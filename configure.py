@@ -1451,6 +1451,7 @@ config.libs = [
         [
             Object(Matching, "dolphin/ai/ai.c"),
         ],
+        extern=True,
     ),
     DolphinLib(
         "ar",
@@ -1458,6 +1459,7 @@ config.libs = [
             Object(Matching, "dolphin/ar/ar.c"),
             Object(Matching, "dolphin/ar/arq.c"),
         ],
+        extern=True,
     ),
     DolphinLib(
         "card",
