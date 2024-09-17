@@ -42,7 +42,7 @@ void PADControlMotor(int chan, u32 command);
 void VISetBlack(bool);
 u32 VIGetRetraceCount(void);
 void PADClamp(PADStatus*);
-void PADRead(u8*);
+void PADRead(PADStatus*);
 void PADReset(u32);
 void PADTypeAndStatusCallback(s32 chan, u32 type);
 void PADSetSpec(s32);

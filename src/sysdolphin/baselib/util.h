@@ -7,6 +7,7 @@
 #include "mtx.h"
 
 #include <dolphin/mtx/vec.h>
+#include <MSL/trigf.h>
 
 // functions
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);
@@ -30,6 +31,15 @@ static inline int vec_normalize_check(Vec3* src, Vec3* dst)
     }
     PSVECNormalize(src, dst);
     return 0;
+}
+
+static inline f32 atan2f_check(s8 y, s8 x)
+{
+    if (fabs(x) == 0.0) {
+        return y >= 0 ? 1.5707963267948966 : -1.5707963267948966;
+    } else {
+        return atan2f(y, x);
+    }
 }
 
 #endif // _UTIL_H_
