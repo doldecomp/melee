@@ -4,11 +4,11 @@
 
 #include "__dsp.h"
 
-#define BUILD_DATE "May 22 2001"
+#define BUILD_DATE "Sep  8 2001"
 #if DEBUG
 #define BUILD_TIME "01:48:51"
 #else
-#define BUILD_TIME "02:06:43"
+#define BUILD_TIME "01:51:48"
 #endif
 
 u32 DSPCheckMailToDSP(void)

@@ -1356,6 +1356,7 @@ config.libs = [
             Object(Matching, "dolphin/dsp/dsp_debug.c"),
             Object(Matching, "dolphin/dsp/dsp_task.c"),
         ],
+        extern=True,
     ),
     DolphinLib(
         "dvd",
