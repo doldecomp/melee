@@ -103,28 +103,27 @@ jobs:
 
         mode='${{matrix.mode}}'
         config_args='--compilers /compilers --max-errors 0 --verbose --version ${{matrix.version}}'
-        case "$mode" in
-          'link')
-            config_args="--map --require-protos $config_args"
-          ;;
-          'diff') ;;
-          *) exit 1 ;;
-        esac
-        echo "$config_args" | xargs python configure.py
+
+        function run_configure {
+          echo "$config_args" | xargs python configure.py
+        }
 
         case "$mode" in
           'link')
+            config_args="--map --require-protos $config_args"
+            run_configure
             ninja || ninja diff
           ;;
           'diff')
             root='build/${{matrix.version}}'
             expected="$root/expected-report.json"
-            actual="$root/report.json"
+            current="$root/report.json"
             changes="$root/changes-report.json"
-            head=$(git rev-parse HEAD)
+            head="$(git rev-parse HEAD)"
 
-            ninja all_source
-            objdiff-cli report generate -o "$actual"
+            function run_ninja {
+              ninja all_source "$current"
+            }
 
             case '${{github.event_name}}' in
               'pull_request')
@@ -137,11 +136,14 @@ jobs:
               *) exit 1 ;;
             esac
 
-            ninja all_source
-            objdiff-cli report generate -o "$expected"
+            run_configure
+            run_ninja
+            cp "$current" "$expected"
 
             git checkout "$head"
-            objdiff-cli report changes -o "$changes" "$expected" "$actual"
+            run_ninja
+
+            build/tools/objdiff-cli report changes -o "$changes" "$expected" "$current"
             python tools/diff_changes.py "$changes"
             status="$?"
             exit "$status"
