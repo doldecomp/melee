@@ -4,7 +4,6 @@ static BOOL Prepared;
 
 void Run(register RunCallback callback)
 {
-#ifdef MWERKS_GEKKO
     OSDisableInterrupts();
     ICFlashInvalidate();
     __sync();
@@ -13,7 +12,6 @@ void Run(register RunCallback callback)
         mtlr callback
         blr
     }
-#endif
 }
 
 static void Callback(void)
