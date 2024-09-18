@@ -26,11 +26,24 @@ path/to/file.cpp: [file attributes]
 
 ### File attributes
 
-- `comment:` Overrides the `mw_comment_version` setting in [`config.yml`](/config/GAMEID/config.example.yml) for this file. See [Comment section](comment_section.md).  
+- `comment:` Overrides the `mw_comment_version` setting in [`config.yml`](/config/GAMEID/config.example.yml) for this file. See [Comment section](comment_section.md).
+  - `comment:0` is used to disable `.comment` section generation for a file that wasn't compiled with `mwcc`.  
+  Example: `TRK_MINNOW_DOLPHIN/ppc/Export/targsupp.s: comment:0`  
+  This file was assembled and only contains label symbols. Generating a `.comment` section for it will crash `mwld`.
 
-`comment:0` is used to disable `.comment` section generation for a file that wasn't compiled with `mwcc`.  
-Example: `TRK_MINNOW_DOLPHIN/ppc/Export/targsupp.s: comment:0`  
-This file was assembled and only contains label symbols. Generating a `.comment` section for it will crash `mwld`.
+- `order:` Allows influencing the resolved link order of objects. This is **not required**, as decomp-toolkit will generate the link order automatically. This can be used to fine-tune the link order for ambiguous cases.  
+  Example:
+  ```
+  file1.cpp: order:0
+    ...
+
+  file2.cpp: order:1
+    ...
+
+  file3.cpp: order:2
+    ...
+  ```
+  This ensures that `file2.cpp` is always anchored in between 1 and 3 when resolving the final link order.
 
 ### Section attributes
 

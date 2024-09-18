@@ -30,7 +30,7 @@ All attributes are optional, and are separated by spaces.
 - `size:` The size of the symbol.
 - `scope:` The symbol's visibility. `global` (default), `local` or `weak`.
 - `align:` The symbol's alignment.
-- `data:` The data type used when writing disassembly. `byte`, `2byte`, `4byte`, `8byte`, `float`, `double`, `string`, `wstring`, `string_table`, or `wstring_table`.
+- `data:` The data type used when writing disassembly. `byte`, `2byte`, `4byte`, `8byte`, `float`, `double`, `int`, `short`, `string`, `wstring`, `string_table`, or `wstring_table`.
 - `hidden` Marked as "hidden" in the generated object. (Only used for extab)
 - `force_active` Marked as ["exported"](comment_section.md) in the generated object, and added to `FORCEACTIVE` in the generated `ldscript.lcf`. Prevents the symbol from being deadstripped.
 - `noreloc` Prevents the _contents_ of the symbol from being interpreted as addresses. Used for objects containing data that look like pointers, but aren't.

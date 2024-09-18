@@ -120,6 +120,8 @@ modules:
 extract:
 
 - # The symbol name to extract.
+  # To disambiguate local symbols with the same name, use:
+  # `SomeSymbol!.section:0x80001234`
   symbol: SomeSymbol
 
   # (optional) The path to extract raw binary data to.
@@ -130,3 +132,26 @@ extract:
   # In a C/C++ file, the symbol can be included with `#include "Lib/SomeSymbol.inc"`.
   # Path is relative to `build/GAMEID/include`.
   header: Lib/SomeSymbol.inc
+
+# (optional) Block relocations from or to specific addresses.
+# For modules, this goes in the module's configuration above.
+block_relocations:
+
+# Block any relocation pointing _to_ this address.
+- target: .data:0x80130140
+
+# Block any relocation originating _from_ this address.
+- source: .text:0x80047160
+  # (optional) End address to make it a range.
+  end: .text:0x800471A8
+
+# (optional) Add or replace relocations if they were detected incorrectly.
+# For modules, this goes in the module's configuration above.
+add_relocations:
+
+# From: `subi r3, r3, 0x7657`
+# To: `li r3, mesWInsert-0x1@sda21`
+- source: .text:0x800473F4
+  type: sda21
+  target: mesWInsert # Supports `symbol` or `symbol!.section:0x80001234`
+  addend: -1
