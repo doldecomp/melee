@@ -213,11 +213,13 @@ CHAIN = "cmd /c " if is_windows() else ""
 EXE = ".exe" if is_windows() else ""
 
 
-def make_flags_str(cflags: Union[str, List[str]]) -> str:
-    if isinstance(cflags, list):
-        return " ".join(cflags)
+def make_flags_str(flags: Optional[Union[str, List[str]]]) -> str:
+    if flags is None:
+        return ""
+    elif isinstance(flags, list):
+        return " ".join(flags)
     else:
-        return cflags
+        return flags
 
 
 # Load decomp-toolkit generated config.json
@@ -282,7 +284,7 @@ def generate_build_ninja(
     # Variables
     ###
     n.comment("Variables")
-    n.variable("ldflags", " ".join(config.ldflags or []))
+    n.variable("ldflags", make_flags_str(config.ldflags))
     if config.linker_version is None:
         sys.exit("ProjectConfig.linker_version missing")
     n.variable("mw_version", Path(config.linker_version))

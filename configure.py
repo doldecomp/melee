@@ -16,7 +16,15 @@ import argparse
 import sys
 from pathlib import Path
 from typing import Any, Dict, List
-from tools.project import *
+
+from tools.project import (
+    Object,
+    ProgressCategory,
+    ProjectConfig,
+    calculate_progress,
+    generate_build,
+    is_windows,
+)
 
 # Game versions
 DEFAULT_VERSION = 0
