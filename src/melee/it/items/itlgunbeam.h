@@ -5,6 +5,7 @@
 #include "it/forward.h"
 
 #include "it/items/types.h"
+
 #include <common_structs.h>
 
 /* 2996D0 */ void it_802996D0(HSD_GObj*, Vec3*, u32, f32);

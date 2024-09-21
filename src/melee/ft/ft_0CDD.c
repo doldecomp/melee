@@ -1,6 +1,7 @@
+#include "it/forward.h"
+
 #include "ft_0CDD.h"
 
-#include "it/forward.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -11,19 +12,19 @@
 #include "ft/ftcommon.h"
 #include "ftCommon/ftpickupitem.h"
 #include "it/it_26B1.h"
-#include "it/items/itlgun.h"
 #include "it/items/itfflower.h"
+#include "it/items/itlgun.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/jobj.h>
 #include <dolphin/mtx/mtxvec.h>
+#include <baselib/jobj.h>
 #include <melee/it/item.h>
 
-void ftCo_800CE0CC(HSD_GObj*); /* extern */
-void ftCo_800CE14C(HSD_GObj*); /* extern */
-void ftCo_800CE1D4(HSD_GObj*); /* extern */
-void ftCo_800CE620(HSD_GObj*); /* extern */
-void ftCo_800CE650(HSD_GObj*); /* extern */
+void ftCo_800CE0CC(HSD_GObj*);      /* extern */
+void ftCo_800CE14C(HSD_GObj*);      /* extern */
+void ftCo_800CE1D4(HSD_GObj*);      /* extern */
+void ftCo_800CE620(HSD_GObj*);      /* extern */
+void ftCo_800CE650(HSD_GObj*);      /* extern */
 void it_8028E938(Item_GObj*);       /* extern */
 UNK_RET ft_800D76B8(Fighter_GObj*); /* extern */
 UNK_RET ft_800D7770(Fighter_GObj*); /* extern */

@@ -14,12 +14,11 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-
-UNK_RET it_80272940(Item_GObj*);                             /* extern */
+UNK_RET it_80272940(Item_GObj*);              /* extern */
 void it_802998A0(Item_GObj*, HSD_GObj*, s32); /* static */
-int it_8029999C(HSD_GObj*);                             /* static */
-void it_802999E4(HSD_GObj*);                            /* static */
-int it_80299A68(HSD_GObj*);                             /* static */
+int it_8029999C(HSD_GObj*);                   /* static */
+void it_802999E4(HSD_GObj*);                  /* static */
+int it_80299A68(HSD_GObj*);                   /* static */
 
 static f32 it_804DCC20 = 0.0f;
 static f32 it_804DCC28[2] = { 0x401921FB, 0x54442D18 }; // 2pi?
