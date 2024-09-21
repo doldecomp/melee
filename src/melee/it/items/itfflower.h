@@ -12,7 +12,7 @@
 /* 292E64 */ void it_80292E64(Item_GObj*);
 /* 292EAC */ void it_80292EAC(Item_GObj*);
 /* 292EF8 */ void it_80292EF8(Item_GObj*, Vec3*);
-/* 292F14 */ void it_80292F14(Item_GObj*, s32, f32);
+/* 292F14 */ void it_80292F14(Item_GObj*, Vec3*, f32);
 /* 293284 */ void it_80293284(Item_GObj*);
 /* 2933C4 */ void it_802933C4(Item_GObj*);
 /* 2933EC */ void it_802933EC(Item_GObj*);
