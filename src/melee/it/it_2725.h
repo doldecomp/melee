@@ -7,6 +7,7 @@
 #include <baselib/forward.h>
 
 #include "it/items/types.h"
+#include "lb/types.h"
 
 #include <placeholder.h>
 
@@ -31,6 +32,7 @@
 /* 275DFC */ void it_80275DFC(HSD_GObj*);
 /* 276214 */ bool it_80276214(Item_GObj*);
 /* 2762D8 */ bool it_802762D8(HSD_GObj*);
+/* 276408 */ void it_80276408(Item_GObj*, CollData*, f32*);
 /* 276CB8 */ void it_80276CB8(Item_GObj* gobj);
 /* 276CEC */ void it_80276CEC(HSD_GObj*);
 /* 276FC4 */ void it_80276FC4(HSD_GObj*);

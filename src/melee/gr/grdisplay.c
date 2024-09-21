@@ -71,3 +71,14 @@ void grDisplay_801C5B90(HSD_JObj* jobj, void* arg1, u32 arg2, int arg3)
         }
     }
 }
+
+void grDisplay_801C5F60(HSD_GObj* gobj, int code)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    if (HSD_CObjSetCurrent(cobj)) {
+        gobj->gxlink_prios = 8;
+        Camera_800310A0(0);
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_CObjEndCurrent();
+    }
+}

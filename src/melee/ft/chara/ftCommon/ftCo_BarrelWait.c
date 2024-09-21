@@ -92,7 +92,7 @@ void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos, UNK_T arg2, float kb_angle)
     fp->dmg.facing_dir_1 = fp->facing_dir;
     fp->dmg.x184c_damaged_hurtbox = 0;
     fp->dmg.x1854_collpos = fp->cur_pos;
-    fp->dmg.x1860 = hit.element;
+    fp->dmg.x1860_element = hit.element;
     Fighter_UnkTakeDamage_8006CC30(fp, hit.damage);
     ftCo_8008DCE0(gobj, 91, 0);
 }

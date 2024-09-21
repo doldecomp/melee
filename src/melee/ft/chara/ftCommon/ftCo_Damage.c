@@ -524,7 +524,7 @@ block_83:
     if (var_r30 < 2) {
         return;
     }
-    if ((u32) fp->dmg.x1860 == 5U) {
+    if ((u32) fp->dmg.x1860_element == 5U) {
         ftCo_80090B60(gobj);
     }
 }
@@ -693,7 +693,7 @@ void ftCo_8008E908(ftCo_GObj* gobj, float facing_dir)
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
     }
     {
-        uint fp_x1860 = fp->dmg.x1860;
+        uint fp_x1860 = fp->dmg.x1860_element;
         if ((fp_x1860 == 6 || fp_x1860 == 7) && !fp->x2228_b2) {
             ftCo_800C318C(gobj, fp_x1860 == 6 ? 0 : 1);
         } else {
@@ -766,7 +766,7 @@ void ftCo_8008EB58(ftCo_GObj* gobj)
         inlineF0(gobj);
         {
             ftCo_Fighter* fp = gobj->user_data;
-            if (ftCo_8008DA4C(gobj, fp->dmg.x1860,
+            if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element,
                               ftCo_8008D8E8(fp->dmg.kb_applied)))
             {
                 ftCo_800C0408(gobj);
@@ -796,7 +796,7 @@ static inline void inlineB2(ftCo_GObj* gobj)
     inlineF0(gobj);
 #pragma pop
     if (ftCo_8008DA4C(
-            gobj, fp->dmg.x1860,
+            gobj, fp->dmg.x1860_element,
             ftCo_8008D8E8(fp->dmg.kb_applied * p_ftCommonData->x154)))
     {
         ftCo_800C0408(gobj);
@@ -814,7 +814,7 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
     {
         inlineB2(gobj);
         goto ret_A8C;
-    } else if (fp->dmg.x1860 == 10U) {
+    } else if (fp->dmg.x1860_element == 10U) {
         if (ftCo_800C3538(gobj)) {
             goto ret_A8C;
         }

@@ -331,4 +331,11 @@ typedef struct HassamVars {
     f32 x68;
 } HassamVars;
 
+typedef struct KinokoVars {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+} KinokoVars;
+
 #endif

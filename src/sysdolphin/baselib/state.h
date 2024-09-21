@@ -18,16 +18,16 @@
 
 typedef struct HSD_Chan {
     struct HSD_Chan* next;
-    u32 chan;
+    GXChannelID chan;
     u32 flags;
     GXColor amb_color;
     GXColor mat_color;
     u8 enable;
-    u32 amb_src;
-    u32 mat_src;
-    s32 light_mask;
-    u32 diff_fn;
-    u32 attn_fn;
+    GXColorSrc amb_src;
+    GXColorSrc mat_src;
+    GXLightID light_mask;
+    GXDiffuseFn diff_fn;
+    GXAttnFn attn_fn;
     HSD_AObj* aobj;
 } HSD_Chan;
 

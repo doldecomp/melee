@@ -21,7 +21,7 @@ bool ftCo_8008A698(ftCo_Fighter* fp)
     return false;
 }
 
-void ftCo_8008A6D8(Fighter_GObj* gobj, enum_t anim_id)
+void ftCo_8008A6D8(Fighter_GObj* gobj, s32 anim_id)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (anim_id != -1) {
@@ -49,8 +49,25 @@ static inline bool inlineA0(Fighter* fp)
     return false;
 }
 
-void ftCo_8008A7A8(Fighter_GObj* gobj, IntVec2* arg1)
+static inline enum_t getAnimID(WaitStruct* arg1)
 {
+    WaitStruct* wait_data = arg1;
+    int max = HSD_Randi(100) + 1;
+    int count = 0;
+    while (wait_data->u.i.x != -1) {
+        count += wait_data->u.i.y;
+        if (max <= count) {
+            return (enum_t) wait_data->u.p.x;
+        }
+        wait_data += 1;
+    }
+    OSReport("wait anim data illegal!!\n", max);
+    __assert("ftwaitanim.c", 86, "0");
+}
+
+void ftCo_8008A7A8(Fighter_GObj* gobj, WaitStruct* arg1)
+{
+    enum_t anim_id;
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (arg1 == NULL ||
@@ -59,27 +76,8 @@ void ftCo_8008A7A8(Fighter_GObj* gobj, IntVec2* arg1)
         {
             ftCo_8008A6D8(gobj, fp->anim_id);
         } else {
-            enum_t anim_id;
             do {
-                IntVec2* var_r25 = arg1;
-                int randi = HSD_Randi(100);
-                int max = randi + 1;
-                int count = 0;
-                while (true) {
-                    if (var_r25->x != -1) {
-                        count += var_r25->y;
-                        if (max <= count) {
-                            anim_id = var_r25->x;
-                        } else {
-                            var_r25 += 1;
-                            continue;
-                        }
-                    } else {
-                        OSReport("wait anim data illegal!!\n", max, randi);
-                        HSD_ASSERT(86, 0);
-                    }
-                    break;
-                }
+                anim_id = getAnimID(arg1);
             } while (!inlineA0(fp) && fp->anim_id == anim_id);
             ftCo_8008A6D8(gobj, anim_id);
         }

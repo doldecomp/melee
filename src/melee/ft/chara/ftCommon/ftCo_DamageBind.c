@@ -19,7 +19,7 @@
 bool ftCo_800C44CC(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->dmg.x1860 == 12 && !fp->x2228_b2) {
+    if (fp->dmg.x1860_element == 12 && !fp->x2228_b2) {
         switch (fp->x2070.x2071_b0_3) {
         case 5:
         case 9:

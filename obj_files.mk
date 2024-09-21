@@ -452,7 +452,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/grdatfiles.c.o\
     $(BUILD_DIR)/asm/melee/gr/granime.s.o\
     $(BUILD_DIR)/asm/melee/gr/grmaterial.s.o\
-    $(BUILD_DIR)/asm/melee/gr/grlib.s.o\
+    $(BUILD_DIR)/src/melee/gr/grlib.c.o\
     $(BUILD_DIR)/src/melee/gr/grdynamicattr.c.o\
     $(BUILD_DIR)/asm/melee/gr/grzakogenerator.s.o\
     $(BUILD_DIR)/asm/melee/gr/grfzerocar.s.o\
@@ -585,8 +585,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itstarrod.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itharisen.s.o\
     $(BUILD_DIR)/src/melee/it/items/itfflower.c.o\
-    $(BUILD_DIR)/asm/melee/it/items/itkinoko.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itdkinoko.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itkinoko.c.o\
+    $(BUILD_DIR)/src/melee/it/items/itdkinoko.c.o\
     $(BUILD_DIR)/src/melee/it/items/ithammer.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itwstar.s.o\
     $(BUILD_DIR)/src/melee/it/items/itscball.c.o\
@@ -730,7 +730,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itmasterhandlaser.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmasterhandbullet.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itcrazyhandbomb.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itcoin.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itcoin.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirby_2F23.s.o\
     $(BUILD_DIR)/asm/melee/it/items/it_2F28.s.o\
     $(BUILD_DIR)/src/melee/it/items/it_2F2B.c.o\
@@ -785,7 +785,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/MSL/ctype.c.o\
     $(BUILD_DIR)/asm/MSL/direct_io.s.o\
     $(BUILD_DIR)/src/MSL/cstring.c.o\
-    $(BUILD_DIR)/asm/MSL/mem_funcs.s.o\
+    $(BUILD_DIR)/src/MSL/mem_funcs.c.o\
     $(BUILD_DIR)/asm/MSL/printf.s.o\
     $(BUILD_DIR)/src/MSL/rand.c.o\
     $(BUILD_DIR)/src/MSL/string.c.o\
@@ -954,7 +954,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/tobj.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/state.c.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/tev.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/tev.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/mobj.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/aobj.c.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/lobj.c.o\

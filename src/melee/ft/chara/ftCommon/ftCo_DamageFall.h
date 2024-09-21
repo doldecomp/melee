@@ -4,9 +4,11 @@
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
 
+#include "common_structs.h"
+
 /* 090574 */ void ftCo_80090574(ftCo_GObj* gobj);
-/* 090594 */ void ftCo_80090594(ftCo_Fighter* fp, enum_t arg1, int dmg,
-                                FtMotionId msid, enum_t arg4,
+/* 090594 */ void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg,
+                                FtMotionId msid, GroundOrAir ground_or_air,
                                 float hitlag_mul);
 /* 090690 */ Vec2* ftCo_80090690(ftCo_Fighter* fp, Vec2* shift);
 /* 090718 */ void ftCo_80090718(ftCo_Fighter* fp);

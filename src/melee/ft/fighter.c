@@ -98,8 +98,6 @@ extern ftData* gFtDataList[FTKIND_MAX];
 extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
-extern HSD_PadStatus HSD_PadRumbleData[4];
-
 extern StageInfo stage_info; // from asm/melee/gm_1A36.s
 
 // ==== fighter.c variables ====
@@ -1816,20 +1814,20 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
 
             } else {
                 SET_STICKS(fp->input.lstick.x, fp->input.lstick.y,
-                           HSD_PadRumbleData[fp->x618_player_id].nml_stickX,
-                           HSD_PadRumbleData[fp->x618_player_id].nml_stickY);
+                           HSD_PadGameStatus[fp->x618_player_id].nml_stickX,
+                           HSD_PadGameStatus[fp->x618_player_id].nml_stickY);
                 if (g_debugLevel < 3 && gm_8016B41C() == 0) {
                     SET_STICKS(
                         fp->input.cstick.x, fp->input.cstick.y,
-                        HSD_PadRumbleData[fp->x618_player_id].nml_subStickX,
-                        HSD_PadRumbleData[fp->x618_player_id].nml_subStickY);
+                        HSD_PadGameStatus[fp->x618_player_id].nml_subStickX,
+                        HSD_PadGameStatus[fp->x618_player_id].nml_subStickY);
                 } else {
                     fp->input.cstick.x = 0;
                     fp->input.cstick.y = 0;
                 }
 
-                tempf1 = HSD_PadRumbleData[fp->x618_player_id].nml_analogR;
-                tempf0 = HSD_PadRumbleData[fp->x618_player_id].nml_analogL;
+                tempf1 = HSD_PadGameStatus[fp->x618_player_id].nml_analogR;
+                tempf0 = HSD_PadGameStatus[fp->x618_player_id].nml_analogL;
 
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
@@ -1858,7 +1856,7 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.held_inputs = ftCo_800A198C(fp);
             } else {
                 fp->input.held_inputs =
-                    HSD_PadRumbleData[fp->x618_player_id].button;
+                    HSD_PadGameStatus[fp->x618_player_id].button;
             }
 
             if (gm_8016B0FC()) {
@@ -2664,7 +2662,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
-        fp->dmg.x1860 != 0xAU && !fp->x2226_b2)
+        fp->dmg.x1860_element != 0xAU && !fp->x2226_b2)
     {
         u8 _[4] = { 0 };
         if ( ///// giant if condition
@@ -2868,7 +2866,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
 
                 damage_bool = fp->dmg.x183C_applied;
                 bool2 = 1;
-                ftCo_80090594(fp, fp->dmg.x1860, damage_bool,
+                ftCo_80090594(fp, fp->dmg.x1860_element, damage_bool,
                               motion_state_index, ground_or_air,
                               fp->x1960_vibrateMult);
                 ftCommon_8007ED50(fp, fp->dmg.x1838_percentTemp);

@@ -69,7 +69,7 @@ void ftCo_8009C744(ftCo_GObj* gobj)
     fp->dmg.facing_dir_1 = -vic_fp->facing_dir;
     fp->dmg.x184c_damaged_hurtbox = 1;
     fp->dmg.x1854_collpos = pos;
-    fp->dmg.x1860 = hit->element;
+    fp->dmg.x1860_element = hit->element;
     // ftColl_80078710(gobj);
     Fighter_UnkTakeDamage_8006CC30(fp, hit->damage);
     ftCo_Damage_CalcKnockback(fp);
@@ -107,7 +107,7 @@ void ftCo_Shouldered_Anim(ftCo_GObj* gobj)
             fp1->dmg.facing_dir_1 = fp1->facing_dir;
             fp1->dmg.x184c_damaged_hurtbox = 1;
             fp2->dmg.x1854_collpos = pos;
-            fp1->dmg.x1860 = hit->element;
+            fp1->dmg.x1860_element = hit->element;
             // ftColl_80078710(gobj);
             Fighter_UnkTakeDamage_8006CC30(fp1, hit->damage);
             ftCo_Damage_CalcKnockback(fp1);

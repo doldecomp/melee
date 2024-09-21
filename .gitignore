@@ -39,6 +39,7 @@ build/
 *.map
 *.dol
 *.pdb
+/result
 
 # Temporary files
 *.swp

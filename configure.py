@@ -18,8 +18,9 @@ from pathlib import Path
 from typing import Iterator, List, Optional
 
 from tools.project import (
-    LibDict,
+    Library,
     Object,
+    ProgressCategory,
     ProjectConfig,
     calculate_progress,
     generate_build,
@@ -71,12 +72,6 @@ parser.add_argument(
     help="generate map file(s)",
 )
 parser.add_argument(
-    "--use-asm",
-    dest="no_asm",
-    action="store_false",
-    help="incorporate .s files from asm directory",
-)
-parser.add_argument(
     "--debug",
     action="store_true",
     help="build with debug info (non-matching)",
@@ -93,6 +88,12 @@ parser.add_argument(
     metavar="BINARY | DIR",
     type=Path,
     help="path to decomp-toolkit binary or source (optional)",
+)
+parser.add_argument(
+    "--objdiff",
+    metavar="BINARY | DIR",
+    type=Path,
+    help="path to objdiff-cli binary or source (optional)",
 )
 parser.add_argument(
     "--sjiswrap",
@@ -150,21 +151,23 @@ version_num = VERSIONS.index(config.version)
 # Apply arguments
 config.build_dir = args.build_dir
 config.dtk_path = args.dtk
+config.objdiff_path = args.objdiff
 config.binutils_path = args.binutils
 config.compilers_path = args.compilers
-config.debug = args.debug
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
 if not is_windows():
     config.wrapper = args.wrapper
-if args.no_asm:
+# Don't build asm unless we're --non-matching
+if not config.non_matching:
     config.asm_dir = None
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20231018"
-config.dtk_tag = "v0.9.3"
+config.compilers_tag = "20240706"
+config.dtk_tag = "v0.9.6"
+config.objdiff_tag = "v2.0.0"
 config.sjiswrap_tag = "v1.1.1"
 config.wibo_tag = "0.6.11"
 
@@ -183,6 +186,12 @@ config.ldflags = [
     "-nodefaults",
     "-warn off",
 ]
+if args.debug:
+    config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
+if args.map:
+    config.ldflags.append("-mapunused")
+    # config.ldflags.append("-listclosure") # For Wii linkers
+
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
 
@@ -214,7 +223,9 @@ cflags_base = [
     f"-DVERSION={version_num}",
 ]
 
-if config.debug:
+# Debug flags
+if args.debug:
+    # Or -sym dwarf-2 for Wii compilers
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
@@ -268,7 +279,8 @@ def Lib(
     includes: List[str] = includes_base,
     system_includes: List[str] = system_includes_base,
     src_dir: Optional[str] = None,
-) -> LibDict:
+    category: Optional[str] = None,
+) -> Library:
     def make_includes(includes: List[str]) -> Iterator[str]:
         return map(lambda s: f"-i {s}", includes)
 
@@ -282,6 +294,7 @@ def Lib(
             *make_includes(system_includes),
         ],
         "host": False,
+        "progress_category": category,
         "objects": objects,
     }
 
@@ -293,7 +306,7 @@ def Lib(
 
 def DolphinLib(
     lib_name: str, objects: Objects, fix_epilogue=False, extern=False
-) -> LibDict:
+) -> Library:
     if extern:
         cflags = [
             "-c",
@@ -332,10 +345,11 @@ def DolphinLib(
         cflags=cflags,
         includes=includes,
         system_includes=system_includes,
+        category="sdk",
     )
 
 
-def SysdolphinLib(lib_name: str, objects: Objects) -> LibDict:
+def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
@@ -347,10 +361,11 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> LibDict:
             *system_includes_base,
             "src/dolphin",
         ],
+        category="hsd",
     )
 
 
-def MeleeLib(lib_name: str, objects: Objects) -> LibDict:
+def MeleeLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
@@ -364,15 +379,17 @@ def MeleeLib(lib_name: str, objects: Objects) -> LibDict:
             "src/dolphin",
             "src/sysdolphin",
         ],
+        category="game",
     )
 
 
-def RuntimeLib(lib_name: str, objects: Objects) -> LibDict:
+def RuntimeLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
         cflags=cflags_runtime,
         fix_epilogue=False,
+        category="runtime",
     )
 
 
@@ -817,7 +834,7 @@ config.libs = [
             Object(Matching, "melee/gr/grdatfiles.c"),
             Object(NonMatching, "melee/gr/granime.c"),
             Object(NonMatching, "melee/gr/grmaterial.c"),
-            Object(NonMatching, "melee/gr/grlib.c"),
+            Object(Matching, "melee/gr/grlib.c"),
             Object(Matching, "melee/gr/grdynamicattr.c"),
             Object(NonMatching, "melee/gr/grzakogenerator.c"),
             # Individual stages
@@ -962,8 +979,8 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itstarrod.c"),
             Object(NonMatching, "melee/it/items/itharisen.c"),
             Object(Matching, "melee/it/items/itfflower.c"),
-            Object(NonMatching, "melee/it/items/itkinoko.c"),
-            Object(NonMatching, "melee/it/items/itdkinoko.c"),
+            Object(Matching, "melee/it/items/itkinoko.c"),
+            Object(Matching, "melee/it/items/itdkinoko.c"),
             Object(Matching, "melee/it/items/ithammer.c"),
             Object(NonMatching, "melee/it/items/itwstar.c"),
             Object(Matching, "melee/it/items/itscball.c"),
@@ -1103,7 +1120,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itmasterhandlaser.c"),
             Object(NonMatching, "melee/it/items/itmasterhandbullet.c"),
             Object(NonMatching, "melee/it/items/itcrazyhandbomb.c"),
-            Object(NonMatching, "melee/it/items/itcoin.c"),
+            Object(Matching, "melee/it/items/itcoin.c"),
             Object(NonMatching, "melee/it/items/itkirby_2F23.c"),
             Object(NonMatching, "melee/it/items/it_2F28.c"),
             Object(Matching, "melee/it/items/it_2F2B.c"),
@@ -1176,7 +1193,7 @@ config.libs = [
             Object(Matching, "MSL/ctype.c"),
             Object(NonMatching, "MSL/direct_io.c"),
             Object(Matching, "MSL/cstring.c"),
-            Object(NonMatching, "MSL/mem_funcs.c"),
+            Object(Matching, "MSL/mem_funcs.c"),
             Object(NonMatching, "MSL/printf.c"),
             Object(Matching, "MSL/rand.c"),
             Object(Matching, "MSL/string.c"),
@@ -1409,7 +1426,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/dobj.c"),
             Object(Matching, "sysdolphin/baselib/tobj.c"),
             Object(Matching, "sysdolphin/baselib/state.c"),
-            Object(NonMatching, "sysdolphin/baselib/tev.c"),
+            Object(Matching, "sysdolphin/baselib/tev.c"),
             Object(Matching, "sysdolphin/baselib/mobj.c"),
             Object(Matching, "sysdolphin/baselib/aobj.c"),
             Object(Matching, "sysdolphin/baselib/lobj.c"),
@@ -1472,13 +1489,22 @@ config.libs = [
     ),
 ]
 
+# Optional extra categories for progress tracking
+# Adjust as desired for your project
+config.progress_categories = [
+    ProgressCategory("game", "Game Code"),
+    ProgressCategory("hsd", "HSD Code"),
+    ProgressCategory("sdk", "Dolphin SDK Code"),
+    ProgressCategory("runtime", "Gekko Runtime Code"),
+]
+config.progress_all = False
+config.progress_each_module = args.verbose
+
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
     generate_build(config)
 elif args.mode == "progress":
     # Print progress and write progress.json
-    config.progress_each_module = args.verbose
-    config.progress_all = False
     calculate_progress(config)
 else:
     sys.exit("Unknown mode: " + args.mode)

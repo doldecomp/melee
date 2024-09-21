@@ -236,7 +236,7 @@ static inline bool HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 
 inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
-    if (jobj == NULL || !HSD_JObjMtxIsDirty(jobj)) {
+    if (!jobj || !HSD_JObjMtxIsDirty(jobj)) {
         return;
     }
     HSD_JObjSetupMatrixSub(jobj);

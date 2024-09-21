@@ -1258,7 +1258,7 @@ struct Fighter {
         /* fp+184C */ int x184c_damaged_hurtbox;
         /* fp+1850 */ float kb_applied;
         /* fp+1854 */ Vec3 x1854_collpos;
-        /* fp+1860 */ uint x1860;
+        /* fp+1860 */ uint x1860_element;
         /* fp+1864 */ int x1864;
         /* fp+1868 */ HSD_GObj* x1868_source;
         /* fp+186C */ int x186c;

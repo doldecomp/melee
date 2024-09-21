@@ -21,7 +21,6 @@ typedef enum _HSD_FlushType {
 
 struct HSD_PadData {
     PADStatus stat[4];
-    u32 rumble_mask;
 };
 
 struct HSD_PadStatus {
@@ -48,7 +47,6 @@ struct HSD_PadStatus {
     f32 nml_analogA;
     f32 nml_analogB;
     u8 cross_dir;
-    u8 support_rumble;
     s8 err;
 };
 
@@ -61,7 +59,7 @@ struct PadLibData {
     /*0x08*/ HSD_PadData* queue;
     /*0x0C*/ s32 repeat_start;
     /*0x10*/ s32 repeat_interval;
-    /*0x14*/ u8 adc_type;
+    /*0x14*/ s8 adc_type;
     /*0x15*/ s8 adc_th;
     /*0x18*/ f32 adc_angle;
     /*0x1C*/ u8 clamp_stickType;
@@ -84,15 +82,16 @@ struct PadLibData {
 };
 
 extern HSD_PadStatus HSD_PadMasterStatus[4];
+extern HSD_PadStatus HSD_PadGameStatus[4];
 
 void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
-void HSD_PadRenewRawStatus(int);
+void HSD_PadRenewRawStatus(bool);
 void HSD_PadRenewMasterStatus(void);
-void HSD_PadZeroQueue(void);
+void HSD_PadRenewGameStatus(void);
 void HSD_PadRenewStatus(void);
 void HSD_PadReset(void);
-void HSD_PadInit(s32, u8*, s32, HSD_PadRumbleListData*);
+void HSD_PadInit(u8, HSD_PadData*, u16, HSD_PadRumbleListData*);
 
 #endif

@@ -84,8 +84,13 @@ static inline f32 fabs_inline(f32 x)
     }
 }
 
+static inline double fabs(double f)
+{
+    return __fabs(f);
+}
+
 double frexp(double x, int* exponent);
-double fabsf__Ff(double);
+float fabsf__Ff(float);
 float tanf(float x);
 float cos__Ff(float x);
 float sin__Ff(float x);

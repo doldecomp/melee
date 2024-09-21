@@ -178,7 +178,7 @@ void ftCo_80091274(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     fp->x1A4C =
         -(fp->dmg.x1838_percentTemp * p_ftCommonData->x79C - fp->x1A4C);
-    if (fp->dmg.x1860 == 1) {
+    if (fp->dmg.x1860_element == 1) {
         fp->x1A4C = 0;
     }
 }

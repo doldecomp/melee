@@ -575,6 +575,7 @@ struct Item {
         FFlowerVars fflower;
         FFlowerFlameVars fflowerflame;
         HassamVars hassam;
+        KinokoVars kinoko;
         itUnkVars unk;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
