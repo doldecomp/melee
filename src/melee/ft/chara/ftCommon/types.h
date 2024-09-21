@@ -87,11 +87,11 @@ union ftCommon_MotionVars {
     } itemget;
     struct {
         /* fp+2340 */ float facing_dir;
-        /* fp+2344 */ UNK_T x4;
-        /* fp+2348 */ UNK_T x8;
-        /* fp+234C */ UNK_T xC;
-        /* fp+2350 */ UNK_T x10;
-        /* fp+2354 */ UNK_T x14;
+        /* fp+2344 */ float x4;
+        /* fp+2348 */ int x8;
+        /* fp+234C */ int xC;
+        /* fp+2350 */ float x10;
+        /* fp+2354 */ int x14;
         /* fp+2358 */ UNK_T x18;
         /* fp+235C */ UNK_T x1C;
         /* fp+2360 */ int x20;

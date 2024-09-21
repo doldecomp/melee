@@ -62,7 +62,7 @@ static s32 it_803F6E3C[11] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 static s32 it_803F6E68[12] = { 0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 10, 0 };
 static s8 it_804D5428[7] = "jobj.h";
 static s8 it_804D5430[5] = "jobj";
-f32 it_804DCF38 = 0.0F;
+static f32 it_804DCF38 = 0.0F;
 
 static inline HSD_JObj* jobj_child(HSD_JObj* node)
 {
@@ -107,7 +107,7 @@ void it_802ADDD0(Item_GObj* item_gobj, s32 visibility)
             case It_Kind_Kirby_FalcoBlaster:
             case It_Kind_Falco_Blaster:
                 Item_8026AE84(item, 0x18700, 0x7F, 0x40);
-                Item_8026AE84(item, 0x1AE05, 0x7F, 0x40);
+                // Item_8026AE84(item, 0x1AE05, 0x7F, 0x40);
                 break;
             }
         }
@@ -136,13 +136,15 @@ void it_802ADEF0(HSD_GObj* item_gobj)
 /// @param item_gobj
 void it_802ADF10(HSD_GObj* item_gobj)
 {
+#if 0
+    Item* item;
+    u32 i;
+    // u8 i;
     Vec3 ft_cur_pos;
+    // Vec3 ft_cur_then_it_joint_pos;
     Vec3 ft_hold_joint_pos;
     Vec3 it_hold_joint_pos;
-    f32 angle;
-    Item* item;
-    // u8 i;
-    s32 i;
+    // f32 angle;
 
     item = item_gobj->user_data;
 
@@ -167,14 +169,15 @@ void it_802ADF10(HSD_GObj* item_gobj)
                 ft_hold_joint_pos.z - ft_cur_pos.z;
             ftFx_SpecialN_ItGetHoldJoint(item->xDD4_itemVar.foxblaster.owner,
                                          &it_hold_joint_pos);
-            angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
+            // angle = atan2f(ft_hold_joint_pos.y - ft_cur_then_it_joint_pos.y,
+            //                ft_hold_joint_pos.x - ft_cur_then_it_joint_pos.x);
+            item->xDD4_itemVar.foxblaster.angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                            ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.angle = angle;
             item->xDD4_itemVar.foxblaster.xDFC = 0;
             // efSync_Spawn(0x48E, item_gobj, &ft_hold_joint_pos,
             // item->xDD4_itemVar.foxblaster.angle_1, angle);
             // efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos);
-            efSync_Spawn(1166, item_gobj, &it_hold_joint_pos,
+            efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos,
                          &item->xDD4_itemVar.foxblaster.angle);
             item->xDD4_itemVar.foxblaster.xDE4 = 0;
             break;
@@ -190,20 +193,96 @@ void it_802ADF10(HSD_GObj* item_gobj)
                 ft_hold_joint_pos.z - ft_cur_pos.z;
             ftKb_SpecialNFx_800FDC70(item->xDD4_itemVar.foxblaster.owner,
                                      &it_hold_joint_pos);
-            angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
+            // angle = atan2f(ft_hold_joint_pos.y - ft_cur_then_it_joint_pos.y,
+            //                ft_hold_joint_pos.x - ft_cur_then_it_joint_pos.x);
+            item->xDD4_itemVar.foxblaster.angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                            ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.angle = angle;
             item->xDD4_itemVar.foxblaster.xDFC = 0;
             // efSync_Spawn(0x4AC, item_gobj, &ft_hold_joint_pos,
             // item->xDD4_itemVar.foxblaster.angle_1, angle);
             // efSync_Spawn(1196, item_gobj, &it_hold_joint_pos);
-            efSync_Spawn(1196, item_gobj, &it_hold_joint_pos,
+            efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
                          &item->xDD4_itemVar.foxblaster.angle);
             item->xDD4_itemVar.foxblaster.xDE4 = 0;
             break;
         }
+#else
+    // u32 i;
+    // u8 i;
+    
+    
+    Vec3 ft_cur_pos;
+    // Vec3 ft_cur_then_it_joint_pos;
+    Vec3 ft_hold_joint_pos;
+    Vec3 it_hold_joint_pos;
+    f32 angle;
+    // s32 angle2;
+    u8 i;
+    Item* item;
+        
+    item = item_gobj->user_data;
 
-#if 1
+    // If blaster is shooting this frame, then spawn shooting effect at
+    // item/fighter position
+    if ((item->owner == item->xDD4_itemVar.foxblaster.owner) &&
+        (item->xDD4_itemVar.foxblaster.gfx_spawn_var != 0))
+    {
+        item->xDD4_itemVar.foxblaster.gfx_spawn_var = 0;
+        ftLib_80086644(item->xDD4_itemVar.foxblaster.owner, &ft_cur_pos);
+
+        switch (item->kind) {
+        case It_Kind_Fox_Blaster:
+        case It_Kind_Falco_Blaster:
+            ftFx_SpecialN_FtGetHoldJoint(item->xDD4_itemVar.foxblaster.owner,
+                                         &ft_hold_joint_pos);
+            item->xDD4_itemVar.foxblaster.xE14.x =
+                ft_hold_joint_pos.x - ft_cur_pos.x;
+            item->xDD4_itemVar.foxblaster.xE14.y =
+                ft_hold_joint_pos.y - ft_cur_pos.y;
+            item->xDD4_itemVar.foxblaster.xE14.z =
+                ft_hold_joint_pos.z - ft_cur_pos.z;
+            ftFx_SpecialN_ItGetHoldJoint(item->xDD4_itemVar.foxblaster.owner,
+                                         &it_hold_joint_pos);
+            // angle = atan2f(ft_hold_joint_pos.y - ft_cur_then_it_joint_pos.y,
+            //                ft_hold_joint_pos.x - ft_cur_then_it_joint_pos.x);
+            item->xDD4_itemVar.foxblaster.angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
+                           ft_hold_joint_pos.x - it_hold_joint_pos.x);
+            item->xDD4_itemVar.foxblaster.xDFC = 0;
+            // efSync_Spawn(0x48E, item_gobj, &ft_hold_joint_pos,
+            // item->xDD4_itemVar.foxblaster.angle_1, angle);
+            // efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos);
+            efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos,
+                         &item->xDD4_itemVar.foxblaster.angle);
+            item->xDD4_itemVar.foxblaster.xDE4 = 0;
+            break;
+        case It_Kind_Kirby_FoxBlaster:
+        case It_Kind_Kirby_FalcoBlaster:
+            ftKb_SpecialNFx_800FDC00(item->xDD4_itemVar.foxblaster.owner,
+                                     &ft_hold_joint_pos);
+            item->xDD4_itemVar.foxblaster.xE14.x =
+                ft_hold_joint_pos.x - ft_cur_pos.x;
+            item->xDD4_itemVar.foxblaster.xE14.y =
+                ft_hold_joint_pos.y - ft_cur_pos.y;
+            item->xDD4_itemVar.foxblaster.xE14.z =
+                ft_hold_joint_pos.z - ft_cur_pos.z;
+            ftKb_SpecialNFx_800FDC70(item->xDD4_itemVar.foxblaster.owner,
+                                     &it_hold_joint_pos);
+            // angle = atan2f(ft_hold_joint_pos.y - ft_cur_then_it_joint_pos.y,
+            //                ft_hold_joint_pos.x - ft_cur_then_it_joint_pos.x);
+            item->xDD4_itemVar.foxblaster.angle = atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
+                           ft_hold_joint_pos.x - it_hold_joint_pos.x);
+            item->xDD4_itemVar.foxblaster.xDFC = 0;
+            // efSync_Spawn(0x4AC, item_gobj, &ft_hold_joint_pos,
+            // item->xDD4_itemVar.foxblaster.angle_1, angle);
+            // efSync_Spawn(1196, item_gobj, &it_hold_joint_pos);
+            efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
+                         &item->xDD4_itemVar.foxblaster.angle);
+            item->xDD4_itemVar.foxblaster.xDE4 = 0;
+            break;
+        }
+#endif
+
+#if 0
         for (i = 0; i < 5; i = i + 1) {
             *(&item->xDD4_itemVar.foxblaster.xDF8 - i) =
                 *(&item->xDD4_itemVar.foxblaster.xDF4 - i);
@@ -221,12 +300,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDF4;
         item->xDD4_itemVar.foxblaster.xE10 =
             item->xDD4_itemVar.foxblaster.xE0C;
-        item->xDD4_itemVar.foxblaster.xE50.x =
-            item->xDD4_itemVar.foxblaster.xE44.x;
-        item->xDD4_itemVar.foxblaster.xE50.y =
-            item->xDD4_itemVar.foxblaster.xE44.y;
-        item->xDD4_itemVar.foxblaster.xE50.z =
-            item->xDD4_itemVar.foxblaster.xE44.z;
+        item->xDD4_itemVar.foxblaster.xE50 =
+            item->xDD4_itemVar.foxblaster.xE44;
         item->xDD4_itemVar.foxblaster.xE70 =
             item->xDD4_itemVar.foxblaster.xE6C;
 
@@ -234,12 +309,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDF0;
         item->xDD4_itemVar.foxblaster.xE0C =
             item->xDD4_itemVar.foxblaster.xE08;
-        item->xDD4_itemVar.foxblaster.xE44.x =
-            item->xDD4_itemVar.foxblaster.xE38.x;
-        item->xDD4_itemVar.foxblaster.xE44.y =
-            item->xDD4_itemVar.foxblaster.xE38.y;
-        item->xDD4_itemVar.foxblaster.xE44.z =
-            item->xDD4_itemVar.foxblaster.xE38.z;
+        item->xDD4_itemVar.foxblaster.xE44 =
+            item->xDD4_itemVar.foxblaster.xE38;
         item->xDD4_itemVar.foxblaster.xE6C =
             item->xDD4_itemVar.foxblaster.xE68;
 
@@ -247,12 +318,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDEC;
         item->xDD4_itemVar.foxblaster.xE08 =
             item->xDD4_itemVar.foxblaster.xE04;
-        item->xDD4_itemVar.foxblaster.xE38.x =
-            item->xDD4_itemVar.foxblaster.xE2C.x;
-        item->xDD4_itemVar.foxblaster.xE38.y =
-            item->xDD4_itemVar.foxblaster.xE2C.y;
-        item->xDD4_itemVar.foxblaster.xE38.z =
-            item->xDD4_itemVar.foxblaster.xE2C.z;
+        item->xDD4_itemVar.foxblaster.xE38 =
+            item->xDD4_itemVar.foxblaster.xE2C;
         item->xDD4_itemVar.foxblaster.xE68 =
             item->xDD4_itemVar.foxblaster.xE64;
 
@@ -260,12 +327,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDE8;
         item->xDD4_itemVar.foxblaster.xE04 =
             item->xDD4_itemVar.foxblaster.xE00;
-        item->xDD4_itemVar.foxblaster.xE2C.x =
-            item->xDD4_itemVar.foxblaster.xE20.x;
-        item->xDD4_itemVar.foxblaster.xE2C.y =
-            item->xDD4_itemVar.foxblaster.xE20.y;
-        item->xDD4_itemVar.foxblaster.xE2C.z =
-            item->xDD4_itemVar.foxblaster.xE20.z;
+        item->xDD4_itemVar.foxblaster.xE2C =
+            item->xDD4_itemVar.foxblaster.xE20;
         item->xDD4_itemVar.foxblaster.xE64 =
             item->xDD4_itemVar.foxblaster.xE60;
 
@@ -273,12 +336,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDE4;
         item->xDD4_itemVar.foxblaster.xE00 =
             item->xDD4_itemVar.foxblaster.xDFC;
-        item->xDD4_itemVar.foxblaster.xE20.x =
-            item->xDD4_itemVar.foxblaster.xE14.x;
-        item->xDD4_itemVar.foxblaster.xE20.y =
-            item->xDD4_itemVar.foxblaster.xE14.y;
-        item->xDD4_itemVar.foxblaster.xE20.z =
-            item->xDD4_itemVar.foxblaster.xE14.z;
+        item->xDD4_itemVar.foxblaster.xE20 =
+            item->xDD4_itemVar.foxblaster.xE14;
         item->xDD4_itemVar.foxblaster.xE60 =
             item->xDD4_itemVar.foxblaster.angle;
 #endif
@@ -322,6 +381,12 @@ void it_802AE200(Item_GObj* item_gobj)
     HSD_JObj* child_jobj_2;
     HSD_JObj* child_jobj_3;
     HSD_JObj* child_jobj_4;
+    f32 unused1;
+    f32 unused2;
+    f32 unused3;
+    f32 unused4;
+    f32 unused5;
+    f32 unused6;
 
     item_jobj = item_gobj->hsd_obj;
     item = item_gobj->user_data;
@@ -635,17 +700,11 @@ Item_GObj* it_802AE8A8(f32 facing_dir, Fighter_GObj* fighter_gobj, Vec3* arg2,
 Item_GObj* it_802AE994(Fighter_GObj* owner_gobj, Fighter_Part ft_part,
                        ItemKind it_kind)
 {
-    f32 sp5C;
-    Vec3 sp44;
-    Vec3 sp18;
-    Item_GObj* item_gobj;
-    Item* item;
     SpawnItem spawn;
+    Item* item;
+    Item_GObj* item_gobj;
+    Vec3 sp18;
     f32 val;
-
-    sp44.x = 0.0F;
-    sp44.y = 0.0F;
-    sp44.z = 0.0F;
 
     if (owner_gobj != NULL) {
         spawn.kind = (ItemKind) it_kind;
@@ -820,11 +879,21 @@ static inline void clear_blaster(HSD_GObj* item_gobj)
 int it_802AEBCC(HSD_GObj* item_gobj)
 {
     // HSD_GObj* gobj;
-    s32 blaster_action;
+    int blaster_action;
     enum_t ft_special_state;
     bool blaster_removed;
     bool blaster_not_needed;
     Item* item;
+    f32 unused1;
+    f32 unused2;
+    f32 unused3;
+    f32 unused4;
+    f32 unused5;
+    f32 unused6;
+    f32 unused7;
+    f32 unused8;
+    f32 unused9;
+    f32 unused10;
 
     item = item_gobj->user_data;
 
@@ -835,8 +904,7 @@ int it_802AEBCC(HSD_GObj* item_gobj)
         if (item->msid == 2) {
             goto block_5;
         }
-    } else if (item->msid >= 9) {
-    } else {
+    } else if (item->msid < 9) {
         goto block_5;
     }
     ft_special_state = 9;
@@ -1009,25 +1077,27 @@ int it_802AEFBC(HSD_GObj* item_gobj)
 int it_802AF064(HSD_GObj* item_gobj)
 {
     Vec3 ft_scale;
-    // Item* item;
+    Item* item;
+    f32 unused1;
+    f32 unused2;
 
     if (item_gobj != NULL) {
-        // item = item_gobj->user_data;
-        // if (item != NULL) {
-        if (item_gobj->user_data != NULL) {
-            // if ((item->xDD4_itemVar.foxblaster.owner != NULL) &&
-            // (ftCo_800BF228((Fighter_GObj*)
-            // item->xDD4_itemVar.foxblaster.owner) == 1)) {
-            if ((((Item*) item_gobj->user_data)
-                     ->xDD4_itemVar.foxblaster.owner != NULL) &&
-                (ftCo_800BF228((Fighter_GObj*) ((Item*) item_gobj->user_data)
-                                   ->xDD4_itemVar.foxblaster.owner) == true))
-            {
-                // ft_scale.x = ft_scale.y = ft_scale.z =
-                // HSD_JObjGetScaleY(item->xDD4_itemVar.foxblaster.owner->hsd_obj);
-                ft_scale.x = ft_scale.y = ft_scale.z = HSD_JObjGetScaleY(
-                    ((Item*) item_gobj->user_data)
-                        ->xDD4_itemVar.foxblaster.owner->hsd_obj);
+        item = item_gobj->user_data;
+        if (item != NULL) {
+        // if (item_gobj->user_data != NULL) {
+            if ((item->xDD4_itemVar.foxblaster.owner != NULL) &&
+            (ftCo_800BF228((Fighter_GObj*)
+            item->xDD4_itemVar.foxblaster.owner) == 1)) {
+            // if ((((Item*) item_gobj->user_data)
+            //          ->xDD4_itemVar.foxblaster.owner != NULL) &&
+            //     (ftCo_800BF228((Fighter_GObj*) ((Item*) item_gobj->user_data)
+            //                        ->xDD4_itemVar.foxblaster.owner) == true))
+            // {
+                ft_scale.x = ft_scale.y = ft_scale.z =
+                HSD_JObjGetScaleY(item->xDD4_itemVar.foxblaster.owner->hsd_obj);
+                // ft_scale.x = ft_scale.y = ft_scale.z = HSD_JObjGetScaleY(
+                //     ((Item*) item_gobj->user_data)
+                //         ->xDD4_itemVar.foxblaster.owner->hsd_obj);
                 HSD_JObjSetScale(item_gobj->hsd_obj, &ft_scale);
             }
         }

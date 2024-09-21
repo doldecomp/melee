@@ -552,6 +552,8 @@ struct Item {
         HeartContainerVars HeartContainer;
         MaximTomatoVars MaximTomato;
         ItLGunVars lgun;
+        ItLGunBeamVars lgunbeam;
+        ItLGunRayVars lgunray;
         FoodVars Food;
         EggVars egg;
         itHeiHoVars heiho;

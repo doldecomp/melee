@@ -135,7 +135,7 @@ void it_80292EF8(Item_GObj* unused, Vec3* vec)
     vec->z = 2.5F;
 }
 
-void it_80292F14(Item_GObj* gobj, s32 arg1, f32 arg8)
+void it_80292F14(Item_GObj* gobj, Vec3* arg1, f32 arg8)
 {
     Item* ip = GET_ITEM(gobj);
 
