@@ -17,7 +17,7 @@ typedef struct {
 
 typedef struct {
     bool x0; // [1 or true]
-    s32 x4; // [8]
+    s32 x4;  // [8]
 } ItCapsuleAttr;
 
 typedef struct {
@@ -107,10 +107,10 @@ typedef struct HeartContainerAttr {
             u8 b7 : 1;
         } bits;
         u32 flags;
-    } x4; // [999]
-    s32 x8; // [1200]
-    u8 xC; // [1140]
-    u8 x10; // [120]
+    } x4;    // [999]
+    s32 x8;  // [1200]
+    u8 xC;   // [1140]
+    u8 x10;  // [120]
     f32 x14; // y velocity? [1.5]
     f32 x18; // y rotation? [0.0349066]
 } HeartContainerAttr;
@@ -336,10 +336,10 @@ typedef struct FFlowerVars {
 } FFlowerVars;
 
 typedef struct FFlowerAttr {
-    int x0; // [120]
-    int x4; // [1200]
-    int x8; // [1140]
-    int xC; // [120]
+    int x0;    // [120]
+    int x4;    // [1200]
+    int x8;    // [1140]
+    int xC;    // [120]
     float x10; // [1.5]
     float x14;
 } FFlowerAttr;
