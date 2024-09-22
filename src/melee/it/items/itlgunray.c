@@ -88,8 +88,8 @@ int it_80298300(HSD_GObj* gobj)
 
     ip->xDD4_itemVar.lgunray.scale +=
         ABS(ip->xDD4_itemVar.lgunray.speed) / 7.0f;
-    if (ip->xDD4_itemVar.lgunray.scale > item_spec_attr->x8) {
-        ip->xDD4_itemVar.lgunray.scale = item_spec_attr->x8;
+    if (ip->xDD4_itemVar.lgunray.scale > item_spec_attr->max_scale) {
+        ip->xDD4_itemVar.lgunray.scale = item_spec_attr->max_scale;
     }
     if (ip->xDD4_itemVar.lgunray.scale < 1e-5f) {
         ip->xDD4_itemVar.lgunray.scale = scale;
