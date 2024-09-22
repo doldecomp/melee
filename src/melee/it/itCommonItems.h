@@ -130,12 +130,12 @@ typedef struct ItLGunVars {
 } ItLGunVars;
 
 typedef struct ItLGunBeamAttr {
-    float x0;
-    float x4;
-    float x8;
-    float xC;
-    float x10;
-} ItLGunBeamAttr; // Not sure if this struct size is correct or type of vars
+    float x0;  // lifetime
+    float x4;  // related to position calcs for var xDFC
+    float x8;  // related to position calcs for var xDFC
+    float xC;  // related to position calcs for var xDF8
+    float x10; // related to position calcs for var xDF8
+} ItLGunBeamAttr;
 
 typedef struct ItLGunBeamVars {
     /* x0 */ Vec3 xDD4;  // pos
