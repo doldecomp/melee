@@ -576,7 +576,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/items/itparasol.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itgshell.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itrshell.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itlgun.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itlgun.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itfreeze.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itfoods.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmsbomb.s.o\
@@ -596,7 +596,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/it/items/itspycloak.c.o\
     $(BUILD_DIR)/asm/melee/it/items/ittarucann.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itmball.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/itlgunray.s.o\
+    $(BUILD_DIR)/src/melee/it/items/itlgunray.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itstarrodstar.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itsscopebeam.s.o\
     $(BUILD_DIR)/asm/melee/it/items/itlgunbeam.s.o\

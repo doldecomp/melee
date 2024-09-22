@@ -21,7 +21,8 @@
 /* 28EB68 */ void it_8028EB68(Item_GObj*, Item_GObj*);
 /* 3F5CC8 */ extern ItemStateTable it_803F5CC8[];
 
+void it_8028E938(Item_GObj*);
 void it_8028E774(Item_GObj*, Vec3*);
-void it_8028E79C(Item_GObj* item_gobj, f32 dir);
+void it_8028E79C(Item_GObj* gobj, Vec3* pos, f32 facing_dir);
 
 #endif

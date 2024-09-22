@@ -1,6 +1,7 @@
 #include "itlgunray.h"
 
 #include "db/db_2253.h"
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/items/itfoxlaser.h"
@@ -8,253 +9,168 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
+#include <placeholder.h>
 #include <stdbool.h>
 #include <baselib/gobj.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-// void it_802982AC(HSD_GObj); /* static */
-void it_802982AC(Item_GObj*, Item_GObj*, Article*); /* static */
-int it_80298300(HSD_GObj*);                         /* static */
-void it_802985D8(HSD_GObj*);                        /* static */
-int it_802985F8(HSD_GObj*);                         /* static */
-static s8 it_803F6508[0x25] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-static s8 it_804D5300[7] = "jobj.h";
-static s8 it_804D5308[5] = "jobj";
+/* 298300 */ static bool it_80298300(Item_GObj*);
+/* 2983AC */ static void it_802982AC(Item_GObj*, Item_GObj*, Article*);
+/* 2985D8 */ static void it_802985D8(Item_GObj*);
+/* 2985F8 */ static bool it_802985F8(Item_GObj*);
 
-static f32 it_804DCBD0 = 0.0f;
-static f32 it_804DCBD4 = 1.0f;
-static f32 it_804DCBD8 = 3.14159f;
-static f32 it_804DCBDC = -1.0f;
-static double it_804DCBE0 = M_PI_2;
-static double it_804DCBE8 = M_PI;
-static f32 it_804DCBF0 = 7.0f;
-static f32 it_804DCBF4 = 0.00001f;
-static f32 it_804DCBF8 = 0.001f;
-static double it_804DCC00 = 2 * M_PI;
+static float const scale = 1e-3f;
 
-ItemStateTable it_803F64F8[1] = {
+ItemStateTable it_803F64F8[] = {
     { 0, it_80298300, it_802985D8, it_802985F8 },
 };
 
-// void it_80298168(HSD_GObj* owner_gobj, Vec3* arg1, f32 facing_dir) {
-void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 dir)
+void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)
 {
-    Article* article;
-    Item* item;
-    Item_GObj* item_gobj;
     SpawnItem spawn;
-    s32 unused;
-
-    f32 var_f2;
-    ItLGunRayAttr* item_spec_attr;
-
-    spawn.kind = 0x23; // type: LGunRay
+    spawn.kind = It_Kind_L_Gun_Ray;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
-    it_8026BB68((Item_GObj*) owner_gobj, &spawn.pos);
-    spawn.facing_dir = dir;
+    it_8026BB68(owner_gobj, &spawn.pos);
+    spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
-    spawn.vel.z = 0.0f;
-    spawn.vel.y = 0.0f;
-    spawn.vel.x = 0.0f;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = owner_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = 1; // Not sure if this is the right bit
+    spawn.x44_flag.bits.b0 = true;
     spawn.x40 = 0;
-    item_gobj = Item_80268B18(&spawn);
-    if (item_gobj != NULL) {
-        item = item_gobj->user_data;
-        article = item->xC4_article_data;
-        item_spec_attr = article->x4_specialAttributes;
-        it_802982AC(item_gobj, (Item_GObj*) owner_gobj, article);
-        var_f2 = 0.0f;
-        item->xDD4_itemVar.lgunray.x0 = 0.0f;
-        if (item->facing_dir == 1.0f) {
-            // item->xDD4_itemVar.lgunray.x4 = 0.0f;
-        } else {
-            var_f2 = 3.1415927f; // Pi
+    {
+        Item_GObj* gobj = Item_80268B18(&spawn);
+        if (gobj != NULL) {
+            Item* ip = GET_ITEM(gobj);
+            Article* article = ip->xC4_article_data;
+            ItLGunRayAttr* item_spec_attr = article->x4_specialAttributes;
+            it_802982AC(gobj, owner_gobj, article);
+            ip->xDD4_itemVar.lgunray.scale = 0.0f;
+            ip->xDD4_itemVar.lgunray.angle =
+                ip->facing_dir == +1 ? 0 : (float) M_PI;
+            ip->xDD4_itemVar.lgunray.speed = item_spec_attr->speed;
+            ip->xDD4_itemVar.lgunray.xC = spawn.pos;
+            ip->x40_vel.x = item_spec_attr->speed * ip->facing_dir;
+            db_80225DD8(gobj, owner_gobj);
         }
-        item->xDD4_itemVar.lgunray.x4 = var_f2;
-        item->xDD4_itemVar.lgunray.x8 = item_spec_attr->x0;
-        item->xDD4_itemVar.lgunray.xC = spawn.pos;
-        item->x40_vel.x = item_spec_attr->x0 * item->facing_dir;
-        db_80225DD8(item_gobj, (Fighter_GObj*) owner_gobj);
     }
 }
 
-// void it_802982AC(HSD_GObj* item_gobj) {
-void it_802982AC(Item_GObj* item_gobj, Item_GObj* owner_gobj, Article* article)
+void it_802982AC(Item_GObj* gobj, Item_GObj* owner_gobj, Article* article)
 {
-    it_80275158((HSD_GObj*) item_gobj,
-                ((ItLGunRayAttr*) ((Item*) item_gobj->user_data)
-                     ->xC4_article_data->x4_specialAttributes)
-                    ->x4);
-    it_8026B3A8((Item_GObj*) item_gobj);
-    Item_80268E5C((HSD_GObj*) item_gobj, 0, ITEM_ANIM_UPDATE);
+    ItLGunRayAttr* da = GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    it_80275158(gobj, da->lifetime);
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-int it_80298300(HSD_GObj* item_gobj)
+int it_80298300(HSD_GObj* gobj)
 {
-    HSD_JObj* item_jobj;
-    Item* item;
-    // f32 rot_y;
-    // f32 rot_x;
-    // f32 scale_z;
-    f32 dir;
-    f32 var_f2;
-    ItLGunRayAttr* item_spec_attr;
+    Item* ip = GET_ITEM(gobj);
+    ItLGunRayAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    item = item_gobj->user_data;
-    item_jobj = item_gobj->hsd_obj;
-    item_spec_attr = item->xC4_article_data->x4_specialAttributes;
-    item->x40_vel.x =
-        item->xDD4_itemVar.lgunray.x8 * cosf(item->xDD4_itemVar.lgunray.x4);
-    item->x40_vel.y =
-        item->xDD4_itemVar.lgunray.x8 * sinf(item->xDD4_itemVar.lgunray.x4);
-    item->x40_vel.z = 0.0f;
-    if (item->x40_vel.x > 0.0f) {
-        dir = 1.0f;
-    } else {
-        dir = -1.0f;
+    ip->x40_vel.x =
+        ip->xDD4_itemVar.lgunray.speed * cosf(ip->xDD4_itemVar.lgunray.angle);
+    ip->x40_vel.y =
+        ip->xDD4_itemVar.lgunray.speed * sinf(ip->xDD4_itemVar.lgunray.angle);
+    ip->x40_vel.z = 0.0f;
+    ip->facing_dir = ip->x40_vel.x > 0.0f ? +1.0F : -1.0F;
+
+    HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
+
+    HSD_JObjSetRotationX(jobj,
+                         M_PI + atan2f(ip->x40_vel.y, ip->facing_dir == 1.0f
+                                                          ? -ip->x40_vel.x
+                                                          : +ip->x40_vel.x));
+
+    ip->xDD4_itemVar.lgunray.scale +=
+        ABS(ip->xDD4_itemVar.lgunray.speed) / 7.0f;
+    if (ip->xDD4_itemVar.lgunray.scale > item_spec_attr->x8) {
+        ip->xDD4_itemVar.lgunray.scale = item_spec_attr->x8;
     }
-    item->facing_dir = dir;
-    // rot_y = 1.5707963267948966 * item->facing_dir; // half-pi
-    if (item_jobj == NULL) {
-        HSD_JObjSetRotationY(item_jobj,
-                             (1.5707963267948966 * item->facing_dir));
-        // }
-
-        if (item->facing_dir == 1.0f) {
-            // var_f2 = -1 * item->x40_vel.x;
-            var_f2 = -item->x40_vel.x;
-        } else {
-            var_f2 = item->x40_vel.x;
-        }
-        // rot_x = 3.141592653589793 + atan2f(item->x40_vel.y, var_f2);
-        // if (item_jobj == NULL) {
-        HSD_JObjSetRotationX(
-            item_jobj, (3.141592653589793 + atan2f(item->x40_vel.y, var_f2)));
-        // }
-        var_f2 = item->xDD4_itemVar.lgunray.x8;
-        if (item->xDD4_itemVar.lgunray.x8 < 0.0f) { // Get abs. value
-            // var_f2 *= -1;
-            var_f2 = -var_f2;
-        }
-        item->xDD4_itemVar.lgunray.x0 += var_f2 / 7.0f;
-        if (item->xDD4_itemVar.lgunray.x0 > item_spec_attr->x8) {
-            item->xDD4_itemVar.lgunray.x0 = item_spec_attr->x8;
-        }
-        if (item->xDD4_itemVar.lgunray.x0 < 0.00001f) {
-            item->xDD4_itemVar.lgunray.x0 = 0.001f;
-        }
-        // scale_z = item->xDD4_itemVar.lgunray.x0;
-        // if (item_jobj == NULL) {
-        HSD_JObjSetScaleZ(item_jobj, item->xDD4_itemVar.lgunray.x0);
-
-        it_80273130((Item_GObj*) item_gobj);
+    if (ip->xDD4_itemVar.lgunray.scale < 1e-5f) {
+        ip->xDD4_itemVar.lgunray.scale = scale;
     }
+    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.lgunray.scale);
 
-#ifdef BUGFIX
-    return 0;
-#endif
+    return it_80273130(gobj);
 }
 
-void it_802985D8(HSD_GObj* item_gobj)
+void it_802985D8(HSD_GObj* gobj)
 {
-    Item* item;
-    item = item_gobj->user_data;
-    item->xDD4_itemVar.lgunray.xC = item->pos;
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.lgunray.xC = ip->pos;
 }
 
-int it_802985F8(HSD_GObj* item_gobj)
+int it_802985F8(HSD_GObj* gobj)
 {
-    CollData item_coll = ((Item*) item_gobj->user_data)
-                             ->x378_itemColl; // Not sure how this is used
-    if (it_8029C4D4((Item_GObj*) item_gobj) != 0) { // Fox laser function
-        return 1;
+    Item* ip = GET_ITEM(gobj);
+    if (it_8029C4D4(gobj, &ip->x378_itemColl)) {
+        return true;
     }
-    return 0;
+    return false;
 }
 
-int it_80298634(Item_GObj* item_gobj)
+bool it_80298634(Item_GObj* gobj)
 {
-    return 1;
+    return true;
 }
 
-int it_8029863C(Item_GObj* item_gobj)
+bool it_8029863C(Item_GObj* gobj)
 {
-    return 1;
+    return true;
 }
 
-int it_80298644(Item_GObj* item_gobj)
+bool it_80298644(Item_GObj* gobj)
 {
-    return 1;
+    return true;
 }
 
-int it_8029864C(Item_GObj* item_gobj)
+bool it_8029864C(Item_GObj* gobj)
 {
-    return 1;
+    return true;
 }
 
-int it_80298654(Item_GObj* item_gobj)
+bool it_80298654(Item_GObj* gobj)
 {
-    HSD_JObj* item_jobj;
-    Item* item;
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    ip->facing_dir = -ip->facing_dir;
+    HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
+    ip->xDD4_itemVar.lgunray.speed *= ip->xC70;
+    HSD_JObjSetScaleZ(jobj, ip->xDD4_itemVar.lgunray.scale = scale);
+    ip->xDD4_itemVar.lgunray.angle += M_PI;
 
-    item = item_gobj->user_data;
-    item_jobj = item_gobj->hsd_obj;
-    // item->facing_dir *= -1;
-    item->facing_dir = -item->facing_dir;
-    if (item_jobj == NULL) {
-        HSD_JObjSetRotationY(item_jobj,
-                             (1.5707963267948966 * item->facing_dir));
-        // }
-        item->xDD4_itemVar.lgunray.x8 *= item->xC70;
-        item->xDD4_itemVar.lgunray.x0 = 0.001f;
-        // if (item_jobj == NULL) {
-        HSD_JObjSetScaleZ(item_jobj, 0.001f);
-        // }
-        item->xDD4_itemVar.lgunray.x4 += 3.141592653589793;
+    while (ip->xDD4_itemVar.lgunray.angle < 0.0f) {
+        ip->xDD4_itemVar.lgunray.angle += 2 * M_PI;
     }
-loop_26:
-    if (item->xDD4_itemVar.lgunray.x4 < 0.0f) {
-        item->xDD4_itemVar.lgunray.x4 += 6.283185307179586;
-        goto loop_26;
-    }
-loop_29:
-    if (item->xDD4_itemVar.lgunray.x4 > 6.283185307179586) {
-        item->xDD4_itemVar.lgunray.x4 -= 6.283185307179586;
-        goto loop_29;
+    while (ip->xDD4_itemVar.lgunray.angle > 2 * M_PI) {
+        ip->xDD4_itemVar.lgunray.angle -= 2 * M_PI;
     }
 
-    return 0;
+    return false;
 }
 
-int it_80298828(Item_GObj* item_gobj)
+bool it_80298828(Item_GObj* gobj)
 {
-    Item* item;
-    f32 unused1;
-    f32 unused2;
-
-    item = item_gobj->user_data;
-    lbVector_Mirror(&item->x40_vel, &item->xC58);
-    item->xDD4_itemVar.lgunray.x0 = 0.001f;
-    item->xDD4_itemVar.lgunray.x4 = atan2f(item->x40_vel.y, item->x40_vel.x);
-loop_2:
-    if (item->xDD4_itemVar.lgunray.x4 < 0.0f) {
-        item->xDD4_itemVar.lgunray.x4 += 6.283185307179586;
-        goto loop_2;
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(4);
+    lbVector_Mirror(&ip->x40_vel, &ip->xC58);
+    ip->xDD4_itemVar.lgunray.scale = scale;
+    ip->xDD4_itemVar.lgunray.angle = atan2f(ip->x40_vel.y, ip->x40_vel.x);
+    while (ip->xDD4_itemVar.lgunray.angle < 0.0f) {
+        ip->xDD4_itemVar.lgunray.angle += 2 * M_PI;
     }
-loop_5:
-    if (item->xDD4_itemVar.lgunray.x4 > 6.283185307179586) {
-        item->xDD4_itemVar.lgunray.x4 -= 6.283185307179586;
-        goto loop_5;
+    while (ip->xDD4_itemVar.lgunray.angle > 2 * M_PI) {
+        ip->xDD4_itemVar.lgunray.angle -= 2 * M_PI;
     }
-    return 0;
+    return false;
 }
 
-void it_802988C4(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_802988C4(Item_GObj* gobj, HSD_GObj* ref_gobj)
 {
-    it_8026B894(item_gobj, ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }

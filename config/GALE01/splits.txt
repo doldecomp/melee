@@ -2434,7 +2434,7 @@ melee/it/items/itrshell.c:
 melee/it/items/itlgun.c:
 	.text       start:0x8028E738 end:0x8028EB88
 	.data       start:0x803F5CC8 end:0x803F5D28
-	.sdata2     start:0x804DCA68 end:0x804DCA70
+	.sdata2     start:0x804DCA68 end:0x804DCA6C
 
 melee/it/items/itfreeze.c:
 	.text       start:0x8028EB88 end:0x8028F9D8
@@ -2541,8 +2541,8 @@ melee/it/items/itmball.c:
 
 melee/it/items/itlgunray.c:
 	.text       start:0x80298168 end:0x802988E4
-	.data       start:0x803F64F8 end:0x803F6530
-	.sdata      start:0x804D5300 end:0x804D5310
+	.data       start:0x803F64F8 end:0x803F652D
+	.sdata      start:0x804D5300 end:0x804D530D
 	.sdata2     start:0x804DCBD0 end:0x804DCC08
 
 melee/it/items/itstarrodstar.c:
