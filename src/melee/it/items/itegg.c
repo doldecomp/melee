@@ -84,7 +84,7 @@ Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
 
 void it_80288D98(Item_GObj* gobj)
 {
-    GET_ITEM(gobj)->xDD4_itemVar.capsule.x0 = false;
+    GET_ITEM(gobj)->xDD4_itemVar.egg.x0 = false;
     it_80288EFC(gobj);
 }
 
@@ -259,7 +259,7 @@ bool it_80289218(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
 
-    if (ip->xDD4_itemVar.capsule.x0) {
+    if (ip->xDD4_itemVar.egg.x0) {
         return false;
     }
     if (it_80288DC4(gobj)) {

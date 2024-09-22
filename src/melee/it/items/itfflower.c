@@ -90,12 +90,12 @@ void it_80292E04(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    FFlowerVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    FFlowerAttr* attr = ip->xC4_article_data->x4_specialAttributes;
 
     ip->xD4C = attr->x0;
     ip->xAC4_ignoreItemID = Item_8026AE60();
-    ip->xDD4_itemVar.capsule.x0 = 0;
-    ip->xDD4_itemVar.capsule.x4 = 0;
+    ip->xDD4_itemVar.fflower.x0 = 0;
+    ip->xDD4_itemVar.fflower.x4 = 0;
     it_8029313C(gobj);
 }
 

@@ -13,7 +13,12 @@
 typedef struct {
     bool x0;
     bool x4;
-} ItCapsuleAttrs;
+} ItCapsuleVars;
+
+typedef struct {
+    bool x0; // [1 or true]
+    s32 x4; // [8]
+} ItCapsuleAttr;
 
 typedef struct {
     /* ip+DD4 */ float dir;
@@ -87,6 +92,28 @@ typedef struct HeartContainerVars {
     f32 xDE8_float;
     f32 xDEC;
 } HeartContainerVars;
+
+typedef struct HeartContainerAttr {
+    s32 x0_heal; // [100]
+    union {
+        struct {
+            u8 b0 : 1;
+            u8 b1 : 1;
+            u8 b2 : 1;
+            u8 b3 : 1;
+            u8 b4 : 1;
+            u8 b5 : 1;
+            u8 b6 : 1;
+            u8 b7 : 1;
+        } bits;
+        u32 flags;
+    } x4; // [999]
+    s32 x8; // [1200]
+    u8 xC; // [1140]
+    u8 x10; // [120]
+    f32 x14; // y velocity? [1.5]
+    f32 x18; // y rotation? [0.0349066]
+} HeartContainerAttr;
 
 typedef struct MaximTomatoVars {
     s32 heal_amount;
@@ -307,6 +334,15 @@ typedef struct FFlowerVars {
     int x0;
     uint x4;
 } FFlowerVars;
+
+typedef struct FFlowerAttr {
+    int x0; // [120]
+    int x4; // [1200]
+    int x8; // [1140]
+    int xC; // [120]
+    float x10; // [1.5]
+    float x14;
+} FFlowerAttr;
 
 typedef struct FFlowerFlameVars {
     /* +0 */ Vec3 pos;
