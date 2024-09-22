@@ -153,11 +153,11 @@ typedef struct ItLGunBeamVars {
 } ItLGunBeamVars;
 
 typedef struct ItLGunBeamAttr {
-    float lifetime;  // lifetime - [18]
-    float x4;  // related to position calcs for var angle1 - [1]
-    float x8;  // related to position calcs for var angle1 - [2]
-    float xC;  // related to position calcs for var angle0 - [1.22173]
-    float x10; // related to position calcs for var angle0 - [2/3 * pi]
+    float lifetime; // lifetime - [18]
+    float x4;       // related to position calcs for var angle1 - [1]
+    float x8;       // related to position calcs for var angle1 - [2]
+    float xC;       // related to position calcs for var angle0 - [1.22173]
+    float x10;      // related to position calcs for var angle0 - [2/3 * pi]
 } ItLGunBeamAttr;
 
 /// Eggs spawned on Yoshi stages / by Chansey
