@@ -126,7 +126,7 @@ typedef struct ItLGunAttr {
 } ItLGunAttr;
 
 typedef struct ItLGunVars {
-    int x0;
+    int timer;
 } ItLGunVars;
 
 typedef struct ItLGunBeamAttr {
