@@ -21,7 +21,6 @@ void it_8028E890(HSD_GObj*); /* static */
 int it_8028E8C0(HSD_GObj*);  /* static */
 int it_8028E92C(HSD_GObj*);  /* static */
 void it_8028E934(HSD_GObj*); /* static */
-// s32 it_8028E96C(HSD_GObj* arg0);                    /* static */
 int it_8028E96C(HSD_GObj*);  /* static */
 void it_8028E9B4(HSD_GObj*); /* static */
 void it_8028EA08(HSD_GObj*); /* static */
@@ -52,22 +51,27 @@ void it_8028E738(Item_GObj* item_gobj)
 }
 
 // void it_8028E774(void* item_gobj, void* arg1) {
-void it_8028E774(Item_GObj* item_gobj, itUnkAttributes* arg1)
+// void it_8028E774(Item_GObj* item_gobj, itUnkAttributes* arg1) {
+void it_8028E774(Item_GObj* item_gobj, Vec3* arg1)
 {
     ItLGunAttr* item_spec_attr;
 
     item_spec_attr =
         ((Item*) item_gobj->user_data)->xC4_article_data->x4_specialAttributes;
     // arg1->unk0 = (f32) item_spec_attr->x4_float;
-    arg1->x0_float = item_spec_attr->x4;
+    // arg1->x0_float = item_spec_attr->x4;
+    arg1->x = item_spec_attr->x4;
     // arg1->unk4 = (f32) item_spec_attr->x8;
-    arg1->x4_float = item_spec_attr->x8;
+    // arg1->x4_float = item_spec_attr->x8;
+    arg1->y = item_spec_attr->x8;
     // arg1->unk8 = (f32) item_spec_attr->xC;
-    arg1->x8 = item_spec_attr->xC;
+    // arg1->x8 = item_spec_attr->xC;
+    arg1->z = item_spec_attr->xC;
 }
 
 // void it_8028E79C(void* item_gobj) {
-void it_8028E79C(Item_GObj* item_gobj)
+// void it_8028E79C(Item_GObj* item_gobj) {
+void it_8028E79C(Item_GObj* item_gobj, f32 dir)
 {
     Item* item;
 
