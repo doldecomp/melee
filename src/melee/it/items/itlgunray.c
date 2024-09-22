@@ -51,7 +51,7 @@ void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)
             ip->xDD4_itemVar.lgunray.angle =
                 ip->facing_dir == +1 ? 0 : (float) M_PI;
             ip->xDD4_itemVar.lgunray.speed = item_spec_attr->speed;
-            ip->xDD4_itemVar.lgunray.xC = spawn.pos;
+            ip->xDD4_itemVar.lgunray.pos = spawn.pos;
             ip->x40_vel.x = item_spec_attr->speed * ip->facing_dir;
             db_80225DD8(gobj, owner_gobj);
         }
@@ -88,8 +88,8 @@ int it_80298300(HSD_GObj* gobj)
 
     ip->xDD4_itemVar.lgunray.scale +=
         ABS(ip->xDD4_itemVar.lgunray.speed) / 7.0f;
-    if (ip->xDD4_itemVar.lgunray.scale > item_spec_attr->x8) {
-        ip->xDD4_itemVar.lgunray.scale = item_spec_attr->x8;
+    if (ip->xDD4_itemVar.lgunray.scale > item_spec_attr->max_scale) {
+        ip->xDD4_itemVar.lgunray.scale = item_spec_attr->max_scale;
     }
     if (ip->xDD4_itemVar.lgunray.scale < 1e-5f) {
         ip->xDD4_itemVar.lgunray.scale = scale;
@@ -102,7 +102,7 @@ int it_80298300(HSD_GObj* gobj)
 void it_802985D8(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.lgunray.xC = ip->pos;
+    ip->xDD4_itemVar.lgunray.pos = ip->pos;
 }
 
 int it_802985F8(HSD_GObj* gobj)
