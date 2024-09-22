@@ -79,7 +79,7 @@ int it_80298300(HSD_GObj* gobj)
     ip->x40_vel.z = 0.0f;
     ip->facing_dir = ip->x40_vel.x > 0.0f ? +1.0F : -1.0F;
 
-    HSD_JObjSetRotationY(jobj, (M_PI_2 * ip->facing_dir));
+    HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
 
     HSD_JObjSetRotationX(jobj,
                          M_PI + atan2f(ip->x40_vel.y, ip->facing_dir == 1.0f
