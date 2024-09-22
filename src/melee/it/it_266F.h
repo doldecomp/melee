@@ -108,7 +108,7 @@ typedef void (*ItCallback)(HSD_GObj*);
 /* 272F7C */ void it_80272F7C(HSD_JObj*, f32);
 /* 273030 */ bool it_80273030(Item_GObj*);
 /* 273078 */ bool itColl_BounceOffShield(Item_GObj*);
-/* 273130 */ bool it_80273130(Item_GObj*);
+/* 273130 */ enum_t it_80273130(Item_GObj*);
 /* 273168 */ void it_80273168(HSD_GObj* gobj);
 /* 2731A4 */ void it_802731A4(HSD_GObj*);
 /* 2731E0 */ void it_802731E0(HSD_GObj*);
