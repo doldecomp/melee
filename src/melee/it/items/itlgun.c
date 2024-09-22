@@ -43,16 +43,16 @@ void it_8028E738(Item_GObj* gobj)
     Item* ip = gobj->user_data;
     ItLGunAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
     ip->xD4C = item_spec_attr->x0;
-    ip->xDD4_itemVar.capsule.x0 = false;
+    ip->xDD4_itemVar.lgun.x0 = false;
     it_8028E860(gobj);
 }
 
 void it_8028E774(Item_GObj* gobj, Vec3* arg1)
 {
     ItLGunAttr* da = GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
-    arg1->x = da->x4;
-    arg1->y = da->x8;
-    arg1->z = da->xC;
+    arg1->x = da->pos_x;
+    arg1->y = da->pos_y;
+    arg1->z = da->pos_z;
 }
 
 void it_8028E79C(Item_GObj* gobj, Vec3* pos, f32 facing_dir)
@@ -125,14 +125,17 @@ void it_8028E934(HSD_GObj* gobj) {}
 
 void it_8028E938(Item_GObj* gobj)
 {
-    GET_ITEM(gobj)->xDD4_itemVar.lgun.x0 = 40;
+    GET_ITEM(gobj)->xDD4_itemVar.lgun.x0 =
+        40; // The item ID of itlgunbeam is 39, so might be related (ID of
+            // itlgunray is 35 btw)
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
 }
 
 bool it_8028E96C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    --ip->xDD4_itemVar.lgun.x0;
+    --ip->xDD4_itemVar.lgun.x0; // Decrementing this value maybe supports that
+                                // it refers to the item ID of itlgunbeam
     if (ip->xDD4_itemVar.lgun.x0 <= 0) {
         Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     }
