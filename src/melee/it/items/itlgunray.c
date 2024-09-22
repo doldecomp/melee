@@ -26,12 +26,12 @@ static f32 it_804DCBD0 = 0.0f;
 static f32 it_804DCBD4 = 1.0f;
 static f32 it_804DCBD8 = 3.14159f;
 static f32 it_804DCBDC = -1.0f;
-static f32 it_804DCBE0[2] = { 0x3FF921FB, 0x54442D18 }; // some form of pi?
-static f32 it_804DCBE8[2] = { 0x400921FB, 0x54442D18 }; // some form of pi?
+static double it_804DCBE0 = M_PI_2;
+static double it_804DCBE8 = M_PI;
 static f32 it_804DCBF0 = 7.0f;
 static f32 it_804DCBF4 = 0.00001f;
 static f32 it_804DCBF8 = 0.001f;
-static f32 it_804DCC00[2] = { 0x401921FB, 0x54442D18 }; // 2pi?
+static double it_804DCC00 = 2 * M_PI;
 
 ItemStateTable it_803F64F8[1] = {
     { 0, it_80298300, it_802985D8, it_802985F8 },
@@ -155,7 +155,9 @@ int it_80298300(HSD_GObj* item_gobj)
         it_80273130((Item_GObj*) item_gobj);
     }
 
-    // return 0;
+#ifdef BUGFIX
+    return 0;
+#endif
 }
 
 void it_802985D8(HSD_GObj* item_gobj)
