@@ -17,8 +17,15 @@ import sys
 from pathlib import Path
 from typing import Iterator, List, Optional
 
-from tools.project import (Library, Object, ProgressCategory, ProjectConfig,
-                           calculate_progress, generate_build, is_windows)
+from tools.project import (
+    Library,
+    Object,
+    ProgressCategory,
+    ProjectConfig,
+    calculate_progress,
+    generate_build,
+    is_windows,
+)
 
 # Game versions
 DEFAULT_VERSION = 0
