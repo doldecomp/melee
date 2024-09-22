@@ -150,17 +150,17 @@ typedef struct ItLGunBeamVars {
 } ItLGunBeamVars;
 
 typedef struct ItLGunRayAttr {
-    float x0; // speed?
-    float x4; // lifetime?
+    float speed;
+    float lifetime;
     float x8;
     float xC;
-} ItLGunRayAttr; // Not sure if this struct size is correct or type of vars
+} ItLGunRayAttr;
 
 typedef struct ItLGunRayVars {
-    float x0; // scale?
-    float x4; // angle?
-    float x8; // speed?
-    Vec3 xC;
+    /* ip+DD4 */ float scale;
+    /* ip+DD8 */ float angle;
+    /* ip+DDC */ float speed;
+    /* ip+DE0 */ Vec3 xC;
 } ItLGunRayVars;
 
 /// Eggs spawned on Yoshi stages / by Chansey

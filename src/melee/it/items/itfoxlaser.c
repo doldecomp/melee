@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "itfoxlaser.h"
 
 #include "it/inlines.h"
@@ -5,6 +7,7 @@
 #include "it/types.h"
 
 #include <common_structs.h>
+#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/db/db_2253.h>
@@ -25,7 +28,7 @@ inline void* getFoxLaser(Item* item)
     return &item->xDD4_itemVar;
 }
 
-bool it_8029C4D4(Item_GObj* item_gobj)
+bool it_8029C4D4(Item_GObj* item_gobj, CollData* arg1)
 {
     Item* item = GET_ITEM(item_gobj);
     return it_8026E9A4(item_gobj, &item->xDD4_itemVar.foxlaser.xDE0,
@@ -150,11 +153,11 @@ void it_8029C9CC(Item_GObj* item_gobj)
 bool it_8029C9EC(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    Vec3 sp18 = item->pos;
-    u8 _[4] = { 0 };
-    if (it_8029C4D4(item_gobj)) {
+    Vec3 pos = item->pos;
+    PAD_STACK(4);
+    if (it_8029C4D4(item_gobj, NULL)) {
         it_80275158(item_gobj, 1.0F);
-        item->pos = sp18;
+        item->pos = pos;
     }
     return false;
 }

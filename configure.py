@@ -17,15 +17,8 @@ import sys
 from pathlib import Path
 from typing import Iterator, List, Optional
 
-from tools.project import (
-    Library,
-    Object,
-    ProgressCategory,
-    ProjectConfig,
-    calculate_progress,
-    generate_build,
-    is_windows,
-)
+from tools.project import (Library, Object, ProgressCategory, ProjectConfig,
+                           calculate_progress, generate_build, is_windows)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -970,7 +963,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itparasol.c"),
             Object(NonMatching, "melee/it/items/itgshell.c"),
             Object(NonMatching, "melee/it/items/itrshell.c"),
-            Object(NonMatching, "melee/it/items/itlgun.c"),
+            Object(Matching, "melee/it/items/itlgun.c"),
             Object(NonMatching, "melee/it/items/itfreeze.c"),
             Object(NonMatching, "melee/it/items/itfoods.c"),
             Object(NonMatching, "melee/it/items/itmsbomb.c"),
@@ -990,7 +983,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itspycloak.c"),
             Object(NonMatching, "melee/it/items/ittarucann.c"),
             Object(NonMatching, "melee/it/items/itmball.c"),
-            Object(NonMatching, "melee/it/items/itlgunray.c"),
+            Object(Matching, "melee/it/items/itlgunray.c"),
             Object(NonMatching, "melee/it/items/itstarrodstar.c"),
             Object(NonMatching, "melee/it/items/itsscopebeam.c"),
             Object(NonMatching, "melee/it/items/itlgunbeam.c"),
@@ -1489,14 +1482,17 @@ config.libs = [
     ),
 ]
 
-# Optional extra categories for progress tracking
-# Adjust as desired for your project
-config.progress_categories = [
-    ProgressCategory("game", "Game Code"),
-    ProgressCategory("hsd", "HSD Code"),
-    ProgressCategory("sdk", "Dolphin SDK Code"),
-    ProgressCategory("runtime", "Gekko Runtime Code"),
-]
+# Extra categories for progress tracking
+config.progress_categories = (
+    [
+        ProgressCategory("game", "Game Code"),
+        ProgressCategory("hsd", "HSD Code"),
+        ProgressCategory("sdk", "Dolphin SDK Code"),
+        ProgressCategory("runtime", "Gekko Runtime Code"),
+    ]
+    if args.verbose
+    else []
+)
 config.progress_all = False
 config.progress_each_module = args.verbose
 

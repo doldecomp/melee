@@ -3,9 +3,11 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
+/* 298168 */ void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir);
 /* 298634 */ bool it_80298634(Item_GObj*);
 /* 29863C */ bool it_8029863C(Item_GObj*);
 /* 298644 */ bool it_80298644(Item_GObj*);
