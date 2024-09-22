@@ -120,22 +120,27 @@ typedef struct FoodVars {
     s32 xDD8_heal;
 } FoodVars;
 
-typedef struct ItLGunAttr {
-    int x0;
-    Vec3 pos;
-} ItLGunAttr;
-
 typedef struct ItLGunVars {
-    int timer;
+    /*  +0 ip+DD4 */ int timer;
 } ItLGunVars;
 
-typedef struct ItLGunBeamAttr {
-    float x0;  // lifetime
-    float x4;  // related to position calcs for var xDFC
-    float x8;  // related to position calcs for var xDFC
-    float xC;  // related to position calcs for var xDF8
-    float x10; // related to position calcs for var xDF8
-} ItLGunBeamAttr;
+typedef struct ItLGunAttr {
+    int x0;   // [16]
+    Vec3 pos; // [0, 2.128, 6.668]
+} ItLGunAttr;
+
+typedef struct ItLGunRayVars {
+    /* +0 ip+DD4 */ float scale;
+    /* +4 ip+DD8 */ float angle;
+    /* +8 ip+DDC */ float speed;
+    /* +C ip+DE0 */ Vec3 pos;
+} ItLGunRayVars;
+
+typedef struct ItLGunRayAttr {
+    /* +0 */ float speed;     // [5]
+    /* +4 */ float lifetime;  // [80]
+    /* +8 */ float max_scale; // [3]
+} ItLGunRayAttr;
 
 typedef struct ItLGunBeamVars {
     /*  +0 ip+DD4 */ Vec3 position0;
@@ -147,18 +152,13 @@ typedef struct ItLGunBeamVars {
     /* +30 ip+E04 */ f32 xE04;
 } ItLGunBeamVars;
 
-typedef struct ItLGunRayAttr {
-    /* +0 */ float speed;
-    /* +4 */ float lifetime;
-    /* +8 */ float max_scale;
-} ItLGunRayAttr;
-
-typedef struct ItLGunRayVars {
-    /* ip+DD4 */ float scale;
-    /* ip+DD8 */ float angle;
-    /* ip+DDC */ float speed;
-    /* ip+DE0 */ Vec3 pos;
-} ItLGunRayVars;
+typedef struct ItLGunBeamAttr {
+    float x0;  // lifetime - [18]
+    float x4;  // related to position calcs for var xDFC - [1]
+    float x8;  // related to position calcs for var xDFC - [2]
+    float xC;  // related to position calcs for var xDF8 - [1.22173]
+    float x10; // related to position calcs for var xDF8 - [2/3 * pi]
+} ItLGunBeamAttr;
 
 /// Eggs spawned on Yoshi stages / by Chansey
 typedef struct EggVars {

@@ -103,9 +103,9 @@ typedef struct FoxBlasterAttr {
     /* +C */ float xC;
     /* +10 */ float x10;
     /* +14 */ float x14;
-    /* +18 */ float x18; // [3F 80 00 00 = 1]
+    /* +18 */ float x18; // [1]
     /* +1C */ float x1C;
-    /* +20 */ float x20; // [40 00 00 00 = 2]
+    /* +20 */ float x20; // [2]
     /* +24 */ float x24;
 } FoxBlasterAttr;
 
@@ -117,8 +117,8 @@ typedef struct {
 } FoxLaserVars;
 
 typedef struct FoxLaserAttr {
-    /* +0 */ float lifetime; // [42 0c 00 00 = 35]
-    /* +4 */ float scale;    // [40 40 00 00 = 3]
+    /* +0 */ float lifetime; // [35]
+    /* +4 */ float scale;    // [3]
     /* +8 */ float x8;
     /* +C */ float xC;
     /* +10 */ float x10;
@@ -126,18 +126,18 @@ typedef struct FoxLaserAttr {
     /* +18 */ float x18;
     /* +1C */ float x1C;
     /* +20 */ float x20;
-    /* +24 */ float x24; // [3F 80 00 00 = 1]
+    /* +24 */ float x24; // [1]
 } FoxLaserAttr;
 
 typedef struct {
-    HSD_Joint* xDD4;
-    float xDD8;
-    HSD_JObj* xDDC;
+    /*  +0 ip+DD4 */ HSD_Joint* xDD4;
+    /*  +4 ip+DD8 */ float xDD8;
+    /*  +8 ip+DDC */ HSD_JObj* xDDC;
 } FoxIllusionVars;
 
 typedef struct FoxIllusionAttr {
-    float x0; // [40 A0 00 00 = 5]
-    float x4; // [40 00 00 00 = 2]
+    float x0; // [5]
+    float x4; // [2]
 } FoxIllusionAttr;
 
 typedef struct {

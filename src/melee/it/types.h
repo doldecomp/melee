@@ -542,7 +542,6 @@ struct Item {
     UnkFlagStruct xDD2_flag;
     UnkFlagStruct xDD3_flag;
     union {
-        ItCapsuleAttrs capsule;
         ItPokemonVars pokemon;
         ItStarVars star;
         itSword_ItemVars sword;
