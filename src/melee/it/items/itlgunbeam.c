@@ -21,12 +21,12 @@ void it_802999E4(HSD_GObj*);                  /* static */
 int it_80299A68(HSD_GObj*);                   /* static */
 
 static f32 it_804DCC20 = 0.0f;
-static f32 it_804DCC28[2] = { 0x401921FB, 0x54442D18 }; // 2pi?
-static f32 it_804DCC30[2] = { 0xC00921FB, 0x54442D18 }; // Some form of pi?
-static f32 it_804DCC38[2] = { 0x400921FB, 0x54442D18 }; // 2pi?
-static f32 it_804DCC40[2] = { 0x3FF921FB, 0x54442D18 }; // Some form of pi?
-static f32 it_804DCC48[2] = { 0x3F947AE1, 2.0f };       // ?
-static f32 it_804DCC50[2] = { 1.75f, 0.0f };            // ?
+static double it_804DCC28 = 2 * M_PI;
+static double it_804DCC30 = -M_PI;
+static double it_804DCC38 = M_PI;
+static double it_804DCC40 = M_PI_2;
+static double it_804DCC48 = 0.02;
+static double it_804DCC50 = 0.5;
 static f32 it_804DCC58 = 1.0f;
 static f32 it_804DCC5C = 3.0f;
 
