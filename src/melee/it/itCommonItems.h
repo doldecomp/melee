@@ -122,10 +122,8 @@ typedef struct FoodVars {
 
 typedef struct ItLGunAttr {
     int x0;
-    float x4;
-    float x8;
-    float xC;
-} ItLGunAttr; // Not sure if this struct size is correct or type of vars
+    Vec3 pos;
+} ItLGunAttr;
 
 typedef struct ItLGunVars {
     int x0;
@@ -140,27 +138,26 @@ typedef struct ItLGunBeamAttr {
 } ItLGunBeamAttr; // Not sure if this struct size is correct or type of vars
 
 typedef struct ItLGunBeamVars {
-    /* x0 */ Vec3 xDD4;  //
-    /* xC */ Vec3 xDE0;  //
-    /* x18 */ Vec3 xDEC; //
-    /* x24 */ f32 xDF8;  //
-    /* x28 */ f32 xDFC;  //
-    /* x2C */ f32 xE00;  //
-    /* x30 */ f32 xE04;  //
+    /* x0 */ Vec3 xDD4;  // pos
+    /* xC */ Vec3 xDE0;  // position
+    /* x18 */ Vec3 xDEC; // position
+    /* x24 */ f32 xDF8;  // angle?
+    /* x28 */ f32 xDFC;  // angle?
+    /* x2C */ f32 xE00;  // lifetime?
+    /* x30 */ f32 xE04;  // ??
 } ItLGunBeamVars;
 
 typedef struct ItLGunRayAttr {
     float speed;
     float lifetime;
-    float x8;
-    float xC;
+    float x8; // reference scale value?
 } ItLGunRayAttr;
 
 typedef struct ItLGunRayVars {
     /* ip+DD4 */ float scale;
     /* ip+DD8 */ float angle;
     /* ip+DDC */ float speed;
-    /* ip+DE0 */ Vec3 xC;
+    /* ip+DE0 */ Vec3 pos;
 } ItLGunRayVars;
 
 /// Eggs spawned on Yoshi stages / by Chansey
