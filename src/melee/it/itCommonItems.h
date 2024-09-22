@@ -145,11 +145,11 @@ typedef struct ItLGunRayAttr {
 typedef struct ItLGunBeamVars {
     /*  +0 ip+DD4 */ Vec3 position0;
     /*  +C ip+DE0 */ Vec3 position1;
-    /* +18 ip+DEC */ Vec3 position2;
+    /* +18 ip+DEC */ Vec3 velocity;
     /* +24 ip+DF8 */ f32 angle0;
     /* +28 ip+DFC */ f32 angle1;
     /* +2C ip+E00 */ f32 lifetime;
-    /* +30 ip+E04 */ f32 xE04;
+    /* +30 ip+E04 */ int xE04;
 } ItLGunBeamVars;
 
 typedef struct ItLGunBeamAttr {
