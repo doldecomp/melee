@@ -45,7 +45,7 @@ void it_8028E738(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     item_spec_attr = item->xC4_article_data->x4_specialAttributes;
     item->xD4C = item_spec_attr->x0;
-    item->xDD4_itemVar.capsule.x0 = 0;
+    item->xDD4_itemVar.lgun.x0 = 0;
     // it_8028E860(item_spec_attr->x0_float, item);
     it_8028E860((HSD_GObj*) item_gobj);
 }
@@ -60,13 +60,13 @@ void it_8028E774(Item_GObj* item_gobj, Vec3* arg1)
         ((Item*) item_gobj->user_data)->xC4_article_data->x4_specialAttributes;
     // arg1->unk0 = (f32) item_spec_attr->x4_float;
     // arg1->x0_float = item_spec_attr->x4;
-    arg1->x = item_spec_attr->x4;
+    arg1->x = item_spec_attr->pos_x;
     // arg1->unk4 = (f32) item_spec_attr->x8;
     // arg1->x4_float = item_spec_attr->x8;
-    arg1->y = item_spec_attr->x8;
+    arg1->y = item_spec_attr->pos_y;
     // arg1->unk8 = (f32) item_spec_attr->xC;
     // arg1->x8 = item_spec_attr->xC;
-    arg1->z = item_spec_attr->xC;
+    arg1->z = item_spec_attr->pos_z;
 }
 
 // void it_8028E79C(void* item_gobj) {
@@ -151,7 +151,9 @@ void it_8028E934(HSD_GObj* item_gobj) {}
 // void it_8028E938(HSD_GObj* item_gobj) {
 void it_8028E938(Item_GObj* item_gobj)
 {
-    ((Item*) item_gobj->user_data)->xDD4_itemVar.lgun.x0 = 0x28;
+    ((Item*) item_gobj->user_data)->xDD4_itemVar.lgun.x0 =
+        0x28; // The item ID of itlgunbeam is 0x27, so might be related (ID of
+              // itlgunray is 0x23 btw)
     Item_80268E5C(item_gobj, 3, ITEM_ANIM_UPDATE);
 }
 
@@ -161,7 +163,9 @@ int it_8028E96C(HSD_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->xDD4_itemVar.lgun.x0 -= 1;
+    item->xDD4_itemVar.lgun.x0 -=
+        1; // Decrementing this value maybe supports that it refers to the item
+           // ID of itlgunbeam
     if ((int) item->xDD4_itemVar.lgun.x0 <= 0) {
         Item_80268E5C((Item_GObj*) item_gobj, 2, ITEM_ANIM_UPDATE);
     }
