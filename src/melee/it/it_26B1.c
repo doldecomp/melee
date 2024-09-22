@@ -1106,7 +1106,7 @@ bool it_8026C1B4(HSD_GObj* gobj)
 u32 it_8026C1D4(void)
 {
     ItLGunVars* lgun = it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes;
-    return lgun->x0;
+    return lgun->timer;
 }
 
 /// Check if item has grabbed a GObj?
