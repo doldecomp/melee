@@ -150,16 +150,17 @@ typedef struct ItLGunBeamVars {
 } ItLGunBeamVars;
 
 typedef struct ItLGunRayAttr {
-    float x0; // speed
-    float x4; // lifetime
-    float x8; // scale reference value?
+    float speed;
+    float lifetime;
+    float x8;
+    float xC;
 } ItLGunRayAttr;
 
 typedef struct ItLGunRayVars {
-    float x0; // scale?
-    float x4; // angle
-    float x8; // speed
-    Vec3 xC;  // position
+    /* ip+DD4 */ float scale;
+    /* ip+DD8 */ float angle;
+    /* ip+DDC */ float speed;
+    /* ip+DE0 */ Vec3 xC;
 } ItLGunRayVars;
 
 /// Eggs spawned on Yoshi stages / by Chansey

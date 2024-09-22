@@ -263,7 +263,7 @@ void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
             it_8026B594((Item_GObj*) fighter->item_gobj);
 
             if (fighter->item_gobj != NULL) {
-                it_8028E79C((Item_GObj*) fighter->item_gobj,
+                it_8028E79C((Item_GObj*) fighter->item_gobj, &pos1,
                             fighter->facing_dir);
                 // it_8028E79C((Item_GObj* ) fighter->item_gobj, &pos2,
                 // fighter->facing_dir); efSync_Spawn(1073, fighter_gobj, pos2,
