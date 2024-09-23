@@ -64,20 +64,20 @@ Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)
 void it_80283BD4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HeartContainerVars* vars = ip->xC4_article_data->x4_specialAttributes;
+    HeartContainerAttr* vars = ip->xC4_article_data->x4_specialAttributes;
 
-    ip->xDD4_itemVar.capsule.x0 = vars->xDD8.flags;
+    ip->xDD4_itemVar.HeartContainer.xDD4_heal = vars->x4.flags;
 }
 
 void it_80283BEC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HeartContainerVars* vars = ip->xC4_article_data->x4_specialAttributes;
+    HeartContainerAttr* vars = ip->xC4_article_data->x4_specialAttributes;
 
     ip->x40_vel.x = 0.0F;
-    ip->x40_vel.y = vars->xDE8_float;
+    ip->x40_vel.y = vars->x14;
     ip->x40_vel.z = 0.0F;
-    ip->xDD4_itemVar.HeartContainer.xDD4_heal = vars->xDD4_heal;
+    ip->xDD4_itemVar.HeartContainer.xDD4_heal = vars->x0_heal;
     ip->xDD4_itemVar.HeartContainer.xDD8.bits.b0 = false;
     ip->xDD4_itemVar.HeartContainer.xDDC = 0;
     it_80283DD4(gobj);
@@ -109,9 +109,9 @@ void it_80283C7C(Item_GObj* gobj)
 bool it_80283CD4(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
-    HeartContainerVars* attrs =
+    HeartContainerAttr* attrs =
         GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
-    HSD_JObjAddRotationY(child, attrs->xDEC);
+    HSD_JObjAddRotationY(child, attrs->x18);
     return false;
 }
 
@@ -131,9 +131,9 @@ void it_80283DD4(Item_GObj* gobj)
 bool it_80283DFC(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
-    HeartContainerVars* attrs =
+    HeartContainerAttr* attrs =
         GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
-    HSD_JObjAddRotationY(child, attrs->xDEC);
+    HSD_JObjAddRotationY(child, attrs->x18);
     return false;
 }
 

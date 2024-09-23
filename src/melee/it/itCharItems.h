@@ -96,18 +96,49 @@ typedef struct {
     /* x108 */ HSD_GObj* owner;   // xE7C
 } FoxBlasterVars;
 
-typedef struct {
-    float xDD4;
-    float xDD8;
-    float xDDC;
-    Vec3 xDE0;
-} FoxLaserVars;
+typedef struct FoxBlasterAttr {
+    /* +0 */ float x0;
+    /* +4 */ float x4;
+    /* +8 */ float x8;
+    /* +C */ float xC;
+    /* +10 */ float x10;
+    /* +14 */ float x14;
+    /* +18 */ float x18; // [1]
+    /* +1C */ float x1C;
+    /* +20 */ float x20; // [2]
+    /* +24 */ float x24;
+} FoxBlasterAttr;
 
 typedef struct {
-    HSD_Joint* xDD4;
-    float xDD8;
-    HSD_JObj* xDDC;
+    /*  +0 ip+DD4 */ float scale;
+    /*  +4 ip+DD8 */ float angle;
+    /*  +8 ip+DDC */ float speed;
+    /*  +C ip+DE0 */ Vec3 pos;
+} FoxLaserVars;
+
+typedef struct FoxLaserAttr {
+    /* +0 */ float lifetime; // [35]
+    /* +4 */ float scale;    // [3]
+    /* +8 */ float x8;
+    /* +C */ float xC;
+    /* +10 */ float x10;
+    /* +14 */ float x14;
+    /* +18 */ float x18;
+    /* +1C */ float x1C;
+    /* +20 */ float x20;
+    /* +24 */ float x24; // [1]
+} FoxLaserAttr;
+
+typedef struct {
+    /*  +0 ip+DD4 */ HSD_Joint* xDD4;
+    /*  +4 ip+DD8 */ float xDD8;
+    /*  +8 ip+DDC */ HSD_JObj* xDDC;
 } FoxIllusionVars;
+
+typedef struct FoxIllusionAttr {
+    float x0; // [5]
+    float x4; // [2]
+} FoxIllusionAttr;
 
 typedef struct {
     u32 x0;

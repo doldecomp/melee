@@ -68,7 +68,7 @@ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
 void it_8028428C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.capsule.x0 =
+    ip->xDD4_itemVar.MaximTomato.heal_amount =
         M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
 }
 

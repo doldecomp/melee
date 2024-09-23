@@ -77,15 +77,15 @@ void it_8027CF30(Item_GObj* gobj)
     u8 _[8] = { 0 };
 
     Item* it = GET_ITEM(gobj);
-    ItCapsuleAttrs* capsule = it->xC4_article_data->x4_specialAttributes;
+    ItCapsuleAttr* attr = it->xC4_article_data->x4_specialAttributes;
 
     sp18.x = sp18.y = sp18.z = 0.0F;
     if (!it_8026F8B4(gobj, &it->pos, &sp18, 0)) {
-        if (!HSD_Randi(capsule->x4)) {
+        if (!HSD_Randi(attr->x4)) {
             it_8027D2DC(gobj);
             it->xDD4_itemVar.capsule.x0 = false;
         } else {
-            it_8026F3D4(gobj, 0, capsule->x0, 0);
+            it_8026F3D4(gobj, 0, attr->x0, 0);
             it->xDD4_itemVar.capsule.x0 = true;
         }
     } else {

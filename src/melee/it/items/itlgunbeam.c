@@ -137,8 +137,8 @@ void it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2, f32 facing_dir)
                 item->xC4_article_data->x4_specialAttributes;
             item->xDAC_itcmd_var0 = item->xDB0_itcmd_var1 =
                 item->xDB4_itcmd_var2 = item->xDB8_itcmd_var3 = 0;
-            item->xDD4_itemVar.lgunbeam.lifetime = item_spec_attr->x0;
-            it_80275158(gobj, item_spec_attr->x0);
+            item->xDD4_itemVar.lgunbeam.lifetime = item_spec_attr->lifetime;
+            it_80275158(gobj, item_spec_attr->lifetime);
             item->xDD4_itemVar.lgunbeam.position0 = *pos;
             {
                 float temp = item_spec_attr->x4;

@@ -31,8 +31,8 @@ inline void* getFoxLaser(Item* item)
 bool it_8029C4D4(Item_GObj* item_gobj, CollData* arg1)
 {
     Item* item = GET_ITEM(item_gobj);
-    return it_8026E9A4(item_gobj, &item->xDD4_itemVar.foxlaser.xDE0,
-                       &item->pos, 0);
+    return it_8026E9A4(item_gobj, &item->xDD4_itemVar.foxlaser.pos, &item->pos,
+                       0);
 }
 
 static inline void normalizeAngle(f32* angle)
@@ -46,7 +46,7 @@ static inline void normalizeAngle(f32* angle)
 }
 
 void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
-                 f32 arg9)
+                 f32 speed)
 {
     SpawnItem spawn;
     Item_GObj* item_gobj;
@@ -71,13 +71,13 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* item = GET_ITEM(item_gobj);
-        FoxLaserVars* attr = item->xC4_article_data->x4_specialAttributes;
+        FoxLaserAttr* attr = item->xC4_article_data->x4_specialAttributes;
         Item_80268E5C(item_gobj, msid, ITEM_ANIM_UPDATE);
-        it_80275158(item_gobj, attr->xDD4);
-        item->xDD4_itemVar.foxlaser.xDD4 = 0.0F;
-        item->xDD4_itemVar.foxlaser.xDD8 = angle;
-        item->xDD4_itemVar.foxlaser.xDDC = arg9;
-        item->xDD4_itemVar.foxlaser.xDE0 = spawn.pos;
+        it_80275158(item_gobj, attr->lifetime);
+        item->xDD4_itemVar.foxlaser.scale = 0.0F;
+        item->xDD4_itemVar.foxlaser.angle = angle;
+        item->xDD4_itemVar.foxlaser.speed = speed;
+        item->xDD4_itemVar.foxlaser.pos = spawn.pos;
         db_80225DD8(item_gobj, parent);
     }
 }
@@ -105,7 +105,7 @@ bool it_8029C6F4(Item_GObj* item_gobj)
 {
     Article* article;
     Item* item;
-    FoxLaserVars* attr;
+    FoxLaserAttr* attr;
     HSD_JObj* jobj;
     f32 dir;
     f32 vel_x;
@@ -114,10 +114,10 @@ bool it_8029C6F4(Item_GObj* item_gobj)
     jobj = GET_JOBJ(item_gobj);
     article = item->xC4_article_data;
     attr = article->x4_specialAttributes;
-    item->x40_vel.x = item->xDD4_itemVar.foxlaser.xDDC *
-                      cosf(item->xDD4_itemVar.foxlaser.xDD8);
-    item->x40_vel.y = item->xDD4_itemVar.foxlaser.xDDC *
-                      sinf(item->xDD4_itemVar.foxlaser.xDD8);
+    item->x40_vel.x = item->xDD4_itemVar.foxlaser.speed *
+                      cosf(item->xDD4_itemVar.foxlaser.angle);
+    item->x40_vel.y = item->xDD4_itemVar.foxlaser.speed *
+                      sinf(item->xDD4_itemVar.foxlaser.angle);
     item->x40_vel.z = 0.0F;
     if (item->x40_vel.x > 0.0F) {
         dir = +1.0F;
@@ -132,22 +132,22 @@ bool it_8029C6F4(Item_GObj* item_gobj)
         vel_x = +item->x40_vel.x;
     }
     HSD_JObjSetRotationX(jobj, M_PI + atan2f(item->x40_vel.y, vel_x));
-    item->xDD4_itemVar.foxlaser.xDD4 +=
-        fabsf(item->xDD4_itemVar.foxlaser.xDDC) / 11.25F;
-    if (item->xDD4_itemVar.foxlaser.xDD4 > attr->xDD8) {
-        item->xDD4_itemVar.foxlaser.xDD4 = attr->xDD8;
+    item->xDD4_itemVar.foxlaser.scale +=
+        fabsf(item->xDD4_itemVar.foxlaser.speed) / 11.25F;
+    if (item->xDD4_itemVar.foxlaser.scale > attr->scale) {
+        item->xDD4_itemVar.foxlaser.scale = attr->scale;
     }
-    if (item->xDD4_itemVar.foxlaser.xDD4 < 1e-5F) {
-        item->xDD4_itemVar.foxlaser.xDD4 = 1e-3;
+    if (item->xDD4_itemVar.foxlaser.scale < 1e-5F) {
+        item->xDD4_itemVar.foxlaser.scale = 1e-3;
     }
-    HSD_JObjSetScaleZ(jobj, item->xDD4_itemVar.foxlaser.xDD4);
+    HSD_JObjSetScaleZ(jobj, item->xDD4_itemVar.foxlaser.scale);
     return it_80273130(item_gobj);
 }
 
 void it_8029C9CC(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    item->xDD4_itemVar.foxlaser.xDE0 = item->pos;
+    item->xDD4_itemVar.foxlaser.pos = item->pos;
 }
 
 bool it_8029C9EC(Item_GObj* item_gobj)
@@ -175,9 +175,9 @@ bool it_8029CA80(Item_GObj* item_gobj)
         item->facing_dir = item->xC68;
         HSD_JObjSetRotationY(jobj, (M_PI / 2) * item->facing_dir);
     }
-    HSD_JObjSetScaleZ(jobj, item->xDD4_itemVar.foxlaser.xDD4 = 1e-3);
-    item->xDD4_itemVar.foxlaser.xDD8 += M_PI;
-    normalizeAngle(&item->xDD4_itemVar.foxlaser.xDD8);
+    HSD_JObjSetScaleZ(jobj, item->xDD4_itemVar.foxlaser.scale = 1e-3);
+    item->xDD4_itemVar.foxlaser.angle += M_PI;
+    normalizeAngle(&item->xDD4_itemVar.foxlaser.angle);
     return false;
 }
 
@@ -191,10 +191,10 @@ bool it_8029CC54(Item_GObj* item_gobj)
     Item* item = GET_ITEM(item_gobj);
     u8 _[4] = { 0 };
     lbVector_Mirror(&item->x40_vel, &item->xC58);
-    item->xDD4_itemVar.foxlaser.xDD4 = 1e-3;
-    item->xDD4_itemVar.foxlaser.xDD8 =
+    item->xDD4_itemVar.foxlaser.scale = 1e-3;
+    item->xDD4_itemVar.foxlaser.angle =
         atan2f(item->x40_vel.y, item->x40_vel.x);
-    normalizeAngle(&item->xDD4_itemVar.foxlaser.xDD8);
+    normalizeAngle(&item->xDD4_itemVar.foxlaser.angle);
     return false;
 }
 
