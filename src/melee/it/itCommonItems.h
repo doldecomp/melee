@@ -109,8 +109,8 @@ typedef struct HeartContainerAttr {
         u32 flags;
     } x4;    // [999]
     s32 x8;  // [1200]
-    s32 xC;   // [1140]
-    s32 x10;  // [120]
+    s32 xC;  // [1140]
+    s32 x10; // [120]
     f32 x14; // y velocity? [1.5]
     f32 x18; // y rotation? [0.0349066]
 } HeartContainerAttr;
