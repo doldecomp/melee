@@ -51,6 +51,7 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
+#include <baselib/particle.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
