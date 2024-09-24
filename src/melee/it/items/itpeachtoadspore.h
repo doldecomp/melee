@@ -3,9 +3,15 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
+/* 2BE214 */ void it_802BE214(Item_GObj* gobj, Vec3* pos, enum_t,
+                              float facing_dir);
+/* 2BE2E8 */ UNK_RET it_802BE2E8(UNK_PARAMS);
+/* 2BE408 */ UNK_RET it_802BE408(UNK_PARAMS);
+/* 2BE458 */ UNK_RET it_802BE458(UNK_PARAMS);
 /* 2BE488 */ bool it_802BE488(Item_GObj*);
 /* 2BE4AC */ bool it_802BE4AC(Item_GObj*);
 /* 2BE4D0 */ bool it_802BE4D0(Item_GObj*);

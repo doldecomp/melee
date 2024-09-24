@@ -1,3 +1,4 @@
+#include "itwhitebea.h"
 
 /// #it_802E31F8
 
@@ -27,7 +28,10 @@ void it_802E34B8(void) {}
 
 /// #it_802E3528
 
-/// #it_802E3588
+bool it_802E3588(void)
+{
+    return false;
+}
 
 /// #it_802E3590
 
@@ -61,7 +65,10 @@ void it_802E34B8(void) {}
 
 /// #it_802E3DA0
 
-/// #it_802E3E5C
+bool it_802E3E5C(void)
+{
+    return false;
+}
 
 /// #it_802E3E64
 
@@ -95,7 +102,10 @@ void it_802E4424(void) {}
 
 /// #it_802E4464
 
-/// #it_802E44E4
+bool it_802E44E4(void)
+{
+    return false;
+}
 
 /// #it_802E44EC
 
@@ -135,7 +145,10 @@ void it_802E495C(void) {}
 
 /// #it_802E4980
 
-/// #it_802E49E0
+bool it_802E49E0(void)
+{
+    return false;
+}
 
 /// #it_802E49E8
 

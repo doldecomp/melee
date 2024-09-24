@@ -1,4 +1,6 @@
 
+#include "itfreeze.h"
+
 /// #it_8028EB88
 
 /// #it_8028EC98
@@ -15,7 +17,10 @@
 
 /// #it_8028EF34
 
-/// #it_8028EF88
+bool it_8028EF88(void)
+{
+    return false;
+}
 
 /// #it_8028EF90
 
@@ -23,7 +28,10 @@
 
 /// #it_8028F1D8
 
-/// #it_8028F200
+bool it_8028F200(void)
+{
+    return false;
+}
 
 /// #it_8028F208
 
@@ -31,7 +39,10 @@
 
 /// #it_8028F2B4
 
-/// #it_8028F310
+bool it_8028F310(void)
+{
+    return false;
+}
 
 /// #it_8028F318
 
@@ -41,23 +52,41 @@
 
 /// #it_8028F398
 
-/// #it_8028F3CC
+bool it_8028F3CC(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_8028F3D4
+bool it_8028F3D4(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_8028F3DC
+bool it_8028F3DC(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_8028F3E4
+bool it_8028F3E4(Item_GObj* arg0)
+{
+    return true;
+}
 
 /// #it_8028F3EC
 
 /// #it_8028F40C
 
-/// #it_8028F42C
+bool it_8028F42C(Item_GObj* arg0)
+{
+    return true;
+}
 
 /// #it_8028F434
 
-/// #it_8028F4AC
+bool it_8028F4AC(void)
+{
+    return false;
+}
 
 /// #it_8028F4B4
 
@@ -65,7 +94,10 @@
 
 /// #it_8028F7C8
 
-/// #it_8028F828
+bool it_8028F828(void)
+{
+    return false;
+}
 
 void it_8028F830(void) {}
 

@@ -1,3 +1,5 @@
+#include "serpoll.h"
+
 /// #TRKTestForPacket
 
 /// #TRKGetInput
@@ -6,6 +8,9 @@
 
 /// #TRKInitializeSerialHandler
 
-/// #TRKTerminateSerialHandler
+bool TRKTerminateSerialHandler(void)
+{
+    return false;
+}
 
 void usr_put_initialize(void) {}

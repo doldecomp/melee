@@ -1,3 +1,4 @@
+#include <platform.h>
 
 void grYorster_80201FA0(void) {}
 
@@ -7,13 +8,19 @@ void grYorster_8020200C(void) {}
 
 /// #grYorster_80202010
 
-/// #grYorster_80202034
+bool grYorster_80202034(void)
+{
+    return false;
+}
 
 /// #grYorster_8020203C
 
 /// #grYorster_80202124
 
-/// #grYorster_80202150
+bool grYorster_80202150(void)
+{
+    return false;
+}
 
 void grYorster_80202158(void) {}
 
@@ -23,7 +30,10 @@ void grYorster_8020215C(void) {}
 
 /// #grYorster_802021AC
 
-/// #grYorster_8020224C
+bool grYorster_8020224C(void)
+{
+    return false;
+}
 
 /// #grYorster_80202254
 
@@ -37,6 +47,12 @@ void grYorster_802022A0(void) {}
 
 /// #grYorster_8020266C
 
-/// #grYorster_80202B5C
+bool grYorster_80202B5C(void)
+{
+    return false;
+}
 
-/// #grYorster_80202B64
+bool grYorster_80202B64(void)
+{
+    return true;
+}

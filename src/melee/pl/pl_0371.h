@@ -11,9 +11,6 @@
 /* 037C60 */ void pl_80037C60(HSD_GObj*, s32);
 /* 037ECC */ void pl_80037ECC(void);
 /* 038144 */ void pl_80038144(void);
-/* 0386D8 */ u32 pl_800386D8(void*, s32);
-/* 03891C */ void pl_8003891C(int slot);
-/* 038F10 */ void pl_80038F10(int slot);
 /* 03D60C */ void pl_8003D60C(void);
 /* 03E058 */ void pl_8003E058(s32, s32, s32, s32);
 /* 03E0E8 */ void pl_8003E0E8(u8, int);

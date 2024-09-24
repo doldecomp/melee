@@ -36,3 +36,8 @@ int lbSnap_8001D350(int i)
     }
     return ptr->unk0;
 }
+
+s32 lbSnap_8001E210(void)
+{
+    return 0x840;
+}

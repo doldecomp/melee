@@ -49,3 +49,83 @@ void AXDriverUnlink(HSD_SM* v, HSD_SM** head)
         }
     }
 }
+
+/// #AXDriverKeyOff
+
+/// #HSD_AudioSFXKeyOffAll
+
+/// #HSD_AudioSFXKeyOffTrack
+
+/// #AXDriver_8038BF6C
+
+/// #fn_8038C678
+
+/// #AXDriver_8038C6C0
+
+/// #fn_8038CC1C
+
+/// #fn_8038CEA4
+
+/// #fn_8038CF48
+
+/// #AXDriver_8038CFF4
+
+/// #AXDriver_8038D2B4
+
+/// #AXDriver_8038D3B8
+
+/// #AXDriver_8038D4E4
+
+/// #AXDriver_8038D5B4
+
+/// #AXDriver_8038D914
+
+/// #AXDriver_8038D9D8
+
+/// #fn_8038DA5C
+
+/// #AXDriver_8038DA70
+
+/// #AXDriver_8038DCFC
+
+/// #AXDriverSetupAux
+
+/// #AXDriver_8038E034
+
+/// #AXDriver_8038E30C
+
+/// #AXDriver_8038E37C
+
+/// #AXDriver_8038E498
+
+extern s32 AXDriver_804D77C8;
+
+s32 AXDriver_8038E5D4(void)
+{
+    return AXDriver_804D77C8;
+}
+
+extern s32 AXDriver_804D77D0;
+
+s32 AXDriver_8038E5DC(void)
+{
+    return AXDriver_804D77D0;
+}
+
+/// #AXDriver_8038E5E4
+
+/// #AXDriver_8038E6C0
+
+/// #AXDriver_8038E768
+
+/// #AXDriver_8038E844
+
+/// #AXDriver_8038E8EC
+
+/// #AXDriver_8038E968
+
+/// #AXDriver_8038E9A8
+
+/// #AXDriver_8038E9E0
+
+/// #AXDriver_8038EA18

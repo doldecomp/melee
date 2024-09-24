@@ -24,13 +24,13 @@ def fix_bool(content: str) -> str:
                 return "true"
             case "0U" | "0u":
                 return "NULL"
-            case "int":
+            case "int" | "s32":
                 return "bool"
             case _:
                 assert False, f'Unknown regex match "{s}"'
 
     return re.sub(
-        r"(?<!\S)(?:0|1|0[Uu]|int)(?=[;)\s])",
+        r"(?<!\S)(?:0|1|0[Uu]|int|s32)(?=[;)\s])",
         replace,
         content,
     )

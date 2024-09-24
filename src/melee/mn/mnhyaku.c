@@ -2,7 +2,6 @@
 
 #include "mnhyaku.h"
 
-#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "mn/inlines.h"
@@ -13,10 +12,6 @@
 static HSD_GObj* mnHyaku_804D6C58;
 
 void gm_801677E8(void);
-
-void lbAudioAx_8002702C(s32, u64);
-void lbAudioAx_80027168(void);
-f32 lbAudioAx_80027648(void);
 
 static f32 mnHyaku_803EF668[3] = { 0.0f, 19.0f, -0.1f };
 static f32 mnHyaku_803EF674[3] = { 20.0f, 29.0f, -0.1f };

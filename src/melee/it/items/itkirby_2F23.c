@@ -1,22 +1,37 @@
+#include <platform.h>
+
+#include <placeholder.h>
 
 /// #it_802F23AC
 
 /// #it_802F23EC
 
-/// #it_802F2578
+bool it_802F2578(void)
+{
+    return false;
+}
 
 void it_802F2580(void) {}
 
-/// #it_802F2584
+bool it_802F2584(void)
+{
+    return false;
+}
 
 /// #it_802F258C
 
 /// #it_802F2810
 
-/// #it_802F2888
+bool it_802F2888(void)
+{
+    return false;
+}
 
 void it_802F2890(void) {}
 
-/// #it_802F2894
+bool it_802F2894(void)
+{
+    return false;
+}
 
 /// #it_802F289C

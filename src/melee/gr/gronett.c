@@ -1,3 +1,5 @@
+#include <platform.h>
+
 void grOnett_801E3734(void) {}
 
 /// #grOnett_801E3738
@@ -6,13 +8,19 @@ void grOnett_801E37C4(void) {}
 
 /// #grOnett_801E37C8
 
-/// #grOnett_801E37EC
+bool grOnett_801E37EC(void)
+{
+    return false;
+}
 
 /// #grOnett_801E37F4
 
 /// #grOnett_801E38DC
 
-/// #grOnett_801E3920
+bool grOnett_801E3920(void)
+{
+    return false;
+}
 
 void grOnett_801E3928(void) {}
 
@@ -22,7 +30,10 @@ void grOnett_801E392C(void) {}
 
 /// #grOnett_801E3A34
 
-/// #grOnett_801E3C58
+bool grOnett_801E3C58(void)
+{
+    return false;
+}
 
 /// #grOnett_801E3C60
 
@@ -30,7 +41,10 @@ void grOnett_801E3CE0(void) {}
 
 /// #grOnett_801E3CE4
 
-/// #grOnett_801E3D98
+bool grOnett_801E3D98(void)
+{
+    return false;
+}
 
 /// #grOnett_801E3DA0
 
@@ -42,7 +56,10 @@ void grOnett_801E40E0(void) {}
 
 /// #grOnett_801E41C8
 
-/// #grOnett_801E43D8
+bool grOnett_801E43D8(void)
+{
+    return false;
+}
 
 /// #grOnett_801E43E0
 
@@ -62,6 +79,9 @@ void grOnett_801E502C(void) {}
 
 /// #grOnett_801E56FC
 
-/// #grOnett_801E5760
+bool grOnett_801E5760(void)
+{
+    return false;
+}
 
 /// #grOnett_801E5768

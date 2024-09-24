@@ -1,3 +1,4 @@
+#include <platform.h>
 
 /// #grBigBlueRoute_8020B864
 
@@ -7,13 +8,19 @@
 
 /// #grBigBlueRoute_8020B95C
 
-/// #grBigBlueRoute_8020B9CC
+bool grBigBlueRoute_8020B9CC(void)
+{
+    return false;
+}
 
 /// #grBigBlueRoute_8020B9D4
 
 /// #grBigBlueRoute_8020BABC
 
-/// #grBigBlueRoute_8020BB00
+bool grBigBlueRoute_8020BB00(void)
+{
+    return false;
+}
 
 void grBigBlueRoute_8020BB08(void) {}
 
@@ -21,7 +28,10 @@ void grBigBlueRoute_8020BB0C(void) {}
 
 /// #grBigBlueRoute_8020BB10
 
-/// #grBigBlueRoute_8020BB58
+bool grBigBlueRoute_8020BB58(void)
+{
+    return false;
+}
 
 void grBigBlueRoute_8020BB60(void) {}
 
@@ -29,7 +39,10 @@ void grBigBlueRoute_8020BB64(void) {}
 
 /// #grBigBlueRoute_8020BB68
 
-/// #grBigBlueRoute_8020BC24
+bool grBigBlueRoute_8020BC24(void)
+{
+    return false;
+}
 
 void grBigBlueRoute_8020BC2C(void) {}
 
@@ -39,7 +52,10 @@ void grBigBlueRoute_8020BC30(void) {}
 
 /// #grBigBlueRoute_8020BC68
 
-/// #grBigBlueRoute_8020BF30
+bool grBigBlueRoute_8020BF30(void)
+{
+    return false;
+}
 
 /// #grBigBlueRoute_8020BF38
 
@@ -47,7 +63,10 @@ void grBigBlueRoute_8020C13C(void) {}
 
 /// #grBigBlueRoute_8020C140
 
-/// #grBigBlueRoute_8020C1D4
+bool grBigBlueRoute_8020C1D4(void)
+{
+    return false;
+}
 
 /// #grBigBlueRoute_8020C1DC
 
@@ -73,6 +92,9 @@ void grBigBlueRoute_8020C13C(void) {}
 
 /// #grBigBlueRoute_8020DED4
 
-/// #grBigBlueRoute_8020DF78
+bool grBigBlueRoute_8020DF78(void)
+{
+    return false;
+}
 
 /// #grBigBlueRoute_8020DF80

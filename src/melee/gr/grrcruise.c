@@ -1,3 +1,4 @@
+#include <platform.h>
 
 void grRCruise_801FF164(void) {}
 
@@ -7,13 +8,19 @@ void grRCruise_801FF298(void) {}
 
 /// #grRCruise_801FF29C
 
-/// #grRCruise_801FF2C0
+bool grRCruise_801FF2C0(void)
+{
+    return false;
+}
 
 /// #grRCruise_801FF2C8
 
 /// #grRCruise_801FF3B4
 
-/// #grRCruise_801FF3E0
+bool grRCruise_801FF3E0(void)
+{
+    return false;
+}
 
 void grRCruise_801FF3E8(void) {}
 
@@ -21,7 +28,10 @@ void grRCruise_801FF3EC(void) {}
 
 /// #grRCruise_801FF3F0
 
-/// #grRCruise_801FF434
+bool grRCruise_801FF434(void)
+{
+    return false;
+}
 
 void grRCruise_801FF43C(void) {}
 
@@ -31,7 +41,10 @@ void grRCruise_801FF440(void) {}
 
 /// #grRCruise_801FF5B4
 
-/// #grRCruise_801FF6CC
+bool grRCruise_801FF6CC(void)
+{
+    return false;
+}
 
 /// #grRCruise_801FF6D4
 
@@ -39,7 +52,10 @@ void grRCruise_801FF738(void) {}
 
 /// #grRCruise_801FF73C
 
-/// #grRCruise_801FF794
+bool grRCruise_801FF794(void)
+{
+    return false;
+}
 
 void grRCruise_801FF79C(void) {}
 
@@ -47,7 +63,10 @@ void grRCruise_801FF7A0(void) {}
 
 /// #grRCruise_801FF7A4
 
-/// #grRCruise_801FF8DC
+bool grRCruise_801FF8DC(void)
+{
+    return false;
+}
 
 /// #grRCruise_801FF8E4
 
@@ -55,7 +74,10 @@ void grRCruise_801FF920(void) {}
 
 /// #grRCruise_801FF924
 
-/// #grRCruise_801FFAD4
+bool grRCruise_801FFAD4(void)
+{
+    return false;
+}
 
 /// #grRCruise_801FFADC
 
@@ -63,7 +85,10 @@ void grRCruise_80200070(void) {}
 
 /// #grRCruise_80200074
 
-/// #grRCruise_8020014C
+bool grRCruise_8020014C(void)
+{
+    return false;
+}
 
 /// #grRCruise_80200154
 
@@ -99,6 +124,12 @@ void grRCruise_8020045C(void) {}
 
 /// #fn_80201BE0
 
-/// #grRCruise_80201C50
+bool grRCruise_80201C50(void)
+{
+    return false;
+}
 
-/// #grRCruise_80201C58
+bool grRCruise_80201C58(void)
+{
+    return true;
+}

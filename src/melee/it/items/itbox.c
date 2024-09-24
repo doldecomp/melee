@@ -1,3 +1,7 @@
+#include <platform.h>
+
+#include <placeholder.h>
+
 /// #it_80286088
 
 /// #it_802861CC
@@ -20,7 +24,10 @@ void it_80286518(void) {}
 
 /// #it_8028655C
 
-/// #it_80286598
+bool it_80286598(void)
+{
+    return false;
+}
 
 /// #it_802865A0
 
@@ -28,7 +35,10 @@ void it_80286518(void) {}
 
 /// #it_80286780
 
-/// #it_802867A8
+bool it_802867A8(void)
+{
+    return false;
+}
 
 void it_802867B0(void) {}
 
@@ -48,7 +58,10 @@ void it_802867B0(void) {}
 
 void it_80286B94(void) {}
 
-/// #it_80286B98
+bool it_80286B98(void)
+{
+    return false;
+}
 
 /// #it_80286BA0
 
@@ -56,7 +69,10 @@ void it_80286B94(void) {}
 
 void it_80286CA8(void) {}
 
-/// #it_80286CAC
+bool it_80286CAC(void)
+{
+    return false;
+}
 
 /// #it_80286CB4
 
@@ -70,7 +86,10 @@ void it_80286CA8(void) {}
 
 /// #it_80286FC8
 
-/// #it_80287044
+bool it_80287044(void)
+{
+    return false;
+}
 
 void it_8028704C(void) {}
 
@@ -80,10 +99,16 @@ void it_8028704C(void) {}
 
 /// #it_802870A4
 
-/// #it_80287104
+bool it_80287104(void)
+{
+    return false;
+}
 
 /// #it_8028710C
 
-/// #it_80287334
+bool it_80287334(void)
+{
+    return false;
+}
 
 /// #it_8028733C

@@ -1,6 +1,7 @@
 #include "itporygon2.h"
 
 #include "it/inlines.h"
+#include "it/it_2725.h"
 
 #include <melee/ef/eflib.h>
 #include <melee/it/it_266F.h>

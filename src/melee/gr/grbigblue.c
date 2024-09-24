@@ -1,3 +1,5 @@
+#include <platform.h>
+
 void grBigBlue_801E57BC(void) {}
 
 /// #grBigBlue_801E57C0
@@ -6,13 +8,19 @@ void grBigBlue_801E59C8(void) {}
 
 /// #grBigBlue_801E59CC
 
-/// #grBigBlue_801E59F0
+bool grBigBlue_801E59F0(void)
+{
+    return false;
+}
 
 /// #grBigBlue_801E59F8
 
 /// #grBigBlue_801E5AE4
 
-/// #grBigBlue_801E5B10
+bool grBigBlue_801E5B10(void)
+{
+    return false;
+}
 
 void grBigBlue_801E5B18(void) {}
 
@@ -20,7 +28,10 @@ void grBigBlue_801E5B1C(void) {}
 
 /// #grBigBlue_801E5B20
 
-/// #grBigBlue_801E6114
+bool grBigBlue_801E6114(void)
+{
+    return false;
+}
 
 void grBigBlue_801E611C(void) {}
 
@@ -30,7 +41,10 @@ void grBigBlue_801E6120(void) {}
 
 /// #grBigBlue_801E613C
 
-/// #grBigBlue_801E61BC
+bool grBigBlue_801E61BC(void)
+{
+    return false;
+}
 
 /// #grBigBlue_801E61C4
 
@@ -38,7 +52,10 @@ void grBigBlue_801E61FC(void) {}
 
 /// #grBigBlue_801E6200
 
-/// #grBigBlue_801E6288
+bool grBigBlue_801E6288(void)
+{
+    return false;
+}
 
 void grBigBlue_801E6290(void) {}
 
@@ -46,7 +63,10 @@ void grBigBlue_801E6294(void) {}
 
 /// #grBigBlue_801E6298
 
-/// #grBigBlue_801E6354
+bool grBigBlue_801E6354(void)
+{
+    return false;
+}
 
 void grBigBlue_801E635C(void) {}
 
@@ -54,7 +74,10 @@ void grBigBlue_801E6360(void) {}
 
 /// #grBigBlue_801E6364
 
-/// #grBigBlue_801E687C
+bool grBigBlue_801E687C(void)
+{
+    return false;
+}
 
 /// #grBigBlue_801E6884
 
@@ -62,7 +85,10 @@ void grBigBlue_801E6360(void) {}
 
 /// #grBigBlue_801E6904
 
-/// #grBigBlue_801E6C58
+bool grBigBlue_801E6C58(void)
+{
+    return false;
+}
 
 /// #grBigBlue_801E6C60
 
@@ -84,7 +110,10 @@ void grBigBlue_801E855C(void) {}
 
 /// #grBigBlue_801E8D64
 
-/// #grBigBlue_801E93D0
+bool grBigBlue_801E93D0(void)
+{
+    return false;
+}
 
 /// #grBigBlue_801E93D8
 
@@ -92,7 +121,10 @@ void grBigBlue_801E9F38(void) {}
 
 /// #grBigBlue_801E9F3C
 
-/// #grBigBlue_801EA054
+bool grBigBlue_801EA054(void)
+{
+    return false;
+}
 
 /// #grBigBlue_801EA05C
 
@@ -132,6 +164,9 @@ void grBigBlue_801EAB4C(void) {}
 
 /// #fn_801EFB9C
 
-/// #grBigBlue_801EFC0C
+bool grBigBlue_801EFC0C(void)
+{
+    return false;
+}
 
 /// #grBigBlue_801EFC14

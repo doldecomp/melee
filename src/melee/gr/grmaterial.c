@@ -1,9 +1,10 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include "it/it_266F.h"
+#include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/it_2E6A.h"
+#include "it/types.h"
 
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>

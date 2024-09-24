@@ -3,6 +3,7 @@
 #include "itfoxlaser.h"
 
 #include "it/inlines.h"
+#include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/types.h"
 

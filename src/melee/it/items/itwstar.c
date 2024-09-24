@@ -1,3 +1,4 @@
+#include "itwstar.h"
 
 /// #it_80294364
 
@@ -9,7 +10,10 @@
 
 /// #it_8029455C
 
-/// #it_802945AC
+bool it_802945AC(void)
+{
+    return false;
+}
 
 /// #it_802945B4
 
@@ -17,7 +21,10 @@
 
 /// #it_80294624
 
-/// #it_8029464C
+bool it_8029464C(void)
+{
+    return false;
+}
 
 /// #it_80294654
 
@@ -27,7 +34,10 @@
 
 /// #it_80294728
 
-/// #it_80294788
+bool it_80294788(void)
+{
+    return false;
+}
 
 /// #it_80294790
 
@@ -37,11 +47,17 @@
 
 void it_80294A1C(void) {}
 
-/// #it_80294A20
+bool it_80294A20(void)
+{
+    return false;
+}
 
 /// #it_80294A28
 
-/// #it_80294A50
+bool it_80294A50(void)
+{
+    return false;
+}
 
 void it_80294A58(void) {}
 

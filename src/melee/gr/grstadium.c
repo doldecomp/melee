@@ -1,3 +1,7 @@
+#include <platform.h>
+
+#include <placeholder.h>
+
 void grStadium_801D1018(void) {}
 
 /// #grStadium_801D101C
@@ -6,7 +10,10 @@ void grStadium_801D10C8(void) {}
 
 /// #grStadium_801D10CC
 
-/// #grStadium_801D10F0
+bool grStadium_801D10F0(void)
+{
+    return false;
+}
 
 /// #grStadium_801D10F8
 
@@ -14,7 +21,10 @@ void grStadium_801D10C8(void) {}
 
 /// #grStadium_801D1290
 
-/// #grStadium_801D1388
+bool grStadium_801D1388(void)
+{
+    return false;
+}
 
 /// #grStadium_801D1390
 
@@ -24,7 +34,10 @@ void grStadium_801D13C4(void) {}
 
 /// #grStadium_801D13E0
 
-/// #grStadium_801D1518
+bool grStadium_801D1518(void)
+{
+    return false;
+}
 
 /// #grStadium_801D1520
 
@@ -32,7 +45,10 @@ void grStadium_801D156C(void) {}
 
 /// #grStadium_801D1570
 
-/// #grStadium_801D15FC
+bool grStadium_801D15FC(void)
+{
+    return false;
+}
 
 /// #grStadium_801D1604
 
@@ -40,7 +56,10 @@ void grStadium_801D156C(void) {}
 
 /// #grStadium_801D1648
 
-/// #grStadium_801D16D4
+bool grStadium_801D16D4(void)
+{
+    return false;
+}
 
 /// #grStadium_801D16DC
 
@@ -48,7 +67,10 @@ void grStadium_801D156C(void) {}
 
 /// #grStadium_801D1720
 
-/// #grStadium_801D17E0
+bool grStadium_801D17E0(void)
+{
+    return false;
+}
 
 /// #grStadium_801D17E8
 
@@ -56,7 +78,10 @@ void grStadium_801D156C(void) {}
 
 /// #grStadium_801D1840
 
-/// #grStadium_801D19D0
+bool grStadium_801D19D0(void)
+{
+    return false;
+}
 
 /// #grStadium_801D19D8
 
@@ -64,7 +89,10 @@ void grStadium_801D156C(void) {}
 
 /// #grStadium_801D1A38
 
-/// #grStadium_801D1B40
+bool grStadium_801D1B40(void)
+{
+    return false;
+}
 
 /// #grStadium_801D1B48
 
@@ -72,7 +100,10 @@ void grStadium_801D156C(void) {}
 
 /// #grStadium_801D1DE4
 
-/// #grStadium_801D1E10
+bool grStadium_801D1E10(void)
+{
+    return false;
+}
 
 void grStadium_801D1E18(void) {}
 
@@ -138,7 +169,10 @@ void grStadium_801D1E1C(void) {}
 
 /// #grStadium_801D42B8
 
-/// #grStadium_801D4354
+bool grStadium_801D4354(void* arg0)
+{
+    return M2C_FIELD(arg0, s32*, 0x2C);
+}
 
 /// #grStadium_801D435C
 
@@ -148,7 +182,10 @@ void grStadium_801D1E1C(void) {}
 
 /// #fn_801D5074
 
-/// #grStadium_801D50B8
+bool grStadium_801D50B8(void)
+{
+    return false;
+}
 
 /// #grStadium_801D50C0
 

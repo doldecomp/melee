@@ -1,3 +1,4 @@
+#include "itunknown.h"
 
 /// #it_802CE710
 
@@ -9,7 +10,10 @@ void it_802CE7CC(void) {}
 
 /// #it_802CE870
 
-/// #it_802CE8C8
+bool it_802CE8C8(void)
+{
+    return false;
+}
 
 /// #it_802CE8D0
 
@@ -17,7 +21,10 @@ void it_802CE7CC(void) {}
 
 void it_802CEC18(void) {}
 
-/// #it_802CEC1C
+bool it_802CEC1C(void)
+{
+    return false;
+}
 
 /// #it_802CEC24
 
@@ -39,4 +46,7 @@ void it_802CEC18(void) {}
 
 /// #it_802CF154
 
-/// #it_802CF3D8
+bool it_802CF3D8(void)
+{
+    return false;
+}

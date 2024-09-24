@@ -1,3 +1,8 @@
+#include "particle.h"
+
+static int hsd_804D78C0;
+extern int hsd_804D78C8;
+
 /// #hsd_80391580
 
 /// #hsd_80391664
@@ -52,7 +57,10 @@ void hsd_80393840(void) {}
 
 /// #hsd_80393A04
 
-/// #hsd_80393A54
+void hsd_80393A54(int arg0)
+{
+    hsd_804D78C0 = arg0;
+}
 
 /// #hsd_80393A5C
 
@@ -166,7 +174,10 @@ void fn_8039710C(void) {}
 
 /// #hsd_80397DA4
 
-/// #Exception_StoreDebugLevel
+void Exception_StoreDebugLevel(int arg0)
+{
+    hsd_804D78C8 = arg0;
+}
 
 /// #hsd_80397DFC
 
@@ -204,7 +215,10 @@ void fn_8039710C(void) {}
 
 /// #hsd_8039D0A0
 
-/// #hsd_8039D1E4
+void hsd_8039D1E4(UNK_T arg0, int arg1)
+{
+    M2C_FIELD(arg0, int*, 0x58) = arg1;
+}
 
 /// #hsd_8039D1EC
 

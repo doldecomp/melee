@@ -1,3 +1,6 @@
+#include <platform.h>
+
+#include <placeholder.h>
 
 /// #it_8028B8D8
 
@@ -13,7 +16,10 @@
 
 /// #it_8028BE54
 
-/// #it_8028BEE8
+bool it_8028BEE8(void)
+{
+    return false;
+}
 
 void it_8028BEF0(void) {}
 
@@ -29,7 +35,10 @@ void it_8028BEF0(void) {}
 
 /// #it_8028C148
 
-/// #it_8028C1A0
+bool it_8028C1A0(void)
+{
+    return false;
+}
 
 void it_8028C1A8(void) {}
 
@@ -67,7 +76,10 @@ void it_8028C1A8(void) {}
 
 /// #it_8028CB24
 
-/// #it_8028CB70
+bool it_8028CB70(void)
+{
+    return false;
+}
 
 void it_8028CB78(void) {}
 

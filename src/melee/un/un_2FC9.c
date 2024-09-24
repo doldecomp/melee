@@ -1,3 +1,10 @@
+#include <platform.h>
+
+#include <placeholder.h>
+
+/* 4D6E1C */ static UNK_T un_804D6E1C;
+/* 4D6E44 */ static UNK_T un_804D6E44;
+
 /// #un_802FC9B4
 
 /// #fn_802FCAA4
@@ -110,7 +117,10 @@ void fn_802FF360(void) {}
 
 /// #un_802FF7DC
 
-/// #un_802FF884
+bool un_802FF884(void)
+{
+    return false;
+}
 
 /// #un_802FF88C
 
@@ -130,7 +140,10 @@ void fn_802FF360(void) {}
 
 /// #un_802FFC6C
 
-/// #fn_802FFCC8
+bool fn_802FFCC8(void)
+{
+    return false;
+}
 
 /// #un_802FFCD0
 
@@ -334,7 +347,10 @@ void fn_802FF360(void) {}
 
 /// #un_80301E78
 
-/// #un_80301FB4
+UNK_T un_80301FB4(void)
+{
+    return un_804D6E1C;
+}
 
 /// #un_80301FBC
 
@@ -394,9 +410,15 @@ void fn_803020F8(void) {}
 
 /// #un_80302D4C
 
-/// #un_80302DF0
+UNK_T un_80302DF0(void)
+{
+    return un_804D6E44;
+}
 
-/// #un_80302DF8
+void un_80302DF8(void* arg0, s32 arg1)
+{
+    M2C_FIELD(arg0, s32*, 0xC) = arg1;
+}
 
 /// #un_80302E00
 

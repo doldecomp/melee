@@ -1,13 +1,29 @@
+#include <platform.h>
+#include "it/forward.h"
+
+#include <placeholder.h>
 
 /// #it_802E878C
 
-/// #it_802E87D8
+bool it_802E87D8(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_802E87E0
+bool it_802E87E0(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_802E87E8
+bool it_802E87E8(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_802E87F0
+bool it_802E87F0(Item_GObj* arg0)
+{
+    return true;
+}
 
 /// #it_802E87F8
 
@@ -23,7 +39,10 @@ void it_802E8898(void) {}
 
 /// #it_802E890C
 
-/// #it_802E896C
+bool it_802E896C(void)
+{
+    return false;
+}
 
 /// #it_802E8974
 

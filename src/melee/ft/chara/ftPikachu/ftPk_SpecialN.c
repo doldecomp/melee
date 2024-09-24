@@ -17,7 +17,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itpikachutjoltground.h"
 
 #include <dolphin/mtx/types.h>
 

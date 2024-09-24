@@ -19,13 +19,13 @@
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itnesspkthunderball.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
 #include <math_ppc.h>
+#include <trigf.h>
 #include <MetroTRK/intrinsics.h>
 
 // SpecialHi/SpecialAirHi (PK Thunder)

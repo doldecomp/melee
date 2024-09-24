@@ -1,3 +1,4 @@
+#include <platform.h>
 
 void grMuteCity_801EFC68(void) {}
 
@@ -7,13 +8,19 @@ void grMuteCity_801EFCDC(void) {}
 
 /// #grMuteCity_801EFCE0
 
-/// #grMuteCity_801EFD04
+bool grMuteCity_801EFD04(void)
+{
+    return false;
+}
 
 /// #grMuteCity_801EFD0C
 
 /// #grMuteCity_801EFDF8
 
-/// #grMuteCity_801F0118
+bool grMuteCity_801F0118(void)
+{
+    return false;
+}
 
 /// #grMuteCity_801F0120
 
@@ -21,7 +28,10 @@ void grMuteCity_801F01B0(void) {}
 
 /// #grMuteCity_801F01B4
 
-/// #grMuteCity_801F0288
+bool grMuteCity_801F0288(void)
+{
+    return false;
+}
 
 /// #grMuteCity_801F0290
 
@@ -29,7 +39,10 @@ void grMuteCity_801F040C(void) {}
 
 /// #grMuteCity_801F0410
 
-/// #grMuteCity_801F043C
+bool grMuteCity_801F043C(void)
+{
+    return false;
+}
 
 void grMuteCity_801F0444(void) {}
 
@@ -37,7 +50,10 @@ void grMuteCity_801F0448(void) {}
 
 /// #grMuteCity_801F044C
 
-/// #grMuteCity_801F04A8
+bool grMuteCity_801F04A8(void)
+{
+    return false;
+}
 
 void grMuteCity_801F04B0(void) {}
 

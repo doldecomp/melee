@@ -20,9 +20,16 @@
 #include <baselib/devcom.h>
 #include <baselib/video.h>
 
-/* 1A5614 */ /* static */ void gm_801A5614(void);
-/* 1ACC90 */ /* static */ void gm_801ACC90(void);
-/* 1BBFE4 */ /* static */ void gm_801BBFE4(void);
+struct sceneData {
+    u32 a;
+    u8 scene_id;
+};
+
+/* 1A5614 */ static void gm_801A5614(void);
+/* 1ACC90 */ static void gm_801ACC90(void);
+/* 1BBFE4 */ static void gm_801BBFE4(void);
+
+static UNK_T gm_804D6720;
 
 typedef struct MinorScene MinorScene;
 
@@ -229,9 +236,15 @@ good:
     }
 }
 
-/// #gm_801A427C
+s32 gm_801A427C(void* arg0)
+{
+    return M2C_FIELD(arg0, s32*, 0x10);
+}
 
-/// #gm_801A4284
+UNK_T gm_801A4284(UNK_T arg0)
+{
+    return M2C_FIELD(arg0, UNK_T*, 0x14);
+}
 
 /// #gm_801A428C
 
@@ -378,7 +391,10 @@ void gm_801A4510(void)
 
 /// #gm_801A4B74
 
-/// #gm_801A4B88
+void gm_801A4B88(UNK_T arg0)
+{
+    gm_804D6720 = arg0;
+}
 
 /// #gm_801A4B90
 
@@ -388,7 +404,12 @@ void gm_801A4510(void)
 
 /// #gm_801A4BB8
 
-/// #gm_801A4BC8
+extern s32 gm_804D672C;
+
+s32 gm_801A4BC8(void)
+{
+    return gm_804D672C;
+}
 
 void fn_801A4BD0(void) {}
 
@@ -412,7 +433,12 @@ void fn_801A4BD0(void) {}
 
 /// #gm_801A5244
 
-/// #gm_801A5250
+extern M2C_UNK gm_804D6730;
+
+M2C_UNK* gm_801A5250(void)
+{
+    return &gm_804D6730;
+}
 
 /// #gm_801A5258
 
@@ -1414,10 +1440,7 @@ enum {
 
 void gm_801BF9A8(void* data)
 {
-    struct {
-        u32 a;
-        u8 scene_id;
-    }* scene_data;
+    struct sceneData* scene_data;
 
     scene_data = gm_801A4284(data);
 

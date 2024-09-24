@@ -14,13 +14,19 @@ void grCastle_801CD4A0(void) {}
 
 /// #grCastle_801CD4A4
 
-/// #grCastle_801CD4C8
+bool grCastle_801CD4C8(void)
+{
+    return false;
+}
 
 /// #grCastle_801CD4D0
 
 /// #grCastle_801CD5BC
 
-/// #grCastle_801CD600
+bool grCastle_801CD600(void)
+{
+    return false;
+}
 
 void grCastle_801CD608(void) {}
 
@@ -30,7 +36,10 @@ void grCastle_801CD60C(void) {}
 
 /// #grCastle_801CD658
 
-/// #grCastle_801CD8A0
+bool grCastle_801CD8A0(void)
+{
+    return false;
+}
 
 /// #grCastle_801CD8A8
 
@@ -40,7 +49,10 @@ void grCastle_801CD60C(void) {}
 
 /// #grCastle_801CDA0C
 
-/// #grCastle_801CDC3C
+bool grCastle_801CDC3C(void)
+{
+    return false;
+}
 
 /// #grCastle_801CDC44
 
@@ -58,7 +70,10 @@ void grCastle_801CDF50(void) {}
 
 void fn_801CE3A0(void) {}
 
-/// #grCastle_801CE3A4
+bool grCastle_801CE3A4(void)
+{
+    return false;
+}
 
 /// #grCastle_801CE3AC
 
@@ -68,7 +83,10 @@ void grCastle_801CE7E4(void) {}
 
 /// #grCastle_801CE7E8
 
-/// #grCastle_801CE858
+bool grCastle_801CE858(void)
+{
+    return false;
+}
 
 /// #grCastle_801CE860
 
@@ -78,7 +96,10 @@ void grCastle_801CE8E4(void) {}
 
 void fn_801CE9DC(void) {}
 
-/// #grCastle_801CE9E0
+bool grCastle_801CE9E0(void)
+{
+    return false;
+}
 
 /// #grCastle_801CE9E8
 
@@ -86,7 +107,10 @@ void grCastle_801CEAC8(void) {}
 
 /// #grCastle_801CEACC
 
-/// #grCastle_801CEEFC
+bool grCastle_801CEEFC(void)
+{
+    return false;
+}
 
 /// #grCastle_801CEF04
 
@@ -94,7 +118,10 @@ void grCastle_801CF0F0(void) {}
 
 /// #grCastle_801CF0F4
 
-/// #grCastle_801CF300
+bool grCastle_801CF300(void)
+{
+    return false;
+}
 
 /// #grCastle_801CF308
 
@@ -144,7 +171,10 @@ void grCastle_801CF74C(void) {}
 
 /// #grCastle_801D0A9C
 
-/// #grCastle_801D0B04
+bool grCastle_801D0B04(void)
+{
+    return false;
+}
 
 bool grCastle_801D0B0C(Vec3* v, u32 arg1, HSD_JObj* jobj)
 {

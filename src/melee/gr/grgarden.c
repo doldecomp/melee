@@ -1,3 +1,4 @@
+#include <platform.h>
 
 void grGarden_80202B6C(void) {}
 
@@ -7,13 +8,19 @@ void grGarden_80202B6C(void) {}
 
 /// #grGarden_80202C4C
 
-/// #grGarden_80202C70
+bool grGarden_80202C70(void)
+{
+    return false;
+}
 
 /// #grGarden_80202C78
 
 /// #grGarden_80202D60
 
-/// #grGarden_80202D8C
+bool grGarden_80202D8C(void)
+{
+    return false;
+}
 
 void grGarden_80202D94(void) {}
 
@@ -23,7 +30,10 @@ void grGarden_80202D98(void) {}
 
 /// #grGarden_80202DC8
 
-/// #grGarden_80202E40
+bool grGarden_80202E40(void)
+{
+    return false;
+}
 
 /// #grGarden_80202E48
 
@@ -31,7 +41,10 @@ void grGarden_80202E68(void) {}
 
 /// #grGarden_80202E6C
 
-/// #grGarden_80202F34
+bool grGarden_80202F34(void)
+{
+    return false;
+}
 
 void grGarden_80202F3C(void) {}
 
@@ -39,7 +52,10 @@ void grGarden_80202F40(void) {}
 
 /// #grGarden_80202F44
 
-/// #grGarden_80202F94
+bool grGarden_80202F94(void)
+{
+    return false;
+}
 
 void grGarden_80202F9C(void) {}
 
@@ -47,7 +63,10 @@ void grGarden_80202FA0(void) {}
 
 /// #grGarden_80202FA4
 
-/// #grGarden_80202FF4
+bool grGarden_80202FF4(void)
+{
+    return false;
+}
 
 void grGarden_80202FFC(void) {}
 
@@ -55,7 +74,10 @@ void grGarden_80203000(void) {}
 
 /// #grGarden_80203004
 
-/// #grGarden_80203090
+bool grGarden_80203090(void)
+{
+    return false;
+}
 
 /// #grGarden_80203098
 
@@ -63,7 +85,10 @@ void grGarden_802031A0(void) {}
 
 /// #grGarden_802031A4
 
-/// #grGarden_80203248
+bool grGarden_80203248(void)
+{
+    return false;
+}
 
 /// #grGarden_80203250
 
@@ -75,8 +100,14 @@ void fn_80203498(void) {}
 
 /// #grGarden_80203560
 
-/// #grGarden_802035C8
+bool grGarden_802035C8(void)
+{
+    return false;
+}
 
 /// #grGarden_802035D0
 
-/// #grGarden_80203624
+f32 grGarden_80203624(void)
+{
+    return -20.0f;
+}

@@ -1,3 +1,6 @@
+#include <platform.h>
+
+#include <placeholder.h>
 
 /// #it_802CCAB4
 
@@ -19,7 +22,10 @@ void it_802CCB10(void) {}
 
 /// #it_802CCD9C
 
-/// #it_802CCE20
+bool it_802CCE20(void)
+{
+    return false;
+}
 
 /// #it_802CCE28
 

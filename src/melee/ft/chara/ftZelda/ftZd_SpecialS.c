@@ -15,7 +15,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftZelda/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>

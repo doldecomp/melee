@@ -12,7 +12,7 @@
 /* 2B1AAC */ void it_802B1AAC(Item_GObj*);
 /* 2B1AD4 */ UNK_RET it_802B1AD4(UNK_PARAMS);
 /* 2B1C34 */ UNK_RET it_802B1C34(UNK_PARAMS);
-/* 2B1C38 */ UNK_RET it_802B1C38(UNK_PARAMS);
+/* 2B1C38 */ bool it_802B1C38(void);
 /* 2B1C40 */ void it_802B1C40(Item_GObj*, Item_GObj*);
 /* 3F70A8 */ extern ItemStateTable it_803F70A8[];
 

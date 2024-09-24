@@ -1,3 +1,5 @@
+#include <platform.h>
+
 void grHeal_8021EF38(void) {}
 
 /// #grHeal_8021EF3C
@@ -6,13 +8,19 @@ void grHeal_8021EFBC(void) {}
 
 /// #grHeal_8021EFC0
 
-/// #grHeal_8021EFE4
+bool grHeal_8021EFE4(void)
+{
+    return false;
+}
 
 /// #grHeal_8021EFEC
 
 /// #grHeal_8021F0D8
 
-/// #grHeal_8021F170
+bool grHeal_8021F170(void)
+{
+    return false;
+}
 
 void grHeal_8021F178(void) {}
 
@@ -20,7 +28,10 @@ void grHeal_8021F17C(void) {}
 
 /// #grHeal_8021F180
 
-/// #grHeal_8021F41C
+bool grHeal_8021F41C(void)
+{
+    return false;
+}
 
 /// #fn_8021F424
 
@@ -34,7 +45,10 @@ void grHeal_8021F4BC(void) {}
 
 void grHeal_8021F5C8(void) {}
 
-/// #grHeal_8021F5CC
+bool grHeal_8021F5CC(void)
+{
+    return false;
+}
 
 void grHeal_8021F5D4(void) {}
 
@@ -42,7 +56,10 @@ void grHeal_8021F5D8(void) {}
 
 /// #grHeal_8021F5DC
 
-/// #grHeal_8021F618
+bool grHeal_8021F618(void)
+{
+    return false;
+}
 
 void grHeal_8021F620(void) {}
 
@@ -52,7 +69,10 @@ void grHeal_8021F624(void) {}
 
 void grHeal_8021F6F8(void) {}
 
-/// #grHeal_8021F6FC
+bool grHeal_8021F6FC(void)
+{
+    return false;
+}
 
 void grHeal_8021F704(void) {}
 
@@ -62,6 +82,12 @@ void grHeal_8021F708(void) {}
 
 /// #grHeal_8021F79C
 
-/// #grHeal_8021F830
+bool grHeal_8021F830(void)
+{
+    return false;
+}
 
-/// #grHeal_8021F838
+bool grHeal_8021F838(void)
+{
+    return true;
+}

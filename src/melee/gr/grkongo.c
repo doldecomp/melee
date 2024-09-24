@@ -3,19 +3,18 @@
 #include "grmaterial.h"
 #include "types.h"
 
-#include "ft/ftdevice.h"
 #include "gm/gm_1601.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
-#include "gr/inlines.h"
 #include "gr/stage.h"
+#include "it/items/itklap.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 #include "MSL/math.h"
-#include "MSL/math_ppc.h"
+#include "MSL/math_ppc.h" // IWYU pragma: keep
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -23,16 +22,10 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
-void grAnime_801C78FC(HSD_GObj*, s32, s32);
-bool grAnime_801C84A4(HSD_GObj*, s32, s32);
-void grAnime_801C7A04(HSD_GObj*, s32, s32, f32);
-void it_802E20D8(Item_GObj*);
-void mpLib_800580AC(s32); /* extern */
-void mpLib_800580E0(s32); /* extern */
-
-int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1); /* static */
-void fn_801D7700(void* arg2, s32 arg4);          /* static */
-void fn_801D7E60(void* arg2, s32 arg4);          /* static */
+/* 1D7700 */ static void fn_801D7700(void* arg2, s32 arg4);
+/* 1D7E60 */ static void fn_801D7E60(void* arg2, s32 arg4);
+/* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
+/* 1D8444 */ static bool grKongo_801D8444(void);
 
 static StageCallbacks* grKg_803E16E0;
 
@@ -83,124 +76,6 @@ static struct {
 }* grKg_804D6980;
 
 extern StageInfo stage_info;
-
-void grKongo_801D5238(void) {}
-void grKongo_801D523C(void)
-{
-    u8* temp_r5;
-
-    grKg_804D6980 = Ground_801C49F8();
-    temp_r5 = (u8*) &stage_info.unk8C;
-    stage_info.unk8C.b4 = false;
-    stage_info.unk8C.b5 = true;
-    grKongo_801D5340(0);
-    grKongo_801D5340(10);
-    grKongo_801D5340(5);
-    grKongo_801D5340(3);
-    grKongo_801D5340(6);
-    grKongo_801D5340(4);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    mpLib_80057BC0(0);
-    mpLib_80057BC0(1);
-    if ((Stage_80225194() != 0x3D) && (gm_8016B238() == 0)) {
-        Ground_801C53EC(0x5A551U);
-    }
-}
-
-void grKongo_801D52F8(void) {}
-
-void grKongo_801D52FC(void)
-{
-    Ground_801C2BA4(5);
-    // ftCo_800C0764(2, fn_801D8134);
-    grZakoGenerator_801CAE04(0);
-}
-
-s32 grKongo_801D5338(void)
-{
-    return 0;
-}
-
-HSD_GObj* grKongo_801D5340(s32 gobj_id)
-{
-    HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grKg_803E16E0[gobj_id + 1];
-
-    gobj = Ground_801C14D0(gobj_id);
-
-    if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        // 0x80
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        // 0x94
-        if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
-        }
-    } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,
-                 gobj_id);
-    }
-    return gobj;
-}
-
-#if 0
-    ? (*temp_r12)(HSD_GObj *);
-    HSD_GObj *temp_r3;
-    HSD_GObj *temp_ret;
-    u32 temp_r0;
-    void (*temp_r4)(HSD_GObj *);
-    void *callbacks;
-    void *temp_r31;
-
-    callbacks = &grKg_803E16E0 + (arg0 * 0x14) + 0x24;
-    temp_ret = Ground_801C14D0(arg0);
-    temp_r3 = temp_ret;
-    if (temp_r3 != NULL) {
-        temp_r31 = temp_r3->user_data;
-        temp_r31->unk8 = 0;
-        temp_r31->unkC = 0;
-        GObj_SetupGXLink(temp_r3, grDisplay_801C5DB0, 3U, 0U);
-        temp_r0 = callbacks->unkC;
-        if (temp_r0 != 0U) {
-            temp_r31->unk1C = temp_r0;
-        }
-        temp_r12 = callbacks->unk0;
-        if (temp_r12 != NULL) {
-            temp_r12(temp_r3);
-        }
-        temp_r4 = callbacks->unk8;
-        if (temp_r4 != NULL) {
-            HSD_GObjProc_8038FD54(temp_r3, temp_r4, 4U);
-        }
-    } else {
-        OSReport(&grKg_803E16E0 + 0x154, &grKg_803E16E0 + 0x178, 0x10E, arg0, (bitwise f32) temp_ret);
-    }
-    return temp_r3;
-#endif
-
-void fn_801D542C(HSD_GObj*);
-void mpLib_800580C8(s32, Ground*, void (*)(void*, s32)); /* extern */
-
-void fn_801D542C(HSD_GObj* arg0)
-{
-    Ground* temp_r31;
-    f32 temp_f2;
-
-    temp_r31 = arg0->user_data;
-    mpLib_800580C8(4, temp_r31, fn_801D7700);
-    temp_f2 = grKg_804D6980->unk0;
-    temp_r31->gv.kongo.xE4 =
-        (s16) (((grKg_804D6980->unk4 - temp_f2) * HSD_Randf()) + temp_f2);
-}
 
 void grKongo_801D5490(HSD_GObj* arg0)
 {
@@ -1433,3 +1308,185 @@ f32 grKongo_801D8314(void)
     }
     return var_f31;
 }
+
+void grKongo_801D5238(void) {}
+
+void grKongo_801D523C(void)
+{
+    u8* temp_r5;
+
+    grKg_804D6980 = Ground_801C49F8();
+    temp_r5 = (u8*) &stage_info.unk8C;
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    grKongo_801D5340(0);
+    grKongo_801D5340(10);
+    grKongo_801D5340(5);
+    grKongo_801D5340(3);
+    grKongo_801D5340(6);
+    grKongo_801D5340(4);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    mpLib_80057BC0(0);
+    mpLib_80057BC0(1);
+    if ((Stage_80225194() != 0x3D) && (gm_8016B238() == 0)) {
+        Ground_801C53EC(0x5A551U);
+    }
+}
+
+void grKongo_801D52F8(void) {}
+
+void grKongo_801D52FC(void)
+{
+    Ground_801C2BA4(5);
+    // ftCo_800C0764(2, fn_801D8134);
+    grZakoGenerator_801CAE04(0);
+}
+
+s32 grKongo_801D5338(void)
+{
+    return 0;
+}
+
+HSD_GObj* grKongo_801D5340(s32 gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grKg_803E16E0[gobj_id + 1];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        // 0x80
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        // 0x94
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,
+                 gobj_id);
+    }
+    return gobj;
+}
+
+void fn_801D542C(HSD_GObj* arg0)
+{
+    Ground* temp_r31;
+    f32 temp_f2;
+
+    temp_r31 = arg0->user_data;
+    mpLib_800580C8(4, temp_r31, fn_801D7700);
+    temp_f2 = grKg_804D6980->unk0;
+    temp_r31->gv.kongo.xE4 =
+        (s16) (((grKg_804D6980->unk4 - temp_f2) * HSD_Randf()) + temp_f2);
+}
+
+/// #grKongo_801D5490
+
+/// #grKongo_801D5574
+
+/// #grKongo_801D557C
+
+/// #grKongo_801D55D4
+
+/// #grKongo_801D55D8
+
+/// #grKongo_801D5774
+
+/// #grKongo_801D577C
+
+/// #grKongo_801D5FA4
+
+/// #grKongo_801D5FA8
+
+/// #grKongo_801D5FD4
+
+/// #grKongo_801D5FDC
+
+/// #grKongo_801D5FE0
+
+/// #grKongo_801D5FE4
+
+/// #grKongo_801D6028
+
+/// #grKongo_801D6030
+
+/// #grKongo_801D6034
+
+/// #grKongo_801D6038
+
+/// #grKongo_801D6064
+
+/// #grKongo_801D606C
+
+/// #grKongo_801D6070
+
+/// #grKongo_801D6074
+
+/// #grKongo_801D6190
+
+/// #grKongo_801D6198
+
+/// #grKongo_801D6378
+
+/// #grKongo_801D637C
+
+/// #grKongo_801D64B4
+
+/// #grKongo_801D64BC
+
+/// #grKongo_801D6518
+
+/// #grKongo_801D651C
+
+/// #grKongo_801D6660
+
+/// #grKongo_801D6668
+
+/// #grKongo_801D69AC
+
+/// #grKongo_801D69B0
+
+/// #grKongo_801D6AFC
+
+/// #grKongo_801D7134
+
+/// #fn_801D7700
+
+/// #grKongo_801D77E0
+
+/// #grKongo_801D7BBC
+
+/// #fn_801D7E60
+
+/// #grKongo_801D7E78
+
+/// #grKongo_801D7F78
+
+/// #grKongo_801D8058
+
+/// #grKongo_801D8078
+
+/// #fn_801D8134
+
+/// #grKongo_801D8270
+
+/// #grKongo_801D828C
+
+/// #grKongo_801D8314
+
+bool grKongo_801D8444(void)
+{
+    return false;
+}
+
+/// #grKongo_801D844C

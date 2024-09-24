@@ -28,7 +28,7 @@
 /* 219898 */ static void grFigureGet_80219898(HSD_GObj*);
 /* 219B0C */ static void grFigureGet_80219B0C(HSD_GObj*);
 /* 219C88 */ static DynamicsDesc* grFigureGet_80219C88(enum_t);
-/* 219C90 */ static int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
+/* 219C90 */ static bool grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grFigureGet_803E7D00[2] = {
     { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
@@ -128,7 +128,10 @@ static void grFigureGet_802196EC(HSD_GObj* gobj) {}
 
 /// #grFigureGet_802196F0
 
-/// #grFigureGet_80219890
+bool grFigureGet_80219890(HSD_GObj* gobj)
+{
+    return false;
+}
 
 /// #grFigureGet_80219898
 
@@ -140,6 +143,12 @@ void grFigureGet_80219B0C(HSD_GObj* gobj) {}
 
 /// #grFigureGet_80219C50
 
-/// #grFigureGet_80219C88
+DynamicsDesc* grFigureGet_80219C88(enum_t arg0)
+{
+    return NULL;
+}
 
-/// #grFigureGet_80219C90
+bool grFigureGet_80219C90(Vec3* arg0, int arg1, HSD_JObj* arg2)
+{
+    return true;
+}

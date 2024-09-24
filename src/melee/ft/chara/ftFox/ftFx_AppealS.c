@@ -11,6 +11,7 @@
 #include "gr/grcorneria.h"
 #include "pl/pl_0371.h"
 #include "pl/player.h"
+#include "pl/plbonus.h"
 
 #include <common_structs.h>
 

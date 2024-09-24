@@ -22,6 +22,11 @@ type ReportValue = ReportDict | ReportList | str
 ROOT = Path(__file__).parents[1]
 MODULE = "main"
 REPORT_PATH = "build/GALE01/report.json"
+GAP_RE = re.compile(r"^gap_\d{2}_[0-9A-F]{8}_text$")
+
+SKIP_SYMBOLS = {
+    "GetR2_80322F20",
+}
 
 
 @dataclass(frozen=True)
@@ -95,6 +100,12 @@ def print_funcs(
         functions = cast(list[ReportDict], unit.get("functions", []))
         for function in functions:
             func_name = cast(str, function["name"])
+
+            if func_name in SKIP_SYMBOLS:
+                continue
+
+            if GAP_RE.match(func_name) is not None:
+                continue
 
             func_size = int(cast(str, function["size"]))
             if func_size < size[0] or func_size > size[1]:

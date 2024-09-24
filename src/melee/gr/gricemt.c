@@ -1,3 +1,5 @@
+#include <platform.h>
+
 void grIceMt_801F6868(void) {}
 
 /// #grIceMt_801F686C
@@ -6,13 +8,19 @@ void grIceMt_801F6868(void) {}
 
 void grIceMt_801F71DC(void) {}
 
-/// #grIceMt_801F71E0
+bool grIceMt_801F71E0(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F71E8
 
 /// #grIceMt_801F72D4
 
-/// #grIceMt_801F75DC
+bool grIceMt_801F75DC(void)
+{
+    return false;
+}
 
 void grIceMt_801F75E4(void) {}
 
@@ -22,7 +30,10 @@ void grIceMt_801F75E8(void) {}
 
 /// #grIceMt_801F75FC
 
-/// #grIceMt_801F7720
+bool grIceMt_801F7720(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F7728
 
@@ -40,7 +51,10 @@ void grIceMt_801F7D90(void) {}
 
 /// #grIceMt_801F7D94
 
-/// #grIceMt_801F7EE0
+bool grIceMt_801F7EE0(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F7EE8
 
@@ -48,7 +62,10 @@ void grIceMt_801F7D90(void) {}
 
 /// #grIceMt_801F7F70
 
-/// #grIceMt_801F8154
+bool grIceMt_801F8154(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F815C
 
@@ -56,7 +73,10 @@ void grIceMt_801F7D90(void) {}
 
 /// #grIceMt_801F8208
 
-/// #grIceMt_801F835C
+bool grIceMt_801F835C(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F8364
 
@@ -64,7 +84,10 @@ void grIceMt_801F7D90(void) {}
 
 /// #grIceMt_801F83EC
 
-/// #grIceMt_801F85BC
+bool grIceMt_801F85BC(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F85C4
 
@@ -72,7 +95,10 @@ void grIceMt_801F7D90(void) {}
 
 /// #grIceMt_801F865C
 
-/// #grIceMt_801F87C0
+bool grIceMt_801F87C0(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F87C8
 
@@ -80,7 +106,10 @@ void grIceMt_801F7D90(void) {}
 
 /// #grIceMt_801F8850
 
-/// #grIceMt_801F89A4
+bool grIceMt_801F89A4(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F89AC
 
@@ -88,7 +117,10 @@ void grIceMt_801F7D90(void) {}
 
 /// #grIceMt_801F8A34
 
-/// #grIceMt_801F8B08
+bool grIceMt_801F8B08(void)
+{
+    return false;
+}
 
 /// #grIceMt_801F8B10
 
@@ -144,6 +176,12 @@ void fn_801F91A4(void) {}
 
 /// #grIceMt_801FA854
 
-/// #grIceMt_801FA8F8
+bool grIceMt_801FA8F8(void)
+{
+    return false;
+}
 
-/// #grIceMt_801FA900
+bool grIceMt_801FA900(void)
+{
+    return true;
+}

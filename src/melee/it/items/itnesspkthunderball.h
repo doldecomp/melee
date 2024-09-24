@@ -3,10 +3,21 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
+/* 2AB3F0 */ void it_802AB3F0(Item_GObj*, void*, s32);
+/* 2AB468 */ UNK_RET it_802AB468(UNK_PARAMS);
+/* 2AB4B8 */ UNK_RET it_802AB4B8(UNK_PARAMS);
+/* 2AB568 */ HSD_GObj* it_802AB568(Item_GObj*);
+/* 2AB58C */ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos,
+                                   float facing_dir);
 /* 2AB90C */ void it_802AB90C(Item_GObj*);
+/* 2AB9C0 */ void it_802AB9C0(Item_GObj*);
+/* 2ABA4C */ UNK_RET it_802ABA4C(UNK_PARAMS);
+/* 2ABBB0 */ UNK_RET it_802ABBB0(UNK_PARAMS);
+/* 2ABCDC */ UNK_RET it_802ABCDC(UNK_PARAMS);
 /* 2AC050 */ bool it_802AC050(Item_GObj*);
 /* 2AC074 */ bool it_802AC074(Item_GObj*);
 /* 2AC098 */ bool it_802AC098(Item_GObj*);
