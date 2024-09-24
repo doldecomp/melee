@@ -17,6 +17,6 @@
 /* 32B7FC */ UNK_RET DBWrite(UNK_PARAMS);
 /* 32BA5C */ UNK_RET DBOpen(UNK_PARAMS);
 /* 32BA60 */ UNK_RET DBClose(UNK_PARAMS);
-/* 32BA64 */ UNK_RET Hu_IsStub(UNK_PARAMS);
+/* 32BA64 */ bool Hu_IsStub(void);
 
 #endif

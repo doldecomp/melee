@@ -1,3 +1,4 @@
+#include "itseakneedlethrown.h"
 
 /// #it_802AFD8C
 
@@ -35,7 +36,10 @@ void it_802B057C(void) {}
 
 /// #it_802B0AB8
 
-/// #it_802B0C5C
+bool it_802B0C5C(void)
+{
+    return false;
+}
 
 /// #it_802B0C64
 

@@ -16,16 +16,16 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftNess/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itnessyoyo.h"
 #include "it/itYoyo.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 
 #include <common_structs.h>
+#include <trigf.h>
 #include <dolphin/mtx/types.h>
 
 void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj)

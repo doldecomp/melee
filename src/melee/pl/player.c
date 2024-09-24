@@ -14,8 +14,8 @@
 #include "gm/gm_1601.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
-#include "pl/pl_0371.h"
 #include "pl/plattack.h"
+#include "pl/plbonus.h"
 #include "pl/plstale.h"
 #include "pl/types.h"
 

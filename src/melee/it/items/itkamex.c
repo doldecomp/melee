@@ -1,3 +1,7 @@
+#include <platform.h>
+#include "it/forward.h"
+
+#include <placeholder.h>
 
 /// #it_802CA49C
 
@@ -45,9 +49,15 @@ void it_802CA534(void) {}
 
 /// #it_802CACD0
 
-/// #it_802CADC0
+bool it_802CADC0(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_802CADC8
+bool it_802CADC8(Item_GObj* arg0)
+{
+    return false;
+}
 
 /// #it_802CADD0
 

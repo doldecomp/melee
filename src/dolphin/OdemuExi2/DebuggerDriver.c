@@ -1,3 +1,5 @@
+#include "DebuggerDriver.h"
+
 /// #DBGEXIImm
 
 /// #DBGReadMailbox
@@ -26,4 +28,7 @@ void DBOpen(void) {}
 
 void DBClose(void) {}
 
-/// #Hu_IsStub
+bool Hu_IsStub(void)
+{
+    return false;
+}

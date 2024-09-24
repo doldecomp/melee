@@ -1,3 +1,4 @@
+#include "itwhispyapple.h"
 
 /// #it_802EE200
 
@@ -27,7 +28,10 @@ void it_802EE7CC(void) {}
 
 /// #it_802EEA08
 
-/// #it_802EEA64
+bool it_802EEA64(void)
+{
+    return false;
+}
 
 void it_802EEA6C(void) {}
 
@@ -49,9 +53,15 @@ void it_802EECC8(void) {}
 
 void it_802EEEC4(void) {}
 
-/// #it_802EEEC8
+bool it_802EEEC8(void)
+{
+    return false;
+}
 
-/// #it_802EEED0
+bool it_802EEED0(void)
+{
+    return true;
+}
 
 /// #it_802EEED8
 

@@ -3049,7 +3049,7 @@ melee/it/items/itmetamon.c:
 melee/it/items/itpippi.c:
 	.text       start:0x802D3260 end:0x802D36B0
 	.data       start:0x803F7FF8 end:0x803F8058
-	.sdata2     start:0x804DD4A8 end:0x804DD4B0
+	.sdata2     start:0x804DD4A8 end:0x804DD4AC
 
 melee/it/items/ittogepy.c:
 	.text       start:0x802D36B0 end:0x802D3B18
@@ -3105,7 +3105,7 @@ melee/it/items/itoldkuri.c:
 melee/it/items/itmato.c:
 	.text       start:0x802D84F8 end:0x802D8618
 	.data       start:0x803F83E0 end:0x803F83F0
-	.sdata2     start:0x804DD5B0 end:0x804DD5B8
+	.sdata2     start:0x804DD5B0 end:0x804DD5B4
 
 melee/it/items/itheiho.c:
 	.text       start:0x802D8618 end:0x802D9A2C

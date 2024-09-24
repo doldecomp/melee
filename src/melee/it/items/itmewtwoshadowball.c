@@ -1,3 +1,4 @@
+#include "itmewtwoshadowball.h"
 
 /// #it_802C4D10
 
@@ -19,7 +20,10 @@
 
 void it_802C5B0C(void) {}
 
-/// #it_802C5B10
+bool it_802C5B10(void)
+{
+    return false;
+}
 
 /// #it_802C5B18
 
@@ -43,17 +47,32 @@ void it_802C5DCC(void) {}
 
 /// #it_802C6094
 
-/// #it_802C60AC
+bool it_802C60AC(void)
+{
+    return false;
+}
 
-/// #it_802C60B4
+bool it_802C60B4(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_802C60BC
+bool it_802C60BC(Item_GObj* arg0)
+{
+    return true;
+}
 
-/// #it_802C60C4
+bool it_802C60C4(Item_GObj* arg0)
+{
+    return true;
+}
 
 /// #it_802C60CC
 
-/// #it_802C6138
+bool it_802C6138(Item_GObj* arg0)
+{
+    return true;
+}
 
 /// #it_802C6140
 

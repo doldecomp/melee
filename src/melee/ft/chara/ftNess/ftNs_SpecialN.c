@@ -15,7 +15,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/ftNs_Init.h"
 #include "ftNess/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itnesspkflush.h"
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>

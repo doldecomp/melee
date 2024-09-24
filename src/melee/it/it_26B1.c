@@ -7,6 +7,7 @@
 #include "gm/gm_1601.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
+#include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/it_27CF.h"

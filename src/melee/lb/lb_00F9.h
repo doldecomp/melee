@@ -10,9 +10,14 @@
 #include <placeholder.h>
 
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
+/* 00FA94 */ UNK_RET lb_8000FA94(UNK_PARAMS);
 /* 00FCDC */ void lb_8000FCDC(void);
 /* 00FD18 */ void lb_8000FD18(UNK_T);
 /* 00FD48 */ void lb_8000FD48(HSD_JObj*, DynamicsDesc*, size_t);
+/* 0100B0 */ UNK_RET lb_800100B0(UNK_PARAMS);
+/* 0101C8 */ UNK_RET lb_800101C8(UNK_PARAMS);
+/* 0103B8 */ UNK_RET lb_800103B8(UNK_PARAMS);
+/* 0103D8 */ UNK_RET lb_800103D8(UNK_PARAMS);
 /* 01044C */ void lb_8001044C(DynamicsDesc*, UNK_T, int, float pos_y, bool,
                               Fighter_Part part, int, bool);
 /* 0115F4 */ void lb_800115F4(void);
@@ -25,15 +30,38 @@
 /* 011AC4 */ HSD_LObj* lb_80011AC4(UNK_T);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);
 /* 011E24 */ int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
+/* 01204C */ UNK_RET lb_8001204C(UNK_PARAMS);
+/* 0121FC */ void lb_800121FC(HSD_ImageDesc*, int, int, int, int);
 /* 0122C8 */ void lb_800122C8(HSD_ImageDesc*, int, int, int);
-/* 0122FC */ void lb_800121FC(HSD_ImageDesc*, int, int, int, int);
+/* 0122F0 */ UNK_RET lb_800122F0(UNK_PARAMS);
+/* 01271C */ UNK_RET lb_8001271C(UNK_PARAMS);
+/* 01285C */ UNK_RET lb_8001285C(UNK_PARAMS);
+/* 012994 */ UNK_RET lb_80012994(UNK_PARAMS);
+/* 013614 */ UNK_RET fn_80013614(UNK_PARAMS);
+/* 0138AC */ UNK_RET fn_800138AC(UNK_PARAMS);
+/* 0138CC */ UNK_RET lb_800138CC(UNK_PARAMS);
+/* 0138D8 */ UNK_RET lb_800138D8(UNK_PARAMS);
+/* 0138EC */ UNK_RET lb_800138EC(UNK_PARAMS);
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
+/* 013BB8 */ UNK_RET lb_80013BB8(UNK_PARAMS);
+/* 013BE4 */ UNK_RET lb_80013BE4(UNK_PARAMS);
+/* 013C18 */ UNK_RET lb_80013C18(UNK_PARAMS);
+/* 013D68 */ UNK_RET lb_80013D68(UNK_PARAMS);
+/* 013E3C */ UNK_RET lb_80013E3C(UNK_PARAMS);
+/* 013F78 */ UNK_RET lb_80013F78(UNK_PARAMS);
+/* 013FF0 */ UNK_RET lb_80013FF0(UNK_PARAMS);
+/* 014014 */ UNK_RET lb_80014014(UNK_PARAMS);
+/* 0140F8 */ UNK_RET lb_800140F8(UNK_PARAMS);
+/* 014234 */ UNK_RET lb_80014234(UNK_PARAMS);
 /* 014258 */ bool lb_80014258(HSD_GObj* gobj, UNK_T arg1, FtCmd cmd);
 /* 014498 */ void lb_80014498(UNK_T arg0);
 /* 0144C8 */ bool lb_800144C8(ftDeviceUnk2*, void*, s32, s32);
+/* 014534 */ UNK_RET lb_80014534(UNK_PARAMS);
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8);
+/* 0145F4 */ UNK_RET lb_800145F4(UNK_PARAMS);
 /* 014638 */ UNK_T lb_80014638(void);
 /* 014770 */ bool lb_80014770(Vec3*, int);
+/* 0149E0 */ UNK_RET lb_800149E0(UNK_PARAMS);
 
 #endif

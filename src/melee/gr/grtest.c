@@ -1,3 +1,4 @@
+#include <platform.h>
 
 void grTest_80206E2C(void) {}
 
@@ -7,13 +8,19 @@ void grTest_80207014(void) {}
 
 /// #grTest_80207018
 
-/// #grTest_8020703C
+bool grTest_8020703C(void)
+{
+    return false;
+}
 
 /// #grTest_80207044
 
 /// #grTest_80207130
 
-/// #grTest_8020715C
+bool grTest_8020715C(void)
+{
+    return false;
+}
 
 void grTest_80207164(void) {}
 
@@ -21,7 +28,10 @@ void grTest_80207168(void) {}
 
 /// #grTest_8020716C
 
-/// #grTest_802071BC
+bool grTest_802071BC(void)
+{
+    return false;
+}
 
 /// #grTest_802071C4
 
@@ -31,12 +41,21 @@ void grTest_802073AC(void) {}
 
 /// #grTest_802073D0
 
-/// #grTest_802073FC
+bool grTest_802073FC(void)
+{
+    return false;
+}
 
 void grTest_80207404(void) {}
 
 void grTest_80207408(void) {}
 
-/// #grTest_8020740C
+bool grTest_8020740C(void)
+{
+    return false;
+}
 
-/// #grTest_80207414
+bool grTest_80207414(void)
+{
+    return true;
+}

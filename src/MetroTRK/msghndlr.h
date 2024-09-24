@@ -1,1 +1,31 @@
+#ifndef GALE01_327740
+#define GALE01_327740
 
+#include <placeholder.h>
+
+/* 327740 */ UNK_RET TRKMessageIntoReply(UNK_PARAMS);
+/* 3277D8 */ UNK_RET TRKSendACK(UNK_PARAMS);
+/* 327828 */ UNK_RET TRKStandardACK(UNK_PARAMS);
+/* 32785C */ UNK_RET MTRK_MsgHndlr_8032785C(UNK_PARAMS);
+/* 327884 */ UNK_RET MTRK_MsgHndlr_80327884(UNK_PARAMS);
+/* 3278AC */ UNK_RET MTRK_MsgHndlr_803278AC(UNK_PARAMS);
+/* 3278FC */ UNK_RET TRKDoReset(UNK_PARAMS);
+/* 32792C */ UNK_RET TRKDoVersions(UNK_PARAMS);
+/* 327AB0 */ UNK_RET TRKDoSupportMask(UNK_PARAMS);
+/* 327B8C */ UNK_RET TRKDoCPUType(UNK_PARAMS);
+/* 327DD0 */ UNK_RET TRKDoReadMemory(UNK_PARAMS);
+/* 327FB8 */ UNK_RET TRKDoWriteMemory(UNK_PARAMS);
+/* 3281B4 */ UNK_RET TRKDoReadRegisters(UNK_PARAMS);
+/* 3283B8 */ UNK_RET TRKDoWriteRegisters(UNK_PARAMS);
+/* 3285C0 */ UNK_RET TRKDoFlushCache(UNK_PARAMS);
+/* 3286F8 */ UNK_RET TRKDoContinue(UNK_PARAMS);
+/* 32875C */ UNK_RET TRKDoStep(UNK_PARAMS);
+/* 328960 */ UNK_RET TRKDoStop(UNK_PARAMS);
+/* 3289E4 */ UNK_RET TRKSuppAccessFile(UNK_PARAMS);
+/* 328CBC */ UNK_RET TRKRequestSend(UNK_PARAMS);
+/* 328E60 */ bool TRKInitializeMutex(void);
+/* 328E68 */ bool TRKAcquireMutex(void);
+/* 328E70 */ bool TRKReleaseMutex(void);
+/* 328E78 */ UNK_RET TRKDoNotifyStopped(UNK_PARAMS);
+
+#endif

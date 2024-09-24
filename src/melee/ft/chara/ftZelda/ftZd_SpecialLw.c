@@ -15,7 +15,7 @@
 #include "ft/types.h"
 #include "ftSeak/ftSk_SpecialLw.h"
 #include "ftZelda/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 

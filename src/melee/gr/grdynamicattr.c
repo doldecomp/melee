@@ -2,6 +2,7 @@
 
 #include "gr/grdynamicattr.h"
 
+#include "gr/types.h"
 #include "mp/mplib.h"
 
 #include <math.h>

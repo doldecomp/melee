@@ -15,6 +15,11 @@
 
 struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
 
+static s8 lbl_804D6598;
+static u8 lbl_804D65A0;
+
+static s32 lbl_804D4190 = 0xFFFFFFFF;
+
 #define NUM_UNLOCKABLE_CHARACTERS 11
 
 /// #gm_801601C4
@@ -333,7 +338,10 @@ bool gm_80164ABC(struct gmMainLib_8015ED8C_arg0_t* arg0)
 
 /// #gm_80167140
 
-/// #fn_80167194
+u8 fn_80167194(void* arg0)
+{
+    return M2C_FIELD(arg0, u8*, 0xD);
+}
 
 /// #fn_8016719C
 
@@ -349,9 +357,15 @@ bool gm_80164ABC(struct gmMainLib_8015ED8C_arg0_t* arg0)
 
 /// #gm_801677C0
 
-/// #gm_801677E8
+void gm_801677E8(s8 arg0)
+{
+    lbl_804D6598 = arg0;
+}
 
-/// #gm_801677F0
+u8 gm_801677F0(void)
+{
+    return lbl_804D6598;
+}
 
 /// #gm_801677F8
 
@@ -758,7 +772,10 @@ void gm_801692E8(uint ticks, struct datetime* datetime)
 
 /// #fn_801701AC
 
-/// #fn_801701B8
+u8 fn_801701B8(void)
+{
+    return lbl_804D65A0;
+}
 
 /// #fn_801701C0
 
@@ -802,7 +819,10 @@ void gm_801692E8(uint ticks, struct datetime* datetime)
 
 /// #fn_80172478
 
-/// #fn_801724C8
+bool fn_801724C8(void)
+{
+    return false;
+}
 
 /// #fn_801724D0
 
@@ -1126,7 +1146,10 @@ void gm_801692E8(uint ticks, struct datetime* datetime)
 
 /// #fn_8017BDC8
 
-/// #gm_8017BE84
+s32 gm_8017BE84(u32 arg0)
+{
+    return (arg0 >> 3) & 0x1F;
+}
 
 /// #gm_8017BE8C
 
@@ -1542,7 +1565,10 @@ void fn_80187714(void)
 
 /// #fn_8018F5F0
 
-/// #fn_8018F62C
+s32 fn_8018F62C(void* arg0)
+{
+    return M2C_FIELD(arg0, s32*, 0x2C);
+}
 
 /// #gm_8018F634
 
@@ -1566,7 +1592,10 @@ void fn_80187714(void)
 
 /// #fn_8018FA24
 
-/// #fn_8018FBD8
+void fn_8018FBD8(void* arg0, s32 arg1)
+{
+    M2C_FIELD(arg0, s32*, 0x2C) = arg1;
+}
 
 /// #fn_8018FBE0
 
@@ -1678,7 +1707,10 @@ void fn_80187714(void)
 
 /// #fn_80196510
 
-/// #fn_8019655C
+s32 fn_8019655C(void)
+{
+    return lbl_804D4190;
+}
 
 /// #fn_80196564
 

@@ -1,8 +1,16 @@
+#include <platform.h>
+#include "it/forward.h"
+
+#include <placeholder.h>
+
 /// #it_802C9B20
 
 /// #it_802C9C20
 
-/// #it_802C9C78
+bool it_802C9C78(Item_GObj* arg0)
+{
+    return false;
+}
 
 /// #it_802C9C80
 

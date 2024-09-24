@@ -15,7 +15,7 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftPikachu/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itpikachuthunder.h"
 
 #include <dolphin/mtx/types.h>
 

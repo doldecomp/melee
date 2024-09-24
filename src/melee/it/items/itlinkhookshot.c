@@ -7,20 +7,17 @@
 #include "ft/chara/ftCommon/ftCo_AirCatch.h"
 #include "ft/chara/ftCommon/ftCo_CliffJump.h"
 #include "ft/chara/ftCommon/ftCo_DamageFall.h"
-#include "ft/chara/ftCommon/inlines.h"
 #include "ft/ft_081B.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
+#include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
-#include "MetroTRK/intrinsics.h"
 #include "mp/mpcoll.h"
 #include "mp/mpisland.h"
 #include "mp/mplib.h"
@@ -28,7 +25,8 @@
 #include "sysdolphin/baselib/gobjobject.h"
 #include "sysdolphin/baselib/gobjplink.h"
 #include "sysdolphin/baselib/jobj.h"
-#include "sysdolphin/baselib/mtx.h"
+
+#include <MSL/math_ppc.h>
 
 ItemStateTable it_803F6998[] = { {
                                      -1,

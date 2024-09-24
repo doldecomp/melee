@@ -1,3 +1,5 @@
+#include <platform.h>
+
 void grZebes_801D84A0(void) {}
 
 /// #grZebes_801D84A4
@@ -6,13 +8,19 @@ void grZebes_801D8528(void) {}
 
 /// #grZebes_801D852C
 
-/// #grZebes_801D8550
+bool grZebes_801D8550(void)
+{
+    return false;
+}
 
 /// #grZebes_801D8558
 
 /// #grZebes_801D8644
 
-/// #grZebes_801D8814
+bool grZebes_801D8814(void)
+{
+    return false;
+}
 
 /// #grZebes_801D881C
 
@@ -20,7 +28,10 @@ void grZebes_801D90FC(void) {}
 
 /// #grZebes_801D9100
 
-/// #grZebes_801D9254
+bool grZebes_801D9254(void)
+{
+    return false;
+}
 
 /// #grZebes_801D925C
 
@@ -28,7 +39,10 @@ void grZebes_801D93D8(void) {}
 
 /// #grZebes_801D93DC
 
-/// #grZebes_801D9408
+bool grZebes_801D9408(void)
+{
+    return false;
+}
 
 /// #grZebes_801D9410
 
@@ -38,7 +52,10 @@ void grZebes_801D94EC(void) {}
 
 /// #grZebes_801D9508
 
-/// #grZebes_801D95B0
+bool grZebes_801D95B0(void)
+{
+    return false;
+}
 
 /// #grZebes_801D95B8
 
@@ -48,7 +65,10 @@ void grZebes_801D9754(void) {}
 
 /// #grZebes_801D9798
 
-/// #grZebes_801D99D8
+bool grZebes_801D99D8(void)
+{
+    return false;
+}
 
 /// #grZebes_801D99E0
 
@@ -56,7 +76,10 @@ void grZebes_801D9F2C(void) {}
 
 /// #grZebes_801D9F30
 
-/// #grZebes_801D9F7C
+bool grZebes_801D9F7C(void)
+{
+    return false;
+}
 
 /// #grZebes_801D9F84
 
@@ -104,8 +127,14 @@ void grZebes_801DA0C0(void) {}
 
 /// #fn_801DCBFC
 
-/// #grZebes_801DCCB8
+bool grZebes_801DCCB8(void)
+{
+    return false;
+}
 
-/// #grZebes_801DCCC0
+bool grZebes_801DCCC0(void)
+{
+    return true;
+}
 
 /// #grZebes_801DCCC8

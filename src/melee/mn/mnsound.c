@@ -28,7 +28,6 @@ Vec3 mnSound_803EEED8[] = { { 0.0f, 199.0f, 0.0f },  { 0.0f, 29.0f, 0.0f },
 
 void gmMainLib_8015ED80(u8); /* extern */
 void gm_801602C0(u8);        /* extern */
-void lbAudioAx_80024C08(u8); /* extern */
 void lb_8001CE00(void);      /* extern */
 
 StaticModelDesc mnSound_desc;
@@ -205,7 +204,6 @@ void fn_80249A1C(HSD_GObj* arg0)
 }
 
 u8 gmMainLib_8015ED74(void); /* extern */
-u8 lbAudioAx_80024BD0(void); /* extern */
 StaticModelDesc mnSound_804A08A8;
 
 void mnSound_80249C08(void)

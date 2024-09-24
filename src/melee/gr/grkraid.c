@@ -1,3 +1,4 @@
+#include <platform.h>
 
 void grKraid_801FDFF8(void) {}
 
@@ -7,13 +8,19 @@ void grKraid_801FE094(void) {}
 
 /// #grKraid_801FE098
 
-/// #grKraid_801FE0BC
+bool grKraid_801FE0BC(void)
+{
+    return false;
+}
 
 /// #grKraid_801FE0C4
 
 /// #grKraid_801FE1B0
 
-/// #grKraid_801FE1DC
+bool grKraid_801FE1DC(void)
+{
+    return false;
+}
 
 void grKraid_801FE1E4(void) {}
 
@@ -21,7 +28,10 @@ void grKraid_801FE1E8(void) {}
 
 /// #grKraid_801FE1EC
 
-/// #grKraid_801FE2C8
+bool grKraid_801FE2C8(void)
+{
+    return false;
+}
 
 /// #grKraid_801FE2D0
 
@@ -29,7 +39,10 @@ void grKraid_801FE35C(void) {}
 
 /// #grKraid_801FE360
 
-/// #grKraid_801FE3A4
+bool grKraid_801FE3A4(void)
+{
+    return false;
+}
 
 void grKraid_801FE3AC(void) {}
 
@@ -37,7 +50,10 @@ void grKraid_801FE3B0(void) {}
 
 /// #grKraid_801FE3B4
 
-/// #grKraid_801FE438
+bool grKraid_801FE438(void)
+{
+    return false;
+}
 
 /// #grKraid_801FE440
 
@@ -47,7 +63,10 @@ void grKraid_801FE6D4(void) {}
 
 /// #grKraid_801FE818
 
-/// #grKraid_801FE9F8
+bool grKraid_801FE9F8(void)
+{
+    return false;
+}
 
 /// #grKraid_801FEA00
 
@@ -61,6 +80,12 @@ void grKraid_801FF14C(void) {}
 
 void grKraid_801FF150(void) {}
 
-/// #grKraid_801FF154
+bool grKraid_801FF154(void)
+{
+    return false;
+}
 
-/// #grKraid_801FF15C
+bool grKraid_801FF15C(void)
+{
+    return true;
+}

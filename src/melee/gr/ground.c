@@ -18,6 +18,7 @@
 #include "gm/gm_1601.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/items/it_27CF.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"

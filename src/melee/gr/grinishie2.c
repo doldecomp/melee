@@ -1,3 +1,5 @@
+#include <platform.h>
+
 void grInishie2_801FCBC0(void) {}
 
 /// #grInishie2_801FCBC4
@@ -6,13 +8,19 @@ void grInishie2_801FCCAC(void) {}
 
 /// #grInishie2_801FCCB0
 
-/// #grInishie2_801FCCD4
+bool grInishie2_801FCCD4(void)
+{
+    return false;
+}
 
 /// #grInishie2_801FCCDC
 
 /// #grInishie2_801FCDC8
 
-/// #grInishie2_801FCDF4
+bool grInishie2_801FCDF4(void)
+{
+    return false;
+}
 
 void grInishie2_801FCDFC(void) {}
 
@@ -20,7 +28,10 @@ void grInishie2_801FCE00(void) {}
 
 /// #grInishie2_801FCE04
 
-/// #grInishie2_801FCF24
+bool grInishie2_801FCF24(void)
+{
+    return false;
+}
 
 /// #grInishie2_801FCF2C
 
@@ -34,7 +45,10 @@ void grInishie2_801FD014(void) {}
 
 /// #grInishie2_801FD198
 
-/// #grInishie2_801FD21C
+bool grInishie2_801FD21C(void)
+{
+    return false;
+}
 
 /// #grInishie2_801FD224
 
@@ -50,7 +64,10 @@ void grInishie2_801FD364(void) {}
 
 /// #grInishie2_801FD4F0
 
-/// #grInishie2_801FD64C
+bool grInishie2_801FD64C(void)
+{
+    return false;
+}
 
 /// #grInishie2_801FD654
 
@@ -66,7 +83,10 @@ void grInishie2_801FD740(void) {}
 
 /// #grInishie2_801FDE8C
 
-/// #grInishie2_801FDED0
+bool grInishie2_801FDED0(void)
+{
+    return false;
+}
 
 /// #grInishie2_801FDED8
 
@@ -74,6 +94,12 @@ void grInishie2_801FD740(void) {}
 
 void grInishie2_801FDFE4(void) {}
 
-/// #grInishie2_801FDFE8
+bool grInishie2_801FDFE8(void)
+{
+    return false;
+}
 
-/// #grInishie2_801FDFF0
+bool grInishie2_801FDFF0(void)
+{
+    return true;
+}

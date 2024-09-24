@@ -3,6 +3,7 @@
 #include "math.h"
 
 #include "it/inlines.h"
+#include "it/it_2725.h"
 
 #include <common_structs.h>
 #include <baselib/gobj.h>

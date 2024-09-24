@@ -1,3 +1,5 @@
+#include <platform.h>
+
 /// #grGreens_80213458
 
 /// #grGreens_80213464
@@ -6,13 +8,19 @@ void grGreens_802134F4(void) {}
 
 /// #grGreens_802134F8
 
-/// #grGreens_8021351C
+bool grGreens_8021351C(void)
+{
+    return false;
+}
 
 /// #grGreens_80213524
 
 /// #grGreens_8021360C
 
-/// #grGreens_802138AC
+bool grGreens_802138AC(void)
+{
+    return false;
+}
 
 void grGreens_802138B4(void) {}
 
@@ -20,7 +28,10 @@ void grGreens_802138B8(void) {}
 
 /// #grGreens_802138BC
 
-/// #grGreens_80213900
+bool grGreens_80213900(void)
+{
+    return false;
+}
 
 void grGreens_80213908(void) {}
 
@@ -28,7 +39,10 @@ void grGreens_8021390C(void) {}
 
 /// #grGreens_80213910
 
-/// #grGreens_8021393C
+bool grGreens_8021393C(void)
+{
+    return false;
+}
 
 void grGreens_80213944(void) {}
 
@@ -36,7 +50,10 @@ void grGreens_80213948(void) {}
 
 /// #grGreens_8021394C
 
-/// #grGreens_80213978
+bool grGreens_80213978(void)
+{
+    return false;
+}
 
 void grGreens_80213980(void) {}
 
@@ -44,7 +61,10 @@ void grGreens_80213984(void) {}
 
 /// #grGreens_80213988
 
-/// #grGreens_802139B4
+bool grGreens_802139B4(void)
+{
+    return false;
+}
 
 void grGreens_802139BC(void) {}
 
@@ -52,7 +72,10 @@ void grGreens_802139C0(void) {}
 
 /// #grGreens_802139C4
 
-/// #grGreens_80213AAC
+bool grGreens_80213AAC(void)
+{
+    return false;
+}
 
 /// #grGreens_80213AB4
 
@@ -66,7 +89,10 @@ void grGreens_80214654(void) {}
 
 /// #grGreens_80214674
 
-/// #grGreens_80214794
+bool grGreens_80214794(void)
+{
+    return false;
+}
 
 /// #grGreens_8021479C
 
@@ -100,6 +126,12 @@ void fn_80215D50(void) {}
 
 /// #fn_80216DE4
 
-/// #grGreens_80216E64
+bool grGreens_80216E64(void)
+{
+    return false;
+}
 
-/// #grGreens_80216E6C
+bool grGreens_80216E6C(void)
+{
+    return true;
+}

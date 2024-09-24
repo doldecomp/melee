@@ -6,7 +6,12 @@
 
 #include "it/items/types.h"
 
+/* 2AF940 */ UNK_RET it_802AF940(UNK_PARAMS);
 /* 2AFA2C */ void it_802AFA2C(Item_GObj*);
+/* 2AFA70 */ UNK_RET it_802AFA70(UNK_PARAMS);
+/* 2AFBA4 */ UNK_RET it_802AFBA4(UNK_PARAMS);
+/* 2AFD2C */ UNK_RET it_802AFD2C(UNK_PARAMS);
+/* 2AFD44 */ UNK_RET it_802AFD44(UNK_PARAMS);
 /* 2AFD4C */ bool it_802AFD4C(Item_GObj*);
 /* 2AFD54 */ bool it_802AFD54(Item_GObj*);
 /* 2AFD5C */ bool it_802AFD5C(Item_GObj*);

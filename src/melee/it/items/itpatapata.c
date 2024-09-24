@@ -1,9 +1,15 @@
+#include <platform.h>
+
+#include <placeholder.h>
 
 /// #it_802E05A0
 
 /// #it_802E0678
 
-/// #it_802E06B4
+bool it_802E06B4(void)
+{
+    return false;
+}
 
 /// #it_802E06BC
 

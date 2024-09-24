@@ -1,3 +1,5 @@
+#include <platform.h>
+
 void grPura_80211CFC(void) {}
 
 /// #grPura_80211D00
@@ -6,13 +8,19 @@ void grPura_80211DD8(void) {}
 
 /// #grPura_80211DDC
 
-/// #grPura_80211E00
+bool grPura_80211E00(void)
+{
+    return false;
+}
 
 /// #grPura_80211E08
 
 /// #grPura_80211EF0
 
-/// #grPura_80211F1C
+bool grPura_80211F1C(void)
+{
+    return false;
+}
 
 void grPura_80211F24(void) {}
 
@@ -20,7 +28,10 @@ void grPura_80211F28(void) {}
 
 /// #grPura_80211F2C
 
-/// #grPura_80211F58
+bool grPura_80211F58(void)
+{
+    return false;
+}
 
 void grPura_80211F60(void) {}
 
@@ -28,7 +39,10 @@ void grPura_80211F64(void) {}
 
 /// #grPura_80211F68
 
-/// #grPura_80211FD0
+bool grPura_80211FD0(void)
+{
+    return false;
+}
 
 /// #grPura_80211FD8
 
@@ -36,7 +50,10 @@ void grPura_80212020(void) {}
 
 /// #grPura_80212024
 
-/// #grPura_802120D8
+bool grPura_802120D8(void)
+{
+    return false;
+}
 
 /// #grPura_802120E0
 
@@ -44,7 +61,10 @@ void grPura_8021228C(void) {}
 
 /// #grPura_80212290
 
-/// #grPura_80212314
+bool grPura_80212314(void)
+{
+    return false;
+}
 
 /// #grPura_8021231C
 
@@ -60,9 +80,15 @@ void grPura_802125EC(void) {}
 
 /// #grPura_80213030
 
-/// #grPura_802130C0
+bool grPura_802130C0(void)
+{
+    return false;
+}
 
-/// #grPura_802130C8
+bool grPura_802130C8(void)
+{
+    return true;
+}
 
 /// #fn_802130D0
 
