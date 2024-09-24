@@ -124,7 +124,7 @@
 /* 39DAD4 */ UNK_RET hsd_8039DAD4(UNK_PARAMS);
 /* 39EE24 */ UNK_RET hsd_8039EE24(UNK_PARAMS);
 /* 39EFAC */ UnkGeneratorStruct* hsd_8039EFAC(s32, s32, s32, HSD_JObj*);
-/* 39F05C */ UNK_RET hsd_8039F05C(UNK_PARAMS);
+/* 39F05C */ UnkGeneratorStruct* hsd_8039F05C(s8, s8, s32);
 /* 39F6CC */ void hsd_8039F6CC(s32, s32, s32, HSD_JObj*);
 /* 4D78D0 */ extern u32 hsd_804D78D0;
 /* 4D78D4 */ extern u32 hsd_804D78D4;
