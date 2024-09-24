@@ -2,10 +2,11 @@
 #define GALE01_2896CC
 
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
-/* 2896CC */ UNK_RET it_802896CC(UNK_PARAMS);
+/* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
 /* 289784 */ void it_80289784(Item_GObj*);
 /* 2897C8 */ UNK_RET it_802897C8(UNK_PARAMS);
 /* 289910 */ UNK_RET it_80289910(UNK_PARAMS);

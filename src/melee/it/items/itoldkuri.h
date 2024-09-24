@@ -58,11 +58,6 @@
 /* 2D846C */ UNK_RET it_802D846C(UNK_PARAMS);
 /* 2D848C */ UNK_RET it_802D848C(UNK_PARAMS);
 /* 2D84D8 */ UNK_RET it_802D84D8(UNK_PARAMS);
-/* 2E31F8 */ void it_802E31F8(Item_GObj*);
-/* 2E32B4 */ void it_802E32B4(Item_GObj*);
-/* 2E3314 */ void it_802E3314(Item_GObj*);
-/* 2E34DC */ void it_802E34DC(Item_GObj*);
-/* 2E3784 */ void it_802E3784(Item_GObj*, Item_GObj*);
 /* 3F8320 */ extern ItemStateTable it_803F8320[];
 
 #endif

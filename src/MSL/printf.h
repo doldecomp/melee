@@ -2,12 +2,13 @@
 #define GALE01_323CF0
 
 #include <placeholder.h>
+#include <stdarg.h>
 
 /* 323CF0 */ UNK_RET __stdio_atexit(UNK_PARAMS);
-/* 323CF4 */ UNK_RET sprintf(UNK_PARAMS);
-/* 323DC8 */ UNK_RET vsprintf(UNK_PARAMS);
-/* 323E38 */ UNK_RET vprintf(UNK_PARAMS);
-/* 323EB4 */ UNK_RET printf(UNK_PARAMS);
+/* 323CF4 */ int sprintf(char* s, const char* format, ...);
+/* 323DC8 */ int vsprintf(char* s, const char* format, va_list arg);
+/* 323E38 */ int vprintf(const char* format, va_list arg);
+/* 323EB4 */ int printf(const char*, ...);
 /* 323F80 */ UNK_RET __StringWrite(UNK_PARAMS);
 /* 323FEC */ UNK_RET __FileWrite(UNK_PARAMS);
 /* 324044 */ UNK_RET __pformatter(UNK_PARAMS);

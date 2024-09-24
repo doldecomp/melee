@@ -10,20 +10,10 @@
 #include "ftSeak/types.h"
 #include "it/items/types.h"
 
-/* 27D670 */ void it_8027D670(Vec3* const);
-/* 27D730 */ void it_8027D730(Item_GObj*);
 /* 283AE4 */ Item_GObj* it_80283AE4(Item_GObj*, Vec3*, s32);
 /* 283BD4 */ void it_80283BD4(Item_GObj*);
 /* 2841B4 */ HSD_GObj* it_802841B4(HSD_GObj*, Vec3*, s32);
 /* 28428C */ void it_8028428C(Item_GObj*);
-/* 286088 */ HSD_GObj* it_80286088(HSD_GObj*);
-/* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
-/* 290938 */ HSD_GObj* it_80290938(HSD_JObj*);
-/* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
-/* 294DC0 */ HSD_GObj* it_80294DC0(Vec3*);
-/* 294E78 */ void it_80294E78(Item_GObj*, float);
-/* 294EB0 */ void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
-/* 2950D4 */ void it_802950D4(Item_GObj*, bool);
 /* 29D968 */ void it_8029D968(Item_GObj*);
 /* 29DD58 */ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3*, u8, int,
                                    float);

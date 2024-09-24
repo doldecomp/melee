@@ -25,7 +25,6 @@
 /* 392CCC */ UNK_RET fn_80392CCC(UNK_PARAMS);
 /* 392CD8 */ UNK_RET fn_80392CD8(UNK_PARAMS);
 /* 392E2C */ UNK_RET fn_80392E2C(UNK_PARAMS);
-/* 392E80 */ UNK_RET hsd_80392E80(UNK_PARAMS);
 /* 392E80 */ void hsd_80392E80(void);
 /* 3931A4 */ bool hsd_803931A4(s32);
 /* 3932D0 */ UNK_RET fn_803932D0(UNK_PARAMS);
@@ -97,9 +96,13 @@
 /* 3982E4 */ UNK_RET fn_803982E4(UNK_PARAMS);
 /* 398310 */ UNK_RET hsd_80398310(UNK_PARAMS);
 /* 3983A4 */ UNK_RET hsd_803983A4(UNK_PARAMS);
-/* 3984F4 */ UNK_RET psInitDataBankLoad(UNK_PARAMS);
-/* 398614 */ UNK_RET psInitDataBankLocate(UNK_PARAMS);
-/* 3989A0 */ UNK_RET psInitDataBank(UNK_PARAMS);
+/* 3984F4 */ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank,
+                                     u32* ref, int* formBank);
+/* 398614 */ void psInitDataBankLocate(HSD_Archive* cmdBank,
+                                       HSD_Archive* texBank, int* formBank);
+/* 3989A0 */ void psInitDataBankRelocate(int* cmdBank, int* texBank,
+                                         int* formBank, int* newCmdBank,
+                                         int* newTexBank, int* newFormBank);
 /* 398A08 */ UNK_RET hsd_80398A08(UNK_PARAMS);
 /* 398C04 */ UNK_RET hsd_80398C04(UNK_PARAMS);
 /* 398F0C */ UNK_RET hsd_80398F0C(UNK_PARAMS);

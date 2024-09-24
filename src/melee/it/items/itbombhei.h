@@ -2,11 +2,12 @@
 #define GALE01_27D670
 
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
-/* 27D670 */ UNK_RET it_8027D670(UNK_PARAMS);
-/* 27D730 */ UNK_RET it_8027D730(UNK_PARAMS);
+/* 27D670 */ void it_8027D670(Vec3* const);
+/* 27D730 */ void it_8027D730(Item_GObj*);
 /* 27D76C */ void it_8027D76C(Item_GObj*);
 /* 27D820 */ UNK_RET it_8027D820(UNK_PARAMS);
 /* 27DAC8 */ UNK_RET fn_8027DAC8(UNK_PARAMS);

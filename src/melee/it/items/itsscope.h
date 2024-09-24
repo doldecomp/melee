@@ -3,10 +3,11 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
-/* 291BE0 */ UNK_RET it_80291BE0(UNK_PARAMS);
+/* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
 /* 291C98 */ void it_80291C98(Item_GObj*);
 /* 291CCC */ UNK_RET it_80291CCC(UNK_PARAMS);
 /* 291CF4 */ UNK_RET it_80291CF4(UNK_PARAMS);

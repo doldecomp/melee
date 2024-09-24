@@ -5,7 +5,7 @@
 
 #include "it/items/types.h"
 
-/* 286088 */ UNK_RET it_80286088(UNK_PARAMS);
+/* 286088 */ HSD_GObj* it_80286088(HSD_GObj*);
 /* 2861CC */ void it_802861CC(Item_GObj*);
 /* 286208 */ void it_80286208(Item_GObj*);
 /* 286248 */ UNK_RET it_80286248(UNK_PARAMS);

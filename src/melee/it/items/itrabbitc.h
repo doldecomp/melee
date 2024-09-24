@@ -3,14 +3,15 @@
 
 #include <platform.h>
 #include "it/forward.h"
+#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
 /* 294DA0 */ bool it_80294DA0(Item_GObj*);
-/* 294DC0 */ UNK_RET it_80294DC0(UNK_PARAMS);
-/* 294E78 */ UNK_RET it_80294E78(UNK_PARAMS);
-/* 294EB0 */ UNK_RET it_80294EB0(UNK_PARAMS);
-/* 2950D4 */ UNK_RET it_802950D4(UNK_PARAMS);
+/* 294DC0 */ HSD_GObj* it_80294DC0(Vec3*);
+/* 294E78 */ void it_80294E78(Item_GObj*, float);
+/* 294EB0 */ void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
+/* 2950D4 */ void it_802950D4(Item_GObj*, bool);
 /* 295118 */ void it_80295118(Item_GObj*);
 /* 295138 */ UNK_RET it_80295138(UNK_PARAMS);
 /* 295188 */ UNK_RET it_80295188(UNK_PARAMS);

@@ -83,7 +83,6 @@
 /* 1D5074 */ UNK_RET fn_801D5074(UNK_PARAMS);
 /* 1D50B8 */ UNK_RET grStadium_801D50B8(UNK_PARAMS);
 /* 1D50C0 */ UNK_RET grStadium_801D50C0(UNK_PARAMS);
-/* 1D511C */ UNK_RET grStadium_801D511C(UNK_PARAMS);
 /* 1D511C */ void grStadium_801D511C(void);
 
 #endif
