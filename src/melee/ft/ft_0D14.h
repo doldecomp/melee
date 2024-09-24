@@ -213,10 +213,12 @@
 /* 0DA31C */ void ftCo_CatchWait_IASA(ftCo_GObj* gobj);
 /* 0DA3D0 */ void ftCo_CatchWait_Phys(ftCo_GObj* gobj);
 /* 0DA418 */ void ftCo_CatchWait_Coll(ftCo_GObj* gobj);
+/* 0DA490 */ void fn_800DA490(Fighter_GObj* gobj);
 /* 0DA568 */ void ftCo_CatchAttack_Anim(ftCo_GObj* gobj);
 /* 0DA5A4 */ void ftCo_CatchAttack_IASA(ftCo_GObj* gobj);
 /* 0DA5A8 */ void ftCo_CatchAttack_Phys(ftCo_GObj* gobj);
 /* 0DA5F0 */ void ftCo_CatchAttack_Coll(ftCo_GObj* gobj);
+/* 0DA668 */ void fn_800DA668(Fighter_GObj* gobj);
 /* 0DA698 */ void ftCo_800DA698(ftCo_GObj* gobj, bool);
 /* 0DA744 */ void ftCo_CatchCut_Anim(ftCo_GObj* gobj);
 /* 0DA780 */ void ftCo_CatchCut_IASA(ftCo_GObj* gobj);

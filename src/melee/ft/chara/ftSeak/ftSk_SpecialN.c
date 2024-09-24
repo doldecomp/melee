@@ -16,6 +16,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSeak/ftSk_Init.h"
 #include "it/items/itseakneedleheld.h"
+#include "it/items/itseakneedlethrown.h"
 
 #include <common_structs.h>
 

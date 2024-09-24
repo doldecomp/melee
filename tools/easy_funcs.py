@@ -7,10 +7,13 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import cast
+from typing import TYPE_CHECKING, Callable, cast
 
 import humanfriendly
 import prettytable
+
+if TYPE_CHECKING:
+    from _typeshed import SupportsRichComparison
 
 type ReportDict = dict[str, ReportValue]
 type ReportList = list[ReportValue]
@@ -31,20 +34,29 @@ class Function:
 
 
 def create_trie(units: list[str]) -> re.Pattern[str]:
-    return re.compile(rf"^{MODULE}/(?:{'|'.join(units)})(?=/|$)" if units else ".*")
+    return re.compile(
+        rf"^{MODULE}/(?:{'|'.join(map(re.escape, units))})(?=/|$)" if units else ".*"
+    )
 
 
 def get_report() -> ReportDict:
 
     def run_ninja():
         proc = subprocess.run(
-            ["ninja", str(REPORT_PATH)],
+            cmd := ["ninja", REPORT_PATH],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
         if proc.returncode != 0:
-            print(proc.stdout.decode(), file=sys.stderr)
-            print(proc.stderr.decode(), file=sys.stderr)
+            print(stdout := proc.stdout.decode(), file=sys.stderr)
+            print(stderr := proc.stderr.decode(), file=sys.stderr)
+
+            raise subprocess.CalledProcessError(
+                proc.returncode,
+                " ".join(cmd),
+                stdout,
+                stderr,
+            )
 
     run_ninja()
 
@@ -60,6 +72,8 @@ def print_funcs(
     matched: tuple[float, float],
     address: tuple[int, int],
     max_results: int,
+    names_only: bool,
+    by_address: bool,
 ):
     trie = create_trie(units)
     report = get_report()
@@ -80,9 +94,6 @@ def print_funcs(
 
         functions = cast(list[ReportDict], unit.get("functions", []))
         for function in functions:
-            if max_results > 0 and len(results) >= max_results:
-                break
-
             func_name = cast(str, function["name"])
 
             func_size = int(cast(str, function["size"]))
@@ -111,46 +122,59 @@ def print_funcs(
                 )
             )
 
-        else:
-            continue
-        break
-
-    results.sort(key=lambda f: (f.size, f.address))
-    table = prettytable.PrettyTable()
-    table.field_names = ["Address", "Unit", "Function", "Size", "Matched"]
-    table.align["Address"] = "c"
-    table.align["Unit"] = "l"
-    table.align["Function"] = "l"
-    table.align["Size"] = "r"
-    table.align["Matched"] = "r"
-    table.set_style(prettytable.PLAIN_COLUMNS)
-    table.add_rows(
-        [
-            [
-                f"{f.address:08X}",
-                f.unit,
-                f.name,
-                humanfriendly.format_size(f.size),
-                f"{f.matched:.2f}%",
-            ]
-            for f in results
-        ],
+    key: Callable[[Function], SupportsRichComparison] = (
+        (lambda f: f.address) if by_address else (lambda f: (f.size, f.address))
     )
-    print(table)
+    results.sort(key=key)
+    if max_results > 0:
+        results = results[:max_results]
+
+    if names_only:
+        for name in map(lambda f: f.name, results):
+            print(name)
+    else:
+        table = prettytable.PrettyTable()
+        table.field_names = ["Address", "Unit", "Function", "Size", "Matched"]
+        table.align["Address"] = "c"
+        table.align["Unit"] = "l"
+        table.align["Function"] = "l"
+        table.align["Size"] = "r"
+        table.align["Matched"] = "r"
+        table.set_style(prettytable.PLAIN_COLUMNS)
+        table.add_rows(
+            [
+                [
+                    f"{f.address:08X}",
+                    f.unit,
+                    f.name,
+                    humanfriendly.format_size(f.size),
+                    f"{f.matched:.2f}%",
+                ]
+                for f in results
+            ],
+        )
+        print(table)
 
 
 def main():
     def sanitize_path(s: str) -> str:
         p = PurePosixPath(s.replace("\\", "/"))
         s = str(p.parent / p.stem)
-        for parent in [
+        parents = [
             ROOT.as_posix(),
             "build/GALE01",
             "src",
             "asm",
+            "obj",
             "/",
-        ]:
-            s = s.removeprefix(parent)
+        ]
+        while True:
+            prev = s
+            for parent in parents:
+                s = s.removeprefix(parent)
+            if prev == s:
+                break
+
         return s
 
     def sanitize_hex(s: str) -> int:
@@ -222,6 +246,19 @@ def main():
         metavar="RESULTS",
         help="the maximum number of functions to display",
     )
+    _ = parser.add_argument(
+        "-o",
+        "--names-only",
+        action="store_true",
+        help="print only function names",
+    )
+    _ = parser.add_argument(
+        "-a",
+        "--order-by-address",
+        dest="by_address",
+        action="store_true",
+        help="sort functions by address instead of size",
+    )
     args = parser.parse_args()
 
     print_funcs(
@@ -230,6 +267,8 @@ def main():
         (cast(float, args.min_matched), cast(float, args.max_matched)),
         (cast(int, args.min_address), cast(int, args.max_address)),
         cast(int, args.max_results),
+        cast(bool, args.names_only),
+        cast(bool, args.by_address),
     )
 
 

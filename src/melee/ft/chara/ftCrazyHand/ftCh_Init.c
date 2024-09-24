@@ -16,6 +16,45 @@
 #include <common_structs.h>
 #include <placeholder.h>
 
+/* static */ void ftCh_Init_801566B4(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156688(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_801566E0(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156710(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156740(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156770(void);
+/* static */ void ftCh_Init_801567A0(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_801567AC(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_801567DC(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_8015683C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_8015686C(void);
+/* static */ void ftCh_Init_80156878(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156884(void);
+/* static */ void ftCh_Init_80156898(void);
+/* static */ void ftCh_Init_801568AC(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_80156A5C(void);
+/* static */ void ftCh_Init_801568B8(void);
+/* static */ void ftCh_Init_801568E8(void);
+/* static */ void ftCh_Init_80156918(void);
+/* static */ void ftCh_Init_80156948(void);
+
 MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount] = {
     {
         // ftMh_MS_Wait1_0 = 341
@@ -568,6 +607,40 @@ Fighter_CostumeStrings ftCh_Init_CostumeStrings[] = {
     { ftCh_Init_803D4834, ftCh_Init_803D4840, NULL },
 };
 
+jtbl_t ftCh_Init_803D4900 = {
+    ftCh_Init_801566B4, ftCh_Init_80156A5C, ftCh_Init_80156688,
+    ftCh_Init_80156A5C, ftCh_Init_801566E0, ftCh_Init_80156A5C,
+    ftCh_Init_80156710, ftCh_Init_80156A5C, ftCh_Init_80156740,
+    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156770,
+    ftCh_Init_801567A0, ftCh_Init_80156A5C, ftCh_Init_801567AC,
+    ftCh_Init_80156A5C, ftCh_Init_801567DC, ftCh_Init_80156A5C,
+    ftCh_Init_8015683C, ftCh_Init_80156A5C, ftCh_Init_80156A5C,
+    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156A5C,
+    ftCh_Init_80156A5C, ftCh_Init_8015686C, ftCh_Init_80156878,
+    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156884,
+    ftCh_Init_80156898, ftCh_Init_801568AC, ftCh_Init_80156A5C,
+    ftCh_Init_80156A5C, ftCh_Init_801568B8, ftCh_Init_801568E8,
+    ftCh_Init_80156918, ftCh_Init_80156948,
+};
+
+/* static */ void ftCh_GrabUnk1_8015B2FC(void);
+/* static */ void ftCh_GrabUnk1_8015B35C(void);
+/* static */ void ftCh_GrabUnk1_8015B390(void);
+/* static */ void ftCh_GrabUnk1_8015B3B8(void);
+/* static */ void ftCh_GrabUnk1_8015B3EC(void);
+/* static */ void ftCh_GrabUnk1_8015B404(void);
+/* static */ void ftCh_GrabUnk1_8015B43C(void);
+/* static */ void ftCh_GrabUnk1_8015B46C(void);
+/* static */ void ftCh_GrabUnk1_8015B4AC(void);
+/* static */ void ftCh_GrabUnk1_8015B4BC(void);
+
+jtbl_t ftCh_Init_803D4998 = {
+    ftCh_GrabUnk1_8015B2FC, ftCh_GrabUnk1_8015B35C, ftCh_GrabUnk1_8015B390,
+    ftCh_GrabUnk1_8015B3B8, ftCh_GrabUnk1_8015B3EC, ftCh_GrabUnk1_8015B404,
+    ftCh_GrabUnk1_8015B43C, ftCh_GrabUnk1_8015B46C, ftCh_GrabUnk1_8015B4AC,
+    ftCh_GrabUnk1_8015B4BC,
+};
+
 void ftCh_Init_OnDeath(HSD_GObj* gobj) {}
 
 void ftCh_Init_OnLoad(HSD_GObj* gobj)
@@ -621,6 +694,514 @@ void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftCrazyHandAttributes);
 }
 
+/// #ftCh_Init_80155FCC
+
+void ftCh_Init_80156014(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80156018
+
+/// #ftCh_Init_801560D8
+
+/// #ftCh_Init_80156198
+
+/// #ftCh_Init_80156310
+
+/// #ftCh_Wait1_0_Anim
+
+/// #ftCh_Wait1_0_IASA
+
+/// #ftCh_Wait1_0_Phys
+
+void ftCh_Wait1_0_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80156AD8
+
+/// #fn_80156F6C
+
+/// #ftCh_Entry_Anim
+
+/// #ftCh_Entry_IASA
+
+/// #ftCh_Entry_Phys
+
+void ftCh_Entry_Coll(HSD_GObj* gobj) {}
+
+/// #fn_80157080
+
+/// #ftCh_Damage_Anim
+
+/// #ftCh_Damage_IASA
+
+/// #ftCh_Damage_Phys
+
+void ftCh_Damage_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80157170
+
+/// #ftCh_Damage2_Anim
+
+/// #ftCh_Damage2_IASA
+
+/// #ftCh_Damage2_Phys
+
+void ftCh_Damage2_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_8015737C
+
+/// #ftCh_WaitSweep_Anim
+
+/// #ftCh_WaitSweep_Phys
+
+/// #ftCh_WaitSweep_IASA
+
+void ftCh_WaitSweep_Coll(HSD_GObj* gobj) {}
+
+/// #fn_8015746C
+
+/// #ftCh_SweepLoop_Anim
+
+/// #ftCh_SweepLoop_IASA
+
+/// #ftCh_SweepLoop_Phys
+
+void ftCh_SweepLoop_Coll(HSD_GObj* gobj) {}
+
+/// #fn_8015755C
+
+/// #ftCh_SweepWait_Anim
+
+/// #ftCh_SweepWait_IASA
+
+/// #ftCh_SweepWait_Phys
+
+void ftCh_SweepWait_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_8015764C
+
+/// #ftCh_Slap_Anim
+
+/// #ftCh_Slap_IASA
+
+/// #ftCh_Slap_Phys
+
+/// #fn_801577B4
+
+/// #ftCh_Init_801577F8
+
+/// #ftCh_Walk2_Anim
+
+/// #ftCh_Walk2_IASA
+
+/// #ftCh_Walk2_Phys
+
+void ftCh_Slap_Coll(HSD_GObj* gobj) {}
+
+/// #fn_801578E8
+
+/// #ftCh_WalkLoop_Anim
+
+/// #ftCh_WalkLoop_IASA
+
+/// #ftCh_WalkLoop_Phys
+
+void ftCh_WalkLoop_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_801579F4
+
+/// #ftCh_WalkWait_Anim
+
+/// #ftCh_WalkWait_IASA
+
+/// #ftCh_WalkWait_Phys
+
+void ftCh_WalkWait_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80157B58
+
+/// #ftCh_WalkShoot_Anim
+
+/// #ftCh_WalkShoot_IASA
+
+/// #ftCh_WalkShoot_Phys
+
+void ftCh_WalkShoot_Coll(HSD_GObj* gobj) {}
+
+/// #fn_80157C50
+
+/// #ftCh_Drill_Anim
+
+/// #ftCh_Drill_IASA
+
+/// #ftCh_Drill_Phys
+
+void ftCh_Drill_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80157DF8
+
+/// #ftCh_RockCrushUp_Anim
+
+/// #ftCh_RockCrushWait_Anim
+
+/// #ftCh_RockCrushUp_IASA
+
+/// #ftCh_RockCrushUp_Phys
+
+void ftCh_RockCrushUp_Coll(HSD_GObj* gobj) {}
+
+/// #fn_80158144
+
+/// #ftCh_RockCrushDown_Anim
+
+/// #ftCh_RockCrushDown_IASA
+
+/// #ftCh_RockCrushDown_Phys
+
+void ftCh_RockCrushDown_Coll(HSD_GObj* gobj) {}
+
+/// #fn_801582D8
+
+/// #ftCh_PaperCrush_Anim
+
+/// #ftCh_PaperCrush_IASA
+
+/// #ftCh_PaperCrush_Phys
+
+void ftCh_PaperCrush_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_801583E4
+
+/// #ftCh_Poke1_Anim
+
+/// #ftCh_Poke1_IASA
+
+/// #ftCh_Poke1_Phys
+
+void ftCh_Poke1_Coll(HSD_GObj* gobj) {}
+
+/// #fn_80158534
+
+/// #ftCh_Init_8015868C
+
+/// #ftCh_Poke2_Anim
+
+/// #ftCh_Poke2_IASA
+
+/// #ftCh_Poke2_Phys
+
+void ftCh_Poke2_Coll(HSD_GObj* gobj) {}
+
+/// #fn_801587B0
+
+/// #ftCh_FingerBeamStart_Anim
+
+/// #ftCh_FingerBeamStart_IASA
+
+/// #ftCh_FingerBeamStart_Phys
+
+void ftCh_FingerBeamStart_Coll(HSD_GObj* gobj) {}
+
+/// #fn_801588B8
+
+/// #ftCh_Init_80158B3C
+
+/// #ftCh_FingerBeamLoop_Anim
+
+/// #ftCh_FingerBeamLoop_IASA
+
+/// #ftCh_FingerBeamLoop_Phys
+
+void ftCh_FingerBeamLoop_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80158DFC
+
+/// #ftCh_FingerBeamEnd_Anim
+
+/// #ftCh_FingerBeamEnd_IASA
+
+/// #ftCh_FingerBeamEnd_Phys
+
+void ftCh_FingerBeamEnd_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80158F34
+
+/// #ftCh_BackPunch_Anim
+
+/// #ftCh_BackPunch_IASA
+
+/// #ftCh_BackPunch_Phys
+
+void ftCh_BackPunch_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80159098
+
+/// #ftCh_FingerGun1_Anim
+
+/// #ftCh_FingerGun1_IASA
+
+/// #ftCh_FingerGun1_Phys
+
+/// #ftCh_FingerGun1_Coll
+
+/// #fn_80159288
+
+/// #ftCh_Init_801592D4
+
+/// #ftCh_BackAirplane1_Anim
+
+/// #ftCh_BackAirplane1_IASA
+
+/// #ftCh_BackAirplane1_Phys
+
+/// #ftCh_BackAirplane1_Coll
+
+/// #ftCh_Init_801594D4
+
+/// #ftCh_BackAirplane2_Anim
+
+/// #ftCh_BackAirplane2_IASA
+
+/// #ftCh_BackAirplane2_Phys
+
+void ftCh_BackAirplane2_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80159670
+
+/// #ftCh_BackAirplane3_Anim
+
+/// #ftCh_BackAirplane3_IASA
+
+/// #ftCh_BackAirplane3_Phys
+
+void ftCh_BackAirplane3_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_801597F0
+
+/// #ftCh_BackCrush_Anim
+
+/// #ftCh_BackCrush_IASA
+
+/// #ftCh_BackCrush_Phys
+
+void ftCh_BackCrush_Coll(HSD_GObj* gobj) {}
+
+/// #fn_80159908
+
+/// #ftCh_BackDisappear_Anim
+
+/// #ftCh_BackDisappear_IASA
+
+/// #ftCh_BackDisappear_Phys
+
+void ftCh_BackDisappear_Coll(HSD_GObj* gobj) {}
+
+/// #fn_80159AA4
+
+/// #ftCh_Wait1_1_Anim
+
+/// #ftCh_Wait1_1_IASA
+
+/// #ftCh_Wait1_1_Phys
+
+void ftCh_Wait1_1_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_80159F40
+
+/// #ftCh_Grab_Anim
+
+/// #ftCh_Grab_IASA
+
+/// #ftCh_Grab_Phys
+
+void ftCh_Grab_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_8015A030
+
+/// #ftCh_Cancel_Anim
+
+/// #ftCh_Cancel_IASA
+
+/// #ftCh_Cancel_Phys
+
+void ftCh_Cancel_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_8015A184
+
+/// #ftCh_Squeezing0_Anim
+
+/// #ftCh_Squeezing0_IASA
+
+/// #ftCh_Squeezing0_Phys
+
+void ftCh_Squeezing0_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_8015A2B0
+
+/// #ftCh_Squeezing1_Anim
+
+/// #ftCh_Squeezing1_IASA
+
+/// #ftCh_Squeezing1_Phys
+
+void ftCh_Squeezing1_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_8015A3F4
+
+/// #ftCh_Squeeze_Anim
+
+/// #ftCh_Squeeze_IASA
+
+/// #ftCh_Squeeze_Phys
+
+void ftCh_Squeeze_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Init_8015A560
+
+/// #ftCh_Throw_Anim
+
+/// #ftCh_Throw_IASA
+
+/// #ftCh_Throw_Phys
+
+void ftCh_Throw_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Slam_Anim
+
+/// #ftCh_Slam_IASA
+
+/// #ftCh_Slam_Phys
+
+void ftCh_Slam_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_Fail_Anim
+
+/// #ftCh_Fail_IASA
+
+/// #ftCh_Fail_Phys
+
+void ftCh_Fail_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015A888
+
+/// #ftCh_TagCrush_Anim
+
+/// #ftCh_TagCrush_IASA
+
+/// #ftCh_TagCrush_Phys
+
+void ftCh_TagCrush_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_TagApplaud_Anim
+
+/// #ftCh_TagApplaud_IASA
+
+/// #ftCh_TagApplaud_Phys
+
+/// #ftCh_TagApplaud_Coll
+
+/// #fn_8015AAC8
+
+/// #ftCh_TagRockPaper_Anim
+
+/// #ftCh_TagRockPaper_IASA
+
+void ftCh_TagRockPaper_Phys(HSD_GObj* gobj) {}
+
+void ftCh_TagRockPaper_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015ABD0
+
+/// #ftCh_GrabUnk1_8015AC50
+
+/// #ftCh_FingerGun2_Anim
+
+/// #ftCh_FingerGun2_IASA
+
+/// #ftCh_FingerGun2_Phys
+
+void ftCh_FingerGun2_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015ADD0
+
+/// #ftCh_TagGrab_Anim
+
+/// #ftCh_TagSqueeze_Anim
+
+/// #ftCh_TagGrab_IASA
+
+/// #ftCh_TagGrab_Phys
+
+void ftCh_TagGrab_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015B174
+
+/// #ftCh_TagFail_Anim
+
+/// #ftCh_TagFail_IASA
+
+void ftCh_TagFail_Phys(HSD_GObj* gobj) {}
+
+void ftCh_TagFail_Coll(HSD_GObj* gobj) {}
+
+/// #fn_8015B2C0
+
+/// #fn_8015B4EC
+
+/// #fn_8015B548
+
+void ftCo_CaptureCrazyHand_Anim(HSD_GObj* gobj) {}
+
+void ftCo_CaptureCrazyHand_IASA(HSD_GObj* gobj) {}
+
+void ftCo_CaptureCrazyHand_Phys(HSD_GObj* gobj) {}
+
+void ftCo_CaptureCrazyHand_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015B670
+
+/// #ftCo_CaptureDamageCrazyHand_Anim
+
+void ftCo_CaptureDamageCrazyHand_IASA(HSD_GObj* gobj) {}
+
+void ftCo_CaptureDamageCrazyHand_Phys(HSD_GObj* gobj) {}
+
+void ftCo_CaptureDamageCrazyHand_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015B778
+
+/// #ftCh_GrabUnk1_8015B800
+
+void ftCo_CaptureWaitCrazyHand_Anim(HSD_GObj* gobj) {}
+
+void ftCo_CaptureWaitCrazyHand_IASA(HSD_GObj* gobj) {}
+
+void ftCo_CaptureWaitCrazyHand_Phys(HSD_GObj* gobj) {}
+
+void ftCo_CaptureWaitCrazyHand_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015B850
+
+void ftCo_ThrownCrazyHand_Anim(HSD_GObj* gobj) {}
+
+void ftCo_ThrownCrazyHand_IASA(HSD_GObj* gobj) {}
+
+void ftCo_ThrownCrazyHand_Phys(HSD_GObj* gobj) {}
+
+void ftCo_ThrownCrazyHand_Coll(HSD_GObj* gobj) {}
+
+/// #ftCh_GrabUnk1_8015B8FC
+
+/// #ftCh_GrabUnk1_8015B998
+
+/// #ftCh_GrabUnk1_8015BA34
+
+/// #ftCh_TagCancel_Anim
+
+/// #ftCh_TagCancel_Phys
+
+/// #ftCh_TagCancel_Coll
+
+/// #ftCh_GrabUnk1_8015BC88
+
 struct {
     enum_t asids[18];
     s8 bytes[64];
@@ -635,77 +1216,4 @@ struct {
       16, 17, 0, 0, 0, 4, 4, 4, 8, 3, 11, 2,  13, 2,  15, 3,
       1,  2,  3, 4, 5, 0, 2, 3, 4, 5, 0,  1,  3,  4,  5,  0,
       1,  2,  4, 5, 0, 1, 2, 3, 5, 0, 1,  2,  3,  4,  0,  0 },
-};
-
-/* static */ void ftCh_Init_801566B4(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156688(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801566E0(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156710(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156740(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156770(void);
-/* static */ void ftCh_Init_801567A0(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801567AC(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801567DC(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_8015683C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_8015686C(void);
-/* static */ void ftCh_Init_80156878(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156884(void);
-/* static */ void ftCh_Init_80156898(void);
-/* static */ void ftCh_Init_801568AC(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801568B8(void);
-/* static */ void ftCh_Init_801568E8(void);
-/* static */ void ftCh_Init_80156918(void);
-/* static */ void ftCh_Init_80156948(void);
-
-jtbl_t ftCh_Init_803D4900 = {
-    ftCh_Init_801566B4, ftCh_Init_80156A5C, ftCh_Init_80156688,
-    ftCh_Init_80156A5C, ftCh_Init_801566E0, ftCh_Init_80156A5C,
-    ftCh_Init_80156710, ftCh_Init_80156A5C, ftCh_Init_80156740,
-    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156770,
-    ftCh_Init_801567A0, ftCh_Init_80156A5C, ftCh_Init_801567AC,
-    ftCh_Init_80156A5C, ftCh_Init_801567DC, ftCh_Init_80156A5C,
-    ftCh_Init_8015683C, ftCh_Init_80156A5C, ftCh_Init_80156A5C,
-    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156A5C,
-    ftCh_Init_80156A5C, ftCh_Init_8015686C, ftCh_Init_80156878,
-    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156884,
-    ftCh_Init_80156898, ftCh_Init_801568AC, ftCh_Init_80156A5C,
-    ftCh_Init_80156A5C, ftCh_Init_801568B8, ftCh_Init_801568E8,
-    ftCh_Init_80156918, ftCh_Init_80156948,
-};
-
-/* static */ void ftCh_GrabUnk1_8015B2FC(void);
-/* static */ void ftCh_GrabUnk1_8015B35C(void);
-/* static */ void ftCh_GrabUnk1_8015B390(void);
-/* static */ void ftCh_GrabUnk1_8015B3B8(void);
-/* static */ void ftCh_GrabUnk1_8015B3EC(void);
-/* static */ void ftCh_GrabUnk1_8015B404(void);
-/* static */ void ftCh_GrabUnk1_8015B43C(void);
-/* static */ void ftCh_GrabUnk1_8015B46C(void);
-/* static */ void ftCh_GrabUnk1_8015B4AC(void);
-/* static */ void ftCh_GrabUnk1_8015B4BC(void);
-
-jtbl_t ftCh_Init_803D4998 = {
-    ftCh_GrabUnk1_8015B2FC, ftCh_GrabUnk1_8015B35C, ftCh_GrabUnk1_8015B390,
-    ftCh_GrabUnk1_8015B3B8, ftCh_GrabUnk1_8015B3EC, ftCh_GrabUnk1_8015B404,
-    ftCh_GrabUnk1_8015B43C, ftCh_GrabUnk1_8015B46C, ftCh_GrabUnk1_8015B4AC,
-    ftCh_GrabUnk1_8015B4BC,
 };

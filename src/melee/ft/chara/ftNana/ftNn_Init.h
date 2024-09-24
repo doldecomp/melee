@@ -27,6 +27,7 @@
 /* 1235BC */ void ftPp_SpecialHi_1_Coll(Fighter_GObj* gobj);
 /* 1235F8 */ void ftPp_SpecialHi_4_Coll(Fighter_GObj* gobj);
 /* 123954 */ bool ftNn_Init_80123954(Fighter_GObj* gobj, GroundOrAir pp_ga);
+/* 123B10 */ bool ftNn_Init_80123B10(Fighter_GObj*);
 /* 123CA4 */ void ftPp_SpecialS_0_Anim(Fighter_GObj* gobj);
 /* 123D68 */ void ftPp_SpecialS_1_Anim(Fighter_GObj* gobj);
 /* 123E58 */ void ftPp_SpecialS_0_IASA(Fighter_GObj* gobj);

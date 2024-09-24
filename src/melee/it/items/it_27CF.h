@@ -27,11 +27,6 @@
 /* 29D968 */ void it_8029D968(Item_GObj*);
 /* 29DD58 */ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3*, u8, int,
                                    float);
-/* 29FDBC */ bool it_8029FDBC(Item_GObj* gobj);
-/* 2A013C */ HSD_GObj* it_802A013C(float facing_dir, Fighter_GObj* owner_gobj,
-                                   Vec3* pos, Fighter_Part, int);
-/* 2A0534 */ void it_802A0534(Item_GObj* gobj, Vec3*);
-/* 2A07B4 */ void it_802A07B4(Item_GObj* gobj);
 /* 2A850C */ void it_802A850C(Item_GObj*, Vec3*, Vec3*, float, float, float);
 /* 2A8A7C */ void it_802A8A7C(Item_GObj* gobj);
 /* 2AA054 */ void it_802AA054(Item_GObj*, Vec3*, Vec3*, float, float);
@@ -44,8 +39,6 @@
 /* 2AB58C */ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos,
                                    float facing_dir);
 /* 2AB9C0 */ void it_802AB9C0(Item_GObj*);
-/* 2AD478 */ HSD_GObj* it_802AD478(Item_GObj*, Vec3*, s32, float);
-/* 2AD6B8 */ void it_802AD6B8(Item_GObj*);
 /* 2ADDD0 */ void it_802ADDD0(Item_GObj*, s32);
 /* 2AE1D0 */ void it_802AE1D0(Item_GObj*);
 /* 2AE538 */ void it_802AE538(Item_GObj*);
@@ -62,13 +55,6 @@
 /* 2B26C0 */ void it_802B26C0(Item_GObj*);
 /* 2B26E0 */ void it_802B26E0(Item_GObj*);
 /* 2B338C */ void it_802B338C(Item_GObj*, Vec3*, float facing_dir, u32);
-/* 2B4AC8 */ void it_802B4AC8(Item_GObj* gobj, Vec3*, float facing_dir,
-                              float x);
-/* 2B55C8 */ HSD_GObj* it_802B55C8(Item_GObj* owner, Vec3*, s32, s32,
-                                   float facing_dir);
-/* 2B56E4 */ void it_802B56E4(Item_GObj*, Vec3*, float, float, float);
-/* 2B5974 */ void it_802B5974(Item_GObj*);
-/* 2B62D0 */ void it_802B62D0(Item_GObj*, Vec3* pos, bool, float facing_dir);
 /* 2BAEEC */ void it_802BAEEC(Item_GObj*);
 /* 2BAF0C */ void it_802BAF0C(Item_GObj*);
 /* 2BB20C */ void it_802BB20C(Item_GObj*);
@@ -79,9 +65,6 @@
                               itChainSegment* chainSegment, Item* item_data,
                               float arg4);
 /* 2BD158 */ void it_802BD158(Item_GObj* gobj, Vec3*, int, float);
-/* 2BD45C */ void it_802BD45C(Item_GObj* gobj);
-/* 2BD4AC */ HSD_GObj* it_802BD4AC(Item_GObj*, Vec3*, u8, s32, float);
-/* 2BDB94 */ void it_802BDB94(Item_GObj* gobj);
 /* 2BDBF8 */ void it_802BDBF8(Item_GObj* gobj);
 /* 2BDC18 */ void it_802BDC18(Item_GObj* gobj);
 /* 2BDC38 */ bool it_802BDC38(Item_GObj* gobj);
@@ -105,19 +88,9 @@
 /* 2C0850 */ u32 it_802C0850(Item_GObj*, Vec3*, u32, s32,
                              float facing_direction);
 /* 2C0DBC */ void it_802C0DBC(u32 arg0);
-/* 2C1590 */ Item_GObj* it_802C1590(Item_GObj*, Vec3*, enum_t,
-                                    float facing_dir);
-/* 2C16F8 */ void it_802C16F8(Item_GObj*);
-/* 2C17DC */ void it_802C17DC(Item_GObj*);
 /* 2C3AF0 */ HSD_GObj* it_802C3AF0(Item_GObj*);
 /* 2C3BAC */ HSD_GObj* it_802C3BAC(Item_GObj*, Vec3*, float facing_dir, float);
 /* 2C3D44 */ void it_802C3D44(Item_GObj*);
-/* 2C49E0 */ void it_802C49E0(Item_GObj*);
-/* 2C4A40 */ HSD_GObj* it_802C4A40(Item_GObj*, Vec3*, float);
-/* 2C5000 */ HSD_GObj* it_802C5000(Item_GObj*, Vec3*, s32, s32, float);
-/* 2C519C */ void it_802C519C(Item_GObj*, Vec3*, s32, s32, float, float);
-/* 2C53F0 */ void it_802C53F0(Item_GObj*, Vec3*, float, float, float);
-/* 2C573C */ void it_802C573C(Item_GObj*);
 /* 2C61F4 */ HSD_GObj* it_802C61F4(Item_GObj*, Vec3*, s32, float);
 /* 2C6328 */ void it_802C6328(Item_GObj*);
 /* 2C6374 */ void it_802C6374(Item_GObj*);
@@ -148,19 +121,18 @@
 /* 2C7A84 */ void it_802C7A84(Item_GObj*);
 /* 2C7AD0 */ void it_802C7AD0(Item_GObj*);
 /* 2C7AF0 */ void it_802C7AF0(Item_GObj*);
-/* 2C8038 */ HSD_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, float, float);
-/* 2C8158 */ void it_802C8158(Item_GObj*);
-/* 2C81C8 */ void it_802C81C8(Item_GObj*);
-/* 2C81E8 */ void it_802C81E8(Item_GObj*);
-/* 2C837C */ HSD_GObj* it_802C837C(Item_GObj*, Vec3*, enum_t, u32, float);
-/* 2C8B28 */ HSD_GObj* it_802C8B28(Item_GObj*, Vec3*, u32, float);
-/* 2C8C34 */ void it_802C8C34(Item_GObj*);
-/* 2E5F8C */ s32 it_802E5F8C(Item_GObj*, Vec3*, s32, bool, float, float);
-/* 2F0340 */ u32 it_802F0340(Item_GObj*, Vec3*, Vec3*, u32, u32, float);
-/* 2F046C */ void it_802F046C(s32);
-/* 2F0AE0 */ void it_802F0AE0(Item_GObj* fighter_gobj, Vec3*, Vec3*, enum_t,
-                              bool, float facing_dir, float, float);
 /* 2F2094 */ Item_GObj* it_802F2094(int, Vec3*, int, int);
+/* 2F2F34 */ UNK_RET it_802F2F34(UNK_PARAMS);
+/* 2F3020 */ UNK_RET it_802F3020(UNK_PARAMS);
+/* 2F3078 */ UNK_RET it_802F3078(UNK_PARAMS);
+/* 2F3120 */ UNK_RET it_802F3120(UNK_PARAMS);
+/* 2F3150 */ UNK_RET it_802F3150(UNK_PARAMS);
+/* 2F317C */ UNK_RET it_802F317C(UNK_PARAMS);
+/* 2F31B8 */ UNK_RET it_802F31B8(UNK_PARAMS);
+/* 2F3260 */ UNK_RET it_802F3260(UNK_PARAMS);
+/* 2F3264 */ UNK_RET it_802F3264(UNK_PARAMS);
+/* 2F3290 */ UNK_RET it_802F3290(UNK_PARAMS);
+/* 2F32F8 */ UNK_RET it_802F32F8(UNK_PARAMS);
 /* 2F3330 */ bool it_802F3330(Item_GObj*);
 /* 2F3374 */ void it_802F3374(Item_GObj*, Item_GObj*);
 /* 3F94A0 */ extern ItemStateTable it_803F94A0[];

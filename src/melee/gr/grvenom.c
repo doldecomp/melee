@@ -1,1 +1,122 @@
 
+/// #grVenom_8020362C
+
+void grVenom_80203B14(void) {}
+
+/// #grVenom_80203B18
+
+/// #grVenom_80203DD0
+
+/// #grVenom_80203E80
+
+/// #grVenom_80203EA4
+
+/// #grVenom_80203EAC
+
+/// #grVenom_80203F98
+
+/// #grVenom_80203FC4
+
+void grVenom_80203FCC(void) {}
+
+void grVenom_80203FD0(void) {}
+
+/// #grVenom_80203FD4
+
+/// #grVenom_802040A4
+
+void grVenom_802040AC(void) {}
+
+void grVenom_802040B0(void) {}
+
+/// #fn_802040B4
+
+/// #grVenom_802040F0
+
+/// #grVenom_8020427C
+
+/// #grVenom_80204284
+
+void grVenom_80204424(void) {}
+
+/// #grVenom_80204428
+
+/// #grVenom_80204544
+
+/// #grVenom_8020454C
+
+void grVenom_80204B84(void) {}
+
+/// #grVenom_80204B88
+
+void grVenom_80204CE0(void) {}
+
+/// #grVenom_80204CE4
+
+/// #grVenom_80204CEC
+
+/// #grVenom_80204DB0
+
+/// #grVenom_80204DD4
+
+/// #grVenom_80204EF4
+
+/// #grVenom_80204EFC
+
+void grVenom_80204F1C(void) {}
+
+/// #grVenom_80204F20
+
+/// #grVenom_802052D8
+
+/// #grVenom_802052E0
+
+/// #grVenom_802053B0
+
+void grVenom_802056AC(void) {}
+
+/// #grVenom_802056B0
+
+/// #grVenom_80205750
+
+/// #grVenom_80205758
+
+void grVenom_80205AD0(void) {}
+
+/// #grVenom_80205AD4
+
+/// #grVenom_80205DF0
+
+/// #grVenom_80205DF8
+
+/// #grVenom_80205E84
+
+/// #grVenom_80205F30
+
+void grVenom_80206870(void) {}
+
+/// #grVenom_80206874
+
+/// #grVenom_80206B68
+
+/// #grVenom_80206B70
+
+void grVenom_80206B90(void) {}
+
+/// #grVenom_80206B94
+
+/// #grVenom_80206BBC
+
+/// #grVenom_80206BC4
+
+void grVenom_80206BEC(void) {}
+
+/// #grVenom_80206BF0
+
+/// #grVenom_80206CB0
+
+/// #grVenom_80206D10
+
+/// #grVenom_80206D74
+
+/// #grVenom_80206D7C

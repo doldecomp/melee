@@ -105,76 +105,90 @@ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-// 801131D0 - 8011320C (0x3C bytes)
+/// #fn_80112ED8
 
-// 8011320C - 80113210 (0x4 bytes)
+/// #ftSk_SpecialHi_80112F48
+
+/// #ftSk_SpecialHi_80112FA8
+
+/// #fn_80113038
+
+/// #ftSk_SpecialHi_Enter
+
+/// #ftSk_SpecialAirHi_Enter
+
+/// #ftSk_SpecialHiStart_0_Anim
+
+/// #ftSk_SpecialAirHiStart_0_Anim
+
+void ftSk_SpecialHiStart_0_IASA(HSD_GObj* gobj) {}
 
 // Interrupt_SheikUpBStartAir
-// 80113210 - 80113214 (0x4 bytes)
+void ftSk_SpecialAirHiStart_0_IASA(HSD_GObj* gobj) {}
 
-// 80113214 - 80113234 (0x20 bytes)
+/// #ftSk_SpecialHiStart_0_Phys
 
-// 80113234 - 80113278 (0x44 bytes)
+/// #ftSk_SpecialAirHiStart_0_Phys
 
-// 80113278 - 801132B4 (0x3C bytes)
+/// #ftSk_SpecialHiStart_0_Coll
 
-// 801132B4 - 80113324 (0x70 bytes)
+/// #ftSk_SpecialAirHiStart_0_Coll
 
-// 80113324 - 80113390 (0x6C bytes)
+/// #ftSk_SpecialHi_80113324
 
-// 80113390 - 801133FC (0x6C bytes)
+/// #ftSk_SpecialHi_80113390
 
-// 801133FC - 80113438 (0x3C bytes)
+/// #ftSk_SpecialHiStart_1_Anim
 
 // Animation_SheikUpBTravel
-// 80113438 - 80113474 (0x3C bytes)
+/// #ftSk_SpecialAirHiStart_1_Anim
 
-// 80113474 - 80113478 (0x4 bytes)
+void ftSk_SpecialHiStart_1_IASA(HSD_GObj* gobj) {}
 
 // Interrupt_SheikUpBTravelAir
-// 80113478 - 8011347C (0x4 bytes)
+void ftSk_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
 // Physics_SheikUpBTravelAir
-// 8011347C - 8011349C (0x20 bytes)
+/// #ftSk_SpecialHiStart_1_Phys
 
-// 8011349C - 801134A0 (0x4 bytes)
+void ftSk_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
 
-// 801134A0 - 80113540 (0xA0 bytes)
+/// #ftSk_SpecialHiStart_1_Coll
 
-// 80113540 - 8011374C (0x20C bytes)
+/// #ftSk_SpecialAirHiStart_1_Coll
 
 // AS_SheikUpBGroundtoAirFall?
-// 8011374C - 801137C8 (0x7C bytes)
+/// #ftSk_SpecialHi_8011374C
 
 // AS_SheikUpBLand
-// 801137C8 - 80113838 (0x70 bytes)
+/// #ftSk_SpecialHi_801137C8
 
 // AS_SheikUpBTravelGround
-// 80113838 - 80113A30 (0x1F8 bytes)
+/// #ftSk_SpecialHi_80113838
 
 // AS_SheikUpBTravelAir
-// 80113A30 - 80113C40 (0x210 bytes)
+/// #ftSk_SpecialHi_80113A30
 
-// 80113C40 - 80113C7C (0x3C bytes)
+/// #ftSk_SpecialHi_Anim
 
-// 80113C7C - 80113CDC (0x60 bytes)
+/// #ftSk_SpecialAirHi_Anim
 
-// 80113CDC - 80113CE0 (0x4 bytes)
+void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
 
 // Interrupt_SheikUpBEndAir
-// 80113CE0 - 80113CE4 (0x4 bytes)
+void ftSk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-// 80113CE4 - 80113D04 (0x20 bytes)
+/// #ftSk_SpecialHi_Phys
 
-// 80113D04 - 80113D80 (0x7C bytes)
+/// #ftSk_SpecialAirHi_Phys
 
-// 80113D80 - 80113DBC (0x3C bytes)
+/// #ftSk_SpecialHi_Coll
 
-// 80113DBC - 80113E40 (0x84 bytes)
+/// #ftSk_SpecialAirHi_Coll
 
-// 80113E40 - 80113EAC (0x6C bytes)
+/// #ftSk_SpecialHi_80113E40
 
-// 80113EAC - 80113F68 (0xBC bytes)
+/// #ftSk_SpecialHi_80113EAC
 
 // AS_SheikUpBFall
-// 80113F68 - 80114034 (0xCC bytes)
+/// #ftSk_SpecialHi_80113F68

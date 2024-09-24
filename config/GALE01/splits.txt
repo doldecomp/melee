@@ -3465,6 +3465,9 @@ MSL/ansi_fp.c:
 MSL/buffer_io.c:
 	.text       start:0x8032345C end:0x8032355C
 
+MSL/PPC_EABI/critical_regions.gamecube.c:
+	.text       start:0x8032355C end:0x80323560
+
 MSL/ctype.c:
 	.text       start:0x80323560 end:0x803235B0
 	.rodata     start:0x803B8C30 end:0x803B8F30

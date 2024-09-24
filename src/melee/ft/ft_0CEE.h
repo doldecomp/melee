@@ -13,7 +13,7 @@
 /* 0CF118 */ void ftCo_ItemParasolOpen_IASA(ftCo_GObj* gobj);
 /* 0CF1A0 */ void ftCo_ItemParasolOpen_Phys(ftCo_GObj* gobj);
 /* 0CF258 */ void ftCo_ItemParasolOpen_Coll(ftCo_GObj* gobj);
-/* 0CF280 */ UNK_RET ftCo_800CF280(UNK_PARAMS);
+/* 0CF280 */ void ftCo_800CF280(Fighter_GObj* gobj);
 /* 0CF2B8 */ void ftCo_ItemParasolFall_Anim(ftCo_GObj* gobj);
 /* 0CF2BC */ void ftCo_ItemParasolFall_IASA(ftCo_GObj* gobj);
 /* 0CF380 */ void ftCo_ItemParasolFall_Phys(ftCo_GObj* gobj);

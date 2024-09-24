@@ -11,7 +11,7 @@
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "ftMasterHand/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itmasterhandbullet.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"

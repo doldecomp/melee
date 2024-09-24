@@ -11,7 +11,9 @@ static float const ftSk_Init_804D96A0 = 1.0471975803375244F;
 static float const ftSk_Init_804D96A4 = 0.0F;
 static double const ftSk_Init_804D96A8 = 0.0078125;
 
-// 80114034 - 801140B0 (0x7C bytes)
+/// #fn_80114034
+
+/// #fn_801140B0
 
 void fn_8011412C(HSD_GObj* gobj)
 {
@@ -21,51 +23,51 @@ void fn_8011412C(HSD_GObj* gobj)
 }
 
 // Sheik_AS_361_Transform_Grounded
-// 80114160 - 80114224 (0xC4 bytes)
+/// #ftSk_SpecialLw_Enter
 
 // Sheik_AS_363_Transform_Aerial
-// 80114224 - 801142E8 (0xC4 bytes)
+/// #ftSk_SpecialAirLw_Enter
 
 // Animation_SheikTransformStartGround
-// 801142E8 - 80114328 (0x40 bytes)
+/// #ftSk_SpecialLw_Anim
 
-// 80114328 - 80114368 (0x40 bytes)
+/// #ftSk_SpecialAirLw_Anim
 
-// 80114368 - 8011436C (0x4 bytes)
+void ftSk_SpecialLw_IASA(HSD_GObj* gobj) {}
 
-// 8011436C - 80114370 (0x4 bytes)
+void ftSk_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
-// 80114370 - 80114390 (0x20 bytes)
+/// #ftSk_SpecialLw_Phys
 
-// 80114390 - 801143D4 (0x44 bytes)
+/// #ftSk_SpecialAirLw_Phys
 
-// 801143D4 - 80114410 (0x3C bytes)
+/// #ftSk_SpecialLw_Coll
 
-// 80114410 - 8011444C (0x3C bytes)
+/// #ftSk_SpecialAirLw_Coll
 
-// 8011444C - 801144B8 (0x6C bytes)
+/// #ftSk_SpecialLw_8011444C
 
-// 801144B8 - 80114524 (0x6C bytes)
+/// #ftSk_SpecialLw_801144B8
 
-// 80114524 - 80114560 (0x3C bytes)
+/// #ftSk_SpecialLw2_Anim
 
-// 80114560 - 8011459C (0x3C bytes)
+/// #ftSk_SpecialAirLw2_Anim
 
-// 8011459C - 801145A0 (0x4 bytes)
+void ftSk_SpecialLw2_IASA(HSD_GObj* gobj) {}
 
-// 801145A0 - 801145A4 (0x4 bytes)
+void ftSk_SpecialAirLw2_IASA(HSD_GObj* gobj) {}
 
-// 801145A4 - 801145C4 (0x20 bytes)
+/// #ftSk_SpecialLw2_Phys
 
-// 801145C4 - 80114608 (0x44 bytes)
+/// #ftSk_SpecialAirLw2_Phys
 
-// 80114608 - 80114644 (0x3C bytes)
+/// #ftSk_SpecialLw2_Coll
 
-// 80114644 - 80114680 (0x3C bytes)
+/// #ftSk_SpecialAirLw2_Coll
 
-// 80114680 - 801146EC (0x6C bytes)
+/// #ftSk_SpecialLw_80114680
 
-// 801146EC - 80114758 (0x6C bytes)
+/// #ftSk_SpecialLw_801146EC
 
 // AS_SheikFinishTransformation
-// 80114758 - 801147C0 (0x68 bytes)
+/// #ftSk_SpecialLw_80114758

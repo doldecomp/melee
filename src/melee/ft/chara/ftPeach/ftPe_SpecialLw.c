@@ -21,6 +21,7 @@
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
+#include "it/items/itpeachturnip.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/random.h>

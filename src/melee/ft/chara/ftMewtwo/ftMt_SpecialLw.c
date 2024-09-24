@@ -15,6 +15,7 @@
 #include "ft/types.h"
 #include "ftMewtwo/types.h"
 #include "it/items/it_27CF.h"
+#include "it/items/itmewtwodisable.h"
 #include "lb/lb_00B0.h"
 
 // SpecialLw/SpecialAirLw

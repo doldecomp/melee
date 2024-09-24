@@ -20,7 +20,7 @@
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftLink/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itlinkboomerang.h"
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
