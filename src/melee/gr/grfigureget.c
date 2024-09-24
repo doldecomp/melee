@@ -23,12 +23,12 @@
 /* 2196E0 */ static bool grFigureGet_802196E0(HSD_GObj*);
 /* 2196E8 */ static void grFigureGet_802196E8(HSD_GObj*);
 /* 2196EC */ static void grFigureGet_802196EC(HSD_GObj*);
-/* 2196F0 */ /* static */ void grFigureGet_802196F0(HSD_GObj*);
-/* 219890 */ /* static */ bool grFigureGet_80219890(HSD_GObj*);
-/* 219898 */ /* static */ void grFigureGet_80219898(HSD_GObj*);
-/* 219B0C */ /* static */ void grFigureGet_80219B0C(HSD_GObj*);
-/* 219C88 */ /* static */ DynamicsDesc* grFigureGet_80219C88(enum_t);
-/* 219C90 */ /* static */ int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
+/* 2196F0 */ static void grFigureGet_802196F0(HSD_GObj*);
+/* 219890 */ static bool grFigureGet_80219890(HSD_GObj*);
+/* 219898 */ static void grFigureGet_80219898(HSD_GObj*);
+/* 219B0C */ static void grFigureGet_80219B0C(HSD_GObj*);
+/* 219C88 */ static DynamicsDesc* grFigureGet_80219C88(enum_t);
+/* 219C90 */ static int grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grFigureGet_803E7D00[2] = {
     { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
@@ -125,3 +125,21 @@ static bool grFigureGet_802196E0(HSD_GObj* gobj)
 static void grFigureGet_802196E8(HSD_GObj* gobj) {}
 
 static void grFigureGet_802196EC(HSD_GObj* gobj) {}
+
+/// #grFigureGet_802196F0
+
+/// #grFigureGet_80219890
+
+/// #grFigureGet_80219898
+
+void grFigureGet_80219B0C(HSD_GObj* gobj) {}
+
+/// #fn_80219B10
+
+/// #grFigureGet_80219C34
+
+/// #grFigureGet_80219C50
+
+/// #grFigureGet_80219C88
+
+/// #grFigureGet_80219C90

@@ -9,10 +9,7 @@
 #include <dolphin/gx/GXTransform.h>
 
 // https://decomp.me/scratch/d4i4k // 95 (98.90%)
-void __GXXfVtxSpecs(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #__GXXfVtxSpecs
 
 /**
  * Sets the type of a single attribute (@p attr) in the current vertex
@@ -120,10 +117,7 @@ void GXSetVtxDesc(GXAttr attr, s32 type)
 }
 
 // https://decomp.me/scratch/NAwYO // 4529 (49.68%)
-void __GXSetVCD(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #__GXSetVCD
 
 void GXClearVtxDesc(void)
 {

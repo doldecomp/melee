@@ -15,6 +15,8 @@
 
 #include <dolphin/mtx/types.h>
 
+/* static */ void ftNn_Init_801238E4(HSD_GObj* gobj);
+
 char ftNn_Init_803CD7F8[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 
 Vec3 ftNn_Init_803CD820[] = {
@@ -378,8 +380,6 @@ void ftNn_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.nn.x2250 = ftNn_Init_804D9898;
 }
 
-/* static */ void ftNn_Init_801238E4(HSD_GObj* gobj);
-
 void ftNn_Init_80122FAC(HSD_GObj* gobj)
 {
     ftNn_Init_801238E4(gobj);
@@ -389,3 +389,79 @@ void ftNn_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftIceClimberAttributes);
 }
+
+/// #ftNn_Init_8012300C
+
+/// #ftNn_Init_8012309C
+
+/// #ftNn_Init_801230D0
+
+/// #fn_80123218
+
+/// #ftNn_Init_801232A4
+
+/// #ftPp_SpecialHi_0_Anim
+
+void ftPp_SpecialHi_3_Anim(Fighter_GObj* gobj) {}
+
+void ftPp_SpecialHi_0_IASA(Fighter_GObj* gobj) {}
+
+void ftPp_SpecialHi_3_IASA(Fighter_GObj* gobj) {}
+
+/// #ftPp_SpecialHi_0_Phys
+
+void ftPp_SpecialHi_3_Phys(Fighter_GObj* gobj) {}
+
+void ftPp_SpecialHi_0_Coll(Fighter_GObj* gobj) {}
+
+void ftPp_SpecialHi_3_Coll(Fighter_GObj* gobj) {}
+
+/// #ftNn_Init_801233F8
+
+/// #ftPp_SpecialHi_1_Anim
+
+/// #ftPp_SpecialHi_4_Anim
+
+void ftPp_SpecialHi_1_IASA(Fighter_GObj* gobj) {}
+
+void ftPp_SpecialHi_4_IASA(Fighter_GObj* gobj) {}
+
+/// #ftPp_SpecialHi_1_Phys
+
+/// #ftPp_SpecialHi_4_Phys
+
+/// #ftPp_SpecialHi_1_Coll
+
+/// #ftPp_SpecialHi_4_Coll
+
+/// #ftNn_Init_80123720
+
+/// #ftNn_Init_8012378C
+
+/// #ftNn_Init_801237F8
+
+/// #ftNn_Init_801238E4
+
+/// #ftNn_Init_80123954
+
+/// #ftNn_Init_80123B10
+
+/// #ftNn_Init_80123B3C
+
+/// #ftNn_Init_80123BF0
+
+/// #ftPp_SpecialS_0_Anim
+
+/// #ftPp_SpecialS_1_Anim
+
+void ftPp_SpecialS_0_IASA(Fighter_GObj* gobj) {}
+
+void ftPp_SpecialS_1_IASA(Fighter_GObj* gobj) {}
+
+/// #ftPp_SpecialS_0_Phys
+
+/// #ftPp_SpecialS_1_Phys
+
+/// #ftPp_SpecialS_0_Coll
+
+/// #ftPp_SpecialS_1_Coll

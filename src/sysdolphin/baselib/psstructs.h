@@ -350,16 +350,6 @@ static inline void psDispSubMakePolygon(struct _particle* pp, u8* texform,
 
 static inline void psDispSub(struct _particle* pp, u8* texform);
 
-void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
-                        int* formBank);
-
-void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
-                          int* formBank);
-
-void psInitDataBankRelocate(int* cmdBank, int* texBank, int* formBank,
-                            int* newCmdBank, int* newTexBank,
-                            int* newFormBank);
-
 void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
                     int* formBank);
 

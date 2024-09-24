@@ -21,7 +21,7 @@
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSamus/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itsamuschargeshot.h"
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>

@@ -13,7 +13,7 @@
 #include "ft/types.h"
 #include "ftLink/ftLk_Init.h"
 #include "ftLink/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itclinkmilk.h"
 
 void ftCl_AppealS_Anim(HSD_GObj* gobj)
 {

@@ -41,7 +41,6 @@ bool grLib_801C96E8(HSD_GObj* arg0)
     return gp->x10_flags.b4;
 }
 
-UnkGeneratorStruct* hsd_8039F05C(s8, s8, s32);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
 UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)

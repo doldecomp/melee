@@ -75,13 +75,6 @@
                                            FtCmdState* cmd);
 /* 071B28 */ static void ftAction_80071B28(Fighter_GObj* gobj,
                                            FtCmdState* cmd);
-/* 071BE0 */ static UNK_RET lbl_80071BE0(UNK_PARAMS);
-/* 071BE8 */ static UNK_RET lbl_80071BE8(UNK_PARAMS);
-/* 071BF0 */ static UNK_RET lbl_80071BF0(UNK_PARAMS);
-/* 071BF8 */ static UNK_RET lbl_80071BF8(UNK_PARAMS);
-/* 071C00 */ static UNK_RET lbl_80071C00(UNK_PARAMS);
-/* 071C08 */ static UNK_RET lbl_80071C08(UNK_PARAMS);
-/* 071C10 */ static UNK_RET lbl_80071C10(UNK_PARAMS);
 /* 071CCC */ static void ftAction_80071CCC(Fighter_GObj* gobj,
                                            FtCmdState* cmd);
 /* 071D30 */ static void ftAction_80071D30(Fighter_GObj* gobj,
@@ -104,24 +97,10 @@
                                            FtCmdState* cmd);
 /* 071FC8 */ static void ftAction_80071FC8(Fighter_GObj* gobj,
                                            FtCmdState* cmd);
-/* 072210 */ static UNK_RET lbl_80072210(UNK_PARAMS);
-/* 072228 */ static UNK_RET lbl_80072228(UNK_PARAMS);
-/* 072240 */ static UNK_RET lbl_80072240(UNK_PARAMS);
-/* 072258 */ static UNK_RET lbl_80072258(UNK_PARAMS);
-/* 072270 */ static UNK_RET lbl_80072270(UNK_PARAMS);
-/* 072288 */ static UNK_RET lbl_80072288(UNK_PARAMS);
-/* 0722A0 */ static UNK_RET lbl_800722A0(UNK_PARAMS);
 /* 0722C8 */ static void ftAction_800722C8(Fighter_GObj* gobj,
                                            FtCmdState* cmd);
 /* 072320 */ static void ftAction_80072320(Fighter_GObj* gobj,
                                            FtCmdState* cmd);
-/* 072408 */ static UNK_RET lbl_80072408(UNK_PARAMS);
-/* 07243C */ static UNK_RET lbl_8007243C(UNK_PARAMS);
-/* 072480 */ static UNK_RET lbl_80072480(UNK_PARAMS);
-/* 072530 */ static UNK_RET lbl_80072530(UNK_PARAMS);
-/* 072574 */ static UNK_RET lbl_80072574(UNK_PARAMS);
-/* 0725B8 */ static UNK_RET lbl_800725B8(UNK_PARAMS);
-/* 0725FC */ static UNK_RET lbl_800725FC(UNK_PARAMS);
 /* 0726C0 */ static void ftAction_800726C0(Fighter_GObj* gobj,
                                            FtCmdState* cmd);
 /* 0726F4 */ static void ftAction_800726F4(Fighter_GObj* gobj,

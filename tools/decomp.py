@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -10,12 +11,14 @@ from typing import Optional, cast
 from elftools.elf.elffile import ELFFile
 from elftools.elf.sections import SymbolTableSection
 
-root = Path(__file__).parents[1]
-dtk_root = root / "build/GALE01"
-obj_root = dtk_root / "obj"
-asm_root = dtk_root / "asm"
-ctx_file = root / "build/ctx.c"
-m2ctx_script = root / "tools/m2ctx/m2ctx.py"
+ROOT = Path(__file__).parents[1]
+DTK_ROOT = ROOT / "build/GALE01"
+OBJ_ROOT = DTK_ROOT / "obj"
+ASM_ROOT = DTK_ROOT / "asm"
+SRC_ROOT = ROOT / "src"
+CTX_FILE = ROOT / "build/ctx.c"
+M2CTX_SCRIPT = ROOT / "tools/m2ctx/m2ctx.py"
+PLACEHOLDER = r"^/// #{name}$(?:\r?\n)?"
 
 
 def has_function(obj_path: Path, function_name: str) -> bool:
@@ -44,12 +47,17 @@ def resolve_path(p: Path) -> str:
     return str(p.resolve())
 
 
-def run_cmd(cmd: list[str]) -> str:
+def run_cmd(cmd: list[str], stdin: str | None = None) -> str:
     if cmd[0] == "python":
         executable = sys.executable
     else:
         executable = None
-    result = subprocess.run(cmd, capture_output=True, executable=executable)
+    result = subprocess.run(
+        cmd,
+        stdin=stdin,
+        capture_output=True,
+        executable=executable,
+    )
     if result.returncode != 0:
         print(" ".join(cmd), file=sys.stderr)
         print(result.stdout.decode(), file=sys.stderr)
@@ -60,10 +68,10 @@ def run_cmd(cmd: list[str]) -> str:
 
 
 def gen_ctx() -> None:
-    run_cmd(
+    _ = run_cmd(
         [
             "python",
-            resolve_path(m2ctx_script),
+            resolve_path(M2CTX_SCRIPT),
             "--quiet",
             "--preprocessor",
         ]
@@ -72,45 +80,60 @@ def gen_ctx() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Decomp a function using m2c")
-    parser.add_argument(
+    _ = parser.add_argument(
         "function",
         type=str,
         help="a function to be processed",
     )
-    parser.add_argument(
+    _ = parser.add_argument(
         dest="m2c_args",
         nargs=argparse.REMAINDER,
         help="additional arguments to be passed to m2c",
     )
-    parser.add_argument(
+    _ = parser.add_argument(
         "--no-context",
         action="store_false",
         dest="ctx",
-        help=f"do not generate {ctx_file.name}",
+        help=f"do not generate {CTX_FILE.name}",
     )
-    parser.add_argument(
+    _ = parser.add_argument(
         "--no-copy",
         action="store_false",
         dest="copy",
         help="do not copy the output to the clipboard",
     )
-    parser.add_argument(
+    _ = parser.add_argument(
+        "-q",
         "--no-print",
         action="store_false",
         dest="print",
         help="do not print the output",
     )
-    parser.add_argument(
+    _ = parser.add_argument(
+        "-c",
         "--colorize",
         action="store_true",
         dest="color",
         help="colorize the output (requires pygments)",
     )
+    _ = parser.add_argument(
+        "-w",
+        "--write",
+        action="store_true",
+        help="insert the output into the corresponding src file",
+    )
+    _ = parser.add_argument(
+        "-f",
+        "--format",
+        action="store_true",
+        help="run clang-format on the output",
+    )
 
     args = parser.parse_args()
 
-    if (obj_file := find_obj(obj_root, args.function)) is not None:
-        asm_file = asm_root / cast(Path, obj_file).with_suffix(".s")
+    function = cast(str, args.function)
+    if (obj_file := find_obj(OBJ_ROOT, function)) is not None:
+        asm_file = ASM_ROOT / cast(Path, obj_file).with_suffix(".s")
 
         m2c_cmd: list[str] = [
             "python",
@@ -120,17 +143,17 @@ def main() -> None:
             "--target",
             "ppc-mwcc-c",
             "--context",
-            resolve_path(ctx_file),
+            resolve_path(CTX_FILE),
             "--function",
-            args.function,
+            function,
             resolve_path(asm_file),
         ]
 
-        if args.ctx:
+        if cast(bool, args.ctx):
             gen_ctx()
 
         output = run_cmd(m2c_cmd)
-        if args.copy:
+        if cast(bool, args.copy):
             try:
                 import pyperclip
 
@@ -138,8 +161,24 @@ def main() -> None:
             except ModuleNotFoundError:
                 print("Failed to import pyperclip; could not copy", file=stderr)
 
-        if args.print:
-            if args.color:
+        if cast(bool, args.format):
+            proc = subprocess.Popen(
+                ["clang-format", "-"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+            )
+            out, err = proc.communicate(output.encode())
+
+            output = out.decode()
+
+            if proc.returncode != 0:
+                print(output, file=sys.stderr)
+                print(err.decode(), file=sys.stderr)
+                exit(1)
+
+        if cast(bool, args.print):
+            colorized = output
+            if cast(bool, args.color):
                 try:
                     import colorama
 
@@ -151,12 +190,32 @@ def main() -> None:
                     from pygments.formatters import TerminalFormatter
                     from pygments.lexers import CLexer
 
-                    output = highlight(output, CLexer(), TerminalFormatter())
+                    colorized = highlight(output, CLexer(), TerminalFormatter())
                 except ModuleNotFoundError:
                     print("Failed to import pygments; could not colorize", file=stderr)
-            print(output, file=sys.stdout)
+            print(colorized, file=sys.stdout)
+
+        if cast(bool, args.write):
+            src_file = SRC_ROOT / obj_file.with_suffix(".c")
+
+            if not src_file.exists():
+                src_file.parent.mkdir(parents=True, exist_ok=True)
+                src_file.touch(exist_ok=True)
+
+            text = src_file.read_text()
+
+            placeholder = re.compile(
+                PLACEHOLDER.format(name=re.escape(function)),
+                re.MULTILINE,
+            )
+
+            result, count = re.subn(placeholder, output, text, count=1)
+            if count < 1:
+                result = result + f"\n{output}"
+
+            _ = src_file.write_text(result)
     else:
-        print(f"Could not find {args.function}", file=stderr)
+        print(f"Could not find {function}", file=stderr)
         sys.exit(1)
 
 

@@ -34,10 +34,7 @@
 /* 0952A0 */ static void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1);
 /* 0952C8 */ static UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ static UNK_RET lbl_80095738(UNK_PARAMS);
-/* 09542C */ static UNK_RET ftCo_8009588C(UNK_PARAMS);
-/* 09543C */ static UNK_RET ftCo_8009589C(UNK_PARAMS);
 /* 09549C */ static void ftCo_800958FC(ftCo_GObj* gobj, int);
-/* 095530 */ static UNK_RET ftCo_80095990(UNK_PARAMS);
 /* 095540 */ static UNK_RET ftCo_800959A0(UNK_PARAMS);
 /* 0955D0 */ static void ftCo_80095A30(ftCo_GObj* gobj);
 /* 0958FC */ static void ftCo_80095D5C(ftCo_Fighter* fp, Vec3* arg1);

@@ -3158,6 +3158,10 @@ void ftKb_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftKb_DatAttrs);
 }
 
+/// #ftKb_Init_800EEB00
+
+/// #ftKb_Init_800EEB1C
+
 void ftKb_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
@@ -3180,6 +3184,38 @@ void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
         *arg1 = 17;
     }
 }
+
+/// #ftKb_Init_GetMotionFileString
+
+/// #ftKb_SpecialN_800EEC34
+
+/// #ftKb_SpecialN_800EED50
+
+/// #ftKb_Init_UnkMotionStates5
+
+/// #ftKb_SpecialN_800EEEC4
+
+/// #ftKb_UnkMtxFunc0
+
+/// #ftKb_Init_UnkMotionStates6
+
+/// #ftKb_SpecialN_800EF040
+
+/// #ftKb_SpecialN_800EF0E4
+
+/// #ftKb_SpecialN_800EF35C
+
+/// #ftKb_SpecialN_800EF438
+
+/// #ftKb_SpecialN_800EF69C
+
+/// #ftKb_UnkIntBoolFunc0
+
+/// #ftKb_Init_UnkCallbackPairs0_0
+
+/// #ftKb_Init_UnkCallbackPairs0_1
+
+/// #ftKb_SpecialN_800EFA40
 
 void ftKb_SpecialN_800EFAF0(HSD_GObj* gobj)
 {
@@ -3223,6 +3259,16 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_SpecialN_800EFBFC
+
+/// #ftKb_SpecialN_800EFC58
+
+/// #ftKb_SpecialN_800EFD08
+
+/// #ftKb_SpecialN_800EFD64
+
+/// #ftKb_SpecialN_800EFE1C
+
 void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3243,6 +3289,392 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_SpecialN_800EFF38
+
+/// #ftKb_SpecialN_800EFF9C
+
+/// #ftKb_SpecialN_800F0054
+
+/// #ftKb_SpecialN_800F00B8
+
+/// #ftKb_SpecialN_800F0168
+
+/// #ftKb_SpecialN_800F01C4
+
+/// #ftKb_SpecialN_800F0274
+
+/// #ftKb_SpecialN_800F02D0
+
+/// #ftKb_SpecialN_800F0380
+
+/// #ftKb_SpecialN_800F03DC
+
+/// #ftKb_SpecialN_800F0494
+
+/// #ftKb_SpecialN_800F04F8
+
+/// #ftKb_SpecialN_800F05A8
+
+/// #ftKb_SpecialN_800F0604
+
+/// #ftKb_SpecialN_800F06B4
+
+/// #ftKb_SpecialN_800F0710
+
+/// #ftKb_SpecialN_800F07C0
+
+/// #ftKb_SpecialN_800F081C
+
+/// #ftKb_SpecialN_800F08D4
+
+/// #ftKb_SpecialN_800F0938
+
+/// #ftKb_SpecialN_800F09F0
+
+/// #ftKb_SpecialN_800F0A54
+
+/// #ftKb_SpecialN_800F0B0C
+
+/// #ftKb_SpecialN_800F0B70
+
+/// #ftKb_SpecialN_800F0C20
+
+/// #ftKb_SpecialN_800F0C7C
+
+/// #ftKb_SpecialN_800F0D34
+
+/// #ftKb_SpecialN_800F0D98
+
+/// #ftKb_SpecialN_800F0E48
+
+/// #ftKb_SpecialN_800F0EA4
+
+/// #ftKb_SpecialN_800F0F5C
+
+/// #ftKb_SpecialN_800F0FC0
+
+/// #ftKb_SpecialN_800F10A4
+
+/// #ftKb_SpecialN_800F10D4
+
+/// #ftKb_SpecialN_800F11AC
+
+/// #ftKb_SpecialN_800F11F0
+
+/// #ftKb_SpecialN_800F12C8
+
+/// #ftKb_SpecialN_800F130C
+
+/// #ftKb_SpecialN_800F13F0
+
+/// #ftKb_SpecialN_800F1420
+
+/// #ftKb_SpecialN_800F14B4
+
+/// #ftKb_SpecialN_800F15D8
+
+/// #ftKb_SpecialN_Enter
+
+/// #ftKb_SpecialAirN_Enter
+
+/// #ftKb_SpecialN_800F16D0
+
+/// #ftKb_SpecialN_800F190C
+
+/// #ftKb_SpecialN_800F19AC
+
+/// #ftKb_SpecialN_800F1A8C
+
+/// #ftKb_Init_UnkMotionStates3
+
+/// #ftKb_SpecialN_800F1BAC
+
+/// #fn_800F1CA0
+
+/// #ftKb_SpecialN_800F1CD8
+
+/// #ftKb_SpecialN_800F1D24
+
+/// #ftKb_SpecialN_800F1DAC
+
+/// #ftKb_SpecialN_800F1F1C
+
+/// #ftKb_SpecialN_800F1F68
+
+/// #fn_800F1FDC
+
+/// #ftKb_AttackDash_Anim
+
+/// #ftKb_AttackDash_IASA
+
+/// #ftKb_AttackDash_Phys
+
+/// #ftKb_AttackDash_Coll
+
+/// #fn_800F20C4
+
+/// #ftKb_AttackDashAir_Anim
+
+void ftKb_AttackDashAir_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_AttackDashAir_Phys
+
+/// #ftKb_AttackDashAir_Coll
+
+/// #ftKb_AttackDashAir_800F21C0
+
+/// #fn_800F21E8
+
+/// #ftKb_AttackDashAir_800F22D4
+
+/// #ftKb_SpecialHi_Enter
+
+/// #ftKb_SpecialAirHi_Enter
+
+/// #ftKb_SpecialHi1_Anim
+
+/// #ftKb_SpecialHi2_Anim
+
+void ftKb_SpecialHi3_Anim(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialAirHiEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialLw1_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialLwEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialAirLwStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialAirLwEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialNLoop_Anim(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialAirNLoop_Anim(ftKb_GObj* gobj) {}
+
+void ftKb_EatWait_Anim(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialAirNCaptureWait_Anim(ftKb_GObj* gobj) {}
+
+void ftKb_EatJump2_Anim(ftKb_GObj* gobj) {}
+
+void ftKb_CaSpecialN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PkSpecialN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PkSpecialAirN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_KpSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_KpSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_KpSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_KpSpecialAirNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_LkSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_LkSpecialAirNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SsSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SsSpecialNCancel_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SsSpecialN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SsSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SsSpecialAirN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_FxSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_FxSpecialAirNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_NsSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_NsSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_NsSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_NsSpecialAirNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialNCancel_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialNFull_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialAirNCancel_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialAirN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_DkSpecialAirNFull_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialNTurn_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialAirN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialAirNEndR_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PrSpecialNHit_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_ZdSpecialN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_ZdSpecialAirN_IASA(ftKb_GObj* gobj) {}
+
+void fn_80105FEC(void) {}
+
+void ftKb_SkSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SkSpecialNCancel_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SkSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SkSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SkSpecialAirNCancel_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SkSpecialAirNEnd_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_SpecialHi4_Anim
+
+/// #ftKb_SpecialAirHi1_Anim
+
+/// #ftKb_SpecialAirHi2_Anim
+
+void ftKb_SpecialAirHi3_Anim(ftKb_GObj* gobj) {}
+
+/// #ftKb_SpecialAirHiEnd_Anim
+
+/// #ftKb_SpecialHi1_IASA
+
+void ftKb_SpecialHi2_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialHi3_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialHi4_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_SpecialAirHi1_IASA
+
+void ftKb_SpecialAirHi2_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_SpecialAirHi3_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_SpecialAirHiEnd_IASA
+
+/// #ftKb_SpecialHi1_Phys
+
+/// #ftKb_SpecialHi2_Phys
+
+/// #ftKb_SpecialHi3_Phys
+
+/// #ftKb_SpecialHi4_Phys
+
+/// #ftKb_SpecialAirHi1_Phys
+
+/// #ftKb_SpecialAirHi2_Phys
+
+/// #ftKb_SpecialAirHi3_Phys
+
+/// #ftKb_SpecialAirHiEnd_Phys
+
+/// #ftKb_SpecialHi1_Coll
+
+/// #ftKb_SpecialHi2_Coll
+
+/// #ftKb_SpecialHi3_Coll
+
+/// #ftKb_SpecialHi4_Coll
+
+/// #ftKb_SpecialAirHi1_Coll
+
+/// #ftKb_SpecialAirHi2_Coll
+
+/// #ftKb_SpecialAirHi3_Coll
+
+/// #ftKb_SpecialAirHiEnd_Coll
+
+/// #ftKb_SpecialHi_800F331C
+
+/// #ftKb_SpecialHi_800F346C
+
+/// #ftKb_SpecialHi_800F3570
+
+/// #ftKb_SpecialHi_800F36DC
+
+/// #ftKb_SpecialHi_800F37EC
+
+/// #ftKb_SpecialHi_800F3B28
+
+/// #ftKb_SpecialLw_Enter
+
+/// #ftKb_SpecialAirLw_Enter
+
+/// #ftKb_SpecialLw1_Anim
+
+/// #ftKb_SpecialLw_Anim
+
+/// #ftKb_SpecialLwEnd_Anim
+
+/// #ftKb_SpecialAirLwStart_Anim
+
+/// #ftKb_SpecialAirLw_Anim
+
+/// #ftKb_SpecialAirLwEnd_Anim
+
+/// #ftKb_SpecialLw1_IASA
+
+/// #ftKb_SpecialLw_IASA
+
+/// #ftKb_SpecialLwEnd_IASA
+
+/// #ftKb_SpecialAirLwStart_IASA
+
+/// #ftKb_SpecialAirLw_IASA
+
+/// #ftKb_SpecialAirLwEnd_IASA
+
+/// #ftKb_SpecialLw1_Phys
+
+/// #ftKb_SpecialLw_Phys
+
+/// #ftKb_SpecialLwEnd_Phys
+
+/// #ftKb_SpecialAirLwStart_Phys
+
+/// #ftKb_SpecialAirLw_Phys
+
+/// #ftKb_SpecialAirLwEnd_Phys
+
+/// #ftKb_SpecialLw1_Coll
+
+/// #ftKb_SpecialLw_Coll
+
+/// #ftKb_SpecialLwEnd_Coll
+
+/// #ftKb_SpecialAirLwStart_Coll
+
+/// #ftKb_SpecialAirLw_Coll
+
+/// #ftKb_SpecialAirLwEnd_Coll
+
+/// #ftKb_SpecialAirLw_800F5318
+
+/// #ftKb_SpecialAirLw_800F539C
+
+/// #fn_800F53AC
+
 void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -3252,12 +3684,86 @@ void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_SpecialS_Enter
+
+/// #ftKb_SpecialAirS_Enter
+
+/// #ftKb_SpecialS_Anim
+
+/// #ftKb_SpecialAirS_Anim
+
+/// #ftKb_SpecialS_Phys
+
+/// #ftKb_SpecialAirS_Phys
+
+/// #ftKb_SpecialS_Coll
+
+/// #ftKb_SpecialAirS_Coll
+
+/// #ftKb_SpecialN_800F5800
+
+/// #ftKb_SpecialN_800F5820
+
+/// #ftKb_SpecialN_800F5874
+
+/// #ftKb_SpecialN_800F5898
+
+/// #ftKb_SpecialN_800F58AC
+
+/// #ftKb_SpecialN_800F58D8
+
+/// #ftKb_SpecialN_800F5954
+
+/// #ftKb_SpecialN_800F597C
+
+/// #ftKb_SpecialN_800F598C
+
+/// #ftKb_SpecialN_800F5A04
+
+/// #ftKb_SpecialN_800F5A38
+
+/// #ftKb_SpecialN_800F5A60
+
+/// #ftKb_SpecialN_800F5A70
+
+/// #ftKb_SpecialN_800F5A88
+
+/// #ftKb_SpecialN_800F5A98
+
+/// #ftKb_SpecialN_800F5AB0
+
+/// #ftKb_SpecialN_800F5AC0
+
+/// #ftKb_SpecialN_800F5AD8
+
+/// #ftKb_SpecialN_800F5AF0
+
+/// #ftKb_SpecialN_800F5B00
+
+/// #ftKb_SpecialN_800F5B10
+
+/// #ftKb_SpecialN_800F5B20
+
 float ftKb_SpecialN_800F5B3C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct ftKb_DatAttrs* da = fp->dat_attrs;
     return da->specialn_gravity_of_inhaled;
 }
+
+/// #ftKb_SpecialN_800F5B4C
+
+/// #ftKb_SpecialN_800F5B5C
+
+/// #ftKb_SpecialN_800F5BA4
+
+/// #ftKb_SpecialN_800F5C34
+
+/// #ftKb_SpecialN_800F5D04
+
+/// #ftKb_SpecialN_800F5DE8
+
+/// #ftKb_SpecialN_800F5EA8
 
 void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
 {
@@ -3287,6 +3793,8 @@ void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_SpecialN_800F6070
+
 void fn_800F6178(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3299,6 +3807,42 @@ void fn_800F6178(HSD_GObj* gobj)
     ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
+
+/// #fn_800F6210
+
+/// #fn_800F6280
+
+/// #fn_800F6318
+
+/// #ftKb_SpecialN_800F6388
+
+/// #ftKb_SpecialN_800F63EC
+
+/// #fn_800F6450
+
+/// #fn_800F64C8
+
+/// #fn_800F6528
+
+/// #fn_800F6588
+
+/// #fn_800F6638
+
+/// #fn_800F66E8
+
+/// #fn_800F6798
+
+/// #fn_800F6848
+
+/// #fn_800F68A8
+
+/// #fn_800F6908
+
+/// #fn_800F697C
+
+/// #fn_800F69E8
+
+/// #fn_800F6A5C
 
 /// Fighter_CollGround_PassLedgeCB
 void fn_800F6AC8(HSD_GObj* gobj)
@@ -3315,6 +3859,50 @@ void fn_800F6AC8(HSD_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
+/// #fn_800F6B3C
+
+/// #ftKb_SpecialS_800F6BB0
+
+/// #fn_800F6C24
+
+/// #fn_800F6C98
+
+/// #fn_800F6D0C
+
+/// #fn_800F6D80
+
+/// #fn_800F6DF4
+
+/// #fn_800F6E68
+
+/// #fn_800F6EDC
+
+/// #fn_800F6F50
+
+/// #fn_800F6FC4
+
+/// #fn_800F702C
+
+/// #ftKb_SpecialN_Anim
+
+/// #ftKb_SpecialAirN_Anim
+
+/// #ftKb_SpecialNLoop_Anim
+
+/// #ftKb_SpecialAirNLoop_Anim
+
+/// #ftKb_SpecialNEnd_Anim
+
+/// #ftKb_SpecialAirNEnd_Anim
+
+/// #ftKb_SpecialNCapture0_Anim
+
+/// #ftKb_SpecialNCapture_Anim
+
+/// #ftKb_SpecialNCapture1_Anim
+
+/// #ftKb_SpecialAirNCapture_Anim
+
 void ftKb_Eat_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -3328,20 +3916,172 @@ void ftKb_Eat_Anim(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_SpecialAirNCaptured_Anim
+
+/// #ftKb_EatWait_Anim
+
+/// #ftKb_SpecialAirNCaptureWait_Anim
+
+/// #ftKb_SpecialNSpit0_Anim
+
+/// #ftKb_SpecialNSpit_Anim
+
+/// #ftKb_SpecialNSpit1_Anim
+
+/// #ftKb_SpecialAirNSpit_Anim
+
+/// #ftKb_SpecialNDrink0_Anim
+
+/// #ftKb_SpecialNDrink_Anim
+
+/// #ftKb_SpecialNDrink1_Anim
+
+/// #ftKb_SpecialAirNDrink_Anim
+
+/// #ftKb_EatTurn_Anim
+
+/// #ftKb_SpecialAirNCaptureTurn_Anim
+
+/// #ftKb_EatWalk_Anim
+
+/// #ftKb_EatJump1_Anim
+
+/// #ftKb_EatJump2_Anim
+
+/// #ftKb_EatLanding_Anim
+
+/// #ftKb_SpecialNLoop_IASA
+
+/// #ftKb_SpecialAirNLoop_IASA
+
+/// #ftKb_EatWait_IASA
+
+/// #ftKb_SpecialAirNCaptureWait_IASA
+
+/// #ftKb_EatWalk_IASA
+
+/// #ftKb_EatJump1_IASA
+
+/// #ftKb_SpecialN_Phys
+
+/// #ftKb_SpecialAirN_Phys
+
 void ftKb_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
+
+/// #ftKb_SpecialAirNLoop_Phys
+
+/// #ftKb_SpecialNEnd_Phys
+
+/// #ftKb_SpecialAirNEnd_Phys
+
+/// #ftKb_SpecialNCapture0_Phys
+
+/// #ftKb_SpecialNCapture_Phys
+
+/// #ftKb_SpecialNCapture1_Phys
+
+/// #ftKb_SpecialAirNCapture_Phys
 
 void ftKb_Eat_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
+/// #ftKb_SpecialAirNCaptured_Phys
+
+/// #ftKb_EatWait_Phys
+
+/// #ftKb_SpecialAirNCaptureWait_Phys
+
+/// #ftKb_SpecialNSpit0_Phys
+
+/// #ftKb_SpecialNSpit_Phys
+
+/// #ftKb_SpecialNSpit1_Phys
+
+/// #ftKb_SpecialAirNSpit_Phys
+
+/// #ftKb_SpecialNDrink0_Phys
+
+/// #ftKb_SpecialNDrink_Phys
+
+/// #ftKb_SpecialNDrink1_Phys
+
+/// #ftKb_SpecialAirNDrink_Phys
+
+/// #ftKb_EatTurn_Phys
+
+/// #ftKb_SpecialAirNCaptureTurn_Phys
+
+/// #ftKb_EatWalk_Phys
+
+/// #ftKb_EatJump1_Phys
+
+/// #ftKb_EatJump2_Phys
+
+/// #ftKb_EatLanding_Phys
+
+/// #ftKb_SpecialN_Coll
+
+/// #ftKb_SpecialAirN_Coll
+
+/// #ftKb_SpecialNLoop_Coll
+
+/// #ftKb_SpecialAirNLoop_Coll
+
+/// #ftKb_SpecialNEnd_Coll
+
+/// #ftKb_SpecialAirNEnd_Coll
+
+/// #ftKb_SpecialNCapture0_Coll
+
+/// #ftKb_SpecialNCapture_Coll
+
+/// #ftKb_SpecialNCapture1_Coll
+
+/// #ftKb_SpecialAirNCapture_Coll
+
 void ftKb_Eat_Coll(HSD_GObj* gobj)
 {
     ft_8008403C(gobj, fn_800F6AC8);
 }
+
+/// #ftKb_SpecialAirNCaptured_Coll
+
+/// #ftKb_EatWait_Coll
+
+/// #ftKb_SpecialAirNCaptureWait_Coll
+
+/// #ftKb_SpecialNSpit0_Coll
+
+/// #ftKb_SpecialNSpit_Coll
+
+/// #ftKb_SpecialNSpit1_Coll
+
+/// #ftKb_SpecialAirNSpit_Coll
+
+/// #ftKb_SpecialNDrink0_Coll
+
+/// #ftKb_SpecialNDrink_Coll
+
+/// #ftKb_SpecialNDrink1_Coll
+
+/// #ftKb_SpecialAirNDrink_Coll
+
+/// #ftKb_EatTurn_Coll
+
+/// #ftKb_SpecialAirNCaptureTurn_Coll
+
+/// #ftKb_EatWalk_Coll
+
+/// #ftKb_EatJump1_Coll
+
+/// #ftKb_EatJump2_Coll
+
+/// #ftKb_EatLanding_Coll
 
 void ftKb_SpecialN_800F9070(HSD_GObj* gobj)
 {
@@ -3368,6 +4108,360 @@ void ftKb_SpecialN_800F9090(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_SpecialN_800F9110
+
+/// #ftKb_MrSpecialN_Anim
+
+/// #ftKb_MrSpecialN_IASA
+
+/// #ftKb_MrSpecialN_Phys
+
+/// #ftKb_MrSpecialN_Coll
+
+/// #fn_800F9260
+
+/// #ftKb_SpecialNMr_800F93CC
+
+/// #ftKb_MrSpecialAirN_Anim
+
+/// #ftKb_MrSpecialAirN_IASA
+
+/// #ftKb_MrSpecialAirN_Phys
+
+/// #ftKb_MrSpecialAirN_Coll
+
+/// #ftKb_SpecialNLg_800F951C
+
+/// #ftKb_SpecialNLg_800F9598
+
+/// #ftKb_SpecialNLg_800F9614
+
+/// #ftKb_SpecialNLg_800F9684
+
+/// #ftKb_LgSpecialN_Anim
+
+/// #ftKb_LgSpecialAirN_Anim
+
+/// #ftKb_LgSpecialN_IASA
+
+/// #ftKb_LgSpecialAirN_IASA
+
+/// #ftKb_LgSpecialN_Phys
+
+/// #ftKb_LgSpecialAirN_Phys
+
+/// #ftKb_LgSpecialN_Coll
+
+/// #ftKb_LgSpecialAirN_Coll
+
+/// #fn_800F98F4
+
+/// #ftKb_SpecialNCa_800F99BC
+
+/// #ftKb_SpecialNCa_800F9A54
+
+/// #ftKb_CaSpecialN_Anim
+
+/// #ftKb_CaSpecialAirN_Anim
+
+/// #ftKb_CaSpecialN_IASA
+
+/// #ftKb_CaSpecialAirN_IASA
+
+/// #ftKb_CaSpecialN_Phys
+
+/// #ftKb_CaSpecialAirN_Phys
+
+/// #ftKb_CaSpecialN_Coll
+
+/// #ftKb_CaSpecialAirN_Coll
+
+/// #ftKb_SpecialNPk_800F9FD4
+
+/// #ftKb_SpecialNPk_800FA064
+
+/// #ftKb_PkSpecialN_Anim
+
+/// #ftKb_PkSpecialAirN_Anim
+
+/// #ftKb_PkSpecialN_IASA
+
+/// #ftKb_PkSpecialAirN_IASA
+
+/// #ftKb_PkSpecialN_Phys
+
+/// #ftKb_PkSpecialAirN_Phys
+
+/// #ftKb_PkSpecialN_Coll
+
+/// #ftKb_PkSpecialAirN_Coll
+
+/// #ftKb_SpecialNKp_800FA588
+
+/// #ftKb_SpecialNKp_800FA7D4
+
+/// #ftKb_SpecialNKp_800FA83C
+
+/// #ftKb_SpecialNKp_800FA878
+
+/// #ftKb_SpecialNKp_800FA8B4
+
+/// #ftKb_SpecialNKp_800FA958
+
+/// #ftKb_KpSpecialNStart_Anim
+
+/// #ftKb_KpSpecialN_Anim
+
+/// #ftKb_KpSpecialNEnd_Anim
+
+/// #ftKb_KpSpecialAirNStart_Anim
+
+/// #ftKb_KpSpecialAirN_Anim
+
+/// #ftKb_KpSpecialAirNEnd_Anim
+
+/// #ftKb_KpSpecialNStart_IASA
+
+/// #ftKb_KpSpecialN_IASA
+
+/// #ftKb_KpSpecialNEnd_IASA
+
+/// #ftKb_KpSpecialAirNStart_IASA
+
+/// #ftKb_KpSpecialAirN_IASA
+
+/// #ftKb_KpSpecialAirNEnd_IASA
+
+/// #ftKb_KpSpecialNStart_Phys
+
+/// #ftKb_KpSpecialN_Phys
+
+/// #ftKb_KpSpecialNEnd_Phys
+
+/// #ftKb_KpSpecialAirNStart_Phys
+
+/// #ftKb_KpSpecialAirN_Phys
+
+/// #ftKb_KpSpecialAirNEnd_Phys
+
+/// #ftKb_KpSpecialNStart_Coll
+
+/// #ftKb_KpSpecialN_Coll
+
+/// #ftKb_KpSpecialNEnd_Coll
+
+/// #ftKb_KpSpecialAirNStart_Coll
+
+/// #ftKb_KpSpecialAirN_Coll
+
+/// #ftKb_KpSpecialAirNEnd_Coll
+
+/// #ftKb_SpecialNLk800FB394
+
+/// #ftKb_SpecialNLk800FB418
+
+/// #ftKb_SpecialNLk800FB444
+
+/// #ftKb_SpecialNLk800FB470
+
+/// #ftKb_SpecialNLk800FB500
+
+/// #ftKb_SpecialNLk800FB5F4
+
+/// #ftKb_SpecialNLk800FB6DC
+
+/// #ftKb_SpecialNLk800FB800
+
+/// #ftKb_SpecialNLk800FB840
+
+/// #ftKb_SpecialNLk800FB880
+
+/// #ftKb_SpecialNLk800FBA00
+
+/// #ftKb_LkSpecialNStart_Anim
+
+/// #ftKb_LkSpecialNLoop_Anim
+
+/// #ftKb_LkSpecialNEnd_Anim
+
+/// #ftKb_LkSpecialAirNStart_Anim
+
+/// #ftKb_LkSpecialAirNLoop_Anim
+
+/// #ftKb_LkSpecialAirNEnd_Anim
+
+/// #ftKb_LkSpecialNStart_IASA
+
+/// #ftKb_LkSpecialNLoop_IASA
+
+/// #ftKb_LkSpecialNEnd_IASA
+
+/// #ftKb_LkSpecialAirNStart_IASA
+
+/// #ftKb_LkSpecialAirNLoop_IASA
+
+/// #ftKb_LkSpecialAirNEnd_IASA
+
+/// #ftKb_LkSpecialNStart_Phys
+
+/// #ftKb_LkSpecialNLoop_Phys
+
+/// #ftKb_LkSpecialNEnd_Phys
+
+/// #ftKb_LkSpecialAirNStart_Phys
+
+/// #ftKb_LkSpecialAirNLoop_Phys
+
+/// #ftKb_LkSpecialAirNEnd_Phys
+
+/// #ftKb_LkSpecialNStart_Coll
+
+/// #ftKb_LkSpecialNLoop_Coll
+
+/// #ftKb_LkSpecialNEnd_Coll
+
+/// #ftKb_LkSpecialAirNStart_Coll
+
+/// #ftKb_LkSpecialAirNLoop_Coll
+
+/// #ftKb_LkSpecialAirNEnd_Coll
+
+/// #ftKb_SpecialNSs_800FCC14
+
+/// #ftKb_SpecialNSs_800FCC6C
+
+/// #ftKb_SpecialNSs_800FCCBC
+
+/// #ftKb_SpecialNSs_800FCD04
+
+/// #ftKb_SpecialNSs_800FCD60
+
+/// #ftKb_SpecialNSs_800FCDE0
+
+/// #ftKb_SpecialNSs_800FCF74
+
+/// #ftKb_SpecialNSs_800FD020
+
+/// #ftKb_SsSpecialNStart_Anim
+
+/// #ftKb_SsSpecialNHold_Anim
+
+/// #ftKb_SsSpecialNCancel_Anim
+
+/// #ftKb_SsSpecialN_Anim
+
+/// #ftKb_SsSpecialAirNStart_Anim
+
+/// #ftKb_SsSpecialAirN_Anim
+
+/// #ftKb_SsSpecialNStart_IASA
+
+/// #ftKb_SsSpecialNHold_IASA
+
+/// #ftKb_SsSpecialNCancel_IASA
+
+/// #ftKb_SsSpecialN_IASA
+
+/// #ftKb_SsSpecialAirNStart_IASA
+
+/// #ftKb_SsSpecialAirN_IASA
+
+/// #ftKb_SsSpecialNStart_Phys
+
+/// #ftKb_SsSpecialNHold_Phys
+
+/// #ftKb_SsSpecialNCancel_Phys
+
+/// #ftKb_SsSpecialN_Phys
+
+/// #ftKb_SsSpecialAirNStart_Phys
+
+/// #ftKb_SsSpecialAirN_Phys
+
+/// #ftKb_SsSpecialNStart_Coll
+
+/// #ftKb_SsSpecialNHold_Coll
+
+/// #ftKb_SsSpecialNCancel_Coll
+
+/// #ftKb_SsSpecialN_Coll
+
+/// #ftKb_SsSpecialAirNStart_Coll
+
+/// #ftKb_SsSpecialAirN_Coll
+
+/// #ftKb_SpecialNFx_800FDC00
+
+/// #ftKb_SpecialNFx_800FDC70
+
+/// #fn_800FDCE0
+
+/// #ftKb_SpecialNFx_800FDD14
+
+/// #ftKb_SpecialNFx_800FDD4C
+
+/// #ftKb_SpecialNFx_800FDDF4
+
+/// #ftKb_SpecialNFx_800FDEB4
+
+/// #ftKb_SpecialNFx_800FDEE0
+
+/// #ftKb_SpecialNFx_800FDF30
+
+/// #fn_800FE0E0
+
+/// #ftKb_SpecialNFx_800FE100
+
+/// #ftKb_SpecialNFx_800FE240
+
+/// #ftKb_FxSpecialNStart_Anim
+
+/// #ftKb_FxSpecialNLoop_Anim
+
+/// #ftKb_FxSpecialNEnd_Anim
+
+/// #ftKb_FxSpecialAirNStart_Anim
+
+/// #ftKb_FxSpecialAirNLoop_Anim
+
+/// #ftKb_FxSpecialAirNEnd_Anim
+
+/// #ftKb_FxSpecialNStart_IASA
+
+/// #ftKb_FxSpecialNLoop_IASA
+
+/// #ftKb_FxSpecialNEnd_IASA
+
+/// #ftKb_FxSpecialAirNStart_IASA
+
+/// #ftKb_FxSpecialAirNLoop_IASA
+
+/// #ftKb_FxSpecialAirNEnd_IASA
+
+/// #ftKb_FxSpecialNStart_Phys
+
+/// #ftKb_FxSpecialNLoop_Phys
+
+/// #ftKb_FxSpecialNEnd_Phys
+
+/// #ftKb_FxSpecialAirNStart_Phys
+
+/// #ftKb_FxSpecialAirNLoop_Phys
+
+/// #ftKb_FxSpecialAirNEnd_Phys
+
+/// #ftKb_FxSpecialNStart_Coll
+
+/// #ftKb_FxSpecialNLoop_Coll
+
+/// #ftKb_FxSpecialNEnd_Coll
+
+/// #ftKb_FxSpecialAirNStart_Coll
+
+/// #ftKb_FxSpecialAirNLoop_Coll
+
+/// #ftKb_FxSpecialAirNEnd_Coll
+
 bool ftKb_SpecialNNs_800FEC78(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -3391,6 +4485,8 @@ void ftKb_SpecialNNs_800FECBC(HSD_GObj* gobj)
         }
     }
 }
+
+/// #ftKb_SpecialNNs_800FECE8
 
 void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
 {
@@ -3512,10 +4608,654 @@ void ftKb_NsSpecialNHold_Anim(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_NsSpecialNEnd_Anim
+
+/// #ftKb_NsSpecialAirNStart_Anim
+
+/// #ftKb_NsSpecialAirNHold_Anim
+
+/// #ftKb_NsSpecialAirNEnd_Anim
+
+/// #ftKb_NsSpecialNStart_IASA
+
+/// #ftKb_NsSpecialNHold_IASA
+
+/// #ftKb_NsSpecialNEnd_IASA
+
+/// #ftKb_NsSpecialAirNStart_IASA
+
+/// #ftKb_NsSpecialAirNHold_IASA
+
+/// #ftKb_NsSpecialAirNEnd_IASA
+
+/// #ftKb_NsSpecialNStart_Phys
+
+/// #ftKb_NsSpecialNHold_Phys
+
+/// #ftKb_NsSpecialNEnd_Phys
+
+/// #ftKb_NsSpecialAirNStart_Phys
+
+/// #ftKb_NsSpecialAirNHold_Phys
+
+/// #ftKb_NsSpecialAirNEnd_Phys
+
+/// #ftKb_NsSpecialNStart_Coll
+
+/// #ftKb_NsSpecialNHold_Coll
+
+/// #ftKb_NsSpecialNEnd_Coll
+
+/// #ftKb_NsSpecialAirNStart_Coll
+
+/// #ftKb_NsSpecialAirNHold_Coll
+
+/// #ftKb_NsSpecialAirNEnd_Coll
+
+/// #ftKb_SpecialNDk_800FF8EC
+
+/// #ftKb_SpecialNDk_800FFA10
+
+/// #ftKb_DkSpecialNStart_Anim
+
+/// #ftKb_DkSpecialNLoop_Anim
+
+/// #ftKb_DkSpecialNCancel_Anim
+
+/// #ftKb_DkSpecialN_Anim
+
+/// #ftKb_DkSpecialNFull_Anim
+
+/// #ftKb_DkSpecialAirNStart_Anim
+
+/// #ftKb_DkSpecialAirNLoop_Anim
+
+/// #ftKb_DkSpecialAirNCancel_Anim
+
+/// #ftKb_DkSpecialAirN_Anim
+
+/// #ftKb_DkSpecialAirNFull_Anim
+
+/// #ftKb_DkSpecialNStart_IASA
+
+/// #ftKb_DkSpecialNLoop_IASA
+
+/// #ftKb_DkSpecialNCancel_IASA
+
+/// #ftKb_DkSpecialN_IASA
+
+/// #ftKb_DkSpecialNFull_IASA
+
+/// #ftKb_DkSpecialAirNStart_IASA
+
+/// #ftKb_DkSpecialAirNLoop_IASA
+
+/// #ftKb_DkSpecialAirNCancel_IASA
+
+/// #ftKb_DkSpecialAirN_IASA
+
+/// #ftKb_DkSpecialAirNFull_IASA
+
+/// #ftKb_DkSpecialNStart_Phys
+
+/// #ftKb_DkSpecialNLoop_Phys
+
+/// #ftKb_DkSpecialNCancel_Phys
+
+/// #ftKb_DkSpecialN_Phys
+
+/// #ftKb_DkSpecialNFull_Phys
+
+/// #ftKb_DkSpecialAirNStart_Phys
+
+/// #ftKb_DkSpecialAirNLoop_Phys
+
+/// #ftKb_DkSpecialAirNCancel_Phys
+
+/// #ftKb_DkSpecialAirN_Phys
+
+/// #ftKb_DkSpecialAirNFull_Phys
+
+/// #ftKb_DkSpecialNStart_Coll
+
+/// #ftKb_DkSpecialNLoop_Coll
+
+/// #ftKb_DkSpecialNCancel_Coll
+
+/// #ftKb_DkSpecialN_Coll
+
+/// #ftKb_DkSpecialNFull_Coll
+
+/// #ftKb_DkSpecialAirNStart_Coll
+
+/// #ftKb_DkSpecialAirNLoop_Coll
+
+/// #ftKb_DkSpecialAirNCancel_Coll
+
+/// #ftKb_DkSpecialAirN_Coll
+
+/// #ftKb_DkSpecialAirNFull_Coll
+
+/// #ftKb_SpecialNPr_80100DE0
+
+/// #fn_80100E0C
+
+/// #fn_80100F60
+
+/// #ftKb_SpecialNPr_80100F94
+
+/// #ftKb_SpecialNPr_801010D4
+
+/// #ftKb_SpecialNPr_8010131C
+
+/// #ftKb_SpecialNPr_8010140C
+
+/// #ftKb_SpecialNPr_80101560
+
+/// #ftKb_SpecialNPr_80101618
+
+/// #ftKb_PrSpecialNStart_Anim
+
+/// #ftKb_PrSpecialNLoop_Anim
+
+/// #ftKb_PrSpecialNFull_Anim
+
+/// #ftKb_PrSpecialN1_Anim
+
+/// #ftKb_PrSpecialNTurn_Anim
+
+/// #ftKb_PrSpecialNEnd_Anim
+
+/// #ftKb_PrSpecialAirNStart_Anim
+
+/// #ftKb_PrSpecialAirNLoop_Anim
+
+/// #ftKb_PrSpecialAirNFull_Anim
+
+/// #ftKb_PrSpecialAirN_Anim
+
+/// #ftKb_PrSpecialN_Anim
+
+/// #ftKb_PrSpecialAirNEndR_Anim
+
+/// #ftKb_PrSpecialNHit_Anim
+
+/// #ftKb_PrSpecialNStart_IASA
+
+/// #ftKb_PrSpecialNLoop_IASA
+
+/// #ftKb_PrSpecialNFull_IASA
+
+/// #ftKb_PrSpecialN1_IASA
+
+/// #ftKb_PrSpecialNTurn_IASA
+
+/// #ftKb_PrSpecialNEnd_IASA
+
+/// #ftKb_PrSpecialAirNStart_IASA
+
+/// #ftKb_PrSpecialAirNLoop_IASA
+
+/// #ftKb_PrSpecialAirNFull_IASA
+
+/// #ftKb_PrSpecialAirN_IASA
+
+/// #ftKb_PrSpecialN_IASA
+
+/// #ftKb_PrSpecialAirNEndR_IASA
+
+/// #ftKb_PrSpecialNHit_IASA
+
+/// #ftKb_PrSpecialNStart_Phys
+
+/// #ftKb_PrSpecialNLoop_Phys
+
+/// #ftKb_PrSpecialNFull_Phys
+
+/// #ftKb_PrSpecialN1_Phys
+
+/// #ftKb_PrSpecialNTurn_Phys
+
+/// #ftKb_PrSpecialNEnd_Phys
+
+/// #ftKb_PrSpecialAirNStart_Phys
+
+/// #ftKb_PrSpecialAirNLoop_Phys
+
+/// #ftKb_PrSpecialAirNFull_Phys
+
+/// #ftKb_PrSpecialAirN_Phys
+
+/// #ftKb_PrSpecialN_Phys
+
+/// #ftKb_PrSpecialAirNEndR_Phys
+
+/// #ftKb_PrSpecialNHit_Phys
+
+/// #ftKb_PrSpecialNStart_Coll
+
+/// #ftKb_PrSpecialNLoop_Coll
+
+/// #ftKb_PrSpecialNFull_Coll
+
+/// #ftKb_PrSpecialN1_Coll
+
+/// #ftKb_PrSpecialNTurn_Coll
+
+/// #ftKb_PrSpecialNEnd_Coll
+
+/// #ftKb_PrSpecialAirNStart_Coll
+
+/// #ftKb_PrSpecialAirNLoop_Coll
+
+/// #ftKb_PrSpecialAirNFull_Coll
+
+/// #ftKb_PrSpecialAirN_Coll
+
+/// #ftKb_PrSpecialN_Coll
+
+/// #ftKb_PrSpecialAirNEndR_Coll
+
+/// #ftKb_PrSpecialNHit_Coll
+
+/// #fn_80105978
+
+/// #fn_80105A34
+
+/// #fn_80105AB0
+
+/// #ftKb_SpecialNZd_80105B2C
+
+/// #ftKb_SpecialNZd_80105BA8
+
+/// #ftKb_ZdSpecialN_Anim
+
+/// #ftKb_ZdSpecialAirN_Anim
+
+/// #ftKb_ZdSpecialN_IASA
+
+/// #ftKb_ZdSpecialAirN_IASA
+
+/// #ftKb_ZdSpecialN_Phys
+
+/// #ftKb_ZdSpecialAirN_Phys
+
+/// #ftKb_ZdSpecialN_Coll
+
+/// #ftKb_ZdSpecialAirN_Coll
+
+/// #ftKb_SpecialNSk_80105E8C
+
+/// #ftKb_SpecialNSk_80105F3C
+
+/// #fn_80105FEC
+
+/// #ftKb_SpecialNSk_80105FF0
+
+/// #ftKb_SpecialNSk_80106020
+
+/// #ftKb_SpecialNSk_8010603C
+
+/// #ftKb_SpecialNSk_8010612C
+
+/// #ftKb_SpecialNSk_801061E4
+
+/// #ftKb_SkSpecialNStart_Anim
+
+/// #ftKb_SkSpecialNLoop_Anim
+
+/// #ftKb_SkSpecialNCancel_Anim
+
+/// #ftKb_SkSpecialNEnd_Anim
+
+/// #ftKb_SkSpecialAirNStart_Anim
+
+/// #ftKb_SkSpecialAirNLoop_Anim
+
+/// #ftKb_SkSpecialAirNCancel_Anim
+
+/// #ftKb_SkSpecialAirNEnd_Anim
+
+/// #ftKb_SkSpecialNStart_IASA
+
+/// #ftKb_SkSpecialNLoop_IASA
+
+/// #ftKb_SkSpecialNCancel_IASA
+
+/// #ftKb_SkSpecialNEnd_IASA
+
+/// #ftKb_SkSpecialAirNStart_IASA
+
+/// #ftKb_SkSpecialAirNLoop_IASA
+
+/// #ftKb_SkSpecialAirNCancel_IASA
+
+/// #ftKb_SkSpecialAirNEnd_IASA
+
+/// #ftKb_SkSpecialNStart_Phys
+
+/// #ftKb_SkSpecialNLoop_Phys
+
+/// #ftKb_SkSpecialNCancel_Phys
+
+/// #ftKb_SkSpecialNEnd_Phys
+
+/// #ftKb_SkSpecialAirNStart_Phys
+
+/// #ftKb_SkSpecialAirNLoop_Phys
+
+/// #ftKb_SkSpecialAirNCancel_Phys
+
+/// #ftKb_SkSpecialAirNEnd_Phys
+
+/// #ftKb_SkSpecialNStart_Coll
+
+/// #ftKb_SkSpecialNLoop_Coll
+
+/// #ftKb_SkSpecialNCancel_Coll
+
+/// #ftKb_SkSpecialNEnd_Coll
+
+/// #ftKb_SkSpecialAirNStart_Coll
+
+/// #ftKb_SkSpecialAirNLoop_Coll
+
+/// #ftKb_SkSpecialAirNCancel_Coll
+
+/// #ftKb_SkSpecialAirNEnd_Coll
+
+/// #fn_80106DB0
+
+/// #ftKb_SpecialNMt_80106F44
+
+/// #ftKb_SpecialNMt_80106F9C
+
+/// #ftKb_SpecialNMt_80106FEC
+
+/// #ftKb_SpecialNMt_80107040
+
+/// #ftKb_SpecialNMt_8010709C
+
+/// #ftKb_SpecialNMt_80107130
+
+/// #ftKb_SpecialNMt_801071FC
+
+/// #ftKb_SpecialNMt_80107410
+
+/// #ftKb_SpecialNMt_80107568
+
+/// #ftKb_SpecialNMt_80107638
+
+/// #ftKb_MtSpecialNStart_Anim
+
+/// #ftKb_MtSpecialNLoop_Anim
+
+/// #ftKb_MtSpecialNLoopFull_Anim
+
+/// #ftKb_MtSpecialNCancel_Anim
+
+/// #ftKb_MtSpecialNEnd_Anim
+
+/// #ftKb_MtSpecialAirNStart_Anim
+
+/// #ftKb_MtSpecialAirNLoop_Anim
+
+/// #ftKb_MtSpecialAirNLoopFull_Anim
+
+/// #ftKb_MtSpecialAirNCancel_Anim
+
+/// #ftKb_MtSpecialAirNEnd_Anim
+
+void ftKb_MtSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_MtSpecialNLoop_IASA
+
+/// #ftKb_MtSpecialNLoopFull_IASA
+
+void ftKb_MtSpecialNCancel_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_MtSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_MtSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_MtSpecialAirNLoop_IASA
+
+/// #ftKb_MtSpecialAirNLoopFull_IASA
+
+void ftKb_MtSpecialAirNCancel_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_MtSpecialAirNEnd_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_MtSpecialNStart_Phys
+
+/// #ftKb_MtSpecialNLoop_Phys
+
+/// #ftKb_MtSpecialNLoopFull_Phys
+
+/// #ftKb_MtSpecialNCancel_Phys
+
+/// #ftKb_MtSpecialNEnd_Phys
+
+/// #ftKb_MtSpecialAirNStart_Phys
+
+/// #ftKb_MtSpecialAirNLoop_Phys
+
+/// #ftKb_MtSpecialAirNLoopFull_Phys
+
+/// #ftKb_MtSpecialAirNCancel_Phys
+
+/// #ftKb_MtSpecialAirNEnd_Phys
+
+/// #ftKb_MtSpecialNStart_Coll
+
+/// #ftKb_MtSpecialNLoop_Coll
+
+/// #ftKb_MtSpecialNLoopFull_Coll
+
+/// #ftKb_MtSpecialNCancel_Coll
+
+/// #ftKb_MtSpecialNEnd_Coll
+
+/// #ftKb_MtSpecialAirNStart_Coll
+
+/// #ftKb_MtSpecialAirNLoop_Coll
+
+/// #ftKb_MtSpecialAirNLoopFull_Coll
+
+/// #ftKb_MtSpecialAirNCancel_Coll
+
+/// #ftKb_MtSpecialAirNEnd_Coll
+
+/// #ftKb_SpecialNIc_80108CE8
+
+/// #ftKb_SpecialNIc_80108D04
+
+/// #ftKb_SpecialNIc_80108D64
+
+/// #ftKb_SpecialNIc_80108E14
+
+/// #ftKb_PpSpecialN_Anim
+
+/// #ftKb_PpSpecialAirN_Anim
+
+void ftKb_PpSpecialN_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PpSpecialAirN_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_PpSpecialN_Phys
+
+/// #ftKb_PpSpecialAirN_Phys
+
+/// #ftKb_PpSpecialN_Coll
+
+/// #ftKb_PpSpecialAirN_Coll
+
+/// #fn_801090D4
+
 Fighter_Part ftKb_SpecialNYs_80109238(ftKb_GObj* gobj)
 {
     return ftParts_8007500C(GET_FIGHTER(gobj), FtPart_TransN2);
 }
+
+/// #ftKb_SpecialNYs_80109260
+
+/// #ftKb_SpecialNYs_80109290
+
+/// #ftKb_SpecialNYs_8010929C
+
+/// #ftKb_SpecialNYs_801092AC
+
+/// #ftKb_SpecialNYs_801092BC
+
+/// #ftKb_SpecialNYs_801092CC
+
+/// #ftKb_SpecialNYs_801092DC
+
+/// #ftKb_SpecialNYs_801092F4
+
+/// #ftKb_SpecialNYs_8010930C
+
+/// #ftKb_SpecialNYs_80109324
+
+/// #ftKb_SpecialNYs_8010933C
+
+/// #ftKb_SpecialNYs_80109354
+
+/// #ftKb_SpecialNYs_80109380
+
+/// #ftKb_SpecialNYs_801093A0
+
+/// #ftKb_SpecialNYs_801093B4
+
+/// #ftKb_SpecialNYs_8010941C
+
+/// #ftKb_SpecialNYs_801094FC
+
+/// #fn_801095DC
+
+/// #fn_80109680
+
+/// #fn_80109714
+
+/// #fn_801097B8
+
+/// #fn_8010984C
+
+/// #fn_801098EC
+
+/// #fn_8010998C
+
+/// #fn_80109A08
+
+/// #fn_80109A84
+
+/// #fn_80109B00
+
+/// #fn_80109B7C
+
+/// #fn_80109BF8
+
+/// #fn_80109C74
+
+/// #fn_80109CF0
+
+/// #ftKb_YsSpecialN1_Anim
+
+/// #ftKb_YsSpecialAirNCapture2_Anim
+
+/// #ftKb_YsSpecialAirNCapture1_Anim
+
+/// #ftKb_YsSpecialNCapture1_Anim
+
+/// #ftKb_YsSpecialAirCapture2_Anim
+
+/// #ftKb_YsSpecialAirCapture1_Anim
+
+/// #ftKb_YsSpecialNCapture2_0_Anim
+
+/// #ftKb_YsSpecialNCapture2_1_Anim
+
+/// #ftKb_YsSpecialAirN2_1_Anim
+
+/// #ftKb_YsSpecialAirN2_0_Anim
+
+/// #ftKb_YsSpecialN1_Phys
+
+/// #ftKb_YsSpecialAirNCapture2_Phys
+
+/// #ftKb_YsSpecialAirNCapture1_Phys
+
+/// #ftKb_YsSpecialNCapture1_Phys
+
+/// #ftKb_YsSpecialAirCapture1_Phys
+
+/// #ftKb_YsSpecialAirCapture2_Phys
+
+/// #ftKb_YsSpecialNCapture2_0_Phys
+
+/// #ftKb_YsSpecialNCapture2_1_Phys
+
+/// #ftKb_YsSpecialAirN2_1_Phys
+
+/// #ftKb_YsSpecialAirN2_0_Phys
+
+/// #ftKb_YsSpecialN1_Coll
+
+/// #ftKb_YsSpecialAirNCapture2_Coll
+
+/// #ftKb_YsSpecialAirNCapture1_Coll
+
+/// #ftKb_YsSpecialNCapture1_Coll
+
+/// #ftKb_YsSpecialAirCapture2_Coll
+
+/// #ftKb_YsSpecialAirCapture1_Coll
+
+/// #ftKb_YsSpecialNCapture2_0_Coll
+
+/// #ftKb_YsSpecialNCapture2_1_Coll
+
+/// #ftKb_YsSpecialAirN2_1_Coll
+
+/// #ftKb_YsSpecialAirN2_0_Coll
+
+/// #ftKb_SpecialNYs_8010A8BC
+
+/// #fn_8010A930
+
+void ftCo_CaptureKirbyYoshi_Anim(ftKb_GObj* gobj) {}
+
+void ftCo_CaptureKirbyYoshi_IASA(ftKb_GObj* gobj) {}
+
+void ftCo_CaptureKirbyYoshi_Phys(ftKb_GObj* gobj) {}
+
+void ftCo_CaptureKirbyYoshi_Coll(ftKb_GObj* gobj) {}
+
+/// #ftKb_SpecialNYs_8010AA2C
+
+/// #fn_8010AA64
+
+/// #ftKb_SpecialNYs_8010AC78
+
+/// #ftCo_KirbyYoshiEgg_Anim
+
+void ftCo_KirbyYoshiEgg_IASA(ftKb_GObj* gobj) {}
+
+/// #ftCo_KirbyYoshiEgg_Phys
+
+/// #ftCo_KirbyYoshiEgg_Coll
+
+/// #fn_8010B124
+
+/// #fn_8010B148
+
+/// #fn_8010B16C
+
+/// #fn_8010B1D4
+
+/// #fn_8010B1F4
+
+/// #fn_8010B2E8
 
 void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 {
@@ -3570,6 +5310,10 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
     }
 }
 
+/// #ftKb_SpecialNMs_8010B4A0
+
+/// #ftKb_MsSpecialNStart_Anim
+
 void ftKb_MsSpecialAirNStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -3584,6 +5328,70 @@ void ftKb_MsSpecialAirNStart_Anim(HSD_GObj* gobj)
         }
     }
 }
+
+void ftKb_MsSpecialNStart_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_MsSpecialAirNStart_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_MsSpecialNStart_Phys
+
+/// #ftKb_MsSpecialAirNStart_Phys
+
+/// #ftKb_MsSpecialNStart_Coll
+
+/// #ftKb_MsSpecialAirNStart_Coll
+
+/// #ftKb_SpecialNMs_8010B868
+
+/// #ftKb_SpecialNMs_8010B8E0
+
+/// #ftKb_MsSpecialNLoop_Anim
+
+/// #ftKb_MsSpecialAirNLoop_Anim
+
+/// #ftKb_MsSpecialNLoop_IASA
+
+/// #ftKb_MsSpecialAirNLoop_IASA
+
+/// #ftKb_MsSpecialNLoop_Phys
+
+/// #ftKb_MsSpecialAirNLoop_Phys
+
+/// #ftKb_MsSpecialNLoop_Coll
+
+/// #ftKb_MsSpecialAirNLoop_Coll
+
+/// #ftKb_SpecialNMs_8010BB50
+
+/// #ftKb_SpecialNMs_8010BBC8
+
+/// #ftKb_SpecialNMs_8010BC40
+
+/// #ftKb_SpecialNMs_8010BC90
+
+/// #ftKb_MsSpecialNEnd_Anim
+
+/// #ftKb_MsSpecialAirNEnd_Anim
+
+void ftKb_MsSpecialNEnd_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_MsSpecialAirNEnd_IASA(ftKb_GObj* gobj) {}
+
+/// #ftKb_MsSpecialNEnd_Phys
+
+/// #ftKb_MsSpecialAirNEnd_Phys
+
+/// #ftKb_MsSpecialNEnd_Coll
+
+/// #ftKb_MsSpecialAirNEnd_Coll
+
+/// #ftKb_SpecialNPe_8010BF90
+
+/// #ftKb_SpecialNPe_8010C06C
+
+/// #ftKb_SpecialNPe_8010C148
+
+/// #ftKb_SpecialNPe_8010C1E8
 
 void fn_8010C288(HSD_GObj* gobj)
 {
@@ -3625,6 +5433,8 @@ void ftKb_SpecialNPe_8010C3C0(HSD_GObj* gobj)
     ftKb_SpecialNPe_8010C47C(gobj);
     fp->fv.kb.xD0 = NULL;
 }
+
+/// #ftKb_SpecialNPe_8010C3F4
 
 void fn_8010C44C(HSD_GObj* gobj)
 {
@@ -3718,6 +5528,10 @@ void ftKb_PeSpecialAirLw_Anim(HSD_GObj* gobj)
 {
     doPeAnim(gobj, ftCo_800CC730);
 }
+
+void ftKb_PeSpecialLw_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PeSpecialAirLw_IASA(ftKb_GObj* gobj) {}
 
 void ftKb_PeSpecialLw_Phys(HSD_GObj* gobj)
 {
@@ -3856,6 +5670,10 @@ void ftKb_PeSpecialAirLwHit_Anim(HSD_GObj* gobj)
     doPeHitAnim(gobj, ftCo_800CC730);
 }
 
+void ftKb_PeSpecialLwHit_IASA(ftKb_GObj* gobj) {}
+
+void ftKb_PeSpecialAirLwHit_IASA(ftKb_GObj* gobj) {}
+
 void ftKb_PeSpecialLwHit_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
@@ -3944,6 +5762,22 @@ void fn_8010CD88(HSD_GObj* gobj)
     ftKb_SpecialNGw_8010CD44(gobj);
 }
 
+/// #fn_8010CE5C
+
+/// #fn_8010CFB0
+
+/// #ftKb_SpecialNGw_8010D074
+
+/// #ftKb_SpecialNGw_8010D0A8
+
+/// #fn_8010D100
+
+/// #ftKb_SpecialNGw_8010D130
+
+/// #ftKb_SpecialNGw_8010D160
+
+/// #ftKb_SpecialNGw_8010D188
+
 inline void setGwVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -3963,3 +5797,27 @@ void ftKb_SpecialNGw_8010D204(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     setGwVars(gobj);
 }
+
+/// #ftKb_GwSpecialN_Anim
+
+/// #ftKb_GwSpecialAirN_Anim
+
+/// #ftKb_GwSpecialN_IASA
+
+/// #ftKb_GwSpecialAirN_IASA
+
+/// #ftKb_GwSpecialN_Phys
+
+/// #ftKb_GwSpecialAirN_Phys
+
+/// #ftKb_GwSpecialN_Coll
+
+/// #ftKb_GwSpecialAirN_Coll
+
+/// #ftKb_SpecialNGw_8010D580
+
+/// #ftKb_SpecialNGw_8010D5F0
+
+/// #ftKb_SpecialNGw_8010D660
+
+/// #ftKb_SpecialNGw_8010D6D0

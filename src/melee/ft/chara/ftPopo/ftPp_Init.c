@@ -13,7 +13,7 @@
 #include "ft/types.h"
 #include "ftNana/ftNn_Init.h"
 #include "it/it_26B1.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itclimbersice.h"
 
 #include <baselib/gobj.h>
 

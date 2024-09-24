@@ -4,6 +4,7 @@
 
 #include "it_266F.h"
 
+#include "it/items/itwhitebea.h"
 #include "it/types.h"
 #include "items/it_27CF.h"
 #include "items/it_2ADA.h"

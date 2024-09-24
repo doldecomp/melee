@@ -28,11 +28,11 @@
 #include "gm/gm_1601.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/items/it_27CF.h"
+#include "it/items/it_2E5A.h"
 #include "it/items/itfflowerflame.h"
+#include "it/items/itrabbitc.h"
 #include "it/items/itsword.h"
 #include "lb/lb_00F9.h"
-#include "lb/lbrefract.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
 #include "pl/player.h"
@@ -40,6 +40,7 @@
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
+#include <trigf.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

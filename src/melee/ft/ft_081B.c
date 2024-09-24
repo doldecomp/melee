@@ -202,7 +202,11 @@ void ft_80085134(Fighter_GObj* gobj)
 
 /// #ft_80085154
 
-/// #ft_800851C0
+void ft_800851C0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->self_vel.y = fp->x6A4_transNOffset.y;
+}
 
 /// #ft_800851D0
 

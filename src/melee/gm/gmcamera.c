@@ -207,3 +207,51 @@ void* gmCamera_801A2334(int arg0, float argA, float argB)
     HSD_SisLib_803A6368(temp_r3, var_r30);
     return temp_r3;
 }
+
+/// #gmCamera_801A253C
+
+/// #gmCamera_801A25C8
+
+/// #gmCamera_801A2640
+
+/// #gmCamera_801A2650
+
+/// #gmCamera_801A26C0
+
+/// #gmCamera_801A2798
+
+/// #gmCamera_801A2800
+
+/// #gmCamera_801A28AC
+
+/// #gmCamera_801A292C
+
+/// #gmCamera_801A2AAC
+
+/// #gmCamera_801A2BB0
+
+/// #gmCamera_801A2BF0
+
+/// #gmCamera_801A2D44
+
+/// #gmCamera_801A2FBC
+
+/// #gmCamera_801A2FFC
+
+/// #gmCamera_801A3048
+
+/// #gmCamera_801A3098
+
+/// #gmCamera_801A30E4
+
+/// #fn_801A31D8
+
+/// #gmCamera_801A31FC
+
+/// #gmCamera_801A33BC
+
+/// #gmCamera_801A34FC
+
+/// #gmCamera_801A3634
+
+void gmCamera_801A367C(void) {}

@@ -24,10 +24,11 @@
 #include "ftMewtwo/ftMt_Init.h"
 #include "ftMewtwo/types.h"
 #include "it/items/it_27CF.h"
+#include "it/items/itmewtwoshadowball.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbrefract.h"
 
 #include <common_structs.h>
+#include <trigf.h>
 
 // SpecialN/SpecialAirN
 

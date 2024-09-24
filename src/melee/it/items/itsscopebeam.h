@@ -6,6 +6,11 @@
 
 #include "it/items/types.h"
 
+/* 298DEC */ UNK_RET it_80298DEC(UNK_PARAMS);
+/* 298ED0 */ UNK_RET it_80298ED0(UNK_PARAMS);
+/* 2990CC */ UNK_RET it_802990CC(UNK_PARAMS);
+/* 299148 */ UNK_RET it_80299148(UNK_PARAMS);
+/* 29914C */ UNK_RET it_8029914C(UNK_PARAMS);
 /* 299360 */ bool it_80299360(Item_GObj*);
 /* 299368 */ bool it_80299368(Item_GObj*);
 /* 299370 */ bool it_80299370(Item_GObj*);

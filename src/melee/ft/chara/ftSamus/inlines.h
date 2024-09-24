@@ -1,20 +1,18 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_INLINES_H
+#define MELEE_FT_CHARA_FTSAMUS_INLINES_H
+
 #include "it/forward.h"
 #include <baselib/forward.h>
-
-#include "ftSamus/types.h"
-#include "it/items/it_27CF.h"
-
-#include <stddef.h>
-#include <baselib/gobj.h>
-
-#define MELEE_FT_CHARA_FTSAMUS_INLINES_H
 
 #include "ef/eflib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftSamus/ftSs_Init.h"
-#include "it/items/it_27CF.h"
+#include "ftSamus/types.h"
+#include "it/items/itsamuschargeshot.h"
+
+#include <stddef.h>
+#include <baselib/gobj.h>
 
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {

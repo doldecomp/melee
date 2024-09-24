@@ -7,6 +7,7 @@
 
 #include <baselib/archive.h>
 #include <baselib/debug.h>
+#include <baselib/particle.h>
 #include <baselib/psstructs.h>
 
 extern StageInfo stage_info;
