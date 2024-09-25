@@ -2027,22 +2027,19 @@ void Item_8026A8EC(Item_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-// These param names do no match up with those in function declaration
-// (Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
-void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx,
-                   Fighter_Part pickup_sfx)
+void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
 {
     u8 _[16];
 
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
 
     it_80273168(gobj);
-    it_802742F4(gobj, pickup_gfx, pickup_sfx);
+    it_802742F4(gobj, owner_gobj, part);
     RunCallback(gobj, item_data->xB8_itemLogicTable->picked_up);
     Item_8026B074(item_data);
 }
 
-void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2)
+void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, f32 arg2)
 {
     u8 _[8];
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -2219,7 +2216,7 @@ static void Item_8026B0B4(HSD_GObj* gobj)
 }
 
 /// Check if item is grabbable
-bool Item_IsGrabbable(HSD_GObj* gobj)
+bool Item_IsGrabbable(Item_GObj* gobj)
 {
     Item* temp_item;
 

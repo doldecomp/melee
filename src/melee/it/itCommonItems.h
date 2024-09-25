@@ -16,7 +16,7 @@ typedef struct {
 } ItCapsuleVars;
 
 typedef struct {
-    bool x0; // [1 or true]
+    bool x0; // [true]
     s32 x4;  // [8]
 } ItCapsuleAttr;
 
@@ -152,8 +152,8 @@ typedef struct ItLGunVars {
 } ItLGunVars;
 
 typedef struct ItLGunAttr {
-    int x0;   // [16]
-    Vec3 pos; // [0, 2.128, 6.668]
+    int max_ammo; // [16]
+    Vec3 pos;     // [0, 2.128, 6.668]
 } ItLGunAttr;
 
 typedef struct ItLGunRayVars {

@@ -1632,7 +1632,7 @@ void ftCommon_8007FA00(HSD_GObj* gobj)
     it_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
 }
 
-void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
+void ftCommon_8007FA58(ftCo_GObj* gobj, Item_GObj* arg1)
 {
     Fighter* fp = gobj->user_data;
     Vec3 vec;

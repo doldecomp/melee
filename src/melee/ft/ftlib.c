@@ -781,7 +781,7 @@ void ftLib_80087140(HSD_GObj* gobj)
     }
 }
 
-void ftLib_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
+void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);

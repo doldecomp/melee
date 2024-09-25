@@ -2509,7 +2509,7 @@ melee/it/items/itscball.c:
 melee/it/items/itrabbitc.c:
 	.text       start:0x80294DA0 end:0x802953C8
 	.data       start:0x803F6270 end:0x803F62C0
-	.sdata      start:0x804D52E0 end:0x804D52F0
+	.sdata      start:0x804D52E0 end:0x804D52ED
 	.sdata2     start:0x804DCB58 end:0x804DCB60
 
 melee/it/items/itmetalb.c:

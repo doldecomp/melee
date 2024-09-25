@@ -43,7 +43,7 @@ void it_8028E738(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     ItLGunAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xD4C = item_spec_attr->x0;
+    ip->xD4C = item_spec_attr->max_ammo;
     ip->xDD4_itemVar.lgun.timer = 0;
     it_8028E860(gobj);
 }

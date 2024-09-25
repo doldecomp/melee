@@ -83,7 +83,7 @@ union ftCommon_MotionVars {
         /* fp+236C */ float x2C;
     } guard;
     struct {
-        /* fp+2340 */ bool x0;
+        /* fp+2340 */ bool x0; // itemget action is heavy type?
     } itemget;
     struct {
         /* fp+2340 */ float facing_dir;
