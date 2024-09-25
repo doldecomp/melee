@@ -241,9 +241,9 @@ void it_80285314(Item_GObj* gobj)
 
 void it_80285338(Item_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     Item* ip = GET_ITEM(gobj);
     itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
     it_8026B390(gobj);
     ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = attrs->xC;

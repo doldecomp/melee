@@ -112,7 +112,10 @@ jobs:
           'link')
             config_args="--map --require-protos $config_args"
             run_configure
-            ninja || ninja diff
+            set +e
+            ninja
+            set -e
+            ninja diff
           ;;
           'diff')
             root='build/${{matrix.version}}'

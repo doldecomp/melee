@@ -14,28 +14,28 @@
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 
-/* 2D8894 */ void it_802D8894(Item_GObj*);
-/* 2D88CC */ int it_802D88CC(Item_GObj*);
-/* 2D88D4 */ void it_802D88D4(Item_GObj*);
-/* 2D8910 */ int it_802D8910(Item_GObj*);
-/* 2D8918 */ void it_802D8918(Item_GObj*);
-/* 2D8984 */ int it_802D8984(Item_GObj*);
-/* 2D8A54 */ void it_802D8A54(Item_GObj*);
-/* 2D8CC8 */ int it_802D8CC8(Item_GObj*);
-/* 2D8DB4 */ int it_802D8DB4(Item_GObj*);
-/* 2D8DBC */ void it_802D8DBC(Item_GObj*);
-/* 2D8E44 */ int it_802D8E44(Item_GObj*);
-/* 2D8E4C */ int it_802D8E4C(Item_GObj*);
-/* 2D8E54 */ void it_802D8E54(Item_GObj*);
-/* 2D8EA4 */ int it_802D8EA4(Item_GObj*);
-/* 2D9168 */ void it_802D9168(Item_GObj*);
-/* 2D9274 */ int it_802D9274(Item_GObj*);
-/* 2D9384 */ void it_802D9384(Item_GObj*);
-/* 2D95F4 */ int it_802D95F4(Item_GObj*);
-/* 2D96B0 */ void it_802D96B0(HSD_GObj* gobj);
-/* 2D9714 */ void it_802D9714(Item_GObj*);
-/* 2D98AC */ void it_802D98AC(Item_GObj*);
-/* 2D98C4 */ void it_802D98C4(HSD_JObj*, Item*);
+/* 2D8894 */ static void it_802D8894(Item_GObj*);
+/* 2D88CC */ static int it_802D88CC(Item_GObj*);
+/* 2D88D4 */ static void it_802D88D4(Item_GObj*);
+/* 2D8910 */ static int it_802D8910(Item_GObj*);
+/* 2D8918 */ static void it_802D8918(Item_GObj*);
+/* 2D8984 */ static int it_802D8984(Item_GObj*);
+/* 2D8A54 */ static void it_802D8A54(Item_GObj*);
+/* 2D8CC8 */ static int it_802D8CC8(Item_GObj*);
+/* 2D8DB4 */ static int it_802D8DB4(Item_GObj*);
+/* 2D8DBC */ static void it_802D8DBC(Item_GObj*);
+/* 2D8E44 */ static int it_802D8E44(Item_GObj*);
+/* 2D8E4C */ static int it_802D8E4C(Item_GObj*);
+/* 2D8E54 */ static void it_802D8E54(Item_GObj*);
+/* 2D8EA4 */ static int it_802D8EA4(Item_GObj*);
+/* 2D9168 */ static void it_802D9168(Item_GObj*);
+/* 2D9274 */ static int it_802D9274(Item_GObj*);
+/* 2D9384 */ static void it_802D9384(Item_GObj*);
+/* 2D95F4 */ static int it_802D95F4(Item_GObj*);
+/* 2D96B0 */ static void it_802D96B0(HSD_GObj* gobj);
+/* 2D9714 */ static void it_802D9714(Item_GObj*);
+/* 2D98AC */ static void it_802D98AC(Item_GObj*);
+/* 2D98C4 */ static void it_802D98C4(HSD_JObj*, Item*);
 
 ItemStateTable it_803F83F0[] = { { -1, it_802D88CC, it_802D88D4, it_802D8910 },
                                  { 0, it_802D8984, it_802D8A54, it_802D8CC8 },
