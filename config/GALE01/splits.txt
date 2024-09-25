@@ -177,7 +177,7 @@ melee/pl/player.c:
 
 melee/pl/plstale.c:
 	.text       start:0x8003715C end:0x80037590
-	.sbss       start:0x804D6478 end:0x804D6480
+	.sbss       start:0x804D6478 end:0x804D647A
 
 melee/pl/plattack.c:
 	.text       start:0x80037590 end:0x80037B2C
@@ -455,8 +455,8 @@ melee/ft/chara/ftCommon/ftCo_FallSpecial.c:
 
 melee/ft/chara/ftCommon/ftCo_Lift.c:
 	.text       start:0x80096D9C end:0x80097570
-	.data       start:0x803C56D8 end:0x803C5700
-	.sdata      start:0x804D3B08 end:0x804D3B18
+	.data       start:0x803C56D8 end:0x803C56FD
+	.sdata      start:0x804D3B08 end:0x804D3B15
 	.sdata2     start:0x804D85D8 end:0x804D85F8
 
 melee/ft/chara/ftCommon/ftCo_DownBound.c:
@@ -619,7 +619,7 @@ melee/ft/chara/ftCommon/ftCo_MissFoot.c:
 melee/ft/chara/ftCommon/ftCo_09F4.c:
 	.text       start:0x8009F480 end:0x8009F834
 	.data       start:0x803C5780 end:0x803C57B0
-	.sdata      start:0x804D3B48 end:0x804D3B68
+	.sdata      start:0x804D3B48 end:0x804D3B65
 	.sbss       start:0x804D6568 end:0x804D6570
 	.sdata2     start:0x804D87B0 end:0x804D87C0
 
@@ -2237,7 +2237,7 @@ melee/mn/mnlanguage.c:
 
 melee/mn/mnhyaku.c:
 	.text       start:0x8024C68C end:0x8024CE74
-	.data       start:0x803EF668 end:0x803EF740
+	.data       start:0x803EF668 end:0x803EF73D
 	.bss        start:0x804A08E8 end:0x804A08F8
 	.sdata      start:0x804D5020 end:0x804D5028
 	.sbss       start:0x804D6C58 end:0x804D6C60
@@ -2387,8 +2387,8 @@ melee/it/items/itbat.c:
 melee/it/items/itsword.c:
 	.text       start:0x80284D54 end:0x80286088
 	.data       start:0x803F5800 end:0x803F5850
-	.sdata      start:0x804D5220 end:0x804D5230
-	.sdata2     start:0x804DC8D0 end:0x804DC900
+	.sdata      start:0x804D5220 end:0x804D522D
+	.sdata2     start:0x804DC8D0 end:0x804DC8FC
 
 melee/it/items/itbox.c:
 	.text       start:0x80286088 end:0x80287458
@@ -2575,9 +2575,9 @@ melee/it/items/itlipstickspore.c:
 
 melee/it/items/itfflowerflame.c:
 	.text       start:0x8029A748 end:0x8029B0C8
-	.data       start:0x803F66C8 end:0x803F6728
-	.sdata      start:0x804D5340 end:0x804D5350
-	.sdata2     start:0x804DCC80 end:0x804DCC88
+	.data       start:0x803F66C8 end:0x803F6722
+	.sdata      start:0x804D5340 end:0x804D534D
+	.sdata2     start:0x804DCC80 end:0x804DCC84
 
 melee/it/items/itevyoshiegg.c:
 	.text       start:0x8029B0C8 end:0x8029B6F8
@@ -2694,7 +2694,7 @@ melee/it/items/itfoxblaster.c:
 melee/it/items/itlinkbow.c:
 	.text       start:0x802AF1A4 end:0x802AF940
 	.data       start:0x803F6E98 end:0x803F6F40
-	.sdata      start:0x804D5438 end:0x804D5448
+	.sdata      start:0x804D5438 end:0x804D5445
 	.sdata2     start:0x804DCF40 end:0x804DCF48
 
 melee/it/items/itnesspkflushexplode.c:
@@ -3027,7 +3027,7 @@ melee/it/items/itkireihana.c:
 
 melee/it/items/itmarumine.c:
 	.text       start:0x802D09D0 end:0x802D1438
-	.rodata     start:0x803B86C8 end:0x803B86D8
+	.rodata     start:0x803B86C8 end:0x803B86D4
 	.data       start:0x803F7E78 end:0x803F7EE8
 	.sdata2     start:0x804DD440 end:0x804DD450
 
@@ -3109,9 +3109,9 @@ melee/it/items/itmato.c:
 
 melee/it/items/itheiho.c:
 	.text       start:0x802D8618 end:0x802D9A2C
-	.data       start:0x803F83F0 end:0x803F8468
-	.sdata      start:0x804D5640 end:0x804D5650
-	.sdata2     start:0x804DD5B8 end:0x804DD600
+	.data       start:0x803F83F0 end:0x803F8465
+	.sdata      start:0x804D5640 end:0x804D564D
+	.sdata2     start:0x804DD5B8 end:0x804DD5FC
 
 melee/it/items/itlikelike.c:
 	.text       start:0x802D9A2C end:0x802DC69C
@@ -3255,9 +3255,9 @@ melee/it/items/itcrazyhandbomb.c:
 
 melee/it/items/itcoin.c:
 	.text       start:0x802F13B4 end:0x802F23AC
-	.data       start:0x803F93C8 end:0x803F9450
-	.sdata      start:0x804D5758 end:0x804D5768
-	.sdata2     start:0x804DD9B8 end:0x804DD9D8
+	.data       start:0x803F93C8 end:0x803F944D
+	.sdata      start:0x804D5758 end:0x804D5765
+	.sdata2     start:0x804DD9B8 end:0x804DD9D4
 
 melee/it/items/itkirby_2F23.c:
 	.text       start:0x802F23AC end:0x802F28C8
@@ -3590,7 +3590,7 @@ dolphin/OdemuExi2/DebuggerDriver.c:
 
 dolphin/hio/hio.c:
 	.text       start:0x8032BA6C end:0x8032C74C
-	.sdata      start:0x804D5B68 end:0x804D5B70
+	.sdata      start:0x804D5B68 end:0x804D5B6C
 	.sbss       start:0x804D70A0 end:0x804D70B0
 
 dolphin/mcc/mcc.c:
