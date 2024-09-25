@@ -3,6 +3,7 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 /* 07C930 */ void ftCommon_8007C930(ftCo_Fighter*, float);
@@ -102,7 +103,7 @@
 /* 07F948 */ void ftCommon_8007F948(ftCo_GObj*, ftCo_GObj*, s32);
 /* 07F9B4 */ void ftCommon_8007F9B4(ftCo_GObj*);
 /* 07FA00 */ void ftCommon_8007FA00(ftCo_GObj*);
-/* 07FA58 */ void ftCommon_8007FA58(ftCo_GObj*, ftCo_GObj*);
+/* 07FA58 */ void ftCommon_8007FA58(ftCo_GObj*, Item_GObj*);
 /* 07FC7C */ void ftCommon_8007FC7C(ftCo_GObj*, float);
 /* 07FDA0 */ void ftCommon_8007FDA0(ftCo_GObj*);
 /* 07FE84 */ void ftCommon_8007FE84(ftCo_GObj*, ftCo_GObj*, s32, float);

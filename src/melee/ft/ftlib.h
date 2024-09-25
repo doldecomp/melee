@@ -72,7 +72,7 @@
 /* 0870F0 */ void ftLib_800870F0(HSD_GObj*, s32);
 /* 087120 */ s32 ftLib_80087120(HSD_GObj*);
 /* 087140 */ void ftLib_80087140(HSD_GObj*);
-/* 0871A8 */ void ftLib_800871A8(HSD_GObj*, HSD_GObj*);
+/* 0871A8 */ void ftLib_800871A8(Fighter_GObj*, Item_GObj*);
 /* 087284 */ bool ftLib_80087284(HSD_GObj*);
 /* 0872A4 */ FighterKind ftLib_800872A4(HSD_GObj*);
 /* 0872B0 */ void* ftLib_800872B0(HSD_GObj*);

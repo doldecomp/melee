@@ -39,7 +39,7 @@ struct ItemStateDesc;
 /* 26A8EC */ void Item_8026A8EC(Item_GObj* gobj);
 /* 26AB54 */ void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* owner_gobj,
                                 Fighter_Part part);
-/* 26ABD8 */ void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, float);
+/* 26ABD8 */ void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, float);
 /* 26AC74 */ void Item_8026AC74(HSD_GObj* gobj, Vec3*, Vec3*, float);
 /* 26AD20 */ void Item_8026AD20(HSD_GObj* gobj, Vec3*, Vec3*, float);
 /* 26ADC0 */ void Item_8026ADC0(HSD_GObj* gobj);
@@ -54,7 +54,7 @@ struct ItemStateDesc;
                                 int volume);
 /* 26B034 */ void Item_8026B034(Item* item_data);
 /* 26B074 */ void Item_8026B074(Item* item_data);
-/* 26B1A4 */ bool Item_IsGrabbable(HSD_GObj* gobj);
+/* 26B1A4 */ bool Item_IsGrabbable(Item_GObj* gobj);
 /* 4A0C38 */ extern HSD_ObjAllocData Item_804A0C38;
 /* 4A0C64 */ extern HSD_ObjAllocUnk Item_804A0C64;
 /* 4A0CCC */ extern HSD_ObjAllocUnk2 Item_804A0CCC;

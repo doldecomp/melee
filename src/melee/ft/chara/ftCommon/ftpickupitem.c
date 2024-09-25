@@ -74,7 +74,7 @@ bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
     return false;
 }
 
-HSD_GObj* ftpickupitem_800942A0(HSD_GObj* gobj, u32 flags)
+Item_GObj* ftpickupitem_800942A0(ftCo_GObj* gobj, u32 flags)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     itPickup* pickup = &fp->x294_itPickup;
@@ -85,8 +85,8 @@ HSD_GObj* ftpickupitem_800942A0(HSD_GObj* gobj, u32 flags)
     }
     {
         float min_dist_sq = 30000;
-        HSD_GObj* cur = HSD_GObj_Entities->items;
-        HSD_GObj* result = NULL;
+        Item_GObj* cur = HSD_GObj_Entities->items;
+        Item_GObj* result = NULL;
         while (cur != NULL) {
             if (Item_IsGrabbable(cur)) {
                 enum_t unk_enum = it_8026B2B4(cur);
@@ -96,8 +96,10 @@ HSD_GObj* ftpickupitem_800942A0(HSD_GObj* gobj, u32 flags)
                     if ((unk_enum == 0 && flags & (1 << 0)) ||
                         (unk_enum == 1 && flags & (1 << 1)))
                     {
-                        Vec4* vec;
                         Vec3 it_pos;
+                        Vec4* vec;
+                        PAD_STACK(4);
+
                         it_8026B344(cur, &it_pos);
                         {
                             float x_range = it_8026B378(cur);
@@ -134,7 +136,7 @@ HSD_GObj* ftpickupitem_800942A0(HSD_GObj* gobj, u32 flags)
     }
 }
 
-bool ftpickupitem_8009447C(HSD_GObj* gobj, HSD_GObj* item_gobj)
+bool ftpickupitem_8009447C(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (item_gobj == NULL) {
@@ -189,7 +191,7 @@ block_35:
     return false;
 }
 
-void ftpickupitem_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
+void ftpickupitem_80094694(ftCo_GObj* gobj, FtMotionId msid, bool loop)
 {
     ftCo_Fighter* fp = gobj->user_data;
     {
@@ -221,11 +223,11 @@ void ftpickupitem_80094694(HSD_GObj* gobj, FtMotionId msid, bool loop)
     }
 }
 
-bool ftpickupitem_80094790(HSD_GObj* gobj)
+bool ftpickupitem_80094790(ftCo_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (GET_FIGHTER(gobj)->x1978 == NULL) {
-        HSD_GObj* unk_gobj = ftpickupitem_800942A0(gobj, 3);
+        Item_GObj* unk_gobj = ftpickupitem_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
             if (!it_8026B2B4(unk_gobj)) {
                 ftpickupitem_80094694(gobj, 92, 0);
@@ -238,7 +240,7 @@ bool ftpickupitem_80094790(HSD_GObj* gobj)
     return false;
 }
 
-void ftpickupitem_80094818(HSD_GObj* gobj, int arg1)
+void ftpickupitem_80094818(ftCo_GObj* gobj, int arg1)
 {
     u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
@@ -306,7 +308,7 @@ static inline enum_t inlineA0(ftCo_Fighter* fp)
     return unk_enum;
 }
 
-void ftpickupitem_Anim(HSD_GObj* gobj)
+void ftpickupitem_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (ftCheckThrowB3(fp)) {
@@ -335,19 +337,19 @@ void ftpickupitem_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftpickupitem_IASA(HSD_GObj* gobj) {}
+void ftpickupitem_IASA(ftCo_GObj* gobj) {}
 
-void ftpickupitem_Phys(HSD_GObj* gobj)
+void ftpickupitem_Phys(ftCo_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftpickupitem_Coll(HSD_GObj* gobj)
+void ftpickupitem_Coll(ftCo_GObj* gobj)
 {
     ft_800841B8(gobj, ftpickupitem_80094D90);
 }
 
-void ftpickupitem_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
+void ftpickupitem_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     Vec3 vec;
     u8 _[4] = { 0 };
@@ -403,7 +405,7 @@ void ftpickupitem_80094B6C(HSD_GObj* gobj, HSD_GObj* item_gobj)
     }
 }
 
-void ftpickupitem_80094D90(HSD_GObj* gobj)
+void ftpickupitem_80094D90(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     ftCo_8009750C(gobj);
@@ -417,7 +419,7 @@ void ftpickupitem_80094D90(HSD_GObj* gobj)
     ftCo_800CC730(gobj);
 }
 
-void ftpickupitem_80094DF8(HSD_GObj* gobj)
+void ftpickupitem_80094DF8(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
