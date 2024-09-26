@@ -205,4 +205,9 @@ void lbAudioAx_80025098(s32 arg0)
 
 /// #lbAudioAx_80028B6C
 
-/// #lbAudioAx_80028B90
+static s32 lbl_804D38CC = 0x7F;
+
+void lbAudioAx_80028B90(void)
+{
+    lbl_804D38CC = 0x7F;
+}

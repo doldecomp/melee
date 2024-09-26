@@ -2,12 +2,13 @@
 #define GALE01_2C3AF0
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
-/* 2C3AF0 */ HSD_GObj* it_802C3AF0(Item_GObj*);
+/* 2C3AF0 */ Fighter_GObj* it_802C3AF0(Item_GObj*);
 /* 2C3AFC */ UNK_RET it_802C3AFC(UNK_PARAMS);
 /* 2C3BAC */ HSD_GObj* it_802C3BAC(Item_GObj*, Vec3*, float facing_dir, float);
 /* 2C3CBC */ void it_802C3CBC(Item_GObj*);

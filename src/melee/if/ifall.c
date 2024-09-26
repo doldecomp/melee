@@ -20,9 +20,15 @@ UNK_T ifAll_802F3690(void)
     return &ifAll_804D6D5C;
 }
 
-/// #ifAll_802F3698
+void ifAll_802F3698(void)
+{
+    ifAll_804D6D58 = 1;
+}
 
-/// #ifAll_802F36A4
+void ifAll_802F36A4(void)
+{
+    ifAll_804D6D58 = 0;
+}
 
 u8 ifAll_802F36B0(void)
 {

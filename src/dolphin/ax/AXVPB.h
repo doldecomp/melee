@@ -1,12 +1,10 @@
-#ifndef DOLPHIN_AX_AXVPB_H
-#define DOLPHIN_AX_AXVPB_H
+#ifndef GALE01_35A250
+#define GALE01_35A250
 
 #include <platform.h>
 
+#include <placeholder.h>
 #include <dolphin/ax.h>
-
-void __AXDumpVPB(AXVPB* pvpb);
-void __AXVPBQuit(void);
 
 /* 35A250 */ u32 __AXGetNumVoices(void);
 /* 35A258 */ void __AXServiceVPB(AXVPB* pvpb);

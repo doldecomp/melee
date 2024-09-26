@@ -1278,7 +1278,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     IntVec3 ivec1;
     int* sp40;
-    M2C_UNK sp38;
+    UNK_T sp38;
     IntVec3 ivec0;
     Vec3 vec1;
     Vec3 vec0;
@@ -1330,7 +1330,7 @@ void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
     u8 _[24] = { 0 };
     IntVec3 ivec1; /* compiler-managed */
     int* sp40;
-    M2C_UNK sp38;
+    UNK_T sp38;
     IntVec3 ivec0;
     ftCo_Fighter* fp = gobj->user_data;
     Vec3 vec1;

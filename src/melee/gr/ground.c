@@ -30,6 +30,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
+#include "ty/toy.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>

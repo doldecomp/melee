@@ -14,7 +14,7 @@ typedef struct itPKThunderAttributes {
     float x10_PKTHUNDER_TURN_RADIUS;
 } itPKThunderAttributes;
 
-typedef struct PKThunderVars {
+typedef struct itPKThunder_ItemVars {
     HSD_GObj* xDD4[6];
     Vec3 xDEC;
     Vec3 xDFC;
@@ -56,6 +56,6 @@ typedef struct PKThunderVars {
     HSD_GObj* xF00;
     HSD_GObj* xF04;
     HSD_GObj* xF08;
-} PKThunderVars;
+} itPKThunder_ItemVars;
 
 #endif

@@ -1409,7 +1409,8 @@ struct Fighter {
     /* fp+206C */ u16 x206C_attack_instance;
     /* fp+206E */ short x206E;
     /* fp+2070 */ union Struct2070 x2070;
-    /* fp+2074 */ u8 filler_x2074[0x208C - 0x2074];
+    /* fp+2074 */ int x2074;
+    /* fp+2074 */ u8 _2078[0x208C - 0x2078];
     /* fp+208C */ s32 x208C;
     /* fp+2090 */ u16 x2090;
     /* fp+2092 */ u16 x2092;

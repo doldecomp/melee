@@ -1,9 +1,11 @@
-#include <platform.h>
-#include "it/forward.h"
+#include "itpikachuthunder.h"
 
-#include <placeholder.h>
+#include "it/inlines.h"
 
-/// #it_802B1DEC
+int it_802B1DEC(Item_GObj* arg0)
+{
+    return GET_ITEM(arg0)->xDD4_itemVar.capsule.x4;
+}
 
 /// #it_802B1DF8
 

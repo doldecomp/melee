@@ -1,6 +1,6 @@
-#include <platform.h>
+#include "ittincle.h"
 
-#include <placeholder.h>
+#include "it/inlines.h"
 
 /// #it_802EB5C8
 
@@ -137,8 +137,14 @@ bool it_802EC7A0(void)
 
 /// #it_802ECA70
 
-/// #it_802ECC8C
+int it_802ECC8C(Item_GObj* arg0)
+{
+    return GET_ITEM(arg0)->xDD4_itemVar.sword.x20;
+}
 
-/// #it_802ECC98
+void it_802ECC98(Item_GObj* arg0, f32 arg1)
+{
+    GET_ITEM(arg0)->xDD4_itemVar.tincle.x54 = arg1;
+}
 
 /// #it_802ECCA4

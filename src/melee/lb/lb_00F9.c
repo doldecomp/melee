@@ -1,5 +1,6 @@
 #include "lb_00F9.h"
 
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
 /* 011B74 */ static void lb_80011B74(HSD_DObj* dobj, u32 flags);
@@ -85,7 +86,11 @@ enum_t lb_80011ABC(void)
 
 /// #fn_800138AC
 
-/// #lb_800138CC
+void lb_800138CC(HSD_GObj* gobj, int arg1)
+{
+    UNK_T data = HSD_GObjGetUserData(gobj);
+    M2C_FIELD(data, int*, 0x18) = arg1;
+}
 
 /// #lb_800138D8
 

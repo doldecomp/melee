@@ -59,8 +59,8 @@ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
     }
     if (item_gobj != NULL) {
         Item* it = GET_ITEM(item_gobj);
-        it->xDD4_itemVar.MaximTomato.x4.bits.b0 = true;
-        it->xDD4_itemVar.MaximTomato.x8 = arg2;
+        it->xDD4_itemVar.tomato.x4.bits.b0 = true;
+        it->xDD4_itemVar.tomato.x8 = arg2;
     }
     return item_gobj;
 }
@@ -68,7 +68,7 @@ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
 void it_8028428C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.MaximTomato.heal_amount =
+    ip->xDD4_itemVar.tomato.heal_amount =
         M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
 }
 
@@ -82,9 +82,9 @@ void it_802842A4(Item_GObj* gobj)
     item->x40_vel.y = sa->x14;
     item->x40_vel.z = 0.0F;
 
-    item->xDD4_itemVar.MaximTomato.heal_amount = sa->x0;
-    item->xDD4_itemVar.MaximTomato.x4.bits.b0 = false;
-    item->xDD4_itemVar.MaximTomato.x8 = 0;
+    item->xDD4_itemVar.tomato.heal_amount = sa->x0;
+    item->xDD4_itemVar.tomato.x4.bits.b0 = false;
+    item->xDD4_itemVar.tomato.x8 = 0;
 
     it_80284358(gobj);
 }

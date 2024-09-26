@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "ft/forward.h"
+#include "it/forward.h"
 
 #include <dolphin/mtx/types.h>
 
@@ -34,7 +35,7 @@ typedef struct _ftPikachuAttributes {
     float x50;
     float x54;
     float x58;
-    s32 x5C;
+    int x5C;
     s32 x60; // up b zip duration
     float x64;
     float x68; // up b angle offset 1
@@ -83,9 +84,8 @@ union ftPikachu_MotionVars {
         s32 x0;
     } unk3;
 
-    /// @todo Proper state name.
-    struct ftPikachu_State4Vars {
-        uint x0;
+    struct ftPikachu_SpecialHiVars {
+        int x0;
         s32 x4;
         s32 x8;
         int xC;
@@ -93,13 +93,12 @@ union ftPikachu_MotionVars {
         s32 x18;
         Vec2 x1C;
         float x24;
-    } unk4;
+    } specialhi;
 
-    /// @todo Proper state name.
-    struct ftPikachu_State5Vars {
-        u32 x0;
-        u32 x4;
-    } unk5;
+    struct ftPikachu_SpecialLwVars {
+        Item_GObj* x0;
+        bool x4;
+    } speciallw;
 };
 
 #endif

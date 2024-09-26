@@ -8,7 +8,6 @@
 
 #include <placeholder.h>
 
-/* 04B4B0 */ UNK_T mpColl_8004B4B0(void);
 /* 0877F8 */ s32 ft_800877F8(Fighter_GObj*, s32);
 /* 087818 */ s32 ft_80087818(Fighter_GObj*, s32);
 /* 087838 */ s32 ft_80087838(Fighter_GObj* gobj);

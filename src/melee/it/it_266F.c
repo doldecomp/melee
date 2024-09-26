@@ -35,21 +35,10 @@
 extern ItemCommonData* it_804D6D28;
 extern HSD_ObjAllocUnk Item_804A0C64;
 
-// @todo: what is this?
-typedef struct test_struct {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-} test_struct;
+s32 lb_800149E0(f32*, u32); /* extern */
+static U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
 
-void it_8026C47C(test_struct*);
-
-void it_8026C47C(test_struct* arg0)
+void it_8026C47C(struct it_8026C47C_arg0_t* arg0)
 {
     s32* var_r28;
     s32 var_r29;
@@ -79,6 +68,62 @@ void it_8026C47C(test_struct* arg0)
         }
     }
 }
+
+#if 0
+s32 it_8026C530(s32 arg0, void *arg1, s32 arg2, s32 arg3) {
+    s32 temp_r10;
+    s32 temp_r5;
+    s32 temp_r6;
+    s32 temp_r7;
+    s32 temp_r7_2;
+    s32 temp_r7_3;
+    s32 temp_r8;
+    s32 temp_r9;
+    s32 temp_r9_2;
+    s32 var_r5;
+
+    var_r5 = arg2;
+    temp_r8 = arg3 - 1;
+    if (var_r5 == temp_r8) {
+        return var_r5;
+    }
+    temp_r10 = arg1->unkC;
+    temp_r9 = (s32) (var_r5 + arg3) / 2;
+    temp_r7_2 = temp_r9 * 2;
+    if ((s32) *(temp_r10 + temp_r7_2) > arg0) {
+        if (var_r5 == (s32) (temp_r9 - 1)) {
+
+        } else {
+            temp_r6 = (s32) (var_r5 + temp_r9) / 2;
+            temp_r7_3 = temp_r6 * 2;
+            if ((s32) *(temp_r10 + temp_r7_3) > arg0) {
+                var_r5 = it_8026C530();
+            } else if ((s32) (temp_r10 + temp_r7_3)->unk2 > arg0) {
+                var_r5 = temp_r6;
+            } else {
+                var_r5 = it_8026C530(temp_r6, temp_r9);
+            }
+        }
+        return var_r5;
+    }
+    temp_r9_2 = temp_r10 + 2;
+    if ((s32) *(temp_r9_2 + temp_r7_2) > arg0) {
+        return temp_r9;
+    }
+    if (temp_r9 == temp_r8) {
+        return temp_r9;
+    }
+    temp_r7 = (s32) (temp_r9 + arg3) / 2;
+    temp_r5 = temp_r7 * 2;
+    if ((s32) *(temp_r10 + temp_r5) > arg0) {
+        return it_8026C530(temp_r9, temp_r7);
+    }
+    if ((s32) *(temp_r9_2 + temp_r5) > arg0) {
+        return temp_r7;
+    }
+    return it_8026C530(temp_r7);
+}
+#endif
 
 // argument is definitely size 0x10
 u8 it_8026C65C(HSD_ObjAllocUnk6* arg0)
@@ -303,6 +348,8 @@ void it_8026CB9C(s32* arg0, u64 arg2, u32 arg3, f32 arg8)
     }
 }
 
+/// #it_8026CD50
+
 void it_8026CF04(void)
 {
     s16 temp_r4;
@@ -388,32 +435,6 @@ void it_8026D018(void)
     }
 }
 
-bool it_8026D324(s32 arg0)
-{
-    u64 temp_r29;
-    s32 temp_r3;
-    u32 temp_r28;
-    u64 temp_ret;
-    u8* temp_r30;
-
-    temp_r29 = it_804A0E30.x18;
-    temp_r30 = Ground_801C2AD8();
-    temp_r3 = gm_8016AE80();
-    if ((((temp_r29 ^ 0)) == 0) || (temp_r30 == NULL) || (temp_r3 == -1)) {
-        return 0;
-    }
-    temp_ret = temp_r29 >> arg0;
-    if (((temp_ret & 1) ^ 0) == 0) {
-        return 0;
-    }
-    return 1;
-}
-
-s32 it_8026D3CC(void)
-{
-    return it_8026D324(9) | it_8026D324(18) | it_8026D324(8);
-}
-
 #if 0
 s32 it_8026D258(void *arg0, s32 arg1) {
     u8 sp54;
@@ -464,6 +485,32 @@ s32 it_8026D258(void *arg0, s32 arg1) {
 }
 #endif
 
+bool it_8026D324(s32 arg0)
+{
+    u64 temp_r29;
+    s32 temp_r3;
+    u32 temp_r28;
+    u64 temp_ret;
+    u8* temp_r30;
+
+    temp_r29 = it_804A0E30.x18;
+    temp_r30 = Ground_801C2AD8();
+    temp_r3 = gm_8016AE80();
+    if ((((temp_r29 ^ 0)) == 0) || (temp_r30 == NULL) || (temp_r3 == -1)) {
+        return 0;
+    }
+    temp_ret = temp_r29 >> arg0;
+    if (((temp_ret & 1) ^ 0) == 0) {
+        return 0;
+    }
+    return 1;
+}
+
+s32 it_8026D3CC(void)
+{
+    return it_8026D324(9) | it_8026D324(18) | it_8026D324(8);
+}
+
 void it_8026D564(Item_GObj* gobj)
 {
     bool test;
@@ -492,7 +539,7 @@ s32 it_8026D604(HSD_GObj* gobj)
     return mpLib_80054ED8(ip->xC30);
 }
 
-void it_8026D62C(Item_GObj* gobj, ItCallback arg1)
+void it_8026D62C(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
     Item* ip;
@@ -520,7 +567,7 @@ void it_8026D62C(Item_GObj* gobj, ItCallback arg1)
     }
 }
 
-void it_8026D6F4(Item_GObj* gobj, ItCallback arg1)
+void it_8026D6F4(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
     Item* ip;
@@ -543,7 +590,7 @@ void it_8026D6F4(Item_GObj* gobj, ItCallback arg1)
     }
 }
 
-void it_8026D78C(Item_GObj* gobj, ItCallback arg1)
+void it_8026D78C(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
     Item* ip;
@@ -590,7 +637,7 @@ void it_8026D82C(Item_GObj* gobj)
     }
 }
 
-s32 it_8026D8A4(Item_GObj* gobj, ItCallback arg1)
+s32 it_8026D8A4(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     Item* ip;
     CollData* coll;
@@ -616,12 +663,28 @@ s32 it_8026D8A4(Item_GObj* gobj, ItCallback arg1)
     return test;
 }
 
-void it_8026D938(Item_GObj* gobj, ItCallback arg1)
+void it_8026D938(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     Item* ip = gobj->user_data;
     if (mpLib_80054ED8(ip->xC30) == 0) {
         ip->xC30 = -1;
         arg1(gobj);
+    }
+}
+
+bool it_8026D9A0(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    CollData* coll_data = &item->x378_itemColl;
+    it_80276214(gobj);
+    {
+        u8 _[4];
+        bool temp = mpColl_800477E0(coll_data);
+        item->pos = coll_data->cur_topn;
+        if (temp) {
+            item->xC30 = coll_data->floor.index;
+        }
+        return temp;
     }
 }
 
@@ -644,22 +707,6 @@ bool it_8026DA08(Item_GObj* gobj)
         ip->xC30 = coll->floor.index;
     }
     return test;
-}
-
-bool it_8026D9A0(Item_GObj* gobj)
-{
-    Item* item = GET_ITEM(gobj);
-    CollData* coll_data = &item->x378_itemColl;
-    it_80276214(gobj);
-    {
-        u8 _[4];
-        bool temp = mpColl_800477E0(coll_data);
-        item->pos = coll_data->cur_topn;
-        if (temp) {
-            item->xC30 = coll_data->floor.index;
-        }
-        return temp;
-    }
 }
 
 bool it_8026DA70(Item_GObj* gobj)
@@ -759,47 +806,6 @@ s32 it_8026DD5C(Item_GObj* gobj)
     }
     it_802734B4(gobj);
     return 1;
-}
-
-void it_8026EB18(HSD_GObj* arg0, s32 arg1, Vec3* arg2)
-{
-    Mtx m2;
-    MtxPtr var_r30;
-    if (arg2 != NULL) {
-        HSD_CObj* cobj = HSD_CObjGetCurrent();
-        MtxPtr temp_r30 = (MtxPtr) &cobj->view_mtx;
-        {
-            // @todo: This appears in several places in the codebase,
-            // it's probably an inline
-            Mtx m;
-            PAD_STACK(1 * 4);
-            PSMTXIdentity((MtxPtr) &m);
-            m[0][3] = arg2->x;
-            m[1][3] = arg2->y;
-            m[2][3] = arg2->z;
-            PSMTXConcat(temp_r30, (MtxPtr) &m, (MtxPtr) &m2);
-            var_r30 = (MtxPtr) &m2;
-        }
-    } else {
-        var_r30 = NULL;
-    }
-    HSD_JObjDispAll(GET_JOBJ(arg0), var_r30, HSD_GObj_80390EB8(arg1), 0U);
-}
-
-void it_8026EBC8(HSD_GObj* gobj, u16 arg1, u8* arg2)
-{
-    Item* ip = GET_ITEM(gobj);
-    u16 var_r29 = 0;
-    u8* var_r27 = arg2;
-    while (var_r29 < arg1) {
-        HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[*var_r27];
-        HSD_JObj* jobj_parent = HSD_JObjGetParent(jobj);
-        if (!(HSD_JObjGetFlags(jobj_parent) & 0x10)) {
-            it_80272A18(jobj);
-        }
-        var_r29 += 1;
-        var_r27 += 1;
-    }
 }
 
 s32 it_8026DDFC(Item_GObj* gobj)
@@ -904,7 +910,7 @@ void it_8026E0F4(Item_GObj* gobj)
     }
 }
 
-void it_8026E15C(Item_GObj* gobj, ItCallback arg1)
+void it_8026E15C(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     s32 var_r3;
     bool res = it_8026DFB0(gobj);
@@ -924,7 +930,7 @@ void it_8026E15C(Item_GObj* gobj, ItCallback arg1)
     }
 }
 
-void it_8026E248(Item_GObj* gobj, ItCallback arg1)
+void it_8026E248(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     s32 var_r3;
     bool res = it_8026DFB0(gobj);
@@ -942,6 +948,22 @@ void it_8026E248(Item_GObj* gobj, ItCallback arg1)
         }
     }
 }
+
+/// #it_8026E32C
+
+/// #it_8026E414
+
+/// #it_8026E4D0
+
+/// #it_8026E5A0
+
+/// #it_8026E664
+
+/// #it_8026E71C
+
+/// #it_8026E7E0
+
+/// #it_8026E8C4
 
 s32 it_8026E9A4(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3)
 {
@@ -981,6 +1003,47 @@ s32 it_8026EA9C(Item_GObj* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, s32 arg4,
     return 0;
 }
 
+void it_8026EB18(HSD_GObj* arg0, s32 arg1, Vec3* arg2)
+{
+    Mtx m2;
+    MtxPtr var_r30;
+    if (arg2 != NULL) {
+        HSD_CObj* cobj = HSD_CObjGetCurrent();
+        MtxPtr temp_r30 = (MtxPtr) &cobj->view_mtx;
+        {
+            // @todo: This appears in several places in the codebase,
+            // it's probably an inline
+            Mtx m;
+            PAD_STACK(1 * 4);
+            PSMTXIdentity((MtxPtr) &m);
+            m[0][3] = arg2->x;
+            m[1][3] = arg2->y;
+            m[2][3] = arg2->z;
+            PSMTXConcat(temp_r30, (MtxPtr) &m, (MtxPtr) &m2);
+            var_r30 = (MtxPtr) &m2;
+        }
+    } else {
+        var_r30 = NULL;
+    }
+    HSD_JObjDispAll(GET_JOBJ(arg0), var_r30, HSD_GObj_80390EB8(arg1), 0U);
+}
+
+void it_8026EBC8(HSD_GObj* gobj, u16 arg1, u8* arg2)
+{
+    Item* ip = GET_ITEM(gobj);
+    u16 var_r29 = 0;
+    u8* var_r27 = arg2;
+    while (var_r29 < arg1) {
+        HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[*var_r27];
+        HSD_JObj* jobj_parent = HSD_JObjGetParent(jobj);
+        if (!(HSD_JObjGetFlags(jobj_parent) & 0x10)) {
+            it_80272A18(jobj);
+        }
+        var_r29 += 1;
+        var_r27 += 1;
+    }
+}
+
 void it_8026EC54(HSD_GObj* gobj, u16 arg1, u8* arg2)
 {
     Item* ip = GET_ITEM(gobj);
@@ -997,9 +1060,6 @@ void it_8026EC54(HSD_GObj* gobj, u16 arg1, u8* arg2)
     }
 }
 
-s32 lb_800149E0(f32*, u32); /* extern */
-static U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
-
 u32 it_8026ECE0(Item_GObj* gobj, u32 arg1)
 {
     Item* ip;
@@ -1015,9 +1075,10 @@ u32 it_8026ECE0(Item_GObj* gobj, u32 arg1)
     ip = GET_ITEM(gobj);
     if ((enum ItemKind) ip->kind == It_Kind_Unk4) {
         if (((ip->xDAA_flag.bits.b7) &&
-             (ip->xDD4_itemVar.unk.x18.bits.b7 == 0)) ||
-            (ip->xDD4_itemVar.unk.x18.bits.b6 &&
-             (lbColl_8000A10C(&ip->xDD4_itemVar.unk.x1C, arg1, ip->scl) != 0)))
+             (ip->xDD4_itemVar.it_266F.x18.bits.b7 == 0)) ||
+            (ip->xDD4_itemVar.it_266F.x18.bits.b6 &&
+             (lbColl_8000A10C(&ip->xDD4_itemVar.it_266F.x1C, arg1, ip->scl) !=
+              0)))
         {
             var_r30 = 1;
         }
@@ -1077,12 +1138,14 @@ u32 it_8026ECE0(Item_GObj* gobj, u32 arg1)
 
 static inline void it_8026EC54_inline(HSD_GObj* gobj, Item* ip)
 {
-    it_8026EC54(gobj, ip->xDD4_itemVar.unk.x0, ip->xDD4_itemVar.unk.x4);
+    it_8026EC54(gobj, ip->xDD4_itemVar.it_266F.x0,
+                ip->xDD4_itemVar.it_266F.x4);
 }
 
 static inline void it_8026EBC8_inline(HSD_GObj* gobj, Item* ip)
 {
-    it_8026EBC8(gobj, ip->xDD4_itemVar.unk.x8, ip->xDD4_itemVar.unk.xC);
+    it_8026EBC8(gobj, ip->xDD4_itemVar.it_266F.x8,
+                ip->xDD4_itemVar.it_266F.xC);
 }
 
 static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos)
@@ -1205,58 +1268,19 @@ void it_8026F3AC(void)
     it_8026C75C(&it_804A0E50);
 }
 
-#if 0
-s32 it_8026C530(s32 arg0, void *arg1, s32 arg2, s32 arg3) {
-    s32 temp_r10;
-    s32 temp_r5;
-    s32 temp_r6;
-    s32 temp_r7;
-    s32 temp_r7_2;
-    s32 temp_r7_3;
-    s32 temp_r8;
-    s32 temp_r9;
-    s32 temp_r9_2;
-    s32 var_r5;
+/// #it_8026F3D4
 
-    var_r5 = arg2;
-    temp_r8 = arg3 - 1;
-    if (var_r5 == temp_r8) {
-        return var_r5;
-    }
-    temp_r10 = arg1->unkC;
-    temp_r9 = (s32) (var_r5 + arg3) / 2;
-    temp_r7_2 = temp_r9 * 2;
-    if ((s32) *(temp_r10 + temp_r7_2) > arg0) {
-        if (var_r5 == (s32) (temp_r9 - 1)) {
+/// #it_8026F53C
 
-        } else {
-            temp_r6 = (s32) (var_r5 + temp_r9) / 2;
-            temp_r7_3 = temp_r6 * 2;
-            if ((s32) *(temp_r10 + temp_r7_3) > arg0) {
-                var_r5 = it_8026C530();
-            } else if ((s32) (temp_r10 + temp_r7_3)->unk2 > arg0) {
-                var_r5 = temp_r6;
-            } else {
-                var_r5 = it_8026C530(temp_r6, temp_r9);
-            }
-        }
-        return var_r5;
-    }
-    temp_r9_2 = temp_r10 + 2;
-    if ((s32) *(temp_r9_2 + temp_r7_2) > arg0) {
-        return temp_r9;
-    }
-    if (temp_r9 == temp_r8) {
-        return temp_r9;
-    }
-    temp_r7 = (s32) (temp_r9 + arg3) / 2;
-    temp_r5 = temp_r7 * 2;
-    if ((s32) *(temp_r10 + temp_r5) > arg0) {
-        return it_8026C530(temp_r9, temp_r7);
-    }
-    if ((s32) *(temp_r9_2 + temp_r5) > arg0) {
-        return temp_r7;
-    }
-    return it_8026C530(temp_r7);
+/// #it_8026F5C8
+
+/// #it_8026F6BC
+
+/// #it_8026F7C8
+
+/// #it_8026F8B4
+
+void it_8026F9A0(void)
+{
+    it_804D6D18 = 0;
 }
-#endif

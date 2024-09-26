@@ -209,7 +209,7 @@
 /* 27A9B8 */ UNK_RET it_8027A9B8(UNK_PARAMS);
 /* 27AAA0 */ UNK_RET it_8027AAA0(UNK_PARAMS);
 /* 27AB64 */ UNK_RET it_8027AB64(UNK_PARAMS);
-/* 27ADEC */ M2C_UNK it_8027ADEC(M2C_UNK, Item_GObj*, HSD_JObj*, f32);
+/* 27ADEC */ UNK_T it_8027ADEC(int, Item_GObj*, HSD_JObj*, f32);
 /* 27AE34 */ UNK_RET it_8027AE34(UNK_PARAMS);
 /* 27AF50 */ UNK_RET it_8027AF50(UNK_PARAMS);
 /* 27B070 */ void it_8027B070(Item_GObj* gobj, Fighter_GObj* owner_gobj);
@@ -252,5 +252,6 @@
 /* 3F23CC */ extern struct ItemLogicTable it_803F23CC[];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
 /* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[];
+/* 4D6D18 */ extern s32 it_804D6D18;
 
 #endif

@@ -8,8 +8,8 @@
 
 #include <baselib/sislib.h>
 
-extern CSSData* mnCharSel_804D6CB0;
-extern SIS* HSD_SisLib_804D1124[];
+/* 4D6CB0 */ static CSSData* mnCharSel_804D6CB0;
+/* 4D6CF4 */ static s8 mnCharSel_804D6CF4;
 
 // Can't be enum bc float, but reused values
 #define ICONROWHT_TOP_TOP 20.0F
@@ -424,3 +424,52 @@ void mnCharSel_8025BD30(void)
         }
     }
 }
+
+/// #mnCharSel_8025C020
+
+/// #mnCharSel_8025D1C4
+
+/// #mnCharSel_8025D5AC
+
+/// #mnCharSel_8025DAA0
+
+/// #mnCharSel_8025DB34
+
+/// #mnCharSel_8025EE8C
+
+/// #fn_8025F0E0
+
+/// #fn_8025FAC0
+
+/// #fn_8025FB2C
+
+/// #mnCharSel_8025FB50
+
+/// #mnCharSel_8025FDEC
+
+/// #mnCharSel_CostumeChange
+
+/// #mnCharSel_CursorThink
+
+/// #fn_80262648
+
+/// #fn_80262F44
+
+/// #fn_80263354
+
+/// #fn_802633B0
+
+void mnCharSel_80264070(void)
+{
+    mnCharSel_804D6CF4 = 1;
+}
+
+/// #fn_8026407C
+
+/// #mnCharSel_802640A0
+
+/// #mnCharSel_8026688C
+
+/// #mnCharSel_802669F4
+
+/// #mnCharSel_80266D70

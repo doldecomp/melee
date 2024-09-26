@@ -1,6 +1,11 @@
 #include <platform.h>
 
-/// #grGreens_80213458
+static s8 grGr_804D6AAC;
+
+void grGreens_80213458(void)
+{
+    grGr_804D6AAC = 1;
+}
 
 /// #grGreens_80213464
 

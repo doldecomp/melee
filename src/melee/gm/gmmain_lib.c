@@ -11,6 +11,9 @@ struct gmMainLib_8046B0F0_t {
 
 /* 15D888 */ static void gmMainLib_8015D888(u32);
 
+static struct gmm_x0 gmMainLib_8045A6C0[2];
+struct gmm_x0* gmMainLib_804D3EE0 = gmMainLib_8045A6C0;
+
 GameRules* gmMainLib_8015CC34(void)
 {
     return &gmMainLib_804D3EE0->x1850;
@@ -707,6 +710,143 @@ void gmMainLib_8015DB80(void)
         gmMainLib_804D3EE0->x39[(u8) i] = 0;
     }
 }
+
+/// #gmMainLib_8015DBF4
+
+/// #gmMainLib_8015EA80
+
+u8 gmMainLib_8015ECB0(void)
+{
+    return gmMainLib_804D3EE0->x1850.unk_x1;
+}
+
+/// #gmMainLib_8015ECBC
+
+u8 gmMainLib_8015ED30(void)
+{
+    return gmMainLib_804D3EE0->x1850.unk_xc;
+}
+
+/// #gmMainLib_8015ED3C
+
+/// #gmMainLib_8015ED4C
+
+s32 gmMainLib_8015ED5C(void)
+{
+    return M2C_FIELD(gmMainLib_804D3EE0, s32*, 0x1864);
+}
+
+void gmMainLib_8015ED68(s32 arg0)
+{
+    M2C_FIELD(gmMainLib_804D3EE0, s32*, 0x1864) = arg0;
+}
+
+u8 gmMainLib_8015ED74(void)
+{
+    return gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x14];
+}
+
+void gmMainLib_8015ED80(u8 arg0)
+{
+    gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x14] = arg0;
+}
+
+u16* gmMainLib_8015ED8C(gmMainLib_8015ED8C_arg0_t* arg0)
+{
+    return (u16*) &gmMainLib_804D3EE0->thing;
+}
+
+struct gmm_retval_ED98* gmMainLib_8015ED98(void)
+{
+    return (struct gmm_retval_ED98*) &gmMainLib_804D3EE0->thing
+        .padding_x1868[4];
+}
+
+UNK_T gmMainLib_8015EDA4(void)
+{
+    return &M2C_FIELD(gmMainLib_804D3EE0, UNK_T*, 0x186A);
+}
+
+struct gmm_retval_EDB0* gmMainLib_8015EDB0(void)
+{
+    return (struct gmm_retval_EDB0*) &gmMainLib_804D3EE0->thing
+        .padding_x1868[0x24];
+}
+
+struct gmm_retval_EDBC* gmMainLib_8015EDBC(void)
+{
+    return (struct gmm_retval_EDBC*) &gmMainLib_804D3EE0->thing
+        .padding_x1868[0x2C];
+}
+
+u8* gmMainLib_8015EDC8(void)
+{
+    return &gmMainLib_804D3EE0->thing.padding_x1868[0x1A4];
+}
+
+/// #gmMainLib_8015EDD4
+
+/// #gmMainLib_8015EDE4
+
+/// #gmMainLib_8015EDF8
+
+/// #gmMainLib_8015EE0C
+
+/// #gmMainLib_8015EE1C
+
+/// #gmMainLib_8015EE30
+
+/// #gmMainLib_8015EE44
+
+/// #gmMainLib_8015EE54
+
+/// #gmMainLib_8015EE68
+
+/// #gmMainLib_8015EE90
+
+/// #gmMainLib_8015EEA0
+
+/// #gmMainLib_8015EEB4
+
+/// #gmMainLib_8015EEC8
+
+/// #gmMainLib_8015EF30
+
+/// #gmMainLib_8015EF84
+
+/// #gmMainLib_8015F150
+
+/// #gmMainLib_8015F260
+
+/// #gmMainLib_8015F464
+
+/// #gmMainLib_8015F490
+
+/// #gmMainLib_8015F4BC
+
+u8 gmMainLib_8015F4E8(void)
+{
+    return gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x15];
+}
+
+void gmMainLib_8015F4F4(u8 arg0)
+{
+    gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x15] = arg0;
+}
+
+/// #gmMainLib_8015F500
+
+/// #gmMainLib_8015F588
+
+/// #gmMainLib_8015F600
+
+/// #gmMainLib_8015FA34
+
+/// #gmMainLib_8015FB68
+
+/// #gmMainLib_8015FBA4
+
+/// #gmMainLib_8015FC74
 
 void gmMainLib_8015FCC0(void)
 {

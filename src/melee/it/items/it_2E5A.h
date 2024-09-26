@@ -8,7 +8,7 @@
 #include "it/items/types.h"
 
 /* 2E5AC4 */ UNK_RET it_802E5AC4(UNK_PARAMS);
-/* 2E5EF4 */ UNK_RET it_802E5EF4(UNK_PARAMS);
+/* 2E5EF4 */ int it_802E5EF4(Item_GObj*);
 /* 2E5F00 */ UNK_RET it_802E5F00(UNK_PARAMS);
 /* 2E5F8C */ s32 it_802E5F8C(Item_GObj*, Vec3*, s32, bool, float, float);
 /* 2E609C */ UNK_RET it_802E609C(UNK_PARAMS);

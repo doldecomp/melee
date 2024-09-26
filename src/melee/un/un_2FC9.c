@@ -1,7 +1,11 @@
-#include <platform.h>
+#include "un_2FC9.h"
 
-#include <placeholder.h>
+#include <dolphin/mtx/types.h>
 
+/* 4D6D6C */ static s8 un_804D6D6C;
+/* 4D6D88 */ static s32 un_804D6D88;
+/* 4D6D8C */ static s32 un_804D6D8C;
+/* 4D6D90 */ static IntVec2 un_804D6D90;
 /* 4D6E1C */ static UNK_T un_804D6E1C;
 /* 4D6E44 */ static UNK_T un_804D6E44;
 
@@ -23,9 +27,15 @@
 
 /// #un_802FD428
 
-/// #un_802FD450
+void un_802FD450(void)
+{
+    un_804D6D6C = 1;
+}
 
-/// #un_802FD45C
+void un_802FD45C(void)
+{
+    un_804D6D6C = 0;
+}
 
 /// #un_802FD468
 
@@ -33,11 +43,20 @@
 
 /// #un_802FD604
 
-/// #un_802FD65C
+void un_802FD65C(void)
+{
+    un_804D6D88 = 0;
+}
 
-/// #un_802FD668
+void un_802FD668(void)
+{
+    un_804D6D8C = 1;
+}
 
-/// #un_802FD674
+void un_802FD674(void)
+{
+    un_804D6D8C = 0;
+}
 
 /// #fn_802FD680
 
@@ -55,9 +74,15 @@ void un_802FD704(void) {}
 
 void un_802FD90C(void) {}
 
-/// #un_802FD910
+void un_802FD910(void)
+{
+    un_804D6D90.x = 1;
+}
 
-/// #un_802FD91C
+void un_802FD91C(void)
+{
+    un_804D6D90.x = 0;
+}
 
 /// #un_802FD928
 
@@ -392,7 +417,11 @@ void fn_803020F8(void) {}
 
 /// #un_80302B00
 
-/// #un_80302B10
+void un_80302B10(UNK_T arg0, float arg1, float arg2)
+{
+    M2C_FIELD(arg0, f32*, 8) = arg1;
+    M2C_FIELD(arg0, f32*, 0xC) = arg2;
+}
 
 /// #un_80302B1C
 
@@ -415,7 +444,7 @@ UNK_T un_80302DF0(void)
     return un_804D6E44;
 }
 
-void un_80302DF8(void* arg0, s32 arg1)
+void un_80302DF8(UNK_T arg0, int arg1)
 {
     M2C_FIELD(arg0, s32*, 0xC) = arg1;
 }

@@ -3218,7 +3218,10 @@ struct ItemLogicTable it_803F3100[] = {
 
 /// #it_80274E44
 
-/// #it_80274ECC
+void it_80274ECC(Item_GObj* gobj, bool arg1)
+{
+    GET_ITEM(gobj)->xD09 = arg1;
+}
 
 /// #it_80274ED8
 
@@ -3330,7 +3333,10 @@ struct ItemLogicTable it_803F3100[] = {
 
 /// #it_80276278
 
-/// #it_802762B0
+void it_802762B0(Item* arg0)
+{
+    arg0->ground_or_air = GA_Ground;
+}
 
 /// #it_802762BC
 

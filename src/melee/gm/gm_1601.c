@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "gm_1601.h"
 
 #include "gmmain_lib.h"
@@ -13,12 +15,19 @@
 #include "lb/lbtime.h"
 #include "mp/mpcoll.h"
 
-struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
+#include <placeholder.h>
 
-static s8 lbl_804D6598;
-static u8 lbl_804D65A0;
-
-static s32 lbl_804D4190 = 0xFFFFFFFF;
+/* 3B75F8 */ struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
+/* 46B488 */ static UNK_T lbl_8046B488[120];
+/* 46B668 */ static UNK_T lbl_8046B668[14];
+/* 46B6A0 */ static Placeholder_8016AE38_ret_val lbl_8046B6A0;
+/* 46DBD8 */ static UNK_T lbl_8046DBD8[4];
+/* 472C30 */ static UNK_T lbl_80472C30[32];
+/* 472CB0 */ static UNK_T lbl_80472CB0[30];
+/* 4771C4 */ static UNK_T gm_804771C4[349];
+/* 4D4190 */ static s32 lbl_804D4190 = 0xFFFFFFFF;
+/* 4D6598 */ static s8 lbl_804D6598;
+/* 4D65A0 */ static s8 lbl_804D65A0;
 
 #define NUM_UNLOCKABLE_CHARACTERS 11
 
@@ -328,7 +337,19 @@ bool gm_80164ABC(struct gmMainLib_8015ED8C_arg0_t* arg0)
 
 /// #gm_80166378
 
-/// #fn_80166A8C
+#ifdef MWERKS_GEKKO
+float fn_80166A8C(register Vec3* src, register Vec3* dst)
+{
+    register float x = src->x;
+    asm { psq_st x, Vec3.x(dst), 1, qr3 }
+    return x;
+}
+#else
+float fn_80166A8C(register Vec3* src, register Vec3* dst)
+{
+    NOT_IMPLEMENTED;
+}
+#endif
 
 /// #gm_80166A98
 
@@ -411,7 +432,12 @@ u8 gm_801677F0(void)
 
 /// #fn_80168F2C
 
-/// #fn_80168F7C
+extern s16 lbl_804D659A;
+
+void fn_80168F7C(void)
+{
+    lbl_804D659A = 0;
+}
 
 /// #gm_80168F88
 
@@ -444,7 +470,10 @@ void gm_801692E8(uint ticks, struct datetime* datetime)
     }
 }
 
-/// #fn_80169364
+UNK_T fn_80169364(void)
+{
+    return &lbl_8046B488;
+}
 
 /// #gm_80169370
 
@@ -520,7 +549,10 @@ void gm_801692E8(uint ticks, struct datetime* datetime)
 
 /// #gm_8016A97C
 
-/// #gm_8016A98C
+UNK_T gm_8016A98C(void)
+{
+    return &lbl_8046B668;
+}
 
 /// #gm_8016A998
 
@@ -528,9 +560,15 @@ void gm_801692E8(uint ticks, struct datetime* datetime)
 
 /// #gm_8016AC44
 
-/// #gm_8016AE38
+Placeholder_8016AE38_ret_val* gm_8016AE38(void)
+{
+    return &lbl_8046B6A0;
+}
 
-/// #gm_8016AE44
+Placeholder_8016AE38_ret_val* gm_8016AE44(void)
+{
+    return &lbl_8046B6A0;
+}
 
 /// #gm_8016AE50
 
@@ -768,9 +806,15 @@ void gm_801692E8(uint ticks, struct datetime* datetime)
 
 /// #fn_80170110
 
-/// #gm_801701A0
+void gm_801701A0(void)
+{
+    lbl_804D65A0 = 1;
+}
 
-/// #fn_801701AC
+void fn_801701AC(void)
+{
+    lbl_804D65A0 = 0;
+}
 
 u8 fn_801701B8(void)
 {
@@ -906,7 +950,10 @@ bool fn_801724C8(void)
 
 /// #fn_8017367C
 
-/// #gm_801736DC
+UNK_T gm_801736DC(void)
+{
+    return &lbl_8046DBD8;
+}
 
 /// #gm_801736E8
 
@@ -1185,7 +1232,10 @@ s32 gm_8017BE84(u32 arg0)
 
 /// #gm_8017DB58
 
-/// #gm_8017DB6C
+u8 gm_8017DB6C(struct gm_8017DB6C_arg0_t* arg0, s32 arg1)
+{
+    return arg0[arg1].x0;
+}
 
 /// #gm_8017DB78
 
@@ -1217,7 +1267,10 @@ s32 gm_8017BE84(u32 arg0)
 
 /// #fn_8017E3C8
 
-/// #gm_8017E424
+UNK_T gm_8017E424(void)
+{
+    return &lbl_80472C30;
+}
 
 /// #gm_8017E430
 
@@ -1257,7 +1310,10 @@ s32 gm_8017BE84(u32 arg0)
 
 /// #fn_8017E8A4
 
-/// #gm_8017EB30
+UNK_T gm_8017EB30(void)
+{
+    return &lbl_80472CB0;
+}
 
 /// #gm_8017EB3C
 
@@ -1570,7 +1626,10 @@ s32 fn_8018F62C(void* arg0)
     return M2C_FIELD(arg0, s32*, 0x2C);
 }
 
-/// #gm_8018F634
+UNK_T gm_8018F634(void)
+{
+    return &gm_804771C4;
+}
 
 /// #fn_8018F640
 
