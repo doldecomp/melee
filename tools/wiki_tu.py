@@ -8,12 +8,7 @@ from typing import Dict, Optional, cast
 
 import humanfriendly
 import mistletoe
-from mistletoe.block_token import (
-    BlockToken,
-    Table,
-    TableRow,
-    re,
-)
+from mistletoe.block_token import BlockToken, Table, TableRow, re
 from mistletoe.span_token import RawText
 from mistletoe.token import Token
 
@@ -86,23 +81,21 @@ File|Matched|Total|%|:grey_question:|Assignee<br>Discord|Assignee<br>GitHub
     )
     for unit in data["units"] or []:
 
-        def friendly_size(key: str) -> str:
-            return (
-                f"`{humanfriendly.format_size(unit[key] or 0).replace('bytes', 'B')}`"
-            )
+        def friendly_size(value: int) -> str:
+            return f"`{humanfriendly.format_size(value).replace('bytes', 'B')}`"
 
         # Strip "main/" by splitting on "/" and recombining
         file = "/".join((unit["name"] or "/").split("/")[1:])
         # Link to source file
         file_link = f"[`{file}`](../blob/master/src/{file}.c)"
 
-        matched_code = float(unit["matched_code"])
-        total_code = float(unit["total_code"])
-        code_percent = (matched_code / total_code if total_code else 0) * 100
-        matched = f"{friendly_size('matched_code')}"
-        total = f"{friendly_size('total_code')}"
+        matched_code = int(unit["measures"].get("matched_code") or 0)
+        total_code = int(unit["measures"].get("total_code") or 0)
+        code_percent = float(unit["measures"].get("matched_code_percent") or 0)
+        matched = f"{friendly_size(matched_code)}"
+        total = f"{friendly_size(total_code)}"
         percent = f"`{humanfriendly.round_number(code_percent)}%`"
-        linked = ":heavy_check_mark:" if unit["complete"] else ":x:"
+        linked = ":heavy_check_mark:" if unit["metadata"].get("complete") else ":x:"
 
         if assignee := assignees.get(file):
             discord = f"`{assignee['discord']}`"
