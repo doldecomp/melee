@@ -3,38 +3,14 @@ set -euox pipefail
 
 apt update
 
-function install {
-    apt install -y --no-install-recommends "${@}"
-}
-
-install curl ca-certificates
-
-curl -L https://deb.nodesource.com/setup_20.x | bash -
-
-install \
+apt install -y --no-install-recommends \
+    ca-certificates \
+    curl \
     doxygen \
     git \
     libarchive-tools \
-    nodejs \
     python-is-python3 \
     python3-full
-
-# Acquire external assets
-git clone --no-checkout --depth=1 \
-    'https://github.com/doldecomp/assets.git' \
-    /tmp/assets
-pushd /tmp/assets
-git sparse-checkout init --cone
-git sparse-checkout set melee
-git checkout
-mv melee /opt/assets
-popd
-
-# Install progress site node modules
-pushd /tmp
-npm install --no-audit --no-progress
-mv node_modules /opt
-popd
 
 # Create and update Python venv
 python -m venv --upgrade-deps /opt/venv
@@ -52,6 +28,5 @@ apt remove -y \
     libarchive-tools
 apt autoremove -y
 apt clean
-npm cache clean --force
 rm -rf /var/lib/apt/lists/*
 rm -rf /tmp/*
