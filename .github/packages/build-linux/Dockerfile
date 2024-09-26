@@ -28,7 +28,6 @@ ENTRYPOINT entrypoint.sh
 
 FROM linux-rw AS gen-pages
 COPY .github/packages/gen-pages/setup.sh /usr/local/bin
-COPY tools/progress-site/package*.json /tmp
 COPY /reqs/gen-pages.txt /tmp/reqs/
 RUN setup.sh
 COPY .github/packages/gen-pages/entrypoint.sh /usr/local/bin
