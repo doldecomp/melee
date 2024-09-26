@@ -1,5 +1,5 @@
-#ifndef SYSDOLPHIN_BASELIB_PSDISPTEV_H
-#define SYSDOLPHIN_BASELIB_PSDISPTEV_H
+#ifndef GALE01_3A3920
+#define GALE01_3A3920
 
 #include <platform.h>
 

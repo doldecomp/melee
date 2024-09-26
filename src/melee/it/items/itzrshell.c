@@ -4,7 +4,6 @@
 #include "itzgshell.h"
 
 #include "gr/grzakogenerator.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/types.h"
@@ -102,7 +101,7 @@ Item_GObj* it_802E0488(s32 arg0, s32 arg1, s32 arg2)
 
         it->facing_dir = arg2;
         it_8027C56C(it_gp, it->facing_dir);
-        it->xDD4_itemVar.shell.xE10 = arg0;
+        it->xDD4_itemVar.zrshell.xE10 = arg0;
         Item_80268E5C(it_gp, 0xC, ITEM_ANIM_UPDATE);
         HSD_JObjAnimAll((HSD_JObj*) it_gp->hsd_obj);
         if (it_802DDA84(it_gp) != false) {

@@ -1,8 +1,13 @@
 #include "itzeldadinfire.h"
 
+#include "it/inlines.h"
+
 /* 2C4434 */ static bool it_802C4434(void);
 
-/// #it_802C3AF0
+Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
+{
+    return GET_ITEM(arg0)->owner;
+}
 
 /// #it_802C3AFC
 

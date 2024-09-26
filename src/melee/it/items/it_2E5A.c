@@ -1,6 +1,13 @@
+#include "it_2E5A.h"
+
+#include "it/inlines.h"
+
 /// #it_802E5AC4
 
-/// #it_802E5EF4
+int it_802E5EF4(Item_GObj* arg0)
+{
+    return GET_ITEM(arg0)->xDD4_itemVar.capsule.x0;
+}
 
 /// #it_802E5F00
 

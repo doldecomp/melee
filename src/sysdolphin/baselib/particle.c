@@ -1,7 +1,9 @@
 #include "particle.h"
 
-static int hsd_804D78C0;
-extern int hsd_804D78C8;
+/* 4D7850 */ static int hsd_804D7850;
+/* 4D7894 */ static int hsd_804D7894;
+/* 4D78C0 */ static int hsd_804D78C0;
+/* 4D78C8 */ static int hsd_804D78C8;
 
 /// #hsd_80391580
 
@@ -21,7 +23,10 @@ extern int hsd_804D78C8;
 
 /// #hsd_803922FC
 
-/// #hsd_80392474
+void hsd_80392474(void)
+{
+    hsd_804D7850 = 0;
+}
 
 /// #fn_80392480
 
@@ -35,7 +40,11 @@ extern int hsd_804D78C8;
 
 /// #fn_80392A3C
 
-/// #fn_80392CCC
+s32 fn_80392CCC(s32 arg0)
+{
+    hsd_804D7894 = arg0;
+    return 0;
+}
 
 /// #fn_80392CD8
 

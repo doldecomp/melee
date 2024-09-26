@@ -1,9 +1,14 @@
 #include "itnesspkflush.h"
 
+#include "it/inlines.h"
+
 /* 2AB29C */ static bool it_802AB29C(void);
 /* 2AB2A4 */ static bool it_802AB2A4(void);
 
-/// #it_802AA7E4
+Fighter_GObj* it_802AA7E4(Item_GObj* arg0)
+{
+    return GET_ITEM(arg0)->owner;
+}
 
 /// #it_802AA7F0
 

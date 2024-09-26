@@ -13,7 +13,7 @@
 typedef struct {
     bool x0;
     bool x4;
-} ItCapsuleVars;
+} itCapsule_ItemVars;
 
 typedef struct {
     bool x0; // [true]
@@ -27,7 +27,7 @@ typedef struct {
     /* ip+DE0 */ float xC;
     /* ip+DE4 */ float xvel;
     /* ip+DE8 */ float yvel;
-} ItStarVars;
+} itStar_ItemVars;
 
 struct itSword_ItemVars {
     /* ip+DD4 */ int x0;
@@ -62,7 +62,7 @@ typedef struct itBatAttributes {
     f32 xC_vel;
 } itBatAttributes;
 
-typedef struct BobOmbVars {
+typedef struct itBombHei_ItemVars {
     s32 xDD4;
     s32 xDD8;
     s32 xDDC;
@@ -70,9 +70,9 @@ typedef struct BobOmbVars {
     s32 xDE4;
     s32 xDE8;
     float xDEC;
-} BobOmbVars;
+} itBombHei_ItemVars;
 
-typedef struct HeartContainerVars {
+typedef struct itHeart_ItemVars {
     s32 xDD4_heal;
     union {
         struct {
@@ -91,7 +91,7 @@ typedef struct HeartContainerVars {
     u8 xDE0_filler[8];
     f32 xDE8_float;
     f32 xDEC;
-} HeartContainerVars;
+} itHeart_ItemVars;
 
 typedef struct HeartContainerAttr {
     s32 x0_heal; // [100]
@@ -115,7 +115,7 @@ typedef struct HeartContainerAttr {
     f32 x18; // y rotation? [0.0349066]
 } HeartContainerAttr;
 
-typedef struct MaximTomatoVars {
+typedef struct itTomato_ItemVars {
     s32 heal_amount;
     union {
         struct {
@@ -131,7 +131,7 @@ typedef struct MaximTomatoVars {
         u32 flags;
     } x4;
     s32 x8;
-} MaximTomatoVars;
+} itTomato_ItemVars;
 
 typedef struct {
     int x0;
@@ -142,26 +142,21 @@ typedef struct {
     f32 x14;
 } MaximTomatoSpecialAttr;
 
-typedef struct FoodVars {
-    s32 xDD4_unk;
-    s32 xDD8_heal;
-} FoodVars;
-
-typedef struct ItLGunVars {
+typedef struct itLGun_ItemVars {
     /*  +0 ip+DD4 */ int timer;
-} ItLGunVars;
+} itLGun_ItemVars;
 
 typedef struct ItLGunAttr {
     int max_ammo; // [16]
     Vec3 pos;     // [0, 2.128, 6.668]
 } ItLGunAttr;
 
-typedef struct ItLGunRayVars {
+typedef struct itLGunRay_ItemVars {
     /* +0 ip+DD4 */ float scale;
     /* +4 ip+DD8 */ float angle;
     /* +8 ip+DDC */ float speed;
     /* +C ip+DE0 */ Vec3 pos;
-} ItLGunRayVars;
+} itLGunRay_ItemVars;
 
 typedef struct ItLGunRayAttr {
     /* +0 */ float speed;     // [5]
@@ -169,7 +164,7 @@ typedef struct ItLGunRayAttr {
     /* +8 */ float max_scale; // [3]
 } ItLGunRayAttr;
 
-typedef struct ItLGunBeamVars {
+typedef struct itLGunBeam_ItemVars {
     /*  +0 ip+DD4 */ Vec3 position0;
     /*  +C ip+DE0 */ Vec3 position1;
     /* +18 ip+DEC */ Vec3 velocity;
@@ -177,7 +172,7 @@ typedef struct ItLGunBeamVars {
     /* +28 ip+DFC */ f32 angle1;
     /* +2C ip+E00 */ f32 lifetime;
     /* +30 ip+E04 */ int xE04;
-} ItLGunBeamVars;
+} itLGunBeam_ItemVars;
 
 typedef struct ItLGunBeamAttr {
     float lifetime; // lifetime - [18]
@@ -188,14 +183,14 @@ typedef struct ItLGunBeamAttr {
 } ItLGunBeamAttr;
 
 /// Eggs spawned on Yoshi stages / by Chansey
-typedef struct EggVars {
+typedef struct itEgg_ItemVars {
     /* +0 */ bool x0;
     /* +4 */ int rand_max;
     /* +8 */ u8 _8[0x60 - 0x8];
     /* +60 */ int heal_amount;
-} EggVars;
+} itEgg_ItemVars;
 
-typedef struct itHeiHoVars {
+typedef struct itHeiho_ItemVars {
     f32 x0;
     f32 x4;
     UnkFlagStruct x8;
@@ -229,12 +224,12 @@ typedef struct itHeiHoVars {
     f32 x70;
     f32 x74;
     f32 x78;
-} itHeiHoVars;
+} itHeiho_ItemVars;
 
-typedef struct itFoodsVars {
-    s32 x0;
-    s32 x4;
-} itFoodsVars;
+typedef struct itFoods_ItemVars {
+    /* +0 ip+DD4 */ s32 x0;
+    /* +4 ip+DD8 */ s32 heal_amount;
+} itFoods_ItemVars;
 
 typedef struct itFoodsAttributes {
     s32 x0;
@@ -243,9 +238,9 @@ typedef struct itFoodsAttributes {
     s32 xC;
 } itFoodsAttributes;
 
-typedef struct WhispyAppleVars {
+typedef struct itWhispyApple_ItemVars {
     s32 xDD4_heal;
-} WhispyAppleVars;
+} itWhispyApple_ItemVars;
 
 /// @remarks Might be shared?
 typedef struct itUnkAttributes {
@@ -258,18 +253,23 @@ typedef struct itUnkAttributes {
 
 typedef struct {
     HSD_JObj* x0;
-} ItMatoVars;
+    HSD_JObj* x4;
+} itMato_ItemVars;
 
 typedef struct {
     int x0;
     int x4;
-
 } itTomatoVars;
+
+typedef struct itTincle_ItemVars {
+    /*  +0 ip+DD4 */ u8 x0[0x54 - 0x0];
+    /* +54 ip+E28 */ float x54;
+} itTincle_ItemVars;
 
 typedef struct {
     u8 padding[0xE10 - 0xDD4];
     int xE10;
-} itShellVars;
+} itGShell_ItemVars;
 
 typedef struct itPokemonAttributes {
     f32 x0;
@@ -285,7 +285,7 @@ typedef struct {
     u8 padding[0xE34 - 0xDD4];
     s32 timer;
     int x64;
-} ItPokemonVars;
+} itPokemon_ItemVars;
 
 typedef struct {
     int x0;
@@ -321,19 +321,19 @@ typedef struct itCoinAttributes {
     f32 x48;
 } itCoinAttributes;
 
-typedef struct CoinVars {
+typedef struct itCoin_ItemVars {
     int x0;
     int x4;
     f32 x8;
     f32 xC;
     int x10;
     int x14;
-} CoinVars;
+} itCoin_ItemVars;
 
-typedef struct FFlowerVars {
+typedef struct itFFlower_ItemVars {
     int x0;
     uint x4;
-} FFlowerVars;
+} itFFlower_ItemVars;
 
 typedef struct FFlowerAttr {
     int x0;    // [120]
@@ -344,12 +344,12 @@ typedef struct FFlowerAttr {
     float x14;
 } FFlowerAttr;
 
-typedef struct FFlowerFlameVars {
+typedef struct itFFlowerFlame_ItemVars {
     /* +0 */ Vec3 pos;
     /* +C */ f32 unk;
-} FFlowerFlameVars;
+} itFFlowerFlame_ItemVars;
 
-typedef struct HassamVars {
+typedef struct itHassam_ItemVars {
     f32 x0;
     f32 x4;
     f32 x8;
@@ -362,13 +362,13 @@ typedef struct HassamVars {
     u8 padding[0x5C - 0x20];
     Vec3 x5C;
     f32 x68;
-} HassamVars;
+} itHassam_ItemVars;
 
-typedef struct KinokoVars {
+typedef struct itKinoko_ItemVars {
     f32 x0;
     f32 x4;
     f32 x8;
     f32 xC;
-} KinokoVars;
+} itKinoko_ItemVars;
 
 #endif

@@ -1,6 +1,7 @@
 #include "AXVPB.h"
 
-static u32 __AXNumVoices;
+/* 4B09E0 */ static AXPB __AXPB;
+/* 4D7588 */ static u32 __AXNumVoices;
 
 u32 __AXGetNumVoices(void)
 {
@@ -11,7 +12,10 @@ u32 __AXGetNumVoices(void)
 
 /// #__AXSyncPBs
 
-/// #__AXGetPBs
+AXPB* __AXGetPBs(void)
+{
+    return &__AXPB;
+}
 
 /// #__AXSetPBDefault
 

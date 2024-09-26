@@ -745,7 +745,7 @@
 /* 109030 */ void ftKb_PpSpecialAirN_Coll(ftKb_GObj* gobj);
 /* 109238 */ Fighter_Part ftKb_SpecialNYs_80109238(ftKb_GObj* gobj);
 /* 109260 */ void ftKb_SpecialNYs_80109260(ftKb_GObj* gobj);
-/* 109290 */ void ftKb_SpecialNYs_80109290(ftKb_GObj* gobj);
+/* 109290 */ float ftKb_SpecialNYs_80109290(ftKb_GObj* gobj);
 /* 10929C */ void ftKb_SpecialNYs_8010929C(ftKb_GObj* gobj);
 /* 1092AC */ void ftKb_SpecialNYs_801092AC(ftKb_GObj* gobj);
 /* 1092BC */ void ftKb_SpecialNYs_801092BC(ftKb_GObj* gobj);

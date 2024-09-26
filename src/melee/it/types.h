@@ -3,7 +3,6 @@
 
 #include <platform.h>
 #include "cm/forward.h"
-#include "ft/forward.h"
 #include "it/forward.h" // IWYU pragma: export
 #include "it/items/forward.h"
 #include <dolphin/gx/forward.h>
@@ -193,7 +192,7 @@ struct Article {
     ItemDynamics* x14_dynamics;
 };
 
-typedef struct itUnkVars {
+typedef struct it_266F_ItemVars {
     u16 x0;
     u8* x4;
     u16 x8;
@@ -202,7 +201,7 @@ typedef struct itUnkVars {
     s32 x14;
     UnkFlagStruct x18;
     Vec3 x1C[2];
-} itUnkVars;
+} it_266F_ItemVars;
 
 struct Item {
     void* x0;
@@ -542,42 +541,41 @@ struct Item {
     UnkFlagStruct xDD2_flag;
     UnkFlagStruct xDD3_flag;
     union {
-        ItCapsuleVars capsule;
-        ItPokemonVars pokemon;
-        ItStarVars star;
+        it_266F_ItemVars it_266F;
+        itBombHei_ItemVars bombhei;
+        itCapsule_ItemVars capsule;
+        itCoin_ItemVars coin;
+        itEgg_ItemVars egg;
+        itFFlower_ItemVars fflower;
+        itFFlowerFlame_ItemVars fflowerflame;
+        itFoods_ItemVars foods;
+        itFoxBlaster_ItemVars foxblaster;
+        itFoxIllusion_ItemVars foxillusion;
+        itFoxLaser_ItemVars foxlaser;
+        itGShell_ItemVars gshell, rshell, zgshell, zrshell;
+        itHassam_ItemVars hassam;
+        itHeart_ItemVars heart;
+        itHeiho_ItemVars heiho;
+        itKinoko_ItemVars kinoko;
+        itKirbyHammer_ItemVars kirbyhammer;
+        itLGun_ItemVars lgun;
+        itLGunBeam_ItemVars lgunbeam;
+        itLGunRay_ItemVars lgunray;
+        itLinkArrow_ItemVars linkarrow;
+        itLinkBomb_ItemVars linkbomb;
+        itLinkBow_ItemVars linkbow;
+        itLinkHookshot_ItemVars linkhookshot;
+        itMato_ItemVars mato;
+        itPKFlush_ItemVars pkflush;
+        itPKFlushExplode_ItemVars pkflushexplode;
+        itPKThunder_ItemVars pkthunder;
+        itPokemon_ItemVars pokemon;
+        itStar_ItemVars star;
         itSword_ItemVars sword;
-        ItMatoVars mato;
-        itFoodsVars foods;
-        BobOmbVars BobOmb;
-        HeartContainerVars HeartContainer;
-        MaximTomatoVars MaximTomato;
-        ItLGunVars lgun;
-        ItLGunBeamVars lgunbeam;
-        ItLGunRayVars lgunray;
-        FoodVars Food;
-        EggVars egg;
-        itHeiHoVars heiho;
-        WhispyAppleVars WhispyApple;
-        PKFlashVars PKFlash;
-        PKFlashExplVars PKFlashExpl;
-        PKThunderVars PKThunderVars;
-        FoxBlasterVars foxblaster;
-        FoxLaserVars foxlaser;
-        FoxIllusionVars foxillusion;
-        itLinkArrowVars linkarrow;
-        itKirbyHammerVars kirbyhammer;
-        itLinkHookshotVars linkhookshot;
-        itLinkBowVars linkbow;
-        itShellVars shell;
-        itLinkBombVars linkbomb;
-        itTargetVars target;
-        CoinVars coin;
-        FFlowerVars fflower;
-        FFlowerFlameVars fflowerflame;
-        HassamVars hassam;
-        KinokoVars kinoko;
-        itUnkVars unk;
-        u8 padding[0xFCC - 0xDD4];
+        itTomato_ItemVars tomato;
+        itTincle_ItemVars tincle;
+        itWhispyApple_ItemVars whispyapple;
+        u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
 
@@ -764,6 +762,17 @@ struct HSD_ObjAllocUnk5 {
     u16 x8;
     u16 xA;
     u16 xC;
+};
+
+struct it_8026C47C_arg0_t {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
 };
 
 #endif

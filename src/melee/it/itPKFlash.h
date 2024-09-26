@@ -4,19 +4,19 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-typedef struct PKFlashVars {
+typedef struct itPKFlush_ItemVars {
     s32 xDD4_PKFlash;
     float xDD8_PKFlash;
     s32 xDDC_PKFlash;
     HSD_GObj* xDE0_PKFlash_Owner;
     s32 xDE4_PKFlash;
-} PKFlashVars;
+} itPKFlush_ItemVars;
 
-typedef struct PKFlashExplVars {
+typedef struct itPKFlushExplode_ItemVars {
     float xDD4;
     s32 xDD8;
     HSD_GObj* xDDC;
-} PKFlashExplVars;
+} itPKFlushExplode_ItemVars;
 
 typedef struct itFlashAttributes {
     float x0_FLASH_LIFETIMER;

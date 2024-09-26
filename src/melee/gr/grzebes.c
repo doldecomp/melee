@@ -1,5 +1,7 @@
 #include <platform.h>
 
+static s16 grZe_804D6998;
+
 void grZebes_801D84A0(void) {}
 
 /// #grZebes_801D84A4
@@ -89,7 +91,10 @@ void grZebes_801DA0C0(void) {}
 
 /// #grZebes_801DA254
 
-/// #grZebes_801DA3E8
+void grZebes_801DA3E8(void)
+{
+    grZe_804D6998 = 0;
+}
 
 /// #grZebes_801DA3F4
 

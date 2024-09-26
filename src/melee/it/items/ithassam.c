@@ -56,7 +56,7 @@ void it_802CDBE0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Article* ap = ip->xC4_article_data;
-    HassamVars* attr = ap->x4_specialAttributes;
+    itHassam_ItemVars* attr = ap->x4_specialAttributes;
 
     PAD_STACK(12);
 
@@ -183,7 +183,7 @@ void it_802CDF28(Item_GObj* gobj)
     f32 temp_f1;
 
     Item* ip = GET_ITEM(gobj);
-    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     var_r3 = it_802CDE1C(&ip->pos, ip->owner);
     if (var_r3 == NULL) {
@@ -207,7 +207,7 @@ void it_802CDF28(Item_GObj* gobj)
 void it_802CE008(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
@@ -223,7 +223,7 @@ bool it_802CE0C4(Item_GObj* gobj)
 {
     f32 prev_dir;
     Item* ip;
-    HassamVars* attr;
+    itHassam_ItemVars* attr;
     HSD_JObj* jobj;
 
     ip = (Item*) gobj->user_data;
@@ -266,7 +266,7 @@ bool it_802CE0C4(Item_GObj* gobj)
 void it_802CE308(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     it_8027A344(gobj);
     if (ip->ground_or_air == GA_Air) {
@@ -301,7 +301,7 @@ void it_802CE400(Item_GObj* gobj)
 
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
-    HassamVars* attr = ip->xC4_article_data->x4_specialAttributes;
+    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
 
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;

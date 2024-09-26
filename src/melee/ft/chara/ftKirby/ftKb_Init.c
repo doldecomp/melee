@@ -5101,7 +5101,10 @@ Fighter_Part ftKb_SpecialNYs_80109238(ftKb_GObj* gobj)
 
 /// #ftKb_SpecialNYs_80109260
 
-/// #ftKb_SpecialNYs_80109290
+float ftKb_SpecialNYs_80109290(ftKb_GObj* gobj)
+{
+    return GET_FIGHTER(gobj)->facing_dir;
+}
 
 /// #ftKb_SpecialNYs_8010929C
 

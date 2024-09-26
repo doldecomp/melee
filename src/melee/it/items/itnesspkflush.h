@@ -2,12 +2,13 @@
 #define GALE01_2AA7E4
 
 #include <platform.h>
+#include "ft/forward.h"
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
 
-/* 2AA7E4 */ HSD_GObj* it_802AA7E4(Item_GObj*);
+/* 2AA7E4 */ Fighter_GObj* it_802AA7E4(Item_GObj*);
 /* 2AA7F0 */ enum_t it_802AA7F0(Item_GObj*);
 /* 2AA810 */ UNK_RET it_802AA810(UNK_PARAMS);
 /* 2AA8C0 */ HSD_GObj* it_802AA8C0(Item_GObj*, Vec3*, enum_t, float);

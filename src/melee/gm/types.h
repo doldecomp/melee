@@ -221,4 +221,10 @@ struct gmMainLib_8015ED8C_arg0_t {
     } thing[11];
 };
 
+struct gm_8017DB6C_arg0_t {
+    /* +0 */ u8 x0;
+    /* +1 */ u8 _1[0xC - 0x1];
+};
+STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
+
 #endif

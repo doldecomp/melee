@@ -156,7 +156,7 @@ def print_funcs(
             [
                 [
                     f"{f.address:08X}",
-                    f.unit,
+                    (ROOT / "src" / f.unit).with_suffix(".c").relative_to(ROOT),
                     f.name,
                     humanfriendly.format_size(f.size),
                     f"{f.matched:.2f}%",

@@ -7,7 +7,6 @@
 
 #include "db/db_2253.h"
 #include "ft/ftlib.h"
-#include "ft/types.h"
 #include "gr/grdynamicattr.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
@@ -26,6 +25,42 @@ static Event mpColl_804D64A4;
 static Event mpColl_804D64A8;
 u32 mpColl_804D64AC;
 
+char mpColl_804D3948[2] = "0";
+
+/// @todo float order hack
+const float mpColl_804D7F9C = -F32_MAX;
+const float mpColl_804D7FA0 = F32_MAX;
+const float flt_804D7FF8 = 5.0f;
+const f64 flt_804D8000 = -0.75;
+const f64 flt_804D8008 = 0.75;
+const float flt_804D8010 = -3.0f;
+
+/// @todo float order hack
+const float flt_804D7FD8 = 6.0f;
+
+/// @todo This is the same as #MPCOLL_RIGHTWALL, etc. Pick a naming convention.
+#define Collide_LeftWallPush 0x1
+#define Collide_LeftWallHug 0x20
+#define Collide_LeftWallMask 0x3F
+#define Collide_RightWallPush 0x40
+#define Collide_RightWallHug 0x800
+#define Collide_RightWallMask 0xFC0
+#define Collide_CeilingPush 0x2000
+#define Collide_CeilingHug 0x4000
+#define Collide_FloorPush 0x8000
+#define Collide_FloorHug 0x10000
+#define Collide_LeftEdge 0x100000
+#define Collide_RightEdge 0x200000
+#define Collide_Edge 0x800000
+#define Collide_LeftLedgeGrab 0x1000000
+#define Collide_RightLedgeGrab 0x2000000
+#define Collide_LeftLedgeSlip 0x10000000
+#define Collide_RightLedgeSlip 0x20000000
+
+#define CollisionFlagAir_StayAirborne 0x1
+#define CollisionFlagAir_PlatformPassCallback 0x2
+#define CollisionFlagAir_CanGrabLedge 0x4
+
 // 80041C78 https://decomp.me/scratch/V6eYQ
 void mpColl_80041C78(void)
 {
@@ -33,8 +68,6 @@ void mpColl_80041C78(void)
     mpColl_804D64A4 = 0;
     mpColl_804D64A8 = 0;
 }
-
-char mpColl_804D3948[2] = "0";
 
 // 80041C8C https://decomp.me/scratch/VvSaI
 void mpColl_80041C8C(CollData* cd)
@@ -116,10 +149,6 @@ void mpColl_80041DD0(CollData* cd, u32 flags)
 
     mpLib_800588D0(left, bottom, right, top);
 }
-
-/// @todo float order hack
-const float mpColl_804D7F9C = -F32_MAX;
-const float mpColl_804D7FA0 = F32_MAX;
 
 // 80041EE4 https://decomp.me/scratch/j2TXK
 // CollDataInit
@@ -796,8 +825,6 @@ void mpColl_800436D8(CollData* arg0, int arg1)
     arg0->x36 = arg1;
 }
 
-// TODO: float order hack
-const float flt_804D7FD8 = 6.0f;
 static float six(void)
 {
     return flt_804D7FD8;
@@ -1064,28 +1091,31 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     }
 }
 
-/// @todo This is the same as #MPCOLL_RIGHTWALL, etc. Pick a naming convention.
-#define Collide_LeftWallPush 0x1
-#define Collide_LeftWallHug 0x20
-#define Collide_LeftWallMask 0x3F
-#define Collide_RightWallPush 0x40
-#define Collide_RightWallHug 0x800
-#define Collide_RightWallMask 0xFC0
-#define Collide_CeilingPush 0x2000
-#define Collide_CeilingHug 0x4000
-#define Collide_FloorPush 0x8000
-#define Collide_FloorHug 0x10000
-#define Collide_LeftEdge 0x100000
-#define Collide_RightEdge 0x200000
-#define Collide_Edge 0x800000
-#define Collide_LeftLedgeGrab 0x1000000
-#define Collide_RightLedgeGrab 0x2000000
-#define Collide_LeftLedgeSlip 0x10000000
-#define Collide_RightLedgeSlip 0x20000000
+/// #mpColl_80043E90
 
-#define CollisionFlagAir_StayAirborne 0x1
-#define CollisionFlagAir_PlatformPassCallback 0x2
-#define CollisionFlagAir_CanGrabLedge 0x4
+/// #mpColl_80043F40
+
+/// #mpColl_80044164
+
+/// #mpColl_800443C4
+
+/// #mpColl_80044628
+
+/// #mpColl_80044838
+
+/// #mpColl_80044948
+
+/// #mpColl_80044AD8
+
+/// #mpColl_80044C74
+
+/// #mpColl_80044E10
+
+/// #mpColl_800454A4
+
+/// #mpColl_80045B74
+
+/// #mpColl_80046224
 
 #pragma push
 #pragma dont_inline on
@@ -1383,6 +1413,10 @@ bool mpColl_80046904(CollData* coll, u32 flags)
 }
 #pragma pop
 
+/// #fn_80046F78
+
+/// #mpColl_800471F8
+
 bool mpColl_8004730C(CollData* cdata, ftCollisionBox* arg1)
 {
     s32 ret;
@@ -1405,10 +1439,13 @@ bool mpColl_8004730C(CollData* cdata, ftCollisionBox* arg1)
     return ret;
 }
 
-const float flt_804D7FF8 = 5.0f;
-const f64 flt_804D8000 = -0.75;
-const f64 flt_804D8008 = 0.75;
-const float flt_804D8010 = -3.0f;
+/// #mpColl_800473CC
+
+/// #mpColl_800474E0
+
+/// #mpColl_800475F4
+
+/// #mpColl_800476B4
 
 bool mpColl_800477E0(CollData* arg0)
 {
@@ -1450,3 +1487,109 @@ bool mpColl_800477E0(CollData* arg0)
 
     return ret;
 }
+
+/// #mpColl_800478F4
+
+/// #mpColl_80047A08
+
+/// #mpColl_80047AC8
+
+/// #mpColl_80047BF4
+
+/// #mpColl_80047D20
+
+/// #mpColl_80047E14
+
+/// #mpColl_80047F40
+
+/// #mpColl_8004806C
+
+/// #mpColl_80048160
+
+/// #mpColl_80048274
+
+/// #mpColl_80048388
+
+/// #mpColl_80048464
+
+/// #mpColl_80048578
+
+/// #mpColl_80048654
+
+/// #mpColl_80048768
+
+/// #mpColl_80048844
+
+/// #mpColl_800488F4
+
+/// #mpColl_80048AB0
+
+/// #mpColl_800491C8
+
+/// #mpColl_80049778
+
+/// #mpColl_80049EAC
+
+/// #mpColl_8004A45C
+
+/// #mpColl_8004A678
+
+/// #mpColl_8004A908
+
+/// #mpColl_8004AB80
+
+/// #fn_8004ACE4
+
+/// #mpColl_8004B108
+
+/// #mpColl_8004B21C
+
+/// #mpColl_8004B2DC
+
+/// #mpColl_8004B3F0
+
+/// #mpColl_8004B4B0
+
+/// #mpColl_8004B5C4
+
+/// #mpColl_8004B6D8
+
+/// #mpColl_8004B894
+
+/// #mpColl_8004BDD4
+
+/// #mpColl_8004C328
+
+/// #fn_8004C534
+
+/// #mpColl_8004C750
+
+/// #mpColl_8004C864
+
+/// #mpColl_8004C91C
+
+/// #mpColl_8004CA6C
+
+/// #mpColl_8004CAA0
+
+/// #mpColl_8004CAE8
+
+/// #mpColl_8004CB30
+
+/// #mpColl_8004CB78
+
+/// #mpColl_8004CBC0
+
+void mpColl_8004CBE8(CollData* arg0)
+{
+    arg0->x3C = arg0->floor.index;
+}
+
+void mpColl_8004CBF4(CollData* arg0)
+{
+    arg0->x3C = -1;
+}
+
+/// #mpColl_8004CC00
+
+/// #mpColl_8004D024

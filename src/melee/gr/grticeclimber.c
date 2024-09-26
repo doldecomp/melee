@@ -10,7 +10,6 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "it/inlines.h"
-#include "it/item.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -177,8 +176,8 @@ void grTIceClimber_80221208(HSD_GObj* gobj)
     Item* it = GET_ITEM(gobj);
     PAD_STACK(16);
 
-    HSD_JObjSetFlagsAll(it->xDD4_itemVar.target.jobj, 0x10);
-    lb_8000B1CC(it->xDD4_itemVar.target.jobj, NULL, &pos);
+    HSD_JObjSetFlagsAll(it->xDD4_itemVar.mato.x4, 0x10);
+    lb_8000B1CC(it->xDD4_itemVar.mato.x4, NULL, &pos);
     efSync_Spawn(0x445, gobj, &pos);
     Camera_80030E44(2, 0);
     Ground_801C53EC(310);

@@ -2,17 +2,25 @@
 
 #include <dolphin/ax.h>
 
-static void (*__AXUserFrameCallback)(void);
+/* 4D7548 */ static void (*__AXUserFrameCallback)(void);
+/* 4D754C */ static int __AXDSPInitFlag;
+/* 4D7550 */ static int __AXDSPDoneFlag;
 
 /// #__AXOutNewFrame
 
 /// #__AXOutAiCallback
 
-/// #__AXDSPInitCallback
+void __AXDSPInitCallback(void)
+{
+    __AXDSPInitFlag = 1;
+}
 
 /// #__AXDSPResumeCallback
 
-/// #__AXDSPDoneCallback
+void __AXDSPDoneCallback(void)
+{
+    __AXDSPDoneFlag = 1;
+}
 
 /// #__AXOutInitDSP
 

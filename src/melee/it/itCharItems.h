@@ -94,7 +94,7 @@ typedef struct {
                                   // 1: Starting to shoot
                                   // 2: Being put away
     /* x108 */ HSD_GObj* owner;   // xE7C
-} FoxBlasterVars;
+} itFoxBlaster_ItemVars;
 
 typedef struct FoxBlasterAttr {
     /* +0 */ float x0;
@@ -114,7 +114,7 @@ typedef struct {
     /*  +4 ip+DD8 */ float angle;
     /*  +8 ip+DDC */ float speed;
     /*  +C ip+DE0 */ Vec3 pos;
-} FoxLaserVars;
+} itFoxLaser_ItemVars;
 
 typedef struct FoxLaserAttr {
     /* +0 */ float lifetime; // [35]
@@ -133,7 +133,7 @@ typedef struct {
     /*  +0 ip+DD4 */ HSD_Joint* xDD4;
     /*  +4 ip+DD8 */ float xDD8;
     /*  +8 ip+DDC */ HSD_JObj* xDDC;
-} FoxIllusionVars;
+} itFoxIllusion_ItemVars;
 
 typedef struct FoxIllusionAttr {
     float x0; // [5]
@@ -142,7 +142,7 @@ typedef struct FoxIllusionAttr {
 
 typedef struct {
     u32 x0;
-} itKirbyHammerVars;
+} itKirbyHammer_ItemVars;
 
 typedef struct ItemLink // user_data struct of GObj class 7
 {
@@ -192,7 +192,7 @@ typedef struct {
     f32 x58;
     f32 x5C;
     f32 x60;
-} itLinkHookshotVars;
+} itLinkHookshot_ItemVars;
 
 typedef struct {
     f32 x0;
@@ -230,7 +230,7 @@ typedef struct {
     f32 x8;
     f32 xC;
     Item_GObj* x10;
-} itLinkBombVars;
+} itLinkBomb_ItemVars;
 
 typedef struct itLinkBombAttributes {
     /* x0 */ u32 lifetime;
@@ -287,7 +287,7 @@ typedef struct {
     f32 xE8;
     f32 xEC;
     s32 xF0;
-} itLinkArrowVars;
+} itLinkArrow_ItemVars;
 
 typedef struct {
     f32 x0;
@@ -307,6 +307,6 @@ typedef struct {
 typedef struct {
     f32 x0;
     HSD_GObj* x4;
-} itLinkBowVars;
+} itLinkBow_ItemVars;
 
 #endif

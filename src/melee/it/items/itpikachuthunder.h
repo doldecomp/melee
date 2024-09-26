@@ -7,10 +7,10 @@
 
 #include "it/items/types.h"
 
-/* 2B1DEC */ s32 it_802B1DEC(u32);
-/* 2B1DF8 */ u32 it_802B1DF8(Item_GObj*, Vec3*, Vec3*, s32, s32, s32);
-/* 2B1FC8 */ s32 it_802B1FC8(u32);
-/* 2B1FE8 */ void it_802B1FE8(u32, Vec3*);
+/* 2B1DEC */ int it_802B1DEC(Item_GObj*);
+/* 2B1DF8 */ Item_GObj* it_802B1DF8(Item_GObj*, Vec3*, Vec3*, s32, s32, s32);
+/* 2B1FC8 */ s32 it_802B1FC8(Item_GObj*);
+/* 2B1FE8 */ void it_802B1FE8(Item_GObj*, Vec3*);
 /* 2B202C */ void it_802B202C(Item_GObj*);
 /* 2B2080 */ UNK_RET it_802B2080(UNK_PARAMS);
 /* 2B20DC */ UNK_RET it_802B20DC(UNK_PARAMS);

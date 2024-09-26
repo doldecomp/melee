@@ -212,15 +212,15 @@ s32 it_8026B47C(HSD_GObj* gobj) // Get heal value of healing items
     kind = temp_item->kind;
     switch (kind) {
     case It_Kind_Heart:
-        return temp_item->xDD4_itemVar.HeartContainer.xDD4_heal;
+        return temp_item->xDD4_itemVar.heart.xDD4_heal;
     case It_Kind_Tomato:
-        return temp_item->xDD4_itemVar.MaximTomato.heal_amount;
+        return temp_item->xDD4_itemVar.tomato.heal_amount;
     case It_Kind_Foods:
-        return temp_item->xDD4_itemVar.Food.xDD8_heal;
+        return temp_item->xDD4_itemVar.foods.heal_amount;
     case Pokemon_Lucky_Egg:
         return temp_item->xDD4_itemVar.egg.heal_amount;
     case It_Kind_WhispyHealApple:
-        return temp_item->xDD4_itemVar.WhispyApple.xDD4_heal;
+        return temp_item->xDD4_itemVar.whispyapple.xDD4_heal;
     default:
         return 0;
     }
@@ -582,7 +582,7 @@ f32 it_8026B960(HSD_GObj* gobj)
     switch (kind) {
     case It_Kind_BombHei:
         if ((s32) ip->msid != 0xB) {
-            unk_timer = ip->xDD4_itemVar.BobOmb.xDEC;
+            unk_timer = ip->xDD4_itemVar.bombhei.xDEC;
         }
         break;
     case It_Kind_Link_Bomb:
@@ -1112,7 +1112,7 @@ bool it_8026C1B4(HSD_GObj* gobj)
 
 u32 it_8026C1D4(void)
 {
-    ItLGunVars* lgun = it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes;
+    itLGun_ItemVars* lgun = it_804D6D24[It_Kind_L_Gun]->x4_specialAttributes;
     return lgun->timer;
 }
 

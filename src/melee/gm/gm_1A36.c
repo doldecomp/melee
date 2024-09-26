@@ -1,4 +1,4 @@
-#include <platform.h>
+#include "gm_1A36.h"
 
 #include "gmmain_lib.h"
 
@@ -20,19 +20,6 @@
 #include <baselib/devcom.h>
 #include <baselib/video.h>
 
-struct sceneData {
-    u32 a;
-    u8 scene_id;
-};
-
-/* 1A5614 */ static void gm_801A5614(void);
-/* 1ACC90 */ static void gm_801ACC90(void);
-/* 1BBFE4 */ static void gm_801BBFE4(void);
-
-static UNK_T gm_804D6720;
-
-typedef struct MinorScene MinorScene;
-
 struct MinorScene {
     u8 idx;
     u8 preload;
@@ -47,7 +34,7 @@ struct MinorScene {
     void* unk_struct_1;
 };
 
-typedef struct {
+struct MajorScene {
     u8 preload;
     u8 idx;
 
@@ -56,18 +43,16 @@ typedef struct {
     void (*Init)(void);
 
     MinorScene* minor_scenes;
-} MajorScene; // 803DACA4
+}; // 803DACA4
 
-void gm_801A4014(MajorScene* scene);
-
-typedef struct _MinorSceneHandler {
+struct MinorSceneHandler {
     u8 class_id;
 
     void (*OnFrame)(void);
     void (*OnLoad)(u32);
     void (*OnLeave)(u32);
     void (*unk_func)(void);
-} MinorSceneHandler; // 803DA920
+}; // 803DA920
 
 extern struct {
     int x0, x4, x8;
@@ -93,19 +78,18 @@ typedef struct {
 } GameState; // 80479D30
 STATIC_ASSERT(sizeof(GameState) == 0x14);
 
-/* 1A3EF4 */ static void gm_801A3EF4(void);
-/* 1A3F48 */ static void gm_801A3F48(MinorScene*);
-/* 1A4284 */ static UNK_T gm_801A4284(UNK_T);
-/* 1A42F8 */ static void gm_801A42F8(int);
-/* 1A4310 */ static UNK_RET gm_800A4310(UNK_PARAMS);
-/* 1A4330 */ void gm_801A4330(void*);
-/* 1A4B88 */ static void gm_801A4B88(void*);
-/* 1A4BD4 */ static void gm_801A4BD4(void);
-/* 1A4CE0 */ static MinorSceneHandler* gm_801A4CE0(u8);
-/* 1A4D34 */ static void gm_801A4D34(void*);
-/* 1A50AC */ static MajorScene* gm_801A50AC(void);
+struct sceneData {
+    u32 a;
+    u8 scene_id;
+};
 
-static GameState gm_80479D30;
+/* 3DA920 */ static MajorScene gm_803DA920;
+/* 3DACA4 */ static MajorScene gm_803DACA4;
+/* 479D30 */ static GameState gm_80479D30;
+/* 4D6720 */ static UNK_T gm_804D6720;
+/* 4D6730 */ static UNK_T gm_804D6730;
+/* 3DD2C0 */ static int gm_803DD2C0[74];
+/* 49C178 */ static s8 gm_8049C178[16];
 
 /// #gm_801A3680
 
@@ -236,9 +220,9 @@ good:
     }
 }
 
-s32 gm_801A427C(void* arg0)
+int gm_801A427C(void* arg0)
 {
-    return M2C_FIELD(arg0, s32*, 0x10);
+    return M2C_FIELD(arg0, int*, 0x10);
 }
 
 UNK_T gm_801A4284(UNK_T arg0)
@@ -396,9 +380,19 @@ void gm_801A4B88(UNK_T arg0)
     gm_804D6720 = arg0;
 }
 
-/// #gm_801A4B90
+extern void* gm_804D6720;
 
-/// #gm_801A4B9C
+s32 gm_801A4B90(void)
+{
+    return M2C_FIELD(gm_804D6720, s32*, 4);
+}
+
+extern void* gm_804D6720;
+
+s32 gm_801A4B9C(void)
+{
+    return M2C_FIELD(gm_804D6720, s32*, 8);
+}
 
 /// #gm_801A4BA8
 
@@ -419,9 +413,15 @@ void fn_801A4BD0(void) {}
 
 /// #gm_801A4D34
 
-/// #gm_801A50A0
+MajorScene* gm_801A50A0(void)
+{
+    return &gm_803DA920;
+}
 
-/// #gm_801A50AC
+MajorScene* gm_801A50AC(void)
+{
+    return &gm_803DACA4;
+}
 
 /// #gm_801A50B8
 
@@ -431,11 +431,12 @@ void fn_801A4BD0(void) {}
 
 /// #gm_801A5220
 
-/// #gm_801A5244
+UNK_T gm_801A5244(void)
+{
+    return &gmMainLib_804D3EE0->padding_x588[4];
+}
 
-extern M2C_UNK gm_804D6730;
-
-M2C_UNK* gm_801A5250(void)
+UNK_T gm_801A5250(void)
 {
     return &gm_804D6730;
 }
@@ -594,7 +595,10 @@ void gm_801A5614(void) {}
 
 void gm_801ACC90(void) {}
 
-/// #gm_801ACC94
+UNK_T gm_801ACC94(void)
+{
+    return &gm_803DD2C0;
+}
 
 /// #gm_801ACCA0
 
@@ -914,7 +918,10 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B62D8
 
-/// #gm_801B6320
+UNK_T gm_801B6320(void)
+{
+    return &gmMainLib_804D3EE0->padding_x57C[4];
+}
 
 /// #gm_801B632C
 
@@ -992,7 +999,10 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B8C30
 
-/// #fn_801B8C5C
+void fn_801B8C5C(void* arg0)
+{
+    M2C_FIELD(arg0, s16*, 0x12) = 0x12C;
+}
 
 /// #gm_801B8C68
 
@@ -1184,7 +1194,10 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801BA588
 
-/// #fn_801BA5B4
+void fn_801BA5B4(void* arg0)
+{
+    M2C_FIELD(arg0, f32*, 0x34) = 0.5f;
+}
 
 /// #gm_801BA5C0
 
@@ -1210,7 +1223,10 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801BA780
 
-/// #fn_801BA7AC
+void fn_801BA7AC(void* arg0)
+{
+    M2C_FIELD(arg0, f32*, 0x34) = 1.25f;
+}
 
 /// #gm_801BA7B8
 
@@ -1318,11 +1334,20 @@ void gm_801BBFE4(void) {}
 
 /// #gm_801BEB2C
 
-/// #gm_801BEB68
+void gm_801BEB68(s32 arg0)
+{
+    M2C_FIELD(gmMainLib_804D3EE0, s32*, 0x548) = arg0;
+}
 
-/// #gm_801BEB74
+void gm_801BEB74(u8 arg0)
+{
+    gmMainLib_804D3EE0->padding_x52C[5] = arg0;
+}
 
-/// #gm_801BEB80
+u8 gm_801BEB80(void)
+{
+    return gmMainLib_804D3EE0->padding_x52C[5];
+}
 
 /// #gm_801BEB8C
 
@@ -1352,7 +1377,10 @@ void gm_801BBFE4(void) {}
 
 /// #gm_801BEF84
 
-/// #gm_801BEFA4
+void gm_801BEFA4(s8 arg0)
+{
+    gm_8049C178[0] = arg0;
+}
 
 /// #gm_801BEFB0
 
@@ -1438,7 +1466,7 @@ enum {
     LANG_JP = 0,
 };
 
-void gm_801BF9A8(void* data)
+void gm_801BF9A8(UNK_T data)
 {
     struct sceneData* scene_data;
 
