@@ -9,7 +9,7 @@ Super Smash Bros Melee \
 [Build Status]: https://github.com/doldecomp/melee/actions/workflows/build.yml/badge.svg
 [actions]: https://github.com/doldecomp/melee/actions/workflows/build.yml
 [Code Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=code&label=Code&category=all
-[Data Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=data&label=Data&category=all
+[Data Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_data&label=Data&category=all
 [Linked Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_code&label=Linked%20Code&category=all
 [Discord Badge]: https://img.shields.io/discord/933849697485983765?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/CWKqYMePX8
