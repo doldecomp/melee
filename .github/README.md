@@ -1,9 +1,19 @@
-# Super Smash Bros Melee
-[![Code Progress](https://img.shields.io/endpoint?label=Code&url=https%3A%2F%2Fprogress.decomp.club%2Fdata%2Fmelee%2FGALE01%2Fdol%2F%3Fmode%3Dshield%26measure%3Dcode)](https://doldecomp.github.io/melee/progress/)
-[![Data Progress](https://img.shields.io/endpoint?label=Data&url=https%3A%2F%2Fprogress.decomp.club%2Fdata%2Fmelee%2FGALE01%2Fdol%2F%3Fmode%3Dshield%26measure%3Ddata)](https://doldecomp.github.io/melee/progress/)
-[![GC/Wii Decompilation](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=shield)](https://discord.gg/hKx3FJJgrV)
-[![build](https://github.com/doldecomp/melee/actions/workflows/build.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/build.yml)
-[![publish-packages](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml)
+Super Smash Bros Melee \
+[![Build Status]][actions]
+[![Code Progress]][progress]
+[![Data Progress]][progress]
+[![Linked Progress]][progress]
+[![Discord Badge]][discord]
+=============
+
+[Build Status]: https://github.com/doldecomp/melee/actions/workflows/build.yml/badge.svg
+[actions]: https://github.com/doldecomp/melee/actions/workflows/build.yml
+[Code Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=code&label=Code&category=all
+[Data Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=data&label=Data&category=all
+[Linked Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_code&label=Linked%20Code&category=all
+[Discord Badge]: https://img.shields.io/discord/933849697485983765?color=%237289DA&logo=discord&logoColor=%23FFFFFF
+[discord]: https://discord.gg/CWKqYMePX8
+[progress]: https://decomp.dev/doldecomp/melee
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
 
