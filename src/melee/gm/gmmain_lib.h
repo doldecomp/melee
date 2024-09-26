@@ -158,10 +158,8 @@
 /* 15F600 */ UNK_RET gmMainLib_8015F600(UNK_PARAMS);
 /* 15FA34 */ UNK_RET gmMainLib_8015FA34(UNK_PARAMS);
 /* 15FB68 */ UNK_RET gmMainLib_8015FB68(UNK_PARAMS);
-/* 15FBA4 */ UNK_RET gmMainLib_8015FBA4(UNK_PARAMS);
 /* 15FBA4 */ void gmMainLib_8015FBA4(void);
 /* 15FC74 */ UNK_RET gmMainLib_8015FC74(UNK_PARAMS);
-/* 15FCC0 */ UNK_RET gmMainLib_8015FCC0(UNK_PARAMS);
 /* 15FCC0 */ void gmMainLib_8015FCC0(void);
 /* 4D3EE0 */ extern struct gmm_x0* gmMainLib_804D3EE0;
 
