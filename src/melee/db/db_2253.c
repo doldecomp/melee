@@ -1,8 +1,13 @@
 #include "db_2253.h"
 
 #include <dolphin/mtx/types.h>
+#include <dolphin/mtx/vec.h>
+#include <baselib/controller.h>
+#include <MSL/trigf.h>
 
 /* 4D6B50 */ static IntVec2 lbl_804D6B50;
+/* 453004 */ extern UNK_T cm_80453004;
+/* 4D6B5C */ extern s8 lbl_804D6B5C;
 
 /// #db_80225374
 
@@ -104,21 +109,119 @@ void fn_80226E00(void)
 /// #fn_802277E8
 
 /// #fn_80227904
+void fn_80227904(HSD_GObj* camera, s8 port)
+{
+    f32 var_f1;
+    f32 var_f2;
+    f32 var_f2_2;
+    f32 var_f3;
+    u32 temp_r4;
 
+    var_f2 = HSD_PadMasterStatus[port].nml_subStickX;
+    if (var_f2 < 0.0f) {
+        var_f1 = -var_f2;
+    } else {
+        var_f1 = var_f2;
+    }
+    if (var_f1 < 0.2f) {
+        var_f2 = 0.0f;
+    }
+    var_f3 = HSD_PadMasterStatus[port].nml_subStickY;
+    if (var_f3 < 0.0f) {
+        var_f2_2 = -var_f3;
+    } else {
+        var_f2_2 = var_f3;
+    }
+    if (var_f2_2 < 0.2f) {
+        var_f3 = 0.0f;
+    }
+    temp_r4 = HSD_PadMasterStatus[port].button;
+
+    if (temp_r4 & 1) {
+        fn_80227CAC(camera, var_f3);
+    } else if (temp_r4 & 2) {
+        fn_80227FE0(camera, -var_f2, -var_f3);
+    } else {
+        fn_80227B64(camera, var_f2, var_f3);
+    }
+    lbl_804D6B5C = 0x3C;
+}
 /// #fn_802279E8
 
 /// #fn_80227B64
-
+void fn_80227B64(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
+{
+    if ((cstick_x != 0.0f) || (cstick_y != 0.0f)) {
+        fn_802279E8(camera, (Vec3*) &cm_80453004 + 0x6,
+                    (Vec3*) &cm_80453004 + 0x5, cstick_x, cstick_y);
+    }
+}
 /// #fn_80227BA8
 
 /// #fn_80227CAC
+void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
+{
+    Vec3 sp14;
+    UNK_T sp10;
+    s32 temp_cr0_eq;
+    void* temp_r31;
+
+    temp_cr0_eq = cstick_y == 0.0f;
+    if ((temp_cr0_eq != 0) && (temp_cr0_eq != 0)) {
+        temp_r31 = camera->hsd_obj;
+        HSD_CObjGetEyeVector((HSD_CObj*) temp_r31, &sp14);
+        PSVECScale(&sp14, &sp14,
+                   HSD_CObjGetEyeDistance((HSD_CObj*) temp_r31) *
+                       -((0.05f * cstick_y) - 1.0f));
+        PSVECSubtract((Vec3*) &cm_80453004 + 0x5, &sp14,
+                      (Vec3*) &cm_80453004 + 0x6);
+    }
+}
 
 /// #fn_80227D38
 
 /// #fn_80227EB0
 
 /// #fn_80227FE0
+void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
+{
+    Vec3 sp24;
+    Vec3 sp18;
+    UNK_T sp20;
+    Vec3* temp_r3;
+    Vec3* temp_r3_2;
+    Vec3* temp_r3_3;
+    Vec3* temp_r3_4;
+    f32 temp_f31;
+    f32 temp_f31_2;
+    void* temp_r30;
 
+    if ((cstick_x != 0.0f) || (cstick_y != 0.0f)) {
+        temp_r30 = camera->hsd_obj;
+        temp_f31 = HSD_CObjGetEyeDistance((HSD_CObj*) temp_r30);
+        temp_f31_2 =
+            0.03f *
+            (2.0f *
+             (temp_f31 * tanf(0.017453292f *
+                              HSD_CObjGetFov((HSD_CObj*) temp_r30) * 0.5f)));
+        if (cstick_x != 0.0f) {
+            HSD_CObjGetLeftVector((HSD_CObj*) temp_r30, &sp18);
+            PSVECScale(&sp18, &sp18, temp_f31_2 * cstick_x);
+            temp_r3 = (Vec3*) &cm_80453004 + 0x5;
+            PSVECAdd(temp_r3, &sp18, temp_r3);
+            temp_r3_2 = (Vec3*) &cm_80453004 + 0x6;
+            PSVECAdd(temp_r3_2, &sp18, temp_r3_2);
+        }
+        if (cstick_y != 0.0f) {
+            HSD_CObjGetUpVector((HSD_CObj*) temp_r30, &sp24);
+            PSVECScale(&sp24, &sp24, -temp_f31_2 * cstick_y);
+            temp_r3_3 = (Vec3*) &cm_80453004 + 0x5;
+            PSVECAdd(temp_r3_3, &sp24, temp_r3_3);
+            temp_r3_4 = (Vec3*) &cm_80453004 + 0x6;
+            PSVECAdd(temp_r3_4, &sp24, temp_r3_4);
+        }
+    }
+}
 /// #fn_80228124
 
 /// #fn_80228318

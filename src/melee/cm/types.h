@@ -8,7 +8,8 @@
 #include <dolphin/mtx/types.h>
 
 struct CameraBox {
-    u32 data_filler[2];
+    CameraBox* next;
+    CameraBox* prev;
     bool x8;
     /* +C:0 */ u8 xC_b0 : 1;
     u8 xD_fill[0x10 - 0xD];
@@ -19,6 +20,8 @@ struct CameraBox {
     Vec3 x34;
     Vec2 x40;
     Vec3 x48;
+    Vec3 x54;
+    Vec3 x60;
 };
 
 struct CameraMovement {
@@ -35,7 +38,7 @@ struct CameraBounds {
     float y_min;
     float x_max;
     float y_max;
-    float subjects;
+    int subjects;
     float z_pos;
 };
 
@@ -57,6 +60,14 @@ struct Camera {
     float unk_2c0;
     u8 unk2[0x39C - 0x2c0];
     uint last_mode;
+};
+
+struct CameraUnkGlobals {
+    float x0[11];
+    float x2C;
+    float x30;
+    float x34;
+    float x38;
 };
 
 #endif

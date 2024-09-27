@@ -5,6 +5,9 @@
 #include "ft/forward.h"
 #include "it/forward.h"
 
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+
 /* 225374 */ void db_80225374(void);
 /* 2254B8 */ UNK_RET db_802254B8(UNK_PARAMS);
 /* 22558C */ UNK_RET fn_8022558C(UNK_PARAMS);
@@ -53,14 +56,18 @@
 /* 227188 */ UNK_RET fn_80227188(UNK_PARAMS);
 /* 227484 */ UNK_RET fn_80227484(UNK_PARAMS);
 /* 2277E8 */ UNK_RET fn_802277E8(UNK_PARAMS);
-/* 227904 */ UNK_RET fn_80227904(UNK_PARAMS);
-/* 2279E8 */ UNK_RET fn_802279E8(UNK_PARAMS);
-/* 227B64 */ UNK_RET fn_80227B64(UNK_PARAMS);
+/* 227904 */ void fn_80227904(HSD_GObj* camera, s8 port);
+/* 2279E8 */ void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos,
+                              Vec3* camera_interest, float cstick_x,
+                              float cstick_y);
+/* 227B64 */ void fn_80227B64(HSD_GObj* camera, float cstick_x,
+                              float cstick_y);
 /* 227BA8 */ UNK_RET fn_80227BA8(UNK_PARAMS);
-/* 227CAC */ UNK_RET fn_80227CAC(UNK_PARAMS);
+/* 227CAC */ void fn_80227CAC(HSD_GObj* camera, float cstick_y);
 /* 227D38 */ UNK_RET fn_80227D38(UNK_PARAMS);
 /* 227EB0 */ UNK_RET fn_80227EB0(UNK_PARAMS);
-/* 227FE0 */ UNK_RET fn_80227FE0(UNK_PARAMS);
+/* 227FE0 */ void fn_80227FE0(HSD_GObj* camera, float cstick_x,
+                              float cstick_y);
 /* 228124 */ UNK_RET fn_80228124(UNK_PARAMS);
 /* 228318 */ UNK_RET fn_80228318(UNK_PARAMS);
 /* 2283F0 */ UNK_RET fn_802283F0(UNK_PARAMS);
