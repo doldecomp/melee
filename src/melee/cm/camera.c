@@ -23,6 +23,9 @@
 /* 4D7E30 */ extern float cm_804D7E30;
 /* 4D7E60 */ extern float cm_804D7E60;
 /* 4D7E6C */ extern float cm_804D7E6C;
+/* 4D6458 */ extern CameraBox* cm_804D6458;
+/* 4D6460 */ extern CameraBox* cm_804D6460;
+/* 4D6468 */ extern CameraBox* cm_804D6468;
 
 CameraBox* Camera_80029020(void)
 {
@@ -405,4 +408,139 @@ bool Camera_8003118C(Vec3* arg0, float arg1)
         return true;
     }
     return false;
+}
+
+void Camera_80028F5C(CameraBox* subject, s32 arg1)
+{
+    if (subject != NULL) {
+        subject->x8 = arg1;
+        subject->x10.z = 0.0f;
+        subject->x10.y = 0.0f;
+        subject->x10.x = 0.0f;
+        subject->x1C = subject->x10;
+        // subject->x1C.y = subject->x10.y;
+        // subject->x1C.z = subject->x10.z;
+        subject->x28 = 0.0f;
+        // subject->xC_b0 = subject->xC_b0 & ~0x80;
+        subject->xC_b0 = subject->xC_b0 & ~0x80;
+        subject->xC_b0 = subject->xC_b0 & ~0x40;
+        subject->xC_b0 = subject->xC_b0 & ~0x20;
+        subject->xD_fill[0] = 0;
+        subject->x2C.x = -1.0f;
+        subject->x2C.y = 1.0f;
+        subject->x34.x = 1.0f;
+        subject->x34.y = -1.0f;
+        subject->x34.z = 1.0f;
+        subject->x40 = subject->x2C;
+        subject->x48 = subject->x34;
+        // // subject->bounds.left = (f32) subject->default_bounds.left;
+        // // subject->bounds.right = (f32) subject->default_bounds.right;
+        // // subject->bounds.top = (f32) subject->default_bounds.top;
+        // // subject->bounds.bottom = (f32) subject->default_bounds.bottom;
+        // // subject->default_size = subject->size;
+        // *(u32*) &subject->default_size = *(u32*) &subject->size;
+        subject->x54.x = 0.0f;
+        subject->x54.y = 0.0f;
+        subject->x54.z = 0.0f;
+        subject->x60.x = 0.0f;
+        subject->x60.y = 0.0f;
+        subject->x60.z = 0.0f;
+    }
+}
+
+void Camera_80028F5C(CameraBox*, s32); /* static */
+static s8 cm_803BCBB0[0x20] = "couldn't get CmSubject struct.\n";
+
+CameraBox* Camera_80029044(int arg0)
+{
+    CameraBox* subject = cm_804D6458;
+
+    // subject = cm_804D6458;
+    if ((CameraBox*) cm_804D6458 == NULL) {
+        OSReport("couldn't get CmSubject struct.\n", arg0);
+    loop_2:
+        goto loop_2;
+    }
+    cm_804D6458 = subject->prev;
+    subject->next = NULL;
+    if ((CameraBox*) cm_804D6460 != NULL) {
+        cm_804D6468->next = subject;
+    } else {
+        cm_804D6460 = subject;
+    }
+    subject->prev = cm_804D6468;
+    cm_804D6468 = subject;
+    Camera_80028F5C(subject, arg0);
+    return subject;
+}
+
+void Camera_800290D4(CameraBox* subject)
+{
+    if (subject->next != 0) {
+        subject->next->prev = subject->prev;
+    } else {
+        cm_804D6468 = subject->prev;
+    }
+
+    if (subject->prev != 0) {
+        subject->prev->next = subject->next;
+    } else {
+        cm_804D6460 = subject->next;
+    }
+
+    subject->prev = cm_804D6458;
+    cm_804D6458 = subject;
+}
+
+static CameraUnkGlobals cm_803BCCA0;
+
+void Camera_80029AAC(CameraBounds* bounds, CameraMovement* movement, f32 arg8)
+{
+    f32 temp_f0;
+    f32 temp_f3;
+    f32 var_f1;
+    f32 var_f2;
+    f32 var_f3;
+    f32 var_f5;
+
+    if (bounds->subjects != 0) {
+        temp_f3 = bounds->x_max - bounds->x_min;
+        temp_f0 = bounds->y_max - bounds->y_min;
+        if (temp_f3 > temp_f0) {
+            var_f5 = temp_f3;
+        } else {
+            var_f5 = temp_f0;
+        }
+    } else {
+        var_f5 = 99999.0f;
+    }
+    if (var_f5 > cm_803BCCA0.x38) {
+        var_f2 = cm_803BCCA0.x30;
+    } else if (var_f5 < cm_803BCCA0.x34) {
+        var_f2 = cm_803BCCA0.x2C;
+    } else {
+        var_f2 = ((cm_803BCCA0.x30 - cm_803BCCA0.x2C) *
+                  ((var_f5 - cm_803BCCA0.x34) /
+                   (cm_803BCCA0.x38 - cm_803BCCA0.x34))) +
+                 cm_803BCCA0.x2C;
+    }
+    if (cm_80452C68.unk_2bc > 0.0001f) {
+        var_f3 = 1.0f / cm_80452C68.unk_2bc;
+    } else {
+        var_f3 = 1000.0f;
+    }
+    var_f1 = var_f3 * (var_f2 * arg8);
+    if (var_f1 > 1.0f) {
+        var_f1 = 1.0f;
+    } else if (var_f1 < 0.0001f) {
+        var_f1 = 0.0001f;
+    }
+    movement->interest.x =
+        (f32) (((movement->target_interest.x - movement->interest.x) *
+                var_f1) +
+               movement->interest.x);
+    movement->interest.y =
+        (f32) (((movement->target_interest.y - movement->interest.y) *
+                var_f1) +
+               movement->interest.y);
 }
