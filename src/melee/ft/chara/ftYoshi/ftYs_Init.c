@@ -28,9 +28,6 @@
 #include <baselib/debug.h>
 #include <baselib/mobj.h>
 
-static void ftYs_SpecialS_8012E270(HSD_GObj* gobj);
-static void ftYs_SpecialS_8012DF18(HSD_GObj* gobj);
-
 MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount] = {
     {
         // ftYs_MS_GuardOn_0 = 341

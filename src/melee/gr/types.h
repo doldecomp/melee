@@ -293,8 +293,13 @@ struct grKongo_GroundVars3 {
 };
 
 struct grCorneria_GroundVars {
-    /*  gp+C4 */ u8 _0[0x68];
-    /* gp+12C */ HSD_JObj* x68;
+    /*  +0  gp+C4 */ char pad_0[0x68];
+    /* +68 gp+12C */ HSD_JObj* x68;
+};
+
+struct grIceMt_GroundVars {
+    /* +0 gp+C4 */ char pad_0[0x14];
+    /* +0 gp+D8 */ s16 xD8;
 };
 
 struct Ground {
@@ -325,9 +330,9 @@ struct Ground {
     HSD_GObj* x18;          // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
-    u8 x40_pad[0xC4 - 0x40];
+    char pad_40[0xC4 - 0x40];
     union GroundVars { // how big should this be?
-        u8 _[0x218 - 0xC4];
+        char pad_0[0x218 - 0xC4];
         struct GroundVars_unk unk;
         struct GroundVars_flatzone flatzone;
         struct GroundVars_flatzone2 flatzone2;
@@ -338,6 +343,7 @@ struct Ground {
         struct grKongo_GroundVars2 kongo2;
         struct grKongo_GroundVars3 kongo3;
         struct grCorneria_GroundVars corneria;
+        struct grIceMt_GroundVars icemt;
     } gv;
 };
 

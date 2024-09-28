@@ -242,6 +242,21 @@ typedef struct itWhispyApple_ItemVars {
     s32 xDD4_heal;
 } itWhispyApple_ItemVars;
 
+typedef struct itFreeze_ItemVars {
+    /*  +0 */ char pad_0[0x1C];
+    /* +1C */ int unk_1C;
+} itFreeze_ItemVars;
+
+typedef struct itPikachutJoltGround_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x8];
+    /* +8 +DDC */ UNK_T unk_8;
+} itPikachutJoltGround_ItemVars;
+
+typedef struct itSamusGrapple_ItemVars {
+    /*  +0 +DD4 */ char pad_0[0x10];
+    /* +10 +DE4 */ UNK_T unk_10;
+} itSamusGrapple_ItemVars;
+
 /// @remarks Might be shared?
 typedef struct itUnkAttributes {
     float x0_float;

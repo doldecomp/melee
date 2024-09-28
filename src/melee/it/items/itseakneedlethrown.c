@@ -1,10 +1,15 @@
 #include "itseakneedlethrown.h"
 
+#include "it/inlines.h"
+
 /// #it_802AFD8C
 
 /// #it_802AFEA8
 
-/// #it_802AFEF8
+void it_802AFEF8(Item_GObj* arg0)
+{
+    GET_ITEM(arg0)->owner = NULL;
+}
 
 /// #it_802AFF08
 

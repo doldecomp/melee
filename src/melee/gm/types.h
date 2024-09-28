@@ -1,13 +1,15 @@
 #ifndef MELEE_GM_TYPES_H
 #define MELEE_GM_TYPES_H
 
+#include <platform.h>
 #include "gm/forward.h" // IWYU pragma: export
 
 #include <common_structs.h>
 #include <placeholder.h>
 
 struct gmm_x1CB0 {
-    u8 padding_x0[0x16 - 0x0];
+    u8 padding_x0[0x10 - 0x0];
+    u8 x10[0x16 - 0x10];
     /* 0x1CC6 0x16 */ u8 saved_language;
     u8 padding_x16[0x20 - 0x16 - 1];
 };
@@ -64,23 +66,25 @@ struct gmm_x2FF8 {
 };
 
 struct GameRules {
-    /*0x00*/ u8 unk_x0;
-    /*0x01*/ u8 unk_x1;
-    /*0x02*/ u8 mode;
-    /*0x03*/ u8 time_limit;
-    /*0x04*/ u8 stock_count;
-    /*0x05*/ u8 handicap;
-    /*0x06*/ u8 damage_ratio;
-    /*0x07*/ u8 unk_x7;
-    /*0x08*/ u8 stock_time_limit;
-    /*0x09*/ u8 friendly_fire;
-    /*0x0A*/ u8 pause;
-    /*0x0B*/ u8 score_display;
-    /*0x0C*/ u8 unk_xc;
-    /*0x0D*/ u8 unk_xd[3];
-    /*0x10*/ u8 unk_x10;
-    /*0x11*/ u8 unk_x11[7];
-};
+    /* 0x00 */ u8 unk_x0;
+    /* 0x01 */ u8 unk_x1;
+    /* 0x02 */ u8 mode;
+    /* 0x03 */ u8 time_limit;
+    /* 0x04 */ u8 stock_count;
+    /* 0x05 */ u8 handicap;
+    /* 0x06 */ u8 damage_ratio;
+    /* 0x07 */ u8 unk_x7;
+    /* 0x08 */ u8 stock_time_limit;
+    /* 0x09 */ u8 friendly_fire;
+    /* 0x0A */ u8 pause;
+    /* 0x0B */ u8 score_display;
+    /* 0x0C */ u8 unk_xc;
+    /* 0x0D */ char pad_D[3]; /* maybe part of unk_xc[4]? */
+    /* 0x10 */ u8 unk_x10;
+    /* 0x11 */ char pad_11[3]; /* maybe part of unk_x10[4]? */
+    /* 0x14 */ s32 unk_14;     /* inferred */
+}; /* size = 0x18 */
+STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
 
 struct gmm_x1868 {
     /* 0x1868 */ s32 x1868;
@@ -129,29 +133,39 @@ struct gmm_x1868 {
 
 struct gmm_x0 {
     /* 0x0000 */ u8 language;
-    /* 0x0001 */ u8 x1;
-    u8 padding_x1[0x39 - 0x1 - 1];
-    /* 0x0039 */ u8 x39[11];
-    /* 0x0044 */ s32 x44;
-    u8 padding_x44[0x6C - 0x44 - 4];
-    /* 0x006C */ u32 x6C[4];
-    u8 padding_x6C[0x51C - 0x6C - 4 * 4];
-    /* 0x051C */ s32 x51C;
-    /* 0x0520 */ s16 x520;
-    /* 0x0522 */ s16 x522;
-    /* 0x0524 */ s16 x524;
-    /* 0x0526 */ s16 x526;
-    /* 0x0528 */ s32 x528;
-    /* 0x052C */ s32 x52C;
-    u8 padding_x52C[0x57C - 0x52C - 4];
-    /* 0x057C */ s32 x57C;
-    u8 padding_x57C[0x586 - 0x57C - 4];
-    /* 0x0586 */ s16 x586;
-    /* 0x0588 */ s8 x588[4];
-    u8 padding_x588[0x1850 - 0x588 - 4];
+    /* 0x0001 */ u8 unk_1;
+    /* 0x0002 */ char pad_2[0x37]; /* maybe part of x1[0x38]? */
+    /* 0x0039 */ char pad_39[0xB];
+    /* 0x0044 */ s32 unk_44;
+    /* 0x0048 */ char pad_48[0x24]; /* maybe part of x44[0xA]? */
+    /* 0x006C */ u32 unk_6C[4];
+    /* 0x007C */ char pad_7C[0x4A0]; /* maybe part of x6C[0x4B]? */
+    /* 0x051C */ s32 unk_51C;
+    /* 0x0520 */ s16 unk_520;
+    /* 0x0522 */ s16 unk_522;
+    /* 0x0524 */ s16 unk_524;
+    /* 0x0526 */ s16 unk_526;
+    /* 0x0528 */ s32 unk_528;
+    /* 0x052C */ s32 unk_52C;
+    /* 0x0530 */ char pad_530[5]; /* maybe part of x52C[2]? */
+    /* 0x0535 */ u8 unk_535;
+    /* 0x0536 */ char pad_536[0x46]; /* maybe part of unk_535[0x47]? */
+    /* 0x057C */ s32 unk_57C;
+    /* 0x0580 */ char pad_580[4];
+    /* 0x0584 */ M2C_UNK unk_584; /* inferred */
+    /* 0x0588 */ s8 unk_588[4];   /* inferred */
+    /* 0x0590 */ char pad_58B[4]; /* inferred */
+    /* 0x0590 */ s8 unk_590;      /* inferred */
+    /* 0x0591 */ char pad_591[3]; /* maybe part of unk_590[4]? */
+    /* 0x0594 */ char unk_594;
+    /* 0x0595 */ char pad_595[3]; /* maybe part of unk_594[4]? */
+    /* 0x0598 */ char unk_598;
+    /* 0x0599 */ char pad_599[1];
+    /* 0x059A */ s16 unk_59A;
+    /* 0x05A0 */ char pad_59C[0x12B4]; /* maybe part of x588[0x4B0]? */
     /* 0x1850 */ GameRules x1850;
-    struct gmm_x1868 thing;
-};
+    /* 0x1898 */ struct gmm_x1868 thing;
+}; /* size = 0x6E80 */
 
 struct gmm_retval_ED98 {
     u8 padding[0xC];
@@ -223,8 +237,14 @@ struct gmMainLib_8015ED8C_arg0_t {
 
 struct gm_8017DB6C_arg0_t {
     /* +0 */ u8 x0;
-    /* +1 */ u8 _1[0xC - 0x1];
+    /* +1 */ u8 x1;
+    /* +2 */ u8 _1[0xC - 0x2];
 };
 STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
+
+struct gmMainLib_8046B0F0_t {
+    bool x0;
+    int x4, x8, xC, x10, x14;
+};
 
 #endif

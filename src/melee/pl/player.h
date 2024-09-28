@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include "ft/forward.h"
+#include "pl/forward.h"
 #include <baselib/forward.h>
 
 #include "pl/types.h"
@@ -285,7 +286,7 @@ void Player_SetUnk4C(s32 slot, u8 unk4C);
 void Player_80036058(s32 slot);
 void Player_800360D8(s32 slot);
 void Player_SetStructFunc(s32 slot, void* arg_func);
-int* Player_GetTotalAttackCountPtr(int slot);
+pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot);
 int* Player_GetUnk6A8Ptr(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot);

@@ -746,10 +746,10 @@
 /* 109238 */ Fighter_Part ftKb_SpecialNYs_80109238(ftKb_GObj* gobj);
 /* 109260 */ void ftKb_SpecialNYs_80109260(ftKb_GObj* gobj);
 /* 109290 */ float ftKb_SpecialNYs_80109290(ftKb_GObj* gobj);
-/* 10929C */ void ftKb_SpecialNYs_8010929C(ftKb_GObj* gobj);
-/* 1092AC */ void ftKb_SpecialNYs_801092AC(ftKb_GObj* gobj);
-/* 1092BC */ void ftKb_SpecialNYs_801092BC(ftKb_GObj* gobj);
-/* 1092CC */ void ftKb_SpecialNYs_801092CC(ftKb_GObj* gobj);
+/* 10929C */ float ftKb_SpecialNYs_8010929C(ftKb_GObj* gobj);
+/* 1092AC */ float ftKb_SpecialNYs_801092AC(ftKb_GObj* gobj);
+/* 1092BC */ float ftKb_SpecialNYs_801092BC(ftKb_GObj* gobj);
+/* 1092CC */ float ftKb_SpecialNYs_801092CC(ftKb_GObj* gobj);
 /* 1092DC */ void ftKb_SpecialNYs_801092DC(ftKb_GObj* gobj);
 /* 1092F4 */ void ftKb_SpecialNYs_801092F4(ftKb_GObj* gobj);
 /* 10930C */ void ftKb_SpecialNYs_8010930C(ftKb_GObj* gobj);

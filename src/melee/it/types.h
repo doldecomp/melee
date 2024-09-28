@@ -552,6 +552,7 @@ struct Item {
         itFoxBlaster_ItemVars foxblaster;
         itFoxIllusion_ItemVars foxillusion;
         itFoxLaser_ItemVars foxlaser;
+        itFreeze_ItemVars freeze;
         itGShell_ItemVars gshell, rshell, zgshell, zrshell;
         itHassam_ItemVars hassam;
         itHeart_ItemVars heart;
@@ -566,14 +567,16 @@ struct Item {
         itLinkBow_ItemVars linkbow;
         itLinkHookshot_ItemVars linkhookshot;
         itMato_ItemVars mato;
+        itPikachutJoltGround_ItemVars pikachujoltground;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
         itPokemon_ItemVars pokemon;
+        itSamusGrapple_ItemVars samusgrapple;
         itStar_ItemVars star;
         itSword_ItemVars sword;
-        itTomato_ItemVars tomato;
         itTincle_ItemVars tincle;
+        itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;

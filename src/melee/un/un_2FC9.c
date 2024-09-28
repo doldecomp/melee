@@ -1,13 +1,8 @@
-#include "un_2FC9.h"
+#include "un_2FC9__static.h"
+
+#include "un/types.h"
 
 #include <dolphin/mtx/types.h>
-
-/* 4D6D6C */ static s8 un_804D6D6C;
-/* 4D6D88 */ static s32 un_804D6D88;
-/* 4D6D8C */ static s32 un_804D6D8C;
-/* 4D6D90 */ static IntVec2 un_804D6D90;
-/* 4D6E1C */ static UNK_T un_804D6E1C;
-/* 4D6E44 */ static UNK_T un_804D6E44;
 
 /// #un_802FC9B4
 
@@ -405,22 +400,40 @@ void fn_803020F8(void) {}
 
 /// #un_80302A88
 
-/// #un_80302AB0
-
-/// #un_80302AC0
-
-/// #un_80302AD0
-
-/// #un_80302AE0
-
-/// #un_80302AF0
-
-/// #un_80302B00
-
-void un_80302B10(UNK_T arg0, float arg1, float arg2)
+void un_80302AB0(un_80302AB0_t* arg0)
 {
-    M2C_FIELD(arg0, f32*, 8) = arg1;
-    M2C_FIELD(arg0, f32*, 0xC) = arg2;
+    arg0->x26 &= ~(1 << 4);
+}
+
+void un_80302AC0(un_80302AB0_t* arg0)
+{
+    arg0->x26 |= (1 << 5);
+}
+
+void un_80302AD0(un_80302AB0_t* arg0)
+{
+    arg0->x26 &= ~(1 << 6);
+}
+
+void un_80302AE0(un_80302AB0_t* arg0)
+{
+    arg0->x26 |= (1 << 6);
+}
+
+void un_80302AF0(un_80302AB0_t* arg0)
+{
+    arg0->x26 &= ~(1 << 7);
+}
+
+void un_80302B00(un_80302AB0_t* arg0)
+{
+    arg0->x26 |= (1 << 7);
+}
+
+void un_80302B10(un_80302B10_t* arg0, f32 arg1, f32 arg2)
+{
+    arg0->x8 = arg1;
+    arg0->xC = arg2;
 }
 
 /// #un_80302B1C
@@ -444,9 +457,9 @@ UNK_T un_80302DF0(void)
     return un_804D6E44;
 }
 
-void un_80302DF8(UNK_T arg0, int arg1)
+void un_80302DF8(un_80302DF8_t* arg0, int arg1)
 {
-    M2C_FIELD(arg0, s32*, 0xC) = arg1;
+    arg0->xC = arg1;
 }
 
 /// #un_80302E00
@@ -473,7 +486,10 @@ void un_80302DF8(UNK_T arg0, int arg1)
 
 /// #un_80304210
 
-/// #un_80304334
+void un_80304334(un_80304334_t* arg0)
+{
+    arg0->x1 |= (1 << 7);
+}
 
 /// #un_80304344
 

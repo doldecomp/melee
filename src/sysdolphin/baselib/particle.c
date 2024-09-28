@@ -1,9 +1,4 @@
-#include "particle.h"
-
-/* 4D7850 */ static int hsd_804D7850;
-/* 4D7894 */ static int hsd_804D7894;
-/* 4D78C0 */ static int hsd_804D78C0;
-/* 4D78C8 */ static int hsd_804D78C8;
+#include "particle__static.h"
 
 /// #hsd_80391580
 
@@ -188,7 +183,10 @@ void Exception_StoreDebugLevel(int arg0)
     hsd_804D78C8 = arg0;
 }
 
-/// #hsd_80397DFC
+void hsd_80397DFC(u32 arg0)
+{
+    hsd_804D78CC = (arg0 + 0xF) >> 4;
+}
 
 /// #baselib_mfspr
 

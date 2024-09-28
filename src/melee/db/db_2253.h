@@ -27,10 +27,10 @@
 /* 225C44 */ UNK_RET fn_80225C44(UNK_PARAMS);
 /* 225C8C */ UNK_RET fn_80225C8C(UNK_PARAMS);
 /* 225CD4 */ UNK_RET fn_80225CD4(UNK_PARAMS);
-/* 225D1C */ UNK_RET db_80225D1C(UNK_PARAMS);
+/* 225D1C */ s32 db_80225D1C(void);
 /* 225D2C */ void db_80225D2C(void);
 /* 225D40 */ void db_80225D40(void);
-/* 225D54 */ UNK_T db_80225D54(HSD_ObjAllocUnk4*);
+/* 225D54 */ s32 db_80225D54(HSD_ObjAllocUnk4* arg0);
 /* 225D64 */ void db_80225D64(Item_GObj* item, Fighter_GObj* owner);
 /* 225D7C */ UNK_RET fn_80225D7C(UNK_PARAMS);
 /* 225DD8 */ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner);

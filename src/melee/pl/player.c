@@ -1721,13 +1721,13 @@ void Player_SetStructFunc(s32 slot, void* arg_func)
     player->struct_func = arg_func;
 }
 
-int* Player_GetTotalAttackCountPtr(int slot)
+pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot)
 {
     StaticPlayer* player;
-    int* attack_count;
+    pl_800386D8_t* attack_count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    attack_count = &player->stale_moves.total_attack_count;
+    attack_count = (pl_800386D8_t*) &player->stale_moves.total_attack_count;
     return attack_count;
 }
 

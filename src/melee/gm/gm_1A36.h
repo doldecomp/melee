@@ -17,17 +17,12 @@
 /* 1A427C */ int gm_801A427C(void* arg0);
 /* 1A428C */ UNK_RET gm_801A428C(UNK_PARAMS);
 /* 1A42A0 */ UNK_RET gm_801A42A0(UNK_PARAMS);
-/* 1A42B4 */ UNK_RET gm_801A42B4(UNK_PARAMS);
-/* 1A42C4 */ UNK_RET gm_801A42C4(UNK_PARAMS);
 /* 1A42D4 */ UNK_RET gm_801A42D4(UNK_PARAMS);
-/* 1A42E8 */ UNK_RET gm_801A42E8(UNK_PARAMS);
 /* 1A4310 */ u8 gm_801A4310(void);
-/* 1A4320 */ UNK_RET gm_801A4320(UNK_PARAMS);
 /* 1A4340 */ UNK_RET gm_801A4340(UNK_PARAMS);
 /* 1A43A0 */ u8 gm_801A43A0(u8 arg0);
 /* 1A4510 */ void gm_801A4510(void);
 /* 1A45E8 */ bool gm_801A45E8(s32);
-/* 1A4624 */ UNK_RET gm_801A4624(UNK_PARAMS);
 /* 1A4634 */ UNK_RET gm_801A4634(UNK_PARAMS);
 /* 1A4674 */ UNK_RET gm_801A4674(UNK_PARAMS);
 /* 1A46B8 */ UNK_RET gm_801A46B8(UNK_PARAMS);
@@ -37,14 +32,11 @@
 /* 1A4970 */ UNK_RET gm_801A4970(UNK_PARAMS);
 /* 1A4B08 */ UNK_RET gm_801A4B08(UNK_PARAMS);
 /* 1A4B1C */ UNK_RET gm_801A4B1C(UNK_PARAMS);
-/* 1A4B40 */ UNK_RET gm_801A4B40(UNK_PARAMS);
-/* 1A4B50 */ UNK_RET gm_801A4B50(UNK_PARAMS);
 /* 1A4B60 */ UNK_RET gm_801A4B60(UNK_PARAMS);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
 /* 1A4B90 */ s32 gm_801A4B90(void);
 /* 1A4B9C */ s32 gm_801A4B9C(void);
-/* 1A4BA8 */ UNK_RET gm_801A4BA8(UNK_PARAMS);
-/* 1A4BB8 */ UNK_T gm_801A4BB8(void);
+/* 1A4BA8 */ struct gm_80479D58_t* gm_801A4BA8(void);
 /* 1A4BC8 */ s32 gm_801A4BC8(void);
 /* 1A4BD0 */ UNK_RET fn_801A4BD0(UNK_PARAMS);
 /* 1A50B8 */ UNK_RET gm_801A50B8(UNK_PARAMS);
@@ -380,7 +372,6 @@
 /* 1B9F3C */ UNK_RET gm_801B9F3C(UNK_PARAMS);
 /* 1B9F64 */ UNK_RET gm_801B9F64(UNK_PARAMS);
 /* 1B9F8C */ UNK_RET gm_801B9F8C(UNK_PARAMS);
-/* 1B9FB8 */ UNK_RET fn_801B9FB8(UNK_PARAMS);
 /* 1B9FC8 */ UNK_RET gm_801B9FC8(UNK_PARAMS);
 /* 1B9FFC */ UNK_RET gm_801B9FFC(UNK_PARAMS);
 /* 1BA024 */ UNK_RET gm_801BA024(UNK_PARAMS);
@@ -501,10 +492,6 @@
 /* 1BEE9C */ UNK_RET gm_801BEE9C(UNK_PARAMS);
 /* 1BEF84 */ UNK_RET gm_801BEF84(UNK_PARAMS);
 /* 1BEFA4 */ void gm_801BEFA4(s8);
-/* 1BEFB0 */ UNK_RET gm_801BEFB0(UNK_PARAMS);
-/* 1BEFC0 */ UNK_RET gm_801BEFC0(UNK_PARAMS);
-/* 1BEFD0 */ UNK_RET gm_801BEFD0(UNK_PARAMS);
-/* 1BEFE0 */ UNK_RET gm_801BEFE0(UNK_PARAMS);
 /* 1BEFF0 */ UNK_RET gm_801BEFF0(UNK_PARAMS);
 /* 1BF000 */ UNK_RET gm_801BF000(UNK_PARAMS);
 /* 1BF010 */ UNK_RET gm_801BF010(UNK_PARAMS);
@@ -520,7 +507,6 @@
 /* 1BF648 */ UNK_RET gm_801BF648(UNK_PARAMS);
 /* 1BF65C */ UNK_RET gm_801BF65C(UNK_PARAMS);
 /* 1BF670 */ UNK_RET gm_801BF670(UNK_PARAMS);
-/* 1BF684 */ UNK_RET gm_801BF684(UNK_PARAMS);
 /* 1BF694 */ UNK_RET gm_801BF694(UNK_PARAMS);
 /* 1BF6A8 */ UNK_RET gm_801BF6A8(UNK_PARAMS);
 /* 1BF6B8 */ UNK_RET gm_801BF6B8(UNK_PARAMS);
@@ -547,33 +533,5 @@
 /* 1BFC60 */ UNK_RET gm_801BFC60(UNK_PARAMS);
 /* 1BFCFC */ UNK_RET gm_801BFCFC(UNK_PARAMS);
 /* 1BFF7C */ UNK_RET gm_801BFF7C(UNK_PARAMS);
-
-/// @todo Move to C file
-
-typedef struct MajorScene MajorScene;
-typedef struct MinorScene MinorScene;
-typedef struct MinorSceneHandler MinorSceneHandler;
-
-/* 1A3EF4 */ static void gm_801A3EF4(void);
-/* 1A3F48 */ static void gm_801A3F48(MinorScene*);
-/* 1A4014 */ static void gm_801A4014(MajorScene* scene);
-/* 1A4284 */ static UNK_T gm_801A4284(UNK_T);
-/* 1A42F8 */ static void gm_801A42F8(int);
-/* 1A4310 */ static UNK_RET gm_800A4310(UNK_PARAMS);
-/* 1A4330 */ static void gm_801A4330(void*);
-/* 1A4B88 */ static void gm_801A4B88(void*);
-/* 1A4BD4 */ static void gm_801A4BD4(void);
-/* 1A4CE0 */ static MinorSceneHandler* gm_801A4CE0(u8);
-/* 1A4D34 */ static void gm_801A4D34(void*);
-/* 1A50A0 */ static MajorScene* gm_801A50A0(void);
-/* 1A50AC */ static MajorScene* gm_801A50AC(void);
-/* 1A5244 */ static UNK_T gm_801A5244(void);
-/* 1A5614 */ static void gm_801A5614(void);
-/* 1ACC90 */ static void gm_801ACC90(void);
-/* 1BBFE4 */ static void gm_801BBFE4(void);
-/* 1B6320 */ static UNK_T gm_801B6320(void);
-/* 1B8C5C */ static void fn_801B8C5C(UNK_T);
-/* 1BA5B4 */ static void fn_801BA5B4(UNK_T);
-/* 1BA7AC */ static void fn_801BA7AC(UNK_T);
 
 #endif

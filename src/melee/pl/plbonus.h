@@ -1,9 +1,11 @@
 #ifndef GALE01_0386D8
 #define GALE01_0386D8
 
+#include "pl/forward.h"
+
 #include <placeholder.h>
 
-/* 0386D8 */ u32 pl_800386D8(void*, s32);
+/* 0386D8 */ UNK_T pl_800386D8(pl_800386D8_t*, ssize_t);
 /* 0386E8 */ UNK_RET pl_800386E8(UNK_PARAMS);
 /* 038700 */ UNK_RET fn_80038700(UNK_PARAMS);
 /* 038788 */ UNK_RET pl_80038788(UNK_PARAMS);

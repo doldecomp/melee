@@ -22,11 +22,11 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "lb/lbrefract.h"
 #include "pl/pl_0371.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
+#include <trigf.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -509,18 +509,13 @@ bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
 
 bool ftLib_80086A8C(HSD_GObj* gobj)
 {
-    u8 _[8];
-
-    struct {
-        u8 x0_fill[0x28];
-        void* unk28;
-    }* temp_r3;
+    HSD_GObj* camera_gobj;
 
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2229_b3 && !fp->x2220_flag.bits.b7) {
-        temp_r3 = Camera_80030A50();
-        if (temp_r3 != NULL) {
-            void* temp_r30 = temp_r3->unk28;
+        camera_gobj = Camera_80030A50();
+        if (camera_gobj != NULL) {
+            HSD_CObj* temp_r30 = GET_COBJ(camera_gobj);
             if (temp_r30 == HSD_CObjGetCurrent()) {
                 if (Camera_80030CD8(fp->x890_cameraBox, &fp->x2188)) {
                     fp->x221F_b0 = false;

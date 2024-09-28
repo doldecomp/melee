@@ -1,11 +1,15 @@
-
 #include "itfreeze.h"
+
+#include "it/inlines.h"
 
 /// #it_8028EB88
 
 /// #it_8028EC98
 
-/// #it_8028ECE0
+void it_8028ECE0(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.freeze.unk_1C = 0;
+}
 
 /// #it_8028ECF0
 

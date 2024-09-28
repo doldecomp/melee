@@ -1,15 +1,18 @@
-#include "ifall.h"
-
-/* 4D6D58 */ static u8 ifAll_804D6D58;
-/* 4D6D5C */ static UNK_T ifAll_804D6D5C;
+#include "ifall__static.h"
 
 /// #ifAll_802F3394
 
 /// #ifAll_802F33CC
 
-/// #ifAll_802F3404
+s32 ifAll_802F3404(void)
+{
+    return ifAll_804A0FD8.unk_0;
+}
 
-/// #ifAll_802F3414
+UNK_T ifAll_802F3414(void)
+{
+    return &ifAll_804A0FD8.unk_C;
+}
 
 /// #ifAll_802F3424
 

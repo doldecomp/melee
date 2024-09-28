@@ -19,7 +19,8 @@
 
 bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 {
-    int* attackCount = Player_GetTotalAttackCountPtr((s32) fp->player_id);
+    pl_800386D8_t* attackCount =
+        Player_GetTotalAttackCountPtr((s32) fp->player_id);
     if ((pl_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) &&
         (grCorneria_801E2D14() != false))
     {
@@ -32,7 +33,7 @@ bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 static inline bool ftFox_CheckAppealSCount(void)
 {
     int i;
-    int* attackCount;
+    pl_800386D8_t* attackCount;
 
     for (i = 0; i < 6; i++) {
         attackCount = Player_GetTotalAttackCountPtr(i);

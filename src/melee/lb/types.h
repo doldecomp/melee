@@ -255,4 +255,53 @@ struct CollData {
     /* fp+878 */ SurfaceData ceiling;
 };
 
+struct HSD_AllocEntry {
+    struct HSD_AllocEntry* next;
+    u32* addr;
+    size_t size;
+};
+
+struct PreloadCacheSceneEntry {
+    struct PreloadCache* field0_0x0;
+    struct PreloadCache* field1_0x4;
+};
+
+struct PreloadEntry {
+    s8 state;
+    u8 type;
+    s8 heap;
+    u8 load_state;
+    u8 unknown004;
+    u8 field5_0x5;
+    u16 entry_num;
+    s16 load_score;
+    u8 field8_0xa;
+    u8 field9_0xb;
+    u32 size;
+    HSD_AllocEntry* raw_data;
+    HSD_AllocEntry* archive;
+    s32 effect_index;
+};
+
+struct PreloadCacheScene {
+    u32 is_heap_persistent[2];
+    u8 major_id;
+    u8 field2_0x9;
+    u8 field3_0xa;
+    u8 field4_0xb;
+    u32 stage_id;
+    PreloadCacheSceneEntry entries[8];
+    s32 major_scene_changes;
+};
+
+struct PreloadCache {
+    u32 persistent_heaps;
+    PreloadCacheScene scene;
+    PreloadCacheScene new_scene;
+    PreloadEntry entries[80];
+    s32 persistent_heap;
+    int preloaded;
+    UNK_T x974;
+};
+
 #endif

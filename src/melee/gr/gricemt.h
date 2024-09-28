@@ -1,6 +1,8 @@
 #ifndef GALE01_1F6868
 #define GALE01_1F6868
 
+#include "gr/forward.h"
+
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
@@ -14,7 +16,7 @@
 /* 1F75DC */ UNK_RET grIceMt_801F75DC(UNK_PARAMS);
 /* 1F75E4 */ UNK_RET grIceMt_801F75E4(UNK_PARAMS);
 /* 1F75E8 */ UNK_RET grIceMt_801F75E8(UNK_PARAMS);
-/* 1F75EC */ UNK_RET fn_801F75EC(UNK_PARAMS);
+/* 1F75EC */ void fn_801F75EC(Ground_GObj*);
 /* 1F75FC */ UNK_RET grIceMt_801F75FC(UNK_PARAMS);
 /* 1F7720 */ UNK_RET grIceMt_801F7720(UNK_PARAMS);
 /* 1F7728 */ UNK_RET grIceMt_801F7728(UNK_PARAMS);

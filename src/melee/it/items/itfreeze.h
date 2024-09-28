@@ -8,7 +8,7 @@
 
 /* 28EB88 */ UNK_RET it_8028EB88(UNK_PARAMS);
 /* 28EC98 */ UNK_RET it_8028EC98(UNK_PARAMS);
-/* 28ECE0 */ UNK_RET it_8028ECE0(UNK_PARAMS);
+/* 28ECE0 */ void it_8028ECE0(Item_GObj* gobj);
 /* 28ECF0 */ UNK_RET it_8028ECF0(UNK_PARAMS);
 /* 28ED10 */ void it_8028ED10(Item_GObj*);
 /* 28ED50 */ void it_8028ED50(Item_GObj*);

@@ -1,5 +1,4 @@
-#include "gm_1A36.h"
-
+#include "gm_1A36__static.h"
 #include "gmmain_lib.h"
 
 #include "db/db_2253.h"
@@ -19,77 +18,6 @@
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
 #include <baselib/video.h>
-
-struct MinorScene {
-    u8 idx;
-    u8 preload;
-    u16 flags;
-
-    void (*Prep)(MinorScene*);
-    void (*Decide)(MinorScene*);
-
-    u8 class_id;
-
-    void* unk_struct_0;
-    void* unk_struct_1;
-};
-
-struct MajorScene {
-    u8 preload;
-    u8 idx;
-
-    void (*Load)(void);
-    void (*Unload)(void);
-    void (*Init)(void);
-
-    MinorScene* minor_scenes;
-}; // 803DACA4
-
-struct MinorSceneHandler {
-    u8 class_id;
-
-    void (*OnFrame)(void);
-    void (*OnLoad)(u32);
-    void (*OnLeave)(u32);
-    void (*unk_func)(void);
-}; // 803DA920
-
-extern struct {
-    int x0, x4, x8;
-} gmMainLib_8046B0F0;
-
-typedef struct {
-    u8 curr_major;
-    u8 pending_major;
-    u8 prev_major;
-    u8 curr_minor;
-    u8 prev_minor;
-    u8 pending_minor;
-} SceneNums;
-
-typedef struct {
-    SceneNums nums;
-    SceneNums nums2;
-    u8 pending;
-    u8 x0D;
-    u8 x0E;
-    u8 x0F;
-    void* data;
-} GameState; // 80479D30
-STATIC_ASSERT(sizeof(GameState) == 0x14);
-
-struct sceneData {
-    u32 a;
-    u8 scene_id;
-};
-
-/* 3DA920 */ static MajorScene gm_803DA920;
-/* 3DACA4 */ static MajorScene gm_803DACA4;
-/* 479D30 */ static GameState gm_80479D30;
-/* 4D6720 */ static UNK_T gm_804D6720;
-/* 4D6730 */ static UNK_T gm_804D6730;
-/* 3DD2C0 */ static int gm_803DD2C0[74];
-/* 49C178 */ static s8 gm_8049C178[16];
 
 /// #gm_801A3680
 
@@ -234,13 +162,22 @@ UNK_T gm_801A4284(UNK_T arg0)
 
 /// #gm_801A42A0
 
-/// #gm_801A42B4
+u8 gm_801A42B4(void)
+{
+    return gm_80479D30.nums.prev_minor;
+}
 
-/// #gm_801A42C4
+u8 gm_801A42C4(void)
+{
+    return gm_80479D30.nums.curr_minor;
+}
 
 /// #gm_801A42D4
 
-/// #gm_801A42E8
+void gm_801A42E8(s8 arg0)
+{
+    M2C_FIELD(&gm_80479D30, s8*, 1) = arg0;
+}
 
 /// #gm_801A42F8
 
@@ -249,9 +186,15 @@ u8 gm_801A4310(void)
     return ((u8*) &gm_80479D30)[0];
 }
 
-/// #gm_801A4320
+u8 gm_801A4320(void)
+{
+    return gm_80479D30.nums.prev_major;
+}
 
-/// #gm_801A4330
+void gm_801A4330(void* arg0)
+{
+    gm_80479D30.data = arg0;
+}
 
 /// #gm_801A4340
 
@@ -347,7 +290,10 @@ void gm_801A4510(void)
 
 /// #gm_801A45E8
 
-/// #gm_801A4624
+u8 gm_801A4624(void)
+{
+    return gm_80479D58.unk_10;
+}
 
 /// #gm_801A4634
 
@@ -367,9 +313,15 @@ void gm_801A4510(void)
 
 /// #gm_801A4B1C
 
-/// #gm_801A4B40
+void gm_801A4B40(s32 arg0)
+{
+    M2C_FIELD(&gm_80479D58, s32*, 0x30) = arg0;
+}
 
-/// #gm_801A4B50
+void gm_801A4B50(s32 arg0)
+{
+    M2C_FIELD(&gm_80479D58, s32*, 0x34) = arg0;
+}
 
 /// #gm_801A4B60
 
@@ -394,11 +346,15 @@ s32 gm_801A4B9C(void)
     return M2C_FIELD(gm_804D6720, s32*, 8);
 }
 
-/// #gm_801A4BA8
+struct gm_80479D58_t* gm_801A4BA8(void)
+{
+    return gm_80479D58.unk_0;
+}
 
-/// #gm_801A4BB8
-
-extern s32 gm_804D672C;
+s32 gm_801A4BB8(void)
+{
+    return gm_80479D58.unk_8;
+}
 
 s32 gm_801A4BC8(void)
 {
@@ -431,9 +387,9 @@ MajorScene* gm_801A50AC(void)
 
 /// #gm_801A5220
 
-UNK_T gm_801A5244(void)
+s8* gm_801A5244(void)
 {
-    return &gmMainLib_804D3EE0->padding_x588[4];
+    return &gmMainLib_804D3EE0->unk_590;
 }
 
 UNK_T gm_801A5250(void)
@@ -920,7 +876,7 @@ void fn_801B1F6C(void) {}
 
 UNK_T gm_801B6320(void)
 {
-    return &gmMainLib_804D3EE0->padding_x57C[4];
+    return &gmMainLib_804D3EE0->unk_584;
 }
 
 /// #gm_801B632C
@@ -1116,7 +1072,10 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B9F8C
 
-/// #fn_801B9FB8
+void fn_801B9FB8(void* arg0)
+{
+    M2C_FIELD(arg0, UNK_RET(**)(UNK_PARAMS), 0x38) = gm_80165290;
+}
 
 /// #gm_801B9FC8
 
@@ -1341,12 +1300,12 @@ void gm_801BEB68(s32 arg0)
 
 void gm_801BEB74(u8 arg0)
 {
-    gmMainLib_804D3EE0->padding_x52C[5] = arg0;
+    gmMainLib_804D3EE0->unk_535 = arg0;
 }
 
 u8 gm_801BEB80(void)
 {
-    return gmMainLib_804D3EE0->padding_x52C[5];
+    return gmMainLib_804D3EE0->unk_535;
 }
 
 /// #gm_801BEB8C
@@ -1382,27 +1341,60 @@ void gm_801BEFA4(s8 arg0)
     gm_8049C178[0] = arg0;
 }
 
-/// #gm_801BEFB0
+u8 gm_801BEFB0(void)
+{
+    return gm_8049C178[0];
+}
 
-/// #gm_801BEFC0
+void gm_801BEFC0(s8 arg0)
+{
+    gm_8049C178[1] = arg0;
+}
 
-/// #gm_801BEFD0
+u8 gm_801BEFD0(void)
+{
+    return M2C_FIELD(&gm_8049C178, u8*, 1);
+}
 
-/// #gm_801BEFE0
+void gm_801BEFE0(s8 arg0)
+{
+    M2C_FIELD(&gm_8049C178, s8*, 0xA) = arg0;
+}
 
-/// #gm_801BEFF0
+u8 gm_801BEFF0(void)
+{
+    return M2C_FIELD(&gm_8049C178, u8*, 0xA);
+}
 
-/// #gm_801BF000
+void gm_801BF000(s8 arg0)
+{
+    M2C_FIELD(&gm_8049C178, s8*, 9) = arg0;
+}
 
-/// #gm_801BF010
+u8 gm_801BF010(void)
+{
+    return M2C_FIELD(&gm_8049C178, u8*, 9);
+}
 
-/// #gm_801BF020
+void gm_801BF020(s8 arg0)
+{
+    M2C_FIELD(&gm_8049C178, s8*, 8) = arg0;
+}
 
-/// #gm_801BF030
+u8 gm_801BF030(void)
+{
+    return M2C_FIELD(&gm_8049C178, u8*, 8);
+}
 
-/// #gm_801BF040
+void gm_801BF040(s8 arg0)
+{
+    M2C_FIELD(&gm_8049C178, s8*, 2) = arg0;
+}
 
-/// #gm_801BF050
+u8 gm_801BF050(void)
+{
+    return M2C_FIELD(&gm_8049C178, u8*, 2);
+}
 
 /// #gm_801BF060
 
@@ -1420,25 +1412,52 @@ void gm_801BEFA4(s8 arg0)
 
 /// #gm_801BF670
 
-/// #gm_801BF684
+void gm_801BF684(s16 arg0)
+{
+    gm_8049E548.unk_C = arg0;
+}
 
 /// #gm_801BF694
 
-/// #gm_801BF6A8
+void gm_801BF6A8(s8 arg0)
+{
+    gm_8049E548.unk_A = arg0;
+}
 
-/// #gm_801BF6B8
+u8 gm_801BF6B8(void)
+{
+    return gm_8049E548.unk_A;
+}
 
-/// #gm_801BF6C8
+void gm_801BF6C8(s8 arg0)
+{
+    gm_8049E548.unk_8 = arg0;
+}
 
-/// #gm_801BF6D8
+u8 gm_801BF6D8(void)
+{
+    return gm_8049E548.unk_8;
+}
 
-/// #gm_801BF6E8
+void gm_801BF6E8(s8 arg0)
+{
+    M2C_FIELD(&gm_8049E548, s8*, 9) = arg0;
+}
 
-/// #gm_801BF6F8
+u8 gm_801BF6F8(void)
+{
+    return gm_8049E548.unk_9;
+}
 
-/// #gm_801BF708
+void gm_801BF708(s8 arg0)
+{
+    gm_8049E548.unk_E = arg0;
+}
 
-/// #gm_801BF718
+u8 gm_801BF718(void)
+{
+    return gm_8049E548.unk_E;
+}
 
 /// #gm_801BF728
 

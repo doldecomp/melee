@@ -10,7 +10,7 @@
 /* 2B3368 */ UNK_RET it_802B3368(UNK_PARAMS);
 /* 2B338C */ void it_802B338C(Item_GObj*, Vec3*, float facing_dir, u32);
 /* 2B34E4 */ void it_802B34E4(Item_GObj*);
-/* 2B3544 */ UNK_RET it_802B3544(UNK_PARAMS);
+/* 2B3544 */ void it_802B3544(Item_GObj* gobj);
 /* 2B3554 */ UNK_RET it_802B3554(UNK_PARAMS);
 /* 2B3680 */ UNK_RET it_802B3680(UNK_PARAMS);
 /* 2B36BC */ UNK_RET it_802B36BC(UNK_PARAMS);

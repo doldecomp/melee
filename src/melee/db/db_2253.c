@@ -1,4 +1,4 @@
-#include "db_2253.h"
+#include "db_2253__static.h"
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
@@ -47,13 +47,19 @@
 
 /// #fn_80225CD4
 
-/// #db_80225D1C
+s32 db_80225D1C(void)
+{
+    return lbl_8049FAA0.unk_14;
+}
 
 /// #db_80225D2C
 
 /// #db_80225D40
 
-/// #db_80225D54
+s32 db_80225D54(HSD_ObjAllocUnk4* arg0)
+{
+    return lbl_8049FAA0.unk_8;
+}
 
 /// #db_80225D64
 
@@ -238,7 +244,14 @@ void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 
 /// #fn_80228820
 
-/// #db_8022886C
+extern s32 lbl_804D6B90;
+extern s32 lbl_804D6B94;
+
+void db_8022886C(void)
+{
+    lbl_804D6B94 = 0;
+    lbl_804D6B90 = 0;
+}
 
 /// #db_8022887C
 
