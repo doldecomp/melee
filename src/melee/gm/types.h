@@ -135,7 +135,7 @@ struct gmm_x0 {
     /* 0x0000 */ u8 language;
     /* 0x0001 */ u8 unk_1;
     /* 0x0002 */ char pad_2[0x37]; /* maybe part of x1[0x38]? */
-    /* 0x0039 */ char pad_39[0xB];
+    /* 0x0039 */ u8 x39[0xB];
     /* 0x0044 */ s32 unk_44;
     /* 0x0048 */ char pad_48[0x24]; /* maybe part of x44[0xA]? */
     /* 0x006C */ u32 unk_6C[4];

@@ -687,20 +687,19 @@ void gmMainLib_8015DB18(void)
 void gmMainLib_8015DB2C(u8 arg0, s32 arg2)
 {
     struct gmm_x0* gmmthing = gmMainLib_804D3EE0;
-    gmmthing->pad_39[arg0] =
-        lbTime_8000AF74(gmMainLib_804D3EE0->pad_39[arg0], 1);
+    gmmthing->x39[arg0] = lbTime_8000AF74(gmMainLib_804D3EE0->x39[arg0], 1);
 }
 
 u8 gmMainLib_8015DB6C(u8 arg0)
 {
-    return gmMainLib_804D3EE0->pad_39[arg0];
+    return gmMainLib_804D3EE0->x39[arg0];
 }
 
 void gmMainLib_8015DB80(void)
 {
     int i;
     for (i = 0; i < 11; i++) {
-        gmMainLib_804D3EE0->pad_39[(u8) i] = 0;
+        gmMainLib_804D3EE0->x39[(u8) i] = 0;
     }
 }
 
