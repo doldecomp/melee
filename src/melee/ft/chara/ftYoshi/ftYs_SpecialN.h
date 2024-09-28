@@ -19,6 +19,18 @@
 /* 12CDD4 */ HSD_Joint* ftYs_SpecialN_8012CDD4(ftYs_GObj* gobj);
 /* 12CDE8 */ void ftYs_SpecialN_Enter(ftYs_GObj* gobj);
 /* 12CE64 */ void ftYs_SpecialAirN_Enter(ftYs_GObj* gobj);
+/* 12D004 */ UNK_RET fn_8012D004(UNK_PARAMS);
+/* 12D0A0 */ UNK_RET fn_8012D0A0(UNK_PARAMS);
+/* 12D128 */ UNK_RET fn_8012D128(UNK_PARAMS);
+/* 12D1AC */ UNK_RET fn_8012D1AC(UNK_PARAMS);
+/* 12D230 */ UNK_RET fn_8012D230(UNK_PARAMS);
+/* 12D298 */ UNK_RET fn_8012D298(UNK_PARAMS);
+/* 12D2F8 */ UNK_RET fn_8012D2F8(UNK_PARAMS);
+/* 12D360 */ UNK_RET fn_8012D360(UNK_PARAMS);
+/* 12D3C0 */ UNK_RET fn_8012D3C0(UNK_PARAMS);
+/* 12D428 */ UNK_RET fn_8012D428(UNK_PARAMS);
+/* 12D488 */ UNK_RET fn_8012D488(UNK_PARAMS);
+/* 12D4F0 */ UNK_RET fn_8012D4F0(UNK_PARAMS);
 /* 12D550 */ void ftYs_SpecialN1_Anim(ftYs_GObj* gobj);
 /* 12D58C */ void ftYs_SpecialAirN1_0_Anim(ftYs_GObj* gobj);
 /* 12D5C8 */ void ftYs_SpecialN1_1_Anim(ftYs_GObj* gobj);
@@ -49,8 +61,14 @@
 /* 12DE88 */ void ftYs_SpecialN2_0_Coll(ftYs_GObj* gobj);
 /* 12DEB0 */ void ftYs_SpecialAirN2_1_Coll(ftYs_GObj* gobj);
 /* 12DED8 */ void ftYs_SpecialAirN2_0_Coll(ftYs_GObj* gobj);
+/* 12DF18 */ void ftYs_SpecialS_8012DF18(ftYs_GObj* gobj);
+/* 12DF8C */ UNK_RET ftYs_SpecialS_8012DF8C(UNK_PARAMS);
+/* 12E110 */ UNK_RET fn_8012E110(UNK_PARAMS);
+/* 12E270 */ void ftYs_SpecialS_8012E270(ftYs_GObj* gobj);
 /* 12E2C4 */ void ftYs_SpecialHi_Enter(ftYs_GObj* gobj);
 /* 12E33C */ void ftYs_SpecialAirHi_Enter(ftYs_GObj* gobj);
+/* 12E3B4 */ UNK_RET fn_8012E3B4(UNK_PARAMS);
+/* 12E44C */ UNK_RET fn_8012E44C(UNK_PARAMS);
 /* 12E4DC */ void ftYs_SpecialHi_Anim(ftYs_GObj* gobj);
 /* 12E538 */ void ftYs_SpecialAirHi_Anim(ftYs_GObj* gobj);
 /* 12E594 */ void ftYs_SpecialHi_Phys(ftYs_GObj* gobj);
@@ -65,9 +83,17 @@
 /* 12E8CC */ void ftYs_SpecialAirLw_Phys(ftYs_GObj* gobj);
 /* 12E924 */ void ftYs_SpecialLw_Coll(ftYs_GObj* gobj);
 /* 12E944 */ void ftYs_SpecialAirLw_Coll(ftYs_GObj* gobj);
+/* 12EA04 */ UNK_RET ftYs_SpecialS_8012EA04(UNK_PARAMS);
 /* 12EA40 */ void ftYs_SpecialLwLanding_Anim(ftYs_GObj* gobj);
 /* 12EA7C */ void ftYs_SpecialLwLanding_Phys(ftYs_GObj* gobj);
 /* 12EA9C */ void ftYs_SpecialLwLanding_Coll(ftYs_GObj* gobj);
+/* 12EB48 */ UNK_RET ftYs_SpecialS_8012EB48(UNK_PARAMS);
+/* 12EC7C */ UNK_RET fn_8012EC7C(UNK_PARAMS);
+/* 12EDE8 */ UNK_RET fn_8012EDE8(UNK_PARAMS);
+/* 12EFC0 */ UNK_RET fn_8012EFC0(UNK_PARAMS);
+/* 12EFF4 */ UNK_RET fn_8012EFF4(UNK_PARAMS);
+/* 12F0DC */ UNK_RET ftYs_SpecialS_8012F0DC(UNK_PARAMS);
+/* 12F35C */ UNK_RET ftYs_SpecialS_8012F35C(UNK_PARAMS);
 /* 12F4B4 */ void ftYs_SpecialS_Enter(ftYs_GObj* gobj);
 /* 12F588 */ void ftYs_SpecialAirS_Enter(ftYs_GObj* gobj);
 /* 12F654 */ void ftYs_SpecialAirSStart_0_Anim(ftYs_GObj* gobj);
@@ -103,5 +129,13 @@
 /* 13245C */ void ftYs_SpecialAirSLoop_3_Coll(ftYs_GObj* gobj);
 /* 1328F0 */ void ftYs_SpecialAirSLanding_Coll(ftYs_GObj* gobj);
 /* 3B75C0 */ extern Vec3 const ftYs_Unk1_803B75C0;
+
+/// @todo Move to C file
+
+/* 12CEE0 */ static void fn_8012CEE0(HSD_GObj*);
+/* 12CF7C */ static void fn_8012CF7C(HSD_GObj*);
+/* 12DF00 */ static void ftYs_SpecialS_8012DF00(HSD_GObj*);
+/* 12E644 */ static void fn_8012E644(HSD_GObj*);
+/* 12EAD8 */ static void ftYs_SpecialS_8012EAD8(HSD_GObj*);
 
 #endif

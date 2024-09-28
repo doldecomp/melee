@@ -3,6 +3,23 @@
 
 #include <placeholder.h>
 
+struct gTRKCPUState_t {
+    /* 0x000 */ char pad_0[0x80];
+    /* 0x080 */ s32 unk_80;         /* inferred */
+    /* 0x084 */ char pad_84[0x3AC]; /* maybe part of unk_80[0xEC]? */
+}; /* size = 0x430 */
+STATIC_ASSERT(sizeof(struct gTRKCPUState_t) == 0x430);
+
+struct gTRKState_t {
+    /* 0x00 */ char pad_0[0x98];
+    /* 0x98 */ s32 unk_98;
+    /* 0x9C */ char pad_9C[4];
+    /* 0xA0 */ s32 unk_A0; /* inferred */
+}; /* size = 0xA4 */
+STATIC_ASSERT(sizeof(struct gTRKState_t) == 0xA4);
+
+/* 4A4BF0 */ extern struct gTRKState_t gTRKState;
+
 /* 32904C */ int __TRK_get_MSR(void);
 /* 329054 */ void __TRK_set_MSR(int);
 /* 32905C */ UNK_RET TRKValidMemory32(UNK_PARAMS);
@@ -29,16 +46,17 @@
 /* 32A090 */ UNK_RET TRKTargetCheckStep(UNK_PARAMS);
 /* 32A0F8 */ UNK_RET TRKTargetSingleStep(UNK_PARAMS);
 /* 32A13C */ UNK_RET TRKTargetStepOutOfRange(UNK_PARAMS);
-/* 32A184 */ UNK_RET TRKTargetGetPC(UNK_PARAMS);
+/* 32A184 */ s32 TRKTargetGetPC(void);
 /* 32A194 */ UNK_RET TRKTargetSupportRequest(UNK_PARAMS);
 /* 32A284 */ UNK_RET TRKTargetFlushCache(UNK_PARAMS);
-/* 32A2C0 */ UNK_RET TRKTargetStopped(UNK_PARAMS);
-/* 32A2D0 */ UNK_RET TRKTargetSetStopped(UNK_PARAMS);
+/* 32A2C0 */ s32 TRKTargetStopped(void);
+/* 32A2D0 */ void TRKTargetSetStopped(s32 arg0);
 /* 32A2E0 */ UNK_RET TRKTargetStop(UNK_PARAMS);
 /* 32A308 */ UNK_RET TRKPPCAccessSPR(UNK_PARAMS);
 /* 32A3B8 */ UNK_RET TRKPPCAccessPairedSingleRegister(UNK_PARAMS);
 /* 32A430 */ UNK_RET TRKPPCAccessFPRegister(UNK_PARAMS);
 /* 32A5B0 */ UNK_RET TRKPPCAccessSpecialReg(UNK_PARAMS);
-/* 32A618 */ UNK_RET TRKTargetSetInputPendingPtr(UNK_PARAMS);
+/* 32A618 */ void TRKTargetSetInputPendingPtr(s32 arg0);
+/* 4A4C98 */ extern struct gTRKCPUState_t gTRKCPUState;
 
 #endif

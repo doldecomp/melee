@@ -1,4 +1,11 @@
-/// #it_802B7150
+#include "itsamusgrapple.h"
+
+#include "it/inlines.h"
+
+void it_802B7150(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = 0;
+}
 
 /// #it_802B7160
 

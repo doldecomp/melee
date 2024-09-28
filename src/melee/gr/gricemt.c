@@ -1,5 +1,9 @@
 #include <platform.h>
 
+#include "gr/inlines.h"
+
+#include <placeholder.h>
+
 void grIceMt_801F6868(void) {}
 
 /// #grIceMt_801F686C
@@ -26,7 +30,10 @@ void grIceMt_801F75E4(void) {}
 
 void grIceMt_801F75E8(void) {}
 
-/// #fn_801F75EC
+void fn_801F75EC(void* arg0)
+{
+    GET_GROUND(arg0)->gv.icemt.xD8 = 0;
+}
 
 /// #grIceMt_801F75FC
 

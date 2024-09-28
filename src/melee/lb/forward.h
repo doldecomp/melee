@@ -9,8 +9,13 @@ typedef struct DynamicsDesc DynamicsDesc;
 typedef struct HitCapsule HitCapsule;
 typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
+typedef struct HSD_AllocEntry HSD_AllocEntry;
 typedef struct HurtCapsule HurtCapsule;
 typedef struct lbRefract_CallbackData lbRefract_CallbackData;
+typedef struct PreloadCache PreloadCache;
+typedef struct PreloadCacheScene PreloadCacheScene;
+typedef struct PreloadCacheSceneEntry PreloadCacheSceneEntry;
+typedef struct PreloadEntry PreloadEntry;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 

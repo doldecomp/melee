@@ -4,7 +4,10 @@
 
 #include <placeholder.h>
 
-/// #pl_800386D8
+UNK_T pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
+{
+    return arg0->x3E8[arg1];
+}
 
 /// #pl_800386E8
 

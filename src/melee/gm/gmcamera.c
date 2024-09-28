@@ -1,49 +1,25 @@
 #include <platform.h>
 
+#include "gmcamera.h"
+
+#include <placeholder.h>
+
+void* HSD_SisLib_803A5ACC(u8, int, float, float, float); /* extern */
+void HSD_SisLib_803A6368(void*, u32);                    /* extern */
+void HSD_SisLib_803A6530(u32, u32, u32);                 /* extern */
+void HSD_SisLib_803A660C(u32, u32, u32);                 /* extern */
+
 typedef struct _SisLibUnkStruct2 {
     /*0x00*/ u8 x0_padding[0x8 - 0x0];
     /*0x08*/ u8* x08_arr; // Unknown length as of right now
 } SisLibUnkStruct2;
 
+/// @todo #SIS
 typedef struct _SisLibUnkStruct {
     /*0x00*/ u8 x0_padding[0xC - 0x0];
     /*0x0C*/ SisLibUnkStruct2* x0C_ptr;
     /*0x10*/ u8 x10_padding[0x14 - 0x10];
 } SisLibUnkStruct;
-
-typedef struct _gmCameraUnkStruct3 {
-    /*0x00*/ u8 x0_padding[0x24 - 0x0];
-    /*0x24*/ float x24;
-    /*0x28*/ float x28;
-    /*0x2C*/ u8 x2C_padding[0x49 - 0x2C];
-    /*0x49*/ u8 x49;
-} gmCameraUnkStruct3;
-
-typedef struct _gmCameraUnkStruct2 {
-    /*0x00*/ u8 x0_padding[0x24 - 0x0];
-    /*0x24*/ u32 x24;
-    /*0x28*/ u32 x28;
-    /*0x2C*/ int x2C;
-    /*0x30*/ u32 x30;
-} gmCameraUnkStruct2;
-
-typedef struct _gmCameraUnkStruct {
-    /*0x00*/ u8 x0_padding[0x20 - 0x0];
-    /*0x20*/ u32 x20;
-    /*0x24*/ u32 x24;
-    /*0x28*/ u8 x28_padding[0x54 - 0x28];
-    /*0x54*/ u32 x54;
-} gmCameraUnkStruct;
-
-typedef struct _gmCameraUnkStructPtrs {
-    /*0x00*/ u8 x0_padding[0x58 - 0x0];
-} gmCameraUnkStruct2Ptrs;
-
-union _gmCameraUnkUnion {
-    gmCameraUnkStruct gcus;
-    // gmCameraUnkStruct2* gcus2_ptrs[0x58/4];
-    gmCameraUnkStruct2Ptrs gcus2_ptrs;
-};
 
 /// @todo #HSD_SisLib_804D1124 is of type #SIS.
 extern SisLibUnkStruct HSD_SisLib_804D1124;
@@ -86,16 +62,6 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
     *arg0 = 0;
     return arg0;
 }
-
-void* HSD_SisLib_803A5ACC(u8, int, float, float, float); /* extern */
-void HSD_SisLib_803A6368(void*, u32);                    /* extern */
-void HSD_SisLib_803A6530(u32, u32, u32);                 /* extern */
-void HSD_SisLib_803A660C(u32, u32, u32);                 /* extern */
-
-extern union _gmCameraUnkUnion gmCamera_80479BC8;
-extern float gmCamera_804DA9B8;
-extern float gmCamera_804DA9BC;
-extern float gmCamera_804DA9C0;
 
 void* gmCamera_801A2334(int arg0, float argA, float argB)
 {
@@ -212,7 +178,10 @@ void* gmCamera_801A2334(int arg0, float argA, float argB)
 
 /// #gmCamera_801A25C8
 
-/// #gmCamera_801A2640
+s32 gmCamera_801A2640(void)
+{
+    return M2C_FIELD(&gmCamera_80479BC8, s32*, 0x54);
+}
 
 /// #gmCamera_801A2650
 

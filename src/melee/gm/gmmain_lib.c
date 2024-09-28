@@ -1,18 +1,10 @@
-#include "gm/gmmain_lib.h"
+#include <platform.h>
+
+#include "gmmain_lib__static.h"
 
 #include "lb/lbtime.h"
 
 #include <dolphin/os/OSReset.h>
-
-struct gmMainLib_8046B0F0_t {
-    bool x0;
-    int x4, x8, xC, x10, x14;
-} gmMainLib_8046B0F0;
-
-/* 15D888 */ static void gmMainLib_8015D888(u32);
-
-static struct gmm_x0 gmMainLib_8045A6C0[2];
-struct gmm_x0* gmMainLib_804D3EE0 = gmMainLib_8045A6C0;
 
 GameRules* gmMainLib_8015CC34(void)
 {
@@ -64,7 +56,7 @@ void* gmMainLib_8015CC9C(s32 arg0)
 
 void* gmMainLib_8015CCE4(void)
 {
-    return &gmMainLib_804D3EE0->x44;
+    return &gmMainLib_804D3EE0->unk_44;
 }
 
 void* gmMainLib_8015CCF0(void)
@@ -159,17 +151,17 @@ void* gmMainLib_8015CDBC(void)
 
 void* gmMainLib_8015CDC8(void)
 {
-    return &gmMainLib_804D3EE0->x51C;
+    return &gmMainLib_804D3EE0->unk_51C;
 }
 
 void* gmMainLib_8015CDD4(void)
 {
-    return &gmMainLib_804D3EE0->x522;
+    return &gmMainLib_804D3EE0->unk_522;
 }
 
 void* gmMainLib_8015CDE0(void)
 {
-    return &gmMainLib_804D3EE0->x528;
+    return &gmMainLib_804D3EE0->unk_528;
 }
 
 void gmMainLib_8015CDEC(void)
@@ -186,8 +178,8 @@ void gmMainLib_8015CDEC(void)
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
     if (arg1 == 0x78) {
-        if (arg0 < 4) {
-            return &gmMainLib_804D3EE0->x588[arg0];
+        if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_588)) {
+            return &gmMainLib_804D3EE0->unk_588[arg0];
         }
         return 0;
     } else {
@@ -611,7 +603,7 @@ u32 gmMainLib_8015D94C(u32 arg0)
 
 u32* gmMainLib_8015D970(ssize_t idx)
 {
-    u32* base = &gmMainLib_804D3EE0->x6C[0];
+    u32* base = &gmMainLib_804D3EE0->unk_6C[0];
     return &base[idx];
 }
 
@@ -622,7 +614,7 @@ bool gmMainLib_8015D984(u32 arg0)
     u8 _[16];
 
     if (gmMainLib_8015DA90(arg0) == 0) {
-        u32* base = &gmMainLib_804D3EE0->x6C[0];
+        u32* base = &gmMainLib_804D3EE0->unk_6C[0];
         u32* qwe = &base[arg0];
         *qwe = lbTime_8000AFBC();
 
@@ -636,13 +628,13 @@ bool gmMainLib_8015D984(u32 arg0)
 
 void gmMainLib_8015D9F4(u32 arg0)
 {
-    s32* base = &gmMainLib_804D3EE0->x44;
+    s32* base = &gmMainLib_804D3EE0->unk_44;
     base[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
 s32 gmMainLib_8015DA1C(u32 arg0)
 {
-    s32* base = &gmMainLib_804D3EE0->x44;
+    s32* base = &gmMainLib_804D3EE0->unk_44;
     return (1 << (arg0 % 32)) & base[arg0 / 32];
 }
 
@@ -679,17 +671,17 @@ s32 gmMainLib_8015DADC(u32 arg0)
 
 u8 gmMainLib_8015DB00(void)
 {
-    return gmMainLib_804D3EE0->x1;
+    return gmMainLib_804D3EE0->unk_1;
 }
 
 void gmMainLib_8015DB0C(u8 arg0)
 {
-    gmMainLib_804D3EE0->x1 = arg0;
+    gmMainLib_804D3EE0->unk_1 = arg0;
 }
 
 void gmMainLib_8015DB18(void)
 {
-    gmMainLib_804D3EE0->x1 += 1;
+    gmMainLib_804D3EE0->unk_1 += 1;
 }
 
 void gmMainLib_8015DB2C(u8 arg0, s32 arg2)
@@ -727,28 +719,34 @@ u8 gmMainLib_8015ED30(void)
     return gmMainLib_804D3EE0->x1850.unk_xc;
 }
 
-/// #gmMainLib_8015ED3C
+u8 gmMainLib_8015ED3C(s32 arg0)
+{
+    return gmMainLib_804D3EE0->thing.x1CB0.x10[arg0];
+}
 
-/// #gmMainLib_8015ED4C
+void gmMainLib_8015ED4C(s32 arg0, s8 arg1)
+{
+    gmMainLib_804D3EE0->thing.x1CB0.x10[arg0] = arg1;
+}
 
 s32 gmMainLib_8015ED5C(void)
 {
-    return M2C_FIELD(gmMainLib_804D3EE0, s32*, 0x1864);
+    return gmMainLib_804D3EE0->x1850.unk_14;
 }
 
 void gmMainLib_8015ED68(s32 arg0)
 {
-    M2C_FIELD(gmMainLib_804D3EE0, s32*, 0x1864) = arg0;
+    gmMainLib_804D3EE0->x1850.unk_14 = arg0;
 }
 
 u8 gmMainLib_8015ED74(void)
 {
-    return gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x14];
+    return gmMainLib_804D3EE0->thing.x1CB0.x10[4];
 }
 
 void gmMainLib_8015ED80(u8 arg0)
 {
-    gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x14] = arg0;
+    gmMainLib_804D3EE0->thing.x1CB0.x10[4] = arg0;
 }
 
 u16* gmMainLib_8015ED8C(gmMainLib_8015ED8C_arg0_t* arg0)
@@ -784,25 +782,37 @@ u8* gmMainLib_8015EDC8(void)
     return &gmMainLib_804D3EE0->thing.padding_x1868[0x1A4];
 }
 
-/// #gmMainLib_8015EDD4
+s32 gmMainLib_8015EDD4(void)
+{
+    return gmMainLib_804D3EE0->thing.padding_x1868[0] & 4;
+}
 
 /// #gmMainLib_8015EDE4
 
 /// #gmMainLib_8015EDF8
 
-/// #gmMainLib_8015EE0C
+s32 gmMainLib_8015EE0C(void)
+{
+    return gmMainLib_804D3EE0->thing.padding_x1868[0] & 1;
+}
 
 /// #gmMainLib_8015EE1C
 
 /// #gmMainLib_8015EE30
 
-/// #gmMainLib_8015EE44
+s32 gmMainLib_8015EE44(void)
+{
+    return gmMainLib_804D3EE0->thing.padding_x1868[0] & 2;
+}
 
 /// #gmMainLib_8015EE54
 
 /// #gmMainLib_8015EE68
 
-/// #gmMainLib_8015EE90
+s32 gmMainLib_8015EE90(void)
+{
+    return gmMainLib_804D3EE0->thing.padding_x1868[0] & 8;
+}
 
 /// #gmMainLib_8015EEA0
 
@@ -826,12 +836,12 @@ u8* gmMainLib_8015EDC8(void)
 
 u8 gmMainLib_8015F4E8(void)
 {
-    return gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x15];
+    return gmMainLib_804D3EE0->thing.x1CB0.x10[5];
 }
 
 void gmMainLib_8015F4F4(u8 arg0)
 {
-    gmMainLib_804D3EE0->thing.x1CB0.padding_x0[0x15] = arg0;
+    gmMainLib_804D3EE0->thing.x1CB0.x10[5] = arg0;
 }
 
 /// #gmMainLib_8015F500

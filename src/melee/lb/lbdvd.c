@@ -7,66 +7,20 @@
 #include "db/db_2253.h"
 #include "ef/efasync.h"
 #include "gr/grdatfiles.h"
+#include "lb/types.h"
 
 #include <placeholder.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>
 
-typedef struct HSD_AllocEntry {
-    struct HSD_AllocEntry* next;
-    u32* addr;
-    size_t size;
-} HSD_AllocEntry;
-
-typedef struct PreloadCacheSceneEntry {
-    struct PreloadCache* field0_0x0;
-    struct PreloadCache* field1_0x4;
-} PreloadCacheSceneEntry;
-
-typedef struct PreloadEntry {
-    s8 state;
-    u8 type;
-    s8 heap;
-    u8 load_state;
-    u8 unknown004;
-    u8 field5_0x5;
-    u16 entry_num;
-    s16 load_score;
-    u8 field8_0xa;
-    u8 field9_0xb;
-    u32 size;
-    HSD_AllocEntry* raw_data;
-    HSD_AllocEntry* archive;
-    s32 effect_index;
-} PreloadEntry;
-
-typedef struct PreloadCacheScene {
-    u32 is_heap_persistent[2];
-    u8 major_id;
-    u8 field2_0x9;
-    u8 field3_0xa;
-    u8 field4_0xb;
-    u32 stage_id;
-    PreloadCacheSceneEntry entries[8];
-    s32 major_scene_changes;
-} PreloadCacheScene;
-
-typedef struct PreloadCache {
-    u32 persistent_heaps;
-    PreloadCacheScene scene;
-    PreloadCacheScene new_scene;
-    PreloadEntry entries[80];
-    s32 persistent_heap;
-    int preloaded;
-    UNK_T x974;
-} PreloadCache;
-
-/* 0189EC */ static void lbDvd_800189EC(int);
-
-PreloadEntry lbDvd_803BA68C = { 0 };
-static PreloadCache preloadCache;
-static PreloadCache lbDvd_803BA638 = { 0 };
+/* 3BA638 */ static PreloadCache lbDvd_803BA638 = { 0 };
+/* 3BA68C */ static PreloadEntry lbDvd_803BA68C = { 0 };
+/* 3BA6A8 */ static char* lbDvd_803BA6A8;
+/* 432078 */ static PreloadCache preloadCache;
+/* 4D37D0 */ static char* lbDvd_804D37D0;
+/* 4D37D8 */ static char* lbDvd_804D37D8;
+/* 4D37E0 */ static char* lbDvd_804D37E0;
 
 void lbDvd_800174BC(void)
 {
@@ -119,10 +73,9 @@ bool lbDvd_80017598(bool cached)
     return var_r28;
 }
 
-extern char* lbDvd_804D37D0;
-extern char* lbDvd_803BA6A8;
-extern char* lbDvd_804D37D8;
-extern char* lbDvd_804D37E0;
+/// #lbDvd_80017644
+
+/// #lbDvd_80017700
 
 void* lbDvd_80017740(int type, s16 entry_num, s32 transient_heap, s32 heap,
                      u32 size, s8 load_state, s16 load_score, s8 arg7,
@@ -186,6 +139,12 @@ void* lbDvd_80017740(int type, s16 entry_num, s32 transient_heap, s32 heap,
     }
     return entry;
 }
+
+/// #lbDvd_800178E8
+
+/// #lbDvd_80017960
+
+/// #lbDvd_80017A80
 
 void lbDvd_CachePreloadedFile(s32 index)
 {
@@ -306,8 +265,6 @@ void lbDvd_80017E64(void* key, int index, void* value, bool cancelflag)
     lbDvd_80017CC4();
 }
 
-extern PreloadCache preloadCache;
-
 HSD_Archive* lbDvd_GetPreloadedArchive(s32 arg0)
 {
     s8 type;
@@ -383,6 +340,23 @@ HSD_Archive* lbDvd_8001819C(const char* basename)
     return archive;
 }
 
+PreloadCacheScene* lbDvd_8001822C(void)
+{
+    return &preloadCache.scene;
+}
+
+/// #lbDvd_8001823C
+
+/// #lbDvd_80018254
+
+/// #lbDvd_800187F4
+
+/// #lbDvd_800189EC
+
+/// #lbDvd_80018A2C
+
+/// #lbDvd_80018C2C
+
 void lbDvd_80018C6C(void)
 {
     PreloadCache* new_var;
@@ -416,3 +390,14 @@ void lbDvd_80018C6C(void)
         return;
     }
 }
+
+/// #lbDvd_80018CF4
+
+void lbDvd_80018F58(bool value)
+{
+    preloadCache.preloaded = value;
+}
+
+/// #lbDvd_80018F68
+
+/// #lbDvd_80019100

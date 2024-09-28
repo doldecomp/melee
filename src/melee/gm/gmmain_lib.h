@@ -119,8 +119,8 @@
 /* 15ECB0 */ u8 gmMainLib_8015ECB0(void);
 /* 15ECBC */ UNK_RET gmMainLib_8015ECBC(UNK_PARAMS);
 /* 15ED30 */ u8 gmMainLib_8015ED30(void);
-/* 15ED3C */ UNK_RET gmMainLib_8015ED3C(UNK_PARAMS);
-/* 15ED4C */ UNK_RET gmMainLib_8015ED4C(UNK_PARAMS);
+/* 15ED3C */ u8 gmMainLib_8015ED3C(s32 arg0);
+/* 15ED4C */ void gmMainLib_8015ED4C(s32 arg0, s8 arg1);
 /* 15ED5C */ s32 gmMainLib_8015ED5C(void);
 /* 15ED68 */ void gmMainLib_8015ED68(s32 arg0);
 /* 15ED74 */ u8 gmMainLib_8015ED74(void);
@@ -131,16 +131,16 @@
 /* 15EDB0 */ struct gmm_retval_EDB0* gmMainLib_8015EDB0(void);
 /* 15EDBC */ struct gmm_retval_EDBC* gmMainLib_8015EDBC(void);
 /* 15EDC8 */ u8* gmMainLib_8015EDC8(void);
-/* 15EDD4 */ UNK_RET gmMainLib_8015EDD4(UNK_PARAMS);
+/* 15EDD4 */ s32 gmMainLib_8015EDD4(void);
 /* 15EDE4 */ UNK_RET gmMainLib_8015EDE4(UNK_PARAMS);
 /* 15EDF8 */ UNK_RET gmMainLib_8015EDF8(UNK_PARAMS);
-/* 15EE0C */ UNK_RET gmMainLib_8015EE0C(UNK_PARAMS);
+/* 15EE0C */ s32 gmMainLib_8015EE0C(void);
 /* 15EE1C */ UNK_RET gmMainLib_8015EE1C(UNK_PARAMS);
 /* 15EE30 */ UNK_RET gmMainLib_8015EE30(UNK_PARAMS);
-/* 15EE44 */ UNK_RET gmMainLib_8015EE44(UNK_PARAMS);
+/* 15EE44 */ s32 gmMainLib_8015EE44(void);
 /* 15EE54 */ UNK_RET gmMainLib_8015EE54(UNK_PARAMS);
 /* 15EE68 */ UNK_RET gmMainLib_8015EE68(UNK_PARAMS);
-/* 15EE90 */ UNK_RET gmMainLib_8015EE90(UNK_PARAMS);
+/* 15EE90 */ s32 gmMainLib_8015EE90(void);
 /* 15EEA0 */ UNK_RET gmMainLib_8015EEA0(UNK_PARAMS);
 /* 15EEB4 */ UNK_RET gmMainLib_8015EEB4(UNK_PARAMS);
 /* 15EEC8 */ UNK_RET gmMainLib_8015EEC8(UNK_PARAMS);
@@ -161,6 +161,7 @@
 /* 15FBA4 */ void gmMainLib_8015FBA4(void);
 /* 15FC74 */ UNK_RET gmMainLib_8015FC74(UNK_PARAMS);
 /* 15FCC0 */ void gmMainLib_8015FCC0(void);
+/* 46B0F0 */ extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 /* 4D3EE0 */ extern struct gmm_x0* gmMainLib_804D3EE0;
 
 #endif

@@ -63,11 +63,14 @@ struct Camera {
 };
 
 struct CameraUnkGlobals {
-    float x0[11];
-    float x2C;
-    float x30;
-    float x34;
-    float x38;
+    /*  +0 */ float _0[11];
+    /* +2C */ float x2C;
+    /* +30 */ float x30;
+    /* +34 */ float x34;
+    /* +38 */ float x38;
+    /* +3C */ float x3C;
+    /* +40 */ float x40;
+    /* +44 */ float _44[43];
 };
 
 #endif

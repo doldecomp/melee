@@ -27,6 +27,9 @@ WhitespaceSensitiveMacros:
   - 'CHECK'
 IncludeBlocks: Regroup
 IncludeCategories:
+  - Regex: '^".*?__static\.h"$'
+    Priority: -2
+    SortPriority: 0
   - Regex: '^<platform\.h>$'
     Priority: -1
     SortPriority: -6

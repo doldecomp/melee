@@ -71,15 +71,24 @@ void __TRK_set_MSR(int value)
 
 /// #TRKTargetStepOutOfRange
 
-/// #TRKTargetGetPC
+s32 TRKTargetGetPC(void)
+{
+    return gTRKCPUState.unk_80;
+}
 
 /// #TRKTargetSupportRequest
 
 /// #TRKTargetFlushCache
 
-/// #TRKTargetStopped
+s32 TRKTargetStopped(void)
+{
+    return gTRKState.unk_98;
+}
 
-/// #TRKTargetSetStopped
+void TRKTargetSetStopped(s32 arg0)
+{
+    gTRKState.unk_98 = arg0;
+}
 
 /// #TRKTargetStop
 
@@ -91,4 +100,7 @@ void __TRK_set_MSR(int value)
 
 /// #TRKPPCAccessSpecialReg
 
-/// #TRKTargetSetInputPendingPtr
+void TRKTargetSetInputPendingPtr(s32 arg0)
+{
+    gTRKState.unk_A0 = arg0;
+}

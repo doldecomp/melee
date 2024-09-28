@@ -3673,7 +3673,10 @@ void ftKb_SpecialAirHi3_IASA(ftKb_GObj* gobj) {}
 
 /// #ftKb_SpecialAirLw_800F5318
 
-/// #ftKb_SpecialAirLw_800F539C
+void ftKb_SpecialAirLw_800F539C(ftKb_GObj* gobj)
+{
+    M2C_FIELD(gobj->user_data, s32*, 0x222C) = 0;
+}
 
 /// #fn_800F53AC
 
@@ -3716,7 +3719,10 @@ void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F5954
 
-/// #ftKb_SpecialN_800F597C
+bool ftKb_SpecialN_800F597C(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(gobj->user_data, s32*, 0x840) & 0x100;
+}
 
 /// #ftKb_SpecialN_800F598C
 
@@ -3724,25 +3730,43 @@ void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F5A38
 
-/// #ftKb_SpecialN_800F5A60
+f32 ftKb_SpecialN_800F5A60(ftKb_GObj* gobj)
+{
+    return -M2C_FIELD(gobj->user_data, f32*, 0x2C);
+}
 
 /// #ftKb_SpecialN_800F5A70
 
-/// #ftKb_SpecialN_800F5A88
+f32 ftKb_SpecialN_800F5A88(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x68);
+}
 
 /// #ftKb_SpecialN_800F5A98
 
-/// #ftKb_SpecialN_800F5AB0
+f32 ftKb_SpecialN_800F5AB0(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x6C);
+}
 
 /// #ftKb_SpecialN_800F5AC0
 
 /// #ftKb_SpecialN_800F5AD8
 
-/// #ftKb_SpecialN_800F5AF0
+f32 ftKb_SpecialN_800F5AF0(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x5C);
+}
 
-/// #ftKb_SpecialN_800F5B00
+f32 ftKb_SpecialN_800F5B00(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x58);
+}
 
-/// #ftKb_SpecialN_800F5B10
+f32 ftKb_SpecialN_800F5B10(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x54);
+}
 
 /// #ftKb_SpecialN_800F5B20
 
@@ -3753,7 +3777,10 @@ float ftKb_SpecialN_800F5B3C(HSD_GObj* gobj)
     return da->specialn_gravity_of_inhaled;
 }
 
-/// #ftKb_SpecialN_800F5B4C
+f32 ftKb_SpecialN_800F5B4C(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x40);
+}
 
 /// #ftKb_SpecialN_800F5B5C
 
@@ -5106,13 +5133,25 @@ float ftKb_SpecialNYs_80109290(ftKb_GObj* gobj)
     return GET_FIGHTER(gobj)->facing_dir;
 }
 
-/// #ftKb_SpecialNYs_8010929C
+f32 ftKb_SpecialNYs_8010929C(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x3B4);
+}
 
-/// #ftKb_SpecialNYs_801092AC
+f32 ftKb_SpecialNYs_801092AC(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x3B8);
+}
 
-/// #ftKb_SpecialNYs_801092BC
+f32 ftKb_SpecialNYs_801092BC(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x3BC);
+}
 
-/// #ftKb_SpecialNYs_801092CC
+f32 ftKb_SpecialNYs_801092CC(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x3C0);
+}
 
 /// #ftKb_SpecialNYs_801092DC
 

@@ -1,10 +1,17 @@
+#include "itpikachutjoltground.h"
+
+#include "it/inlines.h"
+
 /// #it_802B3368
 
 /// #it_802B338C
 
 /// #it_802B34E4
 
-/// #it_802B3544
+void it_802B3544(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.pikachujoltground.unk_8 = 0;
+}
 
 /// #it_802B3554
 

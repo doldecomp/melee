@@ -3,6 +3,7 @@
 
 #define PL_SLOT_MAX 6
 
+typedef struct pl_800386D8_t pl_800386D8_t;
 typedef struct plAllocInfo2 plAllocInfo2;
 
 #endif

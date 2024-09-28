@@ -3084,7 +3084,12 @@ struct ItemLogicTable it_803F3100[] = {
 
 /// #it_80272784
 
-/// #it_80272818
+s32 it_80272818(Item_GObj* gobj)
+{
+    /// @todo This seems to get #Item::xC4_article_data directly,
+    ///       without #GET_ITEM
+    return *M2C_FIELD(M2C_FIELD(gobj, void**, 0xC4), s32**, 4);
+}
 
 /// #it_80272828
 
@@ -3202,7 +3207,10 @@ struct ItemLogicTable it_803F3100[] = {
 
 /// #it_80274C60
 
-/// #it_80274C78
+bool it_80274C78(Item_GObj* gobj)
+{
+    return GET_ITEM(gobj)->xDC8_word.flags.xC;
+}
 
 /// #it_80274C88
 
@@ -3223,9 +3231,15 @@ void it_80274ECC(Item_GObj* gobj, bool arg1)
     GET_ITEM(gobj)->xD09 = arg1;
 }
 
-/// #it_80274ED8
+void it_80274ED8(void)
+{
+    it_804D6D0C += 1;
+}
 
-/// #it_80274EE8
+void it_80274EE8(u32 arg0)
+{
+    it_804D6D08 += 1;
+}
 
 /// #it_80274EF8
 
@@ -3239,7 +3253,11 @@ void it_80274ECC(Item_GObj* gobj, bool arg1)
 
 /// #it_80275070
 
-/// #it_802750E8
+s32 it_802750E8(Item_GObj* gobj, s32 mask)
+{
+    Item* ip = GET_ITEM(gobj);
+    return ip->xDC0 & mask;
+}
 
 /// #it_802750F8
 
@@ -3297,7 +3315,10 @@ void it_80274ECC(Item_GObj* gobj, bool arg1)
 
 /// #it_80275640
 
-/// #it_802756D0
+void it_802756D0(HSD_GObj* gobj)
+{
+    M2C_FIELD(gobj->user_data, s32*, 0xD0C) = 2;
+}
 
 /// #it_802756E0
 

@@ -15,12 +15,6 @@
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
-/* 12CEE0 */ static void fn_8012CEE0(HSD_GObj*);
-/* 12CF7C */ static void fn_8012CF7C(HSD_GObj*);
-/* 12DF00 */ static void ftYs_SpecialS_8012DF00(HSD_GObj*);
-/* 12E644 */ static void fn_8012E644(HSD_GObj*);
-/* 12EAD8 */ static void ftYs_SpecialS_8012EAD8(HSD_GObj*);
-
 bool ftYs_Unk3_803CED48[] = {
     false, true, false, false, false, true, true, false,
     false, true, true,  true,  false, true, true,
@@ -358,13 +352,19 @@ void ftYs_SpecialAirSStart_0_IASA(ftYs_GObj* gobj) {}
 
 void ftYs_SpecialAirSEnd_IASA(ftYs_GObj* gobj) {}
 
-/// #ftYs_SpecialAirSStart_1_IASA
+void ftYs_SpecialAirSStart_1_IASA(ftYs_GObj* gobj)
+{
+    M2C_FIELD(gobj->user_data, s32*, 0x2370) = 0;
+}
 
 /// #ftYs_SpecialAirSLoop_2_IASA
 
 /// #ftYs_SpecialAirSLoop_3_IASA
 
-/// #ftYs_SpecialAirSLanding_IASA
+void ftYs_SpecialAirSLanding_IASA(ftYs_GObj* gobj)
+{
+    M2C_FIELD(gobj->user_data, s32*, 0x2370) = 0;
+}
 
 /// #ftYs_SpecialAirSStart_0_Phys
 

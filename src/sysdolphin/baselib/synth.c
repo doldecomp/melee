@@ -1,4 +1,4 @@
-#include "synth.h"
+#include "synth__static.h"
 
 static UNK_T driverInactivatedCallback;
 extern UNK_T driverMasterClockCallback;
@@ -18,7 +18,10 @@ extern UNK_T driverPauseCallback;
 
 /// #HSD_Synth_80388B0C
 
-/// #HSD_Synth_80388B50
+s32 HSD_Synth_80388B50(void)
+{
+    return HSD_Synth_804D772C - HSD_Synth_804D7738;
+}
 
 /// #HSD_Synth_80388B60
 
@@ -36,7 +39,12 @@ extern UNK_T driverPauseCallback;
 
 /// #HSD_SynthSFXBankDeflag
 
-/// #HSD_SynthSFXBankDeflagSync
+void HSD_SynthSFXBankDeflagSync(void)
+{
+    while (HSD_Synth_804D773C) {
+        continue;
+    }
+}
 
 /// #HSD_Synth_80389094
 

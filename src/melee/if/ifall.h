@@ -7,8 +7,8 @@
 
 /* 2F3394 */ UNK_RET ifAll_802F3394(UNK_PARAMS);
 /* 2F33CC */ UNK_RET ifAll_802F33CC(UNK_PARAMS);
-/* 2F3404 */ UNK_RET ifAll_802F3404(UNK_PARAMS);
-/* 2F3414 */ UNK_RET ifAll_802F3414(UNK_PARAMS);
+/* 2F3404 */ s32 ifAll_802F3404(void);
+/* 2F3414 */ UNK_T ifAll_802F3414(void);
 /* 2F3424 */ void ifAll_802F3424(void);
 /* 2F343C */ void ifAll_802F343C(void);
 /* 2F3690 */ UNK_T ifAll_802F3690(void);

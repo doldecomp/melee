@@ -1,0 +1,138 @@
+/// @todo Move to C file
+#ifndef __GALE01_1A3680
+#define __GALE01_1A3680
+
+#include "gm_1601.h" // IWYU pragma: keep
+
+typedef struct MajorScene MajorScene;
+typedef struct MinorScene MinorScene;
+typedef struct MinorSceneHandler MinorSceneHandler;
+
+struct MinorScene {
+    u8 idx;
+    u8 preload;
+    u16 flags;
+
+    void (*Prep)(MinorScene*);
+    void (*Decide)(MinorScene*);
+
+    u8 class_id;
+
+    void* unk_struct_0;
+    void* unk_struct_1;
+};
+
+struct MajorScene {
+    u8 preload;
+    u8 idx;
+
+    void (*Load)(void);
+    void (*Unload)(void);
+    void (*Init)(void);
+
+    MinorScene* minor_scenes;
+}; // 803DACA4
+
+struct MinorSceneHandler {
+    u8 class_id;
+
+    void (*OnFrame)(void);
+    void (*OnLoad)(u32);
+    void (*OnLeave)(u32);
+    void (*unk_func)(void);
+}; // 803DA920
+
+typedef struct {
+    u8 curr_major;
+    u8 pending_major;
+    u8 prev_major;
+    u8 curr_minor;
+    u8 prev_minor;
+    u8 pending_minor;
+} SceneNums;
+
+typedef struct {
+    SceneNums nums;
+    SceneNums nums2;
+    u8 pending;
+    u8 x0D;
+    u8 x0E;
+    u8 x0F;
+    void* data;
+} GameState;
+STATIC_ASSERT(sizeof(GameState) == 0x14);
+
+struct sceneData {
+    u32 a;
+    u8 scene_id;
+};
+
+struct gm_80479D58_t {
+    /* 0x00 */ struct gm_80479D58_t* unk_0;
+    /* 0x04 */ char pad_4[4];
+    /* 0x08 */ s32 unk_8; /* inferred */
+    /* 0x0C */ char pad_C[4];
+    /* 0x10 */ u8 unk_10;
+    /* 0x11 */ char pad_11[0x2F]; /* maybe part of unk_10[0x30]? */
+}; /* size = 0x40 */
+STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
+
+struct gm_8049E548_t {
+    /* 0x00 */ char pad_0[8];
+    /* 0x08 */ s8 unk_8;
+    /* 0x09 */ u8 unk_9;
+    /* 0x0A */ s8 unk_A;
+    /* 0x0B */ char pad_B[1];
+    /* 0x0C */ s16 unk_C;
+    /* 0x0E */ s8 unk_E; /* inferred */
+    /* 0x0F */ char pad_F[1];
+}; /* size = 0x10 */
+STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
+
+/* 1A3F48 */ static void gm_801A3F48(MinorScene*);
+/* 1A4014 */ static void gm_801A4014(MajorScene* scene);
+/* 1A4284 */ static UNK_T gm_801A4284(UNK_T);
+/* 1A42B4 */ static u8 gm_801A42B4(void);
+/* 1A42C4 */ static u8 gm_801A42C4(void);
+/* 1A42E8 */ static void gm_801A42E8(s8 arg0);
+/* 1A42F8 */ static void gm_801A42F8(int);
+/* 1A4310 */ static UNK_RET gm_800A4310(UNK_PARAMS);
+/* 1A4320 */ static u8 gm_801A4320(void);
+/* 1A4330 */ static void gm_801A4330(void*);
+/* 1A4624 */ static u8 gm_801A4624(void);
+/* 1A4B40 */ static void gm_801A4B40(s32 arg0);
+/* 1A4B50 */ static void gm_801A4B50(s32 arg0);
+/* 1A4B88 */ static void gm_801A4B88(void*);
+/* 1A4BB8 */ static s32 gm_801A4BB8(void);
+/* 1A4BD4 */ static void gm_801A4BD4(void);
+/* 1A4CE0 */ static MinorSceneHandler* gm_801A4CE0(u8);
+/* 1A4D34 */ static void gm_801A4D34(void*);
+/* 1A50A0 */ static MajorScene* gm_801A50A0(void);
+/* 1A50AC */ static MajorScene* gm_801A50AC(void);
+/* 1A5244 */ static s8* gm_801A5244(void);
+/* 1A5614 */ static void gm_801A5614(void);
+/* 1ACC90 */ static void gm_801ACC90(void);
+/* 1B6320 */ static UNK_T gm_801B6320(void);
+/* 1B8C5C */ static void fn_801B8C5C(UNK_T);
+/* 1B9FB8 */ static void fn_801B9FB8(void* arg0);
+/* 1BA5B4 */ static void fn_801BA5B4(UNK_T);
+/* 1BA7AC */ static void fn_801BA7AC(UNK_T);
+/* 1BBFE4 */ static void gm_801BBFE4(void);
+/* 1BEFB0 */ static u8 gm_801BEFB0(void);
+/* 1BEFC0 */ static void gm_801BEFC0(s8 arg0);
+/* 1BEFD0 */ static u8 gm_801BEFD0(void);
+/* 1BEFE0 */ static void gm_801BEFE0(s8 arg0);
+/* 1BF684 */ static void gm_801BF684(s16 arg0);
+/* 2A3EF4 */ static void gm_801A3EF4(void);
+/* 3DA920 */ static MajorScene gm_803DA920;
+/* 3DACA4 */ static MajorScene gm_803DACA4;
+/* 3DD2C0 */ static int gm_803DD2C0[74];
+/* 479D30 */ static GameState gm_80479D30;
+/* 479D58 */ static struct gm_80479D58_t gm_80479D58;
+/* 49C178 */ static s8 gm_8049C178[16];
+/* 49E548 */ static struct gm_8049E548_t gm_8049E548;
+/* 4D6720 */ static UNK_T gm_804D6720;
+/* 4D672C */ static s32 gm_804D672C;
+/* 4D6730 */ static UNK_T gm_804D6730;
+
+#endif
