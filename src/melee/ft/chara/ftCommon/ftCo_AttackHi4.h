@@ -2,6 +2,7 @@
 #define GALE01_08C830
 
 #include <platform.h>
+
 #include "ftCommon/forward.h"
 
 /* 08C830 */ bool ftCo_AttackHi4_CheckInput(ftCo_GObj* gobj);

@@ -2,9 +2,9 @@
 #define GALE01_0C8170
 
 #include <platform.h>
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 0C8170 */ UNK_RET ft_800C8170(UNK_PARAMS);
 /* 0C8348 */ void ftCo_800C8348(ftCo_GObj*, s32, s32);

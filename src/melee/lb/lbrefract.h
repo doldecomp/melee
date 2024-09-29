@@ -2,6 +2,7 @@
 #define GALE01_021CE8
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 void lbRefract_800222A4(void);

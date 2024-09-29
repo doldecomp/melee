@@ -1,9 +1,9 @@
 #ifndef GALE01_2EB5C8
 #define GALE01_2EB5C8
 
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /* 2EB5C8 */ UNK_RET it_802EB5C8(UNK_PARAMS);
 /* 2EB684 */ UNK_RET it_802EB684(UNK_PARAMS);

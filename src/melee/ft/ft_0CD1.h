@@ -1,9 +1,9 @@
 #ifndef GALE01_0CD140
 #define GALE01_0CD140
 
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 0CD140 */ UNK_RET ftCo_800CD140(UNK_PARAMS);
 /* 0CD1BC */ UNK_RET ftCo_800CD1BC(UNK_PARAMS);

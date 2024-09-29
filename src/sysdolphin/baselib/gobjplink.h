@@ -2,6 +2,7 @@
 #define SYSDOLPHIN_BASELIB_GOBJPLINK_H
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 #include "baselib/gobj.h"

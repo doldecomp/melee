@@ -1,4 +1,7 @@
-#include "gm_1A36__static.h"
+#include <placeholder.h>
+
+#include "gm_1A36.static.h"
+
 #include "gmmain_lib.h"
 
 #include "db/db_2253.h"
@@ -11,7 +14,6 @@
 #include "ty/toy.h"
 #include "un/un_2FC9.h"
 
-#include <placeholder.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/vi/vi.h>
@@ -158,9 +160,16 @@ UNK_T gm_801A4284(UNK_T arg0)
     return M2C_FIELD(arg0, UNK_T*, 0x14);
 }
 
-/// #gm_801A428C
+void gm_801A428C(u8 arg0)
+{
+    gm_80479D30.nums.curr_minor = arg0;
+    gm_80479D30.nums.prev_minor = arg0;
+}
 
-/// #gm_801A42A0
+void gm_801A42A0(s32 arg0)
+{
+    gm_80479D30.nums.pending_minor = arg0 + 1;
+}
 
 u8 gm_801A42B4(void)
 {
@@ -172,7 +181,10 @@ u8 gm_801A42C4(void)
     return gm_80479D30.nums.curr_minor;
 }
 
-/// #gm_801A42D4
+void gm_801A42D4(void)
+{
+    gm_80479D30.pending = 1;
+}
 
 void gm_801A42E8(s8 arg0)
 {
@@ -309,7 +321,11 @@ u8 gm_801A4624(void)
 
 /// #gm_801A4970
 
-/// #gm_801A4B08
+void gm_801A4B08(s32 arg0, s32 arg1)
+{
+    gm_80479D58.unk_14 = arg0;
+    gm_80479D58.unk_18 = arg1;
+}
 
 /// #gm_801A4B1C
 
@@ -323,9 +339,15 @@ void gm_801A4B50(s32 arg0)
     M2C_FIELD(&gm_80479D58, s32*, 0x34) = arg0;
 }
 
-/// #gm_801A4B60
+void gm_801A4B60(void)
+{
+    gm_80479D58.unk_C = 1;
+}
 
-/// #gm_801A4B74
+void gm_801A4B74(void)
+{
+    gm_80479D58.unk_C = 2;
+}
 
 void gm_801A4B88(UNK_T arg0)
 {
@@ -1101,7 +1123,10 @@ void fn_801B9FB8(void* arg0)
 
 /// #gm_801BA188
 
-/// #fn_801BA1B4
+void fn_801BA1B4(struct fn_801BA1B4_arg0_t* arg0)
+{
+    arg0->x2_b3 = true;
+}
 
 /// #gm_801BA1C8
 
@@ -1127,7 +1152,10 @@ void fn_801B9FB8(void* arg0)
 
 /// #gm_801BA388
 
-/// #fn_801BA3B4
+void fn_801BA3B4(struct fn_801BA3B4_arg0_t* arg0)
+{
+    arg0->xC_b4 = true;
+}
 
 /// #gm_801BA3C8
 
@@ -1404,20 +1432,35 @@ u8 gm_801BF050(void)
 
 /// #gm_801BF4DC
 
-/// #gm_801BF634
+void gm_801BF634(s32 arg0, s8 arg1)
+{
+    gm_8049E548.pad_0[arg0] = arg1;
+}
 
-/// #gm_801BF648
+u8 gm_801BF648(s32 arg0)
+{
+    return gm_8049E548.pad_0[arg0];
+}
 
-/// #gm_801BF65C
+void gm_801BF65C(s32 arg0, s8 arg1)
+{
+    M2C_FIELD(&gm_8049E548.pad_0[arg0], s8*, 4) = arg1;
+}
 
-/// #gm_801BF670
+u8 gm_801BF670(s32 arg0)
+{
+    return M2C_FIELD(&gm_8049E548.pad_0[arg0], u8*, 4);
+}
 
 void gm_801BF684(s16 arg0)
 {
     gm_8049E548.unk_C = arg0;
 }
 
-/// #gm_801BF694
+u8 gm_801BF694(void)
+{
+    return gm_8049E548.unk_C;
+}
 
 void gm_801BF6A8(s8 arg0)
 {

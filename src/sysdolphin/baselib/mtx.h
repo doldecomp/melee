@@ -2,6 +2,7 @@
 #define _mtx_h_
 
 #include <platform.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "baselib/objalloc.h"

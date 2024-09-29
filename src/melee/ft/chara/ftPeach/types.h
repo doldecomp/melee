@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTPEACH_TYPES_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "ftPeach/forward.h" // IWYU pragma: export
 #include "it/forward.h"

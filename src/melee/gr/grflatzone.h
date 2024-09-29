@@ -1,11 +1,11 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include "it/inlines.h"
-
-#include <placeholder.h>
 
 /* 216E74 */ void grFlatzone_80216E74(int);
 /* 216E78 */ void grFlatzone_80216E78(void);

@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMEWTWO_TYPES_H
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 #include "lb/types.h"

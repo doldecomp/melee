@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftMars/forward.h"
 #include "lb/forward.h"
@@ -25,7 +27,6 @@
 #include "lb/lb_00F9.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)

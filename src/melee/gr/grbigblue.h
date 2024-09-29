@@ -1,9 +1,9 @@
 #ifndef GALE01_1E57BC
 #define GALE01_1E57BC
 
-#include <dolphin/mtx/forward.h>
-
 #include <placeholder.h>
+
+#include <dolphin/mtx/forward.h>
 
 /* 1E57BC */ UNK_RET grBigBlue_801E57BC(UNK_PARAMS);
 /* 1E57C0 */ UNK_RET grBigBlue_801E57C0(UNK_PARAMS);

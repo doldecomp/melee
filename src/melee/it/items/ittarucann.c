@@ -1,15 +1,24 @@
-#include <platform.h>
-#include "it/forward.h"
+#include "ittarucann.h"
 
-#include <placeholder.h>
+#include "it/inlines.h"
 
 /// #it_80295ED4
 
 /// #it_80295F38
 
-/// #it_802960B8
+int it_802960B8(Item_GObj* gobj)
+{
+    itTaruCann_DatAttrs* da =
+        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    return da->x2C;
+}
 
-/// #it_802960CC
+int it_802960CC(Item_GObj* gobj)
+{
+    itTaruCann_DatAttrs* da =
+        GET_ITEM(gobj)->xC4_article_data->x4_specialAttributes;
+    return da->x28;
+}
 
 /// #it_802960E0
 

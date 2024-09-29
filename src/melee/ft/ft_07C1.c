@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/forward.h"
 #include "lb/forward.h"
 
@@ -13,7 +15,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 
-#include <placeholder.h>
 #include <baselib/gobj.h>
 
 void ft_8007C224(HSD_GObj* gobj);

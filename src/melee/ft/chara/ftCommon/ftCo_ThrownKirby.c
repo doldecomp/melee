@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
@@ -21,7 +23,6 @@
 
 #include <common_structs.h>
 #include <math_ppc.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

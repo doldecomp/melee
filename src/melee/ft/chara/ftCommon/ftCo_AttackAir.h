@@ -2,10 +2,10 @@
 #define GALE01_08CD68
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-
-#include <placeholder.h>
 
 /* 08CD68 */ bool ftCo_AttackAir_CheckItemThrowInput(ftCo_GObj* gobj);
 /* 08CE68 */ FtMotionId ftCo_AttackAir_GetMsidFromCStick(ftCo_Fighter* fp);

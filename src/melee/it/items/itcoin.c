@@ -384,7 +384,7 @@ Item_GObj* it_802F2094(int arg0, Vec3* pos, int arg2, int arg3)
     spawn.x3C_damage = 0;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = NULL;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0.0F;
 
     gobj = Item_80268B18(&spawn);

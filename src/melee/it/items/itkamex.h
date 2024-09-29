@@ -2,11 +2,11 @@
 #define GALE01_2CA49C
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/forward.h"
 
 #include "it/items/types.h"
-
-#include <placeholder.h>
 
 /* 2CA49C */ void it_802CA49C(Item_GObj*);
 /* 2CA534 */ UNK_RET it_802CA534(UNK_PARAMS);

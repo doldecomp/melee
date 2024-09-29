@@ -2,12 +2,12 @@
 #define GALE01_081B38
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <placeholder.h>
 
 /* 081B38 */ void ft_80081B38(Fighter_GObj* gobj);
 /* 081C88 */ void ft_80081C88(Fighter_GObj* dst_gobj, float scl_y);

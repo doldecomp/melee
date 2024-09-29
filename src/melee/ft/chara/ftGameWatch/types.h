@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTGAMEWATCH_TYPES_H
 
 #include <platform.h>
+
 #include "ftGameWatch/forward.h" // IWYU pragma: export
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>

@@ -2,6 +2,8 @@
 #define GALE01_0A0148
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "gr/forward.h"
@@ -11,7 +13,6 @@
 #include "gr/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 struct _m2c_stack_ftCo_800A3554 {
     /* 0x00 */ char pad_0[0x10];

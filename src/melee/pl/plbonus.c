@@ -1,8 +1,7 @@
 #include <platform.h>
+#include <placeholder.h>
 
 #include "pl/player.h"
-
-#include <placeholder.h>
 
 UNK_T pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
 {

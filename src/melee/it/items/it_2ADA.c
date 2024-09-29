@@ -37,7 +37,7 @@ void it_802ADA1C(Vec3* pos, Vec3* vel, float facing_dir)
     spawnitem.vel = *vel;
     spawnitem.x0_parent_gobj = NULL;
     spawnitem.x4_parent_gobj2 = NULL;
-    spawnitem.x44_flag.bits.b0 = true;
+    spawnitem.x44_flag.b0 = true;
     spawnitem.x40 = 0;
     {
         Item_GObj* gobj = Item_80268B18(&spawnitem);
@@ -57,7 +57,7 @@ void it_802ADAF0(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    item->xDCE_flag.bits.b7 = false;
+    item->xDCE_flag.b7 = false;
 }
 
 bool it_802ADB48(Item_GObj* gobj)

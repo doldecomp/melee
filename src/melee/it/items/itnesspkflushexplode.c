@@ -1,7 +1,7 @@
 #include <platform.h>
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /* 2AFD44 */ static bool it_802AFD44(void);
 

@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftDonkey/forward.h"
@@ -37,7 +39,6 @@
 
 #include <math.h>
 #include <math_ppc.h>
-#include <placeholder.h>
 #include <MetroTRK/intrinsics.h>
 
 int ftCo_803C5A68[] = {

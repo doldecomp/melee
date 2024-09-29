@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "gr/forward.h"
 
 #include "ground.h"
@@ -36,7 +38,6 @@
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
-#include <placeholder.h>
 #include <trigf.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/vec.h>
@@ -2144,7 +2145,7 @@ void Ground_801C42AC(void)
         if (jobj != NULL) {
             sp8.x14 = 0x14;
             sp8.x4 = jobj;
-            sp8.x1C.bits.b0 = true;
+            sp8.x1C.b0 = true;
             it_8026BE84(&sp8);
         }
     }

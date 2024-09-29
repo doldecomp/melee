@@ -1,10 +1,4 @@
-#include "lbmthp.h"
-
-struct lbl_804333E0_t {
-    /* +0 */ u8 _0[0x1D8];
-};
-
-/* 4333E0 */ static struct lbl_804333E0_t lbl_804333E0;
+#include "lbmthp.static.h"
 
 /// #lbMthp_8001E8F8
 
@@ -24,7 +18,7 @@ struct lbl_804333E0_t {
 
 s32 fn_8001F294(void)
 {
-    return M2C_FIELD(&lbl_804333E0, s32*, 0x110);
+    return lbl_804333E0.unk_110;
 }
 
 /// #fn_8001F2A4
@@ -35,32 +29,32 @@ s32 fn_8001F294(void)
 
 s32 lbMthp_8001F5C4(void)
 {
-    return M2C_FIELD(&lbl_804333E0, s32*, 0x84);
+    return lbl_804333E0.unk_84;
 }
 
 s32 lbMthp_8001F5D4(void)
 {
-    return M2C_FIELD(&lbl_804333E0, s32*, 0x134);
+    return lbl_804333E0.unk_134;
 }
 
 s32 lbMthp_8001F5E4(void)
 {
-    return M2C_FIELD(&lbl_804333E0, s32*, 0x108);
+    return lbl_804333E0.unk_108;
 }
 
 s32 lbMthp_8001F5F4(void)
 {
-    return M2C_FIELD(&lbl_804333E0, s32*, 0x10C);
+    return lbl_804333E0.unk_10C;
 }
 
 s32 lbMthp_8001F604(void)
 {
-    return M2C_FIELD(&lbl_804333E0, s32*, 0x144);
+    return lbl_804333E0.unk_144;
 }
 
 void lbMthp_8001F614(s32 arg0)
 {
-    M2C_FIELD(&lbl_804333E0, s32*, 0x148) = arg0;
+    lbl_804333E0.unk_148 = arg0;
 }
 
 /// #lbMthp_8001F624
@@ -69,7 +63,10 @@ void lbMthp_8001F614(s32 arg0)
 
 /// #lbMthp_8001F800
 
-/// #lbMthp_8001F87C
+void lbMthp_8001F87C(void)
+{
+    lbl_804333E0.unk_14C = 0;
+}
 
 /// #lbMthp8001F890
 

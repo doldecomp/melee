@@ -2,6 +2,7 @@
 #define _grtgamewatch_h_
 
 #include <platform.h>
+
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>

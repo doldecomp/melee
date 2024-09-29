@@ -2,7 +2,6 @@
 #define GALE01_2F7288
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 2F7AF8 */ void if_802F7AF8(s32);

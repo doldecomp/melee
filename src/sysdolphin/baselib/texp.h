@@ -2,6 +2,7 @@
 #define _texp_h_
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 #include <dolphin/gx/GXEnum.h>

@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "gr/grtfalco.h"
 
 #include "gr/granime.h"
@@ -9,7 +11,6 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

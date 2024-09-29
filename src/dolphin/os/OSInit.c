@@ -3,9 +3,9 @@ Issues:
  * @todo Should be called @c OS.c.
  */
 #include <platform.h>
+#include <placeholder.h>
 
 #include <__mem.h>
-#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/dvd/dvd.h>

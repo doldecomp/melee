@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "if/ifstatus.h"
 
 #include "ifall.h"
@@ -9,7 +11,6 @@
 #include "if/types.h"
 #include "pl/player.h"
 
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
 #include <baselib/mtx.h>
@@ -359,7 +360,7 @@ void ifStatus_802F68F0(void)
 void ifStatus_802F6948(s32 player_idx)
 {
     IfDamageState* hud_player;
-    Placeholder_8016AE50_ret_val* small_thing;
+    Placeholder_8016AE38_flags_2* small_thing;
     IfDamageFlags* hud_player_flags;
 
     small_thing = gm_8016AE50();
@@ -368,7 +369,7 @@ void ifStatus_802F6948(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->flags.unk1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
@@ -378,27 +379,28 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 {
     IfDamageState* hud_player;
     IfDamageFlags* hud_player_flags;
-    Placeholder_8016AE38_ret_val* big_thing;
-    Placeholder_8016AE50_ret_val* small_thing;
+    lbl_8046B6A0_t* big_thing;
+    Placeholder_8016AE38_flags_2* small_thing;
 
     big_thing = gm_8016AE38();
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0)) {
+    if ((big_thing->unk24C8.x0_b0_b2 != 1U) && (big_thing->unk24C8.x2_b5 != 0))
+    {
         if_802F7C30(arg1);
     }
 
     big_thing = gm_8016AE38();
-    big_thing->unkD = player_idx;
+    big_thing->unk_D = player_idx;
     small_thing = gm_8016AE50();
     hud_player = &ifStatus_HudInfo.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->flags.unk1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) &&
+    if ((big_thing->unk24C8.x2_b0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -406,9 +408,9 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
-    /// @todo Weird check on a known function addr
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&if_802F7BB4 != NULL))
+    /// @todo Inline with callback arg
+    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
+        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7BB4 != NULL))
     {
         if_802F7BB4(player_idx);
     }
@@ -417,23 +419,23 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 void ifStatus_802F6AF8(s32 player_idx)
 {
     IfDamageState* hud_player;
-    Placeholder_8016AE38_ret_val* big_thing;
-    Placeholder_8016AE50_ret_val* small_thing;
+    lbl_8046B6A0_t* big_thing;
+    Placeholder_8016AE38_flags_2* small_thing;
     IfDamageFlags* hud_player_flags;
 
     big_thing = gm_8016AE38();
-    big_thing->unkD = player_idx;
+    big_thing->unk_D = player_idx;
     small_thing = gm_8016AE50();
     hud_player = &ifStatus_HudInfo.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->flags.unk1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) &&
+    if ((big_thing->unk24C8.x2_b0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -441,9 +443,9 @@ void ifStatus_802F6AF8(s32 player_idx)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
-    /// @todo Weird check on a known function addr
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&if_802F7AF8 != NULL))
+    /// @todo Inline with callback arg
+    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
+        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7AF8 != NULL))
     {
         if_802F7AF8(player_idx);
     }
@@ -453,22 +455,22 @@ void ifStatus_802F6C04(s32 player_idx)
 {
     IfDamageState* hud_player;
     IfDamageFlags* hud_player_flags;
-    Placeholder_8016AE38_ret_val* big_thing;
-    Placeholder_8016AE50_ret_val* small_thing;
+    lbl_8046B6A0_t* big_thing;
+    Placeholder_8016AE38_flags_2* small_thing;
 
     big_thing = gm_8016AE38();
-    big_thing->unkD = player_idx;
+    big_thing->unk_D = player_idx;
     small_thing = gm_8016AE50();
     hud_player = &ifStatus_HudInfo.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->flags.unk1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) &&
+    if ((big_thing->unk24C8.x2_b0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -476,9 +478,9 @@ void ifStatus_802F6C04(s32 player_idx)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
-    /// @todo Weird check on a known function addr
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&if_802F7C30 != NULL))
+    /// @todo Inline with callback arg
+    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
+        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7C30 != NULL))
     {
         if_802F7C30(player_idx);
     }
@@ -487,23 +489,23 @@ void ifStatus_802F6C04(s32 player_idx)
 void ifStatus_802F6D10(s32 player_idx)
 {
     IfDamageState* hud_player;
-    Placeholder_8016AE38_ret_val* big_thing;
-    Placeholder_8016AE50_ret_val* small_thing;
+    lbl_8046B6A0_t* big_thing;
+    Placeholder_8016AE38_flags_2* small_thing;
     IfDamageFlags* hud_player_flags;
 
     big_thing = gm_8016AE38();
-    big_thing->unkD = player_idx;
+    big_thing->unk_D = player_idx;
     small_thing = gm_8016AE50();
     hud_player = &ifStatus_HudInfo.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->flags.unk1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24CA.unk80 != 0) &&
+    if ((big_thing->unk24C8.x2_b0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -511,9 +513,9 @@ void ifStatus_802F6D10(s32 player_idx)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
-    /// @todo Weird check on a known function addr
-    if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&if_802F7D08 != NULL))
+    /// @todo Inline with callback arg
+    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
+        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7D08 != NULL))
     {
         if_802F7D08(player_idx);
     }

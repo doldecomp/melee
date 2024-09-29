@@ -1,9 +1,10 @@
+#include <placeholder.h>
+
 #include "texp.h"
 
 #include "debug.h"
 
 #include <__mem.h>
-#include <placeholder.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texpdag.h>

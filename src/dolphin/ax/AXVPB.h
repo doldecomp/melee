@@ -2,8 +2,8 @@
 #define GALE01_35A250
 
 #include <platform.h>
-
 #include <placeholder.h>
+
 #include <dolphin/ax.h>
 
 /* 35A250 */ u32 __AXGetNumVoices(void);

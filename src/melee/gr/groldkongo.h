@@ -2,9 +2,9 @@
 #define GALE01_20F468
 
 #include <platform.h>
-#include <baselib/forward.h>
-
 #include <placeholder.h>
+
+#include <baselib/forward.h>
 
 /* 20F468 */ UNK_RET grOldKongo_8020F468(UNK_PARAMS);
 /* 20F46C */ UNK_RET grOldKongo_8020F46C(UNK_PARAMS);

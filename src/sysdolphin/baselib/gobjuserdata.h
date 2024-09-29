@@ -2,6 +2,7 @@
 #define _gobjuserdata_h_
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 #define HSD_GOBJ_USER_DATA_NONE (u8) - 1

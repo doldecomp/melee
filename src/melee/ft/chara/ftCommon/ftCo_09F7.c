@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 
 #include "ftCo_09F7.h"
@@ -11,7 +13,6 @@
 #include "ft/types.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <trigf.h>
 #include <baselib/gobj.h>
 

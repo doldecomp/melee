@@ -1,9 +1,10 @@
 #ifndef MELEE_MN_TYPES_H
 #define MELEE_MN_TYPES_H
 
+#include <placeholder.h>
+
 #include "mn/forward.h" // IWYU pragma: export
 
-#include <placeholder.h>
 #include <baselib/sislib.h>
 
 typedef struct {

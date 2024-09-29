@@ -2,6 +2,7 @@
 #define DOLPHIN_CARD_CARDBIOS_H
 
 #include <platform.h>
+
 #include <dolphin/card/forward.h>
 
 #include <dolphin/card.h>

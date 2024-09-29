@@ -2,6 +2,7 @@
 #define GALE01_125D80
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 125D80 */ void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj);

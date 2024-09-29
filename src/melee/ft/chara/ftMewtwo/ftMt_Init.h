@@ -2,6 +2,7 @@
 #define GALE01_144DFC
 
 #include <platform.h>
+
 #include "ftMewtwo/forward.h"
 #include <baselib/forward.h>
 

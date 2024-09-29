@@ -2,11 +2,11 @@
 #define GALE01_390730
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "baselib/forward.h" // IWYU pragma: export
 
 #include "baselib/objalloc.h"
-
-#include <placeholder.h>
 
 struct _GObjUnkStruct;
 

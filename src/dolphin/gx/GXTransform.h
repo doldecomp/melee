@@ -2,8 +2,8 @@
 #define DOLPHIN_GX_GXTRANSFORM_H
 
 #include <platform.h>
-
 #include <placeholder.h>
+
 #include <dolphin/mtx/types.h>
 
 void GXProject(f32 x, // model coordinates

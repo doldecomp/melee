@@ -2,6 +2,7 @@
 #define DOLPHIN_GX___GXINIT_H
 
 #include <platform.h>
+
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/__types.h>

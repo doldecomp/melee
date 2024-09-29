@@ -1,5 +1,4 @@
 #include <platform.h>
-
 #include <placeholder.h>
 
 void grStadium_801D1018(void) {}

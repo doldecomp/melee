@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "ftCo_Damage.h"
@@ -48,7 +50,6 @@
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
-#include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/random.h>
@@ -809,9 +810,7 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
     bool ret0 = false;
     ftCo_Fighter* fp = gobj->user_data;
     float facing_dir = 0;
-    if (fp->x2220_flag.bits.b3 || fp->x2220_flag.bits.b4 ||
-        !fp->dmg.kb_applied)
-    {
+    if (fp->x2220_flag.b3 || fp->x2220_flag.b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;
     } else if (fp->dmg.x1860_element == 10U) {

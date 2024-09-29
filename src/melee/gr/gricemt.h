@@ -1,9 +1,10 @@
 #ifndef GALE01_1F6868
 #define GALE01_1F6868
 
+#include <placeholder.h>
+
 #include "gr/forward.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 /* 1F6868 */ UNK_RET grIceMt_801F6868(UNK_PARAMS);

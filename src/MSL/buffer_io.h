@@ -13,7 +13,7 @@ typedef struct _BufferIoUnkFlagStruct {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    } bits;
+    };
 } BufferIoUnkFlagStruct;
 
 typedef struct _BufferIoUnkStruct {

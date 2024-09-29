@@ -27,11 +27,11 @@ WhitespaceSensitiveMacros:
   - 'CHECK'
 IncludeBlocks: Regroup
 IncludeCategories:
-  - Regex: '^".*?__static\.h"$'
-    Priority: -2
-    SortPriority: 0
   - Regex: '^<platform\.h>$'
-    Priority: -1
+    Priority: -2
+    SortPriority: -7
+  - Regex: '^<placeholder\.h>$'
+    Priority: -2
     SortPriority: -6
   - Regex: '^"forward\.h"$'
     Priority: -1
@@ -44,6 +44,9 @@ IncludeCategories:
     SortPriority: -2
   - Regex: '^<(sysdolphin/)?baselib(/.*)?/forward\.h>$'
     Priority: -1
+    SortPriority: -1
+  - Regex: '^".*\.static\.h"$'
+    Priority: 0
     SortPriority: -1
   - Regex: '^<(.*/)?forward\.h>$'
     Priority: -1

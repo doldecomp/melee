@@ -2,10 +2,11 @@
 #define GALE01_1C87D0
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "gr/forward.h"
 #include <baselib/forward.h>
 
-#include <placeholder.h>
 #include <baselib/gobj.h>
 
 /* 1C8858 */ void grMaterial_801C8858(HSD_JObj*, u32 flags);

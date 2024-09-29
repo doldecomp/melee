@@ -1,4 +1,6 @@
-#include "lbdvd.h"
+#include <placeholder.h>
+
+#include "lbdvd.static.h"
 
 #include "lbarchive.h"
 #include "lbfile.h"
@@ -9,18 +11,9 @@
 #include "gr/grdatfiles.h"
 #include "lb/types.h"
 
-#include <placeholder.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>
-
-/* 3BA638 */ static PreloadCache lbDvd_803BA638 = { 0 };
-/* 3BA68C */ static PreloadEntry lbDvd_803BA68C = { 0 };
-/* 3BA6A8 */ static char* lbDvd_803BA6A8;
-/* 432078 */ static PreloadCache preloadCache;
-/* 4D37D0 */ static char* lbDvd_804D37D0;
-/* 4D37D8 */ static char* lbDvd_804D37D8;
-/* 4D37E0 */ static char* lbDvd_804D37E0;
 
 void lbDvd_800174BC(void)
 {
@@ -345,7 +338,11 @@ PreloadCacheScene* lbDvd_8001822C(void)
     return &preloadCache.scene;
 }
 
-/// #lbDvd_8001823C
+void lbDvd_8001823C(void)
+{
+    preloadCache.scene.major_scene_changes =
+        preloadCache.new_scene.major_scene_changes + 1;
+}
 
 /// #lbDvd_80018254
 

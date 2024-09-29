@@ -2,9 +2,9 @@
 #define GALE01_1D5238
 
 #include <platform.h>
-#include <baselib/forward.h>
-
 #include <placeholder.h>
+
+#include <baselib/forward.h>
 
 /* 1D5238 */ void grKongo_801D5238(void);
 /* 1D523C */ void grKongo_801D523C(void);

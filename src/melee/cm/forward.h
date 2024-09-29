@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-typedef struct Camera Camera;
+// typedef struct Camera Camera;
 typedef struct CameraBounds CameraBounds;
 typedef struct CameraBox CameraBox;
 typedef struct CameraMovement CameraMovement;

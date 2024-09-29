@@ -1,11 +1,11 @@
 #ifndef GALE01_2841B4
 #define GALE01_2841B4
 
+#include <placeholder.h>
+
 #include "it/forward.h"
 
 #include "it/items/types.h"
-
-#include <placeholder.h>
 
 /* 2842A4 */ void it_802842A4(Item_GObj*);
 /* 284324 */ void it_80284324(Item_GObj*);

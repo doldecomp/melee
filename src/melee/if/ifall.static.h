@@ -1,9 +1,9 @@
 #ifndef __GALE01_2F3394
 #define __GALE01_2F3394
 
-#include "ifall.h" // IWYU pragma: export
-
 #include <placeholder.h>
+
+#include "ifall.h" // IWYU pragma: export
 
 struct ifAll_804A0FD8_t {
     /* 0x00 */ s32 unk_0;

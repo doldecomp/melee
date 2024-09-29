@@ -2,6 +2,7 @@
 #define DOLPHIN_GX_GXFRAMEBUF_H
 
 #include <platform.h>
+
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/GXEnum.h>

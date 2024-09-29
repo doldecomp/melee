@@ -2,7 +2,6 @@
 #define GALE01_019230
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 0192A8 */ void lb_800192A8(UNK_T cb);

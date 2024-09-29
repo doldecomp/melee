@@ -2,10 +2,10 @@
 #define MELEE_FT_FORWARD_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 #define FIGHTERVARS_SIZE 0xF8
 

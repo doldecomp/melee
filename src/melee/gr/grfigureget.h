@@ -2,7 +2,6 @@
 #define GALE01_219530
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 219530 */ UNK_RET grFigureGet_80219530(UNK_PARAMS);

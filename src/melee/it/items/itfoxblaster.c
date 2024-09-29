@@ -674,7 +674,7 @@ Item_GObj* it_802AE8A8(f32 facing_dir, Fighter_GObj* fighter_gobj, Vec3* arg2,
         spawn.vel.x = spawn.vel.y = spawn.vel.z = it_804DCF38;
         spawn.x0_parent_gobj = (HSD_GObj*) fighter_gobj;
         spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.bits.b0 = false;
+        spawn.x44_flag.b0 = false;
         spawn.x40 = 0; // 1 = correct initial position?
 
         item_gobj = Item_80268B18(
@@ -722,7 +722,7 @@ Item_GObj* it_802AE994(Fighter_GObj* owner_gobj, Fighter_Part ft_part,
         spawn.vel.x = spawn.vel.y = spawn.vel.z = it_804DCF38;
         spawn.x0_parent_gobj = (HSD_GObj*) owner_gobj;
         spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.bits.b0 = false;
+        spawn.x44_flag.b0 = false;
         spawn.x40 = 0; // 1 = correct initial position?
 
         item_gobj = Item_80268B18(

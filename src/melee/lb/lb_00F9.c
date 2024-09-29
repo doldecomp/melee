@@ -1,12 +1,9 @@
-#include "lb_00F9.h"
+#include "lb_00F9.static.h"
+
+#include "lb/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-
-/* 011B74 */ static void lb_80011B74(HSD_DObj* dobj, u32 flags);
-/* 013BB0 */ bool lb_80013BB0(void);
-
-/* 4D63B4 */ static enum_t lb_804D63B4;
 
 static inline bool checkJObjFlags(HSD_JObj* jobj)
 {
@@ -88,11 +85,16 @@ enum_t lb_80011ABC(void)
 
 void lb_800138CC(HSD_GObj* gobj, int arg1)
 {
-    UNK_T data = HSD_GObjGetUserData(gobj);
-    M2C_FIELD(data, int*, 0x18) = arg1;
+    struct lb_800138D8_t* data = HSD_GObjGetUserData(gobj);
+    data->x18 = arg1;
 }
 
-/// #lb_800138D8
+void lb_800138D8(HSD_GObj* gobj, s8 arg1)
+{
+    struct lb_800138D8_t* data = HSD_GObjGetUserData(gobj);
+    data->x12 = 1;
+    data->x11 = arg1;
+}
 
 /// #lb_800138EC
 

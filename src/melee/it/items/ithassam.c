@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "it/forward.h"
 
@@ -20,7 +22,6 @@
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

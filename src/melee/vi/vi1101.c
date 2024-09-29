@@ -1,4 +1,4 @@
-#include "vi1101__static.h"
+#include "vi1101.static.h"
 
 /// #un_8031F294
 

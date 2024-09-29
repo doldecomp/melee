@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "it/forward.h"
 
 #include "itlgunbeam.h"
@@ -13,7 +15,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <melee/it/item.h>
@@ -126,7 +127,7 @@ void it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2, f32 facing_dir)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = owner_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = arg2;
 
     {

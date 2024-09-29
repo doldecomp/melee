@@ -2,11 +2,12 @@
 #define _cobj_h_
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "baselib/forward.h" // IWYU pragma: export
 
 #include "baselib/object.h"
 
-#include <placeholder.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx/types.h>
 

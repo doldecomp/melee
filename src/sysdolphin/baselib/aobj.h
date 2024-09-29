@@ -2,6 +2,7 @@
 #define _aobj_h_
 
 #include <platform.h>
+
 #include "baselib/forward.h" // IWYU pragma: export
 
 #include "baselib/debug.h"

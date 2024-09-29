@@ -2,6 +2,7 @@
 #define GALE01_323CF0
 
 #include <placeholder.h>
+
 #include <stdarg.h>
 
 /* 323CF0 */ UNK_RET __stdio_atexit(UNK_PARAMS);

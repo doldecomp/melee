@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTNESS_TYPES_H
 
 #include <platform.h>
+
 #include "ftNess/forward.h" // IWYU pragma: export
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
@@ -39,15 +40,15 @@ union ftNess_MotionVars {
     struct ftNess_SpecialNVars {
         /// 0x2340 - Number of frames Ness remains in the "charge loop"
         /// animation after releasing PK Flash
-        s32 flashTimerLoop1;
+        /* fp+2340 */ int frames_to_loop_charge_ground;
         /// 0x2344 - Number of extra frames Ness remains in the "charge loop"
         /// animation after releasing PK Flash?
-        s32 flashTimerLoop2;
+        /* fp+2344 */ int frames_to_loop_charge_air;
         /// 0x2348 - Number of frames to pass before gravity takes effect
-        s32 gravityDelay;
+        /* fp+2348 */ int falling_acceleration_delay;
         /// 0x234C - Minimum number of frames required to pass for PK Flash to
         /// auto-release if B is not being held
-        s32 flashTimerMin;
+        /* fp+234C */ int charge_release_delay;
     } specialn;
 
     struct ftNess_SpecialHiVars {

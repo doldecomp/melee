@@ -2,6 +2,7 @@
 #define SYSDOLPHIN_BASELIB_WOBJ_H
 
 #include <platform.h>
+
 #include "baselib/forward.h" // IWYU pragma: export
 
 #include "baselib/class.h"

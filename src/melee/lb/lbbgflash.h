@@ -2,7 +2,6 @@
 #define GALE01_01FC08
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 01FC08 */ UNK_RET fn_8001FC08(UNK_PARAMS);

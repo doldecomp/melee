@@ -4,10 +4,11 @@
 #define MELEE_IT_ITCOMMONITEMS_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include <baselib/forward.h>
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 typedef struct {
@@ -84,7 +85,7 @@ typedef struct itHeart_ItemVars {
             u8 b5 : 1;
             u8 b6 : 1;
             u8 b7 : 1;
-        } bits;
+        };
         u32 flags;
     } xDD8;
     s32 xDDC;
@@ -127,7 +128,7 @@ typedef struct itTomato_ItemVars {
             u8 b5 : 1;
             u8 b6 : 1;
             u8 b7 : 1;
-        } bits;
+        };
         u32 flags;
     } x4;
     s32 x8;
@@ -254,7 +255,7 @@ typedef struct itPikachutJoltGround_ItemVars {
 
 typedef struct itSamusGrapple_ItemVars {
     /*  +0 +DD4 */ char pad_0[0x10];
-    /* +10 +DE4 */ UNK_T unk_10;
+    /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
 } itSamusGrapple_ItemVars;
 
 /// @remarks Might be shared?
@@ -385,5 +386,11 @@ typedef struct itKinoko_ItemVars {
     f32 x8;
     f32 xC;
 } itKinoko_ItemVars;
+
+typedef struct itTaruCann_DatAttrs {
+    /*  +0 */ char pad_0[0x28];
+    /* +28 */ int x28;
+    /* +2C */ int x2C;
+} itTaruCann_DatAttrs;
 
 #endif

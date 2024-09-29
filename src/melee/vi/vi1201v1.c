@@ -1,4 +1,4 @@
-#include "vi/vi1201v1__static.h"
+#include "vi/vi1201v1.static.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

@@ -52,12 +52,12 @@ void lbArchive_LoadSections(HSD_Archive* archive, void** file, ...)
 HSD_Archive* lbArchive_LoadArchive(char* filename)
 {
     u32 length;
-    u32* data;
+    HSD_Archive* data;
     HSD_Archive* archive;
 
     data = lbHeap_80015BD0(0, lbFile_800163D8(filename) + 0x1F & 0xFFFFFFE0);
     archive = lbHeap_80015BD0(0, sizeof(HSD_Archive));
-    lbFile_8001668C(filename, data, &length);
+    lbFile_8001668C(filename, (u32*) data, &length);
     lbArchive_InitializeDAT(archive, (u8*) data, length);
     return archive;
 }

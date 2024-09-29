@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include "it/forward.h"
 
@@ -22,8 +24,6 @@
 #include "ft/types.h"
 #include "it/it_26B1.h"
 #include "lb/lbmthp.h"
-
-#include <placeholder.h>
 
 MotionState ftPe_Init_MotionStateTable[ftPe_MS_SelfCount] = {
     {

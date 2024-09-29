@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -13,7 +15,6 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>

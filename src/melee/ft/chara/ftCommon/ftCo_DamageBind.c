@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 
 #include "ftCo_DamageBind.h"
@@ -14,7 +16,6 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 bool ftCo_800C44CC(ftCo_GObj* gobj)
 {

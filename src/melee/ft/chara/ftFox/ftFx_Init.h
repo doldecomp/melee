@@ -2,6 +2,7 @@
 #define GALE01_0E5534
 
 #include <platform.h>
+
 #include "ftFox/forward.h"
 #include <baselib/forward.h>
 

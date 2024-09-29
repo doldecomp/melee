@@ -2,9 +2,10 @@
 #define MELEE_FT_CHARA_FTPURIN_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include <baselib/forward.h>
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 struct ftPurin_FighterVars {

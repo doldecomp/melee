@@ -4,6 +4,7 @@
 #define _common_structs_h_
 
 #include <platform.h>
+
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/types.h>
@@ -62,7 +63,7 @@ typedef u32 HSD_Pad;
 #define MPCOLL_FLAGS_B24 (1 << 24)
 #define MPCOLL_FLAGS_B25 (1 << 25)
 
-typedef union _UnkFlagStruct {
+typedef union UnkFlagStruct {
     u8 u8;
     struct {
         u8 b0 : 1;
@@ -73,7 +74,7 @@ typedef union _UnkFlagStruct {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    } bits;
+    };
 } UnkFlagStruct;
 
 typedef struct ColorOverlay {

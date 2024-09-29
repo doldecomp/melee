@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "ftCo_0C35.h"
@@ -12,7 +14,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/jobj.h>
 #include <MSL/trigf.h>
 
@@ -24,7 +25,7 @@ static void inlineA0(ftCo_GObj* gobj)
     if (fp->dmg.x18F4 > fp->dmg.x1954) {
         fp->dmg.x1954 = fp->dmg.x18F4;
     }
-    fp->x2220_flag.bits.b4 = true;
+    fp->x2220_flag.b4 = true;
     Fighter_UnkRecursiveFunc_8006D044(gobj);
 }
 
@@ -77,7 +78,7 @@ void ftCo_800C37A0(ftCo_GObj* gobj)
             ftParts_80075AF0(fp, part, rot_y);
             HSD_JObjSetRotationY(jobj, rot_y);
             if (fp->dmg.x18F4 == 0) {
-                fp->x2220_flag.bits.b4 = false;
+                fp->x2220_flag.b4 = false;
                 fp->facing_dir = -fp->facing_dir;
                 ftParts_80075AF0(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
                 ftParts_80075AF0(fp, part, 0);

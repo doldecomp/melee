@@ -2,9 +2,9 @@
 #define GALE01_2DDB38
 
 #include <platform.h>
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /* 2DDB38 */ UNK_RET it_802DDB38(UNK_PARAMS);
 /* 2DDBE8 */ UNK_RET it_802DDBE8(UNK_PARAMS);

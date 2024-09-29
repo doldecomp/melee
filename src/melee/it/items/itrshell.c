@@ -1,5 +1,4 @@
 #include <platform.h>
-
 #include <placeholder.h>
 
 /// #it_8028CFE0

@@ -90,7 +90,7 @@ void it_802A24D0(ItemLink* arg0, f32 arg8)
     coll_data->cur_topn = arg0->pos;
     coll_data->prev_topn = coll_data->cur_topn;
     mpColl_80041EE4(coll_data);
-    coll_data->x34_flags.bits.b1234 = 5;
+    coll_data->x34_flags.b1234 = 5;
     mpColl_8004220C(coll_data, NULL, arg8, arg8, arg8, arg8);
 }
 
@@ -228,7 +228,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
                 temp_r3_3->x30_collData.cur_topn;
 
             mpColl_80041EE4(temp_r18);
-            temp_r18->x34_flags.bits.b1234 = 5;
+            temp_r18->x34_flags.b1234 = 5;
             mpColl_8004220C(temp_r18, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint(arg0, var_r31));
@@ -253,7 +253,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
                 temp_r3_3->x30_collData.cur_topn;
 
             mpColl_80041EE4(temp_r21);
-            temp_r18->x34_flags.bits.b1234 = 5;
+            temp_r18->x34_flags.b1234 = 5;
             mpColl_8004220C(temp_r21, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint_c(arg0));
@@ -278,7 +278,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
                 temp_r3_3->x30_collData.cur_topn;
 
             mpColl_80041EE4(temp_r17);
-            temp_r18->x34_flags.bits.b1234 = 5;
+            temp_r18->x34_flags.b1234 = 5;
             mpColl_8004220C(temp_r17, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint(arg0, var_r31));
@@ -346,7 +346,7 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
     spawn_item.vel.x = spawn_item.vel.y = spawn_item.vel.z = 0.0f;
     spawn_item.x0_parent_gobj = arg0;
     spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.bits.b0 = true;
+    spawn_item.x44_flag.b0 = true;
     spawn_item.x40 = 0;
 
     gobj = Item_80268B18(&spawn_item);

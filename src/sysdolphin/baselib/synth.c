@@ -1,8 +1,4 @@
-#include "synth__static.h"
-
-static UNK_T driverInactivatedCallback;
-extern UNK_T driverMasterClockCallback;
-extern UNK_T driverPauseCallback;
+#include "synth.static.h"
 
 /// #HSD_AudioMalloc
 
@@ -105,7 +101,10 @@ void HSD_SynthSFXSetDriverPauseCallback(UNK_T arg0)
 
 /// #HSD_SynthCallback
 
-/// #fn_8038AD60
+void fn_8038AD60(void)
+{
+    HSD_Synth_804D776C = HSD_Synth_804D7768, HSD_Synth_804D7778 = 0;
+}
 
 /// #HSD_Synth_8038AD74
 

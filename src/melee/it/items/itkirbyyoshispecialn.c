@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "ftKirby/forward.h"
 
 #include "itkirbyyoshispecialn.h"
@@ -29,7 +30,7 @@ void it_802F2D98(Item_GObj* gobj, ftKb_GObj* owner_gobj)
     item->atk_victim = owner_gobj;
     item->grab_victim = owner_gobj;
     it_8026C220(gobj, owner_gobj);
-    item->xDD0_flag.bits.b1 = false;
+    item->xDD0_flag.b1 = false;
     item->xBC_itemStateContainer = it_803F9490;
     it_80274F48(gobj, item->xC4_article_data->x10_modelDesc->x8_bone_attach_id,
                 owner_gobj, ftKb_SpecialNYs_80109238(owner_gobj));

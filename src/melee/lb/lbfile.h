@@ -2,6 +2,7 @@
 #define GALE01_01615C
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 01615C */ void lbFile_8001615C(void*, int, void*, bool);

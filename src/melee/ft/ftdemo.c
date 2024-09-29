@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "pl/forward.h"
 
 #include "ftdemo.h"
@@ -47,7 +48,7 @@ static void initFighter(HSD_GObj* gobj, plAllocInfo2* alloc_info)
     struct S_TEMP1 temp1;
     temp1.fighterKind = alloc_info->internal_id;
     temp1.playerID = alloc_info->slot;
-    temp1.flags_b0 = alloc_info->bits.has_transformation;
+    temp1.flags_b0 = alloc_info->has_transformation;
     Fighter_UnkInitLoad_80068914(gobj, &temp1);
 }
 
@@ -67,7 +68,7 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         fp->x24 = fp->ft_data->x14;
         fp->x28 = fp->ft_data->x18;
         efAsync_8006737C(ftData_UnkBytePerCharacter[fp->kind]);
-        if (!alloc_info->bits.b0) {
+        if (!alloc_info->b0) {
             ftData_80085820(fp->kind, fp->x619_costume_id);
         } else {
             ftData_800858E4(fp->kind, fp->x619_costume_id);

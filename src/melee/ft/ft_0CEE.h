@@ -2,9 +2,9 @@
 #define GALE01_0CEE70
 
 #include <platform.h>
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 0CEE70 */ bool ftCo_800CEE70(ftCo_GObj* gobj);
 /* 0CEF08 */ UNK_RET ft_800CEF08(UNK_PARAMS);

@@ -1,20 +1,6 @@
-#include <platform.h>
+#include "lbsnap.static.h"
 
 #include <dolphin/card/CARDMount.h>
-
-struct Unk80433380_48 {
-    s32 unk0;
-    char _4[0x408 - 0x4];
-};
-
-struct Unk80433380 {
-    char filler0[0x48];
-    struct Unk80433380_48* x48;
-    int x4C_cardState[2];
-    bool x54_stateChanged[3];
-};
-
-struct Unk80433380 lb_80433380;
 
 void lbSnap_8001D2BC(void)
 {
@@ -79,6 +65,10 @@ s32 lbSnap_8001E210(void)
 
 /// #lbSnap_8001E218
 
-/// #lbSnap_8001E27C
+void lbSnap_8001E27C(void)
+{
+    lb_80433380.unk_0 = 0;
+    lb_80433380.x48 = NULL;
+}
 
 /// #lbSnap_8001E290

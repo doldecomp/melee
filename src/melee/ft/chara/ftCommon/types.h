@@ -2,12 +2,13 @@
 #define MELEE_FT_CHARA_FTCOMMON_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h" // IWYU pragma: export
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 struct ftCollisionBox {

@@ -2,6 +2,7 @@
 #define GALE01_2F2BFC
 
 #include <platform.h>
+
 #include "ft/chara/ftYoshi/forward.h"
 #include "it/forward.h"
 

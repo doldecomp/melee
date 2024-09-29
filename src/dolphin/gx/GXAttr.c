@@ -1,7 +1,8 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/gx/forward.h>
 
-#include <placeholder.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXAttr.h>

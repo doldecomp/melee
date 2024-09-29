@@ -327,7 +327,7 @@ void ftGk_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
     fp->x2226_b1 = true;
-    fp->x222A_flag.bits.b0 = true;
+    fp->x222A_flag.b0 = true;
 }
 
 void ftGk_Init_OnItemPickup(HSD_GObj* gobj, bool flag)

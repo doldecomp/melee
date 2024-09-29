@@ -1,5 +1,4 @@
 #include <platform.h>
-
 #include <placeholder.h>
 
 s32 lbArq_80014ABC(void* arg0)

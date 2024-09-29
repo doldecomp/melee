@@ -4,6 +4,7 @@
 #define GALE01_116D04
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 116D04 */ void ftNs_SpecialAirS_Enter(HSD_GObj* gobj);

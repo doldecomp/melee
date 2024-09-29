@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "ftPikachu/forward.h"
 
 #include "ftPc_Init.h"

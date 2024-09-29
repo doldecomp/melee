@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "lb/forward.h"
 
 #include "itfoxlaser.h"
@@ -8,7 +10,6 @@
 #include "it/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/db/db_2253.h>
@@ -67,7 +68,7 @@ void it_8029C504(HSD_GObj* parent, Vec3* pos, enum_t msid, int kind, f32 angle,
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
     spawn.x0_parent_gobj = parent;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0;
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {

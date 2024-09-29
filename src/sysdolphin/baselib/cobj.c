@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include <dolphin/gx/forward.h>
 
 #include "cobj.h"
@@ -13,7 +15,6 @@
 #include "wobj.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx.h>

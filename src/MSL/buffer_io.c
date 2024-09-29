@@ -7,7 +7,7 @@ s32 __flush_buffer(BufferIoUnkStruct* arg0, s32* arg1)
     temp_r0 = arg0->x20 - arg0->x18;
     if (temp_r0 != 0) {
         arg0->x24 = temp_r0;
-        if (arg0->x05.bits.b4) {
+        if (arg0->x05.b4) {
             arg0 != 0;
         }
 

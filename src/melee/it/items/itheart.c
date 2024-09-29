@@ -49,13 +49,13 @@ Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)
         spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
         spawn.x0_parent_gobj = NULL;
         spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.bits.b0 = true;
+        spawn.x44_flag.b0 = true;
         spawn.x40 = 0;
         item_gobj = Item_80268B18(&spawn);
     }
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
-        ip->xDD4_itemVar.heart.xDD8.bits.b0 = true;
+        ip->xDD4_itemVar.heart.xDD8.b0 = true;
         ip->xDD4_itemVar.heart.xDDC = arg2;
         Item_80267454(item_gobj);
     }
@@ -79,7 +79,7 @@ void it_80283BEC(Item_GObj* gobj)
     ip->x40_vel.y = vars->x14;
     ip->x40_vel.z = 0.0F;
     ip->xDD4_itemVar.heart.xDD4_heal = vars->x0_heal;
-    ip->xDD4_itemVar.heart.xDD8.bits.b0 = false;
+    ip->xDD4_itemVar.heart.xDD8.b0 = false;
     ip->xDD4_itemVar.heart.xDDC = 0;
     it_80283DD4(gobj);
 }

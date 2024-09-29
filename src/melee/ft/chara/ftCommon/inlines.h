@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCOMMON_INLINES_H
 
 #include <platform.h>
+
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
 

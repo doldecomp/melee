@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "ftMh_Entry.h"

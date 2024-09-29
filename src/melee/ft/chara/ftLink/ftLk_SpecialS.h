@@ -2,6 +2,7 @@
 #define GALE01_0EC354
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 0EBFCC */ bool ftLk_SepcialS_Get2219b5(HSD_GObj* gobj);

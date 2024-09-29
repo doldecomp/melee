@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
 
@@ -13,7 +15,6 @@
 #include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
 
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

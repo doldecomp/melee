@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include "mp/forward.h"
 
@@ -13,7 +15,6 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -155,11 +156,11 @@ void mpColl_80041DD0(CollData* cd, u32 flags)
 void mpColl_80041EE4(CollData* cd)
 {
     cd->x0_gobj = NULL;
-    cd->x34_flags.bits.b0 = 1;
-    cd->x34_flags.bits.b6 = 0;
-    cd->x34_flags.bits.b7 = 0;
-    cd->x35_flags.bits.b0 = 1;
-    cd->x34_flags.bits.b1234 = 0;
+    cd->x34_flags.b0 = 1;
+    cd->x34_flags.b6 = 0;
+    cd->x34_flags.b7 = 0;
+    cd->x35_flags.b0 = 1;
+    cd->x34_flags.b1234 = 0;
     cd->env_flags = 0;
     cd->x130_flags = 0;
     cd->cur_topn_correct = cd->cur_topn;
@@ -221,7 +222,7 @@ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
     cd->x124 = arg9;
     cd->x128 = 10.0f;
     cd->x12C = 10.0f;
-    if (cd->x34_flags.bits.b0) {
+    if (cd->x34_flags.b0) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0f;
         cd->xA4_ecbCurrCorrect.top.y = 8.0f;
         cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
@@ -251,7 +252,7 @@ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float arg1, float arg2,
     cd->x110_f32 = arg3;
     cd->x114_f32 = arg4;
     cd->x118_f32 = 0.0f;
-    if (cd->x34_flags.bits.b0) {
+    if (cd->x34_flags.b0) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0f;
         cd->xA4_ecbCurrCorrect.top.y = 8.0f;
         cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
@@ -436,7 +437,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     cd->x84_ecb.right.y = cd->x124 + 0.5f * (bottom_y + top_y);
     cd->x84_ecb.left.x = left_x;
     cd->x84_ecb.left.y = cd->x124 + 0.5f * (bottom_y + top_y);
-    cd->x34_flags.bits.b0 = 0;
+    cd->x34_flags.b0 = 0;
 }
 
 // 8004293C https://decomp.me/scratch/H4EUT
@@ -577,7 +578,7 @@ void mpColl_8004293C(CollData* cd)
     cd->x84_ecb.left.x = left_x;
     cd->x84_ecb.left.y = midpoint_y;
 
-    cd->x34_flags.bits.b0 = 0;
+    cd->x34_flags.b0 = 0;
 }
 
 void mpColl_80042C58(CollData* arg0, ftCollisionBox* arg1)
@@ -602,7 +603,7 @@ void mpColl_80042C58(CollData* arg0, ftCollisionBox* arg1)
     arg0->x84_ecb.right.y = arg1->right.y;
     arg0->x84_ecb.left.x = arg1->left.x;
     arg0->x84_ecb.left.y = arg1->left.y;
-    arg0->x34_flags.bits.b0 = 0;
+    arg0->x34_flags.b0 = 0;
 }
 
 // 80042D24 https://decomp.me/scratch/2MnVj
@@ -637,9 +638,9 @@ inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
 void mpColl_80042DB0(CollData* ecb, float time)
 {
     ecb->xC4_ecb = ecb->xA4_ecbCurrCorrect;
-    if (ecb->x34_flags.bits.b6) {
+    if (ecb->x34_flags.b6) {
         ecb->xA4_ecbCurrCorrect = ecb->x64_ecb;
-        ecb->x34_flags.bits.b6 = 0;
+        ecb->x34_flags.b6 = 0;
     }
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.top, &ecb->x84_ecb.top);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom,
@@ -918,8 +919,8 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     }
     var_r31 = 0;
     arg1->cur_topn = arg1->prev_topn;
-    arg1->x34_flags.bits.b5 = 0;
-    while ((var_r31 < var_r30) && !arg1->x34_flags.bits.b5) {
+    arg1->x34_flags.b5 = 0;
+    while ((var_r31 < var_r30) && !arg1->x34_flags.b5) {
         mpColl_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
         arg1->cur_topn_correct = arg1->cur_topn;
         lbVector_Add(&arg1->cur_topn, &vel);
@@ -1167,7 +1168,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         x_after_collide_right = 0.0f;
         old_horizontal_squeeze_flags = horizontal_squeeze_flags;
         x_after_collide_left = 0.0f;
-        old_x34_flag_b6 = coll->x34_flags.bits.b6;
+        old_x34_flag_b6 = coll->x34_flags.b6;
         horizontal_squeeze_flags = 0;
         if (mpColl_80045B74(coll)) {     // Physics_LeftWallCheckAir
             if (mpColl_80046224(coll)) { // Physics_LeftWallCollideAir
@@ -1304,7 +1305,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                             coll, sp20,
                             var_r5_2); // Physics_RightWallFloorMultiCollide
                     }
-                    coll->x34_flags.bits.b5 = 1;
+                    coll->x34_flags.b5 = 1;
                     touched_floor = 1;
                 }
             }
@@ -1367,7 +1368,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                             y_after_collide_floor); // Physics_SqueezeVertical
         }
         horizontal_squeeze_flags_all |= horizontal_squeeze_flags;
-    } while (old_x34_flag_b6 != coll->x34_flags.bits.b6 ||
+    } while (old_x34_flag_b6 != coll->x34_flags.b6 ||
              horizontal_squeeze_flags != old_horizontal_squeeze_flags);
     if (!touched_floor && (flags & CollisionFlagAir_CanGrabLedge)) {
         var_r3_2 = 1;

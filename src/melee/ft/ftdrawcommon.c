@@ -1,4 +1,5 @@
 #include <platform.h>
+#include <placeholder.h>
 
 #include "ft/ftdrawcommon.h"
 
@@ -15,7 +16,6 @@
 #include "lb/lbcollision.h"
 #include "lb/lbgx.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
@@ -111,7 +111,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     fighter = gobj->user_data;
     phi_r30 = 0U;
     phi_r30 = 0U;
-    if (fighter->x21FC_flag.bits.b6 != 0) {
+    if (fighter->x21FC_flag.b6 != 0) {
         phi_r26 = fighter + 0x138 * 0;
         phi_r25 = 0U;
         do {
@@ -196,7 +196,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         }
     }
     // phi_r30 = phi_r30;
-    if (fighter->x21FC_flag.bits.b5 != 0) {
+    if (fighter->x21FC_flag.b5 != 0) {
         phi_r25 = 0U;
         phi_r26 = fighter;
         phi_r25 = 0U;
@@ -220,16 +220,15 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r26 += 0x18;
         }
     }
-    if ((fighter->x21FC_flag.bits.b3 != 0) && (ftCo_800B395C(gobj, arg1) != 0))
-    {
+    if ((fighter->x21FC_flag.b3 != 0) && (ftCo_800B395C(gobj, arg1) != 0)) {
         phi_r30 = 1U;
     }
-    if ((fighter->x21FC_flag.bits.b4 != 0) && (fighter->x2223_b5 != 0) &&
+    if ((fighter->x21FC_flag.b4 != 0) && (fighter->x2223_b5 != 0) &&
         (lb_80014770(&fighter->dmg.x1930, arg1) != 0))
     {
         phi_r30 = 1U;
     }
-    if (fighter->x21FC_flag.bits.b3 != 0) {
+    if (fighter->x21FC_flag.b3 != 0) {
         temp_r24 = &fighter->x294_itPickup;
         if (fighter->ground_or_air == 0) {
             if (lbGx_8001E2F8(&temp_r24->gr_light_offset, &fighter->cur_pos,
@@ -251,13 +250,13 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r30 = 1U;
         }
     }
-    if ((fighter->x21FC_flag.bits.b2 != 0) && (fighter->x2227_b2 == 0) &&
+    if ((fighter->x21FC_flag.b2 != 0) && (fighter->x2227_b2 == 0) &&
         (lbColl_8000A044(&fighter->x1064_thrownHitbox, arg1,
                          fighter->x34_scale.y) != 0))
     {
         phi_r30 = 1U;
     }
-    if ((fighter->x21FC_flag.bits.b0 != 0) && (fighter->x2229_b4 == 0)) {
+    if ((fighter->x21FC_flag.b0 != 0) && (fighter->x2229_b4 == 0)) {
         phi_r26 = fighter + (0U * 0x2C);
         phi_r25 = 0U;
         do {
@@ -274,7 +273,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     if (phi_r30 != 0U) {
         HSD_StateInvalidate(-1);
     }
-    if (fighter->x21FC_flag.bits.b7 != 0) {
+    if (fighter->x21FC_flag.b7 != 0) {
         if ((fighter->x221E_b0 == 0) && (fighter->x221E_b5 == 0) &&
             (arg2 != 0))
         {
@@ -347,7 +346,7 @@ void ftDrawCommon_80080C28(HSD_GObj* gobj, int arg1)
     u8 pad1[0x18];
 
     fighter = gobj->user_data;
-    if (fighter->x21FC_flag.bits.b7 != 0) {
+    if (fighter->x21FC_flag.b7 != 0) {
         if ((fighter->x221E_b0 == 0) && (fighter->x221E_b5 == 0) &&
             (fighter->x2226_b5 == 0))
         {
@@ -424,7 +423,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
 
         switch (ret) {
         case 1:
-            if (fighter->x2220_flag.bits.b7) {
+            if (fighter->x2220_flag.b7) {
                 fighter2 = gobj->user_data;
                 jobj = (HSD_JObj*) gobj->hsd_obj;
 
@@ -438,7 +437,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
             }
             if (fighter->x5C8 != NULL) {
                 fighter = gobj->user_data;
-                if ((fighter->x21FC_flag.bits.b7) != 0) {
+                if ((fighter->x21FC_flag.b7) != 0) {
                     if ((fighter->x221E_b0 == 0) && (fighter->x221E_b5 == 0) &&
                         (fighter->x2226_b5 == 0))
                     {
@@ -459,7 +458,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
                 }
                 ftDrawCommon_800805C8(gobj, arg1, 1);
                 fighter = gobj->user_data;
-                if (fighter->x21FC_flag.bits.b7 != 0) {
+                if (fighter->x21FC_flag.b7 != 0) {
                     if ((fighter->x221E_b0 == 0) && (fighter->x221E_b5 == 0) &&
                         (fighter->x2226_b5 == 0))
                     {

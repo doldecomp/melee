@@ -2,6 +2,7 @@
 #define DOLPHIN_DVD_FSTLOAD_H
 
 #include <platform.h>
+
 #include <dolphin/dvd/forward.h>
 
 void __fstLoad(void);

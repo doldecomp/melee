@@ -2,7 +2,6 @@
 #define GALE01_01E8F8
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 01E8F8 */ float lbMthp_8001E8F8(u32);

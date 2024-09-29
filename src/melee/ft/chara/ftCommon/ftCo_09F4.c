@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 
 #include "ftCo_09F4.h"
@@ -9,7 +11,6 @@
 #include "lb/lb_00F9.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

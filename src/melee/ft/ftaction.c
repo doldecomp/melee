@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
 
@@ -22,7 +24,6 @@
 #include "lb/lbcommand.h"
 #include "lb/types.h"
 
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>

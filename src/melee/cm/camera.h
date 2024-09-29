@@ -2,13 +2,14 @@
 #define GALE01_028B9C
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "cm/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "cm/types.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
 
@@ -63,7 +64,7 @@
 /* 02EEC8 */ void Camera_8002EEC8(float);
 /* 02EF14 */ void Camera_8002EF14(void);
 /* 02F0E4 */ void Camera_8002F0E4(s32);
-/* 02F260 */ s32 Camera_8002F260(void);
+/* 02F260 */ bool Camera_8002F260(void);
 /* 02F274 */ void Camera_8002F274(void);
 /* 02F360 */ UNK_RET fn_8002F360(UNK_PARAMS);
 /* 02F3AC */ UNK_RET Camera_8002F3AC(UNK_PARAMS);
@@ -104,19 +105,19 @@
 /* 030AA4 */ UNK_RET Camera_80030AA4(UNK_PARAMS);
 /* 030AC4 */ UNK_RET Camera_80030AC4(UNK_PARAMS);
 /* 030AE0 */ UNK_RET Camera_80030AE0(UNK_PARAMS);
-/* 030AF8 */ UNK_RET Camera_80030AF8(UNK_PARAMS);
+/* 030AF8 */ bool Camera_80030AF8(void);
 /* 030B0C */ UNK_RET Camera_80030B0C(UNK_PARAMS);
 /* 030B24 */ bool Camera_80030B24(void);
 /* 030B38 */ UNK_RET Camera_80030B38(UNK_PARAMS);
-/* 030B50 */ UNK_RET Camera_80030B50(UNK_PARAMS);
+/* 030B50 */ bool Camera_80030B50(void);
 /* 030B64 */ UNK_RET Camera_80030B64(UNK_PARAMS);
-/* 030B7C */ UNK_RET Camera_80030B7C(UNK_PARAMS);
+/* 030B7C */ bool Camera_80030B7C(void);
 /* 030B90 */ UNK_RET Camera_80030B90(UNK_PARAMS);
-/* 030BA8 */ UNK_RET Camera_80030BA8(UNK_PARAMS);
+/* 030BA8 */ bool Camera_80030BA8(void);
 /* 030BBC */ UNK_RET Camera_80030BBC(UNK_PARAMS);
 /* 030CD8 */ bool Camera_80030CD8(CameraBox*, S32Vec2*);
 /* 030CFC */ bool Camera_80030CFC(CameraBox*, float);
-/* 030DE4 */ UNK_RET Camera_80030DE4(UNK_PARAMS);
+/* 030DE4 */ void Camera_80030DE4(f32 arg8, f32 arg9);
 /* 030DF8 */ UNK_RET Camera_80030DF8(UNK_PARAMS);
 /* 030E10 */ UNK_RET Camera_80030E10(UNK_PARAMS);
 /* 030E34 */ void Camera_80030E34(f32 arg8);
@@ -124,7 +125,7 @@
 /* 031044 */ UNK_RET Camera_80031044(UNK_PARAMS);
 /* 031060 */ enum_t Camera_80031060(void);
 /* 031074 */ void Camera_80031074(u8);
-/* 03108C */ UNK_RET Camera_8003108C(UNK_PARAMS);
+/* 03108C */ enum_t Camera_8003108C(void);
 /* 0310A0 */ void Camera_800310A0(u8);
 /* 0310B8 */ HSD_CObj* Camera_800310B8(void);
 /* 0310E8 */ UNK_RET Camera_800310E8(UNK_PARAMS);

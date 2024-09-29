@@ -2,7 +2,6 @@
 #define GALE01_3A3920
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 3A3920 */ void psSetupTevCommon(void);

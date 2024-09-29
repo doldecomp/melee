@@ -28,10 +28,9 @@ void plBonusLib_8003D514(int arg0)
                     temp_r31_2 = Player_GetStaleMoveTableIndexPtr2(var_r29);
                     ftLib_80086644(temp_r30, &spC);
                     temp_f1 = ftLib_800865C0(temp_r30);
-                    ((UnkFlagStruct*) ((u8*) temp_r31_2 + 0xdd1))->bits.b6 = 1;
+                    ((UnkFlagStruct*) ((u8*) temp_r31_2 + 0xdd1))->b6 = 1;
                     if ((temp_f1 * sp18.x) > (temp_f1 * spC.x)) {
-                        ((UnkFlagStruct*) ((u8*) temp_r31_2 + 0xdd1))
-                            ->bits.b7 = 1;
+                        ((UnkFlagStruct*) ((u8*) temp_r31_2 + 0xdd1))->b7 = 1;
                     }
                 }
             }

@@ -2,6 +2,7 @@
 #define SYSDOLPHIN_BASELIB_GOBJPROC_H
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 struct HSD_GObjProc {

@@ -2,6 +2,7 @@
 #define __DOLPHIN_DVD_H_
 
 #include <platform.h>
+
 #include <dolphin/dvd/forward.h>
 
 #include <dolphin/os/OSThread.h>

@@ -2,6 +2,7 @@
 #define GALE01_09CA0C
 
 #include <platform.h>
+
 #include "ftCommon/forward.h"
 
 /* 09CA0C */ void ftCo_8009CA0C(ftCo_GObj* gobj, ftCo_GObj* vic_gobj);

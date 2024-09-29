@@ -48,7 +48,7 @@ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
     spawn.x0_parent_gobj = parent;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0;
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {

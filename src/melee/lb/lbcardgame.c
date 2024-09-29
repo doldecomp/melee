@@ -1,18 +1,12 @@
 #include <platform.h>
 
-#include "lbcardgame.h"
+#include "lbcardgame.static.h"
 
-struct lb_80433318_t {
-    /* +0 */ UNK_T x0;
-    /* +4 */ UNK_T x4;
-    /* +8 */ int x8;
-    /* +C */ u8 _C[0x5C];
-};
-STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
-
-/* 433318 */ static struct lb_80433318_t lb_80433318;
-
-/// #lb_80019880
+void lb_80019880(s32 arg0, s32 arg1)
+{
+    lb_804329F0[2].unk_C = arg1;
+    lb_804329F0[2].unk_8 = arg0;
+}
 
 /// #lb_80019894
 
@@ -20,7 +14,10 @@ STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
 
 /// #lb_80019900
 
-/// #lb_80019A30
+s32 lb_80019A30(s32 arg0)
+{
+    return lb_804329F0[arg0].unk_10;
+}
 
 /// #lb_80019A48
 
@@ -68,7 +65,10 @@ STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
 
 /// #lb_8001B614
 
-/// #lb_8001B6E0
+s32 lb_8001B6E0(s32 arg0)
+{
+    return lb_80432A68.unk_38[arg0].unk_0;
+}
 
 /// #lb_8001B6F8
 
@@ -104,7 +104,10 @@ STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
 
 /// #lb_8001C550
 
-/// #lb_8001C5A4
+void lb_8001C5A4(void)
+{
+    lb_80432A68.unk_0 = lb_80432A68.unk_4 = 0;
+}
 
 /// #lb_8001C5BC
 

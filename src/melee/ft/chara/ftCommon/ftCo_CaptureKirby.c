@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 
 #include "ftCo_CaptureKirby.h"
@@ -14,7 +16,6 @@
 #include "ftCommon/types.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <MetroTRK/intrinsics.h>

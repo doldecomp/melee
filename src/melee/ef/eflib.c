@@ -1,8 +1,9 @@
+#include <placeholder.h>
+
 #include "eflib.h"
 
 #include "types.h"
 
-#include <placeholder.h>
 #include <baselib/jobj.h>
 #include <baselib/particle.h>
 #include <baselib/psappsrt.h>

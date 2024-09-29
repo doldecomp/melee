@@ -1,12 +1,7 @@
+#include "axdriver.static.h"
+
 #include <sysdolphin/baselib/axdriver.h>
 #include <sysdolphin/baselib/debug.h>
-
-extern u8* AXDriver_804D77D4;
-extern u32 axfxallocsize;
-extern u32 axfxmaxsize;
-extern char AXDriver_80408140[]; // axdriver.c
-extern char AXDriver_8040814C[]; // "axfxallocsize < axfxmaxsize"
-extern char AXDriver_80408168[]; // *head != v
 
 u8* AXDriverAlloc(s32 size)
 {
@@ -82,7 +77,12 @@ void AXDriverUnlink(HSD_SM* v, HSD_SM** head)
 
 /// #AXDriver_8038D9D8
 
-/// #fn_8038DA5C
+void fn_8038DA5C(s32 arg0)
+{
+    if (arg0 != -1) {
+        AXDriver_804D77EC = 1;
+    }
+}
 
 /// #AXDriver_8038DA70
 

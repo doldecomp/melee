@@ -1,7 +1,7 @@
 #include <platform.h>
+#include <placeholder.h>
 
 #include <Gecko_setjmp.h>
-#include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
 asm int __setjmp(register __jmp_buf* env)

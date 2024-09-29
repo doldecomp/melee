@@ -2,6 +2,7 @@
 #define GALE01_2F2D98
 
 #include <platform.h>
+
 #include "ft/chara/ftKirby/forward.h"
 #include "it/forward.h"
 

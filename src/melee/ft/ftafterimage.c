@@ -1,6 +1,6 @@
-#include "ftafterimage.h"
-
 #include <placeholder.h>
+
+#include "ftafterimage.h"
 
 /* literal */ char ftCo_803C6BD8[] = "no afterimage item!\n";
 /* literal */ char ftCo_803C6BF0[] = "ftafterimage.c";

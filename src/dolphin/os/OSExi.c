@@ -1,5 +1,6 @@
-#include <cstring.h>
 #include <placeholder.h>
+
+#include <cstring.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>

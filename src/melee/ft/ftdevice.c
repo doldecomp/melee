@@ -1,8 +1,9 @@
+#include <placeholder.h>
+
 #include "ftdevice.h"
 
 #include "ft/inlines.h"
 
-#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 

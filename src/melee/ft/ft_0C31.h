@@ -1,11 +1,11 @@
 #ifndef GALE01_0C31
 #define GALE01_0C31
 
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 0C61B0 */ void ftCo_800C61B0(ftCo_GObj* gobj);
 /* 0C6370 */ void ftCo_Entry_Anim(ftCo_GObj* gobj);

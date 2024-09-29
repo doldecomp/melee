@@ -2,6 +2,7 @@
 #define GALE01_110094
 
 #include <platform.h>
+
 #include "ftSeak/forward.h"
 #include <baselib/forward.h>
 

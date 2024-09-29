@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "ftCommon/forward.h"
 #include <dolphin/gx/forward.h>
 
@@ -255,8 +256,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->facing_dir1 = fp->facing_dir;
     fp->x34_scale.y = fp->x34_scale.x;
 
-    fp->x2220_flag.bits.b5 = 0;
-    fp->x2220_flag.bits.b6 = 0;
+    fp->x2220_flag.b5 = 0;
+    fp->x2220_flag.b6 = 0;
 
     fp->x200C = 0;
     fp->x2010 = 0;
@@ -270,7 +271,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x221A_b6 = 0;
     fp->x221D_b2 = 0;
     fp->x221E_b7 = 0;
-    fp->x2220_flag.bits.b7 = 0;
+    fp->x2220_flag.b7 = 0;
     fp->x2221_b4 = 0;
     fp->x2221_b5 = 0;
     fp->x2221_b6 = 1;
@@ -347,8 +348,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x1964 = 0;
     fp->dmg.x189C_unk_num_frames = 0;
 
-    fp->x2220_flag.bits.b3 = 0;
-    fp->x2220_flag.bits.b4 = 0;
+    fp->x2220_flag.b3 = 0;
+    fp->x2220_flag.b4 = 0;
 
     fp->dmg.x1914 = 0;
     fp->dmg.int_value = 0;
@@ -762,7 +763,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x221F_b3 = 0;
 
-    fp->x2220_flag.bits.b0 = 0;
+    fp->x2220_flag.b0 = 0;
 
     fp->x2221_b2 = 0;
 
@@ -770,8 +771,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
     fp->x2229_b6 = 0;
     fp->x2229_b7 = 0;
 
-    fp->x222A_flag.bits.b0 = 0;
-    fp->x222A_flag.bits.b1 = 0;
+    fp->x222A_flag.b0 = 0;
+    fp->x222A_flag.b1 = 0;
 
     fp->x2228_b5 = 0;
     fp->x2228_b6 = 0;
@@ -1011,7 +1012,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     if (fp->dmg.x18F4 != 0) {
         fp->dmg.x18F4 = 0;
-        fp->x2220_flag.bits.b4 = 0;
+        fp->x2220_flag.b4 = 0;
     }
 
     if ((flags & Ft_MF_Unk19) == 0) {
@@ -1062,8 +1063,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     fp->x221F_b1 = 0;
     fp->x221E_b5 = 0;
     fp->x221E_b6 = 0;
-    fp->x2220_flag.bits.b3 = 0;
-    fp->x2220_flag.bits.b7 = 0;
+    fp->x2220_flag.b3 = 0;
+    fp->x2220_flag.b7 = 0;
 
     fp->x209C = 0;
 
@@ -1496,15 +1497,15 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x2220_flag.bits.b5 || fp->x2220_flag.bits.b6) {
+        if (fp->x2220_flag.b5 || fp->x2220_flag.b6) {
             if (fp->x2008) {
                 fp->x2008--;
             }
 
             if (fp->x2008 == 0) {
-                if (fp->x2220_flag.bits.b5) {
+                if (fp->x2220_flag.b5) {
                     ftCo_800D1A8C(gobj);
-                } else if (fp->x2220_flag.bits.b6) {
+                } else if (fp->x2220_flag.b6) {
                     ftCo_800D237C(gobj);
                 }
             }
@@ -2382,7 +2383,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             fp->x2225_b0 = 0;
         }
     } else {
-        if (!fp->x222A_flag.bits.b1 && !fp->x2228_b5) {
+        if (!fp->x222A_flag.b1 && !fp->x2228_b5) {
             // if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom)
             // + stage.crowdReactStart from above...
             if (fp->prev_pos.y >= Stage_CalcUnkCamY() &&
@@ -2657,8 +2658,8 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
         hold_item_bool = 1;
     }
 
-    temp_bool = !((fp->x2220_flag.bits.b3 || fp->x2220_flag.bits.b4 ||
-                   ftCo_8008E984(fp)));
+    temp_bool =
+        !((fp->x2220_flag.b3 || fp->x2220_flag.b4 || ftCo_8008E984(fp)));
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&

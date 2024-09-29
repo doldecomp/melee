@@ -1,4 +1,5 @@
 #include <placeholder.h>
+
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/types.h>
 

@@ -1,9 +1,9 @@
 #ifndef __GALE01_31CB00
 #define __GALE01_31CB00
 
-#include "vi0102.h" // IWYU pragma: export
-
 #include <placeholder.h>
+
+#include "vi0102.h" // IWYU pragma: export
 
 struct un_804D6F60_t {
     /* 0x0 */ s8 unk_0;      /* inferred */

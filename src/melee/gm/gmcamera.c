@@ -1,8 +1,7 @@
 #include <platform.h>
+#include <placeholder.h>
 
 #include "gmcamera.h"
-
-#include <placeholder.h>
 
 void* HSD_SisLib_803A5ACC(u8, int, float, float, float); /* extern */
 void HSD_SisLib_803A6368(void*, u32);                    /* extern */

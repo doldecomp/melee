@@ -2,9 +2,9 @@
 #define GALE01_063930
 
 #include <platform.h>
-#include <baselib/forward.h>
-
 #include <placeholder.h>
+
+#include <baselib/forward.h>
 
 /* 06729C */ void efAsync_8006729C(void);
 /* 06730C */ void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length,

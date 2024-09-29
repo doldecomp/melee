@@ -1,8 +1,9 @@
 #ifndef GALE01_3A949C
 #define GALE01_3A949C
 
-#include <Gecko_setjmp.h>
 #include <placeholder.h>
+
+#include <Gecko_setjmp.h>
 
 typedef struct {
     u8 x0[0x80 * 0x24];

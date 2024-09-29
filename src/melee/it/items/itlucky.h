@@ -2,11 +2,11 @@
 #define GALE01_2D5050
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/forward.h"
 
 #include "it/items/types.h"
-
-#include <placeholder.h>
 
 /* 2D5050 */ void it_802D5050(Item_GObj*);
 /* 2D50F0 */ UNK_RET it_802D50F0(UNK_PARAMS);

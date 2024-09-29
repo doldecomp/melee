@@ -2,6 +2,7 @@
 #define GALE01_1C65B0
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 1C78FC */ void grAnime_801C78FC(HSD_GObj*, s32, s32);

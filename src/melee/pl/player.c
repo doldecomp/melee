@@ -44,7 +44,7 @@ struct plAllocInfo {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    } bits;
+    };
 };
 
 /// TODO delete after fixing functions that use this
@@ -223,8 +223,8 @@ void Player_80031AD0(int slot)
 
     first_struct.internal_id = internal_id;
     first_struct.slot = slot;
-    first_struct.bits.b0 = false;
-    first_struct.bits.has_transformation = false;
+    first_struct.b0 = false;
+    first_struct.has_transformation = false;
     first_struct.unk8 = -1;
 
     /// @todo Eliminate cast.
@@ -242,8 +242,8 @@ void Player_80031AD0(int slot)
 
         second_struct.internal_id = internal_id;
         second_struct.slot = slot;
-        second_struct.bits.b0 = true;
-        second_struct.bits.has_transformation = has_transformation;
+        second_struct.b0 = true;
+        second_struct.has_transformation = has_transformation;
         second_struct.unk8 = -1;
 
         /// @todo Eliminate cast.
@@ -2087,9 +2087,9 @@ void Player_80036F34(s32 slot, s32 arg1)
     some_struct.internal_id =
         ftMapping_list[player->player_character].internal_id;
     some_struct.slot = slot;
-    some_struct.bits.has_transformation = 0;
+    some_struct.has_transformation = 0;
     some_struct.unk8 = arg1;
-    some_struct.bits.b0 = 0;
+    some_struct.b0 = 0;
 
     player->slot_type = 2;
     player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
@@ -2098,7 +2098,7 @@ void Player_80036F34(s32 slot, s32 arg1)
     {
         some_struct.internal_id =
             ftMapping_list[player->player_character].extra_internal_id;
-        some_struct.bits.has_transformation = 1;
+        some_struct.has_transformation = 1;
         player->player_entity[1] = ftDemo_CreateFighter(&some_struct);
     }
 }
@@ -2114,9 +2114,9 @@ void Player_80037054(s32 slot, s32 arg1)
     some_struct.internal_id =
         ftMapping_list[player->player_character].internal_id;
     some_struct.slot = slot;
-    some_struct.bits.has_transformation = 0;
+    some_struct.has_transformation = 0;
     some_struct.unk8 = arg1;
-    some_struct.bits.b0 = 1;
+    some_struct.b0 = 1;
 
     player->slot_type = 2;
     player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
@@ -2125,7 +2125,7 @@ void Player_80037054(s32 slot, s32 arg1)
     {
         some_struct.internal_id =
             ftMapping_list[player->player_character].extra_internal_id;
-        some_struct.bits.has_transformation = 1;
+        some_struct.has_transformation = 1;
         player->player_entity[1] = ftDemo_CreateFighter(&some_struct);
     }
 }

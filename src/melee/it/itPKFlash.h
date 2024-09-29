@@ -2,6 +2,7 @@
 #define MELEE_IT_ITPKFLASH_H
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 typedef struct itPKFlush_ItemVars {

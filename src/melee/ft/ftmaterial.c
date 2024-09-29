@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ft/forward.h"
 
 #include "ftmaterial.h"
@@ -11,7 +13,6 @@
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
-#include <placeholder.h>
 #include <baselib/class.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

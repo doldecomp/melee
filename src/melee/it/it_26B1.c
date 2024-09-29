@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include <baselib/forward.h>
 
 #include "it_26B1.h"
@@ -25,7 +27,6 @@
 #include "it/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <MetroTRK/intrinsics.h>
@@ -775,7 +776,7 @@ void it_8026BC14(HSD_GObj* gobj)
 bool it_8026BC68(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    return ip->xDD0_flag.bits.b0;
+    return ip->xDD0_flag.b0;
 }
 
 /// @returns #Item::owner of @p gobj.
@@ -810,21 +811,21 @@ void it_8026BC90(HSD_GObj* gobj, Vec3* pos)
 void it_8026BCF4(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.bits.b2 = false;
+    ip->xDCD_flag.b2 = false;
 }
 
 /// Sets #Item::xDCD_flag::bits::b2 of @p gobj.
 void it_8026BD0C(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.bits.b2 = true;
+    ip->xDCD_flag.b2 = true;
 }
 
 /// Sets #Item::xDD0_flag::bits::b3 of @p gobj.
 void it_8026BD24(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD0_flag.bits.b3 = true;
+    ip->xDD0_flag.b3 = true;
 }
 
 /// Sets #Item::xDCC_flag::bits::b3 of @p gobj.
@@ -845,14 +846,14 @@ void it_8026BD54(HSD_GObj* gobj)
 void it_8026BD6C(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.bits.b3 = true;
+    ip->xDCD_flag.b3 = true;
 }
 
 /// Sets #Item::xDCD_flag::bits::b4 of @p gobj.
 void it_8026BD84(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDCD_flag.bits.b4 = true;
+    ip->xDCD_flag.b4 = true;
 }
 
 /// Sets #Item::xDC8_word::flags::x1A of @p gobj.
@@ -875,7 +876,7 @@ void it_8026BDCC(HSD_GObj* gobj)
     /// @todo Each of these is an inlined function. Some are already defined.
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDD0_flag.bits.b3 = false;
+        ip->xDD0_flag.b3 = false;
     }
 
     {
@@ -885,12 +886,12 @@ void it_8026BDCC(HSD_GObj* gobj)
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.bits.b3 = false;
+        ip->xDCD_flag.b3 = false;
     }
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.bits.b4 = false;
+        ip->xDCD_flag.b4 = false;
     }
 
     {
@@ -905,7 +906,7 @@ void it_8026BE28(HSD_GObj* gobj)
     /// @todo Each of these is an inlined function. Some are already defined.
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDD0_flag.bits.b3 = true;
+        ip->xDD0_flag.b3 = true;
     }
 
     {
@@ -915,12 +916,12 @@ void it_8026BE28(HSD_GObj* gobj)
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.bits.b3 = true;
+        ip->xDCD_flag.b3 = true;
     }
 
     {
         Item* ip = GET_ITEM(gobj);
-        ip->xDCD_flag.bits.b4 = true;
+        ip->xDCD_flag.b4 = true;
     }
 
     {
@@ -1051,18 +1052,18 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         break;
     }
 
-    if (bobOmbGObj != NULL && bobOmbRain->x1C.bits.b0) {
+    if (bobOmbGObj != NULL && bobOmbRain->x1C.b0) {
         ip = bobOmbGObj->user_data;
-        ip->xDD0_flag.bits.b3 = true;
+        ip->xDD0_flag.b3 = true;
 
         item_data_2 = bobOmbGObj->user_data;
         item_data_2->xDCC_flag.b3 = false;
 
         item_data_3 = bobOmbGObj->user_data;
-        item_data_3->xDCD_flag.bits.b3 = true;
+        item_data_3->xDCD_flag.b3 = true;
 
         item_data_4 = bobOmbGObj->user_data;
-        item_data_4->xDCD_flag.bits.b4 = true;
+        item_data_4->xDCD_flag.b4 = true;
 
         item_data_5 = bobOmbGObj->user_data;
         item_data_5->xDC8_word.flags.x1A = false;
@@ -1191,7 +1192,7 @@ void it_8026C368(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    if (ip->x378_itemColl.x34_flags.bits.b7) {
+    if (ip->x378_itemColl.x34_flags.b7) {
         ItemKind kind = ip->kind;
         switch (kind) {
         case It_Kind_BombHei:

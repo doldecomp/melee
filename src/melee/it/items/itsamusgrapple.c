@@ -4,7 +4,7 @@
 
 void it_802B7150(Item_GObj* gobj)
 {
-    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = 0;
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = NULL;
 }
 
 /// #it_802B7160
@@ -19,39 +19,66 @@ void it_802B7150(Item_GObj* gobj)
 
 /// #fn_802B7E34
 
-/// #it_802B8048
+void it_802B8048(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B7E34;
+}
 
 /// #fn_802B805C
 
-/// #it_802B8370
+void it_802B8370(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B805C;
+}
 
 /// #fn_802B8384
 
-/// #it_802B8510
+void it_802B8510(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8384;
+}
 
 /// #fn_802B8524
 
-/// #it_802B8670
+void it_802B8670(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8524;
+}
 
 /// #fn_802B8684
 
-/// #it_802B8800
+void it_802B8800(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8684;
+}
 
 /// #fn_802B8814
 
-/// #it_802B8948
+void it_802B8948(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8814;
+}
 
 /// #fn_802B895C
 
-/// #it_802B8B40
+void it_802B8B40(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B895C;
+}
 
 /// #fn_802B8B54
 
-/// #it_802B8D24
+void it_802B8D24(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8B54;
+}
 
 /// #fn_802B8D38
 
-/// #it_802B8FF8
+void it_802B8FF8(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = fn_802B8D38;
+}
 
 /// #it_802B900C
 

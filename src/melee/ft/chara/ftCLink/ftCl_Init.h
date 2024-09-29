@@ -2,6 +2,7 @@
 #define GALE01_148C64
 
 #include <platform.h>
+
 #include "ftLink/forward.h"
 
 #include "ft/types.h"

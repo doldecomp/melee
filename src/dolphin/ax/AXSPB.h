@@ -2,6 +2,7 @@
 #define GALE01_359D8C
 
 #include <placeholder.h>
+
 #include <dolphin/ax.h>
 
 /* 359D8C */ AXSPB* __AXGetStudio(void);

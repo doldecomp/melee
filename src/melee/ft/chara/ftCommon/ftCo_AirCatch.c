@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftSamus/forward.h"
 #include "it/forward.h"
 
@@ -24,7 +26,6 @@
 #include "mp/mplib.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <baselib/jobj.h>
 
 #pragma force_active on

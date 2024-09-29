@@ -2,11 +2,12 @@
 #define GALE01_09F480
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 
 /* 09F4A4 */ UNK_RET ftCo_8009F4A4(UNK_PARAMS);

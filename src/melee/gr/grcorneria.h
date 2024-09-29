@@ -2,7 +2,6 @@
 #define GALE01_1DCCFC
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 1DCCFC */ UNK_RET grCorneria_801DCCFC(UNK_PARAMS);

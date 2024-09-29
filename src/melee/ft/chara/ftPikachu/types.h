@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "it/forward.h"
 

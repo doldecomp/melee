@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "it/forward.h"
@@ -25,7 +27,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <placeholder.h>
 #include <MSL/trigf.h>
 
 /* 094D70 */ static bool ftCo_800951D0(ftCo_GObj* gobj);

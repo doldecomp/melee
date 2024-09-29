@@ -2,6 +2,7 @@
 #define GALE01_0EAD64
 
 #include <platform.h>
+
 #include "ftLink/forward.h"
 #include <baselib/forward.h>
 

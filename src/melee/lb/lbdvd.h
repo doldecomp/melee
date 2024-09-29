@@ -1,10 +1,10 @@
 #ifndef GALE01_0174BC
 #define GALE01_0174BC
 
+#include <placeholder.h>
+
 #include "lb/forward.h"
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 typedef void (*lbDvd_Callback)(int, int index, int, int);
 
@@ -38,9 +38,5 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 /* 018F58 */ void lbDvd_80018F58(bool value);
 /* 018F68 */ void lbDvd_80018F68(void);
 /* 019100 */ UNK_RET lbDvd_80019100(UNK_PARAMS);
-
-/// @todo Move to C file
-
-/* 0189EC */ static void lbDvd_800189EC(int);
 
 #endif

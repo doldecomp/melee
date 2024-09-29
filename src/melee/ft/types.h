@@ -2,6 +2,8 @@
 #define MELEE_FT_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h" // IWYU pragma: export
 #include "it/forward.h"
 #include <dolphin/gx/forward.h>
@@ -37,7 +39,6 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <dolphin/gx/types.h>
 
 #define FTPART_INVALID 0xFF
@@ -1623,7 +1624,7 @@ struct Fighter {
             /* fp+2220:5 */ u8 b5 : 1;
             /* fp+2220:6 */ u8 b6 : 1;
             /* fp+2220:7 */ u8 b7 : 1;
-        } bits;
+        };
         /* fp+2220 */ u8 flags;
     } x2220_flag;
     /* fp+2221 */ union {

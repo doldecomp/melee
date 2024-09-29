@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ftCo_DamageSong.h"
 
 #include "ftCo_0C35.h"
@@ -11,8 +13,6 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "pl/player.h"
-
-#include <placeholder.h>
 
 /* 0C3390 */ static void ftCo_800C3390(ftCo_GObj* gobj);
 /* 0C3480 */ static void ftCo_800C3480(ftCo_GObj* gobj);

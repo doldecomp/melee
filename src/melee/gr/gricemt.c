@@ -1,8 +1,7 @@
 #include <platform.h>
+#include <placeholder.h>
 
 #include "gr/inlines.h"
-
-#include <placeholder.h>
 
 void grIceMt_801F6868(void) {}
 

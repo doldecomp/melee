@@ -136,7 +136,7 @@ void Item_80266FCC(void)
     Item_804A0C64.x5C = it_804D6D28->x28;
     Item_804A0C64.x64 = it_804D6D28->x148;
 
-    Item_804A0CCC.x154.bits.b0 = true;
+    Item_804A0CCC.x154.b0 = true;
     Item_804A0CCC.x150 = 1;
 
     Item_804A0E24.x = -1;
@@ -262,13 +262,13 @@ void Item_80267454(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
 
-    if (item_data->xDCD_flag.bits.b01 != 0 &&
+    if (item_data->xDCD_flag.b01 != 0 &&
 
         (item_data->x520_cameraBox != NULL))
     {
         Camera_800290D4(item_data->x520_cameraBox);
         item_data->x520_cameraBox = NULL;
-        item_data->xDCD_flag.bits.b01 = 0;
+        item_data->xDCD_flag.b01 = 0;
     }
 }
 
@@ -573,8 +573,8 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xDC4 = 0;
     item_data->xDC8_word.flags.xF = 0;
     item_data->xCC4 = 0;
-    item_data->xDCF_flag.bits.b6 = 0;
-    item_data->xDCF_flag.bits.b7 = 0;
+    item_data->xDCF_flag.b6 = 0;
+    item_data->xDCF_flag.b7 = 0;
     item_data->xCB0_source_ply = 6;
     item_data->xCB4 = -1;
     item_data->xC38 = -1;
@@ -584,7 +584,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xCDC = 0.0f;
     item_data->xCD8 = 0.0f;
     item_data->xCD4 = 0.0f;
-    item_data->xDD0_flag.bits.b1 = 0;
+    item_data->xDD0_flag.b1 = 0;
     item_data->xDC8_word.flags.x14 = 0;
     item_data->xDC8_word.flags.xE = 0;
     item_data->xCEC_fighterGObj = NULL;
@@ -600,7 +600,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xC68 = 0.0f;
     item_data->xCD0 = 0.0f;
     it_80275158(gobj, it_804D6D28->x30);
-    item_data->xDD0_flag.bits.b3 = false;
+    item_data->xDD0_flag.b3 = false;
     item_data->spin_spd = item_data->xCC_item_attr->xC_spin_speed;
     item_data->xDC8_word.flags.x19 = item_data->xCC_item_attr->x1_3;
     item_data->xDC8_word.flags.x17 = item_data->xCC_item_attr->x1_1;
@@ -621,8 +621,8 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xBFC = item_data->xC0C;
     item_data->xDC8_word.flags.xC = item_data->xCC_item_attr->x1_5;
     item_data->xDC8_word.flags.xD = 1;
-    item_data->xDCD_flag.bits.b01 = item_data->xCC_item_attr->x1_67_cam_kind;
-    item_data->xDCE_flag.bits.b3 = 0;
+    item_data->xDCD_flag.b01 = item_data->xCC_item_attr->x1_67_cam_kind;
+    item_data->xDCE_flag.b3 = 0;
     item_data->xD54_throwNum = 0;
     item_data->xD50_landNum = 0;
     item_data->xD58 = 0;
@@ -631,8 +631,8 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xDCC_flag.b4567 = 15;
     item_data->xAC4_ignoreItemID = spawnItem->x40;
     item_data->destroy_type = 4;
-    item_data->xDCE_flag.bits.b5 = 0;
-    item_data->xDCE_flag.bits.b4 = 0;
+    item_data->xDCE_flag.b5 = 0;
+    item_data->xDCE_flag.b4 = 0;
     item_data->xC54 = 0.0f;
     item_data->xC58.x = 0.0f;
     item_data->xC58.x = 0.0f;
@@ -644,9 +644,9 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xDC8_word.flags.x6 = 0;
     item_data->xDC8_word.flags.x7 = 0;
     item_data->xDC8_word.flags.x8 = 0;
-    item_data->xDD0_flag.bits.b5 = 0;
+    item_data->xDD0_flag.b5 = 0;
     item_data->xD09 = (s8) 0;
-    item_data->xDD0_flag.bits.b4 = 0;
+    item_data->xDD0_flag.b4 = 0;
     item_data->xCA8 = 0;
     item_data->xCBC_hitlagFrames = 0.0f;
     item_data->xCC0 = 0.0f;
@@ -656,21 +656,21 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xC70 = 1.0f;
     item_data->xC6C = 1.0f;
     item_data->xDCC_flag.b2 = 0;
-    item_data->xDD0_flag.bits.b0 = false;
-    item_data->xDCE_flag.bits.b6 = false;
-    item_data->xDCF_flag.bits.b0 = false;
-    item_data->xDCF_flag.bits.b1 = false;
-    item_data->xDCF_flag.bits.b2 = false;
-    item_data->xDD1_flag.bits.b0 = false;
-    item_data->xDCE_flag.bits.b7 = 1;
+    item_data->xDD0_flag.b0 = false;
+    item_data->xDCE_flag.b6 = false;
+    item_data->xDCF_flag.b0 = false;
+    item_data->xDCF_flag.b1 = false;
+    item_data->xDCF_flag.b2 = false;
+    item_data->xDD1_flag.b0 = false;
+    item_data->xDCE_flag.b7 = 1;
     item_data->scl = item_data->xCC_item_attr->x60_scale;
     item_data->x3C = 0.0f;
-    item_data->xDCD_flag.bits.b3 = false;
-    item_data->xDCD_flag.bits.b4 = false;
-    item_data->xDD0_flag.bits.b7 = false;
+    item_data->xDCD_flag.b3 = false;
+    item_data->xDCD_flag.b4 = false;
+    item_data->xDD0_flag.b7 = false;
     item_data->xBC0 = 0;
-    item_data->xDD1_flag.bits.b1 = false;
-    item_data->xDCD_flag.bits.b2 = false;
+    item_data->xDD1_flag.b1 = false;
+    item_data->xDCD_flag.b2 = false;
     item_data->xD6C = -1;
     item_data->sfx_unk2 = SFX_NONE;
     item_data->sfx_unk1 = SFX_NONE;
@@ -701,14 +701,14 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 
     it_80279B64(item_data);
 
-    item_data->xDCF_flag.bits.b3 = false;
-    item_data->xDCF_flag.bits.b4 = false;
-    item_data->xDCF_flag.bits.b5 = false;
+    item_data->xDCF_flag.b3 = false;
+    item_data->xDCF_flag.b4 = false;
+    item_data->xDCF_flag.b5 = false;
 
     item_data->xDAA_byte = 1;
 
-    if (db_80225B20() != NULL) {
-        item_data->xDAA_flag.bits.b4 = true;
+    if (db_80225B20()) {
+        item_data->xDAA_flag.b4 = true;
     }
 
     if (spawnItem->x0_parent_gobj == NULL) {
@@ -903,17 +903,17 @@ static void foobar(HSD_GObj* gobj)
     case 0:
     case 6:
         if (it->xD0C == 2) {
-            it->xDD0_flag.bits.b7 = 1;
+            it->xDD0_flag.b7 = 1;
         }
         it->xD40 = it_804D6D28->x2C;
-        it->xDD0_flag.bits.b6 = 1;
+        it->xDD0_flag.b6 = 1;
         it_802756D0(gobj);
         it_80279B88(it, 3, 0);
         break;
 
     default:
         it->xD40 = 0.0f;
-        it->xDD0_flag.bits.b6 = 0;
+        it->xDD0_flag.b6 = 0;
     }
 }
 
@@ -934,8 +934,8 @@ static void foobar3(HSD_GObj* gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(gobj);
     CameraBox* cam_box;
-    if (it->xDCD_flag.bits.b01 != 0) {
-        if (it->xDCD_flag.bits.b01 == 1) {
+    if (it->xDCD_flag.b01 != 0) {
+        if (it->xDCD_flag.b01 == 1) {
             it->x520_cameraBox = Camera_80029044(0);
         } else {
             it->x520_cameraBox = Camera_80029044(2);
@@ -1277,7 +1277,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     item_data->exited_hitlag = NULL;
     item_data->jumped_on = NULL;
 
-    item_data->xDD0_flag.bits.b5 = false;
+    item_data->xDD0_flag.b5 = false;
     item_data->xD09 = 0;
 
     it_802714C0(gobj);
@@ -1331,19 +1331,19 @@ static void Item_80269528(HSD_GObj* gobj)
             return;
         }
     }
-    if (item_data->xDD0_flag.bits.b6 != 0) {
+    if (item_data->xDD0_flag.b6 != 0) {
         item_data->xD40 -= 1.0f;
         if (item_data->xD40 <= 0.0f) {
-            item_data->xDD0_flag.bits.b6 = 0;
+            item_data->xDD0_flag.b6 = 0;
             item_data->xD40 = 0.0f;
             it_80279BBC(item_data);
-            if (item_data->xDD0_flag.bits.b7 == 0) {
+            if (item_data->xDD0_flag.b7 == 0) {
                 it_802756E0(gobj);
             }
         }
     }
     if (item_data->xDC8_word.flags.x15 != 0 &&
-        item_data->kind < It_Kind_L_Gun_Ray && !item_data->xDD0_flag.bits.b3)
+        item_data->kind < It_Kind_L_Gun_Ray && !item_data->xDD0_flag.b3)
     {
         item_data->xD44_lifeTimer -= 1.0f;
         if (item_data->xD44_lifeTimer <= 0.0f) {
@@ -1407,7 +1407,7 @@ void Item_802697D4(HSD_GObj* gobj)
         if (item_data->xDC8_word.flags.x9 == 0) {
             PSVECAdd(&item_data->x40_vel, &item_data->x70_nudge, &sp1C);
             if ((item_data->ground_or_air == 0) &&
-                (item_data->xDCD_flag.bits.b3 == 0))
+                (item_data->xDCD_flag.b3 == 0))
             {
                 it_8027737C(gobj, &sp1C);
             }
@@ -1422,14 +1422,13 @@ void Item_802697D4(HSD_GObj* gobj)
             it_80274A64(gobj);
         }
     }
-    if ((item_data->xDD1_flag.bits.b1 != 0) && (item_data->ground_or_air == 1))
-    {
+    if ((item_data->xDD1_flag.b1 != 0) && (item_data->ground_or_air == 1)) {
         grLib_801C9E60(&item_data->x58_vec_unk);
     }
     PSVECAdd(&item_data->pos, &item_data->x58_vec_unk, &item_data->pos);
     it_80273484(gobj);
     if (item_data->ground_or_air == 0) {
-        if ((item_data->xDCE_flag.bits.b3 != 0) && (it_8026D604(gobj) != 0)) {
+        if ((item_data->xDCE_flag.b3 != 0) && (it_8026D604(gobj) != 0)) {
             mpLib_800567C0(item_data->xC30, &item_data->pos,
                            &item_data->x64_vec_unk2);
         } else {
@@ -1466,7 +1465,7 @@ static void Item_80269A9C(HSD_GObj* gobj)
         }
     }
     item_data = (Item*) HSD_GObjGetUserData(gobj);
-    if (item_data->xDCD_flag.bits.b01 != 0) {
+    if (item_data->xDCD_flag.b01 != 0) {
         CameraBox* cameraBox = item_data->x520_cameraBox;
         if (cameraBox != NULL) {
             cameraBox->x10 = item_data->pos;
@@ -1499,7 +1498,7 @@ static /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple
     Item_80269BE4(HSD_GObj* gobj)
 {
     Item* item_data = gobj->user_data;
-    if (item_data->xDD0_flag.bits.b5) {
+    if (item_data->xDD0_flag.b5) {
         it_802701BC(gobj);
 
         if (item_data->grab_victim != NULL) {
@@ -1546,7 +1545,7 @@ static void Item_80269CC4(HSD_GObj* gobj)
     temp_item->xC68 = 0.0f;
     temp_item->xCD0 = 0.0f;
     temp_item->xCC0 = 0.0f;
-    temp_item->xDCF_flag.bits.b6 = false;
+    temp_item->xDCF_flag.b6 = false;
     temp_item->xCC4 = 0;
     temp_item->xCEC_fighterGObj = 0;
     temp_item->xCF0_itemGObj = 0;
@@ -1563,8 +1562,8 @@ static void Item_80269CC4(HSD_GObj* gobj)
     temp_item->xCDC = 0.0f;
     temp_item->xCD8 = 0.0f;
     temp_item->xCD4 = 0.0f;
-    temp_item->xDCE_flag.bits.b5 = false;
-    temp_item->xDCE_flag.bits.b4 = false;
+    temp_item->xDCE_flag.b5 = false;
+    temp_item->xDCE_flag.b4 = false;
     temp_item->xDCC_flag.b1 = false;
     temp_item->xC70 = 1.0f;
     temp_item->xC6C = 1.0f;
@@ -1573,7 +1572,7 @@ static void Item_80269CC4(HSD_GObj* gobj)
     temp_item->xCA8 = 0;
     temp_item->xDC8_word.flags.x3 = false;
     temp_item->xDC8_word.flags.x4 = false;
-    temp_item->xDCE_flag.bits.b6 = false;
+    temp_item->xDCE_flag.b6 = false;
 }
 
 static bool Item_80269DC8(HSD_GObj* gobj)
@@ -1582,11 +1581,11 @@ static bool Item_80269DC8(HSD_GObj* gobj)
     HSD_GObjPredicate hit_shield;
     Item* item_data = gobj->user_data;
 
-    if (item_data->xDCE_flag.bits.b5 && item_data->ground_or_air == 1 &&
-        (item_data->xDCE_flag.bits.b4 ||
+    if (item_data->xDCE_flag.b5 && item_data->ground_or_air == 1 &&
+        (item_data->xDCE_flag.b4 ||
          item_data->xC54 < (f32) M_PI / 180 * (90 + it_804D6D28->unk_degrees)))
     {
-        if (item_data->xDCE_flag.bits.b4 == 0) {
+        if (item_data->xDCE_flag.b4 == 0) {
             item_data->xC54 -= M_PI / 2;
             if (item_data->xC54 < 0.0f) {
                 item_data->xC54 = 0.0f;
@@ -1839,7 +1838,7 @@ static void Item_8026A294(HSD_GObj* gobj)
         {
             return;
         }
-    } else if (item_data->xDCE_flag.bits.b6) {
+    } else if (item_data->xDCE_flag.b6) {
         if (processCallback(item_data->touched, gobj, item_data)) {
             return;
         }
@@ -1975,10 +1974,10 @@ static void func_8026A8EC_inline3(HSD_GObj* gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(gobj);
 
-    if (it->xDCD_flag.bits.b01 != 0 && it->x520_cameraBox != NULL) {
+    if (it->xDCD_flag.b01 != 0 && it->x520_cameraBox != NULL) {
         Camera_800290D4(it->x520_cameraBox);
         it->x520_cameraBox = NULL;
-        it->xDCD_flag.bits.b01 = 0;
+        it->xDCD_flag.b01 = 0;
     }
 }
 
@@ -1996,9 +1995,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     func_8026A8EC_inline1(gobj);
     efLib_DestroyAll(gobj);
 
-    if (!ip->xDCF_flag.bits.b2 &&
-        (!ip->xDC8_word.flags.x13 || ip->owner == NULL))
-    {
+    if (!ip->xDCF_flag.b2 && (!ip->xDC8_word.flags.x13 || ip->owner == NULL)) {
         ItemSwitch(gobj);
     }
 

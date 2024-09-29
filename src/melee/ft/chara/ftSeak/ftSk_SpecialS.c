@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "lb/forward.h"
 
 #include "ftSeak/ftSk_SpecialS.h"
@@ -24,7 +26,6 @@
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
-#include <placeholder.h>
 #include <baselib/jobj.h>
 
 /// @todo Fix common data struct

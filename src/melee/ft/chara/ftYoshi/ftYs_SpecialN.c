@@ -1,13 +1,10 @@
-#include <platform.h>
-#include "ft/forward.h"
-#include "ftYoshi/forward.h"
-
-#include "ftYoshi/ftYs_SpecialN.h"
+#include "ftYoshi/ftYs_SpecialN.static.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureYoshi.h"
 #include "it/items/it_2F2B.h"
@@ -15,31 +12,7 @@
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
-bool ftYs_Unk3_803CED48[] = {
-    false, true, false, false, false, true, true, false,
-    false, true, true,  true,  false, true, true,
-};
-
-Vec4 ftYs_Unk3_803CED84 = {
-    0.65,
-    0.7,
-    0.8,
-    1,
-};
-
-Vec4 ftYs_Unk3_803CED94 = {
-    1.1,
-    1.35,
-    1.3,
-    1.2,
-};
-
-Vec3 ftYs_Unk3_803CEDA4[] = {
-    { 12, 0, -6 },
-    { 6, 6, 6 },
-};
-
-Vec3 const ftYs_Unk1_803B75C0 = { 0 };
+/* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
 
 /// #ftYs_SpecialN_8012CD10
 
@@ -55,7 +28,12 @@ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
 
 /// #ftYs_SpecialN_8012CDB4
 
-/// #ftYs_SpecialN_8012CDD4
+HSD_Joint* ftYs_SpecialN_8012CDD4(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftData* ca = fp->ft_data;
+    return ca->x48_items[3];
+}
 
 void ftYs_SpecialN_Enter(HSD_GObj* gobj)
 {

@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 
@@ -18,7 +20,6 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 #pragma force_active on
 

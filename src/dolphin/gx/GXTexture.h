@@ -2,9 +2,10 @@
 #define DOLPHIN_GX_GXTEXTURE_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/gx/forward.h>
 
-#include <placeholder.h>
 #include <dolphin/gx/GXEnum.h>
 
 void __GXSetSUTexSize(void);
