@@ -1243,6 +1243,7 @@ def generate_objdiff_config(
         src_exists = obj.src_path is not None and obj.src_path.exists()
         if src_exists:
             unit_config["base_path"] = obj.src_obj_path
+            unit_config["metadata"]["source_path"] = obj.src_path
 
         cflags = obj.options["cflags"]
         reverse_fn_order = False
@@ -1300,7 +1301,6 @@ def generate_objdiff_config(
             {
                 "complete": obj.completed,
                 "reverse_fn_order": reverse_fn_order,
-                "source_path": obj.src_path,
                 "progress_categories": progress_categories,
             }
         )
