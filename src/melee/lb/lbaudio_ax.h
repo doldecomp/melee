@@ -2,6 +2,7 @@
 #define MELEE_LB_LBAUDIO_AX_H
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 #include <baselib/gobj.h>

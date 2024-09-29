@@ -2,6 +2,7 @@
 #define MELEE_MP_FORWARD_H
 
 #include <platform.h>
+
 #include "lb/forward.h"
 
 typedef struct mp_UnkStruct0 mp_UnkStruct0;

@@ -2,11 +2,11 @@
 #define GALE01_1C96E8
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj*);
 /* 1C96F8 */ UnkGeneratorStruct* grLib_801C96F8(s32, s8, S32Vec3*);

@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
@@ -38,7 +40,6 @@
 #include "pl/plbonuslib.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <trigf.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/gobj.h>
@@ -228,7 +229,7 @@ void ftCo_800C0D0C(ftCo_GObj* gobj)
               (p_ftCommonData->x608 - (Player_80033BB8(fp->player_id) + 1)))));
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
-    fp->x2220_flag.bits.b3 = true;
+    fp->x2220_flag.b3 = true;
     fp->x2224_b4 = true;
     fp->mv.co.bury.x0 = p_ftCommonData->x5F4;
     fp->mv.co.bury.x20 = fp->coll_data.floor.index;
@@ -314,7 +315,7 @@ void ftCo_800C124C(ftCo_GObj* gobj)
     ftCommon_8007E2FC(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
-    fp->x2220_flag.bits.b3 = true;
+    fp->x2220_flag.b3 = true;
     fp->x2224_b4 = true;
 }
 

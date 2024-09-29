@@ -2,14 +2,14 @@
 #define GALE01_26C47C
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "it/types.h"
-
-#include <placeholder.h>
 
 /* 26C47C */ void it_8026C47C(struct it_8026C47C_arg0_t* arg0);
 /* 26C530 */ s32 it_8026C530(s32, void*, s32, s32);

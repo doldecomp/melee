@@ -2,13 +2,14 @@
 #define GALE01_04D164
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "gr/forward.h"
 #include "mp/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 /* 04D164 */ int mpLib_8004D164(void);
 /* 04D16C */ int mpLib_8004D16C(void);

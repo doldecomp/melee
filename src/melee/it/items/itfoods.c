@@ -60,7 +60,7 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
     spawn.x3C_damage = 0;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = NULL;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0.0F;
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {

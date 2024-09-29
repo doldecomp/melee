@@ -1,10 +1,10 @@
 #ifndef MELEE_EF_TYPES_H
 #define MELEE_EF_TYPES_H
 
+#include <placeholder.h>
+
 #include "ef/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 struct ef_UnkStruct2 {
     /* +0 */ HSD_JObj* x0;

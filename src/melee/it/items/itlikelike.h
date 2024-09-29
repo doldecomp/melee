@@ -1,9 +1,9 @@
 #ifndef GALE01_2D9A2C
 #define GALE01_2D9A2C
 
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /* 2D9A2C */ UNK_RET it_802D9A2C(UNK_PARAMS);
 /* 2D9B78 */ UNK_RET it_802D9B78(UNK_PARAMS);

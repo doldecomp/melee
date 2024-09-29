@@ -2,9 +2,9 @@
 #define GALE01_08CB44
 
 #include <platform.h>
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 08CB44 */ bool ftCo_AttackLw4_CheckInput(ftCo_GObj* gobj);
 /* 08CCBC */ void ftCo_AttackLw4_Anim(ftCo_GObj* gobj);

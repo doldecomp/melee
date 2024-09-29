@@ -2,6 +2,7 @@
 #define GALE01_15BD20
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "ftMasterHand/forward.h"
 #include <dolphin/mtx/forward.h>

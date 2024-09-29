@@ -53,13 +53,13 @@ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
         spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
         spawn.x0_parent_gobj = NULL;
         spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-        spawn.x44_flag.bits.b0 = true;
+        spawn.x44_flag.b0 = true;
         spawn.x40 = 0;
         item_gobj = Item_80268B18(&spawn);
     }
     if (item_gobj != NULL) {
         Item* it = GET_ITEM(item_gobj);
-        it->xDD4_itemVar.tomato.x4.bits.b0 = true;
+        it->xDD4_itemVar.tomato.x4.b0 = true;
         it->xDD4_itemVar.tomato.x8 = arg2;
     }
     return item_gobj;
@@ -83,7 +83,7 @@ void it_802842A4(Item_GObj* gobj)
     item->x40_vel.z = 0.0F;
 
     item->xDD4_itemVar.tomato.heal_amount = sa->x0;
-    item->xDD4_itemVar.tomato.x4.bits.b0 = false;
+    item->xDD4_itemVar.tomato.x4.b0 = false;
     item->xDD4_itemVar.tomato.x8 = 0;
 
     it_80284358(gobj);

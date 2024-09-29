@@ -4,8 +4,8 @@
 #define _OS_INTERRUPT_H_
 
 #include <platform.h>
-
 #include <placeholder.h>
+
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSException.h>
 

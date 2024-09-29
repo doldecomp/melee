@@ -1,11 +1,11 @@
 #ifndef GALE01_06DBF4
 #define GALE01_06DBF4
 
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 06FE08 */ void ftAnim_8006FE08(Fighter* fp, bool);
 /* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);

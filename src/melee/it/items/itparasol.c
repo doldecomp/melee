@@ -41,7 +41,7 @@ int it_8028B08C(Item_GObj* item_gobj, int statenum)
 void it_8028B0B8(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    item->xDCE_flag.bits.b7 = false;
+    item->xDCE_flag.b7 = false;
     it_8028B17C(item_gobj);
 }
 

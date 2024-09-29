@@ -2,12 +2,13 @@
 #define MELEE_FT_CHARA_FTSAMUS_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/forward.h"
 #include <baselib/forward.h>
 
 #include "ftCommon/types.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 struct ftSamus_FighterVars {

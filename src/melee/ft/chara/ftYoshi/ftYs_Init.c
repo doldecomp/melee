@@ -1,6 +1,8 @@
 #undef __FILE__
 #define __FILE__ "ftyoshi.c"
 
+#include <placeholder.h>
+
 #include "forward.h"
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
@@ -22,7 +24,6 @@
 #include "ft/types.h"
 #include "it/it_26B1.h"
 
-#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/aobj.h>
 #include <baselib/debug.h>

@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "gr/grticeclimber.h"
 
 #include "cm/camera.h"
@@ -14,7 +16,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

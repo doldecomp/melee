@@ -2,14 +2,14 @@
 #define GALE01_272560
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
 
 #include "it/items/types.h"
 #include "lb/types.h"
-
-#include <placeholder.h>
 
 /* 272560 */ UNK_RET it_80272560(UNK_PARAMS);
 /* 2725D4 */ void it_802725D4(Item_GObj*);

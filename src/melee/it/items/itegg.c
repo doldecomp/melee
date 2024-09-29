@@ -65,16 +65,16 @@ Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
         spawn.vel = *vel;
         spawn.x0_parent_gobj = ip->owner;
         spawn.x4_parent_gobj2 = gobj;
-        spawn.x44_flag.bits.b0 = true;
+        spawn.x44_flag.b0 = true;
         spawn.x40 = 0;
 
         item_gobj = Item_80268B18(&spawn);
         if (item_gobj != NULL) {
             Item* ip = GET_ITEM(item_gobj);
-            ip->xDD0_flag.bits.b6 = false;
+            ip->xDD0_flag.b6 = false;
             ip->xD40 = 0.0F;
             it_80279BBC(ip);
-            if (!ip->xDD0_flag.bits.b7) {
+            if (!ip->xDD0_flag.b7) {
                 it_802756E0(item_gobj);
             }
         }
@@ -208,7 +208,7 @@ void it_80289094(Item_GObj* gobj)
     it_8027518C(gobj);
     ip->x40_vel.x = 0;
     ip->x40_vel.y = 0;
-    ip->xDCF_flag.bits.b2 = true;
+    ip->xDCF_flag.b2 = true;
     ip->xDD4_itemVar.egg.x0 = true;
     ip->xDD4_itemVar.egg.rand_max = 20;
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
@@ -235,7 +235,7 @@ void it_80289158(Item_GObj* gobj)
     it_802756D0(gobj);
     ip->x40_vel.x = 0.0F;
     ip->x40_vel.y = 0.0F;
-    ip->xDCF_flag.bits.b2 = true;
+    ip->xDCF_flag.b2 = true;
     ip->xDD4_itemVar.egg.x0 = true;
     ip->xDD4_itemVar.egg.rand_max = 40;
     it_8026B3A8(gobj);

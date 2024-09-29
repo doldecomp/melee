@@ -2,13 +2,14 @@
 #define GALE01_0679B0
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/inlines.h" // IWYU pragma: export
 #include "ft/types.h"
 
-#include <placeholder.h>
 #include <baselib/objalloc.h>
 
 /* 0679B0 */ void Fighter_800679B0(void);

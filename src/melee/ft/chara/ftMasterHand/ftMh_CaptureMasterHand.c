@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "ftCommon/forward.h"
 
 #include "ftMh_CaptureMasterHand.h"
@@ -26,10 +27,10 @@ void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageMasterHand, 0, 0, 1,
                               0, 0);
     fp->x221E_b0 = true;
-    fp->x2220_flag.bits.b3 = true;
+    fp->x2220_flag.b3 = true;
     fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 511);
-    fp->x2220_flag.bits.b3 = true;
+    fp->x2220_flag.b3 = true;
     ftAnim_8006EBA4(gobj);
 }
 

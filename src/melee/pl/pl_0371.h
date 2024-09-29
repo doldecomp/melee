@@ -2,11 +2,11 @@
 #define GALE01_03715C
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 037C60 */ void pl_80037C60(HSD_GObj*, s32);
 /* 037ECC */ void pl_80037ECC(void);

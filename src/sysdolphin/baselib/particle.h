@@ -2,6 +2,7 @@
 #define GALE01_391580
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 #include "baselib/jobj.h"

@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "ft/ft_081B.h"
@@ -10,7 +12,6 @@
 #include "mp/mpcoll.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 
 void ft_80081B38(HSD_GObj* arg0)
@@ -29,7 +30,7 @@ void ft_80081B38(HSD_GObj* arg0)
     temp_r31->coll_data.cur_topn = temp_r31->cur_pos;
     temp_r31->coll_data.prev_topn = temp_r31->coll_data.cur_topn;
     mpColl_80041EE4(temp_r30);
-    temp_r30->x34_flags.bits.b1234 = 1;
+    temp_r30->x34_flags.b1234 = 1;
     temp_r11 = temp_r31->parts;
     temp_r29 = temp_r31->ft_data->x44;
     mpColl_80042078(

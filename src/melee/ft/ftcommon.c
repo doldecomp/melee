@@ -1441,8 +1441,8 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     if ((src->x198C = 2) && (src->x1990 != 0)) {
         ftColl_8007B760(dst_gobj, src->x1990);
     }
-    dst->x2220_flag.bits.b5 = src->x2220_flag.bits.b5;
-    dst->x2220_flag.bits.b6 = src->x2220_flag.bits.b6;
+    dst->x2220_flag.b5 = src->x2220_flag.b5;
+    dst->x2220_flag.b6 = src->x2220_flag.b6;
     dst->x2008 = src->x2008;
     ftLib_SetScale(dst_gobj, src->x34_scale.y);
     if (src->x2223_b7) {

@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "forward.h"
 
 #include "ftPr_Init.h"
@@ -22,7 +24,6 @@
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

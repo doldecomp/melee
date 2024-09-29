@@ -2,6 +2,7 @@
 #define MELEE_FT_INLINES_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 
 #include "ft/ftanim.h"

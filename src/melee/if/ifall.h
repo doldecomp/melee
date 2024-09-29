@@ -2,7 +2,6 @@
 #define GALE01_2F3394
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 2F3394 */ UNK_RET ifAll_802F3394(UNK_PARAMS);

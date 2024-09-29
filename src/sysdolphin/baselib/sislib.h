@@ -2,12 +2,13 @@
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "baselib/forward.h"
 
 #include "baselib/archive.h"
 #include "baselib/cobj.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 typedef struct sislib_UnkAllocData sislib_UnkAllocData;

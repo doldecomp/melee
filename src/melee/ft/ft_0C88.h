@@ -1,10 +1,10 @@
 #ifndef GALE01_0928CC
 #define GALE01_0928CC
 
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-
-#include <placeholder.h>
 
 /* 0C884C */ void ftCo_800C884C(ftCo_GObj* gobj);
 /* 0C88A0 */ void ftCo_800C88A0(Fighter*);

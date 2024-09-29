@@ -1,5 +1,4 @@
 #include <platform.h>
-
 #include <placeholder.h>
 
 bool it_802E8418(void)

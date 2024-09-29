@@ -2,9 +2,9 @@
 #define GALE01_1601C4
 
 #include <platform.h>
-#include "gm/forward.h"
-
 #include <placeholder.h>
+
+#include "gm/forward.h"
 
 /* 1601C4 */ UNK_RET gm_801601C4(UNK_PARAMS);
 /* 160244 */ UNK_RET gm_80160244(UNK_PARAMS);
@@ -22,7 +22,6 @@
 /* 16075C */ UNK_RET gm_8016075C(UNK_PARAMS);
 /* 1607A8 */ UNK_RET fn_801607A8(UNK_PARAMS);
 /* 1607F4 */ UNK_RET fn_801607F4(UNK_PARAMS);
-/* 160840 */ UNK_RET fn_80160840(UNK_PARAMS);
 /* 160854 */ void gm_80160854(void);
 /* 160968 */ bool gm_80160968(void);
 /* 160980 */ UNK_RET gm_80160980(UNK_PARAMS);
@@ -189,10 +188,9 @@
 /* 169290 */ UNK_RET gm_80169290(UNK_PARAMS);
 /* 1692BC */ UNK_RET gm_801692BC(UNK_PARAMS);
 /* 1692E8 */ void gm_801692E8(uint ticks, struct datetime* datetime);
-/* 169370 */ UNK_RET gm_80169370(UNK_PARAMS);
+/* 169370 */ u8 gm_80169370(s32);
 /* 169384 */ u8 gm_80169384(void);
-/* 169394 */ UNK_RET gm_80169394(UNK_PARAMS);
-/* 1693A8 */ UNK_RET fn_801693A8(UNK_PARAMS);
+/* 169394 */ s32 gm_80169394(void);
 /* 1693BC */ UNK_RET gm_801693BC(UNK_PARAMS);
 /* 169434 */ void fn_80169434(s32 arg0);
 /* 169444 */ UNK_RET fn_80169444(UNK_PARAMS);
@@ -211,7 +209,6 @@
 /* 169F50 */ UNK_RET fn_80169F50(UNK_PARAMS);
 /* 16A09C */ UNK_RET fn_8016A09C(UNK_PARAMS);
 /* 16A164 */ UNK_RET gm_8016A164(UNK_PARAMS);
-/* 16A1E4 */ UNK_RET fn_8016A1E4(UNK_PARAMS);
 /* 16A1F8 */ UNK_RET gm_8016A1F8(UNK_PARAMS);
 /* 16A21C */ void gm_8016A21C(UNK_T arg0);
 /* 16A22C */ UNK_RET gm_8016A22C(UNK_PARAMS);
@@ -230,15 +227,15 @@
 /* 16A998 */ UNK_RET gm_8016A998(UNK_PARAMS);
 /* 16A9E8 */ UNK_RET gm_8016A9E8(UNK_PARAMS);
 /* 16AC44 */ UNK_RET gm_8016AC44(UNK_PARAMS);
-/* 16AE38 */ Placeholder_8016AE38_ret_val* gm_8016AE38(void);
-/* 16AE44 */ Placeholder_8016AE38_ret_val* gm_8016AE44(void);
-/* 16AE50 */ Placeholder_8016AE50_ret_val* gm_8016AE50(void);
+/* 16AE38 */ lbl_8046B6A0_t* gm_8016AE38(void);
+/* 16AE44 */ lbl_8046B6A0_t* gm_8016AE44(void);
+/* 16AE50 */ Placeholder_8016AE38_flags_2* gm_8016AE50(void);
 /* 16AE60 */ UNK_RET fn_8016AE60(UNK_PARAMS);
 /* 16AE80 */ bool gm_8016AE80(void);
 /* 16AE94 */ f32 gm_8016AE94(void);
-/* 16AEA4 */ u64 gm_8016AEA4(void);
+// /* 16AEA4 */ s32 gm_8016AEA4(void);
 /* 16AEB8 */ s32 gm_8016AEB8(void);
-/* 16AEC8 */ UNK_RET gm_8016AEC8(UNK_PARAMS);
+/* 16AEC8 */ bool gm_8016AEC8(void);
 /* 16AEDC */ bool gm_8016AEDC(void);
 /* 16AEEC */ bool gm_8016AEEC(void);
 /* 16AEFC */ u16 gm_8016AEFC(void);
@@ -249,10 +246,10 @@
 /* 16B094 */ UNK_RET gm_8016B094(UNK_PARAMS);
 /* 16B0B4 */ bool gm_8016B0B4(void);
 /* 16B0D4 */ bool gm_8016B0D4(void);
-/* 16B0E8 */ UNK_RET gm_8016B0E8(UNK_PARAMS);
+/* 16B0E8 */ bool gm_8016B0E8(void);
 /* 16B0FC */ bool gm_8016B0FC(void);
-/* 16B110 */ UNK_RET gm_8016B110(UNK_PARAMS);
-/* 16B124 */ UNK_RET gm_8016B124(UNK_PARAMS);
+/* 16B110 */ bool gm_8016B110(void);
+/* 16B124 */ bool gm_8016B124(void);
 /* 16B138 */ UNK_RET fn_8016B138(UNK_PARAMS);
 /* 16B14C */ bool gm_8016B14C(void);
 /* 16B168 */ bool gm_8016B168(void);
@@ -268,9 +265,9 @@
 /* 16B274 */ UNK_RET gm_8016B274(UNK_PARAMS);
 /* 16B2C8 */ UNK_RET gm_8016B2C8(UNK_PARAMS);
 /* 16B328 */ UNK_RET gm_8016B328(UNK_PARAMS);
-/* 16B33C */ UNK_RET gm_8016B33C(UNK_PARAMS);
-/* 16B350 */ UNK_RET gm_8016B350(UNK_PARAMS);
-/* 16B364 */ UNK_RET gm_8016B364(UNK_PARAMS);
+/* 16B33C */ void gm_8016B33C(s32 arg0);
+/* 16B350 */ void gm_8016B350(s32 arg0);
+/* 16B364 */ void gm_8016B364(s32 arg0);
 /* 16B378 */ void gm_8016B378(s8 arg0);
 /* 16B388 */ UNK_RET fn_8016B388(UNK_PARAMS);
 /* 16B3A0 */ bool gm_8016B3A0(void);
@@ -553,7 +550,7 @@
 /* 17CE34 */ UNK_RET gm_8017CE34(UNK_PARAMS);
 /* 17D7AC */ UNK_RET gm_8017D7AC(UNK_PARAMS);
 /* 17D9C0 */ UNK_RET fn_8017D9C0(UNK_PARAMS);
-/* 17DB58 */ UNK_RET gm_8017DB58(UNK_PARAMS);
+/* 17DB58 */ void gm_8017DB58(void* arg0);
 /* 17DB6C */ u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, ssize_t index);
 /* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, ssize_t index);
 /* 17DB88 */ UNK_RET gm_8017DB88(UNK_PARAMS);
@@ -627,7 +624,7 @@
 /* 181598 */ UNK_RET fn_80181598(UNK_PARAMS);
 /* 181708 */ UNK_RET fn_80181708(UNK_PARAMS);
 /* 181998 */ UNK_RET gm_80181998(UNK_PARAMS);
-/* 181A00 */ UNK_RET gm_80181A00(UNK_PARAMS);
+/* 181A00 */ void gm_80181A00(s32 arg0, s32 arg1);
 /* 181A24 */ u16 gm_80181A24(void);
 /* 181A34 */ s32 gm_80181A34(void);
 /* 181A44 */ UNK_RET gm_80181A44(UNK_PARAMS);
@@ -730,7 +727,7 @@
 /* 18F00C */ UNK_RET fn_8018F00C(UNK_PARAMS);
 /* 18F1B0 */ UNK_RET gm_8018F1B0(UNK_PARAMS);
 /* 18F310 */ UNK_RET fn_8018F310(UNK_PARAMS);
-/* 18F3BC */ UNK_RET fn_8018F3BC(UNK_PARAMS);
+// /* 18F3BC */ UNK_RET fn_8018F3BC(UNK_PARAMS);
 /* 18F3D0 */ UNK_RET fn_8018F3D0(UNK_PARAMS);
 /* 18F410 */ UNK_RET fn_8018F410(UNK_PARAMS);
 /* 18F4A0 */ UNK_RET fn_8018F4A0(UNK_PARAMS);
@@ -883,11 +880,5 @@
 /* 1A10FC */ UNK_RET gm_801A10FC(UNK_PARAMS);
 /* 1A1134 */ UNK_RET fn_801A1134(UNK_PARAMS);
 /* 473A18 */ extern UNK_T gm_80473A18;
-
-/// @todo Move to C file
-
-/* 1736DC */ static UNK_T gm_801736DC(void);
-// /* 166A8C */ static f32 fn_80166A8C(f32* arg0);
-/* 169364 */ static UNK_T fn_80169364(void);
 
 #endif

@@ -2,11 +2,12 @@
 #define GALE01_0C0658
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "ft/types.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 /* 0C0658 */ ftDeviceUnk2* ftCo_800C0658(Fighter* fp);

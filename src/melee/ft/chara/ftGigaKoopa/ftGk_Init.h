@@ -2,6 +2,7 @@
 #define GALE01_14F640
 
 #include <platform.h>
+
 #include "ftKoopa/forward.h"
 #include <baselib/forward.h>
 

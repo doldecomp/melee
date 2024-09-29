@@ -2,6 +2,7 @@
 #define GALE01_014E24
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 014FC8 */ HSD_Archive* lbMemory_80014FC8(s32, s32);

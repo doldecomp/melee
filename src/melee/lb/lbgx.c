@@ -1,8 +1,9 @@
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "lbgx.h"
 
-#include <placeholder.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLight.h>

@@ -37,7 +37,7 @@ void it_802C01AC(Item_GObj* gobj, Vec3* pos, ItemKind kind, float facing_dir)
     spawn_item.vel.x = spawn_item.vel.y = spawn_item.vel.z = 0;
     spawn_item.x0_parent_gobj = gobj;
     spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.bits.b0 = true;
+    spawn_item.x44_flag.b0 = true;
     spawn_item.x40 = 0;
     {
         u8 _[8] = { 0 };

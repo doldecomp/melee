@@ -70,10 +70,13 @@ struct sceneData {
 struct gm_80479D58_t {
     /* 0x00 */ struct gm_80479D58_t* unk_0;
     /* 0x04 */ char pad_4[4];
-    /* 0x08 */ s32 unk_8; /* inferred */
-    /* 0x0C */ char pad_C[4];
+    /* 0x08 */ s32 unk_8;
+    /* 0x0C */ s32 unk_C; /* inferred */
     /* 0x10 */ u8 unk_10;
-    /* 0x11 */ char pad_11[0x2F]; /* maybe part of unk_10[0x30]? */
+    /* 0x11 */ char pad_11[3]; /* maybe part of unk_10[4]? */
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ char pad_1C[0x24]; /* maybe part of unk_18[0xA]? */
 }; /* size = 0x40 */
 STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
 
@@ -83,11 +86,35 @@ struct gm_8049E548_t {
     /* 0x09 */ u8 unk_9;
     /* 0x0A */ s8 unk_A;
     /* 0x0B */ char pad_B[1];
-    /* 0x0C */ s16 unk_C;
+    /* 0x0C */ u16 unk_C;
     /* 0x0E */ s8 unk_E; /* inferred */
     /* 0x0F */ char pad_F[1];
 }; /* size = 0x10 */
 STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
+
+struct fn_801BA1B4_arg0_t {
+    char pad_0[0x2];
+    /* +2:0 */ u8 x2_b0 : 1;
+    /* +2:1 */ u8 x2_b1 : 1;
+    /* +2:2 */ u8 x2_b2 : 1;
+    /* +2:3 */ u8 x2_b3 : 1;
+    /* +2:4 */ u8 x2_b4 : 1;
+    /* +2:5 */ u8 x2_b5 : 1;
+    /* +2:6 */ u8 x2_b6 : 1;
+    /* +2:7 */ u8 x2_b7 : 1;
+};
+
+struct fn_801BA3B4_arg0_t {
+    char pad_0[0xC];
+    /* +C:0 */ u8 xC_b0 : 1;
+    /* +C:1 */ u8 xC_b1 : 1;
+    /* +C:2 */ u8 xC_b2 : 1;
+    /* +C:3 */ u8 xC_b3 : 1;
+    /* +C:4 */ u8 xC_b4 : 1;
+    /* +C:5 */ u8 xC_b5 : 1;
+    /* +C:6 */ u8 xC_b6 : 1;
+    /* +C:7 */ u8 xC_b7 : 1;
+};
 
 /* 1A3F48 */ static void gm_801A3F48(MinorScene*);
 /* 1A4014 */ static void gm_801A4014(MajorScene* scene);
@@ -115,6 +142,8 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B6320 */ static UNK_T gm_801B6320(void);
 /* 1B8C5C */ static void fn_801B8C5C(UNK_T);
 /* 1B9FB8 */ static void fn_801B9FB8(void* arg0);
+/* 1BA1B4 */ static void fn_801BA1B4(struct fn_801BA1B4_arg0_t*);
+/* 1BA3B4 */ void fn_801BA3B4(struct fn_801BA3B4_arg0_t* arg0);
 /* 1BA5B4 */ static void fn_801BA5B4(UNK_T);
 /* 1BA7AC */ static void fn_801BA7AC(UNK_T);
 /* 1BBFE4 */ static void gm_801BBFE4(void);
@@ -123,6 +152,7 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1BEFD0 */ static u8 gm_801BEFD0(void);
 /* 1BEFE0 */ static void gm_801BEFE0(s8 arg0);
 /* 1BF684 */ static void gm_801BF684(s16 arg0);
+/* 1BF694 */ static u8 gm_801BF694(void);
 /* 2A3EF4 */ static void gm_801A3EF4(void);
 /* 3DA920 */ static MajorScene gm_803DA920;
 /* 3DACA4 */ static MajorScene gm_803DACA4;

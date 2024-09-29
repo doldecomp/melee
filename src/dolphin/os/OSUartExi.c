@@ -1,6 +1,6 @@
 #include <platform.h>
-
 #include <placeholder.h>
+
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSUartExi.h>
 

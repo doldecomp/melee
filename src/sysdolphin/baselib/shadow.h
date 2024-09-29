@@ -2,6 +2,7 @@
 #define _shadow_h_
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 #include "baselib/cobj.h"

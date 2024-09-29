@@ -54,7 +54,7 @@ HSD_GObj* it_80294DC0(Vec3* pos)
     spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = 0;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = 1;
+    spawn.x44_flag.b0 = 1;
     spawn.x40 = 0;
     item_gobj = Item_80268B5C(&spawn);
     if (item_gobj != NULL) {

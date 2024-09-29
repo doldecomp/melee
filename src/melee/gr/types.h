@@ -2,6 +2,8 @@
 #define MELEE_GR_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "gr/forward.h" // IWYU pragma: export
 #include "it/forward.h"
 #include "lb/forward.h"
@@ -9,7 +11,6 @@
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
-#include <placeholder.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 

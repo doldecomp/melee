@@ -1,9 +1,9 @@
 #ifndef GALE01_0BFE6C
 #define GALE01_0BFE6C
 
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 0BFE6C */ void ftCo_Sleep_Anim(ftCo_GObj* gobj);
 /* 0BFE70 */ void ftCo_Sleep_IASA(ftCo_GObj* gobj);

@@ -1,9 +1,9 @@
 #ifndef GALE01_0CF138
 #define GALE01_0CF138
 
-#include "ft/forward.h"
-
 #include <placeholder.h>
+
+#include "ft/forward.h"
 
 /* 0CF138 */ float ftCo_CalcYScaledKnockback(float*, float, float, float);
 /* 0CF6E8 */ UNK_RET ftCo_800CF6E8(UNK_PARAMS);

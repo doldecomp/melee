@@ -1,5 +1,4 @@
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 2B45E8 */ static bool it_802B45E8(void);

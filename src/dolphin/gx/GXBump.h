@@ -2,7 +2,6 @@
 #define DOLPHIN_GX_GXBUMP_H
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 void __GXUpdateBPMask(void);

@@ -2,7 +2,6 @@
 #define GALE01_014ABC
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 014ABC */ UNK_RET lbArq_80014ABC(UNK_PARAMS);

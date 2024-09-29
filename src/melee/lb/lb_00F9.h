@@ -2,12 +2,12 @@
 #define GALE01_00F9F8
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
 /* 00FA94 */ UNK_RET lb_8000FA94(UNK_PARAMS);
@@ -40,7 +40,7 @@
 /* 013614 */ UNK_RET fn_80013614(UNK_PARAMS);
 /* 0138AC */ UNK_RET fn_800138AC(UNK_PARAMS);
 /* 0138CC */ void lb_800138CC(HSD_GObj* gobj, int arg1);
-/* 0138D8 */ UNK_RET lb_800138D8(UNK_PARAMS);
+/* 0138D8 */ void lb_800138D8(HSD_GObj* gobj, s8 arg1);
 /* 0138EC */ UNK_RET lb_800138EC(UNK_PARAMS);
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
 /* 013BB8 */ UNK_RET lb_80013BB8(UNK_PARAMS);

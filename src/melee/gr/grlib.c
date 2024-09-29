@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "grlib.h"
 
 #include "grbigblue.h"
@@ -16,7 +18,6 @@
 #include "sc/types.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/aobj.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>

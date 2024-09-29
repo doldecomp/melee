@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMARS_TYPES_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 
 #include "lb/types.h"

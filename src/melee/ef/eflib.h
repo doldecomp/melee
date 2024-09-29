@@ -2,10 +2,10 @@
 #define GALE01_05B4B8
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ef/forward.h"
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 05B4B8 */ void efLib_8005B4B8(void);
 /* 05B880 */ void efLib_DestroyAll(HSD_GObj* gobj);

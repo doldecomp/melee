@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftSeak/forward.h"
 
@@ -11,7 +13,6 @@
 #include "lb/lb_00B0.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);

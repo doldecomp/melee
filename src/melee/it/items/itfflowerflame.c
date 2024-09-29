@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "itfflowerflame.h"
 
 #include "it/inlines.h"
@@ -5,8 +7,6 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-
-#include <placeholder.h>
 
 /* 29AA1C */ static void it_8029AA1C(HSD_GObj*);
 /* 29AA6C */ static bool it_8029AA6C(Item_GObj*);
@@ -45,7 +45,7 @@ HSD_GObj* it_8029A748(Item_GObj* arg0, Vec3* arg1, Fighter_Part arg2, f32 arg3)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
     spawn.x0_parent_gobj = arg0;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0;
 
     {

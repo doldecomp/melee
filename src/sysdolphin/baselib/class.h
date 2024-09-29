@@ -2,6 +2,7 @@
 #define _class_h_
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*) o)

@@ -2,9 +2,9 @@
 #define GALE01_1D1018
 
 #include <platform.h>
-#include <baselib/forward.h>
-
 #include <placeholder.h>
+
+#include <baselib/forward.h>
 
 /* 1D1018 */ UNK_RET grStadium_801D1018(UNK_PARAMS);
 /* 1D101C */ UNK_RET grStadium_801D101C(UNK_PARAMS);

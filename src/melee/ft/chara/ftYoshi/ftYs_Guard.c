@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
@@ -20,8 +22,6 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "ftYoshi/types.h"
-
-#include <placeholder.h>
 
 char ftYs_Init_DatFilename[] = "PlYs.dat";
 char ftYs_Init_DataName[] = "ftDataYoshi";

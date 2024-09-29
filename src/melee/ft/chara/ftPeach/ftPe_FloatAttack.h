@@ -2,6 +2,7 @@
 #define GALE01_11BF88
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 11BE80 */ bool ftPe_8011BE80(HSD_GObj* gobj);

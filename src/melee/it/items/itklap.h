@@ -1,9 +1,9 @@
 #ifndef GALE01_2E1820
 #define GALE01_2E1820
 
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /* 2E1820 */ UNK_RET it_802E1820(UNK_PARAMS);
 /* 2E1874 */ UNK_RET it_802E1874(UNK_PARAMS);

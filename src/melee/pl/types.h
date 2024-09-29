@@ -2,7 +2,6 @@
 #define MELEE_PL_TYPES_H
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
@@ -20,7 +19,7 @@ struct plAllocInfo2 {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    } bits;
+    };
 };
 
 struct pl_800386D8_t {

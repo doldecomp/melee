@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftYoshi/forward.h"

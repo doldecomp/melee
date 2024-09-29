@@ -1,7 +1,7 @@
 #include <platform.h>
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /* 29A5F8 */ static bool it_8029A5F8(void);
 

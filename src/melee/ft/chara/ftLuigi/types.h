@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTLUIGI_TYPES_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 
 struct ftLuigi_FighterVars {

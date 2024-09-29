@@ -2,6 +2,7 @@
 #define _AXDRIVER_H_
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 #define SMSTATE_MASK 0xC0000000

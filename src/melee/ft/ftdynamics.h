@@ -2,6 +2,7 @@
 #define GALE01_09CB40
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"

@@ -1,6 +1,8 @@
 /// @file
 /// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/items/forward.h"
 
 #include "itsword.h"
@@ -17,7 +19,6 @@
 #include "it/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -60,7 +61,7 @@ Item_GObj* itSword_Spawn(Vec3* pos)
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0;
     {
         Item_GObj* gobj = Item_80268B5C(&spawn);

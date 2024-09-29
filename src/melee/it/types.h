@@ -2,6 +2,8 @@
 #define MELEE_IT_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "cm/forward.h"
 #include "it/forward.h" // IWYU pragma: export
 #include "it/items/forward.h"
@@ -15,7 +17,6 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 
@@ -28,7 +29,7 @@ struct CameraBoxFlags {
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
-    } bits;
+    };
 };
 
 struct flag32 {

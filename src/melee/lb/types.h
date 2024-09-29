@@ -2,10 +2,11 @@
 #define MELEE_LB_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "lb/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 struct DynamicsData {
@@ -181,7 +182,7 @@ typedef struct _ECBFlagStruct {
             u8 b5 : 1;
             u8 b6 : 1;
             u8 b7 : 1;
-        } bits;
+        };
         u8 raw;
     };
 } ECBFlagStruct;
@@ -302,6 +303,14 @@ struct PreloadCache {
     s32 persistent_heap;
     int preloaded;
     UNK_T x974;
+};
+
+struct lb_800138D8_t {
+    /*  +0 */ char pad_0[0x11];
+    /* +11 */ s8 x11;
+    /* +12 */ s8 x12;
+    /* +13 */ char pad_13[0x18 - 0x13];
+    /* +18 */ int x18;
 };
 
 #endif

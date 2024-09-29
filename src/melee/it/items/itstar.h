@@ -2,6 +2,7 @@
 #define GALE01_284644
 
 #include <platform.h>
+
 #include "it/forward.h"
 #include <baselib/forward.h>
 

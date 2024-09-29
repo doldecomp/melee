@@ -1,13 +1,10 @@
-#include "db_2253__static.h"
+#include "db_2253.static.h"
 
+#include <common_structs.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/controller.h>
 #include <MSL/trigf.h>
-
-/* 4D6B50 */ static IntVec2 lbl_804D6B50;
-/* 453004 */ extern UNK_T cm_80453004;
-/* 4D6B5C */ extern s8 lbl_804D6B5C;
 
 /// #db_80225374
 
@@ -29,11 +26,20 @@
 
 /// #fn_80225A54
 
-/// #db_80225B0C
+u32 db_80225B0C(void)
+{
+    return lbl_8049FAA0.x20_b0;
+}
 
-/// #db_80225B20
+u32 db_80225B20(void)
+{
+    return lbl_8049FAA0.x20_b1;
+}
 
-/// #db_80225B34
+u32 db_80225B34(void)
+{
+    return lbl_8049FAA0.x20_b2;
+}
 
 /// #fn_80225B48
 
@@ -52,9 +58,15 @@ s32 db_80225D1C(void)
     return lbl_8049FAA0.unk_14;
 }
 
-/// #db_80225D2C
+void db_80225D2C(void)
+{
+    lbl_8049FAA0.unk_8 = 0;
+}
 
-/// #db_80225D40
+void db_80225D40(void)
+{
+    lbl_8049FAA0.unk_8 = 1;
+}
 
 s32 db_80225D54(HSD_ObjAllocUnk4* arg0)
 {
@@ -106,7 +118,16 @@ void fn_80226E00(void)
 
 /// #fn_8022713C
 
-/// #fn_80227174
+extern s32 lbl_804D6B58;
+extern s8 lbl_804D6B5C;
+extern s8 lbl_804D6B5D;
+
+void fn_80227174(void)
+{
+    lbl_804D6B58 = 0;
+    lbl_804D6B5C = 0;
+    lbl_804D6B5D = 0;
+}
 
 /// #fn_80227188
 
@@ -238,7 +259,10 @@ void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 
 /// #fn_8022873C
 
-/// #fn_802287C4
+void fn_802287C4(void)
+{
+    lbl_804D6B8C.b0 = false;
+}
 
 /// #fn_802287D8
 

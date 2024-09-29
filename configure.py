@@ -17,15 +17,8 @@ import sys
 from pathlib import Path
 from typing import Iterator, List, Optional
 
-from tools.project import (
-    Library,
-    Object,
-    ProgressCategory,
-    ProjectConfig,
-    calculate_progress,
-    generate_build,
-    is_windows,
-)
+from tools.project import (Library, Object, ProgressCategory, ProjectConfig,
+                           calculate_progress, generate_build, is_windows)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -253,6 +246,21 @@ cflags_runtime = [
     "-inline auto",
 ]
 
+# MetroTRK flags
+cflags_trk = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-common off",
+    "-sdata 0",
+    "-sdata2 0",
+    "-fp hard",
+    "-enum int",
+    "-char unsigned",
+    "-inline deferred",
+    "-rostr",
+]
+
 includes_base = ["src"]
 
 system_includes_base = [
@@ -388,6 +396,16 @@ def RuntimeLib(lib_name: str, objects: Objects) -> Library:
         lib_name,
         objects,
         cflags=cflags_runtime,
+        fix_epilogue=False,
+        category="runtime",
+    )
+
+
+def TRKLib(lib_name: str, objects: Objects) -> Library:
+    return Lib(
+        lib_name,
+        objects,
+        cflags=cflags_trk,
         fix_epilogue=False,
         category="runtime",
     )
@@ -1206,7 +1224,7 @@ config.libs = [
             Object(NonMatching, "MSL/math.c"),
         ],
     ),
-    RuntimeLib(
+    TRKLib(
         "MetroTRK (Metrowerks Target Resident Kernel)",
         [
             Object(NonMatching, "MetroTRK/mainloop.c"),

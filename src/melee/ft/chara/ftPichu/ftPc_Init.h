@@ -2,6 +2,7 @@
 #define GALE01_149E34
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "ftPikachu/forward.h"
 #include <baselib/forward.h>

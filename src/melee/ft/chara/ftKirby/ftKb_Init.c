@@ -1,9 +1,6 @@
-#include "forward.h"
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include <baselib/forward.h>
+#include <placeholder.h>
 
-#include "ftKb_Init.h"
+#include "ftKb_Init.static.h"
 
 #include "types.h"
 
@@ -36,18 +33,9 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-
-/* 0F6178 */ static void fn_800F6178(HSD_GObj*);
-/* 0F6210 */ static void fn_800F6210(HSD_GObj*);
-/* 10B2E8 */ static void fn_8010B2E8(HSD_GObj*);
-/* 10C344 */ static void fn_8010C344(HSD_GObj*);
-/* 10C44C */ static void fn_8010C44C(HSD_GObj*);
-/* 10CD88 */ static void fn_8010CD88(HSD_GObj*);
-/* 10CFB0 */ static void fn_8010CFB0(HSD_GObj*);
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
@@ -3711,7 +3699,12 @@ void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F5874
 
-/// #ftKb_SpecialN_800F5898
+HSD_Joint* ftKb_SpecialN_800F5898(ftKb_GObj* gobj, int arg1)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftData* ca = fp->ft_data;
+    return M2C_FIELD(&ca->x48_items[0], HSD_Joint**, 0x10);
+}
 
 /// #ftKb_SpecialN_800F58AC
 
@@ -5167,7 +5160,10 @@ f32 ftKb_SpecialNYs_801092CC(ftKb_GObj* gobj)
 
 /// #ftKb_SpecialNYs_80109380
 
-/// #ftKb_SpecialNYs_801093A0
+ftDynamics* ftKb_SpecialNYs_801093A0(ftKb_GObj* gobj)
+{
+    return ft_80459B88.hats[FTKIND_SAMUS]->hat_dynamics[0];
+}
 
 /// #ftKb_SpecialNYs_801093B4
 
@@ -5299,7 +5295,12 @@ void ftCo_KirbyYoshiEgg_IASA(ftKb_GObj* gobj) {}
 
 /// #fn_8010B1F4
 
-/// #fn_8010B2E8
+void fn_8010B2E8(ftKb_GObj* gobj)
+{
+    ftKb_Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = 0;
+    fp->mv.kb.specialn_ms.cur_frame = 0;
+}
 
 void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 {
@@ -5822,14 +5823,15 @@ void fn_8010CD88(HSD_GObj* gobj)
 
 /// #ftKb_SpecialNGw_8010D188
 
+/// #ftGameWatch_SpecialN_SetVars with callback arg
 inline void setGwVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[2] = 0;
-    fp->mv.kb.specialn_gw.x0 = 0;
-    fp->mv.kb.specialn_gw.x4 = 0;
+    fp->mv.kb.specialn_gw.isChefLoopDisable = false;
+    fp->mv.kb.specialn_gw.maxSausage = 0;
     fp->accessory4_cb = fn_8010CFB0;
 }
 

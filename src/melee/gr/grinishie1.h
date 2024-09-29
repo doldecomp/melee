@@ -2,7 +2,6 @@
 #define GALE01_1FA908
 
 #include <platform.h>
-
 #include <placeholder.h>
 
 /* 1FA908 */ UNK_RET grInishie1_801FA908(UNK_PARAMS);

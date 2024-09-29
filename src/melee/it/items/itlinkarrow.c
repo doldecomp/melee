@@ -144,7 +144,7 @@ HSD_GObj* it_802A83E0(f32 facing_dir, Fighter_GObj* arg1, Vec3* arg2,
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = arg1;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0;
     gobj = Item_80268B18(&spawn);
 
@@ -749,7 +749,7 @@ int it_802A96E4(Item_GObj* gobj)
             it_802756D0((HSD_GObj*) gobj);
         }
         it_8026BB44(gobj);
-        item->xDCF_flag.bits.b2 = 1;
+        item->xDCF_flag.b2 = 1;
         item->xDD4_itemVar.linkarrow.xF0 += 1;
         if (item->xDD4_itemVar.linkarrow.xF0 > 0x12C) {
             return 1;

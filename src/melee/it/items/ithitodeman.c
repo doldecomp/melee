@@ -1,7 +1,9 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/forward.h"
 
-#include <placeholder.h>
+#include "it/inlines.h"
 
 /// #it_802D42C4
 
@@ -51,7 +53,11 @@ void it_802D4B50(void) {}
 
 /// #it_802D4DE0
 
-/// #it_802D4EF4
+bool it_802D4EF4(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDB4_itcmd_var2 = 1;
+    return false;
+}
 
 /// #it_802D4F08
 

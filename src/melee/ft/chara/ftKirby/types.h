@@ -2,15 +2,19 @@
 #define MELEE_FT_CHARA_FTKIRBY_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
+#include "ftGameWatch/types.h"
+#include "ftMars/types.h"
+#include "ftNess/types.h"
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {
@@ -381,19 +385,12 @@ struct ftKb_DatAttrs {
 STATIC_ASSERT(sizeof(struct ftKb_DatAttrs) == 0x434);
 
 union ftKb_MotionVars {
-    struct ftKb_SpecialNNs_Vars {
-        /* fp+2340 */ int frames_to_loop_charge_ground;
-        /* fp+2344 */ int frames_to_loop_charge_air;
-        /* fp+2348 */ int falling_acceleration_delay;
-        /* fp+234C */ int charge_release_delay;
-    } specialn_ns;
+    struct ftGameWatch_SpecialNVars specialn_gw;
+    struct ftMars_SpecialNVars specialn_ms;
+    struct ftNess_SpecialNVars specialn_ns;
     struct ftKb_SpecialNPe_Vars {
         /* fp+2340 */ int facing_dir;
     } specialn_pe;
-    struct ftKb_SpecialNGw_Vars {
-        /* fp+2340 */ UNK_T x0;
-        /* fp+2344 */ UNK_T x4;
-    } specialn_gw;
 };
 
 #endif

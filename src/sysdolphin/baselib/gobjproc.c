@@ -1,10 +1,10 @@
+#include <placeholder.h>
+
 #include "gobjproc.h"
 
 #include "debug.h"
 #include "gobj.h"
 #include "objalloc.h"
-
-#include <placeholder.h>
 
 extern HSD_ObjAllocData gobjproc_alloc_data;
 

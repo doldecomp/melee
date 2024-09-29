@@ -1,4 +1,5 @@
 #include <placeholder.h>
+
 #include <dolphin/os/OSReboot.h>
 
 static bool Prepared;

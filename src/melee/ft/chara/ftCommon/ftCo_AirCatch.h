@@ -2,10 +2,10 @@
 #define GALE01_0C3A14
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
-
-#include <placeholder.h>
 
 /* 0C3A14 */ bool ftCo_800C3A14(ftCo_GObj* gobj);
 /* 0C3B10 */ bool ftCo_800C3B10(ftCo_GObj* gobj);

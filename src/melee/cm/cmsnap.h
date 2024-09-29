@@ -2,6 +2,7 @@
 #define _CMSNAP_H_
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 #include <baselib/gobj.h>

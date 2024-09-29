@@ -2,10 +2,10 @@
 #define GALE01_2FC9B4
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "gr/forward.h"
 #include "un/forward.h"
-
-#include <placeholder.h>
 
 /* 2FC9B4 */ UNK_RET un_802FC9B4(UNK_PARAMS);
 /* 2FCAA4 */ UNK_RET fn_802FCAA4(UNK_PARAMS);

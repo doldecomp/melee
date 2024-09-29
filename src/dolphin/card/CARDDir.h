@@ -2,6 +2,7 @@
 #define DOLPHIN_CARD_CARDDIR_H
 
 #include <platform.h>
+
 #include <dolphin/card/forward.h>
 
 #include <dolphin/card.h>

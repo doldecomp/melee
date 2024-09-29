@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
@@ -21,7 +23,6 @@
 #include "it/items/itlikelike.h"
 #include "pl/player.h"
 
-#include <placeholder.h>
 #include <baselib/dobj.h>
 #include <baselib/jobj.h>
 

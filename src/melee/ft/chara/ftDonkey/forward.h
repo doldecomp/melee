@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTDONKEY_FORWARD_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 

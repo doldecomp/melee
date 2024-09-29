@@ -2,6 +2,7 @@
 #define INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 #include <dolphin/mtx/forward.h>
 

@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "robj.h"
 
 #include "aobj.h"
@@ -12,7 +14,6 @@
 
 #include <__mem.h>
 #include <math.h>
-#include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>

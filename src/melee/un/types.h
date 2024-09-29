@@ -2,6 +2,7 @@
 #define MELEE_UN_TYPES_H
 
 #include <platform.h>
+
 #include "un/forward.h" // IWYU pragma: export
 
 struct un_80302AB0_t {

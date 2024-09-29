@@ -2,10 +2,10 @@
 #define MELEE_IT_ITEMS_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "it/items/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /// @todo Size unknown.
 struct ItemStateTable {

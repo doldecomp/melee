@@ -2,11 +2,11 @@
 #define GALE01_0881D8
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 
 #include "ft/types.h"
-
-#include <placeholder.h>
 
 /* 0881D8 */ void ft_800881D8(Fighter* fp, int, int, int);
 /* 088328 */ void ft_80088328(Fighter* fp, int, int, int);

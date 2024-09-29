@@ -2,6 +2,7 @@
 #define DOLPHIN_GX_GXTEV_H
 
 #include <platform.h>
+
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/__types.h>

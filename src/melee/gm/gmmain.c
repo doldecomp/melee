@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
@@ -18,7 +20,6 @@
 #include "lb/lbsnap.h"
 #include "lb/lbtime.h"
 
-#include <placeholder.h>
 #include <stddef.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd/dvd.h>

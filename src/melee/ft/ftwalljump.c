@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "ftCommon/forward.h"
 
 #include "ftwalljump.h"

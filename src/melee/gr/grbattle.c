@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "lb/forward.h"
 
 #include "gr/grbattle.h"

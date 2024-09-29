@@ -1,9 +1,9 @@
 #ifndef MELEE_MP_TYPES_H
 #define MELEE_MP_TYPES_H
 
-#include "mp/forward.h" // IWYU pragma: export
-
 #include <placeholder.h>
+
+#include "mp/forward.h" // IWYU pragma: export
 
 struct mp_UnkStruct0 {
     /*  +0 */ mp_UnkStruct0* next;

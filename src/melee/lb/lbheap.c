@@ -1,31 +1,35 @@
-#include "lbmemory.h"
+#include "lbheap.static.h"
 
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/archive.h>
 #include <baselib/initialize.h>
 #include <baselib/memory.h>
 
-int lbHeap_80431FA0[46];
-
 void lbHeap_800158D0(int arg0, int arg1)
 {
-    lbHeap_80431FA0[arg0 * 7 + 9] = arg1;
+    lbHeap_80431FA0.unk_10[arg0].unk_24 = arg1;
 }
 
-int lbHeap_800158E8(int arg0)
+s32 lbHeap_800158E8(s32 arg0)
 {
-    return lbHeap_80431FA0[arg0 * 7 + 9];
+    return lbHeap_80431FA0.unk_10[arg0].unk_24;
 }
 
-HSD_Archive* lbHeap_80015BD0(s32 arg0, s32 arg1)
+int lbHeap_80015BB8(int arg0)
+{
+    return lbHeap_80431FA0.unk_10[arg0].unk_28;
+}
+
+#if 0
+HSD_Archive* lbHeap_80015BD0(int arg0, int arg1)
 {
     HSD_Archive* var_r31;
     s32 temp_r29;
     s32 temp_r30;
     s32* temp_r31;
-    s32* temp_r4;
+    struct lbHeap_80431FA0_x0_t* temp_r4;
 
-    temp_r4 = ((s32*) lbHeap_80431FA0) + (arg0 * 0x1C);
+    temp_r4 = &lbHeap_80431FA0.x0[arg0];
     temp_r31 = temp_r4 + 0x10;
     temp_r30 = OSDisableInterrupts();
     if (*(temp_r4 + 0x28) == 0) {
@@ -46,3 +50,12 @@ HSD_Archive* lbHeap_80015BD0(s32 arg0, s32 arg1)
     OSRestoreInterrupts(temp_r30);
     return var_r31;
 }
+#endif
+
+/// #lbHeap_80015CA8
+
+/// #lbHeap_80015D6C
+
+/// #lbHeap_80015DF8
+
+/// #lbHeap_80015F3C

@@ -2,6 +2,7 @@
 #define GALE01_298168
 
 #include <platform.h>
+
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 

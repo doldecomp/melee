@@ -1,3 +1,5 @@
+#include <placeholder.h>
+
 #include "forward.h"
 #include "ftCommon/forward.h"
 #include "it/forward.h"
@@ -20,8 +22,6 @@
 #include "ftCommon/ftCo_ThrownKoopa.h"
 #include "ftKoopa/types.h"
 #include "it/it_26B1.h"
-
-#include <placeholder.h>
 
 MotionState ftKp_Init_MotionStateTable[ftKp_MS_SelfCount] = {
     {

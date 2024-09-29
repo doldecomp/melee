@@ -1,5 +1,7 @@
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCaptain/forward.h"
 #include <dolphin/mtx/forward.h>
 
@@ -20,7 +22,6 @@
 #include "ftCaptain/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 // /* literal */ float const ftCa_SpecialHi_804D9220 = 0.0F;
 // /* literal */ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;

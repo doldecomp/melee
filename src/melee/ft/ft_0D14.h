@@ -2,12 +2,12 @@
 #define GALE01_0D14E4
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 0D14E4 */ void ftCo_800D14E4(ftCo_GObj* gobj);
 /* 0D15D0 */ UNK_RET ftCo_800D15D0(UNK_PARAMS);

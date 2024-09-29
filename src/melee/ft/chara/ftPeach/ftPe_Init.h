@@ -2,6 +2,7 @@
 #define GALE01_11B51C
 
 #include <platform.h>
+
 #include "ftPeach/forward.h"
 #include <baselib/forward.h>
 

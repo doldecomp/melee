@@ -1,9 +1,9 @@
 #ifndef GALE01_091A2C
 #define GALE01_091A2C
 
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 091A2C */ bool ftCo_80091A2C(ftCo_GObj* gobj);
 /* 091A4C */ bool ftCo_80091A4C(ftCo_GObj* gobj);

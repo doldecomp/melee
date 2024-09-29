@@ -1,7 +1,7 @@
 #include <platform.h>
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /// #it_802E878C
 

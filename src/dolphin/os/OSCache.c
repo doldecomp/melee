@@ -1,6 +1,6 @@
 #include <platform.h>
-
 #include <placeholder.h>
+
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os.h>
 #include <dolphin/os/OSCache.h>

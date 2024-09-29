@@ -1,12 +1,12 @@
 #ifndef GALE01_0877F8
 #define GALE01_0877F8
 
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <placeholder.h>
 
 /* 0877F8 */ s32 ft_800877F8(Fighter_GObj*, s32);
 /* 087818 */ s32 ft_80087818(Fighter_GObj*, s32);

@@ -2,6 +2,7 @@
 #define GALE01_28E738
 
 #include <platform.h>
+
 #include "it/forward.h"
 
 #include "it/items/types.h"

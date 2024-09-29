@@ -28,7 +28,7 @@ HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     spawn_item.x0_parent_gobj = parent;
 
     spawn_item.x4_parent_gobj2 = spawn_item.x0_parent_gobj;
-    spawn_item.x44_flag.bits.b0 = true;
+    spawn_item.x44_flag.b0 = true;
     spawn_item.x40 = 0;
     gobj = Item_80268B18(&spawn_item);
     if (gobj != NULL) {

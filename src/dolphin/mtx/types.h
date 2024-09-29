@@ -2,6 +2,7 @@
 #define DOLPHIN_MTX_TYPES_H
 
 #include <platform.h>
+
 #include "dolphin/mtx/forward.h" // IWYU pragma: export
 #include <dolphin/mtx/forward.h>
 

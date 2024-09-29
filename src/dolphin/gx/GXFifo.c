@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include <dolphin/gx/forward.h>
 
 #include <dolphin/gx/__GXFifo.h>

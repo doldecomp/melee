@@ -2,11 +2,11 @@
 #define SYSDOLPHIN_BASELIB_TEXPDAG_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "baselib/forward.h"
 
 #include "baselib/texp.h"
-
-#include <placeholder.h>
 
 typedef struct HSD_TExpDag {
     struct _HSD_TETev* tev;

@@ -2,6 +2,7 @@
 #define SYSDOLPHIN_BASELIB_PSDISP_H
 
 #include <platform.h>
+
 #include <dolphin/gx/forward.h>
 
 #include "baselib/psstructs.h"

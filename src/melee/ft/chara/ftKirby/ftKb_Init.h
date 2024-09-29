@@ -2,14 +2,14 @@
 #define GALE01_0EE528
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <placeholder.h>
 
 /* 0EE528 */ void ftKb_Init_800EE528(void);
 /* 0EE5C0 */ void ftKb_Init_OnDeath(ftKb_GObj* gobj);
@@ -757,7 +757,7 @@
 /* 10933C */ void ftKb_SpecialNYs_8010933C(ftKb_GObj* gobj);
 /* 109354 */ void ftKb_SpecialNYs_80109354(ftKb_GObj* gobj);
 /* 109380 */ void ftKb_SpecialNYs_80109380(ftKb_GObj* gobj);
-/* 1093A0 */ void ftKb_SpecialNYs_801093A0(ftKb_GObj* gobj);
+/* 1093A0 */ ftDynamics* ftKb_SpecialNYs_801093A0(ftKb_GObj* gobj);
 /* 1093B4 */ void ftKb_SpecialNYs_801093B4(ftKb_GObj* gobj);
 /* 10941C */ void ftKb_SpecialNYs_8010941C(ftKb_GObj* gobj);
 /* 1094FC */ void ftKb_SpecialNYs_801094FC(ftKb_GObj* gobj);

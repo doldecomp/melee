@@ -2,9 +2,9 @@
 #define GALE01_2DC69C
 
 #include <platform.h>
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 /* 2DC69C */ UNK_RET it_802DC69C(UNK_PARAMS);
 /* 2DC774 */ UNK_RET it_802DC774(UNK_PARAMS);

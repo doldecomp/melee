@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include "ftCommon/forward.h"
 
 #include "ftMasterHand/ftMh_CaptureDamageMasterHand.h"
@@ -21,6 +22,6 @@ void ftMh_CaptureDamageMasterHand_80155C94(HSD_GObj* gobj)
                               0);
     fp->x221E_b0 = true;
     ftCommon_8007E2F4(fp, 511);
-    fp->x2220_flag.bits.b3 = true;
+    fp->x2220_flag.b3 = true;
     ftAnim_8006EBA4(gobj);
 }

@@ -2,6 +2,7 @@
 #define GALE01_225374
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "it/forward.h"
 
@@ -18,9 +19,9 @@
 /* 225754 */ UNK_RET db_80225754(UNK_PARAMS);
 /* 225A00 */ UNK_RET fn_80225A00(UNK_PARAMS);
 /* 225A54 */ UNK_RET fn_80225A54(UNK_PARAMS);
-/* 225B0C */ UNK_RET db_80225B0C(UNK_PARAMS);
-/* 225B20 */ UNK_T db_80225B20(void);
-/* 225B34 */ UNK_RET db_80225B34(UNK_PARAMS);
+/* 225B0C */ u32 db_80225B0C(void);
+/* 225B20 */ u32 db_80225B20(void);
+/* 225B34 */ u32 db_80225B34(void);
 /* 225B48 */ UNK_RET fn_80225B48(UNK_PARAMS);
 /* 225B9C */ UNK_RET fn_80225B9C(UNK_PARAMS);
 /* 225BF0 */ UNK_RET fn_80225BF0(UNK_PARAMS);

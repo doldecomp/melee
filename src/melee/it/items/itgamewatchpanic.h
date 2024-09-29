@@ -2,6 +2,7 @@
 #define GALE01_2C7D60
 
 #include <platform.h>
+
 #include "it/forward.h"
 
 #include "ft/types.h"

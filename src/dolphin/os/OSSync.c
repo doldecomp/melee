@@ -1,7 +1,7 @@
 #include <platform.h>
+#include <placeholder.h>
 
 #include <__mem.h>
-#include <placeholder.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSSync.h>
 #include <MetroTRK/intrinsics.h>

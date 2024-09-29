@@ -2,6 +2,8 @@
 #define MELEE_FT_CHARA_FTLINK_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "ftLink/forward.h" // IWYU pragma: export
 #include "it/forward.h"
@@ -10,7 +12,6 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 struct ftLk_DatAttrs {
     /* +0 */ float x0;

@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 #include "ftCaptain/forward.h" // IWYU pragma: export
 

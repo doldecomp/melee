@@ -2,9 +2,9 @@
 #define GALE01_08A9F8
 
 #include <platform.h>
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 08A9F8 */ bool ftCo_Attack1_CheckInput(ftCo_GObj* gobj);
 /* 08AC9C */ void ftCo_Attack11_Anim(ftCo_GObj* gobj);

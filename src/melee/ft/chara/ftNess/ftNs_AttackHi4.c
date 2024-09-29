@@ -126,7 +126,7 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
     push_ecb(&coll, ECBUnk);
     push_ecb(&coll, ECBUnk2);
 
-    coll.x34_flags.bits.b1234 = 5;
+    coll.x34_flags.b1234 = 5;
 
     mpColl_8004730C(&coll, &ecb); // EnvironmentCollisionCheck_NessYoYo
 

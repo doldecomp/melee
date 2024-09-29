@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCrazyHand/forward.h"
 #include <dolphin/mtx/forward.h>
 
@@ -14,7 +16,6 @@
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 /* static */ void ftCh_Init_801566B4(void);
 /* static */ void ftCh_Init_80156A5C(void);
@@ -664,8 +665,8 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     fp->x2229_b5_no_normal_motion = 1;
     fp->x2229_b6 = 1;
     fp->x2229_b7 = 1;
-    fp->x222A_flag.bits.b0 = 1;
-    fp->x222A_flag.bits.b1 = 1;
+    fp->x222A_flag.b0 = 1;
+    fp->x222A_flag.b1 = 1;
     fp->x2229_b3 = 1;
     fp->cur_pos.x = ftData_attr->x18;
     fp->cur_pos.y = ftData_attr->x1C;

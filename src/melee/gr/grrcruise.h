@@ -1,9 +1,9 @@
 #ifndef GALE01_1FF164
 #define GALE01_1FF164
 
-#include <dolphin/mtx/forward.h>
-
 #include <placeholder.h>
+
+#include <dolphin/mtx/forward.h>
 
 /* 1FF164 */ UNK_RET grRCruise_801FF164(UNK_PARAMS);
 /* 1FF168 */ UNK_RET grRCruise_801FF168(UNK_PARAMS);

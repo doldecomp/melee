@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 
 #include "ftMh_Init.h"
@@ -40,7 +42,6 @@
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 MotionState ftMh_Init_MotionStateTable[ftMh_MS_SelfCount] = {
     {
@@ -622,8 +623,8 @@ void ftMh_Init_OnLoad(HSD_GObj* gobj)
         fp->x2229_b5_no_normal_motion = true;
         fp->x2229_b6 = true;
         fp->x2229_b7 = true;
-        fp->x222A_flag.bits.b0 = true;
-        fp->x222A_flag.bits.b1 = true;
+        fp->x222A_flag.b0 = true;
+        fp->x222A_flag.b1 = true;
         fp->x2229_b3 = true;
         fp->cur_pos.x = ftData_attr->x30_pos2.x;
         fp->cur_pos.y = ftData_attr->x30_pos2.y;

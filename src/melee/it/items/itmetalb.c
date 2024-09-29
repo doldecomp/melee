@@ -20,7 +20,7 @@ ItemStateTable it_803F62C0[] = {
 void it_802953C8(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
-    it->xDCE_flag.bits.b7 = 0;
+    it->xDCE_flag.b7 = 0;
     it_80295498(gobj);
 }
 
@@ -112,8 +112,7 @@ bool it_802955E0(Item_GObj* gobj)
     PAD_STACK(8);
 
     if (go != NULL) {
-        if (go->classifier == HSD_GOBJ_CLASS_FIGHTER && it->xDCF_flag.bits.b6)
-        {
+        if (go->classifier == HSD_GOBJ_CLASS_FIGHTER && it->xDCF_flag.b6) {
             ftLib_800871A8(go, gobj);
             pl_8003E17C(ftLib_80086BE0(go) & 0xFF, ftLib_800874BC(go), gobj);
             return true;

@@ -1,5 +1,6 @@
-#include <__mem.h>
 #include <placeholder.h>
+
+#include <__mem.h>
 #include <dolphin/os/init/__start.h>
 #include <dolphin/os/OSReset.h>
 

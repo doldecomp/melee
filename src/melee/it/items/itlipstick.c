@@ -1,6 +1,6 @@
-#include <platform.h>
+#include "itlipstick.h"
 
-#include <placeholder.h>
+#include "it/inlines.h"
 
 /// #it_8029570C
 
@@ -32,7 +32,11 @@ bool it_80295864(void)
 
 /// #it_802958C8
 
-/// #it_802958F0
+bool it_802958F0(Item_GObj* gobj)
+{
+    GET_ITEM(gobj)->xDAC_itcmd_var0 = 1;
+    return false;
+}
 
 void it_80295904(void) {}
 

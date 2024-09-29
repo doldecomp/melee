@@ -2,6 +2,7 @@
 #define _PAD_H_
 
 #include <platform.h>
+
 #include <dolphin/pad/forward.h>
 
 #include <dolphin/os.h>

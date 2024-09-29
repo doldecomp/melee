@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 #include "lb/forward.h"
 #include <dolphin/gx/forward.h>
@@ -12,7 +14,6 @@
 #include "lb/types.h"
 
 #include <math.h>
-#include <placeholder.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>

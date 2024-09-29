@@ -1,9 +1,9 @@
 #ifndef GALE01_0CDD14
 #define GALE01_0CDD14
 
-#include "ftCommon/forward.h"
-
 #include <placeholder.h>
+
+#include "ftCommon/forward.h"
 
 /* 0CDD14 */ void ftCo_Attack_800CDD14(ftCo_GObj* gobj);
 /* 0CDDA0 */ void ftCo_800CDDA0(Fighter_GObj*);

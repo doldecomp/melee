@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ft/forward.h"
 
 #include "ftdynamics.h"
@@ -11,7 +13,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <placeholder.h>
 #include <stddef.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>

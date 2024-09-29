@@ -4,6 +4,7 @@
 #define GALE01_14AB48
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 14AB48 */ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj);

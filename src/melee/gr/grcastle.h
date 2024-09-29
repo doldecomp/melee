@@ -1,10 +1,10 @@
 #ifndef GALE01_1CD338
 #define GALE01_1CD338
 
+#include <placeholder.h>
+
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 1CD338 */ UNK_RET grCastle_801CD338(UNK_PARAMS);
 /* 1CD37C */ UNK_RET grCastle_801CD37C(UNK_PARAMS);

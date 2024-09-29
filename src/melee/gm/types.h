@@ -2,10 +2,11 @@
 #define MELEE_GM_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "gm/forward.h" // IWYU pragma: export
 
 #include <common_structs.h>
-#include <placeholder.h>
 
 struct gmm_x1CB0 {
     u8 padding_x0[0x10 - 0x0];
@@ -26,7 +27,7 @@ typedef union _UnkFlagStruct2 {
         u16 b789 : 3;
         u16 b10_to_12 : 3;
         u16 b13_to_15 : 3;
-    } bits;
+    };
     u16 flags;
 } UnkFlagStruct2;
 
@@ -86,50 +87,81 @@ struct GameRules {
 }; /* size = 0x18 */
 STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
 
-struct gmm_x1868 {
-    /* 0x1868 */ s32 x1868;
-    u8 padding_x1868[0x1A18 - 0x1868 - 4];
-    /* 0x1A18 */ s32 x1A18;
-    /* 0x1A1C */ s32 x1A1C;
-    /* 0x1A20 */ s32 x1A20;
-    /* 0x1A24 */ s32 x1A24;
-    /* 0x1A28 */ s32 x1A28;
-    /* 0x1A2C */ s32 x1A2C;
-    /* 0x1A30 */ s32 x1A30;
-    /* 0x1A34 */ s32 x1A34;
-    /* 0x1A38 */ s32 x1A38;
-    /* 0x1A3C */ s32 x1A3C;
-    /* 0x1A40 */ s32 x1A40;
-    /* 0x1A44 */ s32 x1A44;
-    /* 0x1A48 */ s32 x1A48;
-    /* 0x1A4C */ s32 x1A4C;
-    /* 0x1A50 */ s32 x1A50;
-    /* 0x1A54 */ s32 x1A54;
-    /* 0x1A58 */ s32 x1A58;
-    /* 0x1A5C */ s32 x1A5C;
-    /* 0x1A60 */ s32 x1A60;
-    /* 0x1A64 */ s32 x1A64;
-    /* 0x1A68 */ s64 x1A68;
-    /* 0x1A70 */ s32 x1A70[4];
-    u8 padding_x1A70[0x1B3C - 0x1A70 - 16];
-    /* 0x1B3C */ u8 x1B3C;
-    /* 0x1B40 */ u32 x1B40[3];
-    /* 0x1B4C */ u32 x1B4C[3];
-    /* 0x1B58 */ u32 x1B58[3];
-    u8 padding_x1B58[0x1B80 - 0x1B58 - 3 * 4];
-    /* 0x1B80 */ u32 x1B80[4];
-    u8 padding_x1B80[0x1C88 - 0x1B80 - 4 * 4];
-    /* 0x1C88 */ u32 x1C88[3];
-    u8 padding_x1C88[0x1CB0 - 0x1C88 - 3 * 4];
-    /* 0x1CB0 */ struct gmm_x1CB0 x1CB0;
-    /* 0x1CD0 */ s16 x1CD0;
-    /* 0x1CD2 */ s16 x1CD2;
-    /* 0x1CD4 */ s32 x1CD4;
-    u8 padding_x1CD4[0x1F2C - 0x1CD4 - 4];
-    /* 0x1F2C */ struct gmm_x1F2C x1F2C[25];
-    /* 0x2FF8 */ struct gmm_x2FF8 x2FF8[2];
-    //  u8 padding_x2FF8[0x7000 - 0x2FF8 - 0x1A4*19*2];
+struct gmm_retval_ED98 {
+    u8 padding[0xC];
+    s32 xC;
+    s32 x10;
+    s32 x14;
+    s32 x18;
+    s32 x1C;
 };
+
+struct gmm_retval_EDB0 {
+    s32 x0;
+    s32 x4;
+};
+
+struct gmm_retval_EDBC {
+    s32 x0;
+    s32 x4;
+    s32 x8;
+    u8 padding[0x4C - 0x8 - 4];
+    s32 x4C[4];
+    u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
+    s32 xB0[4];
+};
+
+struct gmm_x1868 {
+    /* 0x0000 */ s32 x1868;
+    /* 0x0004 */ u8 unk_4;
+    /* 0x0005 */ char pad_5[3]; /* maybe part of unk_4[4]? */
+    /* 0x0008 */ struct gmm_retval_ED98 unk_8;
+    /* 0x0028 */ struct gmm_retval_EDB0 unk_28;
+    /* 0x0030 */ struct gmm_retval_EDBC unk_30;
+    /* 0x00F0 */ char pad_F0[0xB8];
+    /* 0x01A8 */ u8 unk_1A8;      /* inferred */
+    /* 0x01A9 */ char pad_1A9[7]; /* maybe part of unk_1A8[8]? */
+    /* 0x01B0 */ s32 x1A18;
+    /* 0x01B4 */ s32 x1A1C;
+    /* 0x01B8 */ s32 x1A20;
+    /* 0x01BC */ s32 x1A24;
+    /* 0x01C0 */ s32 x1A28;
+    /* 0x01C4 */ s32 x1A2C;
+    /* 0x01C8 */ s32 x1A30;
+    /* 0x01CC */ s32 x1A34;
+    /* 0x01D0 */ s32 x1A38;
+    /* 0x01D4 */ s32 x1A3C;
+    /* 0x01D8 */ s32 x1A40;
+    /* 0x01DC */ s32 x1A44;
+    /* 0x01E0 */ s32 x1A48;
+    /* 0x01E4 */ s32 x1A4C;
+    /* 0x01E8 */ s32 x1A50;
+    /* 0x01EC */ s32 x1A54;
+    /* 0x01F0 */ s32 x1A58;
+    /* 0x01F4 */ s32 x1A5C;
+    /* 0x01F8 */ s32 x1A60;
+    /* 0x01FC */ s32 x1A64;
+    /* 0x0200 */ s64 x1A68;
+    /* 0x0208 */ s32 x1A70[4];
+    /* 0x0218 */ u8 padding_x1A70[0xBC];
+    /* 0x02D4 */ u8 x1B3C;
+    /* 0x02D5 */ char pad_2D5[3]; /* maybe part of x1B3C[4]? */
+    /* 0x02D8 */ u32 x1B40[3];
+    /* 0x02E4 */ u32 x1B4C[3];
+    /* 0x02F0 */ u32 x1B58[3];
+    /* 0x02FC */ u8 padding_x1B58[0x1C];
+    /* 0x0318 */ u32 x1B80[4];
+    /* 0x0328 */ u8 padding_x1B80[0xF8];
+    /* 0x0420 */ u32 x1C88[3];
+    /* 0x042C */ u8 padding_x1C88[0x1C];
+    /* 0x0448 */ struct gmm_x1CB0 x1CB0;
+    /* 0x0468 */ s16 x1CD0;
+    /* 0x046A */ s16 x1CD2;
+    /* 0x046C */ s32 x1CD4;
+    /* 0x0470 */ u8 padding_x1CD4[0x254];
+    /* 0x06C4 */ struct gmm_x1F2C x1F2C[0x19];
+    /* 0x1790 */ struct gmm_x2FF8 x2FF8[2];
+}; /* size = 0x55E8 */
 
 struct gmm_x0 {
     /* 0x0000 */ u8 language;
@@ -167,59 +199,87 @@ struct gmm_x0 {
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
 
-struct gmm_retval_ED98 {
-    u8 padding[0xC];
-    s32 xC;
-    s32 x10;
-    s32 x14;
-    s32 x18;
-    s32 x1C;
-};
-
-struct gmm_retval_EDBC {
-    s32 x0;
-    s32 x4;
-    s32 x8;
-    u8 padding[0x4C - 0x8 - 4];
-    s32 x4C[4];
-    u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
-    s32 xB0[4];
-};
-
-struct gmm_retval_EDB0 {
-    s32 x0;
-    s32 x4;
-};
-
-struct Placeholder_8016AE38_flags {
-    u8 unk80 : 1;
-    u8 unk40 : 1;
-    u8 unk20 : 1;
-    u8 unk10 : 1;
-    u8 unk8 : 1;
-    u8 unk4 : 1;
-    u8 unk2 : 1;
-    u8 unk1 : 1;
-};
-
 struct Placeholder_8016AE38_flags_2 {
-    u8 top3 : 3;
-    u8 bot5 : 5;
+    /* +0:0 */ u8 x0_b0_b2 : 3;
+    /* +0:3 */ u8 x0_b3 : 1;
+    /* +0:4 */ u8 x0_b4 : 1;
+    /* +0:5 */ u8 x0_b5 : 1;
+    /* +0:6 */ u8 x0_b6 : 1;
+    /* +0:7 */ u8 x0_b7 : 1;
+    union {
+        /* +1 */ u8 x1;
+        struct {
+            /* +1:0 */ u8 x1_b0 : 1;
+            /* +1:1 */ u8 x1_b1 : 1;
+            /* +1:2 */ u8 x1_b2 : 1;
+            /* +1:3 */ u8 x1_b3 : 1;
+            /* +1:4 */ u8 x1_b4 : 1;
+            /* +1:5 */ u8 x1_b5 : 1;
+            /* +1:6 */ u8 x1_b6 : 1;
+            /* +1:7 */ u8 x1_b7 : 1;
+        };
+    };
+    /* +2:0 */ u8 x2_b0 : 1;
+    /* +2:1 */ u8 x2_b1 : 1;
+    /* +2:2 */ u8 x2_b2 : 1;
+    /* +2:3 */ u8 x2_b3 : 1;
+    /* +2:4 */ u8 x2_b4 : 1;
+    /* +2:5 */ u8 x2_b5 : 1;
+    /* +2:6 */ u8 x2_b6 : 1;
+    /* +2:7 */ u8 x2_b7 : 1;
 };
 
-struct Placeholder_8016AE38_ret_val {
-    u32 unk0;
-    u32 unk4;
-    u32 unk8;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u32 padding[0x931 - 3];
-    Placeholder_8016AE38_flags_2 unk24C8;
-    u8 unk24C9;
-    Placeholder_8016AE38_flags unk24CA;
-};
+struct lbl_8046B6A0_t {
+    /* 0x0000 */ u32 unk_0;
+    /* 0x0004 */ u32 unk_4;
+    /* 0x0008 */ u32 unk_8;
+    /* 0x000C */ u8 unk_C;
+    /* 0x000D */ u8 unk_D;
+    /* 0x000E */ u8 unk_E;
+    /* 0x000F */ u8 unk_F;
+    /* 0x0010 */ s32 unk_10;
+    /* 0x0014 */ s32 unk_14;
+    /* 0x0018 */ char pad_18[0xC]; /* maybe part of unk_14[4]? */
+    /* 0x0024 */ s32 unk_24;
+    /* 0x0028 */ s32 unk_28;
+    /* 0x002C */ u16 unk_2C;
+    /* 0x002E */ char pad_2E[6]; /* maybe part of unk_2C[4]? */
+    /* 0x0034 */ f32 unk_34;
+    /* 0x0038 */ char pad_38[0x2490]; /* maybe part of unk_34[0x925]? */
+    /* 0x24C8 */ Placeholder_8016AE38_flags_2 unk24C8;
+    /* 0x24CB */ char pad_24CB[1];
+    /* 0x24CC:0 */ u8 unk_24CC_b0 : 1;
+    /* 0x24CC:1 */ u8 unk_24CC_b1 : 1;
+    /* 0x24CC:2 */ u8 unk_24CC_b2 : 1;
+    /* 0x24CC:3 */ u8 unk_24CC_b3 : 1;
+    /* 0x24CC:4 */ u8 unk_24CC_b4 : 1;
+    /* 0x24CC:5 */ u8 unk_24CC_b5 : 1;
+    /* 0x24CC:6 */ u8 unk_24CC_b6 : 1;
+    /* 0x24CC:7 */ u8 unk_24CC_b7 : 1;
+    /* 0x24CD:0 */ u8 unk_24CD_b0 : 1;
+    /* 0x24CD:1 */ u8 unk_24CD_b1 : 1;
+    /* 0x24CD:2 */ u8 unk_24CD_b2 : 1;
+    /* 0x24CD:3 */ u8 unk_24CD_b3 : 1;
+    /* 0x24CD:4 */ u8 unk_24CD_b4 : 1;
+    /* 0x24CD:5 */ u8 unk_24CD_b5 : 1;
+    /* 0x24CD:6 */ u8 unk_24CD_b6 : 1;
+    /* 0x24CD:7 */ u8 unk_24CD_b7 : 1;
+    /* 0x24CE */ u8 unk_24CE;
+    /* 0x24CF */ char pad_24CF[1];
+    /* 0x24D0 */ s8 unk_24D0;
+    /* 0x24D1 */ char pad_24D1[2]; /* maybe part of unk_24D0[3]? */
+    /* 0x24D3 */ s8 unk_24D3;
+    /* 0x24D4 */ s8 unk_24D4;
+    /* 0x24D5 */ char pad_24D5[1];
+    /* 0x24D6 */ u16 unk_24D6;
+    /* 0x24D8 */ char pad_24D8[0x10]; /* maybe part of unk_24D6[9]? */
+    /* 0x24E8 */ u64 unk_24E8;
+    /* 0x24F0 */ s32 unk_24F0;
+    /* 0x24F4 */ char pad_24F4[4];
+    /* 0x24F8 */ f32 unk_24F8;        /* inferred */
+    /* 0x24FC */ char pad_24FC[0x2C]; /* maybe part of unk_24F8[0xC]? */
+}; /* size = 0x2528 */
+STATIC_ASSERT(sizeof(struct lbl_8046B6A0_t) == 0x2528);
 
 struct datetime {
     u16 year;

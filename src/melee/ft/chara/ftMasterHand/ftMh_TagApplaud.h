@@ -4,6 +4,7 @@
 #define GALE01_155388
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 /* 155388 */ void ftMh_TagApplaud_Anim(HSD_GObj* gobj);

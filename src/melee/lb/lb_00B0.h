@@ -2,10 +2,11 @@
 #define GALE01_00B074
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "sc/forward.h"
 #include <baselib/forward.h>
 
-#include <placeholder.h>
 #include <stddef.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>

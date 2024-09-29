@@ -2,9 +2,10 @@
 #define SYSDOLPHIN_BASELIB_PSAPPSRT_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "baselib/forward.h"
 
-#include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
 #define PSAPPSRT_UNK_B09 (1 << 9)

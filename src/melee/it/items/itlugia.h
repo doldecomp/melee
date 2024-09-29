@@ -1,11 +1,11 @@
 #ifndef GALE01_2D1438
 #define GALE01_2D1438
 
+#include <placeholder.h>
+
 #include "it/forward.h"
 
 #include "it/items/types.h"
-
-#include <placeholder.h>
 
 /* 2D1438 */ void it_802D1438(Item_GObj*);
 /* 2D14D0 */ UNK_RET it_802D14D0(UNK_PARAMS);

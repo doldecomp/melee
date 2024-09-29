@@ -2,11 +2,11 @@
 #define GALE01_220F10
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 1C8DE0 */ void grMaterial_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
 /* 220F10 */ void grTIceClimber_80220F10(bool);

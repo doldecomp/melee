@@ -1,5 +1,6 @@
-#include <__mem.h>
 #include <placeholder.h>
+
+#include <__mem.h>
 #include <dolphin/ai/ai.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os.h>

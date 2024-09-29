@@ -2,6 +2,7 @@
 #define _UTIL_H_
 
 #include <platform.h>
+
 #include <dolphin/gx/forward.h>
 
 #include "mtx.h"

@@ -77,7 +77,7 @@ Item_GObj* it_80292D48(Vec3* vec)
     spawn.vel.x = 0.0F;
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    spawn.x44_flag.bits.b0 = true;
+    spawn.x44_flag.b0 = true;
     spawn.x40 = 0.0F;
 
     gobj = Item_80268B18(&spawn);

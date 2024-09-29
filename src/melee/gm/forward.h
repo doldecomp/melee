@@ -7,7 +7,7 @@ typedef struct gm_8017DB6C_arg0_t gm_8017DB6C_arg0_t;
 typedef struct gmMainLib_8015ED8C_arg0_t gmMainLib_8015ED8C_arg0_t;
 typedef struct Placeholder_8016AE38_flags Placeholder_8016AE38_flags;
 typedef struct Placeholder_8016AE38_flags_2 Placeholder_8016AE38_flags_2;
-typedef struct Placeholder_8016AE38_ret_val Placeholder_8016AE38_ret_val;
+typedef struct lbl_8046B6A0_t lbl_8046B6A0_t;
 typedef struct Placeholder_8016AE50_ret_val Placeholder_8016AE50_ret_val;
 
 #endif

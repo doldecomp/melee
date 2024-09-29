@@ -1,6 +1,7 @@
+#include <placeholder.h>
+
 #include "dvdlow.h"
 
-#include <placeholder.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSInit.h>
 

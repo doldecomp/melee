@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMARIO_TYPES_H
 
 #include <platform.h>
+
 #include "forward.h" // IWYU pragma: export
 #include "ft/forward.h"
 #include "ftMario/forward.h" // IWYU pragma: export

@@ -1,4 +1,6 @@
 #include <platform.h>
+#include <placeholder.h>
+
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
@@ -22,8 +24,6 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
-
-#include <placeholder.h>
 
 void ftCo_80090574(ftCo_GObj* gobj)
 {

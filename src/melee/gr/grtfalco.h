@@ -2,11 +2,11 @@
 #define GALE01_2207F0
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "lb/forward.h"
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 /* 2207F0 */ void grTFalco_802207F0(int);
 /* 2207F4 */ void grTFalco_802207F4(void);

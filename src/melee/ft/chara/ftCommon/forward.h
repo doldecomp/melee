@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCOMMON_FORWARD_H
 
 #include <platform.h>
+
 #include "ft/forward.h"
 
 struct UNK_SAMUS_S2;

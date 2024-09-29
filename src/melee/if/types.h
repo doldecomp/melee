@@ -2,10 +2,10 @@
 #define MELEE_IF_TYPES_H
 
 #include <platform.h>
+#include <placeholder.h>
+
 #include "if/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
-
-#include <placeholder.h>
 
 struct IfDamageFlags {
     u8 explode_animation : 1;

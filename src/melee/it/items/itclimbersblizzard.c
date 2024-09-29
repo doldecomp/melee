@@ -1,7 +1,7 @@
 #include <platform.h>
-#include "it/forward.h"
-
 #include <placeholder.h>
+
+#include "it/forward.h"
 
 bool it_802C2424(Item_GObj* arg0)
 {

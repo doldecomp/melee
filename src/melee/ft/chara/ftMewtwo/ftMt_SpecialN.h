@@ -4,6 +4,7 @@
 #define GALE01_146CCC
 
 #include <platform.h>
+
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
