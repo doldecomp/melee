@@ -369,7 +369,7 @@ void ifStatus_802F6948(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
@@ -396,7 +396,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
@@ -431,7 +431,7 @@ void ifStatus_802F6AF8(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
@@ -466,7 +466,7 @@ void ifStatus_802F6C04(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
@@ -501,7 +501,7 @@ void ifStatus_802F6D10(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x1 != 0) {
+        if (small_thing->x2_b7 != 0) {
             hud_player->unk9 = 1;
         }
     }
