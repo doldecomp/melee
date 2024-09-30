@@ -543,6 +543,7 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         it_266F_ItemVars it_266F;
+        it_2F28_ItemVars it_2F28;
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;
         itCoin_ItemVars coin;

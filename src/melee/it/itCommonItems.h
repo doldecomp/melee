@@ -393,4 +393,14 @@ typedef struct itTaruCann_DatAttrs {
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
 
+typedef struct it_2F28_ItemVars {
+    f32 x0;
+} it_2F28_ItemVars;
+typedef struct it_2F28_DatAttrs {
+    Vec3 pos;
+    Vec3 vel;
+    f32 float1;
+    f32 float2;
+} it_2F28_DatAttrs;
+
 #endif
