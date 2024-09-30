@@ -5,6 +5,7 @@
 
 typedef struct Article Article;
 typedef struct BobOmbRain BobOmbRain;
+typedef struct BoneDynamicsDesc BoneDynamicsDesc;
 typedef struct CameraBoxFlags CameraBoxFlags;
 typedef struct DynamicBoneTable DynamicBoneTable;
 typedef struct ECB ECB;
@@ -14,12 +15,12 @@ typedef struct HSD_ObjAllocUnk2 HSD_ObjAllocUnk2;
 typedef struct HSD_ObjAllocUnk4 HSD_ObjAllocUnk4;
 typedef struct HSD_ObjAllocUnk5 HSD_ObjAllocUnk5;
 typedef struct HSD_ObjAllocUnk6 HSD_ObjAllocUnk6;
+typedef struct it_2F28_DatAttrs it_2F28_DatAttrs;
 typedef struct Item Item;
 typedef struct Item_DynamicBones Item_DynamicBones;
 typedef struct ItemAttr ItemAttr;
 typedef struct ItemCommonData ItemCommonData;
 typedef struct ItemDynamics ItemDynamics;
-typedef struct BoneDynamicsDesc BoneDynamicsDesc;
 typedef struct ItemModelDesc ItemModelDesc;
 typedef struct ItemModStruct ItemModStruct;
 typedef struct ItemStateArray ItemStateArray;

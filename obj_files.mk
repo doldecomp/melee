@@ -732,7 +732,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/it/items/itcrazyhandbomb.s.o\
     $(BUILD_DIR)/src/melee/it/items/itcoin.c.o\
     $(BUILD_DIR)/asm/melee/it/items/itkirby_2F23.s.o\
-    $(BUILD_DIR)/asm/melee/it/items/it_2F28.s.o\
+    $(BUILD_DIR)/src/melee/it/items/it_2F28.c.o\
     $(BUILD_DIR)/src/melee/it/items/it_2F2B.c.o\
     $(BUILD_DIR)/src/melee/it/items/itkirbyyoshispecialn.c.o\
     $(BUILD_DIR)/asm/melee/it/items/it_27CF.s.o\
