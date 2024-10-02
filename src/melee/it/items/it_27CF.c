@@ -23,7 +23,8 @@ ItemStateTable it_803F94A0[] = {
     { -1, it_802F32F8, NULL, NULL },
 };
 
-void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr) {
+void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr)
+{
     Item* item;
     Item_GObj* item_gobj;
     SpawnItem spawn;
@@ -51,12 +52,13 @@ void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr) {
 }
 
 // void it_802F3020(Item_GObj* item_gobj) {
-void it_802F3020(HSD_GObj* item_gobj) {
+void it_802F3020(HSD_GObj* item_gobj)
+{
     Item* item;
 
     item = GET_ITEM(item_gobj);
     it_8026B3A8((Item_GObj*) item_gobj);
-    Item_80268E5C((HSD_GObj* ) item_gobj, 1, ITEM_ANIM_UPDATE);
+    Item_80268E5C((HSD_GObj*) item_gobj, 1, ITEM_ANIM_UPDATE);
     item->xDCE_flag.b7 = 0;
 }
 
@@ -114,7 +116,8 @@ bool it_802F31B8(HSD_GObj* item_gobj) {
 
 #else
 // bool it_802F3078(Item_GObj* item_gobj) {
-bool it_802F3078(HSD_GObj* item_gobj) {
+bool it_802F3078(HSD_GObj* item_gobj)
+{
     Item* item;
     f32 sp1C;
     HSD_JObj* item_jobj;
@@ -127,28 +130,33 @@ bool it_802F3078(HSD_GObj* item_gobj) {
         item_jobj = item_gobj->hsd_obj;
         sp1C = 1.0f;
         Item_8026AE84(item, 280088, 127, 64);
-        efAsync_Spawn(item_gobj, &item->xBC0, 4U, 1231, item_gobj->hsd_obj, &sp1C);
+        efAsync_Spawn(item_gobj, &item->xBC0, 4U, 1231, item_gobj->hsd_obj,
+                      &sp1C);
         it_802F3290((Item_GObj*) item_gobj);
     }
     return false;
 }
 
 // void it_802F3120(Item_GObj* item_gobj) {
-void it_802F3120(HSD_GObj* item_gobj) {
+void it_802F3120(HSD_GObj* item_gobj)
+{
     ItemAttr* attr;
 
     attr = ((Item*) item_gobj->user_data)->xCC_item_attr;
-    it_80272860((Item_GObj*) item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80272860((Item_GObj*) item_gobj, attr->x10_fall_speed,
+                attr->x14_fall_speed_max);
 }
 
 // bool it_802F3150(Item_GObj* item_gobj) {
-bool it_802F3150(HSD_GObj* item_gobj) {
+bool it_802F3150(HSD_GObj* item_gobj)
+{
     it_8026E15C((Item_GObj*) item_gobj, it_802F317C);
     return false;
 }
 
 // void it_802F317C(Item_GObj* gobj) {
-void it_802F317C(HSD_GObj* item_gobj) {
+void it_802F317C(HSD_GObj* item_gobj)
+{
     Item* item;
 
     item = item_gobj->user_data;
@@ -157,7 +165,8 @@ void it_802F317C(HSD_GObj* item_gobj) {
 }
 
 // bool it_802F31B8(Item_GObj* item_gobj) {
-bool it_802F31B8(HSD_GObj* item_gobj) {
+bool it_802F31B8(HSD_GObj* item_gobj)
+{
     Item* item;
     f32 sp1C;
     HSD_JObj* item_jobj;
@@ -170,7 +179,8 @@ bool it_802F31B8(HSD_GObj* item_gobj) {
         item_jobj = item_gobj->hsd_obj;
         sp1C = 1.0f;
         Item_8026AE84(item, 280088, 127, 64);
-        efAsync_Spawn(item_gobj, &item->xBC0, 4U, 1231, item_gobj->hsd_obj, &sp1C);
+        efAsync_Spawn(item_gobj, &item->xBC0, 4U, 1231, item_gobj->hsd_obj,
+                      &sp1C);
         it_802F3290((Item_GObj*) item_gobj);
     }
     return false;
@@ -178,17 +188,20 @@ bool it_802F31B8(HSD_GObj* item_gobj) {
 #endif
 
 // void it_802F3260(Item_GObj* item_gobj) {
-void it_802F3260(HSD_GObj* item_gobj) {
+void it_802F3260(HSD_GObj* item_gobj)
+{
     return;
 }
 
 // bool it_802F3264(Item_GObj* item_gobj) {
-bool it_802F3264(HSD_GObj* item_gobj) {
+bool it_802F3264(HSD_GObj* item_gobj)
+{
     it_8026D62C((Item_GObj*) item_gobj, it_802F3020);
     return false;
 }
 
-void it_802F3290(Item_GObj* item_gobj) {
+void it_802F3290(Item_GObj* item_gobj)
+{
     HSD_JObj* item_jobj;
     Item* item;
 
@@ -198,11 +211,12 @@ void it_802F3290(Item_GObj* item_gobj) {
     item->xD44_lifeTimer = 40.0f;
     HSD_JObjSetFlagsAll(item_jobj, 0x10U);
     it_802756D0(item_gobj);
-    Item_80268E5C((HSD_GObj* ) item_gobj, 2, ITEM_ANIM_UPDATE);
+    Item_80268E5C((HSD_GObj*) item_gobj, 2, ITEM_ANIM_UPDATE);
 }
 
 // bool it_802F32F8(Item_GObj* item_gobj) {
-bool it_802F32F8(HSD_GObj* item_gobj) {
+bool it_802F32F8(HSD_GObj* item_gobj)
+{
     Item* item;
 
     item = GET_ITEM(item_gobj);
@@ -213,15 +227,18 @@ bool it_802F32F8(HSD_GObj* item_gobj) {
     return false;
 }
 
-bool it_802F3330(Item_GObj* item_gobj) {
+bool it_802F3330(Item_GObj* item_gobj)
+{
     Item* item;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    // item->xD44_lifeTimer = -((item->xCA0 * item->xDD4_itemVar.it_27CF.x0) - item->xD44_lifeTimer);
+    // item->xD44_lifeTimer = -((item->xCA0 * item->xDD4_itemVar.it_27CF.x0) -
+    // item->xD44_lifeTimer);
     item->xD44_lifeTimer -= item->xCA0 * item->xDD4_itemVar.it_27CF.x0;
     return false;
 }
 
-void it_802F3374(Item_GObj* item_gobj, HSD_GObj* ref_gobj) {
+void it_802F3374(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+{
     it_8026B894(item_gobj, ref_gobj);
 }
