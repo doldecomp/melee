@@ -9,6 +9,7 @@
 #include <baselib/forward.h>
 
 #include "ftSeak/types.h"
+#include "it/itCommonItems.h"
 #include "it/items/types.h"
 
 /* 283AE4 */ Item_GObj* it_80283AE4(Item_GObj*, Vec3*, s32);
@@ -78,19 +79,19 @@
 /* 2C7AD0 */ void it_802C7AD0(Item_GObj*);
 /* 2C7AF0 */ void it_802C7AF0(Item_GObj*);
 /* 2F2094 */ Item_GObj* it_802F2094(int, Vec3*, int, int);
-/* 2F2F34 */ UNK_RET it_802F2F34(UNK_PARAMS);
-/* 2F3020 */ UNK_RET it_802F3020(UNK_PARAMS);
-/* 2F3078 */ UNK_RET it_802F3078(UNK_PARAMS);
-/* 2F3120 */ UNK_RET it_802F3120(UNK_PARAMS);
-/* 2F3150 */ UNK_RET it_802F3150(UNK_PARAMS);
-/* 2F317C */ UNK_RET it_802F317C(UNK_PARAMS);
-/* 2F31B8 */ UNK_RET it_802F31B8(UNK_PARAMS);
-/* 2F3260 */ UNK_RET it_802F3260(UNK_PARAMS);
-/* 2F3264 */ UNK_RET it_802F3264(UNK_PARAMS);
-/* 2F3290 */ UNK_RET it_802F3290(UNK_PARAMS);
-/* 2F32F8 */ UNK_RET it_802F32F8(UNK_PARAMS);
+/* 2F2F34 */ void it_802F2F34(it_27CF_DatAttrs*);
+/* 2F3020 */ void it_802F3020(HSD_GObj*);
+/* 2F3078 */ bool it_802F3078(HSD_GObj*);
+/* 2F3120 */ void it_802F3120(HSD_GObj*);
+/* 2F3150 */ bool it_802F3150(HSD_GObj*);
+/* 2F317C */ void it_802F317C(HSD_GObj*);
+/* 2F31B8 */ bool it_802F31B8(HSD_GObj*);
+/* 2F3260 */ void it_802F3260(HSD_GObj*);
+/* 2F3264 */ bool it_802F3264(HSD_GObj*);
+/* 2F3290 */ void it_802F3290(Item_GObj*);
+/* 2F32F8 */ bool it_802F32F8(HSD_GObj*);
 /* 2F3330 */ bool it_802F3330(Item_GObj*);
-/* 2F3374 */ void it_802F3374(Item_GObj*, Item_GObj*);
+/* 2F3374 */ void it_802F3374(Item_GObj*, HSD_GObj*);
 /* 3F94A0 */ extern ItemStateTable it_803F94A0[];
 
 #endif

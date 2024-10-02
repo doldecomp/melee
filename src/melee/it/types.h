@@ -378,7 +378,7 @@ struct Item {
     u16 xC8C;                    // 0xc8c
     HSD_GObj* xC90_absorbGObj;   // 0xc90
     s32 xC94;                    // 0xc94
-    s32 xC98;                    // 0xc98
+    f32 xC98;                    // 0xc98
     s32 xC9C;                    // Total damage taken?
     s32 xCA0;                    // Last amount of damage taken?
     s32 xCA4;                    // 0xca4
@@ -543,6 +543,7 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         it_266F_ItemVars it_266F;
+        it_27CF_ItemVars it_27CF;
         it_2F28_ItemVars it_2F28;
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;

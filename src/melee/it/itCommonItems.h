@@ -400,8 +400,23 @@ typedef struct it_2F28_ItemVars {
 struct it_2F28_DatAttrs {
     Vec3 pos;
     Vec3 vel;
-    f32 float1;
-    f32 float2;
+    f32 float1; // lifetime
+    f32 float2; // item var x0
 };
+
+// Should it_2F28 and it_27CF use the same structs?
+typedef struct it_27CF_ItemVars {
+    f32 x0;
+} it_27CF_ItemVars;
+
+typedef struct it_27CF_DatAttrs {
+    Vec3 pos;
+    Vec3 vel;
+    f32 float1; // lifetime
+    f32 float2;
+    f32 float3; // item var x0
+    f32 x24; // item->xC98
+    int x28; // ItemKind
+} it_27CF_DatAttrs;
 
 #endif
