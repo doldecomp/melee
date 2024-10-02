@@ -415,8 +415,8 @@ typedef struct it_27CF_DatAttrs {
     f32 float1; // lifetime
     f32 float2;
     f32 float3; // item var x0
-    f32 x24; // item->xC98
-    int x28; // ItemKind
+    f32 x24;    // item->xC98
+    int x28;    // ItemKind
 } it_27CF_DatAttrs;
 
 #endif
