@@ -408,6 +408,17 @@ typedef struct it_27CF_DatAttrs {
     int x28;    // ItemKind
 } it_27CF_DatAttrs;
 
+typedef struct it_2F28_ItemVars {
+    f32 x0;
+} it_2F28_ItemVars;
+
+struct it_2F28_DatAttrs {
+    Vec3 pos;
+    Vec3 vel;
+    f32 float1; // lifetime
+    f32 float2; // item var x0
+};
+
 // Not sure if there is a way to combine these two structs?
 typedef struct it_2E6A_ItemVars_1 {
     /*  +0 ip+DD4 */ s16 x0;
@@ -430,16 +441,5 @@ typedef struct it_2E6A_ItemVars_2 {
     /* +18 ip+DEC */ void* x18;
     /* +1C ip+DF0 */ void* x1C;
 } it_2E6A_ItemVars_2;
-
-typedef struct it_2F28_ItemVars {
-    f32 x0;
-} it_2F28_ItemVars;
-
-struct it_2F28_DatAttrs {
-    Vec3 pos;
-    Vec3 vel;
-    f32 float1; // lifetime
-    f32 float2; // item var x0
-};
 
 #endif
