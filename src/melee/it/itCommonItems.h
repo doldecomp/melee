@@ -393,6 +393,21 @@ typedef struct itTaruCann_DatAttrs {
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
 
+// Should it_2F28 and it_27CF use the same structs?
+typedef struct it_27CF_ItemVars {
+    f32 x0;
+} it_27CF_ItemVars;
+
+typedef struct it_27CF_DatAttrs {
+    Vec3 pos;
+    Vec3 vel;
+    f32 float1; // lifetime
+    f32 float2;
+    f32 float3; // item var x0
+    f32 x24;    // item->xC98
+    int x28;    // ItemKind
+} it_27CF_DatAttrs;
+
 typedef struct it_2F28_ItemVars {
     f32 x0;
 } it_2F28_ItemVars;
@@ -400,8 +415,31 @@ typedef struct it_2F28_ItemVars {
 struct it_2F28_DatAttrs {
     Vec3 pos;
     Vec3 vel;
-    f32 float1;
-    f32 float2;
+    f32 float1; // lifetime
+    f32 float2; // item var x0
 };
+
+// Not sure if there is a way to combine these two structs?
+typedef struct it_2E6A_ItemVars_1 {
+    /*  +0 ip+DD4 */ s16 x0;
+    /*  +0 ip+DD4 */ s16 x2;
+    /*  +4 ip+DD8 */ HSD_JObj* x4;
+    /*  +8 ip+DDC */ f32 x8; // unused?
+    /*  +C ip+DE0 */ f32 xC; // unused?
+    /* +10 ip+DE4 */ void* x10;
+    /* +14 ip+DE8 */ void* x14;
+    /* +18 ip+DEC */ void* x18;
+    /* +1C ip+DF0 */ void* x1C;
+} it_2E6A_ItemVars_1;
+
+typedef struct it_2E6A_ItemVars_2 {
+    /*  +0 ip+DD4 */ s16 x0;
+    /*  +0 ip+DD4 */ u16 x2;
+    /*  +4 ip+DD8 */ Vec3 x4;
+    /* +10 ip+DE4 */ void* x10;
+    /* +14 ip+DE8 */ void* x14;
+    /* +18 ip+DEC */ void* x18;
+    /* +1C ip+DF0 */ void* x1C;
+} it_2E6A_ItemVars_2;
 
 #endif
