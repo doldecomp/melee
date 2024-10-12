@@ -1595,7 +1595,7 @@ def generate_compile_commands(
                 "clang",
                 "-nostdinc",
                 "-fno-builtin",
-                "--target=powerpc-none-eabi",
+                "--target=powerpc-eabi",
                 *cflags,
                 "-c",
                 obj.src_path,
