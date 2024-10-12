@@ -1322,7 +1322,7 @@ struct Fighter {
         /* fp+193C */ Vec3 x193c;
         /* fp+1948 */ int x1948;
         /* fp+194C */ int x194C;
-        /* fp+1950 */ int x1950;
+        /* fp+1950 */ bool x1950;
         /* fp+1954 */ float x1954;
         /* fp+1958 */ float x1958;
         /* fp+195C */ float x195c_hitlag_frames;
