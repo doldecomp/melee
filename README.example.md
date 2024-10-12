@@ -108,11 +108,6 @@ Building
   ninja
   ```
 
-Visual Studio Code
-==================
-
-If desired, use the recommended Visual Studio Code settings by renaming the `.vscode.example` directory to `.vscode`.
-
 Diffing
 =======
 

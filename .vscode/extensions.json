@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "llvm-vs-code-extensions.vscode-clangd",
+    "ms-python.black-formatter",
+    "ms-python.flake8",
+  ],
+  "unwantedRecommendations": [
+    "ms-vscode.cmake-tools",
+    "ms-vscode.cpptools-extension-pack",
+    "ms-vscode.cpptools",
+  ]
+}

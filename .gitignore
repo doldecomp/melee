@@ -1,13 +1,35 @@
+# IDE folders
+.idea/
+.vs/
+
+# Caches
 __pycache__
-.idea
-.vscode
-.ninja_*
 .mypy_cache
-*.exe
-build
-build.ninja
-objdiff.json
+.cache/
+
+# Original files
 orig/*/*
 !orig/*/.gitkeep
+*.dol
+*.rel
+*.elf
+*.o
+*.map
+*.MAP
+
+# Build files
+build/
+.ninja_*
+build.ninja
+
+# decompctx output
+ctx.*
+*.ctx
+
+# Generated configs
+objdiff.json
+compile_commands.json
+
+# Miscellaneous
 /*.txt
-ctx.c
+*.exe

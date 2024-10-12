@@ -55,6 +55,7 @@ def dtk_url(tag: str) -> str:
     repo = "https://github.com/encounter/decomp-toolkit"
     return f"{repo}/releases/download/{tag}/dtk-{system}-{arch}{suffix}"
 
+
 def objdiff_cli_url(tag: str) -> str:
     uname = platform.uname()
     suffix = ""
