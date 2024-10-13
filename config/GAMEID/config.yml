@@ -1,5 +1,6 @@
 # See config.example.yml for documentation.
-object: orig/GAMEID/sys/main.dol
+object_base: orig/GAMEID
+object: sys/main.dol
 hash: 0123456789abcdef0123456789abcdef01234567
 symbols: config/GAMEID/symbols.txt
 splits: config/GAMEID/splits.txt
@@ -8,7 +9,7 @@ splits: config/GAMEID/splits.txt
 mw_comment_version: 11
 
 modules:
-- object: orig/GAMEID/files/module.rel
+- object: files/module.rel
   hash: 0123456789abcdef0123456789abcdef01234567
   symbols: config/GAMEID/module/symbols.txt
   splits: config/GAMEID/module/splits.txt

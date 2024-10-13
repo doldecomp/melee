@@ -1,9 +1,26 @@
+# NOTE: All paths in this file can utilize decomp-toolkit's VFS (virtual file system).
+# This allows you to directly reference files inside of containers (disc images, .arc, etc.).
+# Files compressed with Yaz0 (SZS), Yay0 (SZP) are automatically decompressed.
+# Files compressed with NLZSS (Nintendo LZSS) can use a `:nlzss` suffix to decompress.
+# See https://github.com/encounter/decomp-toolkit#vfs-ls for more information on the VFS.
+
+# (optional) Main module name. Defaults to "main".
+name: main
 # Path to the main.dol file.
-object: orig/GAMEID/sys/main.dol
+object: sys/main.dol
 # (optional) SHA-1 hash of the main.dol file for verification.
 hash: 0123456789abcdef0123456789abcdef01234567
-# (optional) Name override. Defaults to "main".
-name: main
+# (optional) If set, all object paths will be relative to this directory.
+# If not set, all object paths will be relative to the root of the project.
+# decomp-toolkit will search the root of this directory for any disc images. (ISO, RVZ, WBFS, etc.)
+# If a disc image is found, decomp-toolkit will fetch all objects from the disc image instead of the filesystem.
+# For example, if `game.iso` exists in the `object_base`, the object path would become the VFS path
+# `orig/GAMEID/game.iso:sys/main.dol`. See information on the VFS above.
+object_base: orig/GAMEID
+# (optional) If true, objects will be extracted from a disc image into `object_base`.
+# This allows users to delete the disc image after the initial build to save space.
+# Enabled by default if `object_base` is set.
+extract_objects: true
 
 # (optional) Path to the symbols.txt file.
 # This file will be created if it does not exist.
@@ -15,6 +32,7 @@ symbols: config/GAMEID/symbols.txt
 splits: config/GAMEID/splits.txt
 
 # (optional) Path to the DOL's .map file.
+# This path is relative to the root of the project, and is _not_ affected by `object_base`.
 # This should only used for initial analysis, and generating the symbols and splits files.
 # Once those files are generated, remove this to avoid conflicts.
 map: orig/GAMEID/files/main.MAP
@@ -34,7 +52,8 @@ common_start: 0x80001234
 mw_comment_version: 8
 
 # (optional) Path to `selfile.sel` for Wii games with RSO files.
-selfile: orig/GAMEID/files/selfile.sel
+# Relative to `object_base` if set, otherwise relative to the root of the project.
+selfile: files/selfile.sel
 # (optional) SHA-1 hash of the `selfile.sel` file for verification.
 selfile_hash: 0123456789abcdef0123456789abcdef01234567
 
@@ -81,7 +100,8 @@ ldscript_template: config/GAMEID/module/ldscript.tpl
 modules:
 
 - # Path to the module.
-  object: orig/GAMEID/files/module.rel
+  # Relative to `object_base` if set, otherwise relative to the root of the project.
+  object: files/module.rel
 
   # (optional) SHA-1 hash of the module for verification.
   hash: 0123456789abcdef0123456789abcdef01234567

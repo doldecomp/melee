@@ -90,11 +90,10 @@ Building
   git clone https://github.com/my/repo.git
   ```
 
-- Using [Dolphin Emulator](https://dolphin-emu.org/), extract your game to `orig/GAMEID`.
-![](assets/dolphin-extract.png)
-  - To save space, the only necessary files are the following. Any others can be deleted.
-    - `sys/main.dol`
-    - `files/rels/*.rel`
+- Copy your game's disc image to `orig/GAMEID`.
+  - Supported formats: ISO (GCM), RVZ, WIA, WBFS, CISO, NFS, GCZ, TGC
+  - After the initial build, the disc image can be deleted to save space.
+
 - Configure:
 
   ```sh
@@ -102,6 +101,7 @@ Building
   ```
 
   To use a version other than `GAMEID` (USA), specify it with `--version`.
+
 - Build:
 
   ```sh
