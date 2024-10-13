@@ -408,7 +408,7 @@ struct Item {
     /// @brief The entity that was detected by this item's inert hitbox.
     HSD_GObj* toucher;
 
-    u32 xCFC;
+    HSD_GObj* xCFC;
 
     /// @at{D00} @sz{4}
     /// @brief The entity that got grabbed by this item.
