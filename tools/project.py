@@ -17,7 +17,7 @@ import os
 import platform
 import sys
 from pathlib import Path
-from typing import IO, Any, Dict, Iterable, List, Optional, Set, Tuple, cast
+from typing import IO, Any, Dict, Iterable, List, Optional, Set, Tuple, Union, cast
 
 from . import ninja_syntax
 from .ninja_syntax import serialize_path
@@ -80,6 +80,18 @@ class Object:
         set_default("mw_version", config.linker_version)
         set_default("shift_jis", config.shift_jis)
         set_default("src_dir", config.src_dir)
+
+        # Validate progress categories
+        def check_category(category: str):
+            if not any(category == c.id for c in config.progress_categories):
+                sys.exit(f"Progress category '{category}' missing from config.progress_categories")
+
+        progress_category = obj.options["progress_category"]
+        if isinstance(progress_category, list):
+            for category in progress_category:
+                check_category(category)
+        elif progress_category is not None:
+            check_category(progress_category)
 
         # Resolve paths
         build_dir = config.out_path()
@@ -167,6 +179,9 @@ class ProjectConfig:
             False  # Include individual modules, disable for large numbers of modules
         )
         self.progress_categories: List[ProgressCategory] = []  # Additional categories
+        self.print_progress_categories: Union[bool, List[str]] = (
+            True  # Print additional progress categories in the CLI progress output
+        )
 
         # Progress fancy printing
         self.progress_use_fancy: bool = False
@@ -1687,7 +1702,11 @@ def calculate_progress(config: ProjectConfig) -> None:
 
     print_category("All", report_data["measures"])
     for category in report_data["categories"]:
-        print_category(category["name"], category["measures"])
+        if config.print_progress_categories is True or (
+            isinstance(config.print_progress_categories, list)
+            and category["id"] in config.print_progress_categories
+        ):
+            print_category(category["name"], category["measures"])
 
     if config.progress_use_fancy:
         measures = report_data["measures"]
