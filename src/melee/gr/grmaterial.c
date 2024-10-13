@@ -151,14 +151,14 @@ void grMaterial_801C8CDC(Item_GObj* gobj)
     Item_8026A8EC(gobj);
 }
 
-void grMaterial_801C8CFC(int arg0, int arg1, int arg2, int arg3, int arg4,
-                         int arg5, int arg6)
+void grMaterial_801C8CFC(int arg0, int arg1, Ground* arg2, HSD_JObj* arg3,
+                         int arg4, HSD_GObjEvent arg5, int arg6)
 {
-    it_802E6AEC(arg2, arg0, arg1, arg3, 0, 0, arg4, arg5, arg6);
+    it_802E6AEC(arg2, arg0, arg1, arg3, NULL, 0, arg4, arg5, arg6);
 }
 
-void grMaterial_801C8D44(int arg0, int arg1, int arg2, int arg3, int arg4,
-                         int arg5, int arg6, int arg7)
+void grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3,
+                         int arg4, int arg5, HSD_GObjEvent arg6, int arg7)
 {
     it_802E6AEC(arg2, arg0, arg1, 0, arg3, arg4, arg5, arg6, arg7);
 }
