@@ -394,6 +394,32 @@ typedef struct itTaruCann_DatAttrs {
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
 
+// Should it_2F28 and it_27CF use the same structs?
+typedef struct it_27CF_ItemVars {
+    f32 x0;
+} it_27CF_ItemVars;
+
+typedef struct it_27CF_DatAttrs {
+    Vec3 pos;
+    Vec3 vel;
+    f32 float1; // lifetime
+    f32 float2;
+    f32 float3; // item var x0
+    f32 x24;    // item->xC98
+    int x28;    // ItemKind
+} it_27CF_DatAttrs;
+
+typedef struct it_2F28_ItemVars {
+    f32 x0;
+} it_2F28_ItemVars;
+
+struct it_2F28_DatAttrs {
+    Vec3 pos;
+    Vec3 vel;
+    f32 float1; // lifetime
+    f32 float2; // item var x0
+};
+
 typedef struct it_2E5A_ItemVars_struct {
     f32 x0;       // set to float calc result/item->x3C
     HSD_JObj* x4; // set to item_gobj->hsd_obj
@@ -503,31 +529,5 @@ typedef struct it_2E6A_ItemVars_2 {
     /* +18 ip+DEC */ void* x18;
     /* +1C ip+DF0 */ void* x1C;
 } it_2E6A_ItemVars_2;
-
-// Should it_2F28 and it_27CF use the same structs?
-typedef struct it_27CF_ItemVars {
-    f32 x0;
-} it_27CF_ItemVars;
-
-typedef struct it_27CF_DatAttrs {
-    Vec3 pos;
-    Vec3 vel;
-    f32 float1; // lifetime
-    f32 float2;
-    f32 float3; // item var x0
-    f32 x24;    // item->xC98
-    int x28;    // ItemKind
-} it_27CF_DatAttrs;
-
-typedef struct it_2F28_ItemVars {
-    f32 x0;
-} it_2F28_ItemVars;
-
-struct it_2F28_DatAttrs {
-    Vec3 pos;
-    Vec3 vel;
-    f32 float1; // lifetime
-    f32 float2; // item var x0
-};
 
 #endif
