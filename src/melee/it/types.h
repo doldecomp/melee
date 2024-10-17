@@ -544,6 +544,7 @@ struct Item {
     union {
         it_266F_ItemVars it_266F;
         it_27CF_ItemVars it_27CF;
+        it_2E5A_ItemVars it_2E5A;
         it_2E6A_ItemVars_1 it_2E6A_1;
         it_2E6A_ItemVars_2 it_2E6A_2;
         it_2F28_ItemVars it_2F28;
