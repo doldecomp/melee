@@ -78,20 +78,12 @@ ItemStateTable it_803F8C8C[] = {
     { 18, NULL, it_802E6D60, NULL }, { 19, NULL, it_802E6D60, NULL },
 };
 
-// static s8 it_803F8DCC[0x10] = "%s:%d: oioi...\n";
-// static u8 it_803F8DDC[9] = "ityaku.c";
-// static s8 it_804D56B8[7] = "jobj.h";
-// static s8 it_804D56C0[5] = "jobj";
 static Vec3 it_803B8730 = { 1.0f, 1.0f, 1.0f };
 
-HSD_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
-                      Vec3 pos, int arg5, int arg6, HSD_GObjEvent arg7,
-                      int arg8)
+Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
+                       Vec3* pos, int arg5, int arg6, HSD_GObjEvent arg7,
+                       int arg8)
 {
-    // bool it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3, Vec3
-    // pos, int arg5, int arg6, HSD_GObjEvent arg7, int arg8) { bool
-    // it_802E6AEC(int arg0, int arg1, int arg2, HSD_JObj* arg3, Vec3 pos, int
-    // arg5, int arg6, int arg7, int arg8) {
     SpawnItem spawn;
     Vec3 sp30;
     HSD_JObj* item_jobj;
@@ -103,8 +95,8 @@ HSD_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
     if (arg3) {
         lb_8000B1CC(arg3, 0, &spawn.prev_pos);
     } else {
-        if (&pos != NULL) {
-            spawn.prev_pos = pos;
+        if (pos != NULL) {
+            spawn.prev_pos = *pos;
         } else {
             return NULL;
         }
@@ -136,7 +128,7 @@ HSD_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
             item->xDD4_itemVar.it_2E6A_1.x4 = arg3;
         } else if (&pos != 0) {
             item->xDD4_itemVar.it_2E6A_2.x2 = 2;
-            item->xDD4_itemVar.it_2E6A_2.x4 = pos;
+            item->xDD4_itemVar.it_2E6A_2.x4 = *pos;
         }
 
         item->xDD4_itemVar.it_2E6A_1.x0 = arg1;
@@ -153,7 +145,7 @@ HSD_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
         item->touched = it_802E7054;
         item->x378_itemColl.x34_flags.b1234 = 5;
     }
-    return (HSD_GObj*) item_gobj;
+    return item_gobj;
 }
 
 // void it_802E6D60(Item_GObj* item_gobj) {

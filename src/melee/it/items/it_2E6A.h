@@ -9,8 +9,8 @@
 
 #include "it/items/types.h"
 
-/* 2E6AEC */ HSD_GObj* it_802E6AEC(Ground*, int, int, HSD_JObj*, Vec3, int,
-                                   int, HSD_GObjEvent, int);
+/* 2E6AEC */ Item_GObj* it_802E6AEC(Ground*, int, int, HSD_JObj*, Vec3*, int,
+                                    int, HSD_GObjEvent, int);
 /* 2E6F7C */ bool it_802E6F7C(Item_GObj*);
 /* 2E6FC0 */ bool it_802E6FC0(Item_GObj*);
 /* 2E709C */ void it_802E709C(Item_GObj*, HSD_GObj*);
