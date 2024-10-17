@@ -394,29 +394,6 @@ typedef struct itTaruCann_DatAttrs {
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
 
-// Not sure if there is a way to combine these two structs?
-typedef struct it_2E6A_ItemVars_1 {
-    /*  +0 ip+DD4 */ s16 x0;
-    /*  +0 ip+DD4 */ s16 x2;
-    /*  +4 ip+DD8 */ HSD_JObj* x4;
-    /*  +8 ip+DDC */ f32 x8; // unused?
-    /*  +C ip+DE0 */ f32 xC; // unused?
-    /* +10 ip+DE4 */ void* x10;
-    /* +14 ip+DE8 */ void* x14;
-    /* +18 ip+DEC */ void* x18;
-    /* +1C ip+DF0 */ void* x1C;
-} it_2E6A_ItemVars_1;
-
-typedef struct it_2E6A_ItemVars_2 {
-    /*  +0 ip+DD4 */ s16 x0;
-    /*  +0 ip+DD4 */ u16 x2;
-    /*  +4 ip+DD8 */ Vec3 x4;
-    /* +10 ip+DE4 */ void* x10;
-    /* +14 ip+DE8 */ void* x14;
-    /* +18 ip+DEC */ void* x18;
-    /* +1C ip+DF0 */ void* x1C;
-} it_2E6A_ItemVars_2;
-
 typedef struct it_2E5A_ItemVars_struct {
     f32 x0;       // set to float calc result/item->x3C
     HSD_JObj* x4; // set to item_gobj->hsd_obj
@@ -503,6 +480,29 @@ typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
     s32 x14;      // non-float assignment
     s32 x18;      // non-float assignment (gm_8016C6C0)
 } it_802E5FXX_struct;
+
+// Not sure if there is a way to combine these two structs?
+typedef struct it_2E6A_ItemVars_1 {
+    /*  +0 ip+DD4 */ s16 x0;
+    /*  +0 ip+DD4 */ s16 x2;
+    /*  +4 ip+DD8 */ HSD_JObj* x4;
+    /*  +8 ip+DDC */ f32 x8; // unused?
+    /*  +C ip+DE0 */ f32 xC; // unused?
+    /* +10 ip+DE4 */ void* x10;
+    /* +14 ip+DE8 */ void* x14;
+    /* +18 ip+DEC */ void* x18;
+    /* +1C ip+DF0 */ void* x1C;
+} it_2E6A_ItemVars_1;
+
+typedef struct it_2E6A_ItemVars_2 {
+    /*  +0 ip+DD4 */ s16 x0;
+    /*  +0 ip+DD4 */ u16 x2;
+    /*  +4 ip+DD8 */ Vec3 x4;
+    /* +10 ip+DE4 */ void* x10;
+    /* +14 ip+DE8 */ void* x14;
+    /* +18 ip+DEC */ void* x18;
+    /* +1C ip+DF0 */ void* x1C;
+} it_2E6A_ItemVars_2;
 
 // Should it_2F28 and it_27CF use the same structs?
 typedef struct it_27CF_ItemVars {
