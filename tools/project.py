@@ -41,8 +41,9 @@ class Object:
             "asflags": None,
             "asm_dir": None,
             "cflags": None,
-            "extra_asflags": None,
-            "extra_cflags": None,
+            "extra_asflags": [],
+            "extra_cflags": [],
+            "extra_clang_flags": [],
             "host": None,
             "lib": None,
             "mw_version": None,
@@ -84,7 +85,9 @@ class Object:
         # Validate progress categories
         def check_category(category: str):
             if not any(category == c.id for c in config.progress_categories):
-                sys.exit(f"Progress category '{category}' missing from config.progress_categories")
+                sys.exit(
+                    f"Progress category '{category}' missing from config.progress_categories"
+                )
 
         progress_category = obj.options["progress_category"]
         if isinstance(progress_category, list):
@@ -170,9 +173,10 @@ class ProjectConfig:
         self.generate_compile_commands: bool = (
             True  # Generate compile_commands.json for clangd
         )
+        self.extra_clang_flags: List[str] = []  # Extra flags for clangd
 
         # Progress output, progress.json and report.json config
-        self.progress = True  # Enable progress output
+        self.progress = True  # Enable report.json generation and CLI progress output
         self.progress_all: bool = True  # Include combined "all" category
         self.progress_modules: bool = True  # Include combined "modules" category
         self.progress_each_module: bool = (
@@ -785,14 +789,11 @@ def generate_build_ninja(
 
             # Add appropriate language flag if it doesn't exist already
             # Added directly to the source so it flows to other generation tasks
-            if not any(flag.startswith("-lang") for flag in cflags) and (
-                extra_cflags is None
-                or not any(flag.startswith("-lang") for flag in extra_cflags)
+            if not any(flag.startswith("-lang") for flag in cflags) and not any(
+                flag.startswith("-lang") for flag in extra_cflags
             ):
                 # Ensure extra_cflags is a unique instance,
                 # and insert into there to avoid modifying shared sets of flags
-                if extra_cflags is None:
-                    extra_cflags = []
                 extra_cflags = obj.options["extra_cflags"] = list(extra_cflags)
                 if file_is_cpp(src_path):
                     extra_cflags.insert(0, "-lang=c++")
@@ -800,7 +801,7 @@ def generate_build_ninja(
                     extra_cflags.insert(0, "-lang=c")
 
             cflags_str = make_flags_str(cflags)
-            if extra_cflags is not None:
+            if len(extra_cflags) > 0:
                 extra_cflags_str = make_flags_str(extra_cflags)
                 cflags_str += " " + extra_cflags_str
             used_compiler_versions.add(obj.options["mw_version"])
@@ -858,7 +859,7 @@ def generate_build_ninja(
             if obj.options["asflags"] is None:
                 sys.exit("ProjectConfig.asflags missing")
             asflags_str = make_flags_str(obj.options["asflags"])
-            if obj.options["extra_asflags"] is not None:
+            if len(obj.options["extra_asflags"]) > 0:
                 extra_asflags_str = make_flags_str(obj.options["extra_asflags"])
                 asflags_str += " " + extra_asflags_str
 
@@ -1363,7 +1364,7 @@ def generate_objdiff_config(
             print(f"Missing scratch compiler mapping for {obj.options['mw_version']}")
         else:
             cflags_str = make_flags_str(cflags)
-            if obj.options["extra_cflags"] is not None:
+            if len(obj.options["extra_cflags"]) > 0:
                 extra_cflags_str = make_flags_str(obj.options["extra_cflags"])
                 cflags_str += " " + extra_cflags_str
             unit_config["scratch"] = {
@@ -1466,7 +1467,10 @@ def generate_compile_commands(
         "-I-",
         "-i-",
     }
-    CFLAG_IGNORE_PREFIX: Tuple[str, ...] = tuple()
+    CFLAG_IGNORE_PREFIX: Tuple[str, ...] = (
+        # Recursive includes are not supported by modern compilers
+        "-ir ",
+    )
 
     # Flags to replace
     CFLAG_REPLACE: Dict[str, str] = {}
@@ -1503,10 +1507,26 @@ def generate_compile_commands(
         (
             "-lang",
             {
-                "c": ("--language=c", "--std=c89"),
+                "c": ("--language=c", "--std=c99"),
                 "c99": ("--language=c", "--std=c99"),
                 "c++": ("--language=c++", "--std=c++98"),
                 "cplus": ("--language=c++", "--std=c++98"),
+            },
+        ),
+        # Enum size
+        (
+            "-enum",
+            {
+                "min": ("-fshort-enums",),
+                "int": ("-fno-short-enums",),
+            },
+        ),
+        # Common BSS
+        (
+            "-common",
+            {
+                "off": ("-fno-common",),
+                "on": ("-fcommon",),
             },
         ),
     )
@@ -1599,8 +1619,9 @@ def generate_compile_commands(
                     continue
 
         append_cflags(obj.options["cflags"])
-        if isinstance(obj.options["extra_cflags"], list):
-            append_cflags(obj.options["extra_cflags"])
+        append_cflags(obj.options["extra_cflags"])
+        cflags.extend(config.extra_clang_flags)
+        cflags.extend(obj.options["extra_clang_flags"])
 
         unit_config = {
             "directory": Path.cwd(),
