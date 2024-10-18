@@ -23,7 +23,7 @@ include_dirs = [
     # Add additional include directories here
 ]
 
-include_pattern = re.compile(r'^#\s*include\s*[<"](.+?)[>"]$')
+include_pattern = re.compile(r'^#\s*include\s*[<"](.+?)[>"]')
 guard_pattern = re.compile(r"^#\s*ifndef\s+(.*)$")
 
 defines = set()
