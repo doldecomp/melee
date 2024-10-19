@@ -1680,7 +1680,7 @@ def calculate_progress(config: ProjectConfig) -> None:
                 data[key] = int(value)
 
     convert_numbers(report_data["measures"])
-    for category in report_data["categories"]:
+    for category in report_data.get("categories", []):
         convert_numbers(category["measures"])
 
     # Output to GitHub Actions job summary, if available
@@ -1722,7 +1722,7 @@ def calculate_progress(config: ProjectConfig) -> None:
         )
 
     print_category("All", report_data["measures"])
-    for category in report_data["categories"]:
+    for category in report_data.get("categories", []):
         if config.print_progress_categories is True or (
             isinstance(config.print_progress_categories, list)
             and category["id"] in config.print_progress_categories
@@ -1780,7 +1780,7 @@ def calculate_progress(config: ProjectConfig) -> None:
     else:
         # Support for old behavior where "dol" was the main category
         add_category("dol", report_data["measures"])
-    for category in report_data["categories"]:
+    for category in report_data.get("categories", []):
         add_category(category["id"], category["measures"])
 
     with open(out_path / "progress.json", "w", encoding="utf-8") as w:
