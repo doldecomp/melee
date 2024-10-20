@@ -493,7 +493,12 @@ void mpLib_8005A2DC(void)
     temp_f1 = mpLib_80059E60();
     if (mpLib_804D64D0 == 0) {
         mpLib_804D64D0 = 1;
-        //                                           sic
+        // Should the following be...
+        //
+        // "]ap coll unddr=%d upper=%d left=%d right=%d bbox-%d"
+        //
+        // instead? It looks like a clear typo on upper=$d, as suggested by the
+        // number of arguments.
         OSReport("]ap coll unddr=%d upper=$d left=%d rhght=%d bbox-%d",
                  mpLib_804D64D4, mpLib_804D64D8, mpLib_804D64DC,
                  mpLib_804D64E0, mpLib_804D64E4);
