@@ -388,71 +388,71 @@ void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top)
     mpLib_804D64B0 = 1;
 }
 
-void mpLib_80058970(f32 arg8, f32 arg9, f32 argA, f32 argB)
+void mpLib_80058970(f32 arg0, f32 arg1, f32 arg2, f32 arg3)
 {
     f32 right;
     f32 left;
     f32 bottom;
     f32 var_f5;
 
-    left = argA;
-    bottom = argB;
-    if (arg8 > left) {
-        right = arg8;
+    left = arg2;
+    bottom = arg3;
+    if (arg0 > left) {
+        right = arg0;
     } else {
         right = left;
-        left = arg8;
+        left = arg0;
     }
-    if (arg9 > bottom) {
-        var_f5 = arg9;
+    if (arg1 > bottom) {
+        var_f5 = arg1;
     } else {
         var_f5 = bottom;
-        bottom = arg9;
+        bottom = arg1;
     }
     mpLib_800588D0(left, bottom, right, var_f5);
 }
 
-void mpLib_800589D0(f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
-                    f32 argE, f32 argF)
+void mpLib_800589D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
+                    f32 arg6, f32 arg7)
 {
     f32 right;
     f32 left;
     f32 bottom;
     f32 top;
 
-    left = argA;
-    bottom = argB;
-    if (arg8 > left) {
-        right = arg8;
+    left = arg2;
+    bottom = arg3;
+    if (arg0 > left) {
+        right = arg0;
     } else {
         right = left;
-        left = arg8;
+        left = arg0;
     }
-    if (arg9 > bottom) {
-        top = arg9;
+    if (arg1 > bottom) {
+        top = arg1;
     } else {
         top = bottom;
-        bottom = arg9;
+        bottom = arg1;
     }
-    if (right < argC) {
-        right = argC;
-    } else if (left > argC) {
-        left = argC;
+    if (right < arg4) {
+        right = arg4;
+    } else if (left > arg4) {
+        left = arg4;
     }
-    if (top < argD) {
-        top = argD;
-    } else if (bottom > argD) {
-        bottom = argD;
+    if (top < arg5) {
+        top = arg5;
+    } else if (bottom > arg5) {
+        bottom = arg5;
     }
-    if (right < argE) {
-        right = argE;
-    } else if (left > argE) {
-        left = argE;
+    if (right < arg6) {
+        right = arg6;
+    } else if (left > arg6) {
+        left = arg6;
     }
-    if (top < argF) {
-        top = argF;
-    } else if (bottom > argF) {
-        bottom = argF;
+    if (top < arg7) {
+        top = arg7;
+    } else if (bottom > arg7) {
+        bottom = arg7;
     }
     mpLib_800588D0(left, bottom, right, top);
 }
