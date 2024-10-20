@@ -14,6 +14,14 @@
 /* 4D64BC */ static mp_UnkStruct2* mpLib_804D64BC;
 /* 4D64C0 */ static int mpLib_804D64C0;
 /* 4D64C4 */ static mp_UnkStruct7* mpLib_804D64C4;
+/* 4D64C8 */ static s32 mpLib_804D64C8;
+/* 4D64CC */ static s32 mpLib_804D64CC;
+/* 4D64D0 */ static s32 mpLib_804D64D0;
+/* 4D64D4 */ static s32 mpLib_804D64D4;
+/* 4D64D8 */ static s32 mpLib_804D64D8;
+/* 4D64DC */ static s32 mpLib_804D64DC;
+/* 4D64E0 */ static s32 mpLib_804D64E0;
+/* 4D64E4 */ static s32 mpLib_804D64E4;
 
 int mpLib_8004D164(void)
 {
@@ -476,15 +484,6 @@ void mpLib_80058AA0(void)
 /// #mpLib_80059FE0
 
 /// #mpLib_8005A220
-
-/// #mpLib_8005A2DC
-
-extern s32 mpLib_804D64D0;
-extern s32 mpLib_804D64D4;
-extern s32 mpLib_804D64D8;
-extern s32 mpLib_804D64DC;
-extern s32 mpLib_804D64E0;
-extern s32 mpLib_804D64E4;
 
 void mpLib_8005A2DC(void)
 {
