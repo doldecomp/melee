@@ -131,15 +131,16 @@
 /* 0588C8 */ int mpLib_800588C8(void);
 /* 0588D0 */ void mpLib_800588D0(float left, float bottom, float right,
                                  float top);
-/* 058970 */ UNK_RET mpLib_80058970(UNK_PARAMS);
-/* 0589D0 */ UNK_RET mpLib_800589D0(UNK_PARAMS);
+/* 058970 */ void mpLib_80058970(f32 arg8, f32 arg9, f32 argA, f32 argB);
+/* 0589D0 */ void mpLib_800589D0(f32 arg8, f32 arg9, f32 argA, f32 argB,
+                                 f32 argC, f32 argD, f32 argE, f32 argF);
 /* 058AA0 */ void mpLib_80058AA0(void);
 /* 058ACC */ UNK_RET mpLib_80058ACC(UNK_PARAMS);
 /* 058B5C */ UNK_RET mpLib_80058B5C(UNK_PARAMS);
 /* 0590F4 */ UNK_RET mpLib_800590F4(UNK_PARAMS);
 /* 059404 */ UNK_RET mpLib_80059404(UNK_PARAMS);
 /* 059554 */ UNK_RET mpLib_80059554(UNK_PARAMS);
-/* 059E60 */ UNK_RET mpLib_80059E60(UNK_PARAMS);
+/* 059E60 */ float mpLib_80059E60(UNK_PARAMS);
 /* 059FE0 */ UNK_RET mpLib_80059FE0(UNK_PARAMS);
 /* 05A220 */ UNK_RET mpLib_8005A220(UNK_PARAMS);
 /* 05A2DC */ UNK_RET mpLib_8005A2DC(UNK_PARAMS);

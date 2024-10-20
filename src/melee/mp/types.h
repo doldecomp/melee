@@ -70,4 +70,15 @@ struct mp_UnkStruct6 {
     /* +4 */ short* x4;
 };
 
+struct mp_UnkStruct7 {
+    /* +0 */ struct mp_UnkStruct7* next;
+    /* +4 */ s32 x4;
+    /* +8 */ s32 x8;
+    /* +C */ u8 xC[0x10 - 0xC];
+    /* +10 */ float x10;
+    /* +14 */ float x14;
+    /* +18 */ float x18;
+    /* +1C */ float x1C;
+};
+
 #endif
