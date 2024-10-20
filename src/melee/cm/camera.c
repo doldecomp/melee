@@ -5,6 +5,7 @@
 #include "camera.static.h"
 
 #include "ft/ftlib.h"
+#include "gr/ground.h"
 #include "gr/stage.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
@@ -99,7 +100,47 @@ void Camera_800290D4(CameraBox* subject)
     cm_804D6458 = subject;
 }
 
-/// #Camera_80029124
+u32 Camera_80029124(Vec3* arg0, s32 distance)
+{
+    f32 _unused;
+    f32 slope;
+    f32 intercept;
+    f32 bounds_left;
+    f32 bounds_right;
+    f32 bounds_top;
+    f32 bounds_bottom;
+    u32 result;
+
+    result = 0;
+    Ground_801C4368(&slope, &intercept);
+    slope += 1.0;
+
+    bounds_left = Stage_GetCamBoundsLeftOffset();
+    bounds_right = Stage_GetCamBoundsRightOffset();
+    bounds_top = Stage_GetCamBoundsTopOffset();
+
+    if (Stage_GetCamBoundsBottomOffset() > slope) {
+        bounds_bottom = Stage_GetCamBoundsBottomOffset();
+    } else {
+        bounds_bottom = slope;
+    }
+
+    if (arg0->x < (bounds_left - distance)) {
+        result |= 4;
+    }
+    if (arg0->x > (bounds_right + distance)) {
+        result |= 8;
+    }
+
+    if (arg0->y > (bounds_top + distance)) {
+        result |= 1;
+    }
+    if (arg0->y < (bounds_bottom - distance)) {
+        result |= 2;
+    }
+
+    return result;
+}
 
 /// #Camera_8002928C
 
@@ -513,7 +554,7 @@ void Camera_8002B1F8(CameraMovement* movement)
           (temp_r3_2 = Player_GetEntity(1), ((temp_r3_2 == NULL) == 0)) &&
           (var_r29 = ftLib_80086B74(temp_r3_2), ((var_r29 == NULL) == 0)) &&
           (Camera_8002928C(var_r29) != 0) &&
-          (Camera_80029124(&var_r29->x1C, 0) == NULL))))
+          (Camera_80029124(&var_r29->x1C, 0) == 0))))
     {
         lbVector_Diff(&movement->target_interest, &var_r29->x1C, &vec);
         temp_f1 = *temp_r31;
@@ -779,7 +820,7 @@ f32 Camera_80031144(void)
 
 bool Camera_80031154(Vec3* arg0)
 {
-    if (Camera_80029124(arg0, 0) == NULL) {
+    if (Camera_80029124(arg0, 0) == 0) {
         return true;
     }
     return false;
@@ -787,7 +828,7 @@ bool Camera_80031154(Vec3* arg0)
 
 bool Camera_8003118C(Vec3* arg0, float arg1)
 {
-    if (Camera_80029124(arg0, arg1) == NULL) {
+    if (Camera_80029124(arg0, arg1) == 0) {
         return true;
     }
     return false;
