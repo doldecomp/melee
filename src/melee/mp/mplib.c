@@ -1,14 +1,19 @@
+#include "mp/forward.h"
+
 #include "mplib.h"
 
 #include "mp/types.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/tev.h>
+#include <baselib/texp.h>
 
 /* 4D64B0 */ static int mpLib_804D64B0;
 /* 4D64B4 */ static int mpLib_804D64B4;
 /* 4D64B8 */ static int mpLib_804D64B8;
 /* 4D64BC */ static mp_UnkStruct2* mpLib_804D64BC;
 /* 4D64C0 */ static int mpLib_804D64C0;
+/* 4D64C4 */ static mp_UnkStruct7* mpLib_804D64C4;
 
 int mpLib_8004D164(void)
 {
@@ -348,13 +353,113 @@ int mpLib_800588C8(void)
     return mpLib_804D64B0;
 }
 
-/// #mpLib_800588D0
+void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top)
+{
+    mp_UnkStruct7* curr = mpLib_804D64C4;
 
-/// #mpLib_80058970
+    while (curr != NULL) {
+        s32 flags = curr->x8;
 
-/// #mpLib_800589D0
+        if ((flags & 0x10000) && !(flags & 0x40000)) {
+            if (flags & 0x400) {
+                curr->x8 = flags & 0xFFFFEFFF;
+            } else if ((left > curr->x18) || (right < curr->x10) ||
+                       (bottom > curr->x1C) || (top < curr->x14))
+            {
+                curr->x8 |= 0x1000;
+            } else {
+                curr->x8 = flags & 0xFFFFEFFF;
+            }
+        } else {
+            curr->x8 |= 0x1000;
+        }
 
-/// #mpLib_80058AA0
+        curr = curr->next;
+    }
+
+    mpLib_804D64B0 = 1;
+}
+
+void mpLib_80058970(f32 arg8, f32 arg9, f32 argA, f32 argB)
+{
+    f32 right;
+    f32 left;
+    f32 bottom;
+    f32 var_f5;
+
+    left = argA;
+    bottom = argB;
+    if (arg8 > left) {
+        right = arg8;
+    } else {
+        right = left;
+        left = arg8;
+    }
+    if (arg9 > bottom) {
+        var_f5 = arg9;
+    } else {
+        var_f5 = bottom;
+        bottom = arg9;
+    }
+    mpLib_800588D0(left, bottom, right, var_f5);
+}
+
+void mpLib_800589D0(f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
+                    f32 argE, f32 argF)
+{
+    f32 right;
+    f32 left;
+    f32 bottom;
+    f32 top;
+
+    left = argA;
+    bottom = argB;
+    if (arg8 > left) {
+        right = arg8;
+    } else {
+        right = left;
+        left = arg8;
+    }
+    if (arg9 > bottom) {
+        top = arg9;
+    } else {
+        top = bottom;
+        bottom = arg9;
+    }
+    if (right < argC) {
+        right = argC;
+    } else if (left > argC) {
+        left = argC;
+    }
+    if (top < argD) {
+        top = argD;
+    } else if (bottom > argD) {
+        bottom = argD;
+    }
+    if (right < argE) {
+        right = argE;
+    } else if (left > argE) {
+        left = argE;
+    }
+    if (top < argF) {
+        top = argF;
+    } else if (bottom > argF) {
+        bottom = argF;
+    }
+    mpLib_800588D0(left, bottom, right, top);
+}
+
+void mpLib_80058AA0(void)
+{
+    mp_UnkStruct7* curr = mpLib_804D64C4;
+
+    while (curr != NULL) {
+        curr->x8 = curr->x8 & 0xFFFFEFFF;
+        curr = curr->next;
+    }
+
+    mpLib_804D64B0 = 0;
+}
 
 /// #mpLib_80058ACC
 
@@ -373,5 +478,28 @@ int mpLib_800588C8(void)
 /// #mpLib_8005A220
 
 /// #mpLib_8005A2DC
+
+extern s32 mpLib_804D64D0;
+extern s32 mpLib_804D64D4;
+extern s32 mpLib_804D64D8;
+extern s32 mpLib_804D64DC;
+extern s32 mpLib_804D64E0;
+extern s32 mpLib_804D64E4;
+
+void mpLib_8005A2DC(void)
+{
+    f32 temp_f1;
+
+    mpLib_800590F4();
+    temp_f1 = mpLib_80059E60();
+    if (mpLib_804D64D0 == 0) {
+        mpLib_804D64D0 = 1;
+        //                                           sic
+        OSReport("]ap coll unddr=%d upper=$d left=%d rhght=%d bbox-%d",
+                 mpLib_804D64D4, mpLib_804D64D8, mpLib_804D64DC,
+                 mpLib_804D64E0, mpLib_804D64E4);
+    }
+    HSD_StateInvalidate(-1);
+}
 
 /// #mpLib_8005A340
