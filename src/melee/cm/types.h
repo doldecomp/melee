@@ -43,6 +43,15 @@ struct CameraBounds {
     float z_pos;
 };
 
+struct UnkInternalCameraStruct {
+    /* 0x0 */ s32 x0;
+    /* 0x4 */ s32 x4;
+    /* 0x8 */ s32 x8;
+    /* 0xC */ s32 xC;
+};
+
+/// @todo The offsets written on this struct are completely wrong, starting at
+/// pad_130.
 typedef struct Camera {
     /* 0x000 */ HSD_GObj* gobj;
     /* 0x004 */ u32 mode;
@@ -55,11 +64,14 @@ typedef struct Camera {
     /* 0x014 */ CameraMovement movement;
     /* 0x04C */ CameraMovement movement_lerp;
     /* 0x084 */ Vec2 translation;
-    /* 0x08C */ char pad_8C[0x18]; /* maybe part of translation[4]? */
+    /* 0x08C */ s32 unk_8C[5]; /* maybe part of translation[4]? */
+    /* 0x0A0 */ HSD_GObj* unk_A0;
     /* 0x0A4 */ f32 unk_A4;
     /* 0x0A8 */ f32 unk_A8;
-    /* 0x0AC */ f32 unk_AC;         /* inferred */
-    /* 0x0B0 */ char pad_B0[0x20C]; /* maybe part of unk_AC[0x84]? */
+    /* 0x0AC */ f32 unk_AC; /* inferred */
+    /* 0x0B0 */ struct UnkInternalCameraStruct unk_B0[2][8];
+    /* 0x1B0 */ struct UnkInternalCameraStruct unk_1B0[2][8];
+    /* 0x2B0 */ u8 pad_2B0[0x2BC - 0x2B0];
     /* 0x2BC */ f32 unk_2bc;
     /* 0x2C0 */ f32 unk_2c0;
     /* 0x2C4 */ char pad_2C4[0x7D]; /* maybe part of unk_2c0[0x20]? */

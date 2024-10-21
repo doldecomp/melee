@@ -5,6 +5,7 @@
 
 #include "camera.static.h"
 
+#include "cm/types.h"
 #include "ft/ftlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
@@ -333,6 +334,41 @@ void Camera_8002A278(f32 x, f32 y)
 }
 
 /// #Camera_8002A28C
+
+void Camera_8002A28C(void)
+{
+    /// @todo Register allocation
+    Camera* camera = &cm_80452C68;
+    struct UnkInternalCameraStruct* src;
+    struct UnkInternalCameraStruct* dst;
+
+    s32 test;
+    s32 i;
+    s32 j;
+
+    test = -1;
+
+    for (i = 0; i < 2; ++i) {
+        src = camera->unk_B0[i];
+        dst = camera->unk_1B0[i];
+        for (j = 0; j < 8; ++j) {
+            dst[j] = src[j];
+            src[j].xC = 0;
+        }
+    }
+
+    for (i = 0; i < 5; ++i) {
+        if (camera->unk_8C[i] != 0) {
+            camera->unk_8C[i] -= 1;
+            test = i;
+        }
+    }
+
+    if ((test != -1) && (camera->unk_A0 != NULL) && (camera->unk_8C[1] == 0)) {
+        HSD_GObjPLink_80390228(camera->unk_A0);
+        camera->unk_A0 = 0;
+    }
+}
 
 /// #Camera_8002A4AC
 
