@@ -144,7 +144,82 @@ u32 Camera_80029124(Vec3* arg0, s32 distance)
 
 /// #Camera_8002928C
 
-/// #Camera_800293E0
+void Camera_800293E0(void)
+{
+    CameraBox* curr;
+    f32 temp_f0;
+    f32 temp_f1;
+    f32 distance;
+
+    for (curr = cm_804D6468; curr != NULL; curr = curr->prev) {
+        if (Camera_8002928C(curr) != 0) {
+            temp_f1 = curr->x40.x;
+            temp_f0 = curr->x2C.x;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x2C.x += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x2C.x -= 0.5f;
+                } else {
+                    curr->x2C.x = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x40.y;
+            temp_f0 = curr->x2C.y;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x2C.y += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x2C.y -= 0.5f;
+                } else {
+                    curr->x2C.y = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x48.x;
+            temp_f0 = curr->x34.x;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x34.x += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x34.x -= 0.5f;
+                } else {
+                    curr->x34.x = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x48.y;
+            temp_f0 = curr->x34.y;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x34.y += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x34.y -= 0.5f;
+                } else {
+                    curr->x34.y = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x48.z;
+            temp_f0 = curr->x34.z;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x34.z += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x34.z = temp_f0 - 0.5f;
+                } else {
+                    curr->x34.z = temp_f1;
+                }
+            }
+        }
+    }
+}
 
 /// #Camera_8002958C
 
