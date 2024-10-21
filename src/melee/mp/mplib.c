@@ -1,14 +1,27 @@
+#include "mp/forward.h"
+
 #include "mplib.h"
 
 #include "mp/types.h"
 
 #include <dolphin/mtx/types.h>
+#include <baselib/tev.h>
+#include <baselib/texp.h>
 
 /* 4D64B0 */ static int mpLib_804D64B0;
 /* 4D64B4 */ static int mpLib_804D64B4;
 /* 4D64B8 */ static int mpLib_804D64B8;
 /* 4D64BC */ static mp_UnkStruct2* mpLib_804D64BC;
 /* 4D64C0 */ static int mpLib_804D64C0;
+/* 4D64C4 */ static mp_UnkStruct7* mpLib_804D64C4;
+/* 4D64C8 */ static s32 mpLib_804D64C8;
+/* 4D64CC */ static s32 mpLib_804D64CC;
+/* 4D64D0 */ static s32 mpLib_804D64D0;
+/* 4D64D4 */ static s32 mpLib_804D64D4;
+/* 4D64D8 */ static s32 mpLib_804D64D8;
+/* 4D64DC */ static s32 mpLib_804D64DC;
+/* 4D64E0 */ static s32 mpLib_804D64E0;
+/* 4D64E4 */ static s32 mpLib_804D64E4;
 
 int mpLib_8004D164(void)
 {
@@ -348,13 +361,113 @@ int mpLib_800588C8(void)
     return mpLib_804D64B0;
 }
 
-/// #mpLib_800588D0
+void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top)
+{
+    mp_UnkStruct7* curr = mpLib_804D64C4;
 
-/// #mpLib_80058970
+    while (curr != NULL) {
+        s32 flags = curr->x8;
 
-/// #mpLib_800589D0
+        if ((flags & 0x10000) && !(flags & 0x40000)) {
+            if (flags & 0x400) {
+                curr->x8 = flags & 0xFFFFEFFF;
+            } else if ((left > curr->x18) || (right < curr->x10) ||
+                       (bottom > curr->x1C) || (top < curr->x14))
+            {
+                curr->x8 |= 0x1000;
+            } else {
+                curr->x8 = flags & 0xFFFFEFFF;
+            }
+        } else {
+            curr->x8 |= 0x1000;
+        }
 
-/// #mpLib_80058AA0
+        curr = curr->next;
+    }
+
+    mpLib_804D64B0 = 1;
+}
+
+void mpLib_80058970(f32 arg0, f32 arg1, f32 arg2, f32 arg3)
+{
+    f32 right;
+    f32 left;
+    f32 bottom;
+    f32 var_f5;
+
+    left = arg2;
+    bottom = arg3;
+    if (arg0 > left) {
+        right = arg0;
+    } else {
+        right = left;
+        left = arg0;
+    }
+    if (arg1 > bottom) {
+        var_f5 = arg1;
+    } else {
+        var_f5 = bottom;
+        bottom = arg1;
+    }
+    mpLib_800588D0(left, bottom, right, var_f5);
+}
+
+void mpLib_800589D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
+                    f32 arg6, f32 arg7)
+{
+    f32 right;
+    f32 left;
+    f32 bottom;
+    f32 top;
+
+    left = arg2;
+    bottom = arg3;
+    if (arg0 > left) {
+        right = arg0;
+    } else {
+        right = left;
+        left = arg0;
+    }
+    if (arg1 > bottom) {
+        top = arg1;
+    } else {
+        top = bottom;
+        bottom = arg1;
+    }
+    if (right < arg4) {
+        right = arg4;
+    } else if (left > arg4) {
+        left = arg4;
+    }
+    if (top < arg5) {
+        top = arg5;
+    } else if (bottom > arg5) {
+        bottom = arg5;
+    }
+    if (right < arg6) {
+        right = arg6;
+    } else if (left > arg6) {
+        left = arg6;
+    }
+    if (top < arg7) {
+        top = arg7;
+    } else if (bottom > arg7) {
+        bottom = arg7;
+    }
+    mpLib_800588D0(left, bottom, right, top);
+}
+
+void mpLib_80058AA0(void)
+{
+    mp_UnkStruct7* curr = mpLib_804D64C4;
+
+    while (curr != NULL) {
+        curr->x8 = curr->x8 & 0xFFFFEFFF;
+        curr = curr->next;
+    }
+
+    mpLib_804D64B0 = 0;
+}
 
 /// #mpLib_80058ACC
 
@@ -372,6 +485,25 @@ int mpLib_800588C8(void)
 
 /// #mpLib_8005A220
 
-/// #mpLib_8005A2DC
+void mpLib_8005A2DC(void)
+{
+    f32 temp_f1;
+
+    mpLib_800590F4();
+    temp_f1 = mpLib_80059E60();
+    if (mpLib_804D64D0 == 0) {
+        mpLib_804D64D0 = 1;
+        // Should the following be...
+        //
+        // "]ap coll unddr=%d upper=%d left=%d right=%d bbox-%d"
+        //
+        // instead? It looks like a clear typo on upper=$d, as suggested by the
+        // number of arguments.
+        OSReport("]ap coll unddr=%d upper=$d left=%d rhght=%d bbox-%d",
+                 mpLib_804D64D4, mpLib_804D64D8, mpLib_804D64DC,
+                 mpLib_804D64E0, mpLib_804D64E4);
+    }
+    HSD_StateInvalidate(-1);
+}
 
 /// #mpLib_8005A340
