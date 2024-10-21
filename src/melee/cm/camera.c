@@ -15,6 +15,9 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
+#include <baselib/gobjplink.h>
+
+static HSD_CObj* cm_804D6464;
 
 /// #Camera_80028B9C
 
@@ -223,83 +226,6 @@ void Camera_800293E0(void)
     }
 }
 
-void Camera_800293E0(void)
-{
-    CameraBox* curr;
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 distance;
-
-    for (curr = cm_804D6468; curr != NULL; curr = curr->prev) {
-        if (Camera_8002928C(curr) != 0) {
-            temp_f1 = curr->x40.x;
-            temp_f0 = curr->x2C.x;
-            distance = temp_f1 - temp_f0;
-            if (distance != 0.0f) {
-                if (distance > 0.5f) {
-                    curr->x2C.x += 0.5f;
-                } else if (distance < -0.5f) {
-                    curr->x2C.x -= 0.5f;
-                } else {
-                    curr->x2C.x = temp_f1;
-                }
-            }
-
-            temp_f1 = curr->x40.y;
-            temp_f0 = curr->x2C.y;
-            distance = temp_f1 - temp_f0;
-            if (distance != 0.0f) {
-                if (distance > 0.5f) {
-                    curr->x2C.y += 0.5f;
-                } else if (distance < -0.5f) {
-                    curr->x2C.y -= 0.5f;
-                } else {
-                    curr->x2C.y = temp_f1;
-                }
-            }
-
-            temp_f1 = curr->x48.x;
-            temp_f0 = curr->x34.x;
-            distance = temp_f1 - temp_f0;
-            if (distance != 0.0f) {
-                if (distance > 0.5f) {
-                    curr->x34.x += 0.5f;
-                } else if (distance < -0.5f) {
-                    curr->x34.x -= 0.5f;
-                } else {
-                    curr->x34.x = temp_f1;
-                }
-            }
-
-            temp_f1 = curr->x48.y;
-            temp_f0 = curr->x34.y;
-            distance = temp_f1 - temp_f0;
-            if (distance != 0.0f) {
-                if (distance > 0.5f) {
-                    curr->x34.y += 0.5f;
-                } else if (distance < -0.5f) {
-                    curr->x34.y -= 0.5f;
-                } else {
-                    curr->x34.y = temp_f1;
-                }
-            }
-
-            temp_f1 = curr->x48.z;
-            temp_f0 = curr->x34.z;
-            distance = temp_f1 - temp_f0;
-            if (distance != 0.0f) {
-                if (distance > 0.5f) {
-                    curr->x34.z += 0.5f;
-                } else if (distance < -0.5f) {
-                    curr->x34.z = temp_f0 - 0.5f;
-                } else {
-                    curr->x34.z = temp_f1;
-                }
-            }
-        }
-    }
-}
-
 /// #Camera_8002958C
 
 void Camera_80029AAC(CameraBounds* bounds, CameraMovement* movement, f32 arg8)
@@ -410,11 +336,9 @@ void Camera_8002A278(f32 x, f32 y)
     cm_80452C68.unk_A8 = y;
 }
 
-/// #Camera_8002A28C
-
 void Camera_8002A28C(void)
 {
-    /// @todo Register allocation
+    /// @todo Mostly register allocation preventing a match here.
     Camera* camera = &cm_80452C68;
     struct UnkInternalCameraStruct* src;
     struct UnkInternalCameraStruct* dst;
@@ -1022,11 +946,27 @@ enum_t Camera_8003108C(void)
     return cm_80452C68.unk_399_b0_b1;
 }
 
-/// #Camera_800310A0
+void Camera_800310A0(u8 arg0)
+{
+    cm_80452C68.unk_399_b0_b1 = arg0;
+}
 
-/// #Camera_800310B8
+HSD_CObj* Camera_800310B8(void)
+{
+    HSD_CObjSetMtxDirty(cm_804D6464);
+    HSD_CObjSetupViewingMtx(cm_804D6464);
+    return cm_804D6464;
+}
 
-/// #Camera_800310E8
+void Camera_800310E8(void)
+{
+    cm_80452C68.unk_398_b0 = 0;
+    cm_80452C68.unk_398_b1 = 0;
+    cm_80452C68.unk_398_b2 = 0;
+    cm_80452C68.unk_398_b3 = 0;
+    cm_80452C68.unk_398_b4 = 0;
+    cm_80452C68.unk_398_b5 = 0;
+}
 
 f32 Camera_80031144(void)
 {
