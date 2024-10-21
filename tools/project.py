@@ -1386,7 +1386,7 @@ def generate_objdiff_config(
             progress_categories.append(category_opt)
         unit_config["metadata"].update(
             {
-                "complete": obj.completed,
+                "complete": obj.completed if src_exists else None,
                 "reverse_fn_order": reverse_fn_order,
                 "progress_categories": progress_categories,
             }
