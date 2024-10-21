@@ -26,12 +26,12 @@ struct CameraBox {
 };
 
 struct CameraMovement {
-    Vec3 interest;
-    Vec3 target_interest;
-    Vec3 position;
-    Vec3 target_position;
-    float fov;
-    float target_fov;
+    /*  +0 */ Vec3 interest;
+    /*  +C */ Vec3 target_interest;
+    /* +18 */ Vec3 position;
+    /* +24 */ Vec3 target_position;
+    /* +30 */ float fov;
+    /* +34 */ float target_fov;
 };
 
 struct CameraBounds {

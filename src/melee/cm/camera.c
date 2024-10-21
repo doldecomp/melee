@@ -1,5 +1,6 @@
 #include <placeholder.h>
 
+#include "cm/forward.h"
 #include "ft/forward.h"
 
 #include "camera.static.h"
@@ -293,7 +294,33 @@ void Camera_80029BC4(CameraBounds* bounds, CameraMovement* movement)
     bounds->z_pos = cam_dist;
 }
 
-/// #Camera_80029C88
+void Camera_80029C88(CameraMovement* movement, f32 arg_scale)
+{
+    /// @todo r3 and r4 need to be swapped in this function to get a match
+    ///
+    /// It sure feels like this function should be...
+    ///
+    /// lbVector_Lerp(&movement->position, &movement->target_position,
+    ///   &movement->position, scale);
+    ///
+    /// But that produces code pretty far from the target.
+    Vec3 dist;
+    f32 scale;
+    f32 camera_speed;
+
+    dist.x = movement->target_position.x - movement->position.x;
+    dist.y = movement->target_position.y - movement->position.y;
+    dist.z = movement->target_position.z - movement->position.z;
+
+    scale = cm_803BCCA0.x3C * arg_scale;
+    if (scale > 1.0f) {
+        scale = 1.0f;
+    }
+
+    movement->position.x += dist.x * scale;
+    movement->position.y += dist.y * scale;
+    movement->position.z += dist.z * scale;
+}
 
 /// #Camera_80029CF8
 

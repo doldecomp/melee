@@ -25,7 +25,7 @@
 /* 029AAC */ void Camera_80028F5C(CameraBox*, s32);
 /* 029BC4 */ void Camera_80029BC4(CameraBounds* bounds,
                                   CameraMovement* movement);
-/* 029C88 */ UNK_RET Camera_80029C88(UNK_PARAMS);
+/* 029C88 */ void Camera_80029C88(CameraMovement* movement, f32);
 /* 029CF8 */ UNK_RET Camera_80029CF8(UNK_PARAMS);
 /* 02A0C0 */ UNK_RET Camera_8002A0C0(UNK_PARAMS);
 /* 02A278 */ void Camera_8002A278(float x, float y);
