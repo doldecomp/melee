@@ -333,11 +333,9 @@ void Camera_8002A278(f32 x, f32 y)
     cm_80452C68.unk_A8 = y;
 }
 
-/// #Camera_8002A28C
-
 void Camera_8002A28C(void)
 {
-    /// @todo Register allocation
+    /// @todo Mostly register allocation preventing a match here.
     Camera* camera = &cm_80452C68;
     struct UnkInternalCameraStruct* src;
     struct UnkInternalCameraStruct* dst;

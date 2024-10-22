@@ -50,8 +50,6 @@ struct UnkInternalCameraStruct {
     /* 0xC */ s32 xC;
 };
 
-/// @todo The offsets written on this struct are completely wrong, starting at
-/// pad_130.
 typedef struct Camera {
     /* 0x000 */ HSD_GObj* gobj;
     /* 0x004 */ u32 mode;
