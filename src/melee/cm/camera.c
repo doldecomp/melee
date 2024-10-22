@@ -1,10 +1,13 @@
 #include <placeholder.h>
 
+#include "cm/forward.h"
 #include "ft/forward.h"
 
 #include "camera.static.h"
 
+#include "cm/types.h"
 #include "ft/ftlib.h"
+#include "gr/ground.h"
 #include "gr/stage.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
@@ -12,6 +15,9 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
+#include <baselib/gobjplink.h>
+
+static HSD_CObj* cm_804D6464;
 
 /// #Camera_80028B9C
 
@@ -99,11 +105,126 @@ void Camera_800290D4(CameraBox* subject)
     cm_804D6458 = subject;
 }
 
-/// #Camera_80029124
+u32 Camera_80029124(Vec3* arg0, s32 distance)
+{
+    f32 _unused;
+    f32 slope;
+    f32 intercept;
+    f32 bounds_left;
+    f32 bounds_right;
+    f32 bounds_top;
+    f32 bounds_bottom;
+    u32 result;
+
+    result = 0;
+    Ground_801C4368(&slope, &intercept);
+    slope += 1.0;
+
+    bounds_left = Stage_GetCamBoundsLeftOffset();
+    bounds_right = Stage_GetCamBoundsRightOffset();
+    bounds_top = Stage_GetCamBoundsTopOffset();
+
+    if (Stage_GetCamBoundsBottomOffset() > slope) {
+        bounds_bottom = Stage_GetCamBoundsBottomOffset();
+    } else {
+        bounds_bottom = slope;
+    }
+
+    if (arg0->x < (bounds_left - distance)) {
+        result |= 4;
+    }
+    if (arg0->x > (bounds_right + distance)) {
+        result |= 8;
+    }
+
+    if (arg0->y > (bounds_top + distance)) {
+        result |= 1;
+    }
+    if (arg0->y < (bounds_bottom - distance)) {
+        result |= 2;
+    }
+
+    return result;
+}
 
 /// #Camera_8002928C
 
-/// #Camera_800293E0
+void Camera_800293E0(void)
+{
+    CameraBox* curr;
+    f32 temp_f0;
+    f32 temp_f1;
+    f32 distance;
+
+    for (curr = cm_804D6468; curr != NULL; curr = curr->prev) {
+        if (Camera_8002928C(curr) != 0) {
+            temp_f1 = curr->x40.x;
+            temp_f0 = curr->x2C.x;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x2C.x += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x2C.x -= 0.5f;
+                } else {
+                    curr->x2C.x = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x40.y;
+            temp_f0 = curr->x2C.y;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x2C.y += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x2C.y -= 0.5f;
+                } else {
+                    curr->x2C.y = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x48.x;
+            temp_f0 = curr->x34.x;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x34.x += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x34.x -= 0.5f;
+                } else {
+                    curr->x34.x = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x48.y;
+            temp_f0 = curr->x34.y;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x34.y += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x34.y -= 0.5f;
+                } else {
+                    curr->x34.y = temp_f1;
+                }
+            }
+
+            temp_f1 = curr->x48.z;
+            temp_f0 = curr->x34.z;
+            distance = temp_f1 - temp_f0;
+            if (distance != 0.0f) {
+                if (distance > 0.5f) {
+                    curr->x34.z += 0.5f;
+                } else if (distance < -0.5f) {
+                    curr->x34.z = temp_f0 - 0.5f;
+                } else {
+                    curr->x34.z = temp_f1;
+                }
+            }
+        }
+    }
+}
 
 /// #Camera_8002958C
 
@@ -177,7 +298,33 @@ void Camera_80029BC4(CameraBounds* bounds, CameraMovement* movement)
     bounds->z_pos = cam_dist;
 }
 
-/// #Camera_80029C88
+void Camera_80029C88(CameraMovement* movement, f32 arg_scale)
+{
+    /// @todo r3 and r4 need to be swapped in this function to get a match
+    ///
+    /// It sure feels like this function should be...
+    ///
+    /// lbVector_Lerp(&movement->position, &movement->target_position,
+    ///   &movement->position, scale);
+    ///
+    /// But that produces code pretty far from the target.
+    Vec3 dist;
+    f32 scale;
+    f32 camera_speed;
+
+    dist.x = movement->target_position.x - movement->position.x;
+    dist.y = movement->target_position.y - movement->position.y;
+    dist.z = movement->target_position.z - movement->position.z;
+
+    scale = cm_803BCCA0.x3C * arg_scale;
+    if (scale > 1.0f) {
+        scale = 1.0f;
+    }
+
+    movement->position.x += dist.x * scale;
+    movement->position.y += dist.y * scale;
+    movement->position.z += dist.z * scale;
+}
 
 /// #Camera_80029CF8
 
@@ -189,7 +336,40 @@ void Camera_8002A278(f32 x, f32 y)
     cm_80452C68.unk_A8 = y;
 }
 
-/// #Camera_8002A28C
+void Camera_8002A28C(void)
+{
+    /// @todo Mostly register allocation preventing a match here.
+    Camera* camera = &cm_80452C68;
+    struct UnkInternalCameraStruct* src;
+    struct UnkInternalCameraStruct* dst;
+
+    s32 test;
+    s32 i;
+    s32 j;
+
+    test = -1;
+
+    for (i = 0; i < 2; ++i) {
+        src = camera->unk_B0[i];
+        dst = camera->unk_1B0[i];
+        for (j = 0; j < 8; ++j) {
+            dst[j] = src[j];
+            src[j].xC = 0;
+        }
+    }
+
+    for (i = 0; i < 5; ++i) {
+        if (camera->unk_8C[i] != 0) {
+            camera->unk_8C[i] -= 1;
+            test = i;
+        }
+    }
+
+    if ((test != -1) && (camera->unk_A0 != NULL) && (camera->unk_8C[1] == 0)) {
+        HSD_GObjPLink_80390228(camera->unk_A0);
+        camera->unk_A0 = 0;
+    }
+}
 
 /// #Camera_8002A4AC
 
@@ -513,7 +693,7 @@ void Camera_8002B1F8(CameraMovement* movement)
           (temp_r3_2 = Player_GetEntity(1), ((temp_r3_2 == NULL) == 0)) &&
           (var_r29 = ftLib_80086B74(temp_r3_2), ((var_r29 == NULL) == 0)) &&
           (Camera_8002928C(var_r29) != 0) &&
-          (Camera_80029124(&var_r29->x1C, 0) == NULL))))
+          (Camera_80029124(&var_r29->x1C, 0) == 0))))
     {
         lbVector_Diff(&movement->target_interest, &var_r29->x1C, &vec);
         temp_f1 = *temp_r31;
@@ -766,11 +946,27 @@ enum_t Camera_8003108C(void)
     return cm_80452C68.unk_399_b0_b1;
 }
 
-/// #Camera_800310A0
+void Camera_800310A0(u8 arg0)
+{
+    cm_80452C68.unk_399_b0_b1 = arg0;
+}
 
-/// #Camera_800310B8
+HSD_CObj* Camera_800310B8(void)
+{
+    HSD_CObjSetMtxDirty(cm_804D6464);
+    HSD_CObjSetupViewingMtx(cm_804D6464);
+    return cm_804D6464;
+}
 
-/// #Camera_800310E8
+void Camera_800310E8(void)
+{
+    cm_80452C68.unk_398_b0 = 0;
+    cm_80452C68.unk_398_b1 = 0;
+    cm_80452C68.unk_398_b2 = 0;
+    cm_80452C68.unk_398_b3 = 0;
+    cm_80452C68.unk_398_b4 = 0;
+    cm_80452C68.unk_398_b5 = 0;
+}
 
 f32 Camera_80031144(void)
 {
@@ -779,7 +975,7 @@ f32 Camera_80031144(void)
 
 bool Camera_80031154(Vec3* arg0)
 {
-    if (Camera_80029124(arg0, 0) == NULL) {
+    if (Camera_80029124(arg0, 0) == 0) {
         return true;
     }
     return false;
@@ -787,7 +983,7 @@ bool Camera_80031154(Vec3* arg0)
 
 bool Camera_8003118C(Vec3* arg0, float arg1)
 {
-    if (Camera_80029124(arg0, arg1) == NULL) {
+    if (Camera_80029124(arg0, arg1) == 0) {
         return true;
     }
     return false;
