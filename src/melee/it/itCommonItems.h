@@ -6,6 +6,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <common_structs.h>
@@ -418,6 +419,93 @@ struct it_2F28_DatAttrs {
     f32 float1; // lifetime
     f32 float2; // item var x0
 };
+
+typedef struct it_2E5A_ItemVars_struct {
+    f32 x0;       // set to float calc result/item->x3C
+    HSD_JObj* x4; // set to item_gobj->hsd_obj
+    Vec3 x8;      // called in lb_8000B1CC
+    Vec3 x14;     // set equal to x8
+} it_2E5A_ItemVars_struct;
+
+typedef struct it_2E5A_ItemVars {
+    // /* ip+DD4 */ HSD_GObj* x0;
+    /* ip+DD4 */ s32 x0;
+    /* ip+DD8 */ s32 x4;  // uses regular registers (#? gets multiplied by 2C,
+                          // then indexed into attr)
+    /* ip+DDC */ s32 x8;  // uses regular registers
+    /* ip+DE0 */ s32 xC;  // uses regular registers
+    /* ip+DE4 */ f32 x10; // uses float registers; timer?
+    /* ip+DE8 */ f32 x14;
+    /* ip+DEC */ UnkFlagStruct x18; // has bit assignments
+    /* ip+DF0 */ it_2E5A_ItemVars_struct* x1C;
+    // /* ip+DF4 */ s32 x20;
+    // /* ip+DF8 */ s32 x24;
+    // /* ip+DFC */ s32 x28;
+    // /* ip+E00 */ s32 x2C;
+    // /* ip+E04 */ s32 x30;
+    // /* ip+E08 */ s32 x34;
+    // /* ip+E0C */ s32 x38;
+    // /* ip+E10 */ s32 x3C;
+    // /* ip+E14 */ s32 x40;
+    // /* ip+E18 */ s32 x44;
+    // /* ip+E1C */ s32 x48;
+    // /* ip+E20 */ s32 x4C;
+    // /* ip+E24 */ s32 x50;
+    // /* ip+E28 */ s32 x54;
+    // /* ip+E2C */ s32 x58;
+} it_2E5A_ItemVars;
+
+typedef struct it_2E5A_DatAttrs_1 {
+    f32 x0; // lifetime?
+    f32 x4; // float assignment
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14; // item->x40_vel.x
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    f32 x24; // float assignment
+    f32 x28;
+    f32 x2C; // float assignment
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    HSD_Joint* x3C; // called in it_80273318
+    f32 x40;
+    f32 x44;
+    f32 x48;
+    s32 x4C; // item->xD84
+    s32 x50;
+    f32 x54;  // item->scl
+    ECB* x58; // called in it_80275D5C
+    s32 x5C;
+} it_2E5A_DatAttrs_1;
+
+typedef struct it_2E5A_DatAttrs_2 {
+    f32 x0; // lifetime?
+    f32 x4; // float assignment
+    f32 x8;
+    f32 xC;
+    HSD_Joint* x10;     // called in it_80273318
+    ItemStateDesc* x14; // item2->xD0_itemStateDesc
+    f32 x18;
+    f32 x1C;
+    s32 x20; // item->xD84
+    f32 x24; // float assignment
+    f32 x28; // item->scl
+    // ECB* x2C; // called in it_80275D5C
+} it_2E5A_DatAttrs_2;
+
+typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
+    HSD_GObj* x0; // Item GObj assignment/passed to db_80225DD8
+    f32 x4;       // float assignment (angle?)
+    f32 x8;       // float assignment (used in x40_vel.y calc)
+    s32 xC;       // non-float assignment (arg3/arg2/while condition)
+    s32 x10;      // non-float assignment
+    s32 x14;      // non-float assignment
+    s32 x18;      // non-float assignment (gm_8016C6C0)
+} it_802E5FXX_struct;
 
 // Not sure if there is a way to combine these two structs?
 typedef struct it_2E6A_ItemVars_1 {
