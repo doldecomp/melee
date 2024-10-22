@@ -15,6 +15,9 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
+#include <baselib/gobjplink.h>
+
+static HSD_CObj* cm_804D6464;
 
 /// #Camera_80028B9C
 
@@ -943,11 +946,27 @@ enum_t Camera_8003108C(void)
     return cm_80452C68.unk_399_b0_b1;
 }
 
-/// #Camera_800310A0
+void Camera_800310A0(u8 arg0)
+{
+    cm_80452C68.unk_399_b0_b1 = arg0;
+}
 
-/// #Camera_800310B8
+HSD_CObj* Camera_800310B8(void)
+{
+    HSD_CObjSetMtxDirty(cm_804D6464);
+    HSD_CObjSetupViewingMtx(cm_804D6464);
+    return cm_804D6464;
+}
 
-/// #Camera_800310E8
+void Camera_800310E8(void)
+{
+    cm_80452C68.unk_398_b0 = 0;
+    cm_80452C68.unk_398_b1 = 0;
+    cm_80452C68.unk_398_b2 = 0;
+    cm_80452C68.unk_398_b3 = 0;
+    cm_80452C68.unk_398_b4 = 0;
+    cm_80452C68.unk_398_b5 = 0;
+}
 
 f32 Camera_80031144(void)
 {
