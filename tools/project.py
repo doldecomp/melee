@@ -633,7 +633,7 @@ def generate_build_ninja(
         )
         n.newline()
 
-    def write_custom_step(step: str) -> List[str | Path]:
+    def write_custom_step(step: str, prev_step: Optional[str] = None) -> None:
         implicit: List[str | Path] = []
         if config.custom_build_steps and step in config.custom_build_steps:
             n.comment(f"Custom build steps ({step})")
@@ -657,7 +657,12 @@ def generate_build_ninja(
                     dyndep=custom_step.get("dyndep", None),
                 )
                 n.newline()
-        return implicit
+        n.build(
+            outputs=step,
+            rule="phony",
+            inputs=implicit,
+            order_only=prev_step,
+        )
 
     n.comment("Host build")
     n.variable("host_cflags", "-I include -Wno-trigraphs")
@@ -678,7 +683,7 @@ def generate_build_ninja(
     n.newline()
 
     # Add all build steps needed before we compile (e.g. processing assets)
-    precompile_implicit = write_custom_step("pre-compile")
+    write_custom_step("pre-compile")
 
     ###
     # Source files
@@ -726,13 +731,12 @@ def generate_build_ninja(
                     rule="link",
                     inputs=self.inputs,
                     implicit=[
-                        *precompile_implicit,
                         self.ldscript,
                         *mwld_implicit,
-                        *postcompile_implicit,
                     ],
                     implicit_outputs=elf_map,
                     variables={"ldflags": elf_ldflags},
+                    order_only="post-compile",
                 )
             else:
                 preplf_path = build_path / self.name / f"{self.name}.preplf"
@@ -759,6 +763,7 @@ def generate_build_ninja(
                     implicit=mwld_implicit,
                     implicit_outputs=preplf_map,
                     variables={"ldflags": preplf_ldflags},
+                    order_only="post-compile",
                 )
                 n.build(
                     outputs=plf_path,
@@ -767,6 +772,7 @@ def generate_build_ninja(
                     implicit=[self.ldscript, preplf_path, *mwld_implicit],
                     implicit_outputs=plf_map,
                     variables={"ldflags": plf_ldflags},
+                    order_only="post-compile",
                 )
             n.newline()
 
@@ -822,6 +828,7 @@ def generate_build_ninja(
                 implicit=(
                     mwcc_sjis_implicit if obj.options["shift_jis"] else mwcc_implicit
                 ),
+                order_only="pre-compile",
             )
 
             # Add ctx build rule
@@ -843,6 +850,7 @@ def generate_build_ninja(
                         "basedir": os.path.dirname(obj.host_obj_path),
                         "basefile": obj.host_obj_path.with_suffix(""),
                     },
+                    order_only="pre-compile",
                 )
                 if obj.options["add_to_all"]:
                     host_source_inputs.append(obj.host_obj_path)
@@ -877,6 +885,7 @@ def generate_build_ninja(
                 inputs=src_path,
                 variables={"asflags": asflags_str},
                 implicit=gnu_as_implicit,
+                order_only="pre-compile",
             )
             n.newline()
 
@@ -966,7 +975,7 @@ def generate_build_ninja(
             sys.exit(f"Linker {mw_path} does not exist")
 
         # Add all build steps needed before we link and after compiling objects
-        postcompile_implicit = write_custom_step("post-compile")
+        write_custom_step("post-compile", "pre-compile")
 
         ###
         # Link
@@ -977,7 +986,7 @@ def generate_build_ninja(
         n.newline()
 
         # Add all build steps needed after linking and before GC/Wii native format generation
-        postlink_implicit = write_custom_step("post-link")
+        write_custom_step("post-link", "post-compile")
 
         ###
         # Generate DOL
@@ -986,7 +995,8 @@ def generate_build_ninja(
             outputs=link_steps[0].output(),
             rule="elf2dol",
             inputs=link_steps[0].partial_output(),
-            implicit=[*postlink_implicit, dtk],
+            implicit=dtk,
+            order_only="post-link",
         )
 
         ###
@@ -1048,11 +1058,12 @@ def generate_build_ninja(
                     "rspfile": config.out_path() / f"rel{idx}.rsp",
                     "names": rel_names_arg,
                 },
+                order_only="post-link",
             )
             n.newline()
 
         # Add all build steps needed post-build (re-building archives and such)
-        postbuild_implicit = write_custom_step("post-build")
+        write_custom_step("post-build", "post-link")
 
         ###
         # Helper rule for building all source files
@@ -1091,7 +1102,8 @@ def generate_build_ninja(
             outputs=ok_path,
             rule="check",
             inputs=config.check_sha_path,
-            implicit=[dtk, *link_outputs, *postbuild_implicit],
+            implicit=[dtk, *link_outputs],
+            order_only="post-build",
         )
         n.newline()
 
@@ -1113,6 +1125,7 @@ def generate_build_ninja(
                 python_lib,
                 report_path,
             ],
+            order_only="post-build",
         )
 
         ###
@@ -1124,11 +1137,11 @@ def generate_build_ninja(
             command=f"{objdiff} report generate -o $out",
             description="REPORT",
         )
-        report_implicit: List[str | Path] = [objdiff, "all_source"]
         n.build(
             outputs=report_path,
             rule="report",
-            implicit=report_implicit,
+            implicit=[objdiff, "all_source"],
+            order_only="post-build",
         )
 
         ###
