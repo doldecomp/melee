@@ -172,6 +172,10 @@ if args.map:
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
 
+# Optional numeric ID for decomp.me preset
+# Can be overridden in libraries or objects
+config.scratch_preset_id = None
+
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [

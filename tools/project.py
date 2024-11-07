@@ -48,6 +48,7 @@ class Object:
             "lib": None,
             "mw_version": None,
             "progress_category": None,
+            "scratch_preset_id": None,
             "shift_jis": None,
             "source": name,
             "src_dir": None,
@@ -79,6 +80,7 @@ class Object:
         set_default("asm_dir", config.asm_dir)
         set_default("host", False)
         set_default("mw_version", config.linker_version)
+        set_default("scratch_preset_id", config.scratch_preset_id)
         set_default("shift_jis", config.shift_jis)
         set_default("src_dir", config.src_dir)
 
@@ -174,6 +176,7 @@ class ProjectConfig:
             True  # Generate compile_commands.json for clangd
         )
         self.extra_clang_flags: List[str] = []  # Extra flags for clangd
+        self.scratch_preset_id: Optional[int] = None  # Default decomp.me preset ID for scratches
 
         # Progress output, progress.json and report.json config
         self.progress = True  # Enable report.json generation and CLI progress output
@@ -1384,6 +1387,7 @@ def generate_objdiff_config(
                 "platform": "gc_wii",
                 "compiler": compiler_version,
                 "c_flags": cflags_str,
+                "preset_id": obj.options["scratch_preset_id"],
             }
             if src_exists:
                 unit_config["scratch"].update(
