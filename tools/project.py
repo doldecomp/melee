@@ -176,7 +176,9 @@ class ProjectConfig:
             True  # Generate compile_commands.json for clangd
         )
         self.extra_clang_flags: List[str] = []  # Extra flags for clangd
-        self.scratch_preset_id: Optional[int] = None  # Default decomp.me preset ID for scratches
+        self.scratch_preset_id: Optional[int] = (
+            None  # Default decomp.me preset ID for scratches
+        )
 
         # Progress output, progress.json and report.json config
         self.progress = True  # Enable report.json generation and CLI progress output
@@ -380,7 +382,7 @@ def generate_build_ninja(
     decompctx = config.tools_dir / "decompctx.py"
     n.rule(
         name="decompctx",
-        command=f"$python {decompctx} $in -o $out -d $out.d",
+        command=f"$python {decompctx} $in -o $out -d $out.d $includes",
         description="CTX $in",
         depfile="$out.d",
         deps="gcc",
@@ -809,10 +811,8 @@ def generate_build_ninja(
                 else:
                     extra_cflags.insert(0, "-lang=c")
 
-            cflags_str = make_flags_str(cflags)
-            if len(extra_cflags) > 0:
-                extra_cflags_str = make_flags_str(extra_cflags)
-                cflags_str += " " + extra_cflags_str
+            all_cflags = cflags + extra_cflags
+            cflags_str = make_flags_str(all_cflags)
             used_compiler_versions.add(obj.options["mw_version"])
 
             # Add MWCC build rule
@@ -836,11 +836,21 @@ def generate_build_ninja(
 
             # Add ctx build rule
             if obj.ctx_path is not None:
+                include_dirs = []
+                for flag in all_cflags:
+                    if (
+                        flag.startswith("-i ")
+                        or flag.startswith("-I ")
+                        or flag.startswith("-I+")
+                    ):
+                        include_dirs.append(flag[3:])
+                includes = " ".join([f"-I {d}" for d in include_dirs])
                 n.build(
                     outputs=obj.ctx_path,
                     rule="decompctx",
                     inputs=src_path,
                     implicit=decompctx,
+                    variables={"includes": includes},
                 )
 
             # Add host build rule
@@ -1358,9 +1368,21 @@ def generate_objdiff_config(
             unit_config["base_path"] = obj.src_obj_path
             unit_config["metadata"]["source_path"] = obj.src_path
 
-        cflags = obj.options["cflags"]
+        # Filter out include directories
+        def keep_flag(flag):
+            return (
+                not flag.startswith("-i ")
+                and not flag.startswith("-i-")
+                and not flag.startswith("-I ")
+                and not flag.startswith("-I+")
+                and not flag.startswith("-I-")
+            )
+
+        all_cflags = list(
+            filter(keep_flag, obj.options["cflags"] + obj.options["extra_cflags"])
+        )
         reverse_fn_order = False
-        for flag in cflags:
+        for flag in all_cflags:
             if not flag.startswith("-inline "):
                 continue
             for value in flag.split(" ")[1].split(","):
@@ -1369,20 +1391,11 @@ def generate_objdiff_config(
                 elif value == "nodeferred":
                     reverse_fn_order = False
 
-        # Filter out include directories
-        def keep_flag(flag):
-            return not flag.startswith("-i ") and not flag.startswith("-I ")
-
-        cflags = list(filter(keep_flag, cflags))
-
         compiler_version = COMPILER_MAP.get(obj.options["mw_version"])
         if compiler_version is None:
             print(f"Missing scratch compiler mapping for {obj.options['mw_version']}")
         else:
-            cflags_str = make_flags_str(cflags)
-            if len(obj.options["extra_cflags"]) > 0:
-                extra_cflags_str = make_flags_str(obj.options["extra_cflags"])
-                cflags_str += " " + extra_cflags_str
+            cflags_str = make_flags_str(all_cflags)
             unit_config["scratch"] = {
                 "platform": "gc_wii",
                 "compiler": compiler_version,
