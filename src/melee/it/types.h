@@ -80,13 +80,6 @@ struct Item_DynamicBones {
 };
 STATIC_ASSERT(sizeof(struct Item_DynamicBones) == 0x1C);
 
-struct ECB {
-    f32 top;
-    f32 bottom;
-    f32 right;
-    f32 left;
-};
-
 struct ItemAttr {
     u8 x0_is_heavy : 1;     // 0x0, bit 0x80, is heavy item (crate)
     u8 x0_78 : 4;           // unk, might be lock-on behavior? (Samus Missile)
@@ -573,6 +566,7 @@ struct Item {
         itLinkBow_ItemVars linkbow;
         itLinkHookshot_ItemVars linkhookshot;
         itMato_ItemVars mato;
+        itNokoNoko_ItemVars nokonoko;
         itPikachutJoltGround_ItemVars pikachujoltground;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;

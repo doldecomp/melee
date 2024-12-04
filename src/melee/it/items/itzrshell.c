@@ -89,7 +89,7 @@ void it_802E0468(Item_GObj* gobj, HSD_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-Item_GObj* it_802E0488(s32 arg0, s32 arg1, s32 arg2)
+Item_GObj* it_802E0488(s32 arg0, Vec3* arg1, s32 arg2)
 {
     Vec3 pos = { 0, 0, 0 };
     Item_GObj* it_gp;
