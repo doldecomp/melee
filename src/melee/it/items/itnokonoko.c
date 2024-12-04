@@ -432,7 +432,7 @@ int it_802DD53C(Item_GObj* gobj)
 
 void it_802DD598(HSD_GObj* gobj) {}
 
-void it_802DD59C_inline(HSD_GObj* gobj)
+static void it_802DD59C_inline(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itNokoNoko_DatAttrs* da = ip->xC4_article_data->x4_specialAttributes;
