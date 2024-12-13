@@ -3547,7 +3547,7 @@ void it_802762B0(Item* arg0)
 
 /// #it_8027C56C
 
-bool it_8027C794(void)
+bool it_8027C794(Item_GObj* gobj)
 {
     return false;
 }
