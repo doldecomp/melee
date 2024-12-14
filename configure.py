@@ -157,7 +157,8 @@ config.asflags = [
     "--strip-local-absolute",
     "-I include",
     f"-I build/{config.version}/include",
-    f"--defsym version={version_num}",
+    f"--defsym BUILD_VERSION={version_num}",
+    f"--defsym VERSION_{config.version}",
 ]
 config.ldflags = [
     "-fp hardware",
@@ -198,7 +199,8 @@ cflags_base = [
     "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
     "-i include",
     f"-i build/{config.version}/include",
-    f"-DVERSION={version_num}",
+    f"-DBUILD_VERSION={version_num}",
+    f"-DVERSION_{config.version}",
 ]
 
 # Debug flags
