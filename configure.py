@@ -277,6 +277,24 @@ config.libs = [
     },
 ]
 
+
+# Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
+# This is called once per module, with the module ID and the current link order.
+#
+# For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
+# "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
+def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+    # Don't modify the link order for matching builds
+    if not config.non_matching:
+        return objects
+    if module_id == 0:  # DOL
+        return objects + ["dummy.c"]
+    return objects
+
+# Uncomment to enable the link order callback.
+# config.link_order_callback = link_order_callback
+
+
 # Optional extra categories for progress tracking
 # Adjust as desired for your project
 config.progress_categories = [
