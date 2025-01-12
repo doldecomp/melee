@@ -36,7 +36,7 @@
 /* 1A4B60 */ UNK_RET gm_801A4B60(UNK_PARAMS);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
 /* 1A4B90 */ s32 gm_801A4B90(void);
-/* 1A4B9C */ s32 gm_801A4B9C(void);
+/* 1A4B9C */ s8* gm_801A4B9C(void);
 /* 1A4BA8 */ struct gm_80479D58_t* gm_801A4BA8(void);
 /* 1A4BC8 */ s32 gm_801A4BC8(void);
 /* 1A4BD0 */ UNK_RET fn_801A4BD0(UNK_PARAMS);

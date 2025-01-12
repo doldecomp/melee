@@ -9,6 +9,19 @@
 #include "lb/lb_00CE.h"
 #include "mn/inlines.h"
 
+u8 mn_802295AC(void)
+{
+    s32 port_idx = 0;
+    while (port_idx < 4) {
+        u64 res = gm_801A36A0(port_idx);
+        if (res & 0x100000000) {
+            return port_idx;
+        }
+        port_idx += 1;
+    }
+    return 0;
+}
+
 u32 mn_80229624(u32 arg0)
 {
     u32 ret = 0;
@@ -57,6 +70,13 @@ u32 mn_80229624(u32 arg0)
         ret |= MenuEvent_Right;
     }
     return ret;
+}
+
+void mn_80229860(s8 arg0)
+{
+    s8* val = gm_801A4B9C();
+    *val = arg0;
+    gm_801A4B60();
 }
 
 s32 mn_80229938(s32 arg0, s32 arg1)

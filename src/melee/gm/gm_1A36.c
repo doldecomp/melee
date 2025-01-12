@@ -466,9 +466,9 @@ s32 gm_801A4B90(void)
 
 extern void* gm_804D6720;
 
-s32 gm_801A4B9C(void)
+s8* gm_801A4B9C(void)
 {
-    return M2C_FIELD(gm_804D6720, s32*, 8);
+    return (s8*) M2C_FIELD(gm_804D6720, s32*, 8);
 }
 
 struct gm_80479D58_t* gm_801A4BA8(void)
