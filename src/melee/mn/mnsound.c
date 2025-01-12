@@ -86,7 +86,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
     }
     events = Menu_GetEvents();
     if (events & MenuEvent_Back) {
-        Menu_SFX_Back();
+        sfxBack();
         mn_804A04F0.x11 = 0;
         gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
         lb_8001CE00();
@@ -95,7 +95,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
     }
     if (events & (MenuEvent_Up | MenuEvent_Down)) {
         // switch between the two
-        Menu_SFX_Move();
+        sfxMove();
         if ((u8) menu->unk2 == 0) {
             menu->unk2 = 1;
         } else {
@@ -115,7 +115,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         if (menu->unk2 == 0) {
             if (menu->unk1 == 1) {
                 // switch from mono to stereo
-                Menu_SFX_Move();
+                sfxMove();
                 menu->unk1 = 0;
                 mnSound_ChannelAnim(GET_JOBJ(mnSound_804D6C30), menu->unk1);
                 lbAudioAx_80024C08(menu->unk1);
@@ -132,7 +132,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         if (menu->unk2 == 0) {
             if (menu->unk1 == 0) {
                 // switch from stereo to mono
-                Menu_SFX_Move();
+                sfxMove();
                 menu->unk1 = 1;
                 mnSound_ChannelAnim(GET_JOBJ(mnSound_804D6C30), menu->unk1);
                 lbAudioAx_80024C08(menu->unk1);
