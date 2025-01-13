@@ -423,8 +423,8 @@ typedef struct itChicoritaAttr {
 typedef struct itChicoritaLeafAttr {
     f32 timer;
     f32 x4;
-    f32 x8; // x pos
-    f32 xC; // y pos
+    f32 x8;  // x pos
+    f32 xC;  // y pos
     f32 x10; // x vel
 } itChicoritaLeafAttr;
 

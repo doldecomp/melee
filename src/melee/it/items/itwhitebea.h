@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 /* 2E31F8 */ void it_802E31F8(Item_GObj*);

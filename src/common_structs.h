@@ -59,8 +59,8 @@ typedef u32 HSD_Pad;
 #define MPCOLL_UNK 0x18000 // Floor??
 #define MPCOLL_GRPUSH (1 << 15)
 #define MPCOLL_FLAGS_B16 (1 << 16)
-#define MPCOLL_FLAGS_B20 (1 << 20) //0x100000
-#define MPCOLL_FLAGS_B21 (1 << 21) //0x200000
+#define MPCOLL_FLAGS_B20 (1 << 20) // 0x100000
+#define MPCOLL_FLAGS_B21 (1 << 21) // 0x200000
 #define MPCOLL_FLAGS_B23 (1 << 23)
 #define MPCOLL_FLAGS_B24 (1 << 24)
 #define MPCOLL_FLAGS_B25 (1 << 25)

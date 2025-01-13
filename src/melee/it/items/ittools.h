@@ -2,7 +2,9 @@
 #define GALE01_2EEFA8
 
 #include <placeholder.h>
+
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 /* 2EEFA8 */ UNK_RET it_802EEFA8(UNK_PARAMS);

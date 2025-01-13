@@ -5,6 +5,7 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 /* 2DDB38 */ UNK_RET it_802DDB38(UNK_PARAMS);

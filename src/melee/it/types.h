@@ -144,7 +144,8 @@ struct ItemAttr {
 
 /// @sz{8}
 struct ItemDynamics {
-     /// @todo Combine with ftDynamics? Can see in it_8027163C that this struct does not work perfectly
+    /// @todo Combine with ftDynamics? Can see in it_8027163C that this struct
+    /// does not work perfectly
     /// @at{0} @sz{4}
     int count;
 
@@ -270,10 +271,10 @@ struct Item {
     Vec3 x70_nudge;
 
     Vec3 x7C;
-    Vec3 x88; // From it_80277040
-    Vec3 x94; // From it_80277040
-    Vec3 xA0; // From it_802734B4
-    Vec3 xAC_unk; // From it_80276CEC
+    Vec3 x88;                           // From it_80277040
+    Vec3 x94;                           // From it_80277040
+    Vec3 xA0;                           // From it_802734B4
+    Vec3 xAC_unk;                       // From it_80276CEC
     ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
     ItemStateTable* xBC_itemStateContainer;
     GroundOrAir ground_or_air;
@@ -290,9 +291,9 @@ struct Item {
     /// @brief Item's current owner
     HSD_GObj* owner;
 
-    HSD_GObj* x51C; // Related to the owner gobj
+    HSD_GObj* x51C;            // Related to the owner gobj
     CameraBox* x520_cameraBox; // CameraBox
-    FtCmdState* x524_cmd; // should this be CommandInfo* instead?
+    FtCmdState* x524_cmd;      // should this be CommandInfo* instead?
     f32 x528;
     void* x52C_item_script; // Script parse?
     u32 x530;
@@ -313,9 +314,13 @@ struct Item {
         s32 x138;
     } x5D4_hitboxes[4];
     u32 xAC4_ignoreItemID; // Cannot hit items with this index?
-    u8 xAC8_hurtboxNum;   // Number of hurtboxes this item has
-    HurtCapsule xACC_itemHurtbox[2];  // Are these really size 0x4C? Code in itcoll.c and it_266F.c adds 0x44 to iterate through. (Conversely can see adding 0x4C to iterate in ftcoll.c)
-                                      // Can see how vars don't line up in it_80274D6C and it_80274DAC
+    u8 xAC8_hurtboxNum;    // Number of hurtboxes this item has
+    HurtCapsule
+        xACC_itemHurtbox[2]; // Are these really size 0x4C? Code in itcoll.c
+                             // and it_266F.c adds 0x44 to iterate through.
+                             // (Conversely can see adding 0x4C to iterate in
+                             // ftcoll.c) Can see how vars don't line up in
+                             // it_80274D6C and it_80274DAC
     f32 xB64;
     u8 xB68; // int for ItemDynamics->count?
     u8 xB69;
@@ -326,7 +331,7 @@ struct Item {
         // u32 xB6C; // struct DynamicsData* for DynamicsDesc->data?
         // u32 xB70; // int for DynamicsDesc->count?
         // u32 xB74; // pos.x?
-        f32 xB78; // pos.y? scale?
+        f32 xB78;       // pos.y? scale?
         HSD_JObj* xB7C; // HSD_JObj* for bone?
         u32 xB80;
         Vec3 xB84;
@@ -394,12 +399,12 @@ struct Item {
     f32 xCB8_outDamageDirection; // 0xcb8, updated @ 80078184
     f32 xCBC_hitlagFrames;       // 0xcbc, hitlag frames remaining
     f32 xCC0;                    // 0xcc0
-    s32 xCC4;                    // 0xcc4, switch statement for this in it_8027CBFC
-    f32 xCC8_knockback;          // 0xcc8
+    s32 xCC4;           // 0xcc4, switch statement for this in it_8027CBFC
+    f32 xCC8_knockback; // 0xcc8
     f32 xCCC_incDamageDirection; // Direction from which damage was applied?
     f32 xCD0;                    // 0xcd0
-    Vec3 xCD4; // 0xcd4
-    Vec3 xCE0; // 0xce0
+    Vec3 xCD4;                   // 0xcd4
+    Vec3 xCE0;                   // 0xce0
     HSD_GObj* xCEC_fighterGObj;  // 0xcec
     HSD_GObj* xCF0_itemGObj; // 0xcf0, is a fp GObj, but is the owner of the
 
@@ -683,7 +688,8 @@ struct ItemCommonData {
     s32 xDC;
     f32 unk_degrees; ///< @at{E0}
     u8 filler_1a[0xE8 - 0xE4];
-    u8 xE8; // struct that has a float (scale?) as the first member? See it_80275BC8
+    u8 xE8; // struct that has a float (scale?) as the first member? See
+            // it_80275BC8
     u8 filler_1a_2[0xF0 - 0xEC];
     f32 xF0;
     f32 xF4;
@@ -694,7 +700,8 @@ struct ItemCommonData {
     s32 x12C; // used in it_8026CF04
     s32 x130; // used in it_8026CF04
     s32 x134; // used in it_8026CF04
-    // u8 filler_2[0x148 - 0x138]; - replaced with vars that are used for calc's in it_8026F8B4
+    // u8 filler_2[0x148 - 0x138]; - replaced with vars that are used for
+    // calc's in it_8026F8B4
     s32 x138;
     s32 x13C;
     s32 x140;
@@ -771,7 +778,8 @@ struct HSD_ObjAllocUnk {
 };
 
 struct HSD_ObjAllocUnk6 {
-    u8 x0; // Gets incremented and decremented by 1 for various checks. Gets indexed into x4's struct
+    u8 x0;  // Gets incremented and decremented by 1 for various checks. Gets
+            // indexed into x4's struct
     u8* x4; // Points to struct of ItemKinds (or array?)
     u16 x8; // Max value for random integers
     u16 xA;
@@ -782,7 +790,8 @@ struct HSD_ObjAllocUnk4 {
     u32 x0;
     HSD_ObjAllocUnk6 x4;
     s32 x14;
-    u64 x18; // Gets set equal to gm_8016AEA4(), aka lbl_8046B6A0.unk_24D3 (which is an s8?)
+    u64 x18; // Gets set equal to gm_8016AEA4(), aka lbl_8046B6A0.unk_24D3
+             // (which is an s8?)
 };
 
 struct HSD_ObjAllocUnk5 {

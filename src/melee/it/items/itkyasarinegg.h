@@ -1,6 +1,7 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 extern ItemStateTable it_803F9328[];
@@ -14,4 +15,3 @@ bool it_802EFF1C(Item_GObj*);
 bool it_802F01F8(Item_GObj*);
 bool it_802F0010(Item_GObj*);
 void it_802F0320(Item_GObj*, Item_GObj*);
-

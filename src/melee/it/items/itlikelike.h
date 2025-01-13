@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 /* 2D9A2C */ UNK_RET it_802D9A2C(UNK_PARAMS);

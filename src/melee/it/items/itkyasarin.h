@@ -2,7 +2,9 @@
 #define GALE01_2ECCDC
 
 #include <placeholder.h>
+
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 /* 2ECCDC */ void it_802ECCDC(Item_GObj*);

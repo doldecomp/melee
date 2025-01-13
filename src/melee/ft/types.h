@@ -868,7 +868,8 @@ struct Fighter_DemoStrings {
     /* fp+2070 */ s32 x2070_int;
 };
 
-/// @todo See if this should likewise be instituted for item->xD94 thru xDA4_word/xDA8_short
+/// @todo See if this should likewise be instituted for item->xD94 thru
+/// xDA4_word/xDA8_short
 /* fp+2074 */ struct Struct2074 {
     /* fp+2074 */ Vec2 x2074_vec;
     /* fp+207C */ Vec2 x207C;

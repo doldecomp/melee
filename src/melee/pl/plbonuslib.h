@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include <placeholder.h>
+
 #include "it/forward.h"
 
 /* 03E70C */ void pl_8003E70C(Item_GObj*);

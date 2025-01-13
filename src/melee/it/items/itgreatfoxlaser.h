@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 /* 2EAF28 */ UNK_T it_802EAF28(Item_GObj* gobj);

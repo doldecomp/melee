@@ -473,7 +473,8 @@ static inline void HSD_JObjAddScaleX(HSD_JObj* jobj, float x)
     jobj->scale.x += x;
     // if (!(jobj->flags & (1 << 25))) {
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        // { if (jobj != ((void*) 0) && !HSD_JObjMtxIsDirty(jobj)) { HSD_JObjSetMtxDirtySub(jobj); } };
+        // { if (jobj != ((void*) 0) && !HSD_JObjMtxIsDirty(jobj)) {
+        // HSD_JObjSetMtxDirtySub(jobj); } };
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -485,7 +486,8 @@ static inline void HSD_JObjAddScaleY(HSD_JObj* jobj, float y)
     jobj->scale.y += y;
     // if (!(jobj->flags & (1 << 25))) {
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        // { if (jobj != ((void*) 0) && !HSD_JObjMtxIsDirty(jobj)) { HSD_JObjSetMtxDirtySub(jobj); } };
+        // { if (jobj != ((void*) 0) && !HSD_JObjMtxIsDirty(jobj)) {
+        // HSD_JObjSetMtxDirtySub(jobj); } };
         HSD_JObjSetMtxDirty(jobj);
     }
 }
@@ -497,7 +499,8 @@ static inline void HSD_JObjAddScaleZ(HSD_JObj* jobj, float z)
     jobj->scale.z += z;
     // if (!(jobj->flags & (1 << 25))) {
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        // { if (jobj != ((void*) 0) && !HSD_JObjMtxIsDirty(jobj)) { HSD_JObjSetMtxDirtySub(jobj); } };
+        // { if (jobj != ((void*) 0) && !HSD_JObjMtxIsDirty(jobj)) {
+        // HSD_JObjSetMtxDirtySub(jobj); } };
         HSD_JObjSetMtxDirty(jobj);
     }
 }

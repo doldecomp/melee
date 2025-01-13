@@ -6,6 +6,7 @@
 
 #include "it/forward.h"
 #include "it/items/forward.h"
+
 #include "it/items/types.h"
 
 /* 2DC69C */ void it_802DC69C(Item_GObj*);

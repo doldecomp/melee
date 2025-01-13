@@ -22,12 +22,8 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-const Vec3 it_803B8718 = {
-    0.0f, 0.0f, 0.0f
-};
-const Vec3 it_803B8724 = {
-    0.0f, 0.0f, 0.0f
-};
+const Vec3 it_803B8718 = { 0.0f, 0.0f, 0.0f };
+const Vec3 it_803B8724 = { 0.0f, 0.0f, 0.0f };
 
 ItemStateTable it_803F8BD8[] = {
     { 0, it_802E67A8, it_802E67F4, it_802E6824 },
