@@ -65,8 +65,8 @@ STATIC_ASSERT(sizeof(DmgLogEntry) == 0x28);
 
 /* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry** log,
                                          int idx, bool);
-/* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
-                                         Fighter* victim, bool);
+// /* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
+//                                          Fighter* victim, bool);
 
 // .data
 IntVec3 ftColl_803C0C40 = { 141, 142, 143 };
@@ -285,7 +285,7 @@ void ftColl_80076764(int arg0, enum_t arg1, Fighter_GObj* arg2,
     }
 }
 
-void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, Fighter* victim,
+void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
                      bool arg4)
 {
     s8 j;
@@ -520,7 +520,7 @@ struct ftCollSFX lbl_803C0C40 = {
 
 /// @todo #ftColl_80076808
 inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1, int arg3,
-                     bool (*cb)(HitCapsule* hit, int arg1, Fighter* fp))
+                     bool (*cb)(HitCapsule* hit, int arg1, void* fp))
 {
     size_t i;
     for (i = 0; i < ARRAY_SIZE(fp0->x914); i++) {

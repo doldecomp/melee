@@ -299,7 +299,8 @@ typedef struct itPokemonAttributes {
 } itPokemonAttributes;
 
 typedef struct {
-    u8 padding[0xE34 - 0xDD4];
+    s16 x0;
+    u8 padding[0xE34 - 0xDD8];
     s32 timer;
     int x64;
 } itPokemon_ItemVars;
@@ -393,6 +394,128 @@ typedef struct itTaruCann_DatAttrs {
     /* +28 */ int x28;
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
+
+typedef struct itKlap_ItemVars {
+    /*  +0 ip+DD4 */ f32 x0;
+    /*  +4 ip+DD8 */ f32 x4;
+    /*  +8 ip+DDC */ f32 x8;
+    /*  +C ip+DE0 */ f32 xC;
+    /* +10 ip+DE4 */ f32 x10;
+    /* +14 ip+DE8 */ f32 x14;
+    /* +18 ip+DEC */ f32 x18;
+    /* +1C ip+DF0 */ f32 x1C;
+    /* +20 ip+DF4 */ f32 x20;
+    /* +24 ip+DF8 */ f32 x24;
+    /* +28 ip+DFC */ f32 x28;
+} itKlap_ItemVars;
+
+typedef struct itChicorita_ItemVars {
+    /* ip+DD4 */ u8 _0[0x60 - 0x0];
+    /* ip+E34 */ s32 x60; // timer?
+    /* ip+E38 */ f32 x64; // y vel
+} itChicorita_ItemVars;
+
+typedef struct itChicoritaAttr {
+    f32 scale;
+    s32 x4; // x60 in item vars gets set to this if -1; max timer/lifetime?
+} itChicoritaAttr;
+
+typedef struct itChicoritaLeafAttr {
+    f32 timer;
+    f32 x4;
+    f32 x8; // x pos
+    f32 xC; // y pos
+    f32 x10; // x vel
+} itChicoritaLeafAttr;
+
+typedef struct it_2728_DatAttrs {
+    Fighter* fighter;
+} it_2728_DatAttrs;
+
+typedef struct it_279D_ItemVars {
+    /* ip+DD4 */ s32 x0;
+    /* ip+DD8 */ Vec3 x4;
+    /* ip+DE4 */ Vec3 x10;
+    /* ip+DF0 */ f32 x1C;
+    /* ip+DF4 */ f32 x20;
+    /* ip+DF8 */ f32 x24;
+    /* ip+DFC */ f32 x28;
+    /* ip+E00 */ f32 x2C[6];
+    // /* ip+E04 */ s32 x30; // scale?
+    // /* ip+E08 */ s32 x34;
+    // /* ip+E0C */ s32 x38;
+    // /* ip+E10 */ s32 x3C;
+    // /* ip+E14 */ s32 x40;
+    /* ip+E18 */ f32 x44;
+    /* ip+E1C */ f32 x48;
+    /* ip+E20 */ f32 x4C; // scale
+    /* ip+E24 */ f32 x50;
+    /* ip+E28 */ s32 x54;
+    /* ip+E2C */ s32 x58; // used as an index back into this struct?
+    /* ip+E30 */ s32 x5C;
+} it_279D_ItemVars;
+
+typedef struct it_279D_DatAttrs {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C[6];
+    // f32 x20;
+    // f32 x24;
+    // f32 x28;
+    // f32 x2C;
+    // f32 x30;
+    f32 x34;
+    s32 x38;
+    s32 x3C[160];
+    // f32 x3C;
+    // f32 x40;
+    // f32 x44;
+    // f32 x48;
+    // f32 x4C;
+    // f32 x50;
+    // f32 x54;
+    // f32 x58;
+    // f32 x5C;
+    // s32 x60[160];
+    // f32 padding[0x248 - 0x4C];
+    // f32 x248;
+} it_279D_DatAttrs;
+
+typedef struct it_27B5_ItemVars {
+    /* ip+DD4 */ HSD_JObj* x0;
+    /* ip+DD8 */ s32 x4;
+    /* ip+DDC */ Vec3 x8;
+    /* ip+DE8 */ S32Vec3 x14;
+    /* ip+DF4 */ s32 x20;
+    /* ip+DF8 */ s32 x24;
+    /* ip+DFC */ s32 x28;
+    /* ip+E00 */ f32 x2C;
+    /* ip+E04 */ s32 x30; // scale?
+    /* ip+E08 */ s32 x34;
+    /* ip+E0C */ s32 x38;
+    /* ip+E10 */ s32 x3C;
+    /* ip+E14 */ s32 x40;
+    /* ip+E18 */ f32 x44;
+    /* ip+E1C */ s32 x48;
+    /* ip+E20 */ f32 x4C; // scale
+    /* ip+E24 */ f32 x50;
+    /* ip+E28 */ s32 x54;
+    /* ip+E2C */ s32 x58;
+    /* ip+E30 */ s32 x5C;
+} it_27B5_ItemVars;
+
+typedef struct it_27B5_DatAttrs {
+    f32 scale;
+} it_27B5_DatAttrs;
+
+typedef struct it_27CE_ItemVars {
+    /* ip+DD4 */ void* attr;
+} it_27CE_ItemVars;
 
 // Should it_2F28 and it_27CF use the same structs?
 typedef struct it_27CF_ItemVars {
@@ -510,7 +633,7 @@ typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
 // Not sure if there is a way to combine these two structs?
 typedef struct it_2E6A_ItemVars_1 {
     /*  +0 ip+DD4 */ s16 x0;
-    /*  +0 ip+DD4 */ s16 x2;
+    /*  +2 ip+DD6 */ s16 x2;
     /*  +4 ip+DD8 */ HSD_JObj* x4;
     /*  +8 ip+DDC */ f32 x8; // unused?
     /*  +C ip+DE0 */ f32 xC; // unused?
@@ -522,7 +645,7 @@ typedef struct it_2E6A_ItemVars_1 {
 
 typedef struct it_2E6A_ItemVars_2 {
     /*  +0 ip+DD4 */ s16 x0;
-    /*  +0 ip+DD4 */ u16 x2;
+    /*  +2 ip+DD6 */ u16 x2;
     /*  +4 ip+DD8 */ Vec3 x4;
     /* +10 ip+DE4 */ void* x10;
     /* +14 ip+DE8 */ void* x14;

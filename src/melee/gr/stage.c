@@ -267,7 +267,7 @@ void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
     Ground_801C2D24(arg0, arg_vec);
 }
 
-s32 Stage_80224FDC(Vec3* arg0)
+bool Stage_80224FDC(Vec3* arg0)
 {
     s32 rand_output;
     s32 counter = 0x15;
@@ -275,7 +275,7 @@ s32 Stage_80224FDC(Vec3* arg0)
 
     while (counter != 0) {
         if (Ground_801C2D24(HSD_Randi(counter) + 0x7F, arg0)) {
-            return 1;
+            return true;
         }
         counter += -1;
     }
@@ -286,12 +286,12 @@ s32 Stage_80224FDC(Vec3* arg0)
         counter2 = Ground_801C2D24(rand_output, arg0);
 
         if (counter2 != 0) {
-            return 1;
+            return true;
         }
         counter2 = rand_output;
     }
 
-    return 0;
+    return false;
 }
 
 s32 Stage_80225074(s32 arg0)

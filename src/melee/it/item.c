@@ -15,6 +15,7 @@
 #include "gr/grlib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
+#include "it/itcoll.h"
 #include "it/it_2725.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
@@ -578,12 +579,12 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xCB0_source_ply = 6;
     item_data->xCB4 = -1;
     item_data->xC38 = -1;
-    item_data->xCE8 = 0.0f;
-    item_data->xCE4 = 0.0f;
-    item_data->xCE0 = 0.0f;
-    item_data->xCDC = 0.0f;
-    item_data->xCD8 = 0.0f;
-    item_data->xCD4 = 0.0f;
+    item_data->xCE0.z = 0.0f;
+    item_data->xCE0.y = 0.0f;
+    item_data->xCE0.x = 0.0f;
+    item_data->xCD4.z = 0.0f;
+    item_data->xCD4.y = 0.0f;
+    item_data->xCD4.x = 0.0f;
     item_data->xDD0_flag.b1 = 0;
     item_data->xDC8_word.flags.x14 = 0;
     item_data->xDC8_word.flags.xE = 0;
@@ -1154,7 +1155,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 {
     item_data->x52C_item_script = itemStateDesc->xC_script;
     item_data->x530 = 0;
-    item_data->x524 = 0.0f;
+    item_data->x524_cmd->x0 = 0.0f;
 }
 
 extern struct r13_ColAnimStruct* it_804D6D04;
@@ -1253,11 +1254,11 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0;
-            item_data->x524 = 0.0F;
+            item_data->x524_cmd->x0 = 0.0F;
         } else if (temp_r23 != NULL && (flags & ITEM_CMD_UPDATE)) {
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
-            item_data->x524 = 0.0f;
+            item_data->x524_cmd->x0 = 0.0f;
         }
 
         HSD_JObjAnimAll(item_jobj);
@@ -1556,12 +1557,12 @@ static void Item_80269CC4(HSD_GObj* gobj)
     temp_item->xCFC = 0;
     temp_item->xCB4 = -1;
     temp_item->xC38 = -1;
-    temp_item->xCE8 = 0.0f;
-    temp_item->xCE4 = 0.0f;
-    temp_item->xCE0 = 0.0f;
-    temp_item->xCDC = 0.0f;
-    temp_item->xCD8 = 0.0f;
-    temp_item->xCD4 = 0.0f;
+    temp_item->xCE0.z = 0.0f;
+    temp_item->xCE0.y = 0.0f;
+    temp_item->xCE0.x = 0.0f;
+    temp_item->xCD4.z = 0.0f;
+    temp_item->xCD4.y = 0.0f;
+    temp_item->xCD4.x = 0.0f;
     temp_item->xDCE_flag.b5 = false;
     temp_item->xDCE_flag.b4 = false;
     temp_item->xDCC_flag.b1 = false;
@@ -1876,7 +1877,7 @@ static void Item_8026A788(HSD_GObj* gobj)
 
     it_80272304(gobj);
     for (i = 0; i < dynamicBonesNum; i++, dynamicBones++) {
-        lb_8001044C(&dynamicBones->dyn_desc, &item_data->xB6C, item_data->xB68,
+        lb_8001044C(&dynamicBones->dyn_desc, &item_data->xB6C_vars[0].xB6C.x, item_data->xB68,
                     0.0f, 0, dynamicBones->flags, 0, 1);
     }
 }
@@ -2043,7 +2044,7 @@ void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, f32 arg2)
     it_802731A4(gobj);
     it_80273B50(gobj, pos);
     RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
-    it_80274198(gobj, 1);
+    it_80274198(gobj, true);
     it_802754D4(gobj);
 
     if (it_8026B6C8(gobj)) {
@@ -2058,7 +2059,7 @@ void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
     it_802731A4(gobj);
     it_80273748(gobj, arg1, arg2);
     RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
-    it_802741F4(gobj, 1);
+    it_802741F4(gobj, true);
     it_802754D4(gobj);
 
     if (it_8026B6C8(gobj)) {
@@ -2073,7 +2074,7 @@ void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
     item_data->xC44 = arg3;
     it_80273748(gobj, arg1, arg2);
     RunCallback(gobj, item_data->xB8_itemLogicTable->thrown);
-    it_802741F4(gobj, 1);
+    it_802741F4(gobj, true);
     it_802754D4(gobj);
 }
 

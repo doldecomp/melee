@@ -648,7 +648,8 @@ int it_8029FA30(Item_GObj* gobj)
             } else {
                 temp_f1 = 2.0f * (HSD_Randf() - 0.5f);
                 item->x40_vel.x = sa->x14 * temp_f1;
-                it_80272980(gobj, temp_f1);
+                // it_80272980(gobj, temp_f1);
+                it_80272980(gobj);
             }
             item->x40_vel.y = sa->x18 * item->facing_dir;
             item->xDD4_itemVar.linkbomb.x0.b2 = true;

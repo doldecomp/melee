@@ -947,7 +947,7 @@ s32 ftLib_800874BC(HSD_GObj* gobj)
     return fp->x221F_b4;
 }
 
-void ftLib_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
+void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     pl_8003E4A4(fp->player_id, fp->x221F_b4, arg1, arg2);

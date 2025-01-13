@@ -10,6 +10,7 @@
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
+#include "ft/types.h"
 #include "it/itCharItems.h"
 #include "it/itCommonItems.h"
 #include "it/itPKFlash.h"
@@ -111,8 +112,8 @@ struct ItemAttr {
     Vec2 x30_unk;        // 0x34
     Vec2 x38_grab_range; // 0x38
     ECB x40;
-    s32 x50;       // 0x50
-    s32 x54;       // 0x54
+    f32 x50;       // 0x50
+    f32 x54;       // 0x54
     f32 x58;       // 0x58
     f32 x5c;       // 0x5c
     f32 x60_scale; // 0x60, does not affect hitboxes
@@ -143,6 +144,7 @@ struct ItemAttr {
 
 /// @sz{8}
 struct ItemDynamics {
+     /// @todo Combine with ftDynamics? Can see in it_8027163C that this struct does not work perfectly
     /// @at{0} @sz{4}
     int count;
 
@@ -181,7 +183,7 @@ struct ItemModelDesc {
     s32 x8_bone_attach_id;
 
     /// @at{C} @sz{4}
-    int xC_bit_field;
+    u8 xC_bit_field;
 };
 
 struct Article {
@@ -267,13 +269,12 @@ struct Item {
     /// @at{70} @sz{C}
     Vec3 x70_nudge;
 
-    f32 x7C;
-    u8 padding_x80[8];
-    f32 x88;
-    u8 padding_x8C[0xB8 - 0x8C];
-
+    Vec3 x7C;
+    Vec3 x88; // From it_80277040
+    Vec3 x94; // From it_80277040
+    Vec3 xA0; // From it_802734B4
+    Vec3 xAC_unk; // From it_80276CEC
     ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
-
     ItemStateTable* xBC_itemStateContainer;
     GroundOrAir ground_or_air;
     Article* xC4_article_data;
@@ -289,10 +290,10 @@ struct Item {
     /// @brief Item's current owner
     HSD_GObj* owner;
 
-    s32 x51C;
+    HSD_GObj* x51C; // Related to the owner gobj
     CameraBox* x520_cameraBox; // CameraBox
-    f32 x524;
-    s32 x528;
+    FtCmdState* x524_cmd; // should this be CommandInfo* instead?
+    f32 x528;
     void* x52C_item_script; // Script parse?
     u32 x530;
     u32 x534;
@@ -302,7 +303,7 @@ struct Item {
     u32 x544;
     ColorOverlay x548_colorOverlay;
     u8 x5C8;
-    u8 x5C9;
+    u8 x5C9; // used heavily in it_80278108
     u8 x5CA;
     u8 x5CB;
     f32 x5CC_currentAnimFrame;
@@ -311,34 +312,38 @@ struct Item {
         HitCapsule hit;
         s32 x138;
     } x5D4_hitboxes[4];
-    s32 xAC4_ignoreItemID; // Cannot hit items with this index?
-    u32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
-    HurtCapsule xACC_itemHurtbox[2];
-    u32 xB64;
-    u8 xB68;
+    u32 xAC4_ignoreItemID; // Cannot hit items with this index?
+    u8 xAC8_hurtboxNum;   // Number of hurtboxes this item has
+    HurtCapsule xACC_itemHurtbox[2];  // Are these really size 0x4C? Code in itcoll.c and it_266F.c adds 0x44 to iterate through. (Conversely can see adding 0x4C to iterate in ftcoll.c)
+                                      // Can see how vars don't line up in it_80274D6C and it_80274DAC
+    f32 xB64;
+    u8 xB68; // int for ItemDynamics->count?
     u8 xB69;
     u8 xB6A;
     u8 xB6B;
-    u32 xB6C;
-    u32 xB70;
-    u32 xB74;
-    u32 xB78;
-    u32 xB7C;
-    u32 xB80;
-    u32 xB84;
-    u32 xB88;
-    u32 xB8C;
-    u32 xB90;
-    u32 xB94;
-    u32 xB98;
-    u32 xB9C;
-    u32 xBA0;
-    u32 xBA4;
-    u32 xBA8;
-    u32 xBAC;
-    u32 xBB0;
-    u32 xBB4;
-    u32 xBB8;
+    struct {
+        Vec3 xB6C;
+        // u32 xB6C; // struct DynamicsData* for DynamicsDesc->data?
+        // u32 xB70; // int for DynamicsDesc->count?
+        // u32 xB74; // pos.x?
+        f32 xB78; // pos.y? scale?
+        HSD_JObj* xB7C; // HSD_JObj* for bone?
+        u32 xB80;
+        Vec3 xB84;
+        // u32 xB88;
+        // u32 xB8C;
+        u32 xB90; // enum_t for BoneDynamicsDesc->bone_id?
+    } xB6C_vars[2];
+    // u32 xB94;
+    // u32 xB98;
+    // u32 xB9C;
+    // u32 xBA0;
+    // u32 xBA4;
+    // u32 xBA8;
+    // u32 xBAC;
+    // u32 xBB0;
+    // u32 xBB4;
+    // u32 xBB8;
     DynamicBoneTable* xBBC_dynamicBoneTable;
     UNK_T xBC0;
     u8 xBC4;
@@ -353,11 +358,11 @@ struct Item {
     ECB xBFC;
     ECB xC0C;
     ECB xC1C;
-    u32 xC2C;
-    u32 xC30;
+    s32 xC2C;
+    s32 xC30;
 
     s32 xC34_damageDealt; // Rounded down
-    s32 xC38;             // 0xc38
+    s32 xC38;             // 0xc38 - ItemKind?
     f32 xC3C;             // 0xc3c
     f32 xC40;             // 0xc40
     f32 xC44;             // 0xc44
@@ -389,16 +394,12 @@ struct Item {
     f32 xCB8_outDamageDirection; // 0xcb8, updated @ 80078184
     f32 xCBC_hitlagFrames;       // 0xcbc, hitlag frames remaining
     f32 xCC0;                    // 0xcc0
-    s32 xCC4;                    // 0xcc4
+    s32 xCC4;                    // 0xcc4, switch statement for this in it_8027CBFC
     f32 xCC8_knockback;          // 0xcc8
     f32 xCCC_incDamageDirection; // Direction from which damage was applied?
     f32 xCD0;                    // 0xcd0
-    f32 xCD4;                    // 0xcd4
-    f32 xCD8;                    // 0xcd8
-    f32 xCDC;                    // 0xcdc
-    f32 xCE0;                    // 0xce0
-    f32 xCE4;                    // 0xce4
-    f32 xCE8;                    // 0xce8
+    Vec3 xCD4; // 0xcd4
+    Vec3 xCE0; // 0xce0
     HSD_GObj* xCEC_fighterGObj;  // 0xcec
     HSD_GObj* xCF0_itemGObj; // 0xcf0, is a fp GObj, but is the owner of the
 
@@ -426,7 +427,7 @@ struct Item {
     /// @at{D0C} @sz{4}
     enum_t xD0C;
 
-    s32 xD10;
+    f32 xD10;
 
     /// @at{D14} @sz{4}
     HSD_GObjPredicate animated;
@@ -478,7 +479,7 @@ struct Item {
     int xD4C;
     u32 xD50_landNum;  // Number of times this item has landed
     s32 xD54_throwNum; // Number of times this item has been thrown
-    s32 xD58;
+    u32 xD58;
     s32 xD5C;
 
     /// @at{D60} @sz{4}
@@ -502,9 +503,9 @@ struct Item {
     s32 xD80;
     s32 xD84;
     s32 xD88_attackID;
-    s16 xD8C_attack_instance;
+    u16 xD8C_attack_instance;
     s16 xD8E;
-    s32 xD90;
+    union Struct2070 xD90; // some bit struct/union
     Vec2 xD94;
     Vec2 xD9C;
     union {
@@ -524,7 +525,7 @@ struct Item {
     u32 xDB4_itcmd_var2;
     u32 xDB8_itcmd_var3;
     u32 xDBC_itcmd_var4;
-    u32 xDC0;
+    UnkFlagStruct xDC0;
     u32 xDC4;
     flag32 xDC8_word;
     struct {
@@ -543,6 +544,9 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         it_266F_ItemVars it_266F;
+        it_279D_ItemVars it_279D;
+        it_27B5_ItemVars it_27B5;
+        it_27CE_ItemVars it_27CE;
         it_27CF_ItemVars it_27CF;
         it_2E5A_ItemVars it_2E5A;
         it_2E6A_ItemVars_1 it_2E6A_1;
@@ -550,6 +554,7 @@ struct Item {
         it_2F28_ItemVars it_2F28;
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;
+        itChicorita_ItemVars chicorita;
         itCoin_ItemVars coin;
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
@@ -565,6 +570,7 @@ struct Item {
         itHeiho_ItemVars heiho;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
+        itKlap_ItemVars klap;
         itLGun_ItemVars lgun;
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
@@ -643,19 +649,19 @@ struct ItemCommonData {
     u32 x24;
     u32 x28;
     u32 x2C;
-    u32 x30;
+    u32 x30; // lifetime?
     u32 x34;
-    s32 x38_float;
+    u32 x38_float;
     s32 x3C_float;
     s32 x40_float;
     s32 x44_float;
-    s32 x48_float;
-    s32 x4C_float;
+    u32 x48_float;
+    f32 x4C_float;
     s32 x50_float;
-    s32 x54_float;
-    s32 x58_float;
-    s32 x5C_float;
-    s32 x60_float;
+    f32 x54_float;
+    f32 x58_float;
+    f32 x5C_float;
+    f32 x60_float;
     s32 x64_float;
     f32 x68_float;
     f32 x6C_float;
@@ -676,12 +682,23 @@ struct ItemCommonData {
     uint xD8;
     s32 xDC;
     f32 unk_degrees; ///< @at{E0}
-    u8 filler[0x128 - 0xE4];
-    s32 x128;
-    s32 x12C;
-    s32 x130;
-    s32 x134;
-    u8 filler_2[0x148 - 0x138];
+    u8 filler_1a[0xE8 - 0xE4];
+    u8 xE8; // struct that has a float (scale?) as the first member? See it_80275BC8
+    u8 filler_1a_2[0xF0 - 0xEC];
+    f32 xF0;
+    f32 xF4;
+    f32 xF8;
+    u8 filler_1b[0x124 - 0xFC];
+    s32 x124; // max value for a random integer generation in it_8026F6BC
+    s32 x128; // used in it_8026CF04
+    s32 x12C; // used in it_8026CF04
+    s32 x130; // used in it_8026CF04
+    s32 x134; // used in it_8026CF04
+    // u8 filler_2[0x148 - 0x138]; - replaced with vars that are used for calc's in it_8026F8B4
+    s32 x138;
+    s32 x13C;
+    s32 x140;
+    f32 x144;
     s32 x148;
     f32 x14C;
     f32 x150;
@@ -700,20 +717,23 @@ struct Item_r13_Data {
 };
 
 struct HSD_ObjAllocUnk2 {
-    float x0;
-    float x4;
-    float x8;
-    float xC;
-    u8 pad_10[0xB0 - 0x10];
+    // float x0;
+    // float x4;
+    // float x8;
+    // float xC;
+    // u8 pad_10[0xB0 - 0x10];
+    ECB ecb_arr[11];
     int xB0;
     int xB4;
     int xB8;
-    UNK_T xBC;
-    Vec3 xC0;
-    u8 pad_CC[0x148 - 0xCC];
+    M2C_UNK xBC;
+    // Vec3 xC0;
+    // u8 pad_CC[0x148 - 0xCC];
+    Vec3 xC0_vec3_arr[11];
+    u32 x144;
     u32 x148;
     u32 x14C;
-    u32 x150;
+    u32 x150; // num of ECB/Vec3's with data?
     UnkFlagStruct x154;
 };
 
@@ -733,8 +753,8 @@ struct HSD_ObjAllocUnk {
     s32 x20;
     s32 x24;
     s32 x28;
-    u32 x2C;
-    u32 x30;
+    s32 x2C; // u32 or s32?
+    s32 x30; // u32 or s32?
     s32 x34;
     s32 x38;
     s32 x3C;
@@ -746,23 +766,23 @@ struct HSD_ObjAllocUnk {
     s32 x54;
     s32 x58;
     s32 x5C;
-    u32 x60;
-    u32 x64;
+    s32 x60; // u32 or s32?
+    s32 x64; // u32 or s32?
 };
 
 struct HSD_ObjAllocUnk6 {
-    u8 x0;
-    u8* x4;
-    u16 x8;
+    u8 x0; // Gets incremented and decremented by 1 for various checks. Gets indexed into x4's struct
+    u8* x4; // Points to struct of ItemKinds (or array?)
+    u16 x8; // Max value for random integers
     u16 xA;
-    u16* xC;
+    u16* xC; // Points to struct of ???
 };
 
 struct HSD_ObjAllocUnk4 {
     u32 x0;
     HSD_ObjAllocUnk6 x4;
     s32 x14;
-    u64 x18;
+    u64 x18; // Gets set equal to gm_8016AEA4(), aka lbl_8046B6A0.unk_24D3 (which is an s8?)
 };
 
 struct HSD_ObjAllocUnk5 {
@@ -773,6 +793,13 @@ struct HSD_ObjAllocUnk5 {
     u16 xC;
 };
 
+typedef struct HSD_ObjAllocUnk7 {
+    s32 x0;
+    void* x4;
+    HitCapsule* x8;
+    void* xC;
+} HSD_ObjAllocUnk7;
+
 struct it_8026C47C_arg0_t {
     s32 unk0;
     s32 unk4;
@@ -782,6 +809,16 @@ struct it_8026C47C_arg0_t {
     s32 unk14;
     s32 unk18;
     s32 unk1C;
+};
+
+struct it_8026F3D4_arg1_t {
+    bool x0;
+    ItemKind x4;
+    Item_GObj* x8;
+};
+
+struct it_8026F3D4_body_t {
+    u8 x0[32]; // This array length was a guess
 };
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_FORWARD_H
 #define MELEE_IT_FORWARD_H
 
+#include "ft/forward.h"
 #include <baselib/forward.h>
 
 typedef struct Article Article;
@@ -54,6 +55,8 @@ struct Item_GObj {
 #else
 typedef HSD_GObj Item_GObj;
 #endif
+
+typedef void (*ItCmd)(Item_GObj* gobj, FtCmdState* cmd);
 
 typedef enum Item_StateChangeFlags {
     ITEM_UNK_0x1 = (1 << 0),

@@ -202,7 +202,8 @@ void it_802CDF28(Item_GObj* gobj)
     ip->x40_vel.x = ip->xDD4_itemVar.hassam.x5C.x;
     ip->x40_vel.y = ip->xDD4_itemVar.hassam.x5C.y;
     ip->x40_vel.z = ip->xDD4_itemVar.hassam.x5C.z;
-    it_80272980(gobj, temp_f1);
+    // it_80272980(gobj, temp_f1);
+    it_80272980(gobj);
 }
 
 void it_802CE008(Item_GObj* gobj)

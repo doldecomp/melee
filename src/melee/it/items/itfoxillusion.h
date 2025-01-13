@@ -9,10 +9,9 @@
 
 #include "it/items/types.h"
 
-/* 29CD18 */ void it_8029CD18(Item_GObj*, int arg1);
+/* 29CD18 */ void it_8029CD18(HSD_GObj*, int);
 /* 29CD78 */ HSD_JObj* it_8029CD78(Item_GObj*);
-/* 29CEB4 */ Item_GObj* it_8029CEB4(HSD_GObj* parent, Vec3* pos, ItemKind kind,
-                                    f32 dir);
+/* 29CEB4 */ Item_GObj* it_8029CEB4(HSD_GObj*, Vec3*, ItemKind, f32);
 /* 29CF8C */ bool it_8029CF8C(Item_GObj*);
 /* 29CFA0 */ void it_8029CFA0(Item_GObj*);
 /* 29CFF0 */ void it_8029CFF0(Item_GObj*);
@@ -26,7 +25,7 @@
 /* 29D7EC */ bool it_8029D7EC(Item_GObj*);
 /* 29D870 */ void it_8029D870(Item_GObj*);
 /* 29D940 */ bool it_8029D940(Item_GObj*);
-/* 29D948 */ void it_8029D948(Item_GObj*, HSD_GObj* ref);
+/* 29D948 */ void it_8029D948(Item_GObj*, HSD_GObj*);
 /* 3F6818 */ extern ItemStateTable it_803F6818[];
 
 #endif

@@ -27,7 +27,7 @@
 /* 088C5C */ void ft_80088C5C(Fighter_GObj* gobj);
 /* 0890BC */ void ft_800890BC(Fighter* fp);
 /* 0890D0 */ void ft_800890D0(Fighter* fp, u32 move_id);
-/* 089228 */ UNK_RET ft_80089228(UNK_PARAMS);
+/* 089228 */ float ft_80089228(Fighter*, s32, s32, f32);
 /* 0892A0 */ void ft_800892A0(Fighter_GObj* gobj);
 
 #endif
