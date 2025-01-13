@@ -36,7 +36,7 @@ HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
         attr = ip->xC4_article_data->x4_specialAttributes;
         Item_8026AB54(gobj, parent, arg2);
         db_80225DD8(gobj, parent);
-        it_8027CE64(gobj, parent, attr);
+        it_8027CE64(gobj, parent, *attr);
         return gobj;
     }
     return NULL;

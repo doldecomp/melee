@@ -1153,9 +1153,9 @@ void Item_80268DD4(HSD_GObj* gobj, f32 frame)
 /// Copy item script
 void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 {
-    item_data->x52C_item_script = itemStateDesc->xC_script;
-    item_data->x530 = 0;
-    item_data->x524_cmd->x0 = 0.0f;
+    item_data->x524_cmd.x8 = itemStateDesc->xC_script;
+    item_data->x524_cmd.xC = 0;
+    item_data->x524_cmd.x0 = 0.0f;
 }
 
 extern struct r13_ColAnimStruct* it_804D6D04;
@@ -1252,13 +1252,13 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
                 HSD_JObjSetScaleItem(gobj->user_data, gobj->hsd_obj, &scl);
             }
 
-            item_data->x52C_item_script = temp_r29->xC_script;
-            item_data->x530 = 0;
-            item_data->x524_cmd->x0 = 0.0F;
+            item_data->x524_cmd.x8 = temp_r29->xC_script;
+            item_data->x524_cmd.xC = 0;
+            item_data->x524_cmd.x0 = 0.0F;
         } else if (temp_r23 != NULL && (flags & ITEM_CMD_UPDATE)) {
-            item_data->x52C_item_script = temp_r29->xC_script;
-            item_data->x530 = 0U;
-            item_data->x524_cmd->x0 = 0.0f;
+            item_data->x524_cmd.x8 = temp_r29->xC_script;
+            item_data->x524_cmd.xC = 0U;
+            item_data->x524_cmd.x0 = 0.0f;
         }
 
         HSD_JObjAnimAll(item_jobj);
@@ -1266,7 +1266,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
         it_802799E4(gobj);
     } else {
         HSD_JObjRemoveAnimAll(item_jobj);
-        item_data->x52C_item_script = NULL;
+        item_data->x524_cmd.x8 = NULL;
     }
 
     item_data->animated = temp_r30->animated;

@@ -181,7 +181,6 @@ void it_802CDF28(Item_GObj* gobj)
     Vec3 sp1C;
     Vec3 sp10;
     Fighter_GObj* var_r3;
-    f32 temp_f1;
 
     Item* ip = GET_ITEM(gobj);
     itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -197,12 +196,10 @@ void it_802CDF28(Item_GObj* gobj)
     ip->xDD4_itemVar.hassam.x5C.y = 0.0F;
     ip->xDD4_itemVar.hassam.x5C.z = 0.0F;
     lbVector_Rotate(&ip->xDD4_itemVar.hassam.x5C, 4, atan2f(sp10.y, sp10.x));
-    temp_f1 = ip->xDD4_itemVar.hassam.x5C.y;
-    ip->xDD4_itemVar.hassam.x5C.y = temp_f1 + attr->xC;
+    ip->xDD4_itemVar.hassam.x5C.y += attr->xC;
     ip->x40_vel.x = ip->xDD4_itemVar.hassam.x5C.x;
     ip->x40_vel.y = ip->xDD4_itemVar.hassam.x5C.y;
     ip->x40_vel.z = ip->xDD4_itemVar.hassam.x5C.z;
-    // it_80272980(gobj, temp_f1);
     it_80272980(gobj);
 }
 

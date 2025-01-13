@@ -634,7 +634,7 @@ static inline void What(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc,
         return;
     }
     HSD_JObjRemoveAnimAll(item_jobj2);
-    ip->x52C_item_script = NULL;
+    ip->x524_cmd.x8 = NULL;
 }
 
 /// Transfer item on character transformation (Zelda <-> Sheik)
@@ -690,7 +690,7 @@ void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, Fighter_Part arg2)
     }
 
     HSD_JObjRemoveAnimAll(jobj0);
-    ip->x52C_item_script = NULL;
+    ip->x524_cmd.x8 = NULL;
 }
 
 /// Multiply item's scale

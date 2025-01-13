@@ -5454,7 +5454,7 @@ void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
     }
     HSD_JObjAnimAll(item_jobj1);
     HSD_JObjRemoveAnimAll(item_jobj1);
-    item->x52C_item_script = NULL;
+    item->x524_cmd.x8 = NULL;
 }
 
 void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
@@ -9112,10 +9112,10 @@ void it_802799E4(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     // temp_r29 = (FtCmdState*) item->x524_cmd;
-    temp_r29 = item->x524_cmd;
-    item->x528 = item->x5CC_currentAnimFrame;
+    temp_r29 = &item->x524_cmd;
+    item->x524_cmd.x4 = item->x5CC_currentAnimFrame;
     item->xDBC_itcmd_var4 = 0;
-    if (item->x52C_item_script != NULL) {
+    if (item->x524_cmd.x8 != NULL) {
         if (F32_MAX != temp_r29->x0) {
             temp_r29->x0 = temp_r29->x0 - item->x5D0_animFrameSpeed;
         }
@@ -9146,7 +9146,7 @@ void it_802799E4(Item_GObj* item_gobj)
     temp_r29 = (CommandInfo*) item->x524_cmd;
     item->x528 = item->x5CC_currentAnimFrame;
     item->xDBC_itcmd_var4 = 0;
-    if ((void*) item->x52C_item_script != NULL) {
+    if ((void*) item->x524_cmd.x8 != NULL) {
         if (F32_MAX != temp_r29->timer) {
             temp_r29->timer = temp_r29->timer - item->x5D0_animFrameSpeed;
         }
@@ -10693,7 +10693,7 @@ void it_8027CE44(Item_GObj* item_gobj)
 }
 
 // Appears to be a function for Game&Watch items
-void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj, void* arg_attr)
+void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj, int arg_attr_address)
 {
     Item* item;
     GXColor sp18;
@@ -10706,5 +10706,5 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj, void* arg_attr)
     item->x5C8 = ftLib_800870BC(item->owner, (void**) &item->xBC4);
     it_80274594(item_gobj);
     item->xDD4_itemVar.it_27CE.attr =
-        arg_attr; // Or the first var gets set equal to the first attribute
+        &arg_attr_address; // Or the first var gets set equal to the first attribute
 }
