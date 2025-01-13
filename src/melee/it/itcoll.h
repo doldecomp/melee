@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/forward.h"
+
 #include "lb/types.h"
 
 /* 26F9AC */ void it_8026F9AC(s32, void*, HitCapsule*, HurtCapsule*);
