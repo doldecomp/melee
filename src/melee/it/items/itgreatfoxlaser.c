@@ -2,9 +2,9 @@
 
 #include "it/inlines.h"
 
-UNK_T it_802EAF28(Item_GObj* gobj)
+UNK_T it_802EAF28(Item_GObj* item_gobj)
 {
-    return M2C_FIELD(&GET_ITEM(gobj)->xDD4_itemVar._, UNK_T*, 0x38);
+    return M2C_FIELD(&GET_ITEM(item_gobj)->xDD4_itemVar._, UNK_T*, 0x38);
 }
 
 /// #it_802EAF34
@@ -17,17 +17,17 @@ UNK_T it_802EAF28(Item_GObj* gobj)
 
 /// #it_802EB3C0
 
-bool it_802EB444(void)
+bool it_802EB444(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_802EB44C(void)
+bool it_802EB44C(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_802EB454(void)
+bool it_802EB454(Item_GObj* item_gobj)
 {
     return false;
 }

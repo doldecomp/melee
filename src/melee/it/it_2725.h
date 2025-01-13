@@ -236,8 +236,8 @@
 /* 27BA54 */ void it_8027BA54(HSD_GObj*, Vec3*);
 /* 27BB1C */ void it_8027BB1C(Vec3*, Vec3*);
 /* 27BBF4 */ void it_8027BBF4(Item_GObj*, bool, f64, f32);
-/* 27C0A8 */ void it_8027C0A8(Item_GObj*);
-/* 27C0CC */ void it_8027C0CC(Item_GObj*);
+/* 27C0A8 */ void it_8027C0A8(Item_GObj*, f32, f32);
+/* 27C0CC */ void it_8027C0CC(Item_GObj*, f32, f32);
 /* 27C0F0 */ void it_8027C0F0(Item_GObj*, Vec3*, f64, f32);
 /* 27C56C */ void it_8027C56C(Item_GObj*, f32);
 /* 27C794 */ bool it_8027C794(Item_GObj*);

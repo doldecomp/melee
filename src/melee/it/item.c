@@ -1638,7 +1638,7 @@ static bool Item_80269F14(HSD_GObj* gobj)
     }
 
     db_80225DD8(gobj, temp_item->owner);
-    temp_item->xD90 = temp_item->xC74;
+    temp_item->xD90.x2070_int = temp_item->xC74;
     temp_item->xD94 = temp_item->xC78;
     temp_item->xD9C = temp_item->xC80;
     temp_item->xDA4_word = temp_item->xC88;

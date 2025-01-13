@@ -10347,15 +10347,15 @@ block_7:
 }
 
 // Might take in and pass more vars
-void it_8027C0A8(Item_GObj* item_gobj)
+void it_8027C0A8(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
-    it_8027BBF4(item_gobj, false, 0, 0);
+    it_8027BBF4(item_gobj, false, arg4, arg5);
 }
 
 // Might take in and pass more vars
-void it_8027C0CC(Item_GObj* item_gobj)
+void it_8027C0CC(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
-    it_8027BBF4(item_gobj, true, 0, 0);
+    it_8027BBF4(item_gobj, true, arg4, arg5);
 }
 
 void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)

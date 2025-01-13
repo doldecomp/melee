@@ -1181,7 +1181,7 @@ bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
 
 void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
     bool chk = it_8026DF34(item_gobj);
-    
+
     chk |= it_80276308(item_gobj);
     chk |= it_802763E0(item_gobj);
     if (chk & 0xE) {
@@ -1717,7 +1717,7 @@ static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos) {
     Item* ip = gobj->user_data;
     Vec3* new_pos = NULL;
     it_266F_ItemVars* it_266F;
-    
+
     ip->xDCF_flag.b4 = 1;
     ip->xDCF_flag.b5 = 0;
     it_266F = &ip->xDD4_itemVar.it_266F;
@@ -1734,7 +1734,7 @@ static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos) {
 static inline void it_8026EECC_inline_2(HSD_GObj* gobj, s32 arg1, Vec3* pos) {
     Item* ip = gobj->user_data;
     Vec3* new_pos = NULL;
-    
+
     ip->xDCF_flag.b4 = 0;
     ip->xDCF_flag.b5 = 0;
     if (ip->xDCF_flag.b7) {
@@ -1747,7 +1747,7 @@ static inline void it_8026EECC_inline_3(HSD_GObj* gobj, s32 arg1, Vec3* pos) {
     Item* ip = gobj->user_data;
     Vec3* new_pos = NULL;
     it_266F_ItemVars* it_266F;
-    
+
     ip->xDCF_flag.b4 = 1;
     ip->xDCF_flag.b5 = 1;
     it_266F = &ip->xDD4_itemVar.it_266F;
@@ -1758,7 +1758,7 @@ static inline void it_8026EECC_inline_3(HSD_GObj* gobj, s32 arg1, Vec3* pos) {
     } else {
         new_pos = NULL;
     }
-    
+
     it_8026EB18(gobj, arg1, new_pos);
     it_8026EBC8(gobj, it_266F->x0, it_266F->x4);
     it_8026EC54(gobj, it_266F->x8, it_266F->xC);

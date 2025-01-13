@@ -2,8 +2,8 @@
 #define _itzrshell_h_
 
 #include <platform.h>
+#include "it/forward.h"
 
-#include "it/item.h"
 #include "it/items/types.h"
 
 void it_802E02E8(Item_GObj*);

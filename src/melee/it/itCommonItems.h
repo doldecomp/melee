@@ -391,9 +391,9 @@ typedef struct itHassam_ItemVars {
 
 typedef struct itKinoko_ItemVars {
     f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
+    Vec3 x4;
+    // f32 x8;
+    // f32 xC;
 } itKinoko_ItemVars;
 
 typedef struct itNokoNoko_ItemVars {

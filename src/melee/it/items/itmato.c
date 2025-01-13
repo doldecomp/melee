@@ -60,7 +60,7 @@ bool it_802D85EC(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_802D85F4(void)
+bool it_802D85F4(Item_GObj* item_gobj)
 {
     Ground_801C4338();
     return true;

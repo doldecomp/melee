@@ -6,6 +6,7 @@
 #include "gr/grzakogenerator.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "it/types.h"
 
 #include <baselib/gobj.h>
@@ -54,34 +55,34 @@ void it_802E0388(Item_GObj* gobj)
     grZakoGenerator_801CACB8(gobj);
 }
 
-void it_802E03A8(Item_GObj* gobj)
+bool it_802E03A8(Item_GObj* gobj)
 {
-    it_802DFC34(gobj);
+    return it_802DFC34(gobj);
 }
 
-void it_802E03C8(Item_GObj* gobj)
+bool it_802E03C8(Item_GObj* gobj)
 {
-    it_802DFC58(gobj);
+    return it_802DFC58(gobj);
 }
 
-void it_802E03E8(Item_GObj* gobj)
+bool it_802E03E8(Item_GObj* gobj)
 {
-    it_802DFC90(gobj);
+    return it_802DFC90(gobj);
 }
 
-void it_802E0408(Item_GObj* gobj)
+bool it_802E0408(Item_GObj* gobj)
 {
-    it_802DFCB0(gobj);
+    return it_802DFCB0(gobj);
 }
 
-void it_802E0428(Item_GObj* gobj)
+bool it_802E0428(Item_GObj* gobj)
 {
-    it_802DFD60(gobj);
+    return it_802DFD60(gobj);
 }
 
-void it_802E0448(Item_GObj* gobj)
+bool it_802E0448(Item_GObj* gobj)
 {
-    it_802DFE40(gobj);
+    return it_802DFE40(gobj);
 }
 
 void it_802E0468(Item_GObj* gobj, HSD_GObj* ref_gobj)

@@ -482,7 +482,7 @@ void ftAction_80071784(Fighter_GObj* gobj, FtCmdState* cmd)
     cmd->x8 += 4;
 }
 
-void ftAction_800717C8(Fighter_GObj* gobj, *cmd)
+void ftAction_800717C8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     cmd->x8 += 4;
 }

@@ -58,7 +58,7 @@ void it_802D8688(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(4);
-    it_8027B730();
+    it_8027B730(gobj);
     ip->xD5C = 0;
     ip->xDCC_flag.b3 = 0;
     ip->xDD4_itemVar.heiho.x54 = it_8028FAF4(NULL, &ip->pos);
