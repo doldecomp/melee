@@ -10693,7 +10693,8 @@ void it_8027CE44(Item_GObj* item_gobj)
 }
 
 // Appears to be a function for Game&Watch items
-void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj, int arg_attr_address)
+void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
+                 int arg_attr_address)
 {
     Item* item;
     GXColor sp18;
@@ -10706,5 +10707,6 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj, int arg_attr_addr
     item->x5C8 = ftLib_800870BC(item->owner, (void**) &item->xBC4);
     it_80274594(item_gobj);
     item->xDD4_itemVar.it_27CE.attr =
-        &arg_attr_address; // Or the first var gets set equal to the first attribute
+        &arg_attr_address; // Or the first var gets set equal to the first
+                           // attribute
 }

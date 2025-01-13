@@ -286,15 +286,15 @@ struct Item {
 
     HSD_GObj* x51C;            // Related to the owner gobj
     CameraBox* x520_cameraBox; // CameraBox
-    FtCmdState x524_cmd;      // should this be CommandInfo* instead?
-        // f32 x528;
-        // void* x52C_item_script; // Script parse?
-        // u32 x530;
-        // u32 x534;
-        // u32 x538;
-        // u32 x53C;
-        // u32 x540;
-        // u32 x544;
+    FtCmdState x524_cmd;       // should this be CommandInfo* instead?
+                         // f32 x528;
+                         // void* x52C_item_script; // Script parse?
+                         // u32 x530;
+                         // u32 x534;
+                         // u32 x538;
+                         // u32 x53C;
+                         // u32 x540;
+                         // u32 x544;
     ColorOverlay x548_colorOverlay;
     u8 x5C8;
     u8 x5C9; // used heavily in it_80278108
