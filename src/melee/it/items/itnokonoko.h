@@ -5,55 +5,53 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
-#include "it/items/forward.h"
-
-#include "it/items/types.h"
+#include <dolphin/mtx/forward.h>
 
 /* 2DC69C */ void it_802DC69C(Item_GObj*);
-/* 2DC774 */ int it_802DC774(Item_GObj*);
-/* 2DC83C */ UNK_RET it_802DC83C(UNK_PARAMS);
-/* 2DC8B8 */ UNK_RET fn_802DC8B8(UNK_PARAMS);
-/* 2DC910 */ UNK_RET it_802DC910(UNK_PARAMS);
-/* 2DC918 */ UNK_RET it_802DC918(UNK_PARAMS);
-/* 2DC954 */ UNK_RET it_802DC954(UNK_PARAMS);
-/* 2DC990 */ UNK_RET it_802DC990(UNK_PARAMS);
-/* 2DCA5C */ UNK_RET it_802DCA5C(UNK_PARAMS);
-/* 2DCAA4 */ UNK_RET it_802DCAA4(UNK_PARAMS);
-/* 2DCB34 */ UNK_RET it_802DCB34(UNK_PARAMS);
-/* 2DCB9C */ UNK_RET it_802DCB9C(UNK_PARAMS);
-/* 2DCC58 */ UNK_RET it_802DCC58(UNK_PARAMS);
-/* 2DCC60 */ UNK_RET it_802DCC60(UNK_PARAMS);
-/* 2DCC90 */ UNK_RET it_802DCC90(UNK_PARAMS);
-/* 2DCCCC */ UNK_RET it_802DCCCC(UNK_PARAMS);
-/* 2DCD54 */ UNK_RET it_802DCD54(UNK_PARAMS);
-/* 2DCD9C */ UNK_RET it_802DCD9C(UNK_PARAMS);
-/* 2DCDC4 */ UNK_RET it_802DCDC4(UNK_PARAMS);
-/* 2DCE00 */ UNK_RET it_802DCE00(UNK_PARAMS);
-/* 2DCE74 */ UNK_RET it_802DCE74(UNK_PARAMS);
-/* 2DCEC4 */ UNK_RET it_802DCEC4(UNK_PARAMS);
-/* 2DCFBC */ UNK_RET it_802DCFBC(UNK_PARAMS);
-/* 2DD0A0 */ UNK_RET it_802DD0A0(UNK_PARAMS);
-/* 2DD1B4 */ UNK_RET it_802DD1B4(UNK_PARAMS);
-/* 2DD1DC */ UNK_RET it_802DD1DC(UNK_PARAMS);
-/* 2DD25C */ UNK_RET it_802DD25C(UNK_PARAMS);
-/* 2DD264 */ UNK_RET it_802DD264(UNK_PARAMS);
-/* 2DD290 */ UNK_RET it_802DD290(UNK_PARAMS);
-/* 2DD2DC */ UNK_RET it_802DD2DC(UNK_PARAMS);
-/* 2DD328 */ UNK_RET it_802DD328(UNK_PARAMS);
-/* 2DD468 */ UNK_RET it_802DD468(UNK_PARAMS);
-/* 2DD46C */ UNK_RET it_802DD46C(UNK_PARAMS);
-/* 2DD4A8 */ UNK_RET it_802DD4A8(UNK_PARAMS);
+/* 2DC774 */ bool it_802DC774(Item_GObj*);
+/* 2DC83C */ bool it_802DC83C(Item_GObj*);
+/* 2DC8B8 */ void fn_802DC8B8(Item_GObj*);
+/* 2DC910 */ bool it_802DC910(Item_GObj*);
+/* 2DC918 */ void it_802DC918(Item_GObj*);
+/* 2DC954 */ int it_802DC954(Item_GObj*);
+/* 2DC990 */ void it_802DC990(Item_GObj*);
+/* 2DCA5C */ int it_802DCA5C(Item_GObj*);
+/* 2DCAA4 */ void it_802DCAA4(Item_GObj*);
+/* 2DCB34 */ int it_802DCB34(Item_GObj*);
+/* 2DCB9C */ void it_802DCB9C(Item_GObj*);
+/* 2DCC58 */ bool it_802DCC58(Item_GObj*);
+/* 2DCC60 */ void it_802DCC60(Item_GObj*);
+/* 2DCC90 */ int it_802DCC90(Item_GObj*);
+/* 2DCCCC */ void it_802DCCCC(Item_GObj*);
+/* 2DCD54 */ bool it_802DCD54(Item_GObj*);
+/* 2DCD9C */ void it_802DCD9C(Item_GObj*);
+/* 2DCDC4 */ int it_802DCDC4(Item_GObj*);
+/* 2DCE00 */ void it_802DCE00(Item_GObj*);
+/* 2DCE74 */ void it_802DCE74(Item_GObj*);
+/* 2DCEC4 */ void it_802DCEC4(Item_GObj*);
+/* 2DCFBC */ void it_802DCFBC(Item_GObj*);
+/* 2DD0A0 */ bool it_802DD0A0(Item_GObj*);
+/* 2DD1B4 */ void it_802DD1B4(Item_GObj*);
+/* 2DD1DC */ int it_802DD1DC(Item_GObj*);
+/* 2DD25C */ bool it_802DD25C(Item_GObj*);
+/* 2DD264 */ void it_802DD264(Item_GObj*);
+/* 2DD290 */ void it_802DD290(Item_GObj*);
+/* 2DD2DC */ void it_802DD2DC(Item_GObj*);
+/* 2DD328 */ bool it_802DD328(Item_GObj*);
+/* 2DD468 */ void it_802DD468(Item_GObj*);
+/* 2DD46C */ int it_802DD46C(Item_GObj*);
+/* 2DD4A8 */ void it_802DD4A8(Item_GObj*, s32, Item_StateChangeFlags);
 /* 2DD4F4 */ void it_802DD4F4(Item_GObj*);
-/* 2DD53C */ UNK_RET it_802DD53C(UNK_PARAMS);
-/* 2DD598 */ UNK_RET it_802DD598(UNK_PARAMS);
+/* 2DD53C */ bool it_802DD53C(Item_GObj*);
+/* 2DD598 */ void it_802DD598(Item_GObj*);
 /* 2DD59C */ void it_802DD59C(Item_GObj*);
 /* 2DD67C */ void it_802DD67C(Item_GObj*);
-/* 2DD6D4 */ UNK_RET it_802DD6D4(UNK_PARAMS);
-/* 2DD71C */ UNK_RET it_802DD71C(UNK_PARAMS);
-/* 2DD74C */ UNK_RET it_802DD74C(UNK_PARAMS);
-/* 2DD78C */ UNK_RET it_802DD78C(UNK_PARAMS);
+/* 2DD6D4 */ bool it_802DD6D4(Item_GObj*);
+/* 2DD71C */ void it_802DD71C(Item_GObj*);
+/* 2DD74C */ int it_802DD74C(Item_GObj*);
+/* 2DD78C */ void it_802DD78C(Item_GObj*);
 /* 2DD7D0 */ void it_802DD7D0(Item_GObj*, Item_GObj*);
-/* 2DD7F0 */ UNK_RET it_802DD7F0(UNK_PARAMS);
+/* 2DD7F0 */ Item_GObj* it_802DD7F0(s32, Vec3*, Vec3*, s32);
 /* 2DDA84 */ bool it_802DDA84(Item_GObj*);
 extern ItemStateTable it_803F85F0[];
 

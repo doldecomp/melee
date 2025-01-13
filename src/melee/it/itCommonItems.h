@@ -12,6 +12,13 @@
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
 
+struct ECB {
+    f32 top;
+    f32 bottom;
+    f32 right;
+    f32 left;
+};
+
 typedef struct {
     bool x0;
     bool x4;
@@ -388,6 +395,57 @@ typedef struct itKinoko_ItemVars {
     f32 x8;
     f32 xC;
 } itKinoko_ItemVars;
+
+typedef struct itNokoNoko_ItemVars {
+    f32 x0;
+    s32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    s32 x14;
+    s32 x18;
+    s32 x1C;
+    s32 x20;
+    s32 x24;
+    s32 x28;
+    s32 x2C;
+    s32 x30;
+    f32 x34;
+    f32 x38;
+    s32 x3C;
+    s32 x40;
+    s32 x44;
+    f32 x48;
+    f32 x4C;
+    f32 x50;
+    f32 x54;
+    f32 x58;
+    f32 x5C;
+    f32 x60;
+    f32 x64;
+    f32 x68;
+    f32 x6C;
+    f32 x70;
+    ECB x74;
+    f32 x84;
+    f32 x88;
+    f32 x8C;
+    f32 x90;
+    f32 x94;
+    f32 x98;
+    f32 x9C;
+} itNokoNoko_ItemVars;
+
+typedef struct itNokoNoko_DatAttrs2 {
+    s32 x0;
+    f32 x4;
+} itNokoNoko_DatAttrs2;
+
+typedef struct itNokoNoko_DatAttrs {
+    itNokoNoko_DatAttrs2* x0;
+    f32 x4;
+    f32 x8;
+} itNokoNoko_DatAttrs;
 
 typedef struct itTaruCann_DatAttrs {
     /*  +0 */ char pad_0[0x28];

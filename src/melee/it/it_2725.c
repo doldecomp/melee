@@ -10443,7 +10443,7 @@ void it_8027C56C(Item_GObj* item_gobj, f32 y_rot)
     item->xDD4_itemVar.it_27B5.x14.x = 0U;
 }
 
-bool it_8027C794(void)
+bool it_8027C794(Item_GObj* gobj)
 {
     return false;
 }

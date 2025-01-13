@@ -240,7 +240,7 @@
 /* 27C0CC */ void it_8027C0CC(Item_GObj*);
 /* 27C0F0 */ void it_8027C0F0(Item_GObj*, Vec3*, f64, f32);
 /* 27C56C */ void it_8027C56C(Item_GObj*, f32);
-/* 27C794 */ bool it_8027C794(void);
+/* 27C794 */ bool it_8027C794(Item_GObj*);
 /* 27C79C */ bool it_8027C79C(Item_GObj*);
 /* 27C824 */ bool it_8027C824(Item_GObj*, s32 (*arg1)(Item_GObj*));
 /* 27C8B0 */ void it_8027C8B0(Item_GObj*);
