@@ -22,7 +22,6 @@
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/types.h"
 #include "gm/gm_1601.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"

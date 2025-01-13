@@ -4,7 +4,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "ft/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 

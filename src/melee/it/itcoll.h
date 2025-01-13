@@ -3,7 +3,8 @@
 
 #include <platform.h>
 
-#include "it/item.h"
+#include "it/forward.h"
+#include "lb/types.h"
 
 /* 26F9AC */ void it_8026F9AC(s32, void*, HitCapsule*, HurtCapsule*);
 /* 26FA2C */ void it_8026FA2C(Item*, HitCapsule*, s32, Item*, bool);
