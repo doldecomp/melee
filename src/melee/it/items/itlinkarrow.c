@@ -13,6 +13,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
+#include "it/itcoll.h"
 #include "it/item.h"
 #include "lb/lbrefract.h"
 #include "lb/lbvector.h"
@@ -63,7 +64,7 @@ ItemStateTable it_803F6A28[5] = {
 f32 numbers[] = { 2, 4, 6, 8, 10, 12, 14, 16 };
 f32 numbers_l[] = { 2, 3, 4, 5, 6, 7, 8, 9 };
 
-void it_802A7D8C(HSD_GObj* gobj, s32 arg1)
+void it_802A7D8C(HSD_GObj* gobj, int arg1)
 {
     Item* item;
 

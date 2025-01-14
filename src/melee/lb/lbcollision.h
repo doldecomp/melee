@@ -4,7 +4,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "ft/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -47,8 +46,8 @@ typedef struct {
 /* 008434 */ void lbColl_80008434(HitCapsule*);
 /* 008440 */ void lbColl_80008440(HitCapsule*);
 /* 0084FC */ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst);
-/* 008688 */ bool lbColl_80008688(HitCapsule*, int, Fighter*);
-/* 008820 */ bool lbColl_80008820(HitCapsule*, int, Fighter*);
+/* 008688 */ bool lbColl_80008688(HitCapsule*, int, void*);
+/* 008820 */ bool lbColl_80008820(HitCapsule*, int, void*);
 /* 0089B8 */ void lbColl_800089B8(HitCapsule* hit, UNK_T arg1);
 /* 008A5C */ void lbColl_80008A5C(HitCapsule* hit);
 /* 008D30 */ void lbColl_80008D30(HitCapsule*, UNK_T);
@@ -71,7 +70,7 @@ typedef struct {
                                   float pos_z);
 /* 00AB2C */ bool lbColl_8000AB2C(HitResult* hit, u32 arg1, Mtx arg2,
                                   float pos_z);
-/* 00ACFC */ bool lbColl_8000ACFC(UNK_T, HitCapsule*);
+/* 00ACFC */ bool lbColl_8000ACFC(void*, HitCapsule*);
 
 static inline bool approximatelyZero(float x)
 {

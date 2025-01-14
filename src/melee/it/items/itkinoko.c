@@ -29,9 +29,9 @@ void it_8029367C(Item_GObj* gobj)
     }
     it->xD5C = 0;
     it->xDD4_itemVar.kinoko.x0 = 0.0f;
-    it->xDD4_itemVar.kinoko.x4 = 0.0f;
-    it->xDD4_itemVar.kinoko.x8 = 1.0f;
-    it->xDD4_itemVar.kinoko.xC = 0.0f;
+    it->xDD4_itemVar.kinoko.x4.x = 0.0f;
+    it->xDD4_itemVar.kinoko.x4.y = 1.0f;
+    it->xDD4_itemVar.kinoko.x4.z = 0.0f;
     it_8029385C(gobj);
 }
 
@@ -60,7 +60,7 @@ void it_8029375C(Item_GObj* gobj)
     if (it->ground_or_air != GA_Air) {
         it->xDD4_itemVar.kinoko.x0 = attrs->x0 * it->facing_dir;
         it->x40_vel.x =
-            it->xDD4_itemVar.kinoko.x0 * it->xDD4_itemVar.kinoko.x8;
+            it->xDD4_itemVar.kinoko.x0 * it->xDD4_itemVar.kinoko.x4.y;
     }
 }
 
@@ -75,7 +75,7 @@ bool it_80293798(Item_GObj* gobj)
         if ((cd->env_flags & MPCOLL_UNK)) {
             it_80276408(gobj, cd, &it->xDD4_itemVar.kinoko.x4);
         } else {
-            it->xDD4_itemVar.kinoko.x4 = 0.0f;
+            it->xDD4_itemVar.kinoko.x4.x = 0.0f;
         }
         if ((cd->env_flags & MPCOLL_RIGHTWALL) ||
             (cd->env_flags & MPCOLL_LEFTWALL))
@@ -83,7 +83,7 @@ bool it_80293798(Item_GObj* gobj)
             it->facing_dir = -it->facing_dir;
             it->xDD4_itemVar.kinoko.x0 = -it->xDD4_itemVar.kinoko.x0;
             it->x40_vel.x =
-                it->xDD4_itemVar.kinoko.x0 * it->xDD4_itemVar.kinoko.x8;
+                it->xDD4_itemVar.kinoko.x0 * it->xDD4_itemVar.kinoko.x4.y;
         }
     }
     return 0;

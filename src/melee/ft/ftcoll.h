@@ -55,6 +55,11 @@
 /* 079AB0 */ UNK_RET ftColl_80079AB0(UNK_PARAMS);
 /* 079C70 */ float ftColl_80079C70(Fighter*, Fighter*, void*, int);
 /* 079EA8 */ float ftColl_80079EA8(Fighter*, HitCapsule*, int);
+// /* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry**
+// log,
+//                                          int idx, bool);
+/* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
+                                         void* victim, bool);
 /* 07AB48 */ void ftColl_8007AB48(Fighter_GObj*);
 /* 07AB80 */ void ftColl_8007AB80(Fighter_GObj*);
 /* 07ABD0 */ void ftColl_8007ABD0(HitCapsule*, u32 damageAmount,

@@ -4,6 +4,6 @@
 #include <platform.h>
 
 void plAttack_80037590(void);
-u16 plStale_80037B08(void);
+u16 plAttack_80037B08(void);
 
 #endif

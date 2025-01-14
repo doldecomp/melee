@@ -53,15 +53,15 @@
 /* 014014 */ UNK_RET lb_80014014(UNK_PARAMS);
 /* 0140F8 */ UNK_RET lb_800140F8(UNK_PARAMS);
 /* 014234 */ UNK_RET lb_80014234(UNK_PARAMS);
-/* 014258 */ bool lb_80014258(HSD_GObj* gobj, UNK_T arg1, FtCmd cmd);
-/* 014498 */ void lb_80014498(UNK_T arg0);
-/* 0144C8 */ bool lb_800144C8(ftDeviceUnk2*, void*, s32, s32);
+/* 014258 */ bool lb_80014258(HSD_GObj* gobj, void* arg1, FtCmd cmd);
+/* 014498 */ void lb_80014498(void* arg0);
+/* 0144C8 */ bool lb_800144C8(void*, void*, s32, s32);
 /* 014534 */ UNK_RET lb_80014534(UNK_PARAMS);
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8);
 /* 0145F4 */ UNK_RET lb_800145F4(UNK_PARAMS);
 /* 014638 */ bool lb_80014638(Vec3*, UNK_T);
 /* 014770 */ bool lb_80014770(Vec3*, int);
-/* 0149E0 */ UNK_RET lb_800149E0(UNK_PARAMS);
+/* 0149E0 */ bool lb_800149E0(f32*, u32);
 
 #endif

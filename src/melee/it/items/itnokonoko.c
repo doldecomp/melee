@@ -6,6 +6,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "it/items/itzgshell.h"
 #include "it/items/itzrshell.h"
 #include "mp/mpcoll.h"
@@ -32,7 +33,7 @@ void static inline coll_inline(Item* ip)
 void it_802DC69C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    it_8027B730();
+    it_8027B730(gobj);
     it_8027C56C(gobj, ip->facing_dir);
     coll_inline(ip);
     ip->xD5C = 0;
@@ -458,7 +459,7 @@ void it_802DD59C(Item_GObj* gobj)
 void it_802DD67C(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    it_8027CB3C();
+    it_8027CB3C(gobj);
     it_80274C88(gobj);
     ip->xDD4_itemVar.nokonoko.x28 = 0.0f;
     Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);

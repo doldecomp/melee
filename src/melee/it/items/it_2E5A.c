@@ -3,6 +3,7 @@
 #include "types.h"
 
 #include "db/db_2253.h"
+#include "gm/gm_1601.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -11,6 +12,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
+#include "mp/mpcoll.h"
 
 #include <math.h>
 #include <math_ppc.h>
@@ -20,19 +22,8 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-s32 gm_8016C6C0(Item_GObj*);            /* extern */
-void it_8027321C(Item_GObj*);           /* extern */
-void it_80275640(Item_GObj*, f32);      /* extern */
-bool it_80276D9C(Item_GObj*, s32);      /* extern */
-void it_80277C40(Item_GObj*, s32);      /* extern */
-bool mpColl_80048844(CollData*, f32);   /* extern */
-bool mpColl_8004CB78(CollData*, Vec3*); /* extern */
-static Vec3 it_803B8718 = {
-    0.0f, 0.0f, 0.0f
-}; /* unable to generate initializer: unknown type; const */
-static Vec3 it_803B8724 = {
-    0.0f, 0.0f, 0.0f
-}; /* unable to generate initializer: unknown type; const */
+const Vec3 it_803B8718 = { 0.0f, 0.0f, 0.0f };
+const Vec3 it_803B8724 = { 0.0f, 0.0f, 0.0f };
 
 ItemStateTable it_803F8BD8[] = {
     { 0, it_802E67A8, it_802E67F4, it_802E6824 },
@@ -532,7 +523,7 @@ void it_802E6658(void)
 {
     if ((u32) Item_804A0C64.x50 >= it_804D6D28->x20 - 2)
     { // HSD_ObjAllocUnk.x50 >= ItemCommonData->x20 - 2
-        Item_8026A8EC((Item_GObj*) it_80272828(158));
+        Item_8026A8EC((Item_GObj*) it_80272828(It_Kind_Unk4));
     }
 }
 

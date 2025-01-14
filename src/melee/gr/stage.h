@@ -39,7 +39,7 @@
 /* 224DC8 */ bool Stage_80224DC8(s32);
 /* 224E38 */ void Stage_80224E38(Vec3*, s32);
 /* 224E64 */ void Stage_80224E64(enum_t, Vec3*);
-/* 224FDC */ s32 Stage_80224FDC(Vec3*);
+/* 224FDC */ bool Stage_80224FDC(Vec3*);
 /* 225074 */ s32 Stage_80225074(s32);
 /* 225194 */ enum_t Stage_80225194(void);
 /* 22519C */ s32 Stage_8022519C(InternalStageId idx);

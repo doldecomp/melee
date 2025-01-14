@@ -12,7 +12,7 @@
 /* 2D858C */ bool it_802D858C(Item_GObj*);
 /* 2D8594 */ void it_802D8594(Item_GObj*);
 /* 2D85EC */ bool it_802D85EC(Item_GObj*);
-/* 2D85F4 */ bool it_802D85F4(void);
+/* 2D85F4 */ bool it_802D85F4(Item_GObj*);
 /* 3F83E0 */ extern ItemStateTable it_803F83E0[];
 
 #endif

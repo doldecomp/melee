@@ -196,7 +196,7 @@ void grMaterial_801C8E28(HSD_GObj* gobj)
 bool grMaterial_801C8E48(HSD_GObj* gobj)
 {
     Item* it = gobj->user_data;
-    if (it->x52C_item_script != NULL) {
+    if (it->x524_cmd.x8 != NULL) {
         return false;
     }
     return true;

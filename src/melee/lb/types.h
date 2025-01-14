@@ -45,14 +45,14 @@ struct HitVictim {
 struct HitCapsule {
     /*  +0 */ HitCapsuleState state;
     /*  +4 */ uint x4;
-    /*  +8 */ int unk_count;
+    /*  +8 */ u32 unk_count;
     /*  +C */ float damage;
     /* +10 */ Vec3 b_offset;
     /* +1C */ float scale;
     /* +20 */ int kb_angle;
-    /* +24 */ int x24;
-    /* +28 */ int x28;
-    /* +2C */ int x2C;
+    /* +24 */ u32 x24;
+    /* +28 */ u32 x28;
+    /* +2C */ u32 x2C;
     /* +30 */ uint element;
     /* +34 */ int x34;
     /* +38 */ int sfx_severity;

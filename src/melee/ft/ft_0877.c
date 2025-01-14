@@ -431,8 +431,7 @@ s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
 
 void ft_8008805C(Fighter* arg0, s32 arg1)
 {
-    ft_80087D0C(arg0, arg1);
-    lbAudioAx_80024DC4();
+    lbAudioAx_80024DC4(ft_80087D0C(arg0, arg1));
 }
 
 void ft_80088080(Fighter* fp)

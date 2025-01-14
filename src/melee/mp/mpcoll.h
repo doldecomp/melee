@@ -73,7 +73,7 @@
 /* 048578 */ void mpColl_80048578(CollData*);
 /* 048654 */ void mpColl_80048654(CollData*);
 /* 048768 */ void mpColl_80048768(CollData*);
-/* 048844 */ UNK_RET mpColl_80048844(UNK_PARAMS);
+/* 048844 */ bool mpColl_80048844(CollData*, f32);
 /* 0488F4 */ UNK_RET mpColl_800488F4(UNK_PARAMS);
 /* 048AB0 */ UNK_RET mpColl_80048AB0(UNK_PARAMS);
 /* 0491C8 */ UNK_RET mpColl_800491C8(UNK_PARAMS);
@@ -99,10 +99,10 @@
 /* 04C864 */ void mpColl_8004C864(CollData*, s32, float, float);
 /* 04C91C */ void mpColl_8004C91C(CollData*, s32, float, float);
 /* 04CA6C */ void mpColl_8004CA6C(CollData*);
-/* 04CAA0 */ UNK_RET mpColl_8004CAA0(UNK_PARAMS);
-/* 04CAE8 */ UNK_RET mpColl_8004CAE8(UNK_PARAMS);
-/* 04CB30 */ UNK_RET mpColl_8004CB30(UNK_PARAMS);
-/* 04CB78 */ UNK_RET mpColl_8004CB78(UNK_PARAMS);
+/* 04CAA0 */ bool mpColl_8004CAA0(CollData*, Vec3*);
+/* 04CAE8 */ bool mpColl_8004CAE8(CollData*, Vec3*);
+/* 04CB30 */ bool mpColl_8004CB30(CollData*, Vec3*);
+/* 04CB78 */ bool mpColl_8004CB78(CollData*, Vec3*);
 /* 04CBC0 */ bool mpColl_8004CBC0(CollData*);
 /* 04CBE8 */ void mpColl_8004CBE8(CollData*);
 /* 04CBF4 */ void mpColl_8004CBF4(CollData*);

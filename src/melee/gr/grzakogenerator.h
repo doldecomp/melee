@@ -5,7 +5,8 @@
 
 #include "gr/types.h"
 
-void grZakoGenerator_801CACB8(Ground_GObj* gobj);
+/* 1CAC14 */ void grZakoGenerator_801CAC14(void);
+/* 1CACB8 */ void grZakoGenerator_801CACB8(Ground_GObj* gobj);
 /* 1CAE04 */ void grZakoGenerator_801CAE04(bool);
 
 #endif

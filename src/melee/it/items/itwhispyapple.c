@@ -53,12 +53,12 @@ void it_802EECC8(void) {}
 
 void it_802EEEC4(void) {}
 
-bool it_802EEEC8(void)
+bool it_802EEEC8(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_802EEED0(void)
+bool it_802EEED0(Item_GObj* item_gobj)
 {
     return true;
 }

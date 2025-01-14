@@ -5,9 +5,11 @@
 
 #include "it/forward.h"
 
-/* 2EB5C8 */ UNK_RET it_802EB5C8(UNK_PARAMS);
-/* 2EB684 */ UNK_RET it_802EB684(UNK_PARAMS);
-/* 2EB6A8 */ UNK_RET it_802EB6A8(UNK_PARAMS);
+#include "it/items/types.h"
+
+/* 2EB5C8 */ void it_802EB5C8(Item_GObj*);
+/* 2EB684 */ bool it_802EB684(Item_GObj*);
+/* 2EB6A8 */ bool it_802EB6A8(Item_GObj*);
 /* 2EB6DC */ UNK_RET it_802EB6DC(UNK_PARAMS);
 /* 2EB808 */ bool it_802EB808(void);
 /* 2EB810 */ UNK_RET it_802EB810(UNK_PARAMS);
@@ -58,12 +60,13 @@
 /* 2EC7A8 */ UNK_RET it_802EC7A8(UNK_PARAMS);
 /* 2EC80C */ UNK_RET it_802EC80C(UNK_PARAMS);
 /* 2EC830 */ UNK_RET it_802EC830(UNK_PARAMS);
-/* 2EC850 */ UNK_RET it_802EC850(UNK_PARAMS);
+/* 2EC850 */ void it_802EC850(Item_GObj*, Item_GObj*);
 /* 2EC870 */ UNK_RET it_802EC870(UNK_PARAMS);
 /* 2EC9E8 */ UNK_RET it_802EC9E8(UNK_PARAMS);
 /* 2ECA70 */ UNK_RET it_802ECA70(UNK_PARAMS);
 /* 2ECC8C */ int it_802ECC8C(Item_GObj*);
 /* 2ECC98 */ void it_802ECC98(Item_GObj*, float);
 /* 2ECCA4 */ UNK_RET it_802ECCA4(UNK_PARAMS);
+extern ItemStateTable it_803F9000[];
 
 #endif

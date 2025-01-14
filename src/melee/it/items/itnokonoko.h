@@ -7,6 +7,8 @@
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 
+#include "it/items/types.h"
+
 /* 2DC69C */ void it_802DC69C(Item_GObj*);
 /* 2DC774 */ bool it_802DC774(Item_GObj*);
 /* 2DC83C */ bool it_802DC83C(Item_GObj*);
@@ -53,5 +55,6 @@
 /* 2DD7D0 */ void it_802DD7D0(Item_GObj*, Item_GObj*);
 /* 2DD7F0 */ Item_GObj* it_802DD7F0(s32, Vec3*, Vec3*, s32);
 /* 2DDA84 */ bool it_802DDA84(Item_GObj*);
+extern ItemStateTable it_803F85F0[];
 
 #endif

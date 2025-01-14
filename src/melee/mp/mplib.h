@@ -43,7 +43,7 @@
 /* 050D68 */ UNK_RET mpLib_80050D68(UNK_PARAMS);
 /* 0511A4 */ UNK_RET mpLib_800511A4(UNK_PARAMS);
 /* 0515A0 */ UNK_RET mpLib_800515A0(UNK_PARAMS);
-/* 05199C */ UNK_RET mpLib_8005199C(UNK_PARAMS);
+/* 05199C */ s32 mpLib_8005199C(Vec3*, s32, s32);
 /* 051BA8 */ UNK_RET mpLib_80051BA8(UNK_PARAMS);
 /* 051EC8 */ s32 mpLib_80051EC8(Vec3*, s32*, s32*, Vec3*, s32, s32, s32, float,
                                 float, float, float);

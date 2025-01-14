@@ -40,7 +40,7 @@
 /* 27D4F4 */ bool it_8027D4F4(Item_GObj*);
 /* 27D530 */ bool it_8027D530(Item_GObj*);
 /* 27D614 */ bool it_8027D614(Item_GObj*);
-/* 27D650 */ void it_8027D650(Item_GObj* item_gobj, HSD_GObj* ref);
+/* 27D650 */ void it_8027D650(Item_GObj*, HSD_GObj*);
 /* 3F5468 */ extern ItemStateTable it_803F5468[];
 
 #endif

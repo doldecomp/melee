@@ -868,6 +868,15 @@ struct Fighter_DemoStrings {
     /* fp+2070 */ s32 x2070_int;
 };
 
+/// @todo See if this should likewise be instituted for item->xD94 thru
+/// xDA4_word/xDA8_short
+/* fp+2074 */ struct Struct2074 {
+    /* fp+2074 */ Vec2 x2074_vec;
+    /* fp+207C */ Vec2 x207C;
+    /* fp+2084 */ u32 x2084;
+    /* fp+2088 */ u16 x2088;
+};
+
 struct ftSubactionList {
     u8 x0_opcode;
 };
@@ -1410,8 +1419,7 @@ struct Fighter {
     /* fp+206C */ u16 x206C_attack_instance;
     /* fp+206E */ short x206E;
     /* fp+2070 */ union Struct2070 x2070;
-    /* fp+2074 */ int x2074;
-    /* fp+2074 */ u8 _2078[0x208C - 0x2078];
+    /* fp+2074 */ struct Struct2074 x2074;
     /* fp+208C */ s32 x208C;
     /* fp+2090 */ u16 x2090;
     /* fp+2092 */ u16 x2092;

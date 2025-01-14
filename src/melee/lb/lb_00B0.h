@@ -43,7 +43,7 @@
 /* 00C7BC */ void lb_8000C7BC(HSD_JObj* src, HSD_JObj* dst);
 /* 00C868 */ void lb_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, float, float);
 /* 00CC5C */ s32 lbGetFreeColorRegister(s32 i0, HSD_MObj*, HSD_TExp*);
-/* 00CC8C */ s32 lb_8000CC8C(s32 i);
+/* 00CC8C */ s32 lb_8000CC8C(s32 i); // return type GXTevColorArg?
 /* 00CCA4 */ s32 lb_8000CCA4(s32 i);
 /* 00CD60 */ s32 lbGetFreeAlphaRegister(s32 i0, HSD_MObj*, HSD_TExp*);
 /* 00CD90 */ s32 lb_8000CD90(s32 i);

@@ -7,6 +7,8 @@
 #include "it/forward.h"
 #include <dolphin/mtx/forward.h>
 
+#include "it/items/types.h"
+
 /* 2DDB38 */ UNK_RET it_802DDB38(UNK_PARAMS);
 /* 2DDBE8 */ UNK_RET it_802DDBE8(UNK_PARAMS);
 /* 2DDC8C */ UNK_RET fn_802DDC8C(UNK_PARAMS);
@@ -52,19 +54,20 @@
 /* 2DFA68 */ bool it_802DFA68(Item_GObj*);
 /* 2DFB90 */ void it_802DFB90(Item_GObj*);
 /* 2DFBAC */ bool it_802DFBAC(Item_GObj*);
-/* 2DFC34 */ void it_802DFC34(Item_GObj*);
-/* 2DFC58 */ void it_802DFC58(Item_GObj*);
-/* 2DFC90 */ void it_802DFC90(Item_GObj*);
-/* 2DFCB0 */ void it_802DFCB0(Item_GObj*);
-/* 2DFD60 */ void it_802DFD60(Item_GObj*);
-/* 2DFE40 */ void it_802DFE40(Item_GObj*);
+/* 2DFC34 */ bool it_802DFC34(Item_GObj*);
+/* 2DFC58 */ bool it_802DFC58(Item_GObj*);
+/* 2DFC90 */ bool it_802DFC90(Item_GObj*);
+/* 2DFCB0 */ bool it_802DFCB0(Item_GObj*);
+/* 2DFD60 */ bool it_802DFD60(Item_GObj*);
+/* 2DFE40 */ bool it_802DFE40(Item_GObj*);
 /* 2DFE7C */ UNK_RET fn_802DFE7C(UNK_PARAMS);
-/* 2DFED4 */ UNK_RET it_802DFED4(UNK_PARAMS);
-/* 2DFEF4 */ UNK_RET it_802DFEF4(UNK_PARAMS);
+/* 2DFED4 */ void it_802DFED4(Item_GObj*, Item_GObj*);
+/* 2DFEF4 */ void it_802DFEF4(Item_GObj*);
 /* 2DFF14 */ UNK_RET it_802DFF14(UNK_PARAMS);
 /* 2DFFA0 */ UNK_RET it_802DFFA0(UNK_PARAMS);
 /* 2DFFB8 */ UNK_RET it_802DFFB8(UNK_PARAMS);
 /* 2E0100 */ Item_GObj* it_802E0100(s32, Vec3*, s32);
-/* 2E0408 */ void it_802E0408(Item_GObj*);
+/* 2E0408 */ bool it_802E0408(Item_GObj*);
+extern ItemStateTable it_803F86C8[];
 
 #endif

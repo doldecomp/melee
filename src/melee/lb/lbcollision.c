@@ -1808,7 +1808,7 @@ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
     dst->x45 = src->x45;
 }
 
-bool lbColl_80008688(HitCapsule* arg0, int arg1, Fighter* arg2)
+bool lbColl_80008688(HitCapsule* arg0, int arg1, void* arg2)
 {
     HitCapsule* var_r6;
     HitCapsule* var_r6_2;
@@ -1826,7 +1826,7 @@ bool lbColl_80008688(HitCapsule* arg0, int arg1, Fighter* arg2)
     var_r6 = arg0;
     var_r7 = 0;
 loop_1:
-    if ((Fighter*) var_r6->victims_1[0].victim == arg2) {
+    if (var_r6->victims_1[0].victim == arg2) {
         if (arg1 != 6) {
             if (arg1 < 6) {
                 if (arg1 != 3) {

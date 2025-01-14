@@ -1,123 +1,1112 @@
 #include <platform.h>
 
+#include "it/forward.h"
+
 #include "it_2725.h"
 
+#include "inlines.h"
 #include "it_266F.h"
 
+#include "cm/camera.h"
+#include "db/db_2253.h"
+#include "ef/efasync.h"
+#include "ef/efsync.h"
+#include "ft/fighter.h"
+#include "ft/ft_0892.h"
+#include "ft/ft_0C31.h"
+#include "ft/ftdevice.h"
+#include "ft/ftlib.h"
+#include "gm/gm_1601.h"
+#include "gm/gm_1A36.h"
+#include "gr/grlib.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "it/it_26B1.h"
+#include "it/itcoll.h"
+#include "it/items/it_27CF.h"
+#include "it/items/it_2ADA.h"
+#include "it/items/it_2E5A.h"
+#include "it/items/it_2E6A.h"
+#include "it/items/it_2F28.h"
+#include "it/items/itarwinglaser.h"
+#include "it/items/itbat.h"
+#include "it/items/itbombhei.h"
+#include "it/items/itbox.h"
+#include "it/items/itcapsule.h"
+#include "it/items/itcerebi.h"
+#include "it/items/itchicorita.h"
+#include "it/items/itchicoritaleaf.h"
+#include "it/items/itclimbersblizzard.h"
+#include "it/items/itclimbersice.h"
+#include "it/items/itclimbersstring.h"
+#include "it/items/itclinkmilk.h"
+#include "it/items/itcoin.h"
+#include "it/items/itcrazyhandbomb.h"
+#include "it/items/itdkinoko.h"
+#include "it/items/itdosei.h"
+#include "it/items/itdrmariopill.h"
+#include "it/items/itegg.h"
+#include "it/items/itentei.h"
+#include "it/items/itevyoshiegg.h"
+#include "it/items/itfflower.h"
+#include "it/items/itfflowerflame.h"
+#include "it/items/itfire.h"
+#include "it/items/itflipper.h"
+#include "it/items/itfoods.h"
+#include "it/items/itfoxblaster.h"
+#include "it/items/itfoxillusion.h"
+#include "it/items/itfoxlaser.h"
+#include "it/items/itfreeze.h"
+#include "it/items/itfreezer.h"
+#include "it/items/itfushigibana.h"
+#include "it/items/itgamewatchbreath.h"
+#include "it/items/itgamewatchchef.h"
+#include "it/items/itgamewatchfire.h"
+#include "it/items/itgamewatchgreenhouse.h"
+#include "it/items/itgamewatchjudge.h"
+#include "it/items/itgamewatchmanhole.h"
+#include "it/items/itgamewatchpanic.h"
+#include "it/items/itgamewatchparachute.h"
+#include "it/items/itgamewatchrescue.h"
+#include "it/items/itgamewatchturtle.h"
+#include "it/items/itgreatfoxlaser.h"
+#include "it/items/itgshell.h"
+#include "it/items/ithammer.h"
+#include "it/items/ithammerhead.h"
+#include "it/items/itharisen.h"
+#include "it/items/ithassam.h"
+#include "it/items/itheart.h"
+#include "it/items/itheiho.h"
+#include "it/items/ithinoarashi.h"
+#include "it/items/ithitodeman.h"
+#include "it/items/ithouou.h"
+#include "it/items/itkabigon.h"
+#include "it/items/itkamex.h"
+#include "it/items/itkinoko.h"
+#include "it/items/itkirbycutterbeam.h"
+#include "it/items/itkirbygamewatchchefpan.h"
+#include "it/items/itkirbyhammer.h"
+#include "it/items/itkireihana.h"
+#include "it/items/itklap.h"
+#include "it/items/itkoopaflame.h"
+#include "it/items/itkusudama.h"
+#include "it/items/itkyasarin.h"
+#include "it/items/itkyasarinegg.h"
+#include "it/items/itleadead.h"
+#include "it/items/itlgun.h"
+#include "it/items/itlgunbeam.h"
+#include "it/items/itlgunray.h"
+#include "it/items/itlikelike.h"
+#include "it/items/itlinkarrow.h"
+#include "it/items/itlinkbomb.h"
+#include "it/items/itlinkboomerang.h"
+#include "it/items/itlinkbow.h"
+#include "it/items/itlinkhookshot.h"
+#include "it/items/itlipstick.h"
+#include "it/items/itlipstickspore.h"
+#include "it/items/itlizardon.h"
+#include "it/items/itlucky.h"
+#include "it/items/itlugia.h"
+#include "it/items/itluigifireball.h"
+#include "it/items/itmaril.h"
+#include "it/items/itmariocape.h"
+#include "it/items/itmariofireball.h"
+#include "it/items/itmarumine.h"
+#include "it/items/itmasterhandbullet.h"
+#include "it/items/itmasterhandlaser.h"
+#include "it/items/itmatadogas.h"
+#include "it/items/itmato.h"
+#include "it/items/itmetalb.h"
+#include "it/items/itmetamon.h"
+#include "it/items/itmew.h"
+#include "it/items/itmewtwodisable.h"
+#include "it/items/itmewtwoshadowball.h"
+#include "it/items/itmsbomb.h"
+#include "it/items/itnessbat.h"
+#include "it/items/itnessfirepillar.h"
+#include "it/items/itnesspkfire.h"
+#include "it/items/itnesspkflush.h"
+#include "it/items/itnesspkflushexplode.h"
+#include "it/items/itnesspkthunderball.h"
+#include "it/items/itnesspkthundertrail.h"
+#include "it/items/itnessyoyo.h"
+#include "it/items/itnokonoko.h"
+#include "it/items/itoctarock.h"
+#include "it/items/itoctarockstone.h"
+#include "it/items/itoldkuri.h"
+#include "it/items/itoldottosea.h"
+#include "it/items/itparasol.h"
+#include "it/items/itpatapata.h"
+#include "it/items/itpeachexplode.h"
+#include "it/items/itpeachparasol.h"
+#include "it/items/itpeachtoad.h"
+#include "it/items/itpeachtoadspore.h"
+#include "it/items/itpeachturnip.h"
+#include "it/items/itpikachuthunder.h"
+#include "it/items/itpikachutjoltair.h"
+#include "it/items/itpikachutjoltground.h"
+#include "it/items/itpippi.h"
+#include "it/items/itporygon2.h"
+#include "it/items/itrabbitc.h"
+#include "it/items/itraikou.h"
+#include "it/items/itrshell.h"
+#include "it/items/itsamusbomb.h"
+#include "it/items/itsamuschargeshot.h"
+#include "it/items/itsamusgrapple.h"
+#include "it/items/itsamusmissile.h"
+#include "it/items/itscball.h"
+#include "it/items/itseakchain.h"
+#include "it/items/itseakneedleheld.h"
+#include "it/items/itseakneedlethrown.h"
+#include "it/items/itseakvanish.h"
+#include "it/items/itsonans.h"
+#include "it/items/itspycloak.h"
+#include "it/items/itsscope.h"
+#include "it/items/itsscopebeam.h"
+#include "it/items/itstar.h"
+#include "it/items/itstarrod.h"
+#include "it/items/itstarrodstar.h"
+#include "it/items/itsuikun.h"
+#include "it/items/itsword.h"
+#include "it/items/ittaru.h"
+#include "it/items/ittarucann.h"
+#include "it/items/itthunder.h"
+#include "it/items/ittincle.h"
+#include "it/items/ittogepy.h"
+#include "it/items/ittomato.h"
+#include "it/items/ittools.h"
+#include "it/items/ittosakinto.h"
+#include "it/items/itunknown.h"
+#include "it/items/itwhispyapple.h"
 #include "it/items/itwhitebea.h"
+#include "it/items/itwstar.h"
+#include "it/items/ityoshieggthrow.h"
+#include "it/items/ityoshistar.h"
+#include "it/items/itzeldadinfire.h"
+#include "it/items/itzeldadinfireexplode.h"
+#include "it/items/itzgshell.h"
+#include "it/items/itzrshell.h"
 #include "it/types.h"
 #include "items/it_27CF.h"
-#include "items/it_2ADA.h"
-#include "items/it_2E5A.h"
-#include "items/it_2E6A.h"
-#include "items/it_2F28.h"
-#include "items/itcerebi.h"
-#include "items/itchicorita.h"
-#include "items/itchicoritaleaf.h"
-#include "items/itclimbersblizzard.h"
-#include "items/itclimbersice.h"
-#include "items/itclimbersstring.h"
-#include "items/itclinkmilk.h"
+#include "items/itbat.h"
+#include "items/itbombhei.h"
+#include "items/itbox.h"
+#include "items/itcapsule.h"
 #include "items/itcoin.h"
-#include "items/itcrazyhandbomb.h"
-#include "items/itdrmariopill.h"
-#include "items/itentei.h"
-#include "items/itfire.h"
-#include "items/itfoxblaster.h"
+#include "items/itdkinoko.h"
+#include "items/itdosei.h"
+#include "items/itegg.h"
+#include "items/itevyoshiegg.h"
+#include "items/itfflower.h"
+#include "items/itfflowerflame.h"
+#include "items/itflipper.h"
+#include "items/itfoods.h"
 #include "items/itfoxillusion.h"
-#include "items/itfoxlaser.h"
-#include "items/itfreezer.h"
-#include "items/itfushigibana.h"
-#include "items/itgamewatchbreath.h"
-#include "items/itgamewatchchef.h"
-#include "items/itgamewatchfire.h"
-#include "items/itgamewatchgreenhouse.h"
-#include "items/itgamewatchjudge.h"
-#include "items/itgamewatchmanhole.h"
-#include "items/itgamewatchpanic.h"
-#include "items/itgamewatchparachute.h"
-#include "items/itgamewatchrescue.h"
-#include "items/itgamewatchturtle.h"
-#include "items/ithassam.h"
-#include "items/ithinoarashi.h"
-#include "items/ithitodeman.h"
-#include "items/ithouou.h"
-#include "items/itkabigon.h"
-#include "items/itkamex.h"
-#include "items/itkirbycutterbeam.h"
-#include "items/itkirbygamewatchchefpan.h"
-#include "items/itkirbyhammer.h"
-#include "items/itkireihana.h"
-#include "items/itkoopaflame.h"
-#include "items/itleadead.h"
+#include "items/itfreeze.h"
+#include "items/itgshell.h"
+#include "items/ithammer.h"
+#include "items/ithammerhead.h"
+#include "items/itharisen.h"
+#include "items/itheart.h"
+#include "items/itkinoko.h"
+#include "items/itkusudama.h"
+#include "items/itlgun.h"
+#include "items/itlgunbeam.h"
+#include "items/itlgunray.h"
 #include "items/itlinkarrow.h"
-#include "items/itlinkbomb.h"
 #include "items/itlinkboomerang.h"
-#include "items/itlinkbow.h"
-#include "items/itlinkhookshot.h"
-#include "items/itlizardon.h"
-#include "items/itlucky.h"
-#include "items/itlugia.h"
-#include "items/itluigifireball.h"
-#include "items/itmaril.h"
-#include "items/itmariocape.h"
-#include "items/itmariofireball.h"
-#include "items/itmarumine.h"
-#include "items/itmasterhandbullet.h"
-#include "items/itmasterhandlaser.h"
-#include "items/itmatadogas.h"
-#include "items/itmetamon.h"
-#include "items/itmew.h"
-#include "items/itmewtwodisable.h"
-#include "items/itmewtwoshadowball.h"
-#include "items/itnessbat.h"
-#include "items/itnessfirepillar.h"
-#include "items/itnesspkfire.h"
-#include "items/itnesspkflush.h"
-#include "items/itnesspkflushexplode.h"
-#include "items/itnesspkthunderball.h"
-#include "items/itnesspkthundertrail.h"
-#include "items/itnessyoyo.h"
-#include "items/itoctarock.h"
-#include "items/itoctarockstone.h"
-#include "items/itoldkuri.h"
-#include "items/itoldottosea.h"
-#include "items/itpeachexplode.h"
-#include "items/itpeachparasol.h"
-#include "items/itpeachtoad.h"
-#include "items/itpeachtoadspore.h"
-#include "items/itpeachturnip.h"
-#include "items/itpikachuthunder.h"
-#include "items/itpikachutjoltair.h"
-#include "items/itpikachutjoltground.h"
-#include "items/itpippi.h"
-#include "items/itporygon2.h"
-#include "items/itraikou.h"
-#include "items/itsamusbomb.h"
-#include "items/itsamuschargeshot.h"
-#include "items/itsamusgrapple.h"
-#include "items/itsamusmissile.h"
-#include "items/itseakchain.h"
-#include "items/itseakneedleheld.h"
-#include "items/itseakneedlethrown.h"
-#include "items/itseakvanish.h"
-#include "items/itsonans.h"
-#include "items/itsuikun.h"
-#include "items/itthunder.h"
-#include "items/ittogepy.h"
-#include "items/ittosakinto.h"
-#include "items/itunknown.h"
-#include "items/ityoshieggthrow.h"
-#include "items/ityoshistar.h"
-#include "items/itzeldadinfire.h"
-#include "items/itzeldadinfireexplode.h"
+#include "items/itlipstick.h"
+#include "items/itlipstickspore.h"
+#include "items/itmball.h"
+#include "items/itmetalb.h"
+#include "items/itmsbomb.h"
+#include "items/itparasol.h"
+#include "items/itrabbitc.h"
+#include "items/itrshell.h"
+#include "items/itscball.h"
+#include "items/itspycloak.h"
+#include "items/itsscope.h"
+#include "items/itsscopebeam.h"
+#include "items/itstar.h"
+#include "items/itstarrod.h"
+#include "items/itstarrodstar.h"
+#include "items/itsword.h"
+#include "items/ittaru.h"
+#include "items/ittarucann.h"
+#include "items/ittomato.h"
+#include "items/itwstar.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbcollision.h"
+#include "lb/lbcommand.h"
+#include "lb/lbvector.h"
+#include "mp/mpcoll.h"
+#include "mp/mplib.h"
+#include "pl/pl_0371.h"
+#include "pl/plattack.h"
+#include "pl/plbonuslib.h"
+#include "pl/plstale.h"
+#include "pl/pltrick.h"
+#include "ty/tydisplay.h"
 
-HSD_ObjAllocUnk4 it_804A0E30;
-HSD_ObjAllocUnk6 it_804A0E50;
-HSD_ObjAllocUnk6 it_804A0E60;
-// u8 it_804A0E70[0xF0];
+#include <math.h>
+#include <math_ppc.h>
+#include <dolphin/mtx/vec.h>
+#include <baselib/dobj.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
+#include <baselib/mobj.h>
+#include <baselib/random.h>
+#include <baselib/tev.h>
 
-struct sdata_ItemGXLink it_803F2310[] = {
+extern Vec3 it_803B8570;       // { 0.0f, 0.0f, 0.0f }
+extern Vec3 it_803B857C;       // { 0.0f, 0.0f, 0.0f }
+extern Quaternion it_803B8588; //{ 0.0f, 0.0f, 0.0f, 0.0f }
+extern Quaternion it_803B8598; //{ 0.0f, 0.0f, 0.0f, 0.0f }
+extern const Vec3 it_803B85A8[6];
+extern s32 it_803B85F0[4];
+
+// Common items
+struct sdata_ItemGXLink it_803F1418[43] = {
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_80284E10, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC,
+};
+
+struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
+    {
+        // Capsule
+        it_803F5468,
+        it_8027CF00,
+        NULL,
+        it_8027D1D4,
+        it_8027D208,
+        it_8027D230,
+        it_8027D338,
+        it_8027D414,
+        it_8027D450,
+        it_8027D4F4,
+        it_8027D4B8,
+        NULL,
+        it_8027D614,
+        it_8027D530,
+        it_8027D650,
+    },
+    {
+        // Box
+        it_803F5850,
+        it_802861CC,
+        it_80286208,
+        it_80286780,
+        it_80286964,
+        it_802867B4,
+        it_80286CB4,
+        it_80286F04,
+        it_80286FC8,
+        it_80286E70,
+        it_80286D48,
+        NULL,
+        NULL,
+        it_80286DDC,
+        it_80287084,
+    },
+    {
+        // Taru
+        it_803F58E0,
+        it_80287458,
+        NULL,
+        it_80287E68,
+        it_80287EA8,
+        it_80287EC8,
+        it_80288818,
+        it_80288A98,
+        NULL,
+        it_802889F8,
+        it_802888B8,
+        NULL,
+        NULL,
+        it_80288958,
+        it_80288C68,
+    },
+    {
+        // Egg
+        it_803F5988,
+        it_80288D98,
+        NULL,
+        it_80288F88,
+        it_80288FBC,
+        it_80288FDC,
+        it_80289218,
+        it_802895A8,
+        it_80289644,
+        it_8028950C,
+        it_802893D4,
+        NULL,
+        NULL,
+        it_80289470,
+        it_802896AC,
+    },
+    {
+        // Kusudama
+        it_803F59F8,
+        it_80289784,
+        NULL,
+        it_8028A93C,
+        it_8028AB28,
+        it_8028A970,
+        it_8028AEA4,
+        it_8028AFC4,
+        NULL,
+        it_8028AF8C,
+        it_8028AF1C,
+        NULL,
+        NULL,
+        it_8028AF54,
+        it_8028B06C,
+    },
+    {
+        // TaruCann
+        it_803F63C0,
+        it_80296120,
+        it_802960E0,
+        it_8029683C,
+        it_802968D8,
+        it_80296930,
+        it_8029789C,
+        NULL,
+        NULL,
+        it_802978B4,
+        it_802978A4,
+        NULL,
+        NULL,
+        it_802978AC,
+        it_802978BC,
+    },
+    {
+        // BombHei
+        it_803F54D8,
+        it_8027D76C,
+        NULL,
+        it_8027E0B4,
+        it_8027E648,
+        it_80280380,
+        it_80280DF0,
+        it_80280E30,
+        it_80280E9C,
+        it_802810A4,
+        it_80281070,
+        NULL,
+        it_80281104,
+        it_802810C4,
+        it_80281144,
+    },
+    {
+        // Dosei
+        it_803F55D0,
+        it_80281164,
+        NULL,
+        it_8028218C,
+        it_802826F8,
+        it_802829FC,
+        it_802839BC,
+        it_80283588,
+        it_80282B14,
+        it_80283A3C,
+        it_80283A5C,
+        NULL,
+        it_80283AA4,
+        it_80283A80,
+        it_80283AC4,
+    },
+    {
+        // Heart
+        it_803F56C8,
+        it_80283BEC,
+        it_80283C48,
+        it_80283F28,
+        it_8028402C,
+        NULL,
+        NULL,
+        NULL,
+        it_8028412C,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80284194,
+    },
+    {
+        // Tomato
+        it_803F5740,
+        it_802842A4,
+        it_80284324,
+        it_802844E4,
+        it_8028454C,
+        NULL,
+        NULL,
+        NULL,
+        it_802845BC,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80284624,
+    },
+    {
+        // Star
+        it_803F57A0,
+        it_80284644,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_8028482C,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80284834,
+    },
+    {
+        // Bat
+        it_803F57B0,
+        it_80284910,
+        NULL,
+        it_80284AAC,
+        it_80284B30,
+        it_80284BA0,
+        it_80284C78,
+        NULL,
+        it_80284C10,
+        it_80284CAC,
+        it_80284CCC,
+        NULL,
+        it_80284D14,
+        it_80284CF0,
+        it_80284D34,
+    },
+    {
+        // Sword
+        it_803F5800,
+        it_80285338,
+        NULL,
+        it_80285804,
+        it_80285B00,
+        it_80285C78,
+        it_80285FAC,
+        NULL,
+        it_80285DF0,
+        it_80285FE0,
+        it_80286000,
+        NULL,
+        itSword_BounceOffShield,
+        it_80286024,
+        it_80286068,
+    },
+    {
+        // Parasol
+        it_803F5AB0,
+        it_8028B0B8,
+        NULL,
+        it_8028B5E8,
+        it_8028B3C0,
+        it_8028B3E0,
+        it_8028B4D4,
+        NULL,
+        it_8028B580,
+        it_8028B540,
+        it_8028B4F8,
+        NULL,
+        it_8028B560,
+        it_8028B51C,
+        it_8028B8B8,
+    },
+    {
+        // G Shell
+        it_803F5BA8,
+        it_8028BDAC,
+        NULL,
+        it_8028C148,
+        it_8028C300,
+        it_8028C1AC,
+        it_8028CCA8,
+        it_8028CCCC,
+        it_8028CB24,
+        it_8028CD04,
+        it_8028CD3C,
+        NULL,
+        it_8028CF2C,
+        it_8028CE1C,
+        it_8028CFC0,
+    },
+    {
+        // R Shell
+        it_803F5C48,
+        it_8028D59C,
+        NULL,
+        it_8028D898,
+        it_8028D9F4,
+        it_8028D8E0,
+        it_8028E540,
+        it_8028E584,
+        it_8028E3CC,
+        it_8028E5C8,
+        it_8028E600,
+        NULL,
+        it_8028E684,
+        it_8028E624,
+        it_8028E718,
+    },
+    {
+        // L Gun
+        it_803F5CC8,
+        it_8028E738,
+        NULL,
+        it_8028E904,
+        it_8028E9B8,
+        it_8028E9E0,
+        it_8028EA54,
+        NULL,
+        it_8028EB00,
+        it_8028EAC0,
+        it_8028EA78,
+        NULL,
+        it_8028EAE0,
+        it_8028EA9C,
+        it_8028EB68,
+    },
+    {
+        // Freeze
+        it_803F5D28,
+        it_8028ED50,
+        it_8028ED10,
+        it_8028F2B4,
+        it_8028F318,
+        it_8028F340,
+        it_8028F3CC,
+        it_8028F42C,
+        NULL,
+        it_8028F3EC,
+        it_8028F3D4,
+        it_8028F3E4,
+        it_8028F40C,
+        it_8028F3DC,
+        it_8028F8C4,
+    },
+    {
+        // Foods
+        it_803F5DB0,
+        it_8028FBE4,
+        NULL,
+        it_8028FD7C,
+        it_8028FDE4,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_8028FE70,
+    },
+    {
+        // MSBomb
+        it_803F5E00,
+        it_8028FED4,
+        NULL,
+        it_802900CC,
+        it_802900F4,
+        it_80290114,
+        it_802906E4,
+        it_80290738,
+        it_80290794,
+        it_80290830,
+        it_802907F0,
+        NULL,
+        it_802908A4,
+        it_80290850,
+        it_80290918,
+    },
+    {
+        // Flipper
+        it_803F5EA8,
+        it_80290A20,
+        NULL,
+        it_80290F8C,
+        it_80290FC0,
+        it_80290FE0,
+        it_802915E8,
+        it_802919B8,
+        it_80291B58,
+        it_80291978,
+        it_802917C8,
+        NULL,
+        it_80291998,
+        it_802918A0,
+        it_80291BC0,
+    },
+    {
+        // S_Scope
+        it_803F5F40,
+        it_80291C98,
+        NULL,
+        it_8029215C,
+        it_80292190,
+        it_802921B8,
+        it_8029222C,
+        NULL,
+        it_802922D8,
+        it_80292298,
+        it_80292250,
+        NULL,
+        it_802922B8,
+        it_80292274,
+        it_80292340,
+    },
+    {
+        // StarRod
+        it_803F5F90,
+        it_80292360,
+        NULL,
+        it_80292514,
+        it_80292548,
+        it_802925B4,
+        it_8029266C,
+        NULL,
+        it_802926A8,
+        it_8029274C,
+        it_80292710,
+        NULL,
+        it_802927A8,
+        it_8029276C,
+        it_802927C8,
+    },
+    {
+        // LipStick
+        it_803F6310,
+        it_8029570C,
+        NULL,
+        it_802958C8,
+        it_80295908,
+        it_80295974,
+        it_80295ACC,
+        NULL,
+        it_80295B08,
+        it_80295BAC,
+        it_80295B70,
+        NULL,
+        it_80295C08,
+        it_80295BCC,
+        it_80295C28,
+    },
+    {
+        // Harisen
+        it_803F5FF0,
+        it_8029285C,
+        NULL,
+        it_80292A5C,
+        it_80292A90,
+        it_80292B2C,
+        it_80292BCC,
+        NULL,
+        it_80292C08,
+        it_80292CAC,
+        it_80292C70,
+        NULL,
+        it_80292D08,
+        it_80292CCC,
+        it_80292D28,
+    },
+    {
+        // F Flower
+        it_803F6090,
+        it_80292E04,
+        NULL,
+        it_80293284,
+        it_802933C4,
+        it_802933EC,
+        it_80293488,
+        NULL,
+        it_80293534,
+        it_802934F4,
+        it_802934AC,
+        NULL,
+        it_80293514,
+        it_802934D0,
+        it_80293640,
+    },
+    {
+        // Kinoko
+        it_803F6110,
+        it_8029367C,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802939E0,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802939E8,
+    },
+    {
+        // DKinoko
+        it_803F6130,
+        it_80293A08,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80293D6C,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80293D74,
+    },
+    {
+        // Hammer
+        it_803F6150,
+        it_80293F58,
+        NULL,
+        it_802940FC,
+        it_802941F8,
+        NULL,
+        NULL,
+        NULL,
+        it_802942B0,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80294344,
+    },
+    {
+        // WStar
+        it_803F61B0,
+        it_8029451C,
+        NULL,
+        it_80294728,
+        it_80294790,
+        NULL,
+        NULL,
+        NULL,
+        it_80294A28,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80294A90,
+    },
+    {
+        // ScBall
+        it_803F6220,
+        it_80294AB0,
+        NULL,
+        it_80294BE4,
+        it_80294C14,
+        it_80294C3C,
+        it_80294D4C,
+        NULL,
+        it_80294CE4,
+        it_80294D5C,
+        it_80294D54,
+        NULL,
+        it_80294DA0,
+        it_80294D7C,
+        it_80294A90,
+    },
+    {
+        // RabbitC
+        it_803F6270,
+        it_80295118,
+        NULL,
+        it_8029524C,
+        it_80295298,
+        NULL,
+        NULL,
+        NULL,
+        it_80295340,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802953A8,
+    },
+    {
+        // MetalB
+        it_803F62C0,
+        it_802953C8,
+        NULL,
+        it_80295524,
+        it_80295554,
+        NULL,
+        NULL,
+        it_802955E0,
+        it_80295684,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802956EC,
+    },
+    {
+        // Spycloak
+        it_803F6370,
+        it_80295C48,
+        NULL,
+        it_80295D90,
+        it_80295DC0,
+        NULL,
+        NULL,
+        NULL,
+        it_80295E4C,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80295EB4,
+    },
+    {
+        // M Ball
+        it_803F6488,
+        it_80297904,
+        it_802978DC,
+        it_80297ABC,
+        it_80297AF0,
+        it_80297B18,
+        it_80297BB8,
+        NULL,
+        it_80297BF8,
+        it_802980A0,
+        it_80298060,
+        NULL,
+        it_80298114,
+        it_802980D4,
+        it_80298148,
+    },
+    {
+        // L Gun Ray
+        it_803F64F8,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80298634,
+        NULL,
+        NULL,
+        it_80298654,
+        it_8029863C,
+        it_8029864C,
+        it_80298828,
+        it_80298644,
+        it_802988C4,
+    },
+    {
+        // Star Rod Star
+        it_803F6530,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80298BE4,
+        NULL,
+        NULL,
+        it_80298C04,
+        it_80298BEC,
+        it_80298BFC,
+        it_80298CE8,
+        it_80298BF4,
+        it_80298DCC,
+    },
+    {
+        // LipStick Spore
+        it_803F6680,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_8029A600,
+        NULL,
+        NULL,
+        it_8029A620,
+        it_8029A608,
+        it_8029A618,
+        it_8029A704,
+        it_8029A610,
+        it_8029A728,
+    },
+    {
+        // S Scope Beam
+        it_803F6568,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80299360,
+        NULL,
+        NULL,
+        it_802993A0,
+        it_80299368,
+        it_80299378,
+        it_80299380,
+        it_80299370,
+        it_802993C0,
+    },
+    {
+        // L Gun Beam
+        it_803F6630,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_80299B6C,
+        NULL,
+        NULL,
+        it_80299B74,
+        it_80299C08,
+        it_80299C10,
+        it_80299C18,
+        it_80299C20,
+        it_80299C28,
+    },
+    {
+        // Hammer Head
+        it_803F6640,
+        it_80299D4C,
+        NULL,
+        it_80299DD0,
+        it_80299E28,
+        it_80299E48,
+        it_8029A0B0,
+        it_8029A0EC,
+        NULL,
+        it_8029A0C8,
+        it_8029A0B8,
+        NULL,
+        NULL,
+        it_8029A0C0,
+        it_8029A0F4,
+    },
+    {
+        // F Flower Flame
+        it_803F66C8,
+        it_8029A9FC,
+        NULL,
+        it_8029AD1C,
+        it_8029AD94,
+        NULL,
+        NULL,
+        NULL,
+        it_8029AF34,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_8029B0A8,
+    },
+    {
+        // EvYoshiEgg
+        it_803F6728,
+        it_8029B1AC,
+        it_8029B188,
+        it_8029B2F4,
+        it_8029B328,
+        it_8029B348,
+        it_8029B46C,
+        it_8029B56C,
+        it_8029B670,
+        it_8029B52C,
+        it_8029B4AC,
+        NULL,
+        NULL,
+        it_8029B4EC,
+        it_8029B6D8,
+    },
+};
+
+// static char it_803F1ED8[]; // unsure of type
+// static char it_803F1EE4[]; // unsure of type
+// static char it_803F1EF0[]; // unsure of type
+// static char it_803F1F00[] = "!(jobj->flags & JOBJ_USE_QUATERNION)"; // ?
+// "translate" static char it_803F1F0C[] = "!(jobj->flags &
+// JOBJ_USE_QUATERNION)"; // ?
+
+// char it_803F1F38[];
+char* it_803F1F38;
+// char it_803F1F58[];
+char* it_803F1F58;
+
+HSD_ClassInfo it_803F1F90;
+//  = {
+//     (struct _HSD_ClassInfoHead) {
+//         it_80277D08, // void (*info_init)(void);
+//         0x00000000, // u32 flags;
+//         0x00000000, // char* library_name;
+//         0x00000000, // char* class_name;
+//         0x00000000, // s16 obj_size;
+//         0x00000000, // s16 info_size;
+//         0x00000000, // struct _HSD_ClassInfo* parent;
+//         0x00000000, // struct _HSD_ClassInfo* next;
+//         0x00000000, // struct _HSD_ClassInfo* child;
+//         0x00000000, // u32 nb_exist;
+//         0x00000000, // u32 nb_peak;
+//     },
+//     0x00000000, // HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
+//     0x00000000, // int (*init)(struct _HSD_Class* c);
+//     0x00000000, // void (*release)(struct _HSD_Class* c);
+//     0x00000000, // void (*destroy)(struct _HSD_Class* c);
+//     0x00000000, // void (*amnesia)(struct _HSD_ClassInfo* c);
+//     // ... lots more data, but no other struct elements to put them in
+// };
+
+void* jumptable_803F20E0[114];
+
+static ItCmd it_803F22A8[16] = {
+    // static void* it_803F22A8[16] = {
+    it_80278F2C, it_802790C0, it_80279544, it_802795EC,
+    it_80279680, it_802796C4, it_8027978C, it_802796FC,
+    it_80279720, it_80279744, it_80279768, it_80279888,
+    it_802798D4, it_8027990C, it_80279958, it_802799A8,
+};
+
+char it_803F22E8;
+char it_803F2300;
+
+// Pokemon items
+struct sdata_ItemGXLink it_803F2310[47] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -978,8 +1967,67 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     },
 };
 
+static ItemKind it_803F2ED0[22] = {
+    // Common Pokemon
+    Pokemon_Tosakinto,
+    Pokemon_Chicorita,
+    Pokemon_Kabigon,
+    Pokemon_Kamex,
+    Pokemon_Matadogas,
+    Pokemon_Lizardon,
+    Pokemon_Sonans,
+    Pokemon_Hassam,
+    Pokemon_Unknown,
+    Pokemon_Kireihana,
+    Pokemon_Marumine,
+    Pokemon_Metamon,
+    Pokemon_Pippi,
+    Pokemon_Togepy,
+    Pokemon_Hitodeman,
+    Pokemon_Lucky,
+    Pokemon_Porygon2,
+    Pokemon_Hinoarashi,
+    Pokemon_Maril,
+    Pokemon_Fushigibana,
+    0xBC, // Pokemon_Chicorita_Leaf
+    0x00,
+};
+
 // Character-specific items
-struct ItemLogicTable it_803F3100[] = {
+struct sdata_ItemGXLink it_803F2F28[118] = {
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8029CD18, it_8029CD18,
+
+    it_8026EECC, it_8026EECC, it_8029FDDC, it_8029FDDC, it_8026EECC,
+    it_8026EECC, it_802A7D8C, it_802A7D8C, it_8026EECC, it_8026EECC,
+
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+
+    it_8026EECC, it_8026EECC, it_802A7D8C, it_802A7D8C, it_8026EECC,
+
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+
+    it_8026EECC, it_802F13B4, it_8026EECC,
+};
+
+struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     {
         // Kuriboh
         it_803F8320,
@@ -3076,506 +4124,6590 @@ struct ItemLogicTable it_803F3100[] = {
     },
 };
 
-/// #it_80272560
+// Monster and Stage-specific Items
+struct sdata_ItemGXLink it_803F4CA8[30] = {
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
+    it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, NULL,
+};
 
-/// #it_802725D4
+struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
+    {
+        // Old Goomba (old-Kuri)
+        it_803F8320,
+        it_802D73F0,
+        it_8027C8B0,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802D7F38,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802D84D8,
+    },
+    {
+        // Target (Mato)
+        it_803F83E0,
+        it_802D84F8,
+        it_8027C8B0,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802D85F4,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // Yoshi's Story Shy Guy (Heiho)
+        it_803F83F0,
+        it_802D8688,
+        it_8027C8B0,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802D8EC8,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802D9A0C,
+    },
+    {
+        // Koopa Troopa (Green) (Nokonoko)
+        it_803F85F0,
+        it_802DC69C,
+        it_8027C8B0,
+        it_802DD4F4,
+        it_802DD59C,
+        it_802DD67C,
+        NULL,
+        it_802DC774,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802DD7D0,
+    },
+    {
+        // Koopa Troopa (Red) (Patapata)
+        it_803F88C0,
+        it_802E05A0,
+        it_8027C8B0,
+        it_802E0F70,
+        it_802E0FE4,
+        it_802E10C8,
+        NULL,
+        it_802E0EE0,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802E16D8,
+    },
+    {
+        // Like-Like (likelike)
+        it_803F8468,
+        it_802D9BA8,
+        it_802DC480,
+        it_802DBE90,
+        it_802DBF30,
+        it_802DC000,
+        NULL,
+        it_802D9CC4,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802E16D8,
+    },
+    {
+        // Old Redead (old-lead) [invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // Old Octorok (old-octa) [invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // Old Ottosea (old-otto)
+        it_803F89C8,
+        it_802E2470,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802E257C,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // Polar Bear (whitebea)
+        it_803F8A88,
+        it_802E37BC,
+        it_8027C8B0,
+        it_802E468C,
+        it_802E4700,
+        it_802E47C0,
+        NULL,
+        it_802E3884,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802E4A24,
+    },
+    {
+        // Klaptrap (klap)
+        it_803F8940,
+        it_802E1820,
+        it_802E1874,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802E1E5C,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802E2450,
+    },
+    {
+        // Green Shell (zgshell)
+        it_803F86C8,
+        it_802DE040,
+        it_802DFEF4,
+        it_802DE434,
+        it_802DE648,
+        it_802DE4FC,
+        it_802DFC34,
+        it_802DFC58,
+        it_802DEEF4,
+        it_802DFC90,
+        it_802DFCB0,
+        NULL,
+        it_802DFE40,
+        it_802DFD60,
+        it_802DFED4,
+    },
+    {
+        // Red Shell (green act) (zrshell)
+        it_803F87F0,
+        it_802E02E8,
+        it_802E0388,
+        it_802E0308,
+        it_802E0348,
+        it_802E0328,
+        it_802E03A8,
+        it_802E03C8,
+        it_802E0368,
+        it_802E03E8,
+        it_802E0408,
+        NULL,
+        it_802E0448,
+        it_802E0428,
+        it_802E0468,
+    },
+    {
+        // Tingle (Tincle) (on balloon)
+        it_803F9000,
+        it_802EB5C8,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802EB6A8,
+        it_802EB684,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802EC850,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // Whispy Apple
+        it_803F91D0,
+        NULL,
+        NULL,
+        it_802EEA08,
+        it_802EEA70,
+        it_802EEB28,
+        it_802EEED0,
+        NULL,
+        it_802EEBB0,
+        it_802EEF10,
+        it_802EEED8,
+        NULL,
+        it_802EEF68,
+        it_802EEF30,
+        it_802EEF88,
+    },
+    {
+        // Whispy's Healing Apple
+        it_803F91D0,
+        NULL,
+        NULL,
+        it_802EEA08,
+        it_802EEA70,
+        it_802EEB28,
+        it_802EEED0,
+        NULL,
+        it_802EEBB0,
+        it_802EEF10,
+        it_802EEED8,
+        NULL,
+        it_802EEF68,
+        it_802EEF30,
+        it_802EEF88,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // Tool (Flatzone)
+        it_803F9260,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802EF074,
+        it_802EF700,
+        NULL,
+        it_802EF944,
+        it_802EF724,
+        it_802EF874,
+        it_802EF924,
+        it_802EF7CC,
+        it_802EFA24,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // [Invalid]
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        // Birdo (Kyasarin)
+        it_803F90D0,
+        it_802ECE90,
+        it_802ECCDC,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802EDDC0,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802EE1E0,
+    },
+    {
+        // Arwing Laser
+        it_803F8DE8,
+        NULL,
+        it_802E79C8,
+        NULL,
+        NULL,
+        NULL,
+        it_802E838C,
+        NULL,
+        NULL,
+        it_802E8420,
+        it_802E838C,
+        it_802E8418,
+        it_802E85F4,
+        it_802E8784,
+        NULL,
+    },
+    {
+        // Great Fox's Laser
+        it_803F8FD0,
+        it_802EB1EC,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        it_802EB444,
+        NULL,
+        NULL,
+        it_802EB45C,
+        it_802EB44C,
+        it_802EB454,
+        NULL,
+        NULL,
+        it_802EB5A8,
+    },
+    {
+        // Birdo's Egg
+        it_803F9328,
+        NULL,
+        NULL,
+        it_802EFBC0,
+        it_802EFBE8,
+        it_802EFC08,
+        it_802EFE28,
+        it_802F022C,
+        NULL,
+        it_802F0104,
+        it_802EFF1C,
+        NULL,
+        it_802F01F8,
+        it_802F0010,
+        it_802F0320,
+    },
+    {
+        // NULL
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+    },
+};
 
-/// #it_80272674
+static char it_803F5428;
+HSD_ObjAllocUnk4 it_804A0E30;
+HSD_ObjAllocUnk6 it_804A0E50;
+HSD_ObjAllocUnk6 it_804A0E60;
+// u8 it_804A0E70[0xF0];
+// Article* it_804A0F60[30];
+// static char it_804D5188[] = "src/sysdolphin/baselib/jobj.h"; // ?
+// static char it_804D5190[] = "jobj";
+static char it_804D5198;
+// static char it_804D519C[]; // Not sure of type
+// static char it_804D51A4[]; // Not sure of type
+static char it_804D51B0;
+static char it_804D51B8;
+static char it_804D51C0;
+static ItCmd it_804D51C8[2] = {
+    it_80279AF0,
+    it_80279B10,
+};
+// static char it_804D51D0[]; // Not sure of type
+// static char it_804D51D8[]; // Not sure of type
+// static char it_804D51E0[];
+// static char it_804D51E8[];
 
-/// #it_80272784
+// s8 it_804D6D00; // Not sure of type
+struct r13_ColAnimStruct* it_804D6D04;
+// s32 it_804D6D08; // Not sure of type
+// s32 it_804D6D0C; // Not sure of type
+// u32 it_804D6D10; // Not sure of type
+// uint it_804D6D14; // Not sure of type
+// u32 it_804D6D18; // Not sure of type
+// u8 it_804D6D1C; // Not sure of type
+// Article* it_804D6D20[]; // Not sure of type
+// Article** it_804D6D24;
+// ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
+// Article** it_804D6D30; // 8 bytes instead of 4 for some reason
+// Article** it_804D6D38; // 8 bytes instead of 4 for some reason
+f32** it_804D6D40; // Not sure of type. 8 bytes instead of 4 for some reason
 
-s32 it_80272818(Item_GObj* gobj)
+// static f32 it_804DC708 = 0.0f;
+// static f32 it_804DC70C = 0.00001f;
+// static f32 it_804DC710 = 1.0f;
+// static f32 it_804DC714 = -1.0f;
+// static f64 it_804DC718 = M_PI_2;
+// static f64 const it_804DC720 = U32_TO_F32;
+// static f32 it_804DC728 = 0.01f;
+// static f32 it_804DC72C = deg_to_rad;
+// static f32 it_804DC730 = 1.0f;
+// static f32 it_804DC734 = 0.0f;
+// static f32 it_804DC738 = 1.0f;
+static f32 it_804DC73C = 0.0f;
+// static f32 it_804DC740 = -1.0f;
+static f32 it_804DC744 = 1.0f;
+// static f64 const it_804DC748 = S32_TO_F32;
+// static f32 it_804DC750 = 1.5f;
+// static f32 it_804DC754 = 0.00001f;
+// static f64 it_804DC758 = 0.5f;
+// static f64 it_804DC760 = 3.0f;
+// static f32 it_804DC768 = 0.85f;
+static f32 it_804DC76C = 0.01f;
+static f32 it_804DC770 = 0.0f;
+// static f32 it_804DC774 = 1.0f;
+// static f32 it_804DC778 = 2.0f;
+// static f32 it_804DC77C = 0.5f;
+// static f64 it_804DC780 = M_PI;
+// static f64 it_804DC788 = 0.0f;
+// static f32 it_804DC790 = 0.003906f;
+// static f64 it_804DC798 = U32_TO_F32;
+// static f64 it_804DC7A0 = S32_TO_F32;
+// static f32 it_804DC7A8 = 1.0f;
+// static f32 it_804DC7AC = 0.0f;
+// static f32 it_804DC7B0 = F32_MAX;
+// static f32 it_804DC7B8 = 0.0f;
+// static f32 it_804DC7BC = -1.0f;
+// static f32 it_804DC7C0 = 1.0f;
+// static f32 it_804DC7C4 = 0.001f;
+// static f64 it_804DC7C8 = M_PI_2;
+// static f32 it_804DC7D0 = 0.0f;
+// static f32 it_804DC7D4 = 1.0f;
+// static f32 it_804DC7D8 = deg_to_rad;
+// static f64 it_804DC7E0 = S32_TO_F32;
+// static f32 it_804DC7E8 = M_PI_2;
+// static f32 it_804DC7EC = 0.1f;
+// static f64 it_804DC7F0 = 10.0f;
+static f64 it_804DC7F8 = 0.5f;
+// static f32 it_804DC800 = 30.0f;
+// static f32 it_804DC804= 10.0f;
+// static f64 it_804DC808 = M_PI_2;
+// static f32 it_804DC810 = deg_to_rad;
+// static f64 it_804DC818 = 3.0f;
+// static f32 it_804DC820 = -1.0f;
+// static f32 0.00000000680742f = 0.00000000680742f;
+// static f32 it_804DC828 = 2.0f;
+// static f32 it_804DC82C = 0.5f;
+
+typedef enum PokemonKind {
+    Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
+    Pokemon_ID_Chicorita,   // Chikorita (Chicorita)
+    Pokemon_ID_Kabigon,     // Snorlax (Kabigon)
+    Pokemon_ID_Kamex,       // Blastoise (Kamex)
+    Pokemon_ID_Matadogas,   // Weezing (Matadogas)
+    Pokemon_ID_Lizardon,    // Charizard (Lizardon)
+    Pokemon_ID_Fire,        // Moltres (Fire)
+    Pokemon_ID_Thunder,     // Zapdos (Thunder)
+    Pokemon_ID_Freezer,     // Articuno (Freezer)
+    Pokemon_ID_Sonans,      // Wobbuffet (Sonans)
+    Pokemon_ID_Hassam,      // Scizor (Hassam)
+    Pokemon_ID_Unknown,     // Unown (Unknown)
+    Pokemon_ID_Entei,       // Entei
+    Pokemon_ID_Raikou,      // Raikou
+    Pokemon_ID_Suikun,      // Suicune (Suikun)
+    Pokemon_ID_Kireihana,   // Bellossom (Kireihana)
+    Pokemon_ID_Marumine,    // Electrode (Marumine)
+    Pokemon_ID_Lugia,       // Lugia
+    Pokemon_ID_Houou,       // Ho-oh (Houou)
+    Pokemon_ID_Metamon,     // Ditto (Metamon)
+    Pokemon_ID_Pippi,       // Clefairy (Pippi)
+    Pokemon_ID_Togepy,      // Togepi (Togepy)
+    Pokemon_ID_Mew,         // Mew
+    Pokemon_ID_Cerebi,      // Celebi (Cerebi)
+    Pokemon_ID_Hitodeman,   // Staryu (Hitodeman)
+    Pokemon_ID_Lucky,       // Chansey (Lucky)
+    Pokemon_ID_Porygon2,    // Porygon2
+    Pokemon_ID_Hinoarashi,  // Cyndaquil (Hinoarashi)
+    Pokemon_ID_Maril,       // Marill (Maril)
+    Pokemon_ID_Fushigibana, // Venusaur (Fushigibana)
+} PokemonKind;
+
+static inline void it_8027129C_by_4(Item_GObj* item_gobj)
 {
-    /// @todo This seems to get #Item::xC4_article_data directly,
-    ///       without #GET_ITEM
-    return *M2C_FIELD(M2C_FIELD(gobj, void**, 0xC4), s32**, 4);
+    u32 cnt;
+
+    for (cnt = 0; cnt < 4; cnt++) {
+        it_8027129C(item_gobj, cnt);
+    }
 }
 
-/// #it_80272828
-
-/// #it_80272860
-
-/// #it_802728C8
-
-/// #it_80272940
-
-/// #it_80272980
-
-/// #it_80272A18
-
-/// #it_80272A3C
-
-/// #it_80272A60
-
-/// #it_80272AC4
-
-/// #it_80272B40
-
-/// #it_80272BA4
-
-/// #it_80272C08
-
-/// #it_80272C6C
-
-/// #it_80272C90
-
-/// #it_80272CC0
-
-/// #it_80272D1C
-
-/// #it_80272D40
-
-/// #itColl_BounceOffVictim
-
-/// #it_80272DE4
-
-/// #it_80272F7C
-
-/// #it_80273030
-
-/// #itColl_BounceOffShield
-
-/// #it_80273130
-
-/// #it_80273168
-
-/// #it_802731A4
-
-/// #it_802731E0
-
-/// #it_8027321C
-
-/// #it_8027327C
-
-/// #it_802732E4
-
-/// #it_80273318
-
-/// #it_80273408
-
-/// #it_80273454
-
-/// #it_8027346C
-
-/// #it_80273484
-
-/// #it_8027349C
-
-/// #it_802734B4
-
-/// #it_80273500
-
-/// #it_80273598
-
-/// #it_80273600
-
-/// #it_80273648
-
-/// #it_80273670
-
-/// #it_80273748
-
-/// #it_80273B50
-
-/// #it_80273F34
-
-/// #it_80274198
-
-/// #it_802741F4
-
-/// #it_80274250
-
-/// #it_8027429C
-
-/// #it_802742F4
-
-/// #it_80274484
-
-/// #it_80274574
-
-/// #it_80274594
-
-/// #it_80274658
-
-/// #it_802746F8
-
-/// #it_80274740
-
-/// #it_80274990
-
-/// #it_80274A64
-
-/// #it_80274C60
-
-bool it_80274C78(Item_GObj* gobj)
+void it_80272560(Item_GObj* item_gobj, s32 idx)
 {
-    return GET_ITEM(gobj)->xDC8_word.flags.xC;
+    Item* item;
+    s32 stack[2];
+
+    item = item_gobj->user_data;
+    lbColl_80008428(&item->x5D4_hitboxes[idx].hit);
+    item->xDAA_flag.b2 = false;
+
+    it_8027129C_by_4(item_gobj);
 }
 
-/// #it_80274C88
-
-/// #it_80274CAC
-
-/// #it_80274D04
-
-/// #it_80274D6C
-
-/// #it_80274DAC
-
-/// #it_80274DFC
-
-/// #it_80274E44
-
-void it_80274ECC(Item_GObj* gobj, bool arg1)
+void it_802725D4(Item_GObj* item_gobj)
 {
-    GET_ITEM(gobj)->xD09 = arg1;
+    u32 i;
+    Item* item = item_gobj->user_data;
+
+#if 1
+    u8* var_r31 = ((u8*) item);
+
+    for (i = 0; i < 4; ++i) {
+        lbColl_80008428((HitCapsule*) (var_r31 + (i * 0x13c) + 0x5d4));
+    }
+#else
+    for (i = 0; i < 4; ++i) {
+        lbColl_80008428(&item->x5D4_hitboxes[i].hit);
+    }
+#endif
+
+    for (i = 0; i < 4; ++i) {
+        it_8027129C(item_gobj, i);
+    }
+    // lol. 0xDC8 should probably be split into 4 bitfields
+    item->xDC8_word.flags.x16 = 0;
+    item->xDAA_flag.b2 = 0;
+}
+
+void it_80272674(Item_GObj* item_gobj, s32 idx)
+{
+    HitCapsuleState state;
+    Item* item = item_gobj->user_data;
+    HitCapsule* hitbox;
+
+    lbColl_80008434(&item->x5D4_hitboxes[idx].hit);
+    item->xDC8_word.flags.x16 = 1;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    hitbox = &item->x5D4_hitboxes[idx].hit;
+    state = hitbox->state;
+
+    switch (state) {
+    case HitCapsule_Enabled:
+        lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
+        hitbox->x58 = hitbox->x4C;
+        hitbox->state = 2;
+        item->xDAA_flag.b2 = 1;
+        return;
+    case HitCapsule_Unk2:
+        hitbox->state = 3;
+        /* fallthrough */
+    case HitCapsule_Unk3:
+        hitbox->x58 = hitbox->x4C;
+        lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
+        /* fallthrough */
+    case 4: // HitCapsule_Max
+    case HitCapsule_Disabled:
+        return;
+    }
+}
+
+static inline void it_80272784_inline(Item_GObj* item_gobj)
+{
+    u32 i;
+
+    for (i = 0; i < 4; ++i) {
+        it_8027129C(item_gobj, i);
+    }
+}
+
+void it_80272784(Item_GObj* item_gobj)
+{
+    u32 i;
+    Item* item = GET_ITEM((HSD_GObj*) item_gobj);
+
+#if 1
+    u8* var_r31 = ((u8*) item);
+
+    for (i = 0; i < 4; ++i) {
+        lbColl_80008434((HitCapsule*) (var_r31 + (i * 0x13c) + 0x5d4));
+    }
+#else
+    for (i = 0; i < 4; ++i) {
+        lbColl_80008434(&item->x5D4_hitboxes[i].hit);
+    }
+#endif
+
+    item->xDC8_word.flags.x16 = 1;
+    it_80272784_inline(item_gobj);
+}
+
+Fighter* it_80272818(Item* item)
+{
+    return ((it_2728_DatAttrs*) item->xC4_article_data->x4_specialAttributes)
+        ->fighter;
+}
+
+// Returns Item_GObj of the specified kind if part of HSD_GObj_Entities->items
+Item_GObj* it_80272828(ItemKind kind)
+{
+    Item_GObj* item_gobj_return;
+    Item_GObj* item_gobj_check;
+
+    item_gobj_return = NULL;
+    item_gobj_check = (Item_GObj*) HSD_GObj_Entities->items;
+    while (item_gobj_check != NULL) {
+        if (((Item*) item_gobj_check->user_data)->kind == kind) {
+            item_gobj_return = item_gobj_check;
+        }
+
+        item_gobj_check = item_gobj_check->next;
+    }
+    return item_gobj_return;
+}
+
+void it_80272860(Item_GObj* item_gobj, f32 arg1, f32 arg2)
+{
+    Item* item;
+    f32 var_f3;
+    s32 var_r0;
+    s32 var_r3;
+
+    item = item_gobj->user_data;
+    // if these aren't ternaries it allocates registers differently .-.
+    var_r0 = arg1 < 0.0f ? -1 : 1;
+
+    var_f3 = item->x40_vel.y;
+
+    var_r3 = var_f3 < 0.0f ? -1 : 1;
+
+    if (var_r3 != var_r0) {
+        if (var_f3 < 0.0f) {
+            var_f3 = -var_f3;
+        }
+        if (var_f3 < arg2) {
+        label_1:
+            item->x40_vel.y -= arg1;
+            return;
+        }
+        return;
+    }
+    // big dumb
+    goto label_1;
+}
+
+void it_802728C8(Item_GObj* item_gobj)
+{
+    u32 rem;
+    HSD_JObj* item_jobj2;
+    HSD_JObj* item_jobj1;
+    PAD_STACK(12);
+
+    item_jobj1 = GET_JOBJ((HSD_GObj*) item_gobj);
+    item_jobj2 = item_jobj1 == NULL ? NULL : item_jobj1->child;
+    rem = (u32) (s32) ((Item*) item_gobj->user_data)->xD44_lifeTimer %
+          it_804D6D28->x44_float;
+    if (rem != 0) {
+        HSD_JObjClearFlagsAll(item_jobj2, 0x10U);
+        return;
+    }
+    HSD_JObjSetFlagsAll(item_jobj2, 0x10U);
+}
+
+void it_80272940(Item_GObj* item_gobj)
+{
+    HSD_JObj* item_jobj2;
+    HSD_JObj* item_jobj1;
+
+    item_jobj1 = GET_JOBJ((HSD_GObj*) item_gobj);
+    item_jobj2 = item_jobj1 == NULL ? NULL : item_jobj1->child;
+    HSD_JObjClearFlagsAll(item_jobj2, 0x10U);
+}
+
+// void it_80272980(Item_GObj* item_gobj, f32 arg1) {
+void it_80272980(Item_GObj* item_gobj)
+{
+    f32 dir;
+    f32 vel_x;
+    s32 int_dir;
+    Item* item;
+
+    item = item_gobj->user_data;
+    vel_x = item->x40_vel.x;
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+    if (!(vel_x < 0.00001f) || (item->facing_dir == 0.0f)) {
+        if (item->x40_vel.x >= 0.0f) {
+            dir = 1.0f;
+        } else {
+            dir = -1.0f;
+        }
+        item->facing_dir = dir;
+    }
+
+    if (-1.0f == item->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    mpColl_800436D8(&item->x378_itemColl, int_dir);
+}
+
+void it_80272A18(HSD_JObj* item_jobj)
+{
+    HSD_JObjClearFlagsAll(item_jobj, 0x10U);
+}
+
+void it_80272A3C(HSD_JObj* item_jobj)
+{
+    HSD_JObjSetFlagsAll(item_jobj, 0x10U);
+}
+
+void it_80272A60(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    efSync_Spawn(0x40E, item_gobj, &item->pos);
+    Item_8026AE84(item, 0x74, 0x7F, 0x40);
+    it_80274C60(item_gobj);
+}
+
+void it_80272AC4(Item_GObj* item_gobj, Vec3* arg1)
+{
+    Item* item;
+    Vec3* temp;
+
+    item = item_gobj->user_data;
+    // mut add + return i guess?
+    temp = lbVector_Add(arg1, &item->pos);
+    efSync_Spawn(0x40C, item_gobj, arg1);
+    Item_8026AE84(item, 0x74, 0x7F, 0x40);
+    it_80274C60(item_gobj);
+}
+
+void it_80272B40(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    efSync_Spawn(0x40C, item_gobj, &item->pos);
+    Item_8026AE84(item, 0x74, 0x7F, 0x40);
+    it_80274C60(item_gobj);
+}
+
+void it_80272BA4(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    efSync_Spawn(0x411, item_gobj, &item->pos);
+    Item_8026AE84(item, 0x73, 0x7F, 0x40);
+    it_80274C60(item_gobj);
+}
+
+void it_80272C08(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    efSync_Spawn(0x410, item_gobj, &item->pos);
+    Item_8026AE84(item, 0x74, 0x7F, 0x40);
+    it_80274C60(item_gobj);
+}
+
+bool it_80272C6C(Item_GObj* item_gobj)
+{
+    return lb_8000B09C(item_gobj->hsd_obj);
+}
+
+HSD_JObj* it_80272C90(Item_GObj* item_gobj)
+{
+    return it_80272CC0(
+        item_gobj, ((Item*) item_gobj->user_data)
+                       ->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
+}
+
+HSD_JObj* it_80272CC0(Item_GObj* item_gobj, enum_t idx)
+{
+    HSD_JObj* item_jobj2;
+    HSD_JObj* item_jobj1;
+    Item* item;
+
+    item = item_gobj->user_data;
+    item_jobj1 = item_gobj->hsd_obj;
+    if (item->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
+        return item->xBBC_dynamicBoneTable->bones[idx];
+    }
+    if (idx != 0) {
+        for (; idx > 0; --idx) {
+            item_jobj2 = item_jobj1 == NULL ? NULL : item_jobj1->child;
+            item_jobj1 = item_jobj2;
+        }
+    }
+
+    return item_jobj1;
+}
+
+bool it_80272D1C(Item_GObj* item_gobj)
+{
+    if ((item_gobj != NULL) && (item_gobj->classifier == 6))
+    { // ITEM_UNK_ENEMY?
+        return true;
+    }
+    return false;
+}
+
+s32 it_80272D40(Item_GObj* item_gobj)
+{
+    bool chk;
+
+    if (ftLib_80086960((HSD_GObj*) item_gobj)) {
+        return 0;
+    }
+    if ((item_gobj != NULL) && (item_gobj->classifier == 6))
+    { // ITEM_UNK_ENEMY?
+        chk = true;
+    } else {
+        chk = false;
+    }
+    if (chk) {
+        return 1;
+    }
+    return 2;
+}
+
+bool itColl_BounceOffVictim(Item_GObj* item_gobj)
+{
+    Item* item;
+    ItemCommonData* val;
+
+    item = item_gobj->user_data;
+    // needs x58-x60 to be f32 type, otherwise requires pointer casting
+    item->x40_vel.x *= it_804D6D28->x58_float;
+    val = it_804D6D28;
+    item->x40_vel.y = (item->x40_vel.y * val->x5C_float) + val->x60_float;
+    return (bool) val; // i have no idea what this means
+}
+
+void it_80272DE4(HSD_JObj* jobj, f32 scale)
+{
+    HSD_JObjAddScaleX(jobj, scale);
+    HSD_JObjAddScaleY(jobj, scale);
+    HSD_JObjAddScaleZ(jobj, scale);
+}
+
+void it_80272F7C(HSD_JObj* jobj, f32 scale)
+{
+    Vec3 temp;
+
+    temp.x = temp.y = temp.z = scale;
+    HSD_JObjSetScale(jobj, &temp);
+}
+
+bool it_80273030(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->x40_vel.x = -item->x40_vel.x * item->xC70;
+    item->x40_vel.y = -item->x40_vel.y * item->xC70;
+    item->facing_dir = -item->facing_dir;
+    item->xD44_lifeTimer = item->xD48_halfLifeTimer;
+    return false;
+}
+
+bool itColl_BounceOffShield(Item_GObj* item_gobj)
+{
+    Item* item;
+    f32 dir;
+    f32 vel_x;
+    s32 int_dir;
+    PAD_STACK(4);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    lbVector_Mirror(&item->x40_vel, &item->xC58);
+    item = item_gobj->user_data;
+    vel_x = item->x40_vel.x;
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+    if (!(vel_x < 0.00001f) || (item->facing_dir == 0.0f)) {
+        if (item->x40_vel.x >= 0.0f) {
+            dir = 1.0f;
+        } else {
+            dir = -1.0f;
+        }
+        item->facing_dir = dir;
+    }
+    if (-1.0f == item->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    return false;
+}
+
+bool it_80273130(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xD44_lifeTimer--;
+    if (item->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
+
+void it_80273168(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    if (!(item->xDCD_flag.b2)) {
+        Item_8026AE84(item, item->xD70, 0x7F, 0x40);
+    }
+}
+
+void it_802731A4(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    if (!(item->xDCD_flag.b2)) {
+        Item_8026AE84(item, item->xD78, 0x7F, 0x40);
+    }
+}
+
+void it_802731E0(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    if (!(item->xDCD_flag.b2)) {
+        Item_8026AE84(item, item->xD74, 0x7F, 0x40);
+    }
+}
+
+void it_8027321C(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    if (!item->xDCD_flag.b2) {
+        if (item->kind == It_Kind_Unk4) {
+            lbAudioAx_80023870(item->xD84, 0x7F, 0x40, 0x9A);
+            return;
+        }
+        Item_8026AE84(item, item->xD84, 0x7F, 0x40);
+    }
+}
+
+void it_8027327C(Item_GObj* item_gobj, enum_t ID1, enum_t ID2)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    if (ID1 != -1) {
+        it_802787B4(item_gobj, ID1);
+    }
+    if (!item->xDCD_flag.b2) {
+        it_802732E4(item, ID2);
+        if (ID2 == 0x12F) {
+            lbAudioAx_80024DC4(ID2);
+        }
+    }
+}
+
+void it_802732E4(Item* item, s32 arg1)
+{
+    if (!item->xDCD_flag.b2) {
+        Item_8026AE84(item, arg1, 0x7F, 0x40);
+    }
+}
+
+void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint, s32 arg2)
+{
+    // void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint) {
+    HSD_JObj* item_jobj;
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xC8_joint = joint;
+    HSD_GObjObject_80390B0C((HSD_GObj*) item_gobj);
+    Item_802680CC((HSD_GObj*) item_gobj);
+    Item_8026849C((HSD_GObj*) item_gobj);
+    item_jobj = item_gobj->hsd_obj;
+    HSD_JObjSetTranslate(item_jobj, &item->pos);
+}
+
+void it_80273408(Item_GObj* item_gobj)
+{
+    it_80273454(item_gobj);
+    it_8027346C(item_gobj);
+    it_80273484(item_gobj);
+    it_8027349C(item_gobj);
+    it_802734B4(item_gobj);
+}
+
+void it_80273454(Item_GObj* item_gobj)
+{
+    Item* item = item_gobj->user_data;
+
+    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+}
+
+void it_8027346C(Item_GObj* item_gobj)
+{
+    Item* item = item_gobj->user_data;
+
+    item->x64_vec_unk2.x = item->x64_vec_unk2.y = item->x64_vec_unk2.z = 0.0f;
+}
+
+void it_80273484(Item_GObj* item_gobj)
+{
+    Item* item = item_gobj->user_data;
+
+    item->x58_vec_unk.x = item->x58_vec_unk.y = item->x58_vec_unk.z = 0.0f;
+}
+
+void it_8027349C(Item_GObj* item_gobj)
+{
+    Item* item = item_gobj->user_data;
+
+    item->x70_nudge.x = item->x70_nudge.y = item->x70_nudge.z = 0.0f;
+}
+
+void it_802734B4(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->x7C.x = item->x7C.y = item->x7C.z = 0.0f;
+    item->x88.x = item->x88.y = item->x88.z = 0.0f;
+    item->x94.x = item->x94.y = item->x94.z = 0.0f;
+    item->xA0.x = item->xA0.y = item->xA0.z = 0.0f;
+    item->xAC_unk.x = item->xAC_unk.z = 0.0f;
+    item->xAC_unk.y = 1.0f;
+}
+
+void it_80273500(Item_GObj* item_gobj, Vec3* arg1)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    // assinging directly causes a memcopy instead of using float transfers
+    item->x40_vel.x = arg1->x;
+    item->x40_vel.y = arg1->y;
+    item->x40_vel.z = arg1->z;
+    // assuming these are inlines?
+    it_8027346C(item_gobj);
+    // item = item_gobj->user_data;
+    // item->x64_vec_unk2.x = item->x64_vec_unk2.y = item->x64_vec_unk2.z = 0;
+    it_80273484(item_gobj);
+    // item = item_gobj->user_data;
+    // item->x58_vec_unk.x = item->x58_vec_unk.y = item->x58_vec_unk.z = 0;
+    it_8027349C(item_gobj);
+    // item = item_gobj->user_data;
+    // item->x70_nudge.x = item->x70_nudge.y = item->x70_nudge.z = 0;
+    it_802734B4(item_gobj);
+    // item = item_gobj->user_data;
+    // item->x7C.x = item->x7C.y = item->x7C.z = 0.0f;
+    // item->x88.x = item->x88.y = item->x88.z = 0.0f;
+    // item->x94.x = item->x94.y = item->x94.z = 0.0f;
+    // item->xA0.x = item->xA0.y = item->xA0.z = 0.0f;
+    // item->xAC_unk.x = item->xAC_unk.z = 0.0f;
+    // item->xAC_unk.y = 1.0f;
+}
+
+void it_80273598(Item_GObj* item_gobj, s32 arg1, s32 arg2)
+{
+    HSD_GObj* temp_r3;
+    Item* item;
+
+    item = item_gobj->user_data;
+    // storing owner causes incorrect register allocations
+    if ((item->owner != NULL) && (ftLib_80086960(item->owner))) {
+        ftLib_80086D40(item->owner, arg1, arg2);
+    }
+}
+
+void it_80273600(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    // storing owner causes incorrect register allocation
+    if ((item->owner != NULL) && (ftLib_80086960(item->owner) != 0)) {
+        ftLib_80086E68(item->owner);
+    }
+}
+
+void it_80273648(Item_GObj* item_gobj, s32 arg1, s32 arg2)
+{
+    ftLib_80086DC4(arg1, arg2);
+}
+
+void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
+{
+    HSD_JObj* item_jobj1;
+    HSD_JObj* item_jobj2;
+    Item* item;
+    HSD_Joint* joint;
+    ItemStateDesc* desc;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item_jobj1 = GET_JOBJ((HSD_GObj*) item_gobj);
+    item->xD0_itemStateDesc =
+        &(item->xC4_article_data->xC_itemStates->x0_itemStateDesc[arg1]);
+    if (item->xD0_itemStateDesc != NULL) {
+        HSD_JObjRemoveAnimAll(item_jobj1);
+        joint = item->xC8_joint;
+        if (joint != NULL) {
+            if (item_jobj1 == NULL) {
+                item_jobj2 = NULL;
+            } else {
+                item_jobj2 = item_jobj1->child;
+            }
+            lb_8000B804(item_jobj2, joint->child);
+        }
+        desc = item->xD0_itemStateDesc;
+        HSD_JObjAddAnimAll(item_jobj1, desc->x0_anim_joint,
+                           desc->x4_matanim_joint,
+                           (HSD_ShapeAnimJoint*) desc->x8_parameters);
+        lb_8000BA0C(item_jobj1, item->x5D0_animFrameSpeed);
+        HSD_JObjReqAnimAll(item_jobj1, arg8);
+    }
+    HSD_JObjAnimAll(item_jobj1);
+    HSD_JObjRemoveAnimAll(item_jobj1);
+    item->x524_cmd.x8 = NULL;
+}
+
+void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
+{
+    // register allocations correct so long as vars are in exactly this order
+    HSD_JObj* jobj2;
+    f32 rotation;
+    f32 dir_radians;
+    f32 dir;
+    f32 vel_x;
+    s32 hold_kind;
+    s32 _filler; // this var does nothing but removing it fucks up the register
+                 // allocations
+    s32 int_dir;
+    Vec3 sp54;
+    Vec3 sp48;
+    Vec3 sp3C;
+    HSD_JObj* jobj_2;
+    Item* item_2;
+    Item* item;
+    HSD_GObj* owner;
+    HSD_JObj* jobj;
+    PAD_STACK(32);
+
+    // item = GET_ITEM((HSD_GObj*) item_gobj);
+    // jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+    item = item_gobj->user_data;
+    jobj = item_gobj->hsd_obj;
+    owner = item->owner;
+    it_80275070(item_gobj,
+                item->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
+    if (!it_8026B6C8(item_gobj)) {
+        it_8026B390(item_gobj);
+    }
+    it_802756E0(item_gobj);
+    item_2 = item_gobj->user_data;
+    jobj_2 = item_gobj->hsd_obj;
+    rotation = it_80274990(item_gobj);
+    lb_8000B804(jobj_2, item_2->xC8_joint);
+    Item_8026849C((HSD_GObj*) item_gobj);
+    it_80274658(item_gobj, rotation);
+    if (item->xDC8_word.flags.x0) {
+        owner = (HSD_GObj*) item->x51C;
+    }
+    item->x40_vel = *vel;
+    item->x40_vel.x *= item->xCC_item_attr->x4_throw_speed_mul;
+    item->x40_vel.y *= item->xCC_item_attr->x4_throw_speed_mul;
+    item->x40_vel.z *= item->xCC_item_attr->x4_throw_speed_mul;
+    item = item_gobj->user_data;
+    vel_x = item->x40_vel.x;
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+    if (!(vel_x < 0.00001f) || (item->facing_dir == 0.0f)) {
+        if (item->x40_vel.x >= 0.0f) {
+            dir = 1.0f;
+        } else {
+            dir = -1.0f;
+        }
+        item->facing_dir = dir;
+    }
+    if (-1.0f == item->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    if (item->xDC8_word.flags.x19 == 1) {
+        dir_radians = M_PI_2 * item->facing_dir;
+        HSD_JObjSetRotationY(jobj, dir_radians);
+    }
+    if (((it_8026B2B4(item_gobj) == 1) &&
+         (hold_kind = item->hold_kind, (hold_kind != 4)) &&
+         (hold_kind != 6)) ||
+        (item->hold_kind == 8))
+    {
+        jobj2 = it_80272CC0(
+            item_gobj,
+            ((Item*) item_gobj->user_data)
+                ->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
+        HSD_JObjGetTranslation(jobj2, &sp3C);
+        sp3C.x = -sp3C.x;
+        sp3C.y = -sp3C.y;
+        sp3C.z = -sp3C.z;
+        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner, item->xDC4), &sp3C,
+                    &sp54);
+        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner, item->xDC4), NULL,
+                    &sp48);
+        sp3C.x = sp54.x - sp48.x;
+        sp3C.y = sp54.y - sp48.y;
+        sp3C.z = 0.0f;
+    } else {
+        sp3C.x = sp3C.y = sp3C.z = 0.0f;
+    }
+    item->pos.x = pos->x + sp3C.x;
+    item->pos.y = pos->y + sp3C.y;
+    item->pos.z = 0.0f;
+    HSD_JObjSetTranslate(jobj, &item->pos);
+}
+
+void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
+{
+    // register allocations are correct when vars declared in exactly this
+    // order
+    s32 stack_top[10];
+    Item* item;
+    HSD_GObj* owner_gobj;
+    HSD_JObj* jobj;
+    f32 rotation;
+    f32 dir_radians;
+    f32 dir;
+    f32 vel_x;
+    s32 hold_kind;
+    Vec3 sp40;
+    Vec3 sp34;
+    s32 int_dir;
+    Vec3* pos;
+    HSD_JObj* item_jobj2;
+    HSD_JObj* item_jobj3;
+    HSD_JObj* item_jobj1;
+    Item* item2;
+    Item* item3;
+    PAD_STACK(32);
+
+    item = item_gobj->user_data;
+    item_jobj1 = item_gobj->hsd_obj;
+    owner_gobj = item->owner;
+    it_80275070(item_gobj,
+                item->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
+    if (!it_8026B6C8(item_gobj)) {
+        it_8026B390(item_gobj);
+    }
+    it_802756E0(item_gobj);
+    item = item_gobj->user_data;
+    item_jobj2 = item_gobj->hsd_obj;
+    rotation = it_80274990(item_gobj);
+    lb_8000B804(item_jobj2, item->xC8_joint);
+    Item_8026849C((HSD_GObj*) item_gobj);
+    it_80274658(item_gobj, rotation);
+    if (item->xDC8_word.flags.x0) {
+        owner_gobj = (HSD_GObj*) item->x51C;
+    }
+    item->x40_vel = *vel;
+    item->x40_vel.x *= item->xCC_item_attr->x4_throw_speed_mul;
+    item->x40_vel.y *= item->xCC_item_attr->x4_throw_speed_mul;
+    item->x40_vel.z *= item->xCC_item_attr->x4_throw_speed_mul;
+    item2 = item_gobj->user_data;
+    vel_x = item2->x40_vel.x;
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+    if (!(vel_x < 0.00001f) || (item2->facing_dir == 0.0f)) {
+        if (item2->x40_vel.x >= 0.0f) {
+            dir = 1.0f;
+        } else {
+            dir = -1.0f;
+        }
+        item2->facing_dir = dir;
+    }
+    if (-1.0f == item2->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    mpColl_800436D8(&item2->x378_itemColl, int_dir);
+    if (item->xDC8_word.flags.x19 == 1) {
+        dir_radians = M_PI_2 * item->facing_dir;
+        HSD_JObjSetRotationY(item_jobj1, dir_radians);
+    }
+    if (((it_8026B2B4(item_gobj) == 1) &&
+         (hold_kind = item->hold_kind, (hold_kind != 4)) &&
+         (hold_kind != 6)) ||
+        (item->hold_kind == 8))
+    {
+        jobj = it_80272CC0(
+            (Item_GObj*) item_gobj,
+            ((Item*) item_gobj->user_data)
+                ->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
+        HSD_JObjGetTranslation(jobj, &sp40);
+        sp40.x = -sp40.x;
+        sp40.y = -sp40.y;
+        sp40.z = -sp40.z;
+    } else {
+        sp40.x = sp40.y = sp40.z = 0.0f;
+    }
+    item3 = item_gobj->user_data;
+    item_jobj3 = item_gobj->hsd_obj;
+    if (&sp40 != NULL) {
+        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
+                    &sp40, &sp34);
+    } else {
+        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
+                    NULL, &sp34);
+    }
+    pos = &item3->pos;
+    item3->pos.x = sp34.x;
+    item3->pos.y = sp34.y;
+    item3->pos.z = 0.0f;
+    HSD_JObjSetTranslate(item_jobj3, pos);
+}
+
+// i don't think this is right, but a 3rd arg somewhere is the only way that
+// the compiler will "protect" r5. I'm not 100% sure on the types either
+
+// https://decomp.me/scratch/Sjr7G supports 3rd arg existing
+// https://decomp.me/scratch/AcQ55 does not
+
+// i'm gonna investigate other call sites of this function, as well as
+// it_80275bc8 and we'll see what turns up
+void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2, Item* arg_item)
+{
+    Item* item;
+    HSD_JObj* item_jobj;
+    f32 rotate;
+    s32 int_dir;
+
+    // item = GET_ITEM((HSD_GObj*) item_gobj);
+    item = item_gobj->user_data;
+    // item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+    item_jobj = item_gobj->hsd_obj;
+    item->xDC8_word.flags.x13 = 0;
+    item->xDC8_word.flags.x14 = 1;
+    item->xDC4 = 0;
+    item->xD54_throwNum++;
+    item->xD50_landNum = 0;
+
+    it_80275BC8(item_gobj, arg_gobj2); // probably not a 3rd arg, though adding
+                                       // it results in a 99.80% match
+    it_80274DAC(item_gobj);            // doesn't touch r5
+
+    if (item->xDC8_word.flags.x19 == 1) {
+        rotate = M_PI_2 * item->facing_dir;
+        HSD_JObjSetRotationY(item_jobj, rotate);
+    }
+
+    if (ftLib_80086960(arg_gobj2)) {
+        Item_8026A848((HSD_GObj*) item_gobj, arg_gobj2); // probably not
+        it_8027B070(item_gobj,
+                    (Fighter_GObj*) arg_gobj2); // immediately loads a value
+                                                // into r5 without saving it
+    }
+
+    if (-1.0f == item->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+
+    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    Item_8026B074(item);
+    it_802762BC(item);
+    HSD_JObjSetTranslate(item_jobj, &item->pos);
+
+    it_8027B4A4((Fighter_GObj*) arg_gobj2, item_gobj);
+    it_8027B378((Fighter_GObj*) arg_gobj2, item_gobj, it_802758D4(item_gobj));
+}
+
+void it_80274198(Item_GObj* item_gobj, bool chk)
+{
+    Item* item;
+    HSD_GObj* owner_gobj;
+    HSD_GObj* x51C_gobj;
+
+    item = item_gobj->user_data;
+    owner_gobj = item->owner;
+    if (item->xDC8_word.flags.x0 != 0) {
+        if (chk == true) {
+            x51C_gobj = item->x51C;
+            item->owner = x51C_gobj;
+            owner_gobj = x51C_gobj;
+            item->x51C = NULL;
+        } else {
+            owner_gobj = item->x51C;
+        }
+    }
+    // it_80273F34(item_gobj, owner_gobj);
+    it_80273F34(item_gobj, owner_gobj, item);
+}
+
+void it_802741F4(Item_GObj* item_gobj, bool chk)
+{
+    HSD_GObj* x51C_gobj;
+    HSD_GObj* owner_gobj;
+    Item* item;
+
+    item = item_gobj->user_data;
+    owner_gobj = item->owner;
+    if (item->xDC8_word.flags.x0) {
+        if (chk == true) {
+            x51C_gobj = item->x51C;
+            item->owner = x51C_gobj;
+            owner_gobj = x51C_gobj;
+            item->x51C = NULL;
+        } else {
+            owner_gobj = item->x51C;
+        }
+    }
+    it_80273F34(item_gobj, owner_gobj, item);
+}
+
+void it_80274250(Item_GObj* item_gobj, Vec3* arg1)
+{
+    HSD_GObj* owner_gobj;
+    Item* item;
+    PAD_STACK(16);
+
+    it_80273B50(item_gobj, arg1);
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    owner_gobj = item->owner;
+    if (item->xDC8_word.flags.x0) {
+        owner_gobj = item->x51C;
+    }
+    it_80273F34(item_gobj, owner_gobj, item);
+}
+
+void it_8027429C(Item_GObj* item_gobj, Vec3* arg1)
+{
+    HSD_GObj* owner_gobj;
+    Item* item;
+    PAD_STACK(16);
+
+    it_80273B50(item_gobj, arg1);
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    owner_gobj = item->owner;
+    if (item->xDC8_word.flags.x0) {
+        owner_gobj = item->x51C;
+        item->owner = owner_gobj;
+        item->x51C = NULL;
+    }
+    it_80273F34(item_gobj, owner_gobj, item);
+}
+
+void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
+{
+    HSD_JObj* item_jobj1;
+    HSD_JObj* item_jobj2;
+    Item* item;
+    flag32 word;
+    u8 flag;
+
+    item = item_gobj->user_data;
+    lb_8000B804(item_gobj->hsd_obj, item->xC8_joint);
+    Item_8026849C((HSD_GObj*) item_gobj);
+    if (ftLib_80086960(gobj)) {
+        // word = item->xDC8_word;
+        // item->xDC8_word.word = (word & ~0x1E000) | (((((word >> 0xDU) & 0xF)
+        // | (1 << ftLib_80086BE0(gobj))) << 0xD) & 0x1E000);
+        // item->xDC8_word.word = item->xDC8_word.word & ~0x1E000;
+        // item->xDC8_word.word = (item->xDC8_word.word >> 0xDU) & 0xF;
+        // item->xDC8_word.word = (((1 << ftLib_80086BE0(gobj))) << 0xD) &
+        // 0x1E000; item->xDC8_word.word |= (item->xDC8_word.word >> 0xDU) &
+        // 0xF; item->xDC8_word.word = item->xDC8_word.word & ~0x1E000 |
+        // (item->xDC8_word.word >> 0xDU) & 0xF | (((1 <<
+        // ftLib_80086BE0(gobj))) << 0xD) & 0x1E000;
+        item->xDC8_word.word =
+            ((item->xDC8_word.word >> 0xDU) & 0xF) |
+            ((((1 << ftLib_80086BE0(gobj))) << 0xD) & 0x1E000);
+        // item->xDC8_word.word |= (item->xDC8_word.word >> 0xDU) & 0xF | (((1
+        // << ftLib_80086BE0(gobj))) << 0xD) & 0x1E000; item->xDC8_word.word =
+        // ((item->xDC8_word.word | ((1 << ftLib_80086BE0(gobj)))) >> 0xDU) &
+        // 0xF | 0x1E000; item->xDC8_word.flags.x3 = 1;
+        // item->xDC8_word.flags.xF = 0;
+
+        // if (!(((u8) item->xDC8_word.word >> 7U) & 1)) {
+        if (!item->xDC8_word.flags.x0) {
+            item->owner = gobj;
+        } else {
+            item->x51C = gobj;
+        }
+        item->xDC4 = ftpart;
+        item->x20_team_id = ftLib_80086EB4(gobj);
+        item_jobj2 = NULL;
+        item->xD50_landNum = 0;
+        // ((UnkFlagStruct*)((u8*)item + 0xDCA))->b6 |= 1;
+        item->xDC8_word.flags.x13 = 1;
+        item_jobj1 = item_gobj->hsd_obj;
+        if (item_jobj1 == NULL) {
+        } else {
+            item_jobj2 = item_jobj1->child;
+        }
+        HSD_JObjClearFlagsAll(item_jobj2, 16U);
+        it_802756D0(item_gobj);
+        it_8026B3A8(item_gobj);
+        db_80225DD8(item_gobj, (Fighter_GObj*) gobj);
+    }
+    if (item->xDD0_flag.b6) {
+        item->xDD0_flag.b6 = 0;
+        item->xD40 = 0.0f;
+        it_80279BBC(item);
+    }
+    if (item->kind < 0x23) {
+        it_80275158(item_gobj, it_804D6D28->x30);
+    }
+    it_80274F48(item_gobj,
+                item->xC4_article_data->x10_modelDesc->x8_bone_attach_id, gobj,
+                ftpart);
+    it_80274C88(item_gobj);
+}
+
+void it_80274484(Item_GObj* item_gobj, HSD_JObj* jobj, f32 scale)
+{
+    Vec3 sp1C;
+    Item* item;
+    f32 unused;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item->scl = scale;
+    sp1C.z = item->scl;
+    sp1C.y = item->scl;
+    sp1C.x = item->scl;
+    HSD_JObjSetScale(jobj, &sp1C);
+    it_80275534(item_gobj, item->x3C);
+    it_80274DFC(item_gobj);
+    it_80274E44(item_gobj);
+}
+
+void it_80274574(Item_GObj* item_gobj)
+{
+    it_80274594(item_gobj);
+}
+
+inline void HSD_JObjSetScale_2(HSD_JObj* jobj, Vec3* scale)
+{
+    ((jobj) ? ((void) 0)
+            : __assert("src/sysdolphin/baselib/jobj.h", 760, "jobj"));
+    jobj->scale = *scale;
+    if (!(jobj->flags & (1 << 25))) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+void it_80274594(Item_GObj* item_gobj)
+{
+    Vec3 sp18;
+    HSD_JObj* item_jobj;
+    Item* item;
+    PAD_STACK(8);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item_jobj = item_gobj->hsd_obj;
+    item->scl *= ftLib_80086A0C(item->owner);
+    sp18.z = item->scl;
+    sp18.y = item->scl;
+    sp18.x = item->scl;
+    HSD_JObjSetScale_2(item_jobj, &sp18);
+    it_80275534(item_gobj, item->x3C);
+    it_80274DFC(item_gobj);
+    it_80274E44(item_gobj);
+}
+
+void it_80274658(Item_GObj* item_gobj, f32 arg1)
+{
+    Item* item;
+    f32 spin_speed1;
+    f32 spin_speed2;
+    s32 dir1;
+    s32 dir2;
+
+    item = item_gobj->user_data;
+    spin_speed2 = 0.0f;
+    spin_speed1 = item->spin_spd;
+    if (spin_speed1 != spin_speed2) {
+        spin_speed2 = 0.01f * spin_speed1 * (0.0174533f * arg1);
+    }
+    item->xD3C_spinSpeed = spin_speed2;
+    if (item->facing_dir < 0.0f) {
+        dir1 = -1;
+    } else {
+        dir1 = 1;
+    }
+    if (item->x40_vel.x < 0.0f) {
+        dir2 = -1;
+    } else {
+        dir2 = 1;
+    }
+    if (dir2 != dir1) {
+        item->xD3C_spinSpeed = -item->xD3C_spinSpeed;
+    }
+    if (item->xDC8_word.flags.x19 != 1) {
+        item->xD3C_spinSpeed *= -item->facing_dir;
+    }
+}
+
+HSD_JObj* it_802746F8(Item_GObj* item_gobj)
+{
+    u32 bit_chk;
+    s32 var_ctr;
+    HSD_JObj* item_jobj2;
+    HSD_JObj* item_jobj1;
+
+    item_jobj1 = item_gobj->hsd_obj;
+    bit_chk = (((Item*) item_gobj->user_data)
+                   ->xC4_article_data->x10_modelDesc->xC_bit_field >>
+               6U) &
+              3;
+    if (bit_chk != 0) {
+        for (var_ctr = bit_chk; var_ctr > 0; var_ctr--) {
+            if (item_jobj1 == NULL) {
+                item_jobj2 = NULL;
+            } else {
+                item_jobj2 = item_jobj1->child;
+            }
+            item_jobj1 = item_jobj2;
+        }
+    }
+    return item_jobj1;
+}
+
+void it_80274740(Item_GObj* item_gobj)
+{
+    HSD_JObj* item_jobj;
+    Item* item;
+    u32 bit_chk;
+    s32 var_ctr;
+    PAD_STACK(24);
+
+    item = item_gobj->user_data;
+    item_jobj = item_gobj->hsd_obj;
+    bit_chk = (item->xC4_article_data->x10_modelDesc->xC_bit_field >> 6U) & 3;
+    if (bit_chk != 0) {
+        for (var_ctr = bit_chk; var_ctr > 0; var_ctr--) {
+            if (item_jobj == NULL) {
+                item_jobj = NULL;
+            } else {
+                item_jobj = item_jobj->child;
+            }
+        }
+    }
+    item->xD3C_spinSpeed = 0.0f;
+    if (item->xDC8_word.flags.x17 == 0) {
+        HSD_JObjSetRotationZ(item_jobj, item->xD3C_spinSpeed);
+    } else if (item->xDC8_word.flags.x17 == 1) {
+        HSD_JObjSetRotationX(item_jobj, item->xD3C_spinSpeed);
+    } else {
+        HSD_JObjSetRotationY(item_jobj, item->xD3C_spinSpeed);
+    }
+}
+
+f32 it_80274990(Item_GObj* item_gobj)
+{
+    u32 bit_chk;
+    s32 var_ctr;
+    Item* item;
+    HSD_JObj* item_jobj;
+    PAD_STACK(48);
+
+    item = item_gobj->user_data;
+    item_jobj = item_gobj->hsd_obj;
+    bit_chk = (item->xC4_article_data->x10_modelDesc->xC_bit_field >> 6U) & 3;
+    if (bit_chk != 0) {
+        for (var_ctr = bit_chk; var_ctr > 0; var_ctr--) {
+            if (item_jobj == NULL) {
+                item_jobj = NULL;
+            } else {
+                item_jobj = item_jobj->child;
+            }
+        }
+    }
+    if (item->xDC8_word.flags.x17 == 0) {
+        return HSD_JObjGetRotationZ(item_jobj);
+    }
+    if (item->xDC8_word.flags.x17 == 1) {
+        return HSD_JObjGetRotationX(item_jobj);
+    }
+    return HSD_JObjGetRotationY(item_jobj);
+}
+
+void it_80274A64(Item_GObj* item_gobj)
+{
+    HSD_JObj* item_jobj;
+    Item* item;
+    u32 bit_chk;
+    s32 var_ctr;
+    PAD_STACK(24);
+
+    item = item_gobj->user_data;
+    item_jobj = item_gobj->hsd_obj;
+    bit_chk = (item->xC4_article_data->x10_modelDesc->xC_bit_field >> 6U) & 3;
+    if (bit_chk != 0) {
+        for (var_ctr = bit_chk; var_ctr > 0; var_ctr--) {
+            if (item_jobj == NULL) {
+                item_jobj = NULL;
+            } else {
+                item_jobj = item_jobj->child;
+            }
+        }
+    }
+    if (item->xDC8_word.flags.x17 == 0) {
+        HSD_JObjAddRotationZ(item_jobj, item->xD3C_spinSpeed);
+    } else if (item->xDC8_word.flags.x17 == 1) {
+        HSD_JObjAddRotationX(item_jobj, item->xD3C_spinSpeed);
+    } else {
+        HSD_JObjAddRotationY(item_jobj, item->xD3C_spinSpeed);
+    }
+}
+
+void it_80274C60(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDC8_word.flags.xC = 0;
+}
+
+bool it_80274C78(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    return item->xDC8_word.flags.xC;
+}
+
+void it_80274C88(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDD0_flag.b0 = 0;
+    item->xDAA_flag.b3 = 0;
+}
+
+void it_80274CAC(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDD0_flag.b0 = 1;
+    if (db_80225B0C() != 0) {
+        item->xDAA_flag.b3 = 1;
+    }
+}
+
+void it_80274D04(Item_GObj* item_gobj, Vec3* pos)
+{
+    Vec3 sp20;
+    Vec3 sp14;
+    PAD_STACK(4);
+
+    it_8026BB88(item_gobj, &sp20);
+    it_8026BBCC(item_gobj, &sp14);
+    pos->x = sp20.x - sp14.x;
+    pos->y = sp20.y - sp14.y;
+}
+
+void it_80274D6C(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    // item->xACC_itemHurtbox[1].b_pos.x =
+    // item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
+    item->xACC_itemHurtbox[1].is_grabbable =
+        item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
+    item->xACC_itemHurtbox[1].kind =
+        item->x378_itemColl.xA4_ecbCurrCorrect.left.x + item->pos.x;
+    item->xB64 = item->x378_itemColl.xA4_ecbCurrCorrect.top.x +
+                 item->x378_itemColl.xA4_ecbCurrCorrect.right.y + item->pos.y;
+}
+
+void it_80274DAC(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xACC_itemHurtbox[1].b_pos.z = 0.0f;
+    item->xACC_itemHurtbox[1].bone_idx = 0.0f;
+    item = item_gobj->user_data;
+    item->xACC_itemHurtbox[1].is_grabbable =
+        item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
+    item->xACC_itemHurtbox[1].kind =
+        item->x378_itemColl.xA4_ecbCurrCorrect.left.x + item->pos.x;
+    item->xB64 = item->x378_itemColl.xA4_ecbCurrCorrect.top.y +
+                 item->x378_itemColl.xA4_ecbCurrCorrect.right.y + item->pos.y;
+}
+
+void it_80274DFC(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xBCC_unk.x *= item->scl;
+    item->xBCC_unk.y *= item->scl;
+    item->xBD4_grabRange.x *= item->scl;
+    item->xBD4_grabRange.y *= item->scl;
+}
+
+void it_80274E44(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xBEC.top *= item->scl;
+    item->xBEC.bottom *= item->scl;
+    item->xBEC.right *= item->scl;
+    item->xBEC.left *= item->scl;
+    item->xBDC.top *= item->scl;
+    item->xBDC.bottom *= item->scl;
+    item->xBDC.right *= item->scl;
+    item->xBDC.left *= item->scl;
+}
+
+void it_80274ECC(Item_GObj* item_gobj, bool arg1)
+{
+    ((Item*) item_gobj->user_data)->xD09 = arg1;
 }
 
 void it_80274ED8(void)
 {
-    it_804D6D0C += 1;
+    it_804D6D0C++;
 }
 
 void it_80274EE8(u32 arg0)
 {
-    it_804D6D08 += 1;
+    it_804D6D08++;
 }
 
-/// #it_80274EF8
-
-/// #it_80274F10
-
-/// #it_80274F28
-
-/// #it_80274F48
-
-/// #it_80274FDC
-
-/// #it_80275070
-
-s32 it_802750E8(Item_GObj* gobj, s32 mask)
+void it_80274EF8(Item_GObj* item_gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    return ip->xDC0 & mask;
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDC8_word.flags.x2 = 0;
 }
 
-/// #it_802750F8
-
-/// #it_80275158
-
-/// #it_80275174
-
-/// #it_8027518C
-
-/// #it_802751D8
-
-/// #it_80275210
-
-/// #it_80275228
-
-/// #it_80275240
-
-/// #it_80275258
-
-/// #it_80275270
-
-/// #it_80275288
-
-/// #it_802752D8
-
-/// #it_80275328
-
-/// #it_80275390
-
-/// #it_802753BC
-
-/// #it_802753DC
-
-/// #it_80275414
-
-/// #it_8027542C
-
-/// #it_80275444
-
-/// #it_80275474
-
-/// #it_802754A4
-
-/// #it_802754BC
-
-/// #it_802754D4
-
-/// #it_80275504
-
-/// #it_80275534
-
-/// #it_80275594
-
-/// #it_802755C0
-
-/// #it_80275640
-
-void it_802756D0(HSD_GObj* gobj)
+void it_80274F10(Item_GObj* item_gobj)
 {
-    M2C_FIELD(gobj->user_data, s32*, 0xD0C) = 2;
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDC8_word.flags.x2 = 1;
 }
 
-/// #it_802756E0
-
-/// #it_8027570C
-
-/// #it_8027572C
-
-/// #it_8027574C
-
-/// #it_80275788
-
-/// #it_80275820
-
-/// #it_80275870
-
-/// #it_802758D4
-
-/// #it_802759DC
-
-/// #it_80275BC8
-
-/// #it_80275D5C
-
-/// #it_80275DFC
-
-/// #it_80275E98
-
-/// #it_80276100
-
-/// #it_80276174
-
-/// #it_80276214
-
-/// #it_80276278
-
-void it_802762B0(Item* arg0)
+void it_80274F28(Item* item, s8 arg1, HSD_GObjEvent arg2,
+                 HSD_GObjInteraction arg3)
 {
-    arg0->ground_or_air = GA_Ground;
+    item->xDD0_flag.b5 = 1;
+    item->xD08 = arg1;
+    item->grab_dealt = arg2;
+    item->grabbed_for_victim = arg3;
 }
 
-/// #it_802762BC
-
-/// #it_802762D8
-
-/// #it_80276308
-
-/// #it_80276348
-
-/// #it_802763B8
-
-/// #it_802763E0
-
-/// #it_80276408
-
-/// #it_8027649C
-
-/// #it_802765BC
-
-/// #it_80276934
-
-/// #it_80276CB8
-
-/// #it_80276CEC
-
-/// #it_80276D9C
-
-/// #it_80276FC4
-
-/// #it_80277040
-
-/// #it_8027737C
-
-/// #it_80277544
-
-/// #it_802775F0
-
-/// #it_8027770C
-
-/// #it_8027781C
-
-/// #it_80277C40
-
-/// #it_80277D08
-
-/// #fn_80277D8C
-
-/// #it_80277F90
-
-/// #it_80278108
-
-/// #it_80278574
-
-/// #it_8027870C
-
-/// #it_802787B4
-
-/// #it_80278800
-
-/// #it_80278F2C
-
-/// #it_802790C0
-
-/// #it_80279544
-
-/// #it_802795EC
-
-/// #it_80279680
-
-/// #it_802796C4
-
-/// #it_802796FC
-
-/// #it_80279720
-
-/// #it_80279744
-
-/// #it_80279768
-
-/// #it_8027978C
-
-/// #it_80279888
-
-/// #it_802798D4
-
-/// #it_8027990C
-
-/// #it_80279958
-
-/// #it_802799A8
-
-/// #it_802799E4
-
-/// #it_80279AF0
-
-/// #it_80279B10
-
-/// #fn_80279B30
-
-/// #it_80279B64
-
-/// #it_80279B88
-
-/// #it_80279BBC
-
-/// #it_80279BE0
-
-/// #it_80279C48
-
-/// #it_80279CDC
-
-/// #it_80279D38
-
-/// #it_80279D5C
-
-/// #it_80279E24
-
-/// #it_80279FF8
-
-/// #it_8027A09C
-
-/// #it_8027A118
-
-/// #it_8027A13C
-
-/// #it_8027A160
-
-/// #it_8027A344
-
-/// #it_8027A364
-
-/// #it_8027A4D4
-
-/// #it_8027A780
-
-/// #it_8027A9B8
-
-/// #it_8027AAA0
-
-/// #it_8027AB64
-
-/// #it_8027ADEC
-
-/// #it_8027AE34
-
-/// #it_8027AF50
-
-/// #it_8027B070
-
-/// #it_8027B0C4
-
-/// #it_8027B1F4
-
-/// #it_8027B288
-
-/// #it_8027B330
-
-/// #it_8027B378
-
-/// #it_8027B408
-
-/// #it_8027B4A4
-
-/// #it_8027B508
-
-/// #it_8027B564
-
-/// #it_8027B5B0
-
-/// #it_8027B730
-
-/// #it_8027B798
-
-/// #it_8027B964
-
-/// #it_8027BA54
-
-/// #it_8027BB1C
-
-/// #it_8027BBF4
-
-/// #it_8027C0A8
-
-/// #it_8027C0CC
-
-/// #it_8027C0F0
-
-/// #it_8027C56C
+void it_80274F48(Item_GObj* item_gobj, s32 bone_id, HSD_GObj* arg2_gobj,
+                 Fighter_Part part_idx)
+{
+    s32 var_ctr;
+    HSD_JObj* item_jobj1 = item_gobj->hsd_obj;
+    HSD_JObj* item_jobj2;
+    PAD_STACK(20);
+
+    if (((Item*) item_gobj->user_data)
+            ->xC4_article_data->x10_modelDesc->x4_bone_count)
+    {
+        item_jobj1 = ((Item*) item_gobj->user_data)
+                         ->xBBC_dynamicBoneTable->bones[bone_id];
+    } else if (bone_id != 0) {
+        for (var_ctr = bone_id; var_ctr > 0; var_ctr--) {
+            if (item_jobj1 == NULL) {
+                item_jobj1 = NULL;
+            } else {
+                item_jobj1 = item_jobj1->child;
+            }
+        }
+    }
+    item_jobj2 = item_jobj1;
+    lb_8000C2F8(item_jobj2,
+                ftLib_80086630((Fighter_GObj*) arg2_gobj, part_idx));
+}
+
+void it_80274FDC(Item_GObj* item_gobj, s32 bone_id, Fighter_GObj* arg2_gobj,
+                 Fighter_Part part_idx)
+{
+    HSD_JObj* item_jobj1;
+    HSD_JObj* item_jobj2;
+    s32 var_ctr;
+    Item* item;
+    PAD_STACK(14);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item_jobj1 = item_gobj->hsd_obj;
+    if (item->xC4_article_data->x10_modelDesc->x4_bone_count != 0U) {
+        item_jobj1 = item->xBBC_dynamicBoneTable->bones[bone_id];
+    } else if (bone_id != 0) {
+        var_ctr = bone_id;
+        while (var_ctr > 0) {
+            if (item_jobj1 == NULL) {
+                item_jobj1 = NULL;
+            } else {
+                item_jobj1 = item_jobj1->child;
+            }
+            var_ctr--;
+        }
+    }
+    item_jobj2 = item_jobj1;
+    lb_8000C1C0(item_jobj2, ftLib_80086630(arg2_gobj, part_idx));
+}
+
+void it_80275070(Item_GObj* item_gobj, s32 bone_id)
+{
+    HSD_JObj* item_jobj1;
+    HSD_JObj* item_jobj2;
+    s32 var_ctr;
+    Item* item;
+
+    item = item_gobj->user_data;
+    item_jobj1 = item_gobj->hsd_obj;
+    if (item->xC4_article_data->x10_modelDesc->x4_bone_count != 0U) {
+        item_jobj1 = item->xBBC_dynamicBoneTable->bones[bone_id];
+    } else {
+        if (bone_id != 0) {
+            for (var_ctr = bone_id; var_ctr > 0; --var_ctr) {
+                if (item_jobj1 == NULL) {
+                    item_jobj1 = NULL;
+                } else {
+                    item_jobj1 = item_jobj1->child;
+                }
+            }
+        }
+    }
+    item_jobj2 = item_jobj1;
+    lb_8000C390(item_jobj2);
+}
+
+bool it_802750E8(Item_GObj* item_gobj, s32 mask)
+{
+    Item* item = GET_ITEM(item_gobj);
+    return item->xDC0.word & mask;
+}
+
+void it_802750F8(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCC_flag.b3 = 0;
+    Item_802697D4((HSD_GObj*) item_gobj);
+    Item_80269978((HSD_GObj*) item_gobj);
+    item->xDCC_flag.b3 = 1;
+}
+
+void it_80275158(Item_GObj* item_gobj, f32 lifetime)
+{
+    Item* item;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item->xD44_lifeTimer = lifetime;
+    item->xD48_halfLifeTimer = lifetime * it_804D6D28->x4C_float;
+}
+
+void it_80275174(Item_GObj* item_gobj, f32 lifetime)
+{
+    ((Item*) item_gobj->user_data)->xD48_halfLifeTimer =
+        lifetime * it_804D6D28->x4C_float;
+}
+
+void it_8027518C(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xD44_lifeTimer = it_804D6D28->xF8;
+    item->xDCF_flag.b2 = 1;
+    item->xDD1_flag.b0 = 1;
+    it_8026BDB4(item_gobj);
+}
+
+bool it_802751D8(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xD44_lifeTimer--;
+    if (item->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
+
+void it_80275210(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDC8_word.flags.x1C = 1;
+}
+
+void it_80275228(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDC8_word.flags.x1C = 0;
+}
+
+void it_80275240(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDC8_word.flags.x1E = 0;
+}
+
+void it_80275258(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDD0_flag.b4 = 0;
+}
+
+void it_80275270(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDD0_flag.b4 = 1;
+}
+
+void it_80275288(Item_GObj* item_gobj, s32 arg1, s32 arg2)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    Item_8026AE84(item, arg2 + HSD_Randi(arg1), 127, 64);
+}
+
+void it_802752D8(Item_GObj* item_gobj, s32 arg1, s32 arg2)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    Item_8026AFA0(item, arg2 + HSD_Randi(arg1), 127, 64);
+}
+
+void it_80275328(HSD_GObj* gobj, ItemLink* arg1)
+{
+    arg1->prev = NULL;
+    arg1->next = NULL;
+    arg1->x8_vel.z = 0.0f;
+    arg1->x8_vel.y = 0.0f;
+    arg1->x8_vel.x = 0.0f;
+    arg1->pos.z = 0.0f;
+    arg1->pos.y = 0.0f;
+    arg1->pos.x = 0.0f;
+    arg1->x20_vec.z = 0.0f;
+    arg1->x20_vec.y = 0.0f;
+    arg1->x20_vec.x = 0.0f;
+    arg1->flag0 = 0;
+    arg1->flag1 = 0;
+    arg1->flag2 = 0;
+    arg1->unk = 0;
+    arg1->x1D0_GObj = gobj;
+    arg1->x1D4_JObj = NULL;
+}
+
+void it_80275390(Item_GObj* item_gobj)
+{
+    ((Item*) item_gobj->user_data)->owner = NULL;
+    it_8026B3A8(item_gobj);
+}
+
+void it_802753BC(Item_GObj* item_gobj, s16 arg1)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xC94 = 0;
+    item->xC9C = arg1;
+    item->xCA0 = 0;
+    item->xCA4 = 0;
+}
+
+void it_802753DC(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xC34_damageDealt = 0;
+    item->xC40 = 1.0f;
+    item->xC44 = 1.0f;
+    item->xC3C = 1.0f;
+    item->xC48 = 0;
+    item->xC4C = 0;
+    item->xC50 = 0;
+    item->xDCE_flag.b6 = 0;
+}
+
+void it_80275414(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCD_flag.b7 = 1;
+}
+
+void it_8027542C(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCD_flag.b7 = 0;
+}
+
+void it_80275444(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCD_flag.b5 = 1;
+    item->xDCD_flag.b7 = 1;
+    item->xDCD_flag.b6 = 1;
+}
+
+void it_80275474(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCD_flag.b5 = 0;
+    item->xDCD_flag.b7 = 0;
+    item->xDCD_flag.b6 = 0;
+}
+
+void it_802754A4(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCE_flag.b2 = 1;
+}
+
+void it_802754BC(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCE_flag.b2 = 0;
+}
+
+void it_802754D4(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCE_flag.b0 = 1;
+    item->xDCE_flag.b2 = 1;
+    item->xDCE_flag.b1 = 1;
+}
+
+void it_80275504(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDCE_flag.b0 = 0;
+    item->xDCE_flag.b2 = 0;
+    item->xDCE_flag.b1 = 0;
+}
+
+void it_80275534(Item_GObj* item_gobj, f32 scale)
+{
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 var_ctr;
+
+    item = item_gobj->user_data;
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            hitcapsule->scale = scale;
+        }
+    }
+}
+
+void it_80275594(Item_GObj* item_gobj, s32 idx, f32 mult)
+{
+    Item* item;
+    HitCapsule* hitcapsule;
+
+    item = item_gobj->user_data;
+    hitcapsule = &item->x5D4_hitboxes[idx].hit;
+    if (hitcapsule->state != HitCapsule_Disabled) {
+        hitcapsule->scale *= mult;
+    }
+}
+
+void it_802755C0(Item_GObj* item_gobj, f32 scale)
+{
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 var_ctr;
+
+    item = item_gobj->user_data;
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            hitcapsule->scale *= scale;
+        }
+    }
+}
+
+void it_80275640(Item_GObj* item_gobj, f32 arg1)
+{
+#if 1
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 var_ctr;
+
+    item = item_gobj->user_data;
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            it_80272460(hitcapsule, hitcapsule->damage * arg1, item_gobj);
+        }
+    }
+#else
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 var_ctr;
+    Item_GObj* gobj = item_gobj;
+
+    item = item_gobj->user_data;
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            it_80272460(hitcapsule, hitcapsule->damage * arg1, item_gobj,
+                        (HSD_GObj*) gobj);
+        }
+    }
+#endif
+}
+
+void it_802756D0(Item_GObj* item_gobj)
+{
+    ((Item*) item_gobj->user_data)->xD0C = 2;
+}
+
+void it_802756E0(Item_GObj* item_gobj)
+{
+    ((Item*) item_gobj->user_data)->xD0C = 0;
+    it_802714C0(item_gobj);
+}
+
+void it_8027570C(Item_GObj* item_gobj, s32 idx)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->x5D4_hitboxes[idx].hit.x40_b0 = 0;
+}
+
+void it_8027572C(Item_GObj* item_gobj, s32 idx)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->x5D4_hitboxes[idx].hit.x40_b0 = 1;
+}
+
+void it_8027574C(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    it_80274D04(item_gobj, &item->xACC_itemHurtbox[1].b_pos);
+    it_80274D6C(item_gobj);
+}
+
+void it_80275788(Item_GObj* item_gobj)
+{
+#if 0
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 var_ctr;
+
+    item = item_gobj->user_data;
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            hitcapsule->state = HitCapsule_Max;
+            item->xDAA_flag.b2 = 1;
+        }
+    }
+#elif 1
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 state;
+    u32 var_ctr;
+
+    item = item_gobj->user_data;
+    state = 4;
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            hitcapsule->state = state;
+            item->xDAA_flag.b2 = 1;
+        }
+    }
+#else
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 state;
+
+    item = item_gobj->user_data;
+    state = 4;
+    hitcapsule = &item->x5D4_hitboxes[0].hit;
+    if (hitcapsule->state != HitCapsule_Disabled) {
+        hitcapsule->state = state;
+        item->xDAA_flag.b2 = 1;
+    }
+    hitcapsule = &item->x5D4_hitboxes[1].hit;
+    if (hitcapsule->state != HitCapsule_Disabled) {
+        hitcapsule->state = state;
+        item->xDAA_flag.b2 = 1;
+    }
+    hitcapsule = &item->x5D4_hitboxes[2].hit;
+    if (hitcapsule->state != HitCapsule_Disabled) {
+        hitcapsule->state = state;
+        item->xDAA_flag.b2 = 1;
+    }
+    hitcapsule = &item->x5D4_hitboxes[3].hit;
+    if (hitcapsule->state != HitCapsule_Disabled) {
+        hitcapsule->state = state;
+        item->xDAA_flag.b2 = 1;
+    }
+#endif
+}
+
+void it_80275820(Item_GObj* item_gobj, Vec3* arg1, Vec3* arg2, s32 idx)
+{
+    Item* item;
+    HitCapsule* hitcapsule;
+
+    item = item_gobj->user_data;
+    hitcapsule = &item->x5D4_hitboxes[idx].hit;
+    if (hitcapsule->state != HitCapsule_Disabled) {
+        hitcapsule->x58 = *arg2;
+        hitcapsule->x4C = *arg1;
+    }
+}
+
+bool it_80275870(Item_GObj* item_gobj)
+{
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 var_ctr;
+
+    item = item_gobj->user_data;
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            return true;
+        }
+    }
+    return false;
+}
+
+f32 it_802758D4(Item_GObj* item_gobj)
+{
+    Item* item;
+    HitCapsule* hitcapsule;
+    u32 var_ctr;
+    f32 damage;
+    bool disable_chk;
+
+    item = item_gobj->user_data;
+    damage = 0.0f;
+#if 0
+    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        if (hitcapsule->state != HitCapsule_Disabled) {
+            disable_chk = true;
+        } else {
+            disable_chk = false;
+        }
+    }
+#else
+    if (item->x5D4_hitboxes[0].hit.state != HitCapsule_Disabled) {
+        disable_chk = true;
+    } else if (item->x5D4_hitboxes[1].hit.state != HitCapsule_Disabled) {
+        disable_chk = true;
+    } else if (item->x5D4_hitboxes[2].hit.state != HitCapsule_Disabled) {
+        disable_chk = true;
+    } else if (item->x5D4_hitboxes[3].hit.state != HitCapsule_Disabled) {
+        disable_chk = true;
+    } else {
+        disable_chk = false;
+    }
+#endif
+    if (disable_chk) {
+        for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
+            hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+            if (hitcapsule->state != HitCapsule_Disabled) {
+                if (hitcapsule->damage <= damage) {
+                    damage = hitcapsule->damage;
+                }
+            }
+        }
+    }
+    return damage;
+}
+
+void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
+{
+    Vec3 sp44;
+    f32 sp40;
+    Vec3 sp34;
+    CollData* coll1;
+    CollData* coll2;
+    Item* item1;
+    f32 temp_f31;
+    s32 temp_r3_2;
+    bool chk;
+    Vec3 sp1C;
+    PAD_STACK(14);
+
+    chk = false;
+    item1 = GET_ITEM((HSD_GObj*) item_gobj1);
+    sp44 = item1->pos;
+    coll2 = it_8026C100(item_gobj2);
+    coll1 = &item1->x378_itemColl;
+    if (coll2 != NULL) {
+        if (mpLib_80054ED8(coll2->floor.index)) {
+            temp_r3_2 = mpLib_8005199C(&sp44, -1, -1);
+            if ((temp_r3_2 != -1) &&
+                mpLib_80054F68(temp_r3_2, coll2->floor.index))
+            {
+                coll1->floor.index = temp_r3_2;
+                mpLib_8004DD90(temp_r3_2, &sp44.x, &sp40, 0, NULL);
+                // if (sp40 >= (f32) ((u8) it_804D6D28 + 0xF0)) {
+                // if (sp40 >= (f32) it_804D6D28->filler[12]) {
+                if (sp40 >= it_804D6D28->xF0) {
+                    item1->pos.x = sp44.x;
+                    item1->pos.y = sp44.y + sp40;
+                    item1->pos.z = sp44.z;
+                    mpColl_80043680(coll1, &item1->pos);
+                    chk = true;
+                    it_802762B0(item1);
+                }
+            }
+        }
+        if (!chk) {
+            temp_f31 = 0.5f * (coll2->xA4_ecbCurrCorrect.top.y +
+                               coll2->xA4_ecbCurrCorrect.bottom.y);
+            it_8026BC90(item_gobj2, &sp1C);
+            sp34.x = sp1C.x + it_804DC73C;
+            // sp34.x = sp1C.x + 0.0f;
+            sp34.y = sp1C.y + temp_f31;
+            sp34.z = sp1C.z + it_804DC73C;
+            // sp34.z = sp1C.z + 0.0f;
+            coll1->prev_topn = sp34;
+            mpColl_80043670(coll1);
+            coll1->cur_topn = sp44;
+            if (mpColl_800471F8(coll1)) {
+                it_802762B0(item1);
+                item1->pos = coll1->cur_topn;
+                return;
+            }
+            it_802762BC(item1);
+            item1->pos = sp44;
+        }
+    }
+}
+
+void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
+{
+    ECB sp24;
+    Item* item;
+    Vec3 sp14;
+    u8* it_comm_data_xE8;
+    PAD_STACK(4);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    sp24 = item->xBFC;
+    it_802762BC(item);
+    item->x378_itemColl.cur_topn = item->pos;
+    if (arg_gobj != NULL) {
+        switch (it_80272D40((Item_GObj*) arg_gobj)) { /* irregular */
+        case 0:
+            it_8026BB68((Item_GObj*) arg_gobj, &sp14);
+            break;
+        case 1:
+            it_8026BB88((Item_GObj*) arg_gobj, &sp14);
+            break;
+        default:
+            OSReport(it_803F1F38);
+            __assert(it_803F1F58, 0x7FU, &it_804D5198);
+            break;
+        }
+    } else {
+        sp14 = item->pos;
+    }
+
+    // it_comm_data_xE8 = &it_804D6D28->filler_1a[4];
+    it_comm_data_xE8 = &it_804D6D28->xE8;
+    sp24.top *= *(f32*) it_comm_data_xE8;
+    sp24.bottom *= *(f32*) it_comm_data_xE8;
+    sp24.right *= *(f32*) it_comm_data_xE8;
+    sp24.left *= *(f32*) it_comm_data_xE8;
+    // temp_struct = it_804D6D28->xE8;
+    // scl = ((Vec2*) temp_struct)->x;
+    // sp24.top *= scl;
+    // sp24.bottom *= scl;
+    // sp24.right *=  scl;
+    // sp24.left *= scl;
+
+    item->xC0C = item->xC1C;
+
+    if (item->xDCE_flag.b7 == 1) {
+        it_80275D5C(item_gobj, &sp24);
+    }
+    it_80276100(item_gobj, &sp14);
+}
+
+void it_80275D5C(Item_GObj* item_gobj, ECB* arg_ecb)
+{
+    f32 scale;
+    s32 int_dir;
+    Item* item;
+    PAD_STACK(8);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    scale = item->scl;
+    item->xC1C = *arg_ecb;
+    mpColl_8004220C(&item->x378_itemColl, (HSD_GObj*) item_gobj,
+                    item->xC1C.top * scale, item->xC1C.bottom * scale,
+                    item->xC1C.right * scale, item->xC1C.left * scale);
+    if (-1.0f == item->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    mpColl_800436D8(&item->x378_itemColl, int_dir);
+}
+
+void it_80275DFC(Item_GObj* item_gobj)
+{
+    Item* item;
+    f32 scale;
+    s32 int_dir;
+    PAD_STACK(14);
+
+    // item = GET_ITEM((HSD_GObj*) item_gobj);
+    item = item_gobj->user_data;
+    scale = item->scl;
+    item->xC1C = item->xC0C;
+    mpColl_8004220C(&item->x378_itemColl, (HSD_GObj*) item_gobj,
+                    item->xC1C.top * scale, item->xC1C.bottom * scale,
+                    item->xC1C.right * scale, item->xC1C.left * scale);
+    if (-1.0f == item->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    mpColl_800436D8(&item->x378_itemColl, int_dir);
+}
+
+void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
+{
+    CollData* coll;
+    Item* item2;
+    Item* item1;
+    ItemAttr* attr;
+    ItemKind kind;
+    f32 scale;
+    s32 int_dir;
+    PAD_STACK(18);
+
+    item1 = item_gobj->user_data;
+    attr = item1->xCC_item_attr;
+    coll = &item1->x378_itemColl;
+    item1->x378_itemColl.cur_topn = item1->pos;
+    mpColl_80041EE4(coll);
+    kind = item1->kind;
+    if (kind < It_Kind_L_Gun_Ray) {
+        coll->x34_flags.b1234 = 2;
+    } else if (kind < It_Kind_Kuriboh) {
+        coll->x34_flags.b1234 = 4;
+    } else if (kind < It_Kind_Octarock_Stone) {
+        coll->x34_flags.b1234 = 3;
+    } else if (kind < It_Kind_Mario_Fire) {
+        coll->x34_flags.b1234 = 4;
+    } else if (kind < It_Kind_Unk4) {
+        coll->x34_flags.b1234 = 5;
+    } else if (kind < Pokemon_Random) {
+        coll->x34_flags.b1234 = 5;
+    } else if (kind < Pokemon_Tosakinto) {
+        coll->x34_flags.b1234 = 5;
+    } else if (kind < Pokemon_Chicorita_Leaf) {
+        coll->x34_flags.b1234 = 5;
+    } else if (kind < It_Kind_Old_Kuri) {
+        coll->x34_flags.b1234 = 4;
+    } else if (kind < It_Kind_Arwing_Laser) {
+        coll->x34_flags.b1234 = 3;
+    } else if (kind < 238) {
+        coll->x34_flags.b1234 = 4;
+    }
+
+    item2 = item_gobj->user_data;
+    scale = item2->scl;
+    item2->xC1C = item1->xC1C;
+    mpColl_8004220C(&item2->x378_itemColl, (HSD_GObj*) item_gobj,
+                    item2->xC1C.top * scale, item2->xC1C.bottom * scale,
+                    item2->xC1C.right * scale, item2->xC1C.left * scale);
+    if (-1.0f == item2->facing_dir) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    mpColl_800436D8(&item2->x378_itemColl, int_dir);
+    coll->x50 = attr->x1C_damage_mul;
+    if (spawn->x44_flag.b0 == 1) {
+        if (spawn->x48_ground_or_air == GA_Air) {
+            it_80276100(item_gobj, &spawn->pos);
+            return;
+        }
+        it_80276174(item_gobj, &spawn->pos);
+        return;
+    }
+    coll->prev_topn = spawn->pos;
+    mpColl_80043670(coll);
+}
+
+void it_80276100(Item_GObj* item_gobj, Vec3* pos)
+{
+    CollData* coll;
+    Item* item;
+    PAD_STACK(4);
+
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    coll->prev_topn = *pos;
+    mpColl_80043670(coll);
+    mpColl_800471F8(coll);
+    item->pos = coll->cur_topn;
+}
+
+void it_80276174(Item_GObj* item_gobj, Vec3* pos)
+{
+    f32 unused1;
+    f32 unused2;
+    Vec3 temp_pos;
+    Item* item;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item->x378_itemColl.prev_topn = *pos;
+    mpColl_80043670(&item->x378_itemColl);
+    if (mpLib_80051EC8(&temp_pos, NULL, NULL, NULL, 1, -1, -1, item->pos.x,
+                       item->pos.y, item->pos.x,
+                       item->pos.y - it_804D6D28->xF4))
+    {
+        item->pos = temp_pos;
+    }
+}
+
+// bool it_80276214(Item_GObj* item_gobj) {}
+void it_80276214(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->x378_itemColl.prev_topn = item->x378_itemColl.cur_topn;
+    item->x378_itemColl.cur_topn = item->pos;
+    if (item->xDCE_flag.b7 == 1) {
+        it_80276278(item_gobj);
+    }
+}
+
+void it_80276278(Item_GObj* item_gobj)
+{
+    Item* item;
+    CollData* coll_data;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    coll_data = &item->x378_itemColl;
+
+    mpColl_800436E4(coll_data, it_80274990(item_gobj));
+}
+
+void it_802762B0(Item* item)
+{
+    item->ground_or_air = GA_Ground;
+}
+
+void it_802762BC(Item* item)
+{
+    item->ground_or_air = GA_Air;
+    item->xDC8_word.flags.x1F = 0;
+}
+
+bool it_802762D8(Item_GObj* item_gobj)
+{
+    CollData* coll;
+    bool chk;
+
+    chk = false;
+    coll = &((Item*) item_gobj->user_data)->x378_itemColl;
+    if (coll->env_flags & MPCOLL_FLAGS_B20) {
+        chk = true;
+    }
+    if (coll->env_flags & MPCOLL_FLAGS_B21) {
+        return true;
+    }
+    return chk;
+}
+
+s32 it_80276308(Item_GObj* item_gobj)
+{
+    Item* item;
+    CollData* coll;
+    s32 ret_val;
+
+    item = item_gobj->user_data;
+    ret_val = 0;
+    coll = &item->x378_itemColl;
+    if (item->x378_itemColl.env_flags & MPCOLL_RIGHTWALL) {
+        ret_val = 8;
+        item->xC30 = coll->right_wall.index;
+    }
+    if (coll->env_flags & MPCOLL_LEFTWALL) {
+        item->xC30 = coll->left_wall.index;
+        ret_val = 4;
+    }
+    return ret_val;
+}
+
+s32 it_80276348(Item_GObj* item_gobj, Vec3* vec)
+{
+    s32 ret_val;
+    Item* item;
+    CollData* coll;
+
+    item = item_gobj->user_data;
+    ret_val = 0;
+    coll = &item->x378_itemColl;
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        ret_val = 8;
+        item->xC30 = coll->right_wall.index;
+        *vec = coll->right_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_LEFTWALL) {
+        item->xC30 = coll->left_wall.index;
+        *vec = coll->left_wall.normal;
+        ret_val = 4;
+    }
+    return ret_val;
+}
+
+bool it_802763B8(Item_GObj* item_gobj)
+{
+    Item* item;
+    CollData* coll;
+    bool chk = false;
+
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    if (coll->env_flags & MPCOLL_UNK) {
+        item->xC30 = coll->floor.index;
+        chk = true;
+    }
+    return chk;
+}
+
+s32 it_802763E0(Item_GObj* item_gobj)
+{
+    Item* item;
+    CollData* colldata;
+
+    item = item_gobj->user_data;
+    colldata = &item->x378_itemColl;
+    if (!(item->x378_itemColl.env_flags & MPCOLL_CEIL)) {
+        // return;
+        return 0;
+    }
+    item->xC30 = colldata->ceiling.index;
+    return 2;
+}
+
+void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
+{
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        *vec = coll->right_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_LEFTWALL) {
+        *vec = coll->left_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_CEIL) {
+        *vec = coll->ceiling.normal;
+    }
+    if (coll->env_flags & MPCOLL_UNK) {
+        *vec = coll->floor.normal;
+    }
+}
+
+f32 it_8027649C(Item_GObj* item_gobj)
+{
+    Vec3 sp20;
+    Vec3 sp14;
+    f32 angle;
+    s32 int_dir;
+    Item* item;
+    CollData* coll;
+    PAD_STACK(4);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    coll = &item->x378_itemColl;
+    sp14.z = 0.0f;
+    sp14.x = 0.0f;
+    sp14.y = 1.0f;
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        sp20 = coll->right_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_LEFTWALL) {
+        sp20 = coll->left_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_CEIL) {
+        sp20 = coll->ceiling.normal;
+    }
+    if (coll->env_flags & MPCOLL_UNK) {
+        sp20 = coll->floor.normal;
+    }
+    angle = lbVector_Angle(&sp20, &sp14);
+    if (sp20.x < 0.0f) {
+        int_dir = -1;
+    } else {
+        int_dir = 1;
+    }
+    return item->facing_dir * (angle * int_dir);
+}
+
+void it_802765BC(Item_GObj* item_gobj, enum_t arg1)
+{
+    Vec3 sp74;
+    Vec3* sp68 = NULL;
+    Vec3 sp5C;
+    Vec3* sp50 = NULL;
+    Vec3 sp44;
+    Vec3* sp38 = NULL;
+    HSD_JObj* jobj;
+    Item* item1;
+    Item* item2;
+    Item* item3;
+    Item* item4;
+    f32 angle1;
+    f32 angle2;
+    f32 angle3;
+    f32 rotate_angle1;
+    f32 rotate_angle2;
+    f32 rotate_angle3;
+    s32 dir1;
+    s32 dir2;
+    s32 dir3;
+    u32 bit_chk;
+    PAD_STACK(80);
+
+    item1 = item_gobj->user_data;
+    jobj = it_80272CC0(item_gobj, arg1);
+    bit_chk = (item1->xDC8_word.word >> 7U) & 3;
+    if (bit_chk == 0) {
+        item2 = item_gobj->user_data;
+        sp74.z = 0.0f;
+        sp74.x = 0.0f;
+        sp74.y = 1.0f;
+        it_80276408(item_gobj, &item2->x378_itemColl, sp68);
+        angle1 = lbVector_Angle(sp68, &sp74);
+        if (sp68->x < 0.0f) {
+            dir1 = -1;
+        } else {
+            dir1 = 1;
+        }
+        rotate_angle1 =
+            -item1->facing_dir * (item2->facing_dir * (angle1 * dir1));
+        HSD_JObjSetRotationZ(jobj, rotate_angle1);
+    } else if (bit_chk == 1) {
+        item3 = item_gobj->user_data;
+        sp5C.z = 0.0f;
+        sp5C.x = 0.0f;
+        sp5C.y = 1.0f;
+        it_80276408(item_gobj, &item3->x378_itemColl, sp50);
+        angle2 = lbVector_Angle(sp50, &sp5C);
+        if (sp50->x < 0.0f) {
+            dir2 = -1;
+        } else {
+            dir2 = 1;
+        }
+        rotate_angle2 = item3->facing_dir * (angle2 * dir2);
+        HSD_JObjSetRotationX(jobj, rotate_angle2);
+    } else {
+        item4 = item_gobj->user_data;
+        sp44.z = 0.0f;
+        sp44.x = 0.0f;
+        sp44.y = 1.0f;
+        it_80276408(item_gobj, &item4->x378_itemColl, sp38);
+        angle3 = lbVector_Angle(sp38, &sp44);
+        if (sp38->x < 0.0f) {
+            dir3 = -1;
+        } else {
+            dir3 = 1;
+        }
+        rotate_angle3 = item4->facing_dir * (angle3 * dir3);
+        HSD_JObjSetRotationY(jobj, rotate_angle3);
+    }
+}
+
+void it_80276934(Item_GObj* item_gobj, enum_t arg1)
+{
+    Vec3 sp80;
+    Vec3 sp74;
+    Vec3 sp64;
+    Vec3 sp58;
+    Vec3 sp48;
+    Vec3 sp3C;
+    HSD_JObj* jobj;
+    Item* item1;
+    Item* item2;
+    Item* item3;
+    Item* item4;
+    f32 angle1;
+    f32 angle2;
+    f32 angle3;
+    f32 rotate_angle1;
+    f32 rotate_angle2;
+    f32 rotate_angle3;
+    s32 dir1;
+    s32 dir2;
+    s32 dir3;
+    u32 bit_chk;
+    PAD_STACK(48);
+
+    item1 = item_gobj->user_data;
+    jobj = it_80272CC0(item_gobj, arg1);
+    bit_chk = (item1->xDC8_word.word >> 7U) & 3;
+    if (bit_chk == 0) {
+        item2 = item_gobj->user_data;
+        sp80.z = 0.0f;
+        sp80.x = 0.0f;
+        sp80.y = 1.0f;
+        mpLib_80054DFC(item2->xC30, &sp74);
+        angle1 = lbVector_Angle(&sp74, &sp80);
+        if (sp74.x < 0.0f) {
+            dir1 = -1;
+        } else {
+            dir1 = 1;
+        }
+        rotate_angle1 =
+            -item1->facing_dir * (item2->facing_dir * (angle1 * dir1));
+        HSD_JObjSetRotationZ(jobj, rotate_angle1);
+    } else if (bit_chk == 1) {
+        item3 = item_gobj->user_data;
+        sp64.z = 0.0f;
+        sp64.x = 0.0f;
+        sp64.y = 1.0f;
+        mpLib_80054DFC(item3->xC30, &sp58);
+        angle2 = lbVector_Angle(&sp58, &sp64);
+        if (sp58.x < 0.0f) {
+            dir2 = -1;
+        } else {
+            dir2 = 1;
+        }
+        rotate_angle2 = item3->facing_dir * (angle2 * dir2);
+        HSD_JObjSetRotationX(jobj, rotate_angle2);
+    } else {
+        item4 = item_gobj->user_data;
+        sp48.z = 0.0f;
+        sp48.x = 0.0f;
+        sp48.y = 1.0f;
+        mpLib_80054DFC(item4->xC30, &sp3C);
+        angle3 = lbVector_Angle(&sp3C, &sp48);
+        if (sp3C.x < 0.0f) {
+            dir3 = -1;
+        } else {
+            dir3 = 1;
+        }
+        rotate_angle3 = item4->facing_dir * (angle3 * dir3);
+        HSD_JObjSetRotationY(jobj, rotate_angle3);
+    }
+}
+
+void it_80276CB8(Item_GObj* item_gobj)
+{
+    if (((Item*) item_gobj->user_data)->x378_itemColl.env_flags & MPCOLL_UNK) {
+        it_802765BC(item_gobj, 0);
+    }
+}
+
+void it_80276CEC(Item_GObj* item_gobj)
+{
+    CollData* coll;
+    Item* item;
+    u32 coll_index;
+
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        item->xAC_unk = coll->right_wall.normal;
+        coll_index = coll->right_wall.index;
+    }
+    if (coll->env_flags & MPCOLL_LEFTWALL) {
+        item->xAC_unk = coll->left_wall.normal;
+        coll_index = coll->left_wall.index;
+    }
+    if (coll->env_flags & MPCOLL_CEIL) {
+        item->xAC_unk = coll->ceiling.normal;
+        coll_index = coll->ceiling.index;
+    }
+    if (coll->env_flags & MPCOLL_UNK) {
+        item->xAC_unk = coll->floor.normal;
+        coll_index = coll->floor.index;
+    }
+    item->xC2C = coll_index;
+}
+
+bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
+{
+    ECB sp34;
+    CollData* coll;
+    Item* item;
+    f32 pos_x1;
+    f32 pos_x2;
+    f32 pos_x3;
+    f32 pos_x4;
+    s32 dir1;
+    s32 dir2;
+    bool ret_val;
+    PAD_STACK(34);
+
+    ret_val = true;
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    if ((coll->env_flags & MPCOLL_RIGHTWALL) &&
+        (coll->env_flags & MPCOLL_LEFTWALL))
+    {
+        // if (coll->env_flags & MPCOLL_WALL) {
+        dir1 = 1;
+    } else {
+        dir1 = 0;
+    }
+    if (dir1 != 0) {
+        sp34 = item->xC1C;
+        if (coll->x36 == 1) {
+            pos_x1 = coll->xA4_ecbCurrCorrect.right.x - 1.0f;
+            if (pos_x1 < 0.0f) {
+                pos_x1 = -pos_x1;
+            }
+            sp34.right = pos_x1;
+            pos_x2 = 1.0f + coll->xA4_ecbCurrCorrect.left.x;
+            if (pos_x2 < 0.0f) {
+                pos_x2 = -pos_x2;
+            }
+            sp34.left = pos_x2;
+        } else {
+            pos_x3 = 1.0f + coll->xA4_ecbCurrCorrect.left.x;
+            if (pos_x3 < 0.0f) {
+                pos_x3 = -pos_x3;
+            }
+            sp34.right = pos_x3;
+            pos_x4 = coll->xA4_ecbCurrCorrect.right.x - 1.0f;
+            if (pos_x4 < 0.0f) {
+                pos_x4 = -pos_x4;
+            }
+            sp34.left = pos_x4;
+        }
+        item->xC1C = sp34;
+        mpColl_8004220C(
+            &item->x378_itemColl, (HSD_GObj*) item_gobj,
+            item->xC1C.top * it_804DC744, item->xC1C.bottom * it_804DC744,
+            item->xC1C.right * it_804DC744, item->xC1C.left * it_804DC744);
+        // mpColl_8004220C(&item->x378_itemColl, (HSD_GObj*) item_gobj,
+        // item->xC1C.top * 1.0f, item->xC1C.bottom * 1.0f, item->xC1C.right
+        // * 1.0f, item->xC1C.left * 1.0f);
+        if (-1.0f == item->facing_dir) {
+            dir2 = -1;
+        } else {
+            dir2 = 1;
+        }
+        mpColl_800436D8(&item->x378_itemColl, dir2);
+        return false;
+    }
+    if ((arg1 & 4) && (coll->prev_env_flags & MPCOLL_LEFTWALL)) {
+        ret_val = false;
+        item->pos.x += 1.5f;
+    }
+    if ((arg1 & 8) && (coll->prev_env_flags & MPCOLL_RIGHTWALL)) {
+        ret_val = false;
+        item->pos.x -= 1.5f;
+    }
+    if ((arg1 & 2) && (coll->prev_env_flags & MPCOLL_CEIL)) {
+        ret_val = false;
+        item->pos.y -= 1.5f;
+    }
+    if ((arg1 & 1) && (coll->prev_env_flags & MPCOLL_UNK)) {
+        ret_val = false;
+        item->pos.y += 1.5f;
+    }
+    return ret_val;
+}
+
+void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
+{
+    ItemAttr* attr;
+
+    attr = GET_ITEM((HSD_GObj*) item_gobj)->xCC_item_attr;
+    it_8027781C(item_gobj);
+    if (it_80276D9C(item_gobj, arg1)) {
+        it_8027321C(item_gobj);
+        it_80277C40(item_gobj, arg1);
+        it_80275640(item_gobj, attr->x58);
+    }
+}
+
+bool it_80277040(Item_GObj* item_gobj)
+{
+    Vec3 sp5C;
+    Vec3 sp50;
+    Vec3 sp44;
+    Vec3 sp38;
+    Vec3 sp20;
+    Vec3 sp14;
+    CollData* coll;
+    Item* item2;
+    Item* item1;
+    f32 temp_f30;
+    f32 temp_f31;
+    f32 temp_f3;
+    f32 var_f1;
+    f32 angle1;
+    f32 angle2;
+    bool chk;
+    s32 int_dir1;
+    s32 int_dir3;
+    bool ret_val;
+    s32 int_dir2;
+    s32 int_dir4;
+    PAD_STACK(20);
+
+    ret_val = true;
+    item1 = GET_ITEM((HSD_GObj*) item_gobj);
+    coll = &item1->x378_itemColl;
+    var_f1 = item1->xCC_item_attr->x50;
+    if (var_f1 < 0.0f) {
+        var_f1 = -var_f1;
+    }
+    if (var_f1 < 0.00001f) {
+        item1->x88.y = 0.0f;
+        item1->x88.x = 0.0f;
+        return false;
+    }
+    sp20.z = 0.0f;
+    sp20.x = 0.0f;
+    sp20.y = 1.0f;
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        sp5C = coll->right_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_LEFTWALL) {
+        sp5C = coll->left_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_CEIL) {
+        sp5C = coll->ceiling.normal;
+    }
+    if (coll->env_flags & MPCOLL_UNK) {
+        sp5C = coll->floor.normal;
+    }
+    item1->x94 = item1->x88;
+    // item1->x98 = item1->x8C;
+    // item1->x9C = item1->x90;
+    angle1 = lbVector_AngleXY(&sp5C, &sp20);
+    if (angle1 < 0.0f) {
+        angle1 = -angle1;
+    }
+    if (angle1 >= it_804D6D28->xC0) {
+        sp50.z = 0.0f;
+        sp50.x = 0.0f;
+        sp50.y = -1.0f;
+        lbVector_CrossprodNormalized(&sp5C, &sp50, &sp44);
+        lbVector_CrossprodNormalized(&sp44, &sp5C, &sp38);
+        temp_f3 = item1->xCC_item_attr->x50;
+        temp_f31 = item1->x94.x / temp_f3;
+        temp_f30 = item1->x94.y / temp_f3;
+        item1->x88.x = sp38.x * temp_f3;
+        item1->x88.y = sp38.y * temp_f3;
+        item2 = item_gobj->user_data;
+        it_80276408(item_gobj, &item2->x378_itemColl, &sp14);
+        angle2 = lbVector_Angle(&sp14, &item2->xAC_unk);
+        if (angle2 < 0.0f) {
+            angle2 = -angle2;
+        }
+        if ((angle2 >= it_804D6D28->xC4) && (item2->xC30 == item2->xC2C)) {
+            chk = true;
+        } else {
+            chk = false;
+        }
+        if (!chk) {
+            if ((item1->x94.x != 0.0f) || (item1->x94.y != 0.0f)) {
+                if (sp38.x < 0.0f) {
+                    int_dir1 = -1;
+                } else {
+                    int_dir1 = 1;
+                }
+                if (temp_f31 < 0.0f) {
+                    int_dir2 = -1;
+                } else {
+                    int_dir2 = 1;
+                }
+                if (int_dir2 == int_dir1) {
+                    if (sp38.y < 0.0f) {
+                        int_dir3 = -1;
+                    } else {
+                        int_dir3 = 1;
+                    }
+                    if (temp_f30 < 0.0f) {
+                        int_dir4 = -1;
+                    } else {
+                        int_dir4 = 1;
+                    }
+                    if (int_dir4 != int_dir3) {
+                        goto block_38;
+                    }
+                } else {
+                block_38:
+                    item1->xD58++;
+                    if (item1->xD58 >= it_804D6D28->x38_float) {
+                        item1->xD58 = 0;
+                        ret_val = false;
+                        item1->x88.y = 0.0f;
+                        item1->x88.x = 0.0f;
+                    }
+                }
+            }
+        } else {
+            item1->xD5C = 2;
+        }
+    } else {
+        ret_val = false;
+        item1->x88.y = 0.0f;
+        item1->x88.x = 0.0f;
+    }
+    return ret_val;
+}
+
+void it_8027737C(Item_GObj* item_gobj, Vec3* pos)
+{
+    Vec3 sp1C;
+    Item* item;
+    f32 temp_f1;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    if (item->xDC8_word.flags.x1F) {
+        if (item->xD5C == 0U) {
+        } else {
+            PSVECAdd(&item->x88, &item->x7C, &item->x7C);
+            item->x7C.x *= item->xCC_item_attr->x54;
+            item->x7C.y *= item->xCC_item_attr->x54;
+            if (sqrtf_accurate(SQ(item->x7C.x) + SQ(item->x7C.y)) >
+                it_804D6D28->xC8)
+            {
+                lbVector_NormalizeXY(&item->x7C);
+                temp_f1 = it_804D6D28->xC8;
+                item->x7C.x *= temp_f1;
+                item->x7C.y *= temp_f1;
+            }
+            if (SQ(item->x7C.x) + SQ(item->x7C.y) < it_804D6D28->xCC) {
+                item->xDC8_word.flags.x1F = 0;
+                item->x7C.y = 0.0f;
+                item->x7C.x = 0.0f;
+                return;
+            }
+        }
+
+        it_802775F0(item_gobj, &item->x7C);
+        it_80274A64(item_gobj);
+        PSVECAdd(&item->x7C, pos, &sp1C);
+        *pos = sp1C;
+    }
+}
+
+bool it_80277544(Item_GObj* item_gobj)
+{
+    Vec3 sp10;
+    Item* item;
+    bool ret_val;
+
+    ret_val = false;
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    if (item->xD5C != 0U && it_80277040(item_gobj) != 0 &&
+        ((PSVECAdd(&item->x40_vel, &item->x70_nudge, &sp10),
+          ((SQ(sp10.x) + SQ(sp10.y))) >= it_804D6D28->xCC) ||
+         (item->xD5C == 2U)))
+    {
+        item->xDC8_word.flags.x1F = 1;
+        ret_val = true;
+        item->xD5C = 1;
+    }
+    return ret_val;
+}
+
+void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
+{
+    Item* item;
+    f32 temp_sqrt;
+    s32 dir1;
+    s32 dir2;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    if (item->spin_spd != 0.0f) {
+        temp_sqrt = sqrtf_accurate(SQ(arg1->x) + SQ(arg1->y));
+        item->xD3C_spinSpeed = 0.85f * (temp_sqrt / item->xC1C.bottom);
+        if (item->facing_dir < 0.0f) {
+            dir1 = -1;
+        } else {
+            dir1 = 1;
+        }
+        if (arg1->x < 0.0f) {
+            dir2 = -1;
+        } else {
+            dir2 = 1;
+        }
+        if (dir2 != dir1) {
+            item->xD3C_spinSpeed = -item->xD3C_spinSpeed;
+        }
+        if (item->xDC8_word.flags.x19 != 1) {
+            item->xD3C_spinSpeed *= -item->facing_dir;
+        }
+    }
+}
+
+bool it_8027770C(Item_GObj* item_gobj)
+{
+    Vec3 sp38;
+    f32 mult;
+    bool ret_val;
+    enum_t var_r5;
+    ItemAttr* attr;
+    Item* item;
+    CollData* coll;
+    PAD_STACK(44);
+
+    var_r5 = 0;
+    item = item_gobj->user_data;
+    ret_val = false;
+    coll = &item->x378_itemColl;
+    attr = item->xCC_item_attr;
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        var_r5 = 8;
+        item->xC30 = coll->right_wall.index;
+        sp38 = coll->right_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_LEFTWALL) {
+        var_r5 = 4;
+        item->xC30 = coll->left_wall.index;
+        sp38 = coll->left_wall.normal;
+    }
+    if (var_r5 != 0) {
+        if (((item->x40_vel.z * sp38.z) +
+             ((item->x40_vel.x * sp38.x) + (item->x40_vel.y * sp38.y))) < 0.0f)
+        {
+            lbVector_Mirror(&item->x40_vel, &sp38);
+        }
+        mult = attr->x58;
+        ret_val = true;
+        item->x40_vel.x *= mult;
+        item->x40_vel.y *= mult;
+        item->x40_vel.z *= mult;
+    }
+    return ret_val;
+}
+
+static inline float product_xy(Vec3* a, Vec3* b)
+{
+    return (a->x * b->x + a->y * b->y);
+}
+
+static inline float return_sqrt_value(Vec3* v)
+{
+    return sqrtf_accurate(product_xy(v, v));
+}
+
+bool it_8027781C(Item_GObj* item_gobj)
+{
+    Item* item;
+    CollData* coll;
+    ItemAttr* attr;
+    // PAD_STACK(8);
+    s32 stack[2];
+
+    f32 speed;
+    bool chk;
+    Vec3 sp48;
+    Vec3 sp3C;
+    Vec3 sp30;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    attr = item->xCC_item_attr;
+    coll = &item->x378_itemColl;
+    sp3C = it_803B8570;
+    // sp3C.x = sp3C.y = sp3C.z = 0.0f;
+    chk = false;
+    sp30 = it_803B857C;
+
+    speed = return_sqrt_value(&item->x40_vel);
+    if ((coll->env_flags & MPCOLL_RIGHTWALL) &&
+        product_xy(&item->x40_vel, &coll->right_wall.normal) < 0.0f)
+    {
+        sp48 = item->x40_vel;
+        lbVector_Mirror(&sp48, &coll->right_wall.normal);
+        lbVector_Add_xy(&sp30, &sp48);
+        if (mpColl_8004CAE8(coll, &sp48)) {
+            lbVector_Add_xy(&sp3C, &sp48);
+        }
+        chk = true;
+    }
+    if ((coll->env_flags & MPCOLL_LEFTWALL) &&
+        product_xy(&item->x40_vel, &coll->left_wall.normal) < 0.0f)
+    {
+        sp48 = item->x40_vel;
+        lbVector_Mirror(&sp48, &coll->left_wall.normal);
+        lbVector_Add_xy(&sp30, &sp48);
+        if (mpColl_8004CB30(coll, &sp48)) {
+            lbVector_Add_xy(&sp3C, &sp48);
+        }
+        chk = true;
+    }
+    if ((coll->env_flags & MPCOLL_CEIL) &&
+        product_xy(&item->x40_vel, &coll->ceiling.normal) < 0.0f)
+    {
+        sp48 = item->x40_vel;
+        lbVector_Mirror(&sp48, &coll->ceiling.normal);
+        lbVector_Add_xy(&sp30, &sp48);
+        if (mpColl_8004CAA0(coll, &sp48)) {
+            lbVector_Add_xy(&sp3C, &sp48);
+        }
+        chk = true;
+    }
+    if ((coll->env_flags & MPCOLL_UNK) &&
+        product_xy(&item->x40_vel, &coll->floor.normal) < 0.0f)
+    {
+        sp48 = item->x40_vel;
+        lbVector_Mirror(&sp48, &coll->floor.normal);
+        lbVector_Add_xy(&sp30, &sp48);
+        if (mpColl_8004CB78(coll, &sp48)) {
+            lbVector_Add_xy(&sp3C, &sp48);
+        }
+        chk = true;
+    }
+    if (chk) {
+        if (return_sqrt_value(&sp30) < it_804DC76C) {
+            sp30.x = item->x40_vel.x;
+            sp30.y = -1.0f * item->x40_vel.y;
+        }
+        lbVector_NormalizeXY(&sp30);
+        speed *= attr->x58;
+        sp30.x *= speed;
+        sp30.y *= speed;
+        item->x64_vec_unk2 = sp3C;
+        item->x40_vel = sp30;
+
+        return true;
+    }
+    return false;
+}
+
+void it_80277C40(Item_GObj* item_gobj, s32 arg1)
+{
+    Vec3 sp20;
+    Vec3 sp14;
+    CollData* coll;
+    Item* item;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    coll = &item->x378_itemColl;
+    sp14.z = 0.0f;
+    sp14.y = 0.0f;
+    sp14.x = 0.0f;
+    sp20.z = 0.0f;
+    sp20.y = 0.0f;
+    sp20.x = 0.0f;
+    if (arg1 & 8) {
+        sp20.x = coll->xA4_ecbCurrCorrect.right.x;
+        sp20.y = coll->xA4_ecbCurrCorrect.right.y;
+    }
+    if (arg1 & 4) {
+        sp20.x = coll->xA4_ecbCurrCorrect.left.x;
+        sp20.y = coll->xA4_ecbCurrCorrect.left.y;
+    }
+    if (arg1 & 2) {
+        sp20.x = coll->xA4_ecbCurrCorrect.top.x;
+        sp20.y = coll->xA4_ecbCurrCorrect.top.y;
+    }
+    if (arg1 & 1) {
+        sp20.x = coll->xA4_ecbCurrCorrect.bottom.x;
+        sp20.y = coll->xA4_ecbCurrCorrect.bottom.y;
+    }
+    if (!item->xDCF_flag.b0) {
+        it_80278800(item_gobj, 0x405, 0, &sp20, &sp14, 0U, 0.0f);
+    }
+}
+
+void it_80277D08(void)
+{
+#if 1
+    HSD_MObjInfo* mobj = (HSD_MObjInfo*) &it_803F1F90;
+    hsdInitClassInfo(&it_803F1F90, &hsdMObj.parent,
+                     (char*) ((s32) &it_803F1F90 + 0xDC), &it_804D51B0, 0x50,
+                     0x20);
+    mobj->parent.release = hsdMObj.parent.release;
+    mobj->parent.amnesia = hsdMObj.parent.amnesia;
+    mobj->setup = fn_80277D8C;
+    mobj->load = hsdMObj.load;
+    mobj->make_texp = hsdMObj.make_texp;
+#else
+    hsdInitClassInfo(&it_803F1F90, &hsdMObj.parent,
+                     (char*) ((s32) &it_803F1F90 + 0xDC), &it_804D51B0, 0x50,
+                     0x20);
+    it_803F1F90.release = hsdMObj.parent.release;
+    it_803F1F90.amnesia = hsdMObj.parent.amnesia;
+    // it_803F1F90.unk3C = fn_80277D8C;
+    it_803F1F90.destroy = (void (*)(struct _HSD_Class* c)) fn_80277D8C;
+    // it_803F1F90.alloc = (s32 (*)(HSD_MObj*, HSD_MObjDesc*)) hsdMObj.load;
+    // it_803F1F90.init = (HSD_TExp* (*)(HSD_MObj*, HSD_TObj*, HSD_TExp**))
+    // hsdMObj.make_texp;
+#endif
+}
+
+void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg)
+{
+    HSD_TObj* tobj2;
+    HSD_TExp sp38;
+    HSD_PEDesc pe_desc;
+    HSD_TObj** tobj1_ptr;
+    HSD_PEDesc* setup_render_arg;
+    Item* item;
+    u32 rendermode;
+
+    item = GET_ITEM(HSD_GObj_804D7814);
+    HSD_StateInitTev();
+    rendermode = mobj->rendermode;
+    HSD_SetMaterialColor(mobj->mat->ambient, mobj->mat->diffuse,
+                         mobj->mat->specular, mobj->mat->alpha);
+    if (rendermode & 8) {
+        HSD_SetMaterialShininess(mobj->mat->shininess);
+    }
+    tobj1_ptr = NULL;
+    tobj2 = mobj->tobj;
+    if ((rendermode & 0x04000000) && tobj_shadows) {
+        tobj1_ptr = &tobj2;
+        while (*tobj1_ptr != NULL) {
+            tobj1_ptr = &(*tobj1_ptr)->next;
+        }
+        *tobj1_ptr = tobj_shadows;
+    }
+    if ((rendermode & 0x1000) && ((HSD_TObj*) tobj_toon != NULL) &&
+        ((HSD_ImageDesc*) tobj_toon->imagedesc != NULL))
+    {
+        tobj_toon->next = tobj2;
+        tobj2 = tobj_toon;
+    }
+    HSD_TObjSetup(tobj2);
+    HSD_TObjSetupTextureCoordGen(tobj2);
+    ((HSD_MObjInfo*) mobj->parent.class_info)
+        ->setup_tev(mobj, tobj2, rendermode);
+    it_80278108(item, mobj, it_80277F90(item, mobj, &sp38));
+    if (item->x5C9 != 0xFF) {
+        rendermode |= 0x60000000;
+    }
+    if (item->xDCF_flag.b4 && !item->xDCF_flag.b5) {
+        rendermode |= 0x20000000;
+    }
+    if (item->xDCF_flag.b5 && (item->x5C9 == 0xFF)) {
+        pe_desc.flags = 0x38;
+        pe_desc.dst_alpha = 0;
+        pe_desc.type = 0;
+        pe_desc.src_factor = 4;
+        setup_render_arg = &pe_desc;
+        pe_desc.dst_factor = 5;
+        pe_desc.logic_op = 0xF;
+        pe_desc.z_comp = 3;
+        pe_desc.alpha_comp0 = 7;
+        pe_desc.ref0 = 0;
+        pe_desc.alpha_op = 0;
+        pe_desc.alpha_comp1 = 7;
+        pe_desc.ref1 = 0;
+    } else {
+        setup_render_arg = mobj->pe;
+        ;
+    }
+    HSD_SetupRenderModeWithCustomPE(rendermode, setup_render_arg);
+    if (tobj1_ptr != NULL) {
+        *tobj1_ptr = NULL;
+    }
+}
+
+HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
+{
+    s32 sp80;
+    s32 sp3C;
+    s32 sp38;
+    s32 sp34;
+    s32 sp30;
+    u32 sp28;
+    s32 sp1C;
+    HSD_TevDesc sp14;
+    Vec3 spC;
+    Vec3* var_r5;
+    // s32 temp_r3_2;
+    // s32 temp_r3_3;
+    s32 temp_ret;
+    s32 var_ctr;
+    bool chk;
+    // u8 temp_r3;
+    Vec3* var_r4;
+
+    if (!item->xDCF_flag.b4) {
+        // temp_r3 = ;
+        if (item->x548_colorOverlay.x7C_flag2 &&
+            item->x548_colorOverlay.x7C_light_enable)
+        {
+#if 1
+            arg2->cnst.type = (HSD_TExpType) ((s32) &it_803F1F90 + 0xC4);
+            arg2->cnst.next = (HSD_TExp*) ((s32) &it_803F1F90 + 0xC8);
+            arg2->cnst.val = (void*) ((s32) &it_803F1F90 + 0xCC);
+            arg2->cnst.comp = (HSD_TEInput) ((s32) &it_803F1F90 + 0xD0);
+            arg2->cnst.ctype = (HSD_TEType) ((s32) &it_803F1F90 + 0xD4);
+            arg2->cnst.reg = (u8) ((s32) &it_803F1F90 + 0xD8);
+#else
+            // arg2->tev.type = (HSD_TExpType) ((s32) &it_803F1F90 + 0xC4);
+            // arg2->tev.next = (HSD_TExp*) ((s32) &it_803F1F90 + 0xC8);
+            // arg2->tev.c_ref = (s32) ((s32) &it_803F1F90 + 0xCC);
+            // arg2->tev.c_dst = (u8) ((s32) &it_803F1F90 + 0xD0);
+            // arg2->tev.c_scale = (u8) ((s32) &it_803F1F90 + 0xD4);
+            // arg2->tev.a_ref = (s32) ((s32) &it_803F1F90 + 0xD8);
+#endif
+            temp_ret = lbGetFreeColorRegister(0, mobj, NULL);
+            // temp_r3_2 = temp_ret;
+            if (temp_ret == -1) {
+                // OSReport(&it_803F1F90 + 0xF4, (u32) (u64) temp_ret, (f32)
+                // temp_ret);
+                // __assert(&it_803F1F90 + 0x118, 0xDDU, &it_804D51B8);
+                HSD_ObjAllocGetFreed((HSD_ObjAllocData*) arg2);
+            }
+            arg2->cnst.reg = (s8) temp_ret;
+            arg2->cnst.val = &item->x548_colorOverlay.x50_light_color;
+            HSD_TExpSetReg(arg2);
+            var_ctr = 14;
+            var_r5 = &spC;
+            var_r4 = (Vec3*) ((s32) &it_803F1F90 + 0x48);
+            while (var_ctr != 0) {
+                // var_r4->x += 8;
+                // var_r5->x += 8;
+                var_r5 = var_r4;
+                // var_r5->z = var_r4->z;
+                // var_r5->y = var_r4->y;
+                var_ctr--;
+            }
+            var_r5->z = var_r4->z;
+            sp14.stage = HSD_StateAssignTev(); // type GXTevStageID?
+            sp14.color = 2; // (GXTevKColorSel) GX_TEV_KCSEL_3_4 ?
+            sp14.u.tevconf.clr_a = GX_CC_ZERO;
+            sp14.u.tevconf.clr_b = lb_8000CC8C(temp_ret);
+            sp14.u.tevconf.clr_c = GX_CC_RASA;
+            chk = false;
+            sp14.u.tevconf.clr_d = GX_CC_CPREV;
+            if (temp_ret < 4) {
+                chk = true;
+            }
+            if (chk) {
+                sp80 = lb_8000CCA4(temp_ret);
+            }
+            HSD_SetupTevStage((HSD_TevDesc*) &sp14);
+            return arg2;
+        }
+    }
+    return NULL;
+}
+
+void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
+{
+    GXColor sp168; /* compiler-managed */
+    s32 sp110;     /* compiler-managed */
+    s32 sp10C;
+    s32 sp108;
+    GXColor* sp104;  /* compiler-managed */
+    HSD_TExp* sp100; /* compiler-managed */
+    HSD_TExp* spFC = NULL;
+    // s32 spA4;                                       /* compiler-managed */
+    // s32 spA0;
+    // s32 sp9C;
+    // s32* sp98;
+    // HSD_TExp* sp94;
+    HSD_TExp* sp90 = NULL;
+    s32 sp8C;
+    s32 sp88;
+    s32 sp68;
+    s32 sp40;
+    s32 sp3C;
+    s32 sp24;
+    HSD_TevDesc sp1C;
+    // u8 sp1A;
+    // u8 sp19;
+    GXColor sp18;
+    Vec3 sp14;
+    Vec3* var_r5;
+    // Fighter_GObj* temp_r3_2;
+    ColorOverlay* var_r4;
+    // ftDeviceUnk2* var_r4;
+    s32 temp_r3_4;
+    s32 temp_r3_5;
+    s32 temp_r3_6;
+    s32 temp_r3_7;
+    s32 temp_r4;
+    s32 temp_r7;
+    s32 temp_r8_2;
+    s32 temp_ret;
+    s32 temp_ret_2;
+    s32 var_ctr;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r0_3;
+    s32 var_r0_4;
+    bool chk1;
+    s32 var_r3;
+    u32 temp_r3_3;
+    // u8 temp_r3;
+    u8 temp_r5_2;
+    u8 temp_r8;
+    u8 temp_r8_3;
+    // void* temp_r5;
+    GXColor* color_hex;
+    Vec3* var_r4_2;
+
+    // temp_r3 = item->unkDCF;
+    if (!item->xDCF_flag.b5) {
+        var_r4 = &item->x548_colorOverlay;
+        chk1 = false;
+        if (item->xDCF_flag.b3) {
+            // temp_r3_2 = item->owner;
+            if ((item->owner != NULL) && item->xDC8_word.flags.x13) {
+                var_r4 =
+                    (ColorOverlay*) ftCo_800C0674((Fighter_GObj*) item->owner);
+            }
+        }
+        if (item->xDCF_flag.b4) {
+            chk1 = true;
+            sp168.r = item->xBC8;
+        } else if (item->x5C8) {
+            if (var_r4->x7C_color_enable) {
+                temp_r3_3 = ((0xFF - item->xBC7) *
+                             (0xFF - (s32) ((s32) &it_803F1F90 + 0x2F))) /
+                            255;
+                // temp_r5 = item->xBC4;
+                color_hex = &var_r4->x2C_hex;
+                if ((s32) temp_r3_3 == 0xFF) {
+                    sp168 = var_r4->x2C_hex;
+                } else {
+                    // temp_r8 = temp_r5->unk0;
+                    temp_r8 = item->xBC4;
+                    temp_r3_4 = 0xFF - temp_r3_3;
+                    temp_r8_2 =
+                        temp_r8 +
+                        ((color_hex->a * (color_hex->r - temp_r8)) / 255);
+                    temp_r7 = temp_r8_2 * 0xFF;
+                    temp_r4 = temp_r7 / temp_r3_4;
+                    sp168.r = (u8) temp_r4;
+                    if ((u32) temp_r4 != 0U) {
+                        sp168.r = (s8) (temp_r7 / temp_r4);
+                    } else {
+                        sp168.r = ((temp_r3_4 - temp_r8_2) * 0xFF) / 255;
+                    }
+                    // temp_r8_3 = temp_r5->unk1;
+                    temp_r8_3 = item->xBC5;
+                    sp168.g = (s8) ((s32) ((temp_r8_3 +
+                                            ((color_hex->a *
+                                              (color_hex->g - temp_r8_3)) /
+                                             255)) *
+                                           0xFF) /
+                                    temp_r3_4);
+                    // temp_r5_2 = temp_r5->unk2;
+                    temp_r5_2 = item->xBC6;
+                    sp168.b = (s8) ((s32) ((temp_r5_2 +
+                                            ((color_hex->a *
+                                              (color_hex->b - temp_r5_2)) /
+                                             255)) *
+                                           0xFF) /
+                                    temp_r3_4);
+                }
+                chk1 = true;
+            } else {
+                chk1 = true;
+                sp168.r = item->xBC4;
+            }
+        } else if (var_r4->x7C_flag2) {
+            chk1 = true;
+            sp168 = var_r4->x2C_hex;
+        }
+        if (chk1) {
+            spFC->cnst.type = (HSD_TExpType) ((s32) &it_803F1F90 + 0xC4);
+            spFC->cnst.next = (HSD_TExp*) ((s32) &it_803F1F90 + 0xC8);
+            spFC->cnst.val = (void*) ((s32) &it_803F1F90 + 0xCC);
+            spFC->cnst.comp = (HSD_TEInput) ((s32) &it_803F1F90 + 0xD0);
+            spFC->cnst.ctype = (HSD_TEType) ((s32) &it_803F1F90 + 0xD4);
+            spFC->cnst.reg = (u8) ((s32) &it_803F1F90 + 0xD4);
+            spFC->tev.a_dst = (u8) ((s32) &it_803F1F90 + 0xD8);
+            temp_ret = lbGetFreeColorRegister(0, mobj, arg2);
+            temp_r3_5 = temp_ret;
+            if (temp_r3_5 == -1) {
+                OSReport((char*) (&it_803F1F90 + 0xF4), (u32) (u64) temp_ret,
+                         (f32) temp_ret);
+                __assert((char*) (&it_803F1F90 + 0x118), 0x144U,
+                         (char*) &it_804D51B8);
+            }
+            sp110 = (s8) temp_r3_5;
+            sp104 = &sp168;
+            HSD_TExpSetReg((HSD_TExp*) &spFC);
+            sp100 = arg2;
+            if (temp_r3_5 < 4) {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+            if (var_r0 != 0) {
+                var_r3 = 4;
+            } else {
+                var_r3 = 0;
+            }
+            temp_ret_2 =
+                lbGetFreeColorRegister(var_r3, mobj, (HSD_TExp*) &spFC);
+            temp_r3_6 = temp_ret_2;
+            if (temp_r3_6 == -1) {
+                OSReport((char*) (&it_803F1F90 + 0x128),
+                         (u32) (u64) temp_ret_2, (f32) temp_ret_2);
+                __assert((char*) (&it_803F1F90 + 0x118), 0x152U,
+                         (char*) &it_804D51B8);
+            }
+            if ((u8) item->x5C9 != 0xFF) {
+                sp90->cnst.type = (HSD_TExpType) ((s32) &it_803F1F90 + 0xC4);
+                sp90->cnst.next = (HSD_TExp*) ((s32) &it_803F1F90 + 0xC8);
+                sp90->cnst.val = (void*) ((s32) &it_803F1F90 + 0xCC);
+                sp90->cnst.comp = (HSD_TEInput) ((s32) &it_803F1F90 + 0xD0);
+                sp90->cnst.ctype = (HSD_TEType) ((s32) &it_803F1F90 + 0xD4);
+                sp90->cnst.reg = (u8) ((s32) &it_803F1F90 + 0xD4);
+                sp90->tev.a_dst = (u8) ((s32) &it_803F1F90 + 0xD8);
+                sp90->tev.a_dst = (s8) temp_r3_6;
+                sp90->cnst.comp = 5;
+                sp90->cnst.idx = 3;
+                sp90->tev.c_ref = item->x5C9;
+                sp100 = sp90;
+            } else {
+                sp100 = NULL;
+            }
+            sp110 = (s8) temp_r3_6;
+            sp18.r = sp168.a;
+            sp18.g = sp168.a;
+            sp18.b = sp168.a;
+            sp104 = &sp18;
+            HSD_TExpSetReg((HSD_TExp*) &spFC);
+            var_ctr = 0xE;
+            var_r5 = &sp14;
+            var_r4_2 = (Vec3*) ((s32) &it_803F1F90 + 0x48);
+            do {
+                // temp_r3_7 = var_r4_2->z;
+                // var_r4_2->x += 8;
+                // var_r5->x += 8;
+                var_r5 = var_r4_2;
+                // var_r5->z = temp_r3_7;
+                // var_r5->y = (s32) var_r4_2->y;
+                var_ctr -= 1;
+            } while (var_ctr != 0);
+            // var_r5->z = (s32) var_r4_2->z;
+            sp1C.stage = HSD_StateAssignTev();
+            sp1C.color = lb_8000CC8C(temp_r3_5);
+            sp1C.u.tevconf.clr_op = lb_8000CC8C(temp_r3_6);
+            if (temp_r3_5 < 4) {
+                var_r0_2 = 1;
+            } else {
+                var_r0_2 = 0;
+            }
+            if (var_r0_2 != 0) {
+                sp88 = lb_8000CCA4(temp_r3_5);
+            } else {
+                if (temp_r3_6 < 4) {
+                    var_r0_3 = 1;
+                } else {
+                    var_r0_3 = 0;
+                }
+                if (var_r0_3 != 0) {
+                    sp88 = lb_8000CCA4(temp_r3_6);
+                }
+            }
+            if ((u8) item->x5C9 != 0xFF) {
+                sp68 = lb_8000CD90(temp_r3_6);
+                if (temp_r3_6 < 4) {
+                    var_r0_4 = 1;
+                } else {
+                    var_r0_4 = 0;
+                }
+                if (var_r0_4 != 0) {
+                    sp8C = lb_8000CDA8(temp_r3_6);
+                }
+            }
+            HSD_SetupTevStage((HSD_TevDesc*) &sp1C);
+        }
+    }
+}
+
+void it_80278574(HSD_GObj* gobj, GXColor* arg1)
+{
+    HSD_DObj* var_r3;
+    HSD_JObj* var_r0;
+    HSD_JObj* var_r0_2;
+    HSD_JObj* var_r0_3;
+    HSD_JObj* var_r0_4;
+    HSD_JObj* var_r0_5;
+    HSD_JObj* var_r0_6;
+    HSD_JObj* var_r0_7;
+    HSD_JObj* var_r0_8;
+    HSD_JObj* var_r31;
+    HSD_JObj* var_r3_2;
+    HSD_JObj* var_r3_3;
+    HSD_MObj* temp_r4;
+    HSD_Material* temp_r4_2;
+    PAD_STACK(4);
+
+    // var_r31 = GET_JOBJ(gobj->hsd_obj);
+    var_r31 = gobj->hsd_obj;
+    while (var_r31 != NULL) {
+        var_r3 = HSD_JObjGetDObj(var_r31);
+        while (var_r3 != NULL) {
+            temp_r4 = var_r3->mobj;
+            if (temp_r4 != NULL) {
+                temp_r4_2 = temp_r4->mat;
+                if (temp_r4_2 != NULL) {
+                    temp_r4_2->diffuse = *arg1;
+                }
+            }
+            if (var_r3 != NULL) {
+                var_r3 = var_r3->next;
+            } else {
+                var_r3 = NULL;
+            }
+        }
+        if (var_r31 == NULL) {
+            var_r0 = NULL;
+        } else {
+            var_r0 = var_r31->child;
+        }
+        if (var_r0 != NULL) {
+            if (var_r31 == NULL) {
+                var_r0_2 = NULL;
+            } else {
+                var_r0_2 = var_r31->child;
+            }
+            var_r31 = var_r0_2;
+        } else {
+            if (var_r31 == NULL) {
+                var_r0_3 = NULL;
+            } else {
+                var_r0_3 = var_r31->next;
+            }
+            if (var_r0_3 != NULL) {
+                if (var_r31 == NULL) {
+                    var_r0_4 = NULL;
+                } else {
+                    var_r0_4 = var_r31->next;
+                }
+                var_r31 = var_r0_4;
+            } else {
+            loop_25:
+                if (var_r31 == NULL) {
+                    var_r0_5 = NULL;
+                } else {
+                    var_r0_5 = var_r31->parent;
+                }
+                if (var_r0_5 == NULL) {
+                    var_r31 = NULL;
+                } else {
+                    if (var_r31 == NULL) {
+                        var_r3_2 = NULL;
+                    } else {
+                        var_r3_2 = var_r31->parent;
+                    }
+                    if (var_r3_2 == NULL) {
+                        var_r0_6 = NULL;
+                    } else {
+                        var_r0_6 = var_r3_2->next;
+                    }
+                    if (var_r0_6 != NULL) {
+                        if (var_r31 == NULL) {
+                            var_r3_3 = NULL;
+                        } else {
+                            var_r3_3 = var_r31->parent;
+                        }
+                        if (var_r3_3 == NULL) {
+                            var_r0_7 = NULL;
+                        } else {
+                            var_r0_7 = var_r3_3->next;
+                        }
+                        var_r31 = var_r0_7;
+                    } else {
+                        if (var_r31 == NULL) {
+                            var_r0_8 = NULL;
+                        } else {
+                            var_r0_8 = var_r31->parent;
+                        }
+                        var_r31 = var_r0_8;
+                        goto loop_25;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#if 0
+void it_8027870C(s32 arg0) {
+    if (lbLang_IsSettingUS() != 0) {
+        lbArchive_80017040(0, &it_803F1EE4, &it_804D6D20, &it_803F1EF0, 0);
+    } else {
+        lbArchive_80017040(0, &it_803F1ED8, &it_804D6D20, &it_803F1EF0, 0);
+    }
+    it_804D6D28 = it_804D6D20->unk0;
+    it_804D6D24 = it_804D6D20->unk4;
+    it_804D6D38 = it_804D6D20->unk8;
+    it_804D6D30 = it_804D6D20->unkC;
+    it_804D6D40 = it_804D6D20->unk10;
+    it_804D6D04 = it_804D6D20->unk14;
+}
+#endif
+
+void it_802787B4(Item_GObj* item_gobj, s32 arg1)
+{
+    Vec3 sp1C;
+    Vec3 sp10;
+
+    sp1C.x = sp1C.y = sp1C.z = it_804DC770;
+    sp10.x = sp10.y = sp10.z = it_804DC770;
+    // void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
+    // Vec3* arg4, s32 arg5, f32 arg6)
+    it_80278800(NULL, arg1, 0, &sp1C, &sp10, 1, it_804DC770);
+}
+
+void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
+                 Vec3* arg4, s32 arg5, f32 arg6)
+{
+    f32 sp88;
+    f32 sp84;
+    f32 sp80;
+    Vec3 sp74;
+    Vec3 sp68;
+    f32 sp64;
+    f32 sp60;
+    f32 sp5C;
+    HSD_JObj* jobj;
+    Item* item;
+    f32 temp_f1;
+    f64 var_f0;
+    PAD_STACK(52);
+
+    item = item_gobj->user_data;
+
+    // Not sure what to make of mixing this case statement with the if's below.
+    // Commenting out those cases did not affect the % match *shrug*
+    switch (ef_id) {
+    case 0x402:
+    // case 0x403:
+    // case 0x409:
+    // case 0x412:
+    // case 0x413:
+    // case 0x414:
+    // case 0x41B:
+    // case 0x422:
+    // case 0x433:
+    case 0x449:
+    case 0x473:
+        // block_50:
+        if (arg5 == 1) {
+            jobj = it_80272CC0(item_gobj, arg2);
+            efSync_Spawn(ef_id, item_gobj, jobj);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn((HSD_GObj*) item_gobj,
+                      &((Item*) item_gobj->user_data)->xBC0, 0U, ef_id, jobj);
+        return;
+    case 0x446:
+    case 0x448:
+        if (arg5 == 1) {
+            jobj = it_80272CC0(item_gobj, arg2);
+            efSync_Spawn(ef_id, item_gobj, jobj, arg3);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn((HSD_GObj*) item_gobj,
+                      &((Item*) item_gobj->user_data)->xBC0, 7U, ef_id, jobj,
+                      arg3);
+        return;
+    // case 0x417:
+    // case 0x418:
+    // case 0x419:
+    case 0x41A:
+        jobj = it_80272CC0(item_gobj, arg2);
+        efSync_Spawn(ef_id, item_gobj, jobj, 0xF25959);
+        return;
+    case 0x415:
+    // case 0x41E:
+    // case 0x428:
+    // case 0x429:
+    case 0x42A:
+    // case 0x438:
+    case 0x439:
+    case 0x43E:
+    case 0x44D:
+    // case 0x45B:
+    case 0x45C:
+    // case 0x45F:
+    // case 0x460:
+    case 0x461:
+        // case 0x462:
+        // case 0x463:
+        // case 0x464:
+        // case 0x465:
+        // case 0x466:
+        // case 0x467:
+        // case 0x468:
+        // case 0x469:
+        // case 0x46A:
+        // case 0x46B:
+        // case 0x46C:
+        // case 0x46D:
+        // case 0x46E:
+        // case 0x46F:
+        // case 0x470:
+        // case 0x471:
+        // case 0x472:
+        sp88 = 1.0f;
+        if (arg5 == 1) {
+            jobj = it_80272CC0(item_gobj, arg2);
+            efSync_Spawn(ef_id, item_gobj, jobj, &sp88);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn((HSD_GObj*) item_gobj,
+                      &((Item*) item_gobj->user_data)->xBC0, 3U, ef_id, jobj,
+                      &sp88);
+        return;
+    case 0x44E:
+    // case 0x44F:
+    // case 0x450:
+    // case 0x451:
+    // case 0x452:
+    // case 0x457:
+    // case 0x458:
+    // case 0x459:
+    case 0x45A:
+        sp84 = 1.0f;
+        jobj = it_80272CC0(item_gobj, arg2);
+        efSync_Spawn(ef_id, item_gobj, jobj, &item->facing_dir, &sp84);
+        return;
+    // case 0x423:
+    case 0x424:
+        sp80 = 0.0f;
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn((HSD_GObj*) item_gobj,
+                      &((Item*) item_gobj->user_data)->xBC0, 3U, ef_id, jobj,
+                      &sp80);
+        return;
+    }
+    // default:
+    sp74 = *arg3;
+    sp74.x += 2.0f * arg4->x * (HSD_Randf() - 1.0f);
+    sp74.y += 2.0f * arg4->y * (HSD_Randf() - 1.0f);
+    sp74.z += 2.0f * arg4->z * (HSD_Randf() - 1.0f);
+    lb_8000B1CC(it_80272CC0(item_gobj, arg2), &sp74, &sp68);
+    if (ef_id < 0x250) {
+        if (arg5 == 1) {
+            efSync_Spawn(ef_id, item_gobj, &sp68);
+            return;
+        }
+        jobj = it_80272CC0(item_gobj, arg2);
+        efAsync_Spawn((HSD_GObj*) item_gobj,
+                      &((Item*) item_gobj->user_data)->xBC0, 2U, ef_id, jobj,
+                      &sp74);
+        return;
+    } else if (ef_id == 0x41E) {
+        return;
+    } else if (ef_id < 0x41E) {
+        if (ef_id == 0x3FF) {
+            goto block_558;
+        } else if (ef_id < 0x3FF) {
+            if (ef_id == 0x3F5) {
+                goto block_4FC;
+            } else if (ef_id < 0x3F5) {
+                if (ef_id == 0x3EE) {
+                    goto block_4A8;
+                } else if (ef_id < 0x3EE) {
+                    if (ef_id >= 0x3ED) {
+                        goto block_4FC;
+                    } else if (ef_id >= 0x3E9) {
+                        goto block_4A8;
+                    } else {
+                        return;
+                    }
+                }
+                if (ef_id >= 0x3F3) {
+                    goto block_4A8;
+                } else {
+                    goto block_4FC;
+                }
+            } else {
+                if (ef_id == 0x3FD) {
+                    goto block_558;
+                } else if (ef_id >= 0x3FD) {
+                    goto block_4FC;
+                }
+                if (ef_id >= 0x3FA) {
+                    goto block_4A8;
+                } else if (ef_id >= 0x3F7) {
+                    goto block_558;
+                } else {
+                    goto block_4A8;
+                }
+            }
+        }
+        if (ef_id == 0x408) {
+            goto block_61C;
+        } else if (ef_id < 0x408) {
+            if (ef_id == 0x405) {
+                goto block_4A8;
+            } else if (ef_id < 0x405) {
+                if (ef_id >= 0x404) {
+                    goto block_61C;
+                } else if (ef_id < 0x402) {
+                    return;
+                } else {
+                    goto block_4FC;
+                }
+            }
+            if (ef_id >= 0x407) {
+                goto block_4A8;
+            } else {
+                goto block_61C;
+            }
+        }
+        if (ef_id == 0x416) {
+            goto block_4A8;
+        } else if (ef_id < 0x416) {
+            if (ef_id >= 0x412) {
+                return;
+            }
+            if (ef_id >= 0x40C) {
+                goto block_4A8;
+            } else {
+                return;
+            }
+        } else if (ef_id >= 0x41C) {
+            goto block_4A8;
+        } else {
+            // goto block_50;
+            return;
+        }
+    } else if (ef_id == 0x440) {
+        goto block_59C;
+    } else if (ef_id < 0x440) {
+        if (ef_id < 0x432) {
+            if (ef_id < 0x428) {
+                if (ef_id >= 0x425) {
+                    goto block_4A8;
+                } else if (ef_id < 0x422) {
+                    return;
+                } else {
+                    goto block_4A8;
+                }
+            }
+            if (ef_id == 0x42D) {
+                goto block_4A8;
+            } else if (ef_id >= 0x42D) {
+                goto block_4FC;
+            } else {
+                return;
+            }
+        }
+        if (ef_id < 0x438) {
+            if (ef_id == 0x434) {
+                goto block_4A8;
+            } else if (ef_id >= 0x434) {
+                goto block_59C;
+            } else {
+                return;
+            }
+        }
+        if (ef_id >= 0x43D) {
+            return;
+        } else if (ef_id >= 0x43A) {
+            goto block_4FC;
+        } else {
+            return;
+        }
+    } else if (ef_id == 0x4D0) {
+        goto block_4A8;
+    } else if (ef_id < 0x4D0) {
+        if (ef_id < 0x446) {
+            if (ef_id == 0x443) {
+                goto block_4FC;
+            } else {
+                goto block_4A8;
+            }
+        } else if (ef_id >= 0x44D) {
+            return;
+        } else if (ef_id >= 0x44A) {
+            goto block_4A8;
+        } else {
+            // goto block_50;
+            return;
+        }
+    } else if (ef_id == 0x514) {
+        goto block_6B4;
+    } else if (ef_id < 0x514) {
+        if (ef_id >= 0x513) {
+            goto block_680;
+
+        } else {
+            return;
+        }
+    } else if (ef_id >= 0x516) {
+        return;
+    } else {
+        goto block_6E8;
+    }
+
+block_4A8:
+    if (arg5 == 1) {
+        efSync_Spawn(ef_id, item_gobj, &sp68);
+        return;
+    }
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  2U, ef_id, jobj, &sp74);
+    return;
+block_4FC:
+    if (arg5 == 1) {
+        efSync_Spawn(ef_id, item_gobj, &sp68, &item->facing_dir);
+        return;
+    }
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  5U, ef_id, jobj, &sp74, &item->facing_dir);
+    return;
+block_558:
+    sp64 = 0.0f;
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  6U, ef_id, jobj, &sp74, &item->facing_dir, &sp64);
+    return;
+block_59C:
+    temp_f1 = item->facing_dir;
+    if (item->facing_dir < 0.0f) {
+        var_f0 = M_PI;
+    } else {
+        var_f0 = 0.0f;
+    }
+    sp60 = var_f0;
+    if (arg5 == 1) {
+        efSync_Spawn(ef_id, item_gobj, &sp68, &sp60);
+        return;
+    }
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  5U, ef_id, jobj, &sp74, &sp60);
+    return;
+block_61C:
+    sp5C = 0.0f;
+    if (arg5 == 1) {
+        efSync_Spawn(ef_id, item_gobj, &sp68, &sp5C);
+        return;
+    }
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  5U, ef_id, jobj, &sp74, &sp5C);
+    return;
+block_680:
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  8U, 2U, jobj, &sp74);
+    return;
+block_6B4:
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  8U, 3U, jobj, &sp74);
+    return;
+block_6E8:
+    jobj = it_80272CC0(item_gobj, arg2);
+    efAsync_Spawn((HSD_GObj*) item_gobj, &((Item*) item_gobj->user_data)->xBC0,
+                  8U, 4U, jobj, &sp74);
+    return;
+}
+
+void it_80278F2C(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    Vec3 sp20;
+    Vec3 sp14;
+    u16 temp_r9;
+    s32 temp_r5;
+    PAD_STACK(28);
+
+    cmd->x8 += 4;
+    temp_r5 = cmd->x8_bits->x0 & 0x3FF;
+    temp_r9 = cmd->x8_bits->x0;
+    // cmd->x8 = (char*) (&cmd->x8 + 4);
+    cmd->x8 += 4;
+    sp20.x = 0.003906f * (f32) cmd->x8_bits->x0;
+    // sp20.x = 0.003906f * (((f32) cmd->x8_bits->x0 - it_804DC798) -
+    // it_804DC7A0);
+    sp20.y = 0.003906f * (f32) cmd->x8_bits->x2;
+    cmd->x8 += 4;
+    // cmd->x8 = (char*) (&cmd->x8 + 4);
+    sp20.z = 0.003906f * (f32) cmd->x8_bits->x0;
+    sp14.x = 0.003906f * (f32) cmd->x8_bits->x2;
+    cmd->x8 += 4;
+    // cmd->x8 = (char*) (&cmd->x8 + 4);
+    sp14.y = 0.003906f * (f32) cmd->x8_bits->x0;
+    sp14.z = 0.003906f * (f32) cmd->x8_bits->x2;
+    // cmd->x8 = (char*) (&cmd->x8 + 4);
+    cmd->x8 += 4;
+
+    // void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
+    // Vec3* arg4, s32 arg5, f32 arg6)
+    //  it_80278800((Item_GObj*) temp_r9, temp_r6->x0 & 0x3FF, &sp20, &sp14, 0,
+    //  temp_r9, temp_r10_2, (f32) (s32) (f32) temp_r10->x2, 0.003906f);
+    it_80278800(item_gobj, temp_r9, temp_r5, &sp20, &sp14, 0, 0.003906f);
+}
+
+void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+#if 1
+    HitCapsule* hitcapsule;
+    s32 temp_r31;
+    u32 temp_r28;
+    u32 temp_r5_2;
+    u32 var_r4;
+    Item* item;
+    PAD_STACK(12);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    var_r4 = ((u16) cmd->x8_bits->x0 >> 7U) & 7;
+    hitcapsule = &item->x5D4_hitboxes[var_r4].hit;
+    temp_r28 = var_r4;
+    temp_r5_2 = ((u8) cmd->x8_bits->x0 >> 4U) & 7;
+    if ((hitcapsule->state == HitCapsule_Disabled) ||
+        (hitcapsule->x4 != temp_r5_2))
+    {
+        hitcapsule->x4 = temp_r5_2;
+        hitcapsule->state = HitCapsule_Enabled;
+        item->xDC8_word.flags.x16 = 1;
+        item->xDAA_flag.b2 = 0;
+        it_8026FCF8(item, hitcapsule);
+    }
+    temp_r31 = ((u32) cmd->x8_bits->x0 >> 0xDU) & S8_MAX;
+    if (temp_r31 != 0U) {
+        if (!item->xBBC_dynamicBoneTable) {
+            OSReport((char*) &it_803F22E8);
+            __assert((char*) &it_803F2300, 0x8BU, (char*) &it_804D51C0);
+        }
+        hitcapsule->jobj = item->xBBC_dynamicBoneTable->bones[temp_r31];
+    } else {
+        hitcapsule->jobj = item_gobj->hsd_obj;
+    }
+    it_80272460(hitcapsule,
+                item->xC3C * ((cmd->x8_bits->x2 & 0x1FFF) * item->xC40),
+                item_gobj);
+    cmd->x8 = cmd->x8 + 4;
+    hitcapsule->scale = 0.003906f * (f32) (u16) cmd->x8_bits->x0;
+    item->x3C = hitcapsule->scale;
+    // it_80275594(item_gobj, temp_r28, temp_r5, it_804DC7A8 / item->scl,
+    // 0.003906f); it_80275594(item_gobj, temp_r28, cmd->x8_bits, 1.0f /
+    // item->scl, 0.003906f);
+    it_80275594(item_gobj, temp_r28, 1.0f / item->scl);
+    hitcapsule->b_offset.x = 0.003906f * (f32) (s16) cmd->x8_bits->x2;
+    cmd->x8 = cmd->x8 + 4;
+    hitcapsule->b_offset.y = 0.003906f * (f32) (s16) cmd->x8_bits->x0;
+    hitcapsule->b_offset.z = 0.003906f * (f32) (s16) cmd->x8_bits->x2;
+    cmd->x8 = cmd->x8 + 4;
+    hitcapsule->kb_angle = ((u16) cmd->x8_bits->x0 >> 7U) & 0x1FF;
+    // hitcapsule->x24 = ((u32) cmd->x8_bits->x0 >> 14U) & 0x1FF;
+    hitcapsule->x24 = ((u32) cmd->x8_bits->x0 >> 14U) & 0x1FF;
+    hitcapsule->x28 = ((u16) cmd->x8_bits->x2 >> 5U) & 0x1FF;
+    hitcapsule->x43_b1 = 1;
+    cmd->x8 = cmd->x8 + 4;
+    hitcapsule->x2C = ((u16) cmd->x8_bits->x0 >> 7U) & 0x1FF;
+    hitcapsule->element = ((u8) cmd->x8_bits->x0 >> 2U) & 0x1F;
+    // hitcapsule->unk40 = (u8) ((hitcapsule->unk40 & ~0x80) |
+    // ((cmd->x8_bits->unk1 << 6) & 0x80));
+    hitcapsule->x40_b0 = cmd->x8_bits->x0_b6;
+    hitcapsule->x40_b1 = 0;
+    hitcapsule->x34 = (s32) ((cmd->x8_bits->x0 << 0xF) & 0xFF800000) >> 0x18;
+    hitcapsule->sfx_severity = ((u16) cmd->x8_bits->x2 >> 6U) & 7;
+    // hitcapsule->sfx_kind = ((u8) cmd->x8[0]->unk3 >> 2U) & 0xF;
+    hitcapsule->sfx_kind = ((u8) cmd->x8_bits->x2 >> 2U) & 0xF;
+    // hitcapsule->sfx_kind = cmd->x8_bits->x3_b5;
+    // hitcapsule->x40_b2 = (u8) ((hitcapsule->x40_b2 & ~0x20) |
+    // ((cmd->x8_bits->unk3 << 5) & 0x20));
+    hitcapsule->x40_b2 = cmd->x8_bits->x3_b7;
+    // hitcapsule->x40_b3 = (u8) ((hitcapsule->x40_b3 & ~0x10) |
+    // ((cmd->x8_bits->unk3 << 3) & 0x10));
+    hitcapsule->x40_b3 = cmd->x8_bits->x3_b6;
+    cmd->x8 = cmd->x8 + 4;
+    hitcapsule->x40_b4 = ((u8) cmd->x8_bits->x0 << 4) & 0xFF0;
+    // hitcapsule->x41_b4 = cmd->x8_bits->x0_b7;
+    // hitcapsule->x41_b4 = (u8) ((hitcapsule->x41_b4 & ~8) | (((u8)
+    // cmd->x8_bits->unk1 >> 4U) & 8)); hitcapsule->x41_b4 = ((u8)
+    // cmd->x8_bits->x0 >> 4U) & 8;
+    hitcapsule->x41_b4 = cmd->x8_bits->x1_b0;
+    // hitcapsule->x41_b5 = (u8) ((hitcapsule->x41_b5 & ~4) | (((u8)
+    // cmd->x8[0]->unk1 >> 4U) & 4)); hitcapsule->x41_b5 = ((u8)
+    // cmd->x8_bits->x0 >> 4U) & 4;
+    hitcapsule->x41_b5 = cmd->x8_bits->x1_b1;
+    // hitcapsule->x41_b6 = (u8) ((hitcapsule->x41_b6 & ~2) | (((u8)
+    // cmd->x8[0]->unk1 >> 4U) & 2));
+    hitcapsule->x41_b6 = cmd->x8_bits->x1_b2;
+    // hitcapsule->x41_b6 = cmd->x8_bits->x1_b6;
+    // hitcapsule->x41_b7 = (u8) ((hitcapsule->x41_b7 & ~1) | (((u8)
+    // cmd->x8[0]->unk1 >> 4U) & 1));
+    hitcapsule->x41_b7 = cmd->x8_bits->x1_b3;
+    // hitcapsule->x41_b7 = cmd->x8_bits->x1_b7;
+    // hitcapsule->x42_b0 = (u8) ((hitcapsule->x42_b0 & ~0x80) |
+    // ((cmd->x8[0]->unk1 << 4) & 0x80));
+    hitcapsule->x42_b0 = cmd->x8_bits->x1_b4;
+    // hitcapsule->x42_b0 = cmd->x8_bits->x1_b0;
+    // hitcapsule->x42_b1 = (u8) ((hitcapsule->x42_b1 & ~0x40) |
+    // ((cmd->x8[0]->unk1 << 4) & 0x40));
+    hitcapsule->x42_b1 = cmd->x8_bits->x1_b5;
+    // hitcapsule->x42_b1 = cmd->x8_bits->x1_b1;
+    // hitcapsule->x42_b2 = (u8) ((hitcapsule->x42_b2 & ~0x20) |
+    // ((cmd->x8[0]->unk1 << 4) & 0x20));
+    hitcapsule->x42_b2 = cmd->x8_bits->x1_b6;
+    // hitcapsule->x42_b2 = cmd->x8_bits->x1_b2;
+    // hitcapsule->x42_b3 = (u8) ((hitcapsule->x42_b3 & ~0x10) |
+    // ((cmd->x8[0]->unk1 << 4) & 0x10));
+    hitcapsule->x42_b3 = cmd->x8_bits->x1_b7;
+    hitcapsule->x42_b4 = cmd->x8_bits->x2_b0;
+    hitcapsule->x42_b5 = cmd->x8_bits->x2_b1;
+    hitcapsule->x42_b6 = cmd->x8_bits->x2_b2;
+    hitcapsule->x42_b7 = cmd->x8_bits->x2_b3;
+    // hitcapsule->x43 = cmd->x8_bits->x2;
+    hitcapsule->x43_b0 = cmd->x8_bits->x2_b4;
+    // hitcapsule->hit_grabbed_victim_only = (u8)
+    // ((hitcapsule->hit_grabbed_victim_only & ~0x80) | (((u8) cmd->x8_bits->x0
+    // << 5) & 0x80)); hitcapsule->hit_grabbed_victim_only = ((u8)
+    // cmd->x8_bits->x0 << 5) & 0x80; hitcapsule->hit_grabbed_victim_only =
+    // cmd->x8_bits->x2_b5;
+    // (&item->x5D4_hitboxes[var_r4])->x138 = cmd->x8_bits->x2_b5;
+    item->x5D4_hitboxes[var_r4].x138 = (u8) cmd->x8_bits->x2;
+    // cmd->unk8 = (void* ) (cmd->unk8 + 4);
+    // cmd->x8[0] = cmd->x8[1];
+    cmd->x8 = cmd->x8 + 4;
+    hitcapsule->x43_b2 = 1;
+    if (HSD_GObj_804D7838 && ((u8) HSD_GObj_804D7838->s_link > 11U)) {
+        it_8027129C(item_gobj, temp_r28);
+    }
+#endif
+}
+
+void it_80279544(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    // struct it_278F_struct_1B* temp_r4;
+    Item* item;
+    // PAD_STACK(4);
+
+    // temp_r4 = &((struct it_278F_struct_1A*) cmd)->x8[0];
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    // item = item_gobj->user_data;
+    it_80272460(
+        &item->x5D4_hitboxes[(cmd->x8_bits->x0 >> 7U) & 7].hit,
+        (s32) (u32) (item->xC3C *
+                     ((f32) ((u16) cmd->x8_bits->x2 & 0x1FFF) * item->xC40)),
+        item_gobj);
+    // cmd->unk8 = (void* ) (cmd->unk8 + 4);
+    // ((struct it_278F_struct_1A*) cmd)->x8[0] = ((struct it_278F_struct_1A*)
+    // cmd)->x8[1];
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_802795EC(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    s32 temp_r4_2;
+    HitCapsule* hitcapsule;
+    Item* item;
+
+    temp_r4_2 = ((u16) cmd->x8_bits->x0 >> 7U) & 7;
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    hitcapsule = &item->x5D4_hitboxes[temp_r4_2].hit;
+    hitcapsule->scale = 0.003906f * (cmd->x8_bits->x0 & 0x7FFFFF);
+    item->x3C = hitcapsule->scale;
+    it_80275594(item_gobj, temp_r4_2, 1.0f / item->scl);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_80279680(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    it_80272560(item_gobj, cmd->x8_bits->x0 & 0x03FFFFFF);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_802796C4(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    it_802725D4(item_gobj);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_802796FC(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    ((Item*) item_gobj->user_data)->xDAC_itcmd_var0 =
+        (s32) (cmd->x8_bits->x0 & 0x03FFFFFF);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_80279720(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    ((Item*) item_gobj->user_data)->xDB0_itcmd_var1 =
+        (s32) (cmd->x8_bits->x0 & 0x03FFFFFF);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_80279744(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    ((Item*) item_gobj->user_data)->xDB4_itcmd_var2 =
+        (s32) (cmd->x8_bits->x0 & 0x03FFFFFF);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_80279768(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 24U & 0x80);
+    // item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 25U & 0x80);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_8027978C(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    Item* item;
+    s32 temp_r4_2;
+    u8 temp_r7;
+    u8 temp_r5_2;
+    u8 temp_r6_2;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    temp_r7 = ((u16) cmd->x8_bits->x0 >> 2U) & U8_MAX;
+    cmd->x8 = cmd->x8 + 4;
+#if 1
+    if (temp_r7 < 10U) {
+        if (temp_r7 < 3U) {
+            if (temp_r7 < 0U) {
+            } else {
+                temp_r4_2 = (s32) cmd->x8_bits->x0;
+                cmd->x8 = cmd->x8 + 4;
+                temp_r5_2 = cmd->x8_bits->x2;
+                // temp_r6_2 = (u8) ((u16) cmd->x8_bits->x2 >> 8U);
+                temp_r6_2 = cmd->x8_bits->x2;
+                switch (temp_r7) {
+                case 0:
+                    Item_8026AE84(item, temp_r4_2, (s32) temp_r5_2,
+                                  (s32) temp_r6_2);
+                    break;
+                case 1:
+                    Item_8026AF0C(item, temp_r4_2, (s32) temp_r5_2,
+                                  (s32) temp_r6_2);
+                    break;
+                case 2:
+                    Item_8026AFA0(item, temp_r4_2, (s32) temp_r5_2,
+                                  (s32) temp_r6_2);
+                    break;
+                }
+            }
+        }
+    } else if (temp_r7 >= 12U) {
+    } else {
+        cmd->x8 = cmd->x8 + 4;
+        switch (temp_r7) {
+        case 10:
+            Item_8026B034(item);
+            break;
+        case 11:
+            Item_8026B074(item);
+            break;
+        }
+    }
+#else
+    temp_r4_2 = (s32) cmd->x8_bits->x0;
+    cmd->x8 = cmd->x8 + 4;
+    temp_r5_2 = cmd->x8_bits->x2;
+    // temp_r6_2 = (u8) ((u16) cmd->x8_bits->x2 >> 8U);
+    temp_r6_2 = cmd->x8_bits->x2;
+    switch (temp_r7) {
+    case 0:
+        Item_8026AE84(item, temp_r4_2, (s32) temp_r5_2, (s32) temp_r6_2);
+        break;
+    case 1:
+        Item_8026AF0C(item, temp_r4_2, (s32) temp_r5_2, (s32) temp_r6_2);
+        break;
+    case 2:
+        Item_8026AFA0(item, temp_r4_2, (s32) temp_r5_2, (s32) temp_r6_2);
+        break;
+    case 10:
+        Item_8026B034(item);
+        break;
+    case 11:
+        Item_8026B074(item);
+        break;
+    }
+#endif
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_80279888(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    PAD_STACK(4);
+    it_80273598(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
+                cmd->x8_bits->x2 & 0x1FFF);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_802798D4(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    PAD_STACK(4);
+    it_80273600(item_gobj);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_8027990C(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    PAD_STACK(4);
+    it_80273648(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
+                cmd->x8_bits->x2 & 0x1FFF);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_80279958(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    PAD_STACK(4);
+    it_80279B88(item_gobj->user_data,
+                (s32) (s8) ((u16) cmd->x8_bits->x0 >> 2U) & 0xFF,
+                (s32) cmd->x8_bits->x0 & 0x3FFFF);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_802799A8(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    it_80279BBC(item_gobj->user_data);
+    cmd->x8 = cmd->x8 + 4;
+}
+
+void it_802799E4(Item_GObj* item_gobj)
+{
+#if 1
+    Item* item;
+    FtCmdState* temp_r29;
+    u32 temp_r28;
+
+    item = item_gobj->user_data;
+    // temp_r29 = (FtCmdState*) item->x524_cmd;
+    temp_r29 = &item->x524_cmd;
+    item->x524_cmd.x4 = item->x5CC_currentAnimFrame;
+    item->xDBC_itcmd_var4 = 0;
+    if (item->x524_cmd.x8 != NULL) {
+        if (F32_MAX != temp_r29->x0) {
+            temp_r29->x0 = temp_r29->x0 - item->x5D0_animFrameSpeed;
+        }
+    loop_4:
+        if (temp_r29->x8 != NULL) {
+            if (F32_MAX == temp_r29->x0) {
+                if (!(temp_r29->x4 >= item->x5D0_animFrameSpeed)) {
+                    temp_r29->x0 = -temp_r29->x4;
+                    goto block_9;
+                }
+            } else if (!(temp_r29->x0 > 0.0f)) {
+            block_9:
+                temp_r28 = ((u16) temp_r29->x8_bits->x0 >> 2U) & 0x3F;
+                if (Command_Execute((CommandInfo*) temp_r29, temp_r28) == 0) {
+                    ((void (*)(Item_GObj*, ...)) *
+                     (&it_803F22A8[temp_r28 - 10U]))(item_gobj, temp_r29);
+                }
+                goto loop_4;
+            }
+        }
+    }
+#else
+    Item* item;
+    CommandInfo* temp_r29;
+    u32 temp_r28;
+
+    item = item_gobj->user_data;
+    temp_r29 = (CommandInfo*) item->x524_cmd;
+    item->x528 = item->x5CC_currentAnimFrame;
+    item->xDBC_itcmd_var4 = 0;
+    if ((void*) item->x524_cmd.x8 != NULL) {
+        if (F32_MAX != temp_r29->timer) {
+            temp_r29->timer = temp_r29->timer - item->x5D0_animFrameSpeed;
+        }
+    loop_4:
+        if ((u8*) temp_r29->u.data_position != NULL) {
+            if (F32_MAX == temp_r29->timer) {
+                if (!(temp_r29->frame_count >= item->x5D0_animFrameSpeed)) {
+                    temp_r29->timer = -temp_r29->frame_count;
+                    goto block_9;
+                }
+            } else if (!(temp_r29->timer > 0.0f)) {
+            block_9:
+                temp_r28 = ((u8) temp_r29->u.Command_09->param_2 >> 2U) & 0x3F;
+                if (Command_Execute((CommandInfo*) temp_r29, temp_r28) == 0) {
+                    ((void (*)(...)) *
+                     (&it_803F22A8[temp_r28 - 10U]))(item_gobj, temp_r29);
+                }
+                goto loop_4;
+            }
+        }
+    }
+#endif
+}
+
+void it_80279AF0(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    it_80278F2C(item_gobj, (FtCmdState*) cmd);
+}
+
+void it_80279B10(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    it_8027978C(item_gobj, cmd);
+}
+
+void fn_80279B30(Item_GObj* item_gobj, FtCmdState* cmd)
+{
+    // void fn_80279B30(HSD_GObj* item_gobj, FtCmdState* cmd, u32 arg2) {
+    // *(&it_804D51C8 + ((M2C_ERROR(/* Read from unset register $r5 */) - 0x15)
+    // * 4))(&it_804D51C8);
+    ((void (*)(Item_GObj*, ...)) * (&it_804D51C8[-0x15]))(item_gobj, cmd);
+    // ((void (*)(...))*(&it_804D51C8[arg2 - 21U]))(item_gobj, cmd);
+}
+
+void it_80279B64(Item* item)
+{
+    lb_80014498(&item->x548_colorOverlay);
+}
+
+void it_80279B88(Item* item, s32 arg1, s32 arg2)
+{
+    // void it_80279B88(Item* item, enum_t arg1, bool arg2) {
+    lb_800144C8(&item->x548_colorOverlay, &it_804D6D04, arg1, arg2);
+}
+
+void it_80279BBC(Item* item)
+{
+    lb_80014498(&item->x548_colorOverlay);
+}
+
+void it_80279BE0(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    while (lb_80014258((HSD_GObj*) item_gobj, &item->x548_colorOverlay,
+                       (void (*)(Fighter_GObj*, FtCmdState*)) fn_80279B30))
+    {
+        lb_80014498(&item->x548_colorOverlay);
+    }
+}
+
+void it_80279C48(Item_GObj* item_gobj, Article* arg1)
+{
+    Vec3 sp10;
+    HSD_GObj* gobj;
+    Item* item;
+    f32 dir;
+
+    item = item_gobj->user_data;
+    gobj = ftLib_8008627C(&item->pos, item->owner);
+    if (gobj != NULL) {
+        ftLib_80086644(gobj, &sp10);
+        if ((item->pos.x - sp10.x) > 0.0f) {
+            item->facing_dir = -1.0f;
+            return;
+        }
+        item->facing_dir = 1.0f;
+        return;
+    }
+    if (HSD_Randi(2) != 0) {
+        dir = 1.0f;
+    } else {
+        dir = -1.0f;
+    }
+    item->facing_dir = dir;
+}
+
+void it_80279CDC(Item_GObj* item_gobj, f32 scale)
+{
+    it_8027A13C(item_gobj);
+    it_80279D5C(item_gobj, scale);
+    it_8026B3A8(item_gobj);
+    it_802756D0(item_gobj);
+    it_8026BDB4(item_gobj);
+}
+
+void it_80279D38(Item_GObj* item_gobj)
+{
+    it_8027B964(item_gobj, false);
+}
+
+void it_80279D5C(Item_GObj* item_gobj, f32 scale)
+{
+    Vec3 sp18;
+    HSD_JObj* item_jobj;
+    u32 temp_r4;
+    Item* item;
+
+    // item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+    item_jobj = item_gobj->hsd_obj;
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    sp18.z = scale;
+    sp18.y = scale;
+    sp18.x = scale;
+    item->xDD4_itemVar.it_279D.x4C = scale;
+    item->xDD4_itemVar.it_279D.x5C = 0;
+    HSD_JObjSetScale(item_jobj, &sp18);
+}
+
+void it_80279E24(Item_GObj* item_gobj)
+{
+    HSD_JObj* item_jobj;
+    f32 scale;
+    Item* item;
+    PAD_STACK(4);
+
+    // item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+    item_jobj = item_gobj->hsd_obj;
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    // item = item_gobj->user_data;
+    scale = HSD_JObjGetScaleX(item_jobj);
+    if (item->xDD4_itemVar.it_279D.x50 <= 0.0f) {
+        item->xDD4_itemVar.it_279D.x50 = item->xDD4_itemVar.it_279D.x44;
+        if (item->xDD4_itemVar.it_279D.x58 & 1) {
+            if (item->xDD4_itemVar.it_279D
+                    .x2C[item->xDD4_itemVar.it_279D.x58] <= scale)
+            {
+                item_jobj = item_gobj->hsd_obj;
+                item = item_gobj->user_data;
+                scale = HSD_JObjGetScaleX(item_jobj);
+                it_80272F7C(item_jobj,
+                            item->xDD4_itemVar.it_279D
+                                .x2C[item->xDD4_itemVar.it_279D.x58]);
+                item->xDD4_itemVar.it_279D.x58++;
+                item->xDD4_itemVar.it_279D.x4C =
+                    (item->xDD4_itemVar.it_279D
+                         .x2C[item->xDD4_itemVar.it_279D.x58] -
+                     scale) /
+                    item->xDD4_itemVar.it_279D.x44;
+            }
+        } else {
+            if (item->xDD4_itemVar.it_279D
+                    .x2C[item->xDD4_itemVar.it_279D.x58] >= scale)
+            {
+                item_jobj = item_gobj->hsd_obj;
+                item = item_gobj->user_data;
+                scale = HSD_JObjGetScaleX(item_jobj);
+                it_80272F7C(item_jobj,
+                            item->xDD4_itemVar.it_279D
+                                .x2C[item->xDD4_itemVar.it_279D.x58]);
+                item->xDD4_itemVar.it_279D.x58++;
+                item->xDD4_itemVar.it_279D.x4C =
+                    (item->xDD4_itemVar.it_279D
+                         .x2C[item->xDD4_itemVar.it_279D.x58] -
+                     scale) /
+                    item->xDD4_itemVar.it_279D.x44;
+            }
+        }
+        if ((s32) item->xDD4_itemVar.it_279D.x54 <=
+            (s32) item->xDD4_itemVar.it_279D.x58)
+        {
+            item->xDD4_itemVar.it_279D.x5C = 2;
+            return;
+        }
+    }
+    item->xDD4_itemVar.it_279D.x50 =
+        (f32) (item->xDD4_itemVar.it_279D.x50 - 1.0f);
+    it_80272DE4(item_jobj, item->xDD4_itemVar.it_279D.x4C);
+}
+
+void it_80279FF8(Item_GObj* item_gobj)
+{
+    HSD_JObj* item_jobj;
+    Item* item;
+    PAD_STACK(8);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    if (item->xDD4_itemVar.it_279D.x5C == 0) {
+        item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+        if (item->xCC_item_attr->x60_scale >
+            (item->xDD4_itemVar.it_279D.x48 + HSD_JObjGetScaleX(item_jobj)))
+        {
+            it_80272DE4(item_jobj, item->xCC_item_attr->x60_scale);
+            return;
+        }
+        it_80272F7C(item_jobj, item->xCC_item_attr->x60_scale);
+        item->xDD4_itemVar.it_279D.x5C = 1;
+        return;
+    }
+    if (item->xDD4_itemVar.it_279D.x5C != 2) {
+        it_80279E24(item_gobj);
+    }
+}
+
+bool it_8027A09C(Item_GObj* item_gobj)
+{
+    Item* item;
+    PAD_STACK(8);
+
+    item = item_gobj->user_data;
+    it_80272860(item_gobj, item->xDD4_itemVar.it_279D.x1C,
+                item->xDD4_itemVar.it_279D.x20);
+    if (item->xDD4_itemVar.it_279D.x24 <= 0.0f) {
+        it_80272F7C(item_gobj->hsd_obj, item->xCC_item_attr->x60_scale);
+        return true;
+    }
+    item->xDD4_itemVar.it_279D.x24 -= 1.0f;
+    return false;
+}
+
+bool it_8027A118(Item_GObj* item_gobj, HSD_GObjEvent arg1)
+{
+    it_8026E4D0(item_gobj, arg1);
+    return false;
+}
+
+void it_8027A13C(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDD4_itemVar.it_279D.x10.z = 0.0f;
+    item->xDD4_itemVar.it_279D.x10.y = 0.0f;
+    item->xDD4_itemVar.it_279D.x10.x = 0.0f;
+    item->xDD4_itemVar.it_279D.x4.z = 0.0f;
+    item->xDD4_itemVar.it_279D.x4.y = 0.0f;
+    item->xDD4_itemVar.it_279D.x4.x = 0.0f;
+}
+
+void it_8027A160(HSD_JObj* bone, Item* item)
+{
+    Vec3 sp1C;
+    Vec3 sp10;
+    f32 var_f1;
+    f32 var_f1_2;
+    f32 var_f1_3;
+
+    if (bone != NULL) {
+        sp1C.z = 0.0f;
+        sp1C.y = 0.0f;
+        sp1C.x = 0.0f;
+        HSD_JObjGetTranslation(bone, &sp10);
+        sp10.x *= item->xCC_item_attr->x60_scale;
+        sp10.y *= item->xCC_item_attr->x60_scale;
+        sp10.z *= item->xCC_item_attr->x60_scale;
+        var_f1 = sp10.x;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
+        if (var_f1 < 0.001f) {
+            sp10.x = 0.0f;
+        }
+        var_f1_2 = sp10.y;
+        if (var_f1_2 < 0.0f) {
+            var_f1_2 = -var_f1_2;
+        }
+        if (var_f1_2 < 0.001f) {
+            sp10.y = 0.0f;
+        }
+        var_f1_3 = sp10.z;
+        if (var_f1_3 < 0.0f) {
+            var_f1_3 = -var_f1_3;
+        }
+        if (var_f1_3 < 0.001f) {
+            sp10.z = 0.0f;
+        }
+        item->xDD4_itemVar.it_279D.x4.x =
+            sp10.x - item->xDD4_itemVar.it_279D.x10.x;
+        item->xDD4_itemVar.it_279D.x4.y =
+            sp10.y - item->xDD4_itemVar.it_279D.x10.y;
+        item->xDD4_itemVar.it_279D.x4.z =
+            sp10.z - item->xDD4_itemVar.it_279D.x10.z;
+        item->xDD4_itemVar.it_279D.x10 = sp10;
+        HSD_JObjSetTranslate(bone, &sp1C);
+    }
+}
+
+void it_8027A344(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->x40_vel.x = item->xDD4_itemVar.it_279D.x4.z * item->facing_dir;
+    item->x40_vel.y = item->xDD4_itemVar.it_279D.x4.y;
+}
+
+s32 it_8027A364(Item* item)
+{
+#if 0
+    s32 var_ctr2;
+    s32 var_ctr1;
+    s32 index;
+    it_279D_DatAttrs* attr;
+    s32 ret_val;
+
+    attr = item->xC4_article_data->x4_specialAttributes;
+    ret_val = 1U;
+    index = Pokemon_Tosakinto;
+    for (var_ctr1 = 3; var_ctr1 != 0; var_ctr1--) {
+        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
+            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
+                ret_val += attr->x3C[index - Pokemon_Tosakinto];
+            }
+            index++;
+        }
+    }
+    return ret_val;
+#else
+    s32 var_ctr2;
+    s32 var_ctr1;
+    s32 index;
+    it_279D_DatAttrs* attr;
+    s32 ret_val;
+
+    attr = item->xC4_article_data->x4_specialAttributes;
+    var_ctr1 = 3;
+    ret_val = 1U;
+    index = Pokemon_Tosakinto;
+    while (var_ctr1 != 0) {
+        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
+            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
+                ret_val += attr->x3C[index - Pokemon_Tosakinto];
+            }
+            index++;
+        }
+        var_ctr1--;
+    }
+
+    return ret_val;
+#endif
+}
+
+s32 it_8027A4D4(Item* item)
+{
+    s32 rand_int;
+    s32 var_ctr2;
+    s32 var_ctr1;
+    s32 var_r3;
+    it_279D_DatAttrs* attr;
+    s32 index2;
+    s32 index;
+    PAD_STACK(16);
+
+    attr = item->xC4_article_data->x4_specialAttributes;
+    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80165084()) {
+        Item_804A0E24.z = 1U;
+        gm_80172C04();
+        return 23U;
+    }
+    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) &&
+        gm_80164ABC((gmMainLib_8015ED8C_arg0_t*) &Item_804A0E24))
+    {
+        Item_804A0E24.z = 1U;
+        gm_80172BC4();
+        return 22U;
+    }
+    var_r3 = 1U;
+    index = Pokemon_Tosakinto;
+    attr = item->xC4_article_data->x4_specialAttributes;
+    for (var_ctr1 = 3; var_ctr1 != 0; var_ctr1--) {
+        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
+            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
+                var_r3 += attr->x3C[index - Pokemon_Tosakinto];
+            }
+            index++;
+        }
+    }
+    rand_int = HSD_Randi(var_r3);
+    var_r3 = 0U;
+    index = Pokemon_Tosakinto;
+    for (var_ctr1 = 30U; var_ctr1 != 0; var_ctr1--) {
+        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
+            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
+                var_r3 += attr->x3C[index - Pokemon_Tosakinto];
+                if (var_r3 >= rand_int) {
+                    Item_804A0E24.y = Item_804A0E24.x;
+                    Item_804A0E24.x = index;
+                    return index - Pokemon_Tosakinto;
+                }
+            }
+            index++;
+        }
+    }
+    return 0;
+}
+
+s32 it_8027A780(Item* item, void* arg1)
+{
+    S32Vec2 sp10;
+    S32Vec2* var_r4;
+    S32Vec2* var_r6;
+    s32 temp_r0;
+    s32 rand_int;
+    s32 chk;
+    s32 cnt;
+    s32 var_ctr2;
+    s32 var_ctr1;
+    it_279D_DatAttrs* attr;
+    s32 index;
+    s32 var_r3;
+    s32 var_r4_2;
+    s32 var_r5;
+    s32 var_r6_2;
+
+    var_r4 = arg1;
+    var_r6 = &sp10;
+    cnt = 0;
+    attr = item->xC4_article_data->x4_specialAttributes;
+    var_r3 = 0;
+    chk = var_r4->x;
+    for (var_ctr1 = 6; var_ctr1 != 0; var_ctr1--) {
+        for (var_ctr2 = 0; var_ctr2 < 5; var_ctr2++) {
+            if (chk != Pokemon_Chicorita_Leaf) {
+                if ((Item_804A0E24.x != chk) && (Item_804A0E24.y != chk)) {
+                    var_r6->x = chk;
+                    cnt++;
+                    var_r6->y = attr->x3C[var_r4->x - Pokemon_Tosakinto];
+                    var_r6->x += 2;
+                    var_r3 += var_r6->y;
+                }
+                chk = var_r4->y;
+                var_r4->x++;
+            }
+        }
+    }
+    rand_int = HSD_Randi(var_r3);
+    var_ctr1 = cnt;
+    var_r6_2 = 0;
+    var_r5 = Pokemon_Sonans;
+    var_r4_2 = 0;
+    if (cnt > 0) {
+        for (var_ctr1 = cnt; var_ctr1 != 0; var_ctr1--) {
+            var_r6_2 += var_r6->y;
+            if (rand_int < var_r6_2) {
+                var_r5 = sp10.x + (var_r4_2 * 8);
+            } else {
+                var_r6->x += 2;
+                var_r4_2++;
+            }
+        }
+    }
+    Item_804A0E24.y = Item_804A0E24.x;
+    Item_804A0E24.x = var_r5;
+    return var_r5 - Pokemon_Tosakinto;
+}
+
+s32 it_8027A9B8(Item* item)
+{
+    void* vec;
+
+    vec = gm_801BEC54();
+    if (vec == NULL) {
+        return Pokemon_Sonans;
+    }
+    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80165084()) {
+        Item_804A0E24.z = 1;
+        gm_80172C04();
+        return 23U;
+    }
+    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) &&
+        gm_80164ABC((gmMainLib_8015ED8C_arg0_t*) &Item_804A0E24))
+    {
+        Item_804A0E24.z = 1;
+        gm_80172BC4();
+        return 22U;
+    }
+    return it_8027A780(item, vec);
+}
+
+void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
+{
+    Item* var_r6;
+    // f32 temp_f1;
+    s32 var_r8;
+    it_279D_DatAttrs* attr;
+
+    attr = ((Item*) item1_gobj->user_data)
+               ->xC4_article_data->x4_specialAttributes;
+    if (arg2 == Pokemon_Marumine) {
+        item2->xDD4_itemVar.it_279D.x1C = 0.0f;
+        item2->xDD4_itemVar.it_279D.x20 = 0.0f;
+    } else {
+        item2->xDD4_itemVar.it_279D.x1C = attr->xC;
+        item2->xDD4_itemVar.it_279D.x20 = attr->x10;
+    }
+    item2->xDD4_itemVar.it_279D.x24 = attr->x14;
+    var_r6 = item2;
+    var_r8 = 0;
+    item2->xDD4_itemVar.it_279D.x28 = attr->x18;
+    item2->xDD4_itemVar.it_279D.x48 =
+        (item2->xCC_item_attr->x60_scale - item2->xDD4_itemVar.it_279D.x4C) /
+        item2->xDD4_itemVar.it_279D.x28;
+    item2->xDD4_itemVar.it_279D.x44 = attr->x34;
+    item2->xDD4_itemVar.it_279D.x54 = attr->x38;
+    item2->xDD4_itemVar.it_279D.x5C = 0.0f;
+    item2->xDD4_itemVar.it_279D.x58 = 0.0f;
+    item2->xDD4_itemVar.it_279D.x50 = 0.0f;
+
+    while (var_r8 < attr->x38) {
+        item2->xDD4_itemVar.it_279D.x2C[var_r8] =
+            attr->x1C[var_r8] * item2->xCC_item_attr->x60_scale;
+        var_r8++;
+    }
+}
+
+bool it_8027AB64(Item_GObj* item_gobj)
+{
+    PokemonKind pokemon_kind;
+    // Item_GObj* sp20;
+    SpawnItem spawn;
+    // Article* temp_r4;
+    // Item* temp_r28;
+    Item* item;
+    Item_GObj* spawn_gobj;
+    ItemKind it_kind;
+    s32 rand_int;
+    s32 var_ctr;
+    s32 var_r0;
+    s32 var_r3;
+    s32 var_r4;
+    s32 index1;
+    s32 index2;
+    u32 temp_r3;
+    // void* temp_r29;
+    it_279D_DatAttrs* attr;
+    // PAD_STACK(8);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    // item = item_gobj->user_data;
+    temp_r3 = gm_8016AEB8();
+    if (temp_r3 != 0U) {
+        if (temp_r3 == 1U) {
+            pokemon_kind = it_8027A9B8(item);
+        } else {
+            pokemon_kind = temp_r3 - Pokemon_Tosakinto;
+        }
+    } else if (gm_8018841C()) {
+        if (&it_803F2ED0 == NULL) {
+            pokemon_kind = (PokemonKind) Pokemon_Sonans;
+        } else {
+            pokemon_kind = it_8027A780(item, &it_803F2ED0);
+        }
+        // pokemon_kind = var_r3;
+    } else if (gm_801A4310() == 0x18) {
+        // temp_r4 = item->xC4_article_data;
+        // temp_r29 = temp_r4->x4_specialAttributes;
+        attr = item->xC4_article_data->x4_specialAttributes;
+
+        rand_int = HSD_Randi(it_8027A364(item));
+        // var_ctr = 0x1E;
+        // var_r6 = temp_r29 + 0x284;
+        var_r4 = 0;
+        index1 = Pokemon_Tosakinto;
+
+        index2 = Pokemon_Sonans;
+        for (var_ctr = 30; var_ctr != 0; var_ctr--) {
+            var_r4 += attr->x3C[index1 - Pokemon_Tosakinto];
+            if ((Item_804A0E24.x != index2) && (Item_804A0E24.y != index2) &&
+                ((var_r4 < rand_int) == 0))
+            {
+                Item_804A0E24.y = Item_804A0E24.x;
+                var_r0 = index2 - Pokemon_Tosakinto;
+                Item_804A0E24.x = index2;
+                goto block_1;
+            } else {
+                index1++;
+                index2++;
+            }
+        }
+        var_r0 = 0;
+    block_1:
+
+        // loop_11:
+        //         if (((s32) Item_804A0E24.x != index2) && ((s32)
+        //         Item_804A0E24.y != index2) && (var_r4 += var_r6->unk-248,
+        //         ((var_r4 < rand_int) == 0))) {
+        //             Item_804A0E24.y = Item_804A0E24.x;
+        //             var_r0 = index2 - Pokemon_Tosakinto;
+        //             Item_804A0E24.x = index2;
+        //         } else {
+        //             var_r6 += 4;
+        //             index2 += 1;
+        //             var_ctr -= 1;
+        //             if (var_ctr == 0) {
+        //                 var_r0 = 0;
+        //             } else {
+        //                 goto loop_11;
+        //             }
+        //         }
+        pokemon_kind = var_r0;
+    } else {
+        pokemon_kind = db_80225D1C();
+        if (pokemon_kind == Pokemon_ID_Tosakinto) {
+            pokemon_kind = it_8027A4D4(item);
+        } else {
+            pokemon_kind--;
+        }
+        if ((pokemon_kind == Pokemon_ID_Metamon) &&
+            ((it_8026B3C0(Pokemon_Metamon) != 0) || (ftLib_800860C4() == 4)))
+        {
+            pokemon_kind = Pokemon_ID_Tosakinto;
+        }
+    }
+    item = item_gobj->user_data;
+    spawn.vel.z = 0.0f;
+    spawn.vel.x = 0.0f;
+    spawn.vel.y =
+        ((it_279D_DatAttrs*) item->xC4_article_data->x4_specialAttributes)->x8;
+    spawn.prev_pos = item->pos;
+    spawn.prev_pos.z = 0.0f;
+    it_8026BB88(item_gobj, &spawn.pos);
+    spawn.x3C_damage = 0;
+    spawn.facing_dir = it_8026B6A8(&spawn.prev_pos, item->owner);
+    it_kind = pokemon_kind + Pokemon_Tosakinto;
+    spawn.kind = it_kind;
+    spawn.x0_parent_gobj = item->owner;
+    spawn.x4_parent_gobj2 = (HSD_GObj*) item_gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    if (spawn.kind == Pokemon_Cerebi) {
+        gm_80172C04();
+    }
+    if (spawn.kind == Pokemon_Mew) {
+        gm_80172BC4();
+    }
+    spawn_gobj = Item_80268B18(&spawn);
+    if (spawn_gobj != NULL) {
+        it_8027AAA0(item_gobj, spawn_gobj->user_data, spawn.kind);
+        pl_8003E70C(spawn_gobj);
+        db_80225DD8(spawn_gobj, (Fighter_GObj*) item->owner);
+        it_8027B288(spawn_gobj, (u32) 0x440060);
+        it_8027B564(spawn_gobj);
+        return true;
+    }
+    return false;
+}
+
+void it_8027ADEC(int arg0, Item_GObj* item_gobj, HSD_JObj* arg2, f32 arg3)
+{
+    f32 sp1C;
+    f32 scale;
+    Item* item;
+
+    // sp1C = 1.0f;
+    item = item_gobj->user_data;
+    scale = item->xCC_item_attr->x60_scale;
+    sp1C = scale * (1.0f / arg3);
+    efSync_Spawn(arg0, item_gobj, arg2, &sp1C, scale);
+}
+
+bool it_8027AE34(Item_GObj* item_gobj)
+{
+    Quaternion rotate;
+    HSD_JObj* item_jobj;
+    Item* item;
+    PAD_STACK(4);
+
+    item_jobj = item_gobj->hsd_obj;
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    rotate = it_803B8588;
+    item->x40_vel.x = -item->x40_vel.x * item->xC70;
+    item->facing_dir = -item->facing_dir;
+    item->xD44_lifeTimer = item->xD48_halfLifeTimer;
+    rotate.y = M_PI_2 * item->facing_dir;
+    HSD_JObjSetRotation(item_jobj, &rotate);
+    return false;
+}
+
+bool it_8027AF50(Item_GObj* item_gobj)
+{
+    Quaternion rotate;
+    HSD_JObj* item_jobj;
+    Item* item;
+    PAD_STACK(4);
+
+    item_jobj = item_gobj->hsd_obj;
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    rotate = it_803B8598;
+    lbVector_Mirror(&item->x40_vel, &item->xC58);
+    it_80272980(item_gobj);
+    rotate.y = M_PI_2 * item->facing_dir;
+    HSD_JObjSetRotation(item_jobj, &rotate);
+    return false;
+}
+
+void it_8027B070(Item_GObj* item_gobj, Fighter_GObj* owner_gobj)
+{
+    Fighter* fighter;
+    Item* item;
+
+    fighter = owner_gobj->user_data;
+    item = item_gobj->user_data;
+    item->xD88_attackID = fighter->x2068_attackID;
+    item->xD8C_attack_instance = fighter->x206C_attack_instance;
+    item->xD90 = fighter->x2070;
+    item->xD94 = fighter->x2074.x2074_vec;
+    item->xD9C = fighter->x2074.x207C;
+    item->xDA4_word = fighter->x2074.x2084;
+    item->xDA8_short = fighter->x2074.x2088;
+}
+
+void it_8027B0C4(Item_GObj* item_gobj, SpawnItem* spawn)
+{
+    // s32 sp24;
+    Item* spawn_item;
+    Item* owner_item;
+    Fighter* owner_fighter;
+    PAD_STACK(28);
+
+    if (ftLib_80086960(spawn->x0_parent_gobj)) {
+        if (ftLib_80086960(spawn->x4_parent_gobj2)) {
+            spawn_item = item_gobj->user_data;
+            owner_fighter = spawn->x4_parent_gobj2->user_data;
+            spawn_item->xD88_attackID = owner_fighter->x2068_attackID;
+            spawn_item->xD8C_attack_instance =
+                (s16) owner_fighter->x206C_attack_instance;
+            spawn_item->xD90 = owner_fighter->x2070;
+            spawn_item->xD94 = owner_fighter->x2074.x2074_vec;
+            spawn_item->xD9C = owner_fighter->x2074.x207C;
+            spawn_item->xDA4_word = owner_fighter->x2074.x2084;
+            spawn_item->xDA8_short = owner_fighter->x2074.x2088;
+            return;
+        }
+        spawn_item = item_gobj->user_data;
+        owner_item = spawn->x4_parent_gobj2->user_data;
+        spawn_item->xD88_attackID = owner_item->xD88_attackID;
+        spawn_item->xD8C_attack_instance =
+            (s16) owner_item->xD8C_attack_instance;
+        spawn_item->xD90 = owner_item->xD90;
+        spawn_item->xD94 = owner_item->xD94;
+        spawn_item->xD9C = owner_item->xD9C;
+        spawn_item->xDA4_word = owner_item->xDA4_word;
+        spawn_item->xDA8_short = owner_item->xDA8_short;
+        return;
+    }
+    spawn_item = item_gobj->user_data;
+    // sp24 = 0;
+    spawn_item->xD88_attackID = 1;
+    spawn_item->xD8C_attack_instance = 0;
+    // spawn_item->xD90.x2070_int = sp24;
+    // spawn_item->xD90.x2070_int = spawn_item->xD8C_attack_instance = 0;
+    spawn_item->xD90.x2070_int = 0;
+    ft_80089768(&spawn_item->xD94);
+    spawn_item->xDA8_short = 0;
+}
+
+void it_8027B1F4(Item_GObj* item_gobj)
+{
+    // void it_8027B1F4(Item_GObj* item_gobj, int arg4) {
+    // s32 sp10;
+    Item* item;
+    struct Struct2074* temp_r3;
+    PAD_STACK(8);
+
+    // item = GET_ITEM((HSD_GObj*) item_gobj);
+    item = item_gobj->user_data;
+    // sp10 = 0;
+    item->xD88_attackID = 1;
+    item->xD8C_attack_instance = 0;
+    // item->xD90.x2070_int = sp10;
+    item->xD90.x2070_int = 0;
+    item->xDA8_short = 0;
+    if (ftLib_80086960(item->owner)) {
+        temp_r3 = ft_800898A8((Fighter_GObj*) item->owner);
+        item->xD94 = temp_r3->x2074_vec;
+        item->xD9C = temp_r3->x207C;
+        item->xDA4_word = temp_r3->x2084;
+        return;
+    }
+    ft_80089768(&item->xD94);
+    // ft_80089768(&item->xD94, arg4);
+    // ft_80089768(item->xD94, temp_r3->x207C);
+}
+
+void it_8027B288(Item_GObj* item_gobj, u32 arg1)
+{
+    union Struct2070 sp14;
+    union Struct2070 spC;
+    Item* item;
+    struct Struct2074* temp_r3;
+
+    spC.x2070_int = arg1;
+    item = item_gobj->user_data;
+    sp14 = spC;
+    // if ((sp14.flags.x0 == 0) || (sp14.flags.x0 != (u8) item->unkD93)) {
+    if ((sp14.x2073 == 0) || (sp14.x2073 != item->xD90.x2073)) {
+        item->xDA8_short = plAttack_80037B08();
+    }
+    item->xD90 = sp14;
+    if (ftLib_80086960(item->owner)) {
+        temp_r3 = ft_800898A8((Fighter_GObj*) item->owner);
+        item->xD94 = temp_r3->x2074_vec;
+        item->xD9C = temp_r3->x207C;
+        item->xDA4_word = temp_r3->x2084;
+        return;
+    }
+    ft_80089768(&item->xD94);
+}
+
+void it_8027B330(Item_GObj* item_gobj, u32 arg1)
+{
+    Item* item;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    if ((arg1 == 1U) || ((s32) arg1 != item->xD88_attackID)) {
+        item->xD88_attackID = arg1;
+        item->xD8C_attack_instance = plStale_IncrementAttackInstance();
+    }
+}
+
+void it_8027B378(Fighter_GObj* fighter_gobj, Item_GObj* item_gobj, f32 arg2)
+{
+    s32 temp_r31;
+    u8 temp_r30;
+    u16 temp_r3;
+    PAD_STACK(4);
+
+    if (it_8026B6C8(item_gobj)) {
+        temp_r30 = ft_80089884(fighter_gobj)->x2073;
+        temp_r31 = ftLib_800874BC((HSD_GObj*) fighter_gobj);
+        temp_r3 = ftLib_80086BE0((HSD_GObj*) fighter_gobj);
+        pl_8003EB30(arg2, temp_r3, temp_r31, 6, 0, temp_r30);
+    }
+}
+
+void it_8027B408(Item_GObj* item_gobj1, Item_GObj* item_gobj2, f32 arg8)
+{
+    HSD_GObj* item1_owner_gobj;
+    s32 temp_r31;
+    u16 temp_r3;
+    Item* item1;
+
+    if (it_8026B6C8(item_gobj2)) {
+        item1 = item_gobj1->user_data;
+        if (ftLib_80086960(item1->owner)) {
+            item1_owner_gobj = item1->owner;
+            temp_r31 = ftLib_800874BC(item1_owner_gobj);
+            temp_r3 = ftLib_80086BE0(item1_owner_gobj);
+            pl_8003EB30(arg8, temp_r3, temp_r31, 6, 0, item1->xD90.x2073);
+        }
+    }
+}
+
+void it_8027B4A4(Fighter_GObj* item_gobj1, Item_GObj* item_gobj2)
+{
+    void* temp_r31;
+
+    if (it_8026B6C8(item_gobj2)) {
+        temp_r31 = (void*) ft_800898A8(item_gobj1);
+        pl_800384DC((HSD_GObj*) item_gobj1, ft_80089884(item_gobj1)->x2073,
+                    temp_r31);
+    }
+}
+
+void it_8027B508(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
+{
+    Item* item1;
+
+    if (it_8026B6C8(item_gobj2)) {
+        item1 = item_gobj1->user_data;
+        if (ftLib_80086960(item1->owner)) {
+            pl_800384DC((HSD_GObj*) item1->owner, item1->xD90.x2073,
+                        &item1->xD94);
+        }
+    }
+}
+
+void it_8027B564(Item_GObj* item_gobj)
+{
+    union Struct2070 sp10;
+    Item* item;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    if (ftLib_80086960(item->owner)) {
+        sp10 = item->xD90;
+        pl_80037DF4(item->owner, &sp10);
+    }
+}
+
+Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
+                       bool chk)
+{
+    Item* spawn_item;
+    SpawnItem spawn;
+    Vec3 sp20;
+    Item_GObj* spawn_gobj;
+    PAD_STACK(4);
+
+    spawn.kind = kind;
+    if (pos != NULL) {
+        spawn.prev_pos = *pos;
+    } else if (jobj != NULL) {
+        lb_8000B1CC(jobj, NULL, &sp20);
+        spawn.prev_pos = sp20;
+    } else {
+        OSReport(&it_803F5428);
+    loop_5:
+        goto loop_5;
+    }
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = it_8026B684(&spawn.prev_pos);
+    spawn.x3C_damage = 0;
+    spawn.x44_flag.b0 = 1;
+    if (vel != NULL) {
+        spawn.vel = *vel;
+    } else {
+        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    }
+    spawn.x0_parent_gobj = NULL;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x40 = 0;
+    if (chk == true) {
+        spawn_gobj = Item_80268B18(&spawn);
+    } else {
+        spawn_gobj = Item_80268B5C(&spawn);
+    }
+    if (spawn_gobj != NULL) {
+        spawn_item = spawn_gobj->user_data;
+        spawn_item->xDD4_itemVar.it_27B5.x0 = jobj;
+        spawn_item->xDD4_itemVar.it_27B5.x4 = -1;
+        spawn_item->xDD4_itemVar.it_27B5.x14.z = 0.0f;
+        spawn_item->x378_itemColl.x34_flags.b1234 = 3;
+    }
+    return spawn_gobj;
+}
+
+void it_8027B730(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->xDD4_itemVar.it_27B5.x0 = 0;
+    item->xDD4_itemVar.it_27B5.x4 = -1;
+    item->xDD4_itemVar.it_27B5.x8.z = 0.0f;
+    item->xDD4_itemVar.it_27B5.x8.x = 0.0f;
+    item->xDD4_itemVar.it_27B5.x8.y = 1.0f;
+    item->xDD4_itemVar.it_27B5.x14.x = 0;
+    item->xDD4_itemVar.it_27B5.x14.y = 0;
+    item->xDD4_itemVar.it_27B5.x14.z = 0;
+    it_80275228(item_gobj);
+    it_80275240(item_gobj);
+}
+
+bool it_8027B798(Item_GObj* item_gobj, Vec3* arg1)
+{
+    Vec3 sp14;
+    Item* item;
+    Vec3* temp_r31_2;
+    f32 temp_f1;
+    f32 temp_f2;
+    f32 temp_f30;
+    f32 temp_f31;
+    f32 temp_f3;
+    f32 temp_f4;
+    f32 temp_f5;
+    f32 angle;
+    s32 degree_angle;
+    bool ret_chk;
+    PAD_STACK(8);
+
+    ret_chk = false;
+    item = item_gobj->user_data;
+    degree_angle = item->xCAC_angle;
+    temp_f1 = item->xCC8_knockback;
+    temp_f31 = temp_f1 * p_ftCommonData->x100;
+    if (degree_angle != 361) {
+        angle = 0.0174533f * (f32) degree_angle;
+    } else if (item->ground_or_air == GA_Air) {
+        angle = p_ftCommonData->x144;
+    } else {
+        temp_f3 = p_ftCommonData->x14C;
+        if (temp_f1 < temp_f3) {
+            angle = 0.0f;
+        } else {
+            temp_f4 = p_ftCommonData->x148;
+            temp_f5 = 0.0174533f * temp_f4;
+            angle =
+                0.0174533f * ((temp_f4 * ((temp_f1 - temp_f3) /
+                                          (p_ftCommonData->x150 - temp_f3))) +
+                              1.0f);
+            if (angle > temp_f5) {
+                angle = temp_f5;
+            }
+        }
+    }
+    temp_f30 = temp_f31 * cosf(angle);
+    temp_f2 = temp_f31 * sinf(angle);
+    item->facing_dir = item->xCCC_incDamageDirection;
+    if (item->ground_or_air == GA_Air) {
+        arg1->x = -temp_f30 * item->facing_dir;
+        arg1->y = temp_f2;
+        arg1->z = 0.0f;
+    } else {
+        temp_r31_2 = &item->x378_itemColl.floor.normal;
+        sp14.x = -temp_f30 * item->facing_dir;
+        sp14.y = temp_f2;
+        sp14.z = 0.0f;
+        if (lbVector_Angle(temp_r31_2, &sp14) < 1.5708f)
+        { // Should this be M_PI_2?
+            ret_chk = true;
+            arg1->x = sp14.x;
+            arg1->y = sp14.y;
+            arg1->z = 0.0f;
+        } else {
+            arg1->x = temp_r31_2->y * sp14.x;
+            arg1->y = -temp_r31_2->x * sp14.x;
+            arg1->z = 0.0f;
+        }
+    }
+    return ret_chk;
+}
+
+void it_8027B964(Item_GObj* item_gobj, bool chk)
+{
+    Vec3 sp14;
+    Item* item;
+    f32 scale;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    if (chk != 0) {
+        it_8027781C(item_gobj);
+    } else {
+        it_8027B798(item_gobj, &item->x40_vel);
+        if ((item->x40_vel.x == 0.0f) && (item->x40_vel.y == 0.0f)) {
+            item->x40_vel.x = 0.1f * -item->xCCC_incDamageDirection;
+            item->x40_vel.y = 0.1f;
+        }
+        if (item->x40_vel.y == 0.0f) {
+            item->x40_vel.y = 0.1f;
+        }
+    }
+    sp14 = item->x40_vel;
+    lbVector_Normalize(&sp14);
+    scale =
+        ((it_27B5_DatAttrs*) ((Article*) it_804D6D40)->x4_specialAttributes)
+            ->scale;
+    sp14.x *= scale;
+    sp14.y *= scale;
+    sp14.z *= scale;
+    item->x40_vel = sp14;
+}
+
+// static inline u32 copy(u32 len, Vec3* src, Vec3* dst) {
+//     *dst = *src;
+//     return len;
+// }
+
+void it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
+{
+    Vec3 sp20;
+    Vec3 sp14;
+    Item* item;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    Camera_80030788(&sp20);
+    sp20.x = ((10.0f * (HSD_Randf() - it_804DC7F8)) + sp20.x);
+    sp20.y += 30.0f * HSD_Randf();
+    lbVector_Diff(&sp20, &item->pos, &sp14);
+    lbVector_Normalize(&sp14);
+    sp14.x *= 10.0f;
+    sp14.y *= 10.0f;
+    sp14.z *= 10.0f;
+    // copy(3, &sp14, arg1);
+    *arg1 = sp14;
+}
+
+void it_8027BB1C(Vec3* arg0, Vec3* arg1)
+{
+    f32 cos;
+    f32 sin;
+    f32 t1;
+    f32 t2;
+
+    {
+        cos = cosf(arg1->x);
+        sin = sinf(arg1->x);
+        t1 = arg0->y;
+        t2 = arg0->z;
+        arg0->y = (t1 * cos) - (t2 * sin);
+        arg0->z = (t1 * sin) + (t2 * cos);
+    }
+
+    {
+        cos = cosf(arg1->y);
+        sin = sinf(arg1->y);
+        t1 = arg0->x;
+        t2 = arg0->z;
+        arg0->x = (t1 * cos) + (t2 * sin);
+        arg0->z = (t2 * cos) - (t1 * sin);
+    }
+
+    {
+        cos = cosf(arg1->z);
+        sin = sinf(arg1->z);
+        t1 = (arg0->x * cos) - (arg0->y * sin);
+        t2 = (arg0->x * sin) + (arg0->y * cos);
+        arg0->x = t1;
+        arg0->y = t2;
+    }
+}
+
+void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
+{
+    f32 temp_f1;
+    f32 temp_f30;
+    f32 var_f29;
+    f32 var_f28;
+    Vec3 sp74;
+    Vec3 sp68;
+    Vec3 sp5C;
+    Vec3 sp50;
+    Vec3 sp44;
+    Vec3 sp38;
+    HSD_JObj* item_jobj;
+    Item* item;
+    CollData* coll;
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item_jobj = item_gobj->hsd_obj;
+    coll = &item->x378_itemColl;
+    sp68 = it_803B85A8[2];
+    sp5C = it_803B85A8[3];
+
+    if (!arg_chk) {
+        if (coll->env_flags & MPCOLL_UNK) {
+            sp68 = coll->floor.normal;
+            goto block_7;
+        }
+        return;
+    } else if (coll->env_flags & MPCOLL_CEIL) {
+        sp68 = coll->ceiling.normal;
+        goto block_7;
+    }
+    return;
+
+block_7:
+
+    sp74.x = HSD_JObjGetRotationX(item_jobj);
+    sp74.y = HSD_JObjGetRotationY(item_jobj);
+    sp74.z = HSD_JObjGetRotationZ(item_jobj);
+
+    it_8027BB1C(&sp5C, &sp74);
+    if (lbVector_AngleXY(&item->xDD4_itemVar.it_27B5.x8, &sp68) > deg_to_rad) {
+        item->xDD4_itemVar.it_27B5.x8 = sp68;
+        item->xDD4_itemVar.it_27B5.x14.x = (s32) arg9;
+    }
+    temp_f1 = lbVector_AngleXY(&sp5C, &item->xDD4_itemVar.it_27B5.x8);
+    if ((temp_f1 < deg_to_rad) || item->xDD4_itemVar.it_27B5.x14.x < 2) {
+        var_f29 = sp68.x;
+        var_f28 = sp68.y;
+    } else {
+        var_f29 = temp_f1 / (f32) item->xDD4_itemVar.it_27B5.x14.x;
+        item->xDD4_itemVar.it_27B5.x14.x--;
+        if (((sp5C.x * sp68.y) - (sp5C.y * sp68.x)) < 0) {
+            var_f29 = -var_f29;
+        }
+        temp_f30 = cosf(var_f29);
+        temp_f1 = sinf(var_f29);
+        var_f29 = (sp5C.x * temp_f30) - (sp5C.y * temp_f1);
+        var_f28 = (sp5C.x * temp_f1) + (sp5C.y * temp_f30);
+    }
+
+    sp44 = it_803B85A8[0];
+    sp50 = it_803B85A8[1];
+    lbVector_Rotate(&sp50, 2, M_PI_2 * arg8);
+    lbVector_Rotate(&sp44, 2, M_PI_2 * arg8);
+
+    sp38.x = var_f29;
+    sp38.y = var_f28;
+    sp38.z = 0.0f;
+    lbVector_CrossprodNormalized(&sp38, &sp50, &sp44);
+    lbVector_CrossprodNormalized(&sp44, &sp38, &sp50);
+    lbVector_EulerAnglesFromONB(&sp74, &sp50, &sp44, &sp38);
+
+    HSD_JObjSetRotationX(item_jobj, sp74.x);
+    HSD_JObjSetRotationY(item_jobj, sp74.y);
+    HSD_JObjSetRotationZ(item_jobj, sp74.z);
+}
+
+// Might take in and pass more vars
+void it_8027C0A8(Item_GObj* item_gobj, f32 arg4, f32 arg5)
+{
+    it_8027BBF4(item_gobj, false, arg4, arg5);
+}
+
+// Might take in and pass more vars
+void it_8027C0CC(Item_GObj* item_gobj, f32 arg4, f32 arg5)
+{
+    it_8027BBF4(item_gobj, true, arg4, arg5);
+}
+
+void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
+{
+    f32 temp_f1;
+    f32 temp_f30;
+    f32 var_f29;
+    f32 var_f28;
+    Vec3 sp74;
+    Vec3 sp68;
+    Vec3 sp5C;
+    Vec3 sp50;
+    Vec3 sp44;
+    Vec3 sp38;
+    Item* item = GET_ITEM((HSD_GObj*) item_gobj);
+    HSD_JObj* item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+    PAD_STACK(4);
+
+    sp68 = it_803B85A8[4];
+    sp5C = it_803B85A8[5];
+
+    if (item->x378_itemColl.env_flags & MPCOLL_UNK) {
+        if (arg1 != NULL) {
+            sp68 = *arg1;
+        }
+        sp74.x = HSD_JObjGetRotationX(item_jobj);
+        sp74.y = HSD_JObjGetRotationY(item_jobj);
+        sp74.z = HSD_JObjGetRotationZ(item_jobj);
+        it_8027BB1C(&sp5C, &sp74);
+
+        if (lbVector_AngleXY(&item->xDD4_itemVar.it_27B5.x8, &sp68) >
+            deg_to_rad)
+        {
+            item->xDD4_itemVar.it_27B5.x8 = sp68;
+            item->xDD4_itemVar.it_27B5.x14.x = (s32) arg9;
+        }
+        temp_f1 = lbVector_AngleXY(&sp5C, &item->xDD4_itemVar.it_27B5.x8);
+        if ((temp_f1 < deg_to_rad) || item->xDD4_itemVar.it_27B5.x14.x < 2) {
+            var_f29 = sp68.x;
+            var_f28 = sp68.y;
+        } else {
+            var_f29 = temp_f1 / (f32) item->xDD4_itemVar.it_27B5.x14.x;
+            item->xDD4_itemVar.it_27B5.x14.x--;
+            if (((sp5C.x * sp68.y) - (sp5C.y * sp68.x)) < 0) {
+                var_f29 = -var_f29;
+            }
+            temp_f30 = cosf(var_f29);
+            temp_f1 = sinf(var_f29);
+            var_f29 = (sp5C.x * temp_f30) - (sp5C.y * temp_f1);
+            var_f28 = (sp5C.x * temp_f1) + (sp5C.y * temp_f30);
+        }
+
+        sp44 = it_803B85A8[0];
+        sp50 = it_803B85A8[1];
+        lbVector_Rotate(&sp50, 2, M_PI_2 * arg8);
+        lbVector_Rotate(&sp44, 2, M_PI_2 * arg8);
+        sp38.x = var_f29;
+        sp38.y = var_f28;
+        sp38.z = 0.0f;
+        lbVector_CrossprodNormalized(&sp38, &sp50, &sp44);
+        lbVector_CrossprodNormalized(&sp44, &sp38, &sp50);
+        lbVector_EulerAnglesFromONB(&sp74, &sp50, &sp44, &sp38);
+
+        HSD_JObjSetRotationX(item_jobj, sp74.x);
+        HSD_JObjSetRotationY(item_jobj, sp74.y);
+        HSD_JObjSetRotationZ(item_jobj, sp74.z);
+    }
+}
+
+void it_8027C56C(Item_GObj* item_gobj, f32 y_rot)
+{
+    Item* item;
+    HSD_JObj* item_jobj;
+    // char msg = it_803F5428;
+
+    item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    HSD_JObjSetRotationX(item_jobj, 0.0f);
+    HSD_JObjSetRotationY(item_jobj, M_PI_2 * y_rot);
+    HSD_JObjSetRotationZ(item_jobj, 0.0f);
+
+    item->xDD4_itemVar.it_27B5.x8.z = 0.0f;
+    item->xDD4_itemVar.it_27B5.x8.x = 0.0f;
+    item->xDD4_itemVar.it_27B5.x8.y = 1.0f;
+    item->xDD4_itemVar.it_27B5.x14.x = 0U;
+}
 
 bool it_8027C794(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8027C79C
+bool it_8027C79C(Item_GObj* item_gobj)
+{
+    Item* item;
+    PAD_STACK(4);
 
-/// #it_8027C824
+    if (it_8026DAA8(item_gobj) & 0xF) {
+        item = GET_ITEM((HSD_GObj*) item_gobj);
+        it_8027C9D8(item);
+        it_8027B964(item_gobj, 1);
+        item->xDD4_itemVar.it_27B5.x14.y++;
+        // if (item->xDD4_itemVar.it_27B5.x14.y > (f32) (u8) &it_804D6D40) {
+        // if (item->xDD4_itemVar.it_27B5.x14.y > ((ItemAttr*) ((Article*)
+        // it_804D6D40)->x0_common_attr)->x0_is_heavy) {
+        if (item->xDD4_itemVar.it_27B5.x14.y > ((S32Vec3*) it_804D6D40)->x) {
+            it_8027CC88(item_gobj);
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #it_8027C8B0
+bool it_8027C824(Item_GObj* item_gobj, s32 (*arg_func)(Item_GObj*))
+{
+    s32 arg_func_ret_val;
 
-/// #it_8027C8D0
+    if (it_8026DAA8(item_gobj) & 0xF) {
+        it_8027CC88(item_gobj);
+        if (arg_func != NULL) {
+            arg_func_ret_val = arg_func(item_gobj);
+            if (arg_func_ret_val != 0) {
+                it_8027CE44(item_gobj);
+            }
+            return arg_func_ret_val;
+        }
+        it_8027CE44(item_gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #it_8027C9D8
+void it_8027C8B0(Item_GObj* item_gobj)
+{
+    grZakoGenerator_801CAC14();
+}
 
-/// #it_8027CA7C
+static inline float product_xyz(Vec3* a, Vec3* b)
+{
+    return (a->x * b->x + a->y * b->y + a->z * b->z);
+}
 
-/// #it_8027CAD8
+static inline float return_sqrt_value3(Vec3* v)
+{
+    return sqrtf(product_xyz(v, v));
+}
 
-/// #it_8027CB3C
+void it_8027C8D0(Vec3* arg0, Vec3* arg1, f32 arg8)
+{
+    f32 dir;
+    f32 vec_mag;
+    f32 var_f6;
+    Vec3 sp1C;
 
-/// #it_8027CBA4
+    vec_mag = return_sqrt_value3(arg0);
+    sp1C = *arg1;
+    if (arg8 > 0.0f) {
+        dir = -1.0f;
+        var_f6 = 0.00000000680742f;
+    } else if (arg8 < 0.0f) {
+        dir = 1.0f;
+        var_f6 = 0.00000000680742f;
+    } else {
+        arg0->z = 0.0f;
+        arg0->y = 0.0f;
+        arg0->x = 0.0f;
+        return;
+    }
 
-/// #it_8027CBFC
+    arg0->x = vec_mag * ((sp1C.x * var_f6) - (sp1C.y * dir));
+    arg0->y = vec_mag * ((sp1C.x * dir) + (sp1C.y * var_f6));
+    arg0->z = 0.0f;
+}
 
-/// #it_8027CC88
+void it_8027C9D8(Item* item)
+{
+    s32 spC[4];
+    s32 var_r3;
 
-/// #it_8027CE18
+    *(s64*) spC = *(s64*) it_803B85F0;
+    *((s64*) spC + 1) = *((s64*) it_803B85F0 + 1);
 
-/// #it_8027CE44
+    var_r3 = spC[HSD_Randi(4)];
+    while (var_r3 == item->xDD4_itemVar.it_27B5.x14.z) {
+        var_r3 = spC[HSD_Randi(4)];
+    }
+    item->xDD4_itemVar.it_27B5.x14.z = var_r3;
+    Item_8026AE84(item, item->xDD4_itemVar.it_27B5.x14.z, 127, 64);
+}
 
-/// #it_8027CE64
+bool it_8027CA7C(HSD_GObj* gobj)
+{
+    bool chk;
+
+    chk = false;
+    if (ftLib_80086C0C(gobj) == 0x14E) {
+        chk = true;
+    }
+    if (ftLib_80086C0C(gobj) == 0x14D) {
+        chk = true;
+    }
+    return chk;
+}
+
+void it_8027CAD8(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->x40_vel.y = 0.0f;
+    item->x40_vel.x = 0.0f;
+    it_8027542C(item_gobj);
+    it_80275444(item_gobj);
+    it_80274740(item_gobj);
+    item->owner = NULL;
+    it_80275270(item_gobj);
+}
+
+void it_8027CB3C(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    it_8026C220(item_gobj, item->owner);
+    item->facing_dir = ftLib_800865C0(item->owner);
+    it_80275414(item_gobj);
+    it_80275474(item_gobj);
+    it_802762BC(item);
+    it_8026B3A8(item_gobj);
+}
+
+void it_8027CBA4(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    item->facing_dir = ftLib_800865C0(item->owner);
+    it_802762BC(item);
+    it_802754D4(item_gobj);
+    it_8026B3A8(item_gobj);
+}
+
+f32 it_8027CBFC(Item_GObj* item_gobj)
+{
+    s32 ret_val;
+    PAD_STACK(4);
+
+    ret_val = 0U;
+    switch (GET_ITEM((HSD_GObj*) item_gobj)->xCC4) {
+    case 6:
+    case 7:
+        ret_val = *(f32*) ((u8*) it_804D6D40 + 0xC);
+        // ret_val = *(f32*) &((Article*) it_804D6D40)->xC_itemStates;
+        break;
+    case 9:
+        ret_val = *(f32*) ((u8*) it_804D6D40 + 0x10);
+        // ret_val = *(f32*) &((Article*) it_804D6D40)->x10_modelDesc;
+        break;
+    case 4:
+    case 5:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+        break;
+    }
+    return (f32) ret_val;
+}
+
+Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
+{
+    s32 temp_r3;
+    s32 temp_r3_2;
+    s32 var_r30;
+    Item_GObj* item_gobj_var;
+    Item* var_item;
+    u32 pad[20];
+    Vec3 sp44;
+    u32 sp1C[10];
+    u32 pad2[4];
+
+    item_gobj_var = NULL;
+    if ((gm_8016B498() != 0) &&
+        (HSD_Randi(*(f32*) ((u8*) it_804D6D40 + 0x14)) == 0))
+    {
+        if ((u16) grLib_801C9E40() == 0U) {
+            var_r30 = Ground_801C5840();
+            if (var_r30 != -1) {
+                temp_r3 =
+                    un_8031C354(var_r30, (s32(*)[]) & sp1C[0], 0xA, 0x63);
+                temp_r3_2 =
+                    temp_r3 + un_8031C354(var_r30,
+                                          (s32(*)[]) & (&sp1C[0])[temp_r3],
+                                          0xA, 2);
+                if (temp_r3_2 != 0) {
+                    var_r30 = (&sp1C[0])[HSD_Randi(temp_r3_2)];
+                }
+                it_8026BB88(item_gobj_arg, &sp44);
+                item_gobj_var = it_802F2094(0, &sp44, var_r30, 0);
+                if (item_gobj_var != 0) {
+                    var_item = item_gobj_var->user_data;
+                    var_item->x40_vel.x =
+                        ((2.0f * (HSD_Randf() - 0.5f)) *
+                         (*((f32*) &it_804D6D28->x54_float)));
+                    var_item->x40_vel.y = var_item->xCC_item_attr->x18;
+                    var_item->x40_vel.z = 0.0f;
+                    grLib_801C9E50(1);
+                }
+            }
+        } else if ((u16) grLib_801C9E40() >=
+                   *((f32*) ((u8*) it_804D6D40 + 0x18)))
+        {
+            grLib_801C9E50(0);
+        } else {
+            grLib_801C9E50(grLib_801C9E40() + 1);
+        }
+    }
+    return item_gobj_var;
+}
+
+void it_8027CE18(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = item_gobj->user_data;
+    pl_8004049C(item->xCB0_source_ply, item->kind);
+}
+
+void it_8027CE44(Item_GObj* item_gobj)
+{
+    grZakoGenerator_801CACB8((Ground_GObj*) item_gobj);
+}
+
+// Appears to be a function for Game&Watch items
+void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
+                 int arg_attr_address)
+{
+    Item* item;
+    GXColor sp18;
+
+    item = item_gobj->user_data;
+    item->xDCF_flag.b3 = true;
+    ftLib_8008770C(fighter_gobj, (void*) &sp18);
+    it_80278574((HSD_GObj*) item_gobj, &sp18);
+    ftLib_80087744(fighter_gobj, &item->xBC8);
+    item->x5C8 = ftLib_800870BC(item->owner, (void**) &item->xBC4);
+    it_80274594(item_gobj);
+    item->xDD4_itemVar.it_27CE.attr =
+        &arg_attr_address; // Or the first var gets set equal to the first
+                           // attribute
+}
