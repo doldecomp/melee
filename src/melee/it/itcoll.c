@@ -1552,7 +1552,7 @@ void it_80271B60(Item_GObj* item_gobj)
                     dir = 1.0f;
                 }
                 item->x70_nudge.x = it_804D6D28->x7C_float * dir;
-                item->xDC0.u8 |= 1;
+                item->xDC0.word |= 1;
             }
             cnt++;
         }
@@ -1628,7 +1628,7 @@ void it_80271D2C(Item_GObj* arg_item_gobj)
                     dir = 1.0f;
                 }
                 arg_item->x70_nudge.x = it_804D6D28->x7C_float * dir;
-                arg_item->xDC0.u8 |= 2;
+                arg_item->xDC0.word |= 2;
             }
         }
         item_gobj = item_gobj->next;
@@ -1699,7 +1699,7 @@ void it_80271F78(Item_GObj* arg_item_gobj)
                     dir = 1.0f;
                 }
                 arg_item->x70_nudge.x = it_804D6D28->x7C_float * dir;
-                arg_item->xDC0.u8 |= 2;
+                arg_item->xDC0.word |= 2;
             }
         }
         item_gobj = item_gobj->next;
@@ -1715,7 +1715,7 @@ void it_802721B8(Item_GObj* item_gobj)
     item->x70_nudge.z = 0.0f;
     item->x70_nudge.y = 0.0f;
     item->x70_nudge.x = 0.0f;
-    item->xDC0.u8 = 0;
+    item->xDC0.word = 0;
     if (!item->xDC8_word.flags.x13) {
         // temp_r3 = item->unkDCB;
         if ((item->xDC8_word.flags.x1A == 1) &&

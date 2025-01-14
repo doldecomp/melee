@@ -6279,7 +6279,8 @@ void it_80275070(Item_GObj* item_gobj, s32 bone_id)
 
 bool it_802750E8(Item_GObj* item_gobj, s32 mask)
 {
-    return ((Item*) item_gobj->user_data)->xDC0.u8 & mask;
+    Item* item = GET_ITEM(item_gobj);
+    return item->xDC0.word & mask;
 }
 
 void it_802750F8(Item_GObj* item_gobj)

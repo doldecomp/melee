@@ -523,7 +523,7 @@ struct Item {
     u32 xDB4_itcmd_var2;
     u32 xDB8_itcmd_var3;
     u32 xDBC_itcmd_var4;
-    UnkFlagStruct xDC0;
+    flag32 xDC0;
     u32 xDC4;
     flag32 xDC8_word;
     struct {
