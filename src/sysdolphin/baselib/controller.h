@@ -84,6 +84,7 @@ struct PadLibData {
 
 extern HSD_PadStatus HSD_PadMasterStatus[4];
 extern HSD_PadStatus HSD_PadGameStatus[4];
+extern HSD_PadStatus HSD_PadCopyStatus[4];
 
 void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);

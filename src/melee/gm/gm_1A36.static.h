@@ -116,6 +116,17 @@ struct fn_801BA3B4_arg0_t {
     /* +C:7 */ u8 xC_b7 : 1;
 };
 
+typedef struct gm_controller_map gm_controller_map;
+struct gm_controller_map {
+    u64 button;
+    u64 trigger;
+    u64 repeat;
+    u64 release;
+    u64 unk;
+    s32 x28;
+    s32 x2C;
+};
+
 /* 1A3F48 */ static void gm_801A3F48(MinorScene*);
 /* 1A4014 */ static void gm_801A4014(MajorScene* scene);
 /* 1A4284 */ static UNK_T gm_801A4284(UNK_T);
@@ -154,6 +165,11 @@ struct fn_801BA3B4_arg0_t {
 /* 1BF684 */ static void gm_801BF684(s16 arg0);
 /* 1BF694 */ static u8 gm_801BF694(void);
 /* 2A3EF4 */ static void gm_801A3EF4(void);
+static u64 gm_803DA788;
+static gm_controller_map gm_80479C30[4];
+static gm_controller_map controller_union;
+void (*gm_80479D20)(s32);
+s32 gm_80479D24;
 /* 3DA920 */ static MajorScene gm_803DA920;
 /* 3DACA4 */ static MajorScene gm_803DACA4;
 /* 3DD2C0 */ static int gm_803DD2C0[74];
