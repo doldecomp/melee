@@ -4,12 +4,14 @@
 #include <platform.h>
 #include <placeholder.h>
 
-/* 1A3680 */ UNK_RET gm_801A3680(UNK_PARAMS);
-/* 1A36A0 */ UNK_RET gm_801A36A0(UNK_PARAMS);
-/* 1A36C0 */ UNK_RET gm_801A36C0(UNK_PARAMS);
-/* 1A36E0 */ UNK_RET gm_801A36E0(UNK_PARAMS);
-/* 1A3714 */ UNK_RET gm_801A3714(UNK_PARAMS);
-/* 1A3820 */ UNK_RET gm_801A3820(UNK_PARAMS);
+#include "gm/types.h"
+
+/* 1A3680 */ u64 gm_801A3680(u8);
+/* 1A36A0 */ u64 gm_801A36A0(u8);
+/* 1A36C0 */ u64 gm_801A36C0(u8);
+/* 1A36E0 */ void gm_801A36E0(s32, s32);
+/* 1A3714 */ void gm_801A3714(s32, u64, u64);
+/* 1A3820 */ void gm_801A3820(s32, u64, u64);
 /* 1A396C */ UNK_RET fn_801A396C(UNK_PARAMS);
 /* 1A3A74 */ UNK_RET gm_801A3A74(UNK_PARAMS);
 /* 1A3E88 */ UNK_RET gm_801A3E88(UNK_PARAMS);
@@ -34,7 +36,7 @@
 /* 1A4B60 */ UNK_RET gm_801A4B60(UNK_PARAMS);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
 /* 1A4B90 */ s32 gm_801A4B90(void);
-/* 1A4B9C */ s32 gm_801A4B9C(void);
+/* 1A4B9C */ s8* gm_801A4B9C(void);
 /* 1A4BA8 */ struct gm_80479D58_t* gm_801A4BA8(void);
 /* 1A4BC8 */ s32 gm_801A4BC8(void);
 /* 1A4BD0 */ UNK_RET fn_801A4BD0(UNK_PARAMS);

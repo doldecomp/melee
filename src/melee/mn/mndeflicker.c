@@ -45,36 +45,35 @@ Vec3 mnDeflicker_803EEFF0 = { 50.0F, 350.0F, 50.0F };
 
 void mnDeflicker_8024A168(HSD_GObj* gobj)
 {
-    unsigned long long ty_permuter;
+    u64 events;
     HSD_JObj* asd[2];
     int stack[5];
     Menu* menu = GET_MENU(mnDeflicker_804D6C38);
     if (mn_804D6BC8.x0 != 0) {
         Menu_DecrementAnimTimer();
         return;
-    } else {
-        ty_permuter = Menu_GetEvents();
-        if ((ty_permuter & 0x20)) {
-            Menu_SFX_Back();
-            gmMainLib_8015F4F4(
-                ((Menu*) mnDeflicker_804D6C38->user_data)->cursor); // inline
-            lb_8001CE00();
-            mn_804A04F0.x11 = 0;
-            mn_80229894(4, 2, 3);
-        } else if (mnDeflicker_804D6C3C && (ty_permuter & 0x200)) {
-            unsigned char x;
-            PAD_STACK(4);
-            Menu_SFX_Move();
-            menu->cursor = (menu->cursor == 0);
-            x = menu->cursor; // inline arg?
-            lb_80011E24(mnDeflicker_804D6C38->hsd_obj, asd, 5, -1);
-            HSD_JObjReqAnimAll(asd[0], (f32) x);
-            mn_8022F3D8(asd[0], 0xFF, 0x20);
-            HSD_JObjAnimAll(asd[0]);
-            gmMainLib_8015F588(x);
-            gmMainLib_8015F4F4(
-                ((Menu*) mnDeflicker_804D6C38->user_data)->cursor); // inline
-        }
+    }
+    events = Menu_GetEvents();
+    if ((events & MenuEvent_Back)) {
+        sfxBack();
+        gmMainLib_8015F4F4(
+            ((Menu*) mnDeflicker_804D6C38->user_data)->cursor); // inline
+        lb_8001CE00();
+        mn_804A04F0.x11 = 0;
+        mn_80229894(4, 2, 3);
+    } else if (mnDeflicker_804D6C3C && (events & MenuEvent_unk4)) {
+        unsigned char x;
+        PAD_STACK(4);
+        sfxMove();
+        menu->cursor = (menu->cursor == 0);
+        x = menu->cursor; // inline arg?
+        lb_80011E24(mnDeflicker_804D6C38->hsd_obj, asd, 5, -1);
+        HSD_JObjReqAnimAll(asd[0], (f32) x);
+        mn_8022F3D8(asd[0], 0xFF, 0x20);
+        HSD_JObjAnimAll(asd[0]);
+        gmMainLib_8015F588(x);
+        gmMainLib_8015F4F4(
+            ((Menu*) mnDeflicker_804D6C38->user_data)->cursor); // inline
     }
 }
 

@@ -46,27 +46,26 @@ static inline void mnHyaku_8024C68C_inline_2(HSD_GObj* gobj)
 
 void mnHyaku_8024C68C(HSD_GObj* arg0)
 {
-    u64 ret;
+    u64 events;
     Menu* menu = GET_MENU(mnHyaku_804D6C58);
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     if (mn_804D6BC8.x0 != 0) {
-        mn_804D6BC8.x0--;
-        mn_804D6BC8.x2 = 0;
-        mn_804D6BC8.x4 = 0;
+        Menu_DecrementAnimTimer();
         return;
     }
-    ret = mn_804A04F0.x8 = mn_80229624(4);
-    if ((ret & 0x20)) {
-        lbAudioAx_80024030(0);
+    events = Menu_GetEvents();
+    if (events & MenuEvent_Back) {
+        sfxBack();
         mn_804A04F0.x11 = 0;
         mn_80229894(9, 2, 3);
         return;
     }
-    if (ret & 0x10) {
-        lbAudioAx_80024030(1);
+    if (events & MenuEvent_Forward) {
+        sfxForward();
         mn_802295AC();
         gm_801677E8();
+        // load the different multi-man melee modes
         switch (menu->cursor) {
         case 0:
             mn_80229860(0x21);
@@ -88,8 +87,8 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
             return;
         }
     } else {
-        if (ret & 4) {
-            lbAudioAx_80024030(2);
+        if (events & MenuEvent_Left) {
+            sfxMove();
             if (menu->cursor == 0) {
                 menu->cursor = 5;
             } else {
@@ -99,8 +98,8 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
             mnHyaku_8024C68C_inline_2(mnHyaku_804D6C58);
             return;
         }
-        if (ret & 8) {
-            lbAudioAx_80024030(2);
+        if (events & MenuEvent_Right) {
+            sfxMove();
             if (menu->cursor == 5) {
                 menu->cursor = 0;
             } else {

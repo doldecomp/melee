@@ -394,12 +394,13 @@ void grKongo_801D577C(HSD_GObj* arg0)
     lb_8000B1CC(temp_r30, NULL, &vec);
     Ground_801C4D70(arg0, &vec, temp_r31->gv.kongo3.xD8);
     switch (temp_r31->gv.kongo3.xC8) {
-    case 0:
+    case 0: {
+        s16 val = temp_r31->gv.kongo2.xCE;
         temp_r31->gv.kongo2.xCE -= 1;
-        if (temp_r31->gv.kongo2.xCE < 0) {
+        if (val < 0) {
             temp_r31->gv.kongo2.xC8 = 1;
         }
-        break;
+    } break;
     case 1:
         temp_r31->gv.kongo2.xE8 += grKg_804D6980->unk5C;
         if (temp_r31->gv.kongo2.xE8 > grKg_804D6980->unk60) {

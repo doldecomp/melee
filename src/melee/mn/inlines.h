@@ -4,7 +4,9 @@
 #include "mn/types.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
+#include <baselib/memory.h>
 #include <baselib/sislib.h>
 
 typedef enum _MenuEvent {
@@ -12,8 +14,14 @@ typedef enum _MenuEvent {
     MenuEvent_Down = 1 << 1,
     MenuEvent_Left = 1 << 2,
     MenuEvent_Right = 1 << 3,
-    MenuEvent_Unk = 1 << 4,
+    MenuEvent_Forward = 1 << 4,
     MenuEvent_Back = 1 << 5,
+    MenuEvent_unk = 1 << 6,
+    MenuEvent_unk2 = 1 << 7,
+    MenuEvent_unk3 = 1 << 8,
+    MenuEvent_unk4 = 1 << 9,
+    MenuEvent_unk5 = 1 << 10,
+    MenuEvent_unk6 = 1 << 11,
 } MenuEvent;
 
 #define GET_MENU(gobj) ((Menu*) HSD_GObjGetUserData(gobj))
@@ -33,17 +41,17 @@ static inline u64 Menu_GetEvents(void)
 // @todo: The functions `fn_8017435C`, `fn_80174338`, and `fn_80174380` are
 // probably deduplicated clones of these.
 
-static inline void Menu_SFX_Back(void)
+static inline void sfxBack(void)
 {
     lbAudioAx_80024030(0);
 }
 
-static inline void Menu_SFX_Forward(void)
+static inline void sfxForward(void)
 {
     lbAudioAx_80024030(1);
 }
 
-static inline void Menu_SFX_Move(void)
+static inline void sfxMove(void)
 {
     lbAudioAx_80024030(2);
 }
