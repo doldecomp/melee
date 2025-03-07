@@ -1,5 +1,7 @@
 #include "itmewtwoshadowball.h"
 
+#include "it/it_26B1.h"
+
 /// #it_802C4D10
 
 /// #it_802C4F50
@@ -76,4 +78,7 @@ bool it_802C6138(Item_GObj* arg0)
 
 /// #it_802C6140
 
-/// #it_802C61D4
+void it_802C61D4(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

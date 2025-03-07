@@ -1,7 +1,6 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "itoctarockstone.h"
 
-#include "it/forward.h"
+#include "it/it_26B1.h"
 
 /// #it_802E878C
 
@@ -48,7 +47,10 @@ bool it_802E896C(void)
 
 /// #it_802E8990
 
-/// #it_802E89B0
+void it_802E89B0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802E89D0
 

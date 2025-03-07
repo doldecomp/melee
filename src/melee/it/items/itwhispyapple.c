@@ -1,5 +1,7 @@
 #include "itwhispyapple.h"
 
+#include "it/it_26B1.h"
+
 /// #it_802EE200
 
 /// #it_802EE374
@@ -71,4 +73,7 @@ bool it_802EEED0(Item_GObj* item_gobj)
 
 /// #it_802EEF68
 
-/// #it_802EEF88
+void it_802EEF88(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
