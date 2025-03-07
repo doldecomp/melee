@@ -1,7 +1,6 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "itmaril.h"
 
-#include "it/forward.h"
+#include "it/it_26B1.h"
 
 /// #it_802D66F8
 
@@ -72,4 +71,7 @@ bool it_802D6848(Item_GObj* arg0)
 
 /// #it_802D6F00
 
-/// #it_802D6FB0
+void it_802D6FB0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

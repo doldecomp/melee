@@ -1,6 +1,7 @@
 #include "itseakneedlethrown.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 
 /// #it_802AFD8C
 
@@ -60,4 +61,7 @@ bool it_802B0C5C(void)
 
 /// #it_802B16E4
 
-/// #it_802B1890
+void it_802B1890(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

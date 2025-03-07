@@ -1,5 +1,6 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "itoctarock.h"
+
+#include "it/it_26B1.h"
 
 /// #it_802E4A44
 
@@ -89,4 +90,7 @@ bool it_802E5900(void)
 
 /// #it_802E595C
 
-/// #it_802E5AA4
+void it_802E5AA4(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

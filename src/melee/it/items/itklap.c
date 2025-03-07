@@ -1,5 +1,6 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "itklap.h"
+
+#include "it/it_26B1.h"
 
 /// #it_802E1820
 
@@ -68,4 +69,7 @@ bool it_802E2154(void)
 
 /// #it_802E2330
 
-/// #it_802E2450
+void it_802E2450(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

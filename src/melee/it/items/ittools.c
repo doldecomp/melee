@@ -1,3 +1,6 @@
+#include "ittools.h"
+
+#include "it/it_26B1.h"
 
 /// #it_802EEFA8
 
@@ -33,4 +36,7 @@ void it_802EF468(void) {}
 
 /// #it_802EF944
 
-/// #it_802EFA24
+void it_802EFA24(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

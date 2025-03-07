@@ -1,3 +1,6 @@
+#include "itpeachtoad.h"
+
+#include "it/it_26B1.h"
 /// #it_802BDE18
 
 /// #it_802BDEFC
@@ -16,4 +19,7 @@
 
 /// #it_802BE168
 
-/// #it_802BE1F4
+void it_802BE1F4(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

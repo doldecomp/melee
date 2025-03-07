@@ -1,5 +1,7 @@
 #include "itwstar.h"
 
+#include "it/it_26B1.h"
+
 /// #it_80294364
 
 /// #it_80294430
@@ -63,4 +65,7 @@ void it_80294A58(void) {}
 
 /// #it_80294A5C
 
-/// #it_80294A90
+void it_80294A90(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
