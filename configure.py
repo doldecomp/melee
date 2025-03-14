@@ -624,7 +624,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/ftstarrodswing.c"),
             Object(NonMatching, "melee/ft/ftlipstickswing.c"),
             Object(NonMatching, "melee/ft/ft_0CDD.c"),
-            Object(NonMatching, "melee/ft/ftattacks4combo.c"),
+            Object(Matching, "melee/ft/ftattacks4combo.c"),
             Object(NonMatching, "melee/ft/ft_0CEE.c"),
             Object(NonMatching, "melee/ft/ftchangeparam.c"),
             Object(NonMatching, "melee/ft/ft_0D14.c"),
