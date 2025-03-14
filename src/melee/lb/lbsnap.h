@@ -5,13 +5,13 @@
 #include <placeholder.h>
 
 /* 01D2BC */ UNK_RET lbSnap_8001D2BC(UNK_PARAMS);
-/* 01D338 */ s32 lbSnap_8001D338(s32 arg0);
+/* 01D338 */ int lbSnap_8001D338(int);
 /* 01D350 */ int lbSnap_8001D350(int i);
-/* 01D394 */ UNK_RET lbSnap_8001D394(UNK_PARAMS);
-/* 01D3B0 */ UNK_RET lbSnap_8001D3B0(UNK_PARAMS);
-/* 01D3CC */ UNK_RET lbSnap_8001D3CC(UNK_PARAMS);
-/* 01D3E8 */ UNK_RET lbSnap_8001D3E8(UNK_PARAMS);
-/* 01D40C */ UNK_RET lbSnap_8001D40C(UNK_PARAMS);
+/* 01D394 */ int lbSnap_8001D394(int);
+/* 01D3B0 */ int lbSnap_8001D3B0(int);
+/* 01D3CC */ int lbSnap_8001D3CC(int);
+/* 01D3E8 */ int lbSnap_8001D3E8(int, int);
+/* 01D40C */ int lbSnap_8001D40C(int);
 /* 01D4A4 */ UNK_RET lbSnap_8001D4A4(UNK_PARAMS);
 /* 01D5FC */ UNK_RET lbSnap_8001D5FC(UNK_PARAMS);
 /* 01D7B0 */ UNK_RET lbSnap_8001D7B0(UNK_PARAMS);

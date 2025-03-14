@@ -1,5 +1,7 @@
 #include "lbsnap.static.h"
 
+#include "lbcardgame.h"
+
 #include <dolphin/card/CARDMount.h>
 
 void lbSnap_8001D2BC(void)
@@ -14,7 +16,7 @@ void lbSnap_8001D2BC(void)
     }
 }
 
-s32 lbSnap_8001D338(s32 arg0)
+int lbSnap_8001D338(int arg0)
 {
     return lb_80433380.x54_stateChanged[arg0];
 }
@@ -28,15 +30,46 @@ int lbSnap_8001D350(int i)
     return ptr->unk0;
 }
 
-/// #lbSnap_8001D394
+int lbSnap_8001D394(int arg0)
+{
+    return lb_80433380.x48[arg0].unk4;
+}
 
-/// #lbSnap_8001D3B0
+int lbSnap_8001D3B0(int arg0)
+{
+    return lb_80433380.x48[arg0].unk8;
+}
 
-/// #lbSnap_8001D3CC
+int lbSnap_8001D3CC(int arg0)
+{
+    return lb_80433380.x48[arg0].unkC;
+}
 
-/// #lbSnap_8001D3E8
+int lbSnap_8001D3E8(int arg0, int arg1)
+{
+    return lb_80433380.x48[arg0].unk16[arg1].unk0;
+}
 
-/// #lbSnap_8001D40C
+int lbSnap_8001D40C(int arg0)
+{
+    struct Unk80433380_48* ptr = &lb_80433380.x48[arg0];
+    lb_80433380.x54_stateChanged[arg0] = 0;
+    ptr->unk0 = lb_8001BFD8(arg0, &ptr->unk10, &ptr->unk8, &ptr->unkC);
+    if (ptr->unk0 == 0) {
+        int i;
+        int j = 0;
+        struct Unk80433380_48* ptr2 = ptr;
+        for (i = 0; i < 0x7F; i++) {
+            if (ptr2->unk14 == -1) {
+                break;
+            }
+            ptr2 += 2;
+            j++;
+        }
+        ptr->unk4 = j;
+    }
+    return ptr->unk0;
+}
 
 /// #lbSnap_8001D4A4
 
