@@ -3854,6 +3854,9 @@ dolphin/os/OSUartExi.c:
 	.text       start:0x8034C86C end:0x8034CABC
 	.sbss       start:0x804D73E8 end:0x804D73F0
 
+dolphin/os/init/__start.c:
+	.init       start:0x800051EC end:0x8000541C
+
 dolphin/os/init/__ppc_eabi_init.c:
 	.init       start:0x8000541C end:0x80005470
 	.text       start:0x8034CABC end:0x8034CB50
