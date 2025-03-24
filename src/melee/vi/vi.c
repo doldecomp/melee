@@ -6,7 +6,17 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 
-char* un_803FFFA8[26];
+char* un_803FFFA8[26] = {
+    "PlCaDViWaitAJ.dat", "PlDkDViWaitAJ.dat", "PlFxDViWaitAJ.dat",
+    "PlGwDViWaitAJ.dat", "PlKbDViWaitAJ.dat", "PlKpDViWaitAJ.dat",
+    "PlLkDViWaitAJ.dat", "PlLgDViWaitAJ.dat", "PlMrDViWaitAJ.dat",
+    "PlMsDViWaitAj.dat", "PlMtDViWaitAJ.dat", "PlNsDViWaitAJ.dat",
+    "PlPeDViWaitAJ.dat", "PlPkDViWaitAJ.dat", "PlPpDViWaitAJ.dat",
+    "PlPrDViWaitAJ.dat", "PlSsDViWaitAJ.dat", "PlYsDViWaitAJ.dat",
+    "PlZdDViWaitAJ.dat", "PlSkDViWaitAJ.dat", "PlFcDViWaitAJ.dat",
+    "PlClDViWaitAJ.dat", "PlDrDViWaitAJ.dat", "PlFeDViWaitAJ.dat",
+    "PlPcDViWaitAJ.dat", "PlGnDViWaitAJ.dat"
+};
 
 char* un_8031C99C(s32 index)
 {
