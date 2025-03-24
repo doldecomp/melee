@@ -197,6 +197,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftstarrodswing.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftlipstickswing.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0CDD.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftattacks4combo.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0CEE.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftchangeparam.s.o\
     $(BUILD_DIR)/asm/melee/ft/ft_0D14.s.o\
