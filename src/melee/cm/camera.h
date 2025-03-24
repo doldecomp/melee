@@ -136,6 +136,6 @@
 /* 0311DC */ void Camera_800311DC(f32 arg8);
 /* 0311EC */ UNK_RET Camera_800311EC(UNK_PARAMS);
 /* 031328 */ UNK_RET Camera_80031328(UNK_PARAMS);
-/* 0313E0 */ UNK_RET Camera_800313E0(UNK_PARAMS);
+/* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
 
 #endif
