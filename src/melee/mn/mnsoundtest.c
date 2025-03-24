@@ -400,7 +400,7 @@ void fn_8024AED0(HSD_GObj* arg0)
         if (temp_r26->unk8 == 0.0f) {
             temp_r26->unk8 = 1.0f;
             temp_r27 = mnSoundTest_804D6C40->user_data;
-            lbAudioAx_800236DC(mnSoundTest_804D6C40);
+            lbAudioAx_800236DC();
             temp_r27->unk2 = 0x50;
         }
     }
