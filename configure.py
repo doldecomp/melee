@@ -1362,6 +1362,7 @@ config.libs = [
             Object(NonMatching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
             Object(NonMatching, "dolphin/os/OSUartExi.c"),
+            Object(Matching, "dolphin/os/init/__start.c"),
             Object(NonMatching, "dolphin/os/init/__ppc_eabi_init.c"),
         ],
     ),
