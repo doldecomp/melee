@@ -755,7 +755,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ty/tydisplay.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/vi/vi.s.o\
+    $(BUILD_DIR)/src/melee/vi/vi.c.o\
     $(BUILD_DIR)/asm/melee/vi/vi0102.s.o\
     $(BUILD_DIR)/asm/melee/vi/vi0401.s.o\
     $(BUILD_DIR)/asm/melee/vi/vi0402.s.o\

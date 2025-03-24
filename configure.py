@@ -1175,7 +1175,7 @@ config.libs = [
     MeleeLib(
         "vi (Visual, cutscenes)",
         [
-            Object(NonMatching, "melee/vi/vi.c"),
+            Object(Matching, "melee/vi/vi.c"),
             Object(NonMatching, "melee/vi/vi0102.c"),
             Object(NonMatching, "melee/vi/vi0401.c"),
             Object(NonMatching, "melee/vi/vi0402.c"),
