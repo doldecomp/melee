@@ -1369,6 +1369,7 @@ def generate_objdiff_config(
         "GC/1.3.2": "mwcc_242_81",
         "GC/1.3.2r": "mwcc_242_81r",
         "GC/2.0": "mwcc_247_92",
+        "GC/2.0p1": "mwcc_247_92p1",
         "GC/2.5": "mwcc_247_105",
         "GC/2.6": "mwcc_247_107",
         "GC/2.7": "mwcc_247_108",
