@@ -1215,6 +1215,81 @@ def generate_build_ninja(
             order_only="post-build",
         )
 
+        n.comment("Phony edge that will always be considered dirty by ninja.")
+        n.comment(
+            "This can be used as an implicit to a target that should always be rerun, ignoring file modified times."
+        )
+        n.build(
+            outputs="always",
+            rule="phony",
+        )
+        n.newline()
+
+        ###
+        # Regression test progress reports
+        ###
+        report_baseline_path = build_path / "baseline.json"
+        report_changes_path = build_path / "report_changes.json"
+        changes_fmt = config.tools_dir / "changes_fmt.py"
+        regressions_md = build_path / "regressions.md"
+        n.comment(
+            "Create a baseline progress report for later match regression testing"
+        )
+        n.build(
+            outputs=report_baseline_path,
+            rule="report",
+            implicit=[objdiff, "all_source", "always"],
+            order_only="post-build",
+        )
+        n.build(
+            outputs="baseline",
+            rule="phony",
+            inputs=report_baseline_path,
+        )
+        n.comment("Check for any match regressions against the baseline")
+        n.comment("Will fail if no baseline has been created")
+        n.rule(
+            name="report_changes",
+            command=f"{objdiff} report changes --format json-pretty {report_baseline_path} $in -o $out",
+            description="CHANGES",
+        )
+        n.build(
+            outputs=report_changes_path,
+            rule="report_changes",
+            inputs=report_path,
+            implicit=[objdiff, "always"],
+        )
+        n.rule(
+            name="changes_fmt",
+            command=f"$python {changes_fmt} $args $in",
+            description="CHANGESFMT",
+        )
+        n.build(
+            outputs="changes",
+            rule="changes_fmt",
+            inputs=report_changes_path,
+            implicit=changes_fmt,
+        )
+        n.build(
+            outputs="changes_all",
+            rule="changes_fmt",
+            inputs=report_changes_path,
+            implicit=changes_fmt,
+            variables={"args": "--all"},
+        )
+        n.rule(
+            name="changes_md",
+            command=f"$python {changes_fmt} $in -o $out",
+            description="CHANGESFMT $out",
+        )
+        n.build(
+            outputs=regressions_md,
+            rule="changes_md",
+            inputs=report_changes_path,
+            implicit=changes_fmt,
+        )
+        n.newline()
+
         ###
         # Helper tools
         ###
