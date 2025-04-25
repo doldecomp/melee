@@ -22,7 +22,7 @@ FUNCTION_KEYS_TO_DIFF = [
     "fuzzy_match_percent",
 ]
 
-type Change = Tuple[str, str, float, float]
+Change = Tuple[str, str, float, float]
 
 
 def get_changes(changes_file: str) -> list[Change]:
