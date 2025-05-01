@@ -38,6 +38,16 @@ union ftCommon_MotionVars {
         /* fp+2360 */ float accel_mul;
     } walk;
     struct {
+        /* fp+2340 */ int x0_int;
+        /* fp+2344 */ float direction_to;
+        /* fp+2348 */ float x8_f32;
+        /* fp+234C */ float xC_f32;
+        /* fp+2350 */ float frames_to_change_direction_on_standing_turn;
+        /* fp+2354 */ float x14_f32;
+        /* fp+2358 */ int x18_int;
+        /* fp+235C */ int x1C_int;
+    } turn;
+    struct {
         /* fp+2340 */ bool x0;
     } attack1;
     struct {

@@ -229,6 +229,13 @@ static inline bool ftCheckThrowB4(Fighter* fp)
     }
 }
 
+static inline bool ftCheckWalkThreshold(Fighter* fp,
+                                        ftCommonData* p_ftCommonData)
+{
+    return fp->input.lstick.x * fp->facing_dir <=
+           p_ftCommonData->x34_walkThresholdMaybe;
+}
+
 static inline void ftOnCloakingDevice(ftCo_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

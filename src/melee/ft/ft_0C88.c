@@ -1,5 +1,6 @@
 #include <placeholder.h>
 
+#include "ft/forward.h"
 #include <dolphin/mtx/forward.h>
 
 #include "ft/ft_0C88.h"
@@ -324,7 +325,7 @@ void fn_800C9198(ftCo_GObj* gobj)
     it_80295F38(GET_FIGHTER(gobj)->mv.co.barrel.item_gobj);
 }
 
-void ftCo_Barrel_Anim(Fighter_GObj* gobj)
+void ftCo_Barrel_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.co.barrel.datAttr_x2C) {
@@ -335,7 +336,7 @@ void ftCo_Barrel_Anim(Fighter_GObj* gobj)
     }
 }
 
-void ftCo_Barrel_IASA(Fighter_GObj* gobj)
+void ftCo_Barrel_IASA(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp;
 
@@ -443,7 +444,7 @@ bool ftCo_800C94B4(ftCo_GObj* gobj)
 }
 
 /* work on later
-void fn_800C9528(Fighter_GObj* gobj, f32 arg1)
+void fn_800C9528(ftCo_GObj* gobj, f32 arg1)
 {
     Fighter* fp;
     f32* x2DC;
@@ -494,17 +495,67 @@ void ftCo_Walk_IASA(ftCo_GObj* gobj)
     }
 }
 
-/// #ftCo_Walk_Phys
+void ftCo_Walk_Phys(ftCo_GObj* gobj)
+{
+    ftWalkCommon_800E0060(gobj);
+}
 
-/// #ftCo_Walk_Coll
+void ftCo_Walk_Coll(ftCo_GObj* gobj)
+{
+    ft_80084280(gobj);
+}
 
-/// #ftCo_800C97A8
+bool ftCo_800C97A8(ftCo_GObj* gobj)
+{
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    if (ftCheckWalkThreshold(fp, p_ftCommonData)) {
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_Turn_CheckInput
+bool ftCo_Turn_CheckInput(ftCo_GObj* gobj)
+{
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    if (ftCheckWalkThreshold(fp, p_ftCommonData) ? true : false) {
+        fn_800C98AC(gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_800C9840
+void ftCo_800C9840(ftCo_GObj* gobj, FtMotionId msid, MotionFlags flags,
+                   f32 unk3, f32 frames, f32 anim_start)
+{
+    ftCo_Fighter* fp = gobj->user_data;
+    void* unused; // required to match stack
+    // added turn to mv.co
+    fp->mv.co.turn.x0_int = 0;
+    fp->mv.co.turn.x18_int = 0;
+    fp->mv.co.turn.direction_to = -fp->facing_dir;
+    fp->mv.co.turn.frames_to_change_direction_on_standing_turn = frames;
+    fp->mv.co.turn.x8_f32 = unk3;
+    fp->mv.co.turn.x1C_int = 0;
+    Fighter_ChangeMotionState(gobj, msid, flags, anim_start, 1.0F, 0.0F, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
-/// #fn_800C98AC
+void fn_800C98AC(ftCo_GObj* gobj)
+{
+    // turn added to motion vars
+    // co_attrs.frames_to_change_direction_on_standing_turn changed to float in
+    // struct
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.co.turn.x0_int = 0;
+    fp->mv.co.turn.x18_int = 0;
+    fp->mv.co.turn.direction_to = -fp->facing_dir;
+    fp->mv.co.turn.frames_to_change_direction_on_standing_turn =
+        fp->co_attrs.frames_to_change_direction_on_standing_turn;
+    fp->mv.co.turn.x1C_int = 0;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Turn, Ft_MF_None,
+                              fp->mv.co.turn.x8_f32 = 0.0, 1.0, 0.0, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
 /// #ftCo_800C9924
 

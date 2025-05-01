@@ -46,7 +46,8 @@
 /* 0C9788 */ void ftCo_Walk_Coll(ftCo_GObj* gobj);
 /* 0C97A8 */ bool ftCo_800C97A8(ftCo_GObj* gobj);
 /* 0C97DC */ bool ftCo_Turn_CheckInput(ftCo_GObj* gobj);
-/* 0C9840 */ void ftCo_800C9840(ftCo_GObj*, s32, s32, float, float, float);
+/* 0C9840 */ void ftCo_800C9840(Fighter_GObj* gobj, FtMotionId, MotionFlags,
+                                f32, f32, f32);
 /* 0C9924 */ void ftCo_800C9924(ftCo_GObj* gobj);
 /* 0C9970 */ void ftCo_Turn_Anim(ftCo_GObj* gobj);
 /* 0C99F8 */ void ftCo_Turn_IASA(ftCo_GObj* gobj);
