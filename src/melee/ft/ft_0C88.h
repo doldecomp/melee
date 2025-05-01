@@ -5,31 +5,37 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 
 /* 0C884C */ void ftCo_800C884C(ftCo_GObj* gobj);
-/* 0C88A0 */ void ftCo_800C88A0(Fighter*);
-/* 0C88D4 */ void ftCo_800C88D4(ftCo_GObj* gobj, int, bool);
+/* 0C88A0 */ void ftCo_800C88A0(ftCo_Fighter* fp);
+/* 0C88D4 */ void ftCo_800C88D4(ftCo_GObj* gobj, u32, bool);
 /* 0C89A0 */ void ftCo_800C89A0(ftCo_GObj* gobj);
 /* 0C8A64 */ void ftCo_800C8A64(ftCo_GObj* gobj);
-/* 0C8AF0 */ void ftCo_800C8AF0(Fighter*);
-/* 0C8B1C */ void fn_800C8B1C(Fighter_GObj* gobj);
-/* 0C8B2C */ bool ftCo_800C8B2C(Fighter*, bool, bool);
-/* 0C8B60 */ void ftCo_800C8B60(ftCo_Fighter* fp, int, s8);
+/* 0C8AF0 */ void ftCo_800C8AF0(ftCo_Fighter* fp);
+/* 0C8B1C */ void fn_800C8B1C(ftCo_GObj* gobj);
+/* 0C8B2C */ bool ftCo_800C8B2C(ftCo_Fighter* fp, bool, bool);
+/* 0C8B60 */ void ftCo_800C8B60(ftCo_Fighter* fp, bool, s8);
 /* 0C8B74 */ void ftCo_800C8B74(ftCo_GObj* gobj);
 /* 0C8C04 */ void ftCo_DownSpot_Anim(ftCo_GObj* gobj);
 /* 0C8C40 */ void ftCo_DownSpot_IASA(ftCo_GObj* gobj);
 /* 0C8C44 */ void ftCo_DownSpot_Phys(ftCo_GObj* gobj);
 /* 0C8C64 */ void ftCo_DownSpot_Coll(ftCo_GObj* gobj);
-/* 0C8C84 */ void ftCo_800C8C84(ftCo_GObj* gobj);
+/* 0C8C84 */ int ftCo_800C8C84(ftCo_GObj* gobj);
 /* 0C8D00 */ void ftCo_800C8D00(ftCo_GObj* gobj);
+/* 0C8E40 */ void fn_800C8E40(ftCo_Fighter* fp, FtSFX*);
+/* 0C8E74 */ void fn_800C8E74(ftCo_GObj* gobj);
 /* 0C8F6C */ void ftCo_800C8F6C(void);
 /* 0C8FC4 */ void ftCo_800C8FC4(ftCo_GObj* gobj);
 /* 0C9034 */ void ftCo_800C9034(ftCo_GObj* gobj);
-/* 0C9078 */ UNK_RET ftCo_800C9078(UNK_PARAMS);
+/* 0C9058 */ void fn_800C9058(ftCo_GObj* gobj);
+/* 0C9078 */ void ftCo_800C9078(ftCo_GObj* gobj, Item_GObj*);
+/* 0C9198 */ void fn_800C9198(ftCo_GObj* gobj);
 /* 0C91C0 */ void ftCo_Barrel_Anim(ftCo_GObj* gobj);
 /* 0C9208 */ void ftCo_Barrel_IASA(ftCo_GObj* gobj);
 /* 0C925C */ void ftCo_Barrel_Phys(ftCo_GObj* gobj);
 /* 0C9260 */ void ftCo_Barrel_Coll(ftCo_GObj* gobj);
+/* 0C9264 */ HSD_GObjEvent fn_800C9264;
 /* 0C92E4 */ UNK_RET ftCo_800C92E4(UNK_PARAMS);
 /* 0C9468 */ bool ftCo_Walk_CheckInput(ftCo_GObj* gobj);
 /* 0C94B4 */ bool ftCo_800C94B4(ftCo_GObj* gobj);

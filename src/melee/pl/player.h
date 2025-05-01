@@ -240,7 +240,7 @@ void Player_SetMoreFlagsBit5(s32 slot, u8 bit5);
 u8 Player_GetMoreFlagsBit6(s32 slot);
 void Player_SetMoreFlagsBit6(s32 slot, u8 bit6);
 u8 Player_GetFlagsAEBit0(s32 slot);
-u32 Player_GetRemainingHPByIndex(s32 slot, s32 index);
+s32 Player_GetRemainingHPByIndex(s32 slot, s32 index);
 s32 Player_GetFalls(s32 slot);
 s32 Player_GetFallsByIndex(s32 slot, s32 index);
 void Player_SetFalls(int slot, s32 falls);

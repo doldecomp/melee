@@ -6,7 +6,7 @@
 #include "it/items/types.h"
 
 /* 295ED4 */ UNK_RET it_80295ED4(UNK_PARAMS);
-/* 295F38 */ UNK_RET it_80295F38(UNK_PARAMS);
+/* 295F38 */ void it_80295F38(Item_GObj*);
 /* 2960B8 */ int it_802960B8(Item_GObj* gobj);
 /* 2960CC */ int it_802960CC(Item_GObj* gobj);
 /* 2960E0 */ void it_802960E0(Item_GObj*);

@@ -5,9 +5,13 @@
 
 #include "ft/forward.h"
 
+#include "ft/ft_0C31.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
+#include "ft/ftdata.h"
 #include "ft/types.h"
 #include "it/it_26B1.h"
+#include "lb/lbrefract.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
@@ -106,6 +110,20 @@ static inline float stickGetDir(float x1, float x2)
         return x1;
     }
 }
+
+static inline ftCo_GObj* ftGetVictim(ftCo_Fighter* fp)
+{
+    return fp->victim_gobj;
+}
+
+static inline FtMotionId ftPickDownSpot(ftCo_Fighter* fp)
+{
+    if (ftData_80085FD4(fp, ftCo_MS_DownSpotU)->x14) {
+        return ftCo_MS_DownSpotU;
+    }
+    return ftCo_MS_DownSpotD;
+}
+
 /// used for all fighters except Kirby and Purin
 static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
                                         bool bool2, bool bool3)
@@ -209,6 +227,18 @@ static inline bool ftCheckThrowB4(Fighter* fp)
     } else {
         return false;
     }
+}
+
+static inline void ftOnCloakingDevice(ftCo_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    fp->x2226_b5 = 1;
+    fp->x2226_b7 = 0;
+    // these functions seem to be related to rendering the cloak
+    fn_800C8B1C(gobj);
+    ft_800C80A4(fp);
+    lbRefract_80022BB8();
+    fp->x221F_b2 = 1;
 }
 
 /// Ternary macro for fcmpo-based facing direction check

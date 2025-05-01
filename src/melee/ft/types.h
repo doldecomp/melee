@@ -518,7 +518,7 @@ struct ftCommonData {
     /* +7CC */ int x7CC;
     /* +7D0 */ int x7D0;
     /* +7D4 */ float hit_weight_mul;
-    /* +7D8 */ int x7D8;
+    /* +7D8 */ GXColor x7D8_gxcolor;
     /* +7DC */ int x7DC;
     /* +7E0 */ int x7E0;
     /* +7E4 */ float x7E4_scaleZ;
@@ -1847,9 +1847,12 @@ typedef struct ftData_UnkModelStruct {
 } ftData_UnkModelStruct;
 
 struct ftData_80085FD4_ret {
-    /* +0 */ UNK_T x0;
-    /* +4 */ UNK_T x4;
-    /* +8 */ UNK_T x8;
+    /*  +0 */ UNK_T x0;
+    /*  +4 */ UNK_T x4;
+    /*  +8 */ UNK_T x8;
+    /*  +C */ UNK_T xC;
+    /* +10 */ UNK_T x10;
+    /* +14 */ UNK_T x14;
 };
 
 typedef struct ArticleDynamicBones {
