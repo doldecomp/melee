@@ -35,10 +35,11 @@
 /* 0C9208 */ void ftCo_Barrel_IASA(ftCo_GObj* gobj);
 /* 0C925C */ void ftCo_Barrel_Phys(ftCo_GObj* gobj);
 /* 0C9260 */ void ftCo_Barrel_Coll(ftCo_GObj* gobj);
-/* 0C9264 */ HSD_GObjEvent fn_800C9264;
+/* 0C9264 */ void fn_800C9264(ftCo_GObj* gobj);
 /* 0C92E4 */ UNK_RET ftCo_800C92E4(UNK_PARAMS);
 /* 0C9468 */ bool ftCo_Walk_CheckInput(ftCo_GObj* gobj);
 /* 0C94B4 */ bool ftCo_800C94B4(ftCo_GObj* gobj);
+/* 0C94B4 */ void fn_800C9528(ftCo_GObj* gobj, f32);
 /* 0C95F4 */ void ftCo_Walk_Anim(ftCo_GObj* gobj);
 /* 0C9614 */ void ftCo_Walk_IASA(ftCo_GObj* gobj);
 /* 0C9768 */ void ftCo_Walk_Phys(ftCo_GObj* gobj);
