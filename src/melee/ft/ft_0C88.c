@@ -412,9 +412,9 @@ void ftCo_800C92E4(HSD_GObj* arg0, void* arg1, Vec3* arg2, s32 arg3, f32 arg8)
     temp_r30->dmg.x1854_collpos.z = temp_r30->cur_pos.z;
     temp_r30->dmg.x1860_element = sp3C.element;
     ftColl_800787B4((bitwise Item_GObj*) temp_r30->mv.ca.specialhi.vel.y,
-                    (Fighter_GObj*) arg0, 0);
+                    (ftCo_GObj*) arg0, 0);
     temp_r30->x21EC = fn_800C9290;
-    ftCo_8008DCE0((Fighter_GObj*) arg0, 0x5B, 0.0f);
+    ftCo_8008DCE0((ftCo_GObj*) arg0, 0x5B, 0.0f);
 }
 */
 
@@ -557,21 +557,160 @@ void fn_800C98AC(ftCo_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-/// #ftCo_800C9924
+static inline bool ftCheckWalkThreshold2(ftCo_Fighter* fp,
+                                         ftCommonData* p_ftCommonData)
+{
+    return fp->input.lstick.x * fp->facing_dir <= p_ftCommonData->x38;
+}
 
-/// #ftCo_Turn_Anim
+static inline bool ftCheckWalkThreshold3(ftCo_Fighter* fp,
+                                         ftCommonData* p_ftCommonData)
+{
+    return fp->input.lstick.x * fp->mv.co.turn.direction_to >=
+           p_ftCommonData->x3C;
+}
 
-/// #ftCo_Turn_IASA
+void ftCo_800C9924(ftCo_GObj* gobj)
+{
+    ftCo_Fighter* temp_r3;
+    f32 temp_f1;
 
-/// #ftCo_Turn_Phys
+    temp_r3 = gobj->user_data;
+    temp_f1 = temp_r3->mv.co.turn.frames_to_change_direction_on_standing_turn;
+    if (temp_f1 > 1.0F) {
+        temp_r3->mv.co.turn.frames_to_change_direction_on_standing_turn =
+            temp_f1 - 0.0F;
+        return;
+    }
+    if (temp_r3->mv.co.turn.x0_int == 0) {
+        temp_r3->mv.co.turn.x0_int = 0x00000001;
+        temp_r3->mv.co.turn.x18_int = 0x00000001;
+        temp_r3->facing_dir = -temp_r3->facing_dir;
+    }
+}
 
-/// #ftCo_Turn_Coll
+void ftCo_Turn_Anim(ftCo_GObj* gobj)
+{
+    ftCo_Fighter* temp_r3;
+    f32 temp_f1;
 
-/// #fn_800C9C2C
+    temp_r3 = gobj->user_data;
+    temp_f1 = temp_r3->mv.co.turn.frames_to_change_direction_on_standing_turn;
+    if (temp_f1 > 1.0F) {
+        temp_r3->mv.co.turn.frames_to_change_direction_on_standing_turn =
+            temp_f1 - 0.0F;
+    } else if (temp_r3->mv.co.turn.x0_int == 0) {
+        temp_r3->mv.co.turn.x0_int = 0x00000001;
+        temp_r3->mv.co.turn.x18_int = 0x00000001;
+        temp_r3->facing_dir = -temp_r3->facing_dir;
+    }
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+    }
+}
 
-/// #fn_800C9C74
+void ftCo_Turn_IASA(ftCo_GObj* gobj)
+{
+    ftCo_Fighter* temp_r31;
 
-/// #fn_800C9CEC
+    temp_r31 = gobj->user_data;
+    if (temp_r31->mv.co.turn.x18_int != 0) {
+        temp_r31->input.x668 |= temp_r31->mv.co.turn.x1C_int;
+    }
+    if (temp_r31->mv.co.turn.x0_int == 0) {
+        temp_r31->facing_dir = -temp_r31->facing_dir;
+    }
+    if ((ftCo_SpecialS_CheckInput(gobj) == 0) && (ftCo_800D68C0(gobj) == 0) &&
+        (ftCo_Attack100_CheckInput(gobj) == 0) &&
+        (ftCo_Catch_CheckInput(gobj) == 0) &&
+        (ftCo_AttackS4_CheckInput(gobj) == 0) &&
+        (ftCo_AttackHi4_CheckInput(gobj) == 0) &&
+        (ftCo_AttackLw4_CheckInput(gobj) == 0) &&
+        (ftCo_AttackS3_CheckInput(gobj) == 0) &&
+        (ftCo_AttackHi3_CheckInput(gobj) == 0) &&
+        (ftCo_AttackLw3_CheckInput(gobj) == 0) &&
+        (ftCo_Attack1_CheckInput(gobj) == 0))
+    {
+        if (temp_r31->mv.co.turn.x0_int == 0) {
+            temp_r31->facing_dir = -temp_r31->facing_dir;
+        }
+        if ((ftCo_80091A4C(gobj) == 0) && (ftCo_800DE9D8(gobj) == 0) &&
+            (ftCo_Jump_CheckInput(gobj) == 0))
+        {
+            fn_800C9C2C(gobj);
+            if ((temp_r31->mv.co.turn.x18_int != 0) &&
+                (temp_r31->mv.co.turn.x8_f32 != 1.0F))
+            {
+                if (ftCheckWalkThreshold3(temp_r31, p_ftCommonData)) {
+                    fn_800CA120(gobj, 0);
+                }
+            }
+            if (temp_r31->input.x668 & 0x100) {
+                temp_r31->mv.co.turn.x1C_int =
+                    (temp_r31->mv.co.turn.x1C_int | 0x100);
+            }
+            if (temp_r31->input.x668 & 0x200) {
+                temp_r31->mv.co.turn.x1C_int =
+                    (temp_r31->mv.co.turn.x1C_int | 0x200);
+            }
+            if (temp_r31->mv.co.turn.x18_int != 0) {
+                temp_r31->mv.co.turn.x18_int = 0.0f;
+            }
+        }
+    }
+}
+
+void ftCo_Turn_Phys(ftCo_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
+
+void ftCo_Turn_Coll(ftCo_GObj* gobj)
+{
+    ft_80083F88(gobj);
+}
+
+s32 fn_800C9C2C(ftCo_GObj* arg0)
+{
+    ftCo_Fighter* temp_r5;
+    temp_r5 = arg0->user_data;
+    if (((temp_r5->input.lstick.x * temp_r5->mv.co.turn.direction_to) >=
+         p_ftCommonData->x3C) &&
+        ((s32) temp_r5->x670_timer_lstick_tilt_x < (s32) p_ftCommonData->x40))
+    {
+        temp_r5->mv.co.turn.x8_f32 = temp_r5->mv.co.turn.direction_to;
+        return 1;
+    }
+    return 0;
+}
+
+// able to preserve f2 by assigning it through two pointers, compiler cant tell
+// its the same as the ref from temp_r7!!!
+void fn_800C9C74(ftCo_GObj* arg0)
+{
+    ftCo_Fighter* temp_r7 = GET_FIGHTER(arg0);
+    f32 facing_dir_preserved = ((ftCo_Fighter*) (arg0->user_data))->facing_dir;
+    void* unused; // needed to match. probably an inline somwhere
+    temp_r7->mv.co.turn.x0_int = 0;
+    temp_r7->mv.co.turn.x18_int = 0;
+    temp_r7->mv.co.turn.direction_to = -temp_r7->facing_dir;
+    temp_r7->mv.co.turn.frames_to_change_direction_on_standing_turn = 0.0F;
+    temp_r7->mv.co.turn.x8_f32 = facing_dir_preserved;
+    temp_r7->mv.co.turn.x1C_int = 0;
+    Fighter_ChangeMotionState(arg0, ftCo_MS_Turn, Ft_MF_None, 0.0F, 1.0F, 0.0F,
+                              NULL);
+    ftAnim_8006EBA4(arg0);
+}
+
+bool fn_800C9CEC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (((fp->input.lstick.x * fp->facing_dir) <= p_ftCommonData->x38)) {
+        fn_800C9D94(gobj, fp->cur_anim_frame);
+        return true;
+    }
+    return false;
+}
 
 /// #fn_800C9D40
 

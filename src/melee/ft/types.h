@@ -66,7 +66,7 @@ struct ftCommonData {
     /* +2C */ float x2C;
     /* +30 */ float x30;
     /* +34 */ float x34_walkThresholdMaybe;
-    /* +38 */ UNK_T x38;
+    /* +38 */ float x38;
     /* +3C */ float x3C;
     /* +40 */ int x40;
     /* +44 */ float x44;

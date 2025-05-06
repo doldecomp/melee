@@ -46,18 +46,21 @@
 /* 0C9788 */ void ftCo_Walk_Coll(ftCo_GObj* gobj);
 /* 0C97A8 */ bool ftCo_800C97A8(ftCo_GObj* gobj);
 /* 0C97DC */ bool ftCo_Turn_CheckInput(ftCo_GObj* gobj);
-/* 0C9840 */ void ftCo_800C9840(Fighter_GObj* gobj, FtMotionId, MotionFlags,
-                                f32, f32, f32);
+/* 0C9840 */ void ftCo_800C9840(ftCo_GObj* gobj, FtMotionId, MotionFlags, f32,
+                                f32, f32);
 /* 0C9924 */ void ftCo_800C9924(ftCo_GObj* gobj);
 /* 0C9970 */ void ftCo_Turn_Anim(ftCo_GObj* gobj);
 /* 0C99F8 */ void ftCo_Turn_IASA(ftCo_GObj* gobj);
 /* 0C9BEC */ void ftCo_Turn_Phys(ftCo_GObj* gobj);
 /* 0C9C0C */ void ftCo_Turn_Coll(ftCo_GObj* gobj);
+/* 0C9C2C */ s32 fn_800C9C2C(ftCo_GObj* gobj);
+/* 0C9D94 */ void fn_800C9D94(ftCo_GObj* gobj, f32);
 /* 0C9E10 */ void ftCo_TurnRun_Anim(ftCo_GObj* gobj);
 /* 0C9ED8 */ void ftCo_TurnRun_IASA(ftCo_GObj* gobj);
 /* 0C9EFC */ void ftCo_TurnRun_Phys(ftCo_GObj* gobj);
 /* 0CA024 */ void ftCo_TurnRun_Coll(ftCo_GObj* gobj);
 /* 0CA094 */ bool ftCo_Dash_CheckInput(ftCo_GObj* gobj);
+/* 0CA120 */ void fn_800CA120(ftCo_GObj* gobj, bool);
 /* 0CA1F4 */ void ftCo_Dash_Anim(ftCo_GObj* gobj);
 /* 0CA230 */ void ftCo_Dash_IASA(ftCo_GObj* gobj);
 /* 0CA53C */ void ftCo_Dash_Phys(ftCo_GObj* gobj);
