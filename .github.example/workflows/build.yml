@@ -37,23 +37,7 @@ jobs:
       run: |
         python configure.py --map --version ${{ matrix.version }} \
             --binutils /binutils --compilers /compilers
-        ninja all_source build/${{ matrix.version }}/progress.json \
-            build/${{ matrix.version }}/report.json
-
-    # Upload progress if we're on the main branch
-    - name: Upload progress
-      # If you're using a different branch, change this to match
-      if: github.ref == 'refs/heads/main'
-      continue-on-error: true
-      env:
-        # Replace with your project slug
-        PROGRESS_SLUG: prime
-        # Set the API key in your repository secrets
-        PROGRESS_API_KEY: ${{ secrets.PROGRESS_API_KEY }}
-      run: |
-        python tools/upload_progress.py -b https://progress.decomp.club/ \
-          -p $PROGRESS_SLUG -v ${{ matrix.version }} \
-          build/${{ matrix.version }}/progress.json
+        ninja all_source progress build/${{ matrix.version }}/report.json
 
     # Upload map files
     - name: Upload map

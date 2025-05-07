@@ -25,27 +25,12 @@ References
 - [Discord: GC/Wii Decompilation](https://discord.gg/hKx3FJJgrV) (Come to `#dtk` for help!)
 - [objdiff](https://github.com/encounter/objdiff) (Local diffing tool)
 - [decomp.me](https://decomp.me) (Collaborate on matches)
-- [frogress](https://github.com/decompals/frogress) (Decompilation progress API)
+- [decomp.dev](https://decomp.dev) (Decompilation progress hub and API)
 - [wibo](https://github.com/decompals/wibo) (Minimal Win32 wrapper for Linux)
 - [sjiswrap](https://github.com/encounter/sjiswrap) (UTF-8 to Shift JIS wrapper)
 
-Projects using this structure:
-
-- [zeldaret/tww](https://github.com/zeldaret/tww)
-- [zeldaret/oot-gc](https://github.com/zeldaret/oot-gc)
-- [zeldaret/ss](https://github.com/zeldaret/ss)
-- [PrimeDecomp/prime](https://github.com/PrimeDecomp/prime)
-- [PrimeDecomp/echoes](https://github.com/PrimeDecomp/echoes)
-- [DarkRTA/rb3](https://github.com/DarkRTA/rb3)
-- [doldecomp/melee](https://github.com/doldecomp/melee)
-- [doldecomp/sadx](https://github.com/doldecomp/sadx)
-- [InputEvelution/wp](https://github.com/InputEvelution/wp)
-- [NWPlayer123/AnimalCrossing-dtk](https://github.com/NWPlayer123/AnimalCrossing-dtk)
-- [Rainchus/marioparty4](https://github.com/Rainchus/marioparty4)
-- [Rainchus/ttyd_dtk](https://github.com/Rainchus/ttyd_dtk)
-- [Sage-of-Mirrors/zmansion](https://github.com/Sage-of-Mirrors/zmansion)
-- [bfbbdecomp/bfbb](https://github.com/bfbbdecomp/bfbb)
-- [EstexNT/rhf-dtk](https://github.com/EstexNT/rhf-dtk)
+Nearly all active GC/Wii decompilation projects use this structure, and will be useful
+for reference. A list of active GC/Wii projects can be found on [decomp.dev](https://decomp.dev).
 
 Features
 --------
@@ -56,7 +41,7 @@ Features
 - Feature-rich analyzer: Many time-consuming tasks are automated, allowing you to focus on the decompilation itself. See [Analyzer features](https://github.com/encounter/decomp-toolkit#analyzer-features).
 - REL support: RELs each have their own `symbols.txt` and `splits.txt`, and will automatically be built and linked against the main binary.
 - No manual assembly: decomp-toolkit handles splitting the DOL into relocatable objects based on the configuration. No game assets are committed to the repository.
-- Progress calculation and upload script for [frogress](https://github.com/decompals/frogress).
+- Progress calculation and integration with [decomp.dev](https://decomp.dev).
 - Integration with [objdiff](https://github.com/encounter/objdiff) for a diffing workflow.
 - CI workflow template for GitHub Actions.
 
