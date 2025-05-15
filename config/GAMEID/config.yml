@@ -4,7 +4,7 @@ object: sys/main.dol
 hash: 0123456789abcdef0123456789abcdef01234567
 symbols: config/GAMEID/symbols.txt
 splits: config/GAMEID/splits.txt
-# Change this to match the linker verison.
+# Change this to match the linker version.
 # See config.example.yml for a list.
 mw_comment_version: 11
 
