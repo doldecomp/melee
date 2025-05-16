@@ -2,6 +2,7 @@
 
 #include "plbonuslib.h"
 
+#include "it/it_26B1.h"
 #include "melee/ft/ftlib.h"
 #include "pl/player.h"
 
@@ -41,19 +42,19 @@ void plBonusLib_8003D514(int arg0)
 
 // void pl_8003E70C(Item_GObj*);
 
-void pl_8003EC30(int arg0, int arg1, int arg2, float arg3)
+void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
 {
-    StaleMoveTable* temp_r3;
+    StaleMoveTable* stale_moves;
 
     if (arg1 != 0) {
         return;
     }
 
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
     switch (arg2) {
     case 1:
     case 3:
-        temp_r3->xC98 += arg3;
+        stale_moves->xC98 += arg3;
         break;
     }
 }
@@ -71,6 +72,11 @@ void pl_800402D0(int slot, bool arg1, bool arg2)
     ++stale_moves->xCF0;
 }
 
-// void pl_800403C0(u8, int);
+void pl_800403C0(int arg0, int arg1)
+{
+    PAD_STACK(8);
+    Player_GetStaleMoveTableIndexPtr2(arg0);
+    pl_80038788(arg0, 0xC5, 1);
+}
 
 // void pl_8004049C(s32, ItemKind);
