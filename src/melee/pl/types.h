@@ -39,9 +39,12 @@ typedef struct StaleMoveTable {
     /* +5EC */ int x5EC;
     /* +5F0 */ u8 x5F0[0xC98 - 0x5F0];
     /* +C98 */ float xC98;
-    /* +C9C */ u8 xC9C[0xCEC - 0xC9C];
+    /* +C9C */ u8 xC9C[0xCD8 - 0xC9C];
+    /* +CD8 */ s32 xCD8;
+    /* +CDC */ u8 xCDC[0xCEC - 0xCDC];
     /* +CEC */ int xCEC;
     /* +CF0 */ int xCF0;
 } StaleMoveTable;
+STATIC_ASSERT(sizeof(struct StaleMoveTable) == 0xCF4);
 
 #endif

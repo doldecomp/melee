@@ -64,6 +64,14 @@ void pl_8003E058(int arg0, s32 arg1, int arg2, s32 arg3)
     }
 }
 
+void pl_8003E150(s32 slot, s32 arg1)
+{
+    StaleMoveTable* stale_moves;
+
+    stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
+    stale_moves->xCD8 += 1;
+}
+
 // void pl_8003E70C(Item_GObj*);
 
 void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
