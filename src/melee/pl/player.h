@@ -192,7 +192,7 @@ u32 Player_GetCostumeId(int slot);
 void Player_SetCostumeId(int slot, s8 costume_id);
 u8 Player_GetControllerIndex(int slot);
 void Player_SetControllerIndex(int slot, s8 controller_index);
-s8 Player_GetTeam(int slot);
+int Player_GetTeam(int slot);
 void Player_SetTeam(int slot, s8 unk_color);
 s8 Player_GetPlayerId(int slot);
 void Player_SetPlayerId(int slot, s8 player_id);

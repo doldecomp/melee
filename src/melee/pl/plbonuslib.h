@@ -6,6 +6,7 @@
 
 #include "it/forward.h"
 
+/* 03E058 */ void pl_8003E058(int, s32, int, s32);
 /* 03E70C */ void pl_8003E70C(Item_GObj*);
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03FDF4 */ void pl_8003FDF4(u8, int);

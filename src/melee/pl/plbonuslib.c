@@ -2,6 +2,7 @@
 
 #include "plbonuslib.h"
 
+#include "gm/gm_1601.h"
 #include "it/it_26B1.h"
 #include "melee/ft/ftlib.h"
 #include "pl/player.h"
@@ -37,6 +38,29 @@ void plBonusLib_8003D514(int arg0)
             }
             var_r29 += 1;
         } while (var_r29 < 6);
+    }
+}
+
+void pl_8003E058(int arg0, s32 arg1, int arg2, s32 arg3)
+{
+    int arg2_player_team;
+    bool same_team;
+
+    pl_80038824(arg2, 0x3F);
+    if (arg0 == 6) {
+        return;
+    }
+
+    if (gm_8016B168() && (arg2_player_team = Player_GetTeam(arg2),
+                          /// @todo: Swap order of registers
+                          Player_GetTeam(arg0) == arg2_player_team))
+    {
+        same_team = true;
+    } else {
+        same_team = false;
+    }
+    if (!same_team) {
+        pl_80038824(arg0, 0x3E);
     }
 }
 

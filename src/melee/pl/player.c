@@ -755,9 +755,9 @@ void Player_SetControllerIndex(int slot, s8 controller_index)
     player->controller_index = controller_index;
 }
 
-s8 Player_GetTeam(int slot)
+int Player_GetTeam(int slot)
 {
-    s8 team;
+    int team;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
