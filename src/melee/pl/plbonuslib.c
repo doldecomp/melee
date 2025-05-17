@@ -93,47 +93,48 @@ void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
 
 // void pl_8003EC30(int, int, int, float);
 
-void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2) {
-    StaleMoveTable *temp_r3;
-    s32 temp_r0;
-    s32 var_r4;
+void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
+{
+    StaleMoveTable* stale_moves;
+    u32 temp_r0;
+    bool var_r4;
 
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    var_r4 = 0;
+    stale_moves = Player_GetStaleMoveTableIndexPtr2(arg0);
+    var_r4 = false;
     if (arg1 != 1) {
-        temp_r0 = temp_r3->xC90;
-        switch (temp_r0) {                        
-        case 0:
+        temp_r0 = stale_moves->xC90;
+        switch (temp_r0) {
+        case 0U:
             if ((arg2 >= 1) && (arg2 <= 3)) {
-                var_r4 = 1;
+                var_r4 = true;
             }
             break;
-        case 1:
+        case 1U:
             if ((arg2 >= 6) && (arg2 <= 8)) {
-                var_r4 = 1;
+                var_r4 = true;
             }
             break;
-        case 2:
-            if ((arg2 >= 9) && (arg2 <= 0xB)) {
-                var_r4 = 1;
+        case 2U:
+            if ((arg2 >= 9) && (arg2 <= 11)) {
+                var_r4 = true;
             }
             break;
-        case 3:
-            if ((arg2 >= 0x11) && (arg2 <= 0x30)) {
-                var_r4 = 1;
+        case 3U:
+            if ((arg2 >= 17) && (arg2 <= 48)) {
+                var_r4 = true;
             }
             break;
         }
-        if (var_r4 != 0) {
-            if ((u32) temp_r0 == 3U) {
-                temp_r3->xC90 = 0;
+        if (var_r4) {
+            if (temp_r0 == 3U) {
+                stale_moves->xC90 = 0U;
                 pl_80038824(arg0, 0x56);
-                return;
+            } else {
+                stale_moves->xC90 += 1U;
             }
-            temp_r3->xC90 += 1;
             return;
         }
-        temp_r3->xC90 = 0;
+        stale_moves->xC90 = 0U;
     }
 }
 
