@@ -158,6 +158,14 @@ void pl_800403C0(int arg0, int arg1)
 
 // void pl_8004049C(s32, ItemKind);
 
+void pl_80040D8C(int slot)
+{
+    StaleMoveTable* stale_moves;
+
+    stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
+    stale_moves->xCB0 += 1;
+}
+
 s32 pl_80040DB8(int slot)
 {
     return Player_GetStaleMoveTableIndexPtr2(slot)->xCB0;
