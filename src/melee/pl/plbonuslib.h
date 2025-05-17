@@ -15,5 +15,6 @@
 /* 0402D0 */ void pl_800402D0(int slot, bool, bool);
 /* 0403C0 */ void pl_800403C0(int, int);
 /* 04049C */ void pl_8004049C(s32, ItemKind);
+/* 040DB8 */ s32 pl_80040DB8(int slot);
 
 #endif
