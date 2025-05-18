@@ -206,6 +206,9 @@ class ProjectConfig:
         self.print_progress_categories: Union[bool, List[str]] = (
             True  # Print additional progress categories in the CLI progress output
         )
+        self.progress_report_args: Optional[List[str]] = (
+            None  # Flags to `objdiff-cli report generate`
+        )
 
         # Progress fancy printing
         self.progress_use_fancy: bool = False
@@ -422,6 +425,7 @@ def generate_build_ninja(
     if config.linker_version is None:
         sys.exit("ProjectConfig.linker_version missing")
     n.variable("mw_version", Path(config.linker_version))
+    n.variable("objdiff_report_args", make_flags_str(config.progress_report_args))
     n.newline()
 
     ###
@@ -1203,7 +1207,7 @@ def generate_build_ninja(
         n.comment("Generate progress report")
         n.rule(
             name="report",
-            command=f"{objdiff} report generate -o $out",
+            command=f"{objdiff} report generate $objdiff_report_args -o $out",
             description="REPORT",
         )
         n.build(

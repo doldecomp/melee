@@ -144,10 +144,10 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20240706"
-config.dtk_tag = "v1.4.1"
-config.objdiff_tag = "v2.7.1"
-config.sjiswrap_tag = "v1.2.0"
-config.wibo_tag = "0.6.11"
+config.dtk_tag = "v1.5.1"
+config.objdiff_tag = "v3.0.0-beta.8"
+config.sjiswrap_tag = "v1.2.1"
+config.wibo_tag = "0.6.16"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -301,6 +301,12 @@ config.progress_categories = [
     ProgressCategory("sdk", "SDK Code"),
 ]
 config.progress_each_module = args.verbose
+# Optional extra arguments to `objdiff-cli report generate`
+config.progress_report_args = [
+    # Marks relocations as mismatching if the target value is different
+    # Default is "functionRelocDiffs=none", which is most lenient
+    # "--config functionRelocDiffs=data_value",
+]
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
