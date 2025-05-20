@@ -72,8 +72,6 @@ void pl_8003E150(s32 slot, s32 arg1)
     stale_moves->xCD8 += 1;
 }
 
-// void pl_8003E70C(Item_GObj*);
-
 void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
 {
     StaleMoveTable* stale_moves;
@@ -90,8 +88,6 @@ void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
         break;
     }
 }
-
-// void pl_8003EC30(int, int, int, float);
 
 void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
 {
@@ -138,8 +134,6 @@ void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
     }
 }
 
-// void pl_8003FDF4(u8, int);
-
 void pl_800402D0(int slot, bool arg1, bool arg2)
 {
     StaleMoveTable* stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
@@ -155,8 +149,6 @@ void pl_800403C0(int arg0, int arg1)
     Player_GetStaleMoveTableIndexPtr2(arg0);
     pl_80038788(arg0, 0xC5, 1);
 }
-
-// void pl_8004049C(s32, ItemKind);
 
 void pl_80040D8C(int slot)
 {
