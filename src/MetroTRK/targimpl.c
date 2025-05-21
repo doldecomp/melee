@@ -530,7 +530,7 @@ L_802CF678:
     mtcrf 0xFF, val
     lwz val, Default_PPC.GPR[3](r2)
     lwz r2, Default_PPC.GPR[2](r2)
-    rfi 
+    rfi
 L_802CF694:
     lis r2, TRK_saved_exceptionID@h
     ori r2, r2, TRK_saved_exceptionID@l
@@ -699,7 +699,7 @@ ASM void TRKSwapAndGo(void)
 
     mfspr     r0, 19
     stw       r0, TRKState_PPC.DAR(r3)
-    
+
     addi      r1, r0, 0x8002
     nor       r1, r1, r1
     mfmsr     r3

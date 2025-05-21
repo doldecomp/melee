@@ -14,7 +14,7 @@ ASM void TRKLoadContext(OSContext* ctx, register u32 val)
 {
 #ifdef __MWERKS__ // clang-format off
         nofralloc
-    
+
         lwz r0, OSContext.gprs[0](r3)
         lwz r1, OSContext.gprs[1](r3)
         lwz r2, OSContext.gprs[2](r3)
