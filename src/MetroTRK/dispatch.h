@@ -1,9 +1,12 @@
-#ifndef GALE01_3276A8
-#define GALE01_3276A8
+#ifndef _METROTRK_DISPATCH_H
+#define _METROTRK_DISPATCH_H
 
-#include <placeholder.h>
+#include <platform.h>
 
-/* 3276A8 */ enum_t TRKInitializeDispatcher(void);
-/* 3276BC */ UNK_RET TRKDispatchMessage(UNK_PARAMS);
+#include "MetroTRK/dserror.h"
+#include "MetroTRK/msgbuf.h"
+
+/* 3276A8 */ DSError TRKInitializeDispatcher(void);
+/* 3276BC */ DSError TRKDispatchMessage(MessageBuffer* buf);
 
 #endif

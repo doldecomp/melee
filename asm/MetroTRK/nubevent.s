@@ -5,11 +5,11 @@
 .global TRKInitializeEventQueue
 TRKInitializeEventQueue:
 /* 8032687C 0032345C  7C 08 02 A6 */	mflr r0
-/* 80326880 00323460  3C 60 80 4A */	lis r3, MTRK_NubInit_804A3148@ha
+/* 80326880 00323460  3C 60 80 4A */	lis r3, gTRKEventQueue@ha
 /* 80326884 00323464  90 01 00 04 */	stw r0, 4(r1)
 /* 80326888 00323468  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8032688C 0032346C  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80326890 00323470  3B E3 31 48 */	addi r31, r3, MTRK_NubInit_804A3148@l
+/* 80326890 00323470  3B E3 31 48 */	addi r31, r3, gTRKEventQueue@l
 /* 80326894 00323474  38 7F 00 00 */	addi r3, r31, 0
 /* 80326898 00323478  48 00 25 C9 */	bl TRKInitializeMutex
 /* 8032689C 0032347C  7F E3 FB 78 */	mr r3, r31
@@ -43,11 +43,11 @@ __TRK_memcpy:
 .global TRKGetNextEvent
 TRKGetNextEvent:
 /* 803268FC 003234DC  7C 08 02 A6 */	mflr r0
-/* 80326900 003234E0  3C 80 80 4A */	lis r4, MTRK_NubInit_804A3148@ha
+/* 80326900 003234E0  3C 80 80 4A */	lis r4, gTRKEventQueue@ha
 /* 80326904 003234E4  90 01 00 04 */	stw r0, 4(r1)
 /* 80326908 003234E8  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8032690C 003234EC  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80326910 003234F0  3B E4 31 48 */	addi r31, r4, MTRK_NubInit_804A3148@l
+/* 80326910 003234F0  3B E4 31 48 */	addi r31, r4, gTRKEventQueue@l
 /* 80326914 003234F4  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80326918 003234F8  93 A1 00 0C */	stw r29, 0xc(r1)
 /* 8032691C 003234FC  3B A0 00 00 */	li r29, 0
@@ -80,8 +80,8 @@ TRKGetNextEvent:
 .L_80326988:
 /* 80326988 00323568  3B A0 00 01 */	li r29, 1
 .L_8032698C:
-/* 8032698C 0032356C  3C 60 80 4A */	lis r3, MTRK_NubInit_804A3148@ha
-/* 80326990 00323570  38 63 31 48 */	addi r3, r3, MTRK_NubInit_804A3148@l
+/* 8032698C 0032356C  3C 60 80 4A */	lis r3, gTRKEventQueue@ha
+/* 80326990 00323570  38 63 31 48 */	addi r3, r3, gTRKEventQueue@l
 /* 80326994 00323574  48 00 24 DD */	bl TRKReleaseMutex
 /* 80326998 00323578  7F A3 EB 78 */	mr r3, r29
 /* 8032699C 0032357C  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -96,13 +96,13 @@ TRKGetNextEvent:
 .global TRKPostEvent
 TRKPostEvent:
 /* 803269BC 0032359C  7C 08 02 A6 */	mflr r0
-/* 803269C0 003235A0  3C 80 80 4A */	lis r4, MTRK_NubInit_804A3148@ha
+/* 803269C0 003235A0  3C 80 80 4A */	lis r4, gTRKEventQueue@ha
 /* 803269C4 003235A4  90 01 00 04 */	stw r0, 4(r1)
 /* 803269C8 003235A8  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 803269CC 003235AC  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 803269D0 003235B0  3B E3 00 00 */	addi r31, r3, 0
 /* 803269D4 003235B4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 803269D8 003235B8  3B C4 31 48 */	addi r30, r4, MTRK_NubInit_804A3148@l
+/* 803269D8 003235B8  3B C4 31 48 */	addi r30, r4, gTRKEventQueue@l
 /* 803269DC 003235BC  38 7E 00 00 */	addi r3, r30, 0
 /* 803269E0 003235C0  93 A1 00 0C */	stw r29, 0xc(r1)
 /* 803269E4 003235C4  93 81 00 08 */	stw r28, 8(r1)
@@ -142,8 +142,8 @@ TRKPostEvent:
 /* 80326A64 00323644  38 03 00 01 */	addi r0, r3, 1
 /* 80326A68 00323648  90 1D 00 00 */	stw r0, 0(r29)
 .L_80326A6C:
-/* 80326A6C 0032364C  3C 60 80 4A */	lis r3, MTRK_NubInit_804A3148@ha
-/* 80326A70 00323650  38 63 31 48 */	addi r3, r3, MTRK_NubInit_804A3148@l
+/* 80326A6C 0032364C  3C 60 80 4A */	lis r3, gTRKEventQueue@ha
+/* 80326A70 00323650  38 63 31 48 */	addi r3, r3, gTRKEventQueue@l
 /* 80326A74 00323654  48 00 23 FD */	bl TRKReleaseMutex
 /* 80326A78 00323658  7F 83 E3 78 */	mr r3, r28
 /* 80326A7C 0032365C  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -175,3 +175,9 @@ TRKDestructEvent:
 /* 80326ACC 003236AC  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326AD0 003236B0  7C 08 03 A6 */	mtlr r0
 /* 80326AD4 003236B4  4E 80 00 20 */	blr
+
+
+.section .bss, "wa"
+.global gTRKEventQueue
+gTRKEventQueue:
+    .skip 0x28

@@ -3528,24 +3528,31 @@ MetroTRK/mainloop.c:
 
 MetroTRK/nubevent.c:
 	.text       start:0x8032687C end:0x80326AD8
+	.bss        start:0x804A3148 end:0x804A3170
 
 MetroTRK/nubinit.c:
 	.text       start:0x80326AD8 end:0x80326C6C
 	.rodata     start:0x803B93A0 end:0x803B93C0
-	.bss        start:0x804A3148 end:0x804A50E0
+	.bss        start:0x804A3170 end:0x804A3178
 
 MetroTRK/msg.c:
 	.text       start:0x80326C6C end:0x80326C94
 
 MetroTRK/msgbuf.c:
 	.text       start:0x80326C94 end:0x803274DC
+	.bss        start:0x804A3178 end:0x804A4B28
 
 MetroTRK/serpoll.c:
-	.text       start:0x803274DC end:0x803276A8
+	.text       start:0x803274DC end:0x803276A4
+	.bss        start:0x804A4B28 end:0x804A4B40
+
+MetroTRK/usr_put.c:
+	.text       start:0x803276A4 end:0x803276A8
 
 MetroTRK/dispatch.c:
 	.text       start:0x803276A8 end:0x80327740
 	.data       start:0x80400788 end:0x80400810
+	.bss        start:0x804A4B40 end:0x804A4B48
 
 MetroTRK/msghndlr.c:
 	.text       start:0x80327740 end:0x80328F50
@@ -3562,16 +3569,18 @@ MetroTRK/targimpl.c:
 	.text       start:0x8032904C end:0x8032A628
 	.rodata     start:0x803B93C0 end:0x803B9410
 	.data       start:0x80400848 end:0x80400878
+	.bss        start:0x804A4B48 end:0x804A50D0
 
 MetroTRK/dolphin_trk.c:
 	.text       start:0x8032A628 end:0x8032A868
 	.data       start:0x80400878 end:0x804008B8
 
 MetroTRK/mpc_7xx_603e.c:
-	.text       start:0x8032A868 end:0x8032ABE0
+	.text       start:0x8032A868 end:0x8032ABD8
 
 MetroTRK/main_TRK.c:
-	.text       start:0x8032ABE0 end:0x8032AC28
+	.text       start:0x8032ABD8 end:0x8032AC28
+	.bss        start:0x804A50D0 end:0x804A50E0
 
 MetroTRK/dolphin_trk_glue.c:
 	.text       start:0x8032AC28 end:0x8032AF80

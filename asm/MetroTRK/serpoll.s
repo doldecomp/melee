@@ -144,3 +144,12 @@ TRKTerminateSerialHandler:
 .global usr_put_initialize
 usr_put_initialize:
 /* 803276A4 00324284  4E 80 00 20 */	blr
+
+
+.section .bss, "wa"
+.global gTRKFramingState
+gTRKFramingState:
+    .skip 0x14
+.global gTRKInputPendingPtr
+gTRKInputPendingPtr:
+    .skip 0x4

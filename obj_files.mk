@@ -805,6 +805,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/MetroTRK/msg.s.o\
     $(BUILD_DIR)/asm/MetroTRK/msgbuf.s.o\
     $(BUILD_DIR)/asm/MetroTRK/serpoll.s.o\
+    $(BUILD_DIR)/asm/MetroTRK/usr_put.s.o\
     $(BUILD_DIR)/asm/MetroTRK/dispatch.s.o\
     $(BUILD_DIR)/asm/MetroTRK/msghndlr.s.o\
     $(BUILD_DIR)/asm/MetroTRK/flush_cache.s.o\

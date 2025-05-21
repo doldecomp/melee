@@ -2,6 +2,11 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
+.fn TRKTargetCPUMinorType, global
+/* 8032ABD8 003277B8  38 60 00 54 */	li r3, 0x54
+/* 8032ABDC 003277BC  4E 80 00 20 */	blr
+.endfn TRKTargetCPUMinorType
+
 .global TRK_main
 TRK_main:
 /* 8032ABE0 003277C0  7C 08 02 A6 */	mflr r0
@@ -23,3 +28,9 @@ TRK_main:
 /* 8032AC1C 003277FC  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AC20 00327800  7C 08 03 A6 */	mtlr r0
 /* 8032AC24 00327804  4E 80 00 20 */	blr
+
+
+.section .bss, "wa"
+.global TRK_mainError
+TRK_mainError:
+    .skip 0x10

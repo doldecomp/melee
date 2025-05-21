@@ -10,9 +10,9 @@ TRKSetBufferUsed:
 .global TRKInitializeMessageBuffers
 TRKInitializeMessageBuffers:
 /* 80326C9C 0032387C  7C 08 02 A6 */	mflr r0
-/* 80326CA0 00323880  3C 60 80 4A */	lis r3, MTRK_NubInit_804A3178@ha
+/* 80326CA0 00323880  3C 60 80 4A */	lis r3, gTRKMsgBufs@ha
 /* 80326CA4 00323884  90 01 00 04 */	stw r0, 4(r1)
-/* 80326CA8 00323888  38 03 31 78 */	addi r0, r3, MTRK_NubInit_804A3178@l
+/* 80326CA8 00323888  38 03 31 78 */	addi r0, r3, gTRKMsgBufs@l
 /* 80326CAC 0032388C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80326CB0 00323890  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80326CB4 00323894  93 C1 00 08 */	stw r30, 8(r1)
@@ -94,8 +94,8 @@ TRKGetBuffer:
 /* 80326DBC 0032399C  2C 03 00 03 */	cmpwi r3, 3
 /* 80326DC0 003239A0  40 80 00 14 */	bge .L_80326DD4
 /* 80326DC4 003239A4  1C 83 08 90 */	mulli r4, r3, 0x890
-/* 80326DC8 003239A8  3C 60 80 4A */	lis r3, MTRK_NubInit_804A3178@ha
-/* 80326DCC 003239AC  38 03 31 78 */	addi r0, r3, MTRK_NubInit_804A3178@l
+/* 80326DC8 003239A8  3C 60 80 4A */	lis r3, gTRKMsgBufs@ha
+/* 80326DCC 003239AC  38 03 31 78 */	addi r0, r3, gTRKMsgBufs@l
 /* 80326DD0 003239B0  7C 00 22 14 */	add r0, r0, r4
 .L_80326DD4:
 /* 80326DD4 003239B4  7C 03 03 78 */	mr r3, r0
@@ -114,8 +114,8 @@ TRKReleaseBuffer:
 /* 80326DFC 003239DC  2C 03 00 03 */	cmpwi r3, 3
 /* 80326E00 003239E0  40 80 00 30 */	bge .L_80326E30
 /* 80326E04 003239E4  1C 83 08 90 */	mulli r4, r3, 0x890
-/* 80326E08 003239E8  3C 60 80 4A */	lis r3, MTRK_NubInit_804A3178@ha
-/* 80326E0C 003239EC  38 03 31 78 */	addi r0, r3, MTRK_NubInit_804A3178@l
+/* 80326E08 003239E8  3C 60 80 4A */	lis r3, gTRKMsgBufs@ha
+/* 80326E0C 003239EC  38 03 31 78 */	addi r0, r3, gTRKMsgBufs@l
 /* 80326E10 003239F0  7F E0 22 14 */	add r31, r0, r4
 /* 80326E14 003239F4  38 7F 00 00 */	addi r3, r31, 0
 /* 80326E18 003239F8  48 00 20 51 */	bl TRKAcquireMutex
@@ -637,3 +637,9 @@ TRKReadBuffer_ui32:
 /* 803274D0 003240B0  80 01 00 04 */	lwz r0, 4(r1)
 /* 803274D4 003240B4  7C 08 03 A6 */	mtlr r0
 /* 803274D8 003240B8  4E 80 00 20 */	blr
+
+
+.section .bss, "wa"
+.global gTRKMsgBufs
+gTRKMsgBufs:
+    .skip 0x19B0

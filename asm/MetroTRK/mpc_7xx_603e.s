@@ -236,8 +236,3 @@
 /* 8032ABD0 003277B0  7F FA 43 A6 */	mtear r31
 /* 8032ABD4 003277B4  4E 80 00 20 */	blr
 .endfn TRKRestoreExtended1Block
-
-.fn TRKTargetCPUMinorType, global
-/* 8032ABD8 003277B8  38 60 00 54 */	li r3, 0x54
-/* 8032ABDC 003277BC  4E 80 00 20 */	blr
-.endfn TRKTargetCPUMinorType

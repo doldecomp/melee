@@ -722,8 +722,8 @@ TRKInterruptHandler:
 /* 80329A14 003265F4  7C 00 04 AC */	sync 0
 /* 80329A18 003265F8  7C 40 01 24 */	mtmsr r2
 /* 80329A1C 003265FC  7C 00 04 AC */	sync 0
-/* 80329A20 00326600  3C 40 80 4A */	lis r2, MTRK_NubInit_804A4B48@h
-/* 80329A24 00326604  60 42 4B 48 */	ori r2, r2, MTRK_NubInit_804A4B48@l
+/* 80329A20 00326600  3C 40 80 4A */	lis r2, TRK_saved_exceptionID@h
+/* 80329A24 00326604  60 42 4B 48 */	ori r2, r2, TRK_saved_exceptionID@l
 /* 80329A28 00326608  B0 62 00 00 */	sth r3, 0(r2)
 /* 80329A2C 0032660C  2C 03 05 00 */	cmpwi r3, 0x500
 /* 80329A30 00326610  40 82 00 84 */	bne .L_80329AB4
@@ -753,16 +753,16 @@ TRKInterruptHandler:
 /* 80329A90 00326670  98 62 00 9C */	stb r3, 0x9c(r2)
 /* 80329A94 00326674  48 00 00 20 */	b .L_80329AB4
 .L_80329A98:
-/* 80329A98 00326678  3C 40 80 4A */	lis r2, MTRK_NubInit_804A4B4C@h
-/* 80329A9C 0032667C  60 42 4B 4C */	ori r2, r2, MTRK_NubInit_804A4B4C@l
+/* 80329A98 00326678  3C 40 80 4A */	lis r2, gTRKSaveState@h
+/* 80329A9C 0032667C  60 42 4B 4C */	ori r2, r2, gTRKSaveState@l
 /* 80329AA0 00326680  80 62 00 88 */	lwz r3, 0x88(r2)
 /* 80329AA4 00326684  7C 6F F1 20 */	mtcrf 0xff, r3
 /* 80329AA8 00326688  80 62 00 0C */	lwz r3, 0xc(r2)
 /* 80329AAC 0032668C  80 42 00 08 */	lwz r2, 8(r2)
 /* 80329AB0 00326690  4C 00 00 64 */	rfi
 .L_80329AB4:
-/* 80329AB4 00326694  3C 40 80 4A */	lis r2, MTRK_NubInit_804A4B48@h
-/* 80329AB8 00326698  60 42 4B 48 */	ori r2, r2, MTRK_NubInit_804A4B48@l
+/* 80329AB4 00326694  3C 40 80 4A */	lis r2, TRK_saved_exceptionID@h
+/* 80329AB8 00326698  60 42 4B 48 */	ori r2, r2, TRK_saved_exceptionID@l
 /* 80329ABC 0032669C  A0 62 00 00 */	lhz r3, 0(r2)
 /* 80329AC0 003266A0  3C 40 80 40 */	lis r2, gTRKExceptionStatus@h
 /* 80329AC4 003266A4  60 42 08 54 */	ori r2, r2, gTRKExceptionStatus@l
@@ -1662,3 +1662,24 @@ gTRKStepStatus:
     .4byte NULL
     .4byte NULL
     .4byte NULL
+
+
+.section .bss, "wa"
+.global TRK_saved_exceptionID
+TRK_saved_exceptionID:
+    .skip 0x4
+.global gTRKSaveState
+gTRKSaveState:
+    .skip 0x94
+.global TRKvalue128_temp
+TRKvalue128_temp:
+    .skip 0x10
+.global gTRKState
+gTRKState:
+    .skip 0xA8
+.global gTRKCPUState
+gTRKCPUState:
+    .skip 0x430
+.global MTRK_NubInit_804A50C8
+MTRK_NubInit_804A50C8:
+    .skip 0x8

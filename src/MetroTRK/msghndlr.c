@@ -6,11 +6,11 @@
 
 /// #TRKStandardACK
 
-/// #MTRK_MsgHndlr_8032785C
+/// #TRKDoUnsupported
 
-/// #MTRK_MsgHndlr_80327884
+/// #TRKDoConnect
 
-/// #MTRK_MsgHndlr_803278AC
+/// #TRKDoDisconnect
 
 /// #TRKDoReset
 
