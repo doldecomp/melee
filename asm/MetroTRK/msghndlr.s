@@ -86,8 +86,8 @@ TRKStandardACK:
 /* 80327854 00324434  7C 08 03 A6 */	mtlr r0
 /* 80327858 00324438  4E 80 00 20 */	blr
 
-.global MTRK_MsgHndlr_8032785C
-MTRK_MsgHndlr_8032785C:
+.global TRKDoUnsupported
+TRKDoUnsupported:
 /* 8032785C 0032443C  7C 08 02 A6 */	mflr r0
 /* 80327860 00324440  38 80 00 80 */	li r4, 0x80
 /* 80327864 00324444  90 01 00 04 */	stw r0, 4(r1)
@@ -99,8 +99,8 @@ MTRK_MsgHndlr_8032785C:
 /* 8032787C 0032445C  7C 08 03 A6 */	mtlr r0
 /* 80327880 00324460  4E 80 00 20 */	blr
 
-.global MTRK_MsgHndlr_80327884
-MTRK_MsgHndlr_80327884:
+.global TRKDoConnect
+TRKDoConnect:
 /* 80327884 00324464  7C 08 02 A6 */	mflr r0
 /* 80327888 00324468  38 80 00 80 */	li r4, 0x80
 /* 8032788C 0032446C  90 01 00 04 */	stw r0, 4(r1)
@@ -112,8 +112,8 @@ MTRK_MsgHndlr_80327884:
 /* 803278A4 00324484  7C 08 03 A6 */	mtlr r0
 /* 803278A8 00324488  4E 80 00 20 */	blr
 
-.global MTRK_MsgHndlr_803278AC
-MTRK_MsgHndlr_803278AC:
+.global TRKDoDisconnect
+TRKDoDisconnect:
 /* 803278AC 0032448C  7C 08 02 A6 */	mflr r0
 /* 803278B0 00324490  38 80 00 80 */	li r4, 0x80
 /* 803278B4 00324494  90 01 00 04 */	stw r0, 4(r1)

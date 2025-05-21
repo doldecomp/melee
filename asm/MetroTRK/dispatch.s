@@ -4,9 +4,9 @@
 
 .global TRKInitializeDispatcher
 TRKInitializeDispatcher:
-/* 803276A8 00324288  3C 60 80 4A */	lis r3, MTRK_NubInit_804A4B40@ha
+/* 803276A8 00324288  3C 60 80 4A */	lis r3, gTRKDispatchTableSize@ha
 /* 803276AC 0032428C  38 00 00 20 */	li r0, 0x20
-/* 803276B0 00324290  90 03 4B 40 */	stw r0, MTRK_NubInit_804A4B40@l(r3)
+/* 803276B0 00324290  90 03 4B 40 */	stw r0, gTRKDispatchTableSize@l(r3)
 /* 803276B4 00324294  38 60 00 00 */	li r3, 0
 /* 803276B8 00324298  4E 80 00 20 */	blr
 
@@ -24,14 +24,14 @@ TRKDispatchMessage:
 /* 803276E0 003242C0  38 7E 00 00 */	addi r3, r30, 0
 /* 803276E4 003242C4  38 81 00 08 */	addi r4, r1, 8
 /* 803276E8 003242C8  4B FF FB 21 */	bl TRKReadBuffer1_ui8
-/* 803276EC 003242CC  3C 60 80 4A */	lis r3, MTRK_NubInit_804A4B40@ha
+/* 803276EC 003242CC  3C 60 80 4A */	lis r3, gTRKDispatchTableSize@ha
 /* 803276F0 003242D0  88 81 00 08 */	lbz r4, 8(r1)
-/* 803276F4 003242D4  80 03 4B 40 */	lwz r0, MTRK_NubInit_804A4B40@l(r3)
+/* 803276F4 003242D4  80 03 4B 40 */	lwz r0, gTRKDispatchTableSize@l(r3)
 /* 803276F8 003242D8  7C 04 00 40 */	cmplw r4, r0
 /* 803276FC 003242DC  40 80 00 28 */	bge .L_80327724
-/* 80327700 003242E0  3C 60 80 40 */	lis r3, MTRK_Dispatch_80400788@ha
+/* 80327700 003242E0  3C 60 80 40 */	lis r3, gTRKDispatchTable@ha
 /* 80327704 003242E4  54 84 10 3A */	slwi r4, r4, 2
-/* 80327708 003242E8  38 03 07 88 */	addi r0, r3, MTRK_Dispatch_80400788@l
+/* 80327708 003242E8  38 03 07 88 */	addi r0, r3, gTRKDispatchTable@l
 /* 8032770C 003242EC  7C 60 22 14 */	add r3, r0, r4
 /* 80327710 003242F0  81 83 00 00 */	lwz r12, 0(r3)
 /* 80327714 003242F4  38 7E 00 00 */	addi r3, r30, 0
@@ -50,39 +50,45 @@ TRKDispatchMessage:
 
 .section .data
     .balign 8
-.global MTRK_Dispatch_80400788
-MTRK_Dispatch_80400788:
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_80327884
-    .4byte MTRK_MsgHndlr_803278AC
+.global gTRKDispatchTableSize
+gTRKDispatchTableSize:
+    .4byte TRKDoUnsupported
+    .4byte TRKDoConnect
+    .4byte TRKDoDisconnect
     .4byte TRKDoReset
     .4byte TRKDoVersions
     .4byte TRKDoSupportMask
     .4byte TRKDoCPUType
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
     .4byte TRKDoReadMemory
     .4byte TRKDoWriteMemory
     .4byte TRKDoReadRegisters
     .4byte TRKDoWriteRegisters
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
     .4byte TRKDoFlushCache
-    .4byte MTRK_MsgHndlr_8032785C
+    .4byte TRKDoUnsupported
     .4byte TRKDoContinue
     .4byte TRKDoStep
     .4byte TRKDoStop
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
-    .4byte MTRK_MsgHndlr_8032785C
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
+    .4byte TRKDoUnsupported
     .4byte NULL
     .4byte NULL
+
+
+.section .bss, "wa"
+.global gTRKDispatchTableSize
+gTRKDispatchTableSize:
+    .skip 0x8

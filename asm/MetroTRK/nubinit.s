@@ -141,42 +141,6 @@ MTRK_NubInit_803B93A0:
 
 
 .section .bss, "wa"
-.global MTRK_NubInit_804A3148
-MTRK_NubInit_804A3148:
-    .skip 0x28
 .global gTRKBigEndian
 gTRKBigEndian:
     .skip 0x8
-.global MTRK_NubInit_804A3178
-MTRK_NubInit_804A3178:
-    .skip 0x19B0
-.global gTRKFramingState
-gTRKFramingState:
-    .skip 0x14
-.global gTRKInputPendingPtr
-gTRKInputPendingPtr:
-    .skip 0x4
-.global MTRK_NubInit_804A4B40
-MTRK_NubInit_804A4B40:
-    .skip 0x8
-.global MTRK_NubInit_804A4B48
-MTRK_NubInit_804A4B48:
-    .skip 0x4
-.global MTRK_NubInit_804A4B4C
-MTRK_NubInit_804A4B4C:
-    .skip 0x94
-.global TRKvalue128_temp
-TRKvalue128_temp:
-    .skip 0x10
-.global gTRKState
-gTRKState:
-    .skip 0xA8
-.global gTRKCPUState
-gTRKCPUState:
-    .skip 0x430
-.global MTRK_NubInit_804A50C8
-MTRK_NubInit_804A50C8:
-    .skip 0x8
-.global TRK_mainError
-TRK_mainError:
-    .skip 0x10
