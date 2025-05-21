@@ -1193,6 +1193,7 @@ def generate_objdiff_config(
     COMPILER_MAP = {
         "GC/1.0": "mwcc_233_144",
         "GC/1.1": "mwcc_233_159",
+        "GC/1.1p1": "mwcc_233_159p1",
         "GC/1.2.5": "mwcc_233_163",
         "GC/1.2.5e": "mwcc_233_163e",
         "GC/1.2.5n": "mwcc_233_163n",
