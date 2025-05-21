@@ -2,7 +2,6 @@
 
 #include <dolphin/os.h>
 
-DSError TRKDoNotifyStopped(u8 cmdId);
 static bool TRKTargetCheckStep(void);
 
 extern OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);

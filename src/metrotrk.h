@@ -18,6 +18,7 @@
 #include "MetroTRK/msgcmd.h"
 #include "MetroTRK/msghndlr.h"
 #include "MetroTRK/mutex_TRK.h"
+#include "MetroTRK/notify.h"
 #include "MetroTRK/nubevent.h"
 #include "MetroTRK/nubinit.h"
 #include "MetroTRK/ppc_except.h"
