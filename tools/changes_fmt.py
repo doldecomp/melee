@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 import os
 import json
 from pathlib import Path
-from typing import Tuple
+from typing import Optional, Tuple
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, ".."))
@@ -25,7 +25,13 @@ FUNCTION_KEYS_TO_DIFF = [
 Change = Tuple[str, str, float, float]
 
 
-def get_changes(changes_file: str) -> list[Change]:
+def format_float(value: float) -> str:
+    if value < 100.0 and value > 99.99:
+        value = 99.99
+    return "%6.2f" % value
+
+
+def get_changes(changes_file: str) -> Tuple[list[Change], list[Change]]:
     changes_file = os.path.relpath(changes_file, root_dir)
     with open(changes_file, "r") as f:
         changes_json = json.load(f)
@@ -33,7 +39,7 @@ def get_changes(changes_file: str) -> list[Change]:
     regressions = []
     progressions = []
 
-    def diff_key(object_name: str, object: dict, key: str):
+    def diff_key(object_name: Optional[str], object: dict, key: str):
         from_value = object.get("from", {}).get(key, 0.0)
         to_value = object.get("to", {}).get(key, 0.0)
         key = key.removesuffix("_percent")
@@ -77,7 +83,7 @@ def generate_changes_plaintext(changes: list[Change]) -> str:
         if len(name) > name_max_len:
             name = name[: name_max_len - len("[...]")] + "[...]"
         out_lines.append(
-            f"{name:>{name_max_len}} | {key:<{key_max_len}} | {from_value:6.2f}% -> {to_value:5.2f}%"
+            f"{name:>{name_max_len}} | {key:<{key_max_len}} | {format_float(from_value)}% -> {format_float(to_value)}%"
         )
 
     return "\n".join(out_lines)
@@ -106,7 +112,9 @@ def generate_changes_markdown(changes: list[Change], description: str) -> str:
                 name = name[: name_max_len - len("...")] + "..."
             name = f"`{name}`"  # Surround with backticks
         key = key.replace("_", " ").capitalize()
-        out_lines.append(f"| {name} | {key} | {from_value:.2f}% | {to_value:.2f}% |")
+        out_lines.append(
+            f"| {name} | {key} | {format_float(from_value)}% | {format_float(to_value)}% |"
+        )
 
     out_lines.append("</details>")
 
