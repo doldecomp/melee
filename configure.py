@@ -1259,7 +1259,7 @@ config.libs = [
             Object(NonMatching, "MetroTRK/serpoll.c"),
             Object(NonMatching, "MetroTRK/dispatch.c"),
             Object(NonMatching, "MetroTRK/msghndlr.c"),
-            Object(NonMatching, "MetroTRK/flush_cache.c"),
+            Object(Matching, "MetroTRK/flush_cache.c"),
             Object(NonMatching, "MetroTRK/mem_TRK.c"),
             Object(NonMatching, "MetroTRK/targimpl.c"),
             Object(NonMatching, "MetroTRK/dolphin_trk.c"),
