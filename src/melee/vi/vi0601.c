@@ -7,7 +7,7 @@
 
 void un_8031E6CC(void)
 {
-    un_8031CAAC();
+    vi_8031CAAC();
 }
 
 void un_8031E6EC(HSD_GObj* gobj)

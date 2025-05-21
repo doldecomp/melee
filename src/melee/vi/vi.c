@@ -6,7 +6,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 
-char* un_803FFFA8[26] = {
+char* vi_animation_table[26] = {
     "PlCaDViWaitAJ.dat", "PlDkDViWaitAJ.dat", "PlFxDViWaitAJ.dat",
     "PlGwDViWaitAJ.dat", "PlKbDViWaitAJ.dat", "PlKpDViWaitAJ.dat",
     "PlLkDViWaitAJ.dat", "PlLgDViWaitAJ.dat", "PlMrDViWaitAJ.dat",
@@ -18,12 +18,12 @@ char* un_803FFFA8[26] = {
     "PlPcDViWaitAJ.dat", "PlGnDViWaitAJ.dat"
 };
 
-char* un_8031C99C(s32 index)
+char* viGetCharAnimByIndex(s32 index)
 {
-    return un_803FFFA8[index];
+    return vi_animation_table[index];
 }
 
-void un_8031C9B4(s32 arg0, s32 arg1)
+void vi_8031C9B4(s32 arg0, s32 arg1)
 {
     u8 r3 = gm_8017E440();
     if (r3 != 4) {
@@ -31,21 +31,21 @@ void un_8031C9B4(s32 arg0, s32 arg1)
     }
 }
 
-void un_8031CA04(HSD_GObj* arg0)
+void vi_8031CA04(HSD_GObj* gobj)
 {
     Camera_800310A0(2U);
-    arg0->gxlink_prios = 9;
-    HSD_GObj_80390ED0(arg0, 7);
+    gobj->gxlink_prios = 9;
+    HSD_GObj_80390ED0(gobj, 7);
     Camera_800310A0(1U);
-    arg0->gxlink_prios = 8;
-    HSD_GObj_80390ED0(arg0, 7);
+    gobj->gxlink_prios = 8;
+    HSD_GObj_80390ED0(gobj, 7);
     Camera_800310A0(0U);
-    arg0->gxlink_prios = 8;
-    HSD_GObj_80390ED0(arg0, 7);
-    Camera_800313E0(arg0, 1);
+    gobj->gxlink_prios = 8;
+    HSD_GObj_80390ED0(gobj, 7);
+    Camera_800313E0(gobj, 1);
 }
 
-void un_8031CAAC(void)
+void vi_8031CAAC(void)
 {
     u64 temp_ret;
     temp_ret = gm_801A36A0(gm_8017E430());
