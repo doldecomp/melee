@@ -188,6 +188,7 @@ $(BUILD_DIR)/src/sysdolphin/%.c.o: CC := $(CC_EPI)
 $(BUILD_DIR)/src/dolphin/card/%.c.o: CC := $(CC_EPI)
 $(BUILD_DIR)/src/dolphin/hio/%.c.o: CC := $(CC_EPI)
 $(BUILD_DIR)/src/dolphin/pad/%.c.o: CC := $(CC_EPI)
+$(BUILD_DIR)/src/MetroTRK/%.c.o: CC := $(CC_TRK)
 
 -include $(DEP_FILES)
 
