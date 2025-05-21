@@ -8,6 +8,8 @@
 void* gTRKInputPendingPtr;
 static FramingState gTRKFramingState;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
 MessageBufferID TRKTestForPacket(void)
 {
     int bytes;
@@ -40,6 +42,7 @@ MessageBufferID TRKTestForPacket(void)
     }
     return -1;
 }
+#pragma clang diagnostic pop
 
 void TRKGetInput(void)
 {
