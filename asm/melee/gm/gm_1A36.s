@@ -33746,7 +33746,7 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x13000000
-	.4byte un_8031D9C4
+	.4byte vi_8031D9C4
 	.4byte un_8031D858
 	.4byte 0x00000000
 	.4byte 0x00000000

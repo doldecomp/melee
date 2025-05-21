@@ -2,12 +2,12 @@
 
 #include <baselib/forward.h>
 
-#include "vi0102.h"
+#include "vi/vi0102.h"
 
-#include "melee/gm/gm_1A36.h"
-#include "melee/lb/lb_00F9.h"
-#include "melee/lb/lbshadow.h"
-#include "melee/vi/vi.h"
+#include "gm/gm_1A36.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbshadow.h"
+#include "vi/vi.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>

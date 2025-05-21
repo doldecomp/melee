@@ -1,5 +1,10 @@
-#include "vi/vi0402.static.h"
+#include "vi/vi0402.h"
 
+#include "gm/gm_1A36.h"
+#include "lb/lb_00F9.h"
+#include "vi/vi.h"
+
+#include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -12,11 +17,26 @@ void un_8031D6E4(HSD_GObj* gobj)
 
 /// #un_8031D708
 
-/// #fn_8031D80C
+/// #vi_8031D80C
+void vi_8031D80C(HSD_GObj* gobj)
+{
+    HSD_AObj* aobj;
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    HSD_CObjAnim(cobj);
+    aobj = cobj->aobj;
+
+    if (aobj->curr_frame == aobj->end_frame) {
+        lb_800145F4();
+        gm_801A4B60();
+    }
+}
 
 /// #un_8031D858
 
-/// #un_8031D9C4
+void vi_8031D9C4(void)
+{
+    vi_8031CAAC();
+}
 
 void un_8031D9E4(s8 arg0, s8 arg1, s8 arg2)
 {
