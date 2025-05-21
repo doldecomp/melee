@@ -12,14 +12,14 @@
 /* 31CA04 */ void vi_8031CA04(HSD_GObj*);
 /* 31CAAC */ void vi_8031CAAC(void);
 
-inline void vi_EraseScreen(HSD_GObj* gobj, u8 erase_colors[4])
+inline void vi_EraseScreen(HSD_GObj* gobj, u8 erase_colors[4], u64 prio)
 {
     if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
         HSD_SetEraseColor(erase_colors[0], erase_colors[1], erase_colors[2],
                           erase_colors[3]);
         HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
         vi_8031CA04(gobj);
-        gobj->gxlink_prios = 0x881;
+        gobj->gxlink_prios = prio;
         HSD_GObj_80390ED0(gobj, 0x7);
         HSD_CObjEndCurrent();
     }

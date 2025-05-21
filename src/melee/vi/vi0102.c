@@ -28,7 +28,7 @@ void vi_8031CC8C(HSD_GObj* gobj)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_EraseScreen(gobj, erase_colors);
+    vi_EraseScreen(gobj, erase_colors, 0x881);
 }
 
 void vi_8031CD20(HSD_GObj* gobj)

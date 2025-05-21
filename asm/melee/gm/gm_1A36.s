@@ -33751,17 +33751,17 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x14000000
-	.4byte un_8031E0F0
+	.4byte vi_8031E0F0
 	.4byte un_8031DE58
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x15000000
-	.4byte un_8031E6CC
+	.4byte vi_8031E6CC
 	.4byte un_8031E444
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x16000000
-	.4byte un_8031ED50
+	.4byte vi_8031ED50
 	.4byte un_8031EBBC
 	.4byte 0x00000000
 	.4byte 0x00000000

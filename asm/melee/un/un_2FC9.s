@@ -15530,8 +15530,8 @@ un_804D6F74:
 .global un_804D6F78
 un_804D6F78:
     .skip 0x4
-.global un_804D6F7C
-un_804D6F7C:
+.global erase_colors
+erase_colors:
     .skip 0x4
 .global un_804D6F80
 un_804D6F80:

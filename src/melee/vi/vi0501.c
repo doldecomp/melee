@@ -1,16 +1,35 @@
-#include "vi0501.static.h"
+#include "vi0501.h"
 
+#include "gm/gm_1A36.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbshadow.h"
+#include "vi/vi.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/displayfunc.h>
+#include <baselib/wobj.h>
+
+static u8 erase_colors[3];
 un_804D7004_t un_804D6FA8;
 
 /// #un_8031D9F8
 
-/// #fn_8031DC80
+void vi_8031DC80(HSD_GObj* gobj)
+{
+    PAD_STACK(8);
+    lbShadow_8000F38C(0);
+    vi_EraseScreen(gobj, erase_colors, 0x281);
+}
 
 /// #fn_8031DD14
 
 /// #un_8031DE58
 
-/// #un_8031E0F0
+void vi_8031E0F0(void)
+{
+    vi_8031CAAC();
+}
 
 void un_8031E110(s8 arg0, s8 arg1, s8 arg2)
 {
