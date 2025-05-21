@@ -5,6 +5,9 @@
 DSError TRKDoNotifyStopped(u8 cmdId);
 static bool TRKTargetCheckStep(void);
 
+extern OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);
+extern OSThread* __gCurrentThread AT_ADDRESS(0x800000E4);
+
 #define BOOTINFO 0x80000000
 #define MEM2_CACHED 0x90000000
 #define DB_EXCEPTION_MASK 0x44
@@ -474,7 +477,7 @@ DSError TRKTargetCPUType(DSCPUType* cpuType)
 
 void TRKUARTInterruptHandler(void);
 
-ASM void TRKInterruptHandler(u16)
+ASM void TRKInterruptHandler(register u16 val)
 {
 #ifdef __MWERKS__ // clang-format off
     nofralloc
@@ -493,18 +496,18 @@ ASM void TRKInterruptHandler(u16)
     sync
     lis r2, TRK_saved_exceptionID@h
     ori r2, r2, TRK_saved_exceptionID@l
-    sth r3, 0(r2)
-    cmpwi r3, 0x500
+    sth val, 0(r2)
+    cmpwi val, 0x500
     bne L_802CF694
     lis r2, gTRKCPUState@h
     ori r2, r2, gTRKCPUState@l
-    mflr r3
-    stw r3, ProcessorState_PPC.transport_handler_saved_ra(r2)
+    mflr val
+    stw val, ProcessorState_PPC.transport_handler_saved_ra(r2)
     bl TRKUARTInterruptHandler
     lis r2, gTRKCPUState@h
     ori r2, r2, gTRKCPUState@l
-    lwz r3, ProcessorState_PPC.transport_handler_saved_ra(r2)
-    mtlr r3
+    lwz val, ProcessorState_PPC.transport_handler_saved_ra(r2)
+    mtlr val
     lis r2, gTRKState@h
     ori r2, r2, gTRKState@l
     lwz r2, TRKState_PPC.inputPendingPtr(r2)
@@ -518,21 +521,21 @@ ASM void TRKInterruptHandler(u16)
     beq L_802CF678
     lis r2, gTRKState@h
     ori r2, r2, gTRKState@l
-    li r3, 1
-    stb r3, TRKState_PPC.inputActivated(r2)
+    li val, 1
+    stb val, TRKState_PPC.inputActivated(r2)
     b L_802CF694
 L_802CF678:
     lis r2, gTRKSaveState@h
     ori r2, r2, gTRKSaveState@l
-    lwz r3, Default_PPC.CR(r2)
-    mtcrf 0xFF, r3
-    lwz r3, Default_PPC.GPR[3](r2)
+    lwz val, Default_PPC.CR(r2)
+    mtcrf 0xFF, val
+    lwz val, Default_PPC.GPR[3](r2)
     lwz r2, Default_PPC.GPR[2](r2)
     rfi 
 L_802CF694:
     lis r2, TRK_saved_exceptionID@h
     ori r2, r2, TRK_saved_exceptionID@l
-    lhz r3, 0(r2)
+    lhz val, 0(r2)
     lis r2, gTRKExceptionStatus@h
     ori r2, r2, gTRKExceptionStatus@l
     lbz r2, TRKExceptionStatus.inTRK(r2)
@@ -544,8 +547,8 @@ L_802CF694:
     stw r1, ProcessorState_PPC.Default.GPR[1](r2)
     mfsprg r0, 1
     stw r0, ProcessorState_PPC.Default.GPR[2](r2)
-    sth r3, ProcessorState_PPC.Extended1.exceptionID(r2)
-    sth r3, (ProcessorState_PPC.Extended1.exceptionID + 2)(r2)
+    sth val, ProcessorState_PPC.Extended1.exceptionID(r2)
+    sth val, (ProcessorState_PPC.Extended1.exceptionID + 2)(r2)
     mfsprg r0, 2
     stw r0, ProcessorState_PPC.Default.GPR[3](r2)
     stmw r4, ProcessorState_PPC.Default.GPR[4](r2)
@@ -558,8 +561,8 @@ L_802CF694:
     bl TRKSaveExtended1Block
     lis r2, gTRKExceptionStatus@h
     ori r2, r2, gTRKExceptionStatus@l
-    li r3, 1
-    stb r3, TRKExceptionStatus.inTRK(r2)
+    li val, 1
+    stb val, TRKExceptionStatus.inTRK(r2)
     lis r2, gTRKState@h
     ori r2, r2, gTRKState@l
     lwz r0, TRKState_PPC.MSR(r2)
@@ -576,7 +579,7 @@ L_802CF694:
     mtdsisr r0
     lwz r0, TRKState_PPC.DAR(r2)
     mtdar r0
-    lmw r3, TRKState_PPC.GPR[3](r2)
+    lmw val, TRKState_PPC.GPR[3](r2)
     lwz r0, TRKState_PPC.GPR[0](r2)
     lwz r1, TRKState_PPC.GPR[1](r2)
     lwz r2, TRKState_PPC.GPR[2](r2)
