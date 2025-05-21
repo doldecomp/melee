@@ -906,8 +906,8 @@ TRKInterruptHandler:
 /* 80329CC4 003268A4  7C 08 03 A6 */	mtlr r0
 /* 80329CC8 003268A8  4E 80 00 20 */	blr
 
-.global TRKInterruptHandlerEnableInterrupts
-TRKInterruptHandlerEnableInterrupts:
+.global TRKSwapAndGo
+TRKSwapAndGo:
 /* 80329CCC 003268AC  3C 60 80 4A */	lis r3, gTRKState@h
 /* 80329CD0 003268B0  60 63 4B F0 */	ori r3, r3, gTRKState@l
 /* 80329CD4 003268B4  BC 03 00 00 */	stmw r0, 0(r3)
@@ -938,7 +938,7 @@ TRKInterruptHandlerEnableInterrupts:
 /* 80329D38 00326918  60 42 4B F0 */	ori r2, r2, gTRKState@l
 /* 80329D3C 0032691C  38 60 00 01 */	li r3, 1
 /* 80329D40 00326920  98 62 00 9C */	stb r3, 0x9c(r2)
-/* 80329D44 00326924  48 00 00 4C */	b .L_80329D90
+/* 80329D44 00326924  48 00 00 4C */	b TRKInterruptHandlerEnableInterrupts
 .L_80329D48:
 /* 80329D48 00326928  3C 40 80 40 */	lis r2, gTRKExceptionStatus@h
 /* 80329D4C 0032692C  60 42 08 54 */	ori r2, r2, gTRKExceptionStatus@l
@@ -958,7 +958,9 @@ TRKInterruptHandlerEnableInterrupts:
 /* 80329D84 00326964  80 22 00 04 */	lwz r1, 4(r2)
 /* 80329D88 00326968  80 42 00 08 */	lwz r2, 8(r2)
 /* 80329D8C 0032696C  4C 00 00 64 */	rfi
-.L_80329D90:
+
+.global TRKInterruptHandlerEnableInterrupts
+TRKInterruptHandlerEnableInterrupts:
 /* 80329D90 00326970  3C 40 80 4A */	lis r2, gTRKState@h
 /* 80329D94 00326974  60 42 4B F0 */	ori r2, r2, gTRKState@l
 /* 80329D98 00326978  80 02 00 8C */	lwz r0, 0x8c(r2)

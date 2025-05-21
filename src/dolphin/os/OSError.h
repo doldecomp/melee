@@ -29,6 +29,6 @@ typedef void (*OSErrorHandler)(OSError error, OSContext* context, ...);
 OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler);
 void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar);
 ATTRIBUTE_NORETURN void OSPanic(char* file, int line, char* msg, ...);
-void OSReport(char*, ...);
+WEAK void OSReport(const char* msg, ...);
 
 #endif

@@ -1,5 +1,8 @@
 #include "mpc_7xx_603e.h"
 
+#include "MetroTRK/m7xx_m603e_reg.h"
+#include "MetroTRK/ppc_targimpl.h"
+
 static int const target_cpu_minor_type = 84;
 
 ASM void TRKSaveExtended1Block(void)

@@ -48,6 +48,12 @@ DispatchCallback gTRKDispatchTable[] = {
     NULL,
 };
 
+DSError TRKInitializeDispatcher(void)
+{
+    gTRKDispatchTableSize = 32; // ARRAY_COUNT(gTRKDispatchTable) - 2;
+    return kNoError;
+}
+
 DSError TRKDispatchMessage(MessageBuffer* buffer)
 {
     DSError result = kDispatchError;
@@ -61,10 +67,4 @@ DSError TRKDispatchMessage(MessageBuffer* buffer)
     }
 
     return result;
-}
-
-DSError TRKInitializeDispatcher(void)
-{
-    gTRKDispatchTableSize = 32; // ARRAY_COUNT(gTRKDispatchTable) - 2;
-    return kNoError;
 }

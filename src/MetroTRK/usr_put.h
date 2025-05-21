@@ -4,5 +4,6 @@
 #include <platform.h>
 
 void usr_puts_serial(const char* msg);
+void usr_put_initialize(void);
 
 #endif

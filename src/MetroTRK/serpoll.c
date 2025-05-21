@@ -8,49 +8,6 @@
 void* gTRKInputPendingPtr;
 static FramingState gTRKFramingState;
 
-DSError TRKInitializeSerialHandler(void)
-{
-    gTRKFramingState.fBufferID = -1;
-    gTRKFramingState.fReceiveState = 0;
-    gTRKFramingState.fEscape = 0;
-    return kNoError;
-}
-
-DSError TRKTerminateSerialHandler(void)
-{
-    return kNoError;
-}
-
-void TRKProcessInput(MessageBufferID bufID)
-{
-    NubEvent event;
-
-    TRKConstructEvent(&event, 2);
-    event.fMessageBufferID = bufID;
-    gTRKFramingState.fBufferID = -1;
-    TRKPostEvent(&event);
-}
-
-void TRKGetInput(void)
-{
-    MessageBuffer* msgbuffer;
-    MessageBufferID bufID;
-    u8 command;
-
-    bufID = TRKTestForPacket();
-
-    if (bufID != -1) {
-        msgbuffer = TRKGetBuffer(bufID);
-        TRKSetBufferPosition(msgbuffer, 0);
-        TRKReadBuffer1_ui8(msgbuffer, &command);
-        if (command < 0x80) {
-            TRKProcessInput(bufID);
-        } else {
-            TRKReleaseBuffer(bufID);
-        }
-    }
-}
-
 MessageBufferID TRKTestForPacket(void)
 {
     int bytes;
@@ -82,4 +39,47 @@ MessageBufferID TRKTestForPacket(void)
         TRKReleaseBuffer(id);
     }
     return -1;
+}
+
+void TRKGetInput(void)
+{
+    MessageBuffer* msgbuffer;
+    MessageBufferID bufID;
+    u8 command;
+
+    bufID = TRKTestForPacket();
+
+    if (bufID != -1) {
+        msgbuffer = TRKGetBuffer(bufID);
+        TRKSetBufferPosition(msgbuffer, 0);
+        TRKReadBuffer1_ui8(msgbuffer, &command);
+        if (command < 0x80) {
+            TRKProcessInput(bufID);
+        } else {
+            TRKReleaseBuffer(bufID);
+        }
+    }
+}
+
+void TRKProcessInput(MessageBufferID bufID)
+{
+    NubEvent event;
+
+    TRKConstructEvent(&event, 2);
+    event.fMessageBufferID = bufID;
+    gTRKFramingState.fBufferID = -1;
+    TRKPostEvent(&event);
+}
+
+DSError TRKInitializeSerialHandler(void)
+{
+    gTRKFramingState.fBufferID = -1;
+    gTRKFramingState.fReceiveState = 0;
+    gTRKFramingState.fEscape = 0;
+    return kNoError;
+}
+
+DSError TRKTerminateSerialHandler(void)
+{
+    return kNoError;
 }
