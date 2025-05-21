@@ -7,7 +7,6 @@
 
 #include <dolphin/os/OSInterrupt.h>
 
-
 typedef enum {
     HARDWARE_GDEV = 0,
     HARDWARE_NDEV = 1,
