@@ -6,7 +6,7 @@
 
 #include <dolphin/amcstubs/AmcExi2Stubs.h>
 #include <dolphin/OdemuExi2/DebuggerDriver.h>
-#include <dolphin/OS/OSThread.h>
+#include <dolphin/os/OSThread.h>
 
 static DBCommTable gDBCommTable = { NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 
