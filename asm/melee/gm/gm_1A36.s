@@ -32888,7 +32888,7 @@
 /* 801BF74C 001BC32C  48 1C 0E 35 */	bl HSD_Randi
 /* 801BF750 001BC330  38 83 00 00 */	addi r4, r3, 0x0
 /* 801BF754 001BC334  38 60 00 0E */	li r3, 0xe
-/* 801BF758 001BC338  48 15 D8 C9 */	bl un_8031D020
+/* 801BF758 001BC338  48 15 D8 C9 */	bl vi_8031D020
 /* 801BF75C 001BC33C  38 60 00 04 */	li r3, 0x4
 /* 801BF760 001BC340  48 1C 0E 21 */	bl HSD_Randi
 /* 801BF764 001BC344  3B E3 00 00 */	addi r31, r3, 0x0
@@ -33736,8 +33736,8 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x11000000
-	.4byte un_8031D000
-	.4byte un_8031CD94
+	.4byte vi_8031D000
+	.4byte vi_8031CD94
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x12000000
@@ -33746,22 +33746,22 @@
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x13000000
-	.4byte un_8031D9C4
+	.4byte vi_8031D9C4
 	.4byte un_8031D858
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x14000000
-	.4byte un_8031E0F0
+	.4byte vi_8031E0F0
 	.4byte un_8031DE58
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x15000000
-	.4byte un_8031E6CC
+	.4byte vi_8031E6CC
 	.4byte un_8031E444
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x16000000
-	.4byte un_8031ED50
+	.4byte vi_8031ED50
 	.4byte un_8031EBBC
 	.4byte 0x00000000
 	.4byte 0x00000000

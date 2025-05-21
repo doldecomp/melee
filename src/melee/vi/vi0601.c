@@ -5,12 +5,17 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-void un_8031E6CC(void)
+void vi_8031E6CC(void)
 {
-    un_8031CAAC();
+    vi_8031CAAC();
 }
 
-void un_8031E6EC(HSD_GObj* gobj)
+void vi_8031E6EC(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
+
+void vi_8031ED50(void)
+{
+    vi_8031CAAC();
 }

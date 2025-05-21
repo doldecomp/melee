@@ -10,5 +10,6 @@
 /* 00ED54 */ void lbShadow_8000ED54(s32*, HSD_JObj*);
 /* 00EE8C */ void lbShadow_8000EE8C(s32*);
 /* 00EFEC */ void lbShadow_8000EFEC(void);
+/* 00F38C */ void lbShadow_8000F38C(s32);
 
 #endif
