@@ -3584,12 +3584,13 @@ MetroTRK/targimpl.c:
 	.text       start:0x8032904C end:0x8032A628
 	.rodata     start:0x803B93C0 end:0x803B9410
 	.data       start:0x80400848 end:0x80400878
-	.bss        start:0x804A4B48 end:0x804A50D0
+	.bss        start:0x804A4B48 end:0x804A50C8
 
 MetroTRK/dolphin_trk.c:
 	.init       start:0x800051CC end:0x800051EC
 	.text       start:0x8032A628 end:0x8032A868
 	.data       start:0x80400878 end:0x804008B8
+	.bss        start:0x804A50C8 end:0x804A50D0
 
 MetroTRK/mpc_7xx_603e.c:
 	.text       start:0x8032A868 end:0x8032ABD8
