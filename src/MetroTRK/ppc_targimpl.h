@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include "metrotrk/m7xx_m603e_reg.h"
-#include "metrotrk/ppc_reg.h"
-#include "metrotrk/trk.h"
+#include "MetroTRK/m7xx_m603e_reg.h"
+#include "MetroTRK/ppc_reg.h"
+#include "MetroTRK/trk.h"
 
 typedef struct TRKState_PPC {
     /* 0x00 */ DefaultType GPR[32];

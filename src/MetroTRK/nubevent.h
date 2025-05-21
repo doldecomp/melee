@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-#include "metrotrk/dserror.h"
-#include "metrotrk/msgbuf.h"
+#include "MetroTRK/dserror.h"
+#include "MetroTRK/msgbuf.h"
 
 typedef unsigned long NubEventID;
 

@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "dolphin/os/OSInterrupt.h"
-#include "metrotrk/dserror.h"
+#include "MetroTRK/dserror.h"
 
 typedef enum {
     HARDWARE_GDEV = 0,
