@@ -158,7 +158,7 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20240706"
+config.compilers_tag = "20250520"
 config.dtk_tag = "v1.0.0"
 config.objdiff_tag = "v2.2.0"
 config.sjiswrap_tag = "v1.1.1"
@@ -284,6 +284,7 @@ def Lib(
     objects: Objects,
     cflags=cflags_base,
     fix_epilogue=True,
+    fix_trk=False,
     includes: List[str] = includes_base,
     system_includes: List[str] = system_includes_base,
     src_dir: Optional[str] = None,
@@ -305,6 +306,9 @@ def Lib(
         "progress_category": category,
         "objects": objects,
     }
+
+    if fix_trk:
+        lib["mw_version"] = "GC/1.1p1"
 
     if src_dir is not None:
         lib["src_dir"] = src_dir
@@ -407,6 +411,7 @@ def TRKLib(lib_name: str, objects: Objects) -> Library:
         objects,
         cflags=cflags_trk,
         fix_epilogue=False,
+        fix_trk=True,
         category="runtime",
     )
 
