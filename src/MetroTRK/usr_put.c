@@ -1,3 +1,5 @@
+#include "usr_put.h"
+
 #include "MetroTRK/msghndlr.h"
 
 extern void OSReport(const char*);
