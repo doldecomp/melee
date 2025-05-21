@@ -817,7 +817,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/MetroTRK/dolphin_trk.s.o\
     $(BUILD_DIR)/src/MetroTRK/mpc_7xx_603e.c.o\
     $(BUILD_DIR)/src/MetroTRK/main_TRK.c.o\
-    $(BUILD_DIR)/asm/MetroTRK/dolphin_trk_glue.s.o\
+    $(BUILD_DIR)/src/MetroTRK/dolphin_trk_glue.c.o\
     $(BUILD_DIR)/src/MetroTRK/targcont.c.o\
 
 TEXT_O_FILES +=\

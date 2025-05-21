@@ -1249,7 +1249,7 @@ config.libs = [
             Object(NonMatching, "MetroTRK/dolphin_trk.c"),
             Object(Matching, "MetroTRK/mpc_7xx_603e.c"),
             Object(Matching, "MetroTRK/main_TRK.c"),
-            Object(NonMatching, "MetroTRK/dolphin_trk_glue.c"),
+            Object(Matching, "MetroTRK/dolphin_trk_glue.c"),
             Object(Matching, "MetroTRK/targcont.c"),
         ],
     ),
