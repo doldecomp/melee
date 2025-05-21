@@ -1,3 +1,5 @@
+#include "notify.h"
+
 #include "MetroTRK/msgbuf.h"
 #include "MetroTRK/support.h"
 #include "MetroTRK/targimpl.h"
