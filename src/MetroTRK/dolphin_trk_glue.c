@@ -6,6 +6,7 @@
 
 #include <dolphin/amcstubs/AmcExi2Stubs.h>
 #include <dolphin/OdemuExi2/DebuggerDriver.h>
+#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSThread.h>
 
 static DBCommTable gDBCommTable = { NULL, NULL, NULL, NULL, NULL, NULL, NULL };
@@ -127,7 +128,10 @@ void UnreserveEXI2Port(void)
     gDBCommTable.close_func();
 }
 
+#pragma push
+#pragma peephole off
 void TRK_board_display(char* str)
 {
     OSReport(str);
 }
+#pragma pop
