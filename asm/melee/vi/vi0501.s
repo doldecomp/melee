@@ -181,8 +181,8 @@ un_8031D9F8:
 /* 8031DCA0 0031A880  48 04 A7 B9 */	bl HSD_CObjSetCurrent
 /* 8031DCA4 0031A884  2C 03 00 00 */	cmpwi r3, 0
 /* 8031DCA8 0031A888  41 82 00 58 */	beq .L_8031DD00
-/* 8031DCAC 0031A88C  38 CD B8 DC */	addi r6, r13, erase_colors@sda21
-/* 8031DCB0 0031A890  88 6D B8 DC */	lbz r3, erase_colors@sda21(r13)
+/* 8031DCAC 0031A88C  38 CD B8 DC */	addi r6, r13, erase_colors_vi0501@sda21
+/* 8031DCB0 0031A890  88 6D B8 DC */	lbz r3, erase_colors_vi0501@sda21(r13)
 /* 8031DCB4 0031A894  88 86 00 01 */	lbz r4, 1(r6)
 /* 8031DCB8 0031A898  88 A6 00 02 */	lbz r5, 2(r6)
 /* 8031DCBC 0031A89C  88 C6 00 03 */	lbz r6, 3(r6)
@@ -349,7 +349,7 @@ un_8031DE58:
 /* 8031DF0C 0031AAEC  80 1C 00 18 */	lwz r0, 0x18(r28)
 /* 8031DF10 0031AAF0  38 60 00 0B */	li r3, 0xb
 /* 8031DF14 0031AAF4  38 80 00 03 */	li r4, 3
-/* 8031DF18 0031AAF8  90 0D B8 DC */	stw r0, erase_colors@sda21(r13)
+/* 8031DF18 0031AAF8  90 0D B8 DC */	stw r0, erase_colors_vi0501@sda21(r13)
 /* 8031DF1C 0031AAFC  38 A0 00 00 */	li r5, 0
 /* 8031DF20 0031AB00  48 07 22 D1 */	bl GObj_Create
 /* 8031DF24 0031AB04  80 8D B8 D0 */	lwz r4, un_804D6F70@sda21(r13)
