@@ -38,6 +38,7 @@ DEP_FILES := $(O_FILES:.o=.dep)
 #-------------------------------------------------------------------------------
 
 MWCC_VERSION := 1.2.5
+MWCC_TRK_VERSION := 1.1p1
 MWCC_EPI_VERSION := 1.2.5n
 MWCC_LD_VERSION := 1.3.2
 
@@ -64,6 +65,7 @@ else
 endif
 
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
+CC_TRK  := $(WINE) tools/mwcc_compiler/$(MWCC_TRK_VERSION)/mwcceppc.exe
 CC_EPI  := $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/mwcceppc.exe
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
