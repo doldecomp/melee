@@ -6,7 +6,7 @@ DSError TRKDoNotifyStopped(u8 cmdId);
 static bool TRKTargetCheckStep(void);
 
 extern OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);
-extern OSThread* __gCurrentThread AT_ADDRESS(0x800000E4);
+extern OSThread* __OSCurrentThread AT_ADDRESS(0x800000E4);
 
 #define BOOTINFO 0x80000000
 #define MEM2_CACHED 0x90000000

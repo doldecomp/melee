@@ -2,7 +2,6 @@
 
 #include "MetroTRK/dispatch.h"
 #include "MetroTRK/msgbuf.h"
-#include "MetroTRK/nubevent.h"
 #include "MetroTRK/serpoll.h"
 #include "MetroTRK/targimpl.h"
 
