@@ -419,9 +419,9 @@ DSError TRKTargetAccessExtended2(u32 firstRegister, u32 lastRegister,
 DSError TRKTargetVersions(DSVersions* version)
 {
     version->kernelMajor = 0;
-    version->kernelMinor = 5;
+    version->kernelMinor = 8;
     version->protocolMajor = 1;
-    version->protocolMinor = 9;
+    version->protocolMinor = 10;
     return kNoError;
 }
 
@@ -1086,7 +1086,7 @@ DSError TRKPPCAccessFPRegister(void* srcDestPtr, u32 fpr, bool read)
             instructionData1[3] = 0xC8240000;
         } else {
             instructionData1[0] = 0xD8240000;
-            instructionData1[1] = 0xD8230000;
+            instructionData1[1] = 0xC8230000;
             instructionData1[2] = 0xFDFE0D8E;
             instructionData1[3] = 0xC8240000;
         }

@@ -17,6 +17,8 @@
 #define EXCEPTION_SIZE 0x100
 #define NUM_EXCEPTIONS 15
 
+int MTRK_NubInit_804A50C8;
+
 static u32 TRK_ISR_OFFSETS[NUM_EXCEPTIONS] = {
     PPC_SYSTEMRESET,
     PPC_MACHINECHECK,
@@ -146,5 +148,6 @@ DSError TRKInitializeTarget(void)
 {
     gTRKState.stopped = true;
     gTRKState.MSR = __TRK_get_MSR();
+    MTRK_NubInit_804A50C8 = 0xE0000000;
     return kNoError;
 }
