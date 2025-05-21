@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-/* 32ABD8 */ u8 TRKTargetCPUMinorType(void);
+u8 TRKTargetCPUMinorType(void);
 int TRK_main(void);
 
 #endif

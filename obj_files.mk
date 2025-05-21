@@ -799,23 +799,26 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/MSL/math_ppc.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/MetroTRK/mainloop.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/nubevent.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/nubinit.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/msg.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/msgbuf.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/serpoll.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/usr_put.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/dispatch.s.o\
+    $(BUILD_DIR)/src/MetroTRK/mainloop.c.o\
+    $(BUILD_DIR)/src/MetroTRK/nubevent.c.o\
+    $(BUILD_DIR)/src/MetroTRK/nubinit.c.o\
+    $(BUILD_DIR)/src/MetroTRK/msg.c.o\
+    $(BUILD_DIR)/src/MetroTRK/msgbuf.c.o\
+    $(BUILD_DIR)/src/MetroTRK/serpoll.c.o\
+    $(BUILD_DIR)/src/MetroTRK/usr_put.c.o\
+    $(BUILD_DIR)/src/MetroTRK/dispatch.c.o\
     $(BUILD_DIR)/asm/MetroTRK/msghndlr.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/flush_cache.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/mem_TRK_text.s.o\
+    $(BUILD_DIR)/src/MetroTRK/support.c.o\
+    $(BUILD_DIR)/src/MetroTRK/mutex_TRK.c.o\
+    $(BUILD_DIR)/src/MetroTRK/notify.c.o\
+    $(BUILD_DIR)/src/MetroTRK/flush_cache.c.o\
+    $(BUILD_DIR)/src/MetroTRK/mem_TRK.c.o\
     $(BUILD_DIR)/asm/MetroTRK/targimpl.s.o\
     $(BUILD_DIR)/asm/MetroTRK/dolphin_trk.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/mpc_7xx_603e.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/main_TRK.s.o\
+    $(BUILD_DIR)/src/MetroTRK/mpc_7xx_603e.c.o\
+    $(BUILD_DIR)/src/MetroTRK/main_TRK.c.o\
     $(BUILD_DIR)/asm/MetroTRK/dolphin_trk_glue.s.o\
-    $(BUILD_DIR)/asm/MetroTRK/targcont.s.o\
+    $(BUILD_DIR)/src/MetroTRK/targcont.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/amcstubs/AmcExi2Stubs.c.o\

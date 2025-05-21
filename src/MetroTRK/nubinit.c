@@ -62,7 +62,7 @@ DSError TRKTerminateNub(void)
 
 void TRKNubWelcome(void)
 {
-    TRK_board_display("MetroTRK for Dolphin v0.5");
+    TRK_board_display("MetroTRK for Dolphin v0.8");
 }
 
 bool TRKInitializeEndian(void)

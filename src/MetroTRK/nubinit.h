@@ -5,10 +5,10 @@
 
 #include "MetroTRK/dserror.h"
 
-/* 326AD8 */ DSError TRKInitializeNub(void);
-/* 326BAC */ DSError TRKTerminateNub(void);
-/* 326BD0 */ void TRKNubWelcome(void);
-/* 326BF8 */ bool TRKInitializeEndian(void);
+DSError TRKInitializeNub(void);
+DSError TRKTerminateNub(void);
+void TRKNubWelcome(void);
+bool TRKInitializeEndian(void);
 
 extern bool gTRKBigEndian;
 

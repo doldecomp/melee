@@ -26,6 +26,7 @@ typedef struct NubEvent {
 DSError TRKInitializeEventQueue(void);
 bool TRKGetNextEvent(NubEvent*);
 DSError TRKPostEvent(NubEvent*);
+void* TRKCopyEvent(void* src, void* dst);
 void TRKConstructEvent(NubEvent*, int);
 void TRKDestructEvent(NubEvent*);
 

@@ -2,7 +2,6 @@
 
 #include "MetroTRK/mem_TRK.h"
 
-
 typedef struct EventQueue {
     u8 pad[4];
     int fCount;
