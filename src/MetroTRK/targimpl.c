@@ -40,7 +40,7 @@ Default_PPC gTRKSaveState;
 typedef void (*RegAccessFunc)(void* srcDestPtr, u128 val);
 
 static void TRKExceptionHandler(u16);
-void TRKInterruptHandlerEnableInterrupts();
+void TRKInterruptHandlerEnableInterrupts(void);
 static void GetThreadInfo(int*, int*);
 
 // Instruction macros
@@ -67,11 +67,14 @@ static void GetThreadInfo(int*, int*);
     (0x7C000000 | (rSrc << 21) | ((spr & 0xFE0) << 6) |                       \
      ((spr & 0x1F) << 16) | 0x3A6)
 
-ASM u32 __TRK_get_MSR(void){
+ASM u32 __TRK_get_MSR(void)
+{
 #ifdef __MWERKS__ // clang-format off
     nofralloc
     mfmsr r3
     blr
+#else
+    return 0;
 #endif // clang-format on
 }
 
@@ -667,7 +670,7 @@ void TRKPostInterruptEvent(void)
     TRKPostEvent(&event);
 }
 
-ASM void TRKSwapAndGo()
+ASM void TRKSwapAndGo(void)
 {
 #ifdef __MWERKS__ // clang-format off
     nofralloc
@@ -743,7 +746,7 @@ NoOutgoingInput:
 #endif // clang-format on
 }
 
-ASM void TRKInterruptHandlerEnableInterrupts()
+ASM void TRKInterruptHandlerEnableInterrupts(void)
 {
 #ifdef __MWERKS__ // clang-format off
     nofralloc
@@ -860,7 +863,7 @@ static DSError TRKTargetEnableTrace(bool enable)
     return kNoError;
 }
 
-bool TRKTargetStepDone()
+bool TRKTargetStepDone(void)
 {
     bool result = true;
 
@@ -888,7 +891,7 @@ bool TRKTargetStepDone()
     return result;
 }
 
-DSError TRKTargetDoStep()
+DSError TRKTargetDoStep(void)
 {
     DSError err = kNoError;
     gTRKStepStatus.active = 1;
@@ -954,7 +957,7 @@ DSError TRKTargetStepOutOfRange(u32 rangeStart, u32 rangeEnd, bool stepOver)
     return error;
 }
 
-u32 TRKTargetGetPC()
+u32 TRKTargetGetPC(void)
 {
     return gTRKCPUState.Default.PC;
 }

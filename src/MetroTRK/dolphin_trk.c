@@ -110,7 +110,7 @@ initCommTableSuccess:
 #endif // clang-format on
 }
 
-void EnableMetroTRKInterrupts()
+void EnableMetroTRKInterrupts(void)
 {
     EnableEXI2Interrupts();
 }
@@ -142,7 +142,7 @@ void __TRK_copy_vectors(void)
     }
 }
 
-DSError TRKInitializeTarget()
+DSError TRKInitializeTarget(void)
 {
     gTRKState.stopped = true;
     gTRKState.MSR = __TRK_get_MSR();

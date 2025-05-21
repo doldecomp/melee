@@ -66,5 +66,8 @@ u32 TRKTargetTranslate(u32 addr);
 void TRKInterruptHandler(u16);
 void TRKTargetSetInputPendingPtr(void*);
 DSError TRKTargetCPUType(DSCPUType* cpuType);
+void TRKInterruptHandlerEnableInterrupts(void);
+bool TRKTargetStepDone(void);
+DSError TRKTargetDoStep(void);
 
 #endif
