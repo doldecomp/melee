@@ -14,7 +14,7 @@
 #include <baselib/displayfunc.h>
 #include <baselib/wobj.h>
 
-static u8 erase_colors[4];
+static u8 erase_colors_vi0102[4];
 static struct un_804D6F60_t un_804D6F60;
 
 /// #vi_8031CB00
@@ -28,7 +28,7 @@ void vi_8031CC8C(HSD_GObj* gobj)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_EraseScreen(gobj, erase_colors, 0x881);
+    vi_EraseScreen(gobj, erase_colors_vi0102, 0x881);
 }
 
 void vi_8031CD20(HSD_GObj* gobj)
