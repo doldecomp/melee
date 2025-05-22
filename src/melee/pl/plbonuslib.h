@@ -25,6 +25,7 @@
 /* 040B3C */ u32 pl_80040B3C(s32);
 /* 040B64 */ u32 pl_80040B64(s32);
 /* 040B8C */ void pl_80040B8C(s32, s32, s32);
+/* 040BD8 */ s32 pl_80040BD8(s32);
 /* 040D8C */ void pl_80040D8C(int slot);
 /* 040DB8 */ s32 pl_80040DB8(int slot);
 
