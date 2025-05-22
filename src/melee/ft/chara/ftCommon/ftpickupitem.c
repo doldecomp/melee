@@ -78,10 +78,14 @@ bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 
 Item_GObj* ftpickupitem_800942A0(ftCo_GObj* gobj, u32 flags)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    itPickup* pickup = &fp->x294_itPickup;
-    Vec4* offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
-                                                   : &pickup->air_light_offset;
+    itPickup* pickup;
+    ftCo_Fighter* fp;
+    Vec4* offset0;
+
+    fp = GET_FIGHTER(gobj);
+    pickup = &fp->x294_itPickup;
+    offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
+                                             : &pickup->air_light_offset;
     if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {
         return NULL;
     }
