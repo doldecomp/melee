@@ -161,6 +161,24 @@ void pl_8003FE64(s32 arg0)
     }
 }
 
+void pl_8003FED0(s32 arg0, s32 arg1)
+{
+    s32 var_r31;
+
+    if (arg1 != 0) {
+        return;
+    }
+
+    for (var_r31 = 0; var_r31 < 6; var_r31++) {
+        if (pl_80039418(var_r31, 0x82) != 0U) {
+            break;
+        }
+    }
+    if (var_r31 == 6) {
+        pl_80038788(arg0, 0x82, 1);
+    }
+}
+
 void pl_800402D0(int slot, bool arg1, bool arg2)
 {
     StaleMoveTable* stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
