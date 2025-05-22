@@ -179,6 +179,29 @@ void pl_8003FED0(s32 arg0, s32 arg1)
     }
 }
 
+void pl_800401F0(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
+{
+    StaleMoveTable* temp_r3;
+    f32 var_f1;
+    f32 var_f1_2;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+
+    if (arg2 < 0.0f) {
+        var_f1 = -arg2;
+    } else {
+        var_f1 = arg2;
+    }
+    temp_r3->xCDC += var_f1;
+
+    if (arg3 < 0.0f) {
+        var_f1_2 = -arg3;
+    } else {
+        var_f1_2 = arg3;
+    }
+    temp_r3->xCE0 += var_f1_2;
+}
+
 void pl_800402D0(int slot, bool arg1, bool arg2)
 {
     StaleMoveTable* stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);

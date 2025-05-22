@@ -8,12 +8,13 @@
 
 /* 03E058 */ void pl_8003E058(int, s32, int, s32);
 /* 03E150 */ void pl_8003E150(s32 slot, s32);
-/* 03EAAC */ void pl_8003EAAC(s32 arg0, s32 arg1, s32 arg2);
+/* 03EAAC */ void pl_8003EAAC(s32, s32, s32);
 /* 03E70C */ void pl_8003E70C(Item_GObj*);
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03FC88 */ void pl_8003FC88(s32, s32, s32);
-/* 03FE64 */ void pl_8003FE64(s32 arg0);
-/* 03FED0 */ void pl_8003FED0(s32 arg0, s32 arg1);
+/* 03FE64 */ void pl_8003FE64(s32);
+/* 03FED0 */ void pl_8003FED0(s32, s32);
+/* 0401F0 */ void pl_800401F0(s32, s32, f32, f32);
 /* 03FDF4 */ void pl_8003FDF4(u8, int);
 /* 0402D0 */ void pl_800402D0(int slot, bool, bool);
 /* 0403C0 */ void pl_800403C0(int, int);
