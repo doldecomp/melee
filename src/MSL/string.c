@@ -1,5 +1,6 @@
-#include <MSL/string.h>
-#define EOF -1
+#include "string.h"
+
+#include "stdio.h"
 
 #ifdef __MWERKS__
 #pragma push
@@ -8,17 +9,6 @@
 
 static unsigned int K1 = 0x80808080L; // = K1
 static unsigned int K2 = 0xfefefeffL; // = K2
-
-typedef struct {
-    const char* NextChar;
-    int NullCharDetected;
-} __InStrCtrl;
-
-enum __ReadProcActions {
-    __GetAChar,
-    __UngetAChar,
-    __TestForError
-};
 
 unsigned long(strlen)(const char* s)
 {

@@ -1,4 +1,5 @@
 #include "stdio.h"
+#include "wchar.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wreturn-type"
