@@ -72,6 +72,19 @@ void pl_8003E150(s32 slot, s32 arg1)
     stale_moves->xCD8 += 1;
 }
 
+void pl_8003EAAC(s32 arg0, s32 arg1, s32 arg2)
+{
+    StaleMoveTable* temp_r31;
+
+    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    if ((arg1 == 0) && (arg2 == 0x59)) {
+        temp_r31->xCA8 += 1;
+        if (temp_r31->xCA8 == it_8026C1D4()) {
+            pl_80038788(arg0, 0xC2, 1);
+        }
+    }
+}
+
 void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
 {
     StaleMoveTable* stale_moves;
