@@ -1,24 +1,9 @@
 #include <platform.h>
 
+#include "lbanim.h"
+
 #include <baselib/fobj.h>
 #include <baselib/jobj.h>
-
-typedef struct FigaTrack {
-    u16 length;
-    u16 startframe;
-    u8 obj_type;
-    u8 frac_value;
-    u8 frac_slope;
-    u8* ad_head;
-} FigaTrack;
-
-typedef struct FigaTree {
-    int type;
-    u32 flags;
-    f32 frames;
-    void* nodes;
-    FigaTrack** tracks;
-} FigaTree;
 
 static HSD_FObj* lbAnim_8001E560(FigaTrack* track, s8 count)
 {
@@ -49,20 +34,22 @@ static HSD_FObj* lbAnim_8001E560(FigaTrack* track, s8 count)
     return result;
 }
 
-void foo(HSD_JObj* jobj)
+// Duplicate of JObjSortAnim
+static void lbAnim_JObjSortAnim(HSD_AObj* aobj)
 {
-    HSD_AObj* temp_r4 = jobj->aobj;
-    if (temp_r4 != NULL && temp_r4->fobj != NULL) {
-        HSD_FObj** cur = &temp_r4->fobj;
-        while (*cur != NULL) {
-            if ((*cur)->obj_type == 12) {
-                HSD_FObj* fobj = *cur;
-                *cur = fobj->next;
-                fobj->next = temp_r4->fobj;
-                temp_r4->fobj = fobj;
-                break;
-            }
-            cur = &(*cur)->next;
+    HSD_FObj* fobj;
+    HSD_FObj** fobj_ptr;
+
+    if (aobj == NULL || aobj->fobj == NULL) {
+        return;
+    }
+    for (fobj_ptr = &aobj->fobj; *fobj_ptr != NULL; fobj_ptr = &fobj->next) {
+        fobj = *fobj_ptr;
+        if (fobj->obj_type == TYPE_JOBJ) {
+            *fobj_ptr = fobj->next;
+            fobj->next = aobj->fobj;
+            aobj->fobj = fobj;
+            break;
         }
     }
 }
@@ -82,7 +69,7 @@ void lbAnim_8001E6D8(HSD_JObj* jobj, FigaTree* tree, FigaTrack* track, s8 arg3)
         HSD_AObjSetEndFrame(aobj, tree->frames);
         HSD_AObjSetFObj(aobj, lbAnim_8001E560(track, arg3));
         jobj->aobj = aobj;
-        foo(jobj);
+        lbAnim_JObjSortAnim(jobj->aobj);
         if (tree->type & 1) {
             HSD_JObjSetFlags(jobj, 8);
             return;
