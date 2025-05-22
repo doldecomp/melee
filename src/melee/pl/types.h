@@ -37,7 +37,9 @@ typedef struct StaleMoveTable {
     /*  +2C */ int total_attack_count;
     /*  +30 */ u8 x30[0x5EC - 0x30];
     /* +5EC */ int x5EC;
-    /* +5F0 */ u8 x5F0[0xC6C - 0x5F0];
+    /* +5F0 */ u8 x5F0[0xC60 - 0x5F0];
+    /* +C60 */ f32 xC60;
+    /* +C64 */ u8 xC64[0xC6C - 0xC64];
     /* +C6C */ f32 xC6C;
     /* +C70 */ u8 xC70[0xC90 - 0xC70];
     /* +C90 */ u32 xC90;

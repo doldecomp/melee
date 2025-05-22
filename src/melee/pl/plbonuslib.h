@@ -23,6 +23,7 @@
 /* 040AF0 */ void pl_80040AF0(s32);
 /* 04049C */ void pl_8004049C(s32, ItemKind);
 /* 040B3C */ u32 pl_80040B3C(s32);
+/* 040B64 */ u32 pl_80040B64(s32);
 /* 040D8C */ void pl_80040D8C(int slot);
 /* 040DB8 */ s32 pl_80040DB8(int slot);
 
