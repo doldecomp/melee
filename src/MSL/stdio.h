@@ -14,7 +14,11 @@
 
 typedef unsigned long __file_handle;
 typedef unsigned long fpos_t;
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wtypedef-redefinition"
 typedef unsigned short wchar_t;
+#pragma clang diagnostic pop
 
 enum __io_modes {
     __read = 1,

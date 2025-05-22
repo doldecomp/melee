@@ -1,5 +1,7 @@
 #include "stdio.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type"
 int fwide(FILE* stream, int mode)
 {
     int orientation;
@@ -26,3 +28,4 @@ int fwide(FILE* stream, int mode)
         return -1;
     }
 }
+#pragma clang diagnostic pop

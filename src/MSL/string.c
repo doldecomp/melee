@@ -31,8 +31,7 @@ unsigned long(strlen)(const char* s)
     return k;
 }
 
-char*(strcpy) (char* ATTRIBUTE_RESTRICT dst,
-               const char* ATTRIBUTE_RESTRICT src)
+char* strcpy(char* dst, const char* src)
 {
     /*
      *	strcpy routine designed to minimized the number of
@@ -146,9 +145,7 @@ bytecopy:
     }
 }
 
-// strncpy
-char* strncpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src,
-              unsigned long n)
+char* strncpy(char* dst, const char* src, unsigned long n)
 {
     const unsigned char* p = (const unsigned char*) src - 1;
     unsigned char* q = (unsigned char*) dst - 1;
