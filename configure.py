@@ -158,7 +158,7 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20240706"
+config.compilers_tag = "20250520"
 config.dtk_tag = "v1.0.0"
 config.objdiff_tag = "v2.2.0"
 config.sjiswrap_tag = "v1.1.1"
@@ -204,8 +204,10 @@ cflags_base = [
     "-proc gekko",
     "-fp hardware",
     "-align powerpc",
+    "-nosyspath",
     "-fp_contract on",
     "-O4,p",
+    "-multibyte",
     "-enum int",
     "-nodefaults",
     "-inline auto",
@@ -259,14 +261,10 @@ cflags_libc = [
 cflags_trk = [
     *cflags_base,
     "-use_lmw_stmw on",
-    "-str reuse,pool,readonly",
-    "-common off",
+    "-pool off",
     "-sdata 0",
     "-sdata2 0",
-    "-fp hard",
-    "-enum int",
-    "-char unsigned",
-    "-inline deferred",
+    "-inline on,noauto",
     "-rostr",
 ]
 
@@ -293,6 +291,7 @@ def Lib(
     objects: Objects,
     cflags=cflags_base,
     fix_epilogue=True,
+    fix_trk=False,
     includes: List[str] = includes_base,
     system_includes: List[str] = system_includes_base,
     src_dir: Optional[str] = None,
@@ -314,6 +313,9 @@ def Lib(
         "progress_category": category,
         "objects": objects,
     }
+
+    if fix_trk:
+        lib["mw_version"] = "GC/1.1p1"
 
     if src_dir is not None:
         lib["src_dir"] = src_dir
@@ -424,6 +426,7 @@ def TRKLib(lib_name: str, objects: Objects) -> Library:
         objects,
         cflags=cflags_trk,
         fix_epilogue=False,
+        fix_trk=True,
         category="runtime",
     )
 
@@ -1246,22 +1249,27 @@ config.libs = [
     TRKLib(
         "MetroTRK (Metrowerks Target Resident Kernel)",
         [
-            Object(NonMatching, "MetroTRK/mainloop.c"),
-            Object(NonMatching, "MetroTRK/nubevent.c"),
-            Object(NonMatching, "MetroTRK/nubinit.c"),
-            Object(NonMatching, "MetroTRK/msg.c"),
-            Object(NonMatching, "MetroTRK/msgbuf.c"),
-            Object(NonMatching, "MetroTRK/serpoll.c"),
-            Object(NonMatching, "MetroTRK/dispatch.c"),
+            Object(Matching, "MetroTRK/mainloop.c"),
+            Object(Matching, "MetroTRK/nubevent.c"),
+            Object(Matching, "MetroTRK/nubinit.c"),
+            Object(Matching, "MetroTRK/msg.c"),
+            Object(Matching, "MetroTRK/msgbuf.c"),
+            Object(Matching, "MetroTRK/serpoll.c"),
+            Object(Matching, "MetroTRK/usr_put.c"),
+            Object(Matching, "MetroTRK/dispatch.c"),
             Object(NonMatching, "MetroTRK/msghndlr.c"),
-            Object(NonMatching, "MetroTRK/flush_cache.c"),
-            Object(NonMatching, "MetroTRK/mem_TRK.c"),
-            Object(NonMatching, "MetroTRK/targimpl.c"),
+            Object(Matching, "MetroTRK/support.c"),
+            Object(Matching, "MetroTRK/mutex_TRK.c"),
+            Object(Matching, "MetroTRK/notify.c"),
+            Object(Matching, "MetroTRK/flush_cache.c"),
+            Object(Matching, "MetroTRK/mem_TRK.c"),
+            Object(Matching, "MetroTRK/__exception.s"),
+            Object(Matching, "MetroTRK/targimpl.c"),
             Object(NonMatching, "MetroTRK/dolphin_trk.c"),
-            Object(NonMatching, "MetroTRK/mpc_7xx_603e.c"),
-            Object(NonMatching, "MetroTRK/main_TRK.c"),
-            Object(NonMatching, "MetroTRK/dolphin_trk_glue.c"),
-            Object(NonMatching, "MetroTRK/targcont.c"),
+            Object(Matching, "MetroTRK/mpc_7xx_603e.c"),
+            Object(Matching, "MetroTRK/main_TRK.c"),
+            Object(Matching, "MetroTRK/dolphin_trk_glue.c"),
+            Object(Matching, "MetroTRK/targcont.c"),
         ],
     ),
     DolphinLib(

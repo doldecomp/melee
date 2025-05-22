@@ -9,7 +9,7 @@
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
 
-void OSReport(char* msg, ...)
+WEAK void OSReport(const char* msg, ...)
 {
     va_list args;
 

@@ -192,3 +192,8 @@ TRK_ISR_OFFSETS:
     .4byte 0x00001400
     .4byte 0x00001700
     .4byte NULL
+
+.section .bss, "wa"
+.global MTRK_NubInit_804A50C8
+MTRK_NubInit_804A50C8:
+    .skip 0x8

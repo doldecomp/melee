@@ -3,8 +3,7 @@
 
 #include <placeholder.h>
 
-/* 32A868 */ UNK_RET TRKSaveExtended1Block(UNK_PARAMS);
-/* 32AA20 */ UNK_RET TRKRestoreExtended1Block(UNK_PARAMS);
-/* 32ABD8 */ int TRKTargetCPUMinorType(void);
+/* 32A868 */ ASM void TRKSaveExtended1Block(void);
+/* 32AA20 */ ASM void TRKRestoreExtended1Block(void);
 
 #endif
