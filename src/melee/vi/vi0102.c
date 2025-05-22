@@ -31,7 +31,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/wobj.h>
 
-Vec3 un_80400010;
+Vec3 initial_pos = { 0.0f, 0.0f, 0.0f };
 
 typedef struct vi0102_archivejoints {
     HSD_Joint* joint;
@@ -57,9 +57,9 @@ typedef struct vi0102_data {
     vi0102_archivefogdata* fogdata;
 } vi0102_data;
 
-vi0102_data* un_804D6F30;
-static HSD_Archive* un_804D6F38;
+static vi0102_data* un_804D6F30;
 static GXColor erase_colors_vi0102;
+static HSD_Archive* un_804D6F38;
 static un_804D6F60_t un_804D6F60;
 
 void vi0102_8031CB00(s8 mario_costume, s8 luigi_costume)
@@ -84,7 +84,7 @@ void vi0102_8031CB00(s8 mario_costume, s8 luigi_costume)
     Player_SetPlayerId(0, 0);
     Player_SetSlottype(0, 2);
     Player_SetFacingDirection(0, 1.0f);
-    Player_80032768(0, &un_80400010);
+    Player_80032768(0, &initial_pos);
     Player_80036F34(0, 9);
 
     // Setup Luigi
@@ -94,7 +94,7 @@ void vi0102_8031CB00(s8 mario_costume, s8 luigi_costume)
     Player_SetPlayerId(1, 0);
     Player_SetSlottype(1, 2);
     Player_SetFacingDirection(1, 1.0f);
-    Player_80032768(1, &un_80400010);
+    Player_80032768(1, &initial_pos);
     Player_80036F34(1, 9);
 
     lbAudioAx_80026F2C(0x18);
