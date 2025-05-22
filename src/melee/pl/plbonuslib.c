@@ -218,6 +218,16 @@ void pl_800403C0(int arg0, int arg1)
     pl_80038788(arg0, 0xC5, 1);
 }
 
+void pl_80040460(s32 slot, s32 arg1)
+{
+    StaleMoveTable* temp_r3;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    if (arg1 == 0) {
+        temp_r3->xCAC = 6;
+    }
+}
+
 void pl_80040D8C(int slot)
 {
     StaleMoveTable* stale_moves;
