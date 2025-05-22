@@ -233,6 +233,11 @@ s32 pl_800408DC(s32 arg0)
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xCB4;
 }
 
+void pl_80040AF0(s32 arg0)
+{
+    pl_800386D8(Player_GetTotalAttackCountPtr(arg0), 0x70);
+}
+
 void pl_80040D8C(int slot)
 {
     StaleMoveTable* stale_moves;
