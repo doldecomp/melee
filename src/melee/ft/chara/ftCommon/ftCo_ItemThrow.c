@@ -88,54 +88,56 @@ int ftCo_80094EA4(HSD_GObj* gobj)
             stick_angle = ftCo_GetCStickAngle(fp);
             ret = false;
         }
-        if (ABS(var_f31) >= p_ftCommonData->x3C &&
-            var_f28 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    } else {
+        return false;
+    }
+    if (ABS(var_f31) >= p_ftCommonData->x3C &&
+        var_f28 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    {
+        msid = var_f31 * fp->facing_dir >= 0.0f ? ftCo_MS_HeavyThrowF4
+                                                : ftCo_MS_HeavyThrowB4;
+    } else {
+        if (var_f30 >= p_ftCommonData->xCC &&
+            var_f29 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
         {
-            msid = var_f31 * fp->facing_dir >= 0.0f ? ftCo_MS_HeavyThrowF4
-                                                    : ftCo_MS_HeavyThrowB4;
+            msid = ftCo_MS_HeavyThrowHi4;
         } else {
-            if (var_f30 >= p_ftCommonData->xCC &&
-                var_f29 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
+            if (var_f30 <= p_ftCommonData->xD4 &&
+                var_f29 < p_ftCommonData->xD8)
             {
-                msid = ftCo_MS_HeavyThrowHi4;
+                msid = ftCo_MS_HeavyThrowLw4;
             } else {
-                if (var_f30 <= p_ftCommonData->xD4 &&
-                    var_f29 < p_ftCommonData->xD8)
-                {
-                    msid = ftCo_MS_HeavyThrowLw4;
-                } else {
-                    if (ABS(var_f31) >= p_ftCommonData->x98) {
-                        if (ABS(stick_angle) <= p_ftCommonData->x20) {
-                            msid = var_f31 * fp->facing_dir >= 0
-                                       ? ftCo_MS_HeavyThrowF
-                                       : ftCo_MS_HeavyThrowB;
-                        } else {
-                            goto block_32;
-                        }
+                if (ABS(var_f31) >= p_ftCommonData->x98) {
+                    if (ABS(stick_angle) <= p_ftCommonData->x20) {
+                        msid = var_f31 * fp->facing_dir >= 0
+                                   ? ftCo_MS_HeavyThrowF
+                                   : ftCo_MS_HeavyThrowB;
                     } else {
-                    block_32:
-                        if (var_f30 >=
-                                p_ftCommonData->attackhi3_stick_threshold_y &&
-                            stick_angle > p_ftCommonData->x20)
+                        goto block_32;
+                    }
+                } else {
+                block_32:
+                    if (var_f30 >=
+                            p_ftCommonData->attackhi3_stick_threshold_y &&
+                        stick_angle > p_ftCommonData->x20)
+                    {
+                        msid = ftCo_MS_HeavyThrowHi;
+                    } else {
+                        if (var_f30 <= p_ftCommonData->xB0 &&
+                            (stick_angle < -p_ftCommonData->x20))
                         {
-                            msid = ftCo_MS_HeavyThrowHi;
-                        } else {
-                            if (var_f30 <= p_ftCommonData->xB0 &&
-                                (stick_angle < -p_ftCommonData->x20))
-                            {
-                                msid = ftCo_MS_HeavyThrowLw;
-                            } else if (ret != 0) {
-                                msid = ftCo_MS_HeavyThrowF;
-                            }
+                            msid = ftCo_MS_HeavyThrowLw;
+                        } else if (ret != 0) {
+                            msid = ftCo_MS_HeavyThrowF;
                         }
                     }
                 }
             }
         }
-        if (msid != fp->motion_id) {
-            ftCo_800958FC(gobj, msid);
-            return true;
-        }
+    }
+    if (msid != fp->motion_id) {
+        ftCo_800958FC(gobj, msid);
+        return true;
     }
     return false;
 }
