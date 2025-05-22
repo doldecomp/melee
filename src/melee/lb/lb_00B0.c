@@ -587,7 +587,6 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
     float temp_f4;
     float temp_f5;
     float temp_f5_2;
-    float temp_f6;
     float temp_f6_2;
     float temp_f8;
     float* temp_r3;
@@ -610,29 +609,16 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
     arg2->scale.z = (arg0->scale.z * arg8) + (arg1->scale.z * arg9);
     temp_r31 = HSD_JObjGetFlags(arg1) & 0x20000;
     if (temp_r31 == 0) {
-        temp_f6 = arg0->rotation.x;
-        temp_f5 = temp_f6 - arg1->rotate.x;
+        temp_f5 = arg0->rotation.x - arg1->rotate.x;
         temp_f3 = arg0->rotation.y - arg1->rotate.y;
         temp_f2 = arg0->rotation.z - arg1->rotate.z;
-        if (temp_f5 < 0) {
-            phi_f1 = -temp_f5;
-        } else {
-            phi_f1 = temp_f5;
-        }
+        phi_f1 = temp_f5 < 0 ? -temp_f5 : temp_f5;
         if (phi_f1 <= 1) {
-            if (temp_f3 < 0) {
-                phi_f1_2 = -temp_f3;
-            } else {
-                phi_f1_2 = temp_f3;
-            }
+            phi_f1_2 = temp_f3 < 0 ? -temp_f3 : temp_f3;
             if (phi_f1_2 <= 1) {
-                if (temp_f2 < 0) {
-                    phi_f1_3 = -temp_f2;
-                } else {
-                    phi_f1_3 = temp_f2;
-                }
+                phi_f1_3 = temp_f2 < 0 ? -temp_f2 : temp_f2;
                 if (phi_f1_3 <= 1) {
-                    arg2->rotate.x = temp_f6;
+                    arg2->rotate.x = arg0->rotation.x;
                     arg2->rotate.y = arg0->rotation.y;
                     arg2->rotate.z = arg0->rotation.z;
                     HSD_JObjClearFlags(arg2, 0x20000U);
@@ -663,12 +649,8 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
     temp_f5_2 = spA4.z + sp94.z;
     temp_f10 = spA4.w - sp94.w;
     temp_f6_2 = spA4.w + sp94.w;
-    if (((temp_f10 * temp_f10) +
-         ((temp_f8 * temp_f8) +
-          ((temp_f4 * temp_f4) + (temp_f2_2 * temp_f2_2)))) >
-        ((temp_f6_2 * temp_f6_2) +
-         ((temp_f5_2 * temp_f5_2) +
-          ((temp_f1 * temp_f1) + (temp_f0 * temp_f0)))))
+    if ((SQ(temp_f10) + (SQ(temp_f8) + (SQ(temp_f4) + SQ(temp_f2_2)))) >
+        (SQ(temp_f6_2) + (SQ(temp_f5_2) + (SQ(temp_f1) + SQ(temp_f0)))))
     {
         sp94.x = -sp94.x;
         sp94.y = -sp94.y;
