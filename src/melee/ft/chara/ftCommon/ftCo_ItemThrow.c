@@ -63,53 +63,55 @@ int ftCo_80094EA4(HSD_GObj* gobj)
 {
     float stick_angle;
     float var_f28;
-    float var_f29;
-    float var_f30;
+    float stick_x;
+    float stick_y;
     float var_f31;
+    ftCo_Fighter* fp;
     FtMotionId msid;
     int ret;
-    ftCo_Fighter* fp = gobj->user_data;
-    msid = fp->motion_id;
     PAD_STACK(8);
+
+    fp = gobj->user_data;
+    msid = fp->motion_id;
 
     if (fp->item_gobj != NULL) {
         if (fp->input.x668 & (HSD_PAD_A | HSD_PAD_B)) {
-            var_f31 = fp->input.lstick.x;
-            var_f30 = fp->input.lstick.y;
+            stick_x = fp->input.lstick.x;
+            stick_y = fp->input.lstick.y;
             var_f28 = fp->x673;
-            var_f29 = fp->x674;
+            var_f31 = fp->x674;
             stick_angle = ftCo_GetLStickAngle(fp);
             ret = true;
         } else {
             var_f28 = 0.0f;
-            var_f31 = fp->input.cstick.x;
-            var_f29 = 0.0f;
-            var_f30 = fp->input.cstick.y;
+            stick_x = fp->input.cstick.x;
+            var_f31 = 0.0f;
+            stick_y = fp->input.cstick.y;
             stick_angle = ftCo_GetCStickAngle(fp);
             ret = false;
         }
     } else {
         return false;
     }
-    if (ABS(var_f31) >= p_ftCommonData->x3C &&
+    if (ABS(stick_x) >= p_ftCommonData->x3C &&
         var_f28 < p_ftCommonData->x40 + p_ftCommonData->x44)
     {
-        msid = var_f31 * fp->facing_dir >= 0.0f ? ftCo_MS_HeavyThrowF4
+        msid = stick_x * fp->facing_dir >= 0.0f ? ftCo_MS_HeavyThrowF4
                                                 : ftCo_MS_HeavyThrowB4;
     } else {
-        if (var_f30 >= p_ftCommonData->xCC &&
-            var_f29 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
+        if (stick_y >= p_ftCommonData->xCC &&
+            var_f31 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
         {
             msid = ftCo_MS_HeavyThrowHi4;
         } else {
-            if (var_f30 <= p_ftCommonData->xD4 &&
-                var_f29 < p_ftCommonData->xD8)
+            if (stick_y <= p_ftCommonData->xD4 &&
+                var_f31 < p_ftCommonData->xD8)
             {
                 msid = ftCo_MS_HeavyThrowLw4;
             } else {
-                if (ABS(var_f31) >= p_ftCommonData->x98) {
+                if (ABS(stick_x) >= p_ftCommonData->x98) {
                     if (ABS(stick_angle) <= p_ftCommonData->x20) {
-                        msid = var_f31 * fp->facing_dir >= 0
+                        msid = stick_x * fp->facing_dir >= 0
                                    ? ftCo_MS_HeavyThrowF
                                    : ftCo_MS_HeavyThrowB;
                     } else {
@@ -117,13 +119,13 @@ int ftCo_80094EA4(HSD_GObj* gobj)
                     }
                 } else {
                 block_32:
-                    if (var_f30 >=
+                    if (stick_y >=
                             p_ftCommonData->attackhi3_stick_threshold_y &&
                         stick_angle > p_ftCommonData->x20)
                     {
                         msid = ftCo_MS_HeavyThrowHi;
                     } else {
-                        if (var_f30 <= p_ftCommonData->xB0 &&
+                        if (stick_y <= p_ftCommonData->xB0 &&
                             (stick_angle < -p_ftCommonData->x20))
                         {
                             msid = ftCo_MS_HeavyThrowLw;
