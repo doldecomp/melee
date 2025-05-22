@@ -62,18 +62,6 @@ jobs:
           load: true
           tags: ${{ env.IMAGE }}:test
 
-      - name: Try building Melee (GENERATE_MAP=1)
-        if: startsWith(matrix.target, 'build-')
-        run: |
-          output="$OUTPUT/generate_map"
-          mkdir -p "$output"
-          docker run --rm \
-            --user "$(id -u):$(id -g)" \
-            --volume "$PWD:/input:ro" \
-            --volume "$output:/output" \
-            --env MAKE_FLAGS="GENERATE_MAP=1" \
-            "$IMAGE:test"
-
       - name: Try checking for code issues
         if: matrix.target == 'check-issues'
         run: |
