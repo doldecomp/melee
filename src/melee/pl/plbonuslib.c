@@ -228,6 +228,11 @@ void pl_80040460(s32 slot, s32 arg1)
     }
 }
 
+s32 pl_800408DC(s32 arg0)
+{
+    return Player_GetStaleMoveTableIndexPtr2(arg0)->xCB4;
+}
+
 void pl_80040D8C(int slot)
 {
     StaleMoveTable* stale_moves;
