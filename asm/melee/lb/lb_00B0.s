@@ -1753,7 +1753,7 @@
 /* 8000C7B8 00009398  4E 80 00 20 */	blr
 .endfn lb_8000C490
 
-.fn lb_8000C7BC, global
+.fn lbCopyJObjSRT, global
 /* 8000C7BC 0000939C  7C 08 02 A6 */	mflr r0
 /* 8000C7C0 000093A0  90 01 00 04 */	stw r0, 0x4(r1)
 /* 8000C7C4 000093A4  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1799,7 +1799,7 @@
 /* 8000C85C 0000943C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8000C860 00009440  7C 08 03 A6 */	mtlr r0
 /* 8000C864 00009444  4E 80 00 20 */	blr
-.endfn lb_8000C7BC
+.endfn lbCopyJObjSRT
 
 .fn lb_8000C868, global
 /* 8000C868 00009448  7C 08 02 A6 */	mflr r0

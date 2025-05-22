@@ -17,6 +17,7 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/types.h"
 #include "it/it_26B1.h"
@@ -32,7 +33,6 @@
 /* 094D70 */ static bool ftCo_800951D0(ftCo_GObj* gobj);
 /* 094DF4 */ static bool ftCo_80095254(ftCo_GObj* gobj);
 /* 094E7C */ static bool ftCo_800952DC(ftCo_GObj* gobj);
-/* 0952A0 */ static void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1);
 /* 0952C8 */ static UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ static UNK_RET lbl_80095738(UNK_PARAMS);
 /* 09549C */ static void ftCo_800958FC(ftCo_GObj* gobj, int);
@@ -58,95 +58,89 @@ bool ftCo_80094E54(Fighter* fp)
     return false;
 }
 
-static FtMotionId getHeavyThrowMsid(ftCo_Fighter* fp, float arg1)
-{
-    if (arg1 * fp->facing_dir >= 0.0f) {
-        return ftCo_MS_HeavyThrowF4;
-    } else {
-        return ftCo_MS_HeavyThrowB4;
-    }
-}
-
 int ftCo_80094EA4(HSD_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     float stick_angle;
     float var_f28;
-    float var_f29;
-    float var_f30;
+    float stick_x;
+    float stick_y;
     float var_f31;
+    ftCo_Fighter* fp;
     FtMotionId msid;
     int ret;
-    ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+
+    fp = gobj->user_data;
     msid = fp->motion_id;
+
     if (fp->item_gobj != NULL) {
         if (fp->input.x668 & (HSD_PAD_A | HSD_PAD_B)) {
-            var_f31 = fp->input.lstick.x;
-            var_f30 = fp->input.lstick.y;
+            stick_x = fp->input.lstick.x;
+            stick_y = fp->input.lstick.y;
             var_f28 = fp->x673;
-            var_f29 = fp->x674;
+            var_f31 = fp->x674;
             stick_angle = ftCo_GetLStickAngle(fp);
             ret = true;
         } else {
             var_f28 = 0.0f;
-            var_f31 = fp->input.cstick.x;
-            var_f29 = 0.0f;
-            var_f30 = fp->input.cstick.y;
+            stick_x = fp->input.cstick.x;
+            var_f31 = 0.0f;
+            stick_y = fp->input.cstick.y;
             stick_angle = ftCo_GetCStickAngle(fp);
             ret = false;
         }
-        if (ABS(var_f31) >= p_ftCommonData->x3C &&
-            var_f28 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    } else {
+        return false;
+    }
+    if (ABS(stick_x) >= p_ftCommonData->x3C &&
+        var_f28 < p_ftCommonData->x40 + p_ftCommonData->x44)
+    {
+        msid = stick_x * fp->facing_dir >= 0.0f ? ftCo_MS_HeavyThrowF4
+                                                : ftCo_MS_HeavyThrowB4;
+    } else {
+        if (stick_y >= p_ftCommonData->xCC &&
+            var_f31 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
         {
-            msid = getHeavyThrowMsid(fp, var_f31);
+            msid = ftCo_MS_HeavyThrowHi4;
         } else {
-            if (var_f30 >= p_ftCommonData->xCC &&
-                var_f29 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
+            if (stick_y <= p_ftCommonData->xD4 &&
+                var_f31 < p_ftCommonData->xD8)
             {
-                msid = ftCo_MS_HeavyThrowHi4;
+                msid = ftCo_MS_HeavyThrowLw4;
             } else {
-                if (var_f30 <= p_ftCommonData->xD4 &&
-                    var_f29 < p_ftCommonData->xD8)
-                {
-                    msid = ftCo_MS_HeavyThrowLw4;
-                } else {
-                    if (ABS(var_f31) >= p_ftCommonData->x98) {
-                        if (ABS(stick_angle) <= p_ftCommonData->x20) {
-                            msid = var_f31 * fp->facing_dir >= 0
-                                       ? ftCo_MS_HeavyThrowF
-                                       : ftCo_MS_HeavyThrowB;
-                        } else {
-                            goto block_32;
-                        }
+                if (ABS(stick_x) >= p_ftCommonData->x98) {
+                    if (ABS(stick_angle) <= p_ftCommonData->x20) {
+                        msid = stick_x * fp->facing_dir >= 0
+                                   ? ftCo_MS_HeavyThrowF
+                                   : ftCo_MS_HeavyThrowB;
                     } else {
-                    block_32:
-                        if (var_f30 >=
-                                p_ftCommonData->attackhi3_stick_threshold_y &&
-                            stick_angle > p_ftCommonData->x20)
+                        goto block_32;
+                    }
+                } else {
+                block_32:
+                    if (stick_y >=
+                            p_ftCommonData->attackhi3_stick_threshold_y &&
+                        stick_angle > p_ftCommonData->x20)
+                    {
+                        msid = ftCo_MS_HeavyThrowHi;
+                    } else {
+                        if (stick_y <= p_ftCommonData->xB0 &&
+                            (stick_angle < -p_ftCommonData->x20))
                         {
-                            msid = ftCo_MS_HeavyThrowHi;
-                        } else {
-                            if (var_f30 <= p_ftCommonData->xB0 &&
-                                (stick_angle < -p_ftCommonData->x20))
-                            {
-                                msid = ftCo_MS_HeavyThrowLw;
-                            } else if (ret != 0) {
-                                msid = ftCo_MS_HeavyThrowF;
-                            }
+                            msid = ftCo_MS_HeavyThrowLw;
+                        } else if (ret != 0) {
+                            msid = ftCo_MS_HeavyThrowF;
                         }
                     }
                 }
             }
         }
-        if (msid != fp->motion_id) {
-            ftCo_800958FC(gobj, msid);
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
     }
+    if (msid != fp->motion_id) {
+        ftCo_800958FC(gobj, msid);
+        return true;
+    }
+    return false;
 }
 
 int ftCo_8009515C(ftCo_GObj* gobj)
@@ -342,9 +336,7 @@ bool ftCo_8009563C(ftCo_GObj* gobj)
     return false;
 }
 
-#pragma push
-#pragma force_active on
-void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
+static void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
 {
     ftCo_Fighter* fp = gobj->user_data;
     switch (arg1) {
@@ -361,14 +353,14 @@ void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
         return;
     }
 }
-#pragma pop
 
 void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
 {
     Vec3 vec;
-    u8 _[4] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
     vec.x = vec.y = vec.z = 0;
+    PAD_STACK(4);
+
     if (ftGetParasolStatus(gobj) != -1) {
         if (fp->motion_id == ftCo_MS_ItemParasolFallSpecial) {
             ftCo_800968C8(gobj);
@@ -384,36 +376,40 @@ void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
     Item_8026ABD8(fp->item_gobj, &vec, 1);
 }
 
+inline float getAnimSpeed(ftCo_GObj* gobj, int msid)
+{
+    ftCo_Fighter* fp;
+    float speed = 1;
+    fp = GET_FIGHTER(gobj);
+    if (msid >= ftCo_MS_LightThrowF4) {
+        speed *= p_ftCommonData->x400;
+    }
+    speed *= (1 / it_8026B334(fp->item_gobj));
+    return speed;
+}
+
 void ftCo_800957F4(ftCo_GObj* gobj, int msid)
 {
-    u8 _[16] = { 0 };
+    float anim_spd;
     ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->throw_flags = 0;
-    {
-        float numerator = 1;
-        if (msid >= ftCo_MS_LightThrowF4) {
-            numerator *= p_ftCommonData->x400;
-        }
-        {
-            float anim_spd =
-                numerator * (1 / it_8026B334(GET_FIGHTER(gobj)->item_gobj));
-            fp->mv.co.itemthrow4.anim_spd = anim_spd;
-            ftCo_80095700(gobj, msid);
-            Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, anim_spd, 0,
-                                      NULL);
-        }
-    }
+
+    fp->mv.co.itemthrow4.anim_spd = anim_spd = getAnimSpeed(gobj, msid);
+    ftCo_80095700(gobj, msid);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, anim_spd, 0, NULL);
+
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = ftCo_80095EFC;
-    ftCo_80095EFC(gobj);
+    ftCo_80095EFC((HSD_GObj*) gobj);
 }
 
 /// @todo Mostly just an inline of #ftCo_800957F4.
 void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
 {
-    u8 _[16] = { 0 };
     float temp_f2;
     float var_f31;
     void* temp_r31;
@@ -423,6 +419,8 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
     M2C_FIELD(temp_r31, int*, 0x2204) = 0;
     M2C_FIELD(temp_r31, int*, 0x2210) = 0;
     var_f31 = 1.0f;
+    PAD_STACK(16);
+
     if (msid >= 0x6C) {
         var_f31 = 1.0f * p_ftCommonData->x400;
     }
@@ -599,7 +597,7 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
 
 void ftCo_ItemThrow_Anim(ftCo_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB4(fp)) {
         fp->facing_dir = -fp->facing_dir;
     }
@@ -610,8 +608,9 @@ void ftCo_ItemThrow_Anim(ftCo_GObj* gobj)
 
 void ftCo_80095EFC(ftCo_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Item_GObj* item_gobj = fp->item_gobj;
+
     if (item_gobj != NULL) {
         Vec3 vec0;
         lb_8000B1CC(it_80272C90(item_gobj), NULL, &vec0);
@@ -691,7 +690,7 @@ void ftCo_ItemThrow_Phys(ftCo_GObj* gobj)
 
 void ftCo_LightThrowDash_Phys(ftCo_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     ftCommonData* cd = p_ftCommonData;
     if (fp->cur_anim_frame <= cd->x408) {
         ft_80085030(gobj, cd->x40C * (cd->x404 * fp->co_attrs.gr_friction),
@@ -727,9 +726,9 @@ void ftCo_LightThrow_Coll(ftCo_GObj* gobj)
     ft_800841B8(gobj, ftCo_80096250);
 }
 
-static inline void inlineA1(ftCo_GObj* gobj, FtMotionId msid)
+static inline void inlineA0(ftCo_GObj* gobj, FtMotionId msid)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     float facing_dir = fp->facing_dir;
     if (facing_dir != fp->facing_dir1) {
         fp->facing_dir = fp->facing_dir1;
@@ -741,19 +740,12 @@ static inline void inlineA1(ftCo_GObj* gobj, FtMotionId msid)
             Ft_MF_SkipModelFlags | Ft_MF_Unk27,
         fp->cur_anim_frame, fp->mv.co.itemthrow4.anim_spd, 0, NULL);
     fp->facing_dir = facing_dir;
-}
-
-static inline void inlineA0(ftCo_GObj* gobj, FtMotionId msid)
-{
-    ftCo_Fighter* fp = gobj->user_data;
-    inlineA1(gobj, msid);
     fp->accessory4_cb = ftCo_80095EFC;
     ftCo_80095EFC(gobj);
 }
 
 void ftCo_80096250(ftCo_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     if (fp->motion_id >= ftCo_MS_LightThrowF4) {
@@ -770,15 +762,13 @@ void ftCo_LightThrowAir_Coll(ftCo_GObj* gobj)
 
 void ftCo_80096374(ftCo_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
     {
-        int msid = fp->motion_id;
-        if (msid >= ftCo_MS_LightThrowF4) {
-            inlineA0(gobj, msid - 4);
+        if (fp->motion_id >= ftCo_MS_LightThrowF4) {
+            inlineA0(gobj, fp->motion_id - 4);
         } else {
-            inlineA0(gobj, msid - 6);
+            inlineA0(gobj, fp->motion_id - 6);
         }
     }
 }
@@ -790,7 +780,7 @@ void ftCo_HeavyThrow_Coll(ftCo_GObj* gobj)
 
 void ftCo_80096498(ftCo_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
         if (ft_80082708(gobj) == GA_Ground) {
             ftCommon_8007D5D4(fp);

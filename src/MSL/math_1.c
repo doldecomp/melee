@@ -3,6 +3,11 @@
 
 const double lbl_804DE190 = 1.8014398509481984e+16;
 
+float fabsf__Ff(float param_1)
+{
+    return __fabsf(param_1);
+}
+
 double frexp(double x, int* exponent)
 {
     int hx, ix, lx;
@@ -23,9 +28,4 @@ double frexp(double x, int* exponent)
     hx = (hx & 0x800fffff) | 0x3fe00000;
     MSL_HI(x) = hx;
     return x;
-}
-
-float fabsf__Ff(float param_1)
-{
-    return __fabsf(param_1);
 }

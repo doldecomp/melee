@@ -103,7 +103,7 @@ jobs:
         name: ${{matrix.version}}_maps
         path: build/${{matrix.version}}/**/*.MAP
     - name: Upload report
-      if: matrix.mode == 'diff'
+      if: matrix.mode == 'diff' && (success() || failure())
       uses: actions/upload-artifact@v4
       with:
         name: ${{matrix.version}}_report

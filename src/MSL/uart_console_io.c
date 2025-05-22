@@ -8,31 +8,6 @@ s32 ReadUARTN(u8*, u32);
 
 bool MSL_ConsoleIo_804D7080;
 
-s32 MSL_ConsoleIo_80325F18(void)
-{
-    return 0;
-}
-
-s32 __write_console(s32 arg0, s32 arg1, s32* arg2)
-{
-    u8 _[8];
-    s32 uart_status = 0;
-    if (!MSL_ConsoleIo_804D7080) {
-        uart_status = InitializeUART(0xE100);
-        if (uart_status == 0) {
-            MSL_ConsoleIo_804D7080 = true;
-        }
-    }
-    if (uart_status != 0) {
-        return 1;
-    }
-    if (WriteUARTN(arg1, *arg2)) {
-        *arg2 = 0;
-        return 1;
-    }
-    return 0;
-}
-
 u8 __read_console(u32 arg0, u8* buf, u32* n)
 {
     u8 _[8];
@@ -68,4 +43,29 @@ u8 __read_console(u32 arg0, u8* buf, u32* n)
         return_status = 1;
     }
     return return_status;
+}
+
+s32 __write_console(s32 arg0, s32 arg1, s32* arg2)
+{
+    u8 _[8];
+    s32 uart_status = 0;
+    if (!MSL_ConsoleIo_804D7080) {
+        uart_status = InitializeUART(0xE100);
+        if (uart_status == 0) {
+            MSL_ConsoleIo_804D7080 = true;
+        }
+    }
+    if (uart_status != 0) {
+        return 1;
+    }
+    if (WriteUARTN(arg1, *arg2)) {
+        *arg2 = 0;
+        return 1;
+    }
+    return 0;
+}
+
+s32 MSL_ConsoleIo_80325F18(void)
+{
+    return 0;
 }

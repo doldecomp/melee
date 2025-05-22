@@ -1,9 +1,10 @@
-#include <MSL/ctype.h>
-#include <MSL/errno.h>
-#include <MSL/limits.h>
-#include <MSL/scanf.h>
-#include <MSL/string.h>
-#include <MSL/strtoul.h>
+#include "strtoul.h"
+
+#include "ctype.h"
+#include "errno.h"
+#include "limits.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 enum scan_states {
     start = 0x01,
@@ -21,32 +22,8 @@ enum scan_states {
 #define fetch() (count++, (*ReadProc)(ReadProcArg, 0, __GetAChar))
 #define unfetch(c) (*ReadProc)(ReadProcArg, c, __UngetAChar)
 
-unsigned long strtoul(const char* str, char** end, int base)
-{
-    unsigned long value;
-    int count, negative, overflow;
-
-    __InStrCtrl isc;
-    isc.NextChar = (char*) str;
-    isc.NullCharDetected = 0;
-
-    value = __strtoul(base, 0x7FFFFFFF, &__StringRead, (void*) &isc, &count,
-                      &negative, &overflow);
-
-    if (end) {
-        *end = (char*) str + count;
-    }
-
-    if (overflow) {
-        value = ULONG_MAX;
-        errno = 0x22;
-    } else if (negative) {
-        value = -value;
-    }
-
-    return value;
-}
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsign-compare"
 unsigned long __strtoul(int base, int max_width,
                         int (*ReadProc)(void*, int, int), void* ReadProcArg,
                         int* chars_scanned, int* negative, int* overflow)
@@ -153,7 +130,7 @@ unsigned long __strtoul(int base, int max_width,
 
             value *= base;
 
-            if ((unsigned long) c > (ULONG_MAX - value)) {
+            if (c > (ULONG_MAX - value)) {
                 *overflow = 1;
             }
 
@@ -165,12 +142,78 @@ unsigned long __strtoul(int base, int max_width,
     }
 
     if (!success(scan_state)) {
-        count = value = 0;
+        value = 0;
+        count = 0;
     } else {
-        --count;
+        count--;
     }
 
     *chars_scanned = count;
+
     unfetch(c);
     return value;
+}
+#pragma clang diagnostic pop
+
+unsigned long strtoul(const char* str, char** end, int base)
+{
+    unsigned long value;
+    int count, negative, overflow;
+
+    __InStrCtrl isc;
+    isc.NextChar = (char*) str;
+    isc.NullCharDetected = 0;
+
+    value = __strtoul(base, 0x7FFFFFFF, &__StringRead, (void*) &isc, &count,
+                      &negative, &overflow);
+
+    if (end) {
+        *end = (char*) str + count;
+    }
+
+    if (overflow) {
+        value = ULONG_MAX;
+        errno = 0x22;
+    } else if (negative) {
+        value = -value;
+    }
+
+    return value;
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsign-compare"
+long strtol(const char* str, char** end, int base)
+{
+    unsigned long uvalue;
+    long svalue;
+    int count, negative, overflow;
+
+    __InStrCtrl isc;
+    isc.NextChar = (char*) str;
+    isc.NullCharDetected = 0;
+
+    uvalue = __strtoul(base, INT_MAX, &__StringRead, (void*) &isc, &count,
+                       &negative, &overflow);
+
+    if (end) {
+        *end = (char*) str + count;
+    }
+
+    if (overflow || (!negative && uvalue > LONG_MAX) ||
+        (negative && uvalue > -LONG_MIN))
+    {
+        svalue = (negative ? -LONG_MIN : LONG_MAX);
+        errno = ERANGE;
+    } else {
+        svalue = (negative ? (long) -uvalue : (long) uvalue);
+    }
+
+    return svalue;
+}
+#pragma clang diagnostic pop
+
+int atoi(const char* str)
+{
+    return strtol(str, NULL, 10);
 }
