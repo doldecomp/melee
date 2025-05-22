@@ -5,21 +5,22 @@
 #include "lb/lbshadow.h"
 #include "vi/vi.h"
 
+#include <dolphin/gx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
 #include <baselib/wobj.h>
 
-static u8 erase_colors_vi0501[3];
+static GXColor erase_colors_vi0501;
 un_804D7004_t un_804D6FA8;
 
 /// #un_8031D9F8
 
-void vi_8031DC80(HSD_GObj* gobj)
+void vi_8031DC80(HSD_GObj* gobj, int unused)
 {
     PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_EraseScreen(gobj, erase_colors_vi0501, 0x281);
+    vi_RunCamera(gobj, (u8*) &erase_colors_vi0501, 0x281);
 }
 
 /// #fn_8031DD14

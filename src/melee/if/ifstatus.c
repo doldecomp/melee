@@ -227,7 +227,7 @@ inline IfDamageState* getPlayerByHUDParent(HSD_GObj* parent)
 void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1)
 {
     if (!getPlayerByHUDParent(player)->flags.hide_all_digits) {
-        HSD_GObj_80391070(player, arg1);
+        HSD_GObj_JObjCallback(player, arg1);
     }
 }
 
