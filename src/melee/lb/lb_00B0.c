@@ -509,7 +509,7 @@ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj* arg2, float arg8,
         dx = jobj1->rotate.x - jobj2->rotate.x;
         dy = jobj1->rotate.y - jobj2->rotate.y;
         dz = jobj1->rotate.z - jobj2->rotate.z;
-        if (ABS(dx) <= 0.01f && ABS(dy) <= 0.01f && ABS(dz) <= 0.01f) {
+        if (ABS(dx) <= 0.0001f && ABS(dy) <= 0.0001f && ABS(dz) <= 0.0001f) {
             arg2->rotate = jobj1->rotate;
             HSD_JObjClearFlags(arg2, 0x20000);
             HSD_JObjSetFlags(arg2, 0x40);
