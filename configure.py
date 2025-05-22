@@ -1204,7 +1204,7 @@ config.libs = [
     RuntimeLib(
         "MSL (Metrowerks Standard Libraries)",
         [
-            Object(NonMatching, "MSL/abort_exit.c"),
+            Object(Matching, "MSL/abort_exit.c"),
             Object(NonMatching, "MSL/ansi_fp.c"),
             Object(Matching, "MSL/buffer_io.c"),
             Object(Matching, "MSL/PPC_EABI/critical_regions.gamecube.c"),

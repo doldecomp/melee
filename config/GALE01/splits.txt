@@ -3452,7 +3452,7 @@ Runtime/runtime.c:
 MSL/abort_exit.c:
 	.text       start:0x80322F9C end:0x803230A8
 	.bss        start:0x804A2F48 end:0x804A3148
-	.sbss       start:0x804D7060 end:0x804D7078
+	.sbss       start:0x804D7060 end:0x804D7074
 
 MSL/errno.c:
 	.sbss       start:0x804D7078 end:0x804D7080
