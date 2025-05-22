@@ -311,7 +311,7 @@
 /* 000003E4 00000424  4E 80 00 20 */	blr
 .endfn HSD_GObj_80390FC0
 
-.fn HSD_GObj_80391044, global
+.fn HSD_GObj_LObjCallback, global
 /* 000003E8 00000428  7C 08 02 A6 */	mflr r0
 /* 000003EC 0000042C  90 01 00 04 */	stw r0, 0x4(r1)
 /* 000003F0 00000430  94 21 FF F8 */	stwu r1, -0x8(r1)
@@ -323,9 +323,9 @@
 /* 00000408 00000448  38 21 00 08 */	addi r1, r1, 0x8
 /* 0000040C 0000044C  7C 08 03 A6 */	mtlr r0
 /* 00000410 00000450  4E 80 00 20 */	blr
-.endfn HSD_GObj_80391044
+.endfn HSD_GObj_LObjCallback
 
-.fn HSD_GObj_80391070, global
+.fn HSD_GObj_JObjCallback, global
 /* 00000414 00000454  7C 08 02 A6 */	mflr r0
 /* 00000418 00000458  90 01 00 04 */	stw r0, 0x4(r1)
 /* 0000041C 0000045C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -343,9 +343,9 @@
 /* 0000044C 0000048C  38 21 00 18 */	addi r1, r1, 0x18
 /* 00000450 00000490  7C 08 03 A6 */	mtlr r0
 /* 00000454 00000494  4E 80 00 20 */	blr
-.endfn HSD_GObj_80391070
+.endfn HSD_GObj_JObjCallback
 
-.fn HSD_GObj_803910B4, global
+.fn HSD_GObj_FogCallback, global
 /* 00000458 00000498  7C 08 02 A6 */	mflr r0
 /* 0000045C 0000049C  90 01 00 04 */	stw r0, 0x4(r1)
 /* 00000460 000004A0  94 21 FF F8 */	stwu r1, -0x8(r1)
@@ -355,7 +355,7 @@
 /* 00000470 000004B0  38 21 00 08 */	addi r1, r1, 0x8
 /* 00000474 000004B4  7C 08 03 A6 */	mtlr r0
 /* 00000478 000004B8  4E 80 00 20 */	blr
-.endfn HSD_GObj_803910B4
+.endfn HSD_GObj_FogCallback
 
 .fn HSD_GObj_803910D8, global
 /* 0000047C 000004BC  7C 08 02 A6 */	mflr r0

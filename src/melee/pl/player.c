@@ -2047,15 +2047,15 @@ void Player_80036DD8(void)
     pl_804D6470 = *sp8;
 }
 
-void Player_80036E20(s32 arg0, HSD_Archive* archive, s32 arg2)
+void Player_80036E20(CharacterKind ckind, HSD_Archive* archive, s32 arg2)
 {
     struct Unk_Struct_w_Array* unkStruct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
-    ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].x, archive, arg2);
-    if ((unkStruct->vec_arr[arg0].y != -1) &&
-        (unkStruct->vec_arr[arg0].z == 0))
+    ftDemo_SetArchiveData(unkStruct->vec_arr[ckind].x, archive, arg2);
+    if ((unkStruct->vec_arr[ckind].y != -1) &&
+        (unkStruct->vec_arr[ckind].z == 0))
     {
-        ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].y, archive, arg2);
+        ftDemo_SetArchiveData(unkStruct->vec_arr[ckind].y, archive, arg2);
     }
 }
 
