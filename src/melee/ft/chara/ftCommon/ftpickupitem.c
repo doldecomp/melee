@@ -256,29 +256,16 @@ void ftpickupitem_80094818(ftCo_GObj* gobj, int arg1)
     }
 }
 
-static inline void inlineB0(ftCo_GObj* gobj)
-{
-    ftCo_Fighter* fp = gobj->user_data;
-    PAD_STACK(8);
-    if (fp->x1978 != NULL) {
-        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
-    } else if (fp->item_gobj != NULL) {
-        if (ftData_OnItemPickupExt[fp->kind] != NULL) {
-            ftData_OnItemPickupExt[fp->kind](gobj, true);
-        }
-        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->item_gobj);
-    }
-}
-
 void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     if (fp->item_gobj != NULL) {
         fp->x1978 = item_gobj;
     } else {
         fp->item_gobj = item_gobj;
     }
-    inlineB0(gobj);
+    ftpickupitem_80094818(gobj, true);
     {
         Fighter_Part ret_part;
         if (it_8026B2B4(item_gobj) == 0) {
@@ -298,22 +285,12 @@ void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
     }
 }
 
-static inline enum_t inlineA0(ftCo_Fighter* fp)
-{
-    enum_t unk_enum;
-    if (fp->mv.co.itemget.x0) {
-        unk_enum = 2;
-    } else {
-        unk_enum = 1;
-    }
-    return unk_enum;
-}
-
 void ftpickupitem_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (ftCheckThrowB3(fp)) {
-        Item_GObj* item_gobj = ftpickupitem_800942A0(gobj, inlineA0(fp));
+        Item_GObj* item_gobj =
+            ftpickupitem_800942A0(gobj, fp->mv.co.itemget.x0 ? 2 : 1);
         if (item_gobj != NULL) {
             ftpickupitem_800948A8(gobj, item_gobj);
         }
