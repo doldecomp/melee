@@ -33,7 +33,6 @@
 /* 094D70 */ static bool ftCo_800951D0(ftCo_GObj* gobj);
 /* 094DF4 */ static bool ftCo_80095254(ftCo_GObj* gobj);
 /* 094E7C */ static bool ftCo_800952DC(ftCo_GObj* gobj);
-/* 0952A0 */ static void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1);
 /* 0952C8 */ static UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ static UNK_RET lbl_80095738(UNK_PARAMS);
 /* 09549C */ static void ftCo_800958FC(ftCo_GObj* gobj, int);
@@ -337,9 +336,7 @@ bool ftCo_8009563C(ftCo_GObj* gobj)
     return false;
 }
 
-#pragma push
-#pragma force_active on
-void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
+static void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
 {
     ftCo_Fighter* fp = gobj->user_data;
     switch (arg1) {
@@ -356,7 +353,6 @@ void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
         return;
     }
 }
-#pragma pop
 
 void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
 {
@@ -380,30 +376,35 @@ void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
     Item_8026ABD8(fp->item_gobj, &vec, 1);
 }
 
+inline float getAnimSpeed(ftCo_GObj* gobj, int msid)
+{
+    ftCo_Fighter* fp;
+    float speed = 1;
+    fp = GET_FIGHTER(gobj);
+    if (msid >= ftCo_MS_LightThrowF4) {
+        speed *= p_ftCommonData->x400;
+    }
+    speed *= (1 / it_8026B334(fp->item_gobj));
+    return speed;
+}
+
 void ftCo_800957F4(ftCo_GObj* gobj, int msid)
 {
+    float anim_spd;
     ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
     fp->throw_flags = 0;
-    PAD_STACK(16);
-    {
-        float numerator = 1;
-        if (msid >= ftCo_MS_LightThrowF4) {
-            numerator *= p_ftCommonData->x400;
-        }
-        {
-            float anim_spd =
-                numerator * (1 / it_8026B334(GET_FIGHTER(gobj)->item_gobj));
-            fp->mv.co.itemthrow4.anim_spd = anim_spd;
-            ftCo_80095700(gobj, msid);
-            Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, anim_spd, 0,
-                                      NULL);
-        }
-    }
+
+    fp->mv.co.itemthrow4.anim_spd = anim_spd = getAnimSpeed(gobj, msid);
+    ftCo_80095700(gobj, msid);
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, anim_spd, 0, NULL);
+
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = ftCo_80095EFC;
-    ftCo_80095EFC(gobj);
+    ftCo_80095EFC((HSD_GObj*) gobj);
 }
 
 /// @todo Mostly just an inline of #ftCo_800957F4.
