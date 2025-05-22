@@ -561,7 +561,7 @@ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj* arg2, float arg8,
     HSD_JObjSetFlags(arg2, 0x40U);
 }
 
-void lb_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
+void lbCopyJObjSRT(HSD_JObj* src, HSD_JObj* dst)
 {
     dst->rotate = src->rotate;
     dst->scale = src->scale;
