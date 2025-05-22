@@ -5,14 +5,14 @@
 #include <baselib/fobj.h>
 #include <baselib/jobj.h>
 
-static HSD_FObj* lbAnim_8001E560(FigaTrack* track, s8 count)
+static HSD_FObj* lbAnim_InitFrames(FigaTrack* track, s8 frames)
 {
     HSD_FObj* fobj;
     HSD_FObj* next = NULL;
     HSD_FObj* result;
     int i;
 
-    for (i = 0; i < count; i++) {
+    for (i = 0; i < frames; i++) {
         fobj = HSD_FObjAlloc();
         if (i == 0) {
             result = fobj;
@@ -54,12 +54,13 @@ static void lbAnim_JObjSortAnim(HSD_AObj* aobj)
     }
 }
 
-void lbAnim_8001E6D8(HSD_JObj* jobj, FigaTree* tree, FigaTrack* track, s8 arg3)
+void lbAnim_8001E6D8(HSD_JObj* jobj, FigaTree* tree, FigaTrack* track,
+                     s8 frames)
 {
     HSD_AObj* aobj;
     u32 unused[2];
 
-    if (jobj != NULL && arg3 != 0) {
+    if (jobj != NULL && frames != 0) {
         if (jobj->aobj != NULL) {
             HSD_AObjRemove(jobj->aobj);
         }
@@ -67,7 +68,7 @@ void lbAnim_8001E6D8(HSD_JObj* jobj, FigaTree* tree, FigaTrack* track, s8 arg3)
         HSD_AObjSetFlags(aobj, tree->flags);
         HSD_AObjSetRewindFrame(aobj, 0.0f);
         HSD_AObjSetEndFrame(aobj, tree->frames);
-        HSD_AObjSetFObj(aobj, lbAnim_8001E560(track, arg3));
+        HSD_AObjSetFObj(aobj, lbAnim_InitFrames(track, frames));
         jobj->aobj = aobj;
         lbAnim_JObjSortAnim(jobj->aobj);
         if (tree->type & 1) {
