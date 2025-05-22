@@ -11,7 +11,7 @@
 
 static DBCommTable gDBCommTable = { NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 
-ASM void TRKLoadContext(OSContext* ctx, register u32 val)
+ASM static void TRKLoadContext(OSContext* ctx, register u32 val)
 {
 #ifdef __MWERKS__ // clang-format off
         nofralloc
@@ -55,7 +55,7 @@ ASM void TRKLoadContext(OSContext* ctx, register u32 val)
     #endif // clang-format on
 }
 
-void TRKEXICallBack(short r3, OSContext* ctx)
+static void TRKEXICallBack(short r3, OSContext* ctx)
 {
     OSEnableScheduler();
     TRKLoadContext(ctx, 0x500);

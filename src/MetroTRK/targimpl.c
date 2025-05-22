@@ -80,7 +80,8 @@ ASM u32 __TRK_get_MSR(void)
 #endif // clang-format on
 }
 
-ASM void __TRK_set_MSR(register u32 val){
+ASM void __TRK_set_MSR(register u32 val)
+{
 #ifdef __MWERKS__ // clang-format off
     nofralloc
     mtmsr val
@@ -88,7 +89,8 @@ ASM void __TRK_set_MSR(register u32 val){
 #endif // clang-format on
 }
 
-DSError TRKValidMemory32(const void* addr, size_t length, int readWriteable)
+static DSError TRKValidMemory32(const void* addr, size_t length,
+                                int readWriteable)
 {
     DSError err = kInvalidMemory;
     const u8* start;
@@ -206,7 +208,7 @@ DSError TRKTargetAccessMemory(void* data, u32 start, size_t* length,
     return error;
 }
 
-DSError TRKTargetReadInstruction(void* data, u32 start)
+static DSError TRKTargetReadInstruction(void* data, u32 start)
 {
     DSError error = kNoError;
     size_t registersLength = sizeof(InstructionType);
