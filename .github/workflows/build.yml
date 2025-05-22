@@ -153,17 +153,6 @@ jobs:
           ;;
           *) exit 1 ;;
         esac
-    - name: Upload progress
-      if: matrix.mode == 'link' && github.ref_name == github.event.repository.default_branch
-      continue-on-error: true
-      env:
-        PROGRESS_API_KEY: ${{secrets.PROGRESS_API_KEY}}
-      run: |
-        python tools/upload_progress.py \
-          -b 'https://progress.decomp.club/' \
-          -p melee \
-          -v ${{matrix.version}} \
-          'build/${{matrix.version}}/progress.json'
     - name: Upload map
       if: matrix.mode == 'link'
       uses: actions/upload-artifact@v4
