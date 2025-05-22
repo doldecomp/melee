@@ -1197,7 +1197,7 @@ config.libs = [
             Object(Matching, "Runtime/global_destructor_chain.c"),
             Object(Matching, "Runtime/Gecko_ExceptionPPC.c"),
             Object(Matching, "Runtime/Gecko_setjmp.c"),
-            Object(NonMatching, "Runtime/runtime.c"),
+            Object(Matching, "Runtime/runtime.c"),
             Object(Matching, "Runtime/__init_cpp_exceptions.c"),
         ],
     ),

@@ -5,8 +5,6 @@
 
 #include <dolphin/os/OSTime.h>
 
-extern s64 __div2i(s64, s64);
-
 u32 lbTime_8000AEC8(u32 a, u32 b);
 u32 lbTime_8000AEE4(u32 a, int b);
 u32 lbTime_8000AF24(u32 a, int b, int c);
