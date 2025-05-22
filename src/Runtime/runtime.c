@@ -34,6 +34,8 @@ ASM unsigned long __cvt_fp2unsigned(register double d)
 @exit:
     addi    r1,r1,16
     blr
+#else
+    return (unsigned long)d;
 #endif // clang-format on
 }
 
