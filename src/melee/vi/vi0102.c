@@ -133,14 +133,18 @@ void vi0102_RunFrame(HSD_GObj* gobj)
 
 void vi0102_Initialize(un_804D6F60_t* unk)
 {
-    HSD_GObj* cam_gobj;
-    HSD_GObj* joint_gobj;
-    HSD_GObj* fog_gobj;
-    HSD_GObj* light_gobj;
     HSD_CObj* cobj;
+    HSD_GObj* cam_gobj;
+
     HSD_JObj* jobj;
+    HSD_GObj* joint_gobj;
+
     HSD_Fog* fog;
+    HSD_GObj* fog_gobj;
+
     HSD_LObj* lobj;
+    HSD_GObj* light_gobj;
+
     int i;
 
     lbAudioAx_800236DC();
