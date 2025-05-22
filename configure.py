@@ -246,6 +246,15 @@ cflags_runtime = [
     "-inline auto",
 ]
 
+# Metrowerks libc flags
+cflags_libc = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str pool,readonly",
+    "-common off",
+    "-inline deferred",
+]
+
 # MetroTRK flags
 cflags_trk = [
     *cflags_base,
@@ -400,6 +409,14 @@ def RuntimeLib(lib_name: str, objects: Objects) -> Library:
         category="runtime",
     )
 
+def Libc(lib_name: str, objects: Objects) -> Library:
+    return Lib(
+        lib_name,
+        objects,
+        cflags=cflags_libc,
+        fix_epilogue=False,
+        category="runtime",
+    )
 
 def TRKLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
@@ -1201,7 +1218,7 @@ config.libs = [
             Object(Matching, "Runtime/__init_cpp_exceptions.c"),
         ],
     ),
-    RuntimeLib(
+    Libc(
         "MSL (Metrowerks Standard Libraries)",
         [
             Object(Matching, "MSL/abort_exit.c"),
@@ -1209,15 +1226,17 @@ config.libs = [
             Object(Matching, "MSL/buffer_io.c"),
             Object(Matching, "MSL/PPC_EABI/critical_regions.gamecube.c"),
             Object(Matching, "MSL/ctype.c"),
-            Object(NonMatching, "MSL/direct_io.c"),
-            Object(Matching, "MSL/cstring.c"),
+            Object(Matching, "MSL/direct_io.c"),
+            Object(Matching, "MSL/mbstring.c"),
+            Object(Matching, "MSL/mem.c"),
             Object(Matching, "MSL/mem_funcs.c"),
+            Object(Matching, "MSL/misc_io.c"),
             Object(NonMatching, "MSL/printf.c"),
             Object(Matching, "MSL/rand.c"),
             Object(Matching, "MSL/string.c"),
             Object(Matching, "MSL/errno.c"),
             Object(Matching, "MSL/strtoul.c"),
-            Object(Matching, "MSL/console_io.c"),
+            Object(Matching, "MSL/uart_console_io.c"),
             Object(Matching, "MSL/wchar_io.c"),
             Object(Matching, "MSL/math_1.c"),
             Object(NonMatching, "MSL/trigf.c"),

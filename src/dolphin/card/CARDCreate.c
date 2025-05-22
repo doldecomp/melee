@@ -1,5 +1,4 @@
 #include <__mem.h>
-#include <cstring.h>
 #include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>

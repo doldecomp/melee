@@ -1,15 +1,20 @@
-#ifndef MSL_STRING_H
-#define MSL_STRING_H
+#ifndef _STRING_H_
+#define _STRING_H_
 
-#include <platform.h>
+#include "stddef.h"
 
-char* strncpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src,
-              unsigned long n);
-int __StringRead(void* isc, int ch, int Action);
-char* strchr(const char* str, int chr);
-int strncmp(const char* str1, const char* str2, unsigned long n);
-int strcmp(const char* str1, const char* str2);
-char* strcpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src);
+char* strcpy(char* dst, const char* src);
+char* strncpy(char* dst, const char* src, size_t num);
+char* strcat(char* dest, const char* src);
 size_t strlen(const char* s);
+int strcmp(const char* s1, const char* s2);
+int strncmp(const char* s1, const char* s2, size_t n);
+char* strchr(const char* str, int chr);
+
+void* memchr(const void* p, int val, size_t n);
+int memcmp(const void* p1, const void* p2, size_t n);
+void* memset(void* dst, int val, size_t n);
+void* memcpy(void* dst, const void* src, size_t n);
+void* memmove(void* dst, const void* src, size_t n);
 
 #endif
