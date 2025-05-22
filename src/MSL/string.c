@@ -6,8 +6,8 @@
 #pragma ANSI_strict off
 #endif
 
-static unsigned int MSL_String_804D5B58 = 0x80808080L; // = K1
-static unsigned int MSL_String_804D5B5C = 0xfefefeffL; // = K2
+static unsigned int K1 = 0x80808080L; // = K1
+static unsigned int K2 = 0xfefefeffL; // = K2
 
 typedef struct {
     const char* NextChar;
@@ -20,192 +20,15 @@ enum __ReadProcActions {
     __TestForError
 };
 
-//__StringRead
-int __StringRead(void* isc, int ch, int Action)
+unsigned long(strlen)(const char* s)
 {
-    char RetVal;
+    unsigned long k = -1;
+    unsigned char* p = (unsigned char*) s - 1;
+    do {
+        k++;
+    } while (*++p);
 
-    __InStrCtrl* Iscp = (__InStrCtrl*) isc;
-    switch (Action) {
-    case __GetAChar:
-        RetVal = *(Iscp->NextChar);
-        if (RetVal == '\0') {
-            Iscp->NullCharDetected = 1;
-            return EOF;
-        } else {
-            Iscp->NextChar++;
-            return (int) RetVal;
-        }
-    case __UngetAChar:
-        if (!Iscp->NullCharDetected) {
-            Iscp->NextChar--;
-        } else {
-            Iscp->NullCharDetected = 0;
-        }
-        return ch;
-    case __TestForError:
-        return Iscp->NullCharDetected;
-    default:
-        return 0;
-    }
-}
-
-// strchr
-char* strchr(const char* str, int chr)
-{
-    const unsigned char* p = (unsigned char*) str - 1;
-    unsigned long int c = ((unsigned long int) chr & 0xffu);
-    unsigned long int ch;
-    while ((ch = *++p)) {
-        if (ch == c) {
-            return ((char*) p);
-        }
-    }
-    return c ? 0 : (char*) p;
-}
-
-// strncmp
-int strncmp(const char* str1, const char* str2, unsigned long n)
-{
-    const unsigned char* p1 = (unsigned char*) str1 - 1;
-    const unsigned char* p2 = (unsigned char*) str2 - 1;
-    unsigned long c1, c2;
-
-    n++;
-    while (--n) {
-        if ((c1 = *++p1) != (c2 = *++p2)) {
-            return ((int) c1 - (int) c2);
-        } else {
-            if (!c1) {
-                break;
-            }
-        }
-    }
-    return (0);
-}
-
-// strcmp
-int strcmp(const char* str1, const char* str2)
-{
-    /*
-     *	strcmp routine designed to minimized the number of
-     *	loads and stores.  We make sure that all the loads and
-     *  stores are properly aligned.
-     *
-     */
-    register unsigned char* left = (unsigned char*) str1;
-    register unsigned char* right = (unsigned char*) str2;
-    unsigned int k1, k2, align, l1, r1, x;
-    int result;
-
-    /*	Check the simple case of the first byte being different. */
-    l1 = *left;
-    r1 = *right;
-    result = (int) l1 - (int) r1;
-    if (result) {
-        return l1 - r1;
-    }
-
-    /*
-     *	If either the destination or the source are not
-     *	aligned on the same boundary, we do a byte copy.
-     *	Otherwise we align them to a word boundary.
-     */
-    if ((align = ((unsigned int) left & 3u)) != ((unsigned int) right & 3u)) {
-        goto bytecopy;
-    }
-    if (align) {
-        /*	Continuation of test of first byte. */
-        if (l1 == 0u) {
-            return (0);
-        }
-        for (align = 3u - align; align; align--) {
-            l1 = *(++left);
-            r1 = *(++right);
-            result = (int) l1 - (int) r1;
-            if (result) {
-                return result;
-            }
-            if (l1 == 0u) {
-                return (0);
-            }
-        }
-        left++;
-        right++;
-    }
-
-    /*	Strings are word aligned */
-
-    k1 = MSL_String_804D5B58;
-    k2 = MSL_String_804D5B5C;
-
-    /*	Load a word from each string. */
-    l1 = *(unsigned int*) left;
-    r1 = *(unsigned int*) right;
-    /*	See comments in strcpy function. */
-    x = l1 + k2;
-    if (x & k1) {
-        goto adjust;
-    }
-    while (l1 == r1) {
-        /*	Load a word and increment strings. */
-        left += sizeof(unsigned int);
-        l1 = *((unsigned int*) left);
-        right += sizeof(unsigned int);
-        r1 = *((unsigned int*) right);
-        x = l1 + k2;
-        if (x & k1) {
-            goto adjust;
-        }
-    }
-
-    if (l1 > r1) {
-        return 1;
-    } else {
-        return -1;
-    }
-
-adjust:
-    l1 = *left;
-    r1 = *right;
-    result = (int) l1 - (int) r1;
-    if (result) {
-        return (int) l1 - (int) r1;
-    }
-bytecopy:
-    if (l1 == 0u) {
-        return (0);
-    }
-    for (;;) {
-        r1 = *(++left);
-        l1 = *(++right);
-        result = (int) r1 - (int) l1;
-        if (result) {
-            return result;
-        }
-        if (r1 == 0u) {
-            return (0);
-        }
-    }
-}
-
-// strncpy
-char* strncpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src,
-              unsigned long n)
-{
-    const unsigned char* p = (const unsigned char*) src - 1;
-    unsigned char* q = (unsigned char*) dst - 1;
-
-    n++;
-    while (--n) {
-        if (!(*++q = *++p)) {
-            while (--n) {
-                *++q = 0u;
-            }
-            break;
-        }
-    }
-    return (dst);
+    return k;
 }
 
 char*(strcpy) (char* ATTRIBUTE_RESTRICT dst,
@@ -248,8 +71,8 @@ char*(strcpy) (char* ATTRIBUTE_RESTRICT dst,
     }
     /*	Source and destination are word aligned */
 
-    k1 = MSL_String_804D5B58;
-    k2 = MSL_String_804D5B5C;
+    k1 = K1;
+    k2 = K2;
 
     /*	Load a word and test for a null byte. */
     w = *((unsigned int*) (fromb));
@@ -323,16 +146,188 @@ bytecopy:
     }
 }
 
-// strlen
-unsigned long(strlen)(const char* s)
+// strncpy
+char* strncpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src,
+              unsigned long n)
 {
-    unsigned long k = -1;
-    unsigned char* p = (unsigned char*) s - 1;
-    do {
-        k++;
-    } while (*++p);
+    const unsigned char* p = (const unsigned char*) src - 1;
+    unsigned char* q = (unsigned char*) dst - 1;
 
-    return k;
+    n++;
+    while (--n) {
+        if (!(*++q = *++p)) {
+            while (--n) {
+                *++q = 0u;
+            }
+            break;
+        }
+    }
+    return (dst);
+}
+
+int strcmp(const char* str1, const char* str2)
+{
+    /*
+     *	strcmp routine designed to minimized the number of
+     *	loads and stores.  We make sure that all the loads and
+     *  stores are properly aligned.
+     *
+     */
+    register unsigned char* left = (unsigned char*) str1;
+    register unsigned char* right = (unsigned char*) str2;
+    unsigned int k1, k2, align, l1, r1, x;
+    int result;
+
+    /*	Check the simple case of the first byte being different. */
+    l1 = *left;
+    r1 = *right;
+    result = (int) l1 - (int) r1;
+    if (result) {
+        return l1 - r1;
+    }
+
+    /*
+     *	If either the destination or the source are not
+     *	aligned on the same boundary, we do a byte copy.
+     *	Otherwise we align them to a word boundary.
+     */
+    if ((align = ((unsigned int) left & 3u)) != ((unsigned int) right & 3u)) {
+        goto bytecopy;
+    }
+    if (align) {
+        /*	Continuation of test of first byte. */
+        if (l1 == 0u) {
+            return (0);
+        }
+        for (align = 3u - align; align; align--) {
+            l1 = *(++left);
+            r1 = *(++right);
+            result = (int) l1 - (int) r1;
+            if (result) {
+                return result;
+            }
+            if (l1 == 0u) {
+                return (0);
+            }
+        }
+        left++;
+        right++;
+    }
+
+    /*	Strings are word aligned */
+
+    k1 = K1;
+    k2 = K2;
+
+    /*	Load a word from each string. */
+    l1 = *(unsigned int*) left;
+    r1 = *(unsigned int*) right;
+    /*	See comments in strcpy function. */
+    x = l1 + k2;
+    if (x & k1) {
+        goto adjust;
+    }
+    while (l1 == r1) {
+        /*	Load a word and increment strings. */
+        left += sizeof(unsigned int);
+        l1 = *((unsigned int*) left);
+        right += sizeof(unsigned int);
+        r1 = *((unsigned int*) right);
+        x = l1 + k2;
+        if (x & k1) {
+            goto adjust;
+        }
+    }
+
+    if (l1 > r1) {
+        return 1;
+    } else {
+        return -1;
+    }
+
+adjust:
+    l1 = *left;
+    r1 = *right;
+    result = (int) l1 - (int) r1;
+    if (result) {
+        return (int) l1 - (int) r1;
+    }
+bytecopy:
+    if (l1 == 0u) {
+        return (0);
+    }
+    for (;;) {
+        r1 = *(++left);
+        l1 = *(++right);
+        result = (int) r1 - (int) l1;
+        if (result) {
+            return result;
+        }
+        if (r1 == 0u) {
+            return (0);
+        }
+    }
+}
+
+int strncmp(const char* str1, const char* str2, unsigned long n)
+{
+    const unsigned char* p1 = (unsigned char*) str1 - 1;
+    const unsigned char* p2 = (unsigned char*) str2 - 1;
+    unsigned long c1, c2;
+
+    n++;
+    while (--n) {
+        if ((c1 = *++p1) != (c2 = *++p2)) {
+            return ((int) c1 - (int) c2);
+        } else {
+            if (!c1) {
+                break;
+            }
+        }
+    }
+    return (0);
+}
+
+char* strchr(const char* str, int chr)
+{
+    const unsigned char* p = (unsigned char*) str - 1;
+    unsigned long int c = ((unsigned long int) chr & 0xffu);
+    unsigned long int ch;
+    while ((ch = *++p)) {
+        if (ch == c) {
+            return ((char*) p);
+        }
+    }
+    return c ? 0 : (char*) p;
+}
+
+int __StringRead(void* isc, int ch, int Action)
+{
+    char RetVal;
+
+    __InStrCtrl* Iscp = (__InStrCtrl*) isc;
+    switch (Action) {
+    case __GetAChar:
+        RetVal = *(Iscp->NextChar);
+        if (RetVal == '\0') {
+            Iscp->NullCharDetected = 1;
+            return EOF;
+        } else {
+            Iscp->NextChar++;
+            return (int) RetVal;
+        }
+    case __UngetAChar:
+        if (!Iscp->NullCharDetected) {
+            Iscp->NextChar--;
+        } else {
+            Iscp->NullCharDetected = 0;
+        }
+        return ch;
+    case __TestForError:
+        return Iscp->NullCharDetected;
+    default:
+        return 0;
+    }
 }
 
 #ifdef __MWERKS__

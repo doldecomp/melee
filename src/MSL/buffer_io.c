@@ -1,40 +1,35 @@
-#include <MSL/buffer_io.h>
+#include "buffer_io.h"
 
-s32 __flush_buffer(BufferIoUnkStruct* arg0, s32* arg1)
+void __prep_buffer(FILE* file)
 {
-    s32 temp_r0;
-    s32 temp_r3;
-    temp_r0 = arg0->x20 - arg0->x18;
-    if (temp_r0 != 0) {
-        arg0->x24 = temp_r0;
-        if (arg0->x05.b4) {
-            arg0 != 0;
-        }
-
-        temp_r3 = arg0->x3C(arg0->x00, arg0->x18, &arg0->x24, arg0->x44);
-
-        if (arg1 != 0U) {
-            *arg1 = arg0->x24;
-        }
-
-        if (temp_r3 != 0) {
-            return temp_r3;
-        }
-
-        arg0->x14 += (s32) arg0->x24;
-    }
-    arg0->x20 = arg0->x18;
-    arg0->x24 = (s32) arg0->x1C;
-    arg0->x24 -= (s32) (arg0->x14 & arg0->x28);
-    arg0->x30 = (s32) arg0->x14;
-    return 0;
+    file->buffer_ptr = file->buffer;
+    file->buffer_len = file->buffer_size;
+    file->buffer_len -= file->position & file->buffer_alignment;
+    file->buffer_pos = file->position;
 }
 
-void __prep_buffer(BufferIoUnkStruct* arg0)
+int __flush_buffer(FILE* file, size_t* bytes_flushed)
 {
-    arg0->x20 = (s32) arg0->x18;
-    arg0->x24 = (s32) arg0->x1C;
-    arg0->x24 = (s32) (arg0->x24 - (arg0->x14 & arg0->x28));
-    arg0->x30 = (s32) arg0->x14;
-    return;
+    size_t len;
+    int res;
+
+    len = file->buffer_ptr - file->buffer;
+    if (len != 0) {
+        file->buffer_len = len;
+        if (file->mode.binary_io) {
+            (void) (file->mode.binary_io != 0);
+        }
+        res = file->write_proc(file->handle, file->buffer, &file->buffer_len,
+                               file->idle_proc);
+        if (bytes_flushed != NULL) {
+            *bytes_flushed = file->buffer_len;
+        }
+        if (res != 0) {
+            return res;
+        }
+        file->position += file->buffer_len;
+    }
+
+    __prep_buffer(file);
+    return 0;
 }

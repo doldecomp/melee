@@ -3475,14 +3475,20 @@ MSL/ctype.c:
 MSL/direct_io.c:
 	.text       start:0x803235B0 end:0x8032388C
 
-MSL/cstring.c:
-	.text       start:0x8032388C end:0x80323A14
+MSL/mbstring.c:
+	.text       start:0x8032388C end:0x803238C8
+
+MSL/mem.c:
+	.text       start:0x803238C8 end:0x80323A14
 
 MSL/mem_funcs.c:
 	.text       start:0x80323A14 end:0x80323CF0
 
+MSL/misc_io.c:
+	.text       start:0x80323CF0 end:0x80323CF4
+
 MSL/printf.c:
-	.text       start:0x80323CF0 end:0x803257BC
+	.text       start:0x80323CF4 end:0x803257BC
 	.rodata     start:0x803B8F30 end:0x803B8F40
 	.data       start:0x80400430 end:0x80400728
 	.sdata      start:0x804D5B48 end:0x804D5B50
@@ -3500,7 +3506,7 @@ MSL/strtoul.c:
 	.text       start:0x80325B24 end:0x80325F18
 	.data       start:0x80400728 end:0x80400770
 
-MSL/console_io.c:
+MSL/uart_console_io.c:
 	.text       start:0x80325F18 end:0x80326098
 	.sbss       start:0x804D7080 end:0x804D7088
 
