@@ -27,7 +27,7 @@ jobs:
       OUTPUT: ${{github.workspace}}/output
     strategy:
       matrix:
-        target: [ "build-linux", "gen-pages", "check-issues" ]
+        target: [ "gen-pages", "check-issues" ]
       fail-fast: false
     runs-on: ubuntu-latest
     permissions:
