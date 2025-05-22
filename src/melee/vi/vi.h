@@ -12,7 +12,7 @@
 /* 31CA04 */ void vi_8031CA04(HSD_GObj*);
 /* 31CAAC */ void vi_8031CAAC(void);
 
-inline void vi_EraseScreen(HSD_GObj* gobj, u8 erase_colors[4], u64 prio)
+inline void vi_RunCamera(HSD_GObj* gobj, u8 erase_colors[4], u64 prio)
 {
     if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
         HSD_SetEraseColor(erase_colors[0], erase_colors[1], erase_colors[2],

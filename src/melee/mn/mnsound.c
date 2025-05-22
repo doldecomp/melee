@@ -213,7 +213,7 @@ void mnSound_80249C08(void)
     mnSound_804D6C30 = gobj;
     jobj = HSD_JObjLoadJoint(mnSound_804A08A8.joint);
     HSD_GObjObject_80390A70((HSD_GObj*) gobj, (u8) HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink((HSD_GObj*) gobj, HSD_GObj_80391070, 4U, 0x80);
+    GObj_SetupGXLink((HSD_GObj*) gobj, HSD_GObj_JObjCallback, 4U, 0x80);
     HSD_JObjAddAnimAll(jobj, mnSound_804A08A8.animjoint,
                        mnSound_804A08A8.matanim_joint,
                        mnSound_804A08A8.shapeanim_joint);

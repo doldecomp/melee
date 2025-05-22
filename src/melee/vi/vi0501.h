@@ -7,7 +7,7 @@
 #include <baselib/forward.h>
 
 /* 31D9F8 */ UNK_RET un_8031D9F8(UNK_PARAMS);
-/* 31DC80 */ void vi_8031DC80(HSD_GObj* gobj);
+/* 31DC80 */ void vi_8031DC80(HSD_GObj*, int);
 /* 31DD14 */ UNK_RET fn_8031DD14(UNK_PARAMS);
 /* 31DE58 */ UNK_RET un_8031DE58(UNK_PARAMS);
 /* 31E0F0 */ void vi_8031E0F0(void);

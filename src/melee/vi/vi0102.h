@@ -5,19 +5,21 @@
 
 #include <baselib/gobj.h>
 
-struct un_804D6F60_t {
-    /* 0x0 */ s8 unk_0;      /* inferred */
-    /* 0x1 */ s8 unk_1;      /* inferred */
-    /* 0x2 */ char pad_2[6]; /* maybe part of unk_1[7]? */
-}; /* size = 0x8 */
-STATIC_ASSERT(sizeof(struct un_804D6F60_t) == 0x8);
+typedef struct un_804D6F60_t {
+    /* 0x0 */ s8 unk_0; /* inferred */
+    /* 0x1 */ s8 unk_1; /* inferred */
+    /* 0x2 */ s8 unk_2; /* inferred */
+    /* 0x3 */ s8 unk_3; /* inferred */
+    /* 0x4 */ char pad_2[4];
+} un_804D6F60_t; /* size = 0x8 */
+STATIC_ASSERT(sizeof(un_804D6F60_t) == 0x8);
 
-/* 31CB00 */ void vi_8031CB00(s8, s8);
-/* 31CC68 */ void vi_8031CC68(HSD_GObj*);
-/* 31CC8C */ void vi_8031CC8C(HSD_GObj*);
-/* 31CD20 */ void vi_8031CD20(HSD_GObj*);
-/* 31CD94 */ UNK_RET vi_8031CD94(UNK_PARAMS);
-/* 31D000 */ void vi_8031D000(void);
-/* 31D020 */ void vi_8031D020(s8, s8);
+/* 31CB00 */ void vi0102_8031CB00(s8, s8);
+/* 31CC68 */ void vi0102_JObjCallback(HSD_GObj*);
+/* 31CC8C */ void vi0102_CameraCallback(HSD_GObj*, int);
+/* 31CD20 */ void vi0102_8031CD20(HSD_GObj*);
+/* 31CD94 */ void vi0102_Initialize(un_804D6F60_t*);
+/* 31D000 */ void vi0102_8031D000(void);
+/* 31D020 */ void vi0102_8031D020(s8, s8);
 
 #endif
