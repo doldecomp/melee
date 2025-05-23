@@ -31,7 +31,6 @@
 /* 040120 */ void pl_80040120(u8, s32);
 /* 040270 */ void pl_80040270(u8, u8, float);
 /* 040330 */ void pl_80040330(u8 slot, bool, f32);
-/* 040B8C */ void pl_80040B8C(u8 slot, bool, s32);
 /* 0411C4 */ void pl_800411C4(u8 slot, bool);
 /* 041280 */ void pl_80041280(u8 slot, bool);
 /* 041B08 */ void pl_80041B08(void);
