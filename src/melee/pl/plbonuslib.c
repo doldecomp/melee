@@ -107,6 +107,20 @@ void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
     }
 }
 
+void pl_8003EC9C(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    if (arg1 == 0) {
+        temp_r3->x0_staleMoveTable.xC60 += arg3;
+        if (temp_r3->x0_staleMoveTable.xC64 < arg2) {
+            temp_r3->x0_staleMoveTable.xC64 = arg2;
+        }
+        temp_r3->xD10 = 0;
+    }
+}
+
 void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* stale_moves;
