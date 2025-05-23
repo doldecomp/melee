@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "gr/forward.h"
+
 /* 1E3734 */ UNK_RET grOnett_801E3734(UNK_PARAMS);
 /* 1E3738 */ UNK_RET grOnett_801E3738(UNK_PARAMS);
 /* 1E37C4 */ UNK_RET grOnett_801E37C4(UNK_PARAMS);
@@ -23,7 +25,7 @@
 /* 1E3DA0 */ UNK_RET grOnett_801E3DA0(UNK_PARAMS);
 /* 1E40E0 */ UNK_RET grOnett_801E40E0(UNK_PARAMS);
 /* 1E40E4 */ UNK_RET fn_801E40E4(UNK_PARAMS);
-/* 1E41B0 */ UNK_RET fn_801E41B0(UNK_PARAMS);
+/* 1E41B0 */ void fn_801E41B0(Ground_GObj* gobj);
 /* 1E41C8 */ UNK_RET grOnett_801E41C8(UNK_PARAMS);
 /* 1E43D8 */ UNK_RET grOnett_801E43D8(UNK_PARAMS);
 /* 1E43E0 */ UNK_RET grOnett_801E43E0(UNK_PARAMS);

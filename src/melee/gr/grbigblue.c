@@ -1,5 +1,7 @@
 #include <platform.h>
 
+#include "gr/inlines.h"
+
 void grBigBlue_801E57BC(void) {}
 
 /// #grBigBlue_801E57C0
@@ -37,7 +39,10 @@ void grBigBlue_801E611C(void) {}
 
 void grBigBlue_801E6120(void) {}
 
-/// #fn_801E6124
+void fn_801E6124(Ground_GObj* gobj)
+{
+    GET_GROUND(gobj)->gv.bigblue.x0_b0 = false;
+}
 
 /// #grBigBlue_801E613C
 
