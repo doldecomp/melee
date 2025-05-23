@@ -1751,13 +1751,13 @@ int* Player_GetUnk6A8Ptr(int slot)
     return unk6A8;
 }
 
-StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot)
+pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot)
 {
     StaticPlayer* player;
-    StaleMoveTable* stale_move_table;
+    pl_StaleMoveTableExt_t* stale_move_table;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    stale_move_table = &player->stale_moves;
+    stale_move_table = (pl_StaleMoveTableExt_t*) (&player->stale_moves);
     return stale_move_table;
 }
 

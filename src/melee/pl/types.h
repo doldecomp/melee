@@ -61,6 +61,12 @@ typedef struct StaleMoveTable {
 } StaleMoveTable;
 STATIC_ASSERT(sizeof(struct StaleMoveTable) == 0xCF4);
 
+typedef struct pl_StaleMoveTableExt_t {
+    /*   +0 */ StaleMoveTable x0_staleMoveTable;
+    /* +CF4 */ u8 xCF4[0xD10 - 0xCF4];
+    /* +D10 */ s32 xD10;
+} pl_StaleMoveTableExt_t;
+
 struct pl_800386E8_arg0_t {
     /* 0x000 */ char pad_0[0x190];
     /* 0x190 */ int unk_190;         /* inferred */
