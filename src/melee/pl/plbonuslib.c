@@ -336,12 +336,12 @@ s32 pl_8003FC20(s32 arg0)
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xD00;
 }
 
-void pl_8003FC44(s32 slot, s32 arg1)
+void pl_8003FC44(s32 slot, bool arg1)
 {
     pl_StaleMoveTableExt_t* temp_r3;
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
-    if (arg1 == 0) {
+    if (!arg1) {
         /// @todo Fix this
         temp_r3->xDD0 |= 0x80;
     }
@@ -390,6 +390,14 @@ void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
         }
         stale_moves->x0_staleMoveTable.xC90 = 0U;
     }
+}
+
+void pl_8003FDC8(s32 arg0)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    temp_r3->xD70 += 1;
 }
 
 void pl_8003FE64(s32 arg0)

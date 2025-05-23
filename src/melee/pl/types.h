@@ -93,7 +93,9 @@ typedef struct pl_StaleMoveTableExt_t {
     /* +D60 */ u32 xD60;
     /* +D64 */ u8 xD64[0xD68 - 0xD64];
     /* +D68 */ s32 xD68;
-    /* +D6C */ u8 xD6C[0xDD0 - 0xD6C];
+    /* +D6C */ u8 xD6C[0xD70 - 0xD6C];
+    /* +D70 */ s32 xD70;
+    /* +D74 */ u8 xD74[0xDD0 - 0xD74];
     /* +DD0 */ u8 xDD0;
     /* +DD1 */ u8 xDD1_Padding[0x3];
 } pl_StaleMoveTableExt_t;
