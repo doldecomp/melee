@@ -326,6 +326,11 @@ void pl_8003F53C(s32 arg0, s32 arg1)
     }
 }
 
+s32 pl_8003FBFC(s32 arg0)
+{
+    return Player_GetStaleMoveTableIndexPtr2(arg0)->xCFC;
+}
+
 void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* stale_moves;
