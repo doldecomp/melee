@@ -14,7 +14,10 @@ void lbSnap_8001D2BC(void)
     }
 }
 
-/// #lbSnap_8001D338
+s32 lbSnap_8001D338(s32 arg0)
+{
+    return lb_80433380.x54_stateChanged[arg0];
+}
 
 int lbSnap_8001D350(int i)
 {

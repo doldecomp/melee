@@ -26,18 +26,18 @@
 /* 074194 */ void ftParts_80074194(Fighter* fighter, FighterBone* bone,
                                    HSD_JObj* jobj, u32* dobj_index,
                                    u32 tree_depth);
-/* 0743E0 */ void ftParts_SetupParts(HSD_GObj* fighter_obj);
+/* 0743E0 */ void ftParts_SetupParts(Fighter_GObj* fighter_obj);
 /* 0743E0 */ void func_800743E0(void);
 /* 07462C */ void ftParts_8007462C(void);
 /* 07482C */ void ftParts_8007482C(void);
 /* 07487C */ void ftParts_8007487C(UNK_T item, UNK_T, u8 costume_id, UNK_T,
                                    UNK_T);
-/* 0749CC */ void ftParts_800749CC(HSD_GObj*);
-/* 074A4C */ void ftParts_80074A4C(HSD_GObj*, enum_t, enum_t);
-/* 074A74 */ s32 ftParts_80074A74(HSD_GObj*, s32);
-/* 074A8C */ void ftParts_80074A8C(HSD_GObj*);
+/* 0749CC */ void ftParts_800749CC(Fighter_GObj*);
+/* 074A4C */ void ftParts_80074A4C(Fighter_GObj*, enum_t, enum_t);
+// /* 074A74 */ int ftParts_80074A74(Fighter_GObj*, int);
+/* 074A8C */ void ftParts_80074A8C(Fighter_GObj*);
 /* 074ACC */ void ftParts_80074ACC(ftCo_GObj* gobj);
-/* 074B0C */ void ftParts_80074B0C(HSD_GObj*, int, int);
+/* 074B0C */ void ftParts_80074B0C(Fighter_GObj*, int, int);
 /* 074B6C */ void ftParts_80074B6C(void);
 /* 074CA0 */ void ftParts_80074CA0(u32*, s32, u32*);
 /* 074D7C */ void ftParts_80074D7C(u32*, s32, u32*);
@@ -51,7 +51,7 @@
 /* 075304 */ void ftParts_80075304(void);
 /* 0753D4 */ void ftParts_800753D4(Fighter*, s32, UNK_T);
 /* 0755E8 */ void ftParts_800755E8(Fighter*, u8*);
-/* 075650 */ void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*);
+/* 075650 */ void ftParts_80075650(Fighter_GObj* gobj, HSD_JObj*, u32*);
 /* 07584C */ void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
 /* 07592C */ void ftParts_8007592C(Fighter*, s32, float);
 /* 075AF0 */ void ftParts_80075AF0(Fighter*, s32, float);

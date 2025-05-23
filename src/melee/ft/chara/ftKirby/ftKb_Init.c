@@ -1,5 +1,8 @@
 #include <placeholder.h>
 
+#include "ft/forward.h"
+#include "ftKirby/forward.h"
+
 #include "ftKb_Init.static.h"
 
 #include "types.h"
@@ -3187,7 +3190,17 @@ void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
 
 /// #ftKb_UnkMtxFunc0
 
-/// #ftKb_Init_UnkMotionStates6
+HSD_JObj* ftKb_Init_UnkMotionStates6(ftKb_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->fv.kb.hat.jobj) {
+        return fp->fv.kb.hat.jobj;
+    }
+
+    /// @todo What???
+    return (HSD_JObj*) gobj;
+}
 
 /// #ftKb_SpecialN_800EF040
 
@@ -3723,28 +3736,46 @@ bool ftKb_SpecialN_800F597C(ftKb_GObj* gobj)
 
 /// #ftKb_SpecialN_800F5A38
 
-f32 ftKb_SpecialN_800F5A60(ftKb_GObj* gobj)
+float ftKb_SpecialN_800F5A60(ftKb_GObj* gobj)
 {
-    return -M2C_FIELD(gobj->user_data, f32*, 0x2C);
+    return -GET_FIGHTER(gobj)->facing_dir;
 }
 
-/// #ftKb_SpecialN_800F5A70
+float ftKb_SpecialN_800F5A70(void)
+{
+    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    return ea->specialn_gravity_of_inhaled;
+}
 
 f32 ftKb_SpecialN_800F5A88(ftKb_GObj* gobj)
 {
-    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x68);
+    ftKb_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
+    return da->specialn_star_base_duration;
 }
 
-/// #ftKb_SpecialN_800F5A98
+f32 ftKb_SpecialN_800F5A98(void)
+{
+    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    return ea->specialn_spit_spin;
+}
 
 f32 ftKb_SpecialN_800F5AB0(ftKb_GObj* gobj)
 {
-    return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x6C);
+    ftKb_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
+    return da->specialn_frames_in_swallow_star;
 }
 
-/// #ftKb_SpecialN_800F5AC0
+f32 ftKb_SpecialN_800F5AC0(void)
+{
+    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    return ea->specialn_star_duration_divisor;
+}
 
-/// #ftKb_SpecialN_800F5AD8
+f32 ftKb_SpecialN_800F5AD8(void)
+{
+    ftKb_DatAttrs* ea = gFtDataList[FTKIND_KIRBY]->ext_attr;
+    return ea->specialn_star_deceleration_rate;
+}
 
 f32 ftKb_SpecialN_800F5AF0(ftKb_GObj* gobj)
 {
@@ -5146,15 +5177,30 @@ f32 ftKb_SpecialNYs_801092CC(ftKb_GObj* gobj)
     return M2C_FIELD(M2C_FIELD(gobj->user_data, void**, 0x2D4), f32*, 0x3C0);
 }
 
-/// #ftKb_SpecialNYs_801092DC
+f32 ftKb_SpecialNYs_801092DC(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(gFtDataList[4]->ext_attr, f32*, 0x3C4);
+}
 
-/// #ftKb_SpecialNYs_801092F4
+f32 ftKb_SpecialNYs_801092F4(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(gFtDataList[4]->ext_attr, f32*, 0x3C8);
+}
 
-/// #ftKb_SpecialNYs_8010930C
+f32 ftKb_SpecialNYs_8010930C(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(gFtDataList[4]->ext_attr, f32*, 0x3CC);
+}
 
-/// #ftKb_SpecialNYs_80109324
+f32 ftKb_SpecialNYs_80109324(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(gFtDataList[4]->ext_attr, f32*, 0x3D0);
+}
 
-/// #ftKb_SpecialNYs_8010933C
+int ftKb_SpecialNYs_8010933C(ftKb_GObj* gobj)
+{
+    return M2C_FIELD(gFtDataList[4]->ext_attr, int*, 0x3D4);
+}
 
 /// #ftKb_SpecialNYs_80109354
 

@@ -22,8 +22,8 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
-/* 1D7700 */ static void fn_801D7700(void* arg2, s32 arg4);
-/* 1D7E60 */ static void fn_801D7E60(void* arg2, s32 arg4);
+/* 1D7700 */ static void fn_801D7700(void* arg2, int arg4);
+/* 1D7E60 */ static void fn_801D7E60(void* arg2, int arg4);
 /* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 1D8444 */ static bool grKongo_801D8444(void);
 

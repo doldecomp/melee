@@ -42,4 +42,12 @@ typedef struct StaleMoveTable {
     /* +CF0 */ int xCF0;
 } StaleMoveTable;
 
+typedef struct pl_800386E8_arg0_t {
+    /* 0x000 */ char pad_0[0x190];
+    /* 0x190 */ int unk_190;         /* inferred */
+    /* 0x194 */ char pad_194[0x418]; /* maybe part of unk_190[0x107]? */
+    /* 0x5AC */ int unk_5AC;         /* inferred */
+    /* 0x5B0 */ int unk_5B0;         /* inferred */
+} pl_800386E8_arg0_t;                /* size = 0x5B4 */
+
 #endif

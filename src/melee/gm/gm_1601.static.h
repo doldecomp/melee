@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "gm_1601.h" // IWYU pragma: export
@@ -59,6 +60,13 @@ struct lbl_803D9D20_t {
     /* +EC */ Vec3 interest;
 };
 
+struct lbl_8046B668_t {
+    /* 0x00 */ char pad_0[0x1C];
+    /* 0x1C */ s8 unk_1C;         /* inferred */
+    /* 0x1D */ char pad_1D[0x1B]; /* maybe part of unk_1C[0x1C]? */
+}; /* size = 0x38 */
+STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
+
 /* 160840 */ static u8 fn_80160840(u8 arg0);
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 /* 166CBC */ static u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0,
@@ -70,9 +78,17 @@ struct lbl_803D9D20_t {
 /* 174274 */ static int fn_80174274(void);
 /* 17F294 */ static int fn_8017F294(void);
 /* 3B75F8 */ static struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
+/* 3B7808 */ static s16 lbl_803B7808[0x3C / 2];
+/* 3B7864 */ static int const lbl_803B7864[9] = {
+    0x991A1AFF, 0x333380FF, 0x806600FF, 0x1A661AFF, 0x666666FF,
+    0x664D4DFF, 0x4D4D66FF, 0x665933FF, 0x4D664DFF,
+};
+/* 3B7888 */ static u8 lbl_803B7888[0x1C];
+/* 3B78A4 */ static u8 lbl_803B78A4[0x24];
+/* 3B7930 */ static Vec2 const lbl_803B7930[0x114 / sizeof(Vec2)];
 /* 3D9D20 */ static struct lbl_803D9D20_t lbl_803D9D20;
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
-/* 46B668 */ static UNK_T lbl_8046B668[14];
+/* 46B668 */ static struct lbl_8046B668_t lbl_8046B668;
 /* 46B6A0 */ static lbl_8046B6A0_t lbl_8046B6A0;
 /* 46DBD8 */ static UNK_T lbl_8046DBD8[4];
 /* 46DBE8 */ static struct lbl_8046DBE8_t lbl_8046DBE8;

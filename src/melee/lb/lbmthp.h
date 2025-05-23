@@ -4,7 +4,10 @@
 #include <platform.h>
 #include <placeholder.h>
 
-/* 01E8F8 */ float lbMthp_8001E8F8(u32);
+#include "lb/forward.h"
+#include <dolphin/mtx/forward.h>
+
+/* 01E8F8 */ float lbMthp_8001E8F8(lbMthp_8001E8F8_t*);
 /* 01E910 */ UNK_RET fn_8001E910(UNK_PARAMS);
 /* 01EB14 */ UNK_RET fn_8001EB14(UNK_PARAMS);
 /* 01EBF0 */ UNK_RET fn_8001EBF0(UNK_PARAMS);

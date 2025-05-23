@@ -11,6 +11,7 @@ typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
 typedef struct HSD_AllocEntry HSD_AllocEntry;
 typedef struct HurtCapsule HurtCapsule;
+typedef struct lbMthp_8001E8F8_t lbMthp_8001E8F8_t;
 typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 typedef struct PreloadCache PreloadCache;
 typedef struct PreloadCacheScene PreloadCacheScene;
