@@ -328,10 +328,10 @@ void mpLib_800566F8(int arg0, float arg1, float arg2)
 
 /// #mpLib_800580AC
 
-void mpLib_800580C8(int arg0, Ground* arg1, void (*arg2)(void*, int))
+void mpLib_800580C8(int arg0, Ground* arg1, mpLib_GroundCallback cb)
 {
     mpLib_804D64C0_t* temp_r3 = &mpLib_804D64C0[arg0];
-    temp_r3->x24 = arg2;
+    temp_r3->x24 = cb;
     temp_r3->x28 = arg1;
 }
 

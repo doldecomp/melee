@@ -117,7 +117,7 @@
 /* 057FDC */ UNK_RET mpLib_80057FDC(UNK_PARAMS);
 /* 058044 */ UNK_RET mpLib_80058044(UNK_PARAMS);
 /* 0580AC */ void mpLib_800580AC(s32);
-/* 0580C8 */ void mpLib_800580C8(int, Ground*, void (*)(void*, int));
+/* 0580C8 */ void mpLib_800580C8(int, Ground*, mpLib_GroundCallback);
 /* 0580E0 */ void mpLib_800580E0(s32);
 /* 0580FC */ void mpLib_800580FC(int, mpLib_Callback*, UNK_T);
 /* 05811C */ void mpLib_8005811C(CollData*, s32 ledge_id);

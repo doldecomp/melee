@@ -5,8 +5,17 @@
 
 #include "gr/types.h"
 
+/* 1CA394 */ UNK_RET grZakoGenerator_801CA394(UNK_PARAMS);
+/* 1CA43C */ UNK_RET grZakoGenerator_801CA43C(UNK_PARAMS);
+/* 1CA67C */ UNK_RET grZakoGenerator_801CA67C(UNK_PARAMS);
+/* 1CA8B4 */ UNK_RET grZakoGenerator_801CA8B4(UNK_PARAMS);
 /* 1CAC14 */ void grZakoGenerator_801CAC14(void);
 /* 1CACB8 */ void grZakoGenerator_801CACB8(Ground_GObj* gobj);
+/* 1CADBC */ UNK_RET fn_801CADBC(UNK_PARAMS);
+/* 1CADE0 */ UNK_RET grZakoGenerator_801CADE0(UNK_PARAMS);
 /* 1CAE04 */ void grZakoGenerator_801CAE04(bool);
+/* 1CAEB0 */ UNK_RET grZakoGenerator_801CAEB0(UNK_PARAMS);
+/* 1CAEF0 */ UNK_RET grZakoGenerator_801CAEF0(bool);
+/* 1CAF08 */ UNK_RET grZakoGenerator_801CAF08(UNK_PARAMS);
 
 #endif

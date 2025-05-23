@@ -81,7 +81,7 @@ STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);
 
 struct mpLib_804D64C0_t {
     /* 0x00 */ char pad_0[0x24];
-    /* 0x24 */ void (*x24)(void*, int);
+    /* 0x24 */ mpLib_GroundCallback x24;
     /* 0x28 */ Ground* x28;
     /* 0x2C */ int unk_2C; /* inferred */
     /* 0x30 */ int unk_30; /* inferred */
