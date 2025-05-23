@@ -1,5 +1,5 @@
-#ifndef MELEE_LB_LBAUDIO_AX_H
-#define MELEE_LB_LBAUDIO_AX_H
+#ifndef GALE01_02305C
+#define GALE01_02305C
 
 #include <platform.h>
 
@@ -18,7 +18,7 @@
 /* 023254 */ UNK_RET fn_80023254(UNK_PARAMS);
 /* 0233EC */ s32 lbAudioAx_800233EC(s32);
 /* 023694 */ s32 lbAudioAx_80023694(void);
-/* 0236B8 */ void lbAudioAx_800236B8(s32);
+/* 0236B8 */ int lbAudioAx_800236B8(int);
 /* 0236DC */ void lbAudioAx_800236DC(void);
 /* 023710 */ bool lbAudioAx_80023710(s32);
 /* 023730 */ UNK_RET lbAudioAx_80023730(UNK_PARAMS);
@@ -46,7 +46,7 @@
 /* 024654 */ UNK_RET fn_80024654(UNK_PARAMS);
 /* 024B1C */ void lbAudioAx_80024B1C(s32, s32);
 /* 024B58 */ void lbAudioAx_80024B58(s32, s32);
-/* 024B94 */ void lbAudioAx_80024B94(int, int);
+/* 024B94 */ int lbAudioAx_80024B94(int arg0, int arg1);
 /* 024BD0 */ u8 lbAudioAx_80024BD0(void);
 /* 024C08 */ void lbAudioAx_80024C08(u8);
 /* 024C84 */ UNK_RET lbAudioAx_80024C84(UNK_PARAMS);
@@ -62,7 +62,7 @@
 /* 02500C */ void lbAudioAx_8002500C(s32);
 /* 025038 */ void lbAudioAx_80025038(s32);
 /* 025064 */ UNK_RET lbAudioAx_80025064(UNK_PARAMS);
-/* 025098 */ UNK_RET lbAudioAx_80025098(UNK_PARAMS);
+/* 025098 */ void lbAudioAx_80025098(s32 arg0);
 /* 0250A0 */ UNK_RET fn_800250A0(UNK_PARAMS);
 /* 0251EC */ UNK_RET fn_800251EC(UNK_PARAMS);
 /* 0253D8 */ UNK_RET fn_800253D8(UNK_PARAMS);

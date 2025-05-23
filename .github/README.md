@@ -106,10 +106,6 @@ Coming soon.
 # Containers
 Coming soon.
 
-# Building with Make (legacy)
-
-See [Building with Make](LEGACY_BUILD.md).
-
 # Diffing
 
 Once the initial build succeeds, an `objdiff.json` should exist in the project root.

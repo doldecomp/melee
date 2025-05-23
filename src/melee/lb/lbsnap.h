@@ -5,7 +5,7 @@
 #include <placeholder.h>
 
 /* 01D2BC */ UNK_RET lbSnap_8001D2BC(UNK_PARAMS);
-/* 01D338 */ UNK_RET lbSnap_8001D338(UNK_PARAMS);
+/* 01D338 */ s32 lbSnap_8001D338(s32 arg0);
 /* 01D350 */ int lbSnap_8001D350(int i);
 /* 01D394 */ UNK_RET lbSnap_8001D394(UNK_PARAMS);
 /* 01D3B0 */ UNK_RET lbSnap_8001D3B0(UNK_PARAMS);

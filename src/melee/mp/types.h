@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 
+#include "gr/forward.h"
 #include "mp/forward.h" // IWYU pragma: export
 
 struct mp_UnkStruct0 {
@@ -69,6 +70,23 @@ struct mp_UnkStruct6 {
     /* +2 */ short x2;
     /* +4 */ short* x4;
 };
+
+struct mpLib_804D64B8_t {
+    /* 0x00 */ char pad_0[8];
+    /* 0x08 */ f32 unk_8;      /* inferred */
+    /* 0x0C */ f32 unk_C;      /* inferred */
+    /* 0x10 */ char pad_10[8]; /* maybe part of unk_C[3]? */
+}; /* size = 0x18 */
+STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);
+
+struct mpLib_804D64C0_t {
+    /* 0x00 */ char pad_0[0x24];
+    /* 0x24 */ void (*x24)(void*, int);
+    /* 0x28 */ Ground* x28;
+    /* 0x2C */ int unk_2C; /* inferred */
+    /* 0x30 */ int unk_30; /* inferred */
+}; /* size = 0x34 */
+STATIC_ASSERT(sizeof(struct mpLib_804D64C0_t) == 0x34);
 
 struct mp_UnkStruct7 {
     /* +0 */ struct mp_UnkStruct7* next;

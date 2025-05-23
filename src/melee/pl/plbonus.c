@@ -8,7 +8,11 @@ UNK_T pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
     return arg0->x3E8[arg1];
 }
 
-/// #pl_800386E8
+s32 pl_800386E8(pl_800386E8_arg0_t* arg0)
+{
+    int temp = arg0->unk_190 + arg0->unk_5AC;
+    return temp + arg0->unk_5B0;
+}
 
 /// #fn_80038700
 

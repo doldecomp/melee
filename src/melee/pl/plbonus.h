@@ -6,7 +6,7 @@
 #include "pl/forward.h"
 
 /* 0386D8 */ UNK_T pl_800386D8(pl_800386D8_t*, ssize_t);
-/* 0386E8 */ UNK_RET pl_800386E8(UNK_PARAMS);
+/* 0386E8 */ int pl_800386E8(pl_800386E8_arg0_t*);
 /* 038700 */ UNK_RET fn_80038700(UNK_PARAMS);
 /* 038788 */ UNK_RET pl_80038788(UNK_PARAMS);
 /* 038824 */ UNK_RET pl_80038824(UNK_PARAMS);

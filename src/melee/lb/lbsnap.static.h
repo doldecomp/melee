@@ -20,6 +20,6 @@ struct Unk80433380 {
 }; /* size = 0x60 */
 STATIC_ASSERT(sizeof(struct Unk80433380) == 0x60);
 
-struct Unk80433380 lb_80433380;
+/* 433380 */ static struct Unk80433380 lb_80433380;
 
 #endif
