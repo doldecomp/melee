@@ -14,6 +14,8 @@ typedef struct mp_UnkStruct5 mp_UnkStruct5;
 typedef struct mp_UnkStruct6 mp_UnkStruct6;
 typedef struct mp_UnkStruct7 mp_UnkStruct7;
 typedef struct mpisland mpisland;
+typedef struct mpLib_804D64B8_t mpLib_804D64B8_t;
+typedef struct mpLib_804D64C0_t mpLib_804D64C0_t;
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
 typedef bool (*mpColl_Callback)(CollData*, u32);

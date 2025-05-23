@@ -211,4 +211,10 @@ void ft_800851C0(Fighter_GObj* gobj)
 
 /// #ft_800851D0
 
-/// #ft_80085204
+void ft_80085204(Fighter_GObj* gobj)
+{
+    Fighter* temp_r3;
+
+    temp_r3 = gobj->user_data;
+    temp_r3->self_vel.x = temp_r3->x6A4_transNOffset.z * temp_r3->facing_dir;
+}

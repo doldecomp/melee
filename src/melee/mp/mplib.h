@@ -12,9 +12,9 @@
 #include <common_structs.h>
 
 /* 04D164 */ int mpLib_8004D164(void);
-/* 04D16C */ int mpLib_8004D16C(void);
+/* 04D16C */ mpLib_804D64B8_t* mpLib_8004D16C(void);
 /* 04D174 */ mp_UnkStruct2* mpLib_8004D174(void);
-/* 04D17C */ int mpLib_8004D17C(void);
+/* 04D17C */ mpLib_804D64C0_t* mpLib_8004D17C(void);
 /* 04D184 */ UNK_RET mpLib_8004D184(UNK_PARAMS);
 /* 04D288 */ void mpLib_8004D288(UNK_T);
 /* 04DB78 */ s32 mpLib_8004DB78(s32 gr_idx);
@@ -93,7 +93,7 @@
 /* 0565DC */ UNK_RET mpLib_800565DC(UNK_PARAMS);
 /* 05667C */ void mpLib_8005667C(s16);
 /* 0566D8 */ UNK_RET mpLib_800566D8(UNK_PARAMS);
-/* 0566F8 */ UNK_RET mpLib_800566F8(UNK_PARAMS);
+/* 0566F8 */ void mpLib_800566F8(ssize_t, f32, f32);
 /* 056710 */ UNK_RET mpLib_80056710(UNK_PARAMS);
 /* 056758 */ UNK_RET mpLib_80056758(UNK_PARAMS);
 /* 0567C0 */ bool mpLib_800567C0(s32 wall_id, Vec3* ecb_side_vtx,
@@ -117,11 +117,11 @@
 /* 057FDC */ UNK_RET mpLib_80057FDC(UNK_PARAMS);
 /* 058044 */ UNK_RET mpLib_80058044(UNK_PARAMS);
 /* 0580AC */ void mpLib_800580AC(s32);
-/* 0580C8 */ void mpLib_800580C8(s32, Ground*, void (*)(void*, s32));
+/* 0580C8 */ void mpLib_800580C8(int, Ground*, void (*)(void*, int));
 /* 0580E0 */ void mpLib_800580E0(s32);
 /* 0580FC */ void mpLib_800580FC(int, mpLib_Callback*, UNK_T);
 /* 05811C */ void mpLib_8005811C(CollData*, s32 ledge_id);
-/* 0581A4 */ UNK_RET mpLib_800581A4(UNK_PARAMS);
+/* 0581A4 */ void mpLib_800581A4(int arg0, int arg1, int arg2);
 /* 0581BC */ void mpLib_800581BC(int, mpLib_Callback*, UNK_T);
 /* 0581DC */ UNK_RET mpLib_800581DC(UNK_PARAMS);
 /* 058560 */ UNK_RET mpLib_80058560(UNK_PARAMS);

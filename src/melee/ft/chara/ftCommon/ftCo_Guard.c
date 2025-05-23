@@ -1,11 +1,4 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include <dolphin/mtx/forward.h>
-#include <baselib/forward.h>
-
-#include "ftCo_Guard.h"
+#include "ftCo_Guard.static.h"
 
 #include "ftCo_0C35.h"
 #include "ftCo_Attack1.h"
@@ -48,39 +41,6 @@
 #include <math_ppc.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-
-float const ftCo_804D8538 = 0;
-float const ftCo_804D853C = 2 * M_PI;
-float const ftCo_804D8540 = rad_to_deg;
-float const ftCo_804D8544 = 359;
-float const ftCo_804D8548 = 10;
-float const ftCo_804D854C = 180;
-float const ftCo_804D8550 = 360;
-float const ftCo_804D8554 = -180;
-double const ftCo_804D8558 = 0.5;
-double const ftCo_804D8560 = 3;
-
-float const ftCo_804D8568 = 1;
-float const ftCo_804D856C = 255;
-double const ftCo_804D8570 = 4503601774854144;
-float const ftCo_804D8578 = 0.1;
-
-/* 091BC4 */ static void ftCo_80091BC4(ftCo_Fighter* fp);
-/* 091E78 */ static void ftCo_80091E78(ftCo_GObj* gobj, float);
-/* 092158 */ static void ftCo_80092158(ftCo_GObj* gobj, int arg1,
-                                       HSD_JObj* arg2);
-/* 0921DC */ static void ftCo_800921DC(ftCo_GObj* gobj);
-/* 0923B4 */ static void ftCo_800923B4(ftCo_GObj* gobj);
-/* 0924C0 */ static void ftCo_800924C0(HSD_GObj* gobj);
-/* 092908 */ static void ftCo_80092908(ftCo_GObj* gobj);
-/* 092C54 */ static void ftCo_80092C54(ftCo_GObj* gobj);
-/* 092E50 */ static void ftCo_80092E50(ftCo_GObj* gobj);
-/* 092F2C */ static void ftCo_80092F2C(ftCo_GObj* gobj, bool);
-/* 093790 */ static void ftCo_80093790(ftCo_GObj* gobj);
-/* 093850 */ static void ftCo_80093850(ftCo_GObj* gobj);
-/* 09388C */ static void ftCo_8009388C(ftCo_GObj* gobj);
-/* 0939B4 */ static void ftCo_800939B4(ftCo_GObj* gobj);
-/* 093A50 */ static void ftCo_80093A50(ftCo_GObj* gobj);
 
 bool ftCo_80091A2C(ftCo_GObj* gobj)
 {
@@ -886,12 +846,10 @@ void ftCo_GuardReflect_Coll(ftCo_GObj* gobj)
     ft_800845B4(gobj);
 }
 
-f32 ftCo_80094098(HSD_GObj* gobj, f32* arg1)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_80094098
 
-void ftCo_80094138(ftCo_Fighter* fp)
+void ftCo_80094138(Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    fp->mv.co.guard.x1C = p_ftCommonData->x2B8;
+    fp->mv.co.guard.x10 = 0.0f;
 }

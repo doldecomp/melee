@@ -294,7 +294,11 @@ void gm_801A42E8(s8 arg0)
     M2C_FIELD(&gm_80479D30, s8*, 1) = arg0;
 }
 
-/// #gm_801A42F8
+void gm_801A42F8(int arg0)
+{
+    gm_80479D30.nums.pending_major = arg0;
+    gm_80479D30.pending = 1;
+}
 
 u8 gm_801A4310(void)
 {
@@ -1441,7 +1445,12 @@ u8 gm_801BEB80(void)
 
 /// #gm_801BEB8C
 
-/// #gm_801BEBA8
+static M2C_UNK gm_803DF918; /* unable to generate initializer: unknown type */
+
+u8 gm_801BEBA8(s8 arg0)
+{
+    return *(&gm_803DF918 + arg0);
+}
 
 /// #gm_801BEBC0
 

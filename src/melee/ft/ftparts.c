@@ -5,6 +5,7 @@
 #include "ft/ftparts.h"
 
 #include "ft/fighter.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lbrefract.h"
 
@@ -270,7 +271,11 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
 /// #ftParts_80074A4C
 
-/// #ftParts_80074A74
+int ftParts_80074A74(HSD_GObj* arg0, int arg1)
+{
+    Fighter* fp = GET_FIGHTER(arg0);
+    return fp->x5F4_arr[arg1].x0;
+}
 
 /// #ftParts_80074A8C
 

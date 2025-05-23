@@ -21,5 +21,6 @@ struct lbl_804333E0_t {
 STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
 
 /* 4333E0 */ static struct lbl_804333E0_t lbl_804333E0;
+/* 4D7CC0 */ static float lb_804D7CC0;
 
 #endif

@@ -527,7 +527,7 @@ void ftPr_Init_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
     }
 }
 
-void* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj)
+HSD_JObj* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -535,7 +535,8 @@ void* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj)
         return fp->fv.pr.x223C;
     }
 
-    return gobj;
+    /// @todo What???
+    return (HSD_JObj*) gobj;
 }
 
 void ftPr_Init_OnLoad(HSD_GObj* gobj)

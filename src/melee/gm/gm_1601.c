@@ -58,7 +58,10 @@ u8 fn_80160840(u8 arg0)
 
 /// #gm_80160854
 
-/// #gm_80160968
+int gm_80160968(u8 arg0)
+{
+    return lbl_803B7864[arg0];
+}
 
 /// #gm_80160980
 
@@ -204,19 +207,34 @@ u8 fn_80160840(u8 arg0)
 
 /// #fn_80163FA4
 
-/// #gm_8016400C
+u8 gm_8016400C(u8 arg0)
+{
+    return lbl_803B7888[arg0];
+}
 
-/// #gm_80164024
+u8 gm_80164024(u8 arg0)
+{
+    return lbl_803B78A4[arg0];
+}
 
 /// #gm_8016403C
 
 /// #fn_801640B0
 
-/// #fn_8016419C
+float fn_8016419C(u8 arg0)
+{
+    return lbl_803B7930[arg0 - 1].x;
+}
 
-/// #fn_801641B4
+float fn_801641B4(u8 arg0)
+{
+    return lbl_803B7930[arg0 - 1].y;
+}
 
-/// #gm_801641CC
+u16 gm_801641CC(u8 arg0)
+{
+    return lbl_803B7808[arg0];
+}
 
 /// #gm_801641E4
 
@@ -576,7 +594,11 @@ void gm_8016A424(s8 arg0)
 
 /// #fn_8016A4C8
 
-/// #gm_8016A92C
+void gm_8016A92C(gm_8016A92C_arg0_t* arg0)
+{
+    lbl_8046B668.unk_1C = -2;
+    arg0->x58 = &lbl_8046B668;
+}
 
 /// #gm_8016A944
 
@@ -716,7 +738,10 @@ bool gm_8016B1D8(void)
     return lbl_8046B6A0.unk_24CD_b3;
 }
 
-/// #gm_8016B1EC
+bool gm_8016B1EC(void)
+{
+    return lbl_8046B6A0.unk_0 == 0;
+}
 
 /// #gm_8016B204
 
@@ -761,7 +786,10 @@ void gm_8016B378(s8 arg0)
     M2C_FIELD(&lbl_8046B6A0, s8*, 0x18) = arg0;
 }
 
-/// #fn_8016B388
+void fn_8016B388(ssize_t arg0, s16 arg1)
+{
+    M2C_FIELD((&lbl_8046B6A0 + (arg0 * 0xE)), s16*, 0x3E) = arg1;
+}
 
 /// #gm_8016B3A0
 

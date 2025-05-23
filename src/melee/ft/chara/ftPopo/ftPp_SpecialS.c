@@ -250,7 +250,15 @@ void ftPp_SpecialS2_Anim(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialS_801210C8
 
-/// #ftPp_SpecialS_8012114C
+void ftPp_SpecialS_8012114C(void* arg0)
+{
+    void* temp_r3;
+
+    temp_r3 = M2C_FIELD(arg0, void**, 0x2C);
+    M2C_FIELD(temp_r3, s32*, 0x2238) = 0;
+    M2C_FIELD(temp_r3, s32*, 0x21E8) = 0;
+    M2C_FIELD(temp_r3, s32*, 0x21DC) = 0;
+}
 
 /// #ftPp_SpecialS_80121164
 

@@ -42,7 +42,7 @@ struct HSD_SM {
 u8* AXDriverAlloc(s32 size);
 void AXDriverFree(void* ptr);
 void AXDriverUnlink(HSD_SM* v, HSD_SM** head);
-void AXDriverKeyOff(HSD_SM* v);
+void AXDriverKeyOff(int v);
 void HSD_AudioSFXKeyOffAll(void);
 void HSD_AudioSFXKeyOffTrack(int track);
 s32 AXDriver_8038D4E4(int, s16);

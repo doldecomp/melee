@@ -64,6 +64,7 @@
 /* 459054 */ extern HSD_ObjAllocData Fighter_80459054;
 /* 459080 */ extern HSD_ObjAllocData Fighter_80459080;
 /* 4590AC */ extern HSD_ObjAllocData Fighter_804590AC;
+/* 4598B8 */ extern ftData* gFtDataList[FTKIND_MAX];
 /* 4D64FC */ extern UNK_T Fighter_804D64FC;
 /* 4D6500 */ extern UNK_T Fighter_804D6500;
 /* 4D6504 */ extern HSD_Joint* Fighter_804D6504;

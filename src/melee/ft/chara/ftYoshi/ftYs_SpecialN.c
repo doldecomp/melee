@@ -7,6 +7,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureYoshi.h"
+#include "ftYoshi/ftYs_Init.h"
 #include "it/items/it_2F2B.h"
 
 #include <dolphin/mtx/types.h>
@@ -14,15 +15,30 @@
 
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
 
-/// #ftYs_SpecialN_8012CD10
+float ftYs_SpecialN_8012CD10(ftYs_GObj* gobj)
+{
+    return M2C_FIELD(gFtDataList[0xE]->ext_attr, f32*, 0x28);
+}
 
-/// #ftYs_SpecialN_8012CD28
+float ftYs_SpecialN_8012CD28(void)
+{
+    return M2C_FIELD(gFtDataList[0xE]->ext_attr, f32*, 0x2C);
+}
 
-/// #ftYs_SpecialN_8012CD40
+float ftYs_SpecialN_8012CD40(void)
+{
+    return M2C_FIELD(gFtDataList[0xE]->ext_attr, f32*, 0x30);
+}
 
-/// #ftYs_SpecialN_8012CD58
+float ftYs_SpecialN_8012CD58(void)
+{
+    return M2C_FIELD(gFtDataList[0xE]->ext_attr, f32*, 0x34);
+}
 
-/// #ftYs_SpecialN_8012CD70
+int ftYs_SpecialN_8012CD70(void)
+{
+    return M2C_FIELD(gFtDataList[0xE]->ext_attr, s32*, 0x38);
+}
 
 /// #ftYs_SpecialN_8012CD88
 
@@ -158,7 +174,14 @@ void fn_8012CF7C(HSD_GObj* gobj)
 
 /// #ftYs_SpecialAirN2_0_Coll
 
-/// #ftYs_SpecialS_8012DF00
+void ftYs_SpecialS_8012DF00(HSD_GObj* arg0)
+{
+    void* temp_r3;
+
+    temp_r3 = arg0->user_data;
+    M2C_FIELD(temp_r3, void (**)(HSD_GObj*), 0x21DC) = ftYs_Init_8012BA8C;
+    M2C_FIELD(temp_r3, void (**)(HSD_GObj*), 0x21E4) = ftYs_Init_8012BA8C;
+}
 
 void ftYs_SpecialS_8012DF18(HSD_GObj* gobj)
 {
