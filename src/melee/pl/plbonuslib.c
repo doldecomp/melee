@@ -294,6 +294,38 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
     }
 }
 
+void pl_8003F53C(s32 arg0, s32 arg1)
+{
+    Fighter_GObj* temp_r30;
+    pl_StaleMoveTableExt_t* temp_r31;
+    s32 temp_r3;
+
+    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
+    if ((arg1 != 1) && (ftLib_800867D8(temp_r30) == 0)) {
+        if ((ft_800877F8(temp_r30, 0x100) == 0) &&
+            (ft_800877F8(temp_r30, 0x200) == 0))
+        {
+            /// @todo fix this
+            temp_r31->xDD0 |= 0x40;
+        }
+        if (ft_800877F8(temp_r30, 0x80000000) != 0) {
+            /// @todo fix this
+            temp_r31->xDD0 |= 0x20;
+        }
+        if ((ft_80087818(temp_r30, 0x100) != 0) ||
+            (ft_80087818(temp_r30, 0x200) != 0))
+        {
+            temp_r31->xCF4 += 1;
+            temp_r3 = temp_r31->xD58;
+            if ((u32) temp_r3 < temp_r31->xD5C) {
+                temp_r31->xD5C = (u32) temp_r3;
+            }
+            temp_r31->xD58 = 0;
+        }
+    }
+}
+
 void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* stale_moves;
