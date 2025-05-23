@@ -336,6 +336,17 @@ s32 pl_8003FC20(s32 arg0)
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xD00;
 }
 
+void pl_8003FC44(s32 slot, s32 arg1)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    if (arg1 == 0) {
+        /// @todo Fix this
+        temp_r3->xDD0 |= 0x80;
+    }
+}
+
 void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* stale_moves;
