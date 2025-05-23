@@ -1,6 +1,9 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "gr/inlines.h"
+#include "gr/types.h"
+
 void grStadium_801D1018(void) {}
 
 /// #grStadium_801D101C
@@ -29,7 +32,10 @@ bool grStadium_801D1388(void)
 
 void grStadium_801D13C4(void) {}
 
-/// #fn_801D13C8
+void fn_801D13C8(Ground_GObj* gobj)
+{
+    GET_GROUND(gobj)->gv.stadium.x0_b0 = false;
+}
 
 /// #grStadium_801D13E0
 

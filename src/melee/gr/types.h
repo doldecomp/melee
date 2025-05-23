@@ -9,6 +9,7 @@
 #include "lb/forward.h"
 #include "sc/forward.h"
 #include <dolphin/gx/forward.h>
+#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <dolphin/gx/types.h>
@@ -275,8 +276,8 @@ struct grKongo_GroundVars2 {
     u8 xE0_pad[0x218 - 0xE0];
 };
 
-// @todo: Investigate if these extra structs could be
-// shared among stages/other things as more are decompiled.
+/// @todo: Investigate if these extra structs could be
+/// shared among stages/other things as more are decompiled.
 struct grKongo_GroundVars3 {
     /* gp+C4 */ s16 xC4;
     /* gp+C6 */ s16 xC6;
@@ -294,13 +295,33 @@ struct grKongo_GroundVars3 {
 };
 
 struct grCorneria_GroundVars {
-    /*  +0  gp+C4 */ char pad_0[0x68];
-    /* +68 gp+12C */ HSD_JObj* x68;
+    /*  +0:0  gp+C4:0 */ u8 x0_b0 : 1;
+    /*  +4    gp+C8   */ char pad_4[0x68 - 0x4];
+    /* +68   gp+12C   */ HSD_JObj* x68;
 };
 
 struct grIceMt_GroundVars {
     /* +0 gp+C4 */ char pad_0[0x14];
     /* +0 gp+D8 */ s16 xD8;
+};
+
+struct grStadium_GroundVars {
+    /* +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
+struct grZebes_GroundVars {
+    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+    /*  +4 gp+C8 */ UNK_T x4;
+    /*  +8 gp+CC */ UNK_T x8;
+    /*  +C gp+D0 */ Vec3 xC;
+};
+
+struct grOnett_GroundVars {
+    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
+struct grBigBlue_GroundVars {
+    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
 struct Ground {
@@ -334,17 +355,21 @@ struct Ground {
     char pad_40[0xC4 - 0x40];
     union GroundVars { // how big should this be?
         char pad_0[0x218 - 0xC4];
-        struct GroundVars_unk unk;
+        struct grBigBlue_GroundVars bigblue;
+        struct grCorneria_GroundVars corneria;
         struct GroundVars_flatzone flatzone;
         struct GroundVars_flatzone2 flatzone2;
+        struct grIceMt_GroundVars icemt;
         struct GroundVars_izumi izumi;
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
         struct grKongo_GroundVars kongo;
         struct grKongo_GroundVars2 kongo2;
         struct grKongo_GroundVars3 kongo3;
-        struct grCorneria_GroundVars corneria;
-        struct grIceMt_GroundVars icemt;
+        struct grOnett_GroundVars onett;
+        struct grStadium_GroundVars stadium;
+        struct GroundVars_unk unk;
+        struct grZebes_GroundVars zebes;
     } gv;
 };
 
