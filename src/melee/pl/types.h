@@ -63,8 +63,36 @@ STATIC_ASSERT(sizeof(struct StaleMoveTable) == 0xCF4);
 
 typedef struct pl_StaleMoveTableExt_t {
     /*   +0 */ StaleMoveTable x0_staleMoveTable;
-    /* +CF4 */ u8 xCF4[0xD10 - 0xCF4];
+    /* +CF4 */ u8 xCF4[0xD04 - 0xCF4];
+    /* +D04 */ u32 xD04;
+    /* +D08 */ u32 xD08;
+    /* +D0C */ u32 xD0C;
     /* +D10 */ s32 xD10;
+    /* +D14 */ s32 xD14;
+    /* +D18 */ u32 xD18;
+    /* +D1C */ s32 xD1C;
+    /* +D20 */ s32 xD20;
+    /* +D24 */ s32 xD24;
+    /* +D28 */ s32 xD28;
+    /* +D2C */ s32 xD2C;
+    /* +D30 */ s32 xD30;
+    /* +D34 */ s32 xD34;
+    /* +D38 */ s32 xD38;
+    /* +D3C */ s32 xD3C;
+    /* +D40 */ u32 xD40;
+    /* +D44 */ u32 xD44;
+    /* +D48 */ u32 xD48;
+    /* +D4C */ u32 xD4C;
+    /* +D50 */ u32 xD50;
+    /* +D54 */ u32 xD54;
+    /* +D58 */ s32 xD58;
+    /* +D5C */ u8 xD5C[0xD60 - 0xD5C];
+    /* +D50 */ u32 xD60;
+    /* +D64 */ u8 xD64[0xD68 - 0xD64];
+    /* +D68 */ s32 xD68;
+    /* +D6C */ u8 xD6C[0xDD0 - 0xD6C];
+    /* +DD0 */ u8 xDD0;
+    /* +DD1 */ u8 xDD1_Padding[0x3];
 } pl_StaleMoveTableExt_t;
 
 struct pl_800386E8_arg0_t {
@@ -74,5 +102,12 @@ struct pl_800386E8_arg0_t {
     /* 0x5AC */ int unk_5AC;         /* inferred */
     /* 0x5B0 */ int unk_5B0;         /* inferred */
 }; /* size = 0x5B4 */
+
+typedef struct pl_804D6470_t {
+    /*   +0 */ u8 x0[0x58];
+    /*  +58 */ f32 x58;
+    /*  +5C */ u8 x5C[0x64 - 0x5C];
+    /*  +64 */ f32 x64;
+} pl_804D6470_t;
 
 #endif

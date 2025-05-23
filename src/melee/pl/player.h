@@ -315,6 +315,6 @@ void Player_80037054(s32 slot, s32 arg1);
 void Player_SetOtherStamina(s32 slot, s32 stamina);
 void Player_SetFlagsAEBit0(s32 slot, u8 bit0);
 s32 Player_80033BB8(int slot);
-/* 4D6470 */ extern void* pl_804D6470;
+/* 4D6470 */ extern pl_804D6470_t* pl_804D6470;
 
 #endif

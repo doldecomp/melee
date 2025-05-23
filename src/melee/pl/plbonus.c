@@ -22,7 +22,7 @@ s32 pl_800386E8(pl_800386E8_arg0_t* arg0)
 
 /// #pl_80038898
 
-void* pl_80038914(void)
+pl_804D6470_t* pl_80038914(void)
 {
     return pl_804D6470;
 }

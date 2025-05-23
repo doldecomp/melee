@@ -4,6 +4,7 @@
 
 #include "gm/gm_1601.h"
 #include "it/it_26B1.h"
+#include "melee/ft/ft_0892.h"
 #include "melee/ft/ftlib.h"
 #include "pl/player.h"
 
@@ -118,6 +119,178 @@ void pl_8003EC9C(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
             temp_r3->x0_staleMoveTable.xC64 = arg2;
         }
         temp_r3->xD10 = 0;
+    }
+}
+
+void pl_8003EE2C(s32 arg0, s32 arg1)
+{
+    Fighter_GObj* temp_r30;
+    HSD_GObj* temp_r3_4;
+    pl_StaleMoveTableExt_t* temp_r31;
+    s32 temp_r3_2;
+    s32 temp_r3_3;
+    bool var_r0;
+    s32 var_r3;
+    u32 temp_r0;
+    u32 temp_r3;
+    u32 temp_r3_10;
+    u32 temp_r3_5;
+    u32 temp_r3_6;
+    u32 temp_r3_7;
+    u32 temp_r3_8;
+    u32 temp_r3_9;
+    u8 temp_r28;
+
+    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
+    if (arg1 != 1) {
+        if ((gm_8016AEDC() != 0U) && (gm_8016AEDC() != -2U)) {
+            var_r0 = true;
+        } else {
+            var_r0 = false;
+        }
+        if (var_r0) {
+            temp_r31->xD08 += 1U;
+            temp_r3 = temp_r31->xD08;
+            if (temp_r3 > temp_r31->xD04) {
+                temp_r31->xD04 = temp_r3;
+            }
+            temp_r31->xD10 += 1;
+            temp_r3_2 = temp_r31->xD10;
+            if ((u32) temp_r3_2 > temp_r31->xD0C) {
+                temp_r31->xD0C = (u32) temp_r3_2;
+            }
+            if (ftLib_800865CC(temp_r30) == 1) {
+                temp_r31->xD20 += 1;
+            } else {
+                temp_r31->xD24 += 1;
+            }
+            temp_r28 = ft_80089884(temp_r30)->x2073;
+            /// @todo This is obviously not right, but it matches
+            if (((s32) * ((u8*) ft_80089884(temp_r30) + 2) >> 6U) & 1) {
+                temp_r31->xD18 += 1U;
+
+                /// @todo uses fcmpu instead of fcmpo
+                if ((f32) temp_r31->xD18 == pl_804D6470->x64) {
+                    temp_r31->xD14 += 1;
+                }
+            } else {
+                temp_r31->xD18 = 0U;
+            }
+            if ((s32) temp_r28 == 0x68) {
+                temp_r31->xD1C += 1;
+            }
+            if (ftLib_800865CC(temp_r30) == 0) {
+                ftLib_8008777C(temp_r30);
+                if (M2C_ERROR(/* Read from unset register $f1 */) < 0.0f) {
+                    ftLib_8008777C(temp_r30);
+                } else {
+                    ftLib_8008777C(temp_r30);
+                }
+                M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
+                if (M2C_ERROR(/* Read from unset register $f1 */) ==
+                    pl_804D6470->x58)
+                {
+                    temp_r31->xD28 += 1;
+                }
+            }
+            if (ftLib_800877D4(temp_r30) != 0) {
+                temp_r31->xD2C += 1;
+            }
+            temp_r3_3 = ifMagnify_802FB6E8(arg0);
+            if (temp_r3_3 != 0) {
+                temp_r31->xD30 += 1;
+                temp_r31->xDD0 |= 1U;
+            } else {
+                temp_r31->xDD0 &= ~1U;
+            }
+            switch (temp_r3_3) {
+            case 1:
+                temp_r31->xDD0 |= 4U;
+                break;
+            case 2:
+                temp_r31->xDD0 |= 8U;
+                break;
+            case 3:
+                temp_r31->xDD0 |= 2U;
+                break;
+            case 4:
+                temp_r31->xDD0 |= 16U;
+                break;
+            }
+            if (ft_800878BC(temp_r30) != 0) {
+                temp_r31->xD34 += 1;
+            }
+            if (ft_80087900(temp_r30) != 0) {
+                temp_r31->xD38 += 1;
+            }
+            if (ft_80087944(temp_r30) != 0) {
+                temp_r31->xD3C += 1;
+            }
+            temp_r3_4 = ftLib_80086794(temp_r30);
+            if (temp_r3_4 != NULL) {
+                var_r3 = itGetKind((Item_GObj*) temp_r3_4);
+                if ((var_r3 >= 0) && (var_r3 < 0x23)) {
+                    // Empty if
+                } else {
+                    switch (var_r3) {
+                    case 0xCD:
+                        var_r3 = 0x23;
+                        break;
+                    case 0xE1:
+                        var_r3 = 0x24;
+                        break;
+                    case 0xE2:
+                        var_r3 = 0x25;
+                        break;
+                    case 0x28:
+                        var_r3 = 0x26;
+                        break;
+                    default:
+                        var_r3 = -1;
+                        break;
+                    }
+                }
+                if ((var_r3 != -1) &&
+                    (it_8026B30C((Item_GObj*) temp_r3_4) != 5))
+                {
+                    temp_r31->xD44 += 1U;
+                    temp_r3_5 = temp_r31->xD44;
+                    if (temp_r3_5 > temp_r31->xD40) {
+                        temp_r31->xD40 = temp_r3_5;
+                    }
+                }
+            } else {
+                temp_r0 = temp_r31->xD44;
+                if (temp_r0 != 0U) {
+                    temp_r3_6 = temp_r31->xD48;
+                    if ((temp_r0 < temp_r3_6) || (temp_r3_6 == 0U)) {
+                        temp_r31->xD48 = temp_r0;
+                    }
+                    temp_r31->xD44 = 0U;
+                }
+            }
+            temp_r3_7 = temp_r31->xD4C;
+            if (temp_r3_7 != 0U) {
+                temp_r31->xD4C = temp_r3_7 - 1U;
+            }
+            temp_r3_8 = temp_r31->xD50;
+            if (temp_r3_8 != 0U) {
+                temp_r31->xD50 = temp_r3_8 - 1U;
+            }
+            temp_r3_9 = temp_r31->xD54;
+            if (temp_r3_9 != 0U) {
+                temp_r31->xD54 = temp_r3_9 - 1U;
+            }
+            temp_r31->xD58 += 1;
+            temp_r3_10 = temp_r31->xD60;
+            if (temp_r3_10 != 0U) {
+                temp_r31->xD60 -= 1U;
+            }
+            if (ft_80087AEC(temp_r30) != 0) {
+                temp_r31->xD68 += 1;
+            }
+        }
     }
 }
 
