@@ -2,6 +2,7 @@
 
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
+#include "ft/inlines.h"
 #include "gm/gm_1A36.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -740,7 +741,39 @@ void fn_802267C8(void)
     }
 }
 
-/// #fn_802268B8
+void fn_802268B8(void)
+{
+    HSD_GObj* fighter;
+    if (db_804D6B48.b3 != 0) {
+        db_804D6B48.b3 = (db_804D6B48.b3 << 1) & 0x3F;
+    } else {
+        db_804D6B48.b3 = 1;
+    }
+    for (fighter = HSD_GObj_Entities->fighters; fighter != NULL;
+         fighter = fighter->next)
+    {
+        Fighter* ft = GET_FIGHTER(fighter);
+        if ((!db_804D6B48.b3) && (!db_804D6B48.b3)) { // ? permuter
+        }
+        // ft->x21FC_flag.grouped_bits.b0_to_5 = db_804D6B48.b3;
+        ft->x21FC_flag.u8 = db_804D6B48.b3;
+    }
+    if ((db_804D6B48.b3 & 0x02) != 0) {
+        fn_80225BF0();
+    } else {
+        fn_80225C44();
+    }
+    if ((db_804D6B48.b3 & 0x08) != 0) {
+        fn_80225C8C();
+    } else {
+        fn_80225B9C();
+    }
+    if ((db_804D6B48.b3 & 0x20) != 0) {
+        fn_80225B48();
+    } else {
+        fn_80225B9C();
+    }
+}
 
 /// #fn_8022697C
 
