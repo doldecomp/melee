@@ -92,7 +92,7 @@
 /* 228E54 */ void fn_80228E54(int arg0, int arg1, int arg2);
 /* 22900C */ void fn_8022900C(int arg0);
 /* 2291A0 */ void fn_802291A0(int arg0);
-/* 229220 */ UNK_RET fn_80229220(UNK_PARAMS);
+/* 229220 */ void fn_80229220(void);
 /* 229240 */ void fn_80229240(int);
 /* 4D4A08 */ extern enum_t g_debugLevel;
 /* 4D6B30 */ extern u16 db_804D6B30;
