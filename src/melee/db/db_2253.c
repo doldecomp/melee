@@ -720,7 +720,25 @@ void fn_80226730(int arg0)
     }
 }
 
-/// #fn_802267C8
+void fn_802267C8(void)
+{
+    HSD_GObj* temp_r3;
+
+    temp_r3 = DevText_GetGObj();
+    db_804D6B48.b0 = 1;
+    db_804D6B48.b9 = 0;
+    db_804D6B48.b3 = 0;
+    db_8049FE18.x0 = DevText_Create(7, 20, 20, 60, 12, db_8049FE18.x4);
+    if (db_8049FE18.x0 != NULL) {
+        GXColor bg = { 0xFF, 0xFF, 0xFF, 0xFF };
+        GXColor fg = { 0x00, 0x00, 0x00, 0x00 };
+        DevText_Show(temp_r3, db_8049FE18.x0);
+        DevText_HideCursor(db_8049FE18.x0);
+        DevText_SetBGColor(db_8049FE18.x0, &bg);
+        DevText_SetTextColor(db_8049FE18.x0, &fg);
+        DevText_SetScale(db_8049FE18.x0, 9.0F, 12.0F);
+    }
+}
 
 /// #fn_802268B8
 
