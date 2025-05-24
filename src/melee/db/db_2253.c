@@ -419,7 +419,23 @@ void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
     it->xDAA_byte |= db_804D6B3C;
 }
 
-/// #fn_80225D7C
+void fn_80225D7C(void)
+{
+    HSD_GObj* item_gobj;
+    Item* it;
+
+    db_804D6B3C += 1;
+    if (db_804D6B3C > 3) {
+        db_804D6B3C = 1;
+    }
+    item_gobj = HSD_GObj_Entities->items;
+    while (item_gobj != NULL) {
+        it = GET_ITEM(item_gobj);
+        it->xDAA_byte &= 0xFC;
+        it->xDAA_byte |= db_804D6B3C;
+        item_gobj = item_gobj->next;
+    }
+}
 
 /// #db_80225DD8
 

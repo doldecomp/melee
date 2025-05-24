@@ -33,7 +33,7 @@
 /* 225D40 */ void db_80225D40(void);
 /* 225D54 */ s32 db_80225D54(HSD_ObjAllocUnk4* arg0);
 /* 225D64 */ void db_80225D64(Item_GObj* item, Fighter_GObj* owner);
-/* 225D7C */ UNK_RET fn_80225D7C(UNK_PARAMS);
+/* 225D7C */ void fn_80225D7C(void);
 /* 225DD8 */ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner);
 /* 225E6C */ UNK_RET fn_80225E6C(UNK_PARAMS);
 /* 225F20 */ UNK_RET fn_80225F20(UNK_PARAMS);
