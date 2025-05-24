@@ -1,5 +1,6 @@
 #include "db_2253.static.h"
 
+#include "ft/ftlib.h"
 #include "lb/lbarchive.h"
 
 #include <common_structs.h>
@@ -145,7 +146,107 @@ void db_802256CC(void)
     OSReport("\n");
 }
 
-/// #db_80225754
+static inline int db_get_pad_button(int i)
+{
+    return HSD_PadMasterStatus[i & 0xFF].button;
+}
+
+static inline int db_get_pad_repeat(int i)
+{
+    return HSD_PadMasterStatus[i & 0xFF].repeat;
+}
+
+void db_80225754(void)
+{
+    int stack[4];
+    int i;
+    int num_players;
+    if (g_debugLevel < 3) {
+        return;
+    }
+    if (ftLib_800860E8() || ftLib_80086140()) {
+        num_players = 2;
+    } else {
+        num_players = 4;
+    }
+    for (i = 0; i < num_players; i++) {
+        int button = db_get_pad_button(i);
+        int repeat = db_get_pad_repeat(i);
+        if (button & HSD_PAD_DPADUP) {
+            if (button & HSD_PAD_DPADLEFT) {
+                button &= ~(HSD_PAD_DPADUP | HSD_PAD_DPADLEFT);
+            }
+            if (button & HSD_PAD_DPADRIGHT) {
+                button &= ~(HSD_PAD_DPADUP | HSD_PAD_DPADRIGHT);
+            }
+        }
+        if (button & HSD_PAD_DPADDOWN) {
+            if (button & HSD_PAD_DPADLEFT) {
+                button &= ~(HSD_PAD_DPADDOWN | HSD_PAD_DPADLEFT);
+            }
+            if (button & HSD_PAD_DPADRIGHT) {
+                button &= ~(HSD_PAD_DPADDOWN | HSD_PAD_DPADRIGHT);
+            }
+        }
+        if (repeat & HSD_PAD_DPADUP) {
+            if (repeat & HSD_PAD_DPADLEFT) {
+                repeat &= ~(HSD_PAD_DPADUP | HSD_PAD_DPADLEFT);
+            }
+            if (repeat & HSD_PAD_DPADRIGHT) {
+                repeat &= ~(HSD_PAD_DPADUP | HSD_PAD_DPADRIGHT);
+            }
+        }
+        if (repeat & HSD_PAD_DPADDOWN) {
+            if (repeat & HSD_PAD_DPADLEFT) {
+                repeat &= ~(HSD_PAD_DPADDOWN | HSD_PAD_DPADLEFT);
+            }
+            if (repeat & HSD_PAD_DPADRIGHT) {
+                repeat &= ~(HSD_PAD_DPADDOWN | HSD_PAD_DPADRIGHT);
+            }
+        }
+        db_8049FA00[i].x4 = db_8049FA00[i].x0;
+        db_8049FA00[i].x0 = button;
+        db_8049FA00[i].x8 =
+            db_8049FA00[i].x0 & (db_8049FA00[i].x4 ^ db_8049FA00[i].x0);
+        db_8049FA00[i].xC =
+            db_8049FA00[i].x4 & (db_8049FA00[i].x4 ^ db_8049FA00[i].x0);
+        db_8049FA00[i].x10 = repeat;
+    }
+    for (i = 0; i < 4; i++) {
+        fn_8022873C(i);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_80227484(i, db_8049FA00[i].x0, db_8049FA00[i].x8,
+                    HSD_PadMasterStatus[i & 0xFF].nml_subStickX,
+                    HSD_PadMasterStatus[i & 0xFF].nml_subStickY);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_80228620(i);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_80229240(i);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_802264C4(i);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_80226730(i);
+    }
+    fn_8022666C();
+    for (i = 0; i < 4; i++) {
+        fn_80226BD4(i);
+    }
+    fn_802269C0();
+    for (i = 0; i < 4; i++) {
+        fn_80226E0C(i);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_802291A0(i);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_802287D8(i);
+    }
+}
 
 /// #fn_80225A00
 
