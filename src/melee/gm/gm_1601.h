@@ -263,8 +263,8 @@
 /* 16B238 */ bool gm_8016B238(void);
 /* 16B248 */ float gm_8016B248(void);
 /* 16B258 */ UNK_RET gm_8016B258(UNK_PARAMS);
-/* 16B274 */ UNK_RET gm_8016B274(UNK_PARAMS);
-/* 16B2C8 */ UNK_RET gm_8016B2C8(UNK_PARAMS);
+/* 16B274 */ void gm_8016B274(f32);
+/* 16B2C8 */ void gm_8016B2C8(void);
 /* 16B328 */ UNK_RET gm_8016B328(UNK_PARAMS);
 /* 16B33C */ void gm_8016B33C(s32 arg0);
 /* 16B350 */ void gm_8016B350(s32 arg0);

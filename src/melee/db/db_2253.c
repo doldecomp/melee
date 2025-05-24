@@ -1356,7 +1356,15 @@ void fn_802287D8(int arg0)
     }
 }
 
-/// #fn_80228820
+void fn_80228820(void)
+{
+    db_804D6B8C.b0 ^= 1;
+    if (db_804D6B8C.b0) {
+        gm_8016B274(5.0f);
+    } else {
+        gm_8016B2C8();
+    }
+}
 
 void db_8022886C(void)
 {
