@@ -40,7 +40,7 @@
 /* 2260D4 */ void fn_802260D4(int player);
 /* 2261BC */ void fn_802261BC(int player);
 /* 2262E0 */ void fn_802262E0(int player);
-/* 2264C4 */ void fn_802264C4(int);
+/* 2264C4 */ void fn_802264C4(int player);
 /* 22659C */ UNK_RET fn_8022659C(UNK_PARAMS);
 /* 22666C */ void fn_8022666C(void);
 /* 226730 */ void fn_80226730(int);

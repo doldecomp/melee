@@ -2,6 +2,7 @@
 
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
+#include "gm/gm_1A36.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -646,7 +647,26 @@ void fn_802262E0(int player)
     }
 }
 
-/// #fn_802264C4
+void fn_802264C4(int player)
+{
+    if (db_8049FAA0.x0 == 1 && db_8049FAA0.xC == player) {
+        if (db_8049FAA0.x4 == 0) {
+            db_8049FAA0.x0 = 2;
+            DevText_HideBackground(db_804D6B38);
+            DevText_HideText(db_804D6B38);
+        } else {
+            db_8049FAA0.x4 -= 1;
+        }
+    }
+    fn_802261BC(player);
+    if (gm_801A45E8(1) == 0 && gm_801A45E8(0) == 0) {
+        fn_802262E0(player);
+    }
+    if (fn_8022558C(player) & 0x20 && fn_802255A4(player) & 8) {
+        fn_80225D7C();
+    }
+    fn_80225A54(player);
+}
 
 /// #fn_8022659C
 
