@@ -7,9 +7,10 @@
 
 #include "baselib/jobj.h"
 
-/* 391580 */ UNK_RET hsd_80391580(UNK_PARAMS);
-/* 391664 */ UNK_RET hsd_80391664(UNK_PARAMS);
-/* 391A04 */ UNK_RET hsd_80391A04(UNK_PARAMS);
+/* 391580 */ void DrawRectangle(float x, float y, float w, float h,
+                                GXColor* color);
+/* 391664 */ void DrawASCII(int chr, float x, float y, GXColor* color);
+/* 391A04 */ void hsd_80391A04(float scale_x, float scale_y, int line_width);
 /* 391AC8 */ UNK_RET hsd_80391AC8(UNK_PARAMS);
 /* 391E18 */ UNK_RET hsd_80391E18(UNK_PARAMS);
 /* 391F28 */ UNK_RET hsd_80391F28(UNK_PARAMS);

@@ -245,7 +245,7 @@ good:
             ;
         gmMainLib_8015FBA4();
         gm_801A50AC();
-        lb_8000C160(&gm_80479D30, 0x14);
+        memzero(&gm_80479D30, 0x14);
         gm_801A3EF4();
         gmMainLib_8046B0F0.x0 = 1;
         gm_801A42F8(0x28);
@@ -381,7 +381,7 @@ void gm_801A4510(void)
     int i;
 
     gm_801A50AC();
-    lb_8000C160(&gm_80479D30, sizeof(GameState));
+    memzero(&gm_80479D30, sizeof(GameState));
     major_scenes = gm_801A50AC();
     for (i = 0; major_scenes[i].idx != 0x2D; i++) {
         if (major_scenes[i].Init != NULL) {
