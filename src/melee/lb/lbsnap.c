@@ -12,7 +12,6 @@
 
 #include <stdio.h>
 #include <dolphin/card/CARDMount.h>
-#include <dolphin/os/OSEXI.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSTime.h>
 #include <baselib/debug.h>
