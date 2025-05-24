@@ -17,6 +17,7 @@
 #include "lb/lbarchive.h"
 #include "lb/lbcardgame.h"
 #include "pl/player.h"
+#include "pl/plbonus.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
@@ -1508,7 +1509,48 @@ void fn_80228D38(void)
     }
 }
 
-/// #fn_80228E54
+void fn_80228E54(int arg0, int arg1, int arg2)
+{
+    DevText* text;
+    s32 temp_r4;
+    s32 bonus;
+    s32 y_pos;
+
+    y_pos = 0;
+    text = db_804D6B9C[arg1].text;
+    DevText_Erase(text);
+    DevText_SetCursorXY(text, 0, 0);
+    if (arg1 == 0) {
+        DevText_Printf(text, "1P %7d 2P %7d\n", gm_8016C658(0),
+                       gm_8016C658(1));
+        DevText_Printf(text, "3P %7d 4P %7d\n", gm_8016C658(2),
+                       gm_8016C658(3));
+        DevText_Printf(text, "%dP screen %d", arg0 + 1, arg1);
+        y_pos = 3;
+    }
+    DevText_SetCursorXY(text, 0, y_pos);
+    for (bonus = arg2; bonus < 0xD7; bonus++) {
+        if (pl_80039418(arg0, bonus) != 0) {
+            if (y_pos >= 0x1E) {
+                temp_r4 = arg1 + 1;
+                if (temp_r4 < 2) {
+                    fn_80228E54(arg0, temp_r4, bonus);
+                    return;
+                }
+                DevText_Printf(text, "screen over!!");
+                return;
+            }
+            if (gm_8016F1B8(bonus) == 0) {
+                DevText_Printf(text, "%s", bonus_names[bonus]);
+            } else {
+                DevText_Printf(text, "%s : %d", bonus_names[bonus],
+                               pl_80039418(arg0, bonus));
+            }
+            y_pos += 1;
+            DevText_SetCursorXY(text, 0, y_pos);
+        }
+    }
+}
 
 /// #fn_8022900C
 
