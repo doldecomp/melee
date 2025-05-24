@@ -27,6 +27,7 @@
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
 #include <baselib/controller.h>
+#include <baselib/memory.h>
 #include <baselib/particle.h>
 #include <MSL/math.h>
 #include <MSL/printf.h>
@@ -1486,7 +1487,26 @@ void fn_80228D18(void)
     db_804D6B98.x1.b0 = 0;
 }
 
-/// #fn_80228D38
+void fn_80228D38(void)
+{
+    HSD_GObj* gobj;
+    int i;
+    gobj = DevText_GetGObj();
+    db_804D6B9C = HSD_MemAlloc(sizeof(*db_804D6B9C) * 2);
+    for (i = 0; i < 2; i++) {
+        db_804D6B9C[i].text =
+            DevText_Create(i + 10, i * 300, 0, 25, 30, db_804D6B9C[i].buffer);
+        if (db_804D6B9C[i].text != NULL) {
+            DevText_Show(gobj, db_804D6B9C[i].text);
+            DevText_HideCursor(db_804D6B9C[i].text);
+            DevText_SetBGColor(db_804D6B9C[i].text,
+                               &db_803EAE08[db_804D6B98.x1.b0].bg);
+            DevText_SetTextColor(db_804D6B9C[i].text,
+                                 &db_803EAE08[db_804D6B98.x1.b0].fg);
+            DevText_SetScale(db_804D6B9C[i].text, 12.0F, 16.0F);
+        }
+    }
+}
 
 /// #fn_80228E54
 
