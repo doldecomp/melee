@@ -295,9 +295,37 @@ struct grKongo_GroundVars3 {
 };
 
 struct grCorneria_GroundVars {
-    /*  +0:0  gp+C4:0 */ u8 x0_b0 : 1;
-    /*  +4    gp+C8   */ char pad_4[0x68 - 0x4];
-    /* +68   gp+12C   */ HSD_JObj* x68;
+    u32 xC4_b0 : 1;
+    u32 xC4_b1 : 1;
+    u32 xC8;
+    u32 xCC;
+    f32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    f32 xEC;
+    f32 xF0;
+    f32 xF4;
+    f32 xF8;
+    u32 xFC;
+    u32 x100;
+    u32 x104;
+    u32 x108;
+    u32 x10C;
+    u32 x110;
+    f32 x114;
+    u8 x118;
+    u8 x119;
+    u8 x11A;
+    u8 x11B;
+    u32 x11C;
+    u32 x120;
+    u32 x124;
+    HSD_GObj* x128;
+    HSD_JObj* x12C;
 };
 
 struct grIceMt_GroundVars {
