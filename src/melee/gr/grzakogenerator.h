@@ -5,7 +5,7 @@
 
 #include "gr/types.h"
 
-/* 1CA394 */ UNK_RET grZakoGenerator_801CA394(UNK_PARAMS);
+/* 1CA394 */ int grZakoGenerator_801CA394(UNK_T, int, UNK_T, f32);
 /* 1CA43C */ UNK_RET grZakoGenerator_801CA43C(UNK_PARAMS);
 /* 1CA67C */ UNK_RET grZakoGenerator_801CA67C(UNK_PARAMS);
 /* 1CA8B4 */ UNK_RET grZakoGenerator_801CA8B4(UNK_PARAMS);
