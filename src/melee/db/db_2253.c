@@ -413,7 +413,11 @@ s32 db_80225D54(HSD_ObjAllocUnk4* arg0)
     return db_8049FAA0.x8;
 }
 
-/// #db_80225D64
+void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
+{
+    Item* it = GET_ITEM(item);
+    it->xDAA_byte |= db_804D6B3C;
+}
 
 /// #fn_80225D7C
 
