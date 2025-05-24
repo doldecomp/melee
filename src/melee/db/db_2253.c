@@ -1,6 +1,7 @@
 #include "db_2253.static.h"
 
 #include "ef/efsync.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "gm/gm_1A36.h"
@@ -845,7 +846,77 @@ void fn_802269C0(void)
     }
 }
 
-/// #fn_80226BD4
+void fn_80226BD4(int arg0)
+{
+    HSD_GObj* gobj;
+    Fighter* ft;
+    if (fn_8022558C(arg0) & HSD_PAD_R) {
+        if (fn_802255A4(arg0) & HSD_PAD_DPADUP) {
+            db_804D6B48.b3++;
+            if (db_804D6B48.b3 > 3) {
+                db_804D6B48.b0 = 1;
+            }
+            for (gobj = HSD_GObj_Entities->fighters; gobj != NULL;
+                 gobj = gobj->next)
+            {
+                ft = GET_FIGHTER(gobj);
+                ft->x21FC_flag.u8 = db_804D6B48.b3;
+            }
+        }
+        if ((fn_802255A4(arg0) & HSD_PAD_DPADRIGHT) &&
+            Player_GetPlayerSlotType(arg0) != 3)
+        {
+            unsigned int x;
+            gobj = Player_GetEntity(arg0);
+            ft = GET_FIGHTER(gobj);
+            // x = ft->x21FC_flag.grouped_bits.b6_to_7 + 1;
+            x = ft->x21FC_flag.u8 + 1;
+            if (x > 3) {
+                ft->x21FC_flag.u8 = 1;
+            } else {
+                ft->x21FC_flag.u8 = x;
+            }
+            fn_80225E6C(gobj);
+        }
+        if (fn_802255A4(arg0) & HSD_PAD_DPADLEFT) {
+            fn_802268B8();
+        }
+    }
+    if ((fn_8022558C(arg0) & HSD_PAD_Y) &&
+        (fn_8022558C(arg0) & HSD_PAD_DPADDOWN))
+    {
+        db_804D6B48.b9 = db_804D6B48.b9 ^ 1;
+        if (!db_804D6B48.b9) {
+            DevText_HideBackground(db_8049FE18.x0);
+            DevText_HideText(db_8049FE18.x0);
+        } else {
+            DevText_ShowBackground(db_8049FE18.x0);
+            DevText_ShowText(db_8049FE18.x0);
+        }
+    }
+    if (fn_8022558C(arg0) & HSD_PAD_Y) {
+        if ((fn_802255A4(arg0) & HSD_PAD_DPADLEFT) &&
+            (Player_GetPlayerSlotType(arg0) != 3))
+        {
+            gobj = Player_GetEntity(arg0);
+            if (fn_8022558C(arg0) & HSD_PAD_A) {
+                ftCo_800D1E80(gobj);
+            } else {
+                ftCo_800D14E4(gobj);
+            }
+        }
+        if ((fn_802255A4(arg0) & HSD_PAD_DPADRIGHT) &&
+            (Player_GetPlayerSlotType(arg0) != 3))
+        {
+            gobj = Player_GetEntity(arg0);
+            if (fn_8022558C(arg0) & HSD_PAD_A) {
+                ftCo_800D237C(gobj);
+                return;
+            }
+            ftCo_800D1A8C(gobj);
+        }
+    }
+}
 
 void fn_80226E00(void)
 {
