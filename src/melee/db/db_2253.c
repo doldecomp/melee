@@ -1552,7 +1552,39 @@ void fn_80228E54(int arg0, int arg1, int arg2)
     }
 }
 
-/// #fn_8022900C
+void fn_8022900C(int arg0)
+{
+    int i;
+
+    if (db_804D6B98.x0 == arg0) {
+        if (db_804D6B98.x1.b0) {
+            db_804D6B98.x0 = 0xFF;
+            db_804D6B98.x1.b0 = 0;
+            for (i = 0; i < 2; i++) {
+                DevText_HideBackground(db_804D6B9C[i].text);
+                DevText_HideText(db_804D6B9C[i].text);
+            }
+        } else {
+            db_804D6B98.x1.b0 = 1;
+            for (i = 0; i < 2; i++) {
+                DevText_SetBGColor(db_804D6B9C[i].text,
+                                   &db_803EAE08[db_804D6B98.x1.b0].bg);
+                DevText_SetTextColor(db_804D6B9C[i].text,
+                                     &db_803EAE08[db_804D6B98.x1.b0].fg);
+            }
+        }
+    } else {
+        db_804D6B98.x0 = arg0;
+        for (i = 0; i < 2; i++) {
+            DevText_ShowBackground(db_804D6B9C[i].text);
+            DevText_ShowText(db_804D6B9C[i].text);
+            DevText_SetBGColor(db_804D6B9C[i].text,
+                               &db_803EAE08[db_804D6B98.x1.b0].bg);
+            DevText_SetTextColor(db_804D6B9C[i].text,
+                                 &db_803EAE08[db_804D6B98.x1.b0].fg);
+        }
+    }
+}
 
 /// #fn_802291A0
 
