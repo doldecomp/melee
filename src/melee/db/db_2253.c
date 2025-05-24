@@ -1,12 +1,44 @@
 #include "db_2253.static.h"
 
 #include <common_structs.h>
+#include <dolphin/card/CARDMount.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
+#include <dolphin/vi/vi.h>
 #include <baselib/controller.h>
 #include <MSL/trigf.h>
 
-/// #db_80225374
+void db_80225374(void)
+{
+    PADStatus status[4];
+    s32 memSize;
+    s32 sectorSize;
+    int done;
+    int pad;
+
+    do {
+        VIWaitForRetrace();
+        PADRead(status);
+        done = 1;
+        for (pad = 0; pad < 4; ++pad) {
+            if (status[pad].err == -2 || status[pad].err == -3) {
+                done = 0;
+            }
+        }
+    } while (!done);
+
+    for (pad = 0; pad < 4; ++pad) {
+        if (status[pad].err == 0) {
+            break;
+        }
+    }
+
+    db_804D6B30 = (pad != 4) ? status[pad].button : 0;
+
+    while (CARDProbeEx(0, &memSize, &sectorSize) == -1) {
+        VIWaitForRetrace();
+    }
+}
 
 /// #db_802254B8
 
