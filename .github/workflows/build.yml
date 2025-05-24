@@ -235,6 +235,9 @@ jobs:
     - uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - uses: DeterminateSystems/magic-nix-cache-action@v2
+    - uses: cachix/cachix-action@v16
+      with:
+        name: doldecomp-melee
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix-build
     - run: nix-shell --run "echo OK"
