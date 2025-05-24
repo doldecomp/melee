@@ -83,7 +83,7 @@
 /* 22892C */ void db_8022892C(void);
 /* 2289F8 */ int fn_802289F8(char* arg0, int arg1, int arg2);
 /* 228A64 */ void db_80228A64(void);
-/* 228AB4 */ UNK_RET fn_80228AB4(UNK_PARAMS);
+/* 228AB4 */ void fn_80228AB4(OSContext* ctx);
 /* 228B28 */ UNK_RET fn_80228B28(UNK_PARAMS);
 /* 228C4C */ void db_80228C4C(void);
 /* 228CF4 */ UNK_RET fn_80228CF4(UNK_PARAMS);

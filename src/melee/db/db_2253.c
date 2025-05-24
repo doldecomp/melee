@@ -15,6 +15,7 @@
 #include "it/item.h"
 #include "it/types.h"
 #include "lb/lbarchive.h"
+#include "lb/lbcardgame.h"
 #include "pl/player.h"
 #include "un/un_2FC9.h"
 
@@ -1416,7 +1417,17 @@ void db_80228A64(void)
     OSLoadFPUContext(ctx);
 }
 
-/// #fn_80228AB4
+void fn_80228AB4(OSContext* ctx)
+{
+    HSD_VISetUserPreRetraceCallback(NULL);
+    HSD_VISetUserPostRetraceCallback(NULL);
+    lb_80019A48();
+    OSReport("%s\n", "DATE Feb 13 2002  TIME 22:06:27");
+    Exception_ReportStackTrace(ctx, 0x10);
+    hsd_80397DFC(0x1388);
+    Exception_StoreDebugLevel(g_debugLevel);
+    hsd_80397DA4(ctx);
+}
 
 /// #fn_80228B28
 

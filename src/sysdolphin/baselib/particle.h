@@ -51,7 +51,7 @@
 /* 394544 */ UNK_RET hsd_80394544(UNK_PARAMS);
 /* 394668 */ UNK_RET hsd_80394668(UNK_PARAMS);
 /* 394950 */ UNK_RET hsd_80394950(UNK_PARAMS);
-/* 394A48 */ UNK_RET Exception_ReportStackTrace(UNK_PARAMS);
+/* 394A48 */ void Exception_ReportStackTrace(OSContext*, int);
 /* 394B18 */ UNK_RET Exception_ReportCodeline(UNK_PARAMS);
 /* 394DF4 */ UNK_RET fn_80394DF4(UNK_PARAMS);
 /* 394E8C */ UNK_RET hsd_80394E8C(UNK_PARAMS);
@@ -91,7 +91,7 @@
 /* 397520 */ UNK_RET hsd_80397520(UNK_PARAMS);
 /* 3975D4 */ UNK_RET hsd_803975D4(UNK_PARAMS);
 /* 397814 */ UNK_RET fn_80397814(UNK_PARAMS);
-/* 397DA4 */ UNK_RET hsd_80397DA4(UNK_PARAMS);
+/* 397DA4 */ void hsd_80397DA4(OSContext*);
 /* 397DF4 */ void Exception_StoreDebugLevel(int);
 /* 397DFC */ void hsd_80397DFC(u32 arg0);
 /* 397E0C */ UNK_RET baselib_mfspr(UNK_PARAMS);
