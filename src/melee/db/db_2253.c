@@ -559,7 +559,37 @@ void fn_802260D4(int player)
     db_8049FAA0.x0 = 1;
 }
 
-/// #fn_802261BC
+void fn_802261BC(int player)
+{
+    char* item;
+    db_8049FAA0.x18 = db_8049FAA0.x10;
+    db_8049FAA0.x1C = db_8049FAA0.x14;
+    fn_80225F20(player);
+    if (db_8049FAA0.x18 != db_8049FAA0.x10 ||
+        db_8049FAA0.x1C != db_8049FAA0.x14)
+    {
+        db_8049FAA0.xC = player;
+        db_8049FAA0.x4 = 0x78;
+        if (db_8049FAA0.x0 != 1) {
+            fn_802260D4(player);
+        }
+        DevText_Erase(db_804D6B38);
+        DevText_SetCursorXY(db_804D6B38, 0, 0);
+        if (db_8049FAA0.x10 < 0x23) {
+            item = db_803EA94C[db_8049FAA0.x10];
+        } else if (db_8049FAA0.x10 < 0x2F) {
+            item = db_803EAA50[db_8049FAA0.x10];
+        } else if (db_8049FAA0.x10 < 0xEA) {
+            // TODO: this is wrong. return when the data section is good
+            item = db_803EA94C[db_8049FAA0.x10];
+        } else {
+            while (1) {
+            }
+        }
+        DevText_Printf(db_804D6B38, "Item-> %s  Pokemon-> %s", item,
+                       db_803EAA50[db_8049FAA0.x14]);
+    }
+}
 
 /// #fn_802262E0
 
