@@ -19,6 +19,7 @@
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
+#include <dolphin/base/PPCArch.h>
 #include <dolphin/card/CARDMount.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
@@ -1404,7 +1405,16 @@ int fn_802289F8(char* arg0, int arg1, int arg2)
     }
 }
 
-/// #db_80228A64
+void db_80228A64(void)
+{
+    OSContext* ctx;
+
+    PPCMtmsr(PPCMfmsr() | 0x900);
+    ctx = OSGetCurrentContext();
+    OSSaveFPUContext(ctx);
+    ctx->fpscr &= 0xFFFFF;
+    OSLoadFPUContext(ctx);
+}
 
 /// #fn_80228AB4
 
