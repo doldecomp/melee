@@ -8,6 +8,7 @@
 #include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
 #include "gr/ground.h"
+#include "if/ifall.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -284,8 +285,6 @@ void fn_80225A00(void)
     db_8049FAA0.x20.b1 = 0;
 }
 
-#pragma push
-#pragma dont_inline on
 void fn_80225A54(int arg0)
 {
     if (g_debugLevel == 4) {
@@ -307,7 +306,6 @@ void fn_80225A54(int arg0)
         }
     }
 }
-#pragma pop
 
 u32 db_80225B0C(void)
 {
@@ -1342,7 +1340,20 @@ void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 
 /// #fn_80228620
 
-/// #fn_8022873C
+void fn_8022873C(int arg0)
+{
+    if ((fn_8022558C(arg0) & 0x400) && (fn_802255A4(arg0) & 0x4)) {
+        db_804D6B80++;
+        if (3 < db_804D6B80) {
+            db_804D6B80 = 0;
+        }
+        if (db_804D6B80 == 0) {
+            ifAll_802F36A4();
+        } else if (!ifAll_802F36B0()) {
+            ifAll_802F3698();
+        }
+    }
+}
 
 void fn_802287C4(void)
 {
