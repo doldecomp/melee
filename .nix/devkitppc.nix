@@ -8,7 +8,7 @@
 }:
 
 let
-  version = "43";
+  version = "46.1";
 
   tag = "devkitPPC_r${version}";
 
