@@ -1,6 +1,7 @@
 #include "db_2253.static.h"
 
 #include "ft/ftlib.h"
+#include "it/inlines.h"
 #include "it/item.h"
 #include "it/types.h"
 #include "lb/lbarchive.h"
@@ -302,7 +303,21 @@ u32 db_80225B34(void)
     return db_8049FAA0.x20.b2;
 }
 
-/// #fn_80225B48
+void fn_80225B48(void)
+{
+    HSD_GObj* item_gobj;
+    Item* it;
+
+    item_gobj = HSD_GObj_Entities->items;
+    while (item_gobj != NULL) {
+        it = GET_ITEM(item_gobj);
+        if (it->kind == It_Kind_Unk4) {
+            it->xDAA_flag.b0 = 1;
+        }
+        item_gobj = item_gobj->next;
+    }
+    db_8049FAA0.x20.b2 = 1;
+}
 
 /// #fn_80225B9C
 
