@@ -7,6 +7,8 @@
 #include "gr/forward.h"
 #include "un/forward.h"
 
+#include <baselib/video.h>
+
 /* 2FC9B4 */ UNK_RET un_802FC9B4(UNK_PARAMS);
 /* 2FCAA4 */ UNK_RET fn_802FCAA4(UNK_PARAMS);
 /* 2FCAC4 */ UNK_RET fn_802FCAC4(UNK_PARAMS);
@@ -173,38 +175,41 @@
 /* 301D7C */ UNK_RET un_80301D7C(UNK_PARAMS);
 /* 301DCC */ UNK_RET un_80301DCC(UNK_PARAMS);
 /* 301E08 */ UNK_RET un_80301E08(UNK_PARAMS);
-/* 301E44 */ UNK_RET un_80301E44(UNK_PARAMS);
-/* 301E78 */ UNK_RET un_80301E78(UNK_PARAMS);
-/* 301FB4 */ UNK_T un_80301FB4(void);
-/* 301FBC */ UNK_RET un_80301FBC(UNK_PARAMS);
-/* 3020F8 */ UNK_RET fn_803020F8(UNK_PARAMS);
-/* 3020FC */ UNK_RET un_803020FC(UNK_PARAMS);
-/* 302164 */ UNK_RET un_80302164(UNK_PARAMS);
-/* 3022BC */ UNK_RET un_803022BC(UNK_PARAMS);
-/* 302608 */ UNK_RET fn_80302608(UNK_PARAMS);
-/* 30265C */ UNK_RET un_8030265C(UNK_PARAMS);
-/* 302708 */ UNK_RET un_80302708(UNK_PARAMS);
-/* 3027A0 */ UNK_RET un_803027A0(UNK_PARAMS);
-/* 302810 */ UNK_RET un_80302810(UNK_PARAMS);
-/* 302834 */ UNK_RET un_80302834(UNK_PARAMS);
-/* 3029B4 */ UNK_RET un_803029B4(UNK_PARAMS);
-/* 302A3C */ UNK_RET un_80302A3C(UNK_PARAMS);
-/* 302A88 */ UNK_RET un_80302A88(UNK_PARAMS);
-/* 302AB0 */ void un_80302AB0(un_80302AB0_t*);
-/* 302AC0 */ void un_80302AC0(un_80302AB0_t*);
-/* 302AD0 */ void un_80302AD0(un_80302AB0_t*);
-/* 302AE0 */ void un_80302AE0(un_80302AB0_t*);
-/* 302AF0 */ void un_80302AF0(un_80302AB0_t* arg0);
-/* 302B00 */ void un_80302B00(un_80302AB0_t* arg0);
-/* 302B10 */ void un_80302B10(un_80302B10_t* arg0, float, float);
-/* 302B1C */ UNK_RET un_80302B1C(UNK_PARAMS);
-/* 302B48 */ UNK_RET un_80302B48(UNK_PARAMS);
-/* 302B64 */ UNK_RET un_80302B64(UNK_PARAMS);
-/* 302B90 */ UNK_RET un_80302B90(UNK_PARAMS);
-/* 302BB0 */ UNK_RET un_80302BB0(UNK_PARAMS);
-/* 302BE4 */ UNK_RET un_80302BE4(UNK_PARAMS);
-/* 302D0C */ UNK_RET un_80302D0C(UNK_PARAMS);
-/* 302D4C */ UNK_RET un_80302D4C(UNK_PARAMS);
+/* 301E44 */ int DevText_StrLen(char* str);
+/* 301E78 */ void DevText_NumToStr(int, char*);
+/* 301FB4 */ HSD_GObj* DevText_GetGObj(void);
+/* 301FBC */ void DevText_InitPool(void);
+/* 3020FC */ void DevText_Remove(DevText** ptext);
+/* 302164 */ void DevText_SetupCObj(void);
+/* 3022BC */ void DevText_Draw(DevText* text);
+/* 302608 */ void DevText_DrawAll(HSD_GObj* gobj, int pass);
+/* 30265C */ void DevText_CreateCObj(int classifier, int p_link,
+                                     int gobj_priority, int gx_link,
+                                     u8 gx_priority);
+/* 302708 */ HSD_GObj* DevText_Setup(int classifier, int p_link, int priority,
+                                     int gx_link, int render_priority,
+                                     u8 camera_priority);
+/* 3027A0 */ void DevText_AddToList(DevText** list, DevText* text);
+/* 302810 */ void DevText_Show(HSD_GObj* gobj, DevText* text);
+/* 302834 */ DevText* DevText_Create(int, int, int, int, int, char*);
+/* 3029B4 */ void DevText_EraseFirstLine(DevText* text);
+/* 302A3C */ void DevText_SetCursorXY(DevText* text, int x, int y);
+/* 302A88 */ void DevText_SetCursorX(DevText* text, int x);
+/* 302AB0 */ void DevText_HideCursor(DevText* text);
+/* 302AC0 */ void DevText_80302AC0(DevText* text);
+/* 302AD0 */ void DevText_ShowBackground(DevText* text);
+/* 302AE0 */ void DevText_HideBackground(DevText* text);
+/* 302AF0 */ void DevText_ShowText(DevText* text);
+/* 302B00 */ void DevText_HideText(DevText* text);
+/* 302B10 */ void DevText_SetScale(DevText* text, float x, float y);
+/* 302B1C */ void DevText_SetXY(DevText* text, int x, int y);
+/* 302B48 */ u8 DevText_StoreColorIndex(DevText* text, u8 index);
+/* 302B64 */ GXColor DevText_SetTextColor(DevText* text, GXColor* color);
+/* 302B90 */ GXColor DevText_SetBGColor(DevText* text, GXColor* color);
+/* 302BB0 */ void DevText_Erase(DevText* text);
+/* 302BE4 */ void DevText_Print(DevText* text, char* str);
+/* 302D0C */ void DevText_PrintInt(DevText* text, int num);
+/* 302D4C */ void DevText_Printf(DevText* text, char* format, ...);
 /* 302DF0 */ UNK_T un_80302DF0(void);
 /* 302DF8 */ void un_80302DF8(un_80302DF8_t* arg0, int arg1);
 /* 302E00 */ UNK_RET un_80302E00(UNK_PARAMS);

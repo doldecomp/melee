@@ -752,7 +752,7 @@ HSD_GObj* grIzumi_801CCD98(void)
     refl->image = HSD_ArchiveGetPublicAddress(
         dat->unk0, "GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc");
     if (refl->image != NULL) {
-        lb_8000C160(refl->image, sizeof(HSD_ImageDesc));
+        memzero(refl->image, sizeof(HSD_ImageDesc));
         lb_800121FC(refl->image, 80, 60, 4, 2001);
     } else {
         OSReport("not found mirror image desc! "

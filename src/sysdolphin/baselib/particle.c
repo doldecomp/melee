@@ -1,8 +1,8 @@
 #include "particle.static.h"
 
-/// #hsd_80391580
+/// #DrawRectangle
 
-/// #hsd_80391664
+/// #DrawASCII
 
 /// #hsd_80391A04
 

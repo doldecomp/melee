@@ -555,9 +555,7 @@ s32 HSD_SisLib_803A611C(u16 arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
                 HSD_CObjSetOrtho(temp_r3, 0.0f, -480.0f, 0.0f, 640.0f);
                 HSD_GObjObject_80390A70(temp_r27->x4, *HSD_GObj_804D784B,
                                         temp_r3);
-                GObj_SetupGXLinkMax(
-                    temp_r27->x4, (void (*)(HSD_GObj*, int)) HSD_GObj_803910D8,
-                    arg7);
+                GObj_SetupGXLinkMax(temp_r27->x4, HSD_GObj_803910D8, arg7);
                 temp_r27->x4->gxlink_prios = (u64) arg5 << 1;
                 GObj_InitUserData(temp_r27->x4, (u8) arg2, fn_803A60EC,
                                   temp_r27->x4);

@@ -31,7 +31,7 @@
 /* 00C07C */ void lb_8000C07C(HSD_JObj*, s32 i, HSD_AnimJoint**,
                               HSD_MatAnimJoint**, HSD_ShapeAnimJoint**);
 /* 00C0E8 */ void lb_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc*);
-/* 00C160 */ void lb_8000C160(void* mem, ssize_t size);
+/* 00C160 */ void memzero(void* mem, ssize_t size);
 /* 00C1C0 */ void lb_8000C1C0(HSD_JObj*, HSD_JObj* constraint);
 /* 00C228 */ void lb_8000C228(HSD_JObj*, HSD_JObj* constraint);
 /* 00C290 */ void lb_8000C290(HSD_JObj*, HSD_JObj* constraint);
