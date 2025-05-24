@@ -86,7 +86,7 @@
 /* 228AB4 */ void fn_80228AB4(OSContext* ctx);
 /* 228B28 */ void fn_80228B28(u16 error, OSContext* ctx, ...);
 /* 228C4C */ void db_80228C4C(void);
-/* 228CF4 */ UNK_RET fn_80228CF4(UNK_PARAMS);
+/* 228CF4 */ void fn_80228CF4(void);
 /* 228D18 */ UNK_RET fn_80228D18(UNK_PARAMS);
 /* 228D38 */ UNK_RET fn_80228D38(UNK_PARAMS);
 /* 228E54 */ UNK_RET fn_80228E54(UNK_PARAMS);
