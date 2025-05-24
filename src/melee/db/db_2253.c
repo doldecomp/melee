@@ -5,6 +5,7 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
+#include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
 #include "gr/ground.h"
 #include "it/inlines.h"
@@ -1129,7 +1130,85 @@ void fn_80227188(void)
     }
 }
 
-/// #fn_80227484
+void fn_80227484(int arg0, int arg1, int arg2, f32 arg3, f32 arg4)
+{
+    if (gm_8018841C() == 0 && gm_801A4310() != 0xA) {
+        if (Camera_80030178() == 0 && Camera_80030154() == 0) {
+            if (!(ABS(arg3) > 0.6F)) {
+                if (ABS(arg4) > 0.6F) {
+                    GXColor bg = { 0x00, 0x00, 0x00, 0x00 };
+                    GXColor fg = { 0xFF, 0xFF, 0xFF, 0xFF };
+                    HSD_GObj* gobj = DevText_GetGObj();
+                    if (db_804D6B58 == NULL && gobj != NULL) {
+                        if ((db_804D6B58 = DevText_Create(12, 420, 360, 32, 3,
+                                                          db_804A03C0)))
+                        {
+                            DevText_Show(gobj, db_804D6B58);
+                            DevText_HideCursor(db_804D6B58);
+                            DevText_SetBGColor(db_804D6B58, &bg);
+                            DevText_SetTextColor(db_804D6B58, &fg);
+                            DevText_SetScale(db_804D6B58, 12.0F, 16.0F);
+                            DevText_HideBackground(db_804D6B58);
+                            DevText_HideText(db_804D6B58);
+                        }
+                    }
+                }
+                Camera_8003006C();
+            }
+        } else {
+            if (arg2 & 8) {
+                GXColor bg = { 0x00, 0x00, 0x00, 0x00 };
+                GXColor fg = { 0xFF, 0xFF, 0xFF, 0xFF };
+                HSD_GObj* gobj = DevText_GetGObj();
+                if (db_804D6B58 == NULL && gobj != NULL) {
+                    if ((db_804D6B58 =
+                             DevText_Create(12, 420, 360, 32, 3, db_804A03C0)))
+                    {
+                        DevText_Show(gobj, db_804D6B58);
+                        DevText_HideCursor(db_804D6B58);
+                        DevText_SetBGColor(db_804D6B58, &bg);
+                        DevText_SetTextColor(db_804D6B58, &fg);
+                        DevText_SetScale(db_804D6B58, 12.0F, 16.0F);
+                        DevText_HideBackground(db_804D6B58);
+                        DevText_HideText(db_804D6B58);
+                    }
+                }
+                if ((arg1 & 0xC60) == 0) {
+                    if (Camera_80030178() != 0) {
+                        Camera_8002FEEC(arg0);
+                    } else if (Camera_80030154() != 0) {
+                        Camera_800300F0();
+                    } else {
+                        Camera_8003006C();
+                    }
+                }
+            }
+        }
+    }
+    if (Camera_80030154() != 0) {
+        fn_802277E8(Camera_80030A50(), arg0);
+    } else if (Camera_80030178() != 0) {
+        fn_80227904(Camera_80030A50(), arg0);
+    }
+    if (Camera_80030178() != 0 && db_804D6B50 - 3 <= 1) {
+        if (arg2 & 0x200) {
+            db_804D6B5D = !db_804D6B5D;
+        }
+    } else {
+        db_804D6B5D = 0;
+    }
+    fn_80227188();
+    if ((fn_8022558C(arg0) & 0x400) && (fn_802255A4(arg0) & 4)) {
+        switch (db_804D6B80) {
+        case 2:
+            Camera_80030740(0xFF, 0xFF, 0xFF);
+            break;
+        case 3:
+            Camera_80030740(0, 0, 0);
+            break;
+        }
+    }
+}
 
 /// #fn_802277E8
 

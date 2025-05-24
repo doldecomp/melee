@@ -55,8 +55,9 @@
 /* 22713C */ void fn_8022713C(int arg0);
 /* 227174 */ void fn_80227174(void);
 /* 227188 */ void fn_80227188(void);
-/* 227484 */ void fn_80227484(int, int, int, float, float);
-/* 2277E8 */ UNK_RET fn_802277E8(UNK_PARAMS);
+/* 227484 */ void fn_80227484(int arg0, int arg1, int arg2, float arg3,
+                              float arg4);
+/* 2277E8 */ void fn_802277E8(HSD_GObj*, int);
 /* 227904 */ void fn_80227904(HSD_GObj* camera, s8 port);
 /* 2279E8 */ void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos,
                               Vec3* camera_interest, float cstick_x,
