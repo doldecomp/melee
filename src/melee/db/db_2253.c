@@ -684,7 +684,27 @@ void fn_8022659C(void)
     }
 }
 
-/// #fn_8022666C
+void fn_8022666C(void)
+{
+    int stack[2];
+    DevText* text;
+    StaticPlayer* player;
+    s32 slot;
+
+    if (db_804D6B40.b0) {
+        text = db_8049FAC8.x0;
+        DevText_Erase(text);
+        DevText_SetCursorXY(text, 0, 0);
+        DevText_Printf(text, "A B  C D E    F    G");
+        for (slot = 0; slot < 6; slot++) {
+            player = Player_GetPtrForSlot(slot);
+            DevText_Printf(text, "\n%d %d %2d %d %2.2f %2.2f %2.2f",
+                           player->player_state, player->cpu_level,
+                           player->cpu_type, player->handicap, player->unk50,
+                           player->attack_ratio, player->defense_ratio);
+        }
+    }
+}
 
 /// #fn_80226730
 
