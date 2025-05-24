@@ -45,7 +45,7 @@ s32 ftLib_800860C4(void)
     return ret;
 }
 
-bool ftLib_800860E8(void)
+bool ftLib_IsMasterHandPresent(void)
 {
     u8 _[8];
 
@@ -59,7 +59,7 @@ bool ftLib_800860E8(void)
     return false;
 }
 
-bool ftLib_80086140(void)
+bool ftLib_IsCrazyHandPresent(void)
 {
     u8 _[8];
 

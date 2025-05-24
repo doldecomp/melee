@@ -6082,7 +6082,7 @@ void it_80274CAC(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     item->xDD0_flag.b0 = 1;
-    if (db_80225B0C() != 0) {
+    if (db_ShowEnemyStompRange() != 0) {
         item->xDAA_flag.b3 = 1;
     }
 }
@@ -9759,7 +9759,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
         //         }
         pokemon_kind = var_r0;
     } else {
-        pokemon_kind = db_80225D1C();
+        pokemon_kind = db_GetCurrentlySelectedPokemon();
         if (pokemon_kind == Pokemon_ID_Tosakinto) {
             pokemon_kind = it_8027A4D4(item);
         } else {

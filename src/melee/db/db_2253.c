@@ -1,6 +1,7 @@
 #include "db_2253.static.h"
 
 #include "cm/camera.h"
+#include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftlib.h"
@@ -16,7 +17,9 @@
 #include "it/item.h"
 #include "it/types.h"
 #include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
+#include "lb/lbshadow.h"
 #include "pl/player.h"
 #include "pl/plbonus.h"
 #include "un/un_2FC9.h"
@@ -31,12 +34,23 @@
 #include <baselib/controller.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>
+#include <baselib/psappsrt.h>
 #include <MSL/math.h>
 #include <MSL/printf.h>
 #include <MSL/string.h>
 #include <MSL/trigf.h>
 
-void db_80225374(void)
+static inline void DevText_SetBGColor2(DevText* text, GXColor color)
+{
+    DevText_SetBGColor(text, &color);
+}
+
+static inline void DevText_SetTextColor2(DevText* text, GXColor color)
+{
+    DevText_SetTextColor(text, &color);
+}
+
+void db_GetGameLaunchButtonState(void)
 {
     PADStatus status[4];
     s32 memSize;
@@ -61,14 +75,14 @@ void db_80225374(void)
         }
     }
 
-    db_804D6B30 = (pad != 4) ? status[pad].button : 0;
+    db_gameLaunchButtonState = (pad != 4) ? status[pad].button : 0;
 
     while (CARDProbeEx(0, &memSize, &sectorSize) == -1) {
         VIWaitForRetrace();
     }
 }
 
-void db_802254B8(void)
+void db_Setup(void)
 {
     struct {
         char** bonus_names;
@@ -78,61 +92,61 @@ void db_802254B8(void)
     int stack[2];
 
     if (g_debugLevel >= 3) {
-        db_8049FA00[0].x10 = 0;
-        db_8049FA00[0].xC = 0;
-        db_8049FA00[0].x8 = 0;
-        db_8049FA00[0].x0 = 0;
+        db_ButtonStates[0].repeat = 0;
+        db_ButtonStates[0].released = 0;
+        db_ButtonStates[0].pressed = 0;
+        db_ButtonStates[0].current = 0;
 
-        db_8049FA00[1].x10 = 0;
-        db_8049FA00[1].xC = 0;
-        db_8049FA00[1].x8 = 0;
-        db_8049FA00[1].x0 = 0;
+        db_ButtonStates[1].repeat = 0;
+        db_ButtonStates[1].released = 0;
+        db_ButtonStates[1].pressed = 0;
+        db_ButtonStates[1].current = 0;
 
-        db_8049FA00[2].x10 = 0;
-        db_8049FA00[2].xC = 0;
-        db_8049FA00[2].x8 = 0;
-        db_8049FA00[2].x0 = 0;
+        db_ButtonStates[2].repeat = 0;
+        db_ButtonStates[2].released = 0;
+        db_ButtonStates[2].pressed = 0;
+        db_ButtonStates[2].current = 0;
 
-        db_8049FA00[3].x10 = 0;
-        db_8049FA00[3].xC = 0;
-        db_8049FA00[3].x8 = 0;
-        db_8049FA00[3].x0 = 0;
+        db_ButtonStates[3].repeat = 0;
+        db_ButtonStates[3].released = 0;
+        db_ButtonStates[3].pressed = 0;
+        db_ButtonStates[3].current = 0;
 
-        lbArchive_80016C64("DbCo.dat", (void**) &commonData,
-                           "dbLoadCommonData", 0);
+        lbArchive_LoadSymbols("DbCo.dat", (void**) &commonData,
+                              "dbLoadCommonData", 0);
 
-        bonus_names = commonData->bonus_names;
-        motionstate_names = commonData->motionstate_names;
-        submotion_names = commonData->submotion_names;
+        db_bonus_names = commonData->bonus_names;
+        db_motionstate_names = commonData->motionstate_names;
+        db_submotion_names = commonData->submotion_names;
 
-        fn_8022659C();
-        fn_802267C8();
-        fn_80225A00();
-        fn_80228318();
-        fn_80226E00();
-        fn_80227174();
-        fn_80228CF4();
-        fn_80229220();
-        fn_802287C4();
+        fn_SetupCpuHandicapInfo();
+        fn_SetupAnimationInfo();
+        fn_SetupItemAndPokemonMenu();
+        fn_SetupSoundInfo();
+        fn_SetupMiscStageVisuals();
+        fn_SetupCameraInfo();
+        fn_SetupBonusInfo();
+        fn_SetupObjAllocLimiter();
+        fn_Setup5xSpeed();
     }
 }
 
-int fn_8022558C(int x)
+HSD_Pad db_ButtonsDown(int player)
 {
-    return db_8049FA00[x].x0;
+    return db_ButtonStates[player].current;
 }
 
-int fn_802255A4(int x)
+HSD_Pad db_ButtonsPressed(int player)
 {
-    return db_8049FA00[x].x8;
+    return db_ButtonStates[player].pressed;
 }
 
-int fn_802255BC(int x)
+HSD_Pad db_ButtonsRepeat(int player)
 {
-    return db_8049FA00[x].x10;
+    return db_ButtonStates[player].repeat;
 }
 
-void db_802255D4(void)
+void db_PrintEntityCounts(void)
 {
     int stack[4];
     int i;
@@ -159,7 +173,7 @@ void db_802255D4(void)
     OSReport("\n");
 }
 
-void db_802256CC(void)
+void db_PrintThreadInfo(void)
 {
     u8* peak = _stack_end + 4;
     while (*peak == 0xAA) {
@@ -181,7 +195,7 @@ static inline int db_get_pad_repeat(int i)
     return HSD_PadMasterStatus[i & 0xFF].repeat;
 }
 
-void db_80225754(void)
+void db_RunEveryFrame(void)
 {
     int stack[4];
     int i;
@@ -189,7 +203,7 @@ void db_80225754(void)
     if (g_debugLevel < 3) {
         return;
     }
-    if (ftLib_800860E8() || ftLib_80086140()) {
+    if (ftLib_IsMasterHandPresent() || ftLib_IsCrazyHandPresent()) {
         num_players = 2;
     } else {
         num_players = 4;
@@ -229,67 +243,72 @@ void db_80225754(void)
                 repeat &= ~(HSD_PAD_DPADDOWN | HSD_PAD_DPADRIGHT);
             }
         }
-        db_8049FA00[i].x4 = db_8049FA00[i].x0;
-        db_8049FA00[i].x0 = button;
-        db_8049FA00[i].x8 =
-            db_8049FA00[i].x0 & (db_8049FA00[i].x4 ^ db_8049FA00[i].x0);
-        db_8049FA00[i].xC =
-            db_8049FA00[i].x4 & (db_8049FA00[i].x4 ^ db_8049FA00[i].x0);
-        db_8049FA00[i].x10 = repeat;
+        db_ButtonStates[i].prev = db_ButtonStates[i].current;
+        db_ButtonStates[i].current = button;
+        db_ButtonStates[i].pressed =
+            db_ButtonStates[i].current &
+            (db_ButtonStates[i].prev ^ db_ButtonStates[i].current);
+        db_ButtonStates[i].released =
+            db_ButtonStates[i].prev &
+            (db_ButtonStates[i].prev ^ db_ButtonStates[i].current);
+        db_ButtonStates[i].repeat = repeat;
     }
     for (i = 0; i < 4; i++) {
-        fn_8022873C(i);
+        fn_CheckMiscVisualEffects(i);
     }
     for (i = 0; i < 4; i++) {
-        fn_80227484(i, db_8049FA00[i].x0, db_8049FA00[i].x8,
-                    HSD_PadMasterStatus[i & 0xFF].nml_subStickX,
-                    HSD_PadMasterStatus[i & 0xFF].nml_subStickY);
+        fn_CheckCameraInfo(i, db_ButtonStates[i].current,
+                           db_ButtonStates[i].pressed,
+                           HSD_PadMasterStatus[i & 0xFF].nml_subStickX,
+                           HSD_PadMasterStatus[i & 0xFF].nml_subStickY);
     }
     for (i = 0; i < 4; i++) {
-        fn_80228620(i);
+        fn_CheckSoundInfo(i);
     }
     for (i = 0; i < 4; i++) {
-        fn_80229240(i);
+        fn_UpdateObjAllocLimiter(i);
     }
     for (i = 0; i < 4; i++) {
-        fn_802264C4(i);
+        fn_CheckItemAndPokemonMenu(i);
     }
     for (i = 0; i < 4; i++) {
-        fn_80226730(i);
+        fn_CheckCpuHandicapInfo(i);
     }
-    fn_8022666C();
+    fn_UpdateCpuHandicapInfo();
     for (i = 0; i < 4; i++) {
-        fn_80226BD4(i);
+        fn_CheckAnimationInfo(i);
     }
-    fn_802269C0();
+    fn_UpdateAnimationInfo();
     for (i = 0; i < 4; i++) {
-        fn_80226E0C(i);
-    }
-    for (i = 0; i < 4; i++) {
-        fn_802291A0(i);
+        fn_CheckMiscStageEffects(i);
     }
     for (i = 0; i < 4; i++) {
-        fn_802287D8(i);
+        fn_CheckBonusInfo(i);
+    }
+    for (i = 0; i < 4; i++) {
+        fn_Check5xSpeed(i);
     }
 }
 
-void fn_80225A00(void)
+static void fn_SetupItemAndPokemonMenu(void)
 {
-    db_8049FAA0.x0 = 0;
-    db_8049FAA0.x10 = 0x22;
-    db_8049FAA0.x18 = db_8049FAA0.x10;
-    db_8049FAA0.x14 = 0;
-    db_8049FAA0.x1C = db_8049FAA0.x14;
-    db_804D6B3C = 1;
-    db_8049FAA0.x20.b0 = 0;
-    db_8049FAA0.x20.b1 = 0;
+    db_ItemAndPokemonMenu.DisplayStatus = 0;
+    db_ItemAndPokemonMenu.CurrentlySelectedItem = 0x22;
+    db_ItemAndPokemonMenu.LastSelectedItem =
+        db_ItemAndPokemonMenu.CurrentlySelectedItem;
+    db_ItemAndPokemonMenu.CurrentlySelectedPokemon = 0;
+    db_ItemAndPokemonMenu.LastSelectedPokemon =
+        db_ItemAndPokemonMenu.CurrentlySelectedPokemon;
+    db_ShowItemCollisionBubbles = 1;
+    db_ItemAndPokemonMenu.ShowEnemyStompRange = 0;
+    db_ItemAndPokemonMenu.ShowItemPickupRange = 0;
 }
 
-void fn_80225A54(int arg0)
+static void fn_80225A54(int player)
 {
     if (g_debugLevel == 4) {
-        if (fn_8022558C(arg0) & 0x200) {
-            if (fn_802255A4(arg0) & 2) {
+        if (db_ButtonsDown(player) & HSD_PAD_B) {
+            if (db_ButtonsPressed(player) & HSD_PAD_DPADLEFT) {
                 Item_804A0C64.x4 = Item_804A0C64.x0;
                 Item_804A0C64.xC = Item_804A0C64.x8;
                 Item_804A0C64.x14 = Item_804A0C64.x10;
@@ -307,22 +326,22 @@ void fn_80225A54(int arg0)
     }
 }
 
-u32 db_80225B0C(void)
+u32 db_ShowEnemyStompRange(void)
 {
-    return db_8049FAA0.x20.b0;
+    return db_ItemAndPokemonMenu.ShowEnemyStompRange;
 }
 
-u32 db_80225B20(void)
+u32 db_ShowItemPickupRange(void)
 {
-    return db_8049FAA0.x20.b1;
+    return db_ItemAndPokemonMenu.ShowItemPickupRange;
 }
 
-u32 db_80225B34(void)
+u32 db_ShowCoinPickupRange(void)
 {
-    return db_8049FAA0.x20.b2;
+    return db_ItemAndPokemonMenu.ShowCoinPickupRange;
 }
 
-void fn_80225B48(void)
+static void fn_EnableShowCoinPickupRange(void)
 {
     HSD_GObj* item_gobj;
     Item* it;
@@ -335,10 +354,10 @@ void fn_80225B48(void)
         }
         item_gobj = item_gobj->next;
     }
-    db_8049FAA0.x20.b2 = 1;
+    db_ItemAndPokemonMenu.ShowCoinPickupRange = 1;
 }
 
-void fn_80225B9C(void)
+static void fn_DisableShowCoinPickupRange(void)
 {
     HSD_GObj* item_gobj;
     Item* it;
@@ -351,10 +370,10 @@ void fn_80225B9C(void)
         }
         item_gobj = item_gobj->next;
     }
-    db_8049FAA0.x20.b2 = 0;
+    db_ItemAndPokemonMenu.ShowCoinPickupRange = 0;
 }
 
-void fn_80225BF0(void)
+static void fn_EnableShowEnemyStompRange(void)
 {
     HSD_GObj* item_gobj;
     Item* it;
@@ -367,10 +386,10 @@ void fn_80225BF0(void)
         }
         item_gobj = item_gobj->next;
     }
-    db_8049FAA0.x20.b0 = 1;
+    db_ItemAndPokemonMenu.ShowEnemyStompRange = 1;
 }
 
-void fn_80225C44(void)
+static void fn_DisableShowEnemyStompRange(void)
 {
     HSD_GObj* item_gobj;
     Item* it;
@@ -381,10 +400,10 @@ void fn_80225C44(void)
         it->xDAA_flag.b3 = 0;
         item_gobj = item_gobj->next;
     }
-    db_8049FAA0.x20.b0 = 0;
+    db_ItemAndPokemonMenu.ShowEnemyStompRange = 0;
 }
 
-void fn_80225C8C(void)
+static void fn_EnableShowItemPickupRange(void)
 {
     HSD_GObj* item_gobj;
     Item* it;
@@ -395,10 +414,10 @@ void fn_80225C8C(void)
         it->xDAA_flag.b4 = 1;
         item_gobj = item_gobj->next;
     }
-    db_8049FAA0.x20.b1 = 1;
+    db_ItemAndPokemonMenu.ShowItemPickupRange = 1;
 }
 
-void fn_80225CD4(void)
+static void fn_DisableShowItemPickupRange(void)
 {
     HSD_GObj* item_gobj;
     Item* it;
@@ -409,49 +428,49 @@ void fn_80225CD4(void)
         it->xDAA_flag.b4 = 0;
         item_gobj = item_gobj->next;
     }
-    db_8049FAA0.x20.b1 = 0;
+    db_ItemAndPokemonMenu.ShowItemPickupRange = 0;
 }
 
-s32 db_80225D1C(void)
+s32 db_GetCurrentlySelectedPokemon(void)
 {
-    return db_8049FAA0.x14;
+    return db_ItemAndPokemonMenu.CurrentlySelectedPokemon;
 }
 
-void db_80225D2C(void)
+void db_DisableItemSpawns(void)
 {
-    db_8049FAA0.x8 = 0;
+    db_ItemAndPokemonMenu.ItemSpawnsEnabled = 0;
 }
 
-void db_80225D40(void)
+void db_EnableItemSpawns(void)
 {
-    db_8049FAA0.x8 = 1;
+    db_ItemAndPokemonMenu.ItemSpawnsEnabled = 1;
 }
 
-s32 db_80225D54(HSD_ObjAllocUnk4* arg0)
+s32 db_AreItemSpawnsEnabled(void)
 {
-    return db_8049FAA0.x8;
+    return db_ItemAndPokemonMenu.ItemSpawnsEnabled;
 }
 
 void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
 {
     Item* it = GET_ITEM(item);
-    it->xDAA_byte |= db_804D6B3C;
+    it->xDAA_byte |= db_ShowItemCollisionBubbles;
 }
 
-void fn_80225D7C(void)
+static void fn_ToggleItemCollisionBubbles(void)
 {
     HSD_GObj* item_gobj;
     Item* it;
 
-    db_804D6B3C += 1;
-    if (db_804D6B3C > 3) {
-        db_804D6B3C = 1;
+    db_ShowItemCollisionBubbles += 1;
+    if (db_ShowItemCollisionBubbles > 3) {
+        db_ShowItemCollisionBubbles = 1;
     }
     item_gobj = HSD_GObj_Entities->items;
     while (item_gobj != NULL) {
         it = GET_ITEM(item_gobj);
         it->xDAA_byte &= 0xFC;
-        it->xDAA_byte |= db_804D6B3C;
+        it->xDAA_byte |= db_ShowItemCollisionBubbles;
         item_gobj = item_gobj->next;
     }
 }
@@ -461,7 +480,7 @@ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
     Item* it = GET_ITEM(item);
     if (ftLib_80086960(owner) == 0) {
         it = GET_ITEM(item);
-        it->xDAA_byte |= db_804D6B3C;
+        it->xDAA_byte |= db_ShowItemCollisionBubbles;
         // db_80225D64(item, owner); // stack too big
     } else {
         int x;
@@ -473,7 +492,7 @@ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
     }
 }
 
-void fn_80225E6C(Fighter_GObj* owner)
+static void fn_80225E6C(Fighter_GObj* owner)
 {
     Item_GObj* item_gobj;
     Item* it;
@@ -489,139 +508,135 @@ void fn_80225E6C(Fighter_GObj* owner)
     }
 }
 
-void fn_80225F20(int player)
+void db_HandleItemPokemonMenuInput(int player)
 {
-    int x, y;
-
-    x = fn_8022558C(player);
-    if ((x & 64) != 0) {
-        y = fn_802255BC(player);
-        if ((y & 8) != 0) {
-            if (db_8049FAA0.x10 < 0x23) {
-                db_8049FAA0.x10++;
-                if (db_8049FAA0.x10 == 0x23) {
-                    db_8049FAA0.x10 = 0x2B;
-                }
-            } else if (db_8049FAA0.x10 < 0x2F) {
-                db_8049FAA0.x10++;
-                if (db_8049FAA0.x10 == 0x2F) {
-                    db_8049FAA0.x10 = 0xD0;
-                }
-            } else if (db_8049FAA0.x10 < 0xE9) {
-                db_8049FAA0.x10++;
+    if ((db_ButtonsDown(player) & HSD_PAD_L) &&
+        (db_ButtonsRepeat(player) & HSD_PAD_DPADUP))
+    {
+        if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0x23) {
+            db_ItemAndPokemonMenu.CurrentlySelectedItem++;
+            if (db_ItemAndPokemonMenu.CurrentlySelectedItem == 0x23) {
+                db_ItemAndPokemonMenu.CurrentlySelectedItem = 0x2B;
             }
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0x2F) {
+            db_ItemAndPokemonMenu.CurrentlySelectedItem++;
+            if (db_ItemAndPokemonMenu.CurrentlySelectedItem == 0x2F) {
+                db_ItemAndPokemonMenu.CurrentlySelectedItem = 0xD0;
+            }
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0xE9) {
+            db_ItemAndPokemonMenu.CurrentlySelectedItem++;
         }
     }
 
-    x = fn_8022558C(player);
-    if ((x & 64) != 0) {
-        y = fn_802255BC(player);
-        if ((y & 4) != 0) {
-            if (db_8049FAA0.x10 >= 0xD0) {
-                db_8049FAA0.x10--;
-                if (db_8049FAA0.x10 < 0xD0) {
-                    db_8049FAA0.x10 = 0x2E;
-                }
-            } else if (db_8049FAA0.x10 >= 0x2B) {
-                db_8049FAA0.x10--;
-                if (db_8049FAA0.x10 < 0x2B) {
-                    db_8049FAA0.x10 = 0x22;
-                }
-            } else if (db_8049FAA0.x10 > 0) {
-                db_8049FAA0.x10--;
+    if ((db_ButtonsDown(player) & HSD_PAD_L) &&
+        (db_ButtonsRepeat(player) & HSD_PAD_DPADDOWN))
+    {
+        if (db_ItemAndPokemonMenu.CurrentlySelectedItem >= 0xD0) {
+            db_ItemAndPokemonMenu.CurrentlySelectedItem--;
+            if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0xD0) {
+                db_ItemAndPokemonMenu.CurrentlySelectedItem = 0x2E;
             }
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem >= 0x2B) {
+            db_ItemAndPokemonMenu.CurrentlySelectedItem--;
+            if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0x2B) {
+                db_ItemAndPokemonMenu.CurrentlySelectedItem = 0x22;
+            }
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem > 0) {
+            db_ItemAndPokemonMenu.CurrentlySelectedItem--;
+        }
+    }
+    if ((db_ButtonsDown(player) & HSD_PAD_L) &&
+        (db_ButtonsRepeat(player) & HSD_PAD_DPADRIGHT))
+    {
+        if (db_ItemAndPokemonMenu.CurrentlySelectedPokemon < 0x1E) {
+            db_ItemAndPokemonMenu.CurrentlySelectedPokemon++;
         }
     }
 
-    x = fn_8022558C(player);
-    if ((x & 64) != 0) {
-        y = fn_802255BC(player);
-        if ((y & 2) != 0) {
-            if (db_8049FAA0.x14 < 0x1E) {
-                db_8049FAA0.x14++;
-            }
-        }
-    }
-
-    x = fn_8022558C(player);
-    if ((x & 64) != 0) {
-        y = fn_802255BC(player);
-        if ((y & 1) != 0) {
-            if (db_8049FAA0.x14 > 0) {
-                db_8049FAA0.x14--;
-            }
+    if ((db_ButtonsDown(player) & HSD_PAD_L) &&
+        (db_ButtonsRepeat(player) & HSD_PAD_DPADLEFT))
+    {
+        if (db_ItemAndPokemonMenu.CurrentlySelectedPokemon > 0) {
+            db_ItemAndPokemonMenu.CurrentlySelectedPokemon--;
         }
     }
 }
 
-void fn_802260D4(int player)
+static void fn_ShowOrCreateItemAndPokemonMenu(int player)
 {
     HSD_GObj* temp_r30;
 
     temp_r30 = DevText_GetGObj();
-    if (db_8049FAA0.x0 == 2) {
-        DevText_ShowBackground(db_804D6B38);
-        DevText_ShowText(db_804D6B38);
+    if (db_ItemAndPokemonMenu.DisplayStatus == 2) {
+        DevText_ShowBackground(db_ItemAndPokemonMenuText);
+        DevText_ShowText(db_ItemAndPokemonMenuText);
     } else {
-        db_804D6B38 = DevText_Create(8, 20, 20, 40, 1, db_8049FA50);
-        if (db_804D6B38 != NULL) {
+        db_ItemAndPokemonMenuText =
+            DevText_Create(8, 20, 20, 40, 1, db_ItemAndPokemonMenuText_buf);
+        if (db_ItemAndPokemonMenuText != NULL) {
             GXColor bg = { 0x00, 0x00, 0x00, 0xFF };
             GXColor fg = { 0x00, 0x00, 0x00, 0x00 };
-            DevText_Show(temp_r30, db_804D6B38);
-            DevText_HideCursor(db_804D6B38);
-            DevText_SetBGColor(db_804D6B38, &bg);
-            DevText_SetTextColor(db_804D6B38, &fg);
-            DevText_SetScale(db_804D6B38, 12.0F, 16.0F);
+            DevText_Show(temp_r30, db_ItemAndPokemonMenuText);
+            DevText_HideCursor(db_ItemAndPokemonMenuText);
+            DevText_SetBGColor2(db_ItemAndPokemonMenuText, bg);
+            DevText_SetTextColor2(db_ItemAndPokemonMenuText, fg);
+            DevText_SetScale(db_ItemAndPokemonMenuText, 12.0F, 16.0F);
         }
     }
-    db_8049FAA0.x0 = 1;
+    db_ItemAndPokemonMenu.DisplayStatus = 1;
 }
 
-void fn_802261BC(int player)
+static void fn_UpdateItemAndPokemonMenu(int player)
 {
     char* item;
-    db_8049FAA0.x18 = db_8049FAA0.x10;
-    db_8049FAA0.x1C = db_8049FAA0.x14;
-    fn_80225F20(player);
-    if (db_8049FAA0.x18 != db_8049FAA0.x10 ||
-        db_8049FAA0.x1C != db_8049FAA0.x14)
+    db_ItemAndPokemonMenu.LastSelectedItem =
+        db_ItemAndPokemonMenu.CurrentlySelectedItem;
+    db_ItemAndPokemonMenu.LastSelectedPokemon =
+        db_ItemAndPokemonMenu.CurrentlySelectedPokemon;
+    db_HandleItemPokemonMenuInput(player);
+    if (db_ItemAndPokemonMenu.LastSelectedItem !=
+            db_ItemAndPokemonMenu.CurrentlySelectedItem ||
+        db_ItemAndPokemonMenu.LastSelectedPokemon !=
+            db_ItemAndPokemonMenu.CurrentlySelectedPokemon)
     {
-        db_8049FAA0.xC = player;
-        db_8049FAA0.x4 = 0x78;
-        if (db_8049FAA0.x0 != 1) {
-            fn_802260D4(player);
+        db_ItemAndPokemonMenu.Player = player;
+        db_ItemAndPokemonMenu.DisplayFadeTimer = 0x78;
+        if (db_ItemAndPokemonMenu.DisplayStatus != 1) {
+            fn_ShowOrCreateItemAndPokemonMenu(player);
         }
-        DevText_Erase(db_804D6B38);
-        DevText_SetCursorXY(db_804D6B38, 0, 0);
-        if (db_8049FAA0.x10 < 0x23) {
-            item = db_803EA94C[db_8049FAA0.x10];
-        } else if (db_8049FAA0.x10 < 0x2F) {
-            item = db_803EAA50[db_8049FAA0.x10];
-        } else if (db_8049FAA0.x10 < 0xEA) {
-            // TODO: this is wrong. return when the data section is good
-            item = db_803EA94C[db_8049FAA0.x10];
+        DevText_Erase(db_ItemAndPokemonMenuText);
+        DevText_SetCursorXY(db_ItemAndPokemonMenuText, 0, 0);
+        if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0x23) {
+            item = db_ItemNames[db_ItemAndPokemonMenu.CurrentlySelectedItem];
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0x2F) {
+            item = db_AdventureEnemies[db_ItemAndPokemonMenu
+                                           .CurrentlySelectedItem];
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0xEA) {
+            item =
+                db_BarrelEnemies[db_ItemAndPokemonMenu.CurrentlySelectedItem];
         } else {
             while (1) {
             }
         }
-        DevText_Printf(db_804D6B38, "Item-> %s  Pokemon-> %s", item,
-                       db_803EAA50[db_8049FAA0.x14]);
+        DevText_Printf(
+            db_ItemAndPokemonMenuText, "Item-> %s  Pokemon-> %s", item,
+            db_PokemonNames[db_ItemAndPokemonMenu.CurrentlySelectedPokemon]);
     }
 }
 
-void fn_802262E0(int player)
+void db_CheckAndSpawnItem(int player)
 {
     int mask = HSD_PAD_DPADLEFT | HSD_PAD_DPADRIGHT | HSD_PAD_DPADUP |
                HSD_PAD_Z | HSD_PAD_R | HSD_PAD_L | HSD_PAD_A | HSD_PAD_B |
                HSD_PAD_X | HSD_PAD_Y | HSD_PAD_START;
     SpawnItem spawnItem;
-    if ((fn_8022558C(player) & mask) != 0) {
+    if ((db_ButtonsDown(player) & mask) != 0) {
         return;
     }
-    if ((fn_802255A4(player) & HSD_PAD_DPADDOWN) == 0) {
+    if ((db_ButtonsPressed(player) & HSD_PAD_DPADDOWN) == 0) {
         return;
     }
-    spawnItem.kind = db_8049FAA0.x10;
+    spawnItem.kind = db_ItemAndPokemonMenu.CurrentlySelectedItem;
     if (Item_80266F3C() == 0 && spawnItem.kind < 0x23) {
         return;
     }
@@ -651,7 +666,8 @@ void fn_802262E0(int player)
             {
                 HSD_GObj* gobj = Item_80268B18(&spawnItem);
                 if (gobj != NULL) {
-                    GET_ITEM(gobj)->xDAA_flag.u8 |= db_804D6B3C;
+                    GET_ITEM(gobj)->xDAA_flag.u8 |=
+                        db_ShowItemCollisionBubbles;
                     efSync_Spawn(0x420, gobj, &spawnItem.prev_pos);
                 }
             }
@@ -659,52 +675,57 @@ void fn_802262E0(int player)
     }
 }
 
-void fn_802264C4(int player)
+static void fn_CheckItemAndPokemonMenu(int player)
 {
-    if (db_8049FAA0.x0 == 1 && db_8049FAA0.xC == player) {
-        if (db_8049FAA0.x4 == 0) {
-            db_8049FAA0.x0 = 2;
-            DevText_HideBackground(db_804D6B38);
-            DevText_HideText(db_804D6B38);
+    if (db_ItemAndPokemonMenu.DisplayStatus == 1 &&
+        db_ItemAndPokemonMenu.Player == player)
+    {
+        if (db_ItemAndPokemonMenu.DisplayFadeTimer == 0) {
+            db_ItemAndPokemonMenu.DisplayStatus = 2;
+            DevText_HideBackground(db_ItemAndPokemonMenuText);
+            DevText_HideText(db_ItemAndPokemonMenuText);
         } else {
-            db_8049FAA0.x4 -= 1;
+            db_ItemAndPokemonMenu.DisplayFadeTimer -= 1;
         }
     }
-    fn_802261BC(player);
+    fn_UpdateItemAndPokemonMenu(player);
     if (gm_801A45E8(1) == 0 && gm_801A45E8(0) == 0) {
-        fn_802262E0(player);
+        db_CheckAndSpawnItem(player);
     }
-    if (fn_8022558C(player) & 0x20 && fn_802255A4(player) & 8) {
-        fn_80225D7C();
+    if (db_ButtonsDown(player) & HSD_PAD_R &&
+        db_ButtonsPressed(player) & HSD_PAD_DPADUP)
+    {
+        fn_ToggleItemCollisionBubbles();
     }
     fn_80225A54(player);
 }
 
-void fn_8022659C(void)
+static void fn_SetupCpuHandicapInfo(void)
 {
     HSD_GObj* gobj = DevText_GetGObj();
-    db_804D6B40.b0 = 0;
-    db_8049FAC8.x0 = DevText_Create(6, 20, 20, 60, 7, db_8049FAC8.x4);
-    if (db_8049FAC8.x0 != NULL) {
+    db_ShowCpuHandicapInfo.b0 = 0;
+    db_CpuHandicapInfo.text =
+        DevText_Create(6, 20, 20, 60, 7, db_CpuHandicapInfo.buf);
+    if (db_CpuHandicapInfo.text != NULL) {
         GXColor bg = { 0xFF, 0xFF, 0xFF, 0xFF };
         GXColor fg = { 0x00, 0x00, 0x00, 0x00 };
-        DevText_Show(gobj, db_8049FAC8.x0);
-        DevText_HideCursor(db_8049FAC8.x0);
-        DevText_SetBGColor(db_8049FAC8.x0, &bg);
-        DevText_SetTextColor(db_8049FAC8.x0, &fg);
-        DevText_SetScale(db_8049FAC8.x0, 9.0F, 12.0F);
+        DevText_Show(gobj, db_CpuHandicapInfo.text);
+        DevText_HideCursor(db_CpuHandicapInfo.text);
+        DevText_SetBGColor2(db_CpuHandicapInfo.text, bg);
+        DevText_SetTextColor2(db_CpuHandicapInfo.text, fg);
+        DevText_SetScale(db_CpuHandicapInfo.text, 9.0F, 12.0F);
     }
 }
 
-void fn_8022666C(void)
+static void fn_UpdateCpuHandicapInfo(void)
 {
     int stack[2];
     DevText* text;
     StaticPlayer* player;
     s32 slot;
 
-    if (db_804D6B40.b0) {
-        text = db_8049FAC8.x0;
+    if (db_ShowCpuHandicapInfo.b0) {
+        text = db_CpuHandicapInfo.text;
         DevText_Erase(text);
         DevText_SetCursorXY(text, 0, 0);
         DevText_Printf(text, "A B  C D E    F    G");
@@ -718,75 +739,79 @@ void fn_8022666C(void)
     }
 }
 
-void fn_80226730(int arg0)
+static void fn_CheckCpuHandicapInfo(int player)
 {
-    if ((fn_8022558C(arg0) & 0x200) && (fn_802255A4(arg0) & 4)) {
-        db_804D6B40.b0 ^= 1;
-        if (db_804D6B40.b0 == 0) {
-            DevText_HideBackground(db_8049FAC8.x0);
-            DevText_HideText(db_8049FAC8.x0);
+    if ((db_ButtonsDown(player) & HSD_PAD_B) &&
+        (db_ButtonsPressed(player) & HSD_PAD_DPADDOWN))
+    {
+        db_ShowCpuHandicapInfo.b0 ^= 1;
+        if (db_ShowCpuHandicapInfo.b0 == 0) {
+            DevText_HideBackground(db_CpuHandicapInfo.text);
+            DevText_HideText(db_CpuHandicapInfo.text);
             return;
         }
-        DevText_ShowBackground(db_8049FAC8.x0);
-        DevText_ShowText(db_8049FAC8.x0);
+        DevText_ShowBackground(db_CpuHandicapInfo.text);
+        DevText_ShowText(db_CpuHandicapInfo.text);
     }
 }
 
-void fn_802267C8(void)
+static void fn_SetupAnimationInfo(void)
 {
     HSD_GObj* temp_r3;
 
     temp_r3 = DevText_GetGObj();
-    db_804D6B48.b0 = 1;
-    db_804D6B48.b9 = 0;
-    db_804D6B48.b3 = 0;
-    db_8049FE18.x0 = DevText_Create(7, 20, 20, 60, 12, db_8049FE18.x4);
-    if (db_8049FE18.x0 != NULL) {
+    db_804D6B48.ShowFighterCollisionBubbles = 1;
+    db_804D6B48.ShowAnimationInfo = 0;
+    db_804D6B48.MiscFighterVisualsStatus = 0;
+    db_AnimationInfo.text =
+        DevText_Create(7, 20, 20, 60, 12, db_AnimationInfo.buf);
+    if (db_AnimationInfo.text) {
         GXColor bg = { 0xFF, 0xFF, 0xFF, 0xFF };
         GXColor fg = { 0x00, 0x00, 0x00, 0x00 };
-        DevText_Show(temp_r3, db_8049FE18.x0);
-        DevText_HideCursor(db_8049FE18.x0);
-        DevText_SetBGColor(db_8049FE18.x0, &bg);
-        DevText_SetTextColor(db_8049FE18.x0, &fg);
-        DevText_SetScale(db_8049FE18.x0, 9.0F, 12.0F);
+        DevText_Show(temp_r3, db_AnimationInfo.text);
+        DevText_HideCursor(db_AnimationInfo.text);
+        DevText_SetBGColor2(db_AnimationInfo.text, bg);
+        DevText_SetTextColor2(db_AnimationInfo.text, fg);
+        DevText_SetScale(db_AnimationInfo.text, 9.0F, 12.0F);
     }
 }
 
-void fn_802268B8(void)
+static void fn_ToggleMiscFighterVisuals(void)
 {
     HSD_GObj* fighter;
-    if (db_804D6B48.b3 != 0) {
-        db_804D6B48.b3 = (db_804D6B48.b3 << 1) & 0x3F;
+    if (db_804D6B48.MiscFighterVisualsStatus != 0) {
+        db_804D6B48.MiscFighterVisualsStatus =
+            (db_804D6B48.MiscFighterVisualsStatus << 1) & 0x3F;
     } else {
-        db_804D6B48.b3 = 1;
+        db_804D6B48.MiscFighterVisualsStatus = 1;
     }
     for (fighter = HSD_GObj_Entities->fighters; fighter != NULL;
          fighter = fighter->next)
     {
         Fighter* ft = GET_FIGHTER(fighter);
-        if ((!db_804D6B48.b3) && (!db_804D6B48.b3)) { // ? permuter
-        }
-        // ft->x21FC_flag.grouped_bits.b0_to_5 = db_804D6B48.b3;
-        ft->x21FC_flag.u8 = db_804D6B48.b3;
+        // ft->x21FC_flag.grouped_bits.b0_to_5 =
+        // db_804D6B48.MiscFighterVisualsStatus;
+        ft->x21FC_flag.u8 = (ft->x21FC_flag.u8 & 3) |
+                            ((db_804D6B48.MiscFighterVisualsStatus << 2) & ~3);
     }
-    if ((db_804D6B48.b3 & 0x02) != 0) {
-        fn_80225BF0();
+    if ((db_804D6B48.MiscFighterVisualsStatus & 0x02) != 0) {
+        fn_EnableShowEnemyStompRange();
     } else {
-        fn_80225C44();
+        fn_DisableShowEnemyStompRange();
     }
-    if ((db_804D6B48.b3 & 0x08) != 0) {
-        fn_80225C8C();
+    if ((db_804D6B48.MiscFighterVisualsStatus & 0x08) != 0) {
+        fn_EnableShowItemPickupRange();
     } else {
-        fn_80225B9C();
+        fn_DisableShowItemPickupRange();
     }
-    if ((db_804D6B48.b3 & 0x20) != 0) {
-        fn_80225B48();
+    if ((db_804D6B48.MiscFighterVisualsStatus & 0x20) != 0) {
+        fn_EnableShowCoinPickupRange();
     } else {
-        fn_80225B9C();
+        fn_DisableShowCoinPickupRange();
     }
 }
 
-u8 fn_8022697C(Fighter_GObj* owner)
+static u8 fn_8022697C(Fighter_GObj* owner)
 {
     if (ftLib_80086960(owner) != 0) {
         Fighter* ft = GET_FIGHTER(owner);
@@ -796,7 +821,7 @@ u8 fn_8022697C(Fighter_GObj* owner)
     }
 }
 
-void fn_802269C0(void)
+static void fn_UpdateAnimationInfo(void)
 {
     Fighter_GObj* gobj;
     Fighter* ft;
@@ -804,8 +829,8 @@ void fn_802269C0(void)
     s32 print_newline;
     int stack[4];
 
-    if (db_804D6B48.b9) {
-        text = db_8049FE18.x0;
+    if (db_804D6B48.ShowAnimationInfo) {
+        text = db_AnimationInfo.text;
         print_newline = 0;
         DevText_Erase(text);
         DevText_SetCursorXY(text, 0, 0);
@@ -820,22 +845,23 @@ void fn_802269C0(void)
             }
             if (ft->motion_id < 0x155) {
                 DevText_Printf(text, "%d %s", ft->player_id,
-                               motionstate_names[ft->motion_id]);
+                               db_motionstate_names[ft->motion_id]);
             } else {
                 DevText_Printf(text, "%d %d", ft->player_id, ft->motion_id);
             }
-            DevText_SetCursorX(text, 0x17);
+            DevText_SetCursorX(text, 23);
             if (ft->anim_id != -1) {
                 if (ft->anim_id < 0x127) {
-                    DevText_Printf(text, "%s", submotion_names[ft->anim_id]);
+                    DevText_Printf(text, "%s",
+                                   db_submotion_names[ft->anim_id]);
                 } else {
                     DevText_Printf(text, "%d", ft->anim_id);
                 }
             }
-            DevText_SetCursorX(text, 0x2C);
+            DevText_SetCursorX(text, 44);
             DevText_Printf(text, "%03.2f", ft->cur_anim_frame);
             if (ft->x221C_u16_y) {
-                DevText_SetCursorX(text, 0x34);
+                DevText_SetCursorX(text, 52);
                 if (ft->x221C_u16_y & 1) {
                     DevText_Printf(text, "L");
                 } else {
@@ -856,28 +882,28 @@ void fn_802269C0(void)
     }
 }
 
-void fn_80226BD4(int arg0)
+static void fn_CheckAnimationInfo(int player)
 {
     HSD_GObj* gobj;
     Fighter* ft;
-    if (fn_8022558C(arg0) & HSD_PAD_R) {
-        if (fn_802255A4(arg0) & HSD_PAD_DPADUP) {
-            db_804D6B48.b3++;
-            if (db_804D6B48.b3 > 3) {
-                db_804D6B48.b0 = 1;
+    if (db_ButtonsDown(player) & HSD_PAD_R) {
+        if (db_ButtonsPressed(player) & HSD_PAD_DPADUP) {
+            db_804D6B48.ShowFighterCollisionBubbles++;
+            if (db_804D6B48.ShowFighterCollisionBubbles > 3) {
+                db_804D6B48.ShowFighterCollisionBubbles = 1;
             }
             for (gobj = HSD_GObj_Entities->fighters; gobj != NULL;
                  gobj = gobj->next)
             {
-                ft = GET_FIGHTER(gobj);
-                ft->x21FC_flag.u8 = db_804D6B48.b3;
+                GET_FIGHTER(gobj)->x21FC_flag.u8 =
+                    db_804D6B48.ShowFighterCollisionBubbles;
             }
         }
-        if ((fn_802255A4(arg0) & HSD_PAD_DPADRIGHT) &&
-            Player_GetPlayerSlotType(arg0) != 3)
+        if ((db_ButtonsPressed(player) & HSD_PAD_DPADRIGHT) &&
+            Player_GetPlayerSlotType(player) != 3)
         {
             unsigned int x;
-            gobj = Player_GetEntity(arg0);
+            gobj = Player_GetEntity(player);
             ft = GET_FIGHTER(gobj);
             // x = ft->x21FC_flag.grouped_bits.b6_to_7 + 1;
             x = ft->x21FC_flag.u8 + 1;
@@ -888,56 +914,58 @@ void fn_80226BD4(int arg0)
             }
             fn_80225E6C(gobj);
         }
-        if (fn_802255A4(arg0) & HSD_PAD_DPADLEFT) {
-            fn_802268B8();
+        if (db_ButtonsPressed(player) & HSD_PAD_DPADLEFT) {
+            fn_ToggleMiscFighterVisuals();
         }
     }
-    if ((fn_8022558C(arg0) & HSD_PAD_Y) &&
-        (fn_8022558C(arg0) & HSD_PAD_DPADDOWN))
+    if ((db_ButtonsDown(player) & HSD_PAD_Y) &&
+        (db_ButtonsDown(player) & HSD_PAD_DPADDOWN))
     {
-        db_804D6B48.b9 = db_804D6B48.b9 ^ 1;
-        if (!db_804D6B48.b9) {
-            DevText_HideBackground(db_8049FE18.x0);
-            DevText_HideText(db_8049FE18.x0);
+        db_804D6B48.ShowAnimationInfo = db_804D6B48.ShowAnimationInfo ^ 1;
+        if (!db_804D6B48.ShowAnimationInfo) {
+            DevText_HideBackground(db_AnimationInfo.text);
+            DevText_HideText(db_AnimationInfo.text);
         } else {
-            DevText_ShowBackground(db_8049FE18.x0);
-            DevText_ShowText(db_8049FE18.x0);
+            DevText_ShowBackground(db_AnimationInfo.text);
+            DevText_ShowText(db_AnimationInfo.text);
         }
     }
-    if (fn_8022558C(arg0) & HSD_PAD_Y) {
-        if ((fn_802255A4(arg0) & HSD_PAD_DPADLEFT) &&
-            (Player_GetPlayerSlotType(arg0) != 3))
+    if (db_ButtonsDown(player) & HSD_PAD_Y) {
+        if ((db_ButtonsPressed(player) & HSD_PAD_DPADLEFT) &&
+            (Player_GetPlayerSlotType(player) != 3))
         {
-            gobj = Player_GetEntity(arg0);
-            if (fn_8022558C(arg0) & HSD_PAD_A) {
-                ftCo_800D1E80(gobj);
+            gobj = Player_GetEntity(player);
+            if (db_ButtonsDown(player) & HSD_PAD_A) {
+                Fighter_PoisonMushroomApply(gobj);
             } else {
-                ftCo_800D14E4(gobj);
+                Fighter_SuperMushroomApply(gobj);
             }
         }
-        if ((fn_802255A4(arg0) & HSD_PAD_DPADRIGHT) &&
-            (Player_GetPlayerSlotType(arg0) != 3))
+        if ((db_ButtonsPressed(player) & HSD_PAD_DPADRIGHT) &&
+            (Player_GetPlayerSlotType(player) != 3))
         {
-            gobj = Player_GetEntity(arg0);
-            if (fn_8022558C(arg0) & HSD_PAD_A) {
-                ftCo_800D237C(gobj);
-                return;
+            gobj = Player_GetEntity(player);
+            if (db_ButtonsDown(player) & HSD_PAD_A) {
+                Fighter_PoisonMushroomEnd(gobj);
+            } else {
+                Fighter_SuperMushroomEnd(gobj);
             }
-            ftCo_800D1A8C(gobj);
         }
     }
 }
 
-void fn_80226E00(void)
+static void fn_SetupMiscStageVisuals(void)
 {
-    db_804D6B50 = 0;
+    db_MiscStageVisualsStatus = 0;
 }
 
-void fn_80226E0C(int arg0)
+static void fn_CheckMiscStageEffects(int player)
 {
-    if ((fn_8022558C(arg0) & 0x20) && (fn_802255A4(arg0) & 4)) {
-        db_804D6B50 += 1;
-        switch (db_804D6B50) {
+    if ((db_ButtonsDown(player) & HSD_PAD_R) &&
+        (db_ButtonsPressed(player) & HSD_PAD_DPADDOWN))
+    {
+        db_MiscStageVisualsStatus += 1;
+        switch (db_MiscStageVisualsStatus) {
         default:
             fn_802270C4(1);
             Camera_80030B0C(0);
@@ -947,7 +975,7 @@ void fn_80226E0C(int arg0)
             Camera_80030B38(0);
             Camera_80030B64(0);
             Camera_80030B90(0);
-            db_804D6B50 = 0;
+            db_MiscStageVisualsStatus = 0;
             break;
         case 1:
             fn_802270C4(0);
@@ -1011,17 +1039,20 @@ void fn_80226E0C(int arg0)
             break;
         }
     }
-    if ((fn_8022558C(arg0) & 0x400) && (fn_802255A4(arg0) & 4)) {
-        if (db_804D6B80 < 2 && db_804D6B80 >= 0) {
-            Ground_801C1FFC();
-            Camera_80030AA4(1);
+    if ((db_ButtonsDown(player) & HSD_PAD_X) &&
+        (db_ButtonsPressed(player) & HSD_PAD_DPADDOWN))
+    {
+        if (db_MiscVisualEffectsStatus < 2 && db_MiscVisualEffectsStatus >= 0)
+        {
+            Ground_ApplyStageBackgroundColor();
+            Camera_SetStageVisible(1);
         } else {
-            Camera_80030AA4(0);
+            Camera_SetStageVisible(0);
         }
     }
 }
 
-void fn_802270C4(int arg0)
+static void fn_802270C4(int arg0)
 {
     Fighter_GObj* gobj;
     Fighter* ft;
@@ -1036,7 +1067,7 @@ void fn_802270C4(int arg0)
     }
 }
 
-void fn_8022713C(int arg0)
+static void fn_8022713C(int arg0)
 {
     HSD_GObj* gobj;
     struct {
@@ -1052,14 +1083,14 @@ void fn_8022713C(int arg0)
     }
 }
 
-void fn_80227174(void)
+static void fn_SetupCameraInfo(void)
 {
-    db_804D6B58 = NULL;
-    db_804D6B5C = 0;
-    db_804D6B5D = 0;
+    db_CameraInfoDisplay = NULL;
+    db_CameraInfoDisplayTimer = 0;
+    db_ShowCameraInfo = 0;
 }
 
-void fn_80227188(void)
+static void fn_80227188(void)
 {
     Vec3 camera;
     Vec3 interest;
@@ -1071,17 +1102,17 @@ void fn_80227188(void)
     int stack;
 
     gobj = Camera_80030A50();
-    if (db_804D6B58 != NULL) {
-        if ((gobj != NULL) && (db_804D6B5D != 0)) {
-            if (db_804D6B5C > 1) {
+    if (db_CameraInfoDisplay != NULL) {
+        if ((gobj != NULL) && (db_ShowCameraInfo != 0)) {
+            if (db_CameraInfoDisplayTimer > 1) {
                 cobj = gobj->hsd_obj;
                 HSD_CObjGetEyePosition(cobj, &camera);
                 HSD_CObjGetInterest(cobj, &interest);
                 fov = HSD_CObjGetFov(cobj);
                 ang = rad_to_deg *
                       atan2f(interest.y - camera.y, -(interest.z - camera.z));
-                DevText_Erase(db_804D6B58);
-                DevText_SetCursorXY(db_804D6B58, 0, 0);
+                DevText_Erase(db_CameraInfoDisplay);
+                DevText_SetCursorXY(db_CameraInfoDisplay, 0, 0);
                 if (ABS(camera.z) > 99999.0F) {
                     eye_z = -1;
                 } else {
@@ -1097,9 +1128,9 @@ void fn_80227188(void)
                 } else {
                     eye_x = camera.x;
                 }
-                DevText_Printf(db_804D6B58, "EYE %d,%d,%d", eye_x, eye_y,
-                               eye_z);
-                DevText_SetCursorXY(db_804D6B58, 0, 1);
+                DevText_Printf(db_CameraInfoDisplay, "EYE %d,%d,%d", eye_x,
+                               eye_y, eye_z);
+                DevText_SetCursorXY(db_CameraInfoDisplay, 0, 1);
                 if (ABS(interest.z) > 99999.0F) {
                     int_z = -1;
                 } else {
@@ -1115,73 +1146,66 @@ void fn_80227188(void)
                 } else {
                     int_x = interest.x;
                 }
-                DevText_Printf(db_804D6B58, "INT %d,%d,%d", int_x, int_y,
-                               int_z);
-                DevText_SetCursorXY(db_804D6B58, 0, 2);
-                DevText_Printf(db_804D6B58, "FOV %d  ANG %d", (int) fov,
-                               (int) ang);
-                DevText_ShowBackground(db_804D6B58);
-                DevText_ShowText(db_804D6B58);
-            } else if (db_804D6B5C == 1) {
-                DevText_HideBackground(db_804D6B58);
-                DevText_HideText(db_804D6B58);
+                DevText_Printf(db_CameraInfoDisplay, "INT %d,%d,%d", int_x,
+                               int_y, int_z);
+                DevText_SetCursorXY(db_CameraInfoDisplay, 0, 2);
+                DevText_Printf(db_CameraInfoDisplay, "FOV %d  ANG %d",
+                               (int) fov, (int) ang);
+                DevText_ShowBackground(db_CameraInfoDisplay);
+                DevText_ShowText(db_CameraInfoDisplay);
+            } else if (db_CameraInfoDisplayTimer == 1) {
+                DevText_HideBackground(db_CameraInfoDisplay);
+                DevText_HideText(db_CameraInfoDisplay);
             } else {
                 return;
             }
-            db_804D6B5C--;
+            db_CameraInfoDisplayTimer--;
         } else {
-            DevText_HideBackground(db_804D6B58);
-            DevText_HideText(db_804D6B58);
+            DevText_HideBackground(db_CameraInfoDisplay);
+            DevText_HideText(db_CameraInfoDisplay);
         }
     }
 }
 
-void fn_80227484(int arg0, int arg1, int arg2, f32 arg3, f32 arg4)
+static inline void fn_CheckCameraInfo_inline(void)
+{
+    GXColor bg = { 0x00, 0x00, 0x00, 0x00 };
+    GXColor fg = { 0xFF, 0xFF, 0xFF, 0xFF };
+    HSD_GObj* gobj = DevText_GetGObj();
+    if (db_CameraInfoDisplay == NULL && gobj != NULL) {
+        if ((db_CameraInfoDisplay = DevText_Create(12, 420, 360, 32, 3,
+                                                   db_CameraInfoDisplay_buf)))
+        {
+            DevText_Show(gobj, db_CameraInfoDisplay);
+            DevText_HideCursor(db_CameraInfoDisplay);
+            DevText_SetBGColor2(db_CameraInfoDisplay, bg);
+            DevText_SetTextColor2(db_CameraInfoDisplay, fg);
+            DevText_SetScale(db_CameraInfoDisplay, 12.0F, 16.0F);
+            DevText_HideBackground(db_CameraInfoDisplay);
+            DevText_HideText(db_CameraInfoDisplay);
+        }
+    }
+}
+
+static void fn_CheckCameraInfo(int player, int buttons_down,
+                               int buttons_pressed, f32 cstick_x, f32 cstick_y)
 {
     if (gm_8018841C() == 0 && gm_801A4310() != 0xA) {
         if (Camera_80030178() == 0 && Camera_80030154() == 0) {
-            if (!(ABS(arg3) > 0.6F)) {
-                if (ABS(arg4) > 0.6F) {
-                    GXColor bg = { 0x00, 0x00, 0x00, 0x00 };
-                    GXColor fg = { 0xFF, 0xFF, 0xFF, 0xFF };
-                    HSD_GObj* gobj = DevText_GetGObj();
-                    if (db_804D6B58 == NULL && gobj != NULL) {
-                        if ((db_804D6B58 = DevText_Create(12, 420, 360, 32, 3,
-                                                          db_804A03C0)))
-                        {
-                            DevText_Show(gobj, db_804D6B58);
-                            DevText_HideCursor(db_804D6B58);
-                            DevText_SetBGColor(db_804D6B58, &bg);
-                            DevText_SetTextColor(db_804D6B58, &fg);
-                            DevText_SetScale(db_804D6B58, 12.0F, 16.0F);
-                            DevText_HideBackground(db_804D6B58);
-                            DevText_HideText(db_804D6B58);
-                        }
-                    }
+            if (!(ABS(cstick_x) > 0.6F)) {
+                if (ABS(cstick_y) > 0.6F) {
+                    fn_CheckCameraInfo_inline();
                 }
                 Camera_8003006C();
             }
         } else {
-            if (arg2 & 8) {
-                GXColor bg = { 0x00, 0x00, 0x00, 0x00 };
-                GXColor fg = { 0xFF, 0xFF, 0xFF, 0xFF };
-                HSD_GObj* gobj = DevText_GetGObj();
-                if (db_804D6B58 == NULL && gobj != NULL) {
-                    if ((db_804D6B58 =
-                             DevText_Create(12, 420, 360, 32, 3, db_804A03C0)))
-                    {
-                        DevText_Show(gobj, db_804D6B58);
-                        DevText_HideCursor(db_804D6B58);
-                        DevText_SetBGColor(db_804D6B58, &bg);
-                        DevText_SetTextColor(db_804D6B58, &fg);
-                        DevText_SetScale(db_804D6B58, 12.0F, 16.0F);
-                        DevText_HideBackground(db_804D6B58);
-                        DevText_HideText(db_804D6B58);
-                    }
-                }
-                if ((arg1 & 0xC60) == 0) {
+            if (buttons_pressed & HSD_PAD_DPADUP) {
+                fn_CheckCameraInfo_inline();
+                if ((buttons_down &
+                     (HSD_PAD_Y | HSD_PAD_X | HSD_PAD_L | HSD_PAD_R)) == 0)
+                {
                     if (Camera_80030178() != 0) {
-                        Camera_8002FEEC(arg0);
+                        Camera_8002FEEC(player);
                     } else if (Camera_80030154() != 0) {
                         Camera_800300F0();
                     } else {
@@ -1192,25 +1216,27 @@ void fn_80227484(int arg0, int arg1, int arg2, f32 arg3, f32 arg4)
         }
     }
     if (Camera_80030154() != 0) {
-        fn_802277E8(Camera_80030A50(), arg0);
+        fn_802277E8(Camera_80030A50(), player);
     } else if (Camera_80030178() != 0) {
-        fn_80227904(Camera_80030A50(), arg0);
+        fn_80227904(Camera_80030A50(), player);
     }
-    if (Camera_80030178() != 0 && db_804D6B50 - 3 <= 1) {
-        if (arg2 & 0x200) {
-            db_804D6B5D = !db_804D6B5D;
+    if (Camera_80030178() != 0 && db_MiscStageVisualsStatus - 3 <= 1) {
+        if (buttons_pressed & HSD_PAD_B) {
+            db_ShowCameraInfo = !db_ShowCameraInfo;
         }
     } else {
-        db_804D6B5D = 0;
+        db_ShowCameraInfo = 0;
     }
     fn_80227188();
-    if ((fn_8022558C(arg0) & 0x400) && (fn_802255A4(arg0) & 4)) {
-        switch (db_804D6B80) {
+    if ((db_ButtonsDown(player) & HSD_PAD_X) &&
+        (db_ButtonsPressed(player) & HSD_PAD_DPADDOWN))
+    {
+        switch (db_MiscVisualEffectsStatus) {
         case 2:
-            Camera_80030740(0xFF, 0xFF, 0xFF);
+            Camera_SetBackgroundColor(0xFF, 0xFF, 0xFF);
             break;
         case 3:
-            Camera_80030740(0, 0, 0);
+            Camera_SetBackgroundColor(0, 0, 0);
             break;
         }
     }
@@ -1218,8 +1244,7 @@ void fn_80227484(int arg0, int arg1, int arg2, f32 arg3, f32 arg4)
 
 /// #fn_802277E8
 
-/// #fn_80227904
-void fn_80227904(HSD_GObj* camera, s8 port)
+static void fn_80227904(HSD_GObj* camera, s8 port)
 {
     f32 var_f1;
     f32 var_f2;
@@ -1254,22 +1279,22 @@ void fn_80227904(HSD_GObj* camera, s8 port)
     } else {
         fn_80227B64(camera, var_f2, var_f3);
     }
-    db_804D6B5C = 0x3C;
+    db_CameraInfoDisplayTimer = 0x3C;
 }
+
 /// #fn_802279E8
 
-/// #fn_80227B64
-void fn_80227B64(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
+static void fn_80227B64(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 {
     if ((cstick_x != 0.0f) || (cstick_y != 0.0f)) {
         fn_802279E8(camera, (Vec3*) &cm_80453004 + 0x6,
                     (Vec3*) &cm_80453004 + 0x5, cstick_x, cstick_y);
     }
 }
+
 /// #fn_80227BA8
 
-/// #fn_80227CAC
-void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
+static void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
 {
     Vec3 sp14;
     UNK_T sp10;
@@ -1292,8 +1317,7 @@ void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
 
 /// #fn_80227EB0
 
-/// #fn_80227FE0
-void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
+static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 {
     Vec3 sp24;
     Vec3 sp18;
@@ -1332,58 +1356,175 @@ void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
         }
     }
 }
+
 /// #fn_80228124
 
-/// #fn_80228318
-
-/// #fn_802283F0
-
-/// #fn_80228620
-
-void fn_8022873C(int arg0)
+void fn_SetupSoundInfo(void)
 {
-    if ((fn_8022558C(arg0) & 0x400) && (fn_802255A4(arg0) & 0x4)) {
-        db_804D6B80++;
-        if (3 < db_804D6B80) {
-            db_804D6B80 = 0;
-        }
-        if (db_804D6B80 == 0) {
-            ifAll_802F36A4();
-        } else if (!ifAll_802F36B0()) {
-            ifAll_802F3698();
-        }
+    GXColor bg = { 0x80, 0x80, 0x80, 0x80 };
+    GXColor fg = { 0xFF, 0xFF, 0xFF, 0xFF };
+    db_804D6B7C = DevText_GetGObj();
+    db_SoundToggles = 0;
+    db_ShowSoundInfo = 0;
+    db_SoundRelated_6B68 = 0;
+    db_SoundRelated_6B6C = 0;
+    db_SoundRelated_6B70 = 0;
+    db_SoundRelated_6B74 = 0;
+    if ((db_SoundInfoText =
+             DevText_Create(9, 420, 60, 18, 3, db_SoundInfoText_buf)))
+    {
+        DevText_Show(db_804D6B7C, db_SoundInfoText);
+        DevText_HideCursor(db_SoundInfoText);
+        DevText_SetBGColor2(db_SoundInfoText, bg);
+        DevText_SetTextColor2(db_SoundInfoText, fg);
+        DevText_SetScale(db_SoundInfoText, 12, 16);
+        DevText_HideBackground(db_SoundInfoText);
+        DevText_HideText(db_SoundInfoText);
     }
 }
 
-void fn_802287C4(void)
+void fn_UpdateSoundInfo(void)
 {
-    db_804D6B8C.b0 = false;
-}
-
-void fn_802287D8(int arg0)
-{
-    if ((fn_8022558C(arg0) & 0x100) && (fn_802255A4(arg0) & 0x2)) {
-        fn_80228820();
-    }
-}
-
-void fn_80228820(void)
-{
-    db_804D6B8C.b0 ^= 1;
-    if (db_804D6B8C.b0) {
-        gm_8016B274(5.0f);
+    int x;
+    lbAudioAx_80025098(3 < db_ShowSoundInfo ? 1 : 0);
+    if (db_SoundInfoText) {
+        switch (db_ShowSoundInfo) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            DevText_HideBackground(db_SoundInfoText);
+            DevText_HideText(db_SoundInfoText);
+            break;
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            x = lbAudioAx_80028B2C();
+            if (db_SoundRelated_6B68 < x) {
+                db_SoundRelated_6B68 = x;
+                db_SoundRelated_6B6C = 0xF0;
+            }
+            db_SoundRelated_6B6C--;
+            if (db_SoundRelated_6B6C <= 0) {
+                db_SoundRelated_6B68 = x;
+                db_SoundRelated_6B6C = 0;
+            }
+            x = lbAudioAx_80028B4C();
+            if (db_SoundRelated_6B70 < x) {
+                db_SoundRelated_6B70 = x;
+                db_SoundRelated_6B74 = 0xF0;
+            }
+            db_SoundRelated_6B74--;
+            if (db_SoundRelated_6B74 <= 0) {
+                db_SoundRelated_6B70 = x;
+                db_SoundRelated_6B74 = 0;
+            }
+            DevText_Erase(db_SoundInfoText);
+            DevText_SetCursorXY(db_SoundInfoText, 1, 0);
+            switch (db_SoundToggleOrder[db_SoundToggles] & 3) {
+            case 0:
+                DevText_Printf(db_SoundInfoText, "FGM:ON   BGM:OFF");
+                break;
+            case 1:
+                DevText_Printf(db_SoundInfoText, "FGM:OFF  BGM:OFF");
+                break;
+            case 2:
+                DevText_Printf(db_SoundInfoText, "FGM:OFF  BGM:ON ");
+                break;
+            case 3:
+                DevText_Printf(db_SoundInfoText, "FGM:ON   BGM:ON ");
+                break;
+            }
+            DevText_SetCursorXY(db_SoundInfoText, 1, 1);
+            DevText_Printf(db_SoundInfoText, "PVoice  %3d  %3d\n", x,
+                           db_SoundRelated_6B68);
+            DevText_SetCursorXY(db_SoundInfoText, 1, 2);
+            DevText_Printf(db_SoundInfoText, "VVoice  %3d  %3d\n", x,
+                           db_SoundRelated_6B70);
+            DevText_ShowBackground(db_SoundInfoText);
+            DevText_ShowText(db_SoundInfoText);
+            break;
+        }
     } else {
-        gm_8016B2C8();
+        db_SoundRelated_6B68 = lbAudioAx_80028B2C();
+        db_SoundRelated_6B6C = 0;
+        db_SoundRelated_6B70 = lbAudioAx_80028B4C();
+        db_SoundRelated_6B74 = 0;
     }
 }
 
-void db_8022886C(void)
+void fn_CheckSoundInfo(int player)
 {
-    db_804D6B94 = 0;
-    db_804D6B90 = 0;
+    int orig = db_SoundToggles;
+    if (player == 0) {
+        if (db_ButtonsPressed(player) & HSD_PAD_X) {
+            if (db_ButtonsDown(player) & HSD_PAD_DPADLEFT) {
+                db_SoundToggles = (db_SoundToggles + 1) % 4;
+                db_ShowSoundInfo = (db_ShowSoundInfo + 1) % 8;
+            }
+        } else if ((db_ButtonsPressed(player) & HSD_PAD_DPADLEFT)) {
+            if (db_ButtonsDown(player) & HSD_PAD_X) {
+                db_SoundToggles = (db_SoundToggles + 1) % 4;
+                db_ShowSoundInfo = (db_ShowSoundInfo + 1) % 8;
+            }
+        }
+        if (db_SoundToggles != orig) {
+            int temp = db_SoundToggleOrder[db_SoundToggles];
+            lbAudioAx_80025064(temp & 1, temp & 2);
+        }
+    }
+    fn_UpdateSoundInfo();
 }
 
-void db_8022887C(void)
+static void fn_CheckMiscVisualEffects(int player)
+{
+    if ((db_ButtonsDown(player) & HSD_PAD_X) &&
+        (db_ButtonsPressed(player) & HSD_PAD_DPADDOWN))
+    {
+        db_MiscVisualEffectsStatus++;
+        if (3 < db_MiscVisualEffectsStatus) {
+            db_MiscVisualEffectsStatus = 0;
+        }
+        if (db_MiscVisualEffectsStatus == 0) {
+            ifAll_ShowHUD();
+        } else if (!ifAll_IsHUDHidden()) {
+            ifAll_HideHUD();
+        }
+    }
+}
+
+static void fn_Setup5xSpeed(void)
+{
+    db_5xSpeedStatus.b0 = false;
+}
+
+static void fn_Check5xSpeed(int player)
+{
+    if ((db_ButtonsDown(player) & HSD_PAD_A) &&
+        (db_ButtonsPressed(player) & HSD_PAD_DPADRIGHT))
+    {
+        fn_Toggle5xSpeed();
+    }
+}
+
+static void fn_Toggle5xSpeed(void)
+{
+    db_5xSpeedStatus.b0 ^= 1;
+    if (db_5xSpeedStatus.b0) {
+        gm_SetGameSpeed(5.0f);
+    } else {
+        gm_ResetGameSpeed();
+    }
+}
+
+void db_InitScreenshot(void)
+{
+    db_ScreenshotNumber = 0;
+    db_ScreenshotPending = 0;
+}
+
+void db_CheckScreenshot(void)
 {
     int i;
 
@@ -1391,12 +1532,12 @@ void db_8022887C(void)
         if ((HSD_PadMasterStatus[i].button & HSD_PAD_Y) &&
             (HSD_PadMasterStatus[i].trigger & HSD_PAD_DPADUP))
         {
-            db_804D6B90 = 1;
+            db_ScreenshotPending = 1;
         }
     }
 }
 
-void db_8022892C(void)
+void db_TakeScreenshotIfPending(void)
 {
     char spC[32];
     int temp_r3;
@@ -1404,7 +1545,7 @@ void db_8022892C(void)
     int temp_ret;
     void* var_r30;
 
-    if (db_804D6B90 != 0) {
+    if (db_ScreenshotPending != 0) {
         HSD_VIWaitXFBFlush();
         temp_ret = HSD_VIGetXFBLastDrawDone();
         temp_r3 = temp_ret;
@@ -1414,17 +1555,17 @@ void db_8022892C(void)
             OSReport("cant find xfb!\n");
             ((0) ? ((void) 0) : __assert("dbscreenshot.c", 61, "0"));
         }
-        temp_r5 = db_804D6B94;
-        db_804D6B94 = temp_r5 + 1;
+        temp_r5 = db_ScreenshotNumber;
+        db_ScreenshotNumber = temp_r5 + 1;
         sprintf(spC, "USB:shot/screenshot%02d.frb", temp_r5);
         fn_802289F8(spC, (int) var_r30,
                     HSD_VIData.current.vi.rmode.fbWidth *
                         HSD_VIData.current.vi.rmode.xfbHeight * 2);
-        db_804D6B90 = 0;
+        db_ScreenshotPending = 0;
     }
 }
 
-int fn_802289F8(char* arg0, int arg1, int arg2)
+static int fn_802289F8(char* arg0, int arg1, int arg2)
 {
     if (strncmp(arg0, "USB:", 4) == 0) {
         return hsd_80393A5C(arg0 + 4, arg1, arg2);
@@ -1433,7 +1574,7 @@ int fn_802289F8(char* arg0, int arg1, int arg2)
     }
 }
 
-void db_80228A64(void)
+void db_ClearFPUExceptions(void)
 {
     OSContext* ctx;
 
@@ -1444,7 +1585,7 @@ void db_80228A64(void)
     OSLoadFPUContext(ctx);
 }
 
-void fn_80228AB4(OSContext* ctx)
+static void fn_HSDPanicHandler(OSContext* ctx)
 {
     HSD_VISetUserPreRetraceCallback(NULL);
     HSD_VISetUserPostRetraceCallback(NULL);
@@ -1456,7 +1597,7 @@ void fn_80228AB4(OSContext* ctx)
     hsd_80397DA4(ctx);
 }
 
-void fn_80228B28(u16 error, OSContext* ctx, ...)
+static void fn_OSErrorHandler(u16 error, OSContext* ctx, ...)
 {
     int dsisr, dar;
 
@@ -1479,13 +1620,13 @@ void fn_80228B28(u16 error, OSContext* ctx, ...)
     va_end(va);
 }
 
-void db_80228C4C(void)
+void db_SetupCrashHandler(void)
 {
     u16 x;
     if (DBIsDebuggerPresent() == 0) {
         void* mem = OSAllocFromArenaLo(0x2000, 4);
         hsd_80393DA0(mem, 0x2000);
-        HSD_SetPanicCallback((PanicCallback) fn_80228AB4);
+        HSD_SetPanicCallback((PanicCallback) fn_HSDPanicHandler);
         for (x = 0; x < 16; x++) {
             switch (x) {
             case 4:
@@ -1494,25 +1635,25 @@ void db_80228C4C(void)
             case 9:
                 break;
             default:
-                OSSetErrorHandler(x, fn_80228B28);
+                OSSetErrorHandler(x, fn_OSErrorHandler);
             }
         }
     }
 }
 
-void fn_80228CF4(void)
+static void fn_SetupBonusInfo(void)
 {
     fn_80228D18();
     fn_80228D38();
 }
 
-void fn_80228D18(void)
+static void fn_80228D18(void)
 {
     db_804D6B98.x0 = 0xFF;
     db_804D6B98.x1.b0 = 0;
 }
 
-void fn_80228D38(void)
+static void fn_80228D38(void)
 {
     HSD_GObj* gobj;
     int i;
@@ -1524,16 +1665,16 @@ void fn_80228D38(void)
         if (db_804D6B9C[i].text != NULL) {
             DevText_Show(gobj, db_804D6B9C[i].text);
             DevText_HideCursor(db_804D6B9C[i].text);
-            DevText_SetBGColor(db_804D6B9C[i].text,
-                               &db_803EAE08[db_804D6B98.x1.b0].bg);
-            DevText_SetTextColor(db_804D6B9C[i].text,
-                                 &db_803EAE08[db_804D6B98.x1.b0].fg);
+            DevText_SetBGColor2(db_804D6B9C[i].text,
+                                db_TextColors[db_804D6B98.x1.b0].bg);
+            DevText_SetTextColor2(db_804D6B9C[i].text,
+                                  db_TextColors[db_804D6B98.x1.b0].fg);
             DevText_SetScale(db_804D6B9C[i].text, 12.0F, 16.0F);
         }
     }
 }
 
-void fn_80228E54(int arg0, int arg1, int arg2)
+static void fn_80228E54(int arg0, int arg1, int arg2)
 {
     DevText* text;
     s32 temp_r4;
@@ -1565,9 +1706,9 @@ void fn_80228E54(int arg0, int arg1, int arg2)
                 return;
             }
             if (gm_8016F1B8(bonus) == 0) {
-                DevText_Printf(text, "%s", bonus_names[bonus]);
+                DevText_Printf(text, "%s", db_bonus_names[bonus]);
             } else {
-                DevText_Printf(text, "%s : %d", bonus_names[bonus],
+                DevText_Printf(text, "%s : %d", db_bonus_names[bonus],
                                pl_80039418(arg0, bonus));
             }
             y_pos += 1;
@@ -1576,7 +1717,7 @@ void fn_80228E54(int arg0, int arg1, int arg2)
     }
 }
 
-void fn_8022900C(int arg0)
+static void fn_8022900C(int arg0)
 {
     int i;
 
@@ -1591,10 +1732,10 @@ void fn_8022900C(int arg0)
         } else {
             db_804D6B98.x1.b0 = 1;
             for (i = 0; i < 2; i++) {
-                DevText_SetBGColor(db_804D6B9C[i].text,
-                                   &db_803EAE08[db_804D6B98.x1.b0].bg);
-                DevText_SetTextColor(db_804D6B9C[i].text,
-                                     &db_803EAE08[db_804D6B98.x1.b0].fg);
+                DevText_SetBGColor2(db_804D6B9C[i].text,
+                                    db_TextColors[db_804D6B98.x1.b0].bg);
+                DevText_SetTextColor2(db_804D6B9C[i].text,
+                                      db_TextColors[db_804D6B98.x1.b0].fg);
             }
         }
     } else {
@@ -1602,42 +1743,42 @@ void fn_8022900C(int arg0)
         for (i = 0; i < 2; i++) {
             DevText_ShowBackground(db_804D6B9C[i].text);
             DevText_ShowText(db_804D6B9C[i].text);
-            DevText_SetBGColor(db_804D6B9C[i].text,
-                               &db_803EAE08[db_804D6B98.x1.b0].bg);
-            DevText_SetTextColor(db_804D6B9C[i].text,
-                                 &db_803EAE08[db_804D6B98.x1.b0].fg);
+            DevText_SetBGColor2(db_804D6B9C[i].text,
+                                db_TextColors[db_804D6B98.x1.b0].bg);
+            DevText_SetTextColor2(db_804D6B9C[i].text,
+                                  db_TextColors[db_804D6B98.x1.b0].fg);
         }
     }
 }
 
-void fn_802291A0(int arg0)
+static void fn_CheckBonusInfo(int player)
 {
-    if ((fn_8022558C(arg0) & HSD_PAD_B) &&
-        (fn_802255A4(arg0) & HSD_PAD_DPADLEFT))
+    if ((db_ButtonsDown(player) & HSD_PAD_B) &&
+        (db_ButtonsPressed(player) & HSD_PAD_DPADLEFT))
     {
-        fn_8022900C(arg0);
+        fn_8022900C(player);
     }
-    if (db_804D6B98.x0 == arg0) {
-        if (Player_GetEntity(arg0) != NULL) {
-            pl_80039450(arg0);
+    if (db_804D6B98.x0 == player) {
+        if (Player_GetEntity(player) != NULL) {
+            pl_80039450(player);
         }
-        fn_80228E54(arg0, 0, 0);
+        fn_80228E54(player, 0, 0);
     }
 }
 
-void fn_80229220(void)
+static void fn_SetupObjAllocLimiter(void)
 {
     db_804D6BA0.b0 = 0;
     db_804D6BA0.b1 = 0;
 }
 
-void fn_80229240(int arg0)
+static void fn_UpdateObjAllocLimiter(int player)
 {
     int peak;
 
     if (g_debugLevel == 4) {
-        if ((fn_8022558C(arg0) & HSD_PAD_B) &&
-            (fn_802255A4(arg0) & HSD_PAD_DPADUP))
+        if ((db_ButtonsDown(player) & HSD_PAD_B) &&
+            (db_ButtonsPressed(player) & HSD_PAD_DPADUP))
         {
             if (db_804D6BA0.b0 == 0) {
                 HSD_ObjAllocSetNumLimit(&efLib_80458EB0,
@@ -1651,8 +1792,8 @@ void fn_80229240(int arg0)
                 db_804D6BA0.b0 = 0;
             }
         }
-        if ((fn_8022558C(arg0) & HSD_PAD_A) &&
-            (fn_802255A4(arg0) & HSD_PAD_DPADUP))
+        if ((db_ButtonsDown(player) & HSD_PAD_A) &&
+            (db_ButtonsPressed(player) & HSD_PAD_DPADUP))
         {
             if (db_804D6BA0.b1 == 0) {
                 HSD_ObjAllocSetNumLimit(&hsd_804D0F60,

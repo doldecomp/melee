@@ -843,7 +843,7 @@ void Camera_80030730(f32 arg8)
     cm_803BCCA0.x40 = arg8;
 }
 
-void Camera_80030740(u8 r, u8 g, u8 b)
+void Camera_SetBackgroundColor(u8 r, u8 g, u8 b)
 {
     cm_80452C68.background_r = r;
     cm_80452C68.background_g = g;
@@ -878,7 +878,7 @@ void Camera_80030A8C(bool arg0)
     cm_80452C68.unk_399_b4 = arg0;
 }
 
-/// #Camera_80030AA4
+/// #Camera_SetStageVisible
 
 /// #Camera_80030AC4
 

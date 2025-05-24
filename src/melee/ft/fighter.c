@@ -181,7 +181,7 @@ void Fighter_FirstInitialize_80067A84(void)
 void Fighter_LoadCommonData(void)
 {
     void** pData;
-    lbArchive_80016C64("PlCo.dat", (void**) &pData, "ftLoadCommonData", 0);
+    lbArchive_LoadSymbols("PlCo.dat", (void**) &pData, "ftLoadCommonData", 0);
 
     // copy 23 4-byte chunks from pData to p_ftCommonData in reverse order,
     // equivalent to this: for(i=0; i<23; i++)
@@ -1427,12 +1427,12 @@ void Fighter_8006A1BC(Fighter_GObj* gobj)
         ftCo_800C37A0(gobj);
 
         while (fp->x200C != 0) {
-            ftCo_800D14E4(gobj);
+            Fighter_SuperMushroomApply(gobj);
             fp->x200C--;
         }
 
         while (fp->x2010 != 0) {
-            ftCo_800D1E80(gobj);
+            Fighter_PoisonMushroomApply(gobj);
             fp->x2010--;
         }
 
@@ -1504,9 +1504,9 @@ void Fighter_8006A360(Fighter_GObj* gobj)
 
             if (fp->x2008 == 0) {
                 if (fp->x2220_flag.b5) {
-                    ftCo_800D1A8C(gobj);
+                    Fighter_SuperMushroomEnd(gobj);
                 } else if (fp->x2220_flag.b6) {
-                    ftCo_800D237C(gobj);
+                    Fighter_PoisonMushroomEnd(gobj);
                 }
             }
         }

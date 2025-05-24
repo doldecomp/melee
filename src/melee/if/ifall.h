@@ -11,9 +11,9 @@
 /* 2F3424 */ void ifAll_802F3424(void);
 /* 2F343C */ void ifAll_802F343C(void);
 /* 2F3690 */ UNK_T ifAll_802F3690(void);
-/* 2F3698 */ void ifAll_802F3698(void);
-/* 2F36A4 */ void ifAll_802F36A4(void);
-/* 2F36B0 */ u8 ifAll_802F36B0(void);
+/* 2F3698 */ void ifAll_HideHUD(void);
+/* 2F36A4 */ void ifAll_ShowHUD(void);
+/* 2F36B0 */ u8 ifAll_IsHUDHidden(void);
 /* 2F36B8 */ UNK_RET fn_802F36B8(UNK_PARAMS);
 /* 2F370C */ UNK_RET ifAll_802F370C(UNK_PARAMS);
 /* 2F390C */ UNK_RET ifAll_802F390C(UNK_PARAMS);
