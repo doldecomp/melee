@@ -1586,7 +1586,20 @@ void fn_8022900C(int arg0)
     }
 }
 
-/// #fn_802291A0
+void fn_802291A0(int arg0)
+{
+    if ((fn_8022558C(arg0) & HSD_PAD_B) &&
+        (fn_802255A4(arg0) & HSD_PAD_DPADLEFT))
+    {
+        fn_8022900C(arg0);
+    }
+    if (db_804D6B98.x0 == arg0) {
+        if (Player_GetEntity(arg0) != NULL) {
+            pl_80039450(arg0);
+        }
+        fn_80228E54(arg0, 0, 0);
+    }
+}
 
 /// #fn_80229220
 
