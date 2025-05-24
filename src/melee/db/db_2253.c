@@ -248,7 +248,17 @@ void db_80225754(void)
     }
 }
 
-/// #fn_80225A00
+void fn_80225A00(void)
+{
+    db_8049FAA0.x0 = 0;
+    db_8049FAA0.x10 = 0x22;
+    db_8049FAA0.x18 = db_8049FAA0.x10;
+    db_8049FAA0.x14 = 0;
+    db_8049FAA0.x1C = db_8049FAA0.x14;
+    db_804D6B3C = 1;
+    db_8049FAA0.x20.b0 = 0;
+    db_8049FAA0.x20.b1 = 0;
+}
 
 /// #fn_80225A54
 
