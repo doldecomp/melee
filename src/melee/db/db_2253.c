@@ -437,7 +437,22 @@ void fn_80225D7C(void)
     }
 }
 
-/// #db_80225DD8
+void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
+{
+    Item* it = GET_ITEM(item);
+    if (ftLib_80086960(owner) == 0) {
+        it = GET_ITEM(item);
+        it->xDAA_byte |= db_804D6B3C;
+        // db_80225D64(item, owner); // stack too big
+    } else {
+        int x;
+        it->xDAA_byte &= 0xFC;
+        x = fn_8022697C(owner);
+        if (x != 0) {
+            it->xDAA_byte |= x & 3;
+        }
+    }
+}
 
 /// #fn_80225E6C
 

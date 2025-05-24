@@ -46,7 +46,7 @@
 /* 226730 */ void fn_80226730(int);
 /* 2267C8 */ UNK_RET fn_802267C8(UNK_PARAMS);
 /* 2268B8 */ UNK_RET fn_802268B8(UNK_PARAMS);
-/* 22697C */ UNK_RET fn_8022697C(UNK_PARAMS);
+/* 22697C */ u8 fn_8022697C(Fighter_GObj* owner);
 /* 2269C0 */ void fn_802269C0(void);
 /* 226BD4 */ void fn_80226BD4(int);
 /* 226E00 */ UNK_RET fn_80226E00(UNK_PARAMS);
