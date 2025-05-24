@@ -470,7 +470,70 @@ void fn_80225E6C(Fighter_GObj* owner)
     }
 }
 
-/// #fn_80225F20
+void fn_80225F20(int player)
+{
+    int x, y;
+
+    x = fn_8022558C(player);
+    if ((x & 64) != 0) {
+        y = fn_802255BC(player);
+        if ((y & 8) != 0) {
+            if (db_8049FAA0.x10 < 0x23) {
+                db_8049FAA0.x10++;
+                if (db_8049FAA0.x10 == 0x23) {
+                    db_8049FAA0.x10 = 0x2B;
+                }
+            } else if (db_8049FAA0.x10 < 0x2F) {
+                db_8049FAA0.x10++;
+                if (db_8049FAA0.x10 == 0x2F) {
+                    db_8049FAA0.x10 = 0xD0;
+                }
+            } else if (db_8049FAA0.x10 < 0xE9) {
+                db_8049FAA0.x10++;
+            }
+        }
+    }
+
+    x = fn_8022558C(player);
+    if ((x & 64) != 0) {
+        y = fn_802255BC(player);
+        if ((y & 4) != 0) {
+            if (db_8049FAA0.x10 >= 0xD0) {
+                db_8049FAA0.x10--;
+                if (db_8049FAA0.x10 < 0xD0) {
+                    db_8049FAA0.x10 = 0x2E;
+                }
+            } else if (db_8049FAA0.x10 >= 0x2B) {
+                db_8049FAA0.x10--;
+                if (db_8049FAA0.x10 < 0x2B) {
+                    db_8049FAA0.x10 = 0x22;
+                }
+            } else if (db_8049FAA0.x10 > 0) {
+                db_8049FAA0.x10--;
+            }
+        }
+    }
+
+    x = fn_8022558C(player);
+    if ((x & 64) != 0) {
+        y = fn_802255BC(player);
+        if ((y & 2) != 0) {
+            if (db_8049FAA0.x14 < 0x1E) {
+                db_8049FAA0.x14++;
+            }
+        }
+    }
+
+    x = fn_8022558C(player);
+    if ((x & 64) != 0) {
+        y = fn_802255BC(player);
+        if ((y & 1) != 0) {
+            if (db_8049FAA0.x14 > 0) {
+                db_8049FAA0.x14--;
+            }
+        }
+    }
+}
 
 /// #fn_802260D4
 

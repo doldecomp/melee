@@ -36,7 +36,7 @@
 /* 225D7C */ void fn_80225D7C(void);
 /* 225DD8 */ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner);
 /* 225E6C */ void fn_80225E6C(Fighter_GObj* owner);
-/* 225F20 */ UNK_RET fn_80225F20(UNK_PARAMS);
+/* 225F20 */ void fn_80225F20(int player);
 /* 2260D4 */ UNK_RET fn_802260D4(UNK_PARAMS);
 /* 2261BC */ UNK_RET fn_802261BC(UNK_PARAMS);
 /* 2262E0 */ UNK_RET fn_802262E0(UNK_PARAMS);
