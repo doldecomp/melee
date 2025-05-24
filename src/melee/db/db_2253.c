@@ -91,13 +91,47 @@ void db_802254B8(void)
     }
 }
 
-/// #fn_8022558C
+int fn_8022558C(int x)
+{
+    return db_8049FA00[x].x0;
+}
 
-/// #fn_802255A4
+int fn_802255A4(int x)
+{
+    return db_8049FA00[x].x8;
+}
 
-/// #fn_802255BC
+int fn_802255BC(int x)
+{
+    return db_8049FA00[x].x10;
+}
 
-/// #db_802255D4
+void db_802255D4(void)
+{
+    int stack[4];
+    int i;
+
+    OSReport("[all PLink num] -- Report --\n");
+    for (i = 0; i < 10; i++) {
+        OSReport("%5d ", i);
+    }
+    OSReport("\n");
+    OSReport("------------------------------------------------------------\n");
+
+    for (i = 0; i < 64; i++) {
+        int count = 0;
+        HSD_GObj* var_r3 = ((HSD_GObj**) HSD_GObj_Entities)[i & 0xFF];
+        while (var_r3 != NULL) {
+            var_r3 = var_r3->next;
+            count += 1;
+        }
+        OSReport("%5d ", count);
+        if ((i % 10) == 9) {
+            OSReport("\n");
+        }
+    }
+    OSReport("\n");
+}
 
 /// #db_802256CC
 
