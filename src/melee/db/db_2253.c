@@ -365,7 +365,19 @@ void fn_80225C44(void)
     db_8049FAA0.x20.b0 = 0;
 }
 
-/// #fn_80225C8C
+void fn_80225C8C(void)
+{
+    HSD_GObj* item_gobj;
+    Item* it;
+
+    item_gobj = HSD_GObj_Entities->items;
+    while (item_gobj != NULL) {
+        it = item_gobj->user_data;
+        it->xDAA_flag.b4 = 1;
+        item_gobj = item_gobj->next;
+    }
+    db_8049FAA0.x20.b1 = 1;
+}
 
 /// #fn_80225CD4
 
