@@ -8,6 +8,8 @@
 // externs
 extern UNK_T cm_80453004;
 extern HSD_ObjAllocUnk4 it_804A0E30;
+extern unsigned char _stack_end[];
+extern unsigned char _stack_addr[];
 
 // rodata
 const Vec3 db_803B84D8 = { 0.0F, 1.0F, 0.0F };

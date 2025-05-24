@@ -133,7 +133,17 @@ void db_802255D4(void)
     OSReport("\n");
 }
 
-/// #db_802256CC
+void db_802256CC(void)
+{
+    u8* peak = _stack_end + 4;
+    while (*peak == 0xAA) {
+        peak += 1;
+    }
+    OSReport("------ Thread info ------\n");
+    OSReport("base:%x, end:%x, size:%d peak:%d \n", _stack_addr, _stack_end,
+             _stack_addr - _stack_end, _stack_addr - peak);
+    OSReport("\n");
+}
 
 /// #db_80225754
 

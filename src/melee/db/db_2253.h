@@ -15,7 +15,7 @@
 /* 2255A4 */ int fn_802255A4(int x);
 /* 2255BC */ int fn_802255BC(int x);
 /* 2255D4 */ void db_802255D4(void);
-/* 2256CC */ UNK_RET db_802256CC(UNK_PARAMS);
+/* 2256CC */ void db_802256CC(void);
 /* 225754 */ UNK_RET db_80225754(UNK_PARAMS);
 /* 225A00 */ UNK_RET fn_80225A00(UNK_PARAMS);
 /* 225A54 */ UNK_RET fn_80225A54(UNK_PARAMS);
