@@ -1,10 +1,15 @@
 #include "db_2253.static.h"
 
+#include "ef/efsync.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/item.h"
 #include "it/types.h"
 #include "lb/lbarchive.h"
+#include "pl/player.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
@@ -591,7 +596,55 @@ void fn_802261BC(int player)
     }
 }
 
-/// #fn_802262E0
+void fn_802262E0(int player)
+{
+    int mask = HSD_PAD_DPADLEFT | HSD_PAD_DPADRIGHT | HSD_PAD_DPADUP |
+               HSD_PAD_Z | HSD_PAD_R | HSD_PAD_L | HSD_PAD_A | HSD_PAD_B |
+               HSD_PAD_X | HSD_PAD_Y | HSD_PAD_START;
+    SpawnItem spawnItem;
+    if ((fn_8022558C(player) & mask) != 0) {
+        return;
+    }
+    if ((fn_802255A4(player) & HSD_PAD_DPADDOWN) == 0) {
+        return;
+    }
+    spawnItem.kind = db_8049FAA0.x10;
+    if (Item_80266F3C() == 0 && spawnItem.kind < 0x23) {
+        return;
+    }
+    Player_LoadPlayerCoords(player, &spawnItem.prev_pos);
+    spawnItem.prev_pos.y += 60.0F;
+    spawnItem.prev_pos.z = 0.0F;
+    spawnItem.pos = spawnItem.prev_pos;
+    spawnItem.facing_dir = it_8026B684(&spawnItem.prev_pos);
+    spawnItem.x3C_damage = 0;
+    spawnItem.vel.x = spawnItem.vel.y = spawnItem.vel.z = 0.0F;
+    spawnItem.x0_parent_gobj = NULL;
+    spawnItem.x4_parent_gobj2 = spawnItem.x0_parent_gobj;
+    spawnItem.x44_flag.b0 = 1;
+    spawnItem.x40 = 0;
+    if (spawnItem.kind < 0x23 && Item_804A0C64.x0 >= it_804D6D28->x0) {
+        OSReport("Item Max Over.\n");
+        return;
+    }
+    if (spawnItem.kind < 0x2F && Item_804A0C64.x2C >= it_804D6D28->x14) {
+        OSReport("couldn't get Item struct.(CZako)");
+        return;
+    }
+    if (spawnItem.kind < 0xD0 || spawnItem.kind >= 0xEA ||
+        it_804A0F60[spawnItem.kind - 0xD0] != 0)
+    {
+        if (spawnItem.kind != 0x22 || it_8026C704() == 0) {
+            {
+                HSD_GObj* gobj = Item_80268B18(&spawnItem);
+                if (gobj != NULL) {
+                    GET_ITEM(gobj)->xDAA_flag.u8 |= db_804D6B3C;
+                    efSync_Spawn(0x420, gobj, &spawnItem.prev_pos);
+                }
+            }
+        }
+    }
+}
 
 /// #fn_802264C4
 
