@@ -668,7 +668,21 @@ void fn_802264C4(int player)
     fn_80225A54(player);
 }
 
-/// #fn_8022659C
+void fn_8022659C(void)
+{
+    HSD_GObj* gobj = DevText_GetGObj();
+    db_804D6B40.b0 = 0;
+    db_8049FAC8.x0 = DevText_Create(6, 20, 20, 60, 7, db_8049FAC8.x4);
+    if (db_8049FAC8.x0 != NULL) {
+        GXColor bg = { 0xFF, 0xFF, 0xFF, 0xFF };
+        GXColor fg = { 0x00, 0x00, 0x00, 0x00 };
+        DevText_Show(gobj, db_8049FAC8.x0);
+        DevText_HideCursor(db_8049FAC8.x0);
+        DevText_SetBGColor(db_8049FAC8.x0, &bg);
+        DevText_SetTextColor(db_8049FAC8.x0, &fg);
+        DevText_SetScale(db_8049FAC8.x0, 9.0F, 12.0F);
+    }
+}
 
 /// #fn_8022666C
 
