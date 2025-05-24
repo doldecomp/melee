@@ -454,7 +454,21 @@ void db_80225DD8(Item_GObj* item, Fighter_GObj* owner)
     }
 }
 
-/// #fn_80225E6C
+void fn_80225E6C(Fighter_GObj* owner)
+{
+    Item_GObj* item_gobj;
+    Item* it;
+    int stack[2];
+
+    item_gobj = HSD_GObj_Entities->items;
+    while (item_gobj != NULL) {
+        it = GET_ITEM(item_gobj);
+        if (it->owner == owner) {
+            db_80225DD8(item_gobj, owner);
+        }
+        item_gobj = item_gobj->next;
+    }
+}
 
 /// #fn_80225F20
 
