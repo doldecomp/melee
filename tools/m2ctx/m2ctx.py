@@ -195,6 +195,7 @@ def main():
         if args.colorize:
             try:
                 import colorama
+
                 colorama.just_fix_windows_console()
             except ModuleNotFoundError:
                 pass

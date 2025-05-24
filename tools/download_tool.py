@@ -91,6 +91,7 @@ TOOLS: Dict[str, Callable[[str], str]] = {
     "wibo": wibo_url,
 }
 
+
 def download(url, response, output) -> None:
     if url.endswith(".zip"):
         data = io.BytesIO(response.read())
@@ -106,6 +107,7 @@ def download(url, response, output) -> None:
             shutil.copyfileobj(response, f)
         st = os.stat(output)
         os.chmod(output, st.st_mode | stat.S_IEXEC)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -129,11 +131,16 @@ def main() -> None:
             import certifi
             import ssl
         except:
-            print("\"certifi\" module not found. Please install it using \"python -m pip install certifi\".")
+            print(
+                '"certifi" module not found. Please install it using "python -m pip install certifi".'
+            )
             return
-            
-        with urllib.request.urlopen(req, context=ssl.create_default_context(cafile=certifi.where())) as response:
+
+        with urllib.request.urlopen(
+            req, context=ssl.create_default_context(cafile=certifi.where())
+        ) as response:
             download(url, response, output)
+
 
 if __name__ == "__main__":
     main()

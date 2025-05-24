@@ -59,7 +59,7 @@ def fix_primitives(content: str) -> str:
                 assert False, f'Unknown regex match "{s}"'
 
     return re.sub(
-            r"(?<![^\s(;])[fsu](?:16|32|64)(?![^\s);,])",
+        r"(?<![^\s(;])[fsu](?:16|32|64)(?![^\s);,])",
         replace,
         content,
     )
