@@ -5,6 +5,7 @@
 #include "it/item.h"
 #include "it/types.h"
 #include "lb/lbarchive.h"
+#include "un/un_2FC9.h"
 
 #include <common_structs.h>
 #include <dolphin/card/CARDMount.h>
@@ -535,7 +536,28 @@ void fn_80225F20(int player)
     }
 }
 
-/// #fn_802260D4
+void fn_802260D4(int player)
+{
+    HSD_GObj* temp_r30;
+
+    temp_r30 = DevText_GetGObj();
+    if (db_8049FAA0.x0 == 2) {
+        DevText_ShowBackground(db_804D6B38);
+        DevText_ShowText(db_804D6B38);
+    } else {
+        db_804D6B38 = DevText_Create(8, 20, 20, 40, 1, db_8049FA50);
+        if (db_804D6B38 != NULL) {
+            GXColor bg = { 0x00, 0x00, 0x00, 0xFF };
+            GXColor fg = { 0x00, 0x00, 0x00, 0x00 };
+            DevText_Show(temp_r30, db_804D6B38);
+            DevText_HideCursor(db_804D6B38);
+            DevText_SetBGColor(db_804D6B38, &bg);
+            DevText_SetTextColor(db_804D6B38, &fg);
+            DevText_SetScale(db_804D6B38, 12.0F, 16.0F);
+        }
+    }
+    db_8049FAA0.x0 = 1;
+}
 
 /// #fn_802261BC
 
