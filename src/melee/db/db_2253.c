@@ -1429,7 +1429,28 @@ void fn_80228AB4(OSContext* ctx)
     hsd_80397DA4(ctx);
 }
 
-/// #fn_80228B28
+void fn_80228B28(u16 error, OSContext* ctx, ...)
+{
+    int dsisr, dar;
+
+    va_list va;
+    va_start(va, ctx);
+
+    dsisr = va_arg(va, int);
+    dar = va_arg(va, int);
+
+    HSD_VISetUserPreRetraceCallback(NULL);
+    HSD_VISetUserPostRetraceCallback(NULL);
+    lb_80019A48();
+    OSReport("%s\n", "DATE Feb 13 2002  TIME 22:06:27");
+    Exception_ReportStackTrace(ctx, 0x10);
+    Exception_ReportCodeline(error, dsisr, dar, ctx);
+    hsd_80397DFC(0x1388);
+    Exception_StoreDebugLevel(g_debugLevel);
+    hsd_80397DA4(ctx);
+
+    va_end(va);
+}
 
 /// #db_80228C4C
 

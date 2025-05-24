@@ -52,7 +52,7 @@
 /* 394668 */ UNK_RET hsd_80394668(UNK_PARAMS);
 /* 394950 */ UNK_RET hsd_80394950(UNK_PARAMS);
 /* 394A48 */ void Exception_ReportStackTrace(OSContext*, int);
-/* 394B18 */ UNK_RET Exception_ReportCodeline(UNK_PARAMS);
+/* 394B18 */ void Exception_ReportCodeline(u16, int, int, OSContext*);
 /* 394DF4 */ UNK_RET fn_80394DF4(UNK_PARAMS);
 /* 394E8C */ UNK_RET hsd_80394E8C(UNK_PARAMS);
 /* 394F48 */ UNK_RET hsd_80394F48(UNK_PARAMS);
