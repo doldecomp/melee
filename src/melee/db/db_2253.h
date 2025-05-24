@@ -10,7 +10,7 @@
 #include <baselib/gobj.h>
 
 /* 225374 */ void db_80225374(void);
-/* 2254B8 */ UNK_RET db_802254B8(UNK_PARAMS);
+/* 2254B8 */ void db_802254B8(void);
 /* 22558C */ UNK_RET fn_8022558C(UNK_PARAMS);
 /* 2255A4 */ UNK_RET fn_802255A4(UNK_PARAMS);
 /* 2255BC */ UNK_RET fn_802255BC(UNK_PARAMS);

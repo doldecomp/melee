@@ -1,5 +1,7 @@
 #include "db_2253.static.h"
 
+#include "lb/lbarchive.h"
+
 #include <common_structs.h>
 #include <dolphin/card/CARDMount.h>
 #include <dolphin/mtx/types.h>
@@ -40,7 +42,54 @@ void db_80225374(void)
     }
 }
 
-/// #db_802254B8
+void db_802254B8(void)
+{
+    struct {
+        char** bonus_names;
+        char** motionstate_names;
+        char** submotion_names;
+    }* commonData;
+    int stack[2];
+
+    if (g_debugLevel >= 3) {
+        db_8049FA00[0].x10 = 0;
+        db_8049FA00[0].xC = 0;
+        db_8049FA00[0].x8 = 0;
+        db_8049FA00[0].x0 = 0;
+
+        db_8049FA00[1].x10 = 0;
+        db_8049FA00[1].xC = 0;
+        db_8049FA00[1].x8 = 0;
+        db_8049FA00[1].x0 = 0;
+
+        db_8049FA00[2].x10 = 0;
+        db_8049FA00[2].xC = 0;
+        db_8049FA00[2].x8 = 0;
+        db_8049FA00[2].x0 = 0;
+
+        db_8049FA00[3].x10 = 0;
+        db_8049FA00[3].xC = 0;
+        db_8049FA00[3].x8 = 0;
+        db_8049FA00[3].x0 = 0;
+
+        lbArchive_80016C64("DbCo.dat", (void**) &commonData,
+                           "dbLoadCommonData", 0);
+
+        bonus_names = commonData->bonus_names;
+        motionstate_names = commonData->motionstate_names;
+        submotion_names = commonData->submotion_names;
+
+        fn_8022659C();
+        fn_802267C8();
+        fn_80225A00();
+        fn_80228318();
+        fn_80226E00();
+        fn_80227174();
+        fn_80228CF4();
+        fn_80229220();
+        fn_802287C4();
+    }
+}
 
 /// #fn_8022558C
 
