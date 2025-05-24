@@ -775,7 +775,15 @@ void fn_802268B8(void)
     }
 }
 
-/// #fn_8022697C
+u8 fn_8022697C(Fighter_GObj* owner)
+{
+    if (ftLib_80086960(owner) != 0) {
+        Fighter* ft = GET_FIGHTER(owner);
+        return ft->x21FC_flag.u8;
+    } else {
+        return 0;
+    }
+}
 
 /// #fn_802269C0
 
