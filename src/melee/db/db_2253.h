@@ -80,8 +80,8 @@
 /* 228820 */ UNK_RET fn_80228820(UNK_PARAMS);
 /* 22886C */ void db_8022886C(void);
 /* 22887C */ void db_8022887C(void);
-/* 22892C */ UNK_RET db_8022892C(UNK_PARAMS);
-/* 2289F8 */ UNK_RET fn_802289F8(UNK_PARAMS);
+/* 22892C */ void db_8022892C(void);
+/* 2289F8 */ int fn_802289F8(char*, int, int);
 /* 228A64 */ void db_80228A64(void);
 /* 228AB4 */ UNK_RET fn_80228AB4(UNK_PARAMS);
 /* 228B28 */ UNK_RET fn_80228B28(UNK_PARAMS);

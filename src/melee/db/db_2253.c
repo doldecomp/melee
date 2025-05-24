@@ -25,6 +25,7 @@
 #include <dolphin/vi/vi.h>
 #include <baselib/controller.h>
 #include <MSL/math.h>
+#include <MSL/printf.h>
 #include <MSL/trigf.h>
 
 void db_80225374(void)
@@ -1364,7 +1365,33 @@ void db_8022887C(void)
     }
 }
 
-/// #db_8022892C
+void db_8022892C(void)
+{
+    char spC[32];
+    int temp_r3;
+    int temp_r5;
+    int temp_ret;
+    void* var_r30;
+
+    if (db_804D6B90 != 0) {
+        HSD_VIWaitXFBFlush();
+        temp_ret = HSD_VIGetXFBLastDrawDone();
+        temp_r3 = temp_ret;
+        if (temp_r3 != -1) {
+            var_r30 = HSD_VIData.xfb[temp_r3].buffer;
+        } else {
+            OSReport("cant find xfb!\n");
+            ((0) ? ((void) 0) : __assert("dbscreenshot.c", 61, "0"));
+        }
+        temp_r5 = db_804D6B94;
+        db_804D6B94 = temp_r5 + 1;
+        sprintf(spC, "USB:shot/screenshot%02d.frb", temp_r5);
+        fn_802289F8(spC, (int) var_r30,
+                    HSD_VIData.current.vi.rmode.fbWidth *
+                        HSD_VIData.current.vi.rmode.xfbHeight * 2);
+        db_804D6B90 = 0;
+    }
+}
 
 /// #fn_802289F8
 
