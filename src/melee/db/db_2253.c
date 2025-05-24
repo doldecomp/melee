@@ -1013,7 +1013,20 @@ void fn_80226E0C(int arg0)
     }
 }
 
-/// #fn_802270C4
+void fn_802270C4(int arg0)
+{
+    Fighter_GObj* gobj;
+    Fighter* ft;
+    int stack;
+
+    for (gobj = HSD_GObj_Entities->fighters; gobj != NULL; gobj = gobj->next) {
+        ft = GET_FIGHTER(gobj);
+        if ((ft != NULL) && (ft->x20A8 != 0)) {
+            ft->x20A4.b5 = !arg0;
+            lbShadow_8000EEE0(gobj);
+        }
+    }
+}
 
 /// #fn_8022713C
 
