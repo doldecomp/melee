@@ -25,7 +25,7 @@
 /* 225B48 */ void fn_80225B48(void);
 /* 225B9C */ void fn_80225B9C(void);
 /* 225BF0 */ void fn_80225BF0(void);
-/* 225C44 */ UNK_RET fn_80225C44(UNK_PARAMS);
+/* 225C44 */ void fn_80225C44(void);
 /* 225C8C */ UNK_RET fn_80225C8C(UNK_PARAMS);
 /* 225CD4 */ UNK_RET fn_80225CD4(UNK_PARAMS);
 /* 225D1C */ s32 db_80225D1C(void);
