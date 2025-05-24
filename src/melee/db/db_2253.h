@@ -93,7 +93,7 @@
 /* 22900C */ void fn_8022900C(int arg0);
 /* 2291A0 */ void fn_802291A0(int arg0);
 /* 229220 */ void fn_80229220(void);
-/* 229240 */ void fn_80229240(int);
+/* 229240 */ void fn_80229240(int arg0);
 /* 4D4A08 */ extern enum_t g_debugLevel;
 /* 4D6B30 */ extern u16 db_804D6B30;
 

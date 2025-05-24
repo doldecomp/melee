@@ -10,6 +10,10 @@ extern UNK_T cm_80453004;
 extern HSD_ObjAllocUnk4 it_804A0E30;
 extern unsigned char _stack_end[];
 extern unsigned char _stack_addr[];
+extern HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
+extern HSD_ObjAllocData efLib_80458EB0;
+extern HSD_ObjAllocData hsd_804D0F60;
+extern HSD_ObjAllocData hsd_804D0F90;
 void lbShadow_8000EEE0(HSD_GObj*);
 
 // rodata

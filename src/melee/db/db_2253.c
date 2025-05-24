@@ -1607,4 +1607,49 @@ void fn_80229220(void)
     db_804D6BA0.b1 = 0;
 }
 
-/// #fn_80229240
+void fn_80229240(int arg0)
+{
+    int peak;
+
+    if (g_debugLevel == 4) {
+        if ((fn_8022558C(arg0) & HSD_PAD_B) &&
+            (fn_802255A4(arg0) & HSD_PAD_DPADUP))
+        {
+            if (db_804D6BA0.b0 == 0) {
+                HSD_ObjAllocSetNumLimit(&efLib_80458EB0,
+                                        HSD_ObjAllocGetPeak(&efLib_80458EB0));
+                HSD_ObjAllocEnableNumLimit(&efLib_80458EB0);
+
+                db_804D6BA0.b0 = 1;
+            } else {
+                HSD_ObjAllocDisableNumLimit(&efLib_80458EB0);
+
+                db_804D6BA0.b0 = 0;
+            }
+        }
+        if ((fn_8022558C(arg0) & HSD_PAD_A) &&
+            (fn_802255A4(arg0) & HSD_PAD_DPADUP))
+        {
+            if (db_804D6BA0.b1 == 0) {
+                HSD_ObjAllocSetNumLimit(&hsd_804D0F60,
+                                        HSD_ObjAllocGetPeak(&hsd_804D0F60));
+                HSD_ObjAllocEnableNumLimit(&hsd_804D0F60);
+                HSD_ObjAllocSetNumLimit(&hsd_804D0F90,
+                                        HSD_ObjAllocGetPeak(&hsd_804D0F90));
+                HSD_ObjAllocEnableNumLimit(&hsd_804D0F90);
+                HSD_ObjAllocSetNumLimit(
+                    &HSD_PSAppSrt_804D10B0,
+                    HSD_ObjAllocGetPeak(&HSD_PSAppSrt_804D10B0));
+                HSD_ObjAllocEnableNumLimit(&HSD_PSAppSrt_804D10B0);
+
+                db_804D6BA0.b1 = 1;
+            } else {
+                HSD_ObjAllocDisableNumLimit(&hsd_804D0F60);
+                HSD_ObjAllocDisableNumLimit(&hsd_804D0F90);
+                HSD_ObjAllocDisableNumLimit(&HSD_PSAppSrt_804D10B0);
+
+                db_804D6BA0.b1 = 0;
+            }
+        }
+    }
+}
