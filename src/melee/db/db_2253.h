@@ -52,7 +52,7 @@
 /* 226E00 */ void fn_80226E00(void);
 /* 226E0C */ void fn_80226E0C(int arg0);
 /* 2270C4 */ void fn_802270C4(int arg0);
-/* 22713C */ void fn_8022713C(int);
+/* 22713C */ void fn_8022713C(int arg0);
 /* 227174 */ UNK_RET fn_80227174(UNK_PARAMS);
 /* 227188 */ UNK_RET fn_80227188(UNK_PARAMS);
 /* 227484 */ void fn_80227484(int, int, int, float, float);
