@@ -706,7 +706,19 @@ void fn_8022666C(void)
     }
 }
 
-/// #fn_80226730
+void fn_80226730(int arg0)
+{
+    if ((fn_8022558C(arg0) & 0x200) && (fn_802255A4(arg0) & 4)) {
+        db_804D6B40.b0 ^= 1;
+        if (db_804D6B40.b0 == 0) {
+            DevText_HideBackground(db_8049FAC8.x0);
+            DevText_HideText(db_8049FAC8.x0);
+            return;
+        }
+        DevText_ShowBackground(db_8049FAC8.x0);
+        DevText_ShowText(db_8049FAC8.x0);
+    }
+}
 
 /// #fn_802267C8
 

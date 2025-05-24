@@ -43,7 +43,7 @@
 /* 2264C4 */ void fn_802264C4(int player);
 /* 22659C */ void fn_8022659C(void);
 /* 22666C */ void fn_8022666C(void);
-/* 226730 */ void fn_80226730(int);
+/* 226730 */ void fn_80226730(int arg0);
 /* 2267C8 */ UNK_RET fn_802267C8(UNK_PARAMS);
 /* 2268B8 */ UNK_RET fn_802268B8(UNK_PARAMS);
 /* 22697C */ u8 fn_8022697C(Fighter_GObj* owner);
