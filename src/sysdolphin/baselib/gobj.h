@@ -120,7 +120,7 @@ void HSD_GObj_80390C5C(HSD_GObj* gobj);
 void HSD_GObj_80390C84(HSD_GObj* gobj);
 void HSD_GObj_80390CAC(HSD_GObj* gobj);
 u32 HSD_GObj_80390EB8(s32 i);
-void HSD_GObj_803910D8(HSD_GObj*);
+void HSD_GObj_803910D8(HSD_GObj*, int);
 u8 HSD_GObj_803912A8(GObjUnkStruct*, GObjFuncs*);
 HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1);

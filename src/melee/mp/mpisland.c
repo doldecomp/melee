@@ -70,7 +70,7 @@ void mpIsland_8005A728(void)
     v22_2 = &mpIsland_80458E88.xC;
     mpIsland_8005A6F8();
 
-    lb_8000C160(v33, 0x600u);
+    memzero(v33, 0x600u);
     v5 = v0[9];
     v6 = 0;
     if (v0[9]) {

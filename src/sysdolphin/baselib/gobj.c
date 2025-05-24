@@ -189,7 +189,7 @@ void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-void HSD_GObj_803910D8(HSD_GObj* gobj)
+void HSD_GObj_803910D8(HSD_GObj* gobj, int renderpass)
 {
     if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
         HSD_GObj_80390ED0(gobj, 7);

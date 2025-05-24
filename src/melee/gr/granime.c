@@ -32,7 +32,7 @@ void grAnime_801C65B0(Foo* arg0)
             lbHeap_80015CA8(0, arg0->x0);
         }
     }
-    lb_8000C160(arg0, 0xC);
+    memzero(arg0, 0xC);
 }
 
 void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1)
