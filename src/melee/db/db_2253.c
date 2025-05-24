@@ -24,8 +24,10 @@
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
 #include <baselib/controller.h>
+#include <baselib/particle.h>
 #include <MSL/math.h>
 #include <MSL/printf.h>
+#include <MSL/string.h>
 #include <MSL/trigf.h>
 
 void db_80225374(void)
@@ -1393,7 +1395,14 @@ void db_8022892C(void)
     }
 }
 
-/// #fn_802289F8
+int fn_802289F8(char* arg0, int arg1, int arg2)
+{
+    if (strncmp(arg0, "USB:", 4) == 0) {
+        return hsd_80393A5C(arg0 + 4, arg1, arg2);
+    } else {
+        return -1;
+    }
+}
 
 /// #db_80228A64
 
