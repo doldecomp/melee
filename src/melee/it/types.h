@@ -636,12 +636,12 @@ struct ItemModStruct {
 };
 
 struct ItemCommonData {
-    u32 x0;
+    s32 x0;
     u32 x4;
     u32 x8;
     u32 xC;
     u32 x10;
-    u32 x14;
+    s32 x14;
     u32 x18;
     u32 x1C;
     u32 x20;
