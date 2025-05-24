@@ -379,7 +379,19 @@ void fn_80225C8C(void)
     db_8049FAA0.x20.b1 = 1;
 }
 
-/// #fn_80225CD4
+void fn_80225CD4(void)
+{
+    HSD_GObj* item_gobj;
+    Item* it;
+
+    item_gobj = HSD_GObj_Entities->items;
+    while (item_gobj != NULL) {
+        it = item_gobj->user_data;
+        it->xDAA_flag.b4 = 0;
+        item_gobj = item_gobj->next;
+    }
+    db_8049FAA0.x20.b1 = 0;
+}
 
 s32 db_80225D1C(void)
 {
