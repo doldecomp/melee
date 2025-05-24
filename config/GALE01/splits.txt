@@ -111,7 +111,7 @@ melee/lb/lbsnap.c:
 	.text       start:0x8001D2BC end:0x8001E2F8
 	.data       start:0x803BACC8 end:0x803BADB0
 	.bss        start:0x80433380 end:0x804333E0
-	.sdata      start:0x804D3828 end:0x804D3830
+	.sdata      start:0x804D3828 end:0x804D382B
 
 melee/lb/lbgx.c:
 	.text       start:0x8001E2F8 end:0x8001E560

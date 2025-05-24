@@ -16,12 +16,15 @@ void HSD_LogInit(void);
 ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 
 /// @todo Take @c file as another arg, ignore it if @c BUGFIX.
-/// @todo Add another variant that takes a string for @c cond.
 #ifndef BUGFIX
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
+#define HSD_ASSERTMSG(line, cond, msg)                                        \
+    ((cond) ? ((void) 0) : __assert(__FILE__, line, msg))
 #else
 #define HSD_ASSERT(line, cond)                                                \
+    ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
+#define HSD_ASSERTMSG(line, cond, msg)                                        \
     ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
 #endif
 
