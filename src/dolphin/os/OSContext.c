@@ -15,7 +15,7 @@ asm void __OSLoadFPUContext(u32 _, register OSContext* fpuctx)
     clrlwi. r5, r5, 31
     beq done
 
-    lfd f0, fpuctx->fpscr
+    lfd f0, fpuctx->fpscr_pad
     mtfsf 0xff, f0
     mfspr r5, 0x398
     rlwinm. r5, r5, 3, 31, 31
@@ -140,7 +140,7 @@ asm void __OSSaveFPUContext(u32 unused1, u32 unused2,
     stfd f31, fpuctx->fprs[31]
 
     mffs f0
-    stfd f0, fpuctx->fpscr
+    stfd f0, fpuctx->fpscr_pad
 
     lfd f0, fpuctx->fprs[0]
 

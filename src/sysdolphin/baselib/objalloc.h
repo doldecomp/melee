@@ -51,6 +51,25 @@ static inline u32 HSD_ObjAllocGetPeak(HSD_ObjAllocData* data)
     return data->peak;
 }
 
+static inline void HSD_ObjAllocSetNumLimit(HSD_ObjAllocData* data,
+                                           u32 num_limit)
+{
+    HSD_ASSERT(251, data);
+    data->num_limit = num_limit;
+}
+
+static inline void HSD_ObjAllocEnableNumLimit(HSD_ObjAllocData* data)
+{
+    HSD_ASSERT(278, data);
+    data->num_limit_flag = 1;
+}
+
+static inline void HSD_ObjAllocDisableNumLimit(HSD_ObjAllocData* data)
+{
+    HSD_ASSERT(291, data);
+    data->num_limit_flag = 0;
+}
+
 void HSD_ObjSetHeap(u32 size, void* ptr);
 s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num);
 void* HSD_ObjAlloc(HSD_ObjAllocData* data);
