@@ -102,7 +102,7 @@
 /* 030A60 */ void Camera_80030A60(bool arg0);
 /* 030A78 */ bool Camera_80030A78(void);
 /* 030A8C */ void Camera_80030A8C(bool arg0);
-/* 030AA4 */ UNK_RET Camera_80030AA4(UNK_PARAMS);
+/* 030AA4 */ void Camera_80030AA4(int);
 /* 030AC4 */ UNK_RET Camera_80030AC4(UNK_PARAMS);
 /* 030AE0 */ void Camera_80030AE0(bool arg0);
 /* 030AF8 */ bool Camera_80030AF8(void);

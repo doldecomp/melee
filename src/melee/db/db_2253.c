@@ -1,10 +1,12 @@
 #include "db_2253.static.h"
 
+#include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "gm/gm_1A36.h"
+#include "gr/ground.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -923,7 +925,93 @@ void fn_80226E00(void)
     db_804D6B50 = 0;
 }
 
-/// #fn_80226E0C
+void fn_80226E0C(int arg0)
+{
+    if ((fn_8022558C(arg0) & 0x20) && (fn_802255A4(arg0) & 4)) {
+        db_804D6B50 += 1;
+        switch (db_804D6B50) {
+        default:
+            fn_802270C4(1);
+            Camera_80030B0C(0);
+            Camera_80030A60(0);
+            Camera_80030A8C(0);
+            fn_8022713C(0);
+            Camera_80030B38(0);
+            Camera_80030B64(0);
+            Camera_80030B90(0);
+            db_804D6B50 = 0;
+            break;
+        case 1:
+            fn_802270C4(0);
+            Camera_80030B0C(0);
+            Camera_80030A60(0);
+            Camera_80030A8C(0);
+            fn_8022713C(0);
+            Camera_80030B38(0);
+            Camera_80030B64(0);
+            Camera_80030B90(0);
+            break;
+        case 2:
+            fn_802270C4(1);
+            Camera_80030B0C(1);
+            Camera_80030A60(0);
+            Camera_80030A8C(1);
+            fn_8022713C(0);
+            Camera_80030B38(0);
+            Camera_80030B64(0);
+            Camera_80030B90(1);
+            break;
+        case 3:
+            fn_802270C4(0);
+            Camera_80030B0C(0);
+            Camera_80030A60(0);
+            Camera_80030A8C(1);
+            fn_8022713C(1);
+            Camera_80030B38(0);
+            Camera_80030B64(0);
+            Camera_80030B90(1);
+            break;
+        case 4:
+            fn_802270C4(0);
+            Camera_80030B0C(0);
+            Camera_80030A60(1);
+            Camera_80030A8C(1);
+            fn_8022713C(1);
+            Camera_80030B38(0);
+            Camera_80030B64(0);
+            Camera_80030B90(1);
+            break;
+        case 5:
+            fn_802270C4(0);
+            Camera_80030B0C(0);
+            Camera_80030A60(1);
+            Camera_80030A8C(1);
+            fn_8022713C(1);
+            Camera_80030B38(1);
+            Camera_80030B64(0);
+            Camera_80030B90(1);
+            break;
+        case 6:
+            fn_802270C4(0);
+            Camera_80030B0C(0);
+            Camera_80030A60(1);
+            Camera_80030A8C(1);
+            fn_8022713C(1);
+            Camera_80030B38(0);
+            Camera_80030B64(1);
+            Camera_80030B90(1);
+            break;
+        }
+    }
+    if ((fn_8022558C(arg0) & 0x400) && (fn_802255A4(arg0) & 4)) {
+        if (db_804D6B80 < 2 && db_804D6B80 >= 0) {
+            Ground_801C1FFC();
+            Camera_80030AA4(1);
+        } else {
+            Camera_80030AA4(0);
+        }
+    }
+}
 
 /// #fn_802270C4
 
