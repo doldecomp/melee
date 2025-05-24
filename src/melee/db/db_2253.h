@@ -79,7 +79,7 @@
 /* 2287D8 */ void fn_802287D8(int);
 /* 228820 */ UNK_RET fn_80228820(UNK_PARAMS);
 /* 22886C */ void db_8022886C(void);
-/* 22887C */ UNK_RET db_8022887C(UNK_PARAMS);
+/* 22887C */ void db_8022887C(void);
 /* 22892C */ UNK_RET db_8022892C(UNK_PARAMS);
 /* 2289F8 */ UNK_RET fn_802289F8(UNK_PARAMS);
 /* 228A64 */ void db_80228A64(void);

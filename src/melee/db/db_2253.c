@@ -1351,7 +1351,18 @@ void db_8022886C(void)
     db_804D6B90 = 0;
 }
 
-/// #db_8022887C
+void db_8022887C(void)
+{
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        if ((HSD_PadMasterStatus[i].button & HSD_PAD_Y) &&
+            (HSD_PadMasterStatus[i].trigger & HSD_PAD_DPADUP))
+        {
+            db_804D6B90 = 1;
+        }
+    }
+}
 
 /// #db_8022892C
 
