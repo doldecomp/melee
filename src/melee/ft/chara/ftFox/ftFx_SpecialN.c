@@ -80,7 +80,7 @@ bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj)
     return false;
 }
 
-// 0x800E5DE4 - shoutouts to Olifr� for figuring this one out!
+// 0x800E5DE4 - shoutouts to Olifre for figuring this one out!
 // https://decomp.me/scratch/aatYF // Get msid for Fox/Falco moves that require
 // the Blaster item
 s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
