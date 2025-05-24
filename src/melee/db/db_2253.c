@@ -28,17 +28,17 @@
 
 u32 db_80225B0C(void)
 {
-    return lbl_8049FAA0.x20_b0;
+    return db_8049FAA0.x20.b0;
 }
 
 u32 db_80225B20(void)
 {
-    return lbl_8049FAA0.x20_b1;
+    return db_8049FAA0.x20.b1;
 }
 
 u32 db_80225B34(void)
 {
-    return lbl_8049FAA0.x20_b2;
+    return db_8049FAA0.x20.b2;
 }
 
 /// #fn_80225B48
@@ -55,22 +55,22 @@ u32 db_80225B34(void)
 
 s32 db_80225D1C(void)
 {
-    return lbl_8049FAA0.unk_14;
+    return db_8049FAA0.x14;
 }
 
 void db_80225D2C(void)
 {
-    lbl_8049FAA0.unk_8 = 0;
+    db_8049FAA0.x8 = 0;
 }
 
 void db_80225D40(void)
 {
-    lbl_8049FAA0.unk_8 = 1;
+    db_8049FAA0.x8 = 1;
 }
 
 s32 db_80225D54(HSD_ObjAllocUnk4* arg0)
 {
-    return lbl_8049FAA0.unk_8;
+    return db_8049FAA0.x8;
 }
 
 /// #db_80225D64
@@ -109,7 +109,7 @@ s32 db_80225D54(HSD_ObjAllocUnk4* arg0)
 
 void fn_80226E00(void)
 {
-    lbl_804D6B50.x = 0;
+    db_804D6B50 = 0;
 }
 
 /// #fn_80226E0C
@@ -118,15 +118,11 @@ void fn_80226E00(void)
 
 /// #fn_8022713C
 
-extern s32 lbl_804D6B58;
-extern s8 lbl_804D6B5C;
-extern s8 lbl_804D6B5D;
-
 void fn_80227174(void)
 {
-    lbl_804D6B58 = 0;
-    lbl_804D6B5C = 0;
-    lbl_804D6B5D = 0;
+    db_804D6B58 = NULL;
+    db_804D6B5C = 0;
+    db_804D6B5D = 0;
 }
 
 /// #fn_80227188
@@ -171,7 +167,7 @@ void fn_80227904(HSD_GObj* camera, s8 port)
     } else {
         fn_80227B64(camera, var_f2, var_f3);
     }
-    lbl_804D6B5C = 0x3C;
+    db_804D6B5C = 0x3C;
 }
 /// #fn_802279E8
 
@@ -261,20 +257,17 @@ void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 
 void fn_802287C4(void)
 {
-    lbl_804D6B8C.b0 = false;
+    db_804D6B8C.b0 = false;
 }
 
 /// #fn_802287D8
 
 /// #fn_80228820
 
-extern s32 lbl_804D6B90;
-extern s32 lbl_804D6B94;
-
 void db_8022886C(void)
 {
-    lbl_804D6B94 = 0;
-    lbl_804D6B90 = 0;
+    db_804D6B94 = 0;
+    db_804D6B90 = 0;
 }
 
 /// #db_8022887C

@@ -93,7 +93,6 @@
 /* 2291A0 */ UNK_RET fn_802291A0(UNK_PARAMS);
 /* 229220 */ UNK_RET fn_80229220(UNK_PARAMS);
 /* 229240 */ UNK_RET fn_80229240(UNK_PARAMS);
-/* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
 /* 4D4A08 */ extern enum_t g_debugLevel;
 /* 4D6B30 */ extern u16 db_804D6B30;
 
