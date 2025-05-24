@@ -23,6 +23,7 @@
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
 #include <baselib/controller.h>
+#include <MSL/math.h>
 #include <MSL/trigf.h>
 
 void db_80225374(void)
@@ -1051,7 +1052,82 @@ void fn_80227174(void)
     db_804D6B5D = 0;
 }
 
-/// #fn_80227188
+void fn_80227188(void)
+{
+    Vec3 camera;
+    Vec3 interest;
+    HSD_CObj* cobj;
+    HSD_GObj* gobj;
+    float fov, ang;
+    int eye_x, eye_y, eye_z;
+    int int_x, int_y, int_z;
+    int stack;
+
+    gobj = Camera_80030A50();
+    if (db_804D6B58 != NULL) {
+        if ((gobj != NULL) && (db_804D6B5D != 0)) {
+            if (db_804D6B5C > 1) {
+                cobj = gobj->hsd_obj;
+                HSD_CObjGetEyePosition(cobj, &camera);
+                HSD_CObjGetInterest(cobj, &interest);
+                fov = HSD_CObjGetFov(cobj);
+                ang = rad_to_deg *
+                      atan2f(interest.y - camera.y, -(interest.z - camera.z));
+                DevText_Erase(db_804D6B58);
+                DevText_SetCursorXY(db_804D6B58, 0, 0);
+                if (ABS(camera.z) > 99999.0F) {
+                    eye_z = -1;
+                } else {
+                    eye_z = camera.z;
+                }
+                if (ABS(camera.y) > 99999.0F) {
+                    eye_y = -1;
+                } else {
+                    eye_y = camera.y;
+                }
+                if (ABS(camera.x) > 99999.0F) {
+                    eye_x = -1;
+                } else {
+                    eye_x = camera.x;
+                }
+                DevText_Printf(db_804D6B58, "EYE %d,%d,%d", eye_x, eye_y,
+                               eye_z);
+                DevText_SetCursorXY(db_804D6B58, 0, 1);
+                if (ABS(interest.z) > 99999.0F) {
+                    int_z = -1;
+                } else {
+                    int_z = interest.z;
+                }
+                if (ABS(interest.y) > 99999.0F) {
+                    int_y = -1;
+                } else {
+                    int_y = interest.y;
+                }
+                if (ABS(interest.x) > 99999.0F) {
+                    int_x = -1;
+                } else {
+                    int_x = interest.x;
+                }
+                DevText_Printf(db_804D6B58, "INT %d,%d,%d", int_x, int_y,
+                               int_z);
+                DevText_SetCursorXY(db_804D6B58, 0, 2);
+                DevText_Printf(db_804D6B58, "FOV %d  ANG %d", (int) fov,
+                               (int) ang);
+                DevText_ShowBackground(db_804D6B58);
+                DevText_ShowText(db_804D6B58);
+            } else if (db_804D6B5C == 1) {
+                DevText_HideBackground(db_804D6B58);
+                DevText_HideText(db_804D6B58);
+            } else {
+                return;
+            }
+            db_804D6B5C--;
+        } else {
+            DevText_HideBackground(db_804D6B58);
+            DevText_HideText(db_804D6B58);
+        }
+    }
+}
 
 /// #fn_80227484
 
