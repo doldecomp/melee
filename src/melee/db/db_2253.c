@@ -22,6 +22,7 @@
 #include <common_structs.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/card/CARDMount.h>
+#include <dolphin/db/db.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
@@ -1452,7 +1453,26 @@ void fn_80228B28(u16 error, OSContext* ctx, ...)
     va_end(va);
 }
 
-/// #db_80228C4C
+void db_80228C4C(void)
+{
+    u16 x;
+    if (DBIsDebuggerPresent() == 0) {
+        void* mem = OSAllocFromArenaLo(0x2000, 4);
+        hsd_80393DA0(mem, 0x2000);
+        HSD_SetPanicCallback((PanicCallback) fn_80228AB4);
+        for (x = 0; x < 16; x++) {
+            switch (x) {
+            case 4:
+            case 7:
+            case 8:
+            case 9:
+                break;
+            default:
+                OSSetErrorHandler(x, fn_80228B28);
+            }
+        }
+    }
+}
 
 /// #fn_80228CF4
 
