@@ -18,7 +18,7 @@
 /* 2256CC */ void db_802256CC(void);
 /* 225754 */ void db_80225754(void);
 /* 225A00 */ void fn_80225A00(void);
-/* 225A54 */ UNK_RET fn_80225A54(UNK_PARAMS);
+/* 225A54 */ void fn_80225A54(int arg0);
 /* 225B0C */ u32 db_80225B0C(void);
 /* 225B20 */ u32 db_80225B20(void);
 /* 225B34 */ u32 db_80225B34(void);

@@ -1,6 +1,8 @@
 #include "db_2253.static.h"
 
 #include "ft/ftlib.h"
+#include "it/item.h"
+#include "it/types.h"
 #include "lb/lbarchive.h"
 
 #include <common_structs.h>
@@ -260,7 +262,30 @@ void fn_80225A00(void)
     db_8049FAA0.x20.b1 = 0;
 }
 
-/// #fn_80225A54
+#pragma push
+#pragma dont_inline on
+void fn_80225A54(int arg0)
+{
+    if (g_debugLevel == 4) {
+        if (fn_8022558C(arg0) & 0x200) {
+            if (fn_802255A4(arg0) & 2) {
+                Item_804A0C64.x4 = Item_804A0C64.x0;
+                Item_804A0C64.xC = Item_804A0C64.x8;
+                Item_804A0C64.x14 = Item_804A0C64.x10;
+                Item_804A0C64.x20 = Item_804A0C64.x1C;
+                Item_804A0C64.x28 = Item_804A0C64.x24;
+                Item_804A0C64.x30 = Item_804A0C64.x2C;
+                Item_804A0C64.x38 = Item_804A0C64.x34;
+                Item_804A0C64.x44 = Item_804A0C64.x40;
+                Item_804A0C64.x4C = Item_804A0C64.x48;
+                Item_804A0C64.x54 = Item_804A0C64.x50;
+                Item_804A0C64.x5C = Item_804A0C64.x58;
+                Item_804A0C64.x64 = Item_804A0C64.x60;
+            }
+        }
+    }
+}
+#pragma pop
 
 u32 db_80225B0C(void)
 {
