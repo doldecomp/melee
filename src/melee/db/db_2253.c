@@ -785,7 +785,65 @@ u8 fn_8022697C(Fighter_GObj* owner)
     }
 }
 
-/// #fn_802269C0
+void fn_802269C0(void)
+{
+    Fighter_GObj* gobj;
+    Fighter* ft;
+    DevText* text;
+    s32 print_newline;
+    int stack[4];
+
+    if (db_804D6B48.b9) {
+        text = db_8049FE18.x0;
+        print_newline = 0;
+        DevText_Erase(text);
+        DevText_SetCursorXY(text, 0, 0);
+        for (gobj = HSD_GObj_Entities->fighters; gobj != NULL;
+             gobj = gobj->next)
+        {
+            ft = gobj->user_data;
+            if (print_newline == 0) {
+                print_newline = 1;
+            } else {
+                DevText_Printf(text, "\n");
+            }
+            if (ft->motion_id < 0x155) {
+                DevText_Printf(text, "%d %s", ft->player_id,
+                               motionstate_names[ft->motion_id]);
+            } else {
+                DevText_Printf(text, "%d %d", ft->player_id, ft->motion_id);
+            }
+            DevText_SetCursorX(text, 0x17);
+            if (ft->anim_id != -1) {
+                if (ft->anim_id < 0x127) {
+                    DevText_Printf(text, "%s", submotion_names[ft->anim_id]);
+                } else {
+                    DevText_Printf(text, "%d", ft->anim_id);
+                }
+            }
+            DevText_SetCursorX(text, 0x2C);
+            DevText_Printf(text, "%03.2f", ft->cur_anim_frame);
+            if (ft->x221C_u16_y) {
+                DevText_SetCursorX(text, 0x34);
+                if (ft->x221C_u16_y & 1) {
+                    DevText_Printf(text, "L");
+                } else {
+                    DevText_Printf(text, " ");
+                }
+                if (ft->x221C_u16_y & 2) {
+                    DevText_Printf(text, "R");
+                } else {
+                    DevText_Printf(text, " ");
+                }
+                if (ft->x221C_u16_y & 4) {
+                    DevText_Printf(text, "T");
+                } else {
+                    DevText_Printf(text, " ");
+                }
+            }
+        }
+    }
+}
 
 /// #fn_80226BD4
 
