@@ -17,8 +17,15 @@ import sys
 from pathlib import Path
 from typing import Iterator, List, Optional
 
-from tools.project import (Library, Object, ProgressCategory, ProjectConfig,
-                           calculate_progress, generate_build, is_windows)
+from tools.project import (
+    Library,
+    Object,
+    ProgressCategory,
+    ProjectConfig,
+    calculate_progress,
+    generate_build,
+    is_windows,
+)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -135,6 +142,12 @@ parser.add_argument(
     action="store_true",
     help="builds equivalent (but non-matching) or modded objects",
 )
+parser.add_argument(
+    "--no-progress",
+    dest="progress",
+    action="store_false",
+    help="disable progress calculation",
+)
 args = parser.parse_args()
 
 config = ProjectConfig()
@@ -150,6 +163,7 @@ config.compilers_path = args.compilers
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
+config.progress = args.progress
 if not is_windows():
     config.wrapper = args.wrapper
 # Don't build asm unless we're --non-matching
@@ -159,10 +173,10 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20250520"
-config.dtk_tag = "v1.0.0"
-config.objdiff_tag = "v2.2.0"
-config.sjiswrap_tag = "v1.1.1"
-config.wibo_tag = "0.6.11"
+config.dtk_tag = "v1.5.1"
+config.objdiff_tag = "v3.0.0-beta.8"
+config.sjiswrap_tag = "v1.2.1"
+config.wibo_tag = "0.6.16"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -172,7 +186,8 @@ config.asflags = [
     "--strip-local-absolute",
     "-I include",
     "-I src",
-    f"--defsym version={version_num}",
+    f"-I build/{config.version}/include",
+    f"--defsym BUILD_VERSION={version_num}",
 ]
 config.ldflags = [
     "-fp hardware",
@@ -195,6 +210,10 @@ config.progress_code_fancy_item = "Trophies"
 config.progress_data_fancy_frac = 51
 config.progress_data_fancy_item = "Event Matches"
 
+# Optional numeric ID for decomp.me preset
+# Can be overridden in libraries or objects
+config.scratch_preset_id = 63
+
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [
@@ -215,7 +234,9 @@ cflags_base = [
     '-pragma "warn_notinlined off"',
     "-RTTI off",
     "-str reuse",
-    f"-DVERSION={version_num}",
+    f"-i build/{config.version}/include",
+    f"-DBUILD_VERSION={version_num}",
+    f"-DVERSION_{config.version}",
 ]
 
 # Debug flags
@@ -411,6 +432,7 @@ def RuntimeLib(lib_name: str, objects: Objects) -> Library:
         category="runtime",
     )
 
+
 def Libc(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
@@ -419,6 +441,7 @@ def Libc(lib_name: str, objects: Objects) -> Library:
         fix_epilogue=False,
         category="runtime",
     )
+
 
 def TRKLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
@@ -436,6 +459,12 @@ NonMatching = False  # Object does not match and should not be linked
 Equivalent = (
     config.non_matching
 )  # Object should be linked when configured with --non-matching
+
+
+# Object is only matching for specific versions
+def MatchingFor(*versions):
+    return config.version in versions
+
 
 config.warn_missing_config = True
 config.warn_missing_source = True
@@ -1535,25 +1564,47 @@ config.libs = [
     ),
 ]
 
+
+# Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
+# This is called once per module, with the module ID and the current link order.
+#
+# For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
+# "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
+def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+    # Don't modify the link order for matching builds
+    if not config.non_matching:
+        return objects
+    if module_id == 0:  # DOL
+        return objects + ["dummy.c"]
+    return objects
+
+
+# Uncomment to enable the link order callback.
+# config.link_order_callback = link_order_callback
+
+
 # Extra categories for progress tracking
-config.progress_categories = (
-    [
-        ProgressCategory("game", "Game Code"),
-        ProgressCategory("hsd", "HSD Code"),
-        ProgressCategory("sdk", "Dolphin SDK Code"),
-        ProgressCategory("runtime", "Gekko Runtime Code"),
-    ]
-    if args.verbose
-    else []
-)
-config.progress_all = False
+config.progress_categories = [
+    ProgressCategory("game", "Game Code"),
+    ProgressCategory("hsd", "HSD Code"),
+    ProgressCategory("sdk", "Dolphin SDK Code"),
+    ProgressCategory("runtime", "Gekko Runtime Code"),
+]
+config.print_progress_categories = args.verbose
 config.progress_each_module = args.verbose
+
+# Optional extra arguments to `objdiff-cli report generate`
+config.progress_report_args = [
+    # Marks relocations as mismatching if the target value is different
+    # Default is "functionRelocDiffs=none", which is most lenient
+    # "--config functionRelocDiffs=data_value",
+]
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
     generate_build(config)
 elif args.mode == "progress":
-    # Print progress and write progress.json
+    # Print progress information
     calculate_progress(config)
 else:
     sys.exit("Unknown mode: " + args.mode)

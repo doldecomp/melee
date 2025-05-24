@@ -3,19 +3,36 @@
 ctx.c
 ctx_includes.h
 *.s.c
-
-# decomp-toolkit
-.ninja_*
-.mypy_cache
-*.exe
-build
-build.ninja
 objdiff.json
+compile_commands.json
+
+# decompctx output
+ctx.*
+*.ctx
+
+# Build files
+build/
+.ninja_*
+build.ninja
+
+# IDE folders
+.idea/
+.vs/
+
+# Caches
+__pycache__
+.mypy_cache
+.cache/
+
+# Original files
 orig/*/*
 !orig/*/sys
 orig/*/sys/*
 !orig/*/sys/.gitkeep
-/*.txt
+*.dol
+*.rel
+*.map
+*.MAP
 
 # Python
 .env
@@ -26,7 +43,7 @@ ENV/
 env.bak/
 venv.bak/
 
-# .DS_Store
+# macOS
 .DS_Store
 
 # Compiler binaries

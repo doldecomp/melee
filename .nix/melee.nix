@@ -1,7 +1,6 @@
 { lib
 , stdenv
 , decomp-toolkit
-, devkitppc
 , fetchurl
 , mwcc
 , ninja
@@ -10,8 +9,8 @@
 }:
 let
   sjiswrap = fetchurl {
-    url = "https://github.com/encounter/sjiswrap/releases/download/v1.1.1/sjiswrap-windows-x86.exe";
-    hash = "sha256-J6PF1PJj5OuW5WGc/Noi9F0zzNEhEEx/9qN+FbP0J80=";
+    url = "https://github.com/encounter/sjiswrap/releases/download/v1.2.1/sjiswrap-windows-x86.exe";
+    hash = "sha256-6GMMjcxhTSKzFmS6MyQvEkO7m+T91ATtbDXYt9pI8hk=";
   };
 in
 stdenv.mkDerivation {
@@ -40,7 +39,6 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [
     decomp-toolkit
-    devkitppc
     ninja
     python3
     wibo

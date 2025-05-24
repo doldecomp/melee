@@ -6,13 +6,13 @@
 
 stdenv.mkDerivation rec {
   pname = "wibo";
-  version = "0.6.12";
+  version = "0.6.16";
 
   src = fetchFromGitHub {
     owner = "decompals";
     repo = "wibo";
     rev = version;
-    hash = "sha256-Kv3jbyWouz/bmteaoJyKkFC5YWuTEEaY6OvmJbZ0Xfg=";
+    hash = "sha256-QnqvLcGMGdX7uCwFo2MWNZETZrZ9NUJbR7PujN+7Ghc=";
   };
 
   nativeBuildInputs = [

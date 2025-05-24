@@ -24,17 +24,10 @@ import textwrap
 import os
 from io import StringIO
 from pathlib import Path
-from typing import Dict, List, Match, Optional, Tuple, Union
+from typing import Dict, Iterable, List, Match, Optional, Tuple, Union
 
 NinjaPath = Union[str, Path]
-NinjaPaths = Union[
-    List[str],
-    List[Path],
-    List[NinjaPath],
-    List[Optional[str]],
-    List[Optional[Path]],
-    List[Optional[NinjaPath]],
-]
+NinjaPaths = Iterable[Optional[NinjaPath]]
 NinjaPathOrPaths = Union[NinjaPath, NinjaPaths]
 
 
@@ -118,8 +111,8 @@ class Writer(object):
         pool: Optional[str] = None,
         dyndep: Optional[NinjaPath] = None,
     ) -> List[str]:
-        outputs = serialize_paths(outputs)
-        out_outputs = [escape_path(x) for x in outputs]
+        str_outputs = serialize_paths(outputs)
+        out_outputs = [escape_path(x) for x in str_outputs]
         all_inputs = [escape_path(x) for x in serialize_paths(inputs)]
 
         if implicit:
@@ -154,7 +147,7 @@ class Writer(object):
             for key, val in iterator:
                 self.variable(key, val, indent=1)
 
-        return outputs
+        return str_outputs
 
     def include(self, path: str) -> None:
         self._line("include %s" % path)
@@ -225,9 +218,11 @@ def serialize_path(input: Optional[NinjaPath]) -> str:
 
 
 def serialize_paths(input: Optional[NinjaPathOrPaths]) -> List[str]:
-    if isinstance(input, list):
+    if isinstance(input, str) or isinstance(input, Path):
+        return [serialize_path(input)] if input else []
+    elif input is not None:
         return [serialize_path(path) for path in input if path]
-    return [serialize_path(input)] if input else []
+    return []
 
 
 def escape(string: str) -> str:

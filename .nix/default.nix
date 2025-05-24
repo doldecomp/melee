@@ -6,7 +6,6 @@ let
     overlays = [
       (self: super: {
         decomp-toolkit = super.callPackage ./decomp-toolkit.nix {};
-        devkitppc = super.callPackage ./devkitppc.nix {};
         mwcc = super.callPackage ./mwcc.nix {};
         wibo = super.pkgsi686Linux.callPackage ./wibo.nix {};
       })

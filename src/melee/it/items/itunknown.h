@@ -1,5 +1,5 @@
 /// @file
-/// Unown, the Pokémon.
+/// Unown, the Pokemon.
 #ifndef GALE01_2CE710
 #define GALE01_2CE710
 

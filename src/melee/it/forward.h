@@ -119,7 +119,7 @@ typedef enum ItemKind {
     It_Kind_RabbitC,  // Bunny Hood (RabbitC)
     It_Kind_MetalB,   // Metal Box
     It_Kind_Spycloak, // Cloaking Device (Spycloak)
-    It_Kind_M_Ball,   // Poké Ball (M Ball)
+    It_Kind_M_Ball,   // Poke Ball (M Ball)
 
     // ITEM-RELATED
 
@@ -256,9 +256,9 @@ typedef enum ItemKind {
     It_Kind_Unk4,                   // (unique)
     It_Kind_Coin,                   // Coin (?)
 
-    // POKéMON
+    // POKEMON
 
-    Pokemon_Random,      // Used for Random Pokémon value
+    Pokemon_Random,      // Used for Random Pokemon value
     Pokemon_Tosakinto,   // Goldeen (Tosakinto)
     Pokemon_Chicorita,   // Chikorita (Chicorita)
     Pokemon_Kabigon,     // Snorlax (Kabigon)
@@ -290,7 +290,7 @@ typedef enum ItemKind {
     Pokemon_Maril,       // Marill (Maril)
     Pokemon_Fushigibana, // Venusaur (Fushigibana)
 
-    // POKéMON-RELATED
+    // POKEMON-RELATED
     Pokemon_Chicorita_Leaf,   // Chikorita's Leaf
     Pokemon_Kamex_HydroPump,  // Blastoise's Water
     Pokemon_Matadogas_Gas1,   // Weezing's Gas

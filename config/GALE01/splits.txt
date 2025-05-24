@@ -3435,9 +3435,6 @@ melee/vi/vi1202.c:
 Runtime/__va_arg.c:
 	.text       start:0x80322620 end:0x80322714
 
-Runtime/__mem.c:
-	.init       start:0x80003100 end:0x80003244
-
 Runtime/Gecko_ExceptionPPC.c:
 	.text       start:0x8032275C end:0x803227CC
 	.bss        start:0x804A2F38 end:0x804A2F48
@@ -3575,6 +3572,9 @@ MetroTRK/notify.c:
 
 MetroTRK/flush_cache.c:
 	.text       start:0x80328F50 end:0x80328F88
+
+Runtime/__mem.c:
+	.init       start:0x80003100 end:0x80003244
 
 MetroTRK/mem_TRK.c:
 	.init       start:0x80003244 end:0x80003298
