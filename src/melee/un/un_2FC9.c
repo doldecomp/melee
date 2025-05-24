@@ -440,6 +440,8 @@ void DevText_InitPool(void)
     devtext_poolhead = devtext_pool;
 }
 
+void fn_803020F8(void) {}
+
 void DevText_Remove(DevText** ptext)
 {
     DevText* text = *ptext;

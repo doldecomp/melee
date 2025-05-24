@@ -17524,6 +17524,7 @@ DevText_StrLen = .text:0x80301E44; // type:function size:0x34 scope:global
 DevText_NumToStr = .text:0x80301E78; // type:function size:0x13C scope:global
 DevText_GetGObj = .text:0x80301FB4; // type:function size:0x8 scope:global
 DevText_InitPool = .text:0x80301FBC; // type:function size:0x13C scope:global
+fn_803020F8 = .text:0x803020F8; // type:function size:0x4
 DevText_Remove = .text:0x803020FC; // type:function size:0x68 scope:global
 DevText_SetupCObj = .text:0x80302164; // type:function size:0x158 scope:global
 DevText_Draw = .text:0x803022BC; // type:function size:0x34C scope:global
