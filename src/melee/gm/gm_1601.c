@@ -925,7 +925,10 @@ UNK_T gm_8016B774(void)
 
 /// #gm_8016F1B8
 
-/// #fn_8016F1F0
+short fn_8016F1F0(int idx)
+{
+    return lbl_803D5A4C[idx].x0;
+}
 
 /// #gm_8016F208
 
@@ -1248,7 +1251,10 @@ int fn_80174274(void)
 
 /// #fn_80179F04
 
-/// #fn_80179F6C
+void fn_80179F6C(int idx, int value)
+{
+    lbl_8046E38C[idx] = value;
+}
 
 /// #fn_80179F84
 
@@ -1710,7 +1716,10 @@ void fn_80187714(void)
 
 /// #gm_8018841C
 
-/// #gm_80188454
+int gm_80188454(int idx)
+{
+    return lbl_80473700[idx + 2];
+}
 
 /// #fn_8018846C
 

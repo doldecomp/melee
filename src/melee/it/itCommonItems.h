@@ -291,8 +291,10 @@ typedef struct itTincle_ItemVars {
 } itTincle_ItemVars;
 
 typedef struct {
-    u8 padding[0xE10 - 0xDD4];
-    int xE10;
+    /* ip+DD4 */ char pad_0[0x3C];
+    /* ip+E10 */ int xE10;
+    /* ip+E14 */ char pad_40[0xC];
+    /* ip+E24 */ Vec3 vel;
 } itGShell_ItemVars;
 
 typedef struct itPokemonAttributes {

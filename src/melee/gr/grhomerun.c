@@ -147,7 +147,10 @@ void grHomeRun_8021E4FC(void) {}
 
 /// #grHomeRun_8021EA30
 
-/// #grHomeRun_8021EAF8
+void grHomeRun_8021EAF8(void)
+{
+    stage_info.flags |= (1 << 7);
+}
 
 // Copies the main camera into a target camera
 void fn_8021EB10(HSD_GObj* target_cam_gobj)

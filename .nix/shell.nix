@@ -6,7 +6,6 @@ let
     overlays = [
       (self: super: {
         decomp-toolkit = super.callPackage ./decomp-toolkit.nix {};
-        devkitppc = super.callPackage ./devkitppc.nix {};
         mwcc = super.callPackage ./mwcc.nix {};
         wibo = super.pkgsi686Linux.callPackage ./wibo.nix {};
       })
@@ -18,13 +17,9 @@ in
 
 melee.overrideAttrs (oa: {
   nativeBuildInputs = oa.nativeBuildInputs ++ [
-    (pkgs.clang-tools.override {
-      llvmPackages = pkgs.llvmPackages_15;
-    })
+    pkgs.clang-tools
     pkgs.clang.cc.python
   ];
-
-  DEVKITPPC = pkgs.devkitppc;
 
   WINE = "${pkgs.wibo}/bin/wibo";
 })

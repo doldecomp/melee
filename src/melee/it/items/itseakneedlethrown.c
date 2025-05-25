@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "itseakneedlethrown.h"
 
 #include "it/inlines.h"
@@ -7,9 +9,9 @@
 
 /// #it_802AFEA8
 
-void it_802AFEF8(Item_GObj* arg0)
+void it_802AFEF8(Item_GObj* gobj)
 {
-    GET_ITEM(arg0)->owner = NULL;
+    GET_ITEM(gobj)->owner = NULL;
 }
 
 /// #it_802AFF08
@@ -32,7 +34,11 @@ void it_802B0544(void) {}
 
 void it_802B057C(void) {}
 
-/// #it_802B0580
+void it_802B0580(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 /// #it_802B0598
 
