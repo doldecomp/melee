@@ -2,7 +2,9 @@
 #include <placeholder.h>
 
 #include <dolphin/mtx/forward.h>
+#include <MSL/math.h>
 
+#include "ft/ft_0819.h"
 #include "ft/ft_081B.h"
 
 #include "inlines.h"
