@@ -9,7 +9,7 @@
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-/* 0D14E4 */ void ftCo_800D14E4(ftCo_GObj* gobj);
+/* 0D14E4 */ void Fighter_SuperMushroomApply(ftCo_GObj* gobj);
 /* 0D15D0 */ UNK_RET ftCo_800D15D0(UNK_PARAMS);
 /* 0D170C */ UNK_RET ftCo_800D170C(UNK_PARAMS);
 /* 0D1868 */ void ftCo_KinokoGiantStart_Anim(ftCo_GObj* gobj);
@@ -17,7 +17,7 @@
 /* 0D18CC */ UNK_RET ftCo_800D18CC(UNK_PARAMS);
 /* 0D1A28 */ void ftCo_KinokoGiantStartAir_Anim(ftCo_GObj* gobj);
 /* 0D1A64 */ void ftCo_KinokoGiantStartAir_Coll(ftCo_GObj* gobj);
-/* 0D1A8C */ void ftCo_800D1A8C(ftCo_GObj* gobj);
+/* 0D1A8C */ void Fighter_SuperMushroomEnd(ftCo_GObj* gobj);
 /* 0D1B04 */ UNK_RET ftCo_800D1B04(UNK_PARAMS);
 /* 0D1BA0 */ UNK_RET ftCo_800D1BA0(UNK_PARAMS);
 /* 0D1CAC */ void ftCo_KinokoGiantEnd_Anim(ftCo_GObj* gobj);
@@ -25,7 +25,7 @@
 /* 0D1D10 */ UNK_RET ftCo_800D1D10(UNK_PARAMS);
 /* 0D1E1C */ void ftCo_KinokoGiantEndAir_Anim(ftCo_GObj* gobj);
 /* 0D1E58 */ void ftCo_KinokoGiantEndAir_Coll(ftCo_GObj* gobj);
-/* 0D1E80 */ void ftCo_800D1E80(ftCo_GObj* gobj);
+/* 0D1E80 */ void Fighter_PoisonMushroomApply(ftCo_GObj* gobj);
 /* 0D1F6C */ UNK_RET ftCo_800D1F6C(UNK_PARAMS);
 /* 0D1FFC */ UNK_RET ftCo_800D1FFC(UNK_PARAMS);
 /* 0D2158 */ void ftCo_KinokoSmallStart_Anim(ftCo_GObj* gobj);
@@ -33,7 +33,7 @@
 /* 0D21BC */ UNK_RET ftCo_800D21BC(UNK_PARAMS);
 /* 0D2318 */ void ftCo_KinokoSmallStartAir_Anim(ftCo_GObj* gobj);
 /* 0D2354 */ void ftCo_KinokoSmallStartAir_Coll(ftCo_GObj* gobj);
-/* 0D237C */ void ftCo_800D237C(ftCo_GObj* gobj);
+/* 0D237C */ void Fighter_PoisonMushroomEnd(ftCo_GObj* gobj);
 /* 0D23F4 */ UNK_RET ftCo_800D23F4(UNK_PARAMS);
 /* 0D2490 */ UNK_RET ftCo_800D2490(UNK_PARAMS);
 /* 0D259C */ void ftCo_KinokoSmallEnd_Anim(ftCo_GObj* gobj);

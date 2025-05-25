@@ -757,9 +757,9 @@ f32 gm_8016B248(void)
 
 /// #gm_8016B258
 
-/// #gm_8016B274
+/// #gm_SetGameSpeed
 
-/// #gm_8016B2C8
+/// #gm_ResetGameSpeed
 
 void gm_8016B328(void)
 {

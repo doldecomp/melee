@@ -389,7 +389,7 @@ void gm_801A4510(void)
         }
     }
     if (VIGetDTVStatus() != NULL &&
-        (db_804D6B30 & 0x200 || OSGetProgressiveMode() == 1))
+        (db_gameLaunchButtonState & 0x200 || OSGetProgressiveMode() == 1))
     {
         gm_80479D30.nums.curr_major = 0x27;
     } else {

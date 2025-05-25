@@ -708,7 +708,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 
     item_data->xDAA_byte = 1;
 
-    if (db_80225B20()) {
+    if (db_ShowItemPickupRange()) {
         item_data->xDAA_flag.b4 = true;
     }
 

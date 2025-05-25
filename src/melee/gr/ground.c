@@ -1044,7 +1044,7 @@ void* Ground_801C1E84(void)
     return stage_info.x12C;
 }
 
-// void Camera_80030740(u8, u8, u8);     /* extern */
+// void Camera_SetBackgroundColor(u8, u8, u8);     /* extern */
 // UnkStruct3* grDatFiles_801C6330(int); /* extern */
 // void Ground_801C1E2C(HSD_GObj*, int); /* extern */
 // extern s8 HSD_GObj_804D7848;
@@ -1094,21 +1094,21 @@ void Ground_801C1E94(void)
         }
         temp_r29_2->start *= phi_f1;
         temp_r29_2->end *= phi_f1;
-        Camera_80030740(temp_r29_2->color.r, temp_r29_2->color.g,
-                        temp_r29_2->color.b);
+        Camera_SetBackgroundColor(temp_r29_2->color.r, temp_r29_2->color.g,
+                                  temp_r29_2->color.b);
         stageinfo->x12C = temp_r30_2;
     } else {
-        Camera_80030740(0, 0, 0);
+        Camera_SetBackgroundColor(0, 0, 0);
     }
 }
 
-void Ground_801C1FFC(void)
+void Ground_ApplyStageBackgroundColor(void)
 {
     HSD_Fog* fog = GET_FOG(stage_info.x12C);
     if (stage_info.x12C != NULL && fog != NULL) {
-        Camera_80030740(fog->color.r, fog->color.g, fog->color.b);
+        Camera_SetBackgroundColor(fog->color.r, fog->color.g, fog->color.b);
     } else {
-        Camera_80030740(0, 0, 0);
+        Camera_SetBackgroundColor(0, 0, 0);
     }
 }
 
