@@ -46,7 +46,7 @@
 /* 2E5900 */ bool it_802E5900(void);
 /* 2E5908 */ UNK_RET it_802E5908(UNK_PARAMS);
 /* 2E5924 */ UNK_RET it_802E5924(UNK_PARAMS);
-/* 2E5944 */ UNK_RET it_802E5944(UNK_PARAMS);
+/* 2E5944 */ void it_802E5944(Item_GObj*);
 /* 2E595C */ UNK_RET it_802E595C(UNK_PARAMS);
 /* 2E5AA4 */ void it_802E5AA4(Item_GObj*, Item_GObj*);
 /* 3F8B48 */ extern ItemStateTable it_803F8B48[];

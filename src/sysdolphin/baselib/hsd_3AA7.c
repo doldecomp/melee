@@ -27,7 +27,13 @@ void fn_803AC334(void)
 
 /// #hsd_803AC340
 
-/// #hsd_803AC3E0
+void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* arg0, int arg1, int arg2,
+                  int arg3, int arg4)
+{
+    arg0->x28[arg1] = arg3;
+    arg0->x4C[arg1] = arg2;
+    arg0->x70[arg1] = arg4;
+}
 
 /// #fn_803AC3F8
 
