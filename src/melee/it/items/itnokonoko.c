@@ -344,7 +344,7 @@ int it_802DD1DC(Item_GObj* gobj)
     if (ip->ground_or_air == GA_Air) {
         if (it_8026DB40(gobj) & 1) {
             it_802762B0(ip);
-            ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+            itResetVelocity(ip);
         }
     } else {
         it_8026D82C(gobj);
@@ -365,7 +365,7 @@ void it_802DD264(Item_GObj* gobj)
 void static inline it_802DD290_inline(Item_GObj* gobj, s32 val)
 {
     Item* ip = gobj->user_data;
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     ip->xDD4_itemVar.nokonoko.x20 = 0;
     ip->xDD4_itemVar.nokonoko.x28 = 0x26;
     it_802DD4A8(gobj, 0x3, val);

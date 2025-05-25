@@ -245,7 +245,7 @@ void Ground_801BFFB0(void)
 {
     u32 _[2];
     grDatFiles_801C6288();
-    stage_info.x84 = 0;
+    stage_info.flags = 0;
     stage_info.x6D0 = -1;
     stage_info.x6D2 = 0;
     stage_info.x6D4 = 0;
@@ -978,27 +978,27 @@ static void Ground_801C1D38(HSD_GObj* gobj)
 
 void Ground_801C1D6C(u32 arg0)
 {
-    stage_info.x84 |= arg0;
+    stage_info.flags |= arg0;
 }
 
 u32 Ground_801C1D84(void)
 {
-    return stage_info.x84 & 0x330;
+    return stage_info.flags & 0x330;
 }
 
 u32 Ground_801C1D98(void)
 {
-    return stage_info.x84 & 0x20;
+    return stage_info.flags & 0x20;
 }
 
 u32 Ground_801C1DAC(void)
 {
-    return stage_info.x84 & 0x100;
+    return stage_info.flags & 0x100;
 }
 
 u32 Ground_801C1DC0(void)
 {
-    return stage_info.x84 & 0x80;
+    return stage_info.flags & 0x80;
 }
 
 s16 Ground_801C1DD4(void)
@@ -2008,10 +2008,10 @@ s32 Ground_801C3D44(s32 arg0, f32 arg8, f32 arg9)
     stage_info.x710 = 0.5f * arg9;
     stage_info.x90 = arg0;
     if (stage_info.x714 != -1) {
-        stage_info.x84 |= 0x10;
+        stage_info.flags |= 0x10;
         stage_info.x6D0 = stage_info.x714;
     } else {
-        stage_info.x84 &= 0xFFFFFFEF;
+        stage_info.flags &= 0xFFFFFFEF;
     }
     return stage_info.x714;
 }
@@ -2023,9 +2023,9 @@ s32 Ground_801C3DB4(s32 arg0, f32 arg8, f32 arg9)
     stage_info.x71C = 0.5f * arg9;
     stage_info.x94 = arg0;
     if (stage_info.x720 != -1) {
-        stage_info.x84 |= 0x40;
+        stage_info.flags |= 0x40;
     } else {
-        stage_info.x84 &= 0xFFFFFFBF;
+        stage_info.flags &= 0xFFFFFFBF;
     }
     return stage_info.x720;
 }
@@ -2155,7 +2155,7 @@ void Ground_801C4338(void)
 {
     stage_info.x6D4--;
     if (stage_info.x6D4 == 0) {
-        stage_info.x84 |= 0x20;
+        stage_info.flags |= 0x20;
     }
 }
 

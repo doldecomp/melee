@@ -26,7 +26,11 @@ Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
 
 /// #it_802C4208
 
-/// #it_802C4364
+void it_802C4364(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 /// #it_802C437C
 
