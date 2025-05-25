@@ -79,7 +79,7 @@ struct ftCommonData {
     /* +60 */ UNK_T x60;
     /* +64 */ UNK_T x64;
     /* +68 */ float x68;
-    /* +6C */ UNK_T x6C;
+    /* +6C */ float x6C;
     /* +70 */ float x70_someLStickYMax;
     /* +6C */ int x74;
     /* +78 */ float x78;

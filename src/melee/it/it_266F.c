@@ -1,5 +1,7 @@
 #include <platform.h>
 
+#include "it/forward.h"
+
 #include "it/it_266F.h"
 
 #include "inlines.h"
@@ -248,16 +250,17 @@ ItemKind it_8026C75C(HSD_ObjAllocUnk6* arg_struct)
 // .L_8026C88C
 void fn_8026C88C(HSD_GObj* gobj)
 {
+    HSD_ObjAllocUnk4* it_804A0E30_ = &it_804A0E30;
+    s32* it_804A0E30_x0 = (s32*) &it_804A0E30_->x0;
     Item_GObj* spawn_gobj;
     SpawnItem spawn;
     bool chk;
-    f32* temp_r29;
-    // PAD_STACK(18);
+    s32* temp_r29;
 
-    if (db_80225D54(&it_804A0E30) != 0U) {
-        it_804A0E30.x0--;
-        if ((s32) it_804A0E30.x0 == 0) {
-            spawn.kind = it_8026C75C(&it_804A0E30.x4);
+    if (db_AreItemSpawnsEnabled() != 0U) {
+        it_804A0E30_->x0--;
+        if ((s32) it_804A0E30_->x0 == 0) {
+            spawn.kind = it_8026C75C(&it_804A0E30_->x4);
             if ((s32) spawn.kind != -1) {
                 if (it_8026CB3C(&spawn.prev_pos)) {
                     spawn.pos = spawn.prev_pos;
@@ -280,12 +283,10 @@ void fn_8026C88C(HSD_GObj* gobj)
                 }
             }
             // @todo: Make a FLT_RAND(min, max) define or inline
-            temp_r29 = ((f32*) it_804D6D28) + (gm_8016AE80() * 8) + 0xFC;
-            it_804A0E30.x0 =
-                (s32) (((temp_r29[4] - temp_r29[0]) * HSD_Randf()) +
-                       (f32) temp_r29[0]);
-            it_804A0E30.x0 = (s32) ((f32) it_804A0E30.x0 *
-                                    Ground_801C2AE8(Stage_80225194()));
+            temp_r29 = ((s32*) it_804D6D28) + (gm_8016AE80() * 2) + 0x3F;
+            *it_804A0E30_x0 =
+                (temp_r29[1] - temp_r29[0]) * HSD_Randf() + temp_r29[0];
+            *it_804A0E30_x0 *= Ground_801C2AE8(Stage_80225194());
         }
     }
 }

@@ -6,6 +6,8 @@
 
 #include "baselib/forward.h"
 
+#include "baselib/objalloc.h"
+
 #include <dolphin/mtx/types.h>
 
 #define PSAPPSRT_UNK_B09 (1 << 9)
@@ -45,5 +47,7 @@ u16 psRemoveGeneratorSRT(UNK_T);
 u16 psRemoveParticleAppSRT(UNK_T);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 u16 psAttachParticleAppSRT(UNK_T, UNK_T);
+
+extern HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
 
 #endif

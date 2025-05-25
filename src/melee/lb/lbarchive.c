@@ -62,7 +62,7 @@ HSD_Archive* lbArchive_LoadArchive(char* filename)
     return archive;
 }
 
-void* lbArchive_80016C64(char* filename, void** file, ...)
+void* lbArchive_LoadSymbols(char* filename, void** file, ...)
 {
     char* symbols;
     HSD_Archive* archive;

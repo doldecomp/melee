@@ -58,7 +58,7 @@
 /* 1C1E00 */ void Ground_801C1E00(s32);
 /* 1C1E18 */ s32 Ground_801C1E18(void);
 /* 1C1E84 */ void* Ground_801C1E84(void);
-/* 1C1FFC */ void Ground_801C1FFC(void);
+/* 1C1FFC */ void Ground_ApplyStageBackgroundColor(void);
 /* 1C205C */ void Ground_801C205C(GXColor* color);
 /* 1C2090 */ bool Ground_801C2090(GXColor* color);
 /* 1C20D0 */ f32 Ground_801C20D0(void);

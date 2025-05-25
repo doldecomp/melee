@@ -93,7 +93,7 @@
 /* 0304E0 */ UNK_RET Camera_800304E0(UNK_PARAMS);
 /* 030688 */ UNK_RET Camera_80030688(UNK_PARAMS);
 /* 030730 */ void Camera_80030730(f32 arg8);
-/* 030740 */ void Camera_80030740(u8 r, u8 g, u8 b);
+/* 030740 */ void Camera_SetBackgroundColor(u8 r, u8 g, u8 b);
 /* 030758 */ UNK_RET Camera_80030758(UNK_PARAMS);
 /* 030788 */ void Camera_80030788(Vec3*);
 /* 0307AC */ UNK_RET Camera_800307AC(UNK_PARAMS);
@@ -102,7 +102,7 @@
 /* 030A60 */ void Camera_80030A60(bool arg0);
 /* 030A78 */ bool Camera_80030A78(void);
 /* 030A8C */ void Camera_80030A8C(bool arg0);
-/* 030AA4 */ void Camera_80030AA4(int);
+/* 030AA4 */ void Camera_SetStageVisible(int);
 /* 030AC4 */ UNK_RET Camera_80030AC4(UNK_PARAMS);
 /* 030AE0 */ void Camera_80030AE0(bool arg0);
 /* 030AF8 */ bool Camera_80030AF8(void);
@@ -137,5 +137,6 @@
 /* 0311EC */ UNK_RET Camera_800311EC(UNK_PARAMS);
 /* 031328 */ UNK_RET Camera_80031328(UNK_PARAMS);
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
+/* 453004 */ extern UNK_T cm_80453004;
 
 #endif

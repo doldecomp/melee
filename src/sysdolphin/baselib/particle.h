@@ -131,6 +131,8 @@
 /* 39EFAC */ UnkGeneratorStruct* hsd_8039EFAC(s32, s32, s32, HSD_JObj*);
 /* 39F05C */ UnkGeneratorStruct* hsd_8039F05C(s8, s8, s32);
 /* 39F6CC */ void hsd_8039F6CC(s32, s32, s32, HSD_JObj*);
+/* 4D0F60 */ extern HSD_ObjAllocData hsd_804D0F60;
+/* 4D0F90 */ extern HSD_ObjAllocData hsd_804D0F90;
 /* 4D78D0 */ extern u32 hsd_804D78D0;
 /* 4D78D4 */ extern u32 hsd_804D78D4;
 /* 4D78D8 */ extern u16 hsd_804D78D8;
