@@ -1,10 +1,9 @@
 #include <platform.h>
 
-#include "cm/camera.h"
+#include "grhomerun.h"
 
-#include <baselib/cobj.h>
-#include <baselib/fog.h>
-#include <baselib/gobj.h>
+#include "cm/camera.h"
+#include "gr/ground.h"
 
 void grHomeRun_8021C750(void) {}
 
