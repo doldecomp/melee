@@ -3,6 +3,10 @@
 
 #include <placeholder.h>
 
+#include <baselib/cobj.h>
+#include <baselib/fog.h>
+#include <baselib/gobj.h>
+
 /* 21C750 */ UNK_RET grHomeRun_8021C750(UNK_PARAMS);
 /* 21C754 */ UNK_RET grHomeRun_8021C754(UNK_PARAMS);
 /* 21C7FC */ UNK_RET grHomeRun_8021C7FC(UNK_PARAMS);
@@ -57,11 +61,11 @@
 /* 21E994 */ UNK_RET fn_8021E994(UNK_PARAMS);
 /* 21EA30 */ UNK_RET grHomeRun_8021EA30(UNK_PARAMS);
 /* 21EAF8 */ UNK_RET grHomeRun_8021EAF8(UNK_PARAMS);
-/* 21EB10 */ UNK_RET fn_8021EB10(UNK_PARAMS);
+/* 21EB10 */ void fn_8021EB10(HSD_GObj* target_cam_gobj);
 /* 21EC58 */ UNK_RET grHomeRun_8021EC58(UNK_PARAMS);
 /* 21ED74 */ UNK_RET grHomeRun_8021ED74(UNK_PARAMS);
 /* 21EDD4 */ UNK_RET grHomeRun_8021EDD4(UNK_PARAMS);
-/* 21EEB4 */ bool grHomeRun_8021EEB4(UNK_PARAMS);
+/* 21EEB4 */ bool grHomeRun_8021EEB4(void);
 /* 21EEBC */ UNK_RET grHomeRun_8021EEBC(UNK_PARAMS);
 /* 21EF10 */ UNK_RET grHomeRun_8021EF10(UNK_PARAMS);
 

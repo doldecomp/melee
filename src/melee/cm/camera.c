@@ -147,8 +147,6 @@ u32 Camera_80029124(Vec3* arg0, s32 distance)
     return result;
 }
 
-/// #Camera_8002928C
-
 void Camera_800293E0(void)
 {
     CameraBox* curr;
@@ -820,15 +818,42 @@ void Camera_8002F8F4(void)
 
 /// #Camera_8003006C
 
-/// #Camera_800300F0
+void Camera_800300F0(void)
+{
+    cm_80452C68.mode = cm_80453004.last_mode;
+}
 
-/// #Camera_8003010C
+bool Camera_8003010C(void)
+{
+    if ((int) cm_80452C68.mode == 5) {
+        return true;
+    }
+    return false;
+}
 
-/// #Camera_80030130
+bool Camera_80030130(void)
+{
+    if ((int) cm_80452C68.mode == 6) {
+        return true;
+    }
+    return false;
+}
 
-/// #Camera_80030154
+bool Camera_80030154(void)
+{
+    if ((int) cm_80452C68.mode == 7) {
+        return true;
+    }
+    return false;
+}
 
-/// #Camera_80030178
+bool Camera_80030178(void)
+{
+    if ((int) cm_80452C68.mode == 8) {
+        return true;
+    }
+    return false;
+}
 
 /// #Camera_8003019C
 

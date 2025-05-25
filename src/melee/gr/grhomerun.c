@@ -2,6 +2,7 @@
 
 #include "grhomerun.h"
 
+#include "cm/camera.h"
 #include "gr/ground.h"
 
 void grHomeRun_8021C750(void) {}
@@ -151,7 +152,46 @@ void grHomeRun_8021EAF8(void)
     stage_info.flags |= (1 << 7);
 }
 
-/// #fn_8021EB10
+// Copies the main camera into a target camera
+void fn_8021EB10(HSD_GObj* target_cam_gobj)
+{
+    HSD_GObj* main_cam_gobj;
+    HSD_CObj* main_cam_cobj;
+    HSD_CObj* target_cam_cobj;
+
+    f32 fov;
+    f32 aspect;
+    HSD_RectF32 viewport;
+    Scissor scissor;
+    Vec3 position;
+
+    target_cam_cobj = GET_COBJ(target_cam_gobj);
+    main_cam_gobj = Camera_80030A50();
+    if (main_cam_gobj) {
+        if ((main_cam_cobj = GET_COBJ(main_cam_gobj))) {
+            HSD_CObjSetFlags(target_cam_cobj, HSD_CObjGetFlags(main_cam_cobj));
+            HSD_CObjGetViewportf(main_cam_cobj, &viewport);
+            HSD_CObjSetViewportf(target_cam_cobj, &viewport);
+            HSD_CObjGetScissor(main_cam_cobj, &scissor);
+            HSD_CObjSetScissor(target_cam_cobj, &scissor);
+            target_cam_cobj->u = main_cam_cobj->u;
+            HSD_CObjSetNear(target_cam_cobj, HSD_CObjGetNear(main_cam_cobj));
+            HSD_CObjSetFar(target_cam_cobj, HSD_CObjGetFar(main_cam_cobj));
+
+            HSD_CObjGetPerspective(main_cam_cobj, &fov, &aspect);
+            HSD_CObjSetPerspective(target_cam_cobj, fov, aspect);
+            HSD_CObjGetEyePosition(main_cam_cobj, &position);
+            HSD_CObjSetEyePosition(target_cam_cobj, &position);
+            HSD_CObjGetInterest(main_cam_cobj, &position);
+            HSD_CObjSetInterest(target_cam_cobj, &position);
+        }
+    }
+    if (HSD_CObjSetCurrent(target_cam_cobj) != 0) {
+        HSD_FogSet(NULL);
+        HSD_GObj_80390ED0(target_cam_gobj, 7U);
+        HSD_CObjEndCurrent();
+    }
+}
 
 /// #grHomeRun_8021EC58
 

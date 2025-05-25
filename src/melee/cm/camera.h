@@ -84,10 +84,10 @@
 /* 02FEEC */ void Camera_8002FEEC(int);
 /* 03006C */ UNK_RET Camera_8003006C(UNK_PARAMS);
 /* 0300F0 */ UNK_RET Camera_800300F0(UNK_PARAMS);
-/* 03010C */ UNK_RET Camera_8003010C(UNK_PARAMS);
-/* 030130 */ UNK_RET Camera_80030130(UNK_PARAMS);
-/* 030154 */ int Camera_80030154(void);
-/* 030178 */ int Camera_80030178(void);
+/* 03010C */ bool Camera_8003010C(void);
+/* 030130 */ bool Camera_80030130(void);
+/* 030154 */ bool Camera_80030154(void);
+/* 030178 */ bool Camera_80030178(void);
 /* 03019C */ UNK_RET Camera_8003019C(UNK_PARAMS);
 /* 0301D0 */ UNK_RET fn_800301D0(UNK_PARAMS);
 /* 0304E0 */ UNK_RET Camera_800304E0(UNK_PARAMS);
@@ -137,6 +137,6 @@
 /* 0311EC */ UNK_RET Camera_800311EC(UNK_PARAMS);
 /* 031328 */ UNK_RET Camera_80031328(UNK_PARAMS);
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
-/* 453004 */ extern UNK_T cm_80453004;
+/* 453004 */ extern CameraDebugMode cm_80453004;
 
 #endif
