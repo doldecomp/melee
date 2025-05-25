@@ -60,7 +60,7 @@
                                             int buttons_pressed, f32 cstick_x,
                                             f32 cstick_y);
 /* 2277E8 */ static void fn_802277E8(HSD_GObj*, int);
-/* 227904 */ static void fn_80227904(HSD_GObj* camera, s8 port);
+/* 227904 */ static void fn_80227904(HSD_GObj* camera, u8 port);
 /* 2279E8 */ static void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos,
                                      Vec3* camera_interest, float cstick_x,
                                      float cstick_y);

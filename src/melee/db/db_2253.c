@@ -28,6 +28,7 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/card/CARDMount.h>
 #include <dolphin/db/db.h>
+#include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/vi/vi.h>
@@ -1244,72 +1245,112 @@ static void fn_CheckCameraInfo(int player, int buttons_down,
 
 /// #fn_802277E8
 
-static void fn_80227904(HSD_GObj* camera, s8 port)
+// Debug_UpdateCamera
+static void fn_80227904(HSD_GObj* camera, u8 port)
 {
-    f32 var_f1;
-    f32 var_f2;
-    f32 var_f2_2;
-    f32 var_f3;
-    u32 temp_r4;
+    f32 cstick_x;
+    f32 cstick_y;
+    u32 buttons;
 
-    var_f2 = HSD_PadMasterStatus[port].nml_subStickX;
-    if (var_f2 < 0.0f) {
-        var_f1 = -var_f2;
-    } else {
-        var_f1 = var_f2;
+    cstick_x = HSD_PadMasterStatus[port].nml_subStickX;
+    // if (cstick_x < 0.0f) {
+    //     var_f1 = -cstick_x;
+    // } else {
+    //     var_f1 = cstick_x;
+    // }
+    // if (var_f1 < 0.2f) {
+    //     cstick_x = 0.0f;
+    // }
+    if (fabs_inline(cstick_x) < 0.2f) {
+        cstick_x = 0.0f;
     }
-    if (var_f1 < 0.2f) {
-        var_f2 = 0.0f;
-    }
-    var_f3 = HSD_PadMasterStatus[port].nml_subStickY;
-    if (var_f3 < 0.0f) {
-        var_f2_2 = -var_f3;
-    } else {
-        var_f2_2 = var_f3;
-    }
-    if (var_f2_2 < 0.2f) {
-        var_f3 = 0.0f;
-    }
-    temp_r4 = HSD_PadMasterStatus[port].button;
 
-    if (temp_r4 & 1) {
-        fn_80227CAC(camera, var_f3);
-    } else if (temp_r4 & 2) {
-        fn_80227FE0(camera, -var_f2, -var_f3);
+    cstick_y = HSD_PadMasterStatus[port].nml_subStickY;
+    // if (cstick_y < 0.0f) {
+    //     var_f2_2 = -cstick_y;
+    // } else {
+    //     var_f2_2 = cstick_y;
+    // }
+    // if (var_f2_2 < 0.2f) {
+    //     cstick_y = 0.0f;
+    // }
+    if (fabs_inline(cstick_y) < 0.2f) {
+        cstick_x = 0.0f;
+    }
+
+    buttons = HSD_PadMasterStatus[port].button;
+
+    if (buttons & 1) {
+        fn_80227CAC(camera, cstick_y);
+    } else if (buttons & 2) {
+        fn_80227FE0(camera, -cstick_x, -cstick_y);
     } else {
-        fn_80227B64(camera, var_f2, var_f3);
+        fn_80227B64(camera, cstick_x, cstick_y);
     }
     db_CameraInfoDisplayTimer = 0x3C;
 }
 
-/// #fn_802279E8
+// Debug_OrbitAroundInterest
+void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos, Vec3* camera_interest,
+                 f32 cstick_x, f32 cstick_y)
+{
+    HSD_CObj* cobj;
+    Mtx44 mtx;
+    Vec3 forward_vec;
+    Vec3 axis;
+    Vec3 up_vec;
+    f32 eye_dist;
+    f32 pitch;
+    f32 new_pitch;
 
+    cobj = GET_COBJ(camera);
+    if ((cstick_x != 0.0f) || (cstick_y != 0.0f)) {
+        up_vec = db_803B84D8;
+        HSD_CObjGetEyeVector(cobj, &forward_vec);
+        pitch = 57.29578f * acosf(PSVECDotProduct(&forward_vec, &up_vec));
+        new_pitch = 2.0f * cstick_y;
+        if ((pitch + new_pitch) > 179.0f) {
+            new_pitch = 179.0f - pitch;
+        }
+        if ((pitch + new_pitch) < 1.0f) {
+            new_pitch = 1.0f - pitch;
+        }
+        PSVECCrossProduct(&up_vec, &forward_vec, &axis);
+        PSVECNormalize(&axis, &axis);
+        PSMTXRotAxisRad(mtx, &axis, 0.017453292f * new_pitch);
+        PSMTXMUltiVec(mtx, &forward_vec, &forward_vec);
+        eye_dist = HSD_CObjGetEyeDistance(cobj);
+        PSMTXRotAxisRad(mtx, &up_vec, 0.017453292f * (2.0f * cstick_x));
+        PSMTXMUltiVec(mtx, &forward_vec, &forward_vec);
+        PSVECScale(&forward_vec, &forward_vec, eye_dist);
+        PSVECSubtract(camera_interest, &forward_vec, camera_pos);
+    }
+}
+
+// Debug_UpdateFreecamRotation
 static void fn_80227B64(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 {
     if ((cstick_x != 0.0f) || (cstick_y != 0.0f)) {
-        fn_802279E8(camera, (Vec3*) &cm_80453004 + 0x6,
-                    (Vec3*) &cm_80453004 + 0x5, cstick_x, cstick_y);
+        fn_802279E8(camera, &cm_80453004.mode8_eye_pos,
+                    &cm_80453004.mode8_int_pos, cstick_x, cstick_y);
     }
 }
 
 /// #fn_80227BA8
 
+// Debug_UpdateFreecamDolly
 static void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
 {
-    Vec3 sp14;
-    UNK_T sp10;
-    s32 temp_cr0_eq;
-    void* temp_r31;
+    Vec3 forward;
+    HSD_CObj* cobj;
 
-    temp_cr0_eq = cstick_y == 0.0f;
-    if ((temp_cr0_eq != 0) && (temp_cr0_eq != 0)) {
-        temp_r31 = camera->hsd_obj;
-        HSD_CObjGetEyeVector((HSD_CObj*) temp_r31, &sp14);
-        PSVECScale(&sp14, &sp14,
-                   HSD_CObjGetEyeDistance((HSD_CObj*) temp_r31) *
-                       -((0.05f * cstick_y) - 1.0f));
-        PSVECSubtract((Vec3*) &cm_80453004 + 0x5, &sp14,
-                      (Vec3*) &cm_80453004 + 0x6);
+    if ((0.0f != cstick_y) && (0.0f != cstick_y)) {
+        cobj = GET_COBJ(camera);
+        HSD_CObjGetEyeVector(cobj, &forward);
+        PSVECScale(&forward, &forward,
+                   HSD_CObjGetEyeDistance(cobj) * (1.0f - 0.05f * cstick_y));
+        PSVECSubtract(&cm_80453004.mode8_int_pos, &forward,
+                      &cm_80453004.mode8_eye_pos);
     }
 }
 
@@ -1317,42 +1358,42 @@ static void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
 
 /// #fn_80227EB0
 
+// Debug_UpdateFreecamPosition
 static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 {
-    Vec3 sp24;
-    Vec3 sp18;
-    UNK_T sp20;
+    Vec3 up_vec;
+    Vec3 left_vec;
+    // fake temp variables?
+    // probably an inline for getting the scale factor
     Vec3* temp_r3;
     Vec3* temp_r3_2;
     Vec3* temp_r3_3;
     Vec3* temp_r3_4;
-    f32 temp_f31;
-    f32 temp_f31_2;
-    void* temp_r30;
+    f32 eye_dist;
+    f32 scale_factor;
+    HSD_CObj* cobj;
 
     if ((cstick_x != 0.0f) || (cstick_y != 0.0f)) {
-        temp_r30 = camera->hsd_obj;
-        temp_f31 = HSD_CObjGetEyeDistance((HSD_CObj*) temp_r30);
-        temp_f31_2 =
-            0.03f *
-            (2.0f *
-             (temp_f31 * tanf(0.017453292f *
-                              HSD_CObjGetFov((HSD_CObj*) temp_r30) * 0.5f)));
+        cobj = GET_COBJ(camera);
+        eye_dist = HSD_CObjGetEyeDistance(cobj);
+        scale_factor =
+            0.03f * (2.0f * (eye_dist * tanf(0.017453292f *
+                                             HSD_CObjGetFov(cobj) * 0.5f)));
         if (cstick_x != 0.0f) {
-            HSD_CObjGetLeftVector((HSD_CObj*) temp_r30, &sp18);
-            PSVECScale(&sp18, &sp18, temp_f31_2 * cstick_x);
-            temp_r3 = (Vec3*) &cm_80453004 + 0x5;
-            PSVECAdd(temp_r3, &sp18, temp_r3);
-            temp_r3_2 = (Vec3*) &cm_80453004 + 0x6;
-            PSVECAdd(temp_r3_2, &sp18, temp_r3_2);
+            HSD_CObjGetLeftVector(cobj, &left_vec);
+            PSVECScale(&left_vec, &left_vec, scale_factor * cstick_x);
+            temp_r3 = &cm_80453004.mode8_int_pos;
+            PSVECAdd(temp_r3, &left_vec, temp_r3);
+            temp_r3_2 = &cm_80453004.mode8_eye_pos;
+            PSVECAdd(temp_r3_2, &left_vec, temp_r3_2);
         }
         if (cstick_y != 0.0f) {
-            HSD_CObjGetUpVector((HSD_CObj*) temp_r30, &sp24);
-            PSVECScale(&sp24, &sp24, -temp_f31_2 * cstick_y);
-            temp_r3_3 = (Vec3*) &cm_80453004 + 0x5;
-            PSVECAdd(temp_r3_3, &sp24, temp_r3_3);
-            temp_r3_4 = (Vec3*) &cm_80453004 + 0x6;
-            PSVECAdd(temp_r3_4, &sp24, temp_r3_4);
+            HSD_CObjGetUpVector(cobj, &up_vec);
+            PSVECScale(&up_vec, &up_vec, -scale_factor * cstick_y);
+            temp_r3_3 = &cm_80453004.mode8_int_pos;
+            PSVECAdd(&cm_80453004.mode8_int_pos, &up_vec, temp_r3_3);
+            temp_r3_4 = &cm_80453004.mode8_eye_pos;
+            PSVECAdd(temp_r3_4, &up_vec, temp_r3_4);
         }
     }
 }
