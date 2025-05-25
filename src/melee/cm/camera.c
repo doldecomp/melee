@@ -282,7 +282,7 @@ void Camera_80029BC4(CameraBounds* bounds, CameraMovement* movement)
     float cam_dist = (bounds->y_max - bounds->y_min) /
                      tanf(cm_804D7E60 * movement->target_fov);
     float x_dist = (bounds->x_max - bounds->x_min) /
-                   (cm_803BCB64.perspective.aspect *
+                   (cm_803BCB64.aspect *
                     tanf(cm_804D7E60 * movement->target_fov));
     if (x_dist > cam_dist) {
         cam_dist = x_dist;
@@ -441,8 +441,8 @@ void Camera_8002A768(CameraMovement* movement, int arg1)
     top_left.z = neg_one;
     lbVector_Rotate((Vec3*) &top_left.x, 1, temp_f30);
     lbVector_Rotate((Vec3*) &top_left.x, 2, temp_f30);
-    temp_r27 = &cm_803BCB64.perspective.aspect;
-    top_left.x *= cm_803BCB64.perspective.aspect;
+    temp_r27 = &cm_803BCB64.aspect;
+    top_left.x *= cm_803BCB64.aspect;
     lbVector_Normalize((Vec3*) &top_left.x);
     lbVector_Rotate((Vec3*) &top_left.x, 1, temp_f28);
     lbVector_Rotate((Vec3*) &top_left.x, 2, temp_f0);

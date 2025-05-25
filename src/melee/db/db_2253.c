@@ -1,5 +1,6 @@
 #include "db_2253.static.h"
 
+// #include "cm/camera.static.h"
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
