@@ -65,10 +65,10 @@ void ftMh_FingerBeamLoop_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftMh_MS_362_80152F80(gobj);
-        it_802F046C(fp->mv.mh.unk0.x34);
-        it_802F046C(fp->mv.mh.unk0.x38);
-        it_802F046C(fp->mv.mh.unk0.x3C);
-        it_802F046C(fp->mv.mh.unk0.x40);
+        it_802F046C(fp->mv.mh.fingerbeam.x34);
+        it_802F046C(fp->mv.mh.fingerbeam.x38);
+        it_802F046C(fp->mv.mh.fingerbeam.x3C);
+        it_802F046C(fp->mv.mh.fingerbeam.x40);
         fp->mv.mh.unk0.x34 = 0;
         fp->mv.mh.unk0.x38 = 0;
         fp->mv.mh.unk0.x3C = 0;
@@ -102,16 +102,16 @@ void ftMh_MS_362_80152E28(HSD_GObj* gobj)
     {
         Vec3 vec;
         lb_8000B1CC(fp->parts[FtPart_RLegJA].joint, 0, &vec);
-        fp->mv.mh.unk0.x34 =
+        fp->mv.mh.fingerbeam.x34 =
             it_802F0340(gobj, &vec, &vec, FtPart_RLegJA, 125, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_BustN].joint, 0, &vec);
-        fp->mv.mh.unk0.x38 =
+        fp->mv.mh.fingerbeam.x38 =
             it_802F0340(gobj, &vec, &vec, FtPart_BustN, 125, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_LHandN].joint, 0, &vec);
-        fp->mv.mh.unk0.x3C =
+        fp->mv.mh.fingerbeam.x3C =
             it_802F0340(gobj, &vec, &vec, FtPart_LHandN, 125, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, 0, &vec);
-        fp->mv.mh.unk0.x40 =
+        fp->mv.mh.fingerbeam.x40 =
             it_802F0340(gobj, &vec, &vec, FtPart_L3rdNa, 125, fp->facing_dir);
         fp->mv.mh.unk0.x28 = lbAudioAx_800237A8(320004, 127, 64);
         fp->mv.mh.unk0.x2C = lbAudioAx_800237A8(320005, 127, 64);
