@@ -17,9 +17,7 @@ in
 
 melee.overrideAttrs (oa: {
   nativeBuildInputs = oa.nativeBuildInputs ++ [
-    (pkgs.clang-tools.override {
-      llvmPackages = pkgs.llvmPackages_15;
-    })
+    pkgs.clang-tools
     pkgs.clang.cc.python
   ];
 
