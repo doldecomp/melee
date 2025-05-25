@@ -174,7 +174,7 @@ if not config.non_matching:
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20250520"
 config.dtk_tag = "v1.5.1"
-config.objdiff_tag = "v3.0.0-beta.8"
+config.objdiff_tag = "v2.7.1"
 config.sjiswrap_tag = "v1.2.1"
 config.wibo_tag = "0.6.16"
 
