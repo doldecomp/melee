@@ -1,5 +1,6 @@
 #include "itmewtwoshadowball.h"
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 
 /// #it_802C4D10
@@ -47,7 +48,11 @@ void it_802C5DCC(void) {}
 
 /// #it_802C5F7C
 
-/// #it_802C6094
+void it_802C6094(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 bool it_802C60AC(void)
 {

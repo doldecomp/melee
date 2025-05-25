@@ -956,7 +956,7 @@ bool it_8026DC24(Item_GObj* gobj)
     }
     if (ip->xDCD_flag.b4 || (attr->x58 == 0.0f)) {
     block_18a8:
-        ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+        itResetVelocity(ip);
         return true;
     }
     return false;

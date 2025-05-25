@@ -1,5 +1,9 @@
 #include <platform.h>
 
+#include "grhomerun.h"
+
+#include "gr/ground.h"
+
 void grHomeRun_8021C750(void) {}
 
 /// #grHomeRun_8021C754
@@ -142,7 +146,10 @@ void grHomeRun_8021E4FC(void) {}
 
 /// #grHomeRun_8021EA30
 
-/// #grHomeRun_8021EAF8
+void grHomeRun_8021EAF8(void)
+{
+    stage_info.flags |= (1 << 7);
+}
 
 /// #fn_8021EB10
 

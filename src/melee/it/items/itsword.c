@@ -278,7 +278,7 @@ void it_80285338(Item_GObj* gobj)
 static inline void inlineA0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     ip->xD50_landNum = 0;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

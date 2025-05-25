@@ -3,7 +3,11 @@
 
 #include "it/forward.h"
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/types.h"
+
+#include <baselib/gobj.h>
 
 /* 29A5F8 */ static bool it_8029A5F8(void);
 
@@ -23,7 +27,11 @@
 
 /// #it_8029A5C0
 
-/// #it_8029A5E0
+void it_8029A5E0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 bool it_8029A5F8(void)
 {

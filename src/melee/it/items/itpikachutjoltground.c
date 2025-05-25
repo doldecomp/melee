@@ -2,6 +2,8 @@
 
 #include "it/inlines.h"
 
+/* 2B37F0 */ static void it_802B37F0(Item_GObj*);
+
 /// #it_802B3368
 
 /// #it_802B338C
@@ -21,7 +23,11 @@ void it_802B3544(Item_GObj* gobj)
 
 /// #it_802B3790
 
-/// #it_802B37F0
+void it_802B37F0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 /// #it_802B3808
 

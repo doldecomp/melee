@@ -56,7 +56,7 @@ struct StageInfo {
     StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
 
-    u32 x84; // 0x84
+    u32 flags; // 0x84
 
     InternalStageId internal_stage_id; // 0x88
 
@@ -352,6 +352,10 @@ struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
+struct grLast_GroundVars {
+    /* +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
 struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
@@ -394,6 +398,7 @@ struct Ground {
         struct grKongo_GroundVars kongo;
         struct grKongo_GroundVars2 kongo2;
         struct grKongo_GroundVars3 kongo3;
+        struct grLast_GroundVars last;
         struct grOnett_GroundVars onett;
         struct grStadium_GroundVars stadium;
         struct GroundVars_unk unk;

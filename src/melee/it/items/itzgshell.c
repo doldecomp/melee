@@ -1,4 +1,10 @@
+#include "it/forward.h"
+
 #include "itzgshell.h"
+
+#include "it/inlines.h"
+
+/* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
 
 /// #it_802DDB38
 
@@ -119,7 +125,13 @@ bool it_802DEF78(Item_GObj* arg0)
 
 /// #it_802DFF14
 
-/// #it_802DFFA0
+void it_802DFFA0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.zgshell.vel.x = 0.0f;
+    ip->xDD4_itemVar.zgshell.vel.y = 0.0f;
+    ip->xDD4_itemVar.zgshell.vel.z = 0.0F;
+}
 
 /// #it_802DFFB8
 
