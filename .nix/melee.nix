@@ -3,6 +3,7 @@
 , decomp-toolkit
 , fetchurl
 , mwcc
+, objdiff
 , ninja
 , python3
 , wibo
@@ -48,6 +49,7 @@ stdenv.mkDerivation {
     runHook preConfigure
     python3 ./configure.py --wrapper ${wibo}/bin/wibo \
       --dtk ${decomp-toolkit}/bin/dtk \
+      --objdiff ${objdiff}/bin/objdiff-cli \
       --sjiswrap ${sjiswrap} \
       --compilers ${mwcc}
     runHook postConfigure

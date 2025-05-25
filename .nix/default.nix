@@ -7,6 +7,7 @@ let
       (self: super: {
         decomp-toolkit = super.callPackage ./decomp-toolkit.nix {};
         mwcc = super.callPackage ./mwcc.nix {};
+        objdiff = super.callPackage ./objdiff.nix {};
         wibo = super.pkgsi686Linux.callPackage ./wibo.nix {};
       })
     ];
