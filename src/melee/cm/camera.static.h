@@ -3,6 +3,7 @@
 
 #include "camera.h" // IWYU pragma: export
 
+/* 452C68 */ static Camera cm_80452C68;
 /* 3B73B8 */ static Vec3 cm_803B73B8;
 /* 3B73C4 */ static Vec3 cm_803B73C4;
 /* 3BCB64 */ static HSD_CObjDesc cm_803BCB64;
@@ -16,7 +17,6 @@
     0.004f, 0.2f,    0.025f,  0.2f,  0.003f, 0.2f,   0.025f, 0.2f,  0.02f,
     1.0f,   0.14f,   1200.0f, -0.2f, 1.2f,   0.0f,
 };
-/* 452C68 */ static Camera cm_80452C68;
 /* 4D6458 */ static CameraBox* cm_804D6458;
 /* 4D6460 */ static CameraBox* cm_804D6460;
 /* 4D6468 */ static CameraBox* cm_804D6468;
