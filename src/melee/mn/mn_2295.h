@@ -75,7 +75,7 @@ struct mn_80231634_t {
 /* 22EA08 */ void mn_8022EA08(char*, u32);
 /* 22EA78 */ UNK_RET mn_8022EA78(UNK_PARAMS);
 /* 22EAE0 */ UNK_RET mn_8022EAE0(UNK_PARAMS);
-/* 22EB04 */ UNK_RET mn_8022EB04(UNK_PARAMS);
+/* 22EB04 */ void mn_8022EB04(void* user_data);
 /* 22EB24 */ s32 mn_8022EB24(s32, s32);
 /* 22EB78 */ s32 mn_8022EB78(s32);
 /* 22EBDC */ UNK_RET mn_8022EBDC(UNK_PARAMS);
