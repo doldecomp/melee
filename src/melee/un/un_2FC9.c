@@ -2,7 +2,12 @@
 
 #include "un_2FC9.static.h"
 
+#include "baselib/jobj.h"
+#include "gm/gm_1601.h"
 #include "lb/lb_00B0.h"
+#include "mn/mn_2295.h"
+#include "mn/mnname.h"
+#include "pl/player.h"
 #include "un/types.h"
 #include "un/un_2FC9.h"
 
@@ -14,8 +19,11 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/memory.h>
 #include <baselib/particle.h>
+#include <baselib/sislib.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
@@ -29,7 +37,65 @@
 
 /// #fn_802FCC44
 
-/// #un_802FCF38
+static inline bool inlineA0(int idx)
+{
+    if (Player_GetPlayerSlotType(idx) != 0 ||
+        Player_GetNametagSlotID(idx) == 120)
+    {
+        return false;
+    }
+    return true;
+}
+
+static inline float inlineA1(float var_f31)
+{
+    if (var_f31 >= 0x10) {
+        return 28.0f;
+    } else {
+        return (var_f31 / 4) + 20;
+    }
+}
+
+void un_802FCF38(int idx)
+{
+    HSD_GObj* gobj = GObj_Create(14, 15, 0);
+    s32 temp_r30 = idx * 4;
+    M2C_FIELD((&un_804A1ED0 + temp_r30), HSD_GObj**, 0x10) = gobj;
+    {
+        HSD_JObj* jobj = HSD_JObjLoadJoint(un_804A1ED0.joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, fn_802FCAA4, 9, 0);
+        HSD_JObjSetScaleX(jobj, 10.0f);
+        HSD_JObjSetScaleY(jobj, 10.0f);
+        HSD_JObjSetScaleZ(jobj, 10.0f);
+        HSD_JObjAddAnimAll(jobj, un_804A1ED0.animjoint,
+                           un_804A1ED0.matanim_joint,
+                           un_804A1ED0.shapeanim_joint);
+        {
+            s8 temp_r25 = Player_GetPlayerSlotType(idx);
+            s8 temp_r26 = gm_8016B168();
+            f32 var_f31 =
+                un_802FC9B4(idx, Player_GetTeam(idx), temp_r26, temp_r25);
+            if (inlineA0(idx)) {
+                var_f31 = inlineA1(var_f31);
+                HSD_SisLib_803A6B98(
+                    un_804D6D78, mnName_8023754C(Player_GetNametagSlotID(idx)),
+                    -5000.0f, 0.0f);
+                M2C_FIELD((&un_804A1ED0 + temp_r30), s32*, 0x28) =
+                    M2C_ERROR(/* Read from unset register $r3 */);
+                HSD_SisLib_803A7548(un_804D6D78, 0.4f, 0.55f);
+            }
+            HSD_JObjReqAnimAll(jobj, var_f31);
+        }
+        HSD_JObjAnimAll(jobj);
+        {
+            s8* user_data = HSD_MemAlloc(1);
+            GObj_InitUserData(gobj, 0, mn_8022EB04, user_data);
+            *user_data = idx;
+        }
+        HSD_GObjProc_8038FD54(gobj, fn_802FCC44, 17);
+    }
+}
 
 /// #un_802FD28C
 
@@ -829,6 +895,11 @@ void un_80302DF8(un_80302DF8_t* arg0, int arg1)
 /// #un_80303FD4
 
 /// #un_80304138
+
+void un_80304138(void)
+{
+    HSD_ObjAllocInit(&un_804A2688, sizeof(struct un_80304138_objalloc_t), 4);
+}
 
 /// #un_80304168
 

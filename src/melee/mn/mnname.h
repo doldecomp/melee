@@ -3,8 +3,10 @@
 
 #include <placeholder.h>
 
+#include <baselib/forward.h>
+
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
-/* 23754C */ UNK_RET mnName_8023754C(UNK_PARAMS);
+/* 23754C */ HSD_Text* mnName_8023754C(int slot);
 /* 237594 */ UNK_RET mnName_80237594(UNK_PARAMS);
 /* 2375EC */ UNK_RET mnName_802375EC(UNK_PARAMS);
 /* 237654 */ UNK_RET mnName_80237654(UNK_PARAMS);
