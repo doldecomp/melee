@@ -36,7 +36,7 @@
 // /* 3BCC4C */ static void* jumptable_803BCC4C[8] = {
 //     (void*)0x8002a4f8,
 //     (void*)0x8002a554,
-//     (void*)0x8002a6c0, 
+//     (void*)0x8002a6c0,
 //     (void*)0x8002a6c0,
 //     (void*)0x8002a52c,
 //     (void*)0x8002a6c0,
