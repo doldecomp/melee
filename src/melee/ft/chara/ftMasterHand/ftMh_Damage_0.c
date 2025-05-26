@@ -33,17 +33,17 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
-    it_802F046C(fp->mv.mh.unk0.x34);
-    it_802F046C(fp->mv.mh.unk0.x38);
-    it_802F046C(fp->mv.mh.unk0.x3C);
-    it_802F046C(fp->mv.mh.unk0.x40);
-    fp->mv.mh.unk0.x34 = 0;
-    fp->mv.mh.unk0.x38 = 0;
-    fp->mv.mh.unk0.x3C = 0;
-    fp->mv.mh.unk0.x40 = 0;
-    lbAudioAx_800236B8(fp->mv.mh.unk0.x28);
-    lbAudioAx_800236B8(fp->mv.mh.unk0.x2C);
-    lbAudioAx_800236B8(fp->mv.mh.unk0.x30);
+    it_802F046C(fp->mv.mh.dmg0.x34);
+    it_802F046C(fp->mv.mh.dmg0.x38);
+    it_802F046C(fp->mv.mh.dmg0.x3C);
+    it_802F046C(fp->mv.mh.dmg0.x40);
+    fp->mv.mh.dmg0.x34 = 0;
+    fp->mv.mh.dmg0.x38 = 0;
+    fp->mv.mh.dmg0.x3C = 0;
+    fp->mv.mh.dmg0.x40 = 0;
+    lbAudioAx_800236B8(fp->mv.mh.dmg0.x28);
+    lbAudioAx_800236B8(fp->mv.mh.dmg0.x2C);
+    lbAudioAx_800236B8(fp->mv.mh.dmg0.x30);
     if (fp->mv.mh.unk0.x20) {
         ftMh_CaptureWaitMasterHand_80155D1C(fp->victim_gobj);
     }

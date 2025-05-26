@@ -11,10 +11,13 @@ s32 ifAll_802F3404(void)
 
 UNK_T ifAll_802F3414(void)
 {
-    return &ifAll_804A0FD8.unk_C;
+    return &ifAll_804A0FD8.xC;
 }
 
-/// #ifAll_802F3424
+struct ifAll_804A0FD8_x18_t* ifAll_802F3424(int idx)
+{
+    return &ifAll_804A0FD8.x18[idx];
+}
 
 /// #ifAll_802F343C
 
