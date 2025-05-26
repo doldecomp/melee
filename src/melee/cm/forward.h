@@ -9,5 +9,7 @@ typedef struct CameraBox CameraBox;
 typedef struct CameraMovement CameraMovement;
 typedef struct CameraUnkGlobals CameraUnkGlobals;
 typedef struct CameraDebugMode CameraDebugMode;
+typedef struct CameraModeCallbacks CameraModeCallbacks;
+typedef struct CameraFixednessMult CameraFixednessMult;
 
 #endif
