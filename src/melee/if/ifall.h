@@ -8,7 +8,7 @@
 /* 2F33CC */ UNK_RET ifAll_802F33CC(UNK_PARAMS);
 /* 2F3404 */ s32 ifAll_802F3404(void);
 /* 2F3414 */ UNK_T ifAll_802F3414(void);
-/* 2F3424 */ void ifAll_802F3424(void);
+/* 2F3424 */ struct ifAll_804A0FD8_x18_t* ifAll_802F3424(int idx);
 /* 2F343C */ void ifAll_802F343C(void);
 /* 2F3690 */ UNK_T ifAll_802F3690(void);
 /* 2F3698 */ void ifAll_HideHUD(void);
