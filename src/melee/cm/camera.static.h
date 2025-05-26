@@ -21,7 +21,7 @@
 /* 3BCB50 */ static HSD_WObjDesc cm_803BCB50 = {
     NULL, { 0.0f, 10.0f, 0.0f }, 0
 };
-/* 3BCB64 */ static HSD_CameraDescPerspective cm_803BCB64 = { 
+/* 3BCB64 */ static HSD_CameraDescPerspective cm_803BCB64 = {
     0, 0, 1, { 0, 0x280, 0, 0x1E0}, { 0, 0x280, 0, 0x1E0},
      &cm_803BCB3C, &cm_803BCB50, 0.0f, NULL, 0.1f, 16384.0f, 30.0f, 1.2173333f
 };
@@ -35,13 +35,13 @@
 /* 3BCC30 */ static char cm_803BCC30[0x1B] = "fov_l<MTXDegToRad(90.0F)";
 // /* 3BCC4C */ static void* jumptable_803BCC4C[8] = {
 //     (void*)0x8002a4f8,
-//     (void*)0x8002a554, 
+//     (void*)0x8002a554,
 //     (void*)0x8002a6c0, 
-//     (void*)0x8002a6c0, 
-//     (void*)0x8002a52c, 
-//     (void*)0x8002a6c0, 
-//     (void*)0x8002a700, 
-//     (void*)0x8002a728, 
+//     (void*)0x8002a6c0,
+//     (void*)0x8002a52c,
+//     (void*)0x8002a6c0,
+//     (void*)0x8002a700,
+//     (void*)0x8002a728,
 // };
 /* 3BCC70 */ static char lbl_803BCC70[0x17] = "rate>0.0F&&rate<=1.0F";
 /* 3BCC88 */ static char lbl_803BCC88[0x17] = "snapshot! ptr=%08x\n";
