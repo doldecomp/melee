@@ -387,7 +387,7 @@ struct Ground {
     int x6C;
     int x70;
     char pad_40[0xC4 - 0x74];
-    union GroundVars { // how big should this be?
+    union GroundVars {
         char pad_0[0x204 - 0xC4];
         struct grBigBlue_GroundVars bigblue;
         struct grCorneria_GroundVars corneria;
