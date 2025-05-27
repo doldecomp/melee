@@ -1823,13 +1823,13 @@ static void fn_UpdateObjAllocLimiter(int player)
             (db_ButtonsPressed(player) & HSD_PAD_DPADUP))
         {
             if (db_804D6BA0.b0 == 0) {
-                HSD_ObjAllocSetNumLimit(&efLib_80458EB0,
-                                        HSD_ObjAllocGetPeak(&efLib_80458EB0));
-                HSD_ObjAllocEnableNumLimit(&efLib_80458EB0);
+                HSD_ObjAllocSetNumLimit(&Effect_AllocData,
+                                        HSD_ObjAllocGetPeak(&Effect_AllocData));
+                HSD_ObjAllocEnableNumLimit(&Effect_AllocData);
 
                 db_804D6BA0.b0 = 1;
             } else {
-                HSD_ObjAllocDisableNumLimit(&efLib_80458EB0);
+                HSD_ObjAllocDisableNumLimit(&Effect_AllocData);
 
                 db_804D6BA0.b0 = 0;
             }
