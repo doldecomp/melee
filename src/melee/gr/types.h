@@ -173,7 +173,6 @@ struct GroundVars_unk {
     int xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi {
@@ -184,7 +183,6 @@ struct GroundVars_izumi {
     HSD_JObj* xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi2 {
@@ -195,7 +193,6 @@ struct GroundVars_izumi2 {
     int xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi3 {
@@ -208,7 +205,6 @@ struct GroundVars_izumi3 {
     float xD4;
     float xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_flatzone {
@@ -258,7 +254,6 @@ struct grKongo_GroundVars {
     /* gp+E4 */ s16 xE4;
     /* gp+E6 */ s16 xE6;
     /* gp+E8 */ f32 xE8;
-    u8 xEC_pad[0x218 - 0xEC];
 };
 
 struct grKongo_GroundVars2 {
@@ -273,7 +268,6 @@ struct grKongo_GroundVars2 {
     f32 xE0;
     f32 xE4;
     f32 xE8;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 /// @todo: Investigate if these extra structs could be
@@ -291,7 +285,6 @@ struct grKongo_GroundVars3 {
     f32 xE0;
     f32 xE4;
     f32 xE8;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct grCorneria_GroundVars {
@@ -384,9 +377,18 @@ struct Ground {
     HSD_GObj* x18;          // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
-    char pad_40[0xC4 - 0x40];
-    union GroundVars { // how big should this be?
-        char pad_0[0x218 - 0xC4];
+    Vec3 self_vel;
+    Vec3 cur_pos;
+    int x58;
+    int x5C;
+    int x60;
+    int x64;
+    int x68;
+    int x6C;
+    int x70;
+    char pad_40[0xC4 - 0x74];
+    union GroundVars {
+        char pad_0[0x204 - 0xC4];
         struct grBigBlue_GroundVars bigblue;
         struct grCorneria_GroundVars corneria;
         struct GroundVars_flatzone flatzone;
@@ -405,6 +407,7 @@ struct Ground {
         struct grZebes_GroundVars zebes;
     } gv;
 };
+STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
 // Appears to be related to stage audio
 struct UnkBgmStruct {
