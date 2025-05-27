@@ -23,10 +23,10 @@
 
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \
-        void* backup = (fp)->x2D8_specialAttributes2;                         \
+        void* backup = (fp)->dat_attrs_backup;                         \
         attributeName* src = (attributeName*) (fp)->ft_data->ext_attr;        \
         void** da = &(fp)->dat_attrs;                                         \
-        *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;               \
+        *(attributeName*) (fp)->dat_attrs_backup = *src;               \
         *da = backup;                                                         \
     } while (0)
 

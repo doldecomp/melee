@@ -108,11 +108,11 @@ const Vec3 Fighter_803B7488 = { 0.0f, 0.0f, 0.0f };
 const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 HSD_ObjAllocData fighter_alloc_data;
-HSD_ObjAllocData Fighter_80458FFC;
-HSD_ObjAllocData fighter_bones_alloc_data;
-HSD_ObjAllocData Fighter_80459054;
-HSD_ObjAllocData Fighter_80459080;
-HSD_ObjAllocData Fighter_804590AC;
+HSD_ObjAllocData fighter_dat_attrs_alloc_data;
+HSD_ObjAllocData fighter_parts_alloc_data;
+HSD_ObjAllocData fighter_dobj_list_alloc_data;
+HSD_ObjAllocData fighter_x2040_alloc_data;
+HSD_ObjAllocData fighter_x59C_alloc_data;
 
 // TODO: verify that this is really a spawn number counter, then rename this
 // var globally
@@ -150,7 +150,7 @@ void Fighter_800679B0(void)
 
     /// @warning don't hardcode the allocation sizes
     HSD_ObjAllocInit(&fighter_alloc_data, sizeof(Fighter), /*align*/ 4);
-    HSD_ObjAllocInit(&Fighter_80458FFC, /*size*/ 0x424, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_dat_attrs_alloc_data, /*size*/ 0x424, /*align*/ 4);
     ft_800852B0();
     Fighter_LoadCommonData();
     ft_8008549C();
@@ -159,9 +159,9 @@ void Fighter_800679B0(void)
     ftCo_800C8F6C();
     // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
     // data section, how does this work?
-    HSD_ObjAllocInit(&fighter_bones_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
-    HSD_ObjAllocInit(&Fighter_80459054, /*size*/ 0x1f0, /*align*/ 4);
-    HSD_ObjAllocInit(&Fighter_80459080, /*size*/ 0x80, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_parts_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_dobj_list_alloc_data, /*size*/ 0x1f0, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_x2040_alloc_data, /*size*/ 0x80, /*align*/ 4);
 
     g_spawnNumCounter = 1;
 
@@ -175,7 +175,7 @@ void Fighter_800679B0(void)
 void Fighter_FirstInitialize_80067A84(void)
 {
     Fighter_800679B0();
-    HSD_ObjAllocInit(&Fighter_804590AC, 0x8000, 0x20);
+    HSD_ObjAllocInit(&fighter_x59C_alloc_data, 0x8000, 0x20);
 }
 
 void Fighter_LoadCommonData(void)
@@ -853,7 +853,7 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
     gobj = GObj_Create(4, 8, 0);
     GObj_SetupGXLink(gobj, &ftDrawCommon_80080E18, 5U, 0U);
     fp = HSD_ObjAlloc(&fighter_alloc_data);
-    fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&Fighter_80458FFC);
+    fp->dat_attrs_backup = HSD_ObjAlloc(&fighter_dat_attrs_alloc_data);
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
     ftData_8008572C(input->fighterKind);
     Fighter_UnkInitLoad_80068914(gobj, input);
@@ -3093,11 +3093,11 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_LObjRemoveAll(fp->x588);
     Player_80031FB0(fp->player_id, fp->x221F_b4);
 
-    HSD_ObjFree(&Fighter_804590AC, fp->x59C);
-    HSD_ObjFree(&Fighter_804590AC, fp->x5A0);
-    HSD_ObjFree(&fighter_bones_alloc_data, fp->parts);
-    HSD_ObjFree(&Fighter_80459054, fp->dobj_list.data);
-    HSD_ObjFree(&Fighter_80459080, fp->x2040);
-    HSD_ObjFree(&Fighter_80458FFC, fp->x2D8_specialAttributes2);
+    HSD_ObjFree(&fighter_x59C_alloc_data, fp->x59C);
+    HSD_ObjFree(&fighter_x59C_alloc_data, fp->x5A0);
+    HSD_ObjFree(&fighter_parts_alloc_data, fp->parts);
+    HSD_ObjFree(&fighter_dobj_list_alloc_data, fp->dobj_list.data);
+    HSD_ObjFree(&fighter_x2040_alloc_data, fp->x2040);
+    HSD_ObjFree(&fighter_dat_attrs_alloc_data, fp->dat_attrs_backup);
     HSD_ObjFree(&fighter_alloc_data, fp);
 }
