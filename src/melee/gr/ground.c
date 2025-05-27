@@ -13,6 +13,7 @@
 #include "groldkongo.h"
 #include "grstadium.h"
 #include "grzebes.h"
+#include "platform.h"
 #include "stage.h"
 
 #include "cm/camera.h"
@@ -59,64 +60,6 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 #include <baselib/wobj.h>
-
-typedef struct _mapData {
-    int x0;         // 0x0
-    HSD_GObj* gobj; // 0x4
-    int x8;         // 0x8
-    int xC;         // 0xC
-    struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } x10_flags;
-    struct {
-        u8 b012 : 3;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } x11_flags;
-
-    unsigned char gx_unk2 : 3;  //  0x80
-    unsigned char flag2x10 : 1; //  0x10
-    unsigned char flag2x08 : 1; //  0x08
-    unsigned char flag2x04 : 1; //  0x04, checked @ 801c5e9c
-    unsigned char flag2x02 : 1; //  0x02
-    unsigned char flag2x01 : 1; //  0x01
-
-    int map_id;     // 0x14
-    HSD_GObj* x18;  // 0x18
-    int x1C;        // 0x1c
-    int x20;        // 0x20
-    int x24;        // 0x24
-    int x28;        // 0x28
-    int x2C;        // 0x2c
-    int x30;        // 0x30
-    int x34;        // 0x34
-    int x38;        // 0x38
-    int x3C;        // 0x3c
-    float selfVelX; // 0x40
-    float selfVelY; // 0x44
-    float selfVelZ; // 0x48
-    float posX;     // 0x4c
-    float posY;     // 0x50
-    float posZ;     // 0x54
-    int x58;        // 0x58
-    int x5c;        // 0x5c
-    int x60;        // 0x60
-    int x64;        // 0x64
-    int x68;        // 0x68
-    int x6c;        // 0x6c
-    int x70;        // 0x70
-    u8 pad[0x218 - 0x74];
-} mapData;
 
 /* 1BFFA8 */ static void Ground_801BFFA8(void);
 /* 1BFFAC */ static void Ground_801BFFAC(bool);
@@ -727,7 +670,7 @@ static char Ground_804D44F8[8] = "archive";
 
 inline void* alloc_user_data_ground(void)
 {
-    mapData* temp_r3 = HSD_MemAlloc(0x204);
+    Ground* temp_r3 = HSD_MemAlloc(0x204);
     if (temp_r3 == NULL) {
         OSReport("%s:%d: couldn t get user data(Ground)\n", "ground.c", 0x1DA);
     }
@@ -750,8 +693,8 @@ HSD_GObj* Ground_801C14D0(int map_id)
     HSD_GObj* gobj;
     UnkArchiveStruct* archive;
     HSD_JObj* temp_r3_8;
-    mapData* temp_r3;
-    mapData* temp_r6;
+    Ground* temp_r3;
+    Ground* temp_r6;
     float phi_f0;
     s16* phi_r23;
     int phi_r24;
@@ -778,23 +721,21 @@ HSD_GObj* Ground_801C14D0(int map_id)
     temp_r3->x10_flags.b0 = 0;
     temp_r3->x10_flags.b1 = 0;
     temp_r3->x10_flags.b2 = 1;
-    temp_r3->x8 = 0;
-    temp_r3->xC = 0;
-    temp_r3->x1C = 0;
+    temp_r3->x8_callback = 0;
+    temp_r3->xC_callback = 0;
+    temp_r3->x1C_callback = 0;
     temp_r3->x10_flags.b5 = 0;
     temp_r3->x10_flags.b6 = 0;
     temp_r3->x11_flags.b012 = 0;
     temp_r3->x10_flags.b7 = 0;
     temp_r3->x18 = 0;
     temp_r3->x10_flags.b3 = 0;
-    temp_r3->x20 = -1;
-    temp_r3->x24 = -1;
-    temp_r3->x28 = -1;
-    temp_r3->x2C = -1;
-    temp_r3->x30 = -1;
-    temp_r3->x34 = -1;
-    temp_r3->x38 = -1;
-    temp_r3->x3C = -1;
+    {
+        ssize_t i;
+        for (i = 0; i < ARRAY_SIZE(temp_r3->x20); i++) {
+            temp_r3->x20[i] = -1;
+        }
+    }
 
     grMaterial_801C95C4(gobj);
     archive = grDatFiles_801C6324();
