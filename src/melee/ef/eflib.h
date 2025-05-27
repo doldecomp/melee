@@ -9,7 +9,6 @@
 
 #include <baselib/objalloc.h>
 
-/* 05B4B8 */ UNK_RET efLib_8005B4B8(UNK_PARAMS);
 /* 05B4B8 */ void efLib_8005B4B8(void);
 /* 05B704 */ UNK_RET efLib_8005B704(UNK_PARAMS);
 /* 05B780 */ UNK_RET efLib_8005B780(UNK_PARAMS);
