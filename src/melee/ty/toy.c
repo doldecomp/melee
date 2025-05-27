@@ -1,5 +1,7 @@
 #include "toy.h"
 
+#include "inlines.h"
+
 #include "un/un_2FC9.h"
 
 /// #un_80305058
@@ -52,7 +54,7 @@
 
 /// #un_80306C5C
 
-/// #un_80306CF4
+/// #Toy_RemoveUserData
 
 /// #un_80306D14
 

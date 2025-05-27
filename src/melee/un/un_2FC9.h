@@ -251,5 +251,6 @@
 /* 3224DC */ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag);
 /* 322598 */ void un_80322598(int, float);
 /* 4D6E6C */ extern void* un_804D6E6C;
+/* 4D6EF4 */ extern void* un_804D6EF4;
 
 #endif

@@ -126,6 +126,7 @@ struct HSD_JObj {
     /* +80 */ HSD_RObj* robj;
     /* +84 */ u32 id;
 };
+STATIC_ASSERT(sizeof(struct HSD_JObj) == 0x88);
 
 struct HSD_Joint {
     char* class_name;
@@ -501,6 +502,15 @@ static inline void HSD_JObjAddScaleZ(HSD_JObj* jobj, float z)
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         // { if (jobj != ((void*) 0) && !HSD_JObjMtxIsDirty(jobj)) {
         // HSD_JObjSetMtxDirtySub(jobj); } };
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void HSD_JObjAddTranslationX(HSD_JObj* jobj, float x)
+{
+    HSD_ASSERT(1102, jobj);
+    jobj->translate.x += x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
     }
 }

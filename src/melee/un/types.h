@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+#include "baselib/forward.h"
 #include "un/forward.h" // IWYU pragma: export
 
 #include <dolphin/gx/types.h>
@@ -41,6 +42,15 @@ struct un_80302DF8_t {
 struct un_80304334_t {
     /* +0 */ char pad_0[1];
     /* +1 */ u8 x1;
+};
+
+struct un_804D6EF4_t {
+    /* +0 */ char pad_0[0x18];
+    /* +14 */ HSD_JObj* x14;
+    /* +18 */ HSD_JObj* x18;
+    /* +1C */ char pad_1C[0x54 - 0x20];
+    /* +54 */ short x54;
+    /* +56 */ short x56;
 };
 
 #endif

@@ -5,6 +5,8 @@
 
 #include "it/forward.h"
 
+#include "platform.h"
+
 #include "lb/types.h"
 
 #include <dolphin/mtx/types.h>
@@ -163,8 +165,8 @@ typedef struct ItemLink // user_data struct of GObj class 7
     s32 unk;
     HSD_GObj* x1D0_GObj;
     HSD_JObj* x1D4_JObj;
-
 } ItemLink;
+STATIC_ASSERT(sizeof(struct ItemLink) == 0x1D8);
 
 typedef struct {
     ItemLink* x0;
