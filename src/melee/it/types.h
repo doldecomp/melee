@@ -73,6 +73,7 @@ struct DynamicBoneTable {
     /// @at{0} @sz{190}
     HSD_JObj* bones[100];
 };
+STATIC_ASSERT(sizeof(struct DynamicBoneTable) == 0x190);
 
 struct Item_DynamicBones {
     int flags;
@@ -595,6 +596,7 @@ struct Item {
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
+STATIC_ASSERT(sizeof(struct Item) == 0xFCC);
 
 struct sdata_ItemGXLink {
     GObj_RenderFunc x0_renderFunc;

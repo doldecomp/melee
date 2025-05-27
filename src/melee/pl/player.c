@@ -74,7 +74,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 
 ////.bss
 StaticPlayer player_slots[PL_SLOT_MAX];
-HSD_ObjAllocData Player_804587E0;
+HSD_ObjAllocData Player_AllocData;
 
 void* pl_804D6470;
 
@@ -2034,7 +2034,7 @@ void Player_InitAllPlayers(void)
 
 void Player_80036DA4(void)
 {
-    HSD_ObjAllocInit(&Player_804587E0, 8, 4);
+    HSD_ObjAllocInit(&Player_AllocData, 8, 4);
     Fighter_FirstInitialize_80067A84();
 }
 
