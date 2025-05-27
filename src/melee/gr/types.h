@@ -384,7 +384,16 @@ struct Ground {
     HSD_GObj* x18;          // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
-    char pad_40[0xC4 - 0x40];
+    Vec3 self_vel;
+    Vec3 cur_pos;
+    int x58;
+    int x5C;
+    int x60;
+    int x64;
+    int x68;
+    int x6C;
+    int x70;
+    char pad_40[0xC4 - 0x74];
     union GroundVars { // how big should this be?
         char pad_0[0x218 - 0xC4];
         struct grBigBlue_GroundVars bigblue;
@@ -405,6 +414,7 @@ struct Ground {
         struct grZebes_GroundVars zebes;
     } gv;
 };
+STATIC_ASSERT(sizeof(struct Ground) == 0x224);
 
 // Appears to be related to stage audio
 struct UnkBgmStruct {
