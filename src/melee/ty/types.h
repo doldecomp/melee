@@ -3,12 +3,11 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
 #include "ty/forward.h" // IWYU pragma: export
 
 #include "platform.h"
 
-#include "mtx/types.h"
+#include <dolphin/mtx/types.h>
 
 struct Toy {
     /*  +0 */ char pad_0[0x8];
