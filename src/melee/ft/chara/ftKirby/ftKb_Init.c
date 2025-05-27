@@ -3227,7 +3227,7 @@ void ftKb_SpecialN_800EFAF0(HSD_GObj* gobj)
     if (jobj != NULL) {
         HSD_JObjRemoveAll(jobj);
         fp->fv.kb.hat.jobj = NULL;
-        HSD_ObjFree(&Fighter_80459080, fp->fv.kb.hat.unk_hsd_obj);
+        HSD_ObjFree(&fighter_x2040_alloc_data, fp->fv.kb.hat.unk_hsd_obj);
         fp->fv.kb.hat.unk_hsd_obj = NULL;
     }
 }
@@ -3242,7 +3242,7 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
         HSD_Joint** temp_joint = temp_unk->x4;
 
         // Fighter_InitPObj
-        fp->fv.kb.hat.unk_hsd_obj = HSD_ObjAlloc(&Fighter_80459080);
+        fp->fv.kb.hat.unk_hsd_obj = HSD_ObjAlloc(&fighter_x2040_alloc_data);
 
         ftParts_80074148();
         // fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(*temp_joint);
@@ -3277,7 +3277,7 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.jobj == NULL) {
         HSD_Joint* joint = ft_80459B88.x0->x0;
-        fp->fv.kb.hat.unk_hsd_obj = HSD_ObjAlloc(&Fighter_80459080);
+        fp->fv.kb.hat.unk_hsd_obj = HSD_ObjAlloc(&fighter_x2040_alloc_data);
         ftParts_80074148();
         fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(joint);
         fp->x2225_b2 = true;

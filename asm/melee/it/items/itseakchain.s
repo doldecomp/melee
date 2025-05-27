@@ -27,13 +27,13 @@ it_802BAF0C:
 .global it_802BAF2C
 it_802BAF2C:
 /* 802BAF2C 002B7B0C  7C 08 02 A6 */	mflr r0
-/* 802BAF30 002B7B10  3C C0 80 4A */	lis r6, Item_804A0C38@ha
+/* 802BAF30 002B7B10  3C C0 80 4A */	lis r6, item_link_alloc_data@ha
 /* 802BAF34 002B7B14  90 01 00 04 */	stw r0, 4(r1)
 /* 802BAF38 002B7B18  94 21 FF A8 */	stwu r1, -0x58(r1)
 /* 802BAF3C 002B7B1C  BE 41 00 20 */	stmw r18, 0x20(r1)
 /* 802BAF40 002B7B20  7C 7D 1B 78 */	mr r29, r3
 /* 802BAF44 002B7B24  7C 9E 23 78 */	mr r30, r4
-/* 802BAF48 002B7B28  3B 06 0C 38 */	addi r24, r6, Item_804A0C38@l
+/* 802BAF48 002B7B28  3B 06 0C 38 */	addi r24, r6, item_link_alloc_data@l
 /* 802BAF4C 002B7B2C  3A 40 00 00 */	li r18, 0
 /* 802BAF50 002B7B30  3B E0 00 00 */	li r31, 0
 /* 802BAF54 002B7B34  80 A3 00 C4 */	lwz r5, 0xc4(r3)

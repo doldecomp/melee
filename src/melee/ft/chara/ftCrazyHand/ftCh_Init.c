@@ -647,7 +647,7 @@ void ftCh_Init_OnDeath(HSD_GObj* gobj) {}
 void ftCh_Init_OnLoad(HSD_GObj* gobj)
 {
     ftData* ftdata;
-    ftCrazyHandAttributes* ftData_attr;
+    ftCrazyHand_DatAttrs* ftData_attr;
     void** items;
     Fighter* fp;
 
@@ -656,7 +656,7 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
-    PUSH_ATTRS(fp, ftCrazyHandAttributes);
+    PUSH_ATTRS(fp, ftCrazyHand_DatAttrs);
 
     ftBossLib_8015BDB4(gobj);
     it_8026B3F8(items[0], 127);
@@ -692,7 +692,7 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
 
 void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftCrazyHandAttributes);
+    COPY_ATTRS(gobj, ftCrazyHand_DatAttrs);
 }
 
 /// #ftCh_Init_80155FCC

@@ -70,7 +70,7 @@ void it_802A2428(HSD_GObj* obj)
 
 void it_802A2474(void* arg0)
 {
-    HSD_ObjFree(&Item_804A0C38, arg0);
+    HSD_ObjFree(&item_link_alloc_data, arg0);
 }
 
 void it_802A24A0(HSD_GObj* obj, int arg1)
@@ -207,7 +207,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             }
             return NULL;
         }
-        temp_r3_3 = HSD_ObjAlloc(&Item_804A0C38);
+        temp_r3_3 = HSD_ObjAlloc(&item_link_alloc_data);
         GObj_InitUserData(temp_r3_2, 6U, it_802A2474, temp_r3_3);
         if (var_r31 == 0) {
             temp_r3_3->next = NULL;

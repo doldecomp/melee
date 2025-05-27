@@ -63,14 +63,14 @@ it_802BE5D8:
 .global it_802BE65C
 it_802BE65C:
 /* 802BE65C 002BB23C  7C 08 02 A6 */	mflr r0
-/* 802BE660 002BB240  3C C0 80 4A */	lis r6, Item_804A0C38@ha
+/* 802BE660 002BB240  3C C0 80 4A */	lis r6, item_link_alloc_data@ha
 /* 802BE664 002BB244  90 01 00 04 */	stw r0, 4(r1)
 /* 802BE668 002BB248  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 802BE66C 002BB24C  DB E1 00 58 */	stfd f31, 0x58(r1)
 /* 802BE670 002BB250  BE 41 00 20 */	stmw r18, 0x20(r1)
 /* 802BE674 002BB254  7C 7D 1B 78 */	mr r29, r3
 /* 802BE678 002BB258  7C 9E 23 78 */	mr r30, r4
-/* 802BE67C 002BB25C  3B 66 0C 38 */	addi r27, r6, Item_804A0C38@l
+/* 802BE67C 002BB25C  3B 66 0C 38 */	addi r27, r6, item_link_alloc_data@l
 /* 802BE680 002BB260  3B E0 00 00 */	li r31, 0
 /* 802BE684 002BB264  80 A3 00 C4 */	lwz r5, 0xc4(r3)
 /* 802BE688 002BB268  3C 60 80 3C */	lis r3, it_803B8698@ha

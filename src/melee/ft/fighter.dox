@@ -36,11 +36,11 @@
 extern ftCommonData* p_ftCommonData;
 extern FighterPartsTable** ftPartsTable;
 extern HSD_ObjAllocData fighter_alloc_data;
-/* 458FFC */ extern HSD_ObjAllocData Fighter_80458FFC;
-extern HSD_ObjAllocData fighter_bones_alloc_data;
-/* 459054 */ extern HSD_ObjAllocData Fighter_80459054;
-/* 459080 */ extern HSD_ObjAllocData Fighter_80459080;
-/* 4590AC */ extern HSD_ObjAllocData Fighter_804590AC;
+/* 458FFC */ extern HSD_ObjAllocData fighter_dat_attrs_alloc_data;
+extern HSD_ObjAllocData fighter_parts_alloc_data;
+/* 459054 */ extern HSD_ObjAllocData fighter_dobj_list_alloc_data;
+/* 459080 */ extern HSD_ObjAllocData fighter_x2040_alloc_data;
+/* 4590AC */ extern HSD_ObjAllocData fighter_x59C_alloc_data;
 /* 0679B0 */ void Fighter_800679B0(void);
 /* 067A84 */ void Fighter_FirstInitialize_80067A84(void);
 void Fighter_LoadCommonData(void);

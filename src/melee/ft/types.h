@@ -1060,6 +1060,11 @@ struct Fighter_x1A88_t {
 };
 STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x57C);
 
+struct Fighter_x59C_t {
+    char pad_0[0x8000];
+};
+STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -1106,7 +1111,7 @@ struct Fighter {
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
     /*  fp+2D0 */ void* x2D0;
     /*  fp+2D4 */ void* dat_attrs;
-    /*  fp+2D8 */ void* x2D8_specialAttributes2;
+    /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;
     /*  fp+2E0 */ float x2E0;
     /*  fp+2E4 */ float x2E4;
@@ -1143,8 +1148,8 @@ struct Fighter {
         /* fp+594 */ s32 x594_s32;
     };
     /*  fp+598 */ s32 x598;
-    /*  fp+59C */ UNK_T x59C;
-    /*  fp+5A0 */ UNK_T x5A0;
+    /*  fp+59C */ struct Fighter_x59C_t* x59C;
+    /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
     /*  fp+5A4 */ UNK_T x5A4;
     /*  fp+5A8 */ UNK_T x5A8;
     /*  fp+5AC */ u8 _5AC[0x5B8 - 0x5AC];

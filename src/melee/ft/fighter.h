@@ -59,11 +59,11 @@
 /* 06DA4C */ void Fighter_8006DA4C(Fighter_GObj* gobj);
 /* 06DABC */ void Fighter_Unload_8006DABC(void* user_data);
 /* 458FD0 */ extern HSD_ObjAllocData fighter_alloc_data;
-/* 458FFC */ extern HSD_ObjAllocData Fighter_80458FFC;
-/* 459028 */ extern HSD_ObjAllocData fighter_bones_alloc_data;
-/* 459054 */ extern HSD_ObjAllocData Fighter_80459054;
-/* 459080 */ extern HSD_ObjAllocData Fighter_80459080;
-/* 4590AC */ extern HSD_ObjAllocData Fighter_804590AC;
+/* 458FFC */ extern HSD_ObjAllocData fighter_dat_attrs_alloc_data;
+/* 459028 */ extern HSD_ObjAllocData fighter_parts_alloc_data;
+/* 459054 */ extern HSD_ObjAllocData fighter_dobj_list_alloc_data;
+/* 459080 */ extern HSD_ObjAllocData fighter_x2040_alloc_data;
+/* 4590AC */ extern HSD_ObjAllocData fighter_x59C_alloc_data;
 /* 4598B8 */ extern ftData* gFtDataList[FTKIND_MAX];
 /* 4D64FC */ extern UNK_T Fighter_804D64FC;
 /* 4D6500 */ extern UNK_T Fighter_804D6500;
