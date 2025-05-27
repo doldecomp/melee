@@ -670,7 +670,7 @@ static char Ground_804D44F8[8] = "archive";
 
 inline void* alloc_user_data_ground(void)
 {
-    Ground* temp_r3 = HSD_MemAlloc(0x204);
+    Ground* temp_r3 = HSD_MemAlloc(sizeof(Ground));
     if (temp_r3 == NULL) {
         OSReport("%s:%d: couldn t get user data(Ground)\n", "ground.c", 0x1DA);
     }
@@ -706,7 +706,7 @@ HSD_GObj* Ground_801C14D0(int map_id)
         OSReport("%s:%d: couldn t get gobj!\n", "ground.c", 0x522);
         return NULL;
     }
-    temp_r3 = (0, HSD_MemAlloc(0x204));
+    temp_r3 = (0, HSD_MemAlloc(sizeof(Ground)));
     if (temp_r3 == NULL) {
         OSReport("%s:%d: couldn t get user data(Ground)\n", "ground.c", 0x1DA);
     }
@@ -845,7 +845,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
         OSReport(get_gobj, __FILE__, 0x5B8);
         return NULL;
     }
-    temp_r3 = HSD_MemAlloc(0x204);
+    temp_r3 = HSD_MemAlloc(sizeof(Ground));
     if (temp_r3 == NULL) {
         OSReport(get_userdata_ground, __FILE__, 0x1DA);
     }
