@@ -731,7 +731,7 @@ HSD_GObj* Ground_801C14D0(int map_id)
     temp_r3->x18 = 0;
     temp_r3->x10_flags.b3 = 0;
     {
-        ssize_t i;
+        size_t i;
         for (i = 0; i < ARRAY_SIZE(temp_r3->x20); i++) {
             temp_r3->x20[i] = -1;
         }
