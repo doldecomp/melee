@@ -1,6 +1,56 @@
 #include "particle.static.h"
 
-/// #DrawRectangle
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXGeometry.h>
+
+void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
+{
+    f32 x_max;
+    f32 y_max;
+    GXColor c;
+    u8 r, g, b, a;
+
+    GXBegin(0x80, 0, 4);
+
+    x_max = x_min + w;
+    y_max = y_min + h;
+
+    // Send the corners in clockwise order, starting with top left
+
+    WGPIPE.f32 = x_min;
+    WGPIPE.f32 = y_min;
+    a = color->a;
+    b = color->b;
+    g = color->g;
+    r = color->r;
+    WGPIPE.u8 = r;
+    WGPIPE.u8 = g;
+    WGPIPE.u8 = b;
+    WGPIPE.u8 = a;
+
+    WGPIPE.f32 = x_max;
+    WGPIPE.f32 = y_min;
+    WGPIPE.u8 = r;
+    WGPIPE.u8 = g;
+    WGPIPE.u8 = b;
+    WGPIPE.u8 = a;
+
+    WGPIPE.f32 = x_max;
+    WGPIPE.f32 = y_max;
+    WGPIPE.u8 = r;
+    WGPIPE.u8 = g;
+    WGPIPE.u8 = b;
+    WGPIPE.u8 = a;
+
+    WGPIPE.f32 = x_min;
+    WGPIPE.f32 = y_max;
+    WGPIPE.u8 = r;
+    WGPIPE.u8 = g;
+    WGPIPE.u8 = b;
+    WGPIPE.u8 = a;
+
+    GXEnd();
+}
 
 /// #DrawASCII
 
