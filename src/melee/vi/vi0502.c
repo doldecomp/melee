@@ -30,9 +30,28 @@
 #include <baselib/gobjproc.h>
 #include <baselib/wobj.h>
 
+const GXColor erase_colors_vi0502 = { 0, 0, 0, 0 };
+
 void vi_8031E304(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
+
+void fn_8031E328(HSD_GObj* gobj)
+{
+    HSD_CObj* cobj;
+    lbShadow_8000F38C(0);
+    cobj = GET_COBJ(gobj);
+    if (HSD_CObjSetCurrent(cobj)) {
+        HSD_SetEraseColor(erase_colors_vi0502.r, erase_colors_vi0502.g,
+                          erase_colors_vi0502.b, erase_colors_vi0502.a);
+        cobj = GET_COBJ(gobj);
+        HSD_CObjEraseScreen(cobj, 1, 0, 1);
+        vi_8031CA04(gobj);
+        gobj->gxlink_prios = 0x281;
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_CObjEndCurrent();
+    }
 }
 
 void vi0502_RunFrame(HSD_GObj* gobj)
