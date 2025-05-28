@@ -85,7 +85,7 @@
 /* 0CB870 */ bool ftCo_800CB870(ftCo_GObj* gobj);
 /* 0CB8E0 */ bool ftCo_800CB8E0(ftCo_GObj* gobj);
 /* 0CB950 */ UNK_RET ftCo_800CB950(UNK_PARAMS);
-/* 0CBAC4 */ UNK_RET ftCo_800CBAC4(UNK_PARAMS);
+/* 0CBAC4 */ void ftCo_800CBAC4(Fighter_GObj*, ftCommon_MotionState, Vec3*, int);
 /* 0CBBC0 */ UNK_RET ftCo_800CBBC0(UNK_PARAMS);
 /* 0CBD18 */ UNK_RET ftCo_800CBD18(UNK_PARAMS);
 /* 0CBE98 */ UNK_RET ftCo_800CBE98(UNK_PARAMS);

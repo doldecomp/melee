@@ -1200,7 +1200,7 @@ s32 Player_GetMoreFlagsBit4(s32 slot)
     return bit4;
 }
 
-u8 Player_GetMoreFlagsBit5(s32 slot)
+int Player_GetMoreFlagsBit5(s32 slot)
 {
     StaticPlayer* player;
     u8 bit5;

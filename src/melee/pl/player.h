@@ -235,7 +235,7 @@ s32 Player_GetMoreFlagsBit3(s32 slot);
 void Player_SetMoreFlagsBit3(s32 slot, u8 bit3);
 void Player_SetMoreFlagsBit4(s32 slot, u8 bit4);
 s32 Player_GetMoreFlagsBit4(s32 slot);
-u8 Player_GetMoreFlagsBit5(s32 slot);
+int Player_GetMoreFlagsBit5(s32 slot);
 void Player_SetMoreFlagsBit5(s32 slot, u8 bit5);
 u8 Player_GetMoreFlagsBit6(s32 slot);
 void Player_SetMoreFlagsBit6(s32 slot, u8 bit6);
