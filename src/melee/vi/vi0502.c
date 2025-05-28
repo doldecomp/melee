@@ -37,7 +37,7 @@ void vi_8031E304(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void fn_8031E328(HSD_GObj* gobj)
+void vi_8031E328(HSD_GObj* gobj)
 {
     HSD_CObj* cobj;
     lbShadow_8000F38C(0);
@@ -61,7 +61,7 @@ void vi0502_RunFrame(HSD_GObj* gobj)
     cobj = GET_COBJ(gobj);
     HSD_CObjAnim(cobj);
 
-    if (190.0f == cobj->eyepos->aobj->curr_frame) {
+    if (30.0f == cobj->eyepos->aobj->curr_frame) {
         vi_8031C9B4(14, 0);
         lbAudioAx_800237A8(430009, 0x7F, 0x40);
     }
