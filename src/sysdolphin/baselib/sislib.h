@@ -11,10 +11,6 @@
 
 #include <dolphin/mtx/types.h>
 
-typedef struct sislib_UnkAllocData sislib_UnkAllocData;
-typedef struct HSD_Text HSD_Text;
-typedef struct sislib_UnkAlloc3 sislib_UnkAlloc3;
-
 typedef struct {
     UNK_T x0;
     UNK_T x4;

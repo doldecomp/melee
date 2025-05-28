@@ -152,7 +152,7 @@ void vi0102_Initialize(un_804D6F60_t* unk)
     efAsync_8006737C(0);
     lbAudioAx_80023F28(0x56);
     lbAudioAx_80024E50(1);
-    un_804D6F38 = (HSD_Archive*) lbArchive_80016C64(
+    un_804D6F38 = (HSD_Archive*) lbArchive_LoadSymbols(
         "Vi0102.dat", (void**) &un_804D6F30, "visual0102Scene", 0);
 
     cam_gobj = GObj_Create(0x13, 0x14, 0);

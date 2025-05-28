@@ -11,7 +11,7 @@
 /* 2C4670 */ void it_802C4670(Item_GObj*);
 /* 2C46C4 */ UNK_RET it_802C46C4(UNK_PARAMS);
 /* 2C4820 */ UNK_RET it_802C4820(UNK_PARAMS);
-/* 2C4980 */ UNK_RET it_802C4980(UNK_PARAMS);
+/* 2C4980 */ void it_802C4980(Item_GObj*);
 /* 2C49A0 */ bool it_802C49A0(Item_GObj*);
 /* 2C49A8 */ bool it_802C49A8(Item_GObj*);
 /* 2C49B0 */ bool it_802C49B0(Item_GObj*);

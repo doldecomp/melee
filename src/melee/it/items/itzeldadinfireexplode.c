@@ -1,5 +1,6 @@
 #include "itzeldadinfireexplode.h"
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 
 /* 2C4998 */ static bool it_802C4998(void);
@@ -12,7 +13,15 @@
 
 /// #it_802C4820
 
-/// #it_802C4980
+void it_802C4980(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+#ifndef BUGFIX
+    ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+#else
+    itResetVelocity(ip);
+#endif
+}
 
 bool it_802C4998(void)
 {

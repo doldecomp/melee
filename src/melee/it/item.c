@@ -93,11 +93,11 @@ void Item_80266FA8(void)
     it_8027870C(false);
 }
 
-static HSD_ObjAllocData itemAllocData;
+static HSD_ObjAllocData item_alloc_data;
 
-static HSD_ObjAllocData unkAllocData1;
+static HSD_ObjAllocData item_dynamic_bones_alloc_data;
 
-HSD_ObjAllocData Item_804A0C38;
+HSD_ObjAllocData item_link_alloc_data;
 HSD_ObjAllocUnk Item_804A0C64;
 HSD_ObjAllocUnk2 Item_804A0CCC;
 S32Vec3 Item_804A0E24;
@@ -105,9 +105,9 @@ S32Vec3 Item_804A0E24;
 /// Init item struct?
 void Item_80266FCC(void)
 {
-    HSD_ObjAllocInit(&itemAllocData, sizeof(Item), 4);
-    HSD_ObjAllocInit(&unkAllocData1, sizeof(DynamicBoneTable), 4);
-    HSD_ObjAllocInit(&Item_804A0C38, sizeof(ItemLink), 4);
+    HSD_ObjAllocInit(&item_alloc_data, sizeof(Item), 4);
+    HSD_ObjAllocInit(&item_dynamic_bones_alloc_data, sizeof(DynamicBoneTable), 4);
+    HSD_ObjAllocInit(&item_link_alloc_data, sizeof(ItemLink), 4);
 
     Item_804A0C64.x0 = 0;
     Item_804A0C64.x8 = 0;
@@ -708,7 +708,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 
     item_data->xDAA_byte = 1;
 
-    if (db_80225B20()) {
+    if (db_ShowItemPickupRange()) {
         item_data->xDAA_flag.b4 = true;
     }
 
@@ -813,7 +813,7 @@ static /// @todo Needs some serious cleaning.
 
     item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
-        item_data->xBBC_dynamicBoneTable = HSD_ObjAlloc(&unkAllocData1);
+        item_data->xBBC_dynamicBoneTable = HSD_ObjAlloc(&item_dynamic_bones_alloc_data);
         if (item_data->xBBC_dynamicBoneTable == NULL) {
             return false;
         }
@@ -980,7 +980,7 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
         int idx = spawnItem->kind - It_Kind_Old_Kuri;
         GObj_SetupGXLink(gobj, it_803F4CA8[idx].x0_renderFunc, 6, 0);
     }
-    user_data = HSD_ObjAlloc(&itemAllocData);
+    user_data = HSD_ObjAlloc(&item_alloc_data);
     if (user_data == NULL) {
         HSD_GObjPLink_80390228(gobj);
         return NULL;
@@ -2092,10 +2092,10 @@ void Item_OnUserDataRemove(void* user_data)
     Item* item_data = (Item*) user_data;
 
     if (item_data->xBBC_dynamicBoneTable != NULL) {
-        HSD_ObjFree(&unkAllocData1, item_data->xBBC_dynamicBoneTable);
+        HSD_ObjFree(&item_dynamic_bones_alloc_data, item_data->xBBC_dynamicBoneTable);
     }
 
-    HSD_ObjFree(&itemAllocData, item_data);
+    HSD_ObjFree(&item_alloc_data, item_data);
 }
 
 uint Item_8026AE60(void)

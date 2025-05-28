@@ -291,8 +291,10 @@ typedef struct itTincle_ItemVars {
 } itTincle_ItemVars;
 
 typedef struct {
-    u8 padding[0xE10 - 0xDD4];
-    int xE10;
+    /* ip+DD4 */ char pad_0[0x3C];
+    /* ip+E10 */ int xE10;
+    /* ip+E14 */ char pad_40[0xC];
+    /* ip+E24 */ Vec3 vel;
 } itGShell_ItemVars;
 
 typedef struct itPokemonAttributes {
@@ -710,5 +712,19 @@ typedef struct it_2E6A_ItemVars_2 {
     /* +18 ip+DEC */ void* x18;
     /* +1C ip+DF0 */ void* x1C;
 } it_2E6A_ItemVars_2;
+
+typedef struct itWhiteBea_ItemVars {
+    /*  +0 ip+DD4 */ char pad_0[0x20];
+    /* +20 ip+DF4 */ UNK_T x20;
+} itWhiteBea_ItemVars;
+
+typedef struct itOctarock_ItemVars {
+    /*  +0 ip+DD4 */ char pad_0[0x20];
+    /* +20 ip+DF4 */ Vec3 x20;
+} itOctarock_ItemVars;
+
+typedef struct itMasterHandLaser_ItemVars {
+    /*  +0 ip+DD4 */ bool x0;
+} itMasterHandLaser_ItemVars;
 
 #endif

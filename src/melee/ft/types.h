@@ -79,7 +79,7 @@ struct ftCommonData {
     /* +60 */ UNK_T x60;
     /* +64 */ UNK_T x64;
     /* +68 */ float x68;
-    /* +6C */ UNK_T x6C;
+    /* +6C */ float x6C;
     /* +70 */ float x70_someLStickYMax;
     /* +6C */ int x74;
     /* +78 */ float x78;
@@ -357,19 +357,19 @@ struct ftCommonData {
     /* +4D8 */ u32 x4D8;
     /* +4DC */ Vec2 x4DC;
     /* +4E4 */ Vec3 x4E4;
-    /* +4F0 */ UNK_T x4F0;
+    /* +4F0 */ float x4F0;
     /* +4F4 */ UNK_T x4F4;
-    /* +4F8 */ UNK_T x4F8;
-    /* +4FC */ UNK_T x4FC;
+    /* +4F8 */ u32 x4F8;
+    /* +4FC */ u32 x4FC;
     /* +500 */ UNK_T x500;
-    /* +504 */ UNK_T x504;
+    /* +504 */ int x504;
     /* +508 */ UNK_T x508;
     /* +50C */ UNK_T x50C;
     /* +510 */ UNK_T x510;
     /* +514 */ UNK_T x514;
     /* +518 */ UNK_T x518;
     /* +51C */ UNK_T x51C;
-    /* +520 */ UNK_T x520;
+    /* +520 */ int x520;
     /* +524 */ UNK_T x524;
     /* +528 */ UNK_T x528;
     /* +52C */ UNK_T x52C;
@@ -404,8 +404,8 @@ struct ftCommonData {
     /* +5A0 */ u8 x5A0[0x5C0 - 0x5A0];
     /* +5C0 */ float x5C0;
     /* +5C4 */ UNK_T x5C4;
-    /* +5C8 */ UNK_T x5C8;
-    /* +5CC */ UNK_T x5CC;
+    /* +5C8 */ int x5C8;
+    /* +5CC */ float x5CC;
     /* +5D0 */ UNK_T x5D0;
     /* +5D4 */ UNK_T x5D4;
     /* +5D8 */ UNK_T x5D8;
@@ -448,13 +448,13 @@ struct ftCommonData {
     /* +66C */ float x66C;
     /* +670 */ float x670;
     /* +674 */ float x674;
-    /* +678 */ UNK_T x678;
-    /* +67C */ UNK_T x67C;
-    /* +680 */ UNK_T x680;
-    /* +684 */ UNK_T x684;
-    /* +688 */ UNK_T x688;
-    /* +68C */ UNK_T x68C;
-    /* +690 */ UNK_T x690;
+    /* +678 */ float x678;
+    /* +67C */ float x67C;
+    /* +680 */ float x680;
+    /* +684 */ float x684;
+    /* +688 */ int x688;
+    /* +68C */ int x68C;
+    /* +690 */ int x690;
     /* +694 */ float x694;
     /* +698 */ float x698;
     /* +69C */ float x69C;
@@ -525,7 +525,9 @@ struct ftCommonData {
     /* +7E8 */ uint unk_kb_angle_min;
     /* +7EC */ uint unk_kb_angle_max;
     /* +7F0 */ int x7F0;
-    /* +7F4 */ u8 x7F4[0x814 - 0x7F4];
+    /* +7F4 */ u8 x7F4[0x800 - 0x7F4];
+    /* +800 */ float x800;
+    /* +804 */ u8 x804[0x814 - 0x804];
     /* +814 */ int x814;
     // lots of more data following, exact size to be determined
 };
@@ -583,7 +585,8 @@ struct ftData {
         /*  +8C */ float x8C;
         /*  +90 */ u8 x90[0xFC - 0x90];
         /*  +FC */ float xFC;
-        /* +100 */ u8 x100[0x16C - 0x100];
+        /* +100 */ u8 x100[0x168 - 0x100];
+        /* +168 */ float x168;
         /* +16C */ int x16C_idx;
     }* x0;
     /*  +4 */ void* ext_attr;
@@ -713,7 +716,7 @@ typedef struct ftCo_DatAttrs {
     /* +11C fp+23C */ float x11C;
     /* +120 fp+240 */ Vec3 x120;
     /* +124 fp+24C */ float x124;
-    /* +128 fp+250 */ int x128;
+    /* +128 fp+250 */ float x128;
     /* +12C fp+254 */ int x12C;
     /* +130 fp+258 */ float x130;
     /* +134 fp+25C */ float bubble_ratio;
@@ -1060,6 +1063,11 @@ struct Fighter_x1A88_t {
 };
 STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x57C);
 
+struct Fighter_x59C_t {
+    char pad_0[0x8000];
+};
+STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -1106,7 +1114,7 @@ struct Fighter {
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
     /*  fp+2D0 */ void* x2D0;
     /*  fp+2D4 */ void* dat_attrs;
-    /*  fp+2D8 */ void* x2D8_specialAttributes2;
+    /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;
     /*  fp+2E0 */ float x2E0;
     /*  fp+2E4 */ float x2E4;
@@ -1143,8 +1151,8 @@ struct Fighter {
         /* fp+594 */ s32 x594_s32;
     };
     /*  fp+598 */ s32 x598;
-    /*  fp+59C */ UNK_T x59C;
-    /*  fp+5A0 */ UNK_T x5A0;
+    /*  fp+59C */ struct Fighter_x59C_t* x59C;
+    /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
     /*  fp+5A4 */ UNK_T x5A4;
     /*  fp+5A8 */ UNK_T x5A8;
     /*  fp+5AC */ u8 _5AC[0x5B8 - 0x5AC];
@@ -1438,7 +1446,7 @@ struct Fighter {
     /* fp+209A */ u16 x209A;
     /* fp+209C */ s16 x209C;
     /* fp+20A0 */ HSD_JObj* x20A0_accessory;
-    /* fp+20A4 */ s32 x20A4;
+    /* fp+20A4 */ UnkFlagStruct x20A4;
     /* fp+20A8 */ s32 x20A8;
     /* fp+20AC */ HSD_GObj* unk_gobj;
     /* fp+20B0 */ UNK_T x20B0;

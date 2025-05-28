@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "itnesspkflush.h"
 
 #include "it/inlines.h"
@@ -38,9 +40,17 @@ bool it_802AA7F0(Item_GObj* gobj)
 
 /// #it_802AAFDC
 
-/// #it_802AB128
+void it_802AB128(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
-/// #it_802AB140
+void it_802AB140(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 /// #it_802AB158
 

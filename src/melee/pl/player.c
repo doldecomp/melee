@@ -74,7 +74,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 
 ////.bss
 StaticPlayer player_slots[PL_SLOT_MAX];
-HSD_ObjAllocData Player_804587E0;
+HSD_ObjAllocData Player_AllocData;
 
 pl_804D6470_t* pl_804D6470;
 
@@ -1200,7 +1200,7 @@ s32 Player_GetMoreFlagsBit4(s32 slot)
     return bit4;
 }
 
-u8 Player_GetMoreFlagsBit5(s32 slot)
+int Player_GetMoreFlagsBit5(s32 slot)
 {
     StaticPlayer* player;
     u8 bit5;
@@ -2034,7 +2034,7 @@ void Player_InitAllPlayers(void)
 
 void Player_80036DA4(void)
 {
-    HSD_ObjAllocInit(&Player_804587E0, 8, 4);
+    HSD_ObjAllocInit(&Player_AllocData, 8, 4);
     Fighter_FirstInitialize_80067A84();
 }
 
@@ -2042,8 +2042,8 @@ void Player_80036DD8(void)
 {
     void** sp8;
 
-    lbArchive_80016C64(str_PdPmdat_start_of_data, (void**) &sp8,
-                       str_plLoadCommonData, 0);
+    lbArchive_LoadSymbols(str_PdPmdat_start_of_data, (void**) &sp8,
+                          str_plLoadCommonData, 0);
     pl_804D6470 = *sp8;
 }
 

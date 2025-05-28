@@ -71,7 +71,8 @@ static void ftCo_800BFF14(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ft_800BFF70(Fighter_GObj* gobj, FtCmdState* cmd, int arg0)
 {
-    ftCo_803C6ADC[arg0 - 0x15](gobj, cmd);
+    int i = arg0 - 21;
+    ftCo_803C6ADC[i](gobj, cmd);
 }
 
 void ftCo_800BFFAC(Fighter* fp)

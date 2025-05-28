@@ -1,81 +1,23 @@
 {
-    "replacerules.rules": {
-        "Remove asm addresses": {
-            "find": "/\\*.*?\\*/\\s*",
-            "replace": "\t"
-        },
-        "Normalize non-global labels": {
-            "find": "(?<!\\.global )(lbl|func)_[\\dA-F]{8}",
-            "replace": "$1_XXXXXXXX"
-        },
-        "Normalize relative labels": {
-            "find": "\"?@\\d+\"?",
-            "replace": "lbl_XXXXXXXX"
-        },
-        "Remove asm comments": {
-            "find": "^#.*$\n"
-        },
-        "Replace gx": {
-            "find": "\\bgx\\b",
-            "replace": "__GXContexts"
-        },
-        "Replace asm comments with C": {
-            "find": "^#\\s*(.*?)\\s*$",
-            "replace": "// $1"
-        },
-        "Wrap asm in C": {
-            "find": "(?<=\n\n)(?:^(\\/\\/.*?)$\n)?(?:^\\.global \\w+$\n)?(\\w+):$\n([\\s\\S]*?)\n\n",
-            "replace": "$1\n#pragma push\nasm unk_t $2()\n{ // clang-format off\n    nofralloc\n$3\n} // clang-format on\n#pragma pop\n\n"
-        },
-        "Remove @ directives": {
-            "find": "@sda21",
-            "replace": ""
-        }
-    },
-    "replacerules.rulesets": {
-        "Normalize asm for comparison": {
-            "rules": [
-                "Remove asm addresses",
-                "Normalize non-global labels",
-                "Normalize relative labels",
-                "Remove asm comments",
-                "Replace gx"
-            ]
-        },
-        "Embed asm in C": {
-            "rules": [
-                "Replace asm comments with C",
-                "Wrap asm in C",
-                "Remove @ directives"
-            ]
-        }
-    },
-    "files.associations": {
-        "*.c": "c",
-        "*.h": "c",
-        "*.s": "gas",
-        "compare": "c",
-        "cstddef": "c",
-        "limits": "c",
-        "type_traits": "c",
-        "xmemory": "c",
-        "xutility": "c",
-        "exception": "c",
-        "xstring": "c"
-    },
-    "[gas]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 4,
-        "editor.detectIndentation": false
-    },
-    "[c]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 4,
-        "editor.detectIndentation": false
-    },
-    "python.formatting.provider": "black",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": "explicit"
-    }
+  "[c]": {
+    "files.encoding": "utf8",
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+  "[cpp]": {
+    "files.encoding": "utf8",
+    "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  // "editor.tabSize": 2,
+  "files.autoSave": "onFocusChange",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.associations": {
+    "*.inc": "c",
+    ".clangd": "yaml"
+  },
+  // Disable C/C++ IntelliSense, use clangd instead
+  "C_Cpp.intelliSenseEngine": "disabled",
 }

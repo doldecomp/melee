@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "ftMasterHand/forward.h" // IWYU pragma: export
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
@@ -143,6 +144,25 @@ union ftMasterHand_MotionVars {
         float x0;
         float x4;
     } unk13;
+
+    struct ftMasterHand_FingerBeamVars {
+        /*  +0 fp+2340 */ char pad_0[0x34];
+        /* +34 fp+2374 */ Item_GObj* x34;
+        /* +38 fp+2378 */ Item_GObj* x38;
+        /* +3C fp+237C */ Item_GObj* x3C;
+        /* +40 fp+2380 */ Item_GObj* x40;
+    } fingerbeam;
+
+    struct ftMasterHand_Damage_0 {
+        /*  +0 fp+2340 */ char pad_0[0x28];
+        /* +28 fp+2368 */ int x28;
+        /* +2C fp+236C */ int x2C;
+        /* +30 fp+2370 */ int x30;
+        /* +34 fp+2374 */ Item_GObj* x34;
+        /* +38 fp+2378 */ Item_GObj* x38;
+        /* +3C fp+237C */ Item_GObj* x3C;
+        /* +40 fp+2380 */ Item_GObj* x40;
+    } dmg0;
 };
 
 #endif

@@ -147,8 +147,6 @@ u32 Camera_80029124(Vec3* arg0, s32 distance)
     return result;
 }
 
-/// #Camera_8002928C
-
 void Camera_800293E0(void)
 {
     CameraBox* curr;
@@ -284,7 +282,7 @@ void Camera_80029BC4(CameraBounds* bounds, CameraMovement* movement)
     float cam_dist = (bounds->y_max - bounds->y_min) /
                      tanf(cm_804D7E60 * movement->target_fov);
     float x_dist = (bounds->x_max - bounds->x_min) /
-                   (cm_803BCB64.perspective.aspect *
+                   (cm_803BCB64.aspect *
                     tanf(cm_804D7E60 * movement->target_fov));
     if (x_dist > cam_dist) {
         cam_dist = x_dist;
@@ -443,8 +441,8 @@ void Camera_8002A768(CameraMovement* movement, int arg1)
     top_left.z = neg_one;
     lbVector_Rotate((Vec3*) &top_left.x, 1, temp_f30);
     lbVector_Rotate((Vec3*) &top_left.x, 2, temp_f30);
-    temp_r27 = &cm_803BCB64.perspective.aspect;
-    top_left.x *= cm_803BCB64.perspective.aspect;
+    temp_r27 = &cm_803BCB64.aspect;
+    top_left.x *= cm_803BCB64.aspect;
     lbVector_Normalize((Vec3*) &top_left.x);
     lbVector_Rotate((Vec3*) &top_left.x, 1, temp_f28);
     lbVector_Rotate((Vec3*) &top_left.x, 2, temp_f0);
@@ -820,15 +818,42 @@ void Camera_8002F8F4(void)
 
 /// #Camera_8003006C
 
-/// #Camera_800300F0
+void Camera_800300F0(void)
+{
+    cm_80452C68.mode = cm_80453004.last_mode;
+}
 
-/// #Camera_8003010C
+bool Camera_8003010C(void)
+{
+    if ((int) cm_80452C68.mode == 5) {
+        return true;
+    }
+    return false;
+}
 
-/// #Camera_80030130
+bool Camera_80030130(void)
+{
+    if ((int) cm_80452C68.mode == 6) {
+        return true;
+    }
+    return false;
+}
 
-/// #Camera_80030154
+bool Camera_80030154(void)
+{
+    if ((int) cm_80452C68.mode == 7) {
+        return true;
+    }
+    return false;
+}
 
-/// #Camera_80030178
+bool Camera_80030178(void)
+{
+    if ((int) cm_80452C68.mode == 8) {
+        return true;
+    }
+    return false;
+}
 
 /// #Camera_8003019C
 
@@ -843,7 +868,7 @@ void Camera_80030730(f32 arg8)
     cm_803BCCA0.x40 = arg8;
 }
 
-void Camera_80030740(u8 r, u8 g, u8 b)
+void Camera_SetBackgroundColor(u8 r, u8 g, u8 b)
 {
     cm_80452C68.background_r = r;
     cm_80452C68.background_g = g;
@@ -878,7 +903,7 @@ void Camera_80030A8C(bool arg0)
     cm_80452C68.unk_399_b4 = arg0;
 }
 
-/// #Camera_80030AA4
+/// #Camera_SetStageVisible
 
 /// #Camera_80030AC4
 

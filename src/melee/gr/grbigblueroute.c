@@ -1,5 +1,7 @@
 #include <platform.h>
 
+#include "grbigblueroute.h"
+
 /// #grBigBlueRoute_8020B864
 
 /// #grBigBlueRoute_8020B89C
@@ -80,7 +82,13 @@ bool grBigBlueRoute_8020C1D4(void)
 
 /// #grBigBlueRoute_8020CD20
 
-/// #grBigBlueRoute_8020DA9C
+int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* arg0)
+{
+    if (arg0 == NULL) {
+        return 0;
+    }
+    return arg0->x8;
+}
 
 /// #grBigBlueRoute_8020DAB4
 

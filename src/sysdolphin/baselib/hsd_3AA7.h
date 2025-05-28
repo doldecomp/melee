@@ -3,6 +3,13 @@
 
 #include <placeholder.h>
 
+struct hsd_803AC3E0_arg0_t {
+    /*  +0 */ char pad_0[0x28];
+    /* +28 */ int x28[9];
+    /* +4C */ int x4C[9];
+    /* +70 */ int x70[9];
+};
+
 /* 3AA790 */ UNK_RET fn_803AA790(UNK_PARAMS);
 /* 3AAA48 */ UNK_RET hsd_803AAA48(UNK_PARAMS);
 /* 3AC168 */ UNK_RET fn_803AC168(UNK_PARAMS);
@@ -12,7 +19,8 @@
 /* 3AC2E0 */ UNK_RET fn_803AC2E0(UNK_PARAMS);
 /* 3AC334 */ UNK_RET fn_803AC334(UNK_PARAMS);
 /* 3AC340 */ UNK_RET hsd_803AC340(UNK_PARAMS);
-/* 3AC3E0 */ UNK_RET hsd_803AC3E0(UNK_PARAMS);
+/* 3AC3E0 */ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* arg0, int arg1,
+                               int arg2, int arg3, int arg4);
 /* 3AC3F8 */ UNK_RET fn_803AC3F8(UNK_PARAMS);
 /* 3AC558 */ UNK_RET hsd_803AC558(UNK_PARAMS);
 /* 3AC634 */ UNK_RET fn_803AC634(UNK_PARAMS);

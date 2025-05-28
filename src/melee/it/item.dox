@@ -2,7 +2,7 @@
 /// @todo
 
 
-extern HSD_ObjAllocData Item_804A0C38;
+extern HSD_ObjAllocData item_link_alloc_data;
 extern HSD_ObjAllocUnk Item_804A0C64;
 extern HSD_ObjAllocUnk2 Item_804A0CCC;
 extern S32Vec3 Item_804A0E24;

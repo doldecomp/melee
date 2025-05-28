@@ -17,7 +17,7 @@ struct DynamicsData {
 
 struct DynamicsDesc {
     /* +0 */ struct DynamicsData* data;
-    /* +4 */ int count;
+    /* +4 */ unsigned int count;
     /* +8 */ Vec3 pos;
 };
 

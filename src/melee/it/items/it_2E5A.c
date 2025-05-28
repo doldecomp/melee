@@ -475,7 +475,7 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
         lb_8000B1CC(item->xDD4_itemVar.it_2E5A.x1C->x4, NULL,
                     (Vec3*) &temp_r29_2->x8);
         temp_r29_2->x14 = temp_r29_2->x8;
-        if (db_80225B34() != 0) {
+        if (db_ShowCoinPickupRange() != 0) {
             item->xDAA_flag.b0 = 0;
         }
     }

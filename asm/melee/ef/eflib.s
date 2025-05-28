@@ -1,15 +1,16 @@
 .include "macros.inc"
 .file "eflib.c"
 
-# 0x8005B4B8 - 0x8005FDDC
+# 0x8005B4B8..0x8005FDDC | size: 0x4924
 .text
 .balign 4
 
+# .text:0x0 | 0x8005B4B8 | size: 0x24C
 .fn efLib_8005B4B8, global
 /* 8005B4B8 00058098  7C 08 02 A6 */	mflr r0
-/* 8005B4BC 0005809C  3C 60 80 46 */	lis r3, efLib_80458EB0@ha
+/* 8005B4BC 0005809C  3C 60 80 46 */	lis r3, Effect_AllocData@ha
 /* 8005B4C0 000580A0  90 01 00 04 */	stw r0, 0x4(r1)
-/* 8005B4C4 000580A4  38 63 8E B0 */	addi r3, r3, efLib_80458EB0@l
+/* 8005B4C4 000580A4  38 63 8E B0 */	addi r3, r3, Effect_AllocData@l
 /* 8005B4C8 000580A8  38 80 00 2C */	li r4, 0x2c
 /* 8005B4CC 000580AC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8005B4D0 000580B0  38 A0 00 04 */	li r5, 0x4
@@ -160,6 +161,7 @@
 /* 8005B700 000582E0  4E 80 00 20 */	blr
 .endfn efLib_8005B4B8
 
+# .text:0x24C | 0x8005B704 | size: 0x7C
 .fn efLib_8005B704, global
 /* 8005B704 000582E4  80 AD C1 8C */	lwz r5, HSD_GObj_Entities@sda21(r0)
 /* 8005B708 000582E8  80 C5 00 2C */	lwz r6, 0x2c(r5)
@@ -200,6 +202,7 @@
 /* 8005B77C 0005835C  4E 80 00 20 */	blr
 .endfn efLib_8005B704
 
+# .text:0x2C8 | 0x8005B780 | size: 0x100
 .fn efLib_8005B780, global
 /* 8005B780 00058360  7C 08 02 A6 */	mflr r0
 /* 8005B784 00058364  90 01 00 04 */	stw r0, 0x4(r1)
@@ -277,6 +280,7 @@
 /* 8005B87C 0005845C  4E 80 00 20 */	blr
 .endfn efLib_8005B780
 
+# .text:0x3C8 | 0x8005B880 | size: 0x1C0
 .fn efLib_DestroyAll, global
 /* 8005B880 00058460  7C 08 02 A6 */	mflr r0
 /* 8005B884 00058464  3C 80 80 46 */	lis r4, efLib_80458F60@ha
@@ -408,6 +412,7 @@
 /* 8005BA3C 0005861C  4E 80 00 20 */	blr
 .endfn efLib_DestroyAll
 
+# .text:0x588 | 0x8005BA40 | size: 0x84
 .fn efLib_PauseAll, global
 /* 8005BA40 00058620  80 8D C1 8C */	lwz r4, HSD_GObj_Entities@sda21(r0)
 /* 8005BA44 00058624  80 A4 00 2C */	lwz r5, 0x2c(r4)
@@ -450,6 +455,7 @@
 /* 8005BAC0 000586A0  4E 80 00 20 */	blr
 .endfn efLib_PauseAll
 
+# .text:0x60C | 0x8005BAC4 | size: 0x7C
 .fn efLib_ResumeAll, global
 /* 8005BAC4 000586A4  80 8D C1 8C */	lwz r4, HSD_GObj_Entities@sda21(r0)
 /* 8005BAC8 000586A8  80 A4 00 2C */	lwz r5, 0x2c(r4)
@@ -490,7 +496,8 @@
 /* 8005BB3C 0005871C  4E 80 00 20 */	blr
 .endfn efLib_ResumeAll
 
-.fn fn_8005BB40, global
+# .text:0x688 | 0x8005BB40 | size: 0x74
+.fn Effect_RemoveUserData, global
 /* 8005BB40 00058720  7C 08 02 A6 */	mflr r0
 /* 8005BB44 00058724  38 83 00 00 */	addi r4, r3, 0x0
 /* 8005BB48 00058728  90 01 00 04 */	stw r0, 0x4(r1)
@@ -505,8 +512,8 @@
 /* 8005BB6C 0005874C  38 03 FF FF */	subi r0, r3, 0x1
 /* 8005BB70 00058750  90 0D AE 4C */	stw r0, efLib_804D64EC@sda21(r0)
 .L_8005BB74:
-/* 8005BB74 00058754  3C 60 80 46 */	lis r3, efLib_80458EB0@ha
-/* 8005BB78 00058758  38 63 8E B0 */	addi r3, r3, efLib_80458EB0@l
+/* 8005BB74 00058754  3C 60 80 46 */	lis r3, Effect_AllocData@ha
+/* 8005BB78 00058758  38 63 8E B0 */	addi r3, r3, Effect_AllocData@l
 /* 8005BB7C 0005875C  48 31 F1 A5 */	bl HSD_ObjFree
 /* 8005BB80 00058760  48 00 00 24 */	b .L_8005BBA4
 .L_8005BB84:
@@ -523,8 +530,9 @@
 /* 8005BBA8 00058788  38 21 00 08 */	addi r1, r1, 0x8
 /* 8005BBAC 0005878C  7C 08 03 A6 */	mtlr r0
 /* 8005BBB0 00058790  4E 80 00 20 */	blr
-.endfn fn_8005BB40
+.endfn Effect_RemoveUserData
 
+# .text:0x6FC | 0x8005BBB4 | size: 0x9C
 .fn efLib_8005BBB4, global
 /* 8005BBB4 00058794  7C 08 02 A6 */	mflr r0
 /* 8005BBB8 00058798  90 01 00 04 */	stw r0, 0x4(r1)
@@ -572,6 +580,7 @@
 /* 8005BC4C 0005882C  4E 80 00 20 */	blr
 .endfn efLib_8005BBB4
 
+# .text:0x798 | 0x8005BC50 | size: 0x238
 .fn fn_8005BC50, global
 /* 8005BC50 00058830  7C 08 02 A6 */	mflr r0
 /* 8005BC54 00058834  90 01 00 04 */	stw r0, 0x4(r1)
@@ -734,6 +743,7 @@
 /* 8005BE84 00058A64  4E 80 00 20 */	blr
 .endfn fn_8005BC50
 
+# .text:0x9D0 | 0x8005BE88 | size: 0x32C
 .fn efLib_8005BE88, global
 /* 8005BE88 00058A68  7C 08 02 A6 */	mflr r0
 /* 8005BE8C 00058A6C  3C A0 10 62 */	lis r5, 0x1062
@@ -773,8 +783,8 @@
 /* 8005BF10 00058AF0  38 03 00 01 */	addi r0, r3, 0x1
 /* 8005BF14 00058AF4  90 0D AE 4C */	stw r0, efLib_804D64EC@sda21(r0)
 .L_8005BF18:
-/* 8005BF18 00058AF8  3C 60 80 46 */	lis r3, efLib_80458EB0@ha
-/* 8005BF1C 00058AFC  38 63 8E B0 */	addi r3, r3, efLib_80458EB0@l
+/* 8005BF18 00058AF8  3C 60 80 46 */	lis r3, Effect_AllocData@ha
+/* 8005BF1C 00058AFC  38 63 8E B0 */	addi r3, r3, Effect_AllocData@l
 /* 8005BF20 00058B00  48 31 EC A9 */	bl HSD_ObjAlloc
 /* 8005BF24 00058B04  28 03 00 00 */	cmplwi r3, 0x0
 /* 8005BF28 00058B08  40 82 00 0C */	bne .L_8005BF34
@@ -838,8 +848,8 @@
 /* 8005BFF4 00058BD4  38 03 FF FF */	subi r0, r3, 0x1
 /* 8005BFF8 00058BD8  90 0D AE 4C */	stw r0, efLib_804D64EC@sda21(r0)
 .L_8005BFFC:
-/* 8005BFFC 00058BDC  3C 60 80 46 */	lis r3, efLib_80458EB0@ha
-/* 8005C000 00058BE0  38 63 8E B0 */	addi r3, r3, efLib_80458EB0@l
+/* 8005BFFC 00058BDC  3C 60 80 46 */	lis r3, Effect_AllocData@ha
+/* 8005C000 00058BE0  38 63 8E B0 */	addi r3, r3, Effect_AllocData@l
 /* 8005C004 00058BE4  38 9E 00 00 */	addi r4, r30, 0x0
 /* 8005C008 00058BE8  48 31 ED 19 */	bl HSD_ObjFree
 /* 8005C00C 00058BEC  48 00 00 24 */	b .L_8005C030
@@ -862,9 +872,9 @@
 /* 8005C044 00058C24  38 A0 00 07 */	li r5, 0x7
 /* 8005C048 00058C28  38 C0 00 01 */	li r6, 0x1
 /* 8005C04C 00058C2C  48 33 46 51 */	bl GObj_SetupGXLink
-/* 8005C050 00058C30  3C 80 80 06 */	lis r4, fn_8005BB40@ha
+/* 8005C050 00058C30  3C 80 80 06 */	lis r4, Effect_RemoveUserData@ha
 /* 8005C054 00058C34  80 7E 00 04 */	lwz r3, 0x4(r30)
-/* 8005C058 00058C38  38 A4 BB 40 */	addi r5, r4, fn_8005BB40@l
+/* 8005C058 00058C38  38 A4 BB 40 */	addi r5, r4, Effect_RemoveUserData@l
 /* 8005C05C 00058C3C  38 DE 00 00 */	addi r6, r30, 0x0
 /* 8005C060 00058C40  38 80 00 08 */	li r4, 0x8
 /* 8005C064 00058C44  48 33 4B 05 */	bl GObj_InitUserData
@@ -958,6 +968,7 @@
 /* 8005C1B0 00058D90  4E 80 00 20 */	blr
 .endfn efLib_8005BE88
 
+# .text:0xCFC | 0x8005C1B4 | size: 0x108
 .fn efLib_8005C1B4, global
 /* 8005C1B4 00058D94  7C 08 02 A6 */	mflr r0
 /* 8005C1B8 00058D98  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1034,6 +1045,7 @@
 /* 8005C2B8 00058E98  4E 80 00 20 */	blr
 .endfn efLib_8005C1B4
 
+# .text:0xE04 | 0x8005C2BC | size: 0x120
 .fn efLib_8005C2BC, global
 /* 8005C2BC 00058E9C  7C 08 02 A6 */	mflr r0
 /* 8005C2C0 00058EA0  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1116,6 +1128,7 @@
 /* 8005C3D8 00058FB8  4E 80 00 20 */	blr
 .endfn efLib_8005C2BC
 
+# .text:0xF24 | 0x8005C3DC | size: 0x1E8
 .fn efLib_8005C3DC, global
 /* 8005C3DC 00058FBC  7C 08 02 A6 */	mflr r0
 /* 8005C3E0 00058FC0  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1252,6 +1265,7 @@
 /* 8005C5C0 000591A0  4E 80 00 20 */	blr
 .endfn efLib_8005C3DC
 
+# .text:0x110C | 0x8005C5C4 | size: 0x130
 .fn efLib_8005C5C4, global
 /* 8005C5C4 000591A4  7C 08 02 A6 */	mflr r0
 /* 8005C5C8 000591A8  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1337,6 +1351,7 @@
 /* 8005C6F0 000592D0  4E 80 00 20 */	blr
 .endfn efLib_8005C5C4
 
+# .text:0x123C | 0x8005C6F4 | size: 0x120
 .fn efLib_8005C6F4, global
 /* 8005C6F4 000592D4  7C 08 02 A6 */	mflr r0
 /* 8005C6F8 000592D8  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1418,6 +1433,7 @@
 /* 8005C810 000593F0  4E 80 00 20 */	blr
 .endfn efLib_8005C6F4
 
+# .text:0x135C | 0x8005C814 | size: 0xF0
 .fn efLib_8005C814, global
 /* 8005C814 000593F4  7C 08 02 A6 */	mflr r0
 /* 8005C818 000593F8  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1486,6 +1502,7 @@
 /* 8005C900 000594E0  4E 80 00 20 */	blr
 .endfn efLib_8005C814
 
+# .text:0x144C | 0x8005C904 | size: 0xA0
 .fn fn_8005C904, global
 /* 8005C904 000594E4  7C 08 02 A6 */	mflr r0
 /* 8005C908 000594E8  2C 04 00 01 */	cmpwi r4, 0x1
@@ -1536,6 +1553,7 @@
 /* 8005C9A0 00059580  4E 80 00 20 */	blr
 .endfn fn_8005C904
 
+# .text:0x14EC | 0x8005C9A4 | size: 0x2C
 .fn efLib_8005C9A4, global
 /* 8005C9A4 00059584  7C 08 02 A6 */	mflr r0
 /* 8005C9A8 00059588  3C 60 00 06 */	lis r3, 0x6
@@ -1550,6 +1568,7 @@
 /* 8005C9CC 000595AC  4E 80 00 20 */	blr
 .endfn efLib_8005C9A4
 
+# .text:0x1518 | 0x8005C9D0 | size: 0x2C
 .fn fn_8005C9D0, global
 /* 8005C9D0 000595B0  7C 08 02 A6 */	mflr r0
 /* 8005C9D4 000595B4  3C 60 00 01 */	lis r3, 0x1
@@ -1564,6 +1583,7 @@
 /* 8005C9F8 000595D8  4E 80 00 20 */	blr
 .endfn fn_8005C9D0
 
+# .text:0x1544 | 0x8005C9FC | size: 0xB4
 .fn efLib_8005C9FC, global
 /* 8005C9FC 000595DC  7C 08 02 A6 */	mflr r0
 /* 8005CA00 000595E0  38 A3 00 00 */	addi r5, r3, 0x0
@@ -1617,6 +1637,7 @@
 /* 8005CAAC 0005968C  4E 80 00 20 */	blr
 .endfn efLib_8005C9FC
 
+# .text:0x15F8 | 0x8005CAB0 | size: 0x84
 .fn efLib_8005CAB0, global
 /* 8005CAB0 00059690  7C 08 02 A6 */	mflr r0
 /* 8005CAB4 00059694  3C 80 10 62 */	lis r4, 0x1062
@@ -1656,6 +1677,7 @@
 /* 8005CB30 00059710  4E 80 00 20 */	blr
 .endfn efLib_8005CAB0
 
+# .text:0x167C | 0x8005CB34 | size: 0xF8
 .fn efLib_8005CB34, global
 /* 8005CB34 00059714  7C 08 02 A6 */	mflr r0
 /* 8005CB38 00059718  3C A0 10 62 */	lis r5, 0x1062
@@ -1725,6 +1747,7 @@
 /* 8005CC28 00059808  4E 80 00 20 */	blr
 .endfn efLib_8005CB34
 
+# .text:0x1774 | 0x8005CC2C | size: 0x58
 .fn efLib_8005CC2C, global
 /* 8005CC2C 0005980C  7C 08 02 A6 */	mflr r0
 /* 8005CC30 00059810  3C A0 10 62 */	lis r5, 0x1062
@@ -1751,6 +1774,7 @@
 /* 8005CC80 00059860  4E 80 00 20 */	blr
 .endfn efLib_8005CC2C
 
+# .text:0x17CC | 0x8005CC84 | size: 0xA8
 .fn efLib_8005CC84, global
 /* 8005CC84 00059864  7C 08 02 A6 */	mflr r0
 /* 8005CC88 00059868  3C A0 10 62 */	lis r5, 0x1062
@@ -1801,6 +1825,7 @@
 /* 8005CD28 00059908  4E 80 00 20 */	blr
 .endfn efLib_8005CC84
 
+# .text:0x1874 | 0x8005CD2C | size: 0x11C
 .fn efLib_8005CD2C, global
 /* 8005CD2C 0005990C  7C 08 02 A6 */	mflr r0
 /* 8005CD30 00059910  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1881,6 +1906,7 @@
 /* 8005CE44 00059A24  4E 80 00 20 */	blr
 .endfn efLib_8005CD2C
 
+# .text:0x1990 | 0x8005CE48 | size: 0xF8
 .fn efLib_8005CE48, global
 /* 8005CE48 00059A28  7C 08 02 A6 */	mflr r0
 /* 8005CE4C 00059A2C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1951,6 +1977,7 @@
 /* 8005CF3C 00059B1C  4E 80 00 20 */	blr
 .endfn efLib_8005CE48
 
+# .text:0x1A88 | 0x8005CF40 | size: 0x104
 .fn efLib_8005CF40, global
 /* 8005CF40 00059B20  7C 08 02 A6 */	mflr r0
 /* 8005CF44 00059B24  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2026,6 +2053,7 @@
 /* 8005D040 00059C20  4E 80 00 20 */	blr
 .endfn efLib_8005CF40
 
+# .text:0x1B8C | 0x8005D044 | size: 0x130
 .fn efLib_8005D044, global
 /* 8005D044 00059C24  7C 08 02 A6 */	mflr r0
 /* 8005D048 00059C28  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2112,6 +2140,7 @@
 /* 8005D170 00059D50  4E 80 00 20 */	blr
 .endfn efLib_8005D044
 
+# .text:0x1CBC | 0x8005D174 | size: 0x9AC
 .fn efLib_8005D174, global
 /* 8005D174 00059D54  7C 08 02 A6 */	mflr r0
 /* 8005D178 00059D58  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2841,6 +2870,7 @@
 /* 8005DB1C 0005A6FC  4E 80 00 20 */	blr
 .endfn efLib_8005D174
 
+# .text:0x2668 | 0x8005DB20 | size: 0x50
 .fn fn_8005DB20, global
 /* 8005DB20 0005A700  7C 08 02 A6 */	mflr r0
 /* 8005DB24 0005A704  2C 04 00 1E */	cmpwi r4, 0x1e
@@ -2866,6 +2896,7 @@
 /* 8005DB6C 0005A74C  4E 80 00 20 */	blr
 .endfn fn_8005DB20
 
+# .text:0x26B8 | 0x8005DB70 | size: 0x50
 .fn fn_8005DB70, global
 /* 8005DB70 0005A750  7C 08 02 A6 */	mflr r0
 /* 8005DB74 0005A754  2C 04 00 1E */	cmpwi r4, 0x1e
@@ -2891,6 +2922,7 @@
 /* 8005DBBC 0005A79C  4E 80 00 20 */	blr
 .endfn fn_8005DB70
 
+# .text:0x2708 | 0x8005DBC0 | size: 0x110
 .fn efLib_8005DBC0, global
 /* 8005DBC0 0005A7A0  7C 08 02 A6 */	mflr r0
 /* 8005DBC4 0005A7A4  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2964,6 +2996,7 @@
 /* 8005DCCC 0005A8AC  4E 80 00 20 */	blr
 .endfn efLib_8005DBC0
 
+# .text:0x2818 | 0x8005DCD0 | size: 0xE8
 .fn fn_8005DCD0, global
 /* 8005DCD0 0005A8B0  7C 08 02 A6 */	mflr r0
 /* 8005DCD4 0005A8B4  3C 80 80 4D */	lis r4, hsd_804D0E5C@ha
@@ -3029,6 +3062,7 @@
 /* 8005DDB4 0005A994  4E 80 00 20 */	blr
 .endfn fn_8005DCD0
 
+# .text:0x2900 | 0x8005DDB8 | size: 0xDC
 .fn efLib_8005DDB8, global
 /* 8005DDB8 0005A998  7C 08 02 A6 */	mflr r0
 /* 8005DDBC 0005A99C  38 80 00 00 */	li r4, 0x0
@@ -3091,6 +3125,7 @@
 /* 8005DE90 0005AA70  4E 80 00 20 */	blr
 .endfn efLib_8005DDB8
 
+# .text:0x29DC | 0x8005DE94 | size: 0x1FC
 .fn efLib_8005DE94, global
 /* 8005DE94 0005AA74  7C 08 02 A6 */	mflr r0
 /* 8005DE98 0005AA78  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3236,6 +3271,7 @@
 /* 8005E08C 0005AC6C  4E 80 00 20 */	blr
 .endfn efLib_8005DE94
 
+# .text:0x2BD8 | 0x8005E090 | size: 0x148
 .fn efLib_8005E090, global
 /* 8005E090 0005AC70  7C 08 02 A6 */	mflr r0
 /* 8005E094 0005AC74  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3330,6 +3366,7 @@
 /* 8005E1D4 0005ADB4  4E 80 00 20 */	blr
 .endfn efLib_8005E090
 
+# .text:0x2D20 | 0x8005E1D8 | size: 0xDC
 .fn efLib_8005E1D8, global
 /* 8005E1D8 0005ADB8  7C 08 02 A6 */	mflr r0
 /* 8005E1DC 0005ADBC  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3395,6 +3432,7 @@
 /* 8005E2B0 0005AE90  4E 80 00 20 */	blr
 .endfn efLib_8005E1D8
 
+# .text:0x2DFC | 0x8005E2B4 | size: 0xEC
 .fn efLib_8005E2B4, global
 /* 8005E2B4 0005AE94  7C 08 02 A6 */	mflr r0
 /* 8005E2B8 0005AE98  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3464,6 +3502,7 @@
 /* 8005E39C 0005AF7C  4E 80 00 20 */	blr
 .endfn efLib_8005E2B4
 
+# .text:0x2EE8 | 0x8005E3A0 | size: 0x2A8
 .fn efLib_8005E3A0, global
 /* 8005E3A0 0005AF80  7C 08 02 A6 */	mflr r0
 /* 8005E3A4 0005AF84  3C A0 80 3C */	lis r5, efLib_803BF7A0@ha
@@ -3657,6 +3696,7 @@
 /* 8005E644 0005B224  4E 80 00 20 */	blr
 .endfn efLib_8005E3A0
 
+# .text:0x3190 | 0x8005E648 | size: 0x308
 .fn efLib_8005E648, global
 /* 8005E648 0005B228  7C 08 02 A6 */	mflr r0
 /* 8005E64C 0005B22C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3876,6 +3916,7 @@
 /* 8005E94C 0005B52C  4E 80 00 20 */	blr
 .endfn efLib_8005E648
 
+# .text:0x3498 | 0x8005E950 | size: 0x220
 .fn efLib_8005E950, global
 /* 8005E950 0005B530  7C 08 02 A6 */	mflr r0
 /* 8005E954 0005B534  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4030,6 +4071,7 @@
 /* 8005EB6C 0005B74C  4E 80 00 20 */	blr
 .endfn efLib_8005E950
 
+# .text:0x36B8 | 0x8005EB70 | size: 0x58
 .fn efLib_8005EB70, global
 /* 8005EB70 0005B750  7C 08 02 A6 */	mflr r0
 /* 8005EB74 0005B754  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4056,6 +4098,7 @@
 /* 8005EBC4 0005B7A4  4E 80 00 20 */	blr
 .endfn efLib_8005EB70
 
+# .text:0x3710 | 0x8005EBC8 | size: 0x214
 .fn efLib_8005EBC8, global
 /* 8005EBC8 0005B7A8  7C 08 02 A6 */	mflr r0
 /* 8005EBCC 0005B7AC  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4205,6 +4248,7 @@
 /* 8005EDD8 0005B9B8  4E 80 00 20 */	blr
 .endfn efLib_8005EBC8
 
+# .text:0x3924 | 0x8005EDDC | size: 0x2B0
 .fn efLib_8005EDDC, global
 /* 8005EDDC 0005B9BC  7C 08 02 A6 */	mflr r0
 /* 8005EDE0 0005B9C0  3C A0 80 3C */	lis r5, efLib_803BF7A0@ha
@@ -4400,6 +4444,7 @@
 /* 8005F088 0005BC68  4E 80 00 20 */	blr
 .endfn efLib_8005EDDC
 
+# .text:0x3BD4 | 0x8005F08C | size: 0x1E4
 .fn efLib_8005F08C, global
 /* 8005F08C 0005BC6C  7C 08 02 A6 */	mflr r0
 /* 8005F090 0005BC70  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4540,6 +4585,7 @@
 /* 8005F26C 0005BE4C  4E 80 00 20 */	blr
 .endfn efLib_8005F08C
 
+# .text:0x3DB8 | 0x8005F270 | size: 0x1E4
 .fn efLib_8005F270, global
 /* 8005F270 0005BE50  7C 08 02 A6 */	mflr r0
 /* 8005F274 0005BE54  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4680,6 +4726,7 @@
 /* 8005F450 0005C030  4E 80 00 20 */	blr
 .endfn efLib_8005F270
 
+# .text:0x3F9C | 0x8005F454 | size: 0x2F4
 .fn efLib_8005F454, global
 /* 8005F454 0005C034  7C 08 02 A6 */	mflr r0
 /* 8005F458 0005C038  3C C0 80 3C */	lis r6, efLib_803BF7A0@ha
@@ -4894,6 +4941,7 @@
 /* 8005F744 0005C324  4E 80 00 20 */	blr
 .endfn efLib_8005F454
 
+# .text:0x4290 | 0x8005F748 | size: 0x2C
 .fn efLib_8005F748, global
 /* 8005F748 0005C328  7C 08 02 A6 */	mflr r0
 /* 8005F74C 0005C32C  7C 64 1B 78 */	mr r4, r3
@@ -4908,6 +4956,7 @@
 /* 8005F770 0005C350  4E 80 00 20 */	blr
 .endfn efLib_8005F748
 
+# .text:0x42BC | 0x8005F774 | size: 0xF0
 .fn efLib_8005F774, global
 /* 8005F774 0005C354  7C 08 02 A6 */	mflr r0
 /* 8005F778 0005C358  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4977,6 +5026,7 @@
 /* 8005F860 0005C440  4E 80 00 20 */	blr
 .endfn efLib_8005F774
 
+# .text:0x43AC | 0x8005F864 | size: 0x12C
 .fn efLib_8005F864, global
 /* 8005F864 0005C444  3C A0 80 46 */	lis r5, efLib_80458EE0@ha
 /* 8005F868 0005C448  38 A5 8E E0 */	addi r5, r5, efLib_80458EE0@l
@@ -5056,6 +5106,7 @@
 /* 8005F98C 0005C56C  4E 80 00 20 */	blr
 .endfn efLib_8005F864
 
+# .text:0x44D8 | 0x8005F990 | size: 0x128
 .fn efLib_8005F990, global
 /* 8005F990 0005C570  3C A0 80 46 */	lis r5, efLib_80458EE0@ha
 /* 8005F994 0005C574  38 A5 8E E0 */	addi r5, r5, efLib_80458EE0@l
@@ -5134,6 +5185,7 @@
 /* 8005FAB4 0005C694  4E 80 00 20 */	blr
 .endfn efLib_8005F990
 
+# .text:0x4600 | 0x8005FAB8 | size: 0x12C
 .fn efLib_8005FAB8, global
 /* 8005FAB8 0005C698  7C 08 02 A6 */	mflr r0
 /* 8005FABC 0005C69C  3C 80 80 46 */	lis r4, efLib_80458EE0@ha
@@ -5223,6 +5275,7 @@
 /* 8005FBE0 0005C7C0  4E 80 00 20 */	blr
 .endfn efLib_8005FAB8
 
+# .text:0x472C | 0x8005FBE4 | size: 0xF4
 .fn fn_8005FBE4, global
 /* 8005FBE4 0005C7C4  7C 08 02 A6 */	mflr r0
 /* 8005FBE8 0005C7C8  38 80 00 00 */	li r4, 0x0
@@ -5291,6 +5344,7 @@
 /* 8005FCD4 0005C8B4  4E 80 00 20 */	blr
 .endfn fn_8005FBE4
 
+# .text:0x4820 | 0x8005FCD8 | size: 0x104
 .fn efLib_8005FCD8, global
 /* 8005FCD8 0005C8B8  7C 08 02 A6 */	mflr r0
 /* 8005FCDC 0005C8BC  90 01 00 04 */	stw r0, 0x4(r1)
@@ -5363,172 +5417,166 @@
 /* 8005FDD8 0005C9B8  4E 80 00 20 */	blr
 .endfn efLib_8005FCD8
 
-# 0x803BF7A0 - 0x803BF848
+# 0x803BF7A0..0x803BF848 | size: 0xA8
 .data
 .balign 8
 
+# .data:0x0 | 0x803BF7A0 | size: 0x18
 .obj efLib_803BF7A0, global
-	.4byte 0x4475706C
-	.4byte 0x69636174
-	.4byte 0x65204672
-	.4byte 0x65652025
-	.4byte 0x3038580A
-	.4byte 0x00000000
+	.string "Duplicate Free %08X\n\000\000\000"
 .endobj efLib_803BF7A0
 
+# .data:0x18 | 0x803BF7B8 | size: 0x4C
 .obj efLib_803BF7B8, global
-	.4byte 0x63616E27
-	.4byte 0x74207265
-	.4byte 0x6D6F7665
-	.4byte 0x206E6F20
-	.4byte 0x666F7263
-	.4byte 0x65206566
-	.4byte 0x66656374
-	.4byte 0x210A0000
-	.4byte 0x6572726F
-	.4byte 0x72206E6F
-	.4byte 0x20706172
-	.4byte 0x656E7420
-	.4byte 0x676F626A
-	.4byte 0x210A0000
-	.4byte 0x4F766572
-	.4byte 0x20416E69
-	.4byte 0x6D652043
-	.4byte 0x616C6C0A
-	.4byte 0x00000000
+	.string "can't remove no force effect!\n\000\000error no parent gobj!\n\000\000Over Anime Call\n\000\000\000"
 .endobj efLib_803BF7B8
 
+# .data:0x64 | 0x803BF804 | size: 0xA
 .obj efLib_803BF804, global
-	.4byte 0x7472616E
-	.4byte 0x736C6174
-	.4byte 0x65000000
+	.string "translate"
+.endobj efLib_803BF804
+
+# .data:0x6E | 0x803BF80E | size: 0xE
+.obj lbl_803BF80E, global
+	.2byte 0x0000
 	.4byte efLib_8005DBC0
 	.4byte 0x00000000
 	.4byte 0x00000000
-.endobj efLib_803BF804
+.endobj lbl_803BF80E
 
+# .data:0x7C | 0x803BF81C | size: 0x2C
 .obj efLib_803BF81C, global
-	.4byte 0x21286A6F
-	.4byte 0x626A2D3E
-	.4byte 0x666C6167
-	.4byte 0x73202620
-	.4byte 0x4A4F424A
-	.4byte 0x5F555345
-	.4byte 0x5F515541
-	.4byte 0x5445524E
-	.4byte 0x494F4E29
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.string "!(jobj->flags & JOBJ_USE_QUATERNION)\000\000\000\000\000\000\000"
 .endobj efLib_803BF81C
 
-# 0x80458EB0 - 0x80458FA0
+# 0x80458EB0..0x80458FA0 | size: 0xF0
 .section .bss, "wa", @nobits
 .balign 8
 
-.obj efLib_80458EB0, global
+# .bss:0x0 | 0x80458EB0 | size: 0x30
+.obj Effect_AllocData, global
 	.skip 0x30
-.endobj efLib_80458EB0
+.endobj Effect_AllocData
 
+# .bss:0x30 | 0x80458EE0 | size: 0x80
 .obj efLib_80458EE0, global
 	.skip 0x80
 .endobj efLib_80458EE0
 
+# .bss:0xB0 | 0x80458F60 | size: 0x40
 .obj efLib_80458F60, global
 	.skip 0x40
 .endobj efLib_80458F60
 
-# 0x804D39A0 - 0x804D39C8
+# 0x804D39A0..0x804D39C8 | size: 0x28
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x804D39A0 | size: 0x8
 .obj efLib_804D39A0, global
 	.string "eflib.c"
 .endobj efLib_804D39A0
 
+# .sdata:0x8 | 0x804D39A8 | size: 0x4
 .obj efLib_804D39A8, global
 	.4byte 0x30000000
 .endobj efLib_804D39A8
 
+# .sdata:0xC | 0x804D39AC | size: 0x7
 .obj efLib_804D39AC, global
-	.4byte 0x6A6F626A
-	.4byte 0x2E680000
+	.string "jobj.h"
 .endobj efLib_804D39AC
+	.byte 0x00
 
+# .sdata:0x14 | 0x804D39B4 | size: 0x8
 .obj efLib_804D39B4, global
-	.4byte 0x6A6F626A
-	.4byte 0x00000000
+	.string "jobj\000\000\000"
 .endobj efLib_804D39B4
 
+# .sdata:0x1C | 0x804D39BC | size: 0xC
 .obj efLib_804D39BC, global
-	.4byte 0x7363616C
-	.4byte 0x65000000
-	.4byte 0x00000000
+	.string "scale\000\000\000\000\000\000"
 .endobj efLib_804D39BC
 
-# 0x804D64E8 - 0x804D64F8
+# 0x804D64E8..0x804D64F8 | size: 0x10
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x804D64E8 | size: 0x4
 .obj efLib_804D64E8, global
 	.skip 0x4
 .endobj efLib_804D64E8
 
+# .sbss:0x4 | 0x804D64EC | size: 0x4
 .obj efLib_804D64EC, global
 	.skip 0x4
 .endobj efLib_804D64EC
 
+# .sbss:0x8 | 0x804D64F0 | size: 0x8
 .obj efLib_804D64F0, global
 	.skip 0x8
 .endobj efLib_804D64F0
 
-# 0x804D8168 - 0x804D81A0
+# 0x804D8168..0x804D81A0 | size: 0x38
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x804D8168 | size: 0x4
 .obj efLib_804D8168, global
 	.float 10
 .endobj efLib_804D8168
 
+# .sdata2:0x4 | 0x804D816C | size: 0x4
 .obj efLib_804D816C, global
 	.float 0
 .endobj efLib_804D816C
 
+# .sdata2:0x8 | 0x804D8170 | size: 0x4
 .obj efLib_804D8170, global
 	.float -1.5707964
 .endobj efLib_804D8170
 
+# .sdata2:0xC | 0x804D8174 | size: 0x4
 .obj efLib_804D8174, global
 	.float 1.5707964
 .endobj efLib_804D8174
 
+# .sdata2:0x10 | 0x804D8178 | size: 0x8
 .obj efLib_804D8178, global
 	.double -1.5707963267948966
 .endobj efLib_804D8178
 
+# .sdata2:0x18 | 0x804D8180 | size: 0x8
 .obj efLib_804D8180, global
 	.double 1.5707963267948966
 .endobj efLib_804D8180
 
+# .sdata2:0x20 | 0x804D8188 | size: 0x4
 .obj efLib_804D8188, global
 	.float 65
 .endobj efLib_804D8188
 
+# .sdata2:0x24 | 0x804D818C | size: 0x4
 .obj efLib_804D818C, global
 	.float 60
 .endobj efLib_804D818C
 
+# .sdata2:0x28 | 0x804D8190 | size: 0x4
 .obj efLib_804D8190, global
 	.float 2
 .endobj efLib_804D8190
 
+# .sdata2:0x2C | 0x804D8194 | size: 0x4
 .obj efLib_804D8194, global
 	.float 0.2
 .endobj efLib_804D8194
 
+# .sdata2:0x30 | 0x804D8198 | size: 0x4
 .obj efLib_804D8198, global
 	.float 0.5
 .endobj efLib_804D8198
 
+# .sdata2:0x34 | 0x804D819C | size: 0x4
 .obj efLib_804D819C, global
 	.float 0.1
 .endobj efLib_804D819C

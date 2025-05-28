@@ -7,9 +7,10 @@
 
 #include "baselib/jobj.h"
 
-/* 391580 */ UNK_RET hsd_80391580(UNK_PARAMS);
-/* 391664 */ UNK_RET hsd_80391664(UNK_PARAMS);
-/* 391A04 */ UNK_RET hsd_80391A04(UNK_PARAMS);
+/* 391580 */ void DrawRectangle(float x, float y, float w, float h,
+                                GXColor* color);
+/* 391664 */ void DrawASCII(int chr, float x, float y, GXColor* color);
+/* 391A04 */ void hsd_80391A04(float scale_x, float scale_y, int line_width);
 /* 391AC8 */ UNK_RET hsd_80391AC8(UNK_PARAMS);
 /* 391E18 */ UNK_RET hsd_80391E18(UNK_PARAMS);
 /* 391F28 */ UNK_RET hsd_80391F28(UNK_PARAMS);
@@ -35,10 +36,10 @@
 /* 393844 */ UNK_RET hsd_80393844(UNK_PARAMS);
 /* 393A04 */ bool hsd_80393A04(void);
 /* 393A54 */ void hsd_80393A54(int);
-/* 393A5C */ UNK_RET hsd_80393A5C(UNK_PARAMS);
+/* 393A5C */ int hsd_80393A5C(char*, int, int);
 /* 393C14 */ UNK_RET fn_80393C14(UNK_PARAMS);
 /* 393D2C */ UNK_RET hsd_80393D2C(UNK_PARAMS);
-/* 393DA0 */ UNK_RET hsd_80393DA0(UNK_PARAMS);
+/* 393DA0 */ void hsd_80393DA0(void*, int);
 /* 393E34 */ UNK_RET hsd_80393E34(UNK_PARAMS);
 /* 393E68 */ UNK_RET hsd_80393E68(UNK_PARAMS);
 /* 393EF4 */ UNK_RET hsd_80393EF4(UNK_PARAMS);
@@ -50,8 +51,8 @@
 /* 394544 */ UNK_RET hsd_80394544(UNK_PARAMS);
 /* 394668 */ UNK_RET hsd_80394668(UNK_PARAMS);
 /* 394950 */ UNK_RET hsd_80394950(UNK_PARAMS);
-/* 394A48 */ UNK_RET Exception_ReportStackTrace(UNK_PARAMS);
-/* 394B18 */ UNK_RET Exception_ReportCodeline(UNK_PARAMS);
+/* 394A48 */ void Exception_ReportStackTrace(OSContext*, int);
+/* 394B18 */ void Exception_ReportCodeline(u16, int, int, OSContext*);
 /* 394DF4 */ UNK_RET fn_80394DF4(UNK_PARAMS);
 /* 394E8C */ UNK_RET hsd_80394E8C(UNK_PARAMS);
 /* 394F48 */ UNK_RET hsd_80394F48(UNK_PARAMS);
@@ -90,7 +91,7 @@
 /* 397520 */ UNK_RET hsd_80397520(UNK_PARAMS);
 /* 3975D4 */ UNK_RET hsd_803975D4(UNK_PARAMS);
 /* 397814 */ UNK_RET fn_80397814(UNK_PARAMS);
-/* 397DA4 */ UNK_RET hsd_80397DA4(UNK_PARAMS);
+/* 397DA4 */ void hsd_80397DA4(OSContext*);
 /* 397DF4 */ void Exception_StoreDebugLevel(int);
 /* 397DFC */ void hsd_80397DFC(u32 arg0);
 /* 397E0C */ UNK_RET baselib_mfspr(UNK_PARAMS);
@@ -130,6 +131,8 @@
 /* 39EFAC */ UnkGeneratorStruct* hsd_8039EFAC(s32, s32, s32, HSD_JObj*);
 /* 39F05C */ UnkGeneratorStruct* hsd_8039F05C(s8, s8, s32);
 /* 39F6CC */ void hsd_8039F6CC(s32, s32, s32, HSD_JObj*);
+/* 4D0F60 */ extern HSD_ObjAllocData hsd_804D0F60;
+/* 4D0F90 */ extern HSD_ObjAllocData hsd_804D0F90;
 /* 4D78D0 */ extern u32 hsd_804D78D0;
 /* 4D78D4 */ extern u32 hsd_804D78D4;
 /* 4D78D8 */ extern u16 hsd_804D78D8;

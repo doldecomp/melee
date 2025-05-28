@@ -243,7 +243,7 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 void ftCo_80092158(ftCo_GObj* gobj, int arg1, HSD_JObj* arg2)
 {
     u8 temp_ret = Player_GetUnk45(GET_FIGHTER(gobj)->player_id);
-    int* temp_r7 = &Fighter_804D650C[temp_ret];
+    u8* temp_r7 = &Fighter_804D650C[temp_ret];
     u8 temp_r7_2 = M2C_FIELD(temp_r7, u8*, 2);
     efSync_Spawn(arg1, gobj, arg2,
                  temp_r7_2 |

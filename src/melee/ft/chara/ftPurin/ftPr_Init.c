@@ -472,7 +472,7 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
                 ftPr_Init_803D05B4[fp->x619_costume_id]);
         }
 
-        fp->fv.pr.x2244 = HSD_ObjAlloc(&Fighter_80459080);
+        fp->fv.pr.x2244 = HSD_ObjAlloc(&fighter_x2040_alloc_data);
         ftParts_80074148();
         fp->fv.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
@@ -496,7 +496,7 @@ void ftPr_Init_8013C494(HSD_GObj* gobj)
     if (fp->fv.pr.x223C != NULL) {
         HSD_JObjRemoveAll(fp->fv.pr.x223C);
         fp->fv.pr.x223C = NULL;
-        HSD_ObjFree(&Fighter_80459080, fp->fv.pr.x2244);
+        HSD_ObjFree(&fighter_x2040_alloc_data, fp->fv.pr.x2244);
         fp->fv.pr.x2244 = NULL;
     }
 }

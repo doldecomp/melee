@@ -2,13 +2,17 @@
 #include <placeholder.h>
 
 #include <dolphin/mtx/forward.h>
+#include <MSL/math.h>
 
+#include "ft/ft_0819.h"
 #include "ft/ft_081B.h"
 
 #include "inlines.h"
 
+#include "ft/fighter.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "lb/types.h"
 #include "mp/mpcoll.h"
 
 #include <common_structs.h>
@@ -112,7 +116,18 @@ GroundOrAir ft_80082708(Fighter_GObj* gobj)
 
 /// #ft_80083A48
 
-/// #ft_80083B68
+void ft_80083B68(Fighter_GObj* gobj)
+{
+    u32 unused[4];
+    CollData* coll;
+    Fighter* fp = GET_FIGHTER(gobj);
+    coll = &fp->coll_data;
+    coll->prev_topn = coll->cur_topn;
+    coll->cur_topn = fp->cur_pos;
+    mpColl_800477E0(coll);
+    fp->cur_pos = coll->cur_topn;
+    ft_80081A00(gobj);
+}
 
 /// #ft_80083C00
 
@@ -168,9 +183,39 @@ GroundOrAir ft_80082708(Fighter_GObj* gobj)
 
 /// #ft_80084EEC
 
-/// #ft_80084F3C
+extern f32 ft_804D83B8;
 
-/// #ft_80084FA8
+void ft_80084F3C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u32 unused;
+    ftCo_DatAttrs* co = &fp->co_attrs;
+    f32 var_f2 = fp->gr_vel;
+    f32 var_f1 = co->gr_friction;
+    if (var_f2 < ft_804D83B8) {
+        var_f2 = -var_f2;
+    }
+    if (var_f2 > co->walk_max_vel) {
+        var_f1 *= p_ftCommonData->x6C;
+    }
+    ftCommon_8007C930(fp, var_f1);
+    ftCommon_8007CB74(gobj);
+}
+
+void ft_80084FA8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* co = &fp->co_attrs;
+    f32 var_f2 = fp->gr_vel;
+    f32 var_f1 = co->gr_friction;
+    if (var_f2 < 0.0F) {
+        var_f2 = -var_f2;
+    }
+    if (var_f2 > co->walk_max_vel) {
+        var_f1 *= p_ftCommonData->x6C;
+    }
+    ft_80085030(gobj, var_f1, fp->facing_dir);
+}
 
 /// #ft_80085004
 
@@ -192,7 +237,16 @@ void ft_80085030(HSD_GObj* gobj, float gr_friction, float facing_dir)
 
 /// #ft_800850B4
 
-/// #ft_800850E0
+void ft_800850E0(Fighter_GObj* gobj, f32 arg8, f32 arg9)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x594_b0) {
+        fp->gr_vel = fp->x6A4_transNOffset.z * arg9;
+    } else {
+        ftCommon_8007C930(fp, arg8);
+    }
+    ftCommon_8007CB74(gobj);
+}
 
 void ft_80085134(Fighter_GObj* gobj)
 {
@@ -201,7 +255,16 @@ void ft_80085134(Fighter_GObj* gobj)
     fp->self_vel.y = fp->x6A4_transNOffset.y;
 }
 
-/// #ft_80085154
+void ft_80085154(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    f32 lstick_x = cosf(fp->lstick_angle);
+    f32 lstick_y = sinf(fp->lstick_angle);
+    f32 temp_f0 = fp->x6A4_transNOffset.y;
+    f32 temp_f3 = fp->x6A4_transNOffset.z * fp->facing_dir;
+    fp->self_vel.x = (temp_f3 * lstick_x) - (temp_f0 * lstick_y);
+    fp->self_vel.y = (temp_f3 * lstick_y) + (temp_f0 * lstick_x);
+}
 
 void ft_800851C0(Fighter_GObj* gobj)
 {
@@ -209,12 +272,18 @@ void ft_800851C0(Fighter_GObj* gobj)
     fp->self_vel.y = fp->x6A4_transNOffset.y;
 }
 
-/// #ft_800851D0
+void ft_800851D0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x197C != NULL) {
+        fp->self_vel.y = fp->x6A4_transNOffset.y * ((f32*) Fighter_804D6520)[5];
+    } else {
+        fp->self_vel.y = fp->x6A4_transNOffset.y;
+    }
+}
 
 void ft_80085204(Fighter_GObj* gobj)
 {
-    Fighter* temp_r3;
-
-    temp_r3 = gobj->user_data;
-    temp_r3->self_vel.x = temp_r3->x6A4_transNOffset.z * temp_r3->facing_dir;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir;
 }

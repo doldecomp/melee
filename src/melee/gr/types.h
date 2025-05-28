@@ -56,7 +56,7 @@ struct StageInfo {
     StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
 
-    u32 x84; // 0x84
+    u32 flags; // 0x84
 
     InternalStageId internal_stage_id; // 0x88
 
@@ -173,7 +173,6 @@ struct GroundVars_unk {
     int xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi {
@@ -184,7 +183,6 @@ struct GroundVars_izumi {
     HSD_JObj* xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi2 {
@@ -195,7 +193,6 @@ struct GroundVars_izumi2 {
     int xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi3 {
@@ -208,7 +205,6 @@ struct GroundVars_izumi3 {
     float xD4;
     float xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_flatzone {
@@ -258,7 +254,6 @@ struct grKongo_GroundVars {
     /* gp+E4 */ s16 xE4;
     /* gp+E6 */ s16 xE6;
     /* gp+E8 */ f32 xE8;
-    u8 xEC_pad[0x218 - 0xEC];
 };
 
 struct grKongo_GroundVars2 {
@@ -273,7 +268,6 @@ struct grKongo_GroundVars2 {
     f32 xE0;
     f32 xE4;
     f32 xE8;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 /// @todo: Investigate if these extra structs could be
@@ -291,13 +285,40 @@ struct grKongo_GroundVars3 {
     f32 xE0;
     f32 xE4;
     f32 xE8;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct grCorneria_GroundVars {
-    /*  +0:0  gp+C4:0 */ u8 x0_b0 : 1;
-    /*  +4    gp+C8   */ char pad_4[0x68 - 0x4];
-    /* +68   gp+12C   */ HSD_JObj* x68;
+    u32 xC4_b0 : 1;
+    u32 xC4_b1 : 1;
+    u32 xC8;
+    u32 xCC;
+    f32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    f32 xEC;
+    f32 xF0;
+    f32 xF4;
+    f32 xF8;
+    u32 xFC;
+    u32 x100;
+    u32 x104;
+    u32 x108;
+    u32 x10C;
+    u32 x110;
+    f32 x114;
+    u8 x118;
+    u8 x119;
+    u8 x11A;
+    u8 x11B;
+    u32 x11C;
+    u32 x120;
+    u32 x124;
+    HSD_GObj* x128;
+    HSD_JObj* x12C;
 };
 
 struct grIceMt_GroundVars {
@@ -322,6 +343,10 @@ struct grOnett_GroundVars {
 
 struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
+struct grLast_GroundVars {
+    /* +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
 struct Ground {
@@ -352,9 +377,18 @@ struct Ground {
     HSD_GObj* x18;          // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
-    char pad_40[0xC4 - 0x40];
-    union GroundVars { // how big should this be?
-        char pad_0[0x218 - 0xC4];
+    Vec3 self_vel;
+    Vec3 cur_pos;
+    int x58;
+    int x5C;
+    int x60;
+    int x64;
+    int x68;
+    int x6C;
+    int x70;
+    char pad_40[0xC4 - 0x74];
+    union GroundVars {
+        char pad_0[0x204 - 0xC4];
         struct grBigBlue_GroundVars bigblue;
         struct grCorneria_GroundVars corneria;
         struct GroundVars_flatzone flatzone;
@@ -366,12 +400,14 @@ struct Ground {
         struct grKongo_GroundVars kongo;
         struct grKongo_GroundVars2 kongo2;
         struct grKongo_GroundVars3 kongo3;
+        struct grLast_GroundVars last;
         struct grOnett_GroundVars onett;
         struct grStadium_GroundVars stadium;
         struct GroundVars_unk unk;
         struct grZebes_GroundVars zebes;
     } gv;
 };
+STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
 // Appears to be related to stage audio
 struct UnkBgmStruct {

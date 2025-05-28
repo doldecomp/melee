@@ -196,12 +196,12 @@ void mpColl_80041EE4(CollData* cd)
     cd->x54 = 0.0f;
     cd->x58 = 0.0f;
     cd->x5C = 0.0f;
-    lb_8000C160(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
-    lb_8000C160(&cd->xC4_ecb, sizeof(ftECB));
-    lb_8000C160(&cd->xE4_ecb, sizeof(ftECB));
-    lb_8000C160(&cd->x104, 0x2C);
-    lb_8000C160(&cd->x84_ecb, sizeof(ftECB));
-    lb_8000C160(&cd->x64_ecb, sizeof(ftECB));
+    memzero(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
+    memzero(&cd->xC4_ecb, sizeof(ftECB));
+    memzero(&cd->xE4_ecb, sizeof(ftECB));
+    memzero(&cd->x104, 0x2C);
+    memzero(&cd->x84_ecb, sizeof(ftECB));
+    memzero(&cd->x64_ecb, sizeof(ftECB));
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8

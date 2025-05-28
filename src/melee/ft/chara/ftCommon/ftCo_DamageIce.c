@@ -38,7 +38,6 @@
 #include <baselib/random.h>
 
 /* 0909D0 */ static void ftCo_800909D0(ftCo_Fighter* fp);
-/* 090AC0 */ static void ftCo_80090AC0(ftCo_Fighter* fp);
 /* 090B48 */ static void ftCo_80090B48(ftCo_GObj* gobj);
 /* 091274 */ static void ftCo_80091274(ftCo_GObj* gobj);
 /* 091620 */ static UNK_RET ftCo_80091620(UNK_PARAMS);

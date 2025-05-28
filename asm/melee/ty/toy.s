@@ -2192,8 +2192,8 @@ un_80306C5C:
 /* 80306CEC 003038CC  7C 08 03 A6 */	mtlr r0
 /* 80306CF0 003038D0  4E 80 00 20 */	blr
 
-.global un_80306CF4
-un_80306CF4:
+.global Toy_RemoveUserData
+Toy_RemoveUserData:
 /* 80306CF4 003038D4  7C 08 02 A6 */	mflr r0
 /* 80306CF8 003038D8  90 01 00 04 */	stw r0, 4(r1)
 /* 80306CFC 003038DC  94 21 FF F8 */	stwu r1, -8(r1)

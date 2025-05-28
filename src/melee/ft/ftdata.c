@@ -5461,8 +5461,8 @@ void ftData_800855C8(enum_t id, int slot)
 void ftData_80085B10(Fighter* fp)
 {
     FighterKind kind = fp->kind;
-    fp->x59C = HSD_ObjAlloc(&Fighter_804590AC);
-    fp->x5A0 = HSD_ObjAlloc(&Fighter_804590AC);
+    fp->x59C = HSD_ObjAlloc(&fighter_x59C_alloc_data);
+    fp->x5A0 = HSD_ObjAlloc(&fighter_x59C_alloc_data);
     fp->x5A4 = NULL;
     fp->x5A8 = NULL;
     fp->x58C = ftData_Table_Unk0[kind].count;

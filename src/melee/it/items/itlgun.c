@@ -68,7 +68,7 @@ void it_8028E79C(Item_GObj* gobj, Vec3* pos, f32 facing_dir)
 void it_8028E7D8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    itResetVelocity(ip);
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

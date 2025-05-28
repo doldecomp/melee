@@ -6,10 +6,13 @@
 
 #include "it/forward.h"
 
+/* 03D644 */ void pl_8003D644(int, int, int, int);
+/* 03DF44 */ void pl_8003DF44(int, int);
 /* 03E058 */ void pl_8003E058(int, s32, int, s32);
 /* 03E150 */ void pl_8003E150(s32 slot, s32);
 /* 03EAAC */ void pl_8003EAAC(s32, s32, s32);
 /* 03E70C */ void pl_8003E70C(Item_GObj*);
+/* 03EA74 */ void pl_8003EA74(int, int);
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03EC9C */ void pl_8003EC9C(s32, s32, f32, f32);
 /* 03EE2C */ void pl_8003EE2C(s32, s32);
@@ -29,6 +32,7 @@
 /* 0408DC */ s32 pl_800408DC(s32);
 /* 040AF0 */ void pl_80040AF0(s32);
 /* 04049C */ void pl_8004049C(s32, ItemKind);
+/* 04065C */ void pl_8004065C(int, int);
 /* 040B3C */ u32 pl_80040B3C(s32);
 /* 040B64 */ u32 pl_80040B64(s32);
 /* 040B8C */ void pl_80040B8C(s32 slot, bool, s32);

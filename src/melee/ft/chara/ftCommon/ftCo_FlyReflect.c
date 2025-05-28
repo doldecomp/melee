@@ -104,9 +104,9 @@ bool ftCo_800C17CC(ftCo_GObj* gobj)
 void ftCo_800C18A8(ftCo_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
                    Vec3* offset)
 {
-    u8 _[8] = { 0 };
     Vec3 vec1;
     Vec3 vec0;
+    u8 _[8] = { 0 };
     float param;
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -114,7 +114,7 @@ void ftCo_800C18A8(ftCo_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     vec0.y = fp->cur_pos.y + offset->y;
     vec0.z = fp->cur_pos.z + offset->z;
     param = atan2f(-normal->x, normal->y);
-    efAsync_Spawn(gobj, &fp->x60C, 5, (1 << 1) | (1 << 2) | (1 << 10), NULL,
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, (1 << 1) | (1 << 2) | (1 << 10), NULL,
                   &vec0, &param);
     Camera_80030E44(2, &vec0);
     vec1 = fp->self_vel;
@@ -128,7 +128,7 @@ void ftCo_800C18A8(ftCo_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     }
     fp->x8c_kb_vel = vec1;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
-    fp->facing_dir = fp->x8c_kb_vel.x < 0 ? -1 : 1;
+    fp->facing_dir = fp->x8c_kb_vel.x < 0 ? -1.0F : 1.0F;
     Fighter_ChangeMotionState(gobj, msid,
                               Ft_MF_Unk06 | Ft_MF_SkipNametagVis |
                                   Ft_MF_KeepColAnimPartHitStatus |

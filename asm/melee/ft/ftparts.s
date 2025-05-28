@@ -1844,18 +1844,18 @@
 
 .fn ftParts_80074E58, global
 /* 0000189C 000018DC  7C 08 02 A6 */	mflr r0
-/* 000018A0 000018E0  3C 80 00 00 */	lis r4, fighter_bones_alloc_data@ha
+/* 000018A0 000018E0  3C 80 00 00 */	lis r4, fighter_parts_alloc_data@ha
 /* 000018A4 000018E4  90 01 00 04 */	stw r0, 0x4(r1)
-/* 000018A8 000018E8  38 04 00 00 */	addi r0, r4, fighter_bones_alloc_data@l
+/* 000018A8 000018E8  38 04 00 00 */	addi r0, r4, fighter_parts_alloc_data@l
 /* 000018AC 000018EC  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 000018B0 000018F0  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 000018B4 000018F4  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 000018B8 000018F8  3B C3 00 00 */	addi r30, r3, 0x0
 /* 000018BC 000018FC  7C 03 03 78 */	mr r3, r0
 /* 000018C0 00001900  48 00 00 01 */	bl HSD_ObjAlloc
-/* 000018C4 00001904  3C 80 00 00 */	lis r4, Fighter_80459054@ha
+/* 000018C4 00001904  3C 80 00 00 */	lis r4, fighter_dobj_list_alloc_data@ha
 /* 000018C8 00001908  90 7E 05 E8 */	stw r3, 0x5e8(r30)
-/* 000018CC 0000190C  38 64 00 00 */	addi r3, r4, Fighter_80459054@l
+/* 000018CC 0000190C  38 64 00 00 */	addi r3, r4, fighter_dobj_list_alloc_data@l
 /* 000018D0 00001910  48 00 00 01 */	bl HSD_ObjAlloc
 /* 000018D4 00001914  38 E0 00 00 */	li r7, 0x0
 /* 000018D8 00001918  90 7E 05 F0 */	stw r3, 0x5f0(r30)

@@ -90,7 +90,7 @@
 /* 085134 */ void ft_80085134(Fighter_GObj* gobj);
 /* 085154 */ void ft_80085154(Fighter_GObj* gobj);
 /* 0851C0 */ void ft_800851C0(Fighter_GObj*);
-/* 0851D0 */ UNK_RET ft_800851D0(UNK_PARAMS);
+/* 0851D0 */ void ft_800851D0(Fighter_GObj*);
 /* 085204 */ void ft_80085204(Fighter_GObj* gobj);
 
 #endif
