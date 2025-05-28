@@ -68,8 +68,8 @@
 /* 4D64FC */ extern UNK_T Fighter_804D64FC;
 /* 4D6500 */ extern UNK_T Fighter_804D6500;
 /* 4D6504 */ extern HSD_Joint* Fighter_804D6504;
-/* 4D6508 */ extern UNK_T Fighter_804D6508;
-/* 4D650C */ extern int* Fighter_804D650C;
+/* 4D6508 */ extern u8* Fighter_804D6508;
+/* 4D650C */ extern u8* Fighter_804D650C;
 /* 4D6510 */ extern UNK_T Fighter_804D6510;
 /* 4D6514 */ extern UNK_T Fighter_804D6514;
 /* 4D6518 */ extern UNK_T Fighter_804D6518;
