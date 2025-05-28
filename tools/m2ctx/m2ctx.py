@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import html
 import os
 import subprocess
 import sys
@@ -188,8 +189,8 @@ def main():
 
     if args.render:
         template = template_path.read_text()
-        html = template.format(ctx=output)
-        render_path.write_text(html, encoding="utf-8")
+        html_output = template.format(ctx=html.escape(output))
+        render_path.write_text(html_output, encoding="utf-8")
 
     if not args.quiet:
         if args.colorize:
