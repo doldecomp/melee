@@ -10,6 +10,9 @@
 #include <MSL/math.h>
 #include <MSL/math_ppc.h>
 
+typedef Vec3 VecMtx[4];
+typedef Vec3* VecMtxPtr;
+
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
 void HSD_MtxInverseTranspose(Mtx src, Mtx dest);
