@@ -8,6 +8,8 @@
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include <baselib/mtx.h>
+
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj*);
 /* 1C96F8 */ UnkGeneratorStruct* grLib_801C96F8(s32, s8, S32Vec3*);
 /* 1C97DC */ void grLib_801C97DC(s32, s32, HSD_JObj*);
@@ -18,7 +20,7 @@
 /* 1C98A0 */ void grLib_801C98A0(HSD_JObj*);
 /* 1C9908 */ void grLib_801C9908(HSD_JObj*);
 /* 1C99C0 */ void grLib_801C99C0(s32, s32, HSD_JObj*, s32);
-/* 1C9A10 */ Vec3* grLib_801C9A10(void);
+/* 1C9A10 */ VecMtxPtr grLib_801C9A10(void);
 /* 1C9A70 */ void grLib_801C9A70(enum_t, Vec3*);
 /* 1C9B20 */ void grLib_801C9B20(HSD_JObj*, DynamicsDesc*, DynamicsDesc*);
 /* 1C9B6C */ void grLib_801C9B6C(void*);

@@ -15554,8 +15554,8 @@ un_804D6F9C:
 .global erase_colors_vi0502
 erase_colors_vi0502:
     .skip 0x4
-.global un_804D6FA4
-un_804D6FA4:
+.global kirby_gobj
+kirby_gobj:
     .skip 0x4
 .global un_804D6FA8
 un_804D6FA8:

@@ -422,6 +422,14 @@ static inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec3* translate)
     *translate = jobj->translate;
 }
 
+///@todo Likely fake but needed by vi0502 as there is a usage of
+/// HSD_JObjGetTranslation that lacks the 2nd assert
+static inline void HSD_JObjGetTranslation2(HSD_JObj* jobj, Vec3* translate)
+{
+    HSD_ASSERT(979, jobj);
+    *translate = jobj->translate;
+}
+
 static inline f32 HSD_JObjGetTranslationX(HSD_JObj* jobj)
 {
     HSD_ASSERT(993, jobj);
