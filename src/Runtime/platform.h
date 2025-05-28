@@ -122,14 +122,6 @@ typedef void (*Event)(void);
 #endif
 #endif
 
-#ifdef PERMUTER
-#define AT_ADDRESS(x) = FIXEDADDR(x)
-#elif defined(__MWERKS__) && !defined(M2CTX)
-#define AT_ADDRESS(x) : (x)
-#else
-#define AT_ADDRESS(x)
-#endif
-
 #ifdef __PPCGEKKO__
 #define qr0 0
 #define qr1 1
