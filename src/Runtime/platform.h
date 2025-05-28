@@ -145,8 +145,6 @@ typedef void (*Event)(void);
 #define MIN(a, b) (((a) > (b)) ? (b) : (a))
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
-#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
-
 #ifdef __cplusplus
 #ifndef _Static_assert
 #define _Static_assert static_assert
