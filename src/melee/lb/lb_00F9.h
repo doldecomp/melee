@@ -27,7 +27,7 @@
 /* 011A50 */ void lb_80011A50(Vec3*, int, float, float, float, float, float,
                               float, float);
 /* 011ABC */ enum_t lb_80011ABC(void);
-/* 011AC4 */ HSD_LObj* lb_80011AC4(UNK_T);
+/* 011AC4 */ HSD_LObj* lb_80011AC4(HSD_LightDesc**);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);
 /* 011E24 */ int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
 /* 01204C */ UNK_RET lb_8001204C(UNK_PARAMS);

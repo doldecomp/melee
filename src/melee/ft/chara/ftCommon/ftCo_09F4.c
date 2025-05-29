@@ -27,25 +27,15 @@ static HSD_LObj* lobj1;
 
 static float floats[] = { 0, 0.57, 0.57, 0.57, 0 };
 
-static struct node0_t {
-    int zero0;
-    int zero1;
-    u32 flags;
-    GXColor white;
-    float* floats;
-    int zero2;
-    int zero3;
-} node0 = {
-    0, 0, 0x00050000, { 0xFF, 0xFF, 0xFF, 0xFF }, floats, 0, 0,
+static HSD_LightDesc node0 = {
+    NULL,           NULL, 0x0005, 0x0000, { 0xFF, 0xFF, 0xFF, 0xFF },
+    (void*) floats, 0,    0,
 };
 
-static struct node1_t {
-    /* +0 */ struct node0_t* x0;
-    /* +4 */ UNK_T x4;
-} node1 = { &node0, NULL };
+static HSD_LightDesc* node1 = &node0;
 
 static struct node2_t {
-    /* +0 */ struct node1_t* x0;
+    /* +0 */ HSD_LightDesc** x0;
     /* +4 */ UNK_T x4;
 } node2 = { &node1, NULL };
 
@@ -75,7 +65,7 @@ void ftCo_8009F54C(HSD_GObj* gobj, int code)
 
 void ftCo_8009F578(Fighter* fp)
 {
-    fp->x588 = lb_80011AC4(&node2.x0);
+    fp->x588 = lb_80011AC4((HSD_LightDesc**) &node2.x0);
 }
 
 void ftCo_8009F5AC(Fighter* fp)
@@ -97,7 +87,7 @@ void ftCo_8009F5AC(Fighter* fp)
             HSD_LObjSetPosition(fp->x588, &position);
         }
         if (data->x7C_b2) {
-            GXColor color = node0.white;
+            GXColor color = node0.color;
             color.a = data->lobj_color.a;
             HSD_LObjSetColor(fp->x588, color);
             HSD_LObjSetFlags(fp->x588, LOBJ_ALPHA);

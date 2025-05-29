@@ -2,16 +2,31 @@
 
 #include "gm/gm_1A36.static.h"
 
+#include "gm_1A36.h"
 #include "gmmain_lib.h"
+#include "types.h"
 
+#include "baselib/fog.h"
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjobject.h"
+#include "baselib/gobjproc.h"
+#include "baselib/lobj.h"
+#include "baselib/memory.h"
+#include "baselib/random.h"
+#include "baselib/sislib.h"
 #include "db/db_2253.h"
-#include "gm/types.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbbgflash.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbdvd.h"
 #include "lb/lblanguage.h"
 #include "lb/lbmthp.h"
+#include "sc/types.h"
 #include "ty/toy.h"
 #include "un/un_2FC9.h"
 
@@ -86,7 +101,7 @@ void gm_801A3820(s32 idx, u64 arg1, u64 arg2)
     }
 }
 
-void fn_801A396C(s32 idx)
+void fn_801A396C(int idx)
 {
     if (gm_80479C30[idx].button || gm_80479C30[idx].release) {
         gm_80479C30[idx].unk = gm_80479C30[idx].button;
@@ -263,15 +278,15 @@ UNK_T gm_801A4284(UNK_T arg0)
     return M2C_FIELD(arg0, UNK_T*, 0x14);
 }
 
-void gm_801A428C(u8 arg0)
+void gm_SetSceneMinor(u8 arg0)
 {
     gm_80479D30.nums.curr_minor = arg0;
     gm_80479D30.nums.prev_minor = arg0;
 }
 
-void gm_801A42A0(s32 arg0)
+void gm_SetScenePendingMinor(int pending_minor)
 {
-    gm_80479D30.nums.pending_minor = arg0 + 1;
+    gm_80479D30.nums.pending_minor = pending_minor + 1;
 }
 
 u8 gm_801A42B4(void)
@@ -348,7 +363,7 @@ u8 gm_801A43A0(u8 arg0)
     }
     while (!gamestate->pending) {
         if (gm_80479D30.data != NULL &&
-            (temp_r3 = (*(u8(*)(void)) gm_80479D30.data)(), temp_r3 != 45))
+            (temp_r3 = (*(u8 (*)(void)) gm_80479D30.data)(), temp_r3 != 45))
         {
             gm_80479D30.nums2 = gm_80479D30.nums;
             gamestate->pending = 0;
@@ -676,7 +691,140 @@ void gm_801A5614(void) {}
 
 /// #fn_801AC67C
 
-/// #gm_801AC6D8
+void gm_801AC6D8(void)
+{
+    HSD_JObj* jobj_arr[2];
+    int const gx_link = 11;
+
+    efLib_8005B4B8();
+    efAsync_8006737C(0);
+    gm_804D67F8 = HSD_MemAlloc(sizeof(struct gm_804D67F8_t));
+    gm_804D67FC = HSD_MemAlloc(sizeof(struct gm_804D67FC_t));
+    HSD_SisLib_803A62A0(0, "SdStRoll.dat", "SIS_StRollData");
+    HSD_SisLib_803A611C(0, -1, 9, 13, 0, 18, 0, 19);
+    lbAudioAx_8002702C(16, lbAudioAx_80026F2C(28));
+    lbAudioAx_80027168();
+    gm_804D683C = lbArchive_80016DBC(
+        "GmStRoll.dat", (void**) &gm_804D6840, "ScGamRegStaffroll_scene_data",
+        &gm_804D6844, "ScGamRegStaffrollNames_scene_modelset", 0);
+    {
+        HSD_GObj* gobj = GObj_Create(17, 19, 0);
+        HSD_CObj* cobj = HSD_CObjLoadDesc(gm_804D6840->cameras->desc);
+        gm_804D6830 = cobj;
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], gm_804D6830);
+        GObj_SetupGXLinkMax(gobj, fn_801AA854, 5);
+        gobj->gxlink_prios = 0x189;
+        HSD_CObjAddAnim(cobj, gm_804D6840->cameras->anims[0]);
+        HSD_CObjReqAnim(cobj, 0.0f);
+        HSD_GObjProc_8038FD54(gobj, fn_801AA7F8, 0);
+    }
+    {
+        HSD_GObj* gobj = GObj_Create(19, 20, 0);
+        HSD_CObj* cobj = HSD_CObjLoadDesc(&gm_803DD0F0);
+        gm_804D6834 = cobj;
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], cobj);
+        GObj_SetupGXLinkMax(gobj, fn_801AAA28, 8);
+        gobj->gxlink_prios = 1LL << gx_link;
+    }
+    {
+        HSD_GObj* gobj = GObj_Create(gx_link, 3, 0);
+        HSD_LObj* lobj = lb_80011AC4(gm_804D6840->lights);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+        HSD_LObjReqAnimAll(lobj, 0.0f);
+        HSD_GObjProc_8038FD54(gobj, fn_801AAABC, 0);
+    }
+    {
+        HSD_GObj* gobj = GObj_Create(0xA, 3, 0);
+        HSD_Fog* fog = HSD_FogLoadDesc(gm_804D6840->fogs->desc);
+        gm_804D6838 = fog;
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+        GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 3, 0);
+        HSD_Fog_8037DE7C(fog, gm_804D6840->fogs->anims[0][0]);
+        HSD_FogReqAnim(fog, 0.0f);
+        HSD_GObjProc_8038FD54(gobj, fn_801AC67C, 0);
+    }
+    {
+        HSD_GObj* gobj = GObj_Create(3, 5, 0);
+        HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6840->models[1][0]);
+        gm_804D682C = jobj;
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 3, 0);
+        gm_8016895C(jobj, gm_804D6840->models[1], 0);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        {
+            if (lbLang_IsSettingUS()) {
+                lb_80011E24(jobj, jobj_arr, 103, 20, -1);
+                M2C_FIELD(M2C_FIELD(M2C_FIELD(jobj_arr[0]->u.ptcl, void**, 8),
+                                    void**, 8),
+                          s32*, 0x58) =
+                    M2C_FIELD(
+                        M2C_FIELD(M2C_FIELD(jobj_arr[1]->u.ptcl, void**, 8),
+                                  void**, 8),
+                        s32*, 0x58);
+            }
+        }
+        HSD_GObjProc_8038FD54(gobj, fn_801AAB18, 0);
+    }
+    {
+        HSD_GObj* gobj = GObj_Create(14, 15, 0);
+        HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6844[0][0]);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, NULL, 9, 0);
+        gm_8016895C(jobj, gm_804D6844[0], 0);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        {
+            ssize_t i;
+            HSD_JObj* cur;
+            /// @todo Length of #gm_804D6844 is 10
+            for (i = 1; i < 10; i++) {
+                HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6844[i][0]);
+                gm_8016895C(jobj, *gm_804D6844[i], 0);
+                HSD_JObjReqAnimAll(jobj, 0.0f);
+                {
+                    for (cur = jobj->child; cur != NULL;) {
+                        HSD_JObjReparent(cur, jobj);
+                    }
+                }
+            }
+        }
+        HSD_GObjProc_8038FD54(gobj, fn_801AAB74, 1);
+    }
+    {
+        HSD_GObj* gobj = GObj_Create(14, 15, 0);
+        HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6840->models[0][0]);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, gx_link, 0);
+        gm_8016895C(jobj, gm_804D6840->models[0], 0);
+        lb_80011E24(jobj, jobj_arr, ARRAY_SIZE(jobj_arr), 20, -1);
+        HSD_JObjReqAnimAll(jobj_arr[0], 0.0f);
+        HSD_JObjReqAnimAll(jobj_arr[1], 0.0f);
+        HSD_GObjProc_8038FD54(gobj, fn_801AB200, 13);
+    }
+    lbAudioAx_80027648();
+    {
+        s32 r = HSD_Randi(5);
+        lbAudioAx_80023F28(lbAudioAx_8002305C(gm_801BEFB0(), -r == 0));
+        lbBgFlash_800209F4();
+        gm_804D6804->x0 = gm_804D6804->x4 = 0.0F;
+        memzero(gm_804D67F8, sizeof(struct gm_804D67F8_t));
+        gm_80480D58.x0 = 0;
+        gm_80480D58.x4 = 0;
+        gm_80480D58.x8 = 0;
+        gm_80480D58.xC = 0;
+        gm_80480D58.x10 = 0;
+        gm_80480D58.x14 = 0;
+        gm_804D680C = 0;
+        gm_804D6810 = 0;
+        gm_804D6814 = 0;
+        gm_804D6818 = 0;
+        gm_804D681C = 1;
+        gm_804D6820 = 0;
+        gm_804D6824 = gm_804D6828 = 0.0f;
+        gm_804D6848 = 0;
+        gm_804D684C = 0;
+    }
+}
 
 void gm_801ACC90(void) {}
 

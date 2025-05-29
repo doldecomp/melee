@@ -568,15 +568,14 @@ s32 HSD_SisLib_803A611C(u16 arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
     return var_r31;
 }
 
-void HSD_SisLib_803A62A0(s32 arg0, HSD_Archive* arg1, char* arg2)
+void HSD_SisLib_803A62A0(s32 arg0, char* arg1, char* arg2)
 {
     HSD_Archive** temp_r30;
     SIS* temp_r3;
     SIS* temp_ret;
 
-    HSD_SisLib_803A945C();
     temp_r30 = &HSD_SisLib_804D1110[arg0];
-    *temp_r30 = arg1;
+    *temp_r30 = HSD_SisLib_803A945C(arg1);
     if (arg1 == 0U) {
         OSReport("Cannot open archive %s", arg1);
         OSPanic("sislib.c", 0x24A, "");

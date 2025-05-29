@@ -43,6 +43,7 @@ struct HSD_Archive {
     u32 flags;                             /* 0x3C */
     void* top_ptr;                         /* 0x40 */
 };
+STATIC_ASSERT(sizeof(struct HSD_Archive) == 0x44);
 
 s32 HSD_ArchiveParse(HSD_Archive*, u8*, u32);
 void* HSD_ArchiveGetPublicAddress(HSD_Archive*, char*);
