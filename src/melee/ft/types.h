@@ -75,8 +75,8 @@ struct ftCommonData {
     /* +50 */ float x50;
     /* +54 */ UNK_T x54;
     /* +58 */ UNK_T x58;
-    /* +5C */ UNK_T x5C;
-    /* +60 */ float x60_turnrunFrictionMul;
+    /* +5C */ float x5C;
+    /* +60 */ float x60_someFrictionMul;
     /* +64 */ UNK_T x64;
     /* +68 */ float x68;
     /* +6C */ float x6C;
