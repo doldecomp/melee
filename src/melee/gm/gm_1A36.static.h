@@ -5,7 +5,6 @@
 #include <platform.h>
 
 #include "baselib/forward.h"
-#include "sc/forward.h"
 
 #include "gm_1601.h" // IWYU pragma: keep
 
@@ -184,7 +183,16 @@ struct gm_804D6840_t {
     struct gm_804D6840_fogs_t* fogs;
 };
 
-/* 479C30 */ static gm_controller_map gm_80479C30[4];
+struct gm_801B0FF8_arg0_x10_t {
+    /* +0 */ s8 x0;
+    /* +1 */ s8 x1;
+    /* +2 */ s8 x2;
+};
+
+struct gm_801B0FF8_arg0_t {
+    /* +0 */ char pad_0[0x10];
+    /* +10 */ struct gm_801B0FF8_arg0_x10_t* x10;
+};
 
 /* 1A3F48 */ static void gm_801A3F48(MinorScene*);
 /* 1A4014 */ static void gm_801A4014(MajorScene* scene);
@@ -209,6 +217,7 @@ struct gm_804D6840_t {
 /* 1A5244 */ static s8* gm_801A5244(void);
 /* 1A5614 */ static void gm_801A5614(void);
 /* 1ACC90 */ static void gm_801ACC90(void);
+/* 1B0FF8 */ static void gm_801B0FF8(struct gm_801B0FF8_arg0_t*);
 /* 1B6320 */ static UNK_T gm_801B6320(void);
 /* 1B8C5C */ static void fn_801B8C5C(UNK_T);
 /* 1B9FB8 */ static void fn_801B9FB8(void* arg0);
@@ -224,13 +233,14 @@ struct gm_804D6840_t {
 /* 1BF684 */ static void gm_801BF684(s16 arg0);
 /* 1BF694 */ static u8 gm_801BF694(void);
 /* 2A3EF4 */ static void gm_801A3EF4(void);
-/* 3DA788 */ static u64 gm_803DA788;
-/* 3DA920 */ static MajorScene gm_803DA920;
-/* 3DACA4 */ static MajorScene gm_803DACA4;
-/* 3DBFD8 */ static struct gm_803DBFD8_t gm_803DBFD8;
-/* 3DD0F0 */ static HSD_CObjDesc gm_803DD0F0;
-/* 3DD248 */ static HSD_Archive gm_803DD248;
-/* 3DD2C0 */ static int gm_803DD2C0[74];
+/* 3DA788 */ extern u64 gm_803DA788;
+/* 3DA920 */ extern MajorScene gm_803DA920;
+/* 3DACA4 */ extern MajorScene gm_803DACA4;
+/* 3DBFD8 */ extern struct gm_803DBFD8_t gm_803DBFD8;
+/* 3DD0F0 */ extern HSD_CObjDesc gm_803DD0F0;
+/* 3DD248 */ extern HSD_Archive gm_803DD248;
+/* 3DD2C0 */ extern int gm_803DD2C0[74];
+/* 479C30 */ static gm_controller_map gm_80479C30[4];
 /* 479CF0 */ static gm_controller_map controller_union;
 /* 479D20 */ void (*gm_80479D20)(s32);
 /* 479D24 */ s32 gm_80479D24;
