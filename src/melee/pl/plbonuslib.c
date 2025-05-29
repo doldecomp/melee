@@ -2,11 +2,14 @@
 
 #include "plbonuslib.h"
 
+#include "ft/ft_0877.h"
 #include "gm/gm_1601.h"
+#include "if/ifmagnify.h"
 #include "it/it_26B1.h"
 #include "melee/ft/ft_0892.h"
 #include "melee/ft/ftlib.h"
 #include "pl/player.h"
+#include "pl/plbonus.h"
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 
@@ -194,37 +197,37 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
                     temp_r31->xD28 += 1;
                 }
             }
-            if (ftLib_800877D4(temp_r30) != 0) {
+            if (ftLib_800877D4(temp_r30)) {
                 temp_r31->xD2C += 1;
             }
             temp_r3_3 = ifMagnify_802FB6E8(arg0);
             if (temp_r3_3 != 0) {
                 temp_r31->xD30 += 1;
-                temp_r31->xDD0 |= 1U;
+                temp_r31->xDD0.bit7 = 1;
             } else {
-                temp_r31->xDD0 &= ~1U;
+                temp_r31->xDD0.bit7 = 0;
             }
             switch (temp_r3_3) {
             case 1:
-                temp_r31->xDD0 |= 4U;
+                temp_r31->xDD0.bit5 = 1;
                 break;
             case 2:
-                temp_r31->xDD0 |= 8U;
+                temp_r31->xDD0.bit4 = 1;
                 break;
             case 3:
-                temp_r31->xDD0 |= 2U;
+                temp_r31->xDD0.bit6 = 1;
                 break;
             case 4:
-                temp_r31->xDD0 |= 16U;
+                temp_r31->xDD0.bit3 = 1;
                 break;
             }
-            if (ft_800878BC(temp_r30) != 0) {
+            if (ft_800878BC(temp_r30)) {
                 temp_r31->xD34 += 1;
             }
-            if (ft_80087900(temp_r30) != 0) {
+            if (ft_80087900(temp_r30)) {
                 temp_r31->xD38 += 1;
             }
-            if (ft_80087944(temp_r30) != 0) {
+            if (ft_80087944(temp_r30)) {
                 temp_r31->xD3C += 1;
             }
             temp_r3_4 = ftLib_80086794(temp_r30);
@@ -287,7 +290,7 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
             if (temp_r3_10 != 0U) {
                 temp_r31->xD60 -= 1U;
             }
-            if (ft_80087AEC(temp_r30) != 0) {
+            if (ft_80087AEC(temp_r30)) {
                 temp_r31->xD68 += 1;
             }
         }
@@ -302,16 +305,14 @@ void pl_8003F53C(s32 arg0, s32 arg1)
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
-    if ((arg1 != 1) && (ftLib_800867D8(temp_r30) == 0)) {
+    if ((arg1 != 1) && (ftLib_800867D8(temp_r30) == false)) {
         if ((ft_800877F8(temp_r30, 0x100) == 0) &&
             (ft_800877F8(temp_r30, 0x200) == 0))
         {
-            /// @todo fix this
-            temp_r31->xDD0 |= 0x40;
+            temp_r31->xDD0.bit1 = 1;
         }
         if (ft_800877F8(temp_r30, 0x80000000) != 0) {
-            /// @todo fix this
-            temp_r31->xDD0 |= 0x20;
+            temp_r31->xDD0.bit2 = 1;
         }
         if ((ft_80087818(temp_r30, 0x100) != 0) ||
             (ft_80087818(temp_r30, 0x200) != 0))
@@ -342,8 +343,7 @@ void pl_8003FC44(s32 slot, bool arg1)
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     if (!arg1) {
-        /// @todo Fix this
-        temp_r3->xDD0 |= 0x80;
+        temp_r3->xDD0.bit0 = 1;
     }
 }
 
