@@ -122,7 +122,7 @@ void HSD_SisLib_803A6048(size_t);
 UNK_T func_804A70A0(UNK_T, s32, u32, s32, s32, s32, s32, s32, f64, f64, f64,
                     f64, f64, f64, f64, f64);
 void HSD_SisLib_803A947C(HSD_Archive*);
-void HSD_SisLib_803A945C(void);
+HSD_Archive* HSD_SisLib_803A945C(char*);
 void HSD_SisLib_803A84BC(HSD_GObj*, HSD_Text*);
 s32 HSD_SisLib_803A7F0C(HSD_Text*, s32);
 void HSD_SisLib_803A8134(void*, HSD_Text*, f32*, f32*);
@@ -141,7 +141,7 @@ void HSD_SisLib_803A660C(s32, s32, s32);
 void HSD_SisLib_803A6530(s32, s32, s32);
 void HSD_SisLib_803A6478(u8*, u8*);
 void HSD_SisLib_803A6368(HSD_Text*, s32);
-void HSD_SisLib_803A62A0(s32, HSD_Archive*, char*);
+void HSD_SisLib_803A62A0(s32, char*, char*);
 s32 HSD_SisLib_803A611C(u16, u32, u16, u8, u8, u8, u8, u32);
 void lbl_803A60EC(void);
 HSD_Text* HSD_SisLib_803A5ACC(s8, s32, f32, f32, f32, f32, f32);
