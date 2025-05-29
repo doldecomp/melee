@@ -53,7 +53,7 @@ typedef struct vi0102_archivefogdata {
 typedef struct vi0102_data {
     vi0102_archivejoints** jointdata;
     vi0102_archivecamdata* camdata;
-    void* lightdata;
+    HSD_LightDesc** lights;
     vi0102_archivefogdata* fogdata;
 } vi0102_data;
 
@@ -184,7 +184,7 @@ void vi0102_Initialize(un_804D6F60_t* unk)
     erase_colors_vi0102 = fog->color;
 
     light_gobj = GObj_Create(0xB, 0x3, 0);
-    lobj = lb_80011AC4(un_804D6F30->lightdata);
+    lobj = lb_80011AC4(un_804D6F30->lights);
     HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
