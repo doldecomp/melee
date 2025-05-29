@@ -492,6 +492,11 @@ void pl_80040AF0(s32 arg0)
     pl_800386D8(Player_GetTotalAttackCountPtr(arg0), 0x70);
 }
 
+s32 pl_80040B18(s32 arg0)
+{
+    return Player_GetTotalAttackCountPtr(arg0)->x19C;
+}
+
 u32 pl_80040B3C(s32 arg0)
 {
     return (u32) Player_GetStaleMoveTableIndexPtr2(arg0)
