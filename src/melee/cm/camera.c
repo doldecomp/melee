@@ -281,9 +281,9 @@ void Camera_80029BC4(CameraBounds* bounds, CameraMovement* movement)
 {
     float cam_dist = (bounds->y_max - bounds->y_min) /
                      tanf(cm_804D7E60 * movement->target_fov);
-    float x_dist = (bounds->x_max - bounds->x_min) /
-                   (cm_803BCB64.aspect *
-                    tanf(cm_804D7E60 * movement->target_fov));
+    float x_dist =
+        (bounds->x_max - bounds->x_min) /
+        (cm_803BCB64.aspect * tanf(cm_804D7E60 * movement->target_fov));
     if (x_dist > cam_dist) {
         cam_dist = x_dist;
     }
@@ -877,7 +877,10 @@ void Camera_SetBackgroundColor(u8 r, u8 g, u8 b)
 
 /// #Camera_80030758
 
-/// #Camera_80030788
+void Camera_80030788(Vec3* arg0)
+{
+    *arg0 = cm_80452C68.movement.position;
+}
 
 /// #Camera_800307AC
 
