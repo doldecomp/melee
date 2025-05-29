@@ -273,7 +273,7 @@ fn process_info(
 
         let filename =
             cxstr_to_symbol(unsafe { clang_getFileName(file) }, str_interner)
-                .ok_or(anyhow!("Null or empty filename."))?;
+                .unwrap_or(str_interner.get_or_intern("<Unknown>"));
 
         (filename, line, column)
     };
@@ -287,7 +287,7 @@ fn process_info(
         unsafe { clang_getDiagnosticCategoryText(diagnostic) },
         str_interner,
     )
-    .ok_or(anyhow!("Null or empty category."))?;
+    .unwrap_or(str_interner.get_or_intern("<Unknown>"));
 
     let option = cxstr_to_symbol(
         unsafe { clang_getDiagnosticOption(diagnostic, null_mut()) },
@@ -298,7 +298,7 @@ fn process_info(
         unsafe { clang_getDiagnosticSpelling(diagnostic) },
         str_interner,
     )
-    .ok_or(anyhow!("Null or empty spelling."))?;
+    .unwrap_or(str_interner.get_or_intern("<Unknown>"));
 
     Ok(DiagnosticInfo {
         severity,
