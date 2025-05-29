@@ -9517,8 +9517,7 @@ s32 it_8027A4D4(Item* item)
         gm_80172C04();
         return 23U;
     }
-    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) &&
-        gm_80164ABC((gmMainLib_8015ED8C_arg0_t*) &Item_804A0E24))
+    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80164ABC())
     {
         Item_804A0E24.z = 1U;
         gm_80172BC4();
@@ -9627,8 +9626,7 @@ s32 it_8027A9B8(Item* item)
         gm_80172C04();
         return 23U;
     }
-    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) &&
-        gm_80164ABC((gmMainLib_8015ED8C_arg0_t*) &Item_804A0E24))
+    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80164ABC())
     {
         Item_804A0E24.z = 1;
         gm_80172BC4();

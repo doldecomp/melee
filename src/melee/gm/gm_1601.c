@@ -262,7 +262,7 @@ bool gm_80164840(u8 id)
     u16* temp_r31;
     u8 var_r0 = 0;
 
-    temp_r31 = gmMainLib_8015ED8C(&lbl_803B75F8);
+    temp_r31 = gmMainLib_8015ED8C();
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (lbl_803B75F8.id[id] == lbl_803B75F8.thing[i].unk1) {
             var_r0 = lbl_803B75F8.thing[i].unk0;
@@ -280,9 +280,9 @@ bool gm_80164840(u8 id)
 /// #gm_80164A0C
 
 /// Are all unlockable characters unlocked?
-bool gm_80164ABC(struct gmMainLib_8015ED8C_arg0_t* arg0)
+bool gm_80164ABC()
 {
-    u16* unlockable_character_bitfield = gmMainLib_8015ED8C(arg0);
+    u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (!(*unlockable_character_bitfield & (1LL << i))) {

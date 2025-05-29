@@ -18,6 +18,7 @@
 
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
+#include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -204,10 +205,10 @@ void Ground_801BFFB0(void)
     stage_info.unk8C.b5 = false;
     stage_info.unk8C.b6 = false;
     stage_info.x714 = -1;
-    stage_info.x90 = 0;
+    stage_info.x90 = NULL;
     stage_info.unk8C.b7 = false;
     stage_info.x720 = -1;
-    stage_info.x94 = 0;
+    stage_info.x94 = NULL;
     zeroStageInfoArrays();
     stage_info.x694[0] = NULL;
     stage_info.x694[1] = NULL;
@@ -540,8 +541,8 @@ static bool Ground_801C0A70(Vec3* pos)
     }
 }
 
-int const Ground_803B7DEC[] = {
-    0, 0, 0, 0, 0, 6, 0, 0,
+BobOmbRain const Ground_803B7DEC = {
+    0, 0, 0, 0, 0, 6
 };
 
 HSD_Joint const Ground_803B7E0C = {
@@ -549,7 +550,91 @@ HSD_Joint const Ground_803B7E0C = {
     { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 }, NULL, NULL,
 };
 
-/// #void Ground_801C0C2C
+void Ground_801C0C2C(HSD_GObj* arg0)
+{
+    Vec3 sp50;
+    Vec3 sp44;
+    Vec3 sp38;
+    Vec3 sp2C;
+
+    if (stage_info.unk8C.b6 || stage_info.unk8C.b7) {
+        HSD_GObj* gobj = Ground_801C57A4();
+        if (gobj != NULL && !ftLib_8008701C(gobj)) {
+            ftLib_80086644(gobj, &sp50);
+            if (stage_info.unk8C.b6) {
+                bool result = false;
+                f32 x_min = -stage_info.x70C;
+                f32 y_min = -stage_info.x710;
+                f32 x_max = +stage_info.x70C;
+                f32 y_max = +stage_info.x710;
+                int i;
+                for (i = 0x99; i < 0xB3; i++) {
+                    if (Ground_801C2D24(i, &sp44)) {
+                        bool var_r0_2 = 0;
+                        bool var_r3_2 = 0;
+                        bool var_r4_2 = 0;
+                        f32 xpos = sp50.x - sp44.x;
+                        f32 ypos = sp50.y - sp44.y;
+                        if (xpos > x_min && xpos < x_max) { var_r4_2 = 1; }
+                        if (var_r4_2 && ypos > y_min) { var_r3_2 = 1; }
+                        if (var_r3_2 && ypos < y_max) { var_r0_2 = 1; }
+                        if (var_r0_2 && (stage_info.x90 == NULL || stage_info.x90(&sp50, i))) {
+                            result = true;
+                            break;
+                        }
+                    }
+                }
+                if (result) {
+                    stage_info.x714 = i;
+                } else {
+                    stage_info.x714 = -1;
+                }
+                stage_info.unk8C.b6 = false;
+            }
+            if (stage_info.unk8C.b7) {
+                bool result = false;
+                f32 x_min = -stage_info.x718;
+                f32 y_min = -stage_info.x71C;
+                f32 x_max = +stage_info.x718;
+                f32 y_max = +stage_info.x71C;
+                int i;
+                for (i = 0xBD; i < 0xC7; i++) {
+                    if (Ground_801C2D24(i, &sp38)) {
+                        bool var_r0_2 = 0;
+                        bool var_r3_2 = 0;
+                        bool var_r4_2 = 0;
+                        f32 xpos = sp50.x - sp38.x;
+                        f32 ypos = sp50.y - sp38.y;
+                        if (xpos > x_min && xpos < x_max) { var_r4_2 = 1; }
+                        if (var_r4_2 && ypos > y_min) { var_r3_2 = 1; }
+                        if (var_r3_2 && ypos < y_max) { var_r0_2 = 1; }
+                        if (var_r0_2 && (stage_info.x94 == NULL || stage_info.x94(&sp50, i))) {
+                            result = true;
+                            break;
+                        }
+                    }
+                }
+                if (result) {
+                    stage_info.x720 = i;
+                } else {
+                    stage_info.x720 = -1;
+                }
+                stage_info.unk8C.b7 = false;
+            }
+        }
+    }
+    if (gm_8016B238()) {
+        int temp_r3_2 = gm_8016AEDC();
+        if (temp_r3_2 > 0x4B0 && temp_r3_2 - stage_info.x9C > 0x1E) {
+            stage_info.x9C = temp_r3_2;
+            if (Ground_801C0A70(&sp2C)) {
+                BobOmbRain spC = Ground_803B7DEC;
+                spC.x8_vec = sp2C;
+                it_8026BE84(&spC);
+            }
+        }
+    }
+}
 
 void Ground_801C0F78(StructPairWithStageID* pair)
 {
@@ -1045,8 +1130,8 @@ void Ground_801C1E94(void)
 
 void Ground_ApplyStageBackgroundColor(void)
 {
-    HSD_Fog* fog = GET_FOG(stage_info.x12C);
-    if (stage_info.x12C != NULL && fog != NULL) {
+    HSD_Fog* fog;
+    if (stage_info.x12C != NULL && (fog = GET_FOG(stage_info.x12C)) != NULL) {
         Camera_SetBackgroundColor(fog->color.r, fog->color.g, fog->color.b);
     } else {
         Camera_SetBackgroundColor(0, 0, 0);
@@ -1068,7 +1153,7 @@ bool Ground_801C2090(GXColor* color)
     if (stage_info.x12C != NULL && color != NULL) {
         HSD_Fog* fog = GET_FOG(stage_info.x12C);
         if (fog != NULL) {
-            fog->color = *color;
+            *color = fog->color;
             return true;
         }
     }
@@ -1196,7 +1281,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 6:
-                    if (gm_80164ABC(/* TODO*/ 0) &&
+                    if (gm_80164ABC() &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1942,7 +2027,7 @@ void Ground_801C3BB4(void)
     stage_info.blast_zone.right = rgt;
 }
 
-s32 Ground_801C3D44(s32 arg0, f32 arg8, f32 arg9)
+s32 Ground_801C3D44(void* arg0, f32 arg8, f32 arg9)
 {
     stage_info.unk8C.b6 = 1;
     stage_info.x70C = 0.5f * arg8;
@@ -1957,7 +2042,7 @@ s32 Ground_801C3D44(s32 arg0, f32 arg8, f32 arg9)
     return stage_info.x714;
 }
 
-s32 Ground_801C3DB4(s32 arg0, f32 arg8, f32 arg9)
+s32 Ground_801C3DB4(void* arg0, f32 arg8, f32 arg9)
 {
     stage_info.unk8C.b7 = 1;
     stage_info.x718 = 0.5f * arg8;
@@ -2520,6 +2605,7 @@ void Ground_801C4FAC(HSD_CObj* cobj)
                     __assert("fog.h", 0xB4, "fog");
                 }
                 fog->start = phi_f31;
+
                 if (fog == NULL) {
                     __assert("fog.h", 0xBF, "fog");
                 }
@@ -2692,7 +2778,7 @@ void Ground_801C5878(void)
     PAD_STACK(8);
     un_8031C2CC();
     if (gm_8016B498() != 0) {
-        int temp_r30 = un_8031C2EC(&stage_info);
+        int temp_r30 = un_8031C2EC();
         un_8031C454();
         stage_info.x6E4[0] = temp_r30;
     } else {
