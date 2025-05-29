@@ -6,6 +6,8 @@ Super Smash Bros Melee \
 [![Discord Badge]][discord]
 =============
 
+[<img src="https://decomp.dev/doldecomp/melee.svg?w=512&h=256" width="512" height="256">][Progress]
+
 [Build Status]: https://github.com/doldecomp/melee/actions/workflows/build.yml/badge.svg
 [actions]: https://github.com/doldecomp/melee/actions/workflows/build.yml
 [Code Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=code&label=Code&category=all
