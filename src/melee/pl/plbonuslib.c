@@ -392,6 +392,11 @@ void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
     }
 }
 
+void pl_8003FDA0(s32 arg0)
+{
+    pl_80038788(arg0, 0x5B, 1);
+}
+
 void pl_8003FDC8(s32 arg0)
 {
     pl_StaleMoveTableExt_t* temp_r3;
