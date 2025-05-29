@@ -26,7 +26,10 @@
 #include "lb/lbdvd.h"
 #include "lb/lblanguage.h"
 #include "lb/lbmthp.h"
-#include "sc/types.h"
+#include "lb/lbsnap.h"
+#include "lb/types.h"
+#include "mn/mngallery.h"
+#include "mn/types.h"
 #include "ty/toy.h"
 #include "un/un_2FC9.h"
 
@@ -959,7 +962,177 @@ UNK_T gm_801ACC94(void)
 
 /// #gm_801B0FB8
 
-/// #gm_801B0FF8
+void gm_801B0FF8(struct gm_801B0FF8_arg0_t* arg0)
+{
+    GameRules* temp_r3;
+    struct gm_801B0FF8_arg0_x10_t* temp_r31;
+    u8 var_r0;
+    Unk80433380_48* temp_r30;
+
+    temp_r31 = arg0->x10;
+    lb_8001C550();
+    lb_8001D164(0);
+    temp_r30 = HSD_MemAlloc(lbSnap_8001E210());
+    lbSnap_8001E218(HSD_MemAlloc(lbSnap_8001E204()), temp_r30);
+    {
+        ssize_t i;
+        for (i = 0; i < (signed) ARRAY_SIZE(mnGallery_804A0B90); i++) {
+            mnGallery_804A0B90[i] =
+                HSD_MemAlloc(sizeof(struct mnGallery_804A0B90_t));
+        }
+    }
+    lbDvd_80018C6C();
+    lbDvd_8001823C();
+    lbDvd_80018254();
+    mnGallery_80258940();
+    temp_r3 = gmMainLib_8015CC34();
+    if (temp_r3->unk_x0 != 0) {
+        temp_r3->unk_x0 = 0;
+        temp_r31->x0 = 0;
+        temp_r31->x1 = 0;
+        temp_r31->x2 = 1;
+        return;
+    }
+    temp_r31->x2 = 1;
+    var_r0 = gm_801A4320();
+    if (var_r0 == 0x14) {
+        var_r0 = gm_801737D8();
+    }
+    switch (var_r0) {
+    case 3:
+        temp_r31->x0 = 6;
+        temp_r31->x1 = 0;
+        return;
+    case 4:
+        temp_r31->x0 = 6;
+        temp_r31->x1 = 1;
+        return;
+    case 5:
+        temp_r31->x0 = 6;
+        temp_r31->x1 = 2;
+        return;
+    case 21:
+        temp_r31->x0 = 6;
+        temp_r31->x1 = 0;
+        return;
+    case 22:
+        temp_r31->x0 = 6;
+        temp_r31->x1 = 1;
+        return;
+    case 23:
+        temp_r31->x0 = 6;
+        temp_r31->x1 = 2;
+        return;
+    case 43:
+        temp_r31->x0 = 7;
+        temp_r31->x1 = 0;
+        return;
+    case 15:
+        temp_r31->x0 = 9;
+        temp_r31->x1 = 0;
+        return;
+    case 33:
+        temp_r31->x0 = 0x21;
+        temp_r31->x1 = 0;
+        return;
+    case 34:
+        temp_r31->x0 = 0x21;
+        temp_r31->x1 = 1;
+        return;
+    case 35:
+        temp_r31->x0 = 0x21;
+        temp_r31->x1 = 2;
+        return;
+    case 36:
+        temp_r31->x0 = 0x21;
+        temp_r31->x1 = 3;
+        return;
+    case 37:
+        temp_r31->x0 = 0x21;
+        temp_r31->x1 = 4;
+        return;
+    case 38:
+        temp_r31->x0 = 0x21;
+        temp_r31->x1 = 5;
+        return;
+    case 32:
+        temp_r31->x0 = 9;
+        temp_r31->x1 = 1;
+        return;
+    case 28:
+        temp_r31->x0 = 1;
+        temp_r31->x1 = 4;
+        return;
+    case 2:
+        temp_r31->x0 = 2;
+        temp_r31->x1 = 0;
+        return;
+    case 27:
+        temp_r31->x0 = 2;
+        temp_r31->x1 = 1;
+        return;
+    case 10:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 0;
+        return;
+    case 31:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 1;
+        return;
+    case 16:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 2;
+        return;
+    case 30:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 3;
+        return;
+    case 29:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 4;
+        return;
+    case 17:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 5;
+        return;
+    case 18:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 9;
+        return;
+    case 19:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 8;
+        return;
+    case 42:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 6;
+        return;
+    case 44:
+        temp_r31->x0 = 0xC;
+        temp_r31->x1 = 7;
+        return;
+    case 11:
+        temp_r31->x0 = 3;
+        temp_r31->x1 = 0;
+        return;
+    case 12:
+        temp_r31->x0 = 3;
+        temp_r31->x1 = 1;
+        return;
+    case 13:
+        temp_r31->x0 = 3;
+        temp_r31->x1 = 3;
+        return;
+    case 1:
+        temp_r31->x0 = 4;
+        temp_r31->x1 = 4;
+        return;
+    default:
+        temp_r31->x0 = 0;
+        temp_r31->x1 = 0;
+        return;
+    }
+}
 
 /// #gm_801B138C
 

@@ -356,7 +356,7 @@ int lbSnap_8001E210(void)
     return 0x840;
 }
 
-void lbSnap_8001E218(void* arg0, void* arg1)
+void lbSnap_8001E218(void* arg0, struct Unk80433380_48* arg1)
 {
     lbSnap_80433380.x0 = arg0;
     lbSnap_80433380.x48 = arg1;

@@ -49,7 +49,7 @@
 /* 01C2D8 */ int lb_8001C2D8(int, char*, char*, char*);
 /* 01C404 */ UNK_RET lb_8001C404(UNK_PARAMS);
 /* 01C4A8 */ void lb_8001C4A8(void*, void*);
-/* 01C550 */ UNK_RET lb_8001C550(UNK_PARAMS);
+/* 01C550 */ void lb_8001C550(void);
 /* 01C5A4 */ UNK_RET lb_8001C5A4(UNK_PARAMS);
 /* 01C5BC */ void lb_8001C5BC(void);
 /* 01C600 */ UNK_RET lb_8001C600(UNK_PARAMS);
@@ -69,7 +69,7 @@
 /* 01CEC0 */ UNK_RET fn_8001CEC0(UNK_PARAMS);
 /* 01CEE4 */ UNK_RET fn_8001CEE4(UNK_PARAMS);
 /* 01CF18 */ UNK_RET lb_8001CF18(UNK_PARAMS);
-/* 01D164 */ UNK_RET lb_8001D164(UNK_PARAMS);
+/* 01D164 */ void lb_8001D164(int);
 /* 01D1F4 */ UNK_RET lb_8001D1F4(UNK_PARAMS);
 /* 01D21C */ void lb_8001D21C(void);
 
