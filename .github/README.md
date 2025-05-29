@@ -14,7 +14,7 @@ Super Smash Bros Melee \
 [Data Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_data&label=Data&category=all
 [Linked Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_code&label=Linked%20Code&category=all
 [Discord Badge]: https://img.shields.io/discord/933849697485983765?color=%237289DA&logo=discord&logoColor=%23FFFFFF
-[discord]: https://discord.gg/CWKqYMePX8
+[discord]: https://discord.gg/hKx3FJJgrV
 [progress]: https://decomp.dev/doldecomp/melee
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
