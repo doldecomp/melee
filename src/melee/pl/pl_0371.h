@@ -28,7 +28,6 @@
 /* 03FFDC */ void pl_8003FFDC(u8, s32, u8, s32, s32);
 /* 040048 */ void pl_80040048(u8, s32);
 /* 040120 */ void pl_80040120(u8, s32);
-/* 040270 */ void pl_80040270(u8, u8, float);
 /* 040330 */ void pl_80040330(u8 slot, bool, f32);
 /* 0411C4 */ void pl_800411C4(u8 slot, bool);
 /* 041280 */ void pl_80041280(u8 slot, bool);
