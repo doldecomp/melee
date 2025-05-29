@@ -70,10 +70,10 @@ struct StageInfo {
         u8 b6 : 1;
         u8 b7 : 1;
     } unk8C;
-    s32 x90;
-    s32 x94;
+    bool (*x90)(Vec3*, int);
+    bool (*x94)(Vec3*, int);
     s32 x98;
-    s32 x9C;
+    u32 x9C;
     u8 xA0[4];
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;

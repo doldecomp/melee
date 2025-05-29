@@ -242,7 +242,7 @@
 /* 304D30 */ UNK_RET un_80304D30(UNK_PARAMS);
 /* 3124BC */ UNK_RET un_803124BC(UNK_PARAMS);
 /* 31C2CC */ UNK_RET un_8031C2CC(UNK_PARAMS);
-/* 31C2EC */ int un_8031C2EC(StageInfo*);
+/* 31C2EC */ int un_8031C2EC(void);
 /* 31C454 */ UNK_RET un_8031C454(UNK_PARAMS);
 /* 322258 */ bool un_80322258(f32 x);
 /* 3222EC */ float un_803222EC(float mag, float angle);
