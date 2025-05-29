@@ -37,3 +37,4 @@
 -Wno-unused-value
 -Wno-unused-variable
 -Wno-for-loop-analysis
+-Wno-integer-overflow

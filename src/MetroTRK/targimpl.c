@@ -1,3 +1,5 @@
+#include "targimpl.h"
+
 #include "metrotrk.h"
 
 #include <dolphin/os.h>
@@ -1012,7 +1014,7 @@ DSError TRKTargetFlushCache(u8 arg0, u32 arg1, u32 arg2)
     return kInvalidMemory;
 }
 
-bool TRKTargetStopped()
+bool TRKTargetStopped(void)
 {
     return gTRKState.stopped;
 }
@@ -1022,7 +1024,7 @@ void TRKTargetSetStopped(bool val)
     gTRKState.stopped = val;
 }
 
-DSError TRKTargetStop()
+DSError TRKTargetStop(void)
 {
     TRKTargetSetStopped(true);
     return kNoError;

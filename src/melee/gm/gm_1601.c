@@ -1,6 +1,7 @@
 #include <placeholder.h>
 
 #include "gm_1601.static.h"
+#include "gm_1601.h"
 
 #include "gmmain_lib.h"
 
@@ -280,7 +281,7 @@ bool gm_80164840(u8 id)
 /// #gm_80164A0C
 
 /// Are all unlockable characters unlocked?
-bool gm_80164ABC()
+bool gm_80164ABC(void)
 {
     u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
     int i;
