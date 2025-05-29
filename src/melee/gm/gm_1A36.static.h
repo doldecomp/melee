@@ -184,6 +184,8 @@ struct gm_804D6840_t {
     struct gm_804D6840_fogs_t* fogs;
 };
 
+/* 479C30 */ static gm_controller_map gm_80479C30[4];
+
 /* 1A3F48 */ static void gm_801A3F48(MinorScene*);
 /* 1A4014 */ static void gm_801A4014(MajorScene* scene);
 /* 1A4284 */ static UNK_T gm_801A4284(UNK_T);
@@ -229,7 +231,6 @@ struct gm_804D6840_t {
 /* 3DD0F0 */ static HSD_CObjDesc gm_803DD0F0;
 /* 3DD248 */ static HSD_Archive gm_803DD248;
 /* 3DD2C0 */ static int gm_803DD2C0[74];
-/* 479C30 */ static gm_controller_map gm_80479C30[4];
 /* 479CF0 */ static gm_controller_map controller_union;
 /* 479D20 */ void (*gm_80479D20)(s32);
 /* 479D24 */ s32 gm_80479D24;
