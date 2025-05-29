@@ -877,7 +877,9 @@ void Camera_SetBackgroundColor(u8 r, u8 g, u8 b)
 
 /// #Camera_80030758
 
-/// #Camera_80030788
+void Camera_80030788(Vec3* arg0) {
+    *arg0 = cm_80452C68.movement.position;
+}
 
 /// #Camera_800307AC
 
