@@ -460,6 +460,20 @@ void pl_800401F0(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
     temp_r3->x0_staleMoveTable.xCE0 += var_f1_2;
 }
 
+void pl_80040270(s32 arg0, bool arg1, f32 arg2)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    if (arg1) {
+        return;
+    }
+    M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
+    if (arg2 == pl_804D6470->x98) {
+        temp_r3->x0_staleMoveTable.xCE4 += 1;
+    }
+}
+
 void pl_800402D0(int slot, bool arg1, bool arg2)
 {
     pl_StaleMoveTableExt_t* stale_moves =
