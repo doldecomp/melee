@@ -32,10 +32,14 @@ static HSD_LightDesc node0 = {
     (void*) floats, 0,    0,
 };
 
-static HSD_LightDesc* node1 = &node0;
+/// @todo #node1_t and #node2_t are fake types.
+static struct node1_t {
+    HSD_LightDesc* x0;
+    UNK_T x4;
+} node1 = { &node0, NULL };
 
 static struct node2_t {
-    /* +0 */ HSD_LightDesc** x0;
+    /* +0 */ struct node1_t* x0;
     /* +4 */ UNK_T x4;
 } node2 = { &node1, NULL };
 
