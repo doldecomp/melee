@@ -524,6 +524,11 @@ s32 pl_80040A30(s32 arg0)
     return Player_GetTotalAttackCountPtr(arg0)->x198;
 }
 
+s32 pl_80040A54(s32 arg0)
+{
+    return Player_GetTotalAttackCountPtr(arg0)->x194;
+}
+
 void pl_80040AF0(s32 arg0)
 {
     pl_800386D8(Player_GetTotalAttackCountPtr(arg0), 0x70);
