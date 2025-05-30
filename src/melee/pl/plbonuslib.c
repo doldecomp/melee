@@ -415,6 +415,11 @@ void pl_8003FE1C(s32 slot, bool arg1)
     pl_80038824(slot, 0xA);
 }
 
+void pl_8003FE40(s32 arg0)
+{
+    pl_80038824(arg0, 0x4B);
+}
+
 void pl_8003FE64(s32 arg0)
 {
     s32 var_r31;
