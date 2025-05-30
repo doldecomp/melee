@@ -508,6 +508,11 @@ void pl_8004065C(int arg0, int arg1)
     }
 }
 
+f32 pl_80040870(s32 arg0)
+{
+    return Player_GetStaleMoveTableIndexPtr2(arg0)->xCF8;
+}
+
 s32 pl_800408DC(s32 arg0)
 {
     return Player_GetStaleMoveTableIndexPtr2(arg0)->x0_staleMoveTable.xCB4;
