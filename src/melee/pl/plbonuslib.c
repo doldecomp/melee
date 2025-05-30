@@ -533,6 +533,11 @@ s32 pl_80040900(s32 arg0)
     return Player_GetTotalAttackCountPtr(arg0)->x358;
 }
 
+s32 pl_80040924(s32 arg0)
+{
+    return Player_GetTotalAttackCountPtr(arg0)->x0;
+}
+
 s32 pl_80040A04(s32 arg0)
 {
     pl_800386D8_t* temp_r3;
