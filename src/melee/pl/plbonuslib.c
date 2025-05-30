@@ -501,6 +501,13 @@ void pl_80040460(s32 slot, s32 arg1)
     }
 }
 
+void pl_8004065C(int arg0, int arg1)
+{
+    if (arg1 == 0) {
+        pl_80038824(arg0, 0x78);
+    }
+}
+
 s32 pl_800408DC(s32 arg0)
 {
     return Player_GetStaleMoveTableIndexPtr2(arg0)->x0_staleMoveTable.xCB4;
