@@ -21,6 +21,7 @@
 /* 1A428C */ void gm_801A428C(u8 arg0);
 /* 1A42A0 */ void gm_801A42A0(int pending_minor);
 /* 1A42D4 */ UNK_RET gm_801A42D4(UNK_PARAMS);
+/* 1A42F8 */ void gm_801A42F8(int);
 /* 1A4310 */ u8 gm_801A4310(void);
 /* 1A4340 */ UNK_RET gm_801A4340(UNK_PARAMS);
 /* 1A43A0 */ u8 gm_801A43A0(u8 arg0);
@@ -35,7 +36,7 @@
 /* 1A4970 */ UNK_RET gm_801A4970(UNK_PARAMS);
 /* 1A4B08 */ void gm_801A4B08(s32 arg0, s32 arg1);
 /* 1A4B1C */ UNK_RET gm_801A4B1C(UNK_PARAMS);
-/* 1A4B60 */ UNK_RET gm_801A4B60(UNK_PARAMS);
+/* 1A4B60 */ void gm_801A4B60(void);
 /* 1A4B74 */ UNK_RET gm_801A4B74(UNK_PARAMS);
 /* 1A4B90 */ s32 gm_801A4B90(void);
 /* 1A4B9C */ s8* gm_801A4B9C(void);

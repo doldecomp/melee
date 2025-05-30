@@ -200,7 +200,6 @@ struct gm_801B0FF8_arg0_t {
 /* 1A42B4 */ static u8 gm_801A42B4(void);
 /* 1A42C4 */ static u8 gm_801A42C4(void);
 /* 1A42E8 */ static void gm_801A42E8(s8 arg0);
-/* 1A42F8 */ static void gm_801A42F8(int);
 /* 1A4310 */ static UNK_RET gm_800A4310(UNK_PARAMS);
 /* 1A4320 */ static u8 gm_801A4320(void);
 /* 1A4330 */ static void gm_801A4330(void*);
