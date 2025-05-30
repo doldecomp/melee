@@ -22,7 +22,7 @@
 /* 03FC44 */ void pl_8003FC44(s32 slot, bool);
 /* 03FC88 */ void pl_8003FC88(s32, s32, s32);
 /* 03FDC8 */ void pl_8003FDC8(s32);
-/* 03FDF4 */ void pl_8003FDF4(u8, int);
+/* 03FDF4 */ void pl_8003FDF4(s32, int);
 /* 03FDA0 */ void pl_8003FDA0(s32);
 /* 03FE64 */ void pl_8003FE64(s32);
 /* 03FED0 */ void pl_8003FED0(s32, s32);

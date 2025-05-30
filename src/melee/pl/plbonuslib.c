@@ -405,6 +405,11 @@ void pl_8003FDC8(s32 arg0)
     temp_r3->xD70 += 1;
 }
 
+void pl_8003FDF4(s32 arg0, int arg1)
+{
+    pl_80038788(arg0, 0xC4, 1);
+}
+
 void pl_8003FE64(s32 arg0)
 {
     s32 var_r31;
