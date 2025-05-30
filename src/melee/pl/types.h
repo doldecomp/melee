@@ -25,7 +25,9 @@ struct plAllocInfo2 {
 struct pl_800386D8_t {
     /*   +0 */ u8 x0[0x19C];
     /* +19C */ s32 x19C;
-    /* +1A0 */ u8 x1A0[0x3E8 - 0x1A0];
+    /* +1A0 */ u8 x1A0[0x358 - 0x1A0];
+    /* +358 */ s32 x358;
+    /* +35C */ u8 x35C[0x3E8 - 0x35C];
     /* +3E8 */ UNK_T x3E8 UNK_SIZE_ARRAY;
 };
 
