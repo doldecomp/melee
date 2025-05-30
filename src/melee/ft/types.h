@@ -1830,6 +1830,15 @@ struct FtCmdState {
                     u8 x1_b6 : 1;
                     u8 x1_b7 : 1;
                 };
+                struct {
+                    u8 x0_b0_8 : 6;
+                    u16 x0_b0_2 : 8;
+                    u32 x0_b0_3 : 18;
+                };
+                struct {
+                    u32 x0_6_26_1 : 6;
+                    u32 x0_6_26_2 : 26;
+                };
             };
             union {
                 s16 x2;
