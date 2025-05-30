@@ -2,20 +2,23 @@
 #define GALE01_2599EC
 
 #include <placeholder.h>
+#include <platform.h>
 
-/* 2599EC */ UNK_RET mnStageSel_802599EC(UNK_PARAMS);
-/* 259C28 */ UNK_RET mnStageSel_80259C28(UNK_PARAMS);
-/* 259D84 */ UNK_RET fn_80259D84(UNK_PARAMS);
-/* 259ED8 */ UNK_RET mnStageSel_80259ED8(UNK_PARAMS);
-/* 25A090 */ UNK_RET fn_8025A090(UNK_PARAMS);
-/* 25A310 */ UNK_RET fn_8025A310(UNK_PARAMS);
-/* 25A560 */ UNK_RET fn_8025A560(UNK_PARAMS);
-/* 25A91C */ UNK_RET fn_8025A91C(UNK_PARAMS);
-/* 25A974 */ UNK_RET fn_8025A974(UNK_PARAMS);
+#include <sysdolphin/baselib/forward.h>
+
+/* 2599EC */ int mnStageSel_802599EC(void);
+/* 259C28 */ void mnStageSel_80259C28(void);
+/* 259D84 */ void fn_80259D84(HSD_GObj*);
+/* 259ED8 */ void mnStageSel_80259ED8(int);
+/* 25A090 */ void fn_8025A090(HSD_GObj*);
+/* 25A310 */ void fn_8025A310(HSD_GObj*);
+/* 25A560 */ void fn_8025A560(HSD_GObj*);
+/* 25A91C */ void fn_8025A91C(HSD_GObj*);
+/* 25A974 */ void fn_8025A974(HSD_GObj*, u32);
 /* 25A998 */ UNK_RET mnStageSel_8025A998(UNK_PARAMS);
-/* 25B850 */ UNK_RET mnStageSel_8025B850(UNK_PARAMS);
-/* 25BB5C */ UNK_RET mnStageSel_8025BB5C(UNK_PARAMS);
-/* 25BBD4 */ UNK_RET mnStageSel_8025BBD4(UNK_PARAMS);
-/* 25BC08 */ UNK_RET mnStageSel_8025BC08(UNK_PARAMS);
+/* 25B850 */ void mnStageSel_8025B850(void);
+/* 25BB5C */ void mnStageSel_8025BB5C(void);
+/* 25BBD4 */ u8 mnStageSel_8025BBD4(void);
+/* 25BC08 */ u8 mnStageSel_8025BC08(int);
 
 #endif

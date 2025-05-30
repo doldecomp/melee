@@ -1596,7 +1596,7 @@ melee/gm/gmmain_lib.c:
 
 melee/gm/gmmain.c:
 	.text       start:0x8015FD24 end:0x801601C4
-	.data       start:0x803D4AC8 end:0x803D4C38
+	.data       start:0x803D4AC8 end:0x803D4C32
 	.bss        start:0x8046B108 end:0x8046B378
 	.sdata      start:0x804D3EE8 end:0x804D3EF8
 	.sbss       start:0x804D6590 end:0x804D6598
@@ -2136,13 +2136,20 @@ melee/db/db_2253.c:
 	.sdata2     start:0x804DBCF0 end:0x804DBD88
 
 melee/mn/mn_2295.c:
-	.text       start:0x802295AC end:0x80233A98
+	.text       start:0x802295AC end:0x8023201C
 	.rodata     start:0x803B84E8 end:0x803B8510
-	.data       start:0x803EAE68 end:0x803ED340
+	.data       start:0x803EAE68 end:0x803ED1D0
 	.bss        start:0x804A04F0 end:0x804A0648
-	.sdata      start:0x804D4B30 end:0x804D4BA0
-	.sbss       start:0x804D6BA8 end:0x804D6BE8
-	.sdata2     start:0x804DBD88 end:0x804DBE70
+	.sdata      start:0x804D4B30 end:0x804D4B98
+	.sbss       start:0x804D6BA8 end:0x804D6BE0
+	.sdata2     start:0x804DBD88 end:0x804DBE38
+
+melee/mn/mnruleplus.c:
+	.text       start:0x8023201C end:0x80233A98
+	.data       start:0x803ED1D0 end:0x803ED340
+	.sdata      start:0x804D4B98 end:0x804D4BA0
+	.sbss       start:0x804D6BE0 end:0x804D6BE8
+	.sdata2     start:0x804DBE38 end:0x804DBE70
 
 melee/mn/mnitemsw.c:
 	.text       start:0x80233A98 end:0x8023593C
