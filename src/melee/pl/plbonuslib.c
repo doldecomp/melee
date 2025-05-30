@@ -518,6 +518,11 @@ u32 pl_80040894(s32 arg0)
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xD40;
 }
 
+u32 pl_800408B8(s32 arg0)
+{
+    return Player_GetStaleMoveTableIndexPtr2(arg0)->xD48;
+}
+
 s32 pl_800408DC(s32 arg0)
 {
     return Player_GetStaleMoveTableIndexPtr2(arg0)->x0_staleMoveTable.xCB4;
