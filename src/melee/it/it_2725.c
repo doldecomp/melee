@@ -265,7 +265,8 @@ extern Vec3 it_803B857C;       // { 0.0f, 0.0f, 0.0f }
 extern Quaternion it_803B8588; //{ 0.0f, 0.0f, 0.0f, 0.0f }
 extern Quaternion it_803B8598; //{ 0.0f, 0.0f, 0.0f, 0.0f }
 extern const Vec3 it_803B85A8[6];
-extern s32 it_803B85F0[4];
+extern s64 it_803B85F0;
+extern s64 it_803B85F8;
 
 // Common items
 struct sdata_ItemGXLink it_803F1418[43] = {
@@ -4688,7 +4689,6 @@ HSD_ObjAllocUnk6 it_804A0E60;
 static char it_804D5198;
 // static char it_804D519C[]; // Not sure of type
 // static char it_804D51A4[]; // Not sure of type
-static char it_804D51B0;
 static char it_804D51B8;
 static char it_804D51C0;
 static ItCmd it_804D51C8[2] = {
@@ -4726,7 +4726,7 @@ f32** it_804D6D40; // Not sure of type. 8 bytes instead of 4 for some reason
 // static f32 it_804DC730 = 1.0f;
 // static f32 it_804DC734 = 0.0f;
 // static f32 it_804DC738 = 1.0f;
-static f32 it_804DC73C = 0.0f;
+extern f32 it_804DC73C; // = 0.0f;
 // static f32 it_804DC740 = -1.0f;
 static f32 it_804DC744 = 1.0f;
 // static f64 const it_804DC748 = S32_TO_F32;
@@ -5100,25 +5100,29 @@ HSD_JObj* it_80272C90(Item_GObj* item_gobj)
                        ->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
 }
 
+static inline HSD_JObj* jobj_child(HSD_JObj* jobj)
+{
+    if (jobj == NULL) {
+        return NULL;
+    } else {
+        return jobj->child;
+    }
+}
+
 HSD_JObj* it_80272CC0(Item_GObj* item_gobj, enum_t idx)
 {
-    HSD_JObj* item_jobj2;
-    HSD_JObj* item_jobj1;
-    Item* item;
-
-    item = item_gobj->user_data;
-    item_jobj1 = item_gobj->hsd_obj;
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
     if (item->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
         return item->xBBC_dynamicBoneTable->bones[idx];
     }
     if (idx != 0) {
         for (; idx > 0; --idx) {
-            item_jobj2 = item_jobj1 == NULL ? NULL : item_jobj1->child;
-            item_jobj1 = item_jobj2;
+            jobj = jobj_child(jobj);
         }
     }
 
-    return item_jobj1;
+    return jobj;
 }
 
 bool it_80272D1C(Item_GObj* item_gobj)
@@ -5204,7 +5208,7 @@ bool itColl_BounceOffShield(Item_GObj* item_gobj)
     if (vel_x < 0.0f) {
         vel_x = -vel_x;
     }
-    if (!(vel_x < 0.00001f) || (item->facing_dir == 0.0f)) {
+    if (!(vel_x < 0.00001f) || !item->facing_dir) {
         if (item->x40_vel.x >= 0.0f) {
             dir = 1.0f;
         } else {
@@ -5302,17 +5306,12 @@ void it_802732E4(Item* item, s32 arg1)
 
 void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint, s32 arg2)
 {
-    // void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint) {
-    HSD_JObj* item_jobj;
-    Item* item;
-
-    item = item_gobj->user_data;
+    Item* item = GET_ITEM(item_gobj);
     item->xC8_joint = joint;
     HSD_GObjObject_80390B0C((HSD_GObj*) item_gobj);
     Item_802680CC((HSD_GObj*) item_gobj);
     Item_8026849C((HSD_GObj*) item_gobj);
-    item_jobj = item_gobj->hsd_obj;
-    HSD_JObjSetTranslate(item_jobj, &item->pos);
+    HSD_JObjSetTranslate(item_gobj->hsd_obj, &item->pos);
 }
 
 void it_80273408(Item_GObj* item_gobj)
@@ -5656,34 +5655,21 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
     HSD_JObjSetTranslate(item_jobj3, pos);
 }
 
-// i don't think this is right, but a 3rd arg somewhere is the only way that
-// the compiler will "protect" r5. I'm not 100% sure on the types either
-
-// https://decomp.me/scratch/Sjr7G supports 3rd arg existing
-// https://decomp.me/scratch/AcQ55 does not
-
-// i'm gonna investigate other call sites of this function, as well as
-// it_80275bc8 and we'll see what turns up
-void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2, Item* arg_item)
+void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
 {
-    Item* item;
-    HSD_JObj* item_jobj;
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* item_jobj = GET_JOBJ(item_gobj);
     f32 rotate;
     s32 int_dir;
 
-    // item = GET_ITEM((HSD_GObj*) item_gobj);
-    item = item_gobj->user_data;
-    // item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
-    item_jobj = item_gobj->hsd_obj;
     item->xDC8_word.flags.x13 = 0;
     item->xDC8_word.flags.x14 = 1;
     item->xDC4 = 0;
     item->xD54_throwNum++;
     item->xD50_landNum = 0;
 
-    it_80275BC8(item_gobj, arg_gobj2); // probably not a 3rd arg, though adding
-                                       // it results in a 99.80% match
-    it_80274DAC(item_gobj);            // doesn't touch r5
+    it_80275BC8(item_gobj, arg_gobj2);
+    it_80274DAC(item_gobj);
 
     if (item->xDC8_word.flags.x19 == 1) {
         rotate = M_PI_2 * item->facing_dir;
@@ -5691,10 +5677,8 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2, Item* arg_item)
     }
 
     if (ftLib_80086960(arg_gobj2)) {
-        Item_8026A848((HSD_GObj*) item_gobj, arg_gobj2); // probably not
-        it_8027B070(item_gobj,
-                    (Fighter_GObj*) arg_gobj2); // immediately loads a value
-                                                // into r5 without saving it
+        Item_8026A848(item_gobj, arg_gobj2);
+        it_8027B070(item_gobj, arg_gobj2);
     }
 
     if (-1.0f == item->facing_dir) {
@@ -5708,8 +5692,8 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2, Item* arg_item)
     it_802762BC(item);
     HSD_JObjSetTranslate(item_jobj, &item->pos);
 
-    it_8027B4A4((Fighter_GObj*) arg_gobj2, item_gobj);
-    it_8027B378((Fighter_GObj*) arg_gobj2, item_gobj, it_802758D4(item_gobj));
+    it_8027B4A4(arg_gobj2, item_gobj);
+    it_8027B378(arg_gobj2, item_gobj, it_802758D4(item_gobj));
 }
 
 void it_80274198(Item_GObj* item_gobj, bool chk)
@@ -5730,21 +5714,16 @@ void it_80274198(Item_GObj* item_gobj, bool chk)
             owner_gobj = item->x51C;
         }
     }
-    // it_80273F34(item_gobj, owner_gobj);
-    it_80273F34(item_gobj, owner_gobj, item);
+    it_80273F34(item_gobj, owner_gobj);
 }
 
 void it_802741F4(Item_GObj* item_gobj, bool chk)
 {
-    HSD_GObj* x51C_gobj;
-    HSD_GObj* owner_gobj;
-    Item* item;
-
-    item = item_gobj->user_data;
-    owner_gobj = item->owner;
+    Item* item = GET_ITEM(item_gobj);
+    HSD_GObj* owner_gobj = item->owner;
     if (item->xDC8_word.flags.x0) {
         if (chk == true) {
-            x51C_gobj = item->x51C;
+            HSD_GObj* x51C_gobj = item->x51C;
             item->owner = x51C_gobj;
             owner_gobj = x51C_gobj;
             item->x51C = NULL;
@@ -5752,7 +5731,7 @@ void it_802741F4(Item_GObj* item_gobj, bool chk)
             owner_gobj = item->x51C;
         }
     }
-    it_80273F34(item_gobj, owner_gobj, item);
+    it_80273F34(item_gobj, owner_gobj);
 }
 
 void it_80274250(Item_GObj* item_gobj, Vec3* arg1)
@@ -5767,7 +5746,7 @@ void it_80274250(Item_GObj* item_gobj, Vec3* arg1)
     if (item->xDC8_word.flags.x0) {
         owner_gobj = item->x51C;
     }
-    it_80273F34(item_gobj, owner_gobj, item);
+    it_80273F34(item_gobj, owner_gobj);
 }
 
 void it_8027429C(Item_GObj* item_gobj, Vec3* arg1)
@@ -5777,14 +5756,15 @@ void it_8027429C(Item_GObj* item_gobj, Vec3* arg1)
     PAD_STACK(16);
 
     it_80273B50(item_gobj, arg1);
-    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item = GET_ITEM(item_gobj);
     owner_gobj = item->owner;
     if (item->xDC8_word.flags.x0) {
-        owner_gobj = item->x51C;
-        item->owner = owner_gobj;
+        HSD_GObj* x51C_gobj = item->x51C;
+        owner_gobj = x51C_gobj;
+        item->owner = x51C_gobj;
         item->x51C = NULL;
     }
-    it_80273F34(item_gobj, owner_gobj, item);
+    it_80273F34(item_gobj, owner_gobj);
 }
 
 void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
@@ -5878,8 +5858,7 @@ void it_80274574(Item_GObj* item_gobj)
 
 inline void HSD_JObjSetScale_2(HSD_JObj* jobj, Vec3* scale)
 {
-    ((jobj) ? ((void) 0)
-            : __assert("src/sysdolphin/baselib/jobj.h", 760, "jobj"));
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 760, "jobj"));
     jobj->scale = *scale;
     if (!(jobj->flags & (1 << 25))) {
         ftCo_800C6AFC(jobj);
@@ -5889,12 +5868,10 @@ inline void HSD_JObjSetScale_2(HSD_JObj* jobj, Vec3* scale)
 void it_80274594(Item_GObj* item_gobj)
 {
     Vec3 sp18;
-    HSD_JObj* item_jobj;
-    Item* item;
-    PAD_STACK(8);
+    Item* item = GET_ITEM((HSD_GObj*) item_gobj);
+    HSD_JObj* item_jobj = GET_JOBJ(item_gobj);
+    PAD_STACK(4);
 
-    item = GET_ITEM((HSD_GObj*) item_gobj);
-    item_jobj = item_gobj->hsd_obj;
     item->scl *= ftLib_80086A0C(item->owner);
     sp18.z = item->scl;
     sp18.y = item->scl;
@@ -5905,7 +5882,7 @@ void it_80274594(Item_GObj* item_gobj)
     it_80274E44(item_gobj);
 }
 
-void it_80274658(Item_GObj* item_gobj, f32 arg1)
+int it_80274658(Item_GObj* item_gobj, f32 arg1)
 {
     Item* item;
     f32 spin_speed1;
@@ -5913,11 +5890,11 @@ void it_80274658(Item_GObj* item_gobj, f32 arg1)
     s32 dir1;
     s32 dir2;
 
-    item = item_gobj->user_data;
+    item = GET_ITEM(item_gobj);
     spin_speed2 = 0.0f;
     spin_speed1 = item->spin_spd;
     if (spin_speed1 != spin_speed2) {
-        spin_speed2 = 0.01f * spin_speed1 * (0.0174533f * arg1);
+        spin_speed2 = 0.01f * spin_speed1 * (0.017453292f * arg1);
     }
     item->xD3C_spinSpeed = spin_speed2;
     if (item->facing_dir < 0.0f) {
@@ -5936,6 +5913,7 @@ void it_80274658(Item_GObj* item_gobj, f32 arg1)
     if (item->xDC8_word.flags.x19 != 1) {
         item->xD3C_spinSpeed *= -item->facing_dir;
     }
+    return dir2;
 }
 
 HSD_JObj* it_802746F8(Item_GObj* item_gobj)
@@ -6196,85 +6174,45 @@ void it_80274F28(Item* item, s8 arg1, HSD_GObjEvent arg2,
     item->grabbed_for_victim = arg3;
 }
 
-void it_80274F48(Item_GObj* item_gobj, s32 bone_id, HSD_GObj* arg2_gobj,
-                 Fighter_Part part_idx)
+inline HSD_JObj* get_bone_by_id(Item_GObj* item_gobj, int bone_id)
 {
-    s32 var_ctr;
-    HSD_JObj* item_jobj1 = item_gobj->hsd_obj;
-    HSD_JObj* item_jobj2;
-    PAD_STACK(20);
-
-    if (((Item*) item_gobj->user_data)
-            ->xC4_article_data->x10_modelDesc->x4_bone_count)
-    {
-        item_jobj1 = ((Item*) item_gobj->user_data)
-                         ->xBBC_dynamicBoneTable->bones[bone_id];
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* jobj = GET_JOBJ(item_gobj);
+    if (item->xC4_article_data->x10_modelDesc->x4_bone_count) {
+        jobj = item->xBBC_dynamicBoneTable->bones[bone_id];
     } else if (bone_id != 0) {
-        for (var_ctr = bone_id; var_ctr > 0; var_ctr--) {
-            if (item_jobj1 == NULL) {
-                item_jobj1 = NULL;
+        while (bone_id-- > 0) {
+            if (jobj == NULL) {
+                jobj = NULL;
             } else {
-                item_jobj1 = item_jobj1->child;
+                jobj = jobj->child;
             }
         }
     }
-    item_jobj2 = item_jobj1;
-    lb_8000C2F8(item_jobj2,
-                ftLib_80086630((Fighter_GObj*) arg2_gobj, part_idx));
+    return jobj;
+}
+
+void it_80274F48(Item_GObj* item_gobj, s32 bone_id, HSD_GObj* arg2_gobj,
+                 Fighter_Part part_idx)
+{
+    u8 _[8];
+    HSD_JObj* jobj = get_bone_by_id(item_gobj, bone_id);
+    lb_8000C2F8(jobj, ftLib_80086630(arg2_gobj, part_idx));
 }
 
 void it_80274FDC(Item_GObj* item_gobj, s32 bone_id, Fighter_GObj* arg2_gobj,
                  Fighter_Part part_idx)
 {
-    HSD_JObj* item_jobj1;
-    HSD_JObj* item_jobj2;
-    s32 var_ctr;
-    Item* item;
-    PAD_STACK(14);
-
-    item = GET_ITEM((HSD_GObj*) item_gobj);
-    item_jobj1 = item_gobj->hsd_obj;
-    if (item->xC4_article_data->x10_modelDesc->x4_bone_count != 0U) {
-        item_jobj1 = item->xBBC_dynamicBoneTable->bones[bone_id];
-    } else if (bone_id != 0) {
-        var_ctr = bone_id;
-        while (var_ctr > 0) {
-            if (item_jobj1 == NULL) {
-                item_jobj1 = NULL;
-            } else {
-                item_jobj1 = item_jobj1->child;
-            }
-            var_ctr--;
-        }
-    }
-    item_jobj2 = item_jobj1;
-    lb_8000C1C0(item_jobj2, ftLib_80086630(arg2_gobj, part_idx));
+    u8 _[8];
+    HSD_JObj* jobj = get_bone_by_id(item_gobj, bone_id);
+    lb_8000C1C0(jobj, ftLib_80086630(arg2_gobj, part_idx));
 }
 
 void it_80275070(Item_GObj* item_gobj, s32 bone_id)
 {
-    HSD_JObj* item_jobj1;
-    HSD_JObj* item_jobj2;
-    s32 var_ctr;
-    Item* item;
-
-    item = item_gobj->user_data;
-    item_jobj1 = item_gobj->hsd_obj;
-    if (item->xC4_article_data->x10_modelDesc->x4_bone_count != 0U) {
-        item_jobj1 = item->xBBC_dynamicBoneTable->bones[bone_id];
-    } else {
-        if (bone_id != 0) {
-            for (var_ctr = bone_id; var_ctr > 0; --var_ctr) {
-                if (item_jobj1 == NULL) {
-                    item_jobj1 = NULL;
-                } else {
-                    item_jobj1 = item_jobj1->child;
-                }
-            }
-        }
-    }
-    item_jobj2 = item_jobj1;
-    lb_8000C390(item_jobj2);
+    u8 _[8];
+    HSD_JObj* jobj = get_bone_by_id(item_gobj, bone_id);
+    lb_8000C390(jobj);
 }
 
 bool it_802750E8(Item_GObj* item_gobj, s32 mask)
@@ -6374,18 +6312,16 @@ void it_80275270(Item_GObj* item_gobj)
 
 void it_80275288(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    Item_8026AE84(item, arg2 + HSD_Randi(arg1), 127, 64);
+    Item* item = GET_ITEM(item_gobj);
+    int val = arg2 + HSD_Randi(arg1);
+    Item_8026AE84(item, val, 127, 64);
 }
 
 void it_802752D8(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    Item_8026AFA0(item, arg2 + HSD_Randi(arg1), 127, 64);
+    Item* item = GET_ITEM(item_gobj);
+    int val = arg2 + HSD_Randi(arg1);
+    Item_8026AFA0(item, val, 127, 64);
 }
 
 void it_80275328(HSD_GObj* gobj, ItemLink* arg1)
@@ -6557,33 +6493,15 @@ void it_802755C0(Item_GObj* item_gobj, f32 scale)
 
 void it_80275640(Item_GObj* item_gobj, f32 arg1)
 {
-#if 1
-    Item* item;
-    HitCapsule* hitcapsule;
-    u32 var_ctr;
+    Item* item = GET_ITEM(item_gobj);
+    u32 i;
 
-    item = item_gobj->user_data;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+    for (i = 0; i < 4; i++) {
+        HitCapsule* hitcapsule = &item->x5D4_hitboxes[i].hit;
         if (hitcapsule->state != HitCapsule_Disabled) {
             it_80272460(hitcapsule, hitcapsule->damage * arg1, item_gobj);
         }
     }
-#else
-    Item* item;
-    HitCapsule* hitcapsule;
-    u32 var_ctr;
-    Item_GObj* gobj = item_gobj;
-
-    item = item_gobj->user_data;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
-        if (hitcapsule->state != HitCapsule_Disabled) {
-            it_80272460(hitcapsule, hitcapsule->damage * arg1, item_gobj,
-                        (HSD_GObj*) gobj);
-        }
-    }
-#endif
 }
 
 void it_802756D0(Item_GObj* item_gobj)
@@ -6613,14 +6531,17 @@ void it_8027572C(Item_GObj* item_gobj, s32 idx)
     item->x5D4_hitboxes[idx].hit.x40_b0 = 1;
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_8027574C(Item_GObj* item_gobj)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    it_80274D04(item_gobj, &item->xACC_itemHurtbox[1].b_pos);
+    Item* item = item_gobj->user_data;
+    it_80274D04(item_gobj, (Vec3*) &item->xACC_itemHurtbox[1].b_pos.z);
     it_80274D6C(item_gobj);
 }
+
+#pragma pop
 
 void it_80275788(Item_GObj* item_gobj)
 {
@@ -6765,10 +6686,11 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
     CollData* coll2;
     Item* item1;
     f32 temp_f31;
-    s32 temp_r3_2;
     bool chk;
+    s32 temp_r3_2;
+    u8 _1[12];
     Vec3 sp1C;
-    PAD_STACK(14);
+    u8 _2[8];
 
     chk = false;
     item1 = GET_ITEM((HSD_GObj*) item_gobj1);
@@ -6777,9 +6699,11 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
     coll1 = &item1->x378_itemColl;
     if (coll2 != NULL) {
         if (mpLib_80054ED8(coll2->floor.index)) {
+            int floor_index;
             temp_r3_2 = mpLib_8005199C(&sp44, -1, -1);
             if ((temp_r3_2 != -1) &&
-                mpLib_80054F68(temp_r3_2, coll2->floor.index))
+                (floor_index = coll2->floor.index,
+                mpLib_80054F68(temp_r3_2, floor_index)))
             {
                 coll1->floor.index = temp_r3_2;
                 mpLib_8004DD90(temp_r3_2, &sp44.x, &sp40, 0, NULL);
@@ -6913,9 +6837,9 @@ void it_80275DFC(Item_GObj* item_gobj)
 
 void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
 {
-    CollData* coll;
-    Item* item2;
     Item* item1;
+    Item* item2;
+    CollData* coll;
     ItemAttr* attr;
     ItemKind kind;
     f32 scale;
@@ -6979,12 +6903,8 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
 
 void it_80276100(Item_GObj* item_gobj, Vec3* pos)
 {
-    CollData* coll;
-    Item* item;
-    PAD_STACK(4);
-
-    item = item_gobj->user_data;
-    coll = &item->x378_itemColl;
+    Item* item = GET_ITEM(item_gobj);
+    CollData* coll = &item->x378_itemColl;
     coll->prev_topn = *pos;
     mpColl_80043670(coll);
     mpColl_800471F8(coll);
@@ -7119,17 +7039,14 @@ bool it_802763B8(Item_GObj* item_gobj)
 
 s32 it_802763E0(Item_GObj* item_gobj)
 {
-    Item* item;
-    CollData* colldata;
-
-    item = item_gobj->user_data;
-    colldata = &item->x378_itemColl;
-    if (!(item->x378_itemColl.env_flags & MPCOLL_CEIL)) {
-        // return;
-        return 0;
+    int result = 0;
+    Item* item = GET_ITEM(item_gobj);
+    CollData* colldata = &item->x378_itemColl;
+    if ((item->x378_itemColl.env_flags & MPCOLL_CEIL)) {
+        item->xC30 = colldata->ceiling.index;
+        result = 2;
     }
-    item->xC30 = colldata->ceiling.index;
-    return 2;
+    return result;
 }
 
 void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
@@ -7451,11 +7368,13 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
     return ret_val;
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
 {
-    ItemAttr* attr;
-
-    attr = GET_ITEM((HSD_GObj*) item_gobj)->xCC_item_attr;
+    Item* it = item_gobj->user_data;
+    ItemAttr* attr = it->xCC_item_attr;
     it_8027781C(item_gobj);
     if (it_80276D9C(item_gobj, arg1)) {
         it_8027321C(item_gobj);
@@ -7463,6 +7382,8 @@ void it_80276FC4(Item_GObj* item_gobj, s32 arg1)
         it_80275640(item_gobj, attr->x58);
     }
 }
+
+#pragma pop
 
 bool it_80277040(Item_GObj* item_gobj)
 {
@@ -7657,7 +7578,7 @@ void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
     s32 dir2;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    if (item->spin_spd != 0.0f) {
+    if (item->spin_spd) {
         temp_sqrt = sqrtf_accurate(SQ(arg1->x) + SQ(arg1->y));
         item->xD3C_spinSpeed = 0.85f * (temp_sqrt / item->xC1C.bottom);
         if (item->facing_dir < 0.0f) {
@@ -7685,8 +7606,8 @@ bool it_8027770C(Item_GObj* item_gobj)
     f32 mult;
     bool ret_val;
     enum_t var_r5;
-    ItemAttr* attr;
     Item* item;
+    ItemAttr* attr;
     CollData* coll;
     PAD_STACK(44);
 
@@ -7855,7 +7776,7 @@ void it_80277D08(void)
 #if 1
     HSD_MObjInfo* mobj = (HSD_MObjInfo*) &it_803F1F90;
     hsdInitClassInfo(&it_803F1F90, &hsdMObj.parent,
-                     (char*) ((s32) &it_803F1F90 + 0xDC), &it_804D51B0, 0x50,
+                     (char*) ((s32) &it_803F1F90 + 0xDC), "it_mobj", 0x50,
                      0x20);
     mobj->parent.release = hsdMObj.parent.release;
     mobj->parent.amnesia = hsdMObj.parent.amnesia;
@@ -7864,7 +7785,7 @@ void it_80277D08(void)
     mobj->make_texp = hsdMObj.make_texp;
 #else
     hsdInitClassInfo(&it_803F1F90, &hsdMObj.parent,
-                     (char*) ((s32) &it_803F1F90 + 0xDC), &it_804D51B0, 0x50,
+                     (char*) ((s32) &it_803F1F90 + 0xDC), "it_mobj", 0x50,
                      0x20);
     it_803F1F90.release = hsdMObj.parent.release;
     it_803F1F90.amnesia = hsdMObj.parent.amnesia;
@@ -7881,10 +7802,11 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg)
     HSD_TObj* tobj2;
     HSD_TExp sp38;
     HSD_PEDesc pe_desc;
-    HSD_TObj** tobj1_ptr;
-    HSD_PEDesc* setup_render_arg;
     Item* item;
+    HSD_PEDesc* setup_render_arg;
+    HSD_TObj** tobj1_ptr;
     u32 rendermode;
+    u32 unused[1];
 
     item = GET_ITEM(HSD_GObj_804D7814);
     HSD_StateInitTev();
@@ -7911,8 +7833,7 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg)
     }
     HSD_TObjSetup(tobj2);
     HSD_TObjSetupTextureCoordGen(tobj2);
-    ((HSD_MObjInfo*) mobj->parent.class_info)
-        ->setup_tev(mobj, tobj2, rendermode);
+    HSD_MOBJ_METHOD(mobj)->setup_tev(mobj, tobj2, rendermode);
     it_80278108(item, mobj, it_80277F90(item, mobj, &sp38));
     if (item->x5C9 != 0xFF) {
         rendermode |= 0x60000000;
@@ -7936,7 +7857,6 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg)
         pe_desc.ref1 = 0;
     } else {
         setup_render_arg = mobj->pe;
-        ;
     }
     HSD_SetupRenderModeWithCustomPE(rendermode, setup_render_arg);
     if (tobj1_ptr != NULL) {
@@ -8384,12 +8304,9 @@ void it_802787B4(Item_GObj* item_gobj, s32 arg1)
 {
     Vec3 sp1C;
     Vec3 sp10;
-
-    sp1C.x = sp1C.y = sp1C.z = it_804DC770;
-    sp10.x = sp10.y = sp10.z = it_804DC770;
-    // void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
-    // Vec3* arg4, s32 arg5, f32 arg6)
-    it_80278800(NULL, arg1, 0, &sp1C, &sp10, 1, it_804DC770);
+    sp1C.x = sp1C.y = sp1C.z = 0.0F;
+    sp10.x = sp10.y = sp10.z = 0.0F;
+    it_80278800(item_gobj, arg1, 0, &sp1C, &sp10, 1, 0.0F);
 }
 
 void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
@@ -8947,47 +8864,50 @@ void it_802795EC(Item_GObj* item_gobj, FtCmdState* cmd)
     cmd->x8 = cmd->x8 + 4;
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_80279680(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    it_80272560(item_gobj, cmd->x8_bits->x0 & 0x03FFFFFF);
-    cmd->x8 = cmd->x8 + 4;
+    it_80272560(item_gobj, cmd->x8_bits->x0_6_26_2);
+    cmd->x8 += 4;
 }
 
 void it_802796C4(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     it_802725D4(item_gobj);
-    cmd->x8 = cmd->x8 + 4;
+    cmd->x8 += 4;
 }
+
+#pragma pop
 
 void it_802796FC(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    ((Item*) item_gobj->user_data)->xDAC_itcmd_var0 =
-        (s32) (cmd->x8_bits->x0 & 0x03FFFFFF);
-    cmd->x8 = cmd->x8 + 4;
+    Item* it = GET_ITEM(item_gobj);
+    it->xDAC_itcmd_var0 = cmd->x8_bits->x0_6_26_2;
+    cmd->x8 += 4;
 }
 
 void it_80279720(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    ((Item*) item_gobj->user_data)->xDB0_itcmd_var1 =
-        (s32) (cmd->x8_bits->x0 & 0x03FFFFFF);
-    cmd->x8 = cmd->x8 + 4;
+    Item* it = GET_ITEM(item_gobj);
+    it->xDB0_itcmd_var1 = cmd->x8_bits->x0_6_26_2;
+    cmd->x8 += 4;
 }
 
 void it_80279744(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    ((Item*) item_gobj->user_data)->xDB4_itcmd_var2 =
-        (s32) (cmd->x8_bits->x0 & 0x03FFFFFF);
-    cmd->x8 = cmd->x8 + 4;
+    Item* it = GET_ITEM(item_gobj);
+    it->xDB4_itcmd_var2 = cmd->x8_bits->x0_6_26_2;
+    cmd->x8 += 4;
 }
 
 void it_80279768(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
+    Item* item = item_gobj->user_data;
     item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 24U & 0x80);
     // item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 25U & 0x80);
-    cmd->x8 = cmd->x8 + 4;
+    cmd->x8 += 4;
 }
 
 void it_8027978C(Item_GObj* item_gobj, FtCmdState* cmd)
@@ -9086,27 +9006,24 @@ void it_8027990C(Item_GObj* item_gobj, FtCmdState* cmd)
     PAD_STACK(4);
     it_80273648(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
                 cmd->x8_bits->x2 & 0x1FFF);
-    cmd->x8 = cmd->x8 + 4;
+    cmd->x8 += 4;
 }
 
 void it_80279958(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    PAD_STACK(4);
-    it_80279B88(item_gobj->user_data,
-                (s32) (s8) ((u16) cmd->x8_bits->x0 >> 2U) & 0xFF,
-                (s32) cmd->x8_bits->x0 & 0x3FFFF);
-    cmd->x8 = cmd->x8 + 4;
+    Item* it = GET_ITEM(item_gobj);
+    it_80279B88(it, cmd->x8_bits->x0_b0_2, cmd->x8_bits->x0_b0_3);
+    cmd->x8 += 4;
 }
 
 void it_802799A8(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     it_80279BBC(item_gobj->user_data);
-    cmd->x8 = cmd->x8 + 4;
+    cmd->x8 += 4;
 }
 
 void it_802799E4(Item_GObj* item_gobj)
 {
-#if 1
     Item* item;
     FtCmdState* temp_r29;
     u32 temp_r28;
@@ -9129,47 +9046,14 @@ void it_802799E4(Item_GObj* item_gobj)
                 }
             } else if (!(temp_r29->x0 > 0.0f)) {
             block_9:
-                temp_r28 = ((u16) temp_r29->x8_bits->x0 >> 2U) & 0x3F;
+                temp_r28 = temp_r29->x8_bits->x0_b0_8;
                 if (Command_Execute((CommandInfo*) temp_r29, temp_r28) == 0) {
-                    ((void (*)(Item_GObj*, ...)) *
-                     (&it_803F22A8[temp_r28 - 10U]))(item_gobj, temp_r29);
+                    it_803F22A8[temp_r28 - 10U](item_gobj, temp_r29);
                 }
                 goto loop_4;
             }
         }
     }
-#else
-    Item* item;
-    CommandInfo* temp_r29;
-    u32 temp_r28;
-
-    item = item_gobj->user_data;
-    temp_r29 = (CommandInfo*) item->x524_cmd;
-    item->x528 = item->x5CC_currentAnimFrame;
-    item->xDBC_itcmd_var4 = 0;
-    if ((void*) item->x524_cmd.x8 != NULL) {
-        if (F32_MAX != temp_r29->timer) {
-            temp_r29->timer = temp_r29->timer - item->x5D0_animFrameSpeed;
-        }
-    loop_4:
-        if ((u8*) temp_r29->u.data_position != NULL) {
-            if (F32_MAX == temp_r29->timer) {
-                if (!(temp_r29->frame_count >= item->x5D0_animFrameSpeed)) {
-                    temp_r29->timer = -temp_r29->frame_count;
-                    goto block_9;
-                }
-            } else if (!(temp_r29->timer > 0.0f)) {
-            block_9:
-                temp_r28 = ((u8) temp_r29->u.Command_09->param_2 >> 2U) & 0x3F;
-                if (Command_Execute((CommandInfo*) temp_r29, temp_r28) == 0) {
-                    ((void (*)(...)) *
-                     (&it_803F22A8[temp_r28 - 10U]))(item_gobj, temp_r29);
-                }
-                goto loop_4;
-            }
-        }
-    }
-#endif
 }
 
 void it_80279AF0(Item_GObj* item_gobj, FtCmdState* cmd)
@@ -9198,8 +9082,7 @@ void it_80279B64(Item* item)
 
 void it_80279B88(Item* item, s32 arg1, s32 arg2)
 {
-    // void it_80279B88(Item* item, enum_t arg1, bool arg2) {
-    lb_800144C8(&item->x548_colorOverlay, &it_804D6D04, arg1, arg2);
+    lb_800144C8(&item->x548_colorOverlay, it_804D6D04, arg1, arg2);
 }
 
 void it_80279BBC(Item* item)
@@ -9245,6 +9128,9 @@ void it_80279C48(Item_GObj* item_gobj, Article* arg1)
     item->facing_dir = dir;
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_80279CDC(Item_GObj* item_gobj, f32 scale)
 {
     it_8027A13C(item_gobj);
@@ -9253,6 +9139,8 @@ void it_80279CDC(Item_GObj* item_gobj, f32 scale)
     it_802756D0(item_gobj);
     it_8026BDB4(item_gobj);
 }
+
+#pragma pop
 
 void it_80279D38(Item_GObj* item_gobj)
 {
@@ -9454,100 +9342,56 @@ void it_8027A344(Item_GObj* item_gobj)
     item->x40_vel.y = item->xDD4_itemVar.it_279D.x4.y;
 }
 
+#define PK_START (Pokemon_Tosakinto)
+#define PK_END (Pokemon_Tosakinto + 30)
+
 s32 it_8027A364(Item* item)
 {
-#if 0
-    s32 var_ctr2;
-    s32 var_ctr1;
-    s32 index;
-    it_279D_DatAttrs* attr;
-    s32 ret_val;
+    it_279D_DatAttrs* attr = item->xC4_article_data->x4_specialAttributes;
+    int ret_val = 1;
+    int i;
+    int start = Pokemon_Tosakinto;
+    int end = Pokemon_Tosakinto + 30;
 
-    attr = item->xC4_article_data->x4_specialAttributes;
-    ret_val = 1U;
-    index = Pokemon_Tosakinto;
-    for (var_ctr1 = 3; var_ctr1 != 0; var_ctr1--) {
-        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
-            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
-                ret_val += attr->x3C[index - Pokemon_Tosakinto];
-            }
-            index++;
+    for (i = start; i < end; i++) {
+        if (Item_804A0E24.x != i && Item_804A0E24.y != i) {
+            ret_val += attr->x3C[i - Pokemon_Tosakinto];
         }
-    }
-    return ret_val;
-#else
-    s32 var_ctr2;
-    s32 var_ctr1;
-    s32 index;
-    it_279D_DatAttrs* attr;
-    s32 ret_val;
-
-    attr = item->xC4_article_data->x4_specialAttributes;
-    var_ctr1 = 3;
-    ret_val = 1U;
-    index = Pokemon_Tosakinto;
-    while (var_ctr1 != 0) {
-        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
-            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
-                ret_val += attr->x3C[index - Pokemon_Tosakinto];
-            }
-            index++;
-        }
-        var_ctr1--;
     }
 
     return ret_val;
-#endif
 }
 
 s32 it_8027A4D4(Item* item)
 {
-    s32 rand_int;
-    s32 var_ctr2;
-    s32 var_ctr1;
-    s32 var_r3;
-    it_279D_DatAttrs* attr;
-    s32 index2;
-    s32 index;
-    PAD_STACK(16);
+    int rand_int;
+    int i;
+    int var_r3;
 
-    attr = item->xC4_article_data->x4_specialAttributes;
-    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80165084()) {
-        Item_804A0E24.z = 1U;
+    it_279D_DatAttrs* attr = item->xC4_article_data->x4_specialAttributes;
+
+    if (HSD_Randi(251) == 0 && Item_804A0E24.z == 0 && gm_80165084()) {
+        Item_804A0E24.z = 1;
         gm_80172C04();
-        return 23U;
+        return 23;
     }
-    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80164ABC())
-    {
-        Item_804A0E24.z = 1U;
+    if (HSD_Randi(251) == 0 && Item_804A0E24.z == 0 && gm_80164ABC()) {
+        Item_804A0E24.z = 1;
         gm_80172BC4();
-        return 22U;
+        return 22;
     }
-    var_r3 = 1U;
-    index = Pokemon_Tosakinto;
-    attr = item->xC4_article_data->x4_specialAttributes;
-    for (var_ctr1 = 3; var_ctr1 != 0; var_ctr1--) {
-        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
-            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
-                var_r3 += attr->x3C[index - Pokemon_Tosakinto];
+    rand_int = HSD_Randi(it_8027A364(item));
+    var_r3 = 0;
+    for (i = PK_START; i < PK_END; i++) {
+        int y = Item_804A0E24.y;
+        int x = Item_804A0E24.x;
+        if (x != i && y != i) {
+            var_r3 += attr->x3C[i - Pokemon_Tosakinto];
+            if (var_r3 >= rand_int) {
+                Item_804A0E24.y = x;
+                Item_804A0E24.x = i;
+                return i - Pokemon_Tosakinto;
             }
-            index++;
-        }
-    }
-    rand_int = HSD_Randi(var_r3);
-    var_r3 = 0U;
-    index = Pokemon_Tosakinto;
-    for (var_ctr1 = 30U; var_ctr1 != 0; var_ctr1--) {
-        for (var_ctr2 = 0; var_ctr2 < 10; var_ctr2++) {
-            if ((Item_804A0E24.x != index) && (Item_804A0E24.y != index)) {
-                var_r3 += attr->x3C[index - Pokemon_Tosakinto];
-                if (var_r3 >= rand_int) {
-                    Item_804A0E24.y = Item_804A0E24.x;
-                    Item_804A0E24.x = index;
-                    return index - Pokemon_Tosakinto;
-                }
-            }
-            index++;
         }
     }
     return 0;
@@ -9592,7 +9436,7 @@ s32 it_8027A780(Item* item, void* arg1)
             }
         }
     }
-    rand_int = HSD_Randi(var_r3);
+    rand_int = HSD_Randi(it_8027A364(item));
     var_ctr1 = cnt;
     var_r6_2 = 0;
     var_r5 = Pokemon_Sonans;
@@ -9638,12 +9482,9 @@ s32 it_8027A9B8(Item* item)
 void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
 {
     Item* var_r6;
-    // f32 temp_f1;
-    s32 var_r8;
-    it_279D_DatAttrs* attr;
 
-    attr = ((Item*) item1_gobj->user_data)
-               ->xC4_article_data->x4_specialAttributes;
+    Item* it = GET_ITEM(item1_gobj);
+    it_279D_DatAttrs* attr = it->xC4_article_data->x4_specialAttributes;
     if (arg2 == Pokemon_Marumine) {
         item2->xDD4_itemVar.it_279D.x1C = 0.0f;
         item2->xDD4_itemVar.it_279D.x20 = 0.0f;
@@ -9653,7 +9494,6 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
     }
     item2->xDD4_itemVar.it_279D.x24 = attr->x14;
     var_r6 = item2;
-    var_r8 = 0;
     item2->xDD4_itemVar.it_279D.x28 = attr->x18;
     item2->xDD4_itemVar.it_279D.x48 =
         (item2->xCC_item_attr->x60_scale - item2->xDD4_itemVar.it_279D.x4C) /
@@ -9664,10 +9504,12 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
     item2->xDD4_itemVar.it_279D.x58 = 0.0f;
     item2->xDD4_itemVar.it_279D.x50 = 0.0f;
 
-    while (var_r8 < attr->x38) {
-        item2->xDD4_itemVar.it_279D.x2C[var_r8] =
-            attr->x1C[var_r8] * item2->xCC_item_attr->x60_scale;
-        var_r8++;
+    {
+        int i;
+        for (i = 0; i < attr->x38; i++) {
+            item2->xDD4_itemVar.it_279D.x2C[i] =
+                attr->x1C[i] * item2->xCC_item_attr->x60_scale;
+        }
     }
 }
 
@@ -9806,14 +9648,10 @@ bool it_8027AB64(Item_GObj* item_gobj)
 void it_8027ADEC(int arg0, Item_GObj* item_gobj, HSD_JObj* arg2, f32 arg3)
 {
     f32 sp1C;
-    f32 scale;
-    Item* item;
-
-    // sp1C = 1.0f;
-    item = item_gobj->user_data;
-    scale = item->xCC_item_attr->x60_scale;
-    sp1C = scale * (1.0f / arg3);
-    efSync_Spawn(arg0, item_gobj, arg2, &sp1C, scale);
+    Item* item = GET_ITEM(item_gobj);
+    sp1C = 1.0F;
+    sp1C = item->xCC_item_attr->x60_scale * (1.0F / arg3);
+    efSync_Spawn(arg0, item_gobj, arg2, &sp1C);
 }
 
 bool it_8027AE34(Item_GObj* item_gobj)
@@ -9837,12 +9675,8 @@ bool it_8027AE34(Item_GObj* item_gobj)
 bool it_8027AF50(Item_GObj* item_gobj)
 {
     Quaternion rotate;
-    HSD_JObj* item_jobj;
-    Item* item;
-    PAD_STACK(4);
-
-    item_jobj = item_gobj->hsd_obj;
-    item = GET_ITEM((HSD_GObj*) item_gobj);
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* item_jobj = GET_JOBJ(item_gobj);
     rotate = it_803B8598;
     lbVector_Mirror(&item->x40_vel, &item->xC58);
     it_80272980(item_gobj);
@@ -9853,11 +9687,8 @@ bool it_8027AF50(Item_GObj* item_gobj)
 
 void it_8027B070(Item_GObj* item_gobj, Fighter_GObj* owner_gobj)
 {
-    Fighter* fighter;
-    Item* item;
-
-    fighter = owner_gobj->user_data;
-    item = item_gobj->user_data;
+    Item* item = GET_ITEM(item_gobj);
+    Fighter* fighter = GET_FIGHTER(owner_gobj);
     item->xD88_attackID = fighter->x2068_attackID;
     item->xD8C_attack_instance = fighter->x206C_attack_instance;
     item->xD90 = fighter->x2070;
@@ -9869,75 +9700,52 @@ void it_8027B070(Item_GObj* item_gobj, Fighter_GObj* owner_gobj)
 
 void it_8027B0C4(Item_GObj* item_gobj, SpawnItem* spawn)
 {
-    // s32 sp24;
-    Item* spawn_item;
-    Item* owner_item;
-    Fighter* owner_fighter;
-    PAD_STACK(28);
+    u8 _2[8];
+    union Struct2070 sp24;
 
     if (ftLib_80086960(spawn->x0_parent_gobj)) {
         if (ftLib_80086960(spawn->x4_parent_gobj2)) {
-            spawn_item = item_gobj->user_data;
-            owner_fighter = spawn->x4_parent_gobj2->user_data;
-            spawn_item->xD88_attackID = owner_fighter->x2068_attackID;
-            spawn_item->xD8C_attack_instance =
-                (s16) owner_fighter->x206C_attack_instance;
-            spawn_item->xD90 = owner_fighter->x2070;
-            spawn_item->xD94 = owner_fighter->x2074.x2074_vec;
-            spawn_item->xD9C = owner_fighter->x2074.x207C;
-            spawn_item->xDA4_word = owner_fighter->x2074.x2084;
-            spawn_item->xDA8_short = owner_fighter->x2074.x2088;
-            return;
+            it_8027B070(item_gobj, spawn->x4_parent_gobj2);
+        } else {
+            Item* owner_item = spawn->x4_parent_gobj2->user_data;
+            Item* spawn_item = GET_ITEM(item_gobj);
+            spawn_item->xD88_attackID = owner_item->xD88_attackID;
+            spawn_item->xD8C_attack_instance = owner_item->xD8C_attack_instance;
+            spawn_item->xD90 = owner_item->xD90;
+            spawn_item->xD94 = owner_item->xD94;
+            spawn_item->xD9C = owner_item->xD9C;
+            spawn_item->xDA4_word = owner_item->xDA4_word;
+            spawn_item->xDA8_short = owner_item->xDA8_short;
         }
-        spawn_item = item_gobj->user_data;
-        owner_item = spawn->x4_parent_gobj2->user_data;
-        spawn_item->xD88_attackID = owner_item->xD88_attackID;
-        spawn_item->xD8C_attack_instance =
-            (s16) owner_item->xD8C_attack_instance;
-        spawn_item->xD90 = owner_item->xD90;
-        spawn_item->xD94 = owner_item->xD94;
-        spawn_item->xD9C = owner_item->xD9C;
-        spawn_item->xDA4_word = owner_item->xDA4_word;
-        spawn_item->xDA8_short = owner_item->xDA8_short;
-        return;
+    } else {
+        Item* spawn_item = GET_ITEM(item_gobj);
+        sp24.x2070_int = 0;
+        spawn_item->xD88_attackID = 1;
+        spawn_item->xD8C_attack_instance = 0;
+        spawn_item->xD90 = sp24;
+        ft_80089768(&spawn_item->xD94);
+        spawn_item->xDA8_short = 0;
     }
-    spawn_item = item_gobj->user_data;
-    // sp24 = 0;
-    spawn_item->xD88_attackID = 1;
-    spawn_item->xD8C_attack_instance = 0;
-    // spawn_item->xD90.x2070_int = sp24;
-    // spawn_item->xD90.x2070_int = spawn_item->xD8C_attack_instance = 0;
-    spawn_item->xD90.x2070_int = 0;
-    ft_80089768(&spawn_item->xD94);
-    spawn_item->xDA8_short = 0;
 }
 
 void it_8027B1F4(Item_GObj* item_gobj)
 {
-    // void it_8027B1F4(Item_GObj* item_gobj, int arg4) {
-    // s32 sp10;
-    Item* item;
-    struct Struct2074* temp_r3;
-    PAD_STACK(8);
+    Item* item = GET_ITEM(item_gobj);
+    union Struct2070 sp10;
 
-    // item = GET_ITEM((HSD_GObj*) item_gobj);
-    item = item_gobj->user_data;
-    // sp10 = 0;
+    sp10.x2070_int = 0;
     item->xD88_attackID = 1;
     item->xD8C_attack_instance = 0;
-    // item->xD90.x2070_int = sp10;
-    item->xD90.x2070_int = 0;
+    item->xD90 = sp10;
     item->xDA8_short = 0;
     if (ftLib_80086960(item->owner)) {
-        temp_r3 = ft_800898A8((Fighter_GObj*) item->owner);
+        struct Struct2074* temp_r3 = ft_800898A8((Fighter_GObj*) item->owner);
         item->xD94 = temp_r3->x2074_vec;
         item->xD9C = temp_r3->x207C;
         item->xDA4_word = temp_r3->x2084;
         return;
     }
     ft_80089768(&item->xD94);
-    // ft_80089768(&item->xD94, arg4);
-    // ft_80089768(item->xD94, temp_r3->x207C);
 }
 
 void it_8027B288(Item_GObj* item_gobj, u32 arg1)
@@ -9967,10 +9775,8 @@ void it_8027B288(Item_GObj* item_gobj, u32 arg1)
 
 void it_8027B330(Item_GObj* item_gobj, u32 arg1)
 {
-    Item* item;
-
-    item = GET_ITEM((HSD_GObj*) item_gobj);
-    if ((arg1 == 1U) || ((s32) arg1 != item->xD88_attackID)) {
+    Item* item = GET_ITEM(item_gobj);
+    if (arg1 == 1 || arg1 != item->xD88_attackID) {
         item->xD88_attackID = arg1;
         item->xD8C_attack_instance = plStale_IncrementAttackInstance();
     }
@@ -9993,17 +9799,16 @@ void it_8027B378(Fighter_GObj* fighter_gobj, Item_GObj* item_gobj, f32 arg2)
 
 void it_8027B408(Item_GObj* item_gobj1, Item_GObj* item_gobj2, f32 arg8)
 {
-    HSD_GObj* item1_owner_gobj;
     s32 temp_r31;
-    u16 temp_r3;
     Item* item1;
+    u16 temp_r3;
 
     if (it_8026B6C8(item_gobj2)) {
         item1 = item_gobj1->user_data;
         if (ftLib_80086960(item1->owner)) {
-            item1_owner_gobj = item1->owner;
-            temp_r31 = ftLib_800874BC(item1_owner_gobj);
-            temp_r3 = ftLib_80086BE0(item1_owner_gobj);
+            HSD_GObj* owner = item1->owner;
+            temp_r31 = ftLib_800874BC(owner);
+            temp_r3 = ftLib_80086BE0(owner);
             pl_8003EB30(arg8, temp_r3, temp_r31, 6, 0, item1->xD90.x2073);
         }
     }
@@ -10022,10 +9827,8 @@ void it_8027B4A4(Fighter_GObj* item_gobj1, Item_GObj* item_gobj2)
 
 void it_8027B508(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
 {
-    Item* item1;
-
     if (it_8026B6C8(item_gobj2)) {
-        item1 = item_gobj1->user_data;
+        Item* item1 = GET_ITEM(item_gobj1);
         if (ftLib_80086960(item1->owner)) {
             pl_800384DC((HSD_GObj*) item1->owner, item1->xD90.x2073,
                         &item1->xD94);
@@ -10061,7 +9864,7 @@ Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
         lb_8000B1CC(jobj, NULL, &sp20);
         spawn.prev_pos = sp20;
     } else {
-        OSReport(&it_803F5428);
+        OSReport("can t init zako pos\n");
     loop_5:
         goto loop_5;
     }
@@ -10189,19 +9992,17 @@ void it_8027B964(Item_GObj* item_gobj, bool chk)
         it_8027781C(item_gobj);
     } else {
         it_8027B798(item_gobj, &item->x40_vel);
-        if ((item->x40_vel.x == 0.0f) && (item->x40_vel.y == 0.0f)) {
+        if (!item->x40_vel.x && !item->x40_vel.y) {
             item->x40_vel.x = 0.1f * -item->xCCC_incDamageDirection;
             item->x40_vel.y = 0.1f;
         }
-        if (item->x40_vel.y == 0.0f) {
+        if (!item->x40_vel.y) {
             item->x40_vel.y = 0.1f;
         }
     }
     sp14 = item->x40_vel;
     lbVector_Normalize(&sp14);
-    scale =
-        ((it_27B5_DatAttrs*) ((Article*) it_804D6D40)->x4_specialAttributes)
-            ->scale;
+    scale = ((float*) it_804D6D40)[1];
     sp14.x *= scale;
     sp14.y *= scale;
     sp14.z *= scale;
@@ -10213,7 +10014,7 @@ void it_8027B964(Item_GObj* item_gobj, bool chk)
 //     return len;
 // }
 
-void it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
+int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -10513,10 +10314,10 @@ void it_8027C8D0(Vec3* arg0, Vec3* arg1, f32 arg8)
     sp1C = *arg1;
     if (arg8 > 0.0f) {
         dir = -1.0f;
-        var_f6 = 0.00000000680742f;
+        var_f6 = 6.8074177e-9f;
     } else if (arg8 < 0.0f) {
         dir = 1.0f;
-        var_f6 = 0.00000000680742f;
+        var_f6 = 6.8074177e-9f;
     } else {
         arg0->z = 0.0f;
         arg0->y = 0.0f;
@@ -10531,11 +10332,13 @@ void it_8027C8D0(Vec3* arg0, Vec3* arg1, f32 arg8)
 
 void it_8027C9D8(Item* item)
 {
-    s32 spC[4];
+    s32 spC[4] = {
+        0x131,
+        0x132,
+        0x133,
+        0x134,
+    };
     s32 var_r3;
-
-    *(s64*) spC = *(s64*) it_803B85F0;
-    *((s64*) spC + 1) = *((s64*) it_803B85F0 + 1);
 
     var_r3 = spC[HSD_Randi(4)];
     while (var_r3 == item->xDD4_itemVar.it_27B5.x14.z) {
@@ -10558,6 +10361,9 @@ bool it_8027CA7C(HSD_GObj* gobj)
     }
     return chk;
 }
+
+#pragma push
+#pragma dont_inline on
 
 void it_8027CAD8(Item_GObj* item_gobj)
 {
@@ -10596,6 +10402,8 @@ void it_8027CBA4(Item_GObj* item_gobj)
     it_802754D4(item_gobj);
     it_8026B3A8(item_gobj);
 }
+
+#pragma pop
 
 f32 it_8027CBFC(Item_GObj* item_gobj)
 {
@@ -10643,7 +10451,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
     if ((gm_8016B498() != 0) &&
         (HSD_Randi(*(f32*) ((u8*) it_804D6D40 + 0x14)) == 0))
     {
-        if ((u16) grLib_801C9E40() == 0U) {
+        if (grLib_801C9E40() == 0) {
             var_r30 = Ground_801C5840();
             if (var_r30 != -1) {
                 temp_r3 =
@@ -10667,9 +10475,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
                     grLib_801C9E50(1);
                 }
             }
-        } else if ((u16) grLib_801C9E40() >=
-                   *((f32*) ((u8*) it_804D6D40 + 0x18)))
-        {
+        } else if (grLib_801C9E40() >= *((f32*) it_804D6D40 + 6)) {
             grLib_801C9E50(0);
         } else {
             grLib_801C9E50(grLib_801C9E40() + 1);

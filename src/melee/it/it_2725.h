@@ -64,7 +64,7 @@
 /* 273670 */ void it_80273670(Item_GObj*, int, float);
 /* 273748 */ void it_80273748(Item_GObj*, Vec3*, Vec3*);
 /* 273B50 */ void it_80273B50(Item_GObj*, Vec3*);
-/* 273F34 */ void it_80273F34(Item_GObj*, HSD_GObj*, Item*);
+/* 273F34 */ void it_80273F34(Item_GObj*, HSD_GObj*);
 /* 274198 */ void it_80274198(Item_GObj*, bool);
 /* 2741F4 */ void it_802741F4(Item_GObj*, bool);
 /* 274250 */ void it_80274250(Item_GObj*, Vec3*);
@@ -73,7 +73,7 @@
 /* 274484 */ void it_80274484(Item_GObj*, HSD_JObj*, f32);
 /* 274574 */ void it_80274574(Item_GObj*);
 /* 274594 */ void it_80274594(Item_GObj*);
-/* 274658 */ void it_80274658(Item_GObj*, f32);
+/* 274658 */ int it_80274658(Item_GObj*, f32);
 /* 2746F8 */ HSD_JObj* it_802746F8(Item_GObj*);
 /* 274740 */ void it_80274740(Item_GObj*);
 /* 274990 */ f32 it_80274990(Item_GObj*);
@@ -233,7 +233,7 @@
 /* 27B730 */ void it_8027B730(Item_GObj*);
 /* 27B798 */ bool it_8027B798(Item_GObj*, Vec3*);
 /* 27B964 */ void it_8027B964(Item_GObj*, bool);
-/* 27BA54 */ void it_8027BA54(HSD_GObj*, Vec3*);
+/* 27BA54 */ int it_8027BA54(HSD_GObj*, Vec3*);
 /* 27BB1C */ void it_8027BB1C(Vec3*, Vec3*);
 /* 27BBF4 */ void it_8027BBF4(Item_GObj*, bool, f64, f32);
 /* 27C0A8 */ void it_8027C0A8(Item_GObj*, f32, f32);
