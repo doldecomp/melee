@@ -584,6 +584,11 @@ u32 pl_80040CFC(s32 arg0)
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xD04;
 }
 
+s32 pl_80040D20(s32 arg0)
+{
+    return Player_GetStaleMoveTableIndexPtr2(arg0)->xD68;
+}
+
 void pl_80040D8C(int slot)
 {
     pl_StaleMoveTableExt_t* stale_moves;
