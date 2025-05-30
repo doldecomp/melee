@@ -286,7 +286,7 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
     return gobj;
 }
 
-s16 grLib_801C9E40(void)
+int grLib_801C9E40(void)
 {
     return stage_info.x708;
 }
