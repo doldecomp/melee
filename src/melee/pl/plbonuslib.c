@@ -587,6 +587,12 @@ u32 pl_80040B3C(s32 arg0)
         ->x0_staleMoveTable.xC6C;
 }
 
+u32 pl_80040B64(s32 arg0)
+{
+    return (u32) Player_GetStaleMoveTableIndexPtr2(arg0)
+        ->x0_staleMoveTable.xC60;
+}
+
 void pl_80040B8C(s32 slot, bool arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* temp_r3;
@@ -595,12 +601,6 @@ void pl_80040B8C(s32 slot, bool arg1, s32 arg2)
     if (!arg1) {
         temp_r3->x0_staleMoveTable.xC68 += arg2;
     }
-}
-
-u32 pl_80040B64(s32 arg0)
-{
-    return (u32) Player_GetStaleMoveTableIndexPtr2(arg0)
-        ->x0_staleMoveTable.xC60;
 }
 
 s32 pl_80040BD8(s32 arg0)
