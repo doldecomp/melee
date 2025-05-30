@@ -47,6 +47,7 @@
 /* 040C90 */ f32 pl_80040C90(s32);
 /* 040CB4 */ s32 pl_80040CB4(s32);
 /* 040CD8 */ s32 pl_80040CD8(s32);
+/* 040CFC */ u32 pl_80040CFC(s32);
 /* 040D8C */ void pl_80040D8C(int slot);
 /* 040DB8 */ s32 pl_80040DB8(int slot);
 
