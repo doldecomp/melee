@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "lb/forward.h"
+
 /* 01D2BC */ void lbSnap_8001D2BC(void);
 /* 01D338 */ int lbSnap_8001D338(int);
 /* 01D350 */ int lbSnap_8001D350(int i);
@@ -23,7 +25,7 @@
 /* 01E058 */ int lbSnap_8001E058(int, int);
 /* 01E204 */ int lbSnap_8001E204(void);
 /* 01E210 */ int lbSnap_8001E210(void);
-/* 01E218 */ void lbSnap_8001E218(void* arg0, void* arg1);
+/* 01E218 */ void lbSnap_8001E218(void* arg0, Unk80433380_48* arg1);
 /* 01E27C */ UNK_RET lbSnap_8001E27C(UNK_PARAMS);
 /* 01E290 */ void lbSnap_8001E290(void);
 

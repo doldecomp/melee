@@ -19,6 +19,7 @@ typedef struct PreloadCacheSceneEntry PreloadCacheSceneEntry;
 typedef struct PreloadEntry PreloadEntry;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
+typedef struct Unk80433380_48 Unk80433380_48;
 
 typedef enum HurtCapsuleState {
     HurtCapsule_Enabled,

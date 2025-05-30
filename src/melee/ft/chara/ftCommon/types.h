@@ -55,6 +55,10 @@ union ftCommon_MotionVars {
         /* fp+2360 */ float accel_mul;
     } walk;
     struct {
+        /* fp+2340 */ u8 pad_x0[12];
+        /* fp+234C */ float accel_mul;
+    } turnrun;
+    struct {
         /* fp+2340 */ bool x0;
     } attack1;
     struct {
