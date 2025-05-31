@@ -466,6 +466,16 @@ void pl_8003FF44(s32 arg0, s32 arg1, s32 arg2)
     }
 }
 
+void pl_8003FFDC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    Fighter_GObj* temp_r3;
+
+    temp_r3 = Player_GetEntityAtIndex(arg2, arg3);
+    if ((arg0 != arg2) && (arg4 != ft_80087A98(temp_r3))) {
+        pl_80038824(arg0, 0x46);
+    }
+}
+
 void pl_800401F0(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
 {
     pl_StaleMoveTableExt_t* temp_r3;
