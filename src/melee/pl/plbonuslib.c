@@ -554,6 +554,20 @@ void pl_800402D0(int slot, bool arg1, bool arg2)
     ++stale_moves->x0_staleMoveTable.xCF0;
 }
 
+void pl_80040330(s32 slot, bool arg1, f32 arg2)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+
+    if (arg1) {
+        return;
+    }
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    if (arg2 < temp_r3->xCF8) {
+        temp_r3->xCF8 = arg2;
+    }
+}
+
 void pl_800403C0(int arg0, int arg1)
 {
     PAD_STACK(8);
