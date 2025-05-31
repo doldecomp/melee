@@ -114,6 +114,13 @@ parser.add_argument(
     help="builds equivalent (but non-matching) or modded objects",
 )
 parser.add_argument(
+    "--warn",
+    dest="warn",
+    type=str,
+    choices=["all", "off", "error"],
+    help="how to handle warnings",
+)
+parser.add_argument(
     "--no-progress",
     dest="progress",
     action="store_false",
@@ -208,6 +215,14 @@ if args.debug:
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
+
+# Warning flags
+if args.warn == "all":
+    cflags_base.append("-W all")
+elif args.warn == "off":
+    cflags_base.append("-W off")
+elif args.warn == "error":
+    cflags_base.append("-W error")
 
 # Metrowerks library flags
 cflags_runtime = [
