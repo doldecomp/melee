@@ -1213,7 +1213,7 @@ def generate_build_ninja(
         n.build(
             outputs=report_path,
             rule="report",
-            implicit=[objdiff, "all_source"],
+            implicit=[objdiff, "objdiff.json", "all_source"],
             order_only="post-build",
         )
 
@@ -1367,7 +1367,7 @@ def generate_build_ninja(
         description=f"RUN {configure_script}",
     )
     n.build(
-        outputs="build.ninja",
+        outputs=["build.ninja", "objdiff.json"],
         rule="configure",
         implicit=[
             build_config_path,
