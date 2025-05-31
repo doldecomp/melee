@@ -2214,10 +2214,10 @@ melee/mn/mnvibration.c:
 
 melee/mn/mnsound.c:
 	.text       start:0x802492CC end:0x8024A168
-	.data       start:0x803EEED8 end:0x803EEFD8
+	.data       start:0x803EEED8 end:0x803EEFD1
 	.bss        start:0x804A08A8 end:0x804A08B8
-	.sdata      start:0x804D5008 end:0x804D5018
-	.sbss       start:0x804D6C30 end:0x804D6C38
+	.sdata      start:0x804D5008 end:0x804D5015
+	.sbss       start:0x804D6C30 end:0x804D6C34
 	.sdata2     start:0x804DC068 end:0x804DC098
 
 melee/mn/mndeflicker.c:
@@ -2236,11 +2236,11 @@ melee/mn/mnsoundtest.c:
 
 melee/mn/mnlanguage.c:
 	.text       start:0x8024BFE0 end:0x8024C68C
-	.data       start:0x803EF5A0 end:0x803EF668
+	.data       start:0x803EF5A0 end:0x803EF661
 	.bss        start:0x804A08D8 end:0x804A08E8
 	.sdata      start:0x804D5018 end:0x804D5020
-	.sbss       start:0x804D6C50 end:0x804D6C58
-	.sdata2     start:0x804DC110 end:0x804DC130
+	.sbss       start:0x804D6C50 end:0x804D6C54
+	.sdata2     start:0x804DC110 end:0x804DC12C
 
 melee/mn/mnhyaku.c:
 	.text       start:0x8024C68C end:0x8024CE74
