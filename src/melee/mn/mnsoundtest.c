@@ -25,9 +25,10 @@
 
 extern HSD_PadStatus HSD_PadCopyStatus[4];
 
-HSD_GObj* mnSoundTest_804D6C40;
-u8 mnSoundTest_804D6C44;
-s32 mnSoundTest_804D6C4C;
+static HSD_GObj* mnSoundTest_804D6C40;
+static u8 mnSoundTest_804D6C44;
+static s32 mnSoundTest_804D6C48;
+static s32 mnSoundTest_804D6C4C;
 
 void fn_8024B2B0(HSD_GObj*);
 
@@ -125,9 +126,6 @@ u32 data_4[] = { 25, 8,  1,  6,  16, 17, 4,  2,  13, 0,  11, 5,  12, 14, 18,
 void gmMainLib_8015ED74(void); /* extern */
 s32 gm_801601C4(void);         /* extern */
 s32 gm_80160244(void);         /* extern */
-
-s32 mnSoundTest_804D6C48;
-s32 mnSoundTest_804D6C4C;
 
 void mnSoundTest_8024A790(HSD_GObj* arg0)
 {
@@ -274,8 +272,8 @@ void mnSoundTest_8024ABF8(HSD_GObj* arg0, u8 arg1)
     HSD_JObj* sp18;
     HSD_JObj* sp14;
     HSD_JObj* temp_r31;
-    f32 temp_f30;
     f32 temp_f31;
+    f32 temp_f30;
 
     temp_r31 = GET_JOBJ(arg0);
     lb_80011E24(temp_r31, &sp18, 2, -1);
@@ -300,7 +298,7 @@ void mnSoundTest_8024ABF8(HSD_GObj* arg0, u8 arg1)
     HSD_JObjAnimAll(sp1C);
 }
 
-void mnSoundTest_8024AD58(HSD_GObj* arg0, s8 arg1)
+void mnSoundTest_8024AD58(HSD_GObj* arg0, u8 arg1)
 {
     HSD_JObj* sp1C;
     HSD_JObj* sp18;
@@ -315,7 +313,7 @@ void mnSoundTest_8024AD58(HSD_GObj* arg0, s8 arg1)
     lb_80011E24(temp_r30, &sp14, 0xD, -1);
     temp_r0 = !!arg1;
     temp_f31 = mn_8022F298(sp18);
-    HSD_JObjReqAnimAll(sp18, (f32) temp_r0);
+    HSD_JObjReqAnimAll(sp18, temp_r0);
     mn_8022F3D8(sp18, 0xFFU, 0x420);
     HSD_JObjAnimAll(sp18);
     HSD_JObjReqAnimAll(sp18, temp_f31);
