@@ -476,6 +476,37 @@ void pl_8003FFDC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 }
 
+void pl_80040120(s32 arg0, bool arg1)
+{
+    pl_StaleMoveTableExt_t* temp_r30;
+    s32 var_r29;
+
+    temp_r30 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    if (arg1 == true) {
+        return;
+    }
+
+    if (temp_r30->xD4C != 0) {
+        pl_80038824(arg0, 0x4A);
+    }
+    if (temp_r30->xD54 != 0) {
+        pl_80038824(arg0, 0x4D);
+    }
+
+    for (var_r29 = 0; var_r29 < 6; ++var_r29) {
+        if (!Player_8003221C(var_r29)) {
+            continue;
+        }
+
+        if (var_r29 == arg0) {
+            temp_r30->xD50 = pl_804D6470->xB0;
+        } else {
+            Player_GetStaleMoveTableIndexPtr2(var_r29)->xD4C =
+                pl_804D6470->xA4;
+        }
+    }
+}
+
 void pl_800401F0(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
 {
     pl_StaleMoveTableExt_t* temp_r3;

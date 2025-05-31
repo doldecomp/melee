@@ -138,7 +138,7 @@ typedef struct pl_StaleMoveTableExt_t {
             u8 bit7 : 1;
         };
     } xDD1;
-    /* +DD2 */ u8 xDD2_Padding[0x2];
+    /* +DD2 */ UNK_T xDD2 UNK_SIZE_ARRAY;
 } pl_StaleMoveTableExt_t;
 
 struct pl_800386E8_arg0_t {
@@ -156,8 +156,13 @@ typedef struct pl_804D6470_t {
     /*  +58 */ f32 x58;
     /*  +5C */ u8 x5C[0x64 - 0x5C];
     /*  +64 */ f32 x64;
-    /*  +68 */ u8 x68[0xCE4 - 0x98];
+    /*  +68 */ u8 x68[0x98 - 0x68];
     /*  +98 */ f32 x98;
+    /*  +9C */ u8 x9C[0xA4 - 0x9C];
+    /*  +A4 */ u32 xA4;
+    /*  +A8 */ u8 xA8[0xB0 - 0xA8];
+    /*  +B0 */ u32 xB0;
+    /*  +B4 */ UNK_T xB4 UNK_SIZE_ARRAY;
 } pl_804D6470_t;
 
 #endif
