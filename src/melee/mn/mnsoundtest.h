@@ -41,5 +41,5 @@ void mnSoundTest_8024A790(HSD_GObj*);
 void mnSoundTest_8024A958(Soundtest_GObj*);
 void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1);
 void mnSoundTest_8024ABF8(HSD_GObj* arg0, u8 arg1);
-void mnSoundTest_8024AD58(HSD_GObj* arg0, s8 arg1);
+void mnSoundTest_8024AD58(HSD_GObj* arg0, u8 arg1);
 void fn_8024AED0(HSD_GObj* arg0);
