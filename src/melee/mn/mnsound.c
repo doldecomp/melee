@@ -29,8 +29,8 @@ Vec3 mnSound_803EEED8[] = { { 0.0f, 199.0f, 0.0f },  { 0.0f, 29.0f, 0.0f },
 void gm_801602C0(u8);   /* extern */
 void lb_8001CE00(void); /* extern */
 
-StaticModelDesc mnSound_desc;
-HSD_GObj* mnSound_804D6C30;
+static StaticModelDesc mnSound_804A08A8;
+static HSD_GObj* mnSound_804D6C30;
 
 static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
                                s32 anim_id)
@@ -202,9 +202,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     mn_8022ED6C(sp3C, &mnSound_803EEED8[menu->unk1 + 4]);
 }
 
-StaticModelDesc mnSound_804A08A8;
-
-void mnSound_80249C08(void)
+void mnSound_80249C08(HSD_GObj* unused)
 {
     HSD_GObj* gobj = GObj_Create(6U, 7U, 0x80U);
     HSD_JObj* jobj;
@@ -266,7 +264,7 @@ void mnSound_80249C08(void)
     }
 }
 
-void mnSound_8024A09C(s32 arg0)
+void mnSound_8024A09C(HSD_GObj* arg0)
 {
     s32 spC;
     HSD_GObjProc* temp_r3;
@@ -278,11 +276,11 @@ void mnSound_8024A09C(s32 arg0)
     mn_804A04F0.x2 = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
-        archive, (void**) &mnSound_desc.joint, "MenMainConSo_Top_joint",
-        &mnSound_desc.animjoint, "MenMainConSo_Top_animjoint",
-        &mnSound_desc.matanim_joint, "MenMainConSo_Top_matanim_joint",
-        &mnSound_desc.shapeanim_joint, "MenMainConSo_Top_shapeanim_joint", 0);
-    mnSound_80249C08();
+        archive, (void**) &mnSound_804A08A8.joint, "MenMainConSo_Top_joint",
+        &mnSound_804A08A8.animjoint, "MenMainConSo_Top_animjoint",
+        &mnSound_804A08A8.matanim_joint, "MenMainConSo_Top_matanim_joint",
+        &mnSound_804A08A8.shapeanim_joint, "MenMainConSo_Top_shapeanim_joint", 0);
+    mnSound_80249C08(arg0);
     temp_r3 =
         HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), mnSound_802492CC, 0);
     temp_r3->flags_3 = HSD_GObj_804D783C;
