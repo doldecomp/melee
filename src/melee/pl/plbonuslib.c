@@ -568,6 +568,16 @@ void pl_80040330(s32 slot, bool arg1, f32 arg2)
     }
 }
 
+void pl_80040374(s32 arg0, s32 arg1)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    if ((arg1 == 0) && (temp_r3->xD64 != 6)) {
+        temp_r3->xD60 = pl_804D6470->x124;
+    }
+}
+
 void pl_800403C0(int arg0, int arg1)
 {
     PAD_STACK(8);
