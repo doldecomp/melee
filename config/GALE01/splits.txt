@@ -2236,11 +2236,11 @@ melee/mn/mnsoundtest.c:
 
 melee/mn/mnlanguage.c:
 	.text       start:0x8024BFE0 end:0x8024C68C
-	.data       start:0x803EF5A0 end:0x803EF668
+	.data       start:0x803EF5A0 end:0x803EF661
 	.bss        start:0x804A08D8 end:0x804A08E8
 	.sdata      start:0x804D5018 end:0x804D5020
-	.sbss       start:0x804D6C50 end:0x804D6C58
-	.sdata2     start:0x804DC110 end:0x804DC130
+	.sbss       start:0x804D6C50 end:0x804D6C54
+	.sdata2     start:0x804DC110 end:0x804DC12C
 
 melee/mn/mnhyaku.c:
 	.text       start:0x8024C68C end:0x8024CE74

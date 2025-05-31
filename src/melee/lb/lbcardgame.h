@@ -64,7 +64,7 @@
 /* 01CC4C */ UNK_RET lb_8001CC4C(UNK_PARAMS);
 /* 01CC84 */ void lb_8001CC84(void);
 /* 01CDB4 */ void lb_8001CDB4(void);
-/* 01CE00 */ UNK_RET lb_8001CE00(UNK_PARAMS);
+/* 01CE00 */ void lb_8001CE00(void);
 /* 01CE78 */ void lb_8001CE78(void);
 /* 01CEC0 */ UNK_RET fn_8001CEC0(UNK_PARAMS);
 /* 01CEE4 */ UNK_RET fn_8001CEE4(UNK_PARAMS);
