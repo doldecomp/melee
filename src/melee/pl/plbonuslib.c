@@ -585,6 +585,16 @@ void pl_800403C0(int arg0, int arg1)
     pl_80038788(arg0, 0xC5, 1);
 }
 
+void pl_800403FC(s32 arg0, s32 arg1, int slot, bool arg3, s32 arg4)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    if ((arg3 == 0) && (arg4 >= 0x54) && (arg4 <= 0x57)) {
+        temp_r3->x0_staleMoveTable.xCAC = arg0;
+    }
+}
+
 void pl_80040460(s32 slot, s32 arg1)
 {
     pl_StaleMoveTableExt_t* temp_r3;

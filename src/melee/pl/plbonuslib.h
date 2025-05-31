@@ -37,6 +37,8 @@
 /* 040330 */ void pl_80040330(s32 slot, bool, f32);
 /* 040374 */ void pl_80040374(s32, s32);
 /* 0403C0 */ void pl_800403C0(int, int);
+/* 0403FC */ void pl_800403FC(s32 arg0, s32 arg1, int slot, bool arg3,
+                              s32 arg4);
 /* 040460 */ void pl_80040460(s32 slot, s32);
 /* 04049C */ void pl_8004049C(s32, ItemKind);
 /* 04065C */ void pl_8004065C(int, int);
