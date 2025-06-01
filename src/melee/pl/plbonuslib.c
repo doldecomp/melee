@@ -110,6 +110,12 @@ void pl_8003E058(int arg0, s32 arg1, int arg2, s32 arg3)
     }
 }
 
+void pl_8003E0E8(s32 arg0, bool arg1)
+{
+    RETURN_IF(arg1);
+    pl_80038824(arg0, 0x40);
+}
+
 void pl_8003E150(s32 slot, s32 arg1)
 {
     pl_StaleMoveTableExt_t* stale_moves;
@@ -135,9 +141,7 @@ void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
 {
     pl_StaleMoveTableExt_t* stale_moves;
 
-    if (arg1 != 0) {
-        return;
-    }
+    RETURN_IF(arg1);
 
     stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
     switch (arg2) {
@@ -153,13 +157,13 @@ void pl_8003EC9C(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
     pl_StaleMoveTableExt_t* temp_r3;
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    if (arg1 == 0) {
-        temp_r3->x0_staleMoveTable.xC60 += arg3;
-        if (temp_r3->x0_staleMoveTable.xC64 < arg2) {
-            temp_r3->x0_staleMoveTable.xC64 = arg2;
-        }
-        temp_r3->xD10 = 0;
+    RETURN_IF(arg1);
+
+    temp_r3->x0_staleMoveTable.xC60 += arg3;
+    if (temp_r3->x0_staleMoveTable.xC64 < arg2) {
+        temp_r3->x0_staleMoveTable.xC64 = arg2;
     }
+    temp_r3->xD10 = 0;
 }
 
 void pl_8003EE2C(s32 arg0, s32 arg1)
@@ -183,154 +187,151 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
-    if (arg1 != 1) {
-        if ((gm_8016AEDC() != 0U) && (gm_8016AEDC() != -2U)) {
-            var_r0 = true;
-        } else {
-            var_r0 = false;
-        }
-        if (var_r0) {
-            temp_r31->xD08 += 1U;
-            temp_r3 = temp_r31->xD08;
-            if (temp_r3 > temp_r31->xD04) {
-                temp_r31->xD04 = temp_r3;
-            }
-            temp_r31->xD10 += 1;
-            temp_r3_2 = temp_r31->xD10;
-            if ((u32) temp_r3_2 > temp_r31->xD0C) {
-                temp_r31->xD0C = (u32) temp_r3_2;
-            }
-            if (ftLib_800865CC(temp_r30) == 1) {
-                temp_r31->xD20 += 1;
-            } else {
-                temp_r31->xD24 += 1;
-            }
-            temp_r28 = ft_80089884(temp_r30)->x2073;
-            /// @todo This is obviously not right, but it matches
-            if (((s32) * ((u8*) ft_80089884(temp_r30) + 2) >> 6U) & 1) {
-                temp_r31->xD18 += 1U;
+    RETURN_IF(arg1 == true);
 
-                /// @todo uses fcmpu instead of fcmpo
-                if ((f32) temp_r31->xD18 == pl_804D6470->x64) {
-                    temp_r31->xD14 += 1;
-                }
-            } else {
-                temp_r31->xD18 = 0U;
-            }
-            if ((s32) temp_r28 == 0x68) {
-                temp_r31->xD1C += 1;
-            }
-            if (ftLib_800865CC(temp_r30) == 0) {
-                ftLib_8008777C(temp_r30);
-                if (M2C_ERROR(/* Read from unset register $f1 */) < 0.0f) {
-                    ftLib_8008777C(temp_r30);
-                } else {
-                    ftLib_8008777C(temp_r30);
-                }
-                M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-                if (M2C_ERROR(/* Read from unset register $f1 */) ==
-                    pl_804D6470->x58)
-                {
-                    temp_r31->xD28 += 1;
-                }
-            }
-            if (ftLib_800877D4(temp_r30)) {
-                temp_r31->xD2C += 1;
-            }
-            temp_r3_3 = ifMagnify_802FB6E8(arg0);
-            if (temp_r3_3 != 0) {
-                temp_r31->xD30 += 1;
-                temp_r31->xDD0.bit7 = 1;
-            } else {
-                temp_r31->xDD0.bit7 = 0;
-            }
-            switch (temp_r3_3) {
-            case 1:
-                temp_r31->xDD0.bit5 = 1;
+    if ((gm_8016AEDC() != 0U) && (gm_8016AEDC() != -2U)) {
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    RETURN_IF(!var_r0);
+
+    temp_r31->xD08 += 1U;
+    temp_r3 = temp_r31->xD08;
+    if (temp_r3 > temp_r31->xD04) {
+        temp_r31->xD04 = temp_r3;
+    }
+    temp_r31->xD10 += 1;
+    temp_r3_2 = temp_r31->xD10;
+    if ((u32) temp_r3_2 > temp_r31->xD0C) {
+        temp_r31->xD0C = (u32) temp_r3_2;
+    }
+    if (ftLib_800865CC(temp_r30) == 1) {
+        temp_r31->xD20 += 1;
+    } else {
+        temp_r31->xD24 += 1;
+    }
+    temp_r28 = ft_80089884(temp_r30)->x2073;
+    /// @todo This is obviously not right, but it matches
+    if (((s32) * ((u8*) ft_80089884(temp_r30) + 2) >> 6U) & 1) {
+        temp_r31->xD18 += 1U;
+
+        /// @todo uses fcmpu instead of fcmpo
+        if ((f32) temp_r31->xD18 == pl_804D6470->x64) {
+            temp_r31->xD14 += 1;
+        }
+    } else {
+        temp_r31->xD18 = 0U;
+    }
+    if ((s32) temp_r28 == 0x68) {
+        temp_r31->xD1C += 1;
+    }
+    if (ftLib_800865CC(temp_r30) == 0) {
+        ftLib_8008777C(temp_r30);
+        if (M2C_ERROR(/* Read from unset register $f1 */) < 0.0f) {
+            ftLib_8008777C(temp_r30);
+        } else {
+            ftLib_8008777C(temp_r30);
+        }
+        M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
+        if (M2C_ERROR(/* Read from unset register $f1 */) == pl_804D6470->x58)
+        {
+            temp_r31->xD28 += 1;
+        }
+    }
+    if (ftLib_800877D4(temp_r30)) {
+        temp_r31->xD2C += 1;
+    }
+    temp_r3_3 = ifMagnify_802FB6E8(arg0);
+    if (temp_r3_3 != 0) {
+        temp_r31->xD30 += 1;
+        temp_r31->xDD0.bit7 = 1;
+    } else {
+        temp_r31->xDD0.bit7 = 0;
+    }
+    switch (temp_r3_3) {
+    case 1:
+        temp_r31->xDD0.bit5 = 1;
+        break;
+    case 2:
+        temp_r31->xDD0.bit4 = 1;
+        break;
+    case 3:
+        temp_r31->xDD0.bit6 = 1;
+        break;
+    case 4:
+        temp_r31->xDD0.bit3 = 1;
+        break;
+    }
+    if (ft_800878BC(temp_r30)) {
+        temp_r31->xD34 += 1;
+    }
+    if (ft_80087900(temp_r30)) {
+        temp_r31->xD38 += 1;
+    }
+    if (ft_80087944(temp_r30)) {
+        temp_r31->xD3C += 1;
+    }
+    temp_r3_4 = ftLib_80086794(temp_r30);
+    if (temp_r3_4 != NULL) {
+        var_r3 = itGetKind((Item_GObj*) temp_r3_4);
+        if ((var_r3 >= 0) && (var_r3 < 0x23)) {
+            // Empty if
+        } else {
+            switch (var_r3) {
+            case 0xCD:
+                var_r3 = 0x23;
                 break;
-            case 2:
-                temp_r31->xDD0.bit4 = 1;
+            case 0xE1:
+                var_r3 = 0x24;
                 break;
-            case 3:
-                temp_r31->xDD0.bit6 = 1;
+            case 0xE2:
+                var_r3 = 0x25;
                 break;
-            case 4:
-                temp_r31->xDD0.bit3 = 1;
+            case 0x28:
+                var_r3 = 0x26;
                 break;
-            }
-            if (ft_800878BC(temp_r30)) {
-                temp_r31->xD34 += 1;
-            }
-            if (ft_80087900(temp_r30)) {
-                temp_r31->xD38 += 1;
-            }
-            if (ft_80087944(temp_r30)) {
-                temp_r31->xD3C += 1;
-            }
-            temp_r3_4 = ftLib_80086794(temp_r30);
-            if (temp_r3_4 != NULL) {
-                var_r3 = itGetKind((Item_GObj*) temp_r3_4);
-                if ((var_r3 >= 0) && (var_r3 < 0x23)) {
-                    // Empty if
-                } else {
-                    switch (var_r3) {
-                    case 0xCD:
-                        var_r3 = 0x23;
-                        break;
-                    case 0xE1:
-                        var_r3 = 0x24;
-                        break;
-                    case 0xE2:
-                        var_r3 = 0x25;
-                        break;
-                    case 0x28:
-                        var_r3 = 0x26;
-                        break;
-                    default:
-                        var_r3 = -1;
-                        break;
-                    }
-                }
-                if ((var_r3 != -1) &&
-                    (it_8026B30C((Item_GObj*) temp_r3_4) != 5))
-                {
-                    temp_r31->xD44 += 1U;
-                    temp_r3_5 = temp_r31->xD44;
-                    if (temp_r3_5 > temp_r31->xD40) {
-                        temp_r31->xD40 = temp_r3_5;
-                    }
-                }
-            } else {
-                temp_r0 = temp_r31->xD44;
-                if (temp_r0 != 0U) {
-                    temp_r3_6 = temp_r31->xD48;
-                    if ((temp_r0 < temp_r3_6) || (temp_r3_6 == 0U)) {
-                        temp_r31->xD48 = temp_r0;
-                    }
-                    temp_r31->xD44 = 0U;
-                }
-            }
-            temp_r3_7 = temp_r31->xD4C;
-            if (temp_r3_7 != 0U) {
-                temp_r31->xD4C = temp_r3_7 - 1U;
-            }
-            temp_r3_8 = temp_r31->xD50;
-            if (temp_r3_8 != 0U) {
-                temp_r31->xD50 = temp_r3_8 - 1U;
-            }
-            temp_r3_9 = temp_r31->xD54;
-            if (temp_r3_9 != 0U) {
-                temp_r31->xD54 = temp_r3_9 - 1U;
-            }
-            temp_r31->xD58 += 1;
-            temp_r3_10 = temp_r31->xD60;
-            if (temp_r3_10 != 0U) {
-                temp_r31->xD60 -= 1U;
-            }
-            if (ft_80087AEC(temp_r30)) {
-                temp_r31->xD68 += 1;
+            default:
+                var_r3 = -1;
+                break;
             }
         }
+        if ((var_r3 != -1) && (it_8026B30C((Item_GObj*) temp_r3_4) != 5)) {
+            temp_r31->xD44 += 1U;
+            temp_r3_5 = temp_r31->xD44;
+            if (temp_r3_5 > temp_r31->xD40) {
+                temp_r31->xD40 = temp_r3_5;
+            }
+        }
+    } else {
+        temp_r0 = temp_r31->xD44;
+        if (temp_r0 != 0U) {
+            temp_r3_6 = temp_r31->xD48;
+            if ((temp_r0 < temp_r3_6) || (temp_r3_6 == 0U)) {
+                temp_r31->xD48 = temp_r0;
+            }
+            temp_r31->xD44 = 0U;
+        }
+    }
+    temp_r3_7 = temp_r31->xD4C;
+    if (temp_r3_7 != 0U) {
+        temp_r31->xD4C = temp_r3_7 - 1U;
+    }
+    temp_r3_8 = temp_r31->xD50;
+    if (temp_r3_8 != 0U) {
+        temp_r31->xD50 = temp_r3_8 - 1U;
+    }
+    temp_r3_9 = temp_r31->xD54;
+    if (temp_r3_9 != 0U) {
+        temp_r31->xD54 = temp_r3_9 - 1U;
+    }
+    temp_r31->xD58 += 1;
+    temp_r3_10 = temp_r31->xD60;
+    if (temp_r3_10 != 0U) {
+        temp_r31->xD60 -= 1U;
+    }
+    if (ft_80087AEC(temp_r30)) {
+        temp_r31->xD68 += 1;
     }
 }
 
@@ -379,12 +380,11 @@ void pl_8003FC44(s32 slot, bool arg1)
     pl_StaleMoveTableExt_t* temp_r3;
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
-    if (!arg1) {
-        temp_r3->xDD0.bit0 = 1;
-    }
+    RETURN_IF(arg1);
+    temp_r3->xDD0.bit0 = 1;
 }
 
-void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
+void pl_8003FC88(s32 arg0, bool arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* stale_moves;
     u32 temp_r0;
@@ -392,41 +392,41 @@ void pl_8003FC88(s32 arg0, s32 arg1, s32 arg2)
 
     stale_moves = Player_GetStaleMoveTableIndexPtr2(arg0);
     var_r4 = false;
-    if (arg1 != 1) {
-        temp_r0 = stale_moves->x0_staleMoveTable.xC90;
-        switch (temp_r0) {
-        case 0U:
-            if ((arg2 >= 1) && (arg2 <= 3)) {
-                var_r4 = true;
-            }
-            break;
-        case 1U:
-            if ((arg2 >= 6) && (arg2 <= 8)) {
-                var_r4 = true;
-            }
-            break;
-        case 2U:
-            if ((arg2 >= 9) && (arg2 <= 11)) {
-                var_r4 = true;
-            }
-            break;
-        case 3U:
-            if ((arg2 >= 17) && (arg2 <= 48)) {
-                var_r4 = true;
-            }
-            break;
+
+    RETURN_IF(arg1 == true);
+    temp_r0 = stale_moves->x0_staleMoveTable.xC90;
+    switch (temp_r0) {
+    case 0U:
+        if ((arg2 >= 1) && (arg2 <= 3)) {
+            var_r4 = true;
         }
-        if (var_r4) {
-            if (temp_r0 == 3U) {
-                stale_moves->x0_staleMoveTable.xC90 = 0U;
-                pl_80038824(arg0, 0x56);
-            } else {
-                stale_moves->x0_staleMoveTable.xC90 += 1U;
-            }
-            return;
+        break;
+    case 1U:
+        if ((arg2 >= 6) && (arg2 <= 8)) {
+            var_r4 = true;
         }
-        stale_moves->x0_staleMoveTable.xC90 = 0U;
+        break;
+    case 2U:
+        if ((arg2 >= 9) && (arg2 <= 11)) {
+            var_r4 = true;
+        }
+        break;
+    case 3U:
+        if ((arg2 >= 17) && (arg2 <= 48)) {
+            var_r4 = true;
+        }
+        break;
     }
+    if (var_r4) {
+        if (temp_r0 == 3U) {
+            stale_moves->x0_staleMoveTable.xC90 = 0U;
+            pl_80038824(arg0, 0x56);
+        } else {
+            stale_moves->x0_staleMoveTable.xC90 += 1U;
+        }
+        return;
+    }
+    stale_moves->x0_staleMoveTable.xC90 = 0U;
 }
 
 void pl_8003FDA0(s32 arg0)
@@ -471,13 +471,10 @@ void pl_8003FE64(s32 arg0)
     }
 }
 
-void pl_8003FED0(s32 arg0, s32 arg1)
+void pl_8003FED0(s32 arg0, bool arg1)
 {
     s32 var_r31;
-
-    if (arg1 != 0) {
-        return;
-    }
+    RETURN_IF(arg1);
 
     for (var_r31 = 0; var_r31 < 6; var_r31++) {
         if (pl_80039418(var_r31, 0x82) != 0U) {
@@ -519,9 +516,7 @@ void pl_80040120(s32 arg0, bool arg1)
     s32 var_r29;
 
     temp_r30 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    if (arg1 == true) {
-        return;
-    }
+    RETURN_IF(arg1 == true);
 
     if (temp_r30->xD4C != 0) {
         pl_80038824(arg0, 0x4A);
@@ -572,9 +567,8 @@ void pl_80040270(s32 arg0, bool arg1, f32 arg2)
     pl_StaleMoveTableExt_t* temp_r3;
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    if (arg1) {
-        return;
-    }
+    RETURN_IF(arg1);
+
     M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
     if (arg2 == pl_804D6470->x98) {
         temp_r3->x0_staleMoveTable.xCE4 += 1;
@@ -595,9 +589,7 @@ void pl_80040330(s32 slot, bool arg1, f32 arg2)
 {
     pl_StaleMoveTableExt_t* temp_r3;
 
-    if (arg1) {
-        return;
-    }
+    RETURN_IF(arg1);
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     if (arg2 < temp_r3->xCF8) {
@@ -637,16 +629,14 @@ void pl_80040460(s32 slot, s32 arg1)
     pl_StaleMoveTableExt_t* temp_r3;
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
-    if (arg1 == 0) {
-        temp_r3->x0_staleMoveTable.xCAC = 6;
-    }
+    RETURN_IF(arg1);
+    temp_r3->x0_staleMoveTable.xCAC = 6;
 }
 
 void pl_8004065C(int arg0, int arg1)
 {
-    if (arg1 == 0) {
-        pl_80038824(arg0, 0x78);
-    }
+    RETURN_IF(arg1);
+    pl_80038824(arg0, 0x78);
 }
 
 f32 pl_80040870(s32 arg0)
@@ -729,9 +719,8 @@ void pl_80040B8C(s32 slot, bool arg1, s32 arg2)
     pl_StaleMoveTableExt_t* temp_r3;
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
-    if (!arg1) {
-        temp_r3->x0_staleMoveTable.xC68 += arg2;
-    }
+    RETURN_IF(arg1);
+    temp_r3->x0_staleMoveTable.xC68 += arg2;
 }
 
 s32 pl_80040BD8(s32 arg0)

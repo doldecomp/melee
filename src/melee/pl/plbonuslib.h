@@ -9,6 +9,7 @@
 /* 03D644 */ void pl_8003D644(int, int, int, int);
 /* 03DF44 */ void pl_8003DF44(int, int);
 /* 03E058 */ void pl_8003E058(int, s32, int, s32);
+/* 03E0E8 */ void pl_8003E0E8(s32, bool);
 /* 03E150 */ void pl_8003E150(s32 slot, s32);
 /* 03E70C */ void pl_8003E70C(Item_GObj*);
 /* 03EA74 */ void pl_8003EA74(int, int);
@@ -21,14 +22,14 @@
 /* 03FBFC */ s32 pl_8003FBFC(s32);
 /* 03FC20 */ s32 pl_8003FC20(s32);
 /* 03FC44 */ void pl_8003FC44(s32 slot, bool);
-/* 03FC88 */ void pl_8003FC88(s32, s32, s32);
+/* 03FC88 */ void pl_8003FC88(s32, bool, s32);
 /* 03FDA0 */ void pl_8003FDA0(s32);
 /* 03FDC8 */ void pl_8003FDC8(s32);
 /* 03FDF4 */ void pl_8003FDF4(s32, int);
 /* 03FE1C */ void pl_8003FE1C(s32 slot, bool);
 /* 03FE40 */ void pl_8003FE40(s32);
 /* 03FE64 */ void pl_8003FE64(s32);
-/* 03FED0 */ void pl_8003FED0(s32, s32);
+/* 03FED0 */ void pl_8003FED0(s32, bool);
 /* 03FF44 */ void pl_8003FF44(s32, s32, s32);
 /* 03FFDC */ void pl_8003FFDC(s32, s32, s32, s32, s32);
 /* 040120 */ void pl_80040120(s32, bool);

@@ -12,7 +12,6 @@
 /* 037ECC */ void pl_80037ECC(void);
 /* 038144 */ void pl_80038144(void);
 /* 03D60C */ void pl_8003D60C(void);
-/* 03E0E8 */ void pl_8003E0E8(u8, int);
 /* 03E114 */ void pl_8003E114(u8, int, float);
 /* 03E17C */ void pl_8003E17C(u8, int, Item_GObj*);
 /* 03E4A4 */ void pl_8003E4A4(u8 slot, bool, void*, s32);
