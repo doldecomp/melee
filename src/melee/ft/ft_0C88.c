@@ -1,11 +1,30 @@
 #include <placeholder.h>
 
+#include "ft/forward.h"
+#include "ftCommon/forward.h"
+
+#include "ft/ft_0C88.h"
+
+#include "platform.h"
+
 #include "ft/fighter.h"
+#include "ft/ft_0877.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AttackDash.h"
+#include "ftCommon/ftCo_Guard.h"
+#include "ftCommon/ftCo_HammerJump.h"
+#include "ftCommon/ftCo_HammerWait.h"
+#include "ftCommon/ftCo_SpecialS.h"
 
 #include <baselib/gobj.h>
+
+/* 0CABC4 */ static bool fn_800CABC4(ftCo_GObj* gobj);
+/* 0CAC18 */ static void ftCo_RunBrake_Enter(ftCo_GObj* gobj);
+/* 0CAF78 */ static bool fn_800CAF78(ftCo_GObj* gobj);
+/* 0CB4E0 */ static void ftCo_KneeBend_Enter(ftCo_GObj* gobj, int arg1);
 
 /// #ftCo_800C884C
 
@@ -26,7 +45,7 @@ void fn_800C8B1C(Fighter_GObj* gobj)
 
 /// #ftCo_800C8B2C
 
-void ftCo_800C8B60(Fighter* fp, s32 arg1, s8 arg2)
+void ftCo_800C8B60(Fighter* fp, int arg1, s8 arg2)
 {
     fp->x2226_b5 = arg1;
     fp->smash_attrs.x2134_vibrateFrame = arg2;
@@ -114,9 +133,37 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #fn_800C9CEC
 
-/// #fn_800C9D40
+void ftCo_TurnRun_Enter(Fighter_GObj* gobj, float anim_start)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[1] = 0;
+    fp->mv.co.turnrun.accel_mul = fp->facing_dir;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_TurnRun, Ft_MF_SkipAnimVel,
+                              anim_start, 1.0F, 0.0F, NULL);
+    fp->mv.co.turnrun.x14 = 0;
+    if (fp->x197C != NULL) {
+        ft_80088148(fp, 0x119, 0x7F, 0x40);
+    }
+}
 
-/// #fn_800C9D94
+#pragma push
+#pragma dont_inline on
+bool fn_800C9D40(Fighter_GObj* gobj)
+{
+    // We can't use GET_FIGHTER due to dont_inline
+    Fighter* fp = gobj->user_data;
+
+    float facing = fp->facing_dir;
+    float threshold = p_ftCommonData->x38_someLStickXThreshold;
+    float lsx = fp->input.lstick.x;
+
+    if ((lsx * facing) <= threshold) {
+        ftCo_TurnRun_Enter(gobj, 0.0F);
+        return true;
+    }
+    return false;
+}
+#pragma pop
 
 static inline void getAccelAndTarget(Fighter* fp, float* accel,
                                      float* target_vel)
@@ -210,7 +257,34 @@ void ftCo_Dash_Phys(Fighter_GObj* gobj)
 
 /// #ftCo_Run_Anim
 
-/// #ftCo_Run_IASA
+void ftCo_Run_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_800D6824(gobj));
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_800D8A38(gobj));
+
+    if (ftCo_AttackDash_CheckInput(gobj)) {
+        ftCo_AttackDash_SetMv0(gobj);
+        return;
+    }
+
+    if (ftCo_80091A4C(gobj)) {
+        ftCo_80091B90(gobj, p_ftCommonData->x410);
+        ftCo_80091B9C(gobj);
+        return;
+    }
+
+    RETURN_IF(ftCo_800DE9D8(gobj));
+    RETURN_IF(fn_800CAF78(gobj));
+
+    RETURN_IF((fp->mv.co.run.x0 <= 0.0F) && fn_800C9D40(gobj));
+    RETURN_IF(!(fp->mv.co.run.x0 <= 0.0F));
+    RETURN_IF(fn_800CABC4(gobj));
+}
 
 void ftCo_Run_Phys(Fighter_GObj* gobj)
 {
@@ -219,7 +293,7 @@ void ftCo_Run_Phys(Fighter_GObj* gobj)
     float accel, target_vel;
     getAccelAndTarget(fp, &accel, &target_vel);
     if (target_vel) {
-        f32 gr_frac = fp->gr_vel / target_vel;
+        float gr_frac = fp->gr_vel / target_vel;
         if ((gr_frac > 0.0F) && (gr_frac < 1.0F)) {
             accel *= (1.0F - gr_frac) * p_ftCommonData->x5C;
         }
@@ -247,9 +321,35 @@ void ftCo_RunDirect_Phys(Fighter_GObj* gobj)
 
 /// #ftCo_RunDirect_Coll
 
-/// #fn_800CABC4
+bool fn_800CABC4(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    float lsx_abs = fp->input.lstick.x;
+    if (lsx_abs < 0.0F) {
+        lsx_abs = -lsx_abs;
+    }
+    if (lsx_abs < p_ftCommonData->x58_someLStickXThreshold) {
+        ftCo_RunBrake_Enter(gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #fn_800CAC18
+void ftCo_RunBrake_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(1);
+
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[1] = 0;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_RunBrake, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
+    fp->mv.co.runbrake.x0 = 0;
+    fp->mv.co.runbrake.x4 = fp->co_attrs.max_run_brake_frames;
+    if (fp->x197C != NULL) {
+        ft_80088148(fp, 0x119, 0x7F, 0x40);
+    }
+}
 
 /// #ftCo_RunBrake_Anim
 
@@ -270,7 +370,27 @@ void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
 
 /// #ftCo_Jump_CheckInput
 
-/// #fn_800CAF78
+bool fn_800CAF78(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (ftCo_800C5240(gobj)) {
+        return ftCo_800C5A50(gobj);
+    }
+
+    if ((fp->input.lstick.y >= p_ftCommonData->x80) &&
+        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74))
+    {
+        ftCo_KneeBend_Enter(gobj, 1);
+        return true;
+    }
+
+    if (fp->input.x668 & HSD_PAD_XY) {
+        ftCo_KneeBend_Enter(gobj, 3);
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800CB024
 
@@ -288,7 +408,14 @@ void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
 
 /// #ftCo_Jump_Coll
 
-/// #fn_800CB4E0
+void ftCo_KneeBend_Enter(Fighter_GObj* gobj, int arg1)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.co.kneebend.x4 = arg1;
+    fp->mv.co.kneebend.x0 = 0;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_KneeBend, 0U, 0.0F, 1.0F, 0.0F,
+                              NULL);
+}
 
 /// #ftCo_KneeBend_Anim
 

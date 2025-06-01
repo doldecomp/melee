@@ -57,14 +57,24 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ u8 pad_x0[12];
         /* fp+234C */ float accel_mul;
+        /* fp+2350 */ u8 pad_x10[4];
+        /* fp+2354 */ int x14;
     } turnrun;
     struct {
         /* fp+2340 */ float x0;
     } dash;
     struct {
-        /* fp+2340 */ u8 pad_x0[4];
+        /* fp+2340 */ float x0;
         /* fp+2344 */ float x4;
     } run;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ float x4;
+    } runbrake;
+    struct {
+        int x0;
+        int x4;
+    } kneebend;
     struct {
         /* fp+2340 */ bool x0;
     } attack1;
@@ -147,6 +157,9 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ float x0;
     } downwait;
+    struct {
+        /* fp+2340 */ float x0;
+    } catch;
     struct {
         /* fp+2340 */ bool x0;
         /* fp+2344 */ bool x4;
