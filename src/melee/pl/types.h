@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "forward.h"
+
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
 struct plAllocInfo2 {
@@ -23,7 +25,7 @@ struct plAllocInfo2 {
 };
 
 struct pl_800386D8_t {
-    /*   +0 */ s32 x0;
+    /*   +0 */ int total_attack_count;
     /*   +4 */ u8 x4[0xD0 - 0x4];
     /*  +D0 */ s32 xD0;
     /*  +D4 */ u8 xD4[0x194 - 0xD4];
@@ -42,9 +44,8 @@ typedef struct StaleMoveTable {
         u16 move_id;
         u16 attack_instance;
     } StaleMoves[10];
-    /// @todo #pl_800386D8_t starts at +2C
-    /*  +2C */ int total_attack_count;
-    /*  +30 */ u8 x30[0x5EC - 0x30];
+    /*  +2C */ pl_800386D8_t total_attack_count_struct;
+    /* +414 */ u8 x414[0x5EC - 0x414];
     /* +5EC */ int x5EC;
     /* +5F0 */ u8 x5F0[0x674 - 0x5F0];
     /* +674 */ s32 x674[39];

@@ -1727,7 +1727,7 @@ pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot)
     pl_800386D8_t* attack_count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    attack_count = (pl_800386D8_t*) &player->stale_moves.total_attack_count;
+    attack_count = &player->stale_moves.total_attack_count_struct;
     return attack_count;
 }
 
