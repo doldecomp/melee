@@ -109,7 +109,7 @@ typedef struct pl_StaleMoveTableExt_t {
     /* +D60 */ u32 xD60;
     /* +D64 */ s32 xD64;
     /* +D68 */ s32 xD68;
-    /* +D6C */ u8 xD6C[0xD70 - 0xD6C];
+    /* +D6C */ s32 xD6C;
     /* +D70 */ s32 xD70;
     /* +D74 */ f32 xD74;
     /* +D78 */ f32 xD78;
@@ -173,7 +173,9 @@ typedef struct pl_804D6470_t {
     /*  +B4 */ u32 xB4;
     /*  +B8 */ u8 xB8[0x124 - 0xB8];
     /* +124 */ u32 x124;
-    /* +128 */ UNK_T x128 UNK_SIZE_ARRAY;
+    /* +128 */ u8 x128[0x180 - 0x128];
+    /* +180 */ float x180;
+    /* +184 */ UNK_T x184 UNK_SIZE_ARRAY;
 } pl_804D6470_t;
 
 #endif

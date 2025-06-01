@@ -202,6 +202,36 @@ s32 pl_8003E7D4(s32 arg0, s32 kind)
         ->x0_staleMoveTable.x5C4[kind];
 }
 
+void pl_8003E854(s32 arg0, s32 arg1, Item_GObj* arg2)
+{
+    HSD_GObj* temp_r31;
+    HSD_GObj* temp_r3;
+    u8 temp_r31_2;
+
+    temp_r31 = Player_GetEntityAtIndex(arg0, arg1);
+    temp_r3 = it_8026BC78(arg2);
+    if ((temp_r31 != temp_r3) && (it_8026B7BC(arg2) != 0)) {
+        pl_80038824(arg0, 0x9A);
+        if (itGetKind(arg2) == 7) {
+            pl_80038788(arg0, 0xB6, 1);
+        }
+        if ((arg1 == 0) && ftLib_80086960(temp_r3) &&
+            (ftLib_800874BC(temp_r3) == 0))
+        {
+            temp_r31_2 = ftLib_80086BE0(temp_r3);
+            Player_GetStaleMoveTableIndexPtr2(arg0)->xD6C = (s32) temp_r31_2;
+        }
+    }
+    if (itGetKind(arg2) == 6) {
+        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+        if (it_8026B960(arg2) == pl_804D6470->x180) {
+            pl_800419AC(arg0, arg1, (u16) it_8026B7CC(arg2));
+        }
+    }
+    RETURN_IF(arg1 != 0);
+    Player_GetStaleMoveTableIndexPtr2(arg0)->x0_staleMoveTable.xCA8 = 0;
+}
+
 void pl_8003EAAC(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* temp_r31;
