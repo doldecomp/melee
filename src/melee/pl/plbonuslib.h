@@ -15,6 +15,7 @@
 /* 03E2CC */ s32 pl_8003E2CC(s32, s32 pl_itemlog_kind);
 /* 03E334 */ s32 pl_8003E334(s32, s32 pl_itemlog_kind);
 /* 03E39C */ s32 pl_8003E39C(s32);
+/* 03E420 */ s32 pl_8003E420(s32);
 /* 03E70C */ void pl_8003E70C(Item_GObj*);
 /* 03EA74 */ void pl_8003EA74(int, int);
 /* 03EAAC */ void pl_8003EAAC(s32, s32, s32);
