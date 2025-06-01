@@ -31,7 +31,6 @@
 #include <MSL/trigf.h>
 
 /* 094D70 */ static bool ftCo_800951D0(ftCo_GObj* gobj);
-/* 094DF4 */ static bool ftCo_80095254(ftCo_GObj* gobj);
 /* 094E7C */ static bool ftCo_800952DC(ftCo_GObj* gobj);
 /* 0952C8 */ static UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ static UNK_RET lbl_80095738(UNK_PARAMS);
