@@ -14,11 +14,9 @@
 /* 03D60C */ void pl_8003D60C(void);
 /* 03E17C */ void pl_8003E17C(u8, int, Item_GObj*);
 /* 03E4A4 */ void pl_8003E4A4(u8 slot, bool, void*, s32);
-/* 03E854 */ void pl_8003E854(u8, int, Item_GObj*);
 /* 03E978 */ void pl_8003E978(u8 slot, bool fp_x221F_b4, Item_GObj* item_gobj,
                               float y0, float, float, float, float x1,
                               float y1, float frame_speed_mul);
-/* 03EA08 */ void pl_8003EA08(u8 slot, bool);
 /* 03EB30 */ void pl_8003EB30(f32, u16, s32, s32, s32, u8);
 /* 03EC9C */ void pl_8003EC9C(s32, s32, f32, f32);
 /* 040048 */ void pl_80040048(u8, s32);

@@ -28,6 +28,7 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "pl/pl_0371.h"
+#include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <dolphin/os/OSError.h>
