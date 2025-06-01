@@ -116,6 +116,13 @@ void pl_8003E0E8(s32 arg0, bool arg1)
     pl_80038824(arg0, 0x40);
 }
 
+void pl_8003E114(s32 arg0, s32 arg1, float arg2)
+{
+    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
+    RETURN_IF(arg2 != pl_804D6470->x84);
+    pl_80038788(arg0, 0x41, 1);
+}
+
 void pl_8003E150(s32 slot, s32 arg1)
 {
     pl_StaleMoveTableExt_t* stale_moves;

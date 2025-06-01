@@ -10,6 +10,7 @@
 /* 03DF44 */ void pl_8003DF44(int, int);
 /* 03E058 */ void pl_8003E058(int, s32, int, s32);
 /* 03E0E8 */ void pl_8003E0E8(s32, bool);
+/* 03E114 */ void pl_8003E114(s32, s32, float);
 /* 03E150 */ void pl_8003E150(s32 slot, s32);
 /* 03E70C */ void pl_8003E70C(Item_GObj*);
 /* 03EA74 */ void pl_8003EA74(int, int);
