@@ -621,10 +621,13 @@ def generate_build_ninja(
     # GNU as
     gnu_as = binutils / f"powerpc-eabi-as{EXE}"
     gnu_as_cmd = (
-        f"{CHAIN}{gnu_as} $asflags -o $out $in -MD $out.d"
+        f"{CHAIN}{gnu_as} $asflags -o $out $in"
         + f" && {dtk} elf fixup $out $out"
     )
     gnu_as_implicit = [binutils_implicit or gnu_as, dtk]
+    # As a workaround for https://github.com/encounter/dtk-template/issues/51
+    # include macros.inc directly as an implicit dependency
+    gnu_as_implicit.append(build_path / "include" / "macros.inc")
 
     if os.name != "nt":
         transform_dep = config.tools_dir / "transform_dep.py"
@@ -676,8 +679,9 @@ def generate_build_ninja(
         name="as",
         command=gnu_as_cmd,
         description="AS $out",
-        depfile="$out.d",
-        deps="gcc",
+        # See https://github.com/encounter/dtk-template/issues/51
+        # depfile="$out.d",
+        # deps="gcc",
     )
     n.newline()
 
