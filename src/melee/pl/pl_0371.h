@@ -23,7 +23,6 @@
 /* 03EA08 */ void pl_8003EA08(u8 slot, bool);
 /* 03EB30 */ void pl_8003EB30(f32, u16, s32, s32, s32, u8);
 /* 03EC9C */ void pl_8003EC9C(s32, s32, f32, f32);
-/* 03FAA8 */ void pl_8003FAA8(s32 slot, s32 index, Vec3* pos, Vec3* prevPos);
 /* 040048 */ void pl_80040048(u8, s32);
 /* 0411C4 */ void pl_800411C4(u8 slot, bool);
 /* 041280 */ void pl_80041280(u8 slot, bool);
