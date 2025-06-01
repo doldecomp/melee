@@ -621,8 +621,7 @@ def generate_build_ninja(
     # GNU as
     gnu_as = binutils / f"powerpc-eabi-as{EXE}"
     gnu_as_cmd = (
-        f"{CHAIN}{gnu_as} $asflags -o $out $in"
-        + f" && {dtk} elf fixup $out $out"
+        f"{CHAIN}{gnu_as} $asflags -o $out $in" + f" && {dtk} elf fixup $out $out"
     )
     gnu_as_implicit = [binutils_implicit or gnu_as, dtk]
     # As a workaround for https://github.com/encounter/dtk-template/issues/51
@@ -964,7 +963,11 @@ def generate_build_ninja(
                 link_built_obj = False
 
             # Assembly overrides
-            if obj.asm_path is not None and obj.asm_path.exists():
+            if (
+                not link_built_obj
+                and obj.asm_path is not None
+                and obj.asm_path.exists()
+            ):
                 link_built_obj = True
                 built_obj_path = asm_build(obj, obj.asm_path, obj.asm_obj_path)
 
