@@ -131,6 +131,16 @@ void pl_8003E150(s32 slot, s32 arg1)
     stale_moves->x0_staleMoveTable.xCD8 += 1;
 }
 
+s32 pl_8003E2CC(s32 arg0, s32 pl_itemlog_kind)
+{
+    if (pl_itemlog_kind >= 39) {
+        __assert("plbonuslib.c", 555,
+                 "pl_itemlog_kind < Pl_ItemLog_Terminate");
+    }
+    return Player_GetStaleMoveTableIndexPtr2(arg0)
+        ->x0_staleMoveTable.x674[pl_itemlog_kind];
+}
+
 void pl_8003EAAC(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* temp_r31;
