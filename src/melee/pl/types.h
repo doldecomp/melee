@@ -163,7 +163,8 @@ typedef struct pl_804D6470_t {
     /*  +A4 */ u32 xA4;
     /*  +A8 */ u8 xA8[0xB0 - 0xA8];
     /*  +B0 */ u32 xB0;
-    /*  +B4 */ u8 xB4[0x124 - 0xB4];
+    /*  +B4 */ u32 xB4;
+    /*  +B8 */ u8 xB8[0x124 - 0xB8];
     /* +124 */ u32 x124;
     /* +128 */ UNK_T x128 UNK_SIZE_ARRAY;
 } pl_804D6470_t;
