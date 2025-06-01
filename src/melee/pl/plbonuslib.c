@@ -238,6 +238,13 @@ void pl_8003EA08(s32 slot, s32 arg1)
     Player_GetStaleMoveTableIndexPtr2(slot)->xD6C = 6;
 }
 
+void pl_8003EA40(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    RETURN_IF(arg3);
+    RETURN_IF(arg2 != arg4);
+    pl_80038824(arg0, 0x9B);
+}
+
 void pl_8003EAAC(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* temp_r31;
