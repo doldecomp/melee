@@ -151,6 +151,23 @@ s32 pl_8003E334(s32 arg0, s32 pl_itemlog_kind)
         ->x0_staleMoveTable.x710[pl_itemlog_kind];
 }
 
+s32 pl_8003E39C(s32 arg0)
+{
+    s32 var_r28;
+    s32 var_r27;
+
+    var_r28 = 0;
+    for (var_r27 = 0; var_r27 < 39; var_r27++) {
+        if (var_r27 >= 39) {
+            __assert("plbonuslib.c", 555,
+                     "pl_itemlog_kind < Pl_ItemLog_Terminate");
+        }
+        var_r28 += Player_GetStaleMoveTableIndexPtr2(arg0)
+                       ->x0_staleMoveTable.x674[var_r27];
+    }
+    return var_r28;
+}
+
 void pl_8003EAAC(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* temp_r31;
