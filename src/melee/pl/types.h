@@ -49,7 +49,8 @@ typedef struct StaleMoveTable {
     /* +5EC */ int x5EC;
     /* +5F0 */ u8 x5F0[0x674 - 0x5F0];
     /* +674 */ s32 x674[39];
-    /* +710 */ u8 x710[0xC60 - 0x710];
+    /* +710 */ s32 x710[39];
+    /* +7AC */ u8 x7AC[0xC60 - 0x7AC];
     /* +C60 */ f32 xC60;
     /* +C64 */ f32 xC64;
     /* +C68 */ s32 xC68;
