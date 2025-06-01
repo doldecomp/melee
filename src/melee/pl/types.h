@@ -45,7 +45,8 @@ typedef struct StaleMoveTable {
         u16 attack_instance;
     } StaleMoves[10];
     /*  +2C */ pl_800386D8_t total_attack_count_struct;
-    /* +414 */ u8 x414[0x5EC - 0x414];
+    /* +414 */ u8 x414[0x5C4 - 0x414];
+    /* +5C4 */ s32 x5C4[0xA]; // UNKNOWN SIZE
     /* +5EC */ int x5EC;
     /* +5F0 */ u8 x5F0[0x674 - 0x5F0];
     /* +674 */ s32 x674[39];

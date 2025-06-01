@@ -186,6 +186,22 @@ s32 pl_8003E420(s32 arg0)
     return var_r28;
 }
 
+s32 pl_8003E7D4(s32 arg0, s32 kind)
+{
+    s32 var_r0;
+
+    var_r0 = 0;
+    if ((kind >= 0xA1) && (kind < 0xBF)) {
+        var_r0 = 1;
+    }
+    if (var_r0 == 0) {
+        __assert("plbonuslib.c", 649,
+                 "It_PKind_Start <= kind && kind < It_PKind_Terminate");
+    }
+    return Player_GetStaleMoveTableIndexPtr2(arg0)
+        ->x0_staleMoveTable.x5C4[kind];
+}
+
 void pl_8003EAAC(s32 arg0, s32 arg1, s32 arg2)
 {
     pl_StaleMoveTableExt_t* temp_r31;
