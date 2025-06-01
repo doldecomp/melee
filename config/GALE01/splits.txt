@@ -1602,13 +1602,21 @@ melee/gm/gmmain.c:
 	.sbss       start:0x804D6590 end:0x804D6598
 
 melee/gm/gm_1601.c:
-	.text       start:0x801601C4 end:0x801A0E34
+	.text       start:0x801601C4 end:0x8019EFC4
 	.rodata     start:0x803B75F8 end:0x803B7D50
-	.data       start:0x803D4C38 end:0x803DA4B0
-	.bss        start:0x8046B378 end:0x80479B10
-	.sdata      start:0x804D3EF8 end:0x804D4218
-	.sbss       start:0x804D6598 end:0x804D6700
-	.sdata2     start:0x804DA230 end:0x804DA980
+	.data       start:0x803D4C38 end:0x803DA3E0
+	.bss        start:0x8046B378 end:0x80479A98
+	.sdata      start:0x804D3EF8 end:0x804D41F0
+	.sbss       start:0x804D6598 end:0x804D6698
+	.sdata2     start:0x804DA230 end:0x804DA950
+
+melee/gm/gm_19EF.c:
+	.text       start:0x8019EFC4 end:0x801A0E34
+	.data       start:0x803DA3E0 end:0x803DA4B0
+	.bss        start:0x80479A98 end:0x80479B10
+	.sdata      start:0x804D41F0 end:0x804D4218
+	.sbss       start:0x804D6698 end:0x804D6700
+	.sdata2     start:0x804DA950 end:0x804DA980
 
 melee/gm/gmpause.c:
 	.text       start:0x801A0E34 end:0x801A12C4

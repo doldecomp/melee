@@ -887,6 +887,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmmain_lib.c"),
             Object(Matching, "melee/gm/gmmain.c"),
             Object(NonMatching, "melee/gm/gm_1601.c"),
+            Object(NonMatching, "melee/gm/gmintro.c"),
             Object(NonMatching, "melee/gm/gmpause.c"),
             Object(NonMatching, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),

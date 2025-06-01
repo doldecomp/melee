@@ -1,6 +1,8 @@
 #ifndef MELEE_GM_GMPAUSE_H
 #define MELEE_GM_GMPAUSE_H
 
+#include "placeholder.h"
+
 /* 1A0E34 */ UNK_RET fn_801A0E34(UNK_PARAMS);
 /* 1A0FEC */ UNK_RET gm_801A0FEC(UNK_PARAMS);
 /* 1A10FC */ UNK_RET gm_801A10FC(UNK_PARAMS);
