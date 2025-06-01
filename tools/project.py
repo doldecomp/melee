@@ -302,6 +302,39 @@ def file_is_c_cpp(path: Path) -> bool:
     return file_is_c(path) or file_is_cpp(path)
 
 
+_listdir_cache = {}
+
+
+def check_path_case(path: Path):
+    parts = path.parts
+    if path.is_absolute():
+        curr = Path(parts[0])
+        start = 1
+    else:
+        curr = Path(".")
+        start = 0
+
+    for part in parts[start:]:
+        if curr in _listdir_cache:
+            entries = _listdir_cache[curr]
+        else:
+            try:
+                entries = os.listdir(curr)
+            except (FileNotFoundError, PermissionError):
+                sys.exit(f"Cannot access: {curr}")
+            _listdir_cache[curr] = entries
+
+        for entry in entries:
+            if entry.lower() == part.lower():
+                curr = curr / entry
+                break
+        else:
+            sys.exit(f"Cannot resolve: {path}")
+
+    if path != curr:
+        print(f"⚠️  Case mismatch: expected={path} actual={curr}")
+
+
 def make_flags_str(flags: Optional[List[str]]) -> str:
     if flags is None:
         return ""
@@ -949,6 +982,7 @@ def generate_build_ninja(
             link_built_obj = obj.completed
             built_obj_path: Optional[Path] = None
             if obj.src_path is not None and obj.src_path.exists():
+                check_path_case(obj.src_path)
                 if file_is_c_cpp(obj.src_path):
                     # Add C/C++ build rule
                     built_obj_path = c_build(obj, obj.src_path)
@@ -968,6 +1002,7 @@ def generate_build_ninja(
                 and obj.asm_path is not None
                 and obj.asm_path.exists()
             ):
+                check_path_case(obj.asm_path)
                 link_built_obj = True
                 built_obj_path = asm_build(obj, obj.asm_path, obj.asm_obj_path)
 
