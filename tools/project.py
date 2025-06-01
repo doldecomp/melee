@@ -57,7 +57,6 @@ class Object:
             "extra_asflags": [],
             "extra_cflags": [],
             "extra_clang_flags": [],
-            "host": None,
             "lib": None,
             "mw_version": None,
             "progress_category": None,
@@ -73,7 +72,6 @@ class Object:
         self.asm_path: Optional[Path] = None
         self.src_obj_path: Optional[Path] = None
         self.asm_obj_path: Optional[Path] = None
-        self.host_obj_path: Optional[Path] = None
         self.ctx_path: Optional[Path] = None
 
     def resolve(self, config: "ProjectConfig", lib: Library) -> "Object":
@@ -91,7 +89,6 @@ class Object:
         set_default("add_to_all", True)
         set_default("asflags", config.asflags)
         set_default("asm_dir", config.asm_dir)
-        set_default("host", False)
         set_default("mw_version", config.linker_version)
         set_default("scratch_preset_id", config.scratch_preset_id)
         set_default("shift_jis", config.shift_jis)
@@ -121,7 +118,6 @@ class Object:
         base_name = Path(self.name).with_suffix("")
         obj.src_obj_path = build_dir / "src" / f"{base_name}.o"
         obj.asm_obj_path = build_dir / "mod" / f"{base_name}.o"
-        obj.host_obj_path = build_dir / "host" / f"{base_name}.o"
         obj.ctx_path = build_dir / "src" / f"{base_name}.ctx"
         return obj
 
@@ -733,24 +729,6 @@ def generate_build_ninja(
             order_only=prev_step,
         )
 
-    n.comment("Host build")
-    n.variable("host_cflags", "-I include -Wno-trigraphs")
-    n.variable(
-        "host_cppflags",
-        "-std=c++98 -I include -fno-exceptions -fno-rtti -D_CRT_SECURE_NO_WARNINGS -Wno-trigraphs -Wno-c++11-extensions",
-    )
-    n.rule(
-        name="host_cc",
-        command="clang $host_cflags -c -o $out $in",
-        description="CC $out",
-    )
-    n.rule(
-        name="host_cpp",
-        command="clang++ $host_cppflags -c -o $out $in",
-        description="CXX $out",
-    )
-    n.newline()
-
     # Add all build steps needed before we compile (e.g. processing assets)
     write_custom_step("pre-compile")
 
@@ -850,7 +828,6 @@ def generate_build_ninja(
         link_steps: List[LinkStep] = []
         used_compiler_versions: Set[str] = set()
         source_inputs: List[Path] = []
-        host_source_inputs: List[Path] = []
         source_added: Set[Path] = set()
 
         def c_build(obj: Object, src_path: Path) -> Optional[Path]:
@@ -916,21 +893,6 @@ def generate_build_ninja(
                     implicit=decompctx,
                     variables={"includes": includes},
                 )
-
-            # Add host build rule
-            if obj.options["host"] and obj.host_obj_path is not None:
-                n.build(
-                    outputs=obj.host_obj_path,
-                    rule="host_cc" if file_is_c(src_path) else "host_cpp",
-                    inputs=src_path,
-                    variables={
-                        "basedir": os.path.dirname(obj.host_obj_path),
-                        "basefile": obj.host_obj_path.with_suffix(""),
-                    },
-                    order_only="pre-compile",
-                )
-                if obj.options["add_to_all"]:
-                    host_source_inputs.append(obj.host_obj_path)
             n.newline()
 
             if obj.options["add_to_all"]:
@@ -985,7 +947,7 @@ def generate_build_ninja(
             built_obj_path: Optional[Path] = None
             if obj.src_path is not None and obj.src_path.exists():
                 if file_is_c_cpp(obj.src_path):
-                    # Add MWCC & host build rules
+                    # Add C/C++ build rule
                     built_obj_path = c_build(obj, obj.src_path)
                 elif file_is_asm(obj.src_path):
                     # Add assembler build rule
@@ -1146,17 +1108,6 @@ def generate_build_ninja(
             outputs="all_source",
             rule="phony",
             inputs=source_inputs,
-        )
-        n.newline()
-
-        ###
-        # Helper rule for building all source files, with a host compiler
-        ###
-        n.comment("Build all source files with a host compiler")
-        n.build(
-            outputs="all_source_host",
-            rule="phony",
-            inputs=host_source_inputs,
         )
         n.newline()
 
