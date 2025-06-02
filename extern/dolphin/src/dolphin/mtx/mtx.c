@@ -684,7 +684,7 @@ void MTXScaleApply(Mtx src, Mtx dst, f32 xS, f32 yS, f32 zS)
     dst[2][3] = (src[2][3] * zS);
 }
 
-void MTXQuat(Mtx m, QuaternionPtr q)
+void C_MTXQuat(Mtx m, QuaternionPtr q)
 {
     f32 s;
     f32 xs;

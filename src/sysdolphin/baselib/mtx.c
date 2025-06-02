@@ -3,7 +3,6 @@
 #include "debug.h"
 #include "math.h"
 
-#include <dolphin/mtx.h>
 #include <MSL/trigf.h>
 
 #define EPSILON 0.0000000001f
@@ -27,12 +26,12 @@ void HSD_MtxInverse(Mtx src, Mtx dest)
     f32 det = HSD_CalcDeterminantMatrix3x4(src);
 
     if (fabsf_bitwise(det) < EPSILON) {
-        PSMTXIdentity(dest);
+        MTXIdentity(dest);
         return;
     }
 
     if (src == dest) {
-        PSMTXCopy(src, tempMatrix);
+        MTXCopy(src, tempMatrix);
         m = &tempMatrix;
     } else {
         m = (Mtx*) src;
@@ -81,7 +80,7 @@ void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest)
 
     if (fabsf_bitwise(det) < EPSILON) {
         if (src != dest) {
-            PSMTXCopy(src, dest);
+            MTXCopy(src, dest);
         }
     } else {
         det = 1.0f / det;
@@ -128,7 +127,7 @@ void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest)
             m[2][3] = temp9 * src[2][3] +
                       (temp5 * src[0][3] + temp6 * src[1][3]) + temp12;
 
-            PSMTXCopy(m, dest);
+            MTXCopy(m, dest);
         } else {
             dest[0][0] =
                 temp7 * src[2][0] + (temp1 * src[0][0] + temp2 * src[1][0]);
@@ -168,11 +167,11 @@ void HSD_MtxInverseTranspose(Mtx src, Mtx dest)
 
     if (fabsf_bitwise(det) < EPSILON) {
         if (*m != dest) {
-            PSMTXCopy(*m, dest);
+            MTXCopy(*m, dest);
         }
     } else {
         if (*m == dest) {
-            PSMTXCopy(*m, tempMatrix);
+            MTXCopy(*m, tempMatrix);
             m = &tempMatrix;
         }
 
@@ -291,7 +290,7 @@ void HSD_MtxGetScale(Mtx arg0, Vec3* arg1)
     vec1.z = arg0[2][0];
 
     arg1->x = VECMag(&vec1);
-    PSVECNormalize(&vec1, &vec1);
+    VECNormalize(&vec1, &vec1);
 
     vec2.x = arg0[0][1];
     vec2.y = arg0[1][1];
@@ -300,7 +299,7 @@ void HSD_MtxGetScale(Mtx arg0, Vec3* arg1)
     VECScale(&vec1, &vec4, VECDotProduct(&vec1, &vec2));
     VECSubtract(&vec2, &vec4, &vec2);
     arg1->y = VECMag(&vec2);
-    PSVECNormalize(&vec2, &vec2);
+    VECNormalize(&vec2, &vec2);
 
     vec3.x = arg0[0][2];
     vec3.y = arg0[1][2];

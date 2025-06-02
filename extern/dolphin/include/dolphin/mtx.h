@@ -76,6 +76,7 @@ void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 #define MTXInverse C_MTXInverse
 #define MTXTranspose C_MTXTranspose
 #define MTXScale C_MTXScale
+#define MTXQuat C_MTXQuat
 #define MTXIdentity C_MTXIdentity
 #else
 #define VECSquareMag PSVECSquareMag
@@ -93,6 +94,7 @@ void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 #define MTXInverse PSMTXInverse
 #define MTXTranspose PSMTXTranspose
 #define MTXScale PSMTXScale
+#define MTXQuat PSMTXQuat
 #define MTXIdentity PSMTXIdentity
 #endif
 
@@ -111,7 +113,6 @@ void MTXRotAxisRad(Mtx m, Vec* axis, f32 rad);
 void MTXTrans(Mtx m, f32 xT, f32 yT, f32 zT);
 void MTXTransApply(Mtx src, Mtx dst, f32 xT, f32 yT, f32 zT);
 void MTXScaleApply(Mtx src, Mtx dst, f32 xS, f32 yS, f32 zS);
-void MTXQuat(Mtx m, QuaternionPtr q);
 void MTXReflect(Mtx m, Vec* p, Vec* n);
 void MTXLookAt(Mtx m, Vec* camPos, Vec* camUp, Vec* target);
 void MTXLightFrustum(Mtx m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 scaleS,
@@ -127,6 +128,7 @@ void C_MTXCopy(Mtx src, Mtx dst);
 void C_MTXConcat(Mtx a, Mtx b, Mtx ab);
 void C_MTXTranspose(Mtx src, Mtx xPose);
 void C_MTXScale(Mtx m, f32 xS, f32 yS, f32 zS);
+void C_MTXQuat(Mtx m, QuaternionPtr q);
 u32 C_MTXInverse(Mtx src, Mtx inv);
 u32 C_MTXInvXpose(Mtx src, Mtx invX);
 
@@ -136,6 +138,7 @@ void PSMTXCopy(Mtx src, Mtx dst);
 void PSMTXConcat(Mtx mA, Mtx mB, Mtx mAB);
 void PSMTXTranspose(Mtx src, Mtx xPose);
 void PSMTXScale(Mtx m, f32 xS, f32 yS, f32 zS);
+void PSMTXQuat(Mtx m, QuaternionPtr q);
 u32 PSMTXInverse(Mtx src, Mtx inv);
 u32 PSMTXInvXpose(Mtx src, Mtx invX);
 
