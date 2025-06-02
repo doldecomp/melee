@@ -371,7 +371,7 @@ void GXLoadLightObjImm(GXLightObj* lt_obj, GXLightID light)
 
     WRITE_SOME_LIGHT_REG1(0, addr);
     WRITE_SOME_LIGHT_REG1(0, addr + 1);
-    WRITE_SOME_LIGHT_REG1(1, addr + 2);
+    WRITE_SOME_LIGHT_REG1(0, addr + 2);
     WRITE_SOME_LIGHT_REG1(obj->Color, addr + 3);
     WRITE_SOME_LIGHT_REG2(obj->a[0], addr + 4);
     WRITE_SOME_LIGHT_REG2(obj->a[1], addr + 5);
@@ -386,7 +386,7 @@ void GXLoadLightObjImm(GXLightObj* lt_obj, GXLightID light)
     WRITE_SOME_LIGHT_REG2(obj->ldir[1], addr + 14);
     WRITE_SOME_LIGHT_REG2(obj->ldir[2], addr + 15);
 
-    gx->bpSent = 0;
+    gx->bpSent = 1;
 }
 
 void GXLoadLightObjIndx(u32 lt_obj_indx, GXLightID light)

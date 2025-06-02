@@ -18,16 +18,16 @@ __declspec(section ".init") extern char _SDA_BASE_[];
 __declspec(section ".init") extern char _SDA2_BASE_[];
 
 typedef struct __rom_copy_info {
-  char* rom;
-  char* addr;
-  unsigned int size;
+    char* rom;
+    char* addr;
+    unsigned int size;
 } __rom_copy_info;
 
 __declspec(section ".init") extern __rom_copy_info _rom_copy_info[];
 
 typedef struct __bss_init_info {
-  char* addr;
-  unsigned int size;
+    char* addr;
+    unsigned int size;
 } __bss_init_info;
 
 __declspec(section ".init") extern __bss_init_info _bss_init_info[];
@@ -35,14 +35,15 @@ extern int main(int argc, char* argv[]);
 extern void exit(int);
 
 __declspec(section ".init") extern void __init_hardware(void);
-__declspec(section ".init") extern void __flush_cache(void* address, unsigned int size);
+__declspec(section ".init") extern void __flush_cache(void* address,
+                                                      unsigned int size);
 
 static void __init_registers(void);
 static void __init_data(void);
 
-__declspec(section ".init")
-__declspec(weak) asm void __start(void) {
-  // clang-format off
+__declspec(section ".init") __declspec(weak) asm void __start(void)
+{
+    // clang-format off
 	nofralloc
 	bl __init_registers
 	bl __init_hardware
@@ -113,6 +114,17 @@ _no_args:
 _end_of_parseargs:
 	bl DBInit
 	bl OSInit
+    lis r4, DVD_DEVICECODE_ADDR@ha
+    addi r4, r4, DVD_DEVICECODE_ADDR@l
+    lhz r3, 0(r4)
+    andi. r5, r3, 0x8000
+    beq _check_pad3
+    andi. r3, r3, 0x7fff
+    cmplwi r3, 1
+    bne _goto_end
+
+_check_pad3:
+    bl __check_pad3
 
 _goto_skip_init_bba:
 	bl __init_user
@@ -120,24 +132,27 @@ _goto_skip_init_bba:
 	mr r4, r15
 	bl main
 	b exit
-  // clang-format on
+    // clang-format on
 }
 
-static void __copy_rom_section(void* dst, const void* src, unsigned long size) {
-  if (size && (dst != src)) {
-    memcpy(dst, src, size);
-    __flush_cache(dst, size);
-  }
+static void __copy_rom_section(void* dst, const void* src, unsigned long size)
+{
+    if (size && (dst != src)) {
+        memcpy(dst, src, size);
+        __flush_cache(dst, size);
+    }
 }
 
-static void __init_bss_section(void* dst, unsigned long size) {
-  if (size) {
-    memset(dst, 0, size);
-  }
+static void __init_bss_section(void* dst, unsigned long size)
+{
+    if (size) {
+        memset(dst, 0, size);
+    }
 }
 
-asm static void __init_registers(void) {
-  // clang-format off
+asm static void __init_registers(void)
+{
+    // clang-format off
 	nofralloc
 	lis r1,  _stack_addr@h
 	ori r1, r1,  _stack_addr@l
@@ -146,26 +161,29 @@ asm static void __init_registers(void) {
 	lis r13, _SDA_BASE_@h
 	ori r13, r13, _SDA_BASE_@l
 	blr
-  // clang-format on
+    // clang-format on
 }
 
-static void __init_data(void) {
-  __rom_copy_info* dci;
-  __bss_init_info* bii;
+static void __init_data(void)
+{
+    __rom_copy_info* dci;
+    __bss_init_info* bii;
 
-  dci = _rom_copy_info;
-  while (TRUE) {
-    if (dci->size == 0)
-      break;
-    __copy_rom_section(dci->addr, dci->rom, dci->size);
-    dci++;
-  }
+    dci = _rom_copy_info;
+    while (TRUE) {
+        if (dci->size == 0) {
+            break;
+        }
+        __copy_rom_section(dci->addr, dci->rom, dci->size);
+        dci++;
+    }
 
-  bii = _bss_init_info;
-  while (TRUE) {
-    if (bii->size == 0)
-      break;
-    __init_bss_section(bii->addr, bii->size);
-    bii++;
-  }
+    bii = _bss_init_info;
+    while (TRUE) {
+        if (bii->size == 0) {
+            break;
+        }
+        __init_bss_section(bii->addr, bii->size);
+        bii++;
+    }
 }
