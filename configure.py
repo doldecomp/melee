@@ -360,7 +360,6 @@ def DolphinLib(
             "-fp hard",
             "-Cpp_exceptions off",
             "-enum int",
-            "-warn pragmas",
             "-requireprotos",
             '-pragma "cats off"',
             "-I-",
