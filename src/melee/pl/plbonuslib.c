@@ -334,8 +334,7 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
         temp_r31->xD24 += 1;
     }
     temp_r28 = ft_80089884(temp_r30)->x2073;
-    /// @todo This is obviously not right, but it matches
-    if (((s32) * ((u8*) ft_80089884(temp_r30) + 2) >> 6U) & 1) {
+    if (ft_80089884(temp_r30)->x2072_b1) {
         temp_r31->xD18 += 1U;
         if ((f32) temp_r31->xD18 >= pl_804D6470->x64) {
             temp_r31->xD14 += 1;
