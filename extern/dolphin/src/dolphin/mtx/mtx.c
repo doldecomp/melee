@@ -551,7 +551,7 @@ void MTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA)
     }
 }
 
-void MTXRotAxisRad(Mtx m, Vec* axis, f32 rad)
+void C_MTXRotAxisRad(Mtx m, Vec* axis, f32 rad)
 {
     Vec vN;
     f32 s;
