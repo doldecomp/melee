@@ -87,8 +87,7 @@ void __OSSetTick(register unsigned long newTicks);
 
 // ppc_eabi_init.c
 __declspec(section ".init") asm void __init_hardware(void);
-__declspec(section ".init") asm void __flush_cache(void* address,
-                                                   unsigned int size);
+__declspec(section ".init") asm void __flush_cache(void* address, size_t size);
 void __init_user(void);
 void __init_cpp(void);
 void __fini_cpp(void);

@@ -15,8 +15,8 @@ static struct FSTEntry* FstStart;      // size: 0x4, address: 0x4
 static char* FstStringStart;           // size: 0x4, address: 0x8
 static unsigned long MaxEntryNum;      // size: 0x4, address: 0xC
 static unsigned long currentDirectory; // size: 0x4, address: 0x10
-struct OSThreadQueue __DVDThreadQueue; // size: 0x8, address: 0x18
 unsigned long __DVDLongFileNameFlag;   // size: 0x4, address: 0x14
+OSThreadQueue __DVDThreadQueue;        // size: 0x8, address: 0x18
 
 // functions
 static BOOL isSame(const char* path, const char* string);

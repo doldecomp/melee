@@ -41,7 +41,7 @@ extern void exit(int);
 
 __declspec(section ".init") extern void __init_hardware(void);
 __declspec(section ".init") extern void __flush_cache(void* address,
-                                                      unsigned int size);
+                                                      size_t size);
 
 static void __check_pad3(void);
 

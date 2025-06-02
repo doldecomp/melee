@@ -1393,7 +1393,7 @@ config.libs = [
             Object(Matching, "dolphin/gx/GXStubs.c"),
             Object(Matching, "dolphin/gx/GXDisplayList.c"),
             Object(NonMatching, "dolphin/gx/GXTransform.c"),
-            Object(NonMatching, "dolphin/gx/GXPerf.c"),
+            Object(Matching, "dolphin/gx/GXPerf.c"),
         ],
         extern=True,
     ),

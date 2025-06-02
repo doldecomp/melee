@@ -1,11 +1,13 @@
-#include <stdlib.h>
-#include <dolphin.h>
-#include <dolphin/os.h>
-
 #include "__os.h"
 
-__declspec(section ".ctors") extern void (* _ctors[])(); // size: 0x0, address: 0x0
-__declspec(section ".dtors") extern void (* _dtors[])(); // size: 0x0, address: 0x0
+#include <dolphin.h>
+#include <stdlib.h>
+#include <dolphin/os.h>
+
+__declspec(section
+           ".ctors") extern void (*_ctors[])(); // size: 0x0, address: 0x0
+__declspec(section
+           ".dtors") extern void (*_dtors[])(); // size: 0x0, address: 0x0
 
 __declspec(section ".init") asm void __init_hardware(void)
 { // clang-format off
@@ -20,7 +22,7 @@ __declspec(section ".init") asm void __init_hardware(void)
     blr
 }
 
-__declspec(section ".init") asm void __flush_cache(void *address, unsigned int size)
+__declspec(section ".init") asm void __flush_cache(void *address, size_t size)
 { // clang-format off
     nofralloc
     lis     r5, 0xffff
