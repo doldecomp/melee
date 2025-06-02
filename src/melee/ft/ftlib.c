@@ -22,8 +22,8 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "pl/pl_0371.h"
 #include "pl/player.h"
+#include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <trigf.h>

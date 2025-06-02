@@ -7,22 +7,29 @@
 #include "it/forward.h"
 
 /* 03D644 */ void pl_8003D644(int, int, int, int);
+/* 03D60C */ void pl_8003D60C(void);
 /* 03DF44 */ void pl_8003DF44(int, int);
 /* 03E058 */ void pl_8003E058(int, s32, int, s32);
 /* 03E0E8 */ void pl_8003E0E8(s32, bool);
 /* 03E114 */ void pl_8003E114(s32, s32, float);
 /* 03E150 */ void pl_8003E150(s32 slot, s32);
+/* 03E17C */ void pl_8003E17C(u8, int, Item_GObj*);
 /* 03E2CC */ s32 pl_8003E2CC(s32, s32 pl_itemlog_kind);
 /* 03E334 */ s32 pl_8003E334(s32, s32 pl_itemlog_kind);
 /* 03E39C */ s32 pl_8003E39C(s32);
 /* 03E420 */ s32 pl_8003E420(s32);
+/* 03E4A4 */ void pl_8003E4A4(u8 slot, bool, void*, s32);
 /* 03E70C */ void pl_8003E70C(Item_GObj*);
 /* 03E7D4 */ s32 pl_8003E7D4(s32, s32 kind);
 /* 03E854 */ void pl_8003E854(s32, s32, Item_GObj*);
+/* 03E978 */ void pl_8003E978(u8 slot, bool fp_x221F_b4, Item_GObj* item_gobj,
+                              float y0, float, float, float, float x1,
+                              float y1, float frame_speed_mul);
 /* 03EA08 */ void pl_8003EA08(s32 slot, s32);
 /* 03EA40 */ void pl_8003EA40(s32, s32, s32, s32, s32);
 /* 03EA74 */ void pl_8003EA74(int, int);
 /* 03EAAC */ void pl_8003EAAC(s32, s32, s32);
+/* 03EB30 */ void pl_8003EB30(f32, u16, s32, s32, s32, u8);
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03EC9C */ void pl_8003EC9C(s32, s32, f32, f32);
 /* 03EE2C */ void pl_8003EE2C(s32, s32);
@@ -41,6 +48,7 @@
 /* 03FED0 */ void pl_8003FED0(s32, bool);
 /* 03FF44 */ void pl_8003FF44(s32, s32, s32);
 /* 03FFDC */ void pl_8003FFDC(s32, s32, s32, s32, s32);
+/* 040048 */ void pl_80040048(u8, s32);
 /* 040120 */ void pl_80040120(s32, bool);
 /* 0401F0 */ void pl_800401F0(s32, s32, f32, f32);
 /* 040270 */ void pl_80040270(s32, bool, f32);
