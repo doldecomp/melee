@@ -54,6 +54,7 @@ class Object:
             "asflags": None,
             "asm_dir": None,
             "cflags": None,
+            "clean_extab": None,
             "extra_asflags": [],
             "extra_cflags": [],
             "extra_clang_flags": [],
@@ -89,6 +90,7 @@ class Object:
         set_default("add_to_all", True)
         set_default("asflags", config.asflags)
         set_default("asm_dir", config.asm_dir)
+        set_default("clean_extab", False)
         set_default("mw_version", config.linker_version)
         set_default("scratch_preset_id", config.scratch_preset_id)
         set_default("shift_jis", config.shift_jis)
@@ -646,6 +648,12 @@ def generate_build_ninja(
     mwcc_sjis_cmd = f"{wrapper_cmd}{sjiswrap} {mwcc} $cflags -MMD -c $in -o $basedir"
     mwcc_sjis_implicit: List[Optional[Path]] = [*mwcc_implicit, sjiswrap]
 
+    # MWCC with extab post-processing
+    mwcc_extab_cmd = f"{CHAIN}{mwcc_cmd} && {dtk} extab clean $out $out"
+    mwcc_extab_implicit: List[Optional[Path]] = [*mwcc_implicit, dtk]
+    mwcc_sjis_extab_cmd = f"{CHAIN}{mwcc_sjis_cmd} && {dtk} extab clean $out $out"
+    mwcc_sjis_extab_implicit: List[Optional[Path]] = [*mwcc_sjis_implicit, dtk]
+
     # MWLD
     mwld = compiler_path / "mwldeppc.exe"
     mwld_cmd = f"{wrapper_cmd}{mwld} $ldflags -o $out @$out.rsp"
@@ -665,8 +673,12 @@ def generate_build_ninja(
         transform_dep = config.tools_dir / "transform_dep.py"
         mwcc_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_sjis_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+        mwcc_extab_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+        mwcc_sjis_extab_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_implicit.append(transform_dep)
         mwcc_sjis_implicit.append(transform_dep)
+        mwcc_extab_implicit.append(transform_dep)
+        mwcc_sjis_extab_implicit.append(transform_dep)
 
     n.comment("Link ELF file")
     n.rule(
@@ -705,6 +717,25 @@ def generate_build_ninja(
         deps="gcc",
     )
     n.newline()
+
+    n.comment("MWCC build (with extab post-processing)")
+    n.rule(
+        name="mwcc_extab",
+        command=mwcc_extab_cmd,
+        description="MWCC $out",
+        depfile="$basefile.d",
+        deps="gcc",
+    )
+    n.newline()
+
+    n.comment("MWCC build (with UTF-8 to Shift JIS wrapper and extab post-processing)")
+    n.rule(
+        name="mwcc_sjis_extab",
+        command=mwcc_sjis_extab_cmd,
+        description="MWCC $out",
+        depfile="$basefile.d",
+        deps="gcc",
+    )
 
     n.comment("Assemble asm")
     n.rule(
@@ -894,10 +925,21 @@ def generate_build_ninja(
 
             # Add MWCC build rule
             lib_name = obj.options["lib"]
+            build_rule = "mwcc"
+            build_implcit = mwcc_implicit
+            if obj.options["shift_jis"] and obj.options["clean_extab"]:
+                build_rule = "mwcc_sjis_extab"
+                build_implcit = mwcc_sjis_extab_implicit
+            elif obj.options["shift_jis"]:
+                build_rule = "mwcc_sjis"
+                build_implcit = mwcc_sjis_implicit
+            elif obj.options["clean_extab"]:
+                build_rule = "mwcc_extab"
+                build_implcit = mwcc_extab_implicit
             n.comment(f"{obj.name}: {lib_name} (linked {obj.completed})")
             n.build(
                 outputs=obj.src_obj_path,
-                rule="mwcc_sjis" if obj.options["shift_jis"] else "mwcc",
+                rule=build_rule,
                 inputs=src_path,
                 variables={
                     "mw_version": Path(obj.options["mw_version"]),
@@ -905,9 +947,7 @@ def generate_build_ninja(
                     "basedir": os.path.dirname(obj.src_obj_path),
                     "basefile": obj.src_obj_path.with_suffix(""),
                 },
-                implicit=(
-                    mwcc_sjis_implicit if obj.options["shift_jis"] else mwcc_implicit
-                ),
+                implicit=build_implcit,
                 order_only="pre-compile",
             )
 

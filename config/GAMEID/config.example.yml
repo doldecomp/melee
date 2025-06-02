@@ -96,6 +96,14 @@ export_all: true
 # See https://github.com/encounter/decomp-toolkit/blob/main/assets/ldscript.lcf
 ldscript_template: config/GAMEID/module/ldscript.tpl
 
+# (optional) Scrub uninitialized data from the extab section.
+# Certain extab acctions contain uninitialized data from the compiler.
+# Affected games can use `dtk extab clean in.dol out.dol` to get a DOL with
+# the uninitialized data zeroed out. When targeting a cleaned DOL hash,
+# this option can be set to true to scrub the uninitialized data from 
+# the extab section in the split objects.
+clean_extab: false
+
 # (optional) Configuration for modules.
 modules:
 
