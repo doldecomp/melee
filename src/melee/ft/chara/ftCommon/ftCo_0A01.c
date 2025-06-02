@@ -336,12 +336,9 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
                    int arg5, int arg6, float arg7, float arg8, float arg9,
                    float arg10, float arg11)
 {
-    volatile int sp8;
-
     *arg1 = -1;
-    sp8 = 0;
     {
-        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0,
+        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0, 0,
                                  arg7, arg8, arg9, arg10, arg11);
         if (ret && ftCo_800A1B38(*arg1)) {
             return false;

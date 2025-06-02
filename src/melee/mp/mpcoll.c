@@ -1073,7 +1073,7 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
                  temp_f2);
         sp8 = 0;
         if (mpLib_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48,
-                           arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24,
+                           arg0->x4C, 0, 0, temp_f1_3, temp_f2, sp20, sp24,
                            0.0f) != 0)
         {
             sp20 = arg0->x140.x;
