@@ -8,7 +8,6 @@
 #include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-/* 037C60 */ void pl_80037C60(HSD_GObj*, s32);
 /* 037ECC */ void pl_80037ECC(void);
 /* 038144 */ void pl_80038144(void);
 /* 03D60C */ void pl_8003D60C(void);

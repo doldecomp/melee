@@ -1,8 +1,24 @@
+#ifndef MELEE_PL_PLTRICK_H
+#define MELEE_PL_PLTRICK_H
 
 #include <platform.h>
 #include <placeholder.h>
 
 #include "ft/types.h"
 
+struct pl_80037B2C_unk {
+    u8 _[0x504];
+    u8 x504[0x64];
+};
+
+/* 037B2C */ int pl_80037B2C(struct pl_80037B2C_unk* arg0, int arg1, int arg2);
+/* 037BC0 */ UNK_RET pl_80037BC0(UNK_PARAMS);
+/* 037C60 */ UNK_RET pl_80037C60(HSD_GObj*, s32);
 /* 037DF4 */ void pl_80037DF4(HSD_GObj*, union Struct2070*);
+/* 037ECC */ UNK_RET pl_80037ECC(UNK_PARAMS);
+/* 037F00 */ UNK_RET fn_80037F00(UNK_PARAMS);
+/* 038144 */ UNK_RET pl_80038144(UNK_PARAMS);
 /* 0384DC */ void pl_800384DC(HSD_GObj*, u8, void*);
+/* 038628 */ UNK_RET pl_80038628(UNK_PARAMS);
+
+#endif
