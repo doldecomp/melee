@@ -430,7 +430,7 @@ void HSD_MtxSRTQuat(Mtx arg0, Vec3* arg1, Quaternion* arg2, Vec3* arg3,
         MTXConcat(temp, arg0, arg0);
     }
 
-    MTXTrans(temp, arg3->x, arg3->y, arg3->z);
+    PSMTXTrans(temp, arg3->x, arg3->y, arg3->z);
     MTXConcat(temp, arg0, arg0);
 }
 

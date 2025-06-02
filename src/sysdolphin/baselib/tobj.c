@@ -398,7 +398,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
                                    : 0.0F));
     trans.z = tobj->translate.z;
 
-    MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
+    PSMTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
     HSD_MkRotationMtx(m, (Vec3*) &rot);
     MTXConcat(m, tobj->mtx, tobj->mtx);
     MTXScale(m, scale.x, scale.y, scale.z);
@@ -445,7 +445,7 @@ static void TObjSetupMtx(HSD_TObj* tobj)
             HSD_ASSERT(0x2A8, cobj);
             vmtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
             HSD_LObjGetLightVector(lobj, &ldir);
-            MTXMultVecSR(vmtx, &ldir, &ldir);
+            PSMTXMultVecSR(vmtx, &ldir, &ldir);
             ldir.z += -1.0F;
 
             PSVECNormalize(&ldir, &half);

@@ -1316,10 +1316,10 @@ void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos, Vec3* camera_interest,
         }
         VECCrossProduct(&up_vec, &forward_vec, &axis);
         VECNormalize(&axis, &axis);
-        MTXRotAxisRad(mtx, &axis, 0.017453292f * new_pitch);
+        PSMTXRotAxisRad(mtx, &axis, 0.017453292f * new_pitch);
         MTXMultVec(mtx, &forward_vec, &forward_vec);
         eye_dist = HSD_CObjGetEyeDistance(cobj);
-        MTXRotAxisRad(mtx, &up_vec, 0.017453292f * (2.0f * cstick_x));
+        PSMTXRotAxisRad(mtx, &up_vec, 0.017453292f * (2.0f * cstick_x));
         MTXMultVec(mtx, &forward_vec, &forward_vec);
         VECScale(&forward_vec, &forward_vec, eye_dist);
         VECSubtract(camera_interest, &forward_vec, camera_pos);

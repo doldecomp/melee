@@ -390,7 +390,7 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
             break;
         case 1:
             HSD_LObjGetLightVector(lobj, &lobj->lvec);
-            MTXMultVecSR(mtx, &lobj->lvec, &lobj->lvec);
+            PSMTXMultVecSR(mtx, &lobj->lvec, &lobj->lvec);
             VECNormalize(&lobj->lvec, &lobj->lvec);
             break;
         default:
@@ -450,7 +450,7 @@ static void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
     HSD_LObjGetPosition(lobj, &lpos);
     MTXMultVec(mtx, &lpos, &lpos);
     HSD_LObjGetLightVector(lobj, &ldir);
-    MTXMultVecSR(mtx, &ldir, &ldir);
+    PSMTXMultVecSR(mtx, &ldir, &ldir);
     PSVECNormalize(&ldir, &ldir);
     GXInitLightPos(&lobj->lightobj, lpos.x, lpos.y, lpos.z);
     GXInitLightPos(&lobj->spec_lightobj, lpos.x, lpos.y, lpos.z);

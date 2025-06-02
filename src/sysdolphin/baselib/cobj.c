@@ -634,7 +634,7 @@ static float upvec2roll(HSD_CObj* cobj, Vec3* up)
             dot = 0.0f;
         } else {
             C_MTXLookAt(vmtx, &orig, &uy, &eye);
-            MTXMultVecSR(vmtx, up, &v);
+            PSMTXMultVecSR(vmtx, up, &v);
             if (fabsf_bitwise(v.y) == 0.0f) {
                 dot = -v.x >= 0.0f ? 1.5707963267948966 : -1.5707963267948966;
             } else {
@@ -670,8 +670,8 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
         v0.x = eye.x * (-eye.y / v0.y);
         v0.z = eye.z * (-eye.y / v0.y);
     }
-    MTXRotAxisRad(m, &eye, -roll);
-    MTXMultVecSR(m, &v0, &v1);
+    PSMTXRotAxisRad(m, &eye, -roll);
+    PSMTXMultVecSR(m, &v0, &v1);
     VECNormalize(&v1, up);
     return 0;
 }

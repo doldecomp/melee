@@ -1203,7 +1203,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
             if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C)) {
                 VECSubtract(&sp5C, &spB0, &sp5C);
                 if (temp_f26 != 0.0F) {
-                    MTXRotAxisRad(sp20, &sp68, temp_f26);
+                    PSMTXRotAxisRad(sp20, &sp68, temp_f26);
                     MTXMultVec(sp20, &sp5C, &sp5C);
                 }
                 VECCrossProduct(&sp68, &sp5C, &sp50);
@@ -1369,7 +1369,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
                 sp1C.y = mtx[1][2];
                 sp1C.z = mtx[2][2];
             }
-            MTXRotAxisRad(sp34, &sp1C, var_f1_2);
+            PSMTXRotAxisRad(sp34, &sp1C, var_f1_2);
             MTXMultVec(sp34, &sp28, &sp7C);
         }
     }

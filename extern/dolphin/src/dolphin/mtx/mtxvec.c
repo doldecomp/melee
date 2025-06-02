@@ -124,13 +124,13 @@ loop:
     // clang-format on
 }
 
-void MTXMultVecSR(Mtx44 m, Vec* src, Vec* dst)
+void C_MTXMultVecSR(Mtx44 m, Vec* src, Vec* dst)
 {
     Vec vTmp;
 
-    ASSERTMSGLINE(0x13A, m, "MTXMultVecSR():  NULL MtxPtr 'm' ");
-    ASSERTMSGLINE(0x13B, src, "MTXMultVecSR():  NULL MtxPtr 'src' ");
-    ASSERTMSGLINE(0x13C, dst, "MTXMultVecSR():  NULL MtxPtr 'dst' ");
+    ASSERTMSGLINE(0x13A, m, "PSMTXMultVecSR():  NULL MtxPtr 'm' ");
+    ASSERTMSGLINE(0x13B, src, "PSMTXMultVecSR():  NULL MtxPtr 'src' ");
+    ASSERTMSGLINE(0x13C, dst, "PSMTXMultVecSR():  NULL MtxPtr 'dst' ");
     vTmp.x = (m[0][2] * src->z) + ((m[0][0] * src->x) + (m[0][1] * src->y));
     vTmp.y = (m[1][2] * src->z) + ((m[1][0] * src->x) + (m[1][1] * src->y));
     vTmp.z = (m[2][2] * src->z) + ((m[2][0] * src->x) + (m[2][1] * src->y));
