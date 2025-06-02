@@ -367,6 +367,7 @@ def DolphinLib(
             "-Iextern/dolphin/include",
             "-Iextern/dolphin/include/libc",
             "-Isrc/MSL",
+            "-Isrc/Runtime",
             "-ir extern/dolphin/src",
             "-DRELEASE",
         ]

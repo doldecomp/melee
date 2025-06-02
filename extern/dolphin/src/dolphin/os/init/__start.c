@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include <dolphin.h>
 #include <dolphin/os.h>
 
@@ -8,8 +10,11 @@
 #define BOOTINFO2_ADDR 0x800000F4
 #define OS_BI2_DEBUGFLAG_OFFSET 0xC
 #define ARENAHI_ADDR 0x80000034
-#define DEBUGFLAG_ADDR 0x800030E8
+#define PAD3_BUTTON_ADDR 0x800030E4
 #define DVD_DEVICECODE_ADDR 0x800030E6
+#define DEBUGFLAG_ADDR 0x800030E8
+
+u16 Pad3Button AT_ADDRESS(PAD3_BUTTON_ADDR);
 
 extern void InitMetroTRK();
 
@@ -38,8 +43,16 @@ __declspec(section ".init") extern void __init_hardware(void);
 __declspec(section ".init") extern void __flush_cache(void* address,
                                                       unsigned int size);
 
-static void __init_registers(void);
-static void __init_data(void);
+static void __check_pad3(void);
+
+#define RESET_BUTTON_MASK 0x0EEF
+
+static void __check_pad3(void)
+{
+    if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK) {
+        OSResetSystem(OS_RESET_RESTART, 0, false);
+    }
+}
 
 __declspec(section ".init") __declspec(weak) asm void __start(void)
 {
@@ -121,7 +134,7 @@ _end_of_parseargs:
     beq _check_pad3
     andi. r3, r3, 0x7fff
     cmplwi r3, 1
-    bne _goto_end
+    bne _goto_skip_init_bba
 
 _check_pad3:
     bl __check_pad3
