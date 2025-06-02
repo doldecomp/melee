@@ -7,6 +7,8 @@
 #include "MetroTRK/nubevent.h"
 #include "MetroTRK/trk.h"
 
+#include <dolphin/os.h>
+
 typedef enum ValidMemoryOptions {
     kValidMemoryReadable = 0,
     kValidMemoryWriteable = 1
@@ -33,6 +35,9 @@ typedef struct DSCPUType {
     /* 0x05 */ u8 extended1TypeSize;
     /* 0x06 */ u8 extended2TypeSize;
 } DSCPUType; // size = 0x07
+
+OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);
+OSThread* __OSCurrentThread AT_ADDRESS(0x800000E4);
 
 void TRKTargetSetStopped(bool);
 void TRKTargetSetInputPendingPtr(void*);

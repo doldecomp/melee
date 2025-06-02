@@ -205,17 +205,17 @@ GXProjectionType makeProjectionMtx(HSD_CObj* cobj, Mtx mtx)
     switch (cobj->projection_type) {
     case PROJ_PERSPECTIVE:
         projection_type = GX_PERSPECTIVE;
-        C_MTXPerspective(mtx, cobj->projection_param.perspective.fov,
-                         cobj->projection_param.perspective.aspect, cobj->near,
-                         cobj->far);
+        MTXPerspective(mtx, cobj->projection_param.perspective.fov,
+                       cobj->projection_param.perspective.aspect, cobj->near,
+                       cobj->far);
         break;
     case PROJ_FRUSTUM:
         projection_type = GX_PERSPECTIVE;
-        C_MTXFrustum(mtx, cobj->projection_param.perspective.fov,
-                     cobj->projection_param.perspective.aspect,
-                     cobj->projection_param.frustum.left,
-                     cobj->projection_param.frustum.right, cobj->near,
-                     cobj->far);
+        MTXFrustum(mtx, cobj->projection_param.perspective.fov,
+                   cobj->projection_param.perspective.aspect,
+                   cobj->projection_param.frustum.left,
+                   cobj->projection_param.frustum.right, cobj->near,
+                   cobj->far);
         break;
     case PROJ_ORTHO:
         projection_type = GX_ORTHOGRAPHIC;
@@ -346,11 +346,11 @@ static bool setupTopHalfCamera(HSD_CObj* cobj)
                 tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = t * cobj->projection_param.perspective.aspect;
             b = t * -(2.0f * h_scale - 1.0f);
-            C_MTXFrustum(p, t, b, -w, w, cobj->near, cobj->far);
+            MTXFrustum(p, t, b, -w, w, cobj->near, cobj->far);
             break;
         case PROJ_FRUSTUM:
             projection_type = GX_PERSPECTIVE;
-            C_MTXFrustum(
+            MTXFrustum(
                 p, cobj->projection_param.perspective.fov,
                 -(h_scale * (cobj->projection_param.perspective.fov -
                              cobj->projection_param.perspective.aspect) -
@@ -432,17 +432,17 @@ static bool setupBottomHalfCamera(HSD_CObj* cobj)
                 tanf(DegToRad(0.5 * cobj->projection_param.perspective.fov));
             w = b * cobj->projection_param.perspective.aspect;
             t = b * (2.0f * hscale + -1.0f);
-            C_MTXFrustum(p, t, -b, -w, w, cobj->near, cobj->far);
+            MTXFrustum(p, t, -b, -w, w, cobj->near, cobj->far);
             break;
         case PROJ_FRUSTUM:
             projection_type = GX_PERSPECTIVE;
             h = (hscale * (cobj->projection_param.perspective.fov -
                            cobj->projection_param.perspective.aspect) +
                  cobj->projection_param.perspective.aspect);
-            C_MTXFrustum(p, h, cobj->projection_param.perspective.aspect,
-                         cobj->projection_param.frustum.left,
-                         cobj->projection_param.frustum.right, cobj->near,
-                         cobj->far);
+            MTXFrustum(p, h, cobj->projection_param.perspective.aspect,
+                       cobj->projection_param.frustum.left,
+                       cobj->projection_param.frustum.right, cobj->near,
+                       cobj->far);
             break;
         case PROJ_ORTHO:
             projection_type = GX_ORTHOGRAPHIC;

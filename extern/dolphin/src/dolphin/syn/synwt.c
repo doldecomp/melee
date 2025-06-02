@@ -1,12 +1,13 @@
-#include <dolphin.h>
-#include <dolphin/syn.h>
-#include "fake_tgmath.h"
-
 #include "__syn.h"
 
-int __SYNGetWavetableData(struct SYNVOICE * voice) {
+#include <dolphin.h>
+#include <dolphin/syn.h>
+
+
+int __SYNGetWavetableData(struct SYNVOICE* voice)
+{
     u32 regionIndex;
-    struct SYNSYNTH * synth;
+    struct SYNSYNTH* synth;
 
     synth = voice->synth;
     regionIndex = synth->inst[voice->midiChannel]->keyRegion[voice->keyNum];

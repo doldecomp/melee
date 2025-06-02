@@ -3642,7 +3642,7 @@ MetroTRK/targcont.c:
 dolphin/amcstubs/AmcExi2Stubs.c:
 	.text       start:0x8032AFB4 end:0x8032AFE4
 
-dolphin/OdemuExi2/DebuggerDriver.c:
+dolphin/odenotstub/odenotstub.c:
 	.text       start:0x8032AFE4 end:0x8032BA6C
 	.sdata      start:0x804D5B60 end:0x804D5B68
 	.sbss       start:0x804D7088 end:0x804D70A0
@@ -3811,7 +3811,7 @@ dolphin/mtx/vec.c:
 	.text       start:0x80342D54 end:0x80342E94
 	.sdata2     start:0x804DE340 end:0x804DE348
 
-dolphin/os/OSInit.c:
+dolphin/os/OS.c:
 	.text       start:0x80342E94 end:0x80343720
 	.data       start:0x80401618 end:0x804017D8
 	.sbss       start:0x804D7338 end:0x804D7358

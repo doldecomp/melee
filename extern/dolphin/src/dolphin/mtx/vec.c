@@ -1,11 +1,12 @@
 #include <dolphin.h>
+#include <math_ppc.h>
 #include <dolphin/mtx.h>
-#include "fake_tgmath.h"
 
 // defines to make asm work
 #define qr0 0
 
-void C_VECAdd(Vec *a, Vec *b, Vec *c) {
+void C_VECAdd(Vec* a, Vec* b, Vec* c)
+{
     ASSERTMSGLINE(0x57, a, "VECAdd():  NULL VecPtr 'a' ");
     ASSERTMSGLINE(0x58, b, "VECAdd():  NULL VecPtr 'b' ");
     ASSERTMSGLINE(0x59, c, "VECAdd():  NULL VecPtr 'ab' ");
@@ -14,7 +15,9 @@ void C_VECAdd(Vec *a, Vec *b, Vec *c) {
     c->z = a->z + b->z;
 }
 
-asm void PSVECAdd(register Vec *a, register Vec *b, register Vec *c) {
+asm void PSVECAdd(register Vec* a, register Vec* b, register Vec* c)
+{
+    // clang-format off
     psq_l f2, Vec.x(a), 0, qr0
     psq_l f4, Vec.x(b), 0, qr0
     ps_add f6, f2, f4
@@ -23,9 +26,11 @@ asm void PSVECAdd(register Vec *a, register Vec *b, register Vec *c) {
     psq_l f5, Vec.z(b), 1, qr0
     ps_add f7, f3, f5
     psq_st f7, Vec.z(c), 1, qr0
+    // clang-format on
 }
 
-void C_VECSubtract(Vec *a, Vec *b, Vec *c) {
+void C_VECSubtract(Vec* a, Vec* b, Vec* c)
+{
     ASSERTMSGLINE(0x9C, a, "VECSubtract():  NULL VecPtr 'a' ");
     ASSERTMSGLINE(0x9D, b, "VECSubtract():  NULL VecPtr 'b' ");
     ASSERTMSGLINE(0x9E, c, "VECSubtract():  NULL VecPtr 'a_b' ");
@@ -34,7 +39,9 @@ void C_VECSubtract(Vec *a, Vec *b, Vec *c) {
     c->z = a->z - b->z;
 }
 
-asm void PSVECSubtract(register Vec *a, register Vec *b, register Vec *c) {
+asm void PSVECSubtract(register Vec* a, register Vec* b, register Vec* c)
+{
+    // clang-format off
     psq_l f2, Vec.x(a), 0, qr0
     psq_l f4, Vec.x(b), 0, qr0
     ps_sub f6, f2, f4
@@ -43,9 +50,11 @@ asm void PSVECSubtract(register Vec *a, register Vec *b, register Vec *c) {
     psq_l f5, Vec.z(b), 1, qr0
     ps_sub f7, f3, f5
     psq_st f7, Vec.z(c), 1, qr0
+    // clang-format on
 }
 
-void C_VECScale(Vec *src, Vec *dst, f32 scale) {
+void C_VECScale(Vec* src, Vec* dst, f32 scale)
+{
     ASSERTMSGLINE(0xE2, src, "VECScale():  NULL VecPtr 'src' ");
     ASSERTMSGLINE(0xE3, dst, "VECScale():  NULL VecPtr 'dst' ");
     dst->x = (src->x * scale);
@@ -53,7 +62,9 @@ void C_VECScale(Vec *src, Vec *dst, f32 scale) {
     dst->z = (src->z * scale);
 }
 
-asm void PSVECScale(register Vec *src, register Vec *dst, register f32 mult) {
+asm void PSVECScale(register Vec* src, register Vec* dst, register f32 mult)
+{
+    // clang-format off
     psq_l f2, Vec.x(src), 0, qr0
     ps_merge00 f4, mult, mult
     ps_mul f6, f2, f4
@@ -61,22 +72,27 @@ asm void PSVECScale(register Vec *src, register Vec *dst, register f32 mult) {
     psq_l f3, Vec.z(src), 1, qr0
     ps_mul f7, f3, f4
     psq_st f7, Vec.z(dst), 1, qr0
+    // clang-format on
 }
 
-void C_VECNormalize(Vec *src, Vec *unit) {
+void C_VECNormalize(Vec* src, Vec* unit)
+{
     f32 mag;
 
     ASSERTMSGLINE(0x127, src, "VECNormalize():  NULL VecPtr 'src' ");
     ASSERTMSGLINE(0x128, unit, "VECNormalize():  NULL VecPtr 'unit' ");
     mag = (src->z * src->z) + ((src->x * src->x) + (src->y * src->y));
-    ASSERTMSGLINE(0x12D, 0.0f != mag, "VECNormalize():  zero magnitude vector ");
-    mag = 1.0f/ sqrtf(mag);
+    ASSERTMSGLINE(0x12D, 0.0f != mag,
+                  "VECNormalize():  zero magnitude vector ");
+    mag = 1.0f / sqrtf(mag);
     unit->x = src->x * mag;
     unit->y = src->y * mag;
     unit->z = src->z * mag;
 }
 
-void PSVECNormalize(register Vec *vec1, register Vec *dst) {
+void PSVECNormalize(register Vec* vec1, register Vec* dst)
+{
+    // clang-format off
     register float c_half = 0.5f;
     register float c_three = 3.0f;
     register float v1_xy;
@@ -105,9 +121,11 @@ void PSVECNormalize(register Vec *vec1, register Vec *dst) {
         ps_muls0 v1_z, v1_z, rsqrt
         psq_st v1_z, Vec.z(dst), 1, qr0
     }
+    // clang-format on
 }
 
-f32 C_VECSquareMag(Vec *v) {
+f32 C_VECSquareMag(Vec* v)
+{
     f32 sqmag;
 
     ASSERTMSGLINE(0x182, v, "VECMag():  NULL VecPtr 'v' ");
@@ -116,20 +134,24 @@ f32 C_VECSquareMag(Vec *v) {
     return sqmag;
 }
 
-asm f32 PSVECSquareMag(register Vec *vec1) {
+asm f32 PSVECSquareMag(register Vec* vec1){
+    // clang-format off
     psq_l f2, Vec.x(vec1), 0, qr0
     ps_mul f3, f2, f2
     lfs f4, Vec.z(vec1)
     ps_madd f5, f4, f4, f3
     ps_sum0 f1, f5, f3, f3 // return square mag in f1
     blr //! whoops! an extra blr is added by the compiler since 1 is added automatically.
+    // clang-format on
 }
 
-f32 VECMag(Vec *v) {
+f32 VECMag(Vec* v)
+{
     return sqrtf(VECSquareMag(v));
 }
 
-f32 C_VECDotProduct(Vec *a, Vec *b) {
+f32 C_VECDotProduct(Vec* a, Vec* b)
+{
     f32 dot;
 
     ASSERTMSGLINE(0x1D1, a, "VECDotProduct():  NULL VecPtr 'a' ");
@@ -138,7 +160,9 @@ f32 C_VECDotProduct(Vec *a, Vec *b) {
     return dot;
 }
 
-asm f32 PSVECDotProduct(register Vec *vec1, register Vec *vec2) {
+asm f32 PSVECDotProduct(register Vec* vec1, register Vec* vec2)
+{
+    // clang-format off
     psq_l f2, Vec.y(vec1), 0, qr0
     psq_l f3, Vec.y(vec2), 0, qr0
     ps_mul f2, f2, f3
@@ -146,9 +170,11 @@ asm f32 PSVECDotProduct(register Vec *vec1, register Vec *vec2) {
     psq_l f4, Vec.x(vec2), 0, qr0
     ps_madd f3, f5, f4, f2
     ps_sum0 f1, f3, f2, f2
+    // clang-format on
 }
 
-void C_VECCrossProduct(Vec *a, Vec *b, Vec *axb) {
+void C_VECCrossProduct(Vec* a, Vec* b, Vec* axb)
+{
     Vec vTmp;
 
     ASSERTMSGLINE(0x20F, a, "VECCrossProduct():  NULL VecPtr 'a' ");
@@ -163,7 +189,10 @@ void C_VECCrossProduct(Vec *a, Vec *b, Vec *axb) {
     axb->z = vTmp.z;
 }
 
-asm void PSVECCrossProduct(register Vec *vec1, register Vec *vec2, register Vec *dst) {
+asm void PSVECCrossProduct(register Vec* vec1, register Vec* vec2,
+                           register Vec* dst)
+{
+    // clang-format off
     psq_l f1, Vec.x(vec2), 0, qr0
     lfs f2, Vec.z(vec1)
     psq_l f0, Vec.x(vec1), 0, qr0
@@ -178,9 +207,11 @@ asm void PSVECCrossProduct(register Vec *vec1, register Vec *vec2, register Vec 
     psq_st f9, Vec.x(dst), 1, qr0
     ps_neg f10, f10
     psq_st f10, Vec.y(dst), 0, qr0
+    // clang-format on
 }
 
-void VECHalfAngle(Vec *a, Vec *b, Vec *half) {
+void VECHalfAngle(Vec* a, Vec* b, Vec* half)
+{
     Vec aTmp;
     Vec bTmp;
     Vec hTmp;
@@ -204,7 +235,8 @@ void VECHalfAngle(Vec *a, Vec *b, Vec *half) {
     *half = hTmp;
 }
 
-void VECReflect(Vec *src, Vec *normal, Vec *dst) {
+void VECReflect(Vec* src, Vec* normal, Vec* dst)
+{
     f32 cosA;
     Vec uI;
     Vec uN;
@@ -225,7 +257,8 @@ void VECReflect(Vec *src, Vec *normal, Vec *dst) {
     VECNormalize(dst, dst);
 }
 
-f32 C_VECSquareDistance(Vec *a, Vec *b) {
+f32 C_VECSquareDistance(Vec* a, Vec* b)
+{
     Vec diff;
 
     diff.x = a->x - b->x;
@@ -234,7 +267,8 @@ f32 C_VECSquareDistance(Vec *a, Vec *b) {
     return (diff.z * diff.z) + ((diff.x * diff.x) + (diff.y * diff.y));
 }
 
-asm f32 PSVECSquareDistance(register Vec *vec1, register Vec *vec2) {
+asm f32 PSVECSquareDistance(register Vec* vec1, register Vec* vec2){
+    // clang-format off
     psq_l f2, Vec.y(vec1), 0, qr0
     psq_l f3, Vec.y(vec2), 0, qr0
     ps_sub f2, f2, f3
@@ -243,9 +277,11 @@ asm f32 PSVECSquareDistance(register Vec *vec1, register Vec *vec2) {
     ps_mul f4, f2, f2
     ps_sub f6, f5, f6
     ps_madd f5, f6, f6, f4
-    ps_sum0 f1, f5, f4, f4    
+    ps_sum0 f1, f5, f4, f4
+    // clang-format on
 }
 
-f32 VECDistance(Vec *a, Vec *b) {
+f32 VECDistance(Vec* a, Vec* b)
+{
     return sqrtf(VECSquareDistance(a, b));
 }

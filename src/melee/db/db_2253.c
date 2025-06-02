@@ -27,12 +27,10 @@
 
 #include <common_structs.h>
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/card/CARDMount.h>
-#include <dolphin/db/db.h>
+#include <dolphin/card.h>
+#include <dolphin/db.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/vec.h>
-#include <dolphin/vi/vi.h>
+#include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>

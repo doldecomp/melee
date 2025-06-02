@@ -56,11 +56,8 @@ typedef f32 (*Mtx44Ptr)[4];
 typedef f32 ROMtx[4][3];
 typedef f32 (*ROMtxPtr)[3];
 
-void MTXScale(Mtx m, f32 xS, f32 yS, f32 zS);
-void MTXOrtho(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f);
-
-void C_MTXFrustum(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f);
-void C_MTXPerspective(Mtx44 m, f32 fovY, f32 aspect, f32 n, f32 f);
+void MTXFrustum(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f);
+void MTXPerspective(Mtx44 m, f32 fovY, f32 aspect, f32 n, f32 f);
 void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 
 #ifdef DEBUG
@@ -78,6 +75,7 @@ void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 #define MTXConcat C_MTXConcat
 #define MTXInverse C_MTXInverse
 #define MTXTranspose C_MTXTranspose
+#define MTXScale C_MTXScale
 #define MTXIdentity C_MTXIdentity
 #else
 #define VECSquareMag PSVECSquareMag
@@ -94,6 +92,7 @@ void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 #define MTXConcat PSMTXConcat
 #define MTXInverse PSMTXInverse
 #define MTXTranspose PSMTXTranspose
+#define MTXScale PSMTXScale
 #define MTXIdentity PSMTXIdentity
 #endif
 
@@ -111,7 +110,6 @@ void MTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA);
 void MTXRotAxisRad(Mtx m, Vec* axis, f32 rad);
 void MTXTrans(Mtx m, f32 xT, f32 yT, f32 zT);
 void MTXTransApply(Mtx src, Mtx dst, f32 xT, f32 yT, f32 zT);
-void MTXScale(Mtx m, f32 xS, f32 yS, f32 zS);
 void MTXScaleApply(Mtx src, Mtx dst, f32 xS, f32 yS, f32 zS);
 void MTXQuat(Mtx m, QuaternionPtr q);
 void MTXReflect(Mtx m, Vec* p, Vec* n);
@@ -128,6 +126,7 @@ void C_MTXIdentity(Mtx m);
 void C_MTXCopy(Mtx src, Mtx dst);
 void C_MTXConcat(Mtx a, Mtx b, Mtx ab);
 void C_MTXTranspose(Mtx src, Mtx xPose);
+void C_MTXScale(Mtx m, f32 xS, f32 yS, f32 zS);
 u32 C_MTXInverse(Mtx src, Mtx inv);
 u32 C_MTXInvXpose(Mtx src, Mtx invX);
 
@@ -136,6 +135,7 @@ void PSMTXIdentity(Mtx m);
 void PSMTXCopy(Mtx src, Mtx dst);
 void PSMTXConcat(Mtx mA, Mtx mB, Mtx mAB);
 void PSMTXTranspose(Mtx src, Mtx xPose);
+void PSMTXScale(Mtx m, f32 xS, f32 yS, f32 zS);
 u32 PSMTXInverse(Mtx src, Mtx inv);
 u32 PSMTXInvXpose(Mtx src, Mtx invX);
 

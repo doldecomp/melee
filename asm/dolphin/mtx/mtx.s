@@ -175,8 +175,8 @@ PSMTXInverse:
 /* 80342410 0033EFF0  F0 E4 80 2C */	psq_st f7, 44(r4), 1, qr0
 /* 80342414 0033EFF4  4E 80 00 20 */	blr
 
-.global PSMTXRotRad
-PSMTXRotRad:
+.global MTXRotRad
+MTXRotRad:
 /* 80342418 0033EFF8  7C 08 02 A6 */	mflr r0
 /* 8034241C 0033EFFC  90 01 00 04 */	stw r0, 4(r1)
 /* 80342420 0033F000  94 21 FF D8 */	stwu r1, -0x28(r1)
