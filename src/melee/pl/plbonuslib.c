@@ -296,6 +296,7 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
 {
     Fighter_GObj* temp_r30;
     HSD_GObj* temp_r3_4;
+    f32 var_f1;
     pl_StaleMoveTableExt_t* temp_r31;
     s32 temp_r3_2;
     s32 temp_r3_3;
@@ -341,9 +342,7 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
     /// @todo This is obviously not right, but it matches
     if (((s32) * ((u8*) ft_80089884(temp_r30) + 2) >> 6U) & 1) {
         temp_r31->xD18 += 1U;
-
-        /// @todo uses fcmpu instead of fcmpo
-        if ((f32) temp_r31->xD18 == pl_804D6470->x64) {
+        if ((f32) temp_r31->xD18 >= pl_804D6470->x64) {
             temp_r31->xD14 += 1;
         }
     } else {
@@ -353,15 +352,12 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
         temp_r31->xD1C += 1;
     }
     if (ftLib_800865CC(temp_r30) == 0) {
-        ftLib_8008777C(temp_r30);
-        if (M2C_ERROR(/* Read from unset register $f1 */) < 0.0f) {
-            ftLib_8008777C(temp_r30);
+        if (ftLib_8008777C(temp_r30) < 0.0f) {
+            var_f1 = -ftLib_8008777C(temp_r30);
         } else {
-            ftLib_8008777C(temp_r30);
+            var_f1 = ftLib_8008777C(temp_r30);
         }
-        M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-        if (M2C_ERROR(/* Read from unset register $f1 */) == pl_804D6470->x58)
-        {
+        if (var_f1 >= pl_804D6470->x58) {
             temp_r31->xD28 += 1;
         }
     }
@@ -402,22 +398,21 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
     if (temp_r3_4 != NULL) {
         var_r3 = itGetKind((Item_GObj*) temp_r3_4);
         if ((var_r3 >= 0) && (var_r3 < 0x23)) {
-            // Empty if
         } else {
-            switch (var_r3) {
-            case 0xCD:
+            switch (var_r3) { /* switch 1; irregular */
+            case 0xCD:        /* switch 1 */
                 var_r3 = 0x23;
                 break;
-            case 0xE1:
+            case 0xE1: /* switch 1 */
                 var_r3 = 0x24;
                 break;
-            case 0xE2:
+            case 0xE2: /* switch 1 */
                 var_r3 = 0x25;
                 break;
-            case 0x28:
+            case 0x28: /* switch 1 */
                 var_r3 = 0x26;
                 break;
-            default:
+            default: /* switch 1 */
                 var_r3 = -1;
                 break;
             }
