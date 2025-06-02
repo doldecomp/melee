@@ -1602,13 +1602,22 @@ melee/gm/gmmain.c:
 	.sbss       start:0x804D6590 end:0x804D6598
 
 melee/gm/gm_1601.c:
-	.text       start:0x801601C4 end:0x8019EFC4
-	.rodata     start:0x803B75F8 end:0x803B7D50
-	.data       start:0x803D4C38 end:0x803DA3E0
-	.bss        start:0x8046B378 end:0x80479A98
-	.sdata      start:0x804D3EF8 end:0x804D41F0
-	.sbss       start:0x804D6598 end:0x804D6698
-	.sdata2     start:0x804DA230 end:0x804DA950
+	.text       start:0x801601C4 end:0x8019B8C4
+	.rodata     start:0x803B75F8 end:0x803B7D18
+	.data       start:0x803D4C38 end:0x803DA2E0
+	.bss        start:0x8046B378 end:0x80479A58
+	.sdata      start:0x804D3EF8 end:0x804D41B8
+	.sbss       start:0x804D6598 end:0x804D6660
+	.sdata2     start:0x804DA230 end:0x804DA878
+
+melee/gm/gmtou.c:
+	.text       start:0x8019B8C4 end:0x8019EFC4
+	.rodata     start:0x803B7D18 end:0x803B7D50
+	.data       start:0x803DA2E0 end:0x803DA3E0
+	.bss        start:0x80479A58 end:0x80479A98
+	.sdata      start:0x804D41B8 end:0x804D41F0
+	.sbss       start:0x804D6660 end:0x804D6698
+	.sdata2     start:0x804DA878 end:0x804DA950
 
 melee/gm/gm_19EF.c:
 	.text       start:0x8019EFC4 end:0x801A0E34
