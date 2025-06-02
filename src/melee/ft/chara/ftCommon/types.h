@@ -90,7 +90,7 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ int x0;
         /* fp+2344 */ int x4;
-        /* fp+2344 */ float x8;
+        /* fp+2348 */ float x8;
     } jump;
     struct {
         /* fp+2340 */ u8 pad_x0[4];
@@ -309,11 +309,6 @@ union ftCommon_MotionVars {
         /* fp+235C */ int x1C;
         /* fp+2360 */ ftCollisionBox ecb;
     } warpstar;
-    struct {
-        /* fp+2340 */ int x0;
-        /* fp+2344 */ int x4;
-        /* fp+2344 */ float x8;
-    } jumpb;
     struct {
         /* fp+2340 */ int x0;
         /* fp+2344 */ int x4;

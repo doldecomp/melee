@@ -12,23 +12,29 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AirCatch.h"
+#include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_AttackS4.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Escape.h"
+#include "ftCommon/ftCo_EscapeAir.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_HammerFall.h"
 #include "ftCommon/ftCo_HammerJump.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
+#include "ftPeach/ftPe_Float.h"
 
 #include <baselib/gobj.h>
 
@@ -772,7 +778,23 @@ bool fn_800CAF78(Fighter_GObj* gobj)
 
 /// #ftCo_Jump_Anim
 
-/// #ftCo_Jump_IASA
+void ftCo_Jump_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
+    RETURN_IF(ftCo_80095328(gobj, NULL));
+    RETURN_IF(ftCo_800D7100(gobj));
+    RETURN_IF(ftCo_800C3B10(gobj));
+    RETURN_IF(ftCo_80099A58(gobj));
+    RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
+    RETURN_IF(ftCo_800D705C(gobj));
+    RETURN_IF(!(fp->mv.co.jump.x4 == 0) && ftCo_800CEE70(gobj));
+    RETURN_IF(!(fp->mv.co.jump.x4 == 0) && ftPe_8011BA54(gobj));
+    RETURN_IF(ftCo_800CB870(gobj));
+    RETURN_IF(fp->mv.co.jump.x4 == 0);
+    RETURN_IF(ftPe_8011BAD8(gobj));
+}
 
 /// #ftCo_800CB438
 
@@ -803,7 +825,10 @@ void ftCo_KneeBend_Enter(Fighter_GObj* gobj, int arg1)
 
 /// #ft_800CB804
 
-/// #ftCo_800CB870
+bool ftCo_800CB870(Fighter_GObj* gobj)
+{
+    NOT_IMPLEMENTED;
+}
 
 /// #ftCo_800CB8E0
 
