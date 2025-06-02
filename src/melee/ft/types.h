@@ -1068,6 +1068,13 @@ struct Fighter_x59C_t {
 };
 STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
 
+struct ft_800898B4_t {
+    /*   +0 */ int x0;
+    /*   +4 */ int x4;
+    /*   +8 */ float kb_applied1;
+    /*   +C */ UNK_T xC UNK_SIZE_ARRAY;
+}; // Unknown size
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -1318,9 +1325,7 @@ struct Fighter {
         /* fp+18CC */ int x18CC;
         /* fp+18D0 */ int x18D0;
         /* fp+18D4 */ int x18d4;
-        /* fp+18D8 */ int x18d8;
-        /* fp+18DC */ int x18dc;
-        /* fp+18E0 */ float kb_applied1;
+        /* fp+18D8 */ ft_800898B4_t x18d8;
         /* fp+18E4 */ int x18e4;
         /* fp+18E8 */ int x18e8;
         /// Last Move Instance This Player Was Hit by

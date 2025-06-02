@@ -151,7 +151,7 @@ s32 ft_80087A98(HSD_GObj* gobj)
     return fp->x213C;
 }
 
-u8 ft_80087AA4(HSD_GObj* gobj)
+s32 ft_80087AA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x2227_b5;

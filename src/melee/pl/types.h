@@ -71,7 +71,7 @@ typedef struct StaleMoveTable {
     /* +CDC */ f32 xCDC;
     /* +CE0 */ f32 xCE0;
     /* +CE4 */ s32 xCE4;
-    /* +CE8 */ u8 xCE8[0xCEC - 0xCE8];
+    /* +CE8 */ s32 xCE8;
     /* +CEC */ int xCEC;
     /* +CF0 */ int xCF0;
 } StaleMoveTable;
@@ -166,7 +166,8 @@ typedef struct pl_804D6470_t {
     /*  +84 */ f32 x84;
     /*  +88 */ u8 x88[0x98 - 0x88];
     /*  +98 */ f32 x98;
-    /*  +9C */ u8 x9C[0xA4 - 0x9C];
+    /*  +9C */ u8 x9C[0xA0 - 0x9C];
+    /*  +A0 */ f32 xA0;
     /*  +A4 */ u32 xA4;
     /*  +A8 */ u8 xA8[0xB0 - 0xA8];
     /*  +B0 */ u32 xB0;

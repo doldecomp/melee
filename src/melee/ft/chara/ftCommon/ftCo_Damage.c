@@ -44,7 +44,7 @@
 #include "lb/lbbgflash.h"
 #include "lb/lbvector.h"
 #include "lb/types.h"
-#include "pl/pl_0371.h"
+#include "pl/plbonuslib.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
@@ -271,7 +271,7 @@ void ftCo_8008DCE0(ftCo_GObj* gobj, int arg1, float facing_dir)
     int var_r27 = 1;
     float kb_applied = fp->dmg.kb_applied;
     Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp, ftCo_803C5520[0][0]);
-    fp->dmg.kb_applied1 = kb_applied;
+    fp->dmg.x18d8.kb_applied1 = kb_applied;
     pl_80040270(fp->player_id, fp->x221F_b4, kb_applied);
     temp_f30 = kb_applied * p_ftCommonData->x154;
     fp->mv.co.damage.x0 = (int) temp_f30;

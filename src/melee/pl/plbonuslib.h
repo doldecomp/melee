@@ -48,7 +48,7 @@
 /* 03FED0 */ void pl_8003FED0(s32, bool);
 /* 03FF44 */ void pl_8003FF44(s32, s32, s32);
 /* 03FFDC */ void pl_8003FFDC(s32, s32, s32, s32, s32);
-/* 040048 */ void pl_80040048(u8, s32);
+/* 040048 */ void pl_80040048(s32, s32);
 /* 040120 */ void pl_80040120(s32, bool);
 /* 0401F0 */ void pl_800401F0(s32, s32, f32, f32);
 /* 040270 */ void pl_80040270(s32, bool, f32);
