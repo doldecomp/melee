@@ -118,9 +118,9 @@ void pl_8003E0E8(s32 arg0, bool arg1)
 
 void pl_8003E114(s32 arg0, s32 arg1, float arg2)
 {
-    M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-    RETURN_IF(arg2 != pl_804D6470->x84);
-    pl_80038788(arg0, 0x41, 1);
+    if (arg2 <= pl_804D6470->x84) {
+        pl_80038788(arg0, 0x41, 1);
+    }
 }
 
 void pl_8003E150(s32 slot, s32 arg1)
@@ -223,8 +223,7 @@ void pl_8003E854(s32 arg0, s32 arg1, Item_GObj* arg2)
         }
     }
     if (itGetKind(arg2) == 6) {
-        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if (it_8026B960(arg2) == pl_804D6470->x180) {
+        if (it_8026B960(arg2) <= pl_804D6470->x180) {
             pl_800419AC(arg0, arg1, (u16) it_8026B7CC(arg2));
         }
     }
@@ -651,12 +650,10 @@ void pl_80040048(s32 arg0, s32 arg1)
     RETURN_IF(temp_r3_2 == 6);
     temp_f31 = ft_800898B4(temp_r3)->kb_applied1;
     temp_r3_3 = Player_GetStaleMoveTableIndexPtr2((s32) arg0);
-    M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-    if (temp_f31 == pl_804D6470->x98) {
+    if (temp_f31 >= pl_804D6470->x98) {
         temp_r3_3->x0_staleMoveTable.xCE8 += 1;
     }
-    M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-    if ((temp_f31 == pl_804D6470->xA0) && (ft_80087AA4(temp_r3) == 0) &&
+    if ((temp_f31 >= pl_804D6470->xA0) && (ft_80087AA4(temp_r3) == 0) &&
         (ft_80087AB4(temp_r3) <= 1U))
     {
         pl_80038824((s32) arg0, 0x48);
@@ -722,8 +719,7 @@ void pl_80040270(s32 arg0, bool arg1, f32 arg2)
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     RETURN_IF(arg1);
 
-    M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-    if (arg2 == pl_804D6470->x98) {
+    if (arg2 >= pl_804D6470->x98) {
         temp_r3->x0_staleMoveTable.xCE4 += 1;
     }
 }
