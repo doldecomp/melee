@@ -55,6 +55,17 @@ union ftCommon_MotionVars {
         /* fp+2360 */ float accel_mul;
     } walk;
     struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ float x4;
+        /* fp+2348 */ float x8;
+        /* fp+234C */ u8 pad_xC[4];
+        /* fp+2350 */ float x10;
+        /* fp+2354 */ u8 pad_x14[4];
+        /* fp+2358 */ int x18;
+        /* fp+235C */ int x1C;
+
+    } turn;
+    struct {
         /* fp+2340 */ u8 pad_x0[12];
         /* fp+234C */ float accel_mul;
         /* fp+2350 */ u8 pad_x10[4];
@@ -62,6 +73,7 @@ union ftCommon_MotionVars {
     } turnrun;
     struct {
         /* fp+2340 */ float x0;
+        /* fp+2344 */ int x4;
     } dash;
     struct {
         /* fp+2340 */ float x0;
