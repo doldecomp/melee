@@ -25,7 +25,7 @@
 /* 04E684 */ UNK_RET mpLib_8004E684(UNK_PARAMS);
 /* 04EBF8 */ UNK_RET mpLib_8004EBF8(UNK_PARAMS);
 /* 04ED5C */ UNK_RET mpLib_8004ED5C(UNK_PARAMS);
-/* 04F008 */ bool mpLib_8004F008(Vec3*, int*, int, int, int, int, int, int,
+/* 04F008 */ bool mpLib_8004F008(Vec3*, int*, int, int, int, int, int, int, int,
                                  float, float, float, float, float);
 /* 04F400 */ UNK_RET mpLib_8004F400(UNK_PARAMS);
 /* 04F8A4 */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);

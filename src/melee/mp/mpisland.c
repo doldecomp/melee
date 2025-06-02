@@ -266,7 +266,7 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 {
     int i;
-    if (mpLib_8004F008(NULL, &i, 0, 0, -1, -1, -1, 0, arg0->x, arg0->y,
+    if (mpLib_8004F008(NULL, &i, 0, 0, -1, -1, -1, 0, 0, arg0->x, arg0->y,
                        arg0->x, arg0->y + arg1, 0.0F))
     {
         return mpIsland_8005AB54(i);
