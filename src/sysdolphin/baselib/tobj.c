@@ -445,7 +445,7 @@ static void TObjSetupMtx(HSD_TObj* tobj)
             HSD_ASSERT(0x2A8, cobj);
             vmtx = HSD_CObjGetViewingMtxPtrDirect(cobj);
             HSD_LObjGetLightVector(lobj, &ldir);
-            PSMTXMultVecSR(vmtx, &ldir, &ldir);
+            MTXMultVecSR(vmtx, &ldir, &ldir);
             ldir.z += -1.0F;
 
             PSVECNormalize(&ldir, &half);

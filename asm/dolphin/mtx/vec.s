@@ -56,8 +56,8 @@ PSVECNormalize:
 /* 80342DF4 0033F9D4  F0 64 80 08 */	psq_st f3, 8(r4), 1, qr0
 /* 80342DF8 0033F9D8  4E 80 00 20 */	blr
 
-.global PSVECMag
-PSVECMag:
+.global VECMag
+VECMag:
 /* 80342DFC 0033F9DC  E0 03 00 00 */	psq_l f0, 0(r3), 0, qr0
 /* 80342E00 0033F9E0  10 00 00 32 */	ps_mul f0, f0, f0
 /* 80342E04 0033F9E4  C0 23 00 08 */	lfs f1, 8(r3)

@@ -426,9 +426,9 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
                 jobj = (HSD_JObj*) gobj->hsd_obj;
 
                 matrix = HSD_CObjGetInvViewingMtxPtr(Camera_800310B8());
-                PSMTXMUltiVec(matrix,
-                              (Vec3*) &fighter->mv.co.walk.fast_anim_frame,
-                              &fighter2->cur_pos);
+                PSMTXMultVec(matrix,
+                             (Vec3*) &fighter->mv.co.walk.fast_anim_frame,
+                             &fighter2->cur_pos);
                 pos = &fighter2->cur_pos;
 
                 HSD_JObjSetTranslate(jobj, pos);

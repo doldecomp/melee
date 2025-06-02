@@ -15,6 +15,7 @@
 #include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
+#include <baselib/mtx.h>
 
 /* 2C027C */ static void it_802C027C(Item_GObj* gobj);
 /* 2C02E4 */ static bool it_802C02E4(Item_GObj* gobj);

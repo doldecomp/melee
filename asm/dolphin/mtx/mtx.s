@@ -498,8 +498,8 @@ C_MTXLookAt:
 /* 803428B8 0033F498  7C 08 03 A6 */	mtlr r0
 /* 803428BC 0033F49C  4E 80 00 20 */	blr
 
-.global C_MTXLightFrustum
-C_MTXLightFrustum:
+.global MTXLightFrustum
+MTXLightFrustum:
 /* 803428C0 0033F4A0  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 803428C4 0033F4A4  C1 81 00 38 */	lfs f12, 0x38(r1)
 /* 803428C8 0033F4A8  ED 44 18 28 */	fsubs f10, f4, f3
@@ -538,8 +538,8 @@ C_MTXLightFrustum:
 /* 8034294C 0033F52C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80342950 0033F530  4E 80 00 20 */	blr
 
-.global C_MTXLightPerspective
-C_MTXLightPerspective:
+.global MTXLightPerspective
+MTXLightPerspective:
 /* 80342954 0033F534  7C 08 02 A6 */	mflr r0
 /* 80342958 0033F538  90 01 00 04 */	stw r0, 4(r1)
 /* 8034295C 0033F53C  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -592,8 +592,8 @@ C_MTXLightPerspective:
 /* 80342A18 0033F5F8  7C 08 03 A6 */	mtlr r0
 /* 80342A1C 0033F5FC  4E 80 00 20 */	blr
 
-.global C_MTXLightOrtho
-C_MTXLightOrtho:
+.global MTXLightOrtho
+MTXLightOrtho:
 /* 80342A20 0033F600  ED 44 18 28 */	fsubs f10, f4, f3
 /* 80342A24 0033F604  C1 62 E9 30 */	lfs f11, MTX_804DE310@sda21(r2)
 /* 80342A28 0033F608  EC 01 10 28 */	fsubs f0, f1, f2

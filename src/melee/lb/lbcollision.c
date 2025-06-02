@@ -1329,8 +1329,8 @@ block_39:
         return 1;
     }
     // HSD_MtxInverse(arg6, (float(*)[4]) & sp9C[0]);
-    // PSMTXMUltiVec((float(*)[4]) & sp9C[0], arg4, (Vec3*) &sp11C);
-    // PSMTXMUltiVec((float(*)[4]) & sp9C[0], arg5, (Vec3*) &sp104);
+    // PSMTXMultVec((float(*)[4]) & sp9C[0], arg4, (Vec3*) &sp11C);
+    // PSMTXMultVec((float(*)[4]) & sp9C[0], arg5, (Vec3*) &sp104);
     temp_f1_9 = sp120 - sp108;
     temp_f4_10 = sp11C - sp104;
     temp_f2_7 = sp124 - sp10C;
