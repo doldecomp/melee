@@ -13,7 +13,7 @@ static void __OSSystemCallVectorStart(void);
 static void __OSSystemCallVectorEnd(void);
 
 #ifdef MWERKS_GEKKO
-asm void __OSSystemCallVector(void)
+asm void SystemCallVector(void)
 { // clang-format off
     nofralloc
 entry __OSSystemCallVectorStart
@@ -29,7 +29,7 @@ entry __OSSystemCallVectorEnd
 } // clang-format on
 #else
 
-void __OSSystemCallVector(void)
+void SystemCallVector(void)
 {
     NOT_IMPLEMENTED;
 }

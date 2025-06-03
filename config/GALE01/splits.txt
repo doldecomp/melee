@@ -3900,7 +3900,7 @@ dolphin/os/OSSync.c:
 
 dolphin/os/OSThread.c:
 	.text       start:0x8034AC04 end:0x8034C3F0
-	.data       start:0x80402420 end:0x80402C30
+	.data       start:0x80402420 end:0x80402C2D
 	.bss        start:0x804A7FB8 end:0x804A89A0
 	.sdata      start:0x804D5C28 end:0x804D5C30
 	.sbss       start:0x804D73D8 end:0x804D73E8

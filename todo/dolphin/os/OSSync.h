@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-void __OSSystemCallVector(void);
+void SystemCallVector(void);
 void __OSInitSystemCall(void);
 
 #endif
