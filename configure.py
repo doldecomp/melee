@@ -1513,7 +1513,7 @@ config.libs = [
         [
             Object(NonMatching, "dolphin/axfx/reverb_hi.c"),
             Object(NonMatching, "dolphin/axfx/reverb_std.c"),
-            Object(NonMatching, "dolphin/axfx/chorus.c"),
+            Object(Matching, "dolphin/axfx/chorus.c"),
             Object(NonMatching, "dolphin/axfx/delay.c"),
             Object(Matching, "dolphin/axfx/axfx.c"),
         ],

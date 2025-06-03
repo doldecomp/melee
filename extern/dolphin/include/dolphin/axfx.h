@@ -123,6 +123,9 @@ struct AXFX_CHORUS {
     /* 0x98 */ u32 period;
 };
 
+extern void* (*__AXFXAlloc)(unsigned long);
+extern void (*__AXFXFree)(void*);
+
 // chorus.c
 int AXFXChorusInit(struct AXFX_CHORUS* c);
 int AXFXChorusShutdown(struct AXFX_CHORUS* c);
