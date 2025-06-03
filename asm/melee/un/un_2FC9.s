@@ -15512,8 +15512,8 @@ un_804D6F54:
 .global un_804D6F58
 un_804D6F58:
     .skip 0x4
-.global un_804D6F5C
-un_804D6F5C:
+.global erase_colors_vi0401
+erase_colors_vi0401:
     .skip 0x4
 .global un_804D6F60
 un_804D6F60:
