@@ -2,6 +2,8 @@
 
 #include "plbonuslib.h"
 
+#include "inlines.h"
+
 #include "ft/ft_0877.h"
 #include "gm/gm_1601.h"
 #include "if/ifmagnify.h"
@@ -47,33 +49,19 @@ void plBonusLib_8003D514(int arg0)
 
 void pl_8003DF44(int arg0, int arg1)
 {
-    s32 temp_r31;
     s32 temp_r3;
-    bool var_r0;
     bool var_r0_2;
 
     temp_r3 = ftLib_80087300(Player_GetEntityAtIndex(arg0, arg1));
 
-    /// @todo: Logic looks similar to pl_8003E058, with similar issues
-
-    if ((temp_r3 != 6) && (temp_r3 != arg0)) {
-        if (gm_8016B168() && (temp_r31 = Player_GetTeam(arg0),
-                              /// @todo: Swap order of registers
-                              Player_GetTeam(temp_r3) == temp_r31))
-        {
-            var_r0 = true;
-        } else {
-            var_r0 = false;
-        }
-        if (!var_r0) {
-            goto block_7;
-        }
+    if ((temp_r3 == 6) || (temp_r3 == arg0) ||
+        pl_CheckIfSameTeam(arg0, temp_r3))
+    {
         var_r0_2 = true;
     } else {
-    block_7:
         var_r0_2 = false;
     }
-    if (!var_r0_2) {
+    if (var_r0_2 == false) {
         pl_StaleMoveTableExt_t* smte =
             Player_GetStaleMoveTableIndexPtr2(temp_r3);
         smte->xD54 = pl_804D6470->xB4;
@@ -82,27 +70,12 @@ void pl_8003DF44(int arg0, int arg1)
 
 void pl_8003E058(int arg0, s32 arg1, int arg2, s32 arg3)
 {
-    int arg2_player_team;
-    bool same_team;
-
     pl_80038824(arg2, 0x3F);
 
-    /// @todo: Logic looks similar to pl_8003DF44, with similar issues
+    RETURN_IF(arg0 == 6);
+    RETURN_IF(pl_CheckIfSameTeam(arg2, arg0));
 
-    if (arg0 == 6) {
-        return;
-    }
-    if (gm_8016B168() && (arg2_player_team = Player_GetTeam(arg2),
-                          /// @todo: Swap order of registers
-                          Player_GetTeam(arg0) == arg2_player_team))
-    {
-        same_team = true;
-    } else {
-        same_team = false;
-    }
-    if (!same_team) {
-        pl_80038824(arg0, 0x3E);
-    }
+    pl_80038824(arg0, 0x3E);
 }
 
 void pl_8003E0E8(s32 arg0, bool arg1)
