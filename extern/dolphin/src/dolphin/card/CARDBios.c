@@ -39,8 +39,8 @@ void __CARDExtHandler(s32 chan, OSContext *context) {
     {
         ASSERTLINE(0xBA, card->txCallback == 0);
         card->attached = FALSE;
-        card->result = CARD_RESULT_NOCARD;
         EXISetExiCallback(chan, 0);
+        OSCancelAlarm(&card->alarm);
         callback = card->exiCallback;
 
         if (callback)
@@ -48,6 +48,9 @@ void __CARDExtHandler(s32 chan, OSContext *context) {
             card->exiCallback = 0;
             callback(chan, CARD_RESULT_NOCARD);
         }
+
+        if (card->result != CARD_RESULT_BUSY)
+            card->result = CARD_RESULT_NOCARD;
 
         callback = card->extCallback;
         if (callback && CARD_MAX_MOUNT_STEP <= card->mountStep)
@@ -113,17 +116,18 @@ fatal:
 void __CARDTxHandler(s32 chan, OSContext *context) {
     CARDControl *card;
     CARDCallback callback;
+    s32 err;
 
     ASSERTLINE(0x12D, 0 <= chan && chan < 2);
     
     card = &__CARDBlock[chan];
-    !EXIDeselect(chan);
+    err = !EXIDeselect(chan);
     !EXIUnlock(chan);
     callback = card->txCallback;
     if (callback)
     {
         card->txCallback = NULL;
-        callback(chan, (EXIProbe(chan)) ? CARD_RESULT_READY : CARD_RESULT_NOCARD);
+        callback(chan, (!err && EXIProbe(chan)) ? CARD_RESULT_READY : CARD_RESULT_NOCARD);
     }
 }
 
@@ -280,6 +284,9 @@ static void TimeoutHandler(OSAlarm *alarm, OSContext *context) {
         }
     }
 
+    if (!card->attached)
+        return;
+
     ASSERTLINE(0x20E, 0 <= chan && chan < 2);
 
     EXISetExiCallback(chan, NULL);
@@ -295,11 +302,13 @@ static void SetupTimeoutAlarm(CARDControl *card) {
     OSCancelAlarm(&card->alarm);
     switch (card->cmd[0])
     {
+    case 0xF2:
+        OSSetAlarm(&card->alarm, OSMillisecondsToTicks(100), TimeoutHandler);
+        break;
     case 0xF3: 
         break;
     case 0xF4:
     case 0xF1:
-    case 0xF2: 
         OSSetAlarm(&card->alarm, OSSecondsToTicks((OSTime)2) * (card->sectorSize / 0x2000),
                    TimeoutHandler);
         break;
@@ -404,13 +413,16 @@ static void UnlockedCallback(s32 chan, s32 result) {
 static s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallback) {
     CARDControl *card;
     s32 result;
+    s32 enabled;
+
+    enabled = OSDisableInterrupts();
 
     ASSERTLINE(0x2C5, 0 <= chan && chan < 2);
 
     card = &__CARDBlock[chan];
     if (!card->attached)
     {
-        return CARD_RESULT_NOCARD;
+        result = CARD_RESULT_NOCARD;
     }
     else
     {
@@ -426,7 +438,7 @@ static s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallba
         card->unlockCallback = UnlockedCallback;
         if (!EXILock(chan, 0, __CARDUnlockedHandler))
         {
-            return CARD_RESULT_BUSY;
+            result = CARD_RESULT_BUSY;
         }
         else
         {
@@ -435,17 +447,18 @@ static s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallba
             if (!EXISelect(chan, 0, 4))
             {
                 EXIUnlock(chan);
-                return CARD_RESULT_NOCARD;
+                result = CARD_RESULT_NOCARD;
             }
             else
             {
                 SetupTimeoutAlarm(card);
-                return CARD_RESULT_READY;
+                result = CARD_RESULT_READY;
             }
         }
     }
 
-    return CARD_RESULT_READY;
+    OSRestoreInterrupts(enabled);
+    return result;
 }
 
 #define AD1(x) ((u8)(((x) >> 17) & 0x7f))
@@ -475,23 +488,24 @@ s32 __CARDReadSegment(s32 chan, CARDCallback callback) {
     result = __CARDStart(chan, callback, 0);
     if (result == CARD_RESULT_BUSY)
     {
-        return CARD_RESULT_READY;
+        result = CARD_RESULT_READY;
     }
-    if (result < 0)
+    else if (result >= 0)
     {
-        return result;
+        if (!EXIImmEx(chan, card->cmd, card->cmdlen, 1) ||
+            !EXIImmEx(chan, (u8 *)card->workArea + sizeof(CARDID), card->latency,
+                      1) || // XXX use DMA if possible
+            !EXIDma(chan, card->buffer, 512, card->mode, __CARDTxHandler))
+        {
+            card->txCallback = NULL;
+            EXIDeselect(chan);
+            EXIUnlock(chan);
+            result = CARD_RESULT_NOCARD;
+        }
+        else
+            result = CARD_RESULT_READY;
     }
-    if (!EXIImmEx(chan, card->cmd, card->cmdlen, 1) ||
-        !EXIImmEx(chan, (u8 *)card->workArea + sizeof(CARDID), card->latency,
-                  1) || // XXX use DMA if possible
-        !EXIDma(chan, card->buffer, 512, card->mode, __CARDTxHandler))
-    {
-        card->txCallback = NULL;
-        EXIDeselect(chan);
-        EXIUnlock(chan);
-        return CARD_RESULT_NOCARD;
-    }
-    return CARD_RESULT_READY;
+    return result;
 }
 
 s32 __CARDWritePage(s32 chan, CARDCallback callback) {
@@ -515,21 +529,22 @@ s32 __CARDWritePage(s32 chan, CARDCallback callback) {
     result = __CARDStart(chan, 0, callback);
     if (result == CARD_RESULT_BUSY)
     {
-        return CARD_RESULT_READY;
+        result = CARD_RESULT_READY;
     }
-    if (result < 0)
+    else if (result >= 0)
     {
-        return result;
+        if (!EXIImmEx(chan, card->cmd, card->cmdlen, 1) ||
+            !EXIDma(chan, card->buffer, 128, card->mode, __CARDTxHandler))
+        {
+            card->exiCallback = 0;
+            EXIDeselect(chan);
+            EXIUnlock(chan);
+            result = CARD_RESULT_NOCARD;
+        }
+        else
+            result = CARD_RESULT_READY;
     }
-    if (!EXIImmEx(chan, card->cmd, card->cmdlen, 1) ||
-        !EXIDma(chan, card->buffer, 128, card->mode, __CARDTxHandler))
-    {
-        card->exiCallback = 0;
-        EXIDeselect(chan);
-        EXIUnlock(chan);
-        return CARD_RESULT_NOCARD;
-    }
-    return CARD_RESULT_READY;
+    return result;
 }
 
 long __CARDErase(long chan, void (* callback)(long, long)) {
@@ -563,8 +578,8 @@ long __CARDErase(long chan, void (* callback)(long, long)) {
 }
 
 s32 __CARDEraseSector(s32 chan, u32 addr, CARDCallback callback) {
-    s32 result;
     CARDControl *card;
+    s32 result;
 
     ASSERTLINE(0x394, 0 <= chan && chan < 2);
 
@@ -582,29 +597,30 @@ s32 __CARDEraseSector(s32 chan, u32 addr, CARDCallback callback) {
 
     if (result == CARD_RESULT_BUSY)
     {
-        return CARD_RESULT_READY;
+        result = CARD_RESULT_READY;
     }
-    if (result < 0)
+    else if (result >= 0)
     {
-        return result;
+        result = CARD_RESULT_READY;
+        if (!EXIImmEx(chan, card->cmd, card->cmdlen, 1))
+        {
+            result = CARD_RESULT_NOCARD;
+            card->exiCallback = NULL;
+        } else {
+            result = CARD_RESULT_READY;
+        }
+
+        EXIDeselect(chan);
+        EXIUnlock(chan);
     }
 
-    result = CARD_RESULT_READY;
-    if (!EXIImmEx(chan, card->cmd, card->cmdlen, 1))
-    {
-        result = CARD_RESULT_NOCARD;
-        card->exiCallback = NULL;
-    }
-
-    EXIDeselect(chan);
-    EXIUnlock(chan);
     return result;
 }
 
 void CARDInit(void) {
     int chan;
 
-    if (__CARDDiskID)
+    if (__CARDBlock[0].diskID && __CARDBlock[1].diskID)
     {
         return;
     }
@@ -626,21 +642,23 @@ void CARDInit(void) {
 }
 
 void __CARDSetDiskID(DVDDiskID *id) {
-    __CARDDiskID = id ? id : &__CARDDiskNone;
+    __CARDBlock[0].diskID = id ? id : &__CARDDiskNone;
+    __CARDBlock[1].diskID = id ? id : &__CARDDiskNone;
 }
 
 s32 __CARDGetControlBlock(s32 chan, CARDControl **pcard) {
     BOOL enabled;
     s32 result;
-    CARDControl *card;
+    CARDControl* card;
 
-    if (chan < 0 || chan >= 2 || !__CARDDiskID)
+    card = &__CARDBlock[chan];
+
+    if (chan < 0 || chan >= 2 || card->diskID == NULL)
     {
         return CARD_RESULT_FATAL_ERROR;
     }
 
     enabled = OSDisableInterrupts();
-    card = &__CARDBlock[chan];
     if (!card->attached)
     {
         result = CARD_RESULT_NOCARD;
@@ -667,6 +685,8 @@ s32 __CARDPutControlBlock(CARDControl *card, s32 result) {
 
     enabled = OSDisableInterrupts();
     if (card->attached) {
+        card->result = result;
+    } else if (card->result == CARD_RESULT_BUSY) {
         card->result = result;
     } else {
         ASSERTLINE(0x442, card->result == CARD_RESULT_NOCARD);
@@ -709,15 +729,16 @@ s32 CARDFreeBlocks(s32 chan, s32 *byteNotUsed, s32 *filesNotUsed) {
         return __CARDPutControlBlock(card, CARD_RESULT_BROKEN);
     }
 
-    *byteNotUsed = (s32)(card->sectorSize * fat[CARD_FAT_FREEBLOCKS]);
+    if (byteNotUsed)
+        *byteNotUsed = (s32)(card->sectorSize * fat[CARD_FAT_FREEBLOCKS]);
 
-    *filesNotUsed = 0;
-    for (fileNo = 0; fileNo < CARD_MAX_FILE; fileNo++)
-    {
-        ent = &dir[fileNo];
-        if (ent->fileName[0] == 0xff)
-        {
-            ++*filesNotUsed;
+    if (filesNotUsed) {
+        *filesNotUsed = 0;
+        for (fileNo = 0; fileNo < CARD_MAX_FILE; fileNo++) {
+            ent = &dir[fileNo];
+            if (ent->fileName[0] == 0xff) {
+                ++*filesNotUsed;
+            }
         }
     }
 

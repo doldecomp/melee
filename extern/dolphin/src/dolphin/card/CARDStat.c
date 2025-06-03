@@ -116,6 +116,8 @@ s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat) {
     return __CARDPutControlBlock(card, result);
 }
 
+#pragma push
+#pragma force_active on
 s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callback) {
     CARDControl *card;
     CARDDir *dir;
@@ -159,6 +161,7 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callba
         __CARDPutControlBlock(card, result);
     return result;
 }
+#pragma pop
 
 long CARDSetStatus(long chan, long fileNo, struct CARDStat * stat) {
     long result = CARDSetStatusAsync(chan, fileNo, stat, __CARDSyncCallback);
