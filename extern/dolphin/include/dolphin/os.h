@@ -2,7 +2,6 @@
 #define _DOLPHIN_OS_H_
 
 #include <dolphin/types.h>
-#include <platform.h>
 
 #ifdef __cplusplus
 extern "C" {
