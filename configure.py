@@ -1501,7 +1501,7 @@ config.libs = [
             Object(Matching, "dolphin/ax/AXAux.c"),
             Object(Matching, "dolphin/ax/AXCL.c"),
             Object(NonMatching, "dolphin/ax/AXOut.c"),
-            Object(NonMatching, "dolphin/ax/AXSPB.c"),
+            Object(Matching, "dolphin/ax/AXSPB.c"),
             Object(Matching, "dolphin/ax/AXVPB.c"),
             Object(Matching, "dolphin/ax/AXProf.c"),
             Object(Matching, "dolphin/ax/DSPCode.c"),
