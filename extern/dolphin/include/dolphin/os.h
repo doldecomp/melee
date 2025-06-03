@@ -36,6 +36,8 @@ typedef u32 OSTick;
 
 // private macro, maybe shouldn't be defined here?
 #define OFFSET(addr, align) (((u32) (addr) & ((align) - 1)))
+#define ROUND(n, a) (((u32) (n) + (a) - 1) & ~((a) - 1))
+#define TRUNC(n, a) (((u32) (n)) & ~((a) - 1))
 
 u32 OSGetPhysicalMemSize(void);
 u32 OSGetConsoleSimulatedMemSize(void);
@@ -155,11 +157,11 @@ u32 OSGetSoundMode(void);
 void OSSetSoundMode(u32 mode);
 
 #ifndef DOLPHIN_ATTRIBUTE_NORETURN
-#  if defined(__clang__) || defined(__GNUC__)
-#    define DOLPHIN_ATTRIBUTE_NORETURN __attribute__((noreturn))
-#  else
-#    define DOLPHIN_ATTRIBUTE_NORETURN
-#  endif
+#if defined(__clang__) || defined(__GNUC__)
+#define DOLPHIN_ATTRIBUTE_NORETURN __attribute__((noreturn))
+#else
+#define DOLPHIN_ATTRIBUTE_NORETURN
+#endif
 #endif
 
 void OSReport(char*, ...);
