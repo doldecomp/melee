@@ -242,6 +242,13 @@ void pl_8003E854(s32 arg0, s32 arg1, Item_GObj* arg2)
     Player_GetStaleMoveTableIndexPtr2(arg0)->x0_staleMoveTable.xCA8 = 0;
 }
 
+void pl_8003E978(s32 slot, bool fp_x221F_b4, Item_GObj* item_gobj, f32 y0,
+                 f32 arg4, f32 arg5, f32 arg6, f32 x1, f32 y1,
+                 f32 frame_speed_mul)
+{
+    fn_8003E998(slot, fp_x221F_b4);
+}
+
 void pl_8003EA08(s32 slot, s32 arg1)
 {
     RETURN_IF(arg1);
