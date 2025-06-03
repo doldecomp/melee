@@ -4,6 +4,11 @@
 
 #include "__card.h"
 
+#define CARDSetIconSpeed(stat, n, f)                                          \
+    ((stat)->iconSpeed =                                                      \
+         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |  \
+                ((f) << (2 * (n)))))
+
 // functions
 static void UpdateIconOffsets(CARDDir *ent, CARDStat *stat);
 
@@ -18,6 +23,7 @@ static void UpdateIconOffsets(CARDDir *ent, CARDStat *stat) {
         stat->bannerFormat = 0;
         stat->iconFormat = 0;
         stat->iconSpeed = 0;
+        offset = 0;
     }
 
     iconTlut = FALSE;
@@ -119,7 +125,11 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callba
     ASSERTLINE(0xD5, 0 <= fileNo && fileNo < CARD_MAX_FILE);
     ASSERTLINE(0xD6, 0 <= chan && chan < 2);
 
-    if (fileNo < 0 || CARD_MAX_FILE <= fileNo)
+    if (fileNo < 0 || CARD_MAX_FILE <= fileNo ||
+        (stat->iconAddr != -1 && CARD_READ_SIZE <= stat->iconAddr) ||
+        (stat->commentAddr != -1 &&
+         CARD_SYSTEM_BLOCK_SIZE - CARD_COMMENT_SIZE <
+             stat->commentAddr % CARD_SYSTEM_BLOCK_SIZE))
         return CARD_RESULT_FATAL_ERROR;
 
     result = __CARDGetControlBlock(chan, &card);
@@ -138,6 +148,10 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callba
     ent->iconSpeed = stat->iconSpeed;
     ent->commentAddr = stat->commentAddr;
     UpdateIconOffsets(ent, stat);
+
+    if (ent->iconAddr == 0xffffffff) {
+        CARDSetIconSpeed(ent, 0, CARD_STAT_SPEED_FAST);
+    }
 
     ent->time = (u32)OSTicksToSeconds(OSGetTime());
     result = __CARDUpdateDir(chan, callback);

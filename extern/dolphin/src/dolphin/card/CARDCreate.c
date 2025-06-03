@@ -3,6 +3,11 @@
 
 #include "__card.h"
 
+#define CARDSetIconSpeed(stat, n, f)                                          \
+    ((stat)->iconSpeed =                                                      \
+         (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |        \
+          ((f) << (2 * (n)))))
+
 static void CreateCallbackFat(long chan, long result);
 
 static void CreateCallbackFat(long chan, long result) {
@@ -18,8 +23,8 @@ static void CreateCallbackFat(long chan, long result) {
     if (result >= 0) {
         dir = __CARDGetDirBlock(card);
         ent = &dir[card->freeNo];
-        memcpy(ent->gameName, __CARDDiskID->gameName, sizeof(ent->gameName));
-        memcpy(ent->company,  __CARDDiskID->company, sizeof(ent->company));
+        memcpy(ent->gameName, card->diskID->gameName, sizeof(ent->gameName));
+        memcpy(ent->company,  card->diskID->company, sizeof(ent->company));
         ent->permission = 4;
         ent->copyTimes = 0;
         ASSERTLINE(0x66, CARDIsValidBlockNo(card, card->startBlock));
@@ -29,6 +34,7 @@ static void CreateCallbackFat(long chan, long result) {
         ent->iconFormat = 0;
         ent->iconSpeed = 0;
         ent->commentAddr = -1;
+        CARDSetIconSpeed(ent, 0, CARD_STAT_SPEED_FAST);
         card->fileInfo->offset = 0;
         card->fileInfo->iBlock = ent->startBlock;
         ent->time = OSTicksToSeconds(OSGetTime());
@@ -81,8 +87,8 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size, CARDFileInfo* file
             if (freeNo == (u16)-1) {
                 freeNo = fileNo;
             }
-        } else if (memcmp(ent->gameName, __CARDDiskID->gameName, sizeof(ent->gameName)) == 0 &&
-                             memcmp(ent->company, __CARDDiskID->company, sizeof(ent->company)) == 0 &&
+        } else if (memcmp(ent->gameName, card->diskID->gameName, sizeof(ent->gameName)) == 0 &&
+                             memcmp(ent->company, card->diskID->company, sizeof(ent->company)) == 0 &&
                              __CARDCompareFileName(ent, fileName)) {
             return __CARDPutControlBlock(card, CARD_RESULT_EXIST);
         }
