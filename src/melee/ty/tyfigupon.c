@@ -1,28 +1,71 @@
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include "tyfigupon.h"
 
 #include "inlines.h"
 #include "toy.h"
 #include "types.h"
 
-#include "baselib/gobj.h"
-#include "baselib/gobjplink.h"
-#include "baselib/gobjuserdata.h"
-#include "baselib/jobj.h"
-#include "baselib/memory.h"
-#include "baselib/random.h"
 #include "lb/lbaudio_ax.h"
 #include "un/types.h"
 #include "un/un_2FC9.h"
 
-/// #un_80314AA8
+#include <baselib/archive.h>
+#include <baselib/cobj.h>
+#include <baselib/displayfunc.h>
+#include <baselib/fog.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/memory.h>
+#include <baselib/random.h>
+
+void tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
+                        char* shapeanim_str)
+{
+    HSD_AnimJoint* ajoint;
+    HSD_MatAnimJoint* majoint;
+    HSD_ShapeAnimJoint* sajoint;
+    struct un_804D6EF4_t* data = un_804D6EF4;
+    PAD_STACK(16);
+
+    if (anim_str != NULL) {
+        ajoint = HSD_ArchiveGetPublicAddress(data->archive, anim_str);
+    } else {
+        ajoint = NULL;
+    }
+    if (matanim_str != NULL) {
+        majoint = HSD_ArchiveGetPublicAddress(data->archive, matanim_str);
+    } else {
+        majoint = NULL;
+    }
+    if (shapeanim_str != NULL) {
+        sajoint = HSD_ArchiveGetPublicAddress(data->archive, shapeanim_str);
+    } else {
+        sajoint = NULL;
+    }
+    HSD_JObjAddAnimAll(jobj, ajoint, majoint, sajoint);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+}
 
 /// #un_80314B54
 
-/// #fn_80314BE4
+void tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
+{
+    if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
+        HSD_SetEraseColor(0x19, 0x19, 0x33, 0xFF);
+        HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 0);
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_FogSet(NULL);
+        HSD_CObjEndCurrent();
+    }
+}
 
-void un_80314C5C(HSD_GObj* gobj)
+void tyFigupon_80314C5C(HSD_GObj* gobj)
 {
     Toy* tp1 = GET_TOY(gobj);
     struct un_804D6EF4_t* temp_r29 = un_804D6EF4;
@@ -112,7 +155,11 @@ void un_80314C5C(HSD_GObj* gobj)
 
 /// #fn_803168DC
 
-/// #fn_80316BF8
+void tyFigupon_80316BF8(void)
+{
+    lbAudioAx_80023F28(0x35);
+    HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+}
 
 /// #fn_80316C24
 
