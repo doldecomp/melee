@@ -20,7 +20,7 @@
 /* 03E39C */ s32 pl_8003E39C(s32);
 /* 03E420 */ s32 pl_8003E420(s32);
 /* 03E4A4 */ void pl_8003E4A4(u8 slot, bool, void*, s32);
-/* 03E70C */ void pl_8003E70C(Item_GObj*);
+/* 03E70C */ void pl_8003E70C(Item_GObj* igobj);
 /* 03E7D4 */ s32 pl_8003E7D4(s32, s32 kind);
 /* 03E854 */ void pl_8003E854(s32, s32, Item_GObj*);
 /* 03E978 */ void pl_8003E978(u8 slot, bool fp_x221F_b4, Item_GObj* item_gobj,

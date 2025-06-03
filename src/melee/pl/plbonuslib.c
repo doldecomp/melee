@@ -172,6 +172,31 @@ s32 pl_8003E420(s32 arg0)
     return var_r28;
 }
 
+void pl_8003E70C(Item_GObj* igobj)
+{
+    s32 var_r31;
+    HSD_GObj* temp_r30;
+    pl_StaleMoveTableExt_t* temp_r31;
+    s32 temp_r3;
+
+    temp_r30 = it_8026BC78(igobj);
+
+    var_r31 = 0;
+    if ((itGetKind(igobj) >= 0xA1) && (itGetKind(igobj) < 0xBF)) {
+        var_r31 = 1;
+    }
+    if (var_r31 == 0) {
+        __assert("plbonuslib.c", 634U,
+                 "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
+                 "It_PKind_Terminate");
+    }
+
+    RETURN_IF(!ftLib_80086960(temp_r30));
+    temp_r31 = Player_GetStaleMoveTableIndexPtr2(ftLib_80086BE0(temp_r30));
+    temp_r3 = itGetKind(igobj);
+    temp_r31->x0_staleMoveTable.x5C4[temp_r3] += 1;
+}
+
 s32 pl_8003E7D4(s32 arg0, s32 kind)
 {
     s32 var_r0;
