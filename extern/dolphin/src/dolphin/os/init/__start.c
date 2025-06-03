@@ -47,14 +47,14 @@ static void __check_pad3(void);
 
 #define RESET_BUTTON_MASK 0x0EEF
 
-static void __check_pad3(void)
+SECTION_INIT static void __check_pad3(void)
 {
     if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK) {
         OSResetSystem(OS_RESET_RESTART, 0, false);
     }
 }
 
-__declspec(section ".init") __declspec(weak) asm void __start(void)
+SECTION_INIT WEAK asm void __start(void)
 {
     // clang-format off
 	nofralloc
@@ -163,7 +163,7 @@ static void __init_bss_section(void* dst, unsigned long size)
     }
 }
 
-asm static void __init_registers(void)
+asm SECTION_INIT static void __init_registers(void)
 {
     // clang-format off
 	nofralloc
@@ -177,7 +177,7 @@ asm static void __init_registers(void)
     // clang-format on
 }
 
-static void __init_data(void)
+SECTION_INIT static void __init_data(void)
 {
     __rom_copy_info* dci;
     __bss_init_info* bii;
