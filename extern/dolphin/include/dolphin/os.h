@@ -2,6 +2,7 @@
 #define _DOLPHIN_OS_H_
 
 #include <dolphin/types.h>
+#include <platform.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -154,8 +155,16 @@ BOOL OSRestoreInterrupts(BOOL level);
 u32 OSGetSoundMode(void);
 void OSSetSoundMode(u32 mode);
 
+#ifndef DOLPHIN_ATTRIBUTE_NORETURN
+#  if defined(__clang__) || defined(__GNUC__)
+#    define DOLPHIN_ATTRIBUTE_NORETURN __attribute__((noreturn))
+#  else
+#    define DOLPHIN_ATTRIBUTE_NORETURN
+#  endif
+#endif
+
 void OSReport(char*, ...);
-void OSPanic(char* file, int line, char* msg, ...);
+DOLPHIN_ATTRIBUTE_NORETURN void OSPanic(char* file, int line, char* msg, ...);
 
 #define OSRoundUp32B(x) (((u32) (x) + 32 - 1) & ~(32 - 1))
 #define OSRoundDown32B(x) (((u32) (x)) & ~(32 - 1))

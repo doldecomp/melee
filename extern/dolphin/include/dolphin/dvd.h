@@ -127,6 +127,7 @@ long DVDCancel(volatile struct DVDCommandBlock * block);
 int DVDCancelAllAsync(void (* callback)(long, struct DVDCommandBlock *));
 long DVDCancelAll();
 struct DVDDiskID * DVDGetCurrentDiskID();
+BOOL DVDCheckDisk(void);
 
 // dvdfs.c
 s32 DVDConvertPathToEntrynum(char* pathPtr);
