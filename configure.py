@@ -1322,7 +1322,7 @@ config.libs = [
     DolphinLib(
         "hio",
         [
-            Object(Matching, "dolphin/hio/hio.c"),
+            Object(NonMatching, "dolphin/hio/hio.c"),
         ],
         extern=True,
     ),
