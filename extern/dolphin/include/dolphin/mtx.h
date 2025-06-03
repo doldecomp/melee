@@ -56,7 +56,9 @@ typedef f32 (*Mtx44Ptr)[4];
 typedef f32 ROMtx[4][3];
 typedef f32 (*ROMtxPtr)[3];
 
-void MTXFrustum(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f);
+void MTXFrustum(Mtx m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f);
+void MTXPerspective(Mtx m, f32 fovY, f32 aspect, f32 n, f32 f);
+void MTXOrtho(Mtx m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f);
 void MTXPerspective(Mtx44 m, f32 fovY, f32 aspect, f32 n, f32 f);
 void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 
