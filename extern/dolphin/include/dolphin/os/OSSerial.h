@@ -29,6 +29,8 @@
 
 #define ROUND(n, a) (((u32) (n) + (a) - 1) & ~((a) - 1))
 
+typedef void (*SITypeAndStatusCallback)(long chan, unsigned long type);
+
 struct SIControl {
     long chan;
     unsigned long poll;
@@ -63,5 +65,6 @@ int SITransfer(long chan, void* output, unsigned long outputBytes, void* input,
                void (*callback)(long, unsigned long, struct OSContext*),
                long long time);
 unsigned long SIGetType(long chan);
+unsigned long SIGetTypeAsync(long chan, SITypeAndStatusCallback callback);
 
 #endif // _DOLPHIN_OSSERIAL_H

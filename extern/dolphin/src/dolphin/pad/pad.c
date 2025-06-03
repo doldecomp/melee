@@ -3,6 +3,7 @@
 #include "os/__os.h"
 
 #include <dolphin.h>
+#include <dolphin/os.h>
 #include <dolphin/pad.h>
 #include <dolphin/si.h>
 
@@ -24,10 +25,10 @@ static unsigned long Spec = 0x00000005;       // size: 0x4, address: 0xC
 static int Initialized;               // size: 0x4, address: 0x0
 static unsigned long EnabledBits;     // size: 0x4, address: 0x4
 static unsigned long ResettingBits;   // size: 0x4, address: 0x8
-static unsigned long ProbingBits;     // size: 0x4, address: 0xC
-static unsigned long RecalibrateBits; // size: 0x4, address: 0x10
-static unsigned long WaitingBits;     // size: 0x4, address: 0x14
-static unsigned long CheckingBits;    // size: 0x4, address: 0x18
+static unsigned long RecalibrateBits; // size: 0x4, address: 0xC
+static unsigned long WaitingBits;     // size: 0x4, address: 0x10
+static unsigned long CheckingBits;    // size: 0x4, address: 0x14
+static unsigned long ProbingBits;     // size: 0x4, address: 0x18
 
 static unsigned long Type[4];      // size: 0x10, address: 0x0
 static struct PADStatus Origin[4]; // size: 0x30, address: 0x10
@@ -42,6 +43,7 @@ static void PADProbeCallback(s32 chan, u32 error, OSContext* context);
 static void PADDisable(long chan);
 static void UpdateOrigin(s32 chan);
 static void PADOriginCallback(s32 chan, u32 error, OSContext* context);
+static void PADTypeAndStatusCallback(s32 chan, u32 type);
 static void PADFixCallback(long unused, unsigned long error,
                            struct OSContext* context);
 static void PADResetCallback(long unused, unsigned long error,
@@ -89,18 +91,6 @@ static u16 GetWirelessID(long chan)
     return id;
 }
 
-static void SetWirelessID(long chan, u16 id)
-{
-    struct OSSramEx* sram = __OSLockSramEx();
-
-    if (sram->wirelessPadID[chan] != id) {
-        sram->wirelessPadID[chan] = id;
-        __OSUnlockSramEx(1);
-        return;
-    }
-    __OSUnlockSramEx(0);
-}
-
 static int DoReset()
 {
     int rc;
@@ -109,18 +99,10 @@ static int DoReset()
 
     rc = 1;
     ResettingChan = __cntlzw(ResettingBits);
-    if ((ResettingChan >= 0) && (ResettingChan < 4)) {
-        frame = 0;
-        memset(&Origin[ResettingChan], 0, 0xC);
-        Type[ResettingChan] = 0;
-        rc = SITransfer(ResettingChan, &frame, 1, &Type[ResettingChan], 3,
-                        PADResetCallback, 0);
-        chanBit = (0x80000000 >> ResettingChan);
-        ResettingBits &= ~chanBit;
-        if (rc == 0) {
-            ResettingChan = 0x20;
-            ResettingBits = 0;
-        }
+    if (ResettingChan != 32) {
+        ResettingBits &= ~(PAD_CHAN0_BIT >> ResettingChan);
+        memset(&Origin[ResettingChan], 0, sizeof(Origin[0]));
+        SIGetTypeAsync(ResettingChan, &PADTypeAndStatusCallback);
     }
     return rc;
 }
@@ -188,13 +170,13 @@ static void PADDisable(long chan)
     unsigned long chanBit;
 
     enabled = OSDisableInterrupts();
-    chanBit = 0x80000000 >> chan;
+    chanBit = PAD_CHAN0_BIT >> chan;
     SIDisablePolling(chanBit);
     EnabledBits &= ~chanBit;
     WaitingBits &= ~chanBit;
     CheckingBits &= ~chanBit;
     ProbingBits &= ~chanBit;
-    SetWirelessID(chan, 0);
+    OSSetWirelessID(chan, 0);
     OSRestoreInterrupts(enabled);
 }
 
@@ -265,12 +247,19 @@ static void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
     if (!(EnabledBits & (PAD_CHAN0_BIT >> chan))) {
         return;
     }
+
     if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
                    SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
     {
         UpdateOrigin(chan);
     }
+
+    if (error & SI_ERROR_NO_RESPONSE) {
+        PADDisable(chan);
+    }
 }
+
+static void PADTypeAndStatusCallback(s32 chan, u32 type) {}
 
 static void PADFixCallback(long unused, unsigned long error,
                            struct OSContext* context)

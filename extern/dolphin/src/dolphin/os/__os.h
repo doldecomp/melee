@@ -67,6 +67,8 @@ int __OSReadROMAsync(void* buffer, long length, long offset,
 unsigned char __OSGetBootMode(void);
 void __OSSetBootMode(unsigned char ntd);
 
+void OSSetWirelessID(long chan, u16 id);
+
 // OSSync.c
 extern void __OSSystemCallVectorStart();
 extern void __OSSystemCallVectorEnd();
