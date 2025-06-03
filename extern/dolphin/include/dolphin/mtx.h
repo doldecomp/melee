@@ -95,6 +95,7 @@ void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 #define MTXCopy PSMTXCopy
 #define MTXConcat PSMTXConcat
 #define MTXInverse PSMTXInverse
+#define MTXTrans PSMTXTrans
 #define MTXTranspose PSMTXTranspose
 #define MTXScale PSMTXScale
 #define MTXRotAxisRad PSMTXRotAxisRad
