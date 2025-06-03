@@ -342,10 +342,7 @@ asm u32 PSMTXInverse(register Mtx src, register Mtx inv){
     li r3, 0
     blr
 skip_return:
-    ps_res f0, f7
-    ps_add f6, f0, f0
-    ps_mul f5, f0, f0
-    ps_nmsub f0, f7, f5, f6
+    fres f0, f7
     ps_add f6, f0, f0
     ps_mul f5, f0, f0
     ps_nmsub f0, f7, f5, f6
@@ -636,7 +633,7 @@ asm void PSMTXScale(register Mtx m, register f32 xS, register f32 yS,
 {
     // clang-format off
     nofralloc
-    lfs f0, 0x0(r0)
+    lfs f0, 0.0F
     stfs f1, 0x0(r3)
     psq_st f0, 0x4(r3), 0, qr0
     psq_st f0, 0xc(r3), 0, qr0
