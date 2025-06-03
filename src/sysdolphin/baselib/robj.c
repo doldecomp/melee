@@ -615,9 +615,9 @@ static void expLoadDesc(HSD_Exp* exp, HSD_ExpDesc* desc)
     memset(exp, 0, sizeof(HSD_Exp));
     if (desc != NULL) {
         if (desc->func != NULL) {
-            exp->expr.func = dummy_func;
+            exp->expr.func = desc->func;
         } else {
-            exp->expr.func = NULL;
+            exp->expr.func = dummy_func;
         }
         exp->rvalue = loadRvalue(desc->rvalue);
         exp->nb_args = -1;
