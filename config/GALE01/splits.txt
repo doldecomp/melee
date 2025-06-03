@@ -3924,7 +3924,7 @@ dolphin/pad/PadClamp.c:
 	.text       start:0x8034CB50 end:0x8034CD88
 	.sdata      start:0x804D5C30 end:0x804D5C38
 
-dolphin/pad/Pad.c:
+dolphin/pad/pad.c:
 	.text       start:0x8034CD88 end:0x8034E964
 	.data       start:0x80402C90 end:0x80402D28
 	.bss        start:0x804A89A0 end:0x804A89F0
