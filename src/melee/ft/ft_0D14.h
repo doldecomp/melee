@@ -60,7 +60,7 @@
 /* 0D2CA0 */ void fn_800D2CA0(Fighter*);
 /* 0D2CD4 */ void fn_800D2CD4(Fighter*);
 /* 0D2D0C */ bool ft_800D2D0C(Fighter_GObj*);
-/* 0D2D50 */ void ft_800D2D50(Fighter_GObj*);
+/* 0D2D50 */ void ftCo_ItemScrew_Enter(Fighter_GObj*);
 /* 0D2DD0 */ void ftCo_ItemScrew_Anim(ftCo_GObj* gobj);
 /* 0D2E0C */ void ftCo_ItemScrew_IASA(ftCo_GObj* gobj);
 /* 0D2E2C */ void ftCo_ItemScrew_Phys(ftCo_GObj* gobj);

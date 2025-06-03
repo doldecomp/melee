@@ -747,7 +747,7 @@ bool ft_800D2D0C(Fighter_GObj* gobj)
     return false;
 }
 
-void ft_800D2D50(Fighter_GObj* gobj)
+void ftCo_ItemScrew_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
