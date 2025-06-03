@@ -28,7 +28,7 @@ static unsigned long ResettingBits;   // size: 0x4, address: 0x8
 static unsigned long RecalibrateBits; // size: 0x4, address: 0xC
 static unsigned long WaitingBits;     // size: 0x4, address: 0x10
 static unsigned long CheckingBits;    // size: 0x4, address: 0x14
-static unsigned long ProbingBits;     // size: 0x4, address: 0x18
+static unsigned long PendingBits;     // size: 0x4, address: 0x18
 
 static unsigned long Type[4];      // size: 0x10, address: 0x0
 static struct PADStatus Origin[4]; // size: 0x30, address: 0x10
@@ -131,7 +131,7 @@ static void ProbeWireless(long chan)
 
     chanBit = 0x80000000 >> chan;
     EnabledBits |= chanBit;
-    ProbingBits |= chanBit;
+    PendingBits |= chanBit;
     SIGetResponse(chan, &data);
     type = Type[chan];
     if (!(type & 0x02000000)) {
@@ -156,7 +156,7 @@ static void PADDisable(long chan)
     EnabledBits &= ~chanBit;
     WaitingBits &= ~chanBit;
     CheckingBits &= ~chanBit;
-    ProbingBits &= ~chanBit;
+    PendingBits &= ~chanBit;
     OSSetWirelessID(chan, 0);
     OSRestoreInterrupts(enabled);
 }
@@ -376,27 +376,57 @@ static void PADResetCallback(long unused, unsigned long error,
     DoReset();
 }
 
+static void PADReceiveCheckCallback(s32 chan, unsigned long error,
+                                    OSContext* arg2)
+{
+    unsigned long type;
+    unsigned long chanBit;
+    unsigned long frame;
+
+    type = Type[chan];
+    chanBit = 0x80000000 >> chan;
+    WaitingBits &= ~chanBit;
+    CheckingBits &= ~chanBit;
+    if (EnabledBits & chanBit) {
+        if (!(error & 0xF) && (type & 0x80000000) && (type & 0x02000000) &&
+            (type & 0x40000000) && !(type & 0x04000000))
+        {
+            frame = 0x41000000;
+            SITransfer(chan, &frame, 1, &Origin[chan], 0xA,
+                       PADOriginUpdateCallback, 0);
+            return;
+        }
+        PADDisable(chan);
+    }
+}
+
 int PADReset(unsigned long mask)
 {
-    int enabled;
-    int rc;
+    BOOL enabled;
+    u32 disableBits;
 
-    rc = 0;
     ASSERTMSGLINE(0x392, !(mask & 0x0FFFFFFF), "PADReset(): invalid mask");
+
     enabled = OSDisableInterrupts();
-    mask = mask & ~(CheckingBits | (ProbingBits | WaitingBits));
+    mask |= PendingBits;
+    PendingBits = 0;
+    mask &= ~(WaitingBits | CheckingBits);
     ResettingBits |= mask;
+    disableBits = ResettingBits & EnabledBits;
     EnabledBits &= ~mask;
-    WaitingBits &= ~mask;
+
     if (Spec == 4) {
         RecalibrateBits |= mask;
     }
-    SIDisablePolling(ResettingBits);
+
+    SIDisablePolling(disableBits);
+
     if (ResettingChan == 0x20) {
-        rc = DoReset();
+        DoReset();
     }
+
     OSRestoreInterrupts(enabled);
-    return rc;
+    return 1;
 }
 
 BOOL PADRecalibrate(u32 mask)
@@ -407,7 +437,7 @@ BOOL PADRecalibrate(u32 mask)
     ret = FALSE;
     ASSERTMSGLINE(0x3BD, !(mask & 0x0FFFFFFF), "PADReset(): invalid mask");
     intrEnabled = OSDisableInterrupts();
-    mask &= ~(CheckingBits | (ProbingBits | WaitingBits));
+    mask &= ~(CheckingBits | (PendingBits | WaitingBits));
     ResettingBits |= mask;
     EnabledBits &= ~mask;
     RecalibrateBits |= mask;
@@ -443,30 +473,6 @@ BOOL PADInit()
     }
     return PADReset(PAD_CHAN0_BIT | PAD_CHAN1_BIT | PAD_CHAN2_BIT |
                     PAD_CHAN3_BIT);
-}
-
-static void PADReceiveCheckCallback(s32 chan, unsigned long error,
-                                    OSContext* arg2)
-{
-    unsigned long type;
-    unsigned long chanBit;
-    unsigned long frame;
-
-    type = Type[chan];
-    chanBit = 0x80000000 >> chan;
-    WaitingBits &= ~chanBit;
-    CheckingBits &= ~chanBit;
-    if (EnabledBits & chanBit) {
-        if (!(error & 0xF) && (type & 0x80000000) && (type & 0x02000000) &&
-            (type & 0x40000000) && !(type & 0x04000000))
-        {
-            frame = 0x41000000;
-            SITransfer(chan, &frame, 1, &Origin[chan], 0xA,
-                       PADOriginUpdateCallback, 0);
-            return;
-        }
-        PADDisable(chan);
-    }
 }
 
 void PADRead(struct PADStatus* status)
@@ -517,7 +523,7 @@ void PADRead(struct PADStatus* status)
                 if (data[0] & 0x80000000) {
                     status->err = -3;
                     memset(status, 0, 0xA);
-                } else if (ProbingBits & chanBit) {
+                } else if (PendingBits & chanBit) {
                     status->err = -1;
                     memset(status, 0, 0xA);
                 } else if (status->button & 0x2000) {
@@ -642,7 +648,7 @@ void PADControlAllMotors(const u32* commandArray)
 
     for (chan = 0; chan < SI_MAX_CHAN; chan++, commandArray++) {
         chanBit = PAD_CHAN0_BIT >> chan;
-        if ((EnabledBits & chanBit) && !(ProbingBits & chanBit) &&
+        if ((EnabledBits & chanBit) && !(PendingBits & chanBit) &&
             !(Type[chan] & 0x20000000))
         {
             command = *commandArray;
@@ -672,7 +678,7 @@ void PADControlMotor(s32 chan, u32 command)
 
     enabled = OSDisableInterrupts();
     chanBit = PAD_CHAN0_BIT >> chan;
-    if ((EnabledBits & chanBit) && !(ProbingBits & chanBit) &&
+    if ((EnabledBits & chanBit) && !(PendingBits & chanBit) &&
         !(Type[chan] & 0x20000000))
     {
         if (Spec < PAD_SPEC_2 && command == PAD_MOTOR_STOP_HARD) {
@@ -892,7 +898,7 @@ void PADSetAnalogMode(u32 mode)
 
     enabled = OSDisableInterrupts();
     AnalogMode = mode << 8;
-    mask = EnabledBits & ~ProbingBits;
+    mask = EnabledBits & ~PendingBits;
 
     EnabledBits &= ~mask;
     WaitingBits &= ~mask;

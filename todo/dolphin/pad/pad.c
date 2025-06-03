@@ -18,7 +18,7 @@ extern s32 ResettingChan;
 extern u32 ResettingBits;
 extern u32 WaitingBits;
 extern u32 CheckingBits;
-extern u32 ProbingBits;
+extern u32 PendingBits;
 
 static void PADEnable(s32 chan)
 {
@@ -46,7 +46,7 @@ static void PADDisable(s32 chan)
     EnabledBits &= ~chanBit;
     WaitingBits &= ~chanBit;
     CheckingBits &= ~chanBit;
-    ProbingBits &= ~chanBit;
+    PendingBits &= ~chanBit;
     OSSetWirelessID(chan, 0);
 
     OSRestoreInterrupts(enabled);

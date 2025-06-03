@@ -205,7 +205,7 @@
 /* 000002CC 0000030C  80 A0 00 00 */	lwz r5, WaitingBits@sda21(r0)
 /* 000002D0 00000310  7F A3 EB 78 */	mr r3, r29
 /* 000002D4 00000314  80 80 00 00 */	lwz r4, CheckingBits@sda21(r0)
-/* 000002D8 00000318  80 00 00 00 */	lwz r0, ProbingBits@sda21(r0)
+/* 000002D8 00000318  80 00 00 00 */	lwz r0, PendingBits@sda21(r0)
 /* 000002DC 0000031C  7C C7 40 38 */	and r7, r6, r8
 /* 000002E0 00000320  7C A6 40 38 */	and r6, r5, r8
 /* 000002E4 00000324  90 E0 00 00 */	stw r7, EnabledBits@sda21(r0)
@@ -214,7 +214,7 @@
 /* 000002F0 00000330  90 C0 00 00 */	stw r6, WaitingBits@sda21(r0)
 /* 000002F4 00000334  38 80 00 00 */	li r4, 0x0
 /* 000002F8 00000338  90 A0 00 00 */	stw r5, CheckingBits@sda21(r0)
-/* 000002FC 0000033C  90 00 00 00 */	stw r0, ProbingBits@sda21(r0)
+/* 000002FC 0000033C  90 00 00 00 */	stw r0, PendingBits@sda21(r0)
 /* 00000300 00000340  48 00 00 01 */	bl OSSetWirelessID
 /* 00000304 00000344  7F E3 FB 78 */	mr r3, r31
 /* 00000308 00000348  48 00 00 01 */	bl OSRestoreInterrupts
@@ -470,12 +470,12 @@
 /* 000006A8 000006E8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 000006AC 000006EC  40 82 00 60 */	bne .L_0000070C
 /* 000006B0 000006F0  80 A0 00 00 */	lwz r5, ResettingBits@sda21(r0)
-/* 000006B4 000006F4  80 60 00 00 */	lwz r3, ProbingBits@sda21(r0)
+/* 000006B4 000006F4  80 60 00 00 */	lwz r3, PendingBits@sda21(r0)
 /* 000006B8 000006F8  7C A0 00 34 */	cntlzw r0, r5
 /* 000006BC 000006FC  90 00 00 00 */	stw r0, ResettingChan@sda21(r0)
 /* 000006C0 00000700  7C 60 E3 78 */	or r0, r3, r28
 /* 000006C4 00000704  80 80 00 00 */	lwz r4, ResettingChan@sda21(r0)
-/* 000006C8 00000708  90 00 00 00 */	stw r0, ProbingBits@sda21(r0)
+/* 000006C8 00000708  90 00 00 00 */	stw r0, PendingBits@sda21(r0)
 /* 000006CC 0000070C  2C 04 00 20 */	cmpwi r4, 0x20
 /* 000006D0 00000710  41 82 00 3C */	beq .L_0000070C
 /* 000006D4 00000714  3C 60 80 00 */	lis r3, 0x8000
@@ -562,7 +562,7 @@
 /* 00000804 00000844  80 A0 00 00 */	lwz r5, WaitingBits@sda21(r0)
 /* 00000808 00000848  7F E3 FB 78 */	mr r3, r31
 /* 0000080C 0000084C  80 80 00 00 */	lwz r4, CheckingBits@sda21(r0)
-/* 00000810 00000850  80 00 00 00 */	lwz r0, ProbingBits@sda21(r0)
+/* 00000810 00000850  80 00 00 00 */	lwz r0, PendingBits@sda21(r0)
 /* 00000814 00000854  7C C7 40 38 */	and r7, r6, r8
 /* 00000818 00000858  7C A6 40 38 */	and r6, r5, r8
 /* 0000081C 0000085C  90 E0 00 00 */	stw r7, EnabledBits@sda21(r0)
@@ -571,7 +571,7 @@
 /* 00000828 00000868  90 C0 00 00 */	stw r6, WaitingBits@sda21(r0)
 /* 0000082C 0000086C  38 80 00 00 */	li r4, 0x0
 /* 00000830 00000870  90 A0 00 00 */	stw r5, CheckingBits@sda21(r0)
-/* 00000834 00000874  90 00 00 00 */	stw r0, ProbingBits@sda21(r0)
+/* 00000834 00000874  90 00 00 00 */	stw r0, PendingBits@sda21(r0)
 /* 00000838 00000878  48 00 00 01 */	bl OSSetWirelessID
 /* 0000083C 0000087C  7F C3 F3 78 */	mr r3, r30
 /* 00000840 00000880  48 00 00 01 */	bl OSRestoreInterrupts
@@ -593,7 +593,7 @@
 /* 00000870 000008B0  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 00000874 000008B4  7C 7E 1B 78 */	mr r30, r3
 /* 00000878 000008B8  48 00 00 01 */	bl OSDisableInterrupts
-/* 0000087C 000008BC  80 80 00 00 */	lwz r4, ProbingBits@sda21(r0)
+/* 0000087C 000008BC  80 80 00 00 */	lwz r4, PendingBits@sda21(r0)
 /* 00000880 000008C0  38 E0 00 00 */	li r7, 0x0
 /* 00000884 000008C4  80 A0 00 00 */	lwz r5, WaitingBits@sda21(r0)
 /* 00000888 000008C8  3B E3 00 00 */	addi r31, r3, 0x0
@@ -605,7 +605,7 @@
 /* 000008A0 000008E0  7F DE 28 78 */	andc r30, r30, r5
 /* 000008A4 000008E4  80 A0 00 00 */	lwz r5, EnabledBits@sda21(r0)
 /* 000008A8 000008E8  7C 86 F3 78 */	or r6, r4, r30
-/* 000008AC 000008EC  90 E0 00 00 */	stw r7, ProbingBits@sda21(r0)
+/* 000008AC 000008EC  90 E0 00 00 */	stw r7, PendingBits@sda21(r0)
 /* 000008B0 000008F0  7C A4 F0 78 */	andc r4, r5, r30
 /* 000008B4 000008F4  90 C0 00 00 */	stw r6, ResettingBits@sda21(r0)
 /* 000008B8 000008F8  28 00 00 04 */	cmplwi r0, 0x4
@@ -662,7 +662,7 @@
 /* 00000970 000009B0  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 00000974 000009B4  7C 7E 1B 78 */	mr r30, r3
 /* 00000978 000009B8  48 00 00 01 */	bl OSDisableInterrupts
-/* 0000097C 000009BC  80 C0 00 00 */	lwz r6, ProbingBits@sda21(r0)
+/* 0000097C 000009BC  80 C0 00 00 */	lwz r6, PendingBits@sda21(r0)
 /* 00000980 000009C0  38 E0 00 00 */	li r7, 0x0
 /* 00000984 000009C4  80 A0 00 00 */	lwz r5, WaitingBits@sda21(r0)
 /* 00000988 000009C8  3C 80 80 00 */	lis r4, 0x8000
@@ -674,7 +674,7 @@
 /* 000009A0 000009E0  7F DE 28 78 */	andc r30, r30, r5
 /* 000009A4 000009E4  80 A0 00 00 */	lwz r5, EnabledBits@sda21(r0)
 /* 000009A8 000009E8  7C C4 F3 78 */	or r4, r6, r30
-/* 000009AC 000009EC  90 E0 00 00 */	stw r7, ProbingBits@sda21(r0)
+/* 000009AC 000009EC  90 E0 00 00 */	stw r7, PendingBits@sda21(r0)
 /* 000009B0 000009F0  54 00 06 73 */	rlwinm. r0, r0, 0, 25, 25
 /* 000009B4 000009F4  90 80 00 00 */	stw r4, ResettingBits@sda21(r0)
 /* 000009B8 000009F8  7C A4 F0 78 */	andc r4, r5, r30
@@ -806,7 +806,7 @@
 /* 00000B90 00000BD0  48 00 00 01 */	bl OSRegisterResetFunction
 /* 00000B94 00000BD4  3F 80 F0 00 */	lis r28, 0xf000
 /* 00000B98 00000BD8  48 00 00 01 */	bl OSDisableInterrupts
-/* 00000B9C 00000BDC  80 80 00 00 */	lwz r4, ProbingBits@sda21(r0)
+/* 00000B9C 00000BDC  80 80 00 00 */	lwz r4, PendingBits@sda21(r0)
 /* 00000BA0 00000BE0  38 E0 00 00 */	li r7, 0x0
 /* 00000BA4 00000BE4  80 A0 00 00 */	lwz r5, WaitingBits@sda21(r0)
 /* 00000BA8 00000BE8  3B 63 00 00 */	addi r27, r3, 0x0
@@ -818,7 +818,7 @@
 /* 00000BC0 00000C00  7F 9C 28 78 */	andc r28, r28, r5
 /* 00000BC4 00000C04  80 A0 00 00 */	lwz r5, EnabledBits@sda21(r0)
 /* 00000BC8 00000C08  7C 86 E3 78 */	or r6, r4, r28
-/* 00000BCC 00000C0C  90 E0 00 00 */	stw r7, ProbingBits@sda21(r0)
+/* 00000BCC 00000C0C  90 E0 00 00 */	stw r7, PendingBits@sda21(r0)
 /* 00000BD0 00000C10  7C A4 E0 78 */	andc r4, r5, r28
 /* 00000BD4 00000C14  90 C0 00 00 */	stw r6, ResettingBits@sda21(r0)
 /* 00000BD8 00000C18  28 00 00 04 */	cmplwi r0, 0x4
@@ -888,7 +888,7 @@
 /* 00000CC0 00000D00  3A 80 00 00 */	li r20, 0x0
 /* 00000CC4 00000D04  3F 60 80 00 */	lis r27, 0x8000
 .L_00000CC8:
-/* 00000CC8 00000D08  80 00 00 00 */	lwz r0, ProbingBits@sda21(r0)
+/* 00000CC8 00000D08  80 00 00 00 */	lwz r0, PendingBits@sda21(r0)
 /* 00000CCC 00000D0C  7F 77 AC 30 */	srw r23, r27, r21
 /* 00000CD0 00000D10  7C 00 B8 39 */	and. r0, r0, r23
 /* 00000CD4 00000D14  41 82 00 D8 */	beq .L_00000DAC
@@ -897,7 +897,7 @@
 /* 00000CE0 00000D20  38 C0 00 00 */	li r6, 0x0
 /* 00000CE4 00000D24  80 00 00 00 */	lwz r0, CheckingBits@sda21(r0)
 /* 00000CE8 00000D28  7C 79 1B 78 */	mr r25, r3
-/* 00000CEC 00000D2C  80 A0 00 00 */	lwz r5, ProbingBits@sda21(r0)
+/* 00000CEC 00000D2C  80 A0 00 00 */	lwz r5, PendingBits@sda21(r0)
 /* 00000CF0 00000D30  7C 84 03 78 */	or r4, r4, r0
 /* 00000CF4 00000D34  80 00 00 00 */	lwz r0, ResettingBits@sda21(r0)
 /* 00000CF8 00000D38  7C A7 20 78 */	andc r7, r5, r4
@@ -908,7 +908,7 @@
 /* 00000D0C 00000D4C  7C A4 38 78 */	andc r4, r5, r7
 /* 00000D10 00000D50  28 00 00 04 */	cmplwi r0, 0x4
 /* 00000D14 00000D54  80 00 00 00 */	lwz r0, ResettingBits@sda21(r0)
-/* 00000D18 00000D58  90 C0 00 00 */	stw r6, ProbingBits@sda21(r0)
+/* 00000D18 00000D58  90 C0 00 00 */	stw r6, PendingBits@sda21(r0)
 /* 00000D1C 00000D5C  7C 03 28 38 */	and r3, r0, r5
 /* 00000D20 00000D60  90 80 00 00 */	stw r4, EnabledBits@sda21(r0)
 /* 00000D24 00000D64  40 82 00 10 */	bne .L_00000D34
@@ -1021,7 +1021,7 @@
 /* 00000EB0 00000EF0  80 A0 00 00 */	lwz r5, WaitingBits@sda21(r0)
 /* 00000EB4 00000EF4  7E A3 AB 78 */	mr r3, r21
 /* 00000EB8 00000EF8  80 80 00 00 */	lwz r4, CheckingBits@sda21(r0)
-/* 00000EBC 00000EFC  80 00 00 00 */	lwz r0, ProbingBits@sda21(r0)
+/* 00000EBC 00000EFC  80 00 00 00 */	lwz r0, PendingBits@sda21(r0)
 /* 00000EC0 00000F00  7C C7 40 38 */	and r7, r6, r8
 /* 00000EC4 00000F04  7C A6 40 38 */	and r6, r5, r8
 /* 00000EC8 00000F08  90 E0 00 00 */	stw r7, EnabledBits@sda21(r0)
@@ -1030,7 +1030,7 @@
 /* 00000ED4 00000F14  90 C0 00 00 */	stw r6, WaitingBits@sda21(r0)
 /* 00000ED8 00000F18  38 80 00 00 */	li r4, 0x0
 /* 00000EDC 00000F1C  90 A0 00 00 */	stw r5, CheckingBits@sda21(r0)
-/* 00000EE0 00000F20  90 00 00 00 */	stw r0, ProbingBits@sda21(r0)
+/* 00000EE0 00000F20  90 00 00 00 */	stw r0, PendingBits@sda21(r0)
 /* 00000EE4 00000F24  48 00 00 01 */	bl OSSetWirelessID
 /* 00000EE8 00000F28  7F 23 CB 78 */	mr r3, r25
 /* 00000EEC 00000F2C  48 00 00 01 */	bl OSRestoreInterrupts
@@ -1808,7 +1808,7 @@
 /* 00001998 000019D8  41 82 00 E8 */	beq .L_00001A80
 /* 0000199C 000019DC  3F C0 F0 00 */	lis r30, 0xf000
 /* 000019A0 000019E0  48 00 00 01 */	bl OSDisableInterrupts
-/* 000019A4 000019E4  80 C0 00 00 */	lwz r6, ProbingBits@sda21(r0)
+/* 000019A4 000019E4  80 C0 00 00 */	lwz r6, PendingBits@sda21(r0)
 /* 000019A8 000019E8  38 E0 00 00 */	li r7, 0x0
 /* 000019AC 000019EC  80 A0 00 00 */	lwz r5, WaitingBits@sda21(r0)
 /* 000019B0 000019F0  3C 80 80 00 */	lis r4, 0x8000
@@ -1820,7 +1820,7 @@
 /* 000019C8 00001A08  7F DE 28 78 */	andc r30, r30, r5
 /* 000019CC 00001A0C  80 A0 00 00 */	lwz r5, EnabledBits@sda21(r0)
 /* 000019D0 00001A10  7C C4 F3 78 */	or r4, r6, r30
-/* 000019D4 00001A14  90 E0 00 00 */	stw r7, ProbingBits@sda21(r0)
+/* 000019D4 00001A14  90 E0 00 00 */	stw r7, PendingBits@sda21(r0)
 /* 000019D8 00001A18  54 00 06 73 */	rlwinm. r0, r0, 0, 25, 25
 /* 000019DC 00001A1C  90 80 00 00 */	stw r4, ResettingBits@sda21(r0)
 /* 000019E0 00001A20  7C A4 F0 78 */	andc r4, r5, r30
@@ -2095,9 +2095,9 @@
 	.skip 0x4
 .endobj CheckingBits
 
-.obj ProbingBits, global
+.obj PendingBits, global
 	.skip 0x4
-.endobj ProbingBits
+.endobj PendingBits
 
 .obj SamplingRate, global
 	.skip 0x4
