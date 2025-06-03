@@ -47,6 +47,17 @@ void plBonusLib_8003D514(int arg0)
     }
 }
 
+s32 pl_8003D60C(s32 arg0)
+{
+    if (((arg0 >= 0xA0) && (arg0 < 0xA1)) ||
+        ((arg0 >= 0xEA) && (arg0 < 0xEE)) || (arg0 == 0xE1))
+    {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 void pl_8003DF44(int arg0, int arg1)
 {
     s32 temp_r3;

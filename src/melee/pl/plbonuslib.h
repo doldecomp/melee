@@ -7,7 +7,7 @@
 #include "it/forward.h"
 
 /* 03D644 */ void pl_8003D644(int, int, int, int);
-/* 03D60C */ void pl_8003D60C(void);
+/* 03D60C */ s32 pl_8003D60C(s32);
 /* 03DF44 */ void pl_8003DF44(int, int);
 /* 03DFF4 */ void pl_8003DFF4(s32, s32, s32);
 /* 03E058 */ void pl_8003E058(int, s32, int, s32);
