@@ -441,7 +441,7 @@ void pl_8003EE2C(s32 arg0, s32 arg1)
     }
 }
 
-void pl_8003F53C(s32 arg0, s32 arg1)
+void fn_8003F53C(s32 arg0, s32 arg1)
 {
     Fighter_GObj* temp_r30;
     pl_StaleMoveTableExt_t* temp_r31;

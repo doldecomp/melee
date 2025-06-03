@@ -34,7 +34,7 @@
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03EC9C */ void pl_8003EC9C(s32, s32, f32, f32);
 /* 03EE2C */ void pl_8003EE2C(s32, s32);
-/* 03F53C */ void pl_8003F53C(s32, s32);
+/* 03F53C */ void fn_8003F53C(s32, s32);
 /* 03FAA8 */ void pl_8003FAA8(s32 slot, s32 index, Vec3* pos, Vec3* prevPos);
 /* 03FBFC */ s32 pl_8003FBFC(s32);
 /* 03FC20 */ s32 pl_8003FC20(s32);
