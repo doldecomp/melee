@@ -496,7 +496,7 @@ void GXSetChanAmbColor(GXChannelID chan, GXColor amb_color)
     }
 
     GX_WRITE_XF_REG(colIdx + 10, reg);
-    gx->bpSent = 0;
+    gx->bpSent = 1;
     gx->ambColor[colIdx] = reg;
 }
 
@@ -555,7 +555,7 @@ void GXSetChanMatColor(GXChannelID chan, GXColor mat_color)
     }
 
     GX_WRITE_XF_REG(colIdx + 12, reg);
-    gx->bpSent = 0;
+    gx->bpSent = 1;
     gx->matColor[colIdx] = reg;
 }
 
@@ -606,7 +606,7 @@ void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src,
     SET_REG_FIELD(0x310, reg, 1, 10, (attn_fn != 0));
 
     GX_WRITE_XF_REG(idx + 14, reg);
-    gx->bpSent = 0;
+    gx->bpSent = 1;
     if (chan == GX_COLOR0A0) {
         GX_WRITE_XF_REG(16, reg);
     } else if (chan == GX_COLOR1A1) {

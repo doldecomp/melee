@@ -25,7 +25,7 @@ long __CARDRawRead(long chan, void * buf, long length, long offset);
 
 // CARDOpen.c
 BOOL __CARDCompareFileName(CARDDir *ent, const char *fileName);
-s32 __CARDAccess(CARDDir *ent);
+s32 __CARDAccess(CARDControl* card, CARDDir *ent);
 s32 __CARDIsPublic(CARDDir *ent);
 s32 __CARDGetFileNo(CARDControl* card, const char* fileName, s32* pfileNo);
 BOOL __CARDIsOpened(CARDControl *card, s32 fileNo);

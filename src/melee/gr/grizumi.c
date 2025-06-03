@@ -690,6 +690,7 @@ HSD_GObj* grIzumi_801CCBDC(float height, Vec3* a, int b, HSD_JObj* jobj)
                 jobj2 = Ground_801C3FA4(gobj, 2);
                 if (jobj2 != NULL) {
                     Vec3 vec;
+                    u8 _[4];
                     lb_8000B1CC(jobj2, NULL, &vec);
                     gp->gv.izumi3.xD8 = (vec.y - aa.y) / Ground_801C0498();
                 } else {

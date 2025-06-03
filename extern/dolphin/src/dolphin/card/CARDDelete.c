@@ -45,7 +45,7 @@ s32 CARDFastDeleteAsync(s32 chan, s32 fileNo, CARDCallback callback) {
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result < 0)
         return __CARDPutControlBlock(card, result);
     if (__CARDIsOpened(card, fileNo))

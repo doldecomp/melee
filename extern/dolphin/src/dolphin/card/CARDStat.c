@@ -87,7 +87,7 @@ s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat) {
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result == CARD_RESULT_NOPERM)
         result = __CARDIsPublic(ent);
 
@@ -128,7 +128,7 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callba
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result < 0)
         return __CARDPutControlBlock(card, result);
 

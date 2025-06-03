@@ -1442,8 +1442,8 @@ config.libs = [
     DolphinLib(
         "pad",
         [
-            Object(Matching, "dolphin/pad/Padclamp.c"),
-            Object(NonMatching, "dolphin/pad/Pad.c"),
+            Object(Matching, "dolphin/pad/PadClamp.c"),
+            Object(NonMatching, "dolphin/pad/pad.c"),
         ],
         fix_epilogue=True,
         extern=True,

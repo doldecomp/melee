@@ -82,7 +82,7 @@ static void ReadCallback(s32 chan, s32 result) {
     // something funky is going on here; these conflicting casts are needed to match both debug
     // and retail regalloc and codegen. Perhaps the macro is different, but for the life of me
     // i cant figure this one out. Fake for now. Maybe? Unless the macro is just weird.
-    length = TRUNC((int)fileInfo->offset + (long)card->sectorSize + card->sectorSize - 1, card->sectorSize) - fileInfo->offset;
+    length = TRUNC((int)fileInfo->offset + (long)card->sectorSize, card->sectorSize) - fileInfo->offset;
     fileInfo->length -= length;
     if (fileInfo->length <= 0)
         goto error;
@@ -133,7 +133,7 @@ s32 CARDReadAsync(CARDFileInfo *fileInfo, void *buf, s32 length, s32 offset, CAR
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileInfo->fileNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result == CARD_RESULT_NOPERM)
         result = __CARDIsPublic(ent);
     if (result < 0)

@@ -79,6 +79,8 @@ typedef struct CARDControl {
     CARDCallback eraseCallback;
     CARDCallback unlockCallback;
     OSAlarm alarm;
+    int cid;
+    const DVDDiskID* diskID;
 } CARDControl;
 
 typedef struct CARDDecParam {

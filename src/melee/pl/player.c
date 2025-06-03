@@ -1348,7 +1348,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     player = &player_slots[slot];
 
     if (!bool_arg) {
-        u32 kos = player->kos_by_player[other_slot];
+        unsigned kos = player->kos_by_player[other_slot];
 
         if (kos < U32_MAX) {
             player->kos_by_player[other_slot]++;
