@@ -28,7 +28,7 @@ static void DLsetdelay(struct AXFX_REVHI_DELAYLINE* dl, long lag)
 static void DLcreate(struct AXFX_REVHI_DELAYLINE* dl, long max_length)
 {
     dl->length = (max_length * 4);
-    dl->inputs = OSAllocFromHeap(__OSCurrHeap, max_length << 2);
+    dl->inputs = __AXFXAlloc(max_length << 2);
     memset(dl->inputs, 0, max_length << 2);
     dl->lastOutput = 0.0f;
     DLsetdelay(dl, max_length >> 1);
@@ -38,7 +38,7 @@ static void DLcreate(struct AXFX_REVHI_DELAYLINE* dl, long max_length)
 
 static void DLdelete(struct AXFX_REVHI_DELAYLINE* dl)
 {
-    OSFreeToHeap(__OSCurrHeap, dl->inputs);
+    __AXFXFree(dl->inputs);
 }
 
 static int ReverbHICreate(struct AXFX_REVHI_WORK* rv, float coloration,
@@ -84,8 +84,7 @@ static int ReverbHICreate(struct AXFX_REVHI_WORK* rv, float coloration,
     if (0.0f != preDelay) {
         rv->preDelayTime = (32000.0f * preDelay);
         for (i = 0; i < 3; i++) {
-            rv->preDelayLine[i] =
-                OSAllocFromHeap(__OSCurrHeap, rv->preDelayTime * 4);
+            rv->preDelayLine[i] = __AXFXAlloc(rv->preDelayTime * 4);
             memset(rv->preDelayLine[i], 0, rv->preDelayTime * 4);
             rv->preDelayPtr[i] = rv->preDelayLine[i];
         }
@@ -648,7 +647,7 @@ static void ReverbHIFree(struct AXFX_REVHI_WORK* rv)
     }
     if (rv->preDelayTime) {
         for (i = 0; i < 3; i++) {
-            OSFreeToHeap(__OSCurrHeap, rv->preDelayLine[i]);
+            __AXFXFree(rv->preDelayLine[i]);
         }
     }
 }

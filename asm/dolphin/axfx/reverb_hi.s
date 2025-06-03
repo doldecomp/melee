@@ -350,8 +350,8 @@ ReverbHICreate:
 DoCrossTalk:
 /* 8035BBAC 0035878C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8035BBB0 00358790  D9 C1 00 28 */	stfd f14, 0x28(r1)
-/* 8035BBB4 00358794  3C A0 80 4E */	lis r5, AXFX_ReverbHi_804DE388@ha
-/* 8035BBB8 00358798  C8 05 E3 88 */	lfd f0, AXFX_ReverbHi_804DE388@l(r5)
+/* 8035BBB4 00358794  3C A0 80 4E */	lis r5, i2fMagic@ha
+/* 8035BBB8 00358798  C8 05 E3 88 */	lfd f0, i2fMagic@l(r5)
 /* 8035BBBC 0035879C  3C A0 43 30 */	lis r5, 0x4330
 /* 8035BBC0 003587A0  90 A1 00 08 */	stw r5, 8(r1)
 /* 8035BBC4 003587A4  90 A1 00 10 */	stw r5, 0x10(r1)
@@ -471,8 +471,8 @@ HandleReverb:
 /* 8035BD80 00358960  C0 DF E3 94 */	lfs f6, value0_3@l(r31)
 /* 8035BD84 00358964  3F E0 80 4E */	lis r31, value0_6@ha
 /* 8035BD88 00358968  C1 3F E3 90 */	lfs f9, value0_6@l(r31)
-/* 8035BD8C 0035896C  3F E0 80 4E */	lis r31, AXFX_ReverbHi_804DE388@ha
-/* 8035BD90 00358970  C8 BF E3 88 */	lfd f5, AXFX_ReverbHi_804DE388@l(r31)
+/* 8035BD8C 0035896C  3F E0 80 4E */	lis r31, i2fMagic@ha
+/* 8035BD90 00358970  C8 BF E3 88 */	lfd f5, i2fMagic@l(r31)
 /* 8035BD94 00358974  C0 44 01 68 */	lfs f2, 0x168(r4)
 /* 8035BD98 00358978  C1 E4 01 A0 */	lfs f15, 0x1a0(r4)
 /* 8035BD9C 0035897C  C1 04 01 9C */	lfs f8, 0x19c(r4)
@@ -1060,8 +1060,8 @@ AXFX_ReverbHi_804DE37C:
 AXFX_ReverbHi_804DE380:
     .4byte 0x43300000
     .4byte 0x80000000
-.global AXFX_ReverbHi_804DE388
-AXFX_ReverbHi_804DE388:
+.global i2fMagic
+i2fMagic:
     .4byte 0x43300000
     .4byte 0x80000000
 .global value0_6
