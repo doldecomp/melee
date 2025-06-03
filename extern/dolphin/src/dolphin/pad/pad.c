@@ -145,25 +145,6 @@ static void ProbeWireless(long chan)
     SIEnablePolling(EnabledBits);
 }
 
-static void PADProbeCallback(s32 chan, u32 error, OSContext* context)
-{
-    unsigned long type;
-    ASSERTLINE(0x1F5, 0 <= ResettingChan && ResettingChan < SI_MAX_CHAN);
-    ASSERTLINE(0x1F6, chan == ResettingChan);
-    if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
-                   SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
-    {
-        type = Type[chan];
-        if (!(type & 0x80000) && !(type & 0x40000)) {
-            PADEnable(ResettingChan);
-            WaitingBits |= PAD_CHAN0_BIT >> ResettingChan;
-        } else {
-            ProbeWireless(ResettingChan);
-        }
-    }
-    DoReset();
-}
-
 static void PADDisable(long chan)
 {
     int enabled;
@@ -257,6 +238,17 @@ static void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
     if (error & SI_ERROR_NO_RESPONSE) {
         PADDisable(chan);
     }
+}
+
+static void PADProbeCallback(s32 chan, u32 error, OSContext* context)
+{
+    if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
+                   SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
+    {
+        PADEnable(ResettingChan);
+        WaitingBits |= PAD_CHAN0_BIT >> ResettingChan;
+    }
+    DoReset();
 }
 
 static void PADTypeAndStatusCallback(s32 chan, u32 type) {}
