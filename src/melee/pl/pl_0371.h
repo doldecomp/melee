@@ -5,8 +5,9 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 03D60C */ void pl_8003D60C(void);
 /* 03E058 */ void pl_8003E058(s32, s32, s32, s32);

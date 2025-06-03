@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftPk_SpecialS.h"
 
@@ -18,6 +17,7 @@
 #include "ftPikachu/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 void ftPk_SpecialS_Enter(HSD_GObj* gobj)
 {

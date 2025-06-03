@@ -9,7 +9,7 @@
 
 #include "lb/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
 typedef struct {

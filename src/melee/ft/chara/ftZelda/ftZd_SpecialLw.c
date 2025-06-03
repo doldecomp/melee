@@ -19,7 +19,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 // 8013ADB4 - 8013AE30 (124 bytes)
 // https://decomp.me/scratch/LbMVE

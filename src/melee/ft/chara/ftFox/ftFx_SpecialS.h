@@ -3,8 +3,9 @@
 
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0E9DF8 */ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj);
 /* 0E9E78 */ bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj);

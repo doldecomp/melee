@@ -5,8 +5,9 @@
 #include <placeholder.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 2207F0 */ void grTFalco_802207F0(int);
 /* 2207F4 */ void grTFalco_802207F4(void);

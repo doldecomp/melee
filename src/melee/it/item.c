@@ -25,7 +25,7 @@
 #include "mp/mplib.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/class.h>
 #include <baselib/debug.h>
@@ -106,7 +106,8 @@ S32Vec3 Item_804A0E24;
 void Item_80266FCC(void)
 {
     HSD_ObjAllocInit(&item_alloc_data, sizeof(Item), 4);
-    HSD_ObjAllocInit(&item_dynamic_bones_alloc_data, sizeof(DynamicBoneTable), 4);
+    HSD_ObjAllocInit(&item_dynamic_bones_alloc_data, sizeof(DynamicBoneTable),
+                     4);
     HSD_ObjAllocInit(&item_link_alloc_data, sizeof(ItemLink), 4);
 
     Item_804A0C64.x0 = 0;
@@ -813,7 +814,8 @@ static /// @todo Needs some serious cleaning.
 
     item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
-        item_data->xBBC_dynamicBoneTable = HSD_ObjAlloc(&item_dynamic_bones_alloc_data);
+        item_data->xBBC_dynamicBoneTable =
+            HSD_ObjAlloc(&item_dynamic_bones_alloc_data);
         if (item_data->xBBC_dynamicBoneTable == NULL) {
             return false;
         }
@@ -1622,7 +1624,7 @@ static bool Item_80269F14(HSD_GObj* gobj)
     f32 temp_f30;
     bool (*cb_OnReflect)(HSD_GObj*);
     s32 i;
-    uint var_r27;
+    u32 var_r27;
     Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
 
     if (temp_item->xDCC_flag.b1 == 0) {
@@ -1944,10 +1946,9 @@ static void ItemSwitch(HSD_GObj* gobj)
     }
 }
 
-static /// @todo Could this be a higher-level inline in gobjproc.h or
-       /// something?
-    void
-    RunCallback(HSD_GObj* gobj, HSD_GObjEvent arg1)
+/// @todo Could this be a higher-level inline in gobjproc.h or
+/// something?
+static void RunGObjCallback(HSD_GObj* gobj, HSD_GObjEvent arg1)
 {
     if (arg1 != NULL) {
         arg1(gobj);
@@ -1968,7 +1969,7 @@ static void func_8026A8EC_inline1(HSD_GObj* gobj)
 static void func_8026A8EC_inline2(HSD_GObj* gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(gobj);
-    RunCallback(gobj, it->xB8_itemLogicTable->destroyed);
+    RunGObjCallback(gobj, it->xB8_itemLogicTable->destroyed);
 }
 
 static void func_8026A8EC_inline3(HSD_GObj* gobj)
@@ -2025,25 +2026,24 @@ void Item_8026A8EC(Item_GObj* gobj)
 
 void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
 {
-    u8 _[16];
-
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
+    PAD_STACK(16);
 
     it_80273168(gobj);
     it_802742F4(gobj, owner_gobj, part);
-    RunCallback(gobj, item_data->xB8_itemLogicTable->picked_up);
+    RunGObjCallback(gobj, item_data->xB8_itemLogicTable->picked_up);
     Item_8026B074(item_data);
 }
 
 void Item_8026ABD8(Item_GObj* gobj, Vec3* pos, f32 arg2)
 {
-    u8 _[8];
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
+    PAD_STACK(8);
 
     item_data->xC44 = arg2;
     it_802731A4(gobj);
     it_80273B50(gobj, pos);
-    RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
+    RunGObjCallback(gobj, item_data->xB8_itemLogicTable->dropped);
     it_80274198(gobj, true);
     it_802754D4(gobj);
 
@@ -2058,7 +2058,7 @@ void Item_8026AC74(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
     item_data->xC44 = arg3;
     it_802731A4(gobj);
     it_80273748(gobj, arg1, arg2);
-    RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
+    RunGObjCallback(gobj, item_data->xB8_itemLogicTable->dropped);
     it_802741F4(gobj, true);
     it_802754D4(gobj);
 
@@ -2073,7 +2073,7 @@ void Item_8026AD20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3)
     it_802731E0(gobj);
     item_data->xC44 = arg3;
     it_80273748(gobj, arg1, arg2);
-    RunCallback(gobj, item_data->xB8_itemLogicTable->thrown);
+    RunGObjCallback(gobj, item_data->xB8_itemLogicTable->thrown);
     it_802741F4(gobj, true);
     it_802754D4(gobj);
 }
@@ -2092,15 +2092,16 @@ void Item_OnUserDataRemove(void* user_data)
     Item* item_data = (Item*) user_data;
 
     if (item_data->xBBC_dynamicBoneTable != NULL) {
-        HSD_ObjFree(&item_dynamic_bones_alloc_data, item_data->xBBC_dynamicBoneTable);
+        HSD_ObjFree(&item_dynamic_bones_alloc_data,
+                    item_data->xBBC_dynamicBoneTable);
     }
 
     HSD_ObjFree(&item_alloc_data, item_data);
 }
 
-uint Item_8026AE60(void)
+u32 Item_8026AE60(void)
 {
-    uint result = it_804D6D14++;
+    u32 result = it_804D6D14++;
 
     if (it_804D6D14 == 0) {
         it_804D6D14++;

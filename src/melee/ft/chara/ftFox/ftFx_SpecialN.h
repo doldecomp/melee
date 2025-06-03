@@ -1,8 +1,9 @@
 #ifndef GALE01_0E5CB0
 #define GALE01_0E5CB0
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0E5CB0 */ void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos);
 /* 0E5D20 */ void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos);

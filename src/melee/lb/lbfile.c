@@ -1,5 +1,3 @@
-#include <dolphin/dvd/forward.h>
-
 #include "lb/lbfile.h"
 
 #include "lb/lb_0192.h"
@@ -8,7 +6,7 @@
 #include "lb/lblanguage.h"
 
 #include <string.h>
-#include <dolphin/dvd/dvd.h>
+#include <dolphin/dvd.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>
@@ -117,7 +115,7 @@ size_t lbFile_8001634C(s32 fileno)
 s32 lbFile_800163D8(const char* basename)
 {
     s32 entry_num;
-    const char* filename = lbFile_80016204(basename);
+    char* filename = lbFile_80016204(basename);
     entry_num = DVDConvertPathToEntrynum(filename);
     if (entry_num == -1) {
         OSReport("file isn't exist %s = %d\n", filename, entry_num);
@@ -139,10 +137,9 @@ void lbFile_800164A4(s32 file, u32 src, u32* dest, s32 size,
 void lbFile_80016580(const char* basename, u32 src, u32* dest,
                      HSD_DevComCallback callback, void* args)
 {
-    u8 _[4];
-
-    const char* filename = lbFile_80016204(basename);
+    char* filename = lbFile_80016204(basename);
     s32 entry_num = DVDConvertPathToEntrynum(filename);
+    PAD_STACK(4);
 
     if (entry_num == -1) {
         OSReport("file isn't exist %s = %d\n", filename, entry_num);

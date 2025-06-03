@@ -1,5 +1,4 @@
 #include "forward.h"
-#include <dolphin/gx/forward.h>
 
 #include "pobj.h"
 
@@ -18,12 +17,7 @@
 
 #include <__mem.h>
 #include <math.h> // IWYU pragma: keep
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXDisplayList.h>
-#include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GXVert.h>
+#include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
@@ -452,7 +446,7 @@ static void setupArrayDesc(HSD_VtxDescList* desc_list)
     if (prev_vtxdesclist_array != desc_list) {
         for (desc = desc_list; desc->attr != GX_VA_NULL; desc++) {
             if (desc->attr_type != GX_DIRECT) {
-                GXSetArray(desc->attr, (s32) desc->vertex, desc->stride);
+                GXSetArray(desc->attr, desc->vertex, desc->stride);
             }
         }
         prev_vtxdesclist_array = desc_list;
@@ -499,7 +493,7 @@ static void setupShapeAnimArrayDesc(HSD_VtxDescList* desc_list)
             case GX_VA_NBT:
                 break;
             default:
-                GXSetArray(desc->attr, (s32) desc->vertex, desc->stride);
+                GXSetArray(desc->attr, desc->vertex, desc->stride);
             }
         }
     }
@@ -1219,7 +1213,7 @@ static void PObjDispSimplePrimitive(HSD_PObj* pobj, u32 rendermode)
     setupArrayDesc(pobj->verts);
     setupVtxDesc(pobj);
 
-    GXCallDisplayList((s32) pobj->display, pobj->n_display << 5);
+    GXCallDisplayList(pobj->display, pobj->n_display << 5);
 }
 
 static void PObjDispShapeAnim(HSD_PObj* pobj, u32 rendermode)

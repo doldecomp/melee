@@ -6,10 +6,11 @@
 
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 0EE528 */ void ftKb_Init_800EE528(void);
 /* 0EE5C0 */ void ftKb_Init_OnDeath(ftKb_GObj* gobj);

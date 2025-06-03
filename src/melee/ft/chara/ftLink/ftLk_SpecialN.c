@@ -2,7 +2,6 @@
 
 #include "ftLink/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftLk_SpecialN.h"
 
@@ -27,6 +26,7 @@
 #include "lb/lbrefract.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 static float const ftLk_Init_804D9340 = 0.0;
 static float const ftLk_Init_804D9344 = 5 * deg_to_rad;

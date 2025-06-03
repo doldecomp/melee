@@ -2,7 +2,7 @@
 #define MELEE_MP_MPCOLL_H
 
 #include <platform.h>
-#include <dolphin/mtx/forward.h>
+#include <dolphin/mtx.h>
 #include <baselib/forward.h>
 
 #include "ft/fighter.h"

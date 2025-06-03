@@ -15,7 +15,6 @@
 #include <__mem.h>
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
 
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data

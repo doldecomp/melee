@@ -1,7 +1,5 @@
-#ifndef _STDIO
-#define _STDIO
-
-#include <platform.h>
+#ifndef _STDIO_H_
+#define _STDIO_H_
 
 #include "stdarg.h"
 #include "stddef.h"

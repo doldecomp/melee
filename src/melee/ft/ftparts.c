@@ -108,10 +108,10 @@ void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
         float scale_z = _HSD_JObjGetScaleZ(jobj);
         float scale_y = _HSD_JObjGetScaleY(jobj);
         float scale_x = _HSD_JObjGetScaleX(jobj);
-        PSMTXScale(temp_mtx, 1.0F / scale_x, 1.0F / scale_y, 1.0F / scale_z);
-        PSMTXConcat(rmtx, temp_mtx, ft_jobj_scale.mtx);
+        MTXScale(temp_mtx, 1.0F / scale_x, 1.0F / scale_y, 1.0F / scale_z);
+        MTXConcat(rmtx, temp_mtx, ft_jobj_scale.mtx);
         HSD_MtxInverse(rmtx, temp_mtx);
-        PSMTXConcat(ft_jobj_scale.mtx, temp_mtx, ft_jobj_scale.mtx);
+        MTXConcat(ft_jobj_scale.mtx, temp_mtx, ft_jobj_scale.mtx);
         ft_jobj_scale.has_z_scale = true;
     } else {
         ft_jobj_scale.has_z_scale = false;

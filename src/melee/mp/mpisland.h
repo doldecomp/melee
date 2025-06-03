@@ -4,7 +4,8 @@
 #include <placeholder.h>
 
 #include "mp/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 05AC14 */ mp_UnkStruct0* mpIsland_8005AC14(Vec3*, float);
 /* 05AB54 */ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx);

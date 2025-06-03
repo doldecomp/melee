@@ -10,7 +10,7 @@
 #include "ftYoshi/ftYs_Init.h"
 #include "it/items/it_2F2B.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };

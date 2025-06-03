@@ -7,7 +7,7 @@
 #include "it/forward.h"
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ftSeak_FighterVars {
     /* fp+222C */ int x0;

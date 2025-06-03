@@ -4,6 +4,11 @@
 
 #include "__card.h"
 
+#define CARDSetIconSpeed(stat, n, f)                                          \
+    ((stat)->iconSpeed =                                                      \
+         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |  \
+                ((f) << (2 * (n)))))
+
 // functions
 static void UpdateIconOffsets(CARDDir *ent, CARDStat *stat);
 
@@ -18,6 +23,7 @@ static void UpdateIconOffsets(CARDDir *ent, CARDStat *stat) {
         stat->bannerFormat = 0;
         stat->iconFormat = 0;
         stat->iconSpeed = 0;
+        offset = 0;
     }
 
     iconTlut = FALSE;
@@ -87,7 +93,7 @@ s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat) {
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result == CARD_RESULT_NOPERM)
         result = __CARDIsPublic(ent);
 
@@ -110,6 +116,8 @@ s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat) {
     return __CARDPutControlBlock(card, result);
 }
 
+#pragma push
+#pragma force_active on
 s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callback) {
     CARDControl *card;
     CARDDir *dir;
@@ -119,7 +127,11 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callba
     ASSERTLINE(0xD5, 0 <= fileNo && fileNo < CARD_MAX_FILE);
     ASSERTLINE(0xD6, 0 <= chan && chan < 2);
 
-    if (fileNo < 0 || CARD_MAX_FILE <= fileNo)
+    if (fileNo < 0 || CARD_MAX_FILE <= fileNo ||
+        (stat->iconAddr != -1 && CARD_READ_SIZE <= stat->iconAddr) ||
+        (stat->commentAddr != -1 &&
+         CARD_SYSTEM_BLOCK_SIZE - CARD_COMMENT_SIZE <
+             stat->commentAddr % CARD_SYSTEM_BLOCK_SIZE))
         return CARD_RESULT_FATAL_ERROR;
 
     result = __CARDGetControlBlock(chan, &card);
@@ -128,7 +140,7 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callba
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result < 0)
         return __CARDPutControlBlock(card, result);
 
@@ -139,12 +151,17 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callba
     ent->commentAddr = stat->commentAddr;
     UpdateIconOffsets(ent, stat);
 
+    if (ent->iconAddr == 0xffffffff) {
+        CARDSetIconSpeed(ent, 0, CARD_STAT_SPEED_FAST);
+    }
+
     ent->time = (u32)OSTicksToSeconds(OSGetTime());
     result = __CARDUpdateDir(chan, callback);
     if (result < 0)
         __CARDPutControlBlock(card, result);
     return result;
 }
+#pragma pop
 
 long CARDSetStatus(long chan, long fileNo, struct CARDStat * stat) {
     long result = CARDSetStatusAsync(chan, fileNo, stat, __CARDSyncCallback);

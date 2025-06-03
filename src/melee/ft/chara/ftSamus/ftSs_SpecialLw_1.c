@@ -16,7 +16,7 @@
 #include "it/items/itsamusbomb.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
 {

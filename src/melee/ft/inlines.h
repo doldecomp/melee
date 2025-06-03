@@ -10,7 +10,7 @@
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -23,10 +23,10 @@
 
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \
-        void* backup = (fp)->dat_attrs_backup;                         \
+        void* backup = (fp)->dat_attrs_backup;                                \
         attributeName* src = (attributeName*) (fp)->ft_data->ext_attr;        \
         void** da = &(fp)->dat_attrs;                                         \
-        *(attributeName*) (fp)->dat_attrs_backup = *src;               \
+        *(attributeName*) (fp)->dat_attrs_backup = *src;                      \
         *da = backup;                                                         \
     } while (0)
 

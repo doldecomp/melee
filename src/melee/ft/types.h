@@ -6,8 +6,6 @@
 
 #include "ft/forward.h" // IWYU pragma: export
 #include "it/forward.h"
-#include <dolphin/gx/forward.h>
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "cm/types.h"
@@ -39,7 +37,8 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 #define FTPART_INVALID 0xFF
 
@@ -409,9 +408,9 @@ struct ftCommonData {
     /* +5D0 */ UNK_T x5D0;
     /* +5D4 */ UNK_T x5D4;
     /* +5D8 */ UNK_T x5D8;
-    /* +5DC */ uint bury_timer_unk1;
-    /* +5E0 */ uint bury_timer_unk2;
-    /* +5E4 */ uint bury_timer_unk3;
+    /* +5DC */ u32 bury_timer_unk1;
+    /* +5E0 */ u32 bury_timer_unk2;
+    /* +5E4 */ u32 bury_timer_unk3;
     /* +5E8 */ UNK_T x5E8;
     /* +5EC */ UNK_T x5EC;
     /* +5F0 */ u32 x5F0;
@@ -522,8 +521,8 @@ struct ftCommonData {
     /* +7DC */ int x7DC;
     /* +7E0 */ int x7E0;
     /* +7E4 */ float x7E4_scaleZ;
-    /* +7E8 */ uint unk_kb_angle_min;
-    /* +7EC */ uint unk_kb_angle_max;
+    /* +7E8 */ u32 unk_kb_angle_min;
+    /* +7EC */ u32 unk_kb_angle_max;
     /* +7F0 */ int x7F0;
     /* +7F4 */ u8 x7F4[0x800 - 0x7F4];
     /* +800 */ float x800;
@@ -1044,13 +1043,13 @@ struct Fighter_x1A88_t {
     /* +448 */ struct Fighter_x1A88_xFC_t* x448;
     /* +44C */ UNK_T x44C;
     /* +450 */ UNK_T x450;
-    /* +454 */ uint x454;
+    /* +454 */ u32 x454;
     /* +458 */ u8 x458[0x554 - 0x458];
     /* +554 */ union Fighter_x1A88_x544_t {
         struct {
             u8 x0_u8;
         };
-        uint x0_u32;
+        u32 x0_u32;
         void* x0_p;
     } x554;
     /* +558 */ float x558;
@@ -1132,7 +1131,7 @@ struct Fighter {
     /*  fp+508 */ ftDeviceUnk2 x508;
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
-    /*  fp+590 */ uint x590;
+    /*  fp+590 */ u32 x590;
     /*  fp+594 */ union {
         struct {
             /* fp+594:0 */ u8 x594_b0 : 1;
@@ -1285,7 +1284,7 @@ struct Fighter {
         /* fp+184C */ int x184c_damaged_hurtbox;
         /* fp+1850 */ float kb_applied;
         /* fp+1854 */ Vec3 x1854_collpos;
-        /* fp+1860 */ uint x1860_element;
+        /* fp+1860 */ u32 x1860_element;
         /* fp+1864 */ int x1864;
         /* fp+1868 */ HSD_GObj* x1868_source;
         /* fp+186C */ int x186c;
@@ -1756,8 +1755,8 @@ struct Fighter {
         /* fp+222C */ struct ftZelda_FighterVars zd;
     } fv;
     /* fp+2324 */ InternalStageId bury_stage_kind;
-    /* fp+2328 */ uint bury_timer_1;
-    /* fp+232C */ uint bury_timer_2;
+    /* fp+2328 */ u32 bury_timer_1;
+    /* fp+232C */ u32 bury_timer_2;
     /* fp+2330 */ IntVec2 x2330;
     /* fp+2338 */ IntVec2 x2338;
     /// @at{2340} @sz{AC}

@@ -1,5 +1,4 @@
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_HammerWait.h"
 
@@ -26,6 +25,7 @@
 #include "pl/plbonuslib.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* 0C5408 */ static void ftCo_800C5408(ftCo_Fighter* fp);
 /* 0C5588 */ static void ftCo_800C5588(ftCo_Fighter* fp);

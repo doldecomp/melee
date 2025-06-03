@@ -10,7 +10,7 @@
 #include <baselib/forward.h>
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ECB {
     f32 top;
@@ -359,7 +359,7 @@ typedef struct itCoin_ItemVars {
 
 typedef struct itFFlower_ItemVars {
     int x0;
-    uint x4;
+    u32 x4;
 } itFFlower_ItemVars;
 
 typedef struct FFlowerAttr {

@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2B1DEC */ int it_802B1DEC(Item_GObj*);
 /* 2B1DF8 */ Item_GObj* it_802B1DF8(Item_GObj*, Vec3*, Vec3*, s32, s32, s32);

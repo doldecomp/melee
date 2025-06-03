@@ -1,7 +1,7 @@
 #include "psdisp.h"
 
 #include <math.h>
-#include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx.h>
 
 typedef struct {
     u8 filename[9];

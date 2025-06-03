@@ -29,7 +29,7 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
@@ -1096,7 +1096,7 @@ void ftColl_8007ABD0(HitCapsule* arg0, u32 arg1, Fighter_GObj* arg2)
     NOT_IMPLEMENTED;
 }
 
-bool ftColl_8007AC68(uint kb_angle)
+bool ftColl_8007AC68(u32 kb_angle)
 {
     if (kb_angle != 361 && p_ftCommonData->unk_kb_angle_min <= kb_angle &&
         kb_angle <= p_ftCommonData->unk_kb_angle_max)

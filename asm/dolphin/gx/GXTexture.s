@@ -579,7 +579,7 @@
 /* 8033EF2C 0033BB0C  88 1C 00 1F */	lbz r0, 0x1f(r28)
 /* 8033EF30 0033BB10  54 00 07 BD */	rlwinm. r0, r0, 0, 30, 30
 /* 8033EF34 0033BB14  40 82 00 3C */	bne .L_8033EF70
-/* 8033EF38 0033BB18  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r0)
+/* 8033EF38 0033BB18  80 8D A5 08 */	lwz r4, gx@sda21(r0)
 /* 8033EF3C 0033BB1C  80 7C 00 18 */	lwz r3, 0x18(r28)
 /* 8033EF40 0033BB20  81 84 04 14 */	lwz r12, 0x414(r4)
 /* 8033EF44 0033BB24  7D 88 03 A6 */	mtlr r12
@@ -594,21 +594,21 @@
 /* 8033EF68 0033BB48  80 03 00 04 */	lwz r0, 0x4(r3)
 /* 8033EF6C 0033BB4C  90 1F 80 00 */	stw r0, -0x8000(r31)
 .L_8033EF70:
-/* 8033EF70 0033BB50  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033EF70 0033BB50  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033EF74 0033BB54  57 A5 10 3A */	slwi r5, r29, 2
 /* 8033EF78 0033BB58  80 9C 00 08 */	lwz r4, 0x8(r28)
 /* 8033EF7C 0033BB5C  38 00 00 00 */	li r0, 0x0
 /* 8033EF80 0033BB60  7C 63 2A 14 */	add r3, r3, r5
 /* 8033EF84 0033BB64  90 83 04 5C */	stw r4, 0x45c(r3)
-/* 8033EF88 0033BB68  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033EF88 0033BB68  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033EF8C 0033BB6C  80 9C 00 00 */	lwz r4, 0x0(r28)
 /* 8033EF90 0033BB70  7C 63 2A 14 */	add r3, r3, r5
 /* 8033EF94 0033BB74  90 83 04 7C */	stw r4, 0x47c(r3)
-/* 8033EF98 0033BB78  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r0)
+/* 8033EF98 0033BB78  80 8D A5 08 */	lwz r4, gx@sda21(r0)
 /* 8033EF9C 0033BB7C  80 64 04 F0 */	lwz r3, 0x4f0(r4)
 /* 8033EFA0 0033BB80  60 63 00 01 */	ori r3, r3, 0x1
 /* 8033EFA4 0033BB84  90 64 04 F0 */	stw r3, 0x4f0(r4)
-/* 8033EFA8 0033BB88  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033EFA8 0033BB88  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033EFAC 0033BB8C  B0 03 00 02 */	sth r0, 0x2(r3)
 /* 8033EFB0 0033BB90  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8033EFB4 0033BB94  83 E1 00 24 */	lwz r31, 0x24(r1)
@@ -629,7 +629,7 @@
 /* 8033EFE0 0033BBC0  3B E4 00 00 */	addi r31, r4, 0x0
 /* 8033EFE4 0033BBC4  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8033EFE8 0033BBC8  3B C3 00 00 */	addi r30, r3, 0x0
-/* 8033EFEC 0033BBCC  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r0)
+/* 8033EFEC 0033BBCC  80 AD A5 08 */	lwz r5, gx@sda21(r0)
 /* 8033EFF0 0033BBD0  81 85 04 10 */	lwz r12, 0x410(r5)
 /* 8033EFF4 0033BBD4  7D 88 03 A6 */	mtlr r12
 /* 8033EFF8 0033BBD8  4E 80 00 21 */	blrl
@@ -676,7 +676,7 @@
 /* 8033F07C 0033BC5C  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8033F080 0033BC60  7C 7E 1B 78 */	mr r30, r3
 /* 8033F084 0033BC64  38 64 00 00 */	addi r3, r4, 0x0
-/* 8033F088 0033BC68  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r0)
+/* 8033F088 0033BC68  80 AD A5 08 */	lwz r5, gx@sda21(r0)
 /* 8033F08C 0033BC6C  81 85 04 14 */	lwz r12, 0x414(r5)
 /* 8033F090 0033BC70  7D 88 03 A6 */	mtlr r12
 /* 8033F094 0033BC74  4E 80 00 21 */	blrl
@@ -843,7 +843,7 @@
 
 # .text:0xB2C | 0x8033F2B8 | size: 0x14
 .fn GXSetTexRegionCallback, global
-/* 8033F2B8 0033BE98  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r0)
+/* 8033F2B8 0033BE98  80 8D A5 08 */	lwz r4, gx@sda21(r0)
 /* 8033F2BC 0033BE9C  84 04 04 10 */	lwzu r0, 0x410(r4)
 /* 8033F2C0 0033BEA0  90 64 00 00 */	stw r3, 0x0(r4)
 /* 8033F2C4 0033BEA4  7C 03 03 78 */	mr r3, r0
@@ -852,7 +852,7 @@
 
 # .text:0xB40 | 0x8033F2CC | size: 0x14
 .fn GXSetTlutRegionCallback, global
-/* 8033F2CC 0033BEAC  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r0)
+/* 8033F2CC 0033BEAC  80 8D A5 08 */	lwz r4, gx@sda21(r0)
 /* 8033F2D0 0033BEB0  84 04 04 14 */	lwzu r0, 0x414(r4)
 /* 8033F2D4 0033BEB4  90 64 00 00 */	stw r3, 0x0(r4)
 /* 8033F2D8 0033BEB8  7C 03 03 78 */	mr r3, r0
@@ -861,7 +861,7 @@
 
 # .text:0xB54 | 0x8033F2E0 | size: 0xCC
 .fn __SetSURegs, global
-/* 8033F2E0 0033BEC0  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r0)
+/* 8033F2E0 0033BEC0  80 AD A5 08 */	lwz r5, gx@sda21(r0)
 /* 8033F2E4 0033BEC4  54 80 10 3A */	slwi r0, r4, 2
 /* 8033F2E8 0033BEC8  54 69 10 3A */	slwi r9, r3, 2
 /* 8033F2EC 0033BECC  7C 85 02 14 */	add r4, r5, r0
@@ -874,13 +874,13 @@
 /* 8033F308 0033BEE8  50 A3 05 BE */	rlwimi r3, r5, 0, 22, 31
 /* 8033F30C 0033BEEC  90 64 00 B8 */	stw r3, 0xb8(r4)
 /* 8033F310 0033BEF0  38 60 00 00 */	li r3, 0x0
-/* 8033F314 0033BEF4  80 8D A5 08 */	lwz r4, __GXContexts@sda21(r0)
+/* 8033F314 0033BEF4  80 8D A5 08 */	lwz r4, gx@sda21(r0)
 /* 8033F318 0033BEF8  7D 04 02 14 */	add r8, r4, r0
 /* 8033F31C 0033BEFC  80 88 00 D8 */	lwz r4, 0xd8(r8)
 /* 8033F320 0033BF00  54 84 00 1E */	clrrwi r4, r4, 16
 /* 8033F324 0033BF04  50 A4 B5 BE */	rlwimi r4, r5, 22, 22, 31
 /* 8033F328 0033BF08  90 88 00 D8 */	stw r4, 0xd8(r8)
-/* 8033F32C 0033BF0C  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r0)
+/* 8033F32C 0033BF0C  80 AD A5 08 */	lwz r5, gx@sda21(r0)
 /* 8033F330 0033BF10  7C 85 4A 14 */	add r4, r5, r9
 /* 8033F334 0033BF14  81 24 04 7C */	lwz r9, 0x47c(r4)
 /* 8033F338 0033BF18  7D 45 02 14 */	add r10, r5, r0
@@ -896,13 +896,13 @@
 /* 8033F360 0033BF40  90 8A 00 B8 */	stw r4, 0xb8(r10)
 /* 8033F364 0033BF44  7D 04 00 34 */	cntlzw r4, r8
 /* 8033F368 0033BF48  54 84 5A 1E */	rlwinm r4, r4, 11, 8, 15
-/* 8033F36C 0033BF4C  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r0)
+/* 8033F36C 0033BF4C  80 AD A5 08 */	lwz r5, gx@sda21(r0)
 /* 8033F370 0033BF50  7D 05 02 14 */	add r8, r5, r0
 /* 8033F374 0033BF54  80 A8 00 D8 */	lwz r5, 0xd8(r8)
 /* 8033F378 0033BF58  54 A5 04 1C */	rlwinm r5, r5, 0, 16, 14
 /* 8033F37C 0033BF5C  7C A4 23 78 */	or r4, r5, r4
 /* 8033F380 0033BF60  90 88 00 D8 */	stw r4, 0xd8(r8)
-/* 8033F384 0033BF64  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r0)
+/* 8033F384 0033BF64  80 AD A5 08 */	lwz r5, gx@sda21(r0)
 /* 8033F388 0033BF68  98 E6 80 00 */	stb r7, -0x8000(r6)
 /* 8033F38C 0033BF6C  7C 85 02 14 */	add r4, r5, r0
 /* 8033F390 0033BF70  80 04 00 B8 */	lwz r0, 0xb8(r4)
@@ -920,7 +920,7 @@
 /* 8033F3B0 0033BF90  90 01 00 04 */	stw r0, 0x4(r1)
 /* 8033F3B4 0033BF94  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 8033F3B8 0033BF98  BF 61 00 14 */	stmw r27, 0x14(r1)
-/* 8033F3BC 0033BF9C  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033F3BC 0033BF9C  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033F3C0 0033BFA0  80 03 04 DC */	lwz r0, 0x4dc(r3)
 /* 8033F3C4 0033BFA4  28 00 00 FF */	cmplwi r0, 0xff
 /* 8033F3C8 0033BFA8  41 82 01 3C */	beq .L_8033F504
@@ -943,30 +943,30 @@
 /* 8033F404 0033BFE4  40 80 00 54 */	bge .L_8033F458
 /* 8033F408 0033BFE8  48 00 00 40 */	b .L_8033F448
 .L_8033F40C:
-/* 8033F40C 0033BFEC  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033F40C 0033BFEC  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033F410 0033BFF0  80 03 01 20 */	lwz r0, 0x120(r3)
 /* 8033F414 0033BFF4  54 1D 07 7E */	clrlwi r29, r0, 29
 /* 8033F418 0033BFF8  54 1C EF 7E */	extrwi r28, r0, 3, 26
 /* 8033F41C 0033BFFC  48 00 00 3C */	b .L_8033F458
 .L_8033F420:
-/* 8033F420 0033C000  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033F420 0033C000  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033F424 0033C004  80 03 01 20 */	lwz r0, 0x120(r3)
 /* 8033F428 0033C008  54 1D D7 7E */	extrwi r29, r0, 3, 23
 /* 8033F42C 0033C00C  54 1C BF 7E */	extrwi r28, r0, 3, 20
 /* 8033F430 0033C010  48 00 00 28 */	b .L_8033F458
 .L_8033F434:
-/* 8033F434 0033C014  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033F434 0033C014  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033F438 0033C018  80 03 01 20 */	lwz r0, 0x120(r3)
 /* 8033F43C 0033C01C  54 1D A7 7E */	extrwi r29, r0, 3, 17
 /* 8033F440 0033C020  54 1C 8F 7E */	extrwi r28, r0, 3, 14
 /* 8033F444 0033C024  48 00 00 14 */	b .L_8033F458
 .L_8033F448:
-/* 8033F448 0033C028  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033F448 0033C028  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033F44C 0033C02C  80 03 01 20 */	lwz r0, 0x120(r3)
 /* 8033F450 0033C030  54 1D 77 7E */	extrwi r29, r0, 3, 11
 /* 8033F454 0033C034  54 1C 5F 7E */	extrwi r28, r0, 3, 8
 .L_8033F458:
-/* 8033F458 0033C038  80 6D A5 08 */	lwz r3, __GXContexts@sda21(r0)
+/* 8033F458 0033C038  80 6D A5 08 */	lwz r3, gx@sda21(r0)
 /* 8033F45C 0033C03C  38 00 00 01 */	li r0, 0x1
 /* 8033F460 0033C040  7C 00 E0 30 */	slw r0, r0, r28
 /* 8033F464 0033C044  80 63 04 DC */	lwz r3, 0x4dc(r3)
@@ -984,7 +984,7 @@
 /* 8033F48C 0033C06C  3B DB 00 00 */	addi r30, r27, 0x0
 /* 8033F490 0033C070  48 00 00 6C */	b .L_8033F4FC
 .L_8033F494:
-/* 8033F494 0033C074  80 AD A5 08 */	lwz r5, __GXContexts@sda21(r0)
+/* 8033F494 0033C074  80 AD A5 08 */	lwz r5, gx@sda21(r0)
 /* 8033F498 0033C078  38 7E 04 9C */	addi r3, r30, 0x49c
 /* 8033F49C 0033C07C  57 64 08 3A */	extlwi r4, r27, 30, 1
 /* 8033F4A0 0033C080  7C 65 18 2E */	lwzx r3, r5, r3

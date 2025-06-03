@@ -13,7 +13,7 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void ftMh_Poke1_Coll(HSD_GObj* gobj) {}
 

@@ -14,7 +14,7 @@
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPopo/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 /* static */ void ftNn_Init_801238E4(HSD_GObj* gobj);
 

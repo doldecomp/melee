@@ -8,7 +8,7 @@
 #include "baselib/class.h"
 #include "baselib/object.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct HSD_WObj {
     HSD_Obj parent;

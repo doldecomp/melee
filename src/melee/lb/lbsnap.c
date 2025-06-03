@@ -11,8 +11,8 @@
 #include "it/it_266F.h"
 
 #include <stdio.h>
-#include <dolphin/card/CARDMount.h>
-#include <dolphin/os/OSExi.h>
+#include <dolphin/card.h>
+#include <dolphin/os.h>
 #include <dolphin/os/OSTime.h>
 #include <baselib/debug.h>
 #include <baselib/hsd_3B34.h>

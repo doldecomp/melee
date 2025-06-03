@@ -15,7 +15,7 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
-#include <dolphin/pad/pad.h>
+#include <dolphin/pad.h>
 #include <melee/ft/chara/ftPopo/ftPp_SpecialS.h>
 
 static void setRefGObjFlagAndClear(Fighter* fp)

@@ -2,7 +2,7 @@
 
 #include "lbcardgame.h"
 
-#include <dolphin/dvd/dvd.h>
+#include <dolphin/dvd.h>
 
 /* 019230 */ static enum_t lb_80019230(void);
 

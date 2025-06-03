@@ -4,10 +4,11 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/itCommonItems.h"
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2E5AC4 */ bool it_802E5AC4(Item_GObj*, bool);
 /* 2E5EF4 */ s32 it_802E5EF4(Item_GObj*);

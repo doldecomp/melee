@@ -7,7 +7,7 @@
 
 #include "platform.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct Toy {
     /*  +0 */ char pad_0[0x8];

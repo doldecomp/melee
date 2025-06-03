@@ -2,9 +2,9 @@
 #define GALE01_2295AC
 
 #include <platform.h>
+#include <placeholder.h>
 
-#include "dolphin/mtx/types.h"
-
+#include <dolphin/mtx.h>
 #include <baselib/object.h>
 
 typedef struct _mn_unk1 {

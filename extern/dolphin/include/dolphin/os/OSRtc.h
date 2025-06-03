@@ -49,6 +49,7 @@ unsigned long OSGetVideoMode();
 void OSSetVideoMode(unsigned long mode);
 unsigned char OSGetLanguage();
 void OSSetLanguage(unsigned char language);
+unsigned long OSGetProgressiveMode(void);
 
 #ifdef __cplusplus
 }

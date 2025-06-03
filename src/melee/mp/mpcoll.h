@@ -5,8 +5,9 @@
 
 #include "ftCommon/forward.h"
 #include "mp/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 041C78 */ void mpColl_80041C78(void);
 /* 041C8C */ void mpColl_80041C8C(CollData* cd);

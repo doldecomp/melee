@@ -48,7 +48,7 @@ error:
     callback(chan, result);
 }
 
-s32 CARDFormatAsync(s32 chan, CARDCallback callback) {
+s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback) {
     CARDControl *card;
     CARDID *id;
     CARDDir *dir;
@@ -71,7 +71,7 @@ s32 CARDFormatAsync(s32 chan, CARDCallback callback) {
     memset(id, 0xff, CARD_SYSTEM_BLOCK_SIZE);
     viDTVStatus = __VIRegs[55];
 
-    id->encode = OSGetFontEncode();
+    id->encode = encode;
 
     sram = __OSLockSram();
     *(u32 *)&id->serial[20] = sram->counterBias;
@@ -125,6 +125,11 @@ s32 CARDFormatAsync(s32 chan, CARDCallback callback) {
     if (result < 0)
         __CARDPutControlBlock(card, result);
     return result;
+}
+
+s32 CARDFormatAsync(s32 chan, CARDCallback callback)
+{
+    return __CARDFormatRegionAsync(chan, OSGetFontEncode(), callback);
 }
 
 long CARDFormat(long chan) {

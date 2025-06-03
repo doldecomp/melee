@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftCo_AttackLw3.h"
@@ -28,6 +27,7 @@
 #include "ftGameWatch/ftGw_AttackLw3.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
     cmd_unk0_bool,

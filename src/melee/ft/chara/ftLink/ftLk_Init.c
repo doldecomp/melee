@@ -23,7 +23,7 @@
 #include "it/it_26B1.h"
 #include "lb/lbmthp.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 MotionState ftLk_Init_MotionStateTable[ftLk_MS_SelfCount] = {
     {

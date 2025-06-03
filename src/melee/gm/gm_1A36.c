@@ -33,9 +33,9 @@
 #include "ty/toy.h"
 #include "un/un_2FC9.h"
 
-#include <dolphin/dvd/dvd.h>
+#include <dolphin/dvd.h>
 #include <dolphin/os/OSRtc.h>
-#include <dolphin/vi/vi.h>
+#include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
 #include <baselib/video.h>

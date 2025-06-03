@@ -7,12 +7,12 @@
 #include "ft/forward.h"
 #include "ftMario/forward.h" // IWYU pragma: export
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "lb/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 struct ftMario_FighterVars {
     /// Current Megavitamin color combo
@@ -22,7 +22,7 @@ struct ftMario_FighterVars {
     /* 0x2234 */ bool x2234_tornadoCharge;
     /* 0x2238 */ bool x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
-    /* 0x2240 */ uint x2240;
+    /* 0x2240 */ u32 x2240;
     u8 _[FIGHTERVARS_SIZE - 0x18];
 };
 
@@ -65,11 +65,11 @@ typedef struct ftMario_DatAttrs {
 typedef struct ftMario_SpecialLw_ECB {
     u8 x0_str_arr[3];
     u8 x3_balign;
-    uint x4;
-    uint x8;
-    uint xC;
-    uint x10;
-    uint x14;
+    u32 x4;
+    u32 x8;
+    u32 xC;
+    u32 x10;
+    u32 x14;
 } ftMario_SpecialLw_ECB;
 
 typedef struct ftMarioSpecialS {

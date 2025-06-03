@@ -41,8 +41,8 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <trigf.h>
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>

@@ -8,7 +8,7 @@
 #include "baselib/objalloc.h"
 #include "sc/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/cobj.h>
 
 struct un_80304138_objalloc_t {

@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2C1590 */ Item_GObj* it_802C1590(Item_GObj*, Vec3*, enum_t,
                                     float facing_dir);

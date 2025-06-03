@@ -17,7 +17,7 @@
 #include "it/items/itgamewatchturtle.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 static void ftGw_AttackAirN_ExitItemHitlag(HSD_GObj*);
 

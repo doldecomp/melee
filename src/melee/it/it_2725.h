@@ -12,7 +12,7 @@
 #include "it/items/types.h"
 #include "lb/types.h"
 
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
 /* 272560 */ void it_80272560(Item_GObj*, s32);
 /* 2725D4 */ void it_802725D4(Item_GObj*);
@@ -267,7 +267,7 @@
 /* 4D6D08 */ extern s32 it_804D6D08;
 /* 4D6D0C */ extern s32 it_804D6D0C;
 /* 4D6D10 */ extern u32 it_804D6D10;
-/* 4D6D14 */ extern uint it_804D6D14;
+/* 4D6D14 */ extern u32 it_804D6D14;
 /* 4D6D18 */ extern u32 it_804D6D18;
 /* 4D6D24 */ extern Article** it_804D6D24;
 /* 4D6D28 */ extern ItemCommonData* it_804D6D28;

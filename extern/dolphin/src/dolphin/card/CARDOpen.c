@@ -22,13 +22,13 @@ BOOL __CARDCompareFileName(CARDDir *ent, const char *fileName) {
     return FALSE;
 }
 
-s32 __CARDAccess(CARDDir *ent) {
+s32 __CARDAccess(CARDControl* card, CARDDir *ent) {
     if (ent->gameName[0] == 0xFF)
         return CARD_RESULT_NOFILE;
 
-    if (__CARDDiskID == &__CARDDiskNone
-     || (memcmp(ent->gameName, __CARDDiskID->gameName, sizeof(ent->gameName)) == 0
-      && memcmp(ent->company, __CARDDiskID->company, sizeof(ent->company)) == 0))
+    if (card->diskID == &__CARDDiskNone
+     || (memcmp(ent->gameName, card->diskID->gameName, sizeof(ent->gameName)) == 0
+      && memcmp(ent->company, card->diskID->company, sizeof(ent->company)) == 0))
         return CARD_RESULT_READY;
 
     return CARD_RESULT_NOPERM;
@@ -53,7 +53,7 @@ s32 __CARDGetFileNo(CARDControl* card, const char* fileName, s32* pfileNo) {
     for (fileNo = 0; fileNo < CARD_MAX_FILE; fileNo++)
     {
         CARDDir *ent = &dir[fileNo];
-        s32 result = __CARDAccess(ent);
+        s32 result = __CARDAccess(card, ent);
 
         if (result < 0)
             continue;
@@ -85,7 +85,7 @@ s32 CARDFastOpen(s32 chan, s32 fileNo, CARDFileInfo *fileInfo) {
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result == CARD_RESULT_NOPERM)
         result = __CARDIsPublic(ent);
     if (result >= 0)

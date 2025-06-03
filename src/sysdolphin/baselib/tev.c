@@ -1,17 +1,11 @@
 #include <placeholder.h>
 
-#include <dolphin/gx/forward.h>
-
 #include "tev.h"
 
 #include "debug.h"
 
 #include <__mem.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/GXTev.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
 static struct {
     GXColorS10 a;
@@ -79,18 +73,6 @@ static void CopyRGB(GXColor* dst, GXColor* src)
     *d = (*d & 0xff) | (*s & 0xffffff00);
 }
 
-static void setAmbColor(int channel, GXColor amb)
-{
-    GXColor* col = &amb;
-    GXSetChanAmbColor(channel, col);
-}
-
-static void setMatColor(int channel, GXColor mat)
-{
-    GXColor* col = &mat;
-    GXSetChanMatColor(channel, col);
-}
-
 void HSD_SetupChannel(HSD_Chan* ch)
 {
     int idx;
@@ -107,7 +89,7 @@ void HSD_SetupChannel(HSD_Chan* ch)
     if (ch->enable != GX_DISABLE && ch->amb_src == GX_SRC_REG) {
         if (prev_amb_invalid[no] != 0) {
             prev_amb_invalid[no] = 0;
-            setAmbColor(no + 4, ch->amb_color);
+            GXSetChanAmbColor(no + 4, ch->amb_color);
             prev_ch[no].amb_color = ch->amb_color;
         } else if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
             if (CompareRGBA(&ch->amb_color, &prev_ch[no].amb_color)) {
@@ -122,14 +104,14 @@ void HSD_SetupChannel(HSD_Chan* ch)
         } else if (ch->amb_color.a != prev_ch[no].amb_color.a) {
             prev_ch[no].amb_color.a = ch->amb_color.a;
         set_amb:
-            setAmbColor(chan, ch->amb_color);
+            GXSetChanAmbColor(chan, ch->amb_color);
         }
     }
 
     if (ch->mat_src == GX_SRC_REG) {
         if (prev_mat_invalid[no] != 0) {
             prev_mat_invalid[no] = 0;
-            setMatColor(no + 4, ch->mat_color);
+            GXSetChanMatColor(no + 4, ch->mat_color);
             prev_ch[no].mat_color = ch->mat_color;
         } else if (chan == GX_COLOR0A0 || chan == GX_COLOR1A1) {
             if (CompareRGBA(&ch->mat_color, &prev_ch[no].mat_color)) {
@@ -144,7 +126,7 @@ void HSD_SetupChannel(HSD_Chan* ch)
         } else if (ch->mat_color.a != prev_ch[no].mat_color.a) {
             prev_ch[no].mat_color.a = ch->mat_color.a;
         set_mat:
-            setMatColor(chan, ch->mat_color);
+            GXSetChanMatColor(chan, ch->mat_color);
         }
     }
 

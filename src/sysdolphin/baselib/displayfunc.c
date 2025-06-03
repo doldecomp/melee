@@ -11,14 +11,8 @@
 #include "baselib/tev.h"
 #include "baselib/util.h"
 
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXPixel.h>
-#include <dolphin/gx/GXTev.h>
-#include <dolphin/gx/GXTexture.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GXVert.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <Runtime/__mem.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
@@ -562,7 +556,7 @@ void HSD_EraseRect(f32 top, f32 bottom, f32 left, f32 right, f32 z,
 
     GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
     GXSetZCompLoc(GX_TRUE);
-    GXSetZMode(GX_ENABLE, GX_ALWAYS, enable_depth ? true : false);
+    GXSetZMode(GX_ENABLE, GX_ALWAYS, enable_depth ? GX_ENABLE : GX_DISABLE);
     GXSetBlendMode(GX_BM_LOGIC, GX_BL_ONE, GX_BL_ZERO, GX_LO_COPY);
     GXSetColorUpdate(enable_color ? GX_ENABLE : GX_DISABLE);
     GXSetAlphaUpdate(enable_alpha ? GX_ENABLE : GX_DISABLE);

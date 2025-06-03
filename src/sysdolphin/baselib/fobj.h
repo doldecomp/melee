@@ -7,7 +7,7 @@
 
 #include "baselib/objalloc.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 #define HSD_A_OP_NONE 0
 #define HSD_A_OP_CON 1

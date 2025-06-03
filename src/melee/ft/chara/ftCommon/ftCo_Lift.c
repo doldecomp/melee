@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Lift.h"
 
@@ -19,6 +18,7 @@
 #include "it/item.h"
 
 #include <math.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
 void ftCo_80096D9C(ftCo_GObj* gobj)

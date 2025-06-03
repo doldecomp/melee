@@ -3,9 +3,10 @@
 
 #include "ft/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2BDE18 */ HSD_GObj* it_802BDE18(Item_GObj*, Vec3*, Fighter_Part, enum_t,
                                    float);

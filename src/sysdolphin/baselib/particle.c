@@ -1,6 +1,6 @@
 #include "particle.static.h"
 
-#include <dolphin/gx/__types.h>
+#include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 
 void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
@@ -17,37 +17,37 @@ void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 
     // Send the corners in clockwise order, starting with top left
 
-    WGPIPE.f32 = x_min;
-    WGPIPE.f32 = y_min;
+    GXWGFifo.f32 = x_min;
+    GXWGFifo.f32 = y_min;
     a = color->a;
     b = color->b;
     g = color->g;
     r = color->r;
-    WGPIPE.u8 = r;
-    WGPIPE.u8 = g;
-    WGPIPE.u8 = b;
-    WGPIPE.u8 = a;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
 
-    WGPIPE.f32 = x_max;
-    WGPIPE.f32 = y_min;
-    WGPIPE.u8 = r;
-    WGPIPE.u8 = g;
-    WGPIPE.u8 = b;
-    WGPIPE.u8 = a;
+    GXWGFifo.f32 = x_max;
+    GXWGFifo.f32 = y_min;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
 
-    WGPIPE.f32 = x_max;
-    WGPIPE.f32 = y_max;
-    WGPIPE.u8 = r;
-    WGPIPE.u8 = g;
-    WGPIPE.u8 = b;
-    WGPIPE.u8 = a;
+    GXWGFifo.f32 = x_max;
+    GXWGFifo.f32 = y_max;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
 
-    WGPIPE.f32 = x_min;
-    WGPIPE.f32 = y_max;
-    WGPIPE.u8 = r;
-    WGPIPE.u8 = g;
-    WGPIPE.u8 = b;
-    WGPIPE.u8 = a;
+    GXWGFifo.f32 = x_min;
+    GXWGFifo.f32 = y_max;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
 
     GXEnd();
 }

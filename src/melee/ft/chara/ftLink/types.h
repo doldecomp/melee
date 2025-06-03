@@ -7,11 +7,11 @@
 #include "ft/forward.h"
 #include "ftLink/forward.h" // IWYU pragma: export
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "lb/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 struct ftLk_DatAttrs {
     /* +0 */ float x0;

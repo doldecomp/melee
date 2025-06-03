@@ -3,8 +3,9 @@
 
 #include <platform.h>
 
-#include "dolphin/mtx/forward.h"
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 114EB8 */ void ftNs_AttackHi4_YoyoUpdateHitPos(HSD_GObj* gobj);
 /* 114F0C */ void ftNs_AttackHi4_YoyoCheckTimedRehit(HSD_GObj* gobj);

@@ -1,8 +1,9 @@
 #ifndef GALE01_08051C
 #define GALE01_08051C
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 08051C */ MtxPtr ftDrawCommon_8008051C(HSD_GObj*, MtxPtr);
 /* 0805C8 */ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2);

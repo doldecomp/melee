@@ -5,12 +5,13 @@
 
 #include "ft/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftSeak/types.h"
 #include "it/itCommonItems.h"
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 283AE4 */ Item_GObj* it_80283AE4(Item_GObj*, Vec3*, s32);
 /* 283BD4 */ void it_80283BD4(Item_GObj*);

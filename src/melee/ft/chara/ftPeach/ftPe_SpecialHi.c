@@ -2,7 +2,6 @@
 
 #include "ftCommon/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftPe_SpecialHi.h"
@@ -25,6 +24,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <dolphin/mtx.h>
 #include <melee/it/items/itpeachparasol.h>
 
 /* 11D424 */ static void ftPe_SpecialHi_8011D424(HSD_GObj* gobj);

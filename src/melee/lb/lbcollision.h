@@ -7,7 +7,7 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
 typedef struct {

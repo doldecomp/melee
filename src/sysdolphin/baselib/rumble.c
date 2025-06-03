@@ -6,7 +6,7 @@
 #include "controller.h" // IWYU pragma: keep
 
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/pad/pad.h>
+#include <dolphin/pad.h>
 
 extern PadLibData HSD_PadLibData;
 

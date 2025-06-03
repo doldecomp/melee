@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
@@ -14,6 +13,7 @@
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
 
+#include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

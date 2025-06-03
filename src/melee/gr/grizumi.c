@@ -674,7 +674,7 @@ HSD_GObj* grIzumi_801CCBDC(float height, Vec3* a, int b, HSD_JObj* jobj)
         if (gp != NULL) {
             HSD_JObj* jobj2;
             jobj2 = HSD_GObjGetHSDObj(gobj);
-            if (jobj2 != (0, NULL)) { // permuter
+            if (jobj2 != NULL) { // permuter
                 Vec3 aa = *a;
                 HSD_JObjSetTranslate(jobj2, &aa);
                 gp->gv.izumi3.xD4 = height;
@@ -690,6 +690,7 @@ HSD_GObj* grIzumi_801CCBDC(float height, Vec3* a, int b, HSD_JObj* jobj)
                 jobj2 = Ground_801C3FA4(gobj, 2);
                 if (jobj2 != NULL) {
                     Vec3 vec;
+                    u8 _[4];
                     lb_8000B1CC(jobj2, NULL, &vec);
                     gp->gv.izumi3.xD8 = (vec.y - aa.y) / Ground_801C0498();
                 } else {
@@ -812,9 +813,9 @@ void grIzumi_801CCEA0(HSD_GObj* gobj, int renderpass)
             HSD_CObjEndCurrent();
         }
         lb_800122C8(refl->image, 0, 0, 1);
-        C_MTXLightPerspective(mtx, cobj->projection_param.perspective.fov,
-                              cobj->projection_param.perspective.aspect, 0.49f,
-                              -0.49f, 0.5f, 0.5f);
+        MTXLightPerspective(mtx, cobj->projection_param.perspective.fov,
+                            cobj->projection_param.perspective.aspect, 0.49f,
+                            -0.49f, 0.5f, 0.5f);
         PSMTXConcat(mtx, HSD_CObjGetViewingMtxPtr(cobj), refl->texture_matrix);
         ftDrawCommon_80081118();
     }

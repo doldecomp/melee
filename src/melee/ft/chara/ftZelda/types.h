@@ -8,7 +8,7 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ftZelda_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;

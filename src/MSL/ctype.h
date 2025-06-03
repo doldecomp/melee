@@ -1,8 +1,6 @@
 #ifndef MSL_CTYPE_H
 #define MSL_CTYPE_H
 
-#include <platform.h>
-
 extern const unsigned char __ctype_map[];
 extern const unsigned char __lower_map[];
 extern const unsigned char __upper_map[];

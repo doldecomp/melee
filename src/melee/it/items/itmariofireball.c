@@ -12,8 +12,9 @@
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
+#include <baselib/mtx.h>
 
 ItemStateTable it_803F6788[] = {
     { 0, it_8029B868, it_8029B8A0, it_8029B8EC },
