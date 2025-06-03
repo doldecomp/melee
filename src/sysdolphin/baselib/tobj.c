@@ -508,9 +508,8 @@ static void setupTextureCoordGen(HSD_TObj* tobj)
         break;
     default:
         if (tobj_bump(tobj)) {
-            mtxid = tobj->mtxid;
-            src = tobj->src;
-            GXSetTexCoordGen(tobj->coord, GX_TG_MTX2x4, src, mtxid);
+            GXSetTexCoordGen(tobj->coord, GX_TG_MTX2x4, tobj->src,
+                             tobj->mtxid);
         } else {
             GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
                               GX_IDENTITY, GX_DISABLE, tobj->mtxid);
@@ -529,12 +528,12 @@ static void setupTextureCoordGenBump(HSD_TObj* bump)
 
     mask = HSD_LObjGetLightMaskDiffuse();
 
-    for (i = 0; i < GX_MAX_LIGHT - 1; i++) {
+    for (i = 0; i < 8; i++) {
         if (mask & (1 << i)) {
             break;
         }
     }
-    if (i >= GX_MAX_LIGHT - 1) {
+    if (i >= 8) {
         i = 0;
     }
 

@@ -12,6 +12,8 @@
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 
+#define MAX_GXLIGHT 9
+
 struct HSD_LightPoint {
     f32 cutoff;
     u32 point_func;

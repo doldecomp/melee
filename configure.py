@@ -1330,7 +1330,7 @@ config.libs = [
         "mcc",
         [
             Object(NonMatching, "dolphin/mcc/mcc.c"),
-            Object(Matching, "dolphin/mcc/fio.c"),
+            Object(NonMatching, "dolphin/mcc/fio.c"),
         ],
         extern=True,
     ),
