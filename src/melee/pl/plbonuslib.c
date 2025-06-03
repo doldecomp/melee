@@ -68,6 +68,13 @@ void pl_8003DF44(int arg0, int arg1)
     }
 }
 
+void pl_8003DFF4(s32 arg0, s32 arg1, s32 arg2)
+{
+    pl_8003FC88(arg0, arg1, arg2);
+    pl_8003FF44(arg0, arg1, arg2);
+    pl_8003EAAC(arg0, arg1, arg2);
+}
+
 void pl_8003E058(int arg0, s32 arg1, int arg2, s32 arg3)
 {
     pl_80038824(arg2, 0x3F);
