@@ -46,6 +46,8 @@ MWCC_FLAGS = [
     "src/Runtime",
     "-i",
     "src/sysdolphin",
+    "-i",
+    "extern/dolphin/include",
     "-DM2CTX",
 ]
 
@@ -66,6 +68,8 @@ PCPP_FLAGS = [
     "src/melee",
     "-I",
     "src/melee/ft/chara",
+    "-I",
+    "extern/dolphin/include",
     "-D",
     "__MWERKS__",
     "-D",
