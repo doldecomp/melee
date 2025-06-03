@@ -189,7 +189,7 @@ s32 __CARDVerify(CARDControl *card) {
     }
 }
 
-s32 CARDCheckAsync(s32 chan, CARDCallback callback) {
+s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback) {
     CARDControl *card;
     CARDDir *dir[2];
     u16 *fat[2];
@@ -205,6 +205,10 @@ s32 CARDCheckAsync(s32 chan, CARDCallback callback) {
     BOOL updateFat = FALSE;
     BOOL updateDir = FALSE;
     BOOL updateOrphan = FALSE;
+
+    if (xferBytes) {
+        *xferBytes = 0;
+    }
 
     ASSERTLINE(0x14A, 0 <= chan && chan < 2);
     result = __CARDGetControlBlock(chan, &card);
@@ -305,15 +309,34 @@ s32 CARDCheckAsync(s32 chan, CARDCallback callback) {
 
     if (updateDir)
     {
+        if (xferBytes) {
+            *xferBytes = CARD_SYSTEM_BLOCK_SIZE;
+        }
         return __CARDUpdateDir(chan, callback);
     }
 
     if (updateFat | updateOrphan)
     {
+        if (xferBytes) {
+            *xferBytes = CARD_SYSTEM_BLOCK_SIZE;
+        }
         return __CARDUpdateFatBlock(chan, card->currentFat, callback);
     }
 
-    return __CARDPutControlBlock(card, CARD_RESULT_READY);
+    __CARDPutControlBlock(card, CARD_RESULT_READY);
+    if (callback) {
+        BOOL enabled = OSDisableInterrupts();
+        callback(chan, CARD_RESULT_READY);
+        OSRestoreInterrupts(enabled);
+    }
+    return CARD_RESULT_READY;
+}
+
+s32 CARDCheckAsync(s32 chan, CARDCallback callback)
+{
+    s32 xferBytes;
+
+    return CARDCheckExAsync(chan, &xferBytes, callback);
 }
 
 long CARDCheck(long chan) {

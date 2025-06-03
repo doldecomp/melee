@@ -51,6 +51,8 @@ after:;
     }
 }
 
+#pragma push
+#pragma force_active on
 s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size, CARDFileInfo* fileInfo,
                                         CARDCallback callback) {
     CARDControl* card;
@@ -118,6 +120,7 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size, CARDFileInfo* file
     }
     return result;
 }
+#pragma pop
 
 long CARDCreate(long chan, char * fileName, unsigned long size, struct CARDFileInfo * fileInfo) {
     long result = CARDCreateAsync(chan, fileName, size, fileInfo, __CARDSyncCallback);
