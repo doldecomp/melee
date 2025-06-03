@@ -3920,7 +3920,7 @@ dolphin/os/init/__ppc_eabi_init.c:
 	.init       start:0x8000541C end:0x80005470
 	.text       start:0x8034CABC end:0x8034CB50
 
-dolphin/pad/Padclamp.c:
+dolphin/pad/PadClamp.c:
 	.text       start:0x8034CB50 end:0x8034CD88
 	.sdata      start:0x804D5C30 end:0x804D5C38
 
