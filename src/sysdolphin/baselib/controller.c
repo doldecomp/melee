@@ -100,8 +100,11 @@ void HSD_PadRenewRawStatus(bool err_check)
         p->qcount += 1;
     }
 
-    for (i = 0; i < 4; i++, qwrite++) {
-        *qwrite = now[i];
+    {
+        struct a {
+            PADStatus _[4];
+        };
+        *(struct a*) qwrite = *(struct a*) now;
     }
     HSD_PadRawQueueShift(p->qnum, &p->qwrite);
 

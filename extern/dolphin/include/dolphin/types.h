@@ -24,8 +24,6 @@ typedef int BOOL;
 
 #define ATTRIBUTE_ALIGN(num) __attribute__((aligned(num)))
 
-#define INT_MAX 2147483647
-
 #ifndef NULL
 #define NULL ((void*) 0)
 #endif
