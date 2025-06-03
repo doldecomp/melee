@@ -13,6 +13,11 @@ static HIOCallback RxCallback;
 static void ExtHandler(s32 chan, OSContext* context)
 {
     Chan = -1;
+    Dev = 0;
+    if ((chan < 2)) {
+        EXISetExiCallback(chan, NULL);
+        return;
+    }
 }
 
 static void ExiHandler(s32 chan, OSContext* context)
@@ -24,9 +29,15 @@ static void ExiHandler(s32 chan, OSContext* context)
 
 static void DbgHandler(__OSInterrupt interrupt, OSContext* context)
 {
+    OSContext exceptionContext;
+
     __PIRegs[0] = 0x1000;
     if (ExiCallback) {
+        OSClearContext(&exceptionContext);
+        OSSetCurrentContext(&exceptionContext);
         ExiCallback();
+        OSClearContext(&exceptionContext);
+        OSSetCurrentContext(context);
     }
 }
 
@@ -50,53 +61,25 @@ static void RxHandler(s32 chan, OSContext* context)
 
 BOOL HIOEnumDevices(HIOEnumCallback callback)
 {
-    int result;
     s32 chan;
-    int err;
-    u32 cmd;
     u32 id;
 
-    if (Chan == -1 && callback) {
-        result = 1;
-        for (chan = 0; chan <= 2; chan++) {
-            if (chan < 2) {
-                while (EXIProbeEx(chan) == 0) {
-                }
-                if (EXIAttach(chan, ExtHandler) == 0) {
-                    continue;
-                }
-            }
-            if (EXILock(chan, 0, 0) == 0) {
-                EXIDetach(chan);
-                continue;
-            }
-            if (EXISelect(chan, 0, 0) == 0) {
-                EXIUnlock(chan);
-                EXIDetach(chan);
-                continue;
-            }
-            cmd = 0;
-            err = 0;
-            err |= !EXIImm(chan, &cmd, 2, 1, 0);
-            err |= !EXISync(chan);
-            err |= !EXIImm(chan, &id, 4, 0, 0);
-            err |= !EXISync(chan);
-            err |= !EXIDeselect(chan);
-            EXIUnlock(chan);
-            if (err == 0 && id == 0x1010000) {
-                result = callback(chan);
-            }
-            if (chan < 2) {
-                EXIDetach(chan);
-            }
-            EXIUnlock(chan);
-            if (result == 0) {
-                return 1;
-            }
-        }
-        return 1;
+    if (Chan != -1 || callback == NULL) {
+        return 0;
     }
-    return 0;
+    Dev = 0;
+    for (chan = 0; chan <= 2; chan++) {
+        if (chan < 2) {
+            do {
+            } while (EXIProbeEx(chan) == 0);
+        }
+        if ((EXIGetID(chan, Dev, &id) != 0) &&
+            ((u32) (id + 0xFEFF0000) == 0U) && (callback(chan) == 0))
+        {
+            return 1;
+        }
+    }
+    return 1;
 }
 
 BOOL HIOInit(s32 chan, HIOCallback callback)
