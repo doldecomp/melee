@@ -1,11 +1,15 @@
 #include <platform.h>
 
+#include "baselib/forward.h"
+
 #include "grkraid.h"
 
-#include "baselib/gobj.h"
+#include "gr/granime.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
 static grKr_804D6A08_t* grKr_804D6A08;
@@ -66,7 +70,12 @@ bool grKraid_801FE2C8(void)
 
 void grKraid_801FE35C(void) {}
 
-/// #grKraid_801FE360
+void grKraid_801FE360(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grKraid_801FE3A4(void)
 {
