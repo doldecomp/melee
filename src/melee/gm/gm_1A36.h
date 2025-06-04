@@ -18,8 +18,8 @@
 /* 1A3A74 */ UNK_RET gm_801A3A74(UNK_PARAMS);
 /* 1A3E88 */ UNK_RET gm_801A3E88(UNK_PARAMS);
 /* 1A427C */ int gm_801A427C(void* arg0);
-/* 1A428C */ void gm_801A428C(u8 arg0);
-/* 1A42A0 */ void gm_801A42A0(int pending_minor);
+/* 1A428C */ void gm_SetSceneMinor(u8 arg0);
+/* 1A42A0 */ void gm_SetScenePendingMinor(int pending_minor);
 /* 1A42D4 */ UNK_RET gm_801A42D4(UNK_PARAMS);
 /* 1A42F8 */ void gm_801A42F8(int);
 /* 1A4310 */ u8 gm_801A4310(void);
