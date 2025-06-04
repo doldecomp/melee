@@ -17,7 +17,7 @@ HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {
     SpawnItem spawn_item;
     HSD_GObj* gobj;
-    int* attr;
+    void** attr;
 
     spawn_item.kind = It_Kind_GameWatch_Panic;
     spawn_item.prev_pos = *pos;
