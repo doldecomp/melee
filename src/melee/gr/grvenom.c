@@ -1,5 +1,9 @@
 #include <platform.h>
 
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+
 /// #grVenom_8020362C
 
 void grVenom_80203B14(void) {}
@@ -8,7 +12,10 @@ void grVenom_80203B14(void) {}
 
 /// #grVenom_80203DD0
 
-/// #grVenom_80203E80
+void grVenom_80203E80(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grVenom_80203EA4(void)
 {
@@ -17,7 +24,11 @@ bool grVenom_80203EA4(void)
 
 /// #grVenom_80203EAC
 
-/// #grVenom_80203F98
+void grVenom_80203F98(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grVenom_80203FC4(void)
 {
