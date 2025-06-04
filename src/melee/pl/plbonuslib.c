@@ -311,7 +311,7 @@ void pl_8003EC9C(s32 arg0, s32 arg1, f32 arg2, f32 arg3)
     temp_r3->xD10 = 0;
 }
 
-void pl_8003EE2C(s32 arg0, s32 arg1)
+void fn_8003EE2C(s32 arg0, s32 arg1)
 {
     Fighter_GObj* temp_r30;
     HSD_GObj* temp_r3_4;
