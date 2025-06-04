@@ -1,5 +1,3 @@
-#include <platform.h>
-
 #include <dolphin.h>
 #include <dolphin/os.h>
 
@@ -14,7 +12,7 @@
 #define DVD_DEVICECODE_ADDR 0x800030E6
 #define DEBUGFLAG_ADDR 0x800030E8
 
-u16 Pad3Button AT_ADDRESS(PAD3_BUTTON_ADDR);
+u16 Pad3Button : PAD3_BUTTON_ADDR;
 
 extern void InitMetroTRK();
 
@@ -47,14 +45,14 @@ static void __check_pad3(void);
 
 #define RESET_BUTTON_MASK 0x0EEF
 
-SECTION_INIT static void __check_pad3(void)
+__declspec(section ".init") static void __check_pad3(void)
 {
     if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK) {
-        OSResetSystem(OS_RESET_RESTART, 0, false);
+        OSResetSystem(OS_RESET_RESTART, 0, FALSE);
     }
 }
 
-SECTION_INIT WEAK asm void __start(void)
+__declspec(section ".init") __declspec(weak) asm void __start(void)
 {
     // clang-format off
 	nofralloc
@@ -163,7 +161,7 @@ static void __init_bss_section(void* dst, unsigned long size)
     }
 }
 
-asm SECTION_INIT static void __init_registers(void)
+asm __declspec(section ".init") static void __init_registers(void)
 {
     // clang-format off
 	nofralloc
@@ -177,7 +175,7 @@ asm SECTION_INIT static void __init_registers(void)
     // clang-format on
 }
 
-SECTION_INIT static void __init_data(void)
+__declspec(section ".init") static void __init_data(void)
 {
     __rom_copy_info* dci;
     __bss_init_info* bii;

@@ -234,7 +234,6 @@ cflags_base = [
     '-pragma "warn_notinlined off"',
     "-RTTI off",
     "-str reuse",
-    f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
 ]
@@ -266,7 +265,6 @@ cflags_runtime = [
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-common off",
-    "-inline auto",
 ]
 
 # Metrowerks libc flags
@@ -289,15 +287,11 @@ cflags_trk = [
     "-rostr",
 ]
 
-includes_base = ["src"]
-
-system_includes_base = [
+includes_base = [
     "src",
     "src/MSL",
     "src/Runtime",
-    "extern/dolphin/src/",
     "extern/dolphin/include",
-    f"build/{config.version}/include",
 ]
 
 cflags_melee = [
@@ -316,7 +310,6 @@ def Lib(
     fix_epilogue=True,
     fix_trk=False,
     includes: List[str] = includes_base,
-    system_includes: List[str] = system_includes_base,
     src_dir: Optional[str] = None,
     category: Optional[str] = None,
 ) -> Library:
@@ -329,8 +322,6 @@ def Lib(
         "cflags": [
             *cflags,
             *make_includes(includes),
-            "-I-",
-            *make_includes(system_includes),
         ],
         "host": False,
         "progress_category": category,
@@ -347,37 +338,19 @@ def Lib(
 
 
 def DolphinLib(
-    lib_name: str, objects: Objects, fix_epilogue=False, extern=False
+    lib_name: str, objects: Objects, fix_epilogue=False
 ) -> Library:
-    if extern:
-        cflags = [
-            "-c",
-            "-O4,p",
-            "-inline auto",
-            "-sym on",
-            "-nodefaults",
-            "-proc gekko",
-            "-fp hard",
-            "-Cpp_exceptions off",
-            "-enum int",
-            "-requireprotos",
-            '-pragma "cats off"',
-            "-I-",
-            "-Iextern/dolphin/include",
-            "-Iextern/dolphin/include/libc",
-            "-Isrc/MSL",
-            "-Isrc/Runtime",
-            "-ir extern/dolphin/src",
-            "-DRELEASE",
-        ]
-        src_dir = "extern/dolphin/src"
-        includes = []
-        system_includes = []
-    else:
-        cflags = cflags_base
-        src_dir = None
-        includes = includes_base
-        system_includes = system_includes_base
+    cflags = cflags_base + [
+        "-requireprotos",
+        "-fp_contract off",
+        "-ir extern/dolphin/src",
+    ]
+    src_dir = "extern/dolphin/src"
+    includes = [
+        "extern/dolphin/include",
+        "extern/dolphin/include/libc",
+        "src/MSL",
+    ]
 
     return Lib(
         lib_name,
@@ -386,7 +359,6 @@ def DolphinLib(
         src_dir=src_dir,
         cflags=cflags,
         includes=includes,
-        system_includes=system_includes,
         category="sdk",
     )
 
@@ -398,9 +370,6 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         includes=[
             *includes_base,
             "src/sysdolphin",
-        ],
-        system_includes=[
-            *system_includes_base,
         ],
         category="hsd",
     )
@@ -414,9 +383,6 @@ def MeleeLib(lib_name: str, objects: Objects) -> Library:
             *includes_base,
             "src/melee",
             "src/melee/ft/chara",
-        ],
-        system_includes=[
-            *system_includes_base,
             "src/sysdolphin",
         ],
         category="game",
@@ -1310,21 +1276,18 @@ config.libs = [
         [
             Object(Matching, "dolphin/amcstubs/AmcExi2Stubs.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "OdemuExi2",
         [
             Object(NonMatching, "dolphin/odenotstub/odenotstub.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "hio",
         [
             Object(Matching, "dolphin/hio/hio.c"),
         ],
-        extern=True,
         fix_epilogue=True,
     ),
     DolphinLib(
@@ -1333,28 +1296,24 @@ config.libs = [
             Object(NonMatching, "dolphin/mcc/mcc.c"),
             Object(NonMatching, "dolphin/mcc/fio.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "thp",
         [
             Object(NonMatching, "dolphin/thp/THPDec.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "base",
         [
             Object(Matching, "dolphin/base/PPCArch.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "db",
         [
             Object(Matching, "dolphin/db/db.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "dsp",
@@ -1363,7 +1322,6 @@ config.libs = [
             Object(Matching, "dolphin/dsp/dsp_debug.c"),
             Object(Matching, "dolphin/dsp/dsp_task.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "dvd",
@@ -1375,7 +1333,6 @@ config.libs = [
             Object(NonMatching, "dolphin/dvd/dvderror.c"),
             Object(Matching, "dolphin/dvd/fstload.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "gx",
@@ -1396,7 +1353,6 @@ config.libs = [
             Object(NonMatching, "dolphin/gx/GXTransform.c"),
             Object(Matching, "dolphin/gx/GXPerf.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "mtx",
@@ -1407,7 +1363,6 @@ config.libs = [
             Object(NonMatching, "dolphin/mtx/vec.c"),
         ],
         fix_epilogue=True,
-        extern=True,
     ),
     DolphinLib(
         "os",
@@ -1438,7 +1393,6 @@ config.libs = [
             Object(Matching, "dolphin/os/init/__start.c"),
             Object(Matching, "dolphin/os/init/__ppc_eabi_init.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "pad",
@@ -1447,21 +1401,18 @@ config.libs = [
             Object(NonMatching, "dolphin/pad/pad.c"),
         ],
         fix_epilogue=True,
-        extern=True,
     ),
     DolphinLib(
         "vi",
         [
             Object(NonMatching, "dolphin/vi/vi.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "ai",
         [
             Object(Matching, "dolphin/ai/ai.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "ar",
@@ -1469,7 +1420,6 @@ config.libs = [
             Object(Matching, "dolphin/ar/ar.c"),
             Object(Matching, "dolphin/ar/arq.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "card",
@@ -1490,7 +1440,6 @@ config.libs = [
             Object(Matching, "dolphin/card/CARDStat.c"),
             Object(Matching, "dolphin/card/CARDRename.c"),
         ],
-        extern=True,
         fix_epilogue=True,
     ),
     DolphinLib(
@@ -1506,7 +1455,6 @@ config.libs = [
             Object(Matching, "dolphin/ax/AXProf.c"),
             Object(Matching, "dolphin/ax/DSPCode.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "axfx",
@@ -1517,7 +1465,6 @@ config.libs = [
             Object(Matching, "dolphin/axfx/delay.c"),
             Object(Matching, "dolphin/axfx/axfx.c"),
         ],
-        extern=True,
     ),
     SysdolphinLib(
         "sysdolphin (HAL base library)",
