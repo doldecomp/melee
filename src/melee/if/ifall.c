@@ -85,7 +85,6 @@ void fn_802F36B8(HSD_GObj* gobj)
 
 /// #ifAll_802F390C
 
-/// #ifAll_802F3A64
 void ifAll_802F3A64(void)
 {
     struct ifAll_804A0FD8_t* data;

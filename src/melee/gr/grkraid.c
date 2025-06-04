@@ -1,12 +1,41 @@
 #include <platform.h>
 
+#include "grkraid.h"
+
+#include "baselib/gobj.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+
+#include <baselib/jobj.h>
+
+static grKr_804D6A08_t* grKr_804D6A08;
+
 void grKraid_801FDFF8(void) {}
 
-/// #grKraid_801FDFFC
+void grKraid_801FDFFC(grKr_804D6A08_t* arg)
+{
+    HSD_GObj* gobj;
+
+    grKr_804D6A08 = Ground_801C49F8();
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    grKraid_801FE0C4(0);
+    grKraid_801FE0C4(2);
+    grKraid_801FE0C4(3);
+    gobj = grKraid_801FE0C4(4);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), 0x10);
+    gobj = grKraid_801FE0C4(1);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), 0x10);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+}
 
 void grKraid_801FE094(void) {}
 
-/// #grKraid_801FE098
+void grKraid_801FE098(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grKraid_801FE0BC(void)
 {
