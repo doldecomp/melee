@@ -98,6 +98,6 @@
 /* 1E2EA0 */ UNK_RET grCorneria_801E2EA0(UNK_PARAMS);
 /* 1E2EE4 */ bool grCorneria_801E2EE4(void);
 /* 1E2EEC */ bool grCorneria_801E2EEC(Vec3* v, u32 arg1, HSD_JObj* jobj);
-/* 1E2FCC */ UNK_RET grCorneria_801E2FCC(UNK_PARAMS);
+/* 1E2FCC */ float grCorneria_801E2FCC(void);
 
 #endif

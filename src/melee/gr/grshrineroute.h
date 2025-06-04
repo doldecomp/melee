@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-/* 2087B0 */ UNK_RET grShrineRoute_802087B0(UNK_PARAMS);
+/* 2087B0 */ float grShrineRoute_802087B0(void);
 /* 2087B8 */ UNK_RET grShrineRoute_802087B8(UNK_PARAMS);
 /* 2087BC */ UNK_RET grShrineRoute_802087BC(UNK_PARAMS);
 /* 20882C */ UNK_RET grShrineRoute_8020882C(UNK_PARAMS);

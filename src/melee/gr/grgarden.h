@@ -43,6 +43,6 @@
 /* 203560 */ UNK_RET grGarden_80203560(UNK_PARAMS);
 /* 2035C8 */ UNK_RET grGarden_802035C8(UNK_PARAMS);
 /* 2035D0 */ UNK_RET grGarden_802035D0(UNK_PARAMS);
-/* 203624 */ UNK_RET grGarden_80203624(UNK_PARAMS);
+/* 203624 */ float grGarden_80203624(void);
 
 #endif
