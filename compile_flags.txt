@@ -42,3 +42,4 @@
 -Wno-integer-overflow
 -Wno-sign-compare
 -Wno-return-type
+-Wno-sometimes-uninitialized

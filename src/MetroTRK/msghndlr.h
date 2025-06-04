@@ -22,6 +22,10 @@ typedef struct msgbuf_t {
     /* 0x10 */ u8 unk10[0x30];
 } msgbuf_t; // size = 0x40
 
+void TRKMessageIntoReply(MessageBuffer*, MessageCommandID, DSReplyError);
+DSError TRKDoUnsupported(MessageBuffer*);
+DSError TRKDoCPUType(MessageBuffer*);
+DSError TRKDoFlushCache(MessageBuffer*);
 bool GetTRKConnected(void);
 DSError TRKDoConnect(MessageBuffer* buf);
 DSError TRKDoDisconnect(MessageBuffer* buf);
