@@ -1,6 +1,10 @@
 #include <platform.h>
 
 #include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+
+#include <baselib/gobj.h>
 
 void grGarden_80202B6C(void) {}
 
@@ -11,7 +15,10 @@ void grGarden_80202C24(void)
     Ground_801C53EC(0x64193);
 }
 
-/// #grGarden_80202C4C
+void grGarden_80202C4C(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grGarden_80202C70(void)
 {
@@ -20,7 +27,11 @@ bool grGarden_80202C70(void)
 
 /// #grGarden_80202C78
 
-/// #grGarden_80202D60
+void grGarden_80202D60(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grGarden_80202D8C(void)
 {
