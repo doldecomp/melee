@@ -1224,7 +1224,7 @@ config.libs = [
         "MSL (Metrowerks Standard Libraries)",
         [
             Object(Matching, "MSL/abort_exit.c"),
-            Object(NonMatching, "MSL/ansi_fp.c"),
+            Object(Matching, "MSL/ansi_fp.c"),
             Object(Matching, "MSL/buffer_io.c"),
             Object(Matching, "MSL/PPC_EABI/critical_regions.gamecube.c"),
             Object(Matching, "MSL/ctype.c"),
@@ -1241,7 +1241,8 @@ config.libs = [
             Object(Matching, "MSL/uart_console_io.c"),
             Object(Matching, "MSL/wchar_io.c"),
             Object(Matching, "MSL/math_1.c"),
-            Object(NonMatching, "MSL/trigf.c"),
+            Object(Matching, "MSL/float.c"),
+            Object(Matching, "MSL/trigf.c"),
             Object(NonMatching, "MSL/math.c"),
         ],
     ),

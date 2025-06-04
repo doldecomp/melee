@@ -2,6 +2,8 @@
 
 #define __epsilon 3.45266983e-4f
 
+#define __HI(x) (((s32*) &x)[0])
+
 extern f32 __sincos_on_quadrant[];
 extern f32 __sincos_poly[];
 

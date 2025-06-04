@@ -1037,16 +1037,30 @@ static void* __StringWrite(void* pCtrl, const char* pBuffer, size_t char_num)
     return res;
 }
 
-int vprintf(const char* format, va_list arg)
+int printf(const char* format, ...)
 {
-    int ret;
+    int res;
 
     if (fwide(stdout, -1) >= 0) {
         return -1;
     }
 
-    ret = __pformatter(&__FileWrite, (void*) stdout, format, arg);
-    return ret;
+    {
+        va_list args;
+        va_start(args, format);
+        res = __pformatter(&__FileWrite, (void*)stdout, format, args);
+    }
+
+    return res;
+}
+
+int vprintf(const char* format, va_list arg)
+{
+    if (fwide(stdout, -1) >= 0) {
+        return -1;
+    }
+
+    return __pformatter(&__FileWrite, stdout, format, arg);
 }
 
 #pragma clang diagnostic push
