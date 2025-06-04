@@ -4,10 +4,14 @@
 
 #include "baselib/jobj.h"
 #include "gm/gm_1601.h"
+#include "gm/gm_1A36.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lblanguage.h"
 #include "mn/mn_2295.h"
 #include "mn/mnname.h"
 #include "pl/player.h"
+#include "ty/toy.h"
 #include "un/types.h"
 #include "un/un_2FC9.h"
 
@@ -29,7 +33,10 @@
 
 /// #un_802FC9B4
 
-/// #fn_802FCAA4
+static void fn_802FCAA4(HSD_GObj* gobj, int idx)
+{
+    HSD_GObj_JObjCallback(gobj, idx);
+}
 
 /// #fn_802FCAC4
 
@@ -237,9 +244,29 @@ bool un_802FF884(void)
 
 /// #un_802FFBAC
 
-/// #un_802FFC30
+bool un_802FFC30(void)
+{
+    lbAudioAx_800236DC();
+    lbAudioAx_800245D4(0x7F);
+    lbAudioAx_800245F4(0x7F);
+    lbAudioAx_80024614(0x7F);
+    return true;
+}
 
-/// #un_802FFC6C
+bool un_802FFC6C(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80023694();
+        lbAudioAx_80024030(0);
+        lbAudioAx_800236DC();
+        lbAudioAx_800245D4(0x7F);
+        lbAudioAx_800245F4(0x7F);
+        lbAudioAx_80024614(0x7F);
+        gm_801A42F8(0);
+        gm_801A4B60();
+    }
+    return true;
+}
 
 bool fn_802FFCC8(void)
 {
@@ -252,15 +279,43 @@ bool fn_802FFCC8(void)
 
 /// #fn_802FFE0C
 
-/// #fn_802FFE6C
+bool fn_802FFE6C(bool update_scene)
+{
+    bool res = update_scene;
+    if (update_scene == false) {
+        lbAudioAx_80024030(0);
+        un_80304334(un_80302DF0());
+        res = false;
+    }
 
-/// #un_802FFEA4
+    return res;
+}
+
+bool un_802FFEA4(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x4);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_802FFEE0
 
 /// #un_802FFF2C
 
-/// #un_803001DC
+bool un_803001DC(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x1);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_80300218
 
@@ -268,7 +323,16 @@ bool fn_802FFCC8(void)
 
 /// #un_80300290
 
-/// #un_803002FC
+bool un_803002FC(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x2);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_80300338
 
@@ -326,25 +390,82 @@ bool fn_802FFCC8(void)
 
 /// #un_80300934
 
-/// #un_80300968
+bool un_80300968(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801A42F8(0x8);
+        gm_801A4B60();
+    }
 
-/// #un_803009A4
+    return false;
+}
+
+bool un_803009A4(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801A42F8(0x9);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_803009E0
 
 /// #un_80300A88
 
-/// #un_80300AB8
+bool un_80300AB8(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x4);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_80300AF4
 
 /// #un_80300B58
 
-/// #un_80300BBC
+bool un_80300BBC(bool update_scene)
+{
+    if (update_scene == true) {
+        un_803124BC();
+        un_80311680();
+        gm_801A42F8(0xB);
+        gm_801A4B60();
+    }
 
-/// #un_80300BF8
+    return false;
+}
 
-/// #un_80300C3C
+bool un_80300BF8(bool update_scene)
+{
+    if (update_scene == true) {
+        un_803124BC();
+        Trophy_SetUnlockState(0xE6, true);
+        gm_801A42F8(1);
+        gm_801A4B60();
+    }
+
+    return false;
+}
+
+bool un_80300C3C(bool update_scene)
+{
+    if (update_scene == true) {
+        un_803124BC();
+        Trophy_SetUnlockState(0xC9, true);
+        gm_801A42F8(1);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_80300C80
 
@@ -362,7 +483,16 @@ bool fn_802FFCC8(void)
 
 /// #un_80300F98
 
-/// #un_80300FEC
+bool un_80300FEC(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x4);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_80301028
 
@@ -378,31 +508,132 @@ bool fn_802FFCC8(void)
 
 /// #un_803012D4
 
-/// #un_80301328
+bool un_80301328(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801BF708(0x0);
+        gm_801A42F8(0x18);
+        gm_801A4B60();
+    }
 
-/// #un_8030136C
+    return false;
+}
 
-/// #un_803013B0
+bool un_8030136C(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801BF708(0x5);
+        gm_801A42F8(0x18);
+        gm_801A4B60();
+    }
+
+    return false;
+}
+
+bool un_803013B0(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801A42F8(0x19);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_803013EC
 
 /// #un_80301420
 
-/// #un_80301454
+bool un_80301454(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801A42F8(0x28);
+        gm_801A4B60();
+    }
 
-/// #un_80301490
+    return false;
+}
 
-/// #un_803014CC
+bool un_80301490(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0xD);
+        gm_801A4B60();
+    }
 
-/// #un_80301508
+    return false;
+}
 
-/// #un_80301544
+bool un_803014CC(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x7);
+        gm_801A4B60();
+    }
 
-/// #un_80301580
+    return false;
+}
 
-/// #un_803015BC
+bool un_80301508(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x3);
+        gm_801A4B60();
+    }
 
-/// #un_803015F8
+    return false;
+}
+
+bool un_80301544(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x9);
+        gm_801A4B60();
+    }
+
+    return false;
+}
+
+bool un_80301580(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0xC);
+        gm_801A4B60();
+    }
+
+    return false;
+}
+
+bool un_803015BC(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801A42F8(0x27);
+        gm_801A4B60();
+    }
+
+    return false;
+}
+
+bool un_803015F8(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0xA);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_80301634
 
@@ -436,13 +667,40 @@ bool fn_802FFCC8(void)
 
 /// #un_80301CE0
 
-/// #un_80301D40
+bool un_80301D40(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_801A42F8(0x2A);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 /// #un_80301D7C
 
-/// #un_80301DCC
+bool un_80301DCC(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0x4);
+        gm_801A4B60();
+    }
 
-/// #un_80301E08
+    return false;
+}
+
+bool un_80301E08(bool update_scene)
+{
+    if (update_scene == true) {
+        lbAudioAx_80024030(1);
+        gm_SetScenePendingMinor(0xE);
+        gm_801A4B60();
+    }
+
+    return false;
+}
 
 int DevText_StrLen(char* str)
 {
@@ -937,6 +1195,76 @@ void un_80304334(un_80304334_t* arg0)
 /// #un_80304B0C
 
 /// #un_80304B94
+int un_80304B94(int option)
+{
+    int res;
+    switch (option) {
+    case 0:
+        if (lbLang_IsSettingJP()) {
+            res = 0x4;
+        } else {
+            res = 0x4;
+        }
+        break;
+    case 1:
+        if (lbLang_IsSettingJP()) {
+            res = 0xA;
+        } else {
+            res = 0xA;
+        }
+        break;
+    case 2:
+        if (lbLang_IsSettingJP()) {
+            res = 0x11;
+        } else {
+            res = 0x10;
+        }
+        break;
+    case 3:
+        if (lbLang_IsSettingJP()) {
+            res = 0x17;
+        } else {
+            res = 0x17;
+        }
+        break;
+    case 4:
+        if (lbLang_IsSettingJP()) {
+            res = 0xC;
+        } else {
+            res = 0xC;
+        }
+        break;
+    case 5:
+        if (lbLang_IsSettingJP()) {
+            res = 0x48;
+        } else {
+            res = 0x48;
+        }
+        break;
+    case 6:
+        if (lbLang_IsSettingJP()) {
+            res = 0x1B;
+        } else {
+            res = 0x1B;
+        }
+        break;
+    case 7:
+        if (lbLang_IsSettingJP()) {
+            res = 0x7E;
+        } else {
+            res = 0x7E;
+        }
+        break;
+    case 8:
+        if (lbLang_IsSettingJP()) {
+            res = 0x2;
+        } else {
+            res = 0x2;
+        }
+        break;
+    }
+    return res;
+}
 
 /// #un_80304CC8
 
