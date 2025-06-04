@@ -10,6 +10,7 @@
 #include "it/it_26B1.h"
 #include "melee/ft/ft_0892.h"
 #include "melee/ft/ftlib.h"
+#include "pl/pl_040D.h"
 #include "pl/player.h"
 #include "pl/plbonus.h"
 
