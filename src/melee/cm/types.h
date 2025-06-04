@@ -13,7 +13,9 @@ struct CameraBox {
     CameraBox* prev;
     bool x8;
     /* +C:0 */ u8 xC_b0 : 1;
-    u8 xD_fill[0x10 - 0xD];
+    /* +C:1 */ u8 xC_b1 : 1;
+    /* +C:2 */ u8 xC_b2 : 1;
+    s16 xE;
     Vec3 x10; // might be Vec2?
     Vec3 x1C;
     float x28;
@@ -69,7 +71,8 @@ typedef struct Camera {
     /* 0x0AC */ f32 unk_AC; /* inferred */
     /* 0x0B0 */ struct UnkInternalCameraStruct unk_B0[2][8];
     /* 0x1B0 */ struct UnkInternalCameraStruct unk_1B0[2][8];
-    /* 0x2B0 */ u8 pad_2B0[0x2BC - 0x2B0];
+    /* 0x2B0 */ u8 pad_2B0[0x2BA - 0x2B0];
+    /* 0x2BA */ s16 unk_2ba;
     /* 0x2BC */ f32 unk_2bc;
     /* 0x2C0 */ f32 unk_2c0;
     /* 0x2C4 */ char pad_2C4[0x7D]; /* maybe part of unk_2c0[0x20]? */

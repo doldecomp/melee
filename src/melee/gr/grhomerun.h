@@ -67,6 +67,6 @@
 /* 21EDD4 */ UNK_RET grHomeRun_8021EDD4(UNK_PARAMS);
 /* 21EEB4 */ bool grHomeRun_8021EEB4(void);
 /* 21EEBC */ UNK_RET grHomeRun_8021EEBC(UNK_PARAMS);
-/* 21EF10 */ UNK_RET grHomeRun_8021EF10(UNK_PARAMS);
+/* 21EF10 */ float grHomeRun_8021EF10(void);
 
 #endif
