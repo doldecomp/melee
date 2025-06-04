@@ -48,7 +48,11 @@ bool grKraid_801FE0BC(void)
 
 /// #grKraid_801FE0C4
 
-/// #grKraid_801FE1B0
+void grKraid_801FE1B0(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grKraid_801FE1DC(void)
 {
