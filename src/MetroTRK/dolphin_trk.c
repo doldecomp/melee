@@ -1,4 +1,4 @@
-#include <platform.h>
+#include "MetroTRK/dolphin_trk.h"
 
 #include "MetroTRK/__exception.h"
 #include "MetroTRK/dolphin_trk_glue.h"
@@ -119,6 +119,11 @@ void EnableMetroTRKInterrupts(void)
 
 u32 TRKTargetTranslate(u32 addr)
 {
+    if (addr >= (u32) MTRK_NubInit_804A50C8 &&
+        addr < (u32) MTRK_NubInit_804A50C8 + 0x4000 &&
+        (gTRKCPUState.Extended1.DBAT3U & 3)) {
+        return addr;
+    }
     return ((addr & 0x3FFFFFFF) | BOOTINFO);
 }
 

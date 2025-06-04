@@ -266,7 +266,15 @@ DSError TRKDoReadMemory(MessageBuffer* buf)
         case kInvalidMemory:
             reply = kDSReplyInvalidMemoryRange;
             break;
-        case kInvalidRegister:
+        case kInvalidProcessId:
+            reply = kDSReplyInvalidProcessId;
+            break;
+        case kInvalidThreadId:
+            reply = kDSReplyInvalidThreadId;
+            break;
+        case kOsError:
+            reply = kDSReplyOsError;
+            break;
         default:
             reply = kDSReplyCWDSError;
             break;
@@ -349,7 +357,15 @@ DSError TRKDoWriteMemory(MessageBuffer* b)
         case kInvalidMemory:
             reply = kDSReplyInvalidMemoryRange;
             break;
-        case kInvalidRegister:
+        case kInvalidProcessId:
+            reply = kDSReplyInvalidProcessId;
+            break;
+        case kInvalidThreadId:
+            reply = kDSReplyInvalidThreadId;
+            break;
+        case kOsError:
+            reply = kDSReplyOsError;
+            break;
         default:
             reply = kDSReplyCWDSError;
             break;
@@ -392,10 +408,6 @@ DSError TRKDoReadRegisters(MessageBuffer* b)
         error = TRKReadBuffer1_ui16(b, &spC);
     }
 
-    if (!TRKTargetStopped()) {
-        return TRKStandardACK(b, kDSReplyACK, kDSReplyNotStopped);
-    }
-
     if (spA > spC) {
         return TRKStandardACK(b, kDSReplyACK, kDSReplyInvalidRegisterRange);
     }
@@ -424,7 +436,7 @@ DSError TRKDoReadRegisters(MessageBuffer* b)
 
     if (error != kNoError) {
         switch (error) {
-        case kUnsupportedError: /* switch 1 */
+        case kUnsupportedError:
             reply = kDSReplyUnsupportedOptionError;
             break;
         case kInvalidRegister:
@@ -432,6 +444,15 @@ DSError TRKDoReadRegisters(MessageBuffer* b)
             break;
         case kCWDSException:
             reply = kDSReplyCWDSException;
+            break;
+        case kInvalidProcessId:
+            reply = kDSReplyInvalidProcessId;
+            break;
+        case kInvalidThreadId:
+            reply = kDSReplyInvalidThreadId;
+            break;
+        case kOsError:
+            reply = kDSReplyOsError;
             break;
         default:
             reply = kDSReplyCWDSError;
@@ -474,10 +495,6 @@ DSError TRKDoWriteRegisters(MessageBuffer* b)
         error = TRKReadBuffer1_ui16(b, &spC);
     }
 
-    if (!TRKTargetStopped()) {
-        return TRKStandardACK(b, kDSReplyACK, kDSReplyNotStopped);
-    }
-
     if (spA > spC) {
         return TRKStandardACK(b, kDSReplyACK, kDSReplyInvalidRegisterRange);
     }
@@ -518,6 +535,15 @@ DSError TRKDoWriteRegisters(MessageBuffer* b)
         case kCWDSException:
             reply = kDSReplyCWDSException;
             break;
+        case kInvalidProcessId:
+            reply = kDSReplyInvalidProcessId;
+            break;
+        case kInvalidThreadId:
+            reply = kDSReplyInvalidThreadId;
+            break;
+        case kOsError:
+            reply = kDSReplyOsError;
+            break;
         default:
             reply = kDSReplyCWDSError;
             break;
@@ -555,10 +581,6 @@ DSError TRKDoFlushCache(MessageBuffer* b)
 
     if (error == kNoError) {
         error = TRKReadBuffer1_ui32(b, &sp10);
-    }
-
-    if (!TRKTargetStopped()) {
-        return TRKStandardACK(b, kDSReplyACK, kDSReplyNotStopped);
     }
 
     if (spC > sp10) {
@@ -630,10 +652,6 @@ DSError TRKDoStep(MessageBuffer* b)
         error = TRKReadBuffer1_ui8(b, &sp9);
     }
 
-    if (!TRKTargetStopped()) {
-        return TRKStandardACK(b, kDSReplyACK, kDSReplyNotStopped);
-    }
-
     switch (sp9) {
     case kDSStepIntoCount:
     case kDSStepOverCount:
@@ -668,6 +686,10 @@ DSError TRKDoStep(MessageBuffer* b)
         return TRKStandardACK(b, kDSReplyACK, kDSReplyUnsupportedOptionError);
     }
 
+    if (!TRKTargetStopped()) {
+        return TRKStandardACK(b, kDSReplyACK, kDSReplyNotStopped);
+    }
+
     error = TRKStandardACK(b, kDSReplyACK, kDSReplyNoError);
 
     if (error == kNoError) {
@@ -692,9 +714,25 @@ DSError TRKDoStep(MessageBuffer* b)
 
 DSError TRKDoStop(MessageBuffer* b)
 {
-    if (TRKTargetStop() == kNoError) {
-        return TRKStandardACK(b, kDSReplyACK, kDSReplyNoError);
+    enum DSReplyError reply;
+
+    switch (TRKTargetStop()) {
+    case kNoError:
+        reply = kDSReplyNoError;
+        break;
+    case kInvalidProcessId:
+        reply = kDSReplyInvalidProcessId;
+        break;
+    case kInvalidThreadId:
+        reply = kDSReplyInvalidThreadId;
+        break;
+    case kOsError:
+        reply = kDSReplyOsError;
+        break;
+    default:
+        reply = kDSReplyError;
+        break;
     }
 
-    return TRKStandardACK(b, kDSReplyACK, kDSReplyError);
+    return TRKStandardACK(b, kDSReplyACK, reply);
 }
