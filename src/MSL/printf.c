@@ -1,6 +1,7 @@
 #include "ansi_fp.h"
 #include "ctype.h"
 #include "limits.h"
+#include "printf.h"
 #include "stdarg.h"
 #include "stdio.h"
 #include "stdlib.h"
