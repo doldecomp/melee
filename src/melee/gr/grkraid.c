@@ -90,7 +90,19 @@ void grKraid_801FE3AC(void) {}
 
 void grKraid_801FE3B0(void) {}
 
-/// #grKraid_801FE3B4
+void grKraid_801FE3B4(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    gp->gv.kraid.x0 = 0;
+    gp->gv.kraid.x4 = 0.0f;
+    gp->gv.kraid.x8 = 0.0f;
+    gp->gv.kraid.xC = 0.0f;
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C7FF8(gobj, 0xD, 0x7, 0x2, 0.0f, 1.0f);
+}
 
 bool grKraid_801FE438(void)
 {

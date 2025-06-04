@@ -285,6 +285,13 @@ struct grKongo_GroundVars3 {
     f32 xE8;
 };
 
+struct grKraid_GroundVars {
+    /*  + gp+C4 */ u8 x0;
+    /*  + gp+C8 */ f32 x4;
+    /*  + gp+CC */ f32 x8;
+    /*  + gp+D0 */ f32 xC;
+};
+
 struct grCorneria_GroundVars {
     u32 xC4_b0 : 1;
     u32 xC4_b1 : 1;
@@ -398,6 +405,7 @@ struct Ground {
         struct grKongo_GroundVars kongo;
         struct grKongo_GroundVars2 kongo2;
         struct grKongo_GroundVars3 kongo3;
+        struct grKraid_GroundVars kraid;
         struct grLast_GroundVars last;
         struct grOnett_GroundVars onett;
         struct grStadium_GroundVars stadium;
