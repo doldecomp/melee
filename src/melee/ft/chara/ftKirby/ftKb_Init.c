@@ -2918,7 +2918,7 @@ enum_t ftKb_Init_803CB540[] = {
     2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
 };
 
-uint ftKb_Init_803CB6C0[] = { 260006, 260009, 260012, 260015, 260018, 0 };
+u32 ftKb_Init_803CB6C0[] = { 260006, 260009, 260012, 260015, 260018, 0 };
 
 char ftKb_Init_803CB6D8[] = "ftToSpecialNFox::Caution!!!\n";
 char ftKb_Init_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
@@ -2977,7 +2977,7 @@ jtbl_t ftKb_Init_803CB7DC = {
     NULL,
 };
 
-uint ftKb_Init_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
+u32 ftKb_Init_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
 
 float const ftKb_Init_803B7548[10] = { 0 };
 Vec3 const ftKb_Init_803B7570 = { 0, 4, 0 };
@@ -5590,7 +5590,7 @@ void ftKb_SpecialNPe_8010C560(HSD_GObj* gobj)
 static inline void doPeAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    uint cmd_var1 = fp->cmd_vars[1];
+    u32 cmd_var1 = fp->cmd_vars[1];
     struct ftKb_DatAttrs* da = fp->dat_attrs;
     u8 _[4 * 4] = { 0 };
 
@@ -5633,7 +5633,7 @@ void ftKb_PeSpecialLw_Phys(HSD_GObj* gobj)
 void ftKb_PeSpecialAirLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    uint cmd_var0 = fp->cmd_vars[0];
+    u32 cmd_var0 = fp->cmd_vars[0];
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(4 * 4);
     if (cmd_var0 >= 1) {

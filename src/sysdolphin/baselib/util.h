@@ -3,11 +3,10 @@
 
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
-
 #include "mtx.h"
 
-#include <dolphin/mtx/vec.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 #include <MSL/trigf.h>
 
 // functions
@@ -16,7 +15,7 @@ u32 HSD_GetNbBits(u32 arg0);
 s32 HSD_Index2PosNrmMtx(u32 arg0);
 
 // variables
-extern float HSD_identityMtx[];
+extern Mtx HSD_identityMtx;
 
 #define FLT_MIN 1.17549435e-38f
 

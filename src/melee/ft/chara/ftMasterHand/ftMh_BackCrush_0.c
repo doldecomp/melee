@@ -11,7 +11,7 @@
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
 void ftMh_BackPunch_Coll(HSD_GObj* gobj) {}

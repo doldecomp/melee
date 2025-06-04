@@ -4,7 +4,8 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1E57BC */ UNK_RET grBigBlue_801E57BC(UNK_PARAMS);
 /* 1E57C0 */ UNK_RET grBigBlue_801E57C0(UNK_PARAMS);

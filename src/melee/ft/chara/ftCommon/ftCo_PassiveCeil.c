@@ -1,5 +1,4 @@
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_PassiveCeil.h"
 
@@ -20,6 +19,7 @@
 #include "ftKirby/ftKb_Init.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 bool ftCo_800C23A0(ftCo_GObj* gobj)
 {

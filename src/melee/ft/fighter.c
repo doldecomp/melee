@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ftCommon/forward.h"
-#include <dolphin/gx/forward.h>
 
 #include "ft/fighter.h"
 
@@ -76,9 +75,8 @@
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/vec.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
@@ -152,7 +150,8 @@ void Fighter_800679B0(void)
 
     /// @warning don't hardcode the allocation sizes
     HSD_ObjAllocInit(&fighter_alloc_data, sizeof(Fighter), /*align*/ 4);
-    HSD_ObjAllocInit(&fighter_dat_attrs_alloc_data, /*size*/ 0x424, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_dat_attrs_alloc_data, /*size*/ 0x424,
+                     /*align*/ 4);
     ft_800852B0();
     Fighter_LoadCommonData();
     ft_8008549C();
@@ -162,7 +161,8 @@ void Fighter_800679B0(void)
     // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
     // data section, how does this work?
     HSD_ObjAllocInit(&fighter_parts_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
-    HSD_ObjAllocInit(&fighter_dobj_list_alloc_data, /*size*/ 0x1f0, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_dobj_list_alloc_data, /*size*/ 0x1f0,
+                     /*align*/ 4);
     HSD_ObjAllocInit(&fighter_x2040_alloc_data, /*size*/ 0x80, /*align*/ 4);
 
     g_spawnNumCounter = 1;

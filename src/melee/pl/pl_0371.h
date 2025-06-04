@@ -5,8 +5,9 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0411C4 */ void pl_800411C4(u8 slot, bool);
 /* 041280 */ void pl_80041280(u8 slot, bool);

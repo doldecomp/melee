@@ -1,5 +1,3 @@
-#include <dolphin/mtx/forward.h>
-
 #include "ft_0877.h"
 
 #include "ftcommon.h"
@@ -11,6 +9,7 @@
 #include "it/it_26B1.h"
 #include "lb/lbaudio_ax.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 

@@ -5,9 +5,9 @@
 #include <placeholder.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
+#include <dolphin/mtx.h>
 #include <baselib/mtx.h>
 
 /* 1C96E8 */ bool grLib_801C96E8(HSD_GObj*);

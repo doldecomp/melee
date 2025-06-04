@@ -18,7 +18,7 @@
 #include "it/items/itzeldadinfire.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 // 8013B638 - 8013B6D8 (160 bytes)
 // https://decomp.me/scratch/QnXK1

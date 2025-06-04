@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_CliffJump.h"
 
 #include "ftCo_CliffClimb.h"
@@ -15,6 +13,8 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 09B1B8 */ static void ftCo_8009B1B8(ftCo_GObj* gobj);
 /* 09B2F8 */ static void ftCo_8009B2F8(ftCo_GObj* gobj);

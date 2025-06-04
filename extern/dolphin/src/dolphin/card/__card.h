@@ -25,7 +25,7 @@ long __CARDRawRead(long chan, void * buf, long length, long offset);
 
 // CARDOpen.c
 BOOL __CARDCompareFileName(CARDDir *ent, const char *fileName);
-s32 __CARDAccess(CARDDir *ent);
+s32 __CARDAccess(CARDControl* card, CARDDir *ent);
 s32 __CARDIsPublic(CARDDir *ent);
 s32 __CARDGetFileNo(CARDControl* card, const char* fileName, s32* pfileNo);
 BOOL __CARDIsOpened(CARDControl *card, s32 fileNo);
@@ -34,6 +34,7 @@ BOOL __CARDIsOpened(CARDControl *card, s32 fileNo);
 void __CARDMountCallback(s32 chan, s32 result);
 
 // CARDFormat.c
+s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback);
 s32 CARDFormatAsync(s32 chan, CARDCallback callback);
 
 // CARDDir.c
@@ -43,6 +44,7 @@ s32 __CARDUpdateDir(s32 chan, CARDCallback callback);
 // CARDCheck.c
 void __CARDCheckSum(void *ptr, int length, u16 *checksum, u16 *checksumInv);
 s32 __CARDVerify(CARDControl *card);
+s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback);
 
 // CARDBlock.c
 void *__CARDGetFatBlock(CARDControl *card);

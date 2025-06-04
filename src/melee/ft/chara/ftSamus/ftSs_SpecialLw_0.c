@@ -1,5 +1,4 @@
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftSs_SpecialLw_0.h"
 
@@ -29,6 +28,7 @@
 
 #include <common_structs.h>
 #include <trigf.h>
+#include <dolphin/mtx.h>
 
 void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
 {

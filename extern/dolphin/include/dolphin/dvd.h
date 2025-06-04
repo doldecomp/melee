@@ -127,6 +127,7 @@ long DVDCancel(volatile struct DVDCommandBlock * block);
 int DVDCancelAllAsync(void (* callback)(long, struct DVDCommandBlock *));
 long DVDCancelAll();
 struct DVDDiskID * DVDGetCurrentDiskID();
+BOOL DVDCheckDisk(void);
 
 // dvdfs.c
 s32 DVDConvertPathToEntrynum(char* pathPtr);
@@ -206,5 +207,6 @@ extern void DVDReset(void);
 int DVDReadAbsAsyncPrio(struct DVDCommandBlock * block /* r29 */, void * addr /* r1+0xC */, long length /* r1+0x10 */, long offset /* r1+0x14 */, void (* callback)(long, struct DVDCommandBlock *) /* r1+0x18 */, long prio /* r31 */);
 int DVDSeekAbsAsyncPrio(struct DVDCommandBlock * block /* r31 */, long offset /* r28 */, void (* callback)(long, struct DVDCommandBlock *) /* r1+0x10 */, long prio /* r1+0x14 */);
 int DVDPrepareStreamAbsAsync(struct DVDCommandBlock * block /* r31 */, unsigned long length /* r1+0xC */, unsigned long offset /* r1+0x10 */, void (* callback)(long, struct DVDCommandBlock *) /* r1+0x14 */);
+void __DVDStoreErrorCode(u32 error);
 
 #endif

@@ -4,11 +4,12 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2ADC04 */ void it_802ADC04(Item_GObj* gobj);
 /* 2ADC34 */ void it_802ADC34(Item_GObj* gobj);

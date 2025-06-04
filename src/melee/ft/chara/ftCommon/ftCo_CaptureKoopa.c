@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_CaptureKoopa.h"
 
 #include "ftCo_CaptureDamageKoopa.h"
@@ -18,6 +16,7 @@
 #include "ftCommon/types.h"
 #include "ftKoopa/ftKp_Init.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
 void ftCo_800BC438(Fighter_GObj* gobj)

@@ -4,7 +4,8 @@
 #include <platform.h>
 
 #include "gr/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1CA0B4 */ void grDynamicAttr_801CA0B4(void);
 /* 1CA0F8 */ grDynamicAttr_UnkStruct*

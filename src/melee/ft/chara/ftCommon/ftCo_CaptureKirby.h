@@ -3,7 +3,7 @@
 
 #include "ft/forward.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 /* 0BD19C */ float ftCo_800BD19C(Fighter_GObj* gobj, Vec3* pos);
 /* 0BD1DC */ void ftCo_800BD1DC(Fighter_GObj* gobj, Fighter_GObj* victim_gobj);

@@ -16,7 +16,7 @@
 
 /// @todo Probably #size_t but that needs to be changed to
 ///       <tt>unsigned int</tt> first.
-/* 4D6D14 */ extern uint it_804D6D14;
+/* 4D6D14 */ extern u32it_804D6D14;
 
 /// Pointer to array of Article*
 /* 4D6D24 */ extern Article** it_804D6D24;  // common items

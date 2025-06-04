@@ -3,8 +3,9 @@
 
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1CD338 */ UNK_RET grCastle_801CD338(UNK_PARAMS);
 /* 1CD37C */ UNK_RET grCastle_801CD37C(UNK_PARAMS);

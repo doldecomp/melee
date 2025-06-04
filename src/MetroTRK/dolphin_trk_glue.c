@@ -4,8 +4,9 @@
 #include "MetroTRK/targimpl.h"
 #include "MetroTRK/trk.h"
 
-#include <dolphin/amcstubs/AmcExi2Stubs.h>
-#include <dolphin/OdemuExi2/DebuggerDriver.h>
+#include <dolphin/amc/AmcExi2Comm.h>
+#include <dolphin/db/DBInterface.h>
+#include <dolphin/odemu/odemu.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSThread.h>
 
@@ -16,18 +17,18 @@ ASM static void TRKLoadContext(OSContext* ctx, register u32 val)
 #ifdef __MWERKS__ // clang-format off
         nofralloc
 
-        lwz r0, OSContext.gprs[0](r3)
-        lwz r1, OSContext.gprs[1](r3)
-        lwz r2, OSContext.gprs[2](r3)
+        lwz r0, OSContext.gpr[0](r3)
+        lwz r1, OSContext.gpr[1](r3)
+        lwz r2, OSContext.gpr[2](r3)
         lhz r5, OSContext.state(r3)
         rlwinm. r6, r5, 0, 0x1E, 0x1E
         beq L_802CC24C
         rlwinm r5, r5, 0, 0x1F, 0x1D
         sth r5, OSContext.state(r3)
-        lmw r5, OSContext.gprs[5](r3)
+        lmw r5, OSContext.gpr[5](r3)
         b L_802CC250
     L_802CC24C:
-        lmw r13, OSContext.gprs[13](r3)
+        lmw r13, OSContext.gpr[13](r3)
     L_802CC250:
         mr r31, r3
         mr r3, r4
@@ -44,13 +45,13 @@ ASM static void TRKLoadContext(OSContext* ctx, register u32 val)
         rlwinm r4, r4, 0, 0x1F, 0x1D //Turn off recoverable exception flag
         mtmsr r4
         mtsprg 1, r2
-        lwz r4, OSContext.gprs[3](r31)
+        lwz r4, OSContext.gpr[3](r31)
         mtsprg 2, r4
-        lwz r4, OSContext.gprs[4](r31)
+        lwz r4, OSContext.gpr[4](r31)
         mtsprg 3, r4
         lwz r2, OSContext.srr0(r31)
         lwz r4, OSContext.srr1(r31)
-        lwz r31, OSContext.gprs[31](r31)
+        lwz r31, OSContext.gpr[31](r31)
         b TRKInterruptHandler
     #endif // clang-format on
 }

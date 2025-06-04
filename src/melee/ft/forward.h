@@ -4,8 +4,9 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 #define FIGHTERVARS_SIZE 0xF8
 

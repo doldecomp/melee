@@ -9,7 +9,7 @@
 
 #include "pl/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -78,11 +78,11 @@ typedef struct _StaticPlayer {
 
     /*0x68 - 0x6C*/ s32 falls[2]; /// other index for nana falls
 
-    /*0x70-0x84*/ uint kos_by_player[6];
+    /*0x70-0x84*/ u32 kos_by_player[6];
 
     /// @at{88} @sz{4}
     /// @remarks If -1 in zz_0035184, then it's set to MatchInfo->frame_count
-    uint match_frame_count;
+    u32 match_frame_count;
 
     /*0x8C*/ u16 suicide_count;
 
@@ -247,9 +247,9 @@ void Player_SetFalls(int slot, s32 falls);
 void Player_SetFallsByIndex(int slot, enum_t index, s32 falls);
 s32 Player_GetKOsByPlayerIndex(int slot, int idx);
 void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot);
-uint Player_GetMatchFrameCount(int slot);
+u32 Player_GetMatchFrameCount(int slot);
 void Player_UpdateMatchFrameCount(int slot, bool condition);
-uint Player_GetSuicideCount(int slot);
+u32 Player_GetSuicideCount(int slot);
 void Player_SetSuicideCount(s32 slot, u32 suicide_count);
 void Player_IncSuicideCount(s32 slot, s32 condition);
 bool Player_800353BC(s32 slot);

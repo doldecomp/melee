@@ -6,7 +6,7 @@
 
 #include "mp/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/tev.h>
 #include <baselib/texp.h>
 

@@ -5,7 +5,7 @@
 
 #include "platform.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct grMc_8049F4B8_t {
     /*   +0 */ float x0;

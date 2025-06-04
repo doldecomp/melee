@@ -6,7 +6,7 @@
 #include "baselib/forward.h"
 #include "un/forward.h" // IWYU pragma: export
 
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
 #define DEVTEXT_FLAG_HIDETEXT (0x80)
 #define DEVTEXT_FLAG_HIDEBACKGROUND (0x40)

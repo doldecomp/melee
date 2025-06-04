@@ -2,7 +2,6 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Escape.h"
 
@@ -24,6 +23,7 @@
 #include "ftYoshi/ftYs_Init.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* 0992A8 */ static void ftCo_800992A8(ftCo_GObj* gobj, FtMotionId msid, bool);
 /* 099314 */ static void ftCo_80099314(ftCo_GObj* gobj, FtMotionId msid,

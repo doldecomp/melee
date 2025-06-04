@@ -4,10 +4,11 @@
 #include <platform.h>
 
 #include "ftPurin/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 13C2F8 */ void ftPr_Init_8013C2F8(void);
 /* 13C318 */ void ftPr_Init_OnDeath(HSD_GObj* gobj);

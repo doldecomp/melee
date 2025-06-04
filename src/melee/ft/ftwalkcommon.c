@@ -1,6 +1,5 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftwalkcommon.h"
@@ -14,6 +13,7 @@
 #include "ft/types.h"
 #include "ftCommon/types.h"
 
+#include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 

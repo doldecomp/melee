@@ -1,8 +1,9 @@
 #ifndef GALE01_0EBB1C
 #define GALE01_0EBB1C
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0EBB1C */ void ftLk_SpecialHi_Enter(HSD_GObj* gobj);
 /* 0EBB80 */ void ftLk_SpecialAirHi_Enter(HSD_GObj* gobj);

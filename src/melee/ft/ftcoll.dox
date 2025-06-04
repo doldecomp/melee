@@ -11,7 +11,7 @@
 
 #include <common_structs.h>
 #include <placeholder.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 
 struct UNK_SAMUS_S2;

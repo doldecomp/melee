@@ -7,7 +7,6 @@
 #include "cm/forward.h"
 #include "it/forward.h" // IWYU pragma: export
 #include "it/items/forward.h"
-#include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -18,8 +17,8 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 struct CameraBoxFlags {
     struct {
@@ -683,7 +682,7 @@ struct ItemCommonData {
     f32 xCC;
     f32 xD0;
     f32 xD4;
-    uint xD8;
+    u32 xD8;
     s32 xDC;
     f32 unk_degrees; ///< @at{E0}
     u8 filler_1a[0xE8 - 0xE4];

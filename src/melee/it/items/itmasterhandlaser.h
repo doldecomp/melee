@@ -2,9 +2,10 @@
 #define GALE01_2F0340
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2F0340 */ Item_GObj* it_802F0340(Item_GObj*, Vec3*, Vec3*, u32, u32, float);
 /* 2F044C */ void it_802F044C(Item_GObj*, Item_GObj*);

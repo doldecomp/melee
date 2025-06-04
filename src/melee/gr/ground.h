@@ -5,11 +5,12 @@
 #include <placeholder.h>
 
 #include "lb/forward.h"
-#include <dolphin/gx/forward.h>
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "gr/types.h"
+
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 /* 1BFFB0 */ void Ground_801BFFB0(void);
 /* 1C0378 */ void Ground_801C0378(int);

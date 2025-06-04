@@ -3,7 +3,6 @@
 
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftCo_DamageIce.h"
@@ -33,6 +32,7 @@
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>

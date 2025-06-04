@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_CargoLanding.h"
 
 #include "ftCo_CargoWait.h"
@@ -14,6 +12,8 @@
 #include "ft/types.h"
 #include "ftCaptain/types.h"
 #include "ftDonkey/types.h"
+
+#include <dolphin/mtx.h>
 
 void ftCo_8009BD4C(ftCo_GObj* gobj)
 {

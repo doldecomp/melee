@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_FallSpecial.h"
 
 #include "ftCo_DamageFall.h"
@@ -21,6 +19,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <dolphin/mtx.h>
 
 void ftCo_800968C8(ftCo_GObj* gobj)
 {
@@ -127,11 +126,10 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
             f1 = ca->air_drift_stick_mul;
             lstick_x = fp->input.lstick.x;
             f1 = lstick_x * f1;
-            base = lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
+            base =
+                lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
 
-            ftCommon_8007D140(fp,
-                              f1 + base,
-                              lstick_x * ca->air_drift_max,
+            ftCommon_8007D140(fp, f1 + base, lstick_x * ca->air_drift_max,
                               ca->aerial_friction);
         }
     } else {
@@ -144,7 +142,8 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
             f1 = ca->air_drift_stick_mul;
             lstick_x = fp->input.lstick.x;
             f1 = lstick_x * f1;
-            base = lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
+            base =
+                lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
             {
                 float drift_max = lstick_x * ca->air_drift_max;
 #define mv_x8 fp->mv.co.fallspecial.x8
@@ -152,9 +151,7 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
                 if (ABS(drift_max) > mv_x8) {
                     drift_max = drift_max < 0 ? -mv_x8 : mv_x8;
                 }
-                ftCommon_8007D140(fp,
-                                  tmp4,
-                                  drift_max, ca->aerial_friction);
+                ftCommon_8007D140(fp, tmp4, drift_max, ca->aerial_friction);
             }
         }
     }

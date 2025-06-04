@@ -24,7 +24,7 @@
 #include <common_structs.h>
 #include <math.h>
 #include <trigf.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
 void ftZd_SpecialHi_801396AC(HSD_GObj* gobj)

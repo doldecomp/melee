@@ -5,7 +5,8 @@
 #include <placeholder.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 01E8F8 */ float lbMthp_8001E8F8(lbMthp_8001E8F8_t*);
 /* 01E910 */ UNK_RET fn_8001E910(UNK_PARAMS);

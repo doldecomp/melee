@@ -2,7 +2,6 @@
 #include <placeholder.h>
 
 #include "ftCrazyHand/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCh_Init.h"
 
@@ -16,6 +15,7 @@
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* static */ void ftCh_Init_801566B4(void);
 /* static */ void ftCh_Init_80156A5C(void);

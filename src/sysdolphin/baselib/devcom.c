@@ -1,6 +1,6 @@
 #include "devcom.h"
 
-#include <dolphin/ar/arq.h>
+#include <dolphin/ar.h>
 
 ARQRequest devComARQR[2][2];
 bool devComStatus[4];

@@ -9,15 +9,8 @@
 #include "tev.h"
 
 #include <__mem.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXFrameBuf.h>
-#include <dolphin/gx/GXMisc.h>
-#include <dolphin/gx/GXTexture.h>
-#include <dolphin/gx/GXTransform.h>
+#include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
-#include <dolphin/mtx/vec.h>
 #include <MetroTRK/intrinsics.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
@@ -405,7 +398,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
                                    : 0.0F));
     trans.z = tobj->translate.z;
 
-    MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
+    PSMTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
     HSD_MkRotationMtx(m, (Vec3*) &rot);
     MTXConcat(m, tobj->mtx, tobj->mtx);
     MTXScale(m, scale.x, scale.y, scale.z);
@@ -515,9 +508,8 @@ static void setupTextureCoordGen(HSD_TObj* tobj)
         break;
     default:
         if (tobj_bump(tobj)) {
-            mtxid = tobj->mtxid;
-            src = tobj->src;
-            GXSetTexCoordGen(tobj->coord, GX_TG_MTX2x4, src, mtxid);
+            GXSetTexCoordGen(tobj->coord, GX_TG_MTX2x4, tobj->src,
+                             tobj->mtxid);
         } else {
             GXSetTexCoordGen2(tobj->coord, GX_TG_MTX2x4, tobj->src,
                               GX_IDENTITY, GX_DISABLE, tobj->mtxid);
@@ -536,12 +528,12 @@ static void setupTextureCoordGenBump(HSD_TObj* bump)
 
     mask = HSD_LObjGetLightMaskDiffuse();
 
-    for (i = 0; i < GX_MAX_LIGHT - 1; i++) {
+    for (i = 0; i < 8; i++) {
         if (mask & (1 << i)) {
             break;
         }
     }
-    if (i >= GX_MAX_LIGHT - 1) {
+    if (i >= 8) {
         i = 0;
     }
 

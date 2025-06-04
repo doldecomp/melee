@@ -1,14 +1,14 @@
-#include <stddef.h>
-#include <dolphin.h>
-#include <dolphin/hw_regs.h>
-
 #include "__dsp.h"
 
-#define BUILD_DATE "May 22 2001"
+#include <dolphin.h>
+#include <stddef.h>
+#include <dolphin/hw_regs.h>
+
+#define BUILD_DATE "Sep  8 2001"
 #if DEBUG
 #define BUILD_TIME "01:48:51"
 #else
-#define BUILD_TIME "02:06:43"
+#define BUILD_TIME "01:51:48"
 #endif
 
 u32 DSPCheckMailToDSP(void)
@@ -50,20 +50,22 @@ void DSPAssertInt(void)
 }
 
 static int __DSP_init_flag;
-DSPTaskInfo *__DSP_first_task;
-DSPTaskInfo *__DSP_last_task;
-DSPTaskInfo *__DSP_curr_task;
-DSPTaskInfo *__DSP_tmp_task;
+extern DSPTaskInfo* __DSP_curr_task;
+extern DSPTaskInfo* __DSP_last_task;
+extern DSPTaskInfo* __DSP_first_task;
+extern DSPTaskInfo* __DSP_tmp_task;
 
 void DSPInit(void)
 {
     BOOL old;
     u16 tmp;
 
-    __DSP_debug_printf("DSPInit(): Build Date: %s %s\n", BUILD_DATE, BUILD_TIME);
+    __DSP_debug_printf("DSPInit(): Build Date: %s %s\n", BUILD_DATE,
+                       BUILD_TIME);
 
-    if (__DSP_init_flag == 1)
+    if (__DSP_init_flag == 1) {
         return;
+    }
 
     old = OSDisableInterrupts();
     __OSSetInterruptHandler(7, __DSPHandler);
@@ -76,7 +78,8 @@ void DSPInit(void)
     tmp = __DSPRegs[5];
     __DSPRegs[5] = tmp = tmp & ~0xAC;
 
-    __DSP_first_task = __DSP_last_task = __DSP_curr_task = __DSP_tmp_task = NULL;
+    __DSP_first_task = __DSP_last_task = __DSP_curr_task = __DSP_tmp_task =
+        NULL;
     __DSP_init_flag = 1;
 
     OSRestoreInterrupts(old);
@@ -129,11 +132,12 @@ u32 DSPGetDMAStatus(void)
     return (__DSPRegs[5] & (1 << 9));
 }
 
-DSPTaskInfo *DSPAddTask(DSPTaskInfo *task)
+DSPTaskInfo* DSPAddTask(DSPTaskInfo* task)
 {
     BOOL old;
 
-    ASSERTMSGLINE(0x21E, __DSP_init_flag == 1, "DSPAddTask(): DSP driver not initialized!\n");
+    ASSERTMSGLINE(0x21E, __DSP_init_flag == 1,
+                  "DSPAddTask(): DSP driver not initialized!\n");
 
     old = OSDisableInterrupts();
 
@@ -142,16 +146,18 @@ DSPTaskInfo *DSPAddTask(DSPTaskInfo *task)
     task->flags = 1;
 
     OSRestoreInterrupts(old);
-    if (task == __DSP_first_task)
+    if (task == __DSP_first_task) {
         __DSP_boot_task(task);
+    }
     return task;
 }
 
-DSPTaskInfo *DSPCancelTask(DSPTaskInfo *task)
+DSPTaskInfo* DSPCancelTask(DSPTaskInfo* task)
 {
     BOOL old;
 
-    ASSERTMSGLINE(0x242, __DSP_init_flag == 1, "DSPCancelTask(): DSP driver not initialized!\n");
+    ASSERTMSGLINE(0x242, __DSP_init_flag == 1,
+                  "DSPCancelTask(): DSP driver not initialized!\n");
 
     old = OSDisableInterrupts();
 
@@ -161,15 +167,18 @@ DSPTaskInfo *DSPCancelTask(DSPTaskInfo *task)
     return task;
 }
 
-extern DSPTaskInfo *__DSP_rude_task;
+extern DSPTaskInfo* __DSP_rude_task;
 extern int __DSP_rude_task_pending;
 
-DSPTaskInfo *DSPAssertTask(DSPTaskInfo *task)
+DSPTaskInfo* DSPAssertTask(DSPTaskInfo* task)
 {
     s32 old;
 
-    ASSERTMSGLINE(0x261, __DSP_init_flag == 1, "DSPAssertTask(): DSP driver not initialized!\n");
-    ASSERTMSGLINE(0x262, task->flags & 1, "DSPAssertTask(): Specified task not in active task list!\n");
+    ASSERTMSGLINE(0x261, __DSP_init_flag == 1,
+                  "DSPAssertTask(): DSP driver not initialized!\n");
+    ASSERTMSGLINE(
+        0x262, task->flags & 1,
+        "DSPAssertTask(): Specified task not in active task list!\n");
 
     old = OSDisableInterrupts();
 

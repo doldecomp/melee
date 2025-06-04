@@ -1,12 +1,20 @@
 #include <platform.h>
 
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+
+#include <baselib/gobj.h>
+
 void grOldYoshi_8020E798(void) {}
 
 /// #grOldYoshi_8020E79C
 
 void grOldYoshi_8020E824(void) {}
 
-/// #grOldYoshi_8020E828
+void grOldYoshi_8020E828(void)
+{
+    grZakoGenerator_801CAE04(false);
+}
 
 bool grOldYoshi_8020E84C(void)
 {
@@ -15,7 +23,11 @@ bool grOldYoshi_8020E84C(void)
 
 /// #grOldYoshi_8020E854
 
-/// #grOldYoshi_8020E93C
+void grOldYoshi_8020E93C(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grOldYoshi_8020E968(void)
 {

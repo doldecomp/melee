@@ -4,8 +4,9 @@
 #include <platform.h>
 
 #include "gr/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 224A54 */ float Stage_GetCamBoundsLeftOffset(void);
 /* 224A68 */ float Stage_GetCamBoundsRightOffset(void);

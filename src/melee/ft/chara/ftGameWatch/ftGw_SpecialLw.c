@@ -19,7 +19,7 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 /// Create Oil Panic Item
 void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)

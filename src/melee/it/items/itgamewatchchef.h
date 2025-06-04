@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2C837C */ HSD_GObj* it_802C837C(Item_GObj*, Vec3*, enum_t, u32, float);
 /* 2C847C */ bool it_802C847C(Item_GObj*);

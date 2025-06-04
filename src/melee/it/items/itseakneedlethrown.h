@@ -5,9 +5,10 @@
 
 #include "ft/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2AFD8C */ Item_GObj* it_802AFD8C(Item_GObj*, Vec3*, u32, float);
 /* 2AFEA8 */ Item_GObj* it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj,

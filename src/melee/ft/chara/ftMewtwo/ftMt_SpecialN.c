@@ -1,7 +1,6 @@
 #include "forward.h"
 #include "ft/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftMt_SpecialN.h"
 
@@ -29,6 +28,7 @@
 
 #include <common_structs.h>
 #include <trigf.h>
+#include <dolphin/mtx.h>
 
 // SpecialN/SpecialAirN
 

@@ -19,7 +19,7 @@
 #include "pl/plstale.h"
 #include "pl/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/debug.h>
 #include <baselib/gobjplink.h>
@@ -1348,7 +1348,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     player = &player_slots[slot];
 
     if (!bool_arg) {
-        uint kos = player->kos_by_player[other_slot];
+        unsigned kos = player->kos_by_player[other_slot];
 
         if (kos < U32_MAX) {
             player->kos_by_player[other_slot]++;
@@ -1379,10 +1379,10 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     }
 }
 
-uint Player_GetMatchFrameCount(int slot)
+u32 Player_GetMatchFrameCount(int slot)
 {
     StaticPlayer* player;
-    uint count;
+    u32 count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     count = player->match_frame_count;
@@ -1391,9 +1391,9 @@ uint Player_GetMatchFrameCount(int slot)
 
 void Player_UpdateMatchFrameCount(int slot, bool condition)
 {
-    u8 _[4];
-
     StaticPlayer* player;
+    PAD_STACK(4);
+
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
@@ -1402,10 +1402,10 @@ void Player_UpdateMatchFrameCount(int slot, bool condition)
     }
 }
 
-uint Player_GetSuicideCount(int slot)
+u32 Player_GetSuicideCount(int slot)
 {
     StaticPlayer* player;
-    uint count;
+    u32 count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     count = player->suicide_count;

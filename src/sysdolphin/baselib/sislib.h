@@ -9,7 +9,7 @@
 #include "baselib/archive.h"
 #include "baselib/cobj.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 typedef struct {
     UNK_T x0;

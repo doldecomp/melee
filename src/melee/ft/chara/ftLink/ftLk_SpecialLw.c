@@ -2,7 +2,6 @@
 
 #include "ftLink/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftLk_SpecialLw.h"
@@ -20,6 +19,8 @@
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <dolphin/mtx.h>
 
 /* 0EB75C */ static bool updateBomb(HSD_GObj* gobj, FtMotionId msid);
 /* 0EB7C8 */ static void spawnBomb(HSD_GObj* gobj);
@@ -49,7 +50,7 @@ static bool updateBomb(HSD_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL) {
-        uint bomb_kind = itGetKind(fp->item_gobj) - It_Kind_Link_Bomb;
+        u32 bomb_kind = itGetKind(fp->item_gobj) - It_Kind_Link_Bomb;
         if (bomb_kind <= 1) {
             ftCo_800957F4(gobj, msid);
         }

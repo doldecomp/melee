@@ -3,7 +3,7 @@
 
 #include <platform.h>
 #include "ftYoshi/forward.h"
-#include <dolphin/mtx/forward.h>
+#include <dolphin/mtx.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"

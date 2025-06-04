@@ -11,7 +11,7 @@
 #include "gr/grdatfiles.h"
 #include "lb/types.h"
 
-#include <dolphin/dvd/dvd.h>
+#include <dolphin/dvd.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/debug.h>
 
@@ -324,7 +324,7 @@ HSD_Archive* lbDvd_GetPreloadedArchive(s32 arg0)
 HSD_Archive* lbDvd_8001819C(const char* basename)
 {
     HSD_Archive* archive;
-    const char* filename = lbFile_80016204(basename);
+    char* filename = lbFile_80016204(basename);
     archive = lbDvd_GetPreloadedArchive(DVDConvertPathToEntrynum(filename));
     if (g_debugLevel != 0 && preloadCache.preloaded && archive == NULL) {
         OSReport("[LbDvd] %s is not PRELOADed.\n", filename);

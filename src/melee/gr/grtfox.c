@@ -15,7 +15,7 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>

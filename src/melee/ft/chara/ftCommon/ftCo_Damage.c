@@ -1,8 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_Damage.h"
 
 #include "ftCo_0C35.h"
@@ -51,7 +49,7 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/vec.h>
+#include <baselib/mtx.h>
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
@@ -694,7 +692,7 @@ void ftCo_8008E908(ftCo_GObj* gobj, float facing_dir)
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
     }
     {
-        uint fp_x1860 = fp->dmg.x1860_element;
+        u32 fp_x1860 = fp->dmg.x1860_element;
         if ((fp_x1860 == 6 || fp_x1860 == 7) && !fp->x2228_b2) {
             ftCo_800C318C(gobj, fp_x1860 == 6 ? 0 : 1);
         } else {

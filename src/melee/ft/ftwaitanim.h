@@ -4,7 +4,8 @@
 #include <placeholder.h>
 
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 typedef struct WaitStruct {
     union {

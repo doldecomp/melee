@@ -1,5 +1,3 @@
-#include <dolphin/mtx/forward.h>
-
 #include "itmarumine.h"
 
 #include "ef/eflib.h"
@@ -12,6 +10,7 @@
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
 static Vec3 const it_803B86C8 = { 0 };

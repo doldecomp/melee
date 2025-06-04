@@ -4,13 +4,12 @@
 #include <platform.h>
 
 #include "ftGameWatch/forward.h" // IWYU pragma: export
-#include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
 struct ftGameWatch_FighterVars {
     /* 0x222C */ s32 x222C_judgeVar1;

@@ -1,8 +1,9 @@
 #ifndef GALE01_150C8C
 #define GALE01_150C8C
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 150C8C */ void ftMh_MS_389_80150C8C(HSD_GObj* gobj);
 /* 150D28 */ void ftMh_MS_389_80150D28(HSD_GObj* gobj);

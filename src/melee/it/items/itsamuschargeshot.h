@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2B5518 */ UNK_RET it_802B5518(UNK_PARAMS);
 /* 2B55C8 */ HSD_GObj* it_802B55C8(Item_GObj* owner, Vec3*, s32, s32,

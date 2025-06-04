@@ -5,7 +5,8 @@
 #include <placeholder.h>
 
 #include "baselib/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 struct HSD_Spline {
     u8 x0 UNK_SIZE_ARRAY;

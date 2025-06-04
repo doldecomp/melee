@@ -8,12 +8,10 @@
 #include "it/forward.h"
 #include "lb/forward.h"
 #include "sc/forward.h"
-#include <dolphin/gx/forward.h>
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74

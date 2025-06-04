@@ -6,7 +6,7 @@
 #include "cm/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct CameraBox {
     CameraBox* next;

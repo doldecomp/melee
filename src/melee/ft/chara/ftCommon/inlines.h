@@ -15,7 +15,7 @@
 
 #include <baselib/gobj.h>
 
-static inline void ftCo_SpawnEf(ftCo_GObj* gobj, HSD_JObj* joint, uint arg2,
+static inline void ftCo_SpawnEf(ftCo_GObj* gobj, HSD_JObj* joint, u32 arg2,
                                 enum_t arg3)
 {
     u8 _[8] = { 0 };

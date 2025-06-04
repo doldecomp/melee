@@ -2,12 +2,10 @@
 
 #include "metrotrk.h"
 
-#include <dolphin/os.h>
-
 static bool TRKTargetCheckStep(void);
 
-extern OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);
-extern OSThread* __OSCurrentThread AT_ADDRESS(0x800000E4);
+OSThreadQueue __OSActiveThreadQueue;
+OSThread* __OSCurrentThread;
 
 #define BOOTINFO 0x80000000
 #define MEM2_CACHED 0x90000000

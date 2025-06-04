@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_CargoThrow.h"
 
@@ -19,6 +18,7 @@
 #include "ftDonkey/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* 09C02C */ static bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid);
 /* 09C170 */ static void ftCo_8009C170(ftCo_GObj* gobj);

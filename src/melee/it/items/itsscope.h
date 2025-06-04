@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
 /* 291C98 */ void it_80291C98(Item_GObj*);

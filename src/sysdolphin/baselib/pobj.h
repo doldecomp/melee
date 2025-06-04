@@ -4,13 +4,13 @@
 #include <platform.h>
 
 #include "baselib/forward.h" // IWYU pragma: export
-#include <dolphin/mtx/forward.h>
 
 #include "baselib/aobj.h"
 #include "baselib/class.h"
 #include "baselib/list.h"
 
 #include <dolphin/gx/GXEnum.h>
+#include <dolphin/mtx.h>
 
 #define HSD_MTX_RIGID 1
 #define HSD_MTX_ENVELOPE 2

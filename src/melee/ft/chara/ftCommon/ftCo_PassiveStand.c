@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_PassiveStand.h"
 
@@ -19,6 +18,7 @@
 #include "ftCommon/inlines.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* 09855C */ static void ftCo_800989D4(ftCo_GObj* gobj, FtMotionId msid);
 

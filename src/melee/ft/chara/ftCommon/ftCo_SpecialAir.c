@@ -1,6 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftCo_SpecialAir.h"
@@ -13,6 +12,7 @@
 #include "ft/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj)
 {

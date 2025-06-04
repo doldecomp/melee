@@ -3,8 +3,9 @@
 
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1E3030 */ void grStory_801E3030(void);
 /* 1E30A8 */ void grStory_801E30A8(void);

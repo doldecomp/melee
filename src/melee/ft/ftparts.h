@@ -5,8 +5,9 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0735BC */ void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx,
                                               Mtx rmtx);

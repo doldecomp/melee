@@ -1,22 +1,21 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
-#include <MSL/math.h>
-
-#include "ft/ft_0819.h"
 #include "ft/ft_081B.h"
 
 #include "inlines.h"
 
 #include "ft/fighter.h"
+#include "ft/ft_0819.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
+#include <MSL/math.h>
 
 void ft_80081B38(HSD_GObj* arg0)
 {
@@ -276,7 +275,8 @@ void ft_800851D0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x197C != NULL) {
-        fp->self_vel.y = fp->x6A4_transNOffset.y * ((f32*) Fighter_804D6520)[5];
+        fp->self_vel.y =
+            fp->x6A4_transNOffset.y * ((f32*) Fighter_804D6520)[5];
     } else {
         fp->self_vel.y = fp->x6A4_transNOffset.y;
     }

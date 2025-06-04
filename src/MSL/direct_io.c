@@ -43,7 +43,7 @@ size_t fwrite(const void* buffer, size_t memb_size, size_t num_memb,
         return 0;
     }
 
-    cur_ptr = (u8*) buffer;
+    cur_ptr = (unsigned char*) buffer;
     bytes_written = 0;
 
     if (rem_bytes && (file->buffer_ptr != file->buffer || buff)) {
@@ -51,7 +51,7 @@ size_t fwrite(const void* buffer, size_t memb_size, size_t num_memb,
             file->buffer_size - (file->buffer_ptr - file->buffer);
 
         do {
-            u8* nw = 0;
+            unsigned char* nw = 0;
             num_bytes = file->buffer_len;
 
             if (num_bytes > rem_bytes) {
@@ -88,7 +88,7 @@ size_t fwrite(const void* buffer, size_t memb_size, size_t num_memb,
     }
 
     if (rem_bytes && buff == 0) {
-        u8* save_buf = (u8*) file->buffer;
+        unsigned char* save_buf = (unsigned char*) file->buffer;
         size_t save_size = file->buffer_size;
 
         file->buffer = cur_ptr;

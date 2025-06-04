@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftMh_Squeeze.h"
 
 #include "ftMh_CaptureMasterHand.h"
@@ -16,6 +14,8 @@
 #include "ft/types.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
+
+#include <dolphin/mtx.h>
 
 void ftMh_MS_378_80154A78(HSD_GObj* gobj)
 {

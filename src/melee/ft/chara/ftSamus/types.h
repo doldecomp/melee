@@ -9,7 +9,7 @@
 
 #include "ftCommon/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ftSamus_FighterVars {
     /* 0x222C */ Item_GObj* x222C;

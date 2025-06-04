@@ -2,7 +2,6 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ft_0C31.h"
 
@@ -23,6 +22,7 @@
 #include "it/items/itlikelike.h"
 #include "pl/player.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/dobj.h>
 #include <baselib/jobj.h>
 

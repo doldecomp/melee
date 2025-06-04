@@ -3,12 +3,10 @@
 
 #include <platform.h>
 #include <placeholder.h>
-#include <dolphin/mtx/types.h>
 
 #include "gr/forward.h"
 
-#include "gr/forward.h"
-#include <dolphin/mtx/forward.h>
+#include <dolphin/mtx.h>
 
 /* 1DCCFC */ UNK_RET grCorneria_801DCCFC(UNK_PARAMS);
 /* 1DCE1C */ UNK_RET grCorneria_801DCE1C(UNK_PARAMS);

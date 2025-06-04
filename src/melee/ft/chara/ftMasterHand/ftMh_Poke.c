@@ -14,7 +14,7 @@
 #include "lb/lbvector.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 

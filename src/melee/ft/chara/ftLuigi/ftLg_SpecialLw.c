@@ -2,7 +2,6 @@
 
 #include "forward.h"
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftLg_SpecialLw.h"
 
@@ -22,6 +21,7 @@
 #include "lb/lbrefract.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 // SpecialLw (Luigi Cyclone)
 #define FTLUIGI_SPECIALLW_FLAG                                                \

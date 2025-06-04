@@ -394,7 +394,7 @@ void ftCo_8009DA38(Fighter* fp)
 
 static inline bool inlineA0(Fighter* fp)
 {
-    uint temp_r0 = fp->x619_costume_id;
+    u32 temp_r0 = fp->x619_costume_id;
     if (temp_r0 == 2) {
         return 0;
     }

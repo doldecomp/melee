@@ -4,8 +4,9 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 221C10 */ void grTLuigi_80221C10(int);
 /* 221C14 */ void grTLuigi_80221C14(void);

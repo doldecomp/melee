@@ -6,10 +6,10 @@
 
 #include "gr/forward.h"
 #include "mp/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* 04D164 */ int mpLib_8004D164(void);
 /* 04D16C */ mpLib_804D64B8_t* mpLib_8004D16C(void);

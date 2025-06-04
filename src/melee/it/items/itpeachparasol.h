@@ -4,11 +4,12 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2BDA40 */ int it_802BDA40(Item_GObj*, int);
 /* 2BDA64 */ Item_GObj* it_802BDA64(HSD_GObj* parent, Vec3* pos,

@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftCo_Ottotto.h"
@@ -28,6 +27,7 @@
 #include "mp/mplib.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* 09A410 */ static void ftCo_8009A410(ftCo_GObj* gobj);
 /* 09A6B8 */ static void ftCo_8009A6B8(ftCo_GObj* gobj);
