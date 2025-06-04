@@ -4735,7 +4735,7 @@ static f32 it_804DC744 = 1.0f;
 // static f64 it_804DC758 = 0.5f;
 // static f64 it_804DC760 = 3.0f;
 // static f32 it_804DC768 = 0.85f;
-static f32 it_804DC76C = 0.01f;
+static const f32 it_804DC76C = 0.01f;
 static f32 it_804DC770 = 0.0f;
 // static f32 it_804DC774 = 1.0f;
 // static f32 it_804DC778 = 2.0f;
@@ -4760,7 +4760,7 @@ static f32 it_804DC770 = 0.0f;
 // static f32 it_804DC7E8 = M_PI_2;
 // static f32 it_804DC7EC = 0.1f;
 // static f64 it_804DC7F0 = 10.0f;
-static f64 it_804DC7F8 = 0.5f;
+static const f64 it_804DC7F8 = 0.5f;
 // static f32 it_804DC800 = 30.0f;
 // static f32 it_804DC804= 10.0f;
 // static f64 it_804DC808 = M_PI_2;
@@ -5008,7 +5008,7 @@ void it_80272980(Item_GObj* item_gobj)
     if (vel_x < 0.0f) {
         vel_x = -vel_x;
     }
-    if (!(vel_x < 0.00001f) || (item->facing_dir == 0.0f)) {
+    if (!(vel_x < 0.00001f) || !item->facing_dir) {
         if (item->x40_vel.x >= 0.0f) {
             dir = 1.0f;
         } else {
@@ -5353,9 +5353,7 @@ void it_8027349C(Item_GObj* item_gobj)
 
 void it_802734B4(Item_GObj* item_gobj)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
+    Item* item = GET_ITEM(item_gobj);
     item->x7C.x = item->x7C.y = item->x7C.z = 0.0f;
     item->x88.x = item->x88.y = item->x88.z = 0.0f;
     item->x94.x = item->x94.y = item->x94.z = 0.0f;
@@ -5366,52 +5364,28 @@ void it_802734B4(Item_GObj* item_gobj)
 
 void it_80273500(Item_GObj* item_gobj, Vec3* arg1)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    // assinging directly causes a memcopy instead of using float transfers
+    Item* item = GET_ITEM(item_gobj);
     item->x40_vel.x = arg1->x;
     item->x40_vel.y = arg1->y;
     item->x40_vel.z = arg1->z;
-    // assuming these are inlines?
     it_8027346C(item_gobj);
-    // item = item_gobj->user_data;
-    // item->x64_vec_unk2.x = item->x64_vec_unk2.y = item->x64_vec_unk2.z = 0;
     it_80273484(item_gobj);
-    // item = item_gobj->user_data;
-    // item->x58_vec_unk.x = item->x58_vec_unk.y = item->x58_vec_unk.z = 0;
     it_8027349C(item_gobj);
-    // item = item_gobj->user_data;
-    // item->x70_nudge.x = item->x70_nudge.y = item->x70_nudge.z = 0;
     it_802734B4(item_gobj);
-    // item = item_gobj->user_data;
-    // item->x7C.x = item->x7C.y = item->x7C.z = 0.0f;
-    // item->x88.x = item->x88.y = item->x88.z = 0.0f;
-    // item->x94.x = item->x94.y = item->x94.z = 0.0f;
-    // item->xA0.x = item->xA0.y = item->xA0.z = 0.0f;
-    // item->xAC_unk.x = item->xAC_unk.z = 0.0f;
-    // item->xAC_unk.y = 1.0f;
 }
 
 void it_80273598(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
-    HSD_GObj* temp_r3;
-    Item* item;
-
-    item = item_gobj->user_data;
-    // storing owner causes incorrect register allocations
-    if ((item->owner != NULL) && (ftLib_80086960(item->owner))) {
+    Item* item = GET_ITEM(item_gobj);
+    if (item->owner != NULL && ftLib_80086960(item->owner)) {
         ftLib_80086D40(item->owner, arg1, arg2);
     }
 }
 
 void it_80273600(Item_GObj* item_gobj)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    // storing owner causes incorrect register allocation
-    if ((item->owner != NULL) && (ftLib_80086960(item->owner) != 0)) {
+    Item* item = GET_ITEM(item_gobj);
+    if (item->owner != NULL && ftLib_80086960(item->owner)) {
         ftLib_80086E68(item->owner);
     }
 }
@@ -5458,30 +5432,25 @@ void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
 
 void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
 {
-    // register allocations correct so long as vars are in exactly this order
+    Item* item;
     HSD_JObj* jobj2;
     f32 rotation;
     f32 dir_radians;
     f32 dir;
     f32 vel_x;
     s32 hold_kind;
-    s32 _filler; // this var does nothing but removing it fucks up the register
-                 // allocations
     s32 int_dir;
     Vec3 sp54;
     Vec3 sp48;
     Vec3 sp3C;
     HSD_JObj* jobj_2;
     Item* item_2;
-    Item* item;
     HSD_GObj* owner;
     HSD_JObj* jobj;
     PAD_STACK(32);
 
-    // item = GET_ITEM((HSD_GObj*) item_gobj);
-    // jobj = GET_JOBJ((HSD_GObj*) item_gobj);
-    item = item_gobj->user_data;
-    jobj = item_gobj->hsd_obj;
+    item = GET_ITEM(item_gobj);
+    jobj = GET_JOBJ(item_gobj);
     owner = item->owner;
     it_80275070(item_gobj,
                 item->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
@@ -5502,25 +5471,27 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
     item->x40_vel.x *= item->xCC_item_attr->x4_throw_speed_mul;
     item->x40_vel.y *= item->xCC_item_attr->x4_throw_speed_mul;
     item->x40_vel.z *= item->xCC_item_attr->x4_throw_speed_mul;
-    item = item_gobj->user_data;
-    vel_x = item->x40_vel.x;
-    if (vel_x < 0.0f) {
-        vel_x = -vel_x;
-    }
-    if (!(vel_x < 0.00001f) || (item->facing_dir == 0.0f)) {
-        if (item->x40_vel.x >= 0.0f) {
-            dir = 1.0f;
-        } else {
-            dir = -1.0f;
+    {
+        Item* item = item_gobj->user_data;
+        vel_x = item->x40_vel.x;
+        if (vel_x < 0.0f) {
+            vel_x = -vel_x;
         }
-        item->facing_dir = dir;
+        if (!(vel_x < 0.00001f) || (!item->facing_dir)) {
+            if (item->x40_vel.x >= 0.0f) {
+                dir = 1.0f;
+            } else {
+                dir = -1.0f;
+            }
+            item->facing_dir = dir;
+        }
+        if (-1.0f == item->facing_dir) {
+            int_dir = -1;
+        } else {
+            int_dir = 1;
+        }
+        mpColl_800436D8(&item->x378_itemColl, int_dir);
     }
-    if (-1.0f == item->facing_dir) {
-        int_dir = -1;
-    } else {
-        int_dir = 1;
-    }
-    mpColl_800436D8(&item->x378_itemColl, int_dir);
     if (item->xDC8_word.flags.x19 == 1) {
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(jobj, dir_radians);
@@ -5530,10 +5501,7 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
          (hold_kind != 6)) ||
         (item->hold_kind == 8))
     {
-        jobj2 = it_80272CC0(
-            item_gobj,
-            ((Item*) item_gobj->user_data)
-                ->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
+        jobj2 = it_80272C90(item_gobj);
         HSD_JObjGetTranslation(jobj2, &sp3C);
         sp3C.x = -sp3C.x;
         sp3C.y = -sp3C.y;
@@ -5556,9 +5524,7 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
 
 void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
 {
-    // register allocations are correct when vars declared in exactly this
-    // order
-    s32 stack_top[10];
+    s32 stack_top[9];
     Item* item;
     HSD_GObj* owner_gobj;
     HSD_JObj* jobj;
@@ -5571,15 +5537,12 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
     Vec3 sp34;
     s32 int_dir;
     Vec3* pos;
-    HSD_JObj* item_jobj2;
     HSD_JObj* item_jobj3;
     HSD_JObj* item_jobj1;
-    Item* item2;
     Item* item3;
-    PAD_STACK(32);
 
-    item = item_gobj->user_data;
-    item_jobj1 = item_gobj->hsd_obj;
+    item = GET_ITEM(item_gobj);
+    item_jobj1 = GET_JOBJ(item_gobj);
     owner_gobj = item->owner;
     it_80275070(item_gobj,
                 item->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
@@ -5587,38 +5550,43 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         it_8026B390(item_gobj);
     }
     it_802756E0(item_gobj);
-    item = item_gobj->user_data;
-    item_jobj2 = item_gobj->hsd_obj;
-    rotation = it_80274990(item_gobj);
-    lb_8000B804(item_jobj2, item->xC8_joint);
-    Item_8026849C((HSD_GObj*) item_gobj);
+    {
+        HSD_JObj* item_jobj2;
+        Item* item = GET_ITEM(item_gobj);
+        item_jobj2 = GET_JOBJ(item_gobj);
+        rotation = it_80274990(item_gobj);
+        lb_8000B804(item_jobj2, item->xC8_joint);
+        Item_8026849C(item_gobj);
+    }
     it_80274658(item_gobj, rotation);
     if (item->xDC8_word.flags.x0) {
-        owner_gobj = (HSD_GObj*) item->x51C;
+        owner_gobj = item->x51C;
     }
     item->x40_vel = *vel;
     item->x40_vel.x *= item->xCC_item_attr->x4_throw_speed_mul;
     item->x40_vel.y *= item->xCC_item_attr->x4_throw_speed_mul;
     item->x40_vel.z *= item->xCC_item_attr->x4_throw_speed_mul;
-    item2 = item_gobj->user_data;
-    vel_x = item2->x40_vel.x;
-    if (vel_x < 0.0f) {
-        vel_x = -vel_x;
-    }
-    if (!(vel_x < 0.00001f) || (item2->facing_dir == 0.0f)) {
-        if (item2->x40_vel.x >= 0.0f) {
-            dir = 1.0f;
-        } else {
-            dir = -1.0f;
+    {
+        Item* item2 = GET_ITEM(item_gobj);
+        vel_x = item2->x40_vel.x;
+        if (vel_x < 0.0f) {
+            vel_x = -vel_x;
         }
-        item2->facing_dir = dir;
+        if (!(vel_x < 0.00001f) || !item2->facing_dir) {
+            if (item2->x40_vel.x >= 0.0f) {
+                dir = 1.0f;
+            } else {
+                dir = -1.0f;
+            }
+            item2->facing_dir = dir;
+        }
+        if (-1.0f == item2->facing_dir) {
+            int_dir = -1;
+        } else {
+            int_dir = 1;
+        }
+        mpColl_800436D8(&item2->x378_itemColl, int_dir);
     }
-    if (-1.0f == item2->facing_dir) {
-        int_dir = -1;
-    } else {
-        int_dir = 1;
-    }
-    mpColl_800436D8(&item2->x378_itemColl, int_dir);
     if (item->xDC8_word.flags.x19 == 1) {
         dir_radians = M_PI_2 * item->facing_dir;
         HSD_JObjSetRotationY(item_jobj1, dir_radians);
@@ -5628,10 +5596,7 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
          (hold_kind != 6)) ||
         (item->hold_kind == 8))
     {
-        jobj = it_80272CC0(
-            (Item_GObj*) item_gobj,
-            ((Item*) item_gobj->user_data)
-                ->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
+        jobj = it_80272C90(item_gobj);
         HSD_JObjGetTranslation(jobj, &sp40);
         sp40.x = -sp40.x;
         sp40.y = -sp40.y;
@@ -5639,20 +5604,22 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
     } else {
         sp40.x = sp40.y = sp40.z = 0.0f;
     }
-    item3 = item_gobj->user_data;
-    item_jobj3 = item_gobj->hsd_obj;
-    if (&sp40 != NULL) {
-        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
-                    &sp40, &sp34);
-    } else {
-        lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
-                    NULL, &sp34);
+    {
+        Item* item3 = GET_ITEM(item_gobj);
+        HSD_JObj* item_jobj3 = GET_JOBJ(item_gobj);
+        if (&sp40 != NULL) {
+            lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
+                        &sp40, &sp34);
+        } else {
+            lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
+                        NULL, &sp34);
+        }
+        pos = &item3->pos;
+        item3->pos.x = sp34.x;
+        item3->pos.y = sp34.y;
+        item3->pos.z = 0.0f;
+        HSD_JObjSetTranslate(item_jobj3, pos);
     }
-    pos = &item3->pos;
-    item3->pos.x = sp34.x;
-    item3->pos.y = sp34.y;
-    item3->pos.z = 0.0f;
-    HSD_JObjSetTranslate(item_jobj3, pos);
 }
 
 void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
@@ -7519,28 +7486,26 @@ void it_8027737C(Item_GObj* item_gobj, Vec3* pos)
     Vec3 sp1C;
     Item* item;
     f32 temp_f1;
+    u8 _[4];
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    if (item->xDC8_word.flags.x1F) {
-        if (item->xD5C == 0U) {
-        } else {
-            PSVECAdd(&item->x88, &item->x7C, &item->x7C);
-            item->x7C.x *= item->xCC_item_attr->x54;
-            item->x7C.y *= item->xCC_item_attr->x54;
-            if (sqrtf_accurate(SQ(item->x7C.x) + SQ(item->x7C.y)) >
-                it_804D6D28->xC8)
-            {
-                lbVector_NormalizeXY(&item->x7C);
-                temp_f1 = it_804D6D28->xC8;
-                item->x7C.x *= temp_f1;
-                item->x7C.y *= temp_f1;
-            }
-            if (SQ(item->x7C.x) + SQ(item->x7C.y) < it_804D6D28->xCC) {
-                item->xDC8_word.flags.x1F = 0;
-                item->x7C.y = 0.0f;
-                item->x7C.x = 0.0f;
-                return;
-            }
+    if (item->xDC8_word.flags.x1F && item->xD5C != 0U) {
+        PSVECAdd(&item->x88, &item->x7C, &item->x7C);
+        item->x7C.x *= item->xCC_item_attr->x54;
+        item->x7C.y *= item->xCC_item_attr->x54;
+        if (sqrtf_accurate(SQ(item->x7C.x) + SQ(item->x7C.y)) >
+            it_804D6D28->xC8)
+        {
+            lbVector_NormalizeXY(&item->x7C);
+            temp_f1 = it_804D6D28->xC8;
+            item->x7C.x *= temp_f1;
+            item->x7C.y *= temp_f1;
+        }
+        if (SQ(item->x7C.x) + SQ(item->x7C.y) < it_804D6D28->xCC) {
+            item->xDC8_word.flags.x1F = 0;
+            item->x7C.y = 0.0f;
+            item->x7C.x = 0.0f;
+            return;
         }
 
         it_802775F0(item_gobj, &item->x7C);
@@ -7572,26 +7537,13 @@ bool it_80277544(Item_GObj* item_gobj)
 
 void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
 {
-    Item* item;
-    f32 temp_sqrt;
-    s32 dir1;
-    s32 dir2;
+    Item* item = GET_ITEM((HSD_GObj*) item_gobj);
+    u8 _[4];
 
-    item = GET_ITEM((HSD_GObj*) item_gobj);
     if (item->spin_spd) {
-        temp_sqrt = sqrtf_accurate(SQ(arg1->x) + SQ(arg1->y));
+        f32 temp_sqrt = sqrtf_accurate(SQ(arg1->x) + SQ(arg1->y));
         item->xD3C_spinSpeed = 0.85f * (temp_sqrt / item->xC1C.bottom);
-        if (item->facing_dir < 0.0f) {
-            dir1 = -1;
-        } else {
-            dir1 = 1;
-        }
-        if (arg1->x < 0.0f) {
-            dir2 = -1;
-        } else {
-            dir2 = 1;
-        }
-        if (dir2 != dir1) {
+        if ((arg1->x < 0 ? -1 : 1) != (item->facing_dir < 0 ? -1 : 1)) {
             item->xD3C_spinSpeed = -item->xD3C_spinSpeed;
         }
         if (item->xDC8_word.flags.x19 != 1) {
@@ -8986,6 +8938,9 @@ void it_8027978C(Item_GObj* item_gobj, FtCmdState* cmd)
     cmd->x8 = cmd->x8 + 4;
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_80279888(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     PAD_STACK(4);
@@ -9000,6 +8955,8 @@ void it_802798D4(Item_GObj* item_gobj, FtCmdState* cmd)
     it_80273600(item_gobj);
     cmd->x8 = cmd->x8 + 4;
 }
+
+#pragma pop
 
 void it_8027990C(Item_GObj* item_gobj, FtCmdState* cmd)
 {
@@ -9056,23 +9013,25 @@ void it_802799E4(Item_GObj* item_gobj)
     }
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_80279AF0(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     it_80278F2C(item_gobj, (FtCmdState*) cmd);
 }
+
+#pragma pop
 
 void it_80279B10(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     it_8027978C(item_gobj, cmd);
 }
 
-void fn_80279B30(Item_GObj* item_gobj, FtCmdState* cmd)
+void fn_80279B30(Item_GObj* item_gobj, FtCmdState* cmd, int arg2)
 {
-    // void fn_80279B30(HSD_GObj* item_gobj, FtCmdState* cmd, u32 arg2) {
-    // *(&it_804D51C8 + ((M2C_ERROR(/* Read from unset register $r5 */) - 0x15)
-    // * 4))(&it_804D51C8);
-    ((void (*)(Item_GObj*, ...)) * (&it_804D51C8[-0x15]))(item_gobj, cmd);
-    // ((void (*)(...))*(&it_804D51C8[arg2 - 21U]))(item_gobj, cmd);
+    int idx = arg2 - 21;
+    it_804D51C8[idx](item_gobj, cmd);
 }
 
 void it_80279B64(Item* item)
@@ -9250,6 +9209,9 @@ void it_80279FF8(Item_GObj* item_gobj)
     }
 }
 
+#pragma push
+#pragma dont_inline on
+
 bool it_8027A09C(Item_GObj* item_gobj)
 {
     Item* item;
@@ -9265,6 +9227,8 @@ bool it_8027A09C(Item_GObj* item_gobj)
     item->xDD4_itemVar.it_279D.x24 -= 1.0f;
     return false;
 }
+
+#pragma pop
 
 bool it_8027A118(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 {
@@ -10486,9 +10450,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
 
 void it_8027CE18(Item_GObj* item_gobj)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
+    Item* item = GET_ITEM(item_gobj);
     pl_8004049C(item->xCB0_source_ply, item->kind);
 }
 
@@ -10497,12 +10459,16 @@ void it_8027CE44(Item_GObj* item_gobj)
     grZakoGenerator_801CACB8((Ground_GObj*) item_gobj);
 }
 
+#pragma push
+#pragma dont_inline on
+
 // Appears to be a function for Game&Watch items
 void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
-                 int arg_attr_address)
+                 void* arg_attr_address)
 {
     Item* item;
     GXColor sp18;
+    u32 pad[1];
 
     item = item_gobj->user_data;
     item->xDCF_flag.b3 = true;
@@ -10511,7 +10477,7 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
     ftLib_80087744(fighter_gobj, &item->xBC8);
     item->x5C8 = ftLib_800870BC(item->owner, (void**) &item->xBC4);
     it_80274594(item_gobj);
-    item->xDD4_itemVar.it_27CE.attr =
-        &arg_attr_address; // Or the first var gets set equal to the first
-                           // attribute
+    item->xDD4_itemVar.it_27CE.attr = arg_attr_address;
 }
+
+#pragma pop

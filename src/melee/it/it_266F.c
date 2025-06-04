@@ -67,14 +67,14 @@ static U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
 
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
-    s32* var_r28;
+    u32 it_kind;
     s32 var_r29; // Hold Kind??
-    ItemKind it_kind;
+    s32* var_r28;
     PAD_STACK(8);
 
     it_kind = It_Kind_Capsule;
     var_r29 = 0;
-    var_r28 = (s32*) arg_struct;
+    var_r28 = &arg_struct->unk0;
     arg_struct->unk0 = 0;
     arg_struct->unk4 = 0;
     arg_struct->unk8 = 0;
@@ -83,7 +83,7 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
     arg_struct->unk14 = 0;
     arg_struct->unk18 = 0;
     arg_struct->unk1C = 0;
-    while (it_kind < 238U) {
+    while (it_kind < 238) {
         if (it_80272828(it_kind)) {
             *var_r28 |= 1 << var_r29;
         }
@@ -806,26 +806,27 @@ void it_8026D82C(Item_GObj* gobj)
 
 bool it_8026D8A4(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
-    Item* ip;
-    CollData* coll;
     bool test;
-    PAD_STACK(9 * 4);
+    PAD_STACK(8 * 4);
 
     it_80276214(gobj);
 
-    ip = gobj->user_data;
-    coll = &ip->x378_itemColl;
+    {
+        CollData* coll;
+        Item* ip = GET_ITEM(gobj);
+        coll = &ip->x378_itemColl;
 
-    it_80276214(gobj);
+        it_80276214(gobj);
 
-    test = mpColl_8004B2DC(coll);
-    ip->pos = coll->cur_topn;
+        test = mpColl_8004B2DC(coll);
+        ip->pos = coll->cur_topn;
 
-    if (test != false) {
-        ip->xC30 = coll->floor.index;
+        if (test != false) {
+            ip->xC30 = coll->floor.index;
+        }
     }
     if (it_802762D8(gobj) != false) {
-        arg1((HSD_GObj*) gobj);
+        arg1(gobj);
     }
     return test;
 }
@@ -954,7 +955,7 @@ bool it_8026DC24(Item_GObj* gobj)
             goto block_18a8;
         }
     }
-    if (ip->xDCD_flag.b4 || (attr->x58 == 0.0f)) {
+    if (ip->xDCD_flag.b4 || !attr->x58) {
     block_18a8:
         itResetVelocity(ip);
         return true;
@@ -983,14 +984,15 @@ bool it_8026DD5C(Item_GObj* gobj)
 
 bool it_8026DDFC(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM((HSD_GObj*) gobj);
+    Item* ip = GET_ITEM(gobj);
 
-    ip->xD50_landNum += 1U;
-    if (ip->xD50_landNum == 1U) {
-        if (ip->xD54_throwNum != 0U) {
+    ip->xD50_landNum += 1;
+    if (ip->xD50_landNum == 1) {
+        if (ip->xD54_throwNum != 0) {
+            u8* tmp = &it_804D6D28->x48_byte;
             if ((ip->xD54_throwNum ==
-                 ((it_804D6D28->x48_float >> 4U) & 0xF)) ||
-                (HSD_Randi(it_804D6D28->x48_float & 0xF) == 0))
+                 ((*tmp >> 4) & 0xF)) ||
+                (HSD_Randi(*tmp & 0xF) == 0))
             {
                 ip->destroy_type = 1;
                 Item_8026A8EC(gobj);
@@ -1541,9 +1543,9 @@ void it_8026E8C4(Item_GObj* item_gobj, HSD_GObjEvent arg1, HSD_GObjEvent arg2)
 
 bool it_8026E9A4(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3)
 {
+    u8 _[4];
     Vec3 p;
-    // PAD_STACK(4);
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     if (mpLib_800524DC(&p, 0, NULL, arg3, -1, -1, arg1->x, arg1->y, arg2->x,
                        arg2->y) == true)
@@ -1613,11 +1615,13 @@ void it_8026EB18(HSD_GObj* gobj, s32 arg1, Vec3* arg2)
 void it_8026EBC8(HSD_GObj* gobj, u16 arg1, u8* arg2)
 {
     Item* ip = GET_ITEM(gobj);
-    u16 cnt = 0U;
+    u16 cnt = 0;
+    HSD_JObj* jobj;
+    HSD_JObj* jobj_parent;
     u8* index = arg2;
     while (cnt < arg1) {
-        HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[*index];
-        HSD_JObj* jobj_parent = HSD_JObjGetParent(jobj);
+        jobj = ip->xBBC_dynamicBoneTable->bones[*index];
+        jobj_parent = HSD_JObjGetParent(jobj);
         if (!(HSD_JObjGetFlags(jobj_parent) & 0x10)) {
             it_80272A18(jobj);
         }
@@ -1629,11 +1633,13 @@ void it_8026EBC8(HSD_GObj* gobj, u16 arg1, u8* arg2)
 void it_8026EC54(HSD_GObj* gobj, u16 arg1, u8* arg2)
 {
     Item* ip = GET_ITEM(gobj);
-    u16 cnt = 0U;
+    u16 cnt = 0;
+    HSD_JObj* jobj;
+    HSD_JObj* jobj_parent;
     u8* index = arg2;
     while (cnt < arg1) {
-        HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[*index];
-        HSD_JObj* jobj_parent = HSD_JObjGetParent(jobj);
+        jobj = ip->xBBC_dynamicBoneTable->bones[*index];
+        jobj_parent = HSD_JObjGetParent(jobj);
         if (!(HSD_JObjGetFlags(jobj_parent) & 0x10)) {
             it_80272A3C(jobj);
         }
