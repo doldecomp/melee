@@ -1,8 +1,34 @@
 #include "ifall.static.h"
 
-/// #ifAll_802F3394
+#include "if/ifmagnify.h"
+#include "if/ifstatus.h"
+#include "if/iftime.h"
+#include "un/un_2FC9.h"
 
-/// #ifAll_802F33CC
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+
+void ifAll_802F3394(void)
+{
+    ifStatus_802F6898();
+    ifTime_802F405C();
+    un_802FD450();
+    ifMagnify_802FC8E8();
+    un_802FD668();
+    un_802FD910();
+    un_802FF570();
+}
+
+void ifAll_802F33CC(void)
+{
+    ifStatus_802F68F0();
+    ifTime_802F40B8();
+    un_802FD45C();
+    ifMagnify_802FC940();
+    un_802FD674();
+    un_802FD91C();
+    un_802FF620();
+}
 
 s32 ifAll_802F3404(void)
 {
@@ -41,7 +67,15 @@ u8 ifAll_IsHUDHidden(void)
     return ifAll_804D6D58;
 }
 
-/// #fn_802F36B8
+void fn_802F36B8(HSD_GObj* gobj)
+{
+    if ((int) ifAll_804D6D58 == 0) {
+        if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
+            HSD_GObj_80390ED0(gobj, 0x7);
+            HSD_CObjEndCurrent();
+        }
+    }
+}
 
 /// #ifAll_802F370C
 
