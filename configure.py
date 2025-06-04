@@ -234,7 +234,6 @@ cflags_base = [
     '-pragma "warn_notinlined off"',
     "-RTTI off",
     "-str reuse",
-    f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
 ]
@@ -266,7 +265,6 @@ cflags_runtime = [
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-common off",
-    "-inline auto",
 ]
 
 # Metrowerks libc flags
