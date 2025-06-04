@@ -1,4 +1,4 @@
-#include <platform.h>
+#include "MetroTRK/dolphin_trk.h"
 
 #include "MetroTRK/__exception.h"
 #include "MetroTRK/dolphin_trk_glue.h"
