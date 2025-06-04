@@ -289,15 +289,11 @@ cflags_trk = [
     "-rostr",
 ]
 
-includes_base = ["src"]
-
-system_includes_base = [
+includes_base = [
     "src",
     "src/MSL",
     "src/Runtime",
-    "extern/dolphin/src/",
     "extern/dolphin/include",
-    f"build/{config.version}/include",
 ]
 
 cflags_melee = [
@@ -316,7 +312,6 @@ def Lib(
     fix_epilogue=True,
     fix_trk=False,
     includes: List[str] = includes_base,
-    system_includes: List[str] = system_includes_base,
     src_dir: Optional[str] = None,
     category: Optional[str] = None,
 ) -> Library:
@@ -329,8 +324,6 @@ def Lib(
         "cflags": [
             *cflags,
             *make_includes(includes),
-            "-I-",
-            *make_includes(system_includes),
         ],
         "host": False,
         "progress_category": category,
@@ -349,35 +342,18 @@ def Lib(
 def DolphinLib(
     lib_name: str, objects: Objects, fix_epilogue=False, extern=False
 ) -> Library:
-    if extern:
-        cflags = [
-            "-c",
-            "-O4,p",
-            "-inline auto",
-            "-sym on",
-            "-nodefaults",
-            "-proc gekko",
-            "-fp hard",
-            "-Cpp_exceptions off",
-            "-enum int",
-            "-requireprotos",
-            '-pragma "cats off"',
-            "-I-",
-            "-Iextern/dolphin/include",
-            "-Iextern/dolphin/include/libc",
-            "-Isrc/MSL",
-            "-Isrc/Runtime",
-            "-ir extern/dolphin/src",
-            "-DRELEASE",
-        ]
-        src_dir = "extern/dolphin/src"
-        includes = []
-        system_includes = []
-    else:
-        cflags = cflags_base
-        src_dir = None
-        includes = includes_base
-        system_includes = system_includes_base
+    cflags = cflags_base + [
+        "-requireprotos",
+        "-fp_contract off",
+        "-ir extern/dolphin/src",
+    ]
+    src_dir = "extern/dolphin/src"
+    includes = [
+        "extern/dolphin/include",
+        "extern/dolphin/include/libc",
+        "src/MSL",
+        "src/Runtime",
+    ]
 
     return Lib(
         lib_name,
@@ -386,7 +362,6 @@ def DolphinLib(
         src_dir=src_dir,
         cflags=cflags,
         includes=includes,
-        system_includes=system_includes,
         category="sdk",
     )
 
@@ -398,9 +373,6 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         includes=[
             *includes_base,
             "src/sysdolphin",
-        ],
-        system_includes=[
-            *system_includes_base,
         ],
         category="hsd",
     )
@@ -414,9 +386,6 @@ def MeleeLib(lib_name: str, objects: Objects) -> Library:
             *includes_base,
             "src/melee",
             "src/melee/ft/chara",
-        ],
-        system_includes=[
-            *system_includes_base,
             "src/sysdolphin",
         ],
         category="game",
