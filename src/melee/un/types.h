@@ -48,7 +48,8 @@ struct un_804D6EF4_t {
     /* +0 */ char pad_0[0x18];
     /* +14 */ HSD_JObj* x14;
     /* +18 */ HSD_JObj* x18;
-    /* +1C */ char pad_1C[0x54 - 0x20];
+    /* +1C */ char pad_1C[0x50 - 0x20];
+    /* +50 */ HSD_Archive* archive;
     /* +54 */ short x54;
     /* +56 */ short x56;
 };
