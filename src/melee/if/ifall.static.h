@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include <baselib/forward.h>
+
 #include "ifall.h" // IWYU pragma: export
 
 struct ifAll_804A0FD8_x18_t {
@@ -20,7 +22,7 @@ struct ifAll_804A0FD8_t {
 };
 
 /* 4D6D58 */ static u8 ifAll_804D6D58;
-/* 4D6D5C */ static UNK_T ifAll_804D6D5C;
+/* 4D6D5C */ static HSD_Archive* ifAll_804D6D5C;
 /* 4A0FD8 */ static struct ifAll_804A0FD8_t ifAll_804A0FD8;
 
 #endif
