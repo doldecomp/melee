@@ -350,7 +350,6 @@ def DolphinLib(
         "extern/dolphin/include",
         "extern/dolphin/include/libc",
         "src/MSL",
-        "src/Runtime",
     ]
 
     return Lib(

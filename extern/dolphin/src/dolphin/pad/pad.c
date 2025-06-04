@@ -1,5 +1,3 @@
-#include "platform.h"
-
 #include "os/__os.h"
 
 #include <dolphin.h>
@@ -15,7 +13,7 @@
      PAD_BUTTON_B | PAD_BUTTON_X | PAD_BUTTON_Y | PAD_BUTTON_MENU | 0x2000 |  \
      0x0080)
 
-u16 __OSWirelessPadFixMode AT_ADDRESS(0x800030E0);
+u16 __OSWirelessPadFixMode : 0x800030E0;
 
 static long ResettingChan = 0x00000020;       // size: 0x4, address: 0x0
 static unsigned long XPatchBits = 0xF0000000; // size: 0x4, address: 0x4
