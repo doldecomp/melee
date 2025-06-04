@@ -126,7 +126,21 @@ bool grKraid_801FE9F8(void)
 
 /// #grKraid_801FEE54
 
-/// #grKraid_801FF068
+void grKraid_801FF068(HSD_GObj* gobj, int val)
+{
+    int temp;
+    Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
+
+    gp->gv.kraid.x1 = val;
+    grAnime_801C8138(gobj, gp->map_id, gp->gv.kraid.x1);
+    temp = gp->gv.kraid.x1;
+    gobj = Ground_801C2BA4(1);
+    gp = GET_GROUND(gobj);
+    gp->gv.kraid.x1 = temp;
+    grAnime_801C8138(gobj, gp->map_id, gp->gv.kraid.x1);
+    gp->gv.kraid.x0 = 1;
+}
 
 /// #grKraid_801FF0E0
 

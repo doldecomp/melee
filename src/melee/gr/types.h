@@ -287,6 +287,7 @@ struct grKongo_GroundVars3 {
 
 struct grKraid_GroundVars {
     /*  + gp+C4 */ u8 x0;
+    /*  + gp+C5 */ s8 x1;
     /*  + gp+C8 */ f32 x4;
     /*  + gp+CC */ f32 x8;
     /*  + gp+D0 */ f32 xC;

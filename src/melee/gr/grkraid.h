@@ -37,7 +37,7 @@ typedef struct grKr_804D6A08_t {
 /* 1FE9F8 */ bool grKraid_801FE9F8(void);
 /* 1FEA00 */ UNK_RET grKraid_801FEA00(UNK_PARAMS);
 /* 1FEE54 */ UNK_RET grKraid_801FEE54(UNK_PARAMS);
-/* 1FF068 */ UNK_RET grKraid_801FF068(UNK_PARAMS);
+/* 1FF068 */ void grKraid_801FF068(HSD_GObj*, int);
 /* 1FF0E0 */ UNK_RET grKraid_801FF0E0(UNK_PARAMS);
 /* 1FF14C */ void grKraid_801FF14C(void);
 /* 1FF150 */ void grKraid_801FF150(void);
