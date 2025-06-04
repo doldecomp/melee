@@ -43,3 +43,4 @@
 -Wno-sign-compare
 -Wno-return-type
 -Wno-sometimes-uninitialized
+-Wno-fortify-source

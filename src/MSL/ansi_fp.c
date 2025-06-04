@@ -2,6 +2,9 @@
 
 #include "math.h"
 
+#define __HI(x) (((s32*)&x)[0])
+#define __LO(x) (((s32*)&x)[1])
+
 // TODO: somehow make this work with math.h
 inline int _fpclassify(double x)
 {
