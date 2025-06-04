@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <console_io.h>
 
-extern FILE __files[3] = {
+FILE __files[3] = {
     {
         0,
         0,
