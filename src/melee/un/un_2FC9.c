@@ -5,6 +5,7 @@
 #include "baselib/jobj.h"
 #include "gm/gm_1601.h"
 #include "lb/lb_00B0.h"
+#include "lb/lblanguage.h"
 #include "mn/mn_2295.h"
 #include "mn/mnname.h"
 #include "pl/player.h"
@@ -937,6 +938,76 @@ void un_80304334(un_80304334_t* arg0)
 /// #un_80304B0C
 
 /// #un_80304B94
+int un_80304B94(int option)
+{
+    int res;
+    switch (option) {
+    case 0:
+        if (lbLang_IsSettingJP()) {
+            res = 0x4;
+        } else {
+            res = 0x4;
+        }
+        break;
+    case 1:
+        if (lbLang_IsSettingJP()) {
+            res = 0xA;
+        } else {
+            res = 0xA;
+        }
+        break;
+    case 2:
+        if (lbLang_IsSettingJP()) {
+            res = 0x11;
+        } else {
+            res = 0x10;
+        }
+        break;
+    case 3:
+        if (lbLang_IsSettingJP()) {
+            res = 0x17;
+        } else {
+            res = 0x17;
+        }
+        break;
+    case 4:
+        if (lbLang_IsSettingJP()) {
+            res = 0xC;
+        } else {
+            res = 0xC;
+        }
+        break;
+    case 5:
+        if (lbLang_IsSettingJP()) {
+            res = 0x48;
+        } else {
+            res = 0x48;
+        }
+        break;
+    case 6:
+        if (lbLang_IsSettingJP()) {
+            res = 0x1B;
+        } else {
+            res = 0x1B;
+        }
+        break;
+    case 7:
+        if (lbLang_IsSettingJP()) {
+            res = 0x7E;
+        } else {
+            res = 0x7E;
+        }
+        break;
+    case 8:
+        if (lbLang_IsSettingJP()) {
+            res = 0x2;
+        } else {
+            res = 0x2;
+        }
+        break;
+    }
+    return res;
+}
 
 /// #un_80304CC8
 
