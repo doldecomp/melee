@@ -30,6 +30,7 @@
 #include <baselib/sislib.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
+#include <printf.h>
 
 /// #un_802FC9B4
 

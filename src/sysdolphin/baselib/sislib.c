@@ -15,6 +15,7 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <printf.h>
 #include <dolphin/os.h>
 
 HSD_CObjDesc HSD_SisLib_8040C4B8;
