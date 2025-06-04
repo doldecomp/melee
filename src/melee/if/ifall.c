@@ -1,12 +1,16 @@
+#include "if/ifall.static.h"
 #include "ifall.static.h"
 
+#include "if/if_2F72.h"
 #include "if/ifmagnify.h"
 #include "if/ifstatus.h"
+#include "if/ifstock.h"
 #include "if/iftime.h"
 #include "un/un_2FC9.h"
 
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjplink.h>
 
 void ifAll_802F3394(void)
 {
@@ -30,9 +34,9 @@ void ifAll_802F33CC(void)
     un_802FF620();
 }
 
-s32 ifAll_802F3404(void)
+HSD_GObj* ifAll_802F3404(void)
 {
-    return ifAll_804A0FD8.unk_0;
+    return ifAll_804A0FD8.gobj;
 }
 
 UNK_T ifAll_802F3414(void)
@@ -82,3 +86,32 @@ void fn_802F36B8(HSD_GObj* gobj)
 /// #ifAll_802F390C
 
 /// #ifAll_802F3A64
+void ifAll_802F3A64(void)
+{
+    struct ifAll_804A0FD8_t* data;
+
+    un_802FE390();
+    ifStock_802FB390();
+    ifStock_802FB41C();
+    ifStock_802FB484();
+    ifMagnify_802FC750();
+    if_802F7E7C();
+    ifTime_802F483C();
+    ifStatus_802F6804();
+    ifStatus_802F7220();
+
+    data = &ifAll_804A0FD8;
+    if (data->gobj != NULL) {
+        HSD_GObjPLink_80390228(data->gobj);
+    }
+
+    if (data->gobj_2) {
+        HSD_GObjPLink_80390228(data->gobj_2);
+    }
+
+    un_802FD468();
+    un_802FD90C();
+    un_802FE390();
+    un_802FF190();
+    un_802FF4FC();
+}

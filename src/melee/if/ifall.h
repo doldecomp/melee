@@ -8,7 +8,7 @@
 
 /* 2F3394 */ void ifAll_802F3394(void);
 /* 2F33CC */ void ifAll_802F33CC(void);
-/* 2F3404 */ s32 ifAll_802F3404(void);
+/* 2F3404 */ HSD_GObj* ifAll_802F3404(void);
 /* 2F3414 */ UNK_T ifAll_802F3414(void);
 /* 2F3424 */ struct ifAll_804A0FD8_x18_t* ifAll_802F3424(int idx);
 /* 2F343C */ void ifAll_802F343C(void);
