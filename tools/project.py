@@ -54,7 +54,7 @@ class Object:
             "asflags": None,
             "asm_dir": None,
             "cflags": None,
-            "clean_extab": None,
+            "extab_padding": None,
             "extra_asflags": [],
             "extra_cflags": [],
             "extra_clang_flags": [],
@@ -90,7 +90,7 @@ class Object:
         set_default("add_to_all", True)
         set_default("asflags", config.asflags)
         set_default("asm_dir", config.asm_dir)
-        set_default("clean_extab", False)
+        set_default("extab_padding", None)
         set_default("mw_version", config.linker_version)
         set_default("scratch_preset_id", config.scratch_preset_id)
         set_default("shift_jis", config.shift_jis)
@@ -649,9 +649,9 @@ def generate_build_ninja(
     mwcc_sjis_implicit: List[Optional[Path]] = [*mwcc_implicit, sjiswrap]
 
     # MWCC with extab post-processing
-    mwcc_extab_cmd = f"{CHAIN}{mwcc_cmd} && {dtk} extab clean $out $out"
+    mwcc_extab_cmd = f"{CHAIN}{mwcc_cmd} && {dtk} extab clean --padding \"$extab_padding\" $out $out"
     mwcc_extab_implicit: List[Optional[Path]] = [*mwcc_implicit, dtk]
-    mwcc_sjis_extab_cmd = f"{CHAIN}{mwcc_sjis_cmd} && {dtk} extab clean $out $out"
+    mwcc_sjis_extab_cmd = f"{CHAIN}{mwcc_sjis_cmd} && {dtk} extab clean --padding \"$extab_padding\" $out $out"
     mwcc_sjis_extab_implicit: List[Optional[Path]] = [*mwcc_sjis_implicit, dtk]
 
     # MWLD
@@ -927,26 +927,30 @@ def generate_build_ninja(
             lib_name = obj.options["lib"]
             build_rule = "mwcc"
             build_implcit = mwcc_implicit
-            if obj.options["shift_jis"] and obj.options["clean_extab"]:
+            variables = {
+                "mw_version": Path(obj.options["mw_version"]),
+                "cflags": cflags_str,
+                "basedir": os.path.dirname(obj.src_obj_path),
+                "basefile": obj.src_obj_path.with_suffix(""),
+            }
+
+            if obj.options["shift_jis"] and obj.options["extab_padding"] is not None:
                 build_rule = "mwcc_sjis_extab"
                 build_implcit = mwcc_sjis_extab_implicit
+                variables["extab_padding"] = "".join(f"{i:02x}" for i in obj.options["extab_padding"])
             elif obj.options["shift_jis"]:
                 build_rule = "mwcc_sjis"
                 build_implcit = mwcc_sjis_implicit
-            elif obj.options["clean_extab"]:
+            elif obj.options["extab_padding"] is not None:
                 build_rule = "mwcc_extab"
                 build_implcit = mwcc_extab_implicit
+                variables["extab_padding"] = "".join(f"{i:02x}" for i in obj.options["extab_padding"])
             n.comment(f"{obj.name}: {lib_name} (linked {obj.completed})")
             n.build(
                 outputs=obj.src_obj_path,
                 rule=build_rule,
                 inputs=src_path,
-                variables={
-                    "mw_version": Path(obj.options["mw_version"]),
-                    "cflags": cflags_str,
-                    "basedir": os.path.dirname(obj.src_obj_path),
-                    "basefile": obj.src_obj_path.with_suffix(""),
-                },
+                variables=variables,
                 implicit=build_implcit,
                 order_only="pre-compile",
             )

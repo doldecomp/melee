@@ -102,6 +102,9 @@ ldscript_template: config/GAMEID/module/ldscript.tpl
 # the uninitialized data zeroed out. When targeting a cleaned DOL hash,
 # this option can be set to true to scrub the uninitialized data from 
 # the extab section in the split objects.
+#
+# Alternatively, you can set extab_padding on any affected objects in
+# configure.py, in order to exactly match the original DOL.
 clean_extab: false
 
 # (optional) Configuration for modules.
