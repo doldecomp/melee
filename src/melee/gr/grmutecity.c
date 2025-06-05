@@ -4,13 +4,19 @@
 
 #include "grmutecity.h"
 
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+
 void grMuteCity_801EFC68(void) {}
 
 /// #grMuteCity_801EFC6C
 
 void grMuteCity_801EFCDC(void) {}
 
-/// #grMuteCity_801EFCE0
+void grMuteCity_801EFCE0(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grMuteCity_801EFD04(void)
 {
@@ -41,7 +47,11 @@ bool grMuteCity_801F0288(void)
 
 void grMuteCity_801F040C(void) {}
 
-/// #grMuteCity_801F0410
+void grMuteCity_801F0410(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grMuteCity_801F043C(void)
 {

@@ -1,12 +1,24 @@
 #include <platform.h>
 
+#include "gr/granime.h"
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+#include "lb/lb_00B0.h"
+
+#include <dolphin/mtx.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+
 void grFourside_801F2D0C(void) {}
 
 /// #grFourside_801F2D10
 
 void grFourside_801F2DA0(void) {}
 
-/// #grFourside_801F2DA4
+void grFourside_801F2DA4(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grFourside_801F2DC8(void)
 {
@@ -15,7 +27,11 @@ bool grFourside_801F2DC8(void)
 
 /// #grFourside_801F2DD0
 
-/// #grFourside_801F2EBC
+void grFourside_801F2EBC(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grFourside_801F2EE8(void)
 {
@@ -26,7 +42,11 @@ void grFourside_801F2EF0(void) {}
 
 void grFourside_801F2EF4(void) {}
 
-/// #grFourside_801F2EF8
+void grFourside_801F2EF8(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grFourside_801F2F24(void)
 {
@@ -105,4 +125,16 @@ bool grFourside_801F41E0(void)
     return false;
 }
 
-/// #grFourside_801F41E8
+bool grFourside_801F41E8(Vec3* a, int arg, HSD_JObj* joint)
+{
+    u8 _[4];
+    Vec3 b;
+
+    lb_8000B1CC(joint, NULL, &b);
+
+    if (a->y > b.y) {
+        return true;
+    } else {
+        return false;
+    }
+}
