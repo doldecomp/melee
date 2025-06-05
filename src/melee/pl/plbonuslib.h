@@ -34,8 +34,11 @@
 /* 03EB30 */ void pl_8003EB30(float, unsigned short, int, int, int, u8);
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03EC9C */ void pl_8003EC9C(int, int, float, float);
+/* 03ED0C */ void pl_8003ED0C(int, int, float);
 /* 03EE2C */ void fn_8003EE2C(int, int);
+/* 03F294 */ void fn_8003F294(int, int);
 /* 03F53C */ void fn_8003F53C(int, int);
+/* 03F654 */ void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos);
 /* 03FAA8 */ void pl_8003FAA8(int slot, int index, Vec3* pos, Vec3* prevPos);
 /* 03FBFC */ int pl_8003FBFC(int);
 /* 03FC20 */ int pl_8003FC20(int);

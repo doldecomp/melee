@@ -38,7 +38,7 @@ static inline bool ftFox_CheckAppealSCount(void)
     for (i = 0; i < 6; i++) {
         attackCount = Player_GetTotalAttackCountPtr(i);
 
-        if (pl_800386D8(attackCount, 0x72)) {
+        if (pl_800386D8(attackCount, 0x72) != 0) {
             return true;
         }
     }

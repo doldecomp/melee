@@ -32,11 +32,13 @@ struct pl_800386D8_t {
     /* +194 */ int x194;
     /* +198 */ int x198;
     /* +19C */ int x19C;
-    /* +1A0 */ u8 x1A0[0x358 - 0x1A0];
+    /* +1A0 */ u8 x1A0[0x1AC - 0x1A0];
+    /* +1AC */ int x1AC;
+    /* +1B0 */ u8 x1B0[0x358 - 0x1B0];
     /* +358 */ int x358;
     /* +35C */ u8 x35C[0x3E8 - 0x35C];
-    /* +3E8 */ UNK_T x3E8 UNK_SIZE_ARRAY;
-};
+    /* +3E8 */ unsigned int x3E8 UNK_SIZE_ARRAY;
+}; // UNKNOWN SIZE
 
 struct StaleMoveTable {
     /*   +0 */ int current_index;
@@ -61,7 +63,8 @@ struct StaleMoveTable {
     /* +C94 */ u8 xC94[0xC98 - 0xC94];
     /* +C98 */ float xC98;
     /* +C9C */ float xC9C;
-    /* +CA0 */ u8 xCA0[0xCA8 - 0xCA0];
+    /* +CA0 */ float xCA0;
+    /* +CA4 */ int xCA4;
     /* +CA8 */ unsigned int xCA8;
     /* +CAC */ int xCAC;
     /* +CB0 */ int xCB0;
@@ -117,7 +120,13 @@ struct pl_StaleMoveTableExt_t {
     /* +D80 */ float xD80;
     /* +D84 */ float xD84;
     /* +D88 */ float xD88;
-    /* +D8C */ u8 xD8C[0xDD0 - 0xD8C];
+    /* +D8C */ float xD8C;
+    /* +D90 */ int xD90;
+    /* +D94 */ float xD94;
+    /* +D98 */ int xD98;
+    /* +D9C */ u8 xD9C[0xDA8 - 0xD9C];
+    /* +DA8 */ UNK_T xDA8;
+    /* +DAC */ u8 xDAC[0xDD0 - 0xDAC];
     /* +DD0 */ union {
         u8 xDD0_value;
         struct {
@@ -144,8 +153,7 @@ struct pl_StaleMoveTableExt_t {
             u8 bit7 : 1;
         };
     } xDD1;
-    /* +DD2 */ UNK_T xDD2 UNK_SIZE_ARRAY;
-};
+}; // UNKNOWN SIZE
 
 struct pl_800386E8_arg0_t {
     /* 0x000 */ char pad_0[0x190];
@@ -156,27 +164,52 @@ struct pl_800386E8_arg0_t {
 }; /* size = 0x5B4 */
 
 struct pl_804D6470_t {
-    /*   +0 */ u8 x0[0x38];
+    /*   +0 */ u8 x0[0x18];
+    /*  +18 */ unsigned int x18;
+    /*  +1C */ UNK_T x1C;
+    /*  +20 */ u8 x20[0x2C - 0x20];
+    /*  +2C */ unsigned int x2C;
+    /*  +30 */ UNK_T x30;
+    /*  +34 */ u8 x34[0x38 - 0x34];
     /*  +38 */ float x38;
     /*  +3C */ u8 x3C[0x58 - 0x3C];
     /*  +58 */ float x58;
     /*  +5C */ u8 x5C[0x64 - 0x5C];
     /*  +64 */ float x64;
-    /*  +68 */ u8 x68[0x84 - 0x68];
+    /*  +68 */ u8 x68[0x80 - 0x68];
+    /*  +70 */ unsigned int x70;
+    /*  +74 */ UNK_T x74;
+    /*  +78 */ u8 x78[0x7C - 0x74];
+    /*  +7C */ unsigned int x7C;
+    /*  +80 */ UNK_T x80;
     /*  +84 */ float x84;
-    /*  +88 */ u8 x88[0x98 - 0x88];
+    /*  +88 */ unsigned int x88;
+    /*  +8C */ UNK_T x8C;
+    /*  +90 */ unsigned int x90;
+    /*  +94 */ UNK_T x94;
     /*  +98 */ float x98;
     /*  +9C */ u8 x9C[0xA0 - 0x9C];
     /*  +A0 */ float xA0;
     /*  +A4 */ unsigned int xA4;
-    /*  +A8 */ u8 xA8[0xB0 - 0xA8];
+    /*  +A8 */ unsigned int xA8;
+    /*  +AC */ UNK_T xAC;
     /*  +B0 */ unsigned int xB0;
     /*  +B4 */ unsigned int xB4;
-    /*  +B8 */ u8 xB8[0x124 - 0xB8];
+    /*  +B8 */ unsigned int xB8;
+    /*  +BC */ UNK_T xBC;
+    /*  +C0 */ u8 xC0[0xC4 - 0xC0];
+    /*  +C4 */ unsigned int xC4;
+    /*  +C8 */ UNK_T xC8;
+    /*  +CC */ u8 xCC[0xE0 - 0xCC];
+    /*  +E0 */ unsigned int xE0;
+    /*  +E4 */ UNK_T xE4;
+    /*  +E8 */ u8 xE8[0x124 - 0xE8];
     /* +124 */ unsigned int x124;
-    /* +128 */ u8 x128[0x180 - 0x128];
+    /* +128 */ u8 x128[0x130 - 0x128];
+    /* +130 */ unsigned int x130;
+    /* +134 */ UNK_T x134;
+    /* +138 */ u8 x138[0x180 - 0x138];
     /* +180 */ float x180;
-    /* +184 */ UNK_T x184 UNK_SIZE_ARRAY;
-};
+}; // UNKNOWN SIZE
 
 #endif

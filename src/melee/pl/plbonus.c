@@ -3,7 +3,7 @@
 
 #include "pl/player.h"
 
-UNK_T pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
+unsigned int pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
 {
     return arg0->x3E8[arg1];
 }

@@ -3,16 +3,19 @@
 #include "plbonuslib.h"
 
 #include "inlines.h"
+#include "pl_040D.h"
+#include "placeholder.h"
+#include "player.h"
+#include "plbonus.h"
 
-#include "ft/ft_0877.h"
-#include "gm/gm_1601.h"
-#include "if/ifmagnify.h"
-#include "it/it_26B1.h"
-#include "melee/ft/ft_0892.h"
-#include "melee/ft/ftlib.h"
-#include "pl/pl_040D.h"
-#include "pl/player.h"
-#include "pl/plbonus.h"
+#include <ft/ft_0877.h>
+#include <ft/ft_0892.h>
+#include <ft/ftlib.h>
+#include <gm/gm_1601.h>
+#include <gr/stage.h>
+#include <if/ifmagnify.h>
+#include <it/it_26B1.h>
+#include <MetroTRK/intrinsics.h>
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 

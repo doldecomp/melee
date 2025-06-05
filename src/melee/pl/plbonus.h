@@ -5,7 +5,7 @@
 
 #include "pl/forward.h"
 
-/* 0386D8 */ UNK_T pl_800386D8(pl_800386D8_t*, ssize_t);
+/* 0386D8 */ unsigned int pl_800386D8(pl_800386D8_t*, ssize_t);
 /* 0386E8 */ int pl_800386E8(pl_800386E8_arg0_t*);
 /* 038700 */ UNK_RET fn_80038700(UNK_PARAMS);
 /* 038788 */ void pl_80038788(int, int, int);
@@ -15,8 +15,9 @@
 /* 03891C */ void pl_8003891C(int slot);
 /* 038F10 */ void pl_80038F10(int slot);
 /* 038FB8 */ UNK_RET fn_80038FB8(UNK_PARAMS);
-/* 03906C */ UNK_RET pl_8003906C(UNK_PARAMS);
-/* 039238 */ UNK_RET pl_80039238(UNK_PARAMS);
+/* 03906C */ int pl_8003906C(int, int, UNK_T, unsigned int, UNK_T, int, UNK_T);
+/* 039238 */ UNK_RET pl_80039238(int, int, UNK_T, unsigned int, UNK_T, UNK_T,
+                                 float);
 /* 039418 */ unsigned int pl_80039418(int, int);
 /* 039450 */ void pl_80039450(int);
 /* 039618 */ UNK_RET fn_80039618(UNK_PARAMS);
