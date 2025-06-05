@@ -123,20 +123,18 @@ void pl_8003E150(int slot, int arg1)
 
 int pl_8003E2CC(int arg0, int pl_itemlog_kind)
 {
-    if (pl_itemlog_kind >= 39) {
-        __assert("plbonuslib.c", 555,
+    HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
-    }
+
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x674[pl_itemlog_kind];
 }
 
 int pl_8003E334(int arg0, int pl_itemlog_kind)
 {
-    if (pl_itemlog_kind >= 39) {
-        __assert("plbonuslib.c", 564,
+    HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
-    }
+
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x710[pl_itemlog_kind];
 }
@@ -148,10 +146,9 @@ int pl_8003E39C(int arg0)
 
     var_r28 = 0;
     for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
-        if (pl_itemlog_kind >= 39) {
-            __assert("plbonuslib.c", 555,
+        HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
-        }
+
         var_r28 += Player_GetStaleMoveTableIndexPtr2(arg0)
                        ->x0_staleMoveTable.x674[pl_itemlog_kind];
     }
@@ -166,34 +163,26 @@ int pl_8003E420(int arg0)
     var_r28 = 0;
     pl_itemlog_kind = 0;
     for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
-        if (pl_itemlog_kind >= 39) {
-            __assert("plbonuslib.c", 564,
+        HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
-        }
+
         var_r28 += Player_GetStaleMoveTableIndexPtr2(arg0)
                        ->x0_staleMoveTable.x710[pl_itemlog_kind];
-    };
+    }
     return var_r28;
 }
 
 void pl_8003E70C(Item_GObj* igobj)
 {
-    int var_r31;
     HSD_GObj* temp_r30;
     pl_StaleMoveTableExt_t* temp_r31;
     s32 temp_r3;
 
     temp_r30 = it_8026BC78(igobj);
 
-    var_r31 = 0;
-    if ((itGetKind(igobj) >= 0xA1) && (itGetKind(igobj) < 0xBF)) {
-        var_r31 = 1;
-    }
-    if (var_r31 == 0) {
-        __assert("plbonuslib.c", 634U,
+    HSD_ASSERTMSG(634, 0xA1 <= itGetKind(igobj) && itGetKind(igobj) < 0xBF,
                  "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
                  "It_PKind_Terminate");
-    }
 
     RETURN_IF(!ftLib_80086960(temp_r30));
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(ftLib_80086BE0(temp_r30));
@@ -203,16 +192,9 @@ void pl_8003E70C(Item_GObj* igobj)
 
 int pl_8003E7D4(int arg0, int kind)
 {
-    bool var_r0;
-
-    var_r0 = false;
-    if ((kind >= 0xA1) && (kind < 0xBF)) {
-        var_r0 = true;
-    }
-    if (var_r0 == false) {
-        __assert("plbonuslib.c", 649,
+    HSD_ASSERTMSG(649, 0xA1 <= kind && kind < 0xBF,
                  "It_PKind_Start <= kind && kind < It_PKind_Terminate");
-    }
+
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x5C4[kind];
 }
