@@ -128,7 +128,8 @@ typedef enum InternalStageId {
     /// Kongo Jungle (64)
     OLDKONGO,
 
-    STAGEKIND_UNK31,
+    SHRINEROUTE,
+
     STAGEKIND_UNK32,
     STAGEKIND_UNK33,
     STAGEKIND_UNK34,
@@ -137,6 +138,9 @@ typedef enum InternalStageId {
     STAGEKIND_UNK37,
     STAGEKIND_UNK38,
     STAGEKIND_UNK39,
+
+    /// Home run contest
+    HOMERUN = 0x43,
 } InternalStageId;
 
 #endif

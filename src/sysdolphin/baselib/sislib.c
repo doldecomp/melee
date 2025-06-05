@@ -15,6 +15,7 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <printf.h>
 #include <dolphin/os.h>
 
 HSD_CObjDesc HSD_SisLib_8040C4B8;
@@ -1032,7 +1033,7 @@ void HSD_SisLib_803A6B98(HSD_Text* arg0, void* arg1, ...)
         // @todo: is this the correct usage of vaargs?
         u8 buffer[256];
         va_start(args, arg1);
-        vsprintf((char*) buffer, (const char*) -1, args);
+        vsnprintf((char*) buffer, -1, arg1, args);
         va_end(args);
         var_r29 = HSD_SisLib_803A67EC(&sp8C, buffer);
     }

@@ -30,6 +30,7 @@
 #include <baselib/sislib.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
+#include <printf.h>
 
 /// #un_802FC9B4
 
@@ -1119,7 +1120,7 @@ void DevText_Printf(DevText* text, char* format, ...)
     char str[64];
     va_list args;
     va_start(args, format);
-    vsprintf(str, format, args);
+    vsnprintf(str, -1, format, args);
     va_end(args);
     DevText_Print(text, str);
 }

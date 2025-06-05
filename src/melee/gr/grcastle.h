@@ -81,6 +81,6 @@
 /* 1D0BBC */ UNK_RET grCastle_801D0BBC(UNK_PARAMS);
 /* 1D0D24 */ UNK_RET grCastle_801D0D24(UNK_PARAMS);
 /* 1D0D84 */ UNK_RET grCastle_801D0D84(UNK_PARAMS);
-/* 1D0FF0 */ UNK_RET grCastle_801D0FF0(UNK_PARAMS);
+/* 1D0FF0 */ float grCastle_801D0FF0(void);
 
 #endif
