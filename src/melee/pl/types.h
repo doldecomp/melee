@@ -176,10 +176,10 @@ struct pl_804D6470_t {
     /*  +58 */ float x58;
     /*  +5C */ u8 x5C[0x64 - 0x5C];
     /*  +64 */ float x64;
-    /*  +68 */ u8 x68[0x80 - 0x68];
+    /*  +68 */ u8 x68[0x70 - 0x68];
     /*  +70 */ unsigned int x70;
     /*  +74 */ UNK_T x74;
-    /*  +78 */ u8 x78[0x7C - 0x74];
+    /*  +78 */ u8 x78[0x7C - 0x78];
     /*  +7C */ unsigned int x7C;
     /*  +80 */ UNK_T x80;
     /*  +84 */ float x84;
