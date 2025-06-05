@@ -4,19 +4,59 @@
 
 #include "grkraid.h"
 
+#include "types.h"
+
 #include "gr/granime.h"
+#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
+
+S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
+                            { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
+
+StageCallbacks grKr_803E4C9C[5] = {
+    { grKraid_801FE1B0, grKraid_801FE1DC, grKraid_801FE1E4, grKraid_801FE1E8,
+      0 },
+    { grKraid_801FE1EC, grKraid_801FE2C8, grKraid_801FE2D0, grKraid_801FE35C,
+      0 },
+    { grKraid_801FE360, grKraid_801FE3A4, grKraid_801FE3AC, grKraid_801FE3B0,
+      0 },
+    { grKraid_801FE3B4, grKraid_801FE438, grKraid_801FE440, grKraid_801FE6D4,
+      0xC0000000 },
+    { grKraid_801FE818, grKraid_801FE9F8, grKraid_801FEA00, grKraid_801FF14C,
+      0 }
+};
+
+StageData grKr_803E4D0C = {
+    (1 << 3),
+    grKr_803E4C9C,
+    "/GrKr.dat",
+    grKraid_801FDFFC,
+    grKraid_801FDFF8,
+    grKraid_801FE094,
+    grKraid_801FE098,
+    grKraid_801FE0BC,
+    grKraid_801FF154,
+    grKraid_801FF15C,
+    (1 << 0),
+    grKr_803E4C78,
+    6,
+};
 
 static grKr_804D6A08_t* grKr_804D6A08;
 
-void grKraid_801FDFF8(void) {}
+void grKraid_801FDFF8(bool unused)
+{
+    return;
+}
 
-void grKraid_801FDFFC(grKr_804D6A08_t* arg)
+void grKraid_801FDFFC(void)
 {
     HSD_GObj* gobj;
 
@@ -46,7 +86,33 @@ bool grKraid_801FE0BC(void)
     return false;
 }
 
-/// #grKraid_801FE0C4
+HSD_GObj* grKraid_801FE0C4(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grKr_803E4C9C[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 223, gobj_id);
+    }
+
+    return gobj;
+}
 
 void grKraid_801FE1B0(HSD_GObj* gobj)
 {
@@ -54,25 +120,34 @@ void grKraid_801FE1B0(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grKraid_801FE1DC(void)
+bool grKraid_801FE1DC(HSD_GObj* gobj)
 {
     return false;
 }
 
-void grKraid_801FE1E4(void) {}
+void grKraid_801FE1E4(HSD_GObj* gobj)
+{
+    return;
+}
 
-void grKraid_801FE1E8(void) {}
+void grKraid_801FE1E8(HSD_GObj* gobj)
+{
+    return;
+}
 
 /// #grKraid_801FE1EC
 
-bool grKraid_801FE2C8(void)
+bool grKraid_801FE2C8(HSD_GObj* gobj)
 {
     return false;
 }
 
 /// #grKraid_801FE2D0
 
-void grKraid_801FE35C(void) {}
+void grKraid_801FE35C(HSD_GObj* gobj)
+{
+    return;
+}
 
 void grKraid_801FE360(HSD_GObj* gobj)
 {
@@ -81,14 +156,20 @@ void grKraid_801FE360(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-bool grKraid_801FE3A4(void)
+bool grKraid_801FE3A4(HSD_GObj* gobj)
 {
     return false;
 }
 
-void grKraid_801FE3AC(void) {}
+void grKraid_801FE3AC(HSD_GObj* gobj)
+{
+    return;
+}
 
-void grKraid_801FE3B0(void) {}
+void grKraid_801FE3B0(HSD_GObj* gobj)
+{
+    return;
+}
 
 void grKraid_801FE3B4(HSD_GObj* gobj)
 {
@@ -104,20 +185,23 @@ void grKraid_801FE3B4(HSD_GObj* gobj)
     grAnime_801C7FF8(gobj, 0xD, 0x7, 0x2, 0.0f, 1.0f);
 }
 
-bool grKraid_801FE438(void)
+bool grKraid_801FE438(HSD_GObj* gobj)
 {
     return false;
 }
 
 /// #grKraid_801FE440
 
-void grKraid_801FE6D4(void) {}
+void grKraid_801FE6D4(HSD_GObj* gobj)
+{
+    return;
+}
 
 /// #grKraid_801FE6D8
 
 /// #grKraid_801FE818
 
-bool grKraid_801FE9F8(void)
+bool grKraid_801FE9F8(HSD_GObj* gobj)
 {
     return false;
 }
@@ -144,16 +228,19 @@ void grKraid_801FF068(HSD_GObj* gobj, int val)
 
 /// #grKraid_801FF0E0
 
-void grKraid_801FF14C(void) {}
+void grKraid_801FF14C(HSD_GObj* gobj)
+{
+    return;
+}
 
 void grKraid_801FF150(void) {}
 
-bool grKraid_801FF154(void)
+DynamicsDesc* grKraid_801FF154(enum_t unused)
 {
     return false;
 }
 
-bool grKraid_801FF15C(void)
+bool grKraid_801FF15C(Vec3* a, int _, HSD_JObj* joint)
 {
     return true;
 }

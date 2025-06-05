@@ -1,12 +1,20 @@
 #include <platform.h>
 
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+
+#include <baselib/gobj.h>
+
 void grInishie2_801FCBC0(void) {}
 
 /// #grInishie2_801FCBC4
 
 void grInishie2_801FCCAC(void) {}
 
-/// #grInishie2_801FCCB0
+void grInishie2_801FCCB0(HSD_GObj* gobj)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grInishie2_801FCCD4(void)
 {
@@ -15,7 +23,11 @@ bool grInishie2_801FCCD4(void)
 
 /// #grInishie2_801FCCDC
 
-/// #grInishie2_801FCDC8
+void grInishie2_801FCDC8(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grInishie2_801FCDF4(void)
 {
