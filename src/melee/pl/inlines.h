@@ -7,10 +7,10 @@
 
 #include <gm/gm_1601.h>
 
-static inline bool pl_CheckIfSameTeam(s32 slotA, s32 slotB)
+static inline bool pl_CheckIfSameTeam(int slotA, int slotB)
 {
-    s32 teamA;
-    s32 teamB;
+    int teamA;
+    int teamB;
 
     if (gm_8016B168()) {
         teamA = Player_GetTeam(slotA);
