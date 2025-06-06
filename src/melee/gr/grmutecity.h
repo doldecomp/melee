@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include <baselib/forward.h>
+
 /* 1EFC68 */ UNK_RET grMuteCity_801EFC68(UNK_PARAMS);
 /* 1EFC6C */ UNK_RET grMuteCity_801EFC6C(UNK_PARAMS);
 /* 1EFCDC */ UNK_RET grMuteCity_801EFCDC(UNK_PARAMS);
@@ -17,7 +19,7 @@
 /* 1F0288 */ bool grMuteCity_801F0288(UNK_PARAMS);
 /* 1F0290 */ UNK_RET grMuteCity_801F0290(UNK_PARAMS);
 /* 1F040C */ UNK_RET grMuteCity_801F040C(UNK_PARAMS);
-/* 1F0410 */ UNK_RET grMuteCity_801F0410(UNK_PARAMS);
+/* 1F0410 */ void grMuteCity_801F0410(HSD_GObj*);
 /* 1F043C */ bool grMuteCity_801F043C(UNK_PARAMS);
 /* 1F0444 */ UNK_RET grMuteCity_801F0444(UNK_PARAMS);
 /* 1F0448 */ UNK_RET grMuteCity_801F0448(UNK_PARAMS);

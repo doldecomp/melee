@@ -1,5 +1,9 @@
 #include <platform.h>
 
+#include "gr/inlines.h"
+
+#include <baselib/gobj.h>
+
 void grInishie1_801FA908(void) {}
 
 /// #grInishie1_801FA90C
@@ -15,7 +19,11 @@ bool grInishie1_801FA9AC(void)
 
 /// #grInishie1_801FA9B4
 
-/// #grInishie1_801FAAA0
+void grInishie1_801FAAA0(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grInishie1_801FAACC(void)
 {
@@ -37,7 +45,13 @@ bool grInishie1_801FAB60(void)
 
 void grInishie1_801FABB0(void) {}
 
-/// #grInishie1_801FABB4
+void grInishie1_801FABB4(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+}
 
 bool grInishie1_801FABF4(void)
 {

@@ -1,7 +1,7 @@
 #ifndef _DOLPHIN_HW_REGS_H_
 #define _DOLPHIN_HW_REGS_H_
 
-#ifdef __MWERKS__
+#if defined(__MWERKS__) && !defined(M2CTX)
 volatile u16 __VIRegs[59]     : 0xCC002000;
 volatile u32 __PIRegs[12]     : 0xCC003000;
 volatile u16 __MEMRegs[64]    : 0xCC004000;

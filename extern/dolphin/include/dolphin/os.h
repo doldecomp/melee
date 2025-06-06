@@ -50,7 +50,7 @@ u32 OSGetConsoleSimulatedMemSize(void);
 #define OS_BASE_CACHED (OS_CACHED_REGION_PREFIX << 16)
 #define OS_BASE_UNCACHED (OS_UNCACHED_REGION_PREFIX << 16)
 
-#ifdef __MWERKS__
+#if defined(__MWERKS__) && !defined(M2CTX)
 u32 __OSPhysicalMemSize : (OS_BASE_CACHED | 0x0028);
 volatile int __OSTVMode : (OS_BASE_CACHED | 0x00CC);
 OSThread* __gUnkThread1 : (OS_BASE_CACHED | 0x00D8);
