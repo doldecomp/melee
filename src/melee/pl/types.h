@@ -26,7 +26,8 @@ struct plAllocInfo2 {
 
 struct pl_800386D8_t {
     /*   +0 */ int total_attack_count;
-    /*   +4 */ u8 x4[0xD0 - 0x4];
+    /*   +4 */ u8 x4[0xCC - 0x4];
+    /*  +33 */ int xCC;
     /*  +D0 */ int xD0;
     /*  +D4 */ u8 xD4[0x194 - 0xD4];
     /* +194 */ int x194;

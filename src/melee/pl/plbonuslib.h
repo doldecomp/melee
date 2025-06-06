@@ -75,6 +75,7 @@
 /* 040A30 */ int pl_80040A30(int);
 /* 040A54 */ int pl_80040A54(int);
 /* 040A78 */ int pl_80040A78(int);
+/* 040A9C */ int pl_80040A9C(int);
 /* 040AF0 */ void pl_80040AF0(int);
 /* 040B18 */ int pl_80040B18(int);
 /* 040B3C */ unsigned int pl_80040B3C(int);

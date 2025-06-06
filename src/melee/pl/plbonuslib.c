@@ -902,6 +902,24 @@ int pl_80040A78(int arg0)
     return Player_GetTotalAttackCountPtr(arg0)->xD0;
 }
 
+int pl_80040A9C(int arg0)
+{
+    int* val = &Player_GetTotalAttackCountPtr(arg0)->xCC;
+    int sum = 0;
+    unsigned int cursor_i = 51;
+    int ctr;
+
+    for (ctr = 11; ctr > 0; --ctr) {
+        if (cursor_i - 51 > 1) {
+            sum += *(val + 1);
+        }
+        val += 1;
+        cursor_i += 1;
+    }
+
+    return sum;
+}
+
 void pl_80040AF0(int arg0)
 {
     pl_800386D8(Player_GetTotalAttackCountPtr(arg0), 0x70);
