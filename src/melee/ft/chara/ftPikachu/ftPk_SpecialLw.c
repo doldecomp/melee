@@ -17,7 +17,7 @@
 #include "ftPikachu/types.h"
 #include "it/items/itpikachuthunder.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 bool ftPk_SpecialLw_CheckProperty(HSD_GObj* gobj)
 {

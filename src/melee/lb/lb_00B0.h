@@ -8,7 +8,7 @@
 #include <baselib/forward.h>
 
 #include <stddef.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/texp.h>
 
@@ -31,7 +31,7 @@
 /* 00C07C */ void lb_8000C07C(HSD_JObj*, s32 i, HSD_AnimJoint**,
                               HSD_MatAnimJoint**, HSD_ShapeAnimJoint**);
 /* 00C0E8 */ void lb_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc*);
-/* 00C160 */ void lb_8000C160(void* mem, ssize_t size);
+/* 00C160 */ void memzero(void* mem, ssize_t size);
 /* 00C1C0 */ void lb_8000C1C0(HSD_JObj*, HSD_JObj* constraint);
 /* 00C228 */ void lb_8000C228(HSD_JObj*, HSD_JObj* constraint);
 /* 00C290 */ void lb_8000C290(HSD_JObj*, HSD_JObj* constraint);
@@ -40,7 +40,7 @@
 /* 00C420 */ void lb_8000C420(HSD_JObj*, u32 flags, float limit);
 /* 00C490 */ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj*,
                               float, float);
-/* 00C7BC */ void lb_8000C7BC(HSD_JObj* src, HSD_JObj* dst);
+/* 00C7BC */ void lbCopyJObjSRT(HSD_JObj* src, HSD_JObj* dst);
 /* 00C868 */ void lb_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, float, float);
 /* 00CC5C */ s32 lbGetFreeColorRegister(s32 i0, HSD_MObj*, HSD_TExp*);
 /* 00CC8C */ s32 lb_8000CC8C(s32 i); // return type GXTevColorArg?

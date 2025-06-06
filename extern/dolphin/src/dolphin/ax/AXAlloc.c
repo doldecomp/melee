@@ -1,23 +1,25 @@
+#include "__ax.h"
+
 #include <dolphin.h>
 #include <dolphin/ax.h>
 
-#include "__ax.h"
+static AXVPB* __AXStackHead[AX_PRIORITY_STACKS];
+static AXVPB* __AXStackTail[AX_PRIORITY_STACKS];
 
-static AXVPB * __AXStackHead[AX_PRIORITY_STACKS];
-static AXVPB * __AXStackTail[AX_PRIORITY_STACKS];
+static AXVPB* __AXCallbackStack;
 
-static AXVPB * __AXCallbackStack;
-
-AXVPB * __AXGetStackHead(u32 priority) {
+AXVPB* __AXGetStackHead(u32 priority)
+{
     ASSERTLINE(0x3D, priority < AX_PRIORITY_STACKS);
     return __AXStackHead[priority];
 }
 
-void __AXServiceCallbackStack(void) {
-    AXVPB * p;
+void __AXServiceCallbackStack(void)
+{
+    AXVPB* p;
     int old;
 
-    for(p = __AXPopCallbackStack(); p; p = __AXPopCallbackStack()) {
+    for (p = __AXPopCallbackStack(); p; p = __AXPopCallbackStack()) {
         if (p->callback) {
             p->callback(p);
         }
@@ -28,63 +30,72 @@ void __AXServiceCallbackStack(void) {
     }
 }
 
-void __AXInitVoiceStacks(void) {
+void __AXInitVoiceStacks(void)
+{
     u32 i;
 
     __AXCallbackStack = NULL;
-    for(i = 0; i < AX_PRIORITY_STACKS; i++) {
+    for (i = 0; i < AX_PRIORITY_STACKS; i++) {
         __AXStackHead[i] = __AXStackTail[i] = 0;
     }
 }
 
-void __AXAllocInit(void) {
+void __AXAllocInit(void)
+{
 #ifdef DEBUG
     OSReport("Initializing AXAlloc code module\n");
 #endif
     __AXInitVoiceStacks();
 }
 
-void __AXAllocQuit(void) {
+void __AXAllocQuit(void)
+{
 #ifdef DEBUG
     OSReport("Shutting down AXAlloc code module\n");
 #endif
     __AXInitVoiceStacks();
 }
 
-void __AXPushFreeStack(AXVPB * p) {
+void __AXPushFreeStack(AXVPB* p)
+{
     p->next = __AXStackHead[0];
     __AXStackHead[0] = p;
+    p->priority = 0;
 }
 
-AXVPB * __AXPopFreeStack(void) {
-    AXVPB * p;
+AXVPB* __AXPopFreeStack(void)
+{
+    AXVPB* p;
 
-    p = (void*)(u32)&__AXStackHead[0]->next;
+    p = (void*) (u32) &__AXStackHead[0]->next;
     if (p) {
         __AXStackHead[0] = p->next;
     }
     return p;
 }
 
-void __AXPushCallbackStack(AXVPB * p) {
+void __AXPushCallbackStack(AXVPB* p)
+{
     p->next1 = __AXCallbackStack;
     __AXCallbackStack = p;
 }
 
-AXVPB * __AXPopCallbackStack(void) {
-    AXVPB * p;
+AXVPB* __AXPopCallbackStack(void)
+{
+    AXVPB* p;
 
-    p = (void*)(u32)&__AXCallbackStack[0];
+    p = (void*) (u32) &__AXCallbackStack[0];
     if (p) {
         __AXCallbackStack = p->next1;
     }
     return p;
 }
 
-void __AXRemoveFromStack(AXVPB * p) {
+void __AXRemoveFromStack(AXVPB* p)
+{
     u32 i;
-    AXVPB * head;
-    AXVPB * tail;
+    AXVPB* head;
+    AXVPB* tail;
 
     ASSERTLINE(0xB5, p->priority);
     i = p->priority;
@@ -110,7 +121,8 @@ void __AXRemoveFromStack(AXVPB * p) {
     tail->prev = head;
 }
 
-void __AXPushStackHead(AXVPB * p, u32 priority) {
+void __AXPushStackHead(AXVPB* p, u32 priority)
+{
     ASSERTLINE(0xDF, priority);
     ASSERTLINE(0xE0, priority < AX_PRIORITY_STACKS);
     p->next = __AXStackHead[priority];
@@ -125,8 +137,9 @@ void __AXPushStackHead(AXVPB * p, u32 priority) {
     p->priority = priority;
 }
 
-AXVPB * __AXPopStackFromBottom(u32 priority) {
-    AXVPB * p;
+AXVPB* __AXPopStackFromBottom(u32 priority)
+{
+    AXVPB* p;
 
     ASSERTLINE(0xF9, priority);
     ASSERTLINE(0xFA, priority < AX_PRIORITY_STACKS);
@@ -144,7 +157,8 @@ AXVPB * __AXPopStackFromBottom(u32 priority) {
     return p;
 }
 
-void AXFreeVoice(AXVPB * p) {
+void AXFreeVoice(AXVPB* p)
+{
     int old;
 
     ASSERTLINE(0x11C, p);
@@ -158,9 +172,10 @@ void AXFreeVoice(AXVPB * p) {
     OSRestoreInterrupts(old);
 }
 
-AXVPB * AXAcquireVoice(u32 priority, void (* callback)(void *), u32 userContext) {
+AXVPB* AXAcquireVoice(u32 priority, void (*callback)(void*), u32 userContext)
+{
     int old;
-    AXVPB * p;
+    AXVPB* p;
     u32 i;
 
     ASSERTLINE(0x13D, priority);
@@ -169,7 +184,7 @@ AXVPB * AXAcquireVoice(u32 priority, void (* callback)(void *), u32 userContext)
     old = OSDisableInterrupts();
     p = __AXPopFreeStack();
     if (p == 0) {
-        for(i = 1; i < priority; i++) {
+        for (i = 1; i < priority; i++) {
             p = __AXPopStackFromBottom(i);
             if (p) {
                 if (p->pb.state == 1) {
@@ -192,7 +207,8 @@ AXVPB * AXAcquireVoice(u32 priority, void (* callback)(void *), u32 userContext)
     return p;
 }
 
-void AXSetVoicePriority(AXVPB * p, u32 priority) {
+void AXSetVoicePriority(AXVPB* p, u32 priority)
+{
     int old;
 
     ASSERTLINE(0x17A, p);

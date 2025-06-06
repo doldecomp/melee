@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2B3368 */ UNK_RET it_802B3368(UNK_PARAMS);
 /* 2B338C */ void it_802B338C(Item_GObj*, Vec3*, float facing_dir, u32);
@@ -16,7 +17,6 @@
 /* 2B3680 */ UNK_RET it_802B3680(UNK_PARAMS);
 /* 2B36BC */ UNK_RET it_802B36BC(UNK_PARAMS);
 /* 2B3790 */ UNK_RET it_802B3790(UNK_PARAMS);
-/* 2B37F0 */ UNK_RET it_802B37F0(UNK_PARAMS);
 /* 2B3808 */ UNK_RET it_802B3808(UNK_PARAMS);
 /* 2B397C */ UNK_RET it_802B397C(UNK_PARAMS);
 /* 2B3A94 */ bool it_802B3A94(Item_GObj*);

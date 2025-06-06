@@ -12,15 +12,15 @@ typedef void (*jmp_t)(void);
 typedef jmp_t jtbl_t[];
 
 #if defined(__clang__) || defined(__GNUC__)
-#include <dolphin/os/OSError.h>
+#include <dolphin/os.h>
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
 #elif defined(__MWERKS__) && !defined(BUGFIX)
 #define NOT_IMPLEMENTED asm { nop }
 #else
-#include <dolphin/OSError.h>
-#define NOT_IMPLEMENTED
-OSPanic(__FILE__, __LINE__, "Function is not implemented!")
+#include <dolphin/os.h>
+#define NOT_IMPLEMENTED \
+    OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #endif
 
 #ifndef UNK_T

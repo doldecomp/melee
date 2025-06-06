@@ -1,6 +1,14 @@
 #include "lbmthp.static.h"
 
-/// #lbMthp_8001E8F8
+#include "lb/types.h"
+
+f32 lbMthp_8001E8F8(lbMthp_8001E8F8_t* arg0)
+{
+    if (arg0 != NULL) {
+        return arg0->x8;
+    }
+    return lb_804D7CC0;
+}
 
 /// #fn_8001E910
 

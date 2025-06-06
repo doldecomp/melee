@@ -3,8 +3,9 @@
 
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1CD338 */ UNK_RET grCastle_801CD338(UNK_PARAMS);
 /* 1CD37C */ UNK_RET grCastle_801CD37C(UNK_PARAMS);
@@ -80,6 +81,6 @@
 /* 1D0BBC */ UNK_RET grCastle_801D0BBC(UNK_PARAMS);
 /* 1D0D24 */ UNK_RET grCastle_801D0D24(UNK_PARAMS);
 /* 1D0D84 */ UNK_RET grCastle_801D0D84(UNK_PARAMS);
-/* 1D0FF0 */ UNK_RET grCastle_801D0FF0(UNK_PARAMS);
+/* 1D0FF0 */ float grCastle_801D0FF0(void);
 
 #endif

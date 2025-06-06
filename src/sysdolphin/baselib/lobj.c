@@ -9,10 +9,9 @@
 #include "object.h"
 #include "wobj.h"
 
+#include "dolphin/gx/GXEnum.h"
+
 #include <dolphin/mtx.h>
-#include <dolphin/mtx/mtxvec.h>
-#include <dolphin/mtx/types.h>
-#include <dolphin/mtx/vec.h>
 #include <dolphin/os.h>
 
 static void LObjInfoInit(void);
@@ -22,7 +21,7 @@ HSD_LObjInfo hsdLObj = { LObjInfoInit };
 static HSD_LObjInfo* default_class = NULL;
 
 static HSD_SList* current_lights;
-static HSD_LObj* active_lights[GX_MAX_LIGHT];
+static HSD_LObj* active_lights[MAX_GXLIGHT];
 static s32 nb_active_lights = 0;
 
 static s32 lightmask_diffuse;
@@ -81,7 +80,7 @@ void HSD_LObjSetActive(HSD_LObj* lobj)
     int idx;
 
     if (HSD_LObjGetType(lobj) == LOBJ_AMBIENT) {
-        idx = GX_MAX_LIGHT - 1;
+        idx = MAX_GXLIGHT - 1;
         if (active_lights[idx]) {
             return;
         }
@@ -100,7 +99,7 @@ s32 HSD_LObjGetNbActive(void)
 HSD_LObj* HSD_LObjGetActiveByID(GXLightID id)
 {
     s32 idx = HSD_LightID2Index(id);
-    if (0 <= idx && idx < GX_MAX_LIGHT) {
+    if (0 <= idx && idx < MAX_GXLIGHT) {
         return active_lights[idx];
     } else {
         return NULL;
@@ -109,7 +108,7 @@ HSD_LObj* HSD_LObjGetActiveByID(GXLightID id)
 
 HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx)
 {
-    if (0 <= idx && idx < GX_MAX_LIGHT - 1) {
+    if (0 <= idx && idx < MAX_GXLIGHT - 1) {
         return active_lights[idx];
     } else {
         return NULL;
@@ -120,7 +119,7 @@ void HSD_LObjClearActive(void)
 {
     int i;
 
-    for (i = 0; i < GX_MAX_LIGHT; i++) {
+    for (i = 0; i < MAX_GXLIGHT; i++) {
         active_lights[i] = NULL;
     }
     nb_active_lights = 0;
@@ -389,12 +388,12 @@ static void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
         case 2:
         case 3:
             HSD_LObjGetPosition(lobj, &lobj->lvec);
-            PSMTXMUltiVec(mtx, &lobj->lvec, &lobj->lvec);
+            MTXMultVec(mtx, &lobj->lvec, &lobj->lvec);
             break;
         case 1:
             HSD_LObjGetLightVector(lobj, &lobj->lvec);
             PSMTXMultVecSR(mtx, &lobj->lvec, &lobj->lvec);
-            PSVECNormalize(&lobj->lvec, &lobj->lvec);
+            VECNormalize(&lobj->lvec, &lobj->lvec);
             break;
         default:
             __assert(__FILE__, 680, "0");
@@ -412,7 +411,7 @@ static void setup_infinite_lightobj(HSD_LObj* lobj, MtxPtr vmtx)
     lpos.x *= 1048576.0F;
     lpos.y *= 1048576.0F;
     lpos.z *= 1048576.0F;
-    PSMTXMUltiVec(vmtx, &lpos, &lpos);
+    MTXMultVec(vmtx, &lpos, &lpos);
     if (lobj->flags & LOBJ_DIFFUSE) {
         GXInitLightPos(&lobj->lightobj, lpos.x, lpos.y, lpos.z);
         GXInitLightAttn(&lobj->lightobj, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
@@ -429,7 +428,7 @@ static void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
     GXInitLightColor(&lobj->lightobj, lobj->color);
     lobj->hw_color = lobj->color;
     HSD_LObjGetPosition(lobj, &lpos);
-    PSMTXMUltiVec(mtx, &lpos, &lpos);
+    MTXMultVec(mtx, &lpos, &lpos);
     GXInitLightPos(&lobj->lightobj, lpos.x, lpos.y, lpos.z);
     GXInitLightPos(&lobj->spec_lightobj, lpos.x, lpos.y, lpos.z);
     if (lobj->flags & 0x40) {
@@ -451,7 +450,7 @@ static void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
     Vec3 ldir;
 
     HSD_LObjGetPosition(lobj, &lpos);
-    PSMTXMUltiVec(mtx, &lpos, &lpos);
+    MTXMultVec(mtx, &lpos, &lpos);
     HSD_LObjGetLightVector(lobj, &ldir);
     PSMTXMultVecSR(mtx, &ldir, &ldir);
     PSVECNormalize(&ldir, &ldir);
@@ -492,7 +491,7 @@ void HSD_LObjSetupInit(HSD_CObj* cobj)
 
     HSD_LObjClearActive();
 
-    for (list = current_lights; idx < GX_MAX_LIGHT - 1 && list;
+    for (list = current_lights; idx < MAX_GXLIGHT - 1 && list;
          list = list->next)
     {
         HSD_LObj* lobj = list->data;
@@ -571,7 +570,7 @@ void HSD_LObjSetupInit(HSD_CObj* cobj)
     }
 
     for (list = current_lights;
-         list != NULL && num < GX_MAX_LIGHT - 1 && idx < GX_MAX_LIGHT - 1;
+         list != NULL && num < MAX_GXLIGHT - 1 && idx < MAX_GXLIGHT - 1;
          list = list->next)
     {
         HSD_LObj* lobj = list->data;
@@ -584,7 +583,7 @@ void HSD_LObjSetupInit(HSD_CObj* cobj)
         num++;
     }
 
-    for (i = 0; i < GX_MAX_LIGHT - 1; i++) {
+    for (i = 0; i < MAX_GXLIGHT - 1; i++) {
         HSD_LObj* lobj;
 
         if (!(lobj = HSD_LObjGetActiveByIndex(i))) {
@@ -635,7 +634,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
         for (p = &current_lights; *p != NULL; p = &(*p)->next) {
             if ((*p)->data == lobj) {
                 int i;
-                for (i = 0; i < GX_MAX_LIGHT; i++) {
+                for (i = 0; i < MAX_GXLIGHT; i++) {
                     if (lobj == active_lights[i]) {
                         active_lights[i] = NULL;
                     }
@@ -651,7 +650,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
 inline void LObjRemoveAll(void)
 {
     int i;
-    for (i = 0; i < GX_MAX_LIGHT; i++) {
+    for (i = 0; i < MAX_GXLIGHT; i++) {
         active_lights[i] = NULL;
     }
     nb_active_lights = 0;
@@ -685,7 +684,7 @@ inline void LObjReplaceAll(HSD_LObj* lobj)
 {
     int i;
     HSD_LObj* cur;
-    for (i = 0; i < GX_MAX_LIGHT; i++) {
+    for (i = 0; i < MAX_GXLIGHT; i++) {
         active_lights[i] = NULL;
     }
     nb_active_lights = 0;
@@ -700,7 +699,7 @@ inline void LObjReplaceAll(HSD_LObj* lobj)
 
 void HSD_LObj_803668EC(HSD_LObj* lobj)
 {
-    u8 _[4];
+    PAD_STACK(4);
 
     LObjReplaceAll(lobj);
 }
@@ -747,7 +746,7 @@ u32 HSD_LightID2Index(GXLightID id)
     case GX_LIGHT7:
         index = 7;
         break;
-    case GX_LIGHT_AMBIENT:
+    case GX_MAX_LIGHT:
         index = 8;
         break;
     default:
@@ -777,7 +776,7 @@ s32 HSD_Index2LightID(u32 index)
     case 7:
         return GX_LIGHT7;
     case 8:
-        return GX_LIGHT_AMBIENT;
+        return GX_MAX_LIGHT;
     default:
         return GX_LIGHT_NULL;
     }

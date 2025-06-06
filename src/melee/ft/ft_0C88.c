@@ -1,5 +1,7 @@
 #include <placeholder.h>
 
+#include "ft/fighter.h"
+#include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -116,11 +118,55 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #fn_800C9D94
 
+static inline void getAccelAndTarget(Fighter* fp, float* accel,
+                                     float* target_vel)
+{
+    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+    *accel = fp->input.lstick.x * fp->co_attrs.dash_run_acceleration_a;
+    *accel += fp->input.lstick.x > 0 ? +co_attrs->dash_run_acceleration_b
+                                     : -co_attrs->dash_run_acceleration_b;
+    *target_vel = fp->input.lstick.x * co_attrs->dash_run_terminal_velocity;
+}
+
 /// #ftCo_TurnRun_Anim
 
 /// #ftCo_TurnRun_IASA
 
-/// #ftCo_TurnRun_Phys
+void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+    float accel, target_vel;
+    getAccelAndTarget(fp, &accel, &target_vel);
+
+    if (!target_vel) {
+        ftCommon_8007C930(fp, co_attrs->gr_friction *
+                                  p_ftCommonData->x60_someFrictionMul);
+    } else if (fp->mv.co.turnrun.accel_mul * accel < 0) {
+        if (accel > 0) {
+            if (fp->gr_vel + accel > target_vel) {
+                accel -= co_attrs->gr_friction *
+                         p_ftCommonData->x60_someFrictionMul;
+                if (fp->gr_vel + accel < target_vel) {
+                    accel = target_vel - fp->gr_vel;
+                }
+            }
+        } else {
+            if (fp->gr_vel + accel < target_vel) {
+                accel += co_attrs->gr_friction *
+                         p_ftCommonData->x60_someFrictionMul;
+                if (fp->gr_vel + accel > target_vel) {
+                    accel = target_vel - fp->gr_vel;
+                }
+            }
+        }
+        fp->xE4_ground_accel_1 = accel;
+    } else {
+        ftCommon_8007C930(fp, co_attrs->gr_friction *
+                                  p_ftCommonData->x60_someFrictionMul);
+    }
+    ftCommon_8007CB74(gobj);
+}
 
 /// #ftCo_TurnRun_Coll
 
@@ -132,7 +178,23 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #ftCo_Dash_IASA
 
-/// #ftCo_Dash_Phys
+void ftCo_Dash_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(1);
+
+    if (fp->mv.co.dash.x0) {
+        fp->mv.co.dash.x0 = 0;
+    } else {
+        ftCo_DatAttrs* attrs = &fp->co_attrs;
+        float accel, target_vel;
+        getAccelAndTarget(fp, &accel, &target_vel);
+        ftCommon_8007C98C(fp, accel, target_vel,
+                          attrs->gr_friction *
+                              p_ftCommonData->x60_someFrictionMul);
+    }
+    ftCommon_8007CB74(gobj);
+}
 
 /// #ftCo_Dash_Coll
 
@@ -150,7 +212,24 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #ftCo_Run_IASA
 
-/// #ftCo_Run_Phys
+void ftCo_Run_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* attrs = &fp->co_attrs;
+    float accel, target_vel;
+    getAccelAndTarget(fp, &accel, &target_vel);
+    if (target_vel) {
+        f32 gr_frac = fp->gr_vel / target_vel;
+        if ((gr_frac > 0.0F) && (gr_frac < 1.0F)) {
+            accel *= (1.0F - gr_frac) * p_ftCommonData->x5C;
+        }
+    }
+    fp->mv.co.run.x4 = target_vel * p_ftCommonData->x440;
+    ftCommon_8007C98C(fp, accel, target_vel,
+                      attrs->gr_friction *
+                          p_ftCommonData->x60_someFrictionMul);
+    ftCommon_8007CB74(gobj);
+}
 
 /// #ftCo_Run_Coll
 
@@ -158,7 +237,13 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #ftCo_RunDirect_IASA
 
-/// #ftCo_RunDirect_Phys
+#pragma push
+#pragma dont_inline on
+void ftCo_RunDirect_Phys(Fighter_GObj* gobj)
+{
+    ftCo_Run_Phys(gobj);
+}
+#pragma pop
 
 /// #ftCo_RunDirect_Coll
 
@@ -170,7 +255,14 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #ftCo_RunBrake_IASA
 
-/// #ftCo_RunBrake_Phys
+void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007C930(fp, p_ftCommonData->x60_someFrictionMul *
+                              fp->co_attrs.gr_friction);
+    ftCommon_8007CB74(gobj);
+}
 
 /// #ftCo_RunBrake_Coll
 

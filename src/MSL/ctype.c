@@ -76,18 +76,18 @@ const unsigned char __upper_map[256] = {
     0xFC, 0xFD, 0xFE, 0xFF
 };
 
-int toupper(int c)
-{
-    if (c == -1) {
-        return -1;
-    }
-    return __upper_map[c & 0xFF];
-}
-
 int tolower(int c)
 {
     if (c == -1) {
         return -1;
     }
     return __lower_map[c & 0xFF];
+}
+
+int toupper(int c)
+{
+    if (c == -1) {
+        return -1;
+    }
+    return __upper_map[c & 0xFF];
 }

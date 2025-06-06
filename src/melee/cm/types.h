@@ -6,14 +6,16 @@
 #include "cm/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct CameraBox {
     CameraBox* next;
     CameraBox* prev;
     bool x8;
     /* +C:0 */ u8 xC_b0 : 1;
-    u8 xD_fill[0x10 - 0xD];
+    /* +C:1 */ u8 xC_b1 : 1;
+    /* +C:2 */ u8 xC_b2 : 1;
+    s16 xE;
     Vec3 x10; // might be Vec2?
     Vec3 x1C;
     float x28;
@@ -69,7 +71,8 @@ typedef struct Camera {
     /* 0x0AC */ f32 unk_AC; /* inferred */
     /* 0x0B0 */ struct UnkInternalCameraStruct unk_B0[2][8];
     /* 0x1B0 */ struct UnkInternalCameraStruct unk_1B0[2][8];
-    /* 0x2B0 */ u8 pad_2B0[0x2BC - 0x2B0];
+    /* 0x2B0 */ u8 pad_2B0[0x2BA - 0x2B0];
+    /* 0x2BA */ s16 unk_2ba;
     /* 0x2BC */ f32 unk_2bc;
     /* 0x2C0 */ f32 unk_2c0;
     /* 0x2C4 */ char pad_2C4[0x7D]; /* maybe part of unk_2c0[0x20]? */
@@ -120,6 +123,42 @@ struct CameraUnkGlobals {
     /* +3C */ float x3C;
     /* +40 */ float x40;
     /* +44 */ float _44[43];
+};
+
+// global vars for camera mode 7 and 8
+// mode 7 will attach and follow a player, and 8 is free cam
+struct CameraDebugMode {
+    /* +00 */ u32 last_mode;
+    /* +04 */ int ply_slot;
+    /* +08 */ Vec3 mode7_int_offset;
+    /* +14 */ Vec3 mode7_eye_offset;
+    /* +20 */ Vec3 mode7_eye_pos;
+    /* +2C */ Vec3 mode7_int_pos;
+    /* +38 */ float mode7_fov;
+    /* +3C */ Vec3 mode8_int_pos;
+    /* +48 */ Vec3 mode8_eye_pos;
+    /* +54 */ float mode8_fov;
+    /* +58 */ u8 x4c[0x8]; // padding? not sure if this is correct
+};
+
+struct CameraModeCallbacks {
+    void* mode_0;
+    void* mode_1;
+    void* mode_2;
+    void* mode_3;
+    void* mode_4;
+    void* mode_5;
+    void* mode_6;
+    void* mode_7;
+    void* mode_8;
+};
+
+struct CameraFixednessMult {
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
 };
 
 #endif

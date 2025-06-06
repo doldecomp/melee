@@ -1,5 +1,9 @@
 #include <platform.h>
 
+#include "grlast.h"
+
+#include "gr/inlines.h"
+
 /// #grLast_8021A620
 
 /// #grLast_8021A740
@@ -48,7 +52,10 @@ void grLast_8021A9A4(void) {}
 
 void grLast_8021A9A8(void) {}
 
-/// #fn_8021A9AC
+void fn_8021A9AC(Ground_GObj* gobj)
+{
+    GET_GROUND(gobj)->gv.last.x0_b0 = false;
+}
 
 /// #grLast_8021A9C4
 

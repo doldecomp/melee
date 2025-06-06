@@ -1,5 +1,7 @@
 #include <platform.h>
 
+#include "gr/inlines.h"
+
 static s16 grZe_804D6998;
 
 void grZebes_801D84A0(void) {}
@@ -50,7 +52,10 @@ bool grZebes_801D9408(void)
 
 void grZebes_801D94EC(void) {}
 
-/// #fn_801D94F0
+void fn_801D94F0(Ground_GObj* gobj)
+{
+    GET_GROUND(gobj)->gv.zebes.x0_b0 = false;
+}
 
 /// #grZebes_801D9508
 
@@ -102,9 +107,17 @@ void grZebes_801DA3E8(void)
 
 /// #grZebes_801DA528
 
-/// #fn_801DA9D8
+void fn_801DA9D8(UNK_T arg0, Ground* gp, float* y, float z)
+{
+    gp->gv.zebes.xC.z += z;
+    gp->gv.zebes.xC.y = *y;
+}
 
-/// #fn_801DA9F0
+void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
+{
+    gp->gv.zebes.xC.y += y;
+    gp->gv.zebes.xC.x = *x;
+}
 
 /// #grZebes_801DAA08
 

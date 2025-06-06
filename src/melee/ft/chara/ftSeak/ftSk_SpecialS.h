@@ -4,8 +4,9 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 110490 */ void ftSk_SpecialS_80110490(Fighter* fp);
 /* 110610 */ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg8);

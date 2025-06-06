@@ -2,7 +2,6 @@
 #include <placeholder.h>
 
 #include "ftCrazyHand/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCh_Init.h"
 
@@ -16,6 +15,7 @@
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* static */ void ftCh_Init_801566B4(void);
 /* static */ void ftCh_Init_80156A5C(void);
@@ -647,7 +647,7 @@ void ftCh_Init_OnDeath(HSD_GObj* gobj) {}
 void ftCh_Init_OnLoad(HSD_GObj* gobj)
 {
     ftData* ftdata;
-    ftCrazyHandAttributes* ftData_attr;
+    ftCrazyHand_DatAttrs* ftData_attr;
     void** items;
     Fighter* fp;
 
@@ -656,7 +656,7 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
-    PUSH_ATTRS(fp, ftCrazyHandAttributes);
+    PUSH_ATTRS(fp, ftCrazyHand_DatAttrs);
 
     ftBossLib_8015BDB4(gobj);
     it_8026B3F8(items[0], 127);
@@ -671,20 +671,20 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     fp->cur_pos.x = ftData_attr->x18;
     fp->cur_pos.y = ftData_attr->x1C;
     fp->cur_pos.z = 0.0f;
-    fp->mv.mh.unk0.x28 = 0;
-    fp->mv.mh.unk0.x2C = 0;
-    fp->mv.mh.unk0.x30 = 0;
-    fp->mv.mh.unk0.x34 = 0;
-    fp->mv.mh.unk0.x38 = -1;
-    fp->mv.mh.unk0.x3C = -1;
-    fp->mv.mh.unk0.x40 = -1;
-    fp->mv.mh.unk0.x1C = 0.0f;
-    fp->mv.mh.unk0.x20 = 0;
-    fp->fv.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
-    fp->fv.mh.x2238 = 1.0f;
-    fp->fv.mh.x224C = 0;
-    fp->fv.mh.x2250 = ftMh_MS_Damage2;
-    fp->fv.mh.x2254 = 0;
+    fp->mv.ch.unk0.x28 = 0;
+    fp->mv.ch.unk0.x2C = 0;
+    fp->mv.ch.unk0.x30 = 0;
+    fp->mv.ch.unk0.x34 = 0;
+    fp->mv.ch.unk0.x38 = -1;
+    fp->mv.ch.unk0.x3C = -1;
+    fp->mv.ch.unk0.x40 = -1;
+    fp->mv.ch.unk0.x1C = 0.0f;
+    fp->mv.ch.unk0.x20 = 0;
+    fp->fv.ch.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
+    fp->fv.ch.x2238 = 1.0f;
+    fp->fv.ch.x224C = 0;
+    fp->fv.ch.x2250 = ftMh_MS_Damage2;
+    fp->fv.ch.x2254 = 0;
     fp->x1A88.x10 = 1;
     ftBossLib_8015BD24(fp->x1A88.x10, &fp->fv.mh.x223C, fp->fv.ch.x2238,
                        ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
@@ -692,7 +692,7 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
 
 void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftCrazyHandAttributes);
+    COPY_ATTRS(gobj, ftCrazyHand_DatAttrs);
 }
 
 /// #ftCh_Init_80155FCC

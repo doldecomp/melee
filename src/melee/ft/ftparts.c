@@ -5,6 +5,7 @@
 #include "ft/ftparts.h"
 
 #include "ft/fighter.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lbrefract.h"
 
@@ -107,10 +108,10 @@ void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
         float scale_z = _HSD_JObjGetScaleZ(jobj);
         float scale_y = _HSD_JObjGetScaleY(jobj);
         float scale_x = _HSD_JObjGetScaleX(jobj);
-        PSMTXScale(temp_mtx, 1.0F / scale_x, 1.0F / scale_y, 1.0F / scale_z);
-        PSMTXConcat(rmtx, temp_mtx, ft_jobj_scale.mtx);
+        MTXScale(temp_mtx, 1.0F / scale_x, 1.0F / scale_y, 1.0F / scale_z);
+        MTXConcat(rmtx, temp_mtx, ft_jobj_scale.mtx);
         HSD_MtxInverse(rmtx, temp_mtx);
-        PSMTXConcat(ft_jobj_scale.mtx, temp_mtx, ft_jobj_scale.mtx);
+        MTXConcat(ft_jobj_scale.mtx, temp_mtx, ft_jobj_scale.mtx);
         ft_jobj_scale.has_z_scale = true;
     } else {
         ft_jobj_scale.has_z_scale = false;
@@ -270,7 +271,11 @@ void ftParts_SetupParts(HSD_GObj* fighter_obj)
 
 /// #ftParts_80074A4C
 
-/// #ftParts_80074A74
+int ftParts_80074A74(HSD_GObj* arg0, int arg1)
+{
+    Fighter* fp = GET_FIGHTER(arg0);
+    return fp->x5F4_arr[arg1].x0;
+}
 
 /// #ftParts_80074A8C
 

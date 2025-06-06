@@ -58,7 +58,7 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
     GObj_SetupGXLink(gobj, ftDrawCommon_80080E18, 5, 0);
     {
         Fighter* fp = HSD_ObjAlloc(&fighter_alloc_data);
-        fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&Fighter_80458FFC);
+        fp->dat_attrs_backup = HSD_ObjAlloc(&fighter_dat_attrs_alloc_data);
         GObj_InitUserData(gobj, 4, Fighter_Unload_8006DABC, fp);
         ftData_8008572C(alloc_info->internal_id);
         initFighter(gobj, alloc_info);
@@ -127,7 +127,7 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
 void ftDemo_ObjAllocInit(void)
 {
     Fighter_800679B0();
-    HSD_ObjAllocInit(&Fighter_804590AC, 0xB000, 0x20);
+    HSD_ObjAllocInit(&fighter_x59C_alloc_data, 0xB000, 0x20);
 }
 
 void ftDemo_SetArchiveData(int pairs_idx, HSD_Archive* archive, int arr_idx)

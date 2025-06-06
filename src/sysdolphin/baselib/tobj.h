@@ -8,9 +8,9 @@
 #include "baselib/class.h"
 #include "baselib/object.h"
 
+#include <dolphin/gx.h>
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct HSD_TObj;
 

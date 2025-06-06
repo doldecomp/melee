@@ -1,5 +1,7 @@
 #include "itunknown.h"
 
+#include "it/it_26B1.h"
+
 /// #it_802CE710
 
 void it_802CE7CC(void) {}
@@ -38,7 +40,10 @@ bool it_802CEC1C(void)
 
 /// #it_802CEEC8
 
-/// #it_802CF0B4
+void it_802CF0B4(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802CF0D4
 

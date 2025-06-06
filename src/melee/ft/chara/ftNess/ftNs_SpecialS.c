@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftNess/ftNs_SpecialS.h"
 
 #include "ft/fighter.h"
@@ -16,6 +14,7 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 #include <MSL/trigf.h>
 
 // https://decomp.me/scratch/apf7Y

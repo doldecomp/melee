@@ -196,12 +196,12 @@ void mpColl_80041EE4(CollData* cd)
     cd->x54 = 0.0f;
     cd->x58 = 0.0f;
     cd->x5C = 0.0f;
-    lb_8000C160(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
-    lb_8000C160(&cd->xC4_ecb, sizeof(ftECB));
-    lb_8000C160(&cd->xE4_ecb, sizeof(ftECB));
-    lb_8000C160(&cd->x104, 0x2C);
-    lb_8000C160(&cd->x84_ecb, sizeof(ftECB));
-    lb_8000C160(&cd->x64_ecb, sizeof(ftECB));
+    memzero(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
+    memzero(&cd->xC4_ecb, sizeof(ftECB));
+    memzero(&cd->xE4_ecb, sizeof(ftECB));
+    memzero(&cd->x104, 0x2C);
+    memzero(&cd->x84_ecb, sizeof(ftECB));
+    memzero(&cd->x64_ecb, sizeof(ftECB));
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8
@@ -1073,7 +1073,7 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
                  temp_f2);
         sp8 = 0;
         if (mpLib_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48,
-                           arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24,
+                           arg0->x4C, 0, 0, temp_f1_3, temp_f2, sp20, sp24,
                            0.0f) != 0)
         {
             sp20 = arg0->x140.x;

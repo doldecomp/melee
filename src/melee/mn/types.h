@@ -5,6 +5,8 @@
 
 #include "mn/forward.h" // IWYU pragma: export
 
+#include "platform.h"
+
 #include <baselib/sislib.h>
 
 typedef struct {
@@ -367,5 +369,10 @@ struct CSSDoorsData {
     CSSKOStar ko_stars[4]; // 0x110
     u8 x190[64];           // 0x190
 };
+
+struct mnGallery_804A0B90_t {
+    char pad_0[0x96000];
+};
+STATIC_ASSERT(sizeof(struct mnGallery_804A0B90_t) == 0x96000);
 
 #endif

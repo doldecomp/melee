@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 typedef struct _ftCrazyHandAttributes {
     s32 x0;
@@ -72,6 +72,6 @@ typedef struct _ftCrazyHandAttributes {
     Vec2 x12C_pos;
     Vec2 x134_pos;
     Vec2 x13C_pos;
-} ftCrazyHandAttributes;
+} ftCrazyHand_DatAttrs;
 
 #endif

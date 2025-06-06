@@ -1,6 +1,7 @@
 #include <placeholder.h>
 
 #include "gm_1601.static.h"
+#include "gm_1601.h"
 
 #include "gmmain_lib.h"
 
@@ -58,7 +59,10 @@ u8 fn_80160840(u8 arg0)
 
 /// #gm_80160854
 
-/// #gm_80160968
+int gm_80160968(u8 arg0)
+{
+    return lbl_803B7864[arg0];
+}
 
 /// #gm_80160980
 
@@ -204,19 +208,34 @@ u8 fn_80160840(u8 arg0)
 
 /// #fn_80163FA4
 
-/// #gm_8016400C
+u8 gm_8016400C(u8 arg0)
+{
+    return lbl_803B7888[arg0];
+}
 
-/// #gm_80164024
+u8 gm_80164024(u8 arg0)
+{
+    return lbl_803B78A4[arg0];
+}
 
 /// #gm_8016403C
 
 /// #fn_801640B0
 
-/// #fn_8016419C
+float fn_8016419C(u8 arg0)
+{
+    return lbl_803B7930[arg0 - 1].x;
+}
 
-/// #fn_801641B4
+float fn_801641B4(u8 arg0)
+{
+    return lbl_803B7930[arg0 - 1].y;
+}
 
-/// #gm_801641CC
+u16 gm_801641CC(u8 arg0)
+{
+    return lbl_803B7808[arg0];
+}
 
 /// #gm_801641E4
 
@@ -244,7 +263,7 @@ bool gm_80164840(u8 id)
     u16* temp_r31;
     u8 var_r0 = 0;
 
-    temp_r31 = gmMainLib_8015ED8C(&lbl_803B75F8);
+    temp_r31 = gmMainLib_8015ED8C();
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (lbl_803B75F8.id[id] == lbl_803B75F8.thing[i].unk1) {
             var_r0 = lbl_803B75F8.thing[i].unk0;
@@ -262,9 +281,9 @@ bool gm_80164840(u8 id)
 /// #gm_80164A0C
 
 /// Are all unlockable characters unlocked?
-bool gm_80164ABC(struct gmMainLib_8015ED8C_arg0_t* arg0)
+bool gm_80164ABC(void)
 {
-    u16* unlockable_character_bitfield = gmMainLib_8015ED8C(arg0);
+    u16* unlockable_character_bitfield = gmMainLib_8015ED8C();
     int i;
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
         if (!(*unlockable_character_bitfield & (1LL << i))) {
@@ -447,7 +466,7 @@ void fn_80168F7C(void)
 
 /// #gm_801692BC
 
-void gm_801692E8(uint ticks, struct datetime* datetime)
+void gm_801692E8(u32 ticks, datetime* datetime)
 {
     OSCalendarTime tm;
 
@@ -576,7 +595,11 @@ void gm_8016A424(s8 arg0)
 
 /// #fn_8016A4C8
 
-/// #gm_8016A92C
+void gm_8016A92C(gm_8016A92C_arg0_t* arg0)
+{
+    lbl_8046B668.unk_1C = -2;
+    arg0->x58 = &lbl_8046B668;
+}
 
 /// #gm_8016A944
 
@@ -716,7 +739,10 @@ bool gm_8016B1D8(void)
     return lbl_8046B6A0.unk_24CD_b3;
 }
 
-/// #gm_8016B1EC
+bool gm_8016B1EC(void)
+{
+    return lbl_8046B6A0.unk_0 == 0;
+}
 
 /// #gm_8016B204
 
@@ -732,9 +758,9 @@ f32 gm_8016B248(void)
 
 /// #gm_8016B258
 
-/// #gm_8016B274
+/// #gm_SetGameSpeed
 
-/// #gm_8016B2C8
+/// #gm_ResetGameSpeed
 
 void gm_8016B328(void)
 {
@@ -761,7 +787,10 @@ void gm_8016B378(s8 arg0)
     M2C_FIELD(&lbl_8046B6A0, s8*, 0x18) = arg0;
 }
 
-/// #fn_8016B388
+void fn_8016B388(ssize_t arg0, s16 arg1)
+{
+    M2C_FIELD((&lbl_8046B6A0 + (arg0 * 0xE)), s16*, 0x3E) = arg1;
+}
 
 /// #gm_8016B3A0
 
@@ -897,7 +926,10 @@ UNK_T gm_8016B774(void)
 
 /// #gm_8016F1B8
 
-/// #fn_8016F1F0
+short fn_8016F1F0(int idx)
+{
+    return lbl_803D5A4C[idx].x0;
+}
 
 /// #gm_8016F208
 
@@ -1220,7 +1252,10 @@ int fn_80174274(void)
 
 /// #fn_80179F04
 
-/// #fn_80179F6C
+void fn_80179F6C(int idx, int value)
+{
+    lbl_8046E38C[idx] = value;
+}
 
 /// #fn_80179F84
 
@@ -1682,7 +1717,10 @@ void fn_80187714(void)
 
 /// #gm_8018841C
 
-/// #gm_80188454
+int gm_80188454(int idx)
+{
+    return lbl_80473700[idx + 2];
+}
 
 /// #fn_8018846C
 
@@ -2004,83 +2042,3 @@ s32 fn_8019655C(void)
 /// #fn_8019B81C
 
 /// #fn_8019B860
-
-/// #gm_8019B8C4
-
-/// #gm_8019B9C8
-
-void fn_8019BA04(void) {}
-
-/// #fn_8019BA08
-
-/// #fn_8019BF18
-
-/// #fn_8019BF8C
-
-/// #fn_8019C048
-
-/// #fn_8019C3EC
-
-/// #fn_8019C570
-
-/// #fn_8019C6AC
-
-/// #fn_8019C744
-
-/// #fn_8019CA38
-
-/// #fn_8019CBFC
-
-/// #fn_8019CC74
-
-/// #fn_8019CDBC
-
-/// #fn_8019CFA4
-
-/// #fn_8019D074
-
-/// #fn_8019D1BC
-
-/// #fn_8019DD60
-
-/// #gm_8019DF8C
-
-/// #gm_8019E634
-
-/// #gm_8019ECAC
-
-/// #gm_8019EE54
-
-/// #fn_8019EE80
-
-/// #fn_8019EF08
-
-/// #fn_8019EFC4
-
-/// #fn_8019F1D0
-
-/// #fn_8019F2D4
-
-/// #fn_8019F6EC
-
-/// #fn_8019F810
-
-/// #fn_8019F9C4
-
-/// #gm_801A0A10
-
-/// #gm_801A0B18
-
-/// #fn_801A0B60
-
-/// #gm_801A0C6C
-
-/// #gm_801A0E0C
-
-/// #fn_801A0E34
-
-/// #gm_801A0FEC
-
-/// #gm_801A10FC
-
-/// #fn_801A1134

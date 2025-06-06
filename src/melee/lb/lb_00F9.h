@@ -6,8 +6,9 @@
 
 #include "ft/forward.h"
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
 /* 00FA94 */ UNK_RET lb_8000FA94(UNK_PARAMS);
@@ -27,7 +28,7 @@
 /* 011A50 */ void lb_80011A50(Vec3*, int, float, float, float, float, float,
                               float, float);
 /* 011ABC */ enum_t lb_80011ABC(void);
-/* 011AC4 */ HSD_LObj* lb_80011AC4(UNK_T);
+/* 011AC4 */ HSD_LObj* lb_80011AC4(HSD_LightDesc**);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);
 /* 011E24 */ int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
 /* 01204C */ UNK_RET lb_8001204C(UNK_PARAMS);
@@ -59,7 +60,8 @@
 /* 014534 */ UNK_RET lb_80014534(UNK_PARAMS);
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8);
-/* 0145F4 */ UNK_RET lb_800145F4(UNK_PARAMS);
+/* 0145F4 */ void lb_800145F4(void);
+;
 /* 014638 */ bool lb_80014638(Vec3*, UNK_T);
 /* 014770 */ bool lb_80014770(Vec3*, int);
 /* 0149E0 */ bool lb_800149E0(f32*, u32);

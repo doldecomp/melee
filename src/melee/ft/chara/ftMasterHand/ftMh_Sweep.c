@@ -11,7 +11,7 @@
 #include "mp/mplib.h"
 #include "pl/player.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void ftMh_Damage_IASA(HSD_GObj* gobj)
 {

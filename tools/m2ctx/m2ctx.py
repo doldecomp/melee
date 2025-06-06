@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import html
 import os
 import subprocess
 import sys
@@ -45,6 +46,8 @@ MWCC_FLAGS = [
     "src/Runtime",
     "-i",
     "src/sysdolphin",
+    "-i",
+    "extern/dolphin/include",
     "-DM2CTX",
 ]
 
@@ -65,6 +68,8 @@ PCPP_FLAGS = [
     "src/melee",
     "-I",
     "src/melee/ft/chara",
+    "-I",
+    "extern/dolphin/include",
     "-D",
     "__MWERKS__",
     "-D",
@@ -188,13 +193,14 @@ def main():
 
     if args.render:
         template = template_path.read_text()
-        html = template.format(ctx=output)
-        render_path.write_text(html, encoding="utf-8")
+        html_output = template.format(ctx=html.escape(output))
+        render_path.write_text(html_output, encoding="utf-8")
 
     if not args.quiet:
         if args.colorize:
             try:
                 import colorama
+
                 colorama.just_fix_windows_console()
             except ModuleNotFoundError:
                 pass

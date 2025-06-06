@@ -8,11 +8,10 @@
 #include "it/forward.h"
 #include "lb/forward.h"
 #include "sc/forward.h"
-#include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74
@@ -55,7 +54,7 @@ struct StageInfo {
     StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
 
-    u32 x84; // 0x84
+    u32 flags; // 0x84
 
     InternalStageId internal_stage_id; // 0x88
 
@@ -69,10 +68,10 @@ struct StageInfo {
         u8 b6 : 1;
         u8 b7 : 1;
     } unk8C;
-    s32 x90;
-    s32 x94;
+    bool (*x90)(Vec3*, int);
+    bool (*x94)(Vec3*, int);
     s32 x98;
-    s32 x9C;
+    u32 x9C;
     u8 xA0[4];
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
@@ -172,7 +171,6 @@ struct GroundVars_unk {
     int xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi {
@@ -183,7 +181,6 @@ struct GroundVars_izumi {
     HSD_JObj* xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi2 {
@@ -194,7 +191,6 @@ struct GroundVars_izumi2 {
     int xD4;
     int xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_izumi3 {
@@ -207,7 +203,6 @@ struct GroundVars_izumi3 {
     float xD4;
     float xD8;
     float xDC;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
 struct GroundVars_flatzone {
@@ -257,7 +252,6 @@ struct grKongo_GroundVars {
     /* gp+E4 */ s16 xE4;
     /* gp+E6 */ s16 xE6;
     /* gp+E8 */ f32 xE8;
-    u8 xEC_pad[0x218 - 0xEC];
 };
 
 struct grKongo_GroundVars2 {
@@ -272,11 +266,10 @@ struct grKongo_GroundVars2 {
     f32 xE0;
     f32 xE4;
     f32 xE8;
-    u8 xE0_pad[0x218 - 0xE0];
 };
 
-// @todo: Investigate if these extra structs could be
-// shared among stages/other things as more are decompiled.
+/// @todo: Investigate if these extra structs could be
+/// shared among stages/other things as more are decompiled.
 struct grKongo_GroundVars3 {
     /* gp+C4 */ s16 xC4;
     /* gp+C6 */ s16 xC6;
@@ -290,17 +283,76 @@ struct grKongo_GroundVars3 {
     f32 xE0;
     f32 xE4;
     f32 xE8;
-    u8 xE0_pad[0x218 - 0xE0];
+};
+
+struct grKraid_GroundVars {
+    /*  + gp+C4 */ u8 x0;
+    /*  + gp+C5 */ s8 x1;
+    /*  + gp+C8 */ f32 x4;
+    /*  + gp+CC */ f32 x8;
+    /*  + gp+D0 */ f32 xC;
 };
 
 struct grCorneria_GroundVars {
-    /*  +0  gp+C4 */ char pad_0[0x68];
-    /* +68 gp+12C */ HSD_JObj* x68;
+    u32 xC4_b0 : 1;
+    u32 xC4_b1 : 1;
+    u32 xC8;
+    u32 xCC;
+    f32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    f32 xEC;
+    f32 xF0;
+    f32 xF4;
+    f32 xF8;
+    u32 xFC;
+    u32 x100;
+    u32 x104;
+    u32 x108;
+    u32 x10C;
+    u32 x110;
+    f32 x114;
+    u8 x118;
+    u8 x119;
+    u8 x11A;
+    u8 x11B;
+    u32 x11C;
+    u32 x120;
+    u32 x124;
+    HSD_GObj* x128;
+    HSD_JObj* x12C;
 };
 
 struct grIceMt_GroundVars {
     /* +0 gp+C4 */ char pad_0[0x14];
     /* +0 gp+D8 */ s16 xD8;
+};
+
+struct grStadium_GroundVars {
+    /* +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
+struct grZebes_GroundVars {
+    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+    /*  +4 gp+C8 */ UNK_T x4;
+    /*  +8 gp+CC */ UNK_T x8;
+    /*  +C gp+D0 */ Vec3 xC;
+};
+
+struct grOnett_GroundVars {
+    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
+struct grBigBlue_GroundVars {
+    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
+struct grLast_GroundVars {
+    /* +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
 struct Ground {
@@ -331,22 +383,38 @@ struct Ground {
     HSD_GObj* x18;          // 0x18
     HSD_GObjEvent x1C_callback;
     int x20[8];
-    char pad_40[0xC4 - 0x40];
-    union GroundVars { // how big should this be?
-        char pad_0[0x218 - 0xC4];
-        struct GroundVars_unk unk;
+    Vec3 self_vel;
+    Vec3 cur_pos;
+    int x58;
+    int x5C;
+    int x60;
+    int x64;
+    int x68;
+    int x6C;
+    int x70;
+    char pad_40[0xC4 - 0x74];
+    union GroundVars {
+        char pad_0[0x204 - 0xC4];
+        struct grBigBlue_GroundVars bigblue;
+        struct grCorneria_GroundVars corneria;
         struct GroundVars_flatzone flatzone;
         struct GroundVars_flatzone2 flatzone2;
+        struct grIceMt_GroundVars icemt;
         struct GroundVars_izumi izumi;
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
         struct grKongo_GroundVars kongo;
         struct grKongo_GroundVars2 kongo2;
         struct grKongo_GroundVars3 kongo3;
-        struct grCorneria_GroundVars corneria;
-        struct grIceMt_GroundVars icemt;
+        struct grKraid_GroundVars kraid;
+        struct grLast_GroundVars last;
+        struct grOnett_GroundVars onett;
+        struct grStadium_GroundVars stadium;
+        struct GroundVars_unk unk;
+        struct grZebes_GroundVars zebes;
     } gv;
 };
+STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
 // Appears to be related to stage audio
 struct UnkBgmStruct {

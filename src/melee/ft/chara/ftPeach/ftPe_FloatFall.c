@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftPe_FloatFall.h"
 
 #include "ft/fighter.h"
@@ -11,6 +9,8 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftPeach/types.h"
+
+#include <dolphin/mtx.h>
 
 static ftPeach_MotionState getFloatDir(HSD_GObj* gobj)
 {

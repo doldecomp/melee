@@ -1,7 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
 #include "gm_1A36.h"
@@ -20,20 +19,12 @@
 #include "lb/lbsnap.h"
 #include "lb/lbtime.h"
 
-#include <stddef.h>
 #include <dolphin/card/CARDBios.h>
-#include <dolphin/dvd/dvd.h>
-#include <dolphin/gx/GXInit.h>
-#include <dolphin/gx/GXMisc.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/dvd.h>
+#include <dolphin/gx.h>
 #include <dolphin/os.h>
-#include <dolphin/os/OSAlarm.h>
-#include <dolphin/os/OSArena.h>
-#include <dolphin/os/OSInit.h>
-#include <dolphin/os/OSMemory.h>
-#include <dolphin/os/OSTime.h>
-#include <dolphin/pad/pad.h>
-#include <dolphin/vi/vi.h>
+#include <dolphin/pad.h>
+#include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
@@ -43,7 +34,7 @@
 #include <baselib/video.h>
 
 extern bool db_804D6B20;
-extern u16 db_804D6B30; // debug flags
+extern u16 db_gameLaunchButtonState; // debug flags
 
 extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
@@ -86,7 +77,7 @@ static void gmMain_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
         db_804D6B20 = true;
-        if (db_804D6B30 & 0x400) {
+        if (db_gameLaunchButtonState & 0x400) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -106,7 +97,7 @@ static void gmMain_8015FDA4(void)
                 break;
             }
             g_debugLevel = level;
-        } else if (db_804D6B30 & 0x800) {
+        } else if (db_gameLaunchButtonState & 0x800) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -160,7 +151,7 @@ int main(void)
     PADInit();
     CARDInit();
     OSInitAlarm();
-    db_80225374();
+    db_GetGameLaunchButtonState();
     gmMain_8015FDA4();
     if (OSGetConsoleSimulatedMemSize() / (1024 * 1024) == 48) {
         OSAllocFromArenaHi(0x01800000, 4);
@@ -170,7 +161,7 @@ int main(void)
     HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &GXNtsc480IntDf);
     HSD_SetInitParameter(HSD_INIT_FIFO_SIZE, 0x40000);
     HSD_SetInitParameter(HSD_INIT_HEAP_MAX_NUM, 4);
-    db_80228C4C();
+    db_SetupCrashHandler();
     HSD_AllocateXFB(2, &GXNtsc480IntDf);
     HSD_GXSetFifoObj(GXInit(HSD_AllocateFifo(0x40000), 0x40000));
     HSD_InitComponent();
@@ -193,7 +184,7 @@ int main(void)
     HSD_SisLib_803A6048(0xC000);
     gmMainLib_8015FBA4();
 
-    if (g_debugLevel != DbLKind_Master && db_804D6B30 & 0x20 &&
+    if (g_debugLevel != DbLKind_Master && db_gameLaunchButtonState & 0x20 &&
         hsd_803931A4(-1))
     {
         hsd_80393A54(1);
@@ -203,7 +194,7 @@ int main(void)
         }
     }
 
-    db_8022886C();
+    db_InitScreenshot();
     OSReport("# ---------------------------------------------\n");
     OSReport("#    Super Smash Bros. Melee\n");
     OSReport("#\n");
@@ -230,13 +221,13 @@ int main(void)
     OSReport("#\n\n");
     gmMain_804D6594 = false;
     if (gmMain_804D6594) {
-        db_80225D2C();
+        db_DisableItemSpawns();
     } else {
-        db_80225D40();
+        db_EnableItemSpawns();
     }
 
     init_spr_unk();
 
-    db_80228A64();
+    db_ClearFPUExceptions();
     gm_801A4510();
 }

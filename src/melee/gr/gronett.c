@@ -1,5 +1,7 @@
 #include <platform.h>
 
+#include "gr/inlines.h"
+
 void grOnett_801E3734(void) {}
 
 /// #grOnett_801E3738
@@ -52,7 +54,10 @@ void grOnett_801E40E0(void) {}
 
 /// #fn_801E40E4
 
-/// #fn_801E41B0
+void fn_801E41B0(Ground_GObj* gobj)
+{
+    GET_GROUND(gobj)->gv.onett.x0_b0 = false;
+}
 
 /// #grOnett_801E41C8
 

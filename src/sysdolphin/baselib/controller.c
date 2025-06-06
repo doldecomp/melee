@@ -6,7 +6,7 @@
 #include "baselib/util.h"
 
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/pad/pad.h>
+#include <dolphin/pad.h>
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
@@ -19,8 +19,8 @@ PadLibData HSD_PadLibData;
 HSD_PadStatus HSD_PadMasterStatus[4];
 HSD_PadStatus HSD_PadCopyStatus[4];
 HSD_PadStatus HSD_PadGameStatus[4];
-u32 pad_bit[4] = { PAD_CHAN0_BIT, PAD_CHAN1_BIT, PAD_CHAN2_BIT,
-                   PAD_CHAN3_BIT };
+const u32 pad_bit[4] = { PAD_CHAN0_BIT, PAD_CHAN1_BIT, PAD_CHAN2_BIT,
+                         PAD_CHAN3_BIT };
 
 u8 HSD_PadGetRawQueueCount(void)
 {
@@ -100,8 +100,11 @@ void HSD_PadRenewRawStatus(bool err_check)
         p->qcount += 1;
     }
 
-    for (i = 0; i < 4; i++, qwrite++) {
-        *qwrite = now[i];
+    {
+        struct a {
+            PADStatus _[4];
+        };
+        *(struct a*) qwrite = *(struct a*) now;
     }
     HSD_PadRawQueueShift(p->qnum, &p->qwrite);
 

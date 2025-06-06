@@ -9,8 +9,8 @@
 // OS time -> Real time
 #define OS_TICKS_TO_SEC(x) ((x) / (OS_TIME_SPEED))
 #define OS_TICKS_TO_MSEC(x) ((x) / (OS_TIME_SPEED / 1000))
-#define OS_TICKS_TO_USEC(x) (((x)*8) / (OS_TIME_SPEED / 125000))
-#define OS_TICKS_TO_NSEC(x) (((x)*8000) / (OS_TIME_SPEED / 125000))
+#define OS_TICKS_TO_USEC(x) (((x) * 8) / (OS_TIME_SPEED / 125000))
+#define OS_TICKS_TO_NSEC(x) (((x) * 8000) / (OS_TIME_SPEED / 125000))
 
 // Real time -> OS time
 #define OS_SEC_TO_TICKS(x) ((x) * (OS_TIME_SPEED))

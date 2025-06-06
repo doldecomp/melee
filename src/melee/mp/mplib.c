@@ -1,34 +1,21 @@
 #include "mp/forward.h"
 
+#include "mplib.static.h"
+
 #include "mplib.h"
 
 #include "mp/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/tev.h>
 #include <baselib/texp.h>
-
-/* 4D64B0 */ static int mpLib_804D64B0;
-/* 4D64B4 */ static int mpLib_804D64B4;
-/* 4D64B8 */ static int mpLib_804D64B8;
-/* 4D64BC */ static mp_UnkStruct2* mpLib_804D64BC;
-/* 4D64C0 */ static int mpLib_804D64C0;
-/* 4D64C4 */ static mp_UnkStruct7* mpLib_804D64C4;
-/* 4D64C8 */ static s32 mpLib_804D64C8;
-/* 4D64CC */ static s32 mpLib_804D64CC;
-/* 4D64D0 */ static s32 mpLib_804D64D0;
-/* 4D64D4 */ static s32 mpLib_804D64D4;
-/* 4D64D8 */ static s32 mpLib_804D64D8;
-/* 4D64DC */ static s32 mpLib_804D64DC;
-/* 4D64E0 */ static s32 mpLib_804D64E0;
-/* 4D64E4 */ static s32 mpLib_804D64E4;
 
 int mpLib_8004D164(void)
 {
     return mpLib_804D64B4;
 }
 
-int mpLib_8004D16C(void)
+mpLib_804D64B8_t* mpLib_8004D16C(void)
 {
     return mpLib_804D64B8;
 }
@@ -38,7 +25,7 @@ mp_UnkStruct2* mpLib_8004D174(void)
     return mpLib_804D64BC;
 }
 
-int mpLib_8004D17C(void)
+mpLib_804D64C0_t* mpLib_8004D17C(void)
 {
     return mpLib_804D64C0;
 }
@@ -290,7 +277,14 @@ bool mpLib_80054ED8(int line)
 
 /// #mpLib_800566D8
 
-/// #mpLib_800566F8
+void mpLib_800566F8(int arg0, float arg1, float arg2)
+{
+    mpLib_804D64B8_t* temp_r3;
+
+    temp_r3 = &mpLib_804D64B8[arg0];
+    temp_r3->unk_8 = arg1;
+    temp_r3->unk_C = arg2;
+}
 
 /// #mpLib_80056710
 
@@ -334,7 +328,12 @@ bool mpLib_80054ED8(int line)
 
 /// #mpLib_800580AC
 
-/// #mpLib_800580C8
+void mpLib_800580C8(int arg0, Ground* arg1, mpLib_GroundCallback cb)
+{
+    mpLib_804D64C0_t* temp_r3 = &mpLib_804D64C0[arg0];
+    temp_r3->x24 = cb;
+    temp_r3->x28 = arg1;
+}
 
 /// #mpLib_800580E0
 
@@ -342,7 +341,12 @@ bool mpLib_80054ED8(int line)
 
 /// #mpLib_8005811C
 
-/// #mpLib_800581A4
+void mpLib_800581A4(int arg0, int arg1, int arg2)
+{
+    mpLib_804D64C0_t* temp_r3 = &mpLib_804D64C0[arg0];
+    temp_r3->unk_2C = arg2;
+    temp_r3->unk_30 = arg1;
+}
 
 /// #mpLib_800581BC
 

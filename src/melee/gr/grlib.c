@@ -25,6 +25,7 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
+#include <baselib/mtx.h>
 #include <baselib/particle.h>
 #include <baselib/psappsrt.h>
 
@@ -34,7 +35,9 @@
 extern StageInfo stage_info;
 extern struct UnkGeneratorStruct* hsd_804D78FC;
 
-static Vec3 grLib_8049EF58[6];
+static VecMtx grLib_8049EF58;
+static Vec3 grLib_unusedvec1;
+static Vec3 grLib_unusedvec2;
 
 bool grLib_801C96E8(HSD_GObj* arg0)
 {
@@ -168,7 +171,7 @@ void grLib_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
     }
 }
 
-Vec3* grLib_801C9A10(void)
+VecMtxPtr grLib_801C9A10(void)
 {
     Ground_801C2D24(0, &grLib_8049EF58[0]);
     Ground_801C2D24(1, &grLib_8049EF58[1]);
@@ -283,7 +286,7 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
     return gobj;
 }
 
-s16 grLib_801C9E40(void)
+int grLib_801C9E40(void)
 {
     return stage_info.x708;
 }

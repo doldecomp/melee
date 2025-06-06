@@ -1,12 +1,12 @@
 #ifndef _MATH_PPC_H_
 #define _MATH_PPC_H_
 
-#include <MetroTRK/intrinsics.h>
-
 #ifdef __MWERKS__
 #pragma push
 #pragma cplusplus on
 #endif
+
+extern double __frsqrte(double);
 
 extern inline float sqrtf(float x)
 {

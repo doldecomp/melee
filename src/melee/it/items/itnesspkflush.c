@@ -1,16 +1,26 @@
+#include "it/forward.h"
+
 #include "itnesspkflush.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 
 /* 2AB29C */ static bool it_802AB29C(void);
 /* 2AB2A4 */ static bool it_802AB2A4(void);
 
-Fighter_GObj* it_802AA7E4(Item_GObj* arg0)
+Fighter_GObj* it_802AA7E4(Item_GObj* gobj)
 {
-    return GET_ITEM(arg0)->owner;
+    return GET_ITEM(gobj)->owner;
 }
 
-/// #it_802AA7F0
+bool it_802AA7F0(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM(gobj);
+    if (it->msid == 0x2) {
+        return 1;
+    }
+    return 0;
+}
 
 /// #it_802AA810
 
@@ -30,9 +40,17 @@ Fighter_GObj* it_802AA7E4(Item_GObj* arg0)
 
 /// #it_802AAFDC
 
-/// #it_802AB128
+void it_802AB128(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
-/// #it_802AB140
+void it_802AB140(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 /// #it_802AB158
 
@@ -58,4 +76,7 @@ bool it_802AB3C8(Item_GObj* arg0)
     return true;
 }
 
-/// #it_802AB3D0
+void it_802AB3D0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

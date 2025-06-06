@@ -1,6 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ftPe_SpecialN.h"
@@ -21,6 +20,7 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 typedef enum cmd_var_idx {
     cmd_phys_state,

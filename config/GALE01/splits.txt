@@ -111,7 +111,7 @@ melee/lb/lbsnap.c:
 	.text       start:0x8001D2BC end:0x8001E2F8
 	.data       start:0x803BACC8 end:0x803BADB0
 	.bss        start:0x80433380 end:0x804333E0
-	.sdata      start:0x804D3828 end:0x804D3830
+	.sdata      start:0x804D3828 end:0x804D382B
 
 melee/lb/lbgx.c:
 	.text       start:0x8001E2F8 end:0x8001E560
@@ -238,7 +238,6 @@ melee/ef/eflib.c:
 melee/ef/efsync.c:
 	.text       start:0x8005FDDC end:0x80061D70
 	.data       start:0x803BF848 end:0x803BF9D0
-	.bss        start:0x80458FA0 end:0x80458FD0
 	.sdata      start:0x804D39C8 end:0x804D39D8
 	.sdata2     start:0x804D81A0 end:0x804D81D0
 
@@ -251,6 +250,7 @@ melee/ef/ef_061D.c:
 melee/ef/efasync.c:
 	.text       start:0x80063930 end:0x800679B0
 	.data       start:0x803BFB00 end:0x803C0530
+	.bss        start:0x80458FA0 end:0x80458FD0
 	.sdata      start:0x804D39E8 end:0x804D3A00
 	.sdata2     start:0x804D81F8 end:0x804D8250
 
@@ -855,8 +855,8 @@ melee/ft/ft_0CDD.c:
 
 melee/ft/ftattacks4combo.c:
 	.text       start:0x800CECE8 end:0x800CEE70
-	.data       start:0x803C6F40 end:0x803C6F78
-	.sdata      start:0x804D3CD0 end:0x804D3CD8
+	.data       start:0x803C6F40 end:0x803C6F72
+	.sdata      start:0x804D3CD0 end:0x804D3CD2
 	.sdata2     start:0x804D8F30 end:0x804D8F38
 
 melee/ft/ft_0CEE.c:
@@ -1596,19 +1596,44 @@ melee/gm/gmmain_lib.c:
 
 melee/gm/gmmain.c:
 	.text       start:0x8015FD24 end:0x801601C4
-	.data       start:0x803D4AC8 end:0x803D4C38
+	.data       start:0x803D4AC8 end:0x803D4C32
 	.bss        start:0x8046B108 end:0x8046B378
 	.sdata      start:0x804D3EE8 end:0x804D3EF8
 	.sbss       start:0x804D6590 end:0x804D6598
 
 melee/gm/gm_1601.c:
-	.text       start:0x801601C4 end:0x801A12C4
-	.rodata     start:0x803B75F8 end:0x803B7D50
-	.data       start:0x803D4C38 end:0x803DA4F0
-	.bss        start:0x8046B378 end:0x80479B28
-	.sdata      start:0x804D3EF8 end:0x804D4230
-	.sbss       start:0x804D6598 end:0x804D6708
-	.sdata2     start:0x804DA230 end:0x804DA998
+	.text       start:0x801601C4 end:0x8019B8C4
+	.rodata     start:0x803B75F8 end:0x803B7D18
+	.data       start:0x803D4C38 end:0x803DA2E0
+	.bss        start:0x8046B378 end:0x80479A58
+	.sdata      start:0x804D3EF8 end:0x804D41B8
+	.sbss       start:0x804D6598 end:0x804D6660
+	.sdata2     start:0x804DA230 end:0x804DA878
+
+melee/gm/gmtou.c:
+	.text       start:0x8019B8C4 end:0x8019EFC4
+	.rodata     start:0x803B7D18 end:0x803B7D50
+	.data       start:0x803DA2E0 end:0x803DA3E0
+	.bss        start:0x80479A58 end:0x80479A98
+	.sdata      start:0x804D41B8 end:0x804D41F0
+	.sbss       start:0x804D6660 end:0x804D6698
+	.sdata2     start:0x804DA878 end:0x804DA950
+
+melee/gm/gm_19EF.c:
+	.text       start:0x8019EFC4 end:0x801A0E34
+	.data       start:0x803DA3E0 end:0x803DA4B0
+	.bss        start:0x80479A98 end:0x80479B10
+	.sdata      start:0x804D41F0 end:0x804D4218
+	.sbss       start:0x804D6698 end:0x804D6700
+	.sdata2     start:0x804DA950 end:0x804DA980
+
+melee/gm/gmpause.c:
+	.text       start:0x801A0E34 end:0x801A12C4
+	.data       start:0x803DA4B0 end:0x803DA4F0
+	.bss        start:0x80479B10 end:0x80479B28
+	.sdata      start:0x804D4218 end:0x804D4230
+	.sbss       start:0x804D6700 end:0x804D6708
+	.sdata2     start:0x804DA980 end:0x804DA998
 
 melee/gm/gmtitle.c:
 	.text       start:0x801A12C4 end:0x801A2224
@@ -2136,13 +2161,20 @@ melee/db/db_2253.c:
 	.sdata2     start:0x804DBCF0 end:0x804DBD88
 
 melee/mn/mn_2295.c:
-	.text       start:0x802295AC end:0x80233A98
+	.text       start:0x802295AC end:0x8023201C
 	.rodata     start:0x803B84E8 end:0x803B8510
-	.data       start:0x803EAE68 end:0x803ED340
+	.data       start:0x803EAE68 end:0x803ED1D0
 	.bss        start:0x804A04F0 end:0x804A0648
-	.sdata      start:0x804D4B30 end:0x804D4BA0
-	.sbss       start:0x804D6BA8 end:0x804D6BE8
-	.sdata2     start:0x804DBD88 end:0x804DBE70
+	.sdata      start:0x804D4B30 end:0x804D4B98
+	.sbss       start:0x804D6BA8 end:0x804D6BE0
+	.sdata2     start:0x804DBD88 end:0x804DBE38
+
+melee/mn/mnruleplus.c:
+	.text       start:0x8023201C end:0x80233A98
+	.data       start:0x803ED1D0 end:0x803ED340
+	.sdata      start:0x804D4B98 end:0x804D4BA0
+	.sbss       start:0x804D6BE0 end:0x804D6BE8
+	.sdata2     start:0x804DBE38 end:0x804DBE70
 
 melee/mn/mnitemsw.c:
 	.text       start:0x80233A98 end:0x8023593C
@@ -2207,10 +2239,10 @@ melee/mn/mnvibration.c:
 
 melee/mn/mnsound.c:
 	.text       start:0x802492CC end:0x8024A168
-	.data       start:0x803EEED8 end:0x803EEFD8
+	.data       start:0x803EEED8 end:0x803EEFD1
 	.bss        start:0x804A08A8 end:0x804A08B8
-	.sdata      start:0x804D5008 end:0x804D5018
-	.sbss       start:0x804D6C30 end:0x804D6C38
+	.sdata      start:0x804D5008 end:0x804D5015
+	.sbss       start:0x804D6C30 end:0x804D6C34
 	.sdata2     start:0x804DC068 end:0x804DC098
 
 melee/mn/mndeflicker.c:
@@ -2229,11 +2261,11 @@ melee/mn/mnsoundtest.c:
 
 melee/mn/mnlanguage.c:
 	.text       start:0x8024BFE0 end:0x8024C68C
-	.data       start:0x803EF5A0 end:0x803EF668
+	.data       start:0x803EF5A0 end:0x803EF661
 	.bss        start:0x804A08D8 end:0x804A08E8
 	.sdata      start:0x804D5018 end:0x804D5020
-	.sbss       start:0x804D6C50 end:0x804D6C58
-	.sdata2     start:0x804DC110 end:0x804DC130
+	.sbss       start:0x804D6C50 end:0x804D6C54
+	.sdata2     start:0x804DC110 end:0x804DC12C
 
 melee/mn/mnhyaku.c:
 	.text       start:0x8024C68C end:0x8024CE74
@@ -2327,7 +2359,7 @@ melee/it/it_26B1.c:
 
 melee/it/it_266F.c:
 	.text       start:0x8026C47C end:0x8026F9AC
-	.rodata     start:0x803B8560 end:0x803B8600
+	.rodata     start:0x803B8560 end:0x803B85F0
 	.sdata      start:0x804D5168 end:0x804D5170
 	.sdata2     start:0x804DC698 end:0x804DC6C8
 
@@ -2339,6 +2371,7 @@ melee/it/itcoll.c:
 
 melee/it/it_2725.c:
 	.text       start:0x80272560 end:0x8027CF00
+	.rodata     start:0x803B85F0 end:0x803B8600
 	.data       start:0x803F1418 end:0x803F5468
 	.bss        start:0x804A0E30 end:0x804A0FD8
 	.sdata      start:0x804D5188 end:0x804D51F0
@@ -3432,11 +3465,11 @@ melee/vi/vi1202.c:
 	.sdata      start:0x804D5B30 end:0x804D5B40
 	.sdata2     start:0x804DE138 end:0x804DE160
 
+MSL/ansi_files.c:
+	.data       start:0x80400430 end:0x80400508
+
 Runtime/__va_arg.c:
 	.text       start:0x80322620 end:0x80322714
-
-Runtime/__mem.c:
-	.init       start:0x80003100 end:0x80003244
 
 Runtime/Gecko_ExceptionPPC.c:
 	.text       start:0x8032275C end:0x803227CC
@@ -3452,7 +3485,7 @@ Runtime/runtime.c:
 MSL/abort_exit.c:
 	.text       start:0x80322F9C end:0x803230A8
 	.bss        start:0x804A2F48 end:0x804A3148
-	.sbss       start:0x804D7060 end:0x804D7078
+	.sbss       start:0x804D7060 end:0x804D7074
 
 MSL/errno.c:
 	.sbss       start:0x804D7078 end:0x804D7080
@@ -3475,16 +3508,22 @@ MSL/ctype.c:
 MSL/direct_io.c:
 	.text       start:0x803235B0 end:0x8032388C
 
-MSL/cstring.c:
-	.text       start:0x8032388C end:0x80323A14
+MSL/mbstring.c:
+	.text       start:0x8032388C end:0x803238C8
+
+MSL/mem.c:
+	.text       start:0x803238C8 end:0x80323A14
 
 MSL/mem_funcs.c:
 	.text       start:0x80323A14 end:0x80323CF0
 
+MSL/misc_io.c:
+	.text       start:0x80323CF0 end:0x80323CF4
+
 MSL/printf.c:
-	.text       start:0x80323CF0 end:0x803257BC
+	.text       start:0x80323CF4 end:0x803257BC
 	.rodata     start:0x803B8F30 end:0x803B8F40
-	.data       start:0x80400430 end:0x80400728
+	.data       start:0x80400508 end:0x80400728
 	.sdata      start:0x804D5B48 end:0x804D5B50
 	.sdata2     start:0x804DE188 end:0x804DE190
 
@@ -3500,7 +3539,10 @@ MSL/strtoul.c:
 	.text       start:0x80325B24 end:0x80325F18
 	.data       start:0x80400728 end:0x80400770
 
-MSL/console_io.c:
+MSL/float.c:
+	.data       start:0x80400770 end:0x80400778
+
+MSL/uart_console_io.c:
 	.text       start:0x80325F18 end:0x80326098
 	.sbss       start:0x804D7080 end:0x804D7088
 
@@ -3515,7 +3557,7 @@ MSL/trigf.c:
 	.text       start:0x803261BC end:0x803265A8
 	.ctors      start:0x803B7244 end:0x803B7248
 	.rodata     start:0x803B8F40 end:0x803B8F50
-	.data       start:0x80400770 end:0x80400788
+	.data       start:0x80400778 end:0x80400788
 	.sdata2     start:0x804DE198 end:0x804DE1B0
 
 MSL/math.c:
@@ -3528,54 +3570,77 @@ MetroTRK/mainloop.c:
 
 MetroTRK/nubevent.c:
 	.text       start:0x8032687C end:0x80326AD8
+	.bss        start:0x804A3148 end:0x804A3170
 
 MetroTRK/nubinit.c:
 	.text       start:0x80326AD8 end:0x80326C6C
 	.rodata     start:0x803B93A0 end:0x803B93C0
-	.bss        start:0x804A3148 end:0x804A50E0
+	.bss        start:0x804A3170 end:0x804A3178
 
 MetroTRK/msg.c:
 	.text       start:0x80326C6C end:0x80326C94
 
 MetroTRK/msgbuf.c:
 	.text       start:0x80326C94 end:0x803274DC
+	.bss        start:0x804A3178 end:0x804A4B28
 
 MetroTRK/serpoll.c:
-	.text       start:0x803274DC end:0x803276A8
+	.text       start:0x803274DC end:0x803276A4
+	.bss        start:0x804A4B28 end:0x804A4B40
+
+MetroTRK/usr_put.c:
+	.text       start:0x803276A4 end:0x803276A8
 
 MetroTRK/dispatch.c:
 	.text       start:0x803276A8 end:0x80327740
 	.data       start:0x80400788 end:0x80400810
+	.bss        start:0x804A4B40 end:0x804A4B48
 
 MetroTRK/msghndlr.c:
-	.text       start:0x80327740 end:0x80328F50
+	.text       start:0x80327740 end:0x803289E4
 	.data       start:0x80400810 end:0x80400848
+
+MetroTRK/support.c:
+	.text       start:0x803289E4 end:0x80328E60
+
+MetroTRK/mutex_TRK.c:
+	.text       start:0x80328E60 end:0x80328E78
+
+MetroTRK/notify.c:
+	.text       start:0x80328E78 end:0x80328F50
 
 MetroTRK/flush_cache.c:
 	.text       start:0x80328F50 end:0x80328F88
 
+Runtime/__mem.c:
+	.init       start:0x80003100 end:0x80003244
+
 MetroTRK/mem_TRK.c:
-	.init       start:0x80003244 end:0x80003268
+	.init       start:0x80003244 end:0x80003298
 	.text       start:0x80328F88 end:0x8032904C
 
 MetroTRK/targimpl.c:
 	.text       start:0x8032904C end:0x8032A628
 	.rodata     start:0x803B93C0 end:0x803B9410
 	.data       start:0x80400848 end:0x80400878
+	.bss        start:0x804A4B48 end:0x804A50C8
 
 MetroTRK/dolphin_trk.c:
+	.init       start:0x800051CC end:0x800051EC
 	.text       start:0x8032A628 end:0x8032A868
 	.data       start:0x80400878 end:0x804008B8
+	.bss        start:0x804A50C8 end:0x804A50D0
 
 MetroTRK/mpc_7xx_603e.c:
-	.text       start:0x8032A868 end:0x8032ABE0
+	.text       start:0x8032A868 end:0x8032ABD8
 
 MetroTRK/main_TRK.c:
-	.text       start:0x8032ABE0 end:0x8032AC28
+	.text       start:0x8032ABD8 end:0x8032AC28
+	.bss        start:0x804A50D0 end:0x804A50D4
 
 MetroTRK/dolphin_trk_glue.c:
 	.text       start:0x8032AC28 end:0x8032AF80
-	.data       start:0x804008B8 end:0x804008D8
+	.data       start:0x804008B8 end:0x804008D4
 
 MetroTRK/targcont.c:
 	.text       start:0x8032AF80 end:0x8032AFB4
@@ -3583,7 +3648,7 @@ MetroTRK/targcont.c:
 dolphin/amcstubs/AmcExi2Stubs.c:
 	.text       start:0x8032AFB4 end:0x8032AFE4
 
-dolphin/OdemuExi2/DebuggerDriver.c:
+dolphin/odenotstub/odenotstub.c:
 	.text       start:0x8032AFE4 end:0x8032BA6C
 	.sdata      start:0x804D5B60 end:0x804D5B68
 	.sbss       start:0x804D7088 end:0x804D70A0
@@ -3595,8 +3660,8 @@ dolphin/hio/hio.c:
 
 dolphin/mcc/mcc.c:
 	.text       start:0x8032C74C end:0x8032EA84
-	.data       start:0x804008D8 end:0x80400918
-	.bss        start:0x804A50E0 end:0x804A5300
+	.data       start:0x804008D4 end:0x80400918
+	.bss        start:0x804A50D4 end:0x804A5300
 	.sdata      start:0x804D5B70 end:0x804D5B78
 	.sbss       start:0x804D70B0 end:0x804D70D0
 
@@ -3752,7 +3817,7 @@ dolphin/mtx/vec.c:
 	.text       start:0x80342D54 end:0x80342E94
 	.sdata2     start:0x804DE340 end:0x804DE348
 
-dolphin/os/OSInit.c:
+dolphin/os/OS.c:
 	.text       start:0x80342E94 end:0x80343720
 	.data       start:0x80401618 end:0x804017D8
 	.sbss       start:0x804D7338 end:0x804D7358
@@ -3841,7 +3906,7 @@ dolphin/os/OSSync.c:
 
 dolphin/os/OSThread.c:
 	.text       start:0x8034AC04 end:0x8034C3F0
-	.data       start:0x80402420 end:0x80402C30
+	.data       start:0x80402420 end:0x80402C2D
 	.bss        start:0x804A7FB8 end:0x804A89A0
 	.sdata      start:0x804D5C28 end:0x804D5C30
 	.sbss       start:0x804D73D8 end:0x804D73E8
@@ -3853,6 +3918,9 @@ dolphin/os/OSTime.c:
 dolphin/os/OSUartExi.c:
 	.text       start:0x8034C86C end:0x8034CABC
 	.sbss       start:0x804D73E8 end:0x804D73F0
+
+dolphin/os/init/__start.c:
+	.init       start:0x800051EC end:0x8000541C
 
 dolphin/os/init/__ppc_eabi_init.c:
 	.init       start:0x8000541C end:0x80005470

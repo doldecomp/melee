@@ -1,6 +1,11 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "itpikachutjoltair.h"
+
+#include "it/inlines.h"
+#include "it/it_26B1.h"
+
 /* 2B45E8 */ static bool it_802B45E8(void);
 
 bool it_802B45E8(void)
@@ -22,7 +27,11 @@ bool it_802B45E8(void)
 
 /// #it_802B4450
 
-/// #it_802B45D0
+void it_802B45D0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+}
 
 /// #it_802B45E8
 
@@ -38,4 +47,7 @@ bool it_802B45E8(void)
 
 /// #it_802B4A60
 
-/// #it_802B4AA8
+void it_802B4AA8(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

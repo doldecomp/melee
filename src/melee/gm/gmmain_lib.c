@@ -749,7 +749,7 @@ void gmMainLib_8015ED80(u8 arg0)
     gmMainLib_804D3EE0->thing.x1CB0.x10[4] = arg0;
 }
 
-u16* gmMainLib_8015ED8C(gmMainLib_8015ED8C_arg0_t* arg0)
+u16* gmMainLib_8015ED8C(void)
 {
     return (u16*) &gmMainLib_804D3EE0->thing;
 }

@@ -1,4 +1,6 @@
-#include "gr/grkongo.h"
+#include "mp/forward.h"
+
+#include "grkongo.static.h"
 
 #include "grmaterial.h"
 #include "types.h"
@@ -6,6 +8,7 @@
 #include "gm/gm_1601.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
+#include "gr/grkongo.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/stage.h"
@@ -21,61 +24,6 @@
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
-
-/* 1D7700 */ static void fn_801D7700(void* arg2, s32 arg4);
-/* 1D7E60 */ static void fn_801D7E60(void* arg2, s32 arg4);
-/* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
-/* 1D8444 */ static bool grKongo_801D8444(void);
-
-static StageCallbacks* grKg_803E16E0;
-
-static struct {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
-    f32 unk14;
-    f32 unk18;
-    f32 unk1C;
-    f32 unk20;
-    f32 unk24;
-    f32 unk28;
-    f32 unk2C;
-    f32 unk30;
-    f32 unk34;
-    f32 unk38;
-    f32 unk3C;
-    f32 unk40;
-    s16 unk44;
-    s16 unk46;
-    s16 unk48;
-    s16 unk4A;
-    s16 unk4C;
-    s16 unk4E;
-    s16 unk50;
-    s16 unk52;
-    f32 unk54;
-    f32 unk58;
-    f32 unk5C;
-    f32 unk60;
-    s32 unk64;
-    s32 unk68;
-    f32 unk6C;
-    f32 unk70;
-    f32 unk74;
-    f32 unk78;
-    f32 unk7C;
-    f32 unk80;
-    s32 unk84;
-    f32 unk88;
-    f32 unk8C;
-    f32 unk90;
-    f32 unk94;
-    f32 unk98;
-}* grKg_804D6980;
-
-extern StageInfo stage_info;
 
 void grKongo_801D5490(HSD_GObj* arg0)
 {
@@ -1467,7 +1415,13 @@ void fn_801D542C(HSD_GObj* arg0)
 
 /// #grKongo_801D7BBC
 
-/// #fn_801D7E60
+void fn_801D7E60(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
+                 mpLib_GroundEnum arg4)
+{
+    if (arg4 == mpLib_GroundEnum_Unk2) {
+        gp->gv.kongo3.xC6 = gp->gv.kongo3.xC8 + 1;
+    }
+}
 
 /// #grKongo_801D7E78
 

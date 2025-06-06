@@ -35,10 +35,10 @@ it_802A2428:
 .global it_802A2474
 it_802A2474:
 /* 802A2474 0029F054  7C 08 02 A6 */	mflr r0
-/* 802A2478 0029F058  3C A0 80 4A */	lis r5, Item_804A0C38@ha
+/* 802A2478 0029F058  3C A0 80 4A */	lis r5, item_link_alloc_data@ha
 /* 802A247C 0029F05C  90 01 00 04 */	stw r0, 4(r1)
 /* 802A2480 0029F060  38 83 00 00 */	addi r4, r3, 0
-/* 802A2484 0029F064  38 65 0C 38 */	addi r3, r5, Item_804A0C38@l
+/* 802A2484 0029F064  38 65 0C 38 */	addi r3, r5, item_link_alloc_data@l
 /* 802A2488 0029F068  94 21 FF F8 */	stwu r1, -8(r1)
 /* 802A248C 0029F06C  48 0D 88 95 */	bl HSD_ObjFree
 /* 802A2490 0029F070  80 01 00 0C */	lwz r0, 0xc(r1)
@@ -55,7 +55,7 @@ it_802A24A0:
 /* 802A24B0 0029F090  88 05 00 2C */	lbz r0, 0x2c(r5)
 /* 802A24B4 0029F094  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 802A24B8 0029F098  41 82 00 08 */	beq .L_802A24C0
-/* 802A24BC 0029F09C  48 0E EB B5 */	bl HSD_GObj_80391070
+/* 802A24BC 0029F09C  48 0E EB B5 */	bl HSD_GObj_JObjCallback
 .L_802A24C0:
 /* 802A24C0 0029F0A0  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 802A24C4 0029F0A4  38 21 00 08 */	addi r1, r1, 8
@@ -196,12 +196,12 @@ it_802A2568:
 /* 802A26B8 0029F298  3C 60 80 2A */	lis r3, it_802A24A0@ha
 /* 802A26BC 0029F29C  3B 23 24 A0 */	addi r25, r3, it_802A24A0@l
 /* 802A26C0 0029F2A0  EC 01 00 24 */	fdivs f0, f1, f0
-/* 802A26C4 0029F2A4  3C 60 80 39 */	lis r3, HSD_GObj_80391070@ha
-/* 802A26C8 0029F2A8  3C A0 80 4A */	lis r5, Item_804A0C38@ha
+/* 802A26C4 0029F2A4  3C 60 80 39 */	lis r3, HSD_GObj_JObjCallback@ha
+/* 802A26C8 0029F2A8  3C A0 80 4A */	lis r5, item_link_alloc_data@ha
 /* 802A26CC 0029F2AC  3C 80 80 2A */	lis r4, it_802A2474@ha
-/* 802A26D0 0029F2B0  3A C3 10 70 */	addi r22, r3, HSD_GObj_80391070@l
+/* 802A26D0 0029F2B0  3A C3 10 70 */	addi r22, r3, HSD_GObj_JObjCallback@l
 /* 802A26D4 0029F2B4  FC 00 00 1E */	fctiwz f0, f0
-/* 802A26D8 0029F2B8  3B 05 0C 38 */	addi r24, r5, Item_804A0C38@l
+/* 802A26D8 0029F2B8  3B 05 0C 38 */	addi r24, r5, item_link_alloc_data@l
 /* 802A26DC 0029F2BC  3A E4 24 74 */	addi r23, r4, it_802A2474@l
 /* 802A26E0 0029F2C0  3A 40 00 00 */	li r18, 0
 /* 802A26E4 0029F2C4  D8 01 00 38 */	stfd f0, 0x38(r1)

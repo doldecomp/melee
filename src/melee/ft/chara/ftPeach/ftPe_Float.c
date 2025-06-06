@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftPe_Float.h"
 
@@ -19,6 +18,7 @@
 #include "ftPeach/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 bool ftPe_Float_CheckContinueInput(Fighter* fp)
 {

@@ -4,6 +4,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "gr/forward.h"
 #include <baselib/forward.h>
 
 /* 1D1018 */ UNK_RET grStadium_801D1018(UNK_PARAMS);
@@ -17,7 +18,7 @@
 /* 1D1388 */ UNK_RET grStadium_801D1388(UNK_PARAMS);
 /* 1D1390 */ UNK_RET grStadium_801D1390(UNK_PARAMS);
 /* 1D13C4 */ UNK_RET grStadium_801D13C4(UNK_PARAMS);
-/* 1D13C8 */ UNK_RET fn_801D13C8(UNK_PARAMS);
+/* 1D13C8 */ void fn_801D13C8(Ground_GObj*);
 /* 1D13E0 */ UNK_RET grStadium_801D13E0(UNK_PARAMS);
 /* 1D1518 */ UNK_RET grStadium_801D1518(UNK_PARAMS);
 /* 1D1520 */ UNK_RET grStadium_801D1520(UNK_PARAMS);

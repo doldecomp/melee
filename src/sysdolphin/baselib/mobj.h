@@ -9,7 +9,7 @@
 #include "baselib/texp.h"
 #include "baselib/tobj.h"
 
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
 #define MOBJ_ANIM 0x4
 #define TOBJ_ANIM 0x10

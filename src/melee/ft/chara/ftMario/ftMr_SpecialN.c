@@ -17,7 +17,7 @@
 #include "it/items/itmariofireball.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/random.h>
 
 static int pickMegavitamin(Fighter* fp, int* arr, int outpos)

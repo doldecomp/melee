@@ -3,6 +3,8 @@
 
 #include "it/forward.h"
 
+#include "it/it_26B1.h"
+
 /// #it_802988E4
 
 /// #it_802989C8
@@ -37,4 +39,7 @@ bool it_80298BFC(Item_GObj* arg0)
 
 /// #it_80298CE8
 
-/// #it_80298DCC
+void it_80298DCC(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

@@ -6,13 +6,15 @@ Super Smash Bros Melee \
 [![Discord Badge]][discord]
 =============
 
+[<img src="https://decomp.dev/doldecomp/melee.svg?w=512&h=256" width="512" height="256">][Progress]
+
 [Build Status]: https://github.com/doldecomp/melee/actions/workflows/build.yml/badge.svg
 [actions]: https://github.com/doldecomp/melee/actions/workflows/build.yml
 [Code Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=code&label=Code&category=all
 [Data Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_data&label=Data&category=all
 [Linked Progress]: https://decomp.dev/doldecomp/melee.svg?mode=shield&measure=complete_code&label=Linked%20Code&category=all
 [Discord Badge]: https://img.shields.io/discord/933849697485983765?color=%237289DA&logo=discord&logoColor=%23FFFFFF
-[discord]: https://discord.gg/CWKqYMePX8
+[discord]: https://discord.gg/hKx3FJJgrV
 [progress]: https://decomp.dev/doldecomp/melee
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
@@ -105,10 +107,6 @@ Coming soon.
 
 # Containers
 Coming soon.
-
-# Building with Make (legacy)
-
-See [Building with Make](LEGACY_BUILD.md).
 
 # Diffing
 

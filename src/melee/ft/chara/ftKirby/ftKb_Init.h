@@ -6,10 +6,11 @@
 
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 0EE528 */ void ftKb_Init_800EE528(void);
 /* 0EE5C0 */ void ftKb_Init_OnDeath(ftKb_GObj* gobj);
@@ -34,7 +35,7 @@
 /* 0EEEC4 */ void ftKb_SpecialN_800EEEC4(ftKb_GObj* gobj,
                                          FighterKind victim_kind);
 /* 0EEF04 */ void ftKb_UnkMtxFunc0(ftKb_GObj* gobj, int, Mtx);
-/* 0EF028 */ UNK_T ftKb_Init_UnkMotionStates6(ftKb_GObj* gobj);
+/* 0EF028 */ HSD_JObj* ftKb_Init_UnkMotionStates6(ftKb_GObj* gobj);
 /* 0EF040 */ UNK_RET ftKb_SpecialN_800EF040(UNK_PARAMS);
 /* 0EF0E4 */ UNK_RET ftKb_SpecialN_800EF0E4(UNK_PARAMS);
 /* 0EF35C */ UNK_RET ftKb_SpecialN_800EF35C(UNK_PARAMS);
@@ -750,11 +751,11 @@
 /* 1092AC */ float ftKb_SpecialNYs_801092AC(ftKb_GObj* gobj);
 /* 1092BC */ float ftKb_SpecialNYs_801092BC(ftKb_GObj* gobj);
 /* 1092CC */ float ftKb_SpecialNYs_801092CC(ftKb_GObj* gobj);
-/* 1092DC */ void ftKb_SpecialNYs_801092DC(ftKb_GObj* gobj);
-/* 1092F4 */ void ftKb_SpecialNYs_801092F4(ftKb_GObj* gobj);
-/* 10930C */ void ftKb_SpecialNYs_8010930C(ftKb_GObj* gobj);
-/* 109324 */ void ftKb_SpecialNYs_80109324(ftKb_GObj* gobj);
-/* 10933C */ void ftKb_SpecialNYs_8010933C(ftKb_GObj* gobj);
+/* 1092DC */ f32 ftKb_SpecialNYs_801092DC(ftKb_GObj* gobj);
+/* 1092F4 */ float ftKb_SpecialNYs_801092F4(ftKb_GObj* gobj);
+/* 10930C */ float ftKb_SpecialNYs_8010930C(ftKb_GObj* gobj);
+/* 109324 */ float ftKb_SpecialNYs_80109324(ftKb_GObj* gobj);
+/* 10933C */ int ftKb_SpecialNYs_8010933C(ftKb_GObj* gobj);
 /* 109354 */ void ftKb_SpecialNYs_80109354(ftKb_GObj* gobj);
 /* 109380 */ void ftKb_SpecialNYs_80109380(ftKb_GObj* gobj);
 /* 1093A0 */ ftDynamics* ftKb_SpecialNYs_801093A0(ftKb_GObj* gobj);

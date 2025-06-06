@@ -2,9 +2,10 @@
 #define GALE01_2896CC
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
 /* 289784 */ void it_80289784(Item_GObj*);

@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_FallSpecial.h"
 
 #include "ftCo_DamageFall.h"
@@ -21,6 +19,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <dolphin/mtx.h>
 
 void ftCo_800968C8(ftCo_GObj* gobj)
 {
@@ -37,9 +36,10 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
     ftCo_800969D8(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0);
 #elif SOLUTION == 1
 
-    u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
-    ftCo_DatAttrs* ca = &fp->co_attrs;
+    ftCo_DatAttrs* ca;
+    ftCo_Fighter* fp;
+    fp = GET_FIGHTER(gobj);
+    ca = &fp->co_attrs;
     if (fp->x2224_b2) {
         ftCo_80090780(gobj);
         return;
@@ -67,8 +67,10 @@ void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
                    float arg4, float arg5, float arg6)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
-    ftCo_DatAttrs* ca = &fp->co_attrs;
+    ftCo_DatAttrs* ca;
+    ftCo_Fighter* fp;
+    fp = GET_FIGHTER(gobj);
+    ca = &fp->co_attrs;
     if (fp->x2224_b2) {
         ftCo_80090780(gobj);
         return;
@@ -105,8 +107,14 @@ void ftCo_FallSpecial_IASA(ftCo_GObj* gobj)
 
 void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
-    ftCo_DatAttrs* ca = &fp->co_attrs;
+    float f1;
+    float lstick_x;
+    float base;
+
+    ftCo_DatAttrs* ca;
+    ftCo_Fighter* fp;
+    fp = GET_FIGHTER(gobj);
+    ca = &fp->co_attrs;
     ftCommon_8007D528(fp);
     if (fp->mv.co.fallspecial.xC != 0) {
         if (fp->x221A_b4) {
@@ -115,11 +123,13 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
             ftCommon_8007D494(fp, ca->grav, ca->terminal_vel);
         }
         {
-            float lstick_x = fp->input.lstick.x;
-            float base =
+            f1 = ca->air_drift_stick_mul;
+            lstick_x = fp->input.lstick.x;
+            f1 = lstick_x * f1;
+            base =
                 lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
-            ftCommon_8007D140(fp, lstick_x * ca->air_drift_stick_mul + base,
-                              lstick_x * ca->air_drift_max,
+
+            ftCommon_8007D140(fp, f1 + base, lstick_x * ca->air_drift_max,
                               ca->aerial_friction);
         }
     } else {
@@ -129,21 +139,19 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
             ftCommon_8007D494(fp, ca->grav, ca->fast_fall_velocity);
         }
         {
-            float lstick_x = fp->input.lstick.x;
-            float base =
+            f1 = ca->air_drift_stick_mul;
+            lstick_x = fp->input.lstick.x;
+            f1 = lstick_x * f1;
+            base =
                 lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
             {
                 float drift_max = lstick_x * ca->air_drift_max;
-                float mv_x8 = fp->mv.co.fallspecial.x8;
+#define mv_x8 fp->mv.co.fallspecial.x8
+                float tmp4 = f1 + base;
                 if (ABS(drift_max) > mv_x8) {
-                    if (drift_max < 0) {
-                        mv_x8 = -mv_x8;
-                    }
-                    drift_max = mv_x8;
+                    drift_max = drift_max < 0 ? -mv_x8 : mv_x8;
                 }
-                ftCommon_8007D140(fp,
-                                  lstick_x * ca->air_drift_stick_mul + base,
-                                  drift_max, ca->aerial_friction);
+                ftCommon_8007D140(fp, tmp4, drift_max, ca->aerial_friction);
             }
         }
     }

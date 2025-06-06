@@ -22,7 +22,7 @@
 #include "it/it_26B1.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
 void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)

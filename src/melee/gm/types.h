@@ -225,7 +225,10 @@ struct Placeholder_8016AE38_flags_2 {
 };
 
 struct lbl_8046B6A0_t {
-    /* 0x0000 */ u32 unk_0;
+    /* 0x0000 */ u8 unk_0;
+    /* 0x0001 */ u8 unk_1;
+    /* 0x0002 */ u8 unk_2;
+    /* 0x0003 */ u8 unk_3;
     /* 0x0004 */ u32 unk_4;
     /* 0x0008 */ u32 unk_8;
     /* 0x000C */ u8 unk_C;
@@ -300,6 +303,11 @@ STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
 struct gmMainLib_8046B0F0_t {
     bool x0;
     int x4, x8, xC, x10, x14;
+};
+
+struct gm_8016A92C_arg0_t {
+    char pad_0[0x58];
+    struct lbl_8046B668_t* x58;
 };
 
 #endif

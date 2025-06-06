@@ -5,9 +5,10 @@
 #include <placeholder.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2DC69C */ void it_802DC69C(Item_GObj*);
 /* 2DC774 */ bool it_802DC774(Item_GObj*);

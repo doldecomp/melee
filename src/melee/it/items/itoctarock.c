@@ -1,5 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "itoctarock.h"
+
+#include "it/inlines.h"
+#include "it/it_26B1.h"
 
 /// #it_802E4A44
 
@@ -85,8 +87,17 @@ bool it_802E5900(void)
 
 /// #it_802E5924
 
-/// #it_802E5944
+void it_802E5944(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.octarock.x20.x = 0.0f;
+    ip->xDD4_itemVar.octarock.x20.y = 0.0f;
+    ip->xDD4_itemVar.octarock.x20.z = 0.0f;
+}
 
 /// #it_802E595C
 
-/// #it_802E5AA4
+void it_802E5AA4(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

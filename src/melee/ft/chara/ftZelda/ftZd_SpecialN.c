@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftZd_SpecialN.h"
 
 #include "ef/eflib.h"
@@ -15,6 +13,8 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftZelda/types.h"
+
+#include <dolphin/mtx.h>
 
 void ftZd_SpecialN_8013A830(HSD_GObj* gobj)
 {

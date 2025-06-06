@@ -6,8 +6,6 @@
 
 #include "ft/forward.h" // IWYU pragma: export
 #include "it/forward.h"
-#include <dolphin/gx/forward.h>
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "cm/types.h"
@@ -39,7 +37,8 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 #define FTPART_INVALID 0xFF
 
@@ -75,11 +74,11 @@ struct ftCommonData {
     /* +50 */ float x50;
     /* +54 */ UNK_T x54;
     /* +58 */ UNK_T x58;
-    /* +5C */ UNK_T x5C;
-    /* +60 */ UNK_T x60;
+    /* +5C */ float x5C;
+    /* +60 */ float x60_someFrictionMul;
     /* +64 */ UNK_T x64;
     /* +68 */ float x68;
-    /* +6C */ UNK_T x6C;
+    /* +6C */ float x6C;
     /* +70 */ float x70_someLStickYMax;
     /* +6C */ int x74;
     /* +78 */ float x78;
@@ -222,7 +221,7 @@ struct ftCommonData {
     /* +2AC */ float x2AC;
     /* +2B0 */ float x2B0;
     /* +2B4 */ float x2B4;
-    /* +2B8 */ UNK_T x2B8;
+    /* +2B8 */ int x2B8;
     /* +2BC */ float x2BC;
     /* +2C0 */ UNK_T x2C0;
     /* +2C4 */ UNK_T x2C4;
@@ -357,19 +356,19 @@ struct ftCommonData {
     /* +4D8 */ u32 x4D8;
     /* +4DC */ Vec2 x4DC;
     /* +4E4 */ Vec3 x4E4;
-    /* +4F0 */ UNK_T x4F0;
+    /* +4F0 */ float x4F0;
     /* +4F4 */ UNK_T x4F4;
-    /* +4F8 */ UNK_T x4F8;
-    /* +4FC */ UNK_T x4FC;
+    /* +4F8 */ u32 x4F8;
+    /* +4FC */ u32 x4FC;
     /* +500 */ UNK_T x500;
-    /* +504 */ UNK_T x504;
+    /* +504 */ int x504;
     /* +508 */ UNK_T x508;
     /* +50C */ UNK_T x50C;
     /* +510 */ UNK_T x510;
     /* +514 */ UNK_T x514;
     /* +518 */ UNK_T x518;
     /* +51C */ UNK_T x51C;
-    /* +520 */ UNK_T x520;
+    /* +520 */ int x520;
     /* +524 */ UNK_T x524;
     /* +528 */ UNK_T x528;
     /* +52C */ UNK_T x52C;
@@ -404,14 +403,14 @@ struct ftCommonData {
     /* +5A0 */ u8 x5A0[0x5C0 - 0x5A0];
     /* +5C0 */ float x5C0;
     /* +5C4 */ UNK_T x5C4;
-    /* +5C8 */ UNK_T x5C8;
-    /* +5CC */ UNK_T x5CC;
+    /* +5C8 */ int x5C8;
+    /* +5CC */ float x5CC;
     /* +5D0 */ UNK_T x5D0;
     /* +5D4 */ UNK_T x5D4;
     /* +5D8 */ UNK_T x5D8;
-    /* +5DC */ uint bury_timer_unk1;
-    /* +5E0 */ uint bury_timer_unk2;
-    /* +5E4 */ uint bury_timer_unk3;
+    /* +5DC */ u32 bury_timer_unk1;
+    /* +5E0 */ u32 bury_timer_unk2;
+    /* +5E4 */ u32 bury_timer_unk3;
     /* +5E8 */ UNK_T x5E8;
     /* +5EC */ UNK_T x5EC;
     /* +5F0 */ u32 x5F0;
@@ -448,13 +447,13 @@ struct ftCommonData {
     /* +66C */ float x66C;
     /* +670 */ float x670;
     /* +674 */ float x674;
-    /* +678 */ UNK_T x678;
-    /* +67C */ UNK_T x67C;
-    /* +680 */ UNK_T x680;
-    /* +684 */ UNK_T x684;
-    /* +688 */ UNK_T x688;
-    /* +68C */ UNK_T x68C;
-    /* +690 */ UNK_T x690;
+    /* +678 */ float x678;
+    /* +67C */ float x67C;
+    /* +680 */ float x680;
+    /* +684 */ float x684;
+    /* +688 */ int x688;
+    /* +68C */ int x68C;
+    /* +690 */ int x690;
     /* +694 */ float x694;
     /* +698 */ float x698;
     /* +69C */ float x69C;
@@ -522,10 +521,12 @@ struct ftCommonData {
     /* +7DC */ int x7DC;
     /* +7E0 */ int x7E0;
     /* +7E4 */ float x7E4_scaleZ;
-    /* +7E8 */ uint unk_kb_angle_min;
-    /* +7EC */ uint unk_kb_angle_max;
+    /* +7E8 */ u32 unk_kb_angle_min;
+    /* +7EC */ u32 unk_kb_angle_max;
     /* +7F0 */ int x7F0;
-    /* +7F4 */ u8 x7F4[0x814 - 0x7F4];
+    /* +7F4 */ u8 x7F4[0x800 - 0x7F4];
+    /* +800 */ float x800;
+    /* +804 */ u8 x804[0x814 - 0x804];
     /* +814 */ int x814;
     // lots of more data following, exact size to be determined
 };
@@ -583,7 +584,8 @@ struct ftData {
         /*  +8C */ float x8C;
         /*  +90 */ u8 x90[0xFC - 0x90];
         /*  +FC */ float xFC;
-        /* +100 */ u8 x100[0x16C - 0x100];
+        /* +100 */ u8 x100[0x168 - 0x100];
+        /* +168 */ float x168;
         /* +16C */ int x16C_idx;
     }* x0;
     /*  +4 */ void* ext_attr;
@@ -713,7 +715,7 @@ typedef struct ftCo_DatAttrs {
     /* +11C fp+23C */ float x11C;
     /* +120 fp+240 */ Vec3 x120;
     /* +124 fp+24C */ float x124;
-    /* +128 fp+250 */ int x128;
+    /* +128 fp+250 */ float x128;
     /* +12C fp+254 */ int x12C;
     /* +130 fp+258 */ float x130;
     /* +134 fp+25C */ float bubble_ratio;
@@ -1041,13 +1043,13 @@ struct Fighter_x1A88_t {
     /* +448 */ struct Fighter_x1A88_xFC_t* x448;
     /* +44C */ UNK_T x44C;
     /* +450 */ UNK_T x450;
-    /* +454 */ uint x454;
+    /* +454 */ u32 x454;
     /* +458 */ u8 x458[0x554 - 0x458];
     /* +554 */ union Fighter_x1A88_x544_t {
         struct {
             u8 x0_u8;
         };
-        uint x0_u32;
+        u32 x0_u32;
         void* x0_p;
     } x554;
     /* +558 */ float x558;
@@ -1059,6 +1061,11 @@ struct Fighter_x1A88_t {
     /* +578 */ float half_height;
 };
 STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x57C);
+
+struct Fighter_x59C_t {
+    char pad_0[0x8000];
+};
+STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
 
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
@@ -1106,7 +1113,7 @@ struct Fighter {
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
     /*  fp+2D0 */ void* x2D0;
     /*  fp+2D4 */ void* dat_attrs;
-    /*  fp+2D8 */ void* x2D8_specialAttributes2;
+    /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;
     /*  fp+2E0 */ float x2E0;
     /*  fp+2E4 */ float x2E4;
@@ -1124,7 +1131,7 @@ struct Fighter {
     /*  fp+508 */ ftDeviceUnk2 x508;
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
-    /*  fp+590 */ uint x590;
+    /*  fp+590 */ u32 x590;
     /*  fp+594 */ union {
         struct {
             /* fp+594:0 */ u8 x594_b0 : 1;
@@ -1143,8 +1150,8 @@ struct Fighter {
         /* fp+594 */ s32 x594_s32;
     };
     /*  fp+598 */ s32 x598;
-    /*  fp+59C */ UNK_T x59C;
-    /*  fp+5A0 */ UNK_T x5A0;
+    /*  fp+59C */ struct Fighter_x59C_t* x59C;
+    /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
     /*  fp+5A4 */ UNK_T x5A4;
     /*  fp+5A8 */ UNK_T x5A8;
     /*  fp+5AC */ u8 _5AC[0x5B8 - 0x5AC];
@@ -1155,10 +1162,19 @@ struct Fighter {
     /*  fp+5CC */ u8 filler_x5CC[0x5E8 - 0x5CC];
     /*  fp+5E8 */ FighterBone* parts;
     /*  fp+5EC */ DObjList dobj_list;
-    /*  fp+5F4 */ s8 x5F4;
-    /*  fp+5F5 */ s8 x5F5;
-    /*  fp+5F6 */ s8 x5F6;
-    /*  fp+5F7 */ s8 x5F7;
+    union {
+        struct {
+            s8 x0, x1;
+        }
+        /// @todo This is nonsense. Used by #ftParts_80074A74.
+        x5F4_arr[2];
+        struct {
+            /*  fp+5F4 */ s8 x5F4;
+            /*  fp+5F5 */ s8 x5F5;
+            /*  fp+5F6 */ s8 x5F6;
+            /*  fp+5F7 */ s8 x5F7;
+        };
+    };
     /*  fp+5F8 */ s8 x5F8;
     /*  fp+5FC */ u8 filler_x5FC[0x60C - 0x5F9];
     /*  fp+60C */ void* x60C;
@@ -1268,7 +1284,7 @@ struct Fighter {
         /* fp+184C */ int x184c_damaged_hurtbox;
         /* fp+1850 */ float kb_applied;
         /* fp+1854 */ Vec3 x1854_collpos;
-        /* fp+1860 */ uint x1860_element;
+        /* fp+1860 */ u32 x1860_element;
         /* fp+1864 */ int x1864;
         /* fp+1868 */ HSD_GObj* x1868_source;
         /* fp+186C */ int x186c;
@@ -1429,7 +1445,7 @@ struct Fighter {
     /* fp+209A */ u16 x209A;
     /* fp+209C */ s16 x209C;
     /* fp+20A0 */ HSD_JObj* x20A0_accessory;
-    /* fp+20A4 */ s32 x20A4;
+    /* fp+20A4 */ UnkFlagStruct x20A4;
     /* fp+20A8 */ s32 x20A8;
     /* fp+20AC */ HSD_GObj* unk_gobj;
     /* fp+20B0 */ UNK_T x20B0;
@@ -1739,8 +1755,8 @@ struct Fighter {
         /* fp+222C */ struct ftZelda_FighterVars zd;
     } fv;
     /* fp+2324 */ InternalStageId bury_stage_kind;
-    /* fp+2328 */ uint bury_timer_1;
-    /* fp+232C */ uint bury_timer_2;
+    /* fp+2328 */ u32 bury_timer_1;
+    /* fp+232C */ u32 bury_timer_2;
     /* fp+2330 */ IntVec2 x2330;
     /* fp+2338 */ IntVec2 x2338;
     /// @at{2340} @sz{AC}
@@ -1813,6 +1829,15 @@ struct FtCmdState {
                     u8 x1_b6 : 1;
                     u8 x1_b7 : 1;
                 };
+                struct {
+                    u8 x0_b0_8 : 6;
+                    u16 x0_b0_2 : 8;
+                    u32 x0_b0_3 : 18;
+                };
+                struct {
+                    u32 x0_6_26_1 : 6;
+                    u32 x0_6_26_2 : 26;
+                };
             };
             union {
                 s16 x2;
@@ -1843,7 +1868,7 @@ struct FtCmdState {
 
 typedef struct ftData_UnkModelStruct {
     Fighter_ModelEvent model_events[FTKIND_MAX];
-    UNK_T (*getter[FTKIND_MAX])(HSD_GObj*);
+    HSD_JObj* (*getter[FTKIND_MAX])(HSD_GObj*);
 } ftData_UnkModelStruct;
 
 struct ftData_80085FD4_ret {

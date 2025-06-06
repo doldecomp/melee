@@ -7,7 +7,7 @@
 #include "lb/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct DynamicsData {
     /* +0 */ HSD_JObj* jobj;
@@ -17,7 +17,7 @@ struct DynamicsData {
 
 struct DynamicsDesc {
     /* +0 */ struct DynamicsData* data;
-    /* +4 */ int count;
+    /* +4 */ unsigned int count;
     /* +8 */ Vec3 pos;
 };
 
@@ -39,12 +39,12 @@ struct HitResult {
 
 struct HitVictim {
     UNK_T victim;
-    uint x4;
+    u32 x4;
 };
 
 struct HitCapsule {
     /*  +0 */ HitCapsuleState state;
-    /*  +4 */ uint x4;
+    /*  +4 */ u32 x4;
     /*  +8 */ u32 unk_count;
     /*  +C */ float damage;
     /* +10 */ Vec3 b_offset;
@@ -53,7 +53,7 @@ struct HitCapsule {
     /* +24 */ u32 x24;
     /* +28 */ u32 x28;
     /* +2C */ u32 x2C;
-    /* +30 */ uint element;
+    /* +30 */ u32 element;
     /* +34 */ int x34;
     /* +38 */ int sfx_severity;
     /* +3C */ enum_t sfx_kind;
@@ -311,6 +311,12 @@ struct lb_800138D8_t {
     /* +12 */ s8 x12;
     /* +13 */ char pad_13[0x18 - 0x13];
     /* +18 */ int x18;
+};
+
+/// @todo Maybe #Vec3
+struct lbMthp_8001E8F8_t {
+    char pad_0[0x8];
+    float x8;
 };
 
 #endif

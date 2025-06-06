@@ -1,28 +1,21 @@
 #include "debug.h"
 
 #include <dolphin/os.h>
-
-struct UnkStruct80400430 {
-    char filler0[0x52];
-    char unk52;
-    char unk53[0x84 - 0x53];
-    int (*unk84)(s32, s32, s32*, s32);
-};
-
-extern struct UnkStruct80400430 __files;
+#include <MSL/stdio.h>
 
 struct DebugContext {
     OSContext context;
     u8 unk[0x10];
 } HSD_Debug_804C2608;
 
-LogFunc logFunc;
+__io_proc logFunc;
 PanicCallback panicCallback;
 ReportCallback reportCallback;
 
 #pragma peephole off
 
-int report_func(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
+int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,
+                __idle_proc arg3)
 {
     if (reportCallback != NULL) {
         reportCallback(arg1, *arg2);
@@ -34,10 +27,10 @@ int report_func(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
 void HSD_LogInit(void)
 {
     if (logFunc == NULL) {
-        logFunc = __files.unk84;
+        logFunc = stdout->write_proc;
     }
-    __files.unk84 = report_func;
-    __files.unk52 = 0;
+    stdout->write_proc = report_func;
+    stdout->state.error = 0;
 }
 
 void __assert(char* str, u32 arg1, char* arg2)

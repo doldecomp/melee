@@ -4,6 +4,7 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 
 /// #it_802D42C4
 
@@ -73,7 +74,10 @@ bool it_802D4F50(Item_GObj* arg0)
     return true;
 }
 
-/// #it_802D4F58
+void it_802D4F58(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802D4F78
 

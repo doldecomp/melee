@@ -4,8 +4,9 @@
 #include <platform.h>
 
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 void grTCLink_8021FF44(bool);
 void grTCLink_8021FF48(void);

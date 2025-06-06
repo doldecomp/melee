@@ -22,7 +22,7 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/aobj.h>
 #include <baselib/jobj.h>
 #include <baselib/object.h>

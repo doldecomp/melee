@@ -7,7 +7,6 @@
 #include "cm/forward.h"
 #include "it/forward.h" // IWYU pragma: export
 #include "it/items/forward.h"
-#include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
@@ -18,8 +17,8 @@
 #include "lb/types.h"
 
 #include <common_structs.h>
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 struct CameraBoxFlags {
     struct {
@@ -73,6 +72,7 @@ struct DynamicBoneTable {
     /// @at{0} @sz{190}
     HSD_JObj* bones[100];
 };
+STATIC_ASSERT(sizeof(struct DynamicBoneTable) == 0x190);
 
 struct Item_DynamicBones {
     int flags;
@@ -476,7 +476,7 @@ struct Item {
                             // lifetime halved
     int xD4C;
     u32 xD50_landNum;  // Number of times this item has landed
-    s32 xD54_throwNum; // Number of times this item has been thrown
+    u32 xD54_throwNum; // Number of times this item has been thrown
     u32 xD58;
     s32 xD5C;
 
@@ -541,15 +541,6 @@ struct Item {
     UnkFlagStruct xDD2_flag;
     UnkFlagStruct xDD3_flag;
     union {
-        it_266F_ItemVars it_266F;
-        it_279D_ItemVars it_279D;
-        it_27B5_ItemVars it_27B5;
-        it_27CE_ItemVars it_27CE;
-        it_27CF_ItemVars it_27CF;
-        it_2E5A_ItemVars it_2E5A;
-        it_2E6A_ItemVars_1 it_2E6A_1;
-        it_2E6A_ItemVars_2 it_2E6A_2;
-        it_2F28_ItemVars it_2F28;
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
@@ -566,6 +557,15 @@ struct Item {
         itHassam_ItemVars hassam;
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;
+        it_266F_ItemVars it_266F;
+        it_279D_ItemVars it_279D;
+        it_27B5_ItemVars it_27B5;
+        it_27CE_ItemVars it_27CE;
+        it_27CF_ItemVars it_27CF;
+        it_2E5A_ItemVars it_2E5A;
+        it_2E6A_ItemVars_1 it_2E6A_1;
+        it_2E6A_ItemVars_2 it_2E6A_2;
+        it_2F28_ItemVars it_2F28;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
         itKlap_ItemVars klap;
@@ -578,6 +578,7 @@ struct Item {
         itLinkHookshot_ItemVars linkhookshot;
         itMato_ItemVars mato;
         itNokoNoko_ItemVars nokonoko;
+        itOctarock_ItemVars octarock;
         itPikachutJoltGround_ItemVars pikachujoltground;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
@@ -589,9 +590,12 @@ struct Item {
         itTincle_ItemVars tincle;
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
+        itWhiteBea_ItemVars whitebea;
+        itMasterHandLaser_ItemVars masterhandlaser;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
+STATIC_ASSERT(sizeof(struct Item) == 0xFCC);
 
 struct sdata_ItemGXLink {
     GObj_RenderFunc x0_renderFunc;
@@ -636,12 +640,12 @@ struct ItemModStruct {
 };
 
 struct ItemCommonData {
-    u32 x0;
+    s32 x0;
     u32 x4;
     u32 x8;
     u32 xC;
     u32 x10;
-    u32 x14;
+    s32 x14;
     u32 x18;
     u32 x1C;
     u32 x20;
@@ -654,7 +658,7 @@ struct ItemCommonData {
     s32 x3C_float;
     s32 x40_float;
     s32 x44_float;
-    u32 x48_float;
+    u8 x48_byte;
     f32 x4C_float;
     s32 x50_float;
     f32 x54_float;
@@ -678,7 +682,7 @@ struct ItemCommonData {
     f32 xCC;
     f32 xD0;
     f32 xD4;
-    uint xD8;
+    u32 xD8;
     s32 xDC;
     f32 unk_degrees; ///< @at{E0}
     u8 filler_1a[0xE8 - 0xE4];

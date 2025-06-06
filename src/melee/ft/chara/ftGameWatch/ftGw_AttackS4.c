@@ -14,7 +14,7 @@
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 // 0x8014A848
 // https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up

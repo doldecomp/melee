@@ -2,9 +2,10 @@
 #define GALE01_27D670
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 27D670 */ void it_8027D670(Vec3* const);
 /* 27D730 */ void it_8027D730(Item_GObj*);

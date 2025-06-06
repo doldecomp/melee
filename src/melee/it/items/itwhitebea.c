@@ -1,5 +1,9 @@
 #include "itwhitebea.h"
 
+#include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/types.h"
+
 /// #it_802E31F8
 
 /// #it_802E324C
@@ -41,7 +45,12 @@ bool it_802E3588(void)
 
 /// #it_802E3784
 
-/// #it_802E37A4
+void it_802E37A4(Item_GObj* gobj)
+{
+    if (gobj != NULL) {
+        GET_ITEM(gobj)->xDD4_itemVar.whitebea.x20 = NULL;
+    }
+}
 
 /// #it_802E37BC
 
@@ -154,4 +163,7 @@ bool it_802E49E0(void)
 
 /// #it_802E4A04
 
-/// #it_802E4A24
+void it_802E4A24(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

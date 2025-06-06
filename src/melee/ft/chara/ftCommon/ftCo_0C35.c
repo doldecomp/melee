@@ -1,8 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_0C35.h"
 
 #include "ftCo_Damage.h"
@@ -14,6 +12,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <MSL/trigf.h>
 

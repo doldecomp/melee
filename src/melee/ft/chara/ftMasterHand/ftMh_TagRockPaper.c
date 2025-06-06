@@ -1,7 +1,6 @@
 #include <platform.h>
 
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftMh_TagRockPaper.h"
 
@@ -17,6 +16,8 @@
 #include "ft/types.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
+
+#include <dolphin/mtx.h>
 
 void ftMh_TagRockPaper_Anim(HSD_GObj* gobj)
 {

@@ -9,7 +9,7 @@
 #include "baselib/object.h"
 
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 #define PROJ_PERSPECTIVE 1
 #define PROJ_FRUSTUM 2

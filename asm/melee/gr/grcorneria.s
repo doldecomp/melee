@@ -1,10 +1,11 @@
 .include "macros.inc"
 .file "grcorneria.c"
 
-# 0x801DCCFC - 0x801E302C
+# 0x801DCCFC..0x801E302C | size: 0x6330
 .text
 .balign 4
 
+# .text:0x0 | 0x801DCCFC | size: 0x120
 .fn grCorneria_801DCCFC, global
 /* 801DCCFC 001D98DC  7C 08 02 A6 */	mflr r0
 /* 801DCD00 001D98E0  3C 60 80 3E */	lis r3, grCn_803E1D38@ha
@@ -91,6 +92,7 @@
 /* 801DCE18 001D99F8  4E 80 00 20 */	blr
 .endfn grCorneria_801DCCFC
 
+# .text:0x120 | 0x801DCE1C | size: 0x4A4
 .fn grCorneria_801DCE1C, global
 /* 801DCE1C 001D99FC  7C 08 02 A6 */	mflr r0
 /* 801DCE20 001D9A00  3C 60 80 3E */	lis r3, grCn_803E1D38@ha
@@ -434,6 +436,7 @@
 /* 801DD2BC 001D9E9C  4E 80 00 20 */	blr
 .endfn grCorneria_801DCE1C
 
+# .text:0x5C4 | 0x801DD2C0 | size: 0x90
 .fn grCorneria_801DD2C0, global
 /* 801DD2C0 001D9EA0  7C 08 02 A6 */	mflr r0
 /* 801DD2C4 001D9EA4  38 60 00 03 */	li r3, 0x3
@@ -476,6 +479,7 @@
 /* 801DD34C 001D9F2C  4E 80 00 20 */	blr
 .endfn grCorneria_801DD2C0
 
+# .text:0x654 | 0x801DD350 | size: 0x128
 .fn grCorneria_801DD350, global
 /* 801DD350 001D9F30  7C 08 02 A6 */	mflr r0
 /* 801DD354 001D9F34  90 01 00 04 */	stw r0, 0x4(r1)
@@ -553,6 +557,7 @@
 /* 801DD474 001DA054  4E 80 00 20 */	blr
 .endfn grCorneria_801DD350
 
+# .text:0x77C | 0x801DD478 | size: 0x90
 .fn grCorneria_801DD478, global
 /* 801DD478 001DA058  7C 08 02 A6 */	mflr r0
 /* 801DD47C 001DA05C  38 60 00 0B */	li r3, 0xb
@@ -596,6 +601,7 @@
 /* 801DD504 001DA0E4  4E 80 00 20 */	blr
 .endfn grCorneria_801DD478
 
+# .text:0x80C | 0x801DD508 | size: 0x24
 .fn grCorneria_801DD508, global
 /* 801DD508 001DA0E8  7C 08 02 A6 */	mflr r0
 /* 801DD50C 001DA0EC  38 60 00 00 */	li r3, 0x0
@@ -608,11 +614,13 @@
 /* 801DD528 001DA108  4E 80 00 20 */	blr
 .endfn grCorneria_801DD508
 
+# .text:0x830 | 0x801DD52C | size: 0x8
 .fn grCorneria_801DD52C, global
 /* 801DD52C 001DA10C  38 60 00 00 */	li r3, 0x0
 /* 801DD530 001DA110  4E 80 00 20 */	blr
 .endfn grCorneria_801DD52C
 
+# .text:0x838 | 0x801DD534 | size: 0xEC
 .fn grCorneria_801DD534, global
 /* 801DD534 001DA114  7C 08 02 A6 */	mflr r0
 /* 801DD538 001DA118  90 01 00 04 */	stw r0, 0x4(r1)
@@ -679,6 +687,7 @@
 /* 801DD61C 001DA1FC  4E 80 00 20 */	blr
 .endfn grCorneria_801DD534
 
+# .text:0x924 | 0x801DD620 | size: 0x2C
 .fn grCorneria_801DD620, global
 /* 801DD620 001DA200  7C 08 02 A6 */	mflr r0
 /* 801DD624 001DA204  38 A0 00 00 */	li r5, 0x0
@@ -693,19 +702,23 @@
 /* 801DD648 001DA228  4E 80 00 20 */	blr
 .endfn grCorneria_801DD620
 
+# .text:0x950 | 0x801DD64C | size: 0x8
 .fn grCorneria_801DD64C, global
 /* 801DD64C 001DA22C  38 60 00 00 */	li r3, 0x0
 /* 801DD650 001DA230  4E 80 00 20 */	blr
 .endfn grCorneria_801DD64C
 
+# .text:0x958 | 0x801DD654 | size: 0x4
 .fn grCorneria_801DD654, global
 /* 801DD654 001DA234  4E 80 00 20 */	blr
 .endfn grCorneria_801DD654
 
+# .text:0x95C | 0x801DD658 | size: 0x4
 .fn grCorneria_801DD658, global
 /* 801DD658 001DA238  4E 80 00 20 */	blr
 .endfn grCorneria_801DD658
 
+# .text:0x960 | 0x801DD65C | size: 0x18
 .fn fn_801DD65C, global
 /* 801DD65C 001DA23C  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 801DD660 001DA240  38 80 00 00 */	li r4, 0x0
@@ -715,6 +728,7 @@
 /* 801DD670 001DA250  4E 80 00 20 */	blr
 .endfn fn_801DD65C
 
+# .text:0x978 | 0x801DD674 | size: 0x32C
 .fn grCorneria_801DD674, global
 /* 801DD674 001DA254  7C 08 02 A6 */	mflr r0
 /* 801DD678 001DA258  90 01 00 04 */	stw r0, 0x4(r1)
@@ -925,11 +939,13 @@
 /* 801DD99C 001DA57C  4E 80 00 20 */	blr
 .endfn grCorneria_801DD674
 
+# .text:0xCA4 | 0x801DD9A0 | size: 0x8
 .fn grCorneria_801DD9A0, global
 /* 801DD9A0 001DA580  38 60 00 00 */	li r3, 0x0
 /* 801DD9A4 001DA584  4E 80 00 20 */	blr
 .endfn grCorneria_801DD9A0
 
+# .text:0xCAC | 0x801DD9A8 | size: 0x118
 .fn grCorneria_801DD9A8, global
 /* 801DD9A8 001DA588  7C 08 02 A6 */	mflr r0
 /* 801DD9AC 001DA58C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1005,10 +1021,12 @@
 /* 801DDABC 001DA69C  4E 80 00 20 */	blr
 .endfn grCorneria_801DD9A8
 
+# .text:0xDC4 | 0x801DDAC0 | size: 0x4
 .fn grCorneria_801DDAC0, global
 /* 801DDAC0 001DA6A0  4E 80 00 20 */	blr
 .endfn grCorneria_801DDAC0
 
+# .text:0xDC8 | 0x801DDAC4 | size: 0x224
 .fn grCorneria_801DDAC4, global
 /* 801DDAC4 001DA6A4  7C 08 02 A6 */	mflr r0
 /* 801DDAC8 001DA6A8  3C A0 80 3E */	lis r5, grCn_803E1D38@ha
@@ -1162,11 +1180,13 @@
 /* 801DDCE4 001DA8C4  4E 80 00 20 */	blr
 .endfn grCorneria_801DDAC4
 
+# .text:0xFEC | 0x801DDCE8 | size: 0x8
 .fn grCorneria_801DDCE8, global
 /* 801DDCE8 001DA8C8  38 60 00 00 */	li r3, 0x0
 /* 801DDCEC 001DA8CC  4E 80 00 20 */	blr
 .endfn grCorneria_801DDCE8
 
+# .text:0xFF4 | 0x801DDCF0 | size: 0x5C
 .fn grCorneria_801DDCF0, global
 /* 801DDCF0 001DA8D0  7C 08 02 A6 */	mflr r0
 /* 801DDCF4 001DA8D4  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1193,6 +1213,7 @@
 /* 801DDD48 001DA928  4E 80 00 20 */	blr
 .endfn grCorneria_801DDCF0
 
+# .text:0x1050 | 0x801DDD4C | size: 0x5C
 .fn grCorneria_801DDD4C, global
 /* 801DDD4C 001DA92C  7C 08 02 A6 */	mflr r0
 /* 801DDD50 001DA930  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1219,6 +1240,7 @@
 /* 801DDDA4 001DA984  4E 80 00 20 */	blr
 .endfn grCorneria_801DDD4C
 
+# .text:0x10AC | 0x801DDDA8 | size: 0xE0
 .fn grCorneria_801DDDA8, global
 /* 801DDDA8 001DA988  7C 08 02 A6 */	mflr r0
 /* 801DDDAC 001DA98C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1281,6 +1303,7 @@
 /* 801DDE84 001DAA64  4E 80 00 20 */	blr
 .endfn grCorneria_801DDDA8
 
+# .text:0x118C | 0x801DDE88 | size: 0x19C
 .fn grCorneria_801DDE88, global
 /* 801DDE88 001DAA68  7C 08 02 A6 */	mflr r0
 /* 801DDE8C 001DAA6C  3C 80 80 3C */	lis r4, grCn_803B809C@ha
@@ -1395,6 +1418,7 @@
 /* 801DE020 001DAC00  4E 80 00 20 */	blr
 .endfn grCorneria_801DDE88
 
+# .text:0x1328 | 0x801DE024 | size: 0x498
 .fn grCorneria_801DE024, global
 /* 801DE024 001DAC04  7C 08 02 A6 */	mflr r0
 /* 801DE028 001DAC08  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1726,10 +1750,12 @@
 /* 801DE4B8 001DB098  4E 80 00 20 */	blr
 .endfn grCorneria_801DE024
 
+# .text:0x17C0 | 0x801DE4BC | size: 0x4
 .fn grCorneria_801DE4BC, global
 /* 801DE4BC 001DB09C  4E 80 00 20 */	blr
 .endfn grCorneria_801DE4BC
 
+# .text:0x17C4 | 0x801DE4C0 | size: 0xA0
 .fn grCorneria_801DE4C0, global
 /* 801DE4C0 001DB0A0  7C 08 02 A6 */	mflr r0
 /* 801DE4C4 001DB0A4  90 01 00 04 */	stw r0, 0x4(r1)
@@ -1773,11 +1799,13 @@
 /* 801DE55C 001DB13C  4E 80 00 20 */	blr
 .endfn grCorneria_801DE4C0
 
+# .text:0x1864 | 0x801DE560 | size: 0x8
 .fn grCorneria_801DE560, global
 /* 801DE560 001DB140  38 60 00 00 */	li r3, 0x0
 /* 801DE564 001DB144  4E 80 00 20 */	blr
 .endfn grCorneria_801DE560
 
+# .text:0x186C | 0x801DE568 | size: 0x378
 .fn grCorneria_801DE568, global
 /* 801DE568 001DB148  7C 08 02 A6 */	mflr r0
 /* 801DE56C 001DB14C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2031,10 +2059,12 @@
 /* 801DE8DC 001DB4BC  4E 80 00 20 */	blr
 .endfn grCorneria_801DE568
 
+# .text:0x1BE4 | 0x801DE8E0 | size: 0x4
 .fn grCorneria_801DE8E0, global
 /* 801DE8E0 001DB4C0  4E 80 00 20 */	blr
 .endfn grCorneria_801DE8E0
 
+# .text:0x1BE8 | 0x801DE8E4 | size: 0x31C
 .fn grCorneria_801DE8E4, global
 /* 801DE8E4 001DB4C4  7C 08 02 A6 */	mflr r0
 /* 801DE8E8 001DB4C8  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2254,11 +2284,13 @@
 /* 801DEBFC 001DB7DC  4E 80 00 20 */	blr
 .endfn grCorneria_801DE8E4
 
+# .text:0x1F04 | 0x801DEC00 | size: 0x8
 .fn grCorneria_801DEC00, global
 /* 801DEC00 001DB7E0  38 60 00 00 */	li r3, 0x0
 /* 801DEC04 001DB7E4  4E 80 00 20 */	blr
 .endfn grCorneria_801DEC00
 
+# .text:0x1F0C | 0x801DEC08 | size: 0x8C
 .fn grCorneria_801DEC08, global
 /* 801DEC08 001DB7E8  7C 08 02 A6 */	mflr r0
 /* 801DEC0C 001DB7EC  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2302,6 +2334,7 @@
 /* 801DEC90 001DB870  4E 80 00 20 */	blr
 .endfn grCorneria_801DEC08
 
+# .text:0x1F98 | 0x801DEC94 | size: 0xBC
 .fn grCorneria_801DEC94, global
 /* 801DEC94 001DB874  7C 08 02 A6 */	mflr r0
 /* 801DEC98 001DB878  90 01 00 04 */	stw r0, 0x4(r1)
@@ -2357,6 +2390,7 @@
 /* 801DED4C 001DB92C  4E 80 00 20 */	blr
 .endfn grCorneria_801DEC94
 
+# .text:0x2054 | 0x801DED50 | size: 0xB7C
 .fn grCorneria_801DED50, global
 /* 801DED50 001DB930  7C 08 02 A6 */	mflr r0
 /* 801DED54 001DB934  3C 80 80 3C */	lis r4, grCn_803B80B4@ha
@@ -3183,10 +3217,12 @@
 /* 801DF8C8 001DC4A8  4E 80 00 20 */	blr
 .endfn grCorneria_801DED50
 
+# .text:0x2BD0 | 0x801DF8CC | size: 0x4
 .fn grCorneria_801DF8CC, global
 /* 801DF8CC 001DC4AC  4E 80 00 20 */	blr
 .endfn grCorneria_801DF8CC
 
+# .text:0x2BD4 | 0x801DF8D0 | size: 0x2F4
 .fn grCorneria_801DF8D0, global
 /* 801DF8D0 001DC4B0  7C 08 02 A6 */	mflr r0
 /* 801DF8D4 001DC4B4  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3396,11 +3432,13 @@
 /* 801DFBC0 001DC7A0  4E 80 00 20 */	blr
 .endfn grCorneria_801DF8D0
 
+# .text:0x2EC8 | 0x801DFBC4 | size: 0x8
 .fn grCorneria_801DFBC4, global
 /* 801DFBC4 001DC7A4  38 60 00 00 */	li r3, 0x0
 /* 801DFBC8 001DC7A8  4E 80 00 20 */	blr
 .endfn grCorneria_801DFBC4
 
+# .text:0x2ED0 | 0x801DFBCC | size: 0x20
 .fn grCorneria_801DFBCC, global
 /* 801DFBCC 001DC7AC  7C 08 02 A6 */	mflr r0
 /* 801DFBD0 001DC7B0  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3412,10 +3450,12 @@
 /* 801DFBE8 001DC7C8  4E 80 00 20 */	blr
 .endfn grCorneria_801DFBCC
 
+# .text:0x2EF0 | 0x801DFBEC | size: 0x4
 .fn grCorneria_801DFBEC, global
 /* 801DFBEC 001DC7CC  4E 80 00 20 */	blr
 .endfn grCorneria_801DFBEC
 
+# .text:0x2EF4 | 0x801DFBF0 | size: 0x2C
 .fn grCorneria_801DFBF0, global
 /* 801DFBF0 001DC7D0  7C 08 02 A6 */	mflr r0
 /* 801DFBF4 001DC7D4  38 A0 00 00 */	li r5, 0x0
@@ -3430,19 +3470,23 @@
 /* 801DFC18 001DC7F8  4E 80 00 20 */	blr
 .endfn grCorneria_801DFBF0
 
+# .text:0x2F20 | 0x801DFC1C | size: 0x8
 .fn grCorneria_801DFC1C, global
 /* 801DFC1C 001DC7FC  38 60 00 00 */	li r3, 0x0
 /* 801DFC20 001DC800  4E 80 00 20 */	blr
 .endfn grCorneria_801DFC1C
 
+# .text:0x2F28 | 0x801DFC24 | size: 0x4
 .fn grCorneria_801DFC24, global
 /* 801DFC24 001DC804  4E 80 00 20 */	blr
 .endfn grCorneria_801DFC24
 
+# .text:0x2F2C | 0x801DFC28 | size: 0x4
 .fn grCorneria_801DFC28, global
 /* 801DFC28 001DC808  4E 80 00 20 */	blr
 .endfn grCorneria_801DFC28
 
+# .text:0x2F30 | 0x801DFC2C | size: 0x64
 .fn grCorneria_801DFC2C, global
 /* 801DFC2C 001DC80C  7C 08 02 A6 */	mflr r0
 /* 801DFC30 001DC810  38 80 00 18 */	li r4, 0x18
@@ -3471,11 +3515,13 @@
 /* 801DFC8C 001DC86C  4E 80 00 20 */	blr
 .endfn grCorneria_801DFC2C
 
+# .text:0x2F94 | 0x801DFC90 | size: 0x8
 .fn grCorneria_801DFC90, global
 /* 801DFC90 001DC870  38 60 00 00 */	li r3, 0x0
 /* 801DFC94 001DC874  4E 80 00 20 */	blr
 .endfn grCorneria_801DFC90
 
+# .text:0x2F9C | 0x801DFC98 | size: 0x21C
 .fn grCorneria_801DFC98, global
 /* 801DFC98 001DC878  7C 08 02 A6 */	mflr r0
 /* 801DFC9C 001DC87C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3627,10 +3673,12 @@
 /* 801DFEB0 001DCA90  4E 80 00 20 */	blr
 .endfn grCorneria_801DFC98
 
+# .text:0x31B8 | 0x801DFEB4 | size: 0x4
 .fn grCorneria_801DFEB4, global
 /* 801DFEB4 001DCA94  4E 80 00 20 */	blr
 .endfn grCorneria_801DFEB4
 
+# .text:0x31BC | 0x801DFEB8 | size: 0x60
 .fn grCorneria_801DFEB8, global
 /* 801DFEB8 001DCA98  7C 08 02 A6 */	mflr r0
 /* 801DFEBC 001DCA9C  38 A0 00 00 */	li r5, 0x0
@@ -3658,11 +3706,13 @@
 /* 801DFF14 001DCAF4  4E 80 00 20 */	blr
 .endfn grCorneria_801DFEB8
 
+# .text:0x321C | 0x801DFF18 | size: 0x8
 .fn grCorneria_801DFF18, global
 /* 801DFF18 001DCAF8  38 60 00 00 */	li r3, 0x0
 /* 801DFF1C 001DCAFC  4E 80 00 20 */	blr
 .endfn grCorneria_801DFF18
 
+# .text:0x3224 | 0x801DFF20 | size: 0x21C
 .fn grCorneria_801DFF20, global
 /* 801DFF20 001DCB00  7C 08 02 A6 */	mflr r0
 /* 801DFF24 001DCB04  90 01 00 04 */	stw r0, 0x4(r1)
@@ -3814,10 +3864,12 @@
 /* 801E0138 001DCD18  4E 80 00 20 */	blr
 .endfn grCorneria_801DFF20
 
+# .text:0x3440 | 0x801E013C | size: 0x4
 .fn grCorneria_801E013C, global
 /* 801E013C 001DCD1C  4E 80 00 20 */	blr
 .endfn grCorneria_801E013C
 
+# .text:0x3444 | 0x801E0140 | size: 0x60
 .fn grCorneria_801E0140, global
 /* 801E0140 001DCD20  7C 08 02 A6 */	mflr r0
 /* 801E0144 001DCD24  38 A0 00 00 */	li r5, 0x0
@@ -3845,11 +3897,13 @@
 /* 801E019C 001DCD7C  4E 80 00 20 */	blr
 .endfn grCorneria_801E0140
 
+# .text:0x34A4 | 0x801E01A0 | size: 0x8
 .fn grCorneria_801E01A0, global
 /* 801E01A0 001DCD80  38 60 00 00 */	li r3, 0x0
 /* 801E01A4 001DCD84  4E 80 00 20 */	blr
 .endfn grCorneria_801E01A0
 
+# .text:0x34AC | 0x801E01A8 | size: 0x21C
 .fn grCorneria_801E01A8, global
 /* 801E01A8 001DCD88  7C 08 02 A6 */	mflr r0
 /* 801E01AC 001DCD8C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4001,10 +4055,12 @@
 /* 801E03C0 001DCFA0  4E 80 00 20 */	blr
 .endfn grCorneria_801E01A8
 
+# .text:0x36C8 | 0x801E03C4 | size: 0x4
 .fn grCorneria_801E03C4, global
 /* 801E03C4 001DCFA4  4E 80 00 20 */	blr
 .endfn grCorneria_801E03C4
 
+# .text:0x36CC | 0x801E03C8 | size: 0x2B0
 .fn grCorneria_801E03C8, global
 /* 801E03C8 001DCFA8  7C 08 02 A6 */	mflr r0
 /* 801E03CC 001DCFAC  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4197,6 +4253,7 @@
 /* 801E0674 001DD254  4E 80 00 20 */	blr
 .endfn grCorneria_801E03C8
 
+# .text:0x397C | 0x801E0678 | size: 0x254
 .fn grCorneria_801E0678, global
 /* 801E0678 001DD258  7C 08 02 A6 */	mflr r0
 /* 801E067C 001DD25C  38 60 00 0B */	li r3, 0xb
@@ -4362,6 +4419,7 @@
 /* 801E08C8 001DD4A8  4E 80 00 20 */	blr
 .endfn grCorneria_801E0678
 
+# .text:0x3BD0 | 0x801E08CC | size: 0x1A8
 .fn grCorneria_801E08CC, global
 /* 801E08CC 001DD4AC  7C 08 02 A6 */	mflr r0
 /* 801E08D0 001DD4B0  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4478,6 +4536,7 @@
 /* 801E0A70 001DD650  4E 80 00 20 */	blr
 .endfn grCorneria_801E08CC
 
+# .text:0x3D78 | 0x801E0A74 | size: 0x1C8
 .fn grCorneria_801E0A74, global
 /* 801E0A74 001DD654  7C 08 02 A6 */	mflr r0
 /* 801E0A78 001DD658  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4602,6 +4661,7 @@
 /* 801E0C38 001DD818  4E 80 00 20 */	blr
 .endfn grCorneria_801E0A74
 
+# .text:0x3F40 | 0x801E0C3C | size: 0xEC
 .fn grCorneria_801E0C3C, global
 /* 801E0C3C 001DD81C  7C 08 02 A6 */	mflr r0
 /* 801E0C40 001DD820  38 A0 00 00 */	li r5, 0x0
@@ -4664,11 +4724,13 @@
 /* 801E0D24 001DD904  4E 80 00 20 */	blr
 .endfn grCorneria_801E0C3C
 
+# .text:0x402C | 0x801E0D28 | size: 0x8
 .fn grCorneria_801E0D28, global
 /* 801E0D28 001DD908  38 60 00 00 */	li r3, 0x0
 /* 801E0D2C 001DD90C  4E 80 00 20 */	blr
 .endfn grCorneria_801E0D28
 
+# .text:0x4034 | 0x801E0D30 | size: 0xB0
 .fn grCorneria_801E0D30, global
 /* 801E0D30 001DD910  7C 08 02 A6 */	mflr r0
 /* 801E0D34 001DD914  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4720,10 +4782,12 @@
 /* 801E0DDC 001DD9BC  4E 80 00 20 */	blr
 .endfn grCorneria_801E0D30
 
+# .text:0x40E4 | 0x801E0DE0 | size: 0x4
 .fn grCorneria_801E0DE0, global
 /* 801E0DE0 001DD9C0  4E 80 00 20 */	blr
 .endfn grCorneria_801E0DE0
 
+# .text:0x40E8 | 0x801E0DE4 | size: 0x28
 .fn grCorneria_801E0DE4, global
 /* 801E0DE4 001DD9C4  7C 08 02 A6 */	mflr r0
 /* 801E0DE8 001DD9C8  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4737,11 +4801,13 @@
 /* 801E0E08 001DD9E8  4E 80 00 20 */	blr
 .endfn grCorneria_801E0DE4
 
+# .text:0x4110 | 0x801E0E0C | size: 0x8
 .fn grCorneria_801E0E0C, global
 /* 801E0E0C 001DD9EC  38 60 00 00 */	li r3, 0x0
 /* 801E0E10 001DD9F0  4E 80 00 20 */	blr
 .endfn grCorneria_801E0E0C
 
+# .text:0x4118 | 0x801E0E14 | size: 0x28
 .fn grCorneria_801E0E14, global
 /* 801E0E14 001DD9F4  7C 08 02 A6 */	mflr r0
 /* 801E0E18 001DD9F8  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4755,10 +4821,12 @@
 /* 801E0E38 001DDA18  4E 80 00 20 */	blr
 .endfn grCorneria_801E0E14
 
+# .text:0x4140 | 0x801E0E3C | size: 0x4
 .fn grCorneria_801E0E3C, global
 /* 801E0E3C 001DDA1C  4E 80 00 20 */	blr
 .endfn grCorneria_801E0E3C
 
+# .text:0x4144 | 0x801E0E40 | size: 0xF0
 .fn grCorneria_801E0E40, global
 /* 801E0E40 001DDA20  7C 08 02 A6 */	mflr r0
 /* 801E0E44 001DDA24  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4829,10 +4897,12 @@
 /* 801E0F2C 001DDB0C  4E 80 00 20 */	blr
 .endfn grCorneria_801E0E40
 
+# .text:0x4234 | 0x801E0F30 | size: 0x4
 .fn grCorneria_801E0F30, global
 /* 801E0F30 001DDB10  4E 80 00 20 */	blr
 .endfn grCorneria_801E0F30
 
+# .text:0x4238 | 0x801E0F34 | size: 0x30
 .fn grCorneria_801E0F34, global
 /* 801E0F34 001DDB14  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 801E0F38 001DDB18  38 00 00 00 */	li r0, 0x0
@@ -4850,11 +4920,13 @@
 /* 801E0F60 001DDB40  4E 80 00 20 */	blr
 .endfn grCorneria_801E0F34
 
+# .text:0x4268 | 0x801E0F64 | size: 0x8
 .fn grCorneria_801E0F64, global
 /* 801E0F64 001DDB44  38 60 00 00 */	li r3, 0x0
 /* 801E0F68 001DDB48  4E 80 00 20 */	blr
 .endfn grCorneria_801E0F64
 
+# .text:0x4270 | 0x801E0F6C | size: 0xC4
 .fn grCorneria_801E0F6C, global
 /* 801E0F6C 001DDB4C  7C 08 02 A6 */	mflr r0
 /* 801E0F70 001DDB50  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4909,6 +4981,7 @@
 /* 801E102C 001DDC0C  4E 80 00 20 */	blr
 .endfn grCorneria_801E0F6C
 
+# .text:0x4334 | 0x801E1030 | size: 0x24
 .fn grCorneria_801E1030, global
 /* 801E1030 001DDC10  7C 08 02 A6 */	mflr r0
 /* 801E1034 001DDC14  90 01 00 04 */	stw r0, 0x4(r1)
@@ -4921,15 +4994,18 @@
 /* 801E1050 001DDC30  4E 80 00 20 */	blr
 .endfn grCorneria_801E1030
 
+# .text:0x4358 | 0x801E1054 | size: 0x4
 .fn grCorneria_801E1054, global
 /* 801E1054 001DDC34  4E 80 00 20 */	blr
 .endfn grCorneria_801E1054
 
+# .text:0x435C | 0x801E1058 | size: 0x8
 .fn grCorneria_801E1058, global
 /* 801E1058 001DDC38  38 60 00 00 */	li r3, 0x0
 /* 801E105C 001DDC3C  4E 80 00 20 */	blr
 .endfn grCorneria_801E1058
 
+# .text:0x4364 | 0x801E1060 | size: 0x26C
 .fn grCorneria_801E1060, global
 /* 801E1060 001DDC40  7C 08 02 A6 */	mflr r0
 /* 801E1064 001DDC44  90 01 00 04 */	stw r0, 0x4(r1)
@@ -5100,14 +5176,17 @@
 /* 801E12C8 001DDEA8  4E 80 00 20 */	blr
 .endfn grCorneria_801E1060
 
+# .text:0x45D0 | 0x801E12CC | size: 0x4
 .fn grCorneria_801E12CC, global
 /* 801E12CC 001DDEAC  4E 80 00 20 */	blr
 .endfn grCorneria_801E12CC
 
+# .text:0x45D4 | 0x801E12D0 | size: 0x4
 .fn fn_801E12D0, global
 /* 801E12D0 001DDEB0  4E 80 00 20 */	blr
 .endfn fn_801E12D0
 
+# .text:0x45D8 | 0x801E12D4 | size: 0x74
 .fn fn_801E12D4, global
 /* 801E12D4 001DDEB4  7C 08 02 A6 */	mflr r0
 /* 801E12D8 001DDEB8  3C 60 80 3E */	lis r3, grCn_803E26C4@ha
@@ -5141,6 +5220,7 @@
 /* 801E1344 001DDF24  4E 80 00 20 */	blr
 .endfn fn_801E12D4
 
+# .text:0x464C | 0x801E1348 | size: 0x530
 .fn grCorneria_801E1348, global
 /* 801E1348 001DDF28  7C 08 02 A6 */	mflr r0
 /* 801E134C 001DDF2C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -5506,6 +5586,7 @@
 /* 801E1874 001DE454  4E 80 00 20 */	blr
 .endfn grCorneria_801E1348
 
+# .text:0x4B7C | 0x801E1878 | size: 0xF8
 .fn grCorneria_801E1878, global
 /* 801E1878 001DE458  7C 08 02 A6 */	mflr r0
 /* 801E187C 001DE45C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -5576,6 +5657,7 @@
 /* 801E196C 001DE54C  4E 80 00 20 */	blr
 .endfn grCorneria_801E1878
 
+# .text:0x4C74 | 0x801E1970 | size: 0x280
 .fn grCorneria_801E1970, global
 /* 801E1970 001DE550  7C 08 02 A6 */	mflr r0
 /* 801E1974 001DE554  90 01 00 04 */	stw r0, 0x4(r1)
@@ -5752,6 +5834,7 @@
 /* 801E1BEC 001DE7CC  4E 80 00 20 */	blr
 .endfn grCorneria_801E1970
 
+# .text:0x4EF4 | 0x801E1BF0 | size: 0x520
 .fn grCorneria_801E1BF0, global
 /* 801E1BF0 001DE7D0  7C 08 02 A6 */	mflr r0
 /* 801E1BF4 001DE7D4  3C 60 80 3E */	lis r3, grCn_803E1D38@ha
@@ -6125,6 +6208,7 @@
 /* 801E210C 001DECEC  4E 80 00 20 */	blr
 .endfn grCorneria_801E1BF0
 
+# .text:0x5414 | 0x801E2110 | size: 0x118
 .fn grCorneria_801E2110, global
 /* 801E2110 001DECF0  7C 08 02 A6 */	mflr r0
 /* 801E2114 001DECF4  90 01 00 04 */	stw r0, 0x4(r1)
@@ -6201,6 +6285,7 @@
 /* 801E2224 001DEE04  4E 80 00 20 */	blr
 .endfn grCorneria_801E2110
 
+# .text:0x552C | 0x801E2228 | size: 0x22C
 .fn grCorneria_801E2228, global
 /* 801E2228 001DEE08  7C 08 02 A6 */	mflr r0
 /* 801E222C 001DEE0C  90 01 00 04 */	stw r0, 0x4(r1)
@@ -6352,6 +6437,7 @@
 /* 801E2450 001DF030  4E 80 00 20 */	blr
 .endfn grCorneria_801E2228
 
+# .text:0x5758 | 0x801E2454 | size: 0x2C
 .fn fn_801E2454, global
 /* 801E2454 001DF034  7C 08 02 A6 */	mflr r0
 /* 801E2458 001DF038  38 A3 00 00 */	addi r5, r3, 0x0
@@ -6366,6 +6452,7 @@
 /* 801E247C 001DF05C  4E 80 00 20 */	blr
 .endfn fn_801E2454
 
+# .text:0x5784 | 0x801E2480 | size: 0x2C
 .fn fn_801E2480, global
 /* 801E2480 001DF060  7C 08 02 A6 */	mflr r0
 /* 801E2484 001DF064  38 A3 00 00 */	addi r5, r3, 0x0
@@ -6380,6 +6467,7 @@
 /* 801E24A8 001DF088  4E 80 00 20 */	blr
 .endfn fn_801E2480
 
+# .text:0x57B0 | 0x801E24AC | size: 0xA4
 .fn fn_801E24AC, global
 /* 801E24AC 001DF08C  7C 08 02 A6 */	mflr r0
 /* 801E24B0 001DF090  90 01 00 04 */	stw r0, 0x4(r1)
@@ -6428,6 +6516,7 @@
 /* 801E254C 001DF12C  4E 80 00 20 */	blr
 .endfn fn_801E24AC
 
+# .text:0x5854 | 0x801E2550 | size: 0x48
 .fn grCorneria_801E2550, global
 /* 801E2550 001DF130  7C 08 02 A6 */	mflr r0
 /* 801E2554 001DF134  90 01 00 04 */	stw r0, 0x4(r1)
@@ -6449,6 +6538,7 @@
 /* 801E2594 001DF174  4E 80 00 20 */	blr
 .endfn grCorneria_801E2550
 
+# .text:0x589C | 0x801E2598 | size: 0x2C
 .fn grCorneria_801E2598, global
 /* 801E2598 001DF178  1C A3 00 3C */	mulli r5, r3, 0x3c
 /* 801E259C 001DF17C  3C 60 80 3E */	lis r3, grCn_803E2204@ha
@@ -6463,6 +6553,7 @@
 /* 801E25C0 001DF1A0  4E 80 00 20 */	blr
 .endfn grCorneria_801E2598
 
+# .text:0x58C8 | 0x801E25C4 | size: 0x174
 .fn grCorneria_801E25C4, global
 /* 801E25C4 001DF1A4  7C 08 02 A6 */	mflr r0
 /* 801E25C8 001DF1A8  90 01 00 04 */	stw r0, 0x4(r1)
@@ -6562,6 +6653,7 @@
 /* 801E2734 001DF314  4E 80 00 20 */	blr
 .endfn grCorneria_801E25C4
 
+# .text:0x5A3C | 0x801E2738 | size: 0x44
 .fn grCorneria_801E2738, global
 /* 801E2738 001DF318  7C 08 02 A6 */	mflr r0
 /* 801E273C 001DF31C  1C E5 00 3C */	mulli r7, r5, 0x3c
@@ -6582,6 +6674,7 @@
 /* 801E2778 001DF358  4E 80 00 20 */	blr
 .endfn grCorneria_801E2738
 
+# .text:0x5A80 | 0x801E277C | size: 0x2F0
 .fn grCorneria_801E277C, global
 /* 801E277C 001DF35C  7C 08 02 A6 */	mflr r0
 /* 801E2780 001DF360  90 01 00 04 */	stw r0, 0x4(r1)
@@ -6782,6 +6875,7 @@
 /* 801E2A68 001DF648  4E 80 00 20 */	blr
 .endfn grCorneria_801E277C
 
+# .text:0x5D70 | 0x801E2A6C | size: 0x88
 .fn grCorneria_801E2A6C, global
 /* 801E2A6C 001DF64C  7C 08 02 A6 */	mflr r0
 /* 801E2A70 001DF650  3C 60 80 4A */	lis r3, stage_info@ha
@@ -6822,6 +6916,7 @@
 /* 801E2AF0 001DF6D0  4E 80 00 20 */	blr
 .endfn grCorneria_801E2A6C
 
+# .text:0x5DF8 | 0x801E2AF4 | size: 0x8C
 .fn grCorneria_801E2AF4, global
 /* 801E2AF4 001DF6D4  7C 08 02 A6 */	mflr r0
 /* 801E2AF8 001DF6D8  3C 60 80 4A */	lis r3, stage_info@ha
@@ -6863,6 +6958,7 @@
 /* 801E2B7C 001DF75C  4E 80 00 20 */	blr
 .endfn grCorneria_801E2AF4
 
+# .text:0x5E84 | 0x801E2B80 | size: 0xB4
 .fn grCorneria_801E2B80, global
 /* 801E2B80 001DF760  7C 08 02 A6 */	mflr r0
 /* 801E2B84 001DF764  3C 60 80 4A */	lis r3, stage_info@ha
@@ -6916,6 +7012,7 @@
 /* 801E2C30 001DF810  4E 80 00 20 */	blr
 .endfn grCorneria_801E2B80
 
+# .text:0x5F38 | 0x801E2C34 | size: 0xB4
 .fn grCorneria_801E2C34, global
 /* 801E2C34 001DF814  7C 08 02 A6 */	mflr r0
 /* 801E2C38 001DF818  3C 60 80 4A */	lis r3, stage_info@ha
@@ -6969,6 +7066,7 @@
 /* 801E2CE4 001DF8C4  4E 80 00 20 */	blr
 .endfn grCorneria_801E2C34
 
+# .text:0x5FEC | 0x801E2CE8 | size: 0x2C
 .fn grCorneria_801E2CE8, global
 /* 801E2CE8 001DF8C8  3C 60 80 4A */	lis r3, stage_info@ha
 /* 801E2CEC 001DF8CC  38 63 E6 C8 */	addi r3, r3, stage_info@l
@@ -6985,6 +7083,7 @@
 /* 801E2D10 001DF8F0  4E 80 00 20 */	blr
 .endfn grCorneria_801E2CE8
 
+# .text:0x6018 | 0x801E2D14 | size: 0x7C
 .fn grCorneria_801E2D14, global
 /* 801E2D14 001DF8F4  7C 08 02 A6 */	mflr r0
 /* 801E2D18 001DF8F8  3C 60 80 4A */	lis r3, stage_info@ha
@@ -7024,6 +7123,7 @@
 /* 801E2D8C 001DF96C  4E 80 00 20 */	blr
 .endfn grCorneria_801E2D14
 
+# .text:0x6094 | 0x801E2D90 | size: 0xC0
 .fn grCorneria_801E2D90, global
 /* 801E2D90 001DF970  7C 08 02 A6 */	mflr r0
 /* 801E2D94 001DF974  3C 80 80 4A */	lis r4, stage_info@ha
@@ -7082,6 +7182,7 @@
 /* 801E2E4C 001DFA2C  4E 80 00 20 */	blr
 .endfn grCorneria_801E2D90
 
+# .text:0x6154 | 0x801E2E50 | size: 0x50
 .fn grCorneria_801E2E50, global
 /* 801E2E50 001DFA30  7C 08 02 A6 */	mflr r0
 /* 801E2E54 001DFA34  3C 80 80 4A */	lis r4, stage_info@ha
@@ -7107,6 +7208,7 @@
 /* 801E2E9C 001DFA7C  4E 80 00 20 */	blr
 .endfn grCorneria_801E2E50
 
+# .text:0x61A4 | 0x801E2EA0 | size: 0x44
 .fn grCorneria_801E2EA0, global
 /* 801E2EA0 001DFA80  7C 08 02 A6 */	mflr r0
 /* 801E2EA4 001DFA84  38 60 00 03 */	li r3, 0x3
@@ -7129,11 +7231,13 @@
 /* 801E2EE0 001DFAC0  4E 80 00 20 */	blr
 .endfn grCorneria_801E2EA0
 
+# .text:0x61E8 | 0x801E2EE4 | size: 0x8
 .fn grCorneria_801E2EE4, global
 /* 801E2EE4 001DFAC4  38 60 00 00 */	li r3, 0x0
 /* 801E2EE8 001DFAC8  4E 80 00 20 */	blr
 .endfn grCorneria_801E2EE4
 
+# .text:0x61F0 | 0x801E2EEC | size: 0xE0
 .fn grCorneria_801E2EEC, global
 /* 801E2EEC 001DFACC  7C 08 02 A6 */	mflr r0
 /* 801E2EF0 001DFAD0  38 80 00 00 */	li r4, 0x0
@@ -7196,6 +7300,7 @@
 /* 801E2FC8 001DFBA8  4E 80 00 20 */	blr
 .endfn grCorneria_801E2EEC
 
+# .text:0x62D0 | 0x801E2FCC | size: 0x60
 .fn grCorneria_801E2FCC, global
 /* 801E2FCC 001DFBAC  7C 08 02 A6 */	mflr r0
 /* 801E2FD0 001DFBB0  38 60 00 03 */	li r3, 0x3
@@ -7225,38 +7330,43 @@
 /* 801E3028 001DFC08  4E 80 00 20 */	blr
 .endfn grCorneria_801E2FCC
 
-# 0x803B8090 - 0x803B80C0
+# 0x803B8090..0x803B80C0 | size: 0x30
 .rodata
 .balign 8
 
+# .rodata:0x0 | 0x803B8090 | size: 0xC
 .obj grCn_803B8090, global
 	.4byte 0x3F800000
 	.4byte 0x00000000
 	.4byte 0x00000000
 .endobj grCn_803B8090
 
+# .rodata:0xC | 0x803B809C | size: 0xC
 .obj grCn_803B809C, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 .endobj grCn_803B809C
 
+# .rodata:0x18 | 0x803B80A8 | size: 0xC
 .obj grCn_803B80A8, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 .endobj grCn_803B80A8
 
+# .rodata:0x24 | 0x803B80B4 | size: 0xC
 .obj grCn_803B80B4, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 .endobj grCn_803B80B4
 
-# 0x803E1D38 - 0x803E26F0
+# 0x803E1D38..0x803E26F0 | size: 0x9B8
 .data
 .balign 8
 
+# .data:0x0 | 0x803E1D38 | size: 0x48
 .obj grCn_803E1D38, global
 	.4byte 0x00030003
 	.4byte 0x00000004
@@ -7278,12 +7388,14 @@
 	.4byte 0x00000000
 .endobj grCn_803E1D38
 
+# .data:0x48 | 0x803E1D80 | size: 0xC
 .obj grCn_803E1D80, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 .endobj grCn_803E1D80
 
+# .data:0x54 | 0x803E1D8C | size: 0x17C
 .obj grCn_803E1D8C, global
 	.4byte grCorneria_801DD620
 	.4byte grCorneria_801DD64C
@@ -7382,6 +7494,7 @@
 	.4byte 0x00000000
 .endobj grCn_803E1D8C
 
+# .data:0x1D0 | 0x803E1F08 | size: 0x34
 .obj grCn_803E1F08, global
 	.4byte 0x0000000E
 	.4byte grCn_803E1D8C
@@ -7396,24 +7509,19 @@
 	.4byte 0x00000001
 	.4byte grCn_803E1D38
 	.4byte 0x00000008
-	.4byte 0x25733A25
-	.4byte 0x643A2063
-	.4byte 0x6F756C64
-	.4byte 0x6E207420
-	.4byte 0x67657420
-	.4byte 0x676F626A
-	.4byte 0x2869643D
-	.4byte 0x2564290A
-	.4byte 0x00000000
 .endobj grCn_803E1F08
 
+# .data:0x204 | 0x803E1F3C | size: 0x24
+.obj grCn_803E1F3C, global
+	.string "%s:%d: couldn t get gobj(id=%d)\n\000\000\000"
+.endobj grCn_803E1F3C
+
+# .data:0x228 | 0x803E1F60 | size: 0x10
 .obj grCn_803E1F60, global
-	.4byte 0x6772636F
-	.4byte 0x726E6572
-	.4byte 0x69612E63
-	.4byte 0x00000000
+	.string "grcorneria.c\000\000\000"
 .endobj grCn_803E1F60
 
+# .data:0x238 | 0x803E1F70 | size: 0x3C
 .obj grCn_803E1F70, global
 	.4byte 0xC38911EC
 	.4byte 0x424251EC
@@ -7432,6 +7540,7 @@
 	.4byte 0x00000000
 .endobj grCn_803E1F70
 
+# .data:0x274 | 0x803E1FAC | size: 0x3C
 .obj grCn_803E1FAC, global
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -7450,6 +7559,7 @@
 	.4byte 0x00000000
 .endobj grCn_803E1FAC
 
+# .data:0x2B0 | 0x803E1FE8 | size: 0x18
 .obj grCn_803E1FE8, global
 	.4byte 0xC26C0000
 	.4byte 0xC2680000
@@ -7459,6 +7569,7 @@
 	.4byte 0x00000000
 .endobj grCn_803E1FE8
 
+# .data:0x2C8 | 0x803E2000 | size: 0x124
 .obj grCn_803E2000, global
 	.4byte 0xC2A20000
 	.4byte 0xC1A80000
@@ -7533,16 +7644,15 @@
 	.4byte 0x00000002
 	.4byte 0x00000002
 	.4byte 0x0000000A
-	.4byte 0x21286A6F
-	.4byte 0x626A2D3E
-	.4byte 0x666C6167
-	.4byte 0x73202620
-	.4byte 0x4A4F424A
-	.4byte 0x5F555345
-	.4byte 0x5F515541
-	.4byte 0x5445524E
-	.4byte 0x494F4E29
-	.4byte 0x00000000
+.endobj grCn_803E2000
+
+# .data:0x3EC | 0x803E2124 | size: 0x28
+.obj grCn_803E2124, global
+	.string "!(jobj->flags & JOBJ_USE_QUATERNION)\000\000\000"
+.endobj grCn_803E2124
+
+# .data:0x414 | 0x803E214C | size: 0x44
+.obj grCn_803E214C, global
 	.4byte 0xFFFFFFFF
 	.4byte 0xFFFFFFFF
 	.4byte 0x00000001
@@ -7560,43 +7670,45 @@
 	.4byte 0x0000000E
 	.4byte 0x0000000F
 	.4byte 0x00000010
-.endobj grCn_803E2000
+.endobj grCn_803E214C
 
+# .data:0x458 | 0x803E2190 | size: 0x14
 .obj grCn_803E2190, global
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x00000002
 	.4byte 0x00000005
-	.4byte 0x7472616E
-	.4byte 0x736C6174
-	.4byte 0x65000000
-	.4byte 0x00000001
-	.4byte 0x00000001
-	.4byte 0x00000001
-	.4byte 0x00000001
-	.4byte 0x00000001
 .endobj grCn_803E2190
 
+# .data:0x46C | 0x803E21A4 | size: 0xC
+.obj grCn_803E21A4, global
+	.string "translate\000\000"
+.endobj grCn_803E21A4
+
+# .data:0x478 | 0x803E21B0 | size: 0x14
+.obj grCn_803E21B0, global
+	.4byte 0x00000001
+	.4byte 0x00000001
+	.4byte 0x00000001
+	.4byte 0x00000001
+	.4byte 0x00000001
+.endobj grCn_803E21B0
+
+# .data:0x48C | 0x803E21C4 | size: 0x30
 .obj grCn_803E21C4, global
-	.4byte 0x6772636F
-	.4byte 0x726E6572
-	.4byte 0x69612E63
-	.4byte 0x20202020
-	.4byte 0x6772436F
-	.4byte 0x726E6572
-	.4byte 0x69614765
-	.4byte 0x74506F73
-	.4byte 0x4D61704B
-	.4byte 0x696E6432
-	.4byte 0x0A000000
-	.4byte 0x00000000
+	.string "grcorneria.c    grCorneriaGetPosMapKind2\n\000\000\000\000\000\000"
+.endobj grCn_803E21C4
+
+# .data:0x4BC | 0x803E21F4 | size: 0x10
+.obj grCn_803E21F4, global
 	.4byte 0x00010006
 	.4byte 0x00020007
 	.4byte 0x00030008
 	.4byte 0x00040009
-.endobj grCn_803E21C4
+.endobj grCn_803E21F4
 
+# .data:0x4CC | 0x803E2204 | size: 0x4B0
 .obj grCn_803E2204, global
 	.4byte 0x00000001
 	.4byte 0x00000007
@@ -7900,345 +8012,405 @@
 	.4byte 0x00000000
 .endobj grCn_803E2204
 
+# .data:0x97C | 0x803E26B4 | size: 0x10
 .obj grCn_803E26B4, global
-	.4byte 0x74616C6B
-	.4byte 0x206E6F20
-	.4byte 0x3D202564
-	.4byte 0x0A000000
+	.string "talk no = %d\n\000\000"
 .endobj grCn_803E26B4
 
+# .data:0x98C | 0x803E26C4 | size: 0x18
 .obj grCn_803E26C4, global
-	.4byte 0x2A2A2A20
-	.4byte 0x4265616D
-	.4byte 0x2044616D
-	.4byte 0x61676521
-	.4byte 0x2025660A
-	.4byte 0x00000000
+	.string "*** Beam Damage! %f\n\000\000\000"
 .endobj grCn_803E26C4
 
+# .data:0x9A4 | 0x803E26DC | size: 0x14
 .obj grCn_803E26DC, global
-	.4byte 0x5349535F
-	.4byte 0x4772436F
-	.4byte 0x726E6572
-	.4byte 0x69614461
-	.4byte 0x74610000
+	.string "SIS_GrCorneriaData\000"
 .endobj grCn_803E26DC
 
-# 0x804D4650 - 0x804D4688
+# 0x804D4650..0x804D4688 | size: 0x38
 .section .sdata, "wa"
 .balign 8
 
+# .sdata:0x0 | 0x804D4650 | size: 0x8
 .obj grCn_804D4650, global
-	.4byte 0x2F477243
-	.4byte 0x6E000000
+	.string "/GrCn\000\000"
 .endobj grCn_804D4650
 
+# .sdata:0x8 | 0x804D4658 | size: 0x8
 .obj grCn_804D4658, global
-	.4byte 0x6A6F626A
-	.4byte 0x2E680000
+	.string "jobj.h\000"
 .endobj grCn_804D4658
 
+# .sdata:0x10 | 0x804D4660 | size: 0x8
 .obj grCn_804D4660, global
-	.4byte 0x6A6F626A
-	.4byte 0x00000000
+	.string "jobj\000\000\000"
 .endobj grCn_804D4660
 
+# .sdata:0x18 | 0x804D4668 | size: 0x4
 .obj grCn_804D4668, global
-	.4byte 0x30000000
+	.string "0\000\000"
 .endobj grCn_804D4668
 
+# .sdata:0x1C | 0x804D466C | size: 0x4
 .obj grCn_804D466C, global
 	.4byte 0xFFFFFFFF
 .endobj grCn_804D466C
 
+# .sdata:0x20 | 0x804D4670 | size: 0x8
 .obj grCn_804D4670, global
-	.4byte 0x77676F62
-	.4byte 0x6A000000
+	.string "wgobj\000\000"
 .endobj grCn_804D4670
 
+# .sdata:0x28 | 0x804D4678 | size: 0x8
 .obj grCn_804D4678, global
-	.4byte 0x676F626A
-	.4byte 0x00000000
+	.string "gobj\000\000\000"
 .endobj grCn_804D4678
 
+# .sdata:0x30 | 0x804D4680 | size: 0x8
 .obj grCn_804D4680, global
-	.4byte 0x67700000
-	.4byte 0x00000000
+	.string "gp\000\000\000\000\000"
 .endobj grCn_804D4680
 
-# 0x804D69A0 - 0x804D69B8
+# 0x804D69A0..0x804D69B8 | size: 0x18
 .section .sbss, "wa", @nobits
 .balign 8
 
+# .sbss:0x0 | 0x804D69A0 | size: 0x4
 .obj grCn_804D69A0, global
 	.skip 0x4
 .endobj grCn_804D69A0
 
+# .sbss:0x4 | 0x804D69A4 | size: 0x4
 .obj grCn_804D69A4, global
 	.skip 0x4
 .endobj grCn_804D69A4
 
+# .sbss:0x8 | 0x804D69A8 | size: 0x4
 .obj grCn_804D69A8, global
 	.skip 0x4
 .endobj grCn_804D69A8
 
+# .sbss:0xC | 0x804D69AC | size: 0x4
 .obj grCn_804D69AC, global
 	.skip 0x4
 .endobj grCn_804D69AC
 
+# .sbss:0x10 | 0x804D69B0 | size: 0x8
 .obj grCn_804D69B0, global
 	.skip 0x8
 .endobj grCn_804D69B0
 
-# 0x804DB168 - 0x804DB270
+# 0x804DB168..0x804DB270 | size: 0x108
 .section .sdata2, "a"
 .balign 8
 
+# .sdata2:0x0 | 0x804DB168 | size: 0x4
 .obj grCn_804DB168, global
 	.float 300
 .endobj grCn_804DB168
 
+# .sdata2:0x4 | 0x804DB16C | size: 0x4
 .obj grCn_804DB16C, global
 	.float 1
 .endobj grCn_804DB16C
 
+# .sdata2:0x8 | 0x804DB170 | size: 0x4
 .obj grCn_804DB170, global
 	.float 0
 .endobj grCn_804DB170
 
+# .sdata2:0xC | 0x804DB174 | size: 0x4
 .obj grCn_804DB174, global
 	.float 1.0471976
 .endobj grCn_804DB174
 
+# .sdata2:0x10 | 0x804DB178 | size: 0x4
 .obj grCn_804DB178, global
 	.float -100000
 .endobj grCn_804DB178
 
+# .sdata2:0x14 | 0x804DB17C | size: 0x4
 .obj grCn_804DB17C, global
 	.float 100000
 .endobj grCn_804DB17C
 
+# .sdata2:0x18 | 0x804DB180 | size: 0x4
 .obj grCn_804DB180, global
 	.float 250
 .endobj grCn_804DB180
 
+# .sdata2:0x1C | 0x804DB184 | size: 0x4
 .obj grCn_804DB184, global
 	.float 4
 .endobj grCn_804DB184
 
+# .sdata2:0x20 | 0x804DB188 | size: 0x4
 .obj grCn_804DB188, global
 	.float 16
 .endobj grCn_804DB188
 
+# .sdata2:0x24 | 0x804DB18C | size: 0x4
 .obj grCn_804DB18C, global
 	.float 0.3
 .endobj grCn_804DB18C
 
+# .sdata2:0x28 | 0x804DB190 | size: 0x4
 .obj grCn_804DB190, global
 	.float -35
 .endobj grCn_804DB190
 
+# .sdata2:0x2C | 0x804DB194 | size: 0x4
 .obj grCn_804DB194, global
 	.float 100
 .endobj grCn_804DB194
 
+# .sdata2:0x30 | 0x804DB198 | size: 0x4
 .obj grCn_804DB198, global
 	.float -10
 .endobj grCn_804DB198
 
+# .sdata2:0x34 | 0x804DB19C | size: 0x4
 .obj grCn_804DB19C, global
 	.float 2000
 .endobj grCn_804DB19C
 
+# .sdata2:0x38 | 0x804DB1A0 | size: 0x4
 .obj grCn_804DB1A0, global
 	.float 349
 .endobj grCn_804DB1A0
 
+# .sdata2:0x3C | 0x804DB1A4 | size: 0x4
 .obj grCn_804DB1A4, global
 	.float -1.5707964
 .endobj grCn_804DB1A4
 
+# .sdata2:0x40 | 0x804DB1A8 | size: 0x4
 .obj grCn_804DB1A8, global
 	.float -150
 .endobj grCn_804DB1A8
 
+# .sdata2:0x44 | 0x804DB1AC | size: 0x4
 .obj grCn_804DB1AC, global
 	.float 10
 .endobj grCn_804DB1AC
 
+# .sdata2:0x48 | 0x804DB1B0 | size: 0x8
 .obj grCn_804DB1B0, global
 	.double 6.283185307179586
 .endobj grCn_804DB1B0
 
+# .sdata2:0x50 | 0x804DB1B8 | size: 0x8
 .obj grCn_804DB1B8, global
 	.double -3.141592653589793
 .endobj grCn_804DB1B8
 
+# .sdata2:0x58 | 0x804DB1C0 | size: 0x8
 .obj grCn_804DB1C0, global
 	.double 3.141592653589793
 .endobj grCn_804DB1C0
 
+# .sdata2:0x60 | 0x804DB1C8 | size: 0x4
 .obj grCn_804DB1C8, global
 	.float -30
 .endobj grCn_804DB1C8
 
+# .sdata2:0x64 | 0x804DB1CC | size: 0x4
 .obj grCn_804DB1CC, global
 	.float 30
 .endobj grCn_804DB1CC
 
+# .sdata2:0x68 | 0x804DB1D0 | size: 0x4
 .obj grCn_804DB1D0, global
 	.float 0.05235988
 .endobj grCn_804DB1D0
 
+# .sdata2:0x6C | 0x804DB1D4 | size: 0x4
 .obj grCn_804DB1D4, global
 	.float 3.0892327
 .endobj grCn_804DB1D4
 
+# .sdata2:0x70 | 0x804DB1D8 | size: 0x4
 .obj grCn_804DB1D8, global
 	.float -1
 .endobj grCn_804DB1D8
 
+# .sdata2:0x74 | 0x804DB1DC | size: 0x4
 .obj grCn_804DB1DC, global
 	.float 500
 .endobj grCn_804DB1DC
 
+# .sdata2:0x78 | 0x804DB1E0 | size: 0x4
 .obj grCn_804DB1E0, global
 	.float 5
 .endobj grCn_804DB1E0
 
+# .sdata2:0x7C | 0x804DB1E4 | size: 0x4
 .obj grCn_804DB1E4, global
 	.float -1400
 .endobj grCn_804DB1E4
 
+# .sdata2:0x80 | 0x804DB1E8 | size: 0x4
 .obj grCn_804DB1E8, global
 	.float 3200
 .endobj grCn_804DB1E8
 
+# .sdata2:0x84 | 0x804DB1EC | size: 0x4
 .obj grCn_804DB1EC, global
 	.float 0.5
 .endobj grCn_804DB1EC
 
+# .sdata2:0x88 | 0x804DB1F0 | size: 0x4
 .obj grCn_804DB1F0, global
 	.float 1400
 .endobj grCn_804DB1F0
 
+# .sdata2:0x8C | 0x804DB1F4 | size: 0x4
 .obj grCn_804DB1F4, global
 	.float 4800
 .endobj grCn_804DB1F4
 
+# .sdata2:0x90 | 0x804DB1F8 | size: 0x4
 .obj grCn_804DB1F8, global
 	.float 2400
 .endobj grCn_804DB1F8
 
+# .sdata2:0x94 | 0x804DB1FC | size: 0x4
 .obj grCn_804DB1FC, global
 	.float 20
 .endobj grCn_804DB1FC
 
+# .sdata2:0x98 | 0x804DB200 | size: 0x4
 .obj grCn_804DB200, global
 	.float 2
 .endobj grCn_804DB200
 
+# .sdata2:0x9C | 0x804DB204 | size: 0x4
 .obj grCn_804DB204, global
 	.float 9
 .endobj grCn_804DB204
 
+# .sdata2:0xA0 | 0x804DB208 | size: 0x4
 .obj grCn_804DB208, global
 	.float -9
 .endobj grCn_804DB208
 
+# .sdata2:0xA4 | 0x804DB20C | size: 0x4
 .obj gap_11_804DB20C_sdata2, global
 .hidden gap_11_804DB20C_sdata2
 	.4byte 0x00000000
 .endobj gap_11_804DB20C_sdata2
 
+# .sdata2:0xA8 | 0x804DB210 | size: 0x8
 .obj grCn_804DB210, global
 	.double 4503601774854144
 .endobj grCn_804DB210
 
+# .sdata2:0xB0 | 0x804DB218 | size: 0x4
 .obj grCn_804DB218, global
 	.4byte 0xAEBAD6FF
 .endobj grCn_804DB218
 
+# .sdata2:0xB4 | 0x804DB21C | size: 0x4
 .obj grCn_804DB21C, global
 	.4byte 0xD7E4F6FF
 .endobj grCn_804DB21C
 
+# .sdata2:0xB8 | 0x804DB220 | size: 0x4
 .obj grCn_804DB220, global
 	.4byte 0xE0ECFAFF
 .endobj grCn_804DB220
 
+# .sdata2:0xBC | 0x804DB224 | size: 0x4
 .obj grCn_804DB224, global
 	.4byte 0x6A9EADFF
 .endobj grCn_804DB224
 
+# .sdata2:0xC0 | 0x804DB228 | size: 0x4
 .obj grCn_804DB228, global
 	.4byte 0x4F94B5FF
 .endobj grCn_804DB228
 
+# .sdata2:0xC4 | 0x804DB22C | size: 0x4
 .obj grCn_804DB22C, global
 	.4byte 0x496E3FFF
 .endobj grCn_804DB22C
 
+# .sdata2:0xC8 | 0x804DB230 | size: 0x4
 .obj grCn_804DB230, global
 	.4byte 0x6A9EADFF
 .endobj grCn_804DB230
 
+# .sdata2:0xCC | 0x804DB234 | size: 0x4
 .obj grCn_804DB234, global
 	.4byte 0x4F94B5FF
 .endobj grCn_804DB234
 
+# .sdata2:0xD0 | 0x804DB238 | size: 0x4
 .obj grCn_804DB238, global
 	.4byte 0x005091FF
 .endobj grCn_804DB238
 
+# .sdata2:0xD4 | 0x804DB23C | size: 0x4
 .obj grCn_804DB23C, global
 	.float 0.005
 .endobj grCn_804DB23C
 
+# .sdata2:0xD8 | 0x804DB240 | size: 0x4
 .obj grCn_804DB240, global
 	.float 50
 .endobj grCn_804DB240
 
+# .sdata2:0xDC | 0x804DB244 | size: 0x4
 .obj grCn_804DB244, global
 	.float -0.0025
 .endobj grCn_804DB244
 
+# .sdata2:0xE0 | 0x804DB248 | size: 0x4
 .obj grCn_804DB248, global
 	.float 3
 .endobj grCn_804DB248
 
+# .sdata2:0xE4 | 0x804DB24C | size: 0x4
 .obj grCn_804DB24C, global
 	.4byte 0xFFFFFFFF
 .endobj grCn_804DB24C
 
+# .sdata2:0xE8 | 0x804DB250 | size: 0x4
 .obj grCn_804DB250, global
 	.float 140
 .endobj grCn_804DB250
 
+# .sdata2:0xEC | 0x804DB254 | size: 0x4
 .obj grCn_804DB254, global
 	.float 380
 .endobj grCn_804DB254
 
+# .sdata2:0xF0 | 0x804DB258 | size: 0x4
 .obj grCn_804DB258, global
 	.float 288
 .endobj grCn_804DB258
 
+# .sdata2:0xF4 | 0x804DB25C | size: 0x4
 .obj grCn_804DB25C, global
 	.float 96
 .endobj grCn_804DB25C
 
+# .sdata2:0xF8 | 0x804DB260 | size: 0x4
 .obj grCn_804DB260, global
 	.float 107
 .endobj grCn_804DB260
 
+# .sdata2:0xFC | 0x804DB264 | size: 0x4
 .obj grCn_804DB264, global
 	.float 106
 .endobj grCn_804DB264
 
+# .sdata2:0x100 | 0x804DB268 | size: 0x4
 .obj grCn_804DB268, global
 	.float -340282350000000000000000000000000000000
 .endobj grCn_804DB268
 
+# .sdata2:0x104 | 0x804DB26C | size: 0x4
 .obj gap_11_804DB26C_sdata2, global
 .hidden gap_11_804DB26C_sdata2
 	.4byte 0x00000000

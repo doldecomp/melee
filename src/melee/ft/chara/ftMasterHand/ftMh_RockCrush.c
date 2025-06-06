@@ -1,5 +1,3 @@
-#include <dolphin/mtx/forward.h>
-
 #include "ftMh_RockCrush.h"
 
 #include "ft/fighter.h"
@@ -9,6 +7,8 @@
 #include "ft/types.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
+
+#include <dolphin/mtx.h>
 
 void ftMh_Drill_Coll(HSD_GObj* gobj) {}
 

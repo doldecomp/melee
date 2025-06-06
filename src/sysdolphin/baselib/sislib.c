@@ -10,18 +10,12 @@
 #include "state.h"
 #include "tev.h"
 
-#include "dolphin/gx/GXAttr.h"
-#include "dolphin/gx/GXGeometry.h"
-#include "dolphin/gx/GXLight.h"
-#include "dolphin/gx/GXPixel.h"
-#include "dolphin/gx/GXTev.h"
-#include "dolphin/gx/GXTexture.h"
-#include "dolphin/gx/GXTransform.h"
-#include "dolphin/gx/GXVert.h"
+#include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <printf.h>
 #include <dolphin/os.h>
 
 HSD_CObjDesc HSD_SisLib_8040C4B8;
@@ -555,9 +549,7 @@ s32 HSD_SisLib_803A611C(u16 arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
                 HSD_CObjSetOrtho(temp_r3, 0.0f, -480.0f, 0.0f, 640.0f);
                 HSD_GObjObject_80390A70(temp_r27->x4, *HSD_GObj_804D784B,
                                         temp_r3);
-                GObj_SetupGXLinkMax(
-                    temp_r27->x4, (void (*)(HSD_GObj*, int)) HSD_GObj_803910D8,
-                    arg7);
+                GObj_SetupGXLinkMax(temp_r27->x4, HSD_GObj_803910D8, arg7);
                 temp_r27->x4->gxlink_prios = (u64) arg5 << 1;
                 GObj_InitUserData(temp_r27->x4, (u8) arg2, fn_803A60EC,
                                   temp_r27->x4);
@@ -570,15 +562,14 @@ s32 HSD_SisLib_803A611C(u16 arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
     return var_r31;
 }
 
-void HSD_SisLib_803A62A0(s32 arg0, HSD_Archive* arg1, char* arg2)
+void HSD_SisLib_803A62A0(s32 arg0, char* arg1, char* arg2)
 {
     HSD_Archive** temp_r30;
     SIS* temp_r3;
     SIS* temp_ret;
 
-    HSD_SisLib_803A945C();
     temp_r30 = &HSD_SisLib_804D1110[arg0];
-    *temp_r30 = arg1;
+    *temp_r30 = HSD_SisLib_803A945C(arg1);
     if (arg1 == 0U) {
         OSReport("Cannot open archive %s", arg1);
         OSPanic("sislib.c", 0x24A, "");
@@ -1042,7 +1033,7 @@ void HSD_SisLib_803A6B98(HSD_Text* arg0, void* arg1, ...)
         // @todo: is this the correct usage of vaargs?
         u8 buffer[256];
         va_start(args, arg1);
-        vsprintf((char*) buffer, (const char*) -1, args);
+        vsnprintf((char*) buffer, -1, arg1, args);
         va_end(args);
         var_r29 = HSD_SisLib_803A67EC(&sp8C, buffer);
     }
@@ -1542,7 +1533,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, HSD_Text* arg1)
             GXSetZMode(0U, 0U, 0U);
             GXSetViewport(0.0f, 0.0f, 640.0f, 480.0f, 0.0f, 1.0f);
             GXSetScissor(0, 0, 0x280, 0x1E0);
-            C_MTXOrtho((MtxPtr)&m, 0.0f, -480.0f, 0.0f, 640.0f, 0.0f, 2.0f);
+            MTXOrtho((MtxPtr)&m, 0.0f, -480.0f, 0.0f, 640.0f, 0.0f, 2.0f);
             GXSetProjection((MtxPtr)&m, 0);
             m[0][0] = 1.0f;
             m[0][1] = 0.0f;

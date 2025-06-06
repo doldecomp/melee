@@ -4,7 +4,6 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftCo_Bury.h"
 
@@ -41,7 +40,7 @@
 
 #include <common_structs.h>
 #include <trigf.h>
-#include <dolphin/mtx/vec.h>
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -282,13 +281,14 @@ void ftCo_800C0FCC(HSD_GObj* arg0, ftCo_GObj* arg1)
     }
 }
 
+#define MY_MIN(a, b) (((a) < (b)) ? (a) : (b))
+
 void ftCo_Bury_Phys(ftCo_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCollisionBox* box = &fp->mv.co.bury.coll_box;
-    float mv_x18_x =
-        MAX(fp->mv.co.bury.coll_box.right.x, fp->mv.co.bury.coll_box.right.y);
-    box->bottom += fp->mv.co.bury.coll_box.right.x;
+    float mv_x18_x = MY_MIN(box->right.y, box->left.y);
+    box->bottom += fp->mv.co.bury.x1C;
     if (1 + box->bottom > mv_x18_x) {
         box->bottom = mv_x18_x - 1;
     }

@@ -26,7 +26,7 @@
 /* 2E35AC */ UNK_RET it_802E35AC(UNK_PARAMS);
 /* 2E35CC */ UNK_RET it_802E35CC(UNK_PARAMS);
 /* 2E3784 */ void it_802E3784(Item_GObj*, Item_GObj*);
-/* 2E37A4 */ UNK_RET it_802E37A4(UNK_PARAMS);
+/* 2E37A4 */ void it_802E37A4(Item_GObj*);
 /* 2E37BC */ void it_802E37BC(Item_GObj*);
 /* 2E3884 */ bool it_802E3884(Item_GObj*);
 /* 2E398C */ UNK_RET fn_802E398C(UNK_PARAMS);

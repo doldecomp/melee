@@ -19,7 +19,7 @@
 #include "pl/plstale.h"
 #include "pl/types.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os.h>
 #include <baselib/debug.h>
 #include <baselib/gobjplink.h>
@@ -74,7 +74,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 
 ////.bss
 StaticPlayer player_slots[PL_SLOT_MAX];
-HSD_ObjAllocData Player_804587E0;
+HSD_ObjAllocData Player_AllocData;
 
 void* pl_804D6470;
 
@@ -1200,7 +1200,7 @@ s32 Player_GetMoreFlagsBit4(s32 slot)
     return bit4;
 }
 
-u8 Player_GetMoreFlagsBit5(s32 slot)
+int Player_GetMoreFlagsBit5(s32 slot)
 {
     StaticPlayer* player;
     u8 bit5;
@@ -1348,7 +1348,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     player = &player_slots[slot];
 
     if (!bool_arg) {
-        uint kos = player->kos_by_player[other_slot];
+        unsigned kos = player->kos_by_player[other_slot];
 
         if (kos < U32_MAX) {
             player->kos_by_player[other_slot]++;
@@ -1379,10 +1379,10 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     }
 }
 
-uint Player_GetMatchFrameCount(int slot)
+u32 Player_GetMatchFrameCount(int slot)
 {
     StaticPlayer* player;
-    uint count;
+    u32 count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     count = player->match_frame_count;
@@ -1391,9 +1391,9 @@ uint Player_GetMatchFrameCount(int slot)
 
 void Player_UpdateMatchFrameCount(int slot, bool condition)
 {
-    u8 _[4];
-
     StaticPlayer* player;
+    PAD_STACK(4);
+
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
@@ -1402,10 +1402,10 @@ void Player_UpdateMatchFrameCount(int slot, bool condition)
     }
 }
 
-uint Player_GetSuicideCount(int slot)
+u32 Player_GetSuicideCount(int slot)
 {
     StaticPlayer* player;
-    uint count;
+    u32 count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     count = player->suicide_count;
@@ -2034,7 +2034,7 @@ void Player_InitAllPlayers(void)
 
 void Player_80036DA4(void)
 {
-    HSD_ObjAllocInit(&Player_804587E0, 8, 4);
+    HSD_ObjAllocInit(&Player_AllocData, 8, 4);
     Fighter_FirstInitialize_80067A84();
 }
 
@@ -2042,20 +2042,20 @@ void Player_80036DD8(void)
 {
     void** sp8;
 
-    lbArchive_80016C64(str_PdPmdat_start_of_data, (void**) &sp8,
-                       str_plLoadCommonData, 0);
+    lbArchive_LoadSymbols(str_PdPmdat_start_of_data, (void**) &sp8,
+                          str_plLoadCommonData, 0);
     pl_804D6470 = *sp8;
 }
 
-void Player_80036E20(s32 arg0, HSD_Archive* archive, s32 arg2)
+void Player_80036E20(CharacterKind ckind, HSD_Archive* archive, s32 arg2)
 {
     struct Unk_Struct_w_Array* unkStruct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
-    ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].x, archive, arg2);
-    if ((unkStruct->vec_arr[arg0].y != -1) &&
-        (unkStruct->vec_arr[arg0].z == 0))
+    ftDemo_SetArchiveData(unkStruct->vec_arr[ckind].x, archive, arg2);
+    if ((unkStruct->vec_arr[ckind].y != -1) &&
+        (unkStruct->vec_arr[ckind].z == 0))
     {
-        ftDemo_SetArchiveData(unkStruct->vec_arr[arg0].y, archive, arg2);
+        ftDemo_SetArchiveData(unkStruct->vec_arr[ckind].y, archive, arg2);
     }
 }
 

@@ -26,7 +26,7 @@
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {
@@ -41,7 +41,7 @@ static void ftSamus_801293BC_inner(HSD_GObj* gobj)
 
 void ftSs_SpecialN_801291F0(HSD_GObj* gobj)
 {
-    u8 _[8];
+    PAD_STACK(8);
 
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -54,7 +54,7 @@ void ftSs_SpecialN_801291F0(HSD_GObj* gobj)
 
 void ftSs_SpecialN_80129258(HSD_GObj* gobj)
 {
-    u8 _[8];
+    PAD_STACK(8);
 
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -190,7 +190,7 @@ void ftSs_SpecialNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-uint ftSs_Unk3_803CE6B8[] = {
+u32 ftSs_Unk3_803CE6B8[] = {
     0x0003F7A6, 0x0003F7A9, 0x0003F7AC, 0x0003F7AF, 0x0003F7B2,
 };
 

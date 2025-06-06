@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2BD32C */ UNK_RET it_802BD32C(UNK_PARAMS);
 /* 2BD45C */ void it_802BD45C(Item_GObj* gobj);

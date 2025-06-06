@@ -1,6 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "itspycloak.h"
@@ -10,6 +9,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+
+#include <dolphin/mtx.h>
 
 /* 295C68 */ static void it_80295C68(Item_GObj* gobj);
 /* 295CB8 */ static bool it_80295CB8(Item_GObj* gobj);

@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCa_SpecialN.h"
 
 #include "math.h"
@@ -18,6 +16,8 @@
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "lb/lb_00F9.h"
+
+#include <dolphin/mtx.h>
 
 /// Create Aesthetic Wind Effect for Warlock Punch
 static void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)

@@ -32,8 +32,8 @@ s32 CARDRenameAsync(s32 chan, const char *old, const char *new, CARDCallback cal
         if (ent->gameName[0] == 0xFF)
             continue;
 
-        if (memcmp(ent->gameName, __CARDDiskID->gameName, sizeof(ent->gameName)) != 0
-         || memcmp(ent->company, __CARDDiskID->company, sizeof(ent->company)) != 0)
+        if (memcmp(ent->gameName, card->diskID->gameName, sizeof(ent->gameName)) != 0
+         || memcmp(ent->company, card->diskID->company, sizeof(ent->company)) != 0)
             continue;
 
         if (__CARDCompareFileName(ent, old))
@@ -48,7 +48,7 @@ s32 CARDRenameAsync(s32 chan, const char *old, const char *new, CARDCallback cal
         return __CARDPutControlBlock(card, CARD_RESULT_EXIST);
 
     ent = &dir[oldNo];
-    result = __CARDAccess(ent);
+    result = __CARDAccess(card, ent);
     if (result < 0)
         return __CARDPutControlBlock(card, result);
 

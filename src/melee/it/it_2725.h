@@ -12,7 +12,7 @@
 #include "it/items/types.h"
 #include "lb/types.h"
 
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
 /* 272560 */ void it_80272560(Item_GObj*, s32);
 /* 2725D4 */ void it_802725D4(Item_GObj*);
@@ -64,7 +64,7 @@
 /* 273670 */ void it_80273670(Item_GObj*, int, float);
 /* 273748 */ void it_80273748(Item_GObj*, Vec3*, Vec3*);
 /* 273B50 */ void it_80273B50(Item_GObj*, Vec3*);
-/* 273F34 */ void it_80273F34(Item_GObj*, HSD_GObj*, Item*);
+/* 273F34 */ void it_80273F34(Item_GObj*, HSD_GObj*);
 /* 274198 */ void it_80274198(Item_GObj*, bool);
 /* 2741F4 */ void it_802741F4(Item_GObj*, bool);
 /* 274250 */ void it_80274250(Item_GObj*, Vec3*);
@@ -73,7 +73,7 @@
 /* 274484 */ void it_80274484(Item_GObj*, HSD_JObj*, f32);
 /* 274574 */ void it_80274574(Item_GObj*);
 /* 274594 */ void it_80274594(Item_GObj*);
-/* 274658 */ void it_80274658(Item_GObj*, f32);
+/* 274658 */ int it_80274658(Item_GObj*, f32);
 /* 2746F8 */ HSD_JObj* it_802746F8(Item_GObj*);
 /* 274740 */ void it_80274740(Item_GObj*);
 /* 274990 */ f32 it_80274990(Item_GObj*);
@@ -192,8 +192,7 @@
 /* 2799E4 */ void it_802799E4(Item_GObj*);
 /* 279AF0 */ void it_80279AF0(Item_GObj*, FtCmdState*);
 /* 279B10 */ void it_80279B10(Item_GObj*, FtCmdState*);
-/* 279B30 */ void fn_80279B30(Item_GObj*, FtCmdState*);
-// /* 279B30 */ void fn_80279B30(Item_GObj*, FtCmdState*, u32);
+/* 279B30 */ void fn_80279B30(Item_GObj*, FtCmdState*, int arg2);
 /* 279B64 */ void it_80279B64(Item*);
 /* 279B88 */ void it_80279B88(Item*, s32, s32);
 /* 279BBC */ void it_80279BBC(Item*);
@@ -233,7 +232,7 @@
 /* 27B730 */ void it_8027B730(Item_GObj*);
 /* 27B798 */ bool it_8027B798(Item_GObj*, Vec3*);
 /* 27B964 */ void it_8027B964(Item_GObj*, bool);
-/* 27BA54 */ void it_8027BA54(HSD_GObj*, Vec3*);
+/* 27BA54 */ int it_8027BA54(HSD_GObj*, Vec3*);
 /* 27BB1C */ void it_8027BB1C(Vec3*, Vec3*);
 /* 27BBF4 */ void it_8027BBF4(Item_GObj*, bool, f64, f32);
 /* 27C0A8 */ void it_8027C0A8(Item_GObj*, f32, f32);
@@ -254,7 +253,7 @@
 /* 27CC88 */ Item_GObj* it_8027CC88(Item_GObj*);
 /* 27CE18 */ void it_8027CE18(Item_GObj*);
 /* 27CE44 */ void it_8027CE44(Item_GObj*);
-/* 27CE64 */ void it_8027CE64(Item_GObj*, HSD_GObj*, int);
+/* 27CE64 */ void it_8027CE64(Item_GObj*, HSD_GObj*, void*);
 /* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
 /* 3F23CC */ extern struct ItemLogicTable it_803F23CC[];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
@@ -267,7 +266,7 @@
 /* 4D6D08 */ extern s32 it_804D6D08;
 /* 4D6D0C */ extern s32 it_804D6D0C;
 /* 4D6D10 */ extern u32 it_804D6D10;
-/* 4D6D14 */ extern uint it_804D6D14;
+/* 4D6D14 */ extern u32 it_804D6D14;
 /* 4D6D18 */ extern u32 it_804D6D18;
 /* 4D6D24 */ extern Article** it_804D6D24;
 /* 4D6D28 */ extern ItemCommonData* it_804D6D28;

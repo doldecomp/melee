@@ -1,6 +1,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "it/it_26B1.h"
+
 /// #it_8027D670
 
 /// #it_8027D730
@@ -124,4 +126,7 @@ void it_80281038(void) {}
 
 /// #it_80281104
 
-/// #it_80281144
+void it_80281144(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

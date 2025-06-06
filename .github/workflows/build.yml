@@ -13,63 +13,6 @@ permissions:
   pages: write
 
 jobs:
-  build-make:
-    name: Make
-    runs-on: ubuntu-latest
-    env:
-      REGISTRY: ghcr.io
-      OUTPUT: ${{ github.workspace }}/output
-    strategy:
-      matrix:
-        make_flags: ["GENERATE_MAP=1"]
-      fail-fast: false
-
-    steps:
-    - name: Get image name
-      env:
-        IMAGE_SUFFIX: build-linux:latest
-      run: |
-        echo "IMAGE=$IMAGE_REPO/$IMAGE_SUFFIX" >> $GITHUB_ENV
-
-    - name: Checkout Melee repository
-      uses: actions/checkout@v3
-
-    - name: Log into container registry
-      uses: docker/login-action@v2.1.0
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Pull build image
-      run: docker pull "$REGISTRY/$IMAGE"
-
-    - name: Build Melee
-      env:
-        MAKE_FLAGS: ${{ matrix.make_flags }}
-      run: |
-        mkdir -p "$OUTPUT"
-        docker run --rm \
-          --user "$(id -u):$(id -g)" \
-          --volume "$PWD":/input:ro \
-          --volume "$OUTPUT:/output" \
-          --env MAKE_FLAGS="$MAKE_FLAGS" \
-          "$REGISTRY/$IMAGE"
-
-    - name: Upload map
-      if: matrix.make_flags == 'GENERATE_MAP=1'
-      uses: actions/upload-artifact@v4
-      with:
-        name: GALE01.map
-        path: ${{ env.OUTPUT }}/ssbm.us.1.2/GALE01.map
-        if-no-files-found: error
-
-    - name: Set step summary
-      if: matrix.make_flags == 'GENERATE_MAP=1'
-      run: |
-        printf "\`\`\`\n%s\n\`\`\`" "$(cat "$OUTPUT/PROGRESS.md")" \
-          >> $GITHUB_STEP_SUMMARY
-
   build-ninja:
     name: Ninja
     runs-on: ubuntu-latest
@@ -153,17 +96,6 @@ jobs:
           ;;
           *) exit 1 ;;
         esac
-    - name: Upload progress
-      if: matrix.mode == 'link' && github.ref_name == github.event.repository.default_branch
-      continue-on-error: true
-      env:
-        PROGRESS_API_KEY: ${{secrets.PROGRESS_API_KEY}}
-      run: |
-        python tools/upload_progress.py \
-          -b 'https://progress.decomp.club/' \
-          -p melee \
-          -v ${{matrix.version}} \
-          'build/${{matrix.version}}/progress.json'
     - name: Upload map
       if: matrix.mode == 'link'
       uses: actions/upload-artifact@v4
@@ -171,7 +103,7 @@ jobs:
         name: ${{matrix.version}}_maps
         path: build/${{matrix.version}}/**/*.MAP
     - name: Upload report
-      if: matrix.mode == 'diff'
+      if: matrix.mode == 'diff' && (success() || failure())
       uses: actions/upload-artifact@v4
       with:
         name: ${{matrix.version}}_report
@@ -303,6 +235,9 @@ jobs:
     - uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
-    - uses: DeterminateSystems/magic-nix-cache-action@v2
+    - uses: cachix/cachix-action@v16
+      with:
+        name: doldecomp-melee
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix-build
     - run: nix-shell --run "echo OK"

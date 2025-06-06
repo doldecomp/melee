@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "gr/forward.h"
+
 /* 1D84A0 */ UNK_RET grZebes_801D84A0(UNK_PARAMS);
 /* 1D84A4 */ UNK_RET grZebes_801D84A4(UNK_PARAMS);
 /* 1D8528 */ UNK_RET grZebes_801D8528(UNK_PARAMS);
@@ -21,7 +23,7 @@
 /* 1D9408 */ UNK_RET grZebes_801D9408(UNK_PARAMS);
 /* 1D9410 */ UNK_RET grZebes_801D9410(UNK_PARAMS);
 /* 1D94EC */ UNK_RET grZebes_801D94EC(UNK_PARAMS);
-/* 1D94F0 */ UNK_RET fn_801D94F0(UNK_PARAMS);
+/* 1D94F0 */ void fn_801D94F0(Ground_GObj* gobj);
 /* 1D9508 */ UNK_RET grZebes_801D9508(UNK_PARAMS);
 /* 1D95B0 */ UNK_RET grZebes_801D95B0(UNK_PARAMS);
 /* 1D95B8 */ UNK_RET grZebes_801D95B8(UNK_PARAMS);
@@ -41,8 +43,8 @@
 /* 1DA3F4 */ void grZebes_801DA3F4(UNK_T);
 /* 1DA4FC */ UNK_RET grZebes_801DA4FC(UNK_PARAMS);
 /* 1DA528 */ UNK_RET grZebes_801DA528(UNK_PARAMS);
-/* 1DA9D8 */ UNK_RET fn_801DA9D8(UNK_PARAMS);
-/* 1DA9F0 */ UNK_RET fn_801DA9F0(UNK_PARAMS);
+/* 1DA9D8 */ void fn_801DA9D8(UNK_T arg0, Ground* gp, float* y, float z);
+/* 1DA9F0 */ void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x);
 /* 1DAA08 */ UNK_RET grZebes_801DAA08(UNK_PARAMS);
 /* 1DAC90 */ UNK_RET fn_801DAC90(UNK_PARAMS);
 /* 1DAE70 */ UNK_RET grZebes_801DAE70(UNK_PARAMS);
@@ -58,6 +60,6 @@
 /* 1DCBFC */ UNK_RET fn_801DCBFC(UNK_PARAMS);
 /* 1DCCB8 */ UNK_RET grZebes_801DCCB8(UNK_PARAMS);
 /* 1DCCC0 */ UNK_RET grZebes_801DCCC0(UNK_PARAMS);
-/* 1DCCC8 */ UNK_RET grZebes_801DCCC8(UNK_PARAMS);
+/* 1DCCC8 */ float grZebes_801DCCC8(void);
 
 #endif

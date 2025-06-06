@@ -1,49 +1,33 @@
 #include <dolphin.h>
+#include <dolphin/amc/AmcExi2Comm.h>
 
-// EXI error codes
-typedef enum
+void EXI2_Init(volatile unsigned char** inputPendingPtrRef,
+               EXICallback monitorCallback)
 {
-	AMC_EXI_NO_ERROR	= 0,
-	AMC_EXI_UNSELECTED
-} AmcExiError;
-
-void EXI2_Init();
-void EXI2_EnableInterrupts();
-int EXI2_Poll();
-AmcExiError EXI2_ReadN();
-AmcExiError EXI2_WriteN();
-void EXI2_Reserve();
-void EXI2_Unreserve();
-int AMC_IsStub();
-
-void EXI2_Init() {
-    
 }
 
-void EXI2_EnableInterrupts() {
-    
-}
+void EXI2_EnableInterrupts() {}
 
-int EXI2_Poll() {
+int EXI2_Poll()
+{
     return 0;
 }
 
-AmcExiError EXI2_ReadN() {
+AmcExiError EXI2_ReadN(void* bytes, unsigned long length)
+{
     return AMC_EXI_NO_ERROR;
 }
 
-AmcExiError EXI2_WriteN() { 
+AmcExiError EXI2_WriteN(const void* bytes, unsigned long length)
+{
     return AMC_EXI_NO_ERROR;
 }
 
-void EXI2_Reserve() {
-    
-}
+void EXI2_Reserve() {}
 
-void EXI2_Unreserve() {
-    
-}
+void EXI2_Unreserve() {}
 
-int AMC_IsStub() {
+int AMC_IsStub()
+{
     return 1;
 }

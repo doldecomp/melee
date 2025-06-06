@@ -3,6 +3,9 @@
 
 #include "it/forward.h"
 
+#include "it/inlines.h"
+#include "it/it_26B1.h"
+
 /* 2AFD44 */ static bool it_802AFD44(void);
 
 /// #it_802AF940
@@ -13,7 +16,11 @@
 
 /// #it_802AFBA4
 
-/// #it_802AFD2C
+void it_802AFD2C(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM(gobj);
+    it->x40_vel.z = it->x40_vel.y = it->x40_vel.z = 0;
+}
 
 bool it_802AFD44(void)
 {
@@ -40,4 +47,7 @@ bool it_802AFD64(Item_GObj* arg0)
     return true;
 }
 
-/// #it_802AFD6C
+void it_802AFD6C(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

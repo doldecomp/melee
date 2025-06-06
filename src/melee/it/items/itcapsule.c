@@ -1,8 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "itcapsule.h"
 
 #include "math.h"
@@ -16,6 +14,7 @@
 #include "it/types.h"
 #include "lb/lb_00F9.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>

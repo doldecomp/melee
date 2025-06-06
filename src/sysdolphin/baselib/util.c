@@ -2,9 +2,11 @@
 
 #include "debug.h"
 
-#include <dolphin/gx/types.h>
+#include <dolphin/gx.h>
 
-float HSD_identityMtx[] = { 1.0f, 0, 0, 0, 0, 1.0f, 0, 0, 0, 0, 1.0f, 0 };
+Mtx HSD_identityMtx = { { 1.0f, 0, 0, 0 },
+                        { 0, 1.0f, 0, 0 },
+                        { 0, 0, 1.0f, 0 } };
 
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest)
 {

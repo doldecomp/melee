@@ -4,12 +4,12 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/inlines.h" // IWYU pragma: export
 #include "ft/types.h"
 
+#include <dolphin/mtx.h>
 #include <baselib/objalloc.h>
 
 /* 0679B0 */ void Fighter_800679B0(void);
@@ -59,16 +59,17 @@
 /* 06DA4C */ void Fighter_8006DA4C(Fighter_GObj* gobj);
 /* 06DABC */ void Fighter_Unload_8006DABC(void* user_data);
 /* 458FD0 */ extern HSD_ObjAllocData fighter_alloc_data;
-/* 458FFC */ extern HSD_ObjAllocData Fighter_80458FFC;
-/* 459028 */ extern HSD_ObjAllocData fighter_bones_alloc_data;
-/* 459054 */ extern HSD_ObjAllocData Fighter_80459054;
-/* 459080 */ extern HSD_ObjAllocData Fighter_80459080;
-/* 4590AC */ extern HSD_ObjAllocData Fighter_804590AC;
+/* 458FFC */ extern HSD_ObjAllocData fighter_dat_attrs_alloc_data;
+/* 459028 */ extern HSD_ObjAllocData fighter_parts_alloc_data;
+/* 459054 */ extern HSD_ObjAllocData fighter_dobj_list_alloc_data;
+/* 459080 */ extern HSD_ObjAllocData fighter_x2040_alloc_data;
+/* 4590AC */ extern HSD_ObjAllocData fighter_x59C_alloc_data;
+/* 4598B8 */ extern ftData* gFtDataList[FTKIND_MAX];
 /* 4D64FC */ extern UNK_T Fighter_804D64FC;
 /* 4D6500 */ extern UNK_T Fighter_804D6500;
 /* 4D6504 */ extern HSD_Joint* Fighter_804D6504;
-/* 4D6508 */ extern UNK_T Fighter_804D6508;
-/* 4D650C */ extern int* Fighter_804D650C;
+/* 4D6508 */ extern u8* Fighter_804D6508;
+/* 4D650C */ extern u8* Fighter_804D650C;
 /* 4D6510 */ extern UNK_T Fighter_804D6510;
 /* 4D6514 */ extern UNK_T Fighter_804D6514;
 /* 4D6518 */ extern UNK_T Fighter_804D6518;

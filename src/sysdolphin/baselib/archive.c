@@ -6,7 +6,7 @@
 
 inline void Locate(HSD_Archive* archive)
 {
-    uint i;
+    u32 i;
     u32* ptr;
 
     for (i = 0; i < archive->header.nb_reloc; i++) {
@@ -64,7 +64,7 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
 
 void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
 {
-    uint i;
+    u32 i;
 
     for (i = 0; i < archive->header.nb_public; i++) {
         int comparison =
@@ -92,7 +92,7 @@ void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
 {
     uintptr_t next;
     uintptr_t offset = -1;
-    uint i;
+    u32 i;
 
     for (i = 0; i < archive->header.nb_extern; i++) {
         int comparison =

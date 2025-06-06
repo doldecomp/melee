@@ -3,7 +3,6 @@
 
 #include "ft/forward.h"
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftpickupitem.h"
 
@@ -30,16 +29,18 @@
 #include "pl/pl_0371.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
 bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
-    u8 _[8] = { 0 };
     itPickup* pickup;
     Vec4* offset0;
     ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+
     if (Item_IsGrabbable(item_gobj) &&
         (!fp->x2222_b4 || !it_8026B47C(item_gobj)) &&
         (fp->item_gobj == NULL || it_8026B4F0(item_gobj)))
@@ -77,10 +78,14 @@ bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 
 Item_GObj* ftpickupitem_800942A0(ftCo_GObj* gobj, u32 flags)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    itPickup* pickup = &fp->x294_itPickup;
-    Vec4* offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
-                                                   : &pickup->air_light_offset;
+    itPickup* pickup;
+    ftCo_Fighter* fp;
+    Vec4* offset0;
+
+    fp = GET_FIGHTER(gobj);
+    pickup = &fp->x294_itPickup;
+    offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
+                                             : &pickup->air_light_offset;
     if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {
         return NULL;
     }
@@ -226,7 +231,7 @@ void ftpickupitem_80094694(ftCo_GObj* gobj, FtMotionId msid, bool loop)
 
 bool ftpickupitem_80094790(ftCo_GObj* gobj)
 {
-    u8 _[8] = { 0 };
+    PAD_STACK(8);
     if (GET_FIGHTER(gobj)->x1978 == NULL) {
         Item_GObj* unk_gobj = ftpickupitem_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
@@ -243,8 +248,8 @@ bool ftpickupitem_80094790(ftCo_GObj* gobj)
 
 void ftpickupitem_80094818(ftCo_GObj* gobj, int arg1)
 {
-    u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     if (fp->x1978 != NULL) {
         pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
     } else if (fp->item_gobj != NULL) {
@@ -255,30 +260,16 @@ void ftpickupitem_80094818(ftCo_GObj* gobj, int arg1)
     }
 }
 
-static inline void inlineB0(ftCo_GObj* gobj)
-{
-    u64 _ = { 0 };
-
-    ftCo_Fighter* fp = gobj->user_data;
-    if (fp->x1978 != NULL) {
-        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
-    } else if (fp->item_gobj != NULL) {
-        if (ftData_OnItemPickupExt[fp->kind] != NULL) {
-            ftData_OnItemPickupExt[fp->kind](gobj, true);
-        }
-        pl_8003E17C(fp->player_id, fp->x221F_b4, fp->item_gobj);
-    }
-}
-
 void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     if (fp->item_gobj != NULL) {
         fp->x1978 = item_gobj;
     } else {
         fp->item_gobj = item_gobj;
     }
-    inlineB0(gobj);
+    ftpickupitem_80094818(gobj, true);
     {
         Fighter_Part ret_part;
         if (it_8026B2B4(item_gobj) == 0) {
@@ -298,22 +289,12 @@ void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
     }
 }
 
-static inline enum_t inlineA0(ftCo_Fighter* fp)
-{
-    enum_t unk_enum;
-    if (fp->mv.co.itemget.x0) {
-        unk_enum = 2;
-    } else {
-        unk_enum = 1;
-    }
-    return unk_enum;
-}
-
 void ftpickupitem_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
     if (ftCheckThrowB3(fp)) {
-        Item_GObj* item_gobj = ftpickupitem_800942A0(gobj, inlineA0(fp));
+        Item_GObj* item_gobj =
+            ftpickupitem_800942A0(gobj, fp->mv.co.itemget.x0 ? 2 : 1);
         if (item_gobj != NULL) {
             ftpickupitem_800948A8(gobj, item_gobj);
         }
@@ -353,8 +334,8 @@ void ftpickupitem_Coll(ftCo_GObj* gobj)
 void ftpickupitem_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj)
 {
     Vec3 vec;
-    u8 _[4] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
+    PAD_STACK(4);
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
         __assert(__FILE__, 399, "item_gobj");

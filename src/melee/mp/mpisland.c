@@ -24,9 +24,9 @@ void mpIsland_8005A6F8(void)
 
 void mpIsland_8005A728(void)
 {
-    short* v0;         // r27
-    mp_UnkStruct2* v1; // r28
-    int v2;            // r3
+    short* v0;            // r27
+    mp_UnkStruct2* v1;    // r28
+    mpLib_804D64B8_t* v2; // r3
     // unk *test;
     int v3;                // r29
     unsigned char* result; // r3
@@ -70,7 +70,7 @@ void mpIsland_8005A728(void)
     v22_2 = &mpIsland_80458E88.xC;
     mpIsland_8005A6F8();
 
-    lb_8000C160(v33, 0x600u);
+    memzero(v33, 0x600u);
     v5 = v0[9];
     v6 = 0;
     if (v0[9]) {
@@ -266,7 +266,7 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 {
     int i;
-    if (mpLib_8004F008(NULL, &i, 0, 0, -1, -1, -1, 0, arg0->x, arg0->y,
+    if (mpLib_8004F008(NULL, &i, 0, 0, -1, -1, -1, 0, 0, arg0->x, arg0->y,
                        arg0->x, arg0->y + arg1, 0.0F))
     {
         return mpIsland_8005AB54(i);
@@ -274,10 +274,11 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
     return NULL;
 }
 
+/// @todo Very fake match.
 bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 {
     int temp_cr0_eq;
-    temp_cr0_eq = mpLib_8004D17C() + 8 + 0x34 * arg0->x28;
+    temp_cr0_eq = (int) mpLib_8004D17C() + 8 + 0x34 * arg0->x28;
     temp_cr0_eq = *(int*) temp_cr0_eq;
     temp_cr0_eq &= 0x700;
     if (temp_cr0_eq != 0) {

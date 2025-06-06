@@ -4,7 +4,8 @@
 #include <platform.h>
 
 #include "ftCommon/forward.h"
-#include <dolphin/mtx/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 0C15F4 */ bool ftCo_800C15F4(ftCo_GObj* gobj);
 /* 0C1718 */ bool ftCo_800C1718(ftCo_GObj* gobj);

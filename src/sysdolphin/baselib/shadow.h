@@ -10,7 +10,7 @@
 #include "baselib/objalloc.h"
 #include "baselib/tobj.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct HSD_Shadow {
     HSD_SList* objects; // 0x0

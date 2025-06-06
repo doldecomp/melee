@@ -1,6 +1,7 @@
 #include "itfreeze.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 
 /// #it_8028EB88
 
@@ -107,7 +108,10 @@ void it_8028F830(void) {}
 
 /// #it_8028F834
 
-/// #it_8028F8C4
+void it_8028F8C4(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_8028F8E4
 

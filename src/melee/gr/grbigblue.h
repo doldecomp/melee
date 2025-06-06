@@ -3,7 +3,9 @@
 
 #include <placeholder.h>
 
-#include <dolphin/mtx/forward.h>
+#include "gr/forward.h"
+
+#include <dolphin/mtx.h>
 
 /* 1E57BC */ UNK_RET grBigBlue_801E57BC(UNK_PARAMS);
 /* 1E57C0 */ UNK_RET grBigBlue_801E57C0(UNK_PARAMS);
@@ -19,7 +21,7 @@
 /* 1E6114 */ UNK_RET grBigBlue_801E6114(UNK_PARAMS);
 /* 1E611C */ UNK_RET grBigBlue_801E611C(UNK_PARAMS);
 /* 1E6120 */ UNK_RET grBigBlue_801E6120(UNK_PARAMS);
-/* 1E6124 */ UNK_RET fn_801E6124(UNK_PARAMS);
+/* 1E6124 */ void fn_801E6124(Ground_GObj* gobj);
 /* 1E613C */ UNK_RET grBigBlue_801E613C(UNK_PARAMS);
 /* 1E61BC */ UNK_RET grBigBlue_801E61BC(UNK_PARAMS);
 /* 1E61C4 */ UNK_RET grBigBlue_801E61C4(UNK_PARAMS);

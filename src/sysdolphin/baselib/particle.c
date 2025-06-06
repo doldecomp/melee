@@ -1,8 +1,58 @@
 #include "particle.static.h"
 
-/// #hsd_80391580
+#include <dolphin/gx.h>
+#include <dolphin/gx/GXGeometry.h>
 
-/// #hsd_80391664
+void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
+{
+    f32 x_max;
+    f32 y_max;
+    GXColor c;
+    u8 r, g, b, a;
+
+    GXBegin(0x80, 0, 4);
+
+    x_max = x_min + w;
+    y_max = y_min + h;
+
+    // Send the corners in clockwise order, starting with top left
+
+    GXWGFifo.f32 = x_min;
+    GXWGFifo.f32 = y_min;
+    a = color->a;
+    b = color->b;
+    g = color->g;
+    r = color->r;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
+
+    GXWGFifo.f32 = x_max;
+    GXWGFifo.f32 = y_min;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
+
+    GXWGFifo.f32 = x_max;
+    GXWGFifo.f32 = y_max;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
+
+    GXWGFifo.f32 = x_min;
+    GXWGFifo.f32 = y_max;
+    GXWGFifo.u8 = r;
+    GXWGFifo.u8 = g;
+    GXWGFifo.u8 = b;
+    GXWGFifo.u8 = a;
+
+    GXEnd();
+}
+
+/// #DrawASCII
 
 /// #hsd_80391A04
 

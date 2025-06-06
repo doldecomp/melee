@@ -148,11 +148,11 @@ void OSInit() {
             BootInfo->consoleType = OS_CONSOLE_RETAIL1;
         }
         BootInfo->consoleType += (__PIRegs[11] & 0xF0000000) >> 28;
-        OSReport("\nDolphin OS $Revision: 36 $.\n");
+        OSReport("\nDolphin OS $Revision: 47 $.\n");
 #if DEBUG
         OSReport("Kernel built : %s %s\n", "May 22 2001", "01:47:06");
 #else
-        OSReport("Kernel built : %s %s\n", "May 22 2001", "02:04:48");
+        OSReport("Kernel built : %s %s\n", "Nov 12 2001", "01:46:17");
 #endif
         OSReport("Console Type : ");
 
@@ -449,4 +449,9 @@ void __OSPSInit(void)
         mtspr   GQR0, r3
     }
   // clang-format on
+}
+
+u32 __OSGetDIConfig(void)
+{
+    return __DIRegs[0x9] & 0xFF;
 }

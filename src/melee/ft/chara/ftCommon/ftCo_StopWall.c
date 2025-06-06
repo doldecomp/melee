@@ -1,7 +1,5 @@
 #include <platform.h>
 
-#include <dolphin/mtx/forward.h>
-
 #include "ftCo_StopWall.h"
 
 #include "math.h"
@@ -15,6 +13,7 @@
 #include "ftKirby/ftKb_Init.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 /* 09EE30 */ static void ftCo_8009EE30(ftCo_GObj* gobj);
 

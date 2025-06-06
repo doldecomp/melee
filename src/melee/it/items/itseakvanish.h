@@ -4,10 +4,11 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "it/items/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 2B1C60 */ Item_GObj* it_802B1C60(HSD_GObj* parent, Vec3* pos, f32 dir);
 /* 2B1D38 */ bool it_802B1D38(Item_GObj*);

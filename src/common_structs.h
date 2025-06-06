@@ -5,10 +5,8 @@
 
 #include <platform.h>
 
-#include <dolphin/gx/forward.h>
-
-#include <dolphin/gx/types.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/gx.h>
+#include <dolphin/mtx.h>
 
 // Most of these should be moved to independent headers once they are created
 

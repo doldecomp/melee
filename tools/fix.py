@@ -36,6 +36,35 @@ def fix_bool(content: str) -> str:
     )
 
 
+def fix_primitives(content: str) -> str:
+    def replace(m: re.Match[str]) -> str:
+        match (s := m.group(0)):
+            case "s8":
+                return "signed char"
+            case "u8":
+                return "char"
+            case "s16":
+                return "short"
+            case "u16":
+                return "unsigned short"
+            case "s32":
+                return "int"
+            case "u32":
+                return "uint"
+            case "f32":
+                return "float"
+            case "f64":
+                return "double"
+            case _:
+                assert False, f'Unknown regex match "{s}"'
+
+    return re.sub(
+        r"(?<![^\s(;])[fsu](?:16|32|64)(?![^\s);,])",
+        replace,
+        content,
+    )
+
+
 def remove_cast(content: str) -> str:
     return re.sub(
         r"\s*\([\w*]+\)\s*",
@@ -70,6 +99,7 @@ def main() -> None:
             "bool",
             "cast",
             "hex",
+            "prim",
         ],
         default="-",
         help="which action to take",
@@ -93,6 +123,8 @@ def main() -> None:
                 return remove_cast
             case "hex":
                 return convert_hex
+            case "prim":
+                return fix_primitives
             case _:
                 assert False, f'Unknown mode "{mode}"'
 

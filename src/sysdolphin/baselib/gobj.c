@@ -166,30 +166,30 @@ void HSD_GObj_80390FC0(void)
     }
 }
 
-void HSD_GObj_80391044(HSD_GObj* gobj)
+void HSD_GObj_LObjCallback(HSD_GObj* gobj, int unused)
 {
     HSD_LObj_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-void HSD_GObj_80391070(HSD_GObj* gobj, int arg1)
+void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     /// @todo don't inline #HSD_GObj_80390EB8
     ///       is there a file boundary between #HSD_GObj_80390EB8 and
-    ///       #HSD_GObj_80391070?
+    ///       #HSD_GObj_JObjCallback?
 #pragma push
 #pragma dont_inline on
     HSD_JObjDispAll(jobj, NULL, HSD_GObj_80390EB8(arg1), 0);
 }
 #pragma pop
 
-void HSD_GObj_803910B4(HSD_GObj* gobj)
+void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused)
 {
     HSD_FogSet(gobj->hsd_obj);
 }
 
-void HSD_GObj_803910D8(HSD_GObj* gobj)
+void HSD_GObj_803910D8(HSD_GObj* gobj, int renderpass)
 {
     if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
         HSD_GObj_80390ED0(gobj, 7);

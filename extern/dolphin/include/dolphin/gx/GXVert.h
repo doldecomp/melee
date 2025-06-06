@@ -23,7 +23,7 @@ typedef union
     f64 f64;
 } PPCWGPipe;
 
-#ifdef __MWERKS__
+#if defined(__MWERKS__) && !defined(M2CTX)
 volatile PPCWGPipe GXWGFifo : GXFIFO_ADDR;
 #else
 #define GXWGFifo (*(volatile PPCWGPipe *)GXFIFO_ADDR)
@@ -126,12 +126,14 @@ FUNC_INDEX8(GXTexCoord)
 // GXMatrixIndex
 FUNC_1PARAM(GXMatrixIndex, u8)
 
+#if !defined(M2CTX) // undef not supported
 #undef FUNC_1PARAM
 #undef FUNC_2PARAM
 #undef FUNC_3PARAM
 #undef FUNC_4PARAM
 #undef FUNC_INDEX8
 #undef FUNC_INDEX16
+#endif
 
 #ifdef __cplusplus
 }

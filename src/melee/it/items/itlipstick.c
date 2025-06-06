@@ -1,6 +1,7 @@
 #include "itlipstick.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 
 /// #it_8029570C
 
@@ -71,4 +72,7 @@ void it_80295B38(void) {}
 
 /// #it_80295C08
 
-/// #it_80295C28
+void it_80295C28(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

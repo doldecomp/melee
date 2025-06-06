@@ -5,6 +5,7 @@
 
 #include "ft/forward.h"
 #include "it/forward.h"
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
 /* 06FE08 */ void ftAnim_8006FE08(Fighter* fp, bool);
@@ -19,7 +20,7 @@
 /* 06F190 */ void ftAnim_SetAnimRate(Fighter_GObj*, float);
 /* 06F238 */ bool ftAnim_IsFramesRemaining(Fighter_GObj*);
 /* 06F484 */ float ftAnim_8006F484(void*);
-/* 06F4C8 */ void ftAnim_8006F4C8(Fighter* fp, int, u32);
+/* 06F4C8 */ void ftAnim_8006F4C8(Fighter* fp, int, lbMthp_8001E8F8_t*);
 /* 06FA58 */ void ftAnim_8006FA58(Fighter* fp, bool, HSD_Joint* joint);
 /* 06FB88 */ void ftAnim_8006FB88(Fighter* fp, bool, HSD_Joint* joint);
 /* 06FE48 */ void ftAnim_8006FE48(Fighter_GObj*);

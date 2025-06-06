@@ -4,10 +4,11 @@
 #include <platform.h>
 
 #include "ftYoshi/forward.h"
-#include <dolphin/mtx/forward.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include <dolphin/mtx.h>
 
 /* 12C030 */ void ftYs_GuardOn_0_Anim(ftYs_GObj* gobj);
 /* 12C114 */ void ftYs_GuardOn_0_IASA(ftYs_GObj* gobj);

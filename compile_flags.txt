@@ -10,6 +10,8 @@
 -isystemsrc/MSL
 -isystemsrc/Runtime
 -isystemsrc/sysdolphin
+-isystemextern/dolphin/include
+-isystemextern/dolphin/src
 -Wall
 -Wextra
 -Werror
@@ -36,3 +38,9 @@
 -Wno-unused-parameter
 -Wno-unused-value
 -Wno-unused-variable
+-Wno-for-loop-analysis
+-Wno-integer-overflow
+-Wno-sign-compare
+-Wno-return-type
+-Wno-sometimes-uninitialized
+-Wno-fortify-source

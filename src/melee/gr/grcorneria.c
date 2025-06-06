@@ -1,5 +1,9 @@
+#include "grcorneria.static.h"
+
 #include "granime.h"
+#include "grcorneria.h"
 #include "grmaterial.h"
+#include "grzakogenerator.h"
 #include "ground.h"
 #include "inlines.h"
 #include "types.h"
@@ -8,24 +12,6 @@
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-
-/* 1DD654 */ static void grCorneria_801DD654(void);
-/* 1DD658 */ static void grCorneria_801DD658(void);
-/* 1DDAC0 */ static void grCorneria_801DDAC0(void);
-/* 1DE4BC */ static void grCorneria_801DE4BC(void);
-/* 1DE8E0 */ static void grCorneria_801DE8E0(void);
-/* 1DF8CC */ static void grCorneria_801DF8CC(void);
-/* 1DFBEC */ static void grCorneria_801DFBEC(void);
-/* 1DFC24 */ static void grCorneria_801DFC24(void);
-/* 1DFC28 */ static void grCorneria_801DFC28(void);
-/* 1DFEB4 */ static void grCorneria_801DFEB4(void);
-/* 1E013C */ static void grCorneria_801E013C(void);
-/* 1E03C4 */ static void grCorneria_801E03C4(void);
-/* 1E0DE0 */ static void grCorneria_801E0DE0(void);
-/* 1E0E3C */ static void grCorneria_801E0E3C(void);
-/* 1E0F30 */ static void grCorneria_801E0F30(void);
-/* 1E1054 */ static void grCorneria_801E1054(void);
-/* 1E12CC */ static void grCorneria_801E12CC(void);
 
 /// #grCorneria_801DCCFC
 
@@ -57,9 +43,70 @@ void grCorneria_801DD654(void) {}
 
 void grCorneria_801DD658(void) {}
 
-/// #fn_801DD65C
+void fn_801DD65C(Ground_GObj* gobj)
+{
+    GET_GROUND(gobj)->gv.corneria.xC4_b0 = false;
+}
 
-/// #grCorneria_801DD674
+extern int grCn_803E1FE8[];
+extern int grCn_803E2000[];
+
+void grMaterial_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
+
+void grCorneria_801DD674(Ground_GObj* ground_gobj)
+{
+    Vec3 translate;
+    HSD_JObj* jobj;
+    u32 unused;
+
+    Ground* gr = GET_GROUND(ground_gobj);
+    Ground_801C2ED0(ground_gobj->hsd_obj, gr->map_id);
+    gr->gv.corneria.xC4_b0 = 1;
+    gr->gv.corneria.xC4_b1 = 0;
+    gr->gv.corneria.xD4 = 0.0f;
+    gr->gv.corneria.xD8 = 250.0f;
+    gr->gv.corneria.xD0 = 0.0f;
+    gr->gv.corneria.xDC = 0.0f;
+    gr->gv.corneria.xE0 = 0.0f;
+    gr->gv.corneria.xE4 = 0.0f;
+    gr->gv.corneria.xE8 = 0.0f;
+    gr->gv.corneria.xEC = 0.0f;
+    gr->gv.corneria.xF0 = 0.0f;
+    gr->gv.corneria.xF4 = 0.0f;
+    gr->gv.corneria.xF8 = 0.0f;
+    gr->gv.corneria.x104 = 0;
+    gr->x10_flags.b5 = 1;
+    grAnime_801C8138(ground_gobj, gr->map_id, 0);
+    grAnime_801C8780(ground_gobj, 3, 0, 0.0f, 1.0f);
+    gr->gv.corneria.x128 = grCorneria_801DD534(0);
+    jobj = ground_gobj->hsd_obj;
+    translate.x = gr->gv.corneria.xD4 + gr->gv.corneria.xDC;
+    translate.y = gr->gv.corneria.xD8 + gr->gv.corneria.xE0;
+    translate.z = 0.0f;
+    HSD_JObjSetTranslate(jobj, &translate);
+    grCorneria_801E1878(ground_gobj);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    gr->gv.corneria.x108 = 0;
+    gr->gv.corneria.x10C = 0;
+    gr->gv.corneria.x118 = 0;
+    gr->gv.corneria.x11A = 0;
+    gr->gv.corneria.x110 = 0;
+    gr->gv.corneria.x114 = 0.0f;
+    gr->gv.corneria.x120 = grMaterial_801C8CFC(0, 0, gr, Ground_801C3FA4(ground_gobj, 2), fn_801E12D0, fn_801E12D4, 0);
+    grMaterial_801C8DE0(gr->gv.corneria.x120, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f, 0.0f, 4.0f);
+    grMaterial_801C8E08(gr->gv.corneria.x120);
+    gr->gv.corneria.x124 = grMaterial_801C8CFC(0, 2, gr, Ground_801C3FA4(ground_gobj, 3), fn_801E12D0, fn_801E12D4, 0);
+    grMaterial_801C8E08(gr->gv.corneria.x124);
+    grMaterial_801C8DE0(gr->gv.corneria.x124, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f, 0.0f, 4.0f);
+    HSD_JObjClearFlags(Ground_801C3FA4(ground_gobj, 6), JOBJ_HIDDEN);
+    HSD_JObjSetFlags(Ground_801C3FA4(ground_gobj, 5), JOBJ_HIDDEN);
+    gr->gv.corneria.xC8 = grZakoGenerator_801CA394(grCn_803E1FE8, 1, fn_801E2454, 0.3f);
+    gr->gv.corneria.xCC = grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
+    Ground_801C10B8(ground_gobj, fn_801DD65C);
+    gr->x11_flags.b012 = 1;
+    gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
+}
 
 bool grCorneria_801DD9A0(void)
 {
@@ -176,7 +223,38 @@ void grCorneria_801E03C4(void) {}
 
 /// #grCorneria_801E08CC
 
-/// #grCorneria_801E0A74
+int grCorneria_801E0A74(f32* arg0)
+{
+    HSD_GObj* gobj;
+
+    gobj = Ground_801C2BA4(8);
+    if (gobj != NULL) {
+        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
+            *arg0 < x + 3200.0f * Ground_801C0498() / 2) {
+            return 8;
+        }
+    }
+    gobj = Ground_801C2BA4(9);
+    if (gobj != NULL) {
+        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
+            *arg0 < x + 3200.0f * Ground_801C0498() / 2) {
+            return 9;
+        }
+    }
+    gobj = Ground_801C2BA4(4);
+    if (gobj != NULL) {
+        f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
+        if (*arg0 > x - 4800.0f * Ground_801C0498() / 2 &&
+            *arg0 < x + 4800.0f * Ground_801C0498() / 2) {
+            return 4;
+        }
+    }
+    OSReport("grcorneria.c    grCorneriaGetPosMapKind2\n");
+    __assert("grcorneria.c", 2507, "0");
+    return -1;
+}
 
 static inline void clearX10_b2(HSD_GObj* gobj)
 {
@@ -310,7 +388,7 @@ bool grCorneria_801E2EEC(Vec3* v, u32 arg1, HSD_JObj* jobj)
     temp_r3 = Ground_801C2BA4(3);
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3->user_data;
-        if ((temp_r3_2 != NULL) && temp_r3_2->gv.corneria.x68 == jobj) {
+        if (temp_r3_2 != NULL && temp_r3_2->gv.corneria.x12C == jobj) {
             temp_f31 = 106.0f * Ground_801C0498();
             temp_f31_2 =
                 ((v->y - sp14.y) * ((107.0f * Ground_801C0498()) / temp_f31)) +

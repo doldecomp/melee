@@ -9,7 +9,7 @@
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 struct ftCollisionBox {
     /*  +0 */ float top;
@@ -27,6 +27,23 @@ struct UNK_SAMUS_S2 {
 
 union ftCommon_MotionVars {
     struct {
+        /* fp+2340 */ UNK_T x0;
+        /* fp+2344 */ UNK_T x4;
+        /* fp+2348 */ UNK_T x8;
+        /* fp+234C */ UNK_T xC;
+        /* fp+2350 */ UNK_T x10;
+        /* fp+2354 */ float x14;
+        /* fp+2358 */ float x18;
+        /* fp+235C */ float x1C;
+        /* fp+2360 */ float x20;
+        /* fp+2364 */ float x24;
+        /* fp+2368 */ Vec3 x28;
+        /* fp+2374 */ Vec3 x34;
+        /* fp+2380 */ Vec3 x40;
+        /* fp+238C */ Vec3 x4C;
+        /* fp+2398 */ Vec3 x58;
+    } common;
+    struct {
         /* fp+2340 */ float x0;
         /* fp+2344 */ FtMotionId msid;
         /* fp+2348 */ float slow_anim_frame;
@@ -37,6 +54,17 @@ union ftCommon_MotionVars {
         /* fp+235C */ float fast_anim_rate;
         /* fp+2360 */ float accel_mul;
     } walk;
+    struct {
+        /* fp+2340 */ u8 pad_x0[12];
+        /* fp+234C */ float accel_mul;
+    } turnrun;
+    struct {
+        /* fp+2340 */ float x0;
+    } dash;
+    struct {
+        /* fp+2340 */ u8 pad_x0[4];
+        /* fp+2344 */ float x4;
+    } run;
     struct {
         /* fp+2340 */ bool x0;
     } attack1;
@@ -266,6 +294,40 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ Item_GObj* x0;
     } capturelikelike;
+    struct {
+        /* fp+2340 */ HSD_GObjEvent x0;
+        /* fp+2344 */ HSD_GObjEvent x4;
+        /* fp+2348 */ int x8;
+    } mushroom;
+    struct {
+        /* fp+2340 */ HSD_GObjEvent x0;
+    } unk_800D2890;
+    struct {
+        /* fp+2340 */ u8 pad_x0[0x6c - 0x40];
+        /* fp+236C */ int x6C;
+        /* fp+2370 */ int x70;
+    } unk_800D331C;
+    struct {
+        /* fp+2340 */ u8 pad_x0[0x6c - 0x40];
+        /* fp+236C */ int x6C;
+        /* fp+2370 */ int x70;
+    } unk_800D34E0;
+    struct {
+        /* fp+2340 */ void* x40;
+        /* fp+2344 */ u8 pad_x44[0x6c - 0x44];
+        /* fp+236C */ int x6C;
+        /* fp+2370 */ int x70;
+        /* fp+2374 */ void* x74;
+    } unk_800D3680;
+    struct {
+        /* fp+2340 */ int x40;
+    } unk_deadleft;
+    struct {
+        /* fp+2340 */ int x40;
+        /* fp+2344 */ int x44;
+        /* fp+2348 */ u8 pad_x48[0x68 - 0x48];
+        /* fp+2368 */ int x68;
+    } unk_deadup;
 };
 
 #endif

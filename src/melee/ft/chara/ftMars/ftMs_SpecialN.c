@@ -27,7 +27,7 @@
 #include "lb/lb_00F9.h"
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 
 void ftMs_SpecialN_Enter(HSD_GObj* gobj)
 {

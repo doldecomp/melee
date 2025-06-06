@@ -2,21 +2,6 @@
 
 .section .init  # 0x80003100 - 0x80005520
 
-.global TRK_memset
-TRK_memset:
-/* 80003268 00000268  7C 08 02 A6 */	mflr r0
-/* 8000326C 0000026C  90 01 00 04 */	stw r0, 4(r1)
-/* 80003270 00000270  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 80003274 00000274  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 80003278 00000278  7C 7F 1B 78 */	mr r31, r3
-/* 8000327C 0000027C  48 32 5D 0D */	bl TRK_fill_mem
-/* 80003280 00000280  7F E3 FB 78 */	mr r3, r31
-/* 80003284 00000284  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 80003288 00000288  38 21 00 10 */	addi r1, r1, 0x10
-/* 8000328C 0000028C  80 01 00 04 */	lwz r0, 4(r1)
-/* 80003290 00000290  7C 08 03 A6 */	mtlr r0
-/* 80003294 00000294  4E 80 00 20 */	blr
-
 .global gTRKInterruptVectorTable
 gTRKInterruptVectorTable:
     .asciz "Metrowerks Target Resident Kernel for PowerPC"

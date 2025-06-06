@@ -12,9 +12,9 @@
 /* 800C8858 000C5438  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 800C885C 000C543C  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 800C8860 000C5440  3B C3 00 00 */	addi r30, r3, 0x0
-/* 800C8864 000C5444  3C 60 80 46 */	lis r3, Fighter_80459080@ha
+/* 800C8864 000C5444  3C 60 80 46 */	lis r3, fighter_x2040_alloc_data@ha
 /* 800C8868 000C5448  83 FE 00 2C */	lwz r31, 0x2c(r30)
-/* 800C886C 000C544C  38 63 90 80 */	addi r3, r3, Fighter_80459080@l
+/* 800C886C 000C544C  38 63 90 80 */	addi r3, r3, fighter_x2040_alloc_data@l
 /* 800C8870 000C5450  48 2B 23 59 */	bl HSD_ObjAlloc
 /* 800C8874 000C5454  90 7F 20 40 */	stw r3, 0x2040(r31)
 /* 800C8878 000C5458  4B FA B8 D1 */	bl ftParts_80074148

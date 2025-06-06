@@ -5,6 +5,7 @@
 
 /* 090984 */ void ftCo_80090984(ftCo_GObj* gobj);
 /* 090B60 */ void ftCo_80090B60(ftCo_GObj* gobj);
+/* 090AC0 */ void ftCo_80090AC0(Fighter*);
 /* 091030 */ void ftCo_80091030(ftCo_GObj* gobj);
 /* 0912A8 */ void ftCo_DamageIce_Anim(ftCo_GObj* gobj);
 /* 0913DC */ void ftCo_DamageIce_IASA(ftCo_GObj* gobj);

@@ -17,8 +17,15 @@ import sys
 from pathlib import Path
 from typing import Iterator, List, Optional
 
-from tools.project import (Library, Object, ProgressCategory, ProjectConfig,
-                           calculate_progress, generate_build, is_windows)
+from tools.project import (
+    Library,
+    Object,
+    ProgressCategory,
+    ProjectConfig,
+    calculate_progress,
+    generate_build,
+    is_windows,
+)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -135,6 +142,12 @@ parser.add_argument(
     action="store_true",
     help="builds equivalent (but non-matching) or modded objects",
 )
+parser.add_argument(
+    "--no-progress",
+    dest="progress",
+    action="store_false",
+    help="disable progress calculation",
+)
 args = parser.parse_args()
 
 config = ProjectConfig()
@@ -150,6 +163,7 @@ config.compilers_path = args.compilers
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
+config.progress = args.progress
 if not is_windows():
     config.wrapper = args.wrapper
 # Don't build asm unless we're --non-matching
@@ -158,11 +172,11 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20240706"
-config.dtk_tag = "v1.0.0"
-config.objdiff_tag = "v2.2.0"
-config.sjiswrap_tag = "v1.1.1"
-config.wibo_tag = "0.6.11"
+config.compilers_tag = "20250520"
+config.dtk_tag = "v1.5.1"
+config.objdiff_tag = "v2.7.1"
+config.sjiswrap_tag = "v1.2.1"
+config.wibo_tag = "0.6.16"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -172,7 +186,8 @@ config.asflags = [
     "--strip-local-absolute",
     "-I include",
     "-I src",
-    f"--defsym version={version_num}",
+    f"-I build/{config.version}/include",
+    f"--defsym BUILD_VERSION={version_num}",
 ]
 config.ldflags = [
     "-fp hardware",
@@ -195,6 +210,10 @@ config.progress_code_fancy_item = "Trophies"
 config.progress_data_fancy_frac = 51
 config.progress_data_fancy_item = "Event Matches"
 
+# Optional numeric ID for decomp.me preset
+# Can be overridden in libraries or objects
+config.scratch_preset_id = 63
+
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [
@@ -204,8 +223,10 @@ cflags_base = [
     "-proc gekko",
     "-fp hardware",
     "-align powerpc",
+    "-nosyspath",
     "-fp_contract on",
     "-O4,p",
+    "-multibyte",
     "-enum int",
     "-nodefaults",
     "-inline auto",
@@ -213,7 +234,8 @@ cflags_base = [
     '-pragma "warn_notinlined off"',
     "-RTTI off",
     "-str reuse",
-    f"-DVERSION={version_num}",
+    f"-DBUILD_VERSION={version_num}",
+    f"-DVERSION_{config.version}",
 ]
 
 # Debug flags
@@ -243,31 +265,33 @@ cflags_runtime = [
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-common off",
-    "-inline auto",
+]
+
+# Metrowerks libc flags
+cflags_libc = [
+    *cflags_base,
+    "-use_lmw_stmw on",
+    "-str pool,readonly",
+    "-common off",
+    "-inline deferred",
 ]
 
 # MetroTRK flags
 cflags_trk = [
     *cflags_base,
     "-use_lmw_stmw on",
-    "-str reuse,pool,readonly",
-    "-common off",
+    "-pool off",
     "-sdata 0",
     "-sdata2 0",
-    "-fp hard",
-    "-enum int",
-    "-char unsigned",
-    "-inline deferred",
+    "-inline on,noauto",
     "-rostr",
 ]
 
-includes_base = ["src"]
-
-system_includes_base = [
+includes_base = [
     "src",
     "src/MSL",
     "src/Runtime",
-    f"build/{config.version}/include",
+    "extern/dolphin/include",
 ]
 
 cflags_melee = [
@@ -284,8 +308,8 @@ def Lib(
     objects: Objects,
     cflags=cflags_base,
     fix_epilogue=True,
+    fix_trk=False,
     includes: List[str] = includes_base,
-    system_includes: List[str] = system_includes_base,
     src_dir: Optional[str] = None,
     category: Optional[str] = None,
 ) -> Library:
@@ -298,13 +322,14 @@ def Lib(
         "cflags": [
             *cflags,
             *make_includes(includes),
-            "-I-",
-            *make_includes(system_includes),
         ],
         "host": False,
         "progress_category": category,
         "objects": objects,
     }
+
+    if fix_trk:
+        lib["mw_version"] = "GC/1.1p1"
 
     if src_dir is not None:
         lib["src_dir"] = src_dir
@@ -313,37 +338,19 @@ def Lib(
 
 
 def DolphinLib(
-    lib_name: str, objects: Objects, fix_epilogue=False, extern=False
+    lib_name: str, objects: Objects, fix_epilogue=False
 ) -> Library:
-    if extern:
-        cflags = [
-            "-c",
-            "-O4,p",
-            "-inline auto",
-            "-sym on",
-            # TODO charflags
-            "-nodefaults",
-            "-proc gekko",
-            "-fp hard",
-            "-Cpp_exceptions off",
-            "-enum int",
-            "-warn pragmas",
-            "-requireprotos",
-            '-pragma "cats off"',
-            "-I-",
-            "-Iextern/dolphin/include",
-            "-Iextern/dolphin/include/libc",
-            "-ir extern/dolphin/src",
-            "-DRELEASE",
-        ]
-        src_dir = "extern/dolphin/src"
-        includes = []
-        system_includes = []
-    else:
-        cflags = cflags_base
-        src_dir = None
-        includes = includes_base
-        system_includes = system_includes_base
+    cflags = cflags_base + [
+        "-requireprotos",
+        "-fp_contract off",
+        "-ir extern/dolphin/src",
+    ]
+    src_dir = "extern/dolphin/src"
+    includes = [
+        "extern/dolphin/include",
+        "extern/dolphin/include/libc",
+        "src/MSL",
+    ]
 
     return Lib(
         lib_name,
@@ -352,7 +359,6 @@ def DolphinLib(
         src_dir=src_dir,
         cflags=cflags,
         includes=includes,
-        system_includes=system_includes,
         category="sdk",
     )
 
@@ -364,10 +370,6 @@ def SysdolphinLib(lib_name: str, objects: Objects) -> Library:
         includes=[
             *includes_base,
             "src/sysdolphin",
-        ],
-        system_includes=[
-            *system_includes_base,
-            "src/dolphin",
         ],
         category="hsd",
     )
@@ -381,10 +383,6 @@ def MeleeLib(lib_name: str, objects: Objects) -> Library:
             *includes_base,
             "src/melee",
             "src/melee/ft/chara",
-        ],
-        system_includes=[
-            *system_includes_base,
-            "src/dolphin",
             "src/sysdolphin",
         ],
         category="game",
@@ -401,12 +399,23 @@ def RuntimeLib(lib_name: str, objects: Objects) -> Library:
     )
 
 
+def Libc(lib_name: str, objects: Objects) -> Library:
+    return Lib(
+        lib_name,
+        objects,
+        cflags=cflags_libc,
+        fix_epilogue=False,
+        category="runtime",
+    )
+
+
 def TRKLib(lib_name: str, objects: Objects) -> Library:
     return Lib(
         lib_name,
         objects,
         cflags=cflags_trk,
         fix_epilogue=False,
+        fix_trk=True,
         category="runtime",
     )
 
@@ -416,6 +425,12 @@ NonMatching = False  # Object does not match and should not be linked
 Equivalent = (
     config.non_matching
 )  # Object should be linked when configured with --non-matching
+
+
+# Object is only matching for specific versions
+def MatchingFor(*versions):
+    return config.version in versions
+
 
 config.warn_missing_config = True
 config.warn_missing_source = True
@@ -624,7 +639,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/ftstarrodswing.c"),
             Object(NonMatching, "melee/ft/ftlipstickswing.c"),
             Object(NonMatching, "melee/ft/ft_0CDD.c"),
-            Object(NonMatching, "melee/ft/ftattacks4combo.c"),
+            Object(Matching, "melee/ft/ftattacks4combo.c"),
             Object(NonMatching, "melee/ft/ft_0CEE.c"),
             Object(NonMatching, "melee/ft/ftchangeparam.c"),
             Object(NonMatching, "melee/ft/ft_0D14.c"),
@@ -838,6 +853,9 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmmain_lib.c"),
             Object(Matching, "melee/gm/gmmain.c"),
             Object(NonMatching, "melee/gm/gm_1601.c"),
+            Object(NonMatching, "melee/gm/gmtou.c"),
+            Object(NonMatching, "melee/gm/gm_19EF.c"),
+            Object(NonMatching, "melee/gm/gmpause.c"),
             Object(NonMatching, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),
             Object(NonMatching, "melee/gm/gm_1A36.c"),
@@ -939,6 +957,7 @@ config.libs = [
         "mn (Menus)",
         [
             Object(NonMatching, "melee/mn/mn_2295.c"),
+            Object(NonMatching, "melee/mn/mnruleplus.c"),
             Object(NonMatching, "melee/mn/mnitemsw.c"),
             Object(NonMatching, "melee/mn/mnstagesw.c"),
             Object(NonMatching, "melee/mn/mnname.c"),
@@ -950,7 +969,7 @@ config.libs = [
             Object(NonMatching, "melee/mn/mnsound.c"),
             Object(Matching, "melee/mn/mndeflicker.c"),
             Object(NonMatching, "melee/mn/mnsoundtest.c"),
-            Object(NonMatching, "melee/mn/mnlanguage.c"),
+            Object(Matching, "melee/mn/mnlanguage.c"),
             Object(Matching, "melee/mn/mnhyaku.c"),
             Object(NonMatching, "melee/mn/mnevent.c"),
             Object(NonMatching, "melee/mn/mndatadel.c"),
@@ -1175,7 +1194,7 @@ config.libs = [
     MeleeLib(
         "vi (Visual, cutscenes)",
         [
-            Object(NonMatching, "melee/vi/vi.c"),
+            Object(Matching, "melee/vi/vi.c"),
             Object(NonMatching, "melee/vi/vi0102.c"),
             Object(NonMatching, "melee/vi/vi0401.c"),
             Object(NonMatching, "melee/vi/vi0402.c"),
@@ -1197,52 +1216,61 @@ config.libs = [
             Object(Matching, "Runtime/global_destructor_chain.c"),
             Object(Matching, "Runtime/Gecko_ExceptionPPC.c"),
             Object(Matching, "Runtime/Gecko_setjmp.c"),
-            Object(NonMatching, "Runtime/runtime.c"),
+            Object(Matching, "Runtime/runtime.c"),
             Object(Matching, "Runtime/__init_cpp_exceptions.c"),
         ],
     ),
-    RuntimeLib(
+    Libc(
         "MSL (Metrowerks Standard Libraries)",
         [
-            Object(NonMatching, "MSL/abort_exit.c"),
-            Object(NonMatching, "MSL/ansi_fp.c"),
+            Object(Matching, "MSL/abort_exit.c"),
+            Object(Matching, "MSL/ansi_fp.c"),
             Object(Matching, "MSL/buffer_io.c"),
             Object(Matching, "MSL/PPC_EABI/critical_regions.gamecube.c"),
             Object(Matching, "MSL/ctype.c"),
-            Object(NonMatching, "MSL/direct_io.c"),
-            Object(Matching, "MSL/cstring.c"),
+            Object(Matching, "MSL/direct_io.c"),
+            Object(Matching, "MSL/mbstring.c"),
+            Object(Matching, "MSL/mem.c"),
             Object(Matching, "MSL/mem_funcs.c"),
-            Object(NonMatching, "MSL/printf.c"),
+            Object(Matching, "MSL/misc_io.c"),
+            Object(Matching, "MSL/ansi_files.c"),
+            Object(Matching, "MSL/printf.c"),
             Object(Matching, "MSL/rand.c"),
             Object(Matching, "MSL/string.c"),
             Object(Matching, "MSL/errno.c"),
             Object(Matching, "MSL/strtoul.c"),
-            Object(Matching, "MSL/console_io.c"),
+            Object(Matching, "MSL/uart_console_io.c"),
             Object(Matching, "MSL/wchar_io.c"),
             Object(Matching, "MSL/math_1.c"),
-            Object(NonMatching, "MSL/trigf.c"),
+            Object(Matching, "MSL/float.c"),
+            Object(Matching, "MSL/trigf.c"),
             Object(NonMatching, "MSL/math.c"),
         ],
     ),
     TRKLib(
         "MetroTRK (Metrowerks Target Resident Kernel)",
         [
-            Object(NonMatching, "MetroTRK/mainloop.c"),
-            Object(NonMatching, "MetroTRK/nubevent.c"),
-            Object(NonMatching, "MetroTRK/nubinit.c"),
-            Object(NonMatching, "MetroTRK/msg.c"),
-            Object(NonMatching, "MetroTRK/msgbuf.c"),
-            Object(NonMatching, "MetroTRK/serpoll.c"),
-            Object(NonMatching, "MetroTRK/dispatch.c"),
-            Object(NonMatching, "MetroTRK/msghndlr.c"),
-            Object(NonMatching, "MetroTRK/flush_cache.c"),
-            Object(NonMatching, "MetroTRK/mem_TRK.c"),
-            Object(NonMatching, "MetroTRK/targimpl.c"),
-            Object(NonMatching, "MetroTRK/dolphin_trk.c"),
-            Object(NonMatching, "MetroTRK/mpc_7xx_603e.c"),
-            Object(NonMatching, "MetroTRK/main_TRK.c"),
-            Object(NonMatching, "MetroTRK/dolphin_trk_glue.c"),
-            Object(NonMatching, "MetroTRK/targcont.c"),
+            Object(Matching, "MetroTRK/mainloop.c"),
+            Object(Matching, "MetroTRK/nubevent.c"),
+            Object(Matching, "MetroTRK/nubinit.c"),
+            Object(Matching, "MetroTRK/msg.c"),
+            Object(Matching, "MetroTRK/msgbuf.c"),
+            Object(Matching, "MetroTRK/serpoll.c"),
+            Object(Matching, "MetroTRK/usr_put.c"),
+            Object(Matching, "MetroTRK/dispatch.c"),
+            Object(Matching, "MetroTRK/msghndlr.c"),
+            Object(Matching, "MetroTRK/support.c"),
+            Object(Matching, "MetroTRK/mutex_TRK.c"),
+            Object(Matching, "MetroTRK/notify.c"),
+            Object(Matching, "MetroTRK/flush_cache.c"),
+            Object(Matching, "MetroTRK/mem_TRK.c"),
+            Object(Matching, "MetroTRK/__exception.s"),
+            Object(Matching, "MetroTRK/targimpl.c"),
+            Object(Matching, "MetroTRK/dolphin_trk.c"),
+            Object(Matching, "MetroTRK/mpc_7xx_603e.c"),
+            Object(Matching, "MetroTRK/main_TRK.c"),
+            Object(Matching, "MetroTRK/dolphin_trk_glue.c"),
+            Object(Matching, "MetroTRK/targcont.c"),
         ],
     ),
     DolphinLib(
@@ -1254,14 +1282,15 @@ config.libs = [
     DolphinLib(
         "OdemuExi2",
         [
-            Object(NonMatching, "dolphin/OdemuExi2/DebuggerDriver.c"),
+            Object(NonMatching, "dolphin/odenotstub/odenotstub.c"),
         ],
     ),
-    Lib(
+    DolphinLib(
         "hio",
         [
             Object(Matching, "dolphin/hio/hio.c"),
         ],
+        fix_epilogue=True,
     ),
     DolphinLib(
         "mcc",
@@ -1301,7 +1330,7 @@ config.libs = [
         [
             Object(NonMatching, "dolphin/dvd/dvdlow.c"),
             Object(Matching, "dolphin/dvd/dvdfs.c"),
-            Object(Matching, "dolphin/dvd/dvd.c"),
+            Object(NonMatching, "dolphin/dvd/dvd.c"),
             Object(Matching, "dolphin/dvd/dvdqueue.c"),
             Object(NonMatching, "dolphin/dvd/dvderror.c"),
             Object(Matching, "dolphin/dvd/fstload.c"),
@@ -1313,18 +1342,18 @@ config.libs = [
             Object(NonMatching, "dolphin/gx/GXInit.c"),
             Object(Matching, "dolphin/gx/GXFifo.c"),
             Object(NonMatching, "dolphin/gx/GXAttr.c"),
-            Object(Matching, "dolphin/gx/GXMisc.c"),
-            Object(Matching, "dolphin/gx/GXGeometry.c"),
-            Object(NonMatching, "dolphin/gx/GXFrameBuf.c"),
+            Object(NonMatching, "dolphin/gx/GXMisc.c"),
+            Object(NonMatching, "dolphin/gx/GXGeometry.c"),
+            Object(Matching, "dolphin/gx/GXFrameBuf.c"),
             Object(Matching, "dolphin/gx/GXLight.c"),
             Object(NonMatching, "dolphin/gx/GXTexture.c"),
-            Object(NonMatching, "dolphin/gx/GXBump.c"),
-            Object(NonMatching, "dolphin/gx/GXTev.c"),
+            Object(Matching, "dolphin/gx/GXBump.c"),
+            Object(Matching, "dolphin/gx/GXTev.c"),
             Object(NonMatching, "dolphin/gx/GXPixel.c"),
             Object(Matching, "dolphin/gx/GXStubs.c"),
             Object(Matching, "dolphin/gx/GXDisplayList.c"),
             Object(NonMatching, "dolphin/gx/GXTransform.c"),
-            Object(NonMatching, "dolphin/gx/GXPerf.c"),
+            Object(Matching, "dolphin/gx/GXPerf.c"),
         ],
     ),
     DolphinLib(
@@ -1335,11 +1364,12 @@ config.libs = [
             Object(Matching, "dolphin/mtx/mtx44.c"),
             Object(NonMatching, "dolphin/mtx/vec.c"),
         ],
+        fix_epilogue=True,
     ),
     DolphinLib(
         "os",
         [
-            Object(Matching, "dolphin/os/OSInit.c"),
+            Object(NonMatching, "dolphin/os/OS.c"),
             Object(Matching, "dolphin/os/OSAlarm.c"),
             Object(Matching, "dolphin/os/OSAlloc.c"),
             Object(Matching, "dolphin/os/OSArena.c"),
@@ -1347,22 +1377,23 @@ config.libs = [
             Object(Matching, "dolphin/os/OSCache.c"),
             Object(Matching, "dolphin/os/OSContext.c"),
             Object(Matching, "dolphin/os/OSError.c"),
-            Object(Matching, "dolphin/os/OSExi.c"),
+            Object(NonMatching, "dolphin/os/OSExi.c"),
             Object(Matching, "dolphin/os/OSFont.c"),
             Object(Matching, "dolphin/os/OSInterrupt.c"),
             Object(Matching, "dolphin/os/OSLink.c"),
-            Object(Matching, "dolphin/os/OSMemory.c"),
+            Object(NonMatching, "dolphin/os/OSMemory.c"),
             Object(Matching, "dolphin/os/OSMutex.c"),
             Object(NonMatching, "dolphin/os/OSReboot.c"),
             Object(NonMatching, "dolphin/os/OSReset.c"),
-            Object(Matching, "dolphin/os/OSResetSW.c"),
-            Object(Matching, "dolphin/os/OSRtc.c"),
+            Object(NonMatching, "dolphin/os/OSResetSW.c"),
+            Object(NonMatching, "dolphin/os/OSRtc.c"),
             Object(NonMatching, "dolphin/os/OSSerial.c"),
             Object(Matching, "dolphin/os/OSSync.c"),
-            Object(NonMatching, "dolphin/os/OSThread.c"),
+            Object(Matching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
-            Object(NonMatching, "dolphin/os/OSUartExi.c"),
-            Object(NonMatching, "dolphin/os/init/__ppc_eabi_init.c"),
+            Object(Matching, "dolphin/os/OSUartExi.c"),
+            Object(Matching, "dolphin/os/init/__start.c"),
+            Object(Matching, "dolphin/os/init/__ppc_eabi_init.c"),
         ],
     ),
     DolphinLib(
@@ -1378,7 +1409,6 @@ config.libs = [
         [
             Object(NonMatching, "dolphin/vi/vi.c"),
         ],
-        extern=True,
     ),
     DolphinLib(
         "ai",
@@ -1420,21 +1450,21 @@ config.libs = [
             Object(Matching, "dolphin/ax/AX.c"),
             Object(Matching, "dolphin/ax/AXAlloc.c"),
             Object(Matching, "dolphin/ax/AXAux.c"),
-            Object(NonMatching, "dolphin/ax/AXCL.c"),
-            Object(NonMatching, "dolphin/ax/AXOut.c"),
-            Object(NonMatching, "dolphin/ax/AXSPB.c"),
-            Object(NonMatching, "dolphin/ax/AXVPB.c"),
+            Object(Matching, "dolphin/ax/AXCL.c"),
+            Object(Matching, "dolphin/ax/AXOut.c"),
+            Object(Matching, "dolphin/ax/AXSPB.c"),
+            Object(Matching, "dolphin/ax/AXVPB.c"),
             Object(Matching, "dolphin/ax/AXProf.c"),
-            Object(NonMatching, "dolphin/ax/DSPCode.c"),
+            Object(Matching, "dolphin/ax/DSPCode.c"),
         ],
     ),
     DolphinLib(
         "axfx",
         [
-            Object(NonMatching, "dolphin/axfx/reverb_hi.c"),
-            Object(NonMatching, "dolphin/axfx/reverb_std.c"),
-            Object(NonMatching, "dolphin/axfx/chorus.c"),
-            Object(NonMatching, "dolphin/axfx/delay.c"),
+            Object(Matching, "dolphin/axfx/reverb_hi.c"),
+            Object(Matching, "dolphin/axfx/reverb_std.c"),
+            Object(Matching, "dolphin/axfx/chorus.c"),
+            Object(Matching, "dolphin/axfx/delay.c"),
             Object(Matching, "dolphin/axfx/axfx.c"),
         ],
     ),
@@ -1507,25 +1537,47 @@ config.libs = [
     ),
 ]
 
+
+# Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
+# This is called once per module, with the module ID and the current link order.
+#
+# For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
+# "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
+def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+    # Don't modify the link order for matching builds
+    if not config.non_matching:
+        return objects
+    if module_id == 0:  # DOL
+        return objects + ["dummy.c"]
+    return objects
+
+
+# Uncomment to enable the link order callback.
+# config.link_order_callback = link_order_callback
+
+
 # Extra categories for progress tracking
-config.progress_categories = (
-    [
-        ProgressCategory("game", "Game Code"),
-        ProgressCategory("hsd", "HSD Code"),
-        ProgressCategory("sdk", "Dolphin SDK Code"),
-        ProgressCategory("runtime", "Gekko Runtime Code"),
-    ]
-    if args.verbose
-    else []
-)
-config.progress_all = False
+config.progress_categories = [
+    ProgressCategory("game", "Game Code"),
+    ProgressCategory("hsd", "HSD Code"),
+    ProgressCategory("sdk", "Dolphin SDK Code"),
+    ProgressCategory("runtime", "Gekko Runtime Code"),
+]
+config.print_progress_categories = args.verbose
 config.progress_each_module = args.verbose
+
+# Optional extra arguments to `objdiff-cli report generate`
+config.progress_report_args = [
+    # Marks relocations as mismatching if the target value is different
+    # Default is "functionRelocDiffs=none", which is most lenient
+    # "--config functionRelocDiffs=data_value",
+]
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
     generate_build(config)
 elif args.mode == "progress":
-    # Print progress and write progress.json
+    # Print progress information
     calculate_progress(config)
 else:
     sys.exit("Unknown mode: " + args.mode)

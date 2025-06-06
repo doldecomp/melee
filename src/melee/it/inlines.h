@@ -13,4 +13,9 @@ static inline Item* GetItemData(HSD_GObj* gobj)
     return item_data;
 }
 
+static inline void itResetVelocity(Item* ip)
+{
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+}
+
 #endif

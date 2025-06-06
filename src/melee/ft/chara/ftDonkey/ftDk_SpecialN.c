@@ -2,7 +2,6 @@
 
 #include "forward.h"
 #include "lb/forward.h"
-#include <dolphin/mtx/forward.h>
 
 #include "ftDk_SpecialN.h"
 
@@ -24,6 +23,7 @@
 #include "ftDonkey/types.h"
 
 #include <common_structs.h>
+#include <dolphin/mtx.h>
 
 static void setCallbacks(HSD_GObj* gobj)
 {

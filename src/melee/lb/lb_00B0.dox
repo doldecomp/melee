@@ -6,7 +6,7 @@
 #include <baselib/forward.h>
 
 #include <placeholder.h>
-#include <dolphin/mtx/types.h>
+#include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/texp.h>
 
@@ -41,7 +41,7 @@
 /* 00C420 */ void lb_8000C420(HSD_JObj*, u32 flags, float limit);
 /* 00C490 */ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj*,
                               float, float);
-/* 00C7BC */ void lb_8000C7BC(HSD_JObj* src, HSD_JObj* dst);
+/* 00C7BC */ void lbCopyJObjSRT(HSD_JObj* src, HSD_JObj* dst);
 /* 00C868 */ void lb_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, float, float);
 /* 00CC5C */ s32 lbGetFreeColorRegister(s32 i0, HSD_MObj*, HSD_TExp*);
 /* 00CC8C */ s32 lb_8000CC8C(s32 i);

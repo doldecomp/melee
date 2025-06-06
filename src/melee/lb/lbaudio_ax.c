@@ -1,6 +1,6 @@
-#include <baselib/axdriver.h>
+#include "lbaudio_ax.static.h"
 
-static s32 lbl_804D6408;
+#include <baselib/axdriver.h>
 
 /// #lbAudioAx_8002306C
 
@@ -18,7 +18,7 @@ static s32 lbl_804D6408;
 
 /// #lbAudioAx_80023694
 
-int lbAudioAx_800236B8(HSD_SM* arg0)
+int lbAudioAx_800236B8(int arg0)
 {
     AXDriverKeyOff(arg0);
     return -1;
@@ -110,9 +110,17 @@ int lbAudioAx_80024B94(int arg0, int arg1)
 
 /// #lbAudioAx_80024F6C
 
-/// #lbAudioAx_80024FDC
+void lbAudioAx_80024FDC(void)
+{
+    lbl_804D6430 = 0x1FE;
+    lbl_804D6420 += 1;
+}
 
-/// #lbAudioAx_80024FF4
+void lbAudioAx_80024FF4(void)
+{
+    lbl_804D6434 = 0x1E0;
+    lbl_804D6424 += 1;
+}
 
 /// #lbAudioAx_8002500C
 
@@ -204,8 +212,6 @@ void lbAudioAx_80025098(s32 arg0)
 /// #lbAudioAx_80028B4C
 
 /// #lbAudioAx_80028B6C
-
-static s32 lbl_804D38CC = 0x7F;
 
 void lbAudioAx_80028B90(void)
 {
