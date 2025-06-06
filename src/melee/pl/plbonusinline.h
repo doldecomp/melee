@@ -1,7 +1,4 @@
-/*
- * Used in:
- *   pl_8003ED0C
- *   pl_8003FAA8
- *   pl_800407C8
- *   pl_80040948
- */
+#ifndef MELEE_PL_PLBONUSLIB_INLINE_H
+#define MELEE_PL_PLBONUSLIB_INLINE_H
+
+#endif

@@ -17,6 +17,9 @@
 #include <it/it_26B1.h>
 #include <MetroTRK/intrinsics.h>
 
+/// @todo Lots of 6s in here
+// pl_8004049C seems to indicate it might have actually been `Gm_Player_NumMax`
+
 /* 03D514 */ static void plBonusLib_8003D514(int);
 
 void plBonusLib_8003D514(int arg0)
@@ -124,7 +127,7 @@ void pl_8003E150(int slot, int arg1)
 int pl_8003E2CC(int arg0, int pl_itemlog_kind)
 {
     HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
-                 "pl_itemlog_kind < Pl_ItemLog_Terminate");
+                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x674[pl_itemlog_kind];
@@ -133,7 +136,7 @@ int pl_8003E2CC(int arg0, int pl_itemlog_kind)
 int pl_8003E334(int arg0, int pl_itemlog_kind)
 {
     HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
-                 "pl_itemlog_kind < Pl_ItemLog_Terminate");
+                  "pl_itemlog_kind < Pl_ItemLog_Terminate");
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x710[pl_itemlog_kind];
@@ -147,7 +150,7 @@ int pl_8003E39C(int arg0)
     var_r28 = 0;
     for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
         HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
-                     "pl_itemlog_kind < Pl_ItemLog_Terminate");
+                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
 
         var_r28 += Player_GetStaleMoveTableIndexPtr2(arg0)
                        ->x0_staleMoveTable.x674[pl_itemlog_kind];
@@ -164,7 +167,7 @@ int pl_8003E420(int arg0)
     pl_itemlog_kind = 0;
     for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
         HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
-                     "pl_itemlog_kind < Pl_ItemLog_Terminate");
+                      "pl_itemlog_kind < Pl_ItemLog_Terminate");
 
         var_r28 += Player_GetStaleMoveTableIndexPtr2(arg0)
                        ->x0_staleMoveTable.x710[pl_itemlog_kind];
@@ -181,8 +184,8 @@ void pl_8003E70C(Item_GObj* igobj)
     temp_r30 = it_8026BC78(igobj);
 
     HSD_ASSERTMSG(634, 0xA1 <= itGetKind(igobj) && itGetKind(igobj) < 0xBF,
-                 "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
-                 "It_PKind_Terminate");
+                  "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
+                  "It_PKind_Terminate");
 
     RETURN_IF(!ftLib_80086960(temp_r30));
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(ftLib_80086BE0(temp_r30));
@@ -193,7 +196,7 @@ void pl_8003E70C(Item_GObj* igobj)
 int pl_8003E7D4(int arg0, int kind)
 {
     HSD_ASSERTMSG(649, 0xA1 <= kind && kind < 0xBF,
-                 "It_PKind_Start <= kind && kind < It_PKind_Terminate");
+                  "It_PKind_Start <= kind && kind < It_PKind_Terminate");
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
         ->x0_staleMoveTable.x5C4[kind];
@@ -780,6 +783,64 @@ void pl_80040460(int slot, int arg1)
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     RETURN_IF(arg1 != 0);
     temp_r3->x0_staleMoveTable.xCAC = 6;
+}
+
+void pl_8004049C(int player, ItemKind arg1)
+{
+    s32 var_r0;
+    int var_r30;
+
+    var_r30 = -1;
+    RETURN_IF(player == 6);
+
+    var_r0 = 0;
+    if ((player >= 0) && (player < 6)) {
+        var_r0 = 1;
+    }
+    if (var_r0 == 0) {
+        OSReport("zako ko player illegal ! :%d\n", player);
+        __assert("plbonuslib.c", 1559,
+                 "0 <= player && player < Gm_Player_NumMax");
+    }
+    switch (arg1) {
+    case It_Kind_Old_Kuri:
+    case It_Kind_Kuriboh:
+        var_r30 = 0xCE;
+        break;
+    case It_Kind_Heiho:
+        var_r30 = 0xD6;
+        break;
+    case It_Kind_Nokonoko:
+        var_r30 = 0xCF;
+        break;
+    case It_Kind_Patapata:
+        var_r30 = 0xD0;
+        break;
+    case It_Kind_Likelike:
+        var_r30 = 0xD2;
+        break;
+    case It_Kind_Old_Lead:
+    case It_Kind_Leadead:
+        var_r30 = 0xD1;
+        break;
+    case It_Kind_Old_Octa:
+    case It_Kind_Octarock:
+        var_r30 = 0xD3;
+        break;
+    case It_Kind_Old_Otto:
+    case It_Kind_Ottosea:
+        var_r30 = 0xD4;
+        break;
+    case It_Kind_Whitebea:
+        var_r30 = 0xD5;
+        break;
+    default:
+        break;
+    }
+    if (var_r30 != -1) {
+        gm_8016B6E8(player, gm_8016F2F8(var_r30, player));
+        pl_80038824(player, var_r30);
+    }
 }
 
 void pl_8004065C(int arg0, int arg1)
