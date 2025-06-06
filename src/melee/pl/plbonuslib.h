@@ -14,7 +14,7 @@
 /* 03E0E8 */ void pl_8003E0E8(int, int);
 /* 03E114 */ void pl_8003E114(int, int, float);
 /* 03E150 */ void pl_8003E150(int slot, int);
-/* 03E17C */ void pl_8003E17C(u8, int, Item_GObj*);
+/* 03E17C */ void pl_8003E17C(int, int, Item_GObj*);
 /* 03E2CC */ int pl_8003E2CC(int, int pl_itemlog_kind);
 /* 03E334 */ int pl_8003E334(int, int pl_itemlog_kind);
 /* 03E39C */ int pl_8003E39C(int);

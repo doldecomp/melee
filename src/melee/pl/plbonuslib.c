@@ -125,6 +125,53 @@ void pl_8003E150(int slot, int arg1)
     stale_moves->x0_staleMoveTable.xCD8 += 1;
 }
 
+void pl_8003E17C(int arg0, int arg1, Item_GObj* arg2)
+{
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    s32 temp_r3 = itGetKind(arg2);
+    s32 var_r30;
+
+    if ((temp_r3 >= 0) && (temp_r3 < 0x23)) {
+        var_r30 = temp_r3;
+    } else {
+        switch (temp_r3) {
+        case 0xCD:
+            var_r30 = 0x23;
+            break;
+        case 0xE1:
+            var_r30 = 0x24;
+            break;
+        case 0xE2:
+            var_r30 = 0x25;
+            break;
+        case 0x28:
+            var_r30 = 0x26;
+            break;
+        default:
+            var_r30 = -1;
+            break;
+        }
+    }
+
+    if (var_r30 != -1 && (var_r30 == 35 || var_r30 == 3 || var_r30 == 38 ||
+                          it_8026B7E8(arg2) == 1))
+    {
+        int var_r29;
+
+        if (!it_8026B774(arg2, arg0)) {
+            temp_r31->x0_staleMoveTable.x674[var_r30] += 1;
+        }
+
+        for (var_r29 = 0; var_r29 < 6; var_r29++) {
+            if (it_8026B774(arg2, var_r29)) {
+                return;
+            }
+        }
+
+        temp_r31->x0_staleMoveTable.x710[var_r30] += 1;
+    }
+}
+
 int pl_8003E2CC(int arg0, int pl_itemlog_kind)
 {
     HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
