@@ -16,6 +16,7 @@
 #include <if/ifmagnify.h>
 #include <it/it_26B1.h>
 #include <MetroTRK/intrinsics.h>
+#include <MSL/math.h>
 
 /// @todo Lots of 6s in here
 // pl_8004049C seems to indicate it might have actually been `Gm_Player_NumMax`
@@ -26,28 +27,30 @@ void plBonusLib_8003D514(int arg0)
 {
     Vec3 sp18;
     Vec3 spC;
-    HSD_GObj* temp_r31;
+    HSD_GObj* temp_r31 = Player_GetEntity(arg0);
     HSD_GObj* temp_r30;
     f32 temp_f1;
     int var_r29;
     pl_StaleMoveTableExt_t* temp_r31_2;
 
-    temp_r31 = Player_GetEntity(arg0);
-
     RETURN_IF(ftLib_80087354(temp_r31) != 0);
     ftLib_80086644(temp_r31, &sp18);
+
     for (var_r29 = 0; var_r29 < 6; var_r29++) {
         if (var_r29 == arg0) {
             continue;
         }
+
         temp_r30 = Player_GetEntity(var_r29);
         if (!Player_8003221C(var_r29) || ftLib_8008732C(temp_r30)) {
             continue;
         }
+
         temp_r31_2 = Player_GetStaleMoveTableIndexPtr2(var_r29);
         ftLib_80086644(temp_r30, &spC);
         temp_f1 = ftLib_800865C0(temp_r30);
         temp_r31_2->xDD1.bit6 = 1;
+
         if ((temp_f1 * sp18.x) > (temp_f1 * spC.x)) {
             temp_r31_2->xDD1.bit7 = 1;
         }
@@ -67,11 +70,10 @@ int pl_8003D60C(int arg0)
 
 void pl_8003DF44(int arg0, int arg1)
 {
-    int temp_r3;
+    int temp_r3 = ftLib_80087300(Player_GetEntityAtIndex(arg0, arg1));
+    pl_StaleMoveTableExt_t* smte;
+
     bool var_r0_2;
-
-    temp_r3 = ftLib_80087300(Player_GetEntityAtIndex(arg0, arg1));
-
     if ((temp_r3 == 6) || (temp_r3 == arg0) ||
         pl_CheckIfSameTeam(arg0, temp_r3))
     {
@@ -79,11 +81,10 @@ void pl_8003DF44(int arg0, int arg1)
     } else {
         var_r0_2 = false;
     }
-    if (var_r0_2 == false) {
-        pl_StaleMoveTableExt_t* smte =
-            Player_GetStaleMoveTableIndexPtr2(temp_r3);
-        smte->xD54 = pl_804D6470->xB4;
-    }
+    RETURN_IF(var_r0_2);
+
+    smte = Player_GetStaleMoveTableIndexPtr2(temp_r3);
+    smte->xD54 = pl_804D6470->xB4;
 }
 
 void pl_8003DFF4(int arg0, int arg1, int arg2)
@@ -118,9 +119,9 @@ void pl_8003E114(int arg0, int arg1, float arg2)
 
 void pl_8003E150(int slot, int arg1)
 {
-    pl_StaleMoveTableExt_t* stale_moves;
+    pl_StaleMoveTableExt_t* stale_moves =
+        Player_GetStaleMoveTableIndexPtr2(slot);
 
-    stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
     stale_moves->x0_staleMoveTable.xCD8 += 1;
 }
 
@@ -144,50 +145,47 @@ int pl_8003E334(int arg0, int pl_itemlog_kind)
 
 int pl_8003E39C(int arg0)
 {
-    int var_r28;
+    int sum = 0;
     int pl_itemlog_kind;
 
-    var_r28 = 0;
     for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
         HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
                       "pl_itemlog_kind < Pl_ItemLog_Terminate");
 
-        var_r28 += Player_GetStaleMoveTableIndexPtr2(arg0)
-                       ->x0_staleMoveTable.x674[pl_itemlog_kind];
+        sum += Player_GetStaleMoveTableIndexPtr2(arg0)
+                   ->x0_staleMoveTable.x674[pl_itemlog_kind];
     }
-    return var_r28;
+
+    return sum;
 }
 
 int pl_8003E420(int arg0)
 {
-    int var_r28;
+    int sum = 0;
     int pl_itemlog_kind;
 
-    var_r28 = 0;
-    pl_itemlog_kind = 0;
     for (pl_itemlog_kind = 0; pl_itemlog_kind < 39; pl_itemlog_kind++) {
         HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
                       "pl_itemlog_kind < Pl_ItemLog_Terminate");
 
-        var_r28 += Player_GetStaleMoveTableIndexPtr2(arg0)
-                       ->x0_staleMoveTable.x710[pl_itemlog_kind];
+        sum += Player_GetStaleMoveTableIndexPtr2(arg0)
+                   ->x0_staleMoveTable.x710[pl_itemlog_kind];
     }
-    return var_r28;
+    return sum;
 }
 
 void pl_8003E70C(Item_GObj* igobj)
 {
-    HSD_GObj* temp_r30;
     pl_StaleMoveTableExt_t* temp_r31;
     s32 temp_r3;
 
-    temp_r30 = it_8026BC78(igobj);
+    HSD_GObj* temp_r30 = it_8026BC78(igobj);
 
     HSD_ASSERTMSG(634, 0xA1 <= itGetKind(igobj) && itGetKind(igobj) < 0xBF,
                   "It_PKind_Start <= itGetKind(igobj) && itGetKind(igobj) < "
                   "It_PKind_Terminate");
-
     RETURN_IF(!ftLib_80086960(temp_r30));
+
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(ftLib_80086BE0(temp_r30));
     temp_r3 = itGetKind(igobj);
     temp_r31->x0_staleMoveTable.x5C4[temp_r3] += 1;
@@ -204,17 +202,17 @@ int pl_8003E7D4(int arg0, int kind)
 
 void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
 {
-    HSD_GObj* temp_r31;
-    HSD_GObj* temp_r3;
+    HSD_GObj* temp_r31 = Player_GetEntityAtIndex(arg0, arg1);
+    HSD_GObj* temp_r3 = it_8026BC78(arg2);
     u8 temp_r31_2;
 
-    temp_r31 = Player_GetEntityAtIndex(arg0, arg1);
-    temp_r3 = it_8026BC78(arg2);
     if ((temp_r31 != temp_r3) && (it_8026B7BC(arg2) != 0)) {
         pl_80038824(arg0, 0x9A);
+
         if (itGetKind(arg2) == 7) {
             pl_80038788(arg0, 0xB6, 1);
         }
+
         if ((arg1 == 0) && ftLib_80086960(temp_r3) &&
             (ftLib_800874BC(temp_r3) == 0))
         {
@@ -222,11 +220,13 @@ void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
             Player_GetStaleMoveTableIndexPtr2(arg0)->xD6C = (s32) temp_r31_2;
         }
     }
+
     if (itGetKind(arg2) == 6) {
         if (it_8026B960(arg2) <= pl_804D6470->x180) {
             pl_800419AC(arg0, arg1, (u16) it_8026B7CC(arg2));
         }
     }
+
     RETURN_IF(arg1 != 0);
     Player_GetStaleMoveTableIndexPtr2(arg0)->x0_staleMoveTable.xCA8 = 0;
 }
@@ -259,11 +259,11 @@ void pl_8003EA74(int arg0, int arg1)
 
 void pl_8003EAAC(int arg0, int arg1, int arg2)
 {
-    pl_StaleMoveTableExt_t* temp_r31;
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
 
-    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
     if ((arg1 == 0) && (arg2 == 0x59)) {
         temp_r31->x0_staleMoveTable.xCA8 += 1;
+
         if (temp_r31->x0_staleMoveTable.xCA8 == it_8026C1D4()) {
             pl_80038788(arg0, 0xC2, 1);
         }
@@ -281,15 +281,12 @@ void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
     case 1:
     case 3:
         stale_moves->x0_staleMoveTable.xC98 += arg3;
-        break;
     }
 }
 
 void pl_8003EC9C(int arg0, int arg1, float arg2, float arg3)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     RETURN_IF(arg1);
 
     temp_r3->x0_staleMoveTable.xC60 += arg3;
@@ -464,12 +461,9 @@ void fn_8003EE2C(int arg0, int arg1)
 
 void fn_8003F53C(int arg0, int arg1)
 {
-    Fighter_GObj* temp_r30;
-    pl_StaleMoveTableExt_t* temp_r31;
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    Fighter_GObj* temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
     unsigned int temp_r3;
-
-    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
 
     if ((arg1 != 1) && (ftLib_800867D8(temp_r30) == false)) {
         if ((ft_800877F8(temp_r30, 0x100) == 0) &&
@@ -505,21 +499,17 @@ int pl_8003FC20(int arg0)
 
 void pl_8003FC44(int slot, int arg1)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     RETURN_IF(arg1 != 0);
     temp_r3->xDD0.bit0 = 1;
 }
 
 void pl_8003FC88(int arg0, int arg1, int arg2)
 {
-    pl_StaleMoveTableExt_t* stale_moves;
+    pl_StaleMoveTableExt_t* stale_moves =
+        Player_GetStaleMoveTableIndexPtr2(arg0);
+    bool var_r4 = false;
     unsigned int temp_r0;
-    bool var_r4;
-
-    stale_moves = Player_GetStaleMoveTableIndexPtr2(arg0);
-    var_r4 = false;
 
     RETURN_IF(arg1 == 1);
     temp_r0 = stale_moves->x0_staleMoveTable.xC90;
@@ -545,6 +535,7 @@ void pl_8003FC88(int arg0, int arg1, int arg2)
         }
         break;
     }
+
     if (var_r4) {
         if (temp_r0 == 3U) {
             stale_moves->x0_staleMoveTable.xC90 = 0U;
@@ -552,9 +543,9 @@ void pl_8003FC88(int arg0, int arg1, int arg2)
         } else {
             stale_moves->x0_staleMoveTable.xC90 += 1U;
         }
-        return;
+    } else {
+        stale_moves->x0_staleMoveTable.xC90 = 0U;
     }
-    stale_moves->x0_staleMoveTable.xC90 = 0U;
 }
 
 void pl_8003FDA0(int arg0)
@@ -564,9 +555,7 @@ void pl_8003FDA0(int arg0)
 
 void pl_8003FDC8(int arg0)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r3->xD70 += 1;
 }
 
@@ -594,9 +583,8 @@ void pl_8003FE64(int arg0)
             break;
         }
     }
-    if (var_r31 == 6) {
-        pl_80038788(arg0, 0x1A, 1);
-    }
+    RETURN_IF(var_r31 != 6);
+    pl_80038788(arg0, 0x1A, 1);
 }
 
 void pl_8003FED0(int arg0, int arg1)
@@ -609,18 +597,14 @@ void pl_8003FED0(int arg0, int arg1)
             break;
         }
     }
-    if (var_r31 == 6) {
-        pl_80038788(arg0, 0x82, 1);
-    }
+    RETURN_IF(var_r31 != 6);
+    pl_80038788(arg0, 0x82, 1);
 }
 
 void pl_8003FF44(int arg0, int arg1, int arg2)
 {
-    Fighter_GObj* temp_r3;
-    pl_StaleMoveTableExt_t* temp_r31;
-
-    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    temp_r3 = Player_GetEntityAtIndex(arg0, arg1);
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    Fighter_GObj* temp_r3 = Player_GetEntityAtIndex(arg0, arg1);
     if ((arg1 == 0) && (arg2 >= 1) && (arg2 <= 0x10) &&
         (ft_80087A8C(temp_r3) > pl_804D6470->x38))
     {
@@ -630,9 +614,7 @@ void pl_8003FF44(int arg0, int arg1, int arg2)
 
 void pl_8003FFDC(int arg0, int arg1, int arg2, int arg3, int arg4)
 {
-    Fighter_GObj* temp_r3;
-
-    temp_r3 = Player_GetEntityAtIndex(arg2, arg3);
+    Fighter_GObj* temp_r3 = Player_GetEntityAtIndex(arg2, arg3);
     if ((arg0 != arg2) && (arg4 != ft_80087A98(temp_r3))) {
         pl_80038824(arg0, 0x46);
     }
@@ -664,10 +646,9 @@ void pl_80040048(int arg0, int arg1)
 
 void pl_80040120(int arg0, int arg1)
 {
-    pl_StaleMoveTableExt_t* temp_r30;
+    pl_StaleMoveTableExt_t* temp_r30 = Player_GetStaleMoveTableIndexPtr2(arg0);
     int var_r29;
 
-    temp_r30 = Player_GetStaleMoveTableIndexPtr2(arg0);
     RETURN_IF(arg1 == 1);
 
     if (temp_r30->xD4C != 0U) {
@@ -693,32 +674,15 @@ void pl_80040120(int arg0, int arg1)
 
 void pl_800401F0(int arg0, int arg1, float arg2, float arg3)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-    float var_f1;
-    float var_f1_2;
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
 
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
-
-    if (arg2 < 0.0F) {
-        var_f1 = -arg2;
-    } else {
-        var_f1 = arg2;
-    }
-    temp_r3->x0_staleMoveTable.xCDC += var_f1;
-
-    if (arg3 < 0.0F) {
-        var_f1_2 = -arg3;
-    } else {
-        var_f1_2 = arg3;
-    }
-    temp_r3->x0_staleMoveTable.xCE0 += var_f1_2;
+    temp_r3->x0_staleMoveTable.xCDC += fabs_inline(arg2);
+    temp_r3->x0_staleMoveTable.xCE0 += fabs_inline(arg3);
 }
 
 void pl_80040270(int arg0, int arg1, float arg2)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     RETURN_IF(arg1 != 0);
 
     if (arg2 >= pl_804D6470->x98) {
@@ -750,9 +714,7 @@ void pl_80040330(int slot, int arg1, float arg2)
 
 void pl_80040374(int arg0, int arg1)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     if ((arg1 == 0) && (temp_r3->xD64 != 6)) {
         temp_r3->xD60 = pl_804D6470->x124;
     }
@@ -768,9 +730,7 @@ void pl_800403C0(int arg0, int arg1)
 
 void pl_800403FC(int arg0, int arg1, int slot, int arg3, int arg4)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     if ((arg3 == 0) && (arg4 >= 0x54) && (arg4 <= 0x57)) {
         temp_r3->x0_staleMoveTable.xCAC = arg0;
     }
@@ -778,19 +738,16 @@ void pl_800403FC(int arg0, int arg1, int slot, int arg3, int arg4)
 
 void pl_80040460(int slot, int arg1)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     RETURN_IF(arg1 != 0);
     temp_r3->x0_staleMoveTable.xCAC = 6;
 }
 
 void pl_8004049C(int player, ItemKind arg1)
 {
+    int var_r30 = -1;
     s32 var_r0;
-    int var_r30;
 
-    var_r30 = -1;
     RETURN_IF(player == 6);
 
     var_r0 = 0;
@@ -802,6 +759,7 @@ void pl_8004049C(int player, ItemKind arg1)
         __assert("plbonuslib.c", 1559,
                  "0 <= player && player < Gm_Player_NumMax");
     }
+
     switch (arg1) {
     case It_Kind_Old_Kuri:
     case It_Kind_Kuriboh:
@@ -837,10 +795,10 @@ void pl_8004049C(int player, ItemKind arg1)
     default:
         break;
     }
-    if (var_r30 != -1) {
-        gm_8016B6E8(player, gm_8016F2F8(var_r30, player));
-        pl_80038824(player, var_r30);
-    }
+
+    RETURN_IF(var_r30 == -1);
+    gm_8016B6E8(player, gm_8016F2F8(var_r30, player));
+    pl_80038824(player, var_r30);
 }
 
 void pl_8004065C(int arg0, int arg1)
@@ -881,9 +839,7 @@ int pl_80040924(int arg0)
 
 int pl_80040A04(int arg0)
 {
-    pl_800386D8_t* temp_r3;
-
-    temp_r3 = Player_GetTotalAttackCountPtr(arg0);
+    pl_800386D8_t* temp_r3 = Player_GetTotalAttackCountPtr(arg0);
     return temp_r3->total_attack_count - temp_r3->x198;
 }
 
@@ -944,9 +900,7 @@ unsigned int pl_80040B64(int arg0)
 
 void pl_80040B8C(int slot, int arg1, int arg2)
 {
-    pl_StaleMoveTableExt_t* temp_r3;
-
-    temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
     RETURN_IF(arg1 != 0);
     temp_r3->x0_staleMoveTable.xC68 += arg2;
 }
@@ -1014,9 +968,8 @@ float pl_80040D68(int arg0)
 
 void pl_80040D8C(int slot)
 {
-    pl_StaleMoveTableExt_t* stale_moves;
-
-    stale_moves = Player_GetStaleMoveTableIndexPtr2(slot);
+    pl_StaleMoveTableExt_t* stale_moves =
+        Player_GetStaleMoveTableIndexPtr2(slot);
     stale_moves->x0_staleMoveTable.xCB0 += 1;
 }
 
