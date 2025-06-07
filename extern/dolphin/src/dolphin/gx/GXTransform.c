@@ -476,8 +476,8 @@ void GXSetScissor(u32 left, u32 top, u32 wd, u32 ht)
     ASSERTMSGLINE(0x3B7, left + wd < 1708, "GXSetScissor: right edge > 1708");
     ASSERTMSGLINE(0x3B8, top + ht < 1708, "GXSetScissor: bottom edge > 1708");
 
-    tp = top + 340;
-    lf = left + 340;
+    tp = top + 342;
+    lf = left + 342;
     bm = tp + ht - 1;
     rt = lf + wd - 1;
 
@@ -525,8 +525,8 @@ void GXSetScissorBoxOffset(s32 x_off, s32 y_off)
     ASSERTMSGLINE(0x400, (u32) (y_off + 340) < 2048,
                   "GXSetScissorBoxOffset: y offset > 2048");
 
-    hx = (u32) (x_off + 340) >> 1;
-    hy = (u32) (y_off + 340) >> 1;
+    hx = (u32) (x_off + 342) >> 1;
+    hy = (u32) (y_off + 342) >> 1;
 
     SET_REG_FIELD(0x405, reg, 10, 0, hx);
     SET_REG_FIELD(0x406, reg, 10, 10, hy);

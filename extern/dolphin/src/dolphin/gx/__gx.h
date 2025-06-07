@@ -191,9 +191,10 @@ void __GXSetGenMode(void);
 
 struct __GXData_struct {
     // total size: 0x4F4
-    unsigned short vNum;          // offset 0x0, size 0x2
+    unsigned short unk;           // offset 0x0, size 0x2
     unsigned short bpSent;        // offset 0x2, size 0x2
-    unsigned long vLim;           // offset 0x4, size 0x4
+    unsigned short vNum;          // offset 0x4, size 0x2
+    unsigned short vLim;          // offset 0x6, size 0x2
     unsigned long cpEnable;       // offset 0x8, size 0x4
     unsigned long cpStatus;       // offset 0xC, size 0x4
     unsigned long cpClr;          // offset 0x10, size 0x4
@@ -279,6 +280,8 @@ extern u32* __piReg;
 extern GXBool __GXinBegin;
 #endif
 
+static void __GXInitGX(void);
+
 /* GXMisc.c */
 
 void __GXBypass(u32 reg);
@@ -301,6 +304,7 @@ void __GetImageTileCount(GXTexFmt fmt, u16 wd, u16 ht, u32* rowTiles,
                          u32* colTiles, u32* cmpTiles);
 void __GXSetSUTexRegs(void);
 void __GXGetSUTexSize(GXTexCoordID coord, u16* width, u16* height);
+void __GXSetTmemConfig(u32 arg0);
 
 /* GXTransform.c */
 
