@@ -75,6 +75,7 @@ void OSSleepThread(OSThreadQueue *queue);
 void OSWakeupThread(OSThreadQueue *queue);
 s32 OSSuspendThread(OSThread *thread);
 s32 OSResumeThread(OSThread* thread);
+void OSCancelThread(OSThread* thread);
 OSThread* OSGetCurrentThread(void);
 s32 OSEnableScheduler(void);
 s32 OSDisableScheduler(void);

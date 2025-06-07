@@ -1369,7 +1369,7 @@ config.libs = [
     DolphinLib(
         "os",
         [
-            Object(NonMatching, "dolphin/os/OS.c"),
+            Object(Matching, "dolphin/os/OS.c"),
             Object(Matching, "dolphin/os/OSAlarm.c"),
             Object(Matching, "dolphin/os/OSAlloc.c"),
             Object(Matching, "dolphin/os/OSArena.c"),
@@ -1384,7 +1384,7 @@ config.libs = [
             Object(NonMatching, "dolphin/os/OSMemory.c"),
             Object(Matching, "dolphin/os/OSMutex.c"),
             Object(NonMatching, "dolphin/os/OSReboot.c"),
-            Object(NonMatching, "dolphin/os/OSReset.c"),
+            Object(Matching, "dolphin/os/OSReset.c"),
             Object(NonMatching, "dolphin/os/OSResetSW.c"),
             Object(NonMatching, "dolphin/os/OSRtc.c"),
             Object(NonMatching, "dolphin/os/OSSerial.c"),

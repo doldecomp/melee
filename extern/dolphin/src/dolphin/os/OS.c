@@ -4,7 +4,7 @@
 #include <dolphin/db.h>
 #include <macros.h>
 
-void EnableMetroTRKInterrupts(void);
+extern void EnableMetroTRKInterrupts(void);
 
 // internal headers
 #include "__os.h"
@@ -47,8 +47,10 @@ void __OSDBJUMPEND(void);
 
 #define NOP 0x60000000
 
+u64 __OSStartTime;
 static struct OSBootInfo_s * BootInfo;
 static unsigned long * BI2DebugFlag;
+static u32 BI2DebugFlagHolder;
 static double ZeroF;
 static int AreWeInitialized;
 static void (* * OSExceptionTable)(unsigned char, struct OSContext *);
@@ -108,22 +110,63 @@ unsigned long OSGetConsoleType() {
     return BootInfo->consoleType;
 }
 
+#define BOOT_REGION_START (*(u32*) 0x812FDFF0)
+#define BOOT_REGION_END (*(u32*) 0x812FDFEC)
+
+static void ClearArena(void)
+{
+    if (OSGetResetCode() != 0x80000000) {
+        memset(OSGetArenaLo(), 0, (u32) OSGetArenaHi() - (u32) OSGetArenaLo());
+    } else {
+        u32 boot_region_start = BOOT_REGION_START;
+        u32 boot_region_end = BOOT_REGION_END;
+
+        if (boot_region_start == 0) {
+            memset(OSGetArenaLo(), 0,
+                   (u32) OSGetArenaHi() - (u32) OSGetArenaLo());
+        } else if ((u32) OSGetArenaLo() < boot_region_start) {
+            if ((u32) OSGetArenaHi() <= boot_region_start) {
+                memset(OSGetArenaLo(), 0,
+                       (u32) OSGetArenaHi() - (u32) OSGetArenaLo());
+            } else {
+                memset(OSGetArenaLo(), 0,
+                       boot_region_start - (u32) OSGetArenaLo());
+                if ((u32) OSGetArenaHi() > boot_region_end) {
+                    memset((void*) boot_region_end, 0,
+                           (u32) OSGetArenaHi() - boot_region_end);
+                }
+            }
+        }
+    }
+}
+
 void OSInit() {
     unsigned long consoleType;
-    void * bi2StartAddr;
+    u32 bi2StartAddr;
 
     if (AreWeInitialized == 0) {
         AreWeInitialized = 1;
+        __OSStartTime = __OSGetSystemTime();
         OSDisableInterrupts();
         BootInfo = (struct OSBootInfo_s *)OSPhysicalToCached(0);
         BI2DebugFlag = NULL;
         __DVDLongFileNameFlag = 0;
-        bi2StartAddr = (void*)(*(u32*)OSPhysicalToCached(0xF4));
+
+        bi2StartAddr = *(u32*)OSPhysicalToCached(0xF4);
         if (bi2StartAddr) {
             BI2DebugFlag = (void*)((char*)bi2StartAddr + 0xC);
-            __DVDLongFileNameFlag = ((u32*)bi2StartAddr)[8];
             __PADSpec = ((u32*)bi2StartAddr)[9];
+            *(u8*) OSPhysicalToCached(0x30E8) = *BI2DebugFlag;
+            *(u8*) OSPhysicalToCached(0x30E9) = __PADSpec;
+        } else if ((void*)(*(u32*)OSPhysicalToCached(0x34)) != NULL) {
+            bi2StartAddr = *(u8*)OSPhysicalToCached(0x30E8);
+            BI2DebugFlagHolder = bi2StartAddr;
+            BI2DebugFlag = &BI2DebugFlagHolder;
+            __PADSpec = *(u8*)OSPhysicalToCached(0x30E9);
         }
+
+        __DVDLongFileNameFlag = 1;
+
         OSSetArenaLo((!BootInfo->arenaLo) ? &__ArenaLo : BootInfo->arenaLo);
         if ((!BootInfo->arenaLo) && (BI2DebugFlag) && (*(u32*)BI2DebugFlag < 2)) {
             OSSetArenaLo((void*)(((u32)(char*)&_stack_addr + 0x1F) & 0xFFFFFFE0));
@@ -131,6 +174,7 @@ void OSInit() {
         OSSetArenaHi((!BootInfo->arenaHi) ? &__ArenaHi : BootInfo->arenaHi);
         OSExceptionInit();
         __OSInitSystemCall();
+        OSInitAlarm();
         __OSModuleInit();
         __OSInterruptInit();
         __OSSetInterruptHandler(0x16, &__OSResetSWInterruptHandler);
@@ -141,6 +185,7 @@ void OSInit() {
         __OSInitSram();
         __OSThreadInit();
         __OSInitAudioSystem();
+        PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
         ASSERTLINE(0x252, BootInfo); // oh sure, assert NOW, you've already dereferenced it a bunch of times.
         if ((BootInfo->consoleType & OS_CONSOLE_DEVELOPMENT) != 0) {
             BootInfo->consoleType = OS_CONSOLE_DEVHW1;
@@ -148,6 +193,7 @@ void OSInit() {
             BootInfo->consoleType = OS_CONSOLE_RETAIL1;
         }
         BootInfo->consoleType += (__PIRegs[11] & 0xF0000000) >> 28;
+        __OSInitMemoryProtection();
         OSReport("\nDolphin OS $Revision: 47 $.\n");
 #if DEBUG
         OSReport("Kernel built : %s %s\n", "May 22 2001", "01:47:06");
@@ -185,10 +231,11 @@ void OSInit() {
         // report heap bounds
         OSReport("Arena : 0x%x - 0x%x\n", OSGetArenaLo(), OSGetArenaHi());
 
-        // if location of debug flag exists, and flag is >= 2, enable MetroTRKInterrupts
-        if (BI2DebugFlag && ((*BI2DebugFlag) >= 2)) {
-          EnableMetroTRKInterrupts();
+        if (BI2DebugFlag != NULL && *BI2DebugFlag >= 2) {
+            EnableMetroTRKInterrupts();
         }
+
+        ClearArena();
         OSEnableInterrupts();
     }
 }
