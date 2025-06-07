@@ -63,6 +63,7 @@ typedef struct {
     /* 0x08 */ u32 eventMask;
     /* 0x0C */ int isStreamDone;
     /* 0x10 */ int isStreamConnection;
+    /* 0x14 */ int unk;
 } MCC_ChannelInfo;
 
 enum MCC_MODE {

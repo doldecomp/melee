@@ -72,6 +72,9 @@ static void callbackEventStream(enum MCC_CHANNEL chID, u32 event, u32 value) {
     if (event == 2) {
         gChannelInfo[chID].isStreamConnection = 1;
     }
+    if (event == 0x100) {
+        gChannelInfo[chID].isStreamConnection = 1;
+    }
 }
 
 int MCCStreamOpen(enum MCC_CHANNEL chID, u8 blockSize) {
@@ -79,14 +82,16 @@ int MCCStreamOpen(enum MCC_CHANNEL chID, u8 blockSize) {
 
     bResult = 0;
     if (MCCOpen(chID, blockSize, callbackEventStream) != 0) {
-        gChannelInfo[chID].isStreamDone = 0;
+        gChannelInfo[chID].unk = 0;
         gChannelInfo[chID].isStreamConnection = 0;
+        gChannelInfo[chID].isStreamDone = 0;
         bResult = 1;
     }
     return bResult;
 }
 
 int MCCStreamClose(enum MCC_CHANNEL chID) {
+    gChannelInfo[chID].unk = 0;
     MCCClose(chID);
 }
 
@@ -101,38 +106,45 @@ int MCCStreamWrite(enum MCC_CHANNEL chID, void *data, u32 dataBlockSize) {
         gLastError = 14;
     } else if (LoadChannelInfo(gChannelInfo) == 0) {
         gLastError = 11;
-    } else if (WaitAMinute(5, &gChannelInfo[chID].isStreamConnection, 1) == 0) {
-        gLastError = 2;
     } else {
-        gChannelInfo[chID].isStreamConnection = 0;
-        if (MCCGetChannelInfo(chID, &chanInfo) != 0) {
-            *(u32*)&gStreamWork = dataBlockSize;
-            if (MCCWrite(chID, 0, gStreamWork, 0x20, 0) != 0) {
-                if (WaitAMinute(5, &gChannelInfo[chID].isStreamDone, 1) == 0) {
-                    gLastError = 2;
-                } else {
-                    dataAddress = data;
-                    lastBlocks = dataBlockSize;
-                    gChannelInfo[chID].isStreamDone = 0;
-                    while(lastBlocks) {
-                        if (!MCCWrite(chID, 0, dataAddress, chanInfo.blockLength << 0xD, 0)) {
-                            break;
-                        }
-                        if (WaitAMinute(5, &gChannelInfo[chID].isStreamDone, 1) == 0) {
-                            gLastError = 2;
-                            break;
-                        } else {
-                            gChannelInfo[chID].isStreamDone = 0;
-                            dataAddress += chanInfo.blockLength << 0xD;
-                            if (lastBlocks > chanInfo.blockLength) {
-                                lastBlocks -= chanInfo.blockLength;
-                            } else {
-                                lastBlocks = 0;
+        if (gChannelInfo[chID].unk != 1) {
+            gChannelInfo[chID].unk = 1;
+        } else {
+            MCCNotify(chID, 0);
+        }
+        if (WaitAMinute(5, &gChannelInfo[chID].isStreamConnection, 1) == 0) {
+            gLastError = 2;
+        } else {
+            gChannelInfo[chID].isStreamConnection = 0;
+            if (MCCGetChannelInfo(chID, &chanInfo) != 0) {
+                *(u32*)&gStreamWork = dataBlockSize;
+                if (MCCWrite(chID, 0, gStreamWork, 0x20, 0) != 0) {
+                    if (WaitAMinute(5, &gChannelInfo[chID].isStreamDone, 1) == 0) {
+                        gLastError = 2;
+                    } else {
+                        dataAddress = data;
+                        lastBlocks = dataBlockSize;
+                        gChannelInfo[chID].isStreamDone = 0;
+                        while(lastBlocks) {
+                            if (!MCCWrite(chID, 0, dataAddress, chanInfo.blockLength << 0xD, 0)) {
                                 break;
                             }
+                            if (WaitAMinute(5, &gChannelInfo[chID].isStreamDone, 1) == 0) {
+                                gLastError = 2;
+                                break;
+                            } else {
+                                gChannelInfo[chID].isStreamDone = 0;
+                                dataAddress += chanInfo.blockLength << 0xD;
+                                if (lastBlocks > chanInfo.blockLength) {
+                                    lastBlocks -= chanInfo.blockLength;
+                                } else {
+                                    lastBlocks = 0;
+                                    break;
+                                }
+                            }
                         }
+                        return lastBlocks == 0;
                     }
-                    return lastBlocks == 0;
                 }
             }
         }
