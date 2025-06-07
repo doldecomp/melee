@@ -3482,6 +3482,12 @@ Runtime/runtime.c:
 	.text       start:0x803228C0 end:0x80322F20
 	.rodata     start:0x803B8B90 end:0x803B8BA8
 
+Runtime/__init_cpp_exceptions.c:
+	.text       start:0x80322F20 end:0x80322F9C
+	.ctors      start:0x803B7240 end:0x803B7244
+	.dtors      start:0x803B7260 end:0x803B7268
+	.sdata      start:0x804D5B40 end:0x804D5B44
+
 MSL/abort_exit.c:
 	.text       start:0x80322F9C end:0x803230A8
 	.bss        start:0x804A2F48 end:0x804A3148
