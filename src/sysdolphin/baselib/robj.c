@@ -11,6 +11,8 @@
 #include "list.h"
 #include "mtx.h"
 #include "object.h"
+#include "memory.h"
+#include "util.h"
 
 #include <__mem.h>
 #include <math.h>
@@ -20,7 +22,7 @@
 HSD_ObjAllocData robj_alloc_data;   // robj_alloc_data
 HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
 
-static u32 arg_buf;
+static float* arg_buf;
 static u32 arg_buf_size;
 
 extern const f64 HSD_RObj_804DE6A0; // 1.75
@@ -303,13 +305,18 @@ static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
     }
 }
 
+int HSD_RObj_80406E74[3] = { 0x32, 0x33, 0x34 };
+
+#pragma push
+#pragma dont_inline on
 static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
                                   HSD_ObjUpdateFunc update_func)
 {
     NOT_IMPLEMENTED;
 }
+#pragma pop
 
-static void resolveLimits(HSD_RObj* robj, void* obj)
+static void resolveLimits(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
 {
     HSD_JObj* jobj = (HSD_JObj*) obj;
     HSD_RObj* rp;
@@ -428,7 +435,7 @@ void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
         }
         resolveCnsDirUp(robj, obj, update_func);
         resolveCnsOrientation(robj, obj, update_func);
-        resolveLimits(robj, obj);
+        resolveLimits(robj, obj, update_func);
 
         for (rp = robj; rp != NULL; rp = rp->next) {
             if (RObjHasFlags(rp) && RObjHasFlags2(rp)) {
@@ -442,7 +449,7 @@ void HSD_RObjUpdateAll(HSD_RObj* robj, void* obj,
 void HSD_RObjResolveRefs(HSD_RObj* robj, HSD_RObjDesc* desc)
 {
     if (robj != NULL && desc != NULL) {
-        switch (desc->flags & ROBJ_TYPE_MASK) {
+        switch (robj->flags & ROBJ_TYPE_MASK) {
         case REFTYPE_JOBJ:
             HSD_JObjUnrefThis(robj->u.jobj);
             robj->u.jobj = HSD_IDGetData((u32) desc->u.joint, NULL);
@@ -475,7 +482,7 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
         robj = HSD_RObjAlloc();
         robj->next = HSD_RObjLoadDesc((HSD_RObjDesc*) robjdesc->next);
         robj->flags = robjdesc->flags;
-        switch (robj->flags & 0x70000000) {
+        switch (robj->flags & ROBJ_TYPE_MASK) {
         case REFTYPE_JOBJ:
             break;
         case REFTYPE_LIMIT: {
@@ -486,7 +493,7 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
             case 4:
             case 5:
             case 6:
-                robj->u.limit = 0.01754533f * robjdesc->u.limit;
+                robj->u.limit = 0.017453292f * robjdesc->u.limit;
                 break;
             default:
                 robj->u.limit = robjdesc->u.limit;
@@ -498,7 +505,7 @@ HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc* robjdesc)
             break;
         case REFTYPE_BYTECODE:
             bcexpLoadDesc(&robj->u.exp, robjdesc->u.bcexp);
-            robj->flags &= 0x8FFFFFFF;
+            robj->flags &= ~ROBJ_TYPE_MASK;
             break;
         case REFTYPE_IKHINT:
             robj->u.ik_hint.bone_length = robjdesc->u.ik_hint->bone_length;
@@ -554,13 +561,132 @@ void HSD_RObjFree(HSD_RObj* robj)
     HSD_ObjFree(&robj_alloc_data, robj);
 }
 
+extern float HSD_ByteCodeEval(u8*, float*, u32);
+
 static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
-                        HSD_ObjUpdateFunc update_func)
-{
-    NOT_IMPLEMENTED;
+                        HSD_ObjUpdateFunc update_func) {
+
+    HSD_Rvalue* rvalue;
+    HSD_JObj* jobj;
+    Vec3 scale;
+    float temp_f31;
+    float* cur_arg;
+    int cur_bit;
+    Vec3 sp2C;
+    u8 _[4]; // TODO should HSD_ObjData be 4 bytes larger?
+    HSD_ObjData sp1C;
+    HSD_RObj* robj = (HSD_RObj*) obj;
+
+    if (exp->nb_args == -1) {
+        u32 nb_args = 0;
+        HSD_Rvalue* rvalue;
+        for (rvalue = exp->rvalue; rvalue != NULL; rvalue = rvalue->next) {
+            nb_args += HSD_GetNbBits(rvalue->flags);
+        }
+        exp->nb_args = nb_args;
+    }
+    if (arg_buf == NULL) {
+        if (arg_buf_size == 0) {
+            arg_buf_size = 100;
+        }
+        arg_buf = HSD_MemAlloc(arg_buf_size * sizeof(float));
+    }
+    if (arg_buf_size < exp->nb_args) {
+        OSReport("Number of argment of expression exceeds the argument buffer\n"
+                 "size. (requested num of arg %d, allocated %d)\n",
+                 exp->nb_args, arg_buf_size);
+        HSD_Panic(__FILE__, 0x45E, "");
+    }
+    cur_arg = arg_buf;
+    temp_f31 = 57.29578F;
+    for (rvalue = exp->rvalue; rvalue != NULL; rvalue = rvalue->next) {
+        jobj = rvalue->jobj;
+        if (jobj == NULL) {
+            __assert(__FILE__, 0x467, "jobj");
+        }
+        HSD_JObjSetupMatrix(rvalue->jobj);
+        for (cur_bit = 1; cur_bit && cur_bit <= rvalue->flags; cur_bit <<= 1) {
+            switch (rvalue->flags & cur_bit) {
+            case 0x1:
+                *cur_arg++ = temp_f31 * jobj->rotate.x;
+                break;
+            case 0x2:
+                *cur_arg++ = temp_f31 * jobj->rotate.y;
+                break;
+            case 0x4:
+                *cur_arg++ = temp_f31 * jobj->rotate.z;
+                break;
+            case 0x8:
+                break;
+            case 0x10:
+                *cur_arg++ = jobj->translate.x;
+                break;
+            case 0x20:
+                *cur_arg++ = jobj->translate.y;
+                break;
+            case 0x40:
+                *cur_arg++ = jobj->translate.z;
+                break;
+            case 0x80:
+                *cur_arg++ = jobj->scale.x;
+                break;
+            case 0x100:
+                *cur_arg++ = jobj->scale.y;
+                break;
+            case 0x200:
+                *cur_arg++ = jobj->scale.z;
+                break;
+            case 0x400:
+            case 0x800:
+                break;
+            case 0x10000:
+                HSD_MtxGetRotation(jobj->mtx, &sp2C);
+                *cur_arg++ = temp_f31 * sp2C.x;
+                break;
+            case 0x20000:
+                HSD_MtxGetRotation(jobj->mtx, &sp2C);
+                *cur_arg++ = temp_f31 * sp2C.y;
+                break;
+            case 0x40000:
+                HSD_MtxGetRotation(jobj->mtx, &sp2C);
+                *cur_arg++ = temp_f31 * sp2C.z;
+                break;
+            case 0x100000:
+                *cur_arg++ = jobj->mtx[0][3];
+                break;
+            case 0x200000:
+                *cur_arg++ = jobj->mtx[1][3];
+                break;
+            case 0x400000:
+                *cur_arg++ = jobj->mtx[2][3];
+                break;
+            case 0x800000:
+                HSD_MtxGetScale(jobj->mtx, &scale);
+                *cur_arg++ = scale.x;
+                break;
+            case 0x1000000:
+                HSD_MtxGetScale(jobj->mtx, &scale);
+                *cur_arg++ = scale.y;
+                break;
+            case 0x2000000:
+                HSD_MtxGetScale(jobj->mtx, &scale);
+                *cur_arg++ = scale.z;
+                break;
+            }
+        }
+    }
+    if (exp->is_bytecode) {
+        sp1C.fv = HSD_ByteCodeEval(exp->expr.bytecode, arg_buf, exp->nb_args);
+    } else {
+        sp1C.fv = exp->expr.func(arg_buf);
+    }
+    if (type - 1 <= 2) {
+        sp1C.fv = sp1C.fv * 0.017453292F;
+    }
+    update_func(obj, type, &sp1C);
 }
 
-static f32 dummy_func(void)
+static f32 dummy_func(void* unused)
 {
     return 0.0f;
 }
@@ -687,7 +813,7 @@ void HSD_RObjSetConstraintObj(HSD_RObj* robj, void* o)
 
 void _HSD_RObjForgetMemory(void* low, void* high)
 {
-    if (((u32) low <= arg_buf) && (arg_buf < (u32) high)) {
+    if (low <= (void*) arg_buf && (void*) arg_buf < high) {
         arg_buf = 0U;
         arg_buf_size = 0U;
     }
