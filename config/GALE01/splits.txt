@@ -4441,6 +4441,7 @@ sysdolphin/baselib/sislib.c:
 
 sysdolphin/baselib/hsd_40FF.c:
 	.data       start:0x8040FF80 end:0x80430B40
+	.sdata2     start:0x804DEB10 end:0x804DEC00
 
 sysdolphin/baselib/hsd_3A94.c:
 	.text       start:0x803A949C end:0x803AA790
