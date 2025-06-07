@@ -3471,6 +3471,11 @@ MSL/ansi_files.c:
 Runtime/__va_arg.c:
 	.text       start:0x80322620 end:0x80322714
 
+Runtime/global_destructor_chain.c:
+	.text       start:0x80322714 end:0x8032275C
+	.dtors      start:0x803B7268 end:0x803B726C
+	.sbss       start:0x804D7058 end:0x804D705C
+
 Runtime/Gecko_ExceptionPPC.c:
 	.text       start:0x8032275C end:0x803227CC
 	.bss        start:0x804A2F38 end:0x804A2F48
@@ -3481,6 +3486,12 @@ Runtime/Gecko_setjmp.c:
 Runtime/runtime.c:
 	.text       start:0x803228C0 end:0x80322F20
 	.rodata     start:0x803B8B90 end:0x803B8BA8
+
+Runtime/__init_cpp_exceptions.c:
+	.text       start:0x80322F20 end:0x80322F9C
+	.ctors      start:0x803B7240 end:0x803B7244
+	.dtors      start:0x803B7260 end:0x803B7268
+	.sdata      start:0x804D5B40 end:0x804D5B44
 
 MSL/abort_exit.c:
 	.text       start:0x80322F9C end:0x803230A8
@@ -4430,6 +4441,7 @@ sysdolphin/baselib/sislib.c:
 
 sysdolphin/baselib/hsd_40FF.c:
 	.data       start:0x8040FF80 end:0x80430B40
+	.sdata2     start:0x804DEB10 end:0x804DEC00
 
 sysdolphin/baselib/hsd_3A94.c:
 	.text       start:0x803A949C end:0x803AA790
