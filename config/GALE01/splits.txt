@@ -3471,6 +3471,11 @@ MSL/ansi_files.c:
 Runtime/__va_arg.c:
 	.text       start:0x80322620 end:0x80322714
 
+Runtime/global_destructor_chain.c:
+	.text       start:0x80322714 end:0x8032275C
+	.dtors      start:0x803B7268 end:0x803B726C
+	.sbss       start:0x804D7058 end:0x804D705C
+
 Runtime/Gecko_ExceptionPPC.c:
 	.text       start:0x8032275C end:0x803227CC
 	.bss        start:0x804A2F38 end:0x804A2F48
