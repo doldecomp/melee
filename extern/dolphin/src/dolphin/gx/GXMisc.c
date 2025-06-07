@@ -16,6 +16,8 @@ void GXSetMisc(GXMiscToken token, u32 val)
     switch (token) {
     case GX_MT_XF_FLUSH:
         gx->vNum = val;
+        gx->unk = !gx->vNum;
+        gx->bpSent = 1;
         if (gx->vNum != 0) {
             gx->dirtyState |= 8;
         }
@@ -42,8 +44,8 @@ void GXFlush(void)
     if (gx->dirtyState) {
         __GXSetDirtyState();
     }
-    for (i = 32; i > 0; i--) {
-        GX_WRITE_U8(0);
+    for (i = 8; i > 0; i--) {
+        GX_WRITE_U32(0);
     }
     PPCSync();
 }
@@ -137,7 +139,7 @@ void GXPixModeSync(void)
 {
     CHECK_GXBEGIN(0x20D, "GXPixModeSync");
     GX_WRITE_RAS_REG(gx->peCtrl);
-    gx->bpSent = 1;
+    gx->bpSent = 0;
 }
 
 void GXTexModeSync(void)

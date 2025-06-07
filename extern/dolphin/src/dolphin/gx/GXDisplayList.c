@@ -90,7 +90,7 @@ void GXCallDisplayList(void* list, u32 nbytes)
 #if DEBUG
     __GXShadowDispList(list, nbytes);
 #endif
-    if (*(u32*) &gx->vNum == 0) { // checks both vNum and bpSent
+    if (*(u32*) &gx->unk == 0) { // checks both unk and bpSent
         __GXSendFlushPrim();
     }
     GX_WRITE_U8(0x40);
