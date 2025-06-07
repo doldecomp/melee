@@ -3636,11 +3636,11 @@ MetroTRK/mpc_7xx_603e.c:
 
 MetroTRK/main_TRK.c:
 	.text       start:0x8032ABD8 end:0x8032AC28
-	.bss        start:0x804A50D0 end:0x804A50D4
+	.bss        start:0x804A50D0 end:0x804A50E0
 
 MetroTRK/dolphin_trk_glue.c:
 	.text       start:0x8032AC28 end:0x8032AF80
-	.data       start:0x804008B8 end:0x804008D4
+	.data       start:0x804008B8 end:0x804008D8
 
 MetroTRK/targcont.c:
 	.text       start:0x8032AF80 end:0x8032AFB4
@@ -3660,8 +3660,8 @@ dolphin/hio/hio.c:
 
 dolphin/mcc/mcc.c:
 	.text       start:0x8032C74C end:0x8032EA84
-	.data       start:0x804008D4 end:0x80400918
-	.bss        start:0x804A50D4 end:0x804A5300
+	.data       start:0x804008D8 end:0x80400918
+	.bss        start:0x804A50E0 end:0x804A5300
 	.sdata      start:0x804D5B70 end:0x804D5B78
 	.sbss       start:0x804D70B0 end:0x804D70D0
 
