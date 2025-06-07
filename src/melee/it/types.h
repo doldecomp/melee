@@ -126,13 +126,6 @@ struct ItemAttr {
 
     s32 x7C; // 0x7c
     s32 x80; // 0x80
-    s32 x84; // 0x84
-    s32 x88; // 0x88
-    s32 x8C; // 0x8c
-    s32 x90; // 0x90
-    s32 x94; // 0x94
-    s32 x98; // 0x98
-    s32 x9C; // 0x9c
 };
 
 /// @sz{8}
@@ -564,7 +557,6 @@ struct Item {
         it_27CF_ItemVars it_27CF;
         it_2E5A_ItemVars it_2E5A;
         it_2E6A_ItemVars_1 it_2E6A_1;
-        it_2E6A_ItemVars_2 it_2E6A_2;
         it_2F28_ItemVars it_2F28;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;

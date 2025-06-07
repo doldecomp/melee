@@ -12,11 +12,8 @@
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
-// static void it_802E6D60(Item_GObj* arg0);                       /* static */
-static void it_802E6D60(HSD_GObj* arg0); /* static */
-// static bool it_802E7054(Item_GObj* gobj);                    /* static */
-static bool it_802E7054(HSD_GObj* gobj); /* static */
-// static Article it_803F8C08 = {
+static void it_802E6D60(HSD_GObj* arg0);
+static bool it_802E7054(HSD_GObj* gobj);
 
 static ItemAttr it_803F8C08 = {
     // 0x31080000
@@ -54,15 +51,14 @@ static ItemAttr it_803F8C08 = {
     0,          // x58?
     0,          // x5C?
     1.0f,       // x60_scale?
-    0,          // destroy_gfx? - 0xFFFFFFFF
-    0,          // x68? - 0xFFFFFFFF
+    -1,         // destroy_gfx? - 0xFFFFFFFF
+    -1,         // x68? - 0xFFFFFFFF
     0x00083D60, // x6C?
     0x00083D60, // x70?
     0x00083D60, // x74?
     0x00083D60, // destroy_sfx?
     0x00083D60, // x7C?
     0x00083D60, // x80?
-    // Missing 0x84 - 0x9C?
 };
 
 ItemStateTable it_803F8C8C[] = {
@@ -78,18 +74,18 @@ ItemStateTable it_803F8C8C[] = {
     { 18, NULL, it_802E6D60, NULL }, { 19, NULL, it_802E6D60, NULL },
 };
 
-static Vec3 it_803B8730 = { 1.0f, 1.0f, 1.0f };
+static const Vec3 it_803B8730 = { 1.0f, 1.0f, 1.0f };
 
 Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
-                       Vec3* pos, int arg5, int arg6, HSD_GObjEvent arg7,
-                       int arg8)
+                       Vec3* pos, int arg5,
+                       void (*arg6)(Item_GObj*, Ground*),
+                       void (*arg7)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                       void (*arg8)(Item_GObj*, Ground*, HSD_GObj*))
 {
     SpawnItem spawn;
     Vec3 sp30;
     HSD_JObj* item_jobj;
-    Item* item;
     Item_GObj* item_gobj;
-    s32 var_r4;
 
     spawn.kind = Pokemon_Random; // 44
     if (arg3) {
@@ -101,54 +97,44 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
             return NULL;
         }
     }
-    var_r4 = 0;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = 0.0f;
     spawn.x3C_damage = 0;
-    // spawn.x3C_damage = var_r4;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = 0;
-    // spawn.x0_parent_gobj = (HSD_GObj*) var_r4;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
-    if (arg5 != 0) {
-        var_r4 = 1;
-    }
-    spawn.x44_flag.b0 = var_r4;
-    // spawn.x44_flag.b0 = 1 | ((var_r4 << 7) & 0x80);
+    spawn.x44_flag.b0 = arg5 ? 1 : 0;
     spawn.x40 = 0;
-    // *it_804D6D38[spawn.kind].unk-AC = &it_803F8C08;
     it_804D6D38[spawn.kind - 0x2B]->x0_common_attr = &it_803F8C08;
-    // it_804D6D38[Pokemon_Random] = &it_803F8C08;
 
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
-        item = GET_ITEM((HSD_GObj*) item_gobj);
+        Item* item = GET_ITEM((HSD_GObj*) item_gobj);
         if (arg3 != 0) {
             item->xDD4_itemVar.it_2E6A_1.x2 = 1;
             item->xDD4_itemVar.it_2E6A_1.x4 = arg3;
-        } else if (&pos != 0) {
-            item->xDD4_itemVar.it_2E6A_2.x2 = 2;
-            item->xDD4_itemVar.it_2E6A_2.x4 = *pos;
+        } else if (pos != 0) {
+            item->xDD4_itemVar.it_2E6A_1.x2 = 2;
+            item->xDD4_itemVar.it_2E6A_1.x4_vec = *pos;
         }
 
         item->xDD4_itemVar.it_2E6A_1.x0 = arg1;
         item->xDD4_itemVar.it_2E6A_1.x10 = arg0;
-        item->xDD4_itemVar.it_2E6A_1.x14 = (void*) arg6;
+        item->xDD4_itemVar.it_2E6A_1.x14 = arg6;
         item->xDD4_itemVar.it_2E6A_1.x18 = arg7;
-        item->xDD4_itemVar.it_2E6A_1.x1C = (void*) arg8;
-        item_jobj = GET_JOBJ((HSD_GObj*) item_gobj);
+        item->xDD4_itemVar.it_2E6A_1.x1C = arg8;
+        item_jobj = GET_JOBJ(item_gobj);
         sp30 = it_803B8730;
         HSD_JObjSetScale(item_jobj, &sp30);
         item->xDCC_flag.b3 = 0;
         it_802756D0(item_gobj);
-        Item_80268E5C((HSD_GObj*) item_gobj, arg2, ITEM_ANIM_UPDATE);
+        Item_80268E5C(item_gobj, arg2, ITEM_ANIM_UPDATE);
         item->touched = it_802E7054;
         item->x378_itemColl.x34_flags.b1234 = 5;
     }
     return item_gobj;
 }
 
-// void it_802E6D60(Item_GObj* item_gobj) {
 void it_802E6D60(HSD_GObj* item_gobj)
 {
     Vec3 sp24;
@@ -172,25 +158,17 @@ void it_802E6D60(HSD_GObj* item_gobj)
         HSD_JObjSetRotation(item_jobj, &sp14);
     } else if (item->xDD4_itemVar.it_2E6A_1.x2 != 2) {
         OSReport("%s:%d: oioi...\n", "ityaku.c", 0xD7);
-        // while (false) {}
-    loop_29:
-        goto loop_29;
+        while (true);
     }
 }
 
 bool it_802E6F7C(Item_GObj* item_gobj)
 {
-    Item* item;
-    // void (*temp_r12)();
-
-    item = item_gobj->user_data;
-    // temp_r12 = item->xDD4_itemVar.it_2E6A_1.x14;
-    if ((item->xDD4_itemVar.it_2E6A_1.x14 != 0U) &&
-        (item->xDD4_itemVar.it_2E6A_1.x10 != 0U))
+    Item* item = GET_ITEM(item_gobj);
+    if (item->xDD4_itemVar.it_2E6A_1.x14 != NULL &&
+        item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
     {
-        // temp_r12();
-        ((void (*)(HSD_GObj*)) item->xDD4_itemVar.it_2E6A_1.x14)(
-            (HSD_GObj*) item_gobj);
+        item->xDD4_itemVar.it_2E6A_1.x14(item_gobj, item->xDD4_itemVar.it_2E6A_1.x10);
     }
     return false;
 }
@@ -198,40 +176,27 @@ bool it_802E6F7C(Item_GObj* item_gobj)
 bool it_802E6FC0(Item_GObj* item_gobj)
 {
     Vec3 sp10;
-    Item* item;
-    // void (*temp_r12)(Item_GObj*, Vec3*, HSD_GObj*, f32);
+    Item* item = GET_ITEM((HSD_GObj*) item_gobj);
     HSD_GObj* fighter_gobj;
 
-    item = GET_ITEM((HSD_GObj*) item_gobj);
     item->xC9C = 0;
     it_8027B798(item_gobj, &sp10);
-    // temp_r12 = item->xDD4_itemVar.it_2E6A_1.x18;
     fighter_gobj = item->xCEC_fighterGObj;
-    if ((item->xDD4_itemVar.it_2E6A_1.x18 != 0U) &&
-        (item->xDD4_itemVar.it_2E6A_1.x10 != 0U))
+    if (item->xDD4_itemVar.it_2E6A_1.x18 != NULL &&
+        item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
     {
-        ((void (*)(Item_GObj*, Vec3*, HSD_GObj*,
-                   f32)) item->xDD4_itemVar.it_2E6A_1.x18)(
-            item_gobj, &sp10, fighter_gobj, item->xCA0);
-        // temp_r12(item_gobj, &sp10, fighter_gobj, item->xCA0);
+        item->xDD4_itemVar.it_2E6A_1.x18(item_gobj, item->xDD4_itemVar.it_2E6A_1.x10, &sp10, fighter_gobj, item->xCA0);
     }
     return false;
 }
 
-// bool it_802E7054(Item_GObj* item_gobj) {
 bool it_802E7054(HSD_GObj* item_gobj)
 {
-    // void (*temp_r12)(HSD_GObj*);
-    Item* item;
-
-    item = GET_ITEM(item_gobj);
-    // temp_r12 = item->xDD4_itemVar.it_2E6A_1.x1C;
-    if ((item->xDD4_itemVar.it_2E6A_1.x1C != NULL) &&
-        (item->xDD4_itemVar.it_2E6A_1.x10 != 0U))
+    Item* item = GET_ITEM(item_gobj);
+    if (item->xDD4_itemVar.it_2E6A_1.x1C != NULL &&
+        item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
     {
-        // temp_r12(item->toucher)
-        ((void (*)(HSD_GObj*)) item->xDD4_itemVar.it_2E6A_1.x1C)(
-            item->toucher);
+        item->xDD4_itemVar.it_2E6A_1.x1C(item_gobj, item->xDD4_itemVar.it_2E6A_1.x10, item->toucher);
     }
     return false;
 }

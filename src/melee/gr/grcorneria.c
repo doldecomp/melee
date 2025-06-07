@@ -51,8 +51,6 @@ void fn_801DD65C(Ground_GObj* gobj)
 extern int grCn_803E1FE8[];
 extern int grCn_803E2000[];
 
-void grMaterial_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
-
 void grCorneria_801DD674(Ground_GObj* ground_gobj)
 {
     Vec3 translate;
@@ -321,7 +319,7 @@ bool grCorneria_801E1058(void)
 
 void grCorneria_801E12CC(void) {}
 
-void fn_801E12D0(void) {}
+void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #fn_801E12D4
 

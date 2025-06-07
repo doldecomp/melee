@@ -4,6 +4,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include <melee/it/forward.h>
 #include "gr/forward.h"
 
 #include <dolphin/mtx.h>
@@ -71,8 +72,8 @@
 /* 1E1030 */ UNK_RET grCorneria_801E1030(UNK_PARAMS);
 /* 1E1058 */ bool grCorneria_801E1058(void);
 /* 1E1060 */ UNK_RET grCorneria_801E1060(UNK_PARAMS);
-/* 1E12D0 */ UNK_RET fn_801E12D0(UNK_PARAMS);
-/* 1E12D4 */ void fn_801E12D4(HSD_GObj*);
+/* 1E12D0 */ void fn_801E12D0(Item_GObj*, Ground*);
+/* 1E12D4 */ void fn_801E12D4(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 /* 1E1348 */ UNK_RET grCorneria_801E1348(UNK_PARAMS);
 /* 1E1878 */ void grCorneria_801E1878(Ground_GObj*);
 /* 1E1970 */ UNK_RET grCorneria_801E1970(UNK_PARAMS);

@@ -321,8 +321,8 @@ struct grCorneria_GroundVars {
     u8 x11A;
     u8 x11B;
     u32 x11C;
-    u32 x120;
-    u32 x124;
+    Item_GObj* x120;
+    Item_GObj* x124;
     HSD_GObj* x128;
     HSD_JObj* x12C;
 };

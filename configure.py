@@ -1144,7 +1144,7 @@ config.libs = [
             # Stage-related items
             Object(NonMatching, "melee/it/items/itoctarock.c"),
             Object(NonMatching, "melee/it/items/it_2E5A.c"),
-            Object(NonMatching, "melee/it/items/it_2E6A.c"),
+            Object(Matching, "melee/it/items/it_2E6A.c"),
             Object(NonMatching, "melee/it/items/itarwinglaser.c"),
             Object(NonMatching, "melee/it/items/itoctarockstone.c"),
             Object(NonMatching, "melee/it/items/itleadead.c"),
