@@ -74,11 +74,11 @@ void it_8027CF00(Item_GObj* item_gobj)
 
 void it_8027CF30(Item_GObj* gobj)
 {
-    Vec3 sp18;
-    u8 _[8] = { 0 };
-
     Item* it = GET_ITEM(gobj);
-    ItCapsuleAttr* attr = it->xC4_article_data->x4_specialAttributes;
+    Article* article = it->xC4_article_data;
+    ItCapsuleAttr* attr = article->x4_specialAttributes;
+    Vec3 sp18;
+    u8 _[8];
 
     sp18.x = sp18.y = sp18.z = 0.0F;
     if (!it_8026F8B4(gobj, &it->pos, &sp18, 0)) {
@@ -220,7 +220,6 @@ bool it_8027D330(Item_GObj* gobj)
 bool it_8027D338(HSD_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
-    u8 _[4] = { 0 };
 
     if (it->msid != 5) {
         it_8027CF30(item_gobj);
@@ -270,9 +269,14 @@ bool it_8027D4F4(Item_GObj* item_gobj)
     return it_8027D338_autoinlined(item_gobj);
 }
 
-bool it_8027D530(Item_GObj* item_gobj)
+bool it_8027D530(Item_GObj *item_gobj)
 {
-    NOT_IMPLEMENTED;
+    Item* it = GET_ITEM(item_gobj);
+    if (it->msid == 3) {
+        it_8027CF30(item_gobj);
+        return it->xDD4_itemVar.capsule.x0;
+    }
+    return false;
 }
 
 bool it_8027D614(Item_GObj* item_gobj)
