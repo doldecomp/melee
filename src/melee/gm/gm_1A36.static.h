@@ -12,68 +12,7 @@
 
 #include <baselib/archive.h>
 
-typedef struct MajorScene MajorScene;
-typedef struct MinorScene MinorScene;
-typedef struct MinorSceneHandler MinorSceneHandler;
-
-struct MinorScene {
-    u8 idx;
-    u8 preload;
-    u16 flags;
-
-    void (*Prep)(MinorScene*);
-    void (*Decide)(MinorScene*);
-
-    u8 class_id;
-
-    void* unk_struct_0;
-    void* unk_struct_1;
-};
-
-struct MajorScene {
-    u8 preload;
-    u8 idx;
-
-    void (*Load)(void);
-    void (*Unload)(void);
-    void (*Init)(void);
-
-    MinorScene* minor_scenes;
-}; // 803DACA4
-
-struct MinorSceneHandler {
-    u8 class_id;
-
-    void (*OnFrame)(void);
-    void (*OnLoad)(u32);
-    void (*OnLeave)(u32);
-    void (*unk_func)(void);
-}; // 803DA920
-
-typedef struct {
-    u8 curr_major;
-    u8 pending_major;
-    u8 prev_major;
-    u8 curr_minor;
-    u8 prev_minor;
-    u8 pending_minor;
-} SceneNums;
-
-typedef struct {
-    SceneNums nums;
-    SceneNums nums2;
-    u8 pending;
-    u8 x0D;
-    u8 x0E;
-    u8 x0F;
-    void* data;
-} GameState;
-STATIC_ASSERT(sizeof(GameState) == 0x14);
-
-struct sceneData {
-    u32 a;
-    u8 scene_id;
-};
+#include <melee/gm/types.h>
 
 struct gm_80479D58_t {
     /* 0x00 */ struct gm_80479D58_t* unk_0;
@@ -196,13 +135,11 @@ struct gm_801B0FF8_arg0_t {
 
 /* 1A3F48 */ static void gm_801A3F48(MinorScene*);
 /* 1A4014 */ static void gm_801A4014(MajorScene* scene);
-/* 1A4284 */ static UNK_T gm_801A4284(UNK_T);
 /* 1A42B4 */ static u8 gm_801A42B4(void);
 /* 1A42C4 */ static u8 gm_801A42C4(void);
 /* 1A42E8 */ static void gm_801A42E8(s8 arg0);
 /* 1A4310 */ static UNK_RET gm_800A4310(UNK_PARAMS);
 /* 1A4320 */ static u8 gm_801A4320(void);
-/* 1A4330 */ static void gm_801A4330(void*);
 /* 1A4624 */ static u8 gm_801A4624(void);
 /* 1A4B40 */ static void gm_801A4B40(s32 arg0);
 /* 1A4B50 */ static void gm_801A4B50(s32 arg0);

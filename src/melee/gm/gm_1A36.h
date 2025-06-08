@@ -4,9 +4,9 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "baselib/forward.h"
+#include <melee/gm/forward.h>
 
-#include "gm/types.h"
+#include "baselib/forward.h"
 
 /* 1A3680 */ u64 gm_801A3680(u8);
 /* 1A36A0 */ u64 gm_801A36A0(u8);
@@ -17,12 +17,14 @@
 /* 1A396C */ void fn_801A396C(int idx);
 /* 1A3A74 */ UNK_RET gm_801A3A74(UNK_PARAMS);
 /* 1A3E88 */ UNK_RET gm_801A3E88(UNK_PARAMS);
-/* 1A427C */ int gm_801A427C(void* arg0);
+/* 1A427C */ void* gm_801A427C(MinorScene*);
+/* 1A4284 */ void* gm_801A4284(MinorScene*);
 /* 1A428C */ void gm_SetSceneMinor(u8 arg0);
 /* 1A42A0 */ void gm_SetScenePendingMinor(int pending_minor);
 /* 1A42D4 */ UNK_RET gm_801A42D4(UNK_PARAMS);
 /* 1A42F8 */ void gm_801A42F8(int);
 /* 1A4310 */ u8 gm_801A4310(void);
+/* 1A4330 */ void gm_801A4330(void*);
 /* 1A4340 */ UNK_RET gm_801A4340(UNK_PARAMS);
 /* 1A43A0 */ u8 gm_801A43A0(u8 arg0);
 /* 1A4510 */ void gm_801A4510(void);
@@ -47,6 +49,7 @@
 /* 1A5130 */ UNK_RET gm_801A5130(UNK_PARAMS);
 /* 1A51A8 */ UNK_RET gm_801A51A8(UNK_PARAMS);
 /* 1A5220 */ UNK_RET gm_801A5220(UNK_PARAMS);
+/* 1A5250 */ UNK_T gm_801A5250(void);
 /* 1A5258 */ UNK_RET gm_801A5258(UNK_PARAMS);
 /* 1A52D0 */ UNK_RET gm_801A52D0(UNK_PARAMS);
 /* 1A5360 */ UNK_RET gm_801A5360(UNK_PARAMS);
@@ -524,9 +527,6 @@
 /* 1BF8D8 */ UNK_RET gm_801BF8D8(UNK_PARAMS);
 /* 1BF8F8 */ UNK_RET gm_801BF8F8(UNK_PARAMS);
 /* 1BF920 */ UNK_RET gm_801BF920(UNK_PARAMS);
-/* 1BF948 */ UNK_RET gm_801BF948(UNK_PARAMS);
-/* 1BF9A8 */ void gm_801BF9A8(UNK_T);
-/* 1BFA3C */ UNK_RET gm_801BFA3C(UNK_PARAMS);
 /* 1BFA6C */ UNK_RET gm_801BFA6C(UNK_PARAMS);
 /* 1BFABC */ UNK_RET gm_801BFABC(UNK_PARAMS);
 /* 1BFBA8 */ UNK_RET gm_801BFBA8(UNK_PARAMS);

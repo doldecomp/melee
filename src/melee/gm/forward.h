@@ -1,6 +1,10 @@
 #ifndef MELEE_GM_FORWARD_H
 #define MELEE_GM_FORWARD_H
 
+typedef struct MajorScene MajorScene;
+typedef struct MinorScene MinorScene;
+typedef struct MinorSceneHandler MinorSceneHandler;
+
 typedef struct datetime datetime;
 typedef struct GameRules GameRules;
 typedef struct gm_8016A92C_arg0_t gm_8016A92C_arg0_t;

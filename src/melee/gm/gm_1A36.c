@@ -271,14 +271,14 @@ good:
     }
 }
 
-int gm_801A427C(void* arg0)
+void* gm_801A427C(MinorScene* scene)
 {
-    return M2C_FIELD(arg0, int*, 0x10);
+    return scene->unk_struct_0;
 }
 
-UNK_T gm_801A4284(UNK_T arg0)
+void* gm_801A4284(MinorScene* scene)
 {
-    return M2C_FIELD(arg0, UNK_T*, 0x14);
+    return scene->unk_struct_1;
 }
 
 void gm_SetSceneMinor(u8 arg0)
@@ -1950,52 +1950,3 @@ u8 gm_801BF718(void)
 /// #gm_801BF8F8
 
 /// #gm_801BF920
-
-/// #gm_801BF948
-
-enum {
-    TROPHY_PIKMIN = 0x113,
-};
-
-enum {
-    LANG_JP = 0,
-};
-
-void gm_801BF9A8(UNK_T data)
-{
-    struct sceneData* scene_data;
-
-    scene_data = gm_801A4284(data);
-
-    if (!un_803048C0(TROPHY_PIKMIN)) {
-        if (!lb_8001C2D8(0, "01",
-                         lbLang_GetLanguageSetting() == LANG_JP ? "GPIJ"
-                                                                : "GPIE",
-                         "Pikmin dataFile"))
-        {
-            un_803124BC();
-            Trophy_SetUnlockState(TROPHY_PIKMIN, true);
-        }
-    }
-
-    // Set scene exit callback?
-    gm_801A4330(&lb_8001CE78);
-
-    // Enter major scene
-    // Gekko "boot to CSS" code changes scene_id to a hardcoded 2
-    gm_801A42F8(scene_data->scene_id);
-}
-
-/// #gm_801BFA3C
-
-/// #gm_801BFA6C
-
-/// #gm_801BFABC
-
-/// #gm_801BFBA8
-
-/// #gm_801BFC60
-
-/// #gm_801BFCFC
-
-/// #gm_801BFF7C
