@@ -47,7 +47,7 @@
 /* 01BFD8 */ int lb_8001BFD8(int, UNK_T, UNK_T, UNK_T);
 /* 01C0F4 */ int lb_8001C0F4(int, char*, char*, char*, int);
 /* 01C2D8 */ int lb_8001C2D8(int, char*, char*, char*);
-/* 01C404 */ UNK_RET lb_8001C404(UNK_PARAMS);
+/* 01C404 */ bool lb_8001C404(int);
 /* 01C4A8 */ void lb_8001C4A8(void*, void*);
 /* 01C550 */ void lb_8001C550(void);
 /* 01C5A4 */ UNK_RET lb_8001C5A4(UNK_PARAMS);
@@ -55,7 +55,7 @@
 /* 01C600 */ UNK_RET lb_8001C600(UNK_PARAMS);
 /* 01C658 */ UNK_RET lb_8001C658(UNK_PARAMS);
 /* 01C820 */ UNK_RET lb_8001C820(UNK_PARAMS);
-/* 01C87C */ UNK_RET lb_8001C87C(UNK_PARAMS);
+/* 01C87C */ u32 lb_8001C87C(void);
 /* 01C8BC */ bool lb_8001C8BC(void);
 /* 01CAF4 */ UNK_RET lb_8001CAF4(UNK_PARAMS);
 /* 01CBAC */ void lb_8001CBAC(s32 arg0);

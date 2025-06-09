@@ -5,6 +5,7 @@
 #include "baselib/jobj.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
+#include "gm/gm_1B03.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"

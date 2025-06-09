@@ -1652,19 +1652,20 @@ melee/gm/gmcamera.c:
 	.sdata2     start:0x804DA9B8 end:0x804DA9E8
 
 melee/gm/gm_1A36.c:
-	.text       start:0x801A3680 end:0x801AEDC8
+	.text       start:0x801A3680 end:0x801AEE6C
 	.rodata     start:0x803B7D68 end:0x803B7D80
 	.data       start:0x803DA788 end:0x803DD550
 	.bss        start:0x80479C30 end:0x80480DA8
 	.sdata      start:0x804D4268 end:0x804D4310
 	.sbss       start:0x804D6720 end:0x804D6870
-	.sdata2     start:0x804DA9E8 end:0x804DAC20
+	.sdata2     start:0x804DA9E8 end:0x804DABF8
 
 melee/gm/gm_1AED.c:
-	.text       start:0x801AEDC8 end:0x801B0348
+	.text       start:0x801AEE6C end:0x801B0348
 	.data       start:0x803DD550 end:0x803DD6A0
 	.bss        start:0x80480DA8 end:0x80480DC8
 	.sbss       start:0x804D6870 end:0x804D6878
+	.sdata2     start:0x804DABF8 end:0x804DAC18
 
 melee/gm/gm_1B03.c:
 	.text       start:0x801B0348 end:0x801BF948
@@ -1672,7 +1673,7 @@ melee/gm/gm_1B03.c:
 	.bss        start:0x80480DC8 end:0x8049E558
 	.sdata      start:0x804D4310 end:0x804D44C8
 	.sbss       start:0x804D6878 end:0x804D6940
-	.sdata2     start:0x804DAC20 end:0x804DAC90
+	.sdata2     start:0x804DAC18 end:0x804DAC90
 
 melee/gm/gm_1BF9.c:
 	.text       start:0x801BF948 end:0x801BFA6C
