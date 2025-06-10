@@ -106,10 +106,7 @@ struct gm_804D6840_t {
 /* 1A5614 */ static void gm_801A5614(void);
 /* 1ACC90 */ static void gm_801ACC90(void);
 /* 1B6320 */ static UNK_T gm_801B6320(void);
-/* 1B8C5C */ static void fn_801B8C5C(UNK_T);
 /* 1B9FB8 */ static void fn_801B9FB8(void* arg0);
-/* 1BA5B4 */ static void fn_801BA5B4(UNK_T);
-/* 1BA7AC */ static void fn_801BA7AC(UNK_T);
 /* 1BBFE4 */ static void gm_801BBFE4(void);
 /* 1BEFB0 */ static u8 gm_801BEFB0(void);
 /* 1BEFC0 */ static void gm_801BEFC0(s8 arg0);
