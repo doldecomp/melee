@@ -848,6 +848,15 @@ void pl_8004049C(int player, ItemKind arg1)
     pl_80038824(player, var_r30);
 }
 
+void pl_80040614(int arg0, float arg8)
+{
+    RETURN_IF(!arg8);
+
+    if (arg8 <= pl_804D6470->x4C) {
+        pl_80038788(arg0, 0x2D, 1);
+    }
+}
+
 void pl_8004065C(int arg0, int arg1)
 {
     RETURN_IF(arg1 != 0);
