@@ -1,11 +1,12 @@
 #include "lbmthp.static.h"
 
-#include "lb/types.h"
+#include <melee/lb/types.h>
+#include <melee/lb/lbanim.h>
 
-f32 lbMthp_8001E8F8(lbMthp_8001E8F8_t* arg0)
+f32 lbMthp_8001E8F8(FigaTree* arg0)
 {
     if (arg0 != NULL) {
-        return arg0->x8;
+        return arg0->frames;
     }
     return lb_804D7CC0;
 }

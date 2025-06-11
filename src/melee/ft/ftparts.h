@@ -29,8 +29,8 @@
                                    u32 tree_depth);
 /* 0743E0 */ void ftParts_SetupParts(Fighter_GObj* fighter_obj);
 /* 0743E0 */ void func_800743E0(void);
-/* 07462C */ void ftParts_8007462C(void);
-/* 07482C */ void ftParts_8007482C(void);
+/* 07462C */ void ftParts_8007462C(Fighter_GObj*);
+/* 07482C */ HSD_JObj* ftParts_8007482C(HSD_Joint*);
 /* 07487C */ void ftParts_8007487C(UNK_T item, UNK_T, u8 costume_id, UNK_T,
                                    UNK_T);
 /* 0749CC */ void ftParts_800749CC(Fighter_GObj*);
@@ -44,11 +44,11 @@
 /* 074D7C */ void ftParts_80074D7C(u32*, s32, u32*);
 /* 074E58 */ void ftParts_80074E58(Fighter*);
 /* 07500C */ Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part);
-/* 075028 */ u8 ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
-                                 size_t joint_idx);
-/* 07506C */ u32 ftParts_8007506C(s32 ftkind, u32 part);
+/* 075028 */ int ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
+                                  size_t joint_idx);
+/* 07506C */ u32 ftParts_8007506C(FighterKind ftkind, u32 part);
 /* 0750C8 */ void ftParts_800750C8(Fighter*, enum_t, bool);
-/* 075240 */ void ftParts_80075240(void);
+/* 075240 */ HSD_TObj* ftParts_80075240(DObjList*, u16);
 /* 075304 */ void ftParts_80075304(void);
 /* 0753D4 */ void ftParts_800753D4(Fighter*, s32, UNK_T);
 /* 0755E8 */ void ftParts_800755E8(Fighter*, u8*);

@@ -39,7 +39,7 @@ void ftCo_8009CF84(Fighter* fp)
                         &fp->dynamic_bone_sets[i].dyn_desc,
                         bones->dyn_desc.count);
             fp->dynamic_bone_sets[i].bone_id = 0;
-            ftCo_8009CB40(fp, i, 1, 0);
+            ftCo_8009CB40(fp, i, 1, NULL);
             lb_80011710(&data->x2C->ftDynamicBones->array[i].dyn_desc,
                         &fp->dynamic_bone_sets[i].dyn_desc);
         }
@@ -568,11 +568,11 @@ void ftCo_8009E140(Fighter* fp, bool arg1)
         return;
     }
     if (fp->kind == FTKIND_PURIN) {
-        ftCo_8009CB40(fp, 0, arg1, 0);
+        ftCo_8009CB40(fp, 0, arg1, NULL);
         return;
     }
     for (i = 0; i < fp->dynamics_num; i++) {
-        ftCo_8009CB40(fp, i, arg1, 0);
+        ftCo_8009CB40(fp, i, arg1, NULL);
     }
 }
 
@@ -639,31 +639,29 @@ exit_false: {
 
 void ftCo_8009E4A8(Fighter* fp)
 {
-    float cur_anim_frame = fp->cur_anim_frame;
-    float frame_speed_mul = fp->frame_speed_mul;
+    float frame = fp->cur_anim_frame;
+    float speed = fp->frame_speed_mul;
+    int i;
+
     if (fp->x594_b4) {
-        Fighter_Part part = fp->ft_data->x2C->x10[fp->x28[fp->anim_id * 2]];
-        if (part != (unsigned) FtPart_TopN) {
-            ssize_t i;
+        FigaTree** tree = fp->ft_data->x2C->x10[fp->x28[fp->anim_id * 2 + 1]];
+        if (tree != NULL) {
             for (i = 0; i < fp->dynamics_num; i++) {
-                ftCo_8009CB40(fp, i, 1, part);
-                if (fp->x590 != 0) {
+                ftCo_8009CB40(fp, i, 1, tree[i]);
+                if (fp->x590 != NULL) {
                     ftAnim_8006EED4(
                         fp, fp->ft_data->x2C->ftDynamicBones->array[i].bone_id,
-                        part, cur_anim_frame, frame_speed_mul);
+                        fp->x590, frame, speed);
                 }
             }
         }
-    } else {
-        if (fp->x594_b3) {
-            ssize_t i;
-            for (i = 0; i < fp->dynamics_num; i++) {
-                ftCo_8009CB40(fp, i, 0, 0);
-                if (fp->x590 != 0) {
-                    ftAnim_8006EED4(
-                        fp, fp->ft_data->x2C->ftDynamicBones->array[i].bone_id,
-                        fp->x590, cur_anim_frame, frame_speed_mul);
-                }
+    } else if (fp->x594_b3) {
+        for (i = 0; i < fp->dynamics_num; i++) {
+            ftCo_8009CB40(fp, i, 0, NULL);
+            if (fp->x590 != NULL) {
+                ftAnim_8006EED4(
+                    fp, fp->ft_data->x2C->ftDynamicBones->array[i].bone_id,
+                    fp->x590, frame, speed);
             }
         }
     }
@@ -687,7 +685,7 @@ void ftCo_8009E614(Fighter* fp)
             frame_speed_mul = fp->frame_speed_mul;
             if (fp->x594_b4 || fp->x594_b3) {
                 for (i = 0; i < data->x2C->dynamicsNum; i++) {
-                    ftCo_8009CB40(fp, i, 1, 0);
+                    ftCo_8009CB40(fp, i, 1, NULL);
                 }
                 if (fp->x590 != 0) {
                     ftAnim_8006EBE8(fp->gobj, cur_anim_frame, frame_speed_mul,

@@ -30,7 +30,7 @@ struct ftData_80086060_arg0 {
 /* 085B10 */ void ftData_80085B10(Fighter*);
 /* 085B98 */ void ftData_80085B98(Fighter*, int, int);
 /* 085CD8 */ void ftData_80085CD8(Fighter*, Fighter*, enum_t msid);
-/* 085E50 */ lbMthp_8001E8F8_t* ftData_80085E50(Fighter*, enum_t msid);
+/* 085E50 */ FigaTree* ftData_80085E50(Fighter*, enum_t msid);
 /* 085FD4 */ struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp,
                                                          FtMotionId msid);
 /* 086060 */ Fighter* ftData_80086060(struct ftData_80086060_arg0* arg0);
