@@ -11,14 +11,6 @@
 
 #include <dolphin/mtx.h>
 
-typedef struct {
-    UNK_T x0;
-    UNK_T x4;
-    UNK_T x8;
-    f32 xC;
-    UNK_T x10;
-} sislib_UnknownType001;
-
 typedef struct _TextGlyphTexture {
     /*0x00*/ u8 data[512];
 } TextGlyphTexture;
@@ -71,7 +63,7 @@ struct HSD_Text {
     SIS* x5C;           // could just be a byte pointer?
     UNK_T x60;
     sislib_UnkAllocData* x64;
-    void* x68;
+    char* x68;
     u16 x6C;
     u16 x6E;
     f32 x70;
@@ -103,10 +95,8 @@ struct sislib_UnkAlloc3 {
 
 extern s8 HSD_SisLib_804D6390[4];
 extern SIS* HSD_SisLib_804D1124[5];
-extern HSD_Archive* HSD_SisLib_804D1110[5];
 extern u32 lbl_8040C8C0[144];
 extern u32 HSD_SisLib_8040C680[144];
-extern HSD_CObjDesc HSD_SisLib_8040C4B8;
 
 extern u32 HSD_SisLib_804D7968;
 extern sislib_UnkAllocData* HSD_SisLib_804D796C;
@@ -115,40 +105,37 @@ extern sislib_UnkAllocData* HSD_SisLib_804D7974;
 extern HSD_Text* HSD_SisLib_804D7978;
 extern sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
-extern sislib_UnknownType001 HSD_SisLib_8040C4A4;
-extern sislib_UnknownType001 HSD_SisLib_8040C490;
-
 void HSD_SisLib_803A6048(size_t);
 UNK_T func_804A70A0(UNK_T, s32, u32, s32, s32, s32, s32, s32, f64, f64, f64,
                     f64, f64, f64, f64, f64);
 void HSD_SisLib_803A947C(HSD_Archive*);
 HSD_Archive* HSD_SisLib_803A945C(char*);
-void HSD_SisLib_803A84BC(HSD_GObj*, HSD_Text*);
+void HSD_SisLib_803A84BC(HSD_GObj*, int);
 s32 HSD_SisLib_803A7F0C(HSD_Text*, s32);
 void HSD_SisLib_803A8134(void*, HSD_Text*, f32*, f32*);
 void HSD_SisLib_803A7684(UNK_T, u8, u8);
 void HSD_SisLib_803A7664(UNK_T);
 void HSD_SisLib_803A75E0(UNK_T, s32);
-void HSD_SisLib_803A7548(UNK_T, f32, f32);
+void HSD_SisLib_803A7548(HSD_Text*, int, float, float);
 void HSD_SisLib_803A74F0(HSD_Text*, s32 arg1, u8* arg2);
 void HSD_SisLib_803A746C(HSD_Text*, s32, f32, f32);
 s32 HSD_SisLib_803A70A0(s32, UNK_T, UNK_T);
 u32 lbl_803A6FEC(s32, s32, bool);
 void HSD_SisLib_803A6B98(HSD_Text* arg0, void* arg1, ...);
 s32 HSD_SisLib_803A67EC(u8*, u8*);
-HSD_Text* HSD_SisLib_803A6754(s8 arg0, s32 arg1);
+HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1);
 void HSD_SisLib_803A660C(s32, s32, s32);
 void HSD_SisLib_803A6530(s32, s32, s32);
 void HSD_SisLib_803A6478(u8*, u8*);
 void HSD_SisLib_803A6368(HSD_Text*, s32);
 void HSD_SisLib_803A62A0(s32, char*, char*);
-s32 HSD_SisLib_803A611C(u16, u32, u16, u8, u8, u8, u8, u32);
+s32 HSD_SisLib_803A611C(int, u32, u16, u8, u8, u8, u8, u32);
 void lbl_803A60EC(void);
-HSD_Text* HSD_SisLib_803A5ACC(s8, s32, f32, f32, f32, f32, f32);
+HSD_Text* HSD_SisLib_803A5ACC(int, s32, f32, f32, f32, f32, f32);
 void* HSD_SisLib_803A5798(s32);
 void HSD_SisLib_803A594C(void*);
 void HSD_SisLib_803A5CC4(HSD_Text*);
-void HSD_SisLib_803A5A2C(HSD_Text*);
+void HSD_SisLib_803A5A2C(void*);
 void HSD_SisLib_803A5D30(void);
 void HSD_SisLib_803A5DA0(s32);
 void HSD_SisLib_803A5E70(void);

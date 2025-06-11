@@ -41,7 +41,7 @@ struct HSD_IKHintDesc {
 
 struct HSD_Exp {
     union {
-        f32 (*func)(void);
+        f32 (*func)(void*);
         u8* bytecode;
     } expr;
     HSD_Rvalue* rvalue;
@@ -50,7 +50,7 @@ struct HSD_Exp {
 };
 
 struct HSD_ExpDesc {
-    f32 (*func)(void);
+    f32 (*func)(void*);
     HSD_RvalueList* rvalue;
 };
 
@@ -143,14 +143,10 @@ static inline bool RObjHasFlags2(HSD_RObj* robj)
 
 static inline bool RObjHasLimitReftype(HSD_RObj* robj)
 {
-    bool has_flags;
-    u32 flags = (robj->flags & ROBJ_TYPE_MASK);
-    if (flags == REFTYPE_LIMIT) {
-        has_flags = true;
-    } else {
-        has_flags = false;
+    if ((robj->flags & ROBJ_TYPE_MASK) == REFTYPE_LIMIT) {
+        return true;
     }
-    return has_flags;
+    return false;
 }
 
 #endif

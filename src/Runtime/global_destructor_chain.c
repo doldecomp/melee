@@ -16,3 +16,5 @@ void __destroy_global_chain(void)
         cur->destructor(cur->object, -1);
     }
 }
+
+SECTION_DTORS static void* const __destroy_global_chain_reference = __destroy_global_chain;

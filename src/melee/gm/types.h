@@ -8,6 +8,65 @@
 
 #include <common_structs.h>
 
+struct MinorScene {
+    u8 idx;
+    u8 preload;
+    u16 flags;
+
+    void (*Prep)(MinorScene*);
+    void (*Decide)(MinorScene*);
+
+    u8 class_id;
+
+    void* unk_struct_0;
+    void* unk_struct_1;
+};
+
+struct MajorScene {
+    u8 preload;
+    u8 idx;
+
+    void (*Load)(void);
+    void (*Unload)(void);
+    void (*Init)(void);
+
+    MinorScene* minor_scenes;
+}; // 803DACA4
+
+struct MinorSceneHandler {
+    u8 class_id;
+
+    void (*OnFrame)(void);
+    void (*OnLoad)(u32);
+    void (*OnLeave)(u32);
+    void (*unk_func)(void);
+}; // 803DA920
+
+typedef struct {
+    u8 curr_major;
+    u8 pending_major;
+    u8 prev_major;
+    u8 curr_minor;
+    u8 prev_minor;
+    u8 pending_minor;
+} SceneNums;
+
+typedef struct {
+    SceneNums nums;
+    SceneNums nums2;
+    u8 pending;
+    u8 x0D;
+    u8 x0E;
+    u8 x0F;
+    void* data;
+} GameState;
+STATIC_ASSERT(sizeof(GameState) == 0x14);
+
+struct sceneData {
+    u32 a;
+    u8 scene_id;
+};
+
 struct gmm_x1CB0 {
     u8 padding_x0[0x10 - 0x0];
     u8 x10[0x16 - 0x10];
@@ -304,6 +363,8 @@ struct gmMainLib_8046B0F0_t {
     bool x0;
     int x4, x8, xC, x10, x14;
 };
+
+extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 
 struct gm_8016A92C_arg0_t {
     char pad_0[0x58];

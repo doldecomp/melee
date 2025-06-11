@@ -4,13 +4,19 @@
 #include <dolphin/dvd.h>
 
 // dvd.c
+static void stateTimeout(void);
+static void cbForStateError(unsigned long intType);
+static void cbForUnrecoveredError(unsigned long);
+static void cbForUnrecoveredErrorRetry(unsigned long);
 void __DVDAudioBufferConfig(struct DVDCommandBlock* block,
                             unsigned long enable, unsigned long size,
                             void (*callback)(long, struct DVDCommandBlock*));
 
 void __DVDFSInit();
+void __DVDPrepareResetAsync(DVDCBCallback);
 
 // dvdlow.c
+void __DVDInitWA(void);
 void __DVDInterruptHandler(short unused, struct OSContext* context);
 
 // dvdqueue.c

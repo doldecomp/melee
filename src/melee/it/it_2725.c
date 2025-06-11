@@ -18,6 +18,7 @@
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
+#include "gm/gm_1B03.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"

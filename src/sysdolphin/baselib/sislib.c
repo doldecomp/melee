@@ -9,6 +9,7 @@
 #include "memory.h"
 #include "state.h"
 #include "tev.h"
+#include "wobj.h"
 
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
@@ -18,7 +19,32 @@
 #include <printf.h>
 #include <dolphin/os.h>
 
-HSD_CObjDesc HSD_SisLib_8040C4B8;
+static HSD_WObjDesc HSD_SisLib_8040C490 = { NULL, { 0, 0, 1 }, NULL, };
+
+static HSD_WObjDesc HSD_SisLib_8040C4A4 = { NULL, { 0, 0, 0 }, NULL, };
+
+static HSD_CameraDescPerspective HSD_SisLib_8040C4B8 = {
+    0,
+    0,
+    1,
+    0,
+    0x280,
+    0,
+    0x1E0,
+    0,
+    0x280,
+    0,
+    0x1E0,
+    &HSD_SisLib_8040C490,
+    &HSD_SisLib_8040C4A4,
+    0,
+    0,
+    0,
+    65535,
+    30,
+    1.3333,
+};
+
 sislib_UnkAllocData* HSD_SisLib_804D7970;
 sislib_UnkAllocData* HSD_SisLib_804D7974;
 HSD_Text* HSD_SisLib_804D7978;
@@ -28,11 +54,14 @@ sislib_UnkAlloc3* HSD_SisLib_804D797C;
 // extern u8 *HSD_SisLib_804D7978;
 // sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0f };
 
+//u8 HSD_SisLib_8040C490[0x60] = { 0 };
+
 static f32
     HSD_SisLib_8040CB00; /* unable to generate initializer: unknown type */
 static u8
     HSD_SisLib_8040CD40; /* unable to generate initializer: unknown type */
-HSD_Archive* HSD_SisLib_804D1110[5];
+
+static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
@@ -40,24 +69,20 @@ s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 // data types
 void* HSD_SisLib_803A5798(s32 size)
 {
-    sislib_UnkAllocData* temp_r0_2;
-    sislib_UnkAllocData* temp_r25;
-    u8* temp_r26;
-    sislib_UnkAllocData* var_r26;
-    sislib_UnkAllocData* var_r27;
-    sislib_UnkAllocData* var_r30;
     sislib_UnkAllocData* var_r31;
-    sislib_UnkAllocData* var_r4;
+    sislib_UnkAllocData* var_r30;
     s32 temp_r0;
-    s32 temp_r27;
     s32 var_r29;
+    sislib_UnkAllocData* var_r27;
+    sislib_UnkAllocData* var_r26;
+    sislib_UnkAllocData* var_r4;
 
     var_r31 = NULL;
     var_r30 = NULL;
     var_r27 = HSD_SisLib_804D7970;
     var_r26 = HSD_SisLib_804D7974;
     if (size == 0) {
-        OSReport("ZERO byte alloc");
+        OSReport("ZERO byte alloc\n");
         OSPanic("sislib.c", 0x3C, "");
     }
     temp_r0 = size % 4;
@@ -69,36 +94,41 @@ void* HSD_SisLib_803A5798(s32 size)
         var_r26 = var_r26->data_0;
     }
     for (;;) {
-        if (var_r27->size == (u32) size) {
+        if (var_r27->size == size) {
             var_r31 = var_r27;
-        } else {
-            if (var_r27->size > (u32) size) {
-                if (var_r31 != NULL) {
-                    if ((u32) var_r31->size > var_r27->size) {
-                        var_r31 = var_r27;
-                    }
-                } else {
+            break;
+        }
+        if (var_r27->size > size) {
+            if (var_r31 != NULL) {
+                if (var_r31->size > var_r27->size) {
                     var_r31 = var_r27;
                 }
+            } else {
+                var_r31 = var_r27;
             }
-            var_r27 = var_r27->data_0;
-            if (var_r27 == NULL) {
-                break;
-            }
+        }
+        var_r27 = var_r27->data_0;
+        if (var_r27 == NULL) {
+            break;
         }
     }
     if (var_r31 == NULL) {
-        OSReport("Memory Empty");
+        OSReport("Memory Empty\n");
         OSPanic("sislib.c", 0x56, "");
     }
 
     var_r4 = HSD_SisLib_804D7970;
+
     if (var_r4 == var_r31) {
-        temp_r26 = (u8*) var_r4->data_1;
-        temp_r25 = var_r4->data_0;
-        temp_r27 = (var_r4->size - size) - 0xC;
+        int temp_r27;
+        u8* temp_r26;
+        sislib_UnkAllocData* temp_r25;
+
+        temp_r26 = (u8*) HSD_SisLib_804D7970->data_1;
+        temp_r25 = HSD_SisLib_804D7970->data_0;
+        temp_r27 = HSD_SisLib_804D7970->size - size - sizeof(sislib_UnkAllocData);
         if (temp_r27 < 0) {
-            OSReport("Memory Empty", var_r4);
+            OSReport("Memory Empty\n");
             OSPanic("sislib.c", 0x5F, "");
         }
 
@@ -172,179 +202,165 @@ void HSD_SisLib_803A594C(void* arg0)
     }
 }
 
-void HSD_SisLib_803A5A2C(HSD_Text* arg0)
+void HSD_SisLib_803A5A2C(void* arg0)
 {
-    HSD_GObj* temp_r0;
+    HSD_Text* temp_r0;
     sislib_UnkAllocData* temp_r3;
-    HSD_Text* temp_r3_2;
-    HSD_Text* temp_r3_3;
-    HSD_Text* var_r31;
-    HSD_Text* var_r4;
+    HSD_Text* curr;
+    HSD_Text* last;
 
-    var_r4 = NULL;
-    var_r31 = HSD_SisLib_804D7978;
-    while (var_r31 != NULL) {
-        temp_r0 = var_r31->x54;
-        if (var_r31 == arg0) {
-            if (var_r4 != NULL) {
-                var_r4->x54 = temp_r0;
+    last = NULL;
+    curr = HSD_SisLib_804D7978;
+    while (curr != NULL) {
+        temp_r0 = curr->x50;
+        if (curr == arg0) {
+            if (last != NULL) {
+                last->x50 = temp_r0;
             } else {
-                HSD_SisLib_804D7978 = (HSD_Text*) temp_r0;
+                HSD_SisLib_804D7978 = temp_r0;
             }
-            temp_r3 = var_r31->x64;
+            temp_r3 = curr->x64;
             if (temp_r3 != NULL) {
-                temp_r3_2 = temp_r3->data_1;
-                if (temp_r3_2 != NULL) {
-                    HSD_SisLib_803A594C(temp_r3_2);
+                if (temp_r3->data_1 != NULL) {
+                    HSD_SisLib_803A594C(temp_r3->data_1);
                 }
-                HSD_SisLib_803A594C(var_r31->x64);
+                HSD_SisLib_803A594C(curr->x64);
             }
-            temp_r3_3 = var_r31->x68;
-            if (temp_r3_3 != NULL) {
-                HSD_SisLib_803A594C(temp_r3_3);
+            if (curr->x68 != NULL) {
+                HSD_SisLib_803A594C(curr->x68);
             }
-            HSD_SisLib_803A594C(var_r31);
+            HSD_SisLib_803A594C(curr);
             return;
         }
-        var_r4 = var_r31;
-        var_r31 = (HSD_Text*) temp_r0;
+        last = curr;
+        curr = temp_r0;
     }
 }
 
 void HSD_SisLib_803A5CC4(HSD_Text* arg0)
 {
-    HSD_GObj* temp_r3;
-    HSD_Text* var_r31;
-
-    var_r31 = HSD_SisLib_804D7978;
-    while (var_r31 != NULL) {
-        if (var_r31 == arg0) {
-            temp_r3 = var_r31->x54;
-            if (temp_r3 != NULL) {
-                HSD_GObjPLink_80390228(temp_r3);
-                var_r31->x54 = NULL;
-                return;
+    HSD_Text* curr = HSD_SisLib_804D7978;
+    while (curr != NULL) {
+        HSD_Text* next = curr->x50;
+        if (curr == arg0) {
+            if (curr->x54 != NULL) {
+                HSD_GObjPLink_80390228(curr->x54);
+                curr->x54 = NULL;
+            } else {
+                HSD_SisLib_803A5A2C(curr);
             }
-            HSD_SisLib_803A5A2C(var_r31);
             return;
         }
-        var_r31 = (HSD_Text*) var_r31->x54;
+        curr = next;
     }
 }
 
 void HSD_SisLib_803A5D30(void)
 {
-    HSD_GObj* temp_r3;
-    HSD_Text* temp_r29;
-    HSD_Text* var_r30;
-
-    var_r30 = HSD_SisLib_804D7978;
-    while (var_r30 != NULL) {
-        temp_r3 = var_r30->x54;
-        temp_r29 = var_r30->x50;
-        if (temp_r3 != NULL) {
-            HSD_GObjPLink_80390228(temp_r3);
-            var_r30->x54 = NULL;
+    HSD_Text* curr = HSD_SisLib_804D7978;
+    while (curr != NULL) {
+        HSD_Text* next = curr->x50;
+        if (curr->x54 != NULL) {
+            HSD_GObjPLink_80390228(curr->x54);
+            curr->x54 = NULL;
         } else {
-            HSD_SisLib_803A5A2C(var_r30);
+            HSD_SisLib_803A5A2C(curr);
         }
-        var_r30 = temp_r29;
+        curr = next;
+    }
+}
+
+static inline void HSD_SisLib_803A5DA0_inline0(s32 arg0)
+{
+    HSD_Text* curr = HSD_SisLib_804D7978;
+    while (curr != NULL) {
+        HSD_Text* next = curr->x50;
+        if (curr->x4F == arg0) {
+            if (curr->x54 != NULL) {
+                HSD_GObjPLink_80390228(curr->x54);
+                curr->x54 = NULL;
+            } else {
+                HSD_SisLib_803A5A2C(curr);
+            }
+        }
+        curr = next;
     }
 }
 
 void HSD_SisLib_803A5DA0(s32 arg0)
 {
-    HSD_GObj* temp_r3;
-    s32 temp_r3_2;
-    sislib_UnkAlloc3* temp_r30_2;
-    sislib_UnkAlloc3* var_r28;
-    sislib_UnkAlloc3* var_r29_2;
-    HSD_Text* temp_r30;
-    HSD_Text* var_r29;
+    sislib_UnkAlloc3* last = NULL;
+    sislib_UnkAlloc3* curr;
 
-    var_r28 = NULL;
-    var_r29 = HSD_SisLib_804D7978;
-    while (var_r29 != NULL) {
-        temp_r30 = var_r29->x50;
-        if ((s32) var_r29->x4F == arg0) {
-            if (var_r29->x54 != NULL) {
-                HSD_GObjPLink_80390228(var_r29->x54);
-                var_r29->x54 = NULL;
+    HSD_SisLib_803A5DA0_inline0(arg0);
+
+    curr = HSD_SisLib_804D797C;
+    while (curr != NULL) {
+        sislib_UnkAlloc3* next = curr->x0;
+        if (curr->xA == arg0) {
+            if (curr->x4 != 0U) {
+                HSD_GObjPLink_80390228(curr->x4);
+                curr->x4 = 0;
+            }
+            if (last != NULL) {
+                last->x0 = next;
             } else {
-                HSD_SisLib_803A5A2C(var_r29);
+                HSD_SisLib_804D797C = next;
             }
+            HSD_SisLib_803A594C(curr);
         }
-        var_r29 = temp_r30;
-    }
-    var_r29_2 = HSD_SisLib_804D797C;
-    while (var_r29_2 != NULL) {
-        temp_r30_2 = var_r29_2->x0;
-        if ((s32) var_r29_2->xA == arg0) {
-            if (var_r29_2->x4 != 0U) {
-                HSD_GObjPLink_80390228(var_r29_2->x4);
-                var_r29_2->x4 = 0;
-            }
-            if (var_r28 != NULL) {
-                var_r28->x0 = temp_r30_2;
-            } else {
-                HSD_SisLib_804D797C = temp_r30_2;
-            }
-            HSD_SisLib_803A594C(var_r29_2);
-        }
-        var_r28 = var_r29_2;
-        var_r29_2 = temp_r30_2;
+        last = curr;
+        curr = next;
     }
 }
 
-HSD_Text* HSD_SisLib_803A5ACC(s8 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
+HSD_Text* HSD_SisLib_803A5ACC(int arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
                               f32 arg5, f32 arg6)
 {
-    HSD_GObj* temp_r3;
-    HSD_GObj* var_r27;
-    s32 var_r4;
-    HSD_Text* temp_r30;
-    sislib_UnkAlloc3* var_r28;
-    HSD_Text* var_r29;
     HSD_Text* var_r30;
+    HSD_Text* var_r29;
+    sislib_UnkAlloc3* var_r28;
+    HSD_GObj* gobj;
+    int var_r4;
+    HSD_Text* temp_r30;
 
     var_r4 = arg1;
     var_r29 = NULL;
     var_r28 = NULL;
-    var_r27 = NULL;
+    gobj = NULL;
     var_r30 = HSD_SisLib_804D7978;
     if (var_r4 >= 0) {
         var_r28 = HSD_SisLib_804D797C;
-        while (((s32) var_r28->xA != arg0) ||
-               (var_r4 -= 1, ((var_r4 < 0) == 0)))
-        {
+        while (1) {
+            if (var_r28->xA == arg0 && --var_r4 < 0) {
+                break;
+            }
+
             if (var_r28 == NULL) {
-                OSReport("unknow camera\n", var_r4);
+                OSReport("unknow camera\n");
                 return NULL;
             }
             var_r28 = var_r28->x0;
         }
-        temp_r3 = GObj_Create(var_r28->x8, var_r28->xC, var_r28->xD);
-        var_r27 = temp_r3;
-        GObj_SetupGXLink(temp_r3, (void*) HSD_SisLib_803A84BC, var_r28->xE,
-                         var_r28->xF);
+        gobj = GObj_Create(var_r28->x8, var_r28->xC, var_r28->xD);
+        GObj_SetupGXLink(gobj, HSD_SisLib_803A84BC, var_r28->xE, var_r28->xF);
     }
     while (var_r30 != NULL) {
         var_r29 = var_r30;
         var_r30 = var_r30->x50;
     }
     temp_r30 = HSD_SisLib_803A5798(0xA0);
-    if ((HSD_Text*) HSD_SisLib_804D7978 == NULL) {
+    if (HSD_SisLib_804D7978 == NULL) {
         HSD_SisLib_804D7978 = temp_r30;
     }
     if (var_r29 != NULL) {
         var_r29->x50 = temp_r30;
     }
-    if (var_r27 != NULL) {
-        GObj_InitUserData(var_r27, (u8) var_r28->x8,
-                          (void (*)(void*)) HSD_SisLib_803A5A2C, temp_r30);
+    if (gobj != NULL) {
+        GObj_InitUserData(gobj, var_r28->x8, HSD_SisLib_803A5A2C, temp_r30);
     }
     temp_r30->x50 = NULL;
-    temp_r30->x54 = var_r27;
+    temp_r30->x54 = gobj;
     temp_r30->x0 = arg2;
     temp_r30->x4 = arg3;
     temp_r30->x8 = arg4;
@@ -390,40 +406,26 @@ extern sislib_UnkAllocData* HSD_SisLib_804D796C;
 
 void HSD_SisLib_803A5E70(void)
 {
-    HSD_GObj* temp_r3;
-    s32 temp_r3_2;
-    sislib_UnkAlloc3* temp_r30_2;
-    sislib_UnkAlloc3* var_r29_2;
-    HSD_Text* temp_r30;
-    HSD_Text* var_r29;
+    sislib_UnkAlloc3* curr;
 
-    var_r29 = HSD_SisLib_804D7978;
-    while (var_r29 != NULL) {
-        temp_r3 = var_r29->x54;
-        temp_r30 = var_r29->x50;
-        if (temp_r3 != NULL) {
-            HSD_GObjPLink_80390228(temp_r3);
-            var_r29->x54 = NULL;
-        } else {
-            HSD_SisLib_803A5A2C(var_r29);
+    HSD_SisLib_803A5D30();
+
+    curr = HSD_SisLib_804D797C;
+    while (curr != NULL) {
+        sislib_UnkAlloc3* next = curr->x0;
+        if (curr->x4 != 0) {
+            HSD_GObjPLink_80390228(curr->x4);
+            curr->x4 = 0;
         }
-        var_r29 = temp_r30;
+        HSD_SisLib_803A594C(curr);
+        curr = next;
     }
-    var_r29_2 = HSD_SisLib_804D797C;
-    while (var_r29_2 != NULL) {
-        temp_r30_2 = var_r29_2->x0;
-        if ((u32) var_r29_2->x4 != 0U) {
-            HSD_GObjPLink_80390228(var_r29_2->x4);
-            var_r29_2->x4 = 0;
-        }
-        HSD_SisLib_803A594C(var_r29_2);
-        var_r29_2 = temp_r30_2;
-    }
+
     HSD_SisLib_804D797C = NULL;
     HSD_SisLib_804D7970 = HSD_SisLib_804D796C;
     HSD_SisLib_804D7974 = NULL;
     HSD_SisLib_804D7970->data_0 = NULL;
-    HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 0xC);
+    HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
     HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;
 }
 
@@ -442,91 +444,73 @@ void HSD_SisLib_803A5F50(s32 arg0)
 
 void HSD_SisLib_803A5FBC(void)
 {
-    HSD_Archive** var_r30;
-    SIS** var_r29;
-    s32 var_r28;
-
+    int i;
     HSD_SisLib_803A5E70();
-    var_r30 = HSD_SisLib_804D1110;
-    var_r29 = HSD_SisLib_804D1124;
-    for (var_r28 = 0; var_r28 < 5; var_r28++) {
-        if (*var_r30 != NULL) {
-            HSD_SisLib_803A947C(*var_r30);
-            *var_r30 = NULL;
-            *var_r29 = NULL;
+    for (i = 0; i < 5; i++) {
+        if (HSD_SisLib_804D1110[i] != NULL) {
+            HSD_SisLib_803A947C(HSD_SisLib_804D1110[i]);
+            HSD_SisLib_804D1110[i] = NULL;
+            HSD_SisLib_804D1124[i] = NULL;
         }
-        var_r30++;
-        var_r29++;
     }
     HSD_Free(HSD_SisLib_804D796C);
 }
 
-void HSD_SisLib_803A6048(u32 arg0)
+void HSD_SisLib_803A6048(u32 size)
 {
-    sislib_UnkAllocData* temp_r3;
-    HSD_Archive* archive;
+    sislib_UnkAllocData* alloc;
+    int i;
 
-    HSD_SisLib_804D7968 = arg0;
+    HSD_SisLib_804D7968 = size;
     HSD_SisLib_804D7974 = NULL;
-    temp_r3 = (sislib_UnkAllocData*) HSD_MemAlloc((s32) HSD_SisLib_804D7968);
-    HSD_SisLib_804D7970 = temp_r3;
-    HSD_SisLib_804D796C = temp_r3;
+    alloc = HSD_MemAlloc(HSD_SisLib_804D7968);
+    HSD_SisLib_804D7970 = alloc;
+    HSD_SisLib_804D796C = HSD_SisLib_804D7970;
     HSD_SisLib_804D7970->data_0 = NULL;
-    HSD_SisLib_804D7970->data_1 =
-        (HSD_Text*) ((u8*) HSD_SisLib_804D7970 + 0xC);
+    HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
     HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;
     HSD_SisLib_804D7978 = NULL;
     HSD_SisLib_804D797C = NULL;
-    archive = HSD_SisLib_804D1110[0];
-    archive->header.file_size = 0;
-    *(u32*) archive->header.version = 0;
-    HSD_SisLib_804D1110[1] = NULL;
-    archive->header.pad[0] = 0;
-    HSD_SisLib_804D1110[2] = NULL;
-    archive->header.pad[1] = 0;
-    HSD_SisLib_804D1110[3] = NULL;
-    archive->data = NULL;
-    HSD_SisLib_804D1110[4] = NULL;
-    archive->reloc_info = 0;
-}
 
-void fn_803A60EC(void* arg0)
-{
-    sislib_UnkAlloc3* var_r4;
-    var_r4 = HSD_SisLib_804D797C;
-    while (var_r4 != NULL) {
-        if (var_r4->x4 == arg0) {
-            var_r4->x4 = 0U;
-            return;
-        }
-        var_r4 = var_r4->x0;
+    for (i = 0; i < 5; i++) {
+        HSD_SisLib_804D1110[i] = NULL;
+        HSD_SisLib_804D1124[i] = NULL;
     }
 }
 
-s32 HSD_SisLib_803A611C(u16 arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
+// GObj "remove" function callback
+void fn_803A60EC(void* arg0)
+{
+    sislib_UnkAlloc3* curr = HSD_SisLib_804D797C;
+    while (curr != NULL) {
+        if (curr->x4 == arg0) {
+            curr->x4 = 0U;
+            return;
+        }
+        curr = curr->x0;
+    }
+}
+
+s32 HSD_SisLib_803A611C(int arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
                         u8 arg5, u8 arg6, u32 arg7)
 {
-    HSD_CObj* temp_r3;
-    HSD_GObj* temp_r3_2;
-    HSD_GObj* temp_r6;
-    s32 var_r31;
+    int count;
+    sislib_UnkAlloc3* var_r28;
     sislib_UnkAlloc3* temp_r27;
     sislib_UnkAlloc3* var_r11;
-    sislib_UnkAlloc3* var_r28;
-    u64 temp_ret;
 
     var_r28 = NULL;
-    var_r31 = 0;
+    count = 0;
     var_r11 = HSD_SisLib_804D797C;
     while (var_r11 != NULL) {
         var_r28 = var_r11;
         if (var_r11->xA == arg0) {
-            var_r31 += 1;
+            count += 1;
         }
         var_r11 = var_r11->x0;
     }
     temp_r27 = HSD_SisLib_803A5798(0x10);
-    if ((sislib_UnkAlloc3*) HSD_SisLib_804D797C == NULL) {
+    if (HSD_SisLib_804D797C == NULL) {
         HSD_SisLib_804D797C = temp_r27;
     }
     if (var_r28 != NULL) {
@@ -544,14 +528,16 @@ s32 HSD_SisLib_803A611C(u16 arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
     } else {
         temp_r27->x4 = GObj_Create(arg2, arg3, arg4);
         if (temp_r27->x4 != NULL) {
-            temp_r3 = HSD_CObjLoadDesc(&HSD_SisLib_8040C4B8);
+            HSD_CObj* temp_r3 = HSD_CObjLoadDesc((HSD_CObjDesc*) &HSD_SisLib_8040C4B8);
             if (temp_r3 != NULL) {
                 HSD_CObjSetOrtho(temp_r3, 0.0f, -480.0f, 0.0f, 640.0f);
-                HSD_GObjObject_80390A70(temp_r27->x4, *HSD_GObj_804D784B,
-                                        temp_r3);
+                {
+                    u8 tmp = *HSD_GObj_804D784B;
+                    HSD_GObjObject_80390A70(temp_r27->x4, tmp, temp_r3);
+                }
                 GObj_SetupGXLinkMax(temp_r27->x4, HSD_GObj_803910D8, arg7);
-                temp_r27->x4->gxlink_prios = (u64) arg5 << 1;
-                GObj_InitUserData(temp_r27->x4, (u8) arg2, fn_803A60EC,
+                temp_r27->x4->gxlink_prios = (u64) 1 << arg5;
+                GObj_InitUserData(temp_r27->x4, arg2, fn_803A60EC,
                                   temp_r27->x4);
             } else {
                 HSD_GObjPLink_80390228(temp_r27->x4);
@@ -559,27 +545,25 @@ s32 HSD_SisLib_803A611C(u16 arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
             }
         }
     }
-    return var_r31;
+    return count;
 }
 
 void HSD_SisLib_803A62A0(s32 arg0, char* arg1, char* arg2)
 {
-    HSD_Archive** temp_r30;
-    SIS* temp_r3;
-    SIS* temp_ret;
 
-    temp_r30 = &HSD_SisLib_804D1110[arg0];
-    *temp_r30 = HSD_SisLib_803A945C(arg1);
-    if (arg1 == 0U) {
-        OSReport("Cannot open archive %s", arg1);
+    HSD_Archive* tmp = HSD_SisLib_803A945C(arg1);
+    HSD_SisLib_804D1110[arg0] = tmp;
+    if (tmp == NULL) {
+        OSReport("Cannot open archive %s.\n", arg1);
         OSPanic("sislib.c", 0x24A, "");
     }
-    temp_ret = HSD_ArchiveGetPublicAddress(*temp_r30, arg2);
-    temp_r3 = temp_ret;
-    HSD_SisLib_804D1124[arg0] = temp_r3;
-    if (temp_r3 == NULL) {
-        OSReport("Cannot find symbol %s", arg2);
-        OSPanic("sislib.c", 0x24F, "");
+    {
+        SIS* sis = HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[arg0], arg2);
+        HSD_SisLib_804D1124[arg0] = sis;
+        if (sis == NULL) {
+            OSReport("Cannot find symbol %s.\n", arg2);
+            OSPanic("sislib.c", 0x24F, "");
+        }
     }
 }
 
@@ -587,7 +571,6 @@ void HSD_SisLib_803A6368(HSD_Text* arg0, s32 arg1)
 {
     SIS** temp_r3;
     s32 var_r5;
-    void* temp_r3_2;
 
     temp_r3 = (SIS**) HSD_SisLib_804D1124[arg0->x4F];
     if (temp_r3 != NULL) {
@@ -610,130 +593,84 @@ void HSD_SisLib_803A6368(HSD_Text* arg0, s32 arg1)
     arg0->x98 = 0;
     arg0->x94 = 0;
     arg0->x4B = 0;
-    temp_r3_2 = arg0->x68;
-    if (temp_r3_2 != NULL) {
-        HSD_SisLib_803A594C(temp_r3_2);
+    if (arg0->x68 != NULL) {
+        HSD_SisLib_803A594C(arg0->x68);
     }
     arg0->x68 = HSD_SisLib_803A5798(0x10);
     var_r5 = 0;
     arg0->x6E = 0x10;
-    while (var_r5 < (s32) arg0->x6E) {
-        // *(arg0->x68 + var_r5) = 0;
+    while (var_r5 < arg0->x6E) {
+        arg0->x68[var_r5] = 0;
         var_r5 += 1;
     }
 }
 
-static inline void HSD_SisLib_803A6478_inline(u8* arg0, u8* arg1)
+void HSD_SisLib_803A6478(u8* arg0, u8* arg1)
 {
-    u8* var_r3;
-    u8* var_r4;
-    u8 temp_r0;
-    u8 temp_r0_2;
-    u8 temp_r0_3;
-    u8 temp_r0_4;
-    u8 temp_r0_5;
-    u8 temp_r0_6;
-
-    while (arg1[0] != 0) {
-        if (arg1[0] >= 0x20U) {
-            arg0[0] = arg1[0];
-            temp_r0_2 = arg1[1];
-            arg1 += 2;
-            arg0[1] = temp_r0_2;
-            arg0 += 2;
+    while (*arg1 != 0) {
+        if (*arg1 >= 0x20) {
+            *arg0++ = *arg1++;
+            *arg0++ = *arg1++;
         } else {
-            temp_r0_3 = (arg1++)[0];
-            arg0[0] = temp_r0_3;
-            arg0++;
-            switch (temp_r0_3) {
+            switch (*arg0++ = *arg1++) {
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
             case 14:
-            case 11:
-                temp_r0_4 = *arg1;
-                arg1 += 1;
-                *arg0 = temp_r0_4;
-                arg0 += 1;
-                /* fallthrough */
+                *arg0++ = *arg1++;
             case 12:
-                temp_r0_5 = *arg1;
-                arg1 += 1;
-                *arg0 = temp_r0_5;
-                arg0 += 1;
+                *arg0++ = *arg1++;
             case 5:
-                arg0[0] = arg1[0];
-                temp_r0_6 = arg1[1];
-                arg1 += 2;
-                arg0[1] = temp_r0_6;
-                arg0 += 2;
+                *arg0++ = *arg1++;
+                *arg0++ = *arg1++;
             }
         }
     }
-    arg0[0] = 0;
-}
-
-void HSD_SisLib_803A6478(u8* arg0, u8* arg1)
-{
-    HSD_SisLib_803A6478_inline(arg0, arg1);
+    *arg0 = 0;
 }
 
 void HSD_SisLib_803A6530(s32 arg0, s32 arg1, s32 arg2)
 {
-    SIS** temp_r6;
-    u8* var_r3;
-    u8* var_r4;
-    temp_r6 = (SIS**) HSD_SisLib_804D1124[arg0];
-    var_r4 = (u8*) temp_r6[arg2];
-    var_r3 = (u8*) temp_r6[arg1];
-    HSD_SisLib_803A6478_inline(var_r3, var_r4);
+    u8** temp_r6 = (u8**) HSD_SisLib_804D1124[arg0];
+    HSD_SisLib_803A6478(temp_r6[arg1], temp_r6[arg2]);
 }
 
 void HSD_SisLib_803A660C(s32 arg0, s32 arg1, s32 arg2)
 {
-    SIS** temp_r6;
-    u8* var_r3;
-    u8* var_r4;
-    u8 temp_r0;
-    u8 temp_r0_2;
-    u8 temp_r0_3;
-    u8 temp_r0_4;
-    u8 temp_r0_5;
-    u8 temp_r0_6;
-    u8 temp_r0_7;
+    u8** temp_r6 = (u8**) HSD_SisLib_804D1124[arg0];
+    u8* var_r3 = temp_r6[arg1];
+    u8* var_r4 = temp_r6[arg2];
 
-    temp_r6 = (SIS**) HSD_SisLib_804D1124[arg0];
-    var_r3 = (u8*) temp_r6[arg1];
-    var_r4 = (u8*) temp_r6[arg2];
-#if 0
-loop_15:
-    temp_r0 = *var_r3;
-    if (temp_r0 != 0) {
-        if (temp_r0 >= 0x20U) {
+    while (*var_r3 != 0) {
+        if (*var_r3 >= 0x20) {
             var_r3 += 2;
-        } else if ((s32) temp_r0 != 0xC) {
-            if ((s32) temp_r0 < 0xC) {
-                if ((s32) temp_r0 != 5) {
-                    if (((s32) temp_r0 >= 5) && ((s32) temp_r0 < 0xB)) {
-                        goto block_11;
-                    }
-                    goto block_14;
-                }
-                var_r3 += 3;
-            } else if ((s32) temp_r0 != 0xE) {
-block_14:
-                var_r3 += 1;
-            } else {
-block_11:
-                var_r3 += 5;
-            }
         } else {
-            var_r3 += 4;
+            switch (*var_r3) {
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 14:
+                var_r3 += 5;
+                break;
+            case 12:
+                var_r3 += 4;
+                break;
+            case 5:
+                var_r3 += 3;
+                break;
+            default:
+                var_r3 += 1;
+            }
         }
-        goto loop_15;
     }
-#endif
-    HSD_SisLib_803A6478_inline(var_r3, var_r4);
+    HSD_SisLib_803A6478(var_r3, var_r4);
 }
 
-HSD_Text* HSD_SisLib_803A6754(s8 arg0, s32 arg1)
+HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1)
 {
     sislib_UnkAllocData* temp_r3;
     HSD_Text* temp_r30;
@@ -1140,6 +1077,8 @@ void HSD_SisLib_803A6B98(HSD_Text* arg0, void* arg1, ...)
     *((s32*) playhead + 2) = *((s32*) playhead + 2) + 1;
 }
 
+// TODO there seems to be a file boundary before this function,
+// because its data section is 8-byte aligned after the previous C strings
 u8* fn_803A6FEC(u8* arg0, s32 arg1, s32* arg2)
 {
     s32 var_r4;
@@ -1204,8 +1143,8 @@ void HSD_SisLib_803A746C(HSD_Text* arg0, s32 arg1, f32 arg2, f32 arg3)
 
     temp_r3 = fn_803A6FEC((u8*) arg0->x5C, arg1, NULL);
     if (temp_r3 != NULL) {
-        temp_r0 = (s16) arg2;
-        temp_r0_2 = (s16) arg3;
+        temp_r0 = arg2;
+        temp_r0_2 = arg3;
         temp_r3_2 = temp_r3 + 1;
         temp_r3_2[0] = (u8) (temp_r0 >> 8);
         temp_r3_2[1] = (u8) temp_r0;
@@ -1226,6 +1165,19 @@ void HSD_SisLib_803A74F0(HSD_Text* arg0, s32 arg1, u8* arg2)
         temp_r3_2[1] = arg2[0];
         temp_r3_2[2] = arg2[1];
         temp_r3_2[3] = arg2[2];
+    }
+}
+
+void HSD_SisLib_803A7548(HSD_Text *arg0, int arg1, float arg2, float arg3)
+{
+    u8* temp_r3 = fn_803A6FEC((u8*) arg0->x5C, arg1, NULL);
+    u8* temp_r4;
+    if (temp_r3 != NULL) {
+        temp_r4 = temp_r3 + 9;
+        temp_r4[0] = arg2;
+        temp_r4[1] = 256.0F * arg2;
+        temp_r4[2] = arg3;
+        temp_r4[3] = 256.0F * arg3;
     }
 }
 
@@ -1476,7 +1428,7 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* arg0, s32 arg1)
     return var_r0;
 }
 
-void HSD_SisLib_803A84BC(HSD_GObj* gobj, HSD_Text* arg1)
+void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
 {
     // clang-format off
     HSD_Text *var_r31;
@@ -1505,13 +1457,13 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, HSD_Text* arg1)
 
 
     if (gobj != NULL) {
-        if ((void *)arg1 == (void *)2) {
+        if (arg1 == 2) {
             var_r31 = gobj->user_data;
         } else {
             var_r31 = NULL;
         }
     } else {
-        var_r31 = arg1;
+        var_r31 = (HSD_Text*) arg1;
     }
     if (var_r31->x4D == 0 && var_r31->x5C != NULL) {
         u8 *var_r30 = (u8 *)var_r31->x5C;

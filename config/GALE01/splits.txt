@@ -1652,13 +1652,39 @@ melee/gm/gmcamera.c:
 	.sdata2     start:0x804DA9B8 end:0x804DA9E8
 
 melee/gm/gm_1A36.c:
-	.text       start:0x801A3680 end:0x801BFFA8
+	.text       start:0x801A3680 end:0x801AEE6C
 	.rodata     start:0x803B7D68 end:0x803B7D80
-	.data       start:0x803DA788 end:0x803DFEA8
-	.bss        start:0x80479C30 end:0x8049E6C8
-	.sdata      start:0x804D4268 end:0x804D44E0
-	.sbss       start:0x804D6720 end:0x804D6950
-	.sdata2     start:0x804DA9E8 end:0x804DAC90
+	.data       start:0x803DA788 end:0x803DD550
+	.bss        start:0x80479C30 end:0x80480DA8
+	.sdata      start:0x804D4268 end:0x804D4310
+	.sbss       start:0x804D6720 end:0x804D6870
+	.sdata2     start:0x804DA9E8 end:0x804DABF8
+
+melee/gm/gm_1AED.c:
+	.text       start:0x801AEE6C end:0x801B0348
+	.data       start:0x803DD550 end:0x803DD6A0
+	.bss        start:0x80480DA8 end:0x80480DC8
+	.sbss       start:0x804D6870 end:0x804D6878
+	.sdata2     start:0x804DABF8 end:0x804DAC18
+
+melee/gm/gm_1B03.c:
+	.text       start:0x801B0348 end:0x801BF948
+	.data       start:0x803DD6A0 end:0x803DFDD8
+	.bss        start:0x80480DC8 end:0x8049E558
+	.sdata      start:0x804D4310 end:0x804D44C8
+	.sbss       start:0x804D6878 end:0x804D6940
+	.sdata2     start:0x804DAC18 end:0x804DAC90
+
+melee/gm/gm_1BF9.c:
+	.text       start:0x801BF948 end:0x801BFA6C
+	.data       start:0x803DFDD8 end:0x803DFE48
+	.sdata      start:0x804D44C8 end:0x804D44E0
+	.sbss       start:0x804D6940 end:0x804D6950
+
+melee/gm/gm_1BFA.c:
+	.text       start:0x801BFA6C end:0x801BFFA8
+	.data       start:0x803DFE48 end:0x803DFEA8
+	.bss        start:0x8049E558 end:0x8049E6C8
 
 melee/gr/ground.c:
 	.text       start:0x801BFFA8 end:0x801C5B90
@@ -3471,6 +3497,11 @@ MSL/ansi_files.c:
 Runtime/__va_arg.c:
 	.text       start:0x80322620 end:0x80322714
 
+Runtime/global_destructor_chain.c:
+	.text       start:0x80322714 end:0x8032275C
+	.dtors      start:0x803B7268 end:0x803B726C
+	.sbss       start:0x804D7058 end:0x804D705C
+
 Runtime/Gecko_ExceptionPPC.c:
 	.text       start:0x8032275C end:0x803227CC
 	.bss        start:0x804A2F38 end:0x804A2F48
@@ -3481,6 +3512,12 @@ Runtime/Gecko_setjmp.c:
 Runtime/runtime.c:
 	.text       start:0x803228C0 end:0x80322F20
 	.rodata     start:0x803B8B90 end:0x803B8BA8
+
+Runtime/__init_cpp_exceptions.c:
+	.text       start:0x80322F20 end:0x80322F9C
+	.ctors      start:0x803B7240 end:0x803B7244
+	.dtors      start:0x803B7260 end:0x803B7268
+	.sdata      start:0x804D5B40 end:0x804D5B44
 
 MSL/abort_exit.c:
 	.text       start:0x80322F9C end:0x803230A8
@@ -3636,11 +3673,11 @@ MetroTRK/mpc_7xx_603e.c:
 
 MetroTRK/main_TRK.c:
 	.text       start:0x8032ABD8 end:0x8032AC28
-	.bss        start:0x804A50D0 end:0x804A50D4
+	.bss        start:0x804A50D0 end:0x804A50E0
 
 MetroTRK/dolphin_trk_glue.c:
 	.text       start:0x8032AC28 end:0x8032AF80
-	.data       start:0x804008B8 end:0x804008D4
+	.data       start:0x804008B8 end:0x804008D8
 
 MetroTRK/targcont.c:
 	.text       start:0x8032AF80 end:0x8032AFB4
@@ -3660,8 +3697,8 @@ dolphin/hio/hio.c:
 
 dolphin/mcc/mcc.c:
 	.text       start:0x8032C74C end:0x8032EA84
-	.data       start:0x804008D4 end:0x80400918
-	.bss        start:0x804A50D4 end:0x804A5300
+	.data       start:0x804008D8 end:0x80400918
+	.bss        start:0x804A50E0 end:0x804A5300
 	.sdata      start:0x804D5B70 end:0x804D5B78
 	.sbss       start:0x804D70B0 end:0x804D70D0
 
@@ -4430,6 +4467,7 @@ sysdolphin/baselib/sislib.c:
 
 sysdolphin/baselib/hsd_40FF.c:
 	.data       start:0x8040FF80 end:0x80430B40
+	.sdata2     start:0x804DEB10 end:0x804DEC00
 
 sysdolphin/baselib/hsd_3A94.c:
 	.text       start:0x803A949C end:0x803AA790

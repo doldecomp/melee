@@ -124,8 +124,8 @@ void DVDPause();
 void DVDResume();
 int DVDCancelAsync(struct DVDCommandBlock * block, void (* callback)(long, struct DVDCommandBlock *));
 long DVDCancel(volatile struct DVDCommandBlock * block);
-int DVDCancelAllAsync(void (* callback)(long, struct DVDCommandBlock *));
-long DVDCancelAll();
+int DVDCancelAllAsync(DVDCBCallback callback);
+long DVDCancelAll(void);
 struct DVDDiskID * DVDGetCurrentDiskID();
 BOOL DVDCheckDisk(void);
 

@@ -171,11 +171,10 @@ void grTIceClimber_802211E4(HSD_GObj* gobj)
 
 void grTIceClimber_80221204(HSD_GObj* gobj) {}
 
-void grTIceClimber_80221208(HSD_GObj* gobj)
+void grTIceClimber_80221208(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
 {
     Vec3 pos;
     Item* it = GET_ITEM(gobj);
-    PAD_STACK(16);
 
     HSD_JObjSetFlagsAll(it->xDD4_itemVar.mato.x4, 0x10);
     lb_8000B1CC(it->xDD4_itemVar.mato.x4, NULL, &pos);
@@ -199,11 +198,11 @@ void grTIceClimber_80221288(HSD_GObj* ground_gobj)
     for (i = 0; grTIc_803E8B5C[i] != -1; i++) {
         enum_t result_0 = Ground_801C33C0(2, grTIc_803E8B5C[i]);
         if (result_0 != -1) {
-            bool result_1 = grMaterial_801C8CFC(
+            Item_GObj* result_1 = grMaterial_801C8CFC(
                 0, 0, gp, Ground_801C3FA4(ground_gobj, result_0), 0,
                 grTIceClimber_80221208, 0);
 
-            if (result_1) {
+            if (result_1 != NULL) {
                 grMaterial_801C8DE0(result_1, -1.0F, 0.0F, 0.0F, 1.0F, 0.0F,
                                     0.0F, 4.0F);
                 grMaterial_801C8E08(result_1);

@@ -1,19 +1,15 @@
-#ifndef GALE01_2BD158
-#define GALE01_2BD158
+#ifndef ITPEACHEXPLODE_H
+#define ITPEACHEXPLODE_H
 
-#include <platform.h>
+#include <melee/it/forward.h>
+#include <melee/it/items/types.h>
 
-#include "it/forward.h"
+extern struct ItemStateTable it_803F7488[];
 
-#include "it/items/types.h"
-
-#include <dolphin/mtx.h>
-
-/* 2BD158 */ void it_802BD158(Item_GObj* gobj, Vec3*, int, float);
+/* 2BD158 */ Item_GObj* it_802BD158(Item_GObj*, Vec3* pos, bool, float dir);
 /* 2BD240 */ bool it_802BD240(Item_GObj*);
-/* 2BD248 */ UNK_RET it_802BD248(UNK_PARAMS);
-/* 2BD2EC */ UNK_RET it_802BD2EC(UNK_PARAMS);
-/* 2BD30C */ void it_802BD30C(Item_GObj*, Item_GObj*);
-/* 3F7488 */ extern ItemStateTable it_803F7488[];
+/* 2BD248 */ void it_802BD248(Item_GObj*, Item_GObj* owner, bool);
+/* 2BD2EC */ bool it_802BD2EC(Item_GObj*);
+/* 2BD30C */ void it_802BD30C(Item_GObj*, Item_GObj* ref_gobj);
 
 #endif
