@@ -30,7 +30,7 @@ void ftCo_8008A6D8(Fighter_GObj* gobj, s32 anim_id)
         ftCo_8009E7B4(fp, blend_data);
         fp->x3E4_fighterCmdScript.x3EC_scriptCurrent = anim->xC;
         fp->x3E4_fighterCmdScript.x3F0_scriptLoopNum = 0;
-        if (fp->x590 != 0) {
+        if (fp->x590 != NULL) {
             fp->x594_s32 = anim->x10_animCurrFlags;
             ftAnim_8006EBE8(gobj, 0.0f, 1.0f, *blend_data);
         }

@@ -1,42 +1,55 @@
-#ifndef GALE01_06DBF4
-#define GALE01_06DBF4
+#ifndef MELEE_FTANIM_H
+#define MELEE_FTANIM_H
 
-#include <placeholder.h>
+#include <melee/ft/forward.h>
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
 
-#include "ft/forward.h"
-#include "it/forward.h"
-#include "lb/forward.h"
-#include <baselib/forward.h>
-
-/* 06FE08 */ void ftAnim_8006FE08(Fighter* fp, bool);
-/* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
+/* 06DBF4 */ void ftAnim_8006DBF4(HSD_AnimJoint**, int*);
+/* 06DCF4 */ void ftAnim_8006DCF4(HSD_MatAnimJoint**, int*);
+/* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint**, s32* pdepth);
+/* 06DF0C */ void ftAnim_8006DF0C(Fighter*);
+/* 06E054 */ void ftAnim_8006E054(Fighter*, HSD_JObj*, HSD_JObj*, HSD_JObj*);
+/* 06E7B8 */ void ftAnim_8006E7B8(Fighter*, int);
 /* 06E9B4 */ void ftAnim_8006E9B4(Fighter_GObj*);
 /* 06EBA4 */ void ftAnim_8006EBA4(Fighter_GObj*);
-/* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj* gobj, float, float anim_rate,
+/* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj*, float, float anim_rate,
                                   float anim_blend_frames);
-/* 06EED4 */ void ftAnim_8006EED4(Fighter*, Fighter_Part, Fighter_Part, float,
-                                  float);
-/* 06F0FC */ void ftAnim_8006F0FC(Fighter_GObj* gobj, float);
+/* 06EDD0 */ void ftAnim_8006EDD0(Fighter*, int, float, float);
+/* 06EED4 */ void ftAnim_8006EED4(Fighter*, Fighter_Part, FigaTree*, float, float);
+/* 06F0FC */ void ftAnim_8006F0FC(Fighter_GObj*, float anim_rate);
 /* 06F190 */ void ftAnim_SetAnimRate(Fighter_GObj*, float);
 /* 06F238 */ bool ftAnim_IsFramesRemaining(Fighter_GObj*);
-/* 06F484 */ float ftAnim_8006F484(void*);
-/* 06F4C8 */ void ftAnim_8006F4C8(Fighter* fp, int, lbMthp_8001E8F8_t*);
-/* 06FA58 */ void ftAnim_8006FA58(Fighter* fp, bool, HSD_Joint* joint);
-/* 06FB88 */ void ftAnim_8006FB88(Fighter* fp, bool, HSD_Joint* joint);
+/* 06F368 */ bool ftAnim_8006F368(Fighter*, Fighter_Part);
+/* 06F3DC */ float ftAnim_8006F3DC(Fighter_GObj*);
+/* 06F484 */ float ftAnim_8006F484(Fighter_GObj*);
+/* 06F4C8 */ void ftAnim_8006F4C8(Fighter*, int, FigaTree*);
+/* 06F628 */ void ftAnim_8006F628(Fighter*, Fighter_Part, int);
+/* 06F7C8 */ void ftAnim_8006F7C8(Fighter*, Fighter_Part, int, FigaTree*);
+/* 06F954 */ void ftAnim_8006F954(Fighter*, Fighter_Part, int, FigaTree* unused);
+/* 06F994 */ HSD_Joint* ftAnim_8006F994(Fighter*, HSD_JObj*, HSD_Joint*);
+/* 06FA58 */ void ftAnim_8006FA58(Fighter*, bool, HSD_Joint*);
+/* 06FB88 */ void ftAnim_8006FB88(Fighter*, bool, HSD_Joint*);
+/* 06FCE4 */ void ftAnim_8006FCE4(Fighter*, int);
+/* 06FE08 */ void ftAnim_8006FE08(Fighter*, bool);
 /* 06FE48 */ void ftAnim_8006FE48(Fighter_GObj*);
-/* 06FE9C */ void ftAnim_8006FE9C(Fighter* fp, int, float, float);
-/* 06FF74 */ void ftAnim_8006FF74(Fighter* fp, int);
-/* 070010 */ void ftAnim_80070010(Fighter* fp, int, HSD_Joint* joint, float,
-                                  float);
-/* 070108 */ void ftAnim_80070108(Fighter* fp, int, HSD_Joint* joint, float,
-                                  float);
+/* 06FE9C */ void ftAnim_8006FE9C(Fighter*, int start_idx, float, float);
+/* 06FF74 */ void ftAnim_8006FF74(Fighter*, int start_idx);
+/* 070010 */ void ftAnim_80070010(Fighter*, int, HSD_Joint*, float, float);
+/* 070108 */ void ftAnim_80070108(Fighter*, int, HSD_Joint*, float, float);
+/* 070200 */ UNK_RET ftAnim_80070200(UNK_PARAMS);
 /* 070308 */ void ftAnim_80070308(Fighter_GObj*);
+/* 070458 */ UNK_RET ftAnim_80070458(UNK_PARAMS);
 /* 0704F0 */ void ftAnim_800704F0(Fighter_GObj*, s32, float);
+/* 0705E0 */ UNK_RET ftAnim_800705E0(UNK_PARAMS);
 /* 070654 */ void ftAnim_80070654(Fighter_GObj*);
-/* 070710 */ void ftAnim_80070710(HSD_JObj* joint, float);
-/* 070734 */ void ftAnim_80070734(HSD_JObj* jobj, float);
+/* 070710 */ void ftAnim_80070710(HSD_JObj*, float frame);
+/* 070734 */ void ftAnim_80070734(HSD_JObj*, float frame);
 /* 070758 */ void ftAnim_80070758(HSD_JObj*);
 /* 07077C */ void ftAnim_8007077C(Fighter_GObj*);
+/* 0707B0 */ void ftAnim_800707B0(Fighter_GObj*);
+/* 070904 */ void ftAnim_80070904(Fighter*, int start_idx, HSD_AnimJoint*);
+/* 070A10 */ void ftAnim_80070A10(Fighter*, int, FigaTree*);
 /* 070B88 */ void ftAnim_ApplyPartAnim(Fighter_GObj*, s32, s32, float);
 /* 070C48 */ void ftAnim_80070C48(Fighter_GObj*, s32);
 /* 070CC4 */ void ftAnim_80070CC4(Fighter_GObj*, s32);

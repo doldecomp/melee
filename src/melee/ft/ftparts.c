@@ -296,7 +296,7 @@ Fighter_Part ftParts_8007500C(Fighter* fp, Fighter_Part part)
     return ftPartsTable[fp->kind]->part_to_joint[part];
 }
 
-u8 ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
+int ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
                     size_t joint_idx)
 {
     FighterPartsTable* from_table = ftPartsTable[from_table_idx];
