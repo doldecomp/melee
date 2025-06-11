@@ -25,7 +25,7 @@
 #include "it/it_26B1.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"
-#include "pl/pl_0371.h"
+#include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <math.h>
