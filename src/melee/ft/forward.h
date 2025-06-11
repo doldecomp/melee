@@ -11,6 +11,7 @@
 #define FIGHTERVARS_SIZE 0xF8
 
 typedef enum_t FtMotionId;
+typedef struct DObjList DObjList;
 typedef struct Fighter Fighter;
 typedef struct Fighter_804D653C_t Fighter_804D653C_t;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;

@@ -313,10 +313,4 @@ struct lb_800138D8_t {
     /* +18 */ int x18;
 };
 
-/// @todo Maybe #Vec3
-struct lbMthp_8001E8F8_t {
-    char pad_0[0x8];
-    float x8;
-};
-
 #endif
