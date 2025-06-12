@@ -17,8 +17,8 @@ typedef struct {
 } Foo;
 
 /* 005BB0 */ int lbColl_80005BB0(HitCapsule*, int);
-/* 005C44 */ bool lbColl_80005C44(Vec3*, Vec3*, Vec3*, Vec3*, float, float);
-/* 005EBC */ float lbColl_80005EBC(Vec3*, Vec3*, Vec3*, float*);
+/* 005C44 */ bool lbColl_80005C44(const Vec3*, const Vec3*, const Vec3*, Vec3*, float, float);
+/* 005EBC */ float lbColl_80005EBC(const Vec3*, const Vec3*, const Vec3*, float*);
 /* 005FC0 */ float lbColl_80005FC0(Vec3*, Vec3*, Vec3*, float*);
 /* 006094 */ bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*,
                                   float, float);
@@ -46,14 +46,14 @@ typedef struct {
 /* 008434 */ void lbColl_80008434(HitCapsule*);
 /* 008440 */ void lbColl_80008440(HitCapsule*);
 /* 0084FC */ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst);
-/* 008688 */ bool lbColl_80008688(HitCapsule*, int, void*);
-/* 008820 */ bool lbColl_80008820(HitCapsule*, int, void*);
+/* 008688 */ bool lbColl_80008688(HitCapsule*, int type, void* victim);
+/* 008820 */ bool lbColl_80008820(HitCapsule*, int type, void* victim);
 /* 0089B8 */ void lbColl_800089B8(HitCapsule* hit, UNK_T arg1);
 /* 008A5C */ void lbColl_80008A5C(HitCapsule* hit);
 /* 008D30 */ void lbColl_80008D30(HitCapsule*, UNK_T);
 /* 008DA4 */ UNK_RET lbColl_80008DA4(UNK_PARAMS);
 /* 008FC8 */ void lbColl_80008FC8(Vec3, Vec3, u8*, u8*, float);
-/* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, u8*, u8*, float);
+/* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, u8*, GXColor*, float);
 /* 009DD4 */ UNK_RET lbColl_80009DD4(UNK_PARAMS);
 /* 009F54 */ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A044 */ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8);
