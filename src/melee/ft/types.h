@@ -862,17 +862,27 @@ struct Fighter_DemoStrings {
 /* fp+2070 */ union Struct2070 {
     /* fp+2070 */ struct {
         /* fp+2070 */ s8 x2070;
-        /* fp+2070:0 */ u8 x2071_b0_3 : 4;
-        /* fp+2070:4 */ u8 x2071_b4 : 1;
-        /* fp+2070:5 */ u8 x2071_b5 : 1;
-        /* fp+2070:6 */ u8 x2071_b6 : 1;
-        /* fp+2070:7 */ u8 x2071_b7 : 1;
-
-        /* fp+2070:0 */ u8 x2072_b0_3 : 4;
-        /* fp+2070:4 */ u8 x2072_b4 : 1;
-        /* fp+2070:5 */ u8 x2072_b5 : 1;
-        /* fp+2070:6 */ u8 x2072_b6 : 1;
-        /* fp+2070:7 */ u8 x2072_b7 : 1;
+        /* fp+2071:0 */ u8 x2071_b0_3 : 4;
+        /* fp+2071:4 */ u8 x2071_b4 : 1;
+        /* fp+2071:5 */ u8 x2071_b5 : 1;
+        /* fp+2071:6 */ u8 x2071_b6 : 1;
+        /* fp+2071:7 */ u8 x2071_b7 : 1;
+        /* fp+2072 */ union {
+            struct {
+                /* fp+2072:0 */ u8 x2072_b0_3 : 4;
+                /* fp+2072:4 */ u8 x2072_b4_7 : 4;
+            };
+            struct {
+                /* fp+2072:0 */ u8 x2072_b0 : 1;
+                /* fp+2072:1 */ u8 x2072_b1 : 1;
+                /* fp+2072:2 */ u8 x2072_b2 : 1;
+                /* fp+2072:3 */ u8 x2072_b3 : 1;
+                /* fp+2072:4 */ u8 x2072_b4 : 1;
+                /* fp+2072:5 */ u8 x2072_b5 : 1;
+                /* fp+2072:6 */ u8 x2072_b6 : 1;
+                /* fp+2072:7 */ u8 x2072_b7 : 1;
+            };
+        };
         /* fp+2073 */ u8 x2073;
     };
     /* fp+2070 */ s32 x2070_int;
@@ -1074,6 +1084,13 @@ struct Fighter_x59C_t {
     char pad_0[0x8000];
 };
 STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
+
+struct ft_800898B4_t {
+    /*   +0 */ int x0;
+    /*   +4 */ int x4;
+    /*   +8 */ float kb_applied1;
+    /*   +C */ UNK_T xC UNK_SIZE_ARRAY;
+}; // Unknown size
 
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
@@ -1333,9 +1350,7 @@ struct Fighter {
         /* fp+18CC */ int x18CC;
         /* fp+18D0 */ int x18D0;
         /* fp+18D4 */ int x18d4;
-        /* fp+18D8 */ int x18d8;
-        /* fp+18DC */ int x18dc;
-        /* fp+18E0 */ float kb_applied1;
+        /* fp+18D8 */ ft_800898B4_t x18d8;
         /* fp+18E4 */ int x18e4;
         /* fp+18E8 */ int x18e8;
         /// Last Move Instance This Player Was Hit by

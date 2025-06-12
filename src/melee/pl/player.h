@@ -192,7 +192,7 @@ u32 Player_GetCostumeId(int slot);
 void Player_SetCostumeId(int slot, s8 costume_id);
 u8 Player_GetControllerIndex(int slot);
 void Player_SetControllerIndex(int slot, s8 controller_index);
-s8 Player_GetTeam(int slot);
+int Player_GetTeam(int slot);
 void Player_SetTeam(int slot, s8 unk_color);
 s8 Player_GetPlayerId(int slot);
 void Player_SetPlayerId(int slot, s8 player_id);
@@ -290,7 +290,7 @@ void Player_SetStructFunc(s32 slot, void* arg_func);
 pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot);
 int* Player_GetUnk6A8Ptr(int slot);
-StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot);
+pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot);
 s32 Player_80036394(s32 slot);
 s32 Player_80036428(s32 slot);
 void Player_SetUnk45(s32 slot, s8 unk45);
@@ -315,6 +315,6 @@ void Player_80037054(s32 slot, s32 arg1);
 void Player_SetOtherStamina(s32 slot, s32 stamina);
 void Player_SetFlagsAEBit0(s32 slot, u8 bit0);
 s32 Player_80033BB8(int slot);
-/* 4D6470 */ extern void* pl_804D6470;
+/* 4D6470 */ extern pl_804D6470_t* pl_804D6470;
 
 #endif

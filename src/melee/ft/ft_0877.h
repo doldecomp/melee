@@ -23,7 +23,7 @@
 /* 087A80 */ s8 ft_80087A80(Fighter_GObj* gobj);
 /* 087A8C */ float ft_80087A8C(Fighter_GObj* gobj);
 /* 087A98 */ s32 ft_80087A98(Fighter_GObj* gobj);
-/* 087AA4 */ u8 ft_80087AA4(Fighter_GObj* gobj);
+/* 087AA4 */ s32 ft_80087AA4(Fighter_GObj* gobj);
 /* 087AB4 */ u8 ft_80087AB4(Fighter_GObj* gobj);
 /* 087AC0 */ void ft_80087AC0(Fighter_GObj*, s32);
 /* 087AEC */ s32 ft_80087AEC(Fighter_GObj* gobj);

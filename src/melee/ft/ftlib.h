@@ -102,7 +102,7 @@
 /* 087700 */ s32 ftLib_80087700(HSD_GObj*);
 /* 08770C */ void ftLib_8008770C(HSD_GObj*, void* dst);
 /* 087744 */ void ftLib_80087744(HSD_GObj*, void* dst);
-/* 08777C */ void ftLib_8008777C(HSD_GObj*);
+/* 08777C */ float ftLib_8008777C(HSD_GObj*);
 /* 0877D4 */ bool ftLib_800877D4(HSD_GObj*);
 
 #endif

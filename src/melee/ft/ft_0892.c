@@ -37,7 +37,7 @@ UNK_T ft_800898A8(Fighter_GObj* gobj)
     return &GET_FIGHTER(gobj)->x2074;
 }
 
-UNK_T ft_800898B4(Fighter_GObj* gobj)
+ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj)
 {
     return &GET_FIGHTER(gobj)->dmg.x18d8;
 }

@@ -76,7 +76,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 StaticPlayer player_slots[PL_SLOT_MAX];
 HSD_ObjAllocData Player_AllocData;
 
-void* pl_804D6470;
+pl_804D6470_t* pl_804D6470;
 
 /// @todo This can be used in more places when functions are fixed to use
 ///       correct structs.
@@ -755,9 +755,9 @@ void Player_SetControllerIndex(int slot, s8 controller_index)
     player->controller_index = controller_index;
 }
 
-s8 Player_GetTeam(int slot)
+int Player_GetTeam(int slot)
 {
-    s8 team;
+    int team;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1727,7 +1727,7 @@ pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot)
     pl_800386D8_t* attack_count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    attack_count = (pl_800386D8_t*) &player->stale_moves.total_attack_count;
+    attack_count = &player->stale_moves.total_attack_count_struct;
     return attack_count;
 }
 
@@ -1751,13 +1751,13 @@ int* Player_GetUnk6A8Ptr(int slot)
     return unk6A8;
 }
 
-StaleMoveTable* Player_GetStaleMoveTableIndexPtr2(s32 slot)
+pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot)
 {
     StaticPlayer* player;
-    StaleMoveTable* stale_move_table;
+    pl_StaleMoveTableExt_t* stale_move_table;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    stale_move_table = &player->stale_moves;
+    stale_move_table = (pl_StaleMoveTableExt_t*) (&player->stale_moves);
     return stale_move_table;
 }
 

@@ -70,6 +70,7 @@
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
 #include "pl/player.h"
+#include "pl/plbonuslib.h"
 #include "pl/pltrick.h"
 #include "un/un_2FC9.h"
 
