@@ -254,7 +254,7 @@
 /* 0DB1F8 */ void ftCo_CapturePulledLw_Coll(ftCo_GObj* gobj);
 /* 0DB368 */ void ftCo_800DB368(Fighter*, Fighter*);
 /* 0DB464 */ void ftCo_800DB464(ftCo_GObj* gobj);
-/* 0DB500 */ UNK_RET ftCo_800DB500(UNK_PARAMS);
+/* 0DB500 */ void ftCo_800DB500(Fighter_GObj*);
 /* 0DB790 */ void fn_800DB790(Fighter_GObj*);
 /* 0DB8A4 */ void fn_800DB8A4(Fighter_GObj*);
 /* 0DB908 */ void ftCo_CaptureWaitHi_Anim(ftCo_GObj* gobj);

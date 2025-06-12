@@ -7,7 +7,7 @@
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
-#include "pl/pl_0371.h"
+#include "pl/plbonuslib.h"
 
 ItemStateTable it_803F62C0[] = {
     { -1, it_8029544C, it_80295454, it_80295458 },

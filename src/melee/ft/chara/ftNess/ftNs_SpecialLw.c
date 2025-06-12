@@ -17,6 +17,7 @@
 #include "ftNess/types.h"
 #include "pl/pl_0371.h"
 #include "pl/player.h"
+#include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

@@ -6,6 +6,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include <melee/gr/forward.h>
+
 #include "it/forward.h"
 #include <baselib/forward.h>
 
@@ -690,28 +692,18 @@ typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
     s32 x18;      // non-float assignment (gm_8016C6C0)
 } it_802E5FXX_struct;
 
-// Not sure if there is a way to combine these two structs?
 typedef struct it_2E6A_ItemVars_1 {
     /*  +0 ip+DD4 */ s16 x0;
-    /*  +2 ip+DD6 */ s16 x2;
-    /*  +4 ip+DD8 */ HSD_JObj* x4;
-    /*  +8 ip+DDC */ f32 x8; // unused?
-    /*  +C ip+DE0 */ f32 xC; // unused?
-    /* +10 ip+DE4 */ void* x10;
-    /* +14 ip+DE8 */ void* x14;
-    /* +18 ip+DEC */ void* x18;
-    /* +1C ip+DF0 */ void* x1C;
+    /*  +2 ip+DD6 */ s16 x2; // type of union: 1=jobj, 2=vec
+                     union {
+    /*  +4 ip+DD8 */     HSD_JObj* x4;
+    /*  +4 ip+DD8 */     Vec3 x4_vec;
+                     };
+    /* +10 ip+DE4 */ Ground* x10;
+    /* +14 ip+DE8 */ void (*x14)(Item_GObj*, Ground*);
+    /* +18 ip+DEC */ void (*x18)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
+    /* +1C ip+DF0 */ void (*x1C)(Item_GObj*, Ground*, HSD_GObj*);
 } it_2E6A_ItemVars_1;
-
-typedef struct it_2E6A_ItemVars_2 {
-    /*  +0 ip+DD4 */ s16 x0;
-    /*  +2 ip+DD6 */ u16 x2;
-    /*  +4 ip+DD8 */ Vec3 x4;
-    /* +10 ip+DE4 */ void* x10;
-    /* +14 ip+DE8 */ void* x14;
-    /* +18 ip+DEC */ void* x18;
-    /* +1C ip+DF0 */ void* x1C;
-} it_2E6A_ItemVars_2;
 
 typedef struct itWhiteBea_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x20];

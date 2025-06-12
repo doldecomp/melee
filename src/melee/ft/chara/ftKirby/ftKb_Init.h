@@ -869,7 +869,7 @@
 /* 10D074 */ void ftKb_SpecialNGw_8010D074(ftKb_GObj* gobj);
 /* 10D0A8 */ void ftKb_SpecialNGw_8010D0A8(ftKb_GObj* gobj);
 /* 10D130 */ void ftKb_SpecialNGw_8010D130(ftKb_GObj* gobj);
-/* 10D160 */ void ftKb_SpecialNGw_8010D160(ftKb_GObj* gobj);
+/* 10D160 */ bool ftKb_SpecialNGw_8010D160(ftKb_GObj* gobj);
 /* 10D188 */ void ftKb_SpecialNGw_8010D188(ftKb_GObj* gobj);
 /* 10D204 */ void ftKb_SpecialNGw_8010D204(ftKb_GObj* gobj);
 /* 10D280 */ void ftKb_GwSpecialN_Anim(ftKb_GObj* gobj);

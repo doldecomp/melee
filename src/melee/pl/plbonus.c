@@ -3,7 +3,7 @@
 
 #include "pl/player.h"
 
-UNK_T pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
+unsigned int pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
 {
     return arg0->x3E8[arg1];
 }
@@ -22,7 +22,7 @@ s32 pl_800386E8(pl_800386E8_arg0_t* arg0)
 
 /// #pl_80038898
 
-void* pl_80038914(void)
+pl_804D6470_t* pl_80038914(void)
 {
     return pl_804D6470;
 }

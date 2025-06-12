@@ -1,3 +1,5 @@
+#include "grmaterial.h"
+
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -151,16 +153,20 @@ void grMaterial_801C8CDC(Item_GObj* gobj)
     Item_8026A8EC(gobj);
 }
 
-void grMaterial_801C8CFC(int arg0, int arg1, Ground* arg2, HSD_JObj* arg3,
-                         int arg4, HSD_GObjEvent arg5, int arg6)
+Item_GObj* grMaterial_801C8CFC(int arg0, int arg1, Ground* arg2, HSD_JObj* arg3,
+                               void (*arg4)(Item_GObj*, Ground*),
+                               void (*arg5)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                               void (*arg6)(Item_GObj*, Ground*, HSD_GObj*))
 {
-    it_802E6AEC(arg2, arg0, arg1, arg3, NULL, 0, arg4, arg5, arg6);
+    return it_802E6AEC(arg2, arg0, arg1, arg3, NULL, 0, arg4, arg5, arg6);
 }
 
-void grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3,
-                         int arg4, int arg5, HSD_GObjEvent arg6, int arg7)
+Item_GObj* grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
+                               void (*arg5)(Item_GObj*, Ground*),
+                               void (*arg6)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                               void (*arg7)(Item_GObj*, Ground*, HSD_GObj*))
 {
-    it_802E6AEC(arg2, arg0, arg1, 0, arg3, arg4, arg5, arg6, arg7);
+    return it_802E6AEC(arg2, arg0, arg1, 0, arg3, arg4, arg5, arg6, arg7);
 }
 
 void grMaterial_801C8D98(HSD_GObj* gobj, int id)
@@ -169,7 +175,7 @@ void grMaterial_801C8D98(HSD_GObj* gobj, int id)
     Item_80268E5C(gobj, id, 2);
 }
 
-void grMaterial_801C8DE0(HSD_GObj* gobj, float arg8, float arg9, float argA,
+void grMaterial_801C8DE0(Item_GObj* gobj, float arg8, float arg9, float argA,
                          float argB, float argC, float argD, float argE)
 {
     Item* it = gobj->user_data;
@@ -183,7 +189,7 @@ void grMaterial_801C8DE0(HSD_GObj* gobj, float arg8, float arg9, float argA,
     hurt->scale = argE;
 }
 
-void grMaterial_801C8E08(HSD_GObj* gobj)
+void grMaterial_801C8E08(Item_GObj* gobj)
 {
     it_802756E0(gobj);
 }

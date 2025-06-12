@@ -33,8 +33,8 @@
 #include "ftYoshi/ftYs_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
-#include "pl/pl_0371.h"
 #include "pl/player.h"
+#include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <math.h>

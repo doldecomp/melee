@@ -1,5 +1,3 @@
-#include <platform.h>
-
 #include "lbanim.h"
 
 #include <baselib/fobj.h>

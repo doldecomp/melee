@@ -5,6 +5,7 @@
 #include "baselib/jobj.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
+#include "gm/gm_1B03.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
@@ -91,7 +92,7 @@ void un_802FCF38(int idx)
                     -5000.0f, 0.0f);
                 M2C_FIELD((&un_804A1ED0 + temp_r30), s32*, 0x28) =
                     M2C_ERROR(/* Read from unset register $r3 */);
-                HSD_SisLib_803A7548(un_804D6D78, 0.4f, 0.55f);
+                HSD_SisLib_803A7548(un_804D6D78, 0, 0.4f, 0.55f);
             }
             HSD_JObjReqAnimAll(jobj, var_f31);
         }

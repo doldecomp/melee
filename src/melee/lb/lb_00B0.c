@@ -477,10 +477,6 @@ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj* arg2, float arg8,
     float dy;
     float dz;
     float dw;
-    float sx;
-    float sy;
-    float sz;
-    float sw;
     s32 is_quat_1;
     s32 is_quat_2;
 
@@ -489,7 +485,11 @@ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj* arg2, float arg8,
     Quaternion quat1;
     Quaternion quat2;
 
-    float x2, y2, z2, w2;
+    float sx;
+    float sy;
+    float sz;
+    float sw;
+
     float sum_square_diffs;
     float sum_square_sums;
 
@@ -531,24 +531,20 @@ void lb_8000C490(HSD_JObj* jobj1, HSD_JObj* jobj2, HSD_JObj* arg2, float arg8,
         sp54.z = jobj2->rotate.z;
         EulerToQuat(&sp54, &quat2);
     }
-    dx = quat1.x - quat2.x;
-    dy = quat1.y - quat2.y;
-    dz = quat1.z - quat2.z;
-    dw = quat1.w - quat2.w;
-    x2 = dx * dx;
-    y2 = dy * dy;
-    z2 = dz * dz;
-    w2 = dw * dw;
-    sum_square_diffs = x2 + y2 + z2 + w2;
-    sx = quat1.x + quat2.x;
-    sy = quat1.y + quat2.y;
-    sz = quat1.z + quat2.z;
-    sw = quat1.w + quat2.w;
-    x2 = sx * sx;
-    y2 = sy * sy;
-    z2 = sz * sz;
-    w2 = sw * sw;
-    sum_square_sums = x2 + y2 + z2 + w2;
+
+    sx = SQ(quat1.x + quat2.x);
+    sy = SQ(quat1.y + quat2.y);
+    sz = SQ(quat1.z + quat2.z);
+    sw = SQ(quat1.w + quat2.w);
+
+    dx = SQ(quat1.x - quat2.x);
+    dy = SQ(quat1.y - quat2.y);
+    dz = SQ(quat1.z - quat2.z);
+    dw = SQ(quat1.w - quat2.w);
+
+    sum_square_sums = sx + sy + sz + sw;
+    sum_square_diffs = dx + dy + dz + dw;
+
     if (sum_square_diffs > sum_square_sums) {
         quat2.x = -quat2.x;
         quat2.y = -quat2.y;
@@ -576,6 +572,12 @@ void lbCopyJObjSRT(HSD_JObj* src, HSD_JObj* dst)
 void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
                  float arg9)
 {
+    Vec3 spC0;
+    Vec3 spB4;
+    Quaternion spA4;
+    Quaternion sp94;
+    Quaternion sum;
+    Quaternion dif;
     float temp_f0;
     float temp_f10;
     float temp_f1;
@@ -595,11 +597,6 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
     float phi_f1_2;
     float phi_f1_3;
 
-    Vec3 spC0;
-    Vec3 spB4;
-    Quaternion spA4;
-    Quaternion sp94;
-
     arg2->translate.x = (arg0->position.x * arg8) + (arg1->translate.x * arg9);
     arg2->translate.y = (arg0->position.y * arg8) + (arg1->translate.y * arg9);
     arg2->translate.z = (arg0->position.z * arg8) + (arg1->translate.z * arg9);
@@ -612,11 +609,11 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
         temp_f3 = arg0->rotation.y - arg1->rotate.y;
         temp_f2 = arg0->rotation.z - arg1->rotate.z;
         phi_f1 = temp_f5 < 0 ? -temp_f5 : temp_f5;
-        if (phi_f1 <= 1) {
+        if (phi_f1 <= 1e-4F) {
             phi_f1_2 = temp_f3 < 0 ? -temp_f3 : temp_f3;
-            if (phi_f1_2 <= 1) {
+            if (phi_f1_2 <= 1e-4F) {
                 phi_f1_3 = temp_f2 < 0 ? -temp_f2 : temp_f2;
-                if (phi_f1_3 <= 1) {
+                if (phi_f1_3 <= 1e-4F) {
                     arg2->rotate.x = arg0->rotation.x;
                     arg2->rotate.y = arg0->rotation.y;
                     arg2->rotate.z = arg0->rotation.z;
@@ -639,24 +636,24 @@ void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, float arg8,
         spB4.z = arg1->rotate.z;
         EulerToQuat(&spB4, (Quaternion*) &sp94);
     }
-    temp_f2_2 = spA4.y - sp94.y;
-    temp_f3_2 = spA4.x;
-    temp_f0 = spA4.y + sp94.y;
-    temp_f1 = temp_f3_2 + sp94.x;
-    temp_f4 = temp_f3_2 - sp94.x;
-    temp_f8 = spA4.z - sp94.z;
-    temp_f5_2 = spA4.z + sp94.z;
-    temp_f10 = spA4.w - sp94.w;
-    temp_f6_2 = spA4.w + sp94.w;
-    if ((SQ(temp_f10) + (SQ(temp_f8) + (SQ(temp_f4) + SQ(temp_f2_2)))) >
-        (SQ(temp_f6_2) + (SQ(temp_f5_2) + (SQ(temp_f1) + SQ(temp_f0)))))
-    {
+
+    sum.x = SQ(spA4.x + sp94.x);
+    sum.y = SQ(spA4.y + sp94.y);
+    sum.z = SQ(spA4.z + sp94.z);
+    sum.w = SQ(spA4.w + sp94.w);
+
+    dif.x = SQ(spA4.x - sp94.x);
+    dif.y = SQ(spA4.y - sp94.y);
+    dif.z = SQ(spA4.z - sp94.z);
+    dif.w = SQ(spA4.w - sp94.w);
+
+    if (dif.x + dif.y + dif.z + dif.w > sum.x + sum.y + sum.z + sum.w) {
         sp94.x = -sp94.x;
         sp94.y = -sp94.y;
         sp94.z = -sp94.z;
         sp94.w = -sp94.w;
     }
-    HSD_QuatLib_8037EF28(&spA4, (Quaternion*) &sp94, &arg2->rotate, arg9);
+    HSD_QuatLib_8037EF28(&spA4, &sp94, &arg2->rotate, arg9);
     HSD_JObjSetFlags(arg2, 0x20000U);
     HSD_JObjSetFlags(arg2, 0x40U);
 }

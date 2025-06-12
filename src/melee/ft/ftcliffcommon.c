@@ -16,7 +16,7 @@
 #include "ftCommon/ftCo_StopCeil.h"
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
-#include "pl/pl_0371.h"
+#include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

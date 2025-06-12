@@ -540,15 +540,10 @@ static inline void HSD_JObjAddTranslationZ(HSD_JObj* jobj, float z)
     }
 }
 
-/// @todo This is inlined into lbcoll, and linker deduplication
-/// only kept that definition.
-/// Rename it back to HSD_JObjSetupMatrix once lbcoll is matched.
-void lbColl_JObjSetupMatrix(HSD_JObj*);
-
 static inline MtxPtr HSD_JObjGetMtxPtr(HSD_JObj* jobj)
 {
     HSD_ASSERT(1144, jobj);
-    lbColl_JObjSetupMatrix(jobj);
+    HSD_JObjSetupMatrix(jobj);
     return jobj->mtx;
 }
 

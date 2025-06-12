@@ -22,8 +22,8 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "pl/pl_0371.h"
 #include "pl/player.h"
+#include "pl/plbonuslib.h"
 
 #include <common_structs.h>
 #include <trigf.h>
@@ -1036,7 +1036,7 @@ void ftLib_80087744(HSD_GObj* gobj, void* dst)
     }
 }
 
-void ftLib_8008777C(HSD_GObj* gobj)
+float ftLib_8008777C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1046,7 +1046,7 @@ void ftLib_8008777C(HSD_GObj* gobj)
 
     {
         CollData* cd = Fighter_GetCollData(fp);
-        atan2f(-cd->floor.normal.x, cd->floor.normal.y);
+        return atan2f(-cd->floor.normal.x, cd->floor.normal.y);
     }
 }
 

@@ -5,5 +5,6 @@
 
 void __fini_cpp_exceptions(void);
 void __init_cpp_exceptions(void);
+void __destroy_global_chain(void);
 
 #endif

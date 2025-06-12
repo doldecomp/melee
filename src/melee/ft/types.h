@@ -6,6 +6,7 @@
 
 #include "ft/forward.h" // IWYU pragma: export
 #include "it/forward.h"
+#include "lb/lbanim.h"
 #include <baselib/forward.h>
 
 #include "cm/types.h"
@@ -526,7 +527,8 @@ struct ftCommonData {
     /* +7F0 */ int x7F0;
     /* +7F4 */ u8 x7F4[0x800 - 0x7F4];
     /* +800 */ float x800;
-    /* +804 */ u8 x804[0x814 - 0x804];
+    /* +804 */ u8 x804[4];
+    /* +804 */ Vec3 x808;
     /* +814 */ int x814;
     // lots of more data following, exact size to be determined
 };
@@ -553,10 +555,10 @@ struct FtSFX {
     int x34;
 };
 
-typedef struct _DObjList {
+struct DObjList {
     usize_t count;
     HSD_DObj** data;
-} DObjList;
+};
 
 typedef struct {
     u32 unk0;
@@ -590,7 +592,11 @@ struct ftData {
     }* x0;
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct ftData_x8 {
-        /*  +0 */ u8 x0[0x10];
+        /*  +0 */ u8 x0[0x8];
+                  struct ftData_x8_x8 {
+        /*  +8 */     u32 x8;
+        /*  +C */     u16** xC;
+                  } x8;
         /* +10 */ u8 x10;
         /* +11 */ u8 x11;
         /* +12 */ u8 x12;
@@ -743,7 +749,8 @@ struct FighterBone {
     /* +8:5 */ u8 flags_b5 : 1;
     /* +8:6 */ u8 flags_b6 : 1;
     /* +8:7 */ u8 flags_b7 : 1;
-    /* +C */ UNK_T xC;
+             u8 x9_pad[3];
+    /* +C */ u8 xC;
 };
 STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
 
@@ -779,7 +786,8 @@ typedef struct itPickup {
 
 typedef struct {
     HSD_Joint* joint;
-    u8 padding[0x10];
+    HSD_MatAnimJoint* x4;
+    u8 padding[0x0C];
     HSD_Archive* x14_archive;
 } UnkCostumeStruct;
 
@@ -854,17 +862,27 @@ struct Fighter_DemoStrings {
 /* fp+2070 */ union Struct2070 {
     /* fp+2070 */ struct {
         /* fp+2070 */ s8 x2070;
-        /* fp+2070:0 */ u8 x2071_b0_3 : 4;
-        /* fp+2070:4 */ u8 x2071_b4 : 1;
-        /* fp+2070:5 */ u8 x2071_b5 : 1;
-        /* fp+2070:6 */ u8 x2071_b6 : 1;
-        /* fp+2070:7 */ u8 x2071_b7 : 1;
-
-        /* fp+2070:0 */ u8 x2072_b0_3 : 4;
-        /* fp+2070:4 */ u8 x2072_b4 : 1;
-        /* fp+2070:5 */ u8 x2072_b5 : 1;
-        /* fp+2070:6 */ u8 x2072_b6 : 1;
-        /* fp+2070:7 */ u8 x2072_b7 : 1;
+        /* fp+2071:0 */ u8 x2071_b0_3 : 4;
+        /* fp+2071:4 */ u8 x2071_b4 : 1;
+        /* fp+2071:5 */ u8 x2071_b5 : 1;
+        /* fp+2071:6 */ u8 x2071_b6 : 1;
+        /* fp+2071:7 */ u8 x2071_b7 : 1;
+        /* fp+2072 */ union {
+            struct {
+                /* fp+2072:0 */ u8 x2072_b0_3 : 4;
+                /* fp+2072:4 */ u8 x2072_b4_7 : 4;
+            };
+            struct {
+                /* fp+2072:0 */ u8 x2072_b0 : 1;
+                /* fp+2072:1 */ u8 x2072_b1 : 1;
+                /* fp+2072:2 */ u8 x2072_b2 : 1;
+                /* fp+2072:3 */ u8 x2072_b3 : 1;
+                /* fp+2072:4 */ u8 x2072_b4 : 1;
+                /* fp+2072:5 */ u8 x2072_b5 : 1;
+                /* fp+2072:6 */ u8 x2072_b6 : 1;
+                /* fp+2072:7 */ u8 x2072_b7 : 1;
+            };
+        };
         /* fp+2073 */ u8 x2073;
     };
     /* fp+2070 */ s32 x2070_int;
@@ -1067,6 +1085,13 @@ struct Fighter_x59C_t {
 };
 STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
 
+struct ft_800898B4_t {
+    /*   +0 */ int x0;
+    /*   +4 */ int x4;
+    /*   +8 */ float kb_applied1;
+    /*   +C */ UNK_T xC UNK_SIZE_ARRAY;
+}; // Unknown size
+
 struct Fighter {
     /*    fp+0 */ HSD_GObj* gobj;
     /*    fp+4 */ FighterKind kind;
@@ -1131,7 +1156,7 @@ struct Fighter {
     /*  fp+508 */ ftDeviceUnk2 x508;
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
-    /*  fp+590 */ u32 x590;
+    /*  fp+590 */ FigaTree* x590;
     /*  fp+594 */ union {
         struct {
             /* fp+594:0 */ u8 x594_b0 : 1;
@@ -1147,6 +1172,12 @@ struct Fighter {
                 /* fp+596:7 */ u16 x7 : 3;
             } x596_bits;
         };
+        struct {
+            u32 x594_pad : 10;
+            u32 x594_bits : 13;
+            u32 x594_pad2 : 3;
+            u32 x597_bits : 6; // FighterKind of this fighter's x590 FigaTree
+        };
         /* fp+594 */ s32 x594_s32;
     };
     /*  fp+598 */ s32 x598;
@@ -1159,7 +1190,9 @@ struct Fighter {
     /*  fp+5BC */ UNK_T x5BC;
     /*  fp+598 */ u8 filler_x598[0x5C8 - 0x5C0];
     /*  fp+5A0 */ void* x5C8;
-    /*  fp+5CC */ u8 filler_x5CC[0x5E8 - 0x5CC];
+    /*  fp+5CC */ u32 n_costume_tobjs;
+    /*  fp+5D0 */ u16* x5D0;
+    /*  fp+5D4 */ HSD_TObj* costume_tobjs[5];
     /*  fp+5E8 */ FighterBone* parts;
     /*  fp+5EC */ DObjList dobj_list;
     union {
@@ -1317,9 +1350,7 @@ struct Fighter {
         /* fp+18CC */ int x18CC;
         /* fp+18D0 */ int x18D0;
         /* fp+18D4 */ int x18d4;
-        /* fp+18D8 */ int x18d8;
-        /* fp+18DC */ int x18dc;
-        /* fp+18E0 */ float kb_applied1;
+        /* fp+18D8 */ ft_800898B4_t x18d8;
         /* fp+18E4 */ int x18e4;
         /* fp+18E8 */ int x18e8;
         /// Last Move Instance This Player Was Hit by
@@ -1875,6 +1906,9 @@ struct ftData_80085FD4_ret {
     /* +0 */ UNK_T x0;
     /* +4 */ UNK_T x4;
     /* +8 */ UNK_T x8;
+    /* +C*/  UNK_T xC;
+    /* +10:0*/ u8 x10_b0 : 1;
+    /* +10:1*/ u8 x10_b1 : 1;
 };
 
 typedef struct ArticleDynamicBones {
@@ -1889,7 +1923,7 @@ typedef struct ftDynamics {
     };
     /*  +8 */ int x4;
     /*  +C */ void* x8;
-    /* +10 */ Fighter_Part* x10;
+    /* +10 */ FigaTree*** x10;
 } ftDynamics;
 
 typedef struct KirbyHatStruct {

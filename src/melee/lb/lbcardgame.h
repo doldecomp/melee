@@ -36,7 +36,7 @@
 /* 01B6F8 */ enum_t lb_8001B6F8(void);
 /* 01B760 */ void lb_8001B760(int);
 /* 01B7E0 */ UNK_RET lb_8001B7E0(UNK_PARAMS);
-/* 01B8C8 */ UNK_RET lb_8001B8C8(UNK_PARAMS);
+/* 01B8C8 */ bool lb_8001B8C8(int);
 /* 01B99C */ int lb_8001B99C(int, char*, int);
 /* 01BA44 */ UNK_RET lb_8001BA44(UNK_PARAMS);
 /* 01BB48 */ int lb_8001BB48(int, char*, void*, void*, char*, int, int, int);
@@ -47,7 +47,7 @@
 /* 01BFD8 */ int lb_8001BFD8(int, UNK_T, UNK_T, UNK_T);
 /* 01C0F4 */ int lb_8001C0F4(int, char*, char*, char*, int);
 /* 01C2D8 */ int lb_8001C2D8(int, char*, char*, char*);
-/* 01C404 */ UNK_RET lb_8001C404(UNK_PARAMS);
+/* 01C404 */ bool lb_8001C404(int);
 /* 01C4A8 */ void lb_8001C4A8(void*, void*);
 /* 01C550 */ void lb_8001C550(void);
 /* 01C5A4 */ UNK_RET lb_8001C5A4(UNK_PARAMS);
@@ -55,13 +55,13 @@
 /* 01C600 */ UNK_RET lb_8001C600(UNK_PARAMS);
 /* 01C658 */ UNK_RET lb_8001C658(UNK_PARAMS);
 /* 01C820 */ UNK_RET lb_8001C820(UNK_PARAMS);
-/* 01C87C */ UNK_RET lb_8001C87C(UNK_PARAMS);
-/* 01C8BC */ UNK_RET lb_8001C8BC(UNK_PARAMS);
+/* 01C87C */ u32 lb_8001C87C(void);
+/* 01C8BC */ bool lb_8001C8BC(void);
 /* 01CAF4 */ UNK_RET lb_8001CAF4(UNK_PARAMS);
 /* 01CBAC */ void lb_8001CBAC(s32 arg0);
-/* 01CBBC */ UNK_RET lb_8001CBBC(UNK_PARAMS);
+/* 01CBBC */ int lb_8001CBBC(void);
 /* 01CC30 */ UNK_RET fn_8001CC30(UNK_PARAMS);
-/* 01CC4C */ UNK_RET lb_8001CC4C(UNK_PARAMS);
+/* 01CC4C */ bool lb_8001CC4C(void);
 /* 01CC84 */ void lb_8001CC84(void);
 /* 01CDB4 */ void lb_8001CDB4(void);
 /* 01CE00 */ void lb_8001CE00(void);

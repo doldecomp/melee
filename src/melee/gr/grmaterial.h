@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include <melee/it/forward.h>
+
 #include "gr/forward.h"
 #include <baselib/forward.h>
 
@@ -14,9 +16,13 @@
 /* 1C8B28 */ HSD_JObj* grMaterial_801C8B28(HSD_JObj*);
 /* 1C8B68 */ void grMaterial_801C8B68(HSD_JObj*, int);
 /* 1C8CDC */ UNK_RET grMaterial_801C8CDC(HSD_GObj*);
-/* 1C8CFC */ int grMaterial_801C8CFC(int, int, Ground*, HSD_JObj*, void (*)(void),
-                                     HSD_GObjEvent, int);
-/* 1C8E08 */ void grMaterial_801C8E08(int);
+/* 1C8CFC */ Item_GObj* grMaterial_801C8CFC(int, int, Ground*, HSD_JObj*,
+                                            void (*arg4)(Item_GObj*, Ground*),
+                                            void (*arg5)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                                            void (*arg6)(Item_GObj*, Ground*, HSD_GObj*));
+/* 1C8DE0 */ void grMaterial_801C8DE0(Item_GObj* gobj, float arg8, float arg9, float argA,
+                                      float argB, float argC, float argD, float argE);
+/* 1C8E08 */ void grMaterial_801C8E08(Item_GObj*);
 /* 1C8E28 */ void grMaterial_801C8E28(HSD_GObj*);
 /* 1C94D8 */ void grMaterial_801C94D8(UNK_T hsd_obj);
 /* 1C95C4 */ void grMaterial_801C95C4(HSD_GObj*);

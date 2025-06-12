@@ -41,6 +41,14 @@ typedef void (*Event)(void);
 #endif
 #endif
 
+#ifndef SECTION_DTORS
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define SECTION_DTORS __declspec(section ".dtors")
+#else
+#define SECTION_DTORS
+#endif
+#endif
+
 #ifndef ATTRIBUTE_NORETURN
 #if defined(__clang__) || defined(__GNUC__)
 #define ATTRIBUTE_NORETURN __attribute__((noreturn))
