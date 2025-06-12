@@ -16,17 +16,17 @@
 /* 081F2C */ bool ft_80081F2C(Fighter_GObj* gobj);
 /* 082084 */ bool ft_80082084(Fighter_GObj* gobj);
 /* 0821DC */ bool ft_800821DC(Fighter_GObj* gobj);
-/* 0822A4 */ bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, s32 direction);
-/* 08239C */ bool ft_8008239C(Fighter_GObj* gobj, s32 facing_direction,
-                              float* height_attributes);
+/* 0822A4 */ bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, int direction);
+/* 08239C */ bool ft_8008239C(Fighter_GObj* gobj, int facing_direction,
+                              ftCollisionBox*  height_attributes);
 /* 0824A0 */ bool ft_800824A0(Fighter_GObj*, ftCollisionBox*);
-/* 082578 */ UNK_RET ft_80082578(UNK_PARAMS);
-/* 082638 */ void ft_80082638(Fighter_GObj* gobj, ftCollisionBox*);
+/* 082578 */ bool ft_80082578(Fighter_GObj*);
+/* 082638 */ bool ft_80082638(Fighter_GObj* gobj, ftCollisionBox*);
 /* 082708 */ GroundOrAir ft_80082708(Fighter_GObj* gobj);
 /* 0827A0 */ bool ft_800827A0(Fighter_GObj* gobj);
-/* 082838 */ void ft_80082838(void);
+/* 082838 */ ftCollisionBox* ft_80082838(ftCollisionBox*, ftCollisionBox*, float);
 /* 082888 */ bool ft_80082888(Fighter_GObj*, ftCollisionBox*);
-/* 082978 */ UNK_RET ft_80082978(UNK_PARAMS);
+/* 082978 */ bool ft_80082978(Fighter_GObj*, ftCollisionBox*);
 /* 082A68 */ bool ft_80082A68(Fighter_GObj* gobj);
 /* 082B1C */ void ft_80082B1C(Fighter_GObj* gobj);
 /* 082B78 */ void ftCo_AirCatchHit_Coll(Fighter_GObj*);
@@ -86,7 +86,8 @@
 /* 085030 */ void ft_80085030(Fighter_GObj*, float gr_friction,
                               float facing_dir);
 /* 085088 */ void ft_80085088(Fighter_GObj*);
-/* 0850B4 */ UNK_RET ft_800850B4(UNK_PARAMS);
+/* 0850B4 */ void ft_800850B4(Fighter_GObj*, UNK_T);
+/* 0850E0 */ void ft_800850E0(Fighter_GObj*, UNK_T, float, float);
 /* 085134 */ void ft_80085134(Fighter_GObj* gobj);
 /* 085154 */ void ft_80085154(Fighter_GObj* gobj);
 /* 0851C0 */ void ft_800851C0(Fighter_GObj*);
