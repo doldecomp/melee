@@ -443,7 +443,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbcollision.c"),
             Object(Matching, "melee/lb/lblanguage.c"),
             Object(Matching, "melee/lb/lbtime.c"),
-            Object(NonMatching, "melee/lb/lb_00B0.c"),
+            Object(Matching, "melee/lb/lb_00B0.c"),
             Object(NonMatching, "melee/lb/lb_00CE.c"),
             Object(Matching, "melee/lb/lbvector.c"),
             Object(NonMatching, "melee/lb/lbshadow.c"),
