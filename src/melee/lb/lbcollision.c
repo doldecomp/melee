@@ -1498,18 +1498,6 @@ void lbColl_80007B78(Mtx a, Mtx b, float x, float y)
                     b[0][0] * y, a[0][0] * x, x);
 }
 
-static inline void HSD_JObjGetMtx_fake(HSD_JObj* jobj)
-{
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 1144, "jobj"));
-    lbColl_JObjSetupMatrix(jobj);
-}
-
-static inline MtxPtr HSD_JObjGetMtxPtr_fake(HSD_JObj* jobj)
-{
-    HSD_JObjGetMtx_fake(jobj);
-    return jobj->mtx;
-}
-
 bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
                      s32 arg3, float arg4, float arg5, float arg6)
 {
@@ -1532,12 +1520,12 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
         return 1;
     }
     if (arg2 != NULL) {
-        PSMTXConcat(arg2, HSD_JObjGetMtxPtr_fake(shield_hit->bone), sp38);
+        PSMTXConcat(arg2, HSD_JObjGetMtxPtr(shield_hit->bone), sp38);
     }
     if (arg2 != NULL) {
         var_r9 = sp38;
     } else {
-        var_r9 = HSD_JObjGetMtxPtr_fake(shield_hit->bone);
+        var_r9 = HSD_JObjGetMtxPtr(shield_hit->bone);
     }
     if (arg0->x43_b1) {
         var_f1 = arg0->scale;
@@ -1558,27 +1546,6 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
                            shield_hit->size,      // arg10
                            lbColl_804D7A34 * arg5 // arg11
     );
-}
-
-static inline bool lbColl_JObjMtxIsDirty(HSD_JObj* jobj)
-{
-    bool result;
-    jobj ? (void) 0 : __assert(lbColl_804D3700, 564, lbColl_804D3708);
-    result = false;
-    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
-        result = true;
-    }
-    return result;
-}
-
-/// @todo This is an inlined copy of JObjSetupMatrix from lbColl_80007BCC which
-/// was too deeply nested to inline. Remove this when matching lbColl_80007BCC.
-void lbColl_JObjSetupMatrix(HSD_JObj* jobj)
-{
-    if (jobj == NULL || !lbColl_JObjMtxIsDirty(jobj)) {
-        return;
-    }
-    HSD_JObjSetupMatrixSub(jobj);
 }
 
 void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform,
