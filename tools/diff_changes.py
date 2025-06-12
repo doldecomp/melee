@@ -42,7 +42,7 @@ def process_input(input_file: Optional[str]) -> None:
         print("No functions broken.")
         sys.exit(0)
     else:
-        print("::error::One or more functions were broken!")
+        print("::warning One or more functions were broken!")
         sys.stdout.write(json.dumps(result, indent=2))
         sys.exit(1)
 
