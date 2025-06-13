@@ -166,80 +166,70 @@ void gm_801A3A74(void)
 
 inline u8 matchMinor(MinorScene* scenes)
 {
-    u8 i;
-    for (i = 0; i != 255; i++) {
-        if (scenes[i].idx > gm_80479D30.nums.curr_minor) {
+    int i;
+    u8 var_r3_3;
+    MinorScene* cur = scenes;
+
+    for (i = 0; scenes[i].idx != 0xFF; i++) {
+        if (cur->idx > gm_80479D30.nums.curr_minor) {
             return scenes[i].idx;
         }
+        cur++;
     }
-    return 0;
+
+    var_r3_3 = scenes[0].idx;
+    if (var_r3_3 == 0xFF) {
+        var_r3_3 = 0;
+    }
+    return var_r3_3;
+}
+
+inline MinorScene* getScene(MinorScene* scene)
+{
+    int i, j;
+    for (i = gm_80479D30.nums.curr_minor; i < 0xFF; i++) {
+        for (j = 0; scene[j].idx != 0xFF; j++) {
+            if (i == scene[j].idx) {
+                return &scene[j];
+            }
+        }
+    }
+    return NULL;
 }
 
 void gm_801A4014(MajorScene* scene)
 {
-    MinorScene* temp_r5;
     MinorScene* var_r27;
-    MinorScene* var_r6;
-    int var_ctr;
-    int var_r3;
-    int* temp_r30;
-    int temp_r0;
-    u8 var_r3_3;
-    int var_r4;
-    struct {
-        u32 x0, x4, x8;
-    }* temp_r25;
     MinorSceneHandler* temp_r26;
-    u32 unused;
+    struct MinorSceneInfo* temp_r25;
+    u32 unused[2];
 
-    var_r4 = gm_80479D30.nums.curr_minor;
-#if 0
-    gm_80479D30.nums.curr_minor = matchMinor(scene->minor_scenes);
-#else
-    temp_r5 = scene->minor_scenes;
-    var_ctr = 0xFF - var_r4;
-    if (var_r4 < 0xFF) {
-    loop_1:
-        var_r6 = temp_r5;
-        var_r3 = 0;
-        while (var_r3 < 0xFF) {
-            if (var_r6->idx == 0xFF) {
-                var_r4 += 1;
-                goto loop_1;
-            }
-            if (var_r4 == var_r6->idx) {
-                var_r27 = &temp_r5[var_r3];
-                goto good;
-            }
-            var_r6 += 1;
-            var_r3 += 1;
-        }
-    }
-    var_r27 = NULL;
-good:
-    gm_80479D30.nums.curr_minor = (u8) var_r27->idx;
-#endif
+    var_r27 = getScene(scene->minor_scenes);
+
+    gm_80479D30.nums.curr_minor = var_r27->idx;
+
     gm_801A3F48(var_r27);
     if (var_r27->Prep != NULL) {
         var_r27->Prep(var_r27);
     }
-    temp_r25 = (void*) var_r27;
-    temp_r26 = gm_801A4CE0(var_r27->class_id);
+    temp_r25 = &var_r27->info;
+    temp_r26 = gm_801A4CE0(var_r27->info.class_id);
     gm_801A4BD4();
     gm_801A4B88(temp_r25);
     if (temp_r26->OnLoad != NULL) {
-        temp_r26->OnLoad(temp_r25->x4);
+        temp_r26->OnLoad(temp_r25->unk_struct_0);
     }
-    gm_801A4D34(temp_r26->OnFrame);
-    temp_r30 = &gmMainLib_8046B0F0.x4;
-    if (*temp_r30 == 0 && temp_r26->OnLeave != NULL) {
-        temp_r26->OnLeave(temp_r25->x8);
+    gm_801A4D34(temp_r26->OnFrame, temp_r25);
+    if (gmMainLib_8046B0F0.x4 == 0 && temp_r26->OnLeave != NULL) {
+        temp_r26->OnLeave(temp_r25->unk_struct_1);
     }
-    if (*temp_r30 == 0) {
+    if (gmMainLib_8046B0F0.x4 == 0) {
         if (var_r27->Decide != NULL) {
             var_r27->Decide(var_r27);
         }
+
         gm_80479D30.nums.prev_minor = gm_80479D30.nums.curr_minor;
+
         if (gm_80479D30.nums.pending_minor) {
             gm_80479D30.nums.curr_minor = gm_80479D30.nums.pending_minor - 1;
             gm_80479D30.nums.pending_minor = 0;
@@ -250,7 +240,7 @@ good:
     lb_8001CDB4();
     lb_8001B760(0xB);
     lbMthp_8001F800();
-    if (*temp_r30 != 0) {
+    if (gmMainLib_8046B0F0.x4 != 0) {
         lbAudioAx_80027DBC();
         HSD_PadReset();
         while (lb_8001B6F8() == 0xB)
@@ -273,12 +263,12 @@ good:
 
 void* gm_801A427C(MinorScene* scene)
 {
-    return scene->unk_struct_0;
+    return scene->info.unk_struct_0;
 }
 
 void* gm_801A4284(MinorScene* scene)
 {
-    return scene->unk_struct_1;
+    return scene->info.unk_struct_1;
 }
 
 void gm_SetSceneMinor(u8 arg0)
@@ -366,7 +356,7 @@ u8 gm_801A43A0(u8 arg0)
     }
     while (!gamestate->pending) {
         if (gm_80479D30.data != NULL &&
-            (temp_r3 = (*(u8 (*)(void)) gm_80479D30.data)(), temp_r3 != 45))
+            (temp_r3 = gm_80479D30.data(), temp_r3 != 45))
         {
             gm_80479D30.nums2 = gm_80479D30.nums;
             gamestate->pending = 0;

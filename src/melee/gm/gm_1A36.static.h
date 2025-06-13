@@ -99,7 +99,7 @@ struct gm_804D6840_t {
 /* 1A4BB8 */ static s32 gm_801A4BB8(void);
 /* 1A4BD4 */ static void gm_801A4BD4(void);
 /* 1A4CE0 */ static MinorSceneHandler* gm_801A4CE0(u8);
-/* 1A4D34 */ static void gm_801A4D34(void*);
+/* 1A4D34 */ static void gm_801A4D34(void*, void*);
 /* 1A50A0 */ static MajorScene* gm_801A50A0(void);
 /* 1A50AC */ static MajorScene* gm_801A50AC(void);
 /* 1A5244 */ static s8* gm_801A5244(void);

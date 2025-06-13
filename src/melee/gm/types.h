@@ -16,10 +16,11 @@ struct MinorScene {
     void (*Prep)(MinorScene*);
     void (*Decide)(MinorScene*);
 
-    u8 class_id;
-
-    void* unk_struct_0;
-    void* unk_struct_1;
+    struct MinorSceneInfo {
+        u8 class_id;
+        void* unk_struct_0; // data passed to OnLoad callback
+        void* unk_struct_1; // data passed to OnLeave callback
+    } info;
 };
 
 struct MajorScene {
@@ -37,8 +38,8 @@ struct MinorSceneHandler {
     u8 class_id;
 
     void (*OnFrame)(void);
-    void (*OnLoad)(u32);
-    void (*OnLeave)(u32);
+    void (*OnLoad)(void*);
+    void (*OnLeave)(void*);
     void (*unk_func)(void);
 }; // 803DA920
 
@@ -58,7 +59,7 @@ typedef struct {
     u8 x0D;
     u8 x0E;
     u8 x0F;
-    void* data;
+    u8 (*data)();
 } GameState;
 STATIC_ASSERT(sizeof(GameState) == 0x14);
 
