@@ -52,7 +52,7 @@ typedef struct _StaticPlayer {
     /*0x48*/ s8 player_id;
     /*0x49*/ u8 cpu_level;
     /*0x4A*/ u8 cpu_type;
-    /*0x4B*/ s8 handicap;
+    /*0x4B*/ u8 handicap;
 
     /*0x4C*/ s8 unk4C;
     /*0x4D*/ s8 unk4D;

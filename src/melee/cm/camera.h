@@ -87,7 +87,7 @@
 /* 030130 */ bool Camera_80030130(void);
 /* 030154 */ bool Camera_80030154(void);
 /* 030178 */ bool Camera_80030178(void);
-/* 03019C */ UNK_RET Camera_8003019C(UNK_PARAMS);
+/* 03019C */ Vec3* Camera_8003019C(void);
 /* 0301D0 */ UNK_RET fn_800301D0(UNK_PARAMS);
 /* 0304E0 */ UNK_RET Camera_800304E0(UNK_PARAMS);
 /* 030688 */ UNK_RET Camera_80030688(UNK_PARAMS);

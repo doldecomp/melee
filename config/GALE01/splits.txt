@@ -2177,14 +2177,78 @@ melee/gr/stage.c:
 	.sdata      start:0x804D49E8 end:0x804D4A08
 	.sdata2     start:0x804DBCD0 end:0x804DBCF0
 
-melee/db/db_2253.c:
-	.text       start:0x80225374 end:0x802295AC
+melee/db/dbinit.c:
+	.text       start:0x80225374 end:0x80225A00
+	.data       start:0x803EA6C8 end:0x803EA7A8
+	.bss        start:0x8049FA00 end:0x8049FA50
+	.sdata      start:0x804D4A08 end:0x804D4A18
+	.sbss       start:0x804D6B20 end:0x804D6B38
+
+melee/db/dbitem.c:
+	.text       start:0x80225A00 end:0x8022659C
+	.data       start:0x803EA7A8 end:0x803EACD8
+	.bss        start:0x8049FA50 end:0x8049FAC8
+	.sdata      start:0x804D4A18 end:0x804D4AC0
+	.sbss       start:0x804D6B38 end:0x804D6B40
+	.sdata2     start:0x804DBCF0 end:0x804DBD08
+
+melee/db/dbcpu.c:
+	.text       start:0x8022659C end:0x802267C8
+	.data       start:0x803EACD8 end:0x803EAD10
+	.bss        start:0x8049FAC8 end:0x8049FE18
+	.sbss       start:0x804D6B40 end:0x804D6B48
+	.sdata2     start:0x804DBD08 end:0x804DBD18
+
+melee/db/dbanim.c:
+	.text       start:0x802267C8 end:0x80226E00
+	.bss        start:0x8049FE18 end:0x804A03C0
+	.sdata      start:0x804D4AC0 end:0x804D4AF8
+	.sbss       start:0x804D6B48 end:0x804D6B50
+	.sdata2     start:0x804DBD18 end:0x804DBD28
+
+melee/db/dbcamera.c:
+	.text       start:0x80226E00 end:0x80228318
 	.rodata     start:0x803B84D8 end:0x803B84E8
-	.data       start:0x803EA6C8 end:0x803EAE68
-	.bss        start:0x8049FA00 end:0x804A04F0
-	.sdata      start:0x804D4A08 end:0x804D4B30
-	.sbss       start:0x804D6B20 end:0x804D6BA8
-	.sdata2     start:0x804DBCF0 end:0x804DBD88
+	.data       start:0x803EAD10 end:0x803EAD40
+	.bss        start:0x804A03C0 end:0x804A0480
+	.sbss       start:0x804D6B50 end:0x804D6B60
+	.sdata2     start:0x804DBD28 end:0x804DBD68
+
+melee/db/dbsound.c:
+	.text       start:0x80228318 end:0x8022873C
+	.data       start:0x803EAD40 end:0x803EADC8
+	.bss        start:0x804A0480 end:0x804A04F0
+	.sdata      start:0x804D4AF8 end:0x804D4B00
+	.sbss       start:0x804D6B60 end:0x804D6B80
+	.sdata2     start:0x804DBD68 end:0x804DBD78
+
+melee/db/dbeffect.c:
+	.text       start:0x8022873C end:0x802287C4
+	.sbss       start:0x804D6B80 end:0x804D6B88
+
+melee/db/dbscreenshot.c:
+	.text       start:0x802287C4 end:0x80228A64
+	.data       start:0x803EADC8 end:0x803EAE08
+	.sdata      start:0x804D4B00 end:0x804D4B10
+	.sbss       start:0x804D6B88 end:0x804D6B98
+	.sdata2     start:0x804DBD78 end:0x804DBD80
+
+melee/db/dberror.c:
+	.text       start:0x80228A64 end:0x80228CF4
+	.sdata      start:0x804D4B10 end:0x804D4B18
+
+melee/db/dbbonus.c:
+	.text       start:0x80228CF4 end:0x80229220
+	.data       start:0x803EAE08 end:0x803EAE58
+	.sdata      start:0x804D4B18 end:0x804D4B28
+	.sbss       start:0x804D6B98 end:0x804D6BA0
+	.sdata2     start:0x804DBD80 end:0x804DBD88
+
+melee/db/dballoc.c:
+	.text       start:0x80229220 end:0x802295AC
+	.data       start:0x803EAE58 end:0x803EAE68
+	.sdata      start:0x804D4B28 end:0x804D4B30
+	.sbss       start:0x804D6BA0 end:0x804D6BA8
 
 melee/mn/mn_2295.c:
 	.text       start:0x802295AC end:0x8023201C

@@ -1,6 +1,6 @@
 #include "itkirbyhammer.h"
 
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "ef/efasync.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "it/inlines.h"

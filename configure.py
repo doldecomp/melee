@@ -954,7 +954,17 @@ config.libs = [
     MeleeLib(
         "db (Debug)",
         [
-            Object(NonMatching, "melee/db/db_2253.c"),
+            Object(Matching, "melee/db/dbinit.c"),
+            Object(Matching, "melee/db/dbitem.c"),
+            Object(Matching, "melee/db/dbcpu.c"),
+            Object(Matching, "melee/db/dbanim.c"),
+            Object(Matching, "melee/db/dbcamera.c"),
+            Object(Matching, "melee/db/dbsound.c"),
+            Object(Matching, "melee/db/dbeffect.c"),
+            Object(Matching, "melee/db/dbscreenshot.c"),
+            Object(Matching, "melee/db/dberror.c"),
+            Object(Matching, "melee/db/dbbonus.c"),
+            Object(Matching, "melee/db/dballoc.c"),
         ],
     ),
     MeleeLib(

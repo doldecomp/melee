@@ -1477,7 +1477,7 @@ struct Fighter {
     /* fp+209C */ s16 x209C;
     /* fp+20A0 */ HSD_JObj* x20A0_accessory;
     /* fp+20A4 */ UnkFlagStruct x20A4;
-    /* fp+20A8 */ s32 x20A8;
+    /* fp+20A8 */ u32 x20A8;
     /* fp+20AC */ HSD_GObj* unk_gobj;
     /* fp+20B0 */ UNK_T x20B0;
     /* fp+20B4 */ UNK_T x20B4;

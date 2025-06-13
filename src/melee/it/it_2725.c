@@ -8,7 +8,7 @@
 #include "it_266F.h"
 
 #include "cm/camera.h"
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "ef/efasync.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"

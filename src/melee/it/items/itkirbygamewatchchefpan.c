@@ -1,6 +1,6 @@
 #include "itkirbygamewatchchefpan.h"
 
-#include <melee/db/db_2253.h>
+#include <melee/db/db.h>
 #include <melee/ft/chara/ftKirby/ftKb_Init.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>

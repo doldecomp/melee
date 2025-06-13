@@ -6,7 +6,7 @@
 #include "lbfile.h"
 #include "lbheap.h"
 
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "ef/efasync.h"
 #include "gr/grdatfiles.h"
 #include "lb/types.h"

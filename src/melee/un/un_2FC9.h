@@ -203,8 +203,8 @@
 /* 302B10 */ void DevText_SetScale(DevText* text, float x, float y);
 /* 302B1C */ void DevText_SetXY(DevText* text, int x, int y);
 /* 302B48 */ u8 DevText_StoreColorIndex(DevText* text, u8 index);
-/* 302B64 */ GXColor DevText_SetTextColor(DevText* text, GXColor* color);
-/* 302B90 */ GXColor DevText_SetBGColor(DevText* text, GXColor* color);
+/* 302B64 */ GXColor DevText_SetTextColor(DevText* text, GXColor color);
+/* 302B90 */ GXColor DevText_SetBGColor(DevText* text, GXColor color);
 /* 302BB0 */ void DevText_Erase(DevText* text);
 /* 302BE4 */ void DevText_Print(DevText* text, char* str);
 /* 302D0C */ void DevText_PrintInt(DevText* text, int num);

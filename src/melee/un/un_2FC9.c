@@ -1058,18 +1058,18 @@ u8 DevText_StoreColorIndex(DevText* text, u8 index)
     return old;
 }
 
-GXColor DevText_SetTextColor(DevText* text, GXColor* color)
+GXColor DevText_SetTextColor(DevText* text, GXColor color)
 {
     int index = text->current_color;
     GXColor old = text->text_colors[index];
-    text->text_colors[index] = *color;
+    text->text_colors[index] = color;
     return old;
 }
 
-GXColor DevText_SetBGColor(DevText* text, GXColor* color)
+GXColor DevText_SetBGColor(DevText* text, GXColor color)
 {
     GXColor old = text->bg_color;
-    text->bg_color = *color;
+    text->bg_color = color;
     return old;
 }
 
