@@ -111,7 +111,12 @@ void ft_80088478(Fighter* fp, int sfx_id, int sfx_vol, int sfx_pan)
 
 /// #ftCo_800886D8
 
-/// #ft_80088770
+void ft_80088770(Fighter* fp)
+{
+    lbAudioAx_80023870(0x83D61, 0, 0x40,
+                       fp->x221F_b4 + (0x1E + fp->player_id * 2));
+    fp->x2144 = -1;
+}
 
 /// #ft_800887CC
 
