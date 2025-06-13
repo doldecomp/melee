@@ -145,23 +145,27 @@ not_squatwait:
 bool ftCo_8008DA4C(ftCo_GObj* gobj, enum_t arg1, enum_t arg2)
 {
     ftCo_Fighter* fp = gobj->user_data;
+    bool result;
     if (fp->dmg.x1838_percentTemp) {
         switch (arg1) {
         case 1:
-            return ftCo_800BFFD0(fp, arg2 + 11, 0);
+            result = ftCo_800BFFD0(fp, arg2 + 11, 0);
             break;
         case 2:
-            return ftCo_800BFFD0(fp, arg2 + 15, 0);
+            result = ftCo_800BFFD0(fp, arg2 + 15, 0);
             break;
         case 5:
-            return ftCo_800BFFD0(fp, arg2 + 31, 0);
+            result = ftCo_800BFFD0(fp, arg2 + 31, 0);
             break;
         case 13:
-            return ftCo_800BFFD0(fp, arg2 + 35, 0);
+            result = ftCo_800BFFD0(fp, arg2 + 35, 0);
+            break;
+        default:
+            result = ftCo_800BFFD0(fp, 4, 0);
             break;
         }
     }
-    return ftCo_800BFFD0(fp, 4, 0);
+    return result;
 }
 
 void ftCo_8008DB10(ftCo_GObj* gobj, enum_t arg1, float arg2)
