@@ -164,7 +164,7 @@ struct ftCommonData {
     /* +1C0 */ float x1C0;
     /* +1C4 */ UNK_T x1C4;
     /* +1C8 */ float x1C8;
-    /* +1CC */ UNK_T x1CC;
+    /* +1CC */ float x1CC;
     /* +1D0 */ float x1D0;
     /* +1D4 */ UNK_T x1D4;
     /* +1D8 */ UNK_T x1D8;
@@ -572,12 +572,10 @@ typedef struct ftData_x44_t {
     s16 unk6;
     s16 unk8;
     s16 unkA;
-    s16 unkC;
-    s16 unk10;
-    s16 unk12;
-    s16 unk14;
-    s16 unk16;
-    s16 unk18;
+    float unkC;
+    float unk10;
+    float unk14;
+    float unk18;
 } ftData_x44_t;
 
 struct ftData {

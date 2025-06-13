@@ -83,7 +83,7 @@
 /* 054D68 */ UNK_RET mpLib_80054D68(UNK_PARAMS);
 /* 054DFC */ void mpLib_80054DFC(enum_t, Vec3*);
 /* 054ED8 */ bool mpLib_80054ED8(int);
-/* 054F68 */ bool mpLib_80054F68(s32, s32);
+/* 054F68 */ bool mpLib_80054F68(int floor_id, s32);
 /* 0552B0 */ void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
 /* 05541C */ UNK_RET mpLib_8005541C(UNK_PARAMS);
 /* 0557D0 */ UNK_RET mpLib_800557D0(UNK_PARAMS);
