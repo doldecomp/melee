@@ -1,3 +1,6 @@
+#include <melee/it/forward.h>
+#include <melee/un/types.h>
+
 /* 49FA50 */ static char db_ItemAndPokemonMenuText_buf[0x50];
 
 /* 4D6B38 */ static DevText* db_ItemAndPokemonMenuText;
