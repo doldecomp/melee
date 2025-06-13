@@ -1,6 +1,6 @@
 #include "gm_1AED.h"
 
-#include <melee/db/db_2253.h>
+#include <melee/db/db.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>

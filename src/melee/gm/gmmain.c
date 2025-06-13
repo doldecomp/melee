@@ -5,7 +5,7 @@
 
 #include "gm_1A36.h"
 
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarq.h"
@@ -33,12 +33,8 @@
 #include <baselib/sislib.h>
 #include <baselib/video.h>
 
-extern bool db_804D6B20;
-extern u16 db_gameLaunchButtonState; // debug flags
-
 extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
-extern char db_803EA6C8[]; // build timestamp string
 extern s32* seed_ptr;
 
 enum {
@@ -77,7 +73,7 @@ static void gmMain_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
         db_804D6B20 = true;
-        if (db_gameLaunchButtonState & 0x400) {
+        if (db_gameLaunchButtonState & HSD_PAD_X) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -97,7 +93,7 @@ static void gmMain_8015FDA4(void)
                 break;
             }
             g_debugLevel = level;
-        } else if (db_gameLaunchButtonState & 0x800) {
+        } else if (db_gameLaunchButtonState & HSD_PAD_Y) {
             int level = g_debugLevel;
             switch (level) {
             case DbLKind_NoDebugRom:
@@ -184,7 +180,7 @@ int main(void)
     HSD_SisLib_803A6048(0xC000);
     gmMainLib_8015FBA4();
 
-    if (g_debugLevel != DbLKind_Master && db_gameLaunchButtonState & 0x20 &&
+    if (g_debugLevel != DbLKind_Master && db_gameLaunchButtonState & HSD_PAD_R &&
         hsd_803931A4(-1))
     {
         hsd_80393A54(1);
@@ -209,7 +205,7 @@ int main(void)
         OSReport("# ARAM Free Size %d MB\n",
                  (free_aram_end - free_aram_start) / (1024 * 1024));
     }
-    OSReport("# %s\n", db_803EA6C8);
+    OSReport("# %s\n", db_build_timestamp);
     {
         struct datetime dt;
         gm_801692E8(lbTime_8000AFBC(), &dt);

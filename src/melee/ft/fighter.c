@@ -21,7 +21,7 @@
 #include "ftparts.h"
 
 #include "cm/camera.h"
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "ef/efasync.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"

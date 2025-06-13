@@ -8,7 +8,7 @@
 #include "types.h"
 
 #include "cm/camera.h"
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"

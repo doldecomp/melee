@@ -2,7 +2,7 @@
 
 #include "types.h"
 
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "gm/gm_1601.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
