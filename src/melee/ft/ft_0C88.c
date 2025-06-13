@@ -45,6 +45,7 @@
 /* 0CAC18 */ static void ftCo_RunBrake_Enter(ftCo_GObj* gobj);
 /* 0CAF78 */ static bool fn_800CAF78(ftCo_GObj* gobj);
 /* 0CB4E0 */ static void ftCo_KneeBend_Enter(ftCo_GObj* gobj, int arg1);
+/* 0CC654 */ static void ftNs_JumpAerial_Phys_Cb(ftCo_GObj* gobj);
 
 /// #ftCo_800C884C
 
@@ -854,7 +855,16 @@ bool ftCo_800CB870(Fighter_GObj* gobj)
 
 /// #ftCo_JumpAerial_Phys
 
-/// #fn_800CC654
+void ftNs_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D28C(fp, fp->mv.co.jumpaerial.x4);
+    fp->mv.co.jumpaerial.x4 += fp->x74_anim_vel.x;
+    fp->x74_anim_vel.x = 0.0F;
+    fp->self_vel.x =
+        fp->x6A4_transNOffset.z * fp->facing_dir + fp->mv.co.jumpaerial.x4;
+    ft_800851D0(gobj);
+}
 
 /// #ftCo_800CC6C8
 
