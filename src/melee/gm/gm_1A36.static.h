@@ -2,6 +2,7 @@
 #ifndef __GALE01_1A3680
 #define __GALE01_1A3680
 
+#include <baselib/gobj.h>
 #include <platform.h>
 
 #include "baselib/forward.h"
@@ -13,6 +14,7 @@
 #include <baselib/archive.h>
 
 #include <melee/gm/types.h>
+#include <melee/sc/types.h>
 
 struct gm_80479D58_t {
     /* 0x00 */ struct gm_80479D58_t* unk_0;
@@ -20,10 +22,15 @@ struct gm_80479D58_t {
     /* 0x08 */ s32 unk_8;
     /* 0x0C */ s32 unk_C; /* inferred */
     /* 0x10 */ u8 unk_10;
-    /* 0x11 */ char pad_11[3]; /* maybe part of unk_10[4]? */
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ char pad_1C[0x24]; /* maybe part of unk_18[0xA]? */
+    /* 0x11 */ u8 unk_11;
+    /* 0x12 */ u8 unk_12;
+    /* 0x14 */ UNK_T unk_14;
+    /* 0x18 */ UNK_T unk_18;
+    /* 0x1C */ char pad_1C[0xC]; /* maybe part of unk_18[0xA]? */
+    /* 0x28 */ u64 unk_28;
+    /* 0x30 */ UNK_T unk_30;
+    /* 0x34 */ UNK_T unk_34;
+    /* 0x38 */ char pad2[0x8];
 }; /* size = 0x40 */
 STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
 
@@ -95,12 +102,12 @@ struct gm_804D6840_t {
 /* 1A4624 */ static u8 gm_801A4624(void);
 /* 1A4B40 */ static void gm_801A4B40(s32 arg0);
 /* 1A4B50 */ static void gm_801A4B50(s32 arg0);
-/* 1A4B88 */ static void gm_801A4B88(void*);
+/* 1A4B88 */ static void gm_801A4B88(struct MinorSceneInfo*);
 /* 1A4BB8 */ static s32 gm_801A4BB8(void);
 /* 1A4BD4 */ static void gm_801A4BD4(void);
 /* 1A4CE0 */ static MinorSceneHandler* gm_801A4CE0(u8);
-/* 1A4D34 */ static void gm_801A4D34(void*, void*);
-/* 1A50A0 */ static MajorScene* gm_801A50A0(void);
+/* 1A4D34 */ static void gm_801A4D34(void*, struct MinorSceneInfo*);
+/* 1A50A0 */ static MinorSceneHandler* gm_801A50A0(void);
 /* 1A50AC */ static MajorScene* gm_801A50AC(void);
 /* 1A5244 */ static s8* gm_801A5244(void);
 /* 1A5614 */ static void gm_801A5614(void);
@@ -116,7 +123,7 @@ struct gm_804D6840_t {
 /* 1BF694 */ static u8 gm_801BF694(void);
 /* 2A3EF4 */ static void gm_801A3EF4(void);
 /* 3DA788 */ extern u64 gm_803DA788;
-/* 3DA920 */ extern MajorScene gm_803DA920;
+/* 3DA920 */ extern MinorSceneHandler gm_803DA920[];
 /* 3DACA4 */ extern MajorScene gm_803DACA4;
 /* 3DBFD8 */ extern struct gm_803DBFD8_t gm_803DBFD8;
 /* 3DD0F0 */ extern HSD_CObjDesc gm_803DD0F0;
@@ -127,10 +134,11 @@ struct gm_804D6840_t {
 /* 479D20 */ void (*gm_80479D20)(s32);
 /* 479D24 */ s32 gm_80479D24;
 /* 479D30 */ static GameState gm_80479D30;
+/* 479D30 */ static HSD_GObjLibInitDataType gm_80479D48;
 /* 479D58 */ static struct gm_80479D58_t gm_80479D58;
 /* 480D58 */ static struct gm_80480D58_t gm_80480D58;
-/* 4D6720 */ static UNK_T gm_804D6720;
-/* 4D672C */ static s32 gm_804D672C;
+/* 4D6720 */ static struct MinorSceneInfo* gm_804D6720;
+/* 4D672C */ static HSD_GObj* gm_804D672C;
 /* 4D6730 */ static UNK_T gm_804D6730;
 /* 4D67F8 */ static struct gm_804D67F8_t* gm_804D67F8;
 /* 4D67FC */ static struct gm_804D67FC_t* gm_804D67FC;
@@ -152,5 +160,21 @@ struct gm_804D6840_t {
 /* 4D6844 */ static HSD_Joint*** gm_804D6844;
 /* 4D6848 */ static s32 gm_804D6848;
 /* 4D684C */ static s32 gm_804D684C;
+/* 4D6868 */ static SceneDesc* gm_804D6868;
+
+static struct unkd4d0 {
+    struct unkd4d0* next;
+    struct unkd4d0* unk4;
+    void* unk8;
+    int unkC;
+    int unk10;
+    float unk14;
+    float unk18;
+    HSD_GObj* unk1C;
+    HSD_Text* unk20;
+} gm_803DD4D0 = { 0 };
+
+extern int gm_804D6724;
+extern int gm_804D6728;
 
 #endif

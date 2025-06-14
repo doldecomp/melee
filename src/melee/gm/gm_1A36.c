@@ -38,6 +38,7 @@
 #include <dolphin/vi.h>
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
+#include <baselib/sobjlib.h>
 #include <baselib/video.h>
 
 u64 gm_801A3680(u8 idx)
@@ -318,12 +319,31 @@ u8 gm_801A4320(void)
     return gm_80479D30.nums.prev_major;
 }
 
-void gm_801A4330(void* arg0)
+void gm_801A4330(u8 (*arg0)())
 {
     gm_80479D30.data = arg0;
 }
 
-/// #gm_801A4340
+bool gm_801A4340(u8 arg0)
+{
+    switch (arg0) {
+        case 0x3:
+        case 0x4:
+        case 0x5:
+        case 0xF:
+        case 0x1C:
+        case 0x20:
+        case 0x21:
+        case 0x22:
+        case 0x23:
+        case 0x24:
+        case 0x25:
+        case 0x26:
+        case 0x2B:
+            return true;
+    }
+    return false;
+}
 
 inline MajorScene* findSceneMatching(u8 idx)
 {
@@ -415,28 +435,61 @@ void gm_801A4510(void)
     }
 }
 
-/// #gm_801A45E8
+bool gm_801A45E8(int bit)
+{
+    return gm_80479D58.unk_10 & (1ULL << bit);
+}
+
 
 u8 gm_801A4624(void)
 {
     return gm_80479D58.unk_10;
 }
 
-/// #gm_801A4634
+void gm_801A4634(int bit)
+{
+    gm_80479D58.unk_10 |= 1ULL << bit;
+}
 
-/// #gm_801A4674
+void gm_801A4674(int bit)
+{
+    gm_80479D58.unk_10 &= ~(1ULL << bit);
+}
 
-/// #gm_801A46B8
+bool gm_801A46B8(int bit)
+{
+    return gm_80479D58.unk_12 & (1ULL << bit);
+}
 
-/// #fn_801A46F4
+bool fn_801A46F4(void)
+{
+    int i;
+    for (i = 0; i < 4; i++) {
+        HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
+        if (pad->err == 0 && (pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #fn_801A47E4
+bool fn_801A47E4(void)
+{
+    int i;
+    for (i = 0; i < 4; i++) {
+        HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
+        if (pad->err == 0 && (pad->trigger & 0x10)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 /// #gm_801A48A4
 
 /// #gm_801A4970
 
-void gm_801A4B08(s32 arg0, s32 arg1)
+void gm_801A4B08(UNK_T arg0, UNK_T arg1)
 {
     gm_80479D58.unk_14 = arg0;
     gm_80479D58.unk_18 = arg1;
@@ -464,23 +517,19 @@ void gm_801A4B74(void)
     gm_80479D58.unk_C = 2;
 }
 
-void gm_801A4B88(UNK_T arg0)
+void gm_801A4B88(struct MinorSceneInfo* info)
 {
-    gm_804D6720 = arg0;
+    gm_804D6720 = info;
 }
 
-extern void* gm_804D6720;
-
-s32 gm_801A4B90(void)
+void* gm_801A4B90(void)
 {
-    return M2C_FIELD(gm_804D6720, s32*, 4);
+    return gm_804D6720->unk_struct_0;
 }
 
-extern void* gm_804D6720;
-
-s8* gm_801A4B9C(void)
+void* gm_801A4B9C(void)
 {
-    return (s8*) M2C_FIELD(gm_804D6720, s32*, 8);
+    return gm_804D6720->unk_struct_1;
 }
 
 struct gm_80479D58_t* gm_801A4BA8(void)
@@ -493,22 +542,60 @@ s32 gm_801A4BB8(void)
     return gm_80479D58.unk_8;
 }
 
-s32 gm_801A4BC8(void)
+HSD_GObj* gm_801A4BC8(void)
 {
     return gm_804D672C;
 }
 
-void fn_801A4BD0(void) {}
+void fn_801A4BD0(HSD_GObj*) {}
 
-/// #gm_801A4BD4
+// fully matching when file data sections are split properly
+// (this file's bss starts at gm_80479D48)
+void gm_801A4BD4(void)
+{
+    PAD_STACK(0x18);
 
-/// #gm_801A4CE0
+    gm_80479D58.unk_14 = fn_801A46F4;
+    gm_80479D58.unk_18 = fn_801A47E4;
+    gm_80479D58.unk_30 = 0;
+    gm_80479D58.unk_34 = 0;
+
+    lb_80019880(1.0F/60 * OS_TIMER_CLOCK);
+    HSD_GObj_803912E0(&gm_80479D48);
+    gm_80479D48.gproc_pri_max = 0x18;
+    HSD_SObjLib_804D7960 = HSD_GObj_803912A8(&gm_80479D48, &HSD_SObjLib_8040C3A4);
+    HSD_SObjLib_803A44A4();
+    gm_80479D48.unk_2 = &gm_80479D58.unk_28;
+    HSD_GObj_80391304(&gm_80479D48);
+    hsd_80392474();
+    un_802FF78C();
+    gm_804D672C = GObj_Create(14, 0, 0);
+    if (gm_804D672C != NULL) {
+        HSD_GObjProc_8038FD54(gm_804D672C, fn_801A4BD0, 0);
+    }
+    gm_804D6728 = 0;
+    gm_804D6724 = 0;
+    gm_801A3E88();
+    lbAudioAx_8002835C();
+    lb_80014534();
+}
+
+MinorSceneHandler* gm_801A4CE0(u8 id)
+{
+    MinorSceneHandler* cur;
+    for (cur = gm_801A50A0(); cur->class_id != 0x2D; cur++) {
+        if (cur->class_id == id) {
+            return cur;
+        }
+    }
+    return NULL;
+}
 
 /// #gm_801A4D34
 
-MajorScene* gm_801A50A0(void)
+MinorSceneHandler* gm_801A50A0(void)
 {
-    return &gm_803DA920;
+    return gm_803DA920;
 }
 
 MajorScene* gm_801A50AC(void)
@@ -856,13 +943,85 @@ UNK_T gm_801ACC94(void)
 
 /// #gm_801ADDD8
 
-/// #gm_801ADE1C
+void gm_801ADDD8(void)
+{
+    memzero(&gm_803DD4D0, sizeof(gm_803DD4D0));
+    gm_803DD4D0.unkC = -0x3E7;
+    gm_801AEBB0();
+}
+
+extern int gm_804D686C;
+
+bool gm_801ADE1C(int arg0, int arg1, f32 arg2, f32 arg3)
+{
+    HSD_Text* text;
+    struct unkd4d0* temp_r0;
+    struct unkd4d0* next;
+    struct unkd4d0* cur;
+
+    cur = &gm_803DD4D0;
+    next = HSD_MemAlloc(sizeof(struct unkd4d0));
+    memzero(next, sizeof(struct unkd4d0));
+    next->unkC = arg0;
+    next->unk10 = arg1;
+    next->unk14 = arg2;
+    next->unk18 = arg3;
+
+    for (; true; cur = cur->next) {
+
+        if (cur->next != NULL) {
+            continue;
+        }
+
+        cur->next = next;
+        next->unk4 = cur;
+        next->next = NULL;
+        next->unk8 = NULL;
+        next->unk1C = gm_801AECC4(1);
+        if (next->unk1C != NULL) {
+            HSD_JObjSetTranslateX(GET_JOBJ(next->unk1C), next->unk14);
+        }
+        if (next->unk1C != NULL) {
+            HSD_JObjSetTranslateY(GET_JOBJ(next->unk1C), next->unk18);
+        }
+        next->unk20 = HSD_SisLib_803A5ACC(3, (s32) gm_804D686C, -14.0f + next->unk14, -9.0f - next->unk18, 0.0f, 30.8f, 4.6f);
+        text = next->unk20;
+        text->x34.x = 0.079f;
+        text->x34.y = 0.079f;
+        next->unk20->x4A = 0;
+        next->unk20->x48 = 0;
+        HSD_SisLib_803A6368(next->unk20, next->unk10);
+        break;
+    }
+
+    return true;
+}
 
 /// #gm_801AE050
 
-/// #gm_801AE44C
+void gm_801AE44C(int arg0, float val)
+{
+    struct unkd4d0* cur;
 
-/// #gm_801AE544
+    for (cur = gm_803DD4D0.next; cur != NULL; cur = cur->next) {
+        if (cur->unkC == arg0) {
+            HSD_JObj* jobj = GET_JOBJ(cur->unk1C);
+            HSD_JObjAddTranslationY(jobj->child->child->child->next, -val);
+        }
+    }
+}
+
+void gm_801AE544(int arg0, float val)
+{
+    struct unkd4d0* cur;
+
+    for (cur = gm_803DD4D0.next; cur != NULL; cur = cur->next) {
+        if (cur->unkC == arg0) {
+            HSD_JObj* jobj = GET_JOBJ(cur->unk1C);
+            HSD_JObjAddTranslationY(jobj->child->child->child->next->child, -val);
+        }
+    }
+}
 
 /// #gm_801AE640
 
@@ -872,9 +1031,47 @@ UNK_T gm_801ACC94(void)
 
 /// #fn_801AE948
 
-/// #gm_801AEBB0
+void gm_801AEBB0(void)
+{
+    HSD_GObj* gobj;
+    PAD_STACK(4);
 
-/// #gm_801AECC4
+    lbArchive_80016DBC("NtMsgWin.dat", &gm_804D6868,
+            "ScNtcCommon_scene_data", 0);
+
+    if (lbLang_IsSavedLanguageUS()) {
+        HSD_SisLib_803A62A0(3, "SdMsgBox.usd", "SIS_MessageData");
+    } else {
+        HSD_SisLib_803A62A0(3, "SdMsgBox.dat", "SIS_MessageData");
+    }
+
+    gobj = GObj_Create(20, 21, 0);
+    {
+        HSD_CObj* desc = HSD_CObjLoadDesc(gm_804D6868->cameras[0]);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, desc);
+    }
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0);
+    gobj->gxlink_prios = 0x4000;
+
+    gm_804D686C = HSD_SisLib_803A611C(3, (u32) gobj, 9, 13, 0, 14, 0, 18);
+    HSD_GObjProc_8038FD54(GObj_Create(15, 17, 0), fn_801AE948, 0);
+}
+
+HSD_GObj* gm_801AECC4(int model_idx)
+{
+    HSD_GObj* gobj = GObj_Create(9, 13, 0);
+    HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6868->models[model_idx]->joint);
+    HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 14, 0);
+    gm_8016895C(jobj, gm_804D6868->models[model_idx], 0);
+    HSD_JObjReqAnimAll(jobj, 0.0F);
+    HSD_JObjAnimAll(jobj);
+    if (model_idx == 1) {
+        HSD_JObjSetFlagsAll(jobj->child->child->next->child->next, 0x10);
+        HSD_JObjSetFlagsAll(jobj->child->child->next->next, 0x10);
+    }
+    return gobj;
+}
 
 static HSD_PadStatus* get_master_status(u8 i)
 {
