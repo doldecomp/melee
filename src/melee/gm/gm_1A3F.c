@@ -1,5 +1,8 @@
 #include "gm_1A3F.h"
 
+#include "gm_1A45.h"
+#include "gm_1A4C.h"
+
 #include "gmmain_lib.h"
 
 #include "db/db.h"
@@ -175,7 +178,7 @@ u8 gm_801A4320(void)
     return gm_80479D30.nums.prev_major;
 }
 
-void gm_801A4330(u8 (*arg0)())
+void gm_801A4330(u8 (*arg0)(void))
 {
     gm_80479D30.data = arg0;
 }

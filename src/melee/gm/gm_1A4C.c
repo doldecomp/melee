@@ -499,7 +499,7 @@ void gm_801AEBB0(void)
     HSD_GObj* gobj;
     PAD_STACK(4);
 
-    lbArchive_80016DBC("NtMsgWin.dat", &gm_804D6868,
+    lbArchive_80016DBC("NtMsgWin.dat", (void**) &gm_804D6868,
             "ScNtcCommon_scene_data", 0);
 
     if (lbLang_IsSavedLanguageUS()) {

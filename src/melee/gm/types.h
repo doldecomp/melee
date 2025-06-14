@@ -59,7 +59,7 @@ typedef struct {
     u8 x0D;
     u8 x0E;
     u8 x0F;
-    u8 (*data)();
+    u8 (*data)(void);
 } GameState;
 STATIC_ASSERT(sizeof(GameState) == 0x14);
 

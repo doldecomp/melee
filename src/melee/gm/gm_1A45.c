@@ -151,7 +151,7 @@ HSD_GObj* gm_801A4BC8(void)
     return gm_804D672C;
 }
 
-void fn_801A4BD0(HSD_GObj*) {}
+void fn_801A4BD0(HSD_GObj* gobj) {}
 
 void gm_801A4BD4(void)
 {
