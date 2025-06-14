@@ -745,7 +745,7 @@ HSD_GObj* grIzumi_801CCD98(void)
     HSD_CObj* cobj = lb_80013B14(&ReflectCObjDesc);
     IzumiReflection* refl;
     UnkArchiveStruct* dat;
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMaxSorted(gobj, grIzumi_801CCEA0, 2);
     refl = HSD_MemAlloc(sizeof(IzumiReflection));
     GObj_InitUserData(gobj, 3, HSD_Free, refl);

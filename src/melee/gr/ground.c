@@ -861,7 +861,7 @@ HSD_GObj* Ground_801C14D0(int map_id)
             HSD_GObj* temp_r23_2 = GObj_Create(17, 19, 0);
             temp_r27 = lb_80013B14(archive->unk4->unk8[map_id].x10);
             new_var2 = temp_r23_2;
-            HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_804D784B[0],
+            HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_804D784B,
                                     temp_r27);
             GObj_SetupGXLinkMax(new_var2, &grDisplay_801C5F60, 5);
             temp_r23_2->gxlink_prios = 8;

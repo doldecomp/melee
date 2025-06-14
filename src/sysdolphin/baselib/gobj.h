@@ -8,8 +8,6 @@
 
 #include "baselib/objalloc.h"
 
-struct _GObjUnkStruct;
-
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
 
@@ -43,14 +41,20 @@ struct HSD_GObj {
     /* +34 */ void* x34_unk;
 };
 
+typedef void (*GObjFunc)(HSD_Obj*);
+
+typedef struct _GObjFuncs {
+    struct _GObjFuncs* next;
+    u8 size;
+    GObjFunc* funcs;
+} GObjFuncs;
+
 typedef struct _HSD_GObjLibInitDataType {
     u8 p_link_max;                  // 804CE380
     u8 gx_link_max;                 // 804CE381
     u8 gproc_pri_max;               // 804CE382
-    u32 unk_1;                      // 804CE384
+    GObjFuncs* funcs;               // 804CE384
     u64* unk_2;                     // 804CE388
-    HSD_ObjAllocData gobj_def;      // 804CE38C
-    HSD_ObjAllocData gobj_proc_def; // 804CE3B8
 } HSD_GObjLibInitDataType;
 
 /// @todo Belongs in `melee/` somewhere
@@ -92,36 +96,36 @@ extern struct _unk_gobj_struct {
     HSD_GObj* gobj;
 } HSD_GObj_804CE3E4;
 
-typedef struct _GObjUnkStruct GObjUnkStruct;
-typedef struct _GObjFuncs GObjFuncs;
 
+extern GObjFunc* HSD_GObj_804D7810;
+extern HSD_GObj* HSD_GObj_804D7814;
 extern HSD_GObj* HSD_GObj_804D7818;
 extern HSD_GObj* HSD_GObj_804D781C;
-extern HSD_GObjProc* HSD_GObj_804D7830;
-extern HSD_GObjProc* HSD_GObj_804D7838;
-extern HSD_GObjProc** HSD_GObj_804D7840;
-extern s32 HSD_GObj_804D7834;
-extern s32 HSD_GObj_804D783C;
-// extern HSD_GObj* HSD_SisLib_804D797C; @todo: is this actually correct?
 extern HSD_GObj** HSD_GObj_804D7820;
 extern HSD_GObj** HSD_GObj_804D7824;
-extern HSD_GObjLibInitDataType HSD_GObjLibInitData;
 extern HSD_GObj** plinklow_gobjs;
+// TODO: GObjList is a fake type, this is just a double pointer
+// (pointer to array of HSD_GObj*, indexed by p_link)
 extern HSD_GObjList* HSD_GObj_Entities;
-extern u8 HSD_GObj_804D784B[5];
-
-extern GObjFuncs HSD_GObj_80408610;
+extern HSD_GObjProc* HSD_GObj_804D7830;
+extern s32 HSD_GObj_804D7834;
+extern HSD_GObjProc* HSD_GObj_804D7838;
+extern s32 HSD_GObj_804D783C;
+extern HSD_GObjProc** HSD_GObj_804D7840;
+extern HSD_GObjProc** HSD_GObj_804D7844;
 extern s8 HSD_GObj_804D7848;
 extern s8 HSD_GObj_804D7849;
 extern s8 HSD_GObj_804D784A;
-extern GObjFuncs HSD_GObj_80408620;
+extern u8 HSD_GObj_804D784B;
+
+extern HSD_GObjLibInitDataType HSD_GObjLibInitData;
 
 void HSD_GObj_80390C5C(HSD_GObj* gobj);
 void HSD_GObj_80390C84(HSD_GObj* gobj);
 void HSD_GObj_80390CAC(HSD_GObj* gobj);
 u32 HSD_GObj_80390EB8(s32 i);
 void HSD_GObj_803910D8(HSD_GObj*, int);
-u8 HSD_GObj_803912A8(GObjUnkStruct*, GObjFuncs*);
+u8 HSD_GObj_803912A8(HSD_GObjLibInitDataType*, GObjFuncs*);
 HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1);
 void HSD_GObj_80390CD4(HSD_GObj* gobj);
@@ -132,10 +136,10 @@ void HSD_GObj_LObjCallback(HSD_GObj* gobj, int unused);
 void HSD_GObj_FogCallback(HSD_GObj* gobj, int unused);
 void HSD_GObj_80391120(HSD_Obj* obj);
 void HSD_GObj_803911C0(HSD_Obj* obj);
-void HSD_GObj_80391260(struct _GObjUnkStruct* arg0);
-void HSD_GObj_803912E0(GObjFuncs* arg0);
+void HSD_GObj_80391260(HSD_GObjLibInitDataType*);
+void HSD_GObj_803912E0(HSD_GObjLibInitDataType* arg0);
 void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask);
-extern HSD_GObj* HSD_GObj_804D7814;
+void HSD_GObj_80391304(HSD_GObjLibInitDataType*);
 
 static inline void* HSD_GObjGetUserData(HSD_GObj* gobj)
 {
