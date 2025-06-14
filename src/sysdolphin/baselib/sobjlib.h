@@ -6,4 +6,6 @@
 extern GObjFuncs HSD_SObjLib_8040C3A4;
 extern u8 HSD_SObjLib_804D7960;
 
+void HSD_SObjLib_803A44A4(void);
+
 #endif
