@@ -8,6 +8,7 @@
 
 #include "baselib/forward.h"
 
+#include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
 #include "gm/gm_1A4C.h"
 
@@ -20,17 +21,5 @@
 /* 1A396C */ void fn_801A396C(int idx);
 /* 1A3A74 */ UNK_RET gm_801A3A74(UNK_PARAMS);
 /* 1A3E88 */ UNK_RET gm_801A3E88(UNK_PARAMS);
-/* 1A427C */ void* gm_801A427C(MinorScene*);
-/* 1A4284 */ void* gm_801A4284(MinorScene*);
-/* 1A428C */ void gm_SetSceneMinor(u8 arg0);
-/* 1A42A0 */ void gm_SetScenePendingMinor(int pending_minor);
-/* 1A42D4 */ UNK_RET gm_801A42D4(UNK_PARAMS);
-/* 1A42F8 */ void gm_801A42F8(int);
-/* 1A4310 */ u8 gm_801A4310(void);
-/* 1A4320 */ u8 gm_801A4320(void);
-/* 1A4330 */ void gm_801A4330(u8 (*)());
-/* 1A4340 */ bool gm_801A4340(u8);
-/* 1A43A0 */ u8 gm_801A43A0(u8 arg0);
-/* 1A4510 */ void gm_801A4510(void);
 
 #endif
