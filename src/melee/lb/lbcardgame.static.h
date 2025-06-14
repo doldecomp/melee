@@ -16,8 +16,7 @@ STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
 
 struct lb_804329F0_t {
     /* 0x00 */ char pad_0[8];
-    /* 0x08 */ s32 unk_8; /* inferred */
-    /* 0x0C */ s32 unk_C; /* inferred */
+    /* 0x08 */ u64 unk_8;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ char pad_14[4];
 }; /* size = 0x18 */
