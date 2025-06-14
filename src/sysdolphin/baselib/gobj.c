@@ -9,6 +9,41 @@
 #include "lobj.h"
 #include "object.h"
 
+u8 HSD_GObj_804D784B;
+s8 HSD_GObj_804D784A;
+s8 HSD_GObj_804D7849;
+s8 HSD_GObj_804D7848;
+HSD_GObjProc** HSD_GObj_804D7844;
+HSD_GObjProc** HSD_GObj_804D7840;
+s32 HSD_GObj_804D783C;
+HSD_GObjProc* HSD_GObj_804D7838;
+s32 HSD_GObj_804D7834;
+HSD_GObjProc* HSD_GObj_804D7830;
+HSD_GObjList* HSD_GObj_Entities;
+HSD_GObj** plinklow_gobjs;
+HSD_GObj** HSD_GObj_804D7824;
+HSD_GObj** HSD_GObj_804D7820;
+HSD_GObj* HSD_GObj_804D781C;
+HSD_GObj* HSD_GObj_804D7818;
+HSD_GObj* HSD_GObj_804D7814;
+GObjFunc* HSD_GObj_804D7810;
+
+int HSD_GObj_804085F0[] = { 1, 4, 2, 0 };
+
+
+static GObjFunc HSD_GObj_80408600[] = {
+    HSD_GObj_80391120,
+    (GObjFunc) HSD_LObjRemoveAll,
+    (GObjFunc) HSD_JObjRemoveAll,
+    HSD_GObj_803911C0,
+};
+
+static GObjFuncs HSD_GObj_80408610  = {
+    0,
+    4,
+    HSD_GObj_80408600,
+};
+
 inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {
     while (proc != NULL) {
@@ -105,8 +140,6 @@ void HSD_GObj_80390CFC(void)
         }
     }
 }
-
-extern s32 HSD_GObj_804085F0[];
 
 // GObj_GetFlagFromArray
 u32 HSD_GObj_80390EB8(s32 i)
@@ -209,40 +242,30 @@ void HSD_GObj_803911C0(HSD_Obj* obj)
     HSD_GObj_80391120(obj);
 }
 
-struct _GObjFuncs {
-    struct _GObjFuncs* next;
-    u8 size;
-    void (**funcs)(void);
-};
-
-void HSD_GObj_80391260(struct _GObjUnkStruct* arg0)
+void HSD_GObj_80391260(HSD_GObjLibInitDataType* arg0)
 {
     u8 count = HSD_GObj_803912A8(arg0, &HSD_GObj_80408610);
-    *HSD_GObj_804D784B = count++;
+    HSD_GObj_804D784B = count++;
     HSD_GObj_804D784A = count++;
     HSD_GObj_804D7849 = count++;
     HSD_GObj_804D7848 = count;
 }
 
-struct _GObjUnkStruct {
-    u32 _;
-    GObjFuncs foo;
-};
-
-u8 HSD_GObj_803912A8(GObjUnkStruct* arg0, GObjFuncs* foo)
+u8 HSD_GObj_803912A8(HSD_GObjLibInitDataType* arg0, GObjFuncs* arg1)
 {
-    GObjFuncs* cur = &arg0->foo;
+    GObjFuncs* cur;
+    GObjFuncs** pcur = &arg0->funcs;
     u8 var_r3 = 0;
-    while (cur->next != NULL) {
-        cur = cur->next;
+    while ((cur = *pcur) != NULL) {
+        pcur = &cur->next;
         var_r3 += cur->size;
     }
-    cur->next = foo;
-    cur->next->next = NULL;
+    *pcur = arg1;
+    (*pcur)->next = NULL;
     return var_r3;
 }
 
-void HSD_GObj_803912E0(GObjFuncs* arg0)
-{
-    *arg0 = HSD_GObj_80408620;
-}
+struct _unk_gobj_struct HSD_GObj_804CE3E4;
+HSD_ObjAllocData gobjproc_alloc_data;
+HSD_ObjAllocData gobj_alloc_data;
+HSD_GObjLibInitDataType HSD_GObjLibInitData;

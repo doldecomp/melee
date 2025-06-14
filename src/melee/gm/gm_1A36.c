@@ -714,7 +714,7 @@ void gm_801AC6D8(void)
         HSD_GObj* gobj = GObj_Create(17, 19, 0);
         HSD_CObj* cobj = HSD_CObjLoadDesc(gm_804D6840->cameras->desc);
         gm_804D6830 = cobj;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], gm_804D6830);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, gm_804D6830);
         GObj_SetupGXLinkMax(gobj, fn_801AA854, 5);
         gobj->gxlink_prios = 0x189;
         HSD_CObjAddAnim(cobj, gm_804D6840->cameras->anims[0]);
@@ -725,7 +725,7 @@ void gm_801AC6D8(void)
         HSD_GObj* gobj = GObj_Create(19, 20, 0);
         HSD_CObj* cobj = HSD_CObjLoadDesc(&gm_803DD0F0);
         gm_804D6834 = cobj;
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], cobj);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
         GObj_SetupGXLinkMax(gobj, fn_801AAA28, 8);
         gobj->gxlink_prios = 1LL << gx_link;
     }

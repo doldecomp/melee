@@ -3,8 +3,6 @@
 #include "debug.h"
 #include "gobj.h"
 
-extern void (**HSD_GObj_804D7810)(void*);
-
 HSD_GObj* HSD_GObjObject_80390A3C(u16 id, u8 arg1)
 {
     HSD_GObj* cur;

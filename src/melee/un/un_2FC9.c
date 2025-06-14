@@ -895,7 +895,7 @@ void DevText_CreateCObj(int classifier, int p_link, int gobj_priority,
     if (gobj) {
         HSD_CObj* cobj = HSD_CObjLoadDesc(&devtext_CObjDesc);
         if (cobj) {
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], cobj);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
             GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, gx_priority);
             gobj->gxlink_prios = 1LL << gx_link;
         } else {
