@@ -90,8 +90,9 @@ jobs:
             run_ninja
 
             build/tools/objdiff-cli report changes -o "$changes" "$expected" "$current"
+            set +e
             python tools/diff_changes.py "$changes"
-            exit 0
+            set -e
           ;;
           *) exit 1 ;;
         esac

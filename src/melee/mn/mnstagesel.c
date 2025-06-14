@@ -415,6 +415,7 @@ void fn_8025A974(HSD_GObj* gobj, u32 unused)
     HSD_FogSet(gobj->hsd_obj);
 }
 
+// OnLoad
 /// #mnStageSel_8025A998
 
 static inline HSD_PadStatus* get_pad(u8 i)
@@ -422,6 +423,7 @@ static inline HSD_PadStatus* get_pad(u8 i)
     return &HSD_PadCopyStatus[i];
 }
 
+// OnFrame
 void mnStageSel_8025B850(void)
 {
     if (mnStageSel_804D6C90->x3 >= 0) {

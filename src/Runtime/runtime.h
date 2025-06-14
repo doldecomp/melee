@@ -15,7 +15,7 @@ ASM void __cvt_sll_dbl(void);
 ASM void __cvt_ull_dbl(void);
 ASM void __cvt_sll_flt(void);
 ASM void __cvt_ull_flt(void);
-ASM void __cvt_dbl_usll(void);
+ASM u64 __cvt_dbl_usll(double);
 ASM void __cvt_dbl_ull(void);
 ASM unsigned long __cvt_fp2unsigned(register double d);
 

@@ -535,7 +535,7 @@ L_802BA6B4:
 #endif // clang-format on
 }
 
-ASM void __cvt_dbl_usll(void)
+ASM u64 __cvt_dbl_usll(double x)
 {
 #ifdef __MWERKS__ // clang-format off
     nofralloc

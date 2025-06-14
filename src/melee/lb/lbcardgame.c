@@ -2,9 +2,8 @@
 
 #include "lbcardgame.static.h"
 
-void lb_80019880(s32 arg0, s32 arg1)
+void lb_80019880(u64 arg0)
 {
-    lb_804329F0[2].unk_C = arg1;
     lb_804329F0[2].unk_8 = arg0;
 }
 
