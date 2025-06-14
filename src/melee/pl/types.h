@@ -54,14 +54,23 @@ struct StaleMoveTable {
     /* +5F0 */ u8 x5F0[0x674 - 0x5F0];
     /* +674 */ int x674[39];
     /* +710 */ int x710[39];
-    /* +7AC */ u8 x7AC[0xC60 - 0x7AC];
+    /* +7AC */ int x7AC[39];
+    /* +848 */ int x848[30];
+    /* +8E4 */ u8 x8C0[0xC60 - 0x8C0];
     /* +C60 */ float xC60;
     /* +C64 */ float xC64;
     /* +C68 */ int xC68;
     /* +C6C */ float xC6C;
-    /* +C70 */ u8 xC70[0xC90 - 0xC70];
+    /* +C70 */ float xC70;
+    /* +C74 */ float xC74;
+    /* +C78 */ float xC78;
+    /* +C7C */ float xC7C;
+    /* +C80 */ float xC80;
+    /* +C84 */ float xC84;
+    /* +C88 */ float xC88;
+    /* +C8C */ float xC8C;
     /* +C90 */ unsigned int xC90;
-    /* +C94 */ u8 xC94[0xC98 - 0xC94];
+    /* +C94 */ int xC94;
     /* +C98 */ float xC98;
     /* +C9C */ float xC9C;
     /* +CA0 */ float xCA0;
@@ -70,7 +79,40 @@ struct StaleMoveTable {
     /* +CAC */ int xCAC;
     /* +CB0 */ int xCB0;
     /* +CB4 */ int xCB4;
-    /* +CB8 */ u8 xCB8[0xCD8 - 0xCB8];
+    /* +CB8 */ int xCB8;
+    /* +CBC */ int xCBC;
+    /* +CC0 */ int xCC0;
+    /* +CC4 */ int xCC4;
+    /* +CC8 */ float xCC8;
+    /* +CCC */ int xCCC;
+    /* +CD0 */ union {
+        u8 value;
+        struct {
+            u8 bit0 : 1;
+            u8 bit1 : 1;
+            u8 bit2 : 1;
+            u8 bit3 : 1;
+            u8 bit4 : 1;
+            u8 bit5 : 1;
+            u8 bit6 : 1;
+            u8 bit7 : 1;
+        };
+    } xCD0;
+    /* +CD1 */ union {
+        u8 value;
+        struct {
+            u8 bit0 : 1;
+            u8 bit1 : 1;
+            u8 bit2 : 1;
+            u8 bit3 : 1;
+            u8 bit4 : 1;
+            u8 bit5 : 1;
+            u8 bit6 : 1;
+            u8 bit7 : 1;
+        };
+    } xCD1;
+    /* +CD2 */ u8 xCD2[2]; // padding?
+    /* +CD4 */ short xCD4;
     /* +CD8 */ int xCD8;
     /* +CDC */ float xCDC;
     /* +CE0 */ float xCE0;
@@ -125,9 +167,19 @@ struct pl_StaleMoveTableExt_t {
     /* +D90 */ int xD90;
     /* +D94 */ float xD94;
     /* +D98 */ int xD98;
-    /* +D9C */ u8 xD9C[0xDA8 - 0xD9C];
-    /* +DA8 */ UNK_T xDA8;
-    /* +DAC */ u8 xDAC[0xDD0 - 0xDAC];
+    /* +D9C */ int xD9C;
+    /* +DA0 */ int xDA0;
+    /* +DA4 */ int xDA4;
+    /* +DA8 */ int xDA8;
+    /* +DAC */ int xDAC;
+    /* +DB0 */ u8 xDB0[0xDB4 - 0xDB0];
+    /* +DB4 */ int xDB4;
+    /* +DB8 */ int xDB8;
+    /* +DBC */ int xDBC;
+    /* +DC0 */ float xDC0;
+    /* +DC4 */ int xDC4;
+    /* +DC8 */ int xDC8;
+    /* +DCC */ int xDCC;
     /* +DD0 */ union {
         u8 xDD0_value;
         struct {

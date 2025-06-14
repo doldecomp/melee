@@ -3,7 +3,8 @@
 
 #include <platform.h>
 
-void plAttack_80037590(void);
-u16 plAttack_80037B08(void);
+/* 037590 */ void plAttack_80037590(void);
+/* 03759C */ void plAttack_8003759C(int);
+/* 037B08 */ u16 plAttack_80037B08(void);
 
 #endif
