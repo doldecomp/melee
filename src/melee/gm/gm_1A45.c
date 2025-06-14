@@ -16,6 +16,17 @@
 
 #include "gm_1A45.static.h"
 
+static u64 gm_803DA888[8] = {
+    0,
+    0x82FFFA,
+    0,
+    0x8EFFFA,
+    0x800FFA,
+    0x808FFA,
+    0x800FFA,
+    0,
+};
+
 bool gm_801A45E8(int bit)
 {
     return gm_80479D58.unk_10 & (1ULL << bit);
@@ -65,7 +76,20 @@ bool fn_801A47E4(void)
     return false;
 }
 
-/// #gm_801A48A4
+u64 gm_801A48A4(u8 arg0)
+{
+    u32 i;
+    u64 result = 0;
+
+    for (i = 0; i < 8; i++) {
+        if (arg0 & 1) {
+            result |= gm_803DA888[i];
+        }
+        arg0 >>= 1;
+    }
+
+    return result;
+}
 
 /// #gm_801A4970
 

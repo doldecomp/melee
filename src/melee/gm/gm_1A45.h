@@ -12,7 +12,7 @@
 /* 1A46B8 */ bool gm_801A46B8(int bit);
 /* 1A46F4 */ bool fn_801A46F4(void);
 /* 1A47E4 */ bool fn_801A47E4(void);
-/* 1A48A4 */ UNK_RET gm_801A48A4(UNK_PARAMS);
+/* 1A48A4 */ u64 gm_801A48A4(u8);
 /* 1A4970 */ UNK_RET gm_801A4970(UNK_PARAMS);
 /* 1A4B08 */ void gm_801A4B08(UNK_T arg0, UNK_T arg1);
 /* 1A4B1C */ UNK_RET gm_801A4B1C(UNK_PARAMS);
