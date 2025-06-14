@@ -42,20 +42,6 @@
 #include <baselib/sobjlib.h>
 #include <baselib/video.h>
 
-MinorSceneHandler* gm_801A4CE0(u8 id)
-{
-    MinorSceneHandler* cur;
-    for (cur = gm_801A50A0(); cur->class_id != 0x2D; cur++) {
-        if (cur->class_id == id) {
-            return cur;
-        }
-    }
-    return NULL;
-}
-
-
-/// #gm_801A4D34
-
 MinorSceneHandler* gm_801A50A0(void)
 {
     return gm_803DA920;

@@ -5,7 +5,7 @@
 #include <placeholder.h>
 
 /* 019880 */ void lb_80019880(u64);
-/* 019894 */ UNK_RET lb_80019894(UNK_PARAMS);
+/* 019894 */ u8 lb_80019894(void);
 /* 0198E0 */ UNK_RET lb_800198E0(UNK_PARAMS);
 /* 019900 */ UNK_RET lb_80019900(UNK_PARAMS);
 /* 019A30 */ s32 lb_80019A30(s32 arg0);
