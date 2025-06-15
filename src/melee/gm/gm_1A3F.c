@@ -6,14 +6,18 @@
 #include "gmmain_lib.h"
 
 #include "db/db.h"
-#include <dolphin/vi.h>
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
+#include "lb/lbheap.h"
 #include "lb/lbmthp.h"
+#include "lb/lbsnap.h"
 #include "lb/types.h"
+#include "un/un_2FC9.h"
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
+#include <baselib/sislib.h>
 #include <baselib/video.h>
+#include <dolphin/vi.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcardgame.h>

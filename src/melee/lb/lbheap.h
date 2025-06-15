@@ -11,6 +11,7 @@
 /* 015BD0 */ HSD_Archive* lbHeap_80015BD0(int arg0, int arg1);
 /* 015CA8 */ void lbHeap_80015CA8(int, void*);
 /* 015D6C */ int lbHeap_80015D6C(int heap0, UNK_T cb, int heap1);
+/* 015DF8 */ u32 lbHeap_80015DF8(void);
 /* 015F3C */ void lbHeap_80015F3C(void);
 
 #endif

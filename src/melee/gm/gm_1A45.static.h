@@ -32,6 +32,6 @@ STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
 /* 479D58 */ static struct gm_80479D58_t gm_80479D58;
 
 /* 4D672C */ HSD_GObj* gm_804D672C;
-/* 4D6728 */ int gm_804D6728;
+/* 4D6728 */ UNK_T gm_804D6728;
 /* 4D6724 */ void (*gm_804D6724)(void);
 /* 4D6720 */ struct MinorSceneInfo* gm_804D6720;

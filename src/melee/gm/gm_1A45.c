@@ -1,19 +1,27 @@
 #include "gm_1A45.h"
 
+#include "gm_1601.h"
 #include "gm_1A36.h"
 
 #include "db/db.h"
 #include "lb/lb_00F9.h"
+#include "lb/lb_0192.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbdvd.h"
+#include "lb/lbheap.h"
 #include "un/un_2FC9.h"
 
 #include <baselib/controller.h>
-#include <baselib/sobjlib.h>
-#include <baselib/particle.h>
 #include <baselib/gobjproc.h>
+#include <baselib/initialize.h>
+#include <baselib/perf.h>
+#include <baselib/leak.h>
+#include <baselib/particle.h>
+#include <baselib/sobjlib.h>
+
+#include <dolphin/os/OSThread.h>
 
 #include "gm_1A45.static.h"
 
@@ -100,12 +108,11 @@ u64 gm_801A48A4(u8 arg0)
 void gm_801A4970(int (**arg0)(void))
 {
     HSD_PadStatus* temp_r3;
-    int (*temp_r12)();
-    int (*temp_r12_2)();
     s8 var_r26;
     s8* temp_r4;
     u64 temp_ret;
     int i;
+    PAD_STACK(8);
 
     var_r26 = 0;
     for (i = 0; i < 4; i++) {
@@ -121,9 +128,9 @@ void gm_801A4970(int (**arg0)(void))
             db_PrintEntityCounts();
             db_PrintThreadInfo();
             HSD_Leak_80387DF8(0);
-            if (gm_804D6728 != 0U) {
+            if (gm_804D6728 != NULL) {
                 gm_801653C8(gm_804D6728);
-                gm_804D6728 = 0;
+                gm_804D6728 = NULL;
             } else {
                 gm_804D6728 = gm_80165388(0x19, 0x3F, 0, 0xFE);
                 if (gm_804D6724 != NULL) {
@@ -133,7 +140,6 @@ void gm_801A4970(int (**arg0)(void))
         }
     }
 
-    temp_r12 = arg0[0];
     if (arg0[0] != NULL && arg0[0]() != 0) {
         if (gm_801A45E8(0)) {
             gm_80479D58.unk_10 &= 0xFFFFFFFE;
@@ -232,7 +238,7 @@ void gm_801A4BD4(void)
     if (gm_804D672C != NULL) {
         HSD_GObjProc_8038FD54(gm_804D672C, fn_801A4BD0, 0);
     }
-    gm_804D6728 = 0;
+    gm_804D6728 = NULL;
     gm_804D6724 = NULL;
     gm_801A3E88();
     lbAudioAx_8002835C();
