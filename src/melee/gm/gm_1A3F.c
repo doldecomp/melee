@@ -6,20 +6,55 @@
 #include "gmmain_lib.h"
 
 #include "db/db.h"
-#include <dolphin/vi.h>
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
+#include "lb/lbheap.h"
 #include "lb/lbmthp.h"
+#include "lb/lbsnap.h"
+#include "lb/types.h"
+#include "un/un_2FC9.h"
 #include <baselib/controller.h>
 #include <baselib/devcom.h>
+#include <baselib/sislib.h>
 #include <baselib/video.h>
+#include <dolphin/vi.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcardgame.h>
 
 static GameState gm_80479D30;
 
-/// #gm_801A3F48
+void gm_801A3F48(MinorScene* scene)
+{
+    PreloadCacheScene* temp_r31;
+
+    lbDvd_80018CF4(scene->preload);
+    switch (scene->info.class_id) {
+    case 43:
+    case 5:
+        HSD_SisLib_803A6048(0xC000);
+        break;
+    case 8:
+        HSD_SisLib_803A6048(0x2400);
+        break;
+    default:
+        HSD_SisLib_803A6048(0x4800);
+        break;
+    }
+    temp_r31 = lbDvd_8001822C();
+    if (lbHeap_80015BB8(2) == 0) {
+        temp_r31->is_heap_persistent[0] = 1;
+    }
+    if (lbHeap_80015BB8(3) == 0) {
+        temp_r31->is_heap_persistent[1] = 1;
+    }
+    lbDvd_80018254();
+    lb_8001C5A4();
+    lb_8001D1F4();
+    lbSnap_8001E27C();
+    un_803127D4();
+    un_8031C8B8();
+}
 
 inline u8 matchMinor(MinorScene* scenes)
 {
@@ -170,7 +205,7 @@ void gm_801A42F8(int arg0)
 
 u8 gm_801A4310(void)
 {
-    return ((u8*) &gm_80479D30)[0];
+    return gm_80479D30.nums.curr_major;
 }
 
 u8 gm_801A4320(void)

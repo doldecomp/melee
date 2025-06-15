@@ -5,7 +5,6 @@
 #include <melee/gm/forward.h>
 #include <baselib/forward.h>
 
-/* 1A4CE0 */ MinorSceneHandler* gm_801A4CE0(u8 id);
 /* 1A50A0 */ MinorSceneHandler* gm_801A50A0(void);
 /* 1A50AC */ MajorScene* gm_801A50AC(void);
 /* 1A50B8 */ UNK_RET gm_801A50B8(UNK_PARAMS);
