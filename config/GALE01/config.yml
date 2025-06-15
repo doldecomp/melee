@@ -4,3 +4,16 @@ symbols: config/GALE01/symbols.txt
 splits: config/GALE01/splits.txt
 mw_comment_version: 8
 quick_analysis: true
+
+block_relocations:
+# GXColors in dbitem
+- source: 0x803EAE08
+- source: 0x804DBCF0
+# Bitmasks in psdisptev
+- source: .text:0x803A3A60
+- source: .text:0x803A3A68
+- source: .text:0x803A3AE8
+- source: .text:0x803A3AF8
+# Raw texture array that creates spurious relocs
+- source: .data:0x8040CD40
+  end:    .data:0x80430B40
