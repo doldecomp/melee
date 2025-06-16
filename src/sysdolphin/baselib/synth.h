@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-/* 388330 */ UNK_RET HSD_AudioMalloc(UNK_PARAMS);
+/* 388330 */ void* HSD_AudioMalloc(size_t);
 /* 38838C */ UNK_RET HSD_AudioFree(UNK_PARAMS);
 /* 3883B4 */ UNK_RET HSD_SynthSFXSampleLoadCallback(UNK_PARAMS);
 /* 3887DC */ UNK_RET HSD_SynthSFXHeaderLoadCallback(UNK_PARAMS);

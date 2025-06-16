@@ -95,6 +95,7 @@ typedef struct OldDVDFileInfo {
 /// This means that calls to lbFile_8001634C write 4 bytes past where it should
 /// on the stack.
 ///
+/// Get file size:
 size_t lbFile_8001634C(s32 fileno)
 {
     OldDVDFileInfo info;
@@ -124,13 +125,15 @@ s32 lbFile_800163D8(const char* basename)
     return lbFile_8001634C(entry_num);
 }
 
-void lbFile_800164A4(s32 file, u32 src, u32* dest, s32 size,
+#define ROUND_UP_32(x) (((x) + 31) & ~31)
+
+void lbFile_800164A4(s32 file, u32 dest, size_t* size, s32 pri,
                      HSD_DevComCallback callback, void* args)
 {
-    s32 var_r0;
-    *dest = lbFile_8001634C(file);
-    var_r0 = (src >= 0x80000000) ? 0x21 : 0x23;
-    HSD_DevComRequest(file, 0, src, (*dest + 0x1F) & 0xFFFFFFE0, var_r0, size,
+    int type;
+    *size = lbFile_8001634C(file);
+    type = (dest >= 0x80000000) ? 0x21 : 0x23;
+    HSD_DevComRequest(file, 0, dest, ROUND_UP_32(*size), type, pri,
                       callback, args);
 }
 
@@ -160,7 +163,7 @@ void lbFile_8001668C(const char* basename, u32* src, u32* dest)
 inline void qwer(s32 a, const char* basename, u32* src, u32* dest)
 {
     *dest = lbFile_800163D8(basename);
-    *src = (u32) lbHeap_80015BD0(a, (*dest + 0x1F) & 0xFFFFFFE0);
+    *src = (u32) lbHeap_80015BD0(a, ROUND_UP_32(*dest));
     lbFile_80016580(basename, *src, dest, lbFile_8001615C, 0);
 
     do {
