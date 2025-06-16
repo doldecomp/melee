@@ -124,4 +124,12 @@ void gm_801A3A74(void)
 
 /// #gm_801A3E88
 
-/// #gm_801A3EF4
+void gm_801A3EF4(void)
+{
+    MajorScene* scene;
+    for (scene = gm_801A50AC(); scene->idx != 0x2D; scene++) {
+        if (scene->Init != NULL) {
+            scene->Init();
+        }
+    }
+}
