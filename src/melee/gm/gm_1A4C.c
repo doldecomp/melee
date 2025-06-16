@@ -52,13 +52,13 @@ MajorScene* gm_801A50AC(void)
     return &gm_803DACA4;
 }
 
-/// #gm_801A50B8
+/// #gm_801A50B8_OnLoad
 
-/// #gm_801A5130
+/// #gm_801A5130_OnLoad
 
-/// #gm_801A51A8
+/// #gm_801A51A8_OnLoad
 
-/// #gm_801A5220
+/// #gm_801A5220_OnLoad
 
 s8* gm_801A5244(void)
 {
@@ -76,13 +76,13 @@ UNK_T gm_801A5250(void)
 
 /// #gm_801A5360
 
-/// #gm_801A5598
+/// #gm_801A5598_OnInit
 
 /// #gm_801A55C4
 
-/// #gm_801A55EC
+/// #gm_801A55EC_OnLoad
 
-void gm_801A5614(void) {}
+void gm_801A5614_OnUnload(void) {}
 
 /// #gm_801A5618
 

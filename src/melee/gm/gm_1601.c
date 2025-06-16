@@ -1113,7 +1113,7 @@ u8 gm_801737D8(void)
     return M2C_FIELD(&lbl_8046DBD8, u8*, 6);
 }
 
-/// #gm_801737E8
+/// #gm_801737E8_OnLoad
 
 /// #fn_80173834
 
