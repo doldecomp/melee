@@ -11,6 +11,8 @@
 #include "tev.h"
 #include "wobj.h"
 
+#include <melee/lb/lbarchive.h>
+
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
@@ -1943,4 +1945,14 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
         }
     }
     // clang-format on
+}
+
+HSD_Archive* HSD_SisLib_803A945C(char* arg0)
+{
+    return lbArchive_LoadArchive(arg0);
+}
+
+void HSD_SisLib_803A947C(HSD_Archive* archive)
+{
+    lbArchive_80016EFC(archive);
 }
