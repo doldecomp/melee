@@ -221,9 +221,9 @@ s32 mn_8022EB78(s32 num)
 
 /// #mn_8022DB10
 
-/// #mn_8022DD38
+/// #mn_8022DD38_OnFrame
 
-/// #mn_8022DDA8
+/// #mn_8022DDA8_OnEnter
 
 /// #mn_8022E950
 

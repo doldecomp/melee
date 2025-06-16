@@ -468,8 +468,8 @@ void mnCharSel_80264070(void)
 
 /// #mnCharSel_802640A0
 
-/// #mnCharSel_8026688C
+/// #mnCharSel_8026688C_OnEnter
 
-/// #mnCharSel_802669F4
+/// #mnCharSel_802669F4_OnFrame
 
-/// #mnCharSel_80266D70
+/// #mnCharSel_80266D70_OnLeave

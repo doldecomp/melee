@@ -167,6 +167,6 @@ void tyFigupon_80316BF8(void)
 
 /// #un_80317A60
 
-/// #un_80317D80
+/// #un_80317D80_OnEnter
 
 /// #un_803181BC
