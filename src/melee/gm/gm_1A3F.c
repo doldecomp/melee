@@ -144,7 +144,7 @@ void gm_801A4014(MajorScene* scene)
             OSResetSystem(1, 0, 0);
         }
         lbMthp_8001F800();
-        while (HSD_DevComIsBusy(1) != 0)
+        while (HSD_DevComIsBusy(1))
             ;
         gmMainLib_8015FBA4();
         gm_801A50AC();
