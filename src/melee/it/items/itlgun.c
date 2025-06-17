@@ -56,6 +56,7 @@ void it_8028E774(Item_GObj* gobj, Vec3* arg1)
     arg1->z = da->pos.z;
 }
 
+// Decrease ammo and fire/spawn lgunray
 void it_8028E79C(Item_GObj* gobj, Vec3* pos, f32 facing_dir)
 {
     Item* ip = GET_ITEM(gobj);

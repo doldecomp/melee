@@ -1331,7 +1331,8 @@ void ftCommon_8007EE0C(Fighter* fp, s32 arg1)
 
 void ftCommon_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
 {
-    if (fp->item_gobj != NULL && fp->item_gobj->classifier == 6 &&
+    if (fp->item_gobj != NULL &&
+        fp->item_gobj->classifier == HSD_GOBJ_CLASS_ITEM &&
         itGetKind(fp->item_gobj) == It_Kind_Sword)
     {
         float multiplier = 1.0 / 256;
@@ -1342,7 +1343,8 @@ void ftCommon_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
 
 void ftCommon_8007EF5C(Fighter* fp, s32 arg1)
 {
-    if (fp->item_gobj != NULL && fp->item_gobj->classifier == 6 &&
+    if (fp->item_gobj != NULL &&
+        fp->item_gobj->classifier == HSD_GOBJ_CLASS_ITEM &&
         itGetKind(fp->item_gobj) == It_Kind_Sword)
     {
         it_80285024(fp->item_gobj, arg1);

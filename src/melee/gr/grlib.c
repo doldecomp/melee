@@ -267,7 +267,7 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
         return NULL;
     }
     tmp = idx1;
-    gobj = GObj_Create(3, 18, tmp);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_STAGE, 18, tmp);
     jobj = HSD_JObjLoadJoint(stage_info.quake_model_set->joint);
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);

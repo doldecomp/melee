@@ -101,7 +101,7 @@ Effect* efLib_8005BE88(int arg0, HSD_GObj* parent_gobj)
                 p_link = 12;
             }
             ep->parent_gobj = parent_gobj;
-            ret_gobj = GObj_Create(8, p_link, 0);
+            ret_gobj = GObj_Create(HSD_GOBJ_CLASS_EFFECT, p_link, 0);
         }
         {
             HSD_GObj* gobj = ret_gobj;

@@ -1,16 +1,7 @@
-#include "mnstagesel.h"
-
 #include "mnstagesel.static.h"
 
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/types.h>
-#include <melee/mn/mn_2295.h>
+#include "mnstagesel.h"
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -22,6 +13,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A36.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/types.h>
+#include <melee/mn/mn_2295.h>
 
 struct stagelistinfo {
     HSD_JObj* x0;
@@ -105,7 +105,8 @@ struct StageSelUserData {
 #define NUM_STAGES 29
 
 // Random stage selection
-// Returns an internal stage ID - 2 (since first 2 internal stage IDs are invalid)
+// Returns an internal stage ID - 2 (since first 2 internal stage IDs are
+// invalid)
 int mnStageSel_802599EC(void)
 {
     int var_r0;
@@ -114,7 +115,9 @@ int mnStageSel_802599EC(void)
     int i;
 
     for (i = 0; i < NUM_STAGES; i++) {
-        if (mnStageSel_803F06D0[i].x4 >= 0 && gm_80164330(mnStageSel_803F06D0[i].xA)) {
+        if (mnStageSel_803F06D0[i].x4 >= 0 &&
+            gm_80164330(mnStageSel_803F06D0[i].xA))
+        {
             break;
         }
     }
@@ -130,7 +133,9 @@ int mnStageSel_802599EC(void)
             }
         }
         for (i = 0; i < NUM_STAGES; i++) {
-            if (mnStageSel_803F06D0[i].x4 == 0 && gm_80164330(mnStageSel_803F06D0[i].xA)) {
+            if (mnStageSel_803F06D0[i].x4 == 0 &&
+                gm_80164330(mnStageSel_803F06D0[i].xA))
+            {
                 var_r29 = false;
             }
         }
@@ -185,7 +190,9 @@ void mnStageSel_80259C28(void)
         if (!(mnStageSel_804D6CA0 & 0x1100)) {
             return;
         }
-        if (mnStageSel_804D6CAE < 0x1E && mnStageSel_803F06D0[mnStageSel_804D6CAE].x8 >= 2) {
+        if (mnStageSel_804D6CAE < 0x1E &&
+            mnStageSel_803F06D0[mnStageSel_804D6CAE].x8 >= 2)
+        {
             goto skip_randomize;
         }
         lbAudioAx_80024030(3);
@@ -194,12 +201,13 @@ void mnStageSel_80259C28(void)
     mnStageSel_804D6CAE = mnStageSel_802599EC();
 skip_randomize:
 
-    gobj = GObj_Create(4, 5, 0x80);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->xB0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x87);
     HSD_GObjProc_8038FD54(gobj, mn_8022EAE0, 0);
-    HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->xB4, mnStageSel_804D6C98->xB8, mnStageSel_804D6C98->xBC);
+    HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->xB4,
+                       mnStageSel_804D6C98->xB8, mnStageSel_804D6C98->xBC);
     HSD_JObjReqAnimAll(gobj->hsd_obj, 0.0F);
     HSD_JObjAnimAll(gobj->hsd_obj);
     mnStageSel_804D6CAF = 1;
@@ -218,7 +226,8 @@ void fn_80259D84(HSD_GObj* gobj)
             mnStageSel_80259C28();
         }
         if (++temp_r31->x4 >= 9U) {
-            HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
             temp_r31->x2 = 1;
         }
         break;
@@ -227,7 +236,9 @@ void fn_80259D84(HSD_GObj* gobj)
             mnStageSel_80259C28();
         }
         if (temp_r31->x0 != mnStageSel_804D6CAE) {
-            if (temp_r31->x0 < 0x1E && mnStageSel_803F06D0[temp_r31->x0].x8 >= 2) {
+            if (temp_r31->x0 < 0x1E &&
+                mnStageSel_803F06D0[temp_r31->x0].x8 >= 2)
+            {
                 HSD_JObjReqAnimAllByFlags(jobj, 1, 10.0F);
             }
             lbAudioAx_80024030(2);
@@ -253,13 +264,13 @@ void mnStageSel_80259ED8(int id)
     struct StageSelUserData* temp_r3_2;
     u8 _[4];
 
-    gobj = GObj_Create(4, 5, 0x80);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 5, 0x80);
     jobj = HSD_JObjLoadJoint(mnStageSel_804D6C98->x30);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x84);
     HSD_GObjProc_8038FD54(gobj, mn_8022EAE0, 1);
-    HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x34, mnStageSel_804D6C98->x38,
-                             mnStageSel_804D6C98->x3C);
+    HSD_JObjAddAnimAll(jobj, mnStageSel_804D6C98->x34,
+                       mnStageSel_804D6C98->x38, mnStageSel_804D6C98->x3C);
     jobj = GET_JOBJ(gobj);
     temp_r3_2 = HSD_MemAlloc(sizeof(struct StageSelUserData));
     GObj_InitUserData(gobj, 4, HSD_Free, temp_r3_2);
@@ -273,7 +284,8 @@ void mnStageSel_80259ED8(int id)
             HSD_JObjReqAnimAll(jobj, 0.0F);
             HSD_JObjReqAnimAllByFlags(jobj, 0x10, temp_r29_2);
             HSD_JObjAnimAll(jobj);
-            HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            HSD_ForeachAnim(jobj, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
         }
     }
 }
@@ -299,7 +311,8 @@ void fn_8025A090(HSD_GObj* gobj)
         if ((s32) var_r3 < 0x1D) {
             HSD_JObjReqAnimAll(jobj, 50.0F * mnStageSel_803F06D0[var_r3].x9);
             HSD_JObjAnimAll(jobj);
-            HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
             HSD_JObjSetTranslateX(jobj, 0.0F);
         } else {
             HSD_JObjSetTranslateX(jobj, 100.0F);
@@ -308,10 +321,12 @@ void fn_8025A090(HSD_GObj* gobj)
     if (temp_r30->x4 < 0x5A) {
         temp_r30->x4++;
         if (temp_r30->x4 == 0x14) {
-            HSD_JObjReqAnimAll(jobj, 50.0F * mnStageSel_803F06D0[temp_r30->x0].x9);
+            HSD_JObjReqAnimAll(jobj,
+                               50.0F * mnStageSel_803F06D0[temp_r30->x0].x9);
         }
         if (temp_r30->x4 == 0x45) {
-            HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
         }
     } else if (mnStageSel_804D6CAF) {
         mnStageSel_804D6CAF = 2;
@@ -358,7 +373,8 @@ void fn_8025A310(HSD_GObj* gobj)
             temp_f1 = mnStageSel_803F06D0[i].xC;
             if (temp_f2 - temp_f1 < sp1C.x && temp_f2 + temp_f1 > sp1C.x) {
                 if (sp10.y - mnStageSel_803F06D0[i].x10 < sp1C.y &&
-                    sp10.y + mnStageSel_803F06D0[i].x10 > sp1C.y) {
+                    sp10.y + mnStageSel_803F06D0[i].x10 > sp1C.y)
+                {
                     mnStageSel_804D6CAE = i;
                     return;
                 }
@@ -377,7 +393,8 @@ void fn_8025A560(HSD_GObj* gobj)
     temp_r30 = HSD_GObjGetUserData(gobj);
 
     if (mnStageSel_804D6CAE < 0x16 && (mnStageSel_804D6CAE & 1) &&
-            mnStageSel_803F06D0[mnStageSel_804D6CAE].x8 == 0) {
+        mnStageSel_803F06D0[mnStageSel_804D6CAE].x8 == 0)
+    {
         HSD_JObjSetTranslateX(jobj, 100.0F);
     } else if (mnStageSel_804D6CAE < 0x1E) {
         lb_8000B1CC(mnStageSel_803F06D0[mnStageSel_804D6CAE].x0, NULL, &sp10);
@@ -452,10 +469,9 @@ void mnStageSel_8025B850_OnFrame(void)
             for (i = 0; i < 4; i++) {
                 mnStageSel_804D6CAC = get_pad(i)->stickX;
                 mnStageSel_804D6CAD = get_pad(i)->stickY;
-                if (get_pad(i)->stickX < -0x1E ||
-                    get_pad(i)->stickX > +0x1E ||
-                    get_pad(i)->stickY < -0x1E ||
-                    get_pad(i)->stickY > +0x1E) {
+                if (get_pad(i)->stickX < -0x1E || get_pad(i)->stickX > +0x1E ||
+                    get_pad(i)->stickY < -0x1E || get_pad(i)->stickY > +0x1E)
+                {
                     break;
                 }
             }
@@ -484,12 +500,14 @@ void mnStageSel_8025B850_OnFrame(void)
         return;
     }
     if (mnStageSel_804D6C90->x1 == 0 && (mnStageSel_804D6CA0 & 0x200) &&
-            mnStageSel_804D6CAF == 0) {
+        mnStageSel_804D6CAF == 0)
+    {
         lbAudioAx_80024030(0);
         gm_801A4B60();
     }
     if (mnStageSel_804D6CAF == 2) {
-        mnStageSel_804D6C90->x1E_stage_id = mnStageSel_803F06D0[mnStageSel_804D6CAE].xB;
+        mnStageSel_804D6C90->x1E_stage_id =
+            mnStageSel_803F06D0[mnStageSel_804D6CAE].xB;
         gm_801A4B60();
     }
 }
