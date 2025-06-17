@@ -17,3 +17,5 @@ block_relocations:
 # Raw texture array that creates spurious relocs
 - source: .data:0x8040CD40
   end:    .data:0x80430B40
+# Another bitmask, not a pointer (would point to the middle of a function)
+- target: 0x80020000

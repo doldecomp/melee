@@ -4,6 +4,7 @@
 #include "gm_1A36.h"
 
 #include "db/db.h"
+#include "gm/gmscdata.h"
 #include "lb/lb_00F9.h"
 #include "lb/lb_0192.h"
 #include "lb/lbaudio_ax.h"

@@ -1,0 +1,11 @@
+#ifndef MELEE_GM_MENU_H
+#define MELEE_GM_MENU_H
+
+#include <placeholder.h>
+
+/* 1A50B8 */ UNK_RET gm_801A50B8_OnLoad(UNK_PARAMS);
+/* 1A5130 */ UNK_RET gm_801A5130_OnLoad(UNK_PARAMS);
+/* 1A51A8 */ UNK_RET gm_801A51A8_OnLoad(UNK_PARAMS);
+/* 1A5220 */ UNK_RET gm_801A5220_OnLoad(UNK_PARAMS);
+
+#endif
