@@ -24,9 +24,25 @@ int pl_800386E8(pl_800386E8_arg0_t* arg0)
 
 /// #pl_80038788
 
-/// #pl_80038824
+void pl_80038824(int arg0, int kind)
+{
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
 
-/// #pl_80038898
+    HSD_ASSERTMSG(92, gm_8016F1B8(kind) == 1,
+                  "gmDecisionGetType(kind) == Gm_DecType_Point");
+    temp_r31->x0_staleMoveTable.x904[kind] += 1;
+}
+
+void pl_80038898(int arg0, int kind)
+{
+    unsigned int temp_r3;
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    HSD_ASSERTMSG(103, gm_8016F1B8(kind) == 1,
+                  "gmDecisionGetType(kind) == Gm_DecType_Point");
+    temp_r3 = temp_r31->x0_staleMoveTable.x904[kind];
+    RETURN_IF(temp_r3 == 0);
+    temp_r31->x0_staleMoveTable.x904[kind] = temp_r3 - 1;
+}
 
 pl_804D6470_t* pl_80038914(void)
 {
@@ -188,7 +204,34 @@ void pl_8003891C(int slot)
     temp_r31->xDD1.bit7 = 0;
 }
 
-/// #pl_80038F10
+void pl_80038F10(int slot)
+{
+    pl_StaleMoveTableExt_t* temp_r3_2;
+    int i;
+
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(slot);
+    temp_r3->xD50 = 0;
+    temp_r3->xD54 = 0;
+    temp_r3->xD60 = 0;
+    temp_r3->xD64 = 6;
+
+    for (i = 0; i < 6; ++i) {
+        temp_r3_2 = Player_GetStaleMoveTableIndexPtr2(i);
+
+        if (slot == temp_r3_2->xD64) {
+            temp_r3_2->xD60 = 0;
+            temp_r3_2->xD64 = 6;
+        }
+
+        if (slot == temp_r3_2->x0_staleMoveTable.xCAC) {
+            temp_r3_2->x0_staleMoveTable.xCAC = 6;
+        }
+
+        if (slot == temp_r3_2->xD6C) {
+            temp_r3_2->xD6C = 6;
+        }
+    }
+}
 
 /// #fn_80038FB8
 

@@ -94,7 +94,7 @@ struct StaleMoveTable {
     /* +CA0 */ float xCA0;
     /* +CA4 */ int xCA4;
     /* +CA8 */ unsigned int xCA8;
-    /* +CAC */ int xCAC;
+    /* +CAC */ unsigned int xCAC;
     /* +CB0 */ int xCB0;
     /* +CB4 */ int xCB4;
     /* +CB8 */ int xCB8;

@@ -9,8 +9,8 @@
 /* 0386E8 */ int pl_800386E8(pl_800386E8_arg0_t*);
 /* 038700 */ UNK_RET fn_80038700(UNK_PARAMS);
 /* 038788 */ void pl_80038788(int, int, int);
-/* 038824 */ void pl_80038824(int, int);
-/* 038898 */ UNK_RET pl_80038898(UNK_PARAMS);
+/* 038824 */ void pl_80038824(int, int kind);
+/* 038898 */ void pl_80038898(int, int kind);
 /* 038914 */ pl_804D6470_t* pl_80038914();
 /* 03891C */ void pl_8003891C(int slot);
 /* 038F10 */ void pl_80038F10(int slot);
