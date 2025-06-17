@@ -18,6 +18,7 @@ typedef struct HSD_CameraDescFrustum HSD_CameraDescFrustum;
 typedef struct HSD_CameraDescPerspective HSD_CameraDescPerspective;
 typedef struct HSD_CObj HSD_CObj;
 typedef struct HSD_CObjInfo HSD_CObjInfo;
+typedef struct HSD_DevCom HSD_DevCom;
 typedef struct HSD_DObj HSD_DObj;
 typedef struct HSD_DObjDesc HSD_DObjDesc;
 typedef struct HSD_DObjInfo HSD_DObjInfo;

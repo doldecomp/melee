@@ -28,3 +28,11 @@
 /* 003A1320 */ extern void HSD_SObjLib_803A4740(UNK_T);
 /* 003A124C */ extern void HSD_SObjLib_803A466C(UNK_T);
 /* 003A10B4 */ extern void HSD_SObjLib_803A44D4(s32, UNK_T, s32, f32, f32);
+
+HSD_ObjAllocData HSD_SObjLib_804D10E0;
+
+void HSD_SObjLib_803A44A4(void)
+{
+    HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, 0x9C, 4);
+}
+

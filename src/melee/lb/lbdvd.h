@@ -34,7 +34,7 @@ typedef void (*lbDvd_Callback)(int, int index, int, int);
 /* 018A2C */ UNK_RET lbDvd_80018A2C(UNK_PARAMS);
 /* 018C2C */ UNK_RET lbDvd_80018C2C(UNK_PARAMS);
 /* 018C6C */ void lbDvd_80018C6C(void);
-/* 018CF4 */ UNK_RET lbDvd_80018CF4(UNK_PARAMS);
+/* 018CF4 */ void lbDvd_80018CF4(u8);
 /* 018F58 */ void lbDvd_80018F58(bool value);
 /* 018F68 */ void lbDvd_80018F68(void);
 /* 019100 */ UNK_RET lbDvd_80019100(UNK_PARAMS);

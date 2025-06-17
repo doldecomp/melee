@@ -362,7 +362,8 @@ STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
 
 struct gmMainLib_8046B0F0_t {
     bool x0;
-    int x4, x8, xC, x10, x14;
+    bool x4; // reset switch pressed
+    int x8, xC, x10, x14;
 };
 
 extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
