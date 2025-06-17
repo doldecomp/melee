@@ -3,6 +3,8 @@
 
 #include "plbonus.h"
 
+#include "baselib/debug.h"
+#include "gm/gm_1601.h"
 #include "pl/pl_040D.h"
 #include "pl/plattack.h"
 #include "pl/player.h"
