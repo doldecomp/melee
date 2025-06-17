@@ -591,7 +591,7 @@ struct ftData {
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct ftData_x8 {
         /*  +0 */ u8 x0[0x8];
-        struct ftData_x8_x8 {
+        /*  +8 */ struct ftData_x8_x8 {
             /*  +8 */ u32 x8;
             /*  +C */ u16** xC;
         } x8;
@@ -747,7 +747,7 @@ struct FighterBone {
     /* +8:5 */ u8 flags_b5 : 1;
     /* +8:6 */ u8 flags_b6 : 1;
     /* +8:7 */ u8 flags_b7 : 1;
-    u8 x9_pad[3];
+    /* +9 */ u8 x9_pad[3];
     /* +C */ u8 xC;
 };
 STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
@@ -1904,9 +1904,9 @@ struct ftData_80085FD4_ret {
     /* +0 */ UNK_T x0;
     /* +4 */ UNK_T x4;
     /* +8 */ UNK_T x8;
-    /* +C*/ UNK_T xC;
-    /* +10:0*/ u8 x10_b0 : 1;
-    /* +10:1*/ u8 x10_b1 : 1;
+    /* +C */ UNK_T xC;
+    /* +10:0 */ u8 x10_b0 : 1;
+    /* +10:1 */ u8 x10_b1 : 1;
 };
 
 typedef struct ArticleDynamicBones {

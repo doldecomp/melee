@@ -83,10 +83,10 @@ STATIC_ASSERT(sizeof(struct Item_DynamicBones) == 0x1C);
 
 struct ItemAttr {
     u8 x0_is_heavy : 1; // 0x0, bit 0x80, is heavy item (crate)
-    u8 x0_78 : 4; // Should be enum for type of action char takes when using
-                  // (Item_UnkKinds?) - 0: throwable, 2: Swingable, 3:
+    u8 x0_78 : 4; // Should be enum (Item_UnkKinds?) for type of action char
+                  // takes when using - 0: throwable, 2: Swingable, 3:
                   // Shootable (Relation to Samus Missile lock-on behavior?)
-    u8 x0_hold_kind : 3;    // defines hand hold behavior
+    u8 x0_hold_kind : 3;    // defines hand hold behavior (Item_HoldKinds?)
     u8 x1_1 : 2;            // 0x1 0xB0
     u8 x1_3 : 1;            // 0x1 0x20
     u8 x1_4 : 1;            // 0x1 0x10
