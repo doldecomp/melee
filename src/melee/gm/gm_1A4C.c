@@ -52,13 +52,13 @@ MajorScene* gm_801A50AC(void)
     return &gm_803DACA4;
 }
 
-/// #gm_801A50B8
+/// #gm_801A50B8_OnLoad
 
-/// #gm_801A5130
+/// #gm_801A5130_OnLoad
 
-/// #gm_801A51A8
+/// #gm_801A51A8_OnLoad
 
-/// #gm_801A5220
+/// #gm_801A5220_OnLoad
 
 s8* gm_801A5244(void)
 {
@@ -76,13 +76,13 @@ UNK_T gm_801A5250(void)
 
 /// #gm_801A5360
 
-/// #gm_801A5598
+/// #gm_801A5598_OnInit
 
 /// #gm_801A55C4
 
-/// #gm_801A55EC
+/// #gm_801A55EC_OnLoad
 
-void gm_801A5614(void) {}
+void gm_801A5614_OnUnload(void) {}
 
 /// #gm_801A5618
 
@@ -108,11 +108,11 @@ void gm_801A5614(void) {}
 
 /// #gm_801A6308
 
-/// #gm_801A632C
+/// #gm_801A632C_OnEnter
 
-/// #gm_801A637C
+/// #gm_801A637C_OnEnter
 
-/// #gm_801A64A8
+/// #gm_801A64A8_OnFrame
 
 /// #gm_801A659C
 
@@ -142,9 +142,9 @@ void gm_801A5614(void) {}
 
 /// #gm_801A6EE4
 
-/// #gm_801A7070
+/// #gm_801A7070_OnEnter
 
-/// #gm_801A79D4
+/// #gm_801A79D4_OnFrame
 
 /// #fn_801A7A44
 
@@ -176,9 +176,9 @@ void gm_801A5614(void) {}
 
 /// #gm_801A9630
 
-/// #gm_801A9B30
+/// #gm_801A9B30_OnEnter
 
-/// #gm_801A9D0C
+/// #gm_801A9D0C_OnFrame
 
 /// #gm_801A9DD0
 
@@ -186,9 +186,9 @@ void gm_801A5614(void) {}
 
 /// #fn_801AA0E8
 
-/// #gm_801AA110
+/// #gm_801AA110_OnEnter
 
-/// #gm_801AA28C
+/// #gm_801AA28C_OnFrame
 
 /// #gm_801AA644
 
@@ -202,7 +202,7 @@ void gm_801A5614(void) {}
 
 /// #gm_801AA774
 
-/// #gm_801AA7C4
+/// #gm_801AA7C4_OnFrame
 
 /// #fn_801AA7F8
 
@@ -220,7 +220,7 @@ void gm_801A5614(void) {}
 
 /// #fn_801AC67C
 
-void gm_801AC6D8(void)
+void gm_801AC6D8_OnEnter(void)
 {
     HSD_JObj* jobj_arr[2];
     int const gx_link = 11;
@@ -355,40 +355,40 @@ void gm_801AC6D8(void)
     }
 }
 
-void gm_801ACC90(void) {}
+void gm_801ACC90_OnLeave(void) {}
 
 UNK_T gm_801ACC94(void)
 {
     return &gm_803DD2C0;
 }
 
-/// #gm_801ACCA0
+/// #gm_801ACCA0_OnEnter
 
-/// #gm_801ACD8C
+/// #gm_801ACD8C_OnFrame
 
-/// #gm_801ACE94
+/// #gm_801ACE94_OnEnter
 
-/// #gm_801ACF8C
+/// #gm_801ACF8C_OnFrame
 
 /// #gm_801AD088
 
 /// #gm_801AD254
 
-/// #gm_801AD620
+/// #gm_801AD620_OnFrame
 
-/// #gm_801AD874
+/// #gm_801AD874_OnEnter
 
-/// #gm_801AD8EC
+/// #gm_801AD8EC_OnLeave
 
 /// #fn_801AD920
 
 /// #gm_801ADB04
 
-/// #gm_801ADC88
+/// #gm_801ADC88_OnFrame
 
-/// #gm_801ADCE4
+/// #gm_801ADCE4_OnEnter
 
-/// #gm_801ADDA8
+/// #gm_801ADDA8_OnLeave
 
 /// #gm_801ADDD8
 

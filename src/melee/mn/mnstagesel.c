@@ -416,7 +416,7 @@ void fn_8025A974(HSD_GObj* gobj, u32 unused)
 }
 
 // OnLoad
-/// #mnStageSel_8025A998
+/// #mnStageSel_8025A998_OnEnter
 
 static inline HSD_PadStatus* get_pad(u8 i)
 {
@@ -424,7 +424,7 @@ static inline HSD_PadStatus* get_pad(u8 i)
 }
 
 // OnFrame
-void mnStageSel_8025B850(void)
+void mnStageSel_8025B850_OnFrame(void)
 {
     if (mnStageSel_804D6C90->x3 >= 0) {
         mnStageSel_804D6CAF = 2;
@@ -494,7 +494,7 @@ void mnStageSel_8025B850(void)
     }
 }
 
-void mnStageSel_8025BB5C(void)
+void mnStageSel_8025BB5C_OnLeave(void)
 {
     u8 _[4];
     struct mnStageSel_804D6C90_t* tmp;

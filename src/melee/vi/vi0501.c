@@ -25,9 +25,9 @@ void vi_8031DC80(HSD_GObj* gobj, int unused)
 
 /// #fn_8031DD14
 
-/// #un_8031DE58
+/// #un_8031DE58_OnEnter
 
-void vi_8031E0F0(void)
+void vi_8031E0F0_OnFrame(void)
 {
     vi_8031CAAC();
 }

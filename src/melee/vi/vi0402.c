@@ -31,9 +31,9 @@ void vi_8031D80C(HSD_GObj* gobj)
     }
 }
 
-/// #un_8031D858
+/// #un_8031D858_OnEnter
 
-void vi_8031D9C4(void)
+void vi_8031D9C4_OnFrame(void)
 {
     vi_8031CAAC();
 }

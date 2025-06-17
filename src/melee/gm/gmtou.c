@@ -3,9 +3,9 @@
 // Filename is just a guess, based on some strings in the file
 // Seems to be Tournament game code
 
-/// #gm_8019B8C4
+/// #gm_8019B8C4_OnEnter
 
-/// #gm_8019B9C8
+/// #gm_8019B9C8_OnLeave
 
 void fn_8019BA04(void) {}
 
@@ -41,13 +41,13 @@ void fn_8019BA04(void) {}
 
 /// #fn_8019DD60
 
-/// #gm_8019DF8C
+/// #gm_8019DF8C_OnFrame
 
 /// #gm_8019E634
 
-/// #gm_8019ECAC
+/// #gm_8019ECAC_OnEnter
 
-/// #gm_8019EE54
+/// #gm_8019EE54_OnLeave
 
 /// #fn_8019EE80
 

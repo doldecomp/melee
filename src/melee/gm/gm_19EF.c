@@ -4,12 +4,12 @@
 
 /// #fn_8019F9C4
 
-/// #gm_801A0A10
+/// #gm_801A0A10_OnEnter
 
-/// #gm_801A0B18
+/// #gm_801A0B18_OnLeave
 
 /// #fn_801A0B60
 
-/// #gm_801A0C6C
+/// #gm_801A0C6C_OnEnter
 
-/// #gm_801A0E0C
+/// #gm_801A0E0C_OnLeave

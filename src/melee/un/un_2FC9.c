@@ -191,9 +191,9 @@ void un_802FD91C(void)
 
 /// #un_802FE918
 
-/// #un_802FEBE0
+/// #un_802FEBE0_OnEnter
 
-void un_802FED10(void) {}
+void un_802FED10_OnLeave(void) {}
 
 /// #fn_802FED14
 

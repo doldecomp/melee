@@ -305,9 +305,9 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B2204
 
-/// #gm_801B2298
+/// #gm_801B2298_OnInit
 
-/// #gm_801B23C4
+/// #gm_801B23C4_OnLoad
 
 /// #gm_801B23F0
 
@@ -327,15 +327,15 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B2AF8
 
-/// #gm_801B2B7C
+/// #gm_801B2B7C_OnInit
 
 /// #gm_801B2BA4
 
 /// #gm_801B2D54
 
-/// #gm_801B2F78
+/// #gm_801B2F78_OnLoad
 
-/// #gm_801B34B8
+/// #gm_801B34B8_OnInit
 
 /// #gm_801B3500
 
@@ -409,9 +409,9 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B518C
 
-/// #gm_801B51CC
+/// #gm_801B51CC_OnInit
 
-/// #gm_801B5214
+/// #gm_801B5214_OnLoad
 
 /// #gm_801B5324
 
@@ -435,9 +435,9 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B607C
 
-/// #gm_801B60A4
+/// #gm_801B60A4_OnLoad
 
-/// #gm_801B62D8
+/// #gm_801B62D8_OnInit
 
 UNK_T gm_801B6320(void)
 {
@@ -452,9 +452,9 @@ UNK_T gm_801B6320(void)
 
 /// #gm_801B65D4
 
-/// #gm_801B67E8
+/// #gm_801B67E8_OnInit
 
-/// #gm_801B6808
+/// #gm_801B6808_OnLoad
 
 /// #gm_801B6834
 
@@ -537,9 +537,9 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B8D34
 
-/// #gm_801B8D60
+/// #gm_801B8D60_OnInit
 
-/// #gm_801B8D88
+/// #gm_801B8D88_OnLoad
 
 /// #gm_801B8DA8
 
@@ -563,9 +563,9 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B8F44
 
-/// #gm_801B8F70
+/// #gm_801B8F70_OnInit
 
-/// #gm_801B8F98
+/// #gm_801B8F98_OnLoad
 
 /// #gm_801B8FB8
 
@@ -589,9 +589,9 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B9154
 
-/// #gm_801B9180
+/// #gm_801B9180_OnInit
 
-/// #gm_801B91A8
+/// #gm_801B91A8_OnLoad
 
 /// #gm_801B91C8
 
@@ -605,9 +605,9 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B9560
 
-/// #gm_801B95B0
+/// #gm_801B95B0_OnInit
 
-/// #gm_801B95D8
+/// #gm_801B95D8_OnLoad
 
 /// #gm_801B9600
 
@@ -625,9 +625,9 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B9DD8
 
-/// #gm_801B9EB8
+/// #gm_801B9EB8_OnInit
 
-/// #gm_801B9EE4
+/// #gm_801B9EE4_OnLoad
 
 /// #gm_801B9F10
 
@@ -654,9 +654,9 @@ void fn_801B9FB8(void* arg0)
 
 /// #gm_801BA098
 
-/// #gm_801BA0C4
+/// #gm_801BA0C4_OnInit
 
-/// #gm_801BA0EC
+/// #gm_801BA0EC_OnLoad
 
 /// #gm_801BA10C
 
@@ -683,9 +683,9 @@ void fn_801BA1B4(struct fn_801BA1B4_arg0_t* arg0)
 
 /// #gm_801BA298
 
-/// #gm_801BA2C4
+/// #gm_801BA2C4_OnInit
 
-/// #gm_801BA2EC
+/// #gm_801BA2EC_OnLoad
 
 /// #gm_801BA30C
 
@@ -712,9 +712,9 @@ void fn_801BA3B4(struct fn_801BA3B4_arg0_t* arg0)
 
 /// #gm_801BA498
 
-/// #gm_801BA4C4
+/// #gm_801BA4C4_OnInit
 
-/// #gm_801BA4EC
+/// #gm_801BA4EC_OnLoad
 
 /// #gm_801BA50C
 
@@ -741,9 +741,9 @@ void fn_801BA5B4(void* arg0)
 
 /// #gm_801BA690
 
-/// #gm_801BA6BC
+/// #gm_801BA6BC_OnInit
 
-/// #gm_801BA6E4
+/// #gm_801BA6E4_OnLoad
 
 /// #gm_801BA704
 
@@ -770,9 +770,9 @@ void fn_801BA7AC(void* arg0)
 
 /// #gm_801BA888
 
-/// #gm_801BA8B4
+/// #gm_801BA8B4_OnInit
 
-/// #gm_801BA8DC
+/// #gm_801BA8DC_OnLoad
 
 /// #gm_801BA8FC
 
@@ -790,13 +790,13 @@ void fn_801BA7AC(void* arg0)
 
 /// #gm_801BB758
 
-/// #gm_801BBA60
+/// #gm_801BBA60_OnInit
 
 /// #gm_801BBB64
 
-/// #gm_801BBEA8
+/// #gm_801BBEA8_OnLoad
 
-void gm_801BBFE4(void) {}
+void gm_801BBFE4_OnUnload(void) {}
 
 /// #fn_801BBFE8
 

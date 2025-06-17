@@ -23,9 +23,9 @@ void un_8031F9B4(HSD_GObj* gobj)
 
 /// #fn_8031FCBC
 
-/// #un_8031FD18
+/// #un_8031FD18_OnEnter
 
-/// #un_80320490
+/// #un_80320490_OnFrame
 
 void un_803204B0(s8 arg0, s8 arg1)
 {
