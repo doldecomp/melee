@@ -82,9 +82,11 @@ struct Item_DynamicBones {
 STATIC_ASSERT(sizeof(struct Item_DynamicBones) == 0x1C);
 
 struct ItemAttr {
-    u8 x0_is_heavy : 1;     // 0x0, bit 0x80, is heavy item (crate)
-    u8 x0_78 : 4;           // unk, might be lock-on behavior? (Samus Missile)
-    u8 x0_hold_kind : 3;    // defines hand hold behavior
+    u8 x0_is_heavy : 1; // 0x0, bit 0x80, is heavy item (crate)
+    u8 x0_78 : 4; // Should be enum (Item_UnkKinds?) for type of action char
+                  // takes when using - 0: throwable, 2: Swingable, 3:
+                  // Shootable (Relation to Samus Missile lock-on behavior?)
+    u8 x0_hold_kind : 3;    // defines hand hold behavior (Item_HoldKinds?)
     u8 x1_1 : 2;            // 0x1 0xB0
     u8 x1_3 : 1;            // 0x1 0x20
     u8 x1_4 : 1;            // 0x1 0x10
@@ -467,7 +469,8 @@ struct Item {
     f32 xD44_lifeTimer;
     f32 xD48_halfLifeTimer; // Not radioactive, just the item's original
                             // lifetime halved
-    int xD4C;
+    int xD4C; // Number of ammo remaining (Checked by shootable items in
+              // it_8026B594)
     u32 xD50_landNum;  // Number of times this item has landed
     u32 xD54_throwNum; // Number of times this item has been thrown
     u32 xD58;

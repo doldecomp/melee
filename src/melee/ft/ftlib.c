@@ -427,9 +427,10 @@ bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
     }
 }
 
+/// Check if the HSD_GObj* class is a fighter
 bool ftLib_80086960(HSD_GObj* arg)
 {
-    if (arg != NULL && arg->classifier == 4) {
+    if (arg != NULL && arg->classifier == HSD_GOBJ_CLASS_FIGHTER) {
         return true;
     } else {
         return false;

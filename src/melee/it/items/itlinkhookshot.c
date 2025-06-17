@@ -199,7 +199,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
     var_r31 = 0;
 
     while (!(var_r31 >= attr->x2C)) {
-        temp_r3_2 = GObj_Create(7U, 0xAU, 0U);
+        temp_r3_2 = GObj_Create(HSD_GOBJ_CLASS_ITEMLINK, 0xAU, 0U);
         if (temp_r3_2 == NULL) {
             while (var_r18 != NULL) {
                 HSD_GObjPLink_80390228(var_r18->x1D0_GObj);

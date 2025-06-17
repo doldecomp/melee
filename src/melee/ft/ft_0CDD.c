@@ -37,41 +37,43 @@ static f32 L_804D8F24 = 1.0f;
 static f32 L_804D8F28 = 0.0f;
 static f32 L_804D8F2C = 1.0f;
 
+// grounded
 void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter;
     ItemKind kind;
 
     fighter = fighter_gobj->user_data;
-    if (ftpickupitem_80094790((HSD_GObj*) fighter_gobj) == 0) {
+    if (ftpickupitem_80094790((HSD_GObj*) fighter_gobj) == false) {
         kind = itGetKind(fighter->item_gobj);
         switch (kind) { /* irregular */
-        case 16:
+        case It_Kind_L_Gun:
             ftCo_800CDF5C(fighter_gobj);
             return;
-        case 25:
+        case It_Kind_F_Flower:
             ftCo_800CE3E0(fighter_gobj);
             return;
-        case 21:
+        case It_Kind_S_Scope:
             ft_800D76B8(fighter_gobj);
             break;
         }
     }
 }
 
+// in air
 void ftCo_800CDDA0(Fighter_GObj* fighter_gobj)
 {
     ItemKind kind;
 
     kind = itGetKind(((Fighter*) fighter_gobj->user_data)->item_gobj);
     switch (kind) { /* irregular */
-    case 16:
+    case It_Kind_L_Gun:
         ftCo_800CE010(fighter_gobj);
         return;
-    case 25:
+    case It_Kind_F_Flower:
         ftCo_800CE480(fighter_gobj);
         return;
-    case 21:
+    case It_Kind_S_Scope:
         ft_800D7770(fighter_gobj);
         return;
     }
@@ -79,7 +81,7 @@ void ftCo_800CDDA0(Fighter_GObj* fighter_gobj)
 
 void ftCo_800CDE18(Fighter_GObj* fighter_gobj)
 {
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == false) {
         ftCommon_8007D92C(fighter_gobj);
     }
 }
@@ -143,18 +145,19 @@ void ftCo_800CDE94(Fighter* fighter, Vec3* arg1, Vec3* arg2)
     // PSMTXMultVec(fighterbone_jobj->mtx, pos, arg1);
 }
 
+// grounded
 void ftCo_800CDF5C(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter;
 
     fighter = fighter_gobj->user_data;
     fighter->throw_flags = 0;
-    if (it_8026B594(fighter->item_gobj) == 0) {
-        Fighter_ChangeMotionState(fighter_gobj, 0x94, 0U, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+    if (it_8026B594(fighter->item_gobj) == false) {
+        Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_LGunShoot, 0U, 0.0f,
+                                  1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(fighter_gobj, 0x96, 0U, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_LGunShootEmpty, 0U,
+                                  0.0f, 1.0f, 0.0f, NULL);
     }
     ftAnim_8006EBA4(fighter_gobj);
     fighter->accessory4_cb = ftCo_800CE1D4;
@@ -163,18 +166,19 @@ void ftCo_800CDF5C(Fighter_GObj* fighter_gobj)
     }
 }
 
+// in air
 void ftCo_800CE010(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter;
 
     fighter = fighter_gobj->user_data;
     fighter->throw_flags = 0;
-    if (it_8026B594(fighter->item_gobj) == 0) {
-        Fighter_ChangeMotionState(fighter_gobj, 0x95, 0U, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+    if (it_8026B594(fighter->item_gobj) == false) {
+        Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_LGunShootAir, 0U, 0.0f,
+                                  1.0f, 0.0f, NULL);
     } else {
-        Fighter_ChangeMotionState(fighter_gobj, 0x97, 0U, 0.0f, 1.0f, 0.0f,
-                                  NULL);
+        Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_LGunShootAirEmpty, 0U,
+                                  0.0f, 1.0f, 0.0f, NULL);
     }
     ftAnim_8006EBA4(fighter_gobj);
     ftCommon_8007D468(fighter);
@@ -184,7 +188,7 @@ void ftCo_800CE010(Fighter_GObj* fighter_gobj)
     }
 }
 
-// Local function?
+// landing?
 void ftCo_800CE0CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter;
@@ -194,10 +198,10 @@ void ftCo_800CE0CC(HSD_GObj* fighter_gobj)
 
     fighter = fighter_gobj->user_data;
     ftCommon_8007D7FC(fighter);
-    if (fighter->motion_id == 0x95) {
-        id = 0x94;
+    if (fighter->motion_id == ftCo_MS_LGunShootAir) {
+        id = ftCo_MS_LGunShoot;
     } else {
-        id = 0x96;
+        id = ftCo_MS_LGunShootEmpty;
     }
     // r5 = fighter->x914->victims_1[8].x4;
     // r5 = 0x0C4C5080;
@@ -210,7 +214,7 @@ void ftCo_800CE0CC(HSD_GObj* fighter_gobj)
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
 
-// Local function?
+// Entering air?
 void ftCo_800CE14C(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter;
@@ -220,10 +224,10 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
 
     fighter = fighter_gobj->user_data;
     ftCommon_8007D5D4(fighter);
-    if (fighter->motion_id == 0x94) {
-        id = 0x95;
+    if (fighter->motion_id == ftCo_MS_LGunShoot) {
+        id = ftCo_MS_LGunShootAir;
     } else {
-        id = 0x97;
+        id = ftCo_MS_LGunShootAirEmpty;
     }
     f1 = fighter->cur_anim_frame;
     f2 = fighter->frame_speed_mul;
@@ -233,7 +237,7 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
 
-// Local function?
+// LGun accessory4 callback function (ran after fire input already processed)
 void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
 {
     Vec3 pos1;
@@ -259,10 +263,9 @@ void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
         if (var_r0) {
             it_8028E774((Item_GObj*) fighter->item_gobj, &pos1);
             ftCo_800CDE94(fighter, &pos1, &pos2);
-            // it_8026B594((Item_GObj* ) fighter->item_gobj);
-            it_8026B594((Item_GObj*) fighter->item_gobj);
-
-            if (fighter->item_gobj != NULL) {
+            // it_8026B594((Item_GObj*) fighter->item_gobj);
+            // if (fighter->item_gobj != NULL) {
+            if (it_8026B594((Item_GObj*) fighter->item_gobj)) {
                 it_8028E79C((Item_GObj*) fighter->item_gobj, &pos1,
                             fighter->facing_dir);
                 // it_8028E79C((Item_GObj* ) fighter->item_gobj, &pos2,

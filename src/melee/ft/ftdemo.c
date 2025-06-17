@@ -54,7 +54,7 @@ static void initFighter(HSD_GObj* gobj, plAllocInfo2* alloc_info)
 
 Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
 {
-    Fighter_GObj* gobj = GObj_Create(4, 8, 0);
+    Fighter_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_FIGHTER, 8, 0);
     GObj_SetupGXLink(gobj, ftDrawCommon_80080E18, 5, 0);
     {
         Fighter* fp = HSD_ObjAlloc(&fighter_alloc_data);

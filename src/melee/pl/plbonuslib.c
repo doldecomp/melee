@@ -125,50 +125,55 @@ void pl_8003E150(int slot, int arg1)
     stale_moves->x0_staleMoveTable.xCD8 += 1;
 }
 
-void pl_8003E17C(int arg0, int arg1, Item_GObj* arg2)
+void pl_8003E17C(int player_id, int arg1,
+                 Item_GObj* item_gobj) // arg1 is fp->x221F_b4 from item owner
 {
-    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    s32 temp_r3 = itGetKind(arg2);
-    s32 var_r30;
+    pl_StaleMoveTableExt_t* temp_r31 =
+        Player_GetStaleMoveTableIndexPtr2(player_id);
+    ItemKind kind = itGetKind(item_gobj);
+    ItemKind kind2;
 
-    if ((temp_r3 >= 0) && (temp_r3 < 0x23)) {
-        var_r30 = temp_r3;
-    } else {
-        switch (temp_r3) {
-        case 0xCD:
-            var_r30 = 0x23;
+    if ((kind >= It_Kind_Capsule) && (kind < It_Kind_L_Gun_Ray)) {
+        kind2 = kind;
+    } else { // Not one of the common items
+        switch (kind) {
+        case Pokemon_Lucky_Egg:
+            kind2 = It_Kind_L_Gun_Ray;
             break;
-        case 0xE1:
-            var_r30 = 0x24;
+        case It_Kind_WhispyApple:
+            kind2 = It_Kind_StarRod_Star;
             break;
-        case 0xE2:
-            var_r30 = 0x25;
+        case It_Kind_WhispyHealApple:
+            kind2 = It_Kind_LipStick_Spore;
             break;
-        case 0x28:
-            var_r30 = 0x26;
+        case It_Kind_Hammer_Head:
+            kind2 = It_Kind_S_Scope_Beam;
             break;
         default:
-            var_r30 = -1;
+            kind2 = -1;
             break;
         }
     }
 
-    if (var_r30 != -1 && (var_r30 == 35 || var_r30 == 3 || var_r30 == 38 ||
-                          it_8026B7E8(arg2) == 1))
+    // If item kind is one of the reassigned types from the switch statement
+    // above (aka not a common item)
+    if (kind2 != -1 &&
+        (kind2 == It_Kind_L_Gun_Ray || kind2 == It_Kind_Egg ||
+         kind2 == It_Kind_S_Scope_Beam || it_8026B7E8(item_gobj) == 1))
     {
-        int var_r29;
+        int cnt;
 
-        if (!it_8026B774(arg2, arg0)) {
-            temp_r31->x0_staleMoveTable.x674[var_r30] += 1;
+        if (!it_8026B774(item_gobj, player_id)) {
+            temp_r31->x0_staleMoveTable.x674[kind2] += 1;
         }
 
-        for (var_r29 = 0; var_r29 < 6; var_r29++) {
-            if (it_8026B774(arg2, var_r29)) {
+        for (cnt = 0; cnt < 6; cnt++) {
+            if (it_8026B774(item_gobj, cnt)) {
                 return;
             }
         }
 
-        temp_r31->x0_staleMoveTable.x710[var_r30] += 1;
+        temp_r31->x0_staleMoveTable.x710[kind2] += 1;
     }
 }
 

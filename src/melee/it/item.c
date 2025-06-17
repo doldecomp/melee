@@ -961,7 +961,7 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
     if (Item_8026784C(spawnItem->hold_kind, spawnItem->kind) != 0) {
         return NULL;
     }
-    gobj = GObj_Create(6, 9, 0);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 9, 0);
     if (gobj == NULL) {
         return NULL;
     }
@@ -1162,6 +1162,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 
 extern struct r13_ColAnimStruct* it_804D6D04;
 
+// Change item state
 void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 {
     Vec3 sp4C;
@@ -1897,9 +1898,10 @@ void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
     Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
 
-    if (temp_item->hold_kind == 8 && temp_item->kind != 58 &&
-        temp_item->kind != 59 && temp_item->kind != 99 &&
-        temp_item->kind != 103)
+    if (temp_item->hold_kind == 8 && temp_item->kind != It_Kind_Link_Bomb &&
+        temp_item->kind != It_Kind_CLink_Bomb &&
+        temp_item->kind != It_Kind_Peach_Turnip &&
+        temp_item->kind != It_Kind_Peach_Parasol)
     {
         if (ftLib_800867CC(fighter_gobj) == gobj) {
             ftLib_80086764(fighter_gobj);
@@ -1914,8 +1916,9 @@ static void DestroyItemInline(HSD_GObj* gobj, Item* other_ip)
     Item* ip = gobj->user_data;
     HSD_GObj* other = other_ip->owner;
 
-    if (ip->hold_kind == 8 && ip->kind != 58 && ip->kind != 59 &&
-        ip->kind != 99 && ip->kind != 103)
+    if (ip->hold_kind == 8 && ip->kind != It_Kind_Link_Bomb &&
+        ip->kind != It_Kind_CLink_Bomb && ip->kind != It_Kind_Peach_Turnip &&
+        ip->kind != It_Kind_Peach_Parasol)
     {
         if (ftLib_800867CC(other) == gobj) {
             ftLib_80086764(other);
@@ -2024,12 +2027,13 @@ void Item_8026A8EC(Item_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
+// Pick up item
 void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     PAD_STACK(16);
 
-    it_80273168(gobj);
+    it_80273168(gobj); // sets pickup sfx?
     it_802742F4(gobj, owner_gobj, part);
     RunGObjCallback(gobj, item_data->xB8_itemLogicTable->picked_up);
     Item_8026B074(item_data);
