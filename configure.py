@@ -173,7 +173,7 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20250520"
-config.dtk_tag = "v1.5.1"
+config.dtk_tag = "v1.6.2"
 config.objdiff_tag = "v2.7.1"
 config.sjiswrap_tag = "v1.2.1"
 config.wibo_tag = "0.6.16"
@@ -859,6 +859,12 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),
             Object(NonMatching, "melee/gm/gm_1A36.c"),
+            Object(NonMatching, "melee/gm/gm_1A3F.c"),
+            Object(NonMatching, "melee/gm/gm_1A45.c"),
+            Object(NonMatching, "melee/gm/gmscdata.c"),
+            Object(NonMatching, "melee/gm/gmmenu.c"),
+            Object(NonMatching, "melee/gm/gmvsmelee.c"),
+            Object(NonMatching, "melee/gm/gm_1A4C.c"),
             Object(Matching, "melee/gm/gm_1AED.c"),
             Object(NonMatching, "melee/gm/gm_1B03.c"),
             Object(Matching, "melee/gm/gm_1BF9.c"),
@@ -954,7 +960,17 @@ config.libs = [
     MeleeLib(
         "db (Debug)",
         [
-            Object(NonMatching, "melee/db/db_2253.c"),
+            Object(Matching, "melee/db/dbinit.c"),
+            Object(Matching, "melee/db/dbitem.c"),
+            Object(Matching, "melee/db/dbcpu.c"),
+            Object(Matching, "melee/db/dbanim.c"),
+            Object(Matching, "melee/db/dbcamera.c"),
+            Object(Matching, "melee/db/dbsound.c"),
+            Object(Matching, "melee/db/dbeffect.c"),
+            Object(Matching, "melee/db/dbscreenshot.c"),
+            Object(Matching, "melee/db/dberror.c"),
+            Object(Matching, "melee/db/dbbonus.c"),
+            Object(Matching, "melee/db/dballoc.c"),
         ],
     ),
     MeleeLib(
@@ -1522,7 +1538,8 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjgxlink.c"),
             Object(Matching, "sysdolphin/baselib/gobjobject.c"),
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
-            Object(NonMatching, "sysdolphin/baselib/gobj.c"),
+            Object(Matching, "sysdolphin/baselib/gobj.c"),
+            Object(NonMatching, "sysdolphin/baselib/gobjinit.c"),
             Object(NonMatching, "sysdolphin/baselib/particle.c"),
             Object(NonMatching, "sysdolphin/baselib/psdisp.c"),
             Object(NonMatching, "sysdolphin/baselib/psdisptev.c"),

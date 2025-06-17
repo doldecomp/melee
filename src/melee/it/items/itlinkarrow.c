@@ -1,7 +1,7 @@
 #include "itlinkarrow.h"
 
 #include "baselib/mtx.h"
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Guard.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"

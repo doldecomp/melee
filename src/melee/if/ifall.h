@@ -15,7 +15,7 @@
 /* 2F3690 */ UNK_T ifAll_802F3690(void);
 /* 2F3698 */ void ifAll_HideHUD(void);
 /* 2F36A4 */ void ifAll_ShowHUD(void);
-/* 2F36B0 */ u8 ifAll_IsHUDHidden(void);
+/* 2F36B0 */ bool ifAll_IsHUDHidden(void);
 /* 2F36B8 */ void fn_802F36B8(HSD_GObj*);
 /* 2F370C */ UNK_RET ifAll_802F370C(UNK_PARAMS);
 /* 2F390C */ UNK_RET ifAll_802F390C(UNK_PARAMS);

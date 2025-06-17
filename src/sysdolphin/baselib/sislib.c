@@ -11,6 +11,8 @@
 #include "tev.h"
 #include "wobj.h"
 
+#include <melee/lb/lbarchive.h>
+
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
@@ -532,7 +534,7 @@ s32 HSD_SisLib_803A611C(int arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
             if (temp_r3 != NULL) {
                 HSD_CObjSetOrtho(temp_r3, 0.0f, -480.0f, 0.0f, 640.0f);
                 {
-                    u8 tmp = *HSD_GObj_804D784B;
+                    u8 tmp = HSD_GObj_804D784B;
                     HSD_GObjObject_80390A70(temp_r27->x4, tmp, temp_r3);
                 }
                 GObj_SetupGXLinkMax(temp_r27->x4, HSD_GObj_803910D8, arg7);
@@ -1943,4 +1945,14 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
         }
     }
     // clang-format on
+}
+
+HSD_Archive* HSD_SisLib_803A945C(char* arg0)
+{
+    return lbArchive_LoadArchive(arg0);
+}
+
+void HSD_SisLib_803A947C(HSD_Archive* archive)
+{
+    lbArchive_80016EFC(archive);
 }

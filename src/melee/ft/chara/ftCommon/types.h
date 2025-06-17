@@ -27,7 +27,7 @@ struct UNK_SAMUS_S2 {
 
 union ftCommon_MotionVars {
     struct {
-        /* fp+2340 */ UNK_T x0;
+        /* fp+2340 */ int x0;
         /* fp+2344 */ UNK_T x4;
         /* fp+2348 */ UNK_T x8;
         /* fp+234C */ UNK_T xC;

@@ -1,6 +1,6 @@
 #include "gm_1AED.h"
 
-#include <melee/db/db_2253.h>
+#include <melee/db/db.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
@@ -216,7 +216,7 @@ void gm_801AF250(void)
     }
 }
 
-void gm_801AF568(void)
+void gm_801AF568_OnFrame(void)
 {
     int temp_r29;
     u8 _[0x14];
@@ -412,7 +412,7 @@ void gm_801AF568(void)
     }
 }
 
-void gm_801B0264(struct gm_80480DA8_t* arg0)
+void gm_801B0264_OnEnter(struct gm_80480DA8_t* arg0)
 {
     s32 var_r0;
 
@@ -434,7 +434,7 @@ void gm_801B0264(struct gm_80480DA8_t* arg0)
     gm_804D6872 = 6;
 }
 
-void gm_801B0304(struct gm_80480DA8_8_t* arg0)
+void gm_801B0304_OnLeave(struct gm_80480DA8_8_t* arg0)
 {
     if (arg0 != NULL) {
         *arg0 = gm_80480DA8.unk8;

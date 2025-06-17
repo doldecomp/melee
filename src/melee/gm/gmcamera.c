@@ -1,12 +1,14 @@
+#include "gmcamera.h"
+
 #include <platform.h>
 #include <placeholder.h>
-
-#include "gmcamera.h"
 
 void* HSD_SisLib_803A5ACC(u8, int, float, float, float); /* extern */
 void HSD_SisLib_803A6368(void*, u32);                    /* extern */
 void HSD_SisLib_803A6530(u32, u32, u32);                 /* extern */
 void HSD_SisLib_803A660C(u32, u32, u32);                 /* extern */
+void HSD_SisLib_803A62A0(s32, char*, char*);
+s32 HSD_SisLib_803A611C(int, u32, u16, u8, u8, u8, u8, u32);
 
 typedef struct _SisLibUnkStruct2 {
     /*0x00*/ u8 x0_padding[0x8 - 0x0];
@@ -182,7 +184,12 @@ s32 gmCamera_801A2640(void)
     return M2C_FIELD(&gmCamera_80479BC8, s32*, 0x54);
 }
 
-/// #gmCamera_801A2650
+void gmCamera_801A2650(void)
+{
+    gmCamera_80479BC8.gcus.x20 = 2;
+    HSD_SisLib_803A62A0(3, "SdVsCam", "SIS_VsCameraData");
+    gmCamera_80479BC8.gcus.x54 = HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
+}
 
 /// #gmCamera_801A26C0
 
@@ -218,8 +225,8 @@ s32 gmCamera_801A2640(void)
 
 /// #gmCamera_801A33BC
 
-/// #gmCamera_801A34FC
+/// #gmCamera_801A34FC_OnFrame
 
-/// #gmCamera_801A3634
+/// #gmCamera_801A3634_OnEnter
 
-void gmCamera_801A367C(void) {}
+void gmCamera_801A367C_OnLeave(void) {}

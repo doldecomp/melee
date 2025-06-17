@@ -16,10 +16,11 @@ struct MinorScene {
     void (*Prep)(MinorScene*);
     void (*Decide)(MinorScene*);
 
-    u8 class_id;
-
-    void* unk_struct_0;
-    void* unk_struct_1;
+    struct MinorSceneInfo {
+        u8 class_id;
+        void* unk_struct_0; // data passed to OnLoad callback
+        void* unk_struct_1; // data passed to OnLeave callback
+    } info;
 };
 
 struct MajorScene {
@@ -37,8 +38,8 @@ struct MinorSceneHandler {
     u8 class_id;
 
     void (*OnFrame)(void);
-    void (*OnLoad)(u32);
-    void (*OnLeave)(u32);
+    void (*OnLoad)(void*);
+    void (*OnLeave)(void*);
     void (*unk_func)(void);
 }; // 803DA920
 
@@ -58,7 +59,7 @@ typedef struct {
     u8 x0D;
     u8 x0E;
     u8 x0F;
-    void* data;
+    u8 (*data)(void);
 } GameState;
 STATIC_ASSERT(sizeof(GameState) == 0x14);
 
@@ -361,7 +362,8 @@ STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
 
 struct gmMainLib_8046B0F0_t {
     bool x0;
-    int x4, x8, xC, x10, x14;
+    bool x4; // reset switch pressed
+    int x8, xC, x10, x14;
 };
 
 extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;

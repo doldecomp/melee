@@ -8,9 +8,9 @@
 
 /// #fn_8031F600
 
-/// #un_8031F714
+/// #un_8031F714_OnEnter
 
-/// #un_8031F960
+/// #un_8031F960_OnFrame
 
 void un_8031F980(s8 arg0, s8 arg1)
 {

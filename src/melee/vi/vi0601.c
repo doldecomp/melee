@@ -14,7 +14,7 @@
 
 GXColor erase_colors_vi0601 = { 0, 0, 0, 0 };
 
-void vi_8031E6CC(void)
+void vi_8031E6CC_OnFrame(void)
 {
     vi_8031CAAC();
 }
@@ -66,7 +66,7 @@ void vi0601_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void vi_8031ED50(void)
+void vi_8031ED50_OnFrame(void)
 {
     vi_8031CAAC();
 }

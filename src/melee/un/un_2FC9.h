@@ -46,8 +46,8 @@
 /* 2FE6A8 */ UNK_RET un_802FE6A8(UNK_PARAMS);
 /* 2FE8CC */ UNK_RET un_802FE8CC(UNK_PARAMS);
 /* 2FE918 */ UNK_RET un_802FE918(UNK_PARAMS);
-/* 2FEBE0 */ UNK_RET un_802FEBE0(UNK_PARAMS);
-/* 2FED10 */ UNK_RET un_802FED10(UNK_PARAMS);
+/* 2FEBE0 */ UNK_RET un_802FEBE0_OnEnter(UNK_PARAMS);
+/* 2FED10 */ UNK_RET un_802FED10_OnLeave(UNK_PARAMS);
 /* 2FED14 */ UNK_RET fn_802FED14(UNK_PARAMS);
 /* 2FEFAC */ UNK_RET un_802FEFAC(UNK_PARAMS);
 /* 2FF128 */ UNK_RET un_802FF128(UNK_PARAMS);
@@ -203,8 +203,8 @@
 /* 302B10 */ void DevText_SetScale(DevText* text, float x, float y);
 /* 302B1C */ void DevText_SetXY(DevText* text, int x, int y);
 /* 302B48 */ u8 DevText_StoreColorIndex(DevText* text, u8 index);
-/* 302B64 */ GXColor DevText_SetTextColor(DevText* text, GXColor* color);
-/* 302B90 */ GXColor DevText_SetBGColor(DevText* text, GXColor* color);
+/* 302B64 */ GXColor DevText_SetTextColor(DevText* text, GXColor color);
+/* 302B90 */ GXColor DevText_SetBGColor(DevText* text, GXColor color);
 /* 302BB0 */ void DevText_Erase(DevText* text);
 /* 302BE4 */ void DevText_Print(DevText* text, char* str);
 /* 302D0C */ void DevText_PrintInt(DevText* text, int num);
@@ -241,9 +241,11 @@
 /* 304CC8 */ UNK_RET un_80304CC8(UNK_PARAMS);
 /* 304D30 */ UNK_RET un_80304D30(UNK_PARAMS);
 /* 3124BC */ UNK_RET un_803124BC(UNK_PARAMS);
+/* 3127D4 */ void un_803127D4(void);
 /* 31C2CC */ UNK_RET un_8031C2CC(UNK_PARAMS);
 /* 31C2EC */ int un_8031C2EC(void);
 /* 31C454 */ UNK_RET un_8031C454(UNK_PARAMS);
+/* 31C8B8 */ void un_8031C8B8(void);
 /* 322258 */ bool un_80322258(f32 x);
 /* 3222EC */ float un_803222EC(float mag, float angle);
 /* 322314 */ void un_80322314(void);

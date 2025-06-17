@@ -46,7 +46,7 @@ void gmTitle_801A185C(void)
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = lb_80013B14(gmTitle_804D6708);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, gmTitle_801A1814, 0xC);
     gobj->gxlink_prios = 0x209;
 }
@@ -72,7 +72,7 @@ void gmTitle_801A1944(void)
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = lb_80013B14(gmTitle_804D6708);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B[0], cobj);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, gmTitle_801A18D4, 0);
 }
 

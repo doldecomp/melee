@@ -4,8 +4,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
-/* 019880 */ void lb_80019880(s32 arg0, s32 arg1);
-/* 019894 */ UNK_RET lb_80019894(UNK_PARAMS);
+/* 019880 */ void lb_80019880(u64);
+/* 019894 */ u8 lb_80019894(void);
 /* 0198E0 */ UNK_RET lb_800198E0(UNK_PARAMS);
 /* 019900 */ UNK_RET lb_80019900(UNK_PARAMS);
 /* 019A30 */ s32 lb_80019A30(s32 arg0);
@@ -65,7 +65,7 @@
 /* 01CC84 */ void lb_8001CC84(void);
 /* 01CDB4 */ void lb_8001CDB4(void);
 /* 01CE00 */ void lb_8001CE00(void);
-/* 01CE78 */ void lb_8001CE78(void);
+/* 01CE78 */ u8 lb_8001CE78(void);
 /* 01CEC0 */ UNK_RET fn_8001CEC0(UNK_PARAMS);
 /* 01CEE4 */ UNK_RET fn_8001CEE4(UNK_PARAMS);
 /* 01CF18 */ UNK_RET lb_8001CF18(UNK_PARAMS);

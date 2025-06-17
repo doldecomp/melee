@@ -66,7 +66,7 @@ void ifAll_ShowHUD(void)
     ifAll_804D6D58 = 0;
 }
 
-u8 ifAll_IsHUDHidden(void)
+int ifAll_IsHUDHidden(void)
 {
     return ifAll_804D6D58;
 }

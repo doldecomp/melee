@@ -1,6 +1,6 @@
 #include "itfoxillusion.h"
 
-#include "db/db_2253.h"
+#include "db/db.h"
 #include "ft/chara/ftFox/ftFx_SpecialS.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"

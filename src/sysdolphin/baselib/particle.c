@@ -1,5 +1,7 @@
 #include "particle.static.h"
 
+#include <baselib/cobj.h>
+#include <baselib/state.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 
@@ -54,7 +56,30 @@ void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 
 /// #DrawASCII
 
-/// #hsd_80391A04
+static float lbl_804D6070 = 12.0f;
+static float lbl_804D6074 = 12.0f;
+static u8 lbl_804D6078 = 12;
+
+void hsd_80391A04(float scale_x, float scale_y, int line_width)
+{
+    Mtx sp14;
+
+    lbl_804D6070 = scale_x;
+    lbl_804D6074 = scale_y;
+    lbl_804D6078 = line_width;
+    HSD_ClearVtxDesc();
+    GXSetCurrentMtx(0);
+    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), sp14);
+    GXLoadPosMtxImm(sp14, 0);
+    HSD_StateSetLineWidth(lbl_804D6078, 5);
+    HSD_StateSetPointSize(lbl_804D6078 * 2, 5);
+    HSD_SetupRenderMode(0x68000002);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_S, GX_RGBA6, 0);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8, 0);
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+    HSD_StateSetCullMode(0);
+}
 
 /// #hsd_80391AC8
 
