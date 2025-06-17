@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "forward.h"
+#include "pl/forward.h"
 
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
@@ -57,7 +57,8 @@ struct StaleMoveTable {
     /* +7AC */ int x7AC[39];
     /* +848 */ int x848[30];
     /* +8E4 */ u8 x8C0[0x904 - 0x8C0];
-    /* 904 */ int x904;
+    /// @todo: Unknown size
+    /* 904 */ unsigned int x904[1];
     /* 908 */ int x908;
     /* 90C */ int x90C;
     /* 910 */ int x910;

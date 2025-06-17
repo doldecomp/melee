@@ -7,6 +7,7 @@
 #include "pl/plattack.h"
 #include "pl/player.h"
 #include "pl/plstale.h"
+#include "pl/types.h"
 
 unsigned int pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
 {
@@ -195,7 +196,11 @@ void pl_8003891C(int slot)
 
 /// #pl_80039238
 
-/// #pl_80039418
+unsigned int pl_80039418(int arg0, int arg1)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(arg0);
+    return table->x0_staleMoveTable.x904[arg1];
+}
 
 /// #pl_80039450
 
