@@ -22,6 +22,6 @@
 /* 08A244 */ UNK_RET ft_8008A244(UNK_PARAMS);
 /* 08A2BC */ void ft_8008A2BC(Fighter_GObj* gobj);
 /* 08A324 */ void ft_8008A324(Fighter_GObj* gobj);
-/* 08A348 */ UNK_RET ft_8008A348(UNK_PARAMS);
+/* 08A348 */ void ft_8008A348(Fighter_GObj* gobj, float);
 
 #endif
