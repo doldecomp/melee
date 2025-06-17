@@ -2,6 +2,8 @@
 
 #include "gm/gm_1A36.static.h"
 
+#include <melee/gm/gmscdata.h>
+
 #include <baselib/controller.h>
 
 u64 gm_801A3680(u8 idx)

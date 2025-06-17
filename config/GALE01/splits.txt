@@ -1668,12 +1668,24 @@ melee/gm/gm_1A45.c:
 	.sbss       start:0x804D6720 end:0x804D6730
 	.sdata2     start:0x804DA9E8 end:0x804DA9F8
 
+melee/gm/gmscdata.c:
+	.text       start:0x801A50A0 end:0x801A50B8
+	.data       start:0x803DA920 end:0x803DB040
+
+melee/gm/gmmenu.c:
+	.text       start:0x801A50B8 end:0x801A5244
+
+melee/gm/gmvsmelee.c:
+	.text       start:0x801A5244 end:0x801A6254
+	.data       start:0x803DB040 end:0x803DB050
+	.sdata      start:0x804D4270 end:0x804D4278
+
 melee/gm/gm_1A4C.c:
-	.text       start:0x801A50A0 end:0x801AEE6C
+	.text       start:0x801A6254 end:0x801AEE6C
 	.rodata     start:0x803B7D68 end:0x803B7D80
-	.data       start:0x803DA920 end:0x803DD550
+	.data       start:0x803DB050 end:0x803DD550
 	.bss        start:0x80479D98 end:0x80480DA8
-	.sdata      start:0x804D4270 end:0x804D4310
+	.sdata      start:0x804D4278 end:0x804D4310
 	.sbss       start:0x804D6730 end:0x804D6870
 	.sdata2     start:0x804DA9F8 end:0x804DABF8
 

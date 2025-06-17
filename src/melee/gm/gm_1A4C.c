@@ -42,67 +42,6 @@
 #include <baselib/sobjlib.h>
 #include <baselib/video.h>
 
-MinorSceneHandler* gm_801A50A0(void)
-{
-    return gm_803DA920;
-}
-
-MajorScene* gm_801A50AC(void)
-{
-    return &gm_803DACA4;
-}
-
-/// #gm_801A50B8_OnLoad
-
-/// #gm_801A5130_OnLoad
-
-/// #gm_801A51A8_OnLoad
-
-/// #gm_801A5220_OnLoad
-
-s8* gm_801A5244(void)
-{
-    return &gmMainLib_804D3EE0->unk_590;
-}
-
-UNK_T gm_801A5250(void)
-{
-    return &gm_804D6730;
-}
-
-/// #gm_801A5258
-
-/// #gm_801A52D0
-
-/// #gm_801A5360
-
-/// #gm_801A5598_OnInit
-
-/// #gm_801A55C4
-
-/// #gm_801A55EC_OnLoad
-
-void gm_801A5614_OnUnload(void) {}
-
-/// #gm_801A5618
-
-/// #gm_801A5680
-
-/// #gm_801A5754
-
-/// #gm_801A57A8
-
-/// #gm_801A583C
-
-/// #gm_801A5AF0
-
-/// #gm_801A5C3C
-
-/// #gm_801A5EC8
-
-/// #gm_801A5F00
-
-/// #gm_801A5F64
 
 /// #gm_801A6254
 

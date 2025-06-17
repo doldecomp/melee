@@ -34,10 +34,7 @@ STATIC_ASSERT(sizeof(struct gm_803DBFD8_t) == 0x10F0);
 
 /* 3DA788 */ static u32 gm_803DA788[64] = { 0 };
 
-/* 3DA920 */ extern MinorSceneHandler gm_803DA920[];
-/* 3DACA4 */ extern MajorScene gm_803DACA4;
 /* 3DBFD8 */ extern struct gm_803DBFD8_t gm_803DBFD8;
-/* 3DD0F0 */ extern HSD_CObjDesc gm_803DD0F0;
 /* 3DD248 */ extern HSD_Archive gm_803DD248;
 /* 3DD2C0 */ extern int gm_803DD2C0[74];
 
