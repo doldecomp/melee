@@ -225,8 +225,8 @@ void gmCamera_801A2650(void)
 
 /// #gmCamera_801A33BC
 
-/// #gmCamera_801A34FC
+/// #gmCamera_801A34FC_OnFrame
 
-/// #gmCamera_801A3634
+/// #gmCamera_801A3634_OnEnter
 
-void gmCamera_801A367C(void) {}
+void gmCamera_801A367C_OnLeave(void) {}

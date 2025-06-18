@@ -79,7 +79,8 @@ void it_8026B294(HSD_GObj* gobj,
     *pos = temp_item->pos;
 }
 
-bool it_8026B2B4(HSD_GObj* gobj) // Check if item is heavy
+/// Check if item is heavy
+bool it_8026B2B4(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
 
@@ -90,7 +91,8 @@ bool it_8026B2B4(HSD_GObj* gobj) // Check if item is heavy
     return false;
 }
 
-bool it_8026B2D8(HSD_GObj* gobj) // Check if item is heavy again?
+/// Check if item is heavy again?
+bool it_8026B2D8(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     if (temp_item->xCC_item_attr->x0_is_heavy == 1) {
@@ -99,7 +101,8 @@ bool it_8026B2D8(HSD_GObj* gobj) // Check if item is heavy again?
     return false;
 }
 
-s32 itGetKind(HSD_GObj* gobj) // Get Item ID
+/// Get Item ID
+s32 itGetKind(HSD_GObj* gobj)
 {
     Item* temp_item = gobj->user_data;
     return temp_item->kind;
@@ -278,7 +281,7 @@ s32 it_8026B588(void) // Get unknown integer from itCommonData
     return it_804D6D28->xDC;
 }
 
-/// Check if item can fire projectiles
+/// Check if item can fire projectiles and if ammo is remaining
 bool it_8026B594(HSD_GObj* gobj)
 {
     Item* ip = gobj->user_data;

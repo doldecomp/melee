@@ -77,6 +77,7 @@ bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
     return false;
 }
 
+/// Find item in pickup range?
 Item_GObj* ftpickupitem_800942A0(ftCo_GObj* gobj, u32 flags)
 {
     itPickup* pickup;
@@ -237,9 +238,9 @@ bool ftpickupitem_80094790(ftCo_GObj* gobj)
         Item_GObj* unk_gobj = ftpickupitem_800942A0(gobj, 3);
         if (unk_gobj != NULL) {
             if (!it_8026B2B4(unk_gobj)) {
-                ftpickupitem_80094694(gobj, 92, 0);
+                ftpickupitem_80094694(gobj, ftCo_MS_LightGet, 0);
             } else {
-                ftpickupitem_80094694(gobj, 93, 0);
+                ftpickupitem_80094694(gobj, ftCo_MS_HeavyGet, 0);
             }
             return true;
         }
@@ -273,9 +274,9 @@ void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
     ftpickupitem_80094818(gobj, true);
     {
         Fighter_Part ret_part;
-        if (it_8026B2B4(item_gobj) == 0) {
+        if (it_8026B2B4(item_gobj) == false) {
             if (itGetKind(item_gobj) == It_Kind_WStar) {
-                ret_part = 0;
+                ret_part = FtPart_TopN;
             } else {
                 ret_part = fp->ft_data->x8->x10;
             }
@@ -301,7 +302,10 @@ void ftpickupitem_Anim(ftCo_GObj* gobj)
         }
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Item_GObj* item_gobj = fp->x1978 != NULL ? fp->x1978 : fp->item_gobj;
+        Item_GObj* item_gobj =
+            fp->x1978 != NULL
+                ? fp->x1978
+                : fp->item_gobj; // set the held item if not already set
         if (item_gobj != NULL) {
             if (fp->motion_id == ftCo_MS_LightGet) {
                 if (ftpickupitem_8009447C(gobj, item_gobj)) {

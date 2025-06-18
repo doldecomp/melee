@@ -1,12 +1,3 @@
-#include <melee/mn/mnlanguage.h>
-
-#include <melee/mn/inlines.h>
-
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/mn/mn_2295.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -15,6 +6,13 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/mn/inlines.h>
+#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnlanguage.h>
 
 extern HSD_Archive* mn_804D6BB8;
 static HSD_GObj* mnLanguage_804D6C50;
@@ -29,7 +27,7 @@ struct {
 // language id -> frame map
 static f32 mnLanguage_804D5018[2] = { 1, 0 };
 
-static Vec3 mnLanguage_803EF5A0 = {  0, 19, -0.1 };
+static Vec3 mnLanguage_803EF5A0 = { 0, 19, -0.1 };
 static Vec3 mnLanguage_803EF5AC = { 20, 29, -0.1 };
 
 void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
@@ -93,7 +91,9 @@ void fn_8024C210(HSD_GObj* gobj)
 {
     u8 _[4];
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    if (mn_8022EC18(jobj, &mnLanguage_803EF5AC.x, 0x80) >= mnLanguage_803EF5AC.y) {
+    if (mn_8022EC18(jobj, &mnLanguage_803EF5AC.x, 0x80) >=
+        mnLanguage_803EF5AC.y)
+    {
         HSD_GObjPLink_80390228(gobj);
     }
 }
@@ -163,12 +163,13 @@ void mnLanguage_8024C3C4(HSD_GObj* arg0_unused)
     HSD_JObj* sp1C;
     u32 _1[2];
 
-    gobj = GObj_Create(6, 7, 0x80);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7, 0x80);
     mnLanguage_804D6C50 = gobj;
     jobj = HSD_JObjLoadJoint(mnLanguage_804A08D8.x0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_JObjAddAnimAll(jobj, mnLanguage_804A08D8.x4, mnLanguage_804A08D8.x8, mnLanguage_804A08D8.xC);
+    HSD_JObjAddAnimAll(jobj, mnLanguage_804A08D8.x4, mnLanguage_804A08D8.x8,
+                       mnLanguage_804A08D8.xC);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
     user_data = HSD_MemAlloc(8);
@@ -209,14 +210,13 @@ void mnLanguage_8024C5C0(HSD_GObj* gobj)
     mn_804A04F0.x0 = 0x17;
     mn_804A04F0.x2 = 0;
     archive = mn_804D6BB8;
-    lbArchive_LoadSections(archive, (void**)
-            &mnLanguage_804A08D8.x0, "MenMainConLa_Top_joint",
-            &mnLanguage_804A08D8.x4, "MenMainConLa_Top_animjoint",
-            &mnLanguage_804A08D8.x8, "MenMainConLa_Top_matanim_joint",
-            &mnLanguage_804A08D8.xC, "MenMainConLa_Top_shapeanim_joint", 0);
+    lbArchive_LoadSections(
+        archive, (void**) &mnLanguage_804A08D8.x0, "MenMainConLa_Top_joint",
+        &mnLanguage_804A08D8.x4, "MenMainConLa_Top_animjoint",
+        &mnLanguage_804A08D8.x8, "MenMainConLa_Top_matanim_joint",
+        &mnLanguage_804A08D8.xC, "MenMainConLa_Top_shapeanim_joint", 0);
     mnLanguage_8024C3C4(gobj);
-    gobjproc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80),
-            mnLanguage_8024BFE0, 0);
+    gobjproc =
+        HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), mnLanguage_8024BFE0, 0);
     gobjproc->flags_3 = HSD_GObj_804D783C;
 }
-

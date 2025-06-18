@@ -3,9 +3,9 @@
 
 #include <baselib/forward.h>
 
-/* 31E6CC */ void vi_8031E6CC(void);
+/* 31E6CC */ void vi_8031E6CC_OnFrame(void);
 /* 31E6EC */ void vi_8031E6EC(HSD_GObj*);
 void vi0601_RunFrame(HSD_GObj*);
-void vi_8031ED50(void);
+void vi_8031ED50_OnFrame(void);
 
 #endif

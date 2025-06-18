@@ -17,7 +17,7 @@ typedef struct {
 static unk_struct_0_t gm_804D6940;
 static u32 gm_804D6948[2];
 
-MinorScene gm_803DFDD8[] = {
+MinorScene gm_803DFDD8_MinorScenes[] = {
     {
         0,
         1,
@@ -77,7 +77,7 @@ void gm_801BF9A8(MinorScene* data)
     gm_801A42F8(scene_data->scene_id);
 }
 
-MinorScene gm_803DFE18[] = {
+MinorScene gm_803DFE18_MinorScenes[] = {
     {
         0,
         3,

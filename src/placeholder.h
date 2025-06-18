@@ -15,6 +15,8 @@ typedef jmp_t jtbl_t[];
 #include <dolphin/os.h>
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
+#elif M2CTX
+#define NOT_IMPLEMENTED
 #elif defined(__MWERKS__) && !defined(BUGFIX)
 #define NOT_IMPLEMENTED asm { nop }
 #else

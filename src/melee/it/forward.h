@@ -77,6 +77,28 @@ typedef enum Item_UnkKinds {
     ITEM_UNK_7
 } Item_UnkKinds;
 
+// Combine with Item_UnkKinds?
+typedef enum Item_HoldKinds {
+    ITEM_HOLD_0,  // Common items, besides It_Kind_Foods
+    ITEM_HOLD_1,  // Item-related items
+    ITEM_HOLD_2,  // It_Kind_Foods
+    ITEM_HOLD_3,  // Pokemon_Random
+    ITEM_HOLD_4,  // Monsters 2 and Stage-specific items, besides
+                  // It_Kind_Arwing_Laser, It_Kind_GreatFox_Laser, and
+                  // It_Kind_Kyasarin_Egg
+    ITEM_HOLD_5,  // (Stage-specific projectile items) It_Kind_Arwing_Laser,
+                  // It_Kind_GreatFox_Laser, and It_Kind_Kyasarin_Egg
+    ITEM_HOLD_6,  // Monster items, besides It_Kind_Octarock_Stone
+    ITEM_HOLD_7,  // It_Kind_Octarock_Stone
+    ITEM_HOLD_8,  // Character-related items, besides It_Kind_Unk4 and
+                  // It_Kind_Coin
+    ITEM_HOLD_9,  // Pokemon items
+    ITEM_HOLD_10, // Pokemon-related items
+    ITEM_HOLD_11, // It_Kind_Coin
+    ITEM_HOLD_12, // It_Kind_Unk4
+    // More?
+} Item_HoldKinds;
+
 // Based on "ID Lists" from the SSBM datasheet, in-game references, and further
 // research by VetriTheRetri
 // https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8

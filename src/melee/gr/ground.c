@@ -541,9 +541,7 @@ static bool Ground_801C0A70(Vec3* pos)
     }
 }
 
-BobOmbRain const Ground_803B7DEC = {
-    0, 0, 0, 0, 0, 6
-};
+BobOmbRain const Ground_803B7DEC = { 0, 0, 0, 0, 0, 6 };
 
 HSD_Joint const Ground_803B7E0C = {
     NULL,        0,           NULL,        NULL, NULL,
@@ -575,10 +573,18 @@ void Ground_801C0C2C(HSD_GObj* arg0)
                         bool var_r4_2 = 0;
                         f32 xpos = sp50.x - sp44.x;
                         f32 ypos = sp50.y - sp44.y;
-                        if (xpos > x_min && xpos < x_max) { var_r4_2 = 1; }
-                        if (var_r4_2 && ypos > y_min) { var_r3_2 = 1; }
-                        if (var_r3_2 && ypos < y_max) { var_r0_2 = 1; }
-                        if (var_r0_2 && (stage_info.x90 == NULL || stage_info.x90(&sp50, i))) {
+                        if (xpos > x_min && xpos < x_max) {
+                            var_r4_2 = 1;
+                        }
+                        if (var_r4_2 && ypos > y_min) {
+                            var_r3_2 = 1;
+                        }
+                        if (var_r3_2 && ypos < y_max) {
+                            var_r0_2 = 1;
+                        }
+                        if (var_r0_2 && (stage_info.x90 == NULL ||
+                                         stage_info.x90(&sp50, i)))
+                        {
                             result = true;
                             break;
                         }
@@ -605,10 +611,18 @@ void Ground_801C0C2C(HSD_GObj* arg0)
                         bool var_r4_2 = 0;
                         f32 xpos = sp50.x - sp38.x;
                         f32 ypos = sp50.y - sp38.y;
-                        if (xpos > x_min && xpos < x_max) { var_r4_2 = 1; }
-                        if (var_r4_2 && ypos > y_min) { var_r3_2 = 1; }
-                        if (var_r3_2 && ypos < y_max) { var_r0_2 = 1; }
-                        if (var_r0_2 && (stage_info.x94 == NULL || stage_info.x94(&sp50, i))) {
+                        if (xpos > x_min && xpos < x_max) {
+                            var_r4_2 = 1;
+                        }
+                        if (var_r4_2 && ypos > y_min) {
+                            var_r3_2 = 1;
+                        }
+                        if (var_r3_2 && ypos < y_max) {
+                            var_r0_2 = 1;
+                        }
+                        if (var_r0_2 && (stage_info.x94 == NULL ||
+                                         stage_info.x94(&sp50, i)))
+                        {
                             result = true;
                             break;
                         }
@@ -656,7 +670,8 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
         HSD_Free(cur);
     }
     stage_info.x6A4 = NULL;
-    HSD_GObjProc_8038FD54(GObj_Create(3, 5, 0), Ground_801C0C2C, 10);
+    HSD_GObjProc_8038FD54(GObj_Create(HSD_GOBJ_CLASS_STAGE, 5, 0),
+                          Ground_801C0C2C, 10);
 }
 
 void Ground_801C1074(StructPairWithStageID* pair, s32 arg1)
@@ -786,7 +801,7 @@ HSD_GObj* Ground_801C14D0(int map_id)
     StageInfo* stageinfo = &stage_info;
     int i;
 
-    gobj = GObj_Create(3, 5, 0);
+    gobj = GObj_Create(HSD_GOBJ_CLASS_STAGE, 5, 0);
     if (gobj == NULL) {
         OSReport("%s:%d: couldn t get gobj!\n", "ground.c", 0x522);
         return NULL;
@@ -861,8 +876,7 @@ HSD_GObj* Ground_801C14D0(int map_id)
             HSD_GObj* temp_r23_2 = GObj_Create(17, 19, 0);
             temp_r27 = lb_80013B14(archive->unk4->unk8[map_id].x10);
             new_var2 = temp_r23_2;
-            HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_804D784B,
-                                    temp_r27);
+            HSD_GObjObject_80390A70(temp_r23_2, HSD_GObj_804D784B, temp_r27);
             GObj_SetupGXLinkMax(new_var2, &grDisplay_801C5F60, 5);
             temp_r23_2->gxlink_prios = 8;
             temp_r3->x18 = temp_r23_2;
@@ -925,7 +939,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     int i;
     u32 _;
     HSD_Joint sp18;
-    temp_r30 = GObj_Create(3, 5, 0);
+    temp_r30 = GObj_Create(HSD_GOBJ_CLASS_STAGE, 5, 0);
     if (temp_r30 == NULL) {
         OSReport(get_gobj, __FILE__, 0x5B8);
         return NULL;

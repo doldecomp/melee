@@ -82,7 +82,5 @@ static struct unkd4d0 {
 /* 4D684C */ static s32 gm_804D684C;
 /* 4D6868 */ static SceneDesc* gm_804D6868;
 
-/* 3DA920 */ extern MinorSceneHandler gm_803DA920[];
-/* 3DACA4 */ extern MajorScene gm_803DACA4;
 /* 3DD0F0 */ extern HSD_CObjDesc gm_803DD0F0;
 /* 3DD2C0 */ extern int gm_803DD2C0[74];

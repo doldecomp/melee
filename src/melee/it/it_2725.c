@@ -5126,9 +5126,10 @@ HSD_JObj* it_80272CC0(Item_GObj* item_gobj, enum_t idx)
     return jobj;
 }
 
+/// Check if the HSD_GObj* class is an item
 bool it_80272D1C(Item_GObj* item_gobj)
 {
-    if ((item_gobj != NULL) && (item_gobj->classifier == 6))
+    if ((item_gobj != NULL) && (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM))
     { // ITEM_UNK_ENEMY?
         return true;
     }
@@ -5142,7 +5143,7 @@ s32 it_80272D40(Item_GObj* item_gobj)
     if (ftLib_80086960((HSD_GObj*) item_gobj)) {
         return 0;
     }
-    if ((item_gobj != NULL) && (item_gobj->classifier == 6))
+    if ((item_gobj != NULL) && (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM))
     { // ITEM_UNK_ENEMY?
         chk = true;
     } else {
@@ -5609,11 +5610,13 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         Item* item3 = GET_ITEM(item_gobj);
         HSD_JObj* item_jobj3 = GET_JOBJ(item_gobj);
         if (&sp40 != NULL) {
-            lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
-                        &sp40, &sp34);
+            lb_8000B1CC(
+                ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4), &sp40,
+                &sp34);
         } else {
-            lb_8000B1CC(ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4),
-                        NULL, &sp34);
+            lb_8000B1CC(
+                ftLib_80086630((Fighter_GObj*) owner_gobj, item3->xDC4), NULL,
+                &sp34);
         }
         pos = &item3->pos;
         item3->pos.x = sp34.x;
@@ -5776,7 +5779,6 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         item->x20_team_id = ftLib_80086EB4(gobj);
         item_jobj2 = NULL;
         item->xD50_landNum = 0;
-        // ((UnkFlagStruct*)((u8*)item + 0xDCA))->b6 |= 1;
         item->xDC8_word.flags.x13 = 1;
         item_jobj1 = item_gobj->hsd_obj;
         if (item_jobj1 == NULL) {
@@ -5793,7 +5795,7 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         item->xD40 = 0.0f;
         it_80279BBC(item);
     }
-    if (item->kind < 0x23) {
+    if (item->kind < It_Kind_L_Gun_Ray) { // If a common item
         it_80275158(item_gobj, it_804D6D28->x30);
     }
     it_80274F48(item_gobj,
@@ -6200,6 +6202,7 @@ void it_802750F8(Item_GObj* item_gobj)
     item->xDCC_flag.b3 = 1;
 }
 
+/// Set both life timers on the item
 void it_80275158(Item_GObj* item_gobj, f32 lifetime)
 {
     Item* item;
@@ -6669,9 +6672,8 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
         if (mpLib_80054ED8(coll2->floor.index)) {
             int floor_index;
             temp_r3_2 = mpLib_8005199C(&sp44, -1, -1);
-            if ((temp_r3_2 != -1) &&
-                (floor_index = coll2->floor.index,
-                mpLib_80054F68(temp_r3_2, floor_index)))
+            if ((temp_r3_2 != -1) && (floor_index = coll2->floor.index,
+                                      mpLib_80054F68(temp_r3_2, floor_index)))
             {
                 coll1->floor.index = temp_r3_2;
                 mpLib_8004DD90(temp_r3_2, &sp44.x, &sp40, 0, NULL);
@@ -9435,8 +9437,7 @@ s32 it_8027A9B8(Item* item)
         gm_80172C04();
         return 23U;
     }
-    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80164ABC())
-    {
+    if ((HSD_Randi(251U) == 0) && (Item_804A0E24.z == 0) && gm_80164ABC()) {
         Item_804A0E24.z = 1;
         gm_80172BC4();
         return 22U;
@@ -9675,7 +9676,8 @@ void it_8027B0C4(Item_GObj* item_gobj, SpawnItem* spawn)
             Item* owner_item = spawn->x4_parent_gobj2->user_data;
             Item* spawn_item = GET_ITEM(item_gobj);
             spawn_item->xD88_attackID = owner_item->xD88_attackID;
-            spawn_item->xD8C_attack_instance = owner_item->xD8C_attack_instance;
+            spawn_item->xD8C_attack_instance =
+                owner_item->xD8C_attack_instance;
             spawn_item->xD90 = owner_item->xD90;
             spawn_item->xD94 = owner_item->xD94;
             spawn_item->xD9C = owner_item->xD9C;

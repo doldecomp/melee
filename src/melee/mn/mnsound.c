@@ -204,7 +204,7 @@ void fn_80249A1C(HSD_GObj* arg0)
 
 void mnSound_80249C08(HSD_GObj* unused)
 {
-    HSD_GObj* gobj = GObj_Create(6U, 7U, 0x80U);
+    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_ITEM, 7U, 0x80U);
     HSD_JObj* jobj;
     Menu* menu;
     HSD_GObjProc* proc;
@@ -279,7 +279,8 @@ void mnSound_8024A09C(HSD_GObj* arg0)
         archive, (void**) &mnSound_804A08A8.joint, "MenMainConSo_Top_joint",
         &mnSound_804A08A8.animjoint, "MenMainConSo_Top_animjoint",
         &mnSound_804A08A8.matanim_joint, "MenMainConSo_Top_matanim_joint",
-        &mnSound_804A08A8.shapeanim_joint, "MenMainConSo_Top_shapeanim_joint", 0);
+        &mnSound_804A08A8.shapeanim_joint, "MenMainConSo_Top_shapeanim_joint",
+        0);
     mnSound_80249C08(arg0);
     temp_r3 =
         HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), mnSound_802492CC, 0);

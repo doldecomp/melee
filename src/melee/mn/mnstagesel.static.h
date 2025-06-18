@@ -1,5 +1,5 @@
-#ifndef GALE01_2599EC
-#define GALE01_2599EC
+#ifndef __GALE01_2599EC
+#define __GALE01_2599EC
 
 #include <placeholder.h>
 
