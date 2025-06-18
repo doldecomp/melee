@@ -3,13 +3,15 @@
 
 #include "plbonus.h"
 
-#include "baselib/debug.h"
-#include "gm/gm_1601.h"
-#include "pl/pl_040D.h"
-#include "pl/plattack.h"
-#include "pl/player.h"
-#include "pl/plstale.h"
-#include "pl/types.h"
+#include "pl_040D.h"
+#include "plattack.h"
+#include "player.h"
+#include "plbonusinline.h"
+#include "plstale.h"
+#include "types.h"
+
+#include <baselib/debug.h>
+#include <gm/gm_1601.h>
 
 unsigned int pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
 {
@@ -24,7 +26,16 @@ int pl_800386E8(pl_800386E8_arg0_t* arg0)
 
 /// #fn_80038700
 
-/// #pl_80038788
+void pl_80038788(int player, int kind, int arg2)
+{
+    pl_StaleMoveTableExt_t* temp_r31 =
+        Player_GetStaleMoveTableIndexPtr2(player);
+
+    HSD_ASSERTMSG(80, player != 6, "player != Gm_Player_Other");
+    HSD_ASSERTMSG(81, gm_8016F1B8(kind) == 1,
+                  "gmDecisionGetType(kind) == Gm_DecType_Point");
+    temp_r31->x0_staleMoveTable.x904[kind] = arg2;
+}
 
 void pl_80038824(int arg0, int kind)
 {
@@ -247,7 +258,50 @@ unsigned int pl_80039418(int arg0, int arg1)
     return table->x0_staleMoveTable.x904[arg1];
 }
 
-/// #pl_80039450
+void pl_80039450(int arg0)
+{
+    pl_StaleMoveTableExt_t* temp_r30;
+    pl_StaleMoveTableExt_t* temp_r30_2;
+    pl_StaleMoveTableExt_t* temp_r31;
+
+    pl_StaleMoveTableExt_t* temp_r29 = Player_GetStaleMoveTableIndexPtr2(arg0);
+
+    pl_80039450_inline(arg0);
+
+    fn_80039618(arg0);
+    fn_8003B044(arg0);
+    fn_8003B9A4(arg0);
+    fn_8003BD60(arg0);
+    fn_8003C340(arg0);
+    fn_8003CC84(arg0);
+    fn_8003D2EC(arg0);
+
+    /// @todo: Replace these with their inlines
+
+    if (!(temp_r29->xDD0.bit1)) {
+        temp_r30 = Player_GetStaleMoveTableIndexPtr2(arg0);
+        HSD_ASSERTMSG(56, arg0 != 6, "player != Gm_Player_Other");
+        HSD_ASSERTMSG(57, gm_8016F1B8(0x4F) == 0,
+                      "gmDecisionGetType(kind) == Gm_DecType_Flag");
+        temp_r30->x0_staleMoveTable.xA40 = 1;
+    }
+
+    if ((gm_8016B0FC() == 0) && !(temp_r29->xDD0.bit2)) {
+        temp_r30_2 = Player_GetStaleMoveTableIndexPtr2(arg0);
+        HSD_ASSERTMSG(56, arg0 != 6, "player != Gm_Player_Other");
+        HSD_ASSERTMSG(57, gm_8016F1B8(0x55) == 0,
+                      "gmDecisionGetType(kind) == Gm_DecType_Flag");
+        temp_r30_2->x0_staleMoveTable.xA58 = 1;
+    }
+
+    if ((temp_r29->xDCC != 0U) && temp_r29->xDD1.bit5) {
+        temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+        HSD_ASSERTMSG(56, arg0 != 6, "player != Gm_Player_Other");
+        HSD_ASSERTMSG(57, gm_8016F1B8(0x4E) == 0,
+                      "gmDecisionGetType(kind) == Gm_DecType_Flag");
+        temp_r31->x0_staleMoveTable.xA3C = 1;
+    }
+}
 
 /// #fn_80039618
 
