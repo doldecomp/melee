@@ -22,6 +22,8 @@
 #include <math.h>
 #include <baselib/gobj.h>
 
+/* 08A2BC */ static void ft_8008A2BC(Fighter_GObj* gobj);
+
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
 /* 112FA8 */ static void ftSk_SpecialHi_80112FA8(Fighter_GObj* gobj);
