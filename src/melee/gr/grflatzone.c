@@ -4,6 +4,7 @@
 #include "gr/grdynamicattr.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
+#include "gr/grlib.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
@@ -58,7 +59,6 @@ extern void fn_80217440(HSD_GObj*);
 extern void Camera_800311CC(f32);          /* extern */
 extern void Camera_800311DC(f32);          /* extern */
 extern void* it_802EEFA8(Vec3*, s32, f32); /* extern */
-extern void mpLib_80058560(void);          /* extern */
 
 static struct {
     s32 unk0;

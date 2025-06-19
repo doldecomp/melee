@@ -18,7 +18,7 @@
 struct UnkGeneratorMember {
     UNK_T x0;
     UnkGeneratorStruct* x4;
-    S32Vec3 x8;
+    Vec3 x8;
     u8 x14_fill[0x10];
     f32 x24;
     f32 x28;

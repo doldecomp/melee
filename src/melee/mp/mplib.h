@@ -109,8 +109,8 @@
 /* 056C54 */ bool mpLib_80056C54(s32 idx, Vec3* pos, bool, Vec3*, bool, bool,
                                  float, float, float, float);
 /* 057424 */ void mpLib_80057424(s32);
-/* 057528 */ UNK_RET mpLib_80057528(UNK_PARAMS);
-/* 0575B0 */ UNK_RET mpLib_800575B0(UNK_PARAMS);
+/* 057528 */ void mpLib_80057528(int);
+/* 0575B0 */ void mpLib_800575B0(int);
 /* 057638 */ void mpLib_80057638(s32);
 /* 057B4C */ UNK_RET mpLib_80057B4C(UNK_PARAMS);
 /* 057BC0 */ void mpLib_80057BC0(s32);
@@ -123,8 +123,8 @@
 /* 05811C */ void mpLib_8005811C(CollData*, s32 ledge_id);
 /* 0581A4 */ void mpLib_800581A4(int arg0, int arg1, int arg2);
 /* 0581BC */ void mpLib_800581BC(int, mpLib_Callback*, UNK_T);
-/* 0581DC */ UNK_RET mpLib_800581DC(UNK_PARAMS);
-/* 058560 */ UNK_RET mpLib_80058560(UNK_PARAMS);
+/* 0581DC */ void mpLib_800581DC(int, int);
+/* 058560 */ void mpLib_80058560(void);
 /* 058614 */ UNK_RET mpLib_80058614(UNK_PARAMS);
 /* 0587FC */ UNK_RET fn_800587FC(UNK_PARAMS);
 /* 058820 */ void mpLib_80058820(void);

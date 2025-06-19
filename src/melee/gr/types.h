@@ -4,11 +4,12 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "gr/forward.h" // IWYU pragma: export
-#include "it/forward.h"
-#include "lb/forward.h"
-#include "sc/forward.h"
-#include <baselib/forward.h>
+#include <melee/cm/forward.h>
+#include <melee/gr/forward.h>
+#include <melee/it/forward.h>
+#include <melee/lb/forward.h>
+#include <melee/sc/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
@@ -333,7 +334,57 @@ struct grIceMt_GroundVars {
 };
 
 struct grStadium_GroundVars {
-    /* +0 gp+C4:0 */ u8 x0_b0 : 1;
+/* +0 gp+C4:0 */   u8 xC4_b0 : 1;
+/* +0 gp+C4:1 */   u8 xC4_b1 : 1;
+/* +0 gp+C8:0 */   u32 xC8;
+/* +4 gp+CC   */   HSD_MObj* xCC;
+/* +4 gp+D0   */   UnkArchiveStruct* xD0;
+/* +4 gp+D4   */   float xD4;
+/* +4 gp+D8   */   int xD8;
+/* +4 gp+DC   */   s16 xDC;
+/* +4 gp+DE   */   s16 xDE;
+/* +4 gp+E0   */   s16 xE0;
+/* +4 gp+E2   */   s16 xE2;
+/* +4 gp+E4   */   HSD_GObj* xE4;
+/* +4 gp+E8   */   HSD_GObj* xE8;
+};
+
+// Specific to the Pokemon Stadium jumbotron
+struct grStadium_Display {
+/* C4:0 */  u8 xC4_b0 : 1;
+/* C4:1 */  u8 xC4_b1 : 1;
+/* C8   */  HSD_TObj* xC8;
+/* CC   */  HSD_MObj* xCC;
+/* D0   */  HSD_ImageDesc* xD0;
+/* D4   */  HSD_GObj* xD4; ///< Text display
+/* D8   */  HSD_GObj* xD8; ///< Stage camera feed
+/* DC   */  HSD_GObj* xDC; ///< Zoomed camera feed
+/* E0   */  int xE0;
+/* E4   */  s16 xE4;
+/* E6   */  s16 xE6;
+/* E8   */  s16 xE8;
+/* EA   */  s16 xEA;
+/* EC   */  s16 xEC;
+/* EE   */  s16 xEE; ///< The focused player, or 99 if none
+/* F0   */  s16 xF0;
+/* F2   */  s16 xF2;
+/* F4   */  CameraBox* xF4;
+/* F8:0 */  u8 xF8_0 : 1;
+/* F8:1 */  u8 xF8_1 : 1;
+/* F8:2 */  u8 xF8_2 : 1;
+};
+
+// Unknown, but used for IDS:
+// 6
+// 9
+// and possibly more
+struct grStadium_type9_GroundVars {
+/* C4:0 */  u8 xC4_b0 : 1;
+/* C4:1 */  u8 xC4_b1 : 1;
+/* C8   */  UnkGeneratorStruct* xC8;
+/* CC   */  HSD_GObj* xCC_gobj;
+/* D0   */  HSD_GObj* xD0_gobj;
+/* D4   */  HSD_JObj* xD4_jobj;
 };
 
 struct grZebes_GroundVars {
@@ -393,6 +444,10 @@ struct Ground {
     int x6C;
     int x70;
     char pad_40[0xC4 - 0x74];
+
+    union {
+
+    /// @todo This union is named 'u', from assert statements
     union GroundVars {
         char pad_0[0x204 - 0xC4];
         struct grBigBlue_GroundVars bigblue;
@@ -409,10 +464,44 @@ struct Ground {
         struct grKraid_GroundVars kraid;
         struct grLast_GroundVars last;
         struct grOnett_GroundVars onett;
-        struct grStadium_GroundVars stadium;
         struct GroundVars_unk unk;
         struct grZebes_GroundVars zebes;
     } gv;
+
+    /**
+     * Union of Ground object subtypes
+     *
+     * A Ground object can be one of multiple subtypes. The toplevel Ground
+     * object for the stage itself is a generic type, but uses different
+     * subtypes for various stage hazards, graphics effects, backgrounds, etc.
+     * used by the stage.
+     *
+     * Each index in a stage's StageCallbacks array may use a different subtype
+     * of Ground object - but each callback in a single StageCallbacks struct
+     * should operate on the same subtype.
+     *
+     * This is known from assert statements to contain at least the following
+     * members:
+     * - map
+     *   - A generic member used for multiple stages - used in in Onett,
+     *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
+     *     to see lots of assert statements using it.
+     * - scroll
+     *   - Used for Rainbow Cruise
+     * - taru
+     *   - "Barrel", used in Kongo Jungle
+     * - car, carnull
+     *   - Used in Big Blue
+     *
+     * @todo The previous #Ground.gv union members should be moved here.
+     */
+    union {
+        struct grStadium_GroundVars stadium;
+        struct grStadium_type9_GroundVars stadium9;
+        struct grStadium_Display display; ///< Pokemon Stadium jumbotron
+    } u;
+
+    };
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
@@ -506,7 +595,7 @@ STATIC_ASSERT(sizeof(struct UnkStageDat_x8_t) == 0x34);
 struct UnkArchiveStruct {
     HSD_Archive* unk0;
     UnkStageDat* unk4;
-    s32 unk8;
+    u32 unk8;
 };
 
 #endif

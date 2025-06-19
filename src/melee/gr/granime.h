@@ -1,10 +1,10 @@
 #ifndef GALE01_1C65B0
 #define GALE01_1C65B0
 
-#include <platform.h>
-
+#include <melee/gr/forward.h>
 #include <baselib/forward.h>
 
+/* 1C65B0 */ void grAnime_801C65B0(UnkArchiveStruct*);
 /* 1C752C */ void grAnime_801C752C(HSD_JObj*, ...);
 /* 1C77FC */ void grAnime_801C77FC(HSD_GObj*, int, u32);
 /* 1C78FC */ void grAnime_801C78FC(HSD_GObj*, int, u32);

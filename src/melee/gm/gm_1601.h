@@ -23,11 +23,11 @@
 /* 16075C */ UNK_RET gm_8016075C(UNK_PARAMS);
 /* 1607A8 */ UNK_RET fn_801607A8(UNK_PARAMS);
 /* 1607F4 */ UNK_RET fn_801607F4(UNK_PARAMS);
-/* 160854 */ u8 gm_80160854(int idx, s8 team, s8, s8 slot_type);
-/* 160968 */ int gm_80160968(u8);
+/* 160854 */ u8 gm_80160854(u8 idx, u8 team, s8, s8 slot_type);
+/* 160968 */ U8Vec4 gm_80160968(u8);
 /* 160980 */ UNK_RET gm_80160980(UNK_PARAMS);
 /* 1609E0 */ UNK_RET fn_801609E0(UNK_PARAMS);
-/* 160A60 */ UNK_RET gm_80160A60(UNK_PARAMS);
+/* 160A60 */ UNK_T gm_80160A60(int);
 /* 160B40 */ UNK_RET gm_80160B40(UNK_PARAMS);
 /* 160C90 */ UNK_RET gm_80160C90(UNK_PARAMS);
 /* 160DE8 */ UNK_RET fn_80160DE8(UNK_PARAMS);
@@ -195,7 +195,7 @@
 /* 1693BC */ bool gm_801693BC(int);
 /* 169434 */ void fn_80169434(s32 arg0);
 /* 169444 */ UNK_RET fn_80169444(UNK_PARAMS);
-/* 1694A0 */ UNK_RET gm_801694A0(UNK_PARAMS);
+/* 1694A0 */ int gm_801694A0(HSD_GObj*);
 /* 169520 */ void* gm_80169520(void);
 /* 169530 */ void* gm_80169530(void);
 /* 169540 */ void* gm_80169540(void);
@@ -240,7 +240,7 @@
 /* 16AEDC */ bool gm_8016AEDC(void);
 /* 16AEEC */ bool gm_8016AEEC(void);
 /* 16AEFC */ u16 gm_8016AEFC(void);
-/* 16AF0C */ UNK_RET gm_8016AF0C(UNK_PARAMS);
+/* 16AF0C */ u16 gm_8016AF0C(UNK_PARAMS);
 /* 16AF88 */ UNK_RET gm_8016AF88(UNK_PARAMS);
 /* 16B004 */ u16 gm_8016B004(void);
 /* 16B014 */ bool gm_8016B014(void);
@@ -254,7 +254,7 @@
 /* 16B138 */ UNK_RET fn_8016B138(UNK_PARAMS);
 /* 16B14C */ bool gm_8016B14C(void);
 /* 16B168 */ bool gm_8016B168(void);
-/* 16B184 */ UNK_RET gm_8016B184(UNK_PARAMS);
+/* 16B184 */ int gm_8016B184(UNK_PARAMS);
 /* 16B1A8 */ UNK_RET gm_8016B1A8(UNK_PARAMS);
 /* 16B1C4 */ bool gm_8016B1C4(void);
 /* 16B1D8 */ bool gm_8016B1D8(void);

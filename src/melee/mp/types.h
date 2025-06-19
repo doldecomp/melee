@@ -80,7 +80,12 @@ struct mpLib_804D64B8_t {
 STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);
 
 struct mpLib_804D64C0_t {
-    /* 0x00 */ char pad_0[0x24];
+    /* 0x00 */ UNK_T x0;
+    /* 0x04 */ UNK_T x4;
+    /* 0x08 */ UNK_T x8;
+    /* 0x0C */ s16 xC;
+    /* 0x0E */ s16 xE;
+    /* 0x10 */ char pad_0[0x14];
     /* 0x24 */ mpLib_GroundCallback x24;
     /* 0x28 */ Ground* x28;
     /* 0x2C */ int unk_2C; /* inferred */

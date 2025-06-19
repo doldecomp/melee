@@ -47,7 +47,7 @@ bool grLib_801C96E8(HSD_GObj* arg0)
 
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
-UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
+UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, Vec3* arg2)
 {
     UnkGeneratorStruct* temp_r3;
     UnkGeneratorMember* phi_r30;

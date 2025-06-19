@@ -1,6 +1,7 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
+#include "gr/inlines.h"
 
 #include "ground.h"
 
@@ -33,6 +34,7 @@
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
+#include "mp/types.h"
 #include "pl/player.h"
 #include "ty/toy.h"
 #include "un/un_2FC9.h"
@@ -1534,7 +1536,64 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 
 static s16 Ground_804D6954;
 
-/// #Ground_801C2FE0
+bool Ground_801C2FE0(Ground_GObj* arg0)
+{
+    StageData* stagedata;
+    UnkArchiveStruct* archive;
+
+    // XXX must be int to match - using enum causes mr instead of addi
+    int map_id;
+
+    struct UnkStageDat_x8_t* dat;
+    mpLib_804D64C0_t* temp_r3;
+    bool result;
+    S16Vec3* vec;
+    int i;
+    int count;
+    Ground* gr = GET_GROUND(arg0);
+
+    map_id = gr->map_id;
+
+    if (Ground_804D6950[map_id] == 0) {
+
+        result = false;
+
+        temp_r3 = mpLib_8004D17C();
+        Ground_804D6954++;
+        stagedata = Ground_803DFEDC[stage_info.internal_stage_id];
+        count = stagedata->x30;
+        vec = stagedata->x2C;
+
+        for (i = 0; i < count; i++, vec++) {
+            if (vec->y == map_id) {
+                mpLib_80055E9C(vec->x);
+                temp_r3[vec->x].xC = Ground_804D6954;
+                result = true;
+            }
+        }
+
+        archive = grDatFiles_801C6330(map_id);
+        if (archive != NULL) {
+            int temp_r30;
+
+            dat = &archive->unk4->unk8[map_id];
+            vec = dat->unk20;
+            count = dat->unk24;
+
+            for (i = 0; i < count; i++, vec++) {
+                if (Ground_804D6954 != temp_r3[vec->x].xC) {
+                    mpLib_80055E9C(vec->x);
+                    temp_r3[vec->x].xC = Ground_804D6954;
+                    result = true;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    return false;
+}
 
 bool Ground_801C3128(s32 arg0, void (*arg1)(s32))
 {

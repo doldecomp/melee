@@ -338,7 +338,7 @@ void grIzumi_801CBE64(HSD_GObj* gobj)
     gobj->render_cb = grIzumi_801CD220;
     grIzumi_801CCB18(gobj);
     {
-        S32Vec3 x = { 0, 0, 0 };
+        Vec3 x = { 0, 0, 0 };
         grLib_801C96F8(0x7534, 0x1E, &x);
     }
     {
@@ -346,7 +346,7 @@ void grIzumi_801CBE64(HSD_GObj* gobj)
         y.x *= Ground_801C0498();
         y.y *= Ground_801C0498();
         y.z *= Ground_801C0498();
-        grLib_801C96F8(0x7536, 0x1E, (S32Vec3*) &y); // whats going on here?
+        grLib_801C96F8(0x7536, 0x1E, &y);
     }
     gp->gv.izumi.xCC = grIzumi_801CBCE8(2);
     ((IzumiUnkCC*) HSD_GObjGetUserData(gp->gv.izumi.xCC))->x18 =

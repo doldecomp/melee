@@ -373,12 +373,12 @@ void Player_80032070(int slot, bool bool_arg)
     }
 }
 
-void Player_8003219C(int slot)
+bool Player_8003219C(int slot)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    ftLib_8008701C(player->player_entity[player->transformed[0]]);
+    return ftLib_8008701C(player->player_entity[player->transformed[0]]);
 }
 
 bool Player_8003221C(int slot)
