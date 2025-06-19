@@ -135,9 +135,22 @@ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
 
 /// #ftSk_SpecialAirHi_Enter
 
-/// #ftSk_SpecialHiStart_0_Anim
+// Gelatart's scratch at https://decomp.me/scratch/ysptk
+void ftSk_SpecialHiStart_0_Anim(HSD_GObj* gobj)
+{
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        ftSk_SpecialHi_80113838(gobj);
+    }
+}
 
-/// #ftSk_SpecialAirHiStart_0_Anim
+// Gelatart's scratch at https://decomp.me/scratch/Ws01S, forked from a
+// kipcode66 scratch
+void ftSk_SpecialAirHiStart_0_Anim(HSD_GObj* gobj)
+{
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        ftSk_SpecialHi_80113A30(gobj);
+    }
+}
 
 void ftSk_SpecialHiStart_0_IASA(HSD_GObj* gobj) {}
 
@@ -165,7 +178,14 @@ void ftSk_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
     ftCommon_8007D268(fp);
 }
 
-/// #ftSk_SpecialHiStart_0_Coll
+// Gelatart's scratch at https://decomp.me/scratch/xhYaR, forked from a
+// kipcode66 scratch
+void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
+{
+    if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {
+        ftSk_SpecialHi_80113324(gobj);
+    }
+}
 
 /// #ftSk_SpecialAirHiStart_0_Coll
 
@@ -209,7 +229,18 @@ void ftSk_SpecialHiStart_1_Anim(HSD_GObj* gobj)
 }
 
 // Animation_SheikUpBTravel
-/// #ftSk_SpecialAirHiStart_1_Anim
+
+// Gelatart's scratch at https://decomp.me/scratch/tHxCH, forked from a
+// kipcode66 scratch
+void ftSk_SpecialAirHiStart_1_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.sk.specialhi.x0 -= 1;
+
+    if (fp->mv.sk.specialhi.x0 <= 0) {
+        ftSk_SpecialHi_80113F68(gobj);
+    }
+}
 
 void ftSk_SpecialHiStart_1_IASA(HSD_GObj* gobj) {}
 
@@ -255,8 +286,8 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
     }
 }
 
-/* Kipcode66's scratch at https://decomp.me/scratch/fE7Dq seems to match this
-However attempting to replicate the same here only gets 53.42% */
+/* Kipcode66's scratch at https://decomp.me/scratch/fE7Dq matches this, someone
+ * else had to add includes to code to get it to work */
 void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 {
     s32 var_r0;
@@ -339,7 +370,11 @@ void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
 // Interrupt_SheikUpBEndAir
 void ftSk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-/// #ftSk_SpecialHi_Phys
+// Gelatart's scratch at https://decomp.me/scratch/dKeEf
+void ftSk_SpecialHi_Phys(HSD_GObj* gobj)
+{
+    ft_80084F3C((Fighter_GObj*) gobj);
+}
 
 /// #ftSk_SpecialAirHi_Phys
 
