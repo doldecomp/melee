@@ -3,21 +3,38 @@
 #include "ft/forward.h"
 #include "ftSeak/forward.h"
 
+#include "ftSk_SpecialHi.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+#include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Pass.h"
 #include "it/items/itseakvanish.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbvector.h"
 
 #include <math.h>
 #include <baselib/gobj.h>
 
+/* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
 /* 112FA8 */ static void ftSk_SpecialHi_80112FA8(Fighter_GObj* gobj);
 /* 113038 */ static void fn_80113038(Fighter_GObj* gobj);
+/* 113324 */ static void ftSk_SpecialHi_80113324(Fighter_GObj* gobj);
+/* 113390 */ static void ftSk_SpecialHi_80113390(Fighter_GObj* gobj);
+/* 11374C */ static void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj);
+/* 1137C8 */ static void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj);
+/* 113838 */ static void ftSk_SpecialHi_80113838(Fighter_GObj* gobj);
+/* 113A30 */ static void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj);
+/* 113E40 */ static void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj);
+/* 113EAC */ static void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj);
+/* 113F68 */ static void ftSk_SpecialHi_80113F68(Fighter_GObj* gobj);
 
 static float const ftSk_Init_804D9660 = 0;
 static float const ftSk_Init_804D9664 = 1;
