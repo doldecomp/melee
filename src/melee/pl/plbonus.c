@@ -3,6 +3,7 @@
 
 #include "plbonus.h"
 
+#include "inlines.h"
 #include "pl_040D.h"
 #include "plattack.h"
 #include "player.h"
@@ -22,6 +23,16 @@ static inline void setKindToOne_inline(int player, int kind)
     table->x0_staleMoveTable.x904[kind] = 1U;
 }
 
+static inline void setKindToValue_inline(int player, int kind,
+                                         unsigned int val)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(player);
+    HSD_ASSERTMSG(80, player != 6, "player != Gm_Player_Other");
+    HSD_ASSERTMSG(81, gm_8016F1B8(kind) == 1,
+                  "gmDecisionGetType(kind) == Gm_DecType_Point");
+    table->x0_staleMoveTable.x904[kind] = val;
+}
+
 unsigned int pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
 {
     return arg0->x3E8[arg1];
@@ -37,13 +48,7 @@ int pl_800386E8(pl_800386E8_arg0_t* arg0)
 
 void pl_80038788(int player, int kind, int arg2)
 {
-    pl_StaleMoveTableExt_t* temp_r31 =
-        Player_GetStaleMoveTableIndexPtr2(player);
-
-    HSD_ASSERTMSG(80, player != 6, "player != Gm_Player_Other");
-    HSD_ASSERTMSG(81, gm_8016F1B8(kind) == 1,
-                  "gmDecisionGetType(kind) == Gm_DecType_Point");
-    temp_r31->x0_staleMoveTable.x904[kind] = arg2;
+    setKindToValue_inline(player, kind, arg2);
 }
 
 void pl_80038824(int arg0, int kind)
@@ -257,7 +262,46 @@ void pl_80038F10(int slot)
 
 /// #fn_80038FB8
 
-/// #pl_8003906C
+int pl_8003906C(int arg0, int arg1, unsigned int* arg2, unsigned int arg3,
+                unsigned int arg4, unsigned int arg5, int* arg6)
+{
+    unsigned int var_r3;
+
+    if (pl_Verify_gm_8016AEDC()) {
+        if (gm_8016AEDC() <= arg3) {
+            if (arg5 >= arg4) {
+                if (arg1 != -1) {
+                    setKindToValue_inline(arg0, arg1, 1U);
+                } else {
+                    *arg2 = 1U;
+                }
+            }
+
+            if (arg3 == gm_8016AEDC()) {
+                *arg6 = (int) arg5;
+                return 1;
+            }
+        } else if ((gm_8016AEDC() % arg3) == 0) {
+            if (arg1 != -1) {
+                var_r3 = pl_80039418(arg0, arg1);
+            } else {
+                var_r3 = *arg2;
+            }
+
+            if (((int) var_r3 != 0) && (arg5 - (unsigned int) *arg6 < arg4)) {
+                if (arg1 != -1) {
+                    setKindToValue_inline(arg0, arg1, 0U);
+                } else {
+                    *arg2 = 0U;
+                }
+            }
+
+            *arg6 = (int) arg5;
+            return 1;
+        }
+    }
+    return 0;
+}
 
 /// #pl_80039238
 

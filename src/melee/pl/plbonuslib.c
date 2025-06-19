@@ -356,7 +356,6 @@ void fn_8003EE2C(int arg0, int arg1)
     pl_StaleMoveTableExt_t* temp_r31;
     int temp_r3_2;
     s32 temp_r3_3;
-    bool var_r0;
     s32 var_r3;
     unsigned int temp_r0;
     unsigned int temp_r3;
@@ -372,12 +371,7 @@ void fn_8003EE2C(int arg0, int arg1)
     temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
     RETURN_IF(arg1 == true);
 
-    if ((gm_8016AEDC() != 0U) && (gm_8016AEDC() != -2U)) {
-        var_r0 = true;
-    } else {
-        var_r0 = false;
-    }
-    RETURN_IF(!var_r0);
+    RETURN_IF(!pl_Verify_gm_8016AEDC());
 
     temp_r31->xD08 += 1U;
     temp_r3 = temp_r31->xD08;

@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include "player.h"
-
 #include <gm/gm_1601.h>
+#include <pl/player.h>
+#include <pl/plbonusinline.h>
 
 static inline bool pl_CheckIfSameTeam(int slotA, int slotB)
 {
@@ -20,6 +20,15 @@ static inline bool pl_CheckIfSameTeam(int slotA, int slotB)
         }
     }
     return false;
-};
+}
+
+static inline bool pl_Verify_gm_8016AEDC()
+{
+    if ((gm_8016AEDC() != 0U) && (gm_8016AEDC() != -2U)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 #endif
