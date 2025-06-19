@@ -187,7 +187,27 @@ void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
     }
 }
 
-/// #ftSk_SpecialAirHiStart_0_Coll
+// Ribbanya's scratch at https://decomp.me/scratch/JHPTX seems to match this
+void ftSk_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 direction; // r4
+    s32 groundOrLedge;
+
+    if (fp->facing_dir < ftSk_Init_804D9660) {
+        direction = -1;
+    } else {
+        direction = 1;
+    }
+
+    groundOrLedge = ft_CheckGroundAndLedge((Fighter_GObj*) gobj, direction);
+
+    if (groundOrLedge != 0) {
+        ftSk_SpecialHi_80113390(gobj);
+    } else {
+        RETURN_IF(ftCliffCommon_80081298((Fighter_GObj*) gobj));
+    }
+}
 
 // Kipcode66's scratch at https://decomp.me/scratch/eQhs5 seems to match this
 void ftSk_SpecialHi_80113324(Fighter_GObj* arg0)
@@ -350,10 +370,66 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 }
 
 // AS_SheikUpBGroundtoAirFall?
-/// #ftSk_SpecialHi_8011374C
+// PsiLupan's scratch at https://decomp.me/scratch/HAj21 seems to match this
+// Scratch has a comment defining static MotionFlags const coll_mf
+void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
+{
+    u32 fighterFlags;
+    Fighter* fp = getFighterPlus(gobj);
+
+    ftCommon_8007D60C(fp);
+
+    fighterFlags =
+        // 0xC4C
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27;
+
+    fighterFlags =
+        fighterFlags +
+        // 0x508E
+        (Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
+         Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd);
+
+    Fighter_ChangeMotionState(gobj, 0x167, fighterFlags, fp->cur_anim_frame,
+                              0.0f, 0.0f, 0);
+
+    fp->x2223_b4 = true;
+    fp->x221E_b0 = true;
+}
 
 // AS_SheikUpBLand
-/// #ftSk_SpecialHi_801137C8
+/*
+Vicious Grasshopper (anon)'s scratch at https://decomp.me/scratch/p2npY
+seems to match this.
+
+Scratch had several warnings at the end about structs not
+being defined, if that's of note
+*/
+void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
+{
+    u32 fighterFlags;
+    // f32 animStart, animSpeed;
+    // float animFrame;
+    Fighter* fp = gobj->user_data;
+
+    ftCommon_8007D7FC(fp);
+
+    fighterFlags =
+        // 0xC4C
+        Ft_MF_SkipModelPartVis | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
+        Ft_MF_SkipModelFlags | Ft_MF_Unk27;
+
+    fighterFlags =
+        fighterFlags +
+        // 0x508E
+        (Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipHit |
+         Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd);
+
+    Fighter_ChangeMotionState(gobj, 0x164, fighterFlags, fp->cur_anim_frame,
+                              0.0, 0.0, NULL);
+    // fp->unk221E = (u8) (fp->unk221E | 0x80);
+    fp->x221E_b0 = true;
+}
 
 // AS_SheikUpBTravelGround
 /// #ftSk_SpecialHi_80113838
@@ -361,7 +437,16 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 // AS_SheikUpBTravelAir
 /// #ftSk_SpecialHi_80113A30
 
-/// #ftSk_SpecialHi_Anim
+// Grumpy Zebra (anon)'s fork at https://decomp.me/scratch/eGfdU of Gelatart's
+// scratch
+void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
+{
+    FORCE_PAD_STACK_8;
+
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        ft_8008A2BC((Fighter_GObj*) gobj);
+    }
+}
 
 /// #ftSk_SpecialAirHi_Anim
 
@@ -378,11 +463,26 @@ void ftSk_SpecialHi_Phys(HSD_GObj* gobj)
 
 /// #ftSk_SpecialAirHi_Phys
 
-/// #ftSk_SpecialHi_Coll
+// Gelatart's scratch at https://decomp.me/scratch/AWQjm
+void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
+{
+    if (ft_800827A0((Fighter_GObj*) gobj) == 0) {
+        ftSk_SpecialHi_80113E40(gobj);
+    }
+}
 
 /// #ftSk_SpecialAirHi_Coll
 
-/// #ftSk_SpecialHi_80113E40
+// Gelatart's scratch at https://decomp.me/scratch/QTuAS
+void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D60C(fp);
+    Fighter_ChangeMotionState(gobj, 0x168, 0x0C4C508AU, fp->cur_anim_frame,
+                              ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
+    fp->accessory4_cb = fn_80113038;
+}
 
 /// #ftSk_SpecialHi_80113EAC
 
