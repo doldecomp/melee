@@ -7,7 +7,7 @@
 
 /* 0386D8 */ unsigned int pl_800386D8(pl_800386D8_t*, ssize_t);
 /* 0386E8 */ int pl_800386E8(pl_800386E8_arg0_t*);
-/* 038700 */ UNK_RET fn_80038700(UNK_PARAMS);
+/* 038700 */ int fn_80038700(int, int, int);
 /* 038788 */ void pl_80038788(int player, int kind, int);
 /* 038824 */ void pl_80038824(int, int kind);
 /* 038898 */ void pl_80038898(int, int kind);
@@ -17,8 +17,8 @@
 /* 038FB8 */ UNK_RET fn_80038FB8(int);
 /* 03906C */ int pl_8003906C(int, int, unsigned int*, unsigned int,
                              unsigned int, unsigned int, int*);
-/* 039238 */ UNK_RET pl_80039238(int, int, UNK_T, unsigned int, UNK_T, UNK_T,
-                                 float);
+/* 039238 */ int pl_80039238(int, int, int*, unsigned int, float*, UNK_T,
+                             float);
 /* 039418 */ unsigned int pl_80039418(int, int);
 /* 039450 */ void pl_80039450(int);
 /* 039618 */ void fn_80039618(int);

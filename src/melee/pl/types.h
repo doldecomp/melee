@@ -175,7 +175,7 @@ struct pl_StaleMoveTableExt_t {
     /* +DA4 */ int xDA4;
     /* +DA8 */ int xDA8;
     /* +DAC */ int xDAC;
-    /* +DB0 */ u8 xDB0[0xDB4 - 0xDB0];
+    /* +DB0 */ int xDB0;
     /* +DB4 */ int xDB4;
     /* +DB8 */ int xDB8;
     /* +DBC */ int xDBC;
