@@ -59,7 +59,7 @@ u8 fn_80160840(u8 arg0)
 
 /// #gm_80160854
 
-int gm_80160968(u8 arg0)
+U8Vec4 gm_80160968(u8 arg0)
 {
     return lbl_803B7864[arg0];
 }

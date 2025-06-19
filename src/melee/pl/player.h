@@ -161,7 +161,7 @@ void Player_80031DC8(void func_arg(s32, s32));
 void Player_80031EBC(int slot);
 void Player_80031FB0(int slot, s32 entity_index);
 void Player_80032070(int slot, bool bool_arg);
-void Player_8003219C(int slot);
+bool Player_8003219C(int slot);
 bool Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
 CharacterKind Player_GetPlayerCharacter(int slot);

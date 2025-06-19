@@ -5,6 +5,7 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbheap.h"
@@ -16,30 +17,24 @@
 #include <baselib/robj.h>
 #include <baselib/tobj.h>
 
-typedef struct {
-    HSD_Archive* x0;
-    u32 x4;
-    u32 x8;
-} Foo;
-
 /* 1C67A8 */ static void grAnime_801C67A8(HSD_MObj*, HSD_MatAnim*);
 
 float grAnime_804D6958;
 float grAnime_804D695C;
 
-void grAnime_801C65B0(Foo* arg0)
+void grAnime_801C65B0(UnkArchiveStruct* arg0)
 {
     if (arg0 == NULL) {
         return;
     }
-    if ((uintptr_t) arg0->x0 != -1U) {
-        if (arg0->x8 == 0) {
-            lbArchive_80016EFC(arg0->x0);
-        } else if (arg0->x8 == 1) {
-            lbHeap_80015CA8(0, arg0->x0);
+    if ((uintptr_t) arg0->unk0 != -1U) {
+        if (arg0->unk8 == 0) {
+            lbArchive_80016EFC(arg0->unk0);
+        } else if (arg0->unk8 == 1) {
+            lbHeap_80015CA8(0, arg0->unk0);
         }
     }
-    memzero(arg0, 0xC);
+    memzero(arg0, sizeof(*arg0));
 }
 
 void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1)
