@@ -13,6 +13,15 @@
 #include <baselib/debug.h>
 #include <gm/gm_1601.h>
 
+static inline void setKindToOne_inline(int player, int kind)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(player);
+    HSD_ASSERTMSG(56, player != 6, "player != Gm_Player_Other");
+    HSD_ASSERTMSG(57, gm_8016F1B8(kind) == 0,
+                  "gmDecisionGetType(kind) == Gm_DecType_Flag");
+    table->x0_staleMoveTable.x904[kind] = 1U;
+}
+
 unsigned int pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
 {
     return arg0->x3E8[arg1];
@@ -48,13 +57,13 @@ void pl_80038824(int arg0, int kind)
 
 void pl_80038898(int arg0, int kind)
 {
-    unsigned int temp_r3;
+    unsigned int currentValue;
     pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
     HSD_ASSERTMSG(103, gm_8016F1B8(kind) == 1,
                   "gmDecisionGetType(kind) == Gm_DecType_Point");
-    temp_r3 = temp_r31->x0_staleMoveTable.x904[kind];
-    RETURN_IF(temp_r3 == 0);
-    temp_r31->x0_staleMoveTable.x904[kind] = temp_r3 - 1;
+    currentValue = temp_r31->x0_staleMoveTable.x904[kind];
+    RETURN_IF(currentValue == 0);
+    temp_r31->x0_staleMoveTable.x904[kind] = currentValue - 1;
 }
 
 pl_804D6470_t* pl_80038914(void)
@@ -260,10 +269,6 @@ unsigned int pl_80039418(int arg0, int arg1)
 
 void pl_80039450(int arg0)
 {
-    pl_StaleMoveTableExt_t* temp_r30;
-    pl_StaleMoveTableExt_t* temp_r30_2;
-    pl_StaleMoveTableExt_t* temp_r31;
-
     pl_StaleMoveTableExt_t* temp_r29 = Player_GetStaleMoveTableIndexPtr2(arg0);
 
     pl_80039450_inline(arg0);
@@ -276,30 +281,16 @@ void pl_80039450(int arg0)
     fn_8003CC84(arg0);
     fn_8003D2EC(arg0);
 
-    /// @todo: Replace these with their inlines
-
-    if (!(temp_r29->xDD0.bit1)) {
-        temp_r30 = Player_GetStaleMoveTableIndexPtr2(arg0);
-        HSD_ASSERTMSG(56, arg0 != 6, "player != Gm_Player_Other");
-        HSD_ASSERTMSG(57, gm_8016F1B8(0x4F) == 0,
-                      "gmDecisionGetType(kind) == Gm_DecType_Flag");
-        temp_r30->x0_staleMoveTable.xA40 = 1;
+    if (!temp_r29->xDD0.bit1) {
+        setKindToOne_inline(arg0, 0x4F);
     }
 
-    if ((gm_8016B0FC() == 0) && !(temp_r29->xDD0.bit2)) {
-        temp_r30_2 = Player_GetStaleMoveTableIndexPtr2(arg0);
-        HSD_ASSERTMSG(56, arg0 != 6, "player != Gm_Player_Other");
-        HSD_ASSERTMSG(57, gm_8016F1B8(0x55) == 0,
-                      "gmDecisionGetType(kind) == Gm_DecType_Flag");
-        temp_r30_2->x0_staleMoveTable.xA58 = 1;
+    if (gm_8016B0FC() == 0 && !temp_r29->xDD0.bit2) {
+        setKindToOne_inline(arg0, 0x55);
     }
 
-    if ((temp_r29->xDCC != 0U) && temp_r29->xDD1.bit5) {
-        temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
-        HSD_ASSERTMSG(56, arg0 != 6, "player != Gm_Player_Other");
-        HSD_ASSERTMSG(57, gm_8016F1B8(0x4E) == 0,
-                      "gmDecisionGetType(kind) == Gm_DecType_Flag");
-        temp_r31->x0_staleMoveTable.xA3C = 1;
+    if (temp_r29->xDCC != 0U && temp_r29->xDD1.bit5) {
+        setKindToOne_inline(arg0, 0x4E);
     }
 }
 

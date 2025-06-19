@@ -58,27 +58,7 @@ struct StaleMoveTable {
     /* +848 */ int x848[30];
     /* +8E4 */ u8 x8C0[0x904 - 0x8C0];
     /// @todo: Unknown size
-    /* +904 */ unsigned int x904[1];
-    /* +908 */ int x908;
-    /* +90C */ int x90C;
-    /* +910 */ int x910;
-    /* +914 */ int x914;
-    /* +918 */ int x918;
-    /* +91C */ int x91C;
-    /* +920 */ int x920;
-    /* +924 */ int x924;
-    /* +928 */ int x928;
-    /* +92C */ int x92C;
-    /* +930 */ int x930;
-    /* +934 */ int x934;
-    /* +938 */ int x938;
-    /* +93C */ int x93C;
-    /* +940 */ int x940;
-    /* +944 */ u8 x944[0xA3C - 0x944];
-    /* +A3C */ int xA3C;
-    /* +A40 */ int xA40;
-    /* +A44 */ u8 xA44[0xA58 - 0xA44];
-    /* +A58 */ int xA58;
+    /* +904 */ unsigned int x904[86];
     /* +A5C */ u8 xA5C[0xC60 - 0xA5C];
     /* +C60 */ float xC60;
     /* +C64 */ float xC64;
