@@ -1,6 +1,7 @@
 { lib
 , stdenv
 , decomp-toolkit
+, devkitppc
 , fetchurl
 , mwcc
 , objdiff
@@ -40,6 +41,7 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = [
     decomp-toolkit
+    devkitppc
     ninja
     python3
     wibo
