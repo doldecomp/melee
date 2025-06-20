@@ -14,7 +14,7 @@
 /* 038914 */ pl_804D6470_t* pl_80038914();
 /* 03891C */ void pl_8003891C(int slot);
 /* 038F10 */ void pl_80038F10(int slot);
-/* 038FB8 */ UNK_RET fn_80038FB8(int);
+/* 038FB8 */ void fn_80038FB8(int);
 /* 03906C */ int pl_8003906C(int, int, unsigned int*, unsigned int,
                              unsigned int, unsigned int, int*);
 /* 039238 */ int pl_80039238(int, int, int*, unsigned int, float*, UNK_T,

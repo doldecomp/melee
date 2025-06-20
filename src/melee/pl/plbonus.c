@@ -260,7 +260,15 @@ void pl_80038F10(int slot)
     }
 }
 
-/// #fn_80038FB8
+void fn_80038FB8(int arg0)
+{
+    int var_ctr;
+    pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+
+    for (var_ctr = 0; var_ctr < 215; ++var_ctr) {
+        temp_r3->x0_staleMoveTable.x904[var_ctr] = 0;
+    }
+}
 
 int pl_8003906C(int arg0, int arg1, unsigned int* arg2, unsigned int arg3,
                 unsigned int arg4, unsigned int arg5, int* arg6)
