@@ -1,48 +1,46 @@
+#include "grstory.h"
+
 #include <platform.h>
 
-#include "it/forward.h"
-#include "lb/forward.h"
-
-#include "gr/grstory.h"
-
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/grmaterial.h"
-#include "gr/ground.h"
-#include "gr/grzakogenerator.h"
-#include "gr/types.h"
-#include "it/it_26B1.h"
-#include "it/items/itheiho.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-
-#include <dolphin/os/OSError.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/random.h>
+#include <melee/gr/granime.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/grmaterial.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
+#include <melee/gr/inlines.h>
+#include <melee/gr/types.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/items/itheiho.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
 
 extern StageInfo stage_info;
 
-static StageCallbacks grSt_803E26F0[4] = {
+static StageCallbacks grSt_803E26F0[] = {
     { NULL, NULL, NULL, NULL, 0 },
     { grStory_801E31C0, grStory_801E3224, grStory_801E322C, grStory_801E3230,
       0 },
+    // Randall
     { grStory_801E3370, grStory_801E33D8, grStory_801E33E0, grStory_801E3414,
       0 },
+    // Shy Guys
     { grStory_801E3234, grStory_801E332C, grStory_801E3334, grStory_801E336C,
       (1 << 30) | (1 << 31) },
 };
 
 static struct {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-    f32 vars[7];
-}* grSt_804D69B8;
+    float timer_min;
+    float timer_rand;
+    float spawnmany_rarity;
+    float vpos[6];
+}* shyguy_vars;
 
 StageData grSt_803E274C = {
     (1 << 1) | (1 << 3),
@@ -64,7 +62,7 @@ static void grStory_801E302C(bool _) {}
 
 void grStory_801E3030(void)
 {
-    grSt_804D69B8 = Ground_801C49F8();
+    shyguy_vars = Ground_801C49F8();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     grStory_801E30D8(0);
@@ -87,9 +85,9 @@ bool grStory_801E30D0(void)
     return false;
 }
 
-HSD_GObj* grStory_801E30D8(int gobj_id)
+Ground_GObj* grStory_801E30D8(int gobj_id)
 {
-    HSD_GObj* gobj;
+    Ground_GObj* gobj;
     StageCallbacks* callbacks = &grSt_803E26F0[gobj_id];
 
     gobj = Ground_801C14D0(gobj_id);
@@ -118,116 +116,131 @@ HSD_GObj* grStory_801E30D8(int gobj_id)
     return gobj;
 }
 
-void grStory_801E31C0(HSD_GObj* gobj)
+void grStory_801E31C0(Ground_GObj* gobj)
 {
-    u8 _[8];
+    u8 _[4];
 
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
     grMaterial_801C8858(Ground_801C3FA4(gobj, 1), 0x20000000);
 }
 
-bool grStory_801E3224(HSD_GObj* arg0)
+bool grStory_801E3224(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grStory_801E322C(HSD_GObj* arg0) {}
+void grStory_801E322C(Ground_GObj* gobj) {}
 
-void grStory_801E3230(HSD_GObj* arg0) {}
+void grStory_801E3230(Ground_GObj* gobj) {}
 
-inline s32 randi(s32 max)
+inline int randi(int max)
 {
     return max ? HSD_Randi(max) : 0;
 }
 
-/* Initialize shyguys */
-void grStory_801E3234(HSD_GObj* gobj)
+static inline void reset_shyguy_timer(Ground* gp)
 {
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
-    grAnime_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);
+    // Reset the timer
+    gp->u.shyguys.timer = shyguy_vars->timer_min
+        + randi(shyguy_vars->timer_rand);
 
-    gp->gv.unk.xC8 = grSt_804D69B8->unk0 + randi(grSt_804D69B8->unk4);
-    gp->gv.unk.xC8 = 120;
+    // This value really is overwritten in the game code.
+    // Maybe a leftover hardcoded value from debugging?
+    gp->u.shyguys.timer = 120;
+}
+
+/**
+ * Set the number of Shy Guys to spawn to either 1,
+ * or a random integer from 3 to 6.
+ *
+ * @param rarity Controls the rarity of spawning multiple Shy Guys
+ */
+static inline void set_shyguy_spawn_count(Ground* gp, int rarity)
+{
+    if (randi(rarity) == 0) {
+        gp->u.shyguys.count = randi(3) + 3;
+    } else {
+        gp->u.shyguys.count = 1;
+    }
+}
+
+/**
+ * Shy guys initialization function
+ */
+void grStory_801E3234(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    grAnime_801C7FF8(gobj, 0, 7, 0, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 5, 7, 1, 0.0F, 1.0F);
+
+    reset_shyguy_timer(gp);
     gp->x10_flags.b5 = true;
 }
 
-bool grStory_801E332C(HSD_GObj* arg0)
+bool grStory_801E332C(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grStory_801E3334(HSD_GObj* gobj)
+void grStory_801E3334(Ground_GObj* gobj)
 {
     grStory_801E3418(gobj);
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-void grStory_801E336C(HSD_GObj* arg0) {}
+void grStory_801E336C(Ground_GObj* gobj) {}
 
-typedef struct {
-    u8 x0_fill[0x14];
-    s32 x14;
-    u8 x18_fill[0xC4 - 0x18];
-    s16 xC4;
-    HSD_JObj* xC8;
-} UnkUserData;
-
-void grStory_801E3370(HSD_GObj* gobj)
+/**
+ * Randall initialization function
+ */
+void grStory_801E3370(Ground_GObj* gobj)
 {
-    UnkUserData* data = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(4);
 
-    u8 _[8];
-
-    Ground_801C2ED0(gobj->hsd_obj, data->x14);
-    grAnime_801C8138(gobj, data->x14, 0);
-    data->xC4 = 0;
-    data->xC8 = Ground_801C3FA4(gobj, 1);
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->u.randall.timer = 0;
+    gp->u.randall.jobj = Ground_801C3FA4(gobj, 1);
 }
 
-bool grStory_801E33D8(HSD_GObj* arg0)
+bool grStory_801E33D8(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grStory_801E33E0(HSD_GObj* gobj)
+void grStory_801E33E0(Ground_GObj* gobj)
 {
+    // Update Randall's moving collision box
     Ground_801C2FE0(gobj);
+    // Check to spawn Randall puff effect
     grStory_801E366C(gobj);
 }
 
-void grStory_801E3414(HSD_GObj* arg0) {}
+void grStory_801E3414(Ground_GObj* gobj) {}
 
 // floating point random number centered at 0
 // with an amplitude of 1
 inline f32 frand_amp1(void)
 {
-    return 2.0f * (HSD_Randf() - 0.5f);
+    return 2.0F * (HSD_Randf() - 0.5F);
 }
 
-typedef struct {
-    u8 x0_fill[0xC4];
-    s8 xC4;
-    s8 xC5;
-    s16 xC6;
-    s32 xC8;
-} UnkUserData2;
-
-// Shy guy spawn timer tick callback
-void grStory_801E3418(HSD_GObj* gobj)
+/**
+ * Shy guy spawn timer frame callback
+ */
+void grStory_801E3418(Ground_GObj* gobj)
 {
     Vec3 pos;
-    s32 spawn_pattern;
-    s32 i;
-    s32 tmp;
+    int spawn_pattern;
+    int i;
 
-    u8 _[8];
-
-    UnkUserData2* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
 
     // Don't trigger if any shy guys are still onscreen
     if (it_8026B3C0(It_Kind_Heiho) != 0) {
@@ -235,68 +248,64 @@ void grStory_801E3418(HSD_GObj* gobj)
     }
 
     // Wait until the shy guy timer has triggered
-    tmp = gp->xC8;
-    if (tmp != 0) {
-        gp->xC8 = tmp - 1;
+    if (gp->u.shyguys.timer != 0) {
+        gp->u.shyguys.timer--;
         return;
     }
-    // Reset the timer
-    gp->xC8 = grSt_804D69B8->unk0 + randi(grSt_804D69B8->unk4);
-    // This value really is overwritten in the game code.
-    // Maybe a leftover hardcoded value from debugging?
-    gp->xC8 = 120;
+
+    reset_shyguy_timer(gp);
 
     // Pick a random spawn pattern,
     // which must be different from the previous one
     do {
-        spawn_pattern = randi(6);
-    } while (gp->xC5 == spawn_pattern);
-    gp->xC5 = spawn_pattern;
+        spawn_pattern = randi(ARRAY_SIZE(shyguy_vars->vpos));
+    } while (gp->u.shyguys.pattern == spawn_pattern);
+    gp->u.shyguys.pattern = spawn_pattern;
 
     // Choose whether they will spawn on the left or the right
     if (spawn_pattern < 3) {
-        pos.x = -292.0f;
+        pos.x = -292.0F;
     } else {
-        pos.x = 304.0f;
+        pos.x = 304.0F;
     }
-    pos.y = grSt_804D69B8->vars[spawn_pattern];
-    pos.z = 2.0f;
+    pos.y = shyguy_vars->vpos[spawn_pattern];
+    pos.z = 2.0F;
 
     {
-        s32 temp_r29 = randi(3);
+        int temp_r29 = randi(3);
 
         // Spawn either 1, or 3-6 shy guys
-        if (randi(grSt_804D69B8->unk8) == 0) {
-            gp->xC4 = randi(3) + 3;
-        } else {
-            gp->xC4 = 1;
-        }
-        // Another overwrite, possible debugging?
-        if (randi(2) == 0) {
-            gp->xC4 = randi(3) + 3;
-        } else {
-            gp->xC4 = 1;
-        }
-        for (i = 0; i < gp->xC4; i++) {
-            it_802D8618(i, &pos, temp_r29, 25.0f * i);
-            // it_802D8618(i, temp_r29, 0, 0);
+        set_shyguy_spawn_count(gp, shyguy_vars->spawnmany_rarity);
+
+        // Value is overwritten, possible debugging?
+        set_shyguy_spawn_count(gp, 2);
+
+        for (i = 0; i < gp->u.shyguys.count; i++) {
+            it_802D8618(i, &pos, temp_r29, 25.0F * i);
+
             // Jitter the vertical position of the each subsequent shy guy
-            pos.y = 3.0f * frand_amp1() + grSt_804D69B8->vars[spawn_pattern];
+            pos.y = 3.0F * frand_amp1() + shyguy_vars->vpos[spawn_pattern];
         }
     }
 }
 
-void grStory_801E366C(HSD_GObj* gobj)
+/**
+ * Randall puff timer frame callback
+ */
+void grStory_801E366C(Ground_GObj* gobj)
 {
-    UnkUserData* data = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
 
-    if (data->xC4-- >= 0) {
+    // Only create the effect when the timer reaches zero
+    if (gp->u.randall.timer-- >= 0) {
         return;
     }
 
-    if (data->xC8 != NULL) {
-        grLib_801C97DC(0x2C, 0, data->xC8);
-        data->xC4 = HSD_Randi(20) + 10;
+    // Spawn a puff effect at Randall's location,
+    // and reset the timer to a random delay
+    if (gp->u.randall.jobj != NULL) {
+        grLib_801C97DC(0x2C, 0, gp->u.randall.jobj);
+        gp->u.randall.timer = HSD_Randi(20) + 10;
     }
 }
 
@@ -305,12 +314,12 @@ static DynamicsDesc* grStory_801E36D0(enum_t arg0)
     return NULL;
 }
 
-bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* joint)
+bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* jobj)
 {
     Vec3 b;
-    lb_8000B1CC(joint, NULL, &b);
+    lb_8000B1CC(jobj, NULL, &b);
 
-    if (a->y + 1.0f > b.y) {
+    if (a->y + 1.0F > b.y) {
         return true;
     } else {
         return false;
