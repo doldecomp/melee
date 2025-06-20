@@ -43,7 +43,8 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     s32 x40;
     s32 x44;
     s32 x48;
-    s32 x4C;
+    /* ftSk_SpecialAirHi_Phys fully matches when x4C is type f32 */
+    f32 x4C;
     /* Adding values here and shrinking data_filler_1 based on context set up
      * by kipcode 66 in https://decomp.me/scratch/fE7Dq for
      * ftSk_SpecialAirHiStart_1_Coll */
