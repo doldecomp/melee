@@ -351,12 +351,10 @@ void pl_8003EC9C(int arg0, int arg1, float arg2, float arg3)
 void fn_8003EE2C(int arg0, int arg1)
 {
     Fighter_GObj* temp_r30;
-    HSD_GObj* temp_r3_4;
     float var_f1;
     pl_StaleMoveTableExt_t* temp_r31;
     int temp_r3_2;
     s32 temp_r3_3;
-    s32 var_r3;
     unsigned int temp_r0;
     unsigned int temp_r3;
     unsigned long temp_r3_10;
@@ -366,6 +364,7 @@ void fn_8003EE2C(int arg0, int arg1)
     unsigned int temp_r3_8;
     unsigned int temp_r3_9;
     u8 temp_r28;
+    HSD_GObj* temp_r3_4; // May be from an inline?
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
@@ -443,30 +442,12 @@ void fn_8003EE2C(int arg0, int arg1)
     if (ft_80087944(temp_r30)) {
         temp_r31->xD3C += 1;
     }
-    temp_r3_4 = ftLib_80086794(temp_r30);
+
+    temp_r3_4 = ftLib_80086794(temp_r30); // Might be the start of an inline?
     if (temp_r3_4 != NULL) {
-        var_r3 = itGetKind((Item_GObj*) temp_r3_4);
-        if ((var_r3 >= 0) && (var_r3 < 0x23)) {
-        } else {
-            switch (var_r3) {
-            case 0xCD:
-                var_r3 = 0x23;
-                break;
-            case 0xE1:
-                var_r3 = 0x24;
-                break;
-            case 0xE2:
-                var_r3 = 0x25;
-                break;
-            case 0x28:
-                var_r3 = 0x26;
-                break;
-            default:
-                var_r3 = -1;
-                break;
-            }
-        }
-        if ((var_r3 != -1) && (it_8026B30C((Item_GObj*) temp_r3_4) != 5)) {
+        if ((fn_8003EE2C_inline(temp_r3_4) != -1) &&
+            (it_8026B30C((Item_GObj*) temp_r3_4) != 5))
+        {
             temp_r31->xD44 += 1U;
             temp_r3_5 = temp_r31->xD44;
             if (temp_r3_5 > temp_r31->xD40) {
@@ -483,6 +464,7 @@ void fn_8003EE2C(int arg0, int arg1)
             temp_r31->xD44 = 0U;
         }
     }
+
     temp_r3_7 = temp_r31->xD4C;
     if (temp_r3_7 != 0U) {
         temp_r31->xD4C = temp_r3_7 - 1U;

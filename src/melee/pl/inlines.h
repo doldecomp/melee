@@ -4,8 +4,10 @@
 #include <platform.h>
 
 #include <gm/gm_1601.h>
+#include <it/it_26B1.h>
 #include <pl/player.h>
 #include <pl/plbonusinline.h>
+#include <pl/types.h>
 
 static inline bool pl_CheckIfSameTeam(int slotA, int slotB)
 {
@@ -29,6 +31,48 @@ static inline bool pl_Verify_gm_8016AEDC()
     } else {
         return false;
     }
+}
+
+static inline void pl_80039450_inline(int slot)
+{
+    pl_StaleMoveTableExt_t* var_r26;
+    int i;
+
+    var_r26 = Player_GetStaleMoveTableIndexPtr2(slot);
+
+    for (i = 0; i < 215; ++i) {
+        if (gm_8016F1B8(i) == 0) {
+            var_r26->x0_staleMoveTable.x904[0] = 0;
+        }
+        var_r26 = (pl_StaleMoveTableExt_t*) ((char*) var_r26 + 4);
+    }
+}
+
+static inline int fn_8003EE2C_inline(HSD_GObj* gobj)
+{
+    int kind = itGetKind(gobj);
+    if ((kind >= 0) && (kind < 0x23)) {
+        return kind;
+    } else {
+        switch (kind) {
+        case 0xCD:
+            kind = 0x23;
+            break;
+        case 0xE1:
+            kind = 0x24;
+            break;
+        case 0xE2:
+            kind = 0x25;
+            break;
+        case 0x28:
+            kind = 0x26;
+            break;
+        default:
+            kind = -1;
+            break;
+        }
+    }
+    return kind;
 }
 
 #endif
