@@ -417,6 +417,13 @@ struct ShyGuys {
 /* +4 gp+C8 */ int timer;
 };
 
+struct Battlefield {
+/* +0 gp+C4 */ int bg_state;
+/* +4 gp+C8 */ int curr_bg;
+/* +8 gp+CC */ int prev_bg;
+/* +C gp+D0 */ int bg_timer;
+};
+
 struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
@@ -512,6 +519,7 @@ struct Ground {
         struct grStadium_Display display; ///< Pokemon Stadium jumbotron
         struct Randall randall;
         struct ShyGuys shyguys;
+        struct Battlefield battle;
     } u;
 
     };

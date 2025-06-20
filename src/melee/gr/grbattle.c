@@ -10,6 +10,7 @@
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
+#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
 #include "gr/stage.h"
 #include "gr/types.h"
@@ -67,8 +68,6 @@ struct {
 }* grNBa_804D6ACC;
 
 static u8 grNBa_804D6AC8;
-
-static const int BATTLE_BG_MAX = 3;
 
 static StageCallbacks grNBa_803E7DA0[7] = {
     {
@@ -349,17 +348,28 @@ static void grBattle_8021A33C(HSD_GObj* arg0) {}
 
 static void grBattle_8021A340(HSD_GObj* arg0) {}
 
+static inline void reset_bg_timer(Ground* gp)
+{
+    gp->u.battle.bg_timer = HSD_Randi(1200) + 2400;
+}
+
+enum {
+    BG_Waiting,
+    BG_Transitioning,
+    BG_Done,
+};
+
 static void grBattle_8021A344(HSD_GObj* gobj)
 {
-    u8 _[24];
+    u8 _[16];
 
-    Ground* gp = gobj->user_data;
-    HSD_JObj* jobj = gobj->hsd_obj;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     gp->x11_flags.b012 = 2;
-    gp->gv.unk.xC4 = 0;
-    gp->gv.unk.xD0 = HSD_Randi(1200) + 2400;
-    gp->gv.unk.xC8 = -1;
-    HSD_JObjSetFlagsAll(jobj, 0x10);
+    gp->u.battle.bg_state = BG_Waiting;
+    reset_bg_timer(gp);
+    gp->u.battle.curr_bg = -1;
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
 }
 
 static bool grBattle_8021A3B4(HSD_GObj* arg0)
@@ -369,61 +379,67 @@ static bool grBattle_8021A3B4(HSD_GObj* arg0)
 
 static void grBattle_8021A3BC(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    HSD_JObj* jobj = gobj->hsd_obj;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_GObj* bg_gobj;
-    s32 temp_r0_2;
-    s16 sp28[BATTLE_BG_MAX] = { 1, 2, 4 };
-    s32 tmp;
+    int bg_idx;
+    s16 sp28[] = { 1, 2, 4 };
 
-    u8 _[28];
+#define BATTLE_BG_MAX ARRAY_SIZE(sp28)
 
-    switch (gp->gv.unk.xC4) {
-    case 0:
-        if (gp->gv.unk.xD0-- < 0) {
-            gp->gv.unk.xC4 = 1;
+    u8 _[20];
+
+    switch (gp->u.battle.bg_state) {
+
+    case BG_Waiting:
+        if (gp->u.battle.bg_timer-- < 0) {
+            gp->u.battle.bg_state = BG_Transitioning;
             grAnime_801C8138(gobj, gp->map_id, 0);
         }
         break;
-    case 1:
-        if (HSD_JObjGetFlags(jobj) & 0x10) {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+
+    case BG_Transitioning:
+        if (HSD_JObjGetFlags(jobj) & JOBJ_HIDDEN) {
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
         if (grAnime_801C83D0(gobj, 0, 7)) {
-            if (gp->gv.unk.xC8 == -1) {
-                u32 i;
+            if (gp->u.battle.curr_bg == -1) {
+                int i;
                 for (i = 0; i < BATTLE_BG_MAX; i++) {
                     if (Ground_801C2BA4(sp28[i])) {
-                        gp->gv.unk.xC8 = sp28[i];
+                        gp->u.battle.curr_bg = sp28[i];
                         break;
                     }
                 }
                 HSD_ASSERT(527, i<BATTLE_BG_MAX);
             }
-            gp->gv.unk.xCC = gp->gv.unk.xC8;
-            do {
-                temp_r0_2 = sp28[HSD_Randi(BATTLE_BG_MAX)];
-            } while ((tmp = gp->gv.unk.xCC) == (gp->gv.unk.xC8 = temp_r0_2));
 
-            bg_gobj = Ground_801C2BA4(tmp);
+            // Pick a random different background to transition to
+            gp->u.battle.prev_bg = gp->u.battle.curr_bg;
+            do {
+                bg_idx = sp28[HSD_Randi(BATTLE_BG_MAX)];
+            } while ((gp->u.battle.curr_bg = bg_idx) == gp->u.battle.prev_bg);
+
+            bg_gobj = Ground_801C2BA4(gp->u.battle.prev_bg);
             HSD_ASSERT(535, bg_gobj);
             grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk4, 0);
 
-            bg_gobj = grBattle_80219D84(gp->gv.unk.xC8);
+            bg_gobj = grBattle_80219D84(gp->u.battle.curr_bg);
             HSD_ASSERT(539, bg_gobj);
             grMaterial_801C9604(bg_gobj, grNBa_804D6ACC->unk0, 0);
 
-            gp->gv.unk.xC4 = 2;
+            gp->u.battle.bg_state = BG_Done;
         }
         break;
-    case 2:
-        bg_gobj = Ground_801C2BA4(gp->gv.unk.xCC);
+
+    case BG_Done:
+        bg_gobj = Ground_801C2BA4(gp->u.battle.prev_bg);
         HSD_ASSERT(546, bg_gobj);
         if (grLib_801C96E8(bg_gobj)) {
             Ground_801C4A08(bg_gobj);
-            HSD_JObjSetFlagsAll(jobj, 0x10);
-            gp->gv.unk.xC4 = 0;
-            gp->gv.unk.xD0 = HSD_Randi(1200) + 2400;
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            gp->u.battle.bg_state = BG_Waiting;
+            reset_bg_timer(gp);
         }
         break;
     }
