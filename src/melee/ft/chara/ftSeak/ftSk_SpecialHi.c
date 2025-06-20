@@ -450,7 +450,19 @@ void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
-/// #ftSk_SpecialAirHi_Anim
+// Gelatart's scratch at https://decomp.me/scratch/2S6Ll
+void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
+
+    if (ftAnim_IsFramesRemaining((Fighter_GObj* ) gobj) == 0) {
+        float x, y;
+        x = attributes->x58;
+        y = attributes->x5C;
+        ftCo_80096900((Fighter_GObj* ) gobj, 1, 0, 1, x, y);
+    }
+    
+}
 
 void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
 
