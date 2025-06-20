@@ -38,7 +38,11 @@
 static struct {
     int x0;
     int x4;
-    u8 _[0x14];
+    int x8;
+    int xC;
+    int x10;
+    int x14;
+    int x18;
     u8 r, g, b;
     u32 x20;
     u32 x24;
@@ -410,7 +414,7 @@ void grStadium_801D16FC(Ground_GObj* gobj)
     mpLib_80057BC0(3);
 }
 
-extern Vec3 grPs_803B7F68;
+static const Vec3 grPs_803B7F68 = { 0, 0, 0 };
 
 void grStadium_801D1720(Ground_GObj* gobj)
 {
@@ -520,7 +524,7 @@ void grStadium_801D19F8(Ground_GObj* gobj)
     mpLib_80057BC0(2);
 }
 
-extern Vec3 grPs_803B7F74;
+static const Vec3 grPs_803B7F74 = { 0, 0, 0 };
 
 void grStadium_801D1A38(Ground_GObj* gobj)
 {
@@ -1455,6 +1459,10 @@ extern const float grPs_804DAF68;
 extern const float grPs_804DAF6C;
 extern const float grPs_804DAF74;
 
+/// @todo This is only size 0x100 in the object, but a single
+/// TextGlyphTexture is size 0x200. Should TextGlyphTexture be smaller?
+static TextGlyphTexture grPs_8049F040;
+
 void grStadium_801D3460(Ground_GObj* gobj)
 {
     U8Vec4 sp48;
@@ -1493,8 +1501,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     HSD_SisLib_803A7664(gp2->x1C);
     temp_r29 = GET_GROUND(Ground_801C2BA4(2));
 
-    /// @todo SIS type needs to be expanded?
-    /// HSD_SisLib_804D1124[1]->unk14 = &grPs_8049F040;
+    HSD_SisLib_804D1124[1][2].textures = &grPs_8049F040;
 
     HSD_SisLib_803A6530(1, 5, 6);
     temp_r0 = temp_r29->u.stadium.xDE;
@@ -1533,7 +1540,9 @@ void grStadium_801D3460(Ground_GObj* gobj)
 
     for (i = 0; i < 4; i++) {
         if (Player_GetPlayerSlotType(i) != 3) {
-            if ((sp38[i] = gm_80160A60(i))) {
+            UNK_T tmp = gm_80160A60(i);
+            sp38[var_r28] = tmp;
+            if (tmp != NULL) {
                 var_r28++;
             }
         }
@@ -1563,7 +1572,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     temp_r4->x34.y = 0.625f;
 
 
-    if (!temp_r3_4->x10 | !temp_r3_4->x0_6) {
+    if ((temp_r3_4->x10 == 0) | !temp_r3_4->x0_6) {
         HSD_SisLib_803A6B98(gp2->x1C, "00:00 00", grPs_804DAF58, grPs_804DAF5C);
         return;
     }
@@ -1676,6 +1685,23 @@ void grStadium_801D3A0C(Ground_GObj* gobj)
     }
 }
 
+const float grPs_804DAF2C = 62;
+const float grPs_804DAF30 = 124;
+const float grPs_804DAF34 = 40;
+const float grPs_804DAF38 = 80;
+const float grPs_804DAF40 = 0.3125;
+const float grPs_804DAF44 = 0.625;
+const float grPs_804DAF48 = 0.26;
+const float grPs_804DAF4C = 70;
+const float grPs_804DAF50 = 186;
+const float grPs_804DAF54 = 60;
+const float grPs_804DAF58 = 125;
+const float grPs_804DAF5C = 120;
+const float grPs_804DAF64 = 1.5;
+const float grPs_804DAF68 = 52;
+const float grPs_804DAF6C = -3;
+const float grPs_804DAF74 = 56;
+
 void grStadium_801D3B4C(int arg0, int arg1)
 {
     Ground_GObj* gobj;
@@ -1691,10 +1717,10 @@ void grStadium_801D3B4C(int arg0, int arg1)
 }
 
 static const U8Vec4 grPs_803B7F8C[] = {
-    { 0x50, 0, 0, 0 },
-    { 0x40, 0, 0, 0 },
-    { 0x30, 0, 0, 0 },
-    { 0x20, 0, 0, 0 },
+    { 0, 0, 0, 0x50 },
+    { 0, 0, 0, 0x40 },
+    { 0, 0, 0, 0x30 },
+    { 0, 0, 0, 0x20 },
 };
 
 void grStadium_801D3BBC(Ground_GObj* arg0)
@@ -2036,16 +2062,6 @@ void grStadium_801D435C(Ground_GObj* arg0)
     }
 }
 
-static struct {
-    int x0;
-    int x4;
-    int x8;
-    int xC;
-    int x10;
-    int x14;
-    int x18;
-}* grPs_804D6978;
-
 void grStadium_801D4548(Ground_GObj* gobj)
 {
     s32 sp6C;
@@ -2202,7 +2218,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         temp_r31->u.stadium.xDC = 3;
         return;
     case 3:
-        if (++temp_r31->u.stadium.xD8 > grPs_804D6978->x10) {
+        if (++temp_r31->u.stadium.xD8 > yaku->x10) {
             temp_r6 = GET_GROUND(temp_r31->u.stadium.xE4);
             temp_r6->u.stadium.xC4_b1 = true;
             temp_r31->u.stadium.xDC = 4;
@@ -2214,7 +2230,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         break;
     case 4:
         temp_r27_2 = GET_JOBJ(temp_r31->u.stadium.xE4);
-        temp_f29 = -((temp_f31 * (0.95f / grPs_804D6978->x14)) - HSD_JObjGetScaleY(temp_r27_2));
+        temp_f29 = -((temp_f31 * (0.95f / yaku->x14)) - HSD_JObjGetScaleY(temp_r27_2));
         temp_f30 = 0.05f * temp_f31;
         if (temp_f29 > temp_f30) {
             HSD_JObjSetScaleY(temp_r27_2, temp_f29);
@@ -2222,7 +2238,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             HSD_JObjSetScaleY(temp_r27_2, 0.05F);
             temp_r4_4 = temp_r31->u.stadium.xD8;
             temp_r31->u.stadium.xD8 = temp_r4_4 + 1;
-            if (temp_r4_4 > grPs_804D6978->x18) {
+            if (temp_r4_4 > yaku->x18) {
                 grAnime_801C7A04(temp_r31->u.stadium.xE4, 0, 7, 0.0f);
                 temp_r3_7 = grStadium_801D10F8(temp_r31->u.stadium.xDE);
                 temp_r27_3 = GET_JOBJ(temp_r3_7);
@@ -2240,20 +2256,20 @@ void grStadium_801D4548(Ground_GObj* gobj)
         return;
     case 5:
         temp_r0_3 = ++temp_r31->u.stadium.xD8;
-        if (temp_r0_3 <= grPs_804D6978->x14) {
+        if (temp_r0_3 <= yaku->x14) {
             float tmp;
             temp_r30 = temp_r31->u.stadium.xE8->hsd_obj;
-            tmp = 0.95f * temp_r0_3 / grPs_804D6978->x14 + 0.05F;
+            tmp = 0.95f * temp_r0_3 / yaku->x14 + 0.05F;
             HSD_JObjSetScaleY(temp_r30, tmp * temp_f31);
             temp_r4_8 = temp_r31->u.stadium.xD8;
-            temp_r0_4 = grPs_804D6978->x14 / 2;
+            temp_r0_4 = yaku->x14 / 2;
             if (temp_r4_8 < temp_r0_4) {
                 var_f29 = -10.0f * temp_f31 * (1.0f - ((f32) temp_r4_8 / temp_r0_4));
             } else {
                 var_f29 = 0.0f;
             }
             HSD_JObjSetTranslateY(temp_r30, var_f29);
-            temp_r5_2 = grPs_804D6978->x14;
+            temp_r5_2 = yaku->x14;
             temp_r3_8 = temp_r31->u.stadium.xD8;
             temp_r27_4 = temp_r31->u.stadium.xE4->hsd_obj;
             temp_r0_5 = temp_r5_2 / 2;
@@ -2280,8 +2296,8 @@ void grStadium_801D4548(Ground_GObj* gobj)
         temp_r3_9->u.stadium.xC4_b0 = true;
         mpLib_80058560();
         if (temp_r31->u.stadium.xDE == 5) {
-            var_r28 = grPs_804D6978->x4;
-            temp_r27_6 = grPs_804D6978->x0;
+            var_r28 = yaku->x4;
+            temp_r27_6 = yaku->x0;
             if (var_r28 > temp_r27_6) {
                 temp_r3_10 = var_r28 - temp_r27_6;
                 if (temp_r3_10 != 0) {
@@ -2304,8 +2320,8 @@ void grStadium_801D4548(Ground_GObj* gobj)
             mpLib_800575B0(0x55);
             mpLib_800575B0(0x6F);
         } else {
-            var_r28_2 = grPs_804D6978->xC;
-            temp_r27_7 = grPs_804D6978->x8;
+            var_r28_2 = yaku->xC;
+            temp_r27_7 = yaku->x8;
             if (var_r28_2 > temp_r27_7) {
                 temp_r3_12 = var_r28_2 - temp_r27_7;
                 if (temp_r3_12 != 0) {
