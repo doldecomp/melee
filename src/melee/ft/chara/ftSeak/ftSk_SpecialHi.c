@@ -451,17 +451,17 @@ void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
 }
 
 // Gelatart's scratch at https://decomp.me/scratch/2S6Ll
-void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj) {
+void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
 
-    if (ftAnim_IsFramesRemaining((Fighter_GObj* ) gobj) == 0) {
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
         float x, y;
         x = attributes->x58;
         y = attributes->x5C;
-        ftCo_80096900((Fighter_GObj* ) gobj, 1, 0, 1, x, y);
+        ftCo_80096900((Fighter_GObj*) gobj, 1, 0, 1, x, y);
     }
-    
 }
 
 void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
@@ -476,20 +476,19 @@ void ftSk_SpecialHi_Phys(HSD_GObj* gobj)
 }
 
 // Gelatart's scratch at https://decomp.me/scratch/rQtEW
-void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj) {
+void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
+{
     u8 _[8];
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
-    
+
     if (fp->cmd_vars[0] != 0) {
         ftCommon_8007D4B8(fp);
         ftCommon_8007D440(fp, attributes->x4C * fp->co_attrs.air_drift_max);
-        //UPDATE x4c TO F32!
+        // UPDATE x4c TO F32!
         return;
-    } 
-    else
-    {
+    } else {
         float vel_y = fp->self_vel.y;
         fp->self_vel.y = vel_y - (vel_y / ftSk_Init_804D9694);
     }
@@ -505,23 +504,24 @@ void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
 }
 
 // Gelatart's scratch at https://decomp.me/scratch/58XJm
-void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj) {
+void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
+{
     u8 _[8];
 
     int ledge_grab_dir;
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
-    
+
     if (fp->facing_dir < ftSk_Init_804D9660) {
         ledge_grab_dir = -1;
     } else {
         ledge_grab_dir = 1;
     }
-    if (ft_CheckGroundAndLedge((Fighter_GObj* ) gobj, ledge_grab_dir) != 0) {
-        ftCo_800D5CB0((Fighter_GObj* ) gobj, 0, attributes->x5C);
+    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ledge_grab_dir) != 0) {
+        ftCo_800D5CB0((Fighter_GObj*) gobj, 0, attributes->x5C);
         return;
     }
-    if (!ftCliffCommon_80081298((Fighter_GObj* ) gobj)) {
+    if (!ftCliffCommon_80081298((Fighter_GObj*) gobj)) {
         return;
     }
 }
