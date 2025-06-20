@@ -10,10 +10,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "it/items/itseakvanish.h"
 #include "lb/lb_00B0.h"
@@ -21,8 +24,6 @@
 
 #include <math.h>
 #include <baselib/gobj.h>
-
-/* 08A2BC */ static void ft_8008A2BC(Fighter_GObj* gobj);
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
@@ -450,7 +451,19 @@ void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
-/// #ftSk_SpecialAirHi_Anim
+// Gelatart's scratch at https://decomp.me/scratch/2S6Ll
+void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
+
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        float x, y;
+        x = attributes->x58;
+        y = attributes->x5C;
+        ftCo_80096900((Fighter_GObj*) gobj, 1, 0, 1, x, y);
+    }
+}
 
 void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
 
@@ -463,7 +476,25 @@ void ftSk_SpecialHi_Phys(HSD_GObj* gobj)
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-/// #ftSk_SpecialAirHi_Phys
+// Gelatart's scratch at https://decomp.me/scratch/rQtEW
+void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
+{
+    u8 _[8];
+
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
+
+    if (fp->cmd_vars[0] != 0) {
+        ftCommon_8007D4B8(fp);
+        ftCommon_8007D440(fp, attributes->x4C * fp->co_attrs.air_drift_max);
+        // UPDATE x4c TO F32!
+        return;
+    } else {
+        float vel_y = fp->self_vel.y;
+        fp->self_vel.y = vel_y - (vel_y / ftSk_Init_804D9694);
+    }
+    ftCommon_8007CEF4(fp);
+}
 
 // Gelatart's scratch at https://decomp.me/scratch/AWQjm
 void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
@@ -473,7 +504,28 @@ void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-/// #ftSk_SpecialAirHi_Coll
+// Gelatart's scratch at https://decomp.me/scratch/58XJm
+void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
+{
+    u8 _[8];
+
+    int ledge_grab_dir;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
+
+    if (fp->facing_dir < ftSk_Init_804D9660) {
+        ledge_grab_dir = -1;
+    } else {
+        ledge_grab_dir = 1;
+    }
+    if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ledge_grab_dir) != 0) {
+        ftCo_800D5CB0((Fighter_GObj*) gobj, 0, attributes->x5C);
+        return;
+    }
+    if (!ftCliffCommon_80081298((Fighter_GObj*) gobj)) {
+        return;
+    }
+}
 
 // Gelatart's scratch at https://decomp.me/scratch/QTuAS
 void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
