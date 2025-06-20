@@ -287,7 +287,20 @@ void pl_8003E978(int slot, bool fp_x221F_b4, Item_GObj* item_gobj, float y0,
                  float arg4, float arg5, float arg6, float x1, float y1,
                  float frame_speed_mul)
 {
+    /// @todo Not actually sure what the second argument should be
     fn_8003E998(slot, fp_x221F_b4);
+}
+
+void fn_8003E998(int arg0, int arg1)
+{
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    Fighter_GObj* fighterGobj;
+
+    RETURN_IF(arg1 != 0);
+    RETURN_IF(temp_r31->xD6C == 6);
+
+    fighterGobj = Player_GetEntityAtIndex(arg0, arg1);
+    *((int*) &ft_800898A8(fighterGobj)->x207C.y) = temp_r31->xD6C;
 }
 
 void pl_8003EA08(int slot, int arg1)
