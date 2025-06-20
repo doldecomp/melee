@@ -68,6 +68,8 @@ int pl_8003D60C(int arg0)
     }
 }
 
+// pl_8003D644
+
 void pl_8003DF44(int arg0, int arg1)
 {
     int temp_r3 = ftLib_80087300(Player_GetEntityAtIndex(arg0, arg1));
@@ -226,6 +228,8 @@ int pl_8003E420(int arg0)
     return sum;
 }
 
+// pl_8003E4A4
+
 void pl_8003E70C(Item_GObj* igobj)
 {
     pl_StaleMoveTableExt_t* temp_r31;
@@ -335,6 +339,8 @@ void pl_8003EAAC(int arg0, int arg1, int arg2)
     }
 }
 
+// pl_8003EB30
+
 void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
 {
     pl_StaleMoveTableExt_t* stale_moves;
@@ -360,6 +366,8 @@ void pl_8003EC9C(int arg0, int arg1, float arg2, float arg3)
     }
     temp_r3->xD10 = 0;
 }
+
+// pl_8003ED0C
 
 void fn_8003EE2C(int arg0, int arg1)
 {
@@ -500,6 +508,8 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 }
 
+// fn_8003F294
+
 void fn_8003F53C(int arg0, int arg1)
 {
     pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
@@ -527,6 +537,10 @@ void fn_8003F53C(int arg0, int arg1)
         }
     }
 }
+
+// fn_8003F654
+
+// pl_8003FAA8
 
 int pl_8003FBFC(int arg0)
 {
@@ -857,6 +871,10 @@ void pl_8004065C(int arg0, int arg1)
     pl_80038824(arg0, 0x78);
 }
 
+// pl_80040688
+
+// pl_800407C8
+
 float pl_80040870(int arg0)
 {
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xCF8;
@@ -886,6 +904,8 @@ int pl_80040924(int arg0)
 {
     return Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
 }
+
+// pl_80040948
 
 int pl_80040A04(int arg0)
 {
