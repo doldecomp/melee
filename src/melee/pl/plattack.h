@@ -1,7 +1,7 @@
 #ifndef _plattack_h_
 #define _plattack_h_
 
-#include <platform.h>
+#include <Runtime/platform.h>
 
 /* 037590 */ void plAttack_80037590(void);
 /* 03759C */ void plAttack_8003759C(int);

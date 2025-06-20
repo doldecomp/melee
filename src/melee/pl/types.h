@@ -1,10 +1,11 @@
 #ifndef MELEE_PL_TYPES_H
 #define MELEE_PL_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
 
-#include <pl/forward.h>
+#include <melee/pl/forward.h>
+
+#include <Runtime/platform.h>
 
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
