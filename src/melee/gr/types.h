@@ -124,7 +124,7 @@ struct StageInfo {
 };
 
 typedef struct StageCallbacks {
-    /*  +0 */ void (*callback0)(HSD_GObj*);
+    /*  +0 */ void (*callback0)(HSD_GObj*); ///< initialization callback
     /*  +4 */ bool (*callback1)(HSD_GObj*);
     /*  +8 */ void (*callback2)(HSD_GObj*);
     /*  +C */ void (*callback3)(HSD_GObj*);
@@ -149,8 +149,8 @@ typedef struct StageData {
     char* data1;
     void (*callback0)(void);
     void (*callback1)(int);
-    void (*callback2)(void);
-    void (*callback3)(void);
+    void (*callback2)(void); ///< on load callback
+    void (*callback3)(void); ///< on GO! callback
     bool (*callback4)(void);
     DynamicsDesc* (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);
@@ -406,6 +406,17 @@ struct grLast_GroundVars {
     /* +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
+struct Randall {
+/* +0 gp+C4 */ s16 timer;
+/* +4 gp+C8 */ HSD_JObj* jobj;
+};
+
+struct ShyGuys {
+/* +0 gp+C4 */ s8 count;
+/* +1 gp+C5 */ s8 pattern;
+/* +4 gp+C8 */ int timer;
+};
+
 struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
@@ -499,6 +510,8 @@ struct Ground {
         struct grStadium_GroundVars stadium;
         struct grStadium_type9_GroundVars stadium9;
         struct grStadium_Display display; ///< Pokemon Stadium jumbotron
+        struct Randall randall;
+        struct ShyGuys shyguys;
     } u;
 
     };
