@@ -24,7 +24,8 @@
 
 /* 08A2BC */ void ft_8008A2BC(Fighter_GObj* gobj);
 /* 0D5CB0 */ void ftCo_800D5CB0(ftCo_GObj*, bool, float landing_lag);
-/* 096900 */ void ftCo_80096900(ftCo_GObj* gobj, int, int, bool allow_interrupt, float, float);
+/* 096900 */ void ftCo_80096900(ftCo_GObj* gobj, int, int,
+                                bool allow_interrupt, float, float);
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
