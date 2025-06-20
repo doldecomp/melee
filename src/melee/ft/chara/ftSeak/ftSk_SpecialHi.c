@@ -10,10 +10,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
+#include "ft/ft_0D14.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "it/items/itseakvanish.h"
 #include "lb/lb_00B0.h"
@@ -21,11 +24,6 @@
 
 #include <math.h>
 #include <baselib/gobj.h>
-
-/* 08A2BC */ void ft_8008A2BC(Fighter_GObj* gobj);
-/* 0D5CB0 */ void ftCo_800D5CB0(ftCo_GObj*, bool, float landing_lag);
-/* 096900 */ void ftCo_80096900(ftCo_GObj* gobj, int, int,
-                                bool allow_interrupt, float, float);
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
 /* 112F48 */ static void ftSk_SpecialHi_80112F48(Fighter_GObj* gobj);
