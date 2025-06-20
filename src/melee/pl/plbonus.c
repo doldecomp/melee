@@ -18,7 +18,7 @@ static inline void setKindToOne_inline(int player, int kind)
 {
     pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(player);
     HSD_ASSERTMSG(56, player != 6, "player != Gm_Player_Other");
-    HSD_ASSERTMSG(57, gm_8016F1B8(kind) == 0,
+    HSD_ASSERTMSG(57, gmDecisionGetType(kind) == 0,
                   "gmDecisionGetType(kind) == Gm_DecType_Flag");
     table->x0_staleMoveTable.x904[kind] = 1U;
 }
@@ -28,7 +28,7 @@ static inline void setKindToValue_inline(int player, int kind,
 {
     pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(player);
     HSD_ASSERTMSG(80, player != 6, "player != Gm_Player_Other");
-    HSD_ASSERTMSG(81, gm_8016F1B8(kind) == 1,
+    HSD_ASSERTMSG(81, gmDecisionGetType(kind) == 1,
                   "gmDecisionGetType(kind) == Gm_DecType_Point");
     table->x0_staleMoveTable.x904[kind] = val;
 }
@@ -55,7 +55,7 @@ void pl_80038824(int arg0, int kind)
 {
     pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
 
-    HSD_ASSERTMSG(92, gm_8016F1B8(kind) == 1,
+    HSD_ASSERTMSG(92, gmDecisionGetType(kind) == 1,
                   "gmDecisionGetType(kind) == Gm_DecType_Point");
     temp_r31->x0_staleMoveTable.x904[kind] += 1;
 }
@@ -64,7 +64,7 @@ void pl_80038898(int arg0, int kind)
 {
     unsigned int currentValue;
     pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    HSD_ASSERTMSG(103, gm_8016F1B8(kind) == 1,
+    HSD_ASSERTMSG(103, gmDecisionGetType(kind) == 1,
                   "gmDecisionGetType(kind) == Gm_DecType_Point");
     currentValue = temp_r31->x0_staleMoveTable.x904[kind];
     RETURN_IF(currentValue == 0);

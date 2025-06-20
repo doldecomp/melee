@@ -924,7 +924,7 @@ UNK_T gm_8016B774(void)
 
 /// #fn_8016F180
 
-/// #gm_8016F1B8
+/// #gmDecisionGetType
 
 short fn_8016F1F0(int idx)
 {
