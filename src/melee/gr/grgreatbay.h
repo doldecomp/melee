@@ -57,7 +57,7 @@
 /* 1F660C */ UNK_RET grGreatBay_801F660C(UNK_PARAMS);
 /* 1F66A4 */ UNK_RET grGreatBay_801F66A4(UNK_PARAMS);
 /* 1F6708 */ UNK_RET fn_801F6708(UNK_PARAMS);
-/* 1F67A4 */ void grGreatBay_801F67A4(S32Vec3*, f32);
+/* 1F67A4 */ void grGreatBay_801F67A4(Vec3*, f32);
 /* 1F680C */ DynamicsDesc* grGreatBay_801F680C(enum_t);
 /* 1F6814 */ bool grGreatBay_801F6814(Vec3*, int _, HSD_JObj*);
 

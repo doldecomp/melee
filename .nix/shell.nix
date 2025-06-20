@@ -19,6 +19,9 @@ melee.overrideAttrs (oa: {
   nativeBuildInputs = oa.nativeBuildInputs ++ [
     pkgs.clang-tools
     pkgs.clang.cc.python
+    (pkgs.python3.pkgs.callPackage ./m2c.nix {})
+    pkgs.python3.pkgs.pyelftools
+    pkgs.python3.pkgs.pcpp
   ];
 
   WINE = "${pkgs.wibo}/bin/wibo";

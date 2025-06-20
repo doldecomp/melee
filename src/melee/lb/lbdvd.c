@@ -258,7 +258,7 @@ void lbDvd_80017E64(void* key, int index, void* value, bool cancelflag)
     lbDvd_80017CC4();
 }
 
-HSD_Archive* lbDvd_GetPreloadedArchive(s32 arg0)
+void* lbDvd_GetPreloadedArchive(s32 arg0)
 {
     s8 type;
     ssize_t i;
@@ -318,7 +318,7 @@ HSD_Archive* lbDvd_GetPreloadedArchive(s32 arg0)
     if (entry->archive) {
         return (HSD_Archive*) entry->archive->addr;
     }
-    return (HSD_Archive*) entry->raw_data->addr;
+    return (void*) entry->raw_data->addr;
 }
 
 HSD_Archive* lbDvd_8001819C(const char* basename)

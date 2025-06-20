@@ -327,7 +327,7 @@ void grGreatBay_801F5D48(HSD_GObj* gobj)
 
 /// #fn_801F6708
 
-void grGreatBay_801F67A4(S32Vec3* vec, f32 arg8)
+void grGreatBay_801F67A4(Vec3* vec, f32 arg8)
 {
     UnkGeneratorMember* temp_r3_2;
     UnkGeneratorStruct* temp_r3;

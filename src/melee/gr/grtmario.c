@@ -40,7 +40,7 @@
 /* 21FB2C */ static void grTMario_8021FB2C(HSD_GObj*);
 /* 21FB4C */ static void grTMario_8021FB4C(HSD_GObj*);
 /* 21FB50 */ static int lbl_8021FB50(s32, HSD_GObj*);
-/* 21FBE8 */ static void grTMario_8021FBE8(S32Vec3*, f32);
+/* 21FBE8 */ static void grTMario_8021FBE8(Vec3*, f32);
 /* 21FC50 */ static DynamicsDesc* grTMario_8021FC50(enum_t);
 /* 21FC58 */ static bool grTMario_8021FC58(Vec3*, int, HSD_JObj*);
 
@@ -212,13 +212,13 @@ int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
     if ((current.y < temp_f31) && (previous.y > temp_f31)) {
         temp_f1 = ftLib_80086B80(gobj) / 10.0f;
         current.y = temp_f31;
-        grTMario_8021FBE8((S32Vec3*) &current, temp_f1);
+        grTMario_8021FBE8(&current, temp_f1);
         Ground_801C53EC(0x77A10U);
     }
     return 0;
 }
 
-void grTMario_8021FBE8(S32Vec3* vec, f32 arg8)
+void grTMario_8021FBE8(Vec3* vec, f32 arg8)
 {
     UnkGeneratorMember* temp_r3_2;
     UnkGeneratorStruct* temp_r3;
