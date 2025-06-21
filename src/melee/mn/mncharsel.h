@@ -27,8 +27,8 @@
 /* 264070 */ UNK_RET mnCharSel_80264070(UNK_PARAMS);
 /* 26407C */ UNK_RET fn_8026407C(UNK_PARAMS);
 /* 2640A0 */ UNK_RET mnCharSel_802640A0(UNK_PARAMS);
-/* 26688C */ UNK_RET mnCharSel_8026688C_OnEnter(UNK_PARAMS);
-/* 2669F4 */ UNK_RET mnCharSel_802669F4_OnFrame(UNK_PARAMS);
-/* 266D70 */ UNK_RET mnCharSel_80266D70_OnLeave(UNK_PARAMS);
+/* 26688C */ void mnCharSel_8026688C_OnEnter(UNK_T);
+/* 2669F4 */ void mnCharSel_802669F4_OnFrame(void);
+/* 266D70 */ void mnCharSel_80266D70_OnLeave(UNK_T);
 
 #endif

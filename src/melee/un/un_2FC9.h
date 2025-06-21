@@ -46,8 +46,8 @@
 /* 2FE6A8 */ UNK_RET un_802FE6A8(UNK_PARAMS);
 /* 2FE8CC */ UNK_RET un_802FE8CC(UNK_PARAMS);
 /* 2FE918 */ UNK_RET un_802FE918(UNK_PARAMS);
-/* 2FEBE0 */ UNK_RET un_802FEBE0_OnEnter(UNK_PARAMS);
-/* 2FED10 */ UNK_RET un_802FED10_OnLeave(UNK_PARAMS);
+/* 2FEBE0 */ void un_802FEBE0_OnEnter(UNK_T);
+/* 2FED10 */ void un_802FED10_OnLeave(UNK_T);
 /* 2FED14 */ UNK_RET fn_802FED14(UNK_PARAMS);
 /* 2FEFAC */ UNK_RET un_802FEFAC(UNK_PARAMS);
 /* 2FF128 */ UNK_RET un_802FF128(UNK_PARAMS);
@@ -243,15 +243,7 @@
 /* 3124BC */ UNK_RET un_803124BC(UNK_PARAMS);
 /* 3127D4 */ void un_803127D4(void);
 /* 31C2CC */ UNK_RET un_8031C2CC(UNK_PARAMS);
-/* 31C2EC */ int un_8031C2EC(void);
 /* 31C454 */ UNK_RET un_8031C454(UNK_PARAMS);
-/* 31C8B8 */ void un_8031C8B8(void);
-/* 322258 */ bool un_80322258(f32 x);
-/* 3222EC */ float un_803222EC(float mag, float angle);
-/* 322314 */ void un_80322314(void);
-/* 32233C */ void un_8032233C(int, int);
-/* 3224DC */ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag);
-/* 322598 */ void un_80322598(int, float);
 /* 4D6E6C */ extern void* un_804D6E6C;
 /* 4D6EF4 */ extern struct un_804D6EF4_t* un_804D6EF4;
 

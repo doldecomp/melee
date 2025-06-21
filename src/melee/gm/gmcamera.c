@@ -229,4 +229,4 @@ void gmCamera_801A2650(void)
 
 /// #gmCamera_801A3634_OnEnter
 
-void gmCamera_801A367C_OnLeave(void) {}
+void gmCamera_801A367C_OnLeave(UNK_T unused) {}

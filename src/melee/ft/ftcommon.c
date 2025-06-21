@@ -38,6 +38,7 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 #include "un/un_2FC9.h"
+#include "vi/vi1202.h"
 
 #include <common_structs.h>
 #include <trigf.h>

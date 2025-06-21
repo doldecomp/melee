@@ -1,10 +1,36 @@
 #ifndef GALE01_32110C
 #define GALE01_32110C
 
+#include <placeholder.h>
 #include <baselib/forward.h>
 
 /* 32110C */ void un_8032110C(HSD_GObj*);
 /* 321130 */ void un_80321130(HSD_GObj*);
 /* 321154 */ void un_80321154(HSD_GObj*);
+/* 321178 */ UNK_RET un_80321178(UNK_PARAMS);
+/* 321294 */ UNK_RET un_80321294(UNK_PARAMS);
+/* 321300 */ void un_80321300_OnEnter(UNK_T);
+/* 3218E0 */ void un_803218E0_OnFrame(void);
+/* 321900 */ UNK_RET un_80321900(UNK_PARAMS);
+/* 321950 */ UNK_RET un_80321950(UNK_PARAMS);
+/* 3219AC */ UNK_RET fn_803219AC(UNK_PARAMS);
+/* 321A00 */ UNK_RET un_80321A00(UNK_PARAMS);
+/* 321AF4 */ UNK_RET un_80321AF4(UNK_PARAMS);
+/* 321BF8 */ UNK_RET un_80321BF8(UNK_PARAMS);
+/* 321C28 */ UNK_RET un_80321C28(UNK_PARAMS);
+/* 321C70 */ UNK_RET un_80321C70(UNK_PARAMS);
+/* 321CA4 */ UNK_RET un_80321CA4(UNK_PARAMS);
+/* 321CE8 */ UNK_RET un_80321CE8(UNK_PARAMS);
+/* 321D30 */ UNK_RET un_80321D30(UNK_PARAMS);
+/* 321EBC */ UNK_RET un_80321EBC(UNK_PARAMS);
+/* 32201C */ UNK_RET un_8032201C(UNK_PARAMS);
+/* 322178 */ UNK_RET un_80322178(UNK_PARAMS);
+/* 322258 */ bool un_80322258(float);
+/* 322298 */ UNK_RET un_80322298(UNK_PARAMS);
+/* 3222EC */ float un_803222EC(float mag, float angle);
+/* 322314 */ void un_80322314(void);
+/* 32233C */ void un_8032233C(int, int);
+/* 3224DC */ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag);
+/* 322598 */ void un_80322598(int, float);
 
 #endif

@@ -159,7 +159,7 @@
 
 /// #fn_801AC67C
 
-void gm_801AC6D8_OnEnter(void)
+void gm_801AC6D8_OnEnter(UNK_T unused)
 {
     HSD_JObj* jobj_arr[2];
     int const gx_link = 11;
@@ -294,7 +294,7 @@ void gm_801AC6D8_OnEnter(void)
     }
 }
 
-void gm_801ACC90_OnLeave(void) {}
+void gm_801ACC90_OnLeave(UNK_T unused) {}
 
 UNK_T gm_801ACC94(void)
 {

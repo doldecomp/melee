@@ -193,7 +193,7 @@ void un_802FD91C(void)
 
 /// #un_802FEBE0_OnEnter
 
-void un_802FED10_OnLeave(void) {}
+void un_802FED10_OnLeave(UNK_T unused) {}
 
 /// #fn_802FED14
 
