@@ -923,7 +923,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/grpushon.c"),
             Object(NonMatching, "melee/gr/grfigureget.c"),
             Object(Matching, "melee/gr/grbattle.c"),
-            Object(NonMatching, "melee/gr/grlast.c"),
+            Object(Matching, "melee/gr/grlast.c"),
             Object(NonMatching, "melee/gr/grhomerun.c"),
             Object(NonMatching, "melee/gr/grheal.c"),
             # Break the Targets stages

@@ -292,109 +292,109 @@ s32 Ground_801C0508(void)
     return temp_r3 != NULL ? temp_r3->x4 : 128;
 }
 
-void Ground_801C052C(s32* arg0)
+void Ground_801C052C(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xB8 = *arg0;
 }
 
-void Ground_801C0544(s32* arg0)
+void Ground_801C0544(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xC0 = *arg0;
 }
 
-void Ground_801C055C(s32* arg0)
+void Ground_801C055C(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xD0 = *arg0;
 }
 
-void Ground_801C0574(s32* arg0)
+void Ground_801C0574(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xD8 = *arg0;
 }
 
-void Ground_801C058C(s32* arg0)
+void Ground_801C058C(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xC4 = *arg0;
 }
 
-void Ground_801C05A4(s32* arg0)
+void Ground_801C05A4(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xCC = *arg0;
 }
 
-void Ground_801C05BC(s32* arg0)
+void Ground_801C05BC(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xD4 = *arg0;
 }
 
-void Ground_801C05D4(s32* arg0)
+void Ground_801C05D4(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xBC = *arg0;
 }
 
-void Ground_801C05EC(s32* arg0)
+void Ground_801C05EC(GXColor* arg0)
 {
     UnkStage6B0* x = stage_info.param;
     x->xC8 = *arg0;
 }
 
-s32* Ground_801C0604(void)
+GXColor* Ground_801C0604(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xB8;
 }
 
-s32* Ground_801C0618(void)
+GXColor* Ground_801C0618(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xC0;
 }
 
-s32* Ground_801C062C(void)
+GXColor* Ground_801C062C(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xD0;
 }
 
-s32* Ground_801C0640(void)
+GXColor* Ground_801C0640(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xD8;
 }
 
-s32* Ground_801C0654(void)
+GXColor* Ground_801C0654(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xC4;
 }
 
-s32* Ground_801C0668(void)
+GXColor* Ground_801C0668(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xCC;
 }
 
-s32* Ground_801C067C(void)
+GXColor* Ground_801C067C(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xD4;
 }
 
-s32* Ground_801C0690(void)
+GXColor* Ground_801C0690(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xBC;
 }
 
-s32* Ground_801C06A4(void)
+GXColor* Ground_801C06A4(void)
 {
     UnkStage6B0* x = stage_info.param;
     return &x->xC8;

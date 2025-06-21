@@ -10,6 +10,7 @@
 #include <melee/lb/forward.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
+#include <sysdolphin/baselib/psappsrt.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
@@ -402,10 +403,6 @@ struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
-struct grLast_GroundVars {
-    /* +0 gp+C4:0 */ u8 x0_b0 : 1;
-};
-
 struct Randall {
 /* +0 gp+C4 */ s16 timer;
 /* +4 gp+C8 */ HSD_JObj* jobj;
@@ -422,6 +419,40 @@ struct Battlefield {
 /* +4 gp+C8 */ int curr_bg;
 /* +8 gp+CC */ int prev_bg;
 /* +C gp+D0 */ int bg_timer;
+};
+
+struct Last_GroundVars {
+/* +00 gp+C4    */ float xC4;
+/* +04 gp+C8    */ float xC8;
+/* +08 gp+CC    */ float xCC;
+/* +0C gp+D0    */ float xD0;
+/* +10 gp+D4    */ float xD4;
+/* +14 gp+D8    */ float xD8;
+/* +18 gp+DC    */ float xDC;
+/* +1C gp+E0    */ UnkGeneratorStruct* xE0;
+};
+
+struct Map_GroundVars {
+/* +00 gp+C4:0  */ u32 xC4_b0 : 1;
+/* +00 gp+C4:1  */ u32 xC4_b1 : 1;
+/* +00 gp+C4:2  */ u32 xC4_b2_25 : 16;
+/* +00 gp+C4:26 */ u32 xC4_b26 : 1;
+/* +00 gp+C4:27 */ u32 xC4_b27 : 1;
+/* +00 gp+C4:28 */ u32 xC4_b28 : 1;
+/* +00 gp+C4:29 */ u32 xC4_b29 : 1;
+/* +00 gp+C4:30 */ u32 xC4_b30 : 1;
+/* +00 gp+C4:31 */ u32 xC4_b31 : 1;
+/* +04 gp+C8    */ float xC8;
+/* +08 gp+CC    */ HSD_GObj* lv_gobj[6];
+/* +20 gp+E4    */ float xE4;
+/* +24 gp+E8    */ float xE8;
+/* +28 gp+EC    */ float xEC;
+/* +2C gp+F0    */ float xF0;
+/* +30 gp+F4    */ float xF4;
+/* +34 gp+F8    */ float xF8;
+/* +38 gp+FC    */ float xFC;
+/* +3C gp+100   */ float x100;
+/* +40 gp+104   */ float x104;
 };
 
 struct Ground {
@@ -464,7 +495,6 @@ struct Ground {
     char pad_40[0xC4 - 0x74];
 
     union {
-
     /// @todo This union is named 'u', from assert statements
     union GroundVars {
         char pad_0[0x204 - 0xC4];
@@ -480,7 +510,6 @@ struct Ground {
         struct grKongo_GroundVars2 kongo2;
         struct grKongo_GroundVars3 kongo3;
         struct grKraid_GroundVars kraid;
-        struct grLast_GroundVars last;
         struct grOnett_GroundVars onett;
         struct GroundVars_unk unk;
         struct grZebes_GroundVars zebes;
@@ -520,6 +549,8 @@ struct Ground {
         struct Randall randall;
         struct ShyGuys shyguys;
         struct Battlefield battle;
+        struct Last_GroundVars last;
+        struct Map_GroundVars map;
     } u;
 
     };
@@ -563,15 +594,15 @@ struct UnkStage6B0 {
     u8 x6C_pad[0xB0 - 0x6A];
     UnkBgmStruct* xB0;
     s32 xB4; // number of entries in xB0
-    s32 xB8;
-    s32 xBC;
-    s32 xC0;
-    s32 xC4;
-    s32 xC8;
-    s32 xCC;
-    s32 xD0;
-    s32 xD4;
-    s32 xD8;
+    GXColor xB8;
+    GXColor xBC;
+    GXColor xC0;
+    GXColor xC4;
+    GXColor xC8;
+    GXColor xCC;
+    GXColor xD0;
+    GXColor xD4;
+    GXColor xD8;
 };
 
 struct UnkStageDatInternal {
