@@ -19,11 +19,13 @@ struct UnkGeneratorMember {
     UNK_T x0;
     UnkGeneratorStruct* x4;
     Vec3 x8;
-    u8 x14_fill[0x10];
+    Vec3 x14;
+    u8 x20_fill[4];
     f32 x24;
     f32 x28;
     f32 x2C;
-    u8 x30_fill[0x72];
+    u8 x30;
+    u8 x31_fill[0x71];
     s8 xA2;
 };
 
