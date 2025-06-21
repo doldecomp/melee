@@ -525,7 +525,7 @@ static /// @remarks #Item_8026862C loads two integers into this,
     return result;
 }
 
-void Item_80267978(HSD_GObj* gobj)
+void Item_80267978(HSD_GObj* gobj) // test
 {
     Item* item_data = gobj->user_data;
     if (item_data->kind < It_Kind_Kuriboh) {
