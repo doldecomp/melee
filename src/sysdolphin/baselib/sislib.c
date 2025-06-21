@@ -11,15 +11,14 @@
 #include "tev.h"
 #include "wobj.h"
 
-#include <melee/lb/lbarchive.h>
-
 #include "dolphin/gx.h"
 #include "dolphin/mtx.h"
 
+#include <printf.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <printf.h>
 #include <dolphin/os.h>
+#include <melee/lb/lbarchive.h>
 
 static HSD_WObjDesc HSD_SisLib_8040C490 = { NULL, { 0, 0, 1 }, NULL, };
 
@@ -892,7 +891,7 @@ loop_37:
     return var_r9;
 }
 
-void HSD_SisLib_803A6B98(HSD_Text* arg0, void* arg1, ...)
+int HSD_SisLib_803A6B98(HSD_Text* arg0, float x, float y, void* arg1, ...)
 {
     s8 sp10C;
     HSD_Text** sp88;
@@ -1077,6 +1076,8 @@ void HSD_SisLib_803A6B98(HSD_Text* arg0, void* arg1, ...)
     *playhead++ = 0xD;
     *playhead = 0;
     *((s32*) playhead + 2) = *((s32*) playhead + 2) + 1;
+
+    return (int) playhead;
 }
 
 // TODO there seems to be a file boundary before this function,

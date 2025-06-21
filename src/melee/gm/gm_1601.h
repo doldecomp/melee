@@ -262,7 +262,7 @@
 /* 16B204 */ UNK_RET gm_8016B204(UNK_PARAMS);
 /* 16B238 */ bool gm_8016B238(void);
 /* 16B248 */ float gm_8016B248(void);
-/* 16B258 */ UNK_RET gm_8016B258(UNK_PARAMS);
+/* 16B258 */ bool gm_8016B258(int);
 /* 16B274 */ void gm_SetGameSpeed(f32);
 /* 16B2C8 */ void gm_ResetGameSpeed(void);
 /* 16B328 */ UNK_RET gm_8016B328(UNK_PARAMS);

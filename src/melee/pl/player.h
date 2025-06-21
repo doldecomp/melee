@@ -23,8 +23,7 @@ typedef struct _StaticPlayer {
     CharacterKind player_character;
 
     /// @at{8} @sz{4}
-    /// @todo 0 is HMN, 1 is CPU, 2 is Demo, 3 n/a
-    enum_t slot_type;
+    Gm_PKind slot_type;
 
     /*0x0C*/ u8 transformed[2]; // 0x0001 for normal, 0x0100 for transformed
                                 // (Probably Zelda/Sheik only)
@@ -194,7 +193,7 @@ u8 Player_GetControllerIndex(int slot);
 void Player_SetControllerIndex(int slot, s8 controller_index);
 int Player_GetTeam(int slot);
 void Player_SetTeam(int slot, s8 unk_color);
-s8 Player_GetPlayerId(int slot);
+int Player_GetPlayerId(int slot);
 void Player_SetPlayerId(int slot, s8 player_id);
 int Player_GetCpuLevel(int slot);
 void Player_SetPlayerAndEntityCpuLevel(int slot, int cpu_level);
@@ -284,8 +283,8 @@ u8 Player_SetFlagsAEBit1(int slot, u8 bit1);
 
 u8 Player_GetUnk4C(s32 slot);
 void Player_SetUnk4C(s32 slot, u8 unk4C);
-void Player_80036058(s32 slot);
-void Player_800360D8(s32 slot);
+bool Player_80036058(s32 slot);
+float Player_800360D8(s32 slot);
 void Player_SetStructFunc(s32 slot, void* arg_func);
 pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot);

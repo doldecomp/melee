@@ -773,9 +773,9 @@ void Player_SetTeam(int slot, s8 team)
     player->team = team;
 }
 
-s8 Player_GetPlayerId(int slot)
+int Player_GetPlayerId(int slot)
 {
-    s8 player_id;
+    u8 player_id;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1697,20 +1697,20 @@ void Player_SetUnk4C(s32 slot, u8 unk4C)
     player->unk4C = unk4C;
 }
 
-void Player_80036058(s32 slot)
+bool Player_80036058(s32 slot)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    ftLib_80086F4C(player->player_entity[player->transformed[0]]);
+    return ftLib_80086F4C(player->player_entity[player->transformed[0]]);
 }
 
-void Player_800360D8(s32 slot)
+float Player_800360D8(s32 slot)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    ftLib_80086F80(player->player_entity[player->transformed[0]]);
+    return ftLib_80086F80(player->player_entity[player->transformed[0]]);
 }
 
 void Player_SetStructFunc(s32 slot, void* arg_func)

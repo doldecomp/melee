@@ -1,4 +1,5 @@
 #include "ftCommon/forward.h"
+#include "pl/forward.h"
 
 #include "ftbosslib.h"
 
@@ -21,14 +22,6 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
-
-typedef enum {
-    Gm_PKind_Human,
-    Gm_PKind_Cpu,
-    Gm_PKind_Demo,
-    Gm_PKind_NA,
-    Gm_PKind_Boss,
-} Gm_PKind;
 
 /// @todo Float reorder hack until hopefully fixing #my_sqrtf fixes it.
 static float get_zero(void)
