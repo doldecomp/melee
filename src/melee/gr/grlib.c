@@ -92,9 +92,9 @@ void grLib_801C9834(UnkGeneratorStruct* arg0)
     hsd_8039D4DC(arg0);
 }
 
-void grLib_801C9854(s32 arg0)
+void grLib_801C9854(HSD_JObj* jobj)
 {
-    hsd_8039D5DC(arg0);
+    hsd_8039D5DC(jobj);
 }
 
 void grLib_801C9874(UnkGeneratorStruct* arg0)

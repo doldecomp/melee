@@ -10,4 +10,12 @@ typedef struct pl_800386E8_arg0_t pl_800386E8_arg0_t;
 typedef struct pl_804D6470_t pl_804D6470_t;
 typedef struct pl_StaleMoveTableExt_t pl_StaleMoveTableExt_t;
 
+typedef enum {
+    Gm_PKind_Human,
+    Gm_PKind_Cpu,
+    Gm_PKind_Demo,
+    Gm_PKind_NA,
+    Gm_PKind_Boss,
+} Gm_PKind;
+
 #endif

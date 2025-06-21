@@ -19,6 +19,9 @@
 #define HSD_GOBJ_CLASS_ITEMLINK 0x7
 
 #define HSD_GOBJ_CLASS_EFFECT 0x8
+#define HSD_GOBJ_CLASS_LIGHT 0xB
+#define HSD_GOBJ_CLASS_UI 0xE
+#define HSD_GOBJ_CLASS_CAMERA 0x13
 
 struct HSD_GObj {
     /*  +0 */ u16 classifier;
@@ -50,11 +53,11 @@ typedef struct _GObjFuncs {
 } GObjFuncs;
 
 typedef struct _HSD_GObjLibInitDataType {
-    u8 p_link_max;                  // 804CE380
-    u8 gx_link_max;                 // 804CE381
-    u8 gproc_pri_max;               // 804CE382
-    GObjFuncs* funcs;               // 804CE384
-    u64* unk_2;                     // 804CE388
+    u8 p_link_max;    // 804CE380
+    u8 gx_link_max;   // 804CE381
+    u8 gproc_pri_max; // 804CE382
+    GObjFuncs* funcs; // 804CE384
+    u64* unk_2;       // 804CE388
 } HSD_GObjLibInitDataType;
 
 /// @todo Belongs in `melee/` somewhere
@@ -95,7 +98,6 @@ extern struct _unk_gobj_struct {
     u8 p_prio;
     HSD_GObj* gobj;
 } HSD_GObj_804CE3E4;
-
 
 extern GObjFunc* HSD_GObj_804D7810;
 extern HSD_GObj* HSD_GObj_804D7814;

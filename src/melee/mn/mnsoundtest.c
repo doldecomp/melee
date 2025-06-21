@@ -211,7 +211,7 @@ void mnSoundTest_8024A958(Soundtest_GObj* arg0)
     temp_r3_4->x24.y = 0.04f;
     mn_8022EA08((char*) &string, temp_r30->unk1);
     temp_r3_4->x4A = 1;
-    HSD_SisLib_803A6B98(temp_r3_4, &string, 0.0f, 0.0f);
+    HSD_SisLib_803A6B98(temp_r3_4, 0.0f, 0.0f, &string);
 }
 
 f32 mn_8022F298(HSD_JObj*);
@@ -251,7 +251,7 @@ void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
         temp_r3_2->x24.y = 0.04f;
         mn_8022EA08((char*) &string, temp_r30_2->unk4);
         temp_r3_2->x4A = 1;
-        HSD_SisLib_803A6B98(temp_r3_2, &string, 0.0f, 0.0f);
+        HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, &string);
         HSD_JObjClearFlagsAll(sp38, 0x10U);
     } else {
         temp_r3_4 = user_data->unk1C;
@@ -349,7 +349,7 @@ static inline void fn_8024AED0_inline(HSD_GObj* arg0)
     temp_r3_6->x24.y = 0.04f;
     mn_8022EA08((char*) &string, temp_r28_4->unk4);
     temp_r3_6->x4A = 1;
-    HSD_SisLib_803A6B98(temp_r3_6, &string, 0.0f, 0.0f);
+    HSD_SisLib_803A6B98(temp_r3_6, 0.0f, 0.0f, &string);
 }
 
 void fn_8024AED0(HSD_GObj* arg0)

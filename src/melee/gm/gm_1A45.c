@@ -269,12 +269,11 @@ inline u64 maybe_gm_801A48A4(u8 i)
 
 void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
 {
-    u64 temp_ret;
-    s32 var_r26;
+    int temp_r3;
+    int i;
     struct gm_80479D58_t* temp_r25;
-    u8 temp_r3;
 
-    PAD_STACK(20);
+    PAD_STACK(28);
 
     temp_r25 = &gm_80479D58;
     gm_801677C0(&temp_r25->unk_10);
@@ -299,8 +298,7 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
             break;
         }
 
-        var_r26 = 0;
-        while (var_r26 < temp_r3) {
+        for (i = 0; i < temp_r3; i++) {
             HSD_PerfSetStartTime();
             lb_800198E0();
             if (g_debugLevel >= 3) {
@@ -322,8 +320,7 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
             }
             if (gm_80479D58.unk_10 != gm_80479D58.unk_11 ||
                     temp_r25->unk_12 != temp_r25->unk_13) {
-                temp_ret = maybe_gm_801A48A4(temp_r25->unk_10);
-                temp_r25->unk_20 = temp_ret;
+                temp_r25->unk_20 = maybe_gm_801A48A4(temp_r25->unk_10);
                 temp_r25->unk_11 = temp_r25->unk_10;
                 temp_r25->unk_13 = temp_r25->unk_12;
                 temp_r25->unk_12 = 0;
@@ -359,7 +356,6 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
             if (temp_r25->unk_C != 0) {
                 break;
             }
-            var_r26 += 1;
         }
         if (temp_r25->unk_C == 2) {
             break;

@@ -37,10 +37,10 @@ union _gmCameraUnkUnion {
     gmCameraUnkStruct2Ptrs gcus2_ptrs;
 };
 
-/* 479BC8 */ static union _gmCameraUnkUnion gmCamera_80479BC8;
-/* 4DA9B8 */ static float gmCamera_804DA9B8;
-/* 4DA9BC */ static float gmCamera_804DA9BC;
-/* 4DA9C0 */ static float gmCamera_804DA9C0;
+/* 479BC8 */ extern union _gmCameraUnkUnion gmCamera_80479BC8;
+/* 4DA9B8 */ extern float gmCamera_804DA9B8;
+/* 4DA9BC */ extern float gmCamera_804DA9BC;
+/* 4DA9C0 */ extern float gmCamera_804DA9C0;
 
 /* 1A2224 */ u8* gmCamera_801A2224(u8* arg0, u32 arg1);
 /* 1A2334 */ void* gmCamera_801A2334(int arg0, float argA, float argB);
@@ -65,8 +65,8 @@ union _gmCameraUnkUnion {
 /* 1A31D8 */ UNK_RET fn_801A31D8(UNK_PARAMS);
 /* 1A31FC */ UNK_RET gmCamera_801A31FC(UNK_PARAMS);
 /* 1A33BC */ UNK_RET gmCamera_801A33BC(UNK_PARAMS);
-/* 1A34FC */ UNK_RET gmCamera_801A34FC_OnFrame(UNK_PARAMS);
-/* 1A3634 */ UNK_RET gmCamera_801A3634_OnEnter(UNK_PARAMS);
-/* 1A367C */ UNK_RET gmCamera_801A367C_OnLeave(UNK_PARAMS);
+/* 1A34FC */ void gmCamera_801A34FC_OnFrame(void);
+/* 1A3634 */ void gmCamera_801A3634_OnEnter(UNK_T);
+/* 1A367C */ void gmCamera_801A367C_OnLeave(UNK_T);
 
 #endif
