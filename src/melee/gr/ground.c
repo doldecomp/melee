@@ -37,6 +37,7 @@
 #include "mp/types.h"
 #include "pl/player.h"
 #include "ty/toy.h"
+#include "ty/tydisplay.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>

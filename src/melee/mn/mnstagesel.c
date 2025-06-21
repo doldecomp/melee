@@ -512,9 +512,8 @@ void mnStageSel_8025B850_OnFrame(void)
     }
 }
 
-void mnStageSel_8025BB5C_OnLeave(void)
+void mnStageSel_8025BB5C_OnLeave(UNK_T unused)
 {
-    u8 _[4];
     struct mnStageSel_804D6C90_t* tmp;
 
     if (mnStageSel_804D6C94 != NULL) {
