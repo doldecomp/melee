@@ -66,12 +66,14 @@
 /* 04049C */ void pl_8004049C(int, ItemKind);
 /* 040614 */ void pl_80040614(int, float);
 /* 04065C */ void pl_8004065C(int, int);
+/* 0407C8 */ float pl_800407C8(int);
 /* 040870 */ float pl_80040870(int);
 /* 040894 */ unsigned int pl_80040894(int);
 /* 0408B8 */ unsigned int pl_800408B8(int);
 /* 0408DC */ int pl_800408DC(int);
 /* 040900 */ int pl_80040900(int);
 /* 040924 */ int pl_80040924(int);
+/* 040948 */ float pl_80040948(int);
 /* 040A04 */ int pl_80040A04(int);
 /* 040A30 */ int pl_80040A30(int);
 /* 040A54 */ int pl_80040A54(int);

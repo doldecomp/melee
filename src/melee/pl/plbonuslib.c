@@ -7,6 +7,7 @@
 #include "placeholder.h"
 #include "player.h"
 #include "plbonus.h"
+#include "plbonusinline.h"
 
 #include <ft/ft_0877.h>
 #include <ft/ft_0892.h>
@@ -17,6 +18,7 @@
 #include <it/it_26B1.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/math.h>
+#include <MSL/math_ppc.h>
 
 /// @todo Lots of 6s in here
 // pl_8004049C seems to indicate it might have actually been `Gm_Player_NumMax`
@@ -538,7 +540,103 @@ void fn_8003F53C(int arg0, int arg1)
     }
 }
 
-// fn_8003F654
+void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
+{
+    Vec3 sp44;
+    Vec3 sp38;
+    float temp_f1;
+    float temp_f1_5;
+    float temp_f1_6;
+    float temp_f30;
+    float temp_f30_2;
+    float temp_f3;
+    float var_f30;
+    float var_f31;
+    float var_f6;
+    Fighter_GObj* temp_r27;
+    pl_StaleMoveTableExt_t* temp_r3_3;
+    int temp_r3;
+    int temp_r3_2;
+    int var_r26;
+    int var_r25;
+    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(slot);
+
+    temp_r27 = (Fighter_GObj*) Player_GetEntityAtIndex(slot, index);
+
+    RETURN_IF(!pl_Verify_gm_8016AEDC());
+
+    RETURN_IF(index == 1 || ftLib_8008732C(temp_r27));
+    temp_r3 = ft_80087B34(temp_r27);
+
+    if (temp_r3 == 1) {
+        temp_f3 = prevPos->x - pos->x;
+        temp_f1 = prevPos->y - pos->y;
+        temp_f1 *= temp_f1;
+        temp_f3 *= temp_f3;
+        var_f31 = sqrtf(temp_f3 + temp_f1);
+
+        temp_r3_2 = ftLib_80087300(temp_r27);
+        temp_r31->xD80 += var_f31;
+
+        if (var_f31 > temp_r31->xD84) {
+            temp_r31->xD84 = var_f31;
+        }
+
+        if (temp_r3_2 != 6) {
+            temp_r3_3 = Player_GetStaleMoveTableIndexPtr2(temp_r3_2);
+
+            if (var_f31 > temp_r3_3->xD88) {
+                temp_r3_3->xD88 = var_f31;
+            }
+        }
+    } else if (temp_r3 == 0) {
+        if (ftLib_800865CC(temp_r27) == 0) {
+            temp_f1_5 = pos->x - prevPos->x;
+            temp_r31->xD74 += ABS(temp_f1_5);
+        } else {
+            temp_f1_6 = pos->y - prevPos->y;
+
+            if (temp_f1_6 > 0.0f) {
+                temp_r31->xD78 += ABS(temp_f1_6);
+            } else {
+                temp_r31->xD7C += ABS(temp_f1_6);
+            }
+        }
+    }
+
+    var_f30 = 0.0F;
+    var_r25 = 0;
+
+    for (var_r26 = 0; var_r26 < 6; ++var_r26) {
+        if (var_r26 == slot) {
+            continue;
+        }
+
+        if (!pl_CheckIfSameTeam(slot, var_r26) && Player_8003221C(var_r26) &&
+            !ftLib_8008732C(Player_GetEntity(var_r26)))
+        {
+            Player_LoadPlayerCoords(var_r26, &sp44);
+            var_f30 += ABS(pos->x - sp44.x);
+            var_r25 += 1;
+        }
+    }
+
+    if (var_r25 != 0) {
+        temp_r31->xD90 += 1;
+
+        temp_f30 = pl_CalculateAverage(var_f30, var_r25) +
+                   (temp_r31->xD8C * (float) (temp_r31->xD90 - 1));
+        temp_r31->xD8C = pl_CalculateAverage(temp_f30, temp_r31->xD90);
+    }
+
+    temp_r31->xD98 += 1;
+    Stage_UnkSetVec3TCam_Offset(&sp38);
+
+    var_f6 = ABS(pos->x - sp38.x);
+
+    temp_f30_2 = (temp_r31->xD94 * (float) (temp_r31->xD98 - 1)) + var_f6;
+    temp_r31->xD94 = pl_CalculateAverage(temp_f30_2, temp_r31->xD98);
+}
 
 // pl_8003FAA8
 
@@ -731,8 +829,8 @@ void pl_800401F0(int arg0, int arg1, float arg2, float arg3)
 {
     pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
 
-    temp_r3->x0_staleMoveTable.xCDC += fabs_inline(arg2);
-    temp_r3->x0_staleMoveTable.xCE0 += fabs_inline(arg3);
+    temp_r3->x0_staleMoveTable.xCDC += ABS(arg2);
+    temp_r3->x0_staleMoveTable.xCE0 += ABS(arg3);
 }
 
 void pl_80040270(int arg0, int arg1, float arg2)
@@ -905,7 +1003,15 @@ int pl_80040924(int arg0)
     return Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
 }
 
-// pl_80040948
+float pl_80040948(int arg0)
+{
+    unsigned int temp_r31 =
+        Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
+    unsigned int temp_r30 = Player_GetTotalAttackCountPtr(arg0)->x358;
+    PAD_STACK(8);
+
+    return temp_r31 != 0 ? pl_CalculateAverage(temp_r30, temp_r31) : 0.0F;
+}
 
 int pl_80040A04(int arg0)
 {
