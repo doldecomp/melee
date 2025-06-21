@@ -255,9 +255,9 @@
 /* 27CE44 */ void it_8027CE44(Item_GObj*);
 /* 27CE64 */ void it_8027CE64(Item_GObj*, HSD_GObj*, void*);
 /* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
-/* 3F23CC */ extern struct ItemLogicTable it_803F23CC[];
+/* 3F23CC */ extern struct ItemLogicTable it_803F23CC[47];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
-/* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[];
+/* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[30];
 /* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk6 it_804A0E50;
 /* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;
@@ -268,9 +268,9 @@
 /* 4D6D10 */ extern u32 it_804D6D10;
 /* 4D6D14 */ extern u32 it_804D6D14;
 /* 4D6D18 */ extern u32 it_804D6D18;
-/* 4D6D24 */ extern Article** it_804D6D24;
+/* 4D6D24 */ extern Article* it_804D6D24[];
 /* 4D6D28 */ extern ItemCommonData* it_804D6D28;
-/* 4D6D30 */ extern Article** it_804D6D30;
-/* 4D6D38 */ extern Article** it_804D6D38;
+/* 4D6D30 */ extern Article* it_804D6D30[];
+/* 4D6D38 */ extern Article* it_804D6D38[];
 
 #endif

@@ -77,9 +77,9 @@ ItemStateTable it_803F8C8C[] = {
 static const Vec3 it_803B8730 = { 1.0f, 1.0f, 1.0f };
 
 Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
-                       Vec3* pos, int arg5,
-                       void (*arg6)(Item_GObj*, Ground*),
-                       void (*arg7)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                       Vec3* pos, int arg5, void (*arg6)(Item_GObj*, Ground*),
+                       void (*arg7)(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                    f32),
                        void (*arg8)(Item_GObj*, Ground*, HSD_GObj*))
 {
     SpawnItem spawn;
@@ -105,7 +105,7 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = arg5 ? 1 : 0;
     spawn.x40 = 0;
-    it_804D6D38[spawn.kind - 0x2B]->x0_common_attr = &it_803F8C08;
+    it_804D6D38[spawn.kind - It_Kind_Kuriboh]->x0_common_attr = &it_803F8C08;
 
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
@@ -158,7 +158,8 @@ void it_802E6D60(HSD_GObj* item_gobj)
         HSD_JObjSetRotation(item_jobj, &sp14);
     } else if (item->xDD4_itemVar.it_2E6A_1.x2 != 2) {
         OSReport("%s:%d: oioi...\n", "ityaku.c", 0xD7);
-        while (true);
+        while (true)
+            ;
     }
 }
 
@@ -168,7 +169,8 @@ bool it_802E6F7C(Item_GObj* item_gobj)
     if (item->xDD4_itemVar.it_2E6A_1.x14 != NULL &&
         item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
     {
-        item->xDD4_itemVar.it_2E6A_1.x14(item_gobj, item->xDD4_itemVar.it_2E6A_1.x10);
+        item->xDD4_itemVar.it_2E6A_1.x14(item_gobj,
+                                         item->xDD4_itemVar.it_2E6A_1.x10);
     }
     return false;
 }
@@ -185,7 +187,9 @@ bool it_802E6FC0(Item_GObj* item_gobj)
     if (item->xDD4_itemVar.it_2E6A_1.x18 != NULL &&
         item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
     {
-        item->xDD4_itemVar.it_2E6A_1.x18(item_gobj, item->xDD4_itemVar.it_2E6A_1.x10, &sp10, fighter_gobj, item->xCA0);
+        item->xDD4_itemVar.it_2E6A_1.x18(item_gobj,
+                                         item->xDD4_itemVar.it_2E6A_1.x10,
+                                         &sp10, fighter_gobj, item->xCA0);
     }
     return false;
 }
@@ -196,7 +200,8 @@ bool it_802E7054(HSD_GObj* item_gobj)
     if (item->xDD4_itemVar.it_2E6A_1.x1C != NULL &&
         item->xDD4_itemVar.it_2E6A_1.x10 != NULL)
     {
-        item->xDD4_itemVar.it_2E6A_1.x1C(item_gobj, item->xDD4_itemVar.it_2E6A_1.x10, item->toucher);
+        item->xDD4_itemVar.it_2E6A_1.x1C(
+            item_gobj, item->xDD4_itemVar.it_2E6A_1.x10, item->toucher);
     }
     return false;
 }
