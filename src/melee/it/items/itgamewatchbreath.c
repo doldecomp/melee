@@ -95,6 +95,6 @@ bool it_802C744C(void* item_gobj) {
     return false;
 }
 
-void it_802C74B8(Item_GObj* item_gobj, HSD_GObj* ref_gobj) {
+void it_802C74B8(Item_GObj* item_gobj, Item_GObj* ref_gobj) {
     it_8026B894(item_gobj, ref_gobj);
 }

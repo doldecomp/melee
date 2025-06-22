@@ -1,11 +1,13 @@
 #include "itgamewatchfire.h"
 
 #include <melee/db/db.h>
+#include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 #include <melee/it/types.h>
+#include <melee/lb/lb_00B0.h>
 
 HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir) {
     SpawnItem spawn;
@@ -105,6 +107,6 @@ bool it_802C6B20(Item_GObj* item_gobj) {
     return false;
 }
 
-void it_802C6C18(Item_GObj* item_gobj, HSD_GObj* ref_gobj) {
+void it_802C6C18(Item_GObj* item_gobj, Item_GObj* ref_gobj) {
     it_8026B894(item_gobj, ref_gobj);
 }

@@ -46,7 +46,7 @@ void it_802C6328(Item_GObj* item_gobj) {
     Item* item = GET_ITEM(item_gobj);
     if (item != NULL) {
         if (item->owner != NULL) {
-            ftGw_Attack11_ItemGreenhouseSetFlag(item);
+            ftGw_Attack11_ItemGreenhouseSetFlag(item->owner);
         }
         Item_8026A8EC(item_gobj);
     }
@@ -113,7 +113,7 @@ bool it_802C653C(Item_GObj* item_gobj) {
     return false;
 }
 
-void it_802C65C4(Item_GObj* item_gobj, HSD_GObj* ref_gobj) {
+void it_802C65C4(Item_GObj* item_gobj, Item_GObj* ref_gobj) {
     it_8026B894(item_gobj, ref_gobj);
 }
 
