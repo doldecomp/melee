@@ -890,7 +890,7 @@ struct Fighter_DemoStrings {
 /// xDA4_word/xDA8_short
 /* fp+2074 */ struct Struct2074 {
     /* fp+2074 */ Vec2 x2074_vec;
-    /* fp+207C */ Vec2 x207C;
+    /* fp+207C */ S32Vec2 x207C;
     /* fp+2084 */ u32 x2084;
     /* fp+2088 */ u16 x2088;
 };
