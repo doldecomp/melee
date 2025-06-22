@@ -661,7 +661,7 @@ bool gm_8016AEC8(void)
     return lbl_8046B6A0.unk_24D4;
 }
 
-bool gm_8016AEDC(void)
+u32 gm_8016AEDC(void)
 {
     return lbl_8046B6A0.unk_24;
 }

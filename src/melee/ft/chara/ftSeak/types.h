@@ -36,13 +36,13 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
      * f32 */
     f32 x30;
     f32 x34;
-    s32 x38;
+    f32 x38;
     f32 x3C;
     /* Changing to f32 based on context set up by kipcode 66 in
      * https://decomp.me/scratch/fE7Dq for ftSk_SpecialAirHiStart_1_Coll */
-    s32 x40;
-    s32 x44;
-    s32 x48;
+    f32 x40;
+    f32 x44;
+    f32 x48;
     /* ftSk_SpecialAirHi_Phys fully matches when x4C is type f32 */
     f32 x4C;
     /* Adding values here and shrinking data_filler_1 based on context set up

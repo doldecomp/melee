@@ -40,7 +40,13 @@ int ftYs_SpecialN_8012CD70(void)
     return M2C_FIELD(gFtDataList[0xE]->ext_attr, s32*, 0x38);
 }
 
-/// #ftYs_SpecialN_8012CD88
+void ftYs_SpecialN_8012CD88(Vec3* arg0)
+{
+    Fighter* fp = gFtDataList[FTKIND_YOSHI]->ext_attr;
+    arg0->x = fp->x34_scale.z; // x3C
+    arg0->y = fp->x40;
+    arg0->z = 0;
+}
 
 /// #ftYs_SpecialN_8012CDB4
 
@@ -220,7 +226,10 @@ void ftYs_SpecialS_8012DF18(HSD_GObj* gobj)
 
 /// #ftYs_SpecialAirHi_Anim
 
-/// #ftYs_SpecialHi_Phys
+void ftYs_SpecialHi_Phys(ftYs_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
 /// #ftYs_SpecialAirHi_Phys
 
@@ -297,7 +306,10 @@ void ftYs_SpecialAirLw_Coll(HSD_GObj* gobj)
 
 /// #ftYs_SpecialLwLanding_Anim
 
-/// #ftYs_SpecialLwLanding_Phys
+void ftYs_SpecialLwLanding_Phys(ftYs_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
 /// #ftYs_SpecialLwLanding_Coll
 
