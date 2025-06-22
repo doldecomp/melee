@@ -5,7 +5,7 @@
 #include <platform.h>
 
 /* 040DDC */ UNK_RET pl_80040DDC(UNK_PARAMS);
-/* 040ED4 */ UNK_RET pl_80040ED4(UNK_PARAMS);
+/* 040ED4 */ void pl_80040ED4(int, int, int, int, int, float);
 /* 040FBC */ UNK_RET pl_80040FBC(UNK_PARAMS);
 /* 0410F4 */ UNK_RET pl_800410F4(UNK_PARAMS);
 /* 0411C4 */ void pl_800411C4(u8 slot, bool);
