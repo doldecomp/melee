@@ -34,7 +34,7 @@
 #include "it/items/itsword.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
-#include "pl/pl_0371.h"
+#include "pl/pl_040D.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 #include "un/un_2FC9.h"

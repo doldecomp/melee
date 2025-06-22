@@ -68,7 +68,7 @@
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "pl/pl_0371.h"
+#include "pl/pl_040D.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 #include "pl/pltrick.h"

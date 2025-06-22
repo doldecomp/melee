@@ -6,6 +6,8 @@
 
 #include "forward.h"
 
+#include <melee/ft/types.h>
+
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
 struct plAllocInfo2 {
@@ -61,7 +63,7 @@ struct StaleMoveTable {
     /* +C6C */ float xC6C;
     /* +C70 */ u8 xC70[0xC90 - 0xC70];
     /* +C90 */ unsigned int xC90;
-    /* +C94 */ u8 xC94[0xC98 - 0xC94];
+    /* +C94 */ int xC94;
     /* +C98 */ float xC98;
     /* +C9C */ float xC9C;
     /* +CA0 */ float xCA0;
@@ -70,7 +72,11 @@ struct StaleMoveTable {
     /* +CAC */ int xCAC;
     /* +CB0 */ int xCB0;
     /* +CB4 */ int xCB4;
-    /* +CB8 */ u8 xCB8[0xCD8 - 0xCB8];
+    /* +CB8 */ int xCB8;
+    /* +CBC */ UnkPlBonusBits xCBC;
+    /* +CC0 */ ft_800898B4_t xCC0;
+
+    /* +CD4 */ u16 xCD4;
     /* +CD8 */ int xCD8;
     /* +CDC */ float xCDC;
     /* +CE0 */ float xCE0;
@@ -206,9 +212,13 @@ struct pl_804D6470_t {
     /*  +CC */ u8 xCC[0xE0 - 0xCC];
     /*  +E0 */ unsigned int xE0;
     /*  +E4 */ UNK_T xE4;
-    /*  +E8 */ u8 xE8[0x124 - 0xE8];
+    /*  +E8 */ u8 xE8[0x118 - 0xE8];
+    /* +118 */ unsigned int x118;
+    /* +11C */ float x11C;
+    /* +120 */ int x120;
     /* +124 */ unsigned int x124;
-    /* +128 */ u8 x128[0x130 - 0x128];
+    /* +128 */ int x128;
+    /* +12C */ int x12C;
     /* +130 */ unsigned int x130;
     /* +134 */ UNK_T x134;
     /* +138 */ u8 x138[0x180 - 0x138];

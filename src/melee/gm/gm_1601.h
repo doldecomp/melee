@@ -237,7 +237,7 @@
 /* 16AEA4 */ u64 gm_8016AEA4(void);
 /* 16AEB8 */ s32 gm_8016AEB8(void);
 /* 16AEC8 */ bool gm_8016AEC8(void);
-/* 16AEDC */ bool gm_8016AEDC(void);
+/* 16AEDC */ u32 gm_8016AEDC(void);
 /* 16AEEC */ bool gm_8016AEEC(void);
 /* 16AEFC */ u16 gm_8016AEFC(void);
 /* 16AF0C */ u16 gm_8016AF0C(UNK_PARAMS);
@@ -259,7 +259,7 @@
 /* 16B1C4 */ bool gm_8016B1C4(void);
 /* 16B1D8 */ bool gm_8016B1D8(void);
 /* 16B1EC */ bool gm_8016B1EC(void);
-/* 16B204 */ UNK_RET gm_8016B204(UNK_PARAMS);
+/* 16B204 */ bool gm_8016B204(void);
 /* 16B238 */ bool gm_8016B238(void);
 /* 16B248 */ float gm_8016B248(void);
 /* 16B258 */ bool gm_8016B258(int);
