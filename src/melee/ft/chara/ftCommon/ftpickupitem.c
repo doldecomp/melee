@@ -26,7 +26,7 @@
 #include "ftDonkey/ftDk_HeavyWait0.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "pl/pl_0371.h"
+#include "pl/pl_040D.h"
 #include "pl/plbonuslib.h"
 
 #include <common_structs.h>
