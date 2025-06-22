@@ -61,7 +61,10 @@ struct StaleMoveTable {
     /* +C64 */ float xC64;
     /* +C68 */ int xC68;
     /* +C6C */ float xC6C;
-    /* +C70 */ u8 xC70[0xC90 - 0xC70];
+    /* +C70 */ float xC70;
+    /* +C74 */ float xC74;
+    /* +C78 */ float xC78[1]; // TODO figure out size
+    /* +C7C */ u8 xC7C[0xC90 - 0xC7C];
     /* +C90 */ unsigned int xC90;
     /* +C94 */ int xC94;
     /* +C98 */ float xC98;
@@ -212,7 +215,9 @@ struct pl_804D6470_t {
     /*  +CC */ u8 xCC[0xE0 - 0xCC];
     /*  +E0 */ unsigned int xE0;
     /*  +E4 */ UNK_T xE4;
-    /*  +E8 */ u8 xE8[0x118 - 0xE8];
+    /*  +E8 */ UNK_T xE8;
+    /*  +EC */ int xEC;
+    /*  +E8 */ u8 xF0[0x118 - 0xF0];
     /* +118 */ unsigned int x118;
     /* +11C */ float x11C;
     /* +120 */ int x120;

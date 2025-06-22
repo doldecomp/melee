@@ -31,7 +31,7 @@
 /* 03EA40 */ void pl_8003EA40(int, int, int, int, int);
 /* 03EA74 */ void pl_8003EA74(int, int);
 /* 03EAAC */ void pl_8003EAAC(int, int, int);
-/* 03EB30 */ void pl_8003EB30(float, unsigned short, int, int, int, u8);
+/* 03EB30 */ void pl_8003EB30(float, int, int, int, int, int);
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03EC9C */ void pl_8003EC9C(int, int, float, float);
 /* 03ED0C */ void pl_8003ED0C(int, int, int, float);

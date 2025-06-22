@@ -7,6 +7,7 @@
 #include "placeholder.h"
 #include "player.h"
 #include "plbonus.h"
+#include "plbonusinline.h"
 
 #include <ft/ft_0877.h>
 #include <ft/ft_0892.h>
@@ -570,6 +571,17 @@ void pl_8003E978(int slot, bool fp_x221F_b4, Item_GObj* item_gobj, float y0,
     fn_8003E998(slot, fp_x221F_b4);
 }
 
+void fn_8003E998(int arg0, int index)
+{
+    pl_StaleMoveTableExt_t* temp_r31;
+    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    if (index == 0 && temp_r31->xD6C != 6) {
+        Fighter_GObj* gobj = Player_GetEntityAtIndex(arg0, index);
+        ft_800898A8(gobj)->x207C.y = temp_r31->xD6C;
+    }
+}
+
+
 void pl_8003EA08(int slot, int arg1)
 {
     RETURN_IF(arg1);
@@ -598,6 +610,41 @@ void pl_8003EAAC(int arg0, int arg1, int arg2)
 
         if (temp_r31->x0_staleMoveTable.xCA8 == it_8026C1D4()) {
             pl_80038788(arg0, 0xC2, 1);
+        }
+    }
+}
+
+void pl_8003EB30(float arg0, int arg1, int arg2, int arg3,
+                 int arg4, int arg5)
+{
+    pl_StaleMoveTableExt_t* temp_r31;
+    pl_StaleMoveTableExt_t* var_r3;
+    PAD_STACK(4);
+
+    if (arg1 != 6 && arg1 != arg3) {
+        temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg1);
+        if (arg3 != 6) {
+            var_r3 = Player_GetStaleMoveTableIndexPtr2(arg3);
+        } else {
+            var_r3 = NULL;
+        }
+        temp_r31->x0_staleMoveTable.xC6C += arg0;
+        if (arg5 == 0x34) {
+            temp_r31->x0_staleMoveTable.xC70 += arg0;
+        }
+        if (arg5 - 0x5C <= 1U) {
+            temp_r31->x0_staleMoveTable.xC74 += arg0;
+        }
+        if (arg3 != 6) {
+            if (arg4 == 0) {
+                var_r3->x0_staleMoveTable.xC78[arg1] += arg0;
+            }
+            pl_80040ED4(arg1, arg2, arg3, arg4, arg5, arg0);
+        }
+        {
+            pl_StaleMoveTableExt_t* tmp;
+            tmp = Player_GetStaleMoveTableIndexPtr2(arg1);
+            tmp->xD08 = 0;
         }
     }
 }
@@ -652,9 +699,7 @@ void pl_8003ED0C(int arg0, int arg1, int r5, float arg2)
     temp_f30 = temp_r3->x0_staleMoveTable.xCA0 * (temp_r4 - 1) + arg2;
 
     total = temp_r4;
-    if (total == 0.0f) {
-        __assert("plbonusinline.h", 0x10U, "total != 0.0F");
-    }
+    plCheckTotal(total);
     temp_r3->x0_staleMoveTable.xCA0 = temp_f30 / total;
 }
 
@@ -833,6 +878,32 @@ void fn_8003F53C(int arg0, int arg1)
             }
             temp_r31->xD58 = 0U;
         }
+    }
+}
+
+void pl_8003FAA8(int slot, int index, Vec3* pos, Vec3* prevPos)
+{
+    float temp_f31;
+    float temp_f30;
+    pl_StaleMoveTableExt_t* temp_r30;
+    int temp_r31;
+    int var_r0;
+    u32 temp_r3;
+    PAD_STACK(8);
+
+    temp_r30 = Player_GetStaleMoveTableIndexPtr2(slot);
+    fn_8003EE2C(slot, index);
+    fn_8003F294(slot, index);
+    fn_8003F53C(slot, index);
+    fn_8003F654(slot, index, pos, prevPos);
+
+    if (gm_cond() && index == 0) {
+        temp_r31 = ftLib_80087120(Player_GetEntityAtIndex(slot, index));
+        temp_f30 = temp_r30->x0_staleMoveTable.xC9C
+                     * (gm_8016AEDC() - 1) + temp_r31;
+        temp_f31 = gm_8016AEDC();
+        plCheckTotal(temp_f31);
+        temp_r30->x0_staleMoveTable.xC9C = temp_f30 / temp_f31;
     }
 }
 
@@ -1165,6 +1236,55 @@ void pl_8004065C(int arg0, int arg1)
     pl_80038824(arg0, 0x78);
 }
 
+void pl_80040688(int arg0, int arg1, int arg2)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+    UnkPlBonusBits* bits;
+    ft_800898B4_t* xCC0;
+    u8 temp_r0_2;
+    int temp_r0;
+
+    if (gm_8016AEDC() <= pl_804D6470->xEC) {
+        pl_80038788(arg0, 0x5F, 1);
+    }
+
+    if (arg2 != 0 && arg1 != 6) {
+        temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg1);
+
+        temp_r0 = temp_r3->x0_staleMoveTable.xCB8;
+        bits = &temp_r3->x0_staleMoveTable.xCBC;
+        xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
+
+        if (!unk_cond(arg1, arg2)) {
+            temp_r0_2 = bits->x3;
+            if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
+                pl_80038788(temp_r0, 0x2A, 1);
+            }
+            if (xCC0->x10_b0) {
+                pl_80038788(temp_r0, 7, 1);
+                pl_80038898(temp_r0, 6);
+            }
+        }
+    }
+}
+
+float pl_800407C8(int arg0)
+{
+    f32 temp_f31;
+    pl_StaleMoveTableExt_t* temp_r3;
+    u32 temp_r5;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    temp_r5 = temp_r3->x0_staleMoveTable.xCEC;
+    if (temp_r5 != 0) {
+        float tmp = temp_r3->x0_staleMoveTable.xCEC;
+        temp_f31 = temp_r3->x0_staleMoveTable.xCF0;
+        plCheckTotal(tmp);
+        return temp_f31 / tmp;
+    }
+    return 0.0f;
+}
+
 float pl_80040870(int arg0)
 {
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xCF8;
@@ -1193,6 +1313,21 @@ int pl_80040900(int arg0)
 int pl_80040924(int arg0)
 {
     return Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
+}
+
+float pl_80040948(s32 arg0)
+{
+    unsigned int total;
+    unsigned int temp_r30;
+    PAD_STACK(0x10);
+
+    total = Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
+    temp_r30 = Player_GetTotalAttackCountPtr(arg0)->x358;
+    if (total != 0) {
+        plCheckTotal(total);
+        return temp_r30 / (float) total;
+    }
+    return 0.0F;
 }
 
 int pl_80040A04(int arg0)
