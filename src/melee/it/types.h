@@ -574,6 +574,7 @@ struct Item {
         itMato_ItemVars mato;
         itNokoNoko_ItemVars nokonoko;
         itOctarock_ItemVars octarock;
+        itPeachTurnip_ItemVars peachturnip;
         itPikachutJoltGround_ItemVars pikachujoltground;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
