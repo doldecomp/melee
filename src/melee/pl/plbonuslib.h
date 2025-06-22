@@ -6,8 +6,8 @@
 
 #include "it/forward.h"
 
+/* 03D60C */ bool pl_8003D60C(int);
 /* 03D644 */ void pl_8003D644(int, int, int, int);
-/* 03D60C */ int pl_8003D60C(int);
 /* 03DF44 */ void pl_8003DF44(int, int);
 /* 03DFF4 */ void pl_8003DFF4(int, int, int);
 /* 03E058 */ void pl_8003E058(int, int, int, int);
