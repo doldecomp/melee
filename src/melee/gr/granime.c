@@ -641,7 +641,8 @@ void grAnime_801C7BA0(HSD_GObj* gobj, int arg1, u32 arg2, f32 arg8)
 
 /// #grAnime_801C7C1C
 
-void grAnime_801C7FF8(Ground_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, f32 arg4, f32 arg5)
+void grAnime_801C7FF8(Ground_GObj* gobj, int arg1, int arg2, int arg3,
+                      float arg4, float arg5)
 {
     Ground* gr = GET_GROUND(gobj);
     if (gr != NULL && arg3 >= 0) {
@@ -654,7 +655,8 @@ void grAnime_801C7FF8(Ground_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, f32 arg4,
     }
 }
 
-void grAnime_801C8098(Ground_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, f32 arg4, f32 arg5)
+void grAnime_801C8098(Ground_GObj* gobj, int arg1, int arg2, int arg3,
+                      float arg4, float arg5)
 {
     Ground* gr = GET_GROUND(gobj);
     if (gr != NULL && arg3 >= 0) {
@@ -677,11 +679,11 @@ void fn_801C82E8(int arg0, int* arg1)
     longjmp(&grAnime_8049EE40, 1);
 }
 
-int grAnime_801C8318(HSD_GObj* gobj, s32 arg1, s32 arg2)
+HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
 {
     HSD_JObj* jobj;
     enum _HSD_TypeMask var_r30 = 0;
-    int sp14 = 0;
+    HSD_AObj* sp14 = NULL;
     jobj = Ground_801C3FA4(gobj, arg1);
     if (jobj == NULL) {
         return 0;

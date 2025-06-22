@@ -22,6 +22,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcardgame.h>
+#include <melee/ty/tydisplay.h>
 
 static GameState gm_80479D30;
 

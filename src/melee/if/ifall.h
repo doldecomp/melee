@@ -12,7 +12,7 @@
 /* 2F3414 */ UNK_T ifAll_802F3414(void);
 /* 2F3424 */ struct ifAll_804A0FD8_x18_t* ifAll_802F3424(int idx);
 /* 2F343C */ void ifAll_802F343C(void);
-/* 2F3690 */ UNK_T ifAll_802F3690(void);
+/* 2F3690 */ HSD_Archive** ifAll_802F3690(void);
 /* 2F3698 */ void ifAll_HideHUD(void);
 /* 2F36A4 */ void ifAll_ShowHUD(void);
 /* 2F36B0 */ bool ifAll_IsHUDHidden(void);

@@ -51,7 +51,7 @@ struct ifAll_804A0FD8_x18_t* ifAll_802F3424(int idx)
 
 /// #ifAll_802F343C
 
-UNK_T ifAll_802F3690(void)
+HSD_Archive** ifAll_802F3690(void)
 {
     return &ifAll_804D6D5C;
 }
