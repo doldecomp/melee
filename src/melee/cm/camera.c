@@ -800,11 +800,11 @@ s32 Camera_8002BA00(s32 slot, s32 arg1)
     if (slot == 0xA) {
         if (arg1 > 0) {
             slot = 0;
-        } 
+        }
         else if (arg1 < 0) {
             slot = 5;
         }
-    } 
+    }
     else {
         slot += arg1;
         if (slot < 0) {
@@ -931,10 +931,10 @@ void Camera_8002F760(s8 arg0, s8 arg1)
 void Camera_8002F784(s8 slot, s8 arg1)
 {
     cm_80452C68.mode = 2;
-    cm_80452C68.unk_2C4 = slot;       
-    cm_80452C68.unk_2C5 = arg1;       
-    cm_80452C68.unk_2C8 = 0.0f;       
-    cm_80452C68.unk_2CC = 0.0f;       
+    cm_80452C68.unk_2C4 = slot;
+    cm_80452C68.unk_2C5 = arg1;
+    cm_80452C68.unk_2C8 = 0.0f;
+    cm_80452C68.unk_2CC = 0.0f;
 }
 
 /// #Camera_8002F7AC
@@ -1045,7 +1045,6 @@ bool Camera_80030178(void)
 
 Point3d* Camera_8003019C(void)
 {
-    
     return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->x1C;
 }
 
