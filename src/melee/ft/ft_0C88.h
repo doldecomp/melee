@@ -56,8 +56,8 @@
 /* 0CA53C */ void ftCo_Dash_Phys(ftCo_GObj* gobj);
 /* 0CA5D0 */ void ftCo_Dash_Coll(ftCo_GObj* gobj);
 /* 0CA5F0 */ bool fn_800CA5F0(ftCo_GObj* gobj);
-/* 0CA6F4 */ void fn_800CA6F4(ftCo_GObj* gobj, float);
-/* 0CA71C */ void fn_800CA71C(Fighter_GObj* gobj, float, float, float);
+/* 0CA6F4 */ void ftCo_Run_Enter(ftCo_GObj* gobj, float);
+/* 0CA71C */ void ftCo_Run_Enter_Full(Fighter_GObj* gobj, float, float, float);
 /* 0CA77C */ void ftCo_Run_Anim(ftCo_GObj* gobj);
 /* 0CA830 */ void ftCo_Run_IASA(ftCo_GObj* gobj);
 /* 0CA95C */ void ftCo_Run_Phys(ftCo_GObj* gobj);

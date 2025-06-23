@@ -412,7 +412,7 @@ bool fn_800CA5F0(Fighter_GObj* gobj)
     if (fp->input.lstick.x * fp->facing_dir >=
         p_ftCommonData->x58_someLStickXThreshold)
     {
-        fn_800CA6F4(gobj, 0.0F);
+        ftCo_Run_Enter(gobj, 0.0F);
         return true;
     }
     return false;
@@ -422,17 +422,17 @@ bool fn_800CA5F0(Fighter_GObj* gobj)
 
 /// #fn_800CA698
 
-void fn_800CA6F4(Fighter_GObj* gobj, float arg0)
+void ftCo_Run_Enter(Fighter_GObj* gobj, float arg0)
 {
-    fn_800CA71C(gobj, arg0, 0.0F, 1.0F);
+    ftCo_Run_Enter_Full(gobj, arg0, 0.0F, 1.0F);
 }
 
-void fn_800CA71C(Fighter_GObj* gobj, float arg0, float anim_start,
-                 float anim_end)
+void ftCo_Run_Enter_Full(Fighter_GObj* gobj, float arg0, float anim_start,
+                         float anim_speed)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Run, Ft_MF_None, anim_start,
-                              anim_end, 0.0F, NULL);
+                              anim_speed, 0.0F, NULL);
     fp->mv.co.run.x0 = arg0;
     fp->mv.co.run.x4 = fp->gr_vel;
 }
