@@ -111,7 +111,7 @@
 /* 0CCD34 */ void ftCo_Fall_IASA(ftCo_GObj* gobj);
 /* 0CCD58 */ void ftCo_Fall_Phys(ftCo_GObj* gobj);
 /* 0CCD78 */ void ftCo_Fall_Coll(ftCo_GObj* gobj);
-/* 0CCDA8 */ void ftCo_800CCDA8(ftCo_GObj* gobj);
+/* 0CCDA8 */ void ftCo_FallAerial_Enter(ftCo_GObj* gobj);
 /* 0CCDFC */ void ftCo_FallAerial_Anim(ftCo_GObj* gobj);
 /* 0CCE50 */ void ftCo_FallAerial_IASA(ftCo_GObj* gobj);
 /* 0CCE74 */ void ftCo_FallAerial_Phys(ftCo_GObj* gobj);

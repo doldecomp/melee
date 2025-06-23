@@ -101,6 +101,10 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
     } fall;
     struct {
+        /* fp+2340 */ s32 x0;
+        /* fp+2344 */ float x4;
+    } fallaerial;
+    struct {
         /* fp+2340 */ bool x0;
     } attack1;
     struct {

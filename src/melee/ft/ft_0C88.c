@@ -924,7 +924,14 @@ void ftCo_800CC730(Fighter_GObj* gobj)
 
 /// #ftCo_Fall_Coll
 
-/// #ftCo_800CCDA8
+void ftCo_FallAerial_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_FallAerial, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
+    fp->mv.co.fallaerial.x0 = 23;
+    fp->mv.co.fallaerial.x4 = 0.0F;
+}
 
 /// #ftCo_FallAerial_Anim
 

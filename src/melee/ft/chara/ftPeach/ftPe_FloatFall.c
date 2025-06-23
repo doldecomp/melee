@@ -35,7 +35,7 @@ void ftPe_UpdateFloatDir(HSD_GObj* gobj)
 void ftPe_FloatFall_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CCDA8(gobj);
+        ftCo_FallAerial_Enter(gobj);
     }
 }
 

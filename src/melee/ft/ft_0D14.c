@@ -605,7 +605,7 @@ void fn_800D2890(Fighter_GObj* gobj, int ms_id)
     }
     switch (ms_id) {
     case ftCo_MS_FallAerial:
-        fp->mv.co.unk_800D2890.x0 = ftCo_800CCDA8;
+        fp->mv.co.unk_800D2890.x0 = ftCo_FallAerial_Enter;
         return;
     case ftCo_MS_FallSpecial:
     case ftCo_MS_ItemParasolFallSpecial:
@@ -793,7 +793,7 @@ void ft_800D2E7C(Fighter_GObj* gobj, Vec3* arg1)
 void ftCo_ItemScrewAir_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CCDA8(gobj);
+        ftCo_FallAerial_Enter(gobj);
     }
 }
 
