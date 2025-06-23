@@ -43,6 +43,18 @@ ItemStateTable it_803F74A8[] = {
     },
 };
 
+static bool decrease_lifetimer(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = GET_ITEM(item_gobj);
+    item->xD44_lifeTimer--;
+    if (item->xD44_lifeTimer <= 0.0F) {
+        return true;
+    }
+    return false;
+}
+
 // Peach_TurnipTypeDecide - Weighted random selection
 s32 it_802BD32C(Item_GObj* item_gobj)
 {
@@ -173,14 +185,7 @@ void it_802BD6DC(Item_GObj* item_gobj)
 
 bool it_802BD6E0(Item_GObj* item_gobj)
 {
-    Item* item;
-
-    item = GET_ITEM(item_gobj);
-    item->xD44_lifeTimer--;
-    if (item->xD44_lifeTimer <= 0.0F) {
-        return true;
-    }
-    return false;
+    return decrease_lifetimer(item_gobj);
 }
 
 void it_802BD718(Item_GObj* item_gobj)
@@ -211,14 +216,7 @@ void it_802BD748(Item_GObj* item_gobj)
 
 bool it_802BD7E0(Item_GObj* item_gobj)
 {
-    Item* item;
-
-    item = GET_ITEM(item_gobj);
-    item->xD44_lifeTimer--;
-    if (item->xD44_lifeTimer <= 0.0F) {
-        return true;
-    }
-    return false;
+    return decrease_lifetimer(item_gobj);
 }
 
 // ProjectilePhysics_TurnipVelocity
@@ -231,7 +229,6 @@ void it_802BD818(Item_GObj* item_gobj)
     it_80274658(item_gobj, it_804D6D28->x68_float);
 }
 
-// TODO: give descriptive name to variables
 bool it_802BD864(Item_GObj* item_gobj)
 {
     s32 first_check, second_check;
