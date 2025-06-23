@@ -1602,13 +1602,52 @@ melee/gm/gmmain.c:
 	.sbss       start:0x804D6590 end:0x804D6598
 
 melee/gm/gm_1601.c:
-	.text       start:0x801601C4 end:0x8019B8C4
-	.rodata     start:0x803B75F8 end:0x803B7D18
-	.data       start:0x803D4C38 end:0x803DA2E0
-	.bss        start:0x8046B378 end:0x80479A58
-	.sdata      start:0x804D3EF8 end:0x804D41B8
-	.sbss       start:0x804D6598 end:0x804D6660
-	.sdata2     start:0x804DA230 end:0x804DA878
+	.text       start:0x801601C4 end:0x80174274
+	.rodata     start:0x803B75F8 end:0x803B7B18
+	.data       start:0x803D4C38 end:0x803D6488
+	.bss        start:0x8046B378 end:0x8046DBE8
+	.sdata      start:0x804D3EF8 end:0x804D3F68
+	.sbss       start:0x804D6598 end:0x804D65B8
+	.sdata2     start:0x804DA230 end:0x804DA300
+
+melee/gm/gmresult.c:
+	.text       start:0x80174274 end:0x80177724
+	.rodata     start:0x803B7B18 end:0x803B7B68
+	.data       start:0x803D6488 end:0x803D6A08
+	.bss        start:0x8046DBE8 end:0x8046E1B0
+	.sdata      start:0x804D3F68 end:0x804D3FC8
+	.sdata2     start:0x804DA300 end:0x804DA368
+
+melee/gm/gmresultplayer.c:
+	.text       start:0x80177724 end:0x8017AD04
+	.rodata     start:0x803B7B68 end:0x803B7C08
+	.data       start:0x803D6A08 end:0x803D79D0
+	.bss        start:0x8046E1B0 end:0x804706C0
+	.sdata      start:0x804D3FC8 end:0x804D4010
+	.sdata2     start:0x804DA368 end:0x804DA408
+
+melee/gm/gm_17AD.c:
+	.text       start:0x8017AD04 end:0x8017BACC
+	.sdata2     start:0x804DA408 end:0x804DA428
+
+melee/gm/gm_17BA.c:
+	.text       start:0x8017BACC end:0x8017BE84
+	.data       start:0x803D79D0 end:0x803D79F0
+	.sdata      start:0x804D4010 end:0x804D4050
+
+melee/gm/gmregcommon.c:
+	.text       start:0x8017BE84 end:0x8017C0C8
+	.data       start:0x803D79F0 end:0x803D7A50
+	.sdata      start:0x804D4050 end:0x804D4058
+
+melee/gm/gm_17C0.c:
+	.text       start:0x8017C0C8 end:0x8019B8C4
+	.rodata     start:0x803B7C08 end:0x803B7D18
+	.data       start:0x803D7A50 end:0x803DA2E0
+	.bss        start:0x804706C0 end:0x80479A58
+	.sdata      start:0x804D4058 end:0x804D41B8
+	.sbss       start:0x804D65B8 end:0x804D6660
+	.sdata2     start:0x804DA428 end:0x804DA878
 
 melee/gm/gmtou.c:
 	.text       start:0x8019B8C4 end:0x8019EFC4
