@@ -421,7 +421,18 @@ bool fn_800CA5F0(Fighter_GObj* gobj)
 
 /// #fn_800CA644
 
-/// #fn_800CA698
+bool fn_800CA698(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->input.lstick.x * fp->facing_dir >=
+        p_ftCommonData->x58_someLStickXThreshold)
+    {
+        ftCo_Run_Enter_Full(gobj, 0.0F, fp->cur_anim_frame,
+                            fp->frame_speed_mul);
+        return true;
+    }
+    return false;
+}
 
 void ftCo_Run_Enter(Fighter_GObj* gobj, float arg0)
 {
