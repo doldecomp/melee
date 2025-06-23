@@ -10,6 +10,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -310,7 +311,12 @@ void fn_800CA120(Fighter_GObj* gobj, int arg1)
     }
 }
 
-/// #ftCo_Dash_Anim
+void ftCo_Dash_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 void ftCo_Dash_IASA(Fighter_GObj* gobj)
 {
