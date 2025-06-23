@@ -5,6 +5,7 @@
 
 #include "ft/ft_0C88.h"
 
+#include "math.h"
 #include "platform.h"
 
 #include "ft/fighter.h"
@@ -437,7 +438,30 @@ void ftCo_Run_Enter_Full(Fighter_GObj* gobj, float arg0, float anim_start,
     fp->mv.co.run.x4 = fp->gr_vel;
 }
 
-/// #ftCo_Run_Anim
+void ftCo_Run_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    f32 vel;
+    f32 anim_rate;
+    PAD_STACK(1);
+
+    if (ft_GetGroundFrictionMultiplier(fp) < 1.0F) {
+        vel = fp->mv.co.run.x4;
+    } else {
+        vel = fp->gr_vel;
+    }
+
+    if (vel * fp->facing_dir <= 0.0F) {
+        anim_rate = 0.0F;
+    } else {
+        anim_rate = fabs_inline(vel) / fp->co_attrs.run_animation_scaling;
+    }
+
+    ftAnim_SetAnimRate(gobj, anim_rate);
+    if (fp->mv.co.run.x0 > 0.0F) {
+        fp->mv.co.run.x0 -= 1.0F;
+    }
+}
 
 void ftCo_Run_IASA(Fighter_GObj* gobj)
 {
