@@ -254,7 +254,7 @@ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
         if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
             fn_800C9C74(gobj);
         } else {
-            fn_800CA120(gobj, 1);
+            ftCo_Dash_Enter(gobj, 1);
         }
         return true;
     }
@@ -278,7 +278,7 @@ static inline bool ftCo_Dash_CheckInput_inline(Fighter_GObj* gobj)
         if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
             fn_800C9C74(gobj);
         } else {
-            fn_800CA120(gobj, 1);
+            ftCo_Dash_Enter(gobj, 1);
         }
         return true;
     }
@@ -286,7 +286,7 @@ static inline bool ftCo_Dash_CheckInput_inline(Fighter_GObj* gobj)
 }
 #pragma pop
 
-void fn_800CA120(Fighter_GObj* gobj, int arg1)
+void ftCo_Dash_Enter(Fighter_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 init_vel;
