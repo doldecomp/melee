@@ -32,7 +32,7 @@ union Struct2070* ft_80089884(Fighter_GObj* gobj)
     return &GET_FIGHTER(gobj)->x2070;
 }
 
-UNK_T ft_80089890(Fighter_GObj* gobj)
+UnkPlBonusBits* ft_80089890(Fighter_GObj* gobj)
 {
     return &GET_FIGHTER(gobj)->dmg.x18d4;
 }
