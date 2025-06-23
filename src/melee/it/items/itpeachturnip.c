@@ -43,7 +43,7 @@ ItemStateTable it_803F74A8[] = {
     },
 };
 
-static inline bool decrease_lifetimer(Item_GObj* item_gobj)
+static bool decrease_lifetimer(Item_GObj* item_gobj)
 {
     Item* item;
 
