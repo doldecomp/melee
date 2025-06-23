@@ -400,7 +400,10 @@ void ftCo_Dash_Phys(Fighter_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-/// #ftCo_Dash_Coll
+void ftCo_Dash_Coll(Fighter_GObj* gobj)
+{
+    ft_800844EC();
+}
 
 bool fn_800CA5F0(Fighter_GObj* gobj)
 {
