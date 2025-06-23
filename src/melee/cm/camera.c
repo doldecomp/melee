@@ -891,7 +891,7 @@ bool Camera_8002F260(void)
 void fn_8002F360(void)
 {
     CameraModeCallbacks *callbacks = &cm_803BCB18;
-    void (*cb)() = callbacks->callback[cm_80452C68.mode];
+    void (*cb)(void) = callbacks->callback[cm_80452C68.mode];
 
     if (cb) {
         cb();
@@ -1008,7 +1008,7 @@ void Camera_8003006C(void)
 
 void Camera_800300F0(void)
 {
-    cm_80452C68.mode = cm_80452C68.debug_mode.last_mode;
+    cm_80452C68.mode = cm_80453004.last_mode;
 }
 
 bool Camera_8003010C(void)
