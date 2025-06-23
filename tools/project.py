@@ -151,6 +151,7 @@ class ProjectConfig:
         self.wrapper: Optional[Path] = None  # If None, download wibo on Linux
         self.sjiswrap_tag: Optional[str] = None  # Git tag
         self.sjiswrap_path: Optional[Path] = None  # If None, download
+        self.ninja_path: Optional[Path] = None  # If None, use system PATH
         self.objdiff_tag: Optional[str] = None  # Git tag
         self.objdiff_path: Optional[Path] = None  # If None, download
 
@@ -1452,9 +1453,14 @@ def generate_objdiff_config(
             existing_config = json.load(r)
             existing_units = {unit["name"]: unit for unit in existing_config["units"]}
 
+    if config.ninja_path:
+        ninja = str(config.ninja_path.absolute())
+    else:
+        ninja = "ninja"
+
     objdiff_config: Dict[str, Any] = {
         "min_version": "2.0.0-beta.5",
-        "custom_make": "ninja",
+        "custom_make": ninja,
         "build_target": False,
         "watch_patterns": [
             "*.c",
