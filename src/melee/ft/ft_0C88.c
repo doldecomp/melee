@@ -511,7 +511,10 @@ void ftCo_Run_Phys(Fighter_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-/// #ftCo_Run_Coll
+void ftCo_Run_Coll(Fighter_GObj* gobj)
+{
+    ft_800844EC();
+}
 
 /// #ftCo_RunDirect_Anim
 
