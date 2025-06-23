@@ -516,7 +516,13 @@ void ftCo_Run_Coll(Fighter_GObj* gobj)
     ft_800844EC();
 }
 
-/// #ftCo_RunDirect_Anim
+#pragma push
+#pragma dont_inline on
+void ftCo_RunDirect_Anim(Fighter_GObj* gobj)
+{
+    ftCo_Run_Anim(gobj);
+}
+#pragma pop
 
 /// #ftCo_RunDirect_IASA
 
