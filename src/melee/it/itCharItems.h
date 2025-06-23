@@ -26,8 +26,8 @@ typedef struct {
                        // ____but not yet invisible)
                        // 0: when xDD8 <= 0 or xDD8 >= 5
                        // 1: when cmd_var3 = 1 (when gun shooting sfx starts)
-    /* xC */ s32 xDE0; // 0 when never shot yet; 1 when has been shot (in this
-                       // spawn instance of the blaster - not put away)
+    /* xC */ bool xDE0; // false when not shot yet; true after shot (in this
+                        // spawn instance of the blaster - not put away)
     /* x10 */ s32 xDE4; // group 1; gets set to 0 in func (it_802ADF10) that
                         // sets item joint locations from corresponding fighter
                         // joint locations
@@ -60,8 +60,8 @@ typedef struct {
     /* x94 */ f32 xE68;  // group 4
     /* x98 */ f32 xE6C;  // group 4
     /* x9C */ f32 xE70;  // group 4
-    /* x100 */ s32 gfx_spawn_var; // xE74 Signals to spawn shoot gfx from
-                                  // blaster when set to '1', which is done
+    /* x100 */ bool gfx_spawn_var; // xE74 Signals to spawn shoot gfx from
+                                  // blaster when set to true, which is done
                                   // from subaction funcs on frame of shot
     /* x104 */ s32 set_sfx_var2;  // xE78 Sets blaster destroy sfx func when
                                   // Flag 1 = 2

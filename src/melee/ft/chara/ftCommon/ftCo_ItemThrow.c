@@ -580,7 +580,8 @@ void ftCo_80095D5C(Fighter* fp, Vec3* arg1)
                      M2C_FIELD(array_element, float*, -0x468));
     if (cmd_var0 != 0) {
         u32 s16_var1 = ((s16*) &fp->cmd_vars)[1];
-        int int_angle = ((int) (s16_var1 << 20)) >> 20;
+        int int_angle = s16_var1 << 20;
+        int_angle = int_angle >> 20;
         if (int_angle == 361) {
             angle = M2C_FIELD(array_element, float*, -0x464);
         } else {

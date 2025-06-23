@@ -3,6 +3,6 @@
 
 #include <platform.h>
 
-void efSync_Spawn(s32, ...);
+int efSync_Spawn(s32, ...);
 
 #endif
