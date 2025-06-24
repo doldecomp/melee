@@ -535,7 +535,34 @@ void ftCo_RunDirect_Anim(Fighter_GObj* gobj)
 }
 #pragma pop
 
-/// #ftCo_RunDirect_IASA
+#pragma push
+#pragma dont_inline on
+void ftCo_RunDirect_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_800D6824(gobj));
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_800D8A38(gobj));
+
+    if (ftCo_AttackDash_CheckInput(gobj)) {
+        ftCo_AttackDash_SetMv0(gobj);
+        return;
+    }
+
+    if (ftCo_80091A4C(gobj)) {
+        ftCo_80091B90(gobj, p_ftCommonData->x410);
+        ftCo_80091B9C(gobj);
+        return;
+    }
+
+    RETURN_IF(ftCo_800DE9D8(gobj));
+    RETURN_IF(fn_800CAF78(gobj));
+    RETURN_IF(fp->mv.ca.specials.grav <= 0.0F && fn_800CA698(gobj));
+    RETURN_IF(ft_8008A244(gobj));
+}
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
