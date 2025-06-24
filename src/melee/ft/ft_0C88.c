@@ -198,7 +198,27 @@ static inline void getAccelAndTarget(Fighter* fp, float* accel,
     *target_vel = fp->input.lstick.x * co_attrs->dash_run_terminal_velocity;
 }
 
-/// #ftCo_TurnRun_Anim
+void ftCo_TurnRun_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
+
+    if (fp->cmd_vars[1] != 0) {
+        if (fp->mv.co.turnrun.x14 == 0) {
+            ftAnim_SetAnimRate(gobj, 0.0F);
+            fp->mv.co.turnrun.x14 = 1;
+        } else {
+            if ((fp->mv.co.walk.middle_anim_frame * fp->gr_vel) <= 0.01F) {
+                ftAnim_SetAnimRate(gobj, 1.0F);
+                fp->cmd_vars[1] = 0;
+                fp->facing_dir = -fp->facing_dir;
+            }
+        }
+    }
+    if (!ftAnim_IsFramesRemaining(gobj) && !fn_800CA644(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 /// #ftCo_TurnRun_IASA
 
