@@ -106,7 +106,17 @@ void fn_8012CF7C(HSD_GObj* gobj)
 
 /// #fn_8012D230
 
-/// #fn_8012D298
+extern f32 ftYs_Init_804D9A38;
+// Just trying to replace ftYs_Init_804D9A38 with 0 seemed to prevent 100%
+// matching
+void fn_8012D298(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, 0x160, 0x0C4C5092U, fp->cur_anim_frame, 0,
+                              ftYs_Init_804D9A38, NULL);
+}
 
 /// #fn_8012D2F8
 
@@ -168,9 +178,15 @@ void fn_8012CF7C(HSD_GObj* gobj)
 
 /// #ftYs_SpecialN1_0_Coll
 
-/// #ftYs_SpecialAirN1_2_Coll
+void ftYs_SpecialAirN1_2_Coll(ftYs_GObj* gobj)
+{
+    ft_80082C74((Fighter_GObj*) gobj, fn_8012D2F8);
+}
 
-/// #ftYs_SpecialAirN1_1_Coll
+void ftYs_SpecialAirN1_1_Coll(ftYs_GObj* gobj)
+{
+    ft_80082C74((Fighter_GObj*) gobj, fn_8012D360);
+}
 
 /// #ftYs_SpecialN2_1_Coll
 
