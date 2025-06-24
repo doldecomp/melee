@@ -928,7 +928,14 @@ void ftCo_JumpAerial_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #fn_800CC3C4
+void ftYs_JumpAerial_Anim_Cb(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* ys_attrs = fp->dat_attrs;
+    PAD_STACK(8);
+    ftCo_JumpAerial_Anim(gobj);
+    ft_800CB6EC(fp, ys_attrs->x0);
+}
 
 /// #ftCo_JumpAerial_IASA
 
