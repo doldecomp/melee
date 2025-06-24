@@ -85,7 +85,7 @@
 /* 0CB6AC */ void ftCo_KneeBend_Phys(ftCo_GObj* gobj);
 /* 0CB6CC */ void ftCo_KneeBend_Coll(ftCo_GObj* gobj);
 /* 0CB6EC */ UNK_RET ft_800CB6EC(UNK_PARAMS);
-/* 0CB804 */ UNK_RET ft_800CB804(UNK_PARAMS);
+/* 0CB804 */ bool ft_did_jump(Fighter* fp, bool);
 /* 0CB870 */ bool ftCo_800CB870(ftCo_GObj* gobj);
 /* 0CB8E0 */ bool ftCo_800CB8E0(ftCo_GObj* gobj);
 /* 0CB950 */ bool ftCo_JumpAerial_CheckInput(ftCo_GObj* gobj, bool);

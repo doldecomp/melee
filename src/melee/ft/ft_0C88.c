@@ -824,7 +824,19 @@ void ftCo_KneeBend_Enter(Fighter_GObj* gobj, int arg1)
 
 /// #ft_800CB6EC
 
-/// #ft_800CB804
+bool ft_did_jump(Fighter* fp, bool arg1)
+{
+    if (fp->x1968_jumpsUsed < fp->co_attrs.max_jumps &&
+        ((fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax &&
+          fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74) ||
+         fp->input.x668 & HSD_PAD_XY) &&
+        !(arg1 && (fp->x68A < p_ftCommonData->x1C)))
+    {
+        return true;
+    }
+
+    return false;
+}
 
 bool ftCo_800CB870(Fighter_GObj* gobj)
 {
@@ -837,20 +849,9 @@ bool ftCo_JumpAerial_CheckInput(Fighter_GObj* gobj, bool arg1)
 {
     ftCo_DatAttrs* co_attrs;
     Fighter* fp = GET_FIGHTER(gobj);
-    bool jumped;
-    bool has_jump = fp->x1968_jumpsUsed < fp->co_attrs.max_jumps;
+    PAD_STACK(8);
     co_attrs = &fp->co_attrs;
-    if (has_jump &&
-        ((fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax &&
-          fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74) ||
-         fp->input.x668 & HSD_PAD_XY) &&
-        !(arg1 && (fp->x68A < p_ftCommonData->x1C)))
-    {
-        jumped = true;
-    } else {
-        jumped = false;
-    }
-    if (jumped) {
+    if (ft_did_jump(fp, arg1)) {
         if (ft_800D2D0C(gobj)) {
             Vec3 v;
             PAD_STACK(8);
