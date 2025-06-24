@@ -98,7 +98,7 @@
 /* 0CC388 */ void ftCo_JumpAerial_Anim(ftCo_GObj* gobj);
 /* 0CC4F8 */ void ftCo_JumpAerial_IASA(ftCo_GObj* gobj);
 /* 0CC634 */ void ftCo_JumpAerial_Phys(ftCo_GObj* gobj);
-/* 0CC6C8 */ void ftCo_800CC6C8(ftCo_GObj* gobj);
+/* 0CC6C8 */ void ftCo_JumpAerial_Phys_Cb(ftCo_GObj* gobj);
 /* 0CC700 */ void ftCo_JumpAerial_Coll(ftCo_GObj* gobj);
 /* 0CC730 */ void ftCo_800CC730(ftCo_GObj* gobj);
 /* 0CC830 */ void ftCo_800CC830(ftCo_GObj* gobj);

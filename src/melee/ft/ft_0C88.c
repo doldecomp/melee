@@ -948,7 +948,12 @@ void ftNs_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
     ft_800851D0(gobj);
 }
 
-/// #ftCo_800CC6C8
+void ftCo_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D268(fp);
+    ft_800851D0(gobj);
+}
 
 /// #ftCo_JumpAerial_Coll
 
