@@ -8,6 +8,8 @@
 #include <baselib/forward.h>
 
 #include "cm/types.h"
+#include "dolphin/gx/GXStruct.h"
+#include "dolphin/types.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
@@ -36,7 +38,7 @@
 /* 02B1F8 */ void Camera_8002B1F8(CameraMovement* movement);
 /* 02B3D4 */ void Camera_8002B3D4(void);
 /* 02B694 */ UNK_RET Camera_8002B694(UNK_PARAMS);
-/* 02BA00 */ UNK_RET Camera_8002BA00(UNK_PARAMS);
+/* 02BA00 */ s32 Camera_8002BA00(s32 port, s32 arg1);
 /* 02BAA8 */ UNK_RET Camera_8002BAA8(UNK_PARAMS);
 /* 02BC78 */ UNK_RET Camera_8002BC78(UNK_PARAMS);
 /* 02BD88 */ UNK_RET Camera_8002BD88(UNK_PARAMS);
@@ -65,23 +67,23 @@
 /* 02F0E4 */ void Camera_8002F0E4(s32);
 /* 02F260 */ bool Camera_8002F260(void);
 /* 02F274 */ void Camera_8002F274(void);
-/* 02F360 */ UNK_RET fn_8002F360(UNK_PARAMS);
+/* 02F360 */ void fn_8002F360(void);
 /* 02F3AC */ UNK_RET Camera_8002F3AC(UNK_PARAMS);
 /* 02F474 */ void Camera_8002F474(void);
-/* 02F488 */ UNK_RET fn_8002F488(UNK_PARAMS);
-/* 02F4D4 */ UNK_RET Camera_8002F4D4(UNK_PARAMS);
-/* 02F73C */ UNK_RET Camera_8002F73C(UNK_PARAMS);
-/* 02F760 */ UNK_RET Camera_8002F760(UNK_PARAMS);
-/* 02F784 */ UNK_RET Camera_8002F784(UNK_PARAMS);
+/* 02F488 */ s32 fn_8002F488(Vec4* arg0);
+/* 02F4D4 */ void Camera_8002F4D4(s8 arg0, s8 arg1, s32 arg2);
+/* 02F73C */ void Camera_8002F73C(s8 arg0, s8 arg1);
+/* 02F760 */ void Camera_8002F760(s8 arg0, s8 arg1);
+/* 02F784 */ void Camera_8002F784(s8 slot, s8 arg1);
 /* 02F7AC */ UNK_RET Camera_8002F7AC(UNK_PARAMS);
 /* 02F8F4 */ void Camera_8002F8F4(void);
-/* 02F908 */ UNK_RET fn_8002F908(UNK_PARAMS);
+/* 02F908 */ s32 fn_8002F908(HSD_RectF32* arg0);
 /* 02F9E4 */ UNK_RET Camera_8002F9E4(UNK_PARAMS);
-/* 02FBA0 */ UNK_RET fn_8002FBA0(UNK_PARAMS);
+/* 02FBA0 */ s32 fn_8002FBA0(HSD_RectF32* arg0);
 /* 02FC7C */ UNK_RET Camera_8002FC7C(UNK_PARAMS);
 /* 02FE38 */ UNK_RET Camera_8002FE38(UNK_PARAMS);
 /* 02FEEC */ void Camera_8002FEEC(int);
-/* 03006C */ UNK_RET Camera_8003006C(UNK_PARAMS);
+/* 03006C */ void Camera_8003006C(void);
 /* 0300F0 */ UNK_RET Camera_800300F0(UNK_PARAMS);
 /* 03010C */ bool Camera_8003010C(void);
 /* 030130 */ bool Camera_80030130(void);
@@ -93,7 +95,7 @@
 /* 030688 */ UNK_RET Camera_80030688(UNK_PARAMS);
 /* 030730 */ void Camera_80030730(f32 arg8);
 /* 030740 */ void Camera_SetBackgroundColor(u8 r, u8 g, u8 b);
-/* 030758 */ UNK_RET Camera_80030758(UNK_PARAMS);
+/* 030758 */ GXColor Camera_80030758(void);
 /* 030788 */ void Camera_80030788(Vec*);
 /* 0307AC */ UNK_RET Camera_800307AC(UNK_PARAMS);
 /* 0307D0 */ UNK_RET Camera_800307D0(UNK_PARAMS);
@@ -102,7 +104,7 @@
 /* 030A78 */ bool Camera_80030A78(void);
 /* 030A8C */ void Camera_80030A8C(bool arg0);
 /* 030AA4 */ void Camera_SetStageVisible(int);
-/* 030AC4 */ UNK_RET Camera_80030AC4(UNK_PARAMS);
+/* 030AC4 */ bool Camera_80030AC4(void);
 /* 030AE0 */ void Camera_80030AE0(bool arg0);
 /* 030AF8 */ bool Camera_80030AF8(void);
 /* 030B0C */ void Camera_80030B0C(bool arg0);
@@ -113,15 +115,15 @@
 /* 030B7C */ bool Camera_80030B7C(void);
 /* 030B90 */ void Camera_80030B90(bool arg0);
 /* 030BA8 */ bool Camera_80030BA8(void);
-/* 030BBC */ UNK_RET Camera_80030BBC(UNK_PARAMS);
+/* 030BBC */ bool Camera_80030BBC(Point3d* arg0, void* arg1);
 /* 030CD8 */ bool Camera_80030CD8(CameraBox*, S32Vec2*);
 /* 030CFC */ bool Camera_80030CFC(CameraBox*, float);
 /* 030DE4 */ void Camera_80030DE4(f32 arg8, f32 arg9);
 /* 030DF8 */ UNK_RET Camera_80030DF8(UNK_PARAMS);
-/* 030E10 */ UNK_RET Camera_80030E10(UNK_PARAMS);
+/* 030E10 */ float Camera_80030E10(void);
 /* 030E34 */ void Camera_80030E34(f32 arg8);
 /* 030E44 */ void Camera_80030E44(enum_t, Vec*);
-/* 031044 */ UNK_RET Camera_80031044(UNK_PARAMS);
+/* 031044 */ void Camera_80031044(s32 arg0);
 /* 031060 */ enum_t Camera_80031060(void);
 /* 031074 */ void Camera_80031074(u8);
 /* 03108C */ enum_t Camera_8003108C(void);

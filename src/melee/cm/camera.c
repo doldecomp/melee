@@ -5,7 +5,10 @@
 
 #include "camera.static.h"
 
+#include "baselib/cobj.h"
+#include "baselib/gobj.h"
 #include "cm/types.h"
+#include "dolphin/types.h"
 #include "ft/ftlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
@@ -792,7 +795,32 @@ void Camera_8002B1F8(CameraMovement* movement)
 
 /// #Camera_8002B694
 
-/// #Camera_8002BA00
+s32 Camera_8002BA00(s32 slot, s32 arg1)
+{
+    if (slot == 0xA) {
+        if (arg1 > 0) {
+            slot = 0;
+        }
+        else if (arg1 < 0) {
+            slot = 5;
+        }
+    }
+    else {
+        slot += arg1;
+        if (slot < 0) {
+            slot = 0xA;
+        } else if (slot > 5) {
+            slot = 0xA;
+        }
+    }
+    if (slot == 0xA) {
+        return 0xA;
+    }
+    if (Player_GetEntity(slot) != NULL) {
+        return slot;
+    }
+    return Camera_8002BA00(slot, arg1);
+}
 
 /// #Camera_8002BAA8
 
@@ -840,7 +868,14 @@ void Camera_8002B1F8(CameraMovement* movement)
 
 /// #Camera_8002ED9C
 
-/// #Camera_8002EEC8
+void Camera_8002EEC8(f32 fov)
+{
+    if (cm_80452C68.mode != 6) {
+        Camera_8002FE38();
+    }
+    cm_80452C68.movement.target_fov = fov;
+}
+
 
 /// #Camera_8002EF14
 
@@ -853,7 +888,15 @@ bool Camera_8002F260(void)
 
 /// #Camera_8002F274
 
-/// #fn_8002F360
+void fn_8002F360(void)
+{
+    CameraModeCallbacks *callbacks = &cm_803BCB18;
+    void (*cb)(void) = callbacks->callback[cm_80452C68.mode];
+
+    if (cb) {
+        cb();
+    }
+}
 
 /// #Camera_8002F3AC
 
@@ -862,15 +905,37 @@ void Camera_8002F474(void)
     cm_80452C68.mode = 0;
 }
 
-/// #fn_8002F488
+s32 fn_8002F488(Vec4* arg0)
+{
+    arg0->z = Stage_GetCamBoundsLeftOffset();
+    arg0->w = Stage_GetCamBoundsRightOffset();
+    arg0->x = Stage_GetCamBoundsTopOffset();
+    arg0->y = Stage_GetCamBoundsBottomOffset();
+    return 1;
+}
 
 /// #Camera_8002F4D4
 
-/// #Camera_8002F73C
+void Camera_8002F73C(s8 arg0, s8 arg1)
+{
+    Camera_8002F4D4(arg0, arg1, 0);
+}
 
-/// #Camera_8002F760
+void Camera_8002F760(s8 arg0, s8 arg1)
+{
+    Camera_8002F4D4(arg0, arg1, 1);
+}
 
-/// #Camera_8002F784
+
+// Camera_SetModeTraining
+void Camera_8002F784(s8 slot, s8 arg1)
+{
+    cm_80452C68.mode = 2;
+    cm_80452C68.unk_2C4 = slot;
+    cm_80452C68.unk_2C5 = arg1;
+    cm_80452C68.unk_2C8 = 0.0f;
+    cm_80452C68.unk_2CC = 0.0f;
+}
 
 /// #Camera_8002F7AC
 
@@ -879,11 +944,44 @@ void Camera_8002F8F4(void)
     cm_80452C68.mode = 4;
 }
 
-/// #fn_8002F908
+s32 fn_8002F908(HSD_RectF32* arg0)
+{
+    f32 half_width;
+    f32 half_height;
+    f32 center_h;
+    f32 center_v;
+
+    center_h = (Stage_GetCamBoundsLeftOffset() + Stage_GetCamBoundsRightOffset()) * 0.5f;
+    half_width = cm_803BCCA0._44[0x1A] * (0.5f * (Stage_GetCamBoundsRightOffset() - Stage_GetCamBoundsLeftOffset()));
+    arg0->ymax = center_h + half_width;
+    arg0->ymin = center_h - half_width;
+    center_v = 0.5f * (Stage_GetCamBoundsTopOffset() + Stage_GetCamBoundsBottomOffset());
+    half_height = cm_803BCCA0._44[0x1B] * (0.5f * (Stage_GetCamBoundsTopOffset() - Stage_GetCamBoundsBottomOffset()));
+    arg0->xmin = center_v + half_height;
+    arg0->xmax = center_v - half_height;
+    return 1;
+}
 
 /// #Camera_8002F9E4
 
-/// #fn_8002FBA0
+s32 fn_8002FBA0(HSD_RectF32* arg0)
+{
+    // duplicate function?? fn_8002F908
+    f32 half_width;
+    f32 half_height;
+    f32 center_h;
+    f32 center_v;
+
+    center_h = (Stage_GetCamBoundsLeftOffset() + Stage_GetCamBoundsRightOffset()) * 0.5f;
+    half_width = cm_803BCCA0._44[0x1A] * (0.5f * (Stage_GetCamBoundsRightOffset() - Stage_GetCamBoundsLeftOffset()));
+    arg0->ymax = center_h + half_width;
+    arg0->ymin = center_h - half_width;
+    center_v = 0.5f * (Stage_GetCamBoundsTopOffset() + Stage_GetCamBoundsBottomOffset());
+    half_height = cm_803BCCA0._44[0x1B] * (0.5f * (Stage_GetCamBoundsTopOffset() - Stage_GetCamBoundsBottomOffset()));
+    arg0->xmin = center_v + half_height;
+    arg0->xmax = center_v - half_height;
+    return 1;
+}
 
 /// #Camera_8002FC7C
 
@@ -891,7 +989,22 @@ void Camera_8002F8F4(void)
 
 /// #Camera_8002FEEC
 
-/// #Camera_8003006C
+void Camera_8003006C(void)
+{
+    HSD_CObj* cobj;
+
+    if (cm_80452C68.mode != 8) {
+        if (cm_80452C68.mode <= 1U) {
+            cm_80452C68.debug_mode.last_mode = cm_80452C68.mode;
+        }
+        cm_80452C68.mode = 8;
+        cobj = GET_COBJ(cm_80452C68.gobj);
+        HSD_CObjGetInterest(cobj, &cm_80452C68.debug_mode.mode8_int_pos);
+        HSD_CObjGetEyePosition(cobj, &cm_80452C68.debug_mode.mode8_eye_pos);
+        cm_80452C68.debug_mode.mode8_fov = HSD_CObjGetFov(cobj);
+    }
+}
+
 
 void Camera_800300F0(void)
 {
@@ -930,7 +1043,10 @@ bool Camera_80030178(void)
     return false;
 }
 
-/// #Camera_8003019C
+Point3d* Camera_8003019C(void)
+{
+    return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->x1C;
+}
 
 /// #fn_800301D0
 
@@ -950,7 +1066,17 @@ void Camera_SetBackgroundColor(u8 r, u8 g, u8 b)
     cm_80452C68.background_b = b;
 }
 
-/// #Camera_80030758
+
+GXColor Camera_80030758(void)
+{
+    GXColor color;
+
+    color.r = cm_80452C68.background_r;
+    color.g = cm_80452C68.background_g;
+    color.b = cm_80452C68.background_b;
+    return color;
+}
+
 
 void Camera_80030788(Vec3* arg0)
 {
@@ -983,7 +1109,10 @@ void Camera_80030A8C(bool arg0)
 
 /// #Camera_SetStageVisible
 
-/// #Camera_80030AC4
+bool Camera_80030AC4(void)
+{
+    return cm_80452C68.unk_399_b5 == 0;
+}
 
 void Camera_80030AE0(bool arg0)
 {
@@ -1037,7 +1166,10 @@ bool Camera_80030BA8(void)
 
 /// #Camera_80030BBC
 
-/// #Camera_80030CD8
+bool Camera_80030CD8(CameraBox* arg0, S32Vec2* arg1)
+{
+    return Camera_80030BBC(&arg0->x1C, arg1);
+}
 
 /// #Camera_80030CFC
 
@@ -1052,7 +1184,13 @@ void Camera_80030DF8(void)
     cm_80452C68.translation.x = cm_80452C68.translation.y = 0;
 }
 
-/// #Camera_80030E10
+float Camera_80030E10(void)
+{
+    if (cm_80452C68.unk_2B8 < 1) {
+        return 10000.f;
+    }
+    return cm_80452C68.unk_2B0;
+}
 
 void Camera_80030E34(f32 arg8)
 {
@@ -1061,7 +1199,10 @@ void Camera_80030E34(f32 arg8)
 
 /// #Camera_80030E44
 
-/// #Camera_80031044
+void Camera_80031044(s32 arg0)
+{
+    cm_80452C68.unk_8C[arg0] = 0;
+}
 
 enum_t Camera_80031060(void)
 {
