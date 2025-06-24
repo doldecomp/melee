@@ -847,7 +847,12 @@ bool ftCo_800CB870(Fighter_GObj* gobj)
 
 /// #ftCo_800CC238
 
-/// #ftCo_JumpAerial_Anim
+void ftCo_JumpAerial_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_FallAerial_Enter(gobj);
+    }
+}
 
 /// #fn_800CC3C4
 
