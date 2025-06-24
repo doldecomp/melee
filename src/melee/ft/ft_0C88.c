@@ -278,7 +278,24 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-/// #ftCo_TurnRun_Coll
+void ftCo_TurnRun_Coll(Fighter_GObj* gobj)
+{
+    s32 env_flags;
+    bool var_r4;
+
+    if (!ft_800827A0(gobj)) {
+        ftCo_800CC730(gobj);
+        return;
+    }
+    var_r4 = true;
+    env_flags = GET_FIGHTER(gobj)->coll_data.env_flags;
+    if (!(env_flags & MPCOLL_FLAGS_B20) && !(env_flags & MPCOLL_FLAGS_B21)) {
+        var_r4 = false;
+    }
+    if (var_r4) {
+        ftCommon_8007E2FC(gobj);
+    }
+}
 
 #pragma push
 #pragma dont_inline on
