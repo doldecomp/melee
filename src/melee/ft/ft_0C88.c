@@ -41,7 +41,7 @@
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
 /* 0CA644 */ static bool fn_800CA644(ftCo_GObj* gobj);
-/* 0CABC4 */ static bool fn_800CABC4(ftCo_GObj* gobj);
+/* 0CABC4 */ static bool ftCo_RunBrake_CheckInput(ftCo_GObj* gobj);
 /* 0CAC18 */ static void ftCo_RunBrake_Enter(ftCo_GObj* gobj);
 /* 0CAF78 */ static bool fn_800CAF78(ftCo_GObj* gobj);
 /* 0CB4E0 */ static void ftCo_KneeBend_Enter(ftCo_GObj* gobj, int arg1);
@@ -576,7 +576,7 @@ void ftCo_Run_IASA(Fighter_GObj* gobj)
 
     RETURN_IF((fp->mv.co.run.x0 <= 0.0F) && fn_800C9D40(gobj));
     RETURN_IF(!(fp->mv.co.run.x0 <= 0.0F));
-    RETURN_IF(fn_800CABC4(gobj));
+    RETURN_IF(ftCo_RunBrake_CheckInput(gobj));
 }
 
 void ftCo_Run_Phys(Fighter_GObj* gobj)
@@ -656,7 +656,7 @@ void ftCo_RunDirect_Coll(Fighter_GObj* gobj)
 }
 #pragma pop
 
-bool fn_800CABC4(Fighter_GObj* gobj)
+bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float lsx_abs = fp->input.lstick.x;
