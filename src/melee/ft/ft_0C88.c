@@ -27,6 +27,7 @@
 
 #include <baselib/gobj.h>
 
+/* 0CA644 */ static bool fn_800CA644(ftCo_GObj* gobj);
 /* 0CABC4 */ static bool fn_800CABC4(ftCo_GObj* gobj);
 /* 0CAC18 */ static void ftCo_RunBrake_Enter(ftCo_GObj* gobj);
 /* 0CAF78 */ static bool fn_800CAF78(ftCo_GObj* gobj);
@@ -419,7 +420,18 @@ bool fn_800CA5F0(Fighter_GObj* gobj)
     return false;
 }
 
-/// #fn_800CA644
+bool fn_800CA644(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((fp->input.lstick.x * fp->facing_dir) >=
+        p_ftCommonData->x58_someLStickXThreshold)
+    {
+        ftCo_Run_Enter(gobj, p_ftCommonData->x430);
+        return true;
+    }
+    return false;
+}
 
 bool fn_800CA698(Fighter_GObj* gobj)
 {
