@@ -220,7 +220,10 @@ void ftCo_TurnRun_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_TurnRun_IASA
+void ftCo_TurnRun_IASA(Fighter_GObj* gobj)
+{
+    RETURN_IF(fn_800CAF78(gobj));
+}
 
 void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
 {
