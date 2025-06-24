@@ -657,7 +657,39 @@ void ftCo_RunBrake_Enter(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_RunBrake_Anim
+void ftCo_RunBrake_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->cmd_vars[1] != 0) {
+        float gr_vel;
+        float maybe_max_vel = p_ftCommonData->x42C;
+        if (fp->mv.co.runbrake.x0 == 0) {
+            gr_vel = fabs_inline(fp->gr_vel);
+            if (gr_vel >= maybe_max_vel) {
+                ftAnim_SetAnimRate(gobj, 0.0F);
+                fp->mv.co.runbrake.x0 = 1;
+            }
+        } else {
+            gr_vel = fabs_inline(fp->gr_vel);
+            if (gr_vel <= maybe_max_vel) {
+                ftAnim_SetAnimRate(gobj, 1.0F);
+                fp->cmd_vars[1] = 0;
+            }
+        }
+    }
+
+    if (fp->mv.co.runbrake.x4) {
+        fp->mv.co.runbrake.x4 -= 1.0F;
+        if (fp->mv.co.runbrake.x4 < 0.0F) {
+            fp->mv.co.runbrake.x4 = 0.0F;
+        }
+    }
+
+    if (!ftAnim_IsFramesRemaining(gobj) || (!fp->mv.co.runbrake.x4)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 #pragma push
 #pragma dont_inline on
@@ -679,7 +711,10 @@ void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-/// #ftCo_RunBrake_Coll
+void ftCo_RunBrake_Coll(Fighter_GObj* gobj)
+{
+    ft_80084280(gobj);
+}
 
 /// #ftCo_800CAE80
 
