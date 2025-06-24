@@ -14,16 +14,21 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
+#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Guard.h"
+#include "ftCommon/ftCo_HammerFall.h"
 #include "ftCommon/ftCo_HammerJump.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_SpecialS.h"
+#include "ftCrazyHand/ftCh_Init.h"
+#include "ftMasterHand/ftMh_Wait1_2.h"
 
 #include <baselib/gobj.h>
 
@@ -813,7 +818,41 @@ void ftCo_KneeBend_Enter(Fighter_GObj* gobj, int arg1)
 
 /// #ftCo_JumpAerial_Coll
 
-/// #ftCo_800CC730
+void ftCo_800CC730(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool var_r0;
+
+    if (ftLib_800872A4(gobj) == FTKIND_MASTERH) {
+        ftMh_MS_389_80151018(gobj);
+        return;
+    }
+
+    if (ftLib_800872A4(gobj) == FTKIND_CREZYH) {
+        ftCh_GrabUnk1_8015BC88(gobj);
+        return;
+    }
+
+    if (GET_FIGHTER(gobj)->x2224_b2) {
+        ftCo_80090780(gobj);
+        var_r0 = true;
+    } else if (ftCo_800C5240(gobj)) {
+        ftCo_800C5D34(gobj);
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if (!var_r0) {
+        Fighter_ChangeMotionState(gobj, ftCo_MS_Fall, Ft_MF_KeepFastFall, 0.0F,
+                                  1.0F, 0.0F, NULL);
+        ftCommon_8007D468(fp);
+        fp->mv.co.fall.x0 = 20;
+        fp->mv.co.fall.x4 = 0.0F;
+        if (fp->ground_or_air == GA_Ground) {
+            ftCommon_8007D5D4(fp);
+        }
+    }
+}
 
 /// #ftCo_800CC830
 

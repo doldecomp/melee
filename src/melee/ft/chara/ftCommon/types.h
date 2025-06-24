@@ -88,6 +88,19 @@ union ftCommon_MotionVars {
         int x4;
     } kneebend;
     struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ int x4;
+        /* fp+2344 */ float x8;
+    } jump;
+    struct {
+        /* fp+2340 */ u8 pad_x0[4];
+        /* fp+2344 */ float x4;
+    } jumpaerial;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ float x4;
+    } fall;
+    struct {
         /* fp+2340 */ bool x0;
     } attack1;
     struct {
