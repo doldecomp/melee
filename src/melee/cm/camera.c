@@ -7,11 +7,13 @@
 
 #include "baselib/cobj.h"
 #include "baselib/gobj.h"
+#include "baselib/memory.h"
 #include "cm/types.h"
 #include "dolphin/types.h"
 #include "ft/ftlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
 
@@ -30,7 +32,69 @@
 
 static HSD_CObj* cm_804D6464;
 
-/// #Camera_80028B9C
+void Camera_80028B9C(int n_subjects)
+{
+    CameraBox* cam_box;
+    Vec3* interest_pos;
+    Vec3* eye_pos;
+    int i;
+
+    interest_pos = &cm_803BCB64.interest->pos;
+    cm_80452C68.movement.interest = *interest_pos;
+    cm_80452C68.movement.target_interest = *interest_pos;
+    eye_pos = &cm_803BCB64.eyepos->pos;
+    cm_80452C68.movement.position = *eye_pos;
+    cm_80452C68.movement.target_position = *eye_pos;
+    cm_80452C68.movement.target_fov = cm_803BCB64.fov;
+    cm_80452C68.movement.fov = cm_803BCB64.fov;
+    cm_80452C68.movement_lerp.interest = *interest_pos;
+    cm_80452C68.movement_lerp.target_interest = *interest_pos;
+    cm_80452C68.movement_lerp.position = *eye_pos;
+    cm_80452C68.movement_lerp.target_position = *eye_pos;
+    cm_80452C68.movement_lerp.target_fov = cm_803BCB64.fov;
+    cm_80452C68.movement_lerp.fov = cm_803BCB64.fov;
+    cm_80452C68.background_b = 0;
+    cm_80452C68.background_g = 0;
+    cm_80452C68.background_r = 0;
+    cm_80452C68.nearz = 0.1f;
+    cm_80452C68.farz = 16384.0f;
+    cm_80452C68.mode = 0;
+    memzero(cm_80452C68.unk_8C, 0x224);
+    cm_80452C68.unk_AC = 1.0f;
+    cm_80452C68.unk_2bc = 1.0f;
+    cm_80452C68.unk_2c0 = -1.0f;
+    cm_80452C68.unk_398_b0 = 0;
+    cm_80452C68.unk_398_b1 = 0;
+    cm_80452C68.unk_398_b2 = 0;
+    cm_80452C68.unk_398_b3 = 0;
+    cm_80452C68.unk_398_b4 = 0;
+    cm_80452C68.unk_398_b5 = 0;
+    cm_80452C68.unk_398_b6_b7 = 0;
+    cm_80452C68.unk_399_b0_b1 = 0;
+    cm_80452C68.unk_399_b2 = 0;
+    cm_80452C68.debug_mode.last_mode = cm_80452C68.mode;
+    cm_80452C68.unk_399_b3 = 0;
+    cm_80452C68.unk_399_b4 = 0;
+    cm_80452C68.unk_399_b5 = 0;
+    memzero(&cm_80452C68 + 0x380, 0x18);
+    cm_80452C68.unk_399_b6 = 0;
+    cm_80452C68.unk_39A_b5 = 0;
+    cm_80452C68.unk_39A_b6 = 0;
+    cm_80452C68.unk_39A_b7 = 0;
+    cm_80452C68.gobj = NULL;
+    cam_box = HSD_MemAlloc( n_subjects * sizeof(CameraBox));
+    cm_804D6458 = cam_box;
+    cm_804D645C = cam_box;
+    memzero(cm_804D6458, n_subjects * sizeof(CameraBox));
+
+    // link subjects
+    for (i = 0; i < n_subjects; i++) {
+        cm_804D645C[i].prev = &cm_804D645C[i + 1];
+    }
+    cm_804D645C[n_subjects - 1].prev = NULL;
+    cm_804D6460 = NULL;
+    cm_804D6468 = NULL;
+}
 
 void Camera_80028F5C(CameraBox* subject, s32 arg1)
 {
@@ -40,10 +104,7 @@ void Camera_80028F5C(CameraBox* subject, s32 arg1)
         subject->x10.y = 0.0f;
         subject->x10.x = 0.0f;
         subject->x1C = subject->x10;
-        // subject->x1C.y = subject->x10.y;
-        // subject->x1C.z = subject->x10.z;
         subject->x28 = 0.0f;
-        // subject->xC_b0 = subject->xC_b0 & ~0x80;
         subject->xC_b0 = false;
         subject->xC_b1 = false;
         subject->xC_b2 = false;
@@ -55,12 +116,6 @@ void Camera_80028F5C(CameraBox* subject, s32 arg1)
         subject->x34.z = 1.0f;
         subject->x40 = subject->x2C;
         subject->x48 = subject->x34;
-        // // subject->bounds.left = (f32) subject->default_bounds.left;
-        // // subject->bounds.right = (f32) subject->default_bounds.right;
-        // // subject->bounds.top = (f32) subject->default_bounds.top;
-        // // subject->bounds.bottom = (f32) subject->default_bounds.bottom;
-        // // subject->default_size = subject->size;
-        // *(u32*) &subject->default_size = *(u32*) &subject->size;
         subject->x54.x = 0.0f;
         subject->x54.y = 0.0f;
         subject->x54.z = 0.0f;
@@ -985,7 +1040,29 @@ s32 fn_8002FBA0(HSD_RectF32* arg0)
 
 /// #Camera_8002FC7C
 
-/// #Camera_8002FE38
+void Camera_8002FE38(void)
+{
+    cm_80452C68.mode = 6;
+    cm_80452C68.unk_341_b1 = 0;
+
+    // cm_80452C68.unk341 = (u8) (cm_80452C68.unk341 & ~0x18);
+    // cm_80452C68.unk341 = (u8) (cm_80452C68.unk341 & ~6);
+    // cm_80452C68.unk341 = (u8) (cm_80452C68.unk341 & ~1);
+    // cm_80452C68.unk350 = (f32) cm_80452C68.movement.interest.x;
+    // cm_80452C68.unk354 = (f32) cm_80452C68.movement.interest.y;
+    // cm_80452C68.unk358 = (f32) cm_80452C68.movement.interest.z;
+    // cm_80452C68.movement.target_interest.x = cm_80452C68.unk350;
+    // cm_80452C68.movement.target_interest.y = cm_80452C68.unk354;
+    // cm_80452C68.movement.target_interest.z = cm_80452C68.unk358;
+    // cm_80452C68.unk368 = (f32) cm_80452C68.movement.position.x;
+    // cm_80452C68.unk36C = (f32) cm_80452C68.movement.position.y;
+    // cm_80452C68.unk370 = (f32) cm_80452C68.movement.position.z;
+    // cm_80452C68.movement.target_position.x = cm_80452C68.unk368;
+    // cm_80452C68.movement.target_position.y = cm_80452C68.unk36C;
+    // cm_80452C68.movement.target_position.z = cm_80452C68.unk370;
+    // cm_80452C68.unk374 = (f32) cm_80452C68.movement.fov;
+    // cm_80452C68.movement.target_fov = cm_80452C68.movement.fov;
+}
 
 /// #Camera_8002FEEC
 
@@ -1083,7 +1160,10 @@ void Camera_80030788(Vec3* arg0)
     *arg0 = cm_80452C68.movement.position;
 }
 
-/// #Camera_800307AC
+void Camera_800307AC(Vec* arg0)
+{
+    *arg0 = cm_80452C68.movement.interest;
+}
 
 /// #Camera_800307D0
 
