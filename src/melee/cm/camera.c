@@ -38,7 +38,7 @@ void Camera_80028B9C(int n_subjects)
     Vec3* interest_pos;
     Vec3* eye_pos;
     int i;
-    
+
     interest_pos = &cm_803BCB64.interest->pos;
     cm_80452C68.movement.interest = *interest_pos;
     cm_80452C68.movement.target_interest = *interest_pos;
@@ -1044,7 +1044,6 @@ void Camera_8002FE38(void)
 {
     cm_80452C68.mode = 6;
     cm_80452C68.unk_341_b1 = 0;
-    
 
     // cm_80452C68.unk341 = (u8) (cm_80452C68.unk341 & ~0x18);
     // cm_80452C68.unk341 = (u8) (cm_80452C68.unk341 & ~6);
