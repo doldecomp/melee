@@ -833,19 +833,82 @@ bool ftCo_800CB870(Fighter_GObj* gobj)
 
 /// #ftCo_800CB8E0
 
-/// #ftCo_800CB950
+bool ftCo_JumpAerial_CheckInput(Fighter_GObj* gobj, bool arg1)
+{
+    ftCo_DatAttrs* co_attrs;
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool jumped;
+    bool has_jump = fp->x1968_jumpsUsed < fp->co_attrs.max_jumps;
+    co_attrs = &fp->co_attrs;
+    if (has_jump &&
+        ((fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax &&
+          fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74) ||
+         fp->input.x668 & HSD_PAD_XY) &&
+        !(arg1 && (fp->x68A < p_ftCommonData->x1C)))
+    {
+        jumped = true;
+    } else {
+        jumped = false;
+    }
+    if (jumped) {
+        if (ft_800D2D0C(gobj)) {
+            Vec3 v;
+            PAD_STACK(8);
+            v.x = fp->input.lstick.x * co_attrs->air_jump_h_multiplier;
+            v.y = co_attrs->jump_v_initial_velocity *
+                  co_attrs->air_jump_v_multiplier;
+            v.z = 0.0F;
+            ft_800D2E7C(gobj, &v);
+            return true;
+        }
+        switch (fp->kind) {
+        case FTKIND_NESS:
+            ftNs_JumpAerial_Enter(gobj);
+            break;
+        case FTKIND_YOSHI:
+            ftYs_JumpAerial_Enter(gobj);
+            break;
+        case FTKIND_PEACH:
+            ftPe_JumpAerial_Enter(gobj);
+            break;
+        case FTKIND_MEWTWO:
+            ftMt_JumpAerial_Enter(gobj);
+            break;
+        default:
+            ftCo_JumpAerial_Enter_Basic(gobj);
+            break;
+        }
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800CBAC4
 
-/// #ftCo_800CBBC0
+void ftCo_JumpAerial_Enter_Basic(Fighter_GObj* gobj)
+{
+    NOT_IMPLEMENTED;
+}
 
-/// #ftCo_800CBD18
+void ftNs_JumpAerial_Enter(Fighter_GObj* gobj)
+{
+    NOT_IMPLEMENTED;
+}
 
-/// #ftCo_800CBE98
+void ftYs_JumpAerial_Enter(Fighter_GObj* gobj)
+{
+    NOT_IMPLEMENTED;
+}
 
-/// #ftCo_800CC0E8
+void ftPe_JumpAerial_Enter(Fighter_GObj* gobj)
+{
+    NOT_IMPLEMENTED;
+}
 
-/// #ftCo_800CC238
+void ftMt_JumpAerial_Enter(Fighter_GObj* gobj)
+{
+    NOT_IMPLEMENTED;
+}
 
 void ftCo_JumpAerial_Anim(Fighter_GObj* gobj)
 {
