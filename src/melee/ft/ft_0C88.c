@@ -945,7 +945,22 @@ void ftYs_JumpAerial_Anim_Cb(Fighter_GObj* gobj)
     ft_800CB6EC(fp, ys_attrs->x0);
 }
 
-/// #ftCo_JumpAerial_IASA
+void ftCo_JumpAerial_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
+    RETURN_IF(ftCo_80095328(gobj, NULL));
+    RETURN_IF(ftCo_800D7100(gobj));
+    RETURN_IF(ftCo_800C3B10(gobj));
+    RETURN_IF(ftCo_80099A58(gobj));
+    RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
+    RETURN_IF(ftCo_800D705C(gobj));
+    RETURN_IF(ftPe_8011BA54(gobj));
+    RETURN_IF(ftCo_800CB870(gobj));
+    RETURN_IF(fp->cmd_vars[0] && ftPe_8011BAD8(gobj));
+    RETURN_IF(!fp->cmd_vars[0]);
+    RETURN_IF(ftCo_800CEE70(gobj));
+}
 
 void ftCo_JumpAerial_Phys(Fighter_GObj* gobj)
 {
