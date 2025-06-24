@@ -572,7 +572,13 @@ void ftCo_RunDirect_Phys(Fighter_GObj* gobj)
 }
 #pragma pop
 
-/// #ftCo_RunDirect_Coll
+#pragma push
+#pragma dont_inline on
+void ftCo_RunDirect_Coll(Fighter_GObj* gobj)
+{
+    ftCo_Run_Coll(gobj);
+}
+#pragma pop
 
 bool fn_800CABC4(Fighter_GObj* gobj)
 {
