@@ -932,7 +932,10 @@ void ftCo_JumpAerial_Anim(Fighter_GObj* gobj)
 
 /// #ftCo_JumpAerial_IASA
 
-/// #ftCo_JumpAerial_Phys
+void ftCo_JumpAerial_Phys(Fighter_GObj* gobj)
+{
+    ft_80084DB0(gobj);
+}
 
 void ftNs_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
 {
