@@ -84,7 +84,7 @@
 /* 0CB5FC */ void ftCo_KneeBend_IASA(ftCo_GObj* gobj);
 /* 0CB6AC */ void ftCo_KneeBend_Phys(ftCo_GObj* gobj);
 /* 0CB6CC */ void ftCo_KneeBend_Coll(ftCo_GObj* gobj);
-/* 0CB6EC */ UNK_RET ft_800CB6EC(UNK_PARAMS);
+/* 0CB6EC */ void ft_800CB6EC(Fighter* fp, s32 arg1);
 /* 0CB804 */ bool ft_did_jump(Fighter* fp, bool);
 /* 0CB870 */ bool ftCo_800CB870(ftCo_GObj* gobj);
 /* 0CB8E0 */ bool ftCo_800CB8E0(ftCo_GObj* gobj);
