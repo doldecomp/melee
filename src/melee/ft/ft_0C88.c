@@ -850,7 +850,15 @@ bool ft_did_jump(Fighter* fp, bool arg1)
 
 bool ftCo_800CB870(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (ftCo_800C5240(gobj)) {
+        return false;
+    }
+    if (fp->x2222_b1) {
+        return ftCo_800D730C(gobj, false);
+    }
+    return ftCo_JumpAerial_CheckInput(gobj, false);
 }
 
 /// #ftCo_800CB8E0
