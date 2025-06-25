@@ -96,9 +96,9 @@ void it_802BE2E8(Item_GObj* item_gobj, HSD_GObj* arg1)
     temp_f30 = 0.5F * temp_f1 + temp_f0;
 
     trig1 = sinf(temp_f30);
-    temp_f2 = temp_f31 * trig1;
+    trig1 = temp_f31 * trig1;
     // item->x40_vel.x = temp_f2 * item->facing_dir;
-    item->x40_vel.x = item->facing_dir * temp_f2;
+    item->x40_vel.x = item->facing_dir * trig1;
 
     trig2 = cosf(temp_f30);
     item->x40_vel.y = temp_f31 * trig2;
