@@ -7,10 +7,12 @@
 
 #include "math.h"
 #include "platform.h"
+#include "stdbool.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
@@ -902,7 +904,38 @@ bool ftCo_JumpAerial_CheckInput(Fighter_GObj* gobj, bool arg1)
     return false;
 }
 
-/// #ftCo_800CBAC4
+static inline void ft_SetVec(Vec3* dst, Vec3* src)
+{
+    dst->x = src->x;
+    dst->y = src->y;
+    dst->z = src->z;
+}
+
+static inline void ft_JumpAerial_Sound(Fighter* fp, FighterKind ftkind)
+{
+    if (ftkind != FTKIND_MEWTWO && (ftkind >= 0x10 || ftkind != FTKIND_NESS) &&
+        fp->x197C != NULL)
+    {
+        ft_80088148(fp, 0x11B, SFX_VOLUME_MAX, SFX_PAN_MID);
+    }
+}
+
+void ftCo_800CBAC4(Fighter_GObj* gobj, FtMotionId msid, Vec3* vel, bool arg3)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipNametagVis, 0.0F, 1.0F,
+                              0.0F, NULL);
+    fp->x2221_b7 = true;
+    ft_SetVec(&fp->self_vel, vel);
+    if (arg3) {
+        fp->x671_timer_lstick_tilt_y = 0xFE;
+    }
+    fp->x1968_jumpsUsed += 1;
+    ft_80088770(fp);
+    ft_80088328(fp, fp->ft_data->x4C_sfx->x14, SFX_VOLUME_MAX, SFX_PAN_MID);
+    ft_JumpAerial_Sound(fp, fp->kind);
+}
 
 void ftCo_JumpAerial_Enter_Basic(Fighter_GObj* gobj)
 {

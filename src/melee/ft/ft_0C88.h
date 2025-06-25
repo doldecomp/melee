@@ -89,7 +89,7 @@
 /* 0CB870 */ bool ftCo_800CB870(ftCo_GObj* gobj);
 /* 0CB8E0 */ bool ftCo_800CB8E0(ftCo_GObj* gobj);
 /* 0CB950 */ bool ftCo_JumpAerial_CheckInput(ftCo_GObj* gobj, bool);
-/* 0CBAC4 */ void ftCo_800CBAC4(ftCo_GObj*, ftCommon_MotionState, Vec3*, int);
+/* 0CBAC4 */ void ftCo_800CBAC4(ftCo_GObj*, FtMotionId, Vec3*, bool);
 /* 0CBBC0 */ void ftCo_JumpAerial_Enter_Basic(ftCo_GObj* gobj);
 /* 0CBD18 */ void ftNs_JumpAerial_Enter(ftCo_GObj* gobj);
 /* 0CBE98 */ void ftYs_JumpAerial_Enter(ftCo_GObj* gobj);
