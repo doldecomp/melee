@@ -2,6 +2,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_0892.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
@@ -130,7 +131,14 @@ void fn_8012D298(Fighter_GObj* gobj)
 
 /// #fn_8012D4F0
 
-/// #ftYs_SpecialN1_Anim
+void ftYs_SpecialN1_Anim(ftYs_GObj* gobj)
+{
+    u8 _[8]; // brought to full match
+
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        ft_8008A2BC((Fighter_GObj*) gobj);
+    }
+}
 
 /// #ftYs_SpecialAirN1_0_Anim
 
@@ -150,17 +158,26 @@ void fn_8012D298(Fighter_GObj* gobj)
 
 /// #ftYs_SpecialAirN2_0_Anim
 
-/// #ftYs_SpecialN1_Phys
+void ftYs_SpecialN1_Phys(ftYs_GObj* gobj)
+{
+    ft_80084F3C((Fighter_GObj*) gobj);
+}
 
 /// #ftYs_SpecialAirN1_0_Phys
 
 /// #ftYs_SpecialN1_1_Phys
 
-/// #ftYs_SpecialN1_0_Phys
+void ftYs_SpecialN1_0_Phys(ftYs_GObj* gobj)
+{
+    ft_80084F3C((Fighter_GObj*) gobj);
+}
 
 /// #ftYs_SpecialAirN1_2_Phys
 
-/// #ftYs_SpecialAirN1_1_Phys
+void ftYs_SpecialAirN1_1_Phys(ftYs_GObj* gobj)
+{
+    ft_80084EEC((Fighter_GObj*) gobj);
+}
 
 /// #ftYs_SpecialN2_1_Phys
 
