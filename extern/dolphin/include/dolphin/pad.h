@@ -59,7 +59,7 @@ typedef struct PADStatus {
 int PADReset(unsigned long mask);
 BOOL PADRecalibrate(u32 mask);
 BOOL PADInit();
-void PADRead(struct PADStatus* status);
+u32 PADRead(struct PADStatus* status);
 void PADSetSamplingRate(unsigned long msec);
 void __PADTestSamplingRate(unsigned long tvmode);
 void PADControlAllMotors(const u32* commandArray);
@@ -69,6 +69,7 @@ unsigned long PADGetSpec();
 int PADGetType(long chan, unsigned long* type);
 BOOL PADSync(void);
 void PADSetAnalogMode(u32 mode);
+BOOL __PADDisableRecalibration(int arg0);
 
 // Padclamp.c
 void PADClamp(PADStatus* status);
