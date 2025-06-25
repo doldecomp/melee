@@ -254,7 +254,7 @@ unsigned long SIDisablePolling(unsigned long poll) {
     return poll;
 }
 
-void SIGetResponse(long chan, void * data) {
+int SIGetResponse(long chan, void * data) {
     ASSERTMSGLINE(0x250, ((chan >= 0) && (chan < 4)), "SIGetResponse(): invalid channel.");
     ((u32*)data)[0] = __SIRegs[chan * 3 + 1];
     ((u32*)data)[1] = __SIRegs[chan * 3 + 2];
