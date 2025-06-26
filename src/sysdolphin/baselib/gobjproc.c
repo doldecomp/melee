@@ -8,39 +8,112 @@
 
 extern HSD_ObjAllocData gobjproc_alloc_data;
 
-#pragma push
-#pragma dont_inline on
+/**
+ * Inserts a new GObjProc
+ */
 void HSD_GObjProc_8038FAA8(HSD_GObjProc* gproc)
 {
-    NOT_IMPLEMENTED;
+    HSD_GObj* proc_gobj;
+    HSD_GObjProc* dst_proc;
+    u8 s_link;
+    int p_link;
+
+    proc_gobj = gproc->gobj;
+    s_link = gproc->s_link;
+    p_link = proc_gobj->p_link;
+
+    // Scan through this GObjProc until we find a destination GObjProc
+    // with the same s_link where we can insert it.
+    //
+    // Start at the current proc's GObj, and scan backwards through
+    // all previous GObjs' procs.
+    if (HSD_GObj_804D7844[p_link + s_link *
+            (HSD_GObjLibInitData.p_link_max + 1)] != NULL) {
+        HSD_GObj* cur_gobj = proc_gobj;
+        while (cur_gobj != NULL) {
+            dst_proc = cur_gobj->proc;
+            while (dst_proc != NULL) {
+                if (dst_proc->s_link == s_link) {
+                    if (HSD_GObj_804D7844[p_link + s_link *
+                            (HSD_GObjLibInitData.p_link_max + 1)] == dst_proc) {
+                        HSD_GObj_804D7844[p_link + s_link *
+                            (HSD_GObjLibInitData.p_link_max + 1)] = gproc;
+                    }
+                    goto insert_at_dst;
+                }
+                dst_proc = dst_proc->child;
+            }
+            cur_gobj = cur_gobj->prev;
+        }
+    } else {
+        HSD_GObj_804D7844[p_link + s_link *
+            (HSD_GObjLibInitData.p_link_max + 1)] = gproc;
+    }
+
+    // If we got here, we still don't have a destination,
+    // so scan through the global GObjProcs instead.
+    while (p_link-- != 0) {
+        dst_proc = HSD_GObj_804D7844[p_link + s_link *
+            (HSD_GObjLibInitData.p_link_max + 1)];
+        if (dst_proc != NULL) {
+            goto insert_at_dst;
+        }
+    }
+
+    // If we're still continuing, we haven't found a valid
+    // destination, so just put it at the front of the global list.
+    if (true) {
+        gproc->next = HSD_GObj_804D7840[s_link];
+        HSD_GObj_804D7840[s_link] = gproc;
+        gproc->prev = NULL;
+    } else {
+
+    // Alternatively, we jump here if we have a valid destination,
+    // so we insert it in the linked list.
+insert_at_dst:
+        gproc->next = dst_proc->next;
+        dst_proc->next = gproc;
+        gproc->prev = dst_proc;
+    }
+
+    // We've now inserted the GObjProc properly, so regardless of insertion
+    // method, update any other struct fields / globals we need to.
+    if (gproc->next != NULL) {
+        gproc->next->prev = gproc;
+    }
+    gproc->child = proc_gobj->proc;
+    proc_gobj->proc = gproc;
+    if (HSD_GObj_804CE3E4.b0 && gproc->prev == HSD_GObj_804D7838 &&
+        gproc->next == HSD_GObj_804D7830 && s_link == HSD_GObj_804D7834) {
+        HSD_GObj_804D7830 = gproc;
+    }
 }
-#pragma pop
 
 void HSD_GObjProc_8038FC18(HSD_GObjProc* gproc)
 {
-    s32 temp_r7 = gproc->gobj->p_link;
-    s32 temp_r8 = gproc->s_link;
+    int p_link = gproc->gobj->p_link;
+    int s_link = gproc->s_link;
     if (HSD_GObj_804CE3E4.b0 && gproc == HSD_GObj_804D7830) {
         HSD_GObj_804D7830 = gproc->next;
     }
     if (gproc ==
-        HSD_GObj_804D7844[temp_r7 +
-                          temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)])
+        HSD_GObj_804D7844[p_link +
+                          s_link * (HSD_GObjLibInitData.p_link_max + 1)])
     {
-        if (gproc->prev != NULL && gproc->prev->gobj->p_link == temp_r7) {
-            HSD_GObj_804D7844[temp_r7 +
-                              temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] =
+        if (gproc->prev != NULL && gproc->prev->gobj->p_link == p_link) {
+            HSD_GObj_804D7844[p_link +
+                              s_link * (HSD_GObjLibInitData.p_link_max + 1)] =
                 gproc->prev;
         } else {
-            HSD_GObj_804D7844[temp_r7 +
-                              temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] =
+            HSD_GObj_804D7844[p_link +
+                              s_link * (HSD_GObjLibInitData.p_link_max + 1)] =
                 NULL;
         }
     }
     if (gproc->prev != NULL) {
         gproc->prev->next = gproc->next;
     } else {
-        HSD_GObj_804D7840[temp_r8] = gproc->next;
+        HSD_GObj_804D7840[s_link] = gproc->next;
     }
     if (gproc->next != NULL) {
         gproc->next->prev = gproc->prev;

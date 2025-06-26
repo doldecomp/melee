@@ -70,6 +70,7 @@ int PADGetType(long chan, unsigned long* type);
 BOOL PADSync(void);
 void PADSetAnalogMode(u32 mode);
 BOOL __PADDisableRecalibration(int arg0);
+void SIRefreshSamplingRate(void);
 
 // Padclamp.c
 void PADClamp(PADStatus* status);
