@@ -25,6 +25,7 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/gobj.h>
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
@@ -447,24 +448,6 @@ static inline void inlineA0(Fighter_GObj* gobj)
     ftColl_8007B62C(gobj, 2);
     fp->x221E_b0 = 1;
     fp->accessory4_cb = fn_80112ED8;
-}
-static inline float sqrtf(float x)
-{
-    static const double _half = .5;
-    static const double _three = 3.0;
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 12 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 24 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
 }
 void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
 {
