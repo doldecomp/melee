@@ -259,10 +259,10 @@ typedef struct itFreeze_ItemVars {
 } itFreeze_ItemVars;
 
 typedef struct itPeachToadSporeAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xc;
+    f32 x0_min_speed;
+    f32 x4_max_speed_offset;
+    f32 x8_speed_decay_rate;
+    f32 xc_angle;
 } itPeachToadSporeAttributes;
 
 typedef struct itPeachTurnipAttributes {

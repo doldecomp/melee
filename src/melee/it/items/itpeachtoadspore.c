@@ -23,8 +23,6 @@ ItemStateTable it_803F7548[] = { {
     NULL,
 } };
 
-// TODO: check types of function calls and headers
-
 Item_GObj* it_802BE214(Item_GObj* item_gobj, Vec3* pos, ItemKind kind,
                        f32 facing_dir)
 {
@@ -53,64 +51,38 @@ Item_GObj* it_802BE214(Item_GObj* item_gobj, Vec3* pos, ItemKind kind,
 
 void it_802BE2E8(Item_GObj* item_gobj, HSD_GObj* arg1)
 {
-    // HSD_JObj* temp_r31;
-    // u8 _[8];
-    f32 trig1;
-    f32 trig2;
-    f32 temp_f0;
-    f32 temp_f31;
-    f32 temp_f30;
-    f32 temp_f4;
-    f32 temp_f2;
-    f32 rand;
-    f32 temp_f1;
-    HSD_JObj* hsd_jobj; // rename to item_jobj
-    HSD_JObj* temp_r5;
-    Item* item;
+    HSD_JObj *item_jobj, *hsd_jobj;
+    Item *item_1, *item_2;
     itPeachToadSporeAttributes* attr;
-    // void* temp_r29;
+    f32 rand, speed, angle_offset, double_angle, angle;
 
-    item = GET_ITEM(item_gobj);
-    hsd_jobj = item_gobj->hsd_obj;
-    attr = item->xC4_article_data->x4_specialAttributes;
-    item->owner = arg1;
-
+    item_1 = GET_ITEM(item_gobj);
+    item_jobj = item_gobj->hsd_obj;
+    attr = item_1->xC4_article_data->x4_specialAttributes;
+    item_1->owner = arg1;
     it_80275158(item_gobj, 60.0F);
-    item->xDAC_itcmd_var0 = 0;
-
-    // temp_f31 = (attr->x4 * HSD_Randf()) + attr->x0;
+    item_1->xDAC_itcmd_var0 = 0;
 
     rand = HSD_Randf();
+    speed = attr->x0_min_speed + attr->x4_max_speed_offset * rand;
 
-    temp_f0 = attr->x0;
-    temp_f31 = attr->x4 * rand + temp_f0;
-
-    // temp_f4 = temp_r29->unkC;
-    // temp_f30 = (0.5f * (3.1415927F - temp_f4)) * (temp_f4 * HSD_Randf());
     rand = HSD_Randf();
-    temp_f2 = 3.1415927F;
-    temp_f4 = attr->xc;
-    temp_f1 = temp_f2 - temp_f4;
-    temp_f0 = temp_f4 * rand;
+    double_angle = ((f32) M_PI) - attr->xc_angle;
+    angle_offset = attr->xc_angle * rand;
+    angle = 0.5F * double_angle + angle_offset;
 
-    temp_f30 = 0.5F * temp_f1 + temp_f0;
+    item_1->x40_vel.x = item_1->facing_dir * (speed * sinf(angle));
+    item_1->x40_vel.y = speed * cosf(angle);
 
-    trig1 = sinf(temp_f30);
-    trig1 = temp_f31 * trig1;
-    // item->x40_vel.x = temp_f2 * item->facing_dir;
-    item->x40_vel.x = item->facing_dir * trig1;
-
-    trig2 = cosf(temp_f30);
-    item->x40_vel.y = temp_f31 * trig2;
-
-    it_80272A3C(hsd_jobj);
+    it_80272A3C(item_jobj);
     it_8026B3A8(item_gobj);
 
-    temp_r5 = item_gobj->hsd_obj;
-    if (GET_ITEM(item_gobj)->kind == It_Kind_Peach_ToadSpore) {
-        efSync_Spawn(0x4D3, item_gobj, temp_r5);
+    item_2 = GET_ITEM(item_gobj);
+    hsd_jobj = item_gobj->hsd_obj;
+    if (item_2->kind == It_Kind_Peach_ToadSpore) {
+        efSync_Spawn(0x4D3, item_gobj, hsd_jobj);
     } else {
-        efSync_Spawn(0x4D3, item_gobj, temp_r5);
+        efSync_Spawn(0x4D3, item_gobj, hsd_jobj);
     }
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
@@ -134,13 +106,13 @@ bool it_802BE408(Item_GObj* item_gobj)
 
 void it_802BE458(Item_GObj* item_gobj)
 {
-    itPeachToadSporeAttributes* temp_r3;
+    itPeachToadSporeAttributes* attr;
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    temp_r3 = item->xC4_article_data->x4_specialAttributes;
-    item->x40_vel.x = item->x40_vel.x * temp_r3->x8;
-    item->x40_vel.y = item->x40_vel.y * temp_r3->x8;
+    attr = item->xC4_article_data->x4_specialAttributes;
+    item->x40_vel.x *= attr->x8_speed_decay_rate;
+    item->x40_vel.y *= attr->x8_speed_decay_rate;
 }
 
 bool it_802BE488(Item_GObj* item_gobj)
