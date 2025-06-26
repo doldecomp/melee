@@ -24,7 +24,15 @@ typedef struct _ftYoshiAttributes {
     float x24;
     s32 x28;
     s32 x2C;
-    u8 data_filler1[0xEF];
+    //additions to match ftYs_SpecialN_8012CDB4
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    f32 x3c;
+    f32 x40;
+    f32 x44;
+    //u8 data_filler1[0xEF];
+    u8 data_filler1[0xD7]; //subtracting 18
     float x120;
     u8 data_filler2[0x14];
 } ftYoshiAttributes;

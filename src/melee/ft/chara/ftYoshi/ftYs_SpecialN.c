@@ -49,7 +49,11 @@ void ftYs_SpecialN_8012CD88(Vec3* arg0)
     arg0->z = 0;
 }
 
-/// #ftYs_SpecialN_8012CDB4
+f32 ftYs_SpecialN_8012CDB4(ftYs_GObj* gobj)
+{
+    ftYoshiAttributes* ea = gFtDataList[FTKIND_YOSHI]->ext_attr;
+    return ea->x44 / ea->x18;
+}
 
 HSD_Joint* ftYs_SpecialN_8012CDD4(ftYs_GObj* gobj)
 {
@@ -181,11 +185,17 @@ void ftYs_SpecialAirN1_1_Phys(ftYs_GObj* gobj)
 
 /// #ftYs_SpecialN2_1_Phys
 
-/// #ftYs_SpecialN2_0_Phys
+void ftYs_SpecialN2_0_Phys(ftYs_GObj* gobj)
+{
+    ft_80084F3C((Fighter_GObj*) gobj);
+}
 
 /// #ftYs_SpecialAirN2_1_Phys
 
-/// #ftYs_SpecialAirN2_0_Phys
+void ftYs_SpecialAirN2_0_Phys(ftYs_GObj* gobj)
+{
+    ft_80084EEC((Fighter_GObj*) gobj);
+}
 
 /// #ftYs_SpecialN1_Coll
 

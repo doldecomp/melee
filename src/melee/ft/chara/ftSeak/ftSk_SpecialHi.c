@@ -13,6 +13,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -20,9 +21,11 @@
 #include "ftCommon/ftCo_Pass.h"
 #include "it/items/itseakvanish.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/gobj.h>
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
@@ -272,7 +275,6 @@ void ftSk_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
 // Physics_SheikUpBTravelAir
 
-// Kipcode66's scratch at https://decomp.me/scratch/jKQKo seems to match this
 void ftSk_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
     ftCommon_8007CB74((Fighter_GObj*) gobj);
@@ -435,7 +437,74 @@ void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
 }
 
 // AS_SheikUpBTravelGround
-/// #ftSk_SpecialHi_80113838
+static inline void inlineA0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes;
+    attributes = fp->dat_attrs;
+    fp->mv.sk.specialhi.x0 = attributes->x38;
+    fp->x1968_jumpsUsed = (u8) fp->co_attrs.max_jumps;
+    fp->x2223_b4 = 1;
+    ftColl_8007B62C(gobj, 2);
+    fp->x221E_b0 = 1;
+    fp->accessory4_cb = fn_80112ED8;
+}
+void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
+{
+    // Almost completely matching, might need more inlining to get fully all
+    // the way there
+    f32 stick_mag;
+    f32 stick_y, stick_x;
+    Vec3 inputVector;
+    Fighter* fp = gobj->user_data;
+    ftSeakAttributes* attributes = fp->dat_attrs;
+    CollData* collData = &fp->coll_data;
+    f32 sum_of_squares;
+
+    u8 _[32];
+
+    stick_x = fp->input.lstick.x;
+    stick_y = fp->input.lstick.y;
+    stick_x = stick_x * stick_x;
+    stick_y = stick_y * stick_y;
+
+    stick_mag = sqrtf(stick_x + stick_y);
+
+    // var_f31 = stick_mag;
+    if (stick_mag > 1.0f) {
+        stick_mag = 1.0f;
+    }
+
+    if (!(stick_mag < attributes->x40)) {
+        Vec3* groundVector = &collData->floor.normal;
+        inputVector.x = fp->input.lstick.x;
+        inputVector.y = fp->input.lstick.y;
+        inputVector.z = 0.0f;
+        if (!(lbVector_AngleXY(groundVector, &inputVector) < (float) M_PI_2)) {
+            if (ftCo_8009A134(gobj) == 0) {
+                f32 temp_f6;
+                f32 temp_f1_5;
+                ftCommon_8007D9FC(fp);
+                temp_f1_5 = atan2f(fp->input.lstick.y,
+                                   fp->input.lstick.x * fp->facing_dir);
+                fp->mv.sk.specialhi.vel.x = inputVector.x;
+                fp->mv.sk.specialhi.vel.y = inputVector.y;
+                // Restructured to get these vel.x and vel.y in specialhi
+                temp_f6 = ((attributes->x44 * stick_mag) + attributes->x48) *
+                          cosf(temp_f1_5);
+                fp->gr_vel = fp->facing_dir * temp_f6;
+                Fighter_ChangeMotionState(gobj, 0x164, 0, 35.0f, 1.0f, 0.0f,
+                                          NULL);
+                ftAnim_8006EBA4(gobj);
+                ftAnim_SetAnimRate(gobj, 0.0f);
+                inlineA0(gobj);
+                return;
+            }
+        }
+    }
+    ftCommon_8007D60C(fp);
+    ftSk_SpecialHi_80113A30(gobj);
+}
 
 // AS_SheikUpBTravelAir
 /// #ftSk_SpecialHi_80113A30
