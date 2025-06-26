@@ -312,7 +312,7 @@ void gm_801A4510(void)
             major_scenes[i].Init();
         }
     }
-    if (VIGetDTVStatus() != NULL &&
+    if (VIGetDTVStatus() != 0 &&
         (db_gameLaunchButtonState & 0x200 || OSGetProgressiveMode() == 1))
     {
         gm_80479D30.nums.curr_major = 0x27;
