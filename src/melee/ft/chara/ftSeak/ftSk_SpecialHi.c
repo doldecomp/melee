@@ -13,6 +13,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
