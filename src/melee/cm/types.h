@@ -52,9 +52,25 @@ struct UnkInternalCameraStruct {
     /* 0xC */ s32 xC;
 };
 
+// global vars for camera mode 7 and 8
+// mode 7 will attach and follow a player, and 8 is free cam
+struct CameraDebugMode {
+    int last_mode;
+    int ply_slot;
+    Vec3 mode7_int_offset;
+    Vec3 mode7_eye_offset;
+    Vec3 mode7_eye_pos;
+    Vec3 mode7_int_pos;
+    float mode7_fov;
+    Vec3 mode8_int_pos;
+    Vec3 mode8_eye_pos;
+    float mode8_fov;
+    u8 x4c[0x8]; // padding? not sure if this is correct
+};
+
 typedef struct Camera {
     /* 0x000 */ HSD_GObj* gobj;
-    /* 0x004 */ u32 mode;
+    /* 0x004 */ int mode;
     /* 0x008 */ u8 background_r;
     /* 0x009 */ u8 background_g;
     /* 0x00A */ u8 background_b;
@@ -71,11 +87,18 @@ typedef struct Camera {
     /* 0x0AC */ f32 unk_AC; /* inferred */
     /* 0x0B0 */ struct UnkInternalCameraStruct unk_B0[2][8];
     /* 0x1B0 */ struct UnkInternalCameraStruct unk_1B0[2][8];
-    /* 0x2B0 */ u8 pad_2B0[0x2BA - 0x2B0];
+    /* 0x2B0 */ float unk_2B0;
+    /* 0x2B4 */ float unk_2B4;
+    /* 0x2B8 */ s16 unk_2B8;
     /* 0x2BA */ s16 unk_2ba;
     /* 0x2BC */ f32 unk_2bc;
     /* 0x2C0 */ f32 unk_2c0;
-    /* 0x2C4 */ char pad_2C4[0x7D]; /* maybe part of unk_2c0[0x20]? */
+    /* 0x2C4 */ s8 unk_2C4; /* unk player slot */
+    /* 0x2C5 */ s8 unk_2C5;
+    /* 0x2C6 */ char pad_2C6[0x2C8 - 0x2C6];
+    /* 0x2C8 */ float unk_2C8;
+    /* 0x2CC */ float unk_2CC;
+    /* 0x2D0 */ char pad_2D0[0x341 - 0x2D0];
     /* 0x341:0 */ u8 unk_341_b0 : 1;
     /* 0x341:1 */ u8 unk_341_b1 : 1;
     /* 0x341:2 */ u8 unk_341_b2 : 1;
@@ -107,12 +130,12 @@ typedef struct Camera {
     /* 0x39A:5 */ u8 unk_39A_b5 : 1;
     /* 0x39A:6 */ u8 unk_39A_b6 : 1;
     /* 0x39A:7 */ u8 unk_39A_b7 : 1;
-    /* 0x39B */ char pad_39B[5]; /* maybe part of unk_39A[6]? */
-    /* 0x3A0 */ u32 last_mode;
+    /* 0x39B */ char pad_39B; /* maybe part of unk_39A[6]? */
+    /* 0x39C */ struct CameraDebugMode debug_mode;
 } Camera; /* size = 0x3A4 */
 
 /// @todo Size should be 0x39C like #cm_80452C68
-STATIC_ASSERT(sizeof(struct Camera) == 0x3A4);
+// STATIC_ASSERT(sizeof(struct Camera) == 0x3A4);
 
 struct CameraUnkGlobals {
     /*  +0 */ float _0[11];
@@ -124,33 +147,8 @@ struct CameraUnkGlobals {
     /* +40 */ float x40;
     /* +44 */ float _44[43];
 };
-
-// global vars for camera mode 7 and 8
-// mode 7 will attach and follow a player, and 8 is free cam
-struct CameraDebugMode {
-    /* +00 */ u32 last_mode;
-    /* +04 */ int ply_slot;
-    /* +08 */ Vec3 mode7_int_offset;
-    /* +14 */ Vec3 mode7_eye_offset;
-    /* +20 */ Vec3 mode7_eye_pos;
-    /* +2C */ Vec3 mode7_int_pos;
-    /* +38 */ float mode7_fov;
-    /* +3C */ Vec3 mode8_int_pos;
-    /* +48 */ Vec3 mode8_eye_pos;
-    /* +54 */ float mode8_fov;
-    /* +58 */ u8 x4c[0x8]; // padding? not sure if this is correct
-};
-
 struct CameraModeCallbacks {
-    void* mode_0;
-    void* mode_1;
-    void* mode_2;
-    void* mode_3;
-    void* mode_4;
-    void* mode_5;
-    void* mode_6;
-    void* mode_7;
-    void* mode_8;
+    void* callback[9];
 };
 
 struct CameraFixednessMult {

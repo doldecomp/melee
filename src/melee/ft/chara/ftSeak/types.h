@@ -36,10 +36,8 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
      * f32 */
     f32 x30;
     f32 x34;
-    f32 x38;
+    int x38;
     f32 x3C;
-    /* Changing to f32 based on context set up by kipcode 66 in
-     * https://decomp.me/scratch/fE7Dq for ftSk_SpecialAirHiStart_1_Coll */
     f32 x40;
     f32 x44;
     f32 x48;
@@ -115,8 +113,7 @@ union ftSeak_MotionVars {
 
     struct ftSeakSpecialHi {
         s32 x0;
-        s32 x4;
-        s32 x8;
+        Vec2 vel;
         s32 xC;
         s32 x10;
         s32 x14;

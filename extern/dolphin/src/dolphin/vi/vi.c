@@ -1,5 +1,6 @@
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
+#include <dolphin/pad.h>
 #include <dolphin/vi.h>
 #include <dolphin/hw_regs.h>
 #include <macros.h>
@@ -69,7 +70,6 @@ typedef struct {
 } SomeVIStruct;
 
 static volatile u32 retraceCount;
-static u32 changeMode;
 static volatile u32 flushFlag;
 static struct OSThreadQueue retraceQueue;
 static void (*PreCB)(u32);
@@ -77,14 +77,16 @@ static void (*PostCB)(u32);
 static u32 encoderType;
 static s16 displayOffsetH;
 static s16 displayOffsetV;
+static volatile u32 shdwChangeMode;
 static volatile u64 changed;
+static volatile u32 changeMode;
 static u16 regs[59];
 static volatile u64 shdwChanged;
 static u16 shdwRegs[59];
 
 #define MARK_CHANGED(index) (changed |= 1LL << (63 - (index)))
 
-static VITiming timing[7] =
+static VITiming timing[8] =
 {
     { 6, 240, 24, 25, 3, 2, 12, 13, 12, 13, 520, 519, 520, 519, 525, 429, 64, 71, 105, 162, 373, 122, 412 },
     { 6, 240, 24, 24, 4, 4, 12, 12, 12, 12, 520, 520, 520, 520, 526, 429, 64, 71, 105, 162, 373, 122, 412 },
@@ -92,7 +94,8 @@ static VITiming timing[7] =
     { 5, 287, 35, 35, 2, 2, 13, 11, 13, 11, 619, 621, 619, 621, 626, 432, 64, 75, 106, 172, 380, 133, 420 },
     { 6, 240, 24, 25, 3, 2, 16, 15, 14, 13, 518, 517, 516, 519, 525, 429, 64, 78, 112, 162, 373, 122, 412 },
     { 6, 240, 24, 24, 4, 4, 16, 14, 16, 14, 518, 520, 518, 520, 526, 429, 64, 78, 112, 162, 373, 122, 412 },
-    { 12, 480, 44, 44, 10, 10, 24, 24, 24, 24, 1038, 1038, 1038, 1038, 1050, 429, 64, 71, 105, 162, 373, 122, 412 },
+    { 12, 480, 48, 48, 6, 6, 24, 24, 24, 24, 1038, 1038, 1038, 1038, 1050, 429, 64, 71, 105, 162, 373, 122, 412 },
+    { 12, 480, 44, 44, 10, 10, 24, 24, 24, 24, 1038, 1038, 1038, 1038, 1050, 429, 64, 71, 105, 168, 379, 122, 412 },
 };
 static u16 taps[25] = {
     0x01F0, 0x01DC,
@@ -111,6 +114,8 @@ static u16 taps[25] = {
 };
 
 static SomeVIStruct HorVer;
+static VITiming* CurrTiming;
+static s32 CurrTvMode;
 static u32 FBSet;
 
 static u32 getCurrentFieldEvenOdd(void);
@@ -146,6 +151,8 @@ static int VISetRegs(void)
             shdwChanged &= ~((u64)1 << (63 - regIndex));
         }
         changeMode = 0;
+        CurrTiming = HorVer.timing;
+        CurrTvMode = HorVer.tv;
         return 1;
     }
     return 0;
@@ -201,6 +208,7 @@ static void __VIRetraceHandler(__OSInterrupt unused, OSContext *context)
 #endif
         if (VISetRegs() != 0) {
             flushFlag = 0;
+            SIRefreshSamplingRate();
         }
     }
 #if DEBUG
@@ -253,9 +261,15 @@ static VITiming *getTiming(VITVMode mode)
     case VI_TVMODE_NTSC_DS:   return &timing[1];
     case VI_TVMODE_PAL_INT:   return &timing[2];
     case VI_TVMODE_PAL_DS:    return &timing[3];
+    case 20:  return &timing[0];
+    case 21:  return &timing[1];
     case VI_TVMODE_MPAL_INT:  return &timing[4];
     case VI_TVMODE_MPAL_DS:   return &timing[5];
     case VI_TVMODE_NTSC_PROG: return &timing[6];
+    case 3:  return &timing[7];
+    case 16: return &timing[2];
+    case 17: return &timing[3];
+
     default: return NULL;
     }
 }
@@ -313,7 +327,7 @@ void __VIInit(VITVMode mode)
     vct = (tm->nhlines / 2) + 1;
     __VIRegs[25] = (u16)(u32)hct;
     __VIRegs[24] = vct | 0x1000;
-    if (mode != VI_TVMODE_NTSC_PROG) {
+    if (mode != VI_TVMODE_NTSC_PROG && mode != 3) {
         __VIRegs[1] = (nonInter << 2) | 1 | (tv << 8);
         __VIRegs[54] = 0;
         return;
@@ -368,6 +382,7 @@ void VIInit(void)
     retraceCount = 0;
     changed = 0;
     shdwChanged = 0;
+    shdwChangeMode = 0;
     changeMode = 0;
     flushFlag = 0;
     __VIRegs[39] = taps[0] | ((taps[1] & 0x3F) << 10);
@@ -385,11 +400,25 @@ void VIInit(void)
     __VIRegs[51] = taps[21] | (taps[22] << 8);
     __VIRegs[50] = taps[23] | (taps[24] << 8);
     __VIRegs[56] = 0x280;
+
     ImportAdjustingValues();
+
+
+    dspCfg = __VIRegs[1];
+    HorVer.nonInter = (s32) ((dspCfg >> 2U) & 1);
+    HorVer.tv = (u32) ((dspCfg >> 8U) & 3);
+    tv = (HorVer.tv == 3) ? 0 : HorVer.tv;
+    HorVer.timing = getTiming((tv << 2) + HorVer.nonInter);
+    regs[1] = dspCfg;
+
+    CurrTiming = HorVer.timing;
+    CurrTvMode = HorVer.tv;
+
+
     HorVer.DispSizeX = 0x280U;
-    HorVer.DispSizeY = 0x1E0U;
+    HorVer.DispSizeY = CurrTiming->acv << 1 & 0xFFFE;
     HorVer.DispPosX = (0x2D0 - HorVer.DispSizeX) / 2;
-    HorVer.DispPosY = (0x1E0 - HorVer.DispSizeY) / 2;
+    HorVer.DispPosY = 0;
     AdjustPosition(0xF0U);
     HorVer.FBSizeX = 0x280;
     HorVer.FBSizeY = 0x1E0;
@@ -398,12 +427,8 @@ void VIInit(void)
     HorVer.PanSizeX = 0x280;
     HorVer.PanSizeY = 0x1E0;
     HorVer.FBMode = 0;
-    dspCfg = __VIRegs[1];
-    HorVer.nonInter = (s32) ((dspCfg >> 2U) & 1);
-    HorVer.tv = (u32) ((dspCfg >> 8U) & 3);
-    tv = (HorVer.tv == 3) ? 0 : HorVer.tv;
-    HorVer.timing = getTiming((tv << 2) + HorVer.nonInter);
-    regs[1] = dspCfg;
+
+
     HorVer.wordPerLine = 0x28;
     HorVer.std = 0x28;
     HorVer.wpl = 0x28;
@@ -626,9 +651,9 @@ static void setVerticalRegs(u16 dispPosY, u16 dispSizeY, u8 equ, u16 acv, u16 pr
     }
     actualAcv = dispSizeY / c;
     if (black) {
-        actualPrbOdd += dispSizeY - 2;
+        actualPrbOdd += actualAcv * 2 - 2;
         actualPsbOdd += 2;
-        actualPrbEven += dispSizeY - 2;
+        actualPrbEven += actualAcv * 2 - 2;
         actualPsbEven += 2;
         actualAcv = 0;
     }
@@ -769,6 +794,8 @@ void VIFlush(void)
     s32 regIndex;
 
     enabled = OSDisableInterrupts();
+    changeMode |= shdwChangeMode;
+    shdwChangeMode = 0;
     shdwChanged |= changed;
     while (changed != 0) {
         regIndex = cntlzd(changed);
@@ -844,16 +871,14 @@ static u32 getCurrentHalfLine(void)
     u32 hcount;
     u32 vcount0;
     u32 vcount;
-    VITiming *tm;
 
-    tm = HorVer.timing;
     vcount = __VIRegs[22] & 0x7FF;
     do {
         vcount0 = vcount;
         hcount = __VIRegs[23] & 0x7FF;
         vcount = __VIRegs[22] & 0x7FF;
     } while (vcount0 != vcount);
-    return ((vcount - 1) * 2) + ((hcount - 1) / tm->hlw);
+    return ((vcount - 1) * 2) + ((hcount - 1) / CurrTiming->hlw);
 }
 
 static u32 getCurrentFieldEvenOdd(void)
@@ -865,17 +890,7 @@ static u32 getCurrentFieldEvenOdd(void)
     u32 nhlines;
     VITiming *tm;
 
-    if (__VIRegs[54] & 1) {
-        tm = getTiming(VI_TVMODE_NTSC_PROG);
-    } else {
-        value = __VIRegs[1];
-        nin = ((value >> 2U) & 1);
-        fmt = ((value >> 8U) & 3);
-        tvMode = (fmt << 2) + nin;
-        tm = getTiming(tvMode);
-    }
-    nhlines = tm->nhlines;
-    if (getCurrentHalfLine() < nhlines) {
+    if (getCurrentHalfLine() < CurrTiming->nhlines) {
         return 1U;
     }
     return 0U;
@@ -901,7 +916,7 @@ u32 VIGetCurrentLine(void)
     VITiming *tm;
     BOOL enabled;
 
-    tm = HorVer.timing;
+    tm = CurrTiming;
     enabled = OSDisableInterrupts();
     halfLine = getCurrentHalfLine();
     OSRestoreInterrupts(enabled);
@@ -913,10 +928,28 @@ u32 VIGetCurrentLine(void)
 
 u32 VIGetTvFormat(void)
 {
-    u32 format = *(u32 *)OSPhysicalToCached(0xCC);
+    s32 enabled;
+    s32 format;
 
     ASSERTMSGLINE(0x80D, format == 0 || format == 1 || format == 2,
         "VIGetTvFormat(): Wrong format is stored in lo mem. Maybe lo mem is trashed");
+
+    enabled = OSDisableInterrupts();
+    switch (CurrTvMode) {
+    case 3:
+    case 0:
+        format = 0;
+        break;
+    case 4:
+    case 1:
+        format = 1;
+        break;
+    case 5:
+    case 2:
+        format = CurrTvMode;
+        break;
+    }
+    OSRestoreInterrupts(enabled);
     return format;
 }
 
@@ -947,4 +980,13 @@ void __VIGetAdjustingValues(s16 *x, s16 *y)
     *x = displayOffsetH;
     *y = displayOffsetV;
     OSRestoreInterrupts(enabled);
+}
+
+u32 VIGetDTVStatus(void)
+{
+    int enabled = OSDisableInterrupts();
+    s32 temp_r31;
+    temp_r31 = __VIRegs[55] & 3;
+    OSRestoreInterrupts(enabled);
+    return temp_r31 & 1;
 }
