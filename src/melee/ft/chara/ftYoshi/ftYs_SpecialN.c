@@ -49,7 +49,8 @@ void ftYs_SpecialN_8012CD88(Vec3* arg0)
     arg0->z = 0;
 }
 
-f32 ftYs_SpecialN_8012CDB4(ftYs_GObj* gobj) {
+f32 ftYs_SpecialN_8012CDB4(ftYs_GObj* gobj)
+{
     ftYoshiAttributes* ea = gFtDataList[FTKIND_YOSHI]->ext_attr;
     return ea->x44 / ea->x18;
 }

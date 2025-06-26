@@ -20,8 +20,8 @@
 #include "ftCommon/ftCo_Pass.h"
 #include "it/items/itseakvanish.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbvector.h"
 #include "lb/lbrefract.h"
+#include "lb/lbvector.h"
 
 #include <math.h>
 #include <baselib/gobj.h>
@@ -435,7 +435,8 @@ void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
 }
 
 // AS_SheikUpBTravelGround
-static inline void inlineA0(Fighter_GObj* gobj) {
+static inline void inlineA0(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes;
     attributes = fp->dat_attrs;
@@ -464,8 +465,10 @@ static inline float sqrtf(float x)
     }
     return x;
 }
-void ftSk_SpecialHi_80113838(Fighter_GObj* gobj) {
-    //Almost completely matching, might need more inlining to get fully all the way there
+void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
+{
+    // Almost completely matching, might need more inlining to get fully all
+    // the way there
     f32 stick_mag;
     f32 stick_y, stick_x;
     Vec3 inputVector;
@@ -483,28 +486,31 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj) {
 
     stick_mag = sqrtf(stick_x + stick_y);
 
-    //var_f31 = stick_mag;
+    // var_f31 = stick_mag;
     if (stick_mag > 1.0f) {
         stick_mag = 1.0f;
     }
-    
+
     if (!(stick_mag < attributes->x40)) {
         Vec3* groundVector = &collData->floor.normal;
         inputVector.x = fp->input.lstick.x;
         inputVector.y = fp->input.lstick.y;
         inputVector.z = 0.0f;
         if (!(lbVector_AngleXY(groundVector, &inputVector) < (float) M_PI_2)) {
-            if(ftCo_8009A134(gobj) == 0) {
+            if (ftCo_8009A134(gobj) == 0) {
                 f32 temp_f6;
                 f32 temp_f1_5;
                 ftCommon_8007D9FC(fp);
-                temp_f1_5 = atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+                temp_f1_5 = atan2f(fp->input.lstick.y,
+                                   fp->input.lstick.x * fp->facing_dir);
                 fp->mv.sk.specialhi.vel.x = inputVector.x;
                 fp->mv.sk.specialhi.vel.y = inputVector.y;
-                //Restructured to get these vel.x and vel.y in specialhi
-                temp_f6 = ((attributes->x44 * stick_mag) + attributes->x48) * cosf(temp_f1_5);
+                // Restructured to get these vel.x and vel.y in specialhi
+                temp_f6 = ((attributes->x44 * stick_mag) + attributes->x48) *
+                          cosf(temp_f1_5);
                 fp->gr_vel = fp->facing_dir * temp_f6;
-                Fighter_ChangeMotionState(gobj, 0x164, 0, 35.0f, 1.0f, 0.0f, NULL);
+                Fighter_ChangeMotionState(gobj, 0x164, 0, 35.0f, 1.0f, 0.0f,
+                                          NULL);
                 ftAnim_8006EBA4(gobj);
                 ftAnim_SetAnimRate(gobj, 0.0f);
                 inlineA0(gobj);
