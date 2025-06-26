@@ -1403,7 +1403,7 @@ config.libs = [
             Object(Matching, "dolphin/os/OSCache.c"),
             Object(Matching, "dolphin/os/OSContext.c"),
             Object(Matching, "dolphin/os/OSError.c"),
-            Object(NonMatching, "dolphin/os/OSExi.c"),
+            Object(Matching, "dolphin/os/OSExi.c"),
             Object(Matching, "dolphin/os/OSFont.c"),
             Object(Matching, "dolphin/os/OSInterrupt.c"),
             Object(Matching, "dolphin/os/OSLink.c"),
