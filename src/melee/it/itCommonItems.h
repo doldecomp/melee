@@ -258,6 +258,13 @@ typedef struct itFreeze_ItemVars {
     /* +1C */ int unk_1C;
 } itFreeze_ItemVars;
 
+typedef struct itPeachToadSporeAttributes {
+    f32 x0_min_speed;
+    f32 x4_max_speed_offset;
+    f32 x8_speed_decay_rate;
+    f32 xc_angle;
+} itPeachToadSporeAttributes;
+
 typedef struct itPeachTurnipAttributes {
     f32 x0_lifetime;
     s32 x4_length; // length of x8, should be 8 for the number of turnip types
