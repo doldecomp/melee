@@ -18,6 +18,7 @@
 #include <it/it_26B1.h>
 #include <MetroTRK/intrinsics.h>
 #include <MSL/math.h>
+#include <MSL/math_ppc.h>
 
 /// @todo Lots of 6s in here
 // pl_8004049C seems to indicate it might have actually been `Gm_Player_NumMax`
@@ -69,18 +70,11 @@ bool pl_8003D60C(int arg0)
     }
 }
 
-inline bool gm_8016B168_and_same_team(int arg0, int temp_r23)
-{
-    if (gm_8016B168() && Player_GetTeam(temp_r23) == Player_GetTeam(arg0)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 inline bool unk_cond(int arg0, int temp_r23)
 {
-    if (temp_r23 == 6 || temp_r23 == arg0 || gm_8016B168_and_same_team(arg0, temp_r23)) {
+    if (temp_r23 == 6 || temp_r23 == arg0 ||
+        pl_CheckIfSameTeam(arg0, temp_r23))
+    {
         return true;
     } else {
         return false;
@@ -165,7 +159,8 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
         case 1:
         case 2:
             if (temp_r31->x4 <= pl_804D6470->x128 &&
-                temp_r31->x0 >= pl_804D6470->x12C) {
+                temp_r31->x0 >= pl_804D6470->x12C)
+            {
                 pl_80038824(arg0, 0x85);
             }
             if (temp_r28 == 2) {
@@ -209,7 +204,9 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
             temp_r26->xD64 = 6;
         } else {
             temp_r3_2 = Player_GetStaleMoveTableIndexPtr2(temp_r23);
-            if (((u32) temp_r3_2->xD60 != 0) && ((s32) temp_r3_2->xD64 == arg0)) {
+            if (((u32) temp_r3_2->xD60 != 0) &&
+                ((s32) temp_r3_2->xD64 == arg0))
+            {
                 pl_80038824(temp_r23, 0x79);
                 temp_r3_2->xD60 = 0;
                 temp_r3_2->xD64 = 6;
@@ -296,7 +293,9 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
                 if (temp_r31->x11_b4) {
                     pl_80038824(temp_r23, 0x7E);
                 }
-                if (!gm_8016B204() && !gm_8016B110() && gm_8016AEEC() + 1 <= pl_804D6470->x118) {
+                if (!gm_8016B204() && !gm_8016B110() &&
+                    gm_8016AEEC() + 1 <= pl_804D6470->x118)
+                {
                     pl_80038824(temp_r23, 0x73);
                 }
                 if (temp_r28 == 2) {
@@ -329,7 +328,8 @@ void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
                         pl_80038824(temp_r23, 0x80);
                     }
                     if (temp_r29 == 0xEA) {
-                        temp_r3_4 = Player_GetStaleMoveTableIndexPtr2(temp_r23);
+                        temp_r3_4 =
+                            Player_GetStaleMoveTableIndexPtr2(temp_r23);
                         temp_r3_4->xCFC += 1;
                     }
                 }
@@ -507,6 +507,8 @@ int pl_8003E420(int arg0)
     return sum;
 }
 
+// pl_8003E4A4
+
 void pl_8003E70C(Item_GObj* igobj)
 {
     pl_StaleMoveTableExt_t* temp_r31;
@@ -568,6 +570,7 @@ void pl_8003E978(int slot, bool fp_x221F_b4, Item_GObj* item_gobj, float y0,
                  float arg4, float arg5, float arg6, float x1, float y1,
                  float frame_speed_mul)
 {
+    /// @todo Not actually sure what the second argument should be
     fn_8003E998(slot, fp_x221F_b4);
 }
 
@@ -580,7 +583,6 @@ void fn_8003E998(int arg0, int index)
         ft_800898A8(gobj)->x207C.y = temp_r31->xD6C;
     }
 }
-
 
 void pl_8003EA08(int slot, int arg1)
 {
@@ -614,8 +616,7 @@ void pl_8003EAAC(int arg0, int arg1, int arg2)
     }
 }
 
-void pl_8003EB30(float arg0, int arg1, int arg2, int arg3,
-                 int arg4, int arg5)
+void pl_8003EB30(float arg0, int arg1, int arg2, int arg3, int arg4, int arg5)
 {
     pl_StaleMoveTableExt_t* temp_r31;
     pl_StaleMoveTableExt_t* var_r3;
@@ -680,18 +681,11 @@ void pl_8003ED0C(int arg0, int arg1, int r5, float arg2)
     float total;
     float temp_f30;
     pl_StaleMoveTableExt_t* temp_r3;
-    s32 temp_r31;
-    s32 temp_r31_2;
     s32 temp_r4;
     PAD_STACK(8);
 
-    if (arg0 == r5) {
-        return;
-    }
-
-    if (gm_8016B168_and_same_team(r5, arg0)) {
-        return;
-    }
+    RETURN_IF(arg0 == r5);
+    RETURN_IF(pl_CheckIfSameTeam(r5, arg0));
 
     temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r3->x0_staleMoveTable.xCA4++;
@@ -699,8 +693,7 @@ void pl_8003ED0C(int arg0, int arg1, int r5, float arg2)
     temp_f30 = temp_r3->x0_staleMoveTable.xCA0 * (temp_r4 - 1) + arg2;
 
     total = temp_r4;
-    plCheckTotal(total);
-    temp_r3->x0_staleMoveTable.xCA0 = temp_f30 / total;
+    temp_r3->x0_staleMoveTable.xCA0 = pl_CalculateAverage(temp_f30, total);
 }
 
 inline int match_item_kind(int kind)
@@ -723,15 +716,6 @@ inline int match_item_kind(int kind)
     }
 }
 
-inline bool gm_cond(void)
-{
-    if (gm_8016AEDC() != 0 && gm_8016AEDC() != -2) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void fn_8003EE2C(int arg0, int arg1)
 {
     pl_StaleMoveTableExt_t* temp_r31;
@@ -742,7 +726,7 @@ void fn_8003EE2C(int arg0, int arg1)
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
     RETURN_IF(arg1 == 1);
-    RETURN_IF(!gm_cond());
+    RETURN_IF(!pl_Verify_gm_8016AEDC());
 
     temp_r31->xD08++;
     if (temp_r31->xD08 > temp_r31->xD04) {
@@ -818,7 +802,8 @@ void fn_8003EE2C(int arg0, int arg1)
         Item_GObj* item_gobj = ftLib_80086794(temp_r30);
         if (item_gobj != NULL) {
             if (match_item_kind(itGetKind(item_gobj)) != -1 &&
-                    it_8026B30C(item_gobj) != 5) {
+                it_8026B30C(item_gobj) != 5)
+            {
                 temp_r31->xD44++;
                 if (temp_r31->xD44 > temp_r31->xD40) {
                     temp_r31->xD40 = temp_r31->xD44;
@@ -826,8 +811,7 @@ void fn_8003EE2C(int arg0, int arg1)
             }
         } else {
             if (temp_r31->xD44 != 0) {
-                if (temp_r31->xD44 < temp_r31->xD48 ||
-                        temp_r31->xD48 == 0) {
+                if (temp_r31->xD44 < temp_r31->xD48 || temp_r31->xD48 == 0) {
                     temp_r31->xD48 = temp_r31->xD44;
                 }
                 temp_r31->xD44 = 0;
@@ -852,6 +836,8 @@ void fn_8003EE2C(int arg0, int arg1)
         temp_r31->xD68++;
     }
 }
+
+// fn_8003F294
 
 void fn_8003F53C(int arg0, int arg1)
 {
@@ -883,12 +869,9 @@ void fn_8003F53C(int arg0, int arg1)
 
 void pl_8003FAA8(int slot, int index, Vec3* pos, Vec3* prevPos)
 {
-    float temp_f31;
     float temp_f30;
     pl_StaleMoveTableExt_t* temp_r30;
     int temp_r31;
-    int var_r0;
-    u32 temp_r3;
     PAD_STACK(8);
 
     temp_r30 = Player_GetStaleMoveTableIndexPtr2(slot);
@@ -897,13 +880,13 @@ void pl_8003FAA8(int slot, int index, Vec3* pos, Vec3* prevPos)
     fn_8003F53C(slot, index);
     fn_8003F654(slot, index, pos, prevPos);
 
-    if (gm_cond() && index == 0) {
+    if (pl_Verify_gm_8016AEDC() && index == 0) {
         temp_r31 = ftLib_80087120(Player_GetEntityAtIndex(slot, index));
-        temp_f30 = temp_r30->x0_staleMoveTable.xC9C
-                     * (gm_8016AEDC() - 1) + temp_r31;
-        temp_f31 = gm_8016AEDC();
-        plCheckTotal(temp_f31);
-        temp_r30->x0_staleMoveTable.xC9C = temp_f30 / temp_f31;
+        temp_f30 =
+            temp_r30->x0_staleMoveTable.xC9C * (gm_8016AEDC() - 1) + temp_r31;
+
+        temp_r30->x0_staleMoveTable.xC9C =
+            pl_CalculateAverage(temp_f30, gm_8016AEDC());
     }
 }
 
@@ -1096,8 +1079,8 @@ void pl_800401F0(int arg0, int arg1, float arg2, float arg3)
 {
     pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
 
-    temp_r3->x0_staleMoveTable.xCDC += fabs_inline(arg2);
-    temp_r3->x0_staleMoveTable.xCE0 += fabs_inline(arg3);
+    temp_r3->x0_staleMoveTable.xCDC += ABS(arg2);
+    temp_r3->x0_staleMoveTable.xCE0 += ABS(arg3);
 }
 
 void pl_80040270(int arg0, int arg1, float arg2)
@@ -1279,8 +1262,7 @@ float pl_800407C8(int arg0)
     if (temp_r5 != 0) {
         float tmp = temp_r3->x0_staleMoveTable.xCEC;
         temp_f31 = temp_r3->x0_staleMoveTable.xCF0;
-        plCheckTotal(tmp);
-        return temp_f31 / tmp;
+        return pl_CalculateAverage(temp_f31, tmp);
     }
     return 0.0f;
 }
@@ -1315,7 +1297,7 @@ int pl_80040924(int arg0)
     return Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
 }
 
-float pl_80040948(s32 arg0)
+float pl_80040948(int arg0)
 {
     unsigned int total;
     unsigned int temp_r30;
@@ -1324,8 +1306,7 @@ float pl_80040948(s32 arg0)
     total = Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
     temp_r30 = Player_GetTotalAttackCountPtr(arg0)->x358;
     if (total != 0) {
-        plCheckTotal(total);
-        return temp_r30 / (float) total;
+        return pl_CalculateAverage(temp_r30, total);
     }
     return 0.0F;
 }

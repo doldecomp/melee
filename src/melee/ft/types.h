@@ -1100,7 +1100,7 @@ struct ft_800898B4_t {
     /*  +0  */ int x0;
     /*  +4  */ int x4;
     /*  +8  */ float kb_applied1;
-    /*  +C  */ UNK_T xC;
+    /*  +C  */ int xC;
     /*  +10 */ u32 x10_b0 : 1;
     /*  +10 */ u32 x10_b1 : 1;
     /*  +10 */ u32 x10_b2 : 1;

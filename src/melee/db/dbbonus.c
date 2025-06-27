@@ -1,10 +1,10 @@
 #include "db.h"
 
+#include <sysdolphin/baselib/memory.h>
 #include <melee/gm/gm_1601.h>
-#include <melee/un/un_2FC9.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
-#include <sysdolphin/baselib/memory.h>
+#include <melee/un/un_2FC9.h>
 
 static struct {
     GXColor bg;
@@ -49,9 +49,9 @@ static void fn_80228D38(void)
             DevText_Show(gobj, db_804D6B9C[i].text);
             DevText_HideCursor(db_804D6B9C[i].text);
             DevText_SetBGColor(db_804D6B9C[i].text,
-                                db_TextColors[db_804D6B98.x1.b0].bg);
+                               db_TextColors[db_804D6B98.x1.b0].bg);
             DevText_SetTextColor(db_804D6B9C[i].text,
-                                  db_TextColors[db_804D6B98.x1.b0].fg);
+                                 db_TextColors[db_804D6B98.x1.b0].fg);
             DevText_SetScale(db_804D6B9C[i].text, 12.0F, 16.0F);
         }
     }
@@ -88,7 +88,7 @@ static void fn_80228E54(int arg0, int arg1, int arg2)
                 DevText_Printf(text, "screen over!!");
                 return;
             }
-            if (gm_8016F1B8(bonus) == 0) {
+            if (gmDecisionGetType(bonus) == 0) {
                 DevText_Printf(text, "%s", db_bonus_names[bonus]);
             } else {
                 DevText_Printf(text, "%s : %d", db_bonus_names[bonus],
@@ -116,9 +116,9 @@ static void fn_8022900C(int arg0)
             db_804D6B98.x1.b0 = 1;
             for (i = 0; i < 2; i++) {
                 DevText_SetBGColor(db_804D6B9C[i].text,
-                                    db_TextColors[db_804D6B98.x1.b0].bg);
+                                   db_TextColors[db_804D6B98.x1.b0].bg);
                 DevText_SetTextColor(db_804D6B9C[i].text,
-                                      db_TextColors[db_804D6B98.x1.b0].fg);
+                                     db_TextColors[db_804D6B98.x1.b0].fg);
             }
         }
     } else {
@@ -127,9 +127,9 @@ static void fn_8022900C(int arg0)
             DevText_ShowBackground(db_804D6B9C[i].text);
             DevText_ShowText(db_804D6B9C[i].text);
             DevText_SetBGColor(db_804D6B9C[i].text,
-                                db_TextColors[db_804D6B98.x1.b0].bg);
+                               db_TextColors[db_804D6B98.x1.b0].bg);
             DevText_SetTextColor(db_804D6B9C[i].text,
-                                  db_TextColors[db_804D6B98.x1.b0].fg);
+                                 db_TextColors[db_804D6B98.x1.b0].fg);
         }
     }
 }
