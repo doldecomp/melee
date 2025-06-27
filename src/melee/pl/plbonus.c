@@ -7,7 +7,6 @@
 #include "pl_040D.h"
 #include "plattack.h"
 #include "player.h"
-#include "plbonusinline.h"
 #include "plstale.h"
 #include "types.h"
 
@@ -82,7 +81,6 @@ void pl_8003891C(int slot)
     pl_StaleMoveTableExt_t* temp_r31;
     /// @todo: This aint it
     volatile int temp_zero;
-    PAD_STACK(8);
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(slot);
     plStale_ResetStaleMoveTableForPlayer(slot);
@@ -111,12 +109,9 @@ void pl_8003891C(int slot)
     temp_r31->x0_staleMoveTable.xC6C = 0.0f;
     temp_r31->x0_staleMoveTable.xC70 = 0.0f;
     temp_r31->x0_staleMoveTable.xC74 = 0.0f;
-    temp_r31->x0_staleMoveTable.xC78 = 0.0f;
-    temp_r31->x0_staleMoveTable.xC7C = 0.0f;
-    temp_r31->x0_staleMoveTable.xC80 = 0.0f;
-    temp_r31->x0_staleMoveTable.xC84 = 0.0f;
-    temp_r31->x0_staleMoveTable.xC88 = 0.0f;
-    temp_r31->x0_staleMoveTable.xC8C = 0.0f;
+    for (i = 0; i < 6; ++i) {
+        temp_r31->x0_staleMoveTable.xC78[i] = 0.0f;
+    }
     temp_r31->x0_staleMoveTable.xC90 = 0;
     temp_r31->x0_staleMoveTable.xC94 = 0;
     temp_r31->x0_staleMoveTable.xC98 = 0.0f;
@@ -130,26 +125,26 @@ void pl_8003891C(int slot)
     {
         temp_zero = 0;
         temp_r31->x0_staleMoveTable.xCB8 = 6;
-        temp_r31->x0_staleMoveTable.xCBC = temp_zero;
+        *(int*) (&temp_r31->x0_staleMoveTable.xCBC.x0) = temp_zero;
     }
 
-    temp_r31->x0_staleMoveTable.xCC0 = 0;
-    temp_r31->x0_staleMoveTable.xCC4 = 0;
-    temp_r31->x0_staleMoveTable.xCC8 = 0.0f;
-    temp_r31->x0_staleMoveTable.xCCC = 6;
-    temp_r31->x0_staleMoveTable.xCD0.bit0 = 0;
-    temp_r31->x0_staleMoveTable.xCD1.bit3 = 0;
-    temp_r31->x0_staleMoveTable.xCD0.bit1 = 0;
-    temp_r31->x0_staleMoveTable.xCD0.bit2 = 0;
-    temp_r31->x0_staleMoveTable.xCD0.bit3 = 0;
-    temp_r31->x0_staleMoveTable.xCD0.bit4 = 0;
-    temp_r31->x0_staleMoveTable.xCD0.bit5 = 0;
-    temp_r31->x0_staleMoveTable.xCD0.bit6 = 0;
-    temp_r31->x0_staleMoveTable.xCD0.bit7 = 0;
-    temp_r31->x0_staleMoveTable.xCD1.bit0 = 0;
-    temp_r31->x0_staleMoveTable.xCD1.bit1 = 0;
-    temp_r31->x0_staleMoveTable.xCD1.bit2 = 0;
-    temp_r31->x0_staleMoveTable.xCD1.bit4 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x0 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x4 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.kb_applied1 = 0.0f;
+    temp_r31->x0_staleMoveTable.xCC0.xC = 6;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b0 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x11_b3 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b1 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b2 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b3 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b4 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b5 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b6 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x10_b7 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x11_b0 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x11_b1 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x11_b2 = 0;
+    temp_r31->x0_staleMoveTable.xCC0.x11_b4 = 0;
     temp_r31->x0_staleMoveTable.xCD4 = 0;
     temp_r31->x0_staleMoveTable.xCD8 = 0;
     temp_r31->x0_staleMoveTable.xCE0 = 0.0f;
@@ -317,6 +312,21 @@ unsigned int pl_80039418(int arg0, int arg1)
 {
     pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(arg0);
     return table->x0_staleMoveTable.x904[arg1];
+}
+
+static inline void pl_80039450_inline(int slot)
+{
+    pl_StaleMoveTableExt_t* var_r26;
+    int i;
+
+    var_r26 = Player_GetStaleMoveTableIndexPtr2(slot);
+
+    for (i = 0; i < 215; ++i) {
+        if (gmDecisionGetType(i) == 0) {
+            var_r26->x0_staleMoveTable.x904[0] = 0;
+        }
+        var_r26 = (pl_StaleMoveTableExt_t*) ((char*) var_r26 + 4);
+    }
 }
 
 void pl_80039450(int arg0)

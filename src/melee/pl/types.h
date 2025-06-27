@@ -5,9 +5,8 @@
 
 #include <melee/pl/forward.h>
 
-#include <Runtime/platform.h>
-
 #include <melee/ft/types.h>
+#include <Runtime/platform.h>
 
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
@@ -67,8 +66,7 @@ struct StaleMoveTable {
     /* +C6C */ float xC6C;
     /* +C70 */ float xC70;
     /* +C74 */ float xC74;
-    /* +C78 */ float xC78[1]; // TODO figure out size
-    /* +C7C */ u8 xC7C[0xC90 - 0xC7C];
+    /* +C78 */ float xC78[6];
     /* +C90 */ unsigned int xC90;
     /* +C94 */ int xC94;
     /* +C98 */ float xC98;
@@ -82,7 +80,6 @@ struct StaleMoveTable {
     /* +CB8 */ int xCB8;
     /* +CBC */ UnkPlBonusBits xCBC;
     /* +CC0 */ ft_800898B4_t xCC0;
-
     /* +CD4 */ u16 xCD4;
     /* +CD8 */ int xCD8;
     /* +CDC */ float xCDC;
