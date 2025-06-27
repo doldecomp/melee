@@ -90,6 +90,7 @@ u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
 void HSD_PadRenewRawStatus(bool);
 void HSD_PadRenewMasterStatus(void);
+void HSD_PadRenewCopyStatus(void);
 void HSD_PadRenewGameStatus(void);
 void HSD_PadRenewStatus(void);
 void HSD_PadReset(void);

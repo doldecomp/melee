@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include <placeholder.h>
+#include <dolphin/os/OSAlarm.h>
 
 #include "lbcardgame.h" // IWYU pragma: export
 
@@ -15,11 +16,17 @@ struct lb_80433318_t {
 STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
 
 struct lb_804329F0_t {
-    /* 0x00 */ char pad_0[8];
-    /* 0x08 */ u64 unk_8;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ char pad_14[4];
-}; /* size = 0x18 */
+    struct UnkArrElem {
+    /* 0x00 */ s64 x0;
+    /* 0x08 */ s64 x8;
+    /* 0x10 */ int x10;
+    } x0[2];
+    u32 x4;
+    u64 x38;
+    u64 x40;
+    int x48;
+    OSAlarm alarm;
+};
 
 struct lb_80432A68_38_t {
     /* 0x0 */ s32 unk_0;
@@ -65,7 +72,7 @@ struct lb_80432A68_t {
 }; /* size = 0x8B0 */
 STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);
 
-/* 4329F0 */ static struct lb_804329F0_t lb_804329F0[5];
+/* 4329F0 */ static struct lb_804329F0_t lb_804329F0;
 /* 432A68 */ static struct lb_80432A68_t lb_80432A68;
 /* 433318 */ static struct lb_80433318_t lb_80433318;
 

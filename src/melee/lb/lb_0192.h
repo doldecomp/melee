@@ -7,5 +7,6 @@
 /* 0192A8 */ void lb_800192A8(UNK_T cb);
 /* 01955C */ UNK_RET lb_8001955C(UNK_PARAMS);
 /* 0195D0 */ void lb_800195D0(void);
+/* 019628 */ void lb_80019628(void);
 
 #endif
