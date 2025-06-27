@@ -507,25 +507,26 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
 }
 
 // AS_SheikUpBTravelAir
-void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj) {
-    f32 stick_y; 
-    f32 stick_x; 
+void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
+{
+    f32 stick_y;
+    f32 stick_x;
     f32 var_f1;
     f32 var_f30;
     f32 var_f31;
     f32 stick_y_sq;
     f32 stick_mag;
     Fighter* fp = gobj->user_data;
-    ftSeakAttributes*  attributes = fp->dat_attrs;
-    
+    ftSeakAttributes* attributes = fp->dat_attrs;
+
     u8 _[32];
-    
+
     stick_x = fp->input.lstick.x;
     stick_y = fp->input.lstick.y;
     stick_x = stick_x * stick_x;
     stick_y_sq = stick_y * stick_y;
     stick_mag = sqrtf(stick_x + stick_y_sq);
-    
+
     var_f31 = stick_mag;
     if (stick_mag > ftSk_Init_804D9664) {
         var_f31 = ftSk_Init_804D9664;
@@ -538,7 +539,8 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj) {
         if (var_f1 > ftSk_Init_804D9690) {
             ftCommon_8007D9FC(fp);
         }
-        var_f30 = atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+        var_f30 =
+            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
         fp->mv.sk.specialhi.vel.x = fp->input.lstick.x;
         fp->mv.sk.specialhi.vel.y = fp->input.lstick.y;
     } else {
@@ -548,9 +550,13 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj) {
         fp->mv.sk.specialhi.vel.y = ftSk_Init_804D9664;
         var_f31 = ftSk_Init_804D9664;
     }
-    fp->self_vel.x = fp->facing_dir * (((attributes->x44 * var_f31) + attributes->x48) * cosf(var_f30));
-    fp->self_vel.y = ((attributes->x44 * var_f31) + attributes->x48) * sinf(var_f30);
-    Fighter_ChangeMotionState(gobj, 0x167, 0U, ftSk_Init_804D968C, ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
+    fp->self_vel.x =
+        fp->facing_dir *
+        (((attributes->x44 * var_f31) + attributes->x48) * cosf(var_f30));
+    fp->self_vel.y =
+        ((attributes->x44 * var_f31) + attributes->x48) * sinf(var_f30);
+    Fighter_ChangeMotionState(gobj, 0x167, 0U, ftSk_Init_804D968C,
+                              ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
     ftAnim_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, ftSk_Init_804D9660);
     inlineA0(gobj);
@@ -654,29 +660,33 @@ void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80113038;
 }
 
-static void ftSk_SpecialHi_80113EAC_inline(Fighter_GObj* gobj) {
-    Fighter *fp = GET_FIGHTER(gobj);
+static void ftSk_SpecialHi_80113EAC_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.walk.fast_anim_frame = fp->self_vel.x;
     fp->mv.co.common.x14 = fp->self_vel.y;
     fp->mv.co.common.x18 = fp->gr_vel;
     fp->gr_vel = fp->self_vel.x = fp->self_vel.y = ftSk_Init_804D9660;
-    //fp->unk221E = (u8) (fp->unk221E & ~0x80);
+    // fp->unk221E = (u8) (fp->unk221E & ~0x80);
     fp->x221E_b0 = 0;
     fp->accessory4_cb = fn_80113038;
 }
 
-void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj) {
+void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
-    Fighter_ChangeMotionState(gobj, 0x165, 0U, ftSk_Init_804D9660, ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
+    Fighter_ChangeMotionState(gobj, 0x165, 0U, ftSk_Init_804D9660,
+                              ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
     ftAnim_8006EBA4(gobj);
     ftSk_SpecialHi_80113EAC_inline(gobj);
     fp->gr_vel = fp->mv.co.common.x18 * attributes->x54;
 }
 
 // AS_SheikUpBFall
-static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj) {
-    Fighter *fp = GET_FIGHTER(gobj);
+static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.walk.fast_anim_frame = fp->self_vel.x;
     fp->mv.co.common.x14 = fp->self_vel.y;
     fp->mv.co.common.x18 = fp->gr_vel;
@@ -684,10 +694,12 @@ static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj) {
     fp->x221E_b0 = 0;
     fp->accessory4_cb = fn_80113038;
 }
-void ftSk_SpecialHi_80113F68(Fighter_GObj* gobj) {
+void ftSk_SpecialHi_80113F68(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
-    Fighter_ChangeMotionState(gobj, 0x168, 0U, ftSk_Init_804D9660, ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
+    Fighter_ChangeMotionState(gobj, 0x168, 0U, ftSk_Init_804D9660,
+                              ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
     ftAnim_8006EBA4(gobj);
     ftSk_SpecialHi_80113F68_inline(gobj);
     fp->self_vel.x = fp->mv.co.walk.fast_anim_frame * attributes->x54;

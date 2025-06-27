@@ -125,12 +125,14 @@ void fn_8012D298(Fighter_GObj* gobj)
 
 /// #fn_8012D2F8
 
-void fn_8012D360(Fighter_GObj* gobj) {
+void fn_8012D360(Fighter_GObj* gobj)
+{
     Fighter* fp;
 
     fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C5092U, fp->cur_anim_frame, 0, ftYs_Init_804D9A38, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C5092U, fp->cur_anim_frame, 0,
+                              ftYs_Init_804D9A38, NULL);
 }
 
 /// #fn_8012D3C0
@@ -139,12 +141,14 @@ void fn_8012D360(Fighter_GObj* gobj) {
 
 /// #fn_8012D488
 
-void fn_8012D4F0(Fighter_GObj* gobj) {
+void fn_8012D4F0(Fighter_GObj* gobj)
+{
     Fighter* fp;
 
     fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15D, 0x0C4C5092U, fp->cur_anim_frame, 0, ftYs_Init_804D9A38, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15D, 0x0C4C5092U, fp->cur_anim_frame, 0,
+                              ftYs_Init_804D9A38, NULL);
 }
 
 void ftYs_SpecialN1_Anim(ftYs_GObj* gobj)
@@ -156,10 +160,11 @@ void ftYs_SpecialN1_Anim(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirN1_0_Anim(ftYs_GObj* gobj) {
+void ftYs_SpecialAirN1_0_Anim(ftYs_GObj* gobj)
+{
     u8 _[8];
-    if (ftAnim_IsFramesRemaining((Fighter_GObj* ) gobj) == 0) {
-        ftCo_800CC730((Fighter_GObj* ) gobj);
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        ftCo_800CC730((Fighter_GObj*) gobj);
     }
 }
 
@@ -216,14 +221,16 @@ void ftYs_SpecialAirN2_0_Phys(ftYs_GObj* gobj)
 
 /// #ftYs_SpecialN1_Coll
 
-void ftYs_SpecialAirN1_0_Coll(ftYs_GObj* gobj) {
-    ft_80082C74((Fighter_GObj* ) gobj, fn_8012D1AC);
+void ftYs_SpecialAirN1_0_Coll(ftYs_GObj* gobj)
+{
+    ft_80082C74((Fighter_GObj*) gobj, fn_8012D1AC);
 }
 
 /// #ftYs_SpecialN1_1_Coll
 
-void ftYs_SpecialN1_0_Coll(ftYs_GObj* gobj) {
-    ft_8008403C((Fighter_GObj* ) gobj, fn_8012D298);
+void ftYs_SpecialN1_0_Coll(ftYs_GObj* gobj)
+{
+    ft_8008403C((Fighter_GObj*) gobj, fn_8012D298);
 }
 
 void ftYs_SpecialAirN1_2_Coll(ftYs_GObj* gobj)
