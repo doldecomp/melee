@@ -32,8 +32,6 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     float x24;
     float x28;
     float self_vel_y;
-    /* ftSk_SpecialAirHiStart_0_Phys fully matches when x30 and x34 are type
-     * f32 */
     f32 x30;
     f32 x34;
     int x38;
@@ -41,19 +39,19 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     f32 x40;
     f32 x44;
     f32 x48;
-    /* ftSk_SpecialAirHi_Phys fully matches when x4C is type f32 */
     f32 x4C;
     /* Adding values here and shrinking data_filler_1 based on context set up
      * by kipcode 66 in https://decomp.me/scratch/fE7Dq for
      * ftSk_SpecialAirHiStart_1_Coll */
     s32 x50;
-    s32 x54;
-    /* ftSk_SpecialAirHi_Anim fully matches when x58 and x5C are type
-     * f32 */
+    f32 x54;
     f32 x58;
     f32 x5C;
-    u8 data_filler_1[0x14];
-    // u8 data_filler_1[0x24];
+    f32 x60;
+    f32 x64;
+    f32 x68;
+    f32 x6C;
+    u8 data_filler_1[0x04];
 } ftSeakAttributes;
 
 typedef struct itChainSegment {
