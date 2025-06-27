@@ -26,7 +26,7 @@
 #include <melee/it/item.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/it/items/itkinoko.h>
-#include <melee/pl/pl_0371.h>
+#include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>

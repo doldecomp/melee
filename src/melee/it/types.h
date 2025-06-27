@@ -370,8 +370,8 @@ struct Item {
     f32 xC6C;                   // 0xc6c
     f32 xC70;                   // 0xc70
     s32 xC74;
-    Vec2 xC78;                   // 0xc74
-    Vec2 xC80;                   // 0xc7c
+    Vec2 xC78;                   // 0xc78
+    S32Vec2 xC80;                // 0xc80
     s32 xC88;                    // 0xc88
     u16 xC8C;                    // 0xc8c
     HSD_GObj* xC90_absorbGObj;   // 0xc90
@@ -501,7 +501,7 @@ struct Item {
     s16 xD8E;
     union Struct2070 xD90; // some bit struct/union
     Vec2 xD94;
-    Vec2 xD9C;
+    S32Vec2 xD9C;
     union {
         UnkFlagStruct xDA4_flag;
         u32 xDA4_word;
@@ -574,6 +574,7 @@ struct Item {
         itMato_ItemVars mato;
         itNokoNoko_ItemVars nokonoko;
         itOctarock_ItemVars octarock;
+        itPeachTurnip_ItemVars peachturnip;
         itPikachutJoltGround_ItemVars pikachujoltground;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;

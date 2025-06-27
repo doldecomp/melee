@@ -9,7 +9,7 @@
 /* 089768 */ void ft_80089768(Vec2*);
 /* 089824 */ void ft_80089824(Fighter_GObj* gobj);
 /* 089884 */ union Struct2070* ft_80089884(Fighter_GObj* gobj);
-/* 089890 */ UNK_T ft_80089890(Fighter_GObj* gobj);
+/* 089890 */ UnkPlBonusBits* ft_80089890(Fighter_GObj* gobj);
 /* 08989C */ u16 ft_8008989C(Fighter_GObj* gobj);
 /* 0898A8 */ struct Struct2074* ft_800898A8(Fighter_GObj* gobj);
 /* 0898B4 */ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj);

@@ -7,6 +7,8 @@
 
 #include <Runtime/platform.h>
 
+#include <melee/ft/types.h>
+
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
 struct plAllocInfo2 {
@@ -65,12 +67,8 @@ struct StaleMoveTable {
     /* +C6C */ float xC6C;
     /* +C70 */ float xC70;
     /* +C74 */ float xC74;
-    /* +C78 */ float xC78;
-    /* +C7C */ float xC7C;
-    /* +C80 */ float xC80;
-    /* +C84 */ float xC84;
-    /* +C88 */ float xC88;
-    /* +C8C */ float xC8C;
+    /* +C78 */ float xC78[1]; // TODO figure out size
+    /* +C7C */ u8 xC7C[0xC90 - 0xC7C];
     /* +C90 */ unsigned int xC90;
     /* +C94 */ int xC94;
     /* +C98 */ float xC98;
@@ -82,39 +80,10 @@ struct StaleMoveTable {
     /* +CB0 */ int xCB0;
     /* +CB4 */ int xCB4;
     /* +CB8 */ int xCB8;
-    /* +CBC */ int xCBC;
-    /* +CC0 */ int xCC0;
-    /* +CC4 */ int xCC4;
-    /* +CC8 */ float xCC8;
-    /* +CCC */ int xCCC;
-    /* +CD0 */ union {
-        u8 value;
-        struct {
-            u8 bit0 : 1;
-            u8 bit1 : 1;
-            u8 bit2 : 1;
-            u8 bit3 : 1;
-            u8 bit4 : 1;
-            u8 bit5 : 1;
-            u8 bit6 : 1;
-            u8 bit7 : 1;
-        };
-    } xCD0;
-    /* +CD1 */ union {
-        u8 value;
-        struct {
-            u8 bit0 : 1;
-            u8 bit1 : 1;
-            u8 bit2 : 1;
-            u8 bit3 : 1;
-            u8 bit4 : 1;
-            u8 bit5 : 1;
-            u8 bit6 : 1;
-            u8 bit7 : 1;
-        };
-    } xCD1;
-    /* +CD2 */ u8 xCD2[2]; // padding?
-    /* +CD4 */ short xCD4;
+    /* +CBC */ UnkPlBonusBits xCBC;
+    /* +CC0 */ ft_800898B4_t xCC0;
+
+    /* +CD4 */ u16 xCD4;
     /* +CD8 */ int xCD8;
     /* +CDC */ float xCDC;
     /* +CE0 */ float xCE0;
@@ -261,11 +230,16 @@ struct pl_804D6470_t {
     /*  +C8 */ unsigned int xC8;
     /*  +CC */ u8 xCC[0xE0 - 0xCC];
     /*  +E0 */ unsigned int xE0;
-    /*  +E4 */ unsigned int xE4;
-    /*  +E8 */ float xE8;
-    /*  +EC */ u8 xEC[0x124 - 0xEC];
+    /*  +E4 */ UNK_T xE4;
+    /*  +E8 */ UNK_T xE8;
+    /*  +EC */ int xEC;
+    /*  +E8 */ u8 xF0[0x118 - 0xF0];
+    /* +118 */ unsigned int x118;
+    /* +11C */ float x11C;
+    /* +120 */ int x120;
     /* +124 */ unsigned int x124;
-    /* +128 */ u8 x128[0x130 - 0x128];
+    /* +128 */ int x128;
+    /* +12C */ int x12C;
     /* +130 */ unsigned int x130;
     /* +134 */ unsigned int x134;
     /* +138 */ u8 x138[0x144 - 0x138];

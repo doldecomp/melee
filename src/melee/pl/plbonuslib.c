@@ -59,18 +59,296 @@ void plBonusLib_8003D514(int arg0)
     }
 }
 
-int pl_8003D60C(int arg0)
+bool pl_8003D60C(int arg0)
 {
     if (((arg0 >= 0xA0) && (arg0 < 0xA1)) ||
         ((arg0 >= 0xEA) && (arg0 < 0xEE)) || (arg0 == 0xE1))
     {
-        return 1;
+        return true;
     } else {
-        return 0;
+        return false;
     }
 }
 
-// pl_8003D644
+inline bool gm_8016B168_and_same_team(int arg0, int temp_r23)
+{
+    if (gm_8016B168() && Player_GetTeam(temp_r23) == Player_GetTeam(arg0)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+inline bool unk_cond(int arg0, int temp_r23)
+{
+    if (temp_r23 == 6 || temp_r23 == arg0 || gm_8016B168_and_same_team(arg0, temp_r23)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+inline bool between_A1_D0(int x)
+{
+    if (x >= 0xA1 && x < 0xD0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void pl_8003D644(int arg0, int arg1, int arg2, int arg3)
+{
+    Fighter_GObj* temp_r3;
+    ft_800898B4_t* temp_r31;
+    pl_StaleMoveTableExt_t* temp_r26;
+    pl_StaleMoveTableExt_t* temp_r3_2;
+    pl_StaleMoveTableExt_t* temp_r3_3;
+    pl_StaleMoveTableExt_t* temp_r3_4;
+    struct UnkPlBonusBits* temp_r30;
+    int temp_r29;
+    int temp_r28;
+    int temp_r27;
+    u16 temp_r24;
+    int temp_r23;
+    int temp_r22;
+    int temp_r20_3;
+    int temp_r20_2;
+    int temp_r20;
+
+    temp_r26 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    temp_r3 = Player_GetEntityAtIndex(arg0, arg1);
+    temp_r27 = ftLib_80086C0C(temp_r3);
+    temp_r28 = ftLib_800876F4(temp_r3);
+    temp_r29 = ftLib_80087700(temp_r3);
+    temp_r30 = ft_80089890(temp_r3);
+    temp_r24 = ft_8008989C(temp_r3);
+    temp_r31 = ft_800898B4(temp_r3);
+    temp_r23 = ftLib_80087300(temp_r3);
+    temp_r22 = ftLib_8008730C(temp_r3);
+
+    if (arg1 != 1) {
+        temp_r26->x0_staleMoveTable.xCB8 = temp_r23;
+        temp_r26->x0_staleMoveTable.xCBC = *temp_r30;
+        temp_r26->x0_staleMoveTable.xCC0 = *temp_r31;
+        temp_r26->x0_staleMoveTable.xCD4 = temp_r24;
+        pl_8003FED0(arg0, arg1);
+        if (ftLib_800873A4(temp_r3) != 0) {
+            pl_80038824(arg0, 0x81);
+        }
+        if (ftLib_8008737C(temp_r3) != 0) {
+            temp_r26->x0_staleMoveTable.xC94++;
+        }
+        if (ftLib_80087354(temp_r3) != 0) {
+            temp_r26->xDD1.bit2 = true;
+        }
+        if (temp_r27 == 0) {
+            temp_r26->xDD1.bit3 = true;
+        }
+        if (temp_r27 == 2) {
+            temp_r26->xDD1.bit0 = true;
+        }
+        if (temp_r27 == 1) {
+            temp_r26->xDD1.bit1 = true;
+        }
+        if (ft_80087858(temp_r3) != 0) {
+            pl_80038788(arg0, 0x83, 1);
+        }
+        if (ft_80087878(temp_r3, arg2) != 0) {
+            pl_80038824(arg0, 0x84);
+        }
+        plBonusLib_8003D514(arg0);
+        if ((u32) arg3 == 0x5FU) {
+            pl_80038788(arg0, 0x9C, 1);
+        }
+
+        switch (temp_r28) {
+        case 1:
+        case 2:
+            if (temp_r31->x4 <= pl_804D6470->x128 &&
+                temp_r31->x0 >= pl_804D6470->x12C) {
+                pl_80038824(arg0, 0x85);
+            }
+            if (temp_r28 == 2) {
+                if (pl_8003D60C(temp_r29)) {
+                    pl_80038788(arg0, 0x88, 1);
+                } else if (temp_r23 == arg0) {
+                    pl_80038788(arg0, 0x9C, 1);
+                }
+                if (temp_r29 == 0xEA) {
+                    temp_r26->xD00 += 1;
+                }
+            }
+            break;
+        case 3:
+            switch (temp_r29) {
+            case 1:
+                pl_80038788(arg0, 0x87, 1);
+                break;
+            default:
+                pl_80038788(arg0, 0x88, 1);
+                break;
+            }
+            break;
+        }
+
+        if (temp_r23 == 6 && temp_r28 == 2 && temp_r29 == 6) {
+            pl_80038788(arg0, 0xC7, 1);
+        }
+        if (temp_r28 != 2 || !between_A1_D0(temp_r29)) {
+            if (unk_cond(arg0, temp_r23)) {
+                if (temp_r23 == arg0) {
+                    pl_80041744(temp_r23, temp_r22, temp_r24);
+                }
+            } else {
+                pl_80041720(temp_r23, temp_r22, temp_r24);
+            }
+        }
+
+        if (unk_cond(arg0, temp_r23)) {
+            temp_r26->xD60 = 0;
+            temp_r26->xD64 = 6;
+        } else {
+            temp_r3_2 = Player_GetStaleMoveTableIndexPtr2(temp_r23);
+            if (((u32) temp_r3_2->xD60 != 0) && ((s32) temp_r3_2->xD64 == arg0)) {
+                pl_80038824(temp_r23, 0x79);
+                temp_r3_2->xD60 = 0;
+                temp_r3_2->xD64 = 6;
+            }
+            temp_r26->xD60 = 0;
+            temp_r26->xD64 = temp_r23;
+        }
+
+        if (!unk_cond(arg0, temp_r23)) {
+            if (ftLib_8008737C(temp_r3) != 0) {
+                pl_80038824(temp_r23, 0x6D);
+            }
+            if (temp_r27 == 3) {
+                temp_r3_3 = Player_GetStaleMoveTableIndexPtr2(temp_r23);
+                temp_r3_3->x0_staleMoveTable.xCB4 += 1;
+            }
+            if (pl_804D6470->x120 == Player_GetDamage(arg0)) {
+                pl_80038824(temp_r23, 0x76);
+            }
+
+            switch (temp_r28) {
+            case 1:
+            case 2:
+                if (temp_r30->x3 >= 1 && temp_r30->x3 <= 3) {
+                    pl_80038824(temp_r23, 0x6E);
+                }
+                if (temp_r30->x3 >= 0x40 && temp_r30->x3 <= 0x43) {
+                    pl_80038824(temp_r23, 0xC0);
+                }
+                if (temp_r30->x3 == 0x46) {
+                    pl_80038824(temp_r23, 0xC1);
+                }
+                if (temp_r30->x3 == 0x5F) {
+                    pl_80038824(temp_r23, 0xAD);
+                }
+                if (temp_r30->x3 == 0x63) {
+                    pl_80038824(temp_r23, 0x70);
+                }
+                if (temp_r30->x3 == 0x61) {
+                    pl_80038824(temp_r23, 0xC6);
+                }
+                if (temp_r30->x2_b7) {
+                    pl_80038824(temp_r23, 0x6F);
+                }
+                if (temp_r28 == 2 && temp_r30->x2_b3) {
+                    pl_80038824(temp_r23, 0x72);
+                }
+                if (temp_r31->x11_b0) {
+                    pl_80038824(temp_r23, 0x71);
+                }
+                if (temp_r31->x10_b0) {
+                    pl_80038824(temp_r23, 6);
+                }
+                if (temp_r31->kb_applied1 >= pl_804D6470->x11C) {
+                    pl_80038824(temp_r23, 0x74);
+                }
+                if (temp_r31->x11_b2) {
+                    pl_80038824(temp_r23, 0x75);
+                }
+                if (temp_r31->x11_b1) {
+                    pl_80038824(temp_r23, 0x77);
+                }
+                if (temp_r31->x10_b1) {
+                    pl_80038824(temp_r23, 0xB0);
+                }
+                if (temp_r31->x10_b2) {
+                    pl_80038824(temp_r23, 0xBB);
+                }
+                if (temp_r31->x10_b3) {
+                    pl_80038824(temp_r23, 0xBF);
+                }
+                if (temp_r31->x10_b4) {
+                    pl_80038824(temp_r23, 0xBA);
+                }
+                if (temp_r31->x10_b5) {
+                    pl_80038824(temp_r23, 0xB7);
+                }
+                if (temp_r31->x10_b6) {
+                    pl_80038824(temp_r23, 0xB8);
+                }
+                if (temp_r31->x11_b3) {
+                    pl_80038824(temp_r23, 0xB);
+                }
+                if (temp_r31->x11_b4) {
+                    pl_80038824(temp_r23, 0x7E);
+                }
+                if (!gm_8016B204() && !gm_8016B110() && gm_8016AEEC() + 1 <= pl_804D6470->x118) {
+                    pl_80038824(temp_r23, 0x73);
+                }
+                if (temp_r28 == 2) {
+                    if (temp_r30->x3 == 0x62) {
+                        switch (temp_r29) {
+                        case 0:
+                        case 3:
+                            pl_80038824(temp_r23, 0x97);
+                            break;
+                        case 1:
+                        case 2:
+                        case 4:
+                            pl_80038824(temp_r23, 0x98);
+                            break;
+                        case 30:
+                            pl_80038824(temp_r23, 0xAC);
+                            break;
+                        case 20:
+                            pl_80038824(temp_r23, 0xB2);
+                            break;
+                        case 17:
+                            pl_80038824(temp_r23, 0xB1);
+                            break;
+                        }
+                    }
+                    if (between_A1_D0(temp_r29)) {
+                        pl_80038824(temp_r23, 0xCB);
+                    }
+                    if (pl_8003D60C(temp_r29)) {
+                        pl_80038824(temp_r23, 0x80);
+                    }
+                    if (temp_r29 == 0xEA) {
+                        temp_r3_4 = Player_GetStaleMoveTableIndexPtr2(temp_r23);
+                        temp_r3_4->xCFC += 1;
+                    }
+                }
+                break;
+            case 3:
+                switch (temp_r29) {
+                case 1:
+                    pl_80038824(temp_r23, 0x7F);
+                    break;
+                default:
+                    pl_80038824(temp_r23, 0x80);
+                    break;
+                }
+                break;
+            }
+        }
+    }
+}
 
 void pl_8003DF44(int arg0, int arg1)
 {
@@ -297,17 +575,16 @@ void pl_8003E978(int slot, bool fp_x221F_b4, Item_GObj* item_gobj, float y0,
     fn_8003E998(slot, fp_x221F_b4);
 }
 
-void fn_8003E998(int arg0, int arg1)
+void fn_8003E998(int arg0, int index)
 {
-    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
-    Fighter_GObj* fighterGobj;
-
-    RETURN_IF(arg1 != 0);
-    RETURN_IF(temp_r31->xD6C == 6);
-
-    fighterGobj = Player_GetEntityAtIndex(arg0, arg1);
-    *((int*) &ft_800898A8(fighterGobj)->x207C.y) = temp_r31->xD6C;
+    pl_StaleMoveTableExt_t* temp_r31;
+    temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    if (index == 0 && temp_r31->xD6C != 6) {
+        Fighter_GObj* gobj = Player_GetEntityAtIndex(arg0, index);
+        ft_800898A8(gobj)->x207C.y = temp_r31->xD6C;
+    }
 }
+
 
 void pl_8003EA08(int slot, int arg1)
 {
@@ -341,7 +618,40 @@ void pl_8003EAAC(int arg0, int arg1, int arg2)
     }
 }
 
-// pl_8003EB30
+void pl_8003EB30(float arg0, int arg1, int arg2, int arg3,
+                 int arg4, int arg5)
+{
+    pl_StaleMoveTableExt_t* temp_r31;
+    pl_StaleMoveTableExt_t* var_r3;
+    PAD_STACK(4);
+
+    if (arg1 != 6 && arg1 != arg3) {
+        temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg1);
+        if (arg3 != 6) {
+            var_r3 = Player_GetStaleMoveTableIndexPtr2(arg3);
+        } else {
+            var_r3 = NULL;
+        }
+        temp_r31->x0_staleMoveTable.xC6C += arg0;
+        if (arg5 == 0x34) {
+            temp_r31->x0_staleMoveTable.xC70 += arg0;
+        }
+        if (arg5 - 0x5C <= 1U) {
+            temp_r31->x0_staleMoveTable.xC74 += arg0;
+        }
+        if (arg3 != 6) {
+            if (arg4 == 0) {
+                var_r3->x0_staleMoveTable.xC78[arg1] += arg0;
+            }
+            pl_80040ED4(arg1, arg2, arg3, arg4, arg5, arg0);
+        }
+        {
+            pl_StaleMoveTableExt_t* tmp;
+            tmp = Player_GetStaleMoveTableIndexPtr2(arg1);
+            tmp->xD08 = 0;
+        }
+    }
+}
 
 void pl_8003EC30(int slot, int arg1, int arg2, float arg3)
 {
@@ -369,144 +679,181 @@ void pl_8003EC9C(int arg0, int arg1, float arg2, float arg3)
     temp_r3->xD10 = 0;
 }
 
-// pl_8003ED0C
+void pl_8003ED0C(int arg0, int arg1, int r5, float arg2)
+{
+    float total;
+    float temp_f30;
+    pl_StaleMoveTableExt_t* temp_r3;
+    s32 temp_r31;
+    s32 temp_r31_2;
+    s32 temp_r4;
+    PAD_STACK(8);
+
+    if (arg0 == r5) {
+        return;
+    }
+
+    if (gm_8016B168_and_same_team(r5, arg0)) {
+        return;
+    }
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    temp_r3->x0_staleMoveTable.xCA4++;
+    temp_r4 = temp_r3->x0_staleMoveTable.xCA4;
+    temp_f30 = temp_r3->x0_staleMoveTable.xCA0 * (temp_r4 - 1) + arg2;
+
+    total = temp_r4;
+    plCheckTotal(total);
+    temp_r3->x0_staleMoveTable.xCA0 = temp_f30 / total;
+}
+
+inline int match_item_kind(int kind)
+{
+    if (kind >= 0 && kind < 0x23) {
+        return kind;
+    } else {
+        switch (kind) {
+        case 0xCD:
+            return 0x23;
+        case 0xE1:
+            return 0x24;
+        case 0xE2:
+            return 0x25;
+        case 0x28:
+            return 0x26;
+        default:
+            return -1;
+        }
+    }
+}
+
+inline bool gm_cond(void)
+{
+    if (gm_8016AEDC() != 0 && gm_8016AEDC() != -2) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 void fn_8003EE2C(int arg0, int arg1)
 {
-    Fighter_GObj* temp_r30;
-    float var_f1;
     pl_StaleMoveTableExt_t* temp_r31;
-    int temp_r3_2;
-    s32 temp_r3_3;
-    unsigned int temp_r0;
-    unsigned int temp_r3;
-    unsigned long temp_r3_10;
-    unsigned int temp_r3_5;
-    unsigned int temp_r3_6;
-    unsigned int temp_r3_7;
-    unsigned int temp_r3_8;
-    unsigned int temp_r3_9;
-    u8 temp_r28;
-    HSD_GObj* temp_r3_4; // May be from an inline?
+    Fighter_GObj* temp_r30;
+    int temp_r3_3;
+    int temp_r28;
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r30 = Player_GetEntityAtIndex(arg0, arg1);
-    RETURN_IF(arg1 == true);
+    RETURN_IF(arg1 == 1);
+    RETURN_IF(!gm_cond());
 
-    RETURN_IF(!pl_Verify_gm_8016AEDC());
-
-    temp_r31->xD08 += 1U;
-    temp_r3 = temp_r31->xD08;
-    if (temp_r3 > temp_r31->xD04) {
-        temp_r31->xD04 = temp_r3;
+    temp_r31->xD08++;
+    if (temp_r31->xD08 > temp_r31->xD04) {
+        temp_r31->xD04 = temp_r31->xD08;
     }
-    temp_r31->xD10 += 1;
-    temp_r3_2 = temp_r31->xD10;
-    if ((u32) temp_r3_2 > temp_r31->xD0C) {
-        temp_r31->xD0C = (u32) temp_r3_2;
+    temp_r31->xD10++;
+    if (temp_r31->xD10 > temp_r31->xD0C) {
+        temp_r31->xD0C = temp_r31->xD10;
     }
-    if (ftLib_800865CC(temp_r30) == 1) {
-        temp_r31->xD20 += 1;
+    if (ftLib_800865CC(temp_r30) == GA_Air) {
+        temp_r31->xD20++;
     } else {
-        temp_r31->xD24 += 1;
+        temp_r31->xD24++;
     }
     temp_r28 = ft_80089884(temp_r30)->x2073;
     if (ft_80089884(temp_r30)->x2072_b1) {
-        temp_r31->xD18 += 1U;
-        if ((f32) temp_r31->xD18 >= pl_804D6470->x64) {
-            temp_r31->xD14 += 1;
+        temp_r31->xD18++;
+        if (temp_r31->xD18 >= pl_804D6470->x64) {
+            temp_r31->xD14++;
         }
     } else {
-        temp_r31->xD18 = 0U;
+        temp_r31->xD18 = 0;
     }
-    if ((s32) temp_r28 == 0x68) {
-        temp_r31->xD1C += 1;
+    if (temp_r28 == 0x68) {
+        temp_r31->xD1C++;
     }
-    if (ftLib_800865CC(temp_r30) == 0) {
+    if (ftLib_800865CC(temp_r30) == GA_Ground) {
+        float var_f1;
         if (ftLib_8008777C(temp_r30) < 0.0f) {
             var_f1 = -ftLib_8008777C(temp_r30);
         } else {
             var_f1 = ftLib_8008777C(temp_r30);
         }
         if (var_f1 >= pl_804D6470->x58) {
-            temp_r31->xD28 += 1;
+            temp_r31->xD28++;
         }
     }
     if (ftLib_800877D4(temp_r30)) {
-        temp_r31->xD2C += 1;
+        temp_r31->xD2C++;
     }
     temp_r3_3 = ifMagnify_802FB6E8(arg0);
     if (temp_r3_3 != 0) {
-        temp_r31->xD30 += 1;
-        temp_r31->xDD0.bit7 = 1;
+        temp_r31->xD30++;
+        temp_r31->xDD0.bit7 = true;
     } else {
-        temp_r31->xDD0.bit7 = 0;
+        temp_r31->xDD0.bit7 = false;
     }
     switch (temp_r3_3) {
     case 1:
-        temp_r31->xDD0.bit5 = 1;
+        temp_r31->xDD0.bit5 = true;
         break;
     case 2:
-        temp_r31->xDD0.bit4 = 1;
+        temp_r31->xDD0.bit4 = true;
         break;
     case 3:
-        temp_r31->xDD0.bit6 = 1;
+        temp_r31->xDD0.bit6 = true;
         break;
     case 4:
-        temp_r31->xDD0.bit3 = 1;
+        temp_r31->xDD0.bit3 = true;
         break;
     }
     if (ft_800878BC(temp_r30)) {
-        temp_r31->xD34 += 1;
+        temp_r31->xD34++;
     }
     if (ft_80087900(temp_r30)) {
-        temp_r31->xD38 += 1;
+        temp_r31->xD38++;
     }
     if (ft_80087944(temp_r30)) {
-        temp_r31->xD3C += 1;
+        temp_r31->xD3C++;
     }
 
-    temp_r3_4 = ftLib_80086794(temp_r30); // Might be the start of an inline?
-    if (temp_r3_4 != NULL) {
-        if ((fn_8003EE2C_inline(temp_r3_4) != -1) &&
-            (it_8026B30C((Item_GObj*) temp_r3_4) != 5))
-        {
-            temp_r31->xD44 += 1U;
-            temp_r3_5 = temp_r31->xD44;
-            if (temp_r3_5 > temp_r31->xD40) {
-                temp_r31->xD40 = temp_r3_5;
+    {
+        Item_GObj* item_gobj = ftLib_80086794(temp_r30);
+        if (item_gobj != NULL) {
+            if (match_item_kind(itGetKind(item_gobj)) != -1 &&
+                    it_8026B30C(item_gobj) != 5) {
+                temp_r31->xD44++;
+                if (temp_r31->xD44 > temp_r31->xD40) {
+                    temp_r31->xD40 = temp_r31->xD44;
+                }
             }
-        }
-    } else {
-        temp_r0 = temp_r31->xD44;
-        if (temp_r0 != 0U) {
-            temp_r3_6 = temp_r31->xD48;
-            if ((temp_r0 < temp_r3_6) || (temp_r3_6 == 0U)) {
-                temp_r31->xD48 = temp_r0;
+        } else {
+            if (temp_r31->xD44 != 0) {
+                if (temp_r31->xD44 < temp_r31->xD48 ||
+                        temp_r31->xD48 == 0) {
+                    temp_r31->xD48 = temp_r31->xD44;
+                }
+                temp_r31->xD44 = 0;
             }
-            temp_r31->xD44 = 0U;
         }
     }
 
-    temp_r3_7 = temp_r31->xD4C;
-    if (temp_r3_7 != 0U) {
-        temp_r31->xD4C = temp_r3_7 - 1U;
+    if (temp_r31->xD4C != 0) {
+        temp_r31->xD4C--;
     }
-    temp_r3_8 = temp_r31->xD50;
-    if (temp_r3_8 != 0U) {
-        temp_r31->xD50 = temp_r3_8 - 1U;
+    if (temp_r31->xD50 != 0) {
+        temp_r31->xD50--;
     }
-    temp_r3_9 = temp_r31->xD54;
-    if (temp_r3_9 != 0U) {
-        temp_r31->xD54 = temp_r3_9 - 1U;
+    if (temp_r31->xD54 != 0) {
+        temp_r31->xD54--;
     }
-    temp_r31->xD58 += 1;
-    temp_r3_10 = temp_r31->xD60;
-    if (temp_r3_10 != 0U) {
-        temp_r31->xD60 -= 1U;
+    temp_r31->xD58++;
+    if (temp_r31->xD60 != 0) {
+        temp_r31->xD60--;
     }
     if (ft_80087AEC(temp_r30)) {
-        temp_r31->xD68 += 1;
+        temp_r31->xD68++;
     }
 }
 
@@ -540,105 +887,31 @@ void fn_8003F53C(int arg0, int arg1)
     }
 }
 
-void fn_8003F654(int slot, int index, Vec3* pos, Vec3* prevPos)
+void pl_8003FAA8(int slot, int index, Vec3* pos, Vec3* prevPos)
 {
-    Vec3 sp44;
-    Vec3 sp38;
-    float temp_f1;
-    float temp_f1_5;
-    float temp_f1_6;
+    float temp_f31;
     float temp_f30;
-    float temp_f30_2;
-    float temp_f3;
-    float var_f30;
-    float var_f31;
-    float var_f6;
-    Fighter_GObj* temp_r27;
-    pl_StaleMoveTableExt_t* temp_r3_3;
-    int temp_r3;
-    int temp_r3_2;
-    int var_r26;
-    int var_r25;
-    pl_StaleMoveTableExt_t* temp_r31 = Player_GetStaleMoveTableIndexPtr2(slot);
+    pl_StaleMoveTableExt_t* temp_r30;
+    int temp_r31;
+    int var_r0;
+    u32 temp_r3;
+    PAD_STACK(8);
 
-    temp_r27 = (Fighter_GObj*) Player_GetEntityAtIndex(slot, index);
+    temp_r30 = Player_GetStaleMoveTableIndexPtr2(slot);
+    fn_8003EE2C(slot, index);
+    fn_8003F294(slot, index);
+    fn_8003F53C(slot, index);
+    fn_8003F654(slot, index, pos, prevPos);
 
-    RETURN_IF(!pl_Verify_gm_8016AEDC());
-
-    RETURN_IF(index == 1 || ftLib_8008732C(temp_r27));
-    temp_r3 = ft_80087B34(temp_r27);
-
-    if (temp_r3 == 1) {
-        temp_f3 = prevPos->x - pos->x;
-        temp_f1 = prevPos->y - pos->y;
-        temp_f1 *= temp_f1;
-        temp_f3 *= temp_f3;
-        var_f31 = sqrtf(temp_f3 + temp_f1);
-
-        temp_r3_2 = ftLib_80087300(temp_r27);
-        temp_r31->xD80 += var_f31;
-
-        if (var_f31 > temp_r31->xD84) {
-            temp_r31->xD84 = var_f31;
-        }
-
-        if (temp_r3_2 != 6) {
-            temp_r3_3 = Player_GetStaleMoveTableIndexPtr2(temp_r3_2);
-
-            if (var_f31 > temp_r3_3->xD88) {
-                temp_r3_3->xD88 = var_f31;
-            }
-        }
-    } else if (temp_r3 == 0) {
-        if (ftLib_800865CC(temp_r27) == 0) {
-            temp_f1_5 = pos->x - prevPos->x;
-            temp_r31->xD74 += ABS(temp_f1_5);
-        } else {
-            temp_f1_6 = pos->y - prevPos->y;
-
-            if (temp_f1_6 > 0.0f) {
-                temp_r31->xD78 += ABS(temp_f1_6);
-            } else {
-                temp_r31->xD7C += ABS(temp_f1_6);
-            }
-        }
+    if (gm_cond() && index == 0) {
+        temp_r31 = ftLib_80087120(Player_GetEntityAtIndex(slot, index));
+        temp_f30 = temp_r30->x0_staleMoveTable.xC9C
+                     * (gm_8016AEDC() - 1) + temp_r31;
+        temp_f31 = gm_8016AEDC();
+        plCheckTotal(temp_f31);
+        temp_r30->x0_staleMoveTable.xC9C = temp_f30 / temp_f31;
     }
-
-    var_f30 = 0.0F;
-    var_r25 = 0;
-
-    for (var_r26 = 0; var_r26 < 6; ++var_r26) {
-        if (var_r26 == slot) {
-            continue;
-        }
-
-        if (!pl_CheckIfSameTeam(slot, var_r26) && Player_8003221C(var_r26) &&
-            !ftLib_8008732C(Player_GetEntity(var_r26)))
-        {
-            Player_LoadPlayerCoords(var_r26, &sp44);
-            var_f30 += ABS(pos->x - sp44.x);
-            var_r25 += 1;
-        }
-    }
-
-    if (var_r25 != 0) {
-        temp_r31->xD90 += 1;
-
-        temp_f30 = pl_CalculateAverage(var_f30, var_r25) +
-                   (temp_r31->xD8C * (float) (temp_r31->xD90 - 1));
-        temp_r31->xD8C = pl_CalculateAverage(temp_f30, temp_r31->xD90);
-    }
-
-    temp_r31->xD98 += 1;
-    Stage_UnkSetVec3TCam_Offset(&sp38);
-
-    var_f6 = ABS(pos->x - sp38.x);
-
-    temp_f30_2 = (temp_r31->xD94 * (float) (temp_r31->xD98 - 1)) + var_f6;
-    temp_r31->xD94 = pl_CalculateAverage(temp_f30_2, temp_r31->xD98);
 }
-
-// pl_8003FAA8
 
 int pl_8003FBFC(int arg0)
 {
@@ -969,9 +1242,54 @@ void pl_8004065C(int arg0, int arg1)
     pl_80038824(arg0, 0x78);
 }
 
-// pl_80040688
+void pl_80040688(int arg0, int arg1, int arg2)
+{
+    pl_StaleMoveTableExt_t* temp_r3;
+    UnkPlBonusBits* bits;
+    ft_800898B4_t* xCC0;
+    u8 temp_r0_2;
+    int temp_r0;
 
-// pl_800407C8
+    if (gm_8016AEDC() <= pl_804D6470->xEC) {
+        pl_80038788(arg0, 0x5F, 1);
+    }
+
+    if (arg2 != 0 && arg1 != 6) {
+        temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg1);
+
+        temp_r0 = temp_r3->x0_staleMoveTable.xCB8;
+        bits = &temp_r3->x0_staleMoveTable.xCBC;
+        xCC0 = &temp_r3->x0_staleMoveTable.xCC0;
+
+        if (!unk_cond(arg1, arg2)) {
+            temp_r0_2 = bits->x3;
+            if (temp_r0_2 >= 0x33 && temp_r0_2 <= 0x3D) {
+                pl_80038788(temp_r0, 0x2A, 1);
+            }
+            if (xCC0->x10_b0) {
+                pl_80038788(temp_r0, 7, 1);
+                pl_80038898(temp_r0, 6);
+            }
+        }
+    }
+}
+
+float pl_800407C8(int arg0)
+{
+    f32 temp_f31;
+    pl_StaleMoveTableExt_t* temp_r3;
+    u32 temp_r5;
+
+    temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
+    temp_r5 = temp_r3->x0_staleMoveTable.xCEC;
+    if (temp_r5 != 0) {
+        float tmp = temp_r3->x0_staleMoveTable.xCEC;
+        temp_f31 = temp_r3->x0_staleMoveTable.xCF0;
+        plCheckTotal(tmp);
+        return temp_f31 / tmp;
+    }
+    return 0.0f;
+}
 
 float pl_80040870(int arg0)
 {
@@ -1003,14 +1321,19 @@ int pl_80040924(int arg0)
     return Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
 }
 
-float pl_80040948(int arg0)
+float pl_80040948(s32 arg0)
 {
-    unsigned int temp_r31 =
-        Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
-    unsigned int temp_r30 = Player_GetTotalAttackCountPtr(arg0)->x358;
-    PAD_STACK(8);
+    unsigned int total;
+    unsigned int temp_r30;
+    PAD_STACK(0x10);
 
-    return temp_r31 != 0 ? pl_CalculateAverage(temp_r30, temp_r31) : 0.0F;
+    total = Player_GetTotalAttackCountPtr(arg0)->total_attack_count;
+    temp_r30 = Player_GetTotalAttackCountPtr(arg0)->x358;
+    if (total != 0) {
+        plCheckTotal(total);
+        return temp_r30 / (float) total;
+    }
+    return 0.0F;
 }
 
 int pl_80040A04(int arg0)
