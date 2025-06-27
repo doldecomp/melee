@@ -1,3 +1,4 @@
+#include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -37,9 +38,21 @@ void ftSk_SpecialLw_IASA(HSD_GObj* gobj) {}
 
 void ftSk_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
-/// #ftSk_SpecialLw_Phys
+void ftSk_SpecialLw_Phys(HSD_GObj* gobj)
+{
+    ft_80084F3C((Fighter_GObj*) gobj);
+}
 
-/// #ftSk_SpecialAirLw_Phys
+void ftSk_SpecialAirLw_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
+
+    u8 _[4];
+
+    ftCommon_8007D494((Fighter*) fp, attributes->x68, attributes->x6C);
+    ftCommon_8007CEF4((Fighter*) fp);
+}
 
 /// #ftSk_SpecialLw_Coll
 
