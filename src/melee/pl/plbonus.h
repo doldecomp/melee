@@ -11,7 +11,7 @@
 /* 038788 */ void pl_80038788(int player, int kind, int);
 /* 038824 */ void pl_80038824(int, int kind);
 /* 038898 */ void pl_80038898(int, int kind);
-/* 038914 */ pl_804D6470_t* pl_80038914();
+/* 038914 */ pl_804D6470_t* pl_80038914(void);
 /* 03891C */ void pl_8003891C(int slot);
 /* 038F10 */ void pl_80038F10(int slot);
 /* 038FB8 */ void fn_80038FB8(int);
