@@ -3,9 +3,10 @@
 
 #include <sysdolphin/baselib/debug.h>
 
-inline void plCheckTotal(float total)
+static inline float pl_CalculateAverage(float val, float total)
 {
-    HSD_ASSERT(0x10, total != 0.0F);
+    HSD_ASSERT(16, total != 0.0F);
+    return val / total;
 }
 
 #endif

@@ -6,12 +6,12 @@
 
 /* 019880 */ void lb_80019880(u64);
 /* 019894 */ u8 lb_80019894(void);
-/* 0198E0 */ UNK_RET lb_800198E0(UNK_PARAMS);
-/* 019900 */ UNK_RET lb_80019900(UNK_PARAMS);
-/* 019A30 */ s32 lb_80019A30(s32 arg0);
-/* 019A48 */ UNK_RET lb_80019A48(UNK_PARAMS);
+/* 0198E0 */ void lb_800198E0(void);
+/* 019900 */ void lb_80019900(void);
+/* 019A30 */ bool lb_80019A30(int index);
+/* 019A48 */ void lb_80019A48(void);
 /* 019AAC */ void lb_80019AAC(Event);
-/* 019BB8 */ UNK_RET lb_80019BB8(UNK_PARAMS);
+/* 019BB8 */ int lb_80019BB8(int);
 /* 019C38 */ UNK_RET lb_80019C38(UNK_PARAMS);
 /* 019CB0 */ UNK_RET lb_80019CB0(UNK_PARAMS);
 /* 019EF0 */ UNK_RET lb_80019EF0(UNK_PARAMS);

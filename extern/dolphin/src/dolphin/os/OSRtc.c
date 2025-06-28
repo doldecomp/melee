@@ -1,6 +1,7 @@
 #include <macros.h>
 #include <dolphin/exi.h>
 #include <dolphin/os.h>
+#include <dolphin/os/OSRtc.h>
 
 
 // internal include
@@ -183,13 +184,21 @@ static int UnlockSram(int commit, unsigned long offset)
     ASSERTLINE(0x162, Scb.locked);
     if (commit != 0) {
         if (offset == 0) {
-            struct OSSram* sram = (struct OSSram*) &Scb.sram[0];
-            sram->checkSum = sram->checkSumInv = 0;
-            for (p = (unsigned short*) &sram->counterBias;
-                 p < ((u16*) &Scb.sram[sizeof(struct OSSram)]); p++)
+            u8* sram = Scb.sram;
+
+            if ((sram[0x13] & 3) > 2U) {
+                sram[0x13] &= 0xFFFFFFFC;
+            }
+
             {
-                sram->checkSum += *p;
-                sram->checkSumInv += ~(*p);
+                struct OSSram* sram = (struct OSSram*) &Scb.sram[0];
+                sram->checkSum = sram->checkSumInv = 0;
+                for (p = (unsigned short*) &sram->counterBias;
+                     p < ((u16*) &Scb.sram[sizeof(struct OSSram)]); p++)
+                {
+                    sram->checkSum += *p;
+                    sram->checkSumInv += ~(*p);
+                }
             }
         }
         if (offset < Scb.offset) {
@@ -332,6 +341,48 @@ void OSSetSoundMode(unsigned long mode)
     sram->flags &= 0xFFFFFFFB;
     sram->flags |= mode;
     __OSUnlockSram(1);
+}
+
+u32 OSGetProgressiveMode(void)
+{
+    u8* var_r31;
+    u32 mode;
+
+    var_r31 = LockSram(0);
+    mode = (var_r31[0x13] >> 7) & 1;
+    UnlockSram(0, 0);
+    return mode;
+}
+
+void OSSetProgressiveMode(u32 mode)
+{
+    u32 temp_r30;
+    u8* var_r31;
+    u8 temp_r3_2;
+
+    temp_r30 = (mode << 7) & 0x80;
+    var_r31 = LockSram(0);
+    temp_r3_2 = var_r31[0x13];
+
+    if (temp_r30 == (temp_r3_2 & 0x80)) {
+        UnlockSram(0, 0);
+    } else {
+        var_r31[0x13] &= 0xFFFFFF7F;
+        var_r31[0x13] |= temp_r30;
+        UnlockSram(1, 0);
+    }
+}
+
+u16 OSGetWirelessID(s32 arg0)
+{
+    u16* var_r3;
+    u16 id;
+    u8 _[4];
+
+    var_r3 = LockSram(0x14);
+    id = var_r3[arg0 + 0xE];
+    UnlockSram(0, 0x14);
+    return id;
 }
 
 unsigned long OSGetVideoMode()

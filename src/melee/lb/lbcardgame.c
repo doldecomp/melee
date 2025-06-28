@@ -1,26 +1,89 @@
-#include <platform.h>
+#include "lbcardgame.h"
 
 #include "lbcardgame.static.h"
 
+#include <dolphin/os.h>
+#include <melee/lb/lb_0192.h>
+#include <sysdolphin/baselib/controller.h>
+
 void lb_80019880(u64 arg0)
 {
-    lb_804329F0[2].unk_8 = arg0;
+    lb_804329F0.x38 = arg0;
 }
 
-/// #lb_80019894
-
-/// #lb_800198E0
-
-/// #lb_80019900
-
-s32 lb_80019A30(s32 arg0)
+u8 lb_80019894(void)
 {
-    return lb_804329F0[arg0].unk_10;
+    u8 count;
+    int enabled = OSDisableInterrupts();
+    count = HSD_PadGetRawQueueCount();
+    lb_80019628();
+    OSRestoreInterrupts(enabled);
+    return count;
 }
 
-/// #lb_80019A48
+void lb_800198E0(void)
+{
+    HSD_PadRenewMasterStatus();
+}
 
-/// #lb_80019AAC
+void lb_80019900(void)
+{
+    int i;
+    for (i = 0; i < 2; i++) {
+        lb_804329F0.x0[i].x8 += lb_804329F0.x40;
+        if (lb_804329F0.x0[i].x8 >= lb_804329F0.x0[i].x0) {
+            lb_804329F0.x0[i].x8 -= lb_804329F0.x0[i].x0;
+            lb_804329F0.x0[i].x10 = true;
+        } else {
+            lb_804329F0.x0[i].x10 = false;
+        }
+    }
+
+    if (lb_80019A30(0)) {
+        HSD_PadRenewGameStatus();
+    }
+    if (lb_80019A30(0)) {
+        HSD_PadRenewCopyStatus();
+    }
+}
+
+bool lb_80019A30(int index)
+{
+    return lb_804329F0.x0[index].x10;
+}
+
+void lb_80019A48(void)
+{
+    int enabled = OSDisableInterrupts();
+
+    if (lb_804329F0.x48) {
+        OSCancelAlarm(&lb_804329F0.alarm);
+        lb_804329F0.x48 = 0;
+    }
+    OSRestoreInterrupts(enabled);
+}
+
+void lb_80019AAC(Event arg0)
+{
+    int i;
+
+    arg0();
+
+    for (i = 0; i < 2; i++) {
+        struct UnkArrElem* cur = &lb_804329F0.x0[i];
+        cur->x0 = 1.0F/60 * OS_TIMER_CLOCK;
+        cur->x8 = 0;
+        cur->x10 = 0;
+    }
+
+    lb_804329F0.x4 = 0;
+    lb_804329F0.x48 = 0;
+    lb_804329F0.x0[0].x0 = 0; // huh? overwritten?
+    lb_804329F0.x40 = 0;
+    lb_804329F0.x38 = 1.0F/60 * OS_TIMER_CLOCK;
+
+    lb_80019628();
+}
 
 /// #lb_80019BB8
 

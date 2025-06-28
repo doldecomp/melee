@@ -22,7 +22,7 @@
 /* 12D004 */ UNK_RET fn_8012D004(UNK_PARAMS);
 /* 12D0A0 */ UNK_RET fn_8012D0A0(UNK_PARAMS);
 /* 12D128 */ UNK_RET fn_8012D128(UNK_PARAMS);
-/* 12D1AC */ UNK_RET fn_8012D1AC(UNK_PARAMS);
+/* 12D1AC */ void fn_8012D1AC(ftYs_GObj* gobj);
 /* 12D230 */ UNK_RET fn_8012D230(UNK_PARAMS);
 /* 12D298 */ void fn_8012D298(Fighter_GObj* gobj);
 /* 12D2F8 */ void fn_8012D2F8(ftYs_GObj* gobj);
@@ -30,7 +30,7 @@
 /* 12D3C0 */ UNK_RET fn_8012D3C0(UNK_PARAMS);
 /* 12D428 */ UNK_RET fn_8012D428(UNK_PARAMS);
 /* 12D488 */ UNK_RET fn_8012D488(UNK_PARAMS);
-/* 12D4F0 */ UNK_RET fn_8012D4F0(UNK_PARAMS);
+/* 12D4F0 */ void fn_8012D4F0(Fighter_GObj* gobj);
 /* 12D550 */ void ftYs_SpecialN1_Anim(ftYs_GObj* gobj);
 /* 12D58C */ void ftYs_SpecialAirN1_0_Anim(ftYs_GObj* gobj);
 /* 12D5C8 */ void ftYs_SpecialN1_1_Anim(ftYs_GObj* gobj);

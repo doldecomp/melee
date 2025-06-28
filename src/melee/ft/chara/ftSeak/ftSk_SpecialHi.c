@@ -13,6 +13,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -20,9 +21,11 @@
 #include "ftCommon/ftCo_Pass.h"
 #include "it/items/itseakvanish.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/gobj.h>
 
 /* 112ED8 */ static void fn_80112ED8(Fighter_GObj* gobj);
@@ -272,7 +275,6 @@ void ftSk_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
 // Physics_SheikUpBTravelAir
 
-// Kipcode66's scratch at https://decomp.me/scratch/jKQKo seems to match this
 void ftSk_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
     ftCommon_8007CB74((Fighter_GObj*) gobj);
@@ -435,10 +437,130 @@ void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
 }
 
 // AS_SheikUpBTravelGround
-/// #ftSk_SpecialHi_80113838
+static inline void inlineA0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes;
+    attributes = fp->dat_attrs;
+    fp->mv.sk.specialhi.x0 = attributes->x38;
+    fp->x1968_jumpsUsed = (u8) fp->co_attrs.max_jumps;
+    fp->x2223_b4 = 1;
+    ftColl_8007B62C(gobj, 2);
+    fp->x221E_b0 = 1;
+    fp->accessory4_cb = fn_80112ED8;
+}
+void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
+{
+    // Almost completely matching, might need more inlining to get fully all
+    // the way there
+    f32 stick_mag;
+    f32 stick_y, stick_x;
+    Vec3 inputVector;
+    Fighter* fp = gobj->user_data;
+    ftSeakAttributes* attributes = fp->dat_attrs;
+    CollData* collData = &fp->coll_data;
+    f32 sum_of_squares;
+
+    u8 _[32];
+
+    stick_x = fp->input.lstick.x;
+    stick_y = fp->input.lstick.y;
+    stick_x = stick_x * stick_x;
+    stick_y = stick_y * stick_y;
+
+    stick_mag = sqrtf(stick_x + stick_y);
+
+    // var_f31 = stick_mag;
+    if (stick_mag > 1.0f) {
+        stick_mag = 1.0f;
+    }
+
+    if (!(stick_mag < attributes->x40)) {
+        Vec3* groundVector = &collData->floor.normal;
+        inputVector.x = fp->input.lstick.x;
+        inputVector.y = fp->input.lstick.y;
+        inputVector.z = 0.0f;
+        if (!(lbVector_AngleXY(groundVector, &inputVector) < (float) M_PI_2)) {
+            if (ftCo_8009A134(gobj) == 0) {
+                f32 temp_f6;
+                f32 temp_f1_5;
+                ftCommon_8007D9FC(fp);
+                temp_f1_5 = atan2f(fp->input.lstick.y,
+                                   fp->input.lstick.x * fp->facing_dir);
+                fp->mv.sk.specialhi.vel.x = inputVector.x;
+                fp->mv.sk.specialhi.vel.y = inputVector.y;
+                // Restructured to get these vel.x and vel.y in specialhi
+                temp_f6 = ((attributes->x44 * stick_mag) + attributes->x48) *
+                          cosf(temp_f1_5);
+                fp->gr_vel = fp->facing_dir * temp_f6;
+                Fighter_ChangeMotionState(gobj, 0x164, 0, 35.0f, 1.0f, 0.0f,
+                                          NULL);
+                ftAnim_8006EBA4(gobj);
+                ftAnim_SetAnimRate(gobj, 0.0f);
+                inlineA0(gobj);
+                return;
+            }
+        }
+    }
+    ftCommon_8007D60C(fp);
+    ftSk_SpecialHi_80113A30(gobj);
+}
 
 // AS_SheikUpBTravelAir
-/// #ftSk_SpecialHi_80113A30
+void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
+{
+    f32 stick_y;
+    f32 stick_x;
+    f32 var_f1;
+    f32 var_f30;
+    f32 var_f31;
+    f32 stick_y_sq;
+    f32 stick_mag;
+    Fighter* fp = gobj->user_data;
+    ftSeakAttributes* attributes = fp->dat_attrs;
+
+    u8 _[32];
+
+    stick_x = fp->input.lstick.x;
+    stick_y = fp->input.lstick.y;
+    stick_x = stick_x * stick_x;
+    stick_y_sq = stick_y * stick_y;
+    stick_mag = sqrtf(stick_x + stick_y_sq);
+
+    var_f31 = stick_mag;
+    if (stick_mag > ftSk_Init_804D9664) {
+        var_f31 = ftSk_Init_804D9664;
+    }
+    if (var_f31 > attributes->x40) {
+        var_f1 = fp->input.lstick.x;
+        if (var_f1 < ftSk_Init_804D9660) {
+            var_f1 = -var_f1;
+        }
+        if (var_f1 > ftSk_Init_804D9690) {
+            ftCommon_8007D9FC(fp);
+        }
+        var_f30 =
+            atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
+        fp->mv.sk.specialhi.vel.x = fp->input.lstick.x;
+        fp->mv.sk.specialhi.vel.y = fp->input.lstick.y;
+    } else {
+        ftCommon_8007DA24(fp);
+        var_f30 = ftSk_Init_804D9688;
+        fp->mv.sk.specialhi.vel.x = ftSk_Init_804D9660;
+        fp->mv.sk.specialhi.vel.y = ftSk_Init_804D9664;
+        var_f31 = ftSk_Init_804D9664;
+    }
+    fp->self_vel.x =
+        fp->facing_dir *
+        (((attributes->x44 * var_f31) + attributes->x48) * cosf(var_f30));
+    fp->self_vel.y =
+        ((attributes->x44 * var_f31) + attributes->x48) * sinf(var_f30);
+    Fighter_ChangeMotionState(gobj, 0x167, 0U, ftSk_Init_804D968C,
+                              ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftAnim_SetAnimRate(gobj, ftSk_Init_804D9660);
+    inlineA0(gobj);
+}
 
 // Grumpy Zebra (anon)'s fork at https://decomp.me/scratch/eGfdU of Gelatart's
 // scratch
@@ -538,7 +660,48 @@ void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80113038;
 }
 
-/// #ftSk_SpecialHi_80113EAC
+static void ftSk_SpecialHi_80113EAC_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.co.walk.fast_anim_frame = fp->self_vel.x;
+    fp->mv.co.common.x14 = fp->self_vel.y;
+    fp->mv.co.common.x18 = fp->gr_vel;
+    fp->gr_vel = fp->self_vel.x = fp->self_vel.y = ftSk_Init_804D9660;
+    // fp->unk221E = (u8) (fp->unk221E & ~0x80);
+    fp->x221E_b0 = 0;
+    fp->accessory4_cb = fn_80113038;
+}
+
+void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
+    Fighter_ChangeMotionState(gobj, 0x165, 0U, ftSk_Init_804D9660,
+                              ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftSk_SpecialHi_80113EAC_inline(gobj);
+    fp->gr_vel = fp->mv.co.common.x18 * attributes->x54;
+}
 
 // AS_SheikUpBFall
-/// #ftSk_SpecialHi_80113F68
+static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->mv.co.walk.fast_anim_frame = fp->self_vel.x;
+    fp->mv.co.common.x14 = fp->self_vel.y;
+    fp->mv.co.common.x18 = fp->gr_vel;
+    fp->gr_vel = fp->self_vel.x = fp->self_vel.y = ftSk_Init_804D9660;
+    fp->x221E_b0 = 0;
+    fp->accessory4_cb = fn_80113038;
+}
+void ftSk_SpecialHi_80113F68(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
+    Fighter_ChangeMotionState(gobj, 0x168, 0U, ftSk_Init_804D9660,
+                              ftSk_Init_804D9664, ftSk_Init_804D9660, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftSk_SpecialHi_80113F68_inline(gobj);
+    fp->self_vel.x = fp->mv.co.walk.fast_anim_frame * attributes->x54;
+    fp->self_vel.y = fp->mv.co.common.x14 * attributes->x54;
+}

@@ -57,7 +57,7 @@ void SITransferCommands();
 unsigned long SISetXY(unsigned long x, unsigned long y);
 unsigned long SIEnablePolling(unsigned long poll);
 unsigned long SIDisablePolling(unsigned long poll);
-void SIGetResponse(long chan, void* data);
+int SIGetResponse(long chan, void* data);
 int SITransfer(long chan, void* output, unsigned long outputBytes, void* input,
                unsigned long inputBytes,
                void (*callback)(long, unsigned long, struct OSContext*),
