@@ -11,6 +11,62 @@
 
 #include <dolphin/mtx.h>
 
+typedef struct IceMountainParams {
+    float x0;
+    int x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    float x18;
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    float x30;
+    float x34;
+    u16 x38;
+    u16 x3A;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
+    float x50;
+    float x54;
+    float x58;
+    float x5C;
+    float x60;
+    float x64;
+    float x68;
+    float x6C;
+    float x70;
+    float x74;
+    float x78;
+    float x7C;
+    float x80;
+    float x84;
+    float x88;
+    float x8C;
+    float x90;
+    float x94;
+    float x98;
+    float x9C;
+    float xA0;
+    float xA4;
+    float xA8;
+    HSD_GObj* xAC;
+    float xB0;
+    float xB4;
+    s16 xB8;
+    bool xBC;
+    float xC0;
+    float xC4;
+    float xC8;
+    float xCC;
+} IceMountainParams;
+
 /* 1F6868 */ void grIceMt_801F6868(int id);
 /* 1F686C */ void grIceMt_801F686C(void);
 /* 1F7080 */ void grIceMt_801F7080(void);
@@ -63,7 +119,7 @@
 /* 1F8CDC */ UNK_RET grIceMt_801F8CDC(Ground_GObj*);
 /* 1F8E58 */ UNK_RET fn_801F8E58(Ground_GObj*);
 /* 1F9038 */ UNK_RET fn_801F9038(Ground_GObj*);
-/* 1F9150 */ UNK_RET fn_801F9150(HSD_GObj*);
+/* 1F9150 */ IceMountainParams* fn_801F9150(HSD_GObj*);
 /* 1F91A4 */ void fn_801F91A4(UNK_PARAMS);
 /* 1F91A8 */ HSD_GObj* fn_801F91A8(HSD_GObj*);
 /* 1F91EC */ UNK_RET grIceMt_801F91EC(HSD_GObj*);
@@ -75,12 +131,12 @@
 /* 1F9558 */ UNK_RET fn_801F9558(Ground*, UNK_T, UNK_T, UNK_T,
                                  mpLib_GroundEnum);
 /* 1F9668 */ void grIceMt_801F9668(float);
-/* 1F96E0 */ UNK_RET grIceMt_801F96E0(float);
+/* 1F96E0 */ float grIceMt_801F96E0(float);
 /* 1F98A8 */ bool grIceMt_801F98A8(HSD_GObj* param1);
 /* 1F993C */ UNK_RET grIceMt_801F993C(UNK_PARAMS);
 /* 1F9ACC */ UNK_RET grIceMt_801F9ACC(float);
 /* 1FA0BC */ UNK_RET grIceMt_801FA0BC(int);
-/* 1FA364 */ UNK_RET grIceMt_801FA364(UNK_PARAMS);
+/* 1FA364 */ void grIceMt_801FA364(UNK_T, float*, HSD_GObjEvent, Ground_GObj*);
 /* 1FA4CC */ int fn_801FA4CC(int num);
 /* 1FA500 */ int grIceMt_801FA500(HSD_GObj*);
 /* 1FA6D8 */ UNK_RET grIceMt_801FA6D8(Ground_GObj*);

@@ -228,9 +228,9 @@ static bool grLast_8021A90C(Ground_GObj* gobj)
     return false;
 }
 
-static void grLast_8021A914() {}
+static void grLast_8021A914(Ground_GObj* gobj) {}
 
-static void grLast_8021A918() {}
+static void grLast_8021A918(Ground_GObj* gobj) {}
 
 static void grLast_8021A91C(Ground_GObj* gobj)
 {
@@ -239,14 +239,14 @@ static void grLast_8021A91C(Ground_GObj* gobj)
     gp->x11_flags.b012 = 1;
 }
 
-static bool grLast_8021A960()
+static bool grLast_8021A960(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grLast_8021A968() {}
+static void grLast_8021A968(Ground_GObj* gobj) {}
 
-static void grLast_8021A96C() {}
+static void grLast_8021A96C(Ground_GObj* gobj) {}
 
 static void grLast_8021A970(Ground_GObj* gobj)
 {
@@ -254,14 +254,14 @@ static void grLast_8021A970(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grLast_8021A99C()
+static bool grLast_8021A99C(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grLast_8021A9A4() {}
+static void grLast_8021A9A4(Ground_GObj* gobj) {}
 
-static void grLast_8021A9A8() {}
+static void grLast_8021A9A8(Ground_GObj* gobj) {}
 
 static void fn_8021A9AC(Ground_GObj* gobj)
 {
@@ -289,7 +289,7 @@ static void grLast_8021A9C4(Ground_GObj* gobj)
     Ground_801C10B8(gobj, &fn_8021A9AC);
 }
 
-static bool grLast_8021AAA8()
+static bool grLast_8021AAA8(Ground_GObj* gobj)
 {
     return false;
 }
@@ -335,14 +335,14 @@ static void grLast_8021AB88(Ground_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool grLast_8021ABCC()
+static bool grLast_8021ABCC(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grLast_8021ABD4() {}
+static void grLast_8021ABD4(Ground_GObj* gobj) {}
 
-static void grLast_8021ABD8() {}
+static void grLast_8021ABD8(Ground_GObj* gobj) {}
 
 static void grLast_8021ABDC(Ground_GObj* gobj)
 {
@@ -351,14 +351,14 @@ static void grLast_8021ABDC(Ground_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool grLast_8021AC20()
+static bool grLast_8021AC20(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grLast_8021AC28() {}
+static void grLast_8021AC28(Ground_GObj* gobj) {}
 
-static void grLast_8021AC2C() {}
+static void grLast_8021AC2C(Ground_GObj* gobj) {}
 
 static void grLast_8021AC30(Ground_GObj* gobj)
 {

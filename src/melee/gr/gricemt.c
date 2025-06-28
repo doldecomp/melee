@@ -3,14 +3,23 @@
 
 #include "gr/gricemt.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjproc.h"
+#include "baselib/random.h"
+#include "cm/camera.h"
+#include "ef/efsync.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
 #include "gr/types.h"
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 #include "it/types.h"
+#include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
@@ -29,62 +38,6 @@
 //     grTFalco_80220B78,
 //     1,
 // };
-
-typedef struct IceMountainParams {
-    float x0;
-    int x4;
-    float x8;
-    float xC;
-    float x10;
-    float x14;
-    float x18;
-    float x1C;
-    float x20;
-    float x24;
-    float x28;
-    float x2C;
-    float x30;
-    float x34;
-    u16 x38;
-    u16 x3A;
-    float x3C;
-    float x40;
-    float x44;
-    float x48;
-    float x4C;
-    float x50;
-    float x54;
-    float x58;
-    float x5C;
-    float x60;
-    float x64;
-    float x68;
-    float x6C;
-    float x70;
-    float x74;
-    float x78;
-    float x7C;
-    float x80;
-    float x84;
-    float x88;
-    float x8C;
-    float x90;
-    float x94;
-    float x98;
-    float x9C;
-    float xA0;
-    float xA4;
-    float xA8;
-    HSD_GObj* xAC;
-    float xB0;
-    float xB4;
-    s16 xB8;
-    bool xBC;
-    float xC0;
-    float xC4;
-    float xC8;
-    float xCC;
-} IceMountainParams;
 
 /*struct {
     Vec3 unk0;
@@ -219,8 +172,7 @@ void grIceMt_801F686C(void)
     Ground_801C39C0();
     Ground_801C3BB4();
 }
-/// #grIceMt_801F7080
-void grIceMt_801F7080()
+void grIceMt_801F7080(void)
 {
     // Ground_801C2BA4(5);
     int iVar1;
@@ -263,7 +215,7 @@ void grIceMt_801F7080()
     if (Stage_80225194() == 76) {
         grZakoGenerator_801CAE04(&grIm_804D69F4->xBC);
         if (grIm_804D69F4->xB8) {
-            iVar1 = HSD_Randi();
+            iVar1 = HSD_Randi(0);
         } else {
             iVar1 = 0;
         }
@@ -297,7 +249,7 @@ HSD_GObj* grIceMt_801F71E8(int gobj_id)
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = 0;
         gp->xC_callback = 0;
-        Gobj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
         // if(grIm_803E4718[gobj_id]) {
         //	int bruh = 4;
         // }
@@ -389,8 +341,8 @@ void grIceMt_801F75FC(HSD_GObj* arg0)
 {
     u32 iVar1;
     Ground* gp = GET_GROUND(arg0);
-    memzero(gp->gv.icemt.xDC, 0x18);
-    memzero(gp->gv.icemt.xF4, 0x14);
+    memzero(&gp->gv.icemt.xDC, 0x18);
+    memzero(&gp->gv.icemt.xF4, 0x14);
     do {
         iVar1 = HSD_Randi(6);
     } while (gp->gv.icemt.xF4[iVar1] != 0);
@@ -423,12 +375,12 @@ bool grIceMt_801F7720(HSD_GObj* arg0)
 /// #grIceMt_801F7728
 void grIceMt_801F7728(HSD_GObj* arg0)
 {
+    float y;
     Ground* gp = GET_GROUND(arg0);
     if (gp->gv.icemt.xD8 == 0) {
-        GrIceMt_801fA364();
-        GrIceMt_801f96E0();
-        GrIceMt_801f9ACC(gp->gv.icemt.xC4, fn_801F9038, arg0);
-        GrIceMt_801f9668();
+        grIceMt_801FA364(&gp->gv.corneria.xC8, &y, fn_801F8E58, arg0);
+        grIceMt_801F9ACC(grIceMt_801F96E0(-y));
+        grIceMt_801F9668(y);
     }
 }
 
@@ -830,11 +782,10 @@ void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
 
 /// #fn_801F9038
 
-/// #fn_801F9150
-void fn_801F9150(HSD_GObj* arg0)
+IceMountainParams* fn_801F9150(HSD_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    grIm_804D69F4;
+    return grIm_804D69F4;
 }
 
 void fn_801F91A4(void) {}
@@ -923,8 +874,7 @@ void grIceMt_801F9668(float arg8)
     gp->gv.icemt2.xC4 = arg8;
 }
 
-/// #grIceMt_801F96E0
-void grIceMt_801F96E0(float y)
+float grIceMt_801F96E0(float y)
 {
     HSD_GObj* jobj;
     double dVar3;
@@ -950,6 +900,7 @@ void grIceMt_801F96E0(float y)
     // HSD_JObjGetTranslationY(jobj);
     // dVar4 = Ground_801C0498();
     // HSD_JObjSetTranslateY(jobj,4);
+    return 0;
 }
 
 /// #grIceMt_801F98A8
@@ -1019,10 +970,9 @@ int fn_801FA4CC(int num)
     return num;
 }
 
-/// #grIceMt_801FA500
 int grIceMt_801FA500(HSD_GObj* param1)
 {
-    int iVar1;
+    int iVar1 = NULL;
     int iVar2;
     int iVar3;
     iVar3 = 0;
