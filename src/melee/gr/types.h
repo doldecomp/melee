@@ -336,7 +336,7 @@ struct grIceMt_GroundVars {
     /* +0 gp+C4 */ s16 xCA;
     /* +0 gp+C4 */ s16 xCC;
     /* +0 gp+C4 */ s16 xCE;
-	//char pad_0[0x0C];
+    // char pad_0[0x0C];
     /* +0 gp+D8 */ s16 xD0;
     /* +0 gp+D8 */ f32 xD4;
     /* +0 gp+D8 */ s16 xD8;

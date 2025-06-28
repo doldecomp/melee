@@ -35,7 +35,7 @@
 /* 212FC0 */ UNK_RET grPura_80212FC0(HSD_GObj*);
 /* 213030 */ UNK_RET grPura_80213030(HSD_GObj*);
 /* 2130C0 */ DynamicsDesc* grPura_802130C0(int);
-/* 2130C8 */ int grPura_802130C8(Vec3* a,int,HSD_JObj*);
+/* 2130C8 */ int grPura_802130C8(Vec3* a, int, HSD_JObj*);
 /* 2130D0 */ UNK_RET fn_802130D0(HSD_GObj*, int);
 /* 213128 */ UNK_RET grPura_80213128(UNK_PARAMS);
 /* 213224 */ UNK_RET grPura_80213224(HSD_DObj*);
