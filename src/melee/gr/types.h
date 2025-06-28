@@ -330,8 +330,37 @@ struct grCorneria_GroundVars {
 };
 
 struct grIceMt_GroundVars {
-    /* +0 gp+C4 */ char pad_0[0x14];
+    /* +0 gp+C4 */ HSD_GObj* xC4;
+    /* +0 gp+C4 */ HSD_GObj* xC6;
+    /* +0 gp+C4 */ s16 xC8;
+    /* +0 gp+C4 */ s16 xCA;
+    /* +0 gp+C4 */ s16 xCC;
+    /* +0 gp+C4 */ s16 xCE;
+	//char pad_0[0x0C];
+    /* +0 gp+D8 */ s16 xD0;
+    /* +0 gp+D8 */ f32 xD4;
     /* +0 gp+D8 */ s16 xD8;
+    /* +0 gp+D8 */ s16 xDA;
+    /* +0 gp+D8 */ s16 xDC;
+    /* +0 gp+D8 */ s16 xDE;
+    /* +0 gp+D8 */ s16 xE0;
+    /* +0 gp+D8 */ f32 xE4;
+    /* +0 gp+D8 */ void* xF4[6];
+};
+struct grIceMt_GroundVars2 {
+    /* +0 gp+C4 */ f32 xC4;
+    /* +0 gp+C4 */ HSD_JObj* xC8;
+    /* +0 gp+C4 */ HSD_JObj* xCC;
+    /* +0 gp+D8 */ HSD_JObj* xD0;
+    /* +0 gp+D8 */ HSD_JObj* xD4;
+    /* +0 gp+D8 */ HSD_JObj* xD8;
+    /* +0 gp+D8 */ HSD_JObj* xDC;
+    /* +0 gp+D8 */ HSD_JObj* xE0;
+    /* +0 gp+D8 */ HSD_JObj* xE4;
+    /* +0 gp+D8 */ HSD_JObj* xE8;
+    /* +0 gp+D8 */ HSD_JObj* xEC;
+    /* +0 gp+D8 */ HSD_JObj* xF0;
+    /* +0 gp+D8 */ HSD_JObj* xF4;
 };
 
 struct grStadium_GroundVars {
@@ -401,6 +430,17 @@ struct grOnett_GroundVars {
 
 struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+};
+
+struct grPura_GroundVars {
+    /*  +0 gp+C4:0 */ u16 xC4;
+    /*  +0 gp+C4:0 */ s16 xC6;
+    /*  +0 gp+C4:0 */ HSD_JObj* xC8;
+};
+
+struct grPura_GroundVars2 {
+    /*  +0 gp+C4:0 */ u32 xC4;
+    /*  +0 gp+C4:0 */ HSD_JObj* xC8;
 };
 
 struct Randall {
@@ -503,6 +543,7 @@ struct Ground {
         struct GroundVars_flatzone flatzone;
         struct GroundVars_flatzone2 flatzone2;
         struct grIceMt_GroundVars icemt;
+        struct grIceMt_GroundVars2 icemt2;
         struct GroundVars_izumi izumi;
         struct GroundVars_izumi2 izumi2;
         struct GroundVars_izumi3 izumi3;
@@ -511,6 +552,8 @@ struct Ground {
         struct grKongo_GroundVars3 kongo3;
         struct grKraid_GroundVars kraid;
         struct grOnett_GroundVars onett;
+        struct grPura_GroundVars pura;
+        struct grPura_GroundVars2 pura2;
         struct GroundVars_unk unk;
         struct grZebes_GroundVars zebes;
     } gv;
