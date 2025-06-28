@@ -17,10 +17,10 @@ struct CameraBox {
     /* +C:2 */ u8 xC_b2 : 1;
     s16 xE;
     Vec3 x10; // might be Vec2?
-    Vec3 pos;
-    float dir;
+    Vec3 x1C; // position?
+    float x28; // direction?
     Vec2 x2C;
-    Vec3 size;
+    Vec3 x34; // size?
     Vec2 x40;
     Vec3 x48;
     Vec3 x54;

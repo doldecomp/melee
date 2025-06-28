@@ -106,19 +106,19 @@ void Camera_80028F5C(CameraBox* subject, s32 arg1)
         subject->x10.z = 0.0f;
         subject->x10.y = 0.0f;
         subject->x10.x = 0.0f;
-        subject->pos = subject->x10;
-        subject->dir = 0.0f;
+        subject->x1C = subject->x10;
+        subject->x28 = 0.0f;
         subject->xC_b0 = false;
         subject->xC_b1 = false;
         subject->xC_b2 = false;
         subject->xE = 0;
         subject->x2C.x = -1.0f;
         subject->x2C.y = 1.0f;
-        subject->size.x = 1.0f;
-        subject->size.y = -1.0f;
-        subject->size.z = 1.0f;
+        subject->x34.x = 1.0f;
+        subject->x34.y = -1.0f;
+        subject->x34.z = 1.0f;
         subject->x40 = subject->x2C;
-        subject->x48 = subject->size;
+        subject->x48 = subject->x34;
         subject->x54.x = 0.0f;
         subject->x54.y = 0.0f;
         subject->x54.z = 0.0f;
@@ -290,41 +290,41 @@ void Camera_800293E0(void)
             }
 
             temp_f1 = curr->x48.x;
-            temp_f0 = curr->size.x;
+            temp_f0 = curr->x34.x;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->size.x += 0.5f;
+                    curr->x34.x += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->size.x -= 0.5f;
+                    curr->x34.x -= 0.5f;
                 } else {
-                    curr->size.x = temp_f1;
+                    curr->x34.x = temp_f1;
                 }
             }
 
             temp_f1 = curr->x48.y;
-            temp_f0 = curr->size.y;
+            temp_f0 = curr->x34.y;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->size.y += 0.5f;
+                    curr->x34.y += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->size.y -= 0.5f;
+                    curr->x34.y -= 0.5f;
                 } else {
-                    curr->size.y = temp_f1;
+                    curr->x34.y = temp_f1;
                 }
             }
 
             temp_f1 = curr->x48.z;
-            temp_f0 = curr->size.z;
+            temp_f0 = curr->x34.z;
             distance = temp_f1 - temp_f0;
             if (distance != 0.0f) {
                 if (distance > 0.5f) {
-                    curr->size.z += 0.5f;
+                    curr->x34.z += 0.5f;
                 } else if (distance < -0.5f) {
-                    curr->size.z = temp_f0 - 0.5f;
+                    curr->x34.z = temp_f0 - 0.5f;
                 } else {
-                    curr->size.z = temp_f1;
+                    curr->x34.z = temp_f1;
                 }
             }
         }
@@ -956,21 +956,21 @@ void Camera_8002B1F8(CameraMovement* movement)
     if ((((temp_r3 = Player_GetEntity(0), temp_r3 != NULL) &&
           (var_r29 = ftLib_80086B74(temp_r3), var_r29 != NULL) &&
           (Camera_8002928C(var_r29) != 0) &&
-          (Camera_80029124(&var_r29->pos, 0) == 0U) &&
+          (Camera_80029124(&var_r29->x1C, 0) == 0U) &&
           !ftLib_8008732C(temp_r3)) ||
          ((Player_GetPlayerCharacter(1) == CHKIND_SANDBAG) &&
           (temp_r3_2 = Player_GetEntity(1), ((temp_r3_2 == NULL) == 0)) &&
           (var_r29 = ftLib_80086B74(temp_r3_2), ((var_r29 == NULL) == 0)) &&
           (Camera_8002928C(var_r29) != 0) &&
-          (Camera_80029124(&var_r29->pos, 0) == 0))))
+          (Camera_80029124(&var_r29->x1C, 0) == 0))))
     {
-        lbVector_Diff(&movement->target_interest, &var_r29->pos, &vec);
+        lbVector_Diff(&movement->target_interest, &var_r29->x1C, &vec);
         temp_f1 = *temp_r31;
         temp_f1_2 = temp_f1 * temp_f1;
         vec.x *= temp_f1_2;
         vec.y *= temp_f1_2;
         vec.z *= temp_f1_2;
-        lbVector_Add(&vec, &var_r29->pos);
+        lbVector_Add(&vec, &var_r29->x1C);
         movement->target_interest = vec;
         lbVector_Diff(&movement->target_position, &movement->target_interest,
                       &vec);
@@ -1255,7 +1255,7 @@ void Camera_8002F7AC(s8 slot)
     if (fighter_gobj != NULL) {
         cam_box = ftLib_80086B74(fighter_gobj);
         if (cam_box != NULL) {
-            direction = cam_box->dir;
+            direction = cam_box->x28;
             if (direction > 0.0f) {
                 offset_dir = 1.0f;
             } else if (direction < 0.0f) {
@@ -1412,7 +1412,7 @@ bool Camera_80030178(void)
 
 Point3d* Camera_8003019C(void)
 {
-    return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->pos;
+    return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->x1C;
 }
 
 /// #fn_800301D0
@@ -1657,7 +1657,7 @@ bool Camera_80030BBC(Point3d* arg0, S32Vec2* arg1)
 
 bool Camera_80030CD8(CameraBox* arg0, S32Vec2* arg1)
 {
-    return Camera_80030BBC(&arg0->pos, arg1);
+    return Camera_80030BBC(&arg0->x1C, arg1);
 }
 
 // Camera_IsSubjectOnScreen
@@ -1674,16 +1674,16 @@ bool Camera_80030CFC(CameraBox* cam_box, f32 tolerance)
     cobj = GET_COBJ(cm_80452C68.gobj);
     HSD_CObjGetEyePosition(cobj, &eye_pos);
     HSD_CObjGetInterest(cobj, &interest);
-    if (lbVector_8000E838(&interest, &eye_pos, &cam_box->pos, &sp38) < (cam_box->size.z + tolerance)) {
+    if (lbVector_8000E838(&interest, &eye_pos, &cam_box->x1C, &sp38) < (cam_box->x34.z + tolerance)) {
         return 1;
     }
-    lbVector_Diff(&sp38, &cam_box->pos, &sp20);
+    lbVector_Diff(&sp38, &cam_box->x1C, &sp20);
     lbVector_Normalize(&sp20);
-    range = cam_box->size.z + tolerance;
+    range = cam_box->x34.z + tolerance;
     sp20.x *= range;
     sp20.y *= range;
     sp20.z *= range;
-    lbVector_Add(&sp20, &cam_box->pos);
+    lbVector_Add(&sp20, &cam_box->x1C);
     return Camera_80030BBC(&sp20, NULL);
 }
 
