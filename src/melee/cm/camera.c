@@ -916,13 +916,11 @@ void Camera_8002B0E0(void)
             cstick_y = 0.0f;
             if (cm_80452C68.unk_2ba > 0) {
                 cm_80452C68.unk_2ba--;
-            } 
-            else {
+            } else {
                 cstick_y = cm_803BCCA0._44[0x28];
             }
             x2bc = cm_803BCCA0._44[40];
-        } 
-        else {
+        } else {
             cm_80452C68.unk_2ba = cm_803BCCA0._44[0x27];
         }
 
@@ -1524,7 +1522,7 @@ bool Camera_800307D0(f32* left, f32* center, f32* right)
             cos_half_fov = cosf(half_fov);
             rot_x = (forward.x * cos_half_fov) + (forward.z * sin_half_fov);
             rot_z = (forward.z * cos_half_fov) - (forward.x * sin_half_fov);
-            
+
             if ((fabs_inline(rot_z) > cm_804D7EE8) && ((forward.z * rot_z) > cm_804D7EF0)) {
                 *right = -((rot_x * (eye_pos.z / rot_z)) - eye_pos.x);
             } else if (rot_x > 0.0f) {
@@ -1637,11 +1635,11 @@ bool Camera_80030BBC(Point3d* arg0, S32Vec2* arg1)
     if (lbVector_WorldToScreen(cobj, arg0, &point, 1) == NULL) {
         return false;
     }
-    
+
     if ((point.x > 2.1474836e9f) || (point.x < -2.1474836e9f) || (point.y > 2.1474836e9f) || (point.y < -2.1474836e9f)) {
         return false;
     }
-    
+
     px = point.x;
     py = point.y;
     if (arg1 != NULL) {
