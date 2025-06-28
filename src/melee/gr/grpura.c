@@ -2,12 +2,18 @@
 
 #include "gr/grpura.h"
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjproc.h"
+#include "baselib/random.h"
 #include "cm/camera.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
@@ -173,14 +179,14 @@ void grPura_80211EF0(HSD_GObj* arg0)
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80211F1C(HSD_GObj*)
+bool grPura_80211F1C(HSD_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211F24(HSD_GObj*) {}
+void grPura_80211F24(HSD_GObj* arg0) {}
 
-void grPura_80211F28(HSD_GObj*) {}
+void grPura_80211F28(HSD_GObj* arg0) {}
 
 /// #grPura_80211F2C
 void grPura_80211F2C(HSD_GObj* arg0)
@@ -189,14 +195,14 @@ void grPura_80211F2C(HSD_GObj* arg0)
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80211F58(HSD_GObj*)
+bool grPura_80211F58(HSD_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211F60(HSD_GObj*) {}
+void grPura_80211F60(HSD_GObj* arg0) {}
 
-void grPura_80211F64(HSD_GObj*) {}
+void grPura_80211F64(HSD_GObj* arg0) {}
 
 /// #grPura_80211F68
 void grPura_80211F68(HSD_GObj* arg0)
@@ -209,22 +215,21 @@ void grPura_80211F68(HSD_GObj* arg0)
     grPura_80212FC0(arg0);
 }
 
-bool grPura_80211FD0(HSD_GObj*)
+bool grPura_80211FD0(HSD_GObj* arg0)
 {
     return false;
 }
 
-/// #grPura_80211FD8
 void grPura_80211FD8(HSD_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
-    grPura_80213030(arg0);
+    // grPura_80213030(arg0);
     mpLib_80055E24(0x18);
     lb_800115F4();
 }
 
-void grPura_80212020(HSD_GObj*) {}
+void grPura_80212020(HSD_GObj* arg0) {}
 
 /// #grPura_80212024
 void grPura_80212024(HSD_GObj* arg0)
@@ -244,14 +249,14 @@ void grPura_80212024(HSD_GObj* arg0)
     gp->gv.pura.xC8 = 0;
 }
 
-bool grPura_802120D8(HSD_GObj*)
+bool grPura_802120D8(HSD_GObj* arg0)
 {
     return false;
 }
 
 /// #grPura_802120E0
 
-void grPura_8021228C(HSD_GObj*) {}
+void grPura_8021228C(HSD_GObj* arg0) {}
 
 /// #grPura_80212290
 void grPura_80212290(HSD_GObj* arg0)
@@ -266,7 +271,7 @@ void grPura_80212290(HSD_GObj* arg0)
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80212314(HSD_GObj*)
+bool grPura_80212314(HSD_GObj* arg0)
 {
     return false;
 }
@@ -297,7 +302,7 @@ void grPura_8021231C(HSD_GObj* arg0)
     }
 }
 
-void grPura_802125EC(HSD_GObj*) {}
+void grPura_802125EC(HSD_GObj* arg0) {}
 
 /// #grPura_802125F0
 void grPura_802125F0(HSD_GObj* arg0)
@@ -371,12 +376,11 @@ void grPura_80212EF4(HSD_GObj* arg0)
 
 /// #grPura_80212FC0
 
-/// #grPura_80213030
-void grPura_80213030()
+void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
 {
     u32 uVar1 = 0;
     do {
-        lb_8000B1CC();
+        lb_8000B1CC(arg0, arg1, arg2);
         uVar1++;
     } while (uVar1 < 42);
     mpLib_800565DC(0);
@@ -385,7 +389,7 @@ void grPura_80213030()
     mpLib_800565DC(5);
 }
 
-DynamicsDesc* grPura_802130C0(int)
+DynamicsDesc* grPura_802130C0(int arg0)
 {
     return false;
 }

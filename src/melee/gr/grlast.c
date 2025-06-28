@@ -1,25 +1,24 @@
 #include "grlast.h"
 
-#include <melee/cm/camera.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/gr/inlines.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/stage.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbvector.h>
+#include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
-
-#include <math.h>
+#include <melee/cm/camera.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gr/granime.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/grmaterial.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
+#include <melee/gr/inlines.h>
+#include <melee/gr/stage.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbvector.h>
 
 const Vec3 grLast_803B8480 = { 1, 1, 1 };
 const Vec3 grLast_803B848C = { 0, 1, 0 };
@@ -73,54 +72,73 @@ static void grLast_8021A620(int arg0)
 }
 
 static StageCallbacks grLast_803E7EBC[] = {
-    { // 0 generic anime gobj
+    {
+        // 0 generic anime gobj
         grLast_8021A8E0,
         grLast_8021A90C,
         grLast_8021A914,
         grLast_8021A918,
-    }, { // 1 generic anime gobj
+    },
+    {
+        // 1 generic anime gobj
         grLast_8021A91C,
         grLast_8021A960,
         grLast_8021A968,
         grLast_8021A96C,
-    }, { // 2 generic anime gobj
+    },
+    {
+        // 2 generic anime gobj
         grLast_8021A970,
         grLast_8021A99C,
         grLast_8021A9A4,
         grLast_8021A9A8,
-    }, { // 3 map type
+    },
+    {
+        // 3 map type
         grLast_8021A9C4,
         grLast_8021AAA8,
         grLast_8021AAB0,
         grLast_8021AB30,
         0x80000000,
-    }, { // 4 generic jobj holder
+    },
+    {
+        // 4 generic jobj holder
         grLast_8021AB34,
         grLast_8021AB78,
         grLast_8021AB80,
         grLast_8021AB84,
         0x40000000,
-    }, { // 5 generic jobj holder
+    },
+    {
+        // 5 generic jobj holder
         grLast_8021AB88,
         grLast_8021ABCC,
         grLast_8021ABD4,
         grLast_8021ABD8,
-    }, { // 6 generic jobj holder
+    },
+    {
+        // 6 generic jobj holder
         grLast_8021ABDC,
         grLast_8021AC20,
         grLast_8021AC28,
         grLast_8021AC2C,
-    }, { // 7, uses UnkGenerator at xE0
+    },
+    {
+        // 7, uses UnkGenerator at xE0
         grLast_8021AC30,
         grLast_8021ADC8,
         grLast_8021ADD0,
         grLast_8021B23C,
-    }, { // 8 generic jobj holder
+    },
+    {
+        // 8 generic jobj holder
         grLast_8021B240,
         grLast_8021B284,
         grLast_8021B28C,
         grLast_8021B290,
-    }, { // 9 generic jobj holder
+    },
+    {
+        // 9 generic jobj holder
         grLast_8021B294,
         grLast_8021B2D8,
         grLast_8021B2E0,
@@ -159,9 +177,7 @@ static void grLast_8021A740(void)
     Camera_800311CC(30000);
 }
 
-static void grLast_8021A7C4(void)
-{
-}
+static void grLast_8021A7C4(void) {}
 
 static void grLast_8021A7C8(void)
 {
@@ -207,18 +223,14 @@ static void grLast_8021A8E0(Ground_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grLast_8021A90C()
+static bool grLast_8021A90C(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grLast_8021A914()
-{
-}
+static void grLast_8021A914() {}
 
-static void grLast_8021A918()
-{
-}
+static void grLast_8021A918() {}
 
 static void grLast_8021A91C(Ground_GObj* gobj)
 {
@@ -232,13 +244,9 @@ static bool grLast_8021A960()
     return false;
 }
 
-static void grLast_8021A968()
-{
-}
+static void grLast_8021A968() {}
 
-static void grLast_8021A96C()
-{
-}
+static void grLast_8021A96C() {}
 
 static void grLast_8021A970(Ground_GObj* gobj)
 {
@@ -251,13 +259,9 @@ static bool grLast_8021A99C()
     return false;
 }
 
-static void grLast_8021A9A4()
-{
-}
+static void grLast_8021A9A4() {}
 
-static void grLast_8021A9A8()
-{
-}
+static void grLast_8021A9A8() {}
 
 static void fn_8021A9AC(Ground_GObj* gobj)
 {
@@ -306,9 +310,7 @@ static void grLast_8021AAB0(Ground_GObj* gobj)
     lb_800115F4();
 }
 
-static void grLast_8021AB30(Ground_GObj* gobj)
-{
-}
+static void grLast_8021AB30(Ground_GObj* gobj) {}
 
 static void grLast_8021AB34(Ground_GObj* gobj)
 {
@@ -322,13 +324,9 @@ static bool grLast_8021AB78(Ground_GObj* gobj)
     return false;
 }
 
-static void grLast_8021AB80(Ground_GObj* gobj)
-{
-}
+static void grLast_8021AB80(Ground_GObj* gobj) {}
 
-static void grLast_8021AB84(Ground_GObj* gobj)
-{
-}
+static void grLast_8021AB84(Ground_GObj* gobj) {}
 
 static void grLast_8021AB88(Ground_GObj* gobj)
 {
@@ -342,13 +340,9 @@ static bool grLast_8021ABCC()
     return false;
 }
 
-static void grLast_8021ABD4()
-{
-}
+static void grLast_8021ABD4() {}
 
-static void grLast_8021ABD8()
-{
-}
+static void grLast_8021ABD8() {}
 
 static void grLast_8021ABDC(Ground_GObj* gobj)
 {
@@ -362,13 +356,9 @@ static bool grLast_8021AC20()
     return false;
 }
 
-static void grLast_8021AC28()
-{
-}
+static void grLast_8021AC28() {}
 
-static void grLast_8021AC2C()
-{
-}
+static void grLast_8021AC2C() {}
 
 static void grLast_8021AC30(Ground_GObj* gobj)
 {
@@ -416,7 +406,6 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     const float grLast_804DBB98 = -(M_PI / 180) * 15;
     const float grLast_804DBB9C = +(M_PI / 180) * 10;
     const float grLast_804DBBA0 = -(M_PI / 180) * 10;
-
 
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -482,9 +471,7 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     }
 }
 
-static void grLast_8021B23C(Ground_GObj* gobj)
-{
-}
+static void grLast_8021B23C(Ground_GObj* gobj) {}
 
 static void grLast_8021B240(Ground_GObj* gobj)
 {
@@ -498,13 +485,9 @@ static bool grLast_8021B284(Ground_GObj* gobj)
     return false;
 }
 
-static void grLast_8021B28C(Ground_GObj* gobj)
-{
-}
+static void grLast_8021B28C(Ground_GObj* gobj) {}
 
-static void grLast_8021B290(Ground_GObj* gobj)
-{
-}
+static void grLast_8021B290(Ground_GObj* gobj) {}
 
 static void grLast_8021B294(Ground_GObj* gobj)
 {
@@ -518,21 +501,13 @@ static bool grLast_8021B2D8(Ground_GObj* gobj)
     return false;
 }
 
-static void grLast_8021B2E0(Ground_GObj* gobj)
-{
-}
+static void grLast_8021B2E0(Ground_GObj* gobj) {}
 
-static void grLast_8021B2E4(Ground_GObj* gobj)
-{
-}
+static void grLast_8021B2E4(Ground_GObj* gobj) {}
 
 static s16 grNLa_803E8010[][4] = {
-    { 4, 1, 2, 0 },
-    { 5, 1, 2, 4 },
-    { 6, 1, 2, 6 },
-    { 7, 1, 2, 8 },
-    { 8, 1, 2, 10 },
-    { 9, 0, -1, 0 },
+    { 4, 1, 2, 0 }, { 5, 1, 2, 4 },  { 6, 1, 2, 6 },
+    { 7, 1, 2, 8 }, { 8, 1, 2, 10 }, { 9, 0, -1, 0 },
 };
 
 static void grLast_8021B2E8(Ground_GObj* gobj)
@@ -545,7 +520,8 @@ static void grLast_8021B2E8(Ground_GObj* gobj)
 
     gp = GET_GROUND(gobj);
     if (Stage_80225194() == 0xB0 || // Boss fight vs Master Hand
-        Stage_80225194() == 0xFB) { // Event match #50
+        Stage_80225194() == 0xFB)
+    { // Event match #50
         temp_f1 = gm_8016ECE8();
         switch (gp->u.map.xC4_b2_25) {
         case 1:
@@ -586,39 +562,40 @@ static void grLast_8021B2E8(Ground_GObj* gobj)
     }
     gp->u.map.xC8 += 1.0F;
     switch (gp->u.map.xC4_b2_25) {
-        case 9:
-            temp_gp = GET_GROUND(gp->u.map.lv_gobj[3]);
-            temp_gp->u.last.xDC += 1.0F / 180;
-            if (temp_gp->u.last.xDC > 1) {
-                temp_gp->u.last.xDC = 1;
-            }
-            break;
-        case 10:
-            temp_gp = GET_GROUND(gp->u.map.lv_gobj[3]);
-            temp_gp->u.last.xDC -= 1.0F / 58;
-            if (temp_gp->u.last.xDC < 0) {
-                temp_gp->u.last.xDC = 0;
-            }
-            Camera_80030E44(1, 0);
-            break;
-        case 11:
-            Camera_80030E44(1, 0);
-            break;
-        case 15:
-            if (gp->u.map.xC4_b27) {
-                int tmp;
-                Ground_801C2090(&sp2C);
-                do {
-                    sp30.r = HSD_Randi(2) * 0x1E;
-                    sp30.g = HSD_Randi(2) * 0x1E;
-                    sp30.b = HSD_Randi(2) * 0x1E;
-                } while ((sp30.r == 0x1E && sp30.g == 0x1E && sp30.b == 0x1E) ||
-                         (sp30.r == sp2C.r && sp30.g == sp2C.g && sp30.g == sp2C.g));
-                tmp = HSD_Randi(0x3C);
-                tmp += 0x3C;
-                grLast_8021C40C(gobj, sp30, tmp);
-            }
-            break;
+    case 9:
+        temp_gp = GET_GROUND(gp->u.map.lv_gobj[3]);
+        temp_gp->u.last.xDC += 1.0F / 180;
+        if (temp_gp->u.last.xDC > 1) {
+            temp_gp->u.last.xDC = 1;
+        }
+        break;
+    case 10:
+        temp_gp = GET_GROUND(gp->u.map.lv_gobj[3]);
+        temp_gp->u.last.xDC -= 1.0F / 58;
+        if (temp_gp->u.last.xDC < 0) {
+            temp_gp->u.last.xDC = 0;
+        }
+        Camera_80030E44(1, 0);
+        break;
+    case 11:
+        Camera_80030E44(1, 0);
+        break;
+    case 15:
+        if (gp->u.map.xC4_b27) {
+            int tmp;
+            Ground_801C2090(&sp2C);
+            do {
+                sp30.r = HSD_Randi(2) * 0x1E;
+                sp30.g = HSD_Randi(2) * 0x1E;
+                sp30.b = HSD_Randi(2) * 0x1E;
+            } while (
+                (sp30.r == 0x1E && sp30.g == 0x1E && sp30.b == 0x1E) ||
+                (sp30.r == sp2C.r && sp30.g == sp2C.g && sp30.g == sp2C.g));
+            tmp = HSD_Randi(0x3C);
+            tmp += 0x3C;
+            grLast_8021C40C(gobj, sp30, tmp);
+        }
+        break;
     }
     grLast_8021C500(gobj);
 }
@@ -766,7 +743,9 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
                 HSD_ASSERT(0x44B, gp->u.map.lv_gobj[i]);
                 HSD_GObjGXLink_803909D8(gp->u.map.lv_gobj[i], gobj_);
                 if (grNLa_803E8010[i][2] != -1) {
-                    grAnime_801C7FF8(gp->u.map.lv_gobj[i], grNLa_803E8010[i][2], 7, grNLa_803E8010[i][3], 0.0F, 1.0F);
+                    grAnime_801C7FF8(gp->u.map.lv_gobj[i],
+                                     grNLa_803E8010[i][2], 7,
+                                     grNLa_803E8010[i][3], 0.0F, 1.0F);
                 }
                 do_anime(gp->u.map.lv_gobj[i], i, 0);
             }
@@ -887,12 +866,12 @@ static void grLast_8021B920(Ground_GObj* gobj_, int arg1)
         break;
     case 17:
         for (i = 0; i < 5; i++) {
-
             gp->u.map.lv_gobj[i] = grLast_8021A7F4(grNLa_803E8010[i][0]);
             HSD_ASSERT(0x4F0, gp->u.map.lv_gobj[i]);
             HSD_GObjGXLink_803909D8(gp->u.map.lv_gobj[i], gobj);
             if (grNLa_803E8010[i][2] != -1) {
-                grAnime_801C7FF8(gp->u.map.lv_gobj[i], grNLa_803E8010[i][2], 7, grNLa_803E8010[i][3], 0.0F, 1.0F);
+                grAnime_801C7FF8(gp->u.map.lv_gobj[i], grNLa_803E8010[i][2], 7,
+                                 grNLa_803E8010[i][3], 0.0F, 1.0F);
             }
             do_anime(gp->u.map.lv_gobj[i], i, 0);
             grMaterial_801C9604(gp->u.map.lv_gobj[i], grNLa_804D6AD0[3], 0);
@@ -932,7 +911,8 @@ static void grLast_8021C500(Ground_GObj* gobj)
         if (gp->u.map.x104 > 0.0F) {
             gp->u.map.xF4 += (gp->u.map.xE4 - gp->u.map.xF4) / gp->u.map.x104;
             gp->u.map.xF8 += (gp->u.map.xE8 - gp->u.map.xF8) / gp->u.map.x104;
-            gp->u.map.xFC += ((gp->u.map.xEC - gp->u.map.xFC) / gp->u.map.x104);
+            gp->u.map.xFC +=
+                ((gp->u.map.xEC - gp->u.map.xFC) / gp->u.map.x104);
             sp10.r = gp->u.map.xF4;
             sp10.g = gp->u.map.xF8;
             sp10.b = gp->u.map.xFC;
@@ -979,7 +959,6 @@ static void grLast_8021C6AC(void)
     Ground_801C05BC(&sp8);
     Ground_801C0574(&spC);
 }
-
 
 static DynamicsDesc* grLast_8021C740(int arg0)
 {

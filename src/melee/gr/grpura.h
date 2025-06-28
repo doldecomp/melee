@@ -3,6 +3,11 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+#include "lb/forward.h"
+
+#include "dolphin/mtx.h"
+
 /* 211CFC */ UNK_RET grPura_80211CFC(int);
 /* 211D00 */ UNK_RET grPura_80211D00(UNK_PARAMS);
 /* 211DD8 */ UNK_RET grPura_80211DD8(UNK_PARAMS);
@@ -19,7 +24,7 @@
 /* 211F64 */ UNK_RET grPura_80211F64(HSD_GObj*);
 /* 211F68 */ UNK_RET grPura_80211F68(HSD_GObj*);
 /* 211FD0 */ bool grPura_80211FD0(HSD_GObj*);
-/* 211FD8 */ UNK_RET grPura_80211FD8(HSD_GObj*);
+/* 211FD8 */ void grPura_80211FD8(HSD_GObj*);
 /* 212020 */ UNK_RET grPura_80212020(HSD_GObj*);
 /* 212024 */ UNK_RET grPura_80212024(HSD_GObj*);
 /* 2120D8 */ bool grPura_802120D8(HSD_GObj*);
@@ -33,7 +38,7 @@
 /* 212CD4 */ UNK_RET grPura_80212CD4(HSD_GObj*);
 /* 212EF4 */ UNK_RET grPura_80212EF4(HSD_GObj*);
 /* 212FC0 */ UNK_RET grPura_80212FC0(HSD_GObj*);
-/* 213030 */ UNK_RET grPura_80213030(HSD_GObj*);
+/* 213030 */ void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2);
 /* 2130C0 */ DynamicsDesc* grPura_802130C0(int);
 /* 2130C8 */ int grPura_802130C8(Vec3* a, int, HSD_JObj*);
 /* 2130D0 */ UNK_RET fn_802130D0(HSD_GObj*, int);
