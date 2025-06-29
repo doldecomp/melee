@@ -122,7 +122,19 @@ void ftCo_800C89A0(Fighter_GObj* gobj)
     ft_800C0098(fp);
 }
 
-/// #ftCo_800C8A64
+void ftCo_800C8A64(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    fp->x2030 = 0;
+    if (!fp->x2226_b3) {
+        ftCo_800C88A0(fp);
+        ft_800C0098(fp);
+        ft_800C8170(fp);
+        lbRefract_80022BD0();
+        fp->x221F_b2 = false;
+    }
+}
 
 /// #ftCo_800C8AF0
 
