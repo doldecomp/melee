@@ -194,7 +194,10 @@ void ftCo_DownSpot_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftCo_DownSpot_Coll
+void ftCo_DownSpot_Coll(Fighter_GObj* gobj)
+{
+    ft_80083F88(gobj);
+}
 
 /// #ftCo_800C8C84
 
