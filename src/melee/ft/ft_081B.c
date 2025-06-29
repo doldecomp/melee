@@ -8,6 +8,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_0819.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
@@ -673,7 +674,13 @@ void ft_80083B68(Fighter_GObj* gobj)
 
 /// #ft_80083E64
 
-/// #ft_80083F88
+void ft_80083F88(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftCo_800CC730(gobj);
+    }
+}
 
 /// #ft_8008403C
 
