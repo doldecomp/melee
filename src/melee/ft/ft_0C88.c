@@ -54,6 +54,7 @@
 #include "gm/gm_1601.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbrefract.h"
+#include "pl/player.h"
 
 #include <baselib/gobj.h>
 
@@ -203,7 +204,19 @@ void ftCo_DownSpot_Coll(Fighter_GObj* gobj)
     ft_80083F88(gobj);
 }
 
-/// #ftCo_800C8C84
+bool ftCo_800C8C84(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!fp->x2224_b2 && fp->x2225_b7 && fp->dmg.x18F0 == 0 &&
+        Player_GetRemainingHPByIndex(fp->player_id, fp->x221F_b4) == 0)
+    {
+        fn_800C8E74(gobj);
+        return true;
+    }
+
+    return false;
+}
 
 /// #ftCo_800C8D00
 

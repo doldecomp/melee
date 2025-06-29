@@ -1266,12 +1266,12 @@ void Player_SetFlagsAEBit0(s32 slot, u8 bit0)
     player->flagsAE.b0 = bit0;
 }
 
-u32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
+s32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
 {
     StaticPlayer* player;
     u32 stamina;
     s32 result;
-    u32 result2;
+    s32 result2;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     stamina = player->staminas.byName.stamina;
