@@ -136,7 +136,12 @@ void ftCo_800C8A64(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800C8AF0
+void ftCo_800C8AF0(Fighter* fp)
+{
+    if (fp->x2226_b5) {
+        lbRefract_800225D4();
+    }
+}
 
 void fn_800C8B1C(Fighter_GObj* gobj)
 {
