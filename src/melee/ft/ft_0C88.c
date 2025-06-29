@@ -212,7 +212,10 @@ void ftCo_Turn_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftCo_Turn_Coll
+void ftCo_Turn_Coll(Fighter_GObj* gobj)
+{
+    ft_80083F88(gobj);
+}
 
 bool fn_800C9C2C(Fighter_GObj* gobj)
 {
