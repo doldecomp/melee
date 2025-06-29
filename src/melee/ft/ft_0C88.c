@@ -207,7 +207,10 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_Turn_Phys
+void ftCo_Turn_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
 /// #ftCo_Turn_Coll
 
