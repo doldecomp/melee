@@ -16,6 +16,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftmetal.h"
@@ -92,7 +93,13 @@ void fn_800C8B1C(Fighter_GObj* gobj)
     GET_FIGHTER(gobj)->smash_attrs.x2134_vibrateFrame = 0;
 }
 
-/// #ftCo_800C8B2C
+bool ftCo_800C8B2C(Fighter* gobj, int arg1, bool arg2)
+{
+    if (!gobj->x2226_b6) {
+        return ftCo_800BFFD0(gobj, arg1, arg2);
+    }
+    return false;
+}
 
 void ftCo_800C8B60(Fighter* fp, int arg1, s8 arg2)
 {
