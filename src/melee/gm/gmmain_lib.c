@@ -5,6 +5,70 @@
 #include "lb/lbtime.h"
 
 #include <dolphin/os/OSReset.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/video.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+
+GameRules gmMainLib_803D4A48 = {
+    0,
+    0x34,
+    0,  // mode
+    2,  // time limit
+    3,  // stock count
+    0,  // handicap
+    10, // damage ratio
+    0,
+    0,     // stock time limit
+    false, // friendly fire
+    true,  // pause
+    0,     // score display
+    0,
+    {
+        0,
+        8,
+        8,
+    },
+    0,
+    {
+        0,
+        8,
+        0,
+    },
+    /* unk_14 */ -1,
+};
+
+GXRenderModeObj gmMainLib_803D4A80 = {
+    VI_TVMODE_NTSC_PROG,
+    0x280,
+    0x1E0,
+    0x1E0,
+    0x28,
+    0,
+    0x280,
+    0x1E0,
+    VI_XFBMODE_SF,
+    0,
+    0,
+    {
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+    },
+    { 8, 8, 0xA, 0xC, 0xA, 8, 8 },
+};
 
 GameRules* gmMainLib_8015CC34(void)
 {
@@ -223,11 +287,6 @@ s32 gmMainLib_8015CF94(void)
     if (gmMainLib_804D3EE0->thing.x1B3C) {
         return 1;
     }
-    return 0;
-}
-
-s32 func_8015CFAC(void)
-{
     return 0;
 }
 
@@ -712,7 +771,21 @@ u8 gmMainLib_8015ECB0(void)
     return gmMainLib_804D3EE0->x1850.unk_x1;
 }
 
-/// #gmMainLib_8015ECBC
+void gmMainLib_8015ECBC(void)
+{
+    u8 _[4];
+
+    GameRules* rules = &gmMainLib_804D3EE0->x1850;
+    if (gm_80164600() && gm_80164ABC()) {
+        if (HSD_Randi(4) != 0) {
+            rules->unk_x1 = 0x34;
+        } else {
+            rules->unk_x1 = 0x36;
+        }
+    } else {
+        rules->unk_x1 = 0x34;
+    }
+}
 
 u8 gmMainLib_8015ED30(void)
 {
@@ -849,11 +922,23 @@ void gmMainLib_8015EEB4(void)
 
 /// #gmMainLib_8015F260
 
-/// #gmMainLib_8015F464
+void gmMainLib_8015F464(void)
+{
+    memzero(&gmMainLib_804D3EE0->thing.unk_8,
+            sizeof(gmMainLib_804D3EE0->thing.unk_8));
+}
 
-/// #gmMainLib_8015F490
+void gmMainLib_8015F490(void)
+{
+    memzero(&gmMainLib_804D3EE0->thing.unk_28,
+            sizeof(gmMainLib_804D3EE0->thing.unk_28));
+}
 
-/// #gmMainLib_8015F4BC
+void gmMainLib_8015F4BC(void)
+{
+    memzero(&gmMainLib_804D3EE0->thing.unk_30,
+            sizeof(gmMainLib_804D3EE0->thing.unk_30));
+}
 
 u8 gmMainLib_8015F4E8(void)
 {
@@ -867,6 +952,30 @@ void gmMainLib_8015F4F4(u8 arg0)
 
 /// #gmMainLib_8015F500
 
+void gmMainLib_8015F500(void)
+{
+    GXRenderModeObj* var_r0;
+    GXRenderModeObj* var_r0_2;
+    GXRenderModeObj* var_r3;
+
+    if (gmMainLib_8046B0F0.x8 != 0) {
+        if (gmMainLib_804D3EE0->thing.x1CB0.x10[5] != 0) {
+            var_r0 = &gmMainLib_803D4A80;
+        } else {
+            var_r0 = &GXNtsc480Prog;
+        }
+        var_r3 = var_r0;
+    } else {
+        if (gmMainLib_804D3EE0->thing.x1CB0.x10[5] != 0) {
+            var_r0_2 = &GXNtsc480IntDf;
+        } else {
+            var_r0_2 = &GXNtsc480Int;
+        }
+        var_r3 = var_r0_2;
+    }
+    HSD_VISetConfigure(var_r3);
+}
+
 /// #gmMainLib_8015F588
 
 /// #gmMainLib_8015F600
@@ -875,23 +984,46 @@ void gmMainLib_8015F4F4(u8 arg0)
 
 /// #gmMainLib_8015FB68
 
-/// #gmMainLib_8015FBA4
+#pragma push
+#pragma dont_inline on
+void gmMainLib_8015FBA4(void)
+{
+    int i;
+
+    memzero(gmMainLib_804D3EE0, 0x10A30);
+    if (DVDConvertPathToEntrynum("/usa.ini") != -1) {
+        lbLang_SetLanguageSetting(1);
+        lbLang_SetSavedLanguage(1);
+    } else {
+        lbLang_SetLanguageSetting(0);
+        lbLang_SetSavedLanguage(0);
+    }
+
+    gmMainLib_8045A6C0[0].x1850 = gmMainLib_803D4A48;
+    for (i = 1; i < 9; i++) {
+        gmMainLib_8015F600(i, 1);
+    }
+    lbAudioAx_80028690();
+    gmMainLib_8015F500();
+}
+#pragma pop
 
 /// #gmMainLib_8015FC74
 
 void gmMainLib_8015FCC0(void)
 {
+    struct gmMainLib_8046B0F0_t* tmp = &gmMainLib_8046B0F0;
     bool val;
     if (OSGetResetCode() == 0x80000000) {
         val = true;
     } else {
         val = false;
     }
-    gmMainLib_8046B0F0.x0 = val;
-    gmMainLib_8046B0F0.x4 = 0;
-    gmMainLib_8046B0F0.x8 = 0;
-    gmMainLib_8046B0F0.xC = 0;
-    gmMainLib_8046B0F0.x10 = lbTime_8000AFBC();
+    tmp->x0 = val;
+    tmp->x4 = 0;
+    tmp->x8 = 0;
+    tmp->xC = 0;
+    tmp->x10 = lbTime_8000AFBC();
 }
 
 struct gmm_retval_ED98* gmMainLib_8015ED98(void)
