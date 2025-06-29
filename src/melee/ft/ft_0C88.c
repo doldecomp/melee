@@ -48,12 +48,16 @@
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCrazyHand/ftCh_Init.h"
+#include "ftMasterHand/ftMh_Damage_0.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "ftPeach/ftPe_Float.h"
+#include "gm/gm_1601.h"
+#include "lb/lbbgflash.h"
 #include "lb/lbrefract.h"
 
 #include <baselib/gobj.h>
 
+/* 0C8E74 */ static void fn_800C8E74(Fighter_GObj* gobj);
 /* 0C9C2C */ static bool fn_800C9C2C(Fighter_GObj* gobj);
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
@@ -205,7 +209,37 @@ void ftCo_DownSpot_Coll(Fighter_GObj* gobj)
 
 /// #fn_800C8E40
 
-/// #fn_800C8E74
+static inline void fn_800C8E74_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2224_b2 = true;
+    Fighter_ResetInputData_80068854(gobj);
+    ftCo_800BFFD0(fp, 0x7A, 0);
+    ft_80088148(fp, fp->ft_data->x4C_sfx->xC, SFX_VOLUME_MAX, SFX_PAN_MID);
+    fp->x2225_b6 = true;
+    lbBgFlash_80021C48(0xEU, 0U);
+    gm_80167470(fp->player_id, fp->x221F_b4);
+}
+
+void fn_800C8E74(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->kind == FTKIND_MASTERH || fp->kind == FTKIND_CREZYH) {
+        if (fp->kind == FTKIND_MASTERH) {
+            ftMh_MS_343_80151484(gobj);
+        } else {
+            ftCh_GrabUnk1_8015ADD0(gobj);
+        }
+        gm_80167470(fp->player_id, fp->x221F_b4);
+        return;
+    }
+
+    fp->x2224_b3 = true;
+    if (fp->dmg.kb_applied) {
+        fn_800C8E74_inline(gobj);
+    }
+}
 
 /// #ftCo_800C8F6C
 
