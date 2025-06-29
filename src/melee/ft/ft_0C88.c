@@ -189,7 +189,10 @@ void ftCo_DownSpot_Anim(Fighter_GObj* gobj)
 
 void ftCo_DownSpot_IASA(Fighter_GObj* gobj) {}
 
-/// #ftCo_DownSpot_Phys
+void ftCo_DownSpot_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
 /// #ftCo_DownSpot_Coll
 
