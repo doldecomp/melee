@@ -7,6 +7,8 @@
 #include <baselib/forward.h>
 
 /* 0158D0 */ void lbHeap_800158D0(int, int);
+/* 0158E8 */ int lbHeap_800158E8(int);
+/* 015900 */ void lbHeap_80015900(void);
 /* 015BB8 */ bool lbHeap_80015BB8(int);
 /* 015BD0 */ HSD_Archive* lbHeap_80015BD0(int arg0, int arg1);
 /* 015CA8 */ void lbHeap_80015CA8(int, void*);
