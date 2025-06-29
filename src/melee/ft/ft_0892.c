@@ -4,6 +4,7 @@
 #include "ftcommon.h"
 #include "ftdata.h"
 #include "ftwaitanim.h"
+#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
@@ -64,7 +65,29 @@ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj)
 
 /// #ft_8008A1FC
 
-/// #ft_8008A244
+static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
+{
+    Fighter* temp_r4 = GET_FIGHTER(gobj);
+    f32 var_f2;
+
+    var_f2 = temp_r4->input.lstick.x;
+    if ((var_f2 * temp_r4->facing_dir < 0.0F) ||
+        (fabs_inline(var_f2) < p_ftCommonData->x24))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool ft_8008A244(Fighter_GObj* gobj)
+{
+    if (ft_8008A244_inline(gobj)) {
+        ft_8008A2BC(gobj);
+        return true;
+    }
+
+    return false;
+}
 
 // Seems to be called to end many actions if no frames are remaining
 void ft_8008A2BC(HSD_GObj* gobj)

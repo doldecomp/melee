@@ -35,7 +35,7 @@ void ftPe_UpdateFloatDir(HSD_GObj* gobj)
 void ftPe_FloatFall_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CCDA8(gobj);
+        ftCo_FallAerial_Enter(gobj);
     }
 }
 
@@ -43,7 +43,7 @@ void ftPe_FloatFall_IASA(HSD_GObj* gobj) {}
 
 void ftPe_FloatFall_Phys(HSD_GObj* gobj)
 {
-    ftCo_800CC6C8(gobj);
+    ftCo_JumpAerial_Phys_Cb(gobj);
 }
 
 void ftPe_FloatFall_Coll(HSD_GObj* gobj)

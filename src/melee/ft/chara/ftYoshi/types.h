@@ -12,7 +12,7 @@ struct ftYoshi_FighterVars {
 };
 
 typedef struct _ftYoshiAttributes {
-    float x0;
+    s32 x0;
     float x4;
     float x8;
     float xC;
