@@ -1,13 +1,37 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/itCommonItems.h"
+#include "it/types.h"
 
-/// #it_802978DC
+#include <dolphin/mtx.h>
+#include <melee/gr/ground.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00B0.h>
 
-/// #it_80297904
+void it_802978DC(Item_GObj* item_gobj)
+{
+    Item* it = GET_ITEM(item_gobj);
+    if (!((it->xDD4_itemVar.mball.x0 >> 6U) & 1)) {
+        Item_804A0C64.x1C -= 1;
+    }
+}
 
-/// #it_80297944
+// #it_80297904
+
+void it_80297944(Item_GObj* arg0)
+{
+    Item* item = GET_ITEM(arg0);
+    HSD_JObj* jobj = GET_JOBJ(arg0);
+    it_8026B390(arg0);
+    item->x40_vel.z = 0.0f;
+    item->x40_vel.y = 0.0f;
+    item->x40_vel.x = 0.0f;
+    Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
+}
 
 bool it_8029799C(void)
 {
@@ -81,9 +105,19 @@ void it_80297E5C(void) {}
 
 /// #it_802980A0
 
-/// #it_802980D4
+s32 it_802980D4(Item_GObj* arg0)
+{
+    it_8026B3A8(arg0);
+    it_802725D4(arg0);
+    itColl_BounceOffVictim(arg0);
+    return 0;
+}
 
-/// #it_80298114
+s32 it_80298114(Item_GObj* arg0)
+{
+    it_8026B3A8(arg0);
+    return itColl_BounceOffShield(arg0);
+}
 
 void it_80298148(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
