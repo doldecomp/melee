@@ -167,7 +167,7 @@
 /* 0D7268 */ UNK_RET ftCo_800D7268(UNK_PARAMS);
 /* 0D72A0 */ UNK_RET ftCo_800D72A0(UNK_PARAMS);
 /* 0D730C */ bool ftCo_800D730C(ftCo_GObj* gobj, bool);
-/* 0D74A4 */ UNK_RET ftCo_800D74A4(UNK_PARAMS);
+/* 0D74A4 */ UNK_RET ftCo_800D74A4(ftCo_GObj* gobj);
 /* 0D7590 */ void ftCo_JumpAerialF1_Anim(ftCo_GObj* gobj);
 /* 0D7614 */ void ftCo_JumpAerialF1_IASA(ftCo_GObj* gobj);
 /* 0D7634 */ void ftCo_JumpAerialF1_Phys(ftCo_GObj* gobj);

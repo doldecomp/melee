@@ -94,7 +94,7 @@ union ftCommon_MotionVars {
     } jump;
     struct {
         /* fp+2340 */ int x0;
-        /* fp+2344 */ float x4;
+        /* fp+2344 */ float init_h_vel;
     } jumpaerial;
     struct {
         /* fp+2340 */ int x0;
