@@ -110,7 +110,17 @@ void ftCo_800C88D4(Fighter_GObj* gobj, int arg1, bool arg2)
     }
 }
 
-/// #ftCo_800C89A0
+void ftCo_800C89A0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCo_800C88A0(fp);
+    fp->x2226_b4 = fp->x2226_b3;
+    if (fp->x2226_b4) {
+        ftCo_800C88D4_inline(gobj);
+    }
+    ft_800C0098(fp);
+}
 
 /// #ftCo_800C8A64
 
