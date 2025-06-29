@@ -15,7 +15,7 @@
 void it_802978DC(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
-    if (!((it->xDD4_itemVar.chicorita._0[0] >> 6U) & 1)) {
+    if (!((it->xDD4_itemVar.mball.x0 >> 6U) & 1)) {
         Item_804A0C64.x1C -= 1;
     }
 }

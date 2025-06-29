@@ -308,6 +308,10 @@ typedef struct {
 } itMato_ItemVars;
 
 typedef struct {
+    u8 x0;
+} itMBall_ItemVars;
+
+typedef struct {
     int x0;
     int x4;
 } itTomatoVars;
