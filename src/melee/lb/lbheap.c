@@ -10,7 +10,7 @@ void lbHeap_800158D0(int arg0, int arg1)
     lbHeap_80431FA0.unk_10[arg0].unk_24 = arg1;
 }
 
-s32 lbHeap_800158E8(s32 arg0)
+int lbHeap_800158E8(int arg0)
 {
     return lbHeap_80431FA0.unk_10[arg0].unk_24;
 }

@@ -262,12 +262,12 @@ struct PreloadCacheSceneEntry {
 
 struct PreloadEntry {
     s8 state;
-    u8 type;
+    s8 type;
     s8 heap;
-    u8 load_state;
+    s8 load_state;
     u8 unknown004;
     u8 field5_0x5;
-    u16 entry_num;
+    s16 entry_num;
     s16 load_score;
     u8 field8_0xa;
     u8 field9_0xb;
@@ -277,6 +277,9 @@ struct PreloadEntry {
     s32 effect_index;
 };
 
+// TODO: this struct might need to be smaller,
+// based on the number of iters in the struct-copy code
+// emitted by e.g. lbDvd_80018CF4
 struct PreloadCacheScene {
     u32 is_heap_persistent[2];
     u8 major_id;
@@ -289,7 +292,7 @@ struct PreloadCacheScene {
 };
 
 struct PreloadCache {
-    u32 persistent_heaps;
+    s32 persistent_heaps;
     PreloadCacheScene scene;
     PreloadCacheScene new_scene;
     PreloadEntry entries[80];
