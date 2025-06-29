@@ -14,6 +14,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ft_0C31.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcolanim.h"
@@ -47,6 +48,7 @@
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "ftPeach/ftPe_Float.h"
+#include "lb/lbrefract.h"
 
 #include <baselib/gobj.h>
 
@@ -80,7 +82,33 @@ void ftCo_800C88A0(Fighter* fp)
     fp->x2226_b7 = false;
 }
 
-/// #ftCo_800C88D4
+static inline void ftCo_800C88D4_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2226_b5 = true;
+    fp->x2226_b7 = false;
+    fn_800C8B1C(gobj);
+    ft_800C80A4(fp);
+    lbRefract_80022BB8();
+    fp->x221F_b2 = true;
+}
+
+void ftCo_800C88D4(Fighter_GObj* gobj, int arg1, bool arg2)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    fp->x2030 = arg1;
+    if (!fp->x2226_b4 || fp->x2226_b7) {
+        fp->x2226_b4 = true;
+        ftCo_800C88D4_inline(gobj);
+
+        if (arg2) {
+            ftCo_800C8B2C(fp, 0x7C, 0);
+        } else {
+            ft_800C0098(fp);
+        }
+    }
+}
 
 /// #ftCo_800C89A0
 
