@@ -36,6 +36,7 @@
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
 #include "ftCommon/ftCo_DamageFall.h"
+#include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_EscapeAir.h"
 #include "ftCommon/ftCo_FallSpecial.h"
@@ -179,7 +180,12 @@ void ftCo_DownSpot_Enter(Fighter_GObj* gobj)
     fp->mv._[4] = 0;
 }
 
-/// #ftCo_DownSpot_Anim
+void ftCo_DownSpot_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_80097E8C(gobj);
+    }
+}
 
 void ftCo_DownSpot_IASA(Fighter_GObj* gobj) {}
 
