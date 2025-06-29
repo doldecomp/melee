@@ -80,7 +80,7 @@ struct ftCommonData {
     /* +64 */ UNK_T x64;
     /* +68 */ float x68;
     /* +6C */ float x6C;
-    /* +70 */ float x70_someLStickYMax;
+    /* +70 */ float tap_jump_threshold;
     /* +6C */ int x74;
     /* +78 */ float x78;
     /* +7C */ u8 x7C[0x80 - 0x7C];

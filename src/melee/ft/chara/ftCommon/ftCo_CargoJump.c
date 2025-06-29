@@ -18,7 +18,7 @@
 
 bool ftCo_8009BB1C(ftCo_GObj* gobj)
 {
-    bool b = ftCo_800CAE80(gobj);
+    ftCo_JumpInput b = ftCo_Jump_GetInput(gobj);
     if (b) {
         ftCo_8009B9C8(gobj, b);
         return true;

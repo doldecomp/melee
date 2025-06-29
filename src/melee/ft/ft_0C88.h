@@ -70,7 +70,7 @@
 /* 0CADB0 */ void ftCo_RunBrake_IASA(ftCo_GObj* gobj);
 /* 0CAE18 */ void ftCo_RunBrake_Phys(ftCo_GObj* gobj);
 /* 0CAE60 */ void ftCo_RunBrake_Coll(ftCo_GObj* gobj);
-/* 0CAE80 */ enum_t ftCo_800CAE80(ftCo_GObj* gobj);
+/* 0CAE80 */ ftCo_JumpInput ftCo_Jump_GetInput(ftCo_GObj* gobj);
 /* 0CAED0 */ bool ftCo_Jump_CheckInput(ftCo_GObj* gobj);
 /* 0CB024 */ bool ftCo_800CB024(ftCo_GObj* gobj);
 /* 0CB110 */ void ftCo_800CB110(ftCo_GObj*, s32, float);

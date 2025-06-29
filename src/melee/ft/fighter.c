@@ -1715,7 +1715,7 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftCo_800CAE80(gobj)) {
+    if (ftCo_Jump_GetInput(gobj)) {
         fp->x68A = fp->x685;
         fp->x685 = 0;
     } else if (fp->x685 < 0xFF) {

@@ -22,7 +22,7 @@
 bool ftCo_8009B170(ftCo_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    if (ftCo_800CAE80(gobj)) {
+    if (ftCo_Jump_GetInput(gobj)) {
         ftCo_8009B1B8(gobj);
         return true;
     }

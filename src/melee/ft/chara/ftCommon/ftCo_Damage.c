@@ -1008,7 +1008,7 @@ bool doIasa(ftCo_GObj* gobj)
     fp->x2227_b4 = true;
     return true;
 ret_inline:
-    if (ftCo_800CAE80(gobj)) {
+    if (ftCo_Jump_GetInput(gobj)) {
         fp->mv.co.damage.x14 = fp->mv.co.damage.x0;
         return true;
     }

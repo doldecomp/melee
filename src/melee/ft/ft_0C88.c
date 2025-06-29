@@ -21,8 +21,14 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AirCatch.h"
+#include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_AttackDash.h"
+#include "ftCommon/ftCo_AttackHi3.h"
+#include "ftCommon/ftCo_AttackHi4.h"
+#include "ftCommon/ftCo_AttackLw3.h"
+#include "ftCommon/ftCo_AttackLw4.h"
+#include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Escape.h"
@@ -48,7 +54,8 @@
 /* 0CABC4 */ static bool ftCo_RunBrake_CheckInput(ftCo_GObj* gobj);
 /* 0CAC18 */ static void ftCo_RunBrake_Enter(ftCo_GObj* gobj);
 /* 0CAF78 */ static bool fn_800CAF78(ftCo_GObj* gobj);
-/* 0CB4E0 */ static void ftCo_KneeBend_Enter(ftCo_GObj* gobj, int arg1);
+/* 0CB4E0 */ static void ftCo_KneeBend_Enter(ftCo_GObj* gobj,
+                                             ftCo_JumpInput jump_input);
 /* 0CC3C4 */ static void ftYs_JumpAerial_Anim_Cb(ftCo_GObj* gobj);
 /* 0CC654 */ static void ftNs_JumpAerial_Phys_Cb(ftCo_GObj* gobj);
 
@@ -760,9 +767,37 @@ void ftCo_RunBrake_Coll(Fighter_GObj* gobj)
     ft_80084280(gobj);
 }
 
-/// #ftCo_800CAE80
+ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if ((fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
+        (fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74))
+    {
+        return JumpInput_Stick;
+    }
 
-/// #ftCo_Jump_CheckInput
+    if (fp->input.x668 & HSD_PAD_XY) {
+        return JumpInput_XY;
+    }
+
+    return JumpInput_None;
+}
+
+bool ftCo_Jump_CheckInput(Fighter_GObj* gobj)
+{
+    ftCo_JumpInput jump_input;
+    if (ftCo_800C5240(gobj) != 0) {
+        return ftCo_800C5A50(gobj);
+    }
+
+    jump_input = ftCo_Jump_GetInput(gobj);
+
+    if (jump_input) {
+        ftCo_KneeBend_Enter(gobj, jump_input);
+        return true;
+    }
+    return false;
+}
 
 bool fn_800CAF78(Fighter_GObj* gobj)
 {
@@ -818,10 +853,10 @@ void ftCo_Jump_IASA(Fighter_GObj* gobj)
 
 /// #ftCo_Jump_Coll
 
-void ftCo_KneeBend_Enter(Fighter_GObj* gobj, int arg1)
+void ftCo_KneeBend_Enter(Fighter_GObj* gobj, ftCo_JumpInput jump_input)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->mv.co.kneebend.x4 = arg1;
+    fp->mv.co.kneebend.jump_input = jump_input;
     fp->mv.co.kneebend.x0 = 0;
     Fighter_ChangeMotionState(gobj, ftCo_MS_KneeBend, 0U, 0.0F, 1.0F, 0.0F,
                               NULL);
@@ -852,7 +887,7 @@ void ft_800CB6EC(Fighter* fp, s32 arg1)
 bool ft_did_jump(Fighter* fp, bool arg1)
 {
     if (fp->x1968_jumpsUsed < fp->co_attrs.max_jumps &&
-        ((fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax &&
+        ((fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold &&
           fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74) ||
          fp->input.x668 & HSD_PAD_XY) &&
         !(arg1 && (fp->x68A < p_ftCommonData->x1C)))

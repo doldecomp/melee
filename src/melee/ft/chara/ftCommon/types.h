@@ -85,7 +85,7 @@ union ftCommon_MotionVars {
     } runbrake;
     struct {
         int x0;
-        int x4;
+        ftCo_JumpInput jump_input;
     } kneebend;
     struct {
         /* fp+2340 */ int x0;
