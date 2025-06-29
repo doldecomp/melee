@@ -18,6 +18,8 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/ftmetal.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AirCatch.h"
@@ -59,7 +61,14 @@
 /* 0CC3C4 */ static void ftYs_JumpAerial_Anim_Cb(ftCo_GObj* gobj);
 /* 0CC654 */ static void ftNs_JumpAerial_Phys_Cb(ftCo_GObj* gobj);
 
-/// #ftCo_800C884C
+void ftCo_800C884C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2040 = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    ftParts_80074148();
+    ft_800C85B8(gobj);
+    ftParts_80074170();
+}
 
 /// #ftCo_800C88A0
 
