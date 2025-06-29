@@ -154,7 +154,58 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #ftCo_Turn_Anim
 
-/// #ftCo_Turn_IASA
+void ftCo_Turn_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->mv.co.turn.x18 != 0) {
+        fp->input.x668 |= fp->mv.co.turn.x1C;
+    }
+    if (fp->mv.co.turn.x0 == 0) {
+        fp->facing_dir = -fp->facing_dir;
+    }
+
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+
+    if (fp->mv.co.turn.x0 == 0) {
+        fp->facing_dir = -fp->facing_dir;
+    }
+
+    RETURN_IF(ftCo_80091A4C(gobj));
+    RETURN_IF(ftCo_800DE9D8(gobj));
+    RETURN_IF(ftCo_Jump_CheckInput(gobj));
+
+    fn_800C9C2C(gobj);
+    if (fp->mv.co.turn.x18 && fp->mv.co.turn.x8) {
+        if ((fp->input.lstick.x * fp->mv.ca.specialhi.vel.x) >=
+            p_ftCommonData->x3C)
+        {
+            ftCo_Dash_Enter(gobj, 0);
+        }
+    }
+
+    if (fp->input.x668 & HSD_PAD_A) {
+        fp->mv.co.turn.x1C |= HSD_PAD_A;
+    }
+
+    if (fp->input.x668 & HSD_PAD_B) {
+        fp->mv.co.turn.x1C |= HSD_PAD_B;
+    }
+
+    if (fp->mv.co.turn.x18 != 0) {
+        fp->mv.co.turn.x18 = 0;
+    }
+}
 
 /// #ftCo_Turn_Phys
 
