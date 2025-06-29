@@ -111,7 +111,7 @@ void ft_8008A348(Fighter_GObj* fighter_gobj, float anim_blend)
 
     fighter = GET_FIGHTER((HSD_GObj*) fighter_gobj);
     if (fighter->x2224_b2 & 1) {
-        ftCo_800C8B74(fighter_gobj);
+        ftCo_DownSpot_Enter(fighter_gobj);
         return;
     }
     if (ftCo_800C5240(fighter_gobj) != false) {

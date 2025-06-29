@@ -29,7 +29,7 @@ void ftCo_Wait_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2224_b2) {
-        ftCo_800C8B74(gobj);
+        ftCo_DownSpot_Enter(gobj);
     } else {
         ftCo_8008A7A8(gobj, fp->ft_data->x24);
     }

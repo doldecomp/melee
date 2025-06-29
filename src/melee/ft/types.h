@@ -1933,6 +1933,7 @@ struct ftData_80085FD4_ret {
     /* +C */ UNK_T xC;
     /* +10:0 */ u8 x10_b0 : 1;
     /* +10:1 */ u8 x10_b1 : 1;
+    /* +14 */ u32 x14;
 };
 
 typedef struct ArticleDynamicBones {

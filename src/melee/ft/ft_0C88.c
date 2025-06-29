@@ -19,6 +19,7 @@
 #include "ft/ft_0D14.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
+#include "ft/ftdata.h"
 #include "ft/ftlib.h"
 #include "ft/ftmetal.h"
 #include "ft/ftparts.h"
@@ -162,7 +163,21 @@ void ftCo_800C8B60(Fighter* fp, int arg1, s8 arg2)
     fp->smash_attrs.x2134_vibrateFrame = arg2;
 }
 
-/// #ftCo_800C8B74
+void ftCo_DownSpot_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtMotionId msid;
+
+    if (ftData_80085FD4(fp, ftCo_MS_DownSpotU)->x14) {
+        msid = ftCo_MS_DownSpotU;
+    } else {
+        msid = ftCo_MS_DownSpotD;
+    }
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftCommon_8007E2F4(fp, 0x1FF);
+    fp->mv._[4] = 0;
+}
 
 /// #ftCo_DownSpot_Anim
 
