@@ -41,6 +41,7 @@
 
 #include <baselib/gobj.h>
 
+/* 0C9C2C */ static bool fn_800C9C2C(Fighter_GObj* gobj);
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
 /* 0CA644 */ static bool fn_800CA644(ftCo_GObj* gobj);
@@ -152,7 +153,17 @@ void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
 /// #ftCo_Turn_Coll
 
-/// #fn_800C9C2C
+bool fn_800C9C2C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->input.lstick.x * fp->mv.co.turn.x4 >= p_ftCommonData->x3C &&
+        fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
+    {
+        fp->mv.co.turn.x8 = fp->mv.co.turn.x4;
+        return true;
+    }
+    return false;
+}
 
 void fn_800C9C74(Fighter_GObj* gobj)
 {
