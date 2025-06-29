@@ -169,6 +169,7 @@ struct gmm_retval_EDBC {
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
     s32 xB0[4];
+    char pad_F0[0xB8];
 };
 
 struct gmm_x1868 {
@@ -178,7 +179,6 @@ struct gmm_x1868 {
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;
     /* 0x0028 */ struct gmm_retval_EDB0 unk_28;
     /* 0x0030 */ struct gmm_retval_EDBC unk_30;
-    /* 0x00F0 */ char pad_F0[0xB8];
     /* 0x01A8 */ u8 unk_1A8;      /* inferred */
     /* 0x01A9 */ char pad_1A9[7]; /* maybe part of unk_1A8[8]? */
     /* 0x01B0 */ s32 x1A18;

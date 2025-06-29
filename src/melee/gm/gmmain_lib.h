@@ -151,11 +151,12 @@
 /* 15F464 */ UNK_RET gmMainLib_8015F464(UNK_PARAMS);
 /* 15F490 */ UNK_RET gmMainLib_8015F490(UNK_PARAMS);
 /* 15F4BC */ UNK_RET gmMainLib_8015F4BC(UNK_PARAMS);
-/* 15F4E8 */ u8* gmMainLib_8015EDC8(void);
+/* 15EDC8 */ u8* gmMainLib_8015EDC8(void);
+/* 15F4E8 */ u8 gmMainLib_8015F4E8(void);
 /* 15F4F4 */ void gmMainLib_8015F4F4(u8 arg0);
 /* 15F500 */ UNK_RET gmMainLib_8015F500(UNK_PARAMS);
 /* 15F588 */ UNK_RET gmMainLib_8015F588(UNK_PARAMS);
-/* 15F600 */ UNK_RET gmMainLib_8015F600(UNK_PARAMS);
+/* 15F600 */ void gmMainLib_8015F600(int, int);
 /* 15FA34 */ UNK_RET gmMainLib_8015FA34(UNK_PARAMS);
 /* 15FB68 */ UNK_RET gmMainLib_8015FB68(UNK_PARAMS);
 /* 15FBA4 */ void gmMainLib_8015FBA4(void);
