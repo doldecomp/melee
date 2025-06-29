@@ -27,6 +27,7 @@
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_EscapeAir.h"
+#include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_HammerFall.h"
 #include "ftCommon/ftCo_HammerJump.h"
@@ -1106,7 +1107,10 @@ void ftCo_JumpAerial_Phys_Cb(Fighter_GObj* gobj)
     ft_800851D0(gobj);
 }
 
-/// #ftCo_JumpAerial_Coll
+void ftCo_JumpAerial_Coll(Fighter_GObj* gobj)
+{
+    ft_800835B0(gobj, ftCo_80096CC8, (HSD_GObjEvent) ft_80082B1C);
+}
 
 void ftCo_800CC730(Fighter_GObj* gobj)
 {
