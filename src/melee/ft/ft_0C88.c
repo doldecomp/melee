@@ -70,7 +70,14 @@ void ftCo_800C884C(Fighter_GObj* gobj)
     ftParts_80074170();
 }
 
-/// #ftCo_800C88A0
+void ftCo_800C88A0(Fighter* fp)
+{
+    fp->x2226_b4 = false;
+    fp->x2226_b5 = false;
+    fp->smash_attrs.x2134_vibrateFrame = 0;
+    fp->x2030 = 0;
+    fp->x2226_b7 = false;
+}
 
 /// #ftCo_800C88D4
 
