@@ -207,7 +207,7 @@ void* gmMainLib_8015CD8C(void)
     return &gmMainLib_804D3EE0->thing.x1A50;
 }
 
-void* gmMainLib_8015CD98(void)
+int* gmMainLib_8015CD98(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A54;
 }

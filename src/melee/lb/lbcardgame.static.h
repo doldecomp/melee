@@ -4,14 +4,23 @@
 #include <platform.h>
 #include <placeholder.h>
 #include <dolphin/os/OSAlarm.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <melee/sc/types.h>
 
 #include "lbcardgame.h" // IWYU pragma: export
 
 struct lb_80433318_t {
-    /* +0 */ UNK_T x0;
-    /* +4 */ UNK_T x4;
-    /* +8 */ int x8;
-    /* +C */ u8 _C[0x5C];
+    /* +0  */ int x0;
+    /* +4  */ int x4;
+    /* +8  */ int x8;
+    /* +C  */ bool xC;
+    /* +10 */ int x10;
+    /* +14 */ int x14;
+    /* +18 */ bool enable;
+    /* +30 */ int _1C[0x10];
+    int* x5C;
+    int x60;
+    SceneDesc* x64;
 };
 STATIC_ASSERT(sizeof(struct lb_80433318_t) == 0x68);
 
@@ -68,7 +77,8 @@ struct lb_80432A68_t {
     /* 0x708 */ s32 unk_708;
     /* 0x70C */ char pad_70C[0x50]; /* maybe part of unk_708[0x15]? */
     /* 0x75C */ s32 unk_75C;
-    /* 0x760 */ char pad_760[0x150]; /* maybe part of unk_75C[0x55]? */
+    /* 0x760 */ char pad_760[0x14C]; /* maybe part of unk_75C[0x55]? */
+    /* 0x8AC */ int x8AC;
 }; /* size = 0x8B0 */
 STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);
 

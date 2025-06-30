@@ -29,7 +29,7 @@
 /* 15CD74 */ void* gmMainLib_8015CD74(void);
 /* 15CD80 */ void* gmMainLib_8015CD80(void);
 /* 15CD8C */ void* gmMainLib_8015CD8C(void);
-/* 15CD98 */ void* gmMainLib_8015CD98(void);
+/* 15CD98 */ int* gmMainLib_8015CD98(void);
 /* 15CDA4 */ void* gmMainLib_8015CDA4(void);
 /* 15CDB0 */ void* gmMainLib_8015CDB0(void);
 /* 15CDBC */ void* gmMainLib_8015CDBC(void);
