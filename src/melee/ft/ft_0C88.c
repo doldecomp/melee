@@ -66,6 +66,7 @@
 /* 0C8E74 */ static void fn_800C8E74(Fighter_GObj* gobj);
 /* 0C9198 */ static void ftCo_Barrel_Take_Dmg_Cb(Fighter_GObj* gobj);
 /* 0C9264 */ static void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj);
+/* 0C9528 */ void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8);
 /* 0C9C2C */ static bool fn_800C9C2C(Fighter_GObj* gobj);
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
@@ -376,7 +377,15 @@ void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj)
 
 /// #ftCo_800C92E4
 
-/// #ftCo_Walk_CheckInput
+bool ftCo_Walk_CheckInput(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (ftWalkCommon_800DFC70(gobj)) {
+        ftCo_Walk_Enter(gobj, 0.0F);
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800C94B4
 
