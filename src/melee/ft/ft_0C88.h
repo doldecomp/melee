@@ -5,6 +5,7 @@
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
+#include "it/forward.h"
 
 /* 0C884C */ void ftCo_800C884C(ftCo_GObj* gobj);
 /* 0C88A0 */ void ftCo_800C88A0(Fighter*);
@@ -25,7 +26,7 @@
 /* 0C8F6C */ void ftCo_800C8F6C(void);
 /* 0C8FC4 */ void ftCo_800C8FC4(ftCo_GObj* gobj);
 /* 0C9034 */ void ftCo_800C9034(ftCo_GObj* gobj);
-/* 0C9078 */ UNK_RET ftCo_800C9078(UNK_PARAMS);
+/* 0C9078 */ void ftCo_Barrel_Enter(ftCo_GObj* gobj, Item_GObj*);
 /* 0C91C0 */ void ftCo_Barrel_Anim(ftCo_GObj* gobj);
 /* 0C9208 */ void ftCo_Barrel_IASA(ftCo_GObj* gobj);
 /* 0C925C */ void ftCo_Barrel_Phys(ftCo_GObj* gobj);
