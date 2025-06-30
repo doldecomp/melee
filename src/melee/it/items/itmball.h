@@ -41,7 +41,7 @@
 /* 298060 */ bool it_80298060(Item_GObj*);
 /* 2980A0 */ bool it_802980A0(Item_GObj*);
 /* 2980D4 */ s32 it_802980D4(Item_GObj* arg0);
-/* 298114 */ s32 it_80298114(Item_GObj* arg0);
+/* 298114 */ bool it_80298114(Item_GObj* arg0);
 /* 298148 */ void it_80298148(Item_GObj*, Item_GObj*);
 /* 3F6488 */ extern ItemStateTable it_803F6488[];
 

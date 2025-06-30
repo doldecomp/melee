@@ -244,7 +244,7 @@ s32 it_802980D4(Item_GObj* arg0)
     return 0;
 }
 
-s32 it_80298114(Item_GObj* arg0)
+bool it_80298114(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     return itColl_BounceOffShield(arg0);
