@@ -452,7 +452,10 @@ void ftCo_Walk_IASA(Fighter_GObj* gobj)
     ftWalkCommon_800DFEC8(gobj, ftCo_Walk_Enter);
 }
 
-/// #ftCo_Walk_Phys
+void ftCo_Walk_Phys(Fighter_GObj* gobj)
+{
+    ftWalkCommon_800E0060(gobj);
+}
 
 /// #ftCo_Walk_Coll
 
