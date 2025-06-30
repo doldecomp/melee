@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+
 #include "baselib/forward.h"
 #include "it/forward.h"
 
@@ -7,10 +8,10 @@
 
 #include "ef/efasync.h"
 #include "it/inlines.h"
-#include "it/itCharItems.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCharItems.h"
 #include "it/itCommonItems.h"
 #include "it/types.h"
 
@@ -155,9 +156,9 @@ void it_80297CC4(Item_GObj* arg0)
 {
     f32 zero = 0.0f;
     Item* item = GET_ITEM(arg0);
-    itMBallAttributes* spec_attrs = item->xC4_article_data->x4_specialAttributes;
+    itMBallAttributes* spec_attrs =
+        item->xC4_article_data->x4_specialAttributes;
     HSD_JObj* hsd_obj = arg0->hsd_obj;
-
 
     it_8026B3A8(arg0);
     it_80275D5C(arg0, &item->xC0C);
@@ -172,9 +173,9 @@ void it_80297CC4(Item_GObj* arg0)
         item->xDD4_itemVar.mball.b0 = true;
         efAsync_Spawn(arg0, &GET_ITEM(arg0)->xBC0, 0U, 0x449U, hsd_obj);
         Item_8026AE84(item, 0x10C, 0x7F, 0x40);
-        Item_80268E5C((HSD_GObj* ) arg0, 5, ITEM_ANIM_UPDATE);
+        Item_80268E5C((HSD_GObj*) arg0, 5, ITEM_ANIM_UPDATE);
     } else {
-        Item_80268E5C((HSD_GObj* ) arg0, 5, ITEM_UNK_0x1);
+        Item_80268E5C((HSD_GObj*) arg0, 5, ITEM_UNK_0x1);
     }
     item->on_accessory = it_80297DD8;
 }
@@ -182,8 +183,9 @@ void it_80297CC4(Item_GObj* arg0)
 void it_80297DD8(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
-    itMBallAttributes* spec_attrs = item->xC4_article_data->x4_specialAttributes;
-    
+    itMBallAttributes* spec_attrs =
+        item->xC4_article_data->x4_specialAttributes;
+
     if (item->xD44_lifeTimer == spec_attrs->x4) {
         item->xDD4_itemVar.mball.b1 = it_8027AB64(arg0);
     }
@@ -203,7 +205,8 @@ void it_80297FC8(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
 
-    it_80272860(arg0, item->xCC_item_attr->x10_fall_speed, item->xCC_item_attr->x14_fall_speed_max);
+    it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
+                item->xCC_item_attr->x14_fall_speed_max);
 }
 
 bool it_80297FF8(Item_GObj* arg0)
