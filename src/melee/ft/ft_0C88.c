@@ -62,8 +62,8 @@
 #include <baselib/gobj.h>
 
 /* 0C8E74 */ static void fn_800C8E74(Fighter_GObj* gobj);
-/* 0C9198 */ static void fn_800C9198(Fighter_GObj* gobj);
-/* 0C9264 */ static void fn_800C9264(Fighter_GObj* gobj);
+/* 0C9198 */ static void ftCo_Barrel_Take_Dmg_Cb(Fighter_GObj* gobj);
+/* 0C9264 */ static void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj);
 /* 0C9C2C */ static bool fn_800C9C2C(Fighter_GObj* gobj);
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
@@ -296,9 +296,9 @@ void ftCo_800C9034(Fighter_GObj* gobj)
     ftCo_800D4F24(gobj, 0);
 }
 
-void fn_800C9058(Fighter_GObj* gobj)
+void ftCo_Barrel_Death2_Cb(Fighter_GObj* gobj)
 {
-    fn_800C9198(gobj);
+    ftCo_Barrel_Take_Dmg_Cb(gobj);
 }
 
 void ftCo_Barrel_Enter(Fighter_GObj* gobj, Item_GObj* item_gobj)
@@ -311,9 +311,9 @@ void ftCo_Barrel_Enter(Fighter_GObj* gobj, Item_GObj* item_gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_Barrel, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
     ftAnim_8006EBA4(gobj);
-    fp->death2_cb = fn_800C9058;
-    fp->accessory1_cb = fn_800C9264;
-    fp->take_dmg_cb = fn_800C9198;
+    fp->death2_cb = ftCo_Barrel_Death2_Cb;
+    fp->accessory1_cb = ftCo_Barrel_Accessory1_Cb;
+    fp->take_dmg_cb = ftCo_Barrel_Take_Dmg_Cb;
     fp->x221D_b5 = true;
     fp->mv.co.barrel.x0 = it_802960B8(item_gobj);
     fp->mv.co.barrel.x4 = it_802960CC(item_gobj);
@@ -327,8 +327,7 @@ void ftCo_Barrel_Enter(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ftColl_800787B4(fp->mv.co.barrel.x8, gobj, 0);
 }
 
-// definitely something barrel
-void fn_800C9198(Fighter_GObj* gobj)
+void ftCo_Barrel_Take_Dmg_Cb(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -364,7 +363,7 @@ void ftCo_Barrel_Phys(Fighter_GObj* gobj) {}
 
 void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
-void fn_800C9264(Fighter_GObj* gobj)
+void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
