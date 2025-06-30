@@ -273,7 +273,18 @@ void ftCo_800C8F6C(void)
     }
 }
 
-/// #ftCo_800C8FC4
+void ftCo_800C8FC4(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (Player_GetMoreFlagsBit0(fp->player_id)) {
+        fp->x2034 = p_ftCommonData->x7DC;
+        fp->x2038 = p_ftCommonData->x7E0;
+        fp->x2227_b3 = true;
+        ft_800C80A4(fp);
+        ftCommon_80080460(fp);
+    }
+}
 
 /// #ftCo_800C9034
 
