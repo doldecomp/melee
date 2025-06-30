@@ -94,8 +94,8 @@ void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
 void ftCo_FallSpecial_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    ftCo_800CCBE0(gobj, &fp->mv.co.fallspecial.x4, ftCo_MS_JumpB,
-                  ftCo_MS_JumpAerialF, ftCo_MS_JumpAerialB);
+    ftCo_Fall_Anim_Inner(gobj, &fp->mv.co.fallspecial.x4, ftCo_SM_FallSpecial,
+                         ftCo_SM_FallSpecialF, ftCo_SM_FallSpecialB);
     ftCo_800CC988(gobj, fp->mv.co.fallspecial.x4);
 }
 

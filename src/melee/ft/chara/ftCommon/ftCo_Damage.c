@@ -1032,7 +1032,7 @@ void ftCo_Damage_IASA(ftCo_GObj* gobj)
                 fp->input.x668 |= HSD_PAD_XY;
             }
             if (fp->ground_or_air == GA_Air) {
-                ftCo_800CCAAC(gobj);
+                ftCo_Fall_IASA_Inner(gobj);
             } else {
                 ftCo_Wait_IASA(gobj);
             }

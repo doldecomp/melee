@@ -146,7 +146,7 @@ void ftMr_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0] != 0) {
-        ftCo_800CCAAC(gobj);
+        ftCo_Fall_IASA_Inner(gobj);
     }
 }
 

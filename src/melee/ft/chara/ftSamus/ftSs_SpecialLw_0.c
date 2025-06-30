@@ -176,7 +176,7 @@ void ftSs_SpecialLw_IASA(HSD_GObj* gobj)
 
 void ftSs_SpecialAirLw_IASA(HSD_GObj* gobj)
 {
-    ftCo_800CCAAC(gobj);
+    ftCo_Fall_IASA_Inner(gobj);
 }
 
 void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
