@@ -254,7 +254,24 @@ void fn_800C8E74(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800C8F6C
+void ftCo_800C8F6C(void)
+{
+    HSD_DObj* dobj = HSD_JObjGetDObj(HSD_JObjLoadJoint(Fighter_804D6504));
+    HSD_MObj* mobj;
+    HSD_Material* mat;
+
+    if (dobj != NULL) {
+        mobj = dobj->mobj;
+    } else {
+        mobj = NULL;
+    }
+
+    ft_804D6588 = mobj;
+    mat = mobj->mat;
+    if (mat != NULL) {
+        mat->diffuse = p_ftCommonData->x7D8;
+    }
+}
 
 /// #ftCo_800C8FC4
 
