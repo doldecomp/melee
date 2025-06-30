@@ -615,7 +615,7 @@ bool fn_800C9C2C(Fighter_GObj* gobj)
     return false;
 }
 
-void fn_800C9C74(Fighter_GObj* gobj)
+void ftCo_SmashTurn_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp_r7 = GET_FIGHTER(gobj);
     float facing = fp_r7->facing_dir;
@@ -783,7 +783,7 @@ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
         ((int) fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40))
     {
         if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
-            fn_800C9C74(gobj);
+            ftCo_SmashTurn_Enter(gobj);
         } else {
             ftCo_Dash_Enter(gobj, 1);
         }
@@ -807,7 +807,7 @@ static inline bool ftCo_Dash_CheckInput_inline(Fighter_GObj* gobj)
         ((s32) fp->x670_timer_lstick_tilt_x < (s32) p_ftCommonData->x40))
     {
         if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
-            fn_800C9C74(gobj);
+            ftCo_SmashTurn_Enter(gobj);
         } else {
             ftCo_Dash_Enter(gobj, 1);
         }
