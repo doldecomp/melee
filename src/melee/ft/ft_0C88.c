@@ -428,7 +428,29 @@ void ftCo_Walk_Anim(Fighter_GObj* gobj)
     ftWalkCommon_800DFDDC(gobj);
 }
 
-/// #ftCo_Walk_IASA
+void ftCo_Walk_IASA(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_800D6824(gobj));
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+    RETURN_IF(ftCo_80091A4C(gobj));
+    RETURN_IF(ftCo_800DE9D8(gobj));
+    RETURN_IF(ftCo_Jump_CheckInput(gobj));
+    RETURN_IF(ftCo_Dash_CheckInput(gobj));
+    RETURN_IF(ftCo_800D5FB0(gobj));
+    RETURN_IF(ft_8008A244(gobj));
+    ftWalkCommon_800DFEC8(gobj, ftCo_Walk_Enter);
+}
 
 /// #ftCo_Walk_Phys
 
