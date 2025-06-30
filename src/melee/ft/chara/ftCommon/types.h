@@ -9,6 +9,8 @@
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 
+#include "common_structs.h"
+
 #include <dolphin/mtx.h>
 
 struct ftCollisionBox {
@@ -55,14 +57,14 @@ union ftCommon_MotionVars {
         /* fp+2360 */ float accel_mul;
     } walk;
     struct {
-        /* fp+2340 */ int x0;
-        /* fp+2344 */ float x4;
+        /* fp+2340 */ bool has_turned;
+        /* fp+2344 */ float facing_after;
         /* fp+2348 */ float x8;
         /* fp+234C */ u8 pad_xC[4];
-        /* fp+2350 */ float x10;
+        /* fp+2350 */ float frames_to_turn;
         /* fp+2354 */ u8 pad_x14[4];
-        /* fp+2358 */ int x18;
-        /* fp+235C */ int x1C;
+        /* fp+2358 */ bool just_turned;
+        /* fp+235C */ HSD_Pad x1C;
 
     } turn;
     struct {

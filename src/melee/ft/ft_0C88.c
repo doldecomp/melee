@@ -485,14 +485,14 @@ bool ftCo_Turn_CheckInput(Fighter_GObj* gobj)
 }
 
 void ftCo_Turn_Enter(Fighter_GObj* gobj, FtMotionId msid, MotionFlags flags,
-                     f32 arg3, f32 frames, f32 anim_start)
+                     f32 arg3, f32 frames_to_turn, f32 anim_start)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->mv.co.turn.x0 = 0;
-    fp->mv.co.turn.x18 = 0;
-    fp->mv.co.turn.x4 = -fp->facing_dir;
-    fp->mv.co.turn.x10 = frames;
+    fp->mv.co.turn.has_turned = false;
+    fp->mv.co.turn.just_turned = 0;
+    fp->mv.co.turn.facing_after = -fp->facing_dir;
+    fp->mv.co.turn.frames_to_turn = frames_to_turn;
     fp->mv.co.turn.x8 = arg3;
     fp->mv.co.turn.x1C = 0;
     Fighter_ChangeMotionState(gobj, msid, flags, anim_start, 1.0F, 0.0F, NULL);
@@ -511,14 +511,14 @@ void ftCo_Turn_Anim_Inner(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->mv.co.turn.x10 > 0.0F) {
-        fp->mv.co.turn.x10 -= 1.0F;
+    if (fp->mv.co.turn.frames_to_turn > 0.0F) {
+        fp->mv.co.turn.frames_to_turn -= 1.0F;
         return;
     }
 
-    if (fp->mv.co.turn.x0 == 0) {
-        fp->mv.co.turn.x0 = 1;
-        fp->mv.co.turn.x18 = 1;
+    if (!fp->mv.co.turn.has_turned) {
+        fp->mv.co.turn.has_turned = true;
+        fp->mv.co.turn.just_turned = true;
         fp->facing_dir = -fp->facing_dir;
     }
 }
@@ -536,10 +536,10 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->mv.co.turn.x18 != 0) {
+    if (fp->mv.co.turn.just_turned) {
         fp->input.x668 |= fp->mv.co.turn.x1C;
     }
-    if (fp->mv.co.turn.x0 == 0) {
+    if (!fp->mv.co.turn.has_turned) {
         fp->facing_dir = -fp->facing_dir;
     }
 
@@ -555,7 +555,7 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
     RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
     RETURN_IF(ftCo_Attack1_CheckInput(gobj));
 
-    if (fp->mv.co.turn.x0 == 0) {
+    if (!fp->mv.co.turn.has_turned) {
         fp->facing_dir = -fp->facing_dir;
     }
 
@@ -564,8 +564,8 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
     RETURN_IF(ftCo_Jump_CheckInput(gobj));
 
     fn_800C9C2C(gobj);
-    if (fp->mv.co.turn.x18 && fp->mv.co.turn.x8) {
-        if ((fp->input.lstick.x * fp->mv.ca.specialhi.vel.x) >=
+    if (fp->mv.co.turn.just_turned && fp->mv.co.turn.x8) {
+        if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
             p_ftCommonData->x3C)
         {
             ftCo_Dash_Enter(gobj, 0);
@@ -580,8 +580,8 @@ void ftCo_Turn_IASA(Fighter_GObj* gobj)
         fp->mv.co.turn.x1C |= HSD_PAD_B;
     }
 
-    if (fp->mv.co.turn.x18 != 0) {
-        fp->mv.co.turn.x18 = 0;
+    if (fp->mv.co.turn.just_turned) {
+        fp->mv.co.turn.just_turned = false;
     }
 }
 
@@ -598,10 +598,11 @@ void ftCo_Turn_Coll(Fighter_GObj* gobj)
 bool fn_800C9C2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.x * fp->mv.co.turn.x4 >= p_ftCommonData->x3C &&
+    if (fp->input.lstick.x * fp->mv.co.turn.facing_after >=
+            p_ftCommonData->x3C &&
         fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40)
     {
-        fp->mv.co.turn.x8 = fp->mv.co.turn.x4;
+        fp->mv.co.turn.x8 = fp->mv.co.turn.facing_after;
         return true;
     }
     return false;
@@ -613,10 +614,10 @@ void fn_800C9C74(Fighter_GObj* gobj)
     float facing = fp_r7->facing_dir;
     PAD_STACK(1);
 
-    fp_r7->mv.co.turn.x0 = 0;
-    fp_r7->mv.co.turn.x18 = 0;
-    fp_r7->mv.co.turn.x4 = -fp_r7->facing_dir;
-    fp_r7->mv.co.turn.x10 = 0.0F;
+    fp_r7->mv.co.turn.has_turned = false;
+    fp_r7->mv.co.turn.just_turned = false;
+    fp_r7->mv.co.turn.facing_after = -fp_r7->facing_dir;
+    fp_r7->mv.co.turn.frames_to_turn = 0.0F;
     fp_r7->mv.co.turn.x8 = facing;
     fp_r7->mv.co.turn.x1C = 0;
 
