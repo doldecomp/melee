@@ -387,7 +387,18 @@ bool ftCo_Walk_CheckInput(Fighter_GObj* gobj)
     return false;
 }
 
-/// #ftCo_800C94B4
+bool ftCo_Walk_CheckInput_Ottotto(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x474 &&
+        ftWalkCommon_800DFC70(gobj))
+    {
+        ftCo_Walk_Enter(gobj, 0.0F);
+        return true;
+    }
+    return false;
+}
 
 void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8)
 {
