@@ -82,8 +82,8 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
     } run;
     struct {
-        /* fp+2340 */ int x0;
-        /* fp+2344 */ float x4;
+        /* fp+2340 */ bool x0;
+        /* fp+2344 */ float frames;
     } runbrake;
     struct {
         int x0;

@@ -1144,8 +1144,8 @@ void ftCo_RunBrake_Enter(Fighter_GObj* gobj)
     fp->cmd_vars[1] = 0;
     Fighter_ChangeMotionState(gobj, ftCo_MS_RunBrake, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
-    fp->mv.co.runbrake.x0 = 0;
-    fp->mv.co.runbrake.x4 = fp->co_attrs.max_run_brake_frames;
+    fp->mv.co.runbrake.x0 = false;
+    fp->mv.co.runbrake.frames = fp->co_attrs.max_run_brake_frames;
     if (fp->x197C != NULL) {
         ft_80088148(fp, 0x119, 0x7F, 0x40);
     }
@@ -1155,32 +1155,29 @@ void ftCo_RunBrake_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->cmd_vars[1] != 0) {
-        float gr_vel;
+    if (fp->cmd_vars[1]) {
         float maybe_max_vel = p_ftCommonData->x42C;
-        if (fp->mv.co.runbrake.x0 == 0) {
-            gr_vel = fabs_inline(fp->gr_vel);
-            if (gr_vel >= maybe_max_vel) {
+        if (!fp->mv.co.runbrake.x0) {
+            if (fabs_inline(fp->gr_vel) >= maybe_max_vel) {
                 ftAnim_SetAnimRate(gobj, 0.0F);
-                fp->mv.co.runbrake.x0 = 1;
+                fp->mv.co.runbrake.x0 = true;
             }
         } else {
-            gr_vel = fabs_inline(fp->gr_vel);
-            if (gr_vel <= maybe_max_vel) {
+            if (fabs_inline(fp->gr_vel) <= maybe_max_vel) {
                 ftAnim_SetAnimRate(gobj, 1.0F);
                 fp->cmd_vars[1] = 0;
             }
         }
     }
 
-    if (fp->mv.co.runbrake.x4) {
-        fp->mv.co.runbrake.x4 -= 1.0F;
-        if (fp->mv.co.runbrake.x4 < 0.0F) {
-            fp->mv.co.runbrake.x4 = 0.0F;
+    if (fp->mv.co.runbrake.frames) {
+        fp->mv.co.runbrake.frames -= 1.0F;
+        if (fp->mv.co.runbrake.frames < 0.0F) {
+            fp->mv.co.runbrake.frames = 0.0F;
         }
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj) || (!fp->mv.co.runbrake.x4)) {
+    if (!(ftAnim_IsFramesRemaining(gobj) && fp->mv.co.runbrake.frames)) {
         ft_8008A2BC(gobj);
     }
 }
