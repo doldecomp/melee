@@ -333,7 +333,12 @@ void ftCo_Barrel_Phys(Fighter_GObj* gobj) {}
 
 void ftCo_Barrel_Coll(Fighter_GObj* gobj) {}
 
-/// #fn_800C9264
+void fn_800C9264(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    it_8026C334(fp->mv.co.barrel.x8, &fp->cur_pos);
+}
 
 /// #fn_800C9290
 
