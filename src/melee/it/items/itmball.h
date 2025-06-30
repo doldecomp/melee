@@ -12,7 +12,7 @@
 /* 297944 */ void it_80297944(Item_GObj* arg0);
 /* 29799C */ bool it_8029799C(void);
 /* 2979A4 */ void it_802979A4(void);
-/* 2979A8 */ s32 it_802979A8(Item_GObj* arg0);
+/* 2979A8 */ bool it_802979A8(Item_GObj* arg0);
 /* 2979D4 */ void it_802979D4(Item_GObj* arg0);
 /* 297A1C */ bool it_80297A1C(void);
 /* 297A24 */ void it_80297A24(Item_GObj* arg0);

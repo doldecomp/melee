@@ -55,7 +55,7 @@ bool it_8029799C(void)
 
 void it_802979A4(void) {}
 
-s32 it_802979A8(Item_GObj* arg0)
+bool it_802979A8(Item_GObj* arg0)
 {
     it_8026D62C(arg0, it_802979D4);
     return 0;
