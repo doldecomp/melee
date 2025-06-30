@@ -457,7 +457,10 @@ void ftCo_Walk_Phys(Fighter_GObj* gobj)
     ftWalkCommon_800E0060(gobj);
 }
 
-/// #ftCo_Walk_Coll
+void ftCo_Walk_Coll(Fighter_GObj* gobj)
+{
+    ft_80084280(gobj);
+}
 
 /// #ftCo_800C97A8
 
