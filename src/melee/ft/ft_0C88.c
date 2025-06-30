@@ -523,7 +523,14 @@ void ftCo_Turn_Anim_Inner(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_Turn_Anim
+void ftCo_Turn_Anim(Fighter_GObj* gobj)
+{
+    ftCo_Turn_Anim_Inner(gobj);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 void ftCo_Turn_IASA(Fighter_GObj* gobj)
 {
