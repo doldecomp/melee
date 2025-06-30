@@ -65,7 +65,7 @@ struct ftCommonData {
     /* +28 */ float x28;
     /* +2C */ float x2C;
     /* +30 */ float x30;
-    /* +34 */ UNK_T x34;
+    /* +34 */ float x34;
     /* +38 */ float x38_someLStickXThreshold;
     /* +3C */ float x3C;
     /* +40 */ int x40;

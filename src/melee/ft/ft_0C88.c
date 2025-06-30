@@ -462,7 +462,15 @@ void ftCo_Walk_Coll(Fighter_GObj* gobj)
     ft_80084280(gobj);
 }
 
-/// #ftCo_800C97A8
+bool ftCo_800C97A8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->input.lstick.x * fp->facing_dir <= p_ftCommonData->x34) {
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_Turn_CheckInput
 
