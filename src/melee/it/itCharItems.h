@@ -311,4 +311,9 @@ typedef struct {
     HSD_GObj* x4;
 } itLinkBow_ItemVars;
 
+typedef struct {
+    f32 x0;
+    f32 x4;
+} itMBallAttributes;
+
 #endif

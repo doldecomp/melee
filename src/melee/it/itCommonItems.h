@@ -308,7 +308,14 @@ typedef struct {
 } itMato_ItemVars;
 
 typedef struct {
-    u8 x0;
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2 : 1;
+    u8 b3 : 1;
+    u8 b4 : 1;
+    u8 b5 : 1;
+    u8 b6 : 1;
+    u8 b7 : 1;
 } itMBall_ItemVars;
 
 typedef struct {
