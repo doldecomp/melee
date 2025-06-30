@@ -2,18 +2,96 @@
 
 #include "gmmain_lib.static.h"
 
-#include "lb/lbtime.h"
-
 #include <dolphin/os/OSReset.h>
+#include <melee/db/db.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbtime.h>
+#include <melee/ty/toy.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/video.h>
+
+GameRules gmMainLib_803D4A48 = {
+    0,
+    0x34,
+    0,  // mode
+    2,  // time limit
+    3,  // stock count
+    0,  // handicap
+    10, // damage ratio
+    0,
+    0,     // stock time limit
+    false, // friendly fire
+    true,  // pause
+    0,     // score display
+    0,
+    {
+        0,
+        8,
+        8,
+    },
+    0,
+    {
+        0,
+        8,
+        0,
+    },
+    /* unk_14 */ -1,
+};
+
+int gmMainLib_803D4A60[] = {
+    0x2000000,
+    0,
+    -1,
+    -1,
+    0x01010101,
+    0x00010000,
+    -1,
+    0,
+};
+
+
+GXRenderModeObj gmMainLib_803D4A80 = {
+    VI_TVMODE_NTSC_PROG,
+    0x280,
+    0x1E0,
+    0x1E0,
+    0x28,
+    0,
+    0x280,
+    0x1E0,
+    VI_XFBMODE_SF,
+    0,
+    0,
+    {
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+        { 6, 6 },
+    },
+    { 8, 8, 0xA, 0xC, 0xA, 8, 8 },
+};
 
 GameRules* gmMainLib_8015CC34(void)
 {
     return &gmMainLib_804D3EE0->x1850;
 }
 
-void* gmMainLib_8015CC40(void)
+struct gmm_x1868* gmMainLib_8015CC40(void)
 {
-    return &gmMainLib_804D3EE0->thing.x1868;
+    return &gmMainLib_804D3EE0->thing;
 }
 
 void* gmMainLib_8015CC4C(void)
@@ -23,12 +101,12 @@ void* gmMainLib_8015CC4C(void)
 
 struct gmm_x1CB0* gmMainLib_8015CC58(void)
 {
-    return &gmMainLib_804D3EE0->thing.x1CB0;
+    return &gmMainLib_8015CC40()->x1CB0;
 }
 
 void* gmMainLib_8015CC64(s32 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct gmm_x1F2C* base = gmMainLib_804D3EE0->thing.x1F2C;
     return &base[arg0];
 }
 
@@ -223,11 +301,6 @@ s32 gmMainLib_8015CF94(void)
     if (gmMainLib_804D3EE0->thing.x1B3C) {
         return 1;
     }
-    return 0;
-}
-
-s32 func_8015CFAC(void)
-{
     return 0;
 }
 
@@ -712,7 +785,21 @@ u8 gmMainLib_8015ECB0(void)
     return gmMainLib_804D3EE0->x1850.unk_x1;
 }
 
-/// #gmMainLib_8015ECBC
+void gmMainLib_8015ECBC(void)
+{
+    u8 _[4];
+
+    GameRules* rules = &gmMainLib_804D3EE0->x1850;
+    if (gm_80164600() && gm_80164ABC()) {
+        if (HSD_Randi(4) != 0) {
+            rules->unk_x1 = 0x34;
+        } else {
+            rules->unk_x1 = 0x36;
+        }
+    } else {
+        rules->unk_x1 = 0x34;
+    }
+}
 
 u8 gmMainLib_8015ED30(void)
 {
@@ -721,7 +808,7 @@ u8 gmMainLib_8015ED30(void)
 
 u8 gmMainLib_8015ED3C(s32 arg0)
 {
-    return gmMainLib_804D3EE0->thing.x1CB0.x10[arg0];
+    return gmMainLib_8015CC40()->x1CB0.x10[arg0];
 }
 
 void gmMainLib_8015ED4C(s32 arg0, s8 arg1)
@@ -754,149 +841,14 @@ u16* gmMainLib_8015ED8C(void)
     return (u16*) &gmMainLib_804D3EE0->thing;
 }
 
-// struct gmm_retval_ED98* gmMainLib_8015ED98(void)
-// {
-//     return (struct gmm_retval_ED98*) &gmMainLib_804D3EE0->thing
-//         .padding_x1868[4];
-// }
+struct gmm_retval_ED98* gmMainLib_8015ED98(void)
+{
+    return &gmMainLib_804D3EE0->thing.unk_8;
+}
 
 UNK_T gmMainLib_8015EDA4(void)
 {
     return &M2C_FIELD(gmMainLib_804D3EE0, UNK_T*, 0x186A);
-}
-
-// struct gmm_retval_EDB0* gmMainLib_8015EDB0(void)
-// {
-//     return (struct gmm_retval_EDB0*) &gmMainLib_804D3EE0->thing
-//         .padding_x1868[0x24];
-// }
-
-// struct gmm_retval_EDBC* gmMainLib_8015EDBC(void)
-// {
-//     return (struct gmm_retval_EDBC*) &gmMainLib_804D3EE0->thing
-//         .padding_x1868[0x2C];
-// }
-
-// u8* gmMainLib_8015EDC8(void)
-// {
-//     return &gmMainLib_804D3EE0->thing.padding_x1868[0x1A4];
-// }
-
-// s32 gmMainLib_8015EDD4(void)
-// {
-//     return gmMainLib_804D3EE0->thing.padding_x1868[0] & 4;
-// }
-
-void gmMainLib_8015EDE4(void)
-{
-    gmMainLib_804D3EE0->thing.unk_4 |= 4;
-}
-
-void gmMainLib_8015EDF8(void)
-{
-    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFB;
-}
-
-// s32 gmMainLib_8015EE0C(void)
-// {
-//     return gmMainLib_804D3EE0->thing.padding_x1868[0] & 1;
-// }
-
-void gmMainLib_8015EE1C(void)
-{
-    gmMainLib_804D3EE0->thing.unk_4 |= 1;
-}
-
-void gmMainLib_8015EE30(void)
-{
-    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFE;
-}
-
-// s32 gmMainLib_8015EE44(void)
-// {
-//     return gmMainLib_804D3EE0->thing.padding_x1868[0] & 2;
-// }
-
-void gmMainLib_8015EE54(void)
-{
-    gmMainLib_804D3EE0->thing.unk_4 |= 2;
-}
-
-/// #gmMainLib_8015EE68
-
-// s32 gmMainLib_8015EE90(void)
-// {
-//     return gmMainLib_804D3EE0->thing.padding_x1868[0] & 8;
-// }
-
-void gmMainLib_8015EEA0(void)
-{
-    gmMainLib_804D3EE0->thing.unk_4 |= 8;
-}
-
-void gmMainLib_8015EEB4(void)
-{
-    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFF7;
-}
-
-/// #gmMainLib_8015EEC8
-
-/// #gmMainLib_8015EF30
-
-/// #gmMainLib_8015EF84
-
-/// #gmMainLib_8015F150
-
-/// #gmMainLib_8015F260
-
-/// #gmMainLib_8015F464
-
-/// #gmMainLib_8015F490
-
-/// #gmMainLib_8015F4BC
-
-u8 gmMainLib_8015F4E8(void)
-{
-    return gmMainLib_804D3EE0->thing.x1CB0.x10[5];
-}
-
-void gmMainLib_8015F4F4(u8 arg0)
-{
-    gmMainLib_804D3EE0->thing.x1CB0.x10[5] = arg0;
-}
-
-/// #gmMainLib_8015F500
-
-/// #gmMainLib_8015F588
-
-/// #gmMainLib_8015F600
-
-/// #gmMainLib_8015FA34
-
-/// #gmMainLib_8015FB68
-
-/// #gmMainLib_8015FBA4
-
-/// #gmMainLib_8015FC74
-
-void gmMainLib_8015FCC0(void)
-{
-    bool val;
-    if (OSGetResetCode() == 0x80000000) {
-        val = true;
-    } else {
-        val = false;
-    }
-    gmMainLib_8046B0F0.x0 = val;
-    gmMainLib_8046B0F0.x4 = 0;
-    gmMainLib_8046B0F0.x8 = 0;
-    gmMainLib_8046B0F0.xC = 0;
-    gmMainLib_8046B0F0.x10 = lbTime_8000AFBC();
-}
-
-struct gmm_retval_ED98* gmMainLib_8015ED98(void)
-{
-    return &gmMainLib_804D3EE0->thing.unk_8;
 }
 
 struct gmm_retval_EDB0* gmMainLib_8015EDB0(void)
@@ -919,9 +871,29 @@ s32 gmMainLib_8015EDD4(void)
     return gmMainLib_804D3EE0->thing.unk_4 & 4;
 }
 
+void gmMainLib_8015EDE4(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 |= 4;
+}
+
+void gmMainLib_8015EDF8(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFB;
+}
+
 s32 gmMainLib_8015EE0C(void)
 {
     return gmMainLib_804D3EE0->thing.unk_4 & 1;
+}
+
+void gmMainLib_8015EE1C(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 |= 1;
+}
+
+void gmMainLib_8015EE30(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFE;
 }
 
 s32 gmMainLib_8015EE44(void)
@@ -929,7 +901,200 @@ s32 gmMainLib_8015EE44(void)
     return gmMainLib_804D3EE0->thing.unk_4 & 2;
 }
 
+void gmMainLib_8015EE54(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 |= 2;
+}
+
+void gmMainLib_8015EE68(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFD;
+    gmMainLib_804D3EE0->thing.x1CB0.unk = gmMainLib_803D4A60[6];
+}
+
 s32 gmMainLib_8015EE90(void)
 {
     return gmMainLib_804D3EE0->thing.unk_4 & 8;
 }
+
+void gmMainLib_8015EEA0(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 |= 8;
+}
+
+void gmMainLib_8015EEB4(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFF7;
+}
+
+/// #gmMainLib_8015EEC8
+
+/// #gmMainLib_8015EF30
+
+/// #gmMainLib_8015EF84
+
+/// #gmMainLib_8015F150
+
+/// #gmMainLib_8015F260
+
+void gmMainLib_8015F464(void)
+{
+    memzero(&gmMainLib_804D3EE0->thing.unk_8,
+            sizeof(gmMainLib_804D3EE0->thing.unk_8));
+}
+
+void gmMainLib_8015F490(void)
+{
+    memzero(&gmMainLib_804D3EE0->thing.unk_28,
+            sizeof(gmMainLib_804D3EE0->thing.unk_28));
+}
+
+void gmMainLib_8015F4BC(void)
+{
+    memzero(&gmMainLib_804D3EE0->thing.unk_30,
+            sizeof(gmMainLib_804D3EE0->thing.unk_30));
+}
+
+u8 gmMainLib_8015F4E8(void)
+{
+    return gmMainLib_8015ED3C(5);
+}
+
+void gmMainLib_8015F4F4(u8 arg0)
+{
+    gmMainLib_8015CC40()->x1CB0.x10[5] = arg0;
+}
+
+/// #gmMainLib_8015F500
+
+void gmMainLib_8015F500(void)
+{
+    GXRenderModeObj* var_r0;
+    GXRenderModeObj* var_r3;
+
+    if (gmMainLib_8046B0F0.x8) {
+        if (gmMainLib_8015F4E8() != 0) {
+            var_r0 = &gmMainLib_803D4A80;
+        } else {
+            var_r0 = &GXNtsc480Prog;
+        }
+        var_r3 = var_r0;
+    } else {
+        if (gmMainLib_8015F4E8() != 0) {
+            var_r0 = &GXNtsc480IntDf;
+        } else {
+            var_r0 = &GXNtsc480Int;
+        }
+        var_r3 = var_r0;
+    }
+    HSD_VISetConfigure(var_r3);
+}
+
+void gmMainLib_8015F588(bool arg0)
+{
+    GXRenderModeObj* var_r0;
+    GXRenderModeObj* var_r3;
+
+    if (gmMainLib_8046B0F0.x8) {
+        if (arg0) {
+            var_r0 = &gmMainLib_803D4A80;
+        } else {
+            var_r0 = &GXNtsc480Prog;
+        }
+        var_r3 = var_r0;
+    } else {
+        if (arg0) {
+            var_r0 = &GXNtsc480IntDf;
+        } else {
+            var_r0 = &GXNtsc480Int;
+        }
+        var_r3 = var_r0;
+    }
+    HSD_VISetConfigure(var_r3);
+}
+
+/// #gmMainLib_8015F600
+
+void gmMainLib_8015FA34(int arg0)
+{
+    GXRenderModeObj* var_r3;
+    int i;
+
+    for (i = 1; i < 9; i++) {
+        if ((arg0 != 0 && arg0 != 2) || lb_8001B6E0(i) != 0) {
+            gmMainLib_8015F600(i, 0);
+        } else if (i == 1 && gmMainLib_8046B0F0.x0 == 0) {
+            gm_80162B98();
+        }
+    }
+    if (g_debugLevel > 2 && db_804D6B20 != 0) {
+        gmMainLib_804D3EE0->thing.unk_4 = -1;
+        gm_80164F18();
+        gm_8016468C();
+        gm_8017297C();
+        gm_801741FC();
+    }
+    lbAudioAx_80028690();
+    // TODO the call to gmMainLib_8015CC40 shouldn't be inlined
+    gmMainLib_8015F500();
+}
+
+void gmMainLib_8015FB68(void)
+{
+    gmMainLib_804D3EE0->thing.unk_4 = 0;
+    gm_8016505C();
+    gm_801647D0();
+    gm_801729EC();
+    gm_80174238();
+    un_80311960();
+}
+
+#pragma push
+#pragma dont_inline on
+void gmMainLib_8015FBA4(void)
+{
+    int i;
+
+    memzero(gmMainLib_804D3EE0, 0x10A30);
+    if (DVDConvertPathToEntrynum("/usa.ini") != -1) {
+        lbLang_SetLanguageSetting(1);
+        lbLang_SetSavedLanguage(1);
+    } else {
+        lbLang_SetLanguageSetting(0);
+        lbLang_SetSavedLanguage(0);
+    }
+
+    gmMainLib_8045A6C0[0].x1850 = gmMainLib_803D4A48;
+    for (i = 1; i < 9; i++) {
+        gmMainLib_8015F600(i, 1);
+    }
+    lbAudioAx_80028690();
+    gmMainLib_8015F500();
+}
+#pragma pop
+
+int gmMainLib_8015FC74(void)
+{
+    int temp_r30;
+
+    temp_r30 = gmMainLib_8046B0F0.x10;
+    gmMainLib_8046B0F0.x10 = lbTime_8000AFBC();
+    return gmMainLib_8046B0F0.x10 - temp_r30;
+}
+
+void gmMainLib_8015FCC0(void)
+{
+    struct gmMainLib_8046B0F0_t* tmp = &gmMainLib_8046B0F0;
+    bool val;
+    if (OSGetResetCode() == 0x80000000) {
+        val = true;
+    } else {
+        val = false;
+    }
+    tmp->x0 = val;
+    tmp->x4 = 0;
+    tmp->x8 = false;
+    tmp->xC = 0;
+    tmp->x10 = lbTime_8000AFBC();
+}
+

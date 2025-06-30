@@ -1,6 +1,7 @@
 #include "lb/lblanguage.h"
 
 #include "gm/gmmain_lib.h"
+#include "gm/types.h"
 
 enum_t lbLang_GetLanguageSetting(void)
 {

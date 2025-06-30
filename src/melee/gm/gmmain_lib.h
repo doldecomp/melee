@@ -2,11 +2,11 @@
 #define GALE01_15CC34
 
 #include <platform.h>
-
-#include "gm/types.h"
+#include <placeholder.h>
+#include <melee/gm/forward.h>
 
 /* 15CC34 */ GameRules* gmMainLib_8015CC34(void);
-/* 15CC40 */ void* gmMainLib_8015CC40(void);
+/* 15CC40 */ struct gmm_x1868* gmMainLib_8015CC40(void);
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
 /* 15CC58 */ struct gmm_x1CB0* gmMainLib_8015CC58(void);
 /* 15CC64 */ void* gmMainLib_8015CC64(s32);
@@ -151,15 +151,16 @@
 /* 15F464 */ UNK_RET gmMainLib_8015F464(UNK_PARAMS);
 /* 15F490 */ UNK_RET gmMainLib_8015F490(UNK_PARAMS);
 /* 15F4BC */ UNK_RET gmMainLib_8015F4BC(UNK_PARAMS);
-/* 15F4E8 */ u8* gmMainLib_8015EDC8(void);
+/* 15EDC8 */ u8* gmMainLib_8015EDC8(void);
+/* 15F4E8 */ u8 gmMainLib_8015F4E8(void);
 /* 15F4F4 */ void gmMainLib_8015F4F4(u8 arg0);
 /* 15F500 */ UNK_RET gmMainLib_8015F500(UNK_PARAMS);
-/* 15F588 */ UNK_RET gmMainLib_8015F588(UNK_PARAMS);
-/* 15F600 */ UNK_RET gmMainLib_8015F600(UNK_PARAMS);
-/* 15FA34 */ UNK_RET gmMainLib_8015FA34(UNK_PARAMS);
+/* 15F588 */ void gmMainLib_8015F588(bool);
+/* 15F600 */ void gmMainLib_8015F600(int, int);
+/* 15FA34 */ void gmMainLib_8015FA34(int);
 /* 15FB68 */ UNK_RET gmMainLib_8015FB68(UNK_PARAMS);
 /* 15FBA4 */ void gmMainLib_8015FBA4(void);
-/* 15FC74 */ UNK_RET gmMainLib_8015FC74(UNK_PARAMS);
+/* 15FC74 */ int gmMainLib_8015FC74(void);
 /* 15FCC0 */ void gmMainLib_8015FCC0(void);
 /* 46B0F0 */ extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 /* 4D3EE0 */ extern struct gmm_x0* gmMainLib_804D3EE0;

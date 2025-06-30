@@ -3,6 +3,7 @@
 #include "mn/mncharsel.h"
 
 #include "gm/gmmain_lib.h"
+#include "gm/types.h"
 #include "lb/lblanguage.h"
 #include "mn/types.h"
 
