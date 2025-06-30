@@ -84,7 +84,7 @@ void it_80297A24(Item_GObj* arg0)
                 item->xCC_item_attr->x14_fall_speed_max);
 }
 
-s32 it_80297A54(Item_GObj* arg0)
+bool it_80297A54(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     f32 previous_vel_x;
@@ -127,7 +127,7 @@ s32 it_80297B40(Item_GObj* arg0)
     return it_80274658(arg0, it_804D6D28->x68_float);
 }
 
-s32 it_80297B8C(Item_GObj* arg0)
+bool it_80297B8C(Item_GObj* arg0)
 {
     it_8026E414(arg0, (void (*)(HSD_GObj*)) it_80297CC4);
     return 0;
@@ -236,7 +236,7 @@ bool it_802980A0(Item_GObj* arg0)
     return it_80273030(arg0);
 }
 
-s32 it_802980D4(Item_GObj* arg0)
+bool it_802980D4(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     it_802725D4(arg0);
