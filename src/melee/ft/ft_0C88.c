@@ -296,7 +296,13 @@ void ftCo_800C9034(Fighter_GObj* gobj)
 
 /// #ftCo_800C9078
 
-/// #fn_800C9198
+// definitely something barrel
+void fn_800C9198(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    it_80295F38(fp->mv.co.barrel.x8);
+}
 
 void ftCo_Barrel_Anim(Fighter_GObj* gobj)
 {
