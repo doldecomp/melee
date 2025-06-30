@@ -67,6 +67,7 @@
 /* 0C9198 */ static void ftCo_Barrel_Take_Dmg_Cb(Fighter_GObj* gobj);
 /* 0C9264 */ static void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj);
 /* 0C9528 */ void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8);
+/* 0C98AC */ void fn_800C98AC(Fighter_GObj* gobj);
 /* 0C9C2C */ static bool fn_800C9C2C(Fighter_GObj* gobj);
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
@@ -472,7 +473,16 @@ bool ftCo_800C97A8(Fighter_GObj* gobj)
     return false;
 }
 
-/// #ftCo_Turn_CheckInput
+bool ftCo_Turn_CheckInput(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (ftCo_800C97A8(gobj)) {
+        fn_800C98AC(gobj);
+        return true;
+    }
+    return false;
+}
 
 /// #ftCo_800C9840
 
