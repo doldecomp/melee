@@ -286,7 +286,10 @@ void ftCo_800C8FC4(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800C9034
+void ftCo_800C9034(Fighter_GObj* gobj)
+{
+    ftCo_800D4F24(gobj, 0);
+}
 
 /// #fn_800C9058
 
