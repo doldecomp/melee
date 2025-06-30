@@ -98,14 +98,21 @@ melee/lb/lbdvd.c:
 melee/lb/lb_0192.c:
 	.text       start:0x80019230 end:0x80019880
 	.data       start:0x803BA708 end:0x803BAAE0
+	.sbss       start:0x804D63D0 end:0x804D63D8
+
+melee/lb/lbcardnew.c:
+	.text       start:0x80019880 end:0x8001C600
+	.data       start:0x803BAAE0 end:0x803BAB60
+	.bss        start:0x804329F0 end:0x80433318
+	.sdata      start:0x804D3800 end:0x804D3808
+	.sdata2     start:0x804D7C80 end:0x804D7CB0
 
 melee/lb/lbcardgame.c:
-	.text       start:0x80019880 end:0x8001D2BC
-	.data       start:0x803BAAE0 end:0x803BACC8
-	.bss        start:0x804329F0 end:0x80433380
-	.sdata      start:0x804D3800 end:0x804D3828
-	.sbss       start:0x804D63D0 end:0x804D63D8
-	.sdata2     start:0x804D7C80 end:0x804D7CB8
+	.text       start:0x8001C600 end:0x8001D2BC
+	.data       start:0x803BAB60 end:0x803BACC8
+	.bss        start:0x80433318 end:0x80433380
+	.sdata      start:0x804D3808 end:0x804D3828
+	.sdata2     start:0x804D7CB0 end:0x804D7CB8
 
 melee/lb/lbsnap.c:
 	.text       start:0x8001D2BC end:0x8001E2F8

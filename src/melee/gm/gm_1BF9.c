@@ -7,6 +7,7 @@
 #include <melee/gm/gm_1B03.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 
 typedef struct {
     u32 x0;
