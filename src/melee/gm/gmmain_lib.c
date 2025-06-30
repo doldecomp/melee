@@ -8,7 +8,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
 #include <melee/ty/toy.h>
@@ -207,7 +207,7 @@ void* gmMainLib_8015CD8C(void)
     return &gmMainLib_804D3EE0->thing.x1A50;
 }
 
-void* gmMainLib_8015CD98(void)
+int* gmMainLib_8015CD98(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A54;
 }

@@ -12,6 +12,7 @@
 #include "lb/lbarq.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
+#include "lb/lbcardnew.h"
 #include "lb/lbdvd.h"
 #include "lb/lbheap.h"
 #include "lb/lblanguage.h"

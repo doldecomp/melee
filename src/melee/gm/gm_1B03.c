@@ -6,6 +6,7 @@
 #include <melee/gm/types.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/mngallery.h>
