@@ -310,7 +310,18 @@ void ftCo_Barrel_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_Barrel_IASA
+void ftCo_Barrel_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->mv.co.barrel.x4 != 0) {
+        fp->mv.co.barrel.x4 -= 1;
+    }
+
+    if (fp->mv.co.barrel.x4 == 0 && fp->input.x668 & HSD_PAD_AB) {
+        it_80295F38(fp->mv.co.barrel.x8);
+    }
+}
 
 void ftCo_Barrel_Phys(Fighter_GObj* gobj) {}
 
