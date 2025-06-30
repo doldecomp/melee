@@ -507,7 +507,21 @@ void ftCo_Turn_Enter_Basic(Fighter_GObj* gobj)
     ftCo_Turn_Enter(gobj, ftCo_MS_Turn, Ft_MF_None, 0.0F, frames, 0.0F);
 }
 
-/// #ftCo_800C9924
+void ftCo_Turn_Anim_Inner(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->mv.co.turn.x10 > 0.0F) {
+        fp->mv.co.turn.x10 -= 1.0F;
+        return;
+    }
+
+    if (fp->mv.co.turn.x0 == 0) {
+        fp->mv.co.turn.x0 = 1;
+        fp->mv.co.turn.x18 = 1;
+        fp->facing_dir = -fp->facing_dir;
+    }
+}
 
 /// #ftCo_Turn_Anim
 

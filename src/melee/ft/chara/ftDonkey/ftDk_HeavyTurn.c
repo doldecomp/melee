@@ -17,7 +17,7 @@
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 {
-    ftCo_800C9924(gobj);
+    ftCo_Turn_Anim_Inner(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftDk_MS_341_800DF980(gobj);
     }
