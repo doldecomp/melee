@@ -374,7 +374,14 @@ void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj)
     it_8026C334(fp->mv.co.barrel.x8, &fp->cur_pos);
 }
 
-/// #fn_800C9290
+void fn_800C9290(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_GObj* owner = it_8026BC78(fp->mv.co.barrel.x8);
+    if (ftLib_80086960(owner)) {
+        ftColl_8007B8CC(fp, owner);
+    }
+}
 
 /// #ftCo_800C92E4
 
