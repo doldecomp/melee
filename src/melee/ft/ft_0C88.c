@@ -60,6 +60,7 @@
 #include <baselib/gobj.h>
 
 /* 0C8E74 */ static void fn_800C8E74(Fighter_GObj* gobj);
+/* 0C9198 */ static void fn_800C9198(Fighter_GObj* gobj);
 /* 0C9C2C */ static bool fn_800C9C2C(Fighter_GObj* gobj);
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
@@ -292,7 +293,10 @@ void ftCo_800C9034(Fighter_GObj* gobj)
     ftCo_800D4F24(gobj, 0);
 }
 
-/// #fn_800C9058
+void fn_800C9058(Fighter_GObj* gobj)
+{
+    fn_800C9198(gobj);
+}
 
 /// #ftCo_800C9078
 
