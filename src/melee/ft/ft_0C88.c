@@ -17,6 +17,7 @@
 #include "ft/ft_0C31.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
+#include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -24,6 +25,7 @@
 #include "ft/ftlib.h"
 #include "ft/ftmetal.h"
 #include "ft/ftparts.h"
+#include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AirCatch.h"
@@ -378,7 +380,28 @@ void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj)
 
 /// #ftCo_800C94B4
 
-/// #fn_800C9528
+void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    f32 accel_mul = 1.0F;
+    float* anim_vars = &fp->x2DC;
+
+    if (fp->x2223_b7) {
+        accel_mul = *Fighter_804D651C;
+    }
+
+    if (fp->x34_scale.y != 1.0F) {
+        accel_mul = ftCo_CalcYScaledKnockback(
+            Fighter_804D6524, accel_mul, fp->x34_scale.y, Fighter_804D6524[3]);
+    }
+    if ((u32) fp->x197C != NULL) {
+        accel_mul *= *Fighter_804D6520;
+    }
+    ftWalkCommon_800DFCA4(
+        gobj, ftCo_MS_WalkSlow, Ft_MF_None, arg8, anim_vars[0], anim_vars[1],
+        anim_vars[2], fp->co_attrs.slow_walk_max, fp->co_attrs.mid_walk_point,
+        fp->co_attrs.fast_walk_min, accel_mul);
+}
 
 /// #ftCo_Walk_Anim
 
