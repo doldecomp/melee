@@ -687,7 +687,7 @@ typedef struct ftCo_DatAttrs {
     /* +078 fp+188 */ float horizontal_air_mobility_constant;
     /* +07C fp+18C */ float jab_2_input_window;
     /* +080 fp+190 */ float jab_3_input_window;
-    /* +084 fp+194 */ int frames_to_change_direction_on_standing_turn;
+    /* +084 fp+194 */ float frames_to_change_direction_on_standing_turn;
     /* +088 fp+198 */ float weight;
     /* +08C fp+19C */ float model_scaling;
     /* +090 fp+1A0 */ float initial_shield_size;

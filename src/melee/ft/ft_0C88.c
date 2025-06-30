@@ -67,7 +67,7 @@
 /* 0C9198 */ static void ftCo_Barrel_Take_Dmg_Cb(Fighter_GObj* gobj);
 /* 0C9264 */ static void ftCo_Barrel_Accessory1_Cb(Fighter_GObj* gobj);
 /* 0C9528 */ void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8);
-/* 0C98AC */ void fn_800C98AC(Fighter_GObj* gobj);
+/* 0C98AC */ void ftCo_Turn_Enter_Basic(Fighter_GObj* gobj);
 /* 0C9C2C */ static bool fn_800C9C2C(Fighter_GObj* gobj);
 /* 0C9D94 */ static void ftCo_TurnRun_Enter(Fighter_GObj* gobj,
                                             float anim_start);
@@ -478,14 +478,14 @@ bool ftCo_Turn_CheckInput(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ftCo_800C97A8(gobj)) {
-        fn_800C98AC(gobj);
+        ftCo_Turn_Enter_Basic(gobj);
         return true;
     }
     return false;
 }
 
 void ftCo_Turn_Enter(Fighter_GObj* gobj, FtMotionId msid, MotionFlags flags,
-                   f32 arg3, f32 frames, f32 anim_start)
+                     f32 arg3, f32 frames, f32 anim_start)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -499,7 +499,13 @@ void ftCo_Turn_Enter(Fighter_GObj* gobj, FtMotionId msid, MotionFlags flags,
     ftAnim_8006EBA4(gobj);
 }
 
-/// #fn_800C98AC
+void ftCo_Turn_Enter_Basic(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    float frames = fp->co_attrs.frames_to_change_direction_on_standing_turn;
+    PAD_STACK(8);
+    ftCo_Turn_Enter(gobj, ftCo_MS_Turn, Ft_MF_None, 0.0F, frames, 0.0F);
+}
 
 /// #ftCo_800C9924
 
