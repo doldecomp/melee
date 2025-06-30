@@ -52,6 +52,7 @@
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "ftPeach/ftPe_Float.h"
 #include "gm/gm_1601.h"
+#include "it/items/ittarucann.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
@@ -297,7 +298,17 @@ void ftCo_800C9034(Fighter_GObj* gobj)
 
 /// #fn_800C9198
 
-/// #ftCo_Barrel_Anim
+void ftCo_Barrel_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->mv.co.barrel.x0 != 0) {
+        fp->mv.co.barrel.x0 -= 1;
+        if (fp->mv.co.barrel.x0 == 0) {
+            it_80295F38(fp->mv.co.barrel.x8);
+        }
+    }
+}
 
 /// #ftCo_Barrel_IASA
 

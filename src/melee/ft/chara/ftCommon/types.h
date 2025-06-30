@@ -337,6 +337,11 @@ union ftCommon_MotionVars {
         /* fp+2348 */ int x8;
     } mushroom;
     struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ u8 pad_x4[4];
+        /* fp+2348 */ Item_GObj* x8;
+    } barrel;
+    struct {
         /* fp+2340 */ HSD_GObjEvent x0;
     } unk_800D2890;
     struct {
