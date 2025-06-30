@@ -484,7 +484,20 @@ bool ftCo_Turn_CheckInput(Fighter_GObj* gobj)
     return false;
 }
 
-/// #ftCo_800C9840
+void ftCo_Turn_Enter(Fighter_GObj* gobj, FtMotionId msid, MotionFlags flags,
+                   f32 arg3, f32 frames, f32 anim_start)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    fp->mv.co.turn.x0 = 0;
+    fp->mv.co.turn.x18 = 0;
+    fp->mv.co.turn.x4 = -fp->facing_dir;
+    fp->mv.co.turn.x10 = frames;
+    fp->mv.co.turn.x8 = arg3;
+    fp->mv.co.turn.x1C = 0;
+    Fighter_ChangeMotionState(gobj, msid, flags, anim_start, 1.0F, 0.0F, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
 /// #fn_800C98AC
 
