@@ -423,7 +423,10 @@ void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8)
         fp->co_attrs.fast_walk_min, accel_mul);
 }
 
-/// #ftCo_Walk_Anim
+void ftCo_Walk_Anim(Fighter_GObj* gobj)
+{
+    ftWalkCommon_800DFDDC(gobj);
+}
 
 /// #ftCo_Walk_IASA
 
