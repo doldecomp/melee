@@ -1428,7 +1428,10 @@ void ftCo_Jump_Phys(Fighter_GObj* gobj)
     ftCo_Jump_Phys_Inner(gobj);
 }
 
-/// #ftCo_Jump_Coll
+void ftCo_Jump_Coll(Fighter_GObj* gobj)
+{
+    ft_800835B0(gobj, ftCo_80096CC8, ft_80082B1C);
+}
 
 void ftCo_KneeBend_Enter(Fighter_GObj* gobj, ftCo_JumpInput jump_input)
 {
