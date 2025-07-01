@@ -36,6 +36,7 @@
 #include "ftCommon/ftCo_AttackLw4.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/ftCo_Escape.h"
@@ -56,7 +57,9 @@
 #include "gm/gm_1601.h"
 #include "it/items/ittarucann.h"
 #include "lb/lbbgflash.h"
+#include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
+#include "mp/mpcoll.h"
 #include "pl/player.h"
 
 #include <baselib/gobj.h>
@@ -429,7 +432,41 @@ void fn_800C9290(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800C92E4
+void ftCo_800C92E4(Fighter_GObj* gobj, Vec3* arg1, Vec3* arg2,
+                   lbColl_80008D30_arg1* arg3, float kb_angle)
+{
+    Fighter* fp;
+    HitCapsule hit;
+    fp = GET_FIGHTER(gobj);
+
+    {
+        HSD_JObj* jobj = GET_JOBJ(gobj);
+        Vec3 sp_vec1;
+        Vec3 sp_vec2;
+        HSD_JObjGetTranslation(jobj, &sp_vec1);
+        ftLib_800866DC(gobj, &sp_vec2);
+        fp->cur_pos.x = (arg1->x + sp_vec1.x) - sp_vec2.x;
+        fp->cur_pos.y = (arg1->y + sp_vec1.y) - sp_vec2.y;
+        fp->cur_pos.z = 0.0F;
+    }
+
+    mpColl_80043680(&fp->coll_data, arg2);
+    lbColl_80008D30(&hit, arg3);
+    if (kb_angle < 0.0F) {
+        kb_angle += 360.0F;
+    }
+    kb_angle = fp->facing_dir < 0.0F ? kb_angle : 180.0F - kb_angle;
+
+    fp->dmg.kb_applied = ftColl_80079EA8(fp, &hit, hit.unk_count);
+    fp->dmg.x1848_kb_angle = kb_angle;
+    fp->dmg.facing_dir_1 = fp->facing_dir;
+    fp->dmg.x184c_damaged_hurtbox = 0;
+    fp->dmg.x1854_collpos = fp->cur_pos;
+    fp->dmg.x1860_element = hit.element;
+    ftColl_800787B4(fp->mv.co.barrel.x8, gobj, 0);
+    fp->x21EC = fn_800C9290;
+    ftCo_8008DCE0(gobj, 0x5B, 0.0F);
+}
 
 bool ftCo_Walk_CheckInput(Fighter_GObj* gobj)
 {

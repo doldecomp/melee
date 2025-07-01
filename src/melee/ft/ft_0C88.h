@@ -7,6 +7,8 @@
 #include "ftCommon/forward.h"
 #include "it/forward.h"
 
+#include "lb/lbcollision.h"
+
 /* 0C884C */ void ftCo_800C884C(ftCo_GObj* gobj);
 /* 0C88A0 */ void ftCo_800C88A0(Fighter*);
 /* 0C88D4 */ void ftCo_800C88D4(ftCo_GObj* gobj, int, bool);
@@ -31,7 +33,8 @@
 /* 0C9208 */ void ftCo_Barrel_IASA(ftCo_GObj* gobj);
 /* 0C925C */ void ftCo_Barrel_Phys(ftCo_GObj* gobj);
 /* 0C9260 */ void ftCo_Barrel_Coll(ftCo_GObj* gobj);
-/* 0C92E4 */ UNK_RET ftCo_800C92E4(UNK_PARAMS);
+/* 0C92E4 */ void ftCo_800C92E4(Fighter_GObj* gobj, Vec3*, Vec3*,
+                                lbColl_80008D30_arg1*, float);
 /* 0C9468 */ bool ftCo_Walk_CheckInput(ftCo_GObj* gobj);
 /* 0C94B4 */ bool ftCo_Walk_CheckInput_Ottotto(ftCo_GObj* gobj);
 /* 0C95F4 */ void ftCo_Walk_Anim(ftCo_GObj* gobj);
