@@ -14,7 +14,7 @@
 void ftDk_HeavyWait1_IASA(HSD_GObj* gobj)
 {
     if (!ftCo_80094EA4(gobj)) {
-        ftCo_800CB59C(gobj);
+        ftCo_KneeBend_Check_ShortHop(gobj);
     }
 }
 

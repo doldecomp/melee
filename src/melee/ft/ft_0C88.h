@@ -82,7 +82,7 @@
 /* 0CB474 */ void ftCo_Jump_Phys(ftCo_GObj* gobj);
 /* 0CB4B0 */ void ftCo_Jump_Coll(ftCo_GObj* gobj);
 /* 0CB528 */ void ftCo_KneeBend_Anim(ftCo_GObj* gobj);
-/* 0CB59C */ void ftCo_800CB59C(ftCo_GObj* gobj);
+/* 0CB59C */ void ftCo_KneeBend_Check_ShortHop(ftCo_GObj* gobj);
 /* 0CB5FC */ void ftCo_KneeBend_IASA(ftCo_GObj* gobj);
 /* 0CB6AC */ void ftCo_KneeBend_Phys(ftCo_GObj* gobj);
 /* 0CB6CC */ void ftCo_KneeBend_Coll(ftCo_GObj* gobj);

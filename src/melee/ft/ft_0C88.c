@@ -1379,7 +1379,7 @@ void ftCo_KneeBend_Anim(Fighter_GObj* gobj)
 }
 #pragma pop
 
-void ftCo_800CB59C(Fighter_GObj* gobj)
+void ftCo_KneeBend_Check_ShortHop(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1400,7 +1400,7 @@ void ftCo_KneeBend_IASA(Fighter_GObj* gobj)
     RETURN_IF(ftCo_Attack100_CheckInput(gobj));
     RETURN_IF(ftCo_Catch_CheckInput(gobj));
     RETURN_IF(ftCo_AttackHi4_CheckInputNoD0(gobj));
-    ftCo_800CB59C(gobj);
+    ftCo_KneeBend_Check_ShortHop(gobj);
 }
 
 void ftCo_KneeBend_Phys(Fighter_GObj* gobj)
