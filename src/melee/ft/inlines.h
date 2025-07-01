@@ -93,6 +93,10 @@ static inline CollData* getFtColl(Fighter* fp)
     return &fp->coll_data;
 }
 
+static inline Fighter_GObj* getFtVictim(Fighter* fp) {
+    return fp->victim_gobj;
+}
+
 static inline bool ftGetGroundAir(Fighter* fp)
 {
     return fp->ground_or_air;

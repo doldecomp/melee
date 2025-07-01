@@ -189,6 +189,10 @@ union ftCommon_MotionVars {
         /* fp+2340 */ float x0;
     } downwait;
     struct {
+        /* fp+2340 */ u8 pad_x0[4];
+        /* fp+2344 */ u8 x4;
+    } downspot;
+    struct {
         /* fp+2340 */ float x0;
     } catch;
     struct {

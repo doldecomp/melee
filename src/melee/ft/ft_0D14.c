@@ -617,11 +617,6 @@ void fn_800D2890(Fighter_GObj* gobj, int ms_id)
     }
 }
 
-inline Fighter_GObj* get_victim(Fighter* fp)
-{
-    return fp->victim_gobj;
-}
-
 void fn_800D290C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -630,7 +625,7 @@ void fn_800D290C(Fighter_GObj* gobj)
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
 
-    victim = get_victim(fp);
+    victim = getFtVictim(fp);
     if (victim != NULL) {
         if (fp->x221B_b5) {
             ftCo_800DC750(victim);
