@@ -1296,18 +1296,32 @@ bool fn_800CAF78(Fighter_GObj* gobj)
     if ((fp->input.lstick.y >= p_ftCommonData->x80) &&
         (fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74))
     {
-        ftCo_KneeBend_Enter(gobj, 1);
+        ftCo_KneeBend_Enter(gobj, JumpInput_LStick);
         return true;
     }
 
     if (fp->input.x668 & HSD_PAD_XY) {
-        ftCo_KneeBend_Enter(gobj, 3);
+        ftCo_KneeBend_Enter(gobj, JumpInput_XY);
         return true;
     }
+
     return false;
 }
 
-/// #ftCo_800CB024
+bool ftCo_800CB024(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (ftCo_Jump_CheckInput(gobj)) {
+        return true;
+    }
+
+    if (ftCo_800DF910(fp)) {
+        ftCo_KneeBend_Enter(gobj, JumpInput_CStick);
+        return true;
+    }
+    return 0;
+}
 
 void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mult)
 {
