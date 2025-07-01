@@ -1534,7 +1534,18 @@ bool ftCo_800CB870(Fighter_GObj* gobj)
     return ftCo_JumpAerial_CheckInput(gobj, false);
 }
 
-/// #ftCo_800CB8E0
+bool ftCo_800CB8E0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (ftCo_800C5240(gobj)) {
+        return false;
+    }
+    if (fp->x2222_b1) {
+        return ftCo_800D730C(gobj, true);
+    }
+    return ftCo_JumpAerial_CheckInput(gobj, true);
+}
 
 bool ftCo_JumpAerial_CheckInput(Fighter_GObj* gobj, bool arg1)
 {
