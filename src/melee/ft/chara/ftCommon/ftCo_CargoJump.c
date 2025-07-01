@@ -47,7 +47,7 @@ void ftCo_CargoJump_IASA(Fighter_GObj* gobj)
 
 void ftCo_CargoJump_Phys(Fighter_GObj* gobj)
 {
-    ftCo_800CB438(gobj);
+    ftCo_Jump_Phys_Inner(gobj);
 }
 
 void ftCo_CargoJump_Coll(Fighter_GObj* gobj)

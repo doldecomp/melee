@@ -617,11 +617,6 @@ void fn_800D2890(Fighter_GObj* gobj, int ms_id)
     }
 }
 
-inline Fighter_GObj* get_victim(Fighter* fp)
-{
-    return fp->victim_gobj;
-}
-
 void fn_800D290C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -630,7 +625,7 @@ void fn_800D290C(Fighter_GObj* gobj)
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
 
-    victim = get_victim(fp);
+    victim = getFtVictim(fp);
     if (victim != NULL) {
         if (fp->x221B_b5) {
             ftCo_800DC750(victim);
@@ -771,7 +766,7 @@ void ftCo_ItemScrew_IASA(Fighter_GObj* gobj)
 
 void ftCo_ItemScrew_Phys(Fighter_GObj* gobj)
 {
-    ftCo_800CB438(gobj);
+    ftCo_Jump_Phys_Inner(gobj);
 }
 
 void ftCo_ItemScrew_Coll(Fighter_GObj* gobj)
@@ -2130,4 +2125,10 @@ void ftCo_800DEEA8(Fighter_GObj* gobj)
 
 /// #ftCo_800DF8E8
 
-/// #ftCo_800DF910
+bool ftCo_800DF910(Fighter* fp)
+{
+    if (fp->input.cstick.y >= p_ftCommonData->tap_jump_threshold) {
+        return true;
+    }
+    return false;
+}
