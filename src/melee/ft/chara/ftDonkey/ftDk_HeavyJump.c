@@ -16,7 +16,7 @@ void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 
 void ftDk_HeavyJump_Phys(HSD_GObj* gobj)
 {
-    ftCo_800CB438(gobj);
+    ftCo_Jump_Phys_Inner(gobj);
 }
 
 void ftDk_HeavyJump_Coll(HSD_GObj* gobj)

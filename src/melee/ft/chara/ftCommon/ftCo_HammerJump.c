@@ -45,7 +45,7 @@ void ftCo_HammerJump_IASA(ftCo_GObj* gobj) {}
 
 void ftCo_HammerJump_Phys(ftCo_GObj* gobj)
 {
-    ftCo_800CB438(gobj);
+    ftCo_Jump_Phys_Inner(gobj);
 }
 
 void ftCo_HammerJump_Coll(ftCo_GObj* gobj)

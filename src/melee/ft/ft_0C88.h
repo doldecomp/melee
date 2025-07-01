@@ -78,7 +78,7 @@
 /* 0CB110 */ void ftCo_800CB110(ftCo_GObj*, bool, float);
 /* 0CB2F8 */ void ftCo_Jump_Anim(ftCo_GObj* gobj);
 /* 0CB334 */ void ftCo_Jump_IASA(ftCo_GObj* gobj);
-/* 0CB438 */ void ftCo_800CB438(ftCo_GObj* gobj);
+/* 0CB438 */ void ftCo_Jump_Phys_Inner(ftCo_GObj* gobj);
 /* 0CB474 */ void ftCo_Jump_Phys(ftCo_GObj* gobj);
 /* 0CB4B0 */ void ftCo_Jump_Coll(ftCo_GObj* gobj);
 /* 0CB528 */ void ftCo_KneeBend_Anim(ftCo_GObj* gobj);

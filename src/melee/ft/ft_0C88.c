@@ -1412,7 +1412,7 @@ void ftCo_Jump_IASA(Fighter_GObj* gobj)
     RETURN_IF(ftPe_8011BAD8(gobj));
 }
 
-void ftCo_800CB438(Fighter_GObj* gobj)
+void ftCo_Jump_Phys_Inner(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -1423,7 +1423,10 @@ void ftCo_800CB438(Fighter_GObj* gobj)
     ft_80084DB0(gobj);
 }
 
-/// #ftCo_Jump_Phys
+void ftCo_Jump_Phys(Fighter_GObj* gobj)
+{
+    ftCo_Jump_Phys_Inner(gobj);
+}
 
 /// #ftCo_Jump_Coll
 

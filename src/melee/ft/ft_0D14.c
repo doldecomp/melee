@@ -766,7 +766,7 @@ void ftCo_ItemScrew_IASA(Fighter_GObj* gobj)
 
 void ftCo_ItemScrew_Phys(Fighter_GObj* gobj)
 {
-    ftCo_800CB438(gobj);
+    ftCo_Jump_Phys_Inner(gobj);
 }
 
 void ftCo_ItemScrew_Coll(Fighter_GObj* gobj)
