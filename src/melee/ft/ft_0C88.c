@@ -1403,7 +1403,10 @@ void ftCo_KneeBend_IASA(Fighter_GObj* gobj)
     ftCo_800CB59C(gobj);
 }
 
-/// #ftCo_KneeBend_Phys
+void ftCo_KneeBend_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
 /// #ftCo_KneeBend_Coll
 
