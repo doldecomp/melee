@@ -32,7 +32,7 @@ void ftDk_HeavyFall_Coll(HSD_GObj* gobj)
 
 bool ftDk_MS_347_800E0378(HSD_GObj* gobj)
 {
-    bool result = ftCo_800CAE80(gobj);
+    ftCo_JumpInput result = ftCo_Jump_GetInput(gobj);
     if (result) {
         ftDk_MS_348_800E04A4(gobj, result);
         return true;

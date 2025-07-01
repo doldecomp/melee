@@ -82,7 +82,7 @@ void ftLg_SpecialN_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->cmd_vars[0] != 0U) {
-        ftCo_800CCAAC(gobj);
+        ftCo_Fall_IASA_Inner(gobj);
     }
 }
 

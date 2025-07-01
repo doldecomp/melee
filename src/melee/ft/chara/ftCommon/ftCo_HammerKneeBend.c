@@ -36,7 +36,7 @@ void ftCo_HammerKneeBend_Anim(ftCo_GObj* gobj)
 
 void ftCo_HammerKneeBend_IASA(ftCo_GObj* gobj)
 {
-    ftCo_800CB59C(gobj);
+    ftCo_KneeBend_Check_ShortHop(gobj);
 }
 
 void ftCo_HammerKneeBend_Phys(ftCo_GObj* gobj)

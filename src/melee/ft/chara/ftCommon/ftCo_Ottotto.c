@@ -79,7 +79,7 @@ void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
     RETURN_IF(ftCo_Dash_CheckInput(gobj));
     RETURN_IF(ftCo_800D5FB0(gobj));
     RETURN_IF(ftCo_Turn_CheckInput(gobj));
-    RETURN_IF(ftCo_800C94B4(gobj));
+    RETURN_IF(ftCo_Walk_CheckInput_Ottotto(gobj));
 }
 
 void ftCo_Ottotto_Phys(HSD_GObj* gobj) {}

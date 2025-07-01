@@ -30,7 +30,7 @@ void ftCo_8009B860(ftCo_GObj* gobj)
     u8 _[16] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
-    ftCo_800C9840(gobj, fp_x2CC->x4_motion_state + 4, 0, 0,
+    ftCo_Turn_Enter(gobj, fp_x2CC->x4_motion_state + 4, 0, 0,
                   fp_x2CC->cargo_hold.x20_TURN_SPEED, 0);
     ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedTurn);
 }

@@ -1008,7 +1008,7 @@ bool doIasa(ftCo_GObj* gobj)
     fp->x2227_b4 = true;
     return true;
 ret_inline:
-    if (ftCo_800CAE80(gobj)) {
+    if (ftCo_Jump_GetInput(gobj)) {
         fp->mv.co.damage.x14 = fp->mv.co.damage.x0;
         return true;
     }
@@ -1032,7 +1032,7 @@ void ftCo_Damage_IASA(ftCo_GObj* gobj)
                 fp->input.x668 |= HSD_PAD_XY;
             }
             if (fp->ground_or_air == GA_Air) {
-                ftCo_800CCAAC(gobj);
+                ftCo_Fall_IASA_Inner(gobj);
             } else {
                 ftCo_Wait_IASA(gobj);
             }

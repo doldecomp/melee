@@ -1,6 +1,7 @@
 #include <platform.h>
 
 #include "ft/forward.h"
+#include "ftCommon/forward.h"
 
 #include "ftCo_HammerJump.h"
 
@@ -14,7 +15,7 @@
 
 bool ftCo_800C5A50(ftCo_GObj* gobj)
 {
-    enum_t e = ftCo_800CAE80(gobj);
+    ftCo_JumpInput e = ftCo_Jump_GetInput(gobj);
     if (e != 0) {
         ftCo_800C5B88(gobj, e);
         return true;

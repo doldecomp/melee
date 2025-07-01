@@ -56,7 +56,7 @@ bool ftCo_800C1D38(ftCo_GObj* gobj)
 bool ftCo_800C1E0C(Fighter* fp)
 {
     if (fp->x67E < p_ftCommonData->x250 ||
-        fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax)
+        fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold)
     {
         return true;
     }
