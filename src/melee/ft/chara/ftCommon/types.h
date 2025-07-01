@@ -91,7 +91,7 @@ union ftCommon_MotionVars {
     } kneebend;
     struct {
         /* fp+2340 */ int x0;
-        /* fp+2344 */ int x4;
+        /* fp+2344 */ bool x4;
         /* fp+2348 */ float x8;
     } jump;
     struct {

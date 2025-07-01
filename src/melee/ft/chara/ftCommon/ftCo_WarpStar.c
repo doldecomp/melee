@@ -3,6 +3,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCo_WarpStar.h"
+#include "stdbool.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -170,7 +171,7 @@ void ftCo_800C4C60(ftCo_GObj* gobj)
     fp->facing_dir = fp->mv.co.warpstar.facing_dir;
     Fighter_ChangeMotionState(gobj, ftCo_MS_JumpB, Ft_MF_None, 0, 1, 0, NULL);
     ftColl_8007B6EC(gobj);
-    fp->mv.co.jump.x0 = fp->mv.co.jump.x4 = 0;
+    fp->mv.co.jump.x0 = fp->mv.co.jump.x4 = false;
     fp->mv.co.jump.x8 = 1;
     fp->self_vel.x *= fp->co_attrs.ground_to_air_jump_momentum_multiplier *
                       fp->mv.co.jump.x8;

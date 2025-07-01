@@ -1328,7 +1328,7 @@ void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mult)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co_attrs;
 
-    fp->mv.co.jump.x4 = 0;
+    fp->mv.co.jump.x4 = false;
     co_attrs = &fp->co_attrs;
     fp->mv.co.jump.x8 = jump_mult;
 
@@ -1405,14 +1405,23 @@ void ftCo_Jump_IASA(Fighter_GObj* gobj)
     RETURN_IF(ftCo_80099A58(gobj));
     RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
     RETURN_IF(ftCo_800D705C(gobj));
-    RETURN_IF(!(fp->mv.co.jump.x4 == 0) && ftCo_800CEE70(gobj));
-    RETURN_IF(!(fp->mv.co.jump.x4 == 0) && ftPe_8011BA54(gobj));
+    RETURN_IF(fp->mv.co.jump.x4 && ftCo_800CEE70(gobj));
+    RETURN_IF(fp->mv.co.jump.x4 && ftPe_8011BA54(gobj));
     RETURN_IF(ftCo_800CB870(gobj));
-    RETURN_IF(fp->mv.co.jump.x4 == 0);
+    RETURN_IF(!fp->mv.co.jump.x4);
     RETURN_IF(ftPe_8011BAD8(gobj));
 }
 
-/// #ftCo_800CB438
+void ftCo_800CB438(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!fp->mv.co.jump.x4) {
+        fp->mv.co.jump.x4 = true;
+        return;
+    }
+    ft_80084DB0(gobj);
+}
 
 /// #ftCo_Jump_Phys
 
