@@ -2125,4 +2125,10 @@ void ftCo_800DEEA8(Fighter_GObj* gobj)
 
 /// #ftCo_800DF8E8
 
-/// #ftCo_800DF910
+bool ftCo_800DF910(Fighter* fp)
+{
+    if (fp->input.cstick.y >= p_ftCommonData->tap_jump_threshold) {
+        return true;
+    }
+    return false;
+}
