@@ -1,24 +1,23 @@
-#include "lbcardgame.h"
-
 #include "lbcardgame.static.h"
+#include "lbcardgame.h"
 
 #include <dolphin/card.h>
 #include <dolphin/os.h>
-#include <melee/lb/lb_0192.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/un/un_2FC9.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/hsd_3AA7.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lb_0192.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/un/un_2FC9.h>
 
 static struct {
     u32 x0, x4, x8;
@@ -67,8 +66,8 @@ const char* lb_8001C658(void)
     } else {
         gamedata_str = "Super Smash Bros. Melee         Game Data";
     }
-    sprintf(lb_80433318._1C, "%s %4d/%02d/%02d", gamedata_str,
-            time.year, time.mon + 1, time.mday);
+    sprintf(lb_80433318._1C, "%s %4d/%02d/%02d", gamedata_str, time.year,
+            time.mon + 1, time.mday);
     return lb_80433318._1C;
 }
 
@@ -101,8 +100,8 @@ int lb_8001C8BC(void)
     }
 
     return lb_8001BC18(0, "SuperSmashBros0110290334", (void**) &lb_803BAB74,
-            &lb_803BAB60, lb_8001C658(), lb_8001C820(),
-            lb_80433318.x5C[3], &lb_80433318.x4);
+                       &lb_803BAB60, lb_8001C658(), lb_8001C820(),
+                       lb_80433318.x5C[3], &lb_80433318.x4);
 }
 
 #pragma push
@@ -164,7 +163,7 @@ bool lb_8001CC4C(void)
     return lb_8001BA44(0, "SuperSmashBros0110290334", &lb_80433318.x4);
 }
 
-static int dont_inline_helper()
+static int dont_inline_helper(void)
 {
     int temp_r24;
 
@@ -173,9 +172,9 @@ static int dont_inline_helper()
     }
 
     temp_r24 = lb_8001C820();
-    return lb_8001BE30(0, "SuperSmashBros0110290334",
-        &lb_803BAB74, lb_8001C658(), temp_r24,
-        lb_80433318.x5C[3], &lb_80433318.x4, fn_8001CC30);
+    return lb_8001BE30(0, "SuperSmashBros0110290334", &lb_803BAB74,
+                       lb_8001C658(), temp_r24, lb_80433318.x5C[3],
+                       &lb_80433318.x4, fn_8001CC30);
 }
 
 void lb_8001CC84(void)
@@ -282,10 +281,10 @@ void lb_8001CF18(void)
 void lb_8001D164(int arg0)
 {
     if (lb_80433318.x5C == 0) {
-        lbArchive_80016DBC("LbMcGame.", (void** ) &lb_80433318.x5C,
-                "MemCardIconData", 0);
-        lbArchive_80016DBC("NtMemAc", (void** ) &lb_80433318.x64,
-                "ScNtcCommon_scene_data", 0);
+        lbArchive_80016DBC("LbMcGame.", (void**) &lb_80433318.x5C,
+                           "MemCardIconData", 0);
+        lbArchive_80016DBC("NtMemAc", (void**) &lb_80433318.x64,
+                           "ScNtcCommon_scene_data", 0);
         lb_80433318.x60 = arg0;
         lb_80433318.enable = 1;
     }

@@ -22,7 +22,7 @@ static inline bool pl_CheckIfSameTeam(int slotA, int slotB)
     return false;
 }
 
-static inline bool pl_Verify_gm_8016AEDC()
+static inline bool pl_Verify_gm_8016AEDC(void)
 {
     if ((gm_8016AEDC() != 0U) && (gm_8016AEDC() != -2U)) {
         return true;
