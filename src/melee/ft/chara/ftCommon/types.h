@@ -86,8 +86,8 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float frames;
     } runbrake;
     struct {
-        int x0;
-        ftCo_JumpInput jump_input;
+        /* fp+2340 */ int is_short_hop;
+        /* fp+2344 */ ftCo_JumpInput jump_input;
     } kneebend;
     struct {
         /* fp+2340 */ int x0;

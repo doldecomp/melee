@@ -6,8 +6,6 @@
 #include "ft/ft_0C88.h"
 
 #include "math.h"
-#include "platform.h"
-#include "stdbool.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -1213,7 +1211,7 @@ ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
     if ((fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) &&
         (fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74))
     {
-        return JumpInput_Stick;
+        return JumpInput_LStick;
     }
 
     if (fp->input.x668 & HSD_PAD_XY) {
@@ -1357,7 +1355,7 @@ void ftCo_KneeBend_Enter(Fighter_GObj* gobj, ftCo_JumpInput jump_input)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.kneebend.jump_input = jump_input;
-    fp->mv.co.kneebend.x0 = 0;
+    fp->mv.co.kneebend.is_short_hop = false;
     Fighter_ChangeMotionState(gobj, ftCo_MS_KneeBend, 0U, 0.0F, 1.0F, 0.0F,
                               NULL);
 }
@@ -1381,7 +1379,20 @@ void ftCo_KneeBend_Anim(Fighter_GObj* gobj)
 }
 #pragma pop
 
-/// #ftCo_800CB59C
+void ftCo_800CB59C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((!(fp->input.held_inputs & HSD_PAD_XY) &&
+         fp->mv.co.kneebend.jump_input == JumpInput_XY) ||
+        (fp->input.lstick.y < p_ftCommonData->tap_jump_release_threshold &&
+         fp->mv.co.kneebend.jump_input == JumpInput_LStick) ||
+        (fp->input.cstick.y < p_ftCommonData->tap_jump_release_threshold &&
+         fp->mv.co.kneebend.jump_input == JumpInput_CStick))
+    {
+        fp->mv.co.kneebend.is_short_hop = true;
+    }
+}
 
 /// #ftCo_KneeBend_IASA
 

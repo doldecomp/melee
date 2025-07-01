@@ -83,7 +83,7 @@ struct ftCommonData {
     /* +70 */ float tap_jump_threshold;
     /* +6C */ int x74;
     /* +78 */ float x78;
-    /* +7C */ u8 x7C[0x80 - 0x7C];
+    /* +7C */ float tap_jump_release_threshold;
     /* +80 */ float x80;
     /* +84 */ u8 x84[4];
     /* +88 */ float x88;
