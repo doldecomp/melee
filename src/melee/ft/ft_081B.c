@@ -739,19 +739,13 @@ float ft_GetGroundFrictionMultiplier(Fighter *fp)
 
 /// #ft_80084EEC
 
-extern f32 ft_804D83B8;
-
 void ft_80084F3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32 unused;
     ftCo_DatAttrs* co = &fp->co_attrs;
-    f32 var_f2 = fp->gr_vel;
     f32 var_f1 = co->gr_friction;
-    if (var_f2 < ft_804D83B8) {
-        var_f2 = -var_f2;
-    }
-    if (var_f2 > co->walk_max_vel) {
+    PAD_STACK(8);
+    if (fabs_inline(fp->gr_vel) > co->walk_max_vel) {
         var_f1 *= p_ftCommonData->x6C;
     }
     ftCommon_8007C930(fp, var_f1);
