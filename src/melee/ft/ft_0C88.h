@@ -40,7 +40,8 @@
 /* 0C9788 */ void ftCo_Walk_Coll(ftCo_GObj* gobj);
 /* 0C97A8 */ bool ftCo_800C97A8(ftCo_GObj* gobj);
 /* 0C97DC */ bool ftCo_Turn_CheckInput(ftCo_GObj* gobj);
-/* 0C9840 */ void ftCo_Turn_Enter(ftCo_GObj*, FtMotionId, MotionFlags, float, float, float);
+/* 0C9840 */ void ftCo_Turn_Enter(ftCo_GObj*, FtMotionId, MotionFlags, float,
+                                  float, float);
 /* 0C9924 */ void ftCo_Turn_Anim_Inner(ftCo_GObj* gobj);
 /* 0C9970 */ void ftCo_Turn_Anim(ftCo_GObj* gobj);
 /* 0C99F8 */ void ftCo_Turn_IASA(ftCo_GObj* gobj);
@@ -74,7 +75,7 @@
 /* 0CAE80 */ ftCo_JumpInput ftCo_Jump_GetInput(ftCo_GObj* gobj);
 /* 0CAED0 */ bool ftCo_Jump_CheckInput(ftCo_GObj* gobj);
 /* 0CB024 */ bool ftCo_800CB024(ftCo_GObj* gobj);
-/* 0CB110 */ void ftCo_800CB110(ftCo_GObj*, s32, float);
+/* 0CB110 */ void ftCo_800CB110(ftCo_GObj*, bool, float);
 /* 0CB2F8 */ void ftCo_Jump_Anim(ftCo_GObj* gobj);
 /* 0CB334 */ void ftCo_Jump_IASA(ftCo_GObj* gobj);
 /* 0CB438 */ void ftCo_800CB438(ftCo_GObj* gobj);
@@ -108,7 +109,7 @@
 /* 0CCA00 */ void ftCo_Fall_Anim(ftCo_GObj* gobj);
 /* 0CCAAC */ bool ftCo_Fall_IASA_Inner(ftCo_GObj* gobj);
 /* 0CCBE0 */ void ftCo_Fall_Anim_Inner(ftCo_GObj* gobj, float*, FtMotionId,
-                                FtMotionId, FtMotionId);
+                                       FtMotionId, FtMotionId);
 /* 0CCD34 */ void ftCo_Fall_IASA(ftCo_GObj* gobj);
 /* 0CCD58 */ void ftCo_Fall_Phys(ftCo_GObj* gobj);
 /* 0CCD78 */ void ftCo_Fall_Coll(ftCo_GObj* gobj);

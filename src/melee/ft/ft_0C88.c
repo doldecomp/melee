@@ -1263,7 +1263,55 @@ bool fn_800CAF78(Fighter_GObj* gobj)
 
 /// #ftCo_800CB024
 
-/// #ftCo_800CB110
+void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mult)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* co_attrs;
+
+    fp->mv.co.jump.x4 = 0;
+    co_attrs = &fp->co_attrs;
+    fp->mv.co.jump.x8 = jump_mult;
+
+    fp->self_vel.x *= fp->co_attrs.ground_to_air_jump_momentum_multiplier *
+                      fp->mv.co.jump.x8;
+    fp->self_vel.y *= p_ftCommonData->x438;
+    fp->self_vel.z = 0.0F;
+
+    {
+        float h_init_v =
+            fp->input.lstick.x * fp->co_attrs.jump_h_initial_velocity;
+        float h_vel = fp->mv.co.jump.x8 * h_init_v;
+        float h_max_vel;
+        float v_init_v;
+        if (fp->mv.co.jump.x0) {
+            v_init_v = co_attrs->hop_v_initial_velocity * fp->mv.co.jump.x8;
+        } else {
+            v_init_v = co_attrs->jump_v_initial_velocity * fp->mv.co.jump.x8;
+        }
+
+        fp->self_vel.y = v_init_v;
+        h_vel = fp->self_vel.x + h_vel;
+        h_max_vel = co_attrs->jump_h_max_velocity * fp->mv.co.jump.x8;
+
+        if (fabs_inline(h_vel) > h_max_vel) {
+            if (h_vel < 0.0F) {
+                h_vel = -h_max_vel;
+            } else {
+                h_vel = h_max_vel;
+            }
+        }
+        fp->self_vel.x = h_vel;
+    }
+
+    fp->x671_timer_lstick_tilt_y = 0xFE;
+    if (arg1) {
+        ft_800881D8(fp, fp->ft_data->x4C_sfx->x10, SFX_VOLUME_MAX,
+                    SFX_PAN_MID);
+        if (fp->x197C != NULL) {
+            ft_80088148(fp, 0x11A, SFX_VOLUME_MAX, SFX_PAN_MID);
+        }
+    }
+}
 
 void fn_800CB250(Fighter_GObj* gobj)
 {
