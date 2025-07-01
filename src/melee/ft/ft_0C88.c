@@ -1394,7 +1394,14 @@ void ftCo_800CB59C(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_KneeBend_IASA
+void ftCo_KneeBend_IASA(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi4_CheckInputNoD0(gobj));
+    ftCo_800CB59C(gobj);
+}
 
 /// #ftCo_KneeBend_Phys
 
