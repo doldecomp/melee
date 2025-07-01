@@ -1265,7 +1265,19 @@ bool fn_800CAF78(Fighter_GObj* gobj)
 
 /// #ftCo_800CB110
 
-/// #fn_800CB250
+void fn_800CB250(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtMotionId msid;
+
+    ftCommon_8007D5D4(fp);
+    msid = (fp->input.lstick.x * fp->facing_dir) > -p_ftCommonData->x78
+               ? ftCo_MS_JumpF
+               : ftCo_MS_JumpB;
+    Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
+    ftCo_800CB110(gobj, 1, 1.0F);
+    fp->x2227_b0 = true;
+}
 
 /// #ftCo_Jump_Anim
 
