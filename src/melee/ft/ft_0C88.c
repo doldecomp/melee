@@ -1387,7 +1387,12 @@ void fn_800CB250(Fighter_GObj* gobj)
     fp->x2227_b0 = true;
 }
 
-/// #ftCo_Jump_Anim
+void ftCo_Jump_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_800CC730(gobj);
+    }
+}
 
 void ftCo_Jump_IASA(Fighter_GObj* gobj)
 {
