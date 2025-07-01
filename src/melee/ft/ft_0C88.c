@@ -1799,8 +1799,23 @@ void ftCo_FallAerial_Enter(Fighter_GObj* gobj)
     fp->mv.co.fallaerial.x4 = 0.0F;
 }
 
-/// #ftCo_FallAerial_Anim
+#pragma push
+#pragma dont_inline on
+void ftCo_FallAerial_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCo_Fall_Anim_Inner(gobj, &fp->mv.co.fallaerial.x4, ftCo_SM_FallAerial,
+                         ftCo_SM_FallAerialF, ftCo_SM_FallAerialB);
+    ftCo_800CC988(gobj, fp->mv.co.fallaerial.x4);
+}
+#pragma pop
 
-/// #ftCo_FallAerial_IASA
+void ftCo_FallAerial_IASA(Fighter_GObj* gobj)
+{
+    RETURN_IF(ftCo_Fall_IASA_Inner(gobj));
+}
 
-/// #ftCo_FallAerial_Phys
+void ftCo_FallAerial_Phys(Fighter_GObj* gobj)
+{
+    ft_80084DB0(gobj);
+}
