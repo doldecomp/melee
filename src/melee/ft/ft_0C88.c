@@ -1362,7 +1362,24 @@ void ftCo_KneeBend_Enter(Fighter_GObj* gobj, ftCo_JumpInput jump_input)
                               NULL);
 }
 
-/// #ftCo_KneeBend_Anim
+#pragma push
+#pragma dont_inline on
+void ftCo_KneeBend_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+
+    if (fp->cur_anim_frame >= fp->co_attrs.jump_startup_time ||
+        !ftAnim_IsFramesRemaining(gobj))
+    {
+        if (ft_800D2D0C(gobj)) {
+            ftCo_ItemScrew_Enter(gobj);
+        } else {
+            fn_800CB250(gobj);
+        }
+    }
+}
+#pragma pop
 
 /// #ftCo_800CB59C
 
