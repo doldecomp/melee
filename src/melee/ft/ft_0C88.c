@@ -1408,7 +1408,10 @@ void ftCo_KneeBend_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftCo_KneeBend_Coll
+void ftCo_KneeBend_Coll(Fighter_GObj* gobj)
+{
+    ft_80083F88(gobj);
+}
 
 void ft_800CB6EC(Fighter* fp, s32 arg1)
 {
