@@ -227,7 +227,10 @@ bool ftCo_800C8C84(Fighter_GObj* gobj)
 
 /// #ftCo_800C8D00
 
-/// #fn_800C8E40
+void fn_800C8E40(Fighter* fp, FtSFX* sfx)
+{
+    ft_80088148(fp, fp->ft_data->x4C_sfx->xC, SFX_VOLUME_MAX, SFX_PAN_MID);
+}
 
 static inline void fn_800C8E74_inline(Fighter_GObj* gobj)
 {
