@@ -110,6 +110,10 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
     } fallaerial;
     struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ float x4;
+    } squat;
+    struct {
         /* fp+2340 */ bool allow_interrupt;
     } landing;
     struct {

@@ -35,10 +35,12 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_JumpAerial.h"
+#include "ftCommon/ftCo_Pass.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
 #include "ftPeach/ftPe_SpecialHi.h"
+#include "mp/mpcoll.h"
 
 #include <math.h>
 #include <melee/cm/camera.h>
@@ -78,7 +80,9 @@
 /* 0D1C40 */ static void fn_800D1C40(Fighter_GObj* gobj);
 /* 0D20EC */ static void fn_800D20EC(Fighter_GObj* gobj);
 /* 0D2530 */ static void fn_800D2530(Fighter_GObj* gobj);
+/* 0D600C */ static void ftCo_Squat_Enter(Fighter_GObj* gobj);
 /* 0D627C */ static bool fn_800D627C(Fighter_GObj* gobj);
+/* 0D62C4 */ static void fn_800D62C4(Fighter_GObj* gobj);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
@@ -1473,21 +1477,97 @@ void ftCo_Landing_Coll(Fighter_GObj* gobj)
     ft_80084280(gobj);
 }
 
-/// #ftCo_Squat_CheckInput
+bool ftCo_Squat_CheckInput(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->input.lstick.y < -p_ftCommonData->x90) {
+        return true;
+    }
 
-/// #fn_800D5F84
+    return false;
+}
 
-/// #ftCo_800D5FB0
+bool fn_800D5F84(Fighter_GObj* gobj)
+{
+    return ftCo_Squat_CheckInput(gobj);
+}
 
-/// #fn_800D600C
+bool ftCo_800D5FB0(Fighter_GObj* gobj)
+{
+    if (ftCo_Squat_CheckInput(gobj)) {
+        ftCo_Squat_Enter(gobj);
+        return true;
+    }
 
-/// #ftCo_Squat_Anim
+    return false;
+}
 
-/// #ftCo_Squat_IASA
+void ftCo_Squat_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
 
-/// #ftCo_Squat_Phys
+    Fighter_ChangeMotionState(gobj, ftCo_MS_Squat, Ft_MF_None, 0.0F, 1.0F,
+                              0.0F, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->mv.co.squat.x0 = 0;
+    ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
+}
 
-/// #ftCo_Squat_Coll
+void ftCo_Squat_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_800D638C(gobj);
+    }
+}
+
+static inline bool ftCo_Squat_IASA_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->mv.co.squat.x0 && fp->mv.co.squat.x4) {
+        fp->mv.co.squat.x4 -= 1.0F;
+
+        if (!fp->mv.co.squat.x4 && mpColl_8004CBC0(&fp->coll_data)) {
+            ftCo_8009A228(gobj);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void ftCo_Squat_IASA(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+
+    RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_800D6824(gobj));
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_Catch_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+    RETURN_IF(ftCo_80091A4C(gobj));
+    RETURN_IF(ftCo_800DE9D8(gobj));
+    RETURN_IF(ftCo_Jump_CheckInput(gobj));
+    RETURN_IF(ftCo_80099F9C(gobj));
+    RETURN_IF(ftCo_Squat_IASA_inline(gobj));
+}
+
+void ftCo_Squat_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
+
+void ftCo_Squat_Coll(Fighter_GObj* gobj)
+{
+    ft_80083F88(gobj);
+}
 
 bool fn_800D627C(Fighter_GObj* gobj)
 {
@@ -1520,24 +1600,15 @@ bool fn_800D627C(Fighter_GObj* gobj)
 
 /// #ftCo_800D67C4
 
-bool ftCo_800D6824(Fighter_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800D6824
 
 /// #ftCo_800D688C
 
-bool ftCo_800D68C0(Fighter_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_800D68C0
 
 /// #ftCo_800D6928
 
-bool ftCo_Attack100_CheckInput(Fighter_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_Attack100_CheckInput
 
 /// #ftCo_800D69C4
 
@@ -1734,10 +1805,7 @@ void ftCo_ItemScopeAirEnd_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_ItemScopeAirEnd_Coll
 
-bool ftCo_Catch_CheckInput(Fighter_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ftCo_Catch_CheckInput
 
 bool ftCo_800D8A38(Fighter_GObj* gobj)
 {
