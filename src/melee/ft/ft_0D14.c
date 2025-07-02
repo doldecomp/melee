@@ -14,6 +14,8 @@
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/ftdata.h"
+#include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -39,6 +41,8 @@
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
+#include "ftCLink/ftCl_Init.h"
+#include "ftLink/ftLk_AttackAir.h"
 #include "ftPeach/ftPe_SpecialHi.h"
 #include "mp/mpcoll.h"
 
@@ -81,8 +85,9 @@
 /* 0D20EC */ static void fn_800D20EC(Fighter_GObj* gobj);
 /* 0D2530 */ static void fn_800D2530(Fighter_GObj* gobj);
 /* 0D600C */ static void ftCo_Squat_Enter(Fighter_GObj* gobj);
-/* 0D627C */ static bool fn_800D627C(Fighter_GObj* gobj);
+/* 0D627C */ static bool ftCo_SquatWait_CheckInput(Fighter_GObj* gobj);
 /* 0D62C4 */ static void fn_800D62C4(Fighter_GObj* gobj);
+/* 0D65D8 */ static bool fn_800D65D8(Fighter_GObj* gobj);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
@@ -1461,8 +1466,8 @@ void ftCo_Landing_IASA(Fighter_GObj* gobj)
     RETURN_IF(ftCo_800DE9D8(gobj));
     RETURN_IF(ftCo_Jump_CheckInput(gobj));
     RETURN_IF(ftCo_Dash_CheckInput(gobj));
-    RETURN_IF(!(!(fp->cur_anim_frame < (fp->frame_speed_mul + *landing_lag)) ||
-                !fn_800D627C(gobj)));
+    RETURN_IF((fp->cur_anim_frame < (fp->frame_speed_mul + *landing_lag)) &&
+              ftCo_SquatWait_CheckInput(gobj));
     RETURN_IF(ftCo_Turn_CheckInput(gobj));
     RETURN_IF(ftCo_Walk_CheckInput(gobj));
 }
@@ -1569,24 +1574,96 @@ void ftCo_Squat_Coll(Fighter_GObj* gobj)
     ft_80083F88(gobj);
 }
 
-bool fn_800D627C(Fighter_GObj* gobj)
+bool ftCo_SquatWait_CheckInput(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->input.lstick.y < -p_ftCommonData->x90) {
+        fn_800D62C4(gobj);
+        return true;
+    }
+
+    return false;
+}
+
+static inline void ftCo_SquatWait_Enter_inline(Fighter_GObj* gobj,
+                                               MotionFlags flags, bool arg2)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    Fighter_ChangeMotionState(gobj, ftCo_MS_SquatWait, flags, 0.0F, 1.0F, 0.0F,
+                              NULL);
+
+    if (ftCo_8008A698(fp) && ftData_80085FD4(fp, ftCo_SM_SquatWaitItem)->x8) {
+        ftCo_8008A6D8(gobj, ftCo_SM_SquatWaitItem);
+    }
+
+    if (arg2) {
+        ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
+    }
+
+    switch (GET_FIGHTER(gobj)->kind) { /* irregular */
+    case FTKIND_LINK:
+        ftLk_AttackAir_800EB3BC(gobj);
+        return;
+    case FTKIND_CLINK:
+        ftCl_Init_8014919C(gobj);
+        return;
+    default:
+        return;
+    }
+}
+
+void fn_800D62C4(Fighter_GObj* gobj)
+{
+    ftCo_SquatWait_Enter_inline(gobj, Ft_MF_None, true);
+}
+
+void ftCo_800D638C(Fighter_GObj* gobj)
+{
+    ftCo_SquatWait_Enter_inline(gobj, Ft_MF_SkipNametagVis, false);
+}
+
+void ftCo_SquatWait_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_8008A7A8(gobj, fp->ft_data->x28);
+}
+
+void ftCo_SquatWait_IASA(Fighter_GObj* gobj)
+{
+    RETURN_IF(ftCo_800D68C0(gobj));
+    RETURN_IF(ftCo_Attack100_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw4_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackS3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackHi3_CheckInput(gobj));
+    RETURN_IF(ftCo_AttackLw3_CheckInput(gobj));
+    RETURN_IF(ftCo_Attack1_CheckInput(gobj));
+    RETURN_IF(ftCo_80091A4C(gobj));
+    RETURN_IF(ftCo_800DE9D8(gobj));
+    RETURN_IF(ftCo_Jump_CheckInput(gobj));
+    RETURN_IF(ftCo_80099F9C(gobj));
+    RETURN_IF(ftCo_Dash_CheckInput(gobj));
+    RETURN_IF(fn_800D65D8(gobj));
+}
+
+void ftCo_SquatWait_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+    ftColl_8007AEE0(gobj);
+}
+
+void ftCo_SquatWait_Coll(Fighter_GObj* gobj)
+{
+    ft_80083F88(gobj);
+}
+
+bool fn_800D65D8(Fighter_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
-
-/// #fn_800D62C4
-
-/// #ftCo_800D638C
-
-/// #ftCo_SquatWait_Anim
-
-/// #ftCo_SquatWait_IASA
-
-/// #ftCo_SquatWait_Phys
-
-/// #ftCo_SquatWait_Coll
-
-/// #fn_800D65D8
 
 /// #fn_800D6620
 
