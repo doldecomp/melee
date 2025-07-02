@@ -43,9 +43,9 @@ struct hsd_803AC3E0_arg0_t {
 /* 3B1F78 */ UNK_RET fn_803B1F78(UNK_PARAMS);
 /* 3B21E8 */ UNK_RET fn_803B21E8(UNK_PARAMS);
 /* 3B2374 */ void hsd_803B2374(void);
-/* 3B24E4 */ UNK_RET hsd_803B24E4(UNK_PARAMS);
-/* 3B2550 */ UNK_RET hsd_803B2550(UNK_PARAMS);
-/* 3B2674 */ UNK_RET hsd_803B2674(UNK_PARAMS);
+/* 3B24E4 */ void hsd_803B24E4(s32*, int, int, void*);
+/* 3B2550 */ int hsd_803B2550(s32*, const char*, void (*)(int, int));
+/* 3B2674 */ int hsd_803B2674(UNK_T);
 /* 3B26CC */ UNK_RET fn_803B26CC(UNK_PARAMS);
 
 #endif
