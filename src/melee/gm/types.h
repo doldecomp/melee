@@ -100,9 +100,9 @@ struct gmm_x1F2C {
     s8 x7B;
     UnkFlagStruct2 x7C;
     s16 x7E;
-    s8 x80;
-    s8 x81;
-    s8 x82;
+    u8 x80;
+    u8 x81;
+    u8 x82;
     s8 x83;
     s32 x84;
     s32 x88;
