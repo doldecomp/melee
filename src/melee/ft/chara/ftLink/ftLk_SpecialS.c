@@ -449,7 +449,7 @@ void ftLk_SpecialAirS2_Coll(HSD_GObj* gobj)
         if (fp->fv.lk.boomerang_gobj != NULL) {
             it_802A07B4(fp->fv.lk.boomerang_gobj);
         }
-        ftCo_800D5BF8(gobj);
+        ftCo_Landing_Enter_Basic(gobj);
     }
 }
 

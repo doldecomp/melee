@@ -422,7 +422,7 @@ void ftSk_SpecialAirNCancel_Coll(Fighter_GObj* gobj)
 {
     PAD_STACK(4 * 2);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCo_800D5BF8(gobj);
+        ftCo_Landing_Enter_Basic(gobj);
         clearDmgCallbacks(gobj);
     }
 }
@@ -434,7 +434,7 @@ void ftSk_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
         clearDmgCallbacks(gobj);
         fp->fv.sk.x0 = 0;
         fp->mv.sk.specialn.x4 = false;
-        ftCo_800D5BF8(gobj);
+        ftCo_Landing_Enter_Basic(gobj);
     }
 }
 

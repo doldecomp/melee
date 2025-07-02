@@ -410,7 +410,7 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
         return;
     }
 
-    ftCo_800D5BF8(gobj);
+    ftCo_Landing_Enter_Basic(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 
@@ -482,7 +482,7 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
         return;
     }
 
-    ftCo_800D5BF8(gobj);
+    ftCo_Landing_Enter_Basic(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 
@@ -544,7 +544,7 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
         return;
     }
 
-    ftCo_800D5BF8(gobj);
+    ftCo_Landing_Enter_Basic(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 

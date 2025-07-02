@@ -113,5 +113,5 @@ void ftCo_EscapeAir_Coll(Fighter_GObj* gobj)
 
 void ftCo_80099D70(Fighter_GObj* gobj)
 {
-    ftCo_800D5CB0(gobj, 0, p_ftCommonData->x344);
+    ftCo_LandingFallSpecial_Enter(gobj, false, p_ftCommonData->x344);
 }

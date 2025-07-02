@@ -161,6 +161,6 @@ void ftNs_SpecialAirS_Coll(
 
     ness_attr = fp->dat_attrs;
     if (ft_80081D0C(gobj) != false) {
-        ftCo_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
+        ftCo_LandingFallSpecial_Enter(gobj, false, ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

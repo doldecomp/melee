@@ -173,7 +173,7 @@ void ftCo_80096D28(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->mv.co.fallspecial.x10 || fp->self_vel.y < ftCo_800D0EC8(fp)) {
-        ftCo_800D5CB0(gobj, fp->mv.co.fallspecial.allow_interrupt,
+        ftCo_LandingFallSpecial_Enter(gobj, fp->mv.co.fallspecial.allow_interrupt,
                       fp->mv.co.fallspecial.x14);
     } else {
         ft_8008A2BC(gobj);

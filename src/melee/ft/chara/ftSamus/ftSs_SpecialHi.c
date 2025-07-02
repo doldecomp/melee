@@ -217,7 +217,7 @@ void ftSs_SpecialHi_Coll(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            ftCo_800D5CB0(gobj, 0, samus_attr->x50);
+            ftCo_LandingFallSpecial_Enter(gobj, false, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {
@@ -250,7 +250,7 @@ void ftSs_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            ftCo_800D5CB0(gobj, 0, samus_attr->x50);
+            ftCo_LandingFallSpecial_Enter(gobj, false, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {
