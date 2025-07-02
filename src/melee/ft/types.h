@@ -96,7 +96,7 @@ struct ftCommonData {
     /* +88 */ float x88;
     /* +8C */ int x8C;
     /* +90 */ float x90;
-    /* +94 */ u8 x94[0x98 - 0x94];
+    /* +94 */ float x94;
     /* +98 */ float x98;
     /* +9C */ float x9C;
     /* +A0 */ float xA0;
