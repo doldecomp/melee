@@ -8,6 +8,7 @@
 
 #include "ft/forward.h" // IWYU pragma: export
 
+#include "ft/ftwaitanim.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
@@ -630,7 +631,7 @@ struct ftData {
         /* +4 */ HSD_Joint* x8;
     }* x20;
     /* +24 */ UNK_T x24;
-    /* +28 */ UNK_T x28;
+    /* +28 */ WaitStruct* x28;
     /* +2C */ struct ftDynamics* x2C;
     /* +30 */ UNK_T x30;
     /* +34 */ struct ftData_x34 {
@@ -1830,7 +1831,7 @@ typedef struct ftData_UnkModelStruct {
 struct ftData_80085FD4_ret {
     /* +0 */ UNK_T x0;
     /* +4 */ UNK_T x4;
-    /* +8 */ UNK_T x8;
+    /* +8 */ u32 x8;
     /* +C */ UNK_T xC;
     /* +10:0 */ u8 x10_b0 : 1;
     /* +10:1 */ u8 x10_b1 : 1;
