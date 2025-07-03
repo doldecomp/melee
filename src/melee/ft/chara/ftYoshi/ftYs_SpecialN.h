@@ -28,7 +28,7 @@
 /* 12D2F8 */ void fn_8012D2F8(ftYs_GObj* gobj);
 /* 12D360 */ void fn_8012D360(ftYs_GObj* gobj);
 /* 12D3C0 */ UNK_RET fn_8012D3C0(UNK_PARAMS);
-/* 12D428 */ UNK_RET fn_8012D428(UNK_PARAMS);
+/* 12D428 */ void fn_8012D428(Fighter_GObj* gobj);
 /* 12D488 */ UNK_RET fn_8012D488(UNK_PARAMS);
 /* 12D4F0 */ void fn_8012D4F0(Fighter_GObj* gobj);
 /* 12D550 */ void ftYs_SpecialN1_Anim(ftYs_GObj* gobj);
@@ -68,7 +68,7 @@
 /* 12E2C4 */ void ftYs_SpecialHi_Enter(ftYs_GObj* gobj);
 /* 12E33C */ void ftYs_SpecialAirHi_Enter(ftYs_GObj* gobj);
 /* 12E3B4 */ UNK_RET fn_8012E3B4(UNK_PARAMS);
-/* 12E44C */ UNK_RET fn_8012E44C(UNK_PARAMS);
+/* 12E44C */ void fn_8012E44C(ftYs_GObj* gobj);
 /* 12E4DC */ void ftYs_SpecialHi_Anim(ftYs_GObj* gobj);
 /* 12E538 */ void ftYs_SpecialAirHi_Anim(ftYs_GObj* gobj);
 /* 12E594 */ void ftYs_SpecialHi_Phys(ftYs_GObj* gobj);

@@ -61,7 +61,16 @@ union ftYoshi_MotionVars {
         float x18;
     } unk2;
     struct ftYoshi_SpecialNVars {
-        /* fp+2340 */ int x0_b0 : 1;
+        union x0 {
+            /* fp+2340 */ s32 x0;
+            struct {
+                /* fp+2340 */ int x0_b0 : 1;
+                /* fp+2341 */ int x0_b1 : 1;
+                /* fp+2342 */ int x0_b2 : 1;
+                /* fp+2343 */ int x0_b3 : 1;
+            };
+        };
+        /* fp+2344 */ s32 x4;
     } specialn;
 };
 
