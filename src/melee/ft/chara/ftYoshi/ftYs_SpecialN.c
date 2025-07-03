@@ -85,7 +85,7 @@ void fn_8012CEE0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 348, 528530, fp->cur_anim_frame, 1, 0,
                               NULL);
     fp->x2222_b2 = true;
-    fp->mv.ys.specialn.x0_b0 = true;
+    fp->mv.ys.specialn.x0_bytes.x0_b0 = true;
     ftYs_SpecialS_8012DF00(gobj);
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -97,7 +97,7 @@ void fn_8012CF7C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 347, 528530, fp->cur_anim_frame, 1, 0,
                               NULL);
     fp->x2222_b2 = 1;
-    fp->mv.ys.specialn.x0_b0 = false;
+    fp->mv.ys.specialn.x0_bytes.x0_b0 = false;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
 }
@@ -144,8 +144,8 @@ void fn_8012D428(Fighter_GObj* gobj)
 
     fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x162, 0x0C4C5092U, fp->cur_anim_frame,
-                              0, ftYs_Init_804D9A38, NULL);
+    Fighter_ChangeMotionState(gobj, 0x162, 0x0C4C5092U, fp->cur_anim_frame, 0,
+                              ftYs_Init_804D9A38, NULL);
 }
 
 /// #fn_8012D488
@@ -334,7 +334,7 @@ void ftYs_SpecialAirHi_Coll(ftYs_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.ys.specialn.x0 != 0) {
-        //ft_80083A48(NULL, fn_8012E44C);
+        // ft_80083A48(NULL, fn_8012E44C);
         ft_80083A48(gobj, fn_8012E44C);
         // return;
     } else {
