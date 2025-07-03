@@ -30,7 +30,7 @@
 /* 082A68 */ bool ft_80082A68(Fighter_GObj* gobj);
 /* 082B1C */ void ft_80082B1C(Fighter_GObj* gobj);
 /* 082B78 */ void ftCo_AirCatchHit_Coll(Fighter_GObj*);
-/* 082C74 */ void ft_80082C74(Fighter_GObj*, HSD_GObjEvent);
+/* 082C74 */ void ft_80082C74(void*, HSD_GObjEvent);
 /* 082D40 */ void ft_80082D40(Fighter_GObj* gobj, float);
 /* 082E3C */ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj);
 /* 082F28 */ void ft_80082F28(Fighter_GObj* gobj);
@@ -50,7 +50,7 @@
 /* 08370C */ void ft_8008370C(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083844 */ UNK_RET ft_80083844(UNK_PARAMS);
 /* 083910 */ UNK_RET ft_80083910(UNK_PARAMS);
-/* 083A48 */ UNK_RET ft_80083A48(UNK_PARAMS);
+/* 083A48 */ void ft_80083A48(void*, HSD_GObjEvent);
 /* 083B68 */ void ft_80083B68(Fighter_GObj* gobj);
 /* 083C00 */ UNK_RET ft_80083C00(UNK_PARAMS);
 /* 083CE4 */ UNK_RET ft_80083CE4(UNK_PARAMS);

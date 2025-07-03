@@ -538,7 +538,8 @@ void ftCo_AirCatchHit_Coll(Fighter_GObj* gobj)
     }
 }
 
-void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
+//void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
+void ft_80082C74(void* gobj, void (*arg1)(Fighter_GObj*))
 {
     CollData* coll;
     Fighter* fp;
