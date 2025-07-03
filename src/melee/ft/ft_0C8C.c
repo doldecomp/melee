@@ -70,10 +70,10 @@ void ftCo_800C8D00(Fighter_GObj* gobj)
 
         if (victim != NULL) {
             if (fp->x221B_b5) {
-                ftCo_800DC750(victim);
+                ftCo_CaptureCut_Enter(victim);
             } else {
                 Fighter_GObj* tmp = victim;
-                ftCo_800DC750(gobj);
+                ftCo_CaptureCut_Enter(gobj);
                 ftCo_800DA698(tmp, false);
             }
             ftCommon_8007DB58(victim);

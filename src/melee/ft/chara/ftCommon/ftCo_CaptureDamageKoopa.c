@@ -39,7 +39,7 @@ static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
     if (fp->grab_timer <= 0) {
         ftCo_800DA698(fp->victim_gobj, false);
         fp->facing_dir = -fp->facing_dir;
-        ftCo_800DC750(gobj);
+        ftCo_CaptureCut_Enter(gobj);
     } else {
         ftCo_800BC4A8(gobj);
     }
