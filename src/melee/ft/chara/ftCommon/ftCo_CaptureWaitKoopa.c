@@ -28,7 +28,7 @@ void ftCo_CaptureWaitKoopa_Anim(Fighter_GObj* gobj)
     if (fp->grab_timer <= 0) {
         ftCo_800DA698(fp->victim_gobj, 0);
         fp->facing_dir = -fp->facing_dir;
-        ftCo_800DC750(gobj);
+        ftCo_CaptureCut_Enter(gobj);
     } else {
         ftCo_800BC4A8(gobj);
     }

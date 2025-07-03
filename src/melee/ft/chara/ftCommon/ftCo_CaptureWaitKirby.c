@@ -104,7 +104,7 @@ void ftCo_CaptureWaitKirby_IASA(Fighter_GObj* gobj)
         Fighter_GObj* victim_gobj = fp->victim_gobj;
         fp->facing_dir = ftKb_SpecialN_800F5A60(victim_gobj);
         HSD_JObjSetScale(jobj, &jobj->scale);
-        ftCo_800DC750(gobj);
+        ftCo_CaptureCut_Enter(gobj);
         ftCo_800DA698(victim_gobj, 0);
     }
 }
