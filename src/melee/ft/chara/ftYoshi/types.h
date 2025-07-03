@@ -68,8 +68,8 @@ union ftYoshi_MotionVars {
                 /* fp+2341 */ int x0_b1 : 1;
                 /* fp+2342 */ int x0_b2 : 1;
                 /* fp+2343 */ int x0_b3 : 1;
-            }x0_bytes;
-        };
+            } x0_bytes;
+        } x0;
         /* fp+2344 */ s32 x4;
     } specialn;
 };

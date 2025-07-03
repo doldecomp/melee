@@ -85,7 +85,7 @@ void fn_8012CEE0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 348, 528530, fp->cur_anim_frame, 1, 0,
                               NULL);
     fp->x2222_b2 = true;
-    fp->mv.ys.specialn.x0_bytes.x0_b0 = true;
+    fp->mv.ys.specialn.x0.x0_bytes.x0_b0 = true;
     ftYs_SpecialS_8012DF00(gobj);
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -97,7 +97,7 @@ void fn_8012CF7C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 347, 528530, fp->cur_anim_frame, 1, 0,
                               NULL);
     fp->x2222_b2 = 1;
-    fp->mv.ys.specialn.x0_bytes.x0_b0 = false;
+    fp->mv.ys.specialn.x0.x0_bytes.x0_b0 = false;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
 }
@@ -333,7 +333,7 @@ void ftYs_SpecialAirHi_Phys(ftYs_GObj* gobj)
 void ftYs_SpecialAirHi_Coll(ftYs_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.ys.specialn.x0 != 0) {
+    if (fp->mv.ys.specialn.x0.x0 != 0) {
         // ft_80083A48(NULL, fn_8012E44C);
         ft_80083A48(gobj, fn_8012E44C);
         // return;
