@@ -455,7 +455,7 @@ void ftPk_SpecialSEnd_Anim(HSD_GObj* gobj)
 void ftPk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -486,7 +486,7 @@ void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 void ftPk_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

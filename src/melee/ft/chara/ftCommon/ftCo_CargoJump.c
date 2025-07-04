@@ -34,7 +34,7 @@ void ftCo_8009BB64(ftCo_GObj* gobj)
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state + 7, Ft_MF_None,
                               0, 1, 0, NULL);
     ftAnim_SetAnimRate(gobj, 0);
-    ftCo_800CB110(gobj, 1, 1);
+    ftCo_800CB110(gobj, true, 1);
     ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedWait);
 }
 

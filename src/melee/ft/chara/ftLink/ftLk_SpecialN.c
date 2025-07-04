@@ -206,7 +206,7 @@ void ftLk_SpecialAirN_Enter(ftLk_GObj* gobj)
         ftLk_SpecialN_UnsetArrow(gobj);
         ftLk_SpecialN_UnsetFv14(gobj);
         if (da->x8 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1, da->x8);
         }
@@ -371,7 +371,7 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
         ftLk_SpecialN_UnsetArrow(gobj);
         ftLk_SpecialN_UnsetFv14(gobj);
         if (da->x8 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1, da->x8);
         }
@@ -405,7 +405,7 @@ void ftLk_SpecialAirNEnd_Anim(ftLk_GObj* gobj)
         ftLk_SpecialN_UnsetFv14(gobj);
         updateParts(gobj);
         if (da->x8 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1, da->x8);
         }

@@ -129,7 +129,7 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
         if (ABS(fp->input.lstick.x) >= p_ftCommonData->x210 &&
             fp->x670_timer_lstick_tilt_x < p_ftCommonData->x214)
         {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
     }

@@ -121,7 +121,7 @@ void ftNs_SpecialAirS_Anim(
     HSD_GObj* gobj) // Ness's aerial PK Fire Animation callback
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -147,7 +147,7 @@ void ftNs_SpecialS_Coll(
     HSD_GObj* gobj) // Ness's grounded PK Fire Collision callback
 {
     if (ft_800827A0(gobj) == false) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

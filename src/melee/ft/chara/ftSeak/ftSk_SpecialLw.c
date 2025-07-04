@@ -1,10 +1,10 @@
 #include "ftSeak/ftSk_SpecialLw.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftZelda/ftZd_SpecialLw.h"
 
 #include <baselib/gobj.h>
@@ -87,7 +87,7 @@ void ftSk_SpecialLw_801144B8(HSD_GObj* gobj) {}
 void ftSk_SpecialAirLw2_Anim(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
-        ftCo_800CC730((Fighter_GObj*) gobj);
+        ftCo_Fall_Enter((Fighter_GObj*) gobj);
     }
 }
 

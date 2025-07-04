@@ -16,6 +16,6 @@
 /* 0C9BEC */ void ftCo_Turn_Phys(ftCo_GObj* gobj);
 /* 0C9C0C */ void ftCo_Turn_Coll(ftCo_GObj* gobj);
 /* 0C9C2C */ bool fn_800C9C2C(Fighter_GObj* gobj);
-/* 0C9C74 */ void ftCo_SmashTurn_Enter(Fighter_GObj* gobj);
+/* 0C9C74 */ void ftCo_Turn_Enter_Smash(Fighter_GObj* gobj);
 
 #endif

@@ -300,7 +300,7 @@ void ftCo_ThrownKirby_IASA(ftCo_GObj* gobj) {}
 static inline void inlineC0(ftCo_GObj* gobj)
 {
     Fighter_UpdateModelScale(gobj);
-    ftCo_800CC730(gobj);
+    ftCo_Fall_Enter(gobj);
 }
 
 void ftCo_ThrownKirby_Phys(ftCo_GObj* gobj)

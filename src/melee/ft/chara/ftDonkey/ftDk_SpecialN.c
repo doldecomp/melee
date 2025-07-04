@@ -245,7 +245,7 @@ void ftDk_SpecialAirNLoop_Anim(HSD_GObj* gobj)
             ftCo_800BFFD0(fighter2, 57, 0);
             fp->fv.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
             clearCallbacks(gobj);
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
     }
 }
@@ -255,7 +255,7 @@ void ftDk_SpecialAirNCancel_Anim(HSD_GObj* gobj)
     u8 _[16];
     if (!ftAnim_IsFramesRemaining(gobj)) {
         clearCallbacks(gobj);
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -302,7 +302,7 @@ void ftDk_SpecialAirN_Anim(HSD_GObj* gobj)
         fp->fv.dk.x222C = 0;
         clearCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1,
                           donkey_attr->SpecialN.x38_LANDING_LAG);
@@ -334,7 +334,7 @@ void ftDk_SpecialAirNFull_Anim(HSD_GObj* gobj)
         fp->fv.dk.x222C = 0;
         clearCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1,
                           donkey_attr->SpecialN.x38_LANDING_LAG);

@@ -974,7 +974,7 @@ void ftCo_Damage_Anim(ftCo_GObj* gobj)
             if (fp->x2224_b2) {
                 ftCo_80090780(gobj);
             } else if (!inlineC0(gobj)) {
-                ftCo_800CC730(gobj);
+                ftCo_Fall_Enter(gobj);
             }
         } else {
             ft_8008A2BC(gobj);

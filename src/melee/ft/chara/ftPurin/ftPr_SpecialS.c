@@ -69,7 +69,7 @@ void ftPr_SpecialS_Anim(Fighter_GObj* gobj)
 void ftPr_SpecialAirS_Anim(Fighter_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

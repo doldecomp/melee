@@ -5,7 +5,6 @@
 
 #include "ftCo_KneeBend.h"
 
-
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
@@ -23,24 +22,21 @@ void ftCo_KneeBend_Enter(Fighter_GObj* gobj, ftCo_JumpInput jump_input)
                               NULL);
 }
 
-#pragma push
-#pragma dont_inline on
 void ftCo_KneeBend_Anim(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    PAD_STACK(8);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
 
-    if (fp->cur_anim_frame >= fp->co_attrs.jump_startup_time ||
+    if (fp->cur_anim_frame >= co_attrs->jump_startup_time ||
         !ftAnim_IsFramesRemaining(gobj))
     {
         if (ft_800D2D0C(gobj)) {
             ftCo_ItemScrew_Enter(gobj);
         } else {
-            fn_800CB250(gobj);
+            ftCo_Jump_Enter(gobj);
         }
     }
 }
-#pragma pop
 
 void ftCo_KneeBend_Check_ShortHop(Fighter_GObj* gobj)
 {

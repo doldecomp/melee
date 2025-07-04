@@ -115,12 +115,12 @@ void ftKp_SpecialSEndB_Anim(HSD_GObj* gobj)
 
 void ftKp_SpecialAirSEndF_Anim(HSD_GObj* gobj)
 {
-    doEndFAnim(gobj, ftCo_800CC730);
+    doEndFAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKp_SpecialAirSEndB_Anim(HSD_GObj* gobj)
 {
-    doEndBAnim(gobj, ftCo_800CC730);
+    doEndBAnim(gobj, ftCo_Fall_Enter);
 }
 
 inline void ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj,

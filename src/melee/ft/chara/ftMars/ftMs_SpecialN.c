@@ -293,7 +293,7 @@ void ftMs_SpecialNEnd_Anim(Fighter_GObj* gobj)
 
 void ftMs_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
-    inlineA0(gobj, ftCo_800CC730);
+    inlineA0(gobj, ftCo_Fall_Enter);
 }
 
 void ftMs_SpecialNEnd_IASA(HSD_GObj* gobj) {}

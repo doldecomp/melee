@@ -28,11 +28,6 @@ void ftCo_DownSpot_Enter(Fighter_GObj* gobj)
     fp->mv.co.downspot.x4 = 0;
 }
 
-static inline void ftCo_DownSpot_Enter_noinline(Fighter_GObj* gobj)
-{
-    ftCo_DownSpot_Enter(gobj);
-}
-
 void ftCo_DownSpot_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {

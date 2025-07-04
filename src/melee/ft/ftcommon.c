@@ -704,7 +704,7 @@ void ftCommon_8007D92C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == 1) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     } else {
         ft_8008A2BC(gobj);
     }

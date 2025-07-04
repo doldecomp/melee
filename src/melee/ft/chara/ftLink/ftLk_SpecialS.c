@@ -299,13 +299,13 @@ void ftLk_SpecialS1Empty_Anim(HSD_GObj* gobj)
 void ftLk_SpecialAirS1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
 void ftLk_SpecialAirS2_Anim(HSD_GObj* gobj)
 {
-    doS2Anim(gobj, ftCo_800CC730);
+    doS2Anim(gobj, ftCo_Fall_Enter);
 }
 
 void ftLk_SpecialAirS1Empty_Anim(HSD_GObj* gobj)
@@ -414,7 +414,7 @@ void ftLk_SpecialS2_Coll(HSD_GObj* gobj)
         if (fp->fv.lk.boomerang_gobj != NULL) {
             it_802A07B4(fp->fv.lk.boomerang_gobj);
         }
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

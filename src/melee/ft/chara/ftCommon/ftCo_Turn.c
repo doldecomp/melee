@@ -168,7 +168,7 @@ bool fn_800C9C2C(Fighter_GObj* gobj)
     return false;
 }
 
-void ftCo_SmashTurn_Enter(Fighter_GObj* gobj)
+void ftCo_Turn_Enter_Smash(Fighter_GObj* gobj)
 {
     Fighter* fp_r7 = GET_FIGHTER(gobj);
     float facing = fp_r7->facing_dir;

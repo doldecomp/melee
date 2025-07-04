@@ -14,12 +14,10 @@ void ftCo_FallAerial_Enter(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_FallAerial, Ft_MF_None, 0.0F, 1.0F,
                               0.0F, NULL);
-    fp->mv.co.fallaerial.x0 = 23;
+    fp->mv.co.fallaerial.smid = ftCo_SM_FallAerial;
     fp->mv.co.fallaerial.x4 = 0.0F;
 }
 
-#pragma push
-#pragma dont_inline on
 void ftCo_FallAerial_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -27,7 +25,6 @@ void ftCo_FallAerial_Anim(Fighter_GObj* gobj)
                          ftCo_SM_FallAerialF, ftCo_SM_FallAerialB);
     ftCo_800CC988(gobj, fp->mv.co.fallaerial.x4);
 }
-#pragma pop
 
 void ftCo_FallAerial_IASA(Fighter_GObj* gobj)
 {

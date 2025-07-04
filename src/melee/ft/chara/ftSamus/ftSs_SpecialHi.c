@@ -84,7 +84,7 @@ void ftSs_SpecialHi_Anim(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
@@ -103,7 +103,7 @@ void ftSs_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);

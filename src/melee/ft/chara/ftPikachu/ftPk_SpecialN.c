@@ -108,7 +108,7 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == pika_attr->x10) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 0, 1, 1.0f, pika_attr->x10);

@@ -56,7 +56,7 @@ void ftCo_80096E68(ftCo_GObj* gobj)
         Item_8026ABD8(fp->item_gobj, &vec, 0.0f);
         ftCo_80090780(gobj);
     } else {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

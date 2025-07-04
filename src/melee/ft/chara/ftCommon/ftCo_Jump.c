@@ -48,7 +48,7 @@ ftCo_JumpInput ftCo_Jump_GetInput(Fighter_GObj* gobj)
 bool ftCo_Jump_CheckInput(Fighter_GObj* gobj)
 {
     ftCo_JumpInput jump_input;
-    if (ftCo_800C5240(gobj) != 0) {
+    if (ftCo_800C5240(gobj)) {
         return ftCo_800C5A50(gobj);
     }
 
@@ -99,35 +99,37 @@ bool ftCo_800CB024(Fighter_GObj* gobj)
     return 0;
 }
 
-void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mult)
+void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mul)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co_attrs;
 
     fp->mv.co.jump.x4 = false;
     co_attrs = &fp->co_attrs;
-    fp->mv.co.jump.x8 = jump_mult;
+    fp->mv.co.jump.jump_mul = jump_mul;
 
     fp->self_vel.x *= fp->co_attrs.ground_to_air_jump_momentum_multiplier *
-                      fp->mv.co.jump.x8;
+                      fp->mv.co.jump.jump_mul;
     fp->self_vel.y *= p_ftCommonData->x438;
     fp->self_vel.z = 0.0F;
 
     {
         float h_init_v =
             fp->input.lstick.x * fp->co_attrs.jump_h_initial_velocity;
-        float h_vel = fp->mv.co.jump.x8 * h_init_v;
+        float h_vel = fp->mv.co.jump.jump_mul * h_init_v;
         float h_max_vel;
         float v_init_v;
         if (fp->mv.co.jump.x0) {
-            v_init_v = co_attrs->hop_v_initial_velocity * fp->mv.co.jump.x8;
+            v_init_v =
+                co_attrs->hop_v_initial_velocity * fp->mv.co.jump.jump_mul;
         } else {
-            v_init_v = co_attrs->jump_v_initial_velocity * fp->mv.co.jump.x8;
+            v_init_v =
+                co_attrs->jump_v_initial_velocity * fp->mv.co.jump.jump_mul;
         }
 
         fp->self_vel.y = v_init_v;
         h_vel = fp->self_vel.x + h_vel;
-        h_max_vel = co_attrs->jump_h_max_velocity * fp->mv.co.jump.x8;
+        h_max_vel = co_attrs->jump_h_max_velocity * fp->mv.co.jump.jump_mul;
 
         if (fabs_inline(h_vel) > h_max_vel) {
             if (h_vel < 0.0F) {
@@ -148,7 +150,8 @@ void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mult)
         }
     }
 }
-void fn_800CB250(Fighter_GObj* gobj)
+
+void ftCo_Jump_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid;
@@ -158,14 +161,14 @@ void fn_800CB250(Fighter_GObj* gobj)
                ? ftCo_MS_JumpF
                : ftCo_MS_JumpB;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0.0F, 1.0F, 0.0F, NULL);
-    ftCo_800CB110(gobj, 1, 1.0F);
+    ftCo_800CB110(gobj, true, 1.0F);
     fp->x2227_b0 = true;
 }
 
 void ftCo_Jump_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

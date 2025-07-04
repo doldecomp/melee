@@ -50,5 +50,5 @@ void ftDk_MS_347_800E03C0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, 0, 0, 1, 0,
                               NULL);
     ftAnim_SetAnimRate(gobj, 0);
-    ftCo_800CB110(gobj, 1, 1);
+    ftCo_800CB110(gobj, true, 1);
 }

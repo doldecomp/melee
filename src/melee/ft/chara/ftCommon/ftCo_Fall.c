@@ -45,7 +45,7 @@ static inline bool ftCo_Fall_inline(Fighter_GObj* gobj)
     return false;
 }
 
-void ftCo_800CC730(Fighter_GObj* gobj)
+void ftCo_Fall_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -63,7 +63,7 @@ void ftCo_800CC730(Fighter_GObj* gobj)
         Fighter_ChangeMotionState(gobj, ftCo_MS_Fall, Ft_MF_KeepFastFall, 0.0F,
                                   1.0F, 0.0F, NULL);
         ftCommon_8007D468(fp);
-        fp->mv.co.fall.x0 = 20;
+        fp->mv.co.fall.smid = ftCo_SM_Fall;
         fp->mv.co.fall.x4 = 0.0F;
         if (fp->ground_or_air == GA_Ground) {
             ftCommon_8007D5D4(fp);
@@ -71,28 +71,21 @@ void ftCo_800CC730(Fighter_GObj* gobj)
     }
 }
 
-void ftCo_800CC830(Fighter_GObj* gobj)
+void ftCo_Fall_Enter_YoshiEgg(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftCo_Fall_inline(gobj)) {
         Fighter_ChangeMotionState(gobj, ftCo_MS_Fall, Ft_MF_Unk06, 0.0F, 1.0F,
                                   -1.0F, NULL);
-        fp->mv.co.fall.x0 = 20;
+        fp->mv.co.fall.smid = ftCo_SM_Fall;
         fp->mv.co.fall.x4 = 0.0F;
     }
 }
 
-void ftCo_800CC8DC(Fighter_GObj* gobj)
+void ftCo_Fall_Enter_YoshiEgg_Kirby(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-
-    if (!ftCo_Fall_inline(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_Fall, Ft_MF_Unk06, 0.0F, 1.0F,
-                                  -1.0F, NULL);
-        fp->mv.co.fall.x0 = 20;
-        fp->mv.co.fall.x4 = 0.0F;
-    }
+    ftCo_Fall_Enter_YoshiEgg(gobj);
 }
 
 void ftCo_800CC988(Fighter_GObj* gobj, f32 arg1)
@@ -119,8 +112,6 @@ void ftCo_Fall_Anim(Fighter_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 bool ftCo_Fall_IASA_Inner(Fighter_GObj* gobj)
 {
     if (ftCo_SpecialAir_CheckInput(gobj)) {
@@ -159,9 +150,8 @@ bool ftCo_Fall_IASA_Inner(Fighter_GObj* gobj)
 
     return false;
 }
-#pragma pop
 
-void ftCo_Fall_Anim_Inner(Fighter_GObj* gobj, f32* arg1,
+void ftCo_Fall_Anim_Inner(Fighter_GObj* gobj, f32* mv_x4,
                           FtMotionId neutral_smid, FtMotionId forwards_smid,
                           FtMotionId backwards_smid)
 {
@@ -193,16 +183,16 @@ void ftCo_Fall_Anim_Inner(Fighter_GObj* gobj, f32* arg1,
         var_f0 = 0.0F;
     }
 
-    *arg1 += p_ftCommonData->x448 * (var_f0 - *arg1);
-    if (*arg1 && smid != fp->mv.co.fall.x0) {
+    *mv_x4 += p_ftCommonData->x448 * (var_f0 - *mv_x4);
+    if (*mv_x4 && smid != fp->mv.co.fall.smid) {
         ftAnim_8006EDD0(fp, smid, fp->cur_anim_frame, 1.0F);
         HSD_JObjAnimAll(fp->x8AC_animSkeleton);
-        if (*arg1 != 1.0F) {
-            ftAnim_8006FE9C(fp, 1, *arg1, 1.0F - *arg1);
+        if (*mv_x4 != 1.0F) {
+            ftAnim_8006FE9C(fp, 1, *mv_x4, 1.0F - *mv_x4);
         } else {
             ftAnim_8006FF74(fp, 1);
         }
-        fp->mv.co.fall.x0 = smid;
+        fp->mv.co.fall.smid = smid;
     }
 }
 

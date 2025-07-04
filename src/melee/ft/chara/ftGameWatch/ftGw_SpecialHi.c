@@ -170,7 +170,7 @@ void ftGw_SpecialAirHi_Anim(HSD_GObj* gobj)
     gawAttrs = (GET_FIGHTER(gobj))->dat_attrs;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 0, 1, 1.0f,
