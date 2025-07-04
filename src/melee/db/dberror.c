@@ -1,5 +1,6 @@
 #include "db.h"
 
+#include <melee/lb/lb_0192.h>
 #include <melee/lb/lbcardnew.h>
 #include <dolphin/db.h>
 #include <dolphin/os.h>
