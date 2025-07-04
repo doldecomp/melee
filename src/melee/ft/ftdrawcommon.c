@@ -5,6 +5,7 @@
 
 #include "cm/camera.h"
 #include "ft/ft_0C88.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"

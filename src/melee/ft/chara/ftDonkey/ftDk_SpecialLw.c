@@ -13,9 +13,9 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftDonkey/types.h"
 
 void ftDk_SpecialLw_Enter(HSD_GObj* gobj)
@@ -46,7 +46,7 @@ void ftDk_SpecialLwStart_Phys(HSD_GObj* gobj)
 void ftDk_SpecialLwStart_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -81,7 +81,7 @@ void ftDk_SpecialLwLoop_Phys(HSD_GObj* gobj)
 void ftDk_SpecialLwLoop_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -133,7 +133,7 @@ void ftDk_SpecialLwEnd0_Phys(HSD_GObj* gobj)
 void ftDk_SpecialLwEnd0_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -145,7 +145,7 @@ static void doTransition(HSD_GObj* gobj)
 void ftDk_SpecialLwEnd1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

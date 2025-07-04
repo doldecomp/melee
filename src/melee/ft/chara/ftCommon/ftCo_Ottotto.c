@@ -20,10 +20,14 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Dash.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Turn.h"
+#include "ftCommon/ftCo_Walk.h"
 #include "mp/mplib.h"
 
 #include <common_structs.h>
@@ -89,7 +93,7 @@ void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             u8 _[4] = { 0 };
             Vec3 pos;
@@ -137,7 +141,7 @@ void ftCo_OttottoWait_Coll(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             u8 _[4] = { 0 };
             Vec3 pos;

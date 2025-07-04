@@ -13,12 +13,12 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftMewtwo/ftMt_Init.h"
 #include "ftMewtwo/types.h"
@@ -742,7 +742,7 @@ void ftMt_SpecialAirNCancel_Anim(HSD_GObj* gobj)
     ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -758,7 +758,7 @@ void ftMt_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 0, true, 1.0f,

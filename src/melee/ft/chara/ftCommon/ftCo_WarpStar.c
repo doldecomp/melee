@@ -172,18 +172,18 @@ void ftCo_800C4C60(ftCo_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_JumpB, Ft_MF_None, 0, 1, 0, NULL);
     ftColl_8007B6EC(gobj);
     fp->mv.co.jump.x0 = fp->mv.co.jump.x4 = false;
-    fp->mv.co.jump.x8 = 1;
+    fp->mv.co.jump.jump_mul = 1;
     fp->self_vel.x *= fp->co_attrs.ground_to_air_jump_momentum_multiplier *
-                      fp->mv.co.jump.x8;
+                      fp->mv.co.jump.jump_mul;
     fp->self_vel.y *= p_ftCommonData->x438;
     fp->self_vel.z = 0;
-    fp->self_vel.y = fp->co_attrs.jump_v_initial_velocity * fp->mv.co.jump.x8;
+    fp->self_vel.y = fp->co_attrs.jump_v_initial_velocity * fp->mv.co.jump.jump_mul;
     {
         float n0 = -fp->facing_dir * p_ftCommonData->x78;
         float n1 = fp->co_attrs.jump_h_initial_velocity * n0;
-        float n2 = fp->mv.co.jump.x8 * n1;
+        float n2 = fp->mv.co.jump.jump_mul * n1;
         float n3 = fp->self_vel.x + n2;
-        float n4 = fp->co_attrs.jump_h_max_velocity * fp->mv.co.jump.x8;
+        float n4 = fp->co_attrs.jump_h_max_velocity * fp->mv.co.jump.jump_mul;
         if (ABS(n3) > n4) {
             if (n3 < 0) {
                 n3 = -n4;

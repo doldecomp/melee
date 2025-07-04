@@ -19,11 +19,12 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 
 void ftCo_80090574(ftCo_GObj* gobj)
 {
@@ -128,7 +129,7 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
         if (ABS(fp->input.lstick.x) >= p_ftCommonData->x210 &&
             fp->x670_timer_lstick_tilt_x < p_ftCommonData->x214)
         {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
     }

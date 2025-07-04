@@ -8,17 +8,16 @@
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
-#include "ft/chara/ftCommon/inlines.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_Fall.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
@@ -202,14 +201,14 @@ void ftCa_SpecialAirLwEnd_Anim(HSD_GObj* gobj)
 void ftCa_SpecialAirLwEndAir_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
 void ftCa_SpecialHiThrow1_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

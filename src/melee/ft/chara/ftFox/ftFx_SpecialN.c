@@ -10,12 +10,12 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftpickupitem.h"
 #include "ftFox/types.h"
@@ -590,7 +590,7 @@ void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftFox_SpecialN_RemoveBlasterNULL(gobj);
         if (0 == da->x18_FOX_BLASTER_LANDING_LAG) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 0, true, 1, da->x18_FOX_BLASTER_LANDING_LAG);

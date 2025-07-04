@@ -14,13 +14,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftMars/ftMs_Init.h"
 #include "ftMars/types.h"
 #include "lb/lb_00B0.h"
@@ -293,7 +293,7 @@ void ftMs_SpecialNEnd_Anim(Fighter_GObj* gobj)
 
 void ftMs_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
-    inlineA0(gobj, ftCo_800CC730);
+    inlineA0(gobj, ftCo_Fall_Enter);
 }
 
 void ftMs_SpecialNEnd_IASA(HSD_GObj* gobj) {}

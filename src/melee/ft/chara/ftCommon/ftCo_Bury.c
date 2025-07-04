@@ -21,7 +21,6 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -29,9 +28,10 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "gr/ground.h"
-#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "mp/mplib.h"
@@ -367,7 +367,7 @@ void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.buryjump.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

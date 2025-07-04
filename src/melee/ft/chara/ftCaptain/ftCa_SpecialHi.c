@@ -6,7 +6,6 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
@@ -15,6 +14,7 @@
 #include "ft/types.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/ftCo_CaptureCaptain.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 
 #include <common_structs.h>
@@ -251,7 +251,7 @@ void ftCa_SpecialHiThrow0_Anim(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
     ftCommon_8007D60C(fp);
     if (fp->cmd_vars[0] != 0) {

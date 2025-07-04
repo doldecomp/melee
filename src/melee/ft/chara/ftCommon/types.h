@@ -92,18 +92,18 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ int x0;
         /* fp+2344 */ bool x4;
-        /* fp+2348 */ float x8;
+        /* fp+2348 */ float jump_mul;
     } jump;
     struct {
         /* fp+2340 */ int x0;
         /* fp+2344 */ float init_h_vel;
     } jumpaerial;
     struct {
-        /* fp+2340 */ int x0;
+        /* fp+2340 */ FtMotionId smid;
         /* fp+2344 */ float x4;
     } fall;
     struct {
-        /* fp+2340 */ s32 x0;
+        /* fp+2340 */ FtMotionId smid;
         /* fp+2344 */ float x4;
     } fallaerial;
     struct {

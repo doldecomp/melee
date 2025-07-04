@@ -9,7 +9,6 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -23,6 +22,7 @@
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
 #include "ftCommon/ftCo_Escape.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_SpecialS.h"
 #include "lb/lbcollision.h"
 
@@ -145,7 +145,7 @@ void ftSs_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

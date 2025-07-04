@@ -7,14 +7,15 @@
 #include "ftPe_Float.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AttackAir.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_LandingAir.h"
 #include "ftPeach/types.h"
 #include "it/it_26B1.h"
@@ -61,7 +62,7 @@ void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.pe.floatattack.x0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftPe_8011BB6C(gobj, false);
         }

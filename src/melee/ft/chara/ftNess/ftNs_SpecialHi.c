@@ -9,13 +9,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_DownBound.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/types.h"
 #include "it/items/itnesspkthunderball.h"
@@ -1035,7 +1035,7 @@ void ftNs_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
         ftCommon_8007D60C(fp);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
 
@@ -1074,7 +1074,7 @@ void ftNs_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftCommon_8007D60C(fp1);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
 
@@ -1099,7 +1099,7 @@ void ftNs_SpecialAirHiRebound_Anim(HSD_GObj* gobj)
             ftCommon_8007D60C(fp1);
 
             if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-                ftCo_800CC730(gobj);
+                ftCo_Fall_Enter(gobj);
                 return;
             }
 

@@ -8,12 +8,12 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftNess/ftNs_AttackHi4.h"
 #include "ftSeak/ftSk_Init.h"
 #include "ftSeak/types.h"
@@ -547,7 +547,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 
         if (fp->fv.sk.x8 == NULL) {
             if (fp->ground_or_air == GA_Air) {
-                ftCo_800CC730(gobj);
+                ftCo_Fall_Enter(gobj);
             } else {
                 ft_8008A2BC(gobj);
             }
@@ -941,7 +941,7 @@ void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
         }
 
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
     }
 }

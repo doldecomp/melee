@@ -8,11 +8,11 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftZelda/types.h"
 #include "it/items/itzeldadinfire.h"
@@ -335,7 +335,7 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
         }
 
         if (sa->x34 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1, sa->x34);
         }

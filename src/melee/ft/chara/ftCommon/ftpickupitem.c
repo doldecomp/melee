@@ -21,6 +21,7 @@
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_0A01.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_WarpStar.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyWait0.h"
@@ -403,7 +404,7 @@ void ftpickupitem_80094D90(ftCo_GObj* gobj)
     if (fp->x1978 != NULL) {
         ftpickupitem_80094B6C(gobj, fp->x1978);
     }
-    ftCo_800CC730(gobj);
+    ftCo_Fall_Enter(gobj);
 }
 
 void ftpickupitem_80094DF8(ftCo_GObj* gobj)

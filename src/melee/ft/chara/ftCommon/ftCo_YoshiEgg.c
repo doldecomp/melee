@@ -11,13 +11,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 #include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_SpecialN.h"
@@ -149,7 +149,7 @@ void ftCo_YoshiEgg_Anim(ftCo_GObj* gobj)
         ftCommon_8007D5D4(fp);
         Fighter_UpdateModelScale(gobj);
         ftColl_8007B760(gobj, ftYs_SpecialN_8012CD70());
-        ftCo_800CC830(gobj);
+        ftCo_Fall_Enter_YoshiEgg(gobj);
         return;
     }
     if (fp->mv.co.yoshiegg.x8) {
