@@ -19,11 +19,12 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 
 void ftCo_80090574(ftCo_GObj* gobj)
 {

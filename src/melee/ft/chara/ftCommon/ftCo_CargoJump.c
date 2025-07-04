@@ -11,9 +11,9 @@
 #include "ftCo_Shouldered.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_Jump.h"
 #include "ftDonkey/types.h"
 
 bool ftCo_8009BB1C(ftCo_GObj* gobj)

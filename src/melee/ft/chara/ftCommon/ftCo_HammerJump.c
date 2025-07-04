@@ -10,8 +10,8 @@
 #include "ftCo_HammerWait.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_Jump.h"
 
 bool ftCo_800C5A50(ftCo_GObj* gobj)
 {

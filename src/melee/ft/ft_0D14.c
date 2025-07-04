@@ -14,7 +14,11 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_FallAerial.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>

@@ -10,6 +10,7 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ftCLink/ftCl_Init.h"
+#include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftLink/ftLk_AttackAir.h"
