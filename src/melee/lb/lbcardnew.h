@@ -8,13 +8,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-/* 019880 */ void lb_80019880(u64);
-/* 019894 */ u8 lb_80019894(void);
-/* 0198E0 */ void lb_800198E0(void);
-/* 019900 */ void lb_80019900(void);
-/* 019A30 */ bool lb_80019A30(int index);
-/* 019A48 */ void lb_80019A48(void);
-/* 019AAC */ void lb_80019AAC(Event);
 /* 019BB8 */ int lb_80019BB8(int);
 /* 019C38 */ struct CardTask* lb_80019C38(void);
 /* 019CB0 */ int lb_80019CB0(int);

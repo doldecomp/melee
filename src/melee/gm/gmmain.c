@@ -9,6 +9,7 @@
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
+#include "lb/lb_0192.h"
 #include "lb/lbarq.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
