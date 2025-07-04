@@ -1,4 +1,7 @@
+#include "it/forward.h"
+
 #include "itgamewatchbreath.h"
+#include "ftGameWatch/ftGw_AttackAir.h"
 
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
@@ -7,7 +10,13 @@
 #include <melee/it/item.h>
 #include <melee/it/types.h>
 
-HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir) {
+
+ItemStateTable it_803F7938[] = { { 0, it_802C744C, NULL, NULL },
+                                 { 1, it_802C744C, NULL, NULL } };
+
+HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
+                      float dir)
+{
     SpawnItem spawn;
     Item_GObj* result;
 
@@ -34,14 +43,17 @@ HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir)
     return NULL;
 }
 
-void it_802C7310(Item_GObj* item_gobj) {
+void it_802C7310(Item_GObj* item_gobj)
+{
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
         ftGw_AttackAirN_ItemSparkySetFlag(item->owner);
     }
 }
 
-void it_802C7340(Item_GObj* item_gobj) {
+void it_802C7340(Item_GObj* item_gobj)
+{
+    int pad[1];
     Item* item = GET_ITEM(item_gobj);
 
     if (item != NULL) {
@@ -52,30 +64,36 @@ void it_802C7340(Item_GObj* item_gobj) {
     }
 }
 
-void it_802C738C(Item_GObj* item_gobj) {
+void it_802C738C(Item_GObj* item_gobj)
+{
     it_8026B724(item_gobj);
 }
 
-void it_802C73AC(Item_GObj* item_gobj) {
+void it_802C73AC(Item_GObj* item_gobj)
+{
     it_8026B73C(item_gobj);
 }
 
-void it_802C73CC(Item_GObj* item_gobj) {
+void it_802C73CC(Item_GObj* item_gobj)
+{
     Item* temp_r3;
 
     temp_r3 = item_gobj->user_data;
     temp_r3->xDAC_itcmd_var0 = 0;
-    if ((HSD_GObj* ) temp_r3->owner != NULL) {
+    if ((HSD_GObj*) temp_r3->owner != NULL) {
         Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
         Item_802694CC(item_gobj);
     }
 }
 
-void it_802C7424(Item_GObj* item_gobj) {
+void it_802C7424(Item_GObj* item_gobj)
+{
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C744C(void* item_gobj) {
+bool it_802C744C(Item_GObj* item_gobj)
+{
+    int pad[3];
     Item* item;
     bool var_r3;
 
@@ -95,6 +113,7 @@ bool it_802C744C(void* item_gobj) {
     return false;
 }
 
-void it_802C74B8(Item_GObj* item_gobj, Item_GObj* ref_gobj) {
+void it_802C74B8(Item_GObj* item_gobj, Item_GObj* ref_gobj)
+{
     it_8026B894(item_gobj, ref_gobj);
 }

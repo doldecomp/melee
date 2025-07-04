@@ -2077,7 +2077,8 @@ bool it_8026F8B4(Item_GObj* item_gobj, Vec3* arg1, Vec3* arg2, bool chk)
     if (HSD_Randi(it_804D6D28->x138) != 0) {
         return false;
     }
-    rand_int = HSD_Randi(it_804D6D28->x13C) + it_804D6D28->x140;
+    rand_int =  HSD_Randi(it_804D6D28->x13C) ;
+    rand_int += it_804D6D28->x140;
     if (chk == false) {
         arg2->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));
         arg2->y = it_804D6D28->x144;
