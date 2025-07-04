@@ -120,7 +120,7 @@ void gm_801A4970(int (**arg0)(void))
     for (i = 0; i < 4; i++) {
         temp_r3 = &HSD_PadMasterStatus[(u8) i];
         if ((temp_r3->trigger & 2) && (temp_r3->button & 0x400)) {
-            temp_ret = lbHeap_80015DF8();
+            lbHeap_80015DF8();
             OSReport("[hsdDumpClassStat] -- Report --\n");
             hsdDumpClassStat(NULL, 0, 1);
             OSReport("\n");
