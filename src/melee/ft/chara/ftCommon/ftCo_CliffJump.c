@@ -93,7 +93,7 @@ void ftCo_8009B390(ftCo_GObj* gobj, float force_mul)
 void ftCo_CliffJump2_Anim(ftCo_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

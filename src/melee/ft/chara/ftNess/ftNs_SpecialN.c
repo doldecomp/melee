@@ -411,7 +411,7 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
         float landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
 
         if (landing_lag == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
 

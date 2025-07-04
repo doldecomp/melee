@@ -63,7 +63,7 @@ bool ftCo_8009AAFC(ftCo_GObj* gobj, int arg1, float stick_x, float angle)
     }
     if (fp->mv.co.cliff.x8) {
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
         return true;
     }
     return false;
@@ -114,7 +114,7 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
                 ftCommon_8007D7FC(fp);
             }
         } else {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
     } else {
         ft_80084FA8(gobj);

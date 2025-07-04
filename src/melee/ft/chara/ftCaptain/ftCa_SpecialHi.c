@@ -251,7 +251,7 @@ void ftCa_SpecialHiThrow0_Anim(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
     ftCommon_8007D60C(fp);
     if (fp->cmd_vars[0] != 0) {

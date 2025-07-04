@@ -590,7 +590,7 @@ void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftFox_SpecialN_RemoveBlasterNULL(gobj);
         if (0 == da->x18_FOX_BLASTER_LANDING_LAG) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 0, true, 1, da->x18_FOX_BLASTER_LANDING_LAG);

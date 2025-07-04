@@ -142,7 +142,7 @@ void ftCo_AttackAir_Anim(ftCo_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

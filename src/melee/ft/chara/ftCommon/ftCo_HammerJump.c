@@ -32,7 +32,7 @@ void ftCo_800C5A98(ftCo_GObj* gobj)
     flags = ftCo_800C54C4(fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_HammerJump, flags,
                               ftCo_800C548C(fp), 1, 0, NULL);
-    ftCo_800CB110(gobj, 0, 1);
+    ftCo_800CB110(gobj, false, 1);
     ftCo_800C4E94(fp);
 }
 

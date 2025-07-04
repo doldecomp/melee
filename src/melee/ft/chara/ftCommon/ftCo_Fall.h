@@ -6,9 +6,9 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-/* 0CC730 */ void ftCo_800CC730(ftCo_GObj* gobj);
-/* 0CC830 */ void ftCo_800CC830(ftCo_GObj* gobj);
-/* 0CC8DC */ void ftCo_800CC8DC(Fighter_GObj* gobj);
+/* 0CC730 */ void ftCo_Fall_Enter(ftCo_GObj* gobj);
+/* 0CC830 */ void ftCo_Fall_Enter_YoshiEgg(ftCo_GObj* gobj);
+/* 0CC8DC */ void ftCo_Fall_Enter_YoshiEgg_Kirby(Fighter_GObj* gobj);
 /* 0CC988 */ void ftCo_800CC988(ftCo_GObj* gobj, float);
 /* 0CCA00 */ void ftCo_Fall_Anim(ftCo_GObj* gobj);
 /* 0CCAAC */ bool ftCo_Fall_IASA_Inner(ftCo_GObj* gobj);

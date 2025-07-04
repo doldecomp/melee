@@ -679,7 +679,7 @@ void ft_80083F88(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

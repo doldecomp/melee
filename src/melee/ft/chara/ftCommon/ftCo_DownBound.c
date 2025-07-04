@@ -220,7 +220,7 @@ void ftCo_DownBound_Coll(ftCo_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (ft_80082708(gobj) == GA_Ground) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     } else {
         RETURN_IF(ftCo_800C7CA0(gobj));
     }

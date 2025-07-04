@@ -7,6 +7,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_Guard.h"
@@ -14,19 +15,15 @@
 #include "ftCommon/ftCo_Run.h"
 #include "ftCommon/ftCo_SpecialS.h"
 
-#pragma push
-#pragma dont_inline on
 void ftCo_RunDirect_Anim(Fighter_GObj* gobj)
 {
     ftCo_Run_Anim(gobj);
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void ftCo_RunDirect_IASA(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
     RETURN_IF(ftCo_Attack100_CheckInput(gobj));
     RETURN_IF(ftCo_800D6824(gobj));
@@ -49,20 +46,13 @@ void ftCo_RunDirect_IASA(Fighter_GObj* gobj)
     RETURN_IF(fp->mv.ca.specials.grav <= 0.0F && fn_800CA698(gobj));
     RETURN_IF(ft_8008A244(gobj));
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void ftCo_RunDirect_Phys(Fighter_GObj* gobj)
 {
     ftCo_Run_Phys(gobj);
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void ftCo_RunDirect_Coll(Fighter_GObj* gobj)
 {
     ftCo_Run_Coll(gobj);
 }
-#pragma pop

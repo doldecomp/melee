@@ -281,7 +281,7 @@ void ftCo_DamageIceJump_Anim(HSD_GObj* gobj)
     if (fp->mv.co.damageicejump.x0 > 0) {
         fp->mv.co.damageicejump.x0 -= 1;
         if (fp->mv.co.damageicejump.x0 <= 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
     }
 }

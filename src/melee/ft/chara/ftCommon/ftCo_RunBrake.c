@@ -79,16 +79,14 @@ void ftCo_RunBrake_Anim(Fighter_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 void ftCo_RunBrake_IASA(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     RETURN_IF(fn_800CAF78(gobj));
     RETURN_IF(fp->cmd_vars[0] && fn_800C9CEC(gobj));
     RETURN_IF(ftCo_800D5FB0(gobj));
 }
-#pragma pop
 
 void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
 {

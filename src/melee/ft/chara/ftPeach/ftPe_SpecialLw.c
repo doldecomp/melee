@@ -193,7 +193,7 @@ void ftPe_SpecialLw_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doAnim(gobj, ftCo_800CC730);
+    doAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftPe_SpecialLw_Phys(HSD_GObj* gobj)

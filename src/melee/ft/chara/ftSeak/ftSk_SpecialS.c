@@ -547,7 +547,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 
         if (fp->fv.sk.x8 == NULL) {
             if (fp->ground_or_air == GA_Air) {
-                ftCo_800CC730(gobj);
+                ftCo_Fall_Enter(gobj);
             } else {
                 ft_8008A2BC(gobj);
             }
@@ -941,7 +941,7 @@ void ftSk_SpecialAirSEnd_Anim(HSD_GObj* gobj)
         }
 
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
     }
 }

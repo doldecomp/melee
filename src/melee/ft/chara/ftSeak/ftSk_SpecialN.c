@@ -207,7 +207,7 @@ void ftSk_SpecialAirNCancel_Anim(Fighter_GObj* gobj)
     fp->fv.sk.x4 = 0;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (da->x10 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, true, 1, da->x10);
         }
@@ -236,7 +236,7 @@ void ftSk_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (da->x10 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, true, 1, da->x10);
         }
@@ -368,7 +368,7 @@ void ftSk_SpecialNCancel_Coll(Fighter_GObj* gobj)
     if (ft_80082708(gobj) == GA_Ground) {
         clearDmgCallbacks(gobj);
         if (da->x10 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, true, 1, da->x10);
         }
@@ -384,7 +384,7 @@ void ftSk_SpecialNEnd_Coll(Fighter_GObj* gobj)
         fp->fv.sk.x0 = 0;
         fp->mv.sk.specialn.x4 = false;
         if (da->x10 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1, da->x10);
         }

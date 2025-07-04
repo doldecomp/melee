@@ -5617,7 +5617,7 @@ void ftKb_PeSpecialLw_Anim(HSD_GObj* gobj)
 
 void ftKb_PeSpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doPeAnim(gobj, ftCo_800CC730);
+    doPeAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKb_PeSpecialLw_IASA(ftKb_GObj* gobj) {}
@@ -5758,7 +5758,7 @@ void ftKb_PeSpecialLwHit_Anim(HSD_GObj* gobj)
 
 void ftKb_PeSpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
-    doPeHitAnim(gobj, ftCo_800CC730);
+    doPeHitAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKb_PeSpecialLwHit_IASA(ftKb_GObj* gobj) {}

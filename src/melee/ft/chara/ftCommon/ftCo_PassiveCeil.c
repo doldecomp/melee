@@ -71,7 +71,7 @@ void ftCo_PassiveCeil_Anim(ftCo_GObj* gobj)
         fp->self_vel.x = fp->input.lstick.x * fp->co_attrs.passiveceil_vel_x;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

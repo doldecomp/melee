@@ -23,8 +23,6 @@
 #include "ftCommon/ftCo_SpecialS.h"
 #include "ftCommon/ftCo_Turn.h"
 
-#pragma push
-#pragma dont_inline on
 bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -37,7 +35,7 @@ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
         ((int) fp->x670_timer_lstick_tilt_x < p_ftCommonData->x40))
     {
         if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
-            ftCo_SmashTurn_Enter(gobj);
+            ftCo_Turn_Enter_Smash(gobj);
         } else {
             ftCo_Dash_Enter(gobj, 1);
         }
@@ -45,31 +43,6 @@ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj)
     }
     return false;
 }
-#pragma pop
-
-#pragma push
-#pragma dont_inline on
-static inline bool ftCo_Dash_CheckInput_inline(Fighter_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    float var_f1 = fp->input.lstick.x;
-    if (var_f1 < 0.0F) {
-        var_f1 = -var_f1;
-    }
-
-    if ((var_f1 >= p_ftCommonData->x3C) &&
-        ((s32) fp->x670_timer_lstick_tilt_x < (s32) p_ftCommonData->x40))
-    {
-        if ((fp->input.lstick.x * fp->facing_dir) < 0.0F) {
-            ftCo_SmashTurn_Enter(gobj);
-        } else {
-            ftCo_Dash_Enter(gobj, 1);
-        }
-        return true;
-    }
-    return false;
-}
-#pragma pop
 
 void ftCo_Dash_Enter(Fighter_GObj* gobj, int arg1)
 {
@@ -133,7 +106,7 @@ void ftCo_Dash_IASA(Fighter_GObj* gobj)
                 return;
             }
             if (!(fp->input.lstick.x * fp->facing_dir < 0.0F) ||
-                !ftCo_Dash_CheckInput_inline(gobj))
+                !ftCo_Dash_CheckInput(gobj))
             {
                 if (ftCo_80091AD8(gobj, (s32) (p_ftCommonData->x4C -
                                                fp->cur_anim_frame)))
@@ -145,7 +118,7 @@ void ftCo_Dash_IASA(Fighter_GObj* gobj)
         }
     } else {
         RETURN_IF(ftCo_800D8A38(gobj));
-        if (!ftCo_Dash_CheckInput_inline(gobj)) {
+        if (!ftCo_Dash_CheckInput(gobj)) {
             if (ftCo_80091A4C(gobj)) {
                 ftCo_80091B9C(gobj);
             } else {

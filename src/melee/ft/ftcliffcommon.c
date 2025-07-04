@@ -123,7 +123,7 @@ void ftCo_CliffCatch_Phys(ftCo_GObj* gobj)
         fp->cur_pos.x = fp->x68C_transNPos.z * fp->facing_dir + vec.x;
         fp->cur_pos.y = vec.y + fp->x68C_transNPos.y;
     } else {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

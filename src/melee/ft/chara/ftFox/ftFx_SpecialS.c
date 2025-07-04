@@ -560,7 +560,7 @@ void ftFx_SpecialSEnd_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (ft_800827A0(gobj) == false) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

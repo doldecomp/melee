@@ -201,7 +201,7 @@ void ftPe_SpecialN_Anim(HSD_GObj* gobj)
 void ftPe_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
-    doAnim(gobj, ftCo_800CC730);
+    doAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftPe_SpecialN_IASA(HSD_GObj* gobj) {}
@@ -316,7 +316,7 @@ void ftPe_SpecialNHit_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirNHit_Anim(HSD_GObj* gobj)
 {
-    doHitAnim(gobj, ftCo_800CC730);
+    doHitAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftPe_SpecialNHit_IASA(HSD_GObj* gobj) {}

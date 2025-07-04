@@ -173,7 +173,7 @@ void ftYs_SpecialAirN1_0_Anim(ftYs_GObj* gobj)
 {
     u8 _[8];
     if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
-        ftCo_800CC730((Fighter_GObj*) gobj);
+        ftCo_Fall_Enter((Fighter_GObj*) gobj);
     }
 }
 
@@ -314,7 +314,7 @@ void ftYs_SpecialAirHi_Anim(ftYs_GObj* gobj)
         fp->mv.ys.specialn.x4 += 1;
     }
     if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
-        ftCo_800CC730((Fighter_GObj*) gobj);
+        ftCo_Fall_Enter((Fighter_GObj*) gobj);
     }
 }
 

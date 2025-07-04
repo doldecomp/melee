@@ -62,7 +62,7 @@ void ftPe_FloatAttackAir_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.pe.floatattack.x0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftPe_8011BB6C(gobj, false);
         }

@@ -294,7 +294,7 @@ void ftPe_SpecialSEnd_Anim(HSD_GObj* gobj)
 void ftPe_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

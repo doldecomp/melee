@@ -93,7 +93,7 @@ void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             u8 _[4] = { 0 };
             Vec3 pos;
@@ -141,7 +141,7 @@ void ftCo_OttottoWait_Coll(ftCo_GObj* gobj)
     ftCo_Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             u8 _[4] = { 0 };
             Vec3 pos;

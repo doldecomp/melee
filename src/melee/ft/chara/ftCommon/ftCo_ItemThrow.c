@@ -364,7 +364,7 @@ void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
         if (fp->motion_id == ftCo_MS_ItemParasolFallSpecial) {
             ftCo_800968C8(gobj);
         } else {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
         if (arg1 != NULL) {
             *arg1 = 1;

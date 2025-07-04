@@ -75,7 +75,7 @@ void ftPp_SpecialN_Anim(HSD_GObj* gobj)
 void ftPp_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -108,7 +108,7 @@ void ftPp_SpecialN_Coll(HSD_GObj* gobj)
                 fp2->take_dmg_cb = 0U;
             }
         }
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

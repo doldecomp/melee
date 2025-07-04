@@ -240,7 +240,7 @@ void ftGw_SpecialAirLw_Anim(HSD_GObj* gobj)
     ftGameWatch_SpecialLw_UpdateVars(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -479,7 +479,7 @@ void ftGw_SpecialAirLwCatch_Anim(HSD_GObj* gobj)
     }
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
         return;
     }
 
@@ -603,7 +603,7 @@ void ftGw_SpecialAirLwShoot_Anim(HSD_GObj* gobj)
     ftGameWatch_SpecialLwShoot_ApplyDamage(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

@@ -112,7 +112,7 @@ void ftPr_SpecialAirHi_Anim(Fighter_GObj* fighter_gobj)
         fighter->x914[0].element = HitElement_Sleep;
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        ftCo_800CC730(fighter_gobj);
+        ftCo_Fall_Enter(fighter_gobj);
     }
 }
 

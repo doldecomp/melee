@@ -367,7 +367,7 @@ void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.buryjump.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

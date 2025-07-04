@@ -28,24 +28,18 @@ bool fn_800C9CEC(Fighter_GObj* gobj)
     return false;
 }
 
-#pragma push
-#pragma dont_inline on
 bool fn_800C9D40(Fighter_GObj* gobj)
 {
-    // We can't use GET_FIGHTER due to dont_inline
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    float facing = fp->facing_dir;
-    float threshold = p_ftCommonData->x38_someLStickXThreshold;
-    float lsx = fp->input.lstick.x;
-
-    if ((lsx * facing) <= threshold) {
+    if (fp->input.lstick.x * fp->facing_dir <=
+        p_ftCommonData->x38_someLStickXThreshold)
+    {
         ftCo_TurnRun_Enter(gobj, 0.0F);
         return true;
     }
     return false;
 }
-#pragma pop
 
 void ftCo_TurnRun_Enter(Fighter_GObj* gobj, float anim_start)
 {
@@ -129,7 +123,7 @@ void ftCo_TurnRun_Coll(Fighter_GObj* gobj)
     bool var_r4;
 
     if (!ft_800827A0(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
         return;
     }
     var_r4 = true;

@@ -59,7 +59,7 @@ void ftCo_DownDamage_Anim(ftCo_GObj* gobj)
         if (fp->x2224_b2) {
             ftCo_80090780(gobj);
         } else {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
     } else {
         if (fp->mv.co.downdamage.x0 <= 0) {
