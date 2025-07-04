@@ -41,7 +41,7 @@ typedef struct grYt_804D6A20_t {
 } grYt_804D6A20_t;
 grYt_804D6A20_t grYt_804D6A20;
 
-void grYorster_80201FA0(int)
+void grYorster_80201FA0(int unused)
 {
     return;
 }
