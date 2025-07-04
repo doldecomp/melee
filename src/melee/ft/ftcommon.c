@@ -23,6 +23,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftpickupitem.h"
 #include "gm/gm_1601.h"

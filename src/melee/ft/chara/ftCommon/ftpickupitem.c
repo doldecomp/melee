@@ -21,6 +21,7 @@
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_0A01.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_WarpStar.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyWait0.h"

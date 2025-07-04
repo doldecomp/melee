@@ -9,7 +9,6 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
@@ -19,6 +18,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
 #include "ftCommon/ftCo_CaptureKoopa.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
 #include "ftKoopa/types.h"
 #include "it/it_26B1.h"

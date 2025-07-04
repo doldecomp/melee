@@ -7,7 +7,6 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -15,6 +14,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureMewtwo.h"
 #include "ftCommon/ftCo_DamageFall.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftMewtwo/types.h"
 
 #include <dolphin/mtx.h>

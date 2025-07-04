@@ -7,13 +7,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
 #include "ftKoopa/ftKp_Init.h"
 
