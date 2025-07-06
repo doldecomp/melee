@@ -1,3 +1,5 @@
+#include "ftSeak/ftSk_SpecialLw.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
@@ -76,9 +78,9 @@ void ftSk_SpecialAirLw_Coll(HSD_GObj* gobj)
     }
 }
 
-/// #ftSk_SpecialLw_8011444C
+void ftSk_SpecialLw_8011444C(HSD_GObj* gobj) {}
 
-/// #ftSk_SpecialLw_801144B8
+void ftSk_SpecialLw_801144B8(HSD_GObj* gobj) {}
 
 /// #ftSk_SpecialLw2_Anim
 
@@ -102,7 +104,12 @@ void ftSk_SpecialLw2_Phys(HSD_GObj* gobj)
 
 /// #ftSk_SpecialLw2_Coll
 
-/// #ftSk_SpecialAirLw2_Coll
+void ftSk_SpecialAirLw2_Coll(HSD_GObj* gobj)
+{
+    if (ft_80081D0C((Fighter_GObj*) gobj) != GA_Ground) {
+        ftSk_SpecialLw_801146EC(gobj);
+    }
+}
 
 /// #ftSk_SpecialLw_80114680
 
