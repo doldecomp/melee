@@ -1,4 +1,5 @@
 #include "ft/ft_081B.h"
+#include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -92,7 +93,10 @@ void ftSk_SpecialLw2_IASA(HSD_GObj* gobj) {}
 
 void ftSk_SpecialAirLw2_IASA(HSD_GObj* gobj) {}
 
-/// #ftSk_SpecialLw2_Phys
+void ftSk_SpecialLw2_Phys(HSD_GObj* gobj)
+{
+    ft_80084F3C((Fighter_GObj*) gobj);
+}
 
 /// #ftSk_SpecialAirLw2_Phys
 

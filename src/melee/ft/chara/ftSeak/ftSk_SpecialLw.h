@@ -30,6 +30,8 @@
 /* 11436C */ void ftSk_SpecialAirLw_IASA(HSD_GObj* gobj);
 /* 114390 */ void ftSk_SpecialAirLw_Phys(HSD_GObj* gobj);
 /* 114410 */ void ftSk_SpecialAirLw_Coll(HSD_GObj* gobj);
+void ftSk_SpecialLw_8011444C(HSD_GObj*);
+void ftSk_SpecialLw_801144B8(HSD_GObj*);
 /* 11444C */ void ftSk_SpecialLw_80114758(HSD_GObj* gobj);
 /* 114560 */ void ftSk_SpecialAirLw2_Anim(HSD_GObj* gobj);
 /* 1145A0 */ void ftSk_SpecialAirLw2_IASA(HSD_GObj* gobj);
