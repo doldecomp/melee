@@ -9,6 +9,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/tev.h>
 #include <baselib/texp.h>
+#include <sysdolphin/baselib/gobj.h>
 
 int mpLib_8004D164(void)
 {
@@ -358,7 +359,26 @@ void mpLib_800581A4(int arg0, int arg1, int arg2)
 
 /// #fn_800587FC
 
-/// #mpLib_80058820
+static struct {
+    float unk0;
+    float unk4;
+    float unk8;
+    float unkC;
+} mpLib_80458868[2];
+
+void mpLib_80058820(void)
+{
+    HSD_GObj* gobj = GObj_Create(1, 6, 0);
+    if (gobj == NULL) {
+        __assert("mplib.c", 0x18AA, "gobj");
+    }
+    HSD_GObjProc_8038FD54(gobj, fn_800587FC, 4);
+    mpLib_80458868[0].unkC = +10000.0F;
+    mpLib_80458868[0].unk0 = +10000.0F;
+    mpLib_80458868[0].unk8 = -10000.0F;
+    mpLib_80458868[0].unk4 = -10000.0F;
+    mpLib_80458868[1] = mpLib_80458868[0];
+}
 
 int mpLib_800588C8(void)
 {
