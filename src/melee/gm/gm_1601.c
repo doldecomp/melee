@@ -804,7 +804,18 @@ void fn_8016B388(ssize_t arg0, s16 arg1)
 
 /// #fn_8016B510
 
-/// #gm_8016B558
+int gm_8016B558(void)
+{
+    int i;
+    int count;
+    count = 0;
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3) {
+            count++;
+        }
+    }
+    return count;
+}
 
 /// #fn_8016B5B0
 
