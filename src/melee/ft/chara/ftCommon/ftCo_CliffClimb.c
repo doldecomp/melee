@@ -8,12 +8,12 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
 
@@ -63,7 +63,7 @@ bool ftCo_8009AAFC(ftCo_GObj* gobj, int arg1, float stick_x, float angle)
     }
     if (fp->mv.co.cliff.x8) {
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
         return true;
     }
     return false;
@@ -114,7 +114,7 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
                 ftCommon_8007D7FC(fp);
             }
         } else {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
     } else {
         ft_80084FA8(gobj);
