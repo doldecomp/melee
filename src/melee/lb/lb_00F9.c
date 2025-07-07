@@ -4,6 +4,7 @@
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <baselib/cobj.h>
 
 static inline bool checkJObjFlags(HSD_JObj* jobj)
 {
@@ -98,7 +99,25 @@ void lb_800138D8(HSD_GObj* gobj, s8 arg1)
 
 /// #lb_800138EC
 
-/// #lb_80013B14
+HSD_CObj* lb_80013B14(HSD_CameraDescPerspective* desc)
+{
+    HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc* ) desc);
+    Scissor scissor;
+
+    if (HSD_CObjGetProjectionType(cobj) == 1 &&
+        HSD_CObjGetAspect(cobj) == 1.18F) {
+        HSD_CObjSetAspect(cobj, 1.2173333F);
+    }
+    HSD_CObjGetScissor(cobj, &scissor);
+    if (scissor.right > 0x280) {
+        scissor.right = 0x280;
+    }
+    if (scissor.bottom > 0x1E0) {
+        scissor.bottom = 0x1E0;
+    }
+    HSD_CObjSetScissor(cobj, &scissor);
+    return cobj;
+}
 
 bool lb_80013BB0(void)
 {
