@@ -10,6 +10,7 @@
 #include <baselib/tev.h>
 #include <baselib/texp.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 int mpLib_8004D164(void)
 {

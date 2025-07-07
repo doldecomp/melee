@@ -14,6 +14,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbtime.h"
 #include "mp/mpcoll.h"
+#include "pl/player.h"
 
 #include <m2c_macros.h>
 
