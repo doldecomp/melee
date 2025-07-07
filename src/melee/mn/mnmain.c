@@ -33,7 +33,7 @@ static HSD_GObj* mn_804D6BB0;
 static u8 mn_804D6BB4;
 static u8 mn_804D6BB5;
 HSD_Archive* mn_804D6BB8;
-static UNK_T MenMain_lights;
+static LightList** MenMain_lights;
 static HSD_FogDesc* MenMain_fog;
 static HSD_CObjDesc* MenMain_cam;
 mn_unk2 mn_804D6BC8;

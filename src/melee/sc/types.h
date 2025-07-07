@@ -29,9 +29,9 @@ struct SceneDesc {
         HSD_CObjDesc* desc;
         HSD_CameraAnim** anims;
     }* cameras;
-    struct {
+    struct LightList {
         HSD_LightDesc* desc;
-        UNK_T anims;
+        HSD_LightAnim** anims;
     }** lights;
     struct {
         HSD_FogDesc* desc;
