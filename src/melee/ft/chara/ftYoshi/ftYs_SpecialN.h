@@ -83,7 +83,7 @@
 /* 12E8CC */ void ftYs_SpecialAirLw_Phys(ftYs_GObj* gobj);
 /* 12E924 */ void ftYs_SpecialLw_Coll(ftYs_GObj* gobj);
 /* 12E944 */ void ftYs_SpecialAirLw_Coll(ftYs_GObj* gobj);
-/* 12EA04 */ UNK_RET ftYs_SpecialS_8012EA04(UNK_PARAMS);
+/* 12EA04 */ void ftYs_SpecialS_8012EA04(Fighter_GObj* gobj);
 /* 12EA40 */ void ftYs_SpecialLwLanding_Anim(ftYs_GObj* gobj);
 /* 12EA7C */ void ftYs_SpecialLwLanding_Phys(ftYs_GObj* gobj);
 /* 12EA9C */ void ftYs_SpecialLwLanding_Coll(ftYs_GObj* gobj);
