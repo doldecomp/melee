@@ -1,6 +1,7 @@
 #include "ftSeak/ftSk_SpecialLw.h"
 
 #include "ft/ft_081B.h"
+#include "ft/ft_0892.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -33,7 +34,14 @@ void fn_8011412C(HSD_GObj* gobj)
 /// #ftSk_SpecialAirLw_Enter
 
 // Animation_SheikTransformStartGround
-/// #ftSk_SpecialLw_Anim
+void ftSk_SpecialLw_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        fp->accessory4_cb = &fn_8011412C;
+    }
+}
 
 void ftSk_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
@@ -82,7 +90,12 @@ void ftSk_SpecialLw_8011444C(HSD_GObj* gobj) {}
 
 void ftSk_SpecialLw_801144B8(HSD_GObj* gobj) {}
 
-/// #ftSk_SpecialLw2_Anim
+void ftSk_SpecialLw2_Anim(HSD_GObj* gobj)
+{
+    if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
+        ft_8008A2BC((Fighter_GObj*) gobj);
+    }
+}
 
 void ftSk_SpecialAirLw2_Anim(HSD_GObj* gobj)
 {
@@ -100,9 +113,23 @@ void ftSk_SpecialLw2_Phys(HSD_GObj* gobj)
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-/// #ftSk_SpecialAirLw2_Phys
+void ftSk_SpecialAirLw2_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftSeakAttributes* attributes = fp->dat_attrs;
 
-/// #ftSk_SpecialLw2_Coll
+    u8 _[4];
+
+    ftCommon_8007D494((Fighter*) fp, attributes->x68, attributes->x6C);
+    ftCommon_8007CEF4((Fighter*) fp);
+}
+
+void ftSk_SpecialLw2_Coll(HSD_GObj* gobj)
+{
+    if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {
+        ftSk_SpecialLw_80114680(gobj);
+    }
+}
 
 void ftSk_SpecialAirLw2_Coll(HSD_GObj* gobj)
 {
