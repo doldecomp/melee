@@ -37,6 +37,7 @@ void ftSk_SpecialLw_801144B8(HSD_GObj* gobj);
 /* 1145A0 */ void ftSk_SpecialAirLw2_IASA(HSD_GObj* gobj);
 /* 1145C4 */ void ftSk_SpecialAirLw2_Phys(HSD_GObj* gobj);
 /* 114644 */ void ftSk_SpecialAirLw2_Coll(HSD_GObj* gobj);
+void ftSk_SpecialLw_80114680(HSD_GObj*);
 void ftSk_SpecialLw_801146EC(HSD_GObj*);
 
 #endif
