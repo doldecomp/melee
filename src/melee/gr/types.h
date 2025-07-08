@@ -428,6 +428,12 @@ struct grZebes_GroundVars {
     /*  +C gp+D0 */ Vec3 xC;
 };
 
+struct grFourside_GroundVars {
+    /*  +0 gp+C4 */ u8 x0;
+    /*  +1 gp+C5 */ u8 x1;
+    /*  +4 gp+C8 */ s32 x4;
+};
+
 struct grOnett_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
@@ -546,6 +552,7 @@ struct Ground {
             struct grCorneria_GroundVars corneria;
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;
+            struct grFourside_GroundVars fourside;
             struct grIceMt_GroundVars icemt;
             struct grIceMt_GroundVars2 icemt2;
             struct GroundVars_izumi izumi;
