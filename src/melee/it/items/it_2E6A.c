@@ -89,7 +89,7 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
 
     spawn.kind = Pokemon_Random; // 44
     if (arg3) {
-        lb_8000B1CC(arg3, 0, &spawn.prev_pos);
+        lb_8000B1CC(arg3, NULL, &spawn.prev_pos);
     } else {
         if (pos != NULL) {
             spawn.prev_pos = *pos;
