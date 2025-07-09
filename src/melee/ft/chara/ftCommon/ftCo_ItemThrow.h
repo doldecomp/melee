@@ -5,6 +5,7 @@
 
 /* 0949F4 */ bool ftCo_80094E54(ftCo_Fighter* fp);
 /* 094CFC */ bool ftCo_8009515C(ftCo_GObj* gobj);
+/* 094DF4 */ bool ftCo_80095254(ftCo_GObj* gobj);
 /* 094EA4 */ bool ftCo_80094EA4(ftCo_GObj* gobj);
 /* 0951DC */ bool ftCo_8009563C(ftCo_GObj* gobj);
 /* 0952E4 */ void ftCo_80095744(ftCo_GObj* gobj, int*);

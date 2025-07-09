@@ -8,6 +8,7 @@
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
+#include <dolphin/card.h>
 
 struct DynamicsData {
     /* +0 */ HSD_JObj* jobj;
@@ -262,12 +263,12 @@ struct PreloadCacheSceneEntry {
 
 struct PreloadEntry {
     s8 state;
-    u8 type;
+    s8 type;
     s8 heap;
-    u8 load_state;
+    s8 load_state;
     u8 unknown004;
     u8 field5_0x5;
-    u16 entry_num;
+    s16 entry_num;
     s16 load_score;
     u8 field8_0xa;
     u8 field9_0xb;
@@ -277,6 +278,9 @@ struct PreloadEntry {
     s32 effect_index;
 };
 
+// TODO: this struct might need to be smaller,
+// based on the number of iters in the struct-copy code
+// emitted by e.g. lbDvd_80018CF4
 struct PreloadCacheScene {
     u32 is_heap_persistent[2];
     u8 major_id;
@@ -289,7 +293,7 @@ struct PreloadCacheScene {
 };
 
 struct PreloadCache {
-    u32 persistent_heaps;
+    s32 persistent_heaps;
     PreloadCacheScene scene;
     PreloadCacheScene new_scene;
     PreloadEntry entries[80];
@@ -305,5 +309,54 @@ struct lb_800138D8_t {
     /* +13 */ char pad_13[0x18 - 0x13];
     /* +18 */ int x18;
 };
+
+struct lb_80432A68_38_t {
+    /* 0x0 */ s32 unk_0;
+    /* 0x4 */ s32 unk_4;
+};
+STATIC_ASSERT(sizeof(struct lb_80432A68_38_t) == 0x8);
+
+struct lb_80432A68_t {
+    /* 0x000 */ UNK_T work_area;
+    /* 0x004 */ UNK_T lib_area;
+    /* 0x008 */ int chan;
+    /* 0x00C */ UNK_T unk_C;
+    /* 0x010 */ const char* unk_10;
+    /* 0x014 */ const char* unk_14;
+    /* 0x018 */ s32 unk_18;
+    /* 0x01C */ s32 unk_1C;
+    /* 0x020 */ UNK_T unk_20;
+    /* 0x024 */ int* unk_24;
+    /* 0x028 */ int* unk_28;
+    /* 0x02C */ char x2C[2];
+    /* 0x02C */ char x2E;
+    /* 0x02C */ char x2F[4];
+    /* 0x034 */ s32 unk_34;
+    /* 0x038 */ struct lb_80432A68_38_t unk_38[9];
+    /* 0x080 */ s32 unk_80;
+    /* 0x084 */ s32 memsize;
+    /* 0x088 */ s32 sectorsize;
+    /* 0x08C */ s32 unused_bytes;
+    /* 0x090 */ s32 unused_files;
+    /* 0x094 */ CARDFileInfo file_info;
+    /* 0x0A8 */ s32 unk_A8;
+    /* 0x098 */ u8 pad_AC[0xD0 - 0xAC]; /* maybe part of unk_80[0x123]? */
+    /* 0x0A8 */ int xD0[9];
+    /* 0x0A8 */ volatile int xF4[9];
+    /* 0x098 */ u8 pad_500[0x50C - 0xF4 - 9*4]; /* maybe part of unk_80[0x123]? */
+    /* 0x50C */ void (*x50C)(int);
+    /* 0x510 */ struct CardTask {
+                    int x0;
+                    int x4;
+                    UNK_T x8;
+                    char* xC;
+                    char x10[0x20];
+                    u8 x18;
+                    char x19[7];
+                    u8 unk20[0x1C];
+                } task_array[11];
+    /* 0x8AC */ int x8AC;
+}; /* size = 0x8B0 */
+STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);
 
 #endif

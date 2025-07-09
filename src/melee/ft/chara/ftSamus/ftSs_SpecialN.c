@@ -14,12 +14,12 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSamus/types.h"
 #include "it/items/itsamuschargeshot.h"
@@ -273,7 +273,7 @@ void ftSs_SpecialAirN_Anim(HSD_GObj* gobj)
     ftSs_SpecialN_801293BC(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (samus_attr->x24 == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCo_80096900(gobj, 1, 0, 1, 1, samus_attr->x24);

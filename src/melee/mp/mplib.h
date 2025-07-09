@@ -88,9 +88,9 @@
 /* 05541C */ UNK_RET mpLib_8005541C(UNK_PARAMS);
 /* 0557D0 */ UNK_RET mpLib_800557D0(UNK_PARAMS);
 /* 055C5C */ UNK_RET mpLib_80055C5C(UNK_PARAMS);
-/* 055E24 */ UNK_RET mpLib_80055E24(UNK_PARAMS);
+/* 055E24 */ UNK_RET mpLib_80055E24(int);
 /* 055E9C */ void mpLib_80055E9C(s16 x);
-/* 0565DC */ UNK_RET mpLib_800565DC(UNK_PARAMS);
+/* 0565DC */ UNK_RET mpLib_800565DC(int);
 /* 05667C */ void mpLib_8005667C(s16);
 /* 0566D8 */ UNK_RET mpLib_800566D8(UNK_PARAMS);
 /* 0566F8 */ void mpLib_800566F8(ssize_t, f32, f32);
@@ -126,7 +126,7 @@
 /* 0581DC */ void mpLib_800581DC(int, int);
 /* 058560 */ void mpLib_80058560(void);
 /* 058614 */ UNK_RET mpLib_80058614(UNK_PARAMS);
-/* 0587FC */ UNK_RET fn_800587FC(UNK_PARAMS);
+/* 0587FC */ void fn_800587FC(HSD_GObj*);
 /* 058820 */ void mpLib_80058820(void);
 /* 0588C8 */ int mpLib_800588C8(void);
 /* 0588D0 */ void mpLib_800588D0(float left, float bottom, float right,

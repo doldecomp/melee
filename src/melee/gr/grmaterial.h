@@ -24,6 +24,7 @@
                                       float argB, float argC, float argD, float argE);
 /* 1C8E08 */ void grMaterial_801C8E08(Item_GObj*);
 /* 1C8E28 */ void grMaterial_801C8E28(HSD_GObj*);
+/* 1C92C0 */ void grMaterial_801C92C0(HSD_JObj*);
 /* 1C94D8 */ void grMaterial_801C94D8(UNK_T hsd_obj);
 /* 1C95C4 */ void grMaterial_801C95C4(HSD_GObj*);
 /* 1C9604 */ void grMaterial_801C9604(HSD_GObj* bg, int, bool);

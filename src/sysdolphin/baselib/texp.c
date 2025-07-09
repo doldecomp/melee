@@ -853,6 +853,7 @@ static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
     int i, val;
 
     tev = &texp->tev;
+
     if (tev->c_ref > 0) {
         if (tev->kcsel != HSD_TE_UNDEF) {
             for (i = 0; i < 4; i++) {
@@ -1051,18 +1052,153 @@ static void TExp2TevDesc(HSD_TExp* texp, HSD_TExpTevDesc* desc,
     tevdesc->u.tevconf.mode = GX_TC_LINEAR;
 }
 
-#ifndef BUGFIX
-static GXTevRegID id[7] = { GX_TEVPREV, GX_TEVREG0, GX_TEVREG1, GX_TEVREG2,
-                            GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
-static char list_type[27] = "clist->type == HSD_TE_CNST";
-#endif
+static GXTevKColorID id1[4] = { GX_KCOLOR0, GX_KCOLOR1, GX_KCOLOR2, GX_KCOLOR3 };
+static GXTevRegID id2[3] = { GX_TEVREG0, GX_TEVREG1, GX_TEVREG2 };
 
-const float HSD_TExp_804DE7D8 = 255.0;
-const double HSD_TExp_804DE7E0 = 255.0;
+static inline int clamp_color(int c)
+{
+    if (c > 0xFF)
+        return 0xFF;
+    if (c < 0)
+        return 0;
+    return c;
+}
 
 void HSD_TExpSetReg(HSD_TExp* texp)
 {
-    NOT_IMPLEMENTED;
+    int i;
+    HSD_TExp* clist;
+    u32 reg_bits;
+
+    int var_r4;
+    int var_r5;
+    int var_r3;
+
+    f32* temp_r3_2;
+    f64* temp_r3_3;
+    u32* temp_r4_3;
+    u16* temp_r5;
+    u8 var_r4_4;
+
+    GXColor sp18[8];
+    GXColor sp14;
+
+    clist = texp;
+    reg_bits = 0;
+
+    while (clist != NULL) {
+        if (clist->type != HSD_TE_CNST) {
+            __assert("texp.c", 0x591, "clist->type == HSD_TE_CNST");
+        }
+        if (clist->cnst.reg < 8) {
+            reg_bits |= 1 << clist->cnst.reg;
+            if (clist->cnst.comp == HSD_TE_RGB) {
+                switch (clist->cnst.ctype) {
+                case HSD_TE_U8:
+                    sp14 = *(GXColor*) clist->cnst.val;
+                    sp14.a = sp18[clist->cnst.reg].a;
+                    sp18[clist->cnst.reg] = sp14;
+                    break;
+                case HSD_TE_U32:
+                    temp_r4_3 = clist->cnst.val;
+                    sp18[clist->cnst.reg].r = temp_r4_3[0] < 0x100 ? temp_r4_3[0] : 0xFF;
+                    sp18[clist->cnst.reg].g = temp_r4_3[1] < 0x100 ? temp_r4_3[1] : 0xFF;
+                    sp18[clist->cnst.reg].b = temp_r4_3[2] < 0x100 ? temp_r4_3[2] : 0xFF;
+                    break;
+                default:
+                    switch (clist->cnst.ctype) {
+                    case HSD_TE_U16:
+                        temp_r5 = clist->cnst.val;
+                        var_r3 = temp_r5[0];
+                        var_r4 = temp_r5[1];
+                        var_r5 = temp_r5[2];
+                        break;
+                    case HSD_TE_F32:
+                        temp_r3_2 = clist->cnst.val;
+                        var_r3 = 0xFF * temp_r3_2[0];
+                        var_r4 = 0xFF * temp_r3_2[1];
+                        var_r5 = 0xFF * temp_r3_2[2];
+                        break;
+                    default:
+                        temp_r3_3 = clist->cnst.val;
+                        var_r3 = 0xFF * temp_r3_3[0];
+                        var_r4 = 0xFF * temp_r3_3[1];
+                        var_r5 = 0xFF * temp_r3_3[2];
+                        break;
+                    }
+                    if (var_r3 > 0xFF) {
+                        var_r3 = 0xFF;
+                    } else if (var_r3 < 0) {
+                        var_r3 = 0;
+                    }
+                    sp18[clist->cnst.reg].r = var_r3;
+                    if (var_r4 > 0xFF) {
+                        var_r4 = 0xFF;
+                    } else if (var_r4 < 0) {
+                        var_r4 = 0;
+                    }
+                    sp18[clist->cnst.reg].g = var_r4;
+                    sp18[clist->cnst.reg].b = var_r5 > 0xFF ? 0xFF : var_r5 < 0 ? 0 : var_r5;
+                }
+            } else {
+                switch (clist->cnst.ctype) {
+                case HSD_TE_U8:
+                    var_r4_4 = *(u8*) clist->cnst.val;
+                    break;
+                case HSD_TE_U16:
+                    var_r4_4 = clamp_color(*(u16*) clist->cnst.val);
+                    break;
+                case HSD_TE_U32:
+                    var_r4_4 = clamp_color(*(u32*) clist->cnst.val);
+                    break;
+                case HSD_TE_F32:
+                    var_r4_4 = clamp_color(0xFF * *(f32*) clist->cnst.val);
+                    break;
+                default:
+                    var_r4_4 = clamp_color(0xFF * *(f64*) clist->cnst.val);
+                    break;
+                }
+                if (clist->cnst.reg < 4) {
+                    switch (clist->cnst.idx) {
+                    case 0:
+                        sp18[clist->cnst.reg].r = var_r4_4;
+                        break;
+                    case 1:
+                        sp18[clist->cnst.reg].g = var_r4_4;
+                        break;
+                    case 2:
+                        sp18[clist->cnst.reg].b = var_r4_4;
+                        break;
+                    default:
+                        sp18[clist->cnst.reg].a = var_r4_4;
+                        break;
+                    }
+                } else if (clist->cnst.idx == 3) {
+                    sp18[clist->cnst.reg].a = var_r4_4;
+                } else {
+                    sp18[clist->cnst.reg].r = var_r4_4;
+                    sp18[clist->cnst.reg].g = var_r4_4;
+                    sp18[clist->cnst.reg].b = var_r4_4;
+                }
+            }
+        }
+        clist = clist->comm.next;
+    }
+    if (reg_bits != 0) {
+        GXPixModeSync();
+        for (i = 0; i < 4; i++) {
+            if (reg_bits & (1 << i)) {
+                GXSetTevKColor(id1[i], sp18[i]);
+            }
+        }
+        for (i = 4; i < 7; i++) {
+            if (reg_bits & (1 << i)) {
+                GXSetTevColor(id2[i - 4], sp18[i]);
+            }
+        }
+        HSD_StateInvalidate(0x10);
+        GXPixModeSync();
+    }
 }
 
 void HSD_TExpSetupTev(HSD_TExpTevDesc* tevdesc, HSD_TExp* texp)

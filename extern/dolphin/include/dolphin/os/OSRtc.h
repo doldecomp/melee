@@ -50,6 +50,8 @@ void OSSetVideoMode(unsigned long mode);
 unsigned char OSGetLanguage();
 void OSSetLanguage(unsigned char language);
 unsigned long OSGetProgressiveMode(void);
+void OSSetProgressiveMode(u32 mode);
+u16 OSGetWirelessID(s32);
 
 #ifdef __cplusplus
 }

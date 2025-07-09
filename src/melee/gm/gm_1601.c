@@ -14,6 +14,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbtime.h"
 #include "mp/mpcoll.h"
+#include "pl/player.h"
 
 #include <m2c_macros.h>
 
@@ -804,7 +805,18 @@ void fn_8016B388(ssize_t arg0, s16 arg1)
 
 /// #fn_8016B510
 
-/// #gm_8016B558
+int gm_8016B558(void)
+{
+    int i;
+    int count;
+    count = 0;
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3) {
+            count++;
+        }
+    }
+    return count;
+}
 
 /// #fn_8016B5B0
 
@@ -924,7 +936,7 @@ UNK_T gm_8016B774(void)
 
 /// #fn_8016F180
 
-/// #gm_8016F1B8
+/// #gmDecisionGetType
 
 short fn_8016F1F0(int idx)
 {

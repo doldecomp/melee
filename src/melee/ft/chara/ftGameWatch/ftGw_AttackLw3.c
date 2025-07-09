@@ -6,7 +6,6 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -18,6 +17,10 @@
 #include "ftCommon/ftCo_AttackLw4.h"
 #include "ftCommon/ftCo_AttackS3.h"
 #include "ftCommon/ftCo_AttackS4.h"
+#include "ftCommon/ftCo_Dash.h"
+#include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Turn.h"
+#include "ftCommon/ftCo_Walk.h"
 #include "ftCommon/ftpickupitem.h"
 #include "ftGameWatch/types.h"
 #include "it/it_26B1.h"

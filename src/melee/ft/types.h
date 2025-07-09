@@ -65,25 +65,27 @@ struct ftCommonData {
     /* +28 */ float x28;
     /* +2C */ float x2C;
     /* +30 */ float x30;
-    /* +34 */ UNK_T x34;
-    /* +38 */ UNK_T x38;
+    /* +34 */ float x34;
+    /* +38 */ float x38_someLStickXThreshold;
     /* +3C */ float x3C;
     /* +40 */ int x40;
     /* +44 */ float x44;
-    /* +48 */ UNK_T x48;
-    /* +4C */ UNK_T x4C;
+    /* +48 */ float x48;
+    /* +4C */ float x4C;
     /* +50 */ float x50;
-    /* +54 */ UNK_T x54;
-    /* +58 */ UNK_T x58;
+    /* +54 */ float x54;
+    /* +58 */ float x58_someLStickXThreshold;
     /* +5C */ float x5C;
     /* +60 */ float x60_someFrictionMul;
     /* +64 */ UNK_T x64;
     /* +68 */ float x68;
     /* +6C */ float x6C;
-    /* +70 */ float x70_someLStickYMax;
+    /* +70 */ float tap_jump_threshold;
     /* +6C */ int x74;
     /* +78 */ float x78;
-    /* +7C */ u8 x7C[0x88 - 0x7C];
+    /* +7C */ float tap_jump_release_threshold;
+    /* +80 */ float x80;
+    /* +84 */ u8 x84[4];
     /* +88 */ float x88;
     /* +8C */ int x8C;
     /* +90 */ u8 x90[0x98 - 0x90];
@@ -304,15 +306,15 @@ struct ftCommonData {
     /* +410 */ float x404;
     /* +410 */ float x408;
     /* +40C */ float x40C;
-    /* +410 */ UNK_T x410;
+    /* +410 */ int x410;
     /* +414 */ UNK_T x414;
     /* +418 */ int x418;
     /* +41C */ int x41C;
     /* +420 */ UNK_T x420;
     /* +424 */ float x424;
     /* +428 */ int x428;
-    /* +42C */ UNK_T x42C;
-    /* +430 */ UNK_T x430;
+    /* +42C */ float x42C;
+    /* +430 */ float x430;
     /* +434 */ UNK_T x434;
     /* +438 */ float x438;
     /* +43C */ UNK_T x43C;
@@ -329,7 +331,7 @@ struct ftCommonData {
     /* +468 */ float x468;
     /* +46C */ float x46C;
     /* +470 */ float x470;
-    /* +474 */ UNK_T x474;
+    /* +474 */ float x474;
     /* +478 */ float x478;
     /* +47C */ float x47C;
     /* +480 */ float x480;
@@ -518,7 +520,7 @@ struct ftCommonData {
     /* +7CC */ int x7CC;
     /* +7D0 */ int x7D0;
     /* +7D4 */ float hit_weight_mul;
-    /* +7D8 */ int x7D8;
+    /* +7D8 */ GXColor x7D8;
     /* +7DC */ int x7DC;
     /* +7E0 */ int x7E0;
     /* +7E4 */ float x7E4_scaleZ;
@@ -685,7 +687,7 @@ typedef struct ftCo_DatAttrs {
     /* +078 fp+188 */ float horizontal_air_mobility_constant;
     /* +07C fp+18C */ float jab_2_input_window;
     /* +080 fp+190 */ float jab_3_input_window;
-    /* +084 fp+194 */ int frames_to_change_direction_on_standing_turn;
+    /* +084 fp+194 */ float frames_to_change_direction_on_standing_turn;
     /* +088 fp+198 */ float weight;
     /* +08C fp+19C */ float model_scaling;
     /* +090 fp+1A0 */ float initial_shield_size;
@@ -1100,7 +1102,7 @@ struct ft_800898B4_t {
     /*  +0  */ int x0;
     /*  +4  */ int x4;
     /*  +8  */ float kb_applied1;
-    /*  +C  */ UNK_T xC;
+    /*  +C  */ int xC;
     /*  +10 */ u32 x10_b0 : 1;
     /*  +10 */ u32 x10_b1 : 1;
     /*  +10 */ u32 x10_b2 : 1;
@@ -1931,6 +1933,7 @@ struct ftData_80085FD4_ret {
     /* +C */ UNK_T xC;
     /* +10:0 */ u8 x10_b0 : 1;
     /* +10:1 */ u8 x10_b1 : 1;
+    /* +14 */ u32 x14;
 };
 
 typedef struct ArticleDynamicBones {

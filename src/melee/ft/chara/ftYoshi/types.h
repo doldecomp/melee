@@ -12,7 +12,7 @@ struct ftYoshi_FighterVars {
 };
 
 typedef struct _ftYoshiAttributes {
-    float x0;
+    s32 x0;
     float x4;
     float x8;
     float xC;
@@ -24,7 +24,15 @@ typedef struct _ftYoshiAttributes {
     float x24;
     s32 x28;
     s32 x2C;
-    u8 data_filler1[0xEF];
+    // additions to match ftYs_SpecialN_8012CDB4
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    f32 x3c;
+    f32 x40;
+    f32 x44;
+    // u8 data_filler1[0xEF];
+    u8 data_filler1[0xD7]; // subtracting 18
     float x120;
     u8 data_filler2[0x14];
 } ftYoshiAttributes;
@@ -53,7 +61,16 @@ union ftYoshi_MotionVars {
         float x18;
     } unk2;
     struct ftYoshi_SpecialNVars {
-        /* fp+2340 */ int x0_b0 : 1;
+        union x0 {
+            /* fp+2340 */ s32 x0;
+            struct ftYoshi_SpecialN_x0Bytes {
+                /* fp+2340 */ int x0_b0 : 1;
+                /* fp+2341 */ int x0_b1 : 1;
+                /* fp+2342 */ int x0_b2 : 1;
+                /* fp+2343 */ int x0_b3 : 1;
+            } x0_bytes;
+        } x0;
+        /* fp+2344 */ s32 x4;
     } specialn;
 };
 

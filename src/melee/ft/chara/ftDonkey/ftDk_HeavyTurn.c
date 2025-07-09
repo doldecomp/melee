@@ -5,11 +5,11 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Turn.h"
 #include "ftDonkey/types.h"
 
 #include <common_structs.h>
@@ -17,7 +17,7 @@
 
 void ftDk_HeavyTurn_Anim(HSD_GObj* gobj)
 {
-    ftCo_800C9924(gobj);
+    ftCo_Turn_Anim_Inner(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftDk_MS_341_800DF980(gobj);
     }

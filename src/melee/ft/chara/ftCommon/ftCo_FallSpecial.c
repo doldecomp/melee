@@ -7,12 +7,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
 #include "un/un_2FC9.h"
@@ -94,8 +95,8 @@ void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
 void ftCo_FallSpecial_Anim(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = gobj->user_data;
-    ftCo_800CCBE0(gobj, &fp->mv.co.fallspecial.x4, ftCo_MS_JumpB,
-                  ftCo_MS_JumpAerialF, ftCo_MS_JumpAerialB);
+    ftCo_Fall_Anim_Inner(gobj, &fp->mv.co.fallspecial.x4, ftCo_SM_FallSpecial,
+                         ftCo_SM_FallSpecialF, ftCo_SM_FallSpecialB);
     ftCo_800CC988(gobj, fp->mv.co.fallspecial.x4);
 }
 

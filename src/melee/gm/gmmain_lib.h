@@ -2,11 +2,11 @@
 #define GALE01_15CC34
 
 #include <platform.h>
-
-#include "gm/types.h"
+#include <placeholder.h>
+#include <melee/gm/forward.h>
 
 /* 15CC34 */ GameRules* gmMainLib_8015CC34(void);
-/* 15CC40 */ void* gmMainLib_8015CC40(void);
+/* 15CC40 */ struct gmm_x1868* gmMainLib_8015CC40(void);
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
 /* 15CC58 */ struct gmm_x1CB0* gmMainLib_8015CC58(void);
 /* 15CC64 */ void* gmMainLib_8015CC64(s32);
@@ -29,7 +29,7 @@
 /* 15CD74 */ void* gmMainLib_8015CD74(void);
 /* 15CD80 */ void* gmMainLib_8015CD80(void);
 /* 15CD8C */ void* gmMainLib_8015CD8C(void);
-/* 15CD98 */ void* gmMainLib_8015CD98(void);
+/* 15CD98 */ int* gmMainLib_8015CD98(void);
 /* 15CDA4 */ void* gmMainLib_8015CDA4(void);
 /* 15CDB0 */ void* gmMainLib_8015CDB0(void);
 /* 15CDBC */ void* gmMainLib_8015CDBC(void);
@@ -54,21 +54,21 @@
 /* 15D0D8 */ s32 gmMainLib_8015D0D8(u8);
 /* 15D0F4 */ s32 gmMainLib_8015D0F4(u8);
 /* 15D134 */ void gmMainLib_8015D134(u8);
-/* 15D194 */ s8* gmMainLib_8015D194(u8);
+/* 15D194 */ u8* gmMainLib_8015D194(u8);
 /* 15D1AC */ s32 gmMainLib_8015D1AC(u8);
 /* 15D1C8 */ void gmMainLib_8015D1C8(u8, s32);
 /* 15D1E8 */ s32* gmMainLib_8015D1E8(u8);
 /* 15D200 */ s32 gmMainLib_8015D200(u8);
 /* 15D21C */ s32 gmMainLib_8015D21C(u8);
 /* 15D25C */ void gmMainLib_8015D25C(u8);
-/* 15D2BC */ s8* gmMainLib_8015D2BC(u8);
+/* 15D2BC */ u8* gmMainLib_8015D2BC(u8);
 /* 15D2D4 */ s32 gmMainLib_8015D2D4(u8);
 /* 15D2F0 */ void gmMainLib_8015D2F0(u8, s32);
 /* 15D310 */ s32* gmMainLib_8015D310(u8);
 /* 15D328 */ s32 gmMainLib_8015D328(u8);
 /* 15D344 */ s32 gmMainLib_8015D344(u8);
 /* 15D384 */ void gmMainLib_8015D384(u8);
-/* 15D3E4 */ s8* gmMainLib_8015D3E4(u8);
+/* 15D3E4 */ u8* gmMainLib_8015D3E4(u8);
 /* 15D3FC */ s32 gmMainLib_8015D3FC(u8);
 /* 15D418 */ void gmMainLib_8015D418(u8, s32);
 /* 15D438 */ s32* gmMainLib_8015D438(u8);
@@ -151,15 +151,16 @@
 /* 15F464 */ UNK_RET gmMainLib_8015F464(UNK_PARAMS);
 /* 15F490 */ UNK_RET gmMainLib_8015F490(UNK_PARAMS);
 /* 15F4BC */ UNK_RET gmMainLib_8015F4BC(UNK_PARAMS);
-/* 15F4E8 */ u8* gmMainLib_8015EDC8(void);
+/* 15EDC8 */ u8* gmMainLib_8015EDC8(void);
+/* 15F4E8 */ u8 gmMainLib_8015F4E8(void);
 /* 15F4F4 */ void gmMainLib_8015F4F4(u8 arg0);
 /* 15F500 */ UNK_RET gmMainLib_8015F500(UNK_PARAMS);
-/* 15F588 */ UNK_RET gmMainLib_8015F588(UNK_PARAMS);
-/* 15F600 */ UNK_RET gmMainLib_8015F600(UNK_PARAMS);
-/* 15FA34 */ UNK_RET gmMainLib_8015FA34(UNK_PARAMS);
+/* 15F588 */ void gmMainLib_8015F588(bool);
+/* 15F600 */ void gmMainLib_8015F600(int, int);
+/* 15FA34 */ void gmMainLib_8015FA34(int);
 /* 15FB68 */ UNK_RET gmMainLib_8015FB68(UNK_PARAMS);
 /* 15FBA4 */ void gmMainLib_8015FBA4(void);
-/* 15FC74 */ UNK_RET gmMainLib_8015FC74(UNK_PARAMS);
+/* 15FC74 */ int gmMainLib_8015FC74(void);
 /* 15FCC0 */ void gmMainLib_8015FCC0(void);
 /* 46B0F0 */ extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 /* 4D3EE0 */ extern struct gmm_x0* gmMainLib_804D3EE0;

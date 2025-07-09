@@ -22,6 +22,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 #include <melee/ty/tydisplay.h>
 
 static GameState gm_80479D30;
@@ -312,7 +313,7 @@ void gm_801A4510(void)
             major_scenes[i].Init();
         }
     }
-    if (VIGetDTVStatus() != NULL &&
+    if (VIGetDTVStatus() != 0 &&
         (db_gameLaunchButtonState & 0x200 || OSGetProgressiveMode() == 1))
     {
         gm_80479D30.nums.curr_major = 0x27;

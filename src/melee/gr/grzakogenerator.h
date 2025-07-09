@@ -13,8 +13,8 @@
 /* 1CACB8 */ void grZakoGenerator_801CACB8(Ground_GObj* gobj);
 /* 1CADBC */ UNK_RET fn_801CADBC(UNK_PARAMS);
 /* 1CADE0 */ UNK_RET grZakoGenerator_801CADE0(UNK_PARAMS);
-/* 1CAE04 */ void grZakoGenerator_801CAE04(bool);
-/* 1CAEB0 */ UNK_RET grZakoGenerator_801CAEB0(UNK_PARAMS);
+/* 1CAE04 */ void grZakoGenerator_801CAE04(UNK_T);
+/* 1CAEB0 */ void grZakoGenerator_801CAEB0(int, int);
 /* 1CAEF0 */ UNK_RET grZakoGenerator_801CAEF0(bool);
 /* 1CAF08 */ UNK_RET grZakoGenerator_801CAF08(UNK_PARAMS);
 

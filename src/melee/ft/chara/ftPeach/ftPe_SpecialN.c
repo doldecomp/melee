@@ -9,11 +9,11 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftPeach/types.h"
 #include "it/items/itpeachtoad.h"
 #include "it/items/itpeachtoadspore.h"
@@ -201,7 +201,7 @@ void ftPe_SpecialN_Anim(HSD_GObj* gobj)
 void ftPe_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     u8 _[16];
-    doAnim(gobj, ftCo_800CC730);
+    doAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftPe_SpecialN_IASA(HSD_GObj* gobj) {}
@@ -316,7 +316,7 @@ void ftPe_SpecialNHit_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialAirNHit_Anim(HSD_GObj* gobj)
 {
-    doHitAnim(gobj, ftCo_800CC730);
+    doHitAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftPe_SpecialNHit_IASA(HSD_GObj* gobj) {}

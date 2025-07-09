@@ -1,315 +1,21 @@
-#include "ft/forward.h"
+#include "mncharsel.h"
 
-#include "mn/mncharsel.h"
+#include "mncharsel.static.h"
 
-#include "gm/gmmain_lib.h"
-#include "lb/lblanguage.h"
-#include "mn/types.h"
-
-#include <baselib/sislib.h>
-
-/* 4D6CB0 */ static CSSData* mnCharSel_804D6CB0;
-/* 4D6CF4 */ static s8 mnCharSel_804D6CF4;
-
-// Can't be enum bc float, but reused values
-#define ICONROWHT_TOP_TOP 20.0F
-#define ICONROWHT_MID_TOP 13.0F
-#define ICONROWHT_BTM_TOP 6.0F
-#define ICONROWHT_BTM_BTM (-1.0F)
-
-// Can't be enum bc float, but reused values
-#define ICONBNDS_COL0_L (-30.0F)
-#define ICONBNDS_COL1_L (-24.399999618530273F)
-#define ICONBNDS_COL2_L (-17.399999618530273F)
-#define ICONBNDS_COL3_L (-10.399999618530273F)
-#define ICONBNDS_COL4_L (-3.4000000953674316F)
-#define ICONBNDS_COL5_L 3.5999999046325684F
-#define ICONBNDS_COL6_L 10.600000381469727F
-#define ICONBNDS_COL7_L 17.600000381469727F
-#define ICONBNDS_COL8_L 24.399999618530273F
-#define ICONBNDS_COL8_R 30.200000762939453F
-
-CSSIconsData mnCharSel_803F0A48 = {
-    {
-        // GnW Name
-        0x82, 0x6C, 0x82, 0x92, // 0x803F0A48
-        0x81, 0x44, 0x82, 0x66, // 0x803F0A4C
-        0x82, 0x81, 0x82, 0x8D, // 0x803F0A50
-        0x82, 0x85, 0x81, 0x95, // 0x803F0A54
-        0x82, 0x76, 0x82, 0x81, // 0x803F0A58
-        0x82, 0x94, 0x82, 0x83, // 0x803F0A5C
-        0x82, 0x88, 0x00, 0x00  // 0x803F0A60
-    },
-    {
-        // Mode Info
-        { 0x0000, 0x0001, 0x00007535 }, // 0x803F0A64
-        { 0x0002, 0x000D, 0x0000753A }, // 0x803F0A6C
-        { 0x0003, 0x000E, 0x0000753B }, // 0x803F0A74
-        { 0x0004, 0x000F, 0x0000753C }, // 0x803F0A7C
-        { 0x0007, 0x0011, 0x0000753D }, // 0x803F0A84
-        { 0x0008, 0x0012, 0x0000753E }, // 0x803F0A8C
-        { 0x0009, 0x0013, 0x0000753F }, // 0x803F0A94
-        { 0x0006, 0x0010, 0x00007540 }, // 0x803F0A9C
-        { 0x000A, 0x0014, 0x00007541 }, // 0x803F0AA4
-        { 0x000B, 0x0015, 0x00007535 }, // 0x803F0AAC
-        { 0x000C, 0x0016, 0x00007535 }, // 0x803F0AB4
-        { 0x0000, 0x0000, 0x00007534 }, // 0x803F0ABC
-        { 0x0001, 0x0000, 0x00007534 }, // 0x803F0AC4
-        { 0x0002, 0x0000, 0x00007533 }, // 0x803F0ACC
-        { 0x0003, 0x0000, 0x00007534 }, // 0x803F0AD4
-        { 0x0004, 0x0000, 0x0007C864 }, // 0x803F0ADC
-        { 0x0005, 0x0000, 0x00007531 }, // 0x803F0AE4
-        { 0x0008, 0x0000, 0x00007534 }, // 0x803F0AEC
-        { 0x0009, 0x0000, 0x00007534 }, // 0x803F0AF4
-        { 0x000A, 0x0000, 0x00007534 }, // 0x803F0AFC
-        { 0x000B, 0x0000, 0x00007534 }, // 0x803F0B04
-        { 0x000C, 0x0000, 0x00007534 }, // 0x803F0B0C
-        { 0x000D, 0x0000, 0x00007534 }, // 0x803F0B14
-        { 0x0007, 0x0000, 0x00007532 }  // 0x803F0B1C
-    },
-    { // -------- Icons Top Row --------
-
-      { // Dr. Mario -                      0x803F0B24
-        ICONHUD_DRMARIO, CKIND_DRMARIO, ICONSTATE_UNLOCKED, 0x00,
-        ICONJOINT_DRMARIO, ICONJOINT_DRMARIO, 0x000000C5, ICONBNDS_COL0_L,
-        ICONBNDS_COL1_L, ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // Mario -                          0x803F0B40
-        ICONHUD_MARIO, CKIND_MARIO, ICONSTATE_TEMP, 0x00, ICONJOINT_MARIO,
-        ICONJOINT_MARIO, 0x000000CD, ICONBNDS_COL1_L, ICONBNDS_COL2_L,
-        ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // Luigi -                          0x803F0B5C
-        ICONHUD_LUIGI, CKIND_LUIGI, ICONSTATE_TEMP, 0x00, ICONJOINT_LUIGI,
-        ICONJOINT_LUIGI, 0x000000CC, ICONBNDS_COL2_L, ICONBNDS_COL3_L,
-        ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // Bowser -                         0x803F0B78
-        ICONHUD_KOOPA, CKIND_KOOPA, ICONSTATE_TEMP, 0x00, ICONJOINT_KOOPA,
-        ICONJOINT_KOOPA, 0x000000CA, ICONBNDS_COL3_L, ICONBNDS_COL4_L,
-        ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // Peach -                          0x803F0B94
-        ICONHUD_PEACH, CKIND_PEACH, ICONSTATE_TEMP, 0x00, ICONJOINT_PEACH,
-        ICONJOINT_PEACH, 0x000000D1, ICONBNDS_COL4_L, ICONBNDS_COL5_L,
-        ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // Yoshi -                          0x803F0BB0
-        ICONHUD_YOSHI, CKIND_YOSHI, ICONSTATE_TEMP, 0x00, ICONJOINT_YOSHI,
-        ICONJOINT_YOSHI, 0x000000D7, ICONBNDS_COL5_L, ICONBNDS_COL6_L,
-        ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // DK -                             0x803F0BCC
-        ICONHUD_DONKEY, CKIND_DONKEY, ICONSTATE_TEMP, 0x00, ICONJOINT_DONKEY,
-        ICONJOINT_DONKEY, 0x000000C4, ICONBNDS_COL6_L, ICONBNDS_COL7_L,
-        ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // Captain Falcon -                 0x803F0BE8
-        ICONHUD_CAPTAIN, CKIND_CAPTAIN, ICONSTATE_TEMP, 0x00,
-        ICONJOINT_CAPTAIN, ICONJOINT_CAPTAIN, 0x000000C2, ICONBNDS_COL7_L,
-        ICONBNDS_COL8_L, ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-      { // Ganondorf -                      0x803F0C04
-        ICONHUD_GANON, CKIND_GANON, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_GANON,
-        ICONJOINT_GANON, 0x000000D9, ICONBNDS_COL8_L, ICONBNDS_COL8_R,
-        ICONROWHT_TOP_TOP, ICONROWHT_MID_TOP },
-
-      // -------- Icons Middle Row --------
-
-      { // Falco -                          0x803F0C20
-        ICONHUD_FALCO, CKIND_FALCO, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_FALCO,
-        ICONJOINT_FALCO, 0x000000C6, ICONBNDS_COL0_L, ICONBNDS_COL1_L,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // Fox -                            0x803F0C3C
-        ICONHUD_FOX, CKIND_FOX, ICONSTATE_TEMP, 0x00, ICONJOINT_FOX,
-        ICONJOINT_FOX, 0x000000C7, ICONBNDS_COL1_L, ICONBNDS_COL2_L,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // Ness -                           0x803F0C58
-        ICONHUD_NESS, CKIND_NESS, ICONSTATE_TEMP, 0x00, ICONJOINT_NESS,
-        ICONJOINT_NESS, 0x000000D0, ICONBNDS_COL2_L, ICONBNDS_COL3_L,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // ICs -                            0x803F0C74
-        ICONHUD_POPONANA, CKIND_POPONANA, ICONSTATE_TEMP, 0x00,
-        ICONJOINT_POPONANA, ICONJOINT_POPONANA, 0x000000C8, ICONBNDS_COL3_L,
-        ICONBNDS_COL4_L, ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // Kirby -                          0x803F0C90
-        ICONHUD_KIRBY, CKIND_KIRBY, ICONSTATE_TEMP, 0x00, ICONJOINT_KIRBY,
-        ICONJOINT_KIRBY, 0x000000C9, ICONBNDS_COL4_L, ICONBNDS_COL5_L,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // Samus -                          0x803F0CAC
-        ICONHUD_SAMUS, CKIND_SAMUS, ICONSTATE_TEMP, 0x00, ICONJOINT_SAMUS,
-        ICONJOINT_SAMUS, 0x000000D5, ICONBNDS_COL5_L, ICONBNDS_COL6_L,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // Zelda -                          0x803F0CC8
-        ICONHUD_ZELDA, CKIND_ZELDA, ICONSTATE_TEMP, 0x00, ICONJOINT_ZELDA,
-        ICONJOINT_ZELDA, 0x000000D6, ICONBNDS_COL6_L, ICONBNDS_COL7_L,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // Link -                           0x803F0CE4
-        ICONHUD_LINK, CKIND_LINK, ICONSTATE_TEMP, 0x00, ICONJOINT_LINK,
-        ICONJOINT_LINK, 0x000000CB, ICONBNDS_COL7_L, ICONBNDS_COL8_L,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-      { // Young Link -                     0x803F0D00
-        ICONHUD_CLINK, CKIND_CLINK, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_CLINK,
-        ICONJOINT_CLINK, 0x000000C3, ICONBNDS_COL8_L, ICONBNDS_COL8_R,
-        ICONROWHT_MID_TOP, ICONROWHT_BTM_TOP },
-
-      // -------- Icons Bottom Row --------
-
-      { // Pichu -                          0x803F0D1C
-        ICONHUD_PICHU, CKIND_PICHU, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_PICHU,
-        ICONJOINT_PICHU, 0x000000D2, -23.399999618530273, ICONBNDS_COL2_L,
-        ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
-      { // Pikachu -                        0x803F0D38
-        ICONHUD_PIKACHU, CKIND_PIKACHU, ICONSTATE_TEMP, 0x00,
-        ICONJOINT_PIKACHU, ICONJOINT_PIKACHU, 0x000000D3, ICONBNDS_COL2_L,
-        ICONBNDS_COL3_L, ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
-      { // Jigglypuff -                     0x803F0D54
-        ICONHUD_PURIN, CKIND_PURIN, ICONSTATE_TEMP, 0x00, ICONJOINT_PURIN,
-        ICONJOINT_PURIN, 0x000000D4, ICONBNDS_COL3_L, ICONBNDS_COL4_L,
-        ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
-      { // Mewtwo -                         0x803F0D70
-        ICONHUD_MEWTWO, CKIND_MEWTWO, ICONSTATE_TEMP, 0x00, ICONJOINT_MEWTWO,
-        ICONJOINT_MEWTWO, 0x000000CF, ICONBNDS_COL4_L, ICONBNDS_COL5_L,
-        ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
-      { // Mr. Game & Watch -               0x803F0D8C
-        ICONHUD_GAMEWATCH, CKIND_GAMEWATCH, ICONSTATE_TEMP, 0x00,
-        ICONJOINT_GAMEWATCH, ICONJOINT_GAMEWATCH, 0x000000D8, ICONBNDS_COL5_L,
-        ICONBNDS_COL6_L, ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
-      { // Marth -                          0x803F0DA8
-        ICONHUD_MARS, CKIND_MARS, ICONSTATE_TEMP, 0x00, ICONJOINT_MARS,
-        ICONJOINT_MARS, 0x000000CE, ICONBNDS_COL6_L, ICONBNDS_COL7_L,
-        ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
-      { // Roy -                            0x803F0DC4
-        ICONHUD_EMBLEM, CKIND_EMBLEM, ICONSTATE_UNLOCKED, 0x00,
-        ICONJOINT_EMBLEM, ICONJOINT_EMBLEM, 0x000000DA, ICONBNDS_COL7_L,
-        23.600000381469727, ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM } }
-};
-
-CSSDoorsData mnCharSel_803F0DFC = {
-    { { 0x2E,
-        0x33,
-        0x38,
-        0x85,
-        0x29,
-        0xA6,
-        0x3D,
-        0x41,
-        0x40,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        -35.599998474121094F,
-        -28.600000381469727F,
-        -26.799999237060547F,
-        -21.0F },
-      { 0x2F,
-        0x34,
-        0x39,
-        0x8D,
-        0x2A,
-        0xA8,
-        0x43,
-        0x47,
-        0x46,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        -19.399999618530273F,
-        -13.399999618530273F,
-        -11.399999618530273F,
-        -6.0F },
-      { 0x30,
-        0x35,
-        0x3A,
-        0x95,
-        0x2B,
-        0xAA,
-        0x49,
-        0x4D,
-        0x4C,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        -4.199999809265137F,
-        2.200000047683716F,
-        3.5F,
-        9.399999618530273F },
-      { 0x31, 0x36, 0x3B, 0x9D, 0x2C,  0xAC,  0x4F,  0x53,
-        0x52, 0x00, 0x00, 0x00, 0x00,  0x00,  0x00,  0x00,
-        0x00, 0x00, 0x00, 0x00, 11.0F, 17.0F, 19.0F, 24.600000381469727F } },
-    { { NULL, 0x70, 0x73, 0x74, 0x72, 0x71, 0x00, 0x00, 0x00 },
-      { NULL, 0x75, 0x78, 0x79, 0x77, 0x76, 0x00, 0x00, 0x00 },
-      { NULL, 0x7A, 0x7D, 0x7E, 0x7C, 0x7B, 0x00, 0x00, 0x00 },
-      { NULL, 0x7F, 0x82, 0x83, 0x81, 0x80, 0x00, 0x00, 0x00 } },
-    0x00,
-    0x00,
-    0x00,
-    0x00,
-    0x4A,
-    0x4D,
-    0x4E,
-    0x4C,
-    0x4B,
-    0x00,
-    0x00,
-    0x00,
-    0x2F,
-    0x01,
-    0x00000000,
-    0x00000000,
-    0.0F,
-    -10.899999618530273F,
-    -4.199999809265137F,
-    12.5F,
-    19.600000381469727F,
-    -6.800000190734863F,
-    -12.100000381469727F,
-    { 0x35, 0x39, 0x36, 0x38, 0x37 },
-    -2.200000047683716F,
-    3.700000047683716F,
-    13.699999809265137F,
-    19.299999237060547F,
-    -12.399999618530273F,
-    -16.600000381469727F,
-    {
-        { NULL, -22.5F, 0x57, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000 },
-        { NULL, -7.099999904632568, 0x5D, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { NULL, 8.300000190734863, 0x63, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { NULL, 23.700000762939453, 0x69, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-    },
-    { 0x25, 0x30, 0x32, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00, 0x00,
-
-      0x25, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64,
-      0x00, 0x00, 0x00, 0x00,
-
-      0x39, 0x39, 0x3A, 0x35, 0x39, 0x3A, 0x35, 0x39, 0x00, 0x00, 0x00, 0x00,
-      0x25, 0x64, 0x20, 0x90,
-
-      0x6C, 0x94, 0xB2, 0x82, 0xAB, 0x00, 0x00, 0x00, 0x25, 0x64, 0x20, 0x82,
-      0x6A, 0x82, 0x6E, 0x82,
-
-      0x93, 0x00, 0x00, 0x00 }
-};
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/mn/mncharsel.h>
+#include <melee/mn/mnname.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/sislib.h>
 
 TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
 {
@@ -349,14 +55,17 @@ TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
 void mnCharSel_8025BD30(void)
 {
     TextKerning* kerning;
+    u32 match_type;
 
     kerning = HSD_SisLib_804D1124[0][37].kerning;
 
-    if (mnCharSel_804D6CB0->match_type == 1) {
+    match_type = mnCharSel_804D6CB0->match_type;
+
+    if (match_type == 1) {
         HSD_SisLib_803A6530(0, 0x4A, 0x4F);
         return;
     }
-    if (mnCharSel_804D6CB0->match_type == 2) {
+    if (match_type == 2) {
         HSD_SisLib_803A6530(0, 0x4A, 0x50);
         return;
     }
@@ -425,7 +134,248 @@ void mnCharSel_8025BD30(void)
     }
 }
 
-/// #mnCharSel_8025C020
+extern HSD_JObj *mnCharSel_804D6CC0;
+extern HSD_JObj *mnCharSel_804D6CC8;
+extern HSD_Text* mnCharSel_804D6CDC;
+extern HSD_Text* mnCharSel_804D6CE0;
+extern HSD_Text* mnCharSel_804D6CE4;
+extern HSD_Text* mnCharSel_804D6CE8;
+/*
+static ? mnCharSel_803F0A48;
+static ? mnCharSel_804D50E4;
+static ? mnCharSel_804D50EC;
+static ? mnCharSel_804D50F0;
+static ? mnCharSel_804D50F8;
+static ? mnCharSel_804D5110;
+static ? mnCharSel_804D5118;
+*/
+extern u8 mnCharSel_804D5100;
+extern u8 mnCharSel_804D5108;
+
+static inline void inline1(HSD_Text* x, HSD_Text* y, int r6, int r7, int r8, int r31)
+{
+    if (r6 == 0) {
+        HSD_SisLib_803A70A0(x, 0, "%02d:%02d", r7, r8);
+        HSD_SisLib_803A70A0(y, 0, "%02d", r31);
+    } else if (r6 < 0x64) {
+        HSD_SisLib_803A70A0(x, 0, "%d:%02d:%02d", r6, r7, r8);
+        HSD_SisLib_803A70A0(y, 0, "%02d", r31);
+    } else {
+        HSD_SisLib_803A70A0(x, 0, "99:59:59");
+        HSD_SisLib_803A70A0(y, 0, "99");
+    }
+}
+
+static inline HSD_JObj* inline3(int i, float x)
+{
+    HSD_JObj* sp5C;
+    float temp_f1_6 = x + 1;
+    lb_80011E24(mnCharSel_804D6CC0, &sp5C, i, -1);
+    HSD_ForeachAnim(sp5C, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f1_6);
+    HSD_JObjAnimAll(sp5C);
+    HSD_ForeachAnim(sp5C, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+    return sp5C;
+}
+
+#define show_kos(x, y) (lbLang_IsSavedLanguageJP() \
+    ? HSD_SisLib_803A70A0((x), 0, "%d 人抜き", (y)) \
+    : HSD_SisLib_803A70A0((x), 0, "%d ＫＯｓ", (y)))
+
+void mnCharSel_8025C020(int arg0)
+{
+    HSD_JObj *sp7C;
+    u8 sp7B;
+    u8 sp7A;
+    u8 sp79;
+    u8 sp78;
+    u8 sp74[4];
+    HSD_JObj *sp70;
+
+    int i = mnCharSel_803F0DFC.doors[0].sel_icon;
+    int temp_r31 = mnCharSel_803F0A48.icons[i].ft_hudindex;
+    if (arg0 != 0) {
+        if (mnCharSel_804D6CDC != 0U) {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, NULL);
+        }
+        if (mnCharSel_804D6CE0 != 0U) {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE0, 0, NULL);
+        }
+    }
+    switch (mnCharSel_804D6CB0->match_type) {
+    case 11:
+        sp7C = inline3(0x42, *gmMainLib_8015D194(temp_r31));
+        if (arg0 != 0) {
+            HSD_JObjSetFlags(sp7C, 0x10U);
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%08d", gm_80162BD8(temp_r31));
+            if (gmMainLib_8015D0D8(temp_r31) != 0) {
+                HSD_JObjClearFlags(sp7C, 0x10U);
+            }
+        }
+        HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%09d", gm_80162C48());
+        if (gm_80162D1C() != 0) {
+            sp7C = inline3(0x43, gm_80162D6C());
+            HSD_JObjClearFlags(sp7C, 0x10U);
+        }
+        break;
+    case 12:
+        sp7C = inline3(0x42, *gmMainLib_8015D2BC(temp_r31));
+        if (arg0 != 0) {
+            HSD_JObjSetFlags(sp7C, 0x10U);
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%08d", gm_80162DD4(temp_r31));
+            if (gmMainLib_8015D200(temp_r31) != 0) {
+                HSD_JObjClearFlags(sp7C, 0x10U);
+            }
+        }
+        HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%09d", gm_80162E44());
+        if (gm_80162F18() != 0) {
+            sp7C = inline3(0x43, gm_80162F68());
+            HSD_JObjClearFlags(sp7C, 0x10U);
+        }
+        break;
+    case 13:
+        sp7C = inline3(0x42, *gmMainLib_8015D3E4(temp_r31));
+        if (arg0 != 0) {
+            HSD_JObjSetFlags(sp7C, 0x10U);
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%08d", gm_80162FD0(temp_r31));
+            if (gmMainLib_8015D328(temp_r31) != 0) {
+                HSD_JObjClearFlags(sp7C, 0x10U);
+            }
+        }
+        HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%09d", gm_80163040());
+        if (gm_80163114() != 0) {
+            sp7C = inline3(0x43, gm_80163164());
+            HSD_JObjClearFlags(sp7C, 0x10U);
+        }
+        break;
+    case 15:
+        if (arg0 == 0) {
+            int temp_r29 = gm_8016332C(temp_r31);
+            if (temp_r29 != -1U) {
+                if (lbLang_IsSavedLanguageJP() != 0) {
+                    HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 個", temp_r29);
+                } else {
+                    HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, &mnCharSel_804D5108, temp_r29);
+                }
+            } else {
+                gm_80163374(temp_r31, &sp7B, &sp7A, &sp79, &sp78);
+                inline1(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B, sp7A, sp79, sp78);
+            }
+        }
+        lb_80011E24(mnCharSel_804D6CC8, &sp7C, 3, -1);
+        if (gm_801634D4(&sp7B, &sp7A, &sp79, &sp78) != 0) {
+            inline1(mnCharSel_804D6CE4, mnCharSel_804D6CE8,
+                    sp7B, sp7A, sp79, sp78);
+            HSD_JObjClearFlagsAll(sp7C, 0x10U);
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, NULL);
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE8, 0, NULL);
+            HSD_JObjSetFlagsAll(sp7C, 0x10U);
+        }
+        break;
+    case 16:
+        if (arg0 == 0) {
+            if (lbLang_IsSavedLanguageJP()) {
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%.1f", (f32) (int) (10.0f * (gm_801631CC(temp_r31) / 100.0f)) / 10.0f);
+            } else {
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%.1f", (f32) (int) (10.0f * (gm_801631CC(temp_r31) / 30.4788f)) / 10.0f);
+            }
+        }
+        if (lbLang_IsSavedLanguageJP()) {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%.1f", (f32) (int) (10.0f * (gm_801631F0() / 100.0f)) / 10.0f);
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%.1f", (f32) (int) (10.0f * (gm_801631F0() / 30.4788f)) / 10.0f);
+        }
+        break;
+    case 23:
+        if (arg0 == 0) {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d", gm_80163274(temp_r31));
+        }
+        break;
+    case 17:
+        if (arg0 == 0) {
+            if (gm_8016365C(temp_r31) != 0) {
+                show_kos(mnCharSel_804D6CDC, gm_80163690(temp_r31));
+            } else {
+                gm_801636D8(temp_r31, &sp7B, &sp7A, &sp79, &sp78);
+                inline1(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B, sp7A, sp79, sp78);
+            }
+        }
+        lb_80011E24(mnCharSel_804D6CC8, &sp7C, 3, -1);
+        if (gm_80163838(&sp7B, &sp7A, &sp79, &sp78) != 0) {
+            inline1(mnCharSel_804D6CE4, mnCharSel_804D6CE8,
+                    sp7B, sp7A, sp79, sp78);
+            HSD_JObjClearFlagsAll(sp7C, 0x10U);
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, NULL);
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE8, 0, NULL);
+            HSD_JObjSetFlagsAll(sp7C, 0x10U);
+        }
+        break;
+    case 18:
+        if (arg0 == 0) {
+            if (gm_801639C0(temp_r31) != 0) {
+                show_kos(mnCharSel_804D6CDC, gm_801639F4(temp_r31));
+            } else {
+                gm_80163A3C(temp_r31, &sp7B, &sp7A, &sp79, &sp78);
+                inline1(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B, sp7A, sp79, sp78);
+            }
+        }
+        lb_80011E24(mnCharSel_804D6CC8, &sp7C, 3, -1);
+        if (gm_80163B9C(&sp7B, &sp7A, &sp79, &sp78) != 0) {
+            inline1(mnCharSel_804D6CE4, mnCharSel_804D6CE8,
+                    sp7B, sp7A, sp79, sp78);
+            HSD_JObjClearFlagsAll(sp7C, 0x10U);
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, NULL);
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE8, 0, NULL);
+            HSD_JObjSetFlagsAll(sp7C, 0x10U);
+        }
+        break;
+    case 19:
+        if (arg0 == 0) {
+            if (lbLang_IsSavedLanguageJP()) {
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 人抜き", gm_80163DC4(temp_r31));
+            } else {
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d ＫＯｓ", gm_80163DC4(temp_r31));
+            }
+        }
+        if (lbLang_IsSavedLanguageJP()) {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d 人抜き", gm_80163DE8());
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d ＫＯｓ", gm_80163DE8());
+        }
+        break;
+    case 20:
+        if (arg0 == 0) {
+            if (lbLang_IsSavedLanguageJP()) {
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 人抜き", gm_80163E3C(temp_r31));
+            } else {
+                HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d ＫＯｓ", gm_80163E3C(temp_r31));
+            }
+        }
+        if (lbLang_IsSavedLanguageJP()) {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d 人抜き", gm_80163E60());
+        } else {
+            HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d ＫＯｓ", gm_80163E60());
+        }
+        break;
+    case 21:
+        if (arg0 == 0) {
+            show_kos(mnCharSel_804D6CDC, gm_80163EB4(temp_r31));
+        }
+        show_kos(mnCharSel_804D6CE4, gm_80163ED8());
+        break;
+    case 22:
+        if (arg0 == 0) {
+            show_kos(mnCharSel_804D6CDC, gm_80163F2C(temp_r31));
+        }
+        show_kos(mnCharSel_804D6CE4, gm_80163F50());
+        break;
+    }
+}
 
 /// #mnCharSel_8025D1C4
 
@@ -468,7 +418,61 @@ void mnCharSel_80264070(void)
 
 /// #mnCharSel_802640A0
 
-/// #mnCharSel_8026688C_OnEnter
+static u8 data_pad[0x138] = { 0 };
+
+static u8 mnCharSel_804D6CF0;
+static u8 mnCharSel_804D6CF8;
+static s8 mnCharSel_804D6CF9;
+HSD_Archive* mnCharSel_804D6CD0;
+HSD_Archive* mnCharSel_804D6CD4;
+void* mnCharSel_804D6CB4;
+void* mnCharSel_804D6CD8;
+
+void mnCharSel_8026688C_OnEnter(void* arg0)
+{
+    PAD_STACK(8);
+
+    lb_8001C550();
+    lb_8001D164(0);
+    mnCharSel_804D6CB0 = arg0;
+
+    mnCharSel_804D6CF0 = mnCharSel_804D6CB0->unk_0x0 - 1;
+
+    for (mnCharSel_804D6CF8 = 0; mnCharSel_804D6CF8 < 0x78; mnCharSel_804D6CF8++) {
+        if (mnName_8023754C(mnCharSel_804D6CF8) == NULL) {
+            break;
+        }
+    }
+    mnCharSel_804D6CF9 = -1;
+    mnCharSel_804D6CF8++;
+
+    mnCharSel_803F0DFC.doors[0].selected_since_load = 0;
+    mnCharSel_803F0DFC.doors[1].selected_since_load = 0;
+    mnCharSel_803F0DFC.doors[2].selected_since_load = 0;
+    mnCharSel_803F0DFC.doors[3].selected_since_load = 0;
+
+    lbAudioAx_80026F2C(0x12);
+
+    lbAudioAx_8002702C(2, 8);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
+    if (lbLang_IsSavedLanguageJP() != 0) {
+        mnCharSel_804D6CD0 = lbArchive_LoadArchive("MnSlChr.dat");
+        mnCharSel_804D6CD4 = lbArchive_LoadArchive("MnExtAll.dat");
+    } else {
+        mnCharSel_804D6CD0 = lbArchive_LoadArchive("MnSlChr.usd");
+        mnCharSel_804D6CD4 = lbArchive_LoadArchive("MnExtAll.usd");
+    }
+    mnCharSel_804D6CB4 = HSD_ArchiveGetPublicAddress(mnCharSel_804D6CD0, "MnSelectChrDataTable");
+    mnCharSel_804D6CD8 = (u8*) mnCharSel_804D6CB4 + 0x10;
+    if (lbLang_IsSavedLanguageJP() != 0) {
+        HSD_SisLib_803A62A0(0, "SdSlChr.dat", "SIS_SelCharData");
+    } else {
+        HSD_SisLib_803A62A0(0, "SdSlChr.usd", "SIS_SelCharData");
+    }
+    mnCharSel_804D6CF4 = 0;
+    mnCharSel_802640A0();
+}
 
 /// #mnCharSel_802669F4_OnFrame
 

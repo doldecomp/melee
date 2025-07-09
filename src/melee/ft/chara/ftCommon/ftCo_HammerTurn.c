@@ -7,9 +7,9 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/types.h"
 
 #include <math.h>
@@ -32,7 +32,7 @@ void ftCo_800C57B4(ftCo_GObj* gobj)
     u32 flags;
     Fighter* fp = GET_FIGHTER(gobj);
     flags = ftCo_800C54C4(fp);
-    ftCo_800C9840(gobj, ftCo_MS_HammerTurn, flags, 0, p_ftCommonData->x6B0,
+    ftCo_Turn_Enter(gobj, ftCo_MS_HammerTurn, flags, 0, p_ftCommonData->x6B0,
                   ftCo_800C548C(fp));
     ftCo_800C4E94(fp);
 }

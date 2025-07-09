@@ -1101,7 +1101,7 @@ void HSD_CObjSetViewportfx4(HSD_CObj* cobj, float left, float right, float top,
     cobj->viewport.ymax = bottom;
 }
 
-u32 HSD_CObjGetProjectionType(HSD_CObj* cobj)
+int HSD_CObjGetProjectionType(HSD_CObj* cobj)
 {
     if (cobj == NULL) {
         return 1;

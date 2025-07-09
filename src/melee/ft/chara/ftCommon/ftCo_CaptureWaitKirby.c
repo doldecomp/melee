@@ -54,7 +54,7 @@ void ftCo_CaptureWaitKirby_Anim(ftCo_GObj* gobj) {}
 void ftCo_800BD6EC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.lstick.y >= p_ftCommonData->x70_someLStickYMax &&
+    if (fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74)
     {
         inlineA0(fp, +1);

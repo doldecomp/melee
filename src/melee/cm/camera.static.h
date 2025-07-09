@@ -7,7 +7,6 @@
 
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
-// /* 453004 */ static CameraDebugMode cm_80453004;
 
 // .data
 /* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = {
@@ -113,11 +112,11 @@
 /* 4D7EB0 */ float const cm_804D7EB0 = -2000.0f;
 /* 4D7EB8 */ double const cm_804D7EB8 = -1.0f;
 /* 4D7EC0 */ float const cm_804D7EC0 = 4.0f;
-/* 4D7EC8 */ float const cm_804D7EC8[2] = { 1.6963495f, 3.3702806E+12f};
-/* 4D7ED0 */ float const cm_804D7ED0[2] = { 1.5713495f, 3.3702806E+12f };
-/* 4D7ED8 */ float const cm_804D7ED8[2] = { 2.392699f, 3.3702806E+12f};
-/* 4D7EE0 */ float const cm_804D7EE0[2] = { 2.142699f, 3.3702806E+12f};
-/* 4D7EE8 */ float const cm_804D7EE8[2] = { 0.60239995f, -1.8890966E+26f};
+/* 4D7EC8 */ f64 const cm_804D7EC8 = 0.3926990816987241f; // M_PI_8
+/* 4D7ED0 */ f64 const cm_804D7ED0 = 0.1963495408493621f; // M_PI_16
+/* 4D7ED8 */ f64 const cm_804D7ED8 = 6.283185307179586f; // M_PI * 2
+/* 4D7EE0 */ f64 const cm_804D7EE0 = 3.141592653589793f; // M_PI
+/* 4D7EE8 */ f64 const cm_804D7EE8 = 0.0001f;
 /* 4D7EF0 */ double const cm_804D7EF0 = 0.0f;
 /* 4D7EF8 */ float const cm_804D7EF8 = 8.5070587E+37f;
 /* 4D7EFC */ float const cm_804D7EFC = -8.5070587E+37f;

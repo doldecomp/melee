@@ -13,12 +13,12 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -31,7 +31,6 @@
 #include <MSL/trigf.h>
 
 /* 094D70 */ static bool ftCo_800951D0(ftCo_GObj* gobj);
-/* 094DF4 */ static bool ftCo_80095254(ftCo_GObj* gobj);
 /* 094E7C */ static bool ftCo_800952DC(ftCo_GObj* gobj);
 /* 0952C8 */ static UNK_RET lbl_80095728(UNK_PARAMS);
 /* 0952D8 */ static UNK_RET lbl_80095738(UNK_PARAMS);
@@ -365,7 +364,7 @@ void ftCo_80095744(ftCo_GObj* gobj, int* arg1)
         if (fp->motion_id == ftCo_MS_ItemParasolFallSpecial) {
             ftCo_800968C8(gobj);
         } else {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         }
         if (arg1 != NULL) {
             *arg1 = 1;
