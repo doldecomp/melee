@@ -268,9 +268,9 @@
 /* 4D6D10 */ extern u32 it_804D6D10;
 /* 4D6D14 */ extern u32 it_804D6D14;
 /* 4D6D18 */ extern u32 it_804D6D18;
-/* 4D6D24 */ extern Article* it_804D6D24[];
+/* 4D6D24 */ extern Article** it_804D6D24;
 /* 4D6D28 */ extern ItemCommonData* it_804D6D28;
-/* 4D6D30 */ extern Article* it_804D6D30[];
-/* 4D6D38 */ extern Article* it_804D6D38[];
+/* 4D6D30 */ extern Article** it_804D6D30;
+/* 4D6D38 */ extern Article** it_804D6D38;
 
 #endif
