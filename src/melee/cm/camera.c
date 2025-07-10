@@ -1137,7 +1137,7 @@ void Camera_8002BD88(f32 x, f32 y)
     // PSVECCrossProduct(&forward, &right, &up);
     // lbVector_Normalize(&up);
     cm_80452C68.pause_up = up;
-    
+
     if (y != 0.0F) {
         scale = y * ((view_dir * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]);
         // scale = y * ((view_dir * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]);
