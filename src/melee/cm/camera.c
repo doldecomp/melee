@@ -1029,7 +1029,7 @@ void Camera_8002BAA8(f32 zoom_amt)
     offset.x *= -1.0F;
     offset.y *= -1.0F;
     offset.z *= -1.0F;
-    
+
     offset_len = vec_len(&offset);
 
     if (offset_len < 1.0F) {
@@ -1046,7 +1046,7 @@ void Camera_8002BAA8(f32 zoom_amt)
     } else if (cm_80452C68.eye_distance > cm_80452C68.max_distance) {
         cm_80452C68.eye_distance = cm_80452C68.max_distance;
     }
-    
+
     dist = cm_80452C68.eye_distance;
     lbVector_Normalize(&offset);
     offset.x *= dist;
@@ -1136,7 +1136,7 @@ void Camera_8002BD88(f32 x, f32 y)
         up.z *= scale;
         lbVector_Add(&offset, &up);
     }
-    
+
     if (x != 0.0f) {
         scale = -(x * ((inv_len * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]));
         side.x *= scale;
