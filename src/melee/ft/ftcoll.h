@@ -45,7 +45,7 @@
                                      u32, int, UNK_T, int);
 /* 078710 */ UNK_RET ftColl_80078710(UNK_PARAMS);
 /* 078754 */ void ftColl_80078754(Fighter_GObj*, Fighter_GObj*, bool);
-/* 0787B4 */ UNK_RET ftColl_800787B4(UNK_PARAMS);
+/* 0787B4 */ void ftColl_800787B4(Item_GObj*, Fighter_GObj*, int);
 /* 0788D4 */ void ftColl_800788D4(Fighter_GObj* gobj);
 /* 07891C */ void ftColl_8007891C(Fighter_GObj*, Fighter_GObj*, float);
 /* 078998 */ UNK_RET ftColl_80078998(UNK_PARAMS);

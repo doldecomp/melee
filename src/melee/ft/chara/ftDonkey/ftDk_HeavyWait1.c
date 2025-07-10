@@ -3,18 +3,18 @@
 #include "ftDk_HeavyWait0.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_KneeBend.h"
 #include "ftDonkey/types.h"
 
 void ftDk_HeavyWait1_IASA(HSD_GObj* gobj)
 {
     if (!ftCo_80094EA4(gobj)) {
-        ftCo_800CB59C(gobj);
+        ftCo_KneeBend_Check_ShortHop(gobj);
     }
 }
 

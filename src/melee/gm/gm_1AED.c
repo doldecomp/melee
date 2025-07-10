@@ -7,6 +7,7 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <sysdolphin/baselib/controller.h>
 
@@ -244,7 +245,7 @@ void gm_801AF568_OnFrame(void)
     switch (gm_80480DA8.unk14) {
     case 0:
         temp_r29 = lb_8001CBBC();
-        gmMainLib_8015FA34();
+        gmMainLib_8015FA34(temp_r29);
         if (temp_r29 == 0 || temp_r29 == 2) {
             gm_80480DA8.unk8.unk0 = 1;
             gm_80480DA8.unk14 = 0x14;

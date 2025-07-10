@@ -1910,6 +1910,20 @@ void lbColl_80008A5C(HitCapsule* hit)
     }
 }
 
+void lbColl_80008D30(HitCapsule* arg0, lbColl_80008D30_arg1* arg1)
+{
+    arg0->state = arg1->state;
+    arg0->damage = arg1->damage;
+    arg0->kb_angle = arg1->kb_angle;
+    arg0->x24 = arg1->unkC;
+    arg0->x28 = arg1->unk10;
+    arg0->x2C = arg1->unk14;
+    arg0->element = arg1->element;
+    arg0->sfx_severity = arg1->sfx_severity;
+    arg0->sfx_kind = arg1->sfx_kind;
+    arg0->unk_count = arg1->damage;
+}
+
 extern u8 lbColl_804D36A0[4];
 extern u8 lbColl_804D36A4[4];
 extern u8 lbColl_804D36A8[4];

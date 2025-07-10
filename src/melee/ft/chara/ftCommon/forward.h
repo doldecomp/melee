@@ -10,6 +10,13 @@ typedef Fighter ftCo_Fighter;
 typedef Fighter_GObj ftCo_GObj;
 typedef struct ftCollisionBox ftCollisionBox;
 
+typedef enum ftCo_JumpInput {
+    JumpInput_None,
+    JumpInput_LStick,
+    JumpInput_CStick,
+    JumpInput_XY,
+} ftCo_JumpInput;
+
 static MotionFlags const ftCo_MF_5_6 = Ft_MF_SkipAnimVel | Ft_MF_Unk06;
 static MotionFlags const ftCo_MF_2_5_6 =
     ftCo_MF_5_6 | Ft_MF_KeepColAnimHitStatus;

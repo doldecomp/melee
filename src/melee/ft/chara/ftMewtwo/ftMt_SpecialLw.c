@@ -9,10 +9,10 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftMewtwo/types.h"
 #include "it/items/it_27CF.h"
 #include "it/items/itmewtwodisable.h"
@@ -108,7 +108,7 @@ void ftMt_SpecialAirLw_Anim(HSD_GObj* gobj)
             it_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
             GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

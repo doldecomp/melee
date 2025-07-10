@@ -7,13 +7,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
 #include "ftKoopa/ftKp_Init.h"
 
@@ -115,12 +115,12 @@ void ftKp_SpecialSEndB_Anim(HSD_GObj* gobj)
 
 void ftKp_SpecialAirSEndF_Anim(HSD_GObj* gobj)
 {
-    doEndFAnim(gobj, ftCo_800CC730);
+    doEndFAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKp_SpecialAirSEndB_Anim(HSD_GObj* gobj)
 {
-    doEndBAnim(gobj, ftCo_800CC730);
+    doEndBAnim(gobj, ftCo_Fall_Enter);
 }
 
 inline void ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj,

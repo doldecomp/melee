@@ -16,9 +16,23 @@ typedef struct {
     HSD_JObj* jobj;
 } Foo;
 
+typedef struct {
+    /*  +0 */ HitCapsuleState state;
+    /*  +4 */ u32 damage;
+    /*  +8 */ int kb_angle;
+    /*  +C */ u32 unkC;
+    /* +10 */ u32 unk10;
+    /* +14 */ u32 unk14;
+    /* +18 */ u32 element;
+    /* +1C */ int sfx_severity;
+    /* +20 */ enum_t sfx_kind;
+} lbColl_80008D30_arg1;
+
 /* 005BB0 */ int lbColl_80005BB0(HitCapsule*, int);
-/* 005C44 */ bool lbColl_80005C44(const Vec3*, const Vec3*, const Vec3*, Vec3*, float, float);
-/* 005EBC */ float lbColl_80005EBC(const Vec3*, const Vec3*, const Vec3*, float*);
+/* 005C44 */ bool lbColl_80005C44(const Vec3*, const Vec3*, const Vec3*, Vec3*,
+                                  float, float);
+/* 005EBC */ float lbColl_80005EBC(const Vec3*, const Vec3*, const Vec3*,
+                                   float*);
 /* 005FC0 */ float lbColl_80005FC0(Vec3*, Vec3*, Vec3*, float*);
 /* 006094 */ bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*,
                                   float, float);
@@ -50,7 +64,7 @@ typedef struct {
 /* 008820 */ bool lbColl_80008820(HitCapsule*, int type, void* victim);
 /* 0089B8 */ void lbColl_800089B8(HitCapsule* hit, UNK_T arg1);
 /* 008A5C */ void lbColl_80008A5C(HitCapsule* hit);
-/* 008D30 */ void lbColl_80008D30(HitCapsule*, UNK_T);
+/* 008D30 */ void lbColl_80008D30(HitCapsule*, lbColl_80008D30_arg1*);
 /* 008DA4 */ UNK_RET lbColl_80008DA4(UNK_PARAMS);
 /* 008FC8 */ void lbColl_80008FC8(Vec3, Vec3, u8*, u8*, float);
 /* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, u8*, GXColor*, float);

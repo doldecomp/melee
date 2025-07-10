@@ -72,7 +72,8 @@ struct gmm_x1CB0 {
     u8 padding_x0[0x10 - 0x0];
     u8 x10[0x16 - 0x10];
     /* 0x1CC6 0x16 */ u8 saved_language;
-    u8 padding_x16[0x20 - 0x16 - 1];
+    int unk;
+    u8 padding_x16[0x1];
 };
 
 typedef union _UnkFlagStruct2 {
@@ -99,9 +100,9 @@ struct gmm_x1F2C {
     s8 x7B;
     UnkFlagStruct2 x7C;
     s16 x7E;
-    s8 x80;
-    s8 x81;
-    s8 x82;
+    u8 x80;
+    u8 x81;
+    u8 x82;
     s8 x83;
     s32 x84;
     s32 x88;
@@ -169,6 +170,7 @@ struct gmm_retval_EDBC {
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
     s32 xB0[4];
+    char pad_F0[0xB8];
 };
 
 struct gmm_x1868 {
@@ -178,7 +180,6 @@ struct gmm_x1868 {
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;
     /* 0x0028 */ struct gmm_retval_EDB0 unk_28;
     /* 0x0030 */ struct gmm_retval_EDBC unk_30;
-    /* 0x00F0 */ char pad_F0[0xB8];
     /* 0x01A8 */ u8 unk_1A8;      /* inferred */
     /* 0x01A9 */ char pad_1A9[7]; /* maybe part of unk_1A8[8]? */
     /* 0x01B0 */ s32 x1A18;
@@ -196,7 +197,7 @@ struct gmm_x1868 {
     /* 0x01E0 */ s32 x1A48;
     /* 0x01E4 */ s32 x1A4C;
     /* 0x01E8 */ s32 x1A50;
-    /* 0x01EC */ s32 x1A54;
+    /* 0x01EC */ int x1A54;
     /* 0x01F0 */ s32 x1A58;
     /* 0x01F4 */ s32 x1A5C;
     /* 0x01F8 */ s32 x1A60;
@@ -363,7 +364,8 @@ STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
 struct gmMainLib_8046B0F0_t {
     bool x0;
     bool x4; // reset switch pressed
-    int x8, xC, x10, x14;
+    bool x8; // true = progressive, false = interlaced
+    int xC, x10, x14;
 };
 
 extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;

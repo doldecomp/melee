@@ -196,6 +196,7 @@ s32 CARDCheckAsync(s32 chan, CARDCallback callback);
 s32 CARDFreeBlocks(s32 chan, s32* byteNotUsed, s32* filesNotUsed);
 s32 CARDRenameAsync(s32 chan, const char* oldName, const char* newName,
                     CARDCallback callback);
+s32 CARDFormatAsync(s32 chan, CARDCallback callback);
 
 #ifdef __cplusplus
 }

@@ -96,16 +96,24 @@ melee/lb/lbdvd.c:
 	.sdata      start:0x804D37D0 end:0x804D3800
 
 melee/lb/lb_0192.c:
-	.text       start:0x80019230 end:0x80019880
+	.text       start:0x80019230 end:0x80019BB8
 	.data       start:0x803BA708 end:0x803BAAE0
+	.bss        start:0x804329F0 end:0x80432A68
+	.sdata      start:0x804D3800 end:0x804D3808
+	.sbss       start:0x804D63D0 end:0x804D63D8
+	.sdata2     start:0x804D7C80 end:0x804D7CB0
+
+melee/lb/lbcardnew.c:
+	.text       start:0x80019BB8 end:0x8001C600
+	.data       start:0x803BAAE0 end:0x803BAB60
+	.bss        start:0x80432A68 end:0x80433318
 
 melee/lb/lbcardgame.c:
-	.text       start:0x80019880 end:0x8001D2BC
-	.data       start:0x803BAAE0 end:0x803BACC8
-	.bss        start:0x804329F0 end:0x80433380
-	.sdata      start:0x804D3800 end:0x804D3828
-	.sbss       start:0x804D63D0 end:0x804D63D8
-	.sdata2     start:0x804D7C80 end:0x804D7CB8
+	.text       start:0x8001C600 end:0x8001D2BC
+	.data       start:0x803BAB60 end:0x803BACC8
+	.bss        start:0x80433318 end:0x80433380
+	.sdata      start:0x804D3808 end:0x804D3828
+	.sdata2     start:0x804D7CB0 end:0x804D7CB8
 
 melee/lb/lbsnap.c:
 	.text       start:0x8001D2BC end:0x8001E2F8
@@ -824,10 +832,70 @@ melee/ft/ftmetal.c:
 	.sdata      start:0x804D3C90 end:0x804D3C98
 
 melee/ft/ft_0C88.c:
-	.text       start:0x800C884C end:0x800CCE94
+	.text       start:0x800C884C end:0x800C8B74
+
+melee/ft/chara/ftCommon/ftCo_DownSpot.c:
+	.text       start:0x800C8B74 end:0x800C8C84
+	.sdata2     start:0x804D8E58 end:0x804D8E60
+
+melee/ft/ft_0C8C.c:
+	.text       start:0x800C8C84 end:0x800C9058
+	.sdata2     start:0x804D8E60 end:0x804D8E68
+
+melee/ft/chara/ftCommon/ftCo_Barrel.c:
+	.text       start:0x800C9058 end:0x800C9468
+	.sdata      start:0x804D3C98 end:0x804D3CA8
+	.sdata2     start:0x804D8E68 end:0x804D8E78
+
+melee/ft/chara/ftCommon/ftCo_Walk.c:
+	.text       start:0x800C9468 end:0x800C97A8
+	.sdata2     start:0x804D8E78 end:0x804D8E80
+
+melee/ft/chara/ftCommon/ftCo_Turn.c:
+	.text       start:0x800C97A8 end:0x800C9CEC
+	.sdata2     start:0x804D8E80 end:0x804D8E88
+
+melee/ft/chara/ftCommon/ftCo_TurnRun.c:
+	.text       start:0x800C9CEC end:0x800CA094
+	.sdata2     start:0x804D8E88 end:0x804D8E98
+
+melee/ft/chara/ftCommon/ftCo_Dash.c:
+	.text       start:0x800CA094 end:0x800CA5F0
+	.sdata2     start:0x804D8E98 end:0x804D8EA0
+
+melee/ft/chara/ftCommon/ftCo_Run.c:
+	.text       start:0x800CA5F0 end:0x800CAA4C
+	.sdata2     start:0x804D8EA0 end:0x804D8EA8
+
+melee/ft/chara/ftCommon/ftCo_RunDirect.c:
+	.text       start:0x800CAA4C end:0x800CABC4
+	.sdata2     start:0x804D8EA8 end:0x804D8EB0
+
+melee/ft/chara/ftCommon/ftCo_RunBrake.c:
+	.text       start:0x800CABC4 end:0x800CAE80
+	.sdata2     start:0x804D8EB0 end:0x804D8EB8
+
+melee/ft/chara/ftCommon/ftCo_Jump.c:
+	.text       start:0x800CAE80 end:0x800CB4E0
+	.sdata2     start:0x804D8EB8 end:0x804D8EC0
+
+melee/ft/chara/ftCommon/ftCo_KneeBend.c:
+	.text       start:0x800CB4E0 end:0x800CB6EC
+	.sdata2     start:0x804D8EC0 end:0x804D8EC8
+
+melee/ft/chara/ftCommon/ftCo_JumpAerial.c:
+	.text       start:0x800CB6EC end:0x800CC730
 	.rodata     start:0x803B74F0 end:0x803B7500
-	.sdata      start:0x804D3C98 end:0x804D3CB8
-	.sdata2     start:0x804D8E58 end:0x804D8EF8
+	.sdata      start:0x804D3CA8 end:0x804D3CB8
+	.sdata2     start:0x804D8EC8 end:0x804D8EE0
+
+melee/ft/chara/ftCommon/ftCo_Fall.c:
+	.text       start:0x800CC730 end:0x800CCDA8
+	.sdata2     start:0x804D8EE0 end:0x804D8EF0
+
+melee/ft/chara/ftCommon/ftCo_FallAerial.c:
+	.text       start:0x800CCDA8 end:0x800CCE94
+	.sdata2     start:0x804D8EF0 end:0x804D8EF8
 
 melee/ft/ftswing.c:
 	.text       start:0x800CCE94 end:0x800CD140

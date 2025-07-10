@@ -73,8 +73,8 @@
 /* 4D6510 */ extern UNK_T Fighter_804D6510;
 /* 4D6514 */ extern UNK_T Fighter_804D6514;
 /* 4D6518 */ extern UNK_T Fighter_804D6518;
-/* 4D651C */ extern UNK_T Fighter_804D651C;
-/* 4D6520 */ extern UNK_T Fighter_804D6520;
+/* 4D651C */ extern float* Fighter_804D651C;
+/* 4D6520 */ extern float* Fighter_804D6520;
 /* 4D6524 */ extern float* Fighter_804D6524;
 /* 4D6528 */ extern UNK_T Fighter_804D6528;
 /* 4D6530 */ extern Vec2** Fighter_804D6530;

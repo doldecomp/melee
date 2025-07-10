@@ -12,12 +12,12 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "it/it_26B1.h"
 
@@ -243,7 +243,7 @@ void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (da->specials_miss_landing_lag == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
         }
@@ -276,7 +276,7 @@ void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (captainAttrs->specials_hit_landing_lag == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 1, 0, 1,
                           captainAttrs->specials_hit_landing_lag);
@@ -345,7 +345,7 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
         efLib_DestroyAll(gobj);
         ftCommon_8007D60C(fp);
         if (da->specials_miss_landing_lag == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
         ftCommon_8007D468(fp);
@@ -378,7 +378,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
             efLib_DestroyAll(gobj);
             ftCommon_8007D60C(fp1);
             if (da->specials_hit_landing_lag == 0) {
-                ftCo_800CC730(gobj);
+                ftCo_Fall_Enter(gobj);
                 return;
             } else {
                 ftCommon_8007D468(fp1);

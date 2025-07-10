@@ -4,11 +4,13 @@
 #include "ftcommon.h"
 #include "ftdata.h"
 #include "ftwaitanim.h"
+#include "math.h"
 
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ftCLink/ftCl_Init.h"
+#include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftLink/ftLk_AttackAir.h"
@@ -64,7 +66,29 @@ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj)
 
 /// #ft_8008A1FC
 
-/// #ft_8008A244
+static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
+{
+    Fighter* temp_r4 = GET_FIGHTER(gobj);
+    f32 var_f2;
+
+    var_f2 = temp_r4->input.lstick.x;
+    if ((var_f2 * temp_r4->facing_dir < 0.0F) ||
+        (fabs_inline(var_f2) < p_ftCommonData->x24))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool ft_8008A244(Fighter_GObj* gobj)
+{
+    if (ft_8008A244_inline(gobj)) {
+        ft_8008A2BC(gobj);
+        return true;
+    }
+
+    return false;
+}
 
 // Seems to be called to end many actions if no frames are remaining
 void ft_8008A2BC(HSD_GObj* gobj)
@@ -88,7 +112,7 @@ void ft_8008A348(Fighter_GObj* fighter_gobj, float anim_blend)
 
     fighter = GET_FIGHTER((HSD_GObj*) fighter_gobj);
     if (fighter->x2224_b2 & 1) {
-        ftCo_800C8B74(fighter_gobj);
+        ftCo_DownSpot_Enter(fighter_gobj);
         return;
     }
     if (ftCo_800C5240(fighter_gobj) != false) {

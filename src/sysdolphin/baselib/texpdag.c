@@ -1,3 +1,4 @@
+#include "texpdag.h"
 
 /// #assign_reg
 
@@ -19,6 +20,23 @@ void fn_80386230(void) {}
 
 /// #SimplifyByMerge
 
-/// #HSD_TExpSimplify
+int HSD_TExpSimplify(HSD_TExp* texp_)
+{
+    HSD_TExp* texp = texp_;
+    int res = false;
+    if (HSD_TExpGetType(texp) != HSD_TE_TEV) {
+        return false;
+    }
+    if (SimplifySrc(texp) != 0) {
+        res = true;
+    }
+    if (SimplifyThis(texp) != 0) {
+        res = true;
+    }
+    if (SimplifyByMerge(texp) != 0) {
+        res = true;
+    }
+    return res;
+}
 
 /// #HSD_TExpSimplify2

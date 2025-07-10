@@ -777,7 +777,7 @@ void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_800787B4(void)
+void ftColl_800787B4(Item_GObj* arg0, Fighter_GObj* arg1, int arg2)
 {
     NOT_IMPLEMENTED;
 }

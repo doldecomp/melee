@@ -4,6 +4,7 @@
 
 #include "cm/camera.h"
 #include "gr/ground.h"
+#include "gr/inlines.h"
 
 void grHomeRun_8021C750(void) {}
 
@@ -64,7 +65,11 @@ bool grHomeRun_8021DF48(void)
 
 /// #grHomeRun_8021E008
 
-/// #grHomeRun_8021E038
+void grHomeRun_8021E038(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, false);
+}
 
 bool grHomeRun_8021E064(void)
 {
@@ -86,7 +91,11 @@ bool grHomeRun_8021E0CC(void)
 
 /// #grHomeRun_8021E18C
 
-/// #grHomeRun_8021E1BC
+void grHomeRun_8021E1BC(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, false);
+}
 
 bool grHomeRun_8021E1E8(void)
 {
@@ -108,7 +117,11 @@ bool grHomeRun_8021E250(void)
 
 /// #grHomeRun_8021E310
 
-/// #grHomeRun_8021E340
+void grHomeRun_8021E340(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, false);
+}
 
 bool grHomeRun_8021E36C(void)
 {
@@ -130,7 +143,11 @@ bool grHomeRun_8021E3D4(void)
 
 /// #grHomeRun_8021E494
 
-/// #grHomeRun_8021E4C4
+void grHomeRun_8021E4C4(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, false);
+}
 
 bool grHomeRun_8021E4F0(void)
 {
