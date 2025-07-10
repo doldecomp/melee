@@ -604,10 +604,10 @@ void Camera_8002A768(CameraTransformState* transform, int arg1)
 
     var_r31 = 0;
     var_r30 = 0;
-    zero = cm_803B73B8.x;
-    zero2 = cm_803B73B8.y;
+    zero = cm_WorldForward.x;
+    zero2 = cm_WorldForward.y;
     temp_f30 = cm_804D7E30 * (cm_804D7E60 * transform->target_fov);
-    neg_one = cm_803B73B8.z;
+    neg_one = cm_WorldForward.z;
     lbVector_Diff(&transform->target_interest, &transform->target_position,
                   &sp58);
     lbVector_Normalize(&sp58);
@@ -1025,7 +1025,7 @@ void Camera_8002BAA8(f32 zoom_amt)
     f32 offset_len;
     f32 dist;
 
-    offset = cm_80452C68.eye_offset;
+    offset = cm_80452C68.pause_eye_offset;
     offset.x *= -1.0F;
     offset.y *= -1.0F;
     offset.z *= -1.0F;
@@ -1036,18 +1036,18 @@ void Camera_8002BAA8(f32 zoom_amt)
         offset.y = 0.0F;
         offset.x = 0.0F;
         offset.z = 1.0F;
-        cm_80452C68.eye_distance = 10.0F;
+        cm_80452C68.pause_eye_distance = 10.0F;
     }
 
-    cm_80452C68.eye_distance = ((zoom_amt * ((offset_len * cm_803BCCA0._44[0x16]) + cm_803BCCA0._44[0x17])) + cm_80452C68.eye_distance);
+    cm_80452C68.pause_eye_distance = ((zoom_amt * ((offset_len * cm_803BCCA0._44[0x16]) + cm_803BCCA0._44[0x17])) + cm_80452C68.pause_eye_distance);
 
-    if (cm_80452C68.eye_distance < cm_80452C68.min_distance) {
-        cm_80452C68.eye_distance = cm_80452C68.min_distance;
-    } else if (cm_80452C68.eye_distance > cm_80452C68.max_distance) {
-        cm_80452C68.eye_distance = cm_80452C68.max_distance;
+    if (cm_80452C68.pause_eye_distance < cm_80452C68.min_distance) {
+        cm_80452C68.pause_eye_distance = cm_80452C68.min_distance;
+    } else if (cm_80452C68.pause_eye_distance > cm_80452C68.max_distance) {
+        cm_80452C68.pause_eye_distance = cm_80452C68.max_distance;
     }
 
-    dist = cm_80452C68.eye_distance;
+    dist = cm_80452C68.pause_eye_distance;
     lbVector_Normalize(&offset);
     offset.x *= dist;
     offset.y *= dist;
@@ -1056,101 +1056,114 @@ void Camera_8002BAA8(f32 zoom_amt)
     offset.y *= -1.0f;
     offset.z *= -1.0f;
 
-    cm_80452C68.eye_offset = offset;
+    cm_80452C68.pause_eye_offset = offset;
 }
 
-s32 Camera_8002BC78(Vec3* arg0, Vec3* arg1, Vec3* arg2)
+static inline void OrthonormalizeBasis(Vec3* forward, Vec3* up, Vec3* right)
 {
-    s32 var_r31 = 0;
+    PSVECCrossProduct(up, forward, right);
+    lbVector_Normalize(right);
+    PSVECCrossProduct(forward, right, up);
+    lbVector_Normalize(up);
+}
 
-    if (arg0->y > 0.999f) {
-        var_r31 = 1;
-        arg0->y = 1.0f;
-        arg0->z = 0.0f;
-        arg0->x = 0.0f;
-        *arg1 = cm_80452C68.x334;
-    } else if (arg0->y < -0.999f) {
-        var_r31 = -1;
-        arg0->y = -1.0f;
-        arg0->z = 0.0f;
-        arg0->x = 0.0f;
-        *arg1 = cm_80452C68.x334;
+s32 Camera_8002BC78(Vec3* forward, Vec3* up, Vec3* right)
+{
+    s32 clamp_result = 0;
+
+    if (forward->y > 0.999f) {
+        clamp_result = 1;
+        forward->y = 1.0f;
+        forward->z = 0.0f;
+        forward->x = 0.0f;
+        *up = cm_80452C68.pause_up;
+    } else if (forward->y < -0.999f) {
+        clamp_result = -1;
+        forward->y = -1.0f;
+        forward->z = 0.0f;
+        forward->x = 0.0f;
+        *up = cm_80452C68.pause_up;
     }
-    PSVECCrossProduct(arg1, arg0, arg2);
-    lbVector_Normalize(arg2);
-    PSVECCrossProduct(arg0, arg2, arg1);
-    lbVector_Normalize(arg1);
-    return var_r31;
+    OrthonormalizeBasis(forward, up, right);
+    // PSVECCrossProduct(up, forward, right);
+    // lbVector_Normalize(right);
+    // PSVECCrossProduct(forward, right, up);
+    // lbVector_Normalize(up);
+    return clamp_result;
 }
 
 // Camera_PauseRotate
 void Camera_8002BD88(f32 x, f32 y)
 {
-    Vec3 up;
-    Vec3 inv_offset;
-    Vec3 side;
-    Vec3 offset;
-    f32 inv_len;
     f32 scale;
-    s32 plane;
+    f32 view_dir;
+    s32 clamp_result;
+    Vec3 up;
+    Vec3 forward;
+    Vec3 right;
+    Vec3 pos;
 
-    up = cm_803B73D0;
-    // up = (Vec3){0.0f, 1.0f, 0.0f};
-    offset = cm_80452C68.eye_offset;
-    inv_offset = offset;
-    inv_offset.x *= -1.0F;
-    inv_offset.y *= -1.0F;
-    inv_offset.z *= -1.0F;
-    inv_len = lbVector_Normalize(&inv_offset);
+    up = cm_WorldUp;
+    pos = cm_80452C68.pause_eye_offset;
+    forward = pos;
+    forward.x *= -1.0F;
+    forward.y *= -1.0F;
+    forward.z *= -1.0F;
+    view_dir = lbVector_Normalize(&forward);
 
-    if (inv_len < 1.0F) {
-        inv_offset.y = 0.0F;
-        inv_offset.x = 0.0F;
-        inv_offset.z = 1.0F;
-        cm_80452C68.eye_distance = 10.0F;
+    if (view_dir < 1.0F) {
+        forward.y = 0.0F;
+        forward.x = 0.0F;
+        forward.z = 1.0F;
+        cm_80452C68.pause_eye_distance = 10.0F;
     }
 
-    plane = Camera_8002BC78(&inv_offset, &up, &side);
-    if (plane == 1) {
+    clamp_result = Camera_8002BC78(&forward, &up, &right);
+    if (clamp_result == 1) {
         if (y < 0.0F) {
             y = 0.0F;
         }
         x = 0.0F;
-    } else if (plane == -1) {
+    } else if (clamp_result == -1) {
         if (y > 0.0F) {
             y = 0.0F;
         }
         x = 0.0F;
     }
 
-    PSVECCrossProduct(&up, &inv_offset, &side);
-    lbVector_Normalize(&side);
-    PSVECCrossProduct(&inv_offset, &side, &up);
-    lbVector_Normalize(&up);
-    cm_80452C68.x334 = up;
-
-    if (y != 0.0f) {
-        scale = y * ((inv_len * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]);
+    OrthonormalizeBasis(&forward, &up, &right);
+    // PSVECCrossProduct(&up, &forward, &right);
+    // lbVector_Normalize(&right);
+    // PSVECCrossProduct(&forward, &right, &up);
+    // lbVector_Normalize(&up);
+    cm_80452C68.pause_up = up;
+    
+    if (y != 0.0F) {
+        scale = y * ((view_dir * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]);
+        // scale = y * ((view_dir * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]);
         up.x *= scale;
         up.y *= scale;
         up.z *= scale;
-        lbVector_Add(&offset, &up);
+        lbVector_Add(&pos, &up);
     }
 
-    if (x != 0.0f) {
-        scale = -(x * ((inv_len * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]));
-        side.x *= scale;
-        side.y *= scale;
-        side.z *= scale;
-        lbVector_Add(&offset, &side);
+    if (x != 0.0F) {
+        // scale = x * ((view_dir * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]);
+        // TODO :: cant figure out how to get it to run the same logic as the y case
+        // without it allocating stack space for it
+        scale = x * ((view_dir * 0.025F) + 0.2F); // fake
+        right.x *= -scale;
+        right.y *= -scale;
+        right.z *= -scale;
+        lbVector_Add(&pos, &right);
     }
 
-    scale = cm_80452C68.eye_distance;
-    lbVector_Normalize(&offset);
-    offset.x *= scale;
-    offset.y *= scale;
-    offset.z *= scale;
-    cm_80452C68.eye_offset = offset;
+    scale = cm_80452C68.pause_eye_distance;
+    lbVector_Normalize(&pos);
+    pos.x *= scale;
+    pos.y *= scale;
+    pos.z *= scale;
+    cm_80452C68.pause_eye_offset = pos;
 }
 
 /// #Camera_8002C010

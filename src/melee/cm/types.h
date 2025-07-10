@@ -100,10 +100,10 @@ typedef struct Camera {
     /* 0x2F8 */ f32 min_distance;
     /* 0x2FC */ f32 max_distance;
     /* 0x300 */ char pad_300[0x320 - 0x300];
-    /* 0x320 */ Vec3 eye_offset;
+    /* 0x320 */ Vec3 pause_eye_offset; /* offset from focused player */
     /* 0x32C */ f32 x32C;
-    /* 0x330 */ f32 eye_distance;
-    /* 0x334 */ Vec3 x334;
+    /* 0x330 */ f32 pause_eye_distance; /* distance to focused player */
+    /* 0x334 */ Vec3 pause_up; /* up vector */
     /* 0x340 */ u8 x340;
     /* 0x341:0 */ u8 x341_b0 : 1;
     /* 0x341:1 */ u8 x341_b1_b2 : 2;
