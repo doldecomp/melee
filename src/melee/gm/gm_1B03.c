@@ -6,6 +6,7 @@
 #include <melee/gm/types.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/mngallery.h>
@@ -335,7 +336,16 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B2F78_OnLoad
 
-/// #gm_801B34B8_OnInit
+void gm_801B34B8_OnInit(void)
+{
+    u8* temp_r3 = gmMainLib_8015CDC8();
+    temp_r3[0] = 0x21;
+    temp_r3[2] = 0;
+    temp_r3[1] = 3;
+    temp_r3[3] = 0;
+    temp_r3[4] = 0x78;
+    temp_r3[5] = 0;
+}
 
 /// #gm_801B3500
 

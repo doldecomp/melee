@@ -9,6 +9,10 @@
 #include "lb/lb_00CE.h"
 #include "mn/inlines.h"
 
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/mobj.h>
+
 u8 mn_802295AC(void)
 {
     s32 port_idx = 0;
@@ -245,7 +249,36 @@ s32 mn_8022EB78(s32 num)
 
 /// #mn_8022EC18
 
-/// #mn_8022ED6C
+void mn_8022ED6C(HSD_JObj* jobj, Vec3* arg1)
+{
+    f32 temp_f0;
+    f32 temp_f0_2;
+    f32 temp_f1;
+    f32 temp_f1_2;
+
+    temp_f1 = mn_8022F298(jobj);
+    if (arg1->x <= temp_f1 && !(temp_f1 <= arg1->y)) {
+        HSD_JObjReqAnimAll(jobj, arg1->x);
+    }
+    if (arg1->z == -0.1f) {
+        if (mn_8022F298(jobj) < arg1->y) {
+            HSD_JObjAnimAll(jobj);
+            temp_f0 = arg1->y;
+            if (mn_8022F298(jobj) > temp_f0) {
+                HSD_JObjReqAnimAll(jobj, temp_f0);
+                HSD_JObjAnimAll(jobj);
+            }
+        }
+    } else {
+        HSD_JObjAnimAll(jobj);
+        temp_f1_2 = mn_8022F298(jobj);
+        temp_f0_2 = arg1->y;
+        if (temp_f1_2 >= temp_f0_2) {
+            HSD_JObjReqAnimAll(jobj, arg1->z + (temp_f1_2 - temp_f0_2));
+            HSD_JObjAnimAll(jobj);
+        }
+    }
+}
 
 /// #mn_8022EE84
 
@@ -261,7 +294,46 @@ s32 mn_8022EB78(s32 num)
 
 /// #mn_8022F268
 
-/// #mn_8022F298
+float mn_8022F298(HSD_JObj* jobj)
+{
+    HSD_AObj* aobj;
+    HSD_DObj* dobj;
+    HSD_MObj* mobj;
+    HSD_TObj* tobj;
+
+    aobj = jobj->aobj;
+    if (aobj != NULL) {
+        return aobj->curr_frame;
+    }
+    dobj = jobj->u.dobj;
+    if (dobj != NULL) {
+        mobj = dobj->mobj;
+        if (mobj != NULL) {
+            aobj = mobj->aobj;
+            if (aobj != NULL) {
+                return aobj->curr_frame;
+            }
+            tobj = mobj->tobj;
+            if (tobj != NULL) {
+                aobj = tobj->aobj;
+                if (aobj != NULL) {
+                    return aobj->curr_frame;
+                }
+            }
+        }
+    }
+    if (!(jobj->flags & 0x1000)) {
+        jobj = jobj->child;
+        while (jobj != NULL) {
+            float frame = mn_8022F298(jobj);
+            if (frame != -1.0f) {
+                return frame;
+            }
+            jobj = jobj->next;
+        }
+    }
+    return -1.0f;
+}
 
 /// #mn_8022F360
 

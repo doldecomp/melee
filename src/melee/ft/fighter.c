@@ -27,6 +27,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftchangeparam.h"
@@ -45,6 +46,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_Rebound.h"
 #include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
@@ -129,8 +131,8 @@ u8* Fighter_804D650C = NULL;
 UNK_T Fighter_804D6510 = NULL;
 UNK_T Fighter_804D6514 = NULL;
 UNK_T Fighter_804D6518 = NULL;
-UNK_T Fighter_804D651C = NULL;
-UNK_T Fighter_804D6520 = NULL;
+float* Fighter_804D651C = NULL;
+float* Fighter_804D6520 = NULL;
 float* Fighter_804D6524 = NULL;
 UNK_T Fighter_804D6528 = NULL;
 UNK_T Fighter_804D652C = NULL;
@@ -1715,7 +1717,7 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftCo_800CAE80(gobj)) {
+    if (ftCo_Jump_GetInput(gobj)) {
         fp->x68A = fp->x685;
         fp->x685 = 0;
     } else if (fp->x685 < 0xFF) {

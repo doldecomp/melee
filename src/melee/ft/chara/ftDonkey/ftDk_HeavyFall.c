@@ -7,10 +7,10 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Jump.h"
 #include "ftDonkey/types.h"
 
 void ftDk_HeavyFall_IASA(HSD_GObj* gobj)
@@ -32,7 +32,7 @@ void ftDk_HeavyFall_Coll(HSD_GObj* gobj)
 
 bool ftDk_MS_347_800E0378(HSD_GObj* gobj)
 {
-    bool result = ftCo_800CAE80(gobj);
+    ftCo_JumpInput result = ftCo_Jump_GetInput(gobj);
     if (result) {
         ftDk_MS_348_800E04A4(gobj, result);
         return true;
@@ -50,5 +50,5 @@ void ftDk_MS_347_800E03C0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, 0, 0, 1, 0,
                               NULL);
     ftAnim_SetAnimRate(gobj, 0);
-    ftCo_800CB110(gobj, 1, 1);
+    ftCo_800CB110(gobj, true, 1);
 }

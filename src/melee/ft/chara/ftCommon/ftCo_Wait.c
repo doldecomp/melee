@@ -16,20 +16,24 @@
 #include "ftCo_SpecialS.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Dash.h"
+#include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_Guard.h"
+#include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Turn.h"
+#include "ftCommon/ftCo_Walk.h"
 #include "ftFox/ftFx_AppealS.h"
 
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2224_b2) {
-        ftCo_800C8B74(gobj);
+        ftCo_DownSpot_Enter(gobj);
     } else {
         ftCo_8008A7A8(gobj, fp->ft_data->x24);
     }

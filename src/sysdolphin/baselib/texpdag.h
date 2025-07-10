@@ -25,9 +25,9 @@ typedef struct HSD_TExpDag {
 /* 386230 */ UNK_RET fn_80386230(UNK_PARAMS);
 /* 386234 */ void HSD_TExpSchedule(int num, HSD_TExpDag* list,
                                    HSD_TExp** result, HSD_TExpRes* resource);
-/* 386470 */ UNK_RET SimplifySrc(UNK_PARAMS);
-/* 38687C */ UNK_RET SimplifyThis(UNK_PARAMS);
-/* 3870E4 */ UNK_RET SimplifyByMerge(UNK_PARAMS);
+/* 386470 */ int SimplifySrc(HSD_TExp*);
+/* 38687C */ int SimplifyThis(HSD_TExp*);
+/* 3870E4 */ int SimplifyByMerge(HSD_TExp*);
 /* 387B1C */ int HSD_TExpSimplify(HSD_TExp* texp);
 /* 387BA4 */ int HSD_TExpSimplify2(HSD_TExp* texp);
 

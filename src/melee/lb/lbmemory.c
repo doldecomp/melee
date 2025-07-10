@@ -1,14 +1,7 @@
+#include "lbmemory.h"
+
 #include <platform.h>
-
 #include <baselib/debug.h>
-
-typedef struct _Handle {
-    struct _Handle* x0_next;
-    void* x4_lo;
-    // is this hi or size?
-    void* x8_hi;
-    struct _Handle* xC_prev;
-} Handle;
 
 struct Allocator {
     void* x0_arenaLo;
@@ -21,7 +14,7 @@ struct Allocator {
     Handle* x698_free_heap;
     Handle* x69C;
     u8 x6A0[0x6E0 - 0x6A0];
-    void* x6E0;
+    u32 x6E0;
     void* x6E4;
     void* x6E8;
     u8 x6EC[0x6F0 - 0x6EC];
@@ -187,7 +180,7 @@ Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
 extern char* filename;
 
 // 100% except for literal relocations
-void lbMemory_800150F0(Handle* h, u32 arg1)
+void lbMemory_800150F0(Handle* h, void* arg1)
 {
     Handle* handle = h->xC_prev;
     Handle* r6 = (Handle*) &h->xC_prev;
@@ -220,7 +213,7 @@ check:
     goto ifeq;
 }
 
-u32 lbMemory_8001529C(Handle* h, void* arg1, void* arg2)
+u32 lbMemory_8001529C(Handle* h, void* arg1, u32 arg2)
 {
     void* lo;
     Handle* iter;
@@ -244,10 +237,10 @@ u32 lbMemory_8001529C(Handle* h, void* arg1, void* arg2)
 }
 
 // getArenaBounds
-void lbMemory_800154BC(void** arenaLo, void** arenaHi)
+void lbMemory_800154BC(uintptr_t* arenaLo, uintptr_t* arenaHi)
 {
-    *arenaLo = g_alloc.x0_arenaLo;
-    *arenaHi = g_alloc.x4_arenaHi;
+    *arenaLo = (uintptr_t) g_alloc.x0_arenaLo;
+    *arenaHi = (uintptr_t) g_alloc.x4_arenaHi;
 }
 
 // same as lbMemory_80014E24, but sets to x69C to the popped handle

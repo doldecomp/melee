@@ -227,7 +227,7 @@
                               int arg4);
 /* 304334 */ void un_80304334(un_80304334_t* arg0);
 /* 304344 */ UNK_RET un_80304344(UNK_PARAMS);
-/* 304470 */ UNK_RET un_80304470(UNK_PARAMS);
+/* 304470 */ int un_80304470(void);
 /* 304510 */ UNK_RET un_80304510(UNK_PARAMS);
 /* 3045A0 */ UNK_RET un_803045A0(UNK_PARAMS);
 /* 304690 */ UNK_RET un_80304690(UNK_PARAMS);

@@ -10,10 +10,10 @@
 #include <melee/lb/forward.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/psappsrt.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/psappsrt.h>
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74
@@ -330,49 +330,78 @@ struct grCorneria_GroundVars {
 };
 
 struct grIceMt_GroundVars {
-    /* +0 gp+C4 */ char pad_0[0x14];
+    /* +0 gp+C4 */ HSD_GObj* xC4;
+    /* +0 gp+C4 */ HSD_GObj* xC6;
+    /* +0 gp+C4 */ s16 xC8;
+    /* +0 gp+C4 */ s16 xCA;
+    /* +0 gp+C4 */ s16 xCC;
+    /* +0 gp+C4 */ s16 xCE;
+    // char pad_0[0x0C];
+    /* +0 gp+D8 */ s16 xD0;
+    /* +0 gp+D8 */ f32 xD4;
     /* +0 gp+D8 */ s16 xD8;
+    /* +0 gp+D8 */ s16 xDA;
+    /* +0 gp+D8 */ s16 xDC;
+    /* +0 gp+D8 */ s16 xDE;
+    /* +0 gp+D8 */ s16 xE0;
+    /* +0 gp+D8 */ f32 xE4;
+    /* +0 gp+D8 */ void* xF4[6];
+};
+struct grIceMt_GroundVars2 {
+    /* +0 gp+C4 */ f32 xC4;
+    /* +0 gp+C4 */ HSD_JObj* xC8;
+    /* +0 gp+C4 */ HSD_JObj* xCC;
+    /* +0 gp+D8 */ HSD_JObj* xD0;
+    /* +0 gp+D8 */ HSD_JObj* xD4;
+    /* +0 gp+D8 */ HSD_JObj* xD8;
+    /* +0 gp+D8 */ HSD_JObj* xDC;
+    /* +0 gp+D8 */ HSD_JObj* xE0;
+    /* +0 gp+D8 */ HSD_JObj* xE4;
+    /* +0 gp+D8 */ HSD_JObj* xE8;
+    /* +0 gp+D8 */ HSD_JObj* xEC;
+    /* +0 gp+D8 */ HSD_JObj* xF0;
+    /* +0 gp+D8 */ HSD_JObj* xF4;
 };
 
 struct grStadium_GroundVars {
-/* +0 gp+C4:0 */   u8 xC4_b0 : 1;
-/* +0 gp+C4:1 */   u8 xC4_b1 : 1;
-/* +0 gp+C8:0 */   u32 xC8;
-/* +4 gp+CC   */   HSD_MObj* xCC;
-/* +4 gp+D0   */   UnkArchiveStruct* xD0;
-/* +4 gp+D4   */   float xD4;
-/* +4 gp+D8   */   int xD8;
-/* +4 gp+DC   */   s16 xDC; ///< grStadium_801D4548 decision state ie waiting for file, animate screen, etc
-/* +4 gp+DE   */   s16 xDE;
-/* +4 gp+E0   */   s16 xE0;
-/* +4 gp+E2   */   s16 xE2;
-/* +4 gp+E4   */   HSD_GObj* xE4;
-/* +4 gp+E8   */   HSD_GObj* xE8;
+    /* +0 gp+C4:0 */ u8 xC4_b0 : 1;
+    /* +0 gp+C4:1 */ u8 xC4_b1 : 1;
+    /* +0 gp+C8:0 */ u32 xC8;
+    /* +4 gp+CC   */ HSD_MObj* xCC;
+    /* +4 gp+D0   */ UnkArchiveStruct* xD0;
+    /* +4 gp+D4   */ float xD4;
+    /* +4 gp+D8   */ int xD8;
+    /* +4 gp+DC   */ s16 xDC;
+    /* +4 gp+DE   */ s16 xDE;
+    /* +4 gp+E0   */ s16 xE0;
+    /* +4 gp+E2   */ s16 xE2;
+    /* +4 gp+E4   */ HSD_GObj* xE4;
+    /* +4 gp+E8   */ HSD_GObj* xE8;
 };
 
 // Specific to the Pokemon Stadium jumbotron
 struct grStadium_Display {
-/* C4:0 */  u8 xC4_b0 : 1;
-/* C4:1 */  u8 xC4_b1 : 1;
-/* C8   */  HSD_TObj* xC8;
-/* CC   */  HSD_MObj* xCC;
-/* D0   */  HSD_ImageDesc* xD0;
-/* D4   */  HSD_GObj* xD4; ///< Text display
-/* D8   */  HSD_GObj* xD8; ///< Stage camera feed
-/* DC   */  HSD_GObj* xDC; ///< Zoomed camera feed
-/* E0   */  int xE0;
-/* E4   */  s16 xE4;
-/* E6   */  s16 xE6;
-/* E8   */  s16 xE8;
-/* EA   */  s16 xEA;
-/* EC   */  s16 xEC;
-/* EE   */  s16 xEE; ///< The focused player, or 99 if none
-/* F0   */  s16 xF0;
-/* F2   */  s16 xF2;
-/* F4   */  CameraBox* xF4;
-/* F8:0 */  u8 xF8_0 : 1;
-/* F8:1 */  u8 xF8_1 : 1;
-/* F8:2 */  u8 xF8_2 : 1;
+    /* C4:0 */ u8 xC4_b0 : 1;
+    /* C4:1 */ u8 xC4_b1 : 1;
+    /* C8   */ HSD_TObj* xC8;
+    /* CC   */ HSD_MObj* xCC;
+    /* D0   */ HSD_ImageDesc* xD0;
+    /* D4   */ HSD_GObj* xD4; ///< Text display
+    /* D8   */ HSD_GObj* xD8; ///< Stage camera feed
+    /* DC   */ HSD_GObj* xDC; ///< Zoomed camera feed
+    /* E0   */ int xE0;
+    /* E4   */ s16 xE4;
+    /* E6   */ s16 xE6;
+    /* E8   */ s16 xE8;
+    /* EA   */ s16 xEA;
+    /* EC   */ s16 xEC;
+    /* EE   */ s16 xEE; ///< The focused player, or 99 if none
+    /* F0   */ s16 xF0;
+    /* F2   */ s16 xF2;
+    /* F4   */ CameraBox* xF4;
+    /* F8:0 */ u8 xF8_0 : 1;
+    /* F8:1 */ u8 xF8_1 : 1;
+    /* F8:2 */ u8 xF8_2 : 1;
 };
 
 // Unknown, but used for IDS:
@@ -380,12 +409,16 @@ struct grStadium_Display {
 // 9
 // and possibly more
 struct grStadium_type9_GroundVars {
-/* C4:0 */  u8 xC4_b0 : 1;
-/* C4:1 */  u8 xC4_b1 : 1;
-/* C8   */  UnkGeneratorStruct* xC8;
-/* CC   */  HSD_GObj* xCC_gobj;
-/* D0   */  HSD_GObj* xD0_gobj;
-/* D4   */  HSD_JObj* xD4_jobj;
+    /* C4:0 */ u8 xC4_b0 : 1;
+    /* C4:1 */ u8 xC4_b1 : 1;
+    /* C8   */ UnkGeneratorStruct* xC8;
+    /* CC   */ HSD_GObj* xCC_gobj;
+    /* D0   */ HSD_GObj* xD0_gobj;
+    /* D4   */ HSD_JObj* xD4_jobj;
+};
+
+struct grYorster_GroundVars {
+    int xC4;
 };
 
 struct grZebes_GroundVars {
@@ -393,6 +426,12 @@ struct grZebes_GroundVars {
     /*  +4 gp+C8 */ UNK_T x4;
     /*  +8 gp+CC */ UNK_T x8;
     /*  +C gp+D0 */ Vec3 xC;
+};
+
+struct grFourside_GroundVars {
+    /*  +0 gp+C4 */ u8 x0;
+    /*  +1 gp+C5 */ u8 x1;
+    /*  +4 gp+C8 */ s32 x4;
 };
 
 struct grOnett_GroundVars {
@@ -403,56 +442,67 @@ struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
+struct grPura_GroundVars {
+    /*  +0 gp+C4:0 */ u16 xC4;
+    /*  +0 gp+C4:0 */ s16 xC6;
+    /*  +0 gp+C4:0 */ HSD_JObj* xC8;
+};
+
+struct grPura_GroundVars2 {
+    /*  +0 gp+C4:0 */ u32 xC4;
+    /*  +0 gp+C4:0 */ HSD_JObj* xC8;
+};
+
 struct Randall {
-/* +0 gp+C4 */ s16 timer;
-/* +4 gp+C8 */ HSD_JObj* jobj;
+    /* +0 gp+C4 */ s16 timer;
+    /* +4 gp+C8 */ HSD_JObj* jobj;
 };
 
 struct ShyGuys {
-/* +0 gp+C4 */ s8 count;
-/* +1 gp+C5 */ s8 pattern;
-/* +4 gp+C8 */ int timer;
+    /* +0 gp+C4 */ s8 count;
+    /* +1 gp+C5 */ s8 pattern;
+    /* +4 gp+C8 */ int timer;
 };
 
 struct Battlefield {
-/* +0 gp+C4 */ int bg_state;
-/* +4 gp+C8 */ int curr_bg;
-/* +8 gp+CC */ int prev_bg;
-/* +C gp+D0 */ int bg_timer;
+    /* +0 gp+C4 */ int bg_state;
+    /* +4 gp+C8 */ int curr_bg;
+    /* +8 gp+CC */ int prev_bg;
+    /* +C gp+D0 */ int bg_timer;
 };
 
 struct Last_GroundVars {
-/* +00 gp+C4    */ float xC4;
-/* +04 gp+C8    */ float xC8;
-/* +08 gp+CC    */ float xCC;
-/* +0C gp+D0    */ float xD0;
-/* +10 gp+D4    */ float xD4;
-/* +14 gp+D8    */ float xD8;
-/* +18 gp+DC    */ float xDC;
-/* +1C gp+E0    */ UnkGeneratorStruct* xE0;
+    /* +00 gp+C4    */ float xC4;
+    /* +04 gp+C8    */ float xC8;
+    /* +08 gp+CC    */ float xCC;
+    /* +0C gp+D0    */ float xD0;
+    /* +10 gp+D4    */ float xD4;
+    /* +14 gp+D8    */ float xD8;
+    /* +18 gp+DC    */ float xDC;
+    /* +1C gp+E0    */ UnkGeneratorStruct* xE0;
 };
 
 struct Map_GroundVars {
-/* +00 gp+C4:0  */ u32 xC4_b0 : 1;
-/* +00 gp+C4:1  */ u32 xC4_b1 : 1;
-/* +00 gp+C4:2  */ u32 xC4_b2_25 : 16;
-/* +00 gp+C4:26 */ u32 xC4_b26 : 1;
-/* +00 gp+C4:27 */ u32 xC4_b27 : 1;
-/* +00 gp+C4:28 */ u32 xC4_b28 : 1;
-/* +00 gp+C4:29 */ u32 xC4_b29 : 1;
-/* +00 gp+C4:30 */ u32 xC4_b30 : 1;
-/* +00 gp+C4:31 */ u32 xC4_b31 : 1;
-/* +04 gp+C8    */ float xC8;
-/* +08 gp+CC    */ HSD_GObj* lv_gobj[6];
-/* +20 gp+E4    */ float xE4;
-/* +24 gp+E8    */ float xE8;
-/* +28 gp+EC    */ float xEC;
-/* +2C gp+F0    */ float xF0;
-/* +30 gp+F4    */ float xF4;
-/* +34 gp+F8    */ float xF8;
-/* +38 gp+FC    */ float xFC;
-/* +3C gp+100   */ float x100;
-/* +40 gp+104   */ float x104;
+    /* +00 gp+C4:0  */ u32 xC4_b0 : 1;
+    /* +00 gp+C4:1  */ u32 xC4_b1 : 1;
+    /* +00 gp+C4:2  */ u32 xC4_b2_25 : 16;
+    /* +00 gp+C4:26 */ u32 xC4_b26 : 1;
+    /* +00 gp+C4:27 */ u32 xC4_b27 : 1;
+    /* +00 gp+C4:28 */ u32 xC4_b28 : 1;
+    /* +00 gp+C4:29 */ u32 xC4_b29 : 1;
+    /* +00 gp+C4:30 */ u32 xC4_b30 : 1;
+    /* +00 gp+C4:31 */ u32 xC4_b31 : 1;
+    /* +04 gp+C8    */ float xC8;
+    /* +08 gp+CC    */ HSD_GObj* lv_gobj[6];
+    /* +20 gp+E4    */ float xE4;
+    /* +24 gp+E8    */ float xE8;
+    /* +28 gp+EC    */ float xEC;
+    /* +2C gp+F0    */ float xF0;
+    /* +30 gp+F4    */ float xF4;
+    /* +34 gp+F8    */ float xF8;
+    /* +38 gp+FC    */ float xFC;
+    /* +3C gp+100   */ float x100;
+    /* +40 gp+104   */ float x104;
 };
 
 struct Ground {
@@ -495,64 +545,68 @@ struct Ground {
     char pad_40[0xC4 - 0x74];
 
     union {
-    /// @todo This union is named 'u', from assert statements
-    union GroundVars {
-        char pad_0[0x204 - 0xC4];
-        struct grBigBlue_GroundVars bigblue;
-        struct grCorneria_GroundVars corneria;
-        struct GroundVars_flatzone flatzone;
-        struct GroundVars_flatzone2 flatzone2;
-        struct grIceMt_GroundVars icemt;
-        struct GroundVars_izumi izumi;
-        struct GroundVars_izumi2 izumi2;
-        struct GroundVars_izumi3 izumi3;
-        struct grKongo_GroundVars kongo;
-        struct grKongo_GroundVars2 kongo2;
-        struct grKongo_GroundVars3 kongo3;
-        struct grKraid_GroundVars kraid;
-        struct grOnett_GroundVars onett;
-        struct GroundVars_unk unk;
-        struct grZebes_GroundVars zebes;
-    } gv;
+        /// @todo This union is named 'u', from assert statements
+        union GroundVars {
+            char pad_0[0x204 - 0xC4];
+            struct grBigBlue_GroundVars bigblue;
+            struct grCorneria_GroundVars corneria;
+            struct GroundVars_flatzone flatzone;
+            struct GroundVars_flatzone2 flatzone2;
+            struct grFourside_GroundVars fourside;
+            struct grIceMt_GroundVars icemt;
+            struct grIceMt_GroundVars2 icemt2;
+            struct GroundVars_izumi izumi;
+            struct GroundVars_izumi2 izumi2;
+            struct GroundVars_izumi3 izumi3;
+            struct grKongo_GroundVars kongo;
+            struct grKongo_GroundVars2 kongo2;
+            struct grKongo_GroundVars3 kongo3;
+            struct grKraid_GroundVars kraid;
+            struct grOnett_GroundVars onett;
+            struct grPura_GroundVars pura;
+            struct grPura_GroundVars2 pura2;
+            struct GroundVars_unk unk;
+            struct grYorster_GroundVars yorster;
+            struct grZebes_GroundVars zebes;
+        } gv;
 
-    /**
-     * Union of Ground object subtypes
-     *
-     * A Ground object can be one of multiple subtypes. The toplevel Ground
-     * object for the stage itself is a generic type, but uses different
-     * subtypes for various stage hazards, graphics effects, backgrounds, etc.
-     * used by the stage.
-     *
-     * Each index in a stage's StageCallbacks array may use a different subtype
-     * of Ground object - but each callback in a single StageCallbacks struct
-     * should operate on the same subtype.
-     *
-     * This is known from assert statements to contain at least the following
-     * members:
-     * - map
-     *   - A generic member used for multiple stages - used in in Onett,
-     *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
-     *     to see lots of assert statements using it.
-     * - scroll
-     *   - Used for Rainbow Cruise
-     * - taru
-     *   - "Barrel", used in Kongo Jungle
-     * - car, carnull
-     *   - Used in Big Blue
-     *
-     * @todo The previous #Ground.gv union members should be moved here.
-     */
-    union {
-        struct grStadium_GroundVars stadium;
-        struct grStadium_type9_GroundVars stadium9;
-        struct grStadium_Display display; ///< Pokemon Stadium jumbotron
-        struct Randall randall;
-        struct ShyGuys shyguys;
-        struct Battlefield battle;
-        struct Last_GroundVars last;
-        struct Map_GroundVars map;
-    } u;
-
+        /**
+         * Union of Ground object subtypes
+         *
+         * A Ground object can be one of multiple subtypes. The toplevel Ground
+         * object for the stage itself is a generic type, but uses different
+         * subtypes for various stage hazards, graphics effects, backgrounds,
+         * etc. used by the stage.
+         *
+         * Each index in a stage's StageCallbacks array may use a different
+         * subtype of Ground object - but each callback in a single
+         * StageCallbacks struct should operate on the same subtype.
+         *
+         * This is known from assert statements to contain at least the
+         * following members:
+         * - map
+         *   - A generic member used for multiple stages - used in in Onett,
+         *     RCruise, Home Run Contest, and more. Grep for `gp->u.map`
+         *     to see lots of assert statements using it.
+         * - scroll
+         *   - Used for Rainbow Cruise
+         * - taru
+         *   - "Barrel", used in Kongo Jungle
+         * - car, carnull
+         *   - Used in Big Blue
+         *
+         * @todo The previous #Ground.gv union members should be moved here.
+         */
+        union {
+            struct grStadium_GroundVars stadium;
+            struct grStadium_type9_GroundVars stadium9;
+            struct grStadium_Display display; ///< Pokemon Stadium jumbotron
+            struct Randall randall;
+            struct ShyGuys shyguys;
+            struct Battlefield battle;
+            struct Last_GroundVars last;
+            struct Map_GroundVars map;
+        } u;
     };
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);

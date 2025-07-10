@@ -12,7 +12,6 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
@@ -24,6 +23,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "it/it_26B1.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itkirby_2F23.h"
@@ -5617,7 +5617,7 @@ void ftKb_PeSpecialLw_Anim(HSD_GObj* gobj)
 
 void ftKb_PeSpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doPeAnim(gobj, ftCo_800CC730);
+    doPeAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKb_PeSpecialLw_IASA(ftKb_GObj* gobj) {}
@@ -5758,7 +5758,7 @@ void ftKb_PeSpecialLwHit_Anim(HSD_GObj* gobj)
 
 void ftKb_PeSpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
-    doPeHitAnim(gobj, ftCo_800CC730);
+    doPeHitAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKb_PeSpecialLwHit_IASA(ftKb_GObj* gobj) {}

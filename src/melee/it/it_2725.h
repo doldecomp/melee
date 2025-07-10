@@ -255,9 +255,9 @@
 /* 27CE44 */ void it_8027CE44(Item_GObj*);
 /* 27CE64 */ void it_8027CE64(Item_GObj*, HSD_GObj*, void*);
 /* 3F14C4 */ extern struct ItemLogicTable it_803F14C4[43];
-/* 3F23CC */ extern struct ItemLogicTable it_803F23CC[];
+/* 3F23CC */ extern struct ItemLogicTable it_803F23CC[47];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
-/* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[];
+/* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[30];
 /* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk6 it_804A0E50;
 /* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;

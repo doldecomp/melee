@@ -40,9 +40,6 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     f32 x44;
     f32 x48;
     f32 x4C;
-    /* Adding values here and shrinking data_filler_1 based on context set up
-     * by kipcode 66 in https://decomp.me/scratch/fE7Dq for
-     * ftSk_SpecialAirHiStart_1_Coll */
     s32 x50;
     f32 x54;
     f32 x58;

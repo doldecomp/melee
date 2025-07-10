@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
@@ -29,7 +31,7 @@
 /* 21DF48 */ bool grHomeRun_8021DF48(UNK_PARAMS);
 /* 21DF50 */ UNK_RET grHomeRun_8021DF50(UNK_PARAMS);
 /* 21E008 */ UNK_RET grHomeRun_8021E008(UNK_PARAMS);
-/* 21E038 */ UNK_RET grHomeRun_8021E038(UNK_PARAMS);
+/* 21E038 */ void grHomeRun_8021E038(HSD_GObj*);
 /* 21E064 */ bool grHomeRun_8021E064(UNK_PARAMS);
 /* 21E06C */ UNK_RET grHomeRun_8021E06C(UNK_PARAMS);
 /* 21E070 */ UNK_RET grHomeRun_8021E070(UNK_PARAMS);
@@ -37,7 +39,7 @@
 /* 21E0CC */ bool grHomeRun_8021E0CC(UNK_PARAMS);
 /* 21E0D4 */ UNK_RET grHomeRun_8021E0D4(UNK_PARAMS);
 /* 21E18C */ UNK_RET grHomeRun_8021E18C(UNK_PARAMS);
-/* 21E1BC */ UNK_RET grHomeRun_8021E1BC(UNK_PARAMS);
+/* 21E1BC */ void grHomeRun_8021E1BC(HSD_GObj*);
 /* 21E1E8 */ bool grHomeRun_8021E1E8(UNK_PARAMS);
 /* 21E1F0 */ UNK_RET grHomeRun_8021E1F0(UNK_PARAMS);
 /* 21E1F4 */ UNK_RET grHomeRun_8021E1F4(UNK_PARAMS);
@@ -45,7 +47,7 @@
 /* 21E250 */ bool grHomeRun_8021E250(UNK_PARAMS);
 /* 21E258 */ UNK_RET grHomeRun_8021E258(UNK_PARAMS);
 /* 21E310 */ UNK_RET grHomeRun_8021E310(UNK_PARAMS);
-/* 21E340 */ UNK_RET grHomeRun_8021E340(UNK_PARAMS);
+/* 21E340 */ void grHomeRun_8021E340(HSD_GObj*);
 /* 21E36C */ bool grHomeRun_8021E36C(UNK_PARAMS);
 /* 21E374 */ UNK_RET grHomeRun_8021E374(UNK_PARAMS);
 /* 21E378 */ UNK_RET grHomeRun_8021E378(UNK_PARAMS);
@@ -53,7 +55,7 @@
 /* 21E3D4 */ bool grHomeRun_8021E3D4(UNK_PARAMS);
 /* 21E3DC */ UNK_RET grHomeRun_8021E3DC(UNK_PARAMS);
 /* 21E494 */ UNK_RET grHomeRun_8021E494(UNK_PARAMS);
-/* 21E4C4 */ UNK_RET grHomeRun_8021E4C4(UNK_PARAMS);
+/* 21E4C4 */ void grHomeRun_8021E4C4(HSD_GObj*);
 /* 21E4F0 */ bool grHomeRun_8021E4F0(UNK_PARAMS);
 /* 21E4F8 */ UNK_RET grHomeRun_8021E4F8(UNK_PARAMS);
 /* 21E4FC */ UNK_RET grHomeRun_8021E4FC(UNK_PARAMS);
@@ -61,7 +63,7 @@
 /* 21E994 */ UNK_RET fn_8021E994(UNK_PARAMS);
 /* 21EA30 */ UNK_RET grHomeRun_8021EA30(UNK_PARAMS);
 /* 21EAF8 */ UNK_RET grHomeRun_8021EAF8(UNK_PARAMS);
-/* 21EB10 */ void fn_8021EB10(HSD_GObj* target_cam_gobj);
+/* 21EB10 */ void fn_8021EB10(HSD_GObj*);
 /* 21EC58 */ UNK_RET grHomeRun_8021EC58(UNK_PARAMS);
 /* 21ED74 */ UNK_RET grHomeRun_8021ED74(UNK_PARAMS);
 /* 21EDD4 */ UNK_RET grHomeRun_8021EDD4(UNK_PARAMS);

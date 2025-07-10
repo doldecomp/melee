@@ -168,8 +168,7 @@ struct VsModeData {
 };
 
 struct CSSData {
-    u8 unk_0x0;
-    u8 unk_0x1;
+    u16 unk_0x0;
     u8 match_type;
     u8 pending_scene_change;
     u8* ko_star_counts;
@@ -367,7 +366,6 @@ struct CSSDoorsData {
     float x108;
     float x10c;
     CSSKOStar ko_stars[4]; // 0x110
-    u8 x190[64];           // 0x190
 };
 
 struct mnGallery_804A0B90_t {
