@@ -19,7 +19,7 @@ static f32 const ftSk_Init_804D96A8 = 0.0078125f;
 
 void fn_80114034(HSD_GObj* gobj) {}
 
-void fn_801140B0(void) {}
+void fn_801140B0(HSD_GObj* gobj) {}
 
 void fn_8011412C(HSD_GObj* gobj)
 {
