@@ -97,12 +97,12 @@ typedef struct Camera {
     /* 0x2C8 */ float pitch_offset;
     /* 0x2CC */ float yaw_offset;
     /* 0x2D0 */ char pad_2D0[0x2F8 - 0x2D0];
-    /* 0x2F8 */ f32 x2F8;
-    /* 0x2FC */ f32 x2FC;
+    /* 0x2F8 */ f32 min_distance;
+    /* 0x2FC */ f32 max_distance;
     /* 0x300 */ char pad_300[0x320 - 0x300];
-    /* 0x320 */ Vec3 x320;
+    /* 0x320 */ Vec3 eye_offset;
     /* 0x32C */ f32 x32C;
-    /* 0x330 */ f32 x330;
+    /* 0x330 */ f32 eye_distance;
     /* 0x334 */ Vec3 x334;
     /* 0x340 */ u8 x340;
     /* 0x341:0 */ u8 x341_b0 : 1;

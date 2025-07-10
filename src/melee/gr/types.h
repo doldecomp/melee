@@ -342,7 +342,7 @@ struct grStadium_GroundVars {
 /* +4 gp+D0   */   UnkArchiveStruct* xD0;
 /* +4 gp+D4   */   float xD4;
 /* +4 gp+D8   */   int xD8;
-/* +4 gp+DC   */   s16 xDC;
+/* +4 gp+DC   */   s16 xDC; ///< grStadium_801D4548 decision state ie waiting for file, animate screen, etc
 /* +4 gp+DE   */   s16 xDE;
 /* +4 gp+E0   */   s16 xE0;
 /* +4 gp+E2   */   s16 xE2;
