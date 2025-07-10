@@ -7,13 +7,14 @@
 
 #include <baselib/archive.h>
 
-void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length);
-void lbArchive_80016EFC(HSD_Archive* archive);
-HSD_Archive* lbArchive_LoadArchive(char* filename);
-
-void* lbArchive_LoadSymbols(char*, void**, ...);
-void* lbArchive_80016DBC(char*, void**, ...);
-s32 lbArchive_800171CC(void*, ...);
-void lbArchive_LoadSections(HSD_Archive* archive, void** file, ...);
+void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length);
+void lbArchive_LoadSections(HSD_Archive* archive, void** symbols, ...);
+HSD_Archive* lbArchive_LoadArchive(const char* filename);
+HSD_Archive* lbArchive_LoadSymbols(const char* filename, void* symbols, ...);
+HSD_Archive* lbArchive_80016DBC(const char* filename, void* symbols, ...);
+void lbArchive_80016EFC(HSD_Archive*);
+bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols, ...);
+bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols, ...);
+int lbArchive_80017340(HSD_Archive*, HSD_ArchiveHeader*, size_t file_size, intptr_t base_addr);
 
 #endif
