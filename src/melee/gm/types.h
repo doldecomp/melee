@@ -375,4 +375,64 @@ struct gm_8016A92C_arg0_t {
     struct lbl_8046B668_t* x58;
 };
 
+struct MatchTeamData {
+    int score;
+    int subscore;
+    u8 is_big_loser;
+    u8 is_small_loser;
+    u8 active;
+};
+
+struct MatchPlayerData {
+    u8 slot_type;
+    u8 character_kind;
+    u8 character_id;
+    u8 x3;
+    u8 x4;
+    u8 is_big_loser;
+    u8 is_small_loser;
+    u8 team;
+    u8 stocks;
+    u8 x9;
+    u16 self_destructs;
+    u16 percent;
+    u16 xE;
+    u16 kills;
+    u16 x12;
+    u16 x14;
+    u8 pad_x16[0x20 - 0x16];
+    int x20;
+    int x24;
+    u8 pad_x28[0x2C - 0x28];
+    int score;
+    u8 pad_x30[0xA8 - 0x30];
+};
+
+struct MatchEnd {
+    int x0; // timer?
+    int x4;
+    int x8;
+    u8 result;
+    u8 x5;
+    u8 is_teams;
+    u8 x7;
+    int frame_count;
+    u8 xC;
+    u8 n_winners;
+    u8 n_team_winners;
+    u8 loser;
+    u8 winners[6];
+    u8 team_winners[5];
+    struct MatchTeamData team_standings[5];
+    struct MatchPlayerData player_standings[6];
+    u8 _x448[4];
+    u8 pad_x44C[0x186C - 0x44C];
+    u8 pad_x186C[0x2274 - 0x186C];
+};
+
+struct MatchExitInfo {
+    int x0;
+    struct MatchEnd match_end;
+};
+
 #endif

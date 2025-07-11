@@ -373,4 +373,13 @@ struct mnGallery_804A0B90_t {
 };
 STATIC_ASSERT(sizeof(struct mnGallery_804A0B90_t) == 0x96000);
 
+struct SSSData {
+    u8 unk_stage;
+    u8 x1;
+    u8 no_lras;
+    u8 force_stage_id;
+    bool start_game;
+    VsModeData data;
+};
+
 #endif
