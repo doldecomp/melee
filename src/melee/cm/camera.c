@@ -17,6 +17,7 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
 
@@ -31,7 +32,10 @@
 #include <math_ppc.h>
 #include <trigf.h>
 #include <baselib/controller.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
 
 static HSD_CObj* cm_804D6464;
 
@@ -1200,9 +1204,7 @@ void Camera_8002BD88(f32 x, f32 y)
 
 void Camera_8002EA64(Vec* arg0)
 {
-    f32 spC;
-    s32 (*cb)(f32*);
-    PAD_STACK(4);
+    Vec3 spC;
 
     if (cm_80452C68.mode != 6) {
         Camera_8002FE38();
@@ -1215,9 +1217,8 @@ void Camera_8002EA64(Vec* arg0)
         cm_80452C68.transform.target_position = cm_80452C68.x35C.vec;
         return;
     case 3:
-        cb = cm_80452C68.x35C.cb;
-        if (cb && cb(&spC)) {
-            cm_80452C68.transform.target_position = *arg0;
+        if (cm_80452C68.x35C.cb && cm_80452C68.x35C.cb(&spC)) {
+            cm_80452C68.transform.target_position = spC;
         }
     case 2:
     case 0:
@@ -1250,10 +1251,10 @@ bool Camera_8002F260(void)
 
 /// #Camera_8002F274
 
-void fn_8002F360(void* x)
+void fn_8002F360(HSD_GObj* x)
 {
     if (cm_803BCB18.callback[cm_80452C68.mode]) {
-        (*cm_803BCB18.callback[cm_80452C68.mode])(x);
+        cm_803BCB18.callback[cm_80452C68.mode](x);
     }
 }
 
@@ -1374,7 +1375,7 @@ s32 fn_8002F908(HSD_RectF32* arg0)
     f32 center_h;
     f32 center_v;
 
-    center_h = (Stage_GetCamBoundsLeftOffset() + Stage_GetCamBoundsRightOffset()) * 0.5f;
+    center_h = (Stage_GetCamBoundsRightOffset() + Stage_GetCamBoundsLeftOffset()) * 0.5f;
     half_width = cm_803BCCA0._44[0x1A] * (0.5f * (Stage_GetCamBoundsRightOffset() - Stage_GetCamBoundsLeftOffset()));
     arg0->ymax = center_h + half_width;
     arg0->ymin = center_h - half_width;
@@ -1395,7 +1396,7 @@ s32 fn_8002FBA0(HSD_RectF32* arg0)
     f32 center_h;
     f32 center_v;
 
-    center_h = (Stage_GetCamBoundsLeftOffset() + Stage_GetCamBoundsRightOffset()) * 0.5f;
+    center_h = (Stage_GetCamBoundsRightOffset() + Stage_GetCamBoundsLeftOffset()) * 0.5f;
     half_width = cm_803BCCA0._44[0x1A] * (0.5f * (Stage_GetCamBoundsRightOffset() - Stage_GetCamBoundsLeftOffset()));
     arg0->ymax = center_h + half_width;
     arg0->ymin = center_h - half_width;
@@ -1488,7 +1489,24 @@ Point3d* Camera_8003019C(void)
 
 /// #Camera_800304E0
 
-/// #Camera_80030688
+void Camera_80030688(void)
+{
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
+
+    gobj = GObj_Create(0x10, 0x12, 0);
+    cm_80452C68.gobj = gobj;
+
+    cobj = lb_80013B14(&cm_803BCB64);
+    cm_804D6464 = lb_80013B14(&cm_803BCB64);
+    {
+        HSD_CObj* c = cobj;
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, c);
+    }
+
+    GObj_SetupGXLinkMax(gobj, fn_800301D0, 2);
+    HSD_GObjProc_8038FD54(gobj, fn_8002F360, 0x12);
+}
 
 void Camera_80030730(f32 arg8)
 {

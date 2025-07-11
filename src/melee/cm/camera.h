@@ -7,9 +7,7 @@
 #include "cm/forward.h"
 #include <baselib/forward.h>
 
-#include "cm/types.h"
 #include "dolphin/gx/GXStruct.h"
-#include "dolphin/types.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
@@ -67,7 +65,7 @@
 /* 02F0E4 */ void Camera_8002F0E4(s32);
 /* 02F260 */ bool Camera_8002F260(void);
 /* 02F274 */ void Camera_8002F274(void);
-/* 02F360 */ void fn_8002F360(void*);
+/* 02F360 */ void fn_8002F360(HSD_GObj*);
 /* 02F3AC */ void Camera_8002F3AC(void);
 /* 02F474 */ void Camera_8002F474(void);
 /* 02F488 */ s32 fn_8002F488(Vec4* arg0);
@@ -90,7 +88,7 @@
 /* 030154 */ bool Camera_80030154(void);
 /* 030178 */ bool Camera_80030178(void);
 /* 03019C */ Vec3* Camera_8003019C(void);
-/* 0301D0 */ UNK_RET fn_800301D0(UNK_PARAMS);
+/* 0301D0 */ void fn_800301D0(HSD_GObj*, int);
 /* 0304E0 */ UNK_RET Camera_800304E0(UNK_PARAMS);
 /* 030688 */ UNK_RET Camera_80030688(UNK_PARAMS);
 /* 030730 */ void Camera_80030730(f32 arg8);

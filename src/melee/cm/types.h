@@ -114,7 +114,7 @@ typedef struct Camera {
     /* 0x350 */ Vec3 x350;
     /* 0x35C */ union {
         Vec3 vec;
-        s32 (*cb)(f32*);
+        s32 (*cb)(Vec3*);
     } x35C;
     /* 0x368 */ Vec3 x368;
     /* 0x374 */ f32 x374;
