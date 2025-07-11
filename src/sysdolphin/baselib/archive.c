@@ -15,7 +15,7 @@ inline void Locate(HSD_Archive* archive)
     }
 }
 
-s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
+s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, size_t file_size)
 {
     u32 offset;
 
@@ -62,7 +62,7 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
     return 0;
 }
 
-void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
+void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, const char* symbols)
 {
     u32 i;
 
@@ -88,7 +88,7 @@ char* HSD_ArchiveGetExtern(HSD_Archive* archive, int offset)
     return archive->symbols + archive->extern_info[offset].symbol;
 }
 
-void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
+void HSD_ArchiveLocateExtern(HSD_Archive* archive, const char* symbols, void* addr)
 {
     uintptr_t next;
     uintptr_t offset = -1;
