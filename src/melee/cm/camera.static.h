@@ -56,10 +56,10 @@
 };
 
 /// .rodata
-/* 3B73B8 */ static Vec3 cm_803B73B8 = {0.0f, 0.0f, -1.0f};
-/* 3B73C4 */ static Vec3 cm_803B73C4 = { 0.0f };
-/* 3B73D0 */ static Vec3 cm_803B73D0 = { 0.0f, 1.0f, 0.0f };
-/* 3B73DC */ static Vec3 cm_803B73DC = { 0.0f, 1.0f, 0.0f };
+/* 3B73B8 */ static Vec3 const cm_WorldForward = { 0.0f, 0.0f, -1.0f };
+/* 3B73C4 */ static Vec3 const cm_803B73C4 = { 0.0f };
+/* 3B73D0 */ static Vec3 const cm_WorldUp = { 0.0f, 1.0f, 0.0f };
+/* 3B73DC */ static Vec3 const cm_803B73DC = { 0.0f, 1.0f, 0.0f };
 
 /// .sbss
 /* 4D6458 */ static CameraBox* cm_804D6458;
