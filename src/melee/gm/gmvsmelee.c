@@ -41,7 +41,6 @@ bool gm_801A52D0(MatchEnd* end_info)
             return true;
         }
     }
-    
     return false;
 }
 
