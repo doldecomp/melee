@@ -6,7 +6,6 @@
 
 #include "lb/forward.h"
 
-/* 01E8F8 */ float lbMthp_8001E8F8(FigaTree*);
 /* 01E910 */ UNK_RET fn_8001E910(UNK_PARAMS);
 /* 01EB14 */ UNK_RET fn_8001EB14(UNK_PARAMS);
 /* 01EBF0 */ UNK_RET fn_8001EBF0(UNK_PARAMS);
