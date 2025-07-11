@@ -1,11 +1,14 @@
 #include "gmvsmelee.h"
 
-#include <melee/gm/types.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lbdvd.h>
 
-/* 4D6730 */ extern UNK_T gm_804D6730;
+/* 4D6730 */ extern u8 gm_804D6730;
 
-s8* gm_801A5244(void)
+VsModeData* gm_801A5244(void)
 {
     return &gmMainLib_804D3EE0->unk_590;
 }
@@ -21,7 +24,11 @@ UNK_T gm_801A5250(void)
 
 /// #gm_801A5360
 
-/// #gm_801A5598_OnInit
+void gm_801A5598_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_590);
+    gmMainLib_8015CDEC();
+}
 
 /// #gm_801A55C4
 
@@ -29,7 +36,14 @@ UNK_T gm_801A5250(void)
 
 void gm_801A5614_OnUnload(void) {}
 
-/// #gm_801A5618
+void gm_801A5618(MinorScene* arg0, VsModeData* arg1, int arg2)
+{
+    CSSData* css_data = gm_801A427C(arg0);
+    css_data->match_type = arg2;
+    css_data->ko_star_counts = &gm_804D6730;
+    css_data->data = *arg1;
+    lbDvd_800174BC();
+}
 
 /// #gm_801A5680
 

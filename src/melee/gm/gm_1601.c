@@ -5,13 +5,21 @@
 
 #include "gmmain_lib.h"
 
+#include <melee/gm/gm_1A45.h>
+#include <melee/pl/player.h>
+#include <sysdolphin/baselib/controller.h>
+
 #include "cm/camera.h"
+#include "db/db.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lb_0192.h"
+#include "lb/lbaudio_ax.h"
 #include "lb/lbtime.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
@@ -408,13 +416,79 @@ u8 gm_801677F0(void)
 
 /// #gm_801678F8
 
-/// #gm_8016795C
+void gm_8016795C(struct PlayerInitData* arg0)
+{
+    memzero(arg0, sizeof(*arg0));
+    arg0->x0 = 0x21;
+    arg0->x1 = 3;
+    arg0->x2 = 0;
+    arg0->x3 = 0;
+    arg0->x4 = 0;
+    arg0->x5 = -1;
+    arg0->x6 = 0;
+    arg0->xB = 0;
+    arg0->x7 = 0;
+    arg0->x8 = 9;
+    arg0->x9 = 0;
+    arg0->xC_b0 = false;
+    arg0->xA = 0x78;
+    arg0->xC_b1 = true;
+    arg0->xE = 4;
+    arg0->xF = 0;
+    arg0->x12 = 0;
+    arg0->x14 = 0;
+    arg0->x18 = 1.0F;
+    arg0->x1C = 1.0F;
+    arg0->x20 = 1.0F;
+}
 
-/// #gm_80167A14
+void gm_80167A14(struct PlayerInitData* arg0)
+{
+    int i;
+    for (i = 0; i < 6; i++) {
+        gm_8016795C(&arg0[i]);
+    }
+}
 
-/// #gm_80167A64
+void gm_80167A64(struct StartMeleeRules* arg0)
+{
+    memzero(arg0, sizeof(*arg0));
+    arg0->x0_3 = 4;
 
-/// #gm_80167B50
+    arg0->xC = 0;
+    arg0->xB = 2;
+
+    arg0->x20 = -1;
+    arg0->x28 = 0;
+
+    arg0->x3_1 = 1;
+
+    arg0->x3_5 = 1;
+    arg0->x3_4 = 1;
+    arg0->x4_0 = 1;
+
+    arg0->x1_6 = 0;
+    arg0->x2_5 = 1;
+    arg0->x2_6 = 1;
+
+    arg0->x2C = 1.0f;
+    arg0->x30 = 1.0f;
+    arg0->x34 = 1.0f;
+
+    arg0->x4_6 = 1;
+    arg0->x4_7 = 1;
+    arg0->xD = 0x6E;
+    arg0->xA = 0;
+}
+
+void gm_80167B50(VsModeData* arg0)
+{
+    gm_80167A64(&arg0->data.rules);
+    gm_80167A14(arg0->data.players);
+    arg0->loser = -1;
+    arg0->ordered_stage_index = -1;
+    arg0->winner = -1;
+}
 
 /// #gm_80167BC8
 
@@ -453,7 +527,14 @@ void fn_80168F7C(void)
 
 /// #gm_80168F88
 
-/// #gm_80168FC4
+// UnclePunch: Audio_LoadAnnouncer
+void gm_80168FC4(void)
+{
+    lbAudioAx_80026F2C(0x12);
+    lbAudioAx_8002702C(2, 0x20);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
+}
 
 /// #fn_80169000
 

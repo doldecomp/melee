@@ -3,8 +3,9 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include <melee/gm/forward.h>
 
-/* 1A5244 */ s8* gm_801A5244(void);
+/* 1A5244 */ struct VsModeData* gm_801A5244(void);
 /* 1A5250 */ UNK_T gm_801A5250(void);
 /* 1A5258 */ UNK_RET gm_801A5258(UNK_PARAMS);
 /* 1A52D0 */ UNK_RET gm_801A52D0(UNK_PARAMS);
@@ -13,7 +14,7 @@
 /* 1A55C4 */ UNK_RET gm_801A55C4(UNK_PARAMS);
 /* 1A55EC */ UNK_RET gm_801A55EC_OnLoad(UNK_PARAMS);
 /* 1A5614 */ void gm_801A5614_OnUnload(void);
-/* 1A5618 */ UNK_RET gm_801A5618(UNK_PARAMS);
+/* 1A5618 */ void gm_801A5618(MinorScene*, struct VsModeData*, int);
 /* 1A5680 */ UNK_RET gm_801A5680(UNK_PARAMS);
 /* 1A5754 */ UNK_RET gm_801A5754(UNK_PARAMS);
 /* 1A57A8 */ UNK_RET gm_801A57A8(UNK_PARAMS);
