@@ -407,9 +407,7 @@ struct MatchPlayerData {
 };
 
 struct MatchEnd {
-    int x0; // timer?
-    int x4;
-    int x8;
+    int x0;
     u8 result;
     u8 x5;
     u8 is_teams;
@@ -430,6 +428,8 @@ struct MatchEnd {
 
 struct MatchExitInfo {
     int x0;
+    int x4;
+    int x8;
     struct MatchEnd match_end;
 };
 

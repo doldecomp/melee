@@ -2,6 +2,8 @@
 #include "mn/forward.h"
 #include "gm/gmvsmelee.static.h"
 #include "gmvsmelee.h"
+#include "lb/lb_00B0.h"
+#include "lb/lbtime.h"
 
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
@@ -52,18 +54,25 @@ void gm_801A5598_OnInit(void)
     gmMainLib_8015CDEC();
 }
 
-/// #gm_801A55C4
+void gm_801A55C4(void)
+{
+    memzero(&gm_804D6730, 6);
+}
 
-/// #gm_801A55EC_OnLoad
+void gm_801A55EC_OnLoad(void)
+{
+    memzero(&gm_804D6730, 6);
+}
+
 
 void gm_801A5614_OnUnload(void) {}
 
-void gm_801A5618(MinorScene* arg0, VsModeData* arg1, int arg2)
+void gm_801A5618(MinorScene* minor_data, VsModeData* vs_data, int match_type)
 {
-    CSSData* css_data = gm_801A427C(arg0);
-    css_data->match_type = arg2;
+    CSSData* css_data = gm_801A427C(minor_data);
+    css_data->match_type = match_type;
     css_data->ko_star_counts = &gm_804D6730;
-    css_data->data = *arg1;
+    css_data->data = *vs_data;
     lbDvd_800174BC();
 }
 
@@ -71,10 +80,8 @@ void gm_801A5618(MinorScene* arg0, VsModeData* arg1, int arg2)
 
 void gm_801A5754(MinorScene* minor_data, VsModeData* vs_data)
 {
-    SSSData* sss;
-    // TODO :: same issue as gm_801A5618
-    sss = gm_801A427C(minor_data);
-    sss->data = *vs_data;
+    SSSData* sss_data = gm_801A427C(minor_data);
+    sss_data->data = *vs_data;
     gm_80167FC4();
 }
 
