@@ -65,7 +65,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
-#include "lb/lbmthp.h"
+#include "lb/lbanim.h"
 #include "lb/lbshadow.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
@@ -839,12 +839,12 @@ static void Fighter_Create_Inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2229_b5_no_normal_motion) {
-        fp->x2EC = lbMthp_8001E8F8(ftData_80085E50(fp, 0x23));
+        fp->x2EC = lbAnim_8001E8F8(ftData_80085E50(fp, 0x23));
         if (!fp->x2228_b2) {
-            fp->x2DC = lbMthp_8001E8F8(ftData_80085E50(fp, 7));
-            fp->x2E0 = lbMthp_8001E8F8(ftData_80085E50(fp, 8));
-            fp->x2E4 = lbMthp_8001E8F8(ftData_80085E50(fp, 9));
-            fp->x2E8 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x25));
+            fp->x2DC = lbAnim_8001E8F8(ftData_80085E50(fp, 7));
+            fp->x2E0 = lbAnim_8001E8F8(ftData_80085E50(fp, 8));
+            fp->x2E4 = lbAnim_8001E8F8(ftData_80085E50(fp, 9));
+            fp->x2E8 = lbAnim_8001E8F8(ftData_80085E50(fp, 0x25));
         }
     }
 }

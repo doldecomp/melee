@@ -20,7 +20,6 @@ typedef struct PreloadEntry PreloadEntry;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 typedef struct Unk80433380_48 Unk80433380_48;
-typedef struct lbMthp_8001E8F8_t lbMthp_8001E8F8_t;
 typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 
 typedef enum HurtCapsuleState {
