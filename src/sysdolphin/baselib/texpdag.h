@@ -17,7 +17,7 @@ typedef struct HSD_TExpDag {
     HSD_TExpDag* depend[8];
 } HSD_TExpDag;
 
-/* 385798 */ UNK_RET assign_reg(UNK_PARAMS);
+/* 385798 */ int assign_reg(int num, u32*, HSD_TExpDag* list, int* order);
 /* 385944 */ UNK_RET order_dag(UNK_PARAMS);
 /* 385B8C */ UNK_RET CalcDistance(UNK_PARAMS);
 /* 385C60 */ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list);
