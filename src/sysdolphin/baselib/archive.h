@@ -45,9 +45,9 @@ struct HSD_Archive {
 };
 STATIC_ASSERT(sizeof(struct HSD_Archive) == 0x44);
 
-s32 HSD_ArchiveParse(HSD_Archive*, u8*, u32);
-void* HSD_ArchiveGetPublicAddress(HSD_Archive*, char*);
+s32 HSD_ArchiveParse(HSD_Archive*, u8*, size_t file_size);
+void* HSD_ArchiveGetPublicAddress(HSD_Archive*, const char*);
 char* HSD_ArchiveGetExtern(HSD_Archive*, int);
-void HSD_ArchiveLocateExtern(HSD_Archive*, char*, void*);
+void HSD_ArchiveLocateExtern(HSD_Archive*, const char*, void*);
 
 #endif

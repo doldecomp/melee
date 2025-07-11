@@ -3,7 +3,10 @@
 
 #include "baselib/forward.h"
 #include "camera.h" // IWYU pragma: export
+#include <melee/cm/types.h>
+#include <sysdolphin/baselib/cobj.h>
 #include "baselib/wobj.h"
+#include <math.h>
 
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
@@ -56,10 +59,10 @@
 };
 
 /// .rodata
-/* 3B73B8 */ static Vec3 cm_803B73B8 = {0.0f, 0.0f, -1.0f};
-/* 3B73C4 */ static Vec3 cm_803B73C4 = { 0.0f };
-/* 3B73D0 */ static Vec3 cm_803B73D0 = { 0.0f, 1.0f, 0.0f };
-/* 3B73DC */ static Vec3 cm_803B73DC = { 0.0f, 1.0f, 0.0f };
+/* 3B73B8 */ static Vec3 const cm_WorldForward = { 0.0f, 0.0f, -1.0f };
+/* 3B73C4 */ static Vec3 const cm_803B73C4 = { 0.0f };
+/* 3B73D0 */ static Vec3 const cm_WorldUp = { 0.0f, 1.0f, 0.0f };
+/* 3B73DC */ static Vec3 const cm_803B73DC = { 0.0f, 1.0f, 0.0f };
 
 /// .sbss
 /* 4D6458 */ static CameraBox* cm_804D6458;
@@ -112,10 +115,10 @@
 /* 4D7EB0 */ float const cm_804D7EB0 = -2000.0f;
 /* 4D7EB8 */ double const cm_804D7EB8 = -1.0f;
 /* 4D7EC0 */ float const cm_804D7EC0 = 4.0f;
-/* 4D7EC8 */ f64 const cm_804D7EC8 = 0.3926990816987241f; // M_PI_8
-/* 4D7ED0 */ f64 const cm_804D7ED0 = 0.1963495408493621f; // M_PI_16
-/* 4D7ED8 */ f64 const cm_804D7ED8 = 6.283185307179586f; // M_PI * 2
-/* 4D7EE0 */ f64 const cm_804D7EE0 = 3.141592653589793f; // M_PI
+/* 4D7EC8 */ f64 const cm_804D7EC8 = M_PI / 8;
+/* 4D7ED0 */ f64 const cm_804D7ED0 = M_PI / 16;
+/* 4D7ED8 */ f64 const cm_804D7ED8 = M_PI * 2;
+/* 4D7EE0 */ f64 const cm_804D7EE0 = M_PI;
 /* 4D7EE8 */ f64 const cm_804D7EE8 = 0.0001f;
 /* 4D7EF0 */ double const cm_804D7EF0 = 0.0f;
 /* 4D7EF8 */ float const cm_804D7EF8 = 8.5070587E+37f;

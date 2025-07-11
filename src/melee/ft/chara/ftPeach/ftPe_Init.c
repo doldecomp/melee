@@ -23,7 +23,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "it/it_26B1.h"
-#include "lb/lbmthp.h"
+#include "lb/lbanim.h"
 
 MotionState ftPe_Init_MotionStateTable[ftPe_MS_SelfCount] = {
     {
@@ -437,8 +437,8 @@ void ftPe_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* extAtrrs = fp->ft_data->ext_attr;
     UNK_T* items = fp->ft_data->x48_items;
-    extAtrrs->floatfallf_anim_start = lbMthp_8001E8F8(ftData_80085E50(fp, 18));
-    extAtrrs->floatfallb_anim_start = lbMthp_8001E8F8(ftData_80085E50(fp, 19));
+    extAtrrs->floatfallf_anim_start = lbAnim_8001E8F8(ftData_80085E50(fp, 18));
+    extAtrrs->floatfallb_anim_start = lbAnim_8001E8F8(ftData_80085E50(fp, 19));
     PUSH_ATTRS(fp, ftPe_DatAttrs);
     it_8026B3F8(items[0], It_Kind_Peach_Explode);
     it_8026B3F8(items[1], It_Kind_Peach_Turnip);

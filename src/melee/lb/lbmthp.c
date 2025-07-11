@@ -3,14 +3,6 @@
 #include <melee/lb/types.h>
 #include <melee/lb/lbanim.h>
 
-f32 lbMthp_8001E8F8(FigaTree* arg0)
-{
-    if (arg0 != NULL) {
-        return arg0->frames;
-    }
-    return lb_804D7CC0;
-}
-
 /// #fn_8001E910
 
 /// #fn_8001EB14

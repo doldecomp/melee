@@ -21,7 +21,7 @@
 #include "ftCommon/ftCo_AirCatch.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "it/it_26B1.h"
-#include "lb/lbmthp.h"
+#include "lb/lbanim.h"
 
 #include <dolphin/mtx.h>
 
@@ -335,7 +335,7 @@ void ftLk_Init_OnLoad(HSD_GObj* gobj)
     ftLk_DatAttrs* da = fp->ft_data->ext_attr;
     void** item_list = fp->ft_data->x48_items;
     da->attackairlw_hit_anim_frame_end =
-        lbMthp_8001E8F8(ftData_80085E50(fp, 72));
+        lbAnim_8001E8F8(ftData_80085E50(fp, 72));
     PUSH_ATTRS(fp, ftLk_DatAttrs);
     da = fp->dat_attrs;
     it_8026B3F8(item_list[0], da->x48);
