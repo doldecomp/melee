@@ -360,7 +360,7 @@ void ifStatus_802F68F0(void)
 void ifStatus_802F6948(s32 player_idx)
 {
     IfDamageState* hud_player;
-    Placeholder_8016AE38_flags_2* small_thing;
+    struct StartMeleeRules* small_thing;
     IfDamageFlags* hud_player_flags;
 
     small_thing = gm_8016AE50();
@@ -369,7 +369,7 @@ void ifStatus_802F6948(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x2_b7 != 0) {
+        if (small_thing->x2_7 != 0) {
             hud_player->unk9 = 1;
         }
     }
@@ -380,10 +380,10 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     IfDamageState* hud_player;
     IfDamageFlags* hud_player_flags;
     lbl_8046B6A0_t* big_thing;
-    Placeholder_8016AE38_flags_2* small_thing;
+    struct StartMeleeRules* small_thing;
 
     big_thing = gm_8016AE38();
-    if ((big_thing->unk24C8.x0_b0_b2 != 1U) && (big_thing->unk24C8.x2_b5 != 0))
+    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0)
     {
         if_802F7C30(arg1);
     }
@@ -396,11 +396,11 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x2_b7 != 0) {
+        if (small_thing->x2_7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24C8.x2_b0 != 0) &&
+    if ((big_thing->x24C8.x2_0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -409,8 +409,8 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     }
 
     /// @todo Inline with callback arg
-    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
-        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7BB4 != NULL))
+    if (big_thing->x24C8.x0_0 != 1 &&
+        big_thing->x24C8.x2_5 != 0 && &if_802F7BB4 != NULL)
     {
         if_802F7BB4(player_idx);
     }
@@ -420,7 +420,7 @@ void ifStatus_802F6AF8(s32 player_idx)
 {
     IfDamageState* hud_player;
     lbl_8046B6A0_t* big_thing;
-    Placeholder_8016AE38_flags_2* small_thing;
+    struct StartMeleeRules* small_thing;
     IfDamageFlags* hud_player_flags;
 
     big_thing = gm_8016AE38();
@@ -431,11 +431,11 @@ void ifStatus_802F6AF8(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x2_b7 != 0) {
+        if (small_thing->x2_7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24C8.x2_b0 != 0) &&
+    if ((big_thing->x24C8.x2_0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -444,8 +444,8 @@ void ifStatus_802F6AF8(s32 player_idx)
     }
 
     /// @todo Inline with callback arg
-    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
-        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7AF8 != NULL))
+    if (big_thing->x24C8.x0_0 != 1 &&
+        big_thing->x24C8.x2_5 != 0 && &if_802F7AF8 != NULL)
     {
         if_802F7AF8(player_idx);
     }
@@ -456,7 +456,7 @@ void ifStatus_802F6C04(s32 player_idx)
     IfDamageState* hud_player;
     IfDamageFlags* hud_player_flags;
     lbl_8046B6A0_t* big_thing;
-    Placeholder_8016AE38_flags_2* small_thing;
+    struct StartMeleeRules* small_thing;
 
     big_thing = gm_8016AE38();
     big_thing->unk_D = player_idx;
@@ -466,11 +466,11 @@ void ifStatus_802F6C04(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x2_b7 != 0) {
+        if (small_thing->x2_7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24C8.x2_b0 != 0) &&
+    if ((big_thing->x24C8.x2_0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -479,8 +479,8 @@ void ifStatus_802F6C04(s32 player_idx)
     }
 
     /// @todo Inline with callback arg
-    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
-        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7C30 != NULL))
+    if (big_thing->x24C8.x0_0 != 1 &&
+        big_thing->x24C8.x2_5 != 0 && &if_802F7C30 != NULL)
     {
         if_802F7C30(player_idx);
     }
@@ -490,7 +490,7 @@ void ifStatus_802F6D10(s32 player_idx)
 {
     IfDamageState* hud_player;
     lbl_8046B6A0_t* big_thing;
-    Placeholder_8016AE38_flags_2* small_thing;
+    struct StartMeleeRules* small_thing;
     IfDamageFlags* hud_player_flags;
 
     big_thing = gm_8016AE38();
@@ -501,11 +501,11 @@ void ifStatus_802F6D10(s32 player_idx)
     if (hud_player_flags->explode_animation != 1) {
         hud_player_flags->explode_animation = 1;
         hud_player_flags->randomize_velocity = 1;
-        if (small_thing->x2_b7 != 0) {
+        if (small_thing->x2_7 != 0) {
             hud_player->unk9 = 1;
         }
     }
-    if ((big_thing->unk24C8.x2_b0 != 0) &&
+    if ((big_thing->x24C8.x2_0 != 0) &&
         ((Player_GetPlayerSlotType(player_idx) == 0) ||
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
@@ -514,8 +514,8 @@ void ifStatus_802F6D10(s32 player_idx)
     }
 
     /// @todo Inline with callback arg
-    if ((big_thing->unk24C8.x0_b0_b2 != 1U) &&
-        (big_thing->unk24C8.x2_b5 != 0) && (&if_802F7D08 != NULL))
+    if (big_thing->x24C8.x0_0 != 1 &&
+        big_thing->x24C8.x2_5 != 0 && &if_802F7D08 != NULL)
     {
         if_802F7D08(player_idx);
     }
@@ -540,20 +540,11 @@ void ifStatus_802F6E3C(s32 player_num)
     ifStock_802FB6AC(player_num);
 }
 
-void ifStatus_802F6EA4(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ifStatus_802F6EA4
 
-void ifStatus_802F7034(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ifStatus_802F7034
 
-void ifStatus_802F7134(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #ifStatus_802F7134
 
 // free
 void ifStatus_802F7220(void)

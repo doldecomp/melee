@@ -4,7 +4,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "gm/forward.h" // IWYU pragma: export
+#include <melee/gm/forward.h> // IWYU pragma: export
+#include <melee/mn/types.h>
 
 #include <common_structs.h>
 
@@ -248,14 +249,8 @@ struct gmm_x0 {
     /* 0x0584 */ M2C_UNK unk_584; /* inferred */
     /* 0x0588 */ s8 unk_588[4];   /* inferred */
     /* 0x0590 */ char pad_58B[4]; /* inferred */
-    /* 0x0590 */ s8 unk_590;      /* inferred */
-    /* 0x0591 */ char pad_591[3]; /* maybe part of unk_590[4]? */
-    /* 0x0594 */ char unk_594;
-    /* 0x0595 */ char pad_595[3]; /* maybe part of unk_594[4]? */
-    /* 0x0598 */ char unk_598;
-    /* 0x0599 */ char pad_599[1];
-    /* 0x059A */ s16 unk_59A;
-    /* 0x05A0 */ char pad_59C[0x12B4]; /* maybe part of x588[0x4B0]? */
+    /* 0x0590 */ VsModeData unk_590;
+    /* 0x05A0 */ char pad_6D0[0x1850 - 0x6D0];
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
@@ -290,53 +285,56 @@ struct lbl_8046B6A0_t {
     /* 0x0001 */ u8 unk_1;
     /* 0x0002 */ u8 unk_2;
     /* 0x0003 */ u8 unk_3;
-    /* 0x0004 */ u32 unk_4;
-    /* 0x0008 */ u32 unk_8;
+    /* 0x0004 */ u8 unk_4;
+    /* 0x0005 */ u8 unk_5;
+    /* 0x0006 */ u8 unk_6;
+    /* 0x0007 */ u8 unk_7;
+    /* 0x0008 */ u8 unk_8;
+    /* 0x0009 */ u8 unk_9;
+    /* 0x000A */ u8 unk_A;
+    /* 0x000B */ u8 unk_B;
     /* 0x000C */ u8 unk_C;
     /* 0x000D */ u8 unk_D;
     /* 0x000E */ u8 unk_E;
     /* 0x000F */ u8 unk_F;
     /* 0x0010 */ s32 unk_10;
     /* 0x0014 */ s32 unk_14;
-    /* 0x0018 */ char pad_18[0xC]; /* maybe part of unk_14[4]? */
+    /* 0x0018 */ UNK_T unk_18; /* maybe part of unk_14[4]? */
+    /* 0x001C */ UNK_T unk_1C;
+    /* 0x0020 */ UNK_T unk_20;
     /* 0x0024 */ s32 unk_24;
     /* 0x0028 */ s32 unk_28;
     /* 0x002C */ u16 unk_2C;
     /* 0x002E */ char pad_2E[6]; /* maybe part of unk_2C[4]? */
     /* 0x0034 */ f32 unk_34;
-    /* 0x0038 */ char pad_38[0x2490]; /* maybe part of unk_34[0x925]? */
-    /* 0x24C8 */ Placeholder_8016AE38_flags_2 unk24C8;
-    /* 0x24CB */ char pad_24CB[1];
-    /* 0x24CC:0 */ u8 unk_24CC_b0 : 1;
-    /* 0x24CC:1 */ u8 unk_24CC_b1 : 1;
-    /* 0x24CC:2 */ u8 unk_24CC_b2 : 1;
-    /* 0x24CC:3 */ u8 unk_24CC_b3 : 1;
-    /* 0x24CC:4 */ u8 unk_24CC_b4 : 1;
-    /* 0x24CC:5 */ u8 unk_24CC_b5 : 1;
-    /* 0x24CC:6 */ u8 unk_24CC_b6 : 1;
-    /* 0x24CC:7 */ u8 unk_24CC_b7 : 1;
-    /* 0x24CD:0 */ u8 unk_24CD_b0 : 1;
-    /* 0x24CD:1 */ u8 unk_24CD_b1 : 1;
-    /* 0x24CD:2 */ u8 unk_24CD_b2 : 1;
-    /* 0x24CD:3 */ u8 unk_24CD_b3 : 1;
-    /* 0x24CD:4 */ u8 unk_24CD_b4 : 1;
-    /* 0x24CD:5 */ u8 unk_24CD_b5 : 1;
-    /* 0x24CD:6 */ u8 unk_24CD_b6 : 1;
-    /* 0x24CD:7 */ u8 unk_24CD_b7 : 1;
-    /* 0x24CE */ u8 unk_24CE;
-    /* 0x24CF */ char pad_24CF[1];
-    /* 0x24D0 */ s8 unk_24D0;
-    /* 0x24D1 */ char pad_24D1[2]; /* maybe part of unk_24D0[3]? */
-    /* 0x24D3 */ s8 unk_24D3;
-    /* 0x24D4 */ s8 unk_24D4;
-    /* 0x24D5 */ char pad_24D5[1];
-    /* 0x24D6 */ u16 unk_24D6;
-    /* 0x24D8 */ char pad_24D8[0x10]; /* maybe part of unk_24D6[9]? */
-    /* 0x24E8 */ u64 unk_24E8;
-    /* 0x24F0 */ s32 unk_24F0;
-    /* 0x24F4 */ char pad_24F4[4];
-    /* 0x24F8 */ f32 unk_24F8;        /* inferred */
-    /* 0x24FC */ char pad_24FC[0x2C]; /* maybe part of unk_24F8[0xC]? */
+    /* 0x0038 */ struct {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        s8 x3;
+        u8 x4_b0 : 1;
+        u8 x4_b1 : 1;
+        u8 x4_b2 : 1;
+        u8 x4_b3 : 1;
+        u8 x4_b4 : 1;
+        u8 x4_b5 : 1;
+        u8 x4_b6 : 1;
+        u8 x4_b7 : 1;
+        u8 x5;
+        u16 x6;
+        u16 x8;
+        u8 xA;
+        u8 xB;
+        u16 xC;
+    } unk_38[6];
+    /* 0x0038 */ char pad_8C[0x250 - 0x8C]; /* maybe part of unk_34[0x925]? */
+    /* 0x0250 */ u8 unk_250;
+    /* 0x0251 */ u8 unk_251;
+    /* 0x0252 */ u8 unk_252;
+    /* 0x0254 */ u32 unk_254;
+    /* 0x0258 */ u8 unk_258;
+    /* 0x025C */ u32 pad_25C[(0x24C8 - 0x25C) / 4];
+    /* 0x24C8 */ struct StartMeleeRules x24C8;
 }; /* size = 0x2528 */
 STATIC_ASSERT(sizeof(struct lbl_8046B6A0_t) == 0x2528);
 

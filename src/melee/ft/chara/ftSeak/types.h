@@ -48,7 +48,8 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     f32 x64;
     f32 x68;
     f32 x6C;
-    u8 data_filler_1[0x04];
+    f32 x70;
+    //u8 data_filler_1[0x04];
 } ftSeakAttributes;
 
 typedef struct itChainSegment {

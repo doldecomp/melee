@@ -28,8 +28,8 @@
 /* 068E98 */ Fighter_GObj* Fighter_Create(struct S_TEMP1* input);
 /* 0693AC */ void Fighter_ChangeMotionState(Fighter_GObj* gobj,
                                             FtMotionId msid, MotionFlags flags,
-                                            float anim_start, float anim_speed,
-                                            float anim_blend,
+                                            f32 anim_start, f32 anim_speed,
+                                            f32 anim_blend,
                                             Fighter_GObj* arg3);
 /* 06A1BC */ void Fighter_8006A1BC(Fighter_GObj* gobj);
 /* 06A360 */ void Fighter_8006A360(Fighter_GObj* gobj);

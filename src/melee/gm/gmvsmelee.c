@@ -2,19 +2,16 @@
 #include "mn/forward.h"
 #include "gm/gmvsmelee.static.h"
 #include "gmvsmelee.h"
-#include "string.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_1A3F.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbdvd.h"
-#include "lb/lbtime.h"
 
-#include <melee/gm/types.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lbdvd.h>
 
 /* 4D6730 */ extern u8 gm_804D6730;
 
-s8* gm_801A5244(void)
+VsModeData* gm_801A5244(void)
 {
     return &gmMainLib_804D3EE0->unk_590;
 }
@@ -55,27 +52,18 @@ void gm_801A5598_OnInit(void)
     gmMainLib_8015CDEC();
 }
 
-void gm_801A55C4(void)
-{
-    memzero(&gm_804D6730, 6);
-}
+/// #gm_801A55C4
 
-void gm_801A55EC_OnLoad(void)
-{
-    memzero(&gm_804D6730, 6);
-}
+/// #gm_801A55EC_OnLoad
 
 void gm_801A5614_OnUnload(void) {}
 
-void gm_801A5618(MinorScene* minor_data, VsModeData* vs_data, u8 match_type)
+void gm_801A5618(MinorScene* arg0, VsModeData* arg1, int arg2)
 {
-    CSSData* css;
-
-    css = gm_801A427C(minor_data);
-    css->match_type = match_type;
-    css->ko_star_counts = &gm_804D6730;
-    // TODO :: wrong size load and wrong order?
-    css->data = *vs_data;
+    CSSData* css_data = gm_801A427C(arg0);
+    css_data->match_type = arg2;
+    css_data->ko_star_counts = &gm_804D6730;
+    css_data->data = *arg1;
     lbDvd_800174BC();
 }
 

@@ -13,6 +13,25 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/mp/mpcoll.h>
 
+struct lbl_803D9D20_t {
+    /*  +0 */ char pad_0[0xB0];
+    /* +B0 */ HSD_CObj* cobj;
+    /* +B4 */ char pad_B4[0xD8 - 0xB4];
+    /* +D8 */ Vec3 eye_position;
+    /* +E4 */ char pad_E4[0xEC - 0xE4];
+    /* +EC */ Vec3 interest;
+};
+
+static struct lbl_803D9D20_t lbl_803D9D20;
+static UNK_T lbl_80472C30[32];
+static UNK_T lbl_80472CB0[30];
+static struct lbl_80472D28_t lbl_80472D28;
+static struct lbl_80472E48_t lbl_80472E48;
+static int lbl_80472EC8[4];
+static u8 lbl_80473594[0x14];
+static int lbl_80473700[69];
+static UNK_T gm_804771C4[349];
+
 /// #fn_8017C0C8
 
 /// #fn_8017C1A4
