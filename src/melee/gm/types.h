@@ -4,6 +4,7 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "baselib/forward.h"
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/mn/types.h>
 
@@ -431,6 +432,15 @@ struct MatchExitInfo {
     int x4;
     int x8;
     struct MatchEnd match_end;
+};
+
+struct PauseData {
+    HSD_JObj* background;
+    HSD_JObj* analog_stick;
+    HSD_JObj* lras;
+    HSD_JObj* z;
+    HSD_JObj* analog_stick_outline;
+    u32 slot;
 };
 
 #endif
