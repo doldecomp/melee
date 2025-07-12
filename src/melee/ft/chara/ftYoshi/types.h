@@ -11,7 +11,7 @@ struct ftYoshi_FighterVars {
     /* 0x2238 */ u32 x2238;
 };
 
-typedef struct _ftYoshiAttributes {
+typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     s32 x0;
     float x4;
     float x8;
@@ -24,7 +24,6 @@ typedef struct _ftYoshiAttributes {
     float x24;
     s32 x28;
     s32 x2C;
-    // additions to match ftYs_SpecialN_8012CDB4
     f32 x30;
     f32 x34;
     f32 x38;
@@ -32,7 +31,10 @@ typedef struct _ftYoshiAttributes {
     f32 x40;
     f32 x44;
     // u8 data_filler1[0xEF];
-    u8 data_filler1[0xD7]; // subtracting 18
+    u8 data_filler1[0xCA];
+    float x114;
+    float x118;
+    float x11C;
     float x120;
     u8 data_filler2[0x14];
 } ftYoshiAttributes;
