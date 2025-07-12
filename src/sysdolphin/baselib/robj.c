@@ -16,6 +16,7 @@
 
 #include <__mem.h>
 #include <math.h>
+#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
@@ -24,8 +25,6 @@ HSD_ObjAllocData rvalue_alloc_data; // rvalue_alloc_data
 
 static float* arg_buf;
 static u32 arg_buf_size;
-
-extern const f64 HSD_RObj_804DE6A0; // 1.75
 
 void HSD_RObjInitAllocData(void)
 {
@@ -91,7 +90,7 @@ static void RObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     }
 
     robj = (HSD_RObj*) obj;
-    if (val->fv >= HSD_RObj_804DE6A0) {
+    if (val->fv >= 0.5) {
         robj->flags = robj->flags | 0x80000000;
         return;
     }
@@ -305,16 +304,130 @@ static void resolveCnsDirUp(HSD_RObj* robj, void* obj,
     }
 }
 
-int HSD_RObj_80406E74[3] = { 0x32, 0x33, 0x34 };
-
-#pragma push
-#pragma dont_inline on
-static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
-                                  HSD_ObjUpdateFunc update_func)
+static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 {
-    NOT_IMPLEMENTED;
+    if (jobj == NULL) {
+        return NULL;
+    }
+    return jobj->parent;
 }
-#pragma pop
+
+static int HSD_RObj_80406E74[3] = { 0x32, 0x33, 0x34 };
+
+void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*, int, HSD_ObjData*))
+{
+    HSD_JObj* jobj;
+    int i;
+    float var_f1;
+    float x, y, z;
+    Vec3 v;
+
+    Mtx sp80;
+    HSD_ObjData sp70;
+    Mtx sp40;
+
+    HSD_ASSERT(0x276, obj);
+
+    if (robj == NULL) {
+        robj = NULL;
+    } else {
+        while (robj != NULL) {
+            if (((robj->flags & 0x80000000) ? 1 : 0) &&
+                (robj->flags & 0x70000000) == 0x10000000 &&
+                (robj->flags & 0x0FFFFFFF) == 4) {
+                break;
+            }
+            robj = robj->next;
+        }
+    }
+    if (robj == NULL) {
+        return;
+    }
+    if (!(HSD_JObjGetFlags(robj->u.jobj) & 8) || jobj_parent(robj->u.jobj) == NULL) {
+        PSMTXCopy(HSD_JObjGetMtxPtr(robj->u.jobj), sp80);
+        jobj = obj;
+
+        for (i = 0; i < 3; i++) {
+            sp70.p.x = sp80[0][i];
+            sp70.p.y = sp80[1][i];
+            sp70.p.z = sp80[2][i];
+            var_f1 = VECMag(&sp70.p);
+            if (var_f1 > 1e-10F) {
+                var_f1 = 1.0F / var_f1;
+            }
+            v.x = SQ(jobj->mtx[0][i]);
+            v.y = SQ(jobj->mtx[1][i]);
+            v.z = SQ(jobj->mtx[2][i]);
+            var_f1 *= sqrtf(v.x + v.y + v.z);
+            sp70.p.x *= var_f1;
+            sp70.p.y *= var_f1;
+            sp70.p.z *= var_f1;
+            arg2(obj, HSD_RObj_80406E74[i], (HSD_ObjData* ) &sp70);
+        }
+    } else {
+        HSD_MtxInverseConcat(
+                HSD_JObjGetMtxPtr(jobj_parent(robj->u.jobj)),
+                HSD_JObjGetMtxPtr(robj->u.jobj), sp40);
+        jobj = obj;
+
+        for (i = 0; i < 3; i++) {
+            sp70.p.x = sp40[0][i];
+            sp70.p.y = sp40[1][i];
+            sp70.p.z = sp40[2][i];
+            var_f1 = VECMag(&sp70.p);
+            if (var_f1 > 1e-10F) {
+                var_f1 = 1.0F / var_f1;
+            }
+            v.x = SQ(jobj->mtx[0][i]);
+            v.y = SQ(jobj->mtx[1][i]);
+            v.z = SQ(jobj->mtx[2][i]);
+            var_f1 *= sqrtf(v.x + v.y + v.z);
+            sp70.p.x *= var_f1;
+            sp70.p.y *= var_f1;
+            sp70.p.z *= var_f1;
+            sp40[0][i] = sp70.p.x;
+            sp40[1][i] = sp70.p.y;
+            sp40[2][i] = sp70.p.z;
+        }
+
+        jobj = jobj_parent(robj->u.jobj);
+        while (jobj != NULL) {
+            if (jobj_parent(jobj) != NULL) {
+                HSD_MtxInverseConcat(
+                        HSD_JObjGetMtxPtr(jobj_parent(jobj)),
+                        HSD_JObjGetMtxPtr(jobj), sp80);
+            } else {
+                PSMTXCopy(HSD_JObjGetMtxPtr(jobj), sp80);
+            }
+
+            for (i = 0; i < 3; i++) {
+                sp70.p.x = sp80[0][i];
+                sp70.p.y = sp80[1][i];
+                sp70.p.z = sp80[2][i];
+                var_f1 = VECMag(&sp70.p);
+                if (var_f1 > 1e-10F) {
+                    var_f1 = 1.0F / var_f1;
+                }
+                sp70.p.x *= var_f1;
+                sp70.p.y *= var_f1;
+                sp70.p.z *= var_f1;
+                sp80[0][i] = sp70.p.x;
+                sp80[1][i] = sp70.p.y;
+                sp80[2][i] = sp70.p.z;
+            }
+            PSMTXConcat(sp80, sp40, sp40);
+            jobj = jobj_parent(jobj);
+        }
+
+        for (i = 0; i < 3; i++) {
+            sp70.p.x = sp40[0][i];
+            sp70.p.y = sp40[1][i];
+            sp70.p.z = sp40[2][i];
+            arg2(obj, HSD_RObj_80406E74[i], &sp70);
+        }
+    }
+    arg2(obj, 0x37, NULL);
+}
 
 static void resolveLimits(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
 {
@@ -560,6 +673,8 @@ void HSD_RObjFree(HSD_RObj* robj)
 {
     HSD_ObjFree(&robj_alloc_data, robj);
 }
+
+static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
 
 extern float HSD_ByteCodeEval(u8*, float*, u32);
 
