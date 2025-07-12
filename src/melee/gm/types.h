@@ -435,12 +435,12 @@ struct MatchExitInfo {
 };
 
 struct PauseData {
-    HSD_JObj* background;
-    HSD_JObj* analog_stick;
-    HSD_JObj* lras;
-    HSD_JObj* z;
-    HSD_JObj* analog_stick_outline;
-    u32 slot;
+/* +0 */ HSD_JObj* background;
+/* +4 */ HSD_JObj* analog_stick;
+/* +8 */ HSD_JObj* lras;
+/* +C */ HSD_JObj* z;
+/* +10 */ HSD_JObj* analog_stick_outline;
+/* +14 */ s32 slot;
 };
 
 #endif
