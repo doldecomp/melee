@@ -888,7 +888,90 @@ u8 gm_801737D8(void)
 
 /// #gm_80173DE4
 
-/// #gm_80173EEC
+bool gm_80173EEC_inline()
+{
+    int i;
+    bool result = true;
+
+    for (i = 0; i < 0x100; i++) {
+        if (i != 0x29 && i - 0x42 > 1U && i != 0xB9 &&
+            i - 0xC9 > 1U && i != 9 && gmMainLib_8015DADC(i) == 0) {
+            result = false;
+            break;
+        }
+    }
+    return result;
+}
+
+void gm_80173EEC(void)
+{
+    int i;
+    u16* temp_r29;
+    u8 temp_r3;
+
+    for (i = 0; i < 0x19; i++) {
+        temp_r29 = &gmMainLib_8015EDBC()->x18[i];
+        if (*temp_r29 >= 0x64) {
+            temp_r3 = gm_8016400C(i);
+            fn_80172C78(gm_80160474(temp_r3, 3));
+            if (temp_r3 == 0x12) {
+                fn_80172C78(gm_80160474(0x13, 3));
+            }
+            if (temp_r3 == 0x13) {
+                fn_80172C78(gm_80160474(0x12, 3));
+            }
+        }
+        if (*temp_r29 >= 0xC8) {
+            temp_r3 = gm_8016400C(i);
+            fn_80172C78(gm_80160474(temp_r3, 4));
+            if (temp_r3 == 0x12) {
+                fn_80172C78(gm_80160474(0x13, 4));
+            }
+            if (temp_r3 == 0x13) {
+                fn_80172C78(gm_80160474(0x12, 4));
+            }
+        }
+        if (*temp_r29 >= 0x12C) {
+            temp_r3 = gm_8016400C(i);
+            fn_80172C78(gm_80160474(temp_r3, 5));
+            if (temp_r3 == 0x12) {
+                fn_80172C78(gm_80160474(0x13, 5));
+            }
+            if (temp_r3 == 0x13) {
+                fn_80172C78(gm_80160474(0x12, 5));
+            }
+        }
+    }
+
+    if (fn_80164B48() != 0) {
+        fn_80172C78(0xA0);
+    }
+    if (gm_80164ABC() != 0) {
+        fn_80172C78(0x9F);
+    }
+    if (gmMainLib_8015EE90() != 0) {
+        fn_80172C78(0xDC);
+    }
+    if (gmMainLib_8015EDBC()->x14 >= 0x2710) {
+        fn_80172C78(0x10C);
+    }
+    if (gmMainLib_8015D94C(0x1A) != 0) {
+        fn_80172C78(0x96);
+    }
+    if (un_803045A0() != 0) {
+        fn_80172C78(0x116);
+    }
+    if (un_80304690() != 0) {
+        fn_80172C78(0xAF);
+    }
+    if (un_80304780() != 0) {
+        fn_80172C78(0x100);
+    }
+
+    if (gm_80173EEC_inline()) {
+        fn_80172C78(0x123);
+    }
+}
 
 /// #gm_80174180
 

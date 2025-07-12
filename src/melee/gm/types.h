@@ -168,7 +168,10 @@ struct gmm_retval_EDBC {
     s32 x0;
     s32 x4;
     s32 x8;
-    u8 padding[0x4C - 0x8 - 4];
+    u8 padding[0x14 - 0xC];
+    u32 x14;
+    u16 x18[2];
+    u8 pad_x1C[0x4C - 0x1C];
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
     s32 xB0[4];
