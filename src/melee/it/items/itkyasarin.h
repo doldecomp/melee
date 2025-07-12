@@ -8,8 +8,8 @@
 #include "it/items/types.h"
 
 /* 2ECCDC */ void it_802ECCDC(Item_GObj*);
-/* 2ECD1C */ UNK_RET it_802ECD1C(UNK_PARAMS);
-/* 2ECD3C */ UNK_RET it_802ECD3C(UNK_PARAMS);
+/* 2ECD1C */ UNK_RET it_802ECD1C(Item_GObj*, Vec3*);
+/* 2ECD3C */ HSD_GObj* it_802ECD3C(HSD_GObj*, Point3d*, f32);
 /* 2ECE90 */ void it_802ECE90(Item_GObj*);
 /* 2ECEB0 */ UNK_RET it_802ECEB0(UNK_PARAMS);
 /* 2ECF00 */ UNK_RET it_802ECF00(UNK_PARAMS);

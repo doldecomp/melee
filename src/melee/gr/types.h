@@ -363,6 +363,49 @@ struct grIceMt_GroundVars2 {
     /* +0 gp+D8 */ HSD_JObj* xF4;
 };
 
+struct grInishie2_GroundVars {
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xC4_flags;
+    s16 xC6;
+    s16 xC8;
+    s16 xCA;
+    s16 xCC;
+    Vec3 xD8;
+};
+
+// probably Cathrine (Birdo)
+struct grInishie2_GroundVars2 {
+    Item_GObj* xC4;
+    HSD_GObj* xC8;
+    HSD_GObj* xCC;
+};
+
+struct grInishie2_GroundVars3 {
+    s16 xC4;
+    s16 xC6;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xC8_flags;
+    s16 xCA;
+    Vec3 xCC;
+    Vec3 xD8;
+};
+
 struct grStadium_GroundVars {
     /* +0 gp+C4:0 */ u8 xC4_b0 : 1;
     /* +0 gp+C4:1 */ u8 xC4_b1 : 1;
@@ -555,6 +598,9 @@ struct Ground {
             struct grFourside_GroundVars fourside;
             struct grIceMt_GroundVars icemt;
             struct grIceMt_GroundVars2 icemt2;
+            struct grInishie2_GroundVars inishie2;
+            struct grInishie2_GroundVars2 inishie22;
+            struct grInishie2_GroundVars3 inishie23;
             struct GroundVars_izumi izumi;
             struct GroundVars_izumi2 izumi2;
             struct GroundVars_izumi3 izumi3;
