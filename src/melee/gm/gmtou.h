@@ -3,10 +3,10 @@
 
 #include "placeholder.h"
 
-/* 19B8C4 */ void gm_8019B8C4_OnEnter(UNK_T);
-/* 19B9C8 */ void gm_8019B9C8_OnLeave(UNK_T);
+/* 19B8C4 */ void gm_8019B8C4_OnEnter(void*);
+/* 19B9C8 */ void gm_8019B9C8_OnLeave(void*);
 /* 19BA04 */ void fn_8019BA04(void);
-/* 19BA08 */ UNK_RET fn_8019BA08(UNK_PARAMS);
+/* 19BA08 */ void fn_8019BA08(UNK_PARAMS);
 /* 19BF18 */ UNK_RET fn_8019BF18(UNK_PARAMS);
 /* 19BF8C */ UNK_RET fn_8019BF8C(UNK_PARAMS);
 /* 19C048 */ UNK_RET fn_8019C048(UNK_PARAMS);
