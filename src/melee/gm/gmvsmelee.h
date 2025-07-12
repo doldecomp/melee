@@ -23,7 +23,7 @@
     void (*callback)(StartMeleeData*, StartMeleeData*),
     void (*callback2)(PlayerInitData*, PlayerInitData*)); /// Match_Enter
 /* 1A5AF0 */ void gm_801A5AF0(MinorScene*, u32, u32); // Match_Exit
-/* 1A5C3C */ void gm_801A5C3C(MinorScene*, struct VsModeData*, 
+/* 1A5C3C */ void gm_801A5C3C(MinorScene*, struct VsModeData*,
     void (*callback)(StartMeleeData*, StartMeleeData*),
     void (*callback2)(PlayerInitData*, PlayerInitData*)); /// SuddenDeath_Enter ??
 /* 1A5EC8 */ void gm_801A5EC8(MinorScene*); /// SuddenDeath_Exit ??
