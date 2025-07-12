@@ -53,7 +53,9 @@ s32 gm_801A5360(MatchEnd* match_end)
     s32 i;
     u8 player;
     s32 loser;
-    u32 losers[6];
+    s32 losers[6];
+
+    loser = 0xFFFF;
 
     if (match_end->is_teams == 1) {
         for (i = 0; i < 6; i++) {
@@ -68,7 +70,7 @@ s32 gm_801A5360(MatchEnd* match_end)
     }
 
     for (i = 0; i < 6; i++) {
-        if ((match_end->player_standings[i].slot_type == 0) && (losers[i] < 0xFFFF)) {
+        if ((match_end->player_standings[i].slot_type == 0) && (losers[i] < loser)) {
             loser = losers[i];
             player = i;
         }
