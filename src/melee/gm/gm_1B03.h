@@ -2,6 +2,7 @@
 #define MELEE_GM_1B03_H
 
 #include <placeholder.h>
+#include "mn/forward.h"
 #include <melee/gm/forward.h>
 
 struct gm_801B0FF8_arg0_x10_t {
@@ -51,8 +52,8 @@ struct gm_8049E548_t {
 }; /* size = 0x10 */
 STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 
-/* 1B0348 */ UNK_RET gm_801B0348(UNK_PARAMS);
-/* 1B0474 */ UNK_RET gm_801B0474(UNK_PARAMS);
+/* 1B0348 */ void gm_801B0348(StartMeleeData*); /// Character tints?
+/* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
 /* 1B05F4 */ UNK_RET gm_801B05F4(UNK_PARAMS);
 /* 1B0620 */ UNK_RET gm_801B0620(UNK_PARAMS);
 /* 1B0664 */ UNK_RET gm_801B0664(UNK_PARAMS);
