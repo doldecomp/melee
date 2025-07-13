@@ -396,7 +396,7 @@ struct SSSData {
     u8 x1;
     u8 no_lras;
     u8 force_stage_id;
-    bool start_game;
+    u8 start_game;
     VsModeData data;
 };
 
