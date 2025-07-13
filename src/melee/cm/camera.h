@@ -7,9 +7,7 @@
 #include "cm/forward.h"
 #include <baselib/forward.h>
 
-#include "cm/types.h"
 #include "dolphin/gx/GXStruct.h"
-#include "dolphin/types.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>
@@ -25,23 +23,23 @@
 /* 02958C */ UNK_RET Camera_8002958C(UNK_PARAMS);
 /* 029AAC */ void Camera_80028F5C(CameraBox*, s32);
 /* 029BC4 */ void Camera_80029BC4(CameraBounds* bounds,
-                                  CameraMovement* movement);
-/* 029C88 */ void Camera_80029C88(CameraBounds*, CameraMovement* movement, f32);
+                                  CameraTransformState* transform);
+/* 029C88 */ void Camera_80029C88(CameraBounds*, CameraTransformState* transform, f32);
 /* 029CF8 */ UNK_RET Camera_80029CF8(UNK_PARAMS);
 /* 02A0C0 */ UNK_RET Camera_8002A0C0(UNK_PARAMS);
 /* 02A278 */ void Camera_8002A278(float x, float y);
 /* 02A28C */ UNK_RET Camera_8002A28C(UNK_PARAMS);
 /* 02A4AC */ void Camera_8002A4AC(HSD_GObj*);
-/* 02A768 */ void Camera_8002A768(CameraMovement* movement, int arg1);
-/* 02AF68 */ void Camera_8002AF68(HSD_CObj*, CameraMovement*);
+/* 02A768 */ void Camera_8002A768(CameraTransformState* transform, int arg1);
+/* 02AF68 */ void Camera_8002AF68(HSD_CObj*, CameraTransformState*);
 /* 02B0E0 */ void Camera_8002B0E0(void);
-/* 02B1F8 */ void Camera_8002B1F8(CameraMovement* movement);
+/* 02B1F8 */ void Camera_8002B1F8(CameraTransformState* transform);
 /* 02B3D4 */ void Camera_8002B3D4(void*);
 /* 02B694 */ UNK_RET Camera_8002B694(UNK_PARAMS);
 /* 02BA00 */ s32 Camera_8002BA00(s32 port, s32 arg1);
 /* 02BAA8 */ void Camera_8002BAA8(f32);
 /* 02BC78 */ s32 Camera_8002BC78(Vec3*, Vec3*, Vec3*);
-/* 02BD88 */ UNK_RET Camera_8002BD88(UNK_PARAMS);
+/* 02BD88 */ void Camera_8002BD88(f32, f32);
 /* 02C010 */ UNK_RET Camera_8002C010(UNK_PARAMS);
 /* 02C1A8 */ UNK_RET Camera_8002C1A8(UNK_PARAMS);
 /* 02C5B4 */ UNK_RET Camera_8002C5B4(UNK_PARAMS);
@@ -67,7 +65,7 @@
 /* 02F0E4 */ void Camera_8002F0E4(s32);
 /* 02F260 */ bool Camera_8002F260(void);
 /* 02F274 */ void Camera_8002F274(void);
-/* 02F360 */ void fn_8002F360(void*);
+/* 02F360 */ void fn_8002F360(HSD_GObj*);
 /* 02F3AC */ void Camera_8002F3AC(void);
 /* 02F474 */ void Camera_8002F474(void);
 /* 02F488 */ s32 fn_8002F488(Vec4* arg0);
@@ -90,7 +88,7 @@
 /* 030154 */ bool Camera_80030154(void);
 /* 030178 */ bool Camera_80030178(void);
 /* 03019C */ Vec3* Camera_8003019C(void);
-/* 0301D0 */ UNK_RET fn_800301D0(UNK_PARAMS);
+/* 0301D0 */ void fn_800301D0(HSD_GObj*, int);
 /* 0304E0 */ UNK_RET Camera_800304E0(UNK_PARAMS);
 /* 030688 */ UNK_RET Camera_80030688(UNK_PARAMS);
 /* 030730 */ void Camera_80030730(f32 arg8);

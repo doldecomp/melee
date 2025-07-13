@@ -26,6 +26,7 @@ typedef struct HSD_Envelope HSD_Envelope;
 typedef struct HSD_EnvelopeDesc HSD_EnvelopeDesc;
 typedef struct HSD_Exp HSD_Exp;
 typedef struct HSD_ExpDesc HSD_ExpDesc;
+typedef struct _HSD_FObj HSD_FObj;
 typedef struct HSD_Fog HSD_Fog;
 typedef struct HSD_FogAdj HSD_FogAdj;
 typedef struct HSD_FogAdjDesc HSD_FogAdjDesc;

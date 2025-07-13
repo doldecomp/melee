@@ -14,6 +14,7 @@ typedef struct CSSTagData CSSTagData;
 typedef struct CSSTag CSSTag;
 typedef struct CSSKOStar CSSKOStar;
 typedef struct CSSDoorsData CSSDoorsData;
+typedef struct SSSData SSSData;
 
 typedef enum _Mode {
     Mode_Time,
