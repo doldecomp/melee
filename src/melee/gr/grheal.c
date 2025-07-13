@@ -126,7 +126,7 @@ void grHeal_8021F4BC(Ground_GObj*) {}
 void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
 {
     if ((((*(u8*)((u8*)arg4 + 0x34) >> 3U) & 0xF) == 1)
-            && ((arg6 - 1) <= 1U)) 
+            && ((arg6 - 1) <= 1U))
         {
             gp->gv.unk.xC4 = 1;
         }
@@ -220,7 +220,7 @@ u32 grHeal_8021F70C(u32 character_id)
     }
 
     entry = (s32*)&grHeal_803E851C[0xD];
-    
+
     while (entry[frame] != -1 && entry[frame] != character_id) {
         frame++;
     }
