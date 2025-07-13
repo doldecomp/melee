@@ -3,6 +3,7 @@
 
 #include <baselib/forward.h>
 
+void fn_801140B0(HSD_GObj* gobj);
 /* 1142E8 */ void ftSk_SpecialLw_Anim(HSD_GObj* gobj);
 /* 1143D4 */ void ftSk_SpecialLw_Coll(HSD_GObj* gobj);
 /* 114524 */ void ftSk_SpecialLw2_Anim(HSD_GObj* gobj);

@@ -2161,16 +2161,16 @@ void grStadium_801D4548(Ground_GObj* gobj)
             temp_r31->u.stadium.xE0 = temp_r31->u.stadium.xDE;
             temp_r31->u.stadium.xDE = var_r4;
 
-            if (var_r4 == 5) {
+            if (var_r4 == 5) { // default
                 temp_r31->u.stadium.xDC = 2;
                 return;
-            } else if (var_r4 == 3) {
+            } else if (var_r4 == 3) { // fire
                 var_r29 = 0;
-            } else if (var_r4 == 4) {
+            } else if (var_r4 == 4) { // grass
                 var_r29 = 1;
-            } else if (var_r4 == 9) {
+            } else if (var_r4 == 9) { // water
                 var_r29 = 2;
-            } else if (var_r4 == 6) {
+            } else if (var_r4 == 6) { // rock
                 var_r29 = 3;
             } else {
                 __assert("grpstadium.c", 0xA44, "0");
