@@ -433,4 +433,8 @@ struct MatchExitInfo {
     struct MatchEnd match_end;
 };
 
+struct UnkAllstarData {
+    s8 pad_x0[0xA0];
+};
+
 #endif

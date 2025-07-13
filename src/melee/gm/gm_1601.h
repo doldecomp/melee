@@ -542,6 +542,6 @@
 /* 17BE8C */ UNK_RET gm_8017BE8C(UNK_PARAMS);
 /* 17BEC8 */ UNK_RET gm_8017BEC8(UNK_PARAMS);
 
-/* 473A18 */ extern UNK_T gm_80473A18;
+/* 473A18 */ extern struct UnkAllstarData gm_80473A18;
 
 #endif
