@@ -3,21 +3,23 @@
 #include "gr/grheal.h"
 #include "placeholder.h"
 #include "baselib/gobj.h"
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "dolphin/types.h"
 #include "gr/granime.h"
+#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/stage.h"
+#include "it/it_26B1.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "it/types.h"
+#include "gr/grheal.static.h"
 
-void grHeal_8021EF38(void) {}
-struct {
-    int x0;
-    int x4;
-}* yaku;
+void grHeal_8021EF38(int arg0) {}
 
-extern struct yaku *grHeal_804D6AF0;
 void grHeal_8021EF3C(void)
 {
     grHeal_804D6AF0 = Ground_801C49F8();
@@ -44,22 +46,52 @@ bool grHeal_8021EFE4(void)
     return false;
 }
 
-/// #grHeal_8021EFEC
+Ground_GObj* grHeal_8021EFEC(u32 idx)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grHeal_803E8454[idx];
+
+    gobj = Ground_801C14D0(idx);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 273, idx);
+    }
+
+    return gobj;
+}
 
 /// #grHeal_8021F0D8
 
-bool grHeal_8021F170(void)
+bool grHeal_8021F170(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F178(void) {}
+void grHeal_8021F178(Ground_GObj* gobj) {}
 
-void grHeal_8021F17C(void) {}
+void grHeal_8021F17C(Ground_GObj* gobj) {}
 
 /// #grHeal_8021F180
 
-bool grHeal_8021F41C(void)
+bool grHeal_8021F41C(Ground_GObj* gobj)
 {
     return false;
 }
@@ -89,7 +121,7 @@ void grHeal_8021F474(Ground_GObj* ground)
     gp->gv.flatzone2.xC4 = 0;
 }
 
-void grHeal_8021F4BC(void) {}
+void grHeal_8021F4BC(Ground_GObj*) {}
 
 void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
 {
@@ -99,54 +131,6 @@ void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
             gp->gv.unk.xC4 = 1;
         }
 }
-
-static char grHeal_803E851C[0x2C] = {
-    0x67,
-    0x72,
-    0x68,
-    0x65,
-    0x61,
-    0x6C,
-    0x2E,
-    0x63,
-    0,
-    0,
-    0,
-    0,
-    0x2A,
-    0x2A,
-    0x2A,
-    0x20,
-    0x4E,
-    0x6F,
-    0x74,
-    0x20,
-    0x66,
-    0x6F,
-    0x75,
-    0x6E,
-    0x64,
-    0x20,
-    0x4E,
-    0x65,
-    0x78,
-    0x74,
-    0x20,
-    0x50,
-    0x6C,
-    0x61,
-    0x79,
-    0x65,
-    0x72,
-    0x21,
-    0x28,
-    0x25,
-    0x64,
-    0x29,
-    0xA,
-    0,
-};
-static char grHeal_804D49E0[5] = "gobj";
 
 void grHeal_8021F4E8(s32 arg0, HSD_JObj* parent_jobj)
 {
@@ -161,26 +145,22 @@ void grHeal_8021F4E8(s32 arg0, HSD_JObj* parent_jobj)
     grAnime_801C8138(ground, 4, 0);
     grAnime_801C7FF8(ground, 0, 7, 0, (f32) arg0, 0.0f);
     jobj = GET_JOBJ(ground);
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
+    child = HSD_JObjGetChild(jobj);
     HSD_JObjReparent(child, parent_jobj);
     HSD_JObjClearFlagsAll(child, 0x10U);
     Ground_801C4A08(ground);
 }
 
-void grHeal_8021F5C8(void) {}
+void grHeal_8021F5C8(Ground_GObj* gobj) {}
 
-bool grHeal_8021F5CC(void)
+bool grHeal_8021F5CC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F5D4(void) {}
+void grHeal_8021F5D4(Ground_GObj* gobj) {}
 
-void grHeal_8021F5D8(void) {}
+void grHeal_8021F5D8(Ground_GObj* gobj) {}
 
 void grHeal_8021F5DC(Ground_GObj* ground)
 {
@@ -191,14 +171,14 @@ void grHeal_8021F5DC(Ground_GObj* ground)
     grAnime_801C8138(ground, gp->map_id, 0);
 }
 
-bool grHeal_8021F618(void)
+bool grHeal_8021F618(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F620(void) {}
+void grHeal_8021F620(Ground_GObj*) {}
 
-void grHeal_8021F624(void) {}
+void grHeal_8021F624(Ground_GObj*) {}
 
 void grHeal_8021F628(s32 arg0, HSD_JObj* jobj_parent)
 {
@@ -213,109 +193,69 @@ void grHeal_8021F628(s32 arg0, HSD_JObj* jobj_parent)
     grAnime_801C8138(ground, 2, 0);
     grAnime_801C7FF8(ground, 0, 7, 0, (f32) arg0, 0.0f);
     jobj = GET_JOBJ(ground);
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
+    child = HSD_JObjGetChild(jobj);
     HSD_JObjReparent(child, jobj_parent);
     Ground_801C4A08(ground);
 }
 
-void grHeal_8021F6F8(void) {}
+void grHeal_8021F6F8(Ground_GObj* gobj) {}
 
-bool grHeal_8021F6FC(void)
+bool grHeal_8021F6FC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F704(void) {}
+void grHeal_8021F704(Ground_GObj* gobj) {}
 
-void grHeal_8021F708(void) {}
-
-static s32 grHeal_803E83B8[0x27] = {
-    0x1D001E,
-    0x1F0020,
-    0x210022,
-    0x230024,
-    0x250026,
-    0x270028,
-    0x29002A,
-    0x2B002C,
-    0x2D002E,
-    0x2F0030,
-    0x310032,
-    0x330034,
-    0x350036,
-    0,
-    0x15,
-    1,
-    0x16,
-    0x14,
-    2,
-    0x19,
-    3,
-    0xE,
-    4,
-    5,
-    7,
-    6,
-    8,
-    9,
-    0xA,
-    0xB,
-    0x18,
-    0xC,
-    0xD,
-    0xF,
-    0x10,
-    0x11,
-    0x12,
-    0x17,
-    -1,
-};
+void grHeal_8021F708(Ground_GObj* gobj) {}
 
 u32 grHeal_8021F70C(u32 character_id)
 {
-    s32 temp_r0;
-    s32* var_r4;
-    u32 var_r3;
-    int i;
+    s32* entry;
+    int frame;
 
-    var_r3 = character_id;
-    // i = 0;
-    if (var_r3 == 0x13) {
-        var_r3 = 0x12;
+    frame = 0;
+    if ((s32)character_id == 0x13) {
+        character_id = 0x12;
     }
-//     var_r4 = &grHeal_803E851C[0xD];
-// loop_5:
-//     temp_r0 = *var_r4;
-//     if (temp_r0 != -1) {
-//         if ((s32) var_r3 != temp_r0) {
-//             var_r4 += 4;
-//             var_r6 += 1;
-//             goto loop_5;
-//         }
-//     }
 
-    for (i = 0; i < 0x27; i++) {
+    entry = (s32*)&grHeal_803E851C[0xD];
+    
+    while (entry[frame] != -1 && entry[frame] != character_id) {
+        frame++;
+    }
 
+    if (grHeal_803E83B8[frame] == -1) {
+        OSReport("*** Not found Next Player!(%d)\n", frame);
+        frame = 0;
     }
-    if (grHeal_803E83B8[i] == -1) {
-        OSReport("*** Not found Next Player!(%d)\n", i);
-        i = 0;
-    }
-    return i;
+    return frame;
 }
 
-/// #grHeal_8021F79C
+void grHeal_8021F79C(s32 arg0, s32 idx, s32 arg2)
+{
+    HSD_GObj* gp;
+    HSD_JObj* jobj;
+    BobOmbRain bobomb_rain;
+    PAD_STACK(4);
 
-bool grHeal_8021F830(void)
+    gp = Ground_801C2BA4(0);
+    jobj = Ground_801C3FA4(gp, idx);
+    bobomb_rain.x0 = gp;
+    bobomb_rain.x4 = NULL;
+    bobomb_rain.x14 = arg0;
+    bobomb_rain.x18 = arg2;
+    bobomb_rain.x1C.b0 = 1;
+    lb_8000B1CC(jobj, NULL, &bobomb_rain.x8_vec);
+    it_8026BE84(&bobomb_rain);
+}
+
+DynamicsDesc* grHeal_8021F830(int arg0)
 {
     return false;
 }
 
-bool grHeal_8021F838(void)
+bool grHeal_8021F838(Vec3* arg0, int arg1, HSD_JObj* jobj)
 {
     return true;
 }
