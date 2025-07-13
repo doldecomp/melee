@@ -85,7 +85,7 @@ struct PlayerInitData {
 };
 
 struct StartMeleeRules {
-    u32 x0_0 : 3;
+    u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
     u32 x0_3 : 3;
     u32 x0_6 : 1;
     u32 x0_7 : 1;
@@ -155,7 +155,8 @@ struct StartMeleeRules {
     float x30; // damage ratio
     float x34; // game speed
     void (*x38)(int);
-    u8 unk3C[0x44 - 0x3C];
+    void (*x3C)(int);
+    int (*x40)(void);
     void (*x44)(void);
     void (*x48)(void);
     void (*x4C)(void);

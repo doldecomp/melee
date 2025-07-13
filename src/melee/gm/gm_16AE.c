@@ -10,6 +10,7 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/gm/gmpause.h>
 #include <melee/gr/ground.h>
@@ -17,6 +18,7 @@
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>
 #include <melee/if/ifstatus.h>
+#include <melee/if/ifstock.h>
 #include <melee/if/iftime.h>
 #include <melee/it/it_266F.h>
 #include <melee/it/item.h>
@@ -52,7 +54,10 @@ struct StartMeleeRules* gm_8016AE50(void)
     return &lbl_8046B6A0.x24C8;
 }
 
-/// #fn_8016AE60
+UNK_T fn_8016AE60(void)
+{
+    return fn_80169364();
+}
 
 bool gm_8016AE80(void)
 {
@@ -94,20 +99,62 @@ u16 gm_8016AEFC(void)
     return lbl_8046B6A0.unk_2C;
 }
 
-/// #gm_8016AF0C
+u16 gm_8016AF0C(void)
+{
+    int tmp = 99.0F * lbl_8046B6A0.unk_2C / 59.0F;
+    u16 var_r31 = tmp;
+    if (!gm_8016B110()) {
+        var_r31 = 0x63 - var_r31;
+    }
+    return var_r31;
+}
 
-/// #gm_8016AF88
+bool gm_8016AF88(int* arg0)
+{
+    if (arg0 != NULL && lbl_8046B6A0.x24C8.x0_6) {
+        if (gm_8016B110()) {
+            *arg0 = lbl_8046B6A0.x24C8.x10 - lbl_8046B6A0.unk_28;
+        } else {
+            *arg0 = lbl_8046B6A0.unk_28;
+        }
+        return true;
+    }
+    return false;
+}
 
 u16 gm_8016B004(void)
 {
     return lbl_8046B6A0.x24C8.xE;
 }
 
-/// #gm_8016B014
+bool gm_8016B014(void)
+{
+    int i;
+    PAD_STACK(4);
 
-/// #gm_8016B094
+    if (lbl_8046B6A0.x24C8.x4_2 && gm_8016A1F8() == 0) {
+        for (i = 1; i < 6; i++) {
+            if (Player_GetPlayerState(i) != 0) {
+                i = -1;
+                break;
+            }
+        }
+        if (i > 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #gm_8016B0B4
+bool gm_8016B094(void)
+{
+    return lbl_8046B6A0.x24C8.x0_0 == 1;
+}
+
+bool gm_8016B0B4(void)
+{
+    return lbl_8046B6A0.x24C8.x0_0 == 2;
+}
 
 bool gm_8016B0D4(void)
 {
@@ -139,13 +186,28 @@ void fn_8016B138(void)
     lbl_8046B6A0.x24C8.x8 = 0;
 }
 
-/// #gm_8016B14C
+bool gm_8016B14C(void)
+{
+    return lbl_8046B6A0.x24C8.x8 == 0;
+}
 
-/// #gm_8016B168
+bool gm_8016B168(void)
+{
+    return lbl_8046B6A0.x24C8.x8 == 1;
+}
 
-/// #gm_8016B184
+bool gm_8016B184(void)
+{
+    if (lbl_8046B6A0.unk_7 == 1) {
+        return true;
+    }
+    return false;
+}
 
-/// #gm_8016B1A8
+bool gm_8016B1A8(void)
+{
+    return lbl_8046B6A0.x24C8.x9 == 1;
+}
 
 bool gm_8016B1C4(void)
 {
@@ -162,7 +224,14 @@ bool gm_8016B1EC(void)
     return lbl_8046B6A0.unk_0 == 0;
 }
 
-/// #gm_8016B204
+bool gm_8016B204(void)
+{
+    StartMeleeRules* rules = &lbl_8046B6A0.x24C8;
+    if (rules->x10 == 0 || !rules->x0_6) {
+        return true;
+    }
+    return false;
+}
 
 bool gm_8016B238(void)
 {
@@ -174,53 +243,125 @@ f32 gm_8016B248(void)
     return lbl_8046B6A0.x24C8.x30;
 }
 
-/// #gm_8016B258
+bool gm_8016B258(int arg0)
+{
+    return lbl_8046B6A0.unk_38[arg0].x4_b3;
+}
 
-/// #gm_SetGameSpeed
+void gm_SetGameSpeed(float speed)
+{
+    lb_80019880(1 / 60.0F / speed * OS_TIMER_CLOCK);
+}
 
-/// #gm_ResetGameSpeed
+void gm_ResetGameSpeed(void)
+{
+    lb_80019880(1 / 60.0F / lbl_8046B6A0.x24C8.x34 * OS_TIMER_CLOCK);
+}
 
 void gm_8016B328(void)
 {
-    M2C_FIELD(&lbl_8046B6A0, s8*, 6) = 1;
+    lbl_8046B6A0.unk_6 = 1;
 }
 
-void gm_8016B33C(s32 arg0)
+void gm_8016B33C(int arg0)
 {
-    M2C_FIELD(&lbl_8046B6A0, s8*, 0xB) = arg0 + 1;
+    lbl_8046B6A0.unk_B = arg0 + 1;
 }
 
-void gm_8016B350(s32 arg0)
+void gm_8016B350(int arg0)
 {
     lbl_8046B6A0.unk_10 = arg0 + 1;
 }
 
-void gm_8016B364(s32 arg0)
+void gm_8016B364(int arg0)
 {
     lbl_8046B6A0.unk_14 = arg0 + 1;
 }
 
 void gm_8016B378(s8 arg0)
 {
-    M2C_FIELD(&lbl_8046B6A0, s8*, 0x18) = arg0;
+    lbl_8046B6A0.unk_18 = arg0;
 }
 
-void fn_8016B388(ssize_t arg0, s16 arg1)
+void fn_8016B388(int arg0, s16 arg1)
 {
-    M2C_FIELD((&lbl_8046B6A0 + (arg0 * 0xE)), s16*, 0x3E) = arg1;
+    lbl_8046B6A0.unk_38[arg0].x6 = arg1;
 }
 
-/// #gm_8016B3A0
+bool gm_8016B3A0(void)
+{
+    if (gm_801A4310() == 0x10) {
+        return true;
+    }
+    return false;
+}
 
-/// #gm_8016B3D8
+bool gm_8016B3D8(void)
+{
+    switch (gm_801A4310()) {
+    case 3:
+    case 4:
+    case 5:
+        return true;
+    default:
+        return false;
+    }
+}
 
-/// #gm_8016B41C
+bool gm_8016B41C(void)
+{
+    switch (gm_801A4310()) {
+    case 3:
+    case 4:
+    case 5:
+    case 0xF:
+    case 0x1C:
+    case 0x20:
+    case 0x21:
+    case 0x22:
+    case 0x23:
+    case 0x24:
+    case 0x25:
+    case 0x26:
+    case 0x2B:
+        return true;
+    default:
+        return false;
+    }
+}
 
-/// #gm_8016B498
+static inline bool gm_8016B41C_dontinline(void)
+{
+    return gm_8016B41C();
+}
 
-/// #fn_8016B4BC
+bool gm_8016B498(void)
+{
+    return gm_801A4340(gm_801A4310());
+}
 
-/// #fn_8016B510
+bool fn_8016B4BC(void)
+{
+    u8 _[4];
+    s32 spC;
+    s32 sp8;
+
+    if (gm_8016B1A8()) {
+        Ground_801C1DE4(&sp8, &spC);
+        if (sp8 == 0) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool fn_8016B510(void)
+{
+    if (lbl_8046B6A0.x24C8.x9 == 2 && Ground_801C1D98()) {
+        return true;
+    }
+    return false;
+}
 
 #pragma push
 #pragma dont_inline on
@@ -238,49 +379,509 @@ int gm_8016B558(void)
 }
 #pragma pop
 
-/// #fn_8016B5B0
+float fn_8016B5B0(void)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    int count;
+    int i;
+    PAD_STACK(4);
 
-/// #gm_8016B6E8
+    if (gm_8016B41C()) {
+        float var_f1 = 3.0F;
+        if (lbl_8046B6A0.unk_0 != 0) {
+            if (tmp->unk_8 == 1 || tmp->unk_8 == 4) {
+                var_f1 *= 1.1F;
+            }
+        }
+        return var_f1;
+    }
+
+    count = 0;
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3) {
+            count++;
+        }
+    }
+
+    switch (count) {
+    case 2:
+        return 0.9F;
+    case 3:
+        return 0.8F;
+    case 4:
+        return 0.7F;
+    default:
+        return 0.0F;
+    }
+}
+
+void gm_8016B6E8(int arg0, int arg1)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    if (arg0 == 0) {
+        tmp->unk_2E = lbTime_8000AF24(tmp->unk_2E, arg1);
+    }
+}
 
 u8 fn_8016B728(void)
 {
-    return M2C_FIELD(&lbl_8046B6A0, u8*, 0xC);
+    return lbl_8046B6A0.unk_C;
 }
 
-/// #fn_8016B738
+void fn_8016B738(int arg0)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    tmp->unk_C = lbTime_8000AF74(tmp->unk_C, arg0);
+}
 
 UNK_T gm_8016B774(void)
 {
-    return &M2C_FIELD(&lbl_8046B6A0, UNK_T*, 0x24C);
+    return &lbl_8046B6A0.unk_24C;
 }
 
-/// #fn_8016B784
+void fn_8016B784(void)
+{
+    lbl_8046B6A0.unk_5 = 1;
+    grStadium_801D4150();
+}
 
-/// #fn_8016B7B4
+void fn_8016B7B4(int arg0)
+{
+    Ground_801C1154();
+    if (arg0 == 3) {
+        grStadium_801D4084();
+    } else {
+        grStadium_801D410C();
+    }
+    un_802FD404();
+}
 
-/// #fn_8016B7F8
+void fn_8016B7F8(void)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    PAD_STACK(4);
 
-/// #fn_8016B88C
+    ftLib_800868A4();
+    Stage_802252E4((InternalStageId) tmp->x24C8.xE, NULL);
+    grStadium_801D4040();
+    if (!tmp->x24C8.x1_3) {
+        ifStatus_802F6EA4(4, -1, -1, 0, NULL, fn_8016B784);
+    } else {
+        ifStatus_802F6EA4(8, -1, -1, 0, NULL, fn_8016B784);
+    }
+    un_802FD428();
+}
 
-/// #gm_8016B8D4
+void fn_8016B88C(int arg0)
+{
+    Ground_801C1158();
+    if (arg0 == 0) {
+        grStadium_801D40C8();
+    }
+    lbl_8046B6A0.unk_5 = 0;
+}
 
-/// #fn_8016B918
+void gm_8016B8D4(s32 arg0, s32 arg1)
+{
+    u8 tmp = arg1;
+    lbl_8046B6A0.unk_38[arg0].x1 = 0x82;
+    lbl_8046B6A0.unk_38[arg0].x2 = tmp;
+    grStadium_801D3B4C(arg0, tmp);
+}
 
-/// #fn_8016BAF4
+static inline int fn_8016B918_inline(int var_r31)
+{
+    int team = Player_GetTeam(var_r31);
+    int i;
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3 &&
+            var_r31 != i &&
+            team == Player_GetTeam(i) &&
+            Player_GetStocks(i) > 1) {
+            return i;
+        }
+    }
+    return 6;
+}
 
-/// #fn_8016BBB4
+void fn_8016B918(void)
+{
+    HSD_PadStatus* temp_r3_3;
+    int temp_r30;
+    int temp_r3_2;
+    bool var_r0;
+    bool var_r0_2;
+    int var_r28;
+    int var_r31;
+    int i;
+    StartMeleeRules* temp_r3;
+    PAD_STACK(0x10);
 
-/// #fn_8016BC74
+    temp_r3 = &lbl_8046B6A0.x24C8;
+    if (!temp_r3->x4_1) {
+        return;
+    }
+    if (temp_r3->x8 != 1) {
+        return;
+    }
 
-/// #gm_8016BE80
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3 &&
+            Player_GetEntity(i) != NULL &&
+            Player_8003219C(i) != 0 &&
+            Player_GetStocks(i) == 0) {
+            var_r0 = true;
+        } else {
+            var_r0 = false;
+        }
+        if (!var_r0) {
+            continue;
+        }
+        temp_r3_2 = Player_GetPlayerId(i);
+        if (g_debugLevel >= 3) {
+            temp_r3_3 = &HSD_PadCopyStatus[(u8) temp_r3_2];
+            if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & 0x400)) {
+                var_r0_2 = true;
+            } else {
+                var_r0_2 = false;
+            }
+        } else {
+            var_r0_2 = HSD_PadCopyStatus[(u8) temp_r3_2].trigger & 0x1000;
+        }
+        if (var_r0_2 != 0) {
+            var_r28 = fn_8016B918_inline(i);
+            if (var_r28 != 6 && ifStock_802F7EFC(i, var_r28) == 0) {
+                Player_LoseStock(var_r28);
+                Player_SetStocks(i, Player_GetStocks(i) + 1);
+                gm_8016C658(i);
+                fn_8016719C(i, 0);
+            }
+        }
+    }
+}
 
-/// #fn_8016BF74
+bool fn_8016BAF4(void)
+{
+    int i;
+    for (i = 0; i < 4; i++) {
+        HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
+        if (pad->err == 0 && (pad->trigger & 0x1000)) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #fn_8016C0C8
+bool fn_8016BBB4(void)
+{
+    int i;
+    for (i = 0; i < 4; i++) {
+        HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
+        if (pad->err == 0 && (pad->trigger & 0x10)) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #fn_8016C35C
+int fn_8016BC74(void)
+{
+    HSD_PadStatus* temp_r3_3;
+    HSD_PadStatus* temp_r4;
+    bool var_r0_2;
+    bool var_r0_3;
+    int var_r30;
+    int var_r29;
+    int temp_r3;
+    PAD_STACK(0x18);
 
-/// #fn_8016C46C
+    if (gm_8016B41C() || gm_801A4310() == 0x14 ||
+        (gm_801A4310() == 2 && gm_801A42C4() == 0x81)) {
+        temp_r3 = Player_GetPlayerId(0);
+        temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
+        if (temp_r4->err == 0) {
+            if (g_debugLevel >= 3) {
+                if ((temp_r4->trigger & 8) && (temp_r4->button & 0x400)) {
+                    var_r0_2 = 1;
+                } else {
+                    var_r0_2 = 0;
+                }
+            } else {
+                var_r0_2 = temp_r4->trigger & 0x1000;
+            }
+            if (var_r0_2 != 0) {
+                return temp_r3;
+            }
+        }
+    } else {
+        for (var_r30 = 0; var_r30 < 4; var_r30++) {
+            temp_r3_3 = &HSD_PadCopyStatus[(u8) var_r30];
+            if (temp_r3_3->err == 0) {
+                if (g_debugLevel >= 3) {
+                    if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & 0x400)) {
+                        var_r0_3 = 1;
+                    } else {
+                        var_r0_3 = 0;
+                    }
+                } else {
+                    var_r0_3 = temp_r3_3->trigger & 0x1000;
+                }
+                if (var_r0_3) {
+                    for (var_r29 = 0; var_r29 < 6; var_r29++) {
+                        if (Player_GetPlayerSlotType(var_r29) != 3 &&
+                            Player_GetEntity(var_r29) != NULL &&
+                            Player_8003219C(var_r29) == 0 &&
+                            var_r30 == Player_GetPlayerId(var_r29)) {
+                            return var_r30;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return -1;
+}
+
+int gm_8016BE80(void)
+{
+    HSD_PadStatus* temp_r3;
+    bool var_r0;
+    int var_r30;
+    int var_r29;
+    PAD_STACK(0x10);
+
+    for (var_r30 = 0; var_r30 < 4; var_r30++) {
+        temp_r3 = &HSD_PadCopyStatus[(u8) var_r30];
+        if (temp_r3->err == 0) {
+            if (g_debugLevel >= 3) {
+                if ((temp_r3->trigger & 8) && (temp_r3->button & 0x400)) {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+            } else {
+                var_r0 = temp_r3->trigger & 0x1000;
+            }
+            if (var_r0 != 0) {
+                if (var_r30 == 3) {
+                    return var_r30;
+                }
+                for (var_r29 = 0; var_r29 < 6; var_r29++) {
+                    if (var_r30 == Player_GetPlayerId(var_r29) &&
+                        Player_GetPlayerSlotType(var_r29) != 3) {
+                        return var_r30;
+                    }
+                }
+            }
+        }
+    }
+    return -1;
+}
+
+int fn_8016BF74(void)
+{
+    bool var_r0;
+    int var_r0_2;
+    bool var_r0_3;
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    PAD_STACK(0x8);
+
+    if (lbl_8046B6A0.x24C8.x4_2 && Player_GetP1Stock() == 0) {
+        return 4;
+    }
+    if (lbl_8046B6A0.unk_7 == 1) {
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if ((var_r0 != 0) && (fn_8016A1E4() != 0) && (fn_801693A8() == 0)) {
+        var_r0_2 = 5;
+    } else {
+        var_r0_2 = 0;
+    }
+    if (var_r0_2 != 0) {
+        return 5;
+    }
+    if (lbl_8046B6A0.unk_7 == 0) {
+        var_r0_3 = 1;
+    } else {
+        var_r0_3 = 0;
+    }
+    if (var_r0_3 != 0 && !lbl_8046B6A0.x24C8.x5_1 &&
+        (lbl_8046B6A0.x24C8.x0_0 == 1 || tmp->x24C8.x4_2)) {
+
+        int i;
+        int var_r31 = 0;
+        int var_r29 = 0;
+        for (i = 0; i < 6; i++) {
+            if (Player_GetPlayerSlotType(i) != 3) {
+                if (Player_GetStocks(i) == 0) {
+                    var_r31 += 1;
+                }
+                var_r29 += 1;
+            }
+        }
+
+        if (var_r31 >= var_r29 - 1) {
+            return 2;
+        }
+    }
+    return 0;
+}
+
+int fn_8016C0C8(void)
+{
+    int i;
+    bool var_r0;
+    int var_r0_2;
+    bool var_r0_3;
+    bool var_r0_4;
+    int var_r29;
+    int var_r29_2;
+    int var_r28;
+    int var_r28_2;
+    int var_r27;
+    int var_r27_2;
+
+    s16 sp14[5];
+    PAD_STACK(0xC);
+
+    if (lbl_8046B6A0.x24C8.x4_2) {
+        var_r28 = 0;
+        var_r27 = 0;
+        if (Player_GetP1Stock() == 0) {
+            return 4;
+        }
+        if (lbl_8046B6A0.unk_7 == 1) {
+            var_r0 = true;
+        } else {
+            var_r0 = false;
+        }
+        if (var_r0 && fn_8016A1E4() != 0 && fn_801693A8() == 0) {
+            var_r0_2 = 5;
+        } else {
+            var_r0_2 = 0;
+        }
+        if (var_r0_2 != 0) {
+            return 5;
+        }
+        if (lbl_8046B6A0.unk_7 == 0) {
+            var_r0_3 = true;
+        } else {
+            var_r0_3 = false;
+        }
+        if (var_r0_3 && !lbl_8046B6A0.x24C8.x5_1) {
+            for (var_r29 = 0; var_r29 < 6; var_r29++) {
+                if (Player_GetFlagsBit1(var_r29) == 0 &&
+                    Player_GetPlayerSlotType(var_r29) != 3 &&
+                    Player_GetEntity(var_r29) != NULL) {
+                    if (Player_GetTeam(var_r29) != Player_GetTeam(0)) {
+                        var_r28 += Player_GetStocks(var_r29);
+                        var_r27 += 1;
+                    }
+                }
+            }
+            if (var_r27 != 0 && var_r28 == 0) {
+                return 3;
+            }
+        }
+    }
+    if (lbl_8046B6A0.unk_7 == 0) {
+        var_r0_4 = true;
+    } else {
+        var_r0_4 = false;
+    }
+    if (var_r0_4 && lbl_8046B6A0.x24C8.x0_0 == 1) {
+        var_r28_2 = 0;
+        var_r29_2 = 0;
+        memset(sp14, -1, sizeof(sp14));
+
+        for (var_r27_2 = 0; var_r27_2 < 6; var_r27_2++) {
+            if (Player_GetPlayerSlotType(var_r27_2) != 3) {
+                if (sp14[Player_GetTeam(var_r27_2)] == -1) {
+                    sp14[Player_GetTeam(var_r27_2)] = Player_GetStocks(var_r27_2);
+                    var_r28_2++;
+                } else {
+                    sp14[Player_GetTeam(var_r27_2)] += Player_GetStocks(var_r27_2);
+                }
+            }
+        }
+
+        for (i = 0; i < 5; i++) {
+            if (sp14[i] == 0) {
+                var_r29_2++;
+            }
+        }
+        if (var_r29_2 >= var_r28_2 - 1) {
+            return 3;
+        }
+    }
+    return 0;
+}
+
+int fn_8016C35C(void)
+{
+    int temp_r3;
+    int temp_r3_2;
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    PAD_STACK(0x8);
+
+    if (lbl_8046B6A0.unk_8 != 0) {
+        return lbl_8046B6A0.unk_8;
+    }
+    if (lbl_8046B6A0.unk_6 == 1) {
+        return 9;
+    }
+    if (lbl_8046B6A0.x24C8.x5_0) {
+        return 0;
+    }
+    if (tmp->x24C8.x0_6) {
+        if (tmp->x24C8.x0_7) {
+            if (lbl_8046B6A0.unk_28 == lbl_8046B6A0.x24C8.x10 &&
+                lbl_8046B6A0.unk_2C == 0) {
+                return 1;
+            }
+        } else {
+            if (lbl_8046B6A0.unk_28 == 0 &&
+                lbl_8046B6A0.unk_2C == 0x3B) {
+                return 1;
+            }
+        }
+    }
+    if (lbl_8046B6A0.x24C8.x8 == 0) {
+        temp_r3_2 = fn_8016BF74();
+        if (temp_r3_2 != 0) {
+            return temp_r3_2;
+        }
+    }
+    if (lbl_8046B6A0.x24C8.x8 == 1) {
+        temp_r3 = fn_8016C0C8();
+        if (temp_r3 != 0) {
+            return temp_r3;
+        }
+    }
+    if (Ground_801C1D84() != 0) {
+        return 6;
+    }
+    return 0;
+}
+
+void fn_8016C46C(int arg0)
+{
+    if (lbl_8046B6A0.unk_9 != 0) {
+        switch (gm_801A4310()) {
+        case 3:
+            fn_8017EE40(arg0);
+            return;
+        case 4:
+            fn_8017E8A4(arg0);
+            return;
+        case 5:
+            fn_8018A364(arg0);
+            break;
+        }
+    }
+}
 
 /// #fn_8016C4F4
 
@@ -299,7 +900,65 @@ void fn_8016C7D0(HSD_GObj* gobj)
 
 /// #fn_8016C7F0
 
-/// #fn_8016CA68
+s8 fn_8016CA68_inline(int var_r31)
+{
+    int var_r30;
+    for (var_r30 = 0; var_r30 < 6; var_r30++) {
+        if (var_r31 == Player_GetPlayerId(var_r30) &&
+            Player_GetPlayerSlotType(var_r30) == 0) {
+            return var_r30;
+        }
+    }
+    return -1;
+}
+
+void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
+{
+    int var_r31;
+    s8 var_r0;
+    u8 var_r4;
+
+    if (arg0->unk_4 == 0 && arg0->unk_5 != 0 && !arg0->x24C8.x2_4) {
+        if (arg0->x24C8.x40 != NULL) {
+            var_r31 = arg0->x24C8.x40();
+        } else {
+            var_r31 = fn_8016BC74();
+        }
+        if (var_r31 != -1) {
+            lbAudioAx_80024E84(1);
+            lbAudioAx_80024030(5);
+            ifAll_802F3394();
+            if (arg0->x24C8.x3_7) {
+                ifTime_802F40B8();
+            }
+            if (!arg0->x24C8.x3_6) {
+                var_r4 = 0;
+                if (arg0->x24C8.x3_5) {
+                    var_r4 |= 1;
+                }
+                if (arg0->x24C8.x3_3) {
+                    var_r4 |= 2;
+                }
+                if (arg0->x24C8.x3_1) {
+                    var_r4 |= 4;
+                }
+                gm_801A0FEC(var_r31, var_r4);
+            }
+            gm_801A4634(arg1);
+            if (arg0->x24C8.x4_0) {
+                var_r0 = fn_8016CA68_inline(var_r31);
+                if (arg0->x24C8.x3C != NULL) {
+                    arg0->x24C8.x3C(var_r0);
+                } else {
+                    fn_80165108(var_r0, var_r31);
+                }
+            }
+            HSD_PadRumblePauseAll();
+            arg0->unk_1 = var_r31;
+            arg0->unk_2 = 0xA;
+        }
+    }
+}
 
 /// #fn_8016CBE8
 
@@ -556,7 +1215,7 @@ void fn_8016E730(StartMeleeData* arg0)
     Stage_802251E8((enum InternalStageId) arg0->rules.xE, NULL);
 
     r30 = &lbl_8046B6A0;
-    if (gm_8016B41C() != 0) {
+    if (gm_8016B41C_dontinline() != 0) {
         var_f0 = 1.0f;
     } else {
         temp_r3 = gm_8016B558();
@@ -612,9 +1271,9 @@ void gm_8016E934_OnEnter(void* arg0)
     StartMeleeData* tmp = arg0;
     fn_8016E730(tmp);
     if (tmp->rules.x1_2) {
-        ifStatus_802F6EA4(8, -1, -1, 0, fn_8016B7B4, fn_8016B7F8);
+        ifStatus_802F6EA4(8, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
     } else {
-        ifStatus_802F6EA4(3, -1, -1, 0, fn_8016B7B4, fn_8016B7F8);
+        ifStatus_802F6EA4(3, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
     }
     ifTime_802F446C();
     ifStatus_802F665C(tmp->rules.x0_3);
@@ -627,7 +1286,7 @@ void gm_8016EBC0_OnEnter(void* arg0)
     StartMeleeData* tmp = arg0;
     tmp->rules.x6 = true;
     fn_8016E730(tmp);
-    ifStatus_802F6EA4(1, -1, -1, 0, fn_8016B7B4, fn_8016B7F8);
+    ifStatus_802F6EA4(1, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
     ifTime_802F446C();
     ifStatus_802F665C(tmp->rules.x0_3);
 }
@@ -888,7 +1547,7 @@ u8 gm_801737D8(void)
 
 /// #gm_80173DE4
 
-bool gm_80173EEC_inline()
+static inline bool gm_80173EEC_inline(void)
 {
     int i;
     bool result = true;
