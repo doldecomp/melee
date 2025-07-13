@@ -121,7 +121,7 @@ void grHeal_8021F474(Ground_GObj* ground)
     gp->gv.flatzone2.xC4 = 0;
 }
 
-void grHeal_8021F4BC(Ground_GObj*) {}
+void grHeal_8021F4BC(Ground_GObj* gobj) {}
 
 void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
 {
@@ -176,9 +176,9 @@ bool grHeal_8021F618(Ground_GObj* gobj)
     return false;
 }
 
-void grHeal_8021F620(Ground_GObj*) {}
+void grHeal_8021F620(Ground_GObj* gobj) {}
 
-void grHeal_8021F624(Ground_GObj*) {}
+void grHeal_8021F624(Ground_GObj* gobj) {}
 
 void grHeal_8021F628(s32 arg0, HSD_JObj* jobj_parent)
 {
