@@ -168,7 +168,10 @@ struct gmm_retval_EDBC {
     s32 x0;
     s32 x4;
     s32 x8;
-    u8 padding[0x4C - 0x8 - 4];
+    u8 padding[0x14 - 0xC];
+    u32 x14;
+    u16 x18[2];
+    u8 pad_x1C[0x4C - 0x1C];
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
     s32 xB0[4];
@@ -283,7 +286,7 @@ struct Placeholder_8016AE38_flags_2 {
 
 struct lbl_8046B6A0_t {
     /* 0x0000 */ u8 unk_0;
-    /* 0x0001 */ u8 unk_1;
+    /* 0x0001 */ s8 unk_1;
     /* 0x0002 */ u8 unk_2;
     /* 0x0003 */ u8 unk_3;
     /* 0x0004 */ u8 unk_4;
@@ -300,13 +303,14 @@ struct lbl_8046B6A0_t {
     /* 0x000F */ u8 unk_F;
     /* 0x0010 */ s32 unk_10;
     /* 0x0014 */ s32 unk_14;
-    /* 0x0018 */ UNK_T unk_18; /* maybe part of unk_14[4]? */
+    /* 0x0018 */ u8 unk_18; /* maybe part of unk_14[4]? */
     /* 0x001C */ UNK_T unk_1C;
     /* 0x0020 */ UNK_T unk_20;
     /* 0x0024 */ s32 unk_24;
-    /* 0x0028 */ s32 unk_28;
+    /* 0x0028 */ u32 unk_28;
     /* 0x002C */ u16 unk_2C;
-    /* 0x002E */ char pad_2E[6]; /* maybe part of unk_2C[4]? */
+    /* 0x002E */ u16 unk_2E;
+    /* 0x0030 */ char pad_30[4]; /* maybe part of unk_2C[4]? */
     /* 0x0034 */ f32 unk_34;
     /* 0x0038 */ struct {
         u8 x0;
@@ -328,7 +332,8 @@ struct lbl_8046B6A0_t {
         u8 xB;
         u16 xC;
     } unk_38[6];
-    /* 0x0038 */ char pad_8C[0x250 - 0x8C]; /* maybe part of unk_34[0x925]? */
+    /* 0x0038 */ char pad_8C[0x24C - 0x8C]; /* maybe part of unk_34[0x925]? */
+    /* 0x024C */ UNK_T unk_24C;
     /* 0x0250 */ u8 unk_250;
     /* 0x0251 */ u8 unk_251;
     /* 0x0252 */ u8 unk_252;

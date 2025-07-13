@@ -626,7 +626,7 @@ s32 gmMainLib_8015D818(u32 arg0)
 {
     u8 _[40];
 
-    if ((signed) gmMainLib_8015D94C(arg0) == 0) {
+    if (gmMainLib_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
         *q = lbTime_8000AFBC();
@@ -667,7 +667,7 @@ void gmMainLib_8015D924(u32 arg0)
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-u32 gmMainLib_8015D94C(u32 arg0)
+int gmMainLib_8015D94C(u32 arg0)
 {
     u32* thing = &gmMainLib_804D3EE0->thing.x1B4C[0];
     u32 flag = thing[arg0 / 32];

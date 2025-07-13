@@ -1,5 +1,6 @@
 #include "gm_1B03.h"
 
+#include <melee/db/db.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gmmain_lib.h>
@@ -36,7 +37,38 @@
 
 /// #gm_801B087C
 
-/// #gm_801B089C
+void gm_801B089C(MinorScene* scene)
+{
+    int* temp_r3 = gm_801A4284(scene);
+    if (g_debugLevel >= 3) {
+        if (*temp_r3 & 0x100) {
+            gm_801A42E8(0xE);
+        } else if (*temp_r3 & 0x1000) {
+            gm_80173EEC();
+            gm_80172898(0x100);
+            if (gm_80173754(1, 0) == 0) {
+                gm_801A42E8(1);
+            }
+        } else if (*temp_r3 & 0x400) {
+            gm_801A42E8(7);
+        } else if (*temp_r3 & 0x800) {
+            gm_801A42E8(6);
+        } else {
+            gm_801BF708(1);
+            gm_801A42E8(0x18);
+        }
+    } else if (*temp_r3 & 0x1000) {
+        gm_80173EEC();
+        gm_80172898(0x100);
+        if (gm_80173754(1, 0) == 0) {
+            gm_801A42E8(1);
+        }
+    } else {
+        gm_801BF708(1);
+        gm_801A42E8(0x18);
+    }
+    gm_801A42D4();
+}
 
 /// #gm_801B099C
 
