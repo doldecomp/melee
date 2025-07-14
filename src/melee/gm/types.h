@@ -439,6 +439,10 @@ struct MatchExitInfo {
     struct MatchEnd match_end;
 };
 
+struct UnkAllstarData {
+    s8 pad_x0[0xA0];
+};
+
 struct PauseData {
 /* +0 */ HSD_JObj* background;
 /* +4 */ HSD_JObj* analog_stick;
