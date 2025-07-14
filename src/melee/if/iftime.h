@@ -13,6 +13,6 @@
 /* 2F446C */ void ifTime_802F446C(void);
 /* 2F480C */ UNK_RET ifTime_802F480C(UNK_PARAMS);
 /* 2F483C */ void ifTime_802F483C(void);
-/* 2F4898 */ UNK_RET ifTime_802F4898(UNK_PARAMS);
+/* 2F4898 */ int ifTime_802F4898(void);
 
 #endif
