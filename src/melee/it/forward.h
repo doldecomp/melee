@@ -104,6 +104,9 @@ typedef enum Item_HoldKinds {
 // https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8
 // Development JP name strings are listed starting at data address 0x803EA7A8
 
+#define It_Common_Start It_Kind_Capsule
+#define It_Common_End It_Kind_L_Gun_Ray
+
 typedef enum ItemKind {
     // COMMON ITEMS
 

@@ -109,7 +109,7 @@ u16 gm_8016AF0C(void)
     return var_r31;
 }
 
-bool gm_8016AF88(int* arg0)
+bool GetMatchTimer(int* arg0)
 {
     if (arg0 != NULL && lbl_8046B6A0.x24C8.x0_6) {
         if (gm_8016B110()) {
