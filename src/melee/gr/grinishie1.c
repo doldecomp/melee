@@ -26,8 +26,6 @@
 
 #include <baselib/gobj.h>
 
-bool GetMatchTimer(u32*); // extern from gm_16AE
-
 #define invalid_state(line)                                                   \
     OSReport("%s:%d: oioi...", "grinishie1.c", line);                         \
     while (true) {                                                            \
@@ -828,7 +826,7 @@ void fn_801FBEB8(s32 block_id, f32 dist)
 
 void grInishie1_801FCB10(HSD_GObj* gobj)
 {
-    u32 time_remaining;
+    int time_remaining;
     s32 var_r3;
 
     Ground* gp = gobj->user_data;

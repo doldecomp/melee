@@ -3,6 +3,7 @@
 #include "gr/grinishie2.h"
 
 #include "cm/camera.h"
+#include "gm/gm_1601.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
@@ -21,8 +22,6 @@
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/jobj.h>
-
-bool GetMatchTimer(u32*); // extern from gm_16AE
 
 StageCallbacks grI2_803E4AB4[] = {
     {
@@ -246,7 +245,7 @@ bool grInishie2_801FCF24(HSD_GObj* gobj)
 // identifier of some kind
 void grInishie2_801FCF2C(HSD_GObj* gobj)
 {
-    u32 time_remaining;
+    int time_remaining;
     s32 var_r3;
 
     Ground* gp = gobj->user_data;
