@@ -12,6 +12,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
@@ -25,13 +26,15 @@
 
 #include <baselib/gobj.h>
 
+bool GetMatchTimer(u32*); // extern from gm_16AE
+
 #define invalid_state(line)                                                   \
     OSReport("%s:%d: oioi...", "grinishie1.c", line);                         \
     while (true) {                                                            \
     }
 
 // these inlines are probably shared in other places
-static inline test_random(s32 val)
+static inline s32 test_random(s32 val)
 {
     return ((val != 0) ? HSD_Randi(val) : 0);
 }
