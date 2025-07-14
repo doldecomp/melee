@@ -363,6 +363,77 @@ struct grIceMt_GroundVars2 {
     /* +0 gp+D8 */ HSD_JObj* xF4;
 };
 
+typedef struct grInishie1_Block {
+    s16 status;
+    s16 x2;
+    s32 x4; // probably a counter
+    f32 x8; // probably a y transform
+    f32 xC; // probably a delta for x8
+    HSD_JObj* jobj;
+    HSD_JObj* jobj2;
+    HSD_GObj* hatena_gobj; // named in an assert
+    Item_GObj* item_gobj;
+    s16 x20;
+    s16 x22; // probably a timer for when a block first appears and flickers
+} grInishie1_Block;
+
+// TODO: probably mistakes in this and Vars2
+typedef struct grInishie1_GroundVars {
+    union {
+        u32 xC4;
+        struct {
+            u8 xC4_flags_b0 : 1;
+            u8 xC4_flags_b1 : 1;
+            u8 xC4_flags_b2 : 1;
+            u8 xC4_flags_b3 : 1;
+            u8 xC4_flags_b4 : 1;
+            u8 xC4_flags_b5 : 1;
+            u8 xC4_flags_b6 : 1;
+            u8 xC4_flags_b7 : 1;
+        };
+    };
+    s16 xC6;
+    s16 xC8;
+    s16 xCA;
+    s16 xCC;
+    s32 xD0;
+    s32 xD4;
+    s32 xD8;
+    grInishie1_Block* blocks;
+    f32 xE0;
+    f32 xE4;
+    s16 xE8;
+    s16 xEA;
+    s16 xEC;
+    s16 xEE;
+    f32 xF0;
+    f32 xF4;
+    f32 xF8;
+    f32 xFC;
+    f32 x100;
+    f32 x104;
+    HSD_JObj* x108;
+    HSD_JObj* x10C;
+} grInishie1_GroundVars;
+
+struct grInishie1_GroundVars2 {
+    HSD_JObj* xC4;
+    s32 xC8;
+    s32 xCC;
+    grInishie1_Block* blocks; // xDC
+    s16 xD8;
+    s16 xDA;
+    s16 xCA;
+    s16 xC6;
+};
+
+// likely for question mark blocks
+struct grInishie1_GroundVars3 {
+    HSD_JObj* xC4;
+    s32 xC8;
+    s32 xCC;
+};
+
 struct grInishie2_GroundVars {
     struct {
         u8 b0 : 1;
@@ -381,7 +452,7 @@ struct grInishie2_GroundVars {
     Vec3 xD8;
 };
 
-// probably Cathrine (Birdo)
+// likely for Cathrine (Birdo)
 struct grInishie2_GroundVars2 {
     Item_GObj* xC4;
     HSD_GObj* xC8;
@@ -598,6 +669,9 @@ struct Ground {
             struct grFourside_GroundVars fourside;
             struct grIceMt_GroundVars icemt;
             struct grIceMt_GroundVars2 icemt2;
+            struct grInishie1_GroundVars inishie1;
+            struct grInishie1_GroundVars2 inishie12;
+            struct grInishie1_GroundVars3 inishie13;
             struct grInishie2_GroundVars inishie2;
             struct grInishie2_GroundVars2 inishie22;
             struct grInishie2_GroundVars3 inishie23;
