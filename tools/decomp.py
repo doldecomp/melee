@@ -88,7 +88,7 @@ def main() -> None:
     )
     _ = group.add_argument(
         "-tu",
-        "--translation_unit",
+        "--translation-unit",
         type=str,
         help="translation unit to be processed (i.e. melee/it/items/itheiho)",
     )
