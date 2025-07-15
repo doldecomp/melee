@@ -420,6 +420,7 @@
 /* 1735F0 */ UNK_RET fn_801735F0(UNK_PARAMS);
 /* 173644 */ UNK_RET fn_80173644(UNK_PARAMS);
 /* 17367C */ UNK_RET fn_8017367C(UNK_PARAMS);
+/* 1736DC */ UNK_T gm_801736DC(void);
 /* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
 /* 173754 */ int gm_80173754(int, int);
 /* 1737D8 */ u8 gm_801737D8(void);

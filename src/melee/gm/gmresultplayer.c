@@ -1,7 +1,6 @@
 #include "gm_1601.h"
 
-#include "gm_16AE.static.h"
-
+/* 46E38C */ static int lbl_8046E38C[4];
 
 /// #gm_80177724
 

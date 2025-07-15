@@ -72,7 +72,6 @@ STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
 /* 169364 */ static UNK_T fn_80169364(void);
 /* 1693A8 */ static s32 fn_801693A8(void);
 /* 16A1E4 */ static s32 fn_8016A1E4(void);
-/* 1736DC */ static UNK_T gm_801736DC(void);
 /* 174274 */ static int fn_80174274(void);
 /* 17F294 */ static int fn_8017F294(void);
 /* 3B75F8 */ static const struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
