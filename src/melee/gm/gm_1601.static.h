@@ -65,7 +65,6 @@ struct lbl_80473700_t {
 };
 STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
 
-/* 160840 */ static u8 fn_80160840(u8 arg0);
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 /* 166CBC */ static u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0,
                                    ssize_t index);

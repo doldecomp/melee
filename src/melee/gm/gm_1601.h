@@ -28,7 +28,8 @@
 /* 16075C */ UNK_RET gm_8016075C(UNK_PARAMS);
 /* 1607A8 */ UNK_RET fn_801607A8(UNK_PARAMS);
 /* 1607F4 */ UNK_RET fn_801607F4(UNK_PARAMS);
-/* 160854 */ u8 gm_80160854(u8 idx, u8 team, u8, u8 slot_type);
+/* 160840 */ u8 fn_80160840(u8);
+/* 160854 */ int gm_80160854(u8 idx, u8 team, u8, u8 slot_type);
 /* 160968 */ U8Vec4 gm_80160968(u8);
 /* 160980 */ UNK_RET gm_80160980(UNK_PARAMS);
 /* 1609E0 */ UNK_RET fn_801609E0(UNK_PARAMS);

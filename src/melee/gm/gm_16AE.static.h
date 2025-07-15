@@ -3,7 +3,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-/* 160840 */ u8 fn_80160840(int arg0);
 /* 169364 */ UNK_T fn_80169364(void);
 /* 1693A8 */ s32 fn_801693A8(void);
 /* 16A1E4 */ s32 fn_8016A1E4(void);

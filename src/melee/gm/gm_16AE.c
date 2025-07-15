@@ -2067,10 +2067,6 @@ float gm_8016ECE8(void)
     return var_f29;
 }
 
-static inline void gm_8016EDDC_inline(int arg0, int temp_r3, Vec3* sp18)
-{
-}
-
 bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
