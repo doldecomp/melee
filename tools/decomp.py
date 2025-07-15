@@ -79,20 +79,11 @@ def gen_ctx() -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Decomp a function or translation unit using m2c")
 
-    group = parser.add_mutually_exclusive_group(required=True)
-    _ = group.add_argument(
-        "-f",
-        "--function",
+    _ = parser.add_argument(
+        "m2c_input",
         type=str,
-        help="a function to be processed",
+        help="name of a function (i.e. it_8026B9A8) or translation unit (i.e. melee/it/items/itheiho)",
     )
-    _ = group.add_argument(
-        "-tu",
-        "--translation-unit",
-        type=str,
-        help="translation unit to be processed (i.e. melee/it/items/itheiho)",
-    )
-
     _ = parser.add_argument(
         dest="m2c_args",
         nargs=argparse.REMAINDER,
@@ -131,7 +122,7 @@ def main() -> None:
         help="insert the output into the corresponding src file (function input only)",
     )
     _ = parser.add_argument(
-        "-fm",
+        "-f",
         "--format",
         action="store_true",
         help="run clang-format on the output",
@@ -141,19 +132,18 @@ def main() -> None:
 
     asm_file = None
     m2c_args = []
-    if args.function:
-        function = cast(str, args.function)
-        if (obj_file := find_obj(OBJ_ROOT, function)) is not None:
-            asm_file = ASM_ROOT / cast(Path, obj_file).with_suffix(".s")
-        else:
-            print(f"Could not find object file with {function}", file=stderr)
-            sys.exit(1)
-        m2c_args = [ "--function", function ]
+    m2c_input = cast(bool, args.m2c_input)
+    is_function = True
+
+    if (obj_file := find_obj(OBJ_ROOT, m2c_input)) is not None:
+        asm_file = ASM_ROOT / cast(Path, obj_file).with_suffix(".s")
+        m2c_args = [ "--function", m2c_input ]
     else:
         if args.write:
-            print(f"--write currently unimplemented with --translation_unit", file=stderr)
+            print(f"--write currently unimplemented with translation unit input", file=stderr)
             sys.exit(1)
-        asm_file = ASM_ROOT / Path(args.translation_unit).with_suffix(".s")
+        is_function = False
+        asm_file = ASM_ROOT / Path(m2c_input).with_suffix(".s")
 
     if asm_file.exists() is True:
         m2c_cmd: list[str] = [
@@ -216,8 +206,8 @@ def main() -> None:
                     print("Failed to import pygments; could not colorize", file=stderr)
             print(colorized, file=sys.stdout)
 
-        if args.function and cast(bool, args.write):
-            function = cast(str, args.function)
+        if is_function and cast(bool, args.write):
+            function = cast(str, args.m2c_input)
             src_file = SRC_ROOT / obj_file.with_suffix(".c")
 
             if not src_file.exists():
