@@ -476,7 +476,7 @@ s32* gmMainLib_8015D438(u8 arg0)
     return &base[arg0].x94;
 }
 
-s32* gmMainLib_8015D450(s32 arg0)
+s32* gmMainLib_8015D450(u8 arg0)
 {
     return &gmMainLib_8015EDBC()->x4C[arg0 & 255];
 }

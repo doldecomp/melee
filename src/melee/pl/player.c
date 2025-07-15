@@ -783,7 +783,7 @@ int Player_GetPlayerId(int slot)
     return player_id;
 }
 
-void Player_SetPlayerId(int slot, s8 player_id)
+void Player_SetPlayerId(int slot, int player_id)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1101,7 +1101,7 @@ void Player_SetHPByIndex(s32 slot, s32 arg1, s32 arg2)
     player->staminas.byIndex[player->transformed[arg1]] = arg2;
 }
 
-s16 Player_GetOtherStamina(s32 slot)
+int Player_GetOtherStamina(s32 slot)
 {
     s16 stamina;
     StaticPlayer* player;
@@ -1119,7 +1119,7 @@ void Player_SetOtherStamina(s32 slot, s32 stamina)
     player->staminas.byName.stamina = stamina;
 }
 
-u32 Player_GetRemainingHP(s32 slot)
+int Player_GetRemainingHP(s32 slot)
 {
     StaticPlayer* player;
     s32 result;
@@ -1791,7 +1791,7 @@ s32 Player_80036428(s32 slot)
     return 6;
 }
 
-void Player_SetUnk45(s32 slot, s8 unk45)
+void Player_SetUnk45(s32 slot, int unk45)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

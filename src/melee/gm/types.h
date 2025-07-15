@@ -259,6 +259,42 @@ struct gmm_x0 {
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
 
+struct lbl_8046B6A0_24C_t {
+    UNK_T x0;
+    u8 x4;
+    u8 x5;
+    u8 x6;
+    u32 x8;
+    u8 xC;
+    u8 padD[0x24 - 0xD];
+    struct {
+        u8 x0;
+        u8 pad_x1[0xB];
+    } x24[1];
+    u8 pad30[0x58 - 0x30];
+    struct lbl_8046B6A0_24C_58_t {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        u8 x3;
+        u8 x4;
+        u8 x5;
+        u8 x6;
+        u8 x7;
+        u8 pad8[0x20 - 8];
+        u32 x20;
+        u32 x24;
+        u32 x28;
+        u32 x2C;
+        u8 pad60[0xA8 - 0x30];
+    } x58[6];
+    u8 pad3F0[0x44C - 0x3F0 - 0x58];
+    struct lbl_8046B6A0_24C_44C_t {
+        u8 x0[0x101];
+        int x104[0x101];
+    } x44C[6];
+};
+
 struct Placeholder_8016AE38_flags_2 {
     /* +0:0 */ u8 x0_b0_b2 : 3;
     /* +0:3 */ u8 x0_b3 : 1;
@@ -286,7 +322,7 @@ struct Placeholder_8016AE38_flags_2 {
 
 struct lbl_8046B6A0_t {
     /* 0x0000 */ u8 unk_0;
-    /* 0x0001 */ s8 unk_1;
+    /* 0x0001 */ s8 unk_1; // who paused?
     /* 0x0002 */ u8 unk_2;
     /* 0x0003 */ u8 unk_3;
     /* 0x0004 */ u8 unk_4;
@@ -304,13 +340,13 @@ struct lbl_8046B6A0_t {
     /* 0x0010 */ s32 unk_10;
     /* 0x0014 */ s32 unk_14;
     /* 0x0018 */ u8 unk_18; /* maybe part of unk_14[4]? */
-    /* 0x001C */ UNK_T unk_1C;
-    /* 0x0020 */ UNK_T unk_20;
-    /* 0x0024 */ s32 unk_24;
+    /* 0x001C */ u32* unk_1C;
+    /* 0x0020 */ u32* unk_20;
+    /* 0x0024 */ u32 unk_24;
     /* 0x0028 */ u32 unk_28;
     /* 0x002C */ u16 unk_2C;
     /* 0x002E */ u16 unk_2E;
-    /* 0x0030 */ char pad_30[4]; /* maybe part of unk_2C[4]? */
+    /* 0x0030 */ u8 unk_30;
     /* 0x0034 */ f32 unk_34;
     /* 0x0038 */ struct {
         u8 x0;
@@ -333,13 +369,7 @@ struct lbl_8046B6A0_t {
         u16 xC;
     } unk_38[6];
     /* 0x0038 */ char pad_8C[0x24C - 0x8C]; /* maybe part of unk_34[0x925]? */
-    /* 0x024C */ UNK_T unk_24C;
-    /* 0x0250 */ u8 unk_250;
-    /* 0x0251 */ u8 unk_251;
-    /* 0x0252 */ u8 unk_252;
-    /* 0x0254 */ u32 unk_254;
-    /* 0x0258 */ u8 unk_258;
-    /* 0x025C */ u32 pad_25C[(0x24C8 - 0x25C) / 4];
+    /* 0x024C */ struct lbl_8046B6A0_24C_t x24C;
     /* 0x24C8 */ struct StartMeleeRules x24C8;
 }; /* size = 0x2528 */
 STATIC_ASSERT(sizeof(struct lbl_8046B6A0_t) == 0x2528);

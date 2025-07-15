@@ -65,7 +65,7 @@ void gm_801A0FEC(s32 slot, u8 flag)
     HSD_JObjAnimAll(lbl_80479B10.background);
 }
 
-void gm_801A10FC(void)
+void gm_801A10FC(int unused)
 {
     lbl_80479B10.slot = 99;
     HSD_JObjSetFlagsAll(lbl_80479B10.background, JOBJ_HIDDEN);

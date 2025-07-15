@@ -10,8 +10,10 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1A36.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_1B03.h>
 #include <melee/gm/gmpause.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grstadium.h>
@@ -27,17 +29,21 @@
 #include <melee/lb/lb_0192.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
+#include <melee/lb/lblanguage.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mn/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
+#include <melee/pl/plbonus.h>
+#include <melee/pl/plbonuslib.h>
 #include <melee/un/un_2FC9.h>
 #include <melee/vi/vi1202.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 #include <m2c_macros.h>
+#include <math.h>
 
 lbl_8046B6A0_t* gm_8016AE38(void)
 {
@@ -434,9 +440,9 @@ void fn_8016B738(int arg0)
     tmp->unk_C = lbTime_8000AF74(tmp->unk_C, arg0);
 }
 
-UNK_T gm_8016B774(void)
+struct lbl_8046B6A0_24C_t* gm_8016B774(void)
 {
-    return &lbl_8046B6A0.unk_24C;
+    return &lbl_8046B6A0.x24C;
 }
 
 void fn_8016B784(void)
@@ -540,13 +546,13 @@ void fn_8016B918(void)
         temp_r3_2 = Player_GetPlayerId(i);
         if (g_debugLevel >= 3) {
             temp_r3_3 = &HSD_PadCopyStatus[(u8) temp_r3_2];
-            if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & 0x400)) {
+            if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & HSD_PAD_X)) {
                 var_r0_2 = true;
             } else {
                 var_r0_2 = false;
             }
         } else {
-            var_r0_2 = HSD_PadCopyStatus[(u8) temp_r3_2].trigger & 0x1000;
+            var_r0_2 = HSD_PadCopyStatus[(u8) temp_r3_2].trigger & HSD_PAD_START;
         }
         if (var_r0_2 != 0) {
             var_r28 = fn_8016B918_inline(i);
@@ -601,7 +607,8 @@ int fn_8016BC74(void)
         temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
         if (temp_r4->err == 0) {
             if (g_debugLevel >= 3) {
-                if ((temp_r4->trigger & 8) && (temp_r4->button & 0x400)) {
+                if ((temp_r4->trigger & 8) &&
+                    (temp_r4->button & HSD_PAD_X)) {
                     var_r0_2 = 1;
                 } else {
                     var_r0_2 = 0;
@@ -618,7 +625,8 @@ int fn_8016BC74(void)
             temp_r3_3 = &HSD_PadCopyStatus[(u8) var_r30];
             if (temp_r3_3->err == 0) {
                 if (g_debugLevel >= 3) {
-                    if ((temp_r3_3->trigger & 8) && (temp_r3_3->button & 0x400)) {
+                    if ((temp_r3_3->trigger & 8) &&
+                        (temp_r3_3->button & HSD_PAD_X)) {
                         var_r0_3 = 1;
                     } else {
                         var_r0_3 = 0;
@@ -654,7 +662,8 @@ int gm_8016BE80(void)
         temp_r3 = &HSD_PadCopyStatus[(u8) var_r30];
         if (temp_r3->err == 0) {
             if (g_debugLevel >= 3) {
-                if ((temp_r3->trigger & 8) && (temp_r3->button & 0x400)) {
+                if ((temp_r3->trigger & 8) &&
+                    (temp_r3->button & HSD_PAD_X)) {
                     var_r0 = 1;
                 } else {
                     var_r0 = 0;
@@ -694,7 +703,7 @@ int fn_8016BF74(void)
     } else {
         var_r0 = false;
     }
-    if ((var_r0 != 0) && (fn_8016A1E4() != 0) && (fn_801693A8() == 0)) {
+    if (var_r0 && fn_8016A1E4() != 0 && fn_801693A8() == 0) {
         var_r0_2 = 5;
     } else {
         var_r0_2 = 0;
@@ -883,24 +892,157 @@ void fn_8016C46C(int arg0)
     }
 }
 
-/// #fn_8016C4F4
+static inline void fn_8016C46C_dontinline(int arg0)
+{
+    fn_8016C46C(arg0);
+}
 
-/// #gm_8016C5C0
+void fn_8016C4F4(struct lbl_8046B6A0_24C_t* arg0)
+{
+    struct lbl_8046B6A0_24C_44C_t* x44C = arg0->x44C;
+    int i;
+    int j;
 
-/// #gm_8016C658
+    for (i = 0; i < 6; i++) {
+        if (arg0->x58[i].x0 != 3) {
+            pl_80039450(i);
+            for (j = 0; j < 0x101; j++) {
+                x44C[i].x0[j] = fn_80170110(arg0, j, 2, i);
+                if (x44C[i].x0[j] != 0) {
+                    x44C[i].x104[j] = fn_8016FAD4(arg0, fn_8016F1F0(j), 2, i);
+                } else {
+                    x44C[i].x104[j] = 0;
+                }
+            }
+        }
+    }
+}
 
-/// #gm_8016C6C0
+int gm_8016C5C0(int pl_slot)
+{
+    struct lbl_8046B6A0_24C_t* tmp = gm_8016B774();
+    PAD_STACK(8);
 
-/// #gm_8016C75C
+    if (tmp->x0 != (UNK_T) gm_801A4BA8()) {
+        tmp->x0 = (UNK_T) gm_801A4BA8();
+        gm_80166378(tmp);
+    }
+    if (lbl_8046B6A0.x24C8.x8 == 0) {
+        return tmp->x58[pl_slot].x5;
+    }
+    return tmp->x24[tmp->x58[pl_slot].x7].x0;
+}
+
+int gm_8016C658(int arg0)
+{
+    struct lbl_8046B6A0_24C_t* temp_r31;
+    PAD_STACK(8);
+
+    temp_r31 = &lbl_8046B6A0.x24C;
+    if (lbl_8046B6A0.x24C.x0 != (UNK_T) gm_801A4BA8()) {
+        lbl_8046B6A0.x24C.x0 = (UNK_T) gm_801A4BA8();
+        gm_80166378(&lbl_8046B6A0.x24C);
+    }
+    return temp_r31->x58[arg0].x2C;
+}
+
+s32 gm_8016C6C0(HSD_GObj* arg0)
+{
+    PAD_STACK(0x10);
+    return gm_8016C5C0(ftLib_80086BE0(arg0));
+}
+
+int gm_8016C75C(HSD_GObj* arg0)
+{
+    struct lbl_8046B6A0_24C_t* tmp;
+    PAD_STACK(8);
+
+    tmp = &lbl_8046B6A0.x24C;
+    if (tmp->x0 != (UNK_T) gm_801A4BA8()) {
+        tmp->x0 = (UNK_T) gm_801A4BA8();
+        gm_80166378(tmp);
+    }
+    return tmp->x58[ftLib_80086BE0(arg0)].x20;
+}
 
 void fn_8016C7D0(HSD_GObj* gobj)
 {
     fn_80171DC4(gobj);
 }
 
-/// #fn_8016C7F0
+void fn_8016C7F0(void)
+{
+    s32 sp24;
+    s32 sp20;
+    u8 _[0x18];
 
-s8 fn_8016CA68_inline(int var_r31)
+    s32* temp_r30_2;
+    int var_r29;
+    u8 var_r29_2;
+    int var_r28;
+    u8* temp_r29_2;
+    u8* temp_r30;
+
+    if (lbl_8046B6A0.x24C8.x50 != NULL) {
+        lbl_8046B6A0.x24C8.x50(lbl_8046B6A0.unk_8);
+    }
+    HSD_PadRumbleRemoveAll();
+    for (var_r29 = 0; var_r29 < 4; var_r29++) {
+        HSD_PadRumbleOn(var_r29);
+    }
+    if (!lbl_8046B6A0.x24C8.x1_5) {
+        lbAudioAx_800236DC();
+    }
+    lbAudioAx_80023694();
+    lbAudioAx_80024C84();
+    ifTime_802F4248();
+    if (lbl_8046B6A0.unk_8 == 4 && lbl_8046B6A0.x24C8.x4_3) {
+        gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
+        Camera_80030E44(4, NULL);
+    }
+    if (gm_801A4310() == 0xF || (gm_801A4310() == 3 && lbl_8046B6A0.x24C8.xE >= 0x21 && lbl_8046B6A0.x24C8.xE <= 0x3A)) {
+        temp_r29_2 = (u8*) gm_801B6320();
+        temp_r30 = gm_8017EB30();
+        var_r28 = 0;
+        if (gm_801A4310() == 0xF) {
+            var_r29_2 = gm_80164024(*temp_r29_2);
+        } else {
+            var_r29_2 = gm_80164024(*temp_r30);
+        }
+        temp_r30_2 = gmMainLib_8015D438(var_r29_2);
+        gmMainLib_8015D450(var_r29_2);
+        Ground_801C1DE4(&sp24, &sp20);
+        if (gmMainLib_8015D48C(var_r29_2) == 0) {
+            if (sp24 == 0) {
+                var_r28 = 1;
+            }
+        } else if (sp24 == 0 && *temp_r30_2 > lbl_8046B6A0.unk_24) {
+            var_r28 = 1;
+        }
+        if (var_r28 != 0) {
+            lbl_8046B6A0.unk_10 = 0x9C41;
+            lbl_8046B6A0.unk_14 = 0x145;
+            gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0x5A);
+        } else if (sp24 > 0) {
+            lbl_8046B6A0.unk_14 = 0x149;
+            lbl_8046B6A0.unk_18 = 0x28;
+        }
+    }
+    if (gm_801A4310() == 0x2B && lbl_8046B6A0.unk_10 == 0x9C41) {
+        gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0x5A);
+    }
+    switch (gm_801A4310()) {
+    case 0x21:
+    case 0x22:
+    case 0x23:
+    case 0x24:
+    case 0x25:
+    case 0x26:
+        fn_80182B5C();
+    }
+}
+
+static inline s8 fn_8016CA68_inline(int var_r31)
 {
     int var_r30;
     for (var_r30 = 0; var_r30 < 6; var_r30++) {
@@ -960,19 +1102,343 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
     }
 }
 
-/// #fn_8016CBE8
+static inline int fn_8016CBE8_inline(void)
+{
+    HSD_PadStatus* pad;
+    bool var_r0;
+    int i;
+    for (i = 0; i < 4; i++) {
+        pad = &HSD_PadCopyStatus[(u8) i];
+        if (pad->err == 0) {
+            if (g_debugLevel >= 3) {
+                if ((pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
+                    var_r0 = true;
+                } else {
+                    var_r0 = false;
+                }
+            } else {
+                var_r0 = pad->trigger & 0x1000;
+            }
+            if (var_r0) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
 
-/// #fn_8016CD98
+void fn_8016CBE8(lbl_8046B6A0_t* arg0, int arg1)
+{
+    int i;
+    PAD_STACK(0x14);
 
-/// #fn_8016CF4C
+    if (arg0->unk_2 != 0) {
+        return;
+    }
+    if (arg0->unk_5 == 0) {
+        return;
+    }
+    if (arg0->x24C8.x2_4) {
+        return;
+    }
 
-/// #fn_8016CFE0
+    i = fn_8016CBE8_inline();
 
-/// #gm_8016D32C_OnFrame
+    if (i != -1 && i == arg0->unk_1) {
+        lbAudioAx_80024E84(0);
+        gm_801A4674(arg1);
+        ifAll_802F33CC();
+        gm_801A10FC(i);
+        HSD_PadRumbleUnpauseAll();
+        if (arg0->x24C8.x4_0) {
+            if (arg0->x24C8.x38 != NULL) {
+                arg0->x24C8.x38(i);
+            } else {
+                Ground_801C5800();
+            }
+        }
+        arg0->unk_4 = 0xA;
+    }
+}
 
-/// #fn_8016D538
+void fn_8016CD98(lbl_8046B6A0_t* arg0)
+{
+    s32 temp_r3_4;
+    s32 var_r3;
+    u16 temp_r3_2;
+    u8 temp_r0_2;
+    u8 temp_r3_5;
+    int i;
+    PAD_STACK(4);
 
-/// #fn_8016D634
+    if (arg0->unk_5 == 0) {
+       return;
+    }
+
+    if (gm_801A4624() == 0 || gm_801A46B8(0) != 0 || arg0->x24C8.x3_7 == 1) {
+        if (arg0->unk_24 < -1) {
+            arg0->unk_24++;
+        }
+        if (arg0->x24C8.x0_6) {
+            if (++arg0->unk_2C >= 0x3C) {
+                arg0->unk_2C = 0;
+                if (arg0->x24C8.x0_7) {
+                    if (arg0->unk_28 < -1) {
+                        arg0->unk_28++;
+                    }
+                } else {
+                    if (arg0->unk_28 != 0) {
+                        if (arg0->unk_28 < 6 && ifTime_802F4898() == 0) {
+                            temp_r3_4 = lbl_8046B6A0.unk_1C[arg0->unk_28];
+                            if (temp_r3_4 >= 0) {
+                                lbAudioAx_800237A8(temp_r3_4, 0x7FU, 0x40U);
+                            }
+                        }
+                        arg0->unk_28 -= 1;
+                    }
+                }
+            }
+        }
+        for (i = 0; i < 4; i++) {
+            temp_r3_5 = arg0->unk_38[i].x1;
+            if (arg0->unk_38[i].x1 != 0) {
+                arg0->unk_38[i].x1--;
+                temp_r0_2 = arg0->unk_38[i].x1;
+                if (temp_r0_2 == 0x50) {
+                    if (arg0->unk_38[i].x2 == 0) {
+                        var_r3 = arg0->unk_20[i];
+                    } else {
+                        var_r3 = 0x7C865;
+                    }
+                    lbAudioAx_80023870(var_r3, 0x7F, 0x40, 0x19);
+                } else if (temp_r0_2 == 0) {
+                    lbAudioAx_80023870(0x7C852, 0x7F, 0x40, 0x19);
+                }
+            }
+        }
+    }
+}
+
+void fn_8016CF4C(int arg0, int arg1)
+{
+    gm_801A10FC(arg0);
+    lbl_8046B6A0.unk_8 = arg1;
+    if (arg1 != 8 && g_debugLevel >= 3) {
+        gm_801A4674(1);
+        if (lbl_8046B6A0.x24C8.xD > 1) {
+            lbl_8046B6A0.unk_30 = lbl_8046B6A0.x24C8.xD - 1;
+        }
+        fn_8016C7F0();
+        lbAudioAx_80024D50();
+        gm_801A4634(4);
+        lbl_8046B6A0.unk_0 = 1;
+        return;
+    }
+    fn_8016C7F0();
+    gm_801A4B60();
+}
+
+static inline void fn_8016CF4C_dontinline(int arg0, int arg1)
+{
+    fn_8016CF4C(arg0, arg1);
+}
+
+static inline void fn_8016CFE0_inline(void)
+{
+    lbl_8046B6A0_t* tmp;
+    int i;
+
+    if (g_debugLevel >= 3 && gm_801A46B8(0) != 0 &&
+        (HSD_PadCopyStatus->button & 0x1160) == 0x1160) {
+        fn_8016C7F0();
+        gm_801A4B60();
+    }
+
+    tmp = &lbl_8046B6A0;
+    for (i = 0; i < 6; i++) {
+        if (tmp->unk_38[i].xA != 0) {
+            if (--tmp->unk_38[i].xA == 0) {
+                fn_8016719C(i, tmp->unk_38[i].xB);
+            }
+        }
+    }
+}
+
+void fn_8016CFE0(void)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    s64 var_r29_2;
+    int var_r29;
+    int var_r4;
+    PAD_STACK(0x10);
+
+    fn_8016CFE0_inline();
+
+    fn_8016A4C8();
+    fn_8016758C();
+    if (gm_801A45E8(1) != 0) {
+        var_r4 = fn_8016CBE8_inline();
+        if (g_debugLevel >= 3) {
+            var_r29 = 0x160;
+        } else {
+            var_r29 = 0x1160;
+        }
+        var_r29_2 = var_r29;
+        if (tmp->x24C8.x3_4 && tmp->unk_2 == 0 && tmp->unk_3 == 0) {
+            if ((var_r29_2 & gm_801A36A0(tmp->unk_1))) {
+                if (!(var_r29_2 & gm_801A3680(tmp->unk_1))) {
+                    fn_8016CF4C_dontinline(var_r4, 7);
+                    return;
+                }
+            }
+        }
+        if (tmp->x24C8.x3_2 && tmp->unk_2 == 0 && tmp->unk_3 == 0) {
+            if ((gm_801A36A0(tmp->unk_1) & 0x10) != 0) {
+                fn_8016CF4C_dontinline(var_r4, 8);
+                return;
+            }
+        }
+        fn_8016CBE8(tmp, 1);
+        if (tmp->unk_2 != 0) {
+            tmp->unk_2--;
+        }
+        goto block_50;
+    } else {
+        tmp->unk_8 = fn_8016C35C();
+        if (tmp->unk_8 == 0) {
+            fn_8016CA68(tmp, 1);
+            if (tmp->unk_4 != 0) {
+                tmp->unk_4--;
+            }
+        } else {
+            goto block_51;
+        }
+block_50:
+        fn_8016B918();
+        tmp->unk_8 = fn_8016C35C();
+    }
+    if (tmp->unk_8 != 0) {
+block_51:
+        fn_8016C7F0();
+        ifStatus_802F7034(fn_8016B88C);
+        lbAudioAx_80024D50();
+        gm_801A4634(4);
+        tmp->unk_0 = 1;
+    } else {
+        fn_8016CD98(tmp);
+    }
+}
+
+void gm_8016D32C_OnFrame(void)
+{
+    int i;
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    PAD_STACK(0x28);
+
+    fn_8016CFE0_inline();
+
+    fn_8016758C();
+    if (gm_801A45E8(2) != 0) {
+        fn_8016CBE8_inline();
+        fn_8016CBE8(tmp, 2);
+        if (tmp->unk_2 != 0) {
+            tmp->unk_2--;
+        }
+    } else {
+        fn_8016CA68(tmp, 2);
+        if (tmp->unk_4 != 0) {
+            tmp->unk_4--;
+        }
+    }
+    fn_8016CD98(tmp);
+    tmp->unk_8 = fn_8016C35C();
+    if (tmp->unk_8 != 0) {
+        fn_8016C7F0();
+        gm_801A4B60();
+    }
+}
+
+bool fn_8016D538(void)
+{
+    bool result = true;
+    PAD_STACK(4);
+
+    if (gm_8016B3D8()) {
+        if (fn_8017DF90() == 0 && gm_801A42C4() == 0x49) {
+            result = true;
+        } else {
+            if (gm_8016B184() && fn_801693A8() != 0) {
+                result = false;
+            } else if (lbl_8046B6A0.x24C8.x5_1) {
+                result = false;
+            }
+        }
+        if (fn_8017DF90() == 1 && (fn_8017DEC8(1)[8] & 0x20)) {
+            result = false;
+        }
+    }
+    return result;
+}
+
+static inline void fn_8016D634_inline(struct lbl_8046B6A0_24C_t* dst)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    if (lbl_8046B6A0.unk_E == 0) {
+        *dst = tmp->x24C;
+        dst->x6 = tmp->x24C8.x8;
+        dst->x4 = tmp->unk_8;
+        gm_80166378(dst);
+        fn_8016C46C_dontinline((int) dst);
+        if (tmp->unk_8 != 7 && tmp->unk_8 != 8) {
+            fn_8016C4F4(dst);
+        }
+        tmp->unk_E = 1;
+    } else {
+        *dst = tmp->x24C;
+    }
+}
+
+void fn_8016D634(void)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    struct lbl_8046B6A0_24C_t* temp_r6;
+
+    PAD_STACK(8);
+
+    if (++lbl_8046B6A0.unk_30 <= lbl_8046B6A0.x24C8.xD) {
+        return;
+    }
+    if (gm_8016B3D8()) {
+        pl_80040688(0, lbl_8046B6A0.unk_D, fn_8016D538());
+    }
+    gm_801A4B1C();
+    if (lbl_8046B6A0.x24C8.x4_4 && lbl_8046B6A0.unk_8 != 1 &&
+        (lbl_8046B6A0.x24C8.x9 == 1 || Player_GetStocks(0) > 0)) {
+        un_802FD668();
+        ifAll_802F3A64();
+        gm_801A4674(4);
+        gm_801A4634(5);
+        lbl_8046B6A0.unk_9 = 1;
+        temp_r6 = &tmp->x24C;
+        if (lbl_8046B6A0.unk_E == 0) {
+            *temp_r6 = tmp->x24C;
+            temp_r6->x6 = lbl_8046B6A0.x24C8.x8;
+            temp_r6->x4 = tmp->unk_8;
+            gm_80166378(temp_r6);
+            fn_8016C46C_dontinline((int) temp_r6);
+            if (tmp->unk_8 != 7 && tmp->unk_8 != 8) {
+                fn_8016C4F4(temp_r6);
+            }
+            tmp->unk_E = 1;
+        } else {
+            *temp_r6 = tmp->x24C;
+        }
+        fn_80180630(tmp->x24C8.x18, 0, tmp->x24C8.x9, tmp->x24C8.x4_5, temp_r6);
+        lbl_8046B6A0.unk_0 = 2;
+    } else {
+        lbl_8046B6A0.unk_0 = 3;
+    }
+}
 
 void gm_8016D800(void)
 {
@@ -1003,10 +1469,13 @@ void gm_8016D800(void)
 
 void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 {
+    lbl_8046B6A0_t* tmp = gm_8016AE38();
+    PAD_STACK(4);
+
     Player_SetSlottype(arg0, arg1->x1);
     Player_SetPlayerCharacter(arg0, arg1->x0);
 
-    lbl_8046B6A0.unk_38[arg0].x0 = arg1->x0;
+    tmp->unk_38[arg0].x0 = arg1->x0;
 
     Player_SetStocks(arg0, arg1->x2);
     Player_SetCostumeId(arg0, arg1->x3);
@@ -1022,19 +1491,19 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         } else {
             Player_SetPlayerCharacter(arg0, CKIND_ZELDA);
         }
-        lbl_8046B6A0.unk_38[arg0].x4_b4 = 1;
+        tmp->unk_38[arg0].x4_b4 = 1;
     }
 
-    lbl_8046B6A0.unk_38[arg0].x3 = arg1->x5;
+    tmp->unk_38[arg0].x3 = arg1->x5;
 
     Player_SetHandicap(arg0, (s8) arg1->x8);
     Player_SetTeam(arg0, (s8) arg1->x9);
     Player_SetFlagsBit0(arg0, arg1->xC_b0);
     Player_SetNametagSlotID(arg0, arg1->xA);
     if (arg1->xC_b1) {
-        lbl_8046B6A0.unk_A += 5;
+        tmp->unk_A += 5;
         Player_SetFlagsBit3(arg0, 1);
-        Player_SetUnk4C(arg0, lbl_8046B6A0.unk_A);
+        Player_SetUnk4C(arg0, tmp->unk_A);
     }
     Player_SetPlayerAndEntityCpuType(arg0, arg1->xE);
     Player_SetPlayerAndEntityCpuLevel(arg0, arg1->xF);
@@ -1044,7 +1513,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetHUDDamage(arg0, arg1->x12);
     }
 
-    lbl_8046B6A0.unk_38[arg0].x6 = arg1->x12;
+    tmp->unk_38[arg0].x6 = arg1->x12;
 
     if (arg1->xC_b7) {
         Player_SetMoreFlagsBit2(arg0, 1);
@@ -1061,14 +1530,14 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         Player_SetMoreFlagsBit1(arg0, 0);
     }
 
-    lbl_8046B6A0.unk_38[arg0].x4_b1 = arg1->xC_b3;
-    lbl_8046B6A0.unk_38[arg0].x4_b0 = arg1->xC_b2;
+    tmp->unk_38[arg0].x4_b1 = arg1->xC_b3;
+    tmp->unk_38[arg0].x4_b0 = arg1->xC_b2;
     if (arg1->xC_b2) {
         Player_SetFlagsBit5(arg0, 1);
     } else {
         Player_SetFlagsBit5(arg0, 0);
     }
-    lbl_8046B6A0.unk_38[arg0].x4_b2 = arg1->xC_b4;
+    tmp->unk_38[arg0].x4_b2 = arg1->xC_b4;
     if (arg1->xC_b4) {
         Player_SetFlagsBit6(arg0, 1);
         Player_SetFlagsBit7(arg0, 0);
@@ -1092,41 +1561,35 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetMoreFlagsBit5(arg0, 0);
     }
-    lbl_8046B6A0.unk_38[arg0].x4_b3 = arg1->xD_b1;
+    tmp->unk_38[arg0].x4_b3 = arg1->xD_b1;
     Player_SetMoreFlagsBit6(arg0, arg1->xB);
     Player_SetFacingDirection(arg0, arg1->x6);
-    lbl_8046B6A0.unk_38[arg0].x4_b5 = arg1->xD_b0;
+    tmp->unk_38[arg0].x4_b5 = arg1->xD_b0;
 }
-
-static struct {
-    u32 x0, x4, x8, xC;
-} lbl_803D5620 = { 0 };
-static struct {
-    u32 x0, x4, x8, xC, x10, x14;
-} lbl_803D5630 = { 0 };
 
 void fn_8016DCC0(StartMeleeData* arg0)
 {
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
     int i;
 
     memzero(&lbl_8046B6A0, 0x24C8);
     lbl_8046B6A0.unk_D = 6;
-    lbl_8046B6A0.unk_1C = &lbl_803D5630;
-    lbl_8046B6A0.unk_20 = &lbl_803D5620;
+    lbl_8046B6A0.unk_1C = (void*) &lbl_803D5630;
+    lbl_8046B6A0.unk_20 = (void*) &lbl_803D5620;
     lbl_8046B6A0.unk_0 = 0;
 
     lbl_8046B6A0.x24C8 = arg0->rules;
 
-    lbl_8046B6A0.unk_251 = arg0->rules.x0_0;
-    lbl_8046B6A0.unk_252 = arg0->rules.x8;
+    lbl_8046B6A0.x24C.x5 = arg0->rules.x0_0;
+    lbl_8046B6A0.x24C.x6 = arg0->rules.x8;
     if (arg0->rules.x7 != 0) {
         lbl_8046B6A0.unk_B = arg0->rules.x7;
     }
-    lbl_8046B6A0.unk_258 = arg0->rules.xC;
+    lbl_8046B6A0.x24C.xC = arg0->rules.xC;
     Camera_80030E34(arg0->rules.x2C);
 
-    if (lbl_8046B6A0.x24C8.x0_6) {
-        if (lbl_8046B6A0.x24C8.x0_7) {
+    if (tmp->x24C8.x0_6) {
+        if (tmp->x24C8.x0_7) {
             if (arg0->rules.x14 != 0) {
                 lbl_8046B6A0.unk_2C = arg0->rules.x14 - 1;
             } else {
@@ -1180,13 +1643,227 @@ void fn_8016DCC0(StartMeleeData* arg0)
     }
 }
 
-/// #fn_8016DEEC
+void fn_8016DEEC(void)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    lbl_8046B6A0_t* tmp2 = &lbl_8046B6A0;
+    float sp18[6];
+    Vec3 spC;
+    float temp_f0;
+    float var_f1;
+    float var_f26;
+    float var_f25;
+    int var_r25;
+    int i;
+    int j;
+    int var_r23;
 
-/// #fn_8016E124
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3) {
+            if (tmp->unk_38[i].x3 == -1) {
+                Stage_80224E64(i, &spC);
+            } else {
+                int x = tmp2->unk_38[i].x3;
+                Stage_80224E64(x, &spC);
+            }
+            sp18[i] = spC.x;
+        }
+    }
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3 && Player_GetFacingDirection(i) == 0.0f) {
+            var_r23 = -1;
 
-/// #fn_8016E2BC
+            for (j = 0; j < 6; j++) {
+                if (j != i &&
+                    Player_GetPlayerSlotType(j) != 3 &&
+                    (tmp->x24C8.x8 != 1 || Player_GetTeam(i) != Player_GetTeam(j))) {
+                    if (var_r23 == -1 || var_f25 < (var_f26 = fabs_inline(sp18[i] - sp18[j]))) {
+                        var_r23 = j;
+                        var_f25 = var_f26;
+                    }
+                }
+            }
+            if (var_r23 == -1) {
+                var_f1 = 1.0f;
+            } else {
+                temp_f0 = sp18[var_r23] - sp18[i];
+                if (temp_f0 < -5.0F) {
+                    var_f1 = -1.0F;
+                } else if (temp_f0 > 5.0F) {
+                    var_f1 = +1.0F;
+                } else if (Player_GetFacingDirection(var_r23) == +1.0F) {
+                    var_f1 = -1.0F;
+                } else if (Player_GetFacingDirection(var_r23) == -1.0F) {
+                    var_f1 = +1.0F;
+                } else {
+                    var_f1 = +1.0F;
+                }
+            }
+            Player_SetFacingDirection(i, var_f1);
+        }
+    }
+}
 
-/// #fn_8016E5C0
+void fn_8016E124(void)
+{
+    int var_r27 = 0;
+    int i;
+    int j;
+    int temp_r3;
+
+    int sp10[7];
+
+    for (i = 0; i < 7; i++) {
+        sp10[i] = -1;
+    }
+
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) != 3 &&
+            Player_GetPlayerCharacter(i) == CKIND_KIRBY) {
+            s8 temp_r3 = Player_GetCostumeId(i);
+            bool var_r5 = false;
+            for (j = 0; j < var_r27; j++) {
+                if (temp_r3 == sp10[j]) {
+                    var_r5 = true;
+                    break;
+                }
+            }
+            if (!var_r5) {
+                sp10[var_r27] = temp_r3;
+                var_r27++;
+            }
+        }
+    }
+    if (var_r27 > 0) {
+        for (i = 0; i < 6; i++) {
+            if (Player_GetPlayerSlotType(i) != 3) {
+                temp_r3 = Player_80032610(i, 0);
+                if (temp_r3 != -1 && temp_r3 != 4) {
+                    for (j = 0; j < var_r27; j++) {
+                        Player_80031DA8(temp_r3, sp10[j]);
+                    }
+                }
+                temp_r3 = Player_80032610(i, 1);
+                if (temp_r3 != -1 && temp_r3 != 4) {
+                    for (j = 0; j < var_r27; j++) {
+                        Player_80031DA8(temp_r3, sp10[j]);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void fn_8016E2BC(void)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    u8 _[4];
+    Vec3 sp24;
+    Vec3 sp18;
+    float var_f1;
+    float var_f1_2;
+    bool var_r0;
+    int i;
+    int temp_r27;
+    int temp_r24;
+    PAD_STACK(0x10);
+
+    Player_80036DA4();
+    if (tmp->unk_7 == 1) {
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if (var_r0) {
+        if (tmp->unk_38[0].x3 == -1) {
+            Stage_80224E64(0, &sp24);
+        } else {
+            int x = tmp->unk_38[0].x3;
+            Stage_80224E64(x, &sp24);
+        }
+        if (Player_GetFacingDirection(0) == 0.0F) {
+            if (Stage_80224DC8(tmp->x24C8.xE) != 0) {
+                Player_SetFacingDirection(0, 1.0F);
+            } else {
+                if (sp24.x >= 0.0F) {
+                    var_f1 = -1.0F;
+                } else {
+                    var_f1 = +1.0F;
+                }
+                Player_SetFacingDirection(0, var_f1);
+            }
+        }
+        Player_80032768(0, &sp24);
+        temp_r27 = tmp->x24C8.x8 == 1;
+        Player_SetUnk45(0, fn_80160840(gm_80160854(Player_GetPlayerId(0), Player_GetTeam(0), temp_r27, Player_GetPlayerSlotType(0))));
+        Player_80031AD0(0);
+        if (tmp->unk_38[0].x4_b4) {
+            lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
+        }
+        fn_80169C54(Player_GetPlayerCharacter(0), Player_GetCostumeId(0));
+        fn_80169F50(Player_GetPlayerCharacter(0), Player_GetCostumeId(0));
+    } else {
+        fn_8016DEEC();
+        for (i = 0; i < 6; i++) {
+            if (Player_GetPlayerSlotType(i) != 3) {
+                if (tmp->unk_38[i].x3 == -1) {
+                    Stage_80224E64(i, &sp18);
+                } else {
+                    Stage_80224E64(tmp->unk_38[i].x3, &sp18);
+                }
+                if (Player_GetFacingDirection(i) == 0.0F) {
+                    if (Stage_80224DC8(tmp->x24C8.xE) != 0) {
+                        Player_SetFacingDirection(i, 1.0F);
+                    } else {
+                        if (sp18.x >= 0.0F) {
+                            var_f1_2 = -1.0F;
+                        } else {
+                            var_f1_2 = +1.0F;
+                        }
+                        Player_SetFacingDirection(i, var_f1_2);
+                    }
+                }
+                Player_80032768(i, &sp18);
+                temp_r24 = tmp->x24C8.x8 == 1;
+                Player_SetUnk45(i, fn_80160840(
+                    gm_80160854(Player_GetPlayerId(i), Player_GetTeam(i),
+                                temp_r24, Player_GetPlayerSlotType(i))));
+                Player_80031AD0(i);
+                if (tmp->unk_38[i].x4_b4) {
+                    lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
+                }
+            }
+        }
+        fn_8016E124();
+    }
+}
+
+bool fn_8016E5C0(StartMeleeData* arg0)
+{
+    bool var_r4;
+    bool var_r6;
+    int i;
+
+    if (arg0->rules.xA != 0) {
+        return arg0->rules.xA;
+    }
+    var_r4 = false;
+    var_r6 = false;
+    for (i = 0; i < 6; i++) {
+        if (arg0->players[i].x1 == 0) {
+            var_r4 = true;
+            if (!(HSD_PadCopyStatus[(u8) i].button & (HSD_PAD_L | HSD_PAD_R))) {
+                var_r6 = true;
+                break;
+            }
+        }
+    }
+
+    if (var_r4 && !var_r6) {
+        return true;
+    }
+    return false;
+}
 
 void fn_8016E730(StartMeleeData* arg0)
 {
@@ -1279,7 +1956,67 @@ void gm_8016E934_OnEnter(void* arg0)
     ifStatus_802F665C(tmp->rules.x0_3);
 }
 
-/// #gm_8016E9C8
+struct EndMeleeData {
+    /* 00 */ u32 x0;
+    /* 04 */ u32 x4;
+    /* 08 */ u32 x8;
+    /* 0C */ struct lbl_8046B6A0_24C_t xC;
+};
+
+static inline bool gm_8016E9C8_inline() {
+    switch (gm_801A4310()) {
+    case 0x10:
+    case 0x11:
+    case 0x12:
+    case 0x13:
+    case 0x1D:
+    case 0x1E:
+    case 0x1F:
+    case 0x2A:
+    case 0x2C:
+        return true;
+    default:
+        return false;
+    }
+}
+
+void gm_8016E9C8(void* arg0_raw)
+{
+    struct EndMeleeData* arg0 = arg0_raw;
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    int i;
+
+    if (lbl_8046B6A0.unk_E == 0) {
+        arg0->xC = lbl_8046B6A0.x24C;
+        arg0->xC.x6 = lbl_8046B6A0.x24C8.x8;
+        arg0->xC.x4 = lbl_8046B6A0.unk_8;
+        gm_80166378(&arg0->xC);
+        fn_8016C46C_dontinline((int) &arg0->xC);
+        if (tmp->unk_8 != 7 && tmp->unk_8 != 8) {
+            fn_8016C4F4(&arg0->xC);
+        }
+        tmp->unk_E = 1;
+    } else {
+        arg0->xC = lbl_8046B6A0.x24C;
+    }
+    if (lbl_8046B6A0.x24C8.x4_4) {
+        arg0->x0 = fn_8017F294();
+    } else {
+        arg0->x0 = lbl_8046B6A0.x24C8.x18;
+    }
+    arg0->x4 = lbl_8046B6A0.unk_28;
+    arg0->x8 = Ground_801C5ABC();
+
+    if (gm_8016B3D8() || gm_8016E9C8_inline() || gm_801A4310() == 2) {
+        if (lbl_8046B6A0.unk_8 != 7 && lbl_8046B6A0.unk_8 != 8) {
+            for (i = 0; i < 6; i++) {
+                if (Player_GetPlayerSlotType(i) == 0) {
+                    gmMainLib_8015D00C(gm_80164024(Player_GetPlayerCharacter(i)));
+                }
+            }
+        }
+    }
+}
 
 void gm_8016EBC0_OnEnter(void* arg0)
 {
@@ -1314,42 +2051,218 @@ void gm_8016EC28_OnEnter(void* arg0)
     fn_8018A000();
 }
 
-/// #gm_8016EC28_OnEnter
+float gm_8016ECE8(void)
+{
+    float var_f29;
+    int count;
+    int i;
 
-/// #gm_8016ECE8
+    count = 0;
+    var_f29 = 0.0F;
+    for (i = 0; i < 6; i++) {
+        CharacterKind kind = Player_GetPlayerCharacter(i);
+        if (kind == CKIND_MASTERH || kind == CKIND_CREZYH) {
+            var_f29 += (float) Player_GetRemainingHP(i) / Player_GetOtherStamina(i);
+            count++;
+        }
+    }
+    if (count > 0) {
+        var_f29 /= count;
+    }
+    return var_f29;
+}
 
-/// #gm_8016EDDC
+static inline void gm_8016EDDC_inline(int arg0, int temp_r3, Vec3* sp18)
+{
+}
 
-/// #fn_8016EF98
+bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    Vec3 sp18;
+    float var_f1;
+    u8 temp_r30;
+    u8 temp_r29;
+    int temp_r27;
+    s8 temp_r3;
+    PAD_STACK(4);
 
-/// #gm_8016F00C
+    if (lbl_8046B6A0.unk_7 == 0 && Player_GetPlayerSlotType(arg0) == 3 &&
+        Player_GetEntity(arg0) == NULL) {
 
-/// #fn_8016F030
+        Player_80036D24(arg0);
+        fn_8016D8AC(arg0, arg1);
 
-/// #gm_8016F088
+        temp_r3 = tmp->unk_38[arg0].x3;
+        if (temp_r3 == -1) {
+            Stage_80224E64(arg0, &sp18);
+        } else {
+            Stage_80224E64(temp_r3, &sp18);
+        }
 
-/// #gm_8016F120
+        if (Player_GetFacingDirection(arg0) == 0.0F) {
+            if (Stage_80224DC8(lbl_8046B6A0.x24C8.xE) != 0) {
+                Player_SetFacingDirection(arg0, 1.0F);
+            } else {
+                if (sp18.x >= 0.0F) {
+                    var_f1 = -1.0F;
+                } else {
+                    var_f1 = +1.0F;
+                }
+                Player_SetFacingDirection(arg0, var_f1);
+            }
+        }
+        Player_80032768(arg0, &sp18);
+        temp_r27 = lbl_8046B6A0.x24C8.x8 == 1;
+        Player_SetUnk45(arg0, fn_80160840(
+            gm_80160854(Player_GetPlayerId(arg0), Player_GetTeam(arg0),
+                        temp_r27, Player_GetPlayerSlotType(arg0))));
+        Player_80031AD0(arg0);
+        if (lbl_8046B6A0.unk_38[arg0].x4_b4) {
+            lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
+        }
+        fn_8016E124();
+        Player_80031848(arg0);
+        ifStatus_802F6508(arg0);
+        un_802FD28C(arg0);
+        return true;
+    }
+    return false;
+}
 
-/// #fn_8016F140
+bool fn_8016EF98(int arg0)
+{
+    if (lbl_8046B6A0.unk_7 == 0 && Player_GetEntity(arg0) != NULL) {
+        ifStatus_802F6788(arg0);
+        Player_80031EBC(arg0);
+        Player_SetSlottype(arg0, 3);
+        return 1;
+    }
+    return 0;
+}
 
-/// #fn_8016F160
+void gm_8016F00C(int arg0)
+{
+    fn_8016719C(arg0, 0);
+}
 
-/// #fn_8016F180
+void fn_8016F030(StartMeleeData* arg0)
+{
+    int i;
+    gm_80167A64(&arg0->rules);
+    for (i = 0; i < 6; i++) {
+        gm_8016795C(&arg0->players[i]);
+    }
+}
 
-/// #gmDecisionGetType
+void gm_8016F088(StartMeleeData* arg0)
+{
+    int var_r3;
+    int temp_r3;
+    int i;
+
+    for (i = 0; i < 6; i++) {
+        if (arg0->players[i].x1 == 0 && i < 4) {
+            temp_r3 = arg0->players[i].x4;
+            if (temp_r3 == 0) {
+                var_r3 = i;
+            } else {
+                var_r3 = temp_r3 - 1;
+            }
+            arg0->players[i].xC_b0 = gm_801677F8(var_r3, arg0->players[i].xA);
+        } else {
+            arg0->players[i].xC_b0 = false;
+        }
+    }
+}
+
+void gm_8016F120(int arg0)
+{
+    gmMainLib_8015DADC(arg0);
+}
+
+void fn_8016F140(int arg0)
+{
+    gmMainLib_8015DAB4(arg0);
+}
+
+void fn_8016F160(int arg0, int arg1)
+{
+    pl_80039418(arg0, arg1);
+}
+
+int fn_8016F180(int arg0)
+{
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    while (curr->x0 != arg0) {
+        if (curr->x0 == 0x29A) {
+            return 0;
+        }
+        curr++;
+    }
+    return curr->x4;
+}
+
+int gmDecisionGetType(int kind)
+{
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    while (curr->x0 != kind) {
+        if (curr->x0 == 0x29A) {
+            return 0;
+        }
+        curr++;
+    }
+    return curr->x5;
+}
 
 short fn_8016F1F0(int idx)
 {
     return lbl_803D5A4C[idx].x0;
 }
 
-/// #gm_8016F208
+int gm_8016F208(int arg0)
+{
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    while (curr->x0 != arg0) {
+        if (curr->x0 == 0x29A) {
+            return 0;
+        }
+        curr++;
+    }
+    if (curr->x2 == 0xDE && lbLang_IsSettingUS()) {
+        return 0x102;
+    }
+    return curr->x2;
+}
 
-/// #fn_8016F280
+int fn_8016F280(int arg0)
+{
+    return gm_8016F208(arg0) - 2;
+}
 
-/// #gm_8016F2F8
+int gm_8016F2F8(int arg0, u8 arg1)
+{
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    while (curr->x0 != arg0) {
+        if (curr->x0 == 0x29A) {
+            return -1;
+        }
+        curr++;
+    }
+    return lbl_803D5648[curr->x2 - 2];
+}
 
-/// #fn_8016F344
+void fn_8016F344(struct lbl_8046B6A0_24C_t* arg0)
+{
+    struct lbl_8046B6A0_24C_58_t* curr = arg0->x58;
+    int i;
+    for (i = 0; i < 4; i++) {
+        if (curr->x0 != 3) {
+            pl_80039450(i);
+        }
+        curr++;
+    }
+}
 
 /// #fn_8016F39C
 
@@ -1361,7 +2274,6 @@ short fn_8016F1F0(int idx)
 
 /// #fn_8016F9A8
 
-static u8 lbl_8046DBC8[0xe];
 void fn_80171AD4(void)
 {
     memzero(&lbl_8046DBC8, 0xE);
