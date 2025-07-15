@@ -335,9 +335,22 @@ bool gm_8016B41C(void)
     }
 }
 
-static inline bool gm_8016B41C_dontinline(void)
+static float get_unk_float(void)
 {
-    return gm_8016B41C();
+    if (gm_8016B41C() != 0) {
+        return 1.0F;
+    } else {
+        switch (gm_8016B558()) {
+        case 2:
+            return 1.0F;
+        case 3:
+            return 1.1F;
+        case 4:
+            return 1.2F;
+        default:
+            return 1.0F;
+        }
+    }
 }
 
 bool gm_8016B498(void)
@@ -1642,6 +1655,15 @@ void fn_8016DCC0(StartMeleeData* arg0)
     }
 }
 
+static float direction(float x)
+{
+    if (x >= 0.0F) {
+        return -1.0F;
+    } else {
+        return +1.0F;
+    }
+}
+
 void fn_8016DEEC(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
@@ -1759,13 +1781,12 @@ void fn_8016E2BC(void)
     u8 _[4];
     Vec3 sp24;
     Vec3 sp18;
-    float var_f1;
     float var_f1_2;
     bool var_r0;
     int i;
     int temp_r27;
     int temp_r24;
-    PAD_STACK(0x10);
+    PAD_STACK(0xC);
 
     Player_80036DA4();
     if (tmp->unk_7 == 1) {
@@ -1784,12 +1805,7 @@ void fn_8016E2BC(void)
             if (Stage_80224DC8(tmp->x24C8.xE) != 0) {
                 Player_SetFacingDirection(0, 1.0F);
             } else {
-                if (sp24.x >= 0.0F) {
-                    var_f1 = -1.0F;
-                } else {
-                    var_f1 = +1.0F;
-                }
-                Player_SetFacingDirection(0, var_f1);
+                Player_SetFacingDirection(0, direction(sp24.x));
             }
         }
         Player_80032768(0, &sp24);
@@ -1867,8 +1883,6 @@ bool fn_8016E5C0(StartMeleeData* arg0)
 void fn_8016E730(StartMeleeData* arg0)
 {
     HSD_GObj* temp_r30;
-    f32 var_f0;
-    s32 temp_r3;
     lbl_8046B6A0_t* r30;
 
     db_Setup();
@@ -1891,26 +1905,8 @@ void fn_8016E730(StartMeleeData* arg0)
     Stage_802251E8((enum InternalStageId) arg0->rules.xE, NULL);
 
     r30 = &lbl_8046B6A0;
-    if (gm_8016B41C_dontinline() != 0) {
-        var_f0 = 1.0F;
-    } else {
-        temp_r3 = gm_8016B558();
-        switch (temp_r3) {                          /* irregular */
-        case 2:
-            var_f0 = 1.0F;
-            break;
-        case 3:
-            var_f0 = 1.1F;
-            break;
-        case 4:
-            var_f0 = 1.2F;
-            break;
-        default:
-            var_f0 = 1.0F;
-            break;
-        }
-    }
-    r30->unk_34 = var_f0;
+
+    r30->unk_34 = get_unk_float();
     Item_80266F70();
     Item_80266FCC();
     it_8026D018();
