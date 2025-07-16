@@ -19,7 +19,7 @@
 /* 12CDD4 */ HSD_Joint* ftYs_SpecialN_8012CDD4(ftYs_GObj* gobj);
 /* 12CDE8 */ void ftYs_SpecialN_Enter(ftYs_GObj* gobj);
 /* 12CE64 */ void ftYs_SpecialAirN_Enter(ftYs_GObj* gobj);
-/* 12D004 */ UNK_RET fn_8012D004(UNK_PARAMS);
+/* 12D004 */ void fn_8012D004(HSD_GObj* gobj);
 /* 12D0A0 */ UNK_RET fn_8012D0A0(UNK_PARAMS);
 /* 12D128 */ void fn_8012D128(ftYs_GObj* gobj);
 /* 12D1AC */ void fn_8012D1AC(ftYs_GObj* gobj);
@@ -90,7 +90,7 @@
 /* 12EB48 */ UNK_RET ftYs_SpecialS_8012EB48(UNK_PARAMS);
 /* 12EC7C */ UNK_RET fn_8012EC7C(UNK_PARAMS);
 /* 12EDE8 */ UNK_RET fn_8012EDE8(UNK_PARAMS);
-/* 12EFC0 */ UNK_RET fn_8012EFC0(UNK_PARAMS);
+/* 12EFC0 */ void fn_8012EFC0(ftYs_GObj* gobj);
 /* 12EFF4 */ UNK_RET fn_8012EFF4(UNK_PARAMS);
 /* 12F0DC */ UNK_RET ftYs_SpecialS_8012F0DC(UNK_PARAMS);
 /* 12F35C */ UNK_RET ftYs_SpecialS_8012F35C(UNK_PARAMS);

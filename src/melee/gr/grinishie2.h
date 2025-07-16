@@ -1,47 +1,53 @@
 #ifndef GALE01_1FCBC0
 #define GALE01_1FCBC0
 
+#include <platform.h>
 #include <placeholder.h>
+
+#include "lb/forward.h"
+#include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1FCBC0 */ UNK_RET grInishie2_801FCBC0(UNK_PARAMS);
 /* 1FCBC4 */ UNK_RET grInishie2_801FCBC4(UNK_PARAMS);
 /* 1FCCAC */ UNK_RET grInishie2_801FCCAC(UNK_PARAMS);
-/* 1FCCB0 */ UNK_RET grInishie2_801FCCB0(UNK_PARAMS);
-/* 1FCCD4 */ UNK_RET grInishie2_801FCCD4(UNK_PARAMS);
-/* 1FCCDC */ UNK_RET grInishie2_801FCCDC(UNK_PARAMS);
-/* 1FCDC8 */ UNK_RET grInishie2_801FCDC8(UNK_PARAMS);
-/* 1FCDF4 */ UNK_RET grInishie2_801FCDF4(UNK_PARAMS);
-/* 1FCDFC */ UNK_RET grInishie2_801FCDFC(UNK_PARAMS);
-/* 1FCE00 */ UNK_RET grInishie2_801FCE00(UNK_PARAMS);
-/* 1FCE04 */ UNK_RET grInishie2_801FCE04(UNK_PARAMS);
-/* 1FCF24 */ UNK_RET grInishie2_801FCF24(UNK_PARAMS);
-/* 1FCF2C */ UNK_RET grInishie2_801FCF2C(UNK_PARAMS);
-/* 1FCFCC */ UNK_RET grInishie2_801FCFCC(UNK_PARAMS);
-/* 1FD014 */ UNK_RET grInishie2_801FD014(UNK_PARAMS);
-/* 1FD018 */ UNK_RET grInishie2_801FD018(UNK_PARAMS);
-/* 1FD0B4 */ UNK_RET grInishie2_801FD0B4(UNK_PARAMS);
-/* 1FD198 */ UNK_RET grInishie2_801FD198(UNK_PARAMS);
-/* 1FD21C */ UNK_RET grInishie2_801FD21C(UNK_PARAMS);
-/* 1FD224 */ UNK_RET grInishie2_801FD224(UNK_PARAMS);
-/* 1FD364 */ UNK_RET grInishie2_801FD364(UNK_PARAMS);
-/* 1FD368 */ UNK_RET grInishie2_801FD368(UNK_PARAMS);
-/* 1FD3CC */ UNK_RET grInishie2_801FD3CC(UNK_PARAMS);
-/* 1FD448 */ UNK_RET grInishie2_801FD448(UNK_PARAMS);
-/* 1FD4CC */ UNK_RET grInishie2_801FD4CC(UNK_PARAMS);
-/* 1FD4F0 */ UNK_RET grInishie2_801FD4F0(UNK_PARAMS);
-/* 1FD64C */ UNK_RET grInishie2_801FD64C(UNK_PARAMS);
-/* 1FD654 */ UNK_RET grInishie2_801FD654(UNK_PARAMS);
-/* 1FD740 */ UNK_RET grInishie2_801FD740(UNK_PARAMS);
-/* 1FD744 */ UNK_RET grInishie2_801FD744(UNK_PARAMS);
-/* 1FD7A8 */ UNK_RET grInishie2_801FD7A8(UNK_PARAMS);
-/* 1FD824 */ UNK_RET grInishie2_801FD824(UNK_PARAMS);
-/* 1FD9EC */ UNK_RET grInishie2_801FD9EC(UNK_PARAMS);
-/* 1FDE8C */ UNK_RET grInishie2_801FDE8C(UNK_PARAMS);
-/* 1FDED0 */ UNK_RET grInishie2_801FDED0(UNK_PARAMS);
-/* 1FDED8 */ UNK_RET grInishie2_801FDED8(UNK_PARAMS);
-/* 1FDFB4 */ UNK_RET grInishie2_801FDFB4(UNK_PARAMS);
-/* 1FDFE4 */ UNK_RET grInishie2_801FDFE4(UNK_PARAMS);
-/* 1FDFE8 */ UNK_RET grInishie2_801FDFE8(UNK_PARAMS);
-/* 1FDFF0 */ UNK_RET grInishie2_801FDFF0(UNK_PARAMS);
+/* 1FCCB0 */ void grInishie2_801FCCB0(HSD_GObj*);
+/* 1FCCD4 */ bool grInishie2_801FCCD4(void);
+/* 1FCCDC */ HSD_GObj* grInishie2_801FCCDC(int);
+/* 1FCDC8 */ void grInishie2_801FCDC8(HSD_GObj*);
+/* 1FCDF4 */ bool grInishie2_801FCDF4(HSD_GObj*);
+/* 1FCDFC */ void grInishie2_801FCDFC(HSD_GObj*);
+/* 1FCE00 */ void grInishie2_801FCE00(HSD_GObj*);
+/* 1FCE04 */ void grInishie2_801FCE04(HSD_GObj*);
+/* 1FCF24 */ bool grInishie2_801FCF24(HSD_GObj*);
+/* 1FCF2C */ void grInishie2_801FCF2C(HSD_GObj*);
+/* 1FCFCC */ void grInishie2_801FCFCC(HSD_GObj*);
+/* 1FD014 */ void grInishie2_801FD014(HSD_GObj*);
+/* 1FD018 */ void grInishie2_801FD018(HSD_GObj*);
+/* 1FD0B4 */ void grInishie2_801FD0B4(HSD_GObj*);
+/* 1FD198 */ void grInishie2_801FD198(HSD_GObj*);
+/* 1FD21C */ bool grInishie2_801FD21C(HSD_GObj*);
+/* 1FD224 */ void grInishie2_801FD224(HSD_GObj*);
+/* 1FD364 */ void grInishie2_801FD364(HSD_GObj*);
+/* 1FD368 */ void grInishie2_801FD368(HSD_GObj*);
+/* 1FD3CC */ void grInishie2_801FD3CC(HSD_GObj*);
+/* 1FD448 */ void grInishie2_801FD448(HSD_GObj*);
+/* 1FD4CC */ void grInishie2_801FD4CC(HSD_GObj*);
+/* 1FD4F0 */ void grInishie2_801FD4F0(HSD_GObj*);
+/* 1FD64C */ bool grInishie2_801FD64C(HSD_GObj*);
+/* 1FD654 */ void grInishie2_801FD654(HSD_GObj*);
+/* 1FD740 */ void grInishie2_801FD740(HSD_GObj*);
+/* 1FD744 */ void grInishie2_801FD744(HSD_GObj*);
+/* 1FD7A8 */ void grInishie2_801FD7A8(HSD_GObj*);
+/* 1FD824 */ void grInishie2_801FD824(HSD_GObj*);
+/* 1FD9EC */ void grInishie2_801FD9EC(HSD_GObj*);
+/* 1FDE8C */ void grInishie2_801FDE8C(HSD_GObj*);
+/* 1FDED0 */ bool grInishie2_801FDED0(HSD_GObj*);
+/* 1FDED8 */ void grInishie2_801FDED8(HSD_GObj*);
+/* 1FDFB4 */ s32 grInishie2_801FDFB4(s32);
+/* 1FDFE4 */ void grInishie2_801FDFE4(HSD_GObj*);
+/* 1FDFE8 */ bool grInishie2_801FDFE8(void);
+/* 1FDFF0 */ bool grInishie2_801FDFF0(void);
 
 #endif

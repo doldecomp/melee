@@ -1,5 +1,7 @@
 #include "ftSeak/ftSk_SpecialLw.h"
 
+#include "ef/eflib.h"
+#include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
@@ -17,9 +19,29 @@ static float const ftSk_Init_804D96A0 = 1.0471975803375244F;
 static f32 const ftSk_Init_804D96A4 = 0.0f;
 static f32 const ftSk_Init_804D96A8 = 0.0078125f;
 
-void fn_80114034(HSD_GObj* gobj) {}
+void fn_80114034(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2219_b0) {
+        efSync_Spawn(0x4FC, gobj, fp->parts[FtPart_R2ndNb].joint);
+        fp->x2219_b0 = true;
+    }
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = 0;
+}
 
-void fn_801140B0(HSD_GObj* gobj) {}
+void fn_801140B0(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2219_b0) {
+        efSync_Spawn(0x4FD, gobj, fp->parts[FtPart_HipN].joint);
+        fp->x2219_b0 = true;
+    }
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = 0;
+}
 
 void fn_8011412C(HSD_GObj* gobj)
 {
@@ -29,7 +51,7 @@ void fn_8011412C(HSD_GObj* gobj)
 }
 
 // Sheik_AS_361_Transform_Grounded
-/// #ftSk_SpecialLw_Enter
+void ftSk_SpecialLw_Enter(HSD_GObj* gobj) {}
 
 // Sheik_AS_363_Transform_Aerial
 /// #ftSk_SpecialAirLw_Enter

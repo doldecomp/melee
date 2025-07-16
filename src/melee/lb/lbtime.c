@@ -16,8 +16,9 @@ u32 lbTime_8000AEE4(u32 a, int b)
     }
 }
 
-u32 lbTime_8000AF24(u32 a, int b, int c)
+u32 lbTime_8000AF24(u32 a, int b)
 {
+    int c;
     if (b > 0) {
         unsigned int ab = a & 0x0000ffff;
         c = 0x0000ffff;
