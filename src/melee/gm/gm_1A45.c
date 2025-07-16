@@ -45,7 +45,7 @@ bool gm_801A45E8(int bit)
     return gm_80479D58.unk_10 & (1ULL << bit);
 }
 
-u8 gm_801A4624(void)
+int gm_801A4624(void)
 {
     return gm_80479D58.unk_10;
 }

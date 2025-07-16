@@ -6,7 +6,7 @@
 #include <placeholder.h>
 
 /* 1A45E8 */ bool gm_801A45E8(int bit);
-/* 1A4624 */ u8 gm_801A4624(void);
+/* 1A4624 */ int gm_801A4624(void);
 /* 1A4634 */ void gm_801A4634(int bit);
 /* 1A4674 */ void gm_801A4674(int bit);
 /* 1A46B8 */ bool gm_801A46B8(int bit);

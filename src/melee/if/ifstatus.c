@@ -300,7 +300,7 @@ void ifStatus_802F66A4(void)
     NOT_IMPLEMENTED;
 }
 
-void ifStatus_802F6788(s32 player_idx)
+void ifStatus_802F6788(u8 player_idx)
 {
     IfDamageState* player_hud;
     s8 p_idx = (u8) player_idx;

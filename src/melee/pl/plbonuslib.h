@@ -66,6 +66,7 @@
 /* 04049C */ void pl_8004049C(int, ItemKind);
 /* 040614 */ void pl_80040614(int, float);
 /* 04065C */ void pl_8004065C(int, int);
+/* 040688 */ void pl_80040688(int, int, int);
 /* 0407C8 */ float pl_800407C8(int);
 /* 040870 */ float pl_80040870(int);
 /* 040894 */ unsigned int pl_80040894(int);

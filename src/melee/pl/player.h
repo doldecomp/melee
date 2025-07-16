@@ -45,10 +45,10 @@ typedef struct _StaticPlayer {
 
     /*0x44*/ u8 costume_id; // 00 = normal, 01 = red, 02 = blue, 03 = green
                             // (reflected in icon immediately)
-    /*0x45*/ s8 unk45;
+    /*0x45*/ u8 unk45;
     /*0x46*/ s8 controller_index;
     /*0x47*/ u8 team; /// 00 = red, 01 = blue, 02 = green
-    /*0x48*/ s8 player_id;
+    /*0x48*/ u8 player_id;
     /*0x49*/ u8 cpu_level;
     /*0x4A*/ u8 cpu_type;
     /*0x4B*/ u8 handicap;
@@ -194,7 +194,7 @@ void Player_SetControllerIndex(int slot, s8 controller_index);
 int Player_GetTeam(int slot);
 void Player_SetTeam(int slot, s8 unk_color);
 int Player_GetPlayerId(int slot);
-void Player_SetPlayerId(int slot, s8 player_id);
+void Player_SetPlayerId(int slot, int player_id);
 int Player_GetCpuLevel(int slot);
 void Player_SetPlayerAndEntityCpuLevel(int slot, int cpu_level);
 int Player_GetCpuType(int slot);
@@ -226,8 +226,8 @@ void Player_SwapTransformedStates(s32 slot, s32 arg1, s32 arg2);
 s32 Player_GetDamage(s32 slot);
 void Player_SetHUDDamage(s32 slot, s32 arg1);
 void Player_SetHPByIndex(s32 slot, s32 arg1, s32 arg2);
-s16 Player_GetOtherStamina(s32 slot);
-u32 Player_GetRemainingHP(s32 slot);
+int Player_GetOtherStamina(s32 slot);
+int Player_GetRemainingHP(s32 slot);
 bool Player_GetMoreFlagsBit2(s32 slot);
 void Player_SetMoreFlagsBit2(s32 slot, u8 bit2);
 bool Player_GetMoreFlagsBit3(s32 slot);
@@ -292,7 +292,7 @@ int* Player_GetUnk6A8Ptr(int slot);
 pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot);
 s32 Player_80036394(s32 slot);
 s32 Player_80036428(s32 slot);
-void Player_SetUnk45(s32 slot, s8 unk45);
+void Player_SetUnk45(s32 slot, int unk45);
 u8 Player_GetUnk45(s32 slot);
 void Player_UpdateJoystickCountByIndex(s32 slot, s32 index);
 s32 Player_GetJoystickCountByIndex(s32 slot, s32 index);
