@@ -993,7 +993,7 @@ void fn_8016C7F0(void)
     u8 var_r29_2;
     int var_r28;
     u8* temp_r29_2;
-    u8* temp_r30;
+    struct UnkAllstarData* temp_r30;
 
     if (lbl_8046B6A0.x24C8.x50 != NULL) {
         lbl_8046B6A0.x24C8.x50(lbl_8046B6A0.unk_8);
@@ -1019,7 +1019,7 @@ void fn_8016C7F0(void)
         if (gm_801A4310() == 0xF) {
             var_r29_2 = gm_80164024(*temp_r29_2);
         } else {
-            var_r29_2 = gm_80164024(*temp_r30);
+            var_r29_2 = gm_80164024(temp_r30->x0);
         }
         temp_r30_2 = gmMainLib_8015D438(var_r29_2);
         gmMainLib_8015D450(var_r29_2);
@@ -1385,7 +1385,7 @@ bool fn_8016D538(void)
                 result = false;
             }
         }
-        if (fn_8017DF90() == 1 && (fn_8017DEC8(1)[8] & 0x20)) {
+        if (fn_8017DF90() == 1 && (fn_8017DEC8(1)->x8 & 0x20)) {
             result = false;
         }
     }
