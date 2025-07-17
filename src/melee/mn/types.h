@@ -53,9 +53,9 @@ struct PlayerInitData {
     /*0x04*/ u8 x4; // port
     /*0x05*/ s8 x5; // spawnpos32
     /*0x06*/ s8 x6; // spawn direction
-    /*0x07*/ s8 x7; // subcolor
+    /*0x07*/ u8 x7; // subcolor
     /*0x08*/ s8 x8; // handicap
-    /*0x09*/ s8 x9; // team
+    /*0x09*/ u8 x9; // team
     /*0x0A*/ u8 xA; // nametag
     /*0x0B*/ u8 xB;
     /*0x0C*/ u8 xC_b0 : 1;

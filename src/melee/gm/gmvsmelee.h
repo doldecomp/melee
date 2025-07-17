@@ -10,7 +10,7 @@
 /* 1A5250 */ u8 *gm_801A5250(void); /// Returns KO Star Counts
 /* 1A5258 */ void gm_801A5258(u8*, MatchEnd*);
 /* 1A52D0 */ bool gm_801A52D0(MatchEnd*);
-/* 1A5360 */ s32 gm_801A5360(MatchEnd*);
+/* 1A5360 */ u8 gm_801A5360(MatchEnd*);
 /* 1A5598 */ void gm_801A5598_OnInit(void);
 /* 1A55C4 */ void gm_801A55C4(void); /// Zeroes KO Star Counts
 /* 1A55EC */ void gm_801A55EC_OnLoad(void);
@@ -28,6 +28,6 @@
     void (*callback2)(PlayerInitData*, PlayerInitData*)); /// SuddenDeath_Enter ??
 /* 1A5EC8 */ void gm_801A5EC8(MinorScene*); /// SuddenDeath_Exit ??
 /* 1A5F00 */ void gm_801A5F00(MinorScene*); /// Results_Enter ??
-/* 1A5F64 */ void gm_801A5F64(MinorScene*, struct VsModeData*, u8); /// Results_Exit ??
+/* 1A5F64 */ void gm_801A5F64(MinorScene*, struct VsModeData*, int); /// Results_Exit ??
 
 #endif

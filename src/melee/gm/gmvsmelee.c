@@ -48,10 +48,10 @@ bool gm_801A52D0(MatchEnd* end_info)
     return false;
 }
 
-s32 gm_801A5360(MatchEnd* match_end)
+u8 gm_801A5360(MatchEnd* match_end)
 {
     s32 i;
-    u8 player;
+    int player;
     s32 loser;
     s32 losers[6];
 
@@ -126,7 +126,7 @@ void gm_801A5680(MinorScene* minor_data, VsModeData* vs_data)
 
     mask = 0;
     for (i = 0; i < 6; i++) {
-        mask |= lbAudioAx_80026E84((u32)css_data->data.data.players[i].x0);
+        mask |= lbAudioAx_80026E84(css_data->data.data.players[i].x0);
     }
     lbAudioAx_80026F2C(0x14);
     lbAudioAx_8002702C(4, mask);
@@ -195,7 +195,6 @@ void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
 {
     MatchExitInfo* match_exit_info;
     int i;
-    bool active_player;
 
     match_exit_info = gm_801A4284(minor_data);
 
@@ -205,17 +204,7 @@ void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
         }
     }
 
-    for (i = 0; i < 6; i++) {
-        if (match_exit_info->match_end.player_standings[i].slot_type == 0) {
-            active_player = true;
-            break;
-        }
-        else {
-            active_player = false;
-        }
-    }
-
-    if (active_player != false) {
+    if (gm_801A52D0(&match_exit_info->match_end)) {
         gm_8016260C(match_exit_info->match_end.x5, match_exit_info->match_end.result);
         gm_801628C4((u32)match_exit_info->match_end.frame_count / 60, gm_80162800(&match_exit_info->match_end));
     }
@@ -266,50 +255,35 @@ void gm_801A5EC8(MinorScene* minor_data)
 
 void gm_801A5F00(MinorScene* minor_data)
 {
-    MatchEnd* exit_info = gm_801A427C(minor_data);
+    MatchExitInfo* exit_info = gm_801A427C(minor_data);
     gm_80177724(exit_info);
-    gm_80479D98.match_end = *exit_info;
+    gm_80479D98.match_end = exit_info->match_end;
 }
 
-void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, u8 next_scene)
+void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, int next_scene)
 {
-    s32 i;
-    s32 idx;
-    s32 unk;
-    bool unk_bool;
-    bool is_active;
-    bool result;
     MatchEnd* match_end;
+    u8* tmp = gm_804D6730;
+    bool unk_bool;
+    int idx;
+    u8 unk;
 
     match_end = &gm_80479D98.match_end;
-    result = gm_801743A4(match_end->result);
-    if (!result) {
+    if (!gm_801743A4(match_end->result)) {
         gm_80168638(match_end);
         gm_80168710(match_end, vs_data);
     }
 
-    for (i = 0; i < 6; i++) {
-        if (match_end->player_standings[i].slot_type == 0) {
-            // TODO :: not sure how to match this, maybe gm_804D6730 is the wrong type?
-            *gm_804D6730 = lbTime_8000AF74(*gm_804D6730, match_end->player_standings[i].x20);
-        }
-    }
+    gm_801A5258(tmp, match_end);
 
-    for (i = 0; i < 6; i++) {
-        if (match_end->player_standings[i].slot_type == 0) {
-            is_active = true;
-            break;
-        }
-    }
-
-    if (is_active) {
+    if (gm_801A52D0(match_end)) {
         gm_801688AC(match_end);
         gm_8016247C();
-        if (minor_data->info.class_id != 0xFF) {
+        if (minor_data[1].idx != 0xFF) {
             gm_8016279C();
             unk_bool = false;
             idx = gm_801A5360(match_end);
-            unk = gm_80172DD4(gmMainLib_8015ED98());
+            unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
             if (unk != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3),
@@ -320,43 +294,43 @@ void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, u8 next_scene)
                 gm_SetScenePendingMinor(0x80);
                 unk_bool = true;
             }
-            else if (gm_80172D78() != 0x21) {
+            else if ((unk = gm_80172D78()) != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3),
                             idx,
                             match_end->player_standings[idx].x4,
-                            gm_80172D78(),
+                            unk,
                             0);
                 gm_SetScenePendingMinor(0x80);
                 unk_bool = true;
             }
-            else if (gm_80172E74() != 0x21) {
+            else if ((unk = gm_80172E74()) != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
                             (match_end->player_standings[idx].x3),
                             idx,
                             match_end->player_standings[idx].x4,
-                            gm_80172E74(),
+                            unk,
                             0);
                 gm_SetScenePendingMinor(0x80);
                 unk_bool = true;
             }
-        }
-        if (gm_80172F00(gmMainLib_8015EDB0()->x0) != 0x148) {
-            gm_80164504();
-        }
-        gm_80173DE4(&gm_80479D98.match_end);
-        gm_80172898(1);
-        gm_80173EEC();
-        if ((unk_bool == 0) && (gm_801721EC() != false)) {
-            gm_801736E8(0x21U, 0, idx, 0x78U, unk, 0);
-            gm_SetScenePendingMinor(0xC0);
-            unk_bool = 1;
-        }
-        if (unk_bool != false) {
-            lb_8001C550();
-            lb_8001D164(0);
-            lb_8001CE00();
-            return;
+            if (gm_80172F00(gmMainLib_8015EDB0()->x0) != 0x148) {
+                gm_80164504();
+            }
+            gm_80173DE4(&gm_80479D98.match_end);
+            gm_80172898(1);
+            gm_80173EEC();
+            if (!unk_bool && gm_801721EC()) {
+                gm_801736E8(0x21, 0, idx, 0x78, unk, 0);
+                gm_SetScenePendingMinor(0xC0);
+                unk_bool = true;
+            }
+            if (unk_bool) {
+                lb_8001C550();
+                lb_8001D164(0);
+                lb_8001CE00();
+                return;
+            }
         }
     }
 

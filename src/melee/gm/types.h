@@ -11,18 +11,18 @@
 #include <common_structs.h>
 
 struct MinorScene {
-    u8 idx;
-    u8 preload;
-    u16 flags;
+    /* 00 */ u8 idx;
+    /* 01 */ u8 preload;
+    /* 02 */ u16 flags;
 
-    void (*Prep)(MinorScene*);
-    void (*Decide)(MinorScene*);
+    /* 04 */ void (*Prep)(MinorScene*);
+    /* 08 */ void (*Decide)(MinorScene*);
 
-    struct MinorSceneInfo {
-        u8 class_id;
-        void* unk_struct_0; // data passed to OnLoad callback
-        void* unk_struct_1; // data passed to OnLeave callback
-    } info;
+             struct MinorSceneInfo {
+    /* 0C */     u8 class_id;
+    /* 10 */     void* unk_struct_0; ///< data passed to OnLoad callback
+    /* 14 */     void* unk_struct_1; ///< data passed to OnLeave callback
+             } info;
 };
 
 struct MajorScene {
@@ -151,7 +151,8 @@ struct GameRules {
 STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
 
 struct gmm_retval_ED98 {
-    u8 padding[0xC];
+    UNK_T x0;
+    u8 padding[0x8];
     s32 xC;
     s32 x10;
     s32 x14;
@@ -420,13 +421,13 @@ struct MatchTeamData {
 struct MatchPlayerData {
     u8 slot_type;
     u8 character_kind;
-    u8 character_id;
-    u8 x3;
+    s8 character_id;
+    u8 x3 : 6;
     u8 x4;
     u8 is_big_loser;
     u8 is_small_loser;
     u8 team;
-    u8 stocks;
+    s8 stocks;
     u8 x9;
     u16 self_destructs;
     u16 percent;
@@ -437,7 +438,7 @@ struct MatchPlayerData {
     u8 pad_x16[0x20 - 0x16];
     int x20;
     int x24;
-    u8 pad_x28[0x2C - 0x28];
+    u32 x28;
     int score;
     u8 pad_x30[0xA8 - 0x30];
 };
@@ -459,7 +460,7 @@ struct MatchEnd {
     struct MatchPlayerData player_standings[6];
     u8 _x448[4];
     u8 pad_x44C[0x186C - 0x44C];
-    u8 pad_x186C[0x2274 - 0x186C];
+    u8 pad_x186C[0x2278 - 0x186C];
 };
 
 struct MatchExitInfo {
