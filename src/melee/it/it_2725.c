@@ -10434,7 +10434,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
                     var_r30 = (&sp1C[0])[HSD_Randi(temp_r3_2)];
                 }
                 it_8026BB88(item_gobj_arg, &sp44);
-                item_gobj_var = it_802F2094(0, &sp44, var_r30, 0);
+                item_gobj_var = it_802F2094(NULL, &sp44, var_r30, 0);
                 if (item_gobj_var != 0) {
                     var_item = item_gobj_var->user_data;
                     var_item->x40_vel.x =

@@ -1,7 +1,6 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
-#include "gr/inlines.h"
 
 #include "ground.h"
 
@@ -21,10 +20,12 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
+#include "gr/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/items/it_27CF.h"
+#include "it/items/itcoin.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -786,7 +787,8 @@ HSD_JObj* get_jobj_inline(float phi_f0)
     jobj = HSD_JObjLoadJoint(&sp14);
     if (jobj == NULL) {
         OSReport("%s:%d: couldn t get jobj\n", __FILE__, 0x4C4);
-        while (1) {}
+        while (1) {
+        }
     }
     return jobj;
 }
@@ -1518,7 +1520,6 @@ bool Ground_801C2FE0(Ground_GObj* arg0)
     map_id = gr->map_id;
 
     if (Ground_804D6950[map_id] == 0) {
-
         result = false;
 
         temp_r3 = mpLib_8004D17C();
@@ -2337,7 +2338,8 @@ HSD_LightDesc** Ground_801C466C_inline(void)
 
     for (i = 0; i < temp_r28; i++) {
         if (var_r26->flags_b0 == 1) {
-            return Ground_801C20E0(0, grDatFiles_801C6330(i)->unk4->unk8[i].x18);
+            return Ground_801C20E0(0,
+                                   grDatFiles_801C6330(i)->unk4->unk8[i].x18);
         }
         var_r26++;
     }
@@ -2371,7 +2373,7 @@ static HSD_LightDesc* Ground_803E06C8[3] = { 0 };
 
 void Ground_801C466C(void)
 {
-    Vec3 sp10;                                   /* compiler-managed */
+    Vec3 sp10; /* compiler-managed */
     HSD_GObj* temp_r3;
     HSD_LObj* temp_r3_2;
     HSD_LObj* var_r27;
@@ -2389,12 +2391,14 @@ void Ground_801C466C(void)
     temp_r3 = GObj_Create(0xD, 3, 0);
     if (temp_r3 == NULL) {
         OSReport("%s:%d: couldn t get gobj\n", __FILE__, 0xEAF);
-        while (true) {}
+        while (true) {
+        }
     }
     temp_r3_2 = lb_80011AC4(var_r28_2);
     if (temp_r3_2 == NULL) {
         OSReport("%s:%d: couldn t get lobj\n", __FILE__, 0xEB1);
-        while (true) {}
+        while (true) {
+        }
     }
     HSD_GObjObject_80390A70(temp_r3, HSD_GObj_804D784A, temp_r3_2);
     GObj_SetupGXLink(temp_r3, Ground_801C4640, 0, 0);
@@ -2424,7 +2428,8 @@ void Ground_801C466C(void)
         }
     }
     HSD_LObjReqAnimAll(temp_r3_2, 0.0F);
-    HSD_ForeachAnim(temp_r3_2, LOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate, AOBJ_ARG_AF, 1.0);
+    HSD_ForeachAnim(temp_r3_2, LOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                    AOBJ_ARG_AF, 1.0);
     var_r27_2 = var_r28_2;
     var_r26_2 = temp_r3_2;
     if ((*var_r28_2)->next != NULL) {
@@ -2434,10 +2439,14 @@ void Ground_801C466C(void)
                     HSD_AObjSetFlags(var_r26_2->aobj, 0x20000000);
                 }
                 if (var_r26_2->position != NULL) {
-                    HSD_ForeachAnim(var_r26_2->position, WOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetFlags, AOBJ_ARG_AU, 0x20000000);
+                    HSD_ForeachAnim(var_r26_2->position, WOBJ_TYPE,
+                                    ALL_TYPE_MASK, HSD_AObjSetFlags,
+                                    AOBJ_ARG_AU, 0x20000000);
                 }
                 if (var_r26_2->interest != NULL) {
-                    HSD_ForeachAnim(var_r26_2->interest, WOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetFlags, AOBJ_ARG_AU, 0x20000000);
+                    HSD_ForeachAnim(var_r26_2->interest, WOBJ_TYPE,
+                                    ALL_TYPE_MASK, HSD_AObjSetFlags,
+                                    AOBJ_ARG_AU, 0x20000000);
                 }
             }
             if (var_r26_2 == NULL) {
