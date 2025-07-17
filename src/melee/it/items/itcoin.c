@@ -367,7 +367,7 @@ void it_802F202C(Item_GObj* gobj)
     it_802756D0(gobj);
 }
 
-Item_GObj* it_802F2094(int arg0, Vec3* pos, int arg2, int arg3)
+Item_GObj* it_802F2094(HSD_GObj* arg0, Vec3* pos, int arg2, int arg3)
 {
     SpawnItem spawn;
     Item_GObj* gobj;
