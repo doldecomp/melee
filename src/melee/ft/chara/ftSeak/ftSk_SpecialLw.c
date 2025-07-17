@@ -10,12 +10,13 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftZelda/ftZd_SpecialLw.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
 
-static float const ftSk_Init_804D9698 = 0.4000000059604645F;
-static float const ftSk_Init_804D969C = 0.003000000026077032F;
-static float const ftSk_Init_804D96A0 = 1.0471975803375244F;
+static f32 const ftSk_Init_804D9698 = 0.4000000059604645F;
+static f32 const ftSk_Init_804D969C = 0.003000000026077032F;
+static f32 const ftSk_Init_804D96A0 = 1.0471975803375244F;
 static f32 const ftSk_Init_804D96A4 = 0.0f;
 static f32 const ftSk_Init_804D96A8 = 0.0078125f;
 
@@ -51,10 +52,57 @@ void fn_8011412C(HSD_GObj* gobj)
 }
 
 // Sheik_AS_361_Transform_Grounded
-void ftSk_SpecialLw_Enter(HSD_GObj* gobj) {}
+void ftSk_SpecialLw_Enter(HSD_GObj* gobj)
+{
+    Vec3 sp20;
+    Fighter* fp;
+    ftSeakAttributes* attributes;
+
+    u8 _[16];
+
+    Fighter_ChangeMotionState((Fighter_GObj*) gobj, 0x169, 0U,
+                              ftSk_Init_804D96A4, ftSk_Init_804D96A8,
+                              ftSk_Init_804D96A4, NULL);
+    ftAnim_8006EBA4((Fighter_GObj*) gobj);
+
+    fp = GET_FIGHTER(gobj);
+    attributes = fp->dat_attrs;
+    fp->cmd_vars[0] = 0;
+    fp->self_vel.x /= attributes->x60;
+    fp->self_vel.y /= attributes->x64;
+    fp->gr_vel /= attributes->x60;
+    lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp20);
+    lb_800119DC(&sp20, 0x78, ftSk_Init_804D9698, ftSk_Init_804D969C,
+                ftSk_Init_804D96A0);
+    fp->accessory4_cb = &fn_80114034;
+}
 
 // Sheik_AS_363_Transform_Aerial
-/// #ftSk_SpecialAirLw_Enter
+void ftSk_SpecialAirLw_Enter(HSD_GObj* gobj)
+{
+    Vec3 sp20;
+    Fighter* fp;
+    ftSeakAttributes* attributes;
+
+    u8 _[16];
+
+    Fighter_ChangeMotionState((Fighter_GObj*) gobj, 0x16B, 0U,
+                              ftSk_Init_804D96A4, ftSk_Init_804D96A8,
+                              ftSk_Init_804D96A4, NULL);
+    ftAnim_8006EBA4((Fighter_GObj*) gobj);
+
+    fp = GET_FIGHTER(gobj);
+    attributes = fp->dat_attrs;
+
+    fp->cmd_vars[0] = 0;
+    fp->self_vel.x /= attributes->x60;
+    fp->self_vel.y /= attributes->x64;
+    fp->gr_vel /= attributes->x60;
+    lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &sp20);
+    lb_800119DC(&sp20, 0x78, ftSk_Init_804D9698, ftSk_Init_804D969C,
+                ftSk_Init_804D96A0);
+    fp->accessory4_cb = &fn_80114034;
+}
 
 // Animation_SheikTransformStartGround
 void ftSk_SpecialLw_Anim(HSD_GObj* gobj)
