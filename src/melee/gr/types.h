@@ -545,7 +545,7 @@ struct grZebes_GroundVars {
 struct grFigureGet_GroundVars {
     /*  +0 gp+C4 */ UNK_T x0;
     /*  +4 gp+C8 */ UNK_T x4;
-    /*  +8 gp+CC */ UNK_T x8;
+    /*  +8 gp+CC */ int x8;
     /*  +C gp+D0 */ int xC;
 };
 

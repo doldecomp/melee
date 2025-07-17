@@ -151,7 +151,18 @@ void grFigureGet_80219C34(HSD_GObj* gobj)
     gp->gv.figureget.xC += 1;
 }
 
-/// #grFigureGet_80219C50
+int grFigureGet_80219C50(HSD_GObj* gobj)
+{
+    Ground* gp;
+    if (gobj == NULL) {
+        return 0;
+    }
+    gp = GET_GROUND(gobj);
+    if (gp->gv.figureget.x8 + gp->gv.figureget.xC >= 3) {
+        return 1;
+    }
+    return 0;
+}
 
 DynamicsDesc* grFigureGet_80219C88(enum_t arg0)
 {
