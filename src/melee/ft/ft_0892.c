@@ -55,7 +55,6 @@ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj)
     return &GET_FIGHTER(gobj)->dmg.x18d8;
 }
 
-/// #ft_800898C0
 bool ft_800898C0(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -114,7 +113,10 @@ void ft_8008A2BC(HSD_GObj* gobj)
     }
 }
 
-/// #ft_8008A324
+void ft_8008A324(HSD_GObj* gobj)
+{
+    ft_8008A348(gobj, -1.0f);
+}
 
 // Transition state to ftCo_MS_Wait or otherwise neutral state
 void ft_8008A348(Fighter_GObj* fighter_gobj, float anim_blend)
