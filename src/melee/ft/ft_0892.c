@@ -6,6 +6,7 @@
 #include "ftwaitanim.h"
 #include "math.h"
 
+#include "ft/chara/ftFox/ftFx_AppealS.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -55,6 +56,17 @@ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj)
 }
 
 /// #ft_800898C0
+bool ft_800898C0(HSD_GObj* gobj)
+{
+    Fighter* ft = GET_FIGHTER(gobj);
+    if ((ft->x2070.x2073 == 113 || ft->x2070.x2073 == 114 ||
+         ft->x2070.x2073 == 99) ||
+        ftFx_AppealS_CheckIfUsed(ft))
+    {
+        return true;
+    }
+    return false;
+}
 
 /// #ft_80089914
 
