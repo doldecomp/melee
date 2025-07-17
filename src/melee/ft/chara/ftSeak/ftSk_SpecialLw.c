@@ -10,6 +10,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftZelda/ftZd_SpecialLw.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
