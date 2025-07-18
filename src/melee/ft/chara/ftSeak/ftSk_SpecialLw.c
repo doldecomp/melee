@@ -16,7 +16,7 @@
 
 #include <baselib/gobj.h>
 
-void fn_80114034(HSD_GObj* gobj)
+static void fn_80114034(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
@@ -28,7 +28,7 @@ void fn_80114034(HSD_GObj* gobj)
     fp->accessory4_cb = 0;
 }
 
-void fn_801140B0(HSD_GObj* gobj)
+static void fn_801140B0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_b0) {
@@ -40,20 +40,20 @@ void fn_801140B0(HSD_GObj* gobj)
     fp->accessory4_cb = 0;
 }
 
-void fn_8011412C(HSD_GObj* gobj)
+static void fn_8011412C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->accessory4_cb = NULL;
     ftCommon_8007EFC8(gobj, &ftZd_SpecialLw_8013B4D8);
 }
 
-void ftSk_unk_inline(Vec3* v)
+static void ftSk_unk_inline(Vec3* v)
 {
     lb_800119DC(v, 0x78, 0.4F, 0.003F, M_PI / 3);
 }
 
 // Sheik_AS_361_Transform_Grounded
-void ftSk_SpecialLw_Enter(HSD_GObj* gobj)
+void ftSk_SpecialLw_Enter(Fighter_GObj* gobj)
 {
     Vec3 sp20;
     Fighter* fp;
@@ -76,7 +76,7 @@ void ftSk_SpecialLw_Enter(HSD_GObj* gobj)
 }
 
 // Sheik_AS_363_Transform_Aerial
-void ftSk_SpecialAirLw_Enter(HSD_GObj* gobj)
+void ftSk_SpecialAirLw_Enter(Fighter_GObj* gobj)
 {
     Vec3 sp20;
     Fighter* fp;
@@ -100,7 +100,7 @@ void ftSk_SpecialAirLw_Enter(HSD_GObj* gobj)
 }
 
 // Animation_SheikTransformStartGround
-void ftSk_SpecialLw_Anim(HSD_GObj* gobj)
+void ftSk_SpecialLw_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -109,7 +109,7 @@ void ftSk_SpecialLw_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftSk_SpecialAirLw_Anim(HSD_GObj* gobj)
+void ftSk_SpecialAirLw_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -118,16 +118,16 @@ void ftSk_SpecialAirLw_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftSk_SpecialLw_IASA(HSD_GObj* gobj) {}
+void ftSk_SpecialLw_IASA(Fighter_GObj* gobj) {}
 
-void ftSk_SpecialAirLw_IASA(HSD_GObj* gobj) {}
+void ftSk_SpecialAirLw_IASA(Fighter_GObj* gobj) {}
 
-void ftSk_SpecialLw_Phys(HSD_GObj* gobj)
+void ftSk_SpecialLw_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSk_SpecialAirLw_Phys(HSD_GObj* gobj)
+void ftSk_SpecialAirLw_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
@@ -138,14 +138,14 @@ void ftSk_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCommon_8007CEF4(fp);
 }
 
-void ftSk_SpecialLw_Coll(HSD_GObj* gobj)
+void ftSk_SpecialLw_Coll(Fighter_GObj* gobj)
 {
     if (ft_80082708(gobj) == GA_Ground) {
         ftSk_SpecialLw_8011444C(gobj);
     }
 }
 
-void ftSk_SpecialAirLw_Coll(HSD_GObj* gobj)
+void ftSk_SpecialAirLw_Coll(Fighter_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftSk_SpecialLw_801144B8(gobj);
@@ -172,30 +172,30 @@ void ftSk_SpecialLw_801144B8(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80114034;
 }
 
-void ftSk_SpecialLw2_Anim(HSD_GObj* gobj)
+void ftSk_SpecialLw2_Anim(Fighter_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftSk_SpecialAirLw2_Anim(HSD_GObj* gobj)
+void ftSk_SpecialAirLw2_Anim(Fighter_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ftCo_Fall_Enter(gobj);
     }
 }
 
-void ftSk_SpecialLw2_IASA(HSD_GObj* gobj) {}
+void ftSk_SpecialLw2_IASA(Fighter_GObj* gobj) {}
 
-void ftSk_SpecialAirLw2_IASA(HSD_GObj* gobj) {}
+void ftSk_SpecialAirLw2_IASA(Fighter_GObj* gobj) {}
 
-void ftSk_SpecialLw2_Phys(HSD_GObj* gobj)
+void ftSk_SpecialLw2_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftSk_SpecialAirLw2_Phys(HSD_GObj* gobj)
+void ftSk_SpecialAirLw2_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* attributes = fp->dat_attrs;
