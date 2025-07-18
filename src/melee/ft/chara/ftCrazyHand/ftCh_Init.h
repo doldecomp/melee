@@ -22,6 +22,7 @@
 /* 157108 */ void ftCh_Damage_IASA(HSD_GObj* gobj);
 /* 15714C */ void ftCh_Damage_Phys(HSD_GObj* gobj);
 /* 15716C */ void ftCh_Damage_Coll(HSD_GObj* gobj);
+/* 157170 */ void ftCh_Init_80157170(HSD_GObj* gobj);
 /* 157204 */ void ftCh_Damage2_Anim(HSD_GObj* gobj);
 /* 1572D4 */ void ftCh_Damage2_IASA(HSD_GObj* gobj);
 /* 157318 */ void ftCh_Damage2_Phys(HSD_GObj* gobj);
@@ -38,6 +39,7 @@
 /* 1575E4 */ void ftCh_SweepWait_IASA(HSD_GObj* gobj);
 /* 157628 */ void ftCh_SweepWait_Phys(HSD_GObj* gobj);
 /* 157648 */ void ftCh_SweepWait_Coll(HSD_GObj* gobj);
+/* 15764C */ void ftCh_Init_8015764C(HSD_GObj* gobj);
 /* 1576B0 */ void ftCh_Slap_Anim(HSD_GObj* gobj);
 /* 157724 */ void ftCh_Slap_IASA(HSD_GObj* gobj);
 /* 157768 */ void ftCh_Slap_Phys(HSD_GObj* gobj);
@@ -74,6 +76,7 @@
 /* 15837C */ void ftCh_PaperCrush_IASA(HSD_GObj* gobj);
 /* 1583C0 */ void ftCh_PaperCrush_Phys(HSD_GObj* gobj);
 /* 1583E0 */ void ftCh_PaperCrush_Coll(HSD_GObj* gobj);
+/* 1583E4 */ void ftCh_Init_801583E4(HSD_GObj* gobj);
 /* 158450 */ void ftCh_Poke1_Anim(HSD_GObj* gobj);
 /* 1584CC */ void ftCh_Poke1_IASA(HSD_GObj* gobj);
 /* 158510 */ void ftCh_Poke1_Phys(HSD_GObj* gobj);
@@ -130,6 +133,7 @@
 /* 159FC8 */ void ftCh_Grab_IASA(HSD_GObj* gobj);
 /* 15A00C */ void ftCh_Grab_Phys(HSD_GObj* gobj);
 /* 15A02C */ void ftCh_Grab_Coll(HSD_GObj* gobj);
+/* 15A030 */ void ftCh_Init_8015A030(HSD_GObj* gobj);
 /* 15A0C4 */ void ftCh_Cancel_Anim(HSD_GObj* gobj);
 /* 15A10C */ void ftCh_Cancel_IASA(HSD_GObj* gobj);
 /* 15A150 */ void ftCh_Cancel_Phys(HSD_GObj* gobj);
