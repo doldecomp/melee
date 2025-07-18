@@ -1224,9 +1224,45 @@ MinorScene gm_803DDC58_MinorScenes[] = {
     { 0xFF },
 };
 
-/// #gm_801B13B8
+void gm_801B13B8(MinorScene* arg0)
+{
+    StartMeleeData* temp_r28 = gm_801A427C(arg0);
+    int i;
 
-/// #gm_801B14A0
+    gm_80167A64(&temp_r28->rules);
+    temp_r28->rules.xE = 0x20;
+    temp_r28->rules.xB = -1;
+    temp_r28->rules.xC = -1;
+    temp_r28->rules.x0_0 = 0;
+
+    for (i = 0; i < 6; i++) {
+        gm_8016795C(&temp_r28->players[i]);
+        temp_r28->players[i].x2 = 0;
+        temp_r28->players[i].xE = 4;
+    }
+
+    temp_r28->players[0].x0 = 6;
+    temp_r28->players[1].x0 = 8;
+    temp_r28->players[2].x0 = 6;
+    temp_r28->players[3].x0 = 6;
+
+    temp_r28->players[0].x1 = 0;
+    temp_r28->players[1].x1 = 0;
+    temp_r28->players[2].x1 = 3;
+    temp_r28->players[3].x1 = 3;
+
+    temp_r28->players[0].xC_b0 = false;
+    temp_r28->players[1].xC_b0 = false;
+    temp_r28->players[2].xC_b0 = false;
+    temp_r28->players[3].xC_b0 = false;
+
+    gm_80168FC4();
+}
+
+void gm_801B14A0(MinorScene* arg0)
+{
+    gm_801A5618(arg0, gm_801A5244(), 0);
+}
 
 /// #gm_801B14DC
 
