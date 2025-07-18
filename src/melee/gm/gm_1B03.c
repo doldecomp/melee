@@ -6,6 +6,7 @@
 #include <melee/gm/gm_1A4C.h>
 #include <melee/gm/gm_1BFA.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -39,15 +40,15 @@ MinorScene gm_803DD6A0_MinorScenes[] = {
 
 static UNK_T gm_80480DC8[0x20 / 4];
 static StartMeleeData gm_80480DE8;
-static UNK_T gm_80480F20[0x2288 / 4];
-static UNK_T gm_804831A8[0x2284 / 4];
+static MatchExitInfo gm_80480F20;
+static struct MatchExitInfo2 gm_804831A8;
 static UNK_T gm_8048542C[0xC / 4];
 static UNK_T gm_80485438[0x1C / 4];
 static UNK_T gm_80485454[0x2284 / 4];
 
 static UNK_T gm_804D6880[0x4 / 4];
 static UNK_T gm_804D6884[0x8 / 4];
-static UNK_T gm_804D688C[0x8 / 4];
+static UNK_T gm_804D688C[0x4 / 4];
 static UNK_T gm_804D6890[0x8 / 4];
 static UNK_T gm_804D6898[0x4 / 4];
 static UNK_T gm_804D689C[0x8 / 4];
@@ -55,8 +56,6 @@ static UNK_T gm_804D68A4[0x8 / 4];
 
 // file boundary?
 static UNK_T gm_804D68A4_pad[0x4 / 4];
-
-static UNK_T gm_804D68B0[0x8 / 4];
 
 MinorScene gm_803DD6D0_MinorScenes[] = {
     {
@@ -106,7 +105,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         {
             0x02,
             &gm_80480DE8,
-            gm_80480F20,
+            &gm_80480F20,
         },
     },
     {
@@ -115,8 +114,8 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0BF0,
         {
             0x05,
-            gm_804831A8,
-            gm_804831A8,
+            &gm_804831A8,
+            &gm_804831A8,
         },
     },
     {
@@ -459,7 +458,12 @@ void gm_801B0B48(MinorScene* arg0)
     lbAudioAx_80027648();
 }
 
-/// #gm_801B0B8C
+void gm_801B0B8C(MinorScene* arg0)
+{
+    struct MatchExitInfo2* temp_r3 = gm_801A427C(arg0);
+    gm_80177724(temp_r3);
+    temp_r3->match_end = gm_80480F20.match_end;
+}
 
 void gm_801B0BF0(MinorScene* arg0)
 {
@@ -549,7 +553,40 @@ void gm_801B0F90(MinorScene* arg0)
     gm_SetScenePendingMinor(0);
 }
 
+static UNK_T gm_804D68B0[0x8 / 4];
+
+MinorScene gm_803DD888_MinorScenes[] = {
+    {
+        0, 2, 0,
+        gm_801B0FB8,
+        NULL,
+        {
+            0x07,
+            gm_804D68B0,
+            NULL,
+        },
+    },
+    { -1 },
+};
+
 /// #gm_801B0FB8
+
+static GameRules* gm_804D68B8;
+static UNK_T gm_804D68BC;
+
+MinorScene gm_803DD8B8_MinorScenes[] = {
+    {
+        0, 2, 0,
+        gm_801B0FF8,
+        gm_801B138C,
+        {
+            0x01,
+            &gm_804D68B8,
+            &gm_804D68BC,
+        },
+    },
+    { -1 },
+};
 
 void gm_801B0FF8(MinorScene* arg0)
 {
@@ -723,8 +760,8 @@ void gm_801B0FF8(MinorScene* arg0)
 
 /// #gm_801B138C
 
-extern UNK_T gm_80479D98[];
-extern UNK_T gm_8047C020[];
+extern MatchExitInfo gm_80479D98;
+extern MatchExitInfo gm_8047C020;
 extern UNK_T gm_8047E2A4[];
 extern UNK_T gm_80480530[];
 extern UNK_T gm_80480668[];
@@ -760,7 +797,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     {
@@ -779,7 +816,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B16C8,
         {
             0x05,
-            gm_8047C020,
+            &gm_8047C020,
             NULL,
         },
     },
@@ -800,7 +837,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     {
@@ -824,7 +861,7 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     {
@@ -833,7 +870,7 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         NULL,
         {
             0x05,
-            gm_8047C020,
+            &gm_8047C020,
             NULL,
         },
     },
@@ -922,7 +959,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
 
 extern UNK_T gm_8048E230[];
 extern UNK_T gm_8048E378[];
-extern UNK_T gm_8048E4C0[];
+static StartMeleeData gm_8048E4C0;
 extern UNK_T gm_8048E5F8[];
 
 MinorScene gm_803DDB80_MinorScenes[] = {
@@ -952,7 +989,7 @@ MinorScene gm_803DDB80_MinorScenes[] = {
         gm_801B2204,
         {
             0x04,
-            gm_8048E4C0,
+            &gm_8048E4C0,
             gm_8048E5F8,
         },
     },
@@ -1002,7 +1039,7 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     { 0xFF },
@@ -1219,9 +1256,45 @@ MinorScene gm_803DDC58_MinorScenes[] = {
     { 0xFF },
 };
 
-/// #gm_801B13B8
+void gm_801B13B8(MinorScene* arg0)
+{
+    StartMeleeData* temp_r28 = gm_801A427C(arg0);
+    int i;
 
-/// #gm_801B14A0
+    gm_80167A64(&temp_r28->rules);
+    temp_r28->rules.xE = 0x20;
+    temp_r28->rules.xB = -1;
+    temp_r28->rules.xC = -1;
+    temp_r28->rules.x0_0 = 0;
+
+    for (i = 0; i < 6; i++) {
+        gm_8016795C(&temp_r28->players[i]);
+        temp_r28->players[i].x2 = 0;
+        temp_r28->players[i].xE = 4;
+    }
+
+    temp_r28->players[0].x0 = 6;
+    temp_r28->players[1].x0 = 8;
+    temp_r28->players[2].x0 = 6;
+    temp_r28->players[3].x0 = 6;
+
+    temp_r28->players[0].x1 = 0;
+    temp_r28->players[1].x1 = 0;
+    temp_r28->players[2].x1 = 3;
+    temp_r28->players[3].x1 = 3;
+
+    temp_r28->players[0].xC_b0 = false;
+    temp_r28->players[1].xC_b0 = false;
+    temp_r28->players[2].xC_b0 = false;
+    temp_r28->players[3].xC_b0 = false;
+
+    gm_80168FC4();
+}
+
+void gm_801B14A0(MinorScene* arg0)
+{
+    gm_801A5618(arg0, gm_801A5244(), 0);
+}
 
 /// #gm_801B14DC
 
@@ -1237,7 +1310,10 @@ MinorScene gm_803DDC58_MinorScenes[] = {
 
 /// #gm_801B1688
 
-/// #gm_801B16A8
+void gm_801B16A8(MinorScene* arg0)
+{
+    gm_801A5F00(arg0);
+}
 
 /// #gm_801B16C8
 
@@ -1293,9 +1369,25 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B2790
 
-/// #gm_801B2AF8
+void gm_801B2AF8(MinorScene* arg0)
+{
+    VsModeData* temp_r30;
+    u8* temp_r29;
 
-/// #gm_801B2B7C_OnInit
+    temp_r30 = &gmMainLib_804D3EE0->unk_950;
+    temp_r29 = (void*) gm_801A5250();
+    gm_80168638(&gm_80479D98.match_end);
+    gm_80168710(&gm_80479D98.match_end, temp_r30);
+    gm_801688AC(&gm_80479D98.match_end);
+    gm_8016247C();
+    gm_801A5258(temp_r29, &gm_80479D98.match_end);
+    gm_SetScenePendingMinor(1);
+}
+
+void gm_801B2B7C_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_950);
+}
 
 /// #gm_801B2BA4
 
@@ -1425,6 +1517,8 @@ UNK_T gm_801B6320(void)
 
 /// #gm_801B63C4
 
+static StartMeleeData gm_80490AA8;
+
 /// #gm_801B6428
 
 /// #gm_801B65D4
@@ -1510,11 +1604,17 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B8CF4
 
-/// #gm_801B8D14
+void gm_801B8D14(MinorScene* arg0)
+{
+    gm_801A5F00(arg0);
+}
 
 /// #gm_801B8D34
 
-/// #gm_801B8D60_OnInit
+void gm_801B8D60_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_6D0);
+}
 
 /// #gm_801B8D88_OnLoad
 
@@ -1540,7 +1640,10 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B8F44
 
-/// #gm_801B8F70_OnInit
+void gm_801B8F70_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_E50);
+}
 
 /// #gm_801B8F98_OnLoad
 
@@ -1562,11 +1665,17 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B9114
 
-/// #gm_801B9134
+void gm_801B9134(MinorScene* arg0)
+{
+    gm_801A5F00(arg0);
+}
 
 /// #gm_801B9154
 
-/// #gm_801B9180_OnInit
+void gm_801B9180_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_F90);
+}
 
 /// #gm_801B91A8_OnLoad
 
@@ -1582,7 +1691,10 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B9560
 
-/// #gm_801B95B0_OnInit
+void gm_801B95B0_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_10D0);
+}
 
 /// #gm_801B95D8_OnLoad
 
@@ -1631,7 +1743,10 @@ void fn_801B9FB8(void* arg0)
 
 /// #gm_801BA098
 
-/// #gm_801BA0C4_OnInit
+void gm_801BA0C4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_A90);
+}
 
 /// #gm_801BA0EC_OnLoad
 
@@ -1660,7 +1775,10 @@ void fn_801BA1B4(struct fn_801BA1B4_arg0_t* arg0)
 
 /// #gm_801BA298
 
-/// #gm_801BA2C4_OnInit
+void gm_801BA2C4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_BD0);
+}
 
 /// #gm_801BA2EC_OnLoad
 
@@ -1689,7 +1807,10 @@ void fn_801BA3B4(struct fn_801BA3B4_arg0_t* arg0)
 
 /// #gm_801BA498
 
-/// #gm_801BA4C4_OnInit
+void gm_801BA4C4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_810);
+}
 
 /// #gm_801BA4EC_OnLoad
 
@@ -1718,7 +1839,10 @@ void fn_801BA5B4(void* arg0)
 
 /// #gm_801BA690
 
-/// #gm_801BA6BC_OnInit
+void gm_801BA6BC_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_1210);
+}
 
 /// #gm_801BA6E4_OnLoad
 
@@ -1747,7 +1871,10 @@ void fn_801BA7AC(void* arg0)
 
 /// #gm_801BA888
 
-/// #gm_801BA8B4_OnInit
+void gm_801BA8B4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_1350);
+}
 
 /// #gm_801BA8DC_OnLoad
 
