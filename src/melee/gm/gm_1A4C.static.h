@@ -28,24 +28,6 @@ struct gm_804D6804_t {
     /* +4 */ float x4;
 };
 
-struct gm_804D6840_cameras_t {
-    /* +0 */ HSD_CObjDesc* desc;
-    /* +4 */ HSD_CameraAnim** anims;
-};
-
-struct gm_804D6840_fogs_t {
-    /* +0 */ HSD_FogDesc* desc;
-    /* +4 */ HSD_AObjDesc*** anims;
-};
-
-/// @todo Possibly a #SceneDesc. File pointer passed to #lbArchive_80016DBC.
-struct gm_804D6840_t {
-    HSD_Joint*** models;
-    struct gm_804D6840_cameras_t* cameras;
-    HSD_LightDesc** lights;
-    struct gm_804D6840_fogs_t* fogs;
-};
-
 static struct unkd4d0 {
     struct unkd4d0* next;
     struct unkd4d0* unk4;
@@ -76,8 +58,8 @@ static struct unkd4d0 {
 /* 4D6834 */ static HSD_CObj* gm_804D6834;
 /* 4D6838 */ static HSD_Fog* gm_804D6838;
 /* 4D683C */ static UNK_T gm_804D683C;
-/* 4D6840 */ static struct gm_804D6840_t* gm_804D6840;
-/* 4D6844 */ static HSD_Joint*** gm_804D6844;
+/* 4D6840 */ static SceneDesc* gm_804D6840;
+/* 4D6844 */ static DynamicModelDesc** gm_804D6844;
 /* 4D6848 */ static s32 gm_804D6848;
 /* 4D684C */ static s32 gm_804D684C;
 /* 4D6868 */ static SceneDesc* gm_804D6868;

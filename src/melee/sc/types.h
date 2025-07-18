@@ -23,9 +23,15 @@ struct DynamicModelDesc {
 // The basis of a rendered scene, like a stage, menu, or HUD overlay
 struct SceneDesc {
     DynamicModelDesc** models;
-    HSD_CObjDesc** cameras;
+    struct {
+        HSD_CObjDesc* desc;
+        HSD_CameraAnim** anims;
+    }* cameras;
     HSD_LightDesc** lights;
-    HSD_FogDesc** fogs;
+    struct {
+        HSD_FogDesc* desc;
+        HSD_CameraAnim** anims;
+    }* fogs;
 };
 
 #endif
