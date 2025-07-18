@@ -723,8 +723,8 @@ void gm_801B0FF8(MinorScene* arg0)
 
 /// #gm_801B138C
 
-extern UNK_T gm_80479D98[];
-extern UNK_T gm_8047C020[];
+extern MatchExitInfo gm_80479D98;
+extern MatchExitInfo gm_8047C020;
 extern UNK_T gm_8047E2A4[];
 extern UNK_T gm_80480530[];
 extern UNK_T gm_80480668[];
@@ -760,7 +760,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     {
@@ -779,7 +779,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B16C8,
         {
             0x05,
-            gm_8047C020,
+            &gm_8047C020,
             NULL,
         },
     },
@@ -800,7 +800,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     {
@@ -824,7 +824,7 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     {
@@ -833,7 +833,7 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         NULL,
         {
             0x05,
-            gm_8047C020,
+            &gm_8047C020,
             NULL,
         },
     },
@@ -1002,7 +1002,7 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         {
             0x02,
             gm_80480530,
-            gm_80479D98,
+            &gm_80479D98,
         },
     },
     { 0xFF },
@@ -1237,7 +1237,10 @@ MinorScene gm_803DDC58_MinorScenes[] = {
 
 /// #gm_801B1688
 
-/// #gm_801B16A8
+void gm_801B16A8(MinorScene* arg0)
+{
+    gm_801A5F00(arg0);
+}
 
 /// #gm_801B16C8
 
@@ -1293,7 +1296,20 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B2790
 
-/// #gm_801B2AF8
+void gm_801B2AF8(MinorScene* arg0)
+{
+    VsModeData* temp_r30;
+    u8* temp_r29;
+
+    temp_r30 = &gmMainLib_804D3EE0->unk_950;
+    temp_r29 = (void*) gm_801A5250();
+    gm_80168638(&gm_80479D98.match_end);
+    gm_80168710(&gm_80479D98.match_end, temp_r30);
+    gm_801688AC(&gm_80479D98.match_end);
+    gm_8016247C();
+    gm_801A5258(temp_r29, &gm_80479D98.match_end);
+    gm_SetScenePendingMinor(1);
+}
 
 /// #gm_801B2B7C_OnInit
 
@@ -1510,7 +1526,10 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B8CF4
 
-/// #gm_801B8D14
+void gm_801B8D14(MinorScene* arg0)
+{
+    gm_801A5F00(arg0);
+}
 
 /// #gm_801B8D34
 
@@ -1562,7 +1581,10 @@ void fn_801B8C5C(void* arg0)
 
 /// #gm_801B9114
 
-/// #gm_801B9134
+void gm_801B9134(MinorScene* arg0)
+{
+    gm_801A5F00(arg0);
+}
 
 /// #gm_801B9154
 

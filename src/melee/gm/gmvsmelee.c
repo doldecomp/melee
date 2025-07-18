@@ -193,10 +193,8 @@ void gm_801A583C(MinorScene* minor_data, VsModeData* vs_data,
 
 void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
 {
-    MatchExitInfo* match_exit_info;
+    MatchExitInfo* match_exit_info = gm_801A4284(minor_data);
     int i;
-
-    match_exit_info = gm_801A4284(minor_data);
 
     for (i = 0; i < 6; i++) {
         if (match_exit_info->match_end.player_standings[i].slot_type == 0) {
@@ -206,13 +204,12 @@ void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
 
     if (gm_801A52D0(&match_exit_info->match_end)) {
         gm_8016260C(match_exit_info->match_end.x5, match_exit_info->match_end.result);
-        gm_801628C4((u32)match_exit_info->match_end.frame_count / 60, gm_80162800(&match_exit_info->match_end));
+        gm_801628C4(match_exit_info->match_end.frame_count / 60, gm_80162800(&match_exit_info->match_end));
     }
 
-    if (gm_80167140(&match_exit_info->match_end) == 0) {
+    if (!gm_80167140(&match_exit_info->match_end)) {
         gm_SetScenePendingMinor(id);
-    }
-    else {
+    } else {
         gm_SetScenePendingMinor(id2);
     }
 }
@@ -255,9 +252,9 @@ void gm_801A5EC8(MinorScene* minor_data)
 
 void gm_801A5F00(MinorScene* minor_data)
 {
-    MatchExitInfo* exit_info = gm_801A427C(minor_data);
+    struct MatchExitInfo2* exit_info = gm_801A427C(minor_data);
     gm_80177724(exit_info);
-    gm_80479D98.match_end = exit_info->match_end;
+    exit_info->match_end = gm_80479D98.match_end;
 }
 
 void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, int next_scene)

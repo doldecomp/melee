@@ -470,7 +470,7 @@
 /* 1771C0 */ UNK_RET fn_801771C0(UNK_PARAMS);
 /* 177368 */ void gm_80177368_OnEnter(UNK_T);
 /* 177704 */ void gm_80177704_OnLeave(UNK_T);
-/* 177724 */ void gm_80177724(MatchExitInfo*);
+/* 177724 */ void gm_80177724(struct MatchExitInfo2*);
 /* 177748 */ UNK_RET fn_80177748(UNK_PARAMS);
 /* 177920 */ UNK_RET fn_80177920(UNK_PARAMS);
 /* 177B7C */ UNK_RET fn_80177B7C(UNK_PARAMS);
