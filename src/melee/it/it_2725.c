@@ -5784,7 +5784,6 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         item->xDC8_word.flags.x13 = 1;
         item_jobj1 = item_gobj->hsd_obj;
         if (item_jobj1 == NULL) {
-        } else {
             item_jobj2 = item_jobj1->child;
         }
         HSD_JObjClearFlagsAll(item_jobj2, 16U);
@@ -6615,33 +6614,21 @@ f32 it_802758D4(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     damage = 0.0f;
-#if 0
     for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
         hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
         if (hitcapsule->state != HitCapsule_Disabled) {
             disable_chk = true;
+            break;
         } else {
             disable_chk = false;
         }
     }
-#else
-    if (item->x5D4_hitboxes[0].hit.state != HitCapsule_Disabled) {
-        disable_chk = true;
-    } else if (item->x5D4_hitboxes[1].hit.state != HitCapsule_Disabled) {
-        disable_chk = true;
-    } else if (item->x5D4_hitboxes[2].hit.state != HitCapsule_Disabled) {
-        disable_chk = true;
-    } else if (item->x5D4_hitboxes[3].hit.state != HitCapsule_Disabled) {
-        disable_chk = true;
-    } else {
-        disable_chk = false;
-    }
-#endif
+
     if (disable_chk) {
         for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
             hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
             if (hitcapsule->state != HitCapsule_Disabled) {
-                if (hitcapsule->damage <= damage) {
+                if (damage <= hitcapsule->damage) {
                     damage = hitcapsule->damage;
                 }
             }
