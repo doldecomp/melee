@@ -9,6 +9,7 @@
 #include "gm/forward.h"
 #include "mn/forward.h"
 #include "it/forward.h"
+#include "sc/forward.h"
 #include "dolphin/types.h"
 #include "gm/types.h"
 
@@ -178,7 +179,7 @@
 /* 168710 */ void gm_80168710(MatchEnd*, VsModeData*);
 /* 1688AC */ void gm_801688AC(MatchEnd*);
 /* 168940 */ UNK_RET gm_80168940(UNK_PARAMS);
-/* 16895C */ void gm_8016895C(HSD_JObj*, void*, s32);
+/* 16895C */ void gm_8016895C(HSD_JObj*, DynamicModelDesc*, int idx);
 /* 1689E4 */ UNK_RET fn_801689E4(UNK_PARAMS);
 /* 168A6C */ UNK_RET fn_80168A6C(UNK_PARAMS);
 /* 168B34 */ void gm_80168B34(void);

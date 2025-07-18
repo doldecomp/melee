@@ -170,7 +170,7 @@ STATIC_ASSERT(sizeof(struct un_80304138_objalloc_t) == 0x20);
 /* 4A1EE0 */ static HSD_GObj* un_804A1EE0[PL_SLOT_MAX];
 /* 4A1EF8 */ static int un_804A1EF8[PL_SLOT_MAX];
 /* 4A1F10 */ static struct {
-    HSD_Joint*** x0;
+    DynamicModelDesc** x0;
     HSD_GObj* x4[4];
     int x14[4];
     unsigned char x24[4];

@@ -23,6 +23,7 @@
 #include "lb/lbtime.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
+#include "sc/types.h"
 
 #include <m2c_macros.h>
 
@@ -504,7 +505,13 @@ void gm_80167B50(VsModeData* arg0)
 
 /// #gm_80168940
 
-/// #gm_8016895C
+void gm_8016895C(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
+{
+    HSD_AnimJoint* anim = arg1->anims != NULL ? arg1->anims[idx] : NULL;
+    HSD_MatAnimJoint* matanim = arg1->matanims != NULL ? arg1->matanims[idx] : NULL;
+    HSD_ShapeAnimJoint* shapeanim = arg1->shapeanims != NULL ? arg1->shapeanims[idx] : NULL;
+    HSD_JObjAddAnimAll(arg0, anim, matanim, shapeanim);
+}
 
 /// #fn_801689E4
 

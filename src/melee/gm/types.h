@@ -554,13 +554,4 @@ struct UnkAllstarData {
     s8 pad_x0[0xA0 - 0x31 - 0xC];
 };
 
-struct PauseData {
-/* +0 */ HSD_JObj* background;
-/* +4 */ HSD_JObj* analog_stick;
-/* +8 */ HSD_JObj* lras;
-/* +C */ HSD_JObj* z;
-/* +10 */ HSD_JObj* analog_stick_outline;
-/* +14 */ s32 slot;
-};
-
 #endif
