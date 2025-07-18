@@ -6623,7 +6623,7 @@ f32 it_802758D4(Item_GObj* item_gobj)
             disable_chk = false;
         }
     }
-    
+
     if (disable_chk) {
         for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
             hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
