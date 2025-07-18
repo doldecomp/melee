@@ -47,7 +47,7 @@ static UNK_T gm_80485454[0x2284 / 4];
 
 static UNK_T gm_804D6880[0x4 / 4];
 static UNK_T gm_804D6884[0x8 / 4];
-static UNK_T gm_804D688C[0x8 / 4];
+static UNK_T gm_804D688C[0x4 / 4];
 static UNK_T gm_804D6890[0x8 / 4];
 static UNK_T gm_804D6898[0x4 / 4];
 static UNK_T gm_804D689C[0x8 / 4];
@@ -55,8 +55,6 @@ static UNK_T gm_804D68A4[0x8 / 4];
 
 // file boundary?
 static UNK_T gm_804D68A4_pad[0x4 / 4];
-
-static UNK_T gm_804D68B0[0x8 / 4];
 
 MinorScene gm_803DD6D0_MinorScenes[] = {
     {
@@ -554,7 +552,40 @@ void gm_801B0F90(MinorScene* arg0)
     gm_SetScenePendingMinor(0);
 }
 
+static UNK_T gm_804D68B0[0x8 / 4];
+
+MinorScene gm_803DD888_MinorScenes[] = {
+    {
+        0, 2, 0,
+        gm_801B0FB8,
+        NULL,
+        {
+            0x07,
+            gm_804D68B0,
+            NULL,
+        },
+    },
+    { -1 },
+};
+
 /// #gm_801B0FB8
+
+static GameRules* gm_804D68B8;
+static UNK_T gm_804D68BC;
+
+MinorScene gm_803DD8B8_MinorScenes[] = {
+    {
+        0, 2, 0,
+        gm_801B0FF8,
+        gm_801B138C,
+        {
+            0x01,
+            &gm_804D68B8,
+            &gm_804D68BC,
+        },
+    },
+    { -1 },
+};
 
 void gm_801B0FF8(MinorScene* arg0)
 {
