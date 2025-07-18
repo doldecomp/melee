@@ -255,9 +255,18 @@ struct gmm_x0 {
     /* 0x0588 */ s8 unk_588[4];   /* inferred */
     /* 0x0590 */ char pad_58B[4]; /* inferred */
     /* 0x0590 */ VsModeData unk_590;
-    /* 0x05A0 */ char pad_6D0[0x950 - 0x6D0];
+    /* 0x06D0 */ VsModeData unk_6D0;
+    /* 0x0810 */ VsModeData unk_810;
     /* 0x0950 */ VsModeData unk_950;
-    /* 0x0A90 */ char pad_A90[0x1850 - 0xA90];
+    /* 0x0A90 */ VsModeData unk_A90;
+    /* 0x0BD0 */ VsModeData unk_BD0;
+    /* 0x0D10 */ VsModeData unk_D10;
+    /* 0x0E50 */ VsModeData unk_E50;
+    /* 0x0F90 */ VsModeData unk_F90;
+    /* 0x10D0 */ VsModeData unk_10D0;
+    /* 0x1210 */ VsModeData unk_1210;
+    /* 0x1350 */ VsModeData unk_1350;
+    /* 0x1490 */ char pad_1490[0x1850 - 0x1490];
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */

@@ -1383,7 +1383,10 @@ void gm_801B2AF8(MinorScene* arg0)
     gm_SetScenePendingMinor(1);
 }
 
-/// #gm_801B2B7C_OnInit
+void gm_801B2B7C_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_950);
+}
 
 /// #gm_801B2BA4
 
@@ -1605,7 +1608,10 @@ void gm_801B8D14(MinorScene* arg0)
 
 /// #gm_801B8D34
 
-/// #gm_801B8D60_OnInit
+void gm_801B8D60_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_6D0);
+}
 
 /// #gm_801B8D88_OnLoad
 
@@ -1631,7 +1637,10 @@ void gm_801B8D14(MinorScene* arg0)
 
 /// #gm_801B8F44
 
-/// #gm_801B8F70_OnInit
+void gm_801B8F70_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_E50);
+}
 
 /// #gm_801B8F98_OnLoad
 
@@ -1660,7 +1669,10 @@ void gm_801B9134(MinorScene* arg0)
 
 /// #gm_801B9154
 
-/// #gm_801B9180_OnInit
+void gm_801B9180_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_F90);
+}
 
 /// #gm_801B91A8_OnLoad
 
@@ -1676,7 +1688,10 @@ void gm_801B9134(MinorScene* arg0)
 
 /// #gm_801B9560
 
-/// #gm_801B95B0_OnInit
+void gm_801B95B0_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_10D0);
+}
 
 /// #gm_801B95D8_OnLoad
 
@@ -1725,7 +1740,10 @@ void fn_801B9FB8(void* arg0)
 
 /// #gm_801BA098
 
-/// #gm_801BA0C4_OnInit
+void gm_801BA0C4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_A90);
+}
 
 /// #gm_801BA0EC_OnLoad
 
@@ -1754,7 +1772,10 @@ void fn_801BA1B4(struct fn_801BA1B4_arg0_t* arg0)
 
 /// #gm_801BA298
 
-/// #gm_801BA2C4_OnInit
+void gm_801BA2C4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_BD0);
+}
 
 /// #gm_801BA2EC_OnLoad
 
@@ -1783,7 +1804,10 @@ void fn_801BA3B4(struct fn_801BA3B4_arg0_t* arg0)
 
 /// #gm_801BA498
 
-/// #gm_801BA4C4_OnInit
+void gm_801BA4C4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_810);
+}
 
 /// #gm_801BA4EC_OnLoad
 
@@ -1812,7 +1836,10 @@ void fn_801BA5B4(void* arg0)
 
 /// #gm_801BA690
 
-/// #gm_801BA6BC_OnInit
+void gm_801BA6BC_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_1210);
+}
 
 /// #gm_801BA6E4_OnLoad
 
@@ -1841,7 +1868,10 @@ void fn_801BA7AC(void* arg0)
 
 /// #gm_801BA888
 
-/// #gm_801BA8B4_OnInit
+void gm_801BA8B4_OnInit(void)
+{
+    gm_80167B50(&gmMainLib_804D3EE0->unk_1350);
+}
 
 /// #gm_801BA8DC_OnLoad
 
