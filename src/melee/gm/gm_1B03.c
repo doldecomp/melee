@@ -39,8 +39,8 @@ MinorScene gm_803DD6A0_MinorScenes[] = {
 
 static UNK_T gm_80480DC8[0x20 / 4];
 static StartMeleeData gm_80480DE8;
-static UNK_T gm_80480F20[0x2288 / 4];
-static UNK_T gm_804831A8[0x2284 / 4];
+static MatchExitInfo gm_80480F20;
+static struct MatchExitInfo2 gm_804831A8;
 static UNK_T gm_8048542C[0xC / 4];
 static UNK_T gm_80485438[0x1C / 4];
 static UNK_T gm_80485454[0x2284 / 4];
@@ -106,7 +106,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         {
             0x02,
             &gm_80480DE8,
-            gm_80480F20,
+            &gm_80480F20,
         },
     },
     {
@@ -115,8 +115,8 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0BF0,
         {
             0x05,
-            gm_804831A8,
-            gm_804831A8,
+            &gm_804831A8,
+            &gm_804831A8,
         },
     },
     {
@@ -459,7 +459,12 @@ void gm_801B0B48(MinorScene* arg0)
     lbAudioAx_80027648();
 }
 
-/// #gm_801B0B8C
+void gm_801B0B8C(MinorScene* arg0)
+{
+    struct MatchExitInfo2* temp_r3 = gm_801A427C(arg0);
+    gm_80177724(temp_r3);
+    temp_r3->match_end = gm_80480F20.match_end;
+}
 
 void gm_801B0BF0(MinorScene* arg0)
 {
