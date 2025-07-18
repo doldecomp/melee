@@ -958,7 +958,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
 
 extern UNK_T gm_8048E230[];
 extern UNK_T gm_8048E378[];
-extern UNK_T gm_8048E4C0[];
+static StartMeleeData gm_8048E4C0;
 extern UNK_T gm_8048E5F8[];
 
 MinorScene gm_803DDB80_MinorScenes[] = {
@@ -988,7 +988,7 @@ MinorScene gm_803DDB80_MinorScenes[] = {
         gm_801B2204,
         {
             0x04,
-            gm_8048E4C0,
+            &gm_8048E4C0,
             gm_8048E5F8,
         },
     },
@@ -1515,6 +1515,8 @@ UNK_T gm_801B6320(void)
 /// #gm_801B632C
 
 /// #gm_801B63C4
+
+static StartMeleeData gm_80490AA8;
 
 /// #gm_801B6428
 
