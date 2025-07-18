@@ -53,9 +53,9 @@ struct PlayerInitData {
     /*0x04*/ u8 x4; // port
     /*0x05*/ s8 x5; // spawnpos32
     /*0x06*/ s8 x6; // spawn direction
-    /*0x07*/ s8 x7; // subcolor
+    /*0x07*/ u8 x7; // subcolor
     /*0x08*/ s8 x8; // handicap
-    /*0x09*/ s8 x9; // team
+    /*0x09*/ u8 x9; // team
     /*0x0A*/ u8 xA; // nametag
     /*0x0B*/ u8 xB;
     /*0x0C*/ u8 xC_b0 : 1;
@@ -147,7 +147,8 @@ struct StartMeleeRules {
 
     u32 x10; // time limit
     u8 x14;
-    u32 x18_pad[(0x20 - 0x18) / 4];
+    u32 x18;
+    u32 x1C_pad[(0x20 - 0x1C) / 4];
 
     u64 x20; // item mask
     int x28;
@@ -160,13 +161,14 @@ struct StartMeleeRules {
     void (*x44)(void);
     void (*x48)(void);
     void (*x4C)(void);
-    u8 unk50[0x54 - 0x50];
+    void (*x50)(int);
     struct {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;
     }* x54;
-    u8 pad_x58[0x60 - 0x58];
+    int x58;
+    u8 pad_x5C[0x60 - 0x5C];
 };
 
 struct StartMeleeData {

@@ -23,6 +23,7 @@
 #include "lb/lbtime.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
+#include "sc/types.h"
 
 #include <m2c_macros.h>
 
@@ -504,7 +505,13 @@ void gm_80167B50(VsModeData* arg0)
 
 /// #gm_80168940
 
-/// #gm_8016895C
+void gm_8016895C(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
+{
+    HSD_AnimJoint* anim = arg1->anims != NULL ? arg1->anims[idx] : NULL;
+    HSD_MatAnimJoint* matanim = arg1->matanims != NULL ? arg1->matanims[idx] : NULL;
+    HSD_ShapeAnimJoint* shapeanim = arg1->shapeanims != NULL ? arg1->shapeanims[idx] : NULL;
+    HSD_JObjAddAnimAll(arg0, anim, matanim, shapeanim);
+}
 
 /// #fn_801689E4
 
@@ -525,7 +532,13 @@ void fn_80168F7C(void)
     lbl_804D659A = 0;
 }
 
-/// #gm_80168F88
+void gm_80168F88(void)
+{
+    lbAudioAx_80026F2C(0x12);
+    lbAudioAx_8002702C(2, 0x10);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
+}
 
 // UnclePunch: Audio_LoadAnnouncer
 void gm_80168FC4(void)
@@ -643,9 +656,9 @@ s32 fn_8016A1E4(void)
 
 /// #gm_8016A1F8
 
-void gm_8016A21C(UNK_T arg0)
+void gm_8016A21C(StartMeleeRules* arg0)
 {
-    M2C_FIELD(arg0, struct lbl_8046B488_t**, 0x54) = &lbl_8046B488;
+    arg0->x54 = (void*) &lbl_8046B488;
 }
 
 /// #gm_8016A22C
@@ -675,10 +688,10 @@ void gm_8016A424(s8 arg0)
 
 /// #fn_8016A4C8
 
-void gm_8016A92C(gm_8016A92C_arg0_t* arg0)
+void gm_8016A92C(StartMeleeRules* arg0)
 {
     lbl_8046B668.unk_1C = -2;
-    arg0->x58 = &lbl_8046B668;
+    arg0->x58 = (int) &lbl_8046B668;
 }
 
 /// #gm_8016A944

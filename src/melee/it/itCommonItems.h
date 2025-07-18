@@ -396,7 +396,7 @@ typedef struct itCoin_ItemVars {
     f32 x8;
     f32 xC;
     int x10;
-    int x14;
+    HSD_GObj* x14;
 } itCoin_ItemVars;
 
 typedef struct itFFlower_ItemVars {

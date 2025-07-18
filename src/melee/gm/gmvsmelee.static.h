@@ -3,6 +3,6 @@
 
 #include <melee/gm/types.h>
 
-/* 479D98 */ static MatchExitInfo gm_80479D98;
+/* 479D98 */ MatchExitInfo gm_80479D98;
 
 #endif

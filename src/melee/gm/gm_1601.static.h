@@ -40,19 +40,6 @@ struct lbl_8046DBE8_t {
 };
 STATIC_ASSERT(sizeof(struct lbl_8046DBE8_t) == 0x5A8);
 
-struct lbl_80472D28_t {
-    /*   +0 */ char pad_0[0x104];
-    /* +104 */ int x104;
-};
-
-struct lbl_80472E48_t {
-    /* 0x00 */ char pad_0[4];
-    /* 0x04 */ s32 unk_4;        /* inferred */
-    /* 0x08 */ s32 unk_8;        /* inferred */
-    /* 0x0C */ char pad_C[0x74]; /* maybe part of unk_8[0x1E]? */
-}; /* size = 0x80 */
-STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x80);
-
 struct lbl_8046B668_t {
     /* 0x00 */ char pad_0[0x1C];
     /* 0x1C */ s8 unk_1C;         /* inferred */
@@ -65,14 +52,12 @@ struct lbl_80473700_t {
 };
 STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
 
-/* 160840 */ static u8 fn_80160840(u8 arg0);
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 /* 166CBC */ static u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0,
                                    ssize_t index);
 /* 169364 */ static UNK_T fn_80169364(void);
 /* 1693A8 */ static s32 fn_801693A8(void);
 /* 16A1E4 */ static s32 fn_8016A1E4(void);
-/* 1736DC */ static UNK_T gm_801736DC(void);
 /* 174274 */ static int fn_80174274(void);
 /* 17F294 */ static int fn_8017F294(void);
 /* 3B75F8 */ static const struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
@@ -83,7 +68,6 @@ STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
 /* 3B7930 */ static Vec2 const lbl_803B7930[0x114 / sizeof(Vec2)] = { 0 };
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
 /* 46B668 */ static struct lbl_8046B668_t lbl_8046B668;
-/* 4D4190 */ static s32 lbl_804D4190 = 0xFFFFFFFF;
 /* 4D6598 */ static s8 lbl_804D6598;
 /* 4D659A */ static s16 lbl_804D659A;
 

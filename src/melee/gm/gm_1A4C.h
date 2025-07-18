@@ -5,8 +5,8 @@
 #include <melee/gm/forward.h>
 #include <baselib/forward.h>
 
-/* 1A6254 */ UNK_RET gm_801A6254(UNK_PARAMS);
-/* 1A6308 */ UNK_RET gm_801A6308(UNK_PARAMS);
+/* 1A6254 */ void gm_801A6254(MinorScene*);
+/* 1A6308 */ void gm_801A6308(MinorScene*);
 /* 1A632C */ void gm_801A632C_OnEnter(UNK_T);
 /* 1A637C */ void gm_801A637C_OnEnter(UNK_T);
 /* 1A64A8 */ void gm_801A64A8_OnFrame(void);

@@ -68,11 +68,13 @@ HSD_Archive* lbArchive_LoadArchive(const char* filename)
     return lbArchive_LoadArchive_inline(filename);
 }
 
-static inline void lbArchive_vLoadSectionsFatal(HSD_Archive* archive, void** symbol, va_list symbols) {
+static inline void lbArchive_vLoadSectionsFatal(HSD_Archive* archive,
+                                                void** symbol, va_list symbols)
+{
     const char* symbol_name;
 
     for (; symbol != NULL; symbol = va_arg(symbols, void**)) {
-        symbol_name = va_arg(symbols, const char*);
+        const char* symbol_name = va_arg(symbols, const char*);
         *symbol = NULL;
         *symbol = HSD_ArchiveGetPublicAddress(archive, symbol_name);
         if (*symbol == NULL) {
@@ -82,7 +84,9 @@ static inline void lbArchive_vLoadSectionsFatal(HSD_Archive* archive, void** sym
     }
 }
 
-static inline void lbArchive_vLoadSections(HSD_Archive* archive, void** symbol, va_list symbols) {
+static inline void lbArchive_vLoadSections(HSD_Archive* archive, void** symbol,
+                                           va_list symbols)
+{
     const char* symbol_name;
 
     for (; symbol != NULL; symbol = va_arg(symbols, void**)) {
@@ -169,7 +173,8 @@ bool lbArchive_80016F80(HSD_Archive** archive, const char* filename)
     return result;
 }
 
-bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols, ...)
+bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols,
+                        ...)
 {
     HSD_Archive* archive;
     bool preloaded;
@@ -195,7 +200,8 @@ bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols, 
     return preloaded;
 }
 
-bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols, ...)
+bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
+                        ...)
 {
     HSD_Archive* archive;
     bool preloaded;
@@ -221,48 +227,64 @@ bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols, 
     return preloaded;
 }
 
-int lbArchive_80017340(HSD_Archive* archive, HSD_ArchiveHeader* header, size_t file_size, intptr_t base_addr)
+inline void Locate(HSD_Archive* archive, intptr_t base_addr)
 {
-    size_t reloc_offset;
+    u32 i;
+    u32* ptr;
+
+    for (i = 0; i < archive->header.nb_reloc; i++) {
+        ptr = (u32*) archive->reloc_info[i].offset;
+        *(intptr_t*) (archive->data + (u32) ptr) += base_addr;
+    }
+}
+
+int lbArchive_80017340(HSD_Archive* archive, u8* src, size_t file_size,
+                       intptr_t base_addr)
+{
     size_t file_offset;
-    int i;
 
     if (archive == NULL) {
         return -1;
     }
     memset(archive, 0, sizeof(HSD_Archive));
     archive->flags |= 1;
-    memcpy(archive, header, sizeof(HSD_ArchiveHeader));
+    memcpy(archive, src, sizeof(HSD_ArchiveHeader));
+
     if (archive->header.file_size != file_size) {
         OSReport("lbArchiveRelocate: byte-order mismatch! "
                  "Please check data format %x %x\n",
                  archive->header.file_size, file_size);
         return -1;
     }
-    file_offset = sizeof(*header);
+
+    file_offset = sizeof(HSD_ArchiveHeader);
     if (archive->header.data_size != 0) {
-        archive->data = (u8*) header + file_offset;
+        archive->data = (u8*) src + file_offset;
         file_offset = archive->header.data_size + sizeof(HSD_ArchiveHeader);
     }
     if (archive->header.nb_reloc != 0) {
-        archive->reloc_info = (void*) ((u8*) header + file_offset);
-        file_offset += archive->header.nb_reloc * sizeof(HSD_ArchiveRelocationInfo);
+        archive->reloc_info =
+            (HSD_ArchiveRelocationInfo*) ((u8*) src + file_offset);
+        file_offset +=
+            archive->header.nb_reloc * sizeof(HSD_ArchiveRelocationInfo);
     }
     if (archive->header.nb_public != 0) {
-        archive->public_info = (void*) ((u8*) header + file_offset);
-        file_offset += archive->header.nb_public * sizeof(HSD_ArchivePublicInfo);
+        archive->public_info =
+            (HSD_ArchivePublicInfo*) ((u8*) src + file_offset);
+        file_offset +=
+            archive->header.nb_public * sizeof(HSD_ArchivePublicInfo);
     }
     if (archive->header.nb_extern != 0) {
-        archive->extern_info = (void*) ((u8*) header + file_offset);
-        file_offset += archive->header.nb_extern * sizeof(HSD_ArchiveExternInfo);
+        archive->extern_info =
+            (HSD_ArchiveExternInfo*) ((u8*) src + file_offset);
+        file_offset +=
+            archive->header.nb_extern * sizeof(HSD_ArchiveExternInfo);
     }
     if (file_offset < archive->header.file_size) {
-        archive->symbols = (void*) ((u8*) header + file_offset);
+        archive->symbols = (char*) ((u8*) src + file_offset);
     }
-    for (i = 0; i < archive->header.nb_reloc; i++) {
-        reloc_offset = archive->reloc_info[i].offset;
-        *(intptr_t*) (archive->data + reloc_offset) += base_addr;
-    }
+
+    Locate(archive, base_addr);
+
     return 0;
 }
-

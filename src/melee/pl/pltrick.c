@@ -1,7 +1,9 @@
-#include <melee/pl/pltrick.h>
+#include "pltrick.h"
+
+#include "ft/inlines.h"
+#include "pl/player.h"
 
 #include <sysdolphin/baselib/debug.h>
-
 
 int pl_80037B2C(struct pl_80037B2C_unk* arg0, int h_player, int idx)
 {
@@ -17,7 +19,12 @@ int pl_80037B2C(struct pl_80037B2C_unk* arg0, int h_player, int idx)
 
 /// #pl_80037DF4
 
-/// #pl_80037ECC
+void pl_80037ECC(HSD_GObj* gobj)
+{
+    Fighter* ft = GET_FIGHTER(gobj);
+    pl_800386D8_t* acp = Player_GetTotalAttackCountPtr(ft->player_id);
+    acp->x1A8 += 1;
+}
 
 /// #fn_80037F00
 

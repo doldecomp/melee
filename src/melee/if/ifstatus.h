@@ -1,6 +1,7 @@
-#ifndef GALE01_2F4910
-#define GALE01_2F4910
+#ifndef MELEE_IF_STATUS_H
+#define MELEE_IF_STATUS_H
 
+#include <placeholder.h>
 #include <platform.h>
 
 #include "if/forward.h"
@@ -18,7 +19,7 @@
 /* 2F6508 */ void ifStatus_802F6508(s32);
 /* 2F665C */ void ifStatus_802F665C(s8);
 /* 2F66A4 */ void ifStatus_802F66A4(void);
-/* 2F6788 */ void ifStatus_802F6788(s32);
+/* 2F6788 */ void ifStatus_802F6788(u8);
 /* 2F6804 */ void ifStatus_802F6804(void);
 /* 2F6898 */ void ifStatus_802F6898(void);
 /* 2F68F0 */ void ifStatus_802F68F0(void);
@@ -30,7 +31,7 @@
 /* 2F6E1C */ void ifStatus_802F6E1C(int slot);
 /* 2F6E3C */ void ifStatus_802F6E3C(s32);
 /* 2F6EA4 */ void ifStatus_802F6EA4(int, int, int, int, Event, Event);
-/* 2F7034 */ void ifStatus_802F7034(void);
+/* 2F7034 */ void ifStatus_802F7034(UNK_T);
 /* 2F7134 */ void ifStatus_802F7134(void);
 /* 2F7220 */ void ifStatus_802F7220(void);
 /* 4A10C8 */ extern HudIndex ifStatus_HudInfo;

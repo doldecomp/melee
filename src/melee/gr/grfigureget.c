@@ -6,6 +6,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/types.h"
 
 #include <dolphin/mtx.h>
@@ -140,9 +141,28 @@ void grFigureGet_80219B0C(HSD_GObj* gobj) {}
 
 /// #fn_80219B10
 
-/// #grFigureGet_80219C34
+void grFigureGet_80219C34(HSD_GObj* gobj)
+{
+    Ground* gp;
+    if (gobj == NULL) {
+        return;
+    }
+    gp = GET_GROUND(gobj);
+    gp->gv.figureget.xC += 1;
+}
 
-/// #grFigureGet_80219C50
+int grFigureGet_80219C50(HSD_GObj* gobj)
+{
+    Ground* gp;
+    if (gobj == NULL) {
+        return 0;
+    }
+    gp = GET_GROUND(gobj);
+    if (gp->gv.figureget.x8 + gp->gv.figureget.xC >= 3) {
+        return 1;
+    }
+    return 0;
+}
 
 DynamicsDesc* grFigureGet_80219C88(enum_t arg0)
 {
