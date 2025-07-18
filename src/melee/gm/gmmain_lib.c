@@ -8,7 +8,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
 #include <melee/ty/toy.h>
@@ -207,7 +207,7 @@ void* gmMainLib_8015CD8C(void)
     return &gmMainLib_804D3EE0->thing.x1A50;
 }
 
-void* gmMainLib_8015CD98(void)
+int* gmMainLib_8015CD98(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A54;
 }
@@ -362,7 +362,7 @@ void gmMainLib_8015D134(u8 arg0)
     gmMainLib_8015ED98()->x10 |= 1 << arg0;
 }
 
-s8* gmMainLib_8015D194(u8 arg0)
+u8* gmMainLib_8015D194(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x80;
@@ -407,7 +407,7 @@ void gmMainLib_8015D25C(u8 arg0)
     gmMainLib_8015ED98()->x14 |= 1 << arg0;
 }
 
-s8* gmMainLib_8015D2BC(u8 arg0)
+u8* gmMainLib_8015D2BC(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x81;
@@ -452,7 +452,7 @@ void gmMainLib_8015D384(u8 arg0)
     gmMainLib_8015ED98()->x18 |= 1 << arg0;
 }
 
-s8* gmMainLib_8015D3E4(u8 arg0)
+u8* gmMainLib_8015D3E4(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x82;
@@ -476,7 +476,7 @@ s32* gmMainLib_8015D438(u8 arg0)
     return &base[arg0].x94;
 }
 
-s32* gmMainLib_8015D450(s32 arg0)
+s32* gmMainLib_8015D450(u8 arg0)
 {
     return &gmMainLib_8015EDBC()->x4C[arg0 & 255];
 }
@@ -626,7 +626,7 @@ s32 gmMainLib_8015D818(u32 arg0)
 {
     u8 _[40];
 
-    if ((signed) gmMainLib_8015D94C(arg0) == 0) {
+    if (gmMainLib_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
         *q = lbTime_8000AFBC();
@@ -667,7 +667,7 @@ void gmMainLib_8015D924(u32 arg0)
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-u32 gmMainLib_8015D94C(u32 arg0)
+int gmMainLib_8015D94C(u32 arg0)
 {
     u32* thing = &gmMainLib_804D3EE0->thing.x1B4C[0];
     u32 flag = thing[arg0 / 32];

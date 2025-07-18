@@ -204,7 +204,7 @@ void HSD_CObjSetScissorx4(HSD_CObj*, u16 left, u16 right, u16 top, u16 bottom);
 void HSD_CObjGetViewportf(HSD_CObj* cobj, HSD_RectF32*);
 void HSD_CObjSetViewport(HSD_CObj* cobj, HSD_RectS16* viewport);
 void HSD_CObjSetViewportf(HSD_CObj* cobj, HSD_RectF32*);
-u32 HSD_CObjGetProjectionType(HSD_CObj*);
+int HSD_CObjGetProjectionType(HSD_CObj*);
 void HSD_CObjSetProjectionType(HSD_CObj*, u32);
 void HSD_CObjSetPerspective(HSD_CObj* cobj, f32 fov, f32 aspect);
 void HSD_CObjSetFrustum(HSD_CObj*, f32 top, f32 bottom, f32 left, f32 right);

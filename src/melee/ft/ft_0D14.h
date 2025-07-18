@@ -376,6 +376,6 @@
 /* 0DF878 */ UNK_RET ftCo_800DF878(UNK_PARAMS);
 /* 0DF8B0 */ bool ftCo_800DF8B0(ftCo_Fighter* fp);
 /* 0DF8E8 */ bool ftCo_800DF8E8(ftCo_Fighter* fp);
-/* 0DF910 */ UNK_RET ftCo_800DF910(UNK_PARAMS);
+/* 0DF910 */ bool ftCo_800DF910(Fighter* fp);
 
 #endif

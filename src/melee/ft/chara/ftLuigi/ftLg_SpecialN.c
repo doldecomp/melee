@@ -9,11 +9,11 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "it/items/itluigifireball.h"
 #include "lb/lb_00B0.h"
@@ -65,7 +65,7 @@ void ftLg_SpecialN_Anim(HSD_GObj* gobj)
 void ftLg_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -82,7 +82,7 @@ void ftLg_SpecialN_IASA(HSD_GObj* gobj)
 void ftLg_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->cmd_vars[0] != 0U) {
-        ftCo_800CCAAC(gobj);
+        ftCo_Fall_IASA_Inner(gobj);
     }
 }
 

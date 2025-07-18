@@ -14,7 +14,11 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_FallAerial.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -612,14 +616,9 @@ void fn_800D2890(Fighter_GObj* gobj, int ms_id)
         fp->mv.co.unk_800D2890.x0 = ftCo_800968C8;
         return;
     default:
-        fp->mv.co.unk_800D2890.x0 = ftCo_800CC730;
+        fp->mv.co.unk_800D2890.x0 = ftCo_Fall_Enter;
         return;
     }
-}
-
-inline Fighter_GObj* get_victim(Fighter* fp)
-{
-    return fp->victim_gobj;
 }
 
 void fn_800D290C(Fighter_GObj* gobj)
@@ -630,7 +629,7 @@ void fn_800D290C(Fighter_GObj* gobj)
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
 
-    victim = get_victim(fp);
+    victim = getFtVictim(fp);
     if (victim != NULL) {
         if (fp->x221B_b5) {
             ftCo_800DC750(victim);
@@ -753,14 +752,14 @@ void ftCo_ItemScrew_Enter(Fighter_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScrew, 0, 0.0F, 1.0F, 0.0F,
                               NULL);
-    ftCo_800CB110(gobj, 0, p_ftCommonData->x800);
+    ftCo_800CB110(gobj, false, p_ftCommonData->x800);
     fp->x2227_b0 = true;
 }
 
 void ftCo_ItemScrew_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -771,7 +770,7 @@ void ftCo_ItemScrew_IASA(Fighter_GObj* gobj)
 
 void ftCo_ItemScrew_Phys(Fighter_GObj* gobj)
 {
-    ftCo_800CB438(gobj);
+    ftCo_Jump_Phys_Inner(gobj);
 }
 
 void ftCo_ItemScrew_Coll(Fighter_GObj* gobj)
@@ -2130,4 +2129,10 @@ void ftCo_800DEEA8(Fighter_GObj* gobj)
 
 /// #ftCo_800DF8E8
 
-/// #ftCo_800DF910
+bool ftCo_800DF910(Fighter* fp)
+{
+    if (fp->input.cstick.y >= p_ftCommonData->tap_jump_threshold) {
+        return true;
+    }
+    return false;
+}

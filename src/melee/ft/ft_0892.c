@@ -6,10 +6,12 @@
 #include "ftwaitanim.h"
 #include "math.h"
 
+#include "ft/chara/ftFox/ftFx_AppealS.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ftCLink/ftCl_Init.h"
+#include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftLink/ftLk_AttackAir.h"
@@ -53,7 +55,17 @@ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj)
     return &GET_FIGHTER(gobj)->dmg.x18d8;
 }
 
-/// #ft_800898C0
+bool ft_800898C0(HSD_GObj* gobj)
+{
+    Fighter* ft = GET_FIGHTER(gobj);
+    if ((ft->x2070.x2073 == 113 || ft->x2070.x2073 == 114 ||
+         ft->x2070.x2073 == 99) ||
+        ftFx_AppealS_CheckIfUsed(ft))
+    {
+        return true;
+    }
+    return false;
+}
 
 /// #ft_80089914
 
@@ -101,7 +113,10 @@ void ft_8008A2BC(HSD_GObj* gobj)
     }
 }
 
-/// #ft_8008A324
+void ft_8008A324(HSD_GObj* gobj)
+{
+    ft_8008A348(gobj, -1.0f);
+}
 
 // Transition state to ftCo_MS_Wait or otherwise neutral state
 void ft_8008A348(Fighter_GObj* fighter_gobj, float anim_blend)
@@ -111,7 +126,7 @@ void ft_8008A348(Fighter_GObj* fighter_gobj, float anim_blend)
 
     fighter = GET_FIGHTER((HSD_GObj*) fighter_gobj);
     if (fighter->x2224_b2 & 1) {
-        ftCo_800C8B74(fighter_gobj);
+        ftCo_DownSpot_Enter(fighter_gobj);
         return;
     }
     if (ftCo_800C5240(fighter_gobj) != false) {

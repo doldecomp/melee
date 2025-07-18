@@ -5,6 +5,7 @@
 
 #include "cm/camera.h"
 #include "ft/ft_0C88.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
@@ -38,6 +39,8 @@ static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, float val, float val2)
     mtx[2][3] = ptr->z + val2;
 }
 
+#pragma push
+#pragma dont_inline on
 MtxPtr ftDrawCommon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 {
     u8 unused0[0x4];
@@ -71,6 +74,7 @@ MtxPtr ftDrawCommon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     }
     return NULL;
 }
+#pragma pop
 
 void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
@@ -406,24 +410,20 @@ typedef struct _Unk2 {
 void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
 {
     Unk2 sp54;
-    s32 ret;
-    s32 flags;
+    u32 ret;
     Vec3* pos;
     HSD_JObj* jobj;
-    MtxPtr arg2;
     MtxPtr matrix;
 
     Fighter* fighter2;
     Fighter* fighter;
     fighter = fighter2 = gobj->user_data;
     if (fighter->x221F_b3 == 0 && ftLib_80086A8C(gobj)) {
-        ret = Camera_80031060();
-
-        switch (ret) {
+        switch (Camera_80031060()) {
         case 1:
             if (fighter->x2220_flag.b7) {
                 fighter2 = gobj->user_data;
-                jobj = (HSD_JObj*) gobj->hsd_obj;
+                jobj = GET_JOBJ(gobj);
 
                 matrix = HSD_CObjGetInvViewingMtxPtr(Camera_800310B8());
                 PSMTXMultVec(matrix,
@@ -445,13 +445,11 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
                         ftParts_800750C8(fighter, 4, 1);
                         fighter->x2223_b2 = 1;
                         fighter->x2223_b3 = 0;
-                        {
-                            HSD_JObj* fighter = gobj->hsd_obj;
-                            u32 ret = HSD_GObj_80390EB8(arg1);
-                            MtxPtr arg2 =
-                                ftDrawCommon_8008051C(gobj, sp54.x38);
-                            HSD_JObjDispAll(fighter, arg2, ret, 0);
-                        }
+
+                        jobj = GET_JOBJ(gobj);
+                        ret = HSD_GObj_80390EB8(arg1);
+                        matrix = ftDrawCommon_8008051C(gobj, sp54.x38);
+                        HSD_JObjDispAll(jobj, matrix, ret, 0);
                     }
                 }
                 ftDrawCommon_800805C8(gobj, arg1, 1);
@@ -466,25 +464,20 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
                         ftParts_800750C8(fighter, 4, 1);
                         fighter->x2223_b2 = 1;
                         fighter->x2223_b3 = 1;
-                        {
-                            HSD_JObj* fighter = gobj->hsd_obj;
-                            ret = HSD_GObj_80390EB8(arg1);
-                            arg2 = ftDrawCommon_8008051C(gobj, sp54.xC);
-                            HSD_JObjDispAll(fighter, arg2, ret, 0);
-                        }
+
+                        jobj = GET_JOBJ(gobj);
+                        ret = HSD_GObj_80390EB8(arg1);
+                        matrix = ftDrawCommon_8008051C(gobj, sp54.x38);
+                        HSD_JObjDispAll(jobj, matrix, ret, 0);
                     }
                 }
             }
             break;
         case 0: {
-            bool arg2;
             fighter->x2223_b3 = 0;
-            if (fighter->x5C8 != 0U) {
-                arg2 = 0;
-            } else {
-                arg2 = 1;
-            }
-            ftDrawCommon_800805C8(gobj, arg1, arg2);
+
+            ret = fighter->x5C8 != NULL ? false : true;
+            ftDrawCommon_800805C8(gobj, arg1, ret);
         }
         }
     }

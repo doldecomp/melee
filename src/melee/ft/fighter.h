@@ -28,8 +28,8 @@
 /* 068E98 */ Fighter_GObj* Fighter_Create(struct S_TEMP1* input);
 /* 0693AC */ void Fighter_ChangeMotionState(Fighter_GObj* gobj,
                                             FtMotionId msid, MotionFlags flags,
-                                            float anim_start, float anim_speed,
-                                            float anim_blend,
+                                            f32 anim_start, f32 anim_speed,
+                                            f32 anim_blend,
                                             Fighter_GObj* arg3);
 /* 06A1BC */ void Fighter_8006A1BC(Fighter_GObj* gobj);
 /* 06A360 */ void Fighter_8006A360(Fighter_GObj* gobj);
@@ -73,8 +73,8 @@
 /* 4D6510 */ extern UNK_T Fighter_804D6510;
 /* 4D6514 */ extern UNK_T Fighter_804D6514;
 /* 4D6518 */ extern UNK_T Fighter_804D6518;
-/* 4D651C */ extern UNK_T Fighter_804D651C;
-/* 4D6520 */ extern UNK_T Fighter_804D6520;
+/* 4D651C */ extern float* Fighter_804D651C;
+/* 4D6520 */ extern float* Fighter_804D6520;
 /* 4D6524 */ extern float* Fighter_804D6524;
 /* 4D6528 */ extern UNK_T Fighter_804D6528;
 /* 4D6530 */ extern Vec2** Fighter_804D6530;

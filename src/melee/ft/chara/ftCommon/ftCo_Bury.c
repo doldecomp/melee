@@ -21,7 +21,6 @@
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
@@ -29,9 +28,10 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "gr/ground.h"
-#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "mp/mplib.h"
@@ -73,7 +73,10 @@ void ftCo_800C08A0(ftCo_GObj* gobj, ftCo_GObj* arg1, DynamicsDesc* arg2,
     if (ftColl_80076640(fp, &f) != 0) {
         p_hurt = &fp->hurt_capsules[0];
         ftColl_80076764(3, arg3, arg1, arg2, fp, p_hurt);
-        lbColl_80008D30(&hit, arg2);
+
+        /// @todo Eliminate cast
+        lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) arg2);
+
         ftColl_80078384(fp, p_hurt, &hit);
     }
     pl_8003EC30(fp->player_id, fp->x221F_b4, arg3, f);
@@ -171,7 +174,10 @@ void ftCo_800C0B20(ftCo_GObj* gobj)
             if (ftColl_80076640(fp, &f)) {
                 HurtCapsule* hurt = &fp->hurt_capsules[0];
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
-                lbColl_80008D30(&hit, unk_anim);
+
+                /// @todo Eliminate cast
+                lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) unk_anim);
+
                 ftColl_80078384(fp, hurt, &hit);
             }
             pl_8003EC30(fp->player_id, fp->x221F_b4, 1, f);
@@ -361,7 +367,7 @@ void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.buryjump.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

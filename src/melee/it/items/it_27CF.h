@@ -79,7 +79,6 @@
 /* 2C7A84 */ void it_802C7A84(Item_GObj*);
 /* 2C7AD0 */ void it_802C7AD0(Item_GObj*);
 /* 2C7AF0 */ void it_802C7AF0(Item_GObj*);
-/* 2F2094 */ Item_GObj* it_802F2094(int, Vec3*, int, int);
 /* 2F2F34 */ void it_802F2F34(HSD_GObj*, it_27CF_DatAttrs*);
 /* 2F3020 */ void it_802F3020(HSD_GObj*);
 /* 2F3078 */ bool it_802F3078(HSD_GObj*);

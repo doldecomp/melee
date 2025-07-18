@@ -7,11 +7,11 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/ftNs_Init.h"
 #include "ftNess/types.h"
@@ -411,7 +411,7 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
         float landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
 
         if (landing_lag == 0) {
-            ftCo_800CC730(gobj);
+            ftCo_Fall_Enter(gobj);
             return;
         }
 

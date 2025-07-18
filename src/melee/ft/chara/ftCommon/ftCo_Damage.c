@@ -26,7 +26,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
-#include "ft/ft_0C88.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
@@ -35,6 +35,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyLanding.h"
 #include "gm/gm_1601.h"
@@ -43,7 +46,6 @@
 #include "lb/lbvector.h"
 #include "lb/types.h"
 #include "pl/plbonuslib.h"
-#include "un/un_2FC9.h"
 #include "vi/vi1202.h"
 
 #include <common_structs.h>
@@ -972,7 +974,7 @@ void ftCo_Damage_Anim(ftCo_GObj* gobj)
             if (fp->x2224_b2) {
                 ftCo_80090780(gobj);
             } else if (!inlineC0(gobj)) {
-                ftCo_800CC730(gobj);
+                ftCo_Fall_Enter(gobj);
             }
         } else {
             ft_8008A2BC(gobj);
@@ -1008,7 +1010,7 @@ bool doIasa(ftCo_GObj* gobj)
     fp->x2227_b4 = true;
     return true;
 ret_inline:
-    if (ftCo_800CAE80(gobj)) {
+    if (ftCo_Jump_GetInput(gobj)) {
         fp->mv.co.damage.x14 = fp->mv.co.damage.x0;
         return true;
     }
@@ -1032,7 +1034,7 @@ void ftCo_Damage_IASA(ftCo_GObj* gobj)
                 fp->input.x668 |= HSD_PAD_XY;
             }
             if (fp->ground_or_air == GA_Air) {
-                ftCo_800CCAAC(gobj);
+                ftCo_Fall_IASA_Inner(gobj);
             } else {
                 ftCo_Wait_IASA(gobj);
             }

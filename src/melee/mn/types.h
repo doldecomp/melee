@@ -46,108 +46,129 @@ typedef struct HSD_GObj Menu_GObj;
 #endif
 
 struct PlayerInitData {
-    /*0x00*/ u8 character_kind;
-    /*0x01*/ u8 slot_type;
-    /*0x02*/ u8 stocks;
-    /*0x03*/ u8 color;
-    /*0x04*/ u8 port;
-    /*0x05*/ s8 spawnpos32;
-    /*0x06*/ u8 spawn_direction;
-    /*0x07*/ u8 subcolor;
-    /*0x08*/ u8 handicap;
-    /*0x09*/ u8 team;
-    /*0x0A*/ u8 nametag;
-    /*0x0B*/ u8 unk_0xb;
-    /*0x0C*/ u8 unk_0xc;
-    /*0x0D*/ u8 unk_0xd;
-    /*0x0E*/ u8 unk_0xe;
-    /*0x0F*/ u8 cpu_level;
-    /*0x10*/ u8 unk_0x10;
-    /*0x11*/ u8 unk_0x11;
-    /*0x12*/ u16 unk_0x12;
-    /*0x14*/ u8 unk_0x14;
-    /*0x15*/ u8 unk_0x15;
-    /*0x16*/ u8 unk_0x16;
-    /*0x17*/ u8 unk_0x17;
-    /*0x18*/ f32 offense_ratio;
-    /*0x1C*/ f32 defense_ratio;
-    /*0x20*/ u8 unk_0x20;
-    /*0x21*/ u8 unk_0x21;
-    /*0x22*/ u8 unk_0x22;
-    /*0x23*/ u8 unk_0x23;
+    /*0x00*/ s8 x0; // character kind
+    /*0x01*/ u8 x1; // slot type
+    /*0x02*/ s8 x2; // stocks
+    /*0x03*/ s8 x3; // color
+    /*0x04*/ u8 x4; // port
+    /*0x05*/ s8 x5; // spawnpos32
+    /*0x06*/ s8 x6; // spawn direction
+    /*0x07*/ u8 x7; // subcolor
+    /*0x08*/ s8 x8; // handicap
+    /*0x09*/ u8 x9; // team
+    /*0x0A*/ u8 xA; // nametag
+    /*0x0B*/ u8 xB;
+    /*0x0C*/ u8 xC_b0 : 1;
+             u8 xC_b1 : 1;
+             u8 xC_b2 : 1;
+             u8 xC_b3 : 1;
+             u8 xC_b4 : 1;
+             u8 xC_b5 : 1;
+             u8 xC_b6 : 1;
+             u8 xC_b7 : 1;
+    /*0x0D*/ u8 xD_b0 : 1;
+             u8 xD_b1 : 1;
+             u8 xD_b2 : 1;
+             u8 xD_b3 : 1;
+             u8 xD_b4 : 1;
+             u8 xD_b5 : 1;
+             u8 xD_b6 : 1;
+             u8 xD_b7 : 1;
+    /*0x0E*/ u8 xE;
+    /*0x0F*/ u8 xF; // CPU level
+    /*0x10*/ u16 x10;
+    /*0x12*/ u16 x12;
+    /*0x14*/ u16 x14;
+    /*0x18*/ float x18; // offense ratio
+    /*0x1C*/ float x1C; // defense ratio
+    /*0x20*/ float x20;
 };
 
 struct StartMeleeRules {
-    u8 flags1;
-    u8 flags2;
-    u8 flags3;
-    u8 flags4;
-    u8 flags5;
-    u8 flags6;
-    u8 unk_0x6;
-    u8 unk_0x7;
-    u8 is_teams;
-    u8 unk_0x9;
-    u8 unk_0xa;
-    s8 item_frequency;
-    s8 sd_penalty;
-    u8 unk_0xd;
-    u32 stage_id;
-    s32 time_limit;
-    u8 unk_0x14;
-    u8 unk_0x15;
-    u8 unk_0x16;
-    u8 unk_0x17;
-    u8 unk_0x18;
-    u8 unk_0x19;
-    u8 unk_0x1a;
-    u8 unk_0x1b;
-    u8 unk_0x1c;
-    u8 unk_0x1d;
-    u8 unk_0x1e;
-    u8 unk_0x1f;
-    u64 item_mask;
-    u8 unk_0x28;
-    u8 unk_0x29;
-    u8 unk_0x2a;
-    u8 unk_0x2b;
-    u8 unk_0x2c;
-    u8 unk_0x2d;
-    u8 unk_0x2e;
-    u8 unk_0x2f;
-    f32 damage_ratio;
-    f32 game_speed;
-    u8 unk_0x38;
-    u8 unk_0x39;
-    u8 unk_0x3a;
-    u8 unk_0x3b;
-    u8 unk_0x3c;
-    u8 unk_0x3d;
-    u8 unk_0x3e;
-    u8 unk_0x3f;
-    void* pause_check_callback;
-    u8 unk_0x44;
-    u8 unk_0x45;
-    u8 unk_0x46;
-    u8 unk_0x47;
-    u8 unk_0x48;
-    u8 unk_0x49;
-    u8 unk_0x4a;
-    u8 unk_0x4b;
-    u8 unk_0x4c;
-    u8 unk_0x4d;
-    u8 unk_0x4e;
-    u8 unk_0x4f;
-    void* match_end_callback;
-    s32 unk_0x54;
-    u8 unk_0x58;
-    u8 unk_0x59;
-    u8 unk_0x5a;
-    u8 unk_0x5b;
-    u8 unk_0x5c;
-    u8 unk_0x5d;
-    u8 unk_0x5e;
-    u8 unk_0x5f;
+    u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
+    u32 x0_3 : 3;
+    u32 x0_6 : 1;
+    u32 x0_7 : 1;
+
+    u32 x1_0 : 1;
+    u32 x1_1 : 1;
+    u32 x1_2 : 1;
+    u32 x1_3 : 1;
+    u32 x1_4 : 1;
+    u32 x1_5 : 1;
+    u32 x1_6 : 1;
+    u32 x1_7 : 1;
+
+    u32 x2_0 : 1;
+    u32 x2_1 : 1;
+    u32 x2_2 : 1;
+    u32 x2_3 : 1;
+    u32 x2_4 : 1;
+    u32 x2_5 : 1;
+    u32 x2_6 : 1;
+    u32 x2_7 : 1;
+
+    u32 x3_0 : 1;
+    u32 x3_1 : 1;
+    u32 x3_2 : 1;
+    u32 x3_3 : 1;
+    u32 x3_4 : 1;
+    u32 x3_5 : 1;
+    u32 x3_6 : 1;
+    u32 x3_7 : 1;
+
+    u32 x4_0 : 1;
+    u32 x4_1 : 1;
+    u32 x4_2 : 1;
+    u32 x4_3 : 1;
+    u32 x4_4 : 1;
+    u32 x4_5 : 1;
+    u32 x4_6 : 1;
+    u32 x4_7 : 1;
+
+    u32 x5_0 : 1;
+    u32 x5_1 : 1;
+    u32 x5_2 : 1;
+    u32 x5_3 : 1;
+    u32 x5_4 : 1;
+    u32 x5_5 : 1;
+    u32 x5_6 : 1;
+    u32 x5_7 : 1;
+
+    u8 x6;
+    u8 x7;
+    u8 x8; // is teams
+    u8 x9;
+    u8 xA;
+    s8 xB; // item frequency
+    s8 xC; // SD penalty
+    u8 xD;
+    u16 xE; // InternalStageId
+
+    u32 x10; // time limit
+    u8 x14;
+    u32 x18;
+    u32 x1C_pad[(0x20 - 0x1C) / 4];
+
+    u64 x20; // item mask
+    int x28;
+    float x2C;
+    float x30; // damage ratio
+    float x34; // game speed
+    void (*x38)(int);
+    void (*x3C)(int);
+    int (*x40)(void);
+    void (*x44)(void);
+    void (*x48)(void);
+    void (*x4C)(void);
+    void (*x50)(int);
+    struct {
+        u8 pad_x0[0x10];
+        u8 x10_b0 : 1;
+        u8 x10_b1 : 1;
+    }* x54;
+    int x58;
+    u8 pad_x5C[0x60 - 0x5C];
 };
 
 struct StartMeleeData {
@@ -157,7 +178,7 @@ struct StartMeleeData {
 
 struct VsModeData {
     s8 loser;
-    u32 ordered_stage_index;
+    s8 ordered_stage_index;
     s8 winner;
     u8 unk_0x3;
     u8 unk_0x4;
@@ -168,8 +189,7 @@ struct VsModeData {
 };
 
 struct CSSData {
-    u8 unk_0x0;
-    u8 unk_0x1;
+    u16 unk_0x0;
     u8 match_type;
     u8 pending_scene_change;
     u8* ko_star_counts;
@@ -367,12 +387,20 @@ struct CSSDoorsData {
     float x108;
     float x10c;
     CSSKOStar ko_stars[4]; // 0x110
-    u8 x190[64];           // 0x190
 };
 
 struct mnGallery_804A0B90_t {
     char pad_0[0x96000];
 };
 STATIC_ASSERT(sizeof(struct mnGallery_804A0B90_t) == 0x96000);
+
+struct SSSData {
+    u8 unk_stage;
+    u8 x1;
+    u8 no_lras;
+    u8 force_stage_id;
+    u8 start_game;
+    VsModeData data;
+};
 
 #endif

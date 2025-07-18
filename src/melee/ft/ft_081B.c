@@ -12,6 +12,7 @@
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
@@ -537,7 +538,8 @@ void ftCo_AirCatchHit_Coll(Fighter_GObj* gobj)
     }
 }
 
-void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
+//void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
+void ft_80082C74(void* gobj, void (*arg1)(Fighter_GObj*))
 {
     CollData* coll;
     Fighter* fp;
@@ -673,7 +675,13 @@ void ft_80083B68(Fighter_GObj* gobj)
 
 /// #ft_80083E64
 
-/// #ft_80083F88
+void ft_80083F88(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 /// #ft_8008403C
 
@@ -732,19 +740,13 @@ float ft_GetGroundFrictionMultiplier(Fighter *fp)
 
 /// #ft_80084EEC
 
-extern f32 ft_804D83B8;
-
 void ft_80084F3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u32 unused;
     ftCo_DatAttrs* co = &fp->co_attrs;
-    f32 var_f2 = fp->gr_vel;
     f32 var_f1 = co->gr_friction;
-    if (var_f2 < ft_804D83B8) {
-        var_f2 = -var_f2;
-    }
-    if (var_f2 > co->walk_max_vel) {
+    PAD_STACK(8);
+    if (fabs_inline(fp->gr_vel) > co->walk_max_vel) {
         var_f1 *= p_ftCommonData->x6C;
     }
     ftCommon_8007C930(fp, var_f1);

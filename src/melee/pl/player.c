@@ -783,7 +783,7 @@ int Player_GetPlayerId(int slot)
     return player_id;
 }
 
-void Player_SetPlayerId(int slot, s8 player_id)
+void Player_SetPlayerId(int slot, int player_id)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1101,7 +1101,7 @@ void Player_SetHPByIndex(s32 slot, s32 arg1, s32 arg2)
     player->staminas.byIndex[player->transformed[arg1]] = arg2;
 }
 
-s16 Player_GetOtherStamina(s32 slot)
+int Player_GetOtherStamina(s32 slot)
 {
     s16 stamina;
     StaticPlayer* player;
@@ -1119,7 +1119,7 @@ void Player_SetOtherStamina(s32 slot, s32 stamina)
     player->staminas.byName.stamina = stamina;
 }
 
-u32 Player_GetRemainingHP(s32 slot)
+int Player_GetRemainingHP(s32 slot)
 {
     StaticPlayer* player;
     s32 result;
@@ -1135,7 +1135,7 @@ u32 Player_GetRemainingHP(s32 slot)
     return result2;
 }
 
-u8 Player_GetMoreFlagsBit2(s32 slot)
+bool Player_GetMoreFlagsBit2(s32 slot)
 {
     StaticPlayer* player;
     u8 bit2;
@@ -1156,7 +1156,7 @@ void Player_SetMoreFlagsBit2(s32 slot, u8 bit2)
     player->more_flags.b2 = bit2;
 }
 
-s32 Player_GetMoreFlagsBit3(s32 slot)
+bool Player_GetMoreFlagsBit3(s32 slot)
 {
     StaticPlayer* player;
     s32 bit3;
@@ -1188,7 +1188,7 @@ void Player_SetMoreFlagsBit4(s32 slot, u8 bit4)
     player->more_flags.b4 = bit4;
 }
 
-s32 Player_GetMoreFlagsBit4(s32 slot)
+bool Player_GetMoreFlagsBit4(s32 slot)
 {
     StaticPlayer* player;
     u8 bit4;
@@ -1200,7 +1200,7 @@ s32 Player_GetMoreFlagsBit4(s32 slot)
     return bit4;
 }
 
-int Player_GetMoreFlagsBit5(s32 slot)
+bool Player_GetMoreFlagsBit5(s32 slot)
 {
     StaticPlayer* player;
     u8 bit5;
@@ -1222,7 +1222,7 @@ void Player_SetMoreFlagsBit5(s32 slot, u8 bit5)
     player->more_flags.b5 = bit5;
 }
 
-u8 Player_GetMoreFlagsBit6(s32 slot)
+bool Player_GetMoreFlagsBit6(s32 slot)
 {
     StaticPlayer* player;
     u8 bit6;
@@ -1266,12 +1266,12 @@ void Player_SetFlagsAEBit0(s32 slot, u8 bit0)
     player->flagsAE.b0 = bit0;
 }
 
-u32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
+s32 Player_GetRemainingHPByIndex(s32 slot, s32 index)
 {
     StaticPlayer* player;
     u32 stamina;
     s32 result;
-    u32 result2;
+    s32 result2;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     stamina = player->staminas.byName.stamina;
@@ -1611,7 +1611,7 @@ void Player_SetFlagsBit7(s32 slot, u8 bit7)
     player->flags.b7 = bit7;
 }
 
-u8 Player_GetMoreFlagsBit0(s32 slot)
+bool Player_GetMoreFlagsBit0(s32 slot)
 {
     StaticPlayer* player;
     u8 bit0;
@@ -1621,7 +1621,7 @@ u8 Player_GetMoreFlagsBit0(s32 slot)
     return bit0;
 }
 
-u8 Player_GetMoreFlagsBit1(s32 slot)
+bool Player_GetMoreFlagsBit1(s32 slot)
 {
     StaticPlayer* player;
     u8 bit1;
@@ -1791,7 +1791,7 @@ s32 Player_80036428(s32 slot)
     return 6;
 }
 
-void Player_SetUnk45(s32 slot, s8 unk45)
+void Player_SetUnk45(s32 slot, int unk45)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

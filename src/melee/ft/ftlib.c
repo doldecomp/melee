@@ -636,6 +636,7 @@ void ftLib_80086E68(HSD_GObj* gobj)
     }
 }
 
+/// Get fighter's team ID
 s32 ftLib_80086EB4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

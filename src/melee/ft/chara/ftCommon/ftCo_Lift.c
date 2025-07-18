@@ -9,10 +9,10 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
@@ -56,7 +56,7 @@ void ftCo_80096E68(ftCo_GObj* gobj)
         Item_8026ABD8(fp->item_gobj, &vec, 0.0f);
         ftCo_80090780(gobj);
     } else {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

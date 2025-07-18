@@ -9,6 +9,8 @@
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 
+#include "common_structs.h"
+
 #include <dolphin/mtx.h>
 
 struct ftCollisionBox {
@@ -55,14 +57,14 @@ union ftCommon_MotionVars {
         /* fp+2360 */ float accel_mul;
     } walk;
     struct {
-        /* fp+2340 */ int x0;
-        /* fp+2344 */ float x4;
+        /* fp+2340 */ bool has_turned;
+        /* fp+2344 */ float facing_after;
         /* fp+2348 */ float x8;
         /* fp+234C */ u8 pad_xC[4];
-        /* fp+2350 */ float x10;
+        /* fp+2350 */ float frames_to_turn;
         /* fp+2354 */ u8 pad_x14[4];
-        /* fp+2358 */ int x18;
-        /* fp+235C */ int x1C;
+        /* fp+2358 */ bool just_turned;
+        /* fp+235C */ HSD_Pad x1C;
 
     } turn;
     struct {
@@ -80,28 +82,28 @@ union ftCommon_MotionVars {
         /* fp+2344 */ float x4;
     } run;
     struct {
-        /* fp+2340 */ int x0;
-        /* fp+2344 */ float x4;
+        /* fp+2340 */ bool x0;
+        /* fp+2344 */ float frames;
     } runbrake;
     struct {
-        int x0;
-        int x4;
+        /* fp+2340 */ int is_short_hop;
+        /* fp+2344 */ ftCo_JumpInput jump_input;
     } kneebend;
     struct {
         /* fp+2340 */ int x0;
-        /* fp+2344 */ int x4;
-        /* fp+2348 */ float x8;
+        /* fp+2344 */ bool x4;
+        /* fp+2348 */ float jump_mul;
     } jump;
     struct {
         /* fp+2340 */ int x0;
         /* fp+2344 */ float init_h_vel;
     } jumpaerial;
     struct {
-        /* fp+2340 */ int x0;
+        /* fp+2340 */ FtMotionId smid;
         /* fp+2344 */ float x4;
     } fall;
     struct {
-        /* fp+2340 */ s32 x0;
+        /* fp+2340 */ FtMotionId smid;
         /* fp+2344 */ float x4;
     } fallaerial;
     struct {
@@ -186,6 +188,10 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ float x0;
     } downwait;
+    struct {
+        /* fp+2340 */ u8 pad_x0[4];
+        /* fp+2344 */ u8 x4;
+    } downspot;
     struct {
         /* fp+2340 */ float x0;
     } catch;
@@ -336,6 +342,11 @@ union ftCommon_MotionVars {
         /* fp+2344 */ HSD_GObjEvent x4;
         /* fp+2348 */ int x8;
     } mushroom;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ Item_GObj* x8;
+    } barrel;
     struct {
         /* fp+2340 */ HSD_GObjEvent x0;
     } unk_800D2890;

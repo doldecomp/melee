@@ -93,6 +93,10 @@ static inline CollData* getFtColl(Fighter* fp)
     return &fp->coll_data;
 }
 
+static inline Fighter_GObj* getFtVictim(Fighter* fp) {
+    return fp->victim_gobj;
+}
+
 static inline bool ftGetGroundAir(Fighter* fp)
 {
     return fp->ground_or_air;
@@ -106,6 +110,17 @@ static inline float stickGetDir(float x1, float x2)
         return x1;
     }
 }
+
+static inline void getAccelAndTarget(Fighter* fp, float* accel,
+                                     float* target_vel)
+{
+    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+    *accel = fp->input.lstick.x * fp->co_attrs.dash_run_acceleration_a;
+    *accel += fp->input.lstick.x > 0 ? +co_attrs->dash_run_acceleration_b
+                                     : -co_attrs->dash_run_acceleration_b;
+    *target_vel = fp->input.lstick.x * co_attrs->dash_run_terminal_velocity;
+}
+
 /// used for all fighters except Kirby and Purin
 static inline void Fighter_OnItemPickup(Fighter_GObj* gobj, bool catchItemFlag,
                                         bool bool2, bool bool3)

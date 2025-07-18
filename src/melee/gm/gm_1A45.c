@@ -10,6 +10,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
+#include "lb/lbcardnew.h"
 #include "lb/lbdvd.h"
 #include "lb/lbheap.h"
 #include "un/un_2FC9.h"
@@ -44,7 +45,7 @@ bool gm_801A45E8(int bit)
     return gm_80479D58.unk_10 & (1ULL << bit);
 }
 
-u8 gm_801A4624(void)
+int gm_801A4624(void)
 {
     return gm_80479D58.unk_10;
 }
@@ -119,7 +120,7 @@ void gm_801A4970(int (**arg0)(void))
     for (i = 0; i < 4; i++) {
         temp_r3 = &HSD_PadMasterStatus[(u8) i];
         if ((temp_r3->trigger & 2) && (temp_r3->button & 0x400)) {
-            temp_ret = lbHeap_80015DF8();
+            lbHeap_80015DF8();
             OSReport("[hsdDumpClassStat] -- Report --\n");
             hsdDumpClassStat(NULL, 0, 1);
             OSReport("\n");

@@ -32,7 +32,7 @@
 #include "ftCommon/ftCo_CargoWait.h"
 #include "ftCommon/ftCo_CargoWalk.h"
 #include "ftDonkey/types.h"
-#include "lb/lbmthp.h"
+#include "lb/lbanim.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
@@ -628,9 +628,9 @@ void ftDk_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
     ftDonkeyAttributes* ftData_attr = ftdata->ext_attr;
-    ftData_attr->x8 = lbMthp_8001E8F8(ftData_80085E50(fp, 296));
-    ftData_attr->xC = lbMthp_8001E8F8(ftData_80085E50(fp, 297));
-    ftData_attr->x10 = lbMthp_8001E8F8(ftData_80085E50(fp, 298));
+    ftData_attr->x8 = lbAnim_8001E8F8(ftData_80085E50(fp, 296));
+    ftData_attr->xC = lbAnim_8001E8F8(ftData_80085E50(fp, 297));
+    ftData_attr->x10 = lbAnim_8001E8F8(ftData_80085E50(fp, 298));
     PUSH_ATTRS(fp, ftDonkeyAttributes);
     fp->x2222_b0 = true;
     fp->x2CC = fp->dat_attrs;

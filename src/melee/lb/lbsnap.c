@@ -3,7 +3,7 @@
 #include "lbsnap.static.h"
 
 #include "lbarchive.h"
-#include "lbcardgame.h"
+#include "lbcardnew.h"
 #include "lblanguage.h"
 
 #include "ft/ft_0877.h"

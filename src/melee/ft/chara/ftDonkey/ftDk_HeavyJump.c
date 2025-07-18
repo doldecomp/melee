@@ -3,10 +3,10 @@
 #include "ftDk_HeavyFall.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Jump.h"
 #include "ftDonkey/types.h"
 
 void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
@@ -16,7 +16,7 @@ void ftDk_HeavyJump_IASA(HSD_GObj* gobj)
 
 void ftDk_HeavyJump_Phys(HSD_GObj* gobj)
 {
-    ftCo_800CB438(gobj);
+    ftCo_Jump_Phys_Inner(gobj);
 }
 
 void ftDk_HeavyJump_Coll(HSD_GObj* gobj)

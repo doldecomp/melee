@@ -4,23 +4,25 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "gm/forward.h" // IWYU pragma: export
+#include "baselib/forward.h"
+#include <melee/gm/forward.h> // IWYU pragma: export
+#include <melee/mn/types.h>
 
 #include <common_structs.h>
 
 struct MinorScene {
-    u8 idx;
-    u8 preload;
-    u16 flags;
+    /* 00 */ u8 idx;
+    /* 01 */ u8 preload;
+    /* 02 */ u16 flags;
 
-    void (*Prep)(MinorScene*);
-    void (*Decide)(MinorScene*);
+    /* 04 */ void (*Prep)(MinorScene*);
+    /* 08 */ void (*Decide)(MinorScene*);
 
-    struct MinorSceneInfo {
-        u8 class_id;
-        void* unk_struct_0; // data passed to OnLoad callback
-        void* unk_struct_1; // data passed to OnLeave callback
-    } info;
+             struct MinorSceneInfo {
+    /* 0C */     u8 class_id;
+    /* 10 */     void* unk_struct_0; ///< data passed to OnLoad callback
+    /* 14 */     void* unk_struct_1; ///< data passed to OnLeave callback
+             } info;
 };
 
 struct MajorScene {
@@ -100,9 +102,9 @@ struct gmm_x1F2C {
     s8 x7B;
     UnkFlagStruct2 x7C;
     s16 x7E;
-    s8 x80;
-    s8 x81;
-    s8 x82;
+    u8 x80;
+    u8 x81;
+    u8 x82;
     s8 x83;
     s32 x84;
     s32 x88;
@@ -149,7 +151,8 @@ struct GameRules {
 STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
 
 struct gmm_retval_ED98 {
-    u8 padding[0xC];
+    UNK_T x0;
+    u8 padding[0x8];
     s32 xC;
     s32 x10;
     s32 x14;
@@ -166,7 +169,10 @@ struct gmm_retval_EDBC {
     s32 x0;
     s32 x4;
     s32 x8;
-    u8 padding[0x4C - 0x8 - 4];
+    u8 padding[0x14 - 0xC];
+    u32 x14;
+    u16 x18[2];
+    u8 pad_x1C[0x4C - 0x1C];
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
     s32 xB0[4];
@@ -197,7 +203,7 @@ struct gmm_x1868 {
     /* 0x01E0 */ s32 x1A48;
     /* 0x01E4 */ s32 x1A4C;
     /* 0x01E8 */ s32 x1A50;
-    /* 0x01EC */ s32 x1A54;
+    /* 0x01EC */ int x1A54;
     /* 0x01F0 */ s32 x1A58;
     /* 0x01F4 */ s32 x1A5C;
     /* 0x01F8 */ s32 x1A60;
@@ -248,17 +254,58 @@ struct gmm_x0 {
     /* 0x0584 */ M2C_UNK unk_584; /* inferred */
     /* 0x0588 */ s8 unk_588[4];   /* inferred */
     /* 0x0590 */ char pad_58B[4]; /* inferred */
-    /* 0x0590 */ s8 unk_590;      /* inferred */
-    /* 0x0591 */ char pad_591[3]; /* maybe part of unk_590[4]? */
-    /* 0x0594 */ char unk_594;
-    /* 0x0595 */ char pad_595[3]; /* maybe part of unk_594[4]? */
-    /* 0x0598 */ char unk_598;
-    /* 0x0599 */ char pad_599[1];
-    /* 0x059A */ s16 unk_59A;
-    /* 0x05A0 */ char pad_59C[0x12B4]; /* maybe part of x588[0x4B0]? */
+    /* 0x0590 */ VsModeData unk_590;
+    /* 0x06D0 */ VsModeData unk_6D0;
+    /* 0x0810 */ VsModeData unk_810;
+    /* 0x0950 */ VsModeData unk_950;
+    /* 0x0A90 */ VsModeData unk_A90;
+    /* 0x0BD0 */ VsModeData unk_BD0;
+    /* 0x0D10 */ VsModeData unk_D10;
+    /* 0x0E50 */ VsModeData unk_E50;
+    /* 0x0F90 */ VsModeData unk_F90;
+    /* 0x10D0 */ VsModeData unk_10D0;
+    /* 0x1210 */ VsModeData unk_1210;
+    /* 0x1350 */ VsModeData unk_1350;
+    /* 0x1490 */ char pad_1490[0x1850 - 0x1490];
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
+
+struct lbl_8046B6A0_24C_t {
+    UNK_T x0;
+    u8 x4;
+    u8 x5;
+    u8 x6;
+    u32 x8;
+    u8 xC;
+    u8 padD[0x24 - 0xD];
+    struct {
+        u8 x0;
+        u8 pad_x1[0xB];
+    } x24[1];
+    u8 pad30[0x58 - 0x30];
+    struct lbl_8046B6A0_24C_58_t {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        u8 x3;
+        u8 x4;
+        u8 x5;
+        u8 x6;
+        u8 x7;
+        u8 pad8[0x20 - 8];
+        u32 x20;
+        u32 x24;
+        u32 x28;
+        u32 x2C;
+        u8 pad60[0xA8 - 0x30];
+    } x58[6];
+    u8 pad3F0[0x44C - 0x3F0 - 0x58];
+    struct lbl_8046B6A0_24C_44C_t {
+        u8 x0[0x101];
+        int x104[0x101];
+    } x44C[6];
+};
 
 struct Placeholder_8016AE38_flags_2 {
     /* +0:0 */ u8 x0_b0_b2 : 3;
@@ -287,56 +334,55 @@ struct Placeholder_8016AE38_flags_2 {
 
 struct lbl_8046B6A0_t {
     /* 0x0000 */ u8 unk_0;
-    /* 0x0001 */ u8 unk_1;
+    /* 0x0001 */ s8 unk_1; // who paused?
     /* 0x0002 */ u8 unk_2;
     /* 0x0003 */ u8 unk_3;
-    /* 0x0004 */ u32 unk_4;
-    /* 0x0008 */ u32 unk_8;
+    /* 0x0004 */ u8 unk_4;
+    /* 0x0005 */ u8 unk_5;
+    /* 0x0006 */ u8 unk_6;
+    /* 0x0007 */ u8 unk_7;
+    /* 0x0008 */ u8 unk_8;
+    /* 0x0009 */ u8 unk_9;
+    /* 0x000A */ u8 unk_A;
+    /* 0x000B */ u8 unk_B;
     /* 0x000C */ u8 unk_C;
     /* 0x000D */ u8 unk_D;
     /* 0x000E */ u8 unk_E;
     /* 0x000F */ u8 unk_F;
     /* 0x0010 */ s32 unk_10;
     /* 0x0014 */ s32 unk_14;
-    /* 0x0018 */ char pad_18[0xC]; /* maybe part of unk_14[4]? */
-    /* 0x0024 */ s32 unk_24;
-    /* 0x0028 */ s32 unk_28;
+    /* 0x0018 */ u8 unk_18; /* maybe part of unk_14[4]? */
+    /* 0x001C */ u32* unk_1C;
+    /* 0x0020 */ u32* unk_20;
+    /* 0x0024 */ u32 unk_24;
+    /* 0x0028 */ u32 unk_28;
     /* 0x002C */ u16 unk_2C;
-    /* 0x002E */ char pad_2E[6]; /* maybe part of unk_2C[4]? */
+    /* 0x002E */ u16 unk_2E;
+    /* 0x0030 */ u8 unk_30;
     /* 0x0034 */ f32 unk_34;
-    /* 0x0038 */ char pad_38[0x2490]; /* maybe part of unk_34[0x925]? */
-    /* 0x24C8 */ Placeholder_8016AE38_flags_2 unk24C8;
-    /* 0x24CB */ char pad_24CB[1];
-    /* 0x24CC:0 */ u8 unk_24CC_b0 : 1;
-    /* 0x24CC:1 */ u8 unk_24CC_b1 : 1;
-    /* 0x24CC:2 */ u8 unk_24CC_b2 : 1;
-    /* 0x24CC:3 */ u8 unk_24CC_b3 : 1;
-    /* 0x24CC:4 */ u8 unk_24CC_b4 : 1;
-    /* 0x24CC:5 */ u8 unk_24CC_b5 : 1;
-    /* 0x24CC:6 */ u8 unk_24CC_b6 : 1;
-    /* 0x24CC:7 */ u8 unk_24CC_b7 : 1;
-    /* 0x24CD:0 */ u8 unk_24CD_b0 : 1;
-    /* 0x24CD:1 */ u8 unk_24CD_b1 : 1;
-    /* 0x24CD:2 */ u8 unk_24CD_b2 : 1;
-    /* 0x24CD:3 */ u8 unk_24CD_b3 : 1;
-    /* 0x24CD:4 */ u8 unk_24CD_b4 : 1;
-    /* 0x24CD:5 */ u8 unk_24CD_b5 : 1;
-    /* 0x24CD:6 */ u8 unk_24CD_b6 : 1;
-    /* 0x24CD:7 */ u8 unk_24CD_b7 : 1;
-    /* 0x24CE */ u8 unk_24CE;
-    /* 0x24CF */ char pad_24CF[1];
-    /* 0x24D0 */ s8 unk_24D0;
-    /* 0x24D1 */ char pad_24D1[2]; /* maybe part of unk_24D0[3]? */
-    /* 0x24D3 */ s8 unk_24D3;
-    /* 0x24D4 */ s8 unk_24D4;
-    /* 0x24D5 */ char pad_24D5[1];
-    /* 0x24D6 */ u16 unk_24D6;
-    /* 0x24D8 */ char pad_24D8[0x10]; /* maybe part of unk_24D6[9]? */
-    /* 0x24E8 */ u64 unk_24E8;
-    /* 0x24F0 */ s32 unk_24F0;
-    /* 0x24F4 */ char pad_24F4[4];
-    /* 0x24F8 */ f32 unk_24F8;        /* inferred */
-    /* 0x24FC */ char pad_24FC[0x2C]; /* maybe part of unk_24F8[0xC]? */
+    /* 0x0038 */ struct {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        s8 x3;
+        u8 x4_b0 : 1;
+        u8 x4_b1 : 1;
+        u8 x4_b2 : 1;
+        u8 x4_b3 : 1;
+        u8 x4_b4 : 1;
+        u8 x4_b5 : 1;
+        u8 x4_b6 : 1;
+        u8 x4_b7 : 1;
+        u8 x5;
+        u16 x6;
+        u16 x8;
+        u8 xA;
+        u8 xB;
+        u16 xC;
+    } unk_38[6];
+    /* 0x0038 */ char pad_8C[0x24C - 0x8C]; /* maybe part of unk_34[0x925]? */
+    /* 0x024C */ struct lbl_8046B6A0_24C_t x24C;
+    /* 0x24C8 */ struct StartMeleeRules x24C8;
 }; /* size = 0x2528 */
 STATIC_ASSERT(sizeof(struct lbl_8046B6A0_t) == 0x2528);
 
@@ -373,6 +419,139 @@ extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
 struct gm_8016A92C_arg0_t {
     char pad_0[0x58];
     struct lbl_8046B668_t* x58;
+};
+
+struct MatchTeamData {
+    int score;
+    int subscore;
+    u8 is_big_loser;
+    u8 is_small_loser;
+    u8 active;
+};
+
+struct MatchPlayerData {
+    u8 slot_type;
+    u8 character_kind;
+    s8 character_id;
+    u8 x3 : 6;
+    u8 x4;
+    u8 is_big_loser;
+    u8 is_small_loser;
+    u8 team;
+    s8 stocks;
+    u8 x9;
+    u16 self_destructs;
+    u16 percent;
+    u16 xE;
+    u16 kills;
+    u16 x12;
+    u16 x14;
+    u8 pad_x16[0x20 - 0x16];
+    int x20;
+    int x24;
+    u32 x28;
+    int score;
+    u8 pad_x30[0xA8 - 0x30];
+};
+
+struct MatchEnd {
+    int x0;
+    u8 result;
+    u8 x5;
+    u8 is_teams;
+    u8 x7;
+    u32 frame_count;
+    u8 xC;
+    u8 n_winners;
+    u8 n_team_winners;
+    u8 loser;
+    u8 winners[6];
+    u8 team_winners[5];
+    struct MatchTeamData team_standings[5];
+    struct MatchPlayerData player_standings[6];
+    u8 _x448[4];
+    u8 pad_x44C[0x186C - 0x44C];
+    u8 pad_x186C[0x227C - 0x186C];
+};
+
+struct MatchExitInfo {
+    int x0;
+    int x4;
+    int x8;
+    MatchEnd match_end;
+};
+
+struct MatchExitInfo2 {
+    int x0;
+    int x4;
+    MatchEnd match_end;
+};
+
+struct UnkAllstarData {
+    s8 x0;
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    u8 x4;
+    u8 x5;
+    u8 x6;
+    u8 x7;
+    u8 x8;
+    u8 x9;
+    u8 xA;
+    u8 xB;
+    struct UnkAllstarData_xC {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        u8 x3;
+        u8 x4;
+        u8 x5;
+        u8 x6;
+        u8 x7;
+        u8 x8;
+        u8 x9;
+        u8 xA;
+        u8 xB;
+        u8 xC;
+        u8 xD;
+        u8 xE;
+        u8 xF;
+        s8 x10;
+        u8 x11;
+        u8 x12;
+        u8 x13;
+        u8 x14;
+        u8 x15;
+        u8 x16;
+        u8 x17;
+        s8 x18;
+        u8 x19;
+        u8 x1A;
+        u8 x1B;
+        u8 x1C;
+        u8 x1D;
+        u8 x1E;
+        u8 x1F;
+        s8 x20;
+        u8 x21;
+        u8 x22;
+        u8 x23;
+        s8 x24;
+        u8 x25;
+        u8 x26;
+        u8 x27;
+        u8 x28;
+        u8 x29;
+        u8 x2A;
+        u8 x2B;
+        u8 x2C;
+        u8 x2D;
+        u8 x2E;
+        u8 x2F;
+        s8 x30;
+    } xC;
+    s8 pad_x0[0xA0 - 0x31 - 0xC];
 };
 
 #endif

@@ -12,7 +12,6 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
@@ -24,6 +23,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "it/it_26B1.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itkirby_2F23.h"
@@ -32,7 +32,7 @@
 #include "it/items/itpeachtoad.h"
 #include "it/items/itpeachtoadspore.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbmthp.h"
+#include "lb/lbanim.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
@@ -3831,10 +3831,10 @@ void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
     // Ends up being 00 28 according to data sheet
     fp->fv.kb.xE4 = da->jumpaerial_unk;
 
-    fp->fv.kb.xE8 = lbMthp_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerFall));
-    fp->fv.kb.xEC = lbMthp_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerJump));
+    fp->fv.kb.xE8 = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerFall));
+    fp->fv.kb.xEC = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerJump));
     fp->fv.kb.xF0 =
-        lbMthp_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerLanding));
+        lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerLanding));
 
     Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialN, 0, 0, 1, 0, NULL);
     fp->x2222_b2 = true;
@@ -5617,7 +5617,7 @@ void ftKb_PeSpecialLw_Anim(HSD_GObj* gobj)
 
 void ftKb_PeSpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    doPeAnim(gobj, ftCo_800CC730);
+    doPeAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKb_PeSpecialLw_IASA(ftKb_GObj* gobj) {}
@@ -5758,7 +5758,7 @@ void ftKb_PeSpecialLwHit_Anim(HSD_GObj* gobj)
 
 void ftKb_PeSpecialAirLwHit_Anim(HSD_GObj* gobj)
 {
-    doPeHitAnim(gobj, ftCo_800CC730);
+    doPeHitAnim(gobj, ftCo_Fall_Enter);
 }
 
 void ftKb_PeSpecialLwHit_IASA(ftKb_GObj* gobj) {}

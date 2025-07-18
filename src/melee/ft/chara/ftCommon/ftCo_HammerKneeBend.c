@@ -5,8 +5,8 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0C88.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_KneeBend.h"
 #include "ftCommon/types.h"
 
 void ftCo_800C5B88(ftCo_GObj* gobj, enum_t arg1)
@@ -36,7 +36,7 @@ void ftCo_HammerKneeBend_Anim(ftCo_GObj* gobj)
 
 void ftCo_HammerKneeBend_IASA(ftCo_GObj* gobj)
 {
-    ftCo_800CB59C(gobj);
+    ftCo_KneeBend_Check_ShortHop(gobj);
 }
 
 void ftCo_HammerKneeBend_Phys(ftCo_GObj* gobj)

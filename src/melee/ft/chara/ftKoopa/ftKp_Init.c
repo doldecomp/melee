@@ -9,7 +9,6 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
@@ -19,6 +18,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
 #include "ftCommon/ftCo_CaptureKoopa.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
 #include "ftKoopa/types.h"
 #include "it/it_26B1.h"
@@ -626,10 +626,10 @@ void ftKp_SpecialS_801332C4(HSD_GObj* gobj)
 
     if (victim_gobj != NULL) {
         ftCo_800DC920(gobj, victim_gobj);
-        ftCo_800CC730(victim_gobj);
+        ftCo_Fall_Enter(victim_gobj);
     }
 
-    ftCo_800CC730(gobj);
+    ftCo_Fall_Enter(gobj);
 }
 
 void ftKp_SpecialS_80133324(HSD_GObj* gobj)
@@ -654,10 +654,10 @@ void ftKp_SpecialS_80133398(HSD_GObj* gobj)
 
     if (victim_gobj != NULL) {
         ftCo_800DC920(gobj, victim_gobj);
-        ftCo_800CC730(victim_gobj);
+        ftCo_Fall_Enter(victim_gobj);
     }
 
-    ftCo_800CC730(gobj);
+    ftCo_Fall_Enter(gobj);
 }
 /// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
@@ -689,10 +689,10 @@ void ftKp_SpecialS_80133484(HSD_GObj* gobj)
 
     if (victim_gobj != NULL) {
         ftCo_800DC920(gobj, victim_gobj);
-        ftCo_800CC730(victim_gobj);
+        ftCo_Fall_Enter(victim_gobj);
     }
 
-    ftCo_800CC730(gobj);
+    ftCo_Fall_Enter(gobj);
 }
 
 void ftKp_SpecialS_801334E4(HSD_GObj* gobj)
@@ -755,7 +755,7 @@ void ftKp_SpecialSStart_Anim(HSD_GObj* gobj)
 void ftKp_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

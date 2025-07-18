@@ -6,9 +6,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <melee/gr/forward.h>
-
 #include "it/forward.h"
+#include <melee/gr/forward.h>
 #include <baselib/forward.h>
 
 #include <common_structs.h>
@@ -308,6 +307,11 @@ typedef struct {
 } itMato_ItemVars;
 
 typedef struct {
+    f32 x0;
+    f32 x4;
+} itMBallAttributes;
+
+typedef struct {
     u8 b0 : 1;
     u8 b1 : 1;
     u8 b2 : 1;
@@ -392,7 +396,7 @@ typedef struct itCoin_ItemVars {
     f32 x8;
     f32 xC;
     int x10;
-    int x14;
+    HSD_GObj* x14;
 } itCoin_ItemVars;
 
 typedef struct itFFlower_ItemVars {
@@ -731,10 +735,10 @@ typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
 typedef struct it_2E6A_ItemVars_1 {
     /*  +0 ip+DD4 */ s16 x0;
     /*  +2 ip+DD6 */ s16 x2; // type of union: 1=jobj, 2=vec
-                     union {
-    /*  +4 ip+DD8 */     HSD_JObj* x4;
-    /*  +4 ip+DD8 */     Vec3 x4_vec;
-                     };
+    union {
+        /*  +4 ip+DD8 */ HSD_JObj* x4;
+        /*  +4 ip+DD8 */ Vec3 x4_vec;
+    };
     /* +10 ip+DE4 */ Ground* x10;
     /* +14 ip+DE8 */ void (*x14)(Item_GObj*, Ground*);
     /* +18 ip+DEC */ void (*x18)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);

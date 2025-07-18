@@ -27,6 +27,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
+#include "ft/ft_0C8C.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftchangeparam.h"
@@ -45,6 +46,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftCo_ItemThrow.h"
+#include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_Rebound.h"
 #include "ftCommon/ftCo_ShieldBreakFly.h"
 #include "ftCommon/ftCo_SpecialS.h"
@@ -63,7 +65,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
-#include "lb/lbmthp.h"
+#include "lb/lbanim.h"
 #include "lb/lbshadow.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
@@ -129,8 +131,8 @@ u8* Fighter_804D650C = NULL;
 UNK_T Fighter_804D6510 = NULL;
 UNK_T Fighter_804D6514 = NULL;
 UNK_T Fighter_804D6518 = NULL;
-UNK_T Fighter_804D651C = NULL;
-UNK_T Fighter_804D6520 = NULL;
+float* Fighter_804D651C = NULL;
+float* Fighter_804D6520 = NULL;
 float* Fighter_804D6524 = NULL;
 UNK_T Fighter_804D6528 = NULL;
 UNK_T Fighter_804D652C = NULL;
@@ -837,12 +839,12 @@ static void Fighter_Create_Inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2229_b5_no_normal_motion) {
-        fp->x2EC = lbMthp_8001E8F8(ftData_80085E50(fp, 0x23));
+        fp->x2EC = lbAnim_8001E8F8(ftData_80085E50(fp, 0x23));
         if (!fp->x2228_b2) {
-            fp->x2DC = lbMthp_8001E8F8(ftData_80085E50(fp, 7));
-            fp->x2E0 = lbMthp_8001E8F8(ftData_80085E50(fp, 8));
-            fp->x2E4 = lbMthp_8001E8F8(ftData_80085E50(fp, 9));
-            fp->x2E8 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x25));
+            fp->x2DC = lbAnim_8001E8F8(ftData_80085E50(fp, 7));
+            fp->x2E0 = lbAnim_8001E8F8(ftData_80085E50(fp, 8));
+            fp->x2E4 = lbAnim_8001E8F8(ftData_80085E50(fp, 9));
+            fp->x2E8 = lbAnim_8001E8F8(ftData_80085E50(fp, 0x25));
         }
     }
 }
@@ -931,8 +933,8 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
 }
 
 void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
-                               MotionFlags flags, float anim_start,
-                               float anim_speed, float anim_blend,
+                               MotionFlags flags, f32 anim_start,
+                               f32 anim_speed, f32 anim_blend,
                                Fighter_GObj* arg3)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -1715,7 +1717,7 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftCo_800CAE80(gobj)) {
+    if (ftCo_Jump_GetInput(gobj)) {
         fp->x68A = fp->x685;
         fp->x685 = 0;
     } else if (fp->x685 < 0xFF) {

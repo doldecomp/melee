@@ -126,7 +126,7 @@ int DVDCancelAsync(struct DVDCommandBlock * block, void (* callback)(long, struc
 long DVDCancel(volatile struct DVDCommandBlock * block);
 int DVDCancelAllAsync(DVDCBCallback callback);
 long DVDCancelAll(void);
-struct DVDDiskID * DVDGetCurrentDiskID();
+struct DVDDiskID * DVDGetCurrentDiskID(void);
 BOOL DVDCheckDisk(void);
 
 // dvdfs.c

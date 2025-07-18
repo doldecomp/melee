@@ -6,9 +6,9 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C88.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_Fall.h"
 #include "ftSamus/types.h"
 
 #include <dolphin/mtx.h>
@@ -65,7 +65,7 @@ void ftSs_SpecialAirS_Anim(HSD_GObj* gobj)
     u8 _[8];
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -93,7 +93,7 @@ void ftSs_SpecialAirS_Phys(HSD_GObj* gobj)
 void ftSs_SpecialS_Coll(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -118,7 +118,7 @@ void ftSs_SpecialAirSSmash_Anim(HSD_GObj* gobj)
     u8 _[8];
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 
@@ -149,7 +149,7 @@ void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
 void ftSs_SpecialSSmash_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ftCo_800CC730(gobj);
+        ftCo_Fall_Enter(gobj);
     }
 }
 

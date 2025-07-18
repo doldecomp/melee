@@ -4714,7 +4714,9 @@ struct r13_ColAnimStruct* it_804D6D04;
 // ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
 // Article** it_804D6D30; // 8 bytes instead of 4 for some reason
 // Article** it_804D6D38; // 8 bytes instead of 4 for some reason
-f32** it_804D6D40; // Not sure of type. 8 bytes instead of 4 for some reason
+f32**
+    it_804D6D40; // Not sure of type. 8 bytes instead of 4 for some reason.
+                 // Based on ItCo.dat, may be a pointer to a struct of size 2C?
 
 // static f32 it_804DC708 = 0.0f;
 // static f32 it_804DC70C = 0.00001f;
@@ -8227,6 +8229,7 @@ void it_80278574(HSD_GObj* gobj, GXColor* arg1)
 }
 
 #if 0
+// load ItCo.dat/usd ?
 void it_8027870C(s32 arg0) {
     if (lbLang_IsSettingUS() != 0) {
         lbArchive_80017040(0, &it_803F1EE4, &it_804D6D20, &it_803F1EF0, 0);
@@ -10418,7 +10421,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
                     var_r30 = (&sp1C[0])[HSD_Randi(temp_r3_2)];
                 }
                 it_8026BB88(item_gobj_arg, &sp44);
-                item_gobj_var = it_802F2094(0, &sp44, var_r30, 0);
+                item_gobj_var = it_802F2094(NULL, &sp44, var_r30, 0);
                 if (item_gobj_var != 0) {
                     var_item = item_gobj_var->user_data;
                     var_item->x40_vel.x =
