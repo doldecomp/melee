@@ -13,7 +13,7 @@
 /* 15CC78 */ void* gmMainLib_8015CC78(void);
 /* 15CC84 */ void* gmMainLib_8015CC84(void);
 /* 15CC90 */ void* gmMainLib_8015CC90(void);
-/* 15CC9C */ void* GetPersistentNameData(s32);
+/* 15CC9C */ void* PersistentNameData(s32);
 /* 15CCE4 */ void* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ void* gmMainLib_8015CCF0(void);
 /* 15CCFC */ void* gmMainLib_8015CCFC(void);
