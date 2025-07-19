@@ -5,8 +5,10 @@
 #include <melee/gm/gm_1A4C.h>
 #include <melee/gm/gm_1AED.h>
 #include <melee/gm/gm_1B03.h>
+#include <melee/gm/gmapproach.h>
 #include <melee/gm/gmcamera.h>
 #include <melee/gm/gmmenu.h>
+#include <melee/gm/gmprogressive.h>
 #include <melee/gm/gmtitle.h>
 #include <melee/gm/gmtou.h>
 #include <melee/gm/gmvsmelee.h>
