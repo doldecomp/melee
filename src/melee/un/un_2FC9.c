@@ -287,7 +287,7 @@ void un_802FD4C8(void)
         lb_80013B14((HSD_CameraDescPerspective*) &nametag_CObjDesc));
     GObj_SetupGXLinkMax(gobj, fn_802FCAC4, 6);
     gobj->gxlink_prios = 0x200;
-    un_804D6D7C = HSD_SisLib_803A611C(2, (u32) gobj, 14, 15, 0, 9, 6, 0);
+    un_804D6D7C = HSD_SisLib_803A611C(2, gobj, 14, 15, 0, 9, 6, 0);
     HSD_SisLib_803A62A0(2, "SdIntro.dat", "SIS_IntroData");
     un_804D6D78 = HSD_SisLib_803A6754(2, un_804D6D7C);
     un_804D6D78->x8 = -10.0;
@@ -680,7 +680,7 @@ void un_802FF498(void)
 {
     memzero(un_804A1F58, sizeof(un_804A1F58));
     un_804A1F58->x0 =
-        HSD_SisLib_803A611C(2, (u32) ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
+        HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }
 
 void un_802FF4FC(void)

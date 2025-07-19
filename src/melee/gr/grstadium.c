@@ -1190,7 +1190,7 @@ HSD_GObj* grStadium_801D2BEC(void)
     memzero(text, 0x18);
     lb_800121FC(&text->desc, 0xFA, 0xA0, 4, 0x7D2);
     archive = grDatFiles_801C6324();
-    HSD_SisLib_803A611C(1, (u32) gobj, 9, 0xD, 0, 1, 0, 1);
+    HSD_SisLib_803A611C(1, gobj, 9, 0xD, 0, 1, 0, 1);
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrPStadiumData");
     text->x18 = HSD_SisLib_803A5ACC(1, 0, 0.0F, 0.0F, 0.0F, 250.0F, 160.0F);

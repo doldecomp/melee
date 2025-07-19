@@ -83,7 +83,7 @@ struct mn_80231634_t {
 /* 22ED6C */ void mn_8022ED6C(HSD_JObj*, Vec3*);
 /* 22EE84 */ UNK_RET mn_8022EE84(UNK_PARAMS);
 /* 22EFD8 */ UNK_RET mn_8022EFD8(UNK_PARAMS);
-/* 22F0F0 */ UNK_RET mn_8022F0F0(UNK_PARAMS);
+/* 22F0F0 */ void mn_8022F0F0(int);
 /* 22F138 */ UNK_RET mn_8022F138(UNK_PARAMS);
 /* 22F1A8 */ void mn_8022F1A8(int, int);
 /* 22F218 */ bool mn_8022F218(void);
