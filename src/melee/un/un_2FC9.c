@@ -195,7 +195,7 @@ void NameTag_Create(int slot)
                 f = inlineA1(f);
                 un_804A1EF8[slot] = HSD_SisLib_803A6B98(
                     un_804D6D78, -5000.0f, 0.0f,
-                    mnName_8023754C(Player_GetNametagSlotID(slot)));
+                    GetNameText(Player_GetNametagSlotID(slot)));
                 HSD_SisLib_803A7548(un_804D6D78, un_804A1EF8[slot], 0.4f,
                                     0.55f);
             }
@@ -221,9 +221,9 @@ void un_802FD28C(int slot)
     if (has_nametag(slot)) {
         f = inlineA1(f);
         HSD_SisLib_803A75E0(un_804D6D78, un_804A1EF8[slot]);
-        un_804A1EF8[slot] = HSD_SisLib_803A6B98(
-            un_804D6D78, -5000.0f, 0.0f,
-            mnName_8023754C(Player_GetNametagSlotID(slot)));
+        un_804A1EF8[slot] =
+            HSD_SisLib_803A6B98(un_804D6D78, -5000.0f, 0.0f,
+                                GetNameText(Player_GetNametagSlotID(slot)));
         HSD_SisLib_803A7548(un_804D6D78, un_804A1EF8[slot], 0.4f, 0.55f);
     }
     HSD_JObjReqAnimAll(jobj, f);
