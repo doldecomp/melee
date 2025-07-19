@@ -13,7 +13,7 @@
 /* 15CC78 */ void* gmMainLib_8015CC78(void);
 /* 15CC84 */ void* gmMainLib_8015CC84(void);
 /* 15CC90 */ void* gmMainLib_8015CC90(void);
-/* 15CC9C */ void* gmMainLib_8015CC9C(s32);
+/* 15CC9C */ void* GetPersistentNameData(s32);
 /* 15CCE4 */ void* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ void* gmMainLib_8015CCF0(void);
 /* 15CCFC */ void* gmMainLib_8015CCFC(void);
@@ -145,7 +145,7 @@
 /* 15EEB4 */ UNK_RET gmMainLib_8015EEB4(UNK_PARAMS);
 /* 15EEC8 */ UNK_RET gmMainLib_8015EEC8(UNK_PARAMS);
 /* 15EF30 */ UNK_RET gmMainLib_8015EF30(UNK_PARAMS);
-/* 15EF84 */ UNK_RET gmMainLib_8015EF84(UNK_PARAMS);
+/* 15EF84 */ UNK_RET InitializePersistentNameData(UNK_PARAMS);
 /* 15F150 */ UNK_RET gmMainLib_8015F150(UNK_PARAMS);
 /* 15F260 */ UNK_RET gmMainLib_8015F260(UNK_PARAMS);
 /* 15F464 */ UNK_RET gmMainLib_8015F464(UNK_PARAMS);

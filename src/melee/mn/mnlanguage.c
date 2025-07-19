@@ -48,7 +48,7 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
         mn_804D6BC8.x4 = 0;
         return;
     }
-    temp_r3 = Menu_GetEvents();
+    temp_r3 = Menu_GetAllEvents();
     if (temp_r3 & 0x20) {
         lbAudioAx_80024030(0);
         mn_804A04F0.x11 = 0;

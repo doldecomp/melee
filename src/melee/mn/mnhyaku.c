@@ -54,7 +54,7 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetEvents();
+    events = Menu_GetAllEvents();
     if (events & MenuEvent_Back) {
         sfxBack();
         mn_804A04F0.x11 = 0;
