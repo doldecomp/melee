@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include <baselib/forward.h>
+#include <dolphin/mtx.h>
 
 /* 206E2C */ UNK_RET grTest_80206E2C(int);
 /* 206E30 */ UNK_RET grTest_80206E30(UNK_PARAMS);
