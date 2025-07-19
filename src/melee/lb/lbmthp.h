@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include <placeholder.h>
+#include <baselib/forward.h>
 
 #include "lb/forward.h"
 
@@ -15,7 +16,7 @@
 /* 01F13C */ UNK_RET fn_8001F13C(UNK_PARAMS);
 /* 01F294 */ s32 fn_8001F294(void);
 /* 01F2A4 */ UNK_RET fn_8001F2A4(UNK_PARAMS);
-/* 01F410 */ UNK_RET lbMthp_8001F410(UNK_PARAMS);
+/* 01F410 */ void lbMthp_8001F410(const char* filename, UNK_T, int, int, int);
 /* 01F578 */ UNK_RET lbMthp_8001F578(UNK_PARAMS);
 /* 01F5C4 */ s32 lbMthp_8001F5C4(void);
 /* 01F5D4 */ s32 lbMthp_8001F5D4(void);
@@ -23,8 +24,8 @@
 /* 01F5F4 */ s32 lbMthp_8001F5F4(void);
 /* 01F604 */ s32 lbMthp_8001F604(void);
 /* 01F614 */ void lbMthp_8001F614(s32 arg0);
-/* 01F624 */ UNK_RET lbMthp_8001F624(UNK_PARAMS);
-/* 01F67C */ UNK_RET lbMthp_8001F67C(UNK_PARAMS);
+/* 01F624 */ UNK_T lbMthp_8001F624(HSD_GObj*, int, int);
+/* 01F67C */ void lbMthp_8001F67C(HSD_GObj*, int);
 /* 01F800 */ void lbMthp_8001F800(void);
 /* 01F87C */ void lbMthp_8001F87C(void);
 /* 01F890 */ UNK_RET lbMthp8001F890(UNK_PARAMS);

@@ -2016,14 +2016,14 @@ u8 gm_801BEBA8(u8 arg0)
 
 /// #gm_801BEF84
 
-/* 49C178 */ static s8 gm_8049C178[16];
+/* 49C178 */ static u8 gm_8049C178[16];
 
 void gm_801BEFA4(s8 arg0)
 {
     gm_8049C178[0] = arg0;
 }
 
-u8 gm_801BEFB0(void)
+int gm_801BEFB0(void)
 {
     return gm_8049C178[0];
 }
@@ -2053,7 +2053,7 @@ void gm_801BF000(s8 arg0)
     M2C_FIELD(&gm_8049C178, s8*, 9) = arg0;
 }
 
-u8 gm_801BF010(void)
+int gm_801BF010(void)
 {
     return M2C_FIELD(&gm_8049C178, u8*, 9);
 }
@@ -2073,7 +2073,7 @@ void gm_801BF040(s8 arg0)
     M2C_FIELD(&gm_8049C178, s8*, 2) = arg0;
 }
 
-u8 gm_801BF050(void)
+int gm_801BF050(void)
 {
     return M2C_FIELD(&gm_8049C178, u8*, 2);
 }
