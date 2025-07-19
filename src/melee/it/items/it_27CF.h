@@ -70,7 +70,6 @@
 /* 2C6DB8 */ void it_802C6DB8(Item_GObj*);
 /* 2C6DD8 */ void it_802C6DD8(Item_GObj*);
 /* 2C6E50 */ void it_802C6E50(Item_GObj*);
-/* 2C720C */ HSD_GObj* it_802C720C(Item_GObj*, Vec3*, s32, float);
 /* 2C7340 */ void it_802C7340(Item_GObj*);
 /* 2C738C */ void it_802C738C(Item_GObj*);
 /* 2C73AC */ void it_802C73AC(Item_GObj*);
@@ -79,7 +78,6 @@
 /* 2C7A84 */ void it_802C7A84(Item_GObj*);
 /* 2C7AD0 */ void it_802C7AD0(Item_GObj*);
 /* 2C7AF0 */ void it_802C7AF0(Item_GObj*);
-/* 2F2094 */ Item_GObj* it_802F2094(int, Vec3*, int, int);
 /* 2F2F34 */ void it_802F2F34(HSD_GObj*, it_27CF_DatAttrs*);
 /* 2F3020 */ void it_802F3020(HSD_GObj*);
 /* 2F3078 */ bool it_802F3078(HSD_GObj*);

@@ -11,18 +11,18 @@
 #include <common_structs.h>
 
 struct MinorScene {
-    u8 idx;
-    u8 preload;
-    u16 flags;
+    /* 00 */ u8 idx;
+    /* 01 */ u8 preload;
+    /* 02 */ u16 flags;
 
-    void (*Prep)(MinorScene*);
-    void (*Decide)(MinorScene*);
+    /* 04 */ void (*Prep)(MinorScene*);
+    /* 08 */ void (*Decide)(MinorScene*);
 
-    struct MinorSceneInfo {
-        u8 class_id;
-        void* unk_struct_0; // data passed to OnLoad callback
-        void* unk_struct_1; // data passed to OnLeave callback
-    } info;
+             struct MinorSceneInfo {
+    /* 0C */     u8 class_id;
+    /* 10 */     void* unk_struct_0; ///< data passed to OnLoad callback
+    /* 14 */     void* unk_struct_1; ///< data passed to OnLeave callback
+             } info;
 };
 
 struct MajorScene {
@@ -151,7 +151,8 @@ struct GameRules {
 STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
 
 struct gmm_retval_ED98 {
-    u8 padding[0xC];
+    UNK_T x0;
+    u8 padding[0x8];
     s32 xC;
     s32 x10;
     s32 x14;
@@ -254,7 +255,18 @@ struct gmm_x0 {
     /* 0x0588 */ s8 unk_588[4];   /* inferred */
     /* 0x0590 */ char pad_58B[4]; /* inferred */
     /* 0x0590 */ VsModeData unk_590;
-    /* 0x05A0 */ char pad_6D0[0x1850 - 0x6D0];
+    /* 0x06D0 */ VsModeData unk_6D0;
+    /* 0x0810 */ VsModeData unk_810;
+    /* 0x0950 */ VsModeData unk_950;
+    /* 0x0A90 */ VsModeData unk_A90;
+    /* 0x0BD0 */ VsModeData unk_BD0;
+    /* 0x0D10 */ VsModeData unk_D10;
+    /* 0x0E50 */ VsModeData unk_E50;
+    /* 0x0F90 */ VsModeData unk_F90;
+    /* 0x10D0 */ VsModeData unk_10D0;
+    /* 0x1210 */ VsModeData unk_1210;
+    /* 0x1350 */ VsModeData unk_1350;
+    /* 0x1490 */ char pad_1490[0x1850 - 0x1490];
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
@@ -420,13 +432,13 @@ struct MatchTeamData {
 struct MatchPlayerData {
     u8 slot_type;
     u8 character_kind;
-    u8 character_id;
-    u8 x3;
+    s8 character_id;
+    u8 x3 : 6;
     u8 x4;
     u8 is_big_loser;
     u8 is_small_loser;
     u8 team;
-    u8 stocks;
+    s8 stocks;
     u8 x9;
     u16 self_destructs;
     u16 percent;
@@ -437,7 +449,7 @@ struct MatchPlayerData {
     u8 pad_x16[0x20 - 0x16];
     int x20;
     int x24;
-    u8 pad_x28[0x2C - 0x28];
+    u32 x28;
     int score;
     u8 pad_x30[0xA8 - 0x30];
 };
@@ -448,7 +460,7 @@ struct MatchEnd {
     u8 x5;
     u8 is_teams;
     u8 x7;
-    int frame_count;
+    u32 frame_count;
     u8 xC;
     u8 n_winners;
     u8 n_team_winners;
@@ -459,14 +471,20 @@ struct MatchEnd {
     struct MatchPlayerData player_standings[6];
     u8 _x448[4];
     u8 pad_x44C[0x186C - 0x44C];
-    u8 pad_x186C[0x2274 - 0x186C];
+    u8 pad_x186C[0x227C - 0x186C];
 };
 
 struct MatchExitInfo {
     int x0;
     int x4;
     int x8;
-    struct MatchEnd match_end;
+    MatchEnd match_end;
+};
+
+struct MatchExitInfo2 {
+    int x0;
+    int x4;
+    MatchEnd match_end;
 };
 
 struct UnkAllstarData {
@@ -534,15 +552,6 @@ struct UnkAllstarData {
         s8 x30;
     } xC;
     s8 pad_x0[0xA0 - 0x31 - 0xC];
-};
-
-struct PauseData {
-/* +0 */ HSD_JObj* background;
-/* +4 */ HSD_JObj* analog_stick;
-/* +8 */ HSD_JObj* lras;
-/* +C */ HSD_JObj* z;
-/* +10 */ HSD_JObj* analog_stick_outline;
-/* +14 */ s32 slot;
 };
 
 #endif

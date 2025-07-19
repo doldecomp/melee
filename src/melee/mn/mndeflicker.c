@@ -53,7 +53,7 @@ void mnDeflicker_8024A168(HSD_GObj* gobj)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetEvents();
+    events = Menu_GetAllEvents();
     if ((events & MenuEvent_Back)) {
         sfxBack();
         gmMainLib_8015F4F4(

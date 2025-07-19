@@ -1799,13 +1799,14 @@ melee/gm/gmmenu.c:
 melee/gm/gmvsmelee.c:
 	.text       start:0x801A5244 end:0x801A6254
 	.data       start:0x803DB040 end:0x803DB050
+	.bss        start:0x80479D98 end:0x8047C020
 	.sdata      start:0x804D4270 end:0x804D4278
 
 melee/gm/gm_1A4C.c:
 	.text       start:0x801A6254 end:0x801AEE6C
 	.rodata     start:0x803B7D68 end:0x803B7D80
 	.data       start:0x803DB050 end:0x803DD550
-	.bss        start:0x80479D98 end:0x80480DA8
+	.bss        start:0x8047C020 end:0x80480DA8
 	.sdata      start:0x804D4278 end:0x804D4310
 	.sbss       start:0x804D6730 end:0x804D6870
 	.sdata2     start:0x804DA9F8 end:0x804DABF8
@@ -2433,7 +2434,7 @@ melee/mn/mnstagesw.c:
 melee/mn/mnname.c:
 	.text       start:0x8023749C end:0x8023B0F8
 	.rodata     start:0x803B8510 end:0x803B8528
-	.data       start:0x803ED538 end:0x803EE728
+	.data       start:0x803ED538 end:0x803EDA58
 	.bss        start:0x804A0648 end:0x804A06F0
 	.sdata      start:0x804D4BD0 end:0x804D4C10
 	.sbss       start:0x804D6BF8 end:0x804D6C08
@@ -2442,6 +2443,7 @@ melee/mn/mnname.c:
 melee/mn/mnnamenew.c:
 	.text       start:0x8023B0F8 end:0x8023EA2C
 	.rodata     start:0x803B8528 end:0x803B8538
+	.data       start:0x803EDA58 end:0x803EE728
 	.bss        start:0x804A06F0 end:0x804A0750
 	.sdata      start:0x804D4C10 end:0x804D4FA0
 	.sbss       start:0x804D6C08 end:0x804D6C10

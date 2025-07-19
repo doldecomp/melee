@@ -128,7 +128,6 @@ HSD_GObj* it_802C3BAC(Item_GObj*, Vec3*, f32 facing_dir, f32);
 /// Clones an entity?
 HSD_GObj* it_802C3AF0(Item_GObj*);
 void it_802AE608(Item_GObj*);
-HSD_GObj* it_802C720C(Item_GObj*, Vec3*, s32, f32);
 void it_802C7340(Item_GObj*);
 void it_802C6DB8(Item_GObj*);
 void it_802C70C0(Item_GObj*);
@@ -151,7 +150,6 @@ void it_802C53F0(Item_GObj*, Vec3*, f32, f32, f32);
 s32 it_802E5F8C(Item_GObj*, Vec3*, s32, bool, f32, f32);
 void it_802950D4(Item_GObj*, bool);
 void it_80294EB0(Item_GObj*, Vec3*, Vec3*);
-s32 it_802F2094(s32, Vec3*, s32, s32);
 HSD_GObj* it_80294DC0(Vec3*);
 void it_8027D670(Vec3* const);
 void it_802C17DC(uint);

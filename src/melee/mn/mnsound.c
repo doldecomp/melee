@@ -84,7 +84,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetEvents();
+    events = Menu_GetAllEvents();
     if (events & MenuEvent_Back) {
         sfxBack();
         mn_804A04F0.x11 = 0;

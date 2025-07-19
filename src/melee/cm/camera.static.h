@@ -28,7 +28,7 @@
      &cm_803BCB3C, &cm_803BCB50, 0.0f, NULL, 0.1f, 16384.0f, 30.0f, 1.2173333f
 };
 
-/* 3BCB9C */ static CameraFixednessMult cm_803BCB9C = { 0.0f, 1.5f, 1.32f, 1.16f, 1.0f };
+/* 3BCB9C */ static f32 cm_803BCB9C[5] = { 0.0f, 1.5f, 1.32f, 1.16f, 1.0f };
 /* 3BCBB0 */ static s8 cm_803BCBB0[0x20] = "couldn't get CmSubject struct.\n";
 /* 3BCBD0 */ static char cm_803BCBD0[0xB] = "camera.c";
 /* 3BCBDC */ static char cm_803BCBDC[0x1B] = "fov_u<MTXDegToRad(90.0F)";

@@ -13,7 +13,7 @@
 /* 08989C */ u16 ft_8008989C(Fighter_GObj* gobj);
 /* 0898A8 */ struct Struct2074* ft_800898A8(Fighter_GObj* gobj);
 /* 0898B4 */ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj);
-/* 0898C0 */ int ft_800898C0(HSD_GObj*);
+/* 0898C0 */ bool ft_800898C0(HSD_GObj*);
 /* 089914 */ UNK_RET ft_80089914(UNK_PARAMS);
 /* 08998C */ UNK_RET fn_8008998C(UNK_PARAMS);
 /* 089B08 */ void ft_80089B08(Fighter_GObj* gobj);

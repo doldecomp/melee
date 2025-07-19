@@ -542,6 +542,13 @@ struct grZebes_GroundVars {
     /*  +C gp+D0 */ Vec3 xC;
 };
 
+struct grFigureGet_GroundVars {
+    /*  +0 gp+C4 */ UNK_T x0;
+    /*  +4 gp+C8 */ UNK_T x4;
+    /*  +8 gp+CC */ int x8;
+    /*  +C gp+D0 */ int xC;
+};
+
 struct grFourside_GroundVars {
     /*  +0 gp+C4 */ u8 x0;
     /*  +1 gp+C5 */ u8 x1;
@@ -664,6 +671,7 @@ struct Ground {
             char pad_0[0x204 - 0xC4];
             struct grBigBlue_GroundVars bigblue;
             struct grCorneria_GroundVars corneria;
+            struct grFigureGet_GroundVars figureget;
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;
             struct grFourside_GroundVars fourside;

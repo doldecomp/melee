@@ -1,8 +1,13 @@
 #include "gm_1601.h"
 
+#include <melee/lb/lb_00B0.h>
+
 /* 46E38C */ static int lbl_8046E38C[4];
 
-/// #gm_80177724
+void gm_80177724(struct MatchExitInfo2* arg0)
+{
+    memzero(arg0, sizeof(*arg0));
+}
 
 /// #fn_80177748
 

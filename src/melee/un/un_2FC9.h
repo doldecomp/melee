@@ -4,7 +4,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "un/forward.h"
+#include <melee/mn/forward.h>
+#include <melee/un/forward.h>
 #include <baselib/forward.h>
 
 #include <baselib/video.h>
@@ -81,8 +82,8 @@
 /* 2FFE0C */ int fn_802FFE0C(int);
 /* 2FFE6C */ bool fn_802FFE6C(bool);
 /* 2FFEA4 */ bool un_802FFEA4(bool);
-/* 2FFEE0 */ UNK_RET un_802FFEE0(UNK_PARAMS);
-/* 2FFF2C */ UNK_RET un_802FFF2C(UNK_PARAMS);
+/* 2FFEE0 */ void un_802FFEE0(UNK_T);
+/* 2FFF2C */ void un_802FFF2C(StartMeleeData*);
 /* 3001DC */ bool un_803001DC(bool);
 /* 300218 */ int un_80300218(void);
 /* 300248 */ int un_80300248(int);
@@ -167,8 +168,8 @@
 /* 301A64 */ UNK_RET un_80301A64(UNK_PARAMS);
 /* 301AD4 */ UNK_RET un_80301AD4(UNK_PARAMS);
 /* 301B48 */ UNK_RET un_80301B48(UNK_PARAMS);
-/* 301BA8 */ UNK_RET un_80301BA8(UNK_PARAMS);
-/* 301C64 */ UNK_RET un_80301C64(UNK_PARAMS);
+/* 301BA8 */ void un_80301BA8(UNK_T);
+/* 301C64 */ void un_80301C64(UNK_T);
 /* 301C80 */ UNK_RET un_80301C80(UNK_PARAMS);
 /* 301CE0 */ UNK_RET un_80301CE0(UNK_PARAMS);
 /* 301D40 */ bool un_80301D40(bool);

@@ -9,6 +9,7 @@
 #include "gm/forward.h"
 #include "mn/forward.h"
 #include "it/forward.h"
+#include "sc/forward.h"
 #include "dolphin/types.h"
 #include "gm/types.h"
 
@@ -178,7 +179,7 @@
 /* 168710 */ void gm_80168710(MatchEnd*, VsModeData*);
 /* 1688AC */ void gm_801688AC(MatchEnd*);
 /* 168940 */ UNK_RET gm_80168940(UNK_PARAMS);
-/* 16895C */ void gm_8016895C(HSD_JObj*, void*, s32);
+/* 16895C */ void gm_8016895C(HSD_JObj*, DynamicModelDesc*, int idx);
 /* 1689E4 */ UNK_RET fn_801689E4(UNK_PARAMS);
 /* 168A6C */ UNK_RET fn_80168A6C(UNK_PARAMS);
 /* 168B34 */ void gm_80168B34(void);
@@ -187,7 +188,7 @@
 /* 168E54 */ UNK_RET fn_80168E54(UNK_PARAMS);
 /* 168F2C */ UNK_RET fn_80168F2C(UNK_PARAMS);
 /* 168F7C */ UNK_RET fn_80168F7C(UNK_PARAMS);
-/* 168F88 */ UNK_RET gm_80168F88(UNK_PARAMS);
+/* 168F88 */ void gm_80168F88(void);
 /* 168FC4 */ void gm_80168FC4(void);
 /* 169000 */ UNK_RET fn_80169000(UNK_PARAMS);
 /* 169238 */ UNK_RET gm_80169238(UNK_PARAMS);
@@ -217,7 +218,7 @@
 /* 16A09C */ UNK_RET fn_8016A09C(UNK_PARAMS);
 /* 16A164 */ UNK_RET gm_8016A164(UNK_PARAMS);
 /* 16A1F8 */ int gm_8016A1F8(void);
-/* 16A21C */ void gm_8016A21C(UNK_T arg0);
+/* 16A21C */ void gm_8016A21C(StartMeleeRules*);
 /* 16A22C */ UNK_RET gm_8016A22C(UNK_PARAMS);
 /* 16A404 */ void gm_8016A404(s32 arg0);
 /* 16A414 */ void gm_8016A414(f32 arg8);
@@ -227,7 +228,7 @@
 /* 16A46C */ UNK_RET fn_8016A46C(UNK_PARAMS);
 /* 16A488 */ UNK_RET fn_8016A488(UNK_PARAMS);
 /* 16A4C8 */ UNK_RET fn_8016A4C8(UNK_PARAMS);
-/* 16A92C */ void gm_8016A92C(struct gm_8016A92C_arg0_t*);
+/* 16A92C */ void gm_8016A92C(StartMeleeRules*);
 /* 16A944 */ UNK_RET gm_8016A944(UNK_PARAMS);
 /* 16A97C */ void* gm_8016A97C(void);
 /* 16A98C */ UNK_T gm_8016A98C(void);
@@ -403,10 +404,10 @@
 /* 172C44 */ UNK_RET gm_80172C44(UNK_PARAMS);
 /* 172C78 */ void fn_80172C78(int);
 /* 172CC0 */ UNK_RET gm_80172CC0(UNK_PARAMS);
-/* 172D78 */ s32 gm_80172D78(UNK_PARAMS);
-/* 172DD4 */ s32 gm_80172DD4(struct gmm_retval_ED98*);
-/* 172E74 */ s32 gm_80172E74(UNK_PARAMS);
-/* 172F00 */ s32 gm_80172F00(s32);
+/* 172D78 */ u8 gm_80172D78(void);
+/* 172DD4 */ u8 gm_80172DD4(UNK_T);
+/* 172E74 */ u8 gm_80172E74(void);
+/* 172F00 */ u16 gm_80172F00(s32);
 /* 172FAC */ UNK_RET fn_80172FAC(UNK_PARAMS);
 /* 173098 */ UNK_RET fn_80173098(UNK_PARAMS);
 /* 173224 */ UNK_RET gm_80173224(UNK_PARAMS);
@@ -422,7 +423,7 @@
 /* 173644 */ UNK_RET fn_80173644(UNK_PARAMS);
 /* 17367C */ UNK_RET fn_8017367C(UNK_PARAMS);
 /* 1736DC */ UNK_T gm_801736DC(void);
-/* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
+/* 1736E8 */ void gm_801736E8(u8, u8, int, u8, u8, u8);
 /* 173754 */ int gm_80173754(int, int);
 /* 1737D8 */ u8 gm_801737D8(void);
 /* 1737E8 */ UNK_RET gm_801737E8_OnLoad(UNK_PARAMS);
@@ -470,7 +471,7 @@
 /* 1771C0 */ UNK_RET fn_801771C0(UNK_PARAMS);
 /* 177368 */ void gm_80177368_OnEnter(UNK_T);
 /* 177704 */ void gm_80177704_OnLeave(UNK_T);
-/* 177724 */ void gm_80177724(void*);
+/* 177724 */ void gm_80177724(struct MatchExitInfo2*);
 /* 177748 */ UNK_RET fn_80177748(UNK_PARAMS);
 /* 177920 */ UNK_RET fn_80177920(UNK_PARAMS);
 /* 177B7C */ UNK_RET fn_80177B7C(UNK_PARAMS);

@@ -4,6 +4,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include <baselib/forward.h>
+
 /* 219530 */ UNK_RET grFigureGet_80219530(UNK_PARAMS);
 /* 219534 */ UNK_RET grFigureGet_80219534(UNK_PARAMS);
 /* 21959C */ UNK_RET grFigureGet_8021959C(UNK_PARAMS);
@@ -17,8 +19,8 @@
 /* 2196F0 */ UNK_RET grFigureGet_802196F0(UNK_PARAMS);
 /* 219898 */ UNK_RET grFigureGet_80219898(UNK_PARAMS);
 /* 219B10 */ UNK_RET fn_80219B10(UNK_PARAMS);
-/* 219C34 */ UNK_T grFigureGet_80219C34(s32);
-/* 219C50 */ int grFigureGet_80219C50(s32);
+/* 219C34 */ void grFigureGet_80219C34(HSD_GObj*);
+/* 219C50 */ int grFigureGet_80219C50(HSD_GObj*);
 /* 219C90 */ UNK_RET grFigureGet_80219C90(UNK_PARAMS);
 
 #endif
