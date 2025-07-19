@@ -125,7 +125,7 @@ void* gmMainLib_8015CC90(void)
     return &gmMainLib_804D3EE0->thing.x1CD0;
 }
 
-void* gmMainLib_8015CC9C(s32 arg0)
+void* GetPersistentNameData(s32 arg0)
 {
     struct gmm_x2FF8* base = &gmMainLib_804D3EE0->thing.x2FF8[0];
     struct gmm_x2FF8_inner* inner = &base[arg0 / 19].inner[0];

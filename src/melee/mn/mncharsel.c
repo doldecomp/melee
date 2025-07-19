@@ -439,7 +439,7 @@ void mnCharSel_8026688C_OnEnter(void* arg0)
     mnCharSel_804D6CF0 = mnCharSel_804D6CB0->unk_0x0 - 1;
 
     for (mnCharSel_804D6CF8 = 0; mnCharSel_804D6CF8 < 0x78; mnCharSel_804D6CF8++) {
-        if (mnName_8023754C(mnCharSel_804D6CF8) == NULL) {
+        if (GetNameText(mnCharSel_804D6CF8) == NULL) {
             break;
         }
     }

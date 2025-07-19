@@ -380,7 +380,7 @@ void fn_8024AED0(HSD_GObj* arg0)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetEvents();
+    events = Menu_GetAllEvents();
     if (events & MenuEvent_Back) {
         lbAudioAx_80023694();
         user_data->unk0 = 1U;

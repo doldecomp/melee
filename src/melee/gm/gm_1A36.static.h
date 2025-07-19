@@ -38,6 +38,9 @@ STATIC_ASSERT(sizeof(struct gm_803DBFD8_t) == 0x10F0);
 /* 3DD248 */ extern HSD_Archive gm_803DD248;
 /* 3DD2C0 */ extern int gm_803DD2C0[74];
 
+/// @todo The fact that mn_80229624() is passed 4 and thus indexes
+/// gm_80479C30[4] may imply controller_union is intended to be part of the
+/// array.
 // .bss
 /* 479C30 */ static gm_controller_map gm_80479C30[4];
 /* 479CF0 */ static gm_controller_map controller_union;

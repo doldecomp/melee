@@ -1,10 +1,10 @@
 /// #mnName_8023749C
 
-/// #mnName_8023754C
+/// #GetNameText
 
-/// #mnName_80237594
+/// #GetNameCount
 
-/// #mnName_802375EC
+/// #CanCreateNewName
 
 /// #mnName_80237654
 
@@ -14,9 +14,9 @@ void fn_802377A4(void) {}
 
 /// #mnName_80237834
 
-/// #mnName_802379BC
+/// #IsNameValid
 
-/// #mnName_80237A04
+/// #CreateNameAtIndex
 
 /// #mnName_80237A68
 
