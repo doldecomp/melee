@@ -4,13 +4,13 @@
 
 /// #GetNameCount
 
-/// #CanCreateNewName
+/// #IsNameListFull
 
-/// #mnName_80237654
+/// #CompareNameStrings
 
 void fn_802377A4(void) {}
 
-/// #mnName_802377A8
+/// #IsNameUnique
 
 /// #mnName_80237834
 
@@ -18,13 +18,13 @@ void fn_802377A4(void) {}
 
 /// #CreateNameAtIndex
 
-/// #mnName_80237A68
+/// #mnName_SortNames
 
 /// #mnName_80237D94
 
-/// #mnName_80237F78
+/// #mnName_ConfirmNameDeleteInput
 
-/// #mnName_8023817C
+/// #mnName_MainInput
 
 /// #fn_80238540
 
