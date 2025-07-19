@@ -11,7 +11,7 @@
 
 u8 HSD_GObj_804D784B;
 s8 HSD_GObj_804D784A;
-s8 HSD_GObj_804D7849;
+u8 HSD_GObj_804D7849;
 s8 HSD_GObj_804D7848;
 HSD_GObjProc** HSD_GObj_804D7844;
 HSD_GObjProc** HSD_GObj_804D7840;
@@ -30,7 +30,6 @@ GObjFunc* HSD_GObj_804D7810;
 
 int HSD_GObj_804085F0[] = { 1, 4, 2, 0 };
 
-
 static GObjFunc HSD_GObj_80408600[] = {
     HSD_GObj_80391120,
     (GObjFunc) HSD_LObjRemoveAll,
@@ -38,7 +37,7 @@ static GObjFunc HSD_GObj_80408600[] = {
     HSD_GObj_803911C0,
 };
 
-static GObjFuncs HSD_GObj_80408610  = {
+static GObjFuncs HSD_GObj_80408610 = {
     0,
     4,
     HSD_GObj_80408600,

@@ -20,7 +20,9 @@ static inline void ftCo_SpawnEf(ftCo_GObj* gobj, HSD_JObj* joint, u32 arg2,
 {
     u8 _[8] = { 0 };
     ftCo_Fighter* fp = gobj->user_data;
-    efAsync_Spawn((HSD_GObj*) gobj, &fp->x60C, arg2, arg3, joint);
+    // efAsync_Spawn((HSD_GObj*) gobj, &fp->x60C, arg2, arg3, joint);
+    efAsync_Spawn((HSD_GObj*) gobj, (ef_UnkStruct3*) &fp->x60C, arg2, arg3,
+                  joint);
 }
 
 static inline void ftCo_Thrown_Enter(ftCo_GObj* gobj, FtMotionId msid,

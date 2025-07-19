@@ -1190,7 +1190,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     item_data->msid = msid;
     item_data->xDC8_word.flags.x14 = 0;
     HSD_JObjSetTranslate(gobj->hsd_obj, &item_data->pos);
-    efAsync_80067624(gobj, &item_data->xBC0);
+    efAsync_80067624(gobj, (struct ef_UnkStruct3*) &item_data->xBC0);
 
     if (item_data->xDC8_word.flags.x2 == 1) {
         it_8026BDCC(gobj);
@@ -1462,7 +1462,7 @@ void Item_80269978(HSD_GObj* gobj)
 static void Item_80269A9C(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
-    efAsync_80067624(gobj, &item_data->xBC0);
+    efAsync_80067624(gobj, (struct ef_UnkStruct3*) &item_data->xBC0);
     if (item_data->xDC8_word.flags.x9 == 0) {
         if (item_data->on_accessory != NULL) {
             item_data->on_accessory(gobj);
@@ -2023,7 +2023,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     }
 
     Item_8026B0B4(gobj);
-    efAsync_80067688(&ip->xBC0);
+    efAsync_80067688((struct ef_UnkStruct3*) &ip->xBC0);
     HSD_GObjPLink_80390228(gobj);
 }
 

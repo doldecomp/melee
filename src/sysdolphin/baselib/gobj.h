@@ -73,8 +73,8 @@ typedef struct _HSD_GObjList {
     /* +20 */ HSD_GObj* fighters;
     /* +24 */ HSD_GObj* items;
     /* +28 */ HSD_GObj* x28;
-    /* +2C */ HSD_GObj* x2C;
-    /* +30 */ HSD_GObj* x30;
+    /* +2C */ HSD_GObj* x2C; // Effects? (See efLib_8005B704)
+    /* +30 */ HSD_GObj* x30; // Effects? (See efLib_8005B704)
     /* +34 */ HSD_GObj* x34;
     /* +38 */ HSD_GObj* x38;
     /* +3C */ HSD_GObj* x3C;
@@ -116,7 +116,7 @@ extern s32 HSD_GObj_804D783C;
 extern HSD_GObjProc** HSD_GObj_804D7840;
 extern HSD_GObjProc** HSD_GObj_804D7844;
 extern s8 HSD_GObj_804D7848;
-extern s8 HSD_GObj_804D7849;
+extern u8 HSD_GObj_804D7849;
 extern s8 HSD_GObj_804D784A;
 extern u8 HSD_GObj_804D784B;
 
