@@ -36,21 +36,24 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, size_t file_size)
 
     offset = sizeof(HSD_ArchiveHeader);
     if (archive->header.data_size != 0) { // Body Size
-        archive->data = src + 0x20;
-        offset = archive->header.data_size + 0x20;
+        archive->data = src + sizeof(HSD_ArchiveHeader);
+        offset = archive->header.data_size + sizeof(HSD_ArchiveHeader);
     }
     if (archive->header.nb_reloc != 0) { // Relocation Size
         archive->reloc_info =
             (HSD_ArchiveRelocationInfo*) ((s32) src + offset);
-        offset = offset + archive->header.nb_reloc * 4;
+        offset = offset +
+                 archive->header.nb_reloc * sizeof(HSD_ArchiveRelocationInfo);
     }
     if (archive->header.nb_public != 0) { // Root Size
         archive->public_info = (HSD_ArchivePublicInfo*) ((s32) src + offset);
-        offset = offset + archive->header.nb_public * 8;
+        offset =
+            offset + archive->header.nb_public * sizeof(HSD_ArchivePublicInfo);
     }
     if (archive->header.nb_extern != 0) { // XRef Size
         archive->extern_info = (HSD_ArchiveExternInfo*) ((s32) src + offset);
-        offset = offset + archive->header.nb_extern * 8;
+        offset =
+            offset + archive->header.nb_extern * sizeof(HSD_ArchiveExternInfo);
     }
     if (offset < archive->header.file_size) { // File Size
         archive->symbols = (char*) ((s32) src + offset);
@@ -88,7 +91,8 @@ char* HSD_ArchiveGetExtern(HSD_Archive* archive, int offset)
     return archive->symbols + archive->extern_info[offset].symbol;
 }
 
-void HSD_ArchiveLocateExtern(HSD_Archive* archive, const char* symbols, void* addr)
+void HSD_ArchiveLocateExtern(HSD_Archive* archive, const char* symbols,
+                             void* addr)
 {
     uintptr_t next;
     uintptr_t offset = -1;

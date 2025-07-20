@@ -1,7 +1,6 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "lbarq.h"
 
-s32 lbArq_80014ABC(void* arg0)
+s32 lbArq_80014ABC(UNK_T arg0)
 {
     return M2C_FIELD(arg0, s32*, 4);
 }

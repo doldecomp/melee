@@ -35,7 +35,8 @@ struct pl_800386D8_t {
     /* +194 */ int x194;
     /* +198 */ int x198;
     /* +19C */ int x19C;
-    /* +1A0 */ u8 x1A0[0x1AC - 0x1A0];
+    /* +1A0 */ u8 x1A0[0x1A8 - 0x1A0];
+    /* +1A8 */ int x1A8;
     /* +1AC */ int x1AC;
     /* +1B0 */ u8 x1B0[0x358 - 0x1B0];
     /* +358 */ int x358;

@@ -116,7 +116,7 @@
 /* 1C43C4 */ bool Ground_801C43C4(void*);
 /* 1C445C */ void Ground_801C445C(HSD_LObj* lobj);
 /* 1C498C */ HSD_GObj* Ground_801C498C(void);
-/* 1C49B4 */ UNK_T Ground_801C49B4(void);
+/* 1C49B4 */ HSD_LightDesc** Ground_801C49B4(void);
 /* 1C49F8 */ void* Ground_801C49F8(void);
 /* 1C4A08 */ void Ground_801C4A08(HSD_GObj* gobj);
 /* 1C4B50 */ void Ground_801C4B50(s32, s32, Vec3* result, f32);

@@ -40,7 +40,7 @@
 /* 0243F4 */ UNK_RET lbAudioAx_800243F4(UNK_PARAMS);
 /* 0244F4 */ UNK_RET fn_800244F4(UNK_PARAMS);
 /* 0245D4 */ void lbAudioAx_800245D4(u8);
-/* 0245F4 */ s32 lbAudioAx_800245F4(u8);
+/* 0245F4 */ s32 lbAudioAx_800245F4(u8); /// i dont believe this actually returns anything
 /* 024614 */ void lbAudioAx_80024614(u8);
 /* 024634 */ void lbAudioAx_80024634(u8);
 /* 024654 */ UNK_RET fn_80024654(UNK_PARAMS);
@@ -54,7 +54,7 @@
 /* 024D78 */ UNK_RET lbAudioAx_80024D78(UNK_PARAMS);
 /* 024DC4 */ void lbAudioAx_80024DC4(s32);
 /* 024E50 */ void lbAudioAx_80024E50(s32);
-/* 024E84 */ UNK_RET lbAudioAx_80024E84(UNK_PARAMS);
+/* 024E84 */ void lbAudioAx_80024E84(int);
 /* 024F08 */ UNK_RET lbAudioAx_80024F08(UNK_PARAMS);
 /* 024F6C */ UNK_RET lbAudioAx_80024F6C(UNK_PARAMS);
 /* 024FDC */ void lbAudioAx_80024FDC(void);
@@ -86,8 +86,8 @@
 /* 0269AC */ UNK_RET fn_800269AC(UNK_PARAMS);
 /* 026C04 */ UNK_RET fn_80026C04(UNK_PARAMS);
 /* 026E58 */ UNK_RET fn_80026E58(UNK_PARAMS);
-/* 026E84 */ UNK_RET lbAudioAx_80026E84(UNK_PARAMS);
-/* 026EBC */ UNK_RET lbAudioAx_80026EBC(UNK_PARAMS);
+/* 026E84 */ u64 lbAudioAx_80026E84(int);
+/* 026EBC */ u64 lbAudioAx_80026EBC(u32);
 /* 026F2C */ u64 lbAudioAx_80026F2C(s32);
 /* 02702C */ void lbAudioAx_8002702C(s32, u64);
 /* 027168 */ void lbAudioAx_80027168(void);

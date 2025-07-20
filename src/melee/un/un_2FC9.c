@@ -195,7 +195,7 @@ void NameTag_Create(int slot)
                 f = inlineA1(f);
                 un_804A1EF8[slot] = HSD_SisLib_803A6B98(
                     un_804D6D78, -5000.0f, 0.0f,
-                    mnName_8023754C(Player_GetNametagSlotID(slot)));
+                    GetNameText(Player_GetNametagSlotID(slot)));
                 HSD_SisLib_803A7548(un_804D6D78, un_804A1EF8[slot], 0.4f,
                                     0.55f);
             }
@@ -221,9 +221,9 @@ void un_802FD28C(int slot)
     if (has_nametag(slot)) {
         f = inlineA1(f);
         HSD_SisLib_803A75E0(un_804D6D78, un_804A1EF8[slot]);
-        un_804A1EF8[slot] = HSD_SisLib_803A6B98(
-            un_804D6D78, -5000.0f, 0.0f,
-            mnName_8023754C(Player_GetNametagSlotID(slot)));
+        un_804A1EF8[slot] =
+            HSD_SisLib_803A6B98(un_804D6D78, -5000.0f, 0.0f,
+                                GetNameText(Player_GetNametagSlotID(slot)));
         HSD_SisLib_803A7548(un_804D6D78, un_804A1EF8[slot], 0.4f, 0.55f);
     }
     HSD_JObjReqAnimAll(jobj, f);
@@ -287,7 +287,7 @@ void un_802FD4C8(void)
         lb_80013B14((HSD_CameraDescPerspective*) &nametag_CObjDesc));
     GObj_SetupGXLinkMax(gobj, fn_802FCAC4, 6);
     gobj->gxlink_prios = 0x200;
-    un_804D6D7C = HSD_SisLib_803A611C(2, (u32) gobj, 14, 15, 0, 9, 6, 0);
+    un_804D6D7C = HSD_SisLib_803A611C(2, gobj, 14, 15, 0, 9, 6, 0);
     HSD_SisLib_803A62A0(2, "SdIntro.dat", "SIS_IntroData");
     un_804D6D78 = HSD_SisLib_803A6754(2, un_804D6D7C);
     un_804D6D78->x8 = -10.0;
@@ -456,11 +456,11 @@ void un_802FE260(void)
                            "Stc_rarwmdls", 0);
     for (i = 0; i < 4; i++) {
         gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
-        jobj = HSD_JObjLoadJoint(**un_804A1F10.x0);
+        jobj = HSD_JObjLoadJoint(un_804A1F10.x0[0]->joint);
         gobj->user_data = &un_804DDBA8[i];
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, fn_802FDA4C, 11, 0);
-        gm_8016895C(jobj, *un_804A1F10.x0, 0);
+        gm_8016895C(jobj, un_804A1F10.x0[0], 0);
         HSD_GObjProc_8038FD54(gobj, fn_802FDA78, 17);
         HSD_JObjReqAnimAll(jobj, 0.0);
         HSD_JObjAnimAll(jobj);
@@ -500,7 +500,7 @@ void un_802FE6A8(void)
     HSD_Text* text2;
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
     HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
-                            HSD_CObjLoadDesc(un_804D6D9C->cameras[0]));
+                            HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 8);
     gobj_camera->gxlink_prios = 0xC00;
     gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
@@ -562,7 +562,7 @@ void un_802FEFAC(void)
     HSD_JObj* jobj_ui;
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 21, 0);
     HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
-                            HSD_CObjLoadDesc(un_804D6DA4->cameras[0]));
+                            HSD_CObjLoadDesc(un_804D6DA4->cameras[0].desc));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 9);
     gobj_camera->gxlink_prios = 0x8400;
     gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
@@ -608,7 +608,7 @@ void un_802FF1B4(void)
 {
     un_803F9E08.x0.b0 = 1;
     un_803F9E08.x0.b1 = 0;
-    un_804D6DA0 = lbArchive_80016DBC("IfCoGet.dat", (void*) &un_804D6DA4,
+    un_804D6DA0 = lbArchive_80016DBC("IfCoGet.dat", &un_804D6DA4,
                                      "ScInfCgt_scene_data", 0);
     un_802FEFAC();
 }
@@ -680,7 +680,7 @@ void un_802FF498(void)
 {
     memzero(un_804A1F58, sizeof(un_804A1F58));
     un_804A1F58->x0 =
-        HSD_SisLib_803A611C(2, (u32) ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
+        HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }
 
 void un_802FF4FC(void)

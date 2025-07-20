@@ -13,7 +13,7 @@
 /* 15CC78 */ void* gmMainLib_8015CC78(void);
 /* 15CC84 */ void* gmMainLib_8015CC84(void);
 /* 15CC90 */ void* gmMainLib_8015CC90(void);
-/* 15CC9C */ void* gmMainLib_8015CC9C(s32);
+/* 15CC9C */ void* PersistentNameData(s32);
 /* 15CCE4 */ void* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ void* gmMainLib_8015CCF0(void);
 /* 15CCFC */ void* gmMainLib_8015CCFC(void);
@@ -72,7 +72,7 @@
 /* 15D3FC */ s32 gmMainLib_8015D3FC(u8);
 /* 15D418 */ void gmMainLib_8015D418(u8, s32);
 /* 15D438 */ s32* gmMainLib_8015D438(u8);
-/* 15D450 */ s32* gmMainLib_8015D450(s32);
+/* 15D450 */ s32* gmMainLib_8015D450(u8);
 /* 15D48C */ s32 gmMainLib_8015D48C(u8);
 /* 15D4A8 */ s32 gmMainLib_8015D4A8(u8);
 /* 15D4E8 */ void gmMainLib_8015D4E8(u8, s32);
@@ -98,7 +98,7 @@
 /* 15D8D8 */ s32 gmMainLib_8015D8D8(u32);
 /* 15D8FC */ void gmMainLib_8015D8FC(u32);
 /* 15D924 */ void gmMainLib_8015D924(u32);
-/* 15D94C */ u32 gmMainLib_8015D94C(u32);
+/* 15D94C */ int gmMainLib_8015D94C(u32);
 /* 15D970 */ u32* gmMainLib_8015D970(ssize_t idx);
 /* 15D984 */ bool gmMainLib_8015D984(u32);
 /* 15D9F4 */ void gmMainLib_8015D9F4(u32);
@@ -127,7 +127,7 @@
 /* 15ED80 */ void gmMainLib_8015ED80(u8);
 /* 15ED8C */ u16* gmMainLib_8015ED8C(void);
 /* 15ED98 */ struct gmm_retval_ED98* gmMainLib_8015ED98(void);
-/* 15EDA4 */ UNK_T gmMainLib_8015EDA4(void);
+/* 15EDA4 */ s16* gmMainLib_8015EDA4(void);
 /* 15EDB0 */ struct gmm_retval_EDB0* gmMainLib_8015EDB0(void);
 /* 15EDBC */ struct gmm_retval_EDBC* gmMainLib_8015EDBC(void);
 /* 15EDC8 */ u8* gmMainLib_8015EDC8(void);
@@ -145,7 +145,7 @@
 /* 15EEB4 */ UNK_RET gmMainLib_8015EEB4(UNK_PARAMS);
 /* 15EEC8 */ UNK_RET gmMainLib_8015EEC8(UNK_PARAMS);
 /* 15EF30 */ UNK_RET gmMainLib_8015EF30(UNK_PARAMS);
-/* 15EF84 */ UNK_RET gmMainLib_8015EF84(UNK_PARAMS);
+/* 15EF84 */ UNK_RET InitializePersistentNameData(UNK_PARAMS);
 /* 15F150 */ UNK_RET gmMainLib_8015F150(UNK_PARAMS);
 /* 15F260 */ UNK_RET gmMainLib_8015F260(UNK_PARAMS);
 /* 15F464 */ UNK_RET gmMainLib_8015F464(UNK_PARAMS);

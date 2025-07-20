@@ -14,25 +14,24 @@
 #define PSAPPSRT_UNK_B10 (1 << 10)
 #define PSAPPSRT_UNK_B11 (1 << 11)
 
-/// MexTK: GeneratorAppSRT
+/// @remarks MexTK: GeneratorAppSRT
 struct UnkGeneratorMember {
     UNK_T x0;
     UnkGeneratorStruct* x4;
     Vec3 x8;
     Vec3 x14;
-    u8 x20_fill[4];
-    f32 x24;
-    f32 x28;
-    f32 x2C;
+    u32 x20_unk;
+    Vec3 x24;
     u8 x30;
     u8 x31_fill[0x71];
     s8 xA2;
 };
 
-/// @remarks MexTK: Particle
+/// @remarks MexTK: ptclGen
 struct UnkGeneratorStruct {
     UnkGeneratorStruct* next;
-    u8 x4_fill[0xC];
+    u32 x4_kind;
+    u8 x8_fill[0x8];
     HSD_JObj* x10_jobj;
     u16 x14_fill;
     u16 x16_flags;
@@ -40,6 +39,13 @@ struct UnkGeneratorStruct {
     f32 x24, x28, x2C;
     u8 x30_fill[0x54 - 0x30];
     UnkGeneratorMember* x54;
+};
+
+/// @remarks MexTK: Particle
+struct UnkGeneratorStruct2 {
+    u8 x0_fill[0x8C - 0x0];
+    UnkGeneratorMember* x8C;
+    u8 x90_fill[0x98 - 0x90];
 };
 
 /* 003A0D18 */ bool psInitAppSRT(int, int);

@@ -12,8 +12,8 @@
 
 /// #un_8031F960_OnFrame
 
-void un_8031F980(s8 arg0, s8 arg1)
+void un_8031F980(int arg0, int arg1)
 {
-    M2C_FIELD(&un_804D7004, s8*, 0) = arg0;
-    M2C_FIELD(&un_804D7004, s8*, 1) = arg1;
+    M2C_FIELD(&un_804D7004, u8*, 0) = arg0;
+    M2C_FIELD(&un_804D7004, u8*, 1) = arg1;
 }

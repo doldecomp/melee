@@ -5464,7 +5464,7 @@ void ftData_800855C8(enum_t id, int slot)
         var_r25 += 1;
     }
     if (ftData_UnkBytePerCharacter[id] != -1) {
-        efAsync_8006729C();
+        efAsync_8006729C(ftData_UnkBytePerCharacter[id]);
     }
     if (ftData_803C23E4[id] != 0U) {
         lbDvd_800178E8(1, ftData_803C23E4[id], 5, 5, 0, 0, 1, 8, 0);

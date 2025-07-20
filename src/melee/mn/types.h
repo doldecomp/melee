@@ -46,16 +46,16 @@ typedef struct HSD_GObj Menu_GObj;
 #endif
 
 struct PlayerInitData {
-    /*0x00*/ s8 x0; // character kind
-    /*0x01*/ u8 x1; // slot type
-    /*0x02*/ s8 x2; // stocks
-    /*0x03*/ s8 x3; // color
-    /*0x04*/ u8 x4; // port
+    /*0x00*/ s8 c_kind; // character kind
+    /*0x01*/ u8 slot_type; // slot type
+    /*0x02*/ s8 stocks; // stocks
+    /*0x03*/ s8 color; // color
+    /*0x04*/ u8 slot; // port
     /*0x05*/ s8 x5; // spawnpos32
-    /*0x06*/ s8 x6; // spawn direction
-    /*0x07*/ s8 x7; // subcolor
-    /*0x08*/ s8 x8; // handicap
-    /*0x09*/ s8 x9; // team
+    /*0x06*/ s8 spawn_dir; // spawn direction
+    /*0x07*/ u8 sub_color; // subcolor
+    /*0x08*/ s8 handicap; // handicap
+    /*0x09*/ u8 team; // team
     /*0x0A*/ u8 xA; // nametag
     /*0x0B*/ u8 xB;
     /*0x0C*/ u8 xC_b0 : 1;
@@ -75,7 +75,7 @@ struct PlayerInitData {
              u8 xD_b6 : 1;
              u8 xD_b7 : 1;
     /*0x0E*/ u8 xE;
-    /*0x0F*/ u8 xF; // CPU level
+    /*0x0F*/ u8 cpu_level; // CPU level
     /*0x10*/ u16 x10;
     /*0x12*/ u16 x12;
     /*0x14*/ u16 x14;
@@ -85,7 +85,7 @@ struct PlayerInitData {
 };
 
 struct StartMeleeRules {
-    u32 x0_0 : 3;
+    u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
     u32 x0_3 : 3;
     u32 x0_6 : 1;
     u32 x0_7 : 1;
@@ -147,7 +147,8 @@ struct StartMeleeRules {
 
     u32 x10; // time limit
     u8 x14;
-    u32 x18_pad[(0x20 - 0x18) / 4];
+    u32 x18;
+    u32 x1C_pad[(0x20 - 0x1C) / 4];
 
     u64 x20; // item mask
     int x28;
@@ -155,17 +156,19 @@ struct StartMeleeRules {
     float x30; // damage ratio
     float x34; // game speed
     void (*x38)(int);
-    u8 unk3C[0x44 - 0x3C];
+    void (*x3C)(int);
+    int (*x40)(void);
     void (*x44)(void);
     void (*x48)(void);
     void (*x4C)(void);
-    u8 unk50[0x54 - 0x50];
+    void (*x50)(int);
     struct {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;
     }* x54;
-    u8 pad_x58[0x60 - 0x58];
+    int x58;
+    u8 pad_x5C[0x60 - 0x5C];
 };
 
 struct StartMeleeData {
@@ -174,15 +177,15 @@ struct StartMeleeData {
 };
 
 struct VsModeData {
-    s8 loser;
-    s8 ordered_stage_index;
-    s8 winner;
-    u8 unk_0x3;
-    u8 unk_0x4;
-    u8 unk_0x5;
-    u8 unk_0x6;
-    u8 unk_0x7;
-    StartMeleeData data;
+/* +0 */ s8 loser;
+/* +1 */ s8 ordered_stage_index;
+/* +2 */ s8 winner;
+/* +3 */ u8 unk_0x3;
+/* +4 */ u8 unk_0x4;
+/* +5 */ u8 unk_0x5;
+/* +6 */ u8 unk_0x6;
+/* +7 */ u8 unk_0x7;
+/* +8 */ StartMeleeData data;
 };
 
 struct CSSData {
@@ -396,7 +399,7 @@ struct SSSData {
     u8 x1;
     u8 no_lras;
     u8 force_stage_id;
-    bool start_game;
+    u8 start_game;
     VsModeData data;
 };
 

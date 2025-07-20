@@ -335,9 +335,9 @@ void grGreatBay_801F67A4(Vec3* vec, f32 arg8)
     temp_r3 = grLib_801C96F8(0x7537, 0x1E, vec);
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3->x54;
-        temp_r3_2->x24 *= arg8;
-        temp_r3_2->x28 *= arg8;
-        temp_r3_2->x2C *= arg8;
+        temp_r3_2->x24.x *= arg8;
+        temp_r3_2->x24.y *= arg8;
+        temp_r3_2->x24.z *= arg8;
     }
 }
 
