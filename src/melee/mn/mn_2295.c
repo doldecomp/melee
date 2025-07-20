@@ -1,19 +1,21 @@
-#include <platform.h>
+#include "mn_2295.h"
 
-#include <baselib/forward.h>
-
-#include "mn/mn_2295.h"
-
-#include "gm/gm_1A36.h"
-#include "gm/gmmain_lib.h"
-#include "lb/lb_00CE.h"
-#include "mn/inlines.h"
-#include "sc/types.h"
-
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mobj.h>
+
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lb_00CE.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/mn/inlines.h>
+#include <melee/sc/types.h>
 
 u8 mn_802295AC(void)
 {
@@ -246,7 +248,7 @@ static struct {
     float x0;
     u8 pad[0x20];
 } mn_803EAE8C[2] = { 0 };
-static float mn_803EAE68[0x100] = { 0 };
+static float mn_803EAE68[0x200] = { 0 };
 
 HSD_GObj* mn_80229DC0(void)
 {

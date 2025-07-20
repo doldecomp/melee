@@ -1,6 +1,7 @@
 #include "gmtitle.h"
 
 #include "gm_1601.h"
+#include "gm_1A36.h"
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gm_1B03.h"
@@ -14,10 +15,13 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
+#include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbmthp.h>
 #include <melee/lb/lbtime.h>
 #include <melee/mn/mn_2295.h>
 #include <melee/sc/types.h>
