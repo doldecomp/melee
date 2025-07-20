@@ -503,7 +503,7 @@ void gm_8016B8D4(s32 arg0, s32 arg1)
 {
     u8 tmp = arg1;
     lbl_8046B6A0.FighterMatchInfo[arg0].x1 = 0x82;
-    lbl_8046B6A0.FighterMatchInfo[arg0].x2 = tmp;
+    lbl_8046B6A0.FighterMatchInfo[arg0].slot_type = tmp;
     grStadium_801D3B4C(arg0, tmp);
 }
 
@@ -1217,7 +1217,7 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
                 arg0->FighterMatchInfo[i].x1--;
                 temp_r0_2 = arg0->FighterMatchInfo[i].x1;
                 if (temp_r0_2 == 0x50) {
-                    if (arg0->FighterMatchInfo[i].x2 == 0) {
+                    if (arg0->FighterMatchInfo[i].slot_type == 0) {
                         var_r3 = arg0->unk_20[i];
                     } else {
                         var_r3 = 0x7C865;
@@ -1268,8 +1268,8 @@ static inline void fn_8016CFE0_inline(void)
 
     tmp = &lbl_8046B6A0;
     for (i = 0; i < 6; i++) {
-        if (tmp->FighterMatchInfo[i].xA != 0) {
-            if (--tmp->FighterMatchInfo[i].xA == 0) {
+        if (tmp->FighterMatchInfo[i].respawn_timer != 0) {
+            if (--tmp->FighterMatchInfo[i].respawn_timer == 0) {
                 fn_8016719C(i, tmp->FighterMatchInfo[i].xB);
             }
         }
@@ -1506,7 +1506,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         tmp->FighterMatchInfo[arg0].x4_b4 = 1;
     }
 
-    tmp->FighterMatchInfo[arg0].x3 = arg1->x5;
+    tmp->FighterMatchInfo[arg0].spawn_point = arg1->x5;
 
     Player_SetHandicap(arg0, (s8) arg1->handicap);
     Player_SetTeam(arg0, (s8) arg1->team);
@@ -1681,10 +1681,10 @@ void fn_8016DEEC(void)
 
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) != 3) {
-            if (tmp->FighterMatchInfo[i].x3 == -1) {
+            if (tmp->FighterMatchInfo[i].spawn_point == -1) {
                 Stage_80224E64(i, &spC);
             } else {
-                int x = tmp2->FighterMatchInfo[i].x3;
+                int x = tmp2->FighterMatchInfo[i].spawn_point;
                 Stage_80224E64(x, &spC);
             }
             sp18[i] = spC.x;
@@ -1795,10 +1795,10 @@ void fn_8016E2BC(void)
         var_r0 = false;
     }
     if (var_r0) {
-        if (tmp->FighterMatchInfo[0].x3 == -1) {
+        if (tmp->FighterMatchInfo[0].spawn_point == -1) {
             Stage_80224E64(0, &sp24);
         } else {
-            int x = tmp->FighterMatchInfo[0].x3;
+            int x = tmp->FighterMatchInfo[0].spawn_point;
             Stage_80224E64(x, &sp24);
         }
         if (Player_GetFacingDirection(0) == 0.0F) {
@@ -1821,10 +1821,10 @@ void fn_8016E2BC(void)
         fn_8016DEEC();
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) != 3) {
-                if (tmp->FighterMatchInfo[i].x3 == -1) {
+                if (tmp->FighterMatchInfo[i].spawn_point == -1) {
                     Stage_80224E64(i, &sp18);
                 } else {
-                    Stage_80224E64(tmp->FighterMatchInfo[i].x3, &sp18);
+                    Stage_80224E64(tmp->FighterMatchInfo[i].spawn_point, &sp18);
                 }
                 if (Player_GetFacingDirection(i) == 0.0F) {
                     if (Stage_80224DC8(tmp->x24C8.xE) != 0) {
@@ -2084,7 +2084,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
         Player_80036D24(arg0);
         fn_8016D8AC(arg0, arg1);
 
-        temp_r3 = tmp->FighterMatchInfo[arg0].x3;
+        temp_r3 = tmp->FighterMatchInfo[arg0].spawn_point;
         if (temp_r3 == -1) {
             Stage_80224E64(arg0, &sp18);
         } else {
