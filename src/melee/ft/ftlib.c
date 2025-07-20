@@ -955,7 +955,7 @@ void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
     pl_8003E4A4(fp->player_id, fp->x221F_b4, arg1, arg2);
 }
 
-void ftLib_80087508(s8 arg0, u8 arg1)
+void ftLib_80087508(FighterKind arg0, u8 arg1)
 {
     ftData_8008572C(arg0);
     efAsync_8006737C(ftData_UnkBytePerCharacter[arg0]);
@@ -964,7 +964,7 @@ void ftLib_80087508(s8 arg0, u8 arg1)
     ftData_800857E0(arg0);
 }
 
-void ftLib_80087574(s8 arg)
+void ftLib_80087574(FighterKind arg)
 {
     u8 i;
     ftData_8008572C(arg);
