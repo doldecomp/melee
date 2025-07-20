@@ -40,7 +40,7 @@
 /* 0243F4 */ UNK_RET lbAudioAx_800243F4(UNK_PARAMS);
 /* 0244F4 */ UNK_RET fn_800244F4(UNK_PARAMS);
 /* 0245D4 */ void lbAudioAx_800245D4(u8);
-/* 0245F4 */ s32 lbAudioAx_800245F4(u8);
+/* 0245F4 */ s32 lbAudioAx_800245F4(u8); /// i dont believe this actually returns anything
 /* 024614 */ void lbAudioAx_80024614(u8);
 /* 024634 */ void lbAudioAx_80024634(u8);
 /* 024654 */ UNK_RET fn_80024654(UNK_PARAMS);

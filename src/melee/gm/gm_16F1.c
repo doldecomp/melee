@@ -294,8 +294,8 @@ static inline bool gm_80173EEC_inline(void)
 void gm_80173EEC(void)
 {
     int i;
-    u16* temp_r29;
     u8 temp_r3;
+    u16* temp_r29;
 
     for (i = 0; i < 0x19; i++) {
         temp_r29 = &gmMainLib_8015EDBC()->x18[i];
