@@ -164,7 +164,7 @@ void gm_801A583C(MinorScene* minor_data, VsModeData* vs_data,
     s32 i;
 
     match_start_data = gm_801A427C(minor_data);
-    (vs_data);
+    gm_80167BC8(vs_data);
     match_start_data->rules = vs_data->data.rules;
 
     if (match_start_data->rules.x0_0 == 1) {

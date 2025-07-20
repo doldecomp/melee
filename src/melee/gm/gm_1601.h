@@ -21,7 +21,7 @@
 /* 1603B0 */ void gm_801603B0(void);
 /* 160400 */ u32 fn_80160400(s32); ///< gets character victory theme id
 /* 160438 */ char* gm_80160438(s32); ///< gets character result anim path
-/* 160474 */ s16 gm_80160474(enum CharacterKind, enum MajorSceneKind);
+/* 160474 */ bool gm_80160474(enum CharacterKind, enum MajorSceneKind);
 /* 1604DC */ char* gm_801604DC(enum CharacterKind, enum MajorSceneKind); ///< gets characters trophy model
 /* 160564 */ char* gm_80160564(enum CharacterKind, enum MajorSceneKind);
 /* 1605EC */ s8 fn_801605EC(s32);

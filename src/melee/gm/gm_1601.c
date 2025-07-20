@@ -205,7 +205,7 @@ char* gm_80160438(s32 cid)
     }
 }
 
-s16 gm_80160474(enum CharacterKind c_kind, enum MajorSceneKind scene)
+bool gm_80160474(enum CharacterKind c_kind, enum MajorSceneKind scene)
 {
     switch (scene) {
     case MJ_CLASSIC_GOVER:
