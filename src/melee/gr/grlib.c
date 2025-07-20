@@ -67,9 +67,9 @@ UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, Vec3* arg2)
         }
         phi_r30->x8 = *arg2;
         scale = Ground_801C0498();
-        phi_r30->x24 *= scale;
-        phi_r30->x28 *= scale;
-        phi_r30->x2C *= scale;
+        phi_r30->x24.x *= scale;
+        phi_r30->x24.y *= scale;
+        phi_r30->x24.z *= scale;
         temp_r3->x2C = 0.0f;
         temp_r3->x28 = 0.0f;
         temp_r3->x24 = 0.0f;

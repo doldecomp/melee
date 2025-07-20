@@ -159,8 +159,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDFC = 0;
 
             item->xDD4_itemVar.foxblaster.xDE4 =
-                efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos,
-                             &item->xDD4_itemVar.foxblaster.angle);
+                (s32) efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos,
+                                   &item->xDD4_itemVar.foxblaster.angle);
             break;
         case It_Kind_Kirby_FoxBlaster:
         case It_Kind_Kirby_FalcoBlaster:
@@ -181,8 +181,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.xDFC = 0;
 
             item->xDD4_itemVar.foxblaster.xDE4 =
-                efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
-                             &item->xDD4_itemVar.foxblaster.angle);
+                (s32) efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
+                                   &item->xDD4_itemVar.foxblaster.angle);
             break;
         }
 
@@ -777,8 +777,8 @@ bool it_802AEBCC(HSD_GObj* item_gobj)
                 ftKb_SpecialNFx_800FDD4C(item->xDD4_itemVar.foxblaster.owner);
             break;
         }
-        // If the item's current state does not match the fighter's action state,
-        // then change it to match and run animations
+        // If the item's current state does not match the fighter's action
+        // state, then change it to match and run animations
         if (item->msid != it_803F6E3C[ft_special_state]) {
             Item_80268E5C(item_gobj, ft_special_state, ITEM_ANIM_UPDATE);
             Item_802694CC(item_gobj);

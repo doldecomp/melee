@@ -2,6 +2,7 @@
 
 #include "gm_1601.h"
 
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -20,7 +21,6 @@
 #include <melee/lb/lbbgflash.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
-#include <sysdolphin/baselib/gobjproc.h>
 
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
@@ -160,26 +160,25 @@ void fn_8017C1A4(HSD_GObj* unused)
         if (Player_GetRemainingHP(2) <= 0) {
             tmp->x0 = 7;
             tmp->x8 = 0;
-        } else if (Player_GetRemainingHP(2) <= 0.5F * tmp->xC &&
-                   fn_8017EDDC()) {
+        } else if (Player_GetRemainingHP(2) <= 0.5F * tmp->xC && fn_8017EDDC())
+        {
             tmp->x0 = 1;
             tmp->x8 = 0;
         }
         break;
     case 4:
-        if (Player_GetRemainingHP(2) <= 0 &&
-            Player_GetRemainingHP(1) <= 0) {
+        if (Player_GetRemainingHP(2) <= 0 && Player_GetRemainingHP(1) <= 0) {
             tmp->x0 = 7;
             tmp->x8 = 0;
         } else if (Player_GetRemainingHP(2) <= 0 ||
-                   Player_GetRemainingHP(1) <= 0) {
+                   Player_GetRemainingHP(1) <= 0)
+        {
             tmp->x0 = 6;
             tmp->x8 = 0;
         }
         break;
     case 5:
-        if (Player_GetRemainingHP(2) <= 0 &&
-            Player_GetRemainingHP(1) <= 0) {
+        if (Player_GetRemainingHP(2) <= 0 && Player_GetRemainingHP(1) <= 0) {
             tmp->x0 = 7;
             tmp->x8 = 0;
         }
@@ -203,8 +202,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             gm_SetGameSpeed(1.0f);
             tmp->x0 = 5;
         }
-        if (Player_GetRemainingHP(2) <= 0 &&
-            Player_GetRemainingHP(1) <= 0) {
+        if (Player_GetRemainingHP(2) <= 0 && Player_GetRemainingHP(1) <= 0) {
             tmp->x0 = 7;
             tmp->x8 = 0;
         } else if (tmp->x8 <= temp_r27_2) {
@@ -247,8 +245,8 @@ void fn_8017C1A4(HSD_GObj* unused)
             lbAudioAx_80028B6C();
         }
         if (tmp->x8 <= temp_r28 && tmp->x8 % 30 == 0) {
-            gm_80167858(Player_GetPlayerId(0),
-                        Player_GetNametagSlotID(0), 2, 0x1E);
+            gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 2,
+                        0x1E);
             Camera_80030E44(3, NULL);
         }
         if (tmp->x8 <= temp_r29_2) {
@@ -267,7 +265,7 @@ void fn_8017C71C(void)
     tmp->x8 = 0;
     tmp->xC = ftBossLib_8015C530(gm_8017E068());
     Player_SetOtherStamina(2, tmp->xC);
-    ftLib_80087508(0x1C, 0);
+    ftLib_80087508(FTKIND_CREZYH, 0);
 }
 
 void fn_8017C7A0(void)
@@ -344,7 +342,7 @@ void gm_8017C838(void)
     }
 
     for (i = 0; i < 3; i++) {
-        if (*var_r31 != 0x21) {
+        if (*var_r31 != (s8) FTKIND_MAX) {
             ftLib_80087574(*var_r31);
         }
         var_r31++;
