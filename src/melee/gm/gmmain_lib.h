@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include <placeholder.h>
+
 #include <melee/gm/forward.h>
 
 /* 15CC34 */ GameRules* gmMainLib_8015CC34(void);
@@ -12,7 +13,7 @@
 /* 15CC64 */ void* GetPersistentFighterData(s32);
 /* 15CC78 */ void* gmMainLib_8015CC78(void);
 /* 15CC84 */ void* gmMainLib_8015CC84(void);
-/* 15CC90 */ void* gmMainLib_8015CC90(void);
+/* 15CC90 */ short* gmMainLib_8015CC90(void);
 /* 15CC9C */ void* GetPersistentNameData(s32);
 /* 15CCE4 */ void* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ void* gmMainLib_8015CCF0(void);

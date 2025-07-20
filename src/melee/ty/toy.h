@@ -2,7 +2,9 @@
 #define GALE01_305058
 
 #include <placeholder.h>
+
 #include "ft/forward.h"
+
 #include "gm/types.h"
 
 /* 305058 */ UNK_RET un_80305058(UNK_PARAMS);
@@ -43,7 +45,9 @@
 /* 307BA0 */ UNK_RET un_80307BA0(UNK_PARAMS);
 /* 307E84 */ UNK_RET fn_80307E84(UNK_PARAMS);
 /* 307F64 */ UNK_RET un_80307F64(UNK_PARAMS);
-/* 30813C */ char* un_8030813C(s16, enum MajorSceneKind); /// TODO :: fill out the struct that this uses/returns
+/* 30813C */ char*
+    un_8030813C(s16, enum MajorSceneKind); /// TODO :: fill out the struct that
+                                           /// this uses/returns
 /* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
 /* 3082F8 */ UNK_RET un_803082F8(UNK_PARAMS);
 /* 308328 */ UNK_RET un_80308328(UNK_PARAMS);

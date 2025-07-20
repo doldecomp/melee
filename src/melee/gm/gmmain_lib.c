@@ -3,6 +3,8 @@
 #include "gmmain_lib.static.h"
 
 #include <dolphin/os/OSReset.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/video.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>
@@ -12,8 +14,6 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
 #include <melee/ty/toy.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/video.h>
 
 GameRules gmMainLib_803D4A48 = {
     0,
@@ -44,16 +44,8 @@ GameRules gmMainLib_803D4A48 = {
 };
 
 int gmMainLib_803D4A60[] = {
-    0x2000000,
-    0,
-    -1,
-    -1,
-    0x01010101,
-    0x00010000,
-    -1,
-    0,
+    0x2000000, 0, -1, -1, 0x01010101, 0x00010000, -1, 0,
 };
-
 
 GXRenderModeObj gmMainLib_803D4A80 = {
     VI_TVMODE_NTSC_PROG,
@@ -120,7 +112,7 @@ void* gmMainLib_8015CC84(void)
     return &gmMainLib_804D3EE0->thing.x1CD2;
 }
 
-void* gmMainLib_8015CC90(void)
+short* gmMainLib_8015CC90(void)
 {
     return &gmMainLib_804D3EE0->thing.x1CD0;
 }

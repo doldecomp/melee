@@ -1,12 +1,13 @@
 #include "gm_1BF9.h"
 
-#include <melee/ty/toy.h>
-#include <melee/un/un_2FC9.h>
-#include <melee/lb/lblanguage.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/tylist.h>
+#include <melee/un/un_2FC9.h>
 
 typedef struct {
     u32 x0;
