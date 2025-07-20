@@ -27,8 +27,8 @@ void un_8031F9B4(HSD_GObj* gobj)
 
 /// #un_80320490_OnFrame
 
-void un_803204B0(s8 arg0, s8 arg1)
+void un_803204B0(int arg0, int arg1)
 {
-    M2C_FIELD(&un_804D7038, s8*, 0) = arg0;
-    M2C_FIELD(&un_804D7038, s8*, 1) = arg1;
+    M2C_FIELD(&un_804D7038, u8*, 0) = arg0;
+    M2C_FIELD(&un_804D7038, u8*, 1) = arg1;
 }

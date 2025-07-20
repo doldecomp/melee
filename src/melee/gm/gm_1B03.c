@@ -13,12 +13,21 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
+#include <melee/lb/lbmthp.h>
 #include <melee/lb/lbsnap.h>
+#include <melee/lb/types.h>
 #include <melee/mn/mngallery.h>
 #include <melee/mn/types.h>
 #include <melee/un/un_2FC9.h>
-#include <sysdolphin/baselib/memory.h>
+#include <melee/vi/types.h>
+#include <melee/vi/vi0102.h>
+#include <melee/vi/vi0402.h>
+#include <melee/vi/vi0501.h>
+#include <melee/vi/vi1101.h>
+#include <melee/vi/vi1201v1.h>
 #include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 
 /* 49E548 */ extern struct gm_8049E548_t gm_8049E548;
 
@@ -1351,13 +1360,27 @@ void fn_801B1F6C(void) {}
 
 /// #gm_801B2298_OnInit
 
-/// #gm_801B23C4_OnLoad
+extern u8 gm_804D68C0;
+extern u8 gm_804D68C1;
+
+void gm_801B23C4_OnLoad(void)
+{
+    gm_804D68C0 = gm_801677F0();
+    gm_804D68C1 = 0;
+}
 
 /// #gm_801B23F0
 
 /// #gm_801B24B4
 
-/// #gm_801B2510
+void gm_801B2510(MinorScene* arg0)
+{
+    int* data = gm_801A4284(arg0);
+    int temp_r0 = *data;
+    if (temp_r0 == 1 || temp_r0 == 2) {
+        gm_801A42F8(1);
+    }
+}
 
 /// #gm_801B254C
 
@@ -1616,7 +1639,10 @@ void gm_801B8D60_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_6D0);
 }
 
-/// #gm_801B8D88_OnLoad
+void gm_801B8D88_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801B8DA8
 
@@ -1645,7 +1671,10 @@ void gm_801B8F70_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_E50);
 }
 
-/// #gm_801B8F98_OnLoad
+void gm_801B8F98_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801B8FB8
 
@@ -1677,7 +1706,10 @@ void gm_801B9180_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_F90);
 }
 
-/// #gm_801B91A8_OnLoad
+void gm_801B91A8_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801B91C8
 
@@ -1696,7 +1728,11 @@ void gm_801B95B0_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_10D0);
 }
 
-/// #gm_801B95D8_OnLoad
+void gm_801B95D8_OnLoad(void)
+{
+    gm_SetGameSpeed(1.0F);
+    gm_801A55C4();
+}
 
 /// #gm_801B9600
 
@@ -1748,7 +1784,10 @@ void gm_801BA0C4_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_A90);
 }
 
-/// #gm_801BA0EC_OnLoad
+void gm_801BA0EC_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801BA10C
 
@@ -1780,7 +1819,10 @@ void gm_801BA2C4_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_BD0);
 }
 
-/// #gm_801BA2EC_OnLoad
+void gm_801BA2EC_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801BA30C
 
@@ -1812,7 +1854,10 @@ void gm_801BA4C4_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_810);
 }
 
-/// #gm_801BA4EC_OnLoad
+void gm_801BA4EC_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801BA50C
 
@@ -1844,7 +1889,10 @@ void gm_801BA6BC_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_1210);
 }
 
-/// #gm_801BA6E4_OnLoad
+void gm_801BA6E4_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801BA704
 
@@ -1876,7 +1924,10 @@ void gm_801BA8B4_OnInit(void)
     gm_80167B50(&gmMainLib_804D3EE0->unk_1350);
 }
 
-/// #gm_801BA8DC_OnLoad
+void gm_801BA8DC_OnLoad(void)
+{
+    gm_801A55C4();
+}
 
 /// #gm_801BA8FC
 
@@ -1998,11 +2049,26 @@ u8 gm_801BEBA8(u8 arg0)
 
 /// #gm_801BEC54
 
-/// #gm_801BEC80
+void gm_801BEC80(void)
+{
+    gm_801A42E8(1);
+    gm_801A42D4();
+}
 
-/// #gm_801BECA8
+void gm_801BECA8(void)
+{
+    lb_8001C550();
+    lb_8001D164(0);
+}
 
-/// #gm_801BECD0
+void gm_801BECD0(void)
+{
+    gm_80172898(4);
+    if (gm_80173754(1, 0) == 0) {
+        gm_801A42E8(1);
+        gm_801A42D4();
+    }
+}
 
 /// #gm_801BED14
 
@@ -2014,24 +2080,33 @@ u8 gm_801BEBA8(u8 arg0)
 
 /// #gm_801BEE9C
 
-/// #gm_801BEF84
+void gm_801BEF84(void)
+{
+    lbMthp_8001F800();
+}
 
 /* 49C178 */ static u8 gm_8049C178[16];
 
+#pragma push
+#pragma dont_inline on
 void gm_801BEFA4(s8 arg0)
 {
     gm_8049C178[0] = arg0;
 }
+#pragma pop
 
 int gm_801BEFB0(void)
 {
     return gm_8049C178[0];
 }
 
-void gm_801BEFC0(s8 arg0)
+#pragma push
+#pragma dont_inline on
+void gm_801BEFC0(int arg0)
 {
     gm_8049C178[1] = arg0;
 }
+#pragma pop
 
 u8 gm_801BEFD0(void)
 {
@@ -2078,7 +2153,32 @@ int gm_801BF050(void)
     return M2C_FIELD(&gm_8049C178, u8*, 2);
 }
 
-/// #gm_801BF060
+void gm_801BF060(MinorScene* arg0)
+{
+    int* temp_r3 = gm_801A4284(arg0);
+    if (g_debugLevel >= 3) {
+        if (*temp_r3 & 0x100) {
+            gm_801A42E8(0xE);
+            gm_801A42D4();
+        } else if (*temp_r3 & 0x1000) {
+            gm_801A42E8(1);
+            gm_801A42D4();
+        } else if (*temp_r3 & 0x400) {
+            gm_801A42E8(7);
+            gm_801A42D4();
+        } else if (*temp_r3 & 0x800) {
+            gm_801A42E8(6);
+            gm_801A42D4();
+        }
+    } else if (*temp_r3 & 0x1000) {
+        gm_80173EEC();
+        gm_80172898(0x100);
+        if (gm_80173754(1, 0) == 0) {
+            gm_801A42E8(1);
+        }
+        gm_801A42D4();
+    }
+}
 
 /// #gm_801BF128
 
@@ -2156,18 +2256,71 @@ u8 gm_801BF718(void)
     return gm_8049E548.unk_E;
 }
 
-/// #gm_801BF728
+extern u8 un_804D6F3C[8];
+extern u8 un_804D6FD8[8];
 
-/// #gm_801BF834
+void gm_801BF728(void)
+{
+    s32 temp_r31;
+    s32 temp_r31_2;
+    PAD_STACK(4);
 
-/// #gm_801BF85C
+    un_804D6F3C[1] = 1;
+    un_804D6F3C[3] = 1;
+    vi0102_8031D020(0xE, HSD_Randi(4));
+    temp_r31 = HSD_Randi(4);
+    un_8031D9E4(0xE, HSD_Randi(4), temp_r31);
+    un_804D6F84[4] = HSD_Randi(0x1B);
+    un_804D6F84[5] = HSD_Randi(0x1B);
+    un_804D6F84[6] = HSD_Randi(0x1B);
+    temp_r31_2 = HSD_Randi(4);
+    un_8031E110(0xE, HSD_Randi(4), temp_r31_2);
+    un_804D6FD8[0] = 0xE;
+    un_804D6FD8[1] = HSD_Randi(4);
+    un_8031F980(0xE, HSD_Randi(4));
+    un_803204B0(0xE, HSD_Randi(4));
+    gm_801BEFA4(8);
+    gm_801BEFC0(HSD_Randi(4));
+}
 
-/// #gm_801BF898
+void gm_801BF834(void)
+{
+    gm_801A42E8(0);
+    gm_801A42D4();
+}
 
-/// #gm_801BF8B8
+void gm_801BF85C(void)
+{
+    PreloadCacheScene* temp_r31 = lbDvd_8001822C();
+    PAD_STACK(4);
+    lbDvd_800174BC();
+    temp_r31->is_heap_persistent[1] = 0;
+    lbDvd_80018254();
+}
 
-/// #gm_801BF8D8
+void gm_801BF898(void)
+{
+    lbMthp_8001F800();
+}
 
-/// #gm_801BF8F8
+void gm_801BF8B8(void)
+{
+    lbMthp_8001F800();
+}
 
-/// #gm_801BF920
+void gm_801BF8D8(void)
+{
+    lbMthp_8001F800();
+}
+
+void gm_801BF8F8(MinorScene* arg0)
+{
+    int* val = gm_801A427C(arg0);
+    *val = 1;
+}
+
+void gm_801BF920(MinorScene* arg0)
+{
+    gm_801A4284(arg0);
+    gm_801A42F8(0x28);
+}
