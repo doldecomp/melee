@@ -63,7 +63,7 @@ struct _struct_efAsync_803C025C_0xC {
 
 struct _struct_efLib_80458EE0_0x8 {
     /* 0x0 */ void* unk0; /* inferred */
-    /* 0x4 */ char pad4[2];
+    /* 0x4 */ u16 pad4;
     /* 0x6 */ u16 unk6; /* inferred */
 }; /* size = 0x8? */
 

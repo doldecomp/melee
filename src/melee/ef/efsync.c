@@ -8,6 +8,7 @@
 #include "efsync.h"
 #include "math.h"
 #include "placeholder.h"
+#include "types.h"
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"

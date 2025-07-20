@@ -6,8 +6,6 @@
 
 #include <baselib/forward.h>
 
-#include "types.h"
-
 /* 063930 */ void* efAsync_80063930(s32, HSD_GObj*, void*);
 // /* 063930 */ void* efAsync_80063930(s32, HSD_GObj*, ...);
 /* 06729C */ void efAsync_8006729C(int);

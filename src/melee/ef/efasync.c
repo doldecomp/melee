@@ -1,4 +1,4 @@
-#include "ef/forward.h"
+#include "forward.h"
 
 #include "efasync.static.h"
 
@@ -6,6 +6,7 @@
 #include "eflib.h"
 #include "efsync.h"
 #include "math.h"
+#include "types.h"
 
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"

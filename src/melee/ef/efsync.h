@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "types.h"
+#include "baselib/forward.h"
 
 void* efSync_Spawn(s32 gfx_id, HSD_GObj* arg_gobj, ...);
 

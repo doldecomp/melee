@@ -1193,7 +1193,7 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x337U, "jobj");
                         }
-                        if (&var_r28->x24 == NULL) {
+                        if ((Vec3*) &var_r28->x24 == NULL) {
                             __assert("jobj.h", 0x338U, "scale");
                         }
                         var_r28->x24.x = var_r31->scale.x;
@@ -1477,7 +1477,7 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                     if (var_r31 == NULL) {
                         __assert("jobj.h", 0x3D3U, "jobj");
                     }
-                    if (&var_r28_2->x8 == NULL) {
+                    if ((Vec3*) &var_r28_2->x8 == NULL) {
                         __assert("jobj.h", 0x3D4U, temp_r5 + 0x64);
                     }
                     var_r28_2->x8.x = var_r31->translate.x;
@@ -2077,14 +2077,14 @@ loop_7:
     if ((u32) var_r5->unk0 == (u32) arg_effect->parent_gobj) {
         temp_r5 = &efLib_80458EE0[var_r6];
         // if ((u16) temp_r5->unk84 == 0x417) {
-        if ((u16) &efLib_80458EE0[16].pad4 == 0x417) {
+        if (efLib_80458EE0[15].pad4 == 0x417) {
             tobj_1 = tobj_1->next;
         }
         temp_r4 = &efLib_80458EE0[var_r6];
         // tobj_1->tev->konst.a = (u8) temp_r4->unk86;
-        tobj_1->tev->konst.a = (u8) &efLib_80458EE0[16].unk6;
+        tobj_1->tev->konst.a = efLib_80458EE0[15].unk6;
         // if ((u16) *(temp_r5 + 0x84) == 0x419) {
-        if ((u16) &efLib_80458EE0[16].pad4 == 0x419) {
+        if (efLib_80458EE0[15].pad4 == 0x419) {
             var_r29 = 0;
             do {
                 jobj_2 = jobj_2->next;
@@ -2098,7 +2098,7 @@ loop_7:
                 // HSD_MObjGetTObj(var_r3_2)->tev->konst.a = (u8) (temp_r4 +
                 // 0x80)->unk6;
                 HSD_MObjGetTObj(var_r3_2)->tev->konst.a =
-                    (u8) &efLib_80458EE0[16].unk6;
+                    efLib_80458EE0[15].unk6;
             } while (var_r29 < 6);
         }
     } else {
