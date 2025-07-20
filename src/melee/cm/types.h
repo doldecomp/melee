@@ -163,12 +163,4 @@ struct CameraModeCallbacks {
     void (*(callback[9]))(void*);
 };
 
-struct CameraFixednessMult {
-    float x0;
-    float x4;
-    float x8;
-    float xC;
-    float x10;
-};
-
 #endif

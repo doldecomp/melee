@@ -64,8 +64,8 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
-#include "lb/lbarchive.h"
 #include "lb/lbanim.h"
+#include "lb/lbarchive.h"
 #include "lb/lbshadow.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
@@ -912,9 +912,9 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006DA4C, 0x16);
     Fighter_UnkProcessDeath_80068354(gobj);
 
-    if (fp->kind == 0x1B) {
+    if (fp->kind == FTKIND_MASTERH) {
         ftMh_MS_341_8014FE10(gobj);
-    } else if (fp->kind == 0x1C) {
+    } else if (fp->kind == FTKIND_CREZYH) {
         ftCh_Init_80155FCC(gobj);
     } else if (input->flags_b1 != 0) {
         ftMaterial_800BFD04(gobj);

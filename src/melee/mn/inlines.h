@@ -9,6 +9,7 @@
 #include <baselib/memory.h>
 #include <baselib/sislib.h>
 
+/// @todo: maybe rename to MenuInput?
 typedef enum _MenuEvent {
     MenuEvent_Up = 1 << 0,
     MenuEvent_Down = 1 << 1,
@@ -33,9 +34,14 @@ static inline void Menu_DecrementAnimTimer(void)
     mn_804D6BC8.x4 = 0;
 }
 
-static inline u64 Menu_GetEvents(void)
+static inline u64 Menu_GetAllEvents(void)
 {
     return mn_804A04F0.x8 = mn_80229624(4);
+}
+
+static inline u64 Menu_GetEventsForPort(s32 i)
+{
+    return mn_804A04F0.x8 = mn_80229624(i);
 }
 
 // @todo: The functions `fn_8017435C`, `fn_80174338`, and `fn_80174380` are

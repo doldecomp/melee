@@ -492,7 +492,7 @@ void fn_803A60EC(void* arg0)
     }
 }
 
-s32 HSD_SisLib_803A611C(int arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
+s32 HSD_SisLib_803A611C(int arg0, HSD_GObj* arg1, u16 arg2, u8 arg3, u8 arg4,
                         u8 arg5, u8 arg6, u32 arg7)
 {
     int count;
@@ -524,7 +524,7 @@ s32 HSD_SisLib_803A611C(int arg0, u32 arg1, u16 arg2, u8 arg3, u8 arg4,
     temp_r27->xF = arg6;
     temp_r27->xA = arg0;
     temp_r27->x0 = NULL;
-    if (arg1 != 0) {
+    if (arg1 != NULL) {
         temp_r27->x4 = NULL;
     } else {
         temp_r27->x4 = GObj_Create(arg2, arg3, arg4);
