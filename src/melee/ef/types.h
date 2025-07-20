@@ -47,7 +47,6 @@ struct ef_UnkStruct1 {
 // Same size as __va_list struct?
 struct ef_UnkStruct3 {
     /* +0 */ ef_UnkStruct3* next; // actually next?
-                                  // /* +0 */ ef_UnkStruct2* x0;
     /* +4 */ u8 eff_type;
     /* +8 */ s32 gfx_id;
     /* +C */ HSD_JObj* xC;

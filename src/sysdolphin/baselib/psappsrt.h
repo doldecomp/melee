@@ -20,7 +20,6 @@ struct UnkGeneratorMember {
     UnkGeneratorStruct* x4;
     Vec3 x8;
     Vec3 x14;
-    // u8 x20_fill[4];
     u32 x20_unk;
     Vec3 x24;
     u8 x30;
