@@ -268,19 +268,19 @@ void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
             if (it_8026B594((Item_GObj*) fighter->item_gobj)) {
                 it_8028E79C((Item_GObj*) fighter->item_gobj, &pos1,
                             fighter->facing_dir);
-                // it_8028E79C((Item_GObj* ) fighter->item_gobj, &pos2,
+                // it_8028E79C((Item_GObj*) fighter->item_gobj, &pos2,
                 // fighter->facing_dir); efSync_Spawn(1073, fighter_gobj, pos2,
                 // fighter);
                 f0 = 0.0f;
-                // efSync_Spawn(1073, fighter, &pos2);
-                efSync_Spawn(1073, fighter, &pos2, fighter->facing_dir);
+                // efSync_Spawn(1073, fighter_gobj, &pos2);
+                efSync_Spawn(1073, fighter_gobj, &pos2, fighter->facing_dir);
                 if (fighter->facing_dir != 1) {
                     ft_80088148(fighter, 228, 127, 64);
                 } else {
                     ft_80088148(fighter, 229, 127, 64);
                 }
             } else {
-                efSync_Spawn(1029, fighter, &pos2);
+                efSync_Spawn(1029, fighter_gobj, &pos2);
                 ft_80088148(fighter, 230, 127, 64);
             }
         }

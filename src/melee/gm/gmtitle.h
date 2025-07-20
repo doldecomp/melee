@@ -4,7 +4,7 @@
 #include <placeholder.h>
 #include <sysdolphin/baselib/forward.h>
 
-/* 1A12C4 */ UNK_RET gmTitle_801A12C4(UNK_PARAMS);
+/* 1A12C4 */ UNK_T gmTitle_801A12C4(UNK_PARAMS);
 /* 1A146C */ static void gmTitle_801A146C(HSD_GObj*);
 /* 1A1498 */ UNK_RET fn_801A1498(UNK_PARAMS);
 /* 1A1630 */ static void gmTitle_801A1630(HSD_GObj*);

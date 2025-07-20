@@ -94,7 +94,9 @@
 /* 0874BC */ s32 ftLib_800874BC(HSD_GObj*);
 /* 0874CC */ void ftLib_800874CC(HSD_GObj*, void*, s32);
 /* 087508 */ void ftLib_80087508(s8, u8);
+// /* 087508 */ void ftLib_80087508(FighterKind, u8);
 /* 087574 */ void ftLib_80087574(s8);
+// /* 087574 */ void ftLib_80087574(FighterKind);
 /* 087610 */ void ftLib_80087610(u8);
 /* 0876B4 */ void ftLib_800876B4(HSD_GObj*);
 /* 0876D4 */ bool ftLib_800876D4(HSD_GObj*);

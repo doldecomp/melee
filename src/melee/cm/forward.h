@@ -11,6 +11,5 @@ typedef struct CameraTransformState CameraTransformState;
 typedef struct CameraUnkGlobals CameraUnkGlobals;
 typedef struct CameraDebugMode CameraDebugMode;
 typedef struct CameraModeCallbacks CameraModeCallbacks;
-typedef struct CameraFixednessMult CameraFixednessMult;
 
 #endif

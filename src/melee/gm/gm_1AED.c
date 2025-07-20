@@ -1,7 +1,9 @@
 #include "gm_1AED.h"
 
+#include <sysdolphin/baselib/controller.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_1ADD.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
@@ -9,7 +11,6 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
-#include <sysdolphin/baselib/controller.h>
 
 static u8 gm_804D6870;
 static u16 gm_804D6872;
