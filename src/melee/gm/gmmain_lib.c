@@ -808,12 +808,12 @@ u8 gmMainLib_8015ED30(void)
 
 u8 gmMainLib_8015ED3C(s32 arg0)
 {
-    return gmMainLib_8015CC40()->x1CB0.x10[arg0];
+    return gmMainLib_8015CC40()->x1CB0.rumble[arg0];
 }
 
 void gmMainLib_8015ED4C(s32 arg0, s8 arg1)
 {
-    gmMainLib_804D3EE0->thing.x1CB0.x10[arg0] = arg1;
+    gmMainLib_804D3EE0->thing.x1CB0.rumble[arg0] = arg1;
 }
 
 s32 gmMainLib_8015ED5C(void)
@@ -828,12 +828,12 @@ void gmMainLib_8015ED68(s32 arg0)
 
 u8 gmMainLib_8015ED74(void)
 {
-    return gmMainLib_804D3EE0->thing.x1CB0.x10[4];
+    return gmMainLib_804D3EE0->thing.x1CB0.sound_balance;
 }
 
 void gmMainLib_8015ED80(u8 arg0)
 {
-    gmMainLib_804D3EE0->thing.x1CB0.x10[4] = arg0;
+    gmMainLib_804D3EE0->thing.x1CB0.sound_balance = arg0;
 }
 
 u16* gmMainLib_8015ED8C(void)
@@ -846,9 +846,9 @@ struct gmm_retval_ED98* gmMainLib_8015ED98(void)
     return &gmMainLib_804D3EE0->thing.unk_8;
 }
 
-UNK_T gmMainLib_8015EDA4(void)
+s16* gmMainLib_8015EDA4(void)
 {
-    return &M2C_FIELD(gmMainLib_804D3EE0, UNK_T*, 0x186A);
+    return &M2C_FIELD(gmMainLib_804D3EE0, s16*, 0x186A);
 }
 
 struct gmm_retval_EDB0* gmMainLib_8015EDB0(void)
@@ -909,7 +909,7 @@ void gmMainLib_8015EE54(void)
 void gmMainLib_8015EE68(void)
 {
     gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFD;
-    gmMainLib_804D3EE0->thing.x1CB0.unk = gmMainLib_803D4A60[6];
+    gmMainLib_804D3EE0->thing.x1CB0.stage_mask = gmMainLib_803D4A60[6];
 }
 
 s32 gmMainLib_8015EE90(void)
@@ -962,7 +962,7 @@ u8 gmMainLib_8015F4E8(void)
 
 void gmMainLib_8015F4F4(u8 arg0)
 {
-    gmMainLib_8015CC40()->x1CB0.x10[5] = arg0;
+    gmMainLib_8015CC40()->x1CB0.deflicker = arg0;
 }
 
 /// #gmMainLib_8015F500
@@ -1097,4 +1097,3 @@ void gmMainLib_8015FCC0(void)
     tmp->xC = 0;
     tmp->x10 = lbTime_8000AFBC();
 }
-

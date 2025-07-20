@@ -20,7 +20,7 @@
 /* 3922FC */ UNK_RET hsd_803922FC(UNK_PARAMS);
 /* 392474 */ UNK_RET hsd_80392474(UNK_PARAMS);
 /* 392480 */ UNK_RET fn_80392480(UNK_PARAMS);
-/* 392528 */ UNK_RET hsd_80392528(UNK_PARAMS);
+/* 392528 */ void hsd_80392528(void*);
 /* 39254C */ UNK_RET hsd_8039254C(UNK_PARAMS);
 /* 392934 */ UNK_RET fn_80392934(UNK_PARAMS);
 /* 392A08 */ UNK_RET fn_80392A08(UNK_PARAMS);
@@ -97,7 +97,7 @@
 /* 397DFC */ void hsd_80397DFC(u32 arg0);
 /* 397E0C */ UNK_RET baselib_mfspr(UNK_PARAMS);
 /* 3982E4 */ UNK_RET fn_803982E4(UNK_PARAMS);
-/* 398310 */ UNK_RET hsd_80398310(UNK_PARAMS);
+/* 398310 */ HSD_GObj* hsd_80398310(s32, s32, s32, s32);
 /* 3983A4 */ UNK_RET hsd_803983A4(UNK_PARAMS);
 /* 3984F4 */ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank,
                                      u32* ref, int* formBank);

@@ -69,22 +69,22 @@ void fn_8017C0C8(void)
 {
     PlayerInitData sp8;
     gm_8016795C(&sp8);
-    sp8.x1 = 1;
-    sp8.x2 = 1;
+    sp8.slot_type = 1;
+    sp8.stocks = 1;
     sp8.xE = 4;
-    sp8.xF = Player_GetCpuLevel(2);
+    sp8.cpu_level = Player_GetCpuLevel(2);
     sp8.xE = Player_GetCpuType(2);
     sp8.x18 = Player_GetAttackRatio(2);
     sp8.x1C = Player_GetUnk50(2);
-    sp8.x3 = 0;
-    sp8.x0 = 0x1E;
-    sp8.x9 = 4;
+    sp8.color = 0;
+    sp8.c_kind = 0x1E;
+    sp8.team = 4;
     sp8.xC_b7 = true;
     sp8.x14 = lbl_804706C0.xC;
     sp8.xD_b2 = true;
     sp8.xD_b0 = true;
     sp8.xD_b2 = true;
-    sp8.x6 = 1;
+    sp8.spawn_dir = 1;
     gm_8016EDDC(1, &sp8);
 }
 
@@ -112,7 +112,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         if (tmp->x8 == 0) {
             temp_r3_2 = gm_8016AE38();
             temp_r3_2->x24C8.x2_4 = false;
-            temp_r3_2->unk_5 = 0;
+            temp_r3_2->hud_enabled = 0;
             lbAudioAx_800237A8(0x81650, 0x7F, 0x40);
             ftLib_80086824();
             tmp->x8 = 1;
@@ -150,7 +150,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         break;
     case 2:
         temp_r3_4 = gm_8016AE38();
-        temp_r3_4->unk_5 = 1;
+        temp_r3_4->hud_enabled = 1;
         Stage_80225074(0);
         ftLib_800868A4();
         ftBossLib_8015CC14();
@@ -216,7 +216,7 @@ void fn_8017C1A4(HSD_GObj* unused)
         temp_r29_2 = temp_r3 + temp_r28;
         if (tmp->x8 == 0) {
             temp_r3_4 = gm_8016AE38();
-            temp_r3_4->unk_5 = 0;
+            temp_r3_4->hud_enabled = 0;
             if (tmp->x4 == 2) {
                 tmp->x4 = 1;
             } else {
@@ -287,7 +287,7 @@ void fn_8017C7EC(void)
 
     temp_r30 = fn_8017DF28();
     temp_r31 = gm_8016AE44();
-    temp_r31->unk_28 = grPushOn_80219230(temp_r30->x0);
+    temp_r31->timer_seconds = grPushOn_80219230(temp_r30->x0);
 }
 
 void gm_8017C838(void)

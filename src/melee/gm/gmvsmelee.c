@@ -126,7 +126,7 @@ void gm_801A5680(MinorScene* minor_data, VsModeData* vs_data)
 
     mask = 0;
     for (i = 0; i < 6; i++) {
-        mask |= lbAudioAx_80026E84(css_data->data.data.players[i].x0);
+        mask |= lbAudioAx_80026E84(css_data->data.data.players[i].c_kind);
     }
     lbAudioAx_80026F2C(0x14);
     lbAudioAx_8002702C(4, mask);
@@ -164,7 +164,7 @@ void gm_801A583C(MinorScene* minor_data, VsModeData* vs_data,
     s32 i;
 
     match_start_data = gm_801A427C(minor_data);
-    gm_80167BC8(vs_data);
+    (vs_data);
     match_start_data->rules = vs_data->data.rules;
 
     if (match_start_data->rules.x0_0 == 1) {
