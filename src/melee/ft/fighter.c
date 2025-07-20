@@ -3080,7 +3080,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     }
 
     ftColl_8007B8E8(fp->gobj);
-    efAsync_80067688((struct ef_UnkStruct3*) &fp->x60C);
+    efAsync_80067688(&fp->x60C);
     it_8026B7F8(fp->gobj);
     Camera_800290D4(fp->x890_cameraBox);
     ftCo_UnloadDynamicBones(fp);
