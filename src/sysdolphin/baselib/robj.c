@@ -314,7 +314,7 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 
 static int HSD_RObj_80406E74[3] = { 0x32, 0x33, 0x34 };
 
-void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*, int, HSD_ObjData*))
+static void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*, int, HSD_ObjData*))
 {
     HSD_JObj* jobj;
     int i;

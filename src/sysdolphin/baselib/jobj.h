@@ -5,7 +5,6 @@
 
 #include "baselib/forward.h" // IWYU pragma: export
 
-#include "baselib/aobj.h"
 #include "baselib/class.h"
 #include "baselib/debug.h"
 #include "baselib/list.h"
