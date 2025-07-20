@@ -22,14 +22,10 @@ struct Effect {
     /* +10 */ efLib_UnkCallback x10;
     /* +14 */ void* x14;
     /* +18 */ Vec3 transform;
-    // /* +18 */ f32 x18; // Vec3? scale?
-    // /* +1C */ f32 x1C;
-    // /* +20 */ f32 x20;
     /* +24 */ u16 x24;
     /* +26 */ s8 x26;
     /* +27 */ s8 x27;
-    /* +28 */ s8
-        x28; // Controls effect updates(?) in fn_8005BC50. (2 = do not update)
+    /* +28 */ s8 x28; // Effect update control (?) in fn_8005BC50
     /* +29 */ u8 x29;
     /* +2A */ s8 x2A;
     /* +2B */ s8 x2B;
