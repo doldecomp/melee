@@ -9,6 +9,6 @@ typedef struct ef_UnkStruct3 ef_UnkStruct3;
 typedef struct Effect Effect;
 typedef struct EffectDesc EffectDesc;
 
-typedef UNK_RET (*efLib_UnkCallback)(Effect*);
+typedef void (*efLib_UnkCallback)(Effect*);
 
 #endif
