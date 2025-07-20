@@ -12,7 +12,7 @@
 #include <baselib/wobj.h>
 
 static GXColor erase_colors_vi0501;
-un_804D7004_t un_804D6FA8;
+extern un_804D7004_t un_804D6FA8;
 
 /// #un_8031D9F8
 
@@ -32,9 +32,9 @@ void vi_8031E0F0_OnFrame(void)
     vi_8031CAAC();
 }
 
-void un_8031E110(s8 arg0, s8 arg1, s8 arg2)
+void un_8031E110(int arg0, int arg1, int arg2)
 {
-    M2C_FIELD(&un_804D6FA8, s8*, 0) = arg0;
-    M2C_FIELD(&un_804D6FA8, s8*, 1) = arg1;
-    M2C_FIELD(&un_804D6FA8, s8*, 3) = arg2;
+    M2C_FIELD(&un_804D6FA8, u8*, 0) = arg0;
+    M2C_FIELD(&un_804D6FA8, u8*, 1) = arg1;
+    M2C_FIELD(&un_804D6FA8, u8*, 3) = arg2;
 }

@@ -6,10 +6,10 @@
 #include <baselib/gobj.h>
 
 typedef struct un_804D6F60_t {
-    /* 0x0 */ s8 unk_0; /* inferred */
-    /* 0x1 */ s8 unk_1; /* inferred */
-    /* 0x2 */ s8 unk_2; /* inferred */
-    /* 0x3 */ s8 unk_3; /* inferred */
+    /* 0x0 */ u8 unk_0; /* inferred */
+    /* 0x1 */ u8 unk_1; /* inferred */
+    /* 0x2 */ u8 unk_2; /* inferred */
+    /* 0x3 */ u8 unk_3; /* inferred */
     /* 0x4 */ char pad_2[4];
 } un_804D6F60_t; /* size = 0x8 */
 STATIC_ASSERT(sizeof(un_804D6F60_t) == 0x8);
@@ -20,6 +20,6 @@ STATIC_ASSERT(sizeof(un_804D6F60_t) == 0x8);
 /* 31CD20 */ void vi0102_8031CD20(HSD_GObj*);
 /* 31CD94 */ void vi0102_Initialize_OnEnter(un_804D6F60_t*);
 /* 31D000 */ void vi0102_8031D000_OnFrame(void);
-/* 31D020 */ void vi0102_8031D020(s8, s8);
+/* 31D020 */ void vi0102_8031D020(int, int);
 
 #endif

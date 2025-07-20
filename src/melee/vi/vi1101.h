@@ -9,6 +9,6 @@
 /* 31F600 */ UNK_RET fn_8031F600(UNK_PARAMS);
 /* 31F714 */ void un_8031F714_OnEnter(UNK_T);
 /* 31F960 */ void un_8031F960_OnFrame(void);
-/* 31F980 */ void un_8031F980(s8 arg0, s8 arg1);
+/* 31F980 */ void un_8031F980(int arg0, int arg1);
 
 #endif

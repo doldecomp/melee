@@ -14,6 +14,6 @@
 /* 31FCBC */ UNK_RET fn_8031FCBC(UNK_PARAMS);
 /* 31FD18 */ void un_8031FD18_OnEnter(UNK_T);
 /* 320490 */ void un_80320490_OnFrame(void);
-/* 3204B0 */ void un_803204B0(s8, s8);
+/* 3204B0 */ void un_803204B0(int, int);
 
 #endif
