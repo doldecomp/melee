@@ -955,27 +955,27 @@ void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
     pl_8003E4A4(fp->player_id, fp->x221F_b4, arg1, arg2);
 }
 
-void ftLib_80087508(FighterKind arg0, u8 arg1)
+void ftLib_80087508(FighterKind ft_kind, u8 arg1)
 {
-    ftData_8008572C(arg0);
-    efAsync_8006737C(ftData_UnkBytePerCharacter[arg0]);
-    ftData_80085820(arg0, arg1);
-    ftData_80085A14(arg0);
-    ftData_800857E0(arg0);
+    ftData_8008572C(ft_kind);
+    efAsync_8006737C(ftData_UnkBytePerCharacter[ft_kind]);
+    ftData_80085820(ft_kind, arg1);
+    ftData_80085A14(ft_kind);
+    ftData_800857E0(ft_kind);
 }
 
-void ftLib_80087574(FighterKind arg)
+void ftLib_80087574(FighterKind ft_kind)
 {
     u8 i;
-    ftData_8008572C(arg);
-    efAsync_8006737C(ftData_UnkBytePerCharacter[arg]);
+    ftData_8008572C(ft_kind);
+    efAsync_8006737C(ftData_UnkBytePerCharacter[ft_kind]);
 
-    for (i = 0; i < CostumeListsForeachCharacter[arg].numCostumes; i++) {
-        ftData_80085820(arg, i);
+    for (i = 0; i < CostumeListsForeachCharacter[ft_kind].numCostumes; i++) {
+        ftData_80085820(ft_kind, i);
     }
 
-    ftData_80085A14(arg);
-    ftData_800857E0(arg);
+    ftData_80085A14(ft_kind);
+    ftData_800857E0(ft_kind);
 }
 
 void ftLib_80087610(u8 arg0)
