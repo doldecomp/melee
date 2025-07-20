@@ -1341,7 +1341,7 @@ void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, int index)
     }
 }
 
-void efAsync_8006737C(int index)
+void efAsync_8006737C(s8 index)
 {
     struct _struct_efAsync_803C025C_0xC* spC;
     bool chk;

@@ -342,7 +342,7 @@ void gm_8017C838(void)
     }
 
     for (i = 0; i < 3; i++) {
-        if (*var_r31 != FTKIND_MAX) {
+        if (*var_r31 != (s8) FTKIND_MAX) {
             ftLib_80087574(*var_r31);
         }
         var_r31++;
