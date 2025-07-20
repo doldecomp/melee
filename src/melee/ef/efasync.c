@@ -1432,33 +1432,34 @@ void efAsync_8006744C(HSD_GObj* gobj, ef_UnkStruct3* arg1)
     HSD_ObjFree(&efSync_80458FA0, arg1);
 }
 
-// void efAsync_80067624(HSD_GObj* gobj, void* arg1) {
-void efAsync_80067624(HSD_GObj* gobj, ef_UnkStruct3* arg1)
+void efAsync_80067624(HSD_GObj* gobj, void* arg_struct)
+// void efAsync_80067624(HSD_GObj* gobj, ef_UnkStruct3* arg_struct)
 {
     ef_UnkStruct3* temp_r31;
     ef_UnkStruct3* var_r4;
 
-    var_r4 = arg1->next;
+    var_r4 = ((ef_UnkStruct3*) arg_struct)->next;
     while (var_r4 != NULL) {
         temp_r31 = var_r4->next;
         efAsync_8006744C(gobj, var_r4);
         var_r4 = temp_r31;
     }
-    arg1->next = NULL;
+    ((ef_UnkStruct3*) arg_struct)->next = NULL;
 }
 
-void efAsync_80067688(ef_UnkStruct3* arg_struct)
+void efAsync_80067688(void* arg_struct)
+// void efAsync_80067688(ef_UnkStruct3* arg_struct)
 {
     ef_UnkStruct3* temp_r30;
     ef_UnkStruct3* var_r4;
 
-    var_r4 = arg_struct->next;
+    var_r4 = ((ef_UnkStruct3*) arg_struct)->next;
     while (var_r4 != NULL) {
         temp_r30 = var_r4->next;
         HSD_ObjFree(&efSync_80458FA0, var_r4);
         var_r4 = temp_r30;
     }
-    arg_struct->next = NULL;
+    ((ef_UnkStruct3*) arg_struct)->next = NULL;
 }
 
 void efAsync_Spawn(HSD_GObj* gobj, void* arg1, u32 eff_type, u32 gfx_id,
