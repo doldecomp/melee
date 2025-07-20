@@ -23,28 +23,6 @@ struct gm_804D6804_t {
     /* +4 */ float x4;
 };
 
-static struct unkd4d0 {
-    struct unkd4d0* next;
-    struct unkd4d0* unk4;
-    struct unkd4d0_8 {
-        struct unkd4d0_8* next;
-        struct unkd4d0_8* unk4;
-        int unk8;
-        int unkC;
-        float unk10;
-        float unk14;
-        u8 pad18[0x8];
-        HSD_GObj* unk20;
-        HSD_Text* unk24;
-    }* unk8;
-    int unkC;
-    int unk10;
-    float unk14;
-    float unk18;
-    HSD_GObj* unk1C;
-    HSD_Text* unk20;
-} gm_803DD4D0 = { 0 };
-
 /* 4D6730 */ static UNK_T gm_804D6730;
 
 /* 4D67F8 */ static struct {
@@ -87,7 +65,6 @@ static struct unkd4d0 {
 /* 4D6844 */ static DynamicModelDesc** gm_804D6844;
 /* 4D6848 */ static s32 gm_804D6848;
 /* 4D684C */ static s32 gm_804D684C;
-/* 4D6868 */ static SceneDesc* gm_804D6868;
 
 /* 3DD0F0 */ static HSD_CObjDesc gm_803DD0F0;
 /* 3DD2C0 */ extern int gm_803DD2C0[74];

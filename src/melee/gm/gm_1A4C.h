@@ -70,27 +70,5 @@
 /* 1ACD8C */ void gm_801ACD8C_OnFrame(void);
 /* 1ACE94 */ void gm_801ACE94_OnEnter(UNK_T);
 /* 1ACF8C */ void gm_801ACF8C_OnFrame(void);
-/* 1AD088 */ void gm_801AD088(void);
-/* 1AD254 */ void gm_801AD254(int);
-/* 1AD620 */ void gm_801AD620_OnFrame(void);
-/* 1AD874 */ void gm_801AD874_OnEnter(void*);
-/* 1AD8EC */ void gm_801AD8EC_OnLeave(void*);
-/* 1AD920 */ void fn_801AD920(HSD_GObj*);
-/* 1ADB04 */ void gm_801ADB04(void);
-/* 1ADC88 */ void gm_801ADC88_OnFrame(void);
-/* 1ADCE4 */ void gm_801ADCE4_OnEnter(void*);
-/* 1ADDA8 */ void gm_801ADDA8_OnLeave(void*);
-/* 1ADDD8 */ void gm_801ADDD8(void);
-/* 1ADE1C */ bool gm_801ADE1C(int, int, float, float);
-/* 1AE050 */ bool gm_801AE050(int, int, int, float, float);
-/* 1AE44C */ void gm_801AE44C(int, float);
-/* 1AE544 */ void gm_801AE544(int, float);
-/* 1AE640 */ void gm_801AE640(int, bool);
-/* 1AE74C */ void gm_801AE74C(int, bool);
-/* 1AE848 */ void gm_801AE848(int);
-/* 1AE948 */ void fn_801AE948(HSD_GObj*);
-/* 1AEBB0 */ UNK_RET gm_801AEBB0(UNK_PARAMS);
-/* 1AECC4 */ HSD_GObj* gm_801AECC4(int);
-/* 1AEDC8 */ u32 gm_801AEDC8(void);
 
 #endif
