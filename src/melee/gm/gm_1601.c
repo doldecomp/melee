@@ -678,7 +678,7 @@ HSD_GObj* gm_80165388(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
 
     temp_r3 = hsd_80398310(arg0, arg1, arg2, arg3);
     if (temp_r3 != NULL) {
-        hsd_80392528(fn_801652D8);
+        hsd_80392528((Event)fn_801652D8);
     }
     return temp_r3;
 }
