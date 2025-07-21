@@ -4,17 +4,22 @@
 #include "gm_1601.h"
 
 #include "gmmain_lib.h"
+#include "runtime.h"
+#include "stddef.h"
 
 #include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/controller.h>
 
+#include "baselib/gobjplink.h"
+#include "baselib/particle.h"
 #include "cm/camera.h"
 #include "db/db.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
+#include "if/ifstatus.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -24,30 +29,262 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "ty/toy.h"
 
 #include <m2c_macros.h>
 
-/// #gm_801601C4
+static struct VictoryTheme lbl_803D5480[0x1B] = {
+    { 0x0, 0x11 },
+    { 0x1, 0xD },
+    { 0x2, 0x10 },
+    { 0x3, 0xF },
+    { 0x4, 0x14 },
+    { 0x5, 0x16 },
+    { 0x6, 0x15 },
+    { 0x7, 0x16 },
+    { 0x8, 0x16 },
+    { 0x9, 0xE },
+    { 0xA, 0x18 },
+    { 0xB, 0x17 },
+    { 0xC, 0x16 },
+    { 0xD, 0x18 },
+    { 0xE, 0x13 },
+    { 0xF, 0x18 },
+    { 0x10, 0x19 },
+    { 0x11, 0x1D },
+    { 0x12, 0x15 },
+    { 0x13, 0x15 },
+    { 0x14, 0x10 },
+    { 0x15, 0x15 },
+    { 0x16, 0x16 },
+    { 0x17, 0xE },
+    { 0x18, 0x18 },
+    { 0x19, 0x15 },
+    { 0x21, -1 },
+};
 
-/// #gm_80160244
+static struct ResultAnimEntry lbl_803D53A8[0x1B] = {
+    { 0, "GmRstMCa.dat" },
+    { 0x15, "GmRstMCl.dat" },
+    { 1, "GmRstMDk.dat" },
+    { 0x16, "GmRstMDr.dat" },
+    { 0x14, "GmRstMFc.dat" },
+    { 2, "GmRstMFx.dat" },
+    { 3, "GmRstMGw.dat" },
+    { 0x19, "GmRstMGn.dat" },
+    { 4, "GmRstMKb.dat" },
+    { 5, "GmRstMKp.dat" },
+    { 6, "GmRstMLk.dat" },
+    { 7, "GmRstMLg.dat" },
+    { 9, "GmRstMMs.dat" },
+    { 8, "GmRstMMr.dat" },
+    { 0xA, "GmRstMMt.dat" },
+    { 0xB, "GmRstMNs.dat" },
+    { 0xE, "GmRstMPn.dat" },
+    { 0xC, "GmRstMPe.dat" },
+    { 0xD, "GmRstMPk.dat" },
+    { 0x18, "GmRstMPc.dat" },
+    { 0xF, "GmRstMPr.dat" },
+    { 0x10, "GmRstMSs.dat" },
+    { 0x13, "GmRstMSk.dat" },
+    { 0x11, "GmRstMYs.dat" },
+    { 0x12, "GmRstMZd.dat" },
+    { 0x17, "GmRstMFe.dat" },
+    { 0x21, NULL },
+};
 
-/// #gm_801602C0
+#pragma dont_inline on
+u8 gm_801601C4(s8 arg0)
+{
+    f32 temp_f1;
 
-/// #gm_801603B0
+    temp_f1 = ((arg0 + 0x64) / 200.0f);
+    if (temp_f1 * 100.f == 50.0f) {
+        return 0x7F;
+    }
+    if (temp_f1 > 50.0f) {
+        return 127.0f * ((100.0f - temp_f1) / 50.0f);
+    }
+    return 0x7F;
+}
 
-/// #fn_80160400
+u8 gm_80160244(s8 arg0)
+{
+    f32 temp_f2;
 
-/// #gm_80160438
+    temp_f2 = ((arg0 + 0x64) / 200.0f) * 100.0f;
+    if (temp_f2 == 50.0f) {
+        return 0x7F;
+    }
+    if (temp_f2 > 50.0f) {
+        return 0x7F;
+    }
+    return (127.0f * (temp_f2 / 50.0f));
+}
+#pragma dont_inline reset
 
-/// #gm_80160474
+void gm_801602C0(s8 arg0)
+{
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f3;
+    s32 var_r0;
+    s32 var_r0_2;
+    PAD_STACK(8); // maybe an inlined function somewhere
 
-/// #gm_801604DC
+    temp_f3 = (arg0 + 0x64) / 200.0f;
+    temp_f1 = temp_f3 * 100.0f;
 
-/// #gm_80160564
+    if (temp_f1 == 50.0f) {
+        var_r0 = 0x7F;
+    } else if (temp_f1 > 50.0f) {
+        var_r0 = 0x7F;
+    } else {
+        var_r0 = (127.0f * (temp_f1 / 50.0f));
+    }
 
-/// #fn_801605EC
+    temp_f1_2 = temp_f3 * 100.0f;
+    if (temp_f1_2 == 50.0f) {
+        var_r0_2 = 0x7F;
+    } else if (temp_f1_2 > 50.0f) {
+        var_r0_2 = (127.0f * ((100.0f - temp_f1_2) / 50.0f));
+    } else {
+        var_r0_2 = 0x7F;
+    }
 
-/// #gm_80160638
+    lbAudioAx_80024614(var_r0_2);
+    lbAudioAx_800245F4(var_r0);
+}
+
+void gm_801603B0(void)
+{
+    u8 temp_r31;
+    s8 temp_r3;
+
+    temp_r3 = gmMainLib_8015ED74();
+    temp_r31 = gm_80160244(temp_r3);
+
+    lbAudioAx_80024614(gm_801601C4(temp_r3));
+    lbAudioAx_800245F4(temp_r31);
+}
+
+u32 fn_80160400(s32 cid)
+{
+    struct VictoryTheme* theme = lbl_803D5480;
+    u8 id;
+
+    while (true) {
+        if (theme->character_id == cid) {
+            return theme->theme_id;
+        }
+
+        id = theme[1].character_id;
+        theme++;
+
+        if ((s32)id == 0x21) {
+            return -1;
+        }
+    }
+}
+
+char* gm_80160438(s32 cid)
+{
+    struct ResultAnimEntry* entry = lbl_803D53A8;
+    s32 id;
+
+    while (true) {
+        id = entry->character_id;
+        if (id == cid || id == 0x21) {
+            return entry->path;
+        }
+        id = entry[1].character_id;
+        entry++;
+        if (id == 0x21) {
+            return NULL;
+        }
+    }
+}
+
+bool gm_80160474(enum CharacterKind c_kind, enum MajorSceneKind scene)
+{
+    switch (scene) {
+    case MJ_CLASSIC_GOVER:
+    case MJ_CLASSIC:
+        return lbl_803B75F8._380[c_kind];
+    case MJ_ADVENTURE_GOVER:
+    case MJ_ADVENTURE:
+        return lbl_803B75F8._3C4[c_kind];
+    default:
+        return lbl_803B75F8._408[c_kind];
+    }
+}
+
+char* gm_801604DC(enum CharacterKind c_kind, enum MajorSceneKind scene)
+{
+    s16 var_r3;
+
+    switch (scene) {
+    case MJ_CLASSIC_GOVER:
+    case MJ_CLASSIC:
+        var_r3 = lbl_803B75F8._380[c_kind];
+        break;
+    case MJ_ADVENTURE_GOVER:
+    case MJ_ADVENTURE:
+        var_r3 = lbl_803B75F8._3C4[c_kind];
+        break;
+    default:
+        var_r3 = lbl_803B75F8._408[c_kind];
+        break;
+    }
+    return un_8030813C(var_r3, scene) + 4;
+}
+
+char* gm_80160564(enum CharacterKind c_kind, enum MajorSceneKind scene)
+{
+    s16 var_r3;
+
+    switch (scene) {
+    case MJ_CLASSIC_GOVER:
+    case MJ_CLASSIC:
+        var_r3 = lbl_803B75F8._380[c_kind];
+        break;
+    case MJ_ADVENTURE_GOVER:
+    case MJ_ADVENTURE:
+        var_r3 = lbl_803B75F8._3C4[c_kind];
+        break;
+    default:
+        var_r3 = lbl_803B75F8._408[c_kind];
+        break;
+    }
+    return un_8030813C(var_r3, scene) + 0x24;
+}
+
+s8 fn_801605EC(s32 arg0)
+{
+    struct lbl_803B78C8_0x6* entry = lbl_803B78C8;
+    s32 i;
+
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; entry++, i++) {
+        if (arg0 == entry->x1) {
+            return lbl_803B78C8[i].x0;
+        }
+    }
+    return NUM_UNLOCKABLE_CHARACTERS;
+}
+
+s8 gm_80160638(s32 arg0)
+{
+    s32 temp_r4 = gm_80164024(arg0);
+    struct lbl_803B78C8_0x6* entry = lbl_803B78C8;
+    u32 i;
+
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; entry++, i++) {
+        if (temp_r4 == entry->x1) {
+            return lbl_803B78C8[i].x0;
+        }
+    }
+    return NUM_UNLOCKABLE_CHARACTERS;
+}
 
 /// #fn_801606A8
 
@@ -67,7 +304,60 @@ u8 fn_80160840(u8 arg0)
     return arg0;
 }
 
-/// #gm_80160854
+u32 gm_80160854(u8 slot, u8 team, u8 is_teams, u8 slot_type)
+{
+    u8 color_idx;
+
+    if (is_teams != 0) {
+        switch (team) {                       /* switch 1; irregular */
+        case 0:                                     /* switch 1 */
+            if (slot_type == 0) {
+                color_idx = 0;
+            } else {
+                color_idx = 5;
+            }
+            return color_idx;
+        case 1:                                     /* switch 1 */
+            if (slot_type == 0) {
+                color_idx = 1;
+            } else {
+                color_idx = 6;
+            }
+            return color_idx;
+        case 2:                                     /* switch 1 */
+            if (slot_type == 0) {
+                color_idx = 3;
+            } else {
+                color_idx = 8;
+            }
+            return color_idx;
+        case 3:                                     /* switch 1 */
+            if (slot_type == 0) {
+                color_idx = 2;
+            } else {
+                color_idx = 7;
+            }
+            return color_idx;
+        case 4:                                     /* switch 1 */
+            return 4U;
+        }
+    } else {
+        if (slot_type != 0) {
+            return 4U;
+        }
+        switch (slot) {                       /* irregular */
+        case 0:
+            return 0U;
+        case 1:
+            return 1U;
+        case 2:
+            return 2U;
+        case 3:
+            return 3U;
+        }
+    }
+    return 0;
+}
 
 U8Vec4 gm_80160968(u8 arg0)
 {
@@ -263,7 +553,11 @@ u16 gm_801641CC(u8 arg0)
 
 /// #gm_8016468C
 
-/// #gm_801647D0
+void gm_801647D0(void)
+{
+    s16 *temp_r3 = gmMainLib_8015EDA4();
+    *temp_r3 = 0;
+}
 
 /// #gm_801647F8
 
@@ -309,35 +603,120 @@ bool gm_80164ABC(void)
 
 /// #gm_80164F18
 
-/// #gm_8016505C
+void gm_8016505C(void)
+{
+    u16 *temp_r3 = gmMainLib_8015ED8C();
+    *temp_r3 = 0;
+}
 
-/// #gm_80165084
+bool gm_80165084(void)
+{
+    s32 i;
+    bool result = true;
 
-/// #fn_801650E8
+    for (i = 0; i <= 0x1B; i++) {
+        if (i != 0x1A && gmMainLib_8015D94C(i) == 0) {
+            result = false;
+            break;
+        }
+    }
 
-/// #fn_80165108
+    return result;
+}
 
-/// #fn_80165190
+void fn_801650E8(void)
+{
+    Ground_801C5800();
+}
 
-/// #fn_801651FC
+void fn_80165108(int slot, int arg1)
+{
+    if (slot == -1) {
+        Camera_8002F73C(0xB, 5);
+        return;
+    }
+    if (((Player_GetPlayerSlotType(slot) == 0) || (Player_GetPlayerSlotType(slot) == 1)) && (Player_GetEntity(slot) != NULL)) {
+        Camera_8002F73C(slot, arg1);
+    }
+}
 
-/// #gm_80165268
+void fn_80165190(s32 slot, s32 arg1)
+{
+    if (((Player_GetPlayerSlotType(slot) == 0) || (Player_GetPlayerSlotType(slot) == 1)) && (Player_GetEntity(slot) != NULL)) {
+        Camera_8002F760(slot, arg1);
+    }
+}
 
-/// #gm_80165290
+void fn_801651FC(s32 slot, s32 arg1)
+{
+    if (((Player_GetPlayerSlotType(slot) == 0) || (Player_GetPlayerSlotType(slot) == 1)) && (Player_GetEntity(slot) != NULL)) {
+        Camera_8002F784(slot, arg1);
+    }
+}
 
-/// #fn_801652B0
+void gm_80165268(void)
+{
+    Camera_8002FC7C(4, 3);
+}
+
+void gm_80165290(void)
+{
+    Camera_8002F8F4();
+}
+
+void fn_801652B0(s32 arg0, s32 arg1)
+{
+    Camera_8002F9E4(arg0, arg1);
+}
 
 /// #fn_801652D8
 
-/// #gm_80165388
+/// creates the develop mode stress test
+HSD_GObj* gm_80165388(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+{
+    HSD_GObj *temp_r3;
 
-/// #gm_801653C8
+    temp_r3 = hsd_80398310(arg0, arg1, arg2, arg3);
+    if (temp_r3 != NULL) {
+        hsd_80392528((Event)fn_801652D8);
+    }
+    return temp_r3;
+}
 
-/// #fn_801653E8
+/// frees the develop mode stress test
+void gm_801653C8(HSD_GObj* gobj)
+{
+    HSD_GObjPLink_80390228(gobj);
+}
 
-/// #fn_80165418
+f64 fn_801653E8(u8 arg0)
+{
+    return (0.1f * arg0);
+}
 
-/// #fn_801654A0
+u8 fn_80165418(MatchEnd* match_end)
+{
+    u8 winner = 0;
+    s32 i;
+    for (i = 0; i < 4; i++) {
+        if (match_end->player_standings[i].slot_type != 3 && match_end->player_standings[i].is_small_loser == 0) {
+            winner = i;
+        }
+    }
+    return winner;
+}
+
+u8 fn_801654A0(MatchEnd* match_end)
+{
+    u8 winner = 0;
+    s32 i;
+    for (i = 0; i < 5; i++) {
+        if (match_end->team_standings[i].active != 0 && match_end->team_standings[i].is_small_loser == 0) {
+            winner = i;
+        }
+    }
+    return winner;
+}
 
 /// #fn_80165548
 
@@ -380,14 +759,84 @@ u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0, ssize_t index)
 
 /// #gm_80166CCC
 
-/// #gm_80167140
-
-u8 fn_80167194(void* arg0)
+bool gm_80167140(MatchEnd* me)
 {
-    return M2C_FIELD(arg0, u8*, 0xD);
+    s32 winners;
+
+    if (me->result != 7) {
+        if (me->is_teams == 1) {
+            winners = me->n_team_winners;
+        } else {
+            winners = fn_80167194(me);
+        }
+        if (winners > 1) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
-/// #fn_8016719C
+
+u8 fn_80167194(MatchEnd* me)
+{
+    return M2C_FIELD(me, u8*, 0xD);
+}
+
+void fn_8016719C(s32 slot, s32 subchar)
+{
+    Vec3 respawn_pos;
+    Vec3 offset;
+    f32 var_f1;
+    lbl_8046B6A0_t* match_info;
+    s32 var_r30;
+    s32 stage_id;
+    u8* temp_r4;
+    u8 temp_r3;
+
+    match_info = gm_8016AE44();
+    stage_id = gm_8016B004();
+    if (Stage_80224DC8(stage_id) != 0) {
+        var_r30 = Ground_801C5774();
+        Stage_80224E38(&respawn_pos, var_r30);
+        offset.z = 0.0f;
+        offset.y = 0.0f;
+        offset.x = 0.0f;
+        if ((stage_id != 0x4C) && (subchar == 0)) {
+            Ground_801C38BC(respawn_pos.x, respawn_pos.y);
+            Camera_8002F3AC();
+        }
+    } else {
+        var_r30 = fn_80167638(slot, &respawn_pos, &offset);
+    }
+    respawn_pos.x += offset.x;
+    Player_SetSpawnPlatformPos(slot, &respawn_pos);
+
+    if (!(((u8)stage_info.unk8C.b0 >> 2U) & 1)) {
+        Player_80032FA4(slot, var_r30);
+        Player_SetSomePos(slot, &offset);
+    }
+
+    respawn_pos.y = Stage_GetCamBoundsTopOffset();
+    Player_80032768(slot, &respawn_pos);
+    if (respawn_pos.x >= 0.0f) {
+        var_f1 = -1.0f;
+    } else {
+        var_f1 = 1.0f;
+    }
+    Player_SetFacingDirection(slot, var_f1);
+    Player_SetHPByIndex(slot, subchar, match_info->FighterMatchInfo[slot].x6);
+    Player_80032070(slot, subchar);
+    if (subchar != 1) {
+        ifStatus_802F6508(slot);
+        temp_r4 = (u8*)&match_info->FighterMatchInfo[slot].xC;
+        temp_r3 = *temp_r4;
+        if ((temp_r3 >> 7U) & 1) {
+            *temp_r4 &= 0x80;
+            Camera_800310E8();
+        }
+    }
+}
 
 /// #gm_80167320
 
@@ -420,22 +869,22 @@ u8 gm_801677F0(void)
 void gm_8016795C(struct PlayerInitData* arg0)
 {
     memzero(arg0, sizeof(*arg0));
-    arg0->x0 = 0x21;
-    arg0->x1 = 3;
-    arg0->x2 = 0;
-    arg0->x3 = 0;
-    arg0->x4 = 0;
+    arg0->c_kind = 0x21;
+    arg0->slot_type = 3;
+    arg0->stocks = 0;
+    arg0->color = 0;
+    arg0->slot = 0;
     arg0->x5 = -1;
-    arg0->x6 = 0;
+    arg0->spawn_dir = 0;
     arg0->xB = 0;
-    arg0->x7 = 0;
-    arg0->x8 = 9;
-    arg0->x9 = 0;
+    arg0->sub_color = 0;
+    arg0->handicap = 9;
+    arg0->team = 0;
     arg0->xC_b0 = false;
     arg0->xA = 0x78;
     arg0->xC_b1 = true;
     arg0->xE = 4;
-    arg0->xF = 0;
+    arg0->cpu_level = 0;
     arg0->x12 = 0;
     arg0->x14 = 0;
     arg0->x18 = 1.0F;
@@ -491,7 +940,141 @@ void gm_80167B50(VsModeData* arg0)
     arg0->winner = -1;
 }
 
-/// #gm_80167BC8
+void gm_80167BC8(VsModeData* vs_data)
+{
+    GameRules* rules;
+    struct gmm_x1CB0* prefs;
+    s32 i;
+    s8* handicap;
+
+    rules = gmMainLib_8015CC34();
+    prefs = gmMainLib_8015CC58();
+    vs_data->data.rules.x0_6 = 0;
+
+    switch (rules->mode) {
+    case 0:
+        vs_data->data.rules.x0_0 = 0;
+        if (rules->time_limit != 0) {
+            vs_data->data.rules.x0_6 = 1;
+            vs_data->data.rules.x10 = rules->time_limit * 60;
+        }
+        break;
+    case 1:
+        vs_data->data.rules.x0_0 = 1;
+       if (rules->stock_time_limit != 0) {
+           vs_data->data.rules.x0_6 = 1;
+           vs_data->data.rules.x10 = rules->stock_time_limit * 60;
+           break;
+        }
+        break;
+    case 2:
+        vs_data->data.rules.x0_0 = 2;
+        if (rules->time_limit != 0) {
+            vs_data->data.rules.x0_6 = 1;
+            vs_data->data.rules.x10 = rules->time_limit * 60;
+        }
+        break;
+    case 3:
+       vs_data->data.rules.x0_0 = 3;
+        if (rules->time_limit != 0) {
+            vs_data->data.rules.x0_6 = 1;
+            vs_data->data.rules.x10 = rules->time_limit * 60;
+        }
+        break;
+    }
+
+    i = 0;
+    for (i = 0; i < 6; i++) {
+        vs_data->data.players[i].stocks = (s8) rules->stock_count;
+        switch(rules->handicap) {
+            case 0:
+                vs_data->data.players[i].x18 = 1.0f;
+                vs_data->data.players[i].x1C = 1.0f;
+                break;
+            case 1:
+                handicap = gmMainLib_8015CE44(i, (s32) vs_data->data.players[i].xA);
+                if (handicap != NULL)
+                {
+                    vs_data->data.players[i].handicap = *handicap;
+                    // TODO :: fix these to actually get the offensive and defensive ratios
+                    // just not sure how to setup the structs
+                    vs_data->data.players[i].x18 = lbl_803B7930[(u8)*handicap].x;
+                    vs_data->data.players[i].x1C = lbl_803B7930[(u8)*handicap].y;
+                }
+                else {
+                    vs_data->data.players[i].handicap = 5;
+                    vs_data->data.players[i].x18 = 0.61f;
+                    vs_data->data.players[i].x1C = 1.6393442f;
+                }
+                break;
+            case 2:
+                vs_data->data.players[i].x18 = lbl_803B7930[(u8)vs_data->data.players[i].handicap].x;
+                vs_data->data.players[i].x1C = lbl_803B7930[(u8)vs_data->data.players[i].handicap].y;
+                break;
+        }
+    }
+
+    vs_data->data.rules.x1_7 = (rules->friendly_fire & 1);
+    vs_data->data.rules.x30 = 0.1f * rules->damage_ratio;
+    vs_data->data.rules.xB = (s8) prefs->item_freq;
+    prefs = gmMainLib_8015CC58();
+
+    // TODO :: some weird item copy thing that needs to be fixed
+    i = 0;
+    do{
+        if ((s32) lbl_803B75F8.pad_x24C[i] != 0x23) {
+            // prefs->item_mask = vs_data->data.rules.x20;
+            if ((prefs->item_mask & (1LL << i))) {
+                vs_data->data.rules.x20 |= (1LL << prefs->item_mask);
+            } else {
+                vs_data->data.rules.x20 &= ~(1LL << prefs->item_mask);
+            }
+
+        }
+    } while (i < 0x20);
+    // this is what decomp.py spits out
+    // temp_r31 = gmMainLib_8015CC58();
+    // var_r28_2 = 0;
+    // do {
+    //     if ((s32) lbl_803B75F8.pad_x24C[var_r28_2] != 0x23) {
+    //         __shl2i();
+    //         if ((((temp_r31->unkC & M2C_ERROR(/* Read from unset register $r4 */)) ^ 0) | ((temp_r31->unk8 & M2C_ERROR(/* Read from unset register $r3 */)) ^ 0)) != 0) {
+    //             __shl2i();
+    //             arg0->unk2C = (s32) (arg0->unk2C | M2C_ERROR(/* Read from unset register $r4 */));
+    //             arg0->unk28 = (s32) (arg0->unk28 | M2C_ERROR(/* Read from unset register $r3 */));
+    //         } else {
+    //             __shl2i();
+    //             arg0->unk2C = (s32) (arg0->unk2C & ~(M2C_ERROR(/* Read from unset register $r4 */) | M2C_ERROR(/* Read from unset register $r4 */)));
+    //             arg0->unk28 = (s32) (arg0->unk28 & ~(M2C_ERROR(/* Read from unset register $r3 */) | M2C_ERROR(/* Read from unset register $r3 */)));
+    //         }
+    //     }
+    //     var_r28_2 += 1;
+    // } while (var_r28_2 < 0x20);
+
+    switch (gmMainLib_8015ED30()) {
+    case 1:
+        vs_data->data.rules.xC = 0;
+        break;
+    case 0:
+        vs_data->data.rules.xC = -1;
+        break;
+    case 2:
+        vs_data->data.rules.xC = -2;
+        break;
+    }
+
+    if (rules->pause != 0) {
+        vs_data->data.rules.x2_4 = 0;
+    } else {
+        vs_data->data.rules.x2_4 = 1;
+    }
+    if ((rules->score_display != 0) && (rules->mode == 0)) {
+        vs_data->data.rules.x3_0 = 1;
+        return;
+    }
+    vs_data->data.rules.x3_0 = 0;
+}
+
 
 /// #gm_80167FC4
 

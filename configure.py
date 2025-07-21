@@ -880,7 +880,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmtou.c"),
             Object(NonMatching, "melee/gm/gm_19EF.c"),
             Object(Matching, "melee/gm/gmpause.c"),
-            Object(NonMatching, "melee/gm/gmtitle.c"),
+            Object(Equivalent, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),
             Object(NonMatching, "melee/gm/gm_1A36.c"),
             Object(NonMatching, "melee/gm/gm_1A3F.c"),

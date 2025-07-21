@@ -240,10 +240,10 @@ void gm_801B0348(StartMeleeData* arg0)
             if (i == j) {
                continue;
             }
-            if (arg0->players[i].x9 == arg0->players[j].x9 &&
-                arg0->players[i].x0 == arg0->players[j].x0 &&
-                arg0->players[i].x7 == arg0->players[j].x7) {
-                arg0->players[j].x7++;
+            if (arg0->players[i].team == arg0->players[j].team &&
+                arg0->players[i].c_kind == arg0->players[j].c_kind &&
+                arg0->players[i].sub_color == arg0->players[j].sub_color) {
+                arg0->players[j].sub_color++;
             }
         }
     }
@@ -261,11 +261,11 @@ static inline void player_standings_inline(StartMeleeData* arg0, MatchEnd* arg1,
                 var_r6 = 0x12;
             }
         }
-        arg0->players[i].x0 = var_r6;
-        arg0->players[i].x2 = 1;
+        arg0->players[i].c_kind = var_r6;
+        arg0->players[i].stocks = 1;
         arg0->players[i].x12 = 0x12C;
     } else {
-        arg0->players[i].x1 = 3;
+        arg0->players[i].slot_type = 3;
     }
 }
 
@@ -300,7 +300,7 @@ void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
     arg0->rules.x2_5 = false;
 
     for (i = 0; i < 6; i++) {
-        if (arg0->players[i].x1 != 3) {
+        if (arg0->players[i].slot_type != 3) {
             var_r7 = gm_801B0474_inline(arg1, i);
             if (arg1->is_teams == 1) {
                 player_standings_inline(arg0, arg1, i, var_r7,
@@ -315,32 +315,32 @@ void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
 
 void gm_801B05F4(PlayerInitData* arg0, int arg1)
 {
-    arg0->x4 = arg1 + 1;
+    arg0->slot = arg1 + 1;
     if (arg1 == 2) {
         arg1 = 3;
     } else if (arg1 == 3) {
         arg1 = 2;
     }
-    arg0->x9 = arg1;
+    arg0->team = arg1;
 }
 
 void gm_801B0620(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
 {
-    arg0->x1 = 0;
-    arg0->x0 = arg1;
-    arg0->x3 = arg2;
-    arg0->x2 = arg3;
+    arg0->slot_type = 0;
+    arg0->c_kind = arg1;
+    arg0->color = arg2;
+    arg0->stocks = arg3;
     gm_801B05F4(arg0, arg4);
 }
 
 void gm_801B0664(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
 {
-    arg0->x1 = 1;
-    arg0->x0 = arg1;
-    arg0->x3 = arg2;
-    arg0->x2 = arg3;
+    arg0->slot_type = 1;
+    arg0->c_kind = arg1;
+    arg0->color = arg2;
+    arg0->stocks = arg3;
     gm_801B05F4(arg0, arg4);
-    arg0->x9 = 4;
+    arg0->team = 4;
 }
 
 /// #gm_801B06B0
@@ -1278,19 +1278,19 @@ void gm_801B13B8(MinorScene* arg0)
 
     for (i = 0; i < 6; i++) {
         gm_8016795C(&temp_r28->players[i]);
-        temp_r28->players[i].x2 = 0;
+        temp_r28->players[i].stocks = 0;
         temp_r28->players[i].xE = 4;
     }
 
-    temp_r28->players[0].x0 = 6;
-    temp_r28->players[1].x0 = 8;
-    temp_r28->players[2].x0 = 6;
-    temp_r28->players[3].x0 = 6;
+    temp_r28->players[0].c_kind = 6;
+    temp_r28->players[1].c_kind = 8;
+    temp_r28->players[2].c_kind = 6;
+    temp_r28->players[3].c_kind = 6;
 
-    temp_r28->players[0].x1 = 0;
-    temp_r28->players[1].x1 = 0;
-    temp_r28->players[2].x1 = 3;
-    temp_r28->players[3].x1 = 3;
+    temp_r28->players[0].slot_type = 0;
+    temp_r28->players[1].slot_type = 0;
+    temp_r28->players[2].slot_type = 3;
+    temp_r28->players[3].slot_type = 3;
 
     temp_r28->players[0].xC_b0 = false;
     temp_r28->players[1].xC_b0 = false;
