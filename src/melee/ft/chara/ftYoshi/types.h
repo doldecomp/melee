@@ -30,8 +30,10 @@ typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     f32 x3c;
     f32 x40;
     f32 x44;
+    s32 x48;
+    s32 x4C;
     // u8 data_filler1[0xEF];
-    u8 data_filler1[0xCA];
+    u8 data_filler1[0xC2];
     float x114;
     float x118;
     float x11C;
@@ -73,6 +75,8 @@ union ftYoshi_MotionVars {
             } x0_bytes;
         } x0;
         /* fp+2344 */ s32 x4;
+        u8 data_filler1[0x28];
+        s32 x30;
     } specialn;
 };
 

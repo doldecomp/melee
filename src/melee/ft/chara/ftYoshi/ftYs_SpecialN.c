@@ -17,6 +17,7 @@
 #include <baselib/gobj.h>
 
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
+f32 ftYs_Init_804D9A70 = 0.0f;
 
 float ftYs_SpecialN_8012CD10(ftYs_GObj* gobj)
 {
@@ -586,7 +587,21 @@ void ftYs_SpecialAirSStart_0_IASA(ftYs_GObj* gobj) {}
 
 /// #ftYs_SpecialAirSLoop_0_IASA
 
-/// #ftYs_SpecialAirSLoop_1_IASA
+void ftYs_SpecialAirSLoop_1_IASA(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* attributes = fp->dat_attrs;
+
+    s32 x48 = attributes->x48;
+    s32 x4C = attributes->x4C;
+    s32 difference = x48 - x4C;
+
+    if ((fp->mv.ys.specialn.x0.x0 < difference) &&
+        (fp->input.x668 & HSD_PAD_B))
+    {
+        ftYs_SpecialS_8012F0DC(gobj, 0, 0x440012, ftYs_Init_804D9A70);
+    }
+}
 
 void ftYs_SpecialAirSEnd_IASA(ftYs_GObj* gobj) {}
 
@@ -595,9 +610,31 @@ void ftYs_SpecialAirSStart_1_IASA(ftYs_GObj* gobj)
     M2C_FIELD(gobj->user_data, s32*, 0x2370) = 0;
 }
 
-/// #ftYs_SpecialAirSLoop_2_IASA
+void ftYs_SpecialAirSLoop_2_IASA(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* attributes = fp->dat_attrs;
 
-/// #ftYs_SpecialAirSLoop_3_IASA
+    fp->mv.ys.specialn.x30 = 0;
+    if ((fp->mv.ys.specialn.x0.x0 < attributes->x48 - attributes->x4C) &&
+        (fp->input.x668 & HSD_PAD_B))
+    {
+        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, ftYs_Init_804D9A70);
+    }
+}
+
+void ftYs_SpecialAirSLoop_3_IASA(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* attributes = fp->dat_attrs;
+    fp->mv.ys.specialn.x30 = 0;
+
+    if ((fp->mv.ys.specialn.x0.x0 < (attributes->x48 - attributes->x4C)) &&
+        (fp->input.x668 & HSD_PAD_B))
+    {
+        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, ftYs_Init_804D9A70);
+    }
+}
 
 void ftYs_SpecialAirSLanding_IASA(ftYs_GObj* gobj)
 {
