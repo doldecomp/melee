@@ -19,7 +19,7 @@
 /* 003A0E3C */ void HSD_PSAppSrt_803A425C(UNK_T, s32);
 u16 psRemoveGeneratorSRT(UNK_T);
 u16 psRemoveParticleAppSRT(UNK_T);
-HSD_Generator* psAddGeneratorAppSRT_begin(HSD_Generator*, s32);
+HSD_psAppSRT* psAddGeneratorAppSRT_begin(HSD_Generator*, s32);
 u16 psAttachParticleAppSRT(UNK_T, UNK_T);
 
 extern HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
