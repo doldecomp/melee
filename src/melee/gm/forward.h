@@ -18,5 +18,6 @@ typedef struct Placeholder_8016AE50_ret_val Placeholder_8016AE50_ret_val;
 typedef struct MatchPlayerData MatchPlayerData;
 typedef struct MatchEnd MatchEnd;
 typedef struct MatchExitInfo MatchExitInfo;
+typedef struct TmData TmData;
 
 #endif
