@@ -615,4 +615,15 @@ struct UnkAllstarData {
     s8 pad_x0[0xA0 - 0x31 - 0xC];
 };
 
+struct TmData {
+    s32 x0;
+    s32 x4;
+    u8 pad_x8[0x4E0 - 0x8];
+    HSD_Text* x4E0;
+    HSD_Text* x4E4;
+    HSD_Text* x4E8[6];
+    HSD_Text* x500[6];
+    HSD_Text* x518[3];
+};
+
 #endif

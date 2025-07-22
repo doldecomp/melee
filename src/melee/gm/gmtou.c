@@ -10,6 +10,7 @@
 #include "lb/lbaudio_ax.h"
 #include "sc/types.h"
 #include <melee/gm/gmtou.h>
+#include <melee/gm/types.h>
 
 // Filename is just a guess, based on some strings in the file
 // Seems to be Tournament game code

@@ -6,7 +6,6 @@
 #include <melee/gm/forward.h>
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
-#include "gm/gmtou.static.h"
 
 /* 17C0C8 */ void fn_8017C0C8(void);
 /* 17C1A4 */ void fn_8017C1A4(HSD_GObj*);

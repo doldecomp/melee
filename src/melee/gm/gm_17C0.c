@@ -1,4 +1,3 @@
-#include "gm/gmtou.static.h"
 #include "gm_17C0.h"
 
 #include "gm_1601.h"
@@ -12,6 +11,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
+#include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
@@ -64,6 +64,8 @@ static struct lbl_80472E48_t lbl_80472E48;
 static int lbl_80472EC8[4];
 static u8 lbl_80473594[0x14];
 static int lbl_80473700[69];
+static TmData gm_804771C4;
+
 
 void fn_8017C0C8(void)
 {

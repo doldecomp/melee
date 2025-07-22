@@ -3,6 +3,7 @@
 
 #include "baselib/forward.h"
 #include "dolphin/types.h"
+#include "gm/types.h"
 
 typedef struct TmBoxArrays {
     void* box2;
@@ -29,17 +30,6 @@ typedef struct TmAnimTimers {
     u8 x20;
 } TmAnimTimers;
 
-typedef struct TmData {
-    s32 x0;
-    s32 x4;
-    u8 pad_x8[0x4E0 - 0x8];
-    HSD_Text* x4E0;
-    HSD_Text* x4E4;
-    HSD_Text* x4E8[6];
-    HSD_Text* x500[6];
-    HSD_Text* x518[3];
-} TmData;
-
-static TmData gm_804771C4;
+extern TmData gm_804771C4;
 
 #endif
