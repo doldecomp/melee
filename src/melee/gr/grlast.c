@@ -465,7 +465,7 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
         lbVector_Sub(&sp14, &sp38);
         lbVector_Normalize(&sp14);
         lbVector_EulerAnglesFromPartialONB(&sp2C, &sp14, &sp20);
-        gp->u.last.xE0->appsrt->transform = sp38;
+        gp->u.last.xE0->appsrt->translate = sp38;
         gp->u.last.xE0->appsrt->rot.x = sp2C.x;
         gp->u.last.xE0->appsrt->rot.y = sp2C.y;
         gp->u.last.xE0->appsrt->rot.z = sp2C.z;

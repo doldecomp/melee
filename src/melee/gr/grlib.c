@@ -43,7 +43,7 @@ bool grLib_801C96E8(HSD_GObj* arg0)
     return gp->x10_flags.b4;
 }
 
-HSD_Generator* grLib_801C96F8(s32 arg0, s8 arg1, Vec3* arg2)
+HSD_Generator* grLib_801C96F8(s32 arg0, s32 arg1, Vec3* arg2)
 {
     HSD_Generator* temp_r3;
     HSD_psAppSRT* phi_r30;
@@ -61,7 +61,7 @@ HSD_Generator* grLib_801C96F8(s32 arg0, s8 arg1, Vec3* arg2)
             hsd_8039D4DC(temp_r3);
             return NULL;
         }
-        phi_r30->transform = *arg2;
+        phi_r30->translate = *arg2;
         scale = Ground_801C0498();
         phi_r30->scale.x *= scale;
         phi_r30->scale.y *= scale;

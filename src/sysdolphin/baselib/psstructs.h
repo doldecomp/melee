@@ -89,9 +89,9 @@ struct HSD_psAppSRT {
 
     struct HSD_Generator* gp; /* 0x4 */
 
-    Vec3 transform; /* 0x8 */ // should be translate??
-    Quaternion rot;           /* 0x14 */
-    Vec3 scale;               /* 0x24 */
+    Vec3 translate; /* 0x8 */
+    Quaternion rot; /* 0x14 */
+    Vec3 scale;     /* 0x24 */
 
     u8 status; /* 0x30 */
 

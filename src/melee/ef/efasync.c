@@ -262,7 +262,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
             generator_1 = efLib_8005CAB0(0x54);
             if (generator_1 != NULL) {
                 psAppSRT_1 = generator_1->appsrt;
-                psAppSRT_1->transform = sp1CC;
+                psAppSRT_1->translate = sp1CC;
                 if (*va_arg(vlist, f32*) < 0.0f) {
                     f64_1 = 0.0;
                 } else {
@@ -480,7 +480,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = generator_1->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = generator_1;
             generator_1->appsrt->rot.z = f32_1;
@@ -494,7 +494,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = generator_1->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = generator_1;
             generator_1->appsrt->rot.z = f32_1;
@@ -505,7 +505,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = generator_1->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = generator_1;
             generator_1->appsrt->rot.z = f32_1;
@@ -519,7 +519,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = generator_1->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             jobj_1 = GET_JOBJ(arg_gobj);
             HSD_JObjGetScale(jobj_1, &sp1C0);
             ret_obj = generator_1;
@@ -706,7 +706,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             jobj_1 = va_arg(vlist, HSD_JObj*);
             lb_8000B1CC(jobj_1, NULL,
-                        &((HSD_Generator*) ret_obj)->appsrt->transform);
+                        &((HSD_Generator*) ret_obj)->appsrt->translate);
             HSD_JObjGetScale(jobj_1, &sp14);
             generator_1 = ret_obj;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
@@ -768,7 +768,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             ((Effect*) ret_obj)->x10 = efLib_8005E648;
             ((Effect*) ret_obj)->x24 = 0x28;
-            ((Effect*) ret_obj)->transform.y = (0.4f * HSD_Randf()) + 2.8f;
+            ((Effect*) ret_obj)->translate.y = (0.4f * HSD_Randf()) + 2.8f;
             f32_1 = (2 * M_PI * HSD_Randf());
             jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationY(jobj_1, f32_1);
@@ -869,7 +869,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
             generator_1 = ret_obj;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
@@ -895,7 +895,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             ((HSD_Generator*) ret_obj)->appsrt->rot.y = M_PI_2;
             generator_1 = ret_obj;
             generator_1->appsrt->rot.z = *va_arg(vlist, f32*);
@@ -909,7 +909,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
             jobj_2 = GET_JOBJ(((Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationY(jobj_2, f32_1);
             ((Effect*) ret_obj)->x10 = efLib_8005DE94;
-            ((Effect*) ret_obj)->transform.x = *va_arg(vlist, f32*);
+            ((Effect*) ret_obj)->translate.x = *va_arg(vlist, f32*);
         }
         break;
     case 0x439:
@@ -955,7 +955,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
             generator_1 = ret_obj;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
@@ -979,7 +979,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
             generator_1 = ret_obj;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
@@ -993,9 +993,12 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005C9FC(0x209, va_arg(vlist, Vec3*));
         break;
     case 0x446:
-        void_1 = va_arg(vlist, void*);
-        void_2 = va_arg(vlist, void*);
-        ret_obj = efLib_8005FCD8(0x1B, arg_gobj, void_1, void_2);
+        // void_1 = va_arg(vlist, void*);
+        // void_2 = va_arg(vlist, void*);
+        // ret_obj = efLib_8005FCD8(0x1B, arg_gobj, void_1, void_2);
+        jobj_1 = va_arg(vlist, HSD_JObj*);
+        vec3_1 = va_arg(vlist, Vec3*);
+        ret_obj = efLib_8005FCD8(0x1B, arg_gobj, jobj_1, vec3_1);
         if (ret_obj != NULL) {
             ((Effect*) ret_obj)->x24 = 0x16;
         }
@@ -1037,7 +1040,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             generator_1 = ret_obj;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
                 generator_1->appsrt->scale.z = f32_1;
@@ -1106,7 +1109,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         generator_1 = efLib_8005CAB0(0x21E);
         if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator_1->appsrt->transform);
+                        &generator_1->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = generator_1;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
@@ -1123,7 +1126,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         generator_1 = efLib_8005CAB0(0x23F);
         if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator_1->appsrt->transform);
+                        &generator_1->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = generator_1;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
@@ -1134,7 +1137,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         generator_1 = efLib_8005CAB0(0x240);
         if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator_1->appsrt->transform);
+                        &generator_1->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             ret_obj = generator_1;
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
@@ -1202,7 +1205,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         generator_1 = efLib_8005CAB0(0xAC);
         if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator_1->appsrt->transform);
+                        &generator_1->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
                 generator_1->appsrt->scale.z = f32_1;
@@ -1225,7 +1228,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         generator_1 = efLib_8005CAB0(0x9E);
         if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &generator_1->appsrt->transform);
+                        &generator_1->appsrt->translate);
             f32_1 = *va_arg(vlist, f32*);
             generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
                 generator_1->appsrt->scale.z = f32_1;

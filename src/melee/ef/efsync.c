@@ -158,7 +158,7 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
         }
         break;
     case 0x4C4:
@@ -271,10 +271,10 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
             jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationX(jobj_1, f32_4);
             f32_5 = sinf(f32_3);
-            ((Effect*) ret_obj)->transform.x = 2.0f * cosf(f32_4) * f32_5;
-            ((Effect*) ret_obj)->transform.y = 2.0f * sinf(f32_4);
+            ((Effect*) ret_obj)->translate.x = 2.0f * cosf(f32_4) * f32_5;
+            ((Effect*) ret_obj)->translate.y = 2.0f * sinf(f32_4);
             f32_6 = cosf(f32_3);
-            ((Effect*) ret_obj)->transform.z = 2.0f * cosf(f32_4) * f32_6;
+            ((Effect*) ret_obj)->translate.z = 2.0f * cosf(f32_4) * f32_6;
             if (s32_1 != 0) {
                 eff_1->x0 = ret_obj;
                 eff_1 = (void*) eff_1->x0;
@@ -312,7 +312,7 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             jobj_1 = GET_JOBJ(arg_gobj);
             HSD_JObjGetScale(jobj_1, vec3_1);
             generator_1 = ret_obj;
@@ -403,12 +403,12 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
 #endif
             sp88 = *va_arg(vlist, Vec3*);
             // sp88 = *vec3_1;
-            ((Effect*) ret_obj)->transform = sp88;
+            ((Effect*) ret_obj)->translate = sp88;
             // ((Effect*) ret_obj)->scale = *vec3_1;
             // ((Effect*) ret_obj)->scale.x = vec3_1->x;
             // ((Effect*) ret_obj)->scale.y = vec3_1->y;
             // ((Effect*) ret_obj)->scale.z = vec3_1->z;
-            ((Effect*) ret_obj)->transform.y *= sp88.y;
+            ((Effect*) ret_obj)->translate.y *= sp88.y;
             // ((Effect*) ret_obj)->scale.y *= vec3_1->y;
         }
         break;
@@ -550,7 +550,7 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             jobj_1 = GET_JOBJ(arg_gobj);
             HSD_JObjGetScale(jobj_1, &spA0);
             generator_1 = ret_obj;
@@ -563,7 +563,7 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
             psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->transform = *vec3_1;
+            psAppSRT_1->translate = *vec3_1;
             jobj_1 = arg_gobj->hsd_obj;
             HSD_JObjGetScale(jobj_1, &spAC);
             generator_1 = ret_obj;
@@ -609,7 +609,7 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
     case 0x50C:
         ret_obj = efLib_8005C1B4(0x4A3AU, arg_gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            ((Effect*) ret_obj)->transform.z = *va_arg(vlist, f32*);
+            ((Effect*) ret_obj)->translate.z = *va_arg(vlist, f32*);
             ((Effect*) ret_obj)->x10 = efLib_8005EDDC;
         }
         break;
