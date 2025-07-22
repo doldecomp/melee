@@ -11,52 +11,52 @@
 #include <common_structs.h>
 
 typedef enum MajorSceneKind {
-    MJ_TITLE,
-    MJ_MENU,
-    MJ_VS,
-    MJ_CLASSIC,
-    MJ_ADVENTURE,
-    MJ_ALLSTAR,
-    MJ_DEBUG,
-    MJ_DEBUG_SOUND_TEST,
-    MJ_HANYU_CSS,
-    MJ_HANYU_SSS,
-    MJ_CAMERA_MODE,
-    MJ_TOY_GALLERY,
-    MJ_TOY_LOTTERY,
-    MJ_TOY_COLLECTION,
-    MJ_DEBUG_VS,
-    MJ_TARGET_TEST,
-    MJ_SUPER_SUDDEN_DEATH_VS,
-    MJ_INVISIBLE_VS,
-    MJ_SLOMO_VS,
-    MJ_LIGHTNING_VS,
-    MJ_CHALLENGER_APPROACH,
-    MJ_CLASSIC_GOVER,
-    MJ_ADVENTURE_GOVER,
-    MJ_ALLSTAR_GOVER,
-    MJ_OPENING_MV,
-    MJ_DEBUG_CUTSCENE,
-    MJ_DEBUG_GOVER, ///< trophy fall and 'congrats'
-    MJ_TOURNAMENT,
-    MJ_TRAINING,
-    MJ_TINY_VS,
-    MJ_GIANT_VS,
-    MJ_STAMINA_VS,
-    MJ_HOME_RUN_CONTEST,
-    MJ_10MAN_VS,
-    MJ_100MAN_VS,
-    MJ_3MIN_VS,
-    MJ_15MIN_VS,
-    MJ_ENDLESS_VS,
-    MJ_CRUEL_VS,
-    MJ_PROGRESSIVE_SCAN,
-    MJ_BOOT,
-    MJ_MEMCARD,
-    MJ_FIXED_CAMERA_VS,
-    MJ_EVENT,
-    MJ_SINGLE_BUTTON_VS,
-    MJ_COUNT,
+    /* 00 */ MJ_TITLE,
+    /* 01 */ MJ_MENU,
+    /* 02 */ MJ_VS,
+    /* 03 */ MJ_CLASSIC,
+    /* 04 */ MJ_ADVENTURE,
+    /* 05 */ MJ_ALLSTAR,
+    /* 06 */ MJ_DEBUG,
+    /* 07 */ MJ_DEBUG_SOUND_TEST,
+    /* 08 */ MJ_HANYU_CSS,
+    /* 09 */ MJ_HANYU_SSS,
+    /* 0A */ MJ_CAMERA_MODE,
+    /* 0B */ MJ_TOY_GALLERY,
+    /* 0C */ MJ_TOY_LOTTERY,
+    /* 0D */ MJ_TOY_COLLECTION,
+    /* 0E */ MJ_DEBUG_VS,
+    /* 0F */ MJ_TARGET_TEST,
+    /* 10 */ MJ_SUPER_SUDDEN_DEATH_VS,
+    /* 11 */ MJ_INVISIBLE_VS,
+    /* 12 */ MJ_SLOMO_VS,
+    /* 13 */ MJ_LIGHTNING_VS,
+    /* 14 */ MJ_CHALLENGER_APPROACH,
+    /* 15 */ MJ_CLASSIC_GOVER,
+    /* 16 */ MJ_ADVENTURE_GOVER,
+    /* 17 */ MJ_ALLSTAR_GOVER,
+    /* 18 */ MJ_OPENING_MV,
+    /* 19 */ MJ_DEBUG_CUTSCENE,
+    /* 1A */ MJ_DEBUG_GOVER, ///< trophy fall and 'congrats'
+    /* 1B */ MJ_TOURNAMENT,
+    /* 1C */ MJ_TRAINING,
+    /* 1D */ MJ_TINY_VS,
+    /* 1E */ MJ_GIANT_VS,
+    /* 1F */ MJ_STAMINA_VS,
+    /* 20 */ MJ_HOME_RUN_CONTEST,
+    /* 21 */ MJ_10MAN_VS,
+    /* 22 */ MJ_100MAN_VS,
+    /* 23 */ MJ_3MIN_VS,
+    /* 24 */ MJ_15MIN_VS,
+    /* 25 */ MJ_ENDLESS_VS,
+    /* 26 */ MJ_CRUEL_VS,
+    /* 27 */ MJ_PROGRESSIVE_SCAN,
+    /* 28 */ MJ_BOOT,
+    /* 29 */ MJ_MEMCARD,
+    /* 2A */ MJ_FIXED_CAMERA_VS,
+    /* 2B */ MJ_EVENT,
+    /* 2C */ MJ_SINGLE_BUTTON_VS,
+    /* 2D */ MJ_COUNT,
 } MajorSceneKind;
 
 struct MinorScene {
@@ -613,6 +613,17 @@ struct UnkAllstarData {
         s8 x30;
     } xC;
     s8 pad_x0[0xA0 - 0x31 - 0xC];
+};
+
+struct TmData {
+    s32 x0;
+    s32 x4;
+    u8 pad_x8[0x4E0 - 0x8];
+    HSD_Text* x4E0;
+    HSD_Text* x4E4;
+    HSD_Text* x4E8[6];
+    HSD_Text* x500[6];
+    HSD_Text* x518[3];
 };
 
 #endif

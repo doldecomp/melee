@@ -11,6 +11,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
+#include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
@@ -63,7 +64,8 @@ static struct lbl_80472E48_t lbl_80472E48;
 static int lbl_80472EC8[4];
 static u8 lbl_80473594[0x14];
 static int lbl_80473700[69];
-static UNK_T gm_804771C4[349];
+static TmData gm_804771C4;
+
 
 void fn_8017C0C8(void)
 {
@@ -872,12 +874,12 @@ u8 fn_8018F3BC(s32 arg0)
 
 /// #fn_8018F5F0
 
-s32 fn_8018F62C(void* arg0)
+s32 fn_8018F62C(HSD_GObj* arg0)
 {
     return M2C_FIELD(arg0, s32*, 0x2C);
 }
 
-UNK_T gm_8018F634(void)
+TmData* gm_8018F634(void)
 {
     return &gm_804771C4;
 }
