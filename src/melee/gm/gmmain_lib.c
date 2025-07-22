@@ -104,7 +104,7 @@ struct gmm_x1CB0* gmMainLib_8015CC58(void)
     return &gmMainLib_8015CC40()->x1CB0;
 }
 
-void* gmMainLib_8015CC64(s32 arg0)
+void* GetPersistentFighterData(s32 arg0)
 {
     struct gmm_x1F2C* base = gmMainLib_804D3EE0->thing.x1F2C;
     return &base[arg0];
@@ -125,7 +125,7 @@ void* gmMainLib_8015CC90(void)
     return &gmMainLib_804D3EE0->thing.x1CD0;
 }
 
-void* PersistentNameData(s32 arg0)
+void* GetPersistentNameData(s32 arg0)
 {
     struct gmm_x2FF8* base = &gmMainLib_804D3EE0->thing.x2FF8[0];
     struct gmm_x2FF8_inner* inner = &base[arg0 / 19].inner[0];
@@ -806,7 +806,7 @@ u8 gmMainLib_8015ED30(void)
     return gmMainLib_804D3EE0->x1850.unk_xc;
 }
 
-u8 gmMainLib_8015ED3C(s32 arg0)
+u8 GetRumbleSettingOfPort(s32 arg0)
 {
     return gmMainLib_8015CC40()->x1CB0.rumble[arg0];
 }
@@ -957,7 +957,7 @@ void gmMainLib_8015F4BC(void)
 
 u8 gmMainLib_8015F4E8(void)
 {
-    return gmMainLib_8015ED3C(5);
+    return GetRumbleSettingOfPort(5);
 }
 
 void gmMainLib_8015F4F4(u8 arg0)
