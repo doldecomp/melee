@@ -19,6 +19,7 @@
 #include "baselib/gobjuserdata.h"
 #include "baselib/mtx.h"
 #include "baselib/psdisp.h"
+#include "baselib/psstructs.h"
 #include "baselib/state.h"
 #include "dolphin/mtx.h"
 #include "ft/inlines.h"
@@ -847,9 +848,9 @@ void fn_8005C9D0(HSD_GObj* gobj)
     hsd_8039EE24(0x10000);
 }
 
-UnkGeneratorStruct* efLib_8005C9FC(u32 arg0, Vec3* arg1)
+HSD_Generator* efLib_8005C9FC(u32 arg0, Vec3* arg1)
 {
-    UnkGeneratorStruct* temp_r3;
+    HSD_Generator* temp_r3;
     u8 var_r3;
 
     var_r3 = 0;
@@ -866,21 +867,21 @@ UnkGeneratorStruct* efLib_8005C9FC(u32 arg0, Vec3* arg1)
     }
     temp_r3 = hsd_8039F05C(var_r3, ((arg0 / 1000) + (u32) var_r3), arg0);
     if (temp_r3 != NULL) {
-        temp_r3->x24 = arg1->x;
-        temp_r3->x28 = arg1->y;
-        temp_r3->x2C = arg1->z;
+        temp_r3->pos.x = arg1->x;
+        temp_r3->pos.y = arg1->y;
+        temp_r3->pos.z = arg1->z;
     }
     return temp_r3;
 }
 
-UnkGeneratorStruct* efLib_8005CAB0(u32 arg0)
+HSD_Generator* efLib_8005CAB0(u32 arg0)
 {
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* temp_r3;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* temp_r3;
 
     temp_r3 = hsd_8039F05C(0, (s8) (arg0 / 1000), (s32) arg0);
     if (temp_r3 != NULL) {
-        var_r3 = temp_r3->x54;
+        var_r3 = temp_r3->appsrt;
         if (var_r3 == NULL) {
             var_r3 = psAddGeneratorAppSRT_begin(temp_r3, 1);
         }
@@ -892,14 +893,14 @@ UnkGeneratorStruct* efLib_8005CAB0(u32 arg0)
     return temp_r3;
 }
 
-UnkGeneratorStruct* efLib_8005CB34(u32 arg0, Vec3* arg_vec3, f32 arg2)
+HSD_Generator* efLib_8005CB34(u32 arg0, Vec3* arg_vec3, f32 arg2)
 {
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* var_r31;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* var_r31;
 
     var_r31 = hsd_8039F05C(0, (s8) (arg0 / 1000), (s32) arg0);
     if (var_r31 != NULL) {
-        var_r3 = var_r31->x54;
+        var_r3 = var_r31->appsrt;
         if (var_r3 == NULL) {
             var_r3 = psAddGeneratorAppSRT_begin(var_r31, 1);
         }
@@ -909,43 +910,43 @@ UnkGeneratorStruct* efLib_8005CB34(u32 arg0, Vec3* arg_vec3, f32 arg2)
         }
     }
     if (var_r31 != NULL) {
-        var_r31->x54->x8.x = arg_vec3->x;
-        var_r31->x54->x8.y = arg_vec3->y;
-        var_r31->x54->x8.z = arg_vec3->z;
+        var_r31->appsrt->transform.x = arg_vec3->x;
+        var_r31->appsrt->transform.y = arg_vec3->y;
+        var_r31->appsrt->transform.z = arg_vec3->z;
         if (arg2 < 0.0f) {
-            var_r31->x4_kind |= 0x40000;
-            var_r31->x54->x14.y = -M_PI_2;
+            var_r31->kind |= 0x40000;
+            var_r31->appsrt->rot.y = -M_PI_2;
         } else {
-            var_r31->x54->x14.y = M_PI_2;
+            var_r31->appsrt->rot.y = M_PI_2;
         }
     }
     return var_r31;
 }
 
-UnkGeneratorStruct* efLib_8005CC2C(int arg0, HSD_JObj* arg1)
+HSD_Generator* efLib_8005CC2C(int arg0, HSD_JObj* arg1)
 {
-    UnkGeneratorStruct* particle = hsd_8039EFAC(0, arg0 / 1000, arg0, arg1);
-    if (particle != NULL) {
-        particle->x16_flags &= ~PSAPPSRT_UNK_B10;
+    HSD_Generator* generator = hsd_8039EFAC(0, arg0 / 1000, arg0, arg1);
+    if (generator != NULL) {
+        generator->type &= ~PSAPPSRT_UNK_B10;
     }
-    return particle;
+    return generator;
 }
 
-UnkGeneratorStruct* efLib_8005CC84(u32 arg0, HSD_JObj* arg1)
+HSD_Generator* efLib_8005CC84(u32 arg0, HSD_JObj* arg1)
 {
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* temp_r3;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* temp_r3;
 
     temp_r3 = hsd_8039EFAC(0, (s32) (arg0 / 1000), (s32) arg0, arg1);
     if (temp_r3 != NULL) {
-        var_r3 = temp_r3->x54;
+        var_r3 = temp_r3->appsrt;
         if (var_r3 == NULL) {
             var_r3 = psAddGeneratorAppSRT_begin(temp_r3, 0);
         }
         if (var_r3 != NULL) {
-            var_r3->x4 = temp_r3;
-            temp_r3->x16_flags &= 0xFFFFF9FF;
-            temp_r3->x16_flags |= 0x800;
+            var_r3->gp = temp_r3;
+            temp_r3->type &= 0xFFFFF9FF;
+            temp_r3->type |= 0x800;
             goto block_7;
         }
         hsd_8039D4DC(temp_r3);
@@ -955,24 +956,24 @@ block_7:
     return temp_r3;
 }
 
-UnkGeneratorStruct* efLib_8005CD2C(u32 arg0, void* arg1, HSD_GObj* arg_gobj)
+HSD_Generator* efLib_8005CD2C(u32 arg0, void* arg1, HSD_GObj* arg_gobj)
 {
     Vec3 sp18;
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* var_r30;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* var_r30;
     HSD_JObj* jobj_1;
 
     var_r30 = hsd_8039EFAC(0, (s32) (arg0 / 1000), (s32) arg0,
                            va_arg(arg1, HSD_JObj*));
     if (var_r30 != NULL) {
-        var_r3 = var_r30->x54;
+        var_r3 = var_r30->appsrt;
         if (var_r3 == NULL) {
             var_r3 = psAddGeneratorAppSRT_begin(var_r30, 0);
         }
         if (var_r3 != NULL) {
-            var_r3->x4 = var_r30;
-            var_r30->x16_flags &= 0xFFFFF9FF;
-            var_r30->x16_flags |= 0x800;
+            var_r3->gp = var_r30;
+            var_r30->type &= 0xFFFFF9FF;
+            var_r30->type |= 0x800;
         } else {
             hsd_8039D4DC(var_r30);
             var_r30 = NULL;
@@ -981,29 +982,29 @@ UnkGeneratorStruct* efLib_8005CD2C(u32 arg0, void* arg1, HSD_GObj* arg_gobj)
     if (var_r30 != NULL) {
         jobj_1 = GET_JOBJ(arg_gobj);
         HSD_JObjGetScale(jobj_1, &sp18);
-        var_r30->x54->x24.x = var_r30->x54->x24.y = var_r30->x54->x24.z =
-            sp18.y;
+        var_r30->appsrt->scale.x = var_r30->appsrt->scale.y =
+            var_r30->appsrt->scale.z = sp18.y;
     }
     return var_r30;
 }
 
-UnkGeneratorStruct* efLib_8005CE48(u32 arg0, void* arg1)
+HSD_Generator* efLib_8005CE48(u32 arg0, void* arg1)
 {
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* var_r31;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* var_r31;
     f32 temp_f0;
 
     var_r31 = hsd_8039EFAC(0, (s32) (arg0 / 1000), (s32) arg0,
                            va_arg(arg1, HSD_JObj*));
     if (var_r31 != NULL) {
-        var_r3 = var_r31->x54;
+        var_r3 = var_r31->appsrt;
         if (var_r3 == NULL) {
             var_r3 = psAddGeneratorAppSRT_begin(var_r31, 0);
         }
         if (var_r3 != NULL) {
-            var_r3->x4 = var_r31;
-            var_r31->x16_flags &= 0xFFFFF9FF;
-            var_r31->x16_flags |= 0x800;
+            var_r3->gp = var_r31;
+            var_r31->type &= 0xFFFFF9FF;
+            var_r31->type |= 0x800;
         } else {
             hsd_8039D4DC(var_r31);
             var_r31 = NULL;
@@ -1011,30 +1012,29 @@ UnkGeneratorStruct* efLib_8005CE48(u32 arg0, void* arg1)
     }
     if (var_r31 != NULL) {
         temp_f0 = va_arg(arg1, f32);
-        var_r31->x54->x24.z = temp_f0;
-        var_r31->x54->x24.y = temp_f0;
-        var_r31->x54->x24.x = temp_f0;
+        var_r31->appsrt->scale.x = var_r31->appsrt->scale.y =
+            var_r31->appsrt->scale.z = temp_f0;
     }
     return var_r31;
 }
 
-UnkGeneratorStruct* efLib_8005CF40(u32 arg0, void* arg1)
+HSD_Generator* efLib_8005CF40(u32 arg0, void* arg1)
 {
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* var_r31;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* var_r31;
     f64 var_f0;
 
     var_r31 = hsd_8039EFAC(0, (s32) (arg0 / 1000), (s32) arg0,
                            va_arg(arg1, HSD_JObj*));
     if (var_r31 != NULL) {
-        var_r3 = var_r31->x54;
+        var_r3 = var_r31->appsrt;
         if (var_r3 == NULL) {
             var_r3 = psAddGeneratorAppSRT_begin(var_r31, 0);
         }
         if (var_r3 != NULL) {
-            var_r3->x4 = var_r31;
-            var_r31->x16_flags &= 0xFFFFF9FF;
-            var_r31->x16_flags |= 0x800;
+            var_r3->gp = var_r31;
+            var_r31->type &= 0xFFFFF9FF;
+            var_r31->type |= 0x800;
         } else {
             hsd_8039D4DC(var_r31);
             var_r31 = NULL;
@@ -1046,29 +1046,29 @@ UnkGeneratorStruct* efLib_8005CF40(u32 arg0, void* arg1)
         } else {
             var_f0 = M_PI_2;
         }
-        var_r31->x54->x14.y = (f32) var_f0;
+        var_r31->appsrt->rot.y = (f32) var_f0;
     }
     return var_r31;
 }
 
-UnkGeneratorStruct* efLib_8005D044(u32 arg0, void* arg1)
+HSD_Generator* efLib_8005D044(u32 arg0, void* arg1)
 {
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* var_r30;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* var_r30;
     f32 temp_f0;
     f64 var_f0;
 
     var_r30 = hsd_8039EFAC(0, (s32) (arg0 / 1000), (s32) arg0,
                            va_arg(arg1, HSD_JObj*));
     if (var_r30 != NULL) {
-        var_r3 = var_r30->x54;
+        var_r3 = var_r30->appsrt;
         if (var_r3 == NULL) {
             var_r3 = psAddGeneratorAppSRT_begin(var_r30, 0);
         }
         if (var_r3 != NULL) {
-            var_r3->x4 = var_r30;
-            var_r30->x16_flags &= 0xFFFFF9FF;
-            var_r30->x16_flags |= 0x800;
+            var_r3->gp = var_r30;
+            var_r30->type &= 0xFFFFF9FF;
+            var_r30->type |= 0x800;
         } else {
             hsd_8039D4DC(var_r30);
             var_r30 = NULL;
@@ -1080,11 +1080,10 @@ UnkGeneratorStruct* efLib_8005D044(u32 arg0, void* arg1)
         } else {
             var_f0 = M_PI_2;
         }
-        var_r30->x54->x14.y = (f32) var_f0;
+        var_r30->appsrt->rot.y = var_f0;
         temp_f0 = va_arg(arg1, f32);
-        var_r30->x54->x24.z = temp_f0;
-        var_r30->x54->x24.y = temp_f0;
-        var_r30->x54->x24.x = temp_f0;
+        var_r30->appsrt->scale.x = var_r30->appsrt->scale.y =
+            var_r30->appsrt->scale.z = temp_f0;
     }
     return var_r30;
 }
@@ -1107,22 +1106,22 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
     HSD_JObj* var_r0_9;
     HSD_JObj* var_r31;
     Point3d* temp_r29_2;
-    UnkGeneratorMember* var_r28;
-    UnkGeneratorMember* var_r28_2;
-    UnkGeneratorMember* var_r3_2;
-    UnkGeneratorMember* var_r3_3;
-    UnkGeneratorMember* var_r3_4;
-    UnkGeneratorMember* var_r3_5;
-    UnkGeneratorMember* var_r3_6;
-    UnkGeneratorMember* var_r3_7;
-    UnkGeneratorStruct* temp_r3;
-    UnkGeneratorStruct* temp_r3_2;
-    UnkGeneratorStruct* var_r29;
-    UnkGeneratorStruct* var_r29_2;
-    UnkGeneratorStruct* var_r29_3;
-    UnkGeneratorStruct* var_r29_4;
-    UnkGeneratorStruct* var_r29_5;
-    UnkGeneratorStruct* var_r29_6;
+    HSD_psAppSRT* var_r28;
+    HSD_psAppSRT* var_r28_2;
+    HSD_psAppSRT* var_r3_2;
+    HSD_psAppSRT* var_r3_3;
+    HSD_psAppSRT* var_r3_4;
+    HSD_psAppSRT* var_r3_5;
+    HSD_psAppSRT* var_r3_6;
+    HSD_psAppSRT* var_r3_7;
+    HSD_Generator* temp_r3;
+    HSD_Generator* temp_r3_2;
+    HSD_Generator* var_r29;
+    HSD_Generator* var_r29_2;
+    HSD_Generator* var_r29_3;
+    HSD_Generator* var_r29_4;
+    HSD_Generator* var_r29_5;
+    HSD_Generator* var_r29_6;
     Vec3* vec3_1;
     s32 var_r3;
     char* temp_r5;
@@ -1136,28 +1135,28 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
             default:        /* switch 2 */
                 var_r29 = hsd_8039EFAC(0, (s32) (arg1 / 1000), arg1, var_r31);
                 if (var_r29 != NULL) {
-                    var_r3_2 = var_r29->x54;
+                    var_r3_2 = var_r29->appsrt;
                     if (var_r3_2 == NULL) {
                         var_r3_2 = psAddGeneratorAppSRT_begin(var_r29, 0);
                     }
                     if (var_r3_2 != NULL) {
-                        var_r3_2->x4 = var_r29;
-                        var_r29->x16_flags &= 0xFFFFF9FF;
-                        var_r29->x16_flags |= 0x800;
+                        var_r3_2->gp = var_r29;
+                        var_r29->type &= 0xFFFFF9FF;
+                        var_r29->type |= 0x800;
                     } else {
                         hsd_8039D4DC(var_r29);
                         var_r29 = NULL;
                     }
                 }
                 if (var_r29 != NULL) {
-                    var_r29->x16_flags |= 0x1000;
+                    var_r29->type |= 0x1000;
                     return;
                 }
                 break;
             case 0xD4: /* switch 2 */
                 temp_r3 = hsd_8039F05C(2, arg0, arg1);
                 if (temp_r3 != NULL) {
-                    var_r28 = temp_r3->x54;
+                    var_r28 = temp_r3->appsrt;
                     if (var_r28 == NULL) {
                         var_r28 = psAddGeneratorAppSRT_begin(temp_r3, 1);
                     }
@@ -1180,25 +1179,25 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x2E9U, "jobj");
                         }
-                        var_r28->x14.z = var_r31->rotate.z;
+                        var_r28->rot.z = var_r31->rotate.z;
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x3D3U, "jobj");
                         }
-                        if (var_r28->x8.x == NULL) {
+                        if (var_r28->transform.x == NULL) {
                             __assert("jobj.h", 0x3D4U, temp_r5 + 0x64);
                         }
-                        var_r28->x8.x = var_r31->translate.x;
-                        var_r28->x8.y = var_r31->translate.y;
-                        var_r28->x8.z = var_r31->translate.z;
+                        var_r28->transform.x = var_r31->translate.x;
+                        var_r28->transform.y = var_r31->translate.y;
+                        var_r28->transform.z = var_r31->translate.z;
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x337U, "jobj");
                         }
-                        if ((Vec3*) &var_r28->x24 == NULL) {
+                        if ((Vec3*) &var_r28->scale == NULL) {
                             __assert("jobj.h", 0x338U, "scale");
                         }
-                        var_r28->x24.x = var_r31->scale.x;
-                        var_r28->x24.y = var_r31->scale.y;
-                        var_r28->x24.z = var_r31->scale.z;
+                        var_r28->scale.x = var_r31->scale.x;
+                        var_r28->scale.y = var_r31->scale.y;
+                        var_r28->scale.z = var_r31->scale.z;
                         return;
                     }
                     hsd_8039D4DC(temp_r3);
@@ -1208,7 +1207,7 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
             case 0xE3: /* switch 2 */
                 var_r29_2 = hsd_8039F05C(0, (s8) (arg1 / 1000), arg1);
                 if (var_r29_2 != NULL) {
-                    var_r3_3 = var_r29_2->x54;
+                    var_r3_3 = var_r29_2->appsrt;
                     if (var_r3_3 == NULL) {
                         var_r3_3 = psAddGeneratorAppSRT_begin(var_r29_2, 1);
                     }
@@ -1218,7 +1217,7 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                     }
                 }
                 if (var_r29_2 != NULL) {
-                    lb_8000B1CC(var_r31, NULL, &var_r29_2->x54->x8);
+                    lb_8000B1CC(var_r31, NULL, &var_r29_2->appsrt->transform);
                 loop_203:
                     if (var_r31 == NULL) {
                         var_r0_3 = NULL;
@@ -1234,7 +1233,7 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                         var_r31 = var_r0_4;
                         goto loop_203;
                     }
-                    vec3_1 = &var_r29_2->x54->x24;
+                    vec3_1 = &var_r29_2->appsrt->scale;
                     if (var_r31 == NULL) {
                         __assert("jobj.h", 0x337U, "jobj");
                     }
@@ -1255,15 +1254,15 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                     var_r29_3 =
                         hsd_8039EFAC(0, (s32) (arg1 / 1000), arg1, var_r31);
                     if (var_r29_3 != NULL) {
-                        var_r3_4 = var_r29_3->x54;
+                        var_r3_4 = var_r29_3->appsrt;
                         if (var_r3_4 == NULL) {
                             var_r3_4 =
                                 psAddGeneratorAppSRT_begin(var_r29_3, 0);
                         }
                         if (var_r3_4 != NULL) {
-                            var_r3_4->x4 = var_r29_3;
-                            var_r29_3->x16_flags &= 0xFFFFF9FF;
-                            var_r29_3->x16_flags |= 0x800;
+                            var_r3_4->gp = var_r29_3;
+                            var_r29_3->type &= 0xFFFFF9FF;
+                            var_r29_3->type |= 0x800;
                         } else {
                             hsd_8039D4DC(var_r29_3);
                             var_r29_3 = NULL;
@@ -1288,8 +1287,8 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x2DAU, "jobj");
                         }
-                        var_r29_3->x54->x14.y = var_r31->rotate.y;
-                        vec3_1 = &var_r29_3->x54->x24;
+                        var_r29_3->appsrt->rot.y = var_r31->rotate.y;
+                        vec3_1 = &var_r29_3->appsrt->scale;
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x337U, "jobj");
                         }
@@ -1312,15 +1311,15 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                     var_r29_4 =
                         hsd_8039EFAC(0, (s32) (arg1 / 1000), arg1, var_r31);
                     if (var_r29_4 != NULL) {
-                        var_r3_5 = var_r29_4->x54;
+                        var_r3_5 = var_r29_4->appsrt;
                         if (var_r3_5 == NULL) {
                             var_r3_5 =
                                 psAddGeneratorAppSRT_begin(var_r29_4, 0);
                         }
                         if (var_r3_5 != NULL) {
-                            var_r3_5->x4 = var_r29_4;
-                            var_r29_4->x16_flags &= 0xFFFFF9FF;
-                            var_r29_4->x16_flags |= 0x800;
+                            var_r3_5->gp = var_r29_4;
+                            var_r29_4->type &= 0xFFFFF9FF;
+                            var_r29_4->type |= 0x800;
                         } else {
                             hsd_8039D4DC(var_r29_4);
                             var_r29_4 = NULL;
@@ -1342,7 +1341,7 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                             var_r31 = var_r0_8;
                             goto loop_115;
                         }
-                        vec3_1 = &var_r29_4->x54->x24;
+                        vec3_1 = &var_r29_4->appsrt->scale;
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x337U, "jobj");
                         }
@@ -1362,15 +1361,15 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                     var_r29_5 =
                         hsd_8039EFAC(0, (s32) (arg1 / 1000), arg1, var_r31);
                     if (var_r29_5 != NULL) {
-                        var_r3_6 = var_r29_5->x54;
+                        var_r3_6 = var_r29_5->appsrt;
                         if (var_r3_6 == NULL) {
                             var_r3_6 =
                                 psAddGeneratorAppSRT_begin(var_r29_5, 0);
                         }
                         if (var_r3_6 != NULL) {
-                            var_r3_6->x4 = var_r29_5;
-                            var_r29_5->x16_flags &= 0xFFFFF9FF;
-                            var_r29_5->x16_flags |= 0x800;
+                            var_r3_6->gp = var_r29_5;
+                            var_r29_5->type &= 0xFFFFF9FF;
+                            var_r29_5->type |= 0x800;
                         } else {
                             hsd_8039D4DC(var_r29_5);
                             var_r29_5 = NULL;
@@ -1395,14 +1394,14 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x2DAU, "jobj");
                         }
-                        var_r29_5->x54->x14.y = var_r31->rotate.y;
+                        var_r29_5->appsrt->rot.y = var_r31->rotate.y;
                         return;
                     }
                     break;
                 case 0x7E2:
                     var_r29_6 = hsd_8039F05C(0, (s8) (arg1 / 1000), arg1);
                     if (var_r29_6 != NULL) {
-                        var_r3_7 = var_r29_6->x54;
+                        var_r3_7 = var_r29_6->appsrt;
                         if (var_r3_7 == NULL) {
                             var_r3_7 =
                                 psAddGeneratorAppSRT_begin(var_r29_6, 1);
@@ -1431,8 +1430,8 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x2DAU, "jobj");
                         }
-                        var_r29_6->x54->x14.y = var_r31->rotate.y;
-                        vec3_1 = &var_r29_6->x54->x8;
+                        var_r29_6->appsrt->rot.y = var_r31->rotate.y;
+                        vec3_1 = &var_r29_6->appsrt->transform;
                         if (var_r31 == NULL) {
                             __assert("jobj.h", 0x3D3U, "jobj");
                         }
@@ -1450,7 +1449,7 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
         } else {
             temp_r3_2 = hsd_8039F05C(2, arg0, arg1);
             if (temp_r3_2 != NULL) {
-                var_r28_2 = temp_r3_2->x54;
+                var_r28_2 = temp_r3_2->appsrt;
                 if (var_r28_2 == NULL) {
                     var_r28_2 = psAddGeneratorAppSRT_begin(temp_r3_2, 1);
                 }
@@ -1473,16 +1472,16 @@ void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
                     if (var_r31 == NULL) {
                         __assert("jobj.h", 0x2E9U, "jobj");
                     }
-                    var_r28_2->x14.z = var_r31->rotate.z;
+                    var_r28_2->rot.z = var_r31->rotate.z;
                     if (var_r31 == NULL) {
                         __assert("jobj.h", 0x3D3U, "jobj");
                     }
-                    if ((Vec3*) &var_r28_2->x8 == NULL) {
+                    if ((Vec3*) &var_r28_2->transform == NULL) {
                         __assert("jobj.h", 0x3D4U, temp_r5 + 0x64);
                     }
-                    var_r28_2->x8.x = var_r31->translate.x;
-                    var_r28_2->x8.y = var_r31->translate.y;
-                    var_r28_2->x8.z = var_r31->translate.z;
+                    var_r28_2->transform.x = var_r31->translate.x;
+                    var_r28_2->transform.y = var_r31->translate.y;
+                    var_r28_2->transform.z = var_r31->translate.z;
                     return;
                 }
                 hsd_8039D4DC(temp_r3_2);
@@ -1520,21 +1519,21 @@ void fn_8005DB70(int arg0, int lo, int hi, HSD_JObj* jobj)
     efLib_8005D174(lo, hi, jobj, 1);
 }
 
-void efLib_8005DBC0(struct UnkGeneratorStruct2* particle)
+void efLib_8005DBC0(HSD_Particle* particle)
 { // Particle?
     Vec3 sp28;
     Vec3 sp1C;
     s32 sp18;
     Vec3 spC;
-    UnkGeneratorMember* temp_r5;
+    HSD_psAppSRT* temp_r5;
 
     if ((particle != NULL) &&
-        (temp_r5 = particle->x8C, ((temp_r5 == NULL) == 0)))
+        (temp_r5 = particle->appsrt, ((temp_r5 == NULL) == 0)))
     {
-        sp28 = temp_r5->x8;
-        sp1C = temp_r5->x24;
-        spC = temp_r5->x14;
-        sp18 = temp_r5->x20_unk;
+        sp28 = temp_r5->transform;
+        sp1C = temp_r5->scale;
+        // spC = temp_r5->rot;
+        sp18 = temp_r5->rot.w;
         psRemoveParticleAppSRT(particle);
         HSD_PSAppSrt_803A425C(particle, 1);
         // if ((u32) M2C_ERROR(/* Read from unset register $r3 */) != 0U) {
@@ -2127,8 +2126,8 @@ void fn_8005FBE4(Effect* arg_effect)
 
 Effect* efLib_8005FCD8(int arg0, HSD_GObj* gobj, void* arg2, void* arg3)
 {
-    UnkGeneratorMember* var_r3;
-    UnkGeneratorStruct* temp_r3_2;
+    HSD_psAppSRT* var_r3;
+    HSD_Generator* temp_r3_2;
     Effect* ep = efLib_8005BE88(0, gobj);
     if (ep != NULL) {
         ep->x10 = fn_8005FBE4;
@@ -2138,14 +2137,14 @@ Effect* efLib_8005FCD8(int arg0, HSD_GObj* gobj, void* arg2, void* arg3)
         // ep->x18 = arg2->x8;
         temp_r3_2 = hsd_8039EFAC(0, arg0 / 1000, arg0, GET_JOBJ(ep->gobj));
         if (temp_r3_2 != NULL) {
-            var_r3 = temp_r3_2->x54;
+            var_r3 = temp_r3_2->appsrt;
             if (var_r3 == NULL) {
                 var_r3 = psAddGeneratorAppSRT_begin(temp_r3_2, 0);
             }
             if (var_r3 != NULL) {
-                var_r3->x4 = temp_r3_2;
-                temp_r3_2->x16_flags &= ~PSAPPSRT_UNK_B09;
-                temp_r3_2->x16_flags |= PSAPPSRT_UNK_B11;
+                var_r3->gp = temp_r3_2;
+                temp_r3_2->type &= ~PSAPPSRT_UNK_B09;
+                temp_r3_2->type |= PSAPPSRT_UNK_B11;
             } else {
                 hsd_8039D4DC(temp_r3_2);
             }

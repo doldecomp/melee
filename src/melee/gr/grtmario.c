@@ -220,15 +220,15 @@ int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
 
 void grTMario_8021FBE8(Vec3* vec, f32 arg8)
 {
-    UnkGeneratorMember* temp_r3_2;
-    UnkGeneratorStruct* temp_r3;
+    HSD_psAppSRT* temp_r3_2;
+    HSD_Generator* temp_r3;
 
     temp_r3 = grLib_801C96F8(0x7530, 0x1E, vec);
     if (temp_r3 != NULL) {
-        temp_r3_2 = temp_r3->x54;
-        temp_r3_2->x24.x *= arg8;
-        temp_r3_2->x24.y *= arg8;
-        temp_r3_2->x24.z *= arg8;
+        temp_r3_2 = temp_r3->appsrt;
+        temp_r3_2->scale.x *= arg8;
+        temp_r3_2->scale.y *= arg8;
+        temp_r3_2->scale.z *= arg8;
     }
 }
 

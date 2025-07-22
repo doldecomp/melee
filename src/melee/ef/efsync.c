@@ -13,6 +13,7 @@
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
 #include "baselib/particle.h"
+#include "baselib/psstructs.h"
 #include "baselib/random.h"
 #include "ft/inlines.h"
 // #include <cstddef>
@@ -37,8 +38,8 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
     Vec3 sp88;
     Vec3 sp7C;
     Vec3 sp70;
-    UnkGeneratorMember* unkgen_member_1;
-    UnkGeneratorStruct* unkgen_struct_1;
+    HSD_psAppSRT* psAppSRT_1;
+    HSD_Generator* generator_1;
     Effect* eff_1;
     void* ret_obj;
     HSD_JObj* jobj_1;
@@ -156,8 +157,8 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(0x24CU);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
         }
         break;
     case 0x4C4:
@@ -310,14 +311,14 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(0x61U);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             jobj_1 = GET_JOBJ(arg_gobj);
             HSD_JObjGetScale(jobj_1, vec3_1);
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = vec3_1->y;
-            unkgen_struct_1->x54->x14.y = M_PI_2;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = vec3_1->y;
+            generator_1->appsrt->rot.y = M_PI_2;
         }
         break;
     case 0x4D9:
@@ -548,26 +549,26 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(0x6DU);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             jobj_1 = GET_JOBJ(arg_gobj);
             HSD_JObjGetScale(jobj_1, &spA0);
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = spA0.y;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = spA0.y;
         }
         break;
     case 0x505:
         ret_obj = efLib_8005CAB0(0x79U);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             jobj_1 = arg_gobj->hsd_obj;
             HSD_JObjGetScale(jobj_1, &spAC);
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = spAC.y;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = spAC.y;
         }
         break;
     case 0x506:

@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "baselib/forward.h"
 
 #include "efasync.static.h"
 
@@ -10,7 +11,6 @@
 
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"
-#include "baselib/jobj.h"
 #include "baselib/particle.h"
 #include "baselib/psstructs.h"
 #include "baselib/random.h"
@@ -160,8 +160,8 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, void* vlist)
     Vec3 sp1CC;
     Vec3 sp1C0;
     Vec3 sp14;
-    UnkGeneratorStruct* unkgen_struct_1;
-    UnkGeneratorMember* unkgen_member_1;
+    HSD_Generator* generator_1;
+    HSD_psAppSRT* psAppSRT_1;
     Effect* eff_2;
     void* void_2;
     void* void_1;
@@ -185,8 +185,8 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
     Vec3 sp1CC;
     Vec3 sp1C0;
     Vec3 sp14;
-    UnkGeneratorStruct* unkgen_struct_1;
-    UnkGeneratorMember* unkgen_member_1;
+    HSD_Generator* generator_1;
+    HSD_psAppSRT* psAppSRT_1;
     Effect* eff_2;
     void* void_2;
     void* void_1;
@@ -259,17 +259,17 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         // ret_obj = efLib_8005C9FC(0x50, &sp1CC, f32_1, vec3_1);
         ret_obj = efLib_8005C9FC(0x50, &sp1CC);
         if (ret_obj != NULL) {
-            unkgen_struct_1 = efLib_8005CAB0(0x54);
-            if (unkgen_struct_1 != NULL) {
-                unkgen_member_1 = unkgen_struct_1->x54;
-                unkgen_member_1->x8 = sp1CC;
+            generator_1 = efLib_8005CAB0(0x54);
+            if (generator_1 != NULL) {
+                psAppSRT_1 = generator_1->appsrt;
+                psAppSRT_1->transform = sp1CC;
                 if (*va_arg(vlist, f32*) < 0.0f) {
                     f64_1 = 0.0;
                 } else {
                     f64_1 = -M_PI;
                 }
-                unkgen_member_1 = unkgen_struct_1->x54;
-                unkgen_member_1->x14.y = f64_1;
+                psAppSRT_1 = generator_1->appsrt;
+                psAppSRT_1->rot.y = f64_1;
             }
         }
         break;
@@ -476,55 +476,55 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005C9FC(0x3C, va_arg(vlist, Vec3*));
         break;
     case 0x408:
-        unkgen_struct_1 = efLib_8005CAB0(0x3E);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x3E);
+        if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = unkgen_struct_1->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = generator_1->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x14.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->rot.z = f32_1;
         }
         break;
     case 0x409:
         ret_obj = hsd_8039EFAC(0, 0, 0xE2, va_arg(vlist, HSD_JObj*));
         break;
     case 0x40A:
-        unkgen_struct_1 = efLib_8005CAB0(0x241);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x241);
+        if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = unkgen_struct_1->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = generator_1->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x14.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->rot.z = f32_1;
         }
         break;
     case 0x40B:
-        unkgen_struct_1 = efLib_8005CAB0(0x242);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x242);
+        if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = unkgen_struct_1->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = generator_1->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x14.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->rot.z = f32_1;
         }
         break;
     case 0x40C:
         ret_obj = efLib_8005C9FC(0x19, va_arg(vlist, Vec3*));
         break;
     case 0x40D:
-        unkgen_struct_1 = efLib_8005CAB0(0x19);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x19);
+        if (generator_1 != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = unkgen_struct_1->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = generator_1->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             jobj_1 = GET_JOBJ(arg_gobj);
             HSD_JObjGetScale(jobj_1, &sp1C0);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = sp1C0.y;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = sp1C0.y;
         }
         break;
     case 0x40E:
@@ -706,11 +706,11 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             jobj_1 = va_arg(vlist, HSD_JObj*);
             lb_8000B1CC(jobj_1, NULL,
-                        &((UnkGeneratorStruct*) ret_obj)->x54->x8);
+                        &((HSD_Generator*) ret_obj)->appsrt->transform);
             HSD_JObjGetScale(jobj_1, &sp14);
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = sp14.y;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = sp14.y;
         }
         break;
     case 0x41C:
@@ -868,12 +868,12 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(0x145);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x433:
@@ -894,11 +894,11 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(u32_1);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
-            ((UnkGeneratorStruct*) ret_obj)->x54->x14.y = M_PI_2;
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x14.z = *va_arg(vlist, f32*);
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
+            ((HSD_Generator*) ret_obj)->appsrt->rot.y = M_PI_2;
+            generator_1 = ret_obj;
+            generator_1->appsrt->rot.z = *va_arg(vlist, f32*);
         }
         break;
     case 0x438:
@@ -954,12 +954,12 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(0xCA);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x440:
@@ -978,12 +978,12 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(0x1F1);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
             f32_1 = *va_arg(vlist, f32*);
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x444:
@@ -1036,11 +1036,11 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CAB0(0x237);
         if (ret_obj != NULL) {
             vec3_1 = va_arg(vlist, Vec3*);
-            unkgen_member_1 = ((UnkGeneratorStruct*) ret_obj)->x54;
-            unkgen_member_1->x8 = *vec3_1;
-            unkgen_struct_1 = ret_obj;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT_1->transform = *vec3_1;
+            generator_1 = ret_obj;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x44D:
@@ -1064,53 +1064,53 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         break;
     case 0x453:
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &sp1CC);
-        unkgen_struct_1 = efLib_8005CB34(0x234, &sp1CC, *va_arg(vlist, f32*));
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CB34(0x234, &sp1CC, *va_arg(vlist, f32*));
+        if (generator_1 != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x454:
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &sp1CC);
-        unkgen_struct_1 = efLib_8005CB34(0x235, &sp1CC, *va_arg(vlist, f32*));
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CB34(0x235, &sp1CC, *va_arg(vlist, f32*));
+        if (generator_1 != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x455:
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &sp1CC);
-        unkgen_struct_1 = efLib_8005CB34(0x236, &sp1CC, *va_arg(vlist, f32*));
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CB34(0x236, &sp1CC, *va_arg(vlist, f32*));
+        if (generator_1 != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x456:
         lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL, &sp1CC);
-        unkgen_struct_1 = efLib_8005CB34(0x23D, &sp1CC, *va_arg(vlist, f32*));
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CB34(0x23D, &sp1CC, *va_arg(vlist, f32*));
+        if (generator_1 != NULL) {
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x452:
-        unkgen_struct_1 = efLib_8005CAB0(0x21E);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x21E);
+        if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &unkgen_struct_1->x54->x8);
+                        &generator_1->appsrt->transform);
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x45B:
@@ -1120,25 +1120,25 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005CE48(0x8D, vlist);
         break;
     case 0x45D:
-        unkgen_struct_1 = efLib_8005CAB0(0x23F);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x23F);
+        if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &unkgen_struct_1->x54->x8);
+                        &generator_1->appsrt->transform);
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x45E:
-        unkgen_struct_1 = efLib_8005CAB0(0x240);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x240);
+        if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &unkgen_struct_1->x54->x8);
+                        &generator_1->appsrt->transform);
             f32_1 = *va_arg(vlist, f32*);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            ret_obj = generator_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
         }
         break;
     case 0x45F:
@@ -1199,17 +1199,17 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         }
         break;
     case 0x46A:
-        unkgen_struct_1 = efLib_8005CAB0(0xAC);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0xAC);
+        if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &unkgen_struct_1->x54->x8);
+                        &generator_1->appsrt->transform);
             f32_1 = *va_arg(vlist, f32*);
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
             jobj_1 = GET_JOBJ(arg_gobj);
             f32_2 = HSD_JObjGetRotationY(jobj_1);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x14.y = jobj_1->rotate.y;
+            ret_obj = generator_1;
+            generator_1->appsrt->rot.y = jobj_1->rotate.y;
         }
         break;
     case 0x46B:
@@ -1222,17 +1222,17 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         }
         break;
     case 0x46C:
-        unkgen_struct_1 = efLib_8005CAB0(0x9E);
-        if (unkgen_struct_1 != NULL) {
+        generator_1 = efLib_8005CAB0(0x9E);
+        if (generator_1 != NULL) {
             lb_8000B1CC(va_arg(vlist, HSD_JObj*), NULL,
-                        &unkgen_struct_1->x54->x8);
+                        &generator_1->appsrt->transform);
             f32_1 = *va_arg(vlist, f32*);
-            unkgen_struct_1->x54->x24.x = unkgen_struct_1->x54->x24.y =
-                unkgen_struct_1->x54->x24.z = f32_1;
+            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
+                generator_1->appsrt->scale.z = f32_1;
             jobj_1 = arg_gobj->hsd_obj;
             f32_2 = HSD_JObjGetRotationY(jobj_1);
-            ret_obj = unkgen_struct_1;
-            unkgen_struct_1->x54->x14.y = jobj_1->rotate.y;
+            ret_obj = generator_1;
+            generator_1->appsrt->rot.y = jobj_1->rotate.y;
         }
         break;
     case 0x46D:
