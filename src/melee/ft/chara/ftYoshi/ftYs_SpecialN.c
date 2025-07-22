@@ -17,6 +17,7 @@
 #include <baselib/gobj.h>
 
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
+f32 ftYs_Init_804D9A70 = 0.0f;
 
 float ftYs_SpecialN_8012CD10(ftYs_GObj* gobj)
 {
@@ -96,7 +97,7 @@ void fn_8012CEE0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 348, 528530, fp->cur_anim_frame, 1, 0,
                               NULL);
     fp->x2222_b2 = true;
-    fp->mv.ys.specialn.x0.x0_bytes.x0_b0 = true;
+    fp->mv.ys.specialn.x0_b0 = true;
     ftYs_SpecialS_8012DF00(gobj);
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -108,7 +109,7 @@ void fn_8012CF7C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 347, 528530, fp->cur_anim_frame, 1, 0,
                               NULL);
     fp->x2222_b2 = 1;
-    fp->mv.ys.specialn.x0.x0_bytes.x0_b0 = false;
+    fp->mv.ys.specialn.x0_b0 = false;
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
 }
@@ -117,13 +118,12 @@ void fn_8012D004(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-
     it_802F2BFC(fp->x1A60, gobj);
     Fighter_ChangeMotionState((Fighter_GObj*) gobj, 0x161, 0x81092U,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
 
     fp->x2222_b2 = 1;
-    fp->mv.ys.specialn.x0.x0_bytes.x0_b0 = 1;
+    fp->mv.ys.specialn.x0_b0 = 1;
     ftYs_SpecialS_8012DF00(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007E2FC((Fighter_GObj*) gobj);
@@ -139,7 +139,7 @@ void fn_8012D0A0(ftYs_GObj* gobj)
                               0.0f, NULL);
 
     fp->x2222_b2 = 1;
-    fp->mv.ys.specialn.x0.x0_bytes.x0_b0 = false;
+    fp->mv.ys.specialn.x0_b0 = false;
 
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007E2FC(gobj);
@@ -420,7 +420,7 @@ void ftYs_SpecialHi_Coll(ftYs_GObj* gobj)
 void ftYs_SpecialAirHi_Coll(ftYs_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.ys.specialn.x0.x0 != 0) {
+    if (fp->mv.ys.specialhi.x0 != 0) {
         // ft_80083A48(NULL, fn_8012E44C);
         ft_80083A48(gobj, fn_8012E44C);
         // return;
@@ -600,7 +600,19 @@ void ftYs_SpecialAirSStart_0_IASA(ftYs_GObj* gobj) {}
 
 /// #ftYs_SpecialAirSLoop_0_IASA
 
-/// #ftYs_SpecialAirSLoop_1_IASA
+void ftYs_SpecialAirSLoop_1_IASA(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* attributes = fp->dat_attrs;
+
+    s32 x48 = attributes->x48;
+    s32 x4C = attributes->x4C;
+    s32 difference = x48 - x4C;
+
+    if ((fp->mv.ys.specials.x0 < difference) && (fp->input.x668 & HSD_PAD_B)) {
+        ftYs_SpecialS_8012F0DC(gobj, 0, 0x440012, ftYs_Init_804D9A70);
+    }
+}
 
 void ftYs_SpecialAirSEnd_IASA(ftYs_GObj* gobj) {}
 
@@ -609,9 +621,31 @@ void ftYs_SpecialAirSStart_1_IASA(ftYs_GObj* gobj)
     M2C_FIELD(gobj->user_data, s32*, 0x2370) = 0;
 }
 
-/// #ftYs_SpecialAirSLoop_2_IASA
+void ftYs_SpecialAirSLoop_2_IASA(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* attributes = fp->dat_attrs;
 
-/// #ftYs_SpecialAirSLoop_3_IASA
+    fp->mv.ys.specialn.x30 = 0;
+    if ((fp->mv.ys.specials.x0 < attributes->x48 - attributes->x4C) &&
+        (fp->input.x668 & HSD_PAD_B))
+    {
+        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, ftYs_Init_804D9A70);
+    }
+}
+
+void ftYs_SpecialAirSLoop_3_IASA(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftYoshiAttributes* attributes = fp->dat_attrs;
+    fp->mv.ys.specialn.x30 = 0;
+
+    if ((fp->mv.ys.specials.x0 < (attributes->x48 - attributes->x4C)) &&
+        (fp->input.x668 & HSD_PAD_B))
+    {
+        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, ftYs_Init_804D9A70);
+    }
+}
 
 void ftYs_SpecialAirSLanding_IASA(ftYs_GObj* gobj)
 {

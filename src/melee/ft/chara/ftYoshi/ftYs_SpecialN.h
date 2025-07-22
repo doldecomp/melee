@@ -92,7 +92,7 @@
 /* 12EDE8 */ UNK_RET fn_8012EDE8(UNK_PARAMS);
 /* 12EFC0 */ void fn_8012EFC0(ftYs_GObj* gobj);
 /* 12EFF4 */ UNK_RET fn_8012EFF4(UNK_PARAMS);
-/* 12F0DC */ UNK_RET ftYs_SpecialS_8012F0DC(UNK_PARAMS);
+/* 12F0DC */ void ftYs_SpecialS_8012F0DC(ftYs_GObj* gobj, s32, s32, f32);
 /* 12F35C */ UNK_RET ftYs_SpecialS_8012F35C(UNK_PARAMS);
 /* 12F4B4 */ void ftYs_SpecialS_Enter(ftYs_GObj* gobj);
 /* 12F588 */ void ftYs_SpecialAirS_Enter(ftYs_GObj* gobj);
