@@ -1,5 +1,7 @@
 #include "grlast.h"
 
+#include "baselib/psstructs.h"
+
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -450,7 +452,7 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
         gp->u.last.xD8 = grLast_804DBB80 * HSD_Randf() + grLast_804DBB7C;
     }
     HSD_JObjSetRotationY(jobj, gp->u.last.xC8 * gp->u.last.xDC);
-    if (gp->u.last.xE0 != NULL && gp->u.last.xE0->x54 != NULL) {
+    if (gp->u.last.xE0 != NULL && gp->u.last.xE0->appsrt != NULL) {
         sp20 = grLast_803B848C;
         sp14 = grLast_803B8498;
 
@@ -463,11 +465,11 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
         lbVector_Sub(&sp14, &sp38);
         lbVector_Normalize(&sp14);
         lbVector_EulerAnglesFromPartialONB(&sp2C, &sp14, &sp20);
-        gp->u.last.xE0->x54->x8 = sp38;
-        gp->u.last.xE0->x54->x14.x = sp2C.x;
-        gp->u.last.xE0->x54->x14.y = sp2C.y;
-        gp->u.last.xE0->x54->x14.z = sp2C.z;
-        gp->u.last.xE0->x54->x30 = 0;
+        gp->u.last.xE0->appsrt->transform = sp38;
+        gp->u.last.xE0->appsrt->rot.x = sp2C.x;
+        gp->u.last.xE0->appsrt->rot.y = sp2C.y;
+        gp->u.last.xE0->appsrt->rot.z = sp2C.z;
+        gp->u.last.xE0->appsrt->status = 0;
     }
 }
 

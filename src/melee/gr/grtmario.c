@@ -2,6 +2,7 @@
 
 #include "lb/forward.h"
 
+#include "baselib/psstructs.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
@@ -18,7 +19,6 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/psappsrt.h>
 
 /* 21F840 */ static void grTMario_8021F840(int);
 /* 21F844 */ static void grTMario_8021F844(void);
