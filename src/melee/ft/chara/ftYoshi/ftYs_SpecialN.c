@@ -129,7 +129,21 @@ void fn_8012D004(HSD_GObj* gobj)
     ftCommon_8007E2FC((Fighter_GObj*) gobj);
 }
 
-/// #fn_8012D0A0
+void fn_8012D0A0(ftYs_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    // 0x160 == 352 == ftYs_MS_SpecialAirN1_1
+    // 0x81092U == (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) | (1 << 19)
+    Fighter_ChangeMotionState(gobj, 0x160, 0x81092U, fp->cur_anim_frame, 1.0f,
+                              0.0f, NULL);
+
+    fp->x2222_b2 = 1;
+    fp->mv.ys.specialn.x0.x0_bytes.x0_b0 = false;
+
+    ftCommon_8007E2F4(fp, 0x1FF);
+    ftCommon_8007E2FC(gobj);
+}
 
 /// #fn_8012D128
 
