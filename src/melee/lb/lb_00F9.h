@@ -31,7 +31,7 @@
 /* 011AC4 */ HSD_LObj* lb_80011AC4(HSD_LightDesc**);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);
 /* 011E24 */ int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
-/* 01204C */ UNK_RET lb_8001204C(UNK_PARAMS);
+/* 01204C */ void lb_8001204C(int, HSD_JObj**, u16*, int);
 /* 0121FC */ void lb_800121FC(HSD_ImageDesc*, int, int, int, int);
 /* 0122C8 */ void lb_800122C8(HSD_ImageDesc*, int, int, int);
 /* 0122F0 */ UNK_RET lb_800122F0(UNK_PARAMS);
