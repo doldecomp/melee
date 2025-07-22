@@ -54,7 +54,7 @@ void gm_8019B8C4_OnEnter(void* arg0)
     lbAudioAx_80023F28(0x5E);
 }
 
-void gm_8019B9C8_OnLeave(void* arg0) 
+void gm_8019B9C8_OnLeave(void* arg0)
 {
     lbArchive_80016EFC(lbl_804D6660);
     lbArchive_80016EFC(lbl_804D6638);
