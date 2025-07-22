@@ -40,7 +40,7 @@ typedef struct UnkX {
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
 /* 3F9628 */ static Thing_803F9628 ifStatus_803F9628;
-/* 4D6D60 */ static s8 ifStatus_804D6D60;
+/* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
 
 HudIndex* ifStatus_802F4910(void)
@@ -279,16 +279,13 @@ void ifStatus_802F61FC(void)
     NOT_IMPLEMENTED;
 }
 
-void ifStatus_802F6508(s32 arg0)
-{
-    NOT_IMPLEMENTED;
-}
+void ifStatus_802F6508(s32 arg0);
 
-void ifStatus_802F665C(s8 arg0)
+void ifStatus_802F665C(int arg0)
 {
-    s32 i;
+    int i;
 
-    ifAll_802F343C();
+    ifAll_802F343C(arg0);
     ifStatus_804D6D60 = arg0;
     for (i = 0; i < 6; i++) {
         ifStatus_802F6508(i);

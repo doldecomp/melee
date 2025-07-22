@@ -648,7 +648,7 @@ void fn_802FF360(void* arg0) {}
 void un_802FF364(int slot)
 {
     int s;
-    struct ifAll_804A0FD8_x18_t* ifAll;
+    Vec3* ifAll;
     struct un_804A1F58_x8_t* thing;
     HSD_GObj* gobj;
     thing = &un_804A1F58[slot].x8;
@@ -668,8 +668,8 @@ void un_802FF364(int slot)
     if (s > 9999) {
         s = 9999;
     }
-    thing->x8 = HSD_SisLib_803A6B98(thing->x4, *(float*) ifAll,
-                                    *(((float*) ifAll) + 1) + 3.2f, "%d", s);
+    thing->x8 =
+        HSD_SisLib_803A6B98(thing->x4, ifAll->x, ifAll->y + 3.2f, "%d", s);
     HSD_SisLib_803A7548(thing->x4, thing->x8, 0.06, 0.06);
     thing->x4->x58 = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
