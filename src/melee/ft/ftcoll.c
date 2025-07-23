@@ -21,7 +21,7 @@
 #include "ftCommon/ftCo_Bury.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/types.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"

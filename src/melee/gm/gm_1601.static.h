@@ -5,7 +5,7 @@
 
 #include <baselib/forward.h>
 
-#include "gm_1601.h" // IWYU pragma: export
+#include "gm_unsplit.h" // IWYU pragma: export
 #include "platform.h"
 
 #include "gm/types.h"
@@ -76,7 +76,6 @@ struct ResultAnimEntry {
 /* 169364 */ static UNK_T fn_80169364(void);
 /* 1693A8 */ static s32 fn_801693A8(void);
 /* 16A1E4 */ static s32 fn_8016A1E4(void);
-/* 17F294 */ static int fn_8017F294(void);
 /* 3B75F8 */ static const struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
 /* 3B7808 */ static const s16 lbl_803B7808[0x3C / 2] = { 0 };
 /* 3B7864 */ extern const U8Vec4 lbl_803B7864[9];

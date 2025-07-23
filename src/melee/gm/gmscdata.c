@@ -5,6 +5,7 @@
 #include <melee/gm/gmcamera.h>
 #include <melee/gm/gmmenu.h>
 #include <melee/gm/gmprogressive.h>
+#include <melee/gm/gmresult.h>
 #include <melee/gm/gmtitle.h>
 #include <melee/gm/gmtou.h>
 #include <melee/gm/gmvsmelee.h>

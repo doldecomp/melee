@@ -4,8 +4,8 @@
 
 #include <melee/db/db.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmresultplayer.h>
 #include <melee/gm/gmvsmelee.h>
-#include <melee/gm/types.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbcardgame.h>

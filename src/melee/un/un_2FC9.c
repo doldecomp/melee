@@ -10,7 +10,7 @@
 #include "baselib/random.h"
 #include "baselib/sislib.h"
 #include "cm/camera.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
 #include "gm/gm_1B03.h"

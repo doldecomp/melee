@@ -2,6 +2,8 @@
 
 #include "gm_1601.static.h"
 
+#include "gm_unsplit.h"
+
 #include "gmmain_lib.h"
 #include "runtime.h"
 #include "stddef.h"

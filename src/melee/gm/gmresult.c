@@ -1,6 +1,4 @@
-#include "gm_unsplit.h"
-
-#include <melee/gm/types.h>
+#include "gmresult.h"
 
 struct lbl_8046DBE8_t {
     /*  +0 */ char pad_0[0x94];

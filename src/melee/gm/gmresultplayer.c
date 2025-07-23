@@ -1,4 +1,4 @@
-#include "gm_unsplit.h"
+#include "gmresultplayer.h"
 
 #include <melee/lb/lb_00B0.h>
 #include <melee/gm/types.h>

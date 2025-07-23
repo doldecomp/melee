@@ -1,6 +1,6 @@
 #include "gmpause.h"
 
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>

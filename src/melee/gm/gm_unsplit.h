@@ -12,6 +12,8 @@
 #define MELEE_GM_UNSPLIT_H
 
 #include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gm_16F1.h>
 #include <melee/gm/gm_17C0.h>
 #include <melee/gm/gm_1832.h>
 #include <melee/gm/gm_18A5.h>

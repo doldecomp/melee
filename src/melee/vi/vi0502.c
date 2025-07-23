@@ -9,7 +9,7 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftdemo.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"

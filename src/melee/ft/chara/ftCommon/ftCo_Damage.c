@@ -40,7 +40,7 @@
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyLanding.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbvector.h"

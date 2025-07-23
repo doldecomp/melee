@@ -1,6 +1,8 @@
-#include "gm_1601.h"
+#include "gm_16F1.h"
 
 #include "gm_16F1.static.h"
+
+#include "gm_unsplit.h"
 
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lblanguage.h>
