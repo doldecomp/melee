@@ -301,10 +301,11 @@ struct ftCommonData {
     /* +3E4 */ float x3E4;
     /* +3E8 */ float x3E8_shieldKnockbackFrameDecay;
     /* +3EC */ float x3EC_shieldGroundFrictionMultiplier;
-    /* +3F0 */ u8 x3F0[0x400 - 0x3F0];
-    /* +410 */ float x400;
-    /* +410 */ float x404;
-    /* +410 */ float x408;
+    /* +3F0 */ u8 x3F0[0x3FC - 0x3F0];
+    /* +3FC */ int x3FC;
+    /* +400 */ float x400;
+    /* +404 */ float x404;
+    /* +408 */ float x408;
     /* +40C */ float x40C;
     /* +410 */ int x410;
     /* +414 */ UNK_T x414;
