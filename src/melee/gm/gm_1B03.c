@@ -412,7 +412,7 @@ int fn_801B09F8(int arg0)
 {
     if (arg0 == 0) {
         lbAudioAx_80024030(0);
-        gm_801A42F8(0);
+        gm_801A42F8(MJ_TITLE);
         gm_801A4B60();
     }
     return 0;
@@ -1376,7 +1376,7 @@ void gm_801B2510(MinorScene* arg0)
     int* data = gm_801A4284(arg0);
     int temp_r0 = *data;
     if (temp_r0 == 1 || temp_r0 == 2) {
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
     }
 }
 
@@ -2320,5 +2320,5 @@ void gm_801BF8F8(MinorScene* arg0)
 void gm_801BF920(MinorScene* arg0)
 {
     gm_801A4284(arg0);
-    gm_801A42F8(0x28);
+    gm_801A42F8(MJ_BOOT);
 }
