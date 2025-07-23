@@ -12,7 +12,7 @@
 #include <ft/ft_0877.h>
 #include <ft/ft_0892.h>
 #include <ft/ftlib.h>
-#include <gm/gm_1601.h>
+#include <gm/gm_16F1.h>
 #include <gr/stage.h>
 #include <if/ifmagnify.h>
 #include <it/it_26B1.h>

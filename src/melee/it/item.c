@@ -11,7 +11,7 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gr/grlib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"

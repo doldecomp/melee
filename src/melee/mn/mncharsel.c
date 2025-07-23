@@ -2,7 +2,7 @@
 
 #include "mncharsel.static.h"
 
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00F9.h>

@@ -9,7 +9,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grlib.h>

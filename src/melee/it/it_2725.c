@@ -16,7 +16,7 @@
 #include "ft/ft_0C31.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1B03.h"
 #include "gr/grlib.h"

@@ -11,7 +11,7 @@
 #include "types.h"
 
 #include <baselib/debug.h>
-#include <gm/gm_1601.h>
+#include <gm/gm_unsplit.h>
 
 static inline void setKindToOne_inline(int player, int kind)
 {

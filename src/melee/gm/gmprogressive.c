@@ -1,6 +1,6 @@
 #include "gmprogressive.h"
 
-#include "gm_1601.h"
+#include "gm_unsplit.h"
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>

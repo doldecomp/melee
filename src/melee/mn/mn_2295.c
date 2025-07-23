@@ -12,9 +12,9 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00CE.h>
 #include <melee/lb/lbcardnew.h>

@@ -1,10 +1,7 @@
 #include "gmmenu.h"
-#include "dolphin/types.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_17C0.h"
-#include "gm/gm_1A3F.h"
-#include "gm/gm_1B03.h"
 
+#include <dolphin/types.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/types.h>
 
 void gm_801A50B8_OnLoad(void)

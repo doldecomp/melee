@@ -11,7 +11,7 @@
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "ftKirby/ftKb_Init.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
 #include "pl/plattack.h"

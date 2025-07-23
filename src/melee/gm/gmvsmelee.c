@@ -1,15 +1,18 @@
-#include "gm/forward.h"
-#include "mn/forward.h"
-#include "gm/gmvsmelee.static.h"
 #include "gmvsmelee.h"
-#include "gm/gm_1B03.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
-#include "lb/lbtime.h"
 
-#include <melee/gm/gm_1601.h>
+#include "gmvsmelee.static.h"
+
+#include "gm_unsplit.h"
+
+#include <melee/gm/gmresult.h>
+#include <melee/gm/gmresultplayer.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbtime.h>
+
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>

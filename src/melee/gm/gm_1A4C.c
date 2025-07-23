@@ -2,9 +2,7 @@
 
 #include "gm_1A4C.static.h"
 
-#include "gm_1601.h"
-#include "gm_1A36.h"
-#include "gm_1B03.h"
+#include "gm_unsplit.h"
 
 #include <dolphin/dvd.h>
 #include <dolphin/os/OSRtc.h>

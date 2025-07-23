@@ -33,7 +33,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
 #include <melee/it/items/it_2E5A.h>

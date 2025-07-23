@@ -13,7 +13,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>

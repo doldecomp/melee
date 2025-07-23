@@ -1,14 +1,11 @@
 #include "gmscdata.h"
 
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_19EF.h>
-#include <melee/gm/gm_1A4C.h>
-#include <melee/gm/gm_1AED.h>
-#include <melee/gm/gm_1B03.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmapproach.h>
 #include <melee/gm/gmcamera.h>
 #include <melee/gm/gmmenu.h>
 #include <melee/gm/gmprogressive.h>
+#include <melee/gm/gmresult.h>
 #include <melee/gm/gmtitle.h>
 #include <melee/gm/gmtou.h>
 #include <melee/gm/gmvsmelee.h>

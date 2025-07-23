@@ -1,10 +1,6 @@
 #include "gmtitle.h"
 
-#include "gm_1601.h"
-#include "gm_1A36.h"
-#include "gm_1A3F.h"
-#include "gm_1A45.h"
-#include "gm_1B03.h"
+#include "gm_unsplit.h"
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>

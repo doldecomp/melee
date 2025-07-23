@@ -1,6 +1,8 @@
-#include "gm_1601.h"
+#include "gm_16AE.h"
 
 #include "gm_16AE.static.h"
+
+#include "gm_unsplit.h"
 
 #include "gmmain_lib.h"
 
@@ -10,10 +12,6 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gm_1B03.h>
 #include <melee/gm/gmpause.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grstadium.h>
