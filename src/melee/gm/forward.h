@@ -50,6 +50,55 @@ typedef enum MajorSceneKind {
     /* 2D */ MJ_COUNT,
 } MajorSceneKind;
 
+typedef enum MinorSceneKind {
+    /* +00 */ MN_TITLE,
+    /* +01 */ MN_MENU,
+    /* +02 */ MN_VS,
+    /* +03 */ MN_SUDDEN_DEATH,
+    /* +04 */ MN_TRAINING_MODE,
+    /* +05 */ MN_RESULTS,
+    /* +06 */ MN_0x6,                       ///< Unused? It is skipped in the table entirely
+    /* +07 */ MN_DEBUG_MENU,
+    /* +08 */ MN_CSS,
+    /* +09 */ MN_SSS,
+    /* +0A */ MN_0xA,                       ///< Unused? Empty in the table
+    /* +0B */ MN_TOY_GALLERY,
+    /* +0C */ MN_TOY_LOTTERY,
+    /* +0D */ MN_TOY_COLLECTION,
+    /* +0E */ MN_INTRO_NORMAL,              ///< Adventure Mode intro
+    /* +0F */ MN_REGEND_TOYFALL,            ///< Trophy fall scene that happens when you win in 1p mode
+    /* +10 */ MN_REGEND_CONGRATS,           ///< "REG" may refer to any 1p mode
+    /* +11 */ MN_CUTSCENE_LUIGI,            ///< "Vi0102.dat" - "visual0102Scene"
+    /* +12 */ MN_CUTSCENE_BRINSTAR,         ///< "Vi0401.dat" - "visual0401Scene" - "visual0401InfoScene"
+    /* +13 */ MN_CUTSCENE_EXPLOSION,        ///< Planet Explosion / "Vi0402.dat" - "visual0402Scene"
+    /* +14 */ MN_CUTSCENE_3KIRBYS,          ///< "Vi0501.dat" - "visual0501Scene"
+    /* +15 */ MN_CUTSCENE_GIANTKIRBY,       ///< "Vi0502.dat" - "visual0502Scene"
+    /* +16 */ MN_CUTSCENE_STARFOX,          ///< "Vi0601.dat" - "visual0601Scene"
+    /* +17 */ MN_CUTSCENE_FZERO,            ///< "Vi0801.dat" - "visual0801Scene"
+    /* +18 */ MN_CUTSCENE_METAL,            ///< Metal Mario/Luigi / "Vi1101.dat" - "visual1101Scene" - "visual1101Cam2Scene"
+    /* +19 */ MN_CUTSCENE_BOWSERTOY,        ///< "Vi1201v1.dat" - "visual1201v1Scene"
+    /* +1A */ MN_CUTSCENE_GIGATRANSFORM,    ///< "Vi1201v2.dat" - "visual1201v2Scene"
+    /* +1B */ MN_CUTSCENE_GIGADEFEATED,     ///< "Vi1202.dat" - "visual1202Scene"
+    /* +1C */ MN_MOVIE_OPENING,
+    /* +1D */ MN_MOVIE_END,                 ///< 1p mode ending movie
+    /* +1E */ MN_MOVIE_HOWTO,
+    /* +1F */ MN_MOVIE_OMAKE15,             ///< "Special Movie"
+    /* +20 */ MN_INTRO_EASY,                ///< Classic Mode splash screen
+    /* +21 */ MN_INTRO_ALLSTAR,             ///< Unused?
+    /* +22 */ MN_GAMEOVER,
+    /* +23 */ MN_COMING_SOON,
+    /* +24 */ MN_TOU,
+    /* +25 */ MN_TOU_BRACKET,
+    /* +26 */ MN_TOU_FINISH,
+    /* +27 */ MN_PRIZE_INTERFACE,           ///< Achievement/Special Message Pop-up
+    /* +28 */ MN_PROG_SCAN,
+    /* +29 */ MN_APPROACH,                  ///< Challenger Approaching
+    /* +2A */ MN_MEMCARD,                   ///< Memcard Prompt
+    /* +2B */ MN_STAFFROLL,                 ///< Credits
+    /* +2C */ MN_CAMERA_VS,
+    /* +2D */ MN_COUNT
+} MinorSceneKind;
+
 typedef struct MajorScene MajorScene;
 typedef struct MinorScene MinorScene;
 typedef struct MinorSceneHandler MinorSceneHandler;
