@@ -626,4 +626,30 @@ struct TmData {
     HSD_Text* x518[3];
 };
 
+struct NameData {
+    // a lot of this is shared with a struct for character stats as well
+    /* x0F0 */ s32 self_destructs;
+    /* x0F4 */ s32 attacks_hit;
+    /* x0F8 */ s32 attacks_total;
+    /* x0FC */ s32 damage_given;
+    /* x100 */ s32 damage_taken;
+    /* x104 */ s32 damage_recovered;
+    /* x108 */ s16 peak_damage;
+    /* x10A */ s16 matches;
+    /* x10C */ s16 victories;
+    /* x10E */ s16 losses;
+    /* x110 */ s32 play_time; // in minutes
+    /* x114 */ s32 x114;
+    /* x118 */ s32 ground_distance; // in meters
+    /* x11C */ s32 jump_distance;
+    /* x120 */ s32 drop_distance;
+    /* x124 */ s32 flight_distance;
+    /* x128 */ s32 coin_points;
+    /* x12C */ s32 swiped_coins;
+    /* x130 */ s32 lost_coins;
+
+    /* x1A1 */ bool rumble_toggle;
+    /* x198 */ void* x198; // some kind of text representation of the name
+};
+
 #endif

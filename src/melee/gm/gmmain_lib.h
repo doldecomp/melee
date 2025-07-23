@@ -9,11 +9,11 @@
 /* 15CC40 */ struct gmm_x1868* gmMainLib_8015CC40(void);
 /* 15CC4C */ void* gmMainLib_8015CC4C(void);
 /* 15CC58 */ struct gmm_x1CB0* gmMainLib_8015CC58(void);
-/* 15CC64 */ void* gmMainLib_8015CC64(s32);
+/* 15CC64 */ void* GetPersistentFighterData(s32);
 /* 15CC78 */ void* gmMainLib_8015CC78(void);
 /* 15CC84 */ void* gmMainLib_8015CC84(void);
 /* 15CC90 */ void* gmMainLib_8015CC90(void);
-/* 15CC9C */ void* PersistentNameData(s32);
+/* 15CC9C */ void* GetPersistentNameData(s32);
 /* 15CCE4 */ void* gmMainLib_8015CCE4(void);
 /* 15CCF0 */ void* gmMainLib_8015CCF0(void);
 /* 15CCFC */ void* gmMainLib_8015CCFC(void);
@@ -119,7 +119,7 @@
 /* 15ECB0 */ u8 gmMainLib_8015ECB0(void);
 /* 15ECBC */ UNK_RET gmMainLib_8015ECBC(UNK_PARAMS);
 /* 15ED30 */ u8 gmMainLib_8015ED30(void);
-/* 15ED3C */ u8 gmMainLib_8015ED3C(s32 arg0);
+/* 15ED3C */ u8 GetRumbleSettingOfPort(s32 arg0);
 /* 15ED4C */ void gmMainLib_8015ED4C(s32 arg0, s8 arg1);
 /* 15ED5C */ s32 gmMainLib_8015ED5C(void);
 /* 15ED68 */ void gmMainLib_8015ED68(s32 arg0);

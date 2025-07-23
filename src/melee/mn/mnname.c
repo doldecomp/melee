@@ -12,7 +12,7 @@ void fn_802377A4(void) {}
 
 /// #IsNameUnique
 
-/// #mnName_80237834
+/// #DeleteName
 
 /// #IsNameValid
 
@@ -30,9 +30,9 @@ void fn_802377A4(void) {}
 
 /// #mnName_802385A0
 
-/// #mnName_802385D4
+/// #mnName_GetPageCount
 
-/// #mnName_80238698
+/// #mnName_GetColumnCount
 
 /// #mnName_80238754
 
@@ -70,4 +70,4 @@ void fn_802377A4(void) {}
 
 /// #mnName_8023AC40
 
-/// #mnName_8023B084
+/// #IsNameNotAllowed

@@ -14,19 +14,19 @@ u8 mnDiagram_8023EA40(s32 arg0)
 
 /// #mnDiagram_8023EAC4
 
-/// #mnDiagram_8023EB84
+/// #GetHitPercentage
 
-/// #mnDiagram_8023ECC4
+/// #GetPlayPercentage
 
-/// #mnDiagram_8023EE38
+/// #GetAveragePlayerCount
 
-/// #mnDiagram_8023EF70
+/// #GetNameTotalKOs
 
-/// #mnDiagram_8023EFE4
+/// #GetNameTotalFalls
 
-/// #mnDiagram_8023F068
+/// #GetFighterTotalKOs
 
-/// #mnDiagram_8023F0DC
+/// #GetFighterTotalFalls
 
 /// #mnDiagram_8023F14C
 
