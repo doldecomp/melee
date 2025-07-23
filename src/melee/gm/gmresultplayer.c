@@ -1,6 +1,7 @@
-#include "gm_1601.h"
+#include "gm_unsplit.h"
 
 #include <melee/lb/lb_00B0.h>
+#include <melee/gm/types.h>
 
 /* 46E38C */ static int lbl_8046E38C[4];
 

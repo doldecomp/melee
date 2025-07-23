@@ -1,7 +1,6 @@
-#include <placeholder.h>
+#include "gm_1601.h"
 
 #include "gm_1601.static.h"
-#include "gm_1601.h"
 
 #include "gmmain_lib.h"
 #include "runtime.h"

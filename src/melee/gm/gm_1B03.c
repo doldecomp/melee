@@ -1,10 +1,8 @@
 #include "gm_1B03.h"
 
+#include "gm_unsplit.h"
+
 #include <melee/db/db.h>
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A4C.h>
-#include <melee/gm/gm_1BFA.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>

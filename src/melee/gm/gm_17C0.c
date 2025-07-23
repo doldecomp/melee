@@ -1,6 +1,6 @@
 #include "gm_17C0.h"
 
-#include "gm_1601.h"
+#include "gm_unsplit.h"
 
 #include <dolphin/gx.h>
 #include <math_ppc.h>

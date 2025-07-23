@@ -13,7 +13,6 @@
 #include "sc/forward.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
-#include "gm/types.h"
 
 /* 1601C4 */ u8 gm_801601C4(s8);
 /* 160244 */ u8 gm_80160244(s8);
@@ -441,6 +440,7 @@
 /* 174180 */ UNK_RET gm_80174180(UNK_PARAMS);
 /* 1741FC */ UNK_RET gm_801741FC(UNK_PARAMS);
 /* 174238 */ UNK_RET gm_80174238(UNK_PARAMS);
+/* 174274 */ int fn_80174274(void);
 /* 174284 */ UNK_RET fn_80174284(UNK_PARAMS);
 /* 174338 */ UNK_RET fn_80174338(UNK_PARAMS);
 /* 17435C */ UNK_RET fn_8017435C(UNK_PARAMS);
