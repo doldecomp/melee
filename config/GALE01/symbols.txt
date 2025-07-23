@@ -2310,7 +2310,6 @@ ftCo_80095700 = .text:0x80095700; // type:function size:0x44 scope:global
 ftCo_80095744 = .text:0x80095744; // type:function size:0xB0 scope:global
 ftCo_800957F4 = .text:0x800957F4; // type:function size:0x108 scope:global
 ftCo_800958FC = .text:0x800958FC; // type:function size:0x134 scope:global
-ftCo_800959A0 = .text:0x800959A0; // type:label scope:global
 ftCo_80095A30 = .text:0x80095A30; // type:function size:0x32C scope:global
 ftCo_80095D5C = .text:0x80095D5C; // type:function size:0x124 scope:global
 ftCo_ItemThrow_Anim = .text:0x80095E80; // type:function size:0x7C scope:global
