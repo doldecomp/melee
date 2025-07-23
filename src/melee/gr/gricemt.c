@@ -214,8 +214,8 @@ void grIceMt_801F7080(void)
     }
     if (Stage_80225194() == 76) {
         grZakoGenerator_801CAE04(&grIm_804D69F4->xBC);
-        if (grIm_804D69F4->xB8) {
-            iVar1 = HSD_Randi(0);
+        if (grIm_804D69F4->xB8 != 0) {
+            iVar1 = HSD_Randi(grIm_804D69F4->xB8);
         } else {
             iVar1 = 0;
         }

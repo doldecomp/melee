@@ -4,8 +4,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include "baselib/psstructs.h"
-
 #include <dolphin/gx.h>
 
 void psDispParticles(s32, u32);

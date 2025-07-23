@@ -1,4 +1,8 @@
+#include "baselib/forward.h"
+
 #include "psdisp.h"
+
+#include "baselib/psstructs.h"
 
 #include <math.h>
 #include <dolphin/gx.h>
@@ -85,9 +89,9 @@ static void calcTornadoLastPos(HSD_Particle* pp, f32* x, f32* y, f32* z)
     gp = pp->gen;
     /// @bug The following should be accessing pp not gp
     if (gp == NULL) {
-        *x = gp->x;
-        *y = gp->y;
-        *z = gp->z;
+        *x = gp->pos.x;
+        *y = gp->pos.y;
+        *z = gp->pos.z;
         return;
     }
 
@@ -96,19 +100,19 @@ static void calcTornadoLastPos(HSD_Particle* pp, f32* x, f32* y, f32* z)
     cosa = cosf(pp->grav);
     cosb = cosf(pp->fric);
 
-    vz0 = pp->vz - gp->aux.tornado.vel;
-    vx0 = pp->vx - gp->grav;
+    vz0 = pp->vel.z - gp->aux.tornado.vel;
+    vx0 = pp->vel.x - gp->grav;
 
     radius = ABS(gp->radius);
     radius += vz0 * tanf(ABS(gp->angle));
-    radius *= pp->vy;
+    radius *= pp->vel.y;
     px = radius * cosf(vx0);
     py = radius * sinf(vx0);
     pz = vz0;
 
-    *x = px * cosb + pz * sinb + gp->x;
-    *y = -px * sina * sinb + py * cosa + pz * sina * cosb + gp->y;
-    *z = -px * cosa * sinb - py * sina + pz * cosa * cosb + gp->z;
+    *x = px * cosb + pz * sinb + gp->pos.x;
+    *y = -px * sina * sinb + py * cosa + pz * sina * cosb + gp->pos.y;
+    *z = -px * cosa * sinb - py * sina + pz * cosa * cosb + gp->pos.z;
 }
 
 static void getColorPrimEnv(HSD_Particle* pp, GXColor* primCol,
