@@ -285,8 +285,7 @@ bool ftCo_80095328(HSD_GObj* arg0, bool* arg1)
                 }
                 var_r4 = var_r0_3;
             } else {
-                M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-                if ((var_f31 * M2C_FIELD(temp_r3, float*, 0x2C)) == 0.0f) {
+                if ((var_f31 * M2C_FIELD(temp_r3, float*, 0x2C)) >= 0.0f) {
                     if (var_f30 <
                         (float) M2C_FIELD(p_ftCommonData, int*, 0x3FC))
                     {
@@ -472,14 +471,12 @@ void ftCo_80095A30(HSD_GObj* gobj)
     if (var_f1 < 0.0f) {
         var_f1 = -var_f1;
     }
-    M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-    if ((var_f1 == p_ftCommonData->x3C) &&
+    if ((var_f1 >= p_ftCommonData->x3C) &&
         ((float) M2C_FIELD(temp_r3, u8*, 0x673) <
          ((float) p_ftCommonData->x40 + p_ftCommonData->x44)))
     {
-        M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
         if ((M2C_FIELD(temp_r3, float*, 0x620) *
-             M2C_FIELD(temp_r3, float*, 0x2C)) == 0.0f)
+             M2C_FIELD(temp_r3, float*, 0x2C)) >= 0.0f)
         {
             var_r0 = 0x6C;
         } else {
@@ -488,8 +485,7 @@ void ftCo_80095A30(HSD_GObj* gobj)
         var_r29 = var_r0;
     } else {
         temp_f4 = M2C_FIELD(temp_r3, float*, 0x624);
-        M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-        if ((temp_f4 == p_ftCommonData->xCC) &&
+        if ((temp_f4 >= p_ftCommonData->xCC) &&
             (temp_r3_2 = M2C_FIELD(temp_r3, u8*, 0x674),
              sp2C = (int) temp_r3_2, sp28 = 0x43300000,
              (((float) temp_r3_2 < (p_ftCommonData->xD0 +
@@ -497,8 +493,7 @@ void ftCo_80095A30(HSD_GObj* gobj)
         {
             var_r29 = 0x6E;
         } else {
-            M2C_ERROR(/* unknown instruction : cror eq, lt, eq */);
-            if ((temp_f4 == p_ftCommonData->xD4) &&
+            if ((temp_f4 <= p_ftCommonData->xD4) &&
                 ((float) M2C_FIELD(temp_r3, u8*, 0x674) < p_ftCommonData->xD8))
             {
                 var_r29 = 0x6F;
@@ -507,18 +502,15 @@ void ftCo_80095A30(HSD_GObj* gobj)
                 if (var_f1_2 < 0.0f) {
                     var_f1_2 = -var_f1_2;
                 }
-                M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-                if (var_f1_2 == p_ftCommonData->x98) {
+                if (var_f1_2 >= p_ftCommonData->x98) {
                     if (ftCo_GetLStickAngle((Fighter*) temp_r3) < 0.0f) {
                         var_f1_3 = -ftCo_GetLStickAngle((Fighter*) temp_r3);
                     } else {
                         var_f1_3 = ftCo_GetLStickAngle((Fighter*) temp_r3);
                     }
-                    M2C_ERROR(/* unknown instruction : cror eq, lt, eq */);
-                    if (var_f1_3 == p_ftCommonData->x20) {
-                        M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
+                    if (var_f1_3 <= p_ftCommonData->x20) {
                         if ((M2C_FIELD(temp_r3, float*, 0x620) *
-                             M2C_FIELD(temp_r3, float*, 0x2C)) == 0.0f)
+                             M2C_FIELD(temp_r3, float*, 0x2C)) >= 0.0f)
                         {
                             var_r0_2 = 0x5E;
                         } else {
@@ -530,16 +522,14 @@ void ftCo_80095A30(HSD_GObj* gobj)
                     }
                 } else {
                 block_25:
-                    M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-                    if ((M2C_FIELD(temp_r3, float*, 0x624) ==
+                    if ((M2C_FIELD(temp_r3, float*, 0x624) >=
                          p_ftCommonData->attackhi3_stick_threshold_y) &&
                         (ftCo_GetLStickAngle((Fighter*) temp_r3) >
                          p_ftCommonData->x20))
                     {
                         var_r29 = 0x60;
                     } else {
-                        M2C_ERROR(/* unknown instruction : cror eq, lt, eq */);
-                        if ((M2C_FIELD(temp_r3, float*, 0x624) ==
+                        if ((M2C_FIELD(temp_r3, float*, 0x624) <=
                              p_ftCommonData->xB0) &&
                             (ftCo_GetLStickAngle((Fighter*) temp_r3) <
                              -p_ftCommonData->x20))
