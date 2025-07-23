@@ -104,11 +104,11 @@ void gm_801A64A8_OnFrame(void)
 bool gm_801A659C(int arg0)
 {
     switch (gm_801A4310()) {
-    case 21:
+    case MJ_CLASSIC_GOVER:
         return gm_80160474(arg0, 3);
-    case 22:
+    case MJ_ADVENTURE_GOVER:
         return gm_80160474(arg0, 4);
-    case 26:
+    case MJ_DEBUG_GOVER:
         return gm_80160474(arg0, gm_801BF050());
     default:
         return gm_80160474(arg0, 5);
@@ -448,7 +448,7 @@ void gm_801A9D0C_OnFrame(void)
     } else if (gm_804D67C9 != 0) {
         gm_804D67C9--;
         if (gm_804D67C9 == 0) {
-            if (gm_801A4310() == 0x1A) {
+            if (gm_801A4310() == MJ_DEBUG_GOVER) {
                 gm_801A6630(6);
             } else {
                 gm_801A6630(1);

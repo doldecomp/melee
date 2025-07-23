@@ -398,11 +398,11 @@ struct UnkAllstarData* fn_8017DEC8(int arg0)
 struct UnkAllstarData* fn_8017DF28(void)
 {
     switch (gm_801A4310()) {
-    case 3:
+    case MJ_CLASSIC:
         return gm_8017EB30();
-    case 4:
+    case MJ_ADVENTURE:
         return gm_8017E424();
-    case 5:
+    case MJ_ALLSTAR:
         return &gm_80473A18;
     default:
         return NULL;
@@ -412,11 +412,11 @@ struct UnkAllstarData* fn_8017DF28(void)
 u8 fn_8017DF90(void)
 {
     switch (gm_801A4310()) {
-    case 3:
+    case MJ_CLASSIC:
         return 1;
-    case 4:
+    case MJ_ADVENTURE:
         return 0;
-    case 5:
+    case MJ_ALLSTAR:
         return 2;
     default:
         return 3;
