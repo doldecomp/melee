@@ -55,7 +55,6 @@ static struct UnkAllstarData lbl_80472CB0;
 static struct lbl_80472D28_t lbl_80472D28;
 static struct lbl_80472E48_t lbl_80472E48;
 static int lbl_80472EC8[4];
-static u8 lbl_80473594[0x14];
 
 void fn_8017C0C8(void)
 {
@@ -619,19 +618,26 @@ void gm_80181A00(s32 arg0, s32 arg1)
     lbl_80472E48.unk_8 = arg1;
 }
 
+static struct {
+    u8 x0;
+    u16 x2;
+    int x4;
+    int pad;
+} lbl_80473594;
+
 u8 gm_80181A14(void)
 {
-    return *lbl_80473594;
+    return lbl_80473594.x0;
 }
 
 u16 gm_80181A24(void)
 {
-    return M2C_FIELD(&lbl_80473594, u16*, 2);
+    return lbl_80473594.x2;
 }
 
 s32 gm_80181A34(void)
 {
-    return M2C_FIELD(&lbl_80473594, s32*, 4);
+    return lbl_80473594.x4;
 }
 
 /// #gm_80181A44

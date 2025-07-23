@@ -4,7 +4,12 @@
 
 #include <dolphin/gx.h>
 #include <math_ppc.h>
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/sobjlib.h>
+#include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
 #include <melee/cm/camera.h>
@@ -13,6 +18,9 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/gm/types.h>
@@ -28,7 +36,10 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 
-static HSD_JObj* lbl_804735A8[0x10];
+static struct {
+    int x0;
+    HSD_JObj* x4[0xF];
+} lbl_804735A8;
 static struct {
     HSD_ImageDesc x40[3];
     HSD_ImageDesc x88[3];
@@ -58,17 +69,35 @@ static struct {
 
 /// #fn_80184138
 
-/// #fn_801849E0
+void fn_801849E0(HSD_GObj* gobj)
+{
+    fn_8018325C(gobj, 0);
+}
 
-/// #fn_80184A04
+void fn_80184A04(HSD_GObj* gobj)
+{
+    fn_8018325C(gobj, 1);
+}
 
-/// #fn_80184A28
+void fn_80184A28(HSD_GObj* gobj)
+{
+    fn_8018325C(gobj, 2);
+}
 
-/// #fn_80184A4C
+void fn_80184A4C(HSD_GObj* gobj)
+{
+    fn_80184138(gobj, 0);
+}
 
-/// #fn_80184A70
+void fn_80184A70(HSD_GObj* gobj)
+{
+    fn_80184138(gobj, 1);
+}
 
-/// #fn_80184A94
+void fn_80184A94(HSD_GObj* gobj)
+{
+    fn_80184138(gobj, 2);
+}
 
 /// #fn_80184AB8
 
@@ -230,18 +259,24 @@ void fn_80186400(void)
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
     if (lbl_804735E8.xE4 != 3) {
-        lb_80011E24(jobj, &lbl_804735A8[1], 4, -1);
-        lb_80011E24(jobj, &lbl_804735A8[2], 5, -1);
-        lb_80011E24(jobj, &lbl_804735A8[3], 0x3A, -1);
-        lb_80011E24(jobj, &lbl_804735A8[4], 0x3B, -1);
-        HSD_JObjSetTranslateZ(lbl_804735A8[3], 10000.0F);
-        HSD_JObjSetTranslateZ(lbl_804735A8[4], 10000.0F);
+        lb_80011E24(jobj, &lbl_804735A8.x4[0], 4, -1);
+        lb_80011E24(jobj, &lbl_804735A8.x4[1], 5, -1);
+        lb_80011E24(jobj, &lbl_804735A8.x4[2], 0x3A, -1);
+        lb_80011E24(jobj, &lbl_804735A8.x4[3], 0x3B, -1);
+        HSD_JObjSetTranslateZ(lbl_804735A8.x4[2], 10000.0F);
+        HSD_JObjSetTranslateZ(lbl_804735A8.x4[3], 10000.0F);
     }
 }
 
 /// #fn_80186634
 
-/// #gm_80186DFC_OnFrame
+void gm_80186DFC_OnFrame(void)
+{
+    if (lbl_804735A8.x0 != 0) {
+        lbAudioAx_800236DC();
+        gm_801A4B60();
+    }
+}
 
 /// #gm_80186E30_OnEnter
 
@@ -255,6 +290,8 @@ void fn_80186400(void)
 
 /// #fn_801874FC
 
+#pragma push
+#pragma dont_inline on
 void fn_80187714(void)
 {
     Camera_80028B9C(6);
@@ -268,10 +305,63 @@ void fn_80187714(void)
     efLib_8005B4B8();
     efAsync_8006737C(0);
 }
+#pragma pop
 
-/// #gm_8018776C_OnFrame
+extern HSD_Archive* lbl_804D6610;
+extern s32 lbl_804736B0[];
 
-/// #gm_801877A8_OnEnter
+void gm_8018776C_OnFrame(void)
+{
+    if (lbl_804736B0[0] != 0) {
+        lbArchive_80016EFC(lbl_804D6610);
+        lbAudioAx_800236DC();
+        gm_801A4B60();
+    }
+}
+
+extern SceneDesc* lbl_804D6614;
+static struct enterdata {
+    int x0, x4;
+} lbl_804D6618;
+
+void gm_801877A8_OnEnter(void* arg0_)
+{
+    struct enterdata* arg0 = arg0_;
+    HSD_GObj* temp_r30;
+    HSD_GObj* temp_r30_2;
+    HSD_GObj* temp_r30_3;
+    HSD_LObj* lobj;
+    HSD_CObj* cobj;
+    HSD_Fog* fog;
+    PAD_STACK(8);
+
+    lbl_804736B0[0] = 0;
+    lbl_804736B0[1] = 0;
+
+    lbl_804D6618 = *arg0;
+    fn_80187714();
+    lbl_804D6610 = lbArchive_80016DBC("IrAls", &lbl_804D6614, "ScItrAllstar_scene_data", 0);
+
+    temp_r30 = GObj_Create(0x13, 0x14, 0);
+    cobj = HSD_CObjLoadDesc(lbl_804D6614->cameras[0].desc);
+    HSD_GObjObject_80390A70(temp_r30, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(temp_r30, fn_80187494, 8);
+    temp_r30->gxlink_prios = 0x801;
+
+    temp_r30_2 = GObj_Create(0xB, 3, 0);
+    lobj = lb_80011AC4(lbl_804D6614->lights);
+    HSD_GObjObject_80390A70(temp_r30_2, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(temp_r30_2, HSD_GObj_LObjCallback, 0, 0);
+    fn_801874FC();
+
+    temp_r30_3 = GObj_Create(0xE, 0xF, 0);
+    fog = HSD_FogLoadDesc(lbl_804D6614->fogs[0].desc);
+    HSD_GObjObject_80390A70(temp_r30_3, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(temp_r30_3, HSD_GObj_FogCallback, 0xB, 0);
+    fn_801873F0();
+    lbAudioAx_80023F28(0x2D);
+}
+
 
 /// #fn_80187910
 
@@ -292,17 +382,6 @@ void fn_80187714(void)
 /// #gm_8018841C
 
 /* 4D4190 */ static s32 lbl_804D4190 = 0xFFFFFFFF;
-
-struct lbl_803D9D20_t {
-    /*  +0 */ char pad_0[0xB0];
-    /* +B0 */ HSD_CObj* cobj;
-    /* +B4 */ char pad_B4[0xD8 - 0xB4];
-    /* +D8 */ Vec3 eye_position;
-    /* +E4 */ char pad_E4[0xEC - 0xE4];
-    /* +EC */ Vec3 interest;
-};
-
-static struct lbl_803D9D20_t lbl_803D9D20 = { 0 };
 
 static int lbl_80473700[69];
 static TmData gm_804771C4;
@@ -389,6 +468,17 @@ int gm_80188454(int idx)
 /// #gm_8018F1B0
 
 /// #fn_8018F310
+
+struct lbl_803D9D20_t {
+    /*  +0 */ char pad_0[0xB0];
+    /* +B0 */ HSD_CObj* cobj;
+    /* +B4 */ char pad_B4[0xD8 - 0xB4];
+    /* +D8 */ Vec3 eye_position;
+    /* +E4 */ char pad_E4[0xEC - 0xE4];
+    /* +EC */ Vec3 interest;
+};
+
+static struct lbl_803D9D20_t lbl_803D9D20 = { 0 };
 
 u8 fn_8018F3BC(s32 arg0)
 {
