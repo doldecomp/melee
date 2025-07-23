@@ -18,7 +18,7 @@
 #include "ft/ftparts.h"
 #include "ftGameWatch/ftGw_Init.h"
 #include "ftKirby/ftKb_Init.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"

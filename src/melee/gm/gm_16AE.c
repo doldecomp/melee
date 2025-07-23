@@ -1,6 +1,8 @@
-#include "gm_1601.h"
+#include "gm_16AE.h"
 
 #include "gm_16AE.static.h"
+
+#include "gm_unsplit.h"
 
 #include "gmmain_lib.h"
 
@@ -10,10 +12,6 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdevice.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gm_1B03.h>
 #include <melee/gm/gmpause.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grstadium.h>
@@ -295,7 +293,7 @@ void fn_8016B388(int arg0, s16 arg1)
 
 bool gm_8016B3A0(void)
 {
-    if (gm_801A4310() == 0x10) {
+    if (gm_801A4310() == MJ_SUPER_SUDDEN_DEATH_VS) {
         return true;
     }
     return false;
@@ -304,9 +302,9 @@ bool gm_8016B3A0(void)
 bool gm_8016B3D8(void)
 {
     switch (gm_801A4310()) {
-    case 3:
-    case 4:
-    case 5:
+    case MJ_CLASSIC:
+    case MJ_ADVENTURE:
+    case MJ_ALLSTAR:
         return true;
     default:
         return false;
@@ -316,19 +314,19 @@ bool gm_8016B3D8(void)
 bool gm_8016B41C(void)
 {
     switch (gm_801A4310()) {
-    case 3:
-    case 4:
-    case 5:
-    case 0xF:
-    case 0x1C:
-    case 0x20:
-    case 0x21:
-    case 0x22:
-    case 0x23:
-    case 0x24:
-    case 0x25:
-    case 0x26:
-    case 0x2B:
+    case MJ_CLASSIC:
+    case MJ_ADVENTURE:
+    case MJ_ALLSTAR:
+    case MJ_TARGET_TEST:
+    case MJ_TRAINING:
+    case MJ_HOME_RUN_CONTEST:
+    case MJ_10MAN_VS:
+    case MJ_100MAN_VS:
+    case MJ_3MIN_VS:
+    case MJ_15MIN_VS:
+    case MJ_ENDLESS_VS:
+    case MJ_CRUEL_VS:
+    case MJ_EVENT:
         return true;
     default:
         return false;
@@ -613,7 +611,7 @@ int fn_8016BC74(void)
     int temp_r3;
     PAD_STACK(0x18);
 
-    if (gm_8016B41C() || gm_801A4310() == 0x14 ||
+    if (gm_8016B41C() || gm_801A4310() == MJ_CHALLENGER_APPROACH ||
         (gm_801A4310() == 2 && gm_801A42C4() == 0x81)) {
         temp_r3 = Player_GetPlayerId(0);
         temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
@@ -1012,11 +1010,11 @@ void fn_8016C7F0(void)
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
         Camera_80030E44(4, NULL);
     }
-    if (gm_801A4310() == 0xF || (gm_801A4310() == 3 && lbl_8046B6A0.x24C8.xE >= 0x21 && lbl_8046B6A0.x24C8.xE <= 0x3A)) {
+    if (gm_801A4310() == MJ_TARGET_TEST || (gm_801A4310() == MJ_CLASSIC && lbl_8046B6A0.x24C8.xE >= 0x21 && lbl_8046B6A0.x24C8.xE <= 0x3A)) {
         temp_r29_2 = (u8*) gm_801B6320();
         temp_r30 = gm_8017EB30();
         var_r28 = 0;
-        if (gm_801A4310() == 0xF) {
+        if (gm_801A4310() == MJ_TARGET_TEST) {
             var_r29_2 = gm_80164024(*temp_r29_2);
         } else {
             var_r29_2 = gm_80164024(temp_r30->x0);
@@ -1040,16 +1038,16 @@ void fn_8016C7F0(void)
             lbl_8046B6A0.unk_18 = 0x28;
         }
     }
-    if (gm_801A4310() == 0x2B && lbl_8046B6A0.unk_10 == 0x9C41) {
+    if (gm_801A4310() == MJ_EVENT && lbl_8046B6A0.unk_10 == 0x9C41) {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0x5A);
     }
     switch (gm_801A4310()) {
-    case 0x21:
-    case 0x22:
-    case 0x23:
-    case 0x24:
-    case 0x25:
-    case 0x26:
+    case MJ_10MAN_VS:
+    case MJ_100MAN_VS:
+    case MJ_3MIN_VS:
+    case MJ_15MIN_VS:
+    case MJ_ENDLESS_VS:
+    case MJ_CRUEL_VS:
         fn_80182B5C();
     }
 }
@@ -1960,15 +1958,15 @@ struct EndMeleeData {
 
 static inline bool gm_8016E9C8_inline() {
     switch (gm_801A4310()) {
-    case 0x10:
-    case 0x11:
-    case 0x12:
-    case 0x13:
-    case 0x1D:
-    case 0x1E:
-    case 0x1F:
-    case 0x2A:
-    case 0x2C:
+    case MJ_SUPER_SUDDEN_DEATH_VS:
+    case MJ_INVISIBLE_VS:
+    case MJ_SLOMO_VS:
+    case MJ_LIGHTNING_VS:
+    case MJ_TINY_VS:
+    case MJ_GIANT_VS:
+    case MJ_STAMINA_VS:
+    case MJ_FIXED_CAMERA_VS:
+    case MJ_SINGLE_BUTTON_VS:
         return true;
     default:
         return false;
@@ -2002,7 +2000,7 @@ void gm_8016E9C8(void* arg0_raw)
     arg0->x4 = lbl_8046B6A0.timer_seconds;
     arg0->x8 = Ground_801C5ABC();
 
-    if (gm_8016B3D8() || gm_8016E9C8_inline() || gm_801A4310() == 2) {
+    if (gm_8016B3D8() || gm_8016E9C8_inline() || gm_801A4310() == MJ_VS) {
         if (lbl_8046B6A0.match_result != 7 && lbl_8046B6A0.match_result != 8) {
             for (i = 0; i < 6; i++) {
                 if (Player_GetPlayerSlotType(i) == 0) {

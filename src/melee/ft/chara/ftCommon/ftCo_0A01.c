@@ -19,7 +19,7 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gr/grbigblue.h"
 #include "gr/grcorneria.h"
 #include "gr/grinishie1.h"

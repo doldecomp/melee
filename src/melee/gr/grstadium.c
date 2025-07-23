@@ -17,7 +17,7 @@
 #include <sysdolphin/baselib/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/gr/grdisplay.h>

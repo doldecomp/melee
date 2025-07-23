@@ -4,7 +4,7 @@
 
 #include "gr/grbattle.h"
 
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"

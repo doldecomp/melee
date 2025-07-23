@@ -26,7 +26,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftpickupitem.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "it/items/it_2E5A.h"

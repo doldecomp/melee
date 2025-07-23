@@ -10,7 +10,7 @@
 #include "baselib/random.h"
 #include "baselib/sislib.h"
 #include "cm/camera.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
 #include "gm/gm_1B03.h"
@@ -860,7 +860,7 @@ bool un_802FFC6C(bool update_scene)
         lbAudioAx_800245D4(0x7F);
         lbAudioAx_800245F4(0x7F);
         lbAudioAx_80024614(0x7F);
-        gm_801A42F8(0);
+        gm_801A42F8(MJ_TITLE);
         gm_801A4B60();
     }
     return true;
@@ -1035,7 +1035,7 @@ bool un_80300968(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x8);
+        gm_801A42F8(MJ_HANYU_CSS);
         gm_801A4B60();
     }
 
@@ -1046,7 +1046,7 @@ bool un_803009A4(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x9);
+        gm_801A42F8(MJ_HANYU_SSS);
         gm_801A4B60();
     }
 
@@ -1077,7 +1077,7 @@ bool un_80300BBC(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         un_80311680();
-        gm_801A42F8(0xB);
+        gm_801A42F8(MJ_TOY_GALLERY);
         gm_801A4B60();
     }
 
@@ -1089,7 +1089,7 @@ bool un_80300BF8(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         Trophy_SetUnlockState(0xE6, true);
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         gm_801A4B60();
     }
 
@@ -1101,7 +1101,7 @@ bool un_80300C3C(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         Trophy_SetUnlockState(0xC9, true);
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         gm_801A4B60();
     }
 
@@ -1154,7 +1154,7 @@ bool un_80301328(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x0);
-        gm_801A42F8(0x18);
+        gm_801A42F8(MJ_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1166,7 +1166,7 @@ bool un_8030136C(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x5);
-        gm_801A42F8(0x18);
+        gm_801A42F8(MJ_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1177,7 +1177,7 @@ bool un_803013B0(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x19);
+        gm_801A42F8(MJ_DEBUG_CUTSCENE);
         gm_801A4B60();
     }
 
@@ -1192,7 +1192,7 @@ bool un_80301454(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x28);
+        gm_801A42F8(MJ_BOOT);
         gm_801A4B60();
     }
 
@@ -1258,7 +1258,7 @@ bool un_803015BC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x27);
+        gm_801A42F8(MJ_PROGRESSIVE_SCAN);
         gm_801A4B60();
     }
 
@@ -1312,7 +1312,7 @@ bool un_80301D40(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x2A);
+        gm_801A42F8(MJ_FIXED_CAMERA_VS);
         gm_801A4B60();
     }
 

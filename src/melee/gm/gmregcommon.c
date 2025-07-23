@@ -1,7 +1,4 @@
-#include "gm_1601.h"
-
-#include "gm_1601.static.h"
-
+#include "gmregcommon.h"
 
 s32 gm_8017BE84(u32 arg0)
 {

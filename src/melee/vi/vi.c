@@ -1,7 +1,7 @@
 #include "vi.h"
 
 #include "cm/camera.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"

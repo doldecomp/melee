@@ -1,3 +1,7 @@
+#include "gmtou.h"
+
+#include "gm_unsplit.h"
+
 #include "baselib/forward.h"
 #include "gm/gmtou.static.h"
 #include "placeholder.h"
@@ -5,11 +9,9 @@
 #include "baselib/jobj.h"
 #include "baselib/random.h"
 #include "baselib/sislib.h"
-#include "gm/gm_17C0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "sc/types.h"
-#include <melee/gm/gmtou.h>
 #include <melee/gm/types.h>
 
 // Filename is just a guess, based on some strings in the file

@@ -1,10 +1,6 @@
 #include "gmtitle.h"
 
-#include "gm_1601.h"
-#include "gm_1A36.h"
-#include "gm_1A3F.h"
-#include "gm_1A45.h"
-#include "gm_1B03.h"
+#include "gm_unsplit.h"
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -81,7 +77,7 @@ static inline void fn_801A1498_inline(void)
                        gmTitle_80479B38.matanim_joint,
                        gmTitle_80479B38.shapeanim_joint);
     HSD_GObjProc_8038FD54(gobj, gmTitle_801A146C, 0);
-    if (gm_801A4310() == 0 || (gm_801A4310() == 0x18 && gm_801A42C4() == 2)) {
+    if (gm_801A4310() == MJ_TITLE || (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2)) {
         var_r0 = false;
     } else {
         var_r0 = true;
@@ -133,7 +129,7 @@ HSD_GObj* gmTitle_801A165C(void)
                        gmTitle_80479B28.matanim_joint,
                        gmTitle_80479B28.shapeanim_joint);
 
-    if (gm_801A4310() == 0 || (gm_801A4310() == 0x18 && gm_801A42C4() == 2)) {
+    if (gm_801A4310() == MJ_TITLE || (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2)) {
         var_r0 = false;
     } else {
         var_r0 = true;

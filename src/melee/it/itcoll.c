@@ -14,7 +14,7 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_DownAttack.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -1519,7 +1519,6 @@ void it_80271B60(Item_GObj* item_gobj)
         while (cnt < Item_804A0CCC.x150) {
             y_pos = var_r29->xC0_vec3_arr[cnt].y;
             x_pos = var_r29->xC0_vec3_arr[cnt].x;
-            // M2C_ERROR(/* unknown instruction: cror 0x2, 0x1, 0x2 */);
             if (((y_pos + (item->xBEC.top + var_r30->ecb_arr[cnt].top)) >=
                  sp24.y) &&
                 ((y_pos + (item->xBEC.bottom +

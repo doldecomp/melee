@@ -14,7 +14,7 @@
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "lb/lb_00B0.h"
