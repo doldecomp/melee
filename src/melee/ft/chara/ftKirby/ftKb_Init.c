@@ -3576,19 +3576,69 @@ void ftKb_SpecialAirHi3_IASA(Fighter_GObj* gobj) {}
 
 /// #ftKb_SpecialAirHiEnd_IASA
 
-/// #ftKb_SpecialHi1_Phys
+void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
+    ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    PAD_STACK(4); //Todo: Remove This 
+    ft_80084FA8(gobj);
+    ftCommon_8007CADC(fp, 0.0f, temp_r30->air_drift_stick_mul * dat_attr->specialhi_horizontal_momentum, temp_r30->air_drift_max);
+    ftCommon_8007CB74(gobj);
+}
 
-/// #ftKb_SpecialHi2_Phys
+void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
+    ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    PAD_STACK(4); //Todo: Remove This 
+    ft_80085134(gobj);
+    ftCommon_8007CADC(fp, 0.0f, temp_r30->air_drift_stick_mul * dat_attr->specialhi_horizontal_momentum, temp_r30->air_drift_max);
+    ftCommon_8007CB74(gobj);
+}
 
-/// #ftKb_SpecialHi3_Phys
+void ftKb_SpecialHi3_Phys(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    ftCommon_8007CADC(fp, 0.0f, fp->co_attrs.air_drift_stick_mul * dat_attr->specialhi_horizontal_momentum, fp->co_attrs.air_drift_max);
+    ftCommon_8007CB74(gobj);
+}
 
-/// #ftKb_SpecialHi4_Phys
+void ftKb_SpecialHi4_Phys(Fighter_GObj* gobj) {
+    ft_80084FA8(gobj);
+}
 
-/// #ftKb_SpecialAirHi1_Phys
+void ftKb_SpecialAirHi1_Phys(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);    
+    f32 stack; //Needed For Stack?
+    ftCo_DatAttrs* temp_r30 =  &fp->co_attrs;
+    ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    
+    ft_80085134(gobj);
+    if (fp->self_vel.y > 0.0f) {
+        fp->self_vel.y *= dat_attr->specialhi_vertical_momentum;
+    }
+    ftCommon_8007D3A8(fp, 0.0f, temp_r30->air_drift_stick_mul * dat_attr->specialhi_horizontal_momentum, temp_r30->air_drift_max);
+}
 
-/// #ftKb_SpecialAirHi2_Phys
+void ftKb_SpecialAirHi2_Phys(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);    
+    f32 stack; //Needed For Stack?
+    ftCo_DatAttrs* temp_r30 =  &fp->co_attrs;
+    ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    
+    ft_80085134(gobj);
+    if (fp->self_vel.y > 0.0f) {
+        fp->self_vel.y *= dat_attr->specialhi_vertical_momentum;
+    }
+    ftCommon_8007D3A8(fp, 0.0f, temp_r30->air_drift_stick_mul * dat_attr->specialhi_horizontal_momentum, temp_r30->air_drift_max);
+}
 
-/// #ftKb_SpecialAirHi3_Phys
+void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);    
+    ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    
+    ftCommon_8007D3A8(fp, 0.0f, fp->co_attrs.air_drift_stick_mul *dat_attr->specialhi_horizontal_momentum, fp->co_attrs.air_drift_max);
+}
 
 /// #ftKb_SpecialAirHiEnd_Phys
 
@@ -3690,7 +3740,13 @@ void ftKb_SpecialAirLw_800F5524(HSD_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialS_Enter
+void ftKb_SpecialS_Enter(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = 0;
+    Fighter_ChangeMotionState(gobj, 0x17F, 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->accessory4_cb = &fn_800F53AC;
+}
 
 /// #ftKb_SpecialAirS_Enter
 
@@ -3732,9 +3788,25 @@ bool ftKb_SpecialN_800F597C(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F598C
 
-/// #ftKb_SpecialN_800F5A04
+void ftKb_SpecialN_800F5A04(Fighter_GObj* gobj, f32 arg1) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    if (!fp->ground_or_air) {
+        fp->gr_vel = arg1 * dat_attr->specialn_stop_momentum;
+        return;
+    }
+    fp->self_vel.x = arg1 * dat_attr->specialn_stop_momentum;
+}
 
-/// #ftKb_SpecialN_800F5A38
+
+bool ftKb_SpecialN_800F5A38(Fighter_GObj* gobj, Fighter* victim_fp) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtMotionId id = fp->motion_id;
+    if (id == ftKb_MS_EatWait || id == ftKb_MS_EatFall) {
+        return 1;
+    }
+    return 0;
+}
 
 float ftKb_SpecialN_800F5A60(Fighter_GObj* gobj)
 {
