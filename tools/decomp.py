@@ -136,11 +136,9 @@ def main() -> None:
     is_function = True
 
     if (obj_file := find_obj(OBJ_ROOT, m2c_input)) is not None:
-        print(f"Assuming function input for name <{m2c_input}>.", file=sys.stderr)
         asm_file = ASM_ROOT / cast(Path, obj_file).with_suffix(".s")
         m2c_args = [ "--function", m2c_input ]
     else:
-        print(f"Assuming TU input for name <{m2c_input}>.", file=sys.stderr)
         if args.write:
             print(f"--write currently unimplemented with translation unit input", file=stderr)
             sys.exit(1)
@@ -229,7 +227,8 @@ def main() -> None:
 
             _ = src_file.write_text(result)
     else:
-        print(f"Asm file does not exist at path {asm_file}", file=stderr)
+        print(f"If a function was intended, then no function with the name <{m2c_input}> was found.", file=stderr)
+        print(f"If a TU was intended, then the expected asm file does not exist at path {asm_file}", file=stderr)
         sys.exit(1)
 
 if __name__ == "__main__":
