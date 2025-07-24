@@ -267,7 +267,7 @@ union ftCommon_MotionVars {
         /* fp+236C */ Vec3 scale;
     } capturekirby;
     struct {
-        /* fp+2340 */ ftKb_GObj* thrower_gobj;
+        /* fp+2340 */ Fighter_GObj* thrower_gobj;
         /* fp+2344 */ float x4;
         /* fp+2348 */ float x8;
         /* fp+234C */ float xC;
