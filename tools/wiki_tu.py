@@ -26,8 +26,15 @@ def read_wiki(lines) -> Dict[str, Dict[str, str]]:
     def read_tr(token: TableRow):
         assert token.children is not None
         td = list(map(read_text, token.children))
-        if td[5] or td[6]:
-            assignees[td[0]] = {"discord": td[5], "github": td[6]}
+
+        assignee = {}
+        if len(td) > 5 and td[5]:
+            assignee["discord"] = td[5]
+        if len(td) > 6 and td[6]:
+            assignee["github"] = td[6]
+
+        if assignee:
+            assignees[td[0]] = assignee
 
     def read_table(token: Table):
         assert token.children is not None
@@ -97,11 +104,16 @@ File|Matched|Total|%|:grey_question:|Assignee<br>Discord|Assignee<br>GitHub
         percent = f"`{humanfriendly.round_number(code_percent)}%`"
         linked = ":heavy_check_mark:" if unit["metadata"].get("complete") else ":x:"
 
-        if assignee := assignees.get(file):
+        assignee = assignees.get(file, {})
+
+        if "discord" in assignee:
             discord = f"`{assignee['discord']}`"
-            github = f"[{assignee['github']}](../commits?author={assignee['github']})"
         else:
             discord = "<!-- Discord -->"
+
+        if "github" in assignee:
+            github = f"[{assignee['github']}](../commits?author={assignee['github']})"
+        else:
             github = "<!-- GitHub -->"
 
         print(f"{file_link}|{matched}|{total}|{percent}|{linked}|{discord}|{github}")
