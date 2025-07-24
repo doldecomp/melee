@@ -6,7 +6,6 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef struct HSD_GObj ftKb_GObj;
 typedef struct Fighter ftKb_Fighter;
 typedef struct ftKb_DatAttrs ftKb_DatAttrs;
 

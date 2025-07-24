@@ -19,7 +19,7 @@ void it_802ADC04(Item_GObj* gobj)
     if (it->owner == NULL) {
         return;
     }
-    ftKb_SpecialAirLw_800F539C((ftKb_GObj*) it->owner);
+    ftKb_SpecialAirLw_800F539C((Fighter_GObj*) it->owner);
 }
 
 void it_802ADC34(Item_GObj* gobj)
