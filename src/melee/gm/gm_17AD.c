@@ -1,9 +1,8 @@
 #include "gm_17AD.h"
-#include "gm/forward.h"
-#include "placeholder.h"
-#include "gm/gmresult.h"
-#include "gm/types.h"
-#include "lb/lblanguage.h"
+
+#include <melee/gm/gmresult.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lblanguage.h>
 
 /// TODO :: figure out how to force the other functions not to inline this
 #pragma dont_inline on
@@ -97,7 +96,7 @@ s32 fn_8017AE70(s32 arg0)
         return -1;
     }
     if (me->player_standings[0].slot_type != 3) {
-        return fn_8017AD04(me->player_standings[arg0].kills, 999999);
+        return fn_8017AD04(me->player_standings[arg0].kills[0], 999999);
     }
     return -1;
 }
@@ -112,7 +111,7 @@ s32 fn_8017AED8(s32 arg0)
         return -1;
     }
     if (me->player_standings[1].slot_type != 3) {
-        return fn_8017AD04(me->player_standings[arg0].x12, 999999);
+        return fn_8017AD04(me->player_standings[arg0].kills[1], 999999);
     }
     return -1;
 }
@@ -127,7 +126,7 @@ s32 fn_8017AF40(s32 arg0)
         return -1;
     }
     if (me->player_standings[2].slot_type != 3) {
-        return fn_8017AD04(me->player_standings[arg0].x14, 999999);
+        return fn_8017AD04(me->player_standings[arg0].kills[2], 999999);
     }
     return -1;
 }
@@ -142,7 +141,7 @@ s32 fn_8017AFA8(s32 arg0)
         return -1;
     }
     if (me->player_standings[3].slot_type != 3) {
-        return fn_8017AD04(me->player_standings[arg0].x16, 999999);
+        return fn_8017AD04(me->player_standings[arg0].kills[3], 999999);
     }
     return -1;
 }
@@ -172,9 +171,8 @@ s32 fn_8017B07C(s32 arg0)
     me = fn_80174274();
     if (arg0 == 0) {
         return -1;
-    }
-    else if (me->player_standings[0].slot_type != 3) {
-        var_r3 = fn_8017AD04(me->player_standings[0].kills, 999999);
+    } else if (me->player_standings[0].slot_type != 3) {
+        var_r3 = fn_8017AD04(me->player_standings[0].kills[arg0], 999999);
         return var_r3;
     }
     return -1;
@@ -190,7 +188,7 @@ s32 fn_8017B0E4(s32 arg0)
         return -1;
     }
     if (me->player_standings[1].slot_type != 3) {
-        return fn_8017AD04(me->player_standings[1].kills, 999999);
+        return fn_8017AD04(me->player_standings[1].kills[arg0], 999999);
     }
     return -1;
 }
@@ -205,7 +203,7 @@ s32 fn_8017B14C(s32 arg0)
         return -1;
     }
     if (me->player_standings[2].slot_type != 3) {
-        return fn_8017AD04(me->player_standings[2].kills, 999999);
+        return fn_8017AD04(me->player_standings[2].kills[arg0], 999999);
     }
     return -1;
 }
@@ -220,7 +218,7 @@ s32 fn_8017B1B4(s32 arg0)
         return -1;
     }
     else if (me->player_standings[3].slot_type != 3) {
-        return fn_8017AD04(me->player_standings[arg0].kills, 999999);
+        return fn_8017AD04(me->player_standings[3].kills[arg0], 999999);
     }
     return -1;
 }
