@@ -1,15 +1,16 @@
 #include "gmresult.h"
+#include "gm/types.h"
 
 struct lbl_8046DBE8_t {
     /*  +0 */ char pad_0[0x94];
-    /* +94 */ int x94;
+    /* +94 */ MatchEnd* x94;
     /* +98 */ char pad_98[0x5A8 - 0x98];
 };
 STATIC_ASSERT(sizeof(struct lbl_8046DBE8_t) == 0x5A8);
 
 static struct lbl_8046DBE8_t lbl_8046DBE8;
 
-int fn_80174274(void)
+MatchEnd* fn_80174274(void)
 {
     return lbl_8046DBE8.x94;
 }

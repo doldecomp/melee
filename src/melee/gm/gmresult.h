@@ -2,8 +2,9 @@
 #define MELEE_GM_RESULT_H
 
 #include <placeholder.h>
+#include "gm/types.h"
 
-/* 174274 */ int fn_80174274(void);
+/* 174274 */ MatchEnd* fn_80174274(void);
 /* 174284 */ UNK_RET fn_80174284(UNK_PARAMS);
 /* 174338 */ UNK_RET fn_80174338(UNK_PARAMS);
 /* 17435C */ UNK_RET fn_8017435C(UNK_PARAMS);

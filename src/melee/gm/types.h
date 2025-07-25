@@ -6,6 +6,7 @@
 
 #include "baselib/forward.h"
 #include <melee/gm/forward.h> // IWYU pragma: export
+#include "dolphin/types.h"
 #include <melee/mn/types.h>
 
 #include <common_structs.h>
@@ -458,7 +459,9 @@ struct MatchPlayerData {
     u16 kills;
     u16 x12;
     u16 x14;
-    u8 pad_x16[0x20 - 0x16];
+    u16 x16;
+    u16 x18;
+    s32 x1C;
     int x20;
     int x24;
     u32 x28;
