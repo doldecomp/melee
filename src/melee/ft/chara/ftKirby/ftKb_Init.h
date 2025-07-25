@@ -118,7 +118,7 @@
 /* 0F2164 */ void ftKb_AttackDashAir_Phys(Fighter_GObj* gobj);
 /* 0F2198 */ void ftKb_AttackDashAir_Coll(Fighter_GObj* gobj);
 /* 0F21C0 */ void ftKb_AttackDashAir_800F21C0(Fighter_GObj* gobj);
-/* 0F21E8 */ void fn_800F21E8(HSD_GObj* gobj);  
+/* 0F21E8 */ void fn_800F21E8(HSD_GObj* gobj);
 /* 0F22D4 */ void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj);
 /* 0F2300 */ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj);
 /* 0F23B8 */ void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj);
