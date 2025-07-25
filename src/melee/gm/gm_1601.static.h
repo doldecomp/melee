@@ -35,12 +35,12 @@ struct fn_80166CBC_arg0_t {
 };
 STATIC_ASSERT(sizeof(struct fn_80166CBC_arg0_t) == 0xA8);
 
-struct lbl_8046DBE8_t {
-    /*  +0 */ char pad_0[0x94];
-    /* +94 */ int x94;
-    /* +98 */ char pad_98[0x5A8 - 0x98];
-};
-STATIC_ASSERT(sizeof(struct lbl_8046DBE8_t) == 0x5A8);
+// struct ResultsData {
+//     /*  +0 */ char pad_0[0x94];
+//     /* +94 */ int x94;
+//     /* +98 */ char pad_98[0x5A8 - 0x98];
+// };
+// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
 
 struct lbl_8046B668_t {
     /* 0x00 */ char pad_0[0x1C];
@@ -78,7 +78,7 @@ struct ResultAnimEntry {
 /* 16A1E4 */ static s32 fn_8016A1E4(void);
 /* 3B75F8 */ static const struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
 /* 3B7808 */ static const s16 lbl_803B7808[0x3C / 2] = { 0 };
-/* 3B7864 */ extern const U8Vec4 lbl_803B7864[9];
+/* 3B7864 */ extern const GXColor lbl_803B7864[9];
 /* 3B7888 */ static const u8 lbl_803B7888[0x1C] = { 0 };
 /* 3B78A4 */ static const u8 lbl_803B78A4[0x24] = { 0 };
 /* 3B78C8 */ static struct lbl_803B78C8_0x6 lbl_803B78C8[NUM_UNLOCKABLE_CHARACTERS] = {

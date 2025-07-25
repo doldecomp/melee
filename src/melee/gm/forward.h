@@ -99,6 +99,19 @@ typedef enum MinorSceneKind {
     /* +2D */ MN_COUNT
 } MinorSceneKind;
 
+typedef enum MatchOutcome {
+    OUTCOME_NONE,
+    OUTCOME_TIMEOUT,
+    OUTCOME_ELIMINATION,
+    OUTCOME_0x3,
+    OUTCOME_0x4,
+    OUTCOME_0x5,
+    OUTCOME_0x6,
+    OUTCOME_LRASTART,
+    OUTCOME_RETRY,
+    OUTCOME_0x9,
+} MatchOutcome;
+
 typedef struct MajorScene MajorScene;
 typedef struct MinorScene MinorScene;
 typedef struct MinorSceneHandler MinorSceneHandler;
@@ -117,5 +130,6 @@ typedef struct MatchPlayerData MatchPlayerData;
 typedef struct MatchEnd MatchEnd;
 typedef struct MatchExitInfo MatchExitInfo;
 typedef struct TmData TmData;
+typedef struct ResultsData ResultsData;
 
 #endif
