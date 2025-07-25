@@ -19,7 +19,7 @@
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
 f32 ftYs_Init_804D9A70 = 0.0f;
 
-float ftYs_SpecialN_8012CD10(ftYs_GObj* gobj)
+float ftYs_SpecialN_8012CD10(Fighter_GObj* gobj)
 {
     return M2C_FIELD(gFtDataList[0xE]->ext_attr, f32*, 0x28);
 }
@@ -52,13 +52,13 @@ void ftYs_SpecialN_8012CD88(Vec3* arg0)
     arg0->z = 0;
 }
 
-f32 ftYs_SpecialN_8012CDB4(ftYs_GObj* gobj)
+f32 ftYs_SpecialN_8012CDB4(Fighter_GObj* gobj)
 {
     ftYoshiAttributes* ea = gFtDataList[FTKIND_YOSHI]->ext_attr;
     return ea->x44 / ea->x18;
 }
 
-HSD_Joint* ftYs_SpecialN_8012CDD4(ftYs_GObj* gobj)
+HSD_Joint* ftYs_SpecialN_8012CDD4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* ca = fp->ft_data;
@@ -78,7 +78,7 @@ void ftYs_SpecialN_Enter(HSD_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirN_Enter(ftYs_GObj* gobj)
+void ftYs_SpecialAirN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 0;
@@ -86,8 +86,8 @@ void ftYs_SpecialAirN_Enter(ftYs_GObj* gobj)
                               0.0f, NULL);
     ftAnim_8006EBA4((Fighter_GObj*) gobj);
     ftCommon_8007E2D0((Fighter*) gobj->user_data, 4,
-                      (void (*)(ftYs_GObj*)) fn_8012D0A0,
-                      (void (*)(ftYs_GObj*)) fn_8012D004, ftCo_800BBB8C);
+                      (void (*)(Fighter_GObj*)) fn_8012D0A0,
+                      (void (*)(Fighter_GObj*)) fn_8012D004, ftCo_800BBB8C);
 }
 
 void fn_8012CEE0(HSD_GObj* gobj)
@@ -129,7 +129,7 @@ void fn_8012D004(HSD_GObj* gobj)
     ftCommon_8007E2FC((Fighter_GObj*) gobj);
 }
 
-void fn_8012D0A0(ftYs_GObj* gobj)
+void fn_8012D0A0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -199,7 +199,7 @@ void fn_8012D4F0(Fighter_GObj* gobj)
                               ftYs_Init_804D9A38, NULL);
 }
 
-void ftYs_SpecialN1_Anim(ftYs_GObj* gobj)
+void ftYs_SpecialN1_Anim(Fighter_GObj* gobj)
 {
     u8 _[8]; // brought to full match
 
@@ -208,7 +208,7 @@ void ftYs_SpecialN1_Anim(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirN1_0_Anim(ftYs_GObj* gobj)
+void ftYs_SpecialAirN1_0_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
     if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
@@ -232,102 +232,102 @@ void ftYs_SpecialAirN1_0_Anim(ftYs_GObj* gobj)
 
 /// #ftYs_SpecialAirN2_0_Anim
 
-void ftYs_SpecialN1_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialN1_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialAirN1_0_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialAirN1_0_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialN1_1_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialN1_1_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialN1_0_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialN1_0_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialAirN1_2_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialAirN1_2_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialAirN1_1_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialAirN1_1_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialN2_1_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialN2_1_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialN2_0_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialN2_0_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialAirN2_1_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialAirN2_1_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialAirN2_0_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialAirN2_0_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialN1_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialN1_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C((Fighter_GObj*) gobj, fn_8012D128);
 }
 
-void ftYs_SpecialAirN1_0_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialAirN1_0_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74((Fighter_GObj*) gobj, fn_8012D1AC);
 }
 
-void ftYs_SpecialN1_1_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialN1_1_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C((Fighter_GObj*) gobj, fn_8012D230);
 }
 
-void ftYs_SpecialN1_0_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialN1_0_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C((Fighter_GObj*) gobj, fn_8012D298);
 }
 
-void ftYs_SpecialAirN1_2_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialAirN1_2_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74((Fighter_GObj*) gobj, fn_8012D2F8);
 }
 
-void ftYs_SpecialAirN1_1_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialAirN1_1_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74((Fighter_GObj*) gobj, fn_8012D360);
 }
 
-void ftYs_SpecialN2_1_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialN2_1_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C((Fighter_GObj*) gobj, fn_8012D3C0);
 }
 
-void ftYs_SpecialN2_0_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialN2_0_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C((Fighter_GObj*) gobj, fn_8012D428);
 }
 
-void ftYs_SpecialAirN2_1_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialAirN2_1_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74((Fighter_GObj*) gobj, fn_8012D488);
 }
 
-void ftYs_SpecialAirN2_0_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialAirN2_0_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74((Fighter_GObj*) gobj, fn_8012D4F0);
 }
@@ -374,7 +374,7 @@ void ftYs_SpecialS_8012DF18(HSD_GObj* gobj)
 
 /// #fn_8012E44C
 
-void ftYs_SpecialHi_Anim(ftYs_GObj* gobj)
+void ftYs_SpecialHi_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -388,7 +388,7 @@ void ftYs_SpecialHi_Anim(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirHi_Anim(ftYs_GObj* gobj)
+void ftYs_SpecialAirHi_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -402,22 +402,22 @@ void ftYs_SpecialAirHi_Anim(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialHi_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialHi_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftYs_SpecialAirHi_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialAirHi_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC((Fighter_GObj*) gobj);
 }
 
-void ftYs_SpecialHi_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialHi_Coll(Fighter_GObj* gobj)
 {
-    ft_8008403C((Fighter_GObj*) gobj, (void (*)(ftYs_GObj*)) fn_8012E3B4);
+    ft_8008403C((Fighter_GObj*) gobj, (void (*)(Fighter_GObj*)) fn_8012E3B4);
 }
 
-void ftYs_SpecialAirHi_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialAirHi_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.ys.specialhi.x0 != 0) {
@@ -454,7 +454,7 @@ void ftYs_SpecialLw_Enter(HSD_GObj* gobj)
 
 /// #ftYs_SpecialAirLw_Enter
 
-void ftYs_SpecialLw_Anim(ftYs_GObj* gobj)
+void ftYs_SpecialLw_Anim(Fighter_GObj* gobj)
 {
     u8 _[8];
 
@@ -463,7 +463,7 @@ void ftYs_SpecialLw_Anim(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirLw_Anim(ftYs_GObj* gobj)
+void ftYs_SpecialAirLw_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -481,7 +481,7 @@ void ftYs_SpecialLw_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirLw_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialAirLw_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
@@ -527,19 +527,19 @@ void ftYs_SpecialS_8012EA04(Fighter_GObj* gobj)
                               ftYs_Init_804D9A5C, ftYs_Init_804D9A60, NULL);
 }
 
-void ftYs_SpecialLwLanding_Anim(ftYs_GObj* gobj)
+void ftYs_SpecialLwLanding_Anim(Fighter_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
         ft_8008A2BC((Fighter_GObj*) gobj);
     }
 }
 
-void ftYs_SpecialLwLanding_Phys(ftYs_GObj* gobj)
+void ftYs_SpecialLwLanding_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftYs_SpecialLwLanding_Coll(ftYs_GObj* gobj)
+void ftYs_SpecialLwLanding_Coll(Fighter_GObj* gobj)
 {
     u8 _[8];
 
@@ -564,7 +564,7 @@ void ftYs_SpecialS_8012EAD8(HSD_GObj* gobj)
 
 /// #fn_8012EDE8
 
-void fn_8012EFC0(ftYs_GObj* gobj)
+void fn_8012EFC0(Fighter_GObj* gobj)
 {
     ft_80089824(gobj);
     ft_800892A0(gobj);
@@ -596,11 +596,11 @@ void fn_8012EFC0(ftYs_GObj* gobj)
 
 /// #ftYs_SpecialAirSLanding_Anim
 
-void ftYs_SpecialAirSStart_0_IASA(ftYs_GObj* gobj) {}
+void ftYs_SpecialAirSStart_0_IASA(Fighter_GObj* gobj) {}
 
 /// #ftYs_SpecialAirSLoop_0_IASA
 
-void ftYs_SpecialAirSLoop_1_IASA(ftYs_GObj* gobj)
+void ftYs_SpecialAirSLoop_1_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
@@ -614,14 +614,14 @@ void ftYs_SpecialAirSLoop_1_IASA(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirSEnd_IASA(ftYs_GObj* gobj) {}
+void ftYs_SpecialAirSEnd_IASA(Fighter_GObj* gobj) {}
 
-void ftYs_SpecialAirSStart_1_IASA(ftYs_GObj* gobj)
+void ftYs_SpecialAirSStart_1_IASA(Fighter_GObj* gobj)
 {
     M2C_FIELD(gobj->user_data, s32*, 0x2370) = 0;
 }
 
-void ftYs_SpecialAirSLoop_2_IASA(ftYs_GObj* gobj)
+void ftYs_SpecialAirSLoop_2_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
@@ -634,7 +634,7 @@ void ftYs_SpecialAirSLoop_2_IASA(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirSLoop_3_IASA(ftYs_GObj* gobj)
+void ftYs_SpecialAirSLoop_3_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
@@ -647,7 +647,7 @@ void ftYs_SpecialAirSLoop_3_IASA(ftYs_GObj* gobj)
     }
 }
 
-void ftYs_SpecialAirSLanding_IASA(ftYs_GObj* gobj)
+void ftYs_SpecialAirSLanding_IASA(Fighter_GObj* gobj)
 {
     M2C_FIELD(gobj->user_data, s32*, 0x2370) = 0;
 }

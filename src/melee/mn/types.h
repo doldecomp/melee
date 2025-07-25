@@ -283,7 +283,6 @@ struct CSSIcon {
 struct CSSIconsData {
     u8 gnw_name[0x1C];         // 0x0
     CSSModeInfo mode_info[24]; // 0x1c
-    CSSIcon icons[25 + 1];     // 0xDC
 };
 
 struct CSSDoor {
@@ -379,7 +378,10 @@ struct CSSDoorsData {
     float xe3;
     float xe7;
     float xeb;
-    u8 xf1[5];
+};
+
+struct CSSDoorsData2 {
+    u8 xf0[5];
     float xf8;
     float xfc;
     float x100;

@@ -1,8 +1,30 @@
 #include <melee/ft/forward.h>
 #include <melee/mn/types.h>
 
-/* 4D6CB0 */ static CSSData* volatile mnCharSel_804D6CB0;
-/* 4D6CF4 */ static s8 mnCharSel_804D6CF4;
+extern u8 mnCharSel_804D5100;
+extern u8 mnCharSel_804D5108;
+
+static CSSData* volatile mnCharSel_804D6CB0;
+static void* mnCharSel_804D6CB4;
+static HSD_JObj* mnCharSel_804D6CC0;
+static HSD_JObj* mnCharSel_804D6CC4;
+static HSD_JObj* mnCharSel_804D6CC8;
+static HSD_Archive* mnCharSel_804D6CD0;
+static HSD_Archive* mnCharSel_804D6CD4;
+static void* mnCharSel_804D6CD8;
+static HSD_Text* mnCharSel_804D6CDC;
+static HSD_Text* mnCharSel_804D6CE0;
+static HSD_Text* mnCharSel_804D6CE4;
+static HSD_Text* mnCharSel_804D6CE8;
+static u32 mnCharSel_804D6CEC;
+static s8 mnCharSel_804D6CF0;
+static s8 mnCharSel_804D6CF1;
+static u8 mnCharSel_804D6CF2;
+static s8 mnCharSel_804D6CF4;
+static u8 mnCharSel_804D6CF5; ///< number of (open? valid?) CSS doors
+static u8 mnCharSel_804D6CF6;
+static u8 mnCharSel_804D6CF8;
+static s8 mnCharSel_804D6CF9;
 
 // Can't be enum bc float, but reused values
 #define ICONROWHT_TOP_TOP 20.0F
@@ -12,15 +34,15 @@
 
 // Can't be enum bc float, but reused values
 #define ICONBNDS_COL0_L (-30.0F)
-#define ICONBNDS_COL1_L (-24.399999618530273F)
-#define ICONBNDS_COL2_L (-17.399999618530273F)
-#define ICONBNDS_COL3_L (-10.399999618530273F)
-#define ICONBNDS_COL4_L (-3.4000000953674316F)
-#define ICONBNDS_COL5_L 3.5999999046325684F
-#define ICONBNDS_COL6_L 10.600000381469727F
-#define ICONBNDS_COL7_L 17.600000381469727F
-#define ICONBNDS_COL8_L 24.399999618530273F
-#define ICONBNDS_COL8_R 30.200000762939453F
+#define ICONBNDS_COL1_L (-24.4F)
+#define ICONBNDS_COL2_L (-17.4F)
+#define ICONBNDS_COL3_L (-10.4F)
+#define ICONBNDS_COL4_L (-3.4F)
+#define ICONBNDS_COL5_L 3.6F
+#define ICONBNDS_COL6_L 10.6F
+#define ICONBNDS_COL7_L 17.6F
+#define ICONBNDS_COL8_L 24.4F
+#define ICONBNDS_COL8_R 30.2F
 
 static CSSIconsData mnCharSel_803F0A48 = {
     {
@@ -60,7 +82,11 @@ static CSSIconsData mnCharSel_803F0A48 = {
         { 0x000D, 0x0000, 0x00007534 }, // 0x803F0B14
         { 0x0007, 0x0000, 0x00007532 }  // 0x803F0B1C
     },
-    { // -------- Icons Top Row --------
+};
+
+
+static CSSIcon icons[25 + 1] = {
+      // -------- Icons Top Row --------
 
       { // Dr. Mario -                      0x803F0B24
         ICONHUD_DRMARIO, CKIND_DRMARIO, ICONSTATE_UNLOCKED, 0x00,
@@ -142,7 +168,7 @@ static CSSIconsData mnCharSel_803F0A48 = {
 
       { // Pichu -                          0x803F0D1C
         ICONHUD_PICHU, CKIND_PICHU, ICONSTATE_UNLOCKED, 0x00, ICONJOINT_PICHU,
-        ICONJOINT_PICHU, 0x000000D2, -23.399999618530273, ICONBNDS_COL2_L,
+        ICONJOINT_PICHU, 0x000000D2, -23.4, ICONBNDS_COL2_L,
         ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM },
       { // Pikachu -                        0x803F0D38
         ICONHUD_PIKACHU, CKIND_PIKACHU, ICONSTATE_TEMP, 0x00,
@@ -167,10 +193,10 @@ static CSSIconsData mnCharSel_803F0A48 = {
       { // Roy -                            0x803F0DC4
         ICONHUD_EMBLEM, CKIND_EMBLEM, ICONSTATE_UNLOCKED, 0x00,
         ICONJOINT_EMBLEM, ICONJOINT_EMBLEM, 0x000000DA, ICONBNDS_COL7_L,
-        23.600000381469727, ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM } }
+        23.6, ICONROWHT_BTM_TOP, ICONROWHT_BTM_BTM }
 };
 
-CSSDoorsData mnCharSel_803F0DFC = {
+static CSSDoorsData mnCharSel_803F0DFC = {
     { { 0x2E,
         0x33,
         0x38,
@@ -180,20 +206,20 @@ CSSDoorsData mnCharSel_803F0DFC = {
         0x3D,
         0x41,
         0x40,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        -35.599998474121094F,
-        -28.600000381469727F,
-        -26.799999237060547F,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -35.6,
+        -28.6,
+        -26.8,
         -21.0F },
       { 0x2F,
         0x34,
@@ -204,20 +230,20 @@ CSSDoorsData mnCharSel_803F0DFC = {
         0x43,
         0x47,
         0x46,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        -19.399999618530273F,
-        -13.399999618530273F,
-        -11.399999618530273F,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -19.4,
+        -13.4,
+        -11.4,
         -6.0F },
       { 0x30,
         0x35,
@@ -228,81 +254,65 @@ CSSDoorsData mnCharSel_803F0DFC = {
         0x49,
         0x4D,
         0x4C,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        -4.199999809265137F,
-        2.200000047683716F,
-        3.5F,
-        9.399999618530273F },
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -4.2,
+        2.2,
+        3.5,
+        9.4 },
       { 0x31, 0x36, 0x3B, 0x9D, 0x2C,  0xAC,  0x4F,  0x53,
         0x52, 0x00, 0x00, 0x00, 0x00,  0x00,  0x00,  0x00,
-        0x00, 0x00, 0x00, 0x00, 11.0F, 17.0F, 19.0F, 24.600000381469727F } },
-    { { NULL, 0x70, 0x73, 0x74, 0x72, 0x71, 0x00, 0x00, 0x00 },
-      { NULL, 0x75, 0x78, 0x79, 0x77, 0x76, 0x00, 0x00, 0x00 },
-      { NULL, 0x7A, 0x7D, 0x7E, 0x7C, 0x7B, 0x00, 0x00, 0x00 },
-      { NULL, 0x7F, 0x82, 0x83, 0x81, 0x80, 0x00, 0x00, 0x00 } },
-    0x00,
-    0x00,
-    0x00,
-    0x00,
+        0x00, 0x00, 0x00, 0x00, 11.0F, 17.0F, 19.0F, 24.6 } },
+    { { NULL, 0x70, 0x73, 0x74, 0x72, 0x71 },
+      { NULL, 0x75, 0x78, 0x79, 0x77, 0x76 },
+      { NULL, 0x7A, 0x7D, 0x7E, 0x7C, 0x7B },
+      { NULL, 0x7F, 0x82, 0x83, 0x81, 0x80 } },
+    0,
+    0,
+    0,
+    0,
     0x4A,
     0x4D,
     0x4E,
     0x4C,
     0x4B,
-    0x00,
-    0x00,
-    0x00,
+    0,
+    0,
+    0,
     0x2F,
     0x01,
-    0x00000000,
-    0x00000000,
+    0,
+    0,
     0.0F,
-    -10.899999618530273F,
-    -4.199999809265137F,
-    12.5F,
-    19.600000381469727F,
-    -6.800000190734863F,
-    -12.100000381469727F,
-    { 0x35, 0x39, 0x36, 0x38, 0x37 },
-    -2.200000047683716F,
-    3.700000047683716F,
-    13.699999809265137F,
-    19.299999237060547F,
-    -12.399999618530273F,
-    -16.600000381469727F,
-    {
-        { NULL, -22.5F, 0x57, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000 },
-        { NULL, -7.099999904632568, 0x5D, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { NULL, 8.300000190734863, 0x63, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { NULL, 23.700000762939453, 0x69, 0x00000000, 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-    },
-    /*
-    { 0x25, 0x30, 0x32, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64, 0x00, 0x00, 0x00,
-
-      0x25, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64, 0x3A, 0x25, 0x30, 0x32, 0x64,
-      0x00, 0x00, 0x00, 0x00,
-
-      0x39, 0x39, 0x3A, 0x35, 0x39, 0x3A, 0x35, 0x39, 0x00, 0x00, 0x00, 0x00,
-      0x25, 0x64, 0x20, 0x90,
-
-      0x6C, 0x94, 0xB2, 0x82, 0xAB, 0x00, 0x00, 0x00, 0x25, 0x64, 0x20, 0x82,
-      0x6A, 0x82, 0x6E, 0x82,
-
-      0x93, 0x00, 0x00, 0x00 }
-    */
+    -10.9,
+    -4.2,
+    12.5,
+    19.6,
+    -6.8,
+    -12.1,
 };
 
+static struct CSSDoorsData2 data2 = {
+    { 0x35, 0x39, 0x36, 0x38, 0x37 },
+    -2.2,
+    3.7,
+    13.7,
+    19.3,
+    -12.4,
+    -16.6,
+    {
+        { NULL, -22.5, 0x57 },
+        { NULL,  -7.1, 0x5D },
+        { NULL,   8.3, 0x63 },
+        { NULL,  23.7, 0x69 },
+    },
+};
