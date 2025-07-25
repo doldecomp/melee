@@ -39,6 +39,7 @@
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
+#include "melee/lb/lbrefract.h"
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
@@ -3640,19 +3641,157 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj) {
     ftCommon_8007D3A8(fp, 0.0f, fp->co_attrs.air_drift_stick_mul *dat_attr->specialhi_horizontal_momentum, fp->co_attrs.air_drift_max);
 }
 
-/// #ftKb_SpecialAirHiEnd_Phys
+void ftKb_SpecialAirHiEnd_Phys(Fighter_GObj* gobj) {
+    ft_80085134(gobj);
+}
 
-/// #ftKb_SpecialHi1_Coll
+void ftKb_SpecialHi1_Coll(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* temp_r4;
+    PAD_STACK(2); //Todo: Remove This
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, 0x185, 0xC1082U, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        temp_r4 = gobj->user_data;
+        temp_r4->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
+        temp_r4->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;    
+        fp->self_vel.z = 0.0f;
+        fp->self_vel.y = 0.0f;
+        ftParts_8007592C(fp, 0, 0.0f);
+    }
+}
 
-/// #ftKb_SpecialHi2_Coll
+void ftKb_SpecialHi2_Coll(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp_2;
+    s32 var_r4;
+    PAD_STACK(10); //Fake match
 
-/// #ftKb_SpecialHi3_Coll
+    if (fp->mv.kb.specialn_pe.facing_dir > 0x14) {
+        if (1 == fp->facing_dir) {
+            var_r4 = 1;
+        } else {
+            var_r4 = -1;
+        }
+        if (ft_CheckGroundAndLedge(gobj, var_r4)) {
+            fp->mv.kb.specialn_pe.facing_dir++;
+            ftCommon_8007D5D4(fp);
+            Fighter_ChangeMotionState(gobj, 0x188, 0xC1082U, 0.0f, 1.0f, 0.0f, NULL);
+            fp_2 = gobj->user_data;
+            fp_2->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
+            fp_2->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+            fp->accessory4_cb = fn_800F21E8;
+            fp->self_vel.z = 0.0f;
+            fp->self_vel.y = 0.0f;
+            fp->self_vel.x = 0.0f;
+            fp->gr_vel = 0.0f;
+            ftParts_8007592C(fp, 0, fp->facing_dir * atan2f(fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y));
+            return;
+        }
+        if (ftCliffCommon_80081298(gobj)) ftCliffCommon_80081370(gobj);
+    } else {
+        fp->mv.kb.specialn_pe.facing_dir++;
+        ftCommon_8007D60C(fp);
+        ft_80082578(gobj);
+    }
+}
 
-/// #ftKb_SpecialHi4_Coll
+void ftKb_SpecialHi3_Coll(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp_2;
+    s32 var_r4;
 
-/// #ftKb_SpecialAirHi1_Coll
+    fp = gobj->user_data;
+    if (1.0f == fp->facing_dir) {
+        var_r4 = 1;
+    } else {
+        var_r4 = -1;
+    }
+    if (ft_CheckGroundAndLedge(gobj, var_r4)) {
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, 0x188, 0xC1082U, 0.0f, 1.0f, 0.0f, NULL);
+        fp_2 = GET_FIGHTER(gobj);
+        fp_2->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
+        fp_2->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+        fp->accessory4_cb = fn_800F21E8;
+        fp->self_vel.z = 0.0f;
+        fp->self_vel.y = 0.0f;
+        fp->self_vel.x = 0.0f;
+        fp->gr_vel = 0.0f;
+        ftParts_8007592C(fp, 0, fp->facing_dir * atan2f(fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y));
+        return;
+    }
+    if (ftCliffCommon_80081298(gobj))  ftCliffCommon_80081370(gobj);
+}
 
-/// #ftKb_SpecialAirHi2_Coll
+void ftKb_SpecialHi4_Coll(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* temp_r4;
+    PAD_STACK(2); //Fix
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, 0x188, 0xC1082U, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        temp_r4 = gobj->user_data;
+        temp_r4->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
+        temp_r4->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+        fp->accessory4_cb = fn_800F21E8;
+        fp->self_vel.z = 0.0f;
+        fp->self_vel.y = 0.0f;
+        ftParts_8007592C(fp, 0, 0.0f);
+        return;
+    }
+    ftParts_8007592C(fp, 0, fp->facing_dir * atan2f(fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y));
+}
+
+void ftKb_SpecialAirHi1_Coll(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* temp_r4;
+    PAD_STACK(5); //Fix
+
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(gobj, 0x181, 0xC1082U, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        temp_r4 = gobj->user_data;
+        temp_r4->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
+        temp_r4->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+        fp->self_vel.z = 0.0f;
+        fp->self_vel.y = 0.0f;
+    }
+}
+
+void ftKb_SpecialAirHi2_Coll(Fighter_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp_2;
+    s32 var_r4;
+    PAD_STACK(10); //Fix
+    if (fp->mv.kb.specialn_pe.facing_dir > 0x14) {
+        if (1.0f == fp->facing_dir) {
+            var_r4 = 1;
+        } else {
+            var_r4 = -1;
+        }
+        if (ft_CheckGroundAndLedge(gobj, var_r4)) {
+            fp->mv.kb.specialn_pe.facing_dir++;
+            ftCommon_8007D7FC(fp);
+            Fighter_ChangeMotionState(gobj, 0x184, 0xC1082U, 0.0f, 1.0f, 0.0f, NULL);
+            fp_2 = gobj->user_data;
+            fp_2->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
+            fp_2->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+            fp->accessory4_cb = fn_800F21E8;
+            fp->self_vel.z = 0.0f;
+            fp->self_vel.y = 0.0f;
+            fp->self_vel.x = 0.0f;
+            fp->gr_vel = 0.0f;
+            ftParts_8007592C(fp, 0, fp->facing_dir * atan2f(fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y));
+            return;
+        }
+        if (ftCliffCommon_80081298(gobj)) ftCliffCommon_80081370(gobj);
+    } else {
+        fp->mv.kb.specialn_pe.facing_dir++;
+        ftCommon_8007D60C(fp);
+        ft_80082578(gobj);
+    }
+}
 
 /// #ftKb_SpecialAirHi3_Coll
 
