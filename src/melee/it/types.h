@@ -150,7 +150,7 @@ struct ItemStateDesc {
     HSD_MatAnimJoint* x4_matanim_joint;
 
     /// @at{0} @sz{4}
-    UNK_T x8_parameters;
+    HSD_ShapeAnimJoint* x8_parameters;
 
     /// @at{0} @sz{4}
     UNK_T xC_script;
@@ -570,6 +570,7 @@ struct Item {
         itLGunRay_ItemVars lgunray;
         itLinkArrow_ItemVars linkarrow;
         itLinkBomb_ItemVars linkbomb;
+        itLinkBoomerang_ItemVars linkboomerang;
         itLinkBow_ItemVars linkbow;
         itLinkHookshot_ItemVars linkhookshot;
         itMBall_ItemVars mball;
