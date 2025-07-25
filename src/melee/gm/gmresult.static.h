@@ -12,7 +12,7 @@ struct ResultsPlayerData {
     /* +01 */ u8 page;
     /* +02 */ u16 x2;
     /* +04 */ f32 scroll_offset;
-    /* +08 */ HSD_GObj* fighter_gobj; 
+    /* +08 */ HSD_GObj* fighter_gobj;
     /* +0C */ HSD_GObj* camera;
     /* +10 */ HSD_Text* stats_text[3][10]; ///< 3 pages with 10 entries?
     // /* +10 */ HSD_Text* stats_x10[10]; ///< these text arrays are the scrollable stats
