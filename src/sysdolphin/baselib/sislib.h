@@ -8,6 +8,7 @@
 
 #include "baselib/archive.h"
 #include "baselib/cobj.h"
+#include "dolphin/gx/GXStruct.h"
 
 #include <dolphin/mtx.h>
 

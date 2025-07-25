@@ -2,8 +2,6 @@
 
 #include "gmvsmelee.static.h"
 
-#include "gm_unsplit.h"
-
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
 #include <melee/lb/lb_00B0.h>
