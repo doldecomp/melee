@@ -100,12 +100,12 @@ bool ftLk_SpecialS_Is2071b0_1to13(HSD_GObj* gobj)
     }
 }
 
-void ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj)
+bool ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.lk.used_boomerang = false;
     fp->fv.lk.boomerang_gobj = NULL;
-    ftLk_Init_BoomerangExists(gobj);
+    return ftLk_Init_BoomerangExists(gobj);
 }
 
 void ftLk_SpecialS_RemoveBoomerang1(HSD_GObj* gobj)
