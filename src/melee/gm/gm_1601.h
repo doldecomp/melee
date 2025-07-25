@@ -11,6 +11,7 @@
 #include "mn/forward.h"
 #include "it/forward.h"
 #include "sc/forward.h"
+#include "dolphin/gx/GXStruct.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
 
@@ -32,7 +33,7 @@
 /* 1607F4 */ UNK_RET fn_801607F4(UNK_PARAMS);
 /* 160840 */ u8 fn_80160840(u8);
 /* 160854 */ u32 gm_80160854(u8, u8, u8, u8); ///< gets the player hud color index
-/* 160968 */ U8Vec4 gm_80160968(u8);
+/* 160968 */ GXColor gm_80160968(u8); ///< gets the player hud color
 /* 160980 */ UNK_RET gm_80160980(UNK_PARAMS);
 /* 1609E0 */ UNK_RET fn_801609E0(UNK_PARAMS);
 /* 160A60 */ UNK_T gm_80160A60(int);
@@ -192,7 +193,7 @@
 /* 168F88 */ void gm_80168F88(void);
 /* 168FC4 */ void gm_80168FC4(void);
 /* 169000 */ UNK_RET fn_80169000(UNK_PARAMS);
-/* 169238 */ UNK_RET gm_80169238(UNK_PARAMS);
+/* 169238 */ u8 gm_80169238(int);
 /* 169264 */ UNK_RET gm_80169264(UNK_PARAMS);
 /* 169290 */ UNK_RET gm_80169290(UNK_PARAMS);
 /* 1692BC */ UNK_RET gm_801692BC(UNK_PARAMS);

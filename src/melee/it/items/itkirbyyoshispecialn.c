@@ -24,7 +24,7 @@ ItemStateTable it_803F9490[] = {
 };
 
 /// @todo Shared code with #it_802F2BFC.
-void it_802F2D98(Item_GObj* gobj, ftKb_GObj* owner_gobj)
+void it_802F2D98(Item_GObj* gobj, Fighter_GObj* owner_gobj)
 {
     Item* item = GET_ITEM(gobj);
     item->atk_victim = owner_gobj;

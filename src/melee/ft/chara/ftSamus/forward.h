@@ -6,7 +6,6 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef struct HSD_GObj ftSs_GObj;
 typedef struct Fighter ftSs_Fighter;
 
 static MotionFlags const ftSs_MF_Special =
