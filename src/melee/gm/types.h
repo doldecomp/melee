@@ -456,10 +456,7 @@ struct MatchPlayerData {
     u16 self_destructs;
     u16 percent;
     u16 xE;
-    u16 kills;
-    u16 x12;
-    u16 x14;
-    u16 x16;
+    u16 kills[4];
     u16 x18;
     s32 x1C;
     s32 x20;
