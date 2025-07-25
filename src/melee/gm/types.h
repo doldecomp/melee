@@ -482,7 +482,10 @@ struct MatchEnd {
     struct MatchTeamData team_standings[5];
     struct MatchPlayerData player_standings[6];
     u8 _x448[4];
-    u8 pad_x44C[0x186C - 0x44C];
+    struct UnkResultPlayerData {
+        u8 x0[0x100];
+        char pad_x100[0x508 - 0x100];
+    } x44C[4];
     u8 pad_x186C[0x227C - 0x186C];
 };
 
