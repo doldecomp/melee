@@ -39,6 +39,6 @@
 /* 176F60 */ UNK_RET fn_80176F60(UNK_PARAMS);
 /* 1771C0 */ UNK_RET fn_801771C0(UNK_PARAMS);
 /* 177368 */ void gm_80177368_OnEnter(UNK_T);
-/* 177704 */ void gm_80177704_OnLeave(void);
+/* 177704 */ void gm_80177704_OnLeave(void*);
 
 #endif

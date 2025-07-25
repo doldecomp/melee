@@ -417,7 +417,7 @@ void fn_80176D18(HSD_GObj* gobj)
 
 /// #gm_80177368_OnEnter
 
-void gm_80177704_OnLeave(void)
+void gm_80177704_OnLeave(void* unused)
 {
     fn_801701AC();
 }
