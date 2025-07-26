@@ -49,7 +49,7 @@ union _gmCameraUnkUnion {
     gmCameraUnkStruct2Ptrs gcus2_ptrs;
 };
 
-/* 479BC8 */ union _gmCameraUnkUnion gmCamera_80479BC8;
+/* 479BC8 */ extern union _gmCameraUnkUnion gmCamera_80479BC8;
 /* 4DA9B8 */ extern float gmCamera_804DA9B8;
 /* 4DA9BC */ extern float gmCamera_804DA9BC;
 /* 4DA9C0 */ extern float gmCamera_804DA9C0;
