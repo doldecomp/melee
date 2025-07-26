@@ -9,7 +9,6 @@
 #include "ft/forward.h"
 #include "gm/forward.h"
 #include "mn/forward.h"
-#include "it/forward.h"
 #include "sc/forward.h"
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/mtx.h"
