@@ -32,14 +32,13 @@ s32 fn_80174284(u8 slot)
     s32 count;
     s32 i;
     u8* buf;
-    PAD_STACK(8);
+    struct UnkResultPlayerData* tmp = lbl_8046DBE8.x94->x44C;
 
     count = 0;
     do_call = (lbl_8046DBE8.x94->player_standings[slot].slot_type == 0) ? true : false;
 
-    buf = lbl_8046DBE8.x94->x44C[slot].x0;
     for (i = 0; i < 0x100; i++) {
-        if (buf[i] != 0) {
+        if (tmp[slot].x0[i] != 0) {
             if (do_call) {
                 fn_8016F140(i);
             }
@@ -139,29 +138,29 @@ void fn_80175038(HSD_GObj* gobj, s32 flag)
 
 GXColor fn_8017507C(s32 slot)
 {
-    GXColor color;
     f32 current_color;
-    PAD_STACK(8);
+    u8 _[8];
+    GXColor color;
 
-    if ((u8) lbl_8046DBE8.x94->is_teams == 1) {
-        if ((u8) lbl_8046DBE8.x94->player_standings[slot].slot_type == 3) {
-            color = gm_80160968(4U);
+    if (lbl_8046DBE8.x94->is_teams == 1) {
+        if (lbl_8046DBE8.x94->player_standings[slot].slot_type == 3) {
+            color = gm_80160968(4);
         } else {
             switch (lbl_8046DBE8.x94->player_standings[slot].team) {
             case 0:
-                color = gm_80160968(0U);
+                color = gm_80160968(0);
                 break;
             case 1:
-                color = gm_80160968(1U);
+                color = gm_80160968(1);
                 break;
             case 2:
-                color = gm_80160968(3U);
+                color = gm_80160968(3);
                 break;
             case 3:
-                color = gm_80160968(2U);
+                color = gm_80160968(2);
                 break;
             default:
-                color = gm_80160968(4U);
+                color = gm_80160968(4);
                 break;
             }
         }
@@ -184,10 +183,7 @@ GXColor fn_8017507C(s32 slot)
         }
         color.b = (s8) current_color;
     } else {
-        color.r = 0xFF;
-        color.g = 0xFF;
-        color.b = 0xFF;
-        color.a = 0xFF;
+        color.r = color.g = color.b = color.a = 0xFF;
     }
     return color;
 }
@@ -316,8 +312,9 @@ void fn_8017556C(s32 slot)
 void fn_80175C5C(void)
 {
     s32 i;
+    u8 _[4];
     Vec3 position;
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     lb_8000B1CC(lbl_8046DBE8.x24, NULL, &position);
     for (i = 0; i < 6; i++) {
@@ -336,23 +333,22 @@ void fn_80175C5C(void)
 
 void fn_80175D34(void)
 {
-    ResultsData* data = &lbl_8046DBE8;
+    u8 _[12];
     Vec3 pos;
     HSD_Text* ko_count;
     HSD_Text* ko_time;
     s32 i;
-    PAD_STACK(20); // TODO :: why does this have so much stack space
+    PAD_STACK(8); // TODO :: why does this have so much stack space
 
     lb_8000B1CC(lbl_8046DBE8.x24, NULL, &pos);
 
     for (i = 0; i < 4; i++) {
-        ko_count = data->player_data[i].ko_count;
-        if (ko_count != NULL) {
-            HSD_SisLib_803A5CC4(ko_count);
-            data->player_data[i].ko_count = NULL;
+        if (lbl_8046DBE8.player_data[i].ko_count != NULL) {
+            HSD_SisLib_803A5CC4(lbl_8046DBE8.player_data[i].ko_count);
+            lbl_8046DBE8.player_data[i].ko_count = NULL;
         }
 
-        ko_time = data->player_data[i].ko_time;
+        ko_time = lbl_8046DBE8.player_data[i].ko_time;
         if (ko_time != NULL) {
             ko_time->x4 = -pos.y;
         }
@@ -390,7 +386,7 @@ void fn_80176A6C(void)
     if (lbLang_IsSavedLanguageUS() != 0) {
         HSD_SisLib_803A62A0(0, "SdRst.usd", "SIS_ResultData");
     } else {
-        HSD_SisLib_803A62A0(0, "SdRst.usd", "SIS_ResultData");
+        HSD_SisLib_803A62A0(0, "SdRst.dat", "SIS_ResultData");
     }
     lbl_8046DBE8.cobj = cobj;
 }
