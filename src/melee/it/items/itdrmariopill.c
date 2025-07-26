@@ -263,28 +263,25 @@ static s32 it_802C0E48(Item_GObj* gobj)
             if (it_802C0E48_sub(gobj)) {
                 return true;
             }
-            goto exit;
+        } else {
+            ip->xDAC_itcmd_var0 =
+                ftDr_Init_801498EC(ip->xDD4_itemVar.drmariopill.x4);
+            fobj = ip->xDD4_itemVar.drmariopill.x4;
+            if (ip->owner == fobj) {
+                mag = ftLib_800869D4(fobj);
+                scale.x = mag;
+                scale.y = mag;
+                scale.z = mag;
+                HSD_JObjSetScale(hobj, &scale);
+                return false;
+            }
+            if (it_802C0E48_sub(gobj)) {
+                return true;
+            }
         }
-        ip->xDAC_itcmd_var0 =
-            ftDr_Init_801498EC(ip->xDD4_itemVar.drmariopill.x4);
-        fobj = ip->xDD4_itemVar.drmariopill.x4;
-        if (ip->owner == fobj) {
-            mag = ftLib_800869D4(fobj);
-            scale.x = mag;
-            scale.y = mag;
-            scale.z = mag;
-            HSD_JObjSetScale(hobj, &scale);
-            return false;
-        }
-        if (it_802C0E48_sub(gobj)) {
-            return true;
-        }
-        goto exit;
-    }
-    if (it_802C0E48_sub(gobj)) {
+    } else if (it_802C0E48_sub(gobj)) {
         return true;
     }
-exit:
     return false;
 }
 
