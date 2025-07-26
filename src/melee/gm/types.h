@@ -632,4 +632,16 @@ struct NameData {
     /* x198 */ void* x198; // some kind of text representation of the name
 };
 
+struct CameraVsData {
+    u32* x0; ///< state? gets set on button presses in OnFrame
+    union {
+        struct {
+            HSD_Text* slot_a;
+            HSD_Text* slot_b;
+            HSD_Text* bottom_text;
+        };
+        HSD_Text* text[3];
+    };
+};
+
 #endif

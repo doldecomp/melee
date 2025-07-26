@@ -131,5 +131,6 @@ typedef struct MatchEnd MatchEnd;
 typedef struct MatchExitInfo MatchExitInfo;
 typedef struct TmData TmData;
 typedef struct ResultsData ResultsData;
+typedef struct CameraVsData CameraVsData;
 
 #endif
