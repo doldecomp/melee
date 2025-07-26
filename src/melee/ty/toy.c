@@ -4,6 +4,8 @@
 
 #include "un/un_2FC9.h"
 
+#include "mn/mnsoundtest.h"
+
 /// #un_80305058
 
 /// #un_803053C4
@@ -15,6 +17,19 @@
 /// #un_80305B88
 
 /// #un_80305C44
+s32 un_80305C44(void) {
+    int i = 0;
+    u32 button;
+    PAD_STACK(4);
+
+    for (i = 0; i < 4; i++) {
+        if (button = HSD_PadCopyStatus[(u8) i].button) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+    return button;
+}
 
 /// #un_80305D00
 
