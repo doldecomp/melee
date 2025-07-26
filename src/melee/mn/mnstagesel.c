@@ -21,7 +21,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/types.h>
-#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnmain.h>
 
 struct stagelistinfo {
     HSD_JObj* x0;

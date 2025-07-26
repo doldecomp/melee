@@ -22,7 +22,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbvector.h"
-#include "mn/mn_2295.h"
+#include "mn/mnmain.h"
 #include "mn/mnname.h"
 #include "pl/player.h"
 #include "ty/toy.h"
