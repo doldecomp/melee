@@ -15,6 +15,9 @@ typedef struct _mn_unk1 {
     u64 x8;
     u8 x10;
     u8 x11;
+    u8 x12;
+    u8 x13;
+    int x14;
 } mn_unk1;
 
 typedef struct _mn_unk2 {
@@ -53,10 +56,10 @@ struct mn_80231634_t {
 /* 22BDB4 */ void fn_8022BDB4(HSD_GObj*, int);
 /* 22BE34 */ HSD_GObj* mn_8022BE34(void);
 /* 22BEDC */ void mn_8022BEDC(HSD_GObj*);
-/* 22BFBC */ UNK_RET mn_8022BFBC(UNK_PARAMS);
+/* 22BFBC */ int mn_8022BFBC(void);
 /* 22C010 */ int mn_8022C010(int, int);
-/* 22C068 */ UNK_RET mn_8022C068(UNK_PARAMS);
-/* 22C128 */ UNK_RET fn_8022C128(UNK_PARAMS);
+/* 22C068 */ void mn_8022C068(HSD_LObj*, int, int);
+/* 22C128 */ void fn_8022C128(HSD_GObj*);
 /* 22C304 */ UNK_RET mn_8022C304(UNK_PARAMS);
 /* 22C4F4 */ void mn_8022C4F4(HSD_GObj*);
 /* 22C7CC */ void mn_8022C7CC(HSD_GObj*);
@@ -69,7 +72,7 @@ struct mn_80231634_t {
 /* 22D7F4 */ void mn_8022D7F4(HSD_GObj*);
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
-/* 22DDA8 */ void mn_8022DDA8_OnEnter(UNK_T);
+/* 22DDA8 */ void mn_8022DDA8_OnEnter(void*);
 /* 22E950 */ UNK_RET mn_8022E950(UNK_PARAMS);
 /* 22E978 */ UNK_RET mn_8022E978(UNK_PARAMS);
 /* 22EA08 */ void mn_8022EA08(char*, u32);
