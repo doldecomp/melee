@@ -9,7 +9,7 @@
 /* 3053C4 */ UNK_RET un_803053C4(UNK_PARAMS);
 /* 30562C */ void Trophy_SetUnlockState(enum_t, bool);
 /* 305918 */ void un_80305918(s32, s32, s32);
-/* 305B88 */ UNK_RET un_80305B88(UNK_PARAMS);
+/* 305B88 */ s32 un_80305B88(void);
 /* 305C44 */ s32 un_80305C44(void);
 /* 305D00 */ UNK_RET un_80305D00(UNK_PARAMS);
 /* 305DB0 */ UNK_RET un_80305DB0(UNK_PARAMS);

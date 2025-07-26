@@ -15,6 +15,19 @@
 /// #un_80305918
 
 /// #un_80305B88
+s32 un_80305B88(void) {
+    int i;
+    u32 button;
+    PAD_STACK(4);
+
+    for (i = 0; i < 4; i++) {
+        if (button = HSD_PadCopyStatus[(u8) i].trigger) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+    return button;
+}
 
 /// #un_80305C44
 s32 un_80305C44(void) {
@@ -30,6 +43,8 @@ s32 un_80305C44(void) {
     }
     return button;
 }
+
+/// #un_80305D00
 
 /// #un_80305D00
 
