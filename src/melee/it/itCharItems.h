@@ -13,6 +13,21 @@
 #include <baselib/jobj.h>
 
 typedef struct {
+    /* x0 ip+DD4 */ f32 x0;
+    /* x4 ip+DD8 */ HSD_GObj* x4;
+    /* x8 ip+DDC */ f32 x8;
+    /* xC ip+DE0 */ f32 xC;
+} itDrMarioPill_ItemVars;
+
+typedef struct {
+    /* x0 */ f32 x0;
+    /* x4 */ f32 x4;
+    /* x8 */ f32 x8;
+    /* xC */ f32 xC;
+    /* x10 */ f32 x10;
+} itDrMarioPillAttributes;
+
+typedef struct {
     /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
                        // that transforms the item model (possibly frame number
                        // of animation?)

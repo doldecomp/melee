@@ -542,6 +542,7 @@ struct Item {
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
         itCoin_ItemVars coin;
+        itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
