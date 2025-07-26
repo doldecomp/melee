@@ -6,6 +6,7 @@
 
 #include "baselib/forward.h"
 #include <melee/gm/forward.h> // IWYU pragma: export
+#include "dolphin/types.h"
 #include <melee/mn/types.h>
 
 #include <common_structs.h>
@@ -455,15 +456,40 @@ struct MatchPlayerData {
     u16 self_destructs;
     u16 percent;
     u16 xE;
-    u16 kills;
-    u16 x12;
-    u16 x14;
-    u8 pad_x16[0x20 - 0x16];
-    int x20;
+    u16 kills[4];
+    u16 x18;
+    s32 x1C;
+    s32 x20;
     int x24;
     u32 x28;
     int score;
-    u8 pad_x30[0xA8 - 0x30];
+    u8 pad_x30[0x40 - 0x30];
+    u32 x40;
+    u32 x44;
+    u32 x48;
+    u32 x4C;
+    u32 x50;
+    u32 x54;
+    u32 x58;
+    u32 x5C;
+    u32 x60;
+    u32 x64;
+    u32 x68;
+    u32 x6C;
+    u32 x70;
+    u32 x74;
+    u32 x78;
+    u32 x7C;
+    u32 x80;
+    u32 x84;
+    u32 x88;
+    u32 x8C;
+    u32 x90;
+    u32 x94;
+    u32 x98;
+    u32 x9C;
+    u32 xA0;
+    u32 xA4;
 };
 
 struct MatchEnd {

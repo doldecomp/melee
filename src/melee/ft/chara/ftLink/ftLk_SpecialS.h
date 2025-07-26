@@ -8,7 +8,7 @@
 /* 0EBFCC */ bool ftLk_SepcialS_Get2219b5(HSD_GObj* gobj);
 /* 0EBFDC */ bool ftLk_SpecialS_Is2071b0_5to13(HSD_GObj* gobj);
 /* 0EC00C */ bool ftLk_SpecialS_Is2071b0_1to13(HSD_GObj* gobj);
-/* 0EC03C */ void ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj);
+/* 0EC03C */ bool ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj);
 /* 0EC06C */ void ftLk_SpecialS_RemoveBoomerang1(HSD_GObj* gobj);
 /* 0EC354 */ void ftLk_SpecialS_Enter(HSD_GObj* gobj);
 /* 0EC404 */ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj);
