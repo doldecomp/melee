@@ -780,7 +780,7 @@ void gmMainLib_8015DB80(void)
 
 /// #gmMainLib_8015EA80
 
-u8 gmMainLib_8015ECB0(void)
+int gmMainLib_8015ECB0(void)
 {
     return gmMainLib_804D3EE0->x1850.unk_x1;
 }

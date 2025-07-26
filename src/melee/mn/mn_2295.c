@@ -17,9 +17,14 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00CE.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
+#include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/inlines.h>
+#include <melee/mn/mnevent.h>
+#include <melee/mn/mnhyaku.h>
 #include <melee/sc/types.h>
 
 mn_unk1 mn_804A04F0;
@@ -778,7 +783,7 @@ void mn_80229A7C(void* arg0, int arg1, int arg2)
 }
 #pragma pop
 
-static StaticModelDesc mn_804A0508;
+static StaticModelDesc MenMainBack_Top;
 
 HSD_GObj* mn_80229B2C(void)
 {
@@ -786,19 +791,37 @@ HSD_GObj* mn_80229B2C(void)
     HSD_JObj* temp_r3;
 
     temp_r30 = GObj_Create(4, 5, 0x80);
-    temp_r3 = HSD_JObjLoadJoint(mn_804A0508.joint);
+    temp_r3 = HSD_JObjLoadJoint(MenMainBack_Top.joint);
     HSD_GObjObject_80390A70(temp_r30, HSD_GObj_804D7849, temp_r3);
     GObj_SetupGXLink(temp_r30, HSD_GObj_JObjCallback, 2, 0x80);
     HSD_GObjProc_8038FD54(temp_r30, mn_8022EAE0, 0);
-    HSD_JObjAddAnimAll(temp_r3, mn_804A0508.animjoint, mn_804A0508.matanim_joint, mn_804A0508.shapeanim_joint);
+    HSD_JObjAddAnimAll(temp_r3, MenMainBack_Top.animjoint,
+                       MenMainBack_Top.matanim_joint,
+                       MenMainBack_Top.shapeanim_joint);
     HSD_JObjReqAnimAll(temp_r3, 0.0F);
     HSD_JObjAnimAll(temp_r3);
     return temp_r30;
 }
 
-static StaticModelDesc mn_804A0518;
-static StaticModelDesc mn_804A0528;
-static StaticModelDesc mn_804A0538;
+static StaticModelDesc MenMainPanel_Top;
+static StaticModelDesc MenMainConTop_Top;
+static StaticModelDesc MenMainCursor_Top;
+static StaticModelDesc MenMainConRl_Top;
+static StaticModelDesc MenMainCursorRl_Top;
+static StaticModelDesc MenMainNmRl_Top;
+static StaticModelDesc MenMainCursorTr01_Top;
+static StaticModelDesc MenMainCursorTr02_Top;
+static StaticModelDesc MenMainCursorTr03_Top;
+static StaticModelDesc MenMainCursorTr04_Top;
+static StaticModelDesc MenMainCursorRl01_Top;
+static StaticModelDesc MenMainCursorRl02_Top;
+static StaticModelDesc MenMainCursorRl03_Top;
+static StaticModelDesc MenMainCursorRl04_Top;
+static StaticModelDesc MenMainCursorRl05_Top;
+static StaticModelDesc MenMainConIs_Top;
+static StaticModelDesc MenMainCursorIs_Top;
+static StaticModelDesc MenMainConSs_Top;
+static StaticModelDesc MenMainCursorSs_Top;
 
 void fn_80229BF4(HSD_GObj* gobj)
 {
@@ -864,11 +887,13 @@ HSD_GObj* mn_80229DC0(void)
     u8 tmp;
 
     temp_r31 = GObj_Create(5, 6, 0x80);
-    temp_r3 = HSD_JObjLoadJoint(mn_804A0518.joint);
+    temp_r3 = HSD_JObjLoadJoint(MenMainPanel_Top.joint);
     HSD_GObjObject_80390A70(temp_r31, HSD_GObj_804D7849, temp_r3);
     GObj_SetupGXLink(temp_r31, HSD_GObj_JObjCallback, 3, 0x80);
     HSD_GObjProc_8038FD54(temp_r31, fn_80229BF4, 0);
-    HSD_JObjAddAnimAll(temp_r3, mn_804A0518.animjoint, mn_804A0518.matanim_joint, mn_804A0518.shapeanim_joint);
+    HSD_JObjAddAnimAll(temp_r3, MenMainPanel_Top.animjoint,
+                       MenMainPanel_Top.matanim_joint,
+                       MenMainPanel_Top.shapeanim_joint);
     lb_80011E24(temp_r3, &spC, 4, -1);
     lb_80011E24(temp_r3, &sp8, 0x29, -1);
     HSD_JObjReqAnimAll(spC, mn_803EB354.x);
@@ -1381,12 +1406,13 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
         var_r18++;
     }
     temp_r27 = GObj_Create(6, 7, 0x80);
-    temp_r3 = HSD_JObjLoadJoint(mn_804A0528.joint);
+    temp_r3 = HSD_JObjLoadJoint(MenMainConTop_Top.joint);
     HSD_GObjObject_80390A70(temp_r27, HSD_GObj_804D7849, temp_r3);
     GObj_SetupGXLink(temp_r27, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_GObjProc_8038FD54(temp_r27, fn_8022AFEC, 0);
-    HSD_JObjAddAnimAll(temp_r3, mn_804A0528.animjoint,
-                       mn_804A0528.matanim_joint, mn_804A0528.shapeanim_joint);
+    HSD_JObjAddAnimAll(temp_r3, MenMainConTop_Top.animjoint,
+                       MenMainConTop_Top.matanim_joint,
+                       MenMainConTop_Top.shapeanim_joint);
     HSD_JObjReqAnimAll(temp_r3, 0.0F);
     temp_r3_2 = HSD_MemAlloc(sizeof(*temp_r3_2));
     if (temp_r3_2 == NULL) {
@@ -1428,10 +1454,10 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
             temp_r19_2 = &sp48[var_r16_2];
             HSD_JObjReqAnim(*temp_r19_2, (f32) var_r17);
             HSD_JObjAnim(*temp_r19_2);
-            temp_r3_4 = HSD_JObjLoadJoint(mn_804A0538.joint);
-            HSD_JObjAddAnimAll(temp_r3_4, mn_804A0538.animjoint,
-                               mn_804A0538.matanim_joint,
-                               mn_804A0538.shapeanim_joint);
+            temp_r3_4 = HSD_JObjLoadJoint(MenMainCursor_Top.joint);
+            HSD_JObjAddAnimAll(temp_r3_4, MenMainCursor_Top.animjoint,
+                               MenMainCursor_Top.matanim_joint,
+                               MenMainCursor_Top.shapeanim_joint);
             lb_8001204C((int) temp_r3_4, sp2C, mn_803EAE7C, 7);
             temp_r22_3 = temp_r25 == var_r17_2;
             tmp = &mn_803EB378 + temp_r22_3;
@@ -1502,7 +1528,7 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
     return temp_r27;
 }
 
-extern HSD_CObjDesc* mn_804D6BC4;
+extern HSD_CObjDesc* MenMain_cam;
 static const Vec3 mn_803B8500 = { 0, 1, 0 };
 
 void mn_8022BA1C(HSD_GObj* arg0)
@@ -1555,7 +1581,7 @@ void mn_8022BA1C(HSD_GObj* arg0)
             var_f30 = 30.0f * ((y - var_f0) / 0.6f);
         }
     }
-    HSD_CObjInit(temp_r31, mn_804D6BC4);
+    HSD_CObjInit(temp_r31, MenMain_cam);
     sp30 = mn_803B8500;
     HSD_CObjGetEyeVector(temp_r31, &sp48);
     HSD_CObjGetInterest(temp_r31, &sp18);
@@ -1578,7 +1604,7 @@ void fn_8022BCD4(HSD_GObj* gobj, int unused)
 extern HSD_GObj* mn_804D6BA8;
 extern HSD_GObj* mn_804D6BAC;
 extern HSD_GObj* mn_804D6BB0;
-extern HSD_FogDesc* mn_804D6BC0;
+extern HSD_FogDesc* MenMain_fog;
 
 HSD_GObj* mn_8022BCF8(void)
 {
@@ -1587,7 +1613,7 @@ HSD_GObj* mn_8022BCF8(void)
 
     gobj = GObj_Create(1, 2, 0x80);
     mn_804D6BA8 = gobj;
-    fog = HSD_FogLoadDesc(mn_804D6BC0);
+    fog = HSD_FogLoadDesc(MenMain_fog);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
     GObj_SetupGXLink(gobj, fn_8022BCD4, 1, 0x80);
     return gobj;
@@ -1617,8 +1643,6 @@ void fn_8022BDB4(HSD_GObj* gobj, int unused)
     }
 }
 
-extern HSD_CObjDesc* mn_804D6BC4;
-
 HSD_GObj* mn_8022BE34(void)
 {
     Vec3 pos;
@@ -1626,7 +1650,7 @@ HSD_GObj* mn_8022BE34(void)
     HSD_CObj* cobj;
 
     mn_804D6BAC = gobj;
-    cobj = HSD_CObjLoadDesc(mn_804D6BC4);
+    cobj = HSD_CObjLoadDesc(MenMain_cam);
     HSD_CObjGetEyePosition(cobj, &pos);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, fn_8022BDB4, 0);
@@ -1646,7 +1670,7 @@ void mn_8022BEDC(HSD_GObj* gobj)
     mn_804D6BB5 = HSD_SisLib_803A611C(0, gobj, 7, 8, 0x80, 5, 0x80, 0);
     temp_r3 = GObj_Create(2, 3, 0x80);
     mn_804D6BB0 = temp_r3;
-    cobj = HSD_CObjLoadDesc(mn_804D6BC4);
+    cobj = HSD_CObjLoadDesc(MenMain_cam);
     HSD_GObjObject_80390A70(temp_r3, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(temp_r3, HSD_GObj_803910D8, 0);
     temp_r3->gxlink_prios = 0x80;
@@ -1656,6 +1680,8 @@ void mn_8022BEDC(HSD_GObj* gobj)
 
 /// #mn_8022BFBC
 
+#pragma push
+#pragma dont_inline on
 int mn_8022C010(int arg0, int arg1)
 {
     if (arg0 == 0) {
@@ -1702,6 +1728,7 @@ int mn_8022C010(int arg0, int arg1)
         return 4;
     }
 }
+#pragma pop
 
 /// #mn_8022C068
 
@@ -1857,7 +1884,195 @@ void mn_8022DD38_OnFrame(void)
     }
 }
 
-/// #mn_8022DDA8_OnEnter
+u8 data_pad[0xd5c - 0xc4c] = { 0 };
+
+extern UNK_T MenMain_lights;
+
+static inline void mn_8022DDA8_inline(u16* sp2B4)
+{
+    int temp_r29;
+    HSD_GObj* gobj;
+    HSD_LObj* lobj;
+
+    gobj = GObj_Create(3, 4, 0x80);
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
+    HSD_GObjProc_8038FD54(gobj, fn_8022C128, 0);
+    lobj = lb_80011AC4(MenMain_lights);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    mn_804A04F0.x12 = 0;
+    temp_r29 = mn_8022C010(mn_804A04F0.x0, *sp2B4);
+    mn_804A04F0.x14 = mn_8022BFBC();
+    mn_8022C068(lobj, temp_r29, mn_804A04F0.x12);
+}
+
+void mn_8022DDA8_OnEnter(void* arg0_)
+{
+    struct {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+    }* arg0 = arg0_;
+    u16* sp2B4;
+    HSD_GObj* temp_r3_8;
+    u8 temp_r0;
+    void (*var_r4)(HSD_GObj*);
+
+    u8 _[0x14];
+
+    mn_804D6BC8.x0 = 0x14;
+    mn_804D6BC8.x2 = 0;
+    mn_804D6BC8.x4 = 0;
+    mn_804A04F0.x8 = 0;
+    sp2B4 = &mn_804A04F0.x2;
+    temp_r0 = arg0->x0;
+    mn_804A04F0.x0 = temp_r0;
+    mn_804A04F0.x1 = temp_r0;
+    *sp2B4 = arg0->x1;
+    mn_804D6BAC = NULL;
+    mn_804D6BB0 = NULL;
+    if (arg0->x2 != 0) {
+        mn_804D6BB8 = lbArchive_LoadSymbols("MnMaAll",
+                &MenMainBack_Top.joint, "MenMainBack_Top_joint",
+                &MenMainBack_Top.animjoint, "MenMainBack_Top_animjoint",
+                &MenMainBack_Top.matanim_joint, "MenMainBack_Top_matanim_joint",
+                &MenMainBack_Top.shapeanim_joint, "MenMainBack_Top_shapeanim_joint",
+
+                &MenMain_cam, "ScMenMain_cam_int1_camera",
+                &MenMain_lights, "ScMenMain_scene_lights",
+                &MenMain_fog, "ScMenMain_fog",
+
+                &MenMainPanel_Top.joint, "MenMainPanel_Top_joint",
+                &MenMainPanel_Top.animjoint, "MenMainPanel_Top_animjoint",
+                &MenMainPanel_Top.matanim_joint, "MenMainPanel_Top_matanim_joint",
+                &MenMainPanel_Top.shapeanim_joint, "MenMainPanel_Top_shapeanim_joint",
+
+                &MenMainConTop_Top.joint, "MenMainConTop_Top_joint",
+                &MenMainConTop_Top.animjoint, "MenMainConTop_Top_animjoint",
+                &MenMainConTop_Top.matanim_joint, "MenMainConTop_Top_matanim_joint",
+                &MenMainConTop_Top.shapeanim_joint, "MenMainConTop_Top_shapeanim_joint",
+
+                &MenMainCursor_Top.joint, "MenMainCursor_Top_joint",
+                &MenMainCursor_Top.animjoint, "MenMainCursor_Top_animjoint",
+                &MenMainCursor_Top.matanim_joint, "MenMainCursor_Top_matanim_joint",
+                &MenMainCursor_Top.shapeanim_joint, "MenMainCursor_Top_shapeanim_joint",
+
+                &MenMainConRl_Top.joint, "MenMainConRl_Top_joint",
+                &MenMainConRl_Top.animjoint, "MenMainConRl_Top_animjoint",
+                &MenMainConRl_Top.matanim_joint, "MenMainConRl_Top_matanim_joint",
+                &MenMainConRl_Top.shapeanim_joint, "MenMainConRl_Top_shapeanim_joint",
+
+                &MenMainCursorRl_Top.joint, "MenMainCursorRl_Top_joint",
+                &MenMainCursorRl_Top.animjoint, "MenMainCursorRl_Top_animjoint",
+                &MenMainCursorRl_Top.matanim_joint, "MenMainCursorRl_Top_matanim_joint",
+                &MenMainCursorRl_Top.shapeanim_joint, "MenMainCursorRl_Top_shapeanim_joint",
+
+                &MenMainNmRl_Top.joint, "MenMainNmRl_Top_joint",
+                &MenMainNmRl_Top.animjoint, "MenMainNmRl_Top_animjoint",
+                &MenMainNmRl_Top.matanim_joint, "MenMainNmRl_Top_matanim_joint",
+                &MenMainNmRl_Top.shapeanim_joint, "MenMainNmRl_Top_shapeanim_joint",
+
+                &MenMainCursorTr01_Top.joint, "MenMainCursorTr01_Top_joint",
+                &MenMainCursorTr01_Top.animjoint, "MenMainCursorTr01_Top_animjoint",
+                &MenMainCursorTr01_Top.matanim_joint, "MenMainCursorTr01_Top_matanim_joint",
+                &MenMainCursorTr01_Top.shapeanim_joint, "MenMainCursorTr01_Top_shapeanim_joint",
+
+                &MenMainCursorTr02_Top.joint, "MenMainCursorTr02_Top_joint",
+                &MenMainCursorTr02_Top.animjoint, "MenMainCursorTr02_Top_animjoint",
+                &MenMainCursorTr02_Top.matanim_joint, "MenMainCursorTr02_Top_matanim_joint",
+                &MenMainCursorTr02_Top.shapeanim_joint, "MenMainCursorTr02_Top_shapeanim_joint",
+
+                &MenMainCursorTr03_Top.joint, "MenMainCursorTr03_Top_joint",
+                &MenMainCursorTr03_Top.animjoint, "MenMainCursorTr03_Top_animjoint",
+                &MenMainCursorTr03_Top.matanim_joint, "MenMainCursorTr03_Top_matanim_joint",
+                &MenMainCursorTr03_Top.shapeanim_joint, "MenMainCursorTr03_Top_shapeanim_joint",
+
+                &MenMainCursorTr04_Top.joint, "MenMainCursorTr04_Top_joint",
+                &MenMainCursorTr04_Top.animjoint, "MenMainCursorTr04_Top_animjoint",
+                &MenMainCursorTr04_Top.matanim_joint, "MenMainCursorTr04_Top_matanim_joint",
+                &MenMainCursorTr04_Top.shapeanim_joint, "MenMainCursorTr04_Top_shapeanim_joint",
+
+                &MenMainCursorRl01_Top.joint, "MenMainCursorRl01_Top_joint",
+                &MenMainCursorRl01_Top.animjoint, "MenMainCursorRl01_Top_animjoint",
+                &MenMainCursorRl01_Top.matanim_joint, "MenMainCursorRl01_Top_matanim_joint",
+                &MenMainCursorRl01_Top.shapeanim_joint, "MenMainCursorRl01_Top_shapeanim_joint",
+
+                &MenMainCursorRl02_Top.joint, "MenMainCursorRl02_Top_joint",
+                &MenMainCursorRl02_Top.animjoint, "MenMainCursorRl02_Top_animjoint",
+                &MenMainCursorRl02_Top.matanim_joint, "MenMainCursorRl02_Top_matanim_joint",
+                &MenMainCursorRl02_Top.shapeanim_joint, "MenMainCursorRl02_Top_shapeanim_joint",
+
+                &MenMainCursorRl03_Top.joint, "MenMainCursorRl03_Top_joint",
+                &MenMainCursorRl03_Top.animjoint, "MenMainCursorRl03_Top_animjoint",
+                &MenMainCursorRl03_Top.matanim_joint, "MenMainCursorRl03_Top_matanim_joint",
+                &MenMainCursorRl03_Top.shapeanim_joint, "MenMainCursorRl03_Top_shapeanim_joint",
+
+                &MenMainCursorRl04_Top.joint, "MenMainCursorRl04_Top_joint",
+                &MenMainCursorRl04_Top.animjoint, "MenMainCursorRl04_Top_animjoint",
+                &MenMainCursorRl04_Top.matanim_joint, "MenMainCursorRl04_Top_matanim_joint",
+                &MenMainCursorRl04_Top.shapeanim_joint, "MenMainCursorRl04_Top_shapeanim_joint",
+
+                &MenMainCursorRl05_Top.joint, "MenMainCursorRl05_Top_joint",
+                &MenMainCursorRl05_Top.animjoint, "MenMainCursorRl05_Top_animjoint",
+                &MenMainCursorRl05_Top.matanim_joint, "MenMainCursorRl05_Top_matanim_joint",
+                &MenMainCursorRl05_Top.shapeanim_joint, "MenMainCursorRl05_Top_shapeanim_joint",
+
+                &MenMainConIs_Top.joint, "MenMainConIs_Top_joint",
+                &MenMainConIs_Top.animjoint, "MenMainConIs_Top_animjoint",
+                &MenMainConIs_Top.matanim_joint, "MenMainConIs_Top_matanim_joint",
+                &MenMainConIs_Top.shapeanim_joint, "MenMainConIs_Top_shapeanim_joint",
+
+                &MenMainCursorIs_Top.joint, "MenMainCursorIs_Top_joint",
+                &MenMainCursorIs_Top.animjoint, "MenMainCursorIs_Top_animjoint",
+                &MenMainCursorIs_Top.matanim_joint, "MenMainCursorIs_Top_matanim_joint",
+                &MenMainCursorIs_Top.shapeanim_joint, "MenMainCursorIs_Top_shapeanim_joint",
+
+                &MenMainConSs_Top.joint, "MenMainConSs_Top_joint",
+                &MenMainConSs_Top.animjoint, "MenMainConSs_Top_animjoint",
+                &MenMainConSs_Top.matanim_joint, "MenMainConSs_Top_matanim_joint",
+                &MenMainConSs_Top.shapeanim_joint, "MenMainConSs_Top_shapeanim_joint",
+
+                &MenMainCursorSs_Top.joint, "MenMainCursorSs_Top_joint",
+                &MenMainCursorSs_Top.animjoint, "MenMainCursorSs_Top_animjoint",
+                &MenMainCursorSs_Top.matanim_joint, "MenMainCursorSs_Top_matanim_joint",
+                &MenMainCursorSs_Top.shapeanim_joint, "MenMainCursorSs_Top_shapeanim_joint",
+
+                0);
+
+        if (lbLang_IsSavedLanguageUS()) {
+            HSD_SisLib_803A62A0(0, "SdMenu.usd", "SIS_MenuData");
+        } else {
+            HSD_SisLib_803A62A0(0, "SdMenu.dat", "SIS_MenuData");
+        }
+        HSD_SisLib_803A62A0(3, "SdToy.dat", "SIS_ToyData");
+        gm_801BA8FC();
+        lbAudioAx_8002392C();
+    }
+
+    mn_8022DDA8_inline(sp2B4);
+    mn_8022BCF8();
+    mn_8022BEDC(mn_8022BE34());
+    mn_80229B2C();
+    mn_80229DC0();
+
+    switch (arg0->x0) {
+    case 7:
+        mnEvent_8024E838(gm_801BEB80(), 0);
+        break;
+    case 33:
+        mnHyaku_8024CD64(arg0->x1);
+        break;
+    default:
+        temp_r3_8 = GObj_Create(0, 1, 0x80);
+        if (!(var_r4 = mn_803EB6B0[mn_804A04F0.x0].x10)) {
+            var_r4 = mn_8022DB10;
+        }
+        HSD_GObjProc_8038FD54(temp_r3_8, var_r4, 0);
+        mn_8022B3A0(0);
+        break;
+    }
+    lbAudioAx_80023F28(gmMainLib_8015ECB0());
+    lb_8001CE00();
+}
 
 /// #mn_8022E950
 
