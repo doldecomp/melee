@@ -12,6 +12,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftYoshi/ftYs_Init.h"
 #include "it/items/it_2F2B.h"
+#include "it/items/ityoshieggthrow.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
