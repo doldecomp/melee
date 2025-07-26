@@ -11,7 +11,7 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/inlines.h>
-#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnmain.h>
 #include <melee/mn/mnlanguage.h>
 
 extern HSD_Archive* mn_804D6BB8;

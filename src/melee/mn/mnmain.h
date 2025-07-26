@@ -1,5 +1,5 @@
-#ifndef GALE01_2295AC
-#define GALE01_2295AC
+#ifndef MELEE_MN_MAIN_H
+#define MELEE_MN_MAIN_H
 
 #include <platform.h>
 #include <placeholder.h>
@@ -25,11 +25,6 @@ typedef struct _mn_unk2 {
     u16 x2;
     s32 x4;
 } mn_unk2;
-
-struct mn_80231634_t {
-    /*  +0 */ char pad_0[0x10];
-    /* +10 */ int x10;
-};
 
 /* 2295AC */ u8 mn_802295AC(void);
 /* 229624 */ u32 mn_80229624(u32);
@@ -100,29 +95,7 @@ struct mn_80231634_t {
 /* 22F538 */ void fn_8022F538(HSD_GObj*);
 /* 22FB88 */ UNK_RET mn_8022FB88(UNK_PARAMS);
 /* 22FD18 */ UNK_RET mn_8022FD18(UNK_PARAMS);
-/* 22FEC8 */ UNK_RET mn_8022FEC8(UNK_PARAMS);
-/* 230198 */ UNK_RET mn_80230198(UNK_PARAMS);
-/* 230274 */ UNK_RET mn_80230274(UNK_PARAMS);
-/* 2307F8 */ UNK_RET mn_802307F8(UNK_PARAMS);
-/* 2308F0 */ UNK_RET mn_802308F0(UNK_PARAMS);
-/* 2309F0 */ UNK_RET fn_802309F0(UNK_PARAMS);
-/* 230D18 */ UNK_RET mn_80230D18(UNK_PARAMS);
-/* 230E38 */ HSD_GObj* mn_80230E38(int);
-/* 231634 */ int mn_80231634(struct mn_80231634_t*);
-/* 23164C */ UNK_RET mn_8023164C(UNK_PARAMS);
-/* 231714 */ UNK_RET mn_80231714(UNK_PARAMS);
-/* 2317E4 */ UNK_RET mn_802317E4(UNK_PARAMS);
-/* 231804 */ void mn_80231804(HSD_Archive*, int);
-/* 231F80 */ UNK_RET mn_80231F80(UNK_PARAMS);
-/* 23201C */ UNK_RET fn_8023201C(UNK_PARAMS);
-/* 232458 */ UNK_RET mn_80232458(UNK_PARAMS);
-/* 2324E4 */ UNK_RET mn_802324E4(UNK_PARAMS);
-/* 232660 */ UNK_RET mn_80232660(UNK_PARAMS);
-/* 2327A4 */ UNK_RET mn_802327A4(UNK_PARAMS);
-/* 232D4C */ UNK_RET mn_80232D4C(UNK_PARAMS);
-/* 232F44 */ UNK_RET fn_80232F44(UNK_PARAMS);
-/* 233218 */ UNK_RET mn_80233218(UNK_PARAMS);
-/* 2339FC */ UNK_RET mn_802339FC(UNK_PARAMS);
+
 /* 4A04F0 */ extern mn_unk1 mn_804A04F0;
 /* 4D6BB8 */ extern HSD_Archive* mn_804D6BB8;
 /* 4D6BC8 */ extern mn_unk2 mn_804D6BC8;
