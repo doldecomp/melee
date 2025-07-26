@@ -52,7 +52,7 @@
 /* 38B380 */ UNK_RET HSD_SynthPStreamFirstHakoHeaderCallback(UNK_PARAMS);
 /* 38B3E0 */ UNK_RET HSD_SynthPStreamHeaderCallback(UNK_PARAMS);
 /* 38B5AC */ UNK_RET HSD_Synth_8038B5AC(UNK_PARAMS);
-/* 38B81C */ UNK_RET HSD_SynthStreamSetVolume(UNK_PARAMS);
+/* 38B81C */ void HSD_SynthStreamSetVolume(float);
 /* 38B938 */ UNK_RET HSD_SynthInit(UNK_PARAMS);
 
 #endif
