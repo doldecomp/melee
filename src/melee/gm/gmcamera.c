@@ -72,8 +72,6 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
     return arg0;
 }
 
-union _gmCameraUnkUnion gmCamera_80479BC8;
-
 HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
 {
     HSD_Text* text;
