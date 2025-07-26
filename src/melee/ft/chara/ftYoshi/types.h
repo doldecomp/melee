@@ -3,7 +3,7 @@
 
 #include <platform.h>
 #include <placeholder.h>
-#include <sysdolphin/baselib/forward.h>
+#include <melee/it/forward.h>
 
 struct ftYoshi_FighterVars {
     /* 0x222C */ u32 x222C;
