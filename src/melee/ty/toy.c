@@ -6,6 +6,8 @@
 
 #include "mn/mnsoundtest.h"
 
+#include "baselib/controller.h"
+
 /// #un_80305058
 
 /// #un_803053C4
@@ -14,7 +16,6 @@
 
 /// #un_80305918
 
-/// #un_80305B88
 s32 un_80305B88(void) {
     int i;
     u32 button;
@@ -29,7 +30,6 @@ s32 un_80305B88(void) {
     return button;
 }
 
-/// #un_80305C44
 s32 un_80305C44(void) {
     int i = 0;
     u32 button;
@@ -48,7 +48,21 @@ s32 un_80305C44(void) {
 
 /// #un_80305D00
 
-/// #un_80305DB0
+float un_80305DB0(void) {
+    float ret = 0.0f;
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        ret = HSD_PadGetNmlStickY(i);
+
+        if (ABS(ret) > 0.1f) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+
+    return ret;
+}
 
 /// #un_80305EB4
 
