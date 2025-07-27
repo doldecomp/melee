@@ -46,16 +46,14 @@ s32 un_80305C44(void) {
 
 /// #un_80305D00
 
-/// #un_80305D00
-
 float un_80305DB0(void) {
-    float ret = 0.0f;
+    float ret = 0.0F;
     int i;
 
     for (i = 0; i < 4; i++) {
         ret = HSD_PadGetNmlStickY(i);
 
-        if (ABS(ret) > 0.1f) {
+        if (ABS(ret) > 0.1F) {
             gm_801677E8(i);
             break;
         }
