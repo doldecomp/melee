@@ -28,7 +28,7 @@
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbsnap.h>
 #include <melee/lb/types.h>
-#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnmain.h>
 #include <melee/mn/mngallery.h>
 #include <melee/mn/types.h>
 #include <melee/mp/mpcoll.h>
