@@ -88,6 +88,7 @@ extern HSD_PadStatus HSD_PadCopyStatus[4];
 void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
+float HSD_PadGetNmlStickY(u8 slot);
 void HSD_PadRenewRawStatus(bool);
 void HSD_PadRenewMasterStatus(void);
 void HSD_PadRenewCopyStatus(void);

@@ -43,6 +43,11 @@ s32 HSD_PadGetResetSwitch(void)
     return (p->reset_switch != 0) ? true : false;
 }
 
+float HSD_PadGetNmlStickY(u8 slot)
+{
+    return HSD_PadCopyStatus[slot].nml_stickY;
+}
+
 static void HSD_PadRawQueueShift(u8 qnum, u8* qptr)
 {
     *qptr = (*qptr + 1) % qnum;

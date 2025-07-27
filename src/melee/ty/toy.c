@@ -4,6 +4,10 @@
 
 #include "un/un_2FC9.h"
 
+#include "mn/mnsoundtest.h"
+
+#include "baselib/controller.h"
+
 /// #un_80305058
 
 /// #un_803053C4
@@ -12,13 +16,51 @@
 
 /// #un_80305918
 
-/// #un_80305B88
+s32 un_80305B88(void) {
+    int i;
+    u32 button;
+    PAD_STACK(4);
 
-/// #un_80305C44
+    for (i = 0; i < 4; i++) {
+        if (button = HSD_PadCopyStatus[(u8) i].trigger) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+    return button;
+}
+
+s32 un_80305C44(void) {
+    int i = 0;
+    u32 button;
+    PAD_STACK(4);
+
+    for (i = 0; i < 4; i++) {
+        if (button = HSD_PadCopyStatus[(u8) i].button) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+    return button;
+}
 
 /// #un_80305D00
 
-/// #un_80305DB0
+float un_80305DB0(void) {
+    float ret = 0.0F;
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        ret = HSD_PadGetNmlStickY(i);
+
+        if (ABS(ret) > 0.1F) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+
+    return ret;
+}
 
 /// #un_80305EB4
 
