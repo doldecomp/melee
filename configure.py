@@ -1005,7 +1005,8 @@ config.libs = [
     MeleeLib(
         "mn (Menus)",
         [
-            Object(NonMatching, "melee/mn/mn_2295.c"),
+            Object(NonMatching, "melee/mn/mnmain.c"),
+            Object(NonMatching, "melee/mn/mnmainrule.c"),
             Object(NonMatching, "melee/mn/mnruleplus.c"),
             Object(NonMatching, "melee/mn/mnitemsw.c"),
             Object(NonMatching, "melee/mn/mnstagesw.c"),

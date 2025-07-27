@@ -6,7 +6,7 @@
 #include "gm/types.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbsnap.h"
-#include "mn/mn_2295.h"
+#include "mn/mnmain.h"
 
 #include <platform.h>
 #include <placeholder.h>

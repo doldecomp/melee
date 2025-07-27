@@ -1,4 +1,4 @@
-#include "mn_2295.h"
+#include "mnmain.h"
 
 #include <math.h>
 #include <trigf.h>
@@ -2288,55 +2288,3 @@ void mn_8022F3D8(HSD_JObj* jobj, u8 arg1, HSD_TypeMask mask)
 /// #mn_8022FB88
 
 /// #mn_8022FD18
-
-/// #mn_8022FEC8
-
-/// #mn_80230198
-
-/// #mn_80230274
-
-/// #mn_802307F8
-
-/// #mn_802308F0
-
-/// #fn_802309F0
-
-/// #mn_80230D18
-
-/// #mn_80230E38
-
-int mn_80231634(struct mn_80231634_t* arg0)
-{
-    if (arg0 == NULL) {
-        return 0;
-    }
-    return arg0->x10;
-}
-
-/// #mn_8023164C
-
-/// #mn_80231714
-
-/// #mn_802317E4
-
-/// #mn_80231804
-
-/// #mn_80231F80
-
-/// #fn_8023201C
-
-/// #mn_80232458
-
-/// #mn_802324E4
-
-/// #mn_80232660
-
-/// #mn_802327A4
-
-/// #mn_80232D4C
-
-/// #fn_80232F44
-
-/// #mn_80233218
-
-/// #mn_802339FC

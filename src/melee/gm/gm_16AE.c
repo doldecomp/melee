@@ -135,7 +135,7 @@ bool gm_8016B014(void)
     int i;
     PAD_STACK(4);
 
-    if (lbl_8046B6A0.x24C8.x4_2 && gm_8016A1F8() == 0) {
+    if (lbl_8046B6A0.x24C8.x4_2 && !gm_8016A1F8()) {
         for (i = 1; i < 6; i++) {
             if (Player_GetPlayerState(i) != 0) {
                 i = -1;

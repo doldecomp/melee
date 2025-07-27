@@ -13,6 +13,9 @@
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
+#include <printf.h>
+
+struct lbl_8046B488_t;
 
 /* 1601C4 */ u8 gm_801601C4(s8);
 /* 160244 */ u8 gm_80160244(s8);
@@ -94,29 +97,29 @@
 /* 1639F4 */ int gm_801639F4(int);
 /* 163A3C */ void gm_80163A3C(int, void*, void*, void*, void*);
 /* 163B9C */ int gm_80163B9C(void*, void*, void*, void*);
-/* 163D24 */ UNK_RET fn_80163D24(UNK_PARAMS);
-/* 163D74 */ UNK_RET fn_80163D74(UNK_PARAMS);
-/* 163DC4 */ u16 gm_80163DC4(int);
+/* 163D24 */ bool fn_80163D24(void);
+/* 163D74 */ bool fn_80163D74(void);
+/* 163DC4 */ u16 gm_80163DC4(u8);
 /* 163DE8 */ int gm_80163DE8(void);
-/* 163E3C */ u16 gm_80163E3C(int);
+/* 163E3C */ u16 gm_80163E3C(u8);
 /* 163E60 */ int gm_80163E60(void);
-/* 163EB4 */ int gm_80163EB4(int);
+/* 163EB4 */ int gm_80163EB4(u8);
 /* 163ED8 */ int gm_80163ED8(void);
-/* 163F2C */ int gm_80163F2C(int);
+/* 163F2C */ int gm_80163F2C(u8);
 /* 163F50 */ int gm_80163F50(void);
-/* 163FA4 */ UNK_RET fn_80163FA4(UNK_PARAMS);
+/* 163FA4 */ int fn_80163FA4(u8);
 /* 16400C */ u8 gm_8016400C(u8);
 /* 164024 */ u8 gm_80164024(u8 arg0);
-/* 16403C */ UNK_RET gm_8016403C(UNK_PARAMS);
-/* 1640B0 */ UNK_RET fn_801640B0(UNK_PARAMS);
+/* 16403C */ bool gm_8016403C(u8 item);
+/* 1640B0 */ void fn_801640B0(u64* item_mask);
 /* 16419C */ float fn_8016419C(u8);
 /* 1641B4 */ float fn_801641B4(u8);
 /* 1641CC */ u16 gm_801641CC(u8);
-/* 1641E4 */ UNK_RET gm_801641E4(UNK_PARAMS);
+/* 1641E4 */ void gm_801641E4(u8 stage, u8 enable);
 /* 164250 */ UNK_RET gm_80164250(UNK_PARAMS);
 /* 1642A0 */ UNK_RET fn_801642A0(UNK_PARAMS);
 /* 164330 */ u8 gm_80164330(u8);
-/* 164430 */ UNK_RET gm_80164430(UNK_PARAMS);
+/* 164430 */ bool gm_80164430(u16);
 /* 164504 */ UNK_RET gm_80164504(UNK_PARAMS);
 /* 164600 */ bool gm_80164600(void);
 /* 16468C */ UNK_RET gm_8016468C(UNK_PARAMS);
@@ -197,6 +200,7 @@
 /* 169290 */ UNK_RET gm_80169290(UNK_PARAMS);
 /* 1692BC */ UNK_RET gm_801692BC(UNK_PARAMS);
 /* 1692E8 */ void gm_801692E8(u32 ticks, datetime* datetime);
+/* 169364 */ struct lbl_8046B488_t* fn_80169364(void);
 /* 169370 */ u8 gm_80169370(s32);
 /* 169384 */ u8 gm_80169384(void);
 /* 169394 */ s32 gm_80169394(void);
@@ -218,7 +222,7 @@
 /* 169F50 */ UNK_RET fn_80169F50(s8, s8);
 /* 16A09C */ UNK_RET fn_8016A09C(UNK_PARAMS);
 /* 16A164 */ UNK_RET gm_8016A164(UNK_PARAMS);
-/* 16A1F8 */ int gm_8016A1F8(void);
+/* 16A1F8 */ bool gm_8016A1F8(void);
 /* 16A21C */ void gm_8016A21C(StartMeleeRules*);
 /* 16A22C */ UNK_RET gm_8016A22C(UNK_PARAMS);
 /* 16A404 */ void gm_8016A404(s32 arg0);
