@@ -1,18 +1,25 @@
-#include "gm/forward.h"
-#include "mn/forward.h"
 #include "gm/gmtou.static.h"
-#include "gm_1B03.h"
-
-#include "gm_unsplit.h"
-#include "placeholder.h"
-#include "gm/gmresult.h"
-#include "gm/gmtou.h"
-#include "lb/lbtime.h"
 #include "gm_1B03.static.h"
+#include "gm/gm_1B03.h"
 
+#include "placeholder.h"
+
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gm_16F1.h>
+#include <melee/gm/gm_18A5.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_1A4C.h>
+#include <melee/gm/gm_1BFA.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
+#include <melee/gm/gmtou.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -21,6 +28,7 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbsnap.h>
+#include <melee/lb/lbtime.h>
 #include <melee/lb/types.h>
 #include <melee/mn/mngallery.h>
 #include <melee/mn/types.h>
@@ -31,9 +39,6 @@
 #include <melee/vi/vi0501.h>
 #include <melee/vi/vi1101.h>
 #include <melee/vi/vi1201v1.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 477738 */ extern ResultsMatchInfo gm_80477738;
 /* 4876D8 */ static StartMeleeData gm_804876D8;
