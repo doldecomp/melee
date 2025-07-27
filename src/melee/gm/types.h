@@ -493,7 +493,7 @@ struct MatchPlayerData {
 };
 
 struct MatchEnd {
-    int x0;
+    u32 x0; ///< timer
     u8 result;
     u8 x5;
     u8 is_teams;
@@ -522,7 +522,7 @@ struct MatchExitInfo {
     MatchEnd match_end;
 };
 
-struct MatchExitInfo2 {
+struct ResultsMatchInfo {
     int x0;
     int x4;
     MatchEnd match_end;
@@ -598,7 +598,11 @@ struct UnkAllstarData {
 struct TmData {
     s32 x0;
     s32 x4;
-    u8 pad_x8[0x4E0 - 0x8];
+    u8 pad_x8[0x28 - 0x8];
+    u32 x28; ///< stage id
+    u8 pad_x2C[0x32 - 0x2C];
+    u8 x32;
+    u8 pad_x33[0x4E4 - 0x33];
     HSD_Text* x4E0;
     HSD_Text* x4E4;
     HSD_Text* x4E8[6];
