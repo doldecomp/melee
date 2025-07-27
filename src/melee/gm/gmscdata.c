@@ -11,7 +11,7 @@
 #include <melee/gm/gmtou.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
-#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnmain.h>
 #include <melee/mn/mncharsel.h>
 #include <melee/mn/mnstagesel.h>
 #include <melee/ty/toy.h>

@@ -83,7 +83,12 @@ struct gmm_x1CB0 {
 /* +1C */ u8 padding_x16[0x1];
 };
 
-typedef union _UnkFlagStruct2 {
+struct gmm_x1F2C {
+    u8 padding_x0[0x78];
+    s8 x78;
+    s8 x79;
+    UnkFlagStruct x7A;
+    s8 x7B;
     struct {
         u16 b0 : 1;
         u16 b1 : 1;
@@ -95,33 +100,23 @@ typedef union _UnkFlagStruct2 {
         u16 b789 : 3;
         u16 b10_to_12 : 3;
         u16 b13_to_15 : 3;
-    };
-    u16 flags;
-} UnkFlagStruct2;
-
-struct gmm_x1F2C {
-    u8 padding_x0[0x78];
-    s8 x78;
-    s8 x79;
-    UnkFlagStruct x7A;
-    s8 x7B;
-    UnkFlagStruct2 x7C;
-    s16 x7E;
-    u8 x80;
-    u8 x81;
-    u8 x82;
-    s8 x83;
-    s32 x84;
-    s32 x88;
-    s32 x8C;
-    s32 x90;
-    s32 x94;
-    s32 x98;
-    s32 x9C;
-    s16 xA0;
-    s16 xA2;
-    s32 xA4;
-    s32 xA8;
+        s16 x7E;
+        u8 x80;
+        u8 x81;
+        u8 x82;
+        s8 x83;
+        s32 x84;
+        s32 x88;
+        s32 x8C;
+        s32 x90;
+        s32 x94;
+        s32 x98;
+        s32 x9C;
+        u16 xA0;
+        u16 xA2;
+        s32 xA4;
+        s32 xA8;
+    } x7C;
 };
 
 struct gmm_x2FF8_inner {
