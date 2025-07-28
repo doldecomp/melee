@@ -2124,7 +2124,7 @@ void gm_801B9A3C(MinorScene* arg0)
     gm_801B0620(&data->players[0], vs->data.players[0].c_kind, vs->data.players[0].color, 1, gm_804D68F8);
     data->players[0].xD_b2 = true;
     gm_8016F088(data);
-    gm_80181A00(data->players[0].c_kind, data->players[0].xA);
+    gm_80181A00(data->players[0].c_kind, (u8) data->players[0].xA);
     gm_80180B18();
 }
 #pragma pop
