@@ -144,4 +144,7 @@ void it_8028F8C4(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_8028F968
 
-void it_8028F9B8(void) {}
+void it_8028F9B8(Item_GObj* gobj) 
+{
+    Item_8026A8EC(gobj);
+}
