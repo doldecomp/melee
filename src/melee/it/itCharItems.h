@@ -369,4 +369,19 @@ typedef struct {
     HSD_GObj* x4;
 } itLinkBow_ItemVars;
 
+typedef struct itZeldaDinFireExplode_ItemVars {
+    /* +0 ip+DD4 */ f32 xDD4;
+    /* +4 ip+DD8 */ f32 xDD8;
+    /* +8 ip+DDC */ HSD_GObj* xDDC;
+    /* +C ip+DE0 */ s32 xDE0;
+} itZeldaDinFireExplode_ItemVars;
+
+typedef struct itZeldaDinFireExplodeAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itZeldaDinFireExplodeAttributes;
+
 #endif
