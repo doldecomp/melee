@@ -81,7 +81,7 @@ bool it_8028F3E4(Item_GObj* arg0)
 
 bool it_8028F40C(Item_GObj* gobj) 
 {
-     return itColl_BounceOffShield(gobj);
+    return itColl_BounceOffShield(gobj);
 }
 
 bool it_8028F42C(Item_GObj* arg0)
