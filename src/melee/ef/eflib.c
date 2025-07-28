@@ -1210,7 +1210,6 @@ block_968:
         return;
     }
     hsd_8039F6CC(chk, arg0, arg1, jobj_1);
-block_98c:
     return;
 }
 
