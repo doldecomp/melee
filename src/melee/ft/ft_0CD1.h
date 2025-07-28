@@ -6,11 +6,11 @@
 #include "ftCommon/forward.h"
 
 /* 0CD140 */ UNK_RET ftCo_800CD140(UNK_PARAMS);
-/* 0CD1BC */ UNK_RET ftCo_800CD1BC(UNK_PARAMS);
-/* 0CD204 */ UNK_RET ftCo_800CD204(UNK_PARAMS);
-/* 0CD278 */ UNK_RET ftCo_800CD278(UNK_PARAMS);
-/* 0CD2C4 */ UNK_RET ftCo_800CD2C4(UNK_PARAMS);
-/* 0CD31C */ UNK_RET ft_800CD31C(UNK_PARAMS);
+/* 0CD1BC */ void ftCo_800CD1BC(ftCo_GObj*);
+/* 0CD204 */ void ftCo_800CD204(ftCo_GObj*);
+/* 0CD278 */ void ftCo_800CD278(ftCo_GObj*);
+/* 0CD2C4 */ void ftCo_800CD2C4(ftCo_GObj*, void (*)(ftCo_GObj*));
+/* 0CD31C */ void ft_800CD31C(ftCo_GObj*);
 /* 0CD350 */ UNK_RET ftCo_800CD350(UNK_PARAMS);
 /* 0CD390 */ void ftCo_SwordSwing_Anim(ftCo_GObj* gobj);
 /* 0CD3B0 */ void ftCo_SwordSwing_IASA(ftCo_GObj* gobj);

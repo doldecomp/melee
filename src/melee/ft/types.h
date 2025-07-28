@@ -995,7 +995,7 @@ STATIC_ASSERT(sizeof(struct Fighter_x1A88_xFC_t) == 0x348);
 
 struct Fighter_x1A88_t {
     /*   +0 */ HSD_Pad x0;
-    /*   +4 */ u8 x4;
+    /*   +4 */ s8 x4;
     /*   +5 */ u8 x5;
     /*   +6 */ u8 x6;
     /*   +7 */ u8 x7;
