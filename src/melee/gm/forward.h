@@ -133,5 +133,6 @@ typedef struct ResultsMatchInfo ResultsMatchInfo;
 typedef struct TmData TmData;
 typedef struct ResultsData ResultsData;
 typedef struct CameraVsData CameraVsData;
+typedef struct TmVsData TmVsData;
 
 #endif

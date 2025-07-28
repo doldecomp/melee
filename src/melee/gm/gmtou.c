@@ -11,6 +11,8 @@
 #include "baselib/sislib.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbdvd.h"
+#include "lb/types.h"
 #include "sc/types.h"
 #include <melee/gm/types.h>
 
@@ -183,4 +185,18 @@ void gm_8019EE54_OnLeave(void* arg0)
 
 /// #fn_8019EE80
 
-/// #fn_8019EF08
+void fn_8019EF08(TmVsData* arg0)
+{
+    struct GameCache* game_cache;
+    s32 i;
+
+    game_cache = &lbDvd_8001822C()->game_cache;
+    for (i = 0; i < 4; i++) {
+        if (arg0->slot_type[i] != 3) {
+            game_cache->entries[i].char_id = arg0->char_id[i];
+            game_cache->entries[i].color = arg0->color[i];
+        }
+    }
+
+    lbDvd_80018254();
+}

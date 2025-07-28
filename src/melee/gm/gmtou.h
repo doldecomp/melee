@@ -2,12 +2,13 @@
 #define MELEE_GM_GMTOU_H
 
 #include "baselib/forward.h"
+#include "gm/forward.h"
 #include "placeholder.h"
 
 /* 19B8C4 */ void gm_8019B8C4_OnEnter(void*);
 /* 19B9C8 */ void gm_8019B9C8_OnLeave(void*);
 /* 19BA04 */ void fn_8019BA04(void);
-/* 19BA08 */ void fn_8019BA08(s32, u32);
+/* 19BA08 */ void fn_8019BA08(s32, HSD_JObj*);
 /* 19BF18 */ void fn_8019BF18(HSD_GObj*);
 /* 19BF8C */ void fn_8019BF8C(HSD_GObj*);
 /* 19C048 */ void fn_8019C048(HSD_GObj*);
@@ -28,6 +29,6 @@
 /* 19ECAC */ void gm_8019ECAC_OnEnter(void*);
 /* 19EE54 */ void gm_8019EE54_OnLeave(void*);
 /* 19EE80 */ void fn_8019EE80(UNK_T);
-/* 19EF08 */ UNK_RET fn_8019EF08(UNK_PARAMS);
+/* 19EF08 */ void fn_8019EF08(TmVsData*);
 
 #endif

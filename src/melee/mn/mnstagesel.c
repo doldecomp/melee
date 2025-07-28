@@ -524,7 +524,7 @@ void mnStageSel_8025BB5C_OnLeave(UNK_T unused)
     tmp->x4 = mnStageSel_804D6CAF == 2 ? true : false;
     if (tmp->x4) {
         PreloadCacheScene* cache = lbDvd_8001822C();
-        cache->stage_id = tmp->x1E_stage_id;
+        cache->game_cache.stage_id = tmp->x1E_stage_id;
         lbDvd_80018254();
     }
 }

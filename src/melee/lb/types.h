@@ -257,8 +257,8 @@ struct HSD_AllocEntry {
 };
 
 struct PreloadCacheSceneEntry {
-    struct PreloadCache* field0_0x0;
-    struct PreloadCache* field1_0x4;
+    u32 char_id;
+    u8 color;
 };
 
 struct PreloadEntry {
@@ -283,12 +283,14 @@ struct PreloadEntry {
 // emitted by e.g. lbDvd_80018CF4
 struct PreloadCacheScene {
     u32 is_heap_persistent[2];
-    u8 major_id;
-    u8 field2_0x9;
-    u8 field3_0xa;
-    u8 field4_0xb;
-    u32 stage_id;
-    PreloadCacheSceneEntry entries[8];
+    struct GameCache {
+        u8 major_id;
+        u8 field2_0x9;
+        u8 field3_0xa;
+        u8 field4_0xb;
+        u32 stage_id;
+        PreloadCacheSceneEntry entries[8];
+    } game_cache;
     s32 major_scene_changes;
 };
 

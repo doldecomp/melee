@@ -643,4 +643,11 @@ struct CameraVsData {
     };
 };
 
+struct TmVsData {
+    u32 stage_id;
+    s32 slot_type[4];
+    u32 char_id[4];
+    u32 color[4];
+};
+
 #endif
