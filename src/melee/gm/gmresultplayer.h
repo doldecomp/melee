@@ -3,9 +3,9 @@
 
 #include <placeholder.h>
 
-struct MatchExitInfo2;
+struct ResultsMatchInfo;
 
-/* 177724 */ void gm_80177724(struct MatchExitInfo2*);
+/* 177724 */ void gm_80177724(struct ResultsMatchInfo*);
 /* 177748 */ UNK_RET fn_80177748(UNK_PARAMS);
 /* 177920 */ UNK_RET fn_80177920(UNK_PARAMS);
 /* 177B7C */ UNK_RET fn_80177B7C(UNK_PARAMS);

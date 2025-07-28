@@ -83,7 +83,12 @@ struct gmm_x1CB0 {
 /* +1C */ u8 padding_x16[0x1];
 };
 
-typedef union _UnkFlagStruct2 {
+struct gmm_x1F2C {
+    u8 padding_x0[0x78];
+    s8 x78;
+    s8 x79;
+    UnkFlagStruct x7A;
+    s8 x7B;
     struct {
         u16 b0 : 1;
         u16 b1 : 1;
@@ -95,33 +100,23 @@ typedef union _UnkFlagStruct2 {
         u16 b789 : 3;
         u16 b10_to_12 : 3;
         u16 b13_to_15 : 3;
-    };
-    u16 flags;
-} UnkFlagStruct2;
-
-struct gmm_x1F2C {
-    u8 padding_x0[0x78];
-    s8 x78;
-    s8 x79;
-    UnkFlagStruct x7A;
-    s8 x7B;
-    UnkFlagStruct2 x7C;
-    s16 x7E;
-    u8 x80;
-    u8 x81;
-    u8 x82;
-    s8 x83;
-    s32 x84;
-    s32 x88;
-    s32 x8C;
-    s32 x90;
-    s32 x94;
-    s32 x98;
-    s32 x9C;
-    s16 xA0;
-    s16 xA2;
-    s32 xA4;
-    s32 xA8;
+        s16 x7E;
+        u8 x80;
+        u8 x81;
+        u8 x82;
+        s8 x83;
+        s32 x84;
+        s32 x88;
+        s32 x8C;
+        s32 x90;
+        s32 x94;
+        s32 x98;
+        s32 x9C;
+        u16 xA0;
+        u16 xA2;
+        s32 xA4;
+        s32 xA8;
+    } x7C;
 };
 
 struct gmm_x2FF8_inner {
@@ -269,9 +264,11 @@ struct gmm_x0 {
     /* 0x0E50 */ VsModeData unk_E50;
     /* 0x0F90 */ VsModeData unk_F90;
     /* 0x10D0 */ VsModeData unk_10D0;
-    /* 0x1210 */ VsModeData unk_1210;
-    /* 0x1350 */ VsModeData unk_1350;
-    /* 0x1490 */ char pad_1490[0x1850 - 0x1490];
+    /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
+    /* 0x1350 */ VsModeData unk_1350; ///< lightning melee
+    /* 0x1490 */ VsModeData unk_1490;
+    /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
+    /* 0x17C0 */ VsModeData unk_1710;
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
@@ -493,7 +490,7 @@ struct MatchPlayerData {
 };
 
 struct MatchEnd {
-    int x0;
+    u32 x0; ///< timer
     u8 result;
     u8 x5;
     u8 is_teams;
@@ -522,7 +519,7 @@ struct MatchExitInfo {
     MatchEnd match_end;
 };
 
-struct MatchExitInfo2 {
+struct ResultsMatchInfo {
     int x0;
     int x4;
     MatchEnd match_end;
@@ -598,7 +595,11 @@ struct UnkAllstarData {
 struct TmData {
     s32 x0;
     s32 x4;
-    u8 pad_x8[0x4E0 - 0x8];
+    u8 pad_x8[0x28 - 0x8];
+    u32 x28; ///< stage id
+    u8 pad_x2C[0x32 - 0x2C];
+    u8 x32;
+    u8 pad_x33[0x4E4 - 0x33];
     HSD_Text* x4E0;
     HSD_Text* x4E4;
     HSD_Text* x4E8[6];

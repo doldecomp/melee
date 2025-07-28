@@ -313,7 +313,7 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
 s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
 {
     enum_t sfx = lbAudioAx_800233EC(sfx_id);
-    enum_t ssm_id = lbAudioAx_80023130();
+    enum_t ssm_id = lbAudioAx_80023130(sfx);
 
     switch (ssm_id) {
     case 0:

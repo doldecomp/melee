@@ -18,7 +18,7 @@
 /* 25A998 */ void mnStageSel_8025A998_OnEnter(UNK_T);
 /* 25B850 */ void mnStageSel_8025B850_OnFrame(void);
 /* 25BB5C */ void mnStageSel_8025BB5C_OnLeave(UNK_T);
-/* 25BBD4 */ u8 mnStageSel_8025BBD4(void);
+/* 25BBD4 */ int mnStageSel_8025BBD4(void);
 /* 25BC08 */ u8 mnStageSel_8025BC08(int);
 
 #endif

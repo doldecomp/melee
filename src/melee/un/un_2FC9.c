@@ -22,7 +22,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbvector.h"
-#include "mn/mn_2295.h"
+#include "mn/mnmain.h"
 #include "mn/mnname.h"
 #include "pl/player.h"
 #include "ty/toy.h"
@@ -751,7 +751,7 @@ void un_802FF7DC(void)
     lbArchive_LoadSymbols(0, 0);
 }
 
-bool un_802FF884(void)
+bool un_802FF884(char* unused)
 {
     return false;
 }
