@@ -580,7 +580,7 @@ Effect* efLib_8005BE88(int arg0, HSD_GObj* parent_gobj)
             return NULL;
         }
         HSD_GObjObject_80390A70(ep->gobj, HSD_GObj_804D7849, jobj);
-        if (((10.0f * M2C_FIELD(desc, f32*, 0)) / /* % */ 10) != 0) {
+        if (((10.0f * desc->x0) / /* % */ 10) != 0) {
             lb_80011C18(jobj, 0x08000000);
         }
         ep->x24 = desc->x0;
