@@ -253,7 +253,7 @@ void gm_801A5EC8(MinorScene* minor_data)
 
 void gm_801A5F00(MinorScene* minor_data)
 {
-    struct MatchExitInfo2* exit_info = gm_801A427C(minor_data);
+    struct ResultsMatchInfo* exit_info = gm_801A427C(minor_data);
     gm_80177724(exit_info);
     exit_info->match_end = gm_80479D98.match_end;
 }

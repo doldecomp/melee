@@ -1,10 +1,25 @@
-#include "gm_1B03.h"
+#include "gm/gmtou.static.h"
+#include "gm_1B03.static.h"
+#include "gm/gm_1B03.h"
 
-#include "gm_unsplit.h"
+#include "placeholder.h"
 
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
+#include <melee/gm/gm_16F1.h>
+#include <melee/gm/gm_18A5.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_1A4C.h>
+#include <melee/gm/gm_1BFA.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
+#include <melee/gm/gmtou.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -13,6 +28,7 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbsnap.h>
+#include <melee/lb/lbtime.h>
 #include <melee/lb/types.h>
 #include <melee/mn/mngallery.h>
 #include <melee/mn/types.h>
@@ -23,10 +39,10 @@
 #include <melee/vi/vi0501.h>
 #include <melee/vi/vi1101.h>
 #include <melee/vi/vi1201v1.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/random.h>
 
+/* 477738 */ extern ResultsMatchInfo gm_80477738;
+/* 4876D8 */ static StartMeleeData gm_804876D8;
+/* 487810 */ static MatchExitInfo gm_80487810;
 /* 49E548 */ extern struct gm_8049E548_t gm_8049E548;
 
 static u32 gm_804D6878[2];
@@ -48,7 +64,7 @@ MinorScene gm_803DD6A0_MinorScenes[] = {
 static UNK_T gm_80480DC8[0x20 / 4];
 static StartMeleeData gm_80480DE8;
 static MatchExitInfo gm_80480F20;
-static struct MatchExitInfo2 gm_804831A8;
+static struct ResultsMatchInfo gm_804831A8;
 static UNK_T gm_8048542C[0xC / 4];
 static UNK_T gm_80485438[0x1C / 4];
 static UNK_T gm_80485454[0x2284 / 4];
@@ -70,7 +86,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B09C0,
         NULL,
         {
-            0x07,
+            MN_DEBUG_MENU,
             gm_804D6890,
             NULL,
         },
@@ -80,7 +96,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0A34,
         NULL,
         {
-            0x07,
+            MN_DEBUG_MENU,
             gm_804D6890,
             NULL,
         },
@@ -90,7 +106,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0AC8,
         NULL,
         {
-            0x07,
+            MN_DEBUG_MENU,
             gm_804D6890,
             NULL,
         },
@@ -100,7 +116,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0B00,
         gm_801B0B24,
         {
-            0x27,
+            MN_PRIZE_INTERFACE,
             gm_8048542C,
             NULL,
         },
@@ -110,7 +126,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0B48,
         NULL,
         {
-            0x02,
+            MN_VS,
             &gm_80480DE8,
             &gm_80480F20,
         },
@@ -120,7 +136,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0B8C,
         gm_801B0BF0,
         {
-            0x05,
+            MN_RESULTS,
             &gm_804831A8,
             &gm_804831A8,
         },
@@ -130,7 +146,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0C18,
         gm_801B099C,
         {
-            0x20,
+            MN_INTRO_EASY,
             gm_80480DC8,
             gm_804D6880,
         },
@@ -140,7 +156,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0C50,
         gm_801B099C,
         {
-            0x21,
+            MN_INTRO_ALLSTAR,
             gm_804D6884,
             gm_804D688C,
         },
@@ -150,7 +166,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         NULL,
         gm_801B099C,
         {
-            0x23,
+            MN_COMING_SOON,
             NULL,
             NULL,
         },
@@ -160,7 +176,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0C74,
         gm_801B099C,
         {
-            0x22,
+            MN_GAMEOVER,
             gm_80485438,
             gm_80485438,
         },
@@ -170,7 +186,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0CF0,
         gm_801B099C,
         {
-            0x29,
+            MN_APPROACH,
             gm_804D6898,
             gm_804D6898,
         },
@@ -180,7 +196,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0DD0,
         gm_801B0F1C,
         {
-            0x05,
+            MN_RESULTS,
             gm_80485454,
             NULL,
         },
@@ -190,7 +206,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         NULL,
         gm_801B099C,
         {
-            0x1C,
+            MN_MOVIE_OPENING,
             NULL,
             NULL,
         },
@@ -200,7 +216,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         gm_801B0F60,
         gm_801B0F90,
         {
-            0x2A,
+            MN_MEMCARD,
             gm_804D689C,
             gm_804D68A4,
         },
@@ -210,7 +226,7 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         NULL,
         NULL,
         {
-            0x2B,
+            MN_STAFFROLL,
             NULL,
             NULL,
         },
@@ -341,13 +357,83 @@ void gm_801B0664(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
     arg0->team = 4;
 }
 
-/// #gm_801B06B0
+void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color, u8 arg5, u8 level, u8 slot)
+{
+    gm_80167B50(&css_data->data);
+    css_data->match_type = type;
+    css_data->unk_0x0 = slot + 1;
+    css_data->data.data.players[slot].c_kind = c_kind;
+    css_data->data.data.players[slot].stocks = stocks;
+    css_data->data.data.players[slot].color = color;
+    css_data->data.data.players[slot].cpu_level = level;
+    css_data->data.data.players[slot].xA = arg5;
+    css_data->data.data.players[0].cpu_level = level;
+    css_data->data.data.players[0].stocks = stocks;
+}
 
-/// #gm_801B0730
+void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, s8* color, s8* arg4, u8* level)
+{
+    s32 slot;
 
-/// #gm_801B07B4
+    slot = css_data->unk_0x0 - 1;
+    if (c_kind != NULL) {
+        *c_kind = css_data->data.data.players[slot].c_kind;
+    }
+    if (stocks != NULL) {
+        *stocks = css_data->data.data.players[slot].stocks;
+    }
+    if (color != NULL) {
+        *color = css_data->data.data.players[slot].color;
+    }
+    if (level != NULL) {
+        *level = css_data->data.data.players[slot].cpu_level;
+    }
+    if (arg4 != NULL) {
+        *arg4 = css_data->data.data.players[slot].xA;
+    }
+}
 
-/// #gm_801B07E8
+void gm_801B07B4(CSSData* css_data, s8 c_kind, s8 stocks, s8 color, u8 arg4, u8 level, u8 arg6)
+{
+    s32 var_r0;
+
+    if (arg6 == 0) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    css_data->data.data.players[var_r0].c_kind = c_kind;
+    css_data->data.data.players[var_r0].stocks = stocks;
+    css_data->data.data.players[var_r0].color = color;
+    css_data->data.data.players[var_r0].cpu_level = level;
+    css_data->data.data.players[var_r0].xA = arg4;
+}
+
+void gm_801B07E8(CSSData* css_data, s8* c_kind, s8* stocks, s8* color, s8* arg4, u8* level)
+{
+    s32 slot;
+
+    if ((css_data->unk_0x0 - 1) == 0) {
+        slot = 1;
+    } else {
+        slot = 0;
+    }
+    if (c_kind != NULL) {
+        *c_kind = css_data->data.data.players[slot].c_kind;
+    }
+    if (stocks != NULL) {
+        *stocks = css_data->data.data.players[slot].stocks;
+    }
+    if (color != NULL) {
+        *color = css_data->data.data.players[slot].color;
+    }
+    if (level != NULL) {
+        *level = css_data->data.data.players[slot].cpu_level;
+    }
+    if (arg4 != NULL) {
+        *arg4 = css_data->data.data.players[slot].xA;
+    }
+}
 
 void gm_801B087C(MinorScene* arg0)
 {
@@ -467,7 +553,7 @@ void gm_801B0B48(MinorScene* arg0)
 
 void gm_801B0B8C(MinorScene* arg0)
 {
-    struct MatchExitInfo2* temp_r3 = gm_801A427C(arg0);
+    struct ResultsMatchInfo* temp_r3 = gm_801A427C(arg0);
     gm_80177724(temp_r3);
     temp_r3->match_end = gm_80480F20.match_end;
 }
@@ -490,9 +576,21 @@ void gm_801B0C50(MinorScene* arg0)
     un_80301C64(gm_801A427C(arg0));
 }
 
-/// #gm_801B0C74
-
 extern int un_803FA258[];
+
+void gm_801B0C74(MinorScene* arg0)
+{
+    struct DebugGameOverData* data;
+
+    data = gm_801A427C(arg0);
+    data->x0 = 0x1869F;
+    data->x8 = 1;
+    data->x10 = un_803FA258[0x4D];
+    data->x14 = 0;
+    data->x15 = 0x78;
+    data->x18 = HSD_Randi(0x3E8);
+    data->x16 = (HSD_Randi(0xA) + 1);
+}
 
 void gm_801B0CF0(MinorScene* arg0)
 {
@@ -552,7 +650,14 @@ void gm_801B0F1C(MinorScene* arg0)
     }
 }
 
-/// #gm_801B0F60
+void gm_801B0F60(MinorScene* arg0)
+{
+    struct DebugMemcardData* data;
+
+    data = gm_801A427C(arg0);
+    data->x0 = 1;
+    data->x4 = 0;
+}
 
 void gm_801B0F90(MinorScene* arg0)
 {
@@ -574,9 +679,18 @@ MinorScene gm_803DD888_MinorScenes[] = {
         },
     },
     { -1 },
-};
+};                           /* unable to generate initializer: unknown type */
 
-/// #gm_801B0FB8
+void gm_801B0FB8(MinorScene* arg0)
+{
+    struct DebugSoundTestData* data;
+
+    data = gm_801A427C(arg0);
+    data->x0 = &un_803F9FA4;
+    data->x4 = 0;
+    un_802FF7DC();
+    un_802FF884("/audio");
+}
 
 static GameRules* gm_804D68B8;
 static UNK_T gm_804D68BC;
@@ -587,13 +701,14 @@ MinorScene gm_803DD8B8_MinorScenes[] = {
         gm_801B0FF8,
         gm_801B138C,
         {
-            0x01,
+            MN_MENU,
             &gm_804D68B8,
             &gm_804D68BC,
         },
     },
     { -1 },
 };
+
 
 void gm_801B0FF8(MinorScene* arg0)
 {
@@ -765,10 +880,16 @@ void gm_801B0FF8(MinorScene* arg0)
     }
 }
 
-/// #gm_801B138C
+void gm_801B138C(MinorScene* arg0)
+{
+    struct MainMenuExitData* data = arg0->info.unk_struct_1;
+
+    gm_801A42E8(data->x0);
+    gm_801A42D4();
+}
 
 extern MatchExitInfo gm_80479D98;
-extern MatchExitInfo gm_8047C020;
+extern ResultsMatchInfo gm_8047C020;
 extern UNK_T gm_8047E2A4[];
 extern UNK_T gm_80480530[];
 extern UNK_T gm_80480668[];
@@ -782,7 +903,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B14A0,
         gm_801B14DC,
         {
-            0x08,
+            MN_CSS,
             gm_804807B0,
             gm_804807B0,
         },
@@ -792,7 +913,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B1514,
         gm_801B154C,
         {
-            0x09,
+            MN_SSS,
             gm_80480668,
             gm_80480668,
         },
@@ -802,7 +923,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B1588,
         gm_801B15C8,
         {
-            0x02,
+            MN_VS,
             gm_80480530,
             &gm_80479D98,
         },
@@ -812,7 +933,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B1648,
         gm_801B1688,
         {
-            0x03,
+            MN_SUDDEN_DEATH,
             gm_80480530,
             gm_8047E2A4,
         },
@@ -822,7 +943,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B16A8,
         gm_801B16C8,
         {
-            0x05,
+            MN_RESULTS,
             &gm_8047C020,
             NULL,
         },
@@ -832,7 +953,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801BFA6C,
         NULL,
         {
-            0x29,
+            MN_APPROACH,
             gm_804D6860,
             gm_804D6860,
         },
@@ -842,7 +963,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801BFABC,
         gm_801A6254,
         {
-            0x02,
+            MN_VS,
             gm_80480530,
             &gm_80479D98,
         },
@@ -852,7 +973,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801BFCFC,
         gm_801A6308,
         {
-            0x27,
+            MN_PRIZE_INTERFACE,
             un_804A1F48,
             NULL,
         },
@@ -866,7 +987,7 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         gm_801B13B8,
         NULL,
         {
-            0x02,
+            MN_VS,
             gm_80480530,
             &gm_80479D98,
         },
@@ -876,7 +997,7 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         gm_801B16A8,
         NULL,
         {
-            0x05,
+            MN_RESULTS,
             &gm_8047C020,
             NULL,
         },
@@ -884,8 +1005,6 @@ MinorScene gm_803DDA78_MinorScenes[] = {
     { 0xFF },
 };
 
-static UNK_T gm_804876D8[0x138 / 4];
-static UNK_T gm_80487810[0x2288 / 4];
 static UNK_T gm_80489A98[0x2288 / 4];
 static UNK_T gm_8048BD20[0x148 / 4];
 static UNK_T gm_8048BE68[0x23C8 / 4];
@@ -896,7 +1015,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         gm_801B1724,
         NULL,
         {
-            0x24,
+            MN_TOU,
             NULL,
             NULL,
         },
@@ -906,7 +1025,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         NULL,
         NULL,
         {
-            0x25,
+            MN_TOU_BRACKET,
             NULL,
             NULL,
         },
@@ -916,7 +1035,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         NULL,
         NULL,
         {
-            0x26,
+            MN_TOU_FINISH,
             NULL,
             NULL,
         },
@@ -926,7 +1045,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         gm_801B174C,
         gm_801B1788,
         {
-            0x09,
+            MN_SSS,
             gm_8048BD20,
             gm_8048BD20,
         },
@@ -936,9 +1055,9 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         gm_801B1810,
         gm_801B1834,
         {
-            0x02,
-            gm_804876D8,
-            gm_80487810,
+            MN_VS,
+            &gm_804876D8,
+            &gm_80487810,
         },
     },
     {
@@ -946,8 +1065,8 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         gm_801B18D4,
         gm_801B1A2C,
         {
-            0x03,
-            gm_804876D8,
+            MN_SUDDEN_DEATH,
+            &gm_804876D8,
             gm_8048BE68,
         },
     },
@@ -956,7 +1075,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         gm_801B1A84,
         gm_801B1AD4,
         {
-            0x05,
+            MN_RESULTS,
             gm_80489A98,
             NULL,
         },
@@ -975,7 +1094,7 @@ MinorScene gm_803DDB80_MinorScenes[] = {
         gm_801B1B74,
         gm_801B1C24,
         {
-            0x08,
+            MN_CSS,
             gm_8048E230,
             gm_8048E230,
         }
@@ -985,7 +1104,7 @@ MinorScene gm_803DDB80_MinorScenes[] = {
         gm_801B1EB8,
         gm_801B1EEC,
         {
-            0x09,
+            MN_SSS,
             gm_8048E378,
             gm_8048E378,
         },
@@ -995,7 +1114,7 @@ MinorScene gm_803DDB80_MinorScenes[] = {
         gm_801B1F70,
         gm_801B2204,
         {
-            0x04,
+            MN_TRAINING_MODE,
             &gm_8048E4C0,
             gm_8048E5F8,
         },
@@ -1014,7 +1133,7 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         gm_801B24B4,
         gm_801B2510,
         {
-            0x2C,
+            MN_CAMERA_VS,
             gm_804D68C8,
             gm_804D68C8,
         },
@@ -1024,7 +1143,7 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         gm_801B254C,
         gm_801B25D4,
         {
-            0x08,
+            MN_CSS,
             gm_804807B0,
             gm_804807B0,
         },
@@ -1034,7 +1153,7 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         gm_801B26AC,
         gm_801B2704,
         {
-            0x09,
+            MN_SSS,
             gm_80480668,
             gm_80480668,
         },
@@ -1044,7 +1163,7 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         gm_801B2790,
         gm_801B2AF8,
         {
-            0x02,
+            MN_VS,
             gm_80480530,
             &gm_80479D98,
         },
@@ -1064,7 +1183,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x00, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1072,7 +1191,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x01, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1080,7 +1199,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x08, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1088,7 +1207,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x09, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1096,7 +1215,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x10, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1104,7 +1223,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x11, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1112,7 +1231,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x18, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1120,7 +1239,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x19, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1128,7 +1247,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x20, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1136,7 +1255,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x21, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1144,7 +1263,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x28, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1152,7 +1271,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x29, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1160,7 +1279,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x30, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1168,7 +1287,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x31, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1176,7 +1295,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x38, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1184,7 +1303,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x39, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1192,7 +1311,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x40, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1200,7 +1319,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x41, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1208,7 +1327,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x48, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1216,7 +1335,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x49, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1224,7 +1343,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x50, 0x03, 0,
         gm_801B3500,
         NULL,
-        0x20,
+        MN_INTRO_EASY,
         gm_80490880,
         gm_804D68D0,
     },
@@ -1232,7 +1351,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x51, 0x03, 0,
         gm_801B3A34,
         gm_801B3B40,
-        0x02,
+        MN_VS,
         gm_80472AF8,
         gm_8047086C,
     },
@@ -1240,7 +1359,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x68, 0x03, 0,
         NULL,
         gm_801B3F18,
-        0x23,
+        MN_COMING_SOON,
         NULL,
         NULL,
     },
@@ -1248,7 +1367,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x69, 0x03, 0,
         gm_801B3D44,
         gm_801B3D84,
-        0x22,
+        MN_GAMEOVER,
         gm_80470850,
         gm_80470850,
     },
@@ -1256,7 +1375,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         0x70, 0x03, 0,
         gm_801B3DD8,
         gm_801B3E44,
-        0x08,
+        MN_CSS,
         gm_80470708,
         gm_80470708,
     },
@@ -1303,52 +1422,236 @@ void gm_801B14A0(MinorScene* arg0)
     gm_801A5618(arg0, gm_801A5244(), 0);
 }
 
-/// #gm_801B14DC
+void gm_801B14DC(MinorScene* arg0)
+{
+    gm_801A5680(arg0, gm_801A5244());
+}
 
-/// #gm_801B1514
+void gm_801B1514(MinorScene* arg0)
+{
+    gm_801A5754(arg0, gm_801A5244());
+}
 
-/// #gm_801B154C
+void gm_801B154C(MinorScene* arg0)
+{
+    gm_801A57A8(arg0, gm_801A5244(), 0);
+}
 
-/// #gm_801B1588
+void gm_801B1588(MinorScene* arg0)
+{
+    gm_801A583C(arg0, gm_801A5244(), NULL, NULL);
+}
 
-/// #gm_801B15C8
+void gm_801B15C8(MinorScene* arg0)
+{
+    s32 i;
+    MatchExitInfo* mei;
 
-/// #gm_801B1648
+    gm_801A5AF0(arg0, 4, 3);
+    mei = gm_801A4284(arg0);
+    for (i = 0; i < 6; i++) {
+        if (mei->match_end.player_standings[i].slot_type != 3) {
+            gm_80162A98(mei->match_end.player_standings[i].x20);
+            gm_80162B4C(mei->match_end.player_standings[i].self_destructs);
+            gm_80162A4C(mei->match_end.player_standings[i].x44);
+        }
+    }
+}
 
-/// #gm_801B1688
+void gm_801B1648(MinorScene* arg0)
+{
+    gm_801A5C3C(arg0, gm_801A5244(), NULL, NULL);
+}
+
+void gm_801B1688(MinorScene* arg0)
+{
+    gm_801A5EC8(arg0);
+}
 
 void gm_801B16A8(MinorScene* arg0)
 {
     gm_801A5F00(arg0);
 }
 
-/// #gm_801B16C8
+void gm_801B16C8(MinorScene* arg0)
+{
+    gm_801A5F64(arg0, gm_801A5244(), 0);
+    if (gm_801743A4(gm_8047C020.match_end.result) == 0) {
+        gm_801623A4(&gm_8047C020.match_end);
+    }
+}
 
-/// #gm_801B1724
+void gm_801B1724(MinorScene* arg0)
+{
+    lb_8001C550();
+    lb_8001D164(0);
+}
 
-/// #gm_801B174C
+void gm_801B174C(MinorScene* arg0)
+{
+    SSSData* sss;
 
-/// #gm_801B1788
+    sss = gm_801A427C(arg0);
+    sss->x1 = 0;
+    sss->no_lras = 1;
+    sss->force_stage_id = -1;
+    sss->unk_stage = 0;
+}
 
-/// #gm_801B1810
+void gm_801B1788(MinorScene* arg0)
+{
+    u16 stage;
+    SSSData* sss;
 
-/// #gm_801B1834
+    sss = gm_801A4284(arg0);
+    if (sss->start_game != 0) {
+        gm_SetScenePendingMinor(4);
+        stage = sss->data.data.rules.xE;
+        gm_8018F634()->x28 = stage;
+        return;
+    }
+    if (gm_804771C4.x4 == 0) {
+        gm_8019A828();
+        gm_SetScenePendingMinor(1);
+        return;
+    }
+    gm_8018F634()->x32 = 0;
+    gm_SetScenePendingMinor(2);
+}
 
-/// #gm_801B18D4
+void gm_801B1810(MinorScene* arg0)
+{
+    gm_801A427C(arg0);
+    gm_801905F0();
+}
 
-/// #gm_801B1A2C
+void gm_801B1834(MinorScene* arg0)
+{
+    MatchExitInfo* mei;
 
-/// #gm_801B1A84
+    mei = gm_801A4284(arg0);
+    if (gm_801A52D0(&mei->match_end) != 0) {
+        gm_8016260C(mei->match_end.x5, mei->match_end.result);
+        gm_801628C4(mei->match_end.frame_count / 60, gm_80162800(&mei->match_end));
+    }
+    if ((gm_80167140(&mei->match_end) != 0) && (gm_8018F1B0(&mei->match_end) != 0)) {
+        gm_SetScenePendingMinor(5);
+        return;
+    }
+    gm_SetScenePendingMinor(6);
+}
 
-/// #gm_801B1AD4
+#pragma dont_inline on
+void gm_801B18D4(MinorScene* arg0)
+{
+    StartMeleeData* smd;
+    s32 i;
 
-/// #gm_801B1B74
+    smd = gm_801A427C(arg0);
+
+    for (i = 0; i < 4; i++)
+    {
+        smd->players[i] = gm_804876D8.players[i];
+    }
+
+    /// TODO :: figure out how to call this not inlined
+    gm_801B0474(smd, &gm_80487810.match_end);
+}
+#pragma dont_inline reset
+
+void gm_801B1A2C(MinorScene* arg0)
+{
+    MatchExitInfo* mei;
+
+    mei = gm_801A4284(arg0);
+    gm_801629B4(mei->match_end.frame_count / 60);
+    gm_80166CCC(&gm_80487810.match_end, &mei->match_end);
+}
+
+void gm_801B1A84(MinorScene* arg0)
+{
+    ResultsMatchInfo* rmi;
+
+    rmi = gm_801A427C(arg0);
+    rmi->match_end = gm_80487810.match_end;
+}
+
+void gm_801B1AD4(MinorScene* arg0)
+{
+    ResultsMatchInfo* rmi;
+
+    rmi = gm_801A427C(arg0);
+    /// why is there a subi? another match end struct?
+    gm_80477738.match_end = rmi->match_end;
+
+    gm_801688AC(&rmi->match_end);
+    gm_8016247C();
+    if ((s32) gm_804771C4.x4 == 0) {
+        gm_SetScenePendingMinor(1);
+        gm_8018F634()->x0 = 0x1F;
+        return;
+    }
+    gm_8019E634();
+    gm_SetScenePendingMinor(2);
+}
+
+extern u8 gm_804D68C0;
+extern u8 gm_804D68C1;
+
+#pragma dont_inline on
+void gm_801B1B74(MinorScene* arg0)
+{
+    VsModeData* vs_data;
+    CSSData* css;
+    PAD_STACK(8);
+
+    vs_data = &gmMainLib_804D3EE0->unk_D10;
+    css = gm_801A427C(arg0);
+    if ((u8) gm_804D68C1 != 0) {
+        lb_8001C550();
+        lb_8001D164(0);
+        lb_8001CE00();
+    }
+    gm_801B06B0(css, 0x17U, (s8) (u8) vs_data->data.players[0].c_kind, 1, (s8) (u8) vs_data->data.players[0].color, vs_data->data.players[0].xA, 9U, gm_804D68C0);
+    gm_801B07B4(css, (s8) (u8) vs_data->data.players[1].c_kind, 1, (s8) (u8) vs_data->data.players[1].color, vs_data->data.players[1].xA, 0U, gm_804D68C0);
+    lbDvd_800174BC();
+    gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
+}
+#pragma dont_inline reset
 
 /// #gm_801B1C24
 
-/// #gm_801B1EB8
+void gm_801B1EB8(MinorScene* arg0)
+{
+    SSSData* sss;
 
-/// #gm_801B1EEC
+    sss = gm_801A427C(arg0);
+    sss->x1 = 0;
+    sss->force_stage_id = -1;
+    sss->unk_stage = 0;
+}
+
+extern struct TrainingMenuData gm_80473814;
+
+void gm_801B1EEC(MinorScene* arg0)
+{
+    VsModeData* vs_data;
+    SSSData* sss;
+    s16 stage_id;
+
+    vs_data = &gmMainLib_804D3EE0->unk_D10;
+    sss = gm_801A4284(arg0);
+    if (sss->start_game == 0) {
+        gm_SetScenePendingMinor(0);
+        return;
+    }
+    stage_id = sss->data.data.rules.xE;
+    gm_80473814.x6 = stage_id;
+    vs_data->data.rules.xE = stage_id;
+    lbAudioAx_80026F2C(0x18);
+    lbAudioAx_8002702C(8, lbAudioAx_80026EBC((enum InternalStageId) (u16)vs_data->data.rules.xE));
+    lbAudioAx_80027168();
+}
 
 void fn_801B1F6C(void) {}
 

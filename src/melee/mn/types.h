@@ -189,7 +189,7 @@ struct VsModeData {
 };
 
 struct CSSData {
-    u16 unk_0x0;
+    u16 unk_0x0; ///< 1p port?
     u8 match_type;
     u8 pending_scene_change;
     u8* ko_star_counts;
@@ -397,12 +397,12 @@ struct mnGallery_804A0B90_t {
 STATIC_ASSERT(sizeof(struct mnGallery_804A0B90_t) == 0x96000);
 
 struct SSSData {
-    u8 unk_stage;
-    u8 x1;
-    u8 no_lras;
-    u8 force_stage_id;
-    u8 start_game;
-    VsModeData data;
+    /* +00 */ u8 unk_stage;
+    /* +01 */ u8 x1;
+    /* +02 */ u8 no_lras;
+    /* +03 */ s8 force_stage_id;
+    /* +04 */ u8 start_game;
+    /* +08 */ VsModeData data;
 };
 
 #endif
