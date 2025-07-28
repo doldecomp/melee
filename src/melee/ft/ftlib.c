@@ -560,11 +560,11 @@ void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
     *v = cam->x1C;
 }
 
-void ftLib_80086BB4(HSD_GObj* gobj)
+bool ftLib_80086BB4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CameraBox* cam = fp->x890_cameraBox;
-    Camera_80031154(&cam->x10);
+    return Camera_80031154(&cam->x10);
 }
 
 u8 ftLib_80086BE0(HSD_GObj* gobj)

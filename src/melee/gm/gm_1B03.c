@@ -1694,7 +1694,22 @@ void gm_801B1F70(MinorScene* arg0)
 }
 #pragma pop
 
-/// #gm_801B2204
+void gm_801B2204(MinorScene* arg0)
+{
+    MatchExitInfo* temp_r3;
+
+    temp_r3 = gm_801A4284(arg0);
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80163298(temp_r3->match_end.player_standings[0].character_kind,
+            (u16) gm_80188454((s8) temp_r3->match_end.player_standings[0].character_kind));
+    gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
+    gm_80173EEC();
+    if (gm_80173754(0x1C, gm_804D68C0) == 0) {
+        gm_SetScenePendingMinor(0);
+    }
+    lbAudioAx_80024030(1);
+}
 
 /// #gm_801B2298_OnInit
 
@@ -1772,7 +1787,11 @@ void gm_801B34B8_OnInit(void)
 
 /// #gm_801B3B40
 
-/// #gm_801B3D44
+void gm_801B3D44(MinorScene* arg0)
+{
+    struct UnkAllstarData* temp_r31 = gm_801A427C(arg0);
+    gm_8017C9A8(temp_r31, gm_8017EB30(), 1);
+}
 
 /// #gm_801B3D84
 

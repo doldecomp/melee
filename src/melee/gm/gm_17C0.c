@@ -20,6 +20,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/mp/mpcoll.h>
@@ -556,7 +557,27 @@ struct UnkAllstarData* gm_8017EB30(void)
 
 /// #fn_8017EE40
 
-/// #fn_8017F008
+int fn_8017F008(void)
+{
+    int r3 = fn_80171A88();
+    if (r3 == 3) {
+        return 4;
+    } else if (r3 == 1) {
+        return 1;
+    } else if (r3 == 2) {
+        return 8;
+    } else if (r3 == 7) {
+        return 0x20;
+    } else if (r3 == 6) {
+        return 0x80;
+    } else if (r3 == 8) {
+        return 0x40;
+    } else if (r3 == 4) {
+        return 0x10;
+    } else {
+        return 0xFD;
+    }
+}
 
 /// #fn_8017F09C
 
@@ -608,7 +629,16 @@ s32 gm_80180AE4(void)
 
 /// #fn_80181708
 
-/// #gm_80181998
+static SceneDesc* lbl_804D65CC;
+static SceneDesc* lbl_804D65D0;
+extern HSD_Archive* lbl_804D65C8;
+
+void gm_80181998(void)
+{
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC, "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0, "ScInfCnt_scene_models", 0);
+    fn_80181708();
+}
 
 void gm_80181A00(s32 arg0, s32 arg1)
 {
@@ -644,7 +674,20 @@ s32 gm_80181A34(void)
 
 /// #gm_80181B64
 
-/// #fn_80181BFC
+int fn_80181BFC(int* arg0)
+{
+    int i;
+    int count = 0;
+
+    for (i = 1; i < 6; i++) {
+        if (Player_GetFalls(i) == 0 && Player_GetPlayerSlotType(i) != 3) {
+            count += 1;
+        } else if (arg0 != NULL) {
+            *arg0 = i;
+        }
+    }
+    return count;
+}
 
 /// #fn_80181C80
 
@@ -652,7 +695,19 @@ s32 gm_80181A34(void)
 
 /// #gm_80182174
 
-/// #gm_80182510
+bool gm_80182510(void)
+{
+    switch (gm_801A4310()) {
+    case 0x21:
+    case 0x22:
+    case 0x23:
+    case 0x24:
+    case 0x25:
+    case 0x26:
+        return true;
+    }
+    return false;
+}
 
 /// #gm_80182554
 
@@ -664,4 +719,10 @@ s32 gm_80181A34(void)
 
 /// #fn_80182F40
 
-/// #gm_80183218
+extern u8 lbl_804D65E8;
+
+void gm_80183218(void)
+{
+    lbl_804D65E8 = 0;
+    HSD_GObjProc_8038FD54(GObj_Create(0xF, 0x11, 0), fn_80182F40, 0x15);
+}
