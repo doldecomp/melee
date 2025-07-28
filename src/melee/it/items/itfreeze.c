@@ -42,7 +42,18 @@ bool it_8028F200(void)
 
 /// #it_8028F238
 
-/// #it_8028F2B4
+void it_8028F2B4(Item_GObj* gobj) 
+{
+    Item* item = gobj->user_data;
+    Item_GObj* linked;
+    
+    if ((linked = (Item_GObj*)item->xDD4_itemVar.foxblaster.xDF0) != NULL) {
+        it_802E37A4(linked);
+        item->xDD4_itemVar.foxblaster.xDF0 = NULL;
+    }
+    
+    Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool it_8028F310(void)
 {
