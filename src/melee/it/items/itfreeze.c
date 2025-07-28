@@ -79,7 +79,9 @@ bool it_8028F3E4(Item_GObj* arg0)
 
 /// #it_8028F3EC
 
-/// #it_8028F40C
+int it_8028F40C(Item_GObj* arg0) {
+    return itColl_BounceOffShield(arg0);
+}
 
 bool it_8028F42C(Item_GObj* arg0)
 {
@@ -117,4 +119,4 @@ void it_8028F8C4(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_8028F968
 
-/// #it_8028F9B8
+void it_8028F9B8(void) {}
