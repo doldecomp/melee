@@ -330,9 +330,9 @@ s32* gmMainLib_8015D06C(u8 arg0)
     return &base[arg0].x7C.x84;
 }
 
-s32* gmMainLib_8015D084(s32 arg0)
+s32* gmMainLib_8015D084(u8 arg0)
 {
-    return &gmMainLib_8015EDBC()->xB0[arg0 & 0xFF];
+    return &gmMainLib_8015EDBC()->xB0[arg0];
 }
 
 s32* gmMainLib_8015D0C0(u8 arg0)
