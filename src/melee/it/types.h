@@ -591,6 +591,7 @@ struct Item {
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
         itWhiteBea_ItemVars whitebea;
+        itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
         itMasterHandLaser_ItemVars masterhandlaser;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
