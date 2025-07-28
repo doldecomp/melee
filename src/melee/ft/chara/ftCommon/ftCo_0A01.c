@@ -338,8 +338,8 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
 {
     *arg1 = -1;
     {
-        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0, 0,
-                                 arg7, arg8, arg9, arg10, arg11);
+        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0,
+                                 0, arg7, arg8, arg9, arg10, arg11);
         if (ret && ftCo_800A1B38(*arg1)) {
             return false;
         }
@@ -1583,7 +1583,7 @@ void ftCo_800AC30C(Fighter* fp)
         return;
     }
     if (data->x7C % 3 == 0 && !(data->x10 * 0.1F < HSD_Randf())) {
-        if (fp->x1A88.x34 < 0) {
+        if (fp->x1A88.x4 < 0) {
             ftCo_800B46B8(fp, 0x80, 0x7F);
         } else {
             ftCo_800B46B8(fp, 0x80, 0x81);
@@ -2149,15 +2149,15 @@ void ftCo_800B1DA0(Fighter* fp)
 
 void ftCo_800B3900(Fighter_GObj* gobj)
 {
-    Fighter* fp;
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
 
-    fp = gobj->user_data;
     ftCo_800B33B0(fp);
     ftCo_800B2AFC(fp);
     ftCo_800B2790(fp);
     ftCo_800B3E04(fp);
     ftCo_800B0AF4(fp);
-    M2C_FIELD(fp, int*, 0x1B04) = (int) (M2C_FIELD(fp, int*, 0x1B04) + 1);
+    fp->x1A88.x7C += 1;
 }
 
 /// #ftCo_800B395C
