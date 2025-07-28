@@ -117,7 +117,7 @@ void ftBossLib_8015BF74(HSD_GObj* gobj, float x_diff_max)
 
     {
         float x_diff = vec.x - fp->cur_pos.x;
-        float abs_x_diff = fabs_inline(x_diff);
+        float abs_x_diff = ABS(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {
@@ -134,7 +134,7 @@ void ftBossLib_8015C010(HSD_GObj* gobj, float x_diff_max)
 
     {
         float x_diff = vec.x - fp->cur_pos.x;
-        float abs_x_diff = fabs_inline(x_diff);
+        float abs_x_diff = ABS(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {

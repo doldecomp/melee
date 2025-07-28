@@ -21,7 +21,7 @@ FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float gr_vel = fp->gr_vel;
-    float walk_vel = fabs_inline(gr_vel);
+    float walk_vel = ABS(gr_vel);
     if (walk_vel >= (fp->mv.co.walk.accel_mul *
                      (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
     {
@@ -38,7 +38,7 @@ FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 static inline FtWalkType ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    float walking_velocity = fabs_inline(fp->gr_vel);
+    float walking_velocity = ABS(fp->gr_vel);
     float tempf = fp->mv.co.walk.accel_mul;
     if (walking_velocity >=
         (tempf * (p_ftCommonData->x2C * fp->co_attrs.walk_max_vel)))
@@ -107,7 +107,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
     if (mv_x0 * fp->facing_dir <= 0) {
         anim_rate = 0;
     } else {
-        mv_x0 = fabs_inline(mv_x0);
+        mv_x0 = ABS(mv_x0);
         switch (fp->motion_id - fp->mv.co.walk.msid) {
         case FtWalkType_Slow:
             anim_rate = mv_x0 / fp->mv.co.walk.slow_anim_rate;

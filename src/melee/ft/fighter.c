@@ -1837,19 +1837,19 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
 
-            if (fabs_inline(fp->input.lstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.lstick.x) <= p_ftCommonData->x0) {
                 fp->input.lstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.lstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.lstick.y) <= p_ftCommonData->x4) {
                 fp->input.lstick.y = 0.0f;
             }
 
-            if (fabs_inline(fp->input.cstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.cstick.x) <= p_ftCommonData->x0) {
                 fp->input.cstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.cstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.cstick.y) <= p_ftCommonData->x4) {
                 fp->input.cstick.y = 0.0f;
             }
 

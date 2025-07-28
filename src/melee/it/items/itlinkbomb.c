@@ -369,9 +369,9 @@ static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj* gobj, Vec3* vel)
 {
     Item* item;
     itLinkBombAttributes* sa;
-    item = gobj->user_data;
+    item = GET_ITEM(gobj);
     sa = item->xC4_article_data->x4_specialAttributes;
-    if ((fabs_inline(vel->x) > sa->x24) || (fabs_inline(vel->y) > sa->x28)) {
+    if ((ABS(vel->x) > sa->x24) || (ABS(vel->y) > sa->x28)) {
         it_8029F69C(gobj);
         return 1;
     } else {
@@ -545,7 +545,7 @@ void it_8029F60C(HSD_GObj* gobj)
             item->x40_vel.x =
                 (sa->x2C * item->xDD4_itemVar.linkbomb.x4) + temp_f2;
         }
-        if (fabs_inline(item->x40_vel.x) < sa->x30) {
+        if (ABS(item->x40_vel.x) < sa->x30) {
             item->x40_vel.x = zero;
         }
     }
