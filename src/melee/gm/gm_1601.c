@@ -762,7 +762,7 @@ void gm_80165268(void)
     Camera_8002FC7C(4, 3);
 }
 
-void gm_80165290(void)
+void gm_80165290(int x)
 {
     Camera_8002F8F4();
 }

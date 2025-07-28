@@ -1506,10 +1506,10 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 
     tmp->FighterMatchInfo[arg0].spawn_point = arg1->x5;
 
-    Player_SetHandicap(arg0, (s8) arg1->handicap);
-    Player_SetTeam(arg0, (s8) arg1->team);
+    Player_SetHandicap(arg0, arg1->handicap);
+    Player_SetTeam(arg0, arg1->team);
     Player_SetFlagsBit0(arg0, arg1->xC_b0);
-    Player_SetNametagSlotID(arg0, arg1->xA);
+    Player_SetNametagSlotID(arg0, (u8) arg1->xA);
     if (arg1->xC_b1) {
         tmp->unk_A += 5;
         Player_SetFlagsBit3(arg0, 1);

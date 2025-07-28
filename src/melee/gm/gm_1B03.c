@@ -22,7 +22,9 @@
 #include <melee/gm/gmtou.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
@@ -371,6 +373,8 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color, u8 
     css_data->data.data.players[0].stocks = stocks;
 }
 
+#pragma push
+#pragma dont_inline on
 void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, s8* color, s8* arg4, u8* level)
 {
     s32 slot;
@@ -392,6 +396,7 @@ void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, s8* color, s8* arg4,
         *arg4 = css_data->data.data.players[slot].xA;
     }
 }
+#pragma pop
 
 void gm_801B07B4(CSSData* css_data, s8 c_kind, s8 stocks, s8 color, u8 arg4, u8 level, u8 arg6)
 {
@@ -891,7 +896,7 @@ void gm_801B138C(MinorScene* arg0)
 extern MatchExitInfo gm_80479D98;
 extern ResultsMatchInfo gm_8047C020;
 extern UNK_T gm_8047E2A4[];
-extern UNK_T gm_80480530[];
+extern StartMeleeData gm_80480530;
 extern UNK_T gm_80480668[];
 extern UNK_T gm_804807B0[];
 extern UNK_T un_804A1F48[];
@@ -924,7 +929,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B15C8,
         {
             MN_VS,
-            gm_80480530,
+            &gm_80480530,
             &gm_80479D98,
         },
     },
@@ -934,7 +939,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B1688,
         {
             MN_SUDDEN_DEATH,
-            gm_80480530,
+            &gm_80480530,
             gm_8047E2A4,
         },
     },
@@ -964,7 +969,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801A6254,
         {
             MN_VS,
-            gm_80480530,
+            &gm_80480530,
             &gm_80479D98,
         },
     },
@@ -988,7 +993,7 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         NULL,
         {
             MN_VS,
-            gm_80480530,
+            &gm_80480530,
             &gm_80479D98,
         },
     },
@@ -1125,7 +1130,7 @@ MinorScene gm_803DDB80_MinorScenes[] = {
 extern UNK_T gm_804D68C8[];
 extern UNK_T gm_804807B0[];
 extern UNK_T gm_80480668[];
-extern UNK_T gm_80480530[];
+extern StartMeleeData gm_80480530;
 
 MinorScene gm_803DDBE0_MinorScenes[] = {
     {
@@ -1164,7 +1169,7 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         gm_801B2AF8,
         {
             MN_VS,
-            gm_80480530,
+            &gm_80480530,
             &gm_80479D98,
         },
     },
@@ -1584,8 +1589,7 @@ void gm_801B1AD4(MinorScene* arg0)
     /// why is there a subi? another match end struct?
     gm_80477738.match_end = rmi->match_end;
 
-    gm_801688AC(&rmi->match_end);
-    gm_8016247C();
+    gm_8016247C(gm_801688AC(&rmi->match_end));
     if ((s32) gm_804771C4.x4 == 0) {
         gm_SetScenePendingMinor(1);
         gm_8018F634()->x0 = 0x1F;
@@ -1702,8 +1706,7 @@ void gm_801B2AF8(MinorScene* arg0)
     temp_r29 = (void*) gm_801A5250();
     gm_80168638(&gm_80479D98.match_end);
     gm_80168710(&gm_80479D98.match_end, temp_r30);
-    gm_801688AC(&gm_80479D98.match_end);
-    gm_8016247C();
+    gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
     gm_801A5258(temp_r29, &gm_80479D98.match_end);
     gm_SetScenePendingMinor(1);
 }
@@ -1812,7 +1815,10 @@ void gm_801B34B8_OnInit(void)
 
 /// #gm_801B59AC
 
-/// #fn_801B5AA8
+void fn_801B5AA8(int arg0)
+{
+    lbBgFlash_8002063C(0x78);
+}
 
 /// #gm_801B5ACC
 
@@ -1826,7 +1832,11 @@ void gm_801B34B8_OnInit(void)
 
 /// #gm_801B5FB4
 
-/// #gm_801B607C
+void gm_801B607C(void)
+{
+    gm_801A42E8(1);
+    gm_801A42D4();
+}
 
 /// #gm_801B60A4_OnLoad
 
@@ -2045,40 +2055,181 @@ void gm_801B95D8_OnLoad(void)
 
 /// #gm_801B98E8
 
-/// #gm_801B999C
+extern VsModeData gm_80497618;
 
-/// #gm_801B9A3C
-
-/// #gm_801B9DD8
-
-/// #gm_801B9EB8_OnInit
-
-/// #gm_801B9EE4_OnLoad
-
-/// #gm_801B9F10
-
-/// #gm_801B9F3C
-
-/// #gm_801B9F64
-
-/// #gm_801B9F8C
-
-void fn_801B9FB8(void* arg0)
+void gm_801B999C(MinorScene* arg0)
 {
-    M2C_FIELD(arg0, UNK_RET(**)(UNK_PARAMS), 0x38) = gm_80165290;
+    VsModeData* vs = &gm_80497618;
+    CSSData* temp_r3;
+
+    temp_r3 = gm_801A4284(arg0);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+    gm_80167A14(vs->data.players);
+    gm_801B0730(temp_r3, &vs->data.players[0].c_kind, NULL, &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
+    vs->data.players[1].c_kind = 0x1F;
+    vs->data.players[1].xE = 0xF;
+    vs->data.players[1].x1C = 1.0f;
+    vs->data.players[1].slot_type = 1;
+    vs->data.players[1].stocks = 1;
+    vs->data.players[1].team = 1;
 }
 
-/// #gm_801B9FC8
+extern u8 gm_804D68F8;
+extern u8 gm_804D68F9;
 
-/// #gm_801B9FFC
+#pragma push
+#pragma dont_inline on
+void gm_801B9A3C(MinorScene* arg0)
+{
+    StartMeleeData* data;
+    VsModeData* vs = &gm_80497618;
+    int i;
 
-/// #gm_801BA024
 
-/// #gm_801BA058
+    data = gm_801A427C(arg0);
+    gm_80167A64(&data->rules);
 
-/// #gm_801BA078
+    data->rules = vs->data.rules;
 
-/// #gm_801BA098
+    data->rules.xE = 0x54;
+    data->rules.x0_0 = 1;
+    data->rules.x0_6 = true;
+    data->rules.x1_0 = true;
+    data->rules.x4_2 = false;
+    data->rules.x4_4 = false;
+
+    data->rules.x8 = 0;
+    data->rules.xB = -1;
+    data->rules.x10 = 0xA;
+    data->rules.x34 = 1.0f;
+    data->rules.x30 = 1.0f;
+
+    data->rules.x5_0 = true;
+    data->rules.x1_3 = true;
+    data->rules.x44 = gm_80181998;
+
+    data->rules.x3_3 = true;
+    data->rules.x3_2 = true;
+    data->rules.x7 = 9;
+
+    for (i = 0; i < 6; i++) {
+        data->players[i] = vs->data.players[i];
+        data->players[i].xC_b1 = false;
+        data->players[i].xD_b3 = true;
+    }
+
+    gm_801B0620(&data->players[0], vs->data.players[0].c_kind, vs->data.players[0].color, 1, gm_804D68F8);
+    data->players[0].xD_b2 = true;
+    gm_8016F088(data);
+    gm_80181A00(data->players[0].c_kind, data->players[0].xA);
+    gm_80180B18();
+}
+#pragma pop
+
+void gm_801B9DD8(MinorScene* arg0)
+{
+    u32 temp_r31;
+    s32* temp_r3_2;
+    u8 temp_r30;
+    MatchExitInfo* temp_r3;
+
+    temp_r3 = gm_801A4284(arg0);
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80180BA0();
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1);
+        return;
+    }
+    temp_r30 = gm_80164024(temp_r3->match_end.player_standings[0].character_kind);
+    temp_r31 = gm_80180AE4();
+    if (gm_801734D0(temp_r31) != 0x148) {
+        gm_80164504();
+    }
+    temp_r3_2 = gmMainLib_8015D084(temp_r30);
+    if (temp_r31 > *temp_r3_2) {
+        *temp_r3_2 = temp_r31;
+    }
+    gm_80173B30(temp_r31);
+    gm_80173EEC();
+    gm_80172898(8);
+    if (gm_80173754(0x20, gm_804D68F8) == 0) {
+        gm_SetScenePendingMinor(0);
+    }
+}
+
+void gm_801B9EB8_OnInit(void)
+{
+    VsModeData* data = &gm_80497618;
+    gm_80167B50(data);
+}
+
+void gm_801B9EE4_OnLoad(void)
+{
+    gm_804D68F8 = gm_801677F0();
+    gm_804D68F9 = 0;
+}
+
+void gm_801B9F10(MinorScene* scene)
+{
+    gm_801A5618(scene, &gmMainLib_804D3EE0->unk_A90, 7);
+}
+
+void gm_801B9F3C(MinorScene* scene)
+{
+    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_A90);
+}
+
+void gm_801B9F64(MinorScene* scene)
+{
+    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_A90);
+}
+
+void gm_801B9F8C(MinorScene* scene)
+{
+    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_A90, 0);
+}
+
+void fn_801B9FB8(StartMeleeData* arg0, StartMeleeData* arg1)
+{
+    arg0->rules.x38 = gm_80165290;
+}
+
+void gm_801B9FC8(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_A90;
+    gm_801A583C(scene, data, fn_801B9FB8, NULL);
+}
+
+void gm_801B9FFC(MinorScene* scene)
+{
+    gm_801A5AF0(scene, 4, 3);
+}
+
+void gm_801BA024(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_A90;
+    gm_801A5C3C(scene, data, fn_801B9FB8, NULL);
+}
+
+void gm_801BA058(MinorScene* scene)
+{
+    gm_801A5EC8(scene);
+}
+
+void gm_801BA078(MinorScene* scene)
+{
+    gm_801A5F00(scene);
+}
+
+void gm_801BA098(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_A90;
+    gm_801A5F64(scene, data, 0);
+}
 
 void gm_801BA0C4_OnInit(void)
 {
@@ -2090,30 +2241,67 @@ void gm_801BA0EC_OnLoad(void)
     gm_801A55C4();
 }
 
-/// #gm_801BA10C
-
-/// #gm_801BA138
-
-/// #gm_801BA160
-
-/// #gm_801BA188
-
-void fn_801BA1B4(struct fn_801BA1B4_arg0_t* arg0)
+void gm_801BA10C(MinorScene* scene)
 {
-    arg0->x2_b3 = true;
+    VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
+    gm_801A5618(scene, data, 8);
 }
 
-/// #gm_801BA1C8
+void gm_801BA138(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
+    gm_801A5680(scene, data);
+}
 
-/// #gm_801BA1FC
+void gm_801BA160(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
+    gm_801A5754(scene, data);
+}
 
-/// #gm_801BA224
+void gm_801BA188(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
+    gm_801A57A8(scene, data, 0);
+}
 
-/// #gm_801BA258
+void fn_801BA1B4(StartMeleeData* data, StartMeleeData* unused)
+{
+    data->rules.x2_3 = true;
+}
 
-/// #gm_801BA278
+void gm_801BA1C8(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
+    gm_801A583C(scene, data, fn_801BA1B4, NULL);
+}
 
-/// #gm_801BA298
+void gm_801BA1FC(MinorScene* scene)
+{
+    gm_801A5AF0(scene, 4, 3);
+}
+
+void gm_801BA224(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
+    gm_801A5C3C(scene, data, fn_801BA1B4, NULL);
+}
+
+void gm_801BA258(MinorScene* scene)
+{
+    gm_801A5EC8(scene);
+}
+
+void gm_801BA278(MinorScene* scene)
+{
+    gm_801A5F00(scene);
+}
+
+void gm_801BA298(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_BD0;
+    gm_801A5F64(scene, data, 0);
+}
 
 void gm_801BA2C4_OnInit(void)
 {
@@ -2125,30 +2313,64 @@ void gm_801BA2EC_OnLoad(void)
     gm_801A55C4();
 }
 
-/// #gm_801BA30C
+void gm_801BA30C(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_810;
+    gm_801A5618(scene, data, 6);
+}
 
-/// #gm_801BA338
+void gm_801BA338(MinorScene* scene)
+{
+    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_810);
+}
 
-/// #gm_801BA360
+void gm_801BA360(MinorScene* scene)
+{
+    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_810);
+}
 
-/// #gm_801BA388
+void gm_801BA388(MinorScene* scene)
+{
+    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_810, 0);
+}
 
-void fn_801BA3B4(struct fn_801BA3B4_arg0_t* arg0)
+void fn_801BA3B4(PlayerInitData* arg0, PlayerInitData* unused)
 {
     arg0->xC_b4 = true;
 }
 
-/// #gm_801BA3C8
+void gm_801BA3C8(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_810;
+    gm_801A583C(scene, data, NULL, fn_801BA3B4);
+}
 
-/// #gm_801BA3FC
+void gm_801BA3FC(MinorScene* scene)
+{
+    gm_801A5AF0(scene, 4, 3);
+}
 
-/// #gm_801BA424
+void gm_801BA424(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_810;
+    gm_801A5C3C(scene, data, NULL, fn_801BA3B4);
+}
 
-/// #gm_801BA458
+void gm_801BA458(MinorScene* scene)
+{
+    gm_801A5EC8(scene);
+}
 
-/// #gm_801BA478
+void gm_801BA478(MinorScene* scene)
+{
+    gm_801A5F00(scene);
+}
 
-/// #gm_801BA498
+void gm_801BA498(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_810;
+    gm_801A5F64(scene, data, 0);
+}
 
 void gm_801BA4C4_OnInit(void)
 {
@@ -2160,30 +2382,63 @@ void gm_801BA4EC_OnLoad(void)
     gm_801A55C4();
 }
 
-/// #gm_801BA50C
-
-/// #gm_801BA538
-
-/// #gm_801BA560
-
-/// #gm_801BA588
-
-void fn_801BA5B4(void* arg0)
+void gm_801BA50C(MinorScene* scene)
 {
-    M2C_FIELD(arg0, f32*, 0x34) = 0.5f;
+    gm_801A5618(scene, &gmMainLib_804D3EE0->unk_1210, 0xA);
 }
 
-/// #gm_801BA5C0
+void gm_801BA538(MinorScene* scene)
+{
+    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_1210);
+}
 
-/// #gm_801BA5F4
+void gm_801BA560(MinorScene* scene)
+{
+    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_1210);
+}
 
-/// #gm_801BA61C
+void gm_801BA588(MinorScene* scene)
+{
+    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_1210, 0);
+}
 
-/// #gm_801BA650
+/// Sets game speed to 1/2 for slowmo melee
+void fn_801BA5B4(StartMeleeData* data, StartMeleeData* unused)
+{
+    data->rules.x34 = 0.5F;
+}
 
-/// #gm_801BA670
+void gm_801BA5C0(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_1210;
+    gm_801A583C(scene, data, fn_801BA5B4, NULL);
+}
 
-/// #gm_801BA690
+void gm_801BA5F4(MinorScene* scene)
+{
+    gm_801A5AF0(scene, 4, 3);
+}
+
+void gm_801BA61C(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_1210;
+    gm_801A5C3C(scene, data, fn_801BA5B4, NULL);
+}
+
+void gm_801BA650(MinorScene* scene)
+{
+    gm_801A5EC8(scene);
+}
+
+void gm_801BA670(MinorScene* scene)
+{
+    gm_801A5F00(scene);
+}
+
+void gm_801BA690(MinorScene* scene)
+{
+    gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_1210, 0);
+}
 
 void gm_801BA6BC_OnInit(void)
 {
@@ -2195,30 +2450,63 @@ void gm_801BA6E4_OnLoad(void)
     gm_801A55C4();
 }
 
-/// #gm_801BA704
-
-/// #gm_801BA730
-
-/// #gm_801BA758
-
-/// #gm_801BA780
-
-void fn_801BA7AC(void* arg0)
+void gm_801BA704(MinorScene* scene)
 {
-    M2C_FIELD(arg0, f32*, 0x34) = 1.25f;
+    gm_801A5618(scene, &gmMainLib_804D3EE0->unk_1350, 9);
 }
 
-/// #gm_801BA7B8
+void gm_801BA730(MinorScene* scene)
+{
+    gm_801A5680(scene, &gmMainLib_804D3EE0->unk_1350);
+}
 
-/// #gm_801BA7EC
+void gm_801BA758(MinorScene* scene)
+{
+    gm_801A5754(scene, &gmMainLib_804D3EE0->unk_1350);
+}
 
-/// #gm_801BA814
+void gm_801BA780(MinorScene* scene)
+{
+    gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_1350, 0);
+}
 
-/// #gm_801BA848
+/// Sets game speed to 1.25F for lightning melee
+void fn_801BA7AC(StartMeleeData* data, StartMeleeData* unused)
+{
+    data->rules.x34 = 1.25F;
+}
 
-/// #gm_801BA868
+void gm_801BA7B8(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
+    gm_801A583C(scene, data, fn_801BA7AC, NULL);
+}
 
-/// #gm_801BA888
+void gm_801BA7EC(MinorScene* scene)
+{
+    gm_801A5AF0(scene, 4, 3);
+}
+
+void gm_801BA814(MinorScene* scene)
+{
+    VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
+    gm_801A5C3C(scene, data, fn_801BA7AC, NULL);
+}
+
+void gm_801BA848(MinorScene* scene)
+{
+    gm_801A5EC8(scene);
+}
+
+void gm_801BA868(MinorScene* scene)
+{
+    gm_801A5F00(scene);
+}
+
+void gm_801BA888(MinorScene* scene)
+{
+    gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_1350, 0);
+}
 
 void gm_801BA8B4_OnInit(void)
 {
@@ -2230,7 +2518,12 @@ void gm_801BA8DC_OnLoad(void)
     gm_801A55C4();
 }
 
-/// #gm_801BA8FC
+extern UNK_T gm_804D6900;
+
+void gm_801BA8FC(void)
+{
+    lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900, "sqEventInitDataLevelTbl", 0);
+}
 
 /// #gm_801BA938
 
@@ -2254,7 +2547,11 @@ void gm_801BA8DC_OnLoad(void)
 
 void gm_801BBFE4_OnUnload(void) {}
 
-/// #fn_801BBFE8
+void fn_801BBFE8(void)
+{
+    gm_801A4310();
+    gm_801BC00C();
+}
 
 /// #gm_801BC00C
 
@@ -2272,7 +2569,10 @@ void gm_801BBFE4_OnUnload(void) {}
 
 /// #gm_801BCC9C
 
-/// #gm_801BCF20
+void gm_801BCF20(HSD_GObj* gobj)
+{
+    gm_801BCC9C(gobj);
+}
 
 /// #gm_801BCF40
 

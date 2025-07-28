@@ -49,7 +49,7 @@
 /* 15CFCC */ s32 gmMainLib_8015CFCC(u8);
 /* 15D00C */ void gmMainLib_8015D00C(u8);
 /* 15D06C */ s32* gmMainLib_8015D06C(u8);
-/* 15D084 */ s32* gmMainLib_8015D084(s32);
+/* 15D084 */ s32* gmMainLib_8015D084(u8);
 /* 15D0C0 */ s32* gmMainLib_8015D0C0(u8);
 /* 15D0D8 */ s32 gmMainLib_8015D0D8(u8);
 /* 15D0F4 */ s32 gmMainLib_8015D0F4(u8);
