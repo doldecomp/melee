@@ -13,6 +13,21 @@
 #include <baselib/jobj.h>
 
 typedef struct {
+    /* x0 ip+DD4 */ f32 x0;
+    /* x4 ip+DD8 */ HSD_GObj* x4;
+    /* x8 ip+DDC */ f32 x8;
+    /* xC ip+DE0 */ f32 xC;
+} itDrMarioPill_ItemVars;
+
+typedef struct {
+    /* x0 */ f32 x0;
+    /* x4 */ f32 x4;
+    /* x8 */ f32 x8;
+    /* xC */ f32 xC;
+    /* x10 */ f32 x10;
+} itDrMarioPillAttributes;
+
+typedef struct {
     /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
                        // that transforms the item model (possibly frame number
                        // of animation?)
@@ -252,6 +267,49 @@ typedef struct itLinkBombAttributes {
 } itLinkBombAttributes;
 
 typedef struct {
+    /* ip+DD4 */ s32 xDD4;
+    /* ip+DD8 */ s32 xDD8;
+    /* ip+DDC */ s32 xDDC;
+    /* ip+DE0 */ s32 xDE0;
+    /* ip+DE4 */ s32 xDE4;
+    /* ip+DE8 */ s32 xDE8;
+    /* ip+DEC */ s32 xDEC;
+    /* ip+DF0 */ u8 _pad0[0xF70 - 0xDF0];
+    /* ip+F70 */ f32 xF70;
+    /* ip+F74 */ f32 xF74;
+    /* ip+F78 */ f32 xF78;
+    /* ip+F7C */ f32 xF7C;
+    /* ip+F80 */ f32 xF80;
+    /* ip+F84 */ f32 xF84;
+    /* ip+F88 */ f32 xF88;
+    /* ip+F8C */ f32 xF8C;
+    /* ip+F90 */ HSD_JObj* xF90[2];
+    /* ip+F98 */ Item_GObj* xF98;
+} itLinkBoomerang_ItemVars;
+
+typedef struct itLinkBoomerangAttributes {
+    /* x0 */ f32 x0;
+    /* x4 */ f32 x4;
+    /* x8 */ f32 x8;
+    /* xC */ f32 xC;
+    /* x10 */ f32 x10;
+    /* x14 */ f32 x14;
+    /* x18 */ f32 x18;
+    /* x1C */ f32 x1C;
+    /* x20 */ f32 x20;
+    /* x24 */ f32 x24;
+    /* x28 */ f32 x28;
+    /* x2C */ f32 x2C;
+    /* x30 */ f32 x30;
+    /* x34 */ f32 x34;
+    /* x38 */ f32 x38;
+    /* x3C */ f32 x3C;
+    /* x40 */ f32 x40;
+    /* x44 */ HSD_Joint* x44;
+    /* x48 */ HSD_Joint* x48;
+} itLinkBoomerangAttributes;
+
+typedef struct {
     f32 x0;
     f32 x4;
     f32 x8;
@@ -310,5 +368,20 @@ typedef struct {
     f32 x0;
     HSD_GObj* x4;
 } itLinkBow_ItemVars;
+
+typedef struct itZeldaDinFireExplode_ItemVars {
+    /* +0 ip+DD4 */ f32 xDD4;
+    /* +4 ip+DD8 */ f32 xDD8;
+    /* +8 ip+DDC */ HSD_GObj* xDDC;
+    /* +C ip+DE0 */ s32 xDE0;
+} itZeldaDinFireExplode_ItemVars;
+
+typedef struct itZeldaDinFireExplodeAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itZeldaDinFireExplodeAttributes;
 
 #endif

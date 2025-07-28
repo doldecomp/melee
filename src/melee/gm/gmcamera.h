@@ -2,6 +2,8 @@
 #define GALE01_1A2224
 
 #include <placeholder.h>
+#include "baselib/forward.h"
+#include "dolphin/types.h"
 
 typedef struct _gmCameraUnkStruct3 {
     /*0x00*/ u8 x0_padding[0x24 - 0x0];
@@ -20,10 +22,20 @@ typedef struct _gmCameraUnkStruct2 {
 } gmCameraUnkStruct2;
 
 typedef struct _gmCameraUnkStruct {
-    /*0x00*/ u8 x0_padding[0x20 - 0x0];
+    /*0x00*/ void* ifvscam; ///< interface dat file loaded from 801a3254
+    /*0x04*/ u8 x4_padding[0x20 - 0x4];
     /*0x20*/ u32 x20;
     /*0x24*/ u32 x24;
-    /*0x28*/ u8 x28_padding[0x54 - 0x28];
+    /*0x28*/ s32 x28;
+    /*0x2C*/ u32 x2C;
+    /*0x30*/ s32 x30;
+    /*0x34*/ u8 pad_x34[0x38 - 0x34];
+    /*0x38*/ u32 x38;
+    /*0x3C*/ u8 pad_x3C[0x40 - 0x3C];
+    /*0x40*/ s32 x40;
+    /*0x44*/ u32 x44;
+    /*0x48*/ HSD_Text* x48;
+    /*0x4C*/ u8 pad_x4C[0x54 - 0x4C];
     /*0x54*/ u32 x54;
 } gmCameraUnkStruct;
 
@@ -43,8 +55,8 @@ union _gmCameraUnkUnion {
 /* 4DA9C0 */ extern float gmCamera_804DA9C0;
 
 /* 1A2224 */ u8* gmCamera_801A2224(u8* arg0, u32 arg1);
-/* 1A2334 */ void* gmCamera_801A2334(int arg0, float argA, float argB);
-/* 1A253C */ UNK_RET gmCamera_801A253C(UNK_PARAMS);
+/* 1A2334 */ HSD_Text* gmCamera_801A2334(s32, f32, f32, f32, f32);
+/* 1A253C */ void gmCamera_801A253C(s32*, s32*);
 /* 1A25C8 */ UNK_RET gmCamera_801A25C8(UNK_PARAMS);
 /* 1A2640 */ s32 gmCamera_801A2640(void);
 /* 1A2650 */ UNK_RET gmCamera_801A2650(UNK_PARAMS);
@@ -64,7 +76,7 @@ union _gmCameraUnkUnion {
 /* 1A30E4 */ UNK_RET gmCamera_801A30E4(UNK_PARAMS);
 /* 1A31D8 */ UNK_RET fn_801A31D8(UNK_PARAMS);
 /* 1A31FC */ UNK_RET gmCamera_801A31FC(UNK_PARAMS);
-/* 1A33BC */ UNK_RET gmCamera_801A33BC(UNK_PARAMS);
+/* 1A33BC */ void gmCamera_801A33BC(void);
 /* 1A34FC */ void gmCamera_801A34FC_OnFrame(void);
 /* 1A3634 */ void gmCamera_801A3634_OnEnter(UNK_T);
 /* 1A367C */ void gmCamera_801A367C_OnLeave(UNK_T);

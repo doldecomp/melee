@@ -150,7 +150,7 @@ struct ItemStateDesc {
     HSD_MatAnimJoint* x4_matanim_joint;
 
     /// @at{0} @sz{4}
-    UNK_T x8_parameters;
+    HSD_ShapeAnimJoint* x8_parameters;
 
     /// @at{0} @sz{4}
     UNK_T xC_script;
@@ -542,6 +542,7 @@ struct Item {
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
         itCoin_ItemVars coin;
+        itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
@@ -570,6 +571,7 @@ struct Item {
         itLGunRay_ItemVars lgunray;
         itLinkArrow_ItemVars linkarrow;
         itLinkBomb_ItemVars linkbomb;
+        itLinkBoomerang_ItemVars linkboomerang;
         itLinkBow_ItemVars linkbow;
         itLinkHookshot_ItemVars linkhookshot;
         itMBall_ItemVars mball;
@@ -589,6 +591,7 @@ struct Item {
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
         itWhiteBea_ItemVars whitebea;
+        itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
         itMasterHandLaser_ItemVars masterhandlaser;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;

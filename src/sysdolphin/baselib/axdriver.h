@@ -46,5 +46,8 @@ void AXDriverKeyOff(int v);
 void HSD_AudioSFXKeyOffAll(void);
 void HSD_AudioSFXKeyOffTrack(int track);
 s32 AXDriver_8038D4E4(int, s16);
+int AXDriver_8038D9D8(int);
+void AXDriver_8038E844(int);
+void AXDriver_8038E968(void);
 
 #endif

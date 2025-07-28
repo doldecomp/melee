@@ -21,7 +21,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/types.h>
-#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnmain.h>
 
 struct stagelistinfo {
     HSD_JObj* x0;
@@ -529,7 +529,7 @@ void mnStageSel_8025BB5C_OnLeave(UNK_T unused)
     }
 }
 
-u8 mnStageSel_8025BBD4(void)
+int mnStageSel_8025BBD4(void)
 {
     return mnStageSel_803F06D0[mnStageSel_802599EC()].xB;
 }

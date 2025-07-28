@@ -1040,7 +1040,6 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     f32 temp_f31;
     s32 temp_r29;
     s32 temp_r6;
-    s32 temp_ret;
     s32 var_r3;
     u8* temp_r8;
     u8 temp_r3;
@@ -1099,8 +1098,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     temp_r5 = temp_r9[2];
     temp_r29 = temp_r5 | (((temp_r9[1] << 8) & ~0xFF0000) |
                           ((temp_r4 << 0x10) & 0xFF0000));
-    temp_ret = gm_801693BC(temp_r28_3->player_id);
-    if (temp_ret != 0) {
+    if (gm_801693BC(temp_r28_3->player_id)) {
         var_r3 = 0x42C;
     } else {
         var_r3 = 0x42B;
