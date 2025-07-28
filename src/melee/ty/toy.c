@@ -8,6 +8,9 @@
 
 #include "baselib/controller.h"
 
+#include "gm/gm_1A36.h" // for gm_801677E8
+#include <MSL/math.h> // for ABS
+
 /// #un_80305058
 
 /// #un_803053C4
@@ -22,7 +25,7 @@ s32 un_80305B88(void) {
     PAD_STACK(4);
 
     for (i = 0; i < 4; i++) {
-        if (button = HSD_PadCopyStatus[(u8) i].trigger) {
+        if ((button = HSD_PadCopyStatus[(u8) i].trigger)) {
             gm_801677E8(i);
             break;
         }
@@ -36,7 +39,7 @@ s32 un_80305C44(void) {
     PAD_STACK(4);
 
     for (i = 0; i < 4; i++) {
-        if (button = HSD_PadCopyStatus[(u8) i].button) {
+        if ((button = HSD_PadCopyStatus[(u8) i].button)) {
             gm_801677E8(i);
             break;
         }
