@@ -158,9 +158,9 @@ void fn_8019CFA4(HSD_GObj* gobj)
         jobj = jobj->next;
     }
 
-    fn_8019044C(jobj, data->pad_x8[0x26]);
+    fn_8019044C(jobj, data->pad_x2C[0x2]);
     jobj = HSD_JObjGetNext(jobj);
-    fn_8019044C(jobj, data->pad_x8[0x28]);
+    fn_8019044C(jobj, data->pad_x2C[0x4]);
 }
 
 /// #fn_8019D074

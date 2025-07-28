@@ -135,7 +135,7 @@ bool gm_8016B014(void)
     int i;
     PAD_STACK(4);
 
-    if (lbl_8046B6A0.x24C8.x4_2 && gm_8016A1F8() == 0) {
+    if (lbl_8046B6A0.x24C8.x4_2 && !gm_8016A1F8()) {
         for (i = 1; i < 6; i++) {
             if (Player_GetPlayerState(i) != 0) {
                 i = -1;
@@ -1506,10 +1506,10 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
 
     tmp->FighterMatchInfo[arg0].spawn_point = arg1->x5;
 
-    Player_SetHandicap(arg0, (s8) arg1->handicap);
-    Player_SetTeam(arg0, (s8) arg1->team);
+    Player_SetHandicap(arg0, arg1->handicap);
+    Player_SetTeam(arg0, arg1->team);
     Player_SetFlagsBit0(arg0, arg1->xC_b0);
-    Player_SetNametagSlotID(arg0, arg1->xA);
+    Player_SetNametagSlotID(arg0, (u8) arg1->xA);
     if (arg1->xC_b1) {
         tmp->unk_A += 5;
         Player_SetFlagsBit3(arg0, 1);

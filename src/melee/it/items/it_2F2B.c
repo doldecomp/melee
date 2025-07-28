@@ -23,7 +23,7 @@ ItemStateTable it_803F9480[] = {
     { -1, it_802F2CCC, it_802F2CD4, it_802F2CD8 },
 };
 
-void it_802F2BFC(Item_GObj* gobj, ftYs_GObj* owner_gobj)
+void it_802F2BFC(Item_GObj* gobj, Fighter_GObj* owner_gobj)
 {
     Item* item = GET_ITEM(gobj);
     item->atk_victim = owner_gobj;

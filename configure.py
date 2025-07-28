@@ -873,7 +873,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gm_16F1.c"),
             Object(NonMatching, "melee/gm/gmresult.c"),
             Object(NonMatching, "melee/gm/gmresultplayer.c"),
-            Object(NonMatching, "melee/gm/gm_17AD.c"),
+            Object(Matching, "melee/gm/gm_17AD.c"),
             Object(NonMatching, "melee/gm/gm_17BA.c"),
             Object(NonMatching, "melee/gm/gmregcommon.c"),
             Object(NonMatching, "melee/gm/gm_17C0.c"),
@@ -1005,7 +1005,8 @@ config.libs = [
     MeleeLib(
         "mn (Menus)",
         [
-            Object(NonMatching, "melee/mn/mn_2295.c"),
+            Object(NonMatching, "melee/mn/mnmain.c"),
+            Object(NonMatching, "melee/mn/mnmainrule.c"),
             Object(NonMatching, "melee/mn/mnruleplus.c"),
             Object(NonMatching, "melee/mn/mnitemsw.c"),
             Object(NonMatching, "melee/mn/mnstagesw.c"),

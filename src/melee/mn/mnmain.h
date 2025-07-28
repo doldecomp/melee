@@ -1,5 +1,5 @@
-#ifndef GALE01_2295AC
-#define GALE01_2295AC
+#ifndef MELEE_MN_MAIN_H
+#define MELEE_MN_MAIN_H
 
 #include <platform.h>
 #include <placeholder.h>
@@ -15,6 +15,9 @@ typedef struct _mn_unk1 {
     u64 x8;
     u8 x10;
     u8 x11;
+    u8 x12;
+    u8 x13;
+    int x14;
 } mn_unk1;
 
 typedef struct _mn_unk2 {
@@ -22,11 +25,6 @@ typedef struct _mn_unk2 {
     u16 x2;
     s32 x4;
 } mn_unk2;
-
-struct mn_80231634_t {
-    /*  +0 */ char pad_0[0x10];
-    /* +10 */ int x10;
-};
 
 /* 2295AC */ u8 mn_802295AC(void);
 /* 229624 */ u32 mn_80229624(u32);
@@ -53,10 +51,10 @@ struct mn_80231634_t {
 /* 22BDB4 */ void fn_8022BDB4(HSD_GObj*, int);
 /* 22BE34 */ HSD_GObj* mn_8022BE34(void);
 /* 22BEDC */ void mn_8022BEDC(HSD_GObj*);
-/* 22BFBC */ UNK_RET mn_8022BFBC(UNK_PARAMS);
+/* 22BFBC */ int mn_8022BFBC(void);
 /* 22C010 */ int mn_8022C010(int, int);
-/* 22C068 */ UNK_RET mn_8022C068(UNK_PARAMS);
-/* 22C128 */ UNK_RET fn_8022C128(UNK_PARAMS);
+/* 22C068 */ void mn_8022C068(HSD_LObj*, int, int);
+/* 22C128 */ void fn_8022C128(HSD_GObj*);
 /* 22C304 */ UNK_RET mn_8022C304(UNK_PARAMS);
 /* 22C4F4 */ void mn_8022C4F4(HSD_GObj*);
 /* 22C7CC */ void mn_8022C7CC(HSD_GObj*);
@@ -69,7 +67,7 @@ struct mn_80231634_t {
 /* 22D7F4 */ void mn_8022D7F4(HSD_GObj*);
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
-/* 22DDA8 */ void mn_8022DDA8_OnEnter(UNK_T);
+/* 22DDA8 */ void mn_8022DDA8_OnEnter(void*);
 /* 22E950 */ UNK_RET mn_8022E950(UNK_PARAMS);
 /* 22E978 */ UNK_RET mn_8022E978(UNK_PARAMS);
 /* 22EA08 */ void mn_8022EA08(char*, u32);
@@ -94,32 +92,10 @@ struct mn_80231634_t {
 /* 22F410 */ UNK_RET mn_8022F410(UNK_PARAMS);
 /* 22F470 */ UNK_RET mn_8022F470(UNK_PARAMS);
 /* 22F4CC */ UNK_RET mn_8022F4CC(UNK_PARAMS);
-/* 22F538 */ UNK_RET fn_8022F538(UNK_PARAMS);
+/* 22F538 */ void fn_8022F538(HSD_GObj*);
 /* 22FB88 */ UNK_RET mn_8022FB88(UNK_PARAMS);
 /* 22FD18 */ UNK_RET mn_8022FD18(UNK_PARAMS);
-/* 22FEC8 */ UNK_RET mn_8022FEC8(UNK_PARAMS);
-/* 230198 */ UNK_RET mn_80230198(UNK_PARAMS);
-/* 230274 */ UNK_RET mn_80230274(UNK_PARAMS);
-/* 2307F8 */ UNK_RET mn_802307F8(UNK_PARAMS);
-/* 2308F0 */ UNK_RET mn_802308F0(UNK_PARAMS);
-/* 2309F0 */ UNK_RET fn_802309F0(UNK_PARAMS);
-/* 230D18 */ UNK_RET mn_80230D18(UNK_PARAMS);
-/* 230E38 */ UNK_RET mn_80230E38(UNK_PARAMS);
-/* 231634 */ int mn_80231634(struct mn_80231634_t*);
-/* 23164C */ UNK_RET mn_8023164C(UNK_PARAMS);
-/* 231714 */ UNK_RET mn_80231714(UNK_PARAMS);
-/* 2317E4 */ UNK_RET mn_802317E4(UNK_PARAMS);
-/* 231804 */ UNK_RET mn_80231804(UNK_PARAMS);
-/* 231F80 */ UNK_RET mn_80231F80(UNK_PARAMS);
-/* 23201C */ UNK_RET fn_8023201C(UNK_PARAMS);
-/* 232458 */ UNK_RET mn_80232458(UNK_PARAMS);
-/* 2324E4 */ UNK_RET mn_802324E4(UNK_PARAMS);
-/* 232660 */ UNK_RET mn_80232660(UNK_PARAMS);
-/* 2327A4 */ UNK_RET mn_802327A4(UNK_PARAMS);
-/* 232D4C */ UNK_RET mn_80232D4C(UNK_PARAMS);
-/* 232F44 */ UNK_RET fn_80232F44(UNK_PARAMS);
-/* 233218 */ UNK_RET mn_80233218(UNK_PARAMS);
-/* 2339FC */ UNK_RET mn_802339FC(UNK_PARAMS);
+
 /* 4A04F0 */ extern mn_unk1 mn_804A04F0;
 /* 4D6BB8 */ extern HSD_Archive* mn_804D6BB8;
 /* 4D6BC8 */ extern mn_unk2 mn_804D6BC8;

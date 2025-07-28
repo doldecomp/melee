@@ -85,6 +85,10 @@ extern HSD_PadStatus HSD_PadMasterStatus[4];
 extern HSD_PadStatus HSD_PadGameStatus[4];
 extern HSD_PadStatus HSD_PadCopyStatus[4];
 
+static inline float HSD_PadGetNmlStickY(u8 slot) {
+    return HSD_PadCopyStatus[slot].nml_stickY;
+}
+
 void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);

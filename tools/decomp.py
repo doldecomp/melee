@@ -227,7 +227,8 @@ def main() -> None:
 
             _ = src_file.write_text(result)
     else:
-        print(f"Asm file does not exist at path {asm_file}", file=stderr)
+        print(f"If a function was intended, then no function with the name <{m2c_input}> was found.", file=stderr)
+        print(f"If a TU was intended, then the expected asm file does not exist at path {asm_file}", file=stderr)
         sys.exit(1)
 
 if __name__ == "__main__":

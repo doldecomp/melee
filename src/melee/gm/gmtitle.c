@@ -19,7 +19,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbtime.h>
-#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 
 static StaticModelDesc gmTitle_80479B28;

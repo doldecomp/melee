@@ -134,7 +134,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     }
 }
 
-void ftYs_Shield_8012C1D4(ftYs_GObj* gobj)
+void ftYs_Shield_8012C1D4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(4 * 2);
@@ -303,7 +303,7 @@ bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
     return false;
 }
 
-Fighter_Part ftYs_Shield_8012CC6C(ftYs_GObj* gobj)
+Fighter_Part ftYs_Shield_8012CC6C(Fighter_GObj* gobj)
 {
     return ftParts_8007500C(GET_FIGHTER(gobj), 52);
 }

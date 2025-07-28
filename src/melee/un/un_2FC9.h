@@ -66,7 +66,7 @@
 /* 2FF710 */ void un_802FF710(void);
 /* 2FF78C */ HSD_GObj* un_802FF78C(void);
 /* 2FF7DC */ void un_802FF7DC(void);
-/* 2FF884 */ bool un_802FF884(void);
+/* 2FF884 */ bool un_802FF884(char*);
 /* 2FF88C */ int un_802FF88C(void);
 /* 2FF934 */ void un_802FF934(void);
 /* 2FF958 */ int un_802FF958(void);
