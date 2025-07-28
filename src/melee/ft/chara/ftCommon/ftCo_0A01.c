@@ -1342,6 +1342,17 @@ void ftCo_800A8DE4(Fighter* fp)
 
 /// #ftCo_800A8EB0
 
+static inline float inverseInlineE0(ftCo_Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    f32 cur_pos_x = fp->cur_pos.x;
+    if (cur_pos_x - data->x54.x < 0.0f) {
+        return -(cur_pos_x - data->x54.x);
+    } else {
+        return cur_pos_x - data->x54.x;
+    }
+}
+
 static inline float inlineE0(ftCo_Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -1354,7 +1365,7 @@ static inline float inlineE0(ftCo_Fighter* fp)
 
 void ftCo_800A92CC(ftCo_Fighter* fp)
 {
-    if (inlineE0(fp) > 60.0) {
+    if (inverseInlineE0(fp) > 60.0) {
         ftCo_800B46B8(fp, 0x81, 0x7F);
         ftCo_800B46B8(fp, 0x80, 0);
         ftCo_800B46B8(fp, 0x88, 1);
