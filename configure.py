@@ -496,7 +496,8 @@ config.libs = [
     MeleeLib(
         "ef (Visual effects)",
         [
-            Object(NonMatching, "melee/ef/eflib.c"),
+            Object(NonMatching, "melee/ef/eflib.c", extra_cflags=["-sym on"]),
+            # Object(NonMatching, "melee/ef/eflib.c"),
             Object(NonMatching, "melee/ef/efsync.c"),
             Object(NonMatching, "melee/ef/ef_061D.c"),
             Object(NonMatching, "melee/ef/efasync.c"),
