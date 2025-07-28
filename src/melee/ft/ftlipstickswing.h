@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
 /* 0CDAB4 */ UNK_RET ftCo_800CDAB4(UNK_PARAMS);
 /* 0CDB14 */ void ftCo_LipstickSwing_Anim(ftCo_GObj* gobj);
