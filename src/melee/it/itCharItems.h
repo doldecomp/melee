@@ -12,6 +12,19 @@
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
+typedef struct itClimbersBlizzard_ItemVars {
+    /* +0 */ f32 x0;
+    /* +4 */ u8 flag0 : 1;
+} itClimbersBlizzard_ItemVars;
+
+typedef struct itClimbersBlizzardAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itClimbersBlizzardAttributes;
+
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
     /* x4 ip+DD8 */ HSD_GObj* x4;
