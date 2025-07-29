@@ -944,14 +944,14 @@ bool it_8026DC24(Item_GObj* gobj)
         it_80274658(gobj, it_804D6D28->x74_float);
         it_80275DFC(gobj);
     }
-    if (fabs_inline(ip->x40_vel.x) <= 0.00001f) {
+    if (ABS(ip->x40_vel.x) <= 0.00001f) {
         ip->x40_vel.x = 0.0f;
     }
-    if (fabs_inline(ip->x40_vel.y) <= 0.00001f) {
+    if (ABS(ip->x40_vel.y) <= 0.00001f) {
         ip->x40_vel.y = 0.0f;
     }
-    if (fabs_inline(ip->x40_vel.x) <= attr->x5c) {
-        if ((fabs_inline(ip->x40_vel.y) <= attr->x5c)) {
+    if (ABS(ip->x40_vel.x) <= attr->x5c) {
+        if ((ABS(ip->x40_vel.y) <= attr->x5c)) {
             goto block_18a8;
         }
     }

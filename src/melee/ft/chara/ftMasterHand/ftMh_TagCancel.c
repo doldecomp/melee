@@ -35,7 +35,7 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     Fighter_ChangeMotionState(gobj_1, ftCo_MS_CaptureMasterHand, 0, 0, 1, 0,
                               0);
     ft_1->x221E_b0 = true;
-    ft_1->x2220_flag.b3 = true;
+    ft_1->x2220_b3 = true;
     ftCommon_8007E2F4(ft_1, 511);
     ftAnim_8006EBA4(gobj_1);
     ftCommon_8007E2FC(gobj_1);

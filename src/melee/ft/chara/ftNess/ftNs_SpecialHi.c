@@ -165,19 +165,10 @@ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
 }
 #pragma pop
 
-static inline float fabs_inline_ness(float x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return x;
-    }
-}
-
 inline bool check_distance(Vec3* pos, Vec2* pair)
 {
-    if ((fabs_inline_ness(pos->x - pair->x) < 8.333333015441895f) &&
-        (fabs_inline_ness(pos->y - pair->y) < 12.333333015441895f))
+    if ((ABS(pos->x - pair->x) < 8.333333015441895f) &&
+        (ABS(pos->y - pair->y) < 12.333333015441895f))
     {
         return true;
     }

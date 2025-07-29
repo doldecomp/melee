@@ -25,6 +25,7 @@
 /* 0CE480 */ void ftCo_800CE480(Fighter_GObj*);
 /* 0CE528 */ void ft_800CE528(Fighter_GObj*);
 /* 0CE5A0 */ void ft_800CE5A0(Fighter_GObj*);
+/* 0CE650 */ void ftCo_800CE650(Fighter_GObj* gobj);
 /* 0CEAF0 */ void ftCo_FireFlowerShoot_Anim(ftCo_GObj* gobj);
 /* 0CEBA0 */ void ftCo_FireFlowerShootAir_Anim(ftCo_GObj* gobj);
 /* 0CEC50 */ void ftCo_FireFlowerShoot_IASA(ftCo_GObj* gobj);

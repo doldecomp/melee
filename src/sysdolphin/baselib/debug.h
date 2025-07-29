@@ -6,7 +6,7 @@
 #include <dolphin/os.h>
 #include <dolphin/os/OSContext.h>
 
-typedef void (*ReportCallback)(unsigned char*, size_t);
+typedef void (*ReportCallback)(const unsigned char*, size_t);
 typedef void (*PanicCallback)(OSContext*, ...);
 
 ATTRIBUTE_NORETURN void __assert(char*, u32, char*);

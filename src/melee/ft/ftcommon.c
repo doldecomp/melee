@@ -49,25 +49,14 @@
 #include <baselib/jobj.h>
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
-
-/// @todo Fix these to be in a single file, not math.h
-#define M_PI 3.14159265358979323846
-#define ABS(x) ((x) < 0 ? -(x) : (x))
-static inline f32 fabs_inline(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return x;
-    }
-}
+#include <math.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 
 void ftCommon_8007C930(Fighter* fp, float result)
 {
-    float absvel = fabs_inline(fp->gr_vel);
-    if (fabs_inline(result) > absvel) {
+    float absvel = ABS(fp->gr_vel);
+    if (ABS(result) > absvel) {
         result = -fp->gr_vel;
     } else if (fp->gr_vel > 0) {
         result = -result;
@@ -87,8 +76,8 @@ void ftCommon_8007C98C(Fighter* fp, float arg8, float arg9, float argA)
     phi_f3 = argA;
     result = arg8;
     if (!arg9) {
-        phi_f1 = fabs_inline(fp->gr_vel);
-        phi_f0 = fabs_inline(argA);
+        phi_f1 = ABS(fp->gr_vel);
+        phi_f0 = ABS(argA);
         if (phi_f0 > phi_f1) {
             phi_f3 = -fp->gr_vel;
         } else if (fp->gr_vel > 0) {
@@ -151,7 +140,7 @@ void ftCommon_8007CADC(Fighter* fp, float arg8, float arg9, float argA)
     float phi_f2;
     float phi_f4;
 
-    if (fabs_inline(phi_f1) >= arg8) {
+    if (ABS(phi_f1) >= arg8) {
         phi_f2 = phi_f1 * arg9;
         phi_f4 = phi_f1 * argA;
     } else {
@@ -283,8 +272,8 @@ void ftCommon_8007CE4C(Fighter* fp, float val)
 
 void ftCommon_8007CE94(Fighter* fp, float val)
 {
-    float phi_f2 = fabs_inline(fp->self_vel.x);
-    if (fabs_inline(val) >= phi_f2) {
+    float phi_f2 = ABS(fp->self_vel.x);
+    if (ABS(val) >= phi_f2) {
         val = -fp->self_vel.x;
     } else if (fp->self_vel.x > 0) {
         val = -val;
@@ -298,9 +287,9 @@ void ftCommon_8007CEF4(Fighter* fp)
 {
 #if SOLUTION == 0
     float result = fp->co_attrs.aerial_friction;
-    float lhs = fabs_inline(result);
-    float phi_f1 = fabs_inline(fp->self_vel.x);
-    if (fabs_inline(result) >= phi_f1) {
+    float lhs = ABS(result);
+    float phi_f1 = ABS(fp->self_vel.x);
+    if (ABS(result) >= phi_f1) {
         result = -fp->self_vel.x;
     } else if (fp->self_vel.x > 0) {
         result = -fp->co_attrs.aerial_friction;
@@ -321,11 +310,11 @@ bool ftCommon_8007CF58(Fighter* fp)
     struct ftCo_DatAttrs* ca = &fp->co_attrs;
 
     temp_f3 = fp->self_vel.x;
-    phi_f1 = fabs_inline(temp_f3);
-    if (fabs_inline(temp_f3) > ca->air_drift_max) {
+    phi_f1 = ABS(temp_f3);
+    if (ABS(temp_f3) > ca->air_drift_max) {
         phi_f2 = p_ftCommonData->x1FC;
-        phi_f1 = fabs_inline(temp_f3);
-        phi_f0 = fabs_inline(p_ftCommonData->x1FC);
+        phi_f1 = ABS(temp_f3);
+        phi_f0 = ABS(p_ftCommonData->x1FC);
         if (phi_f0 >= phi_f1) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -335,8 +324,8 @@ bool ftCommon_8007CF58(Fighter* fp)
         return true;
     } else {
         phi_f2 = fp->co_attrs.aerial_friction;
-        phi_f1 = fabs_inline(temp_f3);
-        phi_f0 = fabs_inline(fp->co_attrs.aerial_friction);
+        phi_f1 = ABS(temp_f3);
+        phi_f0 = ABS(fp->co_attrs.aerial_friction);
         if (phi_f0 >= phi_f1) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -360,12 +349,12 @@ bool ftCommon_8007D050(Fighter* fp, float val)
 
     temp_f3 = fp->self_vel.x;
     {
-        float _ = fabs_inline(temp_f3);
+        float _ = ABS(temp_f3);
     }
-    if (fabs_inline(temp_f3) > val) {
+    if (ABS(temp_f3) > val) {
         phi_f2 = p_ftCommonData->x1FC;
-        phi_f1 = fabs_inline(temp_f3);
-        phi_f0_2 = fabs_inline(p_ftCommonData->x1FC);
+        phi_f1 = ABS(temp_f3);
+        phi_f0_2 = ABS(p_ftCommonData->x1FC);
         if (phi_f0_2 >= phi_f1) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -375,8 +364,8 @@ bool ftCommon_8007D050(Fighter* fp, float val)
         return 1;
     } else {
         phi_f2 = fp->co_attrs.aerial_friction;
-        phi_f1_2 = fabs_inline(temp_f3);
-        phi_f0_3 = fabs_inline(fp->co_attrs.aerial_friction);
+        phi_f1_2 = ABS(temp_f3);
+        phi_f0_3 = ABS(fp->co_attrs.aerial_friction);
         if (phi_f0_3 >= phi_f1_2) {
             phi_f2 = -temp_f3;
         } else if (temp_f3 > 0) {
@@ -400,8 +389,8 @@ void ftCommon_8007D174(Fighter* fp, float arg8, float arg9, float argA,
 
     phi_f2 = argB;
     if (!argA) {
-        phi_f1 = fabs_inline(fp->self_vel.x);
-        if (fabs_inline(argB) >= phi_f1) {
+        phi_f1 = ABS(fp->self_vel.x);
+        if (ABS(argB) >= phi_f1) {
             phi_f2 = -fp->self_vel.x;
         } else if (fp->self_vel.x > 0) {
             phi_f2 = -argB;
@@ -488,7 +477,7 @@ void ftCommon_8007D344(Fighter* fp, float arg8, float arg9, float argA)
     float argx, argy;
     float friction;
 
-    if (fabs_inline(fp->input.lstick.x) >= arg8) {
+    if (ABS(fp->input.lstick.x) >= arg8) {
         argx = fp->input.lstick.x * arg9;
         argy = fp->input.lstick.x * argA;
     } else {
@@ -504,7 +493,7 @@ void ftCommon_8007D3A8(Fighter* fp, float arg8, float arg9, float argA)
     float phi_f2;
     float phi_f4;
 
-    if (fabs_inline(fp->input.lstick.x) >= arg8) {
+    if (ABS(fp->input.lstick.x) >= arg8) {
         phi_f2 = fp->input.lstick.x * arg9;
         phi_f4 = fp->input.lstick.x * argA;
     } else {
@@ -712,12 +701,12 @@ void ftCommon_8007D92C(HSD_GObj* gobj)
 
 float ftCo_GetLStickAngle(Fighter* fp)
 {
-    return atan2f(fp->input.lstick.y, fabs_inline(fp->input.lstick.x));
+    return atan2f(fp->input.lstick.y, ABS(fp->input.lstick.x));
 }
 
 float ftCo_GetCStickAngle(Fighter* fp)
 {
-    return atan2f(fp->input.cstick.y, fabs_inline(fp->input.cstick.x));
+    return atan2f(fp->input.cstick.y, ABS(fp->input.cstick.x));
 }
 
 float ftCommon_8007D9D4(Fighter* fp)
@@ -739,7 +728,7 @@ void ftCommon_8007D9FC(Fighter* fp)
 void ftCommon_8007DA24(Fighter* fp)
 {
     float phi_f0;
-    if (fabs_inline(fp->input.lstick.x) > p_ftCommonData->x0) {
+    if (ABS(fp->input.lstick.x) > p_ftCommonData->x0) {
         if (fp->input.lstick.x >= 0) {
             phi_f0 = +1;
         } else {
@@ -1445,8 +1434,8 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     if ((src->x198C = 2) && (src->x1990 != 0)) {
         ftColl_8007B760(dst_gobj, src->x1990);
     }
-    dst->x2220_flag.b5 = src->x2220_flag.b5;
-    dst->x2220_flag.b6 = src->x2220_flag.b6;
+    dst->x2220_b5 = src->x2220_b5;
+    dst->x2220_b6 = src->x2220_b6;
     dst->x2008 = src->x2008;
     ftLib_SetScale(dst_gobj, src->x34_scale.y);
     if (src->x2223_b7) {
@@ -1543,15 +1532,15 @@ void ftCommon_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 void ftCommon_8007F76C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->gr_vel = fp->facing_dir * fabs_inline(fp->gr_vel);
-    fp->self_vel.x = fp->facing_dir * fabs_inline(fp->self_vel.x);
+    fp->gr_vel = fp->facing_dir * ABS(fp->gr_vel);
+    fp->self_vel.x = fp->facing_dir * ABS(fp->self_vel.x);
 }
 
 void ftCommon_8007F7B4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->gr_vel = -fp->facing_dir * fabs_inline(fp->gr_vel);
-    fp->self_vel.x = -fp->facing_dir * fabs_inline(fp->self_vel.x);
+    fp->gr_vel = -fp->facing_dir * ABS(fp->gr_vel);
+    fp->self_vel.x = -fp->facing_dir * ABS(fp->self_vel.x);
 }
 
 MtxPtr ftCommon_8007F804(Fighter* fp)
@@ -1854,16 +1843,16 @@ void ftCommon_8008021C(HSD_GObj* gobj)
 void ftCommon_8008031C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if ((fabs_inline(fp->input.lstick.x) >= p_ftCommonData->x7B8 &&
+    if ((ABS(fp->input.lstick.x) >= p_ftCommonData->x7B8 &&
          fp->x679_x < p_ftCommonData->x7C0) ||
-        (fabs_inline(fp->input.lstick.y) >= p_ftCommonData->x7B8 &&
+        (ABS(fp->input.lstick.y) >= p_ftCommonData->x7B8 &&
          fp->x67A_y < p_ftCommonData->x7C0))
     {
         Player_UpdateJoystickCountByIndex((s32) fp->player_id, fp->x221F_b4);
         fp->x67A_y = 0xFE;
         fp->x679_x = 0xFE;
     }
-    if (fabs_inline(fp->input.x650) >= p_ftCommonData->x7BC) {
+    if (ABS(fp->input.x650) >= p_ftCommonData->x7BC) {
         if (fp->x67B < p_ftCommonData->x7C0) {
             Player_UpdateJoystickCountByIndex((s32) fp->player_id,
                                               fp->x221F_b4);

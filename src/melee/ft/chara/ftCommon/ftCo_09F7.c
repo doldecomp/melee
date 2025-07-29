@@ -73,7 +73,6 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     f32 var_f1;
     f32 var_f1_2;
     u8 temp_r3;
-    u8 temp_r5;
 
     var_f1 = arg7;
     var_r27 = arg2;
@@ -81,21 +80,19 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     if (arg4 == 0) {
         goto block_2;
     }
-    temp_r30->x2219 |= 0x80;
+    temp_r30->x2219_b0 = true;
 block_2:
     if (var_r27 != 0x8D) {
         goto block_5;
     }
-    temp_r5 = temp_r30->x2220_flag.flags;
-    var_r27 = M2C_ERROR(/* TODO */); // *(M2C_FIELD(temp_r30->ft_data, s32*,
-                                     // 0x54) + ((temp_r5 >> 3) & 0x1C));
-    temp_r30->x2220_flag.flags =
-        (temp_r5 & ~0xE0) | (((((temp_r5 >> 5) & 7) + 1) << 5) & 0xE0);
-    temp_r3 = temp_r30->x2220_flag.flags;
-    if (((temp_r3 >> 5) & 7) < 5) {
+
+    var_r27 = temp_r30->ft_data->x54 + temp_r30->x2220_b0;
+
+    temp_r30->x2220_b0++;
+    if (temp_r30->x2220_b0 < 5) {
         goto block_9;
     }
-    temp_r30->x2220_flag.flags = temp_r3 & ~0xE0;
+    temp_r30->x2220_b0 = 0;
     goto block_9;
 block_5:
     if (var_r27 != 0x8E) {
@@ -519,7 +516,7 @@ block_133:
                   &sp7C, var_f1_2);
     return;
 block_134:
-    OSReport("no effect from animlist %d\n", arg1, var_f1_2, temp_f2_2, 2.0f);
+    OSReport("no effect from animlist %d\n", arg1);
     return;
 }
 

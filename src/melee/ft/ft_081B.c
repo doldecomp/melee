@@ -746,7 +746,7 @@ void ft_80084F3C(Fighter_GObj* gobj)
     ftCo_DatAttrs* co = &fp->co_attrs;
     f32 var_f1 = co->gr_friction;
     PAD_STACK(8);
-    if (fabs_inline(fp->gr_vel) > co->walk_max_vel) {
+    if (ABS(fp->gr_vel) > co->walk_max_vel) {
         var_f1 *= p_ftCommonData->x6C;
     }
     ftCommon_8007C930(fp, var_f1);

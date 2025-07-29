@@ -234,7 +234,7 @@ void ftCo_800C0D0C(ftCo_GObj* gobj)
               (p_ftCommonData->x608 - (Player_80033BB8(fp->player_id) + 1)))));
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
-    fp->x2220_flag.b3 = true;
+    fp->x2220_b3 = true;
     fp->x2224_b4 = true;
     fp->mv.co.bury.x0 = p_ftCommonData->x5F4;
     fp->mv.co.bury.x20 = fp->coll_data.floor.index;
@@ -321,7 +321,7 @@ void ftCo_800C124C(ftCo_GObj* gobj)
     ftCommon_8007E2FC(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221D_b5 = true;
-    fp->x2220_flag.b3 = true;
+    fp->x2220_b3 = true;
     fp->x2224_b4 = true;
 }
 

@@ -53,7 +53,8 @@ void ftCo_AttackS42_Anim(ftCo_GObj* gobj)
 
 void ftCo_AttackS42_IASA(ftCo_GObj* gobj)
 {
-    if ((((Fighter*) gobj->user_data)->x2218 >> 7) & 1) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }

@@ -3,11 +3,8 @@
 function melee_sed {
     find \
         src \
-        asm \
         docs \
-        obj_files.mk \
         ldscript.lcf \
-        Makefile \
         config/GALE01/splits.txt \
         config/GALE01/symbols.txt \
         configure.py \

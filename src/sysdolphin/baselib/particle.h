@@ -38,9 +38,9 @@
 /* 393A04 */ bool hsd_80393A04(void);
 /* 393A54 */ void hsd_80393A54(int);
 /* 393A5C */ int hsd_80393A5C(char*, int, int);
-/* 393C14 */ UNK_RET fn_80393C14(UNK_PARAMS);
+/* 393C14 */ void fn_80393C14(const u8* buf, size_t);
 /* 393D2C */ UNK_RET hsd_80393D2C(UNK_PARAMS);
-/* 393DA0 */ void hsd_80393DA0(void*, int);
+/* 393DA0 */ void hsd_80393DA0(u8*, size_t);
 /* 393E34 */ UNK_RET hsd_80393E34(UNK_PARAMS);
 /* 393E68 */ UNK_RET hsd_80393E68(UNK_PARAMS);
 /* 393EF4 */ UNK_RET hsd_80393EF4(UNK_PARAMS);

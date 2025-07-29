@@ -217,8 +217,8 @@ bool ftCo_80095328(ftCo_GObj* gobj, bool* arg1)
         return false;
     }
 
-    if (fabs_inline(var_f31) < p_ftCommonData->xDC &&
-        fabs_inline(var_f28) < p_ftCommonData->xE0)
+    if (ABS(var_f31) < p_ftCommonData->xDC &&
+        ABS(var_f28) < p_ftCommonData->xE0)
     {
         if (it_8026B30C(fp->item_gobj) == 0 &&
             !(fp->input.held_inputs & HSD_PAD_LR))
