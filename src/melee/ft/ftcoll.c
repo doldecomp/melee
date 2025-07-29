@@ -939,7 +939,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                 } else {
                 block_16:
                     if (victim_fp->x1064_thrownHitbox.owner != this_gobj) {
-                        if ((is_same_gobj != false) && !(((u8) this_fp->x221B >> 2U) & 1)) {
+                        if (is_same_gobj && !this_fp->x221B_b5) {
                             for (var_unk = 0, i = 0; i < (sizeof(this_fp->x914) / sizeof(HitCapsule)); i++) {
                                 this_hit = (HitCapsule*) HitCapsuleGetPtr( this_fp, i);
                                 if ((this_hit->state != HitCapsule_Disabled) && (!((u8) this_hit->x43_b2) && ((((u32) this_hit->element == (u8) HitElement_Catch) == 0)) && ((u32) this_hit->element != (u8) HitElement_Inert) && ((((this_hit->x40_b0) == 1) != 0)) && ((u32) (((u8) this_hit->x42_b5) == 1) && (((this_hit->x40_b2) && (victim_fp->ground_or_air == GA_Air)) || (((u8) this_hit->x40_b3) && (victim_fp->ground_or_air == GA_Ground))) && (lbColl_8000ACFC(victim_fp, this_hit) == 0)))) { ftColl_804D6560[i] = 1; var_unk++;
@@ -1002,7 +1002,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                 if (lbColl_8000805C( temp_r23, &this_fp ->hurt_capsules [n], ftCommon_8007F804( this_fp), var_r22, victim_fp ->x34_scale .y, this_fp ->x34_scale .y, this_fp ->cur_pos .z) != false) {
                                                     if ((u32) temp_r23->element != (u32) HitElement_Inert) {
                                       if (ftColl_80076ED8((Fighter*) victim_fp, temp_r23, this_fp, (HitCapsule*)&this_fp ->hurt_capsules [n]) != false) {
-                                                            if (((int) this_fp ->x1988 != 0) || ((int) this_fp ->x198C != 0) || (((u8) this_fp ->x221D >> 1U) & 1) || ((&this_fp->hurt_capsules[n])->state != 0)) {
+                                                            if (((int) this_fp ->x1988 != 0) || ((int) this_fp ->x198C != 0) || this_fp ->x221D_b6 || ((&this_fp->hurt_capsules[n])->state != 0)) {
                                                                 ft_80088148(this_fp, hit_sfx [temp_r23 ->sfx_severity], 0x7FU, 0x40U);
                                                                 var_r0_2 = true;
                                                             } else {

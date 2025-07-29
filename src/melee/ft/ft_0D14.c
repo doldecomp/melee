@@ -1055,7 +1055,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     temp_r27->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
     Fighter_ChangeMotionState(gobj, 1, 0U, 0.0F, 1.0F, 0.0F, NULL);
     temp_r28 = gobj->user_data;
-    if (((u8) temp_r28->x221D >> 1U) & 1) {
+    if (temp_r28->x221D_b6) {
         ft_800880D8(temp_r28);
         temp_r28->x2004 = 0;
     }
