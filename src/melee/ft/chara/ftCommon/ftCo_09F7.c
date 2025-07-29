@@ -86,13 +86,13 @@ block_2:
         goto block_5;
     }
 
-    var_r27 = temp_r30->ft_data->x54 + temp_r30->x2220_flag.b0;
+    var_r27 = temp_r30->ft_data->x54 + temp_r30->x2220_b0;
 
-    temp_r30->x2220_flag.b0++;
-    if (temp_r30->x2220_flag.b0 < 5) {
+    temp_r30->x2220_b0++;
+    if (temp_r30->x2220_b0 < 5) {
         goto block_9;
     }
-    temp_r30->x2220_flag.b0 = 0;
+    temp_r30->x2220_b0 = 0;
     goto block_9;
 block_5:
     if (var_r27 != 0x8E) {

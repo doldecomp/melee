@@ -421,7 +421,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
     if (fighter->x221F_b3 == 0 && ftLib_80086A8C(gobj)) {
         switch (Camera_80031060()) {
         case 1:
-            if (fighter->x2220_flag.b7) {
+            if (fighter->x2220_b7) {
                 fighter2 = gobj->user_data;
                 jobj = GET_JOBJ(gobj);
 
