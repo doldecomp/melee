@@ -757,7 +757,7 @@ void gmMainLib_8015DB18(void)
     gmMainLib_804D3EE0->unk_1 += 1;
 }
 
-void gmMainLib_8015DB2C(u8 arg0, s32 arg2)
+void gmMainLib_8015DB2C(u8 arg0)
 {
     struct gmm_x0* gmmthing = gmMainLib_804D3EE0;
     gmmthing->x39[arg0] = lbTime_8000AF74(gmMainLib_804D3EE0->x39[arg0], 1);

@@ -1874,12 +1874,12 @@ void Player_80036844(s32 slot, s32 arg1)
     }
 }
 
-void Player_800368F8(s32 slot)
+bool Player_800368F8(int slot)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    ftLib_80086BB4(player->player_entity[player->transformed[0]]);
+    return ftLib_80086BB4(player->player_entity[player->transformed[0]]);
 }
 
 void Player_80036978(s32 slot, s32 arg1)

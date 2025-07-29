@@ -260,7 +260,7 @@ char* gm_80160564(enum CharacterKind c_kind, enum MajorSceneKind scene)
     return un_8030813C(var_r3, scene) + 0x24;
 }
 
-s8 fn_801605EC(s32 arg0)
+u8 fn_801605EC(s32 arg0)
 {
     struct lbl_803B78C8_0x6* entry = lbl_803B78C8;
     s32 i;

@@ -17,11 +17,11 @@
 /* 1A6868 */ void fn_801A6868(HSD_GObj*);
 /* 1A68D8 */ UNK_RET gm_801A68D8(UNK_PARAMS);
 /* 1A6A48 */ void fn_801A6A48(HSD_GObj*, int);
-/* 1A6ACC */ void fn_801A6ACC(HSD_GObj*);
+/* 1A6ACC */ void fn_801A6ACC(HSD_GObj*, int);
 /* 1A6B6C */ void fn_801A6B6C(HSD_GObj*);
 /* 1A6C30 */ void fn_801A6C30(HSD_GObj*);
 /* 1A6C54 */ UNK_RET gm_801A6C54(UNK_PARAMS);
-/* 1A6D78 */ void fn_801A6D78(HSD_GObj*);
+/* 1A6D78 */ void fn_801A6D78(HSD_GObj*, int);
 /* 1A6DC0 */ UNK_RET gm_801A6DC0(UNK_PARAMS);
 /* 1A6EE4 */ UNK_RET gm_801A6EE4(UNK_PARAMS);
 /* 1A7070 */ void gm_801A7070_OnEnter(UNK_T);
@@ -33,7 +33,7 @@
 /* 1A7FB4 */ UNK_RET fn_801A7FB4(UNK_PARAMS);
 /* 1A80CC */ void fn_801A80CC(HSD_GObj*);
 /* 1A80F0 */ void fn_801A80F0(HSD_GObj*);
-/* 1A8114 */ UNK_RET gm_801A8114(UNK_PARAMS);
+/* 1A8114 */ void gm_801A8114(HSD_JObj*, int);
 /* 1A851C */ void fn_801A851C(HSD_GObj*);
 /* 1A85E4 */ UNK_RET gm_801A85E4(UNK_PARAMS);
 /* 1A8D54 */ UNK_RET gm_801A8D54(UNK_PARAMS);
