@@ -595,9 +595,22 @@ struct TmData {
     s32 x4;
     u8 pad_x8[0x28 - 0x8];
     u32 x28; ///< stage id
-    u8 pad_x2C[0x32 - 0x2C];
+    u8 x2C;
+    u8 x2D;
+    u8 x2E;
+    u8 x2F;
+    u8 x30;
+    u8 x31;
     u8 x32;
-    u8 pad_x33[0x4E4 - 0x33];
+    u8 x33;
+    u8 pad_x34[0x4B8 - 0x34];
+    struct UnkSelections {
+        u8 x0; ///< slot type?
+        u8 x1; ///< CSSIconHud
+        u8 x2;
+        u8 x3;
+        u8 pad_x4[0xA - 0x4];
+    } x4B8[4];
     HSD_Text* x4E0;
     HSD_Text* x4E4;
     HSD_Text* x4E8[6];

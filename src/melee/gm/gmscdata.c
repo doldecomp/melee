@@ -277,7 +277,7 @@ static MinorSceneHandler gm_803DA920[] = {
         NULL,
     },
     {
-        MN_TOU,
+        MN_TOU_SETUP,
         gm_8019628C_OnFrame,
         gm_801963B4_OnEnter,
         gm_801964A4_OnLeave,
@@ -291,7 +291,7 @@ static MinorSceneHandler gm_803DA920[] = {
         NULL,
     },
     {
-        MN_TOU_FINISH,
+        MN_TOU_ALT,
         gm_8019DF8C_OnFrame,
         gm_8019ECAC_OnEnter,
         gm_8019EE54_OnLeave,

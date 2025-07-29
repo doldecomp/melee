@@ -2,9 +2,11 @@
 #define MELEE_GM_18A5_H
 
 #include <placeholder.h>
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
+#include <melee/mn/types.h>
 
 /* 18A514 */ UNK_RET fn_8018A514(UNK_PARAMS);
 /* 18A970 */ void fn_8018A970(int);
@@ -30,14 +32,14 @@
 /* 18F4A0 */ int fn_8018F4A0(void);
 /* 18F508 */ UNK_RET fn_8018F508(UNK_PARAMS);
 /* 18F5F0 */ char* fn_8018F5F0(void);
-/* 18F62C */ UNK_T fn_8018F62C(HSD_GObj*);
+/* 18F62C */ u32 fn_8018F62C(HSD_GObj*);
 /* 18F634 */ TmData* gm_8018F634(void);
 /* 18F640 */ u32 fn_8018F640(int);
 /* 18F674 */ u32 fn_8018F674(int);
 /* 18F6A8 */ u32 fn_8018F6A8(int);
 /* 18F6DC */ int fn_8018F6DC(int);
-/* 18F6FC */ int fn_8018F6FC(int);
-/* 18F71C */ float fn_8018F71C(int, int);
+/* 18F6FC */ CharacterKind fn_8018F6FC(CSSIconHud);
+/* 18F71C */ float fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 18F74C */ int fn_8018F74C(void);
 /* 18F808 */ int fn_8018F808(void);
 /* 18F888 */ UNK_RET fn_8018F888(UNK_PARAMS);
@@ -99,8 +101,8 @@
 /* 1964A4 */ void gm_801964A4_OnLeave(UNK_T);
 /* 196510 */ UNK_RET fn_80196510(UNK_PARAMS);
 /* 19655C */ s32 fn_8019655C(void);
-/* 196564 */ UNK_RET fn_80196564(UNK_PARAMS);
-/* 196594 */ UNK_RET fn_80196594(UNK_PARAMS);
+/* 196564 */ bool fn_80196564(TmData*);
+/* 196594 */ bool fn_80196594(TmData*);
 /* 1965C4 */ UNK_RET fn_801965C4(UNK_PARAMS);
 /* 196684 */ UNK_RET fn_80196684(UNK_PARAMS);
 /* 1967E0 */ UNK_RET fn_801967E0(UNK_PARAMS);

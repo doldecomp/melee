@@ -1,20 +1,19 @@
 #include "gmtou.h"
-
-#include "gm_unsplit.h"
-
-#include "baselib/forward.h"
 #include "gm/gmtou.static.h"
-#include "placeholder.h"
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
-#include "baselib/random.h"
-#include "baselib/sislib.h"
-#include "lb/lbarchive.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbdvd.h"
-#include "lb/types.h"
-#include "sc/types.h"
+#include "mn/mnmain.h"
+
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <melee/gm/gm_18A5.h>
 #include <melee/gm/types.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/types.h>
+#include <melee/sc/types.h>
 
 // Filename is just a guess, based on some strings in the file
 // Seems to be Tournament game code
@@ -104,9 +103,62 @@ void fn_8019BF8C(HSD_GObj* gobj)
 
 /// #fn_8019C048
 
-/// #fn_8019C3EC
+void fn_8019C3EC(HSD_GObj* gobj)
+{
+    s32 idx;
+    f32 var_f1;
+    TmData* tmd;
+    HSD_JObj* jobj;
 
-/// #fn_8019C570
+    tmd = gm_8018F634();
+    idx = fn_8018F62C(gobj);
+    jobj = GET_JOBJ(gobj);
+    if (HSD_PadMasterStatus[(u8) idx].err != 0) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        return;
+    }
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+
+    if ((s32) tmd->x30 == 4) {
+        var_f1 = (13.0f * idx) + -19.5f;
+    } else if ((s32) tmd->x30 == 3) {
+        var_f1 = 6.5f + ((13.0f * idx) - 19.5f);
+    } else {
+        var_f1 = 6.5f + ((13.0f * (2.0f * idx)) - 19.5f);
+    }
+    fn_8018FDC4(jobj, 4.5f + var_f1, 3.0f, 666.0f);
+    if (lbl_80479A58.x20[idx].x0 == 4) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+    fn_8019BA08(idx, jobj);
+}
+
+void fn_8019C570(HSD_GObj* gobj)
+{
+    u32 idx;
+    HSD_JObj* jobj;
+    TmData* tmd = GetTmData();
+
+    idx = fn_8018F62C(gobj);
+    jobj = GET_JOBJ(gobj);
+    if (HSD_PadMasterStatus[(u8) idx].err != 0) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        return;
+    }
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    if (lbl_80479A58.x20[idx].x0 == 4) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+    if (tmd->x4B8[idx].x2 != 0) {
+        jobj = HSD_JObjGetChild(jobj);
+        jobj = HSD_JObjGetNext(jobj);
+        fn_8019044C(jobj, 201.0f);
+        return;
+    }
+    jobj = HSD_JObjGetChild(jobj);
+    jobj = HSD_JObjGetNext(jobj);
+    fn_8019044C(jobj, fn_8018F71C(tmd->x4B8[idx].x1, tmd->x4B8[idx].x3));
+}
 
 void fn_8019C6AC(HSD_GObj* gobj)
 {
@@ -115,8 +167,8 @@ void fn_8019C6AC(HSD_GObj* gobj)
 
     jobj = GET_JOBJ(gobj);
 
-    if (lbl_80479A58.xF > 0x3CU) {
-        lbl_80479A58.xF = 0x3C;
+    if (lbl_80479A58.xF > 60) {
+        lbl_80479A58.xF = 60;
     }
 
     fn_8019044C(jobj, (lbl_80479A58.xF + gm_804771C4.x4 * 100 + 100));
@@ -125,8 +177,41 @@ void fn_8019C6AC(HSD_GObj* gobj)
 
 /// #fn_8019C744
 
-/// #fn_8019CA38
+void fn_8019CA38(HSD_GObj* gobj)
+{
+    s32 idx;
+    f32 var_f1;
+    HSD_JObj* jobj;
+    TmData* tmd;
 
+    tmd = gm_8018F634();
+    idx = fn_8018F62C(gobj);
+    jobj = GET_JOBJ(gobj);
+    if (HSD_PadMasterStatus[(u8) idx].err != 0) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        return;
+    }
+
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    if ((s32) tmd->x30 == 4) {
+        var_f1 = (13.0f * (s32) idx) + -19.5f;
+    } else if ((s32) tmd->x30 == 3) {
+        var_f1 = 6.5f + ((13.0f * (s32) idx) - 19.5f);
+    } else {
+        var_f1 = 6.5f + ((13.0f * (2.0f * (s32) idx)) - 19.5f);
+    }
+    fn_8018FDC4(jobj, var_f1, 666.0f, 666.0f);
+    if (lbl_80479A58.x20[idx].x0 == 2) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+
+    if ((u32)lbl_80479A58.x6[idx] < 600) {
+        lbl_80479A58.x6[idx]++;
+    } else {
+        lbl_80479A58.x6[idx] = 0;
+    }
+    fn_8019044C(jobj, lbl_80479A58.x6[idx]);
+}
 
 void fn_8019CBFC(HSD_GObj* gobj)
 {
@@ -139,9 +224,89 @@ void fn_8019CBFC(HSD_GObj* gobj)
     }
 }
 
-/// #fn_8019CC74
+void fn_8019CC74(HSD_GObj* gobj)
+{
+    s32 idx;
+    f32 var_f1;
+    TmData* tmd;
+    HSD_JObj* jobj;
 
-/// #fn_8019CDBC
+    tmd = gm_8018F634();
+    idx = fn_8018F62C(gobj);
+    jobj = GET_JOBJ(gobj);
+    if (HSD_PadMasterStatus[(u8) idx].err == 0) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        return;
+    }
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+
+    if ((s32) tmd->x30 == 4) {
+        var_f1 = (13.0f * (f32) idx) + -19.5f;
+    } else if ((s32) tmd->x30 == 3) {
+        var_f1 = 6.5f + ((13.0f * (f32) idx) - 19.5f);
+    } else {
+        var_f1 = 6.5f + ((13.0f * (2.0f * (f32) idx)) - 19.5f);
+    }
+    fn_8018FDC4(jobj, var_f1, 666.0f, 0.01f);
+}
+
+// void fn_8019CDBC(HSD_GObj* gobj)
+// {
+//     f32 sp28;
+//     f32 sp24;
+//     TmData* tmd;
+//     s32 temp_r31;
+//     s32 temp_r3;
+//     u32 idx;
+//     void* temp_r27;
+//     void* temp_r27_2;
+//     void* temp_r29_2;
+//     void* temp_r29_3;
+//     HSD_JObj* jobj;
+//     void* temp_r4;
+
+//     jobj = GET_JOBJ(gobj);
+//     tmd = gm_8018F634();
+//     idx = fn_8018F62C(gobj);
+//     if (jobj == NULL) {
+//         __assert("jobj.h", 0x3E1U, "jobj");
+//     }
+//     temp_r31 = idx * 0x12;
+//     sp28 = jobj->translate.x;
+//     temp_r27 = tmd + temp_r31;
+//     sp24 = (5.999997f * (f32) temp_r27->unk45) - 21.5f;
+//     mn_8022F410(&sp28, 0.4f, &sp24);
+//     temp_r3 = mn_8022F410(&sp28, 0.2f, &sp24);
+//     switch (temp_r3) {                              /* irregular */
+//     case 1:
+//         fn_8018FDC4((HSD_JObj* ) jobj, sp28, 19.5f, -6.0f);
+//         temp_r29_2 = tmd + (idx * 4);
+//         HSD_SisLib_803A746C(temp_r29_2->unk534, 0, 10.0f * sp28, -197.0f);
+//         (*(temp_r29_2 + 0x534))->unk8 = -6.0f;
+//         break;
+//     case -1:
+//         fn_8018FDC4((HSD_JObj* ) jobj, sp28, 15.0f, 6.0f);
+//         temp_r29_3 = tmd + (idx * 4);
+//         HSD_SisLib_803A746C(temp_r29_3->unk534, 0, 10.0f * sp28, -152.0f);
+//         (*(temp_r29_3 + 0x534))->unk8 = 6.0f;
+//         break;
+//     default:
+//     case 0:
+//         (temp_r28 + temp_r31)->unk46 = (u8) *(temp_r27 + 0x45);
+//         fn_8018FDC4((HSD_JObj* ) jobj, sp28, 17.0f, 0.01f);
+//         temp_r27_2 = tmd + (idx * 4);
+//         HSD_SisLib_803A746C(temp_r27_2->unk534, 0, 10.0f * sp28, -172.0f);
+//         (*(temp_r27_2 + 0x534))->unk8 = 0.01f;
+//         break;
+//     }
+//     temp_r4 = tmd + temp_r31;
+//     if ((u8) temp_r4->unk3C != 0) {
+//         fn_8019044C((HSD_JObj* ) jobj, 201.0f);
+//         return;
+//     }
+//     fn_8019044C((HSD_JObj* ) jobj, fn_8018F71C((s32) temp_r4->unk3A, (s32) temp_r4->unk3E));
+// }
+
 
 void fn_8019CFA4(HSD_GObj* gobj)
 {
@@ -149,23 +314,48 @@ void fn_8019CFA4(HSD_GObj* gobj)
     HSD_JObj* jobj;
 
     data = GetTmData();
-    jobj = GET_JOBJ(gobj);
+    /// @todo is there a different inline here? seems cursed
+    jobj = HSD_JObjGetNext(HSD_JObjGetNext(HSD_JObjGetChild(GET_JOBJ(gobj))));
+    // jobj = GET_JOBJ(gobj);
 
-    jobj = HSD_JObjGetChild(jobj);
+    // jobj = HSD_JObjGetChild(jobj);
+    // jobj = HSD_JObjGetNext(jobj);
+
+    // if (jobj == NULL) {
+    //     jobj = NULL;
+    // } else {
+    //     jobj = jobj->next;
+    // }
+
+    fn_8019044C(jobj, data->x2E);
     jobj = HSD_JObjGetNext(jobj);
-
-    if (jobj == NULL) {
-        jobj = NULL;
-    } else {
-        jobj = jobj->next;
-    }
-
-    fn_8019044C(jobj, data->pad_x2C[0x2]);
-    jobj = HSD_JObjGetNext(jobj);
-    fn_8019044C(jobj, data->pad_x2C[0x4]);
+    fn_8019044C(jobj, data->x30);
 }
 
-/// #fn_8019D074
+void fn_8019D074(HSD_GObj* gobj)
+{
+    s32 idx;
+    f32 var_f1;
+    TmData* tmd;
+    HSD_JObj* jobj;
+
+    tmd = gm_8018F634();
+    idx = fn_8018F62C(gobj);
+    jobj = GET_JOBJ(gobj);
+    if (HSD_PadMasterStatus[(u8) idx].err != 0) {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        return;
+    }
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    if ((s32) tmd->x30 == 4) {
+        var_f1 = (13.0f * idx) + -19.5f;
+    } else if ((s32) tmd->x30 == 3) {
+        var_f1 = 6.5f + ((13.0f * idx) - 19.5f);
+    } else {
+        var_f1 = 6.5f + ((13.0f * (2.0f * idx)) - 19.5f);
+    }
+    fn_8018FDC4(jobj, var_f1, 666.0f, 666.0f);
+}
 
 /// #fn_8019D1BC
 
@@ -183,7 +373,24 @@ void gm_8019EE54_OnLeave(void* arg0)
     lbArchive_80016EFC(lbl_804D668C);
 }
 
-/// #fn_8019EE80
+void fn_8019EE80(TmVsData* arg0)
+{
+    struct GameCache* game_cache;
+    s32 i;
+
+    game_cache = &lbDvd_8001822C()->game_cache;
+    for (i = 0; i < gm_8018F634()->x30; i++)
+    {
+        game_cache->entries[i].char_id = arg0->char_id[i];
+        game_cache->entries[i].color = arg0->color[i];
+    }
+
+    if (!fn_80196594(gm_8018F634())) {
+        game_cache->stage_id = arg0->stage_id;
+    }
+
+    lbDvd_80018254();
+}
 
 void fn_8019EF08(TmVsData* arg0)
 {

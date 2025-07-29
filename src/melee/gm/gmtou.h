@@ -8,12 +8,12 @@
 /* 19B8C4 */ void gm_8019B8C4_OnEnter(void*);
 /* 19B9C8 */ void gm_8019B9C8_OnLeave(void*);
 /* 19BA04 */ void fn_8019BA04(void);
-/* 19BA08 */ void fn_8019BA08(s32, HSD_JObj*);
+/* 19BA08 */ void fn_8019BA08(u8, HSD_JObj*);
 /* 19BF18 */ void fn_8019BF18(HSD_GObj*);
 /* 19BF8C */ void fn_8019BF8C(HSD_GObj*);
 /* 19C048 */ void fn_8019C048(HSD_GObj*);
 /* 19C3EC */ void fn_8019C3EC(HSD_GObj*);
-/* 19C570 */ void fn_8019C570(HSD_GObj*);
+/* 19C570 */ void fn_8019C570(HSD_GObj*); ///< updates visibility of char icons on the "press start" screen
 /* 19C6AC */ void fn_8019C6AC(HSD_GObj*);
 /* 19C744 */ void fn_8019C744(HSD_GObj*);
 /* 19CA38 */ void fn_8019CA38(HSD_GObj*);
@@ -28,7 +28,7 @@
 /* 19E634 */ void gm_8019E634(void);
 /* 19ECAC */ void gm_8019ECAC_OnEnter(void*);
 /* 19EE54 */ void gm_8019EE54_OnLeave(void*);
-/* 19EE80 */ void fn_8019EE80(UNK_T);
+/* 19EE80 */ void fn_8019EE80(TmVsData*);
 /* 19EF08 */ void fn_8019EF08(TmVsData*);
 
 #endif

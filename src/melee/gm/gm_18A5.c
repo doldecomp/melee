@@ -1,3 +1,4 @@
+#include "ft/forward.h"
 #include "gm_18A5.h"
 
 #include "gm_18A5.static.h"
@@ -120,9 +121,12 @@ char* fn_8018F5F0(void)
 }
 #pragma pop
 
-UNK_T fn_8018F62C(HSD_GObj* gobj)
+/// ???
+/// tournament uses the user data as just an int
+/// it controls various menu jobj states ie animation state, visibility, etc
+u32 fn_8018F62C(HSD_GObj* gobj)
 {
-    return gobj->user_data;
+    return (u32)gobj->user_data;
 }
 
 TmData* gm_8018F634(void)
@@ -165,7 +169,7 @@ int fn_8018F6DC(int arg0)
     return arg0;
 }
 
-int fn_8018F6FC(int arg0)
+CharacterKind fn_8018F6FC(CSSIconHud arg0)
 {
     if (arg0 >= 0x13) {
         if (arg0 == 0x1D) {
@@ -173,7 +177,7 @@ int fn_8018F6FC(int arg0)
         }
         return arg0 + 1;
     }
-    return arg0;
+    return (CharacterKind)arg0;
 }
 
 float fn_8018F71C(int arg0, int arg1)
