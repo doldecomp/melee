@@ -147,8 +147,8 @@ static int __SITransfer(long chan, void * output, unsigned long outputBytes, voi
     for (i = 0; i < rLen; i++) {
         __SIRegs[i+0x20] = ((u32*)output)[i];
     }
-    
-    comcsr.val = 0;
+
+    comcsr.val = __SIRegs[SI_COMCSR_IDX];
     comcsr.f.tcint = 1;
     comcsr.f.tcintmsk = callback ? 1 : 0;
     comcsr.f.outlngth = outputBytes == 0x80 ? 0 : outputBytes;
@@ -174,8 +174,24 @@ unsigned long SISync() {
     return sr;
 }
 
-unsigned long SIGetStatus() {
-    return __SIRegs[SI_STATUS_IDX];
+static u64 TypeTime[4];
+
+static u32 Type[4] = { 8, 8, 8, 8 };
+
+unsigned long SIGetStatus(int arg0) {
+    int enabled;
+    u32 status;
+
+    enabled = OSDisableInterrupts();
+    status = __SIRegs[SI_STATUS_IDX];
+    status >>= ((3 - arg0) * 8);
+    if (status & 8) {
+        if (!(Type[arg0] & 0x80)) {
+            Type[arg0] = 8;
+        }
+    }
+    OSRestoreInterrupts(enabled);
+    return status;
 }
 
 void SISetCommand(long chan, unsigned long command) {
@@ -218,15 +234,14 @@ unsigned long SIEnablePolling(unsigned long poll) {
     if (poll == 0) {
         return Si.poll;
     }
-    
+
     enabled = OSDisableInterrupts();
-    __SIRegs[0x30/4] = 0;
     poll = poll >> 24;
     en = poll & 0xF0;
     ASSERTLINE(0x202, en);
     poll &= ((en >> 4) | 0x03FFFFF0);
     poll &= 0xFC0000FF;
-    
+
     Si.poll &= ~(en >> 4);
     Si.poll |= poll;
     poll = Si.poll;
