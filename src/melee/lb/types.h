@@ -75,19 +75,14 @@ struct HitCapsule {
     /* +42:5 */ u8 x42_b5 : 1;
     /* +42:6 */ u8 x42_b6 : 1;
     /* +42:7 */ u8 x42_b7 : 1;
-    /* +43 */ union {
-        /* +43 */ u8 x43;
-        struct {
-            /* +43:0 */ u8 x43_b0 : 1;
-            /* +43:1 */ u8 x43_b1 : 1;
-            /* +43:2 */ u8 x43_b2 : 1;
-            /* +43:3 */ u8 x43_b3 : 1;
-            /* +43:4 */ u8 x43_b4 : 1;
-            /* +43:5 */ u8 x43_b5 : 1;
-            /* +43:6 */ u8 x43_b6 : 1;
-            /* +43:7 */ u8 x43_b7 : 1;
-        };
-    };
+    /* +43:0 */ u8 x43_b0 : 1;
+    /* +43:1 */ u8 x43_b1 : 1;
+    /* +43:2 */ u8 x43_b2 : 1;
+    /* +43:3 */ u8 x43_b3 : 1;
+    /* +43:4 */ u8 x43_b4 : 1;
+    /* +43:5 */ u8 x43_b5 : 1;
+    /* +43:6 */ u8 x43_b6 : 1;
+    /* +43:7 */ u8 x43_b7 : 1;
     /* +44 */ u8 x44; // victims_1 count
     /* +45 */ u8 x45; // victims_2 count
     /* +46 */ u8 x46[0x48 - 0x46];
@@ -169,16 +164,11 @@ struct lbRefract_CallbackData {
 };
 
 typedef struct _ECBFlagStruct {
-    union {
-        struct {
-            u8 b0 : 1;
-            u8 b1234 : 4;
-            u8 b5 : 1;
-            u8 b6 : 1;
-            u8 b7 : 1;
-        };
-        u8 raw;
-    };
+    u8 b0 : 1;
+    u8 b1234 : 4;
+    u8 b5 : 1;
+    u8 b6 : 1;
+    u8 b7 : 1;
 } ECBFlagStruct;
 
 typedef struct SurfaceData {
@@ -239,8 +229,6 @@ struct CollData {
             /* fp+800 */ float x110_f32;
             /* fp+804 */ float x114_f32;
             /* fp+808 */ float x118_f32;
-            /* fp+80C */ float x11C_f32;
-            /* fp+810 */ float x120_f32;
         };
     };
     /* fp+814 */ float x124;
