@@ -1,5 +1,7 @@
 #include "grlast.h"
 
+#include "baselib/psstructs.h"
+
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -7,7 +9,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grlib.h>
@@ -427,13 +429,13 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     if (gp->u.last.xC4 > grLast_804DBB94) {
         float randf;
         gp->u.last.xC4 = grLast_804DBB94;
-        gp->u.last.xCC = -fabs_inline(gp->u.last.xCC);
+        gp->u.last.xCC = -ABS(gp->u.last.xCC);
         randf = HSD_Randf();
         gp->u.last.xD4 = grLast_804DBB80 * -randf - grLast_804DBB7C;
     } else if (gp->u.last.xC4 < grLast_804DBB98) {
         float randf;
         gp->u.last.xC4 = grLast_804DBB98;
-        gp->u.last.xCC = fabs_inline(gp->u.last.xCC);
+        gp->u.last.xCC = ABS(gp->u.last.xCC);
         gp->u.last.xD4 = grLast_804DBB80 * HSD_Randf() + grLast_804DBB7C;
     }
     HSD_JObjSetRotationX(jobj, gp->u.last.xC4 * gp->u.last.xDC);
@@ -441,16 +443,16 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     if (gp->u.last.xC8 > grLast_804DBB9C) {
         float randf;
         gp->u.last.xC8 = grLast_804DBB9C;
-        gp->u.last.xD0 = -fabs_inline(gp->u.last.xD0);
+        gp->u.last.xD0 = -ABS(gp->u.last.xD0);
         randf = HSD_Randf();
         gp->u.last.xD8 = grLast_804DBB80 * -randf - grLast_804DBB7C;
     } else if (gp->u.last.xC8 < grLast_804DBBA0) {
         gp->u.last.xC8 = grLast_804DBBA0;
-        gp->u.last.xD0 = fabs_inline(gp->u.last.xD0);
+        gp->u.last.xD0 = ABS(gp->u.last.xD0);
         gp->u.last.xD8 = grLast_804DBB80 * HSD_Randf() + grLast_804DBB7C;
     }
     HSD_JObjSetRotationY(jobj, gp->u.last.xC8 * gp->u.last.xDC);
-    if (gp->u.last.xE0 != NULL && gp->u.last.xE0->x54 != NULL) {
+    if (gp->u.last.xE0 != NULL && gp->u.last.xE0->appsrt != NULL) {
         sp20 = grLast_803B848C;
         sp14 = grLast_803B8498;
 
@@ -463,11 +465,11 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
         lbVector_Sub(&sp14, &sp38);
         lbVector_Normalize(&sp14);
         lbVector_EulerAnglesFromPartialONB(&sp2C, &sp14, &sp20);
-        gp->u.last.xE0->x54->x8 = sp38;
-        gp->u.last.xE0->x54->x14.x = sp2C.x;
-        gp->u.last.xE0->x54->x14.y = sp2C.y;
-        gp->u.last.xE0->x54->x14.z = sp2C.z;
-        gp->u.last.xE0->x54->x30 = 0;
+        gp->u.last.xE0->appsrt->translate = sp38;
+        gp->u.last.xE0->appsrt->rot.x = sp2C.x;
+        gp->u.last.xE0->appsrt->rot.y = sp2C.y;
+        gp->u.last.xE0->appsrt->rot.z = sp2C.z;
+        gp->u.last.xE0->appsrt->status = 0;
     }
 }
 

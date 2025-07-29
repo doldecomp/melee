@@ -45,7 +45,7 @@ typedef enum cmd_var_idx {
 void on21EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fabs_inline(fp->input.lstick.x) >= p_ftCommonData->x3C &&
+    if (ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
         fp->x673 < p_ftCommonData->x40 + p_ftCommonData->x44)
     {
         fp->x2070.x2072_b4 = true;
@@ -100,12 +100,12 @@ bool ftLk_SpecialS_Is2071b0_1to13(HSD_GObj* gobj)
     }
 }
 
-void ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj)
+bool ftLk_SpecialS_RemoveBoomerang0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.lk.used_boomerang = false;
     fp->fv.lk.boomerang_gobj = NULL;
-    ftLk_Init_BoomerangExists(gobj);
+    return ftLk_Init_BoomerangExists(gobj);
 }
 
 void ftLk_SpecialS_RemoveBoomerang1(HSD_GObj* gobj)
@@ -132,7 +132,7 @@ float calcAnglePos(HSD_GObj* gobj, Vec3* pos, float dist)
     ftLk_DatAttrs* da = fp->dat_attrs;
     float lstick_y = fp->input.lstick.y;
     float da_x18_mul_x1C = da->x18 * da->x1C;
-    if (fabs_inline(lstick_y) > da->x14) {
+    if (ABS(lstick_y) > da->x14) {
         float lstick_x = fp->input.lstick.x;
         if (lstick_x < 0) {
             lstick_x = -lstick_x;

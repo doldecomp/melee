@@ -18,7 +18,7 @@
 #include "ft/ftparts.h"
 #include "ftGameWatch/ftGw_Init.h"
 #include "ftKirby/ftKb_Init.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -501,7 +501,7 @@ bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x2229_b3 && !fp->x2220_flag.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_b7) {
         *x = fp->x2188;
     }
 
@@ -513,7 +513,7 @@ bool ftLib_80086A8C(HSD_GObj* gobj)
     HSD_GObj* camera_gobj;
 
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x2229_b3 && !fp->x2220_flag.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_b7) {
         camera_gobj = Camera_80030A50();
         if (camera_gobj != NULL) {
             HSD_CObj* temp_r30 = GET_COBJ(camera_gobj);
@@ -560,11 +560,11 @@ void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
     *v = cam->x1C;
 }
 
-void ftLib_80086BB4(HSD_GObj* gobj)
+bool ftLib_80086BB4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CameraBox* cam = fp->x890_cameraBox;
-    Camera_80031154(&cam->x10);
+    return Camera_80031154(&cam->x10);
 }
 
 u8 ftLib_80086BE0(HSD_GObj* gobj)
@@ -654,7 +654,7 @@ bool ftLib_80086ED0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221E_b0 || fp->x221E_b2 ||
         Player_GetMoreFlagsBit4(fp->player_id) || fp->x2228_b2 ||
-        fp->x2229_b3 || fp->x2220_flag.b7)
+        fp->x2229_b3 || fp->x2220_b7)
     {
         return false;
     }
@@ -955,27 +955,29 @@ void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
     pl_8003E4A4(fp->player_id, fp->x221F_b4, arg1, arg2);
 }
 
-void ftLib_80087508(s8 arg0, u8 arg1)
+void ftLib_80087508(s8 ft_kind, u8 arg1)
+// void ftLib_80087508(FighterKind ft_kind, u8 arg1)
 {
-    ftData_8008572C(arg0);
-    efAsync_8006737C(ftData_UnkBytePerCharacter[arg0]);
-    ftData_80085820(arg0, arg1);
-    ftData_80085A14(arg0);
-    ftData_800857E0(arg0);
+    ftData_8008572C(ft_kind);
+    efAsync_8006737C(ftData_UnkBytePerCharacter[ft_kind]);
+    ftData_80085820(ft_kind, arg1);
+    ftData_80085A14(ft_kind);
+    ftData_800857E0(ft_kind);
 }
 
-void ftLib_80087574(s8 arg)
+void ftLib_80087574(s8 ft_kind)
+// void ftLib_80087574(FighterKind ft_kind)
 {
     u8 i;
-    ftData_8008572C(arg);
-    efAsync_8006737C(ftData_UnkBytePerCharacter[arg]);
+    ftData_8008572C(ft_kind);
+    efAsync_8006737C(ftData_UnkBytePerCharacter[ft_kind]);
 
-    for (i = 0; i < CostumeListsForeachCharacter[arg].numCostumes; i++) {
-        ftData_80085820(arg, i);
+    for (i = 0; i < CostumeListsForeachCharacter[ft_kind].numCostumes; i++) {
+        ftData_80085820(ft_kind, i);
     }
 
-    ftData_80085A14(arg);
-    ftData_800857E0(arg);
+    ftData_80085A14(ft_kind);
+    ftData_800857E0(ft_kind);
 }
 
 void ftLib_80087610(u8 arg0)

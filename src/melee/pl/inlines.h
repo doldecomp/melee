@@ -1,7 +1,7 @@
 #ifndef MELEE_PL_INLINES_H
 #define MELEE_PL_INLINES_H
 
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_16AE.h>
 #include <melee/it/it_26B1.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonusinline.h>

@@ -190,132 +190,64 @@ bool ftCo_800952DC(ftCo_GObj* gobj)
 }
 
 /// @todo A lot of shared code with #ftCo_80094EA4.
-bool ftCo_80095328(HSD_GObj* arg0, bool* arg1)
+bool ftCo_80095328(ftCo_GObj* gobj, bool* arg1)
 {
-    HSD_GObj* temp_r3_2;
-    float temp_f0;
-    float var_f1;
-    float var_f28;
-    float var_f29;
-    float var_f2;
-    float var_f2_2;
-    float var_f30;
+    float angle;
     float var_f31;
-    int var_r0;
-    int var_r0_2;
-    int var_r0_3;
-    int var_r0_4;
-    int var_r0_5;
-    int var_r4;
-    u8 temp_r5;
-    void* temp_r3;
+    float var_f30;
+    float var_f29;
+    float var_f28;
+    int msid;
+    Fighter* fp;
 
-    temp_r3 = arg0->user_data;
-    if (((HSD_GObj*) M2C_FIELD(temp_r3, HSD_GObj**, 0x1974) != NULL) &&
-        (ftCo_800DF50C(temp_r3) != 0))
-    {
+    fp = GET_FIGHTER(gobj);
+    if (fp->item_gobj != NULL && ftCo_800DF50C(fp)) {
+        var_f31 = fp->input.cstick.x;
+        var_f28 = fp->input.cstick.y;
         var_f29 = 0.0f;
-        var_f31 = M2C_FIELD(temp_r3, float*, 0x638);
         var_f30 = 0.0f;
-        var_f28 = M2C_FIELD(temp_r3, float*, 0x63C);
-        var_f1 = ftCo_GetCStickAngle((Fighter*) temp_r3);
-        goto block_12;
+        angle = ftCo_GetCStickAngle(fp);
+    } else if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
+        var_f31 = fp->input.lstick.x;
+        var_f28 = fp->input.lstick.y;
+        var_f30 = fp->x673;
+        var_f29 = fp->x674;
+        angle = ftCo_GetLStickAngle(fp);
+    } else {
+        return false;
     }
-    temp_r3_2 = M2C_FIELD(temp_r3, HSD_GObj**, 0x1974);
-    if (temp_r3_2 != NULL) {
-        if ((M2C_FIELD(temp_r3, int*, 0x668) & 0x100) &&
-            ((M2C_FIELD(temp_r3, int*, 0x65C) & 0x80000000) ||
-             (it_8026B30C(temp_r3_2) == 0)))
+
+    if (ABS(var_f31) < p_ftCommonData->xDC &&
+        ABS(var_f28) < p_ftCommonData->xE0)
+    {
+        if (it_8026B30C(fp->item_gobj) == 0 &&
+            !(fp->input.held_inputs & HSD_PAD_LR))
         {
-            var_r0 = 1;
+            ftCo_800957F4(gobj, 0x64);
+            if (arg1 != NULL) {
+                *arg1 = true;
+            }
+            return true;
         } else {
-            var_r0 = 0;
+            ftCo_80095744(gobj, arg1);
+            fp->x2224_b1 = true;
+            return true;
         }
-        if (var_r0 != 0) {
-            temp_r5 = M2C_FIELD(temp_r3, u8*, 0x673);
-            var_f31 = M2C_FIELD(temp_r3, float*, 0x620);
-            var_f28 = M2C_FIELD(temp_r3, float*, 0x624);
-            var_f30 = (float) temp_r5;
-            var_f29 = (float) M2C_FIELD(temp_r3, u8*, 0x674);
-            var_f1 = ftCo_GetLStickAngle((Fighter*) temp_r3);
-        block_12:
-            if (var_f31 < 0.0f) {
-                var_f2 = -var_f31;
-            } else {
-                var_f2 = var_f31;
-            }
-            if (var_f2 < p_ftCommonData->xDC) {
-                if (var_f28 < 0.0f) {
-                    var_f2_2 = -var_f28;
-                } else {
-                    var_f2_2 = var_f28;
-                }
-                if (var_f2_2 < p_ftCommonData->xE0) {
-                    if ((it_8026B30C(M2C_FIELD(temp_r3, HSD_GObj**, 0x1974)) ==
-                         0) &&
-                        !(M2C_FIELD(temp_r3, int*, 0x65C) & 0x80000000))
-                    {
-                        ftCo_800957F4(arg0, 0x64);
-                        if ((u32) arg1 != 0U) {
-                            *arg1 = 1;
-                        }
-                        return 1;
-                    }
-                    ftCo_80095744(arg0, (int*) arg1);
-                    M2C_FIELD(temp_r3, u8*, 0x2224) =
-                        (u8) (M2C_FIELD(temp_r3, u8*, 0x2224) | 0x40);
-                    return 1;
-                }
-                goto block_26;
-            }
-        block_26:
-            temp_f0 = p_ftCommonData->x20;
-            if (var_f1 > temp_f0) {
-                if (var_f29 < (float) M2C_FIELD(p_ftCommonData, int*, 0x3FC)) {
-                    var_r0_2 = 0x72;
-                } else {
-                    var_r0_2 = 0x66;
-                }
-                var_r4 = var_r0_2;
-            } else if (var_f1 < -temp_f0) {
-                if (var_f29 < (float) M2C_FIELD(p_ftCommonData, int*, 0x3FC)) {
-                    var_r0_3 = 0x73;
-                } else {
-                    var_r0_3 = 0x67;
-                }
-                var_r4 = var_r0_3;
-            } else {
-                M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-                if ((var_f31 * M2C_FIELD(temp_r3, float*, 0x2C)) == 0.0f) {
-                    if (var_f30 <
-                        (float) M2C_FIELD(p_ftCommonData, int*, 0x3FC))
-                    {
-                        var_r0_4 = 0x70;
-                    } else {
-                        var_r0_4 = 0x64;
-                    }
-                    var_r4 = var_r0_4;
-                } else {
-                    if (var_f30 <
-                        (float) M2C_FIELD(p_ftCommonData, int*, 0x3FC))
-                    {
-                        var_r0_5 = 0x71;
-                    } else {
-                        var_r0_5 = 0x65;
-                    }
-                    var_r4 = var_r0_5;
-                }
-            }
-            ftCo_800957F4(arg0, var_r4);
-            if ((u32) arg1 != 0U) {
-                *arg1 = 1;
-            }
-            return 1;
-        }
-        goto block_11;
     }
-block_11:
-    return 0;
+    if (angle > p_ftCommonData->x20) {
+        msid = var_f29 < p_ftCommonData->x3FC ? 0x72 : 0x66;
+    } else if (angle < -p_ftCommonData->x20) {
+        msid = var_f29 < p_ftCommonData->x3FC ? 0x73 : 0x67;
+    } else if (var_f31 * fp->facing_dir >= 0.0F) {
+        msid = var_f30 < p_ftCommonData->x3FC ? 0x70 : 0x64;
+    } else {
+        msid = var_f30 < p_ftCommonData->x3FC ? 0x71 : 0x65;
+    }
+    ftCo_800957F4(gobj, msid);
+    if (arg1 != NULL) {
+        *arg1 = true;
+    }
+    return true;
 }
 
 bool ftCo_8009563C(ftCo_GObj* gobj)
@@ -337,7 +269,7 @@ bool ftCo_8009563C(ftCo_GObj* gobj)
 
 static void ftCo_80095700(ftCo_GObj* gobj, enum_t arg1)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
     switch (arg1) {
     case 95:
     case 101:
@@ -390,8 +322,7 @@ inline float getAnimSpeed(ftCo_GObj* gobj, int msid)
 void ftCo_800957F4(ftCo_GObj* gobj, int msid)
 {
     float anim_spd;
-    ftCo_Fighter* fp = gobj->user_data;
-    PAD_STACK(8);
+    ftCo_Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cmd_vars[0] = 0;
     fp->cmd_vars[1] = 0;
@@ -409,24 +340,17 @@ void ftCo_800957F4(ftCo_GObj* gobj, int msid)
 /// @todo Mostly just an inline of #ftCo_800957F4.
 void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
 {
+    Fighter* temp_r4;
+    Fighter* fp;
     float temp_f2;
-    float var_f31;
-    void* temp_r31;
-    void* temp_r4;
-    temp_r31 = gobj->user_data;
-    M2C_FIELD(temp_r31, int*, 0x2200) = 0;
-    M2C_FIELD(temp_r31, int*, 0x2204) = 0;
-    M2C_FIELD(temp_r31, int*, 0x2210) = 0;
-    var_f31 = 1.0f;
-    PAD_STACK(16);
 
-    if (msid >= 0x6C) {
-        var_f31 = 1.0f * p_ftCommonData->x400;
-    }
-    temp_r4 = gobj->user_data;
-    temp_f2 =
-        var_f31 *
-        (1.0f / it_8026B334(M2C_FIELD(gobj->user_data, HSD_GObj**, 0x1974)));
+    fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->throw_flags = 0;
+
+    temp_f2 = getAnimSpeed(gobj, msid);
+    temp_r4 = GET_FIGHTER(gobj);
     switch (msid) {
     case 0x5F:
     case 0x65:
@@ -434,92 +358,73 @@ void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
     case 0x6D:
     case 0x71:
     case 0x75:
-        M2C_FIELD(temp_r4, float*, 0x2340) =
-            (float) -M2C_FIELD(temp_r4, float*, 0x2C);
+        temp_r4->mv.co.itemthrow.facing_dir = -temp_r4->facing_dir;
         break;
     default:
-        M2C_FIELD(temp_r4, float*, 0x2340) =
-            (float) M2C_FIELD(temp_r4, float*, 0x2C);
+        temp_r4->mv.co.itemthrow.facing_dir = temp_r4->facing_dir;
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0U, 0.0f, temp_f2, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, temp_f2, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
-    M2C_FIELD(temp_r31, void (**)(HSD_GObj*), 0x21BC) = ftCo_80095EFC;
-    M2C_FIELD(temp_r31, void (**)(HSD_GObj*), 0x21DC) = ftCo_800974C4;
-    if (((u8) M2C_FIELD(temp_r31, u8*, 0x2222) >> 7U) & 1) {
-        M2C_FIELD(temp_r31, void (**)(HSD_GObj*), 0x21A4) = ftCo_800961D0;
-        M2C_FIELD(temp_r31, void (**)(HSD_GObj*), 0x21A8) = ftCo_80096498;
+
+    fp->accessory4_cb = ftCo_80095EFC;
+    fp->take_dmg_cb = ftCo_800974C4;
+    if (fp->x2222_b0) {
+        fp->phys_cb = ftCo_800961D0;
+        fp->coll_cb = ftCo_80096498;
     }
     ftCo_80095EFC(gobj);
 }
 
 void ftCo_80095A30(HSD_GObj* gobj)
 {
-    int sp2C;
-    int sp28;
-    float temp_f4;
-    float var_f1;
+    Fighter* fp = GET_FIGHTER(gobj);
     float var_f1_2;
     float var_f1_3;
     int var_r0;
     int var_r0_2;
     int var_r0_3;
     int var_r29;
-    u8 temp_r3_2;
-    void* temp_r3;
-    temp_r3 = gobj->user_data;
-    var_f1 = M2C_FIELD(temp_r3, float*, 0x620);
+    float var_f1;
+
+    PAD_STACK(0x8);
+
+    var_f1 = fp->input.lstick.x;
     if (var_f1 < 0.0f) {
         var_f1 = -var_f1;
     }
-    M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-    if ((var_f1 == p_ftCommonData->x3C) &&
-        ((float) M2C_FIELD(temp_r3, u8*, 0x673) <
-         ((float) p_ftCommonData->x40 + p_ftCommonData->x44)))
+    if (var_f1 >= p_ftCommonData->x3C &&
+        fp->x673 < p_ftCommonData->x40 + p_ftCommonData->x44)
     {
-        M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-        if ((M2C_FIELD(temp_r3, float*, 0x620) *
-             M2C_FIELD(temp_r3, float*, 0x2C)) == 0.0f)
-        {
+        if (fp->input.lstick.x * fp->facing_dir >= 0.0f) {
             var_r0 = 0x6C;
         } else {
             var_r0 = 0x6D;
         }
         var_r29 = var_r0;
     } else {
-        temp_f4 = M2C_FIELD(temp_r3, float*, 0x624);
-        M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-        if ((temp_f4 == p_ftCommonData->xCC) &&
-            (temp_r3_2 = M2C_FIELD(temp_r3, u8*, 0x674),
-             sp2C = (int) temp_r3_2, sp28 = 0x43300000,
-             (((float) temp_r3_2 < (p_ftCommonData->xD0 +
-                                    M2C_FIELD(temp_r3, float*, 0x148))) != 0)))
+        if (fp->input.lstick.y >= p_ftCommonData->xCC &&
+            fp->x674 < p_ftCommonData->xD0 + fp->co_attrs.jump_startup_time)
         {
             var_r29 = 0x6E;
         } else {
-            M2C_ERROR(/* unknown instruction : cror eq, lt, eq */);
-            if ((temp_f4 == p_ftCommonData->xD4) &&
-                ((float) M2C_FIELD(temp_r3, u8*, 0x674) < p_ftCommonData->xD8))
+            if (fp->input.lstick.y <= p_ftCommonData->xD4 &&
+                fp->x674 < p_ftCommonData->xD8)
             {
                 var_r29 = 0x6F;
             } else {
-                var_f1_2 = M2C_FIELD(temp_r3, float*, 0x620);
+                var_f1_2 = fp->input.lstick.x;
                 if (var_f1_2 < 0.0f) {
                     var_f1_2 = -var_f1_2;
                 }
-                M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-                if (var_f1_2 == p_ftCommonData->x98) {
-                    if (ftCo_GetLStickAngle((Fighter*) temp_r3) < 0.0f) {
-                        var_f1_3 = -ftCo_GetLStickAngle((Fighter*) temp_r3);
+                if (var_f1_2 >= p_ftCommonData->x98) {
+                    if (ftCo_GetLStickAngle(fp) < 0.0f) {
+                        var_f1_3 = -ftCo_GetLStickAngle(fp);
                     } else {
-                        var_f1_3 = ftCo_GetLStickAngle((Fighter*) temp_r3);
+                        var_f1_3 = ftCo_GetLStickAngle(fp);
                     }
-                    M2C_ERROR(/* unknown instruction : cror eq, lt, eq */);
-                    if (var_f1_3 == p_ftCommonData->x20) {
-                        M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-                        if ((M2C_FIELD(temp_r3, float*, 0x620) *
-                             M2C_FIELD(temp_r3, float*, 0x2C)) == 0.0f)
-                        {
+                    if (var_f1_3 <= p_ftCommonData->x20) {
+                        if (fp->input.lstick.x * fp->facing_dir >= 0.0f) {
                             var_r0_2 = 0x5E;
                         } else {
                             var_r0_2 = 0x5F;
@@ -530,25 +435,18 @@ void ftCo_80095A30(HSD_GObj* gobj)
                     }
                 } else {
                 block_25:
-                    M2C_ERROR(/* unknown instruction : cror eq, gt, eq */);
-                    if ((M2C_FIELD(temp_r3, float*, 0x624) ==
-                         p_ftCommonData->attackhi3_stick_threshold_y) &&
-                        (ftCo_GetLStickAngle((Fighter*) temp_r3) >
-                         p_ftCommonData->x20))
+                    if (fp->input.lstick.y >=
+                            p_ftCommonData->attackhi3_stick_threshold_y &&
+                        ftCo_GetLStickAngle(fp) > p_ftCommonData->x20)
                     {
                         var_r29 = 0x60;
                     } else {
-                        M2C_ERROR(/* unknown instruction : cror eq, lt, eq */);
-                        if ((M2C_FIELD(temp_r3, float*, 0x624) ==
-                             p_ftCommonData->xB0) &&
-                            (ftCo_GetLStickAngle((Fighter*) temp_r3) <
-                             -p_ftCommonData->x20))
+                        if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
+                            ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
                         {
                             var_r29 = 0x61;
                         } else {
-                            if (it_8026B30C(M2C_FIELD(temp_r3, HSD_GObj**,
-                                                      0x1974)) == 0)
-                            {
+                            if (it_8026B30C(fp->item_gobj) == 0) {
                                 var_r0_3 = 0x5E;
                             } else {
                                 var_r0_3 = 0x63;
@@ -610,12 +508,15 @@ void ftCo_80095EFC(ftCo_GObj* gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Item_GObj* item_gobj = fp->item_gobj;
+    Vec3 vec0;
+    Vec3 vec1;
+    Vec3 vec2;
+
+    PAD_STACK(0x8);
 
     if (item_gobj != NULL) {
-        Vec3 vec0;
         lb_8000B1CC(it_80272C90(item_gobj), NULL, &vec0);
         if (ftCheckThrowB3(fp)) {
-            Vec3 vec1;
             ftCo_80095D5C(fp, &vec1);
             {
                 u32 cmd_var1 = fp->cmd_vars[1];
@@ -634,7 +535,6 @@ void ftCo_80095EFC(ftCo_GObj* gobj)
                                   float*, -0x460);
                     float temp_f4 = var_f4 * temp_f2;
                     {
-                        Vec3 vec2;
                         vec2.x = fsm * (fp->mv.co.itemthrow4.x8.x - vec0_x) +
                                  vec0_x;
                         {
@@ -674,9 +574,7 @@ void ftCo_80095EFC(ftCo_GObj* gobj)
                 }
             }
         } else {
-            fp->mv.co.itemthrow4.x8.x = vec0.x;
-            fp->mv.co.itemthrow4.x8.y = vec0.y;
-            fp->mv.co.itemthrow4.x8.z = vec0.z;
+            fp->mv.co.itemthrow4.x8 = vec0;
         }
     }
 }

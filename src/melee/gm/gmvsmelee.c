@@ -1,15 +1,16 @@
-#include "gm/forward.h"
-#include "mn/forward.h"
-#include "gm/gmvsmelee.static.h"
 #include "gmvsmelee.h"
-#include "gm/gm_1B03.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
-#include "lb/lbtime.h"
 
-#include <melee/gm/gm_1601.h>
+#include "gmvsmelee.static.h"
+
+#include <melee/gm/gmresult.h>
+#include <melee/gm/gmresultplayer.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbtime.h>
+
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
@@ -119,14 +120,14 @@ void gm_801A5680(MinorScene* minor_data, VsModeData* vs_data)
 
     css_data = gm_801A4284(minor_data);
     if (css_data->pending_scene_change == 2) {
-        gm_801A42F8(1); // returns to CSS
+        gm_801A42F8(MJ_MENU); // returns to CSS
         return;
     }
     *vs_data = css_data->data;
 
     mask = 0;
     for (i = 0; i < 6; i++) {
-        mask |= lbAudioAx_80026E84(css_data->data.data.players[i].x0);
+        mask |= lbAudioAx_80026E84(css_data->data.data.players[i].c_kind);
     }
     lbAudioAx_80026F2C(0x14);
     lbAudioAx_8002702C(4, mask);
@@ -195,6 +196,7 @@ void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
 {
     MatchExitInfo* match_exit_info = gm_801A4284(minor_data);
     int i;
+    bool result;
 
     for (i = 0; i < 6; i++) {
         if (match_exit_info->match_end.player_standings[i].slot_type == 0) {
@@ -252,7 +254,7 @@ void gm_801A5EC8(MinorScene* minor_data)
 
 void gm_801A5F00(MinorScene* minor_data)
 {
-    struct MatchExitInfo2* exit_info = gm_801A427C(minor_data);
+    struct ResultsMatchInfo* exit_info = gm_801A427C(minor_data);
     gm_80177724(exit_info);
     exit_info->match_end = gm_80479D98.match_end;
 }
@@ -274,8 +276,7 @@ void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, int next_scene)
     gm_801A5258(tmp, match_end);
 
     if (gm_801A52D0(match_end)) {
-        gm_801688AC(match_end);
-        gm_8016247C();
+        gm_8016247C(gm_801688AC(match_end));
         if (minor_data[1].idx != 0xFF) {
             gm_8016279C();
             unk_bool = false;

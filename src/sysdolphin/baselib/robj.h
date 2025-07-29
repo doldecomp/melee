@@ -5,8 +5,6 @@
 
 #include "baselib/forward.h" // IWYU pragma: export
 
-#include "baselib/aobj.h"
-#include "baselib/jobj.h"
 #include "baselib/objalloc.h"
 
 #include <dolphin/mtx.h>

@@ -5,15 +5,21 @@
 
 #include <baselib/forward.h>
 
-#include "gm_1601.h" // IWYU pragma: export
+#include "gm_unsplit.h" // IWYU pragma: export
 #include "platform.h"
 
 #include "gm/types.h"
 
 #include <dolphin/mtx.h>
 
+#define NUM_UNLOCKABLE_CHARACTERS 11
+
 struct lbl_8046B488_t {
-    /* 0x000 */ char pad_0[0x10];
+    /* 0x000 */ char pad_0[0x7];
+    /* 0x007 */ u8 x7;
+    /* 0x008 */ u8 x8;
+    /* 0x009 */ char pad_9[0x0F - 0x9];
+    /* 0x00F */ u8 xF;
     /* 0x010:0 */ u8 unk_10_b0 : 1;
     /* 0x010:1 */ u8 unk_10_b1 : 1;
     /* 0x010:2 */ u8 unk_10_b2 : 1;
@@ -33,12 +39,12 @@ struct fn_80166CBC_arg0_t {
 };
 STATIC_ASSERT(sizeof(struct fn_80166CBC_arg0_t) == 0xA8);
 
-struct lbl_8046DBE8_t {
-    /*  +0 */ char pad_0[0x94];
-    /* +94 */ int x94;
-    /* +98 */ char pad_98[0x5A8 - 0x98];
-};
-STATIC_ASSERT(sizeof(struct lbl_8046DBE8_t) == 0x5A8);
+// struct ResultsData {
+//     /*  +0 */ char pad_0[0x94];
+//     /* +94 */ int x94;
+//     /* +98 */ char pad_98[0x5A8 - 0x98];
+// };
+// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
 
 struct lbl_8046B668_t {
     /* 0x00 */ char pad_0[0x1C];
@@ -52,19 +58,54 @@ struct lbl_80473700_t {
 };
 STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
 
+struct lbl_803B78C8_0x6 {
+    /* 0x0 */ u8 x0;      /* inferred */
+    /* 0x1 */ u8 x1;      /* inferred */
+    /* 0x2 */ char _2[4]; /* maybe part of unk1[5]? */
+};                        /* size = 0x6 */
+
+struct VictoryTheme {
+    s8 character_id;
+    s32 theme_id;
+};
+
+struct ResultAnimEntry {
+    s32 character_id;
+    char* path;
+};
+
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 /* 166CBC */ static u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0,
                                    ssize_t index);
-/* 169364 */ static UNK_T fn_80169364(void);
 /* 1693A8 */ static s32 fn_801693A8(void);
 /* 16A1E4 */ static s32 fn_8016A1E4(void);
-/* 174274 */ static int fn_80174274(void);
-/* 17F294 */ static int fn_8017F294(void);
+
 /* 3B75F8 */ static const struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
 /* 3B7808 */ static const s16 lbl_803B7808[0x3C / 2] = { 0 };
-/* 3B7864 */ extern const U8Vec4 lbl_803B7864[9];
+
+static const u8 lbl_803B7844[] = {
+    0x06, 0x0B, 0x07, 0x19, 0x14, 0x12, 0x11, 0x0E,
+    0x1C, 0x18, 0x08, 0x1A, 0x04, 0x10, 0x17, 0x22,
+    0x20, 0x13, 0x09, 0x21, 0x0D, 0x0F, 0x1F, 0x16,
+    0x15, 0x1E, 0x0A, 0x0C, 0x23, 0x05, 0x1D, 0x1B,
+};
+
+/* 3B7864 */ extern const GXColor lbl_803B7864[9];
 /* 3B7888 */ static const u8 lbl_803B7888[0x1C] = { 0 };
 /* 3B78A4 */ static const u8 lbl_803B78A4[0x24] = { 0 };
+/* 3B78C8 */ static struct lbl_803B78C8_0x6 lbl_803B78C8[NUM_UNLOCKABLE_CHARACTERS] = {
+    { 0, 3, { 4, 0, 1, 0x16 } },
+    { 1, 7, { 2, 0, 1, 0x14 } },
+    { 2, 9, { 3, 0, 1, 0x15 } },
+    { 3, 0xA, { 1, 0, 1, 0x13 } },
+    { 4, 0xF, { 0, 0, 1, 0x12 } },
+    { 5, 0x13, { 8, 0, 1, 0x1A } },
+    { 6, 0x14, { 7, 0, 1, 0x19 } },
+    { 7, 0x15, { 5, 0, 1, 0x17 } },
+    { 8, 0x16, { 0xA, 0, 1, 0x1C } },
+    { 9, 0x17, { 9, 0, 1, 0x1B } },
+    { 0xA, 0x18, { 6, 0, 1, 0x18 } },
+};
 /* 3B7930 */ static Vec2 const lbl_803B7930[0x114 / sizeof(Vec2)] = { 0 };
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
 /* 46B668 */ static struct lbl_8046B668_t lbl_8046B668;
@@ -72,6 +113,5 @@ STATIC_ASSERT(sizeof(struct lbl_80473700_t) == 0x114);
 /* 4D659A */ static s16 lbl_804D659A;
 
 
-#define NUM_UNLOCKABLE_CHARACTERS 11
 
 #endif

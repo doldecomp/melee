@@ -6,7 +6,7 @@
 #include "gm_1A36.h"
 
 #include "db/db.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
 #include "lb/lb_0192.h"
@@ -117,8 +117,7 @@ static void gmMain_8015FDA4(void)
     }
 }
 
-/// @remarks Might not do anything relevant to a port, but should still
-///          understand its purpose before ignoring it.
+/// @remarks Can safely be ignored when building with GCC
 static void init_spr_unk(void)
 {
 #ifdef MWERKS_GEKKO
@@ -134,10 +133,13 @@ static void init_spr_unk(void)
     MTSPR(0x393, 5);
     MTSPR(0x394, 6);
     MTSPR(0x395, 7);
-#else
-    NOT_IMPLEMENTED;
 #endif
 }
+
+#ifdef __GNUC__
+/// stub function auto-called from main to set up EABI environment
+void __eabi(void) {}
+#endif
 
 int main(void)
 {

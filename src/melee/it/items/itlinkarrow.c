@@ -542,7 +542,7 @@ void it_802A90F0(HSD_GObj* gobj)
     item = gobj->user_data;
     attr = item->xC4_article_data->x4_specialAttributes;
     item->xDD4_itemVar.linkarrow.x18 = item->pos;
-    item->x40_vel.y -= fabs_inline(attr->x1C);
+    item->x40_vel.y -= ABS(attr->x1C);
 }
 
 static inline bool it_802A9138_inline(Item_GObj* gobj)
@@ -591,7 +591,7 @@ int it_802A9138(Item_GObj* gobj)
             -atan2f(item->pos.y - item->xDD4_itemVar.linkarrow.x18.y,
                     item->xDD4_itemVar.linkarrow.x18.x - item->pos.x);
     }
-    if (fabs_inline(item->xDD4_itemVar.linkarrow.x94) > attr->x20) {
+    if (ABS(item->xDD4_itemVar.linkarrow.x94) > attr->x20) {
         item->xDD4_itemVar.linkarrow.x94 =
             (item->xDD4_itemVar.linkarrow.x94 < 0.0f) ? -attr->x20 : attr->x20;
     }

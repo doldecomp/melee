@@ -10,7 +10,7 @@
 #include "baselib/random.h"
 #include "baselib/sislib.h"
 #include "cm/camera.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
 #include "gm/gm_1B03.h"
@@ -22,7 +22,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbvector.h"
-#include "mn/mn_2295.h"
+#include "mn/mnmain.h"
 #include "mn/mnname.h"
 #include "pl/player.h"
 #include "ty/toy.h"
@@ -287,7 +287,7 @@ void un_802FD4C8(void)
         lb_80013B14((HSD_CameraDescPerspective*) &nametag_CObjDesc));
     GObj_SetupGXLinkMax(gobj, fn_802FCAC4, 6);
     gobj->gxlink_prios = 0x200;
-    un_804D6D7C = HSD_SisLib_803A611C(2, (u32) gobj, 14, 15, 0, 9, 6, 0);
+    un_804D6D7C = HSD_SisLib_803A611C(2, gobj, 14, 15, 0, 9, 6, 0);
     HSD_SisLib_803A62A0(2, "SdIntro.dat", "SIS_IntroData");
     un_804D6D78 = HSD_SisLib_803A6754(2, un_804D6D7C);
     un_804D6D78->x8 = -10.0;
@@ -648,7 +648,7 @@ void fn_802FF360(void* arg0) {}
 void un_802FF364(int slot)
 {
     int s;
-    struct ifAll_804A0FD8_x18_t* ifAll;
+    Vec3* ifAll;
     struct un_804A1F58_x8_t* thing;
     HSD_GObj* gobj;
     thing = &un_804A1F58[slot].x8;
@@ -668,8 +668,8 @@ void un_802FF364(int slot)
     if (s > 9999) {
         s = 9999;
     }
-    thing->x8 = HSD_SisLib_803A6B98(thing->x4, *(float*) ifAll,
-                                    *(((float*) ifAll) + 1) + 3.2f, "%d", s);
+    thing->x8 =
+        HSD_SisLib_803A6B98(thing->x4, ifAll->x, ifAll->y + 3.2f, "%d", s);
     HSD_SisLib_803A7548(thing->x4, thing->x8, 0.06, 0.06);
     thing->x4->x58 = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
@@ -680,7 +680,7 @@ void un_802FF498(void)
 {
     memzero(un_804A1F58, sizeof(un_804A1F58));
     un_804A1F58->x0 =
-        HSD_SisLib_803A611C(2, (u32) ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
+        HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }
 
 void un_802FF4FC(void)
@@ -751,7 +751,7 @@ void un_802FF7DC(void)
     lbArchive_LoadSymbols(0, 0);
 }
 
-bool un_802FF884(void)
+bool un_802FF884(char* unused)
 {
     return false;
 }
@@ -860,7 +860,7 @@ bool un_802FFC6C(bool update_scene)
         lbAudioAx_800245D4(0x7F);
         lbAudioAx_800245F4(0x7F);
         lbAudioAx_80024614(0x7F);
-        gm_801A42F8(0);
+        gm_801A42F8(MJ_TITLE);
         gm_801A4B60();
     }
     return true;
@@ -1035,7 +1035,7 @@ bool un_80300968(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x8);
+        gm_801A42F8(MJ_HANYU_CSS);
         gm_801A4B60();
     }
 
@@ -1046,7 +1046,7 @@ bool un_803009A4(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x9);
+        gm_801A42F8(MJ_HANYU_SSS);
         gm_801A4B60();
     }
 
@@ -1077,7 +1077,7 @@ bool un_80300BBC(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         un_80311680();
-        gm_801A42F8(0xB);
+        gm_801A42F8(MJ_TOY_GALLERY);
         gm_801A4B60();
     }
 
@@ -1089,7 +1089,7 @@ bool un_80300BF8(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         Trophy_SetUnlockState(0xE6, true);
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         gm_801A4B60();
     }
 
@@ -1101,7 +1101,7 @@ bool un_80300C3C(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         Trophy_SetUnlockState(0xC9, true);
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         gm_801A4B60();
     }
 
@@ -1154,7 +1154,7 @@ bool un_80301328(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x0);
-        gm_801A42F8(0x18);
+        gm_801A42F8(MJ_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1166,7 +1166,7 @@ bool un_8030136C(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x5);
-        gm_801A42F8(0x18);
+        gm_801A42F8(MJ_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1177,7 +1177,7 @@ bool un_803013B0(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x19);
+        gm_801A42F8(MJ_DEBUG_CUTSCENE);
         gm_801A4B60();
     }
 
@@ -1192,7 +1192,7 @@ bool un_80301454(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x28);
+        gm_801A42F8(MJ_BOOT);
         gm_801A4B60();
     }
 
@@ -1258,7 +1258,7 @@ bool un_803015BC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x27);
+        gm_801A42F8(MJ_PROGRESSIVE_SCAN);
         gm_801A4B60();
     }
 
@@ -1312,7 +1312,7 @@ bool un_80301D40(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(0x2A);
+        gm_801A42F8(MJ_FIXED_CAMERA_VS);
         gm_801A4B60();
     }
 

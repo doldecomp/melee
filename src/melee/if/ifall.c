@@ -1,16 +1,34 @@
-#include "if/ifall.static.h"
-#include "ifall.static.h"
-
-#include "if/if_2F72.h"
-#include "if/ifmagnify.h"
-#include "if/ifstatus.h"
-#include "if/ifstock.h"
-#include "if/iftime.h"
-#include "un/un_2FC9.h"
+#include "ifall.h"
 
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <melee/if/if_2F72.h>
+#include <melee/if/ifmagnify.h>
+#include <melee/if/ifstatus.h>
+#include <melee/if/ifstock.h>
+#include <melee/if/iftime.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/sc/types.h>
+#include <melee/un/un_2FC9.h>
+
+static struct ifAll_804A0FD8_t {
+    /* 0x00 */ HSD_GObj* gobj;
+    /* 0x04 */ HSD_GObj* gobj_2;
+    /* 0x08 */ HSD_JObj* x8;
+    /* 0x0C */ Vec3 xC;
+    /* 0x18 */ Vec3 x18[6];
+    /* 0x60 */ Vec3 x60[3];
+    /* 0x84 */ Vec3 x84[2];
+} ifAll_804A0FD8;
+
+static u8 hidden; // HUD hidden bool
 
 void ifAll_802F3394(void)
 {
@@ -39,41 +57,94 @@ HSD_GObj* ifAll_802F3404(void)
     return ifAll_804A0FD8.gobj;
 }
 
-UNK_T ifAll_802F3414(void)
+Vec3* ifAll_802F3414(void)
 {
     return &ifAll_804A0FD8.xC;
 }
 
-struct ifAll_804A0FD8_x18_t* ifAll_802F3424(int idx)
+Vec3* ifAll_802F3424(int idx)
 {
     return &ifAll_804A0FD8.x18[idx];
 }
 
-/// #ifAll_802F343C
+static inline void ifAll_802F343C_inline(int i)
+{
+    ifAll_804A0FD8.x18[i].x *= 0.65F;
+}
+
+void ifAll_802F343C(int arg0)
+{
+    HSD_JObj* jobj;
+    int i;
+    HSD_JObj* spC;
+
+    jobj = ifAll_804A0FD8.x8;
+    switch (arg0) {
+    case 1:
+        lb_80011E24(jobj, &spC, 9, -1);
+        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[0]);
+        break;
+    case 2:
+        for (i = 0; i < arg0; i++) {
+            lb_80011E24(jobj, &spC, i + 11, -1);
+            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+        }
+        break;
+    case 3:
+        for (i = 0; i < arg0; i++) {
+            lb_80011E24(jobj, &spC, i + 8, -1);
+            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+        }
+        break;
+    case 4:
+        for (i = 0; i < arg0; i++) {
+            lb_80011E24(jobj, &spC, i + 2, -1);
+            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+        }
+        break;
+    case 5:
+    case 6:
+        lb_80011E24(jobj, &spC, 6, -1);
+        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[0]);
+        ifAll_802F343C_inline(0);
+
+        lb_80011E24(jobj, &spC, 7, -1);
+        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[5]);
+        ifAll_802F343C_inline(5);
+
+        for (i = 1; i < 5; i++) {
+            lb_80011E24(jobj, &spC, i + 1, -1);
+            lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[i]);
+            ifAll_802F343C_inline(i);
+        }
+        break;
+    }
+}
 
 HSD_Archive** ifAll_802F3690(void)
 {
-    return &ifAll_804D6D5C;
+    static HSD_Archive* archive;
+    return &archive;
 }
 
 void ifAll_HideHUD(void)
 {
-    ifAll_804D6D58 = 1;
+    hidden = true;
 }
 
 void ifAll_ShowHUD(void)
 {
-    ifAll_804D6D58 = 0;
+    hidden = false;
 }
 
-int ifAll_IsHUDHidden(void)
+bool ifAll_IsHUDHidden(void)
 {
-    return ifAll_804D6D58;
+    return hidden;
 }
 
-void fn_802F36B8(HSD_GObj* gobj)
+static void fn_802F36B8(HSD_GObj* gobj, int unused)
 {
-    if ((int) ifAll_804D6D58 == 0) {
+    if (!ifAll_IsHUDHidden()) {
         if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
             HSD_GObj_80390ED0(gobj, 0x7);
             HSD_CObjEndCurrent();
@@ -81,9 +152,89 @@ void fn_802F36B8(HSD_GObj* gobj)
     }
 }
 
-/// #ifAll_802F370C
+static void ifAll_802F370C(SceneDesc* arg0)
+{
+    HSD_JObj* spC;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    int i;
 
-/// #ifAll_802F390C
+    gobj = GObj_Create(0xE, 0xF, 0);
+    jobj = HSD_JObjLoadJoint(arg0->models[0]->joint);
+    ifAll_804A0FD8.x8 = jobj;
+    lb_80011E24(jobj, &spC, 0xD, -1);
+    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.xC);
+
+    lb_80011E24(jobj, &spC, 2, -1);
+    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[0]);
+    lb_80011E24(jobj, &spC, 3, -1);
+    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[1]);
+    lb_80011E24(jobj, &spC, 4, -1);
+    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[2]);
+    lb_80011E24(jobj, &spC, 5, -1);
+    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[3]);
+    lb_80011E24(jobj, &spC, 6, -1);
+    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[4]);
+    lb_80011E24(jobj, &spC, 7, -1);
+    lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x18[5]);
+
+    for (i = 0; i < 3; i++) {
+        lb_80011E24(jobj, &spC, i + 8, -1);
+        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x60[i]);
+    }
+    for (i = 0; i < 2; i++) {
+        lb_80011E24(jobj, &spC, i + 11, -1);
+        lb_8000B1CC(spC, NULL, &ifAll_804A0FD8.x84[i]);
+    }
+    HSD_GObjPLink_80390228(gobj);
+}
+
+void ifAll_802F390C(void)
+{
+    SceneDesc* sp14;
+
+    HSD_LightDesc* lightdesc;
+    HSD_Archive** parchive = ifAll_802F3690();
+
+    PAD_STACK(0xC);
+
+    ifAll_ShowHUD();
+    lbArchive_80016F80(parchive, "IfAll");
+    lbArchive_LoadSections(*parchive, (void**) &sp14, "ScInfDmg_scene_data",
+                           0);
+    ifAll_802F370C(sp14);
+
+    {
+        HSD_CObjDesc* desc = sp14->cameras[0].desc;
+        HSD_GObj* gobj = GObj_Create(0x13, 0x14, 0);
+        HSD_CObj* cobj = lb_80013B14((HSD_CameraDescPerspective*) desc);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+        GObj_SetupGXLinkMax(gobj, fn_802F36B8, 8);
+        gobj->gxlink_prios = 0xD00;
+        ifAll_804A0FD8.gobj = gobj;
+    }
+
+    lightdesc = sp14->lights[0]->desc;
+    {
+        HSD_GObj* gobj = GObj_Create(0xE, 3, 0);
+        HSD_LObj* lobj = HSD_LObjLoadDesc(lightdesc);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0xA, 0);
+        ifAll_804A0FD8.gobj_2 = gobj;
+    }
+
+    ifStatus_802F7134();
+    ifStatus_802F66A4();
+    ifStock_802FAEC4();
+    ifTime_802F480C();
+    if_802F7E24();
+    ifMagnify_802FC870();
+    un_802FE260();
+    un_802FD704();
+    un_802FD4C8();
+    un_802FF1B4();
+    un_802FF498();
+}
 
 void ifAll_802F3A64(void)
 {
@@ -104,7 +255,7 @@ void ifAll_802F3A64(void)
         HSD_GObjPLink_80390228(data->gobj);
     }
 
-    if (data->gobj_2) {
+    if (data->gobj_2 != NULL) {
         HSD_GObjPLink_80390228(data->gobj_2);
     }
 

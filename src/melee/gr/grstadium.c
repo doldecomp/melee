@@ -1,5 +1,6 @@
 /// @todo this file needs to be named "grpstadium.c" for asserts, oops!
 #include "grstadium.h"
+#include "dolphin/gx/GXStruct.h"
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -17,7 +18,7 @@
 #include <sysdolphin/baselib/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/gr/grdisplay.h>
@@ -1190,7 +1191,7 @@ HSD_GObj* grStadium_801D2BEC(void)
     memzero(text, 0x18);
     lb_800121FC(&text->desc, 0xFA, 0xA0, 4, 0x7D2);
     archive = grDatFiles_801C6324();
-    HSD_SisLib_803A611C(1, (u32) gobj, 9, 0xD, 0, 1, 0, 1);
+    HSD_SisLib_803A611C(1, gobj, 9, 0xD, 0, 1, 0, 1);
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrPStadiumData");
     text->x18 = HSD_SisLib_803A5ACC(1, 0, 0.0F, 0.0F, 0.0F, 250.0F, 160.0F);
@@ -1722,7 +1723,7 @@ static const U8Vec4 grPs_803B7F8C[] = {
 
 void grStadium_801D3BBC(Ground_GObj* arg0)
 {
-    U8Vec4 sp28[5];
+    GXColor sp28[5];
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_4;
     HSD_Text* temp_r3_2;
@@ -1792,13 +1793,13 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         temp_r3_3->x34.y = 1.0f;
         temp_r31->x1C->x49 = 1;
     }
-    sp28[1] = grPs_803B7F8C[0];
-    sp28[2] = grPs_803B7F8C[1];
+    sp28[1] = *(GXColor*)&grPs_803B7F8C[0];
+    sp28[2] = *(GXColor*)&grPs_803B7F8C[1];
     var_r28 = 0;
     var_r30_2 = 0;
-    sp28[3] = grPs_803B7F8C[2];
-    sp28[4] = grPs_803B7F8C[3];
-    temp_r29 = sp28[var_r30].x;
+    sp28[3] = *(GXColor*)&grPs_803B7F8C[2];
+    sp28[4] = *(GXColor*)&grPs_803B7F8C[3];
+    temp_r29 = sp28[var_r30].r;
     do {
         if (Player_GetPlayerSlotType(var_r30_2) != 3 &&
             Player_8003219C(var_r30_2) == 0)
@@ -1809,23 +1810,23 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 temp_r26 = gm_8016B168();
                 sp28[0] = gm_80160968(gm_80160854(
                     var_r30_2, Player_GetTeam(var_r30_2), temp_r26, temp_r25));
-                var_f0 = 1.25f * sp28[0].x;
+                var_f0 = 1.25f * sp28[0].r;
                 if (var_f0 > 255.0f) {
                     var_f0 = 255.0f;
                 }
-                sp28[0].x = (s8) var_f0;
-                var_f0_2 = 1.25f * sp28[0].y;
+                sp28[0].r = (s8) var_f0;
+                var_f0_2 = 1.25f * sp28[0].g;
                 if (var_f0_2 > 255.0f) {
                     var_f0_2 = 255.0f;
                 }
-                sp28[0].x = (u8) (s32) var_f0_2;
-                var_f0_3 = 1.25f * sp28[0].z;
+                sp28[0].r = (u8) (s32) var_f0_2;
+                var_f0_3 = 1.25f * sp28[0].b;
                 if (var_f0_3 > 255.0f) {
                     var_f0_3 = 255.0f;
                 }
-                sp28[0].y = (u8) (s32) var_f0_3;
-                sp28[0].z = 0xFF;
-                temp_r31->x1C->x30 = sp28[0];
+                sp28[0].g = (u8) (s32) var_f0_3;
+                sp28[0].b = 0xFF;
+                temp_r31->x1C->x30 = *(U8Vec4*)&sp28[0];
                 temp_r3_5 = gm_80160A60(var_r30_2);
                 if (temp_r3_5 != 0) {
                     HSD_SisLib_803A6B98(temp_r31->x1C, grPs_804DAF58,

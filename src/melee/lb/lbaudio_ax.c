@@ -1,16 +1,70 @@
 #include "lbaudio_ax.static.h"
 
 #include <baselib/axdriver.h>
+#include <baselib/synth.h>
+#include <melee/ft/forward.h>
+#include <melee/gr/stage.h>
+#include <melee/lb/lblanguage.h>
 
-/// #lbAudioAx_8002306C
+extern s8 flags_arr_803BB800[0x62];
 
-/// #lbAudioAx_80023090
+int lbAudioAx_8002305C(int arg0, int arg1)
+{
+    static const int size = ARRAY_SIZE(unk_arr_803BC4A0);
+    if (arg0 >= 0 && arg0 < size) {
+        return unk_arr_803BC4A0[arg0][arg1];
+    }
+    return 0x62;
+}
 
-/// #lbAudioAx_800230C8
+int lbAudioAx_80023090(int idx)
+{
+    if (idx < 0) {
+        return 0;
+    }
+    if (idx >= 0x62) {
+        return 0;
+    }
+    return flags_arr_803BB800[idx];
+}
 
-/// #lbAudioAx_80023130
+int lbAudioAx_800230C8(int i, int* lo, int* hi)
+{
+    if (i < 0) {
+        return 1;
+    }
+    if (i >= 0x37) {
+        return 1;
+    }
+    if (lo != NULL) {
+        *lo = s32_arr_803BB8D4[i][0];
+    }
+    if (hi != NULL) {
+        *hi = s32_arr_803BB8D4[i][1];
+    }
+    return 0;
+}
 
-/// #lbAudioAx_80023220
+int lbAudioAx_80023130(int arg0)
+{
+    int i;
+    if (arg0 >= 0 && arg0 < 0x83D60) {
+        for (i = 0; i < 0x37; i++) {
+            if (s32_arr_803BB8D4[i][0] <= arg0 && arg0 <= s32_arr_803BB8D4[i][1]) {
+                return i;
+            }
+        }
+    }
+    return 0x37;
+}
+
+int lbAudioAx_80023220(int idx)
+{
+    if (idx >= 0 && idx < 0x37) {
+        return s32_arr_803BB5D0[idx][3];
+    }
+    return 0;
+}
 
 /// #fn_80023254
 
@@ -26,7 +80,10 @@ int lbAudioAx_800236B8(int arg0)
 
 /// #lbAudioAx_800236DC
 
-/// #lbAudioAx_80023710
+bool lbAudioAx_80023710(int arg0)
+{
+    return AXDriver_8038D9D8(arg0);
+}
 
 /// #lbAudioAx_80023730
 
@@ -38,9 +95,53 @@ int lbAudioAx_800236B8(int arg0)
 
 /// #lbAudioAx_8002392C
 
-/// #lbAudioAx_80023968
+static inline int* lbAudioAx_80023968_inline(int arg0)
+{
+    if (lbLang_IsSettingUS()) {
+        if (lbLang_IsSavedLanguageUS()) {
+            return lbl_804D6454->x4[arg0];
+        } else {
+            return lbl_804D6454->xC[arg0];
+        }
+    } else {
+        if (lbLang_IsSavedLanguageUS()) {
+            return lbl_804D6454->x8[arg0];
+        } else {
+            return lbl_804D6454->x0[arg0];
+        }
+    }
+}
 
-/// #lbAudioAx_80023A44
+int lbAudioAx_80023968(int arg0)
+{
+    int count = 0;
+    int* var_r4;
+
+    if (arg0 < 0 && arg0 >= 0x1E) {
+        return -1;
+    }
+
+    var_r4 = lbAudioAx_80023968_inline(arg0);
+    while (*var_r4 != 0x83D60) {
+        var_r4++;
+        count++;
+    }
+    return count;
+}
+
+int lbAudioAx_80023A44(int arg0, int arg1)
+{
+    int* var_r3;
+    if (arg0 < 0 && arg0 >= 0x1E) {
+        return 0x83D60;
+    }
+    if (arg1 < 0 && 0x83D60 <= arg1) {
+        return 0x83D60;
+    }
+
+    var_r3 = lbAudioAx_80023968_inline(arg0);
+    return var_r3[arg1];
+}
 
 /// #lbAudioAx_80023B24
 
@@ -108,7 +209,20 @@ int lbAudioAx_80024B94(int arg0, int arg1)
 
 /// #lbAudioAx_80024F08
 
-/// #lbAudioAx_80024F6C
+void lbAudioAx_80024F6C(void)
+{
+    HSD_SynthStreamSetVolume(lbl_804D3880);
+    AXDriver_8038E844(2);
+    AXDriver_8038E844(3);
+    AXDriver_8038E844(4);
+    AXDriver_8038E844(9);
+    if (lbl_804D640C == 0) {
+        AXDriver_8038E844(5);
+        AXDriver_8038E844(6);
+        AXDriver_8038E844(8);
+        AXDriver_8038E844(7);
+    }
+}
 
 void lbAudioAx_80024FDC(void)
 {
@@ -177,11 +291,36 @@ void lbAudioAx_80025098(s32 arg0)
 
 /// #fn_80026C04
 
-/// #fn_80026E58
+bool fn_80026E58(int arg0)
+{
+    if (lbl_80433984[arg0] == 2) {
+        return true;
+    }
+    return false;
+}
 
-/// #lbAudioAx_80026E84
+u64 lbAudioAx_80026E84(int c_kind)
+{
+    if (c_kind < 0 || c_kind >= CHKIND_MAX) {
+        return 0;
+    }
+    return lbl_803BB3C0[c_kind].x8;
+}
 
-/// #lbAudioAx_80026EBC
+u64 lbAudioAx_80026EBC(InternalStageId arg0)
+{
+    const int imax = ARRAY_SIZE(s32_arr_803BB6B0);
+    int id = Stage_8022519C(arg0);
+    int shift;
+
+    if (id < 0 || id >= imax) {
+        return 0;
+    }
+    if ((shift = s32_arr_803BB6B0[id][0]) == 0x37) {
+        return 0;
+    }
+    return 1ULL << shift;
+}
 
 /// #lbAudioAx_80026F2C
 
@@ -197,9 +336,24 @@ void lbAudioAx_80025098(s32 arg0)
 
 /// #lbAudioAx_80027AB0
 
-/// #lbAudioAx_80027DBC
+extern int lbl_804D6418;
+
+void lbAudioAx_80027DBC(void)
+{
+    HSD_AudioSFXKeyOffAll();
+    AXDriver_8038E968();
+    lbl_804D6418 = 0;
+    lbl_803BB300[0] = '\0';
+    lbAudioAx_80024C84();
+    fn_800269AC();
+}
 
 /// #lbAudioAx_80027DF8
+
+void lbAudioAx_8002835C(void)
+{
+    HSD_ObjAllocInit(&lbl_80433710, 0x48, 4);
+}
 
 /// #lbAudioAx_8002835C
 
@@ -211,7 +365,13 @@ void lbAudioAx_80025098(s32 arg0)
 
 /// #lbAudioAx_80028B4C
 
-/// #lbAudioAx_80028B6C
+void lbAudioAx_80028B6C(void)
+{
+    lbl_804D38CC--;
+    if (lbl_804D38CC < 0) {
+        lbl_804D38CC = 0;
+    }
+}
 
 void lbAudioAx_80028B90(void)
 {

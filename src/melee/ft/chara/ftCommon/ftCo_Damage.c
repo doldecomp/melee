@@ -40,7 +40,7 @@
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyLanding.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_26B1.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbvector.h"
@@ -815,7 +815,7 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
     bool ret0 = false;
     ftCo_Fighter* fp = gobj->user_data;
     float facing_dir = 0;
-    if (fp->x2220_flag.b3 || fp->x2220_flag.b4 || !fp->dmg.kb_applied) {
+    if (fp->x2220_b3 || fp->x2220_b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;
     } else if (fp->dmg.x1860_element == 10U) {

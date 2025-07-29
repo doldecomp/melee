@@ -20,7 +20,7 @@
 /* 3922FC */ UNK_RET hsd_803922FC(UNK_PARAMS);
 /* 392474 */ UNK_RET hsd_80392474(UNK_PARAMS);
 /* 392480 */ UNK_RET fn_80392480(UNK_PARAMS);
-/* 392528 */ UNK_RET hsd_80392528(UNK_PARAMS);
+/* 392528 */ void hsd_80392528(Event);
 /* 39254C */ UNK_RET hsd_8039254C(UNK_PARAMS);
 /* 392934 */ UNK_RET fn_80392934(UNK_PARAMS);
 /* 392A08 */ UNK_RET fn_80392A08(UNK_PARAMS);
@@ -97,7 +97,7 @@
 /* 397DFC */ void hsd_80397DFC(u32 arg0);
 /* 397E0C */ UNK_RET baselib_mfspr(UNK_PARAMS);
 /* 3982E4 */ UNK_RET fn_803982E4(UNK_PARAMS);
-/* 398310 */ UNK_RET hsd_80398310(UNK_PARAMS);
+/* 398310 */ HSD_GObj* hsd_80398310(s32, s32, s32, s32);
 /* 3983A4 */ UNK_RET hsd_803983A4(UNK_PARAMS);
 /* 3984F4 */ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank,
                                      u32* ref, int* formBank);
@@ -106,31 +106,31 @@
 /* 3989A0 */ void psInitDataBankRelocate(int* cmdBank, int* texBank,
                                          int* formBank, int* newCmdBank,
                                          int* newTexBank, int* newFormBank);
-/* 398A08 */ UNK_RET hsd_80398A08(UNK_PARAMS);
+/* 398A08 */ void hsd_80398A08(u32);
 /* 398C04 */ UNK_RET hsd_80398C04(UNK_PARAMS);
 /* 398F0C */ UNK_RET hsd_80398F0C(UNK_PARAMS);
 /* 398F8C */ UNK_RET hsd_80398F8C(UNK_PARAMS);
 /* 3991D8 */ UNK_RET hsd_803991D8(UNK_PARAMS);
 /* 39930C */ UNK_RET hsd_8039930C(UNK_PARAMS);
-/* 39CEAC */ UNK_RET hsd_8039CEAC(UNK_PARAMS);
+/* 39CEAC */ void hsd_8039CEAC(u32);
 /* 39CF4C */ UNK_RET hsd_8039CF4C(UNK_PARAMS);
 /* 39D048 */ UNK_RET hsd_8039D048(UNK_PARAMS);
 /* 39D0A0 */ UNK_RET hsd_8039D0A0(UNK_PARAMS);
 /* 39D1E4 */ void hsd_8039D1E4(UNK_T arg0, int arg1);
 /* 39D1EC */ UNK_RET hsd_8039D1EC(UNK_PARAMS);
 /* 39D214 */ UNK_RET hsd_8039D214(UNK_PARAMS);
-/* 39D354 */ UNK_RET hsd_8039D354(UNK_PARAMS);
+/* 39D354 */ void hsd_8039D354(u32);
 /* 39D3AC */ UNK_RET hsd_8039D3AC(UNK_PARAMS);
-/* 39D4DC */ void hsd_8039D4DC(UnkGeneratorStruct*);
+/* 39D4DC */ void hsd_8039D4DC(HSD_Generator*);
 /* 39D580 */ UNK_RET hsd_8039D580(UNK_PARAMS);
 /* 39D5DC */ void hsd_8039D5DC(HSD_JObj*);
-/* 39D688 */ UNK_RET hsd_8039D688(UNK_PARAMS);
+/* 39D688 */ void hsd_8039D688(HSD_JObj*, f32**, s32);
 /* 39D71C */ UNK_RET hsd_8039D71C(UNK_PARAMS);
 /* 39D9C8 */ UNK_RET hsd_8039D9C8(UNK_PARAMS);
 /* 39DAD4 */ UNK_RET hsd_8039DAD4(UNK_PARAMS);
-/* 39EE24 */ UNK_RET hsd_8039EE24(UNK_PARAMS);
-/* 39EFAC */ UnkGeneratorStruct* hsd_8039EFAC(s32, s32, s32, HSD_JObj*);
-/* 39F05C */ UnkGeneratorStruct* hsd_8039F05C(s8, s8, s32);
+/* 39EE24 */ void hsd_8039EE24(u32);
+/* 39EFAC */ HSD_Generator* hsd_8039EFAC(s32, s32, s32, HSD_JObj*);
+/* 39F05C */ HSD_Generator* hsd_8039F05C(s8, s32, s32);
 /* 39F6CC */ void hsd_8039F6CC(s32, s32, s32, HSD_JObj*);
 /* 4D0F60 */ extern HSD_ObjAllocData hsd_804D0F60;
 /* 4D0F90 */ extern HSD_ObjAllocData hsd_804D0F90;

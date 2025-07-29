@@ -2,7 +2,7 @@
 
 #include <melee/cm/camera.h>
 #include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
@@ -325,7 +325,7 @@ static inline HSD_PadStatus* get_pad(u8 i)
 
 static inline float cstick_threshold(float cstick, float val)
 {
-    if (fabs_inline(cstick) < val) return 0;
+    if (ABS(cstick) < val) return 0;
     return cstick;
 }
 

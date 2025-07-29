@@ -1,6 +1,8 @@
 #ifndef MELEE_SC_TYPES_H
 #define MELEE_SC_TYPES_H
 
+#include <placeholder.h>
+
 #include "sc/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
@@ -27,7 +29,10 @@ struct SceneDesc {
         HSD_CObjDesc* desc;
         HSD_CameraAnim** anims;
     }* cameras;
-    HSD_LightDesc** lights;
+    struct {
+        HSD_LightDesc* desc;
+        UNK_T anims;
+    }** lights;
     struct {
         HSD_FogDesc* desc;
         HSD_CameraAnim** anims;

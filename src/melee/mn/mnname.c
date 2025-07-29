@@ -4,35 +4,35 @@
 
 /// #GetNameCount
 
-/// #CanCreateNewName
+/// #IsNameListFull
 
-/// #mnName_80237654
+/// #CompareNameStrings
 
 void fn_802377A4(void) {}
 
-/// #mnName_802377A8
+/// #IsNameUnique
 
-/// #mnName_80237834
+/// #DeleteName
 
 /// #IsNameValid
 
 /// #CreateNameAtIndex
 
-/// #mnName_80237A68
+/// #mnName_SortNames
 
 /// #mnName_80237D94
 
-/// #mnName_80237F78
+/// #mnName_ConfirmNameDeleteInput
 
-/// #mnName_8023817C
+/// #mnName_MainInput
 
 /// #fn_80238540
 
 /// #mnName_802385A0
 
-/// #mnName_802385D4
+/// #mnName_GetPageCount
 
-/// #mnName_80238698
+/// #mnName_GetColumnCount
 
 /// #mnName_80238754
 
@@ -70,4 +70,4 @@ void fn_802377A4(void) {}
 
 /// #mnName_8023AC40
 
-/// #mnName_8023B084
+/// #IsNameNotAllowed

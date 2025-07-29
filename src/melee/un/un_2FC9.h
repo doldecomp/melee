@@ -66,7 +66,7 @@
 /* 2FF710 */ void un_802FF710(void);
 /* 2FF78C */ HSD_GObj* un_802FF78C(void);
 /* 2FF7DC */ void un_802FF7DC(void);
-/* 2FF884 */ bool un_802FF884(void);
+/* 2FF884 */ bool un_802FF884(char*);
 /* 2FF88C */ int un_802FF88C(void);
 /* 2FF934 */ void un_802FF934(void);
 /* 2FF958 */ int un_802FF958(void);
@@ -233,7 +233,7 @@
 /* 3045A0 */ int un_803045A0(void);
 /* 304690 */ int un_80304690(void);
 /* 304780 */ int un_80304780(void);
-/* 304870 */ UNK_RET un_80304870(UNK_PARAMS);
+/* 304870 */ int un_80304870(void);
 /* 3048C0 */ bool un_803048C0(s32);
 /* 304924 */ UNK_RET un_80304924(UNK_PARAMS);
 /* 304988 */ UNK_RET un_80304988(UNK_PARAMS);

@@ -74,10 +74,10 @@
 /* 02F784 */ void Camera_8002F784(s8, s8);
 /* 02F7AC */ void Camera_8002F7AC(s8);
 /* 02F8F4 */ void Camera_8002F8F4(void);
-/* 02F908 */ s32 fn_8002F908(HSD_RectF32*);
-/* 02F9E4 */ UNK_RET Camera_8002F9E4(UNK_PARAMS);
-/* 02FBA0 */ s32 fn_8002FBA0(HSD_RectF32*);
-/* 02FC7C */ UNK_RET Camera_8002FC7C(UNK_PARAMS);
+/* 02F908 */ s32 fn_8002F908(HSD_RectF32* arg0);
+/* 02F9E4 */ void Camera_8002F9E4(s8, s8);
+/* 02FBA0 */ s32 fn_8002FBA0(HSD_RectF32* arg0);
+/* 02FC7C */ void Camera_8002FC7C(u8, u8);
 /* 02FE38 */ void Camera_8002FE38(void);
 /* 02FEEC */ void Camera_8002FEEC(int);
 /* 03006C */ void Camera_8003006C(void);

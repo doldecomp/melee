@@ -2,18 +2,20 @@
 #define GALE01_305058
 
 #include <placeholder.h>
+#include "ft/forward.h"
+#include "gm/types.h"
 
 /* 305058 */ UNK_RET un_80305058(UNK_PARAMS);
 /* 3053C4 */ UNK_RET un_803053C4(UNK_PARAMS);
 /* 30562C */ void Trophy_SetUnlockState(enum_t, bool);
 /* 305918 */ void un_80305918(s32, s32, s32);
-/* 305B88 */ UNK_RET un_80305B88(UNK_PARAMS);
-/* 305C44 */ UNK_RET un_80305C44(UNK_PARAMS);
+/* 305B88 */ s32 un_80305B88(void);
+/* 305C44 */ s32 un_80305C44(void);
 /* 305D00 */ UNK_RET un_80305D00(UNK_PARAMS);
-/* 305DB0 */ UNK_RET un_80305DB0(UNK_PARAMS);
+/* 305DB0 */ float un_80305DB0(void);
 /* 305EB4 */ UNK_RET un_80305EB4(UNK_PARAMS);
 /* 305FB8 */ UNK_RET un_80305FB8(UNK_PARAMS);
-/* 3060BC */ UNK_RET un_803060BC(UNK_PARAMS);
+/* 3060BC */ float un_803060BC(int, int);
 /* 3062BC */ UNK_RET un_803062BC(UNK_PARAMS);
 /* 3062EC */ UNK_RET un_803062EC(UNK_PARAMS);
 /* 3063D4 */ UNK_RET un_803063D4(UNK_PARAMS);
@@ -41,7 +43,7 @@
 /* 307BA0 */ UNK_RET un_80307BA0(UNK_PARAMS);
 /* 307E84 */ UNK_RET fn_80307E84(UNK_PARAMS);
 /* 307F64 */ UNK_RET un_80307F64(UNK_PARAMS);
-/* 30813C */ UNK_RET un_8030813C(UNK_PARAMS);
+/* 30813C */ char* un_8030813C(s16, enum MajorSceneKind); /// TODO :: fill out the struct that this uses/returns
 /* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
 /* 3082F8 */ UNK_RET un_803082F8(UNK_PARAMS);
 /* 308328 */ UNK_RET un_80308328(UNK_PARAMS);

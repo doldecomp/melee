@@ -1,5 +1,7 @@
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include "grlib.h"
 
 #include "grbigblue.h"
@@ -7,6 +9,8 @@
 #include "ground.h"
 #include "grrcruise.h"
 
+#include "baselib/psappsrt.h"
+#include "baselib/psstructs.h"
 #include "cm/camera.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -18,22 +22,16 @@
 #include "sc/types.h"
 
 #include <math.h>
-#include <baselib/aobj.h>
-#include <baselib/debug.h>
-#include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/mtx.h>
 #include <baselib/particle.h>
-#include <baselib/psappsrt.h>
 
 /* 1C9BC8 */ static void grLib_801C9BC8(HSD_GObj*);
 /* 1C9C40 */ static void grLib_801C9C40(HSD_GObj*);
 
 extern StageInfo stage_info;
-extern struct UnkGeneratorStruct* hsd_804D78FC;
+extern HSD_Generator* hsd_804D78FC;
 
 static VecMtx grLib_8049EF58;
 static Vec3 grLib_unusedvec1;
@@ -45,17 +43,15 @@ bool grLib_801C96E8(HSD_GObj* arg0)
     return gp->x10_flags.b4;
 }
 
-UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
-
-UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, Vec3* arg2)
+HSD_Generator* grLib_801C96F8(s32 arg0, s32 arg1, Vec3* arg2)
 {
-    UnkGeneratorStruct* temp_r3;
-    UnkGeneratorMember* phi_r30;
+    HSD_Generator* temp_r3;
+    HSD_psAppSRT* phi_r30;
     f32 scale;
 
     temp_r3 = hsd_8039F05C(0, arg1, arg0);
     if (temp_r3 != NULL) {
-        phi_r30 = temp_r3->x54;
+        phi_r30 = temp_r3->appsrt;
         if (phi_r30 == NULL) {
             phi_r30 = psAddGeneratorAppSRT_begin(temp_r3, 1);
         } else {
@@ -65,14 +61,12 @@ UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, Vec3* arg2)
             hsd_8039D4DC(temp_r3);
             return NULL;
         }
-        phi_r30->x8 = *arg2;
+        phi_r30->translate = *arg2;
         scale = Ground_801C0498();
-        phi_r30->x24 *= scale;
-        phi_r30->x28 *= scale;
-        phi_r30->x2C *= scale;
-        temp_r3->x2C = 0.0f;
-        temp_r3->x28 = 0.0f;
-        temp_r3->x24 = 0.0f;
+        phi_r30->scale.x *= scale;
+        phi_r30->scale.y *= scale;
+        phi_r30->scale.z *= scale;
+        temp_r3->pos.x = temp_r3->pos.y = temp_r3->pos.z = 0.0f;
     }
     return temp_r3;
 }
@@ -87,7 +81,7 @@ void grLib_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
     hsd_8039EFAC(0, arg1, arg0, arg2);
 }
 
-void grLib_801C9834(UnkGeneratorStruct* arg0)
+void grLib_801C9834(HSD_Generator* arg0)
 {
     hsd_8039D4DC(arg0);
 }
@@ -97,15 +91,15 @@ void grLib_801C9854(HSD_JObj* jobj)
     hsd_8039D5DC(jobj);
 }
 
-void grLib_801C9874(UnkGeneratorStruct* arg0)
+void grLib_801C9874(HSD_Generator* arg0)
 {
-    arg0->x16_flags |= 0x80;
+    arg0->type |= 0x80;
     hsd_8039D4DC(arg0);
 }
 
 void grLib_801C98A0(HSD_JObj* jobj)
 {
-    UnkGeneratorStruct *cur, *next;
+    HSD_Generator *cur, *next;
 
     if (jobj == NULL) {
         return;
@@ -113,8 +107,8 @@ void grLib_801C98A0(HSD_JObj* jobj)
 
     for (cur = hsd_804D78FC; cur != NULL; cur = next) {
         next = cur->next;
-        if (cur->x10_jobj == jobj) {
-            cur->x16_flags |= 0x80;
+        if (cur->jobj == jobj) {
+            cur->type |= 0x80;
             hsd_8039D4DC(cur);
         }
     }
@@ -138,8 +132,8 @@ inline HSD_JObj* jobj_next(HSD_JObj* node)
 
 void grLib_801C9908(HSD_JObj* jobj)
 {
-    UnkGeneratorStruct* cur;
-    UnkGeneratorStruct* next;
+    HSD_Generator* cur;
+    HSD_Generator* next;
 
     if (jobj == NULL) {
         return;
@@ -147,8 +141,8 @@ void grLib_801C9908(HSD_JObj* jobj)
 
     for (cur = hsd_804D78FC; cur != NULL; cur = next) {
         next = cur->next;
-        if (cur->x10_jobj == jobj) {
-            cur->x16_flags |= 0x80;
+        if (cur->jobj == jobj) {
+            cur->type |= 0x80;
             hsd_8039D4DC(cur);
         }
     }

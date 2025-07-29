@@ -89,11 +89,15 @@ void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame);
 void _HSD_AObjForgetMemory(void* low, void* high);
 
+static inline f32 HSD_AObjGetCurrFrame(HSD_AObj* aobj)
+{
+    HSD_ASSERT(0x92, aobj);
+    return aobj->curr_frame;
+}
+
 static inline f32 HSD_AObjGetEndFrame(HSD_AObj* aobj)
 {
-    if (!aobj) {
-        __assert("aobj.h", 0xAAU, "aobj");
-    }
+    HSD_ASSERT(0xAA, aobj);
     return aobj->end_frame;
 }
 

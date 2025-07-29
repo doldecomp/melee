@@ -12,16 +12,7 @@
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/mtx.h>
 
-struct _psAppSRT;
 struct HSD_Fog;
-
-typedef struct _psAppSRT HSD_psAppSRT;
-struct _particle;
-
-typedef struct _particle HSD_Particle;
-struct _generator;
-
-typedef struct _generator HSD_Generator;
 
 enum HSD_ParticleKind {
     Tornado = 1 << 2,
@@ -93,16 +84,14 @@ typedef struct _HSD_PSCmdList {
     u8 cmdList[1]; /* 0x3C */
 } HSD_PSCmdList;
 
-struct _particle;
+struct HSD_psAppSRT {
+    struct HSD_psAppSRT* next; /* 0x0 */
 
-struct _psAppSRT {
-    struct _psAppSRT* next; /* 0x0 */
+    struct HSD_Generator* gp; /* 0x4 */
 
-    struct _generator* gp; /* 0x4 */
-
-    Vec3 tra;       /* 0x8 */
+    Vec3 translate; /* 0x8 */
     Quaternion rot; /* 0x14 */
-    Vec3 sca;       /* 0x24 */
+    Vec3 scale;     /* 0x24 */
 
     u8 status; /* 0x30 */
 
@@ -113,15 +102,18 @@ struct _psAppSRT {
     float ssx; /* 0x64 */
     float ssy; /* 0x68 */
 
-    void (*freefunc)(struct _psAppSRT* appSrt); /* 0x6C */
+    void (*freefunc)(struct HSD_psAppSRT* appSrt); /* 0x6C */
 
-    u16 idnum;    /* 0x70 */
-    u8 billboard; /* 0x72 */
-    u8 dummy;     /* 0x73 */
+    u16 idnum;                /* 0x70 */
+    u8 billboard;             /* 0x72 */
+    u8 dummy;                 /* 0x73 */
+    u8 x31_fill[0xA2 - 0x74]; /* 0x74 */
+    s8 xA2; /* 0xA2 */        // This and preceding fill only added to match
+                              // grLib_801C96F8
 };
 
-/* size: 0x94 */
-struct _particle {
+/* size: 0x98 */
+struct HSD_Particle {
     HSD_Particle* next; /* 0x0 */
 
     u32 kind; /* 0x4 */
@@ -154,16 +146,12 @@ struct _particle {
 
     u16 life;
 
-    float vx; /* 0x2C */
-    float vy; /* 0x30 */
-    float vz; /* 0x34 */
+    Vec3 vel; /* 0x2C */
 
     float grav; /* 0x38 */
     float fric; /* 0x3C */
 
-    float x; /* 0x40 */
-    float y; /* 0x44 */
-    float z; /* 0x48 */
+    Vec3 pos; /* 0x40 */
 
     float size;   /* 0x4C */
     float rotate; /* 0x50 */
@@ -207,10 +195,10 @@ struct _particle {
 
     float trail; /* 0x84 */
 
-    struct _generator* gen; /* 0x88 */
-    struct _psAppSRT* appsrt;
-    float* userdata;
-    int (*callback)(HSD_Particle* part);
+    struct HSD_Generator* gen;           /* 0x88 */
+    struct HSD_psAppSRT* appsrt;         /* 0x8C */
+    float* userdata;                     /* 0x90 */
+    int (*callback)(HSD_Particle* part); /* 0x94 */
 };
 
 /* size: 0xC */
@@ -266,7 +254,7 @@ typedef struct _auxSphere {
     f32 lonRange;
 } auxSphere;
 
-typedef struct _generator {
+struct HSD_Generator {
     HSD_Generator* next;                  // 0x0
     u32 kind;                             // 0x4
     f32 random;                           // 0x8
@@ -281,12 +269,8 @@ typedef struct _generator {
     u16 idnum;                            // 0x1C
     u16 life;                             // 0x1E
     u8* cmdList;                          // 0x20
-    f32 x;                                // 0x24
-    f32 y;                                // 0x28
-    f32 z;                                // 0x2C
-    f32 vx;                               // 0x30
-    f32 vy;                               // 0x34
-    f32 vz;                               // 0x38
+    Vec3 pos;                             // 0x24
+    Vec3 vel;                             // 0x30
     f32 grav;                             // 0x3C
     f32 fric;                             // 0x40
     f32 size;                             // 0x44
@@ -304,7 +288,7 @@ typedef struct _generator {
         auxCone cone;
         auxSphere sphere;
     } aux; // 0x60
-} _generator;
+};
 
 extern u32* ptclref[64];
 
@@ -335,20 +319,20 @@ void psRemoveFog(void);
 
 static inline void setBlendMode(int blendmode);
 
-static inline void setupChanCtrl(struct _particle* pp);
-static inline void setupChanReg(struct _particle* pp);
-static inline void getClrTrail(struct _particle* pp, GXColor* col);
-static inline void setupTevReg(struct _particle* pp);
+static inline void setupChanCtrl(HSD_Particle* pp);
+static inline void setupChanReg(HSD_Particle* pp);
+static inline void getClrTrail(HSD_Particle* pp, GXColor* col);
+static inline void setupTevReg(HSD_Particle* pp);
 static inline void psSetCurrentMtx(GXPosNrmMtx idx);
-static inline struct _particle* psDispSubPoint(struct _particle* pp);
-static inline struct _particle* psDispSubPointTrail(struct _particle* pp);
-static inline void psDispSubMakePolygon(struct _particle* pp, u8* texform,
-                                        float x, float y, float z, float ppvx,
+static inline HSD_Particle* psDispSubPoint(HSD_Particle* pp);
+static inline HSD_Particle* psDispSubPointTrail(HSD_Particle* pp);
+static inline void psDispSubMakePolygon(HSD_Particle* pp, u8* texform, float x,
+                                        float y, float z, float ppvx,
                                         float ppvy, float ppvz, float x0,
                                         float y0, float z0, float x1, float y1,
                                         float z1);
 
-static inline void psDispSub(struct _particle* pp, u8* texform);
+static inline void psDispSub(HSD_Particle* pp, u8* texform);
 
 void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
                     int* formBank);
@@ -361,8 +345,8 @@ HSD_Particle* psGenerateParticle0(HSD_Particle* p, int linkNo, int bank,
                                   u32 kind, u16 texGroup, u8* list, int life,
                                   float x, float y, float z, float vx,
                                   float vy, float vz, float size, float grav,
-                                  float fric, int palflag,
-                                  struct _generator* gp, int flgInterpret);
+                                  float fric, int palflag, HSD_Generator* gp,
+                                  int flgInterpret);
 
 HSD_Particle* psGenerateParticleID0(HSD_Particle* p, int linkNo, int bank,
                                     int id, int flgInterpret);
@@ -371,7 +355,7 @@ HSD_Particle* psGenerateParticle(int linkNo, int bank, u32 kind, u16 texGroup,
                                  u8* list, int life, float x, float y, float z,
                                  float vx, float vy, float vz, float size,
                                  float grav, float fric, int palflag,
-                                 struct _generator* gp);
+                                 HSD_Generator* gp);
 
 HSD_Particle* psGenerateParticleIDPV(int linkNo, int bank, int id, float px,
                                      float py, float pz, float vx, float vy,
@@ -391,7 +375,7 @@ void psClearPointJObj(void);
 void psDeletePntJObjwithParticle(HSD_Particle* pp);
 
 void psKillFamily(u16 idnum, int linkNo);
-void psKillGeneratorChild(struct _generator* gp);
+void psKillGeneratorChild(HSD_Generator* gp);
 
 void psAddOffsetAll(float xofs, float yofs, float zofs);
 
@@ -400,7 +384,7 @@ void psRestartFamily(u16 idnum, int linkNo);
 
 void psSetCallback(int (**callback)(HSD_Particle* part));
 
-void psSetUserFunc(struct _generator* gp, HSD_PSUserFunc* userfunc);
+void psSetUserFunc(HSD_Generator* gp, HSD_PSUserFunc* userfunc);
 
 static inline void psRemoveBillboardCamera(void);
 

@@ -26,9 +26,9 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-typedef float (*KirbyVelocityFunc)(ftKb_GObj* gobj, Vec3* victim_self_vel,
+typedef float (*KirbyVelocityFunc)(Fighter_GObj* gobj, Vec3* victim_self_vel,
                                    float victim_facing_dir);
-typedef float (*GetFloatFunc)(ftKb_GObj* gobj);
+typedef float (*GetFloatFunc)(Fighter_GObj* gobj);
 
 /* literal */ float const ftCo_804D8BD0 = 0;
 /* literal */ double const ftCo_804D8BD8 = S32_TO_F32;
@@ -40,7 +40,7 @@ typedef float (*GetFloatFunc)(ftKb_GObj* gobj);
 /* literal */ extern char* ftCo_804D3BE8;
 /* literal */ extern char* ftCo_804D3BF0;
 
-FighterKind ftCo_800BD9E0(ftKb_GObj* gobj, Fighter_GObj* victim_gobj)
+FighterKind ftCo_800BD9E0(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 {
     ftKb_Fighter* fp = GET_FIGHTER(gobj);
     Fighter* victim_fp = GET_FIGHTER(victim_gobj);
@@ -60,7 +60,7 @@ FighterKind ftCo_800BD9E0(ftKb_GObj* gobj, Fighter_GObj* victim_gobj)
     return victim_kind;
 }
 
-void ftCo_800BDA50(ftKb_GObj* gobj)
+void ftCo_800BDA50(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.kind != FTKIND_KIRBY) {
@@ -96,7 +96,7 @@ static inline float inlineB1(ftCo_GObj* gobj)
     return GET_FIGHTER(gobj)->co_attrs.kirby_b_star_damage;
 }
 
-static inline void inlineB2(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj,
+static inline void inlineB2(ftCo_GObj* gobj, Fighter_GObj* thrower_gobj,
                             Vec3* scale, ftCommon_MotionState msid,
                             KirbyVelocityFunc vel_func, GetFloatFunc get_float)
 {
@@ -129,7 +129,7 @@ static inline void inlineB2(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj,
                 fp->parts[ftParts_8007500C(fp, FtPart_YRotN)].joint);
 }
 
-void ftCo_800BDB58(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj)
+void ftCo_800BDB58(ftCo_GObj* gobj, Fighter_GObj* thrower_gobj)
 {
     ftCo_Fighter* fp = GET_FIGHTER(gobj);
     Vec3 scale;
@@ -196,7 +196,7 @@ void ftCo_ThrownKirbyStar_Coll(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800BE000(ftCo_GObj* gobj, ftKb_GObj* thrower_gobj)
+void ftCo_800BE000(ftCo_GObj* gobj, Fighter_GObj* thrower_gobj)
 {
     Vec3 scale;
     ftCo_Fighter* fp = GET_FIGHTER(gobj);

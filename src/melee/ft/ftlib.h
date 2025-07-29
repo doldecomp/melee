@@ -49,7 +49,7 @@
 /* 086B74 */ CameraBox* ftLib_80086B74(HSD_GObj*);
 /* 086B80 */ float ftLib_80086B80(HSD_GObj*);
 /* 086B90 */ void ftLib_80086B90(HSD_GObj*, Vec3* v);
-/* 086BB4 */ void ftLib_80086BB4(HSD_GObj*);
+/* 086BB4 */ bool ftLib_80086BB4(HSD_GObj*);
 /* 086BE0 */ u8 ftLib_80086BE0(HSD_GObj*);
 /* 086BEC */ void ftLib_80086BEC(HSD_GObj*, Vec3*);
 /* 086C0C */ enum_t ftLib_80086C0C(HSD_GObj*);
@@ -94,7 +94,9 @@
 /* 0874BC */ s32 ftLib_800874BC(HSD_GObj*);
 /* 0874CC */ void ftLib_800874CC(HSD_GObj*, void*, s32);
 /* 087508 */ void ftLib_80087508(s8, u8);
+// /* 087508 */ void ftLib_80087508(FighterKind, u8);
 /* 087574 */ void ftLib_80087574(s8);
+// /* 087574 */ void ftLib_80087574(FighterKind);
 /* 087610 */ void ftLib_80087610(u8);
 /* 0876B4 */ void ftLib_800876B4(HSD_GObj*);
 /* 0876D4 */ bool ftLib_800876D4(HSD_GObj*);

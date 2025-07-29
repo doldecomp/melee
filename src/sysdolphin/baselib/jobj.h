@@ -5,7 +5,6 @@
 
 #include "baselib/forward.h" // IWYU pragma: export
 
-#include "baselib/aobj.h"
 #include "baselib/class.h"
 #include "baselib/debug.h"
 #include "baselib/list.h"
@@ -128,20 +127,20 @@ struct HSD_JObj {
 STATIC_ASSERT(sizeof(struct HSD_JObj) == 0x88);
 
 struct HSD_Joint {
-    char* class_name;
-    u32 flags;
-    HSD_Joint* child;
-    HSD_Joint* next;
-    union {
+    /* +0 */ char* class_name;
+    /* +4 */ u32 flags;
+    /* +8 */ HSD_Joint* child;
+    /* +C */ HSD_Joint* next;
+    /* +10 */ union {
         HSD_DObjDesc* dobjdesc;
         HSD_Spline* spline;
         HSD_SList* ptcl;
     } u;
-    Vec3 rotation;
-    Vec3 scale;
-    Vec3 position;
-    MtxPtr mtx;
-    HSD_RObjDesc* robjdesc;
+    /* +14 */ Vec3 rotation;
+    /* +20 */ Vec3 scale;
+    /* +2C */ Vec3 position;
+    /* +38 */ MtxPtr mtx;
+    /* +3C */ HSD_RObjDesc* robjdesc;
 };
 
 typedef struct _HSD_JObjInfo {

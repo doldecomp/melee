@@ -20,7 +20,7 @@ struct ftData_80086060_arg0 {
 
 /* 085560 */ void ftData_80085560(int idx, int increment);
 /* 0855C8 */ void ftData_800855C8(enum_t id, int slot);
-/* 08572C */ void ftData_8008572C(s32);
+/* 08572C */ void ftData_8008572C(FighterKind);
 /* 08578C */ void ftData_8008578C(enum_t id, int slot);
 /* 0857E0 */ void ftData_800857E0(bool);
 /* 085820 */ void ftData_80085820(FighterKind, int costume_id);

@@ -2,6 +2,7 @@
 
 #include "grgreatbay.h"
 
+#include "baselib/psstructs.h"
 #include "ft/ftdevice.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -18,7 +19,6 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/psappsrt.h>
 
 S16Vec3 grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
                             { 4, 1, 34 }, { 3, 1, 38 }, { 5, 10, 0 } };
@@ -329,15 +329,15 @@ void grGreatBay_801F5D48(HSD_GObj* gobj)
 
 void grGreatBay_801F67A4(Vec3* vec, f32 arg8)
 {
-    UnkGeneratorMember* temp_r3_2;
-    UnkGeneratorStruct* temp_r3;
+    HSD_psAppSRT* temp_r3_2;
+    HSD_Generator* temp_r3;
 
     temp_r3 = grLib_801C96F8(0x7537, 0x1E, vec);
     if (temp_r3 != NULL) {
-        temp_r3_2 = temp_r3->x54;
-        temp_r3_2->x24 *= arg8;
-        temp_r3_2->x28 *= arg8;
-        temp_r3_2->x2C *= arg8;
+        temp_r3_2 = temp_r3->appsrt;
+        temp_r3_2->scale.x *= arg8;
+        temp_r3_2->scale.y *= arg8;
+        temp_r3_2->scale.z *= arg8;
     }
 }
 

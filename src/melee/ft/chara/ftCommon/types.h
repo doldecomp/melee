@@ -30,7 +30,7 @@ struct UNK_SAMUS_S2 {
 union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ int x0;
-        /* fp+2344 */ UNK_T x4;
+        /* fp+2344 */ f32 x4;
         /* fp+2348 */ UNK_T x8;
         /* fp+234C */ UNK_T xC;
         /* fp+2350 */ UNK_T x10;
@@ -267,7 +267,7 @@ union ftCommon_MotionVars {
         /* fp+236C */ Vec3 scale;
     } capturekirby;
     struct {
-        /* fp+2340 */ ftKb_GObj* thrower_gobj;
+        /* fp+2340 */ Fighter_GObj* thrower_gobj;
         /* fp+2344 */ float x4;
         /* fp+2348 */ float x8;
         /* fp+234C */ float xC;

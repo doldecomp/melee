@@ -8,7 +8,7 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftdemo.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
@@ -173,7 +173,7 @@ void vi0102_8031D000_OnFrame(void)
     vi_8031CAAC();
 }
 
-void vi0102_8031D020(s8 arg0, s8 arg1)
+void vi0102_8031D020(int arg0, int arg1)
 {
     un_804D6F60.unk_0 = arg0;
     un_804D6F60.unk_1 = arg1;

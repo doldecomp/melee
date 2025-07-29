@@ -17,7 +17,7 @@
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftMasterHand/ftMh_Damage_0.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "lb/lbbgflash.h"
 #include "pl/player.h"
 

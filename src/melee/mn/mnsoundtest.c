@@ -394,8 +394,7 @@ void fn_8024AED0(HSD_GObj* arg0)
     temp_f1 = temp_r26->unk8;
     if (temp_f1 < 1.0f) {
         temp_r26->unk8 = (f32) (temp_f1 - 0.02f);
-        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if (temp_r26->unk8 == 0.0f) {
+        if (temp_r26->unk8 <= 0.0f) {
             temp_r26->unk8 = 1.0f;
             temp_r27 = mnSoundTest_804D6C40->user_data;
             lbAudioAx_800236DC();
@@ -405,8 +404,7 @@ void fn_8024AED0(HSD_GObj* arg0)
     temp_f1_2 = temp_r26->unkC;
     if (temp_f1_2 < 1.0f) {
         temp_r26->unkC = (f32) (temp_f1_2 - 0.02f);
-        M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-        if (temp_r26->unkC == 0.0f) {
+        if (temp_r26->unkC <= 0.0f) {
             temp_r26->unkC = 1.0f;
             lbAudioAx_80023694();
         }

@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "mtx.h"
+#include <sysdolphin/baselib/mtx.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>

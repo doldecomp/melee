@@ -150,7 +150,7 @@ struct ItemStateDesc {
     HSD_MatAnimJoint* x4_matanim_joint;
 
     /// @at{0} @sz{4}
-    UNK_T x8_parameters;
+    HSD_ShapeAnimJoint* x8_parameters;
 
     /// @at{0} @sz{4}
     UNK_T xC_script;
@@ -298,13 +298,14 @@ struct Item {
     f32 x5CC_currentAnimFrame;
     f32 x5D0_animFrameSpeed;
     struct {
-        HitCapsule hit;
-        s32 x138;
+        HitCapsule hit; // x5D4, x710, x84C, x988
+        s32 x138;       // x70C, x848, x984, xAC0
     } x5D4_hitboxes[4];
     u32 xAC4_ignoreItemID; // Cannot hit items with this index?
     u8 xAC8_hurtboxNum;    // Number of hurtboxes this item has
     HurtCapsule
-        xACC_itemHurtbox[2]; // Are these really size 0x4C? Code in itcoll.c
+        xACC_itemHurtbox[2]; // xACC, xB18
+                             // Are these really size 0x4C? Code in itcoll.c
                              // and it_266F.c adds 0x44 to iterate through.
                              // (Conversely can see adding 0x4C to iterate in
                              // ftcoll.c) Can see how vars don't line up in
@@ -541,6 +542,7 @@ struct Item {
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
         itCoin_ItemVars coin;
+        itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
@@ -569,6 +571,7 @@ struct Item {
         itLGunRay_ItemVars lgunray;
         itLinkArrow_ItemVars linkarrow;
         itLinkBomb_ItemVars linkbomb;
+        itLinkBoomerang_ItemVars linkboomerang;
         itLinkBow_ItemVars linkbow;
         itLinkHookshot_ItemVars linkhookshot;
         itMBall_ItemVars mball;
@@ -588,6 +591,7 @@ struct Item {
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
         itWhiteBea_ItemVars whitebea;
+        itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
         itMasterHandLaser_ItemVars masterhandlaser;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;

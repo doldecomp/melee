@@ -7,7 +7,7 @@
 #include "lblanguage.h"
 
 #include "ft/ft_0877.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/it_266F.h"
 
 #include <stdio.h>

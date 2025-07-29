@@ -14,7 +14,7 @@
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "lb/lb_00B0.h"
@@ -515,7 +515,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
         y_max = 40.0f + scroll_offset.y;
     }
 
-    z_pos = fabs_inline(transform->position.z);
+    z_pos = ABS(transform->position.z);
     if (z_pos < 80.0f) {
         var_f3 = 0.0f;
     } else if (z_pos > 5000.0f) {
@@ -1835,7 +1835,7 @@ static inline void compute_edge(Vec3 *forward, Vec3 *eye_pos, f32 fov, f32* valu
     edge_x = (forward->x * c) + (forward->z * s);
     edge_z = (forward->z * c) - (forward->x * s);
 
-    if ((fabs_inline(edge_z) > 0.0001) && ((forward->z * edge_z) > 0.0)) {
+    if ((ABS(edge_z) > 0.0001) && ((forward->z * edge_z) > 0.0)) {
         *value = -((edge_x * (eye_pos->z / edge_z)) - eye_pos->x);
     } else if (edge_x > 0.0f) {
         *value = 8.5070587e37f;
@@ -1847,34 +1847,30 @@ static inline void compute_edge(Vec3 *forward, Vec3 *eye_pos, f32 fov, f32* valu
 bool Camera_800307D0(f32* left, f32* center, f32* right)
 {
     HSD_CObj* cobj;
-    f32 aspect;
     f32 half_fov;
     Vec3 forward;
     Vec3 interest_pos;
     Vec3 eye_pos;
     bool b_r30;
-    PAD_STACK(8);
+    PAD_STACK(0x10);
 
     cobj = GET_COBJ(cm_80452C68.gobj);
-    aspect = HSD_CObjGetAspect(cobj);
-    half_fov = (0.5 * (deg_to_rad * HSD_CObjGetFov(cobj) * aspect));
+    half_fov = 0.5 * (deg_to_rad * HSD_CObjGetFov(cobj) * HSD_CObjGetAspect(cobj));
 
     b_r30 = true;
     HSD_CObjGetEyePosition(cobj, &eye_pos);
     HSD_CObjGetEyeVector(cobj, &forward);
     HSD_CObjGetInterest(cobj, &interest_pos);
 
-    if (fabs_inline(forward.x) > cm_804D7EE8) {
-        if (fabs_inline(forward.z) > cm_804D7EE8) {
-            // ray casts?
-            forward.x *= -1.0f;
-            forward.y *= -1.0f;
-            forward.z *= -1.0f;
-            *center = -((forward.x * (eye_pos.z / forward.z)) - eye_pos.x);
+    if (ABS(forward.x) > 1e-4 && ABS(forward.z) > 1e-4) {
+        // ray casts?
+        forward.x *= -1.0f;
+        forward.y *= -1.0f;
+        forward.z *= -1.0f;
+        *center = -((forward.x * (eye_pos.z / forward.z)) - eye_pos.x);
 
-            compute_edge(&forward, &eye_pos, half_fov, left);
-            compute_edge(&forward, &eye_pos, -half_fov, right);
-        }
+        compute_edge(&forward, &eye_pos, half_fov, left);
+        compute_edge(&forward, &eye_pos, -half_fov, right);
     } else {
         *left = -8.5070587e37f;
         *right = 8.5070587e37f;

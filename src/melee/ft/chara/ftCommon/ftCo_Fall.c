@@ -169,7 +169,7 @@ void ftCo_Fall_Anim_Inner(Fighter_GObj* gobj, f32* mv_x4,
         air_drift_frac = -1.0F;
     }
 
-    air_drift_frac_abs = fabs_inline(air_drift_frac);
+    air_drift_frac_abs = ABS(air_drift_frac);
     if (air_drift_frac_abs > p_ftCommonData->x444) {
         if (air_drift_frac * fp->facing_dir > 0.0F) {
             smid = forwards_smid;

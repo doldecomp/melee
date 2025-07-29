@@ -54,8 +54,7 @@
 #include "ftKirby/ftKb_Init.h"
 #include "ftMasterHand/ftMh_Wait1_0.h"
 #include "ftPeach/types.h"
-#include "gm/gm_1601.h"
-#include "gm/gm_1A36.h"
+#include "gm/gm_unsplit.h"
 #include "gr/stage.h"
 #include "gr/types.h"
 #include "if/ifmagnify.h"
@@ -64,8 +63,8 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
-#include "lb/lbarchive.h"
 #include "lb/lbanim.h"
+#include "lb/lbarchive.h"
 #include "lb/lbshadow.h"
 #include "lb/types.h"
 #include "mp/mpcoll.h"
@@ -261,8 +260,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->facing_dir1 = fp->facing_dir;
     fp->x34_scale.y = fp->x34_scale.x;
 
-    fp->x2220_flag.b5 = 0;
-    fp->x2220_flag.b6 = 0;
+    fp->x2220_b5 = 0;
+    fp->x2220_b6 = 0;
 
     fp->x200C = 0;
     fp->x2010 = 0;
@@ -276,7 +275,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x221A_b6 = 0;
     fp->x221D_b2 = 0;
     fp->x221E_b7 = 0;
-    fp->x2220_flag.b7 = 0;
+    fp->x2220_b7 = 0;
     fp->x2221_b4 = 0;
     fp->x2221_b5 = 0;
     fp->x2221_b6 = 1;
@@ -353,8 +352,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x1964 = 0;
     fp->dmg.x189C_unk_num_frames = 0;
 
-    fp->x2220_flag.b3 = 0;
-    fp->x2220_flag.b4 = 0;
+    fp->x2220_b3 = 0;
+    fp->x2220_b4 = 0;
 
     fp->dmg.x1914 = 0;
     fp->dmg.int_value = 0;
@@ -768,16 +767,16 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x221F_b3 = 0;
 
-    fp->x2220_flag.b0 = 0;
+    fp->x2220_b0 = 0;
 
     fp->x2221_b2 = 0;
 
-    fp->x2229_b5_no_normal_motion = 0;
+    fp->no_normal_motion = 0;
     fp->x2229_b6 = 0;
     fp->x2229_b7 = 0;
 
-    fp->x222A_flag.b0 = 0;
-    fp->x222A_flag.b1 = 0;
+    fp->x222A_b0 = 0;
+    fp->x222A_b1 = 0;
 
     fp->x2228_b5 = 0;
     fp->x2228_b6 = 0;
@@ -838,7 +837,7 @@ void Fighter_80068E64(Fighter_GObj* gobj)
 static void Fighter_Create_Inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x2229_b5_no_normal_motion) {
+    if (!fp->no_normal_motion) {
         fp->x2EC = lbAnim_8001E8F8(ftData_80085E50(fp, 0x23));
         if (!fp->x2228_b2) {
             fp->x2DC = lbAnim_8001E8F8(ftData_80085E50(fp, 7));
@@ -912,16 +911,16 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006DA4C, 0x16);
     Fighter_UnkProcessDeath_80068354(gobj);
 
-    if (fp->kind == 0x1B) {
+    if (fp->kind == FTKIND_MASTERH) {
         ftMh_MS_341_8014FE10(gobj);
-    } else if (fp->kind == 0x1C) {
+    } else if (fp->kind == FTKIND_CREZYH) {
         ftCh_Init_80155FCC(gobj);
     } else if (input->flags_b1 != 0) {
         ftMaterial_800BFD04(gobj);
     } else if (Player_GetFlagsBit3(fp->player_id) != 0) {
         ftCo_800C61B0(gobj);
     } else {
-        if (!fp->x2229_b5_no_normal_motion) {
+        if (!fp->no_normal_motion) {
             ftCommon_8007D92C(gobj);
         } else {
             OSReport("ellegal flag fp->no_normal_motion\n");
@@ -1017,7 +1016,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     if (fp->dmg.x18F4 != 0) {
         fp->dmg.x18F4 = 0;
-        fp->x2220_flag.b4 = 0;
+        fp->x2220_b4 = 0;
     }
 
     if ((flags & Ft_MF_Unk19) == 0) {
@@ -1068,8 +1067,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     fp->x221F_b1 = 0;
     fp->x221E_b5 = 0;
     fp->x221E_b6 = 0;
-    fp->x2220_flag.b3 = 0;
-    fp->x2220_flag.b7 = 0;
+    fp->x2220_b3 = 0;
+    fp->x2220_b7 = 0;
 
     fp->x209C = 0;
 
@@ -1502,15 +1501,15 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x2220_flag.b5 || fp->x2220_flag.b6) {
+        if (fp->x2220_b5 || fp->x2220_b6) {
             if (fp->x2008) {
                 fp->x2008--;
             }
 
             if (fp->x2008 == 0) {
-                if (fp->x2220_flag.b5) {
+                if (fp->x2220_b5) {
                     Fighter_SuperMushroomEnd(gobj);
-                } else if (fp->x2220_flag.b6) {
+                } else if (fp->x2220_b6) {
                     Fighter_PoisonMushroomEnd(gobj);
                 }
             }
@@ -1838,19 +1837,19 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
 
-            if (fabs_inline(fp->input.lstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.lstick.x) <= p_ftCommonData->x0) {
                 fp->input.lstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.lstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.lstick.y) <= p_ftCommonData->x4) {
                 fp->input.lstick.y = 0.0f;
             }
 
-            if (fabs_inline(fp->input.cstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.cstick.x) <= p_ftCommonData->x0) {
                 fp->input.cstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.cstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.cstick.y) <= p_ftCommonData->x4) {
                 fp->input.cstick.y = 0.0f;
             }
 
@@ -2388,7 +2387,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             fp->x2225_b0 = 0;
         }
     } else {
-        if (!fp->x222A_flag.b1 && !fp->x2228_b5) {
+        if (!fp->x222A_b1 && !fp->x2228_b5) {
             // if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom)
             // + stage.crowdReactStart from above...
             if (fp->prev_pos.y >= Stage_CalcUnkCamY() &&
@@ -2664,7 +2663,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     }
 
     temp_bool =
-        !((fp->x2220_flag.b3 || fp->x2220_flag.b4 || ftCo_8008E984(fp)));
+        !((fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp)));
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&

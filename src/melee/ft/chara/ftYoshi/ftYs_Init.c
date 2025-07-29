@@ -1,6 +1,3 @@
-#undef __FILE__
-#define __FILE__ "ftyoshi.c"
-
 #include <placeholder.h>
 
 #include "forward.h"
@@ -28,6 +25,9 @@
 #include <baselib/aobj.h>
 #include <baselib/debug.h>
 #include <baselib/mobj.h>
+
+#undef __FILE__
+#define __FILE__ "ftyoshi.c"
 
 MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount] = {
     {
@@ -351,7 +351,7 @@ extern char* ftYs_Unk2_804D3E78;
 /// https://decomp.me/scratch/ufrFK
 void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 {
-    u8 _[20];
+    u8 _[12];
 
     struct S_UNK_YOSHI1* unk_struct1;
     s32* ptr2EndIndex;
