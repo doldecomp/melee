@@ -8,7 +8,9 @@
 #include "placeholder.h"
 #include "platform.h"
 
+#include "baselib/gobj.h"
 #include "baselib/jobj.h"
+#include "db/db.h"
 #include "dolphin/mtx.h"
 #include "ft/ft_0BF0.h"
 #include "ft/ftlib.h"
@@ -24,6 +26,26 @@
 
 #define GET_ATTRS(ip)                                                         \
     ((itDrMarioPillAttributes*) ip->xC4_article_data->x4_specialAttributes)
+
+static bool it_802C0C0C(Item_GObj*);
+static void it_802C0C68(Item_GObj*);
+static bool it_802C0CC4(Item_GObj*);
+static bool it_802C0E48(Item_GObj*);
+static void it_802C1114(Item_GObj*);
+static bool it_802C1148(Item_GObj*);
+static bool it_802C1234(Item_GObj*);
+static void it_802C1340(Item_GObj*);
+static bool it_802C1360(Item_GObj*);
+
+ItemStateTable it_803F75D0[] = {
+    { 0, it_802C0C0C, it_802C0C68, it_802C0CC4 },
+    { 1, it_802C0E48, it_802C1114, it_802C1148 },
+    { 2, it_802C0E48, it_802C1114, it_802C1148 },
+    { 1, it_802C1234, it_802C1340, it_802C1360 },
+    { 3, it_802C1234, it_802C1340, it_802C1360 },
+    { 4, it_802C1234, it_802C1340, it_802C1360 },
+    { 5, it_802C1234, it_802C1340, it_802C1360 },
+};
 
 // NOTE: 4 iterations instead of the usual 3
 static inline float my_sqrtf(float x)
@@ -69,24 +91,16 @@ static void it_802C0C68(Item_GObj* gobj)
 
 static void it_802C061C(Item_GObj* gobj)
 {
-    Vec3 sp10;
-    Fighter_GObj* fobj;
-    HSD_JObj* hobj;
-    Item* ip;
-    f32 rot_y;
-    PAD_STACK(8);
-
-    ip = gobj->user_data;
-    hobj = gobj->hsd_obj;
-    fobj = ip->xDD4_itemVar.drmariopill.x4;
-    if (fobj) {
-        ftLib_80086644(fobj, &sp10);
-        ip->pos = sp10;
-        HSD_JObjSetTranslate(hobj, &sp10);
-        rot_y =
-            (f32) (1.5707963267948966 * (f64) ip->xDD4_itemVar.drmariopill.x0);
-        HSD_JObjSetRotationY(hobj, rot_y);
-        HSD_JObjSetRotationY(hobj, 0);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* hobj = gobj->hsd_obj;
+    if (ip->xDD4_itemVar.drmariopill.x4) {
+        Vec3 v;
+        ftLib_80086644(ip->xDD4_itemVar.drmariopill.x4, &v);
+        ip->pos = v;
+        HSD_JObjSetTranslate(hobj, &v);
+        HSD_JObjSetRotationY(
+            hobj, (1.5707963267948966 * ip->xDD4_itemVar.drmariopill.x0));
+        HSD_JObjSetRotationZ(hobj, 0);
     }
     it_8026B3A8(gobj);
 }
@@ -102,26 +116,87 @@ static void it_802C1340(Item_GObj* gobj)
     it_8026B3A8(gobj);
 }
 
+static inline void copy_jobj_scale(HSD_JObj* dst, HSD_JObj* src, Vec3* scale)
+{
+    scale->x = scale->y = scale->z = HSD_JObjGetScaleY(src);
+    HSD_JObjSetScale(dst, scale);
+}
+
 static bool it_802C1234(Item_GObj* gobj)
 {
-    Vec3 scale;
-    f32 scale_y;
-    Fighter_GObj* fobj;
-    HSD_JObj* jobj;
-    Item* ip;
-    PAD_STACK(8);
-
-    ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
+    Item_GObj* orig = gobj;
     it_8026B3A8(gobj);
-    fobj = ip->xDD4_itemVar.drmariopill.x4;
-    if (fobj && (ftCo_800BF228(fobj) == 1)) {
-        scale_y = HSD_JObjGetScaleY(fobj->hsd_obj);
-        scale.x = scale_y;
-        scale.y = scale_y;
-        scale.z = scale_y;
-        HSD_JObjSetScale(gobj->hsd_obj, &scale);
+    gobj = ip->xDD4_itemVar.drmariopill.x4;
+    if ((gobj != NULL) && (ftCo_800BF228(gobj) == 1)) {
+        Vec3 scale;
+        Fighter_GObj* fobj = ip->xDD4_itemVar.drmariopill.x4;
+        copy_jobj_scale(GET_JOBJ(orig), GET_JOBJ(fobj), &scale);
     }
     return false;
+}
+
+static void it_802C1180_no_inline3(Item_GObj* gobj, enum_t msid)
+{
+    it_802C1180(gobj, msid);
+}
+
+static void it_802C1180_no_inline2(Item_GObj* gobj, enum_t msid)
+{
+    it_802C1180_no_inline3(gobj, msid);
+}
+
+static void it_802C1180_no_inline(Item_GObj* gobj, enum_t msid)
+{
+    it_802C1180_no_inline2(gobj, msid);
+}
+
+Item_GObj* it_802C09C4(Fighter_GObj* parent_gobj, Vec3* pos, s32 arg2,
+                       ItemKind kind, s32 msid, Fighter_Part part,
+                       f32 facing_dir)
+{
+    SpawnItem spawn;
+    Item_GObj* gobj;
+
+    spawn.kind = kind;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    it_8026BB68(parent_gobj, &spawn.pos);
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = parent_gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        it_802C1180_no_inline(gobj, msid);
+        it_80273670(gobj, 1, (f32) arg2);
+        it_802756D0(gobj);
+        it_8026B3A8(gobj);
+        Item_80268E5C(gobj, msid + 4, ITEM_ANIM_UPDATE);
+        ip->xDB8_itcmd_var3 = 0;
+        ip->xDB4_itcmd_var2 = 0;
+        ip->xDB0_itcmd_var1 = 0;
+        ip->xDAC_itcmd_var0 = 0;
+        ip->xDC8_word.flags.x19 = 0;
+        ip->on_accessory = it_802C061C;
+        ip->xDC8_word.flags.x13 = 1;
+        ip->owner = parent_gobj;
+        ip->xDD4_itemVar.drmariopill.x4 = parent_gobj;
+        ip->xDD4_itemVar.drmariopill.x0 = facing_dir;
+        it_80274740(gobj);
+        it_802756D0(gobj);
+        it_8026B3A8(gobj);
+        it_802750F8(gobj);
+        if (msid == 2) {
+            Item_8026AB54(gobj, parent_gobj, part);
+        }
+        it_8026B3A8(gobj);
+    }
+    return gobj;
 }
 
 static bool it_802C1148(Item_GObj* gobj)
@@ -160,16 +235,14 @@ static void it_802C0DBC(Item_GObj* gobj)
 
 static bool it_802C0CC4(Item_GObj* gobj)
 {
-    Item* ip;
-    f32 var_f4;
-
     it_8026D9A0(gobj);
     it_8026B3A8(gobj);
     if (it_8027781C(gobj) != 0) {
-        ip = gobj->user_data;
-        var_f4 = my_sqrtf((ip->x40_vel.x * ip->x40_vel.x) +
-                          (ip->x40_vel.y * ip->x40_vel.y));
-        if (var_f4 < GET_ATTRS(ip)->x10) {
+        Item* ip = GET_ITEM(gobj);
+        itDrMarioPillAttributes* attrs = GET_ATTRS(ip);
+        if (my_sqrtf((ip->x40_vel.x * ip->x40_vel.x) +
+                     (ip->x40_vel.y * ip->x40_vel.y)) < attrs->x10)
+        {
             return true;
         }
         Item_8026AE84(ip, 0x15FAE, 0x7F, 0x40);
@@ -193,15 +266,10 @@ static bool it_802C0C0C(Item_GObj* gobj)
 
 static void it_802C0B5C(Item_GObj* gobj)
 {
-    Item* ip;
-    f32 temp_f30;
-    f32 temp_f31;
-    itDrMarioPillAttributes* attrs;
-
-    ip = gobj->user_data;
-    attrs = ip->xC4_article_data->x4_specialAttributes;
-    temp_f31 = attrs->x0;
-    temp_f30 = attrs->x4;
+    Item* ip = GET_ITEM(gobj);
+    itDrMarioPillAttributes* attrs = GET_ATTRS(ip);
+    f32 temp_f31 = attrs->x0;
+    f32 temp_f30 = attrs->x4;
     ip->x40_vel.x = ip->facing_dir * (temp_f31 * cosf(temp_f30));
     ip->x40_vel.y = temp_f31 * sinf(temp_f30);
     ip->x40_vel.z = 0.0f;
@@ -226,7 +294,7 @@ static inline bool it_802C0E48_sub(Item_GObj* gobj)
             ip->on_accessory = NULL;
         }
     }
-    if (gobj && ip) {
+    if (gobj && (ip = gobj->user_data)) {
         ip->xDD4_itemVar.drmariopill.x4 = 0;
         ret = true;
         ip->on_accessory = NULL;
@@ -236,46 +304,48 @@ static inline bool it_802C0E48_sub(Item_GObj* gobj)
     return ret;
 }
 
-static s32 it_802C0E48(Item_GObj* gobj)
+static inline void it_802C0E48_flags(Item_GObj* gobj)
 {
-    Vec scale;
-    HSD_JObj* hobj;
-    HSD_JObj* child;
-    Item* ip;
-    f32 mag;
-    Fighter_GObj* fobj;
-    PAD_STACK(40);
-
-    hobj = gobj->hsd_obj;
-    ip = gobj->user_data;
-    it_802756D0(gobj);
-    it_8026B3A8(gobj);
-    child = HSD_JObjGetChild(gobj->hsd_obj);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    jobj = HSD_JObjGetChild(jobj);
     it_8026B3A8(gobj);
     if (ip->xDAC_itcmd_var0 == 1) {
-        HSD_JObjClearFlags(child, 0x10U);
+        HSD_JObjClearFlags(jobj, 0x10U);
     } else {
-        HSD_JObjSetFlags(child, 0x10U);
+        HSD_JObjSetFlags(jobj, 0x10U);
     }
-    fobj = ip->xDD4_itemVar.drmariopill.x4;
-    if (fobj) {
-        if (ftDr_Init_80149844(fobj) == 1) {
+}
+
+static bool it_802C0E48(Item_GObj* gobj)
+{
+    Vec scale;
+    Item* ip;
+    HSD_JObj* child;
+    Item* ixp;
+    Item* ixp2;
+    HSD_JObj* hobj;
+    f32 mag;
+    PAD_STACK(4);
+
+    hobj = GET_JOBJ(gobj);
+    ip = GET_ITEM(gobj);
+    it_802756D0(gobj);
+    it_8026B3A8(gobj);
+    it_802C0E48_flags(gobj);
+    if (ip->xDD4_itemVar.drmariopill.x4) {
+        if (ftDr_Init_80149844(ip->xDD4_itemVar.drmariopill.x4) == 1) {
             if (it_802C0E48_sub(gobj)) {
                 return true;
             }
         } else {
             ip->xDAC_itcmd_var0 =
                 ftDr_Init_801498EC(ip->xDD4_itemVar.drmariopill.x4);
-            fobj = ip->xDD4_itemVar.drmariopill.x4;
-            if (ip->owner == fobj) {
-                mag = ftLib_800869D4(fobj);
-                scale.x = mag;
-                scale.y = mag;
-                scale.z = mag;
+            if (ip->owner == ip->xDD4_itemVar.drmariopill.x4) {
+                mag = ftLib_800869D4(ip->xDD4_itemVar.drmariopill.x4);
+                scale.x = scale.y = scale.z = mag;
                 HSD_JObjSetScale(hobj, &scale);
-                return false;
-            }
-            if (it_802C0E48_sub(gobj)) {
+            } else if (it_802C0E48_sub(gobj)) {
                 return true;
             }
         }
@@ -283,6 +353,97 @@ static s32 it_802C0E48(Item_GObj* gobj)
         return true;
     }
     return false;
+}
+
+static void it_802C0B5C_no_inline(Item_GObj* gobj)
+{
+    it_802C0B5C(gobj);
+}
+
+void it_802C0510(Item_GObj* parent_gobj, Vec3* pos, s32 arg2, ItemKind kind,
+                 f32 facing_dir)
+{
+    SpawnItem spawn;
+    Item_GObj* gobj;
+
+    spawn.kind = kind;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    it_8026BB68(parent_gobj, &spawn.pos);
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = parent_gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        it_802C0B5C_no_inline(gobj);
+        it_80273670(gobj, 0, (f32) arg2);
+        db_80225DD8(gobj, parent_gobj);
+        it_802750F8(gobj);
+        it_8026B3A8(gobj);
+    }
+}
+
+static void it_802C0DF8_no_inline(Item_GObj* gobj)
+{
+    it_802C0DF8(gobj);
+}
+
+static void it_802C0DF8_no_inline2(Item_GObj* gobj)
+{
+    it_802C0DF8_no_inline(gobj);
+}
+
+static void it_802C0DF8_no_inline3(Item_GObj* gobj)
+{
+    it_802C0DF8_no_inline2(gobj);
+}
+
+Item_GObj* it_802C0850(Item_GObj* parent_gobj, Vec3* pos, s32 arg2,
+                       ItemKind kind, f32 facing_dir)
+{
+    SpawnItem spawn;
+    Item_GObj* gobj;
+
+    spawn.kind = kind;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    it_8026BB68(parent_gobj, &spawn.pos);
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = parent_gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        it_802C0DF8_no_inline3(gobj);
+        it_80273670(gobj, 1, (f32) arg2);
+        it_8026B3A8(gobj);
+        Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+        ip->xDB8_itcmd_var3 = 0;
+        ip->xDB4_itcmd_var2 = 0;
+        ip->xDB0_itcmd_var1 = 0;
+        ip->xDAC_itcmd_var0 = 0;
+        ip->xDC8_word.flags.x19 = 0;
+        ip->on_accessory = it_802C061C;
+        ip->xDC8_word.flags.x13 = 1;
+        ip->owner = parent_gobj;
+        ip->xDD4_itemVar.drmariopill.x4 = parent_gobj;
+        ip->xDD4_itemVar.drmariopill.x0 = facing_dir;
+        it_80274740(gobj);
+        it_802756D0(gobj);
+        it_8026B3A8(gobj);
+        db_80225DD8(gobj, parent_gobj);
+        it_802750F8(gobj);
+        it_8026B3A8(gobj);
+    }
+    return gobj;
 }
 
 void it_802C11E0(Item_GObj* gobj)

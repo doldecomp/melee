@@ -10,8 +10,9 @@
 
 #include <dolphin/mtx.h>
 
-/* 2C09C4 */ Item_GObj* it_802C09C4(Fighter_GObj* owner, Vec3* pos, int,
-                                    enum_t, bool, bool, float facing_dir);
+/* 2C09C4 */ Item_GObj* it_802C09C4(Fighter_GObj* owner, Vec3* pos, s32 arg2,
+                                    ItemKind arg3, s32 arg4, Fighter_Part arg5,
+                                    f32 facing_dir);
 /* 2C11E0 */ void it_802C11E0(Item_GObj*);
 /* 2C1384 */ bool it_802C1384(Item_GObj*);
 /* 2C13CC */ bool it_802C13CC(Item_GObj*);
