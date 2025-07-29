@@ -404,7 +404,13 @@ struct ftCommonData {
     /* +594 */ UNK_T x594;
     /* +598 */ UNK_T x598;
     /* +59C */ float x59C;
-    /* +5A0 */ u8 x5A0[0x5C0 - 0x5A0];
+    /* +5A0 */ float x5A0;
+    /* +5A4 */ int x5A4;
+    /* +5A8 */ float x5A8;
+    /* +5AC */ float x5AC;
+    /* +5B0 */ float x5B0;
+    /* +5B4 */ int x5B4;
+    /* +5B8 */ u8 x5B8[0x5C0 - 0x5B8];
     /* +5C0 */ float x5C0;
     /* +5C4 */ UNK_T x5C4;
     /* +5C8 */ int x5C8;

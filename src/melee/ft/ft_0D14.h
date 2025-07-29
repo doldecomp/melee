@@ -172,8 +172,8 @@
 /* 0D7614 */ void ftCo_JumpAerialF1_IASA(ftCo_GObj* gobj);
 /* 0D7634 */ void ftCo_JumpAerialF1_Phys(ftCo_GObj* gobj);
 /* 0D767C */ void ftCo_JumpAerialF1_Coll(ftCo_GObj* gobj);
-/* 0D76B8 */ UNK_RET ft_800D76B8(UNK_PARAMS);
-/* 0D7770 */ UNK_RET ft_800D7770(UNK_PARAMS);
+/* 0D76B8 */ void ft_800D76B8(ftCo_GObj*);
+/* 0D7770 */ void ft_800D7770(ftCo_GObj*);
 /* 0D79AC */ void ftCo_ItemScopeStart_Anim(ftCo_GObj* gobj);
 /* 0D79B0 */ void ftCo_ItemScopeAirStart_Anim(ftCo_GObj* gobj);
 /* 0D7AEC */ void ftCo_ItemScopeStart_IASA(ftCo_GObj* gobj);
