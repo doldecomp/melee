@@ -1696,7 +1696,7 @@ void fn_8016DEEC(void)
                 if (j != i &&
                     Player_GetPlayerSlotType(j) != 3 &&
                     (tmp->x24C8.x8 != 1 || Player_GetTeam(i) != Player_GetTeam(j))) {
-                    if (var_r23 == -1 || var_f25 < (var_f26 = fabs_inline(sp18[i] - sp18[j]))) {
+                    if (var_r23 == -1 || var_f25 < (var_f26 = ABS(sp18[i] - sp18[j]))) {
                         var_r23 = j;
                         var_f25 = var_f26;
                     }

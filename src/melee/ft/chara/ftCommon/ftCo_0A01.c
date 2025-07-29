@@ -1723,7 +1723,7 @@ void ftCo_800AFC40(ftCo_Fighter* fp)
     void* temp_r31;
 
     temp_r31 = fp + 0x1A88;
-    if ((fp->x221D >> 1) & 1) {
+    if (fp->x221D_b6) {
         var_r0 = 1;
     } else if ((fp->x2168 != 0) && (fp->x2338.x == 0)) {
         var_r0 = 1;

@@ -282,7 +282,7 @@ void mpColl_80042384(CollData* cd)
 {
     float tmp, tmp2;
 
-    if (fabs_inline(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0f) {
+    if (ABS(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0f) {
         cd->x84_ecb.top.y += 1.0f;
         tmp = 0.5f * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
         cd->x84_ecb.left.y = tmp;
@@ -384,7 +384,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     }
 
     phi_f1 = 4.0f > cd->x12C ? 4.0f : cd->x12C;
-    phi_f2 = fabs_inline(right_x - left_x);
+    phi_f2 = ABS(right_x - left_x);
 
     if (phi_f2 < phi_f1) {
         right_x = 0.5f * phi_f2;
@@ -392,7 +392,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     }
 
     phi_f1 = 4.0f > cd->x128 ? 4.0f : cd->x128;
-    phi_f2 = fabs_inline(top_y - bottom_y);
+    phi_f2 = ABS(top_y - bottom_y);
 
     if (phi_f2 < phi_f1) {
         tmpval = 0.5f * phi_f2;
@@ -875,12 +875,12 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     s32 ret;
 
     lbVector_Diff(&arg1->cur_topn, &arg1->prev_topn, &vel);
-    x = fabs_inline(vel.x);
-    y = fabs_inline(vel.y);
+    x = ABS(vel.x);
+    y = ABS(vel.y);
 
     dist_left_x = arg1->x84_ecb.left.x - arg1->xA4_ecbCurrCorrect.left.x;
     // if (dist_left_x < 0) dist_left_x = -dist_left_x;
-    dist_left_x = fabs_inline(dist_left_x);
+    dist_left_x = ABS(dist_left_x);
 
     dist_right_x = arg1->x84_ecb.right.x - arg1->xA4_ecbCurrCorrect.right.x;
     if (dist_right_x < 0) {
@@ -893,7 +893,7 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
 
     dist_top_y = arg1->x84_ecb.top.y - arg1->xA4_ecbCurrCorrect.top.y;
     // if (dist_top_y < 0) dist_top_y = -dist_top_y;
-    dist_top_y = fabs_inline(dist_top_y);
+    dist_top_y = ABS(dist_top_y);
 
     dist_right_y = arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y;
     if (dist_right_y < 0) {

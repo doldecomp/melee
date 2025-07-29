@@ -196,6 +196,7 @@ void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
 {
     MatchExitInfo* match_exit_info = gm_801A4284(minor_data);
     int i;
+    bool result;
 
     for (i = 0; i < 6; i++) {
         if (match_exit_info->match_end.player_standings[i].slot_type == 0) {

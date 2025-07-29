@@ -1138,7 +1138,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         HSD_JObjGetRotationZ(temp_f30_2, grKg_804D6984.unk0);
         HSD_JObjSetRotationZ(grKg_804D6984.unk0, var_f31);
         temp_f3 = var_f31 - temp_f30_2;
-        if (fabs_inline(temp_f3) > (deg_to_rad * grKg_804D6980->unkB0)) {
+        if (ABS(temp_f3) > (deg_to_rad * grKg_804D6980->unkB0)) {
             gp->gv.kongo2.xC8 = -temp_f3;
         }
     }

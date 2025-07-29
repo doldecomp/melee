@@ -35,10 +35,10 @@
 void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->gr_vel = fp->facing_dir * fabs_inline(fp->gr_vel);
-    fp->self_vel.x = fp->facing_dir * fabs_inline(fp->self_vel.x);
+    fp->gr_vel = fp->facing_dir * ABS(fp->gr_vel);
+    fp->self_vel.x = fp->facing_dir * ABS(fp->self_vel.x);
     fp->mv.pk.specialhi.x10.x =
-        fp->facing_dir * fabs_inline(fp->mv.pk.specialhi.x10.x);
+        fp->facing_dir * ABS(fp->mv.pk.specialhi.x10.x);
 }
 
 void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
@@ -562,7 +562,7 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
     }
 
     if ((final_stick_mag > pika_attr->x8C)) {
-        if (fabs_inline(fp->input.lstick.x) > 0.001f) {
+        if (ABS(fp->input.lstick.x) > 0.001f) {
             ftCommon_8007D9FC(fp);
         }
 

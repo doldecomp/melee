@@ -536,7 +536,7 @@ void ftGw_Init_OnLoad(HSD_GObj* gobj)
     {
         ftGameWatchAttributes* da = fp->dat_attrs;
         fp->x34_scale.z = da->x0_GAMEWATCH_WIDTH;
-        fp->x614 = da->x14_GAMEWATCH_OUTLINE;
+        fp->x610_color_rgba[1] = da->x14_GAMEWATCH_OUTLINE;
         ftMaterial_800BFB4C(gobj,
                             &da->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
