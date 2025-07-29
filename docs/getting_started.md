@@ -9,7 +9,7 @@ The goal of this repo is to **write C code that, after being compiled, matches t
 
 ![](compilation_diagram.png)
 
-The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/0b3f4aeebc17d8e9c3d8ea792d8d8e412c2ad436/src/melee/ft/chara/ftMewtwo/ftMt_SpecialHi.c#L15-L21)):
+The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/0b3f4aeebc17d8e9c3d8ea792d8d8e412c2ad436/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c#L15-L21)):
 
 ```c
 void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
