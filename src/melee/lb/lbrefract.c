@@ -97,7 +97,7 @@ void lbRefract_80022BD0(void)
     lbl_804336D0[0] -= 1;
     if (lbl_804336D0[0] < 0) {
         OSReport("lbRefSetUnuse error!\n");
-        __assert("refract.c", 0x31c, "0");
+        __assert("lbrefract.c", 0x31c, "0");
     }
 }
 
@@ -126,11 +126,20 @@ float atan2f(float y, float x)
 
 float acosf(float x)
 {
-    float result = -(x * x - 1.0f);
-    result = lbRefract_80022DF8(result) * x;
-    result = atanf(result);
-    result = M_PI_2 - result;
-    return result;
+    float result = 1.0F - x * x;
+    if (result > 0) {
+        float guess;
+        guess = __frsqrte(result);
+        guess = 0.5f * guess * (3.0f - guess * guess * result);
+        guess = 0.5f * guess * (3.0f - guess * guess * result);
+        guess = 0.5f * guess * (3.0f - guess * guess * result);
+        result = guess;
+    } else if (result) {
+        result = NAN;
+    } else {
+        result = INF;
+    }
+    return (float) M_PI_2 - atanf(x * result);
 }
 
 float asinf(float x)
