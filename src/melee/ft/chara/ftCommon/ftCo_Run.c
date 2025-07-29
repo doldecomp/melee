@@ -90,7 +90,7 @@ void ftCo_Run_Anim(Fighter_GObj* gobj)
     if (vel * fp->facing_dir <= 0.0F) {
         anim_rate = 0.0F;
     } else {
-        anim_rate = fabs_inline(vel) / fp->co_attrs.run_animation_scaling;
+        anim_rate = ABS(vel) / fp->co_attrs.run_animation_scaling;
     }
 
     ftAnim_SetAnimRate(gobj, anim_rate);

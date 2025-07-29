@@ -131,7 +131,7 @@ void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mul)
         h_vel = fp->self_vel.x + h_vel;
         h_max_vel = co_attrs->jump_h_max_velocity * fp->mv.co.jump.jump_mul;
 
-        if (fabs_inline(h_vel) > h_max_vel) {
+        if (ABS(h_vel) > h_max_vel) {
             if (h_vel < 0.0F) {
                 h_vel = -h_max_vel;
             } else {
