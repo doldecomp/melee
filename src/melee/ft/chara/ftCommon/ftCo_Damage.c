@@ -815,7 +815,7 @@ void ftCo_8008EC90(ftCo_GObj* gobj)
     bool ret0 = false;
     ftCo_Fighter* fp = gobj->user_data;
     float facing_dir = 0;
-    if (fp->x2220_flag.b3 || fp->x2220_flag.b4 || !fp->dmg.kb_applied) {
+    if (fp->x2220_b3 || fp->x2220_b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;
     } else if (fp->dmg.x1860_element == 10U) {

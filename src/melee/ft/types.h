@@ -1664,14 +1664,12 @@ struct Fighter {
     /* fp+221F:6 */ u8 x221F_b6 : 1;
     /* fp+221F:7 */ u8 x221F_b7 : 1;
 
-    /* fp+2220 */ struct {
-        /* fp+2220:0 */ u8 b0 : 3;
-        /* fp+2220:3 */ u8 b3 : 1;
-        /* fp+2220:4 */ u8 b4 : 1;
-        /* fp+2220:5 */ u8 b5 : 1;
-        /* fp+2220:6 */ u8 b6 : 1;
-        /* fp+2220:7 */ u8 b7 : 1;
-    } x2220_flag;
+    /* fp+2220:0 */ u8 x2220_b0 : 3;
+    /* fp+2220:3 */ u8 x2220_b3 : 1;
+    /* fp+2220:4 */ u8 x2220_b4 : 1;
+    /* fp+2220:5 */ u8 x2220_b5 : 1;
+    /* fp+2220:6 */ u8 x2220_b6 : 1;
+    /* fp+2220:7 */ u8 x2220_b7 : 1;
 
     /* fp+2221:0 */ u8 x2221_b0 : 1;
     /* fp+2221:1 */ u8 x2221_b1 : 1;
@@ -1749,11 +1747,17 @@ struct Fighter {
     /* fp+2229:2 */ u8 x2229_b2 : 1;
     /* fp+2229:3 */ u8 x2229_b3 : 1;
     /* fp+2229:4 */ u8 x2229_b4 : 1;
-    /* fp+2229:5 */ u8 x2229_b5_no_normal_motion : 1;
+    /* fp+2229:5 */ u8 no_normal_motion : 1;
     /* fp+2229:6 */ u8 x2229_b6 : 1;
     /* fp+2229:7 */ u8 x2229_b7 : 1;
 
-    /* fp+222A */ UnkFlagStruct x222A_flag;
+    /* fp+222A:0 */ u8 x222A_b0 : 1;
+    /* fp+222A:1 */ u8 x222A_b1 : 1;
+    /* fp+222A:2 */ u8 x222A_b2 : 1;
+    /* fp+222A:3 */ u8 x222A_b3 : 2;
+    /* fp+222A:5 */ u8 x222A_b5 : 1;
+    /* fp+222A:6 */ u8 x222A_b6 : 1;
+    /* fp+222A:7 */ u8 x222A_b7 : 1;
 
     /* fp+222C */ union Fighter_FighterVars {
         /* fp+222C */ struct ftCaptain_FighterVars ca, gn;
@@ -1812,7 +1816,7 @@ struct Fighter {
         /* fp+2340 */ union ftZelda_MotionVars zd;
     } mv;
 };
-STATIC_ASSERT(sizeof(Fighter) == 0x23EC);
+STATIC_ASSERT(sizeof(struct Fighter) == 0x23EC);
 
 struct gmScriptEventDefault {
     u32 opcode : 6;

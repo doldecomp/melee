@@ -837,7 +837,7 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
         if (ftLib_80086FD4(this_gobj, victim_gobj) == false) {
             victim_fp = victim_gobj->user_data;
             if (((!(victim_fp->x2219_b1)) &&
-                 ((!victim_fp->x222A_flag.b0) &&
+                 ((!victim_fp->x222A_b0) &&
                   ((gm_8016B168() == false) || (gm_8016B0D4() != false) ||
                    ((u8) victim_fp->team != (u8) this_fp->team)) &&
                   ((int) victim_fp->x1988 == 0) &&

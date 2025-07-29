@@ -277,15 +277,15 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
 
     switch (temp_r0) {
     case 0:
-        if (fp->x2220_flag.b5) {
+        if (fp->x2220_b5) {
             var_r4 += 1;
-        } else if (fp->x2220_flag.b6) {
+        } else if (fp->x2220_b6) {
             var_r4 += 2;
         }
         break;
     case 1:
-        if (!fp->x2220_flag.b5) {
-            if (fp->x2220_flag.b6) {
+        if (!fp->x2220_b5) {
+            if (fp->x2220_b6) {
                 var_r4 += 2;
             } else {
                 var_r4 += 2;
@@ -293,9 +293,9 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
         }
         break;
     case 2:
-        if (fp->x2220_flag.b5) {
+        if (fp->x2220_b5) {
             var_r4 += 1;
-        } else if (!fp->x2220_flag.b6) {
+        } else if (!fp->x2220_b6) {
             var_r4 += 1;
         }
         break;
