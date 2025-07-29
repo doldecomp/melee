@@ -26,8 +26,8 @@
 /* 28F310 */ bool it_8028F310(void);
 /* 28F318 */ void it_8028F318(Item_GObj*);
 /* 28F340 */ void it_8028F340(Item_GObj*);
-/* 28F368 */ s32 it_8028F368(UNK_PARAMS);
-/* 28F398 */ s32 it_8028F398(UNK_PARAMS);
+/* 28F368 */ s32 it_8028F368(Item_GObj* gobj);
+/* 28F398 */ s32 it_8028F398(Item_GObj* gobj);
 /* 28F3CC */ bool it_8028F3CC(Item_GObj*);
 /* 28F3D4 */ bool it_8028F3D4(Item_GObj*);
 /* 28F3DC */ bool it_8028F3DC(Item_GObj*);
