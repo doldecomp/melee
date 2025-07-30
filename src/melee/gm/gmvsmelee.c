@@ -16,7 +16,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lbdvd.h>
 
-/* 4D6730 */ extern u8 gm_804D6730[6];
+/* 4D6730 */ static u8 gm_804D6730[6];
 
 VsModeData* gm_801A5244(void)
 {

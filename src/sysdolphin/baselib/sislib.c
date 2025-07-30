@@ -24,6 +24,8 @@ static HSD_WObjDesc HSD_SisLib_8040C490 = { NULL, { 0, 0, 1 }, NULL, };
 
 static HSD_WObjDesc HSD_SisLib_8040C4A4 = { NULL, { 0, 0, 0 }, NULL, };
 
+static u32 HSD_SisLib_804D7968;
+
 static HSD_CameraDescPerspective HSD_SisLib_8040C4B8 = {
     0,
     0,
@@ -403,7 +405,7 @@ HSD_Text* HSD_SisLib_803A5ACC(int arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
     return temp_r30;
 }
 
-extern sislib_UnkAllocData* HSD_SisLib_804D796C;
+static sislib_UnkAllocData* HSD_SisLib_804D796C;
 
 void HSD_SisLib_803A5E70(void)
 {

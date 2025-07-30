@@ -93,7 +93,7 @@ static s8 efAsync_803C0214[0xB] = "EfKbFe.dat";
 static s8 efAsync_803C0220[0x18] = "effKirbyEmblemDataTable";
 static s8 efAsync_803C0238[0xD] = "EfFeData.dat";
 static s8 efAsync_803C0248[0x13] = "effEmblemDataTable";
-static struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51] = {
+struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51] = {
     { "EfCoData.dat", "effCommonDataTable", NULL },
     { "EfMrData.dat", "effMarioDataTable", NULL },
     { "EfSsData.dat", "effSamusDataTable", NULL },

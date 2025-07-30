@@ -1298,7 +1298,7 @@ s32 Camera_8002BA00(s32 slot, s32 arg1)
     return Camera_8002BA00(slot, arg1);
 }
 
-float vec_len(Vec3* offset)
+static inline float vec_len(Vec3* offset)
 {
     return sqrtf((offset->x * offset->x) + (offset->y * offset->y) + (offset->z * offset->z));
 }
