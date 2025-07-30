@@ -438,7 +438,7 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
     // it_80275D5C(item_gobj, attr + (temp_r25 + 0x58));
     // it_80275D5C(item_gobj, attr[var_r31].x58);
     // it_80275D5C(item_gobj, attr[var_r31 + 1].x2C);
-    it_80275D5C(item_gobj, (ECB*) &attr[var_r31 + 2].x0);
+    it_80275D5C(item_gobj, (itECB*) &attr[var_r31 + 2].x0);
 
     // item->xC0C.top = item->xC1C.top;
     // item->xC0C.bottom = item->xC1C.bottom;

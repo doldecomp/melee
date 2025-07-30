@@ -12,6 +12,19 @@
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
+typedef struct itClimbersBlizzard_ItemVars {
+    /* +0 */ f32 x0;
+    /* +4 */ u8 flag0 : 1;
+} itClimbersBlizzard_ItemVars;
+
+typedef struct itClimbersBlizzardAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itClimbersBlizzardAttributes;
+
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
     /* x4 ip+DD8 */ HSD_GObj* x4;
@@ -368,6 +381,61 @@ typedef struct {
     f32 x0;
     HSD_GObj* x4;
 } itLinkBow_ItemVars;
+
+typedef struct itMasterHandBullet_ItemVars {
+    /* ip+DD4 */ f32 x0;
+} itMasterHandBullet_ItemVars;
+
+typedef struct itMasterHandBulletAttributes {
+    f32 x0;
+} itMasterHandBulletAttributes;
+
+typedef struct itMasterHandLaser_ItemVars {
+    /* ip+DD4 */ bool x0;
+    /* ip+DD8 */ s32 x4;
+    /* ip+DDC */ s32 x8;
+    /* ip+DE0 */ HSD_JObj* x10;
+} itMasterHandLaser_ItemVars;
+
+typedef struct itMasterHandLaserAttributes {
+    f32 x0;
+    f32 x4;
+} itMasterHandLaserAttributes;
+
+typedef struct itPeachToadSporeAttributes {
+    f32 x0_min_speed;
+    f32 x4_max_speed_offset;
+    f32 x8_speed_decay_rate;
+    f32 xc_angle;
+} itPeachToadSporeAttributes;
+
+typedef struct itPeachTurnipAttributes {
+    f32 x0_lifetime;
+    s32 x4_length; // length of x8, should be 8 for the number of turnip types
+    struct {
+        s32 x0_odds;
+        s32 x4_damage;
+    } x8 UNK_SIZE_ARRAY;
+} itPeachTurnipAttributes;
+
+typedef struct itPeachTurnip_ItemVars {
+    /*  +0 ip+DD4 */ UnkFlagStruct xDD4;
+    /*  +4 ip+DD8 */ s32 xDD8; // turnip type index
+    /*  +8 ip+DDC */ s32 xDDC_damage;
+    /*  +C ip+DE0 */ f32 xDE0_scl; // Scale - Mr. Saturn, Turnip
+    /*  +10 ip+DE4 */ HSD_GObj* xDE4_owner;
+    /*  +14 ip+DE8 */ f32 xDE8_scl; // Scale - Bob-omb
+} itPeachTurnip_ItemVars;
+
+typedef struct itPikachutJoltGround_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x8];
+    /* +8 +DDC */ UNK_T unk_8;
+} itPikachutJoltGround_ItemVars;
+
+typedef struct itSamusGrapple_ItemVars {
+    /*  +0 +DD4 */ char pad_0[0x10];
+    /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
+} itSamusGrapple_ItemVars;
 
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;

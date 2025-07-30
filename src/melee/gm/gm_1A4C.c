@@ -629,8 +629,8 @@ static u8 gm_804D67E1;
 static u8 gm_804D67E2;
 static u32 gm_804D67E4;
 static HSD_GObj* gm_804D67E8;
-static u32 gm_804D67EC;
-static int gm_804D67F0;
+u32 gm_804D67EC;
+int gm_804D67F0;
 static HSD_GObj* gm_804D67F4;
 
 static int gm_803DBFB4[] = {
@@ -1079,7 +1079,7 @@ UNK_T gm_801ACC94(void)
     return &gm_803DD2C0;
 }
 
-extern HSD_GObj* gm_804D6850;
+static HSD_GObj* gm_804D6850;
 
 void gm_801ACCA0_OnEnter(UNK_T unused)
 {

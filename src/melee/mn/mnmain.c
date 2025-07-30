@@ -27,6 +27,17 @@
 #include <melee/mn/mnhyaku.h>
 #include <melee/sc/types.h>
 
+static HSD_GObj* mn_804D6BA8;
+static HSD_GObj* mn_804D6BAC;
+static HSD_GObj* mn_804D6BB0;
+static u8 mn_804D6BB4;
+static u8 mn_804D6BB5;
+HSD_Archive* mn_804D6BB8;
+static UNK_T MenMain_lights;
+static HSD_FogDesc* MenMain_fog;
+static HSD_CObjDesc* MenMain_cam;
+mn_unk2 mn_804D6BC8;
+
 mn_unk1 mn_804A04F0;
 
 static u16 mn_803EAE68[] = {
@@ -746,8 +757,6 @@ static u8 mn_80229A04_dontinline(int arg0, int arg1)
 {
     return mn_80229A04(arg0, arg1);
 }
-
-extern u8 mn_804D6BB4;
 
 struct mn_80229A7C_t {
     u8 x0, x1, x2;
@@ -1528,7 +1537,6 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
     return temp_r27;
 }
 
-extern HSD_CObjDesc* MenMain_cam;
 static const Vec3 mn_803B8500 = { 0, 1, 0 };
 
 void mn_8022BA1C(HSD_GObj* arg0)
@@ -1601,11 +1609,6 @@ void fn_8022BCD4(HSD_GObj* gobj, int unused)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-extern HSD_GObj* mn_804D6BA8;
-extern HSD_GObj* mn_804D6BAC;
-extern HSD_GObj* mn_804D6BB0;
-extern HSD_FogDesc* MenMain_fog;
-
 HSD_GObj* mn_8022BCF8(void)
 {
     HSD_GObj* gobj;
@@ -1658,9 +1661,6 @@ HSD_GObj* mn_8022BE34(void)
     HSD_GObjProc_8038FD54(gobj, mn_8022BA1C, 0);
     return gobj;
 }
-
-extern u8 mn_804D6BB4;
-extern u8 mn_804D6BB5;
 
 void mn_8022BEDC(HSD_GObj* gobj)
 {
@@ -1885,8 +1885,6 @@ void mn_8022DD38_OnFrame(void)
 }
 
 u8 data_pad[0xd5c - 0xc4c] = { 0 };
-
-extern UNK_T MenMain_lights;
 
 static inline void mn_8022DDA8_inline(u16* sp2B4)
 {
