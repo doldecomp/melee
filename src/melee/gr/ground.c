@@ -74,13 +74,13 @@
 /* 1C1D38 */ static void Ground_801C1D38(HSD_GObj*);
 /* 1C1E2C */ static void Ground_801C1E2C(HSD_GObj* gobj, int code);
 /* 1C1E94 */ static void Ground_801C1E94(void);
-/* 1C20E0 */ static UNK_T Ground_801C20E0(UnkArchiveStruct*, UNK_T);
+/* 1C20E0 */ UNK_T Ground_801C20E0(UnkArchiveStruct*, UNK_T);
 /* 1C24F8 */ static bool Ground_801C24F8(s32, u32, s32*);
-/* 1C28CC */ static void Ground_801C28CC(void*, s32);
+/* 1C28CC */ void Ground_801C28CC(void*, s32);
 /* 1C2BBC */ static void Ground_801C2BBC(HSD_GObj*, s32);
 /* 1C2BD4 */ static void Ground_801C2BD4(void*);
-/* 1C34AC */ static void Ground_801C34AC(s32, HSD_JObj*, struct HSD_Joint*);
-/* 1C466C */ static void Ground_801C466C(void);
+/* 1C34AC */ void Ground_801C34AC(s32, HSD_JObj*, struct HSD_Joint*);
+/* 1C466C */ void Ground_801C466C(void);
 /* 1C55AC */ static void Ground_801C55AC(Ground*);
 /* 1C5878 */ static void Ground_801C5878(void);
 
@@ -2661,7 +2661,7 @@ SDATA UNK_T Ground_804D451C[] = { &Ground_803E06AC, &Ground_804D4514 };
 SDATA char Ground_804D4524[] = "fog.h";
 SDATA char Ground_804D452C[] = "fog";
 
-float vec_len(Vec3* v)
+static inline float vec_len(Vec3* v)
 {
     float x2 = v->x * v->x;
     float y2 = v->y * v->y;

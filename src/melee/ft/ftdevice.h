@@ -19,7 +19,6 @@
 /* 459A68 */ extern struct ftDeviceUnk3 ft_80459A68[4];
 /* 459A74 */ extern struct ftDeviceUnk5 ftDevice_BuryThings[2];
 /* 459A8C */ extern UNK_T ft_80459A8C;
-/* 4D6570 */ extern int ft_804D6570;
 /* 4D6574 */ extern int ftDevice_BuryThingCount;
 /* 4D6578 */ extern struct ftDeviceUnk4 ft_804D6578;
 

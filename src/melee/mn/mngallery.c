@@ -3,7 +3,7 @@
 #include <baselib/cobj.h>
 #include <baselib/memory.h>
 
-extern void* mnGallery_804D6C8C;
+static void* mnGallery_804D6C8C;
 
 void mnGallery_80258940(void)
 {

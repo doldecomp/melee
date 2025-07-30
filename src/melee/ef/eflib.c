@@ -49,7 +49,7 @@ struct UnkStruct8039EFAC {
 extern struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51];
 HSD_ObjAllocData Effect_AllocData;
 
-static struct _struct_efLib_80458EE0_0x8 efLib_80458EE0[16];
+struct _struct_efLib_80458EE0_0x8 efLib_80458EE0[16];
 // static HSD_JObj** efLib_80458EE0;
 
 struct struct_efLib_80458F60_0x8 {
