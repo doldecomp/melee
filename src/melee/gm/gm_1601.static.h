@@ -13,6 +13,7 @@
 #include <dolphin/mtx.h>
 
 #define NUM_UNLOCKABLE_CHARACTERS 11
+#define NUM_UNLOCKABLE_STAGES 11
 
 struct lbl_8046B488_t {
     /* 0x000 */ char pad_0[0x7];
