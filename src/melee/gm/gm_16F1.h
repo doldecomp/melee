@@ -66,7 +66,7 @@
 /* 172BC4 */ bool gm_80172BC4(void);
 /* 172C04 */ bool gm_80172C04(void);
 /* 172C44 */ UNK_RET gm_80172C44(UNK_PARAMS);
-/* 172C78 */ void fn_80172C78(int);
+/* 172C78 */ bool fn_80172C78(int);
 /* 172CC0 */ u8 gm_80172CC0(int, int); ///< returns a CPU level
 /* 172D78 */ u8 gm_80172D78(void);
 /* 172DD4 */ u8 gm_80172DD4(UNK_T);
