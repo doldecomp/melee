@@ -89,7 +89,7 @@ typedef struct _mn_unk2 {
 /* 22F298 */ f32 mn_8022F298(HSD_JObj*);
 /* 22F360 */ UNK_RET mn_8022F360(HSD_AObj*, void*, u32);
 /* 22F3D8 */ void mn_8022F3D8(HSD_JObj*, u8, HSD_TypeMask);
-/* 22F410 */ UNK_RET mn_8022F410(UNK_PARAMS);
+/* 22F410 */ s32 mn_8022F410(f32*, f32, f32*);
 /* 22F470 */ UNK_RET mn_8022F470(UNK_PARAMS);
 /* 22F4CC */ UNK_RET mn_8022F4CC(UNK_PARAMS);
 /* 22F538 */ void fn_8022F538(HSD_GObj*);

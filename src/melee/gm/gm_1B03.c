@@ -1013,7 +1013,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         gm_801B1724,
         NULL,
         {
-            MN_TOU,
+            MN_TOU_SETUP,
             NULL,
             NULL,
         },
@@ -1033,7 +1033,7 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         NULL,
         NULL,
         {
-            MN_TOU_FINISH,
+            MN_TOU_ALT,
             NULL,
             NULL,
         },

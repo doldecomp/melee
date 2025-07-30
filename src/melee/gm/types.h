@@ -598,14 +598,47 @@ struct TmData {
     s32 x4;
     u8 pad_x8[0x28 - 0x8];
     u32 x28; ///< stage id
-    u8 pad_x2C[0x32 - 0x2C];
+    u8 x2C;
+    u8 x2D;
+    u8 x2E;
+    u8 x2F;
+    u8 x30;
+    u8 x31;
     u8 x32;
-    u8 pad_x33[0x4E4 - 0x33];
+    u8 x33;
+    u8 pad_x34[0x37 - 0x34];
+    struct TmUnkMenuData {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        u8 x3;
+        u8 x4;
+        u8 x5;
+        u8 x6;
+        u8 x7;
+        u8 x8;
+        u16 x9;
+        u8 xB;
+        u8 xC;
+        u8 xD;
+        u8 pad_xE[0x11 - 0xE];
+    } x37[16];
+    u8 pad_x158[0x4B8 - 0x158];
+    struct UnkSelections {
+        u8 x0; ///< slot type?
+        u8 x1; ///< CSSIconHud
+        u8 x2;
+        u8 x3;
+        u8 pad_x4[0xA - 0x4];
+    } x4B8[4];
     HSD_Text* x4E0;
     HSD_Text* x4E4;
     HSD_Text* x4E8[6];
     HSD_Text* x500[6];
     HSD_Text* x518[3];
+    u8 pad_x524[0x534 - 0x524];
+    HSD_Text* x534[3];
+    u8 pad_x540[0x56B - 0x540];
 };
 
 struct NameData {
@@ -644,6 +677,13 @@ struct CameraVsData {
         };
         HSD_Text* text[3];
     };
+};
+
+struct TmVsData {
+    u32 stage_id;
+    s32 slot_type[4];
+    u32 char_id[4];
+    u32 color[4];
 };
 
 #endif
