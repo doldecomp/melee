@@ -391,8 +391,16 @@ typedef struct itMasterHandBulletAttributes {
 } itMasterHandBulletAttributes;
 
 typedef struct itMasterHandLaser_ItemVars {
-    /*  +0 ip+DD4 */ bool x0;
+    /* ip+DD4 */ bool x0;
+    /* ip+DD8 */ s32 x4;
+    /* ip+DDC */ s32 x8;
+    /* ip+DE0 */ HSD_JObj* x10;
 } itMasterHandLaser_ItemVars;
+
+typedef struct itMasterHandLaserAttributes {
+    f32 x0;
+    f32 x4;
+} itMasterHandLaserAttributes;
 
 typedef struct itPeachToadSporeAttributes {
     f32 x0_min_speed;
