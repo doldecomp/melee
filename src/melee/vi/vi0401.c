@@ -4,7 +4,7 @@
 
 #include "vi.h"
 
-#include "gm/gm_1A36.h"
+#include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 
 #include <baselib/aobj.h>

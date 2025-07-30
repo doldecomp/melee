@@ -21,6 +21,8 @@
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_1A4C.h>
+#include <melee/gm/gm_1ADD.h>
 #include <melee/gm/gm_1AED.h>
 #include <melee/gm/gm_1B03.h>
 #include <melee/gm/gm_1BFA.h>

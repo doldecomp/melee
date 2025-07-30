@@ -50,7 +50,7 @@ struct SIPacket {
 int SIBusy();
 void SIInit();
 unsigned long SISync();
-unsigned long SIGetStatus();
+unsigned long SIGetStatus(int);
 void SISetCommand(long chan, unsigned long command);
 unsigned long SIGetCommand(long chan);
 void SITransferCommands();

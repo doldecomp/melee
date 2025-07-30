@@ -127,7 +127,7 @@
 /* 15ED80 */ void gmMainLib_8015ED80(u8);
 /* 15ED8C */ u16* gmMainLib_8015ED8C(void);
 /* 15ED98 */ struct gmm_retval_ED98* gmMainLib_8015ED98(void);
-/* 15EDA4 */ s16* gmMainLib_8015EDA4(void);
+/* 15EDA4 */ u16* gmMainLib_8015EDA4(void);
 /* 15EDB0 */ struct gmm_retval_EDB0* gmMainLib_8015EDB0(void);
 /* 15EDBC */ struct gmm_retval_EDBC* gmMainLib_8015EDBC(void);
 /* 15EDC8 */ u8* gmMainLib_8015EDC8(void);
