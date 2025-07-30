@@ -180,7 +180,8 @@ struct gmm_retval_EDBC {
 };
 
 struct gmm_x1868 {
-    /* 0x0000 */ s32 x1868;
+    /* 0x0000 */ u16 x1868; // unlocked characters bitmask
+    /* 0x0002 */ u16 x186A; // unlocked stages bitmask
     /* 0x0004 */ u8 unk_4;
     /* 0x0005 */ char pad_5[3]; /* maybe part of unk_4[4]? */
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;

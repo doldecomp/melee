@@ -304,7 +304,17 @@ bool gm_80172C04(void)
 
 /// #gm_80172C44
 
-/// #fn_80172C78
+#pragma push
+#pragma dont_inline on
+bool fn_80172C78(int arg0)
+{
+    if (gmMainLib_8015D984(arg0) != 0) {
+        gmMainLib_8015DA68(arg0);
+        return true;
+    }
+    return false;
+}
+#pragma pop
 
 /// #gm_80172CC0
 

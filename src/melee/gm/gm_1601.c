@@ -652,14 +652,26 @@ void gm_801641E4(u8 stage, u8 enable)
 
 /// #gm_80164504
 
-/// #gm_80164600
+/// Are all stages unlocked?
+bool gm_80164600(void)
+{
+    u16* stage_unlock_mask = (void*) gmMainLib_8015EDA4();
+    int i;
+
+    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+        if (!(*stage_unlock_mask & (1LL << i))) {
+            return false;
+        }
+    }
+    return true;
+}
 
 /// #gm_8016468C
 
 void gm_801647D0(void)
 {
-    s16 *temp_r3 = gmMainLib_8015EDA4();
-    *temp_r3 = 0;
+    u16* stage_unlock_mask = gmMainLib_8015EDA4();
+    *stage_unlock_mask = 0;
 }
 
 /// #gm_801647F8
