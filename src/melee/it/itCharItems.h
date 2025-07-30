@@ -12,6 +12,19 @@
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
+typedef struct itClimbersBlizzard_ItemVars {
+    /* +0 */ f32 x0;
+    /* +4 */ u8 flag0 : 1;
+} itClimbersBlizzard_ItemVars;
+
+typedef struct itClimbersBlizzardAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itClimbersBlizzardAttributes;
+
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
     /* x4 ip+DD8 */ HSD_GObj* x4;
@@ -369,9 +382,25 @@ typedef struct {
     HSD_GObj* x4;
 } itLinkBow_ItemVars;
 
+typedef struct itMasterHandBullet_ItemVars {
+    /* ip+DD4 */ f32 x0;
+} itMasterHandBullet_ItemVars;
+
+typedef struct itMasterHandBulletAttributes {
+    f32 x0;
+} itMasterHandBulletAttributes;
+
 typedef struct itMasterHandLaser_ItemVars {
-    /*  +0 ip+DD4 */ bool x0;
+    /* ip+DD4 */ bool x0;
+    /* ip+DD8 */ s32 x4;
+    /* ip+DDC */ s32 x8;
+    /* ip+DE0 */ HSD_JObj* x10;
 } itMasterHandLaser_ItemVars;
+
+typedef struct itMasterHandLaserAttributes {
+    f32 x0;
+    f32 x4;
+} itMasterHandLaserAttributes;
 
 typedef struct itPeachToadSporeAttributes {
     f32 x0_min_speed;
