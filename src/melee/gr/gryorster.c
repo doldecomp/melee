@@ -164,7 +164,7 @@ void grYorster_802022A0(HSD_GObj* gobj)
     return;
 }
 
-void grYorster_802022A4()
+void grYorster_802022A4(void)
 {
     return;
 }

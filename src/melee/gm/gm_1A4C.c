@@ -1,40 +1,11 @@
-#include "gm_1A4C.h"
-
 #include "gm_1A4C.static.h"
 
+#include "gm_1A4C.h"
 #include "gm_unsplit.h"
 
 #include <dolphin/dvd.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/vi.h>
-#include <melee/cm/camera.h>
-#include <melee/db/db.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftdemo.h>
-#include <melee/it/item.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/gmtitle.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbcardgame.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/lb/types.h>
-#include <melee/mn/mnmain.h>
-#include <melee/mn/mngallery.h>
-#include <melee/mn/types.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/pl/player.h>
-#include <melee/ty/toy.h>
-#include <melee/un/un_2FC9.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/devcom.h>
@@ -52,7 +23,35 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/video.h>
-
+#include <melee/cm/camera.h>
+#include <melee/db/db.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftdemo.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmtitle.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00B0.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbbgflash.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/lb/types.h>
+#include <melee/mn/mngallery.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/types.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
+#include <melee/ty/toy.h>
+#include <melee/ty/tylist.h>
+#include <melee/un/un_2FC9.h>
 
 void gm_801A6254(MinorScene* arg0)
 {
@@ -66,7 +65,9 @@ void gm_801A6254(MinorScene* arg0)
     gm_80162968(temp_r30->match_end.frame_count / 60);
     gm_8016247C(temp_r30->match_end.player_standings[0].xE);
     temp_r0 = temp_r30->match_end.result;
-    if (temp_r0 != 7 && temp_r0 != 8 && temp_r30->match_end.player_standings[0].stocks != 0) {
+    if (temp_r0 != 7 && temp_r0 != 8 &&
+        temp_r30->match_end.player_standings[0].stocks != 0)
+    {
         gm_80164910(temp_r31[4]);
     } else {
         temp_ret = gm_80160638(temp_r31[4]);
@@ -111,7 +112,9 @@ void gm_801A64A8_OnFrame(void)
     if (gmMainLib_8046B0F0.xC != 0 && lbMthp_8001F604() == 0) {
         var_r30 = true;
     }
-    if (gm_804D6738 >= 0x1A4 || (gm_801A36A0(gm_801BF010()) & 0x1000) || var_r30) {
+    if (gm_804D6738 >= 0x1A4 || (gm_801A36A0(gm_801BF010()) & 0x1000) ||
+        var_r30)
+    {
         lbAudioAx_800236DC();
         lbAudioAx_80023694();
         if (var_r30) {
@@ -170,39 +173,9 @@ static HSD_Archive* gm_804D6744;
 static HSD_GObj* gm_804D674C;
 
 static float gm_803DB2EC[] = {
-    0.6f,
-    0.5f,
-    0.75f,
-    0.7f,
-    0.7f,
-    0.4f,
-    0.8f,
-    0.75f,
-    0.9f,
-    0.7f,
-    0.6f,
-    0.6f,
-    0.75f,
-    0.7f,
-    0.65f,
-    0.7f,
-    0.6f,
-    0.7f,
-    0.8f,
-    0.7f,
-    0.7f,
-    0.7f,
-    1.0f,
-    0.7f,
-    0.4f,
-    0.5f,
-    0.0f,
-    0.0f,
-    0.0f,
-    0.0f,
-    0.0f,
-    0.0f,
-    0.0f,
+    0.6f, 0.5f,  0.75f, 0.7f,  0.7f, 0.4f, 0.8f, 0.75f, 0.9f, 0.7f, 0.6f,
+    0.6f, 0.75f, 0.7f,  0.65f, 0.7f, 0.6f, 0.7f, 0.8f,  0.7f, 0.7f, 0.7f,
+    1.0f, 0.7f,  0.4f,  0.5f,  0.0f, 0.0f, 0.0f, 0.0f,  0.0f, 0.0f, 0.0f,
 };
 
 void gm_801A68D8(void)
@@ -332,7 +305,8 @@ void gm_801A6C54(void)
     int i;
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = lb_80013B14((HSD_CameraDescPerspective*) gm_804D6748->cameras[0].desc);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) gm_804D6748->cameras[0].desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, fn_801A6ACC, 8);
     gobj->gxlink_prios = 0x61;
@@ -365,7 +339,8 @@ void gm_801A6DC0(void)
     int i;
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = lb_80013B14((HSD_CameraDescPerspective*) gm_804D6748->cameras[0].desc);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) gm_804D6748->cameras[0].desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, fn_801A6D78, 0xB);
     gobj->gxlink_prios = 0x801;
@@ -405,14 +380,12 @@ void gm_801A6EE4(void)
         var_r29 = MJ_ALLSTAR;
         break;
     }
-    lbArchive_LoadSymbols(gm_801604DC(gm_801BEFB0(), var_r29),
-            &gm_804D6798, gm_80160564(gm_801BEFB0(), var_r29), 0);
-    gm_804D6744 = lbArchive_LoadSymbols("GmRegEnd",
-            &gm_804D6748, "cut1CanimScene",
-            &gm_804D67A8, "cut2CanimScene",
-            &gm_804D67A4, "cut3CanimScene",
-            &gm_804D67A0, "cut3BgScene",
-            0);
+    lbArchive_LoadSymbols(gm_801604DC(gm_801BEFB0(), var_r29), &gm_804D6798,
+                          gm_80160564(gm_801BEFB0(), var_r29), 0);
+    gm_804D6744 = lbArchive_LoadSymbols(
+        "GmRegEnd", &gm_804D6748, "cut1CanimScene", &gm_804D67A8,
+        "cut2CanimScene", &gm_804D67A4, "cut3CanimScene", &gm_804D67A0,
+        "cut3BgScene", 0);
     lbArchive_LoadSymbols("GmRgStnd.dat", &gm_804D67AC, "standScene", 0);
     switch (var_r29) {
     case MJ_CLASSIC_GOVER:
@@ -634,12 +607,7 @@ int gm_804D67F0;
 static HSD_GObj* gm_804D67F4;
 
 static int gm_803DBFB4[] = {
-    0x000004E2,
-    0x00000002,
-    0x0000018A,
-    0x00000001,
-    0x00010000,
-    0x00000002,
+    0x000004E2, 0x00000002, 0x0000018A, 0x00000001, 0x00010000, 0x00000002,
 };
 
 void gm_801AA110_OnEnter(UNK_T arg0)
@@ -729,7 +697,8 @@ void gm_801AA28C_OnFrame(void)
         temp_r3_2 = GObj_Create(0xEU, 0xFU, 0U);
         HSD_GObjObject_80390A70(temp_r3_2, HSD_SObjLib_804D7960, NULL);
         GObj_SetupGXLink(temp_r3_2, HSD_SObjLib_803A49E0, 0x11U, 0U);
-        temp_r3_3 = HSD_SObjLib_803A477C(temp_r3_2, gm_804D67F0, 0, 0, 0x80, 0);
+        temp_r3_3 =
+            HSD_SObjLib_803A477C(temp_r3_2, gm_804D67F0, 0, 0, 0x80, 0);
         temp_r3_3->x10 = 82.0f;
         temp_r3_3->x14 = 290.0f;
         gm_804D67D4 = temp_r3_2;
@@ -738,7 +707,9 @@ void gm_801AA28C_OnFrame(void)
         HSD_GObjPLink_80390228(gm_804D67D4);
         gm_804D67D4 = NULL;
     }
-    if ((gm_804D67D8 == NULL) && ((u32) gm_804D67EC >= 0x3B6) && (gm_804D67EC < 0x3CE)) {
+    if ((gm_804D67D8 == NULL) && ((u32) gm_804D67EC >= 0x3B6) &&
+        (gm_804D67EC < 0x3CE))
+    {
         gm_804D67D8 = gmTitle_801A12C4();
     }
     if ((gm_804D67D8 != NULL) && (gm_804D67EC >= 0x3CE)) {
@@ -852,7 +823,8 @@ void fn_801AA854(HSD_GObj* gobj, int code)
     Mtx sp10;
 
     if (HSD_CObjSetCurrent(cobj)) {
-        HSD_SetEraseColor(gm_804D6838->color.r, gm_804D6838->color.g, gm_804D6838->color.b, 0xFF);
+        HSD_SetEraseColor(gm_804D6838->color.r, gm_804D6838->color.g,
+                          gm_804D6838->color.b, 0xFF);
         HSD_CObjEraseScreen(cobj, 1, 0, 0);
         HSD_GObj_80390ED0(gobj, 7);
         HSD_FogSet(NULL);
@@ -860,19 +832,26 @@ void fn_801AA854(HSD_GObj* gobj, int code)
         gobj = HSD_GObj_804D7824[9];
         while (gobj != NULL) {
             if (gobj != HSD_GObj_804D7824[9]) {
-                __assert("gmstaffroll.c", 0x167, "gobj == HSD_GObjGXLinkHead[Gm_GObj_GXLink_PlyCursor]");
+                __assert(
+                    "gmstaffroll.c", 0x167,
+                    "gobj == HSD_GObjGXLinkHead[Gm_GObj_GXLink_PlyCursor]");
             }
             for (i = gm_804D6800 - 1; i >= 0; i--) {
                 if (gm_804D67F8[gm_804D67FC[i].index].win[0] == 0) {
-                    __assert("gmstaffroll.c", 0x169, "staffInfo[staffInfoSortBuf[i].index].win[0]");
+                    __assert("gmstaffroll.c", 0x169,
+                             "staffInfo[staffInfoSortBuf[i].index].win[0]");
                 }
                 if (gm_804D67F8[gm_804D67FC[i].index].win[1] == 0) {
-                    __assert("gmstaffroll.c", 0x16A, "staffInfo[staffInfoSortBuf[i].index].win[1]");
+                    __assert("gmstaffroll.c", 0x16A,
+                             "staffInfo[staffInfoSortBuf[i].index].win[1]");
                 }
-                PSMTXConcat(cobj->view_mtx, gm_804D67FC[i].x4->mtx, cobj->view_mtx);
+                PSMTXConcat(cobj->view_mtx, gm_804D67FC[i].x4->mtx,
+                            cobj->view_mtx);
                 if (cobj->view_mtx[2][2] >= 0.0F) {
-                    HSD_SisLib_803A84BC(gm_804D67F8[gm_804D67FC[i].index].win[0]->x54, 2);
-                    HSD_SisLib_803A84BC(gm_804D67F8[gm_804D67FC[i].index].win[1]->x54, 2);
+                    HSD_SisLib_803A84BC(
+                        gm_804D67F8[gm_804D67FC[i].index].win[0]->x54, 2);
+                    HSD_SisLib_803A84BC(
+                        gm_804D67F8[gm_804D67FC[i].index].win[1]->x54, 2);
                 }
                 PSMTXCopy(sp10, cobj->view_mtx);
             }
@@ -1005,13 +984,10 @@ void gm_801AC6D8_OnEnter(UNK_T unused)
         {
             if (lbLang_IsSettingUS()) {
                 lb_80011E24(jobj, jobj_arr, 103, 20, -1);
-                M2C_FIELD(M2C_FIELD(jobj_arr[1]->u.dobj->mobj,
-                                    void**, 8),
+                M2C_FIELD(M2C_FIELD(jobj_arr[1]->u.dobj->mobj, void**, 8),
                           s32*, 0x58) =
-                    M2C_FIELD(
-                        M2C_FIELD(jobj_arr[1]->u.dobj->mobj,
-                                  void**, 8),
-                        s32*, 0x58);
+                    M2C_FIELD(M2C_FIELD(jobj_arr[1]->u.dobj->mobj, void**, 8),
+                              s32*, 0x58);
             }
         }
         HSD_GObjProc_8038FD54(gobj, fn_801AAB18, 0);
