@@ -1,5 +1,6 @@
 #include "gmtou.h"
 #include "gm/gmtou.static.h"
+#include "placeholder.h"
 #include "mn/mnmain.h"
 
 #include <sysdolphin/baselib/controller.h>
@@ -250,63 +251,48 @@ void fn_8019CC74(HSD_GObj* gobj)
     fn_8018FDC4(jobj, var_f1, 666.0f, 0.01f);
 }
 
-// void fn_8019CDBC(HSD_GObj* gobj)
-// {
-//     f32 sp28;
-//     f32 sp24;
-//     TmData* tmd;
-//     s32 temp_r31;
-//     s32 temp_r3;
-//     u32 idx;
-//     void* temp_r27;
-//     void* temp_r27_2;
-//     void* temp_r29_2;
-//     void* temp_r29_3;
-//     HSD_JObj* jobj;
-//     void* temp_r4;
+void fn_8019CDBC(HSD_GObj* gobj)
+{
+    f32 sp28;
+    f32 sp24;
+    u8 temp_r27;
+    TmData* tmd = gm_8018F634();
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    u32 idx = fn_8018F62C(gobj);
+    PAD_STACK(20);
 
-//     jobj = GET_JOBJ(gobj);
-//     tmd = gm_8018F634();
-//     idx = fn_8018F62C(gobj);
-//     if (jobj == NULL) {
-//         __assert("jobj.h", 0x3E1U, "jobj");
-//     }
-//     temp_r31 = idx * 0x12;
-//     sp28 = jobj->translate.x;
-//     temp_r27 = tmd + temp_r31;
-//     sp24 = (5.999997f * (f32) temp_r27->unk45) - 21.5f;
-//     mn_8022F410(&sp28, 0.4f, &sp24);
-//     temp_r3 = mn_8022F410(&sp28, 0.2f, &sp24);
-//     switch (temp_r3) {                              /* irregular */
-//     case 1:
-//         fn_8018FDC4((HSD_JObj* ) jobj, sp28, 19.5f, -6.0f);
-//         temp_r29_2 = tmd + (idx * 4);
-//         HSD_SisLib_803A746C(temp_r29_2->unk534, 0, 10.0f * sp28, -197.0f);
-//         (*(temp_r29_2 + 0x534))->unk8 = -6.0f;
-//         break;
-//     case -1:
-//         fn_8018FDC4((HSD_JObj* ) jobj, sp28, 15.0f, 6.0f);
-//         temp_r29_3 = tmd + (idx * 4);
-//         HSD_SisLib_803A746C(temp_r29_3->unk534, 0, 10.0f * sp28, -152.0f);
-//         (*(temp_r29_3 + 0x534))->unk8 = 6.0f;
-//         break;
-//     default:
-//     case 0:
-//         (temp_r28 + temp_r31)->unk46 = (u8) *(temp_r27 + 0x45);
-//         fn_8018FDC4((HSD_JObj* ) jobj, sp28, 17.0f, 0.01f);
-//         temp_r27_2 = tmd + (idx * 4);
-//         HSD_SisLib_803A746C(temp_r27_2->unk534, 0, 10.0f * sp28, -172.0f);
-//         (*(temp_r27_2 + 0x534))->unk8 = 0.01f;
-//         break;
-//     }
-//     temp_r4 = tmd + temp_r31;
-//     if ((u8) temp_r4->unk3C != 0) {
-//         fn_8019044C((HSD_JObj* ) jobj, 201.0f);
-//         return;
-//     }
-//     fn_8019044C((HSD_JObj* ) jobj, fn_8018F71C((s32) temp_r4->unk3A, (s32) temp_r4->unk3E));
-// }
+    HSD_ASSERT(993, jobj);
+    sp28 = jobj->translate.x;
+    temp_r27 = tmd->x37[idx].xC;
+    sp24 = (5.999997f * temp_r27) - 21.5f;
+    mn_8022F410(&sp28, 0.4f, &sp24);
 
+    switch (mn_8022F410(&sp28, 0.2f, &sp24)) {                              /* irregular */
+    case 1:
+        fn_8018FDC4(jobj, sp28, 19.5f, -6.0f);
+        HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -197.0f);
+        tmd->x534[idx]->x8 = -6.0f;
+        break;
+    case -1:
+        fn_8018FDC4(jobj, sp28, 15.0f, 6.0f);
+        HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -152.0f);
+        tmd->x534[idx]->x8 = 6.0f;
+        break;
+    default:
+    case 0:
+        tmd->x37[idx].xD = temp_r27;
+        fn_8018FDC4(jobj, sp28, 17.0f, 0.01f);
+        HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -172.0f);
+        tmd->x534[idx]->x8 = 0.01f;
+        break;
+
+    }
+    if (tmd->x37[idx].x4 != 0) {
+        fn_8019044C(jobj, 201.0f);
+        return;
+    }
+    fn_8019044C(jobj, fn_8018F71C(tmd->x37[idx].x2, tmd->x37[idx].x6));
+}
 
 void fn_8019CFA4(HSD_GObj* gobj)
 {

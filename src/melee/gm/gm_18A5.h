@@ -45,7 +45,7 @@
 /* 18F888 */ UNK_RET fn_8018F888(UNK_PARAMS);
 /* 18FA24 */ UNK_RET fn_8018FA24(UNK_PARAMS);
 /* 18FBD8 */ void fn_8018FBD8(UNK_T arg0, s32 arg1);
-/* 18FBE0 */ UNK_RET fn_8018FBE0(UNK_PARAMS);
+/* 18FBE0 */ void fn_8018FBE0(s32, s32, s32, s8, s8, s16, s8);
 /* 18FDC4 */ void fn_8018FDC4(HSD_JObj*, float x, float y, float z);
 /* 18FF9C */ void fn_8018FF9C(HSD_JObj*, float x, float y, float z);
 /* 190174 */ HSD_GObj* fn_80190174(HSD_CObjDesc*);
