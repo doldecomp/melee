@@ -275,7 +275,7 @@ void it_802DCEC4(Item_GObj* gobj)
 
 void it_802DCFBC(Item_GObj* gobj)
 {
-    ECB box;
+    itECB box;
     Item* ip = GET_ITEM(gobj);
     it_802756D0(gobj);
     if (it_8027B798(gobj, &ip->x40_vel) != 0) {

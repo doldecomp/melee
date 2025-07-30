@@ -16,9 +16,9 @@
 #include "ft/ft_0C31.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1B03.h"
+#include "gm/gm_unsplit.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -6703,7 +6703,7 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
 
 void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
 {
-    ECB sp24;
+    itECB sp24;
     Item* item;
     Vec3 sp14;
     u8* it_comm_data_xE8;
@@ -6751,7 +6751,7 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
     it_80276100(item_gobj, &sp14);
 }
 
-void it_80275D5C(Item_GObj* item_gobj, ECB* arg_ecb)
+void it_80275D5C(Item_GObj* item_gobj, itECB* arg_ecb)
 {
     f32 scale;
     s32 int_dir;
@@ -7244,7 +7244,7 @@ void it_80276CEC(Item_GObj* item_gobj)
 
 bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
 {
-    ECB sp34;
+    itECB sp34;
     CollData* coll;
     Item* item;
     f32 pos_x1;
