@@ -6,7 +6,7 @@
 #include <sysdolphin/baselib/forward.h>
 #include <melee/gm/forward.h>
 #include <melee/sc/forward.h>
-#include <melee/mn/types.h>
+#include <melee/mn/forward.h>
 
 /* 18A514 */ UNK_RET fn_8018A514(UNK_PARAMS);
 /* 18A970 */ void fn_8018A970(int);
