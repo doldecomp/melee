@@ -10,6 +10,7 @@
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
+#include "baselib/mtx.h"
 #include "db/db.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
@@ -241,9 +242,7 @@ static bool it_802C0CC4(Item_GObj* gobj)
     if (it_8027781C(gobj) != 0) {
         Item* ip = GET_ITEM(gobj);
         itDrMarioPillAttributes* attrs = GET_ATTRS(ip);
-        if (my_sqrtf((ip->x40_vel.x * ip->x40_vel.x) +
-                     (ip->x40_vel.y * ip->x40_vel.y)) < attrs->x10)
-        {
+        if (my_sqrtf(VEC2_SQ_LEN(ip->x40_vel)) < attrs->x10) {
             return true;
         }
         Item_8026AE84(ip, 0x15FAE, 0x7F, 0x40);

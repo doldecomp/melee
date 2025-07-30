@@ -382,6 +382,14 @@ typedef struct {
     HSD_GObj* x4;
 } itLinkBow_ItemVars;
 
+typedef struct itMasterHandBullet_ItemVars {
+    /* ip+DD4 */ f32 x0;
+} itMasterHandBullet_ItemVars;
+
+typedef struct itMasterHandBulletAttributes {
+    f32 x0;
+} itMasterHandBulletAttributes;
+
 typedef struct itMasterHandLaser_ItemVars {
     /*  +0 ip+DD4 */ bool x0;
 } itMasterHandLaser_ItemVars;
