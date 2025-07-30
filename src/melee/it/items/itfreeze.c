@@ -1,12 +1,11 @@
 #include "itfreeze.h"
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_266F.h"
 #include "it/item.h"
 #include "it/items/itwhitebea.h"
-
 
 /// #it_8028EB88
 
@@ -14,7 +13,7 @@
 
 void it_8028ECE0(Item_GObj* gobj)
 {
-    GET_ITEM(gobj)->xDD4_itemVar.freeze.unk_1C = 0;
+    GET_ITEM(gobj)->xDD4_itemVar.freeze.unk_1C = NULL;
 }
 
 /// #it_8028ECF0
@@ -52,10 +51,9 @@ void it_8028F2B4(Item_GObj* gobj)
     Item* item = gobj->user_data;
     Item_GObj* linked;
 
-    if ((linked = (Item_GObj*)item->xDD4_itemVar.foxblaster.xDF0) != NULL)
-    {
+    if ((linked = (Item_GObj*) item->xDD4_itemVar.freeze.unk_1C) != NULL) {
         it_802E37A4(linked);
-        item->xDD4_itemVar.foxblaster.xDF0 = NULL;
+        item->xDD4_itemVar.freeze.unk_1C = NULL;
     }
 
     Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
@@ -88,8 +86,7 @@ s32 it_8028F368(Item_GObj* gobj)
 
 s32 it_8028F398(Item_GObj* gobj)
 {
-    if (it_8026DAA8(gobj) != 0)
-    {
+    if (it_8026DAA8(gobj) != 0) {
         return 1;
     }
     return 0;

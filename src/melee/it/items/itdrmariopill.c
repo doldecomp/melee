@@ -10,8 +10,10 @@
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
+#include "baselib/mtx.h"
 #include "db/db.h"
 #include "dolphin/mtx.h"
+#include "dolphin/types.h"
 #include "ft/ft_0BF0.h"
 #include "ft/ftlib.h"
 #include "ftDrMario/ftDr_Init.h"
@@ -92,15 +94,15 @@ static void it_802C0C68(Item_GObj* gobj)
 static void it_802C061C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* hobj = gobj->hsd_obj;
+    // HSD_JObj* jobj = GET_JOBJ(gobj); // Using this messes up the stack
+    HSD_JObj* jobj = gobj->hsd_obj;
     if (ip->xDD4_itemVar.drmariopill.x4) {
         Vec3 v;
         ftLib_80086644(ip->xDD4_itemVar.drmariopill.x4, &v);
         ip->pos = v;
-        HSD_JObjSetTranslate(hobj, &v);
-        HSD_JObjSetRotationY(
-            hobj, (1.5707963267948966 * ip->xDD4_itemVar.drmariopill.x0));
-        HSD_JObjSetRotationZ(hobj, 0);
+        HSD_JObjSetTranslate(jobj, &v);
+        HSD_JObjSetRotationY(jobj, (M_PI_2 * ip->xDD4_itemVar.drmariopill.x0));
+        HSD_JObjSetRotationZ(jobj, 0);
     }
     it_8026B3A8(gobj);
 }
@@ -128,7 +130,7 @@ static bool it_802C1234(Item_GObj* gobj)
     Item_GObj* orig = gobj;
     it_8026B3A8(gobj);
     gobj = ip->xDD4_itemVar.drmariopill.x4;
-    if ((gobj != NULL) && (ftCo_800BF228(gobj) == 1)) {
+    if ((gobj != NULL) && (ftCo_800BF228(gobj) == true)) {
         Vec3 scale;
         Fighter_GObj* fobj = ip->xDD4_itemVar.drmariopill.x4;
         copy_jobj_scale(GET_JOBJ(orig), GET_JOBJ(fobj), &scale);
@@ -225,7 +227,7 @@ static void it_802C0DBC(Item_GObj* gobj)
     Item* ip;
 
     if (gobj != 0) {
-        ip = gobj->user_data;
+        ip = GET_ITEM(gobj);
         if (ip != NULL) {
             ip->xDD4_itemVar.drmariopill.x4 = NULL;
             Item_8026A8EC(gobj);
@@ -240,9 +242,7 @@ static bool it_802C0CC4(Item_GObj* gobj)
     if (it_8027781C(gobj) != 0) {
         Item* ip = GET_ITEM(gobj);
         itDrMarioPillAttributes* attrs = GET_ATTRS(ip);
-        if (my_sqrtf((ip->x40_vel.x * ip->x40_vel.x) +
-                     (ip->x40_vel.y * ip->x40_vel.y)) < attrs->x10)
-        {
+        if (my_sqrtf(VEC2_SQ_LEN(ip->x40_vel)) < attrs->x10) {
             return true;
         }
         Item_8026AE84(ip, 0x15FAE, 0x7F, 0x40);
@@ -278,23 +278,23 @@ static void it_802C0B5C(Item_GObj* gobj)
     it_8026B3A8(gobj);
 }
 
-static inline bool it_802C0E48_sub(Item_GObj* gobj)
+static inline bool it_802C0E48_sub(Item_GObj* arg_gobj)
 {
     Item* ip;
-    HSD_GObj* hobj;
+    HSD_GObj* gobj;
     bool ret;
-    if (gobj) {
-        ip = gobj->user_data;
-        if (gobj && ip) {
-            hobj = ip->xDD4_itemVar.drmariopill.x4;
-            if (hobj && (ip->owner == hobj)) {
-                ftDr_Init_801498A0(hobj);
+    if (arg_gobj) {
+        ip = arg_gobj->user_data;
+        if (arg_gobj && ip) {
+            gobj = ip->xDD4_itemVar.drmariopill.x4;
+            if (gobj && (ip->owner == gobj)) {
+                ftDr_Init_801498A0(gobj);
             }
             ip->xDD4_itemVar.drmariopill.x4 = 0;
             ip->on_accessory = NULL;
         }
     }
-    if (gobj && (ip = gobj->user_data)) {
+    if (arg_gobj && (ip = arg_gobj->user_data)) {
         ip->xDD4_itemVar.drmariopill.x4 = 0;
         ret = true;
         ip->on_accessory = NULL;
@@ -334,7 +334,7 @@ static bool it_802C0E48(Item_GObj* gobj)
     it_8026B3A8(gobj);
     it_802C0E48_flags(gobj);
     if (ip->xDD4_itemVar.drmariopill.x4) {
-        if (ftDr_Init_80149844(ip->xDD4_itemVar.drmariopill.x4) == 1) {
+        if (ftDr_Init_80149844(ip->xDD4_itemVar.drmariopill.x4) == true) {
             if (it_802C0E48_sub(gobj)) {
                 return true;
             }

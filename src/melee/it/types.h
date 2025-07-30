@@ -103,10 +103,10 @@ struct ItemAttr {
     f32 x18;
     f32 x1C_damage_mul; // collision related? referenced on taking damage @
                         // 80270f90
-    ECB x20;
+    itECB x20;
     Vec2 x30_unk;        // 0x34
     Vec2 x38_grab_range; // 0x38
-    ECB x40;
+    itECB x40;
     f32 x50;       // 0x50
     f32 x54;       // 0x54
     f32 x58;       // 0x58
@@ -347,11 +347,11 @@ struct Item {
     u32 xBC8;
     Vec2 xBCC_unk;
     Vec2 xBD4_grabRange;
-    ECB xBDC;
-    ECB xBEC;
-    ECB xBFC;
-    ECB xC0C;
-    ECB xC1C;
+    itECB xBDC;
+    itECB xBEC;
+    itECB xBFC;
+    itECB xC0C;
+    itECB xC1C;
     s32 xC2C;
     s32 xC30;
 
@@ -541,6 +541,7 @@ struct Item {
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
+        itClimbersBlizzard_ItemVars climbersblizzard;
         itCoin_ItemVars coin;
         itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
@@ -592,6 +593,7 @@ struct Item {
         itWhispyApple_ItemVars whispyapple;
         itWhiteBea_ItemVars whitebea;
         itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
+        itMasterHandBullet_ItemVars masterhandbullet;
         itMasterHandLaser_ItemVars masterhandlaser;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
@@ -728,7 +730,7 @@ struct HSD_ObjAllocUnk2 {
     // float x8;
     // float xC;
     // u8 pad_10[0xB0 - 0x10];
-    ECB ecb_arr[11];
+    itECB ecb_arr[11];
     int xB0;
     int xB4;
     int xB8;
@@ -739,7 +741,7 @@ struct HSD_ObjAllocUnk2 {
     u32 x144;
     u32 x148;
     u32 x14C;
-    u32 x150; // num of ECB/Vec3's with data?
+    u32 x150; // num of itECB/Vec3's with data?
     UnkFlagStruct x154;
 };
 

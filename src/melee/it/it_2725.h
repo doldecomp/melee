@@ -136,7 +136,7 @@
 /* 2758D4 */ float it_802758D4(Item_GObj*);
 /* 2759DC */ void it_802759DC(Item_GObj*, Item_GObj*);
 /* 275BC8 */ void it_80275BC8(Item_GObj*, HSD_GObj*);
-/* 275D5C */ void it_80275D5C(Item_GObj*, ECB*);
+/* 275D5C */ void it_80275D5C(Item_GObj*, itECB*);
 /* 275DFC */ void it_80275DFC(Item_GObj*);
 /* 275E98 */ void it_80275E98(Item_GObj*, SpawnItem*);
 /* 276100 */ void it_80276100(Item_GObj*, Vec3*);

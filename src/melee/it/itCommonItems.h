@@ -10,15 +10,10 @@
 #include <melee/gr/forward.h>
 #include <baselib/forward.h>
 
+#include "lb/types.h"
+
 #include <common_structs.h>
 #include <dolphin/mtx.h>
-
-struct ECB {
-    f32 top;
-    f32 bottom;
-    f32 right;
-    f32 left;
-};
 
 typedef struct {
     bool x0;
@@ -254,43 +249,9 @@ typedef struct itWhispyApple_ItemVars {
 
 typedef struct itFreeze_ItemVars {
     /*  +0 */ char pad_0[0x1C];
-    /* +1C */ int unk_1C;
+    /* +1C */ Item_GObj* unk_1C;
+    /* +20 */ UNK_T x20;
 } itFreeze_ItemVars;
-
-typedef struct itPeachToadSporeAttributes {
-    f32 x0_min_speed;
-    f32 x4_max_speed_offset;
-    f32 x8_speed_decay_rate;
-    f32 xc_angle;
-} itPeachToadSporeAttributes;
-
-typedef struct itPeachTurnipAttributes {
-    f32 x0_lifetime;
-    s32 x4_length; // length of x8, should be 8 for the number of turnip types
-    struct {
-        s32 x0_odds;
-        s32 x4_damage;
-    } x8 UNK_SIZE_ARRAY;
-} itPeachTurnipAttributes;
-
-typedef struct itPeachTurnip_ItemVars {
-    /*  +0 ip+DD4 */ UnkFlagStruct xDD4;
-    /*  +4 ip+DD8 */ s32 xDD8; // turnip type index
-    /*  +8 ip+DDC */ s32 xDDC_damage;
-    /*  +C ip+DE0 */ f32 xDE0_scl; // Scale - Mr. Saturn, Turnip
-    /*  +10 ip+DE4 */ HSD_GObj* xDE4_owner;
-    /*  +14 ip+DE8 */ f32 xDE8_scl; // Scale - Bob-omb
-} itPeachTurnip_ItemVars;
-
-typedef struct itPikachutJoltGround_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x8];
-    /* +8 +DDC */ UNK_T unk_8;
-} itPikachutJoltGround_ItemVars;
-
-typedef struct itSamusGrapple_ItemVars {
-    /*  +0 +DD4 */ char pad_0[0x10];
-    /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
-} itSamusGrapple_ItemVars;
 
 /// @remarks Might be shared?
 typedef struct itUnkAttributes {
@@ -470,7 +431,7 @@ typedef struct itNokoNoko_ItemVars {
     f32 x68;
     f32 x6C;
     f32 x70;
-    ECB x74;
+    itECB x74;
     f32 x84;
     f32 x88;
     f32 x8C;
@@ -702,8 +663,8 @@ typedef struct it_2E5A_DatAttrs_1 {
     f32 x48;
     s32 x4C; // item->xD84
     s32 x50;
-    f32 x54;  // item->scl
-    ECB* x58; // called in it_80275D5C
+    f32 x54;    // item->scl
+    itECB* x58; // called in it_80275D5C
     s32 x5C;
 } it_2E5A_DatAttrs_1;
 
@@ -719,7 +680,7 @@ typedef struct it_2E5A_DatAttrs_2 {
     s32 x20; // item->xD84
     f32 x24; // float assignment
     f32 x28; // item->scl
-    // ECB* x2C; // called in it_80275D5C
+    // itECB* x2C; // called in it_80275D5C
 } it_2E5A_DatAttrs_2;
 
 typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
@@ -754,9 +715,5 @@ typedef struct itOctarock_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x20];
     /* +20 ip+DF4 */ Vec3 x20;
 } itOctarock_ItemVars;
-
-typedef struct itMasterHandLaser_ItemVars {
-    /*  +0 ip+DD4 */ bool x0;
-} itMasterHandLaser_ItemVars;
 
 #endif
