@@ -369,6 +369,45 @@ typedef struct {
     HSD_GObj* x4;
 } itLinkBow_ItemVars;
 
+typedef struct itMasterHandLaser_ItemVars {
+    /*  +0 ip+DD4 */ bool x0;
+} itMasterHandLaser_ItemVars;
+
+typedef struct itPeachToadSporeAttributes {
+    f32 x0_min_speed;
+    f32 x4_max_speed_offset;
+    f32 x8_speed_decay_rate;
+    f32 xc_angle;
+} itPeachToadSporeAttributes;
+
+typedef struct itPeachTurnipAttributes {
+    f32 x0_lifetime;
+    s32 x4_length; // length of x8, should be 8 for the number of turnip types
+    struct {
+        s32 x0_odds;
+        s32 x4_damage;
+    } x8 UNK_SIZE_ARRAY;
+} itPeachTurnipAttributes;
+
+typedef struct itPeachTurnip_ItemVars {
+    /*  +0 ip+DD4 */ UnkFlagStruct xDD4;
+    /*  +4 ip+DD8 */ s32 xDD8; // turnip type index
+    /*  +8 ip+DDC */ s32 xDDC_damage;
+    /*  +C ip+DE0 */ f32 xDE0_scl; // Scale - Mr. Saturn, Turnip
+    /*  +10 ip+DE4 */ HSD_GObj* xDE4_owner;
+    /*  +14 ip+DE8 */ f32 xDE8_scl; // Scale - Bob-omb
+} itPeachTurnip_ItemVars;
+
+typedef struct itPikachutJoltGround_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x8];
+    /* +8 +DDC */ UNK_T unk_8;
+} itPikachutJoltGround_ItemVars;
+
+typedef struct itSamusGrapple_ItemVars {
+    /*  +0 +DD4 */ char pad_0[0x10];
+    /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
+} itSamusGrapple_ItemVars;
+
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;
     /* +4 ip+DD8 */ f32 xDD8;

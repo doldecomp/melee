@@ -45,10 +45,12 @@ bool it_802E3588(void)
 
 /// #it_802E3784
 
+// This function only called by it_8028F2B4 from itfreeze, so using those item
+// vars
 void it_802E37A4(Item_GObj* gobj)
 {
     if (gobj != NULL) {
-        GET_ITEM(gobj)->xDD4_itemVar.whitebea.x20 = NULL;
+        GET_ITEM(gobj)->xDD4_itemVar.freeze.x20 = NULL;
     }
 }
 

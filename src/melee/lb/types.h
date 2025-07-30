@@ -7,8 +7,8 @@
 #include "lb/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <dolphin/card.h>
+#include <dolphin/mtx.h>
 
 struct DynamicsData {
     /* +0 */ HSD_JObj* jobj;
@@ -187,6 +187,13 @@ typedef struct SurfaceData {
     Vec3 normal;
 } SurfaceData;
 
+typedef struct _itECB {
+    f32 top;
+    f32 bottom;
+    f32 right;
+    f32 left;
+} itECB;
+
 typedef struct _ftECB {
     Vec2 top;
     Vec2 bottom;
@@ -343,18 +350,19 @@ struct lb_80432A68_t {
     /* 0x098 */ u8 pad_AC[0xD0 - 0xAC]; /* maybe part of unk_80[0x123]? */
     /* 0x0A8 */ int xD0[9];
     /* 0x0A8 */ volatile int xF4[9];
-    /* 0x098 */ u8 pad_500[0x50C - 0xF4 - 9*4]; /* maybe part of unk_80[0x123]? */
+    /* 0x098 */ u8
+        pad_500[0x50C - 0xF4 - 9 * 4]; /* maybe part of unk_80[0x123]? */
     /* 0x50C */ void (*x50C)(int);
     /* 0x510 */ struct CardTask {
-                    int x0;
-                    int x4;
-                    UNK_T x8;
-                    char* xC;
-                    char x10[0x20];
-                    u8 x18;
-                    char x19[7];
-                    u8 unk20[0x1C];
-                } task_array[11];
+        int x0;
+        int x4;
+        UNK_T x8;
+        char* xC;
+        char x10[0x20];
+        u8 x18;
+        char x19[7];
+        u8 unk20[0x1C];
+    } task_array[11];
     /* 0x8AC */ int x8AC;
 }; /* size = 0x8B0 */
 STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);
