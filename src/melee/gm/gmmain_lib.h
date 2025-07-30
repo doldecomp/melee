@@ -111,7 +111,7 @@
 /* 15DB00 */ u8 gmMainLib_8015DB00(void);
 /* 15DB0C */ void gmMainLib_8015DB0C(u8);
 /* 15DB18 */ void gmMainLib_8015DB18(void);
-/* 15DB2C */ void gmMainLib_8015DB2C(u8, s32);
+/* 15DB2C */ void gmMainLib_8015DB2C(u8);
 /* 15DB6C */ u8 gmMainLib_8015DB6C(u8);
 /* 15DB80 */ void gmMainLib_8015DB80(void);
 /* 15DBF4 */ UNK_RET gmMainLib_8015DBF4(UNK_PARAMS);
@@ -127,7 +127,7 @@
 /* 15ED80 */ void gmMainLib_8015ED80(u8);
 /* 15ED8C */ u16* gmMainLib_8015ED8C(void);
 /* 15ED98 */ struct gmm_retval_ED98* gmMainLib_8015ED98(void);
-/* 15EDA4 */ s16* gmMainLib_8015EDA4(void);
+/* 15EDA4 */ u16* gmMainLib_8015EDA4(void);
 /* 15EDB0 */ struct gmm_retval_EDB0* gmMainLib_8015EDB0(void);
 /* 15EDBC */ struct gmm_retval_EDBC* gmMainLib_8015EDBC(void);
 /* 15EDC8 */ u8* gmMainLib_8015EDC8(void);

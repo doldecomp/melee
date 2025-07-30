@@ -7,6 +7,8 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+struct UnkAllstarData;
+
 /* 17C0C8 */ void fn_8017C0C8(void);
 /* 17C1A4 */ void fn_8017C1A4(HSD_GObj*);
 /* 17C71C */ void fn_8017C71C(void);
@@ -14,7 +16,7 @@
 /* 17C7EC */ void fn_8017C7EC(void);
 /* 17C838 */ void gm_8017C838(void);
 /* 17C984 */ void gm_8017C984(UNK_T);
-/* 17C9A8 */ UNK_RET gm_8017C9A8(UNK_PARAMS);
+/* 17C9A8 */ void gm_8017C9A8(struct UnkAllstarData*, struct UnkAllstarData*, int);
 /* 17CA38 */ UNK_RET gm_8017CA38(UNK_PARAMS);
 /* 17CBAC */ UNK_RET gm_8017CBAC(UNK_PARAMS);
 /* 17CD94 */ UNK_RET gm_8017CD94(UNK_PARAMS);
@@ -72,7 +74,7 @@
 /* 17ED8C */ UNK_RET gm_8017ED8C(UNK_PARAMS);
 /* 17EDDC */ bool fn_8017EDDC(void);
 /* 17EE40 */ void fn_8017EE40(int);
-/* 17F008 */ UNK_RET fn_8017F008(UNK_PARAMS);
+/* 17F008 */ int fn_8017F008(void);
 /* 17F09C */ UNK_RET fn_8017F09C(UNK_PARAMS);
 /* 17F14C */ UNK_RET fn_8017F14C(UNK_PARAMS);
 /* 17F1B8 */ UNK_RET fn_8017F1B8(UNK_PARAMS);
@@ -94,7 +96,7 @@
 /* 180C60 */ UNK_RET fn_80180C60(UNK_PARAMS);
 /* 181598 */ UNK_RET fn_80181598(UNK_PARAMS);
 /* 181708 */ UNK_RET fn_80181708(UNK_PARAMS);
-/* 181998 */ UNK_RET gm_80181998(UNK_PARAMS);
+/* 181998 */ void gm_80181998(void);
 /* 181A00 */ void gm_80181A00(s32 arg0, s32 arg1);
 /* 181A14 */ u8 gm_80181A14(void);
 /* 181A24 */ u16 gm_80181A24(void);
@@ -102,16 +104,16 @@
 /* 181A44 */ UNK_RET gm_80181A44(UNK_PARAMS);
 /* 181AC8 */ UNK_RET gm_80181AC8(UNK_PARAMS);
 /* 181B64 */ UNK_RET gm_80181B64(UNK_PARAMS);
-/* 181BFC */ UNK_RET fn_80181BFC(UNK_PARAMS);
+/* 181BFC */ int fn_80181BFC(int*);
 /* 181C80 */ UNK_RET fn_80181C80(UNK_PARAMS);
 /* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
-/* 182510 */ UNK_RET gm_80182510(UNK_PARAMS);
+/* 182510 */ bool gm_80182510(void);
 /* 182554 */ UNK_RET gm_80182554(UNK_PARAMS);
 /* 182578 */ UNK_RET gm_80182578(UNK_PARAMS);
 /* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
 /* 182DF0 */ UNK_RET gm_80182DF0(UNK_PARAMS);
-/* 182F40 */ UNK_RET fn_80182F40(UNK_PARAMS);
+/* 182F40 */ void fn_80182F40(HSD_GObj*);
 /* 183218 */ UNK_RET gm_80183218(UNK_PARAMS);
 /* 18325C */ void fn_8018325C(HSD_GObj*, int);
 /* 184138 */ void fn_80184138(HSD_GObj*, int);

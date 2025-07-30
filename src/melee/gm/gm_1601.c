@@ -260,7 +260,7 @@ char* gm_80160564(enum CharacterKind c_kind, enum MajorSceneKind scene)
     return un_8030813C(var_r3, scene) + 0x24;
 }
 
-s8 fn_801605EC(s32 arg0)
+u8 fn_801605EC(s32 arg0)
 {
     struct lbl_803B78C8_0x6* entry = lbl_803B78C8;
     s32 i;
@@ -652,14 +652,26 @@ void gm_801641E4(u8 stage, u8 enable)
 
 /// #gm_80164504
 
-/// #gm_80164600
+/// Are all stages unlocked?
+bool gm_80164600(void)
+{
+    u16* stage_unlock_mask = (void*) gmMainLib_8015EDA4();
+    int i;
+
+    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+        if (!(*stage_unlock_mask & (1LL << i))) {
+            return false;
+        }
+    }
+    return true;
+}
 
 /// #gm_8016468C
 
 void gm_801647D0(void)
 {
-    s16 *temp_r3 = gmMainLib_8015EDA4();
-    *temp_r3 = 0;
+    u16* stage_unlock_mask = gmMainLib_8015EDA4();
+    *stage_unlock_mask = 0;
 }
 
 /// #gm_801647F8

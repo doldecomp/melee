@@ -429,13 +429,13 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     if (gp->u.last.xC4 > grLast_804DBB94) {
         float randf;
         gp->u.last.xC4 = grLast_804DBB94;
-        gp->u.last.xCC = -fabs_inline(gp->u.last.xCC);
+        gp->u.last.xCC = -ABS(gp->u.last.xCC);
         randf = HSD_Randf();
         gp->u.last.xD4 = grLast_804DBB80 * -randf - grLast_804DBB7C;
     } else if (gp->u.last.xC4 < grLast_804DBB98) {
         float randf;
         gp->u.last.xC4 = grLast_804DBB98;
-        gp->u.last.xCC = fabs_inline(gp->u.last.xCC);
+        gp->u.last.xCC = ABS(gp->u.last.xCC);
         gp->u.last.xD4 = grLast_804DBB80 * HSD_Randf() + grLast_804DBB7C;
     }
     HSD_JObjSetRotationX(jobj, gp->u.last.xC4 * gp->u.last.xDC);
@@ -443,12 +443,12 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     if (gp->u.last.xC8 > grLast_804DBB9C) {
         float randf;
         gp->u.last.xC8 = grLast_804DBB9C;
-        gp->u.last.xD0 = -fabs_inline(gp->u.last.xD0);
+        gp->u.last.xD0 = -ABS(gp->u.last.xD0);
         randf = HSD_Randf();
         gp->u.last.xD8 = grLast_804DBB80 * -randf - grLast_804DBB7C;
     } else if (gp->u.last.xC8 < grLast_804DBBA0) {
         gp->u.last.xC8 = grLast_804DBBA0;
-        gp->u.last.xD0 = fabs_inline(gp->u.last.xD0);
+        gp->u.last.xD0 = ABS(gp->u.last.xD0);
         gp->u.last.xD8 = grLast_804DBB80 * HSD_Randf() + grLast_804DBB7C;
     }
     HSD_JObjSetRotationY(jobj, gp->u.last.xC8 * gp->u.last.xDC);

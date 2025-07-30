@@ -467,7 +467,7 @@ void it_802701BC(Item_GObj* arg_item_gobj)
              arg_item->xDCD_flag.b5) &&
             (!gm_8016B168() || gm_8016B0D4() || arg_item->xDCD_flag.b6 ||
              (arg_item->x20_team_id != fighter->team)) &&
-            !fighter->x2219_b1 && !fighter->x222A_flag.b0 &&
+            !fighter->x2219_b1 && !fighter->x222A_b0 &&
             (fighter->x1988 == 0) && (fighter->x198C == 0) &&
             !fighter->x221D_b6 && !(fighter->x1A6A & arg_item->xD08))
         {

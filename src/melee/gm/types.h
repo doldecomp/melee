@@ -180,7 +180,8 @@ struct gmm_retval_EDBC {
 };
 
 struct gmm_x1868 {
-    /* 0x0000 */ s32 x1868;
+    /* 0x0000 */ u16 x1868; // unlocked characters bitmask
+    /* 0x0002 */ u16 x186A; // unlocked stages bitmask
     /* 0x0004 */ u8 unk_4;
     /* 0x0005 */ char pad_5[3]; /* maybe part of unk_4[4]? */
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;
@@ -266,7 +267,9 @@ struct gmm_x0 {
     /* 0x10D0 */ VsModeData unk_10D0;
     /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
     /* 0x1350 */ VsModeData unk_1350; ///< lightning melee
-    /* 0x1490 */ char pad_1490[0x1850 - 0x1490];
+    /* 0x1490 */ VsModeData unk_1490;
+    /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
+    /* 0x17C0 */ VsModeData unk_1710;
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */

@@ -339,6 +339,34 @@ void ftMs_SpecialLw_801390E0(HSD_GObj* gobj)
                               NULL);
 }
 
+static inline void ftMs_SpecialLw_80139140_inline(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2219_b0) {
+        switch (ftLib_800872A4(gobj)) {
+        case 18:
+            efSync_Spawn(
+                1265, gobj,
+                fp->parts[ftParts_8007500C(fp, FtPart_RShoulderN)]
+                    .joint,
+                &fp->facing_dir);
+            break;
+        case 26:
+            efSync_Spawn(
+                1296, gobj,
+                fp->parts[ftParts_8007500C(fp, FtPart_RShoulderN)]
+                    .joint,
+                &fp->facing_dir);
+            break;
+        }
+        fp->x2219_b0 = true;
+    }
+
+    fp->pre_hitlag_cb = NULL;
+    fp->post_hitlag_cb = NULL;
+    fp->accessory4_cb = NULL;
+}
+
 void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
 {
     s32 temp_r0;
@@ -346,10 +374,10 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
     u8 unused0[4];
     Vec3 sp18;
 
-    u8 unused1[12];
+    u8 unused1[4];
 
     {
-        Fighter* fp = gobj->user_data;
+        Fighter* fp = GET_FIGHTER(gobj);
         MarsAttributes* da = fp->dat_attrs;
 
         fp->facing_dir = fp->specialn_facing_dir;
@@ -376,32 +404,5 @@ void ftMs_SpecialLw_80139140(HSD_GObj* gobj)
         }
     }
 
-    {
-        Fighter* ft_2;
-        ft_2 = gobj->user_data;
-        ft_2->x2219; // required for regalloc
-        if (!ft_2->x2219_b0) {
-            switch (ftLib_800872A4(gobj)) {
-            case 18:
-                efSync_Spawn(
-                    1265, gobj,
-                    ft_2->parts[ftParts_8007500C(ft_2, FtPart_RShoulderN)]
-                        .joint,
-                    &ft_2->facing_dir);
-                break;
-            case 26:
-                efSync_Spawn(
-                    1296, gobj,
-                    ft_2->parts[ftParts_8007500C(ft_2, FtPart_RShoulderN)]
-                        .joint,
-                    &ft_2->facing_dir);
-                break;
-            }
-            ft_2->x2219_b0 = true;
-        }
-
-        ft_2->pre_hitlag_cb = NULL;
-        ft_2->post_hitlag_cb = NULL;
-        ft_2->accessory4_cb = NULL;
-    }
+    ftMs_SpecialLw_80139140_inline(gobj);
 }

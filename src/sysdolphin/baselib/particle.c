@@ -5,6 +5,9 @@
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
 
+HSD_ObjAllocData hsd_804D0F60;
+HSD_ObjAllocData hsd_804D0F90;
+
 void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 {
     f32 x_max;
@@ -143,11 +146,77 @@ void hsd_80393A54(int arg0)
 
 /// #hsd_80393A5C
 
-/// #fn_80393C14
+static struct {
+    /* 00 */ u8 x0_b0 : 1;
+    /* 00 */ u8 x0_b1 : 1;
+    /* 04 */ u8* out_buf;
+    /* 08 */ u32 buf_size;
+    /* 0C */ int xC;
+    /* 10 */ u8 x10;
+    /* 11 */ u8 x11;
+    /* 12 */ u8 x12;
+    /* 13 */ u8 x13;
+    /* 14 */ int x14;
+    /* 18 */ int x18;
+    /* 1C */ int x1C;
+    /* 20 */ int x20;
+} hsd_804CF7E8;
+
+void fn_80393C14(const u8* buf, size_t size)
+{
+    int i;
+
+    const u32 out_size = hsd_804CF7E8.buf_size;
+    const u32 tmp = out_size - 1;
+
+    int var_r12 = hsd_804CF7E8.xC;
+    u8* out_buf = hsd_804CF7E8.out_buf;
+    u8 var_r9 = hsd_804CF7E8.x11;
+
+    for (i = 0; i < size; i++) {
+        switch (buf[i]) {
+        case '\r':
+            break;
+        case '\n':
+            if (var_r9 != 0 || out_buf[(var_r12 + tmp) % out_size] != '\0') {
+                out_buf[var_r12] = var_r9;
+                var_r12 = (var_r12 + 1) % out_size;
+                hsd_804CF7E8.x1C++;
+                hsd_804CF7E8.x18++;
+                var_r9 = 0;
+            }
+            break;
+        default:
+            out_buf[var_r12] = buf[i];
+            if (++var_r9 == 0x36) {
+                var_r12 = (var_r12 + 1) % out_size;
+                out_buf[var_r12] = var_r9;
+                hsd_804CF7E8.x1C++;
+                hsd_804CF7E8.x18++;
+                var_r9 = 0;
+            }
+            var_r12 = (var_r12 + 1) % out_size;
+            hsd_804CF7E8.x1C++;
+            break;
+        }
+    }
+    hsd_804CF7E8.xC = var_r12;
+    hsd_804CF7E8.x11 = var_r9;
+}
 
 /// #hsd_80393D2C
 
-/// #hsd_80393DA0
+void hsd_80393DA0(u8* arg0, size_t arg1)
+{
+    PAD_STACK(4);
+    memset(&hsd_804CF7E8, 0, sizeof(hsd_804CF7E8));
+    hsd_804CF7E8.out_buf = arg0;
+    hsd_804CF7E8.buf_size = arg1;
+    memset(arg0, 0, arg1);
+    hsd_804CF7E8.x0_b0 = true;
+    hsd_804CF7E8.x0_b1 = true;
+    HSD_SetReportCallback(fn_80393C14);
+}
 
 /// #hsd_80393E34
 

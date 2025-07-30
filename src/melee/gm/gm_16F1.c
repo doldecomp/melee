@@ -5,9 +5,10 @@
 #include "gm_unsplit.h"
 
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/pl/plbonus.h>
-#include <melee/lb/lb_00B0.h>
+#include <melee/ty/toy.h>
 #include <melee/un/un_2FC9.h>
 
 int fn_8016F180(int arg0)
@@ -164,31 +165,114 @@ bool fn_801724C8(void)
     return false;
 }
 
-/// #fn_801724D0
+bool fn_801724D0(void)
+{
+    if (gm_8016279C() >= 0x64) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_80172504
+bool fn_80172504(void)
+{
+    if (gm_8016279C() >= 0x3E8) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_80172538
+bool fn_80172538(void)
+{
+    if (gm_8016279C() >= 0x2710) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_8017256C
+bool fn_8017256C(void)
+{
+    if (gm_8016279C() >= 0x186A0) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_801725A8
+bool fn_801725A8(void)
+{
+    if (gm_8016279C() >= 0xF4240) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_801725E4
+enum {
+    LANG_JP = 0,
+    LANG_US = 1,
+};
 
-/// #fn_80172624
+bool fn_801725E4(void)
+{
+    if (lbLang_GetLanguageSetting() == LANG_JP && gm_8016279C() >= 0x1A90) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_80172664
+bool fn_80172624(void)
+{
+    if (lbLang_GetLanguageSetting() == LANG_US && gm_8016279C() >= 0x1383) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_80172698
+bool fn_80172664(void)
+{
+    if (gm_8016279C() >= 0xC350) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_801726CC
+bool fn_80172698(void)
+{
+    if (un_80304870() >= 0x32) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_80172700
+bool fn_801726CC(void)
+{
+    if (un_80304870() >= 0x64) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_80172734
+bool fn_80172700(void)
+{
+    if (un_80304870() >= 0x96) {
+        return true;
+    }
+    return false;
+}
 
-/// #fn_80172768
+bool fn_80172734(void)
+{
+    if (un_80304870() >= 0xC8) {
+        return true;
+    }
+    return false;
+}
+
+bool fn_80172768(void)
+{
+    if (un_80304870() >= 0xFA) {
+        return true;
+    }
+    return false;
+}
 
 /// #fn_8017279C
 
@@ -200,13 +284,37 @@ bool fn_801724C8(void)
 
 /// #gm_801729EC
 
-/// #gm_80172BC4
+bool gm_80172BC4(void)
+{
+    if (gmMainLib_8015D94C(0x19) == 0) {
+        gmMainLib_8015D818(0x19);
+        return true;
+    }
+    return false;
+}
 
-/// #gm_80172C04
+bool gm_80172C04(void)
+{
+    if (gmMainLib_8015D94C(0x1A) == 0) {
+        gmMainLib_8015D818(0x1A);
+        return true;
+    }
+    return false;
+}
 
 /// #gm_80172C44
 
-/// #fn_80172C78
+#pragma push
+#pragma dont_inline on
+bool fn_80172C78(int arg0)
+{
+    if (gmMainLib_8015D984(arg0) != 0) {
+        gmMainLib_8015DA68(arg0);
+        return true;
+    }
+    return false;
+}
+#pragma pop
 
 /// #gm_80172CC0
 
@@ -214,15 +322,54 @@ bool fn_801724C8(void)
 
 /// #gm_80172DD4
 
-/// #gm_80172E74
+u8 gm_80172E74(void)
+{
+    int i;
+    int count = 0;
 
-/// #gm_80172F00
+    for (i = 0; i < 0x19; i++) {
+        if (fn_801605EC(i) == 0xB && gmMainLib_8015CFCC(i)) {
+            count += 1;
+        }
+    }
+    if (count >= 0xE && !gm_80164840(9)) {
+        return 9;
+    }
+    return 0x21;
+}
+
+u16 gm_80172F00(u32 arg0)
+{
+    if (arg0 >= 0x32 && !gm_80164430(0xF)) {
+        return 0xF;
+    }
+    if (arg0 >= 0x64 && !gm_80164430(0x12)) {
+        return 0x12;
+    }
+    if (arg0 >= 0x96 && !gm_80164430(0x18)) {
+        return 0x18;
+    }
+    if (arg0 >= 0xC8 && !gm_80164430(0x17)) {
+        return 0x17;
+    }
+    return 0x148;
+}
 
 /// #fn_80172FAC
 
 /// #fn_80173098
 
-/// #gm_80173224
+u8 gm_80173224(int arg0, int arg1)
+{
+    u8 var_r4 = 0x21;
+    if (arg1 != 0) {
+        var_r4 = fn_80173098(arg0);
+    }
+    if (var_r4 == 0x21) {
+        var_r4 = gm_80172E74();
+    }
+    return var_r4;
+}
 
 /// #gm_801732D8
 
@@ -363,8 +510,31 @@ void gm_80173EEC(void)
     }
 }
 
-/// #gm_80174180
+void gm_80174180(void)
+{
+    if (fn_80162CCC() != 0 && gm_80162EC8() != 0) {
+        un_80305918(4, 0, 0);
+    }
+    if (gm_8016279C() >= 0xC8) {
+        un_80305918(5, 0, 0);
+    }
+    if (gm_80164ABC() != 0) {
+        un_80305918(6, 0, 0);
+    }
+}
 
-/// #gm_801741FC
+void gm_801741FC(void)
+{
+    int i;
+    for (i = 0; i < 0x12C; i++) {
+        gmMainLib_8015DA40(i);
+    }
+}
 
-/// #gm_80174238
+void gm_80174238(void)
+{
+    int i;
+    for (i = 0; i < 0x12C; i++) {
+        gmMainLib_8015DA68(i);
+    }
+}

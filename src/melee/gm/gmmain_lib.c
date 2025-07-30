@@ -757,7 +757,7 @@ void gmMainLib_8015DB18(void)
     gmMainLib_804D3EE0->unk_1 += 1;
 }
 
-void gmMainLib_8015DB2C(u8 arg0, s32 arg2)
+void gmMainLib_8015DB2C(u8 arg0)
 {
     struct gmm_x0* gmmthing = gmMainLib_804D3EE0;
     gmmthing->x39[arg0] = lbTime_8000AF74(gmMainLib_804D3EE0->x39[arg0], 1);
@@ -838,7 +838,7 @@ void gmMainLib_8015ED80(u8 arg0)
 
 u16* gmMainLib_8015ED8C(void)
 {
-    return (u16*) &gmMainLib_804D3EE0->thing;
+    return &gmMainLib_804D3EE0->thing.x1868;
 }
 
 struct gmm_retval_ED98* gmMainLib_8015ED98(void)
@@ -846,9 +846,9 @@ struct gmm_retval_ED98* gmMainLib_8015ED98(void)
     return &gmMainLib_804D3EE0->thing.unk_8;
 }
 
-s16* gmMainLib_8015EDA4(void)
+u16* gmMainLib_8015EDA4(void)
 {
-    return &M2C_FIELD(gmMainLib_804D3EE0, s16*, 0x186A);
+    return &gmMainLib_804D3EE0->thing.x186A;
 }
 
 struct gmm_retval_EDB0* gmMainLib_8015EDB0(void)

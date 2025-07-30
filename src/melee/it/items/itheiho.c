@@ -152,7 +152,7 @@ void it_802D8A54(Item_GObj* gobj)
     ip->x40_vel.x = ip->facing_dir * attr[ip->xDD4_itemVar.heiho.x21 + 1];
     if (ip->xDD4_itemVar.heiho.x2C > 960) {
         ip->x40_vel.y =
-            -((-0.04f * fabs_inline(ip->x40_vel.x)) - ip->x40_vel.y);
+            -((-0.04f * ABS(ip->x40_vel.x)) - ip->x40_vel.y);
     }
     it_802D9714(gobj);
     if (ip->xDD4_itemVar.heiho.x24 != 0) {
@@ -329,7 +329,7 @@ void it_802D9384(Item_GObj* gobj)
         1.5F * (ip->facing_dir * attr[ip->xDD4_itemVar.heiho.x21 + 1]);
     if (ip->xDD4_itemVar.heiho.x2C > 960) {
         ip->x40_vel.y =
-            -((-0.04f * fabs_inline(ip->x40_vel.x)) - ip->x40_vel.y);
+            -((-0.04f * ABS(ip->x40_vel.x)) - ip->x40_vel.y);
     }
     if (ip->xDD4_itemVar.heiho.x24 != 0) {
         HSD_JObjAddRotationY(HSD_GObjGetHSDObj(gobj), 0.15707964f);

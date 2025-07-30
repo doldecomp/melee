@@ -49,7 +49,7 @@
 /* 086B74 */ CameraBox* ftLib_80086B74(HSD_GObj*);
 /* 086B80 */ float ftLib_80086B80(HSD_GObj*);
 /* 086B90 */ void ftLib_80086B90(HSD_GObj*, Vec3* v);
-/* 086BB4 */ void ftLib_80086BB4(HSD_GObj*);
+/* 086BB4 */ bool ftLib_80086BB4(HSD_GObj*);
 /* 086BE0 */ u8 ftLib_80086BE0(HSD_GObj*);
 /* 086BEC */ void ftLib_80086BEC(HSD_GObj*, Vec3*);
 /* 086C0C */ enum_t ftLib_80086C0C(HSD_GObj*);

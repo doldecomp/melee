@@ -2,7 +2,7 @@
 
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>

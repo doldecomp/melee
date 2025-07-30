@@ -5,6 +5,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/cobj.h>
+#include <baselib/memory.h>
 
 static inline bool checkJObjFlags(HSD_JObj* jobj)
 {
@@ -23,7 +24,15 @@ void lb_8000F9F8(HSD_JObj* jobj)
 
 /// #lb_8000FA94
 
-/// #lb_8000FCDC
+UNK_T lb_804D63A0;
+UNK_T lb_804D63A8;
+
+void lb_8000FCDC(void)
+{
+    lb_804D63A0 = HSD_MemAlloc(0xBE00);
+    lb_804D63A8 = HSD_MemAlloc(0x1C0);
+    lb_8000FA94();
+}
 
 /// #lb_8000FD18
 

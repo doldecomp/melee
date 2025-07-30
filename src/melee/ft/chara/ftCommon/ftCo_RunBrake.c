@@ -55,12 +55,12 @@ void ftCo_RunBrake_Anim(Fighter_GObj* gobj)
     if (fp->cmd_vars[1]) {
         float maybe_max_vel = p_ftCommonData->x42C;
         if (!fp->mv.co.runbrake.x0) {
-            if (fabs_inline(fp->gr_vel) >= maybe_max_vel) {
+            if (ABS(fp->gr_vel) >= maybe_max_vel) {
                 ftAnim_SetAnimRate(gobj, 0.0F);
                 fp->mv.co.runbrake.x0 = true;
             }
         } else {
-            if (fabs_inline(fp->gr_vel) <= maybe_max_vel) {
+            if (ABS(fp->gr_vel) <= maybe_max_vel) {
                 ftAnim_SetAnimRate(gobj, 1.0F);
                 fp->cmd_vars[1] = 0;
             }

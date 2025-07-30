@@ -665,11 +665,11 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[0], 127);
     it_8026B3F8(items[1], 128);
     it_8026B3F8(items[2], 129);
-    fp->x2229_b5_no_normal_motion = 1;
+    fp->no_normal_motion = 1;
     fp->x2229_b6 = 1;
     fp->x2229_b7 = 1;
-    fp->x222A_flag.b0 = 1;
-    fp->x222A_flag.b1 = 1;
+    fp->x222A_b0 = 1;
+    fp->x222A_b1 = 1;
     fp->x2229_b3 = 1;
     fp->cur_pos.x = ftData_attr->x18;
     fp->cur_pos.y = ftData_attr->x1C;
