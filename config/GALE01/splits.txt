@@ -3648,14 +3648,55 @@ melee/if/ifmagnify.c:
 	.sdata      start:0x804D57E8 end:0x804D5800
 	.sdata2     start:0x804DDB08 end:0x804DDB68
 
-melee/un/un_2FC9.c:
-	.text       start:0x802FC9B4 end:0x80305058
+melee/un/un_2FC91.c:
+	.text       start:0x802FC9B4 end:0x802FD604
+	.data       start:0x803F98B8 end:0x803F9A00
+	.bss        start:0x804A1ED0 end:0x804A1F10
+	.sdata      start:0x804D5800 end:0x804D580D
+	.sbss       start:0x804D6D68 end:0x804D6D80
+	.sdata2     start:0x804DDB68 end:0x804DDBA0
+
+melee/un/un_2FC92.c:
+	.text       start:0x802FD604 end:0x802FD910
+	.sdata      start:0x804D5810 end:0x804D581D
+	.sbss       start:0x804D6D80 end:0x804D6D90
+	.sdata2     start:0x804DDBA0 end:0x804DDBA8
+
+melee/un/un_2FC93.c:
+	.text       start:0x802FD910 end:0x802FE3F8
 	.rodata     start:0x803B8780 end:0x803B8810
-	.data       start:0x803F98B8 end:0x803FDD18
-	.bss        start:0x804A1ED0 end:0x804A2F38
-	.sdata      start:0x804D5800 end:0x804D5A40
-	.sbss       start:0x804D6D68 end:0x804D7054
-	.sdata2     start:0x804DDB68 end:0x804DDCC8
+	.bss        start:0x804A1F10 end:0x804A1F58
+	.sdata      start:0x804D5820 end:0x804D5830
+	.sbss       start:0x804D6D90 end:0x804D6D98
+	.sdata2     start:0x804DDBA8 end:0x804DDCC8
+
+melee/un/un_2FC94.c:
+	.text       start:0x802FE3F8 end:0x802FED14
+	.data       start:0x803F9A00 end:0x803F9E08
+	.sdata      start:0x804D5830 end:0x804D5838
+	.sbss       start:0x804D6D98 end:0x804D6DA0
+
+melee/un/un_2FC95.c:
+	.text       start:0x802FED14 end:0x802FF7DC
+	.data       start:0x803F9E08 end:0x803F9F28
+	.bss        start:0x804A1F58 end:0x804A1FD8
+	.sdata      start:0x804D5838 end:0x804D5850
+	.sbss       start:0x804D6DA0 end:0x804D6DA8
+
+melee/un/un_2FC96.c:
+	.text       start:0x802FF7DC end:0x80301E44
+	.data       start:0x803F9F28 end:0x803FDC20
+	.sdata      start:0x804D5850 end:0x804D5A40
+	.sbss       start:0x804D6DA8 end:0x804D7054
+
+melee/un/un_2FC97.c:
+	.text       start:0x80301E44 end:0x80302834
+	.data       start:0x803FDC20 end:0x803FDD18
+	.bss        start:0x804A1FD8 end:0x804A2688
+
+melee/un/un_2FC98.c:
+	.text       start:0x80302834 end:0x80305058
+	.bss        start:0x804A2688 end:0x804A2F38
 
 melee/ty/toy.c:
 	.text       start:0x80305058 end:0x803124BC

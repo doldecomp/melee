@@ -40,6 +40,7 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
+#include "ty/tylist.h"
 #include "un/un_2FC9.h"
 
 #include <common_structs.h>

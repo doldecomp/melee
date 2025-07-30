@@ -243,7 +243,7 @@ if args.debug:
     # Or -sym dwarf-2 for Wii compilers
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
-    cflags_base.append("-DNDEBUG=1")
+    cflags_base.extend(["-sym off", "-DNDEBUG=1"])
 
 cflags_base.append(f"-maxerrors {args.max_errors}")
 if args.max_errors == 0:
@@ -1229,7 +1229,14 @@ config.libs = [
     MeleeLib(
         "un (Unknown)",
         [
-            Object(NonMatching, "melee/un/un_2FC9.c"),
+            Object(NonMatching, "melee/un/un_2FC91.c"),
+            Object(Matching, "melee/un/un_2FC92.c"),
+            Object(NonMatching, "melee/un/un_2FC93.c"),
+            Object(NonMatching, "melee/un/un_2FC94.c"),
+            Object(NonMatching, "melee/un/un_2FC95.c"),
+            Object(NonMatching, "melee/un/un_2FC96.c"),
+            Object(NonMatching, "melee/un/un_2FC97.c"),
+            Object(NonMatching, "melee/un/un_2FC98.c"),
         ],
     ),
     MeleeLib(
