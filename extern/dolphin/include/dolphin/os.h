@@ -10,10 +10,17 @@ extern "C" {
 typedef s64 OSTime;
 typedef u32 OSTick;
 
+typedef s16 __OSInterrupt;
+typedef u32 OSInterruptMask;
+
+#include <dolphin/os/OSContext.h>
+
+typedef void (*__OSInterruptHandler)(__OSInterrupt interrupt,
+                                     OSContext* context);
+
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSAlloc.h>
 #include <dolphin/os/OSCache.h>
-#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSDC.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSException.h>

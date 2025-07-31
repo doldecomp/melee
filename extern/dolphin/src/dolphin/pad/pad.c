@@ -1029,7 +1029,7 @@ static BOOL OnReset(BOOL f)
     return TRUE;
 }
 
-void SamplingHandler(int unk, OSContext* arg1)
+static void SamplingHandler(__OSInterrupt intr, OSContext* arg1)
 {
     OSContext sp10;
 
