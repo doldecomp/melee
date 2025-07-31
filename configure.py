@@ -1419,7 +1419,7 @@ config.libs = [
             Object(Matching, "dolphin/mtx/mtx.c"),
             Object(Matching, "dolphin/mtx/mtxvec.c"),
             Object(Matching, "dolphin/mtx/mtx44.c"),
-            Object(NonMatching, "dolphin/mtx/vec.c"),
+            Object(Matching, "dolphin/mtx/vec.c"),
         ],
         fix_epilogue=True,
     ),

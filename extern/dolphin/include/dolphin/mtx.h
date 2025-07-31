@@ -67,6 +67,7 @@ void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 #define VECNormalize C_VECNormalize
 #define VECAdd C_VECAdd
 #define VECSubtract C_VECSubtract
+#define VECMag C_VECMag
 #define VECDotProduct C_VECDotProduct
 #define VECSquareDistance C_VECSquareDistance
 #define VECCrossProduct C_VECCrossProduct
@@ -88,6 +89,7 @@ void C_MTXLookAt(Mtx m, Point3dPtr camPos, VecPtr camUp, Point3dPtr target);
 #define VECNormalize PSVECNormalize
 #define VECAdd PSVECAdd
 #define VECSubtract PSVECSubtract
+#define VECMag PSVECMag
 #define VECDotProduct PSVECDotProduct
 #define VECSquareDistance PSVECSquareDistance
 #define VECCrossProduct PSVECCrossProduct
@@ -191,7 +193,8 @@ void PSMTXROMultS16VecArray(ROMtx* m, S16Vec* srcBase, Vec* dstBase,
 void PSMTXMultS16VecArray(Mtx44* m, S16Vec* srcBase, Vec* dstBase, u32 count);
 
 // vec.c
-f32 VECMag(Vec* v);
+f32 C_VECMag(Vec* v);
+f32 PSVECMag(Vec* v);
 void VECHalfAngle(Vec* a, Vec* b, Vec* half);
 void VECReflect(Vec* src, Vec* normal, Vec* dst);
 f32 VECDistance(Vec* a, Vec* b);
