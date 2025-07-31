@@ -21,26 +21,39 @@ static u8 ErrorCode2Num(u32 errorCode)
     return 29;
 }
 
-void __DVDStoreErrorCode(u32 errCode)
+static u8 Convert(u32 error)
 {
-    u8 storedCode;
-    u8* sramPtr;
-    u32 upperByte;
+    u32 statusCode;
+    u32 errorCode;
+    u8 errorNum;
 
-    if (errCode == 0x1234567) {
-        storedCode = -1;
-    } else if (errCode == 0x1234568) {
-        storedCode = -2;
-    } else {
-        upperByte = errCode >> 24;
-        storedCode = ErrorCode2Num(errCode & 0xffffff);
-        if (errCode >> 24 >= 6) {
-            upperByte = 6;
-        }
-        storedCode += upperByte * 30;
+    if (error == 0x01234567) {
+        return 255;
     }
 
-    sramPtr = (u8*) __OSLockSramEx();
-    sramPtr[36] = storedCode;
-    __OSUnlockSramEx(1);
+    if (error == 0x01234568) {
+        return 254;
+    }
+
+    statusCode = (error & 0xFF000000) >> 24;
+    errorCode = error & 0x00FFFFFF;
+
+    errorNum = ErrorCode2Num(errorCode);
+    if (statusCode >= 6) {
+        statusCode = 6;
+    }
+
+    return statusCode * 30 + errorNum;
+}
+
+void __DVDStoreErrorCode(u32 error)
+{
+    OSSramEx* sram;
+    u8 num;
+
+    num = Convert(error);
+
+    sram = __OSLockSramEx();
+    sram->dvdErrorCode = num;
+    __OSUnlockSramEx(TRUE);
 }
