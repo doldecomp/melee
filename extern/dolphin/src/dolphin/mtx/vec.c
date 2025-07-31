@@ -65,13 +65,12 @@ void C_VECScale(Vec* src, Vec* dst, f32 scale)
 asm void PSVECScale(register Vec* src, register Vec* dst, register f32 mult)
 {
     // clang-format off
-    psq_l f2, Vec.x(src), 0, qr0
-    ps_merge00 f4, mult, mult
-    ps_mul f6, f2, f4
-    psq_st f6, Vec.x(dst), 0, qr0
-    psq_l f3, Vec.z(src), 1, qr0
-    ps_mul f7, f3, f4
-    psq_st f7, Vec.z(dst), 1, qr0
+    psq_l f0, Vec.x(src), 0, qr0
+    psq_l f2, Vec.z(src), 1, qr0
+    ps_muls0 f0, f0, mult
+    psq_st f0, Vec.x(dst), 0, qr0
+    ps_muls0 f0, f2, mult
+    psq_st f0, Vec.z(dst), 1, qr0
     // clang-format on
 }
 
@@ -92,7 +91,6 @@ void C_VECNormalize(Vec* src, Vec* unit)
 
 void PSVECNormalize(register Vec* vec1, register Vec* dst)
 {
-    // clang-format off
     register float c_half = 0.5f;
     register float c_three = 3.0f;
     register float v1_xy;
@@ -104,17 +102,17 @@ void PSVECNormalize(register Vec* vec1, register Vec* dst)
     register float nwork0;
     register float nwork1;
 
+    // clang-format off
     asm {
         psq_l v1_xy, Vec.x(vec1), 0, qr0
         ps_mul xx_yy, v1_xy, v1_xy
         psq_l v1_z, Vec.z(vec1), 1, qr0
         ps_madd xx_zz, v1_z, v1_z, xx_yy
         ps_sum0 sqsum, xx_zz, v1_z, xx_yy
-        ps_rsqrte rsqrt, sqsum
+        frsqrte rsqrt, sqsum
         fmuls nwork0, rsqrt, rsqrt
         fmuls nwork1, rsqrt, c_half
-        fmuls nwork0, nwork0, sqsum
-        fsubs nwork0, c_three, nwork0
+        fnmsubs nwork0, nwork0, sqsum, c_three
         fmuls rsqrt, nwork0, nwork1
         ps_muls0 v1_xy, v1_xy, rsqrt
         psq_st v1_xy, Vec.x(dst), 0, qr0
@@ -145,7 +143,27 @@ asm f32 PSVECSquareMag(register Vec* vec1){
     // clang-format on
 }
 
-f32 VECMag(Vec* v)
+asm float PSVECMag(register Vec* v)
+{
+#ifdef __MWERKS__ // clang-format off
+	psq_l   f0, Vec.x(v), 0, qr0
+	ps_mul  f0, f0, f0
+	lfs     f1, Vec.z(v)
+	ps_madd f1, f1, f1, f0
+	lfs     f4, 0.5f
+	ps_sum0 f1, f1, f0, f0
+	frsqrte f0, f1
+	lfs     f3, 3.0f
+	fmuls   f2, f0, f0
+	fmuls   f0, f0, f4
+	fnmsubs f2, f2, f1, f3
+	fmuls   f0, f2, f0
+	fsel    f0, f0, f0, f1
+	fmuls   f1, f1, f0
+#endif // clang-format on
+}
+
+f32 C_VECMag(Vec* v)
 {
     return sqrtf(VECSquareMag(v));
 }
