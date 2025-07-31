@@ -1339,7 +1339,7 @@ config.libs = [
     DolphinLib(
         "OdemuExi2",
         [
-            Object(NonMatching, "dolphin/odenotstub/odenotstub.c"),
+            Object(Matching, "dolphin/odenotstub/odenotstub.c"),
         ],
     ),
     DolphinLib(
