@@ -129,7 +129,7 @@ struct lbl_8046B488_t;
 /* 164910 */ void gm_80164910(int);
 /* 164A0C */ UNK_RET gm_80164A0C(UNK_PARAMS);
 /* 164ABC */ bool gm_80164ABC(void);
-/* 164B48 */ int fn_80164B48(void);
+/* 164B48 */ bool fn_80164B48(void);
 /* 164F18 */ void gm_80164F18(void);
 /* 16505C */ void gm_8016505C(void);
 /* 165084 */ bool gm_80165084(void);
