@@ -1442,7 +1442,7 @@ config.libs = [
             Object(Matching, "dolphin/os/OSMutex.c"),
             Object(NonMatching, "dolphin/os/OSReboot.c"),
             Object(Matching, "dolphin/os/OSReset.c"),
-            Object(NonMatching, "dolphin/os/OSResetSW.c"),
+            Object(Matching, "dolphin/os/OSResetSW.c"),
             Object(Matching, "dolphin/os/OSRtc.c"),
             Object(Matching, "dolphin/os/OSSerial.c"),
             Object(Matching, "dolphin/os/OSSync.c"),
