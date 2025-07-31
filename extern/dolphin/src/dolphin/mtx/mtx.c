@@ -493,7 +493,68 @@ void MTXRotRad(Mtx m, char axis, f32 rad)
     MTXRotTrig(m, axis, sinA, cosA);
 }
 
-void MTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA)
+void PSMTXRotTrig(register Mtx m, register char axis, register f32 sinA,
+                  register f32 cosA)
+{
+    register f32 fc0;
+    register f32 fc1;
+    register f32 nsinA;
+    register f32 fw0, fw1, fw2, fw3;
+
+    fc0 = 0.0f;
+    fc1 = 1.0f;
+
+    asm {
+        ori         axis, axis, 0x20
+        ps_neg      nsinA, sinA
+        cmplwi      axis, 'x'
+        beq         _case_x
+        cmplwi      axis, 'y'
+        beq         _case_y
+        cmplwi      axis, 'z'
+        beq         _case_z
+        b           _end
+
+_case_x:
+        psq_st      fc1,  0(m), 1, qr0
+        psq_st      fc0,  4(m), 0, qr0
+        ps_merge00  fw0, sinA, cosA
+        psq_st      fc0, 12(m), 0, qr0
+        ps_merge00  fw1, cosA, nsinA
+        psq_st      fc0, 28(m), 0, qr0
+        psq_st      fc0, 44(m), 1, qr0
+        psq_st      fw0, 36(m), 0, qr0
+        psq_st      fw1, 20(m), 0, qr0
+        b           _end;
+
+_case_y:
+        ps_merge00  fw0, cosA, fc0
+        ps_merge00  fw1, fc0, fc1
+        psq_st      fc0, 24(m), 0, qr0
+        psq_st      fw0,  0(m), 0, qr0
+        ps_merge00  fw2, nsinA, fc0
+        ps_merge00  fw3, sinA, fc0
+        psq_st      fw0, 40(m), 0, qr0
+        psq_st      fw1, 16(m), 0, qr0
+        psq_st      fw3,  8(m), 0, qr0
+        psq_st      fw2, 32(m), 0, qr0
+        b           _end;
+
+_case_z:
+        psq_st      fc0,  8(m), 0, qr0
+        ps_merge00  fw0, sinA, cosA
+        ps_merge00  fw2, cosA, nsinA
+        psq_st      fc0, 24(m), 0, qr0
+        psq_st      fc0, 32(m), 0, qr0
+        ps_merge00  fw1, fc1, fc0
+        psq_st      fw0, 16(m), 0, qr0
+        psq_st      fw2,  0(m), 0, qr0
+        psq_st      fw1, 40(m), 0, qr0
+_end:
+    }
+}
+
+void C_MTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA)
 {
     ASSERTMSGLINE(0x4AF, m, "MTXRotTrig():  NULL MtxPtr 'm' ");
     switch (axis) {
@@ -546,46 +607,6 @@ void MTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA)
         ASSERTMSGLINE(0x4CB, FALSE, "MTXRotTrig():  invalid 'axis' value ");
         break;
     }
-}
-
-void C_MTXRotAxisRad(Mtx m, Vec* axis, f32 rad)
-{
-    Vec vN;
-    f32 s;
-    f32 c;
-    f32 t;
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 xSq;
-    f32 ySq;
-    f32 zSq;
-
-    ASSERTMSGLINE(0x50B, m, "MTXRotAxisRad():  NULL MtxPtr 'm' ");
-    ASSERTMSGLINE(0x50C, axis, "MTXRotAxisRad():  NULL VecPtr 'axis' ");
-
-    s = sinf(rad);
-    c = cosf(rad);
-    t = 1 - c;
-    VECNormalize(axis, &vN);
-    x = vN.x;
-    y = vN.y;
-    z = vN.z;
-    xSq = (x * x);
-    ySq = (y * y);
-    zSq = (z * z);
-    m[0][0] = (c + (t * xSq));
-    m[0][1] = (y * (t * x)) - (s * z);
-    m[0][2] = (z * (t * x)) + (s * y);
-    m[0][3] = 0;
-    m[1][0] = ((y * (t * x)) + (s * z));
-    m[1][1] = (c + (t * ySq));
-    m[1][2] = ((z * (t * y)) - (s * x));
-    m[1][3] = 0;
-    m[2][0] = ((z * (t * x)) - (s * y));
-    m[2][1] = ((z * (t * y)) + (s * x));
-    m[2][2] = (c + (t * zSq));
-    m[2][3] = 0;
 }
 
 void PSMTXRotAxisRad(register Mtx m, Vec* axis, register f32 rad)
@@ -642,22 +663,63 @@ void PSMTXRotAxisRad(register Mtx m, Vec* axis, register f32 rad)
 #endif // clang-format on
 }
 
-
-void MTXTrans(Mtx m, f32 xT, f32 yT, f32 zT)
+void C_MTXRotAxisRad(Mtx m, Vec* axis, f32 rad)
 {
-    ASSERTMSGLINE(0x547, m, "MTXTrans():  NULL MtxPtr 'm' ");
-    m[0][0] = 1;
-    m[0][1] = 0;
-    m[0][2] = 0;
+    Vec vN;
+    f32 s;
+    f32 c;
+    f32 t;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 xSq;
+    f32 ySq;
+    f32 zSq;
+
+    ASSERTMSGLINE(0x50B, m, "MTXRotAxisRad():  NULL MtxPtr 'm' ");
+    ASSERTMSGLINE(0x50C, axis, "MTXRotAxisRad():  NULL VecPtr 'axis' ");
+
+    s = sinf(rad);
+    c = cosf(rad);
+    t = 1 - c;
+    VECNormalize(axis, &vN);
+    x = vN.x;
+    y = vN.y;
+    z = vN.z;
+    xSq = (x * x);
+    ySq = (y * y);
+    zSq = (z * z);
+    m[0][0] = (c + (t * xSq));
+    m[0][1] = (y * (t * x)) - (s * z);
+    m[0][2] = (z * (t * x)) + (s * y);
+    m[0][3] = 0;
+    m[1][0] = ((y * (t * x)) + (s * z));
+    m[1][1] = (c + (t * ySq));
+    m[1][2] = ((z * (t * y)) - (s * x));
+    m[1][3] = 0;
+    m[2][0] = ((z * (t * x)) - (s * y));
+    m[2][1] = ((z * (t * y)) + (s * x));
+    m[2][2] = (c + (t * zSq));
+    m[2][3] = 0;
+}
+
+void PSMTXTrans(register Mtx m, register f32 xT, register f32 yT,
+                register f32 zT)
+{
+    register f32 c0 = 0.0F;
+    register f32 c1 = 1.0F;
     m[0][3] = xT;
-    m[1][0] = 0;
-    m[1][1] = 1;
-    m[1][2] = 0;
     m[1][3] = yT;
-    m[2][0] = 0;
-    m[2][1] = 0;
-    m[2][2] = 1;
+    asm {
+        psq_st c0,  4(m), 0, qr0
+        psq_st c0, 32(m), 0, qr0
+    }
+    m[1][0] = c0;
+    m[1][1] = c1;
+    m[1][2] = c0;
+    m[2][2] = c1;
     m[2][3] = zT;
+    m[0][0] = c1;
 }
 
 void MTXTransApply(Mtx src, Mtx dst, f32 xT, f32 yT, f32 zT)
@@ -734,6 +796,56 @@ void MTXScaleApply(Mtx src, Mtx dst, f32 xS, f32 yS, f32 zS)
     dst[2][1] = (src[2][1] * zS);
     dst[2][2] = (src[2][2] * zS);
     dst[2][3] = (src[2][3] * zS);
+}
+
+void PSMTXQuat(register Mtx m, register Quaternion* q)
+{
+    register f32 c_zero, c_one, c_two, scale;
+    register f32 tmp0, tmp1, tmp2, tmp3, tmp4;
+    register f32 tmp5, tmp6, tmp7, tmp8, tmp9;
+
+    c_one = 1.0F;
+    asm {
+        psq_l       tmp0, 0(q), 0, 0
+        psq_l       tmp1, 8(q), 0, 0
+        fsubs       c_zero, c_one, c_one
+        fadds       c_two, c_one, c_one
+        ps_mul      tmp2, tmp0, tmp0
+        ps_merge10  tmp5, tmp0, tmp0
+        ps_madd     tmp4, tmp1, tmp1, tmp2
+        ps_mul      tmp3, tmp1, tmp1
+        ps_sum0     scale, tmp4, tmp4, tmp4
+        ps_muls1    tmp7, tmp5, tmp1
+        fres        tmp9, scale
+        ps_sum1     tmp4, tmp3, tmp4, tmp2
+        ps_nmsub    scale, scale, tmp9, c_two
+        ps_muls1    tmp6, tmp1, tmp1
+        ps_mul      scale, tmp9, scale
+        ps_sum0     tmp2, tmp2, tmp2, tmp2
+        fmuls       scale, scale, c_two
+        ps_madd     tmp8, tmp0, tmp5, tmp6
+        ps_msub     tmp6, tmp0, tmp5, tmp6
+        psq_st      c_zero, 12(m), 1, 0
+        ps_nmsub    tmp2, tmp2, scale, c_one
+        ps_nmsub    tmp4, tmp4, scale, c_one
+        psq_st      c_zero, 44(m), 1, 0
+        ps_mul      tmp8, tmp8, scale
+        ps_mul      tmp6, tmp6, scale
+        psq_st      tmp2, 40(m), 1, 0
+        ps_madds0   tmp5, tmp0, tmp1, tmp7
+        ps_merge00  tmp1, tmp8, tmp4
+        ps_nmsub    tmp7, tmp7, c_two, tmp5
+        ps_merge10  tmp0, tmp4, tmp6
+        psq_st      tmp1, 16(m), 0, 0
+        ps_mul      tmp5, tmp5, scale
+        ps_mul      tmp7, tmp7, scale
+        psq_st      tmp0,  0(m), 0, 0
+        psq_st      tmp5,  8(m), 1, 0
+        ps_merge10  tmp3, tmp7, c_zero
+        ps_merge01  tmp9, tmp7, tmp5
+        psq_st      tmp3, 24(m), 0, 0
+        psq_st      tmp9, 32(m), 0, 0
+    }
 }
 
 void C_MTXQuat(Mtx m, QuaternionPtr q)
