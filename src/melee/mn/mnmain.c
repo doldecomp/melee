@@ -991,7 +991,7 @@ void mn_8022A440(HSD_GObj* arg0, HSD_JObj* arg1, s32 arg2)
     HSD_JObj* r29;
     mn_unk1* tmp;
     float f;
-    PAD_STACK(0x14);
+    PAD_STACK(0x10);
 
     lb_8001204C(arg1, sp24, mn_803EAE7C, 7);
     r29 = sp24[1];
