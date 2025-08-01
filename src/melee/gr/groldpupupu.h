@@ -33,7 +33,7 @@
 /* 210BE0 */ UNK_RET grOldPupupu_80210BE0(UNK_PARAMS);
 /* 210BE4 */ UNK_RET grOldPupupu_80210BE4(UNK_PARAMS);
 /* 210C2C */ bool grOldPupupu_80210C2C(HSD_GObj*);
-/* 210C34 */ UNK_RET grOldPupupu_80210C34(UNK_PARAMS);
+/* 210C34 */ void grOldPupupu_80210C34(HSD_GObj*);
 /* 210C78 */ UNK_RET grOldPupupu_80210C78(UNK_PARAMS);
 /* 210C7C */ UNK_RET grOldPupupu_80210C7C(UNK_PARAMS);
 /* 210D08 */ bool grOldPupupu_80210D08(HSD_GObj*);

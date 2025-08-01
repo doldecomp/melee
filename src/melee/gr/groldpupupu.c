@@ -1,5 +1,7 @@
 #include "groldpupupu.h"
 
+#include "gr/granime.h"
+#include "gr/ground.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>
@@ -71,7 +73,13 @@ bool grOldPupupu_80210C2C(HSD_GObj* gobj)
     return false;
 }
 
-/// #grOldPupupu_80210C34
+void grOldPupupu_80210C34(HSD_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+        Ground_801C4A08(gobj);
+    }
+}
 
 void grOldPupupu_80210C78(void) {}
 
