@@ -1,4 +1,9 @@
-#include <platform.h>
+#include "groldpupupu.h"
+
+#include "lb/lb_00B0.h"
+
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 void grOldPupupu_802107DC(void) {}
 
@@ -8,7 +13,7 @@ void grOldPupupu_80210884(void) {}
 
 /// #grOldPupupu_80210888
 
-bool grOldPupupu_802108AC(void)
+bool grOldPupupu_802108AC(HSD_GObj* gobj)
 {
     return false;
 }
@@ -17,7 +22,7 @@ bool grOldPupupu_802108AC(void)
 
 /// #grOldPupupu_8021099C
 
-bool grOldPupupu_802109C8(void)
+bool grOldPupupu_802109C8(HSD_GObj* gobj)
 {
     return false;
 }
@@ -28,7 +33,7 @@ void grOldPupupu_802109D4(void) {}
 
 /// #grOldPupupu_802109D8
 
-bool grOldPupupu_80210A1C(void)
+bool grOldPupupu_80210A1C(HSD_GObj* gobj)
 {
     return false;
 }
@@ -39,7 +44,7 @@ void grOldPupupu_80210B00(void) {}
 
 /// #grOldPupupu_80210B04
 
-bool grOldPupupu_80210B48(void)
+bool grOldPupupu_80210B48(HSD_GObj* gobj)
 {
     return false;
 }
@@ -50,7 +55,7 @@ void grOldPupupu_80210B54(void) {}
 
 /// #grOldPupupu_80210B58
 
-bool grOldPupupu_80210BB8(void)
+bool grOldPupupu_80210BB8(HSD_GObj* gobj)
 {
     return false;
 }
@@ -61,7 +66,7 @@ void grOldPupupu_80210BE0(void) {}
 
 /// #grOldPupupu_80210BE4
 
-bool grOldPupupu_80210C2C(void)
+bool grOldPupupu_80210C2C(HSD_GObj* gobj)
 {
     return false;
 }
@@ -72,7 +77,7 @@ void grOldPupupu_80210C78(void) {}
 
 /// #grOldPupupu_80210C7C
 
-bool grOldPupupu_80210D08(void)
+bool grOldPupupu_80210D08(HSD_GObj* gobj)
 {
     return false;
 }
@@ -83,7 +88,7 @@ void grOldPupupu_8021110C(void) {}
 
 /// #grOldPupupu_80211110
 
-bool grOldPupupu_8021118C(void)
+bool grOldPupupu_8021118C(HSD_GObj* gobj)
 {
     return false;
 }
@@ -94,7 +99,7 @@ void grOldPupupu_80211198(void) {}
 
 /// #grOldPupupu_8021119C
 
-bool grOldPupupu_80211284(void)
+bool grOldPupupu_80211284(HSD_GObj* gobj)
 {
     return false;
 }
@@ -109,7 +114,7 @@ void grOldPupupu_80211C0C(void) {}
 
 void grOldPupupu_80211C10(void) {}
 
-bool grOldPupupu_80211C14(void)
+bool grOldPupupu_80211C14(HSD_GObj* gobj)
 {
     return false;
 }
@@ -118,9 +123,20 @@ bool grOldPupupu_80211C14(void)
 
 void grOldPupupu_80211C9C(void) {}
 
-bool grOldPupupu_80211CA0(void)
+bool grOldPupupu_80211CA0(HSD_GObj* gobj)
 {
     return false;
 }
 
-/// #grOldPupupu_80211CA8
+bool grOldPupupu_80211CA8(Vec3* a, int arg, HSD_JObj* joint)
+{
+    Vec3 b;
+
+    lb_8000B1CC(joint, NULL, &b);
+
+    if (a->y > b.y) {
+        return true;
+    } else {
+        return false;
+    }
+}
