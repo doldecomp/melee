@@ -120,10 +120,10 @@ typedef struct _AXPB {
 } AXPB;
 
 typedef struct _AXVPB {
-    /* 0x000 */ void* next;
-    /* 0x004 */ void* prev;
+    /* 0x000 */ struct _AXVPB* next;
+    /* 0x004 */ struct _AXVPB* prev;
     /* 0x008 */ void* next1;
-    /* 0x00C */ u32 priority;
+    /* 0x00C */ int priority;
     /* 0x010 */ void (*callback)(void*);
     /* 0x014 */ u32 userContext;
     /* 0x018 */ u32 index;
