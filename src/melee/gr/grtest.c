@@ -42,7 +42,8 @@ StageData grTe_803E5764 = { 0x01,
                             grTest_8020740C,
                             grTest_80207414,
                             1,
-                            grTe_803E56B8 };
+                            grTe_803E56B8,
+                            13 };
 
 float grTe_804D6A48;
 
@@ -50,15 +51,17 @@ void grTest_80206E2C(int unused) {}
 
 void grTest_80206E30(void)
 {
-    HSD_GObj* r3;
+    HSD_GObj* gobj;
     HSD_JObj* jobj;
+    PAD_STACK(8);
+
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grTest_80207044(0);
-    r3 = grTest_80207044(2);
-    GET_GROUND(r3)->x8_callback = grTest_802073B0;
-    r3 = grTest_80207044(1);
-    jobj = r3->hsd_obj;
+    gobj = grTest_80207044(2);
+    GET_GROUND(gobj)->x8_callback = grTest_802073B0;
+    gobj = grTest_80207044(1);
+    jobj = GET_JOBJ(gobj);
     HSD_JObjSetScaleX(jobj, 80.0);
     HSD_JObjSetScaleY(jobj, 80.0);
     HSD_JObjSetScaleZ(jobj, 80.0);
@@ -100,7 +103,7 @@ HSD_GObj* grTest_80207044(int gobj_id)
             HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtest.c", 0x35C,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtest.c", 209,
                  gobj_id);
     }
     return gobj;
@@ -140,6 +143,8 @@ void grTest_802071C4(HSD_GObj* gobj)
     HSD_JObj* iVar2;
     u32 uVar3;
     HSD_PadStatus* pad;
+    PAD_STACK(16);
+
     if ((HSD_PadMasterStatus[1].trigger & 0x100) != 0) {
         iVar2 = Ground_801C3FA4(gobj, 0x10);
         if (iVar2) {
@@ -148,7 +153,7 @@ void grTest_802071C4(HSD_GObj* gobj)
             } else {
                 HSD_JObjSetFlags(iVar2, 0x10);
             }
-            grTe_804D6A48 = (float) 0.0;
+            grTe_804D6A48 = 0.0f;
         }
     }
     pad = &HSD_PadMasterStatus[2];
@@ -160,19 +165,19 @@ void grTest_802071C4(HSD_GObj* gobj)
             } else {
                 HSD_JObjSetFlags(iVar2, 0x10);
             }
-            grTe_804D6A48 = (float) 0.0;
+            grTe_804D6A48 = 0.0f;
         }
     }
     pad = &HSD_PadMasterStatus[1];
     uVar3 = pad->button;
     if (uVar3 & 0x400) {
-        if (grTe_804D6A48 > (float) -1.2217305) {
-            grTe_804D6A48 = grTe_804D6A48 - (float) 0.08726646;
+        if (grTe_804D6A48 > -1.2217305f) {
+            grTe_804D6A48 -= 0.08726646f;
         }
     }
     if (uVar3 & 0x800) {
-        if (grTe_804D6A48 < (float) 1.2217305) {
-            grTe_804D6A48 = grTe_804D6A48 + (float) 0.08726646;
+        if (grTe_804D6A48 < 1.2217305f) {
+            grTe_804D6A48 += 0.08726646f;
         }
     }
     iVar2 = Ground_801C3FA4(gobj, 11);
