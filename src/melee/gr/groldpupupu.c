@@ -1,8 +1,13 @@
+#include "baselib/forward.h"
+
 #include "groldpupupu.h"
 
 #include "gr/granime.h"
 #include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -13,7 +18,10 @@ void grOldPupupu_802107DC(void) {}
 
 void grOldPupupu_80210884(void) {}
 
-/// #grOldPupupu_80210888
+void grOldPupupu_80210888(void)
+{
+    grZakoGenerator_801CAE04(NULL);
+}
 
 bool grOldPupupu_802108AC(HSD_GObj* gobj)
 {
@@ -22,7 +30,11 @@ bool grOldPupupu_802108AC(HSD_GObj* gobj)
 
 /// #grOldPupupu_802108B4
 
-/// #grOldPupupu_8021099C
+void grOldPupupu_8021099C(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grOldPupupu_802109C8(HSD_GObj* gobj)
 {
@@ -62,7 +74,10 @@ bool grOldPupupu_80210BB8(HSD_GObj* gobj)
     return false;
 }
 
-/// #grOldPupupu_80210BC0
+void grOldPupupu_80210BC0(HSD_GObj* gobj)
+{
+    lb_800115F4();
+}
 
 void grOldPupupu_80210BE0(void) {}
 
