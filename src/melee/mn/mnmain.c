@@ -760,7 +760,7 @@ static u8 mn_80229A04_dontinline(int arg0, int arg1)
 
 struct mn_80229A7C_t {
     u8 x0, x1, x2; ///< x0 = menu type, x1 = cursor, x2 = state
-    HSD_JObj* x4[42]; ///< these are
+    HSD_JObj* x4[42]; ///< these are the menu jobjs, ie buttons, panels, etc
     HSD_Text* xAC; ///< description
 };
 
