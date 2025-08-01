@@ -23,13 +23,13 @@
 
 /// #it_8028A298
 
-void it_8028A2C0(void) {}
+void it_8028A2C0(Item_GObj* gobj) {}
 
 /// #it_8028A2C4
 
 /// #it_8028A2F0
 
-void it_8028A3A4(void) {}
+void it_8028A3A4(Item_GObj* gobj) {}
 
 /// #it_8028A3A8
 
@@ -45,22 +45,22 @@ void it_8028A3A4(void) {}
 
 /// #it_8028A690
 
-void it_8028A7F0(void) {}
+void it_8028A7F0(Item_GObj* gobj) {}
 
 /// #it_8028A7F4
 
 /// #it_8028A93C
 
-bool it_8028A964(void)
+bool it_8028A964(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028A96C(void) {}
+void it_8028A96C(Item_GObj* gobj) {}
 
 /// #it_8028A970
 
-bool it_8028A9AC(void)
+bool it_8028A9AC(Item_GObj* gobj)
 {
     return false;
 }
@@ -77,9 +77,9 @@ bool it_8028A9AC(void)
 
 /// #it_8028AD18
 
-void it_8028AD38(void) {}
+void it_8028AD38(Item_GObj* gobj) {}
 
-bool it_8028AD3C(void)
+bool it_8028AD3C(Item_GObj* gobj)
 {
     return false;
 }
@@ -88,9 +88,9 @@ bool it_8028AD3C(void)
 
 /// #it_8028ADD4
 
-void it_8028AE98(void) {}
+void it_8028AE98(Item_GObj* gobj) {}
 
-bool it_8028AE9C(void)
+bool it_8028AE9C(Item_GObj* gobj)
 {
     return false;
 }

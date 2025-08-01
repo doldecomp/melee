@@ -11,8 +11,8 @@
 /* 2EAF34 */ UNK_RET it_802EAF34(UNK_PARAMS);
 /* 2EB1EC */ void it_802EB1EC(Item_GObj*);
 /* 2EB268 */ UNK_RET it_802EB268(UNK_PARAMS);
-/* 2EB2C0 */ UNK_RET it_802EB2C0(UNK_PARAMS);
-/* 2EB3C0 */ UNK_RET it_802EB3C0(UNK_PARAMS);
+/* 2EB2C0 */ bool it_802EB2C0(Item_GObj* gobj);
+/* 2EB3C0 */ void it_802EB3C0(Item_GObj* gobj);
 /* 2EB444 */ bool it_802EB444(Item_GObj*);
 /* 2EB44C */ bool it_802EB44C(Item_GObj*);
 /* 2EB454 */ bool it_802EB454(Item_GObj*);

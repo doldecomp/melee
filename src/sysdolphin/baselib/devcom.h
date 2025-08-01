@@ -34,6 +34,6 @@ UNK_RET HSD_DevComDVDCallback(UNK_PARAMS);
 UNK_RET HSD_DevComDVDWakeUp(UNK_PARAMS);
 int HSD_DevComRequest(int file, u32 src, u32 dest, size_t size, int type,
                       int pri, HSD_DevComCallback callback, void* args);
-UNK_RET HSD_DevComCancelEx(UNK_PARAMS);
+int HSD_DevComCancelEx(int, int, void*, int);
 
 #endif

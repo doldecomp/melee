@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itthunder.h"
 
 /// #it_802CCAB4
 
@@ -21,7 +22,7 @@ void it_802CCB10(void) {}
 
 /// #it_802CCD9C
 
-bool it_802CCE20(void)
+bool it_802CCE20(Item_GObj* gobj)
 {
     return false;
 }

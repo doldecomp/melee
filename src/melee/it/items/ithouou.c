@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "ithouou.h"
 
 /// #it_802D251C
 
@@ -11,7 +12,7 @@ void it_802D25B8(void) {}
 
 /// #it_802D2640
 
-bool it_802D2660(void)
+bool it_802D2660(Item_GObj* gobj)
 {
     return false;
 }
@@ -22,7 +23,7 @@ bool it_802D2660(void)
 
 /// #it_802D26FC
 
-bool it_802D27A8(void)
+bool it_802D27A8(Item_GObj* gobj)
 {
     return false;
 }
@@ -33,7 +34,7 @@ bool it_802D27A8(void)
 
 /// #it_802D288C
 
-bool it_802D2904(void)
+bool it_802D2904(Item_GObj* gobj)
 {
     return false;
 }
@@ -44,7 +45,7 @@ bool it_802D2904(void)
 
 /// #it_802D29D4
 
-bool it_802D2A50(void)
+bool it_802D2A50(Item_GObj* gobj)
 {
     return false;
 }
@@ -55,7 +56,7 @@ bool it_802D2A50(void)
 
 /// #it_802D2B24
 
-bool it_802D2B44(void)
+bool it_802D2B44(Item_GObj* gobj)
 {
     return false;
 }

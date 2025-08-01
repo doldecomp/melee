@@ -1,4 +1,5 @@
 #include "baselib/forward.h"
+#include "ft/forward.h"
 
 #include "itlinkboomerang.h"
 
@@ -368,7 +369,7 @@ bool it_802A0FB0(Item_GObj* gobj)
     return it_802A0C34(gobj);
 }
 
-f32 it_802A0FD0(Item_GObj* gobj)
+void it_802A0FD0(Item_GObj* gobj)
 {
     Item* ip;
     f32 angle;
@@ -388,12 +389,12 @@ f32 it_802A0FD0(Item_GObj* gobj)
         angle = sinf(ip->xDD4_itemVar.linkboomerang.xF74);
         ip->x40_vel.y = var_f31 * angle;
     }
-    return angle;
 }
 
-void it_802A10C0(Item_GObj* gobj)
+bool it_802A10C0(Item_GObj* gobj)
 {
     it_802A16E4(gobj);
+    return false;
 }
 
 void it_802A10E4(Item_GObj* gobj)
@@ -422,7 +423,7 @@ bool it_802A12DC(Item_GObj* gobj)
 }
 
 // NOTE: identical to it_802A0FD0
-f32 it_802A12FC(Item_GObj* gobj)
+void it_802A12FC(Item_GObj* gobj)
 {
     Item* ip;
     f32 angle;
@@ -442,7 +443,6 @@ f32 it_802A12FC(Item_GObj* gobj)
         angle = sinf(ip->xDD4_itemVar.linkboomerang.xF74);
         ip->x40_vel.y = var_f31 * angle;
     }
-    return angle;
 }
 
 static void clamp_pi_tau(f32* angle)
@@ -624,17 +624,15 @@ bool it_802A1C30(Item_GObj* gobj)
 
 void it_802A1D60_sub(Item_GObj* gobj, f32 angle)
 {
-    Item* ip;
-    itLinkBoomerangAttributes* attrs;
-
-    ip = GET_ITEM(gobj);
-    attrs = ip->xC4_article_data->x4_specialAttributes;
+    Item* ip = GET_ITEM(gobj);
+    itLinkBoomerangAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Fighter_Part part;
     if ((ip->msid == 3) && (angle < attrs->x2C)) {
         if (ip->xDD4_itemVar.linkboomerang.xF98) {
             if ((ftLk_SpecialS_Is2071b0_1to13(ip->xDD4_itemVar.linkboomerang.xF98) == 0) && (ftLk_SepcialS_Get2219b5(ip->xDD4_itemVar.linkboomerang.xF98) == 0)) {
                 ftLk_SpecialS2_Enter(ip->xDD4_itemVar.linkboomerang.xF98);
-                ftLk_SpecialHi_ProcessPartLThumbNb(ip->xDD4_itemVar.linkboomerang.xF98);
-                Item_8026AB54(gobj, ip->xDD4_itemVar.linkboomerang.xF98, M2C_ERROR(/* Read from unset register $r3 */));
+                part = ftLk_SpecialHi_ProcessPartLThumbNb(ip->xDD4_itemVar.linkboomerang.xF98);
+                Item_8026AB54(gobj, ip->xDD4_itemVar.linkboomerang.xF98, part);
             } else {
                 remove_boomerang(gobj);
                 Item_8026A8EC(gobj);
@@ -644,17 +642,18 @@ void it_802A1D60_sub(Item_GObj* gobj, f32 angle)
     }
 }
 
-void it_802A1D60(Item_GObj* gobj, Fighter_Part part)
+void it_802A1D60(Item_GObj* gobj)
 {
-    Item* ip;
+    Item* ip = gobj->user_data;
+    itLinkBoomerangAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 xC;
     f32 length;
-    itLinkBoomerangAttributes* attrs;
-
-    ip = gobj->user_data;
-    attrs = ip->xC4_article_data->x4_specialAttributes;
     if (ip->xDD4_itemVar.linkboomerang.xDE8 != 1) {
+        xC = attrs->xC;
         length = VEC_XY_LENGTH(&ip->x40_vel) + attrs->xC;
-        length = MIN(length, attrs->x14);
+        if (length > xC) {
+            length = xC;
+        }
         ip->x40_vel.x = length * cosf(ip->xDD4_itemVar.linkboomerang.xF74);
         ip->x40_vel.y = length * sinf(ip->xDD4_itemVar.linkboomerang.xF74);
         it_802A1D60_sub(gobj, it_802A13EC(gobj));

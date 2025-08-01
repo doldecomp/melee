@@ -13,12 +13,12 @@
 
 /// #it_80299DD0
 
-bool it_80299E1C(void)
+bool it_80299E1C(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80299E24(void) {}
+void it_80299E24(Item_GObj* gobj) {}
 
 /// #it_80299E28
 
@@ -36,7 +36,7 @@ void it_80299E24(void) {}
 
 /// #it_8029A000
 
-void it_8029A080(void) {}
+void it_8029A080(Item_GObj* gobj) {}
 
 /// #it_8029A084
 

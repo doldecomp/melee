@@ -34,7 +34,7 @@
 /* 802A2B10 */ void it_802A2B10(Item_GObj* gobj);
 /* 802A2BA4 */ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2,
                                       s32 arg3);
-/* 802A2D88 */ int it_802A2D88(Item_GObj* arg0);
+/* 802A2D88 */ bool it_802A2D88(Item_GObj* arg0);
 /* 802A2ED0 */ void it_802A2ED0(Item_GObj* arg0);
 /* 802A2EE4 */ void it_802A2EE4(Item_GObj* arg0);
 /* 802A30FC */ void it_802A30FC(Item_GObj* arg0);

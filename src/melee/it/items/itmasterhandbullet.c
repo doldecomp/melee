@@ -99,7 +99,7 @@ bool it_802F0E70(Item_GObj* gobj)
     return false;
 }
 
-void it_802F0ED4(void) {}
+void it_802F0ED4(Item_GObj* gobj) {}
 
 void it_802F0F08(Item_GObj* gobj) {}
 

@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itsamusbomb.h"
 
 /// #it_802B4AC8
 
@@ -9,7 +10,7 @@
 
 /// #it_802B4C38
 
-void it_802B4CC4(void) {}
+void it_802B4CC4(Item_GObj* gobj) {}
 
 /// #it_802B4CC8
 

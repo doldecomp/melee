@@ -28,11 +28,11 @@ void it_802AFEF8(Item_GObj* gobj)
 
 /// #it_802B0464
 
-void it_802B0544(void) {}
+void it_802B0544(Item_GObj* gobj) {}
 
 /// #it_802B0548
 
-void it_802B057C(void) {}
+void it_802B057C(Item_GObj* gobj) {}
 
 void it_802B0580(Item_GObj* gobj)
 {
@@ -48,7 +48,7 @@ void it_802B0580(Item_GObj* gobj)
 
 /// #it_802B0AB8
 
-bool it_802B0C5C(void)
+bool it_802B0C5C(Item_GObj* gobj)
 {
     return false;
 }
