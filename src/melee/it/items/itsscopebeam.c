@@ -11,7 +11,7 @@
 
 /// #it_802990CC
 
-void it_80299148(void) {}
+void it_80299148(Item_GObj* gobj) {}
 
 /// #it_8029914C
 

@@ -32,13 +32,13 @@ bool it_802E87F0(Item_GObj* arg0)
 
 /// #it_802E8864
 
-void it_802E8898(void) {}
+void it_802E8898(Item_GObj* gobj) {}
 
 /// #it_802E889C
 
 /// #it_802E890C
 
-bool it_802E896C(void)
+bool it_802E896C(Item_GObj* gobj)
 {
     return false;
 }

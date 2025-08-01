@@ -1,3 +1,4 @@
+#include "itkyasarin.h"
 
 /// #it_802ECCDC
 
@@ -53,7 +54,7 @@
 
 /// #it_802EDD54
 
-void it_802EDD9C(void) {}
+void it_802EDD9C(Item_GObj* gobj) {}
 
 /// #it_802EDDA0
 

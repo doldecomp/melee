@@ -47,12 +47,12 @@ void it_80297944(Item_GObj* arg0)
     Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_8029799C(void)
+bool it_8029799C(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802979A4(void) {}
+void it_802979A4(Item_GObj* gobj) {}
 
 bool it_802979A8(Item_GObj* arg0)
 {
@@ -71,7 +71,7 @@ void it_802979D4(Item_GObj* arg0)
     Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_80297A1C(void)
+bool it_80297A1C(Item_GObj* gobj)
 {
     return false;
 }
@@ -101,12 +101,12 @@ void it_80297ABC(Item_GObj* arg0)
     Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_80297AE4(void)
+bool it_80297AE4(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80297AEC(void) {}
+void it_80297AEC(Item_GObj* gobj) {}
 
 void it_80297AF0(Item_GObj* arg0)
 {
@@ -118,12 +118,12 @@ void it_80297B18(Item_GObj* arg0)
     Item_80268E5C(arg0, 3, 6);
 }
 
-s32 it_80297B40(Item_GObj* arg0)
+void it_80297B40(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
                 item->xCC_item_attr->x14_fall_speed_max);
-    return it_80274658(arg0, it_804D6D28->x68_float);
+    it_80274658(arg0, it_804D6D28->x68_float);
 }
 
 bool it_80297B8C(Item_GObj* arg0)
@@ -142,12 +142,12 @@ bool it_80297BB8(Item_GObj* arg0)
 
 /// #it_80297BF8
 
-bool it_80297C84(void)
+bool it_80297C84(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80297C8C(void) {}
+void it_80297C8C(Item_GObj* gobj) {}
 
 /// #it_80297C90
 
@@ -192,7 +192,7 @@ void it_80297DD8(Item_GObj* arg0)
 
 /// #it_80297E28
 
-void it_80297E5C(void) {}
+void it_80297E5C(Item_GObj* gobj) {}
 
 /// #it_80297E60
 

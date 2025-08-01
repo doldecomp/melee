@@ -76,7 +76,7 @@ void it_802E37A4(Item_GObj* gobj)
 
 /// #it_802E3DA0
 
-bool it_802E3E5C(void)
+bool it_802E3E5C(Item_GObj* gobj)
 {
     return false;
 }
@@ -99,7 +99,7 @@ bool it_802E3E5C(void)
 
 /// #it_802E41D4
 
-void it_802E432C(void) {}
+void it_802E432C(Item_GObj* gobj) {}
 
 /// #it_802E4330
 
@@ -107,13 +107,13 @@ void it_802E432C(void) {}
 
 /// #it_802E43C0
 
-void it_802E4424(void) {}
+void it_802E4424(Item_GObj* gobj) {}
 
 /// #it_802E4428
 
 /// #it_802E4464
 
-bool it_802E44E4(void)
+bool it_802E44E4(Item_GObj* gobj)
 {
     return false;
 }
@@ -126,7 +126,7 @@ bool it_802E44E4(void)
 
 /// #it_802E45D0
 
-void it_802E464C(void) {}
+void it_802E464C(Item_GObj* gobj) {}
 
 /// #it_802E4650
 
@@ -134,7 +134,7 @@ void it_802E464C(void) {}
 
 /// #it_802E46B4
 
-void it_802E46FC(void) {}
+void it_802E46FC(Item_GObj* gobj) {}
 
 /// #it_802E4700
 
@@ -150,13 +150,13 @@ void it_802E46FC(void) {}
 
 /// #it_802E4914
 
-void it_802E495C(void) {}
+void it_802E495C(Item_GObj* gobj) {}
 
 /// #it_802E4960
 
 /// #it_802E4980
 
-bool it_802E49E0(void)
+bool it_802E49E0(Item_GObj* gobj)
 {
     return false;
 }

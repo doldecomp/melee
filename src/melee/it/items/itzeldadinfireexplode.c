@@ -93,7 +93,7 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
     db_80225DD8(gobj, ip->owner);
 }
 
-void it_802C4820(Item_GObj* gobj)
+bool it_802C4820(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -135,7 +135,7 @@ void it_802C4980(Item_GObj* gobj)
 #endif
 }
 
-bool it_802C4998(void)
+bool it_802C4998(Item_GObj* gobj)
 {
     return false;
 }

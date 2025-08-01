@@ -10,9 +10,9 @@
 
 /// #it_802B1AD4
 
-void it_802B1C34(void) {}
+void it_802B1C34(Item_GObj* gobj) {}
 
-bool it_802B1C38(void)
+bool it_802B1C38(Item_GObj* gobj)
 {
     return false;
 }

@@ -12,7 +12,7 @@ void it_802CE7CC(void) {}
 
 /// #it_802CE870
 
-bool it_802CE8C8(void)
+bool it_802CE8C8(Item_GObj* gobj)
 {
     return false;
 }
@@ -21,9 +21,9 @@ bool it_802CE8C8(void)
 
 /// #it_802CEB9C
 
-void it_802CEC18(void) {}
+void it_802CEC18(Item_GObj* gobj) {}
 
-bool it_802CEC1C(void)
+bool it_802CEC1C(Item_GObj* gobj)
 {
     return false;
 }

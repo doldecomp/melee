@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itlikelike.h"
 
 /// #it_802D9A2C
 
@@ -45,7 +46,7 @@
 
 /// #it_802DAA10
 
-bool it_802DAAD0(void)
+bool it_802DAAD0(Item_GObj* gobj)
 {
     return false;
 }
@@ -66,7 +67,7 @@ bool it_802DAAD0(void)
 
 /// #it_802DAD18
 
-bool it_802DAE0C(void)
+bool it_802DAE0C(Item_GObj* gobj)
 {
     return false;
 }
@@ -79,7 +80,7 @@ bool it_802DAE0C(void)
 
 /// #it_802DAEA8
 
-void it_802DAFC8(void) {}
+void it_802DAFC8(Item_GObj* gobj) {}
 
 /// #it_802DAFCC
 
@@ -105,7 +106,7 @@ void it_802DAFC8(void) {}
 
 /// #it_802DB670
 
-void it_802DB70C(void) {}
+void it_802DB70C(Item_GObj* gobj) {}
 
 /// #it_802DB710
 
@@ -113,7 +114,7 @@ void it_802DB70C(void) {}
 
 /// #it_802DB7CC
 
-void it_802DB868(void) {}
+void it_802DB868(Item_GObj* gobj) {}
 
 /// #it_802DB86C
 
@@ -133,13 +134,13 @@ void it_802DB868(void) {}
 
 /// #it_802DBC68
 
-void it_802DBD3C(void) {}
+void it_802DBD3C(Item_GObj* gobj) {}
 
 /// #it_802DBD40
 
 /// #it_802DBD7C
 
-void it_802DBE50(void) {}
+void it_802DBE50(Item_GObj* gobj) {}
 
 /// #it_802DBE54
 
@@ -147,13 +148,13 @@ void it_802DBE50(void) {}
 
 /// #it_802DBED4
 
-void it_802DBF2C(void) {}
+void it_802DBF2C(Item_GObj* gobj) {}
 
 /// #it_802DBF30
 
 /// #it_802DC000
 
-bool it_802DC050(void)
+bool it_802DC050(Item_GObj* gobj)
 {
     return false;
 }
@@ -164,7 +165,7 @@ bool it_802DC050(void)
 
 /// #it_802DC0AC
 
-bool it_802DC114(void)
+bool it_802DC114(Item_GObj* gobj)
 {
     return false;
 }
@@ -177,13 +178,13 @@ bool it_802DC114(void)
 
 /// #it_802DC370
 
-void it_802DC3B8(void) {}
+void it_802DC3B8(Item_GObj* gobj) {}
 
 /// #it_802DC3BC
 
 /// #it_802DC3DC
 
-bool it_802DC43C(void)
+bool it_802DC43C(Item_GObj* gobj)
 {
     return false;
 }

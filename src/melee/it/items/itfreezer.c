@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itfreezer.h"
 
 /// #it_802CCF9C
 
@@ -9,7 +10,7 @@ void it_802CCFFC(void) {}
 
 /// #it_802CD020
 
-void it_802CD060(void) {}
+void it_802CD060(Item_GObj* gobj) {}
 
 /// #it_802CD064
 
@@ -21,7 +22,7 @@ void it_802CD060(void) {}
 
 /// #it_802CD230
 
-bool it_802CD288(void)
+bool it_802CD288(Item_GObj* gobj)
 {
     return false;
 }

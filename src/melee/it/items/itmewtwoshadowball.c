@@ -21,9 +21,9 @@
 
 /// #it_802C57C8
 
-void it_802C5B0C(void) {}
+void it_802C5B0C(Item_GObj* gobj) {}
 
-bool it_802C5B10(void)
+bool it_802C5B10(Item_GObj* gobj)
 {
     return false;
 }
@@ -38,7 +38,7 @@ bool it_802C5B10(void)
 
 /// #it_802C5DAC
 
-void it_802C5DCC(void) {}
+void it_802C5DCC(Item_GObj* gobj) {}
 
 /// #it_802C5DD0
 
@@ -54,7 +54,7 @@ void it_802C6094(Item_GObj* gobj)
     itResetVelocity(ip);
 }
 
-bool it_802C60AC(void)
+bool it_802C60AC(Item_GObj* gobj)
 {
     return false;
 }
