@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itkabigon.h"
 
 /// #it_802C9D40
 
@@ -25,9 +26,9 @@ void it_802C9DFC(void) {}
 
 /// #it_802CA198
 
-void it_802CA318(void) {}
+void it_802CA318(Item_GObj* gobj) {}
 
-bool it_802CA31C(void)
+bool it_802CA31C(Item_GObj* gobj)
 {
     return false;
 }

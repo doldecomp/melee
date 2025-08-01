@@ -146,9 +146,9 @@ static void doColl(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1, 0, NULL);
 }
 
-void ftLk_SpecialHi_ProcessPartLThumbNb(HSD_GObj* gobj)
+Fighter_Part ftLk_SpecialHi_ProcessPartLThumbNb(HSD_GObj* gobj)
 {
-    ftParts_8007500C(GET_FIGHTER(gobj), FtPart_LThumbNb);
+    return ftParts_8007500C(GET_FIGHTER(gobj), FtPart_LThumbNb);
 }
 
 void ftLk_SpecialHi_GetPosWithAdjustedY(HSD_GObj* gobj, Vec3* pos)

@@ -381,7 +381,7 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
     return gobj;
 }
 
-int it_802A2D88(Item_GObj* arg0)
+bool it_802A2D88(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item;

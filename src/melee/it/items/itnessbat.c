@@ -13,18 +13,18 @@
 
 /// #it_802AD768
 
-void it_802AD8D0(void) {}
+void it_802AD8D0(Item_GObj* gobj) {}
 
-bool it_802AD8D4(void)
+bool it_802AD8D4(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802AD8DC
 
-void it_802AD9F0(void) {}
+void it_802AD9F0(Item_GObj* gobj) {}
 
-bool it_802AD9F4(void)
+bool it_802AD9F4(Item_GObj* gobj)
 {
     return false;
 }

@@ -18,7 +18,7 @@
 
 /// #it_802EF3C4
 
-void it_802EF468(void) {}
+void it_802EF468(Item_GObj* gobj) {}
 
 /// #it_802EF46C
 

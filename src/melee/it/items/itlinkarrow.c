@@ -416,7 +416,7 @@ static void inline it_802A8CC8_inline_s_2(HSD_GObj* gobj, Item* item)
     HSD_JObjSetScale(jobj, &scale);
 }
 
-int it_802A8B20(HSD_GObj* gobj)
+bool it_802A8B20(HSD_GObj* gobj)
 {
     Item* item;
     item = GET_ITEM(gobj);
@@ -455,7 +455,7 @@ void it_802A8C70(HSD_GObj* gobj)
     return;
 }
 
-int it_802A8C74(HSD_GObj* gobj)
+bool it_802A8C74(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -497,7 +497,7 @@ static void inline it_802A8CC8_inline(HSD_GObj* gobj, int i)
     }
 }
 
-int it_802A8CC8(HSD_GObj* gobj)
+bool it_802A8CC8(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     {
@@ -567,7 +567,7 @@ static inline bool it_802A9138_inline(Item_GObj* gobj)
     return 0;
 }
 
-int it_802A9138(Item_GObj* gobj)
+bool it_802A9138(Item_GObj* gobj)
 {
     HSD_JObj* jobj;
     f32 temp_f1;
@@ -603,7 +603,7 @@ int it_802A9138(Item_GObj* gobj)
     return 0;
 }
 
-int it_802A934C(Item_GObj* gobj)
+bool it_802A934C(Item_GObj* gobj)
 {
     Item* item;
     f32 pad[1];
@@ -631,12 +631,12 @@ void it_802A93B4(HSD_GObj* gobj)
     item->pos.z = 0.0f;
 }
 
-int it_802A943C(HSD_GObj* gobj)
+bool it_802A943C(HSD_GObj* gobj)
 {
     return 0;
 }
 
-int it_802A9444(HSD_GObj* gobj)
+bool it_802A9444(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -646,7 +646,7 @@ void it_802A944C(HSD_GObj* gobj)
     return;
 }
 
-int it_802A9450(HSD_GObj* gobj)
+bool it_802A9450(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -704,7 +704,7 @@ static bool inline itlinkarrow_inline_bool(Item_GObj* gobj)
     return var_r0;
 }
 
-int it_802A96E4(Item_GObj* gobj)
+bool it_802A96E4(Item_GObj* gobj)
 {
     f32 var_f32;
     Item* item;
@@ -764,7 +764,7 @@ void it_802A98E4(HSD_GObj* gobj)
     return;
 }
 
-int it_802A98E8(HSD_GObj* gobj)
+bool it_802A98E8(HSD_GObj* gobj)
 {
     f32 temp_f0;
     f32 temp_f1;

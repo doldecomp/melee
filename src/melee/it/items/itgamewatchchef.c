@@ -1,3 +1,4 @@
+#include "itgamewatchchef.h"
 
 /// #it_802C837C
 
@@ -15,7 +16,7 @@
 
 /// #it_802C87B4
 
-void it_802C8828(void) {}
+void it_802C8828(Item_GObj* gobj) {}
 
 /// #it_802C882C
 

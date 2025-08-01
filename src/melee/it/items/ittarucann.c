@@ -31,7 +31,7 @@ int it_802960CC(Item_GObj* gobj)
 
 /// #it_802964A4
 
-void it_802964F8(void) {}
+void it_802964F8(Item_GObj* gobj) {}
 
 /// #it_802964FC
 
@@ -47,7 +47,7 @@ void it_802964F8(void) {}
 
 /// #it_80296898
 
-void it_802968D4(void) {}
+void it_802968D4(Item_GObj* gobj) {}
 
 /// #it_802968D8
 
@@ -83,9 +83,9 @@ void it_802968D4(void) {}
 
 /// #it_80297674
 
-void it_80297784(void) {}
+void it_80297784(Item_GObj* gobj) {}
 
-bool it_80297788(void)
+bool it_80297788(Item_GObj* gobj)
 {
     return false;
 }

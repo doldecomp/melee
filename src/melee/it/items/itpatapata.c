@@ -1,11 +1,12 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itpatapata.h"
 
 /// #it_802E05A0
 
 /// #it_802E0678
 
-bool it_802E06B4(void)
+bool it_802E06B4(Item_GObj* gobj)
 {
     return false;
 }
@@ -34,13 +35,13 @@ bool it_802E06B4(void)
 
 /// #it_802E0F98
 
-void it_802E0FE0(void) {}
+void it_802E0FE0(Item_GObj* gobj) {}
 
 /// #it_802E0FE4
 
 /// #it_802E1040
 
-void it_802E10A0(void) {}
+void it_802E10A0(Item_GObj* gobj) {}
 
 /// #it_802E10A4
 

@@ -238,7 +238,7 @@ void it_8029DEB0(HSD_GObj* gobj)
     it_8026BCF4((Item_GObj*) gobj);
 }
 
-int it_8029E074(HSD_GObj* gobj)
+bool it_8029E074(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -274,7 +274,7 @@ void fn_8029E21C(HSD_GObj* gobj)
     it_8029D9A4(gobj, 1, 0x0);
 }
 
-int it_8029E3D8(HSD_GObj* gobj)
+bool it_8029E3D8(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -310,7 +310,7 @@ void it_8029E574(HSD_GObj* gobj)
                 temp_r4->x14_fall_speed_max);
 }
 
-int it_8029E5A4(Item_GObj* gobj)
+bool it_8029E5A4(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_8029F18C);
     return 0;
@@ -329,7 +329,7 @@ void it_8029E5D0(HSD_GObj* gobj)
     }
 }
 
-int it_8029E920(HSD_GObj* gobj)
+bool it_8029E920(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -379,7 +379,7 @@ static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj* gobj, Vec3* vel)
     }
 }
 
-int it_8029EB3C(HSD_GObj* gobj)
+bool it_8029EB3C(HSD_GObj* gobj)
 {
     Item* item;
     s32 temp_r3;
@@ -429,7 +429,7 @@ static inline void it_8029E3D8_fake(HSD_GObj* gobj)
 // it_8029E3D8, but I can't figure out how to get a match for it_8029E3D8 that
 // calls it_8029DB5C. Not sure if that's related to the unused
 // item/specialattributes.
-int it_8029EF84(HSD_GObj* gobj)
+bool it_8029EF84(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -454,7 +454,7 @@ void it_8029F04C(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-int it_8029F098(HSD_GObj* gobj)
+bool it_8029F098(HSD_GObj* gobj)
 {
     GET_ITEM(gobj);
     it_8029EB3C(gobj);
@@ -504,7 +504,7 @@ void it_8029F18C(HSD_GObj* gobj)
 
 // This regswap may or may not be related to the fake inline for it_8029DB5C,
 // but every other function matches with it.
-int it_8029F3DC(HSD_GObj* gobj)
+bool it_8029F3DC(HSD_GObj* gobj)
 {
     Article* article;
     Item* item;
@@ -551,7 +551,7 @@ void it_8029F60C(HSD_GObj* gobj)
     }
 }
 
-int it_8029F670(Item_GObj* gobj)
+bool it_8029F670(Item_GObj* gobj)
 {
     it_8026D62C(gobj, fn_8029E21C);
     return 0;
@@ -594,7 +594,7 @@ void it_8029F69C(HSD_GObj* gobj)
     lb_800119DC(&item_pos, 0x78, 1.0f, 0.02f, 1.0471976f);
 }
 
-int it_8029F934(Item_GObj* gobj)
+bool it_8029F934(Item_GObj* gobj)
 {
     return it_802751D8(gobj);
 }
@@ -604,7 +604,7 @@ void it_8029F954(HSD_GObj* gobj)
     return;
 }
 
-int it_8029F958(HSD_GObj* gobj)
+bool it_8029F958(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -663,7 +663,7 @@ void it_8029FB24(Item_GObj* gobj)
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
-int it_8029FB4C(HSD_GObj* gobj)
+bool it_8029FB4C(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -694,7 +694,7 @@ void it_8029FCE8(HSD_GObj* gobj)
     return;
 }
 
-int it_8029FCEC(Item_GObj* gobj)
+bool it_8029FCEC(Item_GObj* gobj)
 {
     it_8026E8C4(gobj, it_8029F18C, fn_8029E21C);
     return 0;

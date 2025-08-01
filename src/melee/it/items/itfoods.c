@@ -9,18 +9,18 @@
 
 #include <baselib/gobj.h>
 
-/* 28FC84 */ int it_8028FC84(Item_GObj* arg0);
+/* 28FC84 */ bool it_8028FC84(Item_GObj* arg0);
 /* 28FC8C */ void it_8028FC8C(Item_GObj* arg0);
-/* 28FCBC */ int it_8028FCBC(Item_GObj* arg0);
+/* 28FCBC */ bool it_8028FCBC(Item_GObj* arg0);
 /* 28FCE8 */ void it_8028FCE8(HSD_GObj* gobj);
-/* 28FD44 */ int it_8028FD44(Item_GObj* arg0);
+/* 28FD44 */ bool it_8028FD44(Item_GObj* arg0);
 /* 28FD4C */ void it_8028FD4C(Item_GObj* arg0);
-/* 28FD50 */ int it_8028FD50(Item_GObj* arg0);
-/* 28FDD8 */ int it_8028FDD8(Item_GObj* arg0);
+/* 28FD50 */ bool it_8028FD50(Item_GObj* arg0);
+/* 28FDD8 */ bool it_8028FDD8(Item_GObj* arg0);
 /* 28FDE0 */ void it_8028FDE0(Item_GObj* arg0);
-/* 28FE0C */ int it_8028FE0C(Item_GObj* arg0);
+/* 28FE0C */ bool it_8028FE0C(Item_GObj* arg0);
 /* 28FE14 */ void it_8028FE14(Item_GObj* arg0);
-/* 28FE44 */ int it_8028FE44(Item_GObj* arg0);
+/* 28FE44 */ bool it_8028FE44(Item_GObj* arg0);
 
 ItemStateTable it_803F83F0[] = { { -1, it_8028FC84, it_8028FC8C, it_8028FCBC },
                                  { -1, it_8028FD44, it_8028FD4C, it_8028FD50 },

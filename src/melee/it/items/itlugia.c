@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itlugia.h"
 
 /// #it_802D1438
 
@@ -11,7 +12,7 @@ void it_802D14D0(void) {}
 
 /// #it_802D1558
 
-bool it_802D1578(void)
+bool it_802D1578(Item_GObj* gobj)
 {
     return false;
 }
@@ -22,7 +23,7 @@ bool it_802D1578(void)
 
 /// #it_802D1620
 
-bool it_802D16CC(void)
+bool it_802D16CC(Item_GObj* gobj)
 {
     return false;
 }
@@ -33,7 +34,7 @@ bool it_802D16CC(void)
 
 /// #it_802D17B0
 
-bool it_802D1828(void)
+bool it_802D1828(Item_GObj* gobj)
 {
     return false;
 }
@@ -44,7 +45,7 @@ bool it_802D1828(void)
 
 /// #it_802D19C0
 
-bool it_802D1A3C(void)
+bool it_802D1A3C(Item_GObj* gobj)
 {
     return false;
 }
@@ -55,7 +56,7 @@ bool it_802D1A3C(void)
 
 /// #it_802D1B94
 
-bool it_802D1BB4(void)
+bool it_802D1BB4(Item_GObj* gobj)
 {
     return false;
 }

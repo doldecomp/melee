@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itoldkuri.h"
 
 /// #it_802D73D0
 
@@ -7,7 +8,7 @@
 
 /// #it_802D747C
 
-bool it_802D74D0(void)
+bool it_802D74D0(Item_GObj* gobj)
 {
     return false;
 }
@@ -50,7 +51,7 @@ bool it_802D74D0(void)
 
 /// #it_802D7C58
 
-void it_802D7CB0(void) {}
+void it_802D7CB0(Item_GObj* gobj) {}
 
 /// #it_802D7CB4
 
@@ -76,7 +77,7 @@ void it_802D7CB0(void) {}
 
 /// #it_802D8190
 
-void it_802D81D8(void) {}
+void it_802D81D8(Item_GObj* gobj) {}
 
 /// #it_802D81DC
 
@@ -92,7 +93,7 @@ void it_802D81D8(void) {}
 
 /// #it_802D8330
 
-void it_802D8378(void) {}
+void it_802D8378(Item_GObj* gobj) {}
 
 /// #it_802D837C
 

@@ -17,7 +17,7 @@
 
 /// #it_802D53AC
 
-void it_802D53F0(void) {}
+void it_802D53F0(Item_GObj* gobj) {}
 
 /// #it_802D53F4
 
@@ -25,7 +25,7 @@ void it_802D53F0(void) {}
 
 /// #it_802D546C
 
-bool it_802D54C4(void)
+bool it_802D54C4(Item_GObj* gobj)
 {
     return false;
 }
@@ -34,7 +34,7 @@ bool it_802D54C4(void)
 
 /// #it_802D54FC
 
-bool it_802D5528(void)
+bool it_802D5528(Item_GObj* gobj)
 {
     return false;
 }

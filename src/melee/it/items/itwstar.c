@@ -12,7 +12,7 @@
 
 /// #it_8029455C
 
-bool it_802945AC(void)
+bool it_802945AC(Item_GObj* gobj)
 {
     return false;
 }
@@ -23,7 +23,7 @@ bool it_802945AC(void)
 
 /// #it_80294624
 
-bool it_8029464C(void)
+bool it_8029464C(Item_GObj* gobj)
 {
     return false;
 }
@@ -36,7 +36,7 @@ bool it_8029464C(void)
 
 /// #it_80294728
 
-bool it_80294788(void)
+bool it_80294788(Item_GObj* gobj)
 {
     return false;
 }
@@ -47,21 +47,21 @@ bool it_80294788(void)
 
 /// #it_802949C0
 
-void it_80294A1C(void) {}
+void it_80294A1C(Item_GObj* gobj) {}
 
-bool it_80294A20(void)
+bool it_80294A20(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_80294A28
 
-bool it_80294A50(void)
+bool it_80294A50(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80294A58(void) {}
+void it_80294A58(Item_GObj* gobj) {}
 
 /// #it_80294A5C
 

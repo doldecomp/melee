@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itoldottosea.h"
 
 /// #it_802E2470
 
@@ -23,7 +24,7 @@
 
 /// #it_802E2BC0
 
-bool it_802E2C0C(void)
+bool it_802E2C0C(Item_GObj* gobj)
 {
     return false;
 }
@@ -54,6 +55,6 @@ bool it_802E2C0C(void)
 
 /// #it_802E3110
 
-void it_802E31B8(void) {}
+void it_802E31B8(Item_GObj* gobj) {}
 
 /// #it_802E31BC

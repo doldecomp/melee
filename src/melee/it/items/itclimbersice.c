@@ -17,13 +17,13 @@
 
 /// #it_802C198C
 
-void it_802C1A14(void) {}
+void it_802C1A14(Item_GObj* gobj) {}
 
 /// #it_802C1A18
 
 /// #it_802C1A58
 
-bool it_802C1A80(void)
+bool it_802C1A80(Item_GObj* gobj)
 {
     return false;
 }
