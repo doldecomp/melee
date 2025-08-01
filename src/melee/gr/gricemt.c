@@ -470,6 +470,7 @@ bool grIceMt_801F7EE0(HSD_GObj* arg0)
 
 void grIceMt_801F7EE8(HSD_GObj* arg0)
 {
+    PAD_STACK(8);
     grIceMt_801F98A8(arg0);
     Ground_801C2FE0(arg0);
 }

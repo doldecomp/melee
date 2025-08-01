@@ -1,5 +1,9 @@
 #include <platform.h>
 
+#include "gr/inlines.h"
+
+#include <baselib/gobj.h>
+
 void grZebesRoute_8020B160(void) {}
 
 /// #grZebesRoute_8020B164
@@ -15,7 +19,11 @@ bool grZebesRoute_8020B258(void)
 
 /// #grZebesRoute_8020B260
 
-/// #grZebesRoute_8020B348
+void grZebesRoute_8020B348(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grZebesRoute_8020B374(void)
 {
@@ -26,7 +34,11 @@ void grZebesRoute_8020B37C(void) {}
 
 void grZebesRoute_8020B380(void) {}
 
-/// #grZebesRoute_8020B384
+void grZebesRoute_8020B384(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grZebesRoute_8020B3B0(void)
 {
