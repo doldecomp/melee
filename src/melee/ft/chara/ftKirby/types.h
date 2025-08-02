@@ -19,7 +19,7 @@
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {
         /*  +0   fp+222C */ UNK_T x0;
-        /*  +4   fp+2230 */ u32 x4;
+        /*  +4   fp+2230 */ s32 x4;
         /*  +8:0 fp+2234:0 */ u8 x8_b0 : 1;
         /*  +9   fp+2235 */ u8 x9[3];
         /*  +C   fp+2238 */ FighterKind kind;
@@ -148,7 +148,7 @@ struct ftKb_DatAttrs {
     /*  +FC */ float speciallw_slide_acceleration;
     /* +100 */ float speciallw_slide_max_speed;
     /* +104 */ float speciallw_gravity;
-    /* +108 */ u32 speciallw_hp;
+    /* +108 */ s32 speciallw_hp;
     /* +10C */ u32 speciallw_resistance;
     /* +110 */ u32 speciallw_unk;
     /* +114 */ float speciallw_freefall_toggle;
@@ -391,6 +391,18 @@ union ftKb_MotionVars {
     struct ftKb_SpecialNPe_Vars {
         /* fp+2340 */ int facing_dir;
     } specialn_pe;
+    struct ftKb_SpecialHiVars {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ int x8;
+        /* fp+234C */ int xC;   
+        /* fp+2350 */ int x10;     
+        /* fp+2354 */ int x14; 
+        /* fp+2358 */ Vec3 x18;
+                                char pad1[0x60];
+        /* fp+23C4 */ float xC4;
+    } specialhi;
+
 };
 
 #endif

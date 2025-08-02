@@ -118,6 +118,7 @@
 /* 0F2164 */ void ftKb_AttackDashAir_Phys(Fighter_GObj* gobj);
 /* 0F2198 */ void ftKb_AttackDashAir_Coll(Fighter_GObj* gobj);
 /* 0F21C0 */ void ftKb_AttackDashAir_800F21C0(Fighter_GObj* gobj);
+/* 0F21E8 */ void fn_800F21E8(HSD_GObj* gobj);
 /* 0F22D4 */ void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj);
 /* 0F2300 */ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj);
 /* 0F23B8 */ void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj);
@@ -153,9 +154,9 @@
 /* 0F3004 */ void ftKb_SpecialAirHi2_Coll(Fighter_GObj* gobj);
 /* 0F3140 */ void ftKb_SpecialAirHi3_Coll(Fighter_GObj* gobj);
 /* 0F3248 */ void ftKb_SpecialAirHiEnd_Coll(Fighter_GObj* gobj);
-/* 0F331C */ UNK_RET ftKb_SpecialHi_800F331C(UNK_PARAMS);
-/* 0F346C */ UNK_RET ftKb_SpecialHi_800F346C(UNK_PARAMS);
-/* 0F3570 */ UNK_RET ftKb_SpecialHi_800F3570(UNK_PARAMS);
+/* 0F331C */ void ftKb_SpecialHi_800F331C(Fighter_GObj* gobj);
+/* 0F346C */ void ftKb_SpecialHi_800F346C(Fighter_GObj* gobj);
+/* 0F3570 */ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj);
 /* 0F36DC */ UNK_RET ftKb_SpecialHi_800F36DC(UNK_PARAMS);
 /* 0F37EC */ UNK_RET ftKb_SpecialHi_800F37EC(UNK_PARAMS);
 /* 0F3B28 */ UNK_RET ftKb_SpecialHi_800F3B28(UNK_PARAMS);
@@ -187,6 +188,7 @@
 /* 0F51C0 */ void ftKb_SpecialAirLwEnd_Coll(Fighter_GObj* gobj);
 /* 0F5318 */ void ftKb_SpecialAirLw_800F5318(Fighter_GObj* gobj);
 /* 0F539C */ void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj);
+/* 0F53AC */ void fn_800F53AC(HSD_GObj*);
 /* 0F5524 */ void ftKb_SpecialAirLw_800F5524(Fighter_GObj* gobj);
 /* 0F5564 */ void ftKb_SpecialS_Enter(Fighter_GObj* gobj);
 /* 0F55D0 */ void ftKb_SpecialAirS_Enter(Fighter_GObj* gobj);
@@ -211,7 +213,7 @@
 /* 0F5954 */ void ftKb_SpecialN_800F5954(Fighter_GObj* gobj);
 /* 0F597C */ bool ftKb_SpecialN_800F597C(Fighter_GObj* gobj);
 /* 0F598C */ void ftKb_SpecialN_800F598C(Fighter_GObj* gobj, int arg1);
-/* 0F5A04 */ void ftKb_SpecialN_800F5A04(Fighter_GObj* gobj);
+/* 0F5A04 */ void ftKb_SpecialN_800F5A04(Fighter_GObj* gobj, f32 arg1);
 /* 0F5A38 */ bool ftKb_SpecialN_800F5A38(Fighter_GObj* gobj,
                                          Fighter* victim_fp);
 /* 0F5A60 */ float ftKb_SpecialN_800F5A60(Fighter_GObj* gobj);
