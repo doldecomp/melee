@@ -759,13 +759,9 @@ static u8 mn_80229A04_dontinline(int arg0, int arg1)
 }
 
 struct mn_80229A7C_t {
-    u8 x0, x1, x2;
-    HSD_JObj* x4[3];
-    HSD_JObj* x10;
-    u8 unk14[0x3C - 0x14];
-    HSD_JObj* x3C;
-    u8 unk40[0xAC - 0x40];
-    HSD_Text* xAC;
+    u8 x0, x1, x2; ///< x0 = menu type, x1 = cursor, x2 = state
+    HSD_JObj* x4[42]; ///< these are the menu jobjs, ie buttons, panels, etc
+    HSD_Text* xAC; ///< description
 };
 
 #pragma push
@@ -929,7 +925,7 @@ HSD_GObj* mn_80229DC0(void)
 static const Vec3 mn_803B84E8 = { 0 };
 static const Vec3 mn_803B84F4 = { 0 };
 
-void mn_80229F60(HSD_GObj* arg0, int arg1, int arg2)
+void mn_80229F60(HSD_GObj* arg0, HSD_JObj* arg1, int arg2)
 {
     float temp_f31;
     struct {
@@ -989,15 +985,15 @@ void mn_80229F60(HSD_GObj* arg0, int arg1, int arg2)
     HSD_JObjSetRotationZ(sp54[6], temp_f31);
 }
 
-void mn_8022A440(HSD_GObj* arg1, int arg2)
+void mn_8022A440(HSD_GObj* arg0, HSD_JObj* arg1, s32 arg2)
 {
     HSD_JObj* sp24[7];
     HSD_JObj* r29;
     mn_unk1* tmp;
     float f;
-    PAD_STACK(0x14);
+    PAD_STACK(0x10);
 
-    lb_8001204C(arg2, sp24, mn_803EAE7C, 7);
+    lb_8001204C(arg1, sp24, mn_803EAE7C, 7);
     r29 = sp24[1];
     tmp = &mn_804A04F0;
     HSD_JObjReqAnimAll(r29, 0.0F);
@@ -1024,15 +1020,15 @@ void mn_8022A440(HSD_GObj* arg1, int arg2)
 void mn_8022A5D0(HSD_GObj* arg0, int arg1)
 {
     u8 pad[8];
-    int spA0[7];
+    HSD_JObj* spA0[7];
     HSD_JObj* sp84[7];
     HSD_JObj* sp80;
     Vec3 sp74;
     Vec3 sp68;
     Vec3 sp5C;
     Vec3 sp50;
-    int var_r0;
-    int* var_r5;
+    HSD_JObj* var_r0;
+    HSD_JObj* var_r5;
     u16* var_r4;
     u32 temp_r4;
     struct {
@@ -1047,20 +1043,20 @@ void mn_8022A5D0(HSD_GObj* arg0, int arg1)
     int temp_r22_2;
     struct {
         u8 pad[0x10];
-        int unk10;
+        HSD_JObj* unk10;
     }* temp_r3;
     int i;
 
     var_r4 = mn_803EAE68;
     sp68 = mn_803B84F4;
-    var_r5 = spA0;
+    // var_r5 = &spA0[0];
     temp_r28 = arg0->user_data;
     temp_r27 = mn_803EB6B0[temp_r28->x0].xC;
 
     for (i = 0; i < temp_r27; i++) {
         temp_r3 = temp_r28->x4[var_r4[i]];
         if (temp_r3 == NULL) {
-            var_r0 = 0;
+            var_r0 = NULL;
         } else {
             var_r0 = temp_r3->unk10;
         }
@@ -1196,7 +1192,7 @@ void fn_8022AF10(HSD_GObj* arg0)
 
 void fn_8022AFEC(HSD_GObj* arg0)
 {
-    int sp20[4];
+    HSD_JObj* sp20[4];
     HSD_GObjProc* temp_r3;
     HSD_JObj* temp_r30;
     struct {
@@ -1206,7 +1202,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
         void* x4[3];
         HSD_JObj* x10;
     }* temp_r30_3;
-    int var_r0;
+    HSD_JObj* var_r0;
     Vec3* var_r28;
     struct {
         u8 x0;
@@ -1225,7 +1221,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
 
     struct {
         u8 pad[0x10];
-        int x10;
+        HSD_JObj* x10;
     }* temp_r3_2;
 
     PAD_STACK(0x34);
@@ -1309,7 +1305,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
             for (i = 0; i < temp_r0_7; i++) {
                 temp_r3_2 = temp_r30_3->x4[mn_803EAE68[i]];
                 if (temp_r3_2 == NULL) {
-                    var_r0 = 0;
+                    var_r0 = NULL;
                 } else {
                     var_r0 = temp_r3_2->x10;
                 }
@@ -1323,7 +1319,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
                 mn_804A04F0.x2);
             mn_8022A440(
                 arg0,
-                sp20[mn_80229A04_dontinline(mn_804A04F0.x0, temp_r30_3->x1)]);
+                sp20[mn_80229A04_dontinline(mn_804A04F0.x0, temp_r30_3->x1)], mn_804A04F0.x1);
         }
         if (var_r25 != 0) {
             var_r0_2 = mn_804A04F0.x2;
@@ -1366,16 +1362,16 @@ void fn_8022AFEC(HSD_GObj* arg0)
     }
 }
 
-HSD_GObj* mn_8022B3A0(u8 arg0)
+HSD_GObj* mn_8022B3A0(u8 state)
 {
     HSD_JObj* sp48[1];
     HSD_JObj* sp2C[5];
 
     int temp_r31;
-    HSD_GObj* temp_r27;
+    HSD_GObj* gobj;
     HSD_JObj* temp_r16_2;
-    HSD_JObj* temp_r3;
-    HSD_JObj* temp_r3_4;
+    HSD_JObj* root_jobj;
+    HSD_JObj* cursor_jobj;
     HSD_JObj** temp_r19_2;
     HSD_Text* temp_r3_6;
     int temp_r22_3;
@@ -1384,7 +1380,7 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
     int var_r21;
     int var_r19;
     int var_r18;
-    int var_r18_2;
+    int idx;
     u8 var_r17;
     int var_r17_2;
     int var_r16_2;
@@ -1396,7 +1392,7 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
     u8 temp_r21;
     u8 temp_r22;
     u8 temp_r22_2;
-    struct mn_80229A7C_t* temp_r3_2;
+    struct mn_80229A7C_t* menu_data;
     int i;
     HSD_JObj* jobj;
     Vec3* tmp;
@@ -1414,43 +1410,43 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
         }
         var_r18++;
     }
-    temp_r27 = GObj_Create(6, 7, 0x80);
-    temp_r3 = HSD_JObjLoadJoint(MenMainConTop_Top.joint);
-    HSD_GObjObject_80390A70(temp_r27, HSD_GObj_804D7849, temp_r3);
-    GObj_SetupGXLink(temp_r27, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_GObjProc_8038FD54(temp_r27, fn_8022AFEC, 0);
-    HSD_JObjAddAnimAll(temp_r3, MenMainConTop_Top.animjoint,
+    gobj = GObj_Create(6, 7, 0x80);
+    root_jobj = HSD_JObjLoadJoint(MenMainConTop_Top.joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_GObjProc_8038FD54(gobj, fn_8022AFEC, 0);
+    HSD_JObjAddAnimAll(root_jobj, MenMainConTop_Top.animjoint,
                        MenMainConTop_Top.matanim_joint,
                        MenMainConTop_Top.shapeanim_joint);
-    HSD_JObjReqAnimAll(temp_r3, 0.0F);
-    temp_r3_2 = HSD_MemAlloc(sizeof(*temp_r3_2));
-    if (temp_r3_2 == NULL) {
+    HSD_JObjReqAnimAll(root_jobj, 0.0F);
+    menu_data = HSD_MemAlloc(sizeof(*menu_data));
+    if (menu_data == NULL) {
         OSReport("Can't get user_data.\n");
         __assert("mnmain.c", 0x65D, "user_data");
     }
-    GObj_InitUserData(temp_r27, 0, mn_8022EB04, temp_r3_2);
-    var_r18_2 = 0;
-    temp_r3_2->x0 = (u8) mn_804A04F0.x0;
-    temp_r3_2->x1 = (u8) mn_804A04F0.x2;
-    temp_r3_2->x2 = arg0;
-    temp_r3_2->xAC = NULL;
+    GObj_InitUserData(gobj, 0, mn_8022EB04, menu_data);
+    idx = 0;
+    menu_data->x0 = (u8) mn_804A04F0.x0;
+    menu_data->x1 = (u8) mn_804A04F0.x2;
+    menu_data->x2 = state;
+    menu_data->xAC = NULL;
     do {
-        lb_80011E24(temp_r3, &temp_r3_2->x4[var_r18_2], var_r18_2, -1);
-        var_r18_2 += 1;
-    } while (var_r18_2 < 0x2A);
-    if (temp_r3_2->x2 != 0) {
-        switch (temp_r3_2->x2) {
+        lb_80011E24(root_jobj, &menu_data->x4[idx], idx, -1);
+        idx += 1;
+    } while (idx < 0x2A);
+    if (menu_data->x2 != 0) {
+        switch (menu_data->x2) {
         case 1:
-            HSD_JObjReqAnim(temp_r3_2->x10, mn_803EB39C.x);
+            HSD_JObjReqAnim(menu_data->x4[3], mn_803EB39C.x);
             break;
         case 3:
-            HSD_JObjReqAnim(temp_r3_2->x10, mn_803EB3B4.x);
+            HSD_JObjReqAnim(menu_data->x4[3], mn_803EB3B4.x);
             break;
         }
-        HSD_JObjAnim(temp_r3_2->x10);
+        HSD_JObjAnim(menu_data->x4[3]);
     }
     for (i = 0; i < temp_r22; i++) {
-        sp48[i] = temp_r3_2->x4[mn_803EAE68[i]];
+        sp48[i] = menu_data->x4[mn_803EAE68[i]];
     }
     var_r17_2 = 0;
     var_r21 = 0;
@@ -1463,11 +1459,11 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
             temp_r19_2 = &sp48[var_r16_2];
             HSD_JObjReqAnim(*temp_r19_2, (f32) var_r17);
             HSD_JObjAnim(*temp_r19_2);
-            temp_r3_4 = HSD_JObjLoadJoint(MenMainCursor_Top.joint);
-            HSD_JObjAddAnimAll(temp_r3_4, MenMainCursor_Top.animjoint,
+            cursor_jobj = HSD_JObjLoadJoint(MenMainCursor_Top.joint);
+            HSD_JObjAddAnimAll(cursor_jobj, MenMainCursor_Top.animjoint,
                                MenMainCursor_Top.matanim_joint,
                                MenMainCursor_Top.shapeanim_joint);
-            lb_8001204C((int) temp_r3_4, sp2C, mn_803EAE7C, 7);
+            lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
             temp_r22_3 = temp_r25 == var_r17_2;
             tmp = &mn_803EB378 + temp_r22_3;
             HSD_JObjReqAnim(sp2C[0], mn_803EB360.x);
@@ -1500,41 +1496,41 @@ HSD_GObj* mn_8022B3A0(u8 arg0)
             if (var_r17_2 != temp_r25) {
                 HSD_JObjSetFlagsAll(sp2C[4], JOBJ_HIDDEN);
             }
-            HSD_JObjAddChild(*temp_r19_2, temp_r3_4);
+            HSD_JObjAddChild(*temp_r19_2, cursor_jobj);
         }
         var_r21 += 2;
         var_r17_2 += 1;
     }
-    temp_r16_2 = temp_r3_2->x3C;
-    if ((temp_r3_2->x0 == 0) && (temp_r3_2->x1 == 4) &&
+    temp_r16_2 = menu_data->x4[14];
+    if ((menu_data->x0 == 0) && (menu_data->x1 == 4) &&
         (gmMainLib_8015EE90() == 0))
     {
         var_r4_3 = &mn_803EB438;
-    } else if ((temp_r3_2->x0 == 1) && (temp_r3_2->x1 == 0) &&
+    } else if ((menu_data->x0 == 1) && (menu_data->x1 == 0) &&
                (gmMainLib_8015EDD4() == 0))
     {
         var_r4_3 = &mn_803EB480;
     } else {
-        var_r4_3 = &mn_803EB6B0[temp_r21].x0[temp_r3_2->x1];
+        var_r4_3 = &mn_803EB6B0[temp_r21].x0[menu_data->x1];
     }
     HSD_JObjReqAnimAll(temp_r16_2, var_r4_3->x);
     HSD_JObjAnimAll(temp_r16_2);
-    temp_r17 = temp_r3_2->x1;
-    temp_r16_3 = temp_r3_2->x0;
-    if (temp_r3_2->xAC != NULL) {
-        HSD_SisLib_803A5CC4(temp_r3_2->xAC);
-        temp_r3_2->xAC = NULL;
+    temp_r17 = menu_data->x1;
+    temp_r16_3 = menu_data->x0;
+    if (menu_data->xAC != NULL) {
+        HSD_SisLib_803A5CC4(menu_data->xAC);
+        menu_data->xAC = NULL;
     }
     temp_r16_4 = mn_803EB6B0[temp_r16_3].x8;
     if (temp_r16_4 != NULL) {
         temp_r3_6 = HSD_SisLib_803A5ACC(0, mn_804D6BB4, -9.5F, 9.1F, 17.0F,
                                         364.68332F, 38.38772F);
-        temp_r3_2->xAC = temp_r3_6;
+        menu_data->xAC = temp_r3_6;
         temp_r3_6->x24.x = 0.0521F;
         temp_r3_6->x24.y = 0.0521F;
         HSD_SisLib_803A6368(temp_r3_6, temp_r16_4[temp_r17]);
     }
-    return temp_r27;
+    return gobj;
 }
 
 static const Vec3 mn_803B8500 = { 0, 1, 0 };

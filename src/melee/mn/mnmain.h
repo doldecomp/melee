@@ -10,8 +10,8 @@
 typedef struct _mn_unk1 {
     u8 x0; // current menu
     u8 x1; // previous menu
-    u16 x2;
-    s32 x4;
+    u16 x2; // selected index
+    s32 x4; // selected value
     u64 x8;
     u8 x10;
     u8 x11;
@@ -36,8 +36,8 @@ typedef struct _mn_unk2 {
 /* 229B2C */ HSD_GObj* mn_80229B2C(void);
 /* 229BF4 */ void fn_80229BF4(HSD_GObj*);
 /* 229DC0 */ HSD_GObj* mn_80229DC0(void);
-/* 229F60 */ void mn_80229F60(HSD_GObj*, int, int);
-/* 22A440 */ void mn_8022A440(HSD_GObj*, int);
+/* 229F60 */ void mn_80229F60(HSD_GObj*, HSD_JObj*, int);
+/* 22A440 */ void mn_8022A440(HSD_GObj*, HSD_JObj*, s32);
 /* 22A5D0 */ void mn_8022A5D0(HSD_GObj*, int);
 /* 22ADD8 */ void mn_8022ADD8(HSD_GObj*, int);
 /* 22AF10 */ void fn_8022AF10(HSD_GObj*);
