@@ -16,7 +16,7 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-bool ftCo_800C5CD4(ftCo_GObj* gobj)
+bool ftCo_800C5CD4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCo_800C5240(gobj) && fp->input.x668 & HSD_PAD_AB) {
@@ -26,7 +26,7 @@ bool ftCo_800C5CD4(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_800C5D34(ftCo_GObj* gobj)
+void ftCo_800C5D34(Fighter_GObj* gobj)
 {
     /// @todo Cannot move below @c fp, which suggests an inline
     u32 flags;
@@ -40,12 +40,12 @@ void ftCo_800C5D34(ftCo_GObj* gobj)
     ftCo_800C4E94(fp);
 }
 
-void ftCo_HammerFall_Anim(ftCo_GObj* gobj)
+void ftCo_HammerFall_Anim(Fighter_GObj* gobj)
 {
     ftCo_800C4F64(gobj);
 }
 
-static inline void inlineA0(ftCo_GObj* gobj)
+static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 pos;
@@ -56,7 +56,7 @@ static inline void inlineA0(ftCo_GObj* gobj)
     pl_8003FDF4(fp->player_id, fp->x221F_b4);
 }
 
-bool ftCo_800C5DDC(ftCo_GObj* gobj)
+bool ftCo_800C5DDC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2338.y != 0 && fp->input.x668 & HSD_PAD_A &&
@@ -68,17 +68,17 @@ bool ftCo_800C5DDC(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_HammerFall_IASA(ftCo_GObj* gobj)
+void ftCo_HammerFall_IASA(Fighter_GObj* gobj)
 {
     ftCo_800C5DDC(gobj);
 }
 
-void ftCo_HammerFall_Phys(ftCo_GObj* gobj)
+void ftCo_HammerFall_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftCo_HammerFall_Coll(ftCo_GObj* gobj)
+void ftCo_HammerFall_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74(gobj, ftCo_800C5F88);
 }

@@ -20,7 +20,7 @@
 
 void ftCo_80098B20(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 205, 64, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);

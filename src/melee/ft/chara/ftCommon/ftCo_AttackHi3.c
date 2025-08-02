@@ -17,11 +17,11 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 08BA38 */ static void doEnter(ftCo_GObj* gobj);
+/* 08BA38 */ static void doEnter(Fighter_GObj* gobj);
 
-bool ftCo_AttackHi3_CheckInput(ftCo_GObj* gobj)
+bool ftCo_AttackHi3_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A) {
         if (fp->input.lstick.y >=
                 p_ftCommonData->attackhi3_stick_threshold_y &&
@@ -38,35 +38,35 @@ bool ftCo_AttackHi3_CheckInput(ftCo_GObj* gobj)
     return false;
 }
 
-void doEnter(ftCo_GObj* gobj)
+void doEnter(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
     Fighter_ChangeMotionState(gobj, ftCo_MS_AttackHi3, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCo_AttackHi3_Anim(ftCo_GObj* arg0)
+void ftCo_AttackHi3_Anim(Fighter_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
         ft_8008A2BC(arg0);
     }
 }
 
-void ftCo_AttackHi3_IASA(ftCo_GObj* gobj)
+void ftCo_AttackHi3_IASA(Fighter_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }
 
-void ftCo_AttackHi3_Phys(ftCo_GObj* gobj)
+void ftCo_AttackHi3_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_AttackHi3_Coll(ftCo_GObj* gobj)
+void ftCo_AttackHi3_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }

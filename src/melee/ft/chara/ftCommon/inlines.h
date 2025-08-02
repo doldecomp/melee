@@ -15,18 +15,18 @@
 
 #include <baselib/gobj.h>
 
-static inline void ftCo_SpawnEf(ftCo_GObj* gobj, HSD_JObj* joint, u32 arg2,
+static inline void ftCo_SpawnEf(Fighter_GObj* gobj, HSD_JObj* joint, u32 arg2,
                                 enum_t arg3)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     efAsync_Spawn((HSD_GObj*) gobj, &fp->x60C, arg2, arg3, joint);
 }
 
-static inline void ftCo_Thrown_Enter(ftCo_GObj* gobj, FtMotionId msid,
+static inline void ftCo_Thrown_Enter(Fighter_GObj* gobj, FtMotionId msid,
                                      MotionFlags mf, float anim_start)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = GET_FIGHTER(fp->victim_gobj)->facing_dir;
     fp->mv.co.capturekoopa.x0 = false;
     Fighter_ChangeMotionState(gobj, msid, mf, anim_start, 1, 0,

@@ -18,7 +18,7 @@
 
 void ftCo_80098E3C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }

@@ -25,8 +25,8 @@ static double const ftCo_804D8BC8 = S32_TO_F32;
 
 void ftCo_800BD620(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_Fighter* victim_fp = GET_FIGHTER(fp->victim_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* victim_fp = GET_FIGHTER(fp->victim_gobj);
     fp->x2226_b2 = false;
     ftCo_800DB368(victim_fp, fp);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureWaitKirby,
@@ -42,18 +42,18 @@ void ftCo_800BD620(Fighter_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-static inline void inlineA0(ftCo_Fighter* fp, int arg1)
+static inline void inlineA0(Fighter* fp, int arg1)
 {
     fp->x671_timer_lstick_tilt_y = 254;
     ftKb_SpecialN_800F598C(fp->victim_gobj, arg1);
 }
 
-void ftCo_CaptureWaitKirby_Anim(ftCo_GObj* gobj) {}
+void ftCo_CaptureWaitKirby_Anim(Fighter_GObj* gobj) {}
 #pragma push
 #pragma force_active on
-void ftCo_800BD6EC(ftCo_GObj* gobj)
+void ftCo_800BD6EC(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->x74)
     {
@@ -70,9 +70,9 @@ void ftCo_800BD6EC(ftCo_GObj* gobj)
 }
 #pragma pop
 
-static inline void inlineB0(ftCo_GObj* gobj)
+static inline void inlineB0(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     float lstick_x = fp->input.lstick.x;
     if (lstick_x < 0) {
         lstick_x = -lstick_x;
@@ -88,7 +88,7 @@ static inline void inlineB0(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CaptureWaitKirby_IASA(ftCo_GObj* gobj)
+void ftCo_CaptureWaitKirby_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -108,6 +108,6 @@ void ftCo_CaptureWaitKirby_IASA(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CaptureWaitKirby_Phys(ftCo_GObj* gobj) {}
+void ftCo_CaptureWaitKirby_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_CaptureWaitKirby_Coll(ftCo_GObj* gobj) {}
+void ftCo_CaptureWaitKirby_Coll(Fighter_GObj* gobj) {}

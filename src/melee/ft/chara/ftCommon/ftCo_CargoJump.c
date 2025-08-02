@@ -16,7 +16,7 @@
 #include "ftCommon/ftCo_Jump.h"
 #include "ftDonkey/types.h"
 
-bool ftCo_8009BB1C(ftCo_GObj* gobj)
+bool ftCo_8009BB1C(Fighter_GObj* gobj)
 {
     ftCo_JumpInput b = ftCo_Jump_GetInput(gobj);
     if (b) {
@@ -26,10 +26,10 @@ bool ftCo_8009BB1C(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009BB64(ftCo_GObj* gobj)
+void ftCo_8009BB64(Fighter_GObj* gobj)
 {
     u8 _[16] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state + 7, Ft_MF_None,
                               0, 1, 0, NULL);

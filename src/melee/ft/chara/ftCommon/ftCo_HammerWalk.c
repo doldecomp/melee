@@ -15,9 +15,9 @@
 
 #include <dolphin/mtx.h>
 
-/* 0C5614 */ static void ftCo_800C5614(ftCo_GObj* gobj);
+/* 0C5614 */ static void ftCo_800C5614(Fighter_GObj* gobj);
 
-bool ftCo_800C55CC(ftCo_GObj* gobj)
+bool ftCo_800C55CC(Fighter_GObj* gobj)
 {
     if (ftWalkCommon_800DFC70(gobj)) {
         ftCo_800C5614(gobj);
@@ -26,7 +26,7 @@ bool ftCo_800C55CC(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_800C5614(ftCo_GObj* gobj)
+void ftCo_800C5614(Fighter_GObj* gobj)
 {
     /// @todo Cannot move below @c fp, which suggests an inline
     u32 flags;
@@ -49,24 +49,24 @@ void ftCo_800C5614(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_HammerWalk_Anim(ftCo_GObj* gobj)
+void ftCo_HammerWalk_Anim(Fighter_GObj* gobj)
 {
     ftCo_800C4F64(gobj);
 }
 
-void ftCo_HammerWalk_IASA(ftCo_GObj* gobj)
+void ftCo_HammerWalk_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_800C5A50(gobj));
     RETURN_IF(ftCo_800C60C8(gobj));
     RETURN_IF(ftCo_800C4E4C(gobj));
 }
 
-void ftCo_HammerWalk_Phys(ftCo_GObj* gobj)
+void ftCo_HammerWalk_Phys(Fighter_GObj* gobj)
 {
     ftWalkCommon_800E0060(gobj);
 }
 
-void ftCo_HammerWalk_Coll(ftCo_GObj* gobj)
+void ftCo_HammerWalk_Coll(Fighter_GObj* gobj)
 {
     ftCo_HammerWait_Coll(gobj);
 }

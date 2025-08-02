@@ -20,9 +20,9 @@
 
 #include <common_structs.h>
 
-/* 09F184 */ static void ftCo_8009F184(ftCo_GObj* gobj);
+/* 09F184 */ static void ftCo_8009F184(Fighter_GObj* gobj);
 
-bool ftCo_8009F0F0(ftCo_GObj* gobj)
+bool ftCo_8009F0F0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if ((fp->motion_id == ftCo_MS_DownBoundU ||
@@ -39,7 +39,7 @@ bool ftCo_8009F0F0(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009F184(ftCo_GObj* gobj)
+void ftCo_8009F184(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_DownWaitU ? ftCo_MS_DownDamageU
@@ -48,7 +48,7 @@ void ftCo_8009F184(ftCo_GObj* gobj)
     ftCommon_8007E2F4(fp, 1);
 }
 
-void ftCo_DownDamage_Anim(ftCo_GObj* gobj)
+void ftCo_DownDamage_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2224_b2) {
@@ -72,14 +72,14 @@ void ftCo_DownDamage_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_DownDamage_IASA(ftCo_GObj* gobj) {}
+void ftCo_DownDamage_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_DownDamage_Phys(ftCo_GObj* gobj)
+void ftCo_DownDamage_Phys(Fighter_GObj* gobj)
 {
     ftCo_Damage_Phys(gobj);
 }
 
-void ftCo_DownDamage_Coll(ftCo_GObj* gobj)
+void ftCo_DownDamage_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {

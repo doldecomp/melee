@@ -14,9 +14,9 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 09CAD4 */ static void ftCo_8009EFA4(ftCo_GObj* gobj);
+/* 09CAD4 */ static void ftCo_8009EFA4(Fighter_GObj* gobj);
 
-bool ftCo_8009EF68(ftCo_GObj* gobj)
+bool ftCo_8009EF68(Fighter_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->coll_data.env_flags & MPCOLL_FLAGS_B14) {
         ftCo_8009EFA4(gobj);
@@ -25,7 +25,7 @@ bool ftCo_8009EF68(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009EFA4(ftCo_GObj* gobj)
+void ftCo_8009EFA4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->throw_flags = 0;
@@ -47,7 +47,7 @@ void ftCo_8009EFA4(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_StopCeil_Anim(ftCo_GObj* gobj)
+void ftCo_StopCeil_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB3(fp) || !ftAnim_IsFramesRemaining(gobj)) {
@@ -55,11 +55,11 @@ void ftCo_StopCeil_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_StopCeil_IASA(ftCo_GObj* gobj) {}
+void ftCo_StopCeil_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_StopCeil_Phys(ftCo_GObj* gobj) {}
+void ftCo_StopCeil_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_StopCeil_Coll(ftCo_GObj* gobj)
+void ftCo_StopCeil_Coll(Fighter_GObj* gobj)
 {
     ft_80083464(gobj, ftCo_80096CC8, ft_80082B1C);
 }

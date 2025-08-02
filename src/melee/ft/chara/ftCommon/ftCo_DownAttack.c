@@ -21,7 +21,7 @@
 
 static Vec4 unk_vec4 = { 14, 0, -3, +3 };
 
-static inline bool inlineA0(ftCo_Fighter* fp)
+static inline bool inlineA0(Fighter* fp)
 {
     if (fp->input.x668 & (HSD_PAD_A | HSD_PAD_B)) {
         return true;
@@ -29,7 +29,7 @@ static inline bool inlineA0(ftCo_Fighter* fp)
     return false;
 }
 
-int ftCo_800984D4(ftCo_GObj* gobj)
+int ftCo_800984D4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (inlineA0(fp) || ftCo_800DF644(fp)) {
@@ -41,27 +41,27 @@ int ftCo_800984D4(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009856C(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_8009856C(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCo_DownAttack_Anim(ftCo_GObj* gobj)
+void ftCo_DownAttack_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftCo_DownAttack_IASA(ftCo_GObj* gobj) {}
+void ftCo_DownAttack_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_DownAttack_Phys(ftCo_GObj* gobj)
+void ftCo_DownAttack_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_DownAttack_Coll(ftCo_GObj* gobj)
+void ftCo_DownAttack_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }
@@ -70,7 +70,7 @@ void ftCo_80098634(HSD_ObjAllocUnk2* arg0)
 {
     Vec4* cur_vec4 = (Vec4*) arg0;
     Vec3* cur_pos = (Vec3*) arg0;
-    ftCo_GObj* cur_gobj;
+    Fighter_GObj* cur_gobj;
     int count = 0;
     for (cur_gobj = HSD_GObj_Entities->fighters; cur_gobj != NULL;
          cur_gobj = cur_gobj->next)
@@ -88,9 +88,9 @@ void ftCo_80098634(HSD_ObjAllocUnk2* arg0)
     arg0->x150 = count;
 }
 
-bool ftCo_800986B0(ftCo_GObj* gobj)
+bool ftCo_800986B0(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!ftCo_800C5240(gobj) && fp->x680 < p_ftCommonData->x250 &&
         fp->x684 >= p_ftCommonData->x1C)
     {
@@ -99,7 +99,7 @@ bool ftCo_800986B0(ftCo_GObj* gobj)
     return false;
 }
 
-int ftCo_8009872C(ftCo_GObj* gobj)
+int ftCo_8009872C(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (ftCo_800986B0(gobj)) {

@@ -36,13 +36,13 @@ typedef enum cmd_var_idx {
     cmd_unk0_bool,
 } cmd_var_idx;
 
-/* 08BC00 */ static void callUnk(ftCo_GObj* gobj);
-/* 08BC34 */ static void decideFighter(ftCo_GObj* gobj);
-/* 08BC70 */ static void doEnter(ftCo_GObj* gobj);
+/* 08BC00 */ static void callUnk(Fighter_GObj* gobj);
+/* 08BC34 */ static void decideFighter(Fighter_GObj* gobj);
+/* 08BC70 */ static void doEnter(Fighter_GObj* gobj);
 
-bool ftCo_AttackLw3_CheckInput(ftCo_GObj* gobj)
+bool ftCo_AttackLw3_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A) {
         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
             ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
@@ -77,9 +77,9 @@ void decideFighter(HSD_GObj* gobj)
     }
 }
 
-static void doEnter(ftCo_GObj* gobj)
+static void doEnter(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!ftpickupitem_80094790(gobj)) {
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->allow_interrupt = false;
@@ -92,14 +92,14 @@ static void doEnter(ftCo_GObj* gobj)
 }
 
 /// @todo This is fake.
-static void wrapper(ftCo_GObj* gobj)
+static void wrapper(Fighter_GObj* gobj)
 {
     decideFighter(gobj);
 }
 
 void ftCo_AttackLw3_Anim(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[cmd_unk0_bool] && fp->mv.co.attacklw3.x0) {
         wrapper(gobj);
         return;
@@ -109,9 +109,9 @@ void ftCo_AttackLw3_Anim(HSD_GObj* gobj)
     }
 }
 
-static bool checkPadA(ftCo_GObj* gobj)
+static bool checkPadA(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A) {
         if (fp->cmd_vars[cmd_unk0_bool]) {
             decideFighter(gobj);
@@ -122,9 +122,9 @@ static bool checkPadA(ftCo_GObj* gobj)
     return false;
 }
 
-static bool checkItemThrowInput(ftCo_GObj* gobj)
+static bool checkItemThrowInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.y <= p_ftCommonData->xB0 &&
         ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
@@ -142,7 +142,7 @@ static bool checkItemThrowInput(ftCo_GObj* gobj)
 void ftCo_AttackLw3_IASA(HSD_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
         RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
@@ -162,12 +162,12 @@ void ftCo_AttackLw3_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftCo_AttackLw3_Phys(ftCo_GObj* gobj)
+void ftCo_AttackLw3_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_AttackLw3_Coll(ftCo_GObj* gobj)
+void ftCo_AttackLw3_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }

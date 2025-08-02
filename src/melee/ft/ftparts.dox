@@ -8,7 +8,7 @@
 
 #include "ft/types.h"
 
-void ftParts_80074ACC(ftCo_GObj* gobj);
+void ftParts_80074ACC(Fighter_GObj* gobj);
 u32 ftParts_8007506C(s32 ftkind, u32 part);
 
 void ftParts_JObjInfoInit(void);

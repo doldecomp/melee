@@ -9,9 +9,9 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-void ftCo_80099010(ftCo_GObj* gobj)
+void ftCo_80099010(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Furafura,
                               Ft_MF_SkipModel | Ft_MF_SkipMatAnim, 0, 1, 0,
                               NULL);
@@ -27,10 +27,10 @@ void ftCo_80099010(ftCo_GObj* gobj)
     ft_800885A8(fp, 95, 127, 64);
 }
 
-void ftCo_Furafura_Anim(ftCo_GObj* gobj)
+void ftCo_Furafura_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
     fp->x1A4C -= p_ftCommonData->x300;
     ftCommon_8007DC08(fp, p_ftCommonData->x304);
@@ -39,14 +39,14 @@ void ftCo_Furafura_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Furafura_IASA(ftCo_GObj* gobj) {}
+void ftCo_Furafura_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_Furafura_Phys(ftCo_GObj* gobj)
+void ftCo_Furafura_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_Furafura_Coll(ftCo_GObj* gobj)
+void ftCo_Furafura_Coll(Fighter_GObj* gobj)
 {
     ft_80083F88(gobj);
 }

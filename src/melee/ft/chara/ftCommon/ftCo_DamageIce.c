@@ -37,15 +37,15 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-/* 0909D0 */ static void ftCo_800909D0(ftCo_Fighter* fp);
-/* 090B48 */ static void ftCo_80090B48(ftCo_GObj* gobj);
-/* 091274 */ static void ftCo_80091274(ftCo_GObj* gobj);
+/* 0909D0 */ static void ftCo_800909D0(Fighter* fp);
+/* 090B48 */ static void ftCo_80090B48(Fighter_GObj* gobj);
+/* 091274 */ static void ftCo_80091274(Fighter_GObj* gobj);
 /* 091620 */ static UNK_RET ftCo_80091620(UNK_PARAMS);
 
 static Vec3 const ftCo_803B74B0 = { 0 };
 static Vec3 const ftCo_803B74BC = { 0 };
 
-void ftCo_80090984(ftCo_GObj* gobj)
+void ftCo_80090984(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_80098928(gobj));
     RETURN_IF(ftCo_8009872C(gobj));
@@ -79,10 +79,10 @@ void ftCo_800909D0(Fighter* fp)
     }
 }
 
-static inline void inlineA0(ftCo_GObj* gobj, HSD_JObj* joint, float* param)
+static inline void inlineA0(Fighter_GObj* gobj, HSD_JObj* joint, float* param)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     efAsync_Spawn(gobj, &fp->x60C, 3, 1045, joint, param);
 }
 
@@ -96,13 +96,13 @@ void ftCo_80090AC0(Fighter* fp)
     fp->x2219_b0 = true;
 }
 
-void ftCo_80090B48(ftCo_GObj* gobj)
+void ftCo_80090B48(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x2227_b6 = false;
 }
 
-void ftCo_80090B60(ftCo_GObj* gobj)
+void ftCo_80090B60(Fighter_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -173,9 +173,9 @@ void ftCo_80091030(Fighter_GObj* gobj)
     }
 }
 
-void ftCo_80091274(ftCo_GObj* gobj)
+void ftCo_80091274(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x1A4C =
         -(fp->dmg.x1838_percentTemp * p_ftCommonData->x79C - fp->x1A4C);
     if (fp->dmg.x1860_element == 1) {
@@ -186,10 +186,10 @@ void ftCo_80091274(ftCo_GObj* gobj)
 #define HSD_ASSERT2(file, line, msg, cond)                                    \
     ((cond) ? ((void) 0) : __assert((file), (line), (#msg)))
 
-void ftCo_DamageIce_Anim(ftCo_GObj* gobj)
+void ftCo_DamageIce_Anim(Fighter_GObj* gobj)
 {
     HSD_JObj* jobj;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         float rot_x = fp->mv.co.damageice.x4;
         jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
@@ -208,12 +208,12 @@ void ftCo_DamageIce_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_DamageIce_IASA(ftCo_GObj* gobj) {}
+void ftCo_DamageIce_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_DamageIce_Phys(ftCo_GObj* gobj)
+void ftCo_DamageIce_Phys(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007CEF4(fp);
@@ -224,9 +224,9 @@ void ftCo_DamageIce_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_DamageIce_Coll(ftCo_GObj* gobj)
+void ftCo_DamageIce_Coll(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         ftCo_800914A4(gobj);
     } else if (!ft_80082888(gobj, &fp->mv.co.damageice.x8)) {
@@ -234,7 +234,7 @@ void ftCo_DamageIce_Coll(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800914A4(ftCo_GObj* gobj)
+void ftCo_800914A4(Fighter_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -248,7 +248,7 @@ void ftCo_80091854(HSD_GObj* gobj)
 {
     Vec3 vec;
     float sp24;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (ftCo_800C5240(gobj)) {
         ftCo_800C5A98(gobj);
     } else {
@@ -277,7 +277,7 @@ void ftCo_80091854(HSD_GObj* gobj)
 
 void ftCo_DamageIceJump_Anim(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.co.damageicejump.x0 > 0) {
         fp->mv.co.damageicejump.x0 -= 1;
         if (fp->mv.co.damageicejump.x0 <= 0) {
@@ -286,14 +286,14 @@ void ftCo_DamageIceJump_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCo_DamageIceJump_IASA(ftCo_GObj* gobj) {}
+void ftCo_DamageIceJump_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_DamageIceJump_Phys(ftCo_GObj* gobj)
+void ftCo_DamageIceJump_Phys(Fighter_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-void ftCo_DamageIceJump_Coll(ftCo_GObj* gobj)
+void ftCo_DamageIceJump_Coll(Fighter_GObj* gobj)
 {
     ft_800831CC(gobj, ftCo_80096CC8, ft_80082B1C);
 }
