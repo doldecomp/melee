@@ -233,8 +233,8 @@ void ftCo_DamageIce_Coll(ftCo_GObj* gobj)
     }
 }
 
-static float SOME_CONSTANT_IDK = 666.0f;
-static float SOME_CONSTANT_IDK_2 = 666.0f;
+static float SOME_CONSTANT_IDK = 3.0f;
+static float SOME_CONSTANT_IDK_2 = 0.0f;
 
 void ftCo_800914A4(ftCo_GObj* gobj)
 {
