@@ -33,12 +33,12 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 09A410 */ static void ftCo_8009A410(ftCo_GObj* gobj);
-/* 09A6B8 */ static void ftCo_8009A6B8(ftCo_GObj* gobj);
+/* 09A410 */ static void ftCo_8009A410(Fighter_GObj* gobj);
+/* 09A6B8 */ static void ftCo_8009A6B8(Fighter_GObj* gobj);
 
-bool ftCo_8009A3C8(ftCo_GObj* gobj)
+bool ftCo_8009A3C8(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->coll_data.env_flags & MPCOLL_FLAGS_B23 && !fp->x2228_b2) {
         ftCo_8009A410(gobj);
         return true;
@@ -46,23 +46,23 @@ bool ftCo_8009A3C8(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009A410(ftCo_GObj* gobj)
+void ftCo_8009A410(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Ottotto, Ft_MF_None, 0, 1, 0,
                               NULL);
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
     fp->gr_vel = 0;
 }
 
-void ftCo_Ottotto_Anim(ftCo_GObj* gobj)
+void ftCo_Ottotto_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_8009A6B8(gobj);
     }
 }
 
-void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
+void ftCo_Ottotto_IASA(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
@@ -88,9 +88,9 @@ void ftCo_Ottotto_IASA(ftCo_GObj* gobj)
 
 void ftCo_Ottotto_Phys(HSD_GObj* gobj) {}
 
-void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
+void ftCo_Ottotto_Coll(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
             ftCo_Fall_Enter(gobj);
@@ -116,9 +116,9 @@ void ftCo_Ottotto_Coll(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_8009A6B8(ftCo_GObj* gobj)
+void ftCo_8009A6B8(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_OttottoWait, Ft_MF_None, 0, 1, 0,
                               NULL);
     ft_80088770(fp);
@@ -136,9 +136,9 @@ void ftCo_OttottoWait_IASA(Fighter_GObj* gobj)
 void ftCo_OttottoWait_Phys(HSD_GObj* gobj) {}
 
 /// @todo Shared code with #ftCo_Ottotto_Coll
-void ftCo_OttottoWait_Coll(ftCo_GObj* gobj)
+void ftCo_OttottoWait_Coll(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     {
         if (!ft_800827A0(gobj)) {
             ftCo_Fall_Enter(gobj);

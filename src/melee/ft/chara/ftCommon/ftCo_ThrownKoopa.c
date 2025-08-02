@@ -14,16 +14,16 @@
 #include "ft/types.h"
 #include "ftCommon/types.h"
 
-void ftCo_800BCDE0(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_800BCDE0(Fighter_GObj* gobj, FtMotionId msid)
 {
     u8 _[8] = { 0 };
     ftCo_Thrown_Enter(gobj, msid, Ft_MF_None, 0);
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCo_800BCE64(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_800BCE64(Fighter_GObj* gobj, FtMotionId msid)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     const MotionFlags mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
                            Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
                            Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
@@ -44,34 +44,34 @@ void ftCo_800BCE64(ftCo_GObj* gobj, FtMotionId msid)
 #undef SOLUTION
 }
 
-void ftCo_ThrownKoopaF_Anim(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaF_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaF_IASA(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaF_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaF_Phys(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaF_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaF_Coll(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaF_Coll(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaB_Anim(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaB_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaB_IASA(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaB_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaB_Phys(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaB_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaB_Coll(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaB_Coll(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirF_Anim(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirF_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirF_IASA(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirF_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirF_Phys(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirF_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirF_Coll(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirF_Coll(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirB_Anim(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirB_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirB_IASA(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirB_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirB_Phys(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirB_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_ThrownKoopaAirB_Coll(ftCo_GObj* gobj) {}
+void ftCo_ThrownKoopaAirB_Coll(Fighter_GObj* gobj) {}

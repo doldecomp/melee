@@ -44,7 +44,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
+void ftCo_800C0874(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
 {
     switch (arg2) {
     case BuryType_Unk2:
@@ -52,7 +52,7 @@ void ftCo_800C0874(ftCo_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
     }
 }
 
-void ftCo_800C08A0(ftCo_GObj* gobj, ftCo_GObj* arg1, DynamicsDesc* arg2,
+void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
                    ftCommon_BuryType arg3)
 {
     float f;
@@ -82,7 +82,7 @@ void ftCo_800C08A0(ftCo_GObj* gobj, ftCo_GObj* arg1, DynamicsDesc* arg2,
     pl_8003EC30(fp->player_id, fp->x221F_b4, arg3, f);
 }
 
-void ftCo_800C09B4(ftCo_GObj* gobj)
+void ftCo_800C09B4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->bury_stage_kind = stage_info.internal_stage_id;
@@ -100,7 +100,7 @@ void ftCo_800C09B4(ftCo_GObj* gobj)
     }
 }
 
-bool ftCo_800C0A28(ftCo_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
+bool ftCo_800C0A28(Fighter_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     switch (arg2) {
@@ -122,7 +122,7 @@ bool ftCo_800C0A28(ftCo_GObj* gobj, UNK_T arg1, ftCommon_BuryType arg2)
     return true;
 }
 
-void ftCo_800C0A98(ftCo_GObj* gobj)
+void ftCo_800C0A98(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->bury_timer_1 != 0) {
@@ -147,7 +147,7 @@ void ftCo_800C0A98(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800C0B20(ftCo_GObj* gobj)
+void ftCo_800C0B20(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     DynamicsDesc* unk_anim;
@@ -197,7 +197,7 @@ bool ftCo_800C0C88(ftCommon_BuryType arg0)
     }
 }
 
-bool ftCo_800C0CB8(ftCo_GObj* gobj)
+bool ftCo_800C0CB8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x1860_element == 9 && fp->ground_or_air == GA_Ground &&
@@ -209,7 +209,7 @@ bool ftCo_800C0CB8(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_800C0D0C(ftCo_GObj* gobj)
+void ftCo_800C0D0C(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Vec3 joint_pos;
@@ -251,7 +251,7 @@ void ftCo_800C0D0C(ftCo_GObj* gobj)
     fp->x2219_b0 = true;
 }
 
-void ftCo_Bury_Anim(ftCo_GObj* gobj)
+void ftCo_Bury_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
@@ -266,9 +266,9 @@ void ftCo_Bury_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Bury_IASA(ftCo_GObj* gobj) {}
+void ftCo_Bury_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_800C0FCC(HSD_GObj* arg0, ftCo_GObj* arg1)
+void ftCo_800C0FCC(HSD_GObj* arg0, Fighter_GObj* arg1)
 {
     Fighter* fp = GET_FIGHTER(arg1);
     if (mpLib_80054ED8(fp->mv.co.bury.x20)) {
@@ -289,7 +289,7 @@ void ftCo_800C0FCC(HSD_GObj* arg0, ftCo_GObj* arg1)
 
 #define MY_MIN(a, b) (((a) < (b)) ? (a) : (b))
 
-void ftCo_Bury_Phys(ftCo_GObj* gobj)
+void ftCo_Bury_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCollisionBox* box = &fp->mv.co.bury.coll_box;
@@ -300,7 +300,7 @@ void ftCo_Bury_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Bury_Coll(ftCo_GObj* gobj)
+void ftCo_Bury_Coll(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
@@ -312,7 +312,7 @@ void ftCo_Bury_Coll(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800C124C(ftCo_GObj* gobj)
+void ftCo_800C124C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(
@@ -325,7 +325,7 @@ void ftCo_800C124C(ftCo_GObj* gobj)
     fp->x2224_b4 = true;
 }
 
-void ftCo_BuryWait_Anim(ftCo_GObj* gobj)
+void ftCo_BuryWait_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= p_ftCommonData->x610;
@@ -335,17 +335,17 @@ void ftCo_BuryWait_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_BuryWait_IASA(ftCo_GObj* gobj) {}
+void ftCo_BuryWait_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_BuryWait_Phys(ftCo_GObj* gobj) {}
+void ftCo_BuryWait_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_BuryWait_Coll(ftCo_GObj* gobj)
+void ftCo_BuryWait_Coll(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     ftCo_Bury_Coll(gobj);
 }
 
-void ftCo_800C13BC(ftCo_GObj* gobj)
+void ftCo_800C13BC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (ftCo_800C5240(gobj)) {
@@ -362,7 +362,7 @@ void ftCo_800C13BC(ftCo_GObj* gobj)
     ftColl_8007B7A4(gobj, p_ftCommonData->x620);
 }
 
-void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
+void ftCo_BuryJump_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.buryjump.x0 += 1;
@@ -371,7 +371,7 @@ void ftCo_BuryJump_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_BuryJump_IASA(ftCo_GObj* gobj)
+void ftCo_BuryJump_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.ca.specials.grav >= p_ftCommonData->x61C) {
@@ -386,7 +386,7 @@ void ftCo_BuryJump_IASA(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_BuryJump_Phys(ftCo_GObj* gobj)
+void ftCo_BuryJump_Phys(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
@@ -394,7 +394,7 @@ void ftCo_BuryJump_Phys(ftCo_GObj* gobj)
     ftCommon_8007D268(fp);
 }
 
-void ftCo_BuryJump_Coll(ftCo_GObj* gobj)
+void ftCo_BuryJump_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->self_vel.y >= 0) {

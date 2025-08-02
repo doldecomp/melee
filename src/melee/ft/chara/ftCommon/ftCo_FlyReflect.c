@@ -27,7 +27,7 @@
 
 #pragma force_active on
 
-bool ftCo_800C15F4(ftCo_GObj* gobj)
+bool ftCo_800C15F4(Fighter_GObj* gobj)
 {
     Vec3 vec;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -66,7 +66,7 @@ bool ftCo_800C15F4(ftCo_GObj* gobj)
     return false;
 }
 
-bool ftCo_800C1718(ftCo_GObj* gobj)
+bool ftCo_800C1718(Fighter_GObj* gobj)
 {
     Vec3 vec;
     u8 _[4] = { 0 };
@@ -90,7 +90,7 @@ bool ftCo_800C1718(ftCo_GObj* gobj)
     return false;
 }
 
-bool ftCo_800C17CC(ftCo_GObj* gobj)
+bool ftCo_800C17CC(Fighter_GObj* gobj)
 {
     if (ftCo_800C15F4(gobj)) {
         return true;
@@ -101,7 +101,7 @@ bool ftCo_800C17CC(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_800C18A8(ftCo_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
+void ftCo_800C18A8(Fighter_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
                    Vec3* offset)
 {
     Vec3 vec1;
@@ -153,7 +153,7 @@ void ftCo_800C18A8(ftCo_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     }
 }
 
-void ftCo_FlyReflect_Anim(ftCo_GObj* gobj)
+void ftCo_FlyReflect_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.co.damage.x18 != 0) {
@@ -167,12 +167,12 @@ void ftCo_FlyReflect_IASA(Fighter_GObj* gobj)
     ftCo_DamageFly_IASA(gobj);
 }
 
-void ftCo_FlyReflect_Phys(ftCo_GObj* gobj)
+void ftCo_FlyReflect_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftCo_FlyReflect_Coll(ftCo_GObj* gobj)
+void ftCo_FlyReflect_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id == ftCo_MS_FlyReflectWall) {

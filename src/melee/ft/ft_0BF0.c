@@ -65,10 +65,10 @@ void ftCo_800BF108(Fighter_GObj* gobj)
     }
 }
 
-bool ftCo_800BF228(ftCo_GObj* gobj)
+bool ftCo_800BF228(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
-        ftCo_Fighter* fp = GET_FIGHTER(gobj);
+        Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL && (fp->motion_id == ftCo_MS_DeadUpFallHitCameraIce ||
                            fp->motion_id == ftCo_MS_Sleep))
         {

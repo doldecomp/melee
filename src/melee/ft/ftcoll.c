@@ -1111,7 +1111,7 @@ void ftColl_8007AC9C(HitCapsule* arg0, int arg1, Fighter_GObj* arg2)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_8007AD18(ftCo_Fighter* fp, HitCapsule* arg1)
+void ftColl_8007AD18(Fighter* fp, HitCapsule* arg1)
 {
     NOT_IMPLEMENTED;
 }

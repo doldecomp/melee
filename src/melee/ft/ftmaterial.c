@@ -138,7 +138,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
     NOT_IMPLEMENTED;
 }
 
-void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse)
+void ftMaterial_800BFB4C(Fighter_GObj* gobj, GXColor* diffuse)
 {
     HSD_JObj* cur = GET_JOBJ(gobj);
 
@@ -246,7 +246,7 @@ void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse)
     }
 }
 
-void ftMaterial_800BFD04(ftCo_GObj* gobj)
+void ftMaterial_800BFD04(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Sleep, Ft_MF_None, 0, 1, 0, NULL);
@@ -259,7 +259,7 @@ void ftMaterial_800BFD04(ftCo_GObj* gobj)
     fp->x221F_b1 = true;
 }
 
-void ftMaterial_800BFD9C(ftCo_GObj* gobj)
+void ftMaterial_800BFD9C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMaterial_800BFD04(gobj);

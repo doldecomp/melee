@@ -21,7 +21,7 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-bool ftCo_800C23A0(ftCo_GObj* gobj)
+bool ftCo_800C23A0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->coll_data.env_flags & MPCOLL_FLAGS_B14 && ftCo_800986B0(gobj)) {
@@ -32,7 +32,7 @@ bool ftCo_800C23A0(ftCo_GObj* gobj)
 }
 
 /// @todo Shared code with #ftCo_800C1E64.
-void ftCo_800C23FC(ftCo_GObj* gobj)
+void ftCo_800C23FC(Fighter_GObj* gobj)
 {
     Vec3 ef_offset;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -63,7 +63,7 @@ void ftCo_800C23FC(ftCo_GObj* gobj)
     ftCo_800BFFD0(fp, 120, 0);
 }
 
-void ftCo_PassiveCeil_Anim(ftCo_GObj* gobj)
+void ftCo_PassiveCeil_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
@@ -75,14 +75,14 @@ void ftCo_PassiveCeil_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_PassiveCeil_IASA(ftCo_GObj* gobj) {}
+void ftCo_PassiveCeil_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_PassiveCeil_Phys(ftCo_GObj* gobj)
+void ftCo_PassiveCeil_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftCo_PassiveCeil_Coll(ftCo_GObj* gobj)
+void ftCo_PassiveCeil_Coll(Fighter_GObj* gobj)
 {
     ft_800831CC(gobj, ftCo_80096CC8, ft_80082B1C);
 }

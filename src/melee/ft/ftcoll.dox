@@ -71,12 +71,12 @@ void ftColl_CreateReflectHit(Fighter_GObj*, ReflectDesc*,
                              HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(Fighter_GObj*, AbsorbDesc*);
 void ftColl_8007AF10(Fighter_GObj*);
-void ftColl_8007B5AC(ftCo_Fighter* fp, HurtCapsule* arg1,
+void ftColl_8007B5AC(Fighter* fp, HurtCapsule* arg1,
                      struct UNK_SAMUS_S2* arg2);
 void ftColl_8007B7FC(Fighter*, int);
 bool ftColl_80076640(Fighter*, float*);
 void ftColl_80076764(int arg0, enum_t arg1, enum_t arg2, UNK_T arg3,
-                     ftCo_Fighter* arg4, HurtCapsule* arg5);
+                     Fighter* arg4, HurtCapsule* arg5);
 void ftColl_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim,
                      int);
 void ftColl_800768A0(void);
@@ -100,7 +100,7 @@ float ftColl_80079EA8(Fighter*, HitCapsule*, int);
 UNK_RET ftColl_8007A06C(UNK_PARAMS);
 bool ftColl_8007AC68(int kb_angle);
 void ftColl_8007AC9C(HitCapsule*, int, Fighter_GObj*);
-void ftColl_8007AD18(ftCo_Fighter* fp, HitCapsule*);
+void ftColl_8007AD18(Fighter* fp, HitCapsule*);
 UNK_RET ftColl_8007AF60(UNK_PARAMS);
 void ftColl_8007AFC8(Fighter_GObj* gobj, int);
 void ftColl_8007B064(Fighter_GObj* gobj, enum_t arg1);

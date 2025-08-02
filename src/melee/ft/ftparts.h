@@ -37,7 +37,7 @@
 /* 074A4C */ void ftParts_80074A4C(Fighter_GObj*, enum_t, enum_t);
 /* 074A74 */ int ftParts_80074A74(Fighter_GObj*, int);
 /* 074A8C */ void ftParts_80074A8C(Fighter_GObj*);
-/* 074ACC */ void ftParts_80074ACC(ftCo_GObj* gobj);
+/* 074ACC */ void ftParts_80074ACC(Fighter_GObj* gobj);
 /* 074B0C */ void ftParts_80074B0C(Fighter_GObj*, int, int);
 /* 074B6C */ void ftParts_80074B6C(void);
 /* 074CA0 */ void ftParts_80074CA0(u32*, s32, u32*);

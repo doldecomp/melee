@@ -23,15 +23,15 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 
-void ftCo_800968C8(ftCo_GObj* gobj)
+void ftCo_800968C8(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_80096900(gobj, 1, 0, true, 1, fp->x2EC);
 }
 
 /// @todo Real solution is @c 0. Inline needs to be fixed.
 #define SOLUTION 1
-void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
+void ftCo_80096900(Fighter_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
                    float arg4, float arg5)
 {
 #if SOLUTION == 0
@@ -39,7 +39,7 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
 #elif SOLUTION == 1
 
     ftCo_DatAttrs* ca;
-    ftCo_Fighter* fp;
+    Fighter* fp;
     fp = GET_FIGHTER(gobj);
     ca = &fp->co_attrs;
     if (fp->x2224_b2) {
@@ -65,12 +65,12 @@ void ftCo_80096900(ftCo_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
 }
 #undef SOLUTION
 
-void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
+void ftCo_800969D8(Fighter_GObj* gobj, int arg1, int arg2, int allow_interrupt,
                    float arg4, float arg5, float arg6)
 {
     u8 _[8] = { 0 };
     ftCo_DatAttrs* ca;
-    ftCo_Fighter* fp;
+    Fighter* fp;
     fp = GET_FIGHTER(gobj);
     ca = &fp->co_attrs;
     if (fp->x2224_b2) {
@@ -92,29 +92,29 @@ void ftCo_800969D8(ftCo_GObj* gobj, int arg1, int arg2, int allow_interrupt,
     un_80322598(fp->x8_spawnNum, fp->cur_pos.y);
 }
 
-void ftCo_FallSpecial_Anim(ftCo_GObj* gobj)
+void ftCo_FallSpecial_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_Fall_Anim_Inner(gobj, &fp->mv.co.fallspecial.x4, ftCo_SM_FallSpecial,
                          ftCo_SM_FallSpecialF, ftCo_SM_FallSpecialB);
     ftCo_800CC988(gobj, fp->mv.co.fallspecial.x4);
 }
 
-void ftCo_FallSpecial_IASA(ftCo_GObj* gobj)
+void ftCo_FallSpecial_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_800CEE70(gobj));
     RETURN_IF(ftCo_800D705C(gobj));
     RETURN_IF(ftCo_800CB870(gobj));
 }
 
-void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
+void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
 {
     float f1;
     float lstick_x;
     float base;
 
     ftCo_DatAttrs* ca;
-    ftCo_Fighter* fp;
+    Fighter* fp;
     fp = GET_FIGHTER(gobj);
     ca = &fp->co_attrs;
     ftCommon_8007D528(fp);
@@ -159,15 +159,15 @@ void ftCo_FallSpecial_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_FallSpecial_Coll(ftCo_GObj* gobj)
+void ftCo_FallSpecial_Coll(Fighter_GObj* gobj)
 {
     ft_80083090(gobj, ftCo_80096CC8, ftCo_80096D28);
 }
 
-bool ftCo_80096CC8(ftCo_GObj* gobj, enum_t arg1)
+bool ftCo_80096CC8(Fighter_GObj* gobj, enum_t arg1)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (arg1 != -1 && (!(mpLib_80054CEC(arg1) & (1 << 8)) ||
                        fp->input.lstick.y > p_ftCommonData->x25C))
     {
@@ -176,9 +176,9 @@ bool ftCo_80096CC8(ftCo_GObj* gobj, enum_t arg1)
     return false;
 }
 
-void ftCo_80096D28(ftCo_GObj* gobj)
+void ftCo_80096D28(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.co.fallspecial.x10 || fp->self_vel.y < ftCo_800D0EC8(fp)) {
         ftCo_800D5CB0(gobj, fp->mv.co.fallspecial.allow_interrupt,
                       fp->mv.co.fallspecial.x14);

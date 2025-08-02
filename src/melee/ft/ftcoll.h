@@ -66,7 +66,7 @@
                                   Fighter_GObj*);
 /* 07AC68 */ bool ftColl_8007AC68(u32 kb_angle);
 /* 07AC9C */ void ftColl_8007AC9C(HitCapsule*, int, Fighter_GObj*);
-/* 07AD18 */ void ftColl_8007AD18(ftCo_Fighter* fp, HitCapsule*);
+/* 07AD18 */ void ftColl_8007AD18(Fighter* fp, HitCapsule*);
 /* 07AE80 */ void ftColl_8007AE80(Fighter_GObj*);
 /* 07AEE0 */ void ftColl_8007AEE0(Fighter_GObj*);
 /* 07AEF8 */ void ftColl_8007AEF8(Fighter_GObj*);
@@ -86,7 +86,7 @@
 /* 07B2C4 */ void ftColl_CreateAbsorbHit(Fighter_GObj*, AbsorbDesc*);
 /* 07B320 */ void ftColl_8007B320(Fighter_GObj*);
 /* 07B4E0 */ void ftColl_8007B4E0(Fighter_GObj*);
-/* 07B5AC */ void ftColl_8007B5AC(ftCo_Fighter* fp, HurtCapsule*,
+/* 07B5AC */ void ftColl_8007B5AC(Fighter* fp, HurtCapsule*,
                                   struct UNK_SAMUS_S2*);
 /* 07B62C */ void ftColl_8007B62C(Fighter_GObj*, bool);
 /* 07B6A0 */ void ftColl_8007B6A0(Fighter_GObj* gobj);

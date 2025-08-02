@@ -28,10 +28,10 @@
 
 #pragma force_active on
 
-/* 0C4858 */ static void ftCo_800C4858(ftCo_GObj* gobj);
-/* 0C48AC */ static void ftCo_800C48AC(ftCo_GObj* gobj);
-/* 0C4A38 */ static void ftCo_800C4A38(ftCo_GObj* gobj);
-/* 0C4C60 */ static void ftCo_800C4C60(ftCo_GObj* gobj);
+/* 0C4858 */ static void ftCo_800C4858(Fighter_GObj* gobj);
+/* 0C48AC */ static void ftCo_800C48AC(Fighter_GObj* gobj);
+/* 0C4A38 */ static void ftCo_800C4A38(Fighter_GObj* gobj);
+/* 0C4C60 */ static void ftCo_800C4C60(Fighter_GObj* gobj);
 
 /* literal */ float const ftCo_804D8D48 = 0;
 /* literal */ float const ftCo_804D8D4C = 1;
@@ -39,7 +39,7 @@
 /* literal */ SDATA char ftCo_804D3C58[] = "jobj.h";
 /* literal */ SDATA char ftCo_804D3C60[] = "jobj";
 
-void ftCo_800C4724(ftCo_GObj* gobj)
+void ftCo_800C4724(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -65,7 +65,7 @@ void ftCo_800C4724(ftCo_GObj* gobj)
     HSD_JObjAnim(jobj);
 }
 
-static inline void inlineA0(ftCo_GObj* gobj)
+static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 pos;
@@ -75,17 +75,17 @@ static inline void inlineA0(ftCo_GObj* gobj)
     Item_8026ABD8(fp->item_gobj, &pos, 1);
 }
 
-void ftCo_800C4858(ftCo_GObj* gobj)
+void ftCo_800C4858(Fighter_GObj* gobj)
 {
     inlineA0(gobj);
 }
 
-void ftCo_800C48AC(ftCo_GObj* gobj)
+void ftCo_800C48AC(Fighter_GObj* gobj)
 {
     inlineA0(gobj);
 }
 
-void ftCo_WarpStarJump_Anim(ftCo_GObj* gobj)
+void ftCo_WarpStarJump_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     --fp->mv.co.warpstar.x1C;
@@ -96,9 +96,9 @@ void ftCo_WarpStarJump_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_WarpStarJump_IASA(ftCo_GObj* gobj) {}
+void ftCo_WarpStarJump_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_WarpStarJump_Phys(ftCo_GObj* gobj)
+void ftCo_WarpStarJump_Phys(Fighter_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
@@ -110,14 +110,14 @@ void ftCo_WarpStarJump_Phys(ftCo_GObj* gobj)
     fp->mv.co.warpstar.self_vel = self_vel;
 }
 
-void ftCo_WarpStarJump_Coll(ftCo_GObj* gobj) {}
+void ftCo_WarpStarJump_Coll(Fighter_GObj* gobj) {}
 
-void ftCo_WarpStarJump_Cam(ftCo_GObj* gobj)
+void ftCo_WarpStarJump_Cam(Fighter_GObj* gobj)
 {
     ftCamera_800762F4(gobj);
 }
 
-void ftCo_800C4A38(ftCo_GObj* gobj)
+void ftCo_800C4A38(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Quaternion rot;
@@ -141,11 +141,11 @@ void ftCo_800C4A38(ftCo_GObj* gobj)
     mpColl_80043680(&fp->coll_data, &fp->cur_pos);
 }
 
-void ftCo_WarpStarFall_Anim(ftCo_GObj* gobj) {}
+void ftCo_WarpStarFall_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_WarpStarFall_IASA(ftCo_GObj* gobj) {}
+void ftCo_WarpStarFall_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_WarpStarFall_Phys(ftCo_GObj* gobj)
+void ftCo_WarpStarFall_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D494(fp, p_ftCommonData->x694, p_ftCommonData->x698);
@@ -159,13 +159,13 @@ void ftCo_WarpStarFall_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_WarpStarFall_Coll(ftCo_GObj* gobj)
+void ftCo_WarpStarFall_Coll(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ft_80083E64(gobj, &fp->mv.co.warpstar.ecb, ftCo_800C4C60);
 }
 
-void ftCo_800C4C60(ftCo_GObj* gobj)
+void ftCo_800C4C60(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = fp->mv.co.warpstar.facing_dir;
@@ -213,7 +213,7 @@ void ftCo_800C4C60(ftCo_GObj* gobj)
     ftCommon_8007EBAC(fp, 14, 0);
 }
 
-void ftCo_WarpStarFall_Cam(ftCo_GObj* gobj)
+void ftCo_WarpStarFall_Cam(Fighter_GObj* gobj)
 {
     ftCamera_800762F4(gobj);
 }

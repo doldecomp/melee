@@ -26,12 +26,12 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 08CE0C */ static void decideFighter(ftCo_GObj* gobj);
+/* 08CE0C */ static void decideFighter(Fighter_GObj* gobj);
 
 /// @todo This probably doesn't exist; see #ftCo_AttackAir_CheckItemThrowInput.
-static bool checkItemThrowInput(ftCo_GObj* gobj)
+static bool checkItemThrowInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
@@ -53,10 +53,10 @@ static bool checkItemThrowInput(ftCo_GObj* gobj)
  * @todo This is exactly #checkItemThrowInput but it uses too much stack for
  *       #ftCo_AttackAirLw_IASA to call it.
  */
-bool ftCo_AttackAir_CheckItemThrowInput(ftCo_GObj* gobj)
+bool ftCo_AttackAir_CheckItemThrowInput(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A || ftCo_800DF478(fp)) {
         if ((unsigned) ftCo_AttackAir_GetMsidFromCStick(fp) -
                     ftCo_MS_AttackAirN <=
@@ -74,7 +74,7 @@ bool ftCo_AttackAir_CheckItemThrowInput(ftCo_GObj* gobj)
     }
 }
 
-static void decideFighter(ftCo_GObj* gobj)
+static void decideFighter(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
     case FTKIND_LINK:
@@ -119,15 +119,15 @@ FtMotionId ftCo_AttackAir_GetMsidFromCStick(Fighter* fp)
     return ftCo_MS_AttackAirB;
 }
 
-void ftCo_AttackAir_EnterFromCStick(ftCo_GObj* gobj)
+void ftCo_AttackAir_EnterFromCStick(Fighter_GObj* gobj)
 {
     ftCo_AttackAir_EnterFromMsid(
         gobj, ftCo_AttackAir_GetMsidFromCStick(GET_FIGHTER(gobj)));
 }
 
-void ftCo_AttackAir_EnterFromMsid(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_AttackAir_EnterFromMsid(Fighter_GObj* gobj, FtMotionId msid)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
@@ -135,9 +135,9 @@ void ftCo_AttackAir_EnterFromMsid(ftCo_GObj* gobj, FtMotionId msid)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCo_AttackAir_Anim(ftCo_GObj* gobj)
+void ftCo_AttackAir_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (ftCheckThrowB3(fp)) {
         fp->facing_dir = -fp->facing_dir;
     }
@@ -157,39 +157,39 @@ void ftCo_AttackAir_Anim(ftCo_GObj* gobj)
         RETURN_IF(ftCo_800CB870(gobj));                                       \
     }
 
-void ftCo_AttackAirN_IASA(ftCo_GObj* gobj)
+void ftCo_AttackAirN_IASA(Fighter_GObj* gobj)
 {
     DO_IASA(gobj);
 }
 
-void ftCo_AttackAirF_IASA(ftCo_GObj* gobj)
+void ftCo_AttackAirF_IASA(Fighter_GObj* gobj)
 {
     DO_IASA(gobj);
 }
 
-void ftCo_AttackAirB_IASA(ftCo_GObj* gobj)
+void ftCo_AttackAirB_IASA(Fighter_GObj* gobj)
 {
     DO_IASA(gobj);
 }
 
-void ftCo_AttackAirHi_IASA(ftCo_GObj* gobj)
+void ftCo_AttackAirHi_IASA(Fighter_GObj* gobj)
 {
     DO_IASA(gobj);
 }
 
-void ftCo_AttackAirLw_IASA(ftCo_GObj* gobj)
+void ftCo_AttackAirLw_IASA(Fighter_GObj* gobj)
 {
     DO_IASA(gobj);
 }
 
 #undef DO_IASA
 
-void ftCo_AttackAir_Phys(ftCo_GObj* gobj)
+void ftCo_AttackAir_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftCo_AttackAir_Coll(ftCo_GObj* gobj)
+void ftCo_AttackAir_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74(gobj, ftCo_LandingAir_EnterWithLag);
 }

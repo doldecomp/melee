@@ -27,10 +27,10 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 0C5408 */ static void ftCo_800C5408(ftCo_Fighter* fp);
-/* 0C5588 */ static void ftCo_800C5588(ftCo_Fighter* fp);
+/* 0C5408 */ static void ftCo_800C5408(Fighter* fp);
+/* 0C5588 */ static void ftCo_800C5588(Fighter* fp);
 
-bool ftCo_800C4E4C(ftCo_GObj* gobj)
+bool ftCo_800C4E4C(Fighter_GObj* gobj)
 {
     if (ft_8008A1FC(gobj)) {
         ftCo_800C4ED8(gobj);
@@ -39,14 +39,14 @@ bool ftCo_800C4E4C(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_800C4E94(ftCo_Fighter* fp)
+void ftCo_800C4E94(Fighter* fp)
 {
     ftCo_800C5408(fp);
     ftCo_800C5588(fp);
     ftCommon_8007EBAC(fp, 1, 0);
 }
 
-static inline void inlineA0(ftCo_GObj* gobj)
+static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u32 flags = ftCo_800C54C4(fp);
@@ -55,12 +55,12 @@ static inline void inlineA0(ftCo_GObj* gobj)
     ftCo_800C4E94(fp);
 }
 
-void ftCo_800C4ED8(ftCo_GObj* gobj)
+void ftCo_800C4ED8(Fighter_GObj* gobj)
 {
     inlineA0(gobj);
 }
 
-static inline void inlineB0(ftCo_GObj* gobj)
+static inline void inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2338.x != 0) {
@@ -74,17 +74,17 @@ static inline void inlineB0(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800C4F64(ftCo_GObj* gobj)
+void ftCo_800C4F64(Fighter_GObj* gobj)
 {
     inlineB0(gobj);
 }
 
-void ftCo_HammerWait_Anim(ftCo_GObj* gobj)
+void ftCo_HammerWait_Anim(Fighter_GObj* gobj)
 {
     inlineB0(gobj);
 }
 
-void ftCo_HammerWait_IASA(ftCo_GObj* gobj)
+void ftCo_HammerWait_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_800C5A50(gobj));
     RETURN_IF(ftCo_800C60C8(gobj));
@@ -92,17 +92,17 @@ void ftCo_HammerWait_IASA(ftCo_GObj* gobj)
     RETURN_IF(ftCo_800C55CC(gobj));
 }
 
-void ftCo_HammerWait_Phys(ftCo_GObj* gobj)
+void ftCo_HammerWait_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_HammerWait_Coll(ftCo_GObj* gobj)
+void ftCo_HammerWait_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, ftCo_800C5D34);
 }
 
-void ftCo_800C511C(ftCo_GObj* gobj)
+void ftCo_800C511C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->motion_id != ftCo_MS_LightGet) {
@@ -137,16 +137,16 @@ void ftCo_800C511C(ftCo_GObj* gobj)
     }
 }
 
-bool ftCo_800C5240(ftCo_GObj* gobj)
+bool ftCo_800C5240(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_Hammer) {
         return true;
     }
     return false;
 }
 
-void ftCo_800C5284(ftCo_GObj* gobj)
+void ftCo_800C5284(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2330.x = p_ftCommonData->x6AC;
@@ -159,7 +159,7 @@ void ftCo_800C5284(ftCo_GObj* gobj)
     ft_800880AC(fp);
 }
 
-void ftCo_800C52F4(ftCo_GObj* gobj)
+void ftCo_800C52F4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800C5284(gobj);
@@ -170,7 +170,7 @@ void ftCo_800C52F4(ftCo_GObj* gobj)
     }
 }
 
-bool ftCo_800C53E4(ftCo_Fighter* fp)
+bool ftCo_800C53E4(Fighter* fp)
 {
     if (fp->motion_id >= ftCo_MS_HammerWait &&
         fp->motion_id <= ftCo_MS_HammerLanding)
@@ -180,26 +180,26 @@ bool ftCo_800C53E4(ftCo_Fighter* fp)
     return false;
 }
 
-void ftCo_800C5408(ftCo_Fighter* fp)
+void ftCo_800C5408(Fighter* fp)
 {
     if (ftCo_800C0694(fp) != 106) {
         ftCo_800BFFD0(fp, 106, false);
     }
 }
 
-void ftCo_800C544C(ftCo_Fighter* fp)
+void ftCo_800C544C(Fighter* fp)
 {
     if (ftCo_800C0694(fp) == 106) {
         ftCo_800C0200(fp, 106);
     }
 }
 
-float ftCo_800C548C(ftCo_Fighter* fp)
+float ftCo_800C548C(Fighter* fp)
 {
     return ftCo_800C53E4(fp) ? fp->cur_anim_frame : 0;
 }
 
-u32 ftCo_800C54C4(ftCo_Fighter* fp)
+u32 ftCo_800C54C4(Fighter* fp)
 {
     return ftCo_800C53E4(fp)
                ? Ft_MF_SkipHit | Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
@@ -208,25 +208,25 @@ u32 ftCo_800C54C4(ftCo_Fighter* fp)
                : Ft_MF_None;
 }
 
-void ftCo_800C5500(ftCo_GObj* gobj)
+void ftCo_800C5500(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800C544C(fp);
     ft_80088110(fp);
 }
 
-void ftCo_800C554C(ftCo_Fighter* fp)
+void ftCo_800C554C(Fighter* fp)
 {
     fp->x2338.y = p_ftCommonData->x6B8;
 }
 
-void ftCo_800C555C(ftCo_GObj* gobj)
+void ftCo_800C555C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     it_8026C16C(fp->item_gobj, 0);
 }
 
-void ftCo_800C5588(ftCo_Fighter* fp)
+void ftCo_800C5588(Fighter* fp)
 {
     it_8026C16C(fp->item_gobj, true);
     fp->x2219_b4 = true;

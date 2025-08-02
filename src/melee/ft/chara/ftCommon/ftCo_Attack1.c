@@ -31,17 +31,17 @@
 
 #include <common_structs.h>
 
-/* 08AB50 */ static void onPkPc21EC(ftCo_GObj* gobj);
-/* 08AB84 */ static void decideAttack11(ftCo_GObj* gobj);
-/* 08ABC0 */ static void checkAttack11(ftCo_GObj* gobj);
-/* 08AE30 */ static void doAttack12(ftCo_GObj* gobj);
-/* 08AF0C */ static bool checkAttack12(ftCo_GObj* gobj);
-/* 08B194 */ static void doAttack13(ftCo_GObj* gobj);
-/* 08B248 */ static bool checkAttack13(ftCo_GObj* gobj);
+/* 08AB50 */ static void onPkPc21EC(Fighter_GObj* gobj);
+/* 08AB84 */ static void decideAttack11(Fighter_GObj* gobj);
+/* 08ABC0 */ static void checkAttack11(Fighter_GObj* gobj);
+/* 08AE30 */ static void doAttack12(Fighter_GObj* gobj);
+/* 08AF0C */ static bool checkAttack12(Fighter_GObj* gobj);
+/* 08B194 */ static void doAttack13(Fighter_GObj* gobj);
+/* 08B248 */ static bool checkAttack13(Fighter_GObj* gobj);
 
-bool ftCo_Attack1_CheckInput(ftCo_GObj* gobj)
+bool ftCo_Attack1_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A) {
         if (fp->item_gobj != NULL) {
             if (it_8026B30C(fp->item_gobj) == 0) {
@@ -81,13 +81,13 @@ bool ftCo_Attack1_CheckInput(ftCo_GObj* gobj)
     return false;
 }
 
-static void onPkPc21EC(ftCo_GObj* gobj)
+static void onPkPc21EC(Fighter_GObj* gobj)
 {
     ft_800892A0(gobj);
     ft_80089824(gobj);
 }
 
-static void decideAttack11(ftCo_GObj* gobj)
+static void decideAttack11(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
     case FTKIND_GAMEWATCH:
@@ -99,7 +99,7 @@ static void decideAttack11(ftCo_GObj* gobj)
     }
 }
 
-static MotionFlags getMotionFlags(ftCo_Fighter* fp)
+static MotionFlags getMotionFlags(Fighter* fp)
 {
     switch (fp->kind) {
     case FTKIND_PICHU:
@@ -111,10 +111,10 @@ static MotionFlags getMotionFlags(ftCo_Fighter* fp)
     }
 }
 
-static void checkAttack11(ftCo_GObj* gobj)
+static void checkAttack11(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!ftpickupitem_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
@@ -129,7 +129,7 @@ static void checkAttack11(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Attack11_Anim(ftCo_GObj* arg0)
+void ftCo_Attack11_Anim(Fighter_GObj* arg0)
 {
     u8 _[8] = { 0 };
     if (!ftAnim_IsFramesRemaining(arg0)) {
@@ -137,9 +137,9 @@ void ftCo_Attack11_Anim(ftCo_GObj* arg0)
     }
 }
 
-void ftCo_Attack11_IASA(ftCo_GObj* gobj)
+void ftCo_Attack11_IASA(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
         RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
@@ -159,19 +159,19 @@ void ftCo_Attack11_IASA(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Attack11_Phys(ftCo_GObj* gobj)
+void ftCo_Attack11_Phys(Fighter_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
-void ftCo_Attack11_Coll(ftCo_GObj* gobj)
+void ftCo_Attack11_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }
 
-static void doAttack12Rapid(ftCo_GObj* gobj)
+static void doAttack12Rapid(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->kind) {
     case FTKIND_GAMEWATCH:
         ftGw_Attack11_Enter(gobj);
@@ -182,9 +182,9 @@ static void doAttack12Rapid(ftCo_GObj* gobj)
     }
 }
 
-static void doAttack12Normal(ftCo_GObj* gobj)
+static void doAttack12Normal(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!ftpickupitem_80094790(gobj)) {
         fp->allow_interrupt = false;
         fp->x2218_b1 = false;
@@ -196,7 +196,7 @@ static void doAttack12Normal(ftCo_GObj* gobj)
     }
 }
 
-static void doAttack12(ftCo_GObj* gobj)
+static void doAttack12(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
     case FTKIND_PIKACHU:
@@ -209,10 +209,10 @@ static void doAttack12(ftCo_GObj* gobj)
     }
 }
 
-bool checkAttack12(ftCo_GObj* gobj)
+bool checkAttack12(Fighter_GObj* gobj)
 {
     u8 _[16] = { 0 };
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
         if (fp->input.x668 & HSD_PAD_A) {
@@ -226,7 +226,7 @@ bool checkAttack12(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_Attack12_Anim(ftCo_GObj* gobj)
+void ftCo_Attack12_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -234,9 +234,9 @@ void ftCo_Attack12_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Attack12_IASA(ftCo_GObj* gobj)
+void ftCo_Attack12_IASA(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_AttackS4_CheckInput(gobj));
         RETURN_IF(ftCo_AttackHi4_CheckInput(gobj));
@@ -256,9 +256,9 @@ void ftCo_Attack12_IASA(ftCo_GObj* gobj)
     }
 }
 
-static void doAttack13(ftCo_GObj* gobj)
+static void doAttack13(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->kind) {
     case FTKIND_MARS:
         doAttack12Rapid(gobj);
@@ -274,9 +274,9 @@ static void doAttack13(ftCo_GObj* gobj)
     }
 }
 
-bool checkAttack13(ftCo_GObj* gobj)
+bool checkAttack13(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->hitlag_mul > 0) {
         fp->hitlag_mul -= 1;
         if (fp->input.x668 & HSD_PAD_A) {
@@ -290,16 +290,16 @@ bool checkAttack13(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_Attack13_Anim(ftCo_GObj* gobj)
+void ftCo_Attack13_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftCo_Attack13_IASA(ftCo_GObj* gobj)
+void ftCo_Attack13_IASA(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!ftCo_Attack_800D6A50(gobj) && fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }

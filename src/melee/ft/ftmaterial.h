@@ -15,9 +15,9 @@
                                            HSD_TExp* texp, u32 rendermode);
 /* 0BF6BC */ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj,
                                       HSD_TExp* texp);
-/* 0BFB4C */ void ftMaterial_800BFB4C(ftCo_GObj* gobj, GXColor* diffuse);
-/* 0BFD04 */ void ftMaterial_800BFD04(ftCo_GObj* gobj);
-/* 0BFD9C */ void ftMaterial_800BFD9C(ftCo_GObj* gobj);
+/* 0BFB4C */ void ftMaterial_800BFB4C(Fighter_GObj* gobj, GXColor* diffuse);
+/* 0BFD04 */ void ftMaterial_800BFD04(Fighter_GObj* gobj);
+/* 0BFD9C */ void ftMaterial_800BFD9C(Fighter_GObj* gobj);
 /* 3C6980 */ extern HSD_MObjInfo ftMObj;
 
 #endif
