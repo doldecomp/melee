@@ -248,7 +248,7 @@ void ftCo_80091854(HSD_GObj* gobj)
     float sp24;
     HSD_JObj* jobj;
     ftCo_Fighter* fp;
-    u8 _[20];
+    PAD_STACK(20);
 
     fp = GET_FIGHTER(gobj);
     if (ftCo_800C5240(gobj)) {
