@@ -248,30 +248,25 @@ void ftCo_80091854(HSD_GObj* gobj)
 {
     Vec3 vec;
     float sp24;
-    ftCo_Fighter* fp = gobj->user_data;
+    HSD_JObj *jobj;
+    ftCo_Fighter *fp;
+    u8 _[20];
+    
+    fp = GET_FIGHTER(gobj);
     if (ftCo_800C5240(gobj)) {
         ftCo_800C5A98(gobj);
     } else {
         ftCommon_8007D5D4(fp);
-        fp->x2227_b5 = false;
+        fp->x2227_b6 = false;
         Fighter_ChangeMotionState(gobj, 0x146, 0x40U, 0, 0, 0, NULL);
         ft_80088148(fp, 0x123, 0x7F, 0x40);
-        {
-            HSD_JObj* jobj =
-                fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
-            vec.x = ftCo_803B74BC.x;
-            vec.y = ftCo_803B74BC.y;
-            vec.z = (s32) ftCo_803B74BC.z;
-            {
-                float temp_f2 = M2C_FIELD(fp, float*, 0x38);
-                float temp_f1 = temp_f2 * fp->co_attrs.bubble_ratio;
-                sp24 = temp_f1 / p_ftCommonData->x7A0;
-                efAsync_Spawn(gobj, GET_FIGHTER(gobj)->x60C, 5, 1091, jobj);
-            }
-            fp->self_vel.x = fp->input.lstick.x * fp->co_attrs.x144;
-            fp->self_vel.y = fp->co_attrs.x140;
-            fp->mv.co.damageicejump.x0 = p_ftCommonData->x7A4;
-        }
+        jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
+        vec = ftCo_803B74BC;
+        sp24 = fp->x34_scale.y * fp->co_attrs.bubble_ratio / p_ftCommonData->x7A0;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 1091, jobj, &vec, &sp24);
+        fp->self_vel.x = fp->input.lstick.x * *(float *)&fp->co_attrs.x144;
+        fp->self_vel.y = fp->co_attrs.x140;
+        fp->mv.co.damageicejump.x0 = p_ftCommonData->x7A4;
     }
 }
 
