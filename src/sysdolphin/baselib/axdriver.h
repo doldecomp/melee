@@ -10,44 +10,61 @@
 #define SMSTATE_ACTIVE 0x40000000
 #define SMSTATE_SLEEP 0x80000000
 
+typedef enum {
+    AXDRIVER_AUX_OFF = 0,
+    AXDRIVER_AUX_REVERB_HI = 1,
+    AXDRIVER_AUX_REVERB_STD = 2,
+    AXDRIVER_AUX_CHORUS = 3,
+    AXDRIVER_AUX_DELAY = 4
+} AXDriverAuxType;
+
 struct HSD_SM {
-    HSD_SM* prev;
-    HSD_SM* next;
-    u32 flags;
-    int vid;
-    int pid;
-    int fid;
-    u8 track;
-    u8 pri;
-    u8 pri0[2];
-    u8 volumeType[2];
-    s16 volume[2];
-    u16 fadetime;
-    u8 pan[2];
-    s16 round;
-    u8 dp12flag;
-    u8 itdflag;
-    u8 span[2];
-    u8 maxfid;
-    s16 pitch[2];
-    u8 mix[2];
-    u8 mixscale[2];
-    u8 filter;
-    u8 group;
-    u16 loopcount;
-    u32* curScore;
-    long clock;
+    /* 00 */ HSD_SM* prev;
+    /* 04 */ HSD_SM* next;
+    /* 08 */ u32 flags;
+    /* 0C */ int unk;
+    /* 10 */ int vID;
+    /* 14 */ u16 fid;
+    /* 16 */ u16 x16;
+    /* 18 */ u8 track;
+    /* 19 */ u8 pri;
+    /* 1A */ u8 x1A;
+    /* 1B */ u8 volume;
+    /* 1C */ u8 x1C;
+    /* 1D */ u8 pan;
+    /* 1E */ u8 x1E;
+    /* 20 */ s16 x20;
+    /* 22 */ s16 fadetime;
+    /* 24 */ u8 x24;
+    /* 25 */ u8 x25;
+    /* 26 */ u8 x26;
+    /* 27 */ u8 x27;
+    /* 28 */ u8 dp12flag;
+    /* 29 */ u8 itdflag;
+    /* 2A */ u16 x2A;
+    /* 2C */ u32* cmd_stream;
+    /* 30 */ int x30;
 };
 
-u8* AXDriverAlloc(s32 size);
+void* AXDriverAlloc(size_t size);
 void AXDriverFree(void* ptr);
 void AXDriverUnlink(HSD_SM* v, HSD_SM** head);
-void AXDriverKeyOff(int v);
+bool AXDriverKeyOff(int vid);
 void HSD_AudioSFXKeyOffAll(void);
 void HSD_AudioSFXKeyOffTrack(int track);
+void AXDriver_8038C6C0(HSD_SM* v);
 s32 AXDriver_8038D4E4(int, s16);
 int AXDriver_8038D9D8(int);
-void AXDriver_8038E844(int);
-void AXDriver_8038E968(void);
+void fn_8038DA5C(int arg0);
+int AXDriver_8038E5D4(void);
+int AXDriver_8038E5DC(void);
+bool AXDriver_8038E844(int);
+bool AXDriver_8038E37C(AXDriverAuxType type, void* param);
+bool AXDriver_8038E8EC(char* arg0, int arg1, int arg2);
+bool AXDriver_8038E968(void);
+bool AXDriver_8038E9A8(void);
+bool AXDriver_8038E9E0(void);
+bool AXDriver_8038EA18(void);
+int AXDriverSetupAux(int channel, AXDriverAuxType type, void* param);
 
 #endif

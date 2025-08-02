@@ -1,8 +1,9 @@
 #ifndef SYSDOLPHIN_SYNTH_H
 #define SYSDOLPHIN_SYNTH_H
 
-#include <dolphin/ax.h>
 #include <placeholder.h>
+
+#include <dolphin/ax.h>
 
 struct HSD_SynthSFXNode;
 
@@ -28,18 +29,19 @@ struct HSD_SynthSFXNode;
 /* 38912C */ void HSD_Synth_8038912C(struct HSD_SynthSFXNode*);
 /* 3891D0 */ UNK_RET dropcallback(UNK_PARAMS);
 /* 389334 */ UNK_RET HSD_Synth_80389334(UNK_PARAMS);
-/* 3896F0 */ UNK_RET HSD_Synth_803896F0(UNK_PARAMS);
-/* 38987C */ UNK_RET HSD_SynthSFXKeyOff(UNK_PARAMS);
+/* 3896F0 */ s32 HSD_Synth_803896F0(u16, u8, u8, u8, u8, u8, u8, f32, f32, f32,
+                                    f32, f32);
+/* 38987C */ void HSD_SynthSFXKeyOff(int);
 /* 3899B0 */ void HSD_SynthSFXStopRange(int);
 /* 389A50 */ void HSD_SynthSFXPause(int);
 /* 389AD0 */ void HSD_SynthSFXResume(int);
 /* 389B50 */ int HSD_SynthSFXCheck(int);
 /* 389BD8 */ void HSD_SynthSFXSetVolumeFade(int, u8, int);
-/* 389CC4 */ UNK_RET HSD_Synth_80389CC4(UNK_PARAMS);
+/* 389CC4 */ void HSD_Synth_80389CC4(int, u8);
 /* 389D24 */ void HSD_SynthSFXSetMix(int, float, float, float);
 /* 389D8C */ void HSD_SynthSFXUpdatePitch(struct HSD_SynthSFXNode*);
-/* 389E2C */ UNK_RET HSD_Synth_80389E2C(UNK_PARAMS);
-/* 389F4C */ UNK_RET HSD_Synth_80389F4C(UNK_PARAMS);
+/* 389E2C */ void HSD_Synth_80389E2C(s32, s32, float);
+/* 389F4C */ void HSD_Synth_80389F4C(s32, u8);
 /* 38A000 */ UNK_RET HSD_Synth_8038A000(UNK_PARAMS);
 /* 38A5A4 */ void HSD_SynthSFXUpdateVolume(struct HSD_SynthSFXNode*);
 /* 38A600 */ void HSD_SynthSFXUpdateMix(struct HSD_SynthSFXNode*, int);
@@ -55,8 +57,8 @@ struct HSD_SynthSFXNode;
 /* 38B380 */ UNK_RET HSD_SynthPStreamFirstHakoHeaderCallback(UNK_PARAMS);
 /* 38B3E0 */ void HSD_SynthPStreamHeaderCallback(void*, s32, void*,
                                                  s32 cancelflag);
-/* 38B5AC */ UNK_RET HSD_Synth_8038B5AC(UNK_PARAMS);
+/* 38B5AC */ int HSD_Synth_8038B5AC(int, u8, int, int);
 /* 38B81C */ void HSD_SynthStreamSetVolume(float);
-/* 38B938 */ UNK_RET HSD_SynthInit(UNK_PARAMS);
+/* 38B938 */ void HSD_SynthInit(int, int, int, int);
 
 #endif
