@@ -59,7 +59,7 @@ void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
         fp->dmg.x1900 = fp->coll_data.floor.normal.x;
         fp->dmg.x1904 = fp->coll_data.floor.normal.y;
     }
-    fp->dmg.x18FD = (u8)Fighter_804D6530[fp->dmg.x18F8 * 2 + 1];
+    fp->dmg.x18FD = (u8)(u32)Fighter_804D6530[fp->dmg.x18F8 * 2 + 1];
 }
 
 Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)

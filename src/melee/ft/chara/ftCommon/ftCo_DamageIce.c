@@ -40,10 +40,11 @@
 /* 0909D0 */ static void ftCo_800909D0(ftCo_Fighter* fp);
 /* 090B48 */ static void ftCo_80090B48(ftCo_GObj* gobj);
 /* 091274 */ static void ftCo_80091274(ftCo_GObj* gobj);
-/* 091620 */ static UNK_RET ftCo_80091620(UNK_PARAMS);
+/* 091620 */ static void ftCo_80091620(HSD_GObj* gobj, Vec3 *normal, Vec3 *vec);
 
 static Vec3 const ftCo_803B74B0 = { 0 };
 static Vec3 const ftCo_803B74BC = { 0 };
+float atan2f(float, float);
 
 void ftCo_80090984(ftCo_GObj* gobj)
 {
@@ -232,14 +233,126 @@ void ftCo_DamageIce_Coll(ftCo_GObj* gobj)
     }
 }
 
+static float SOME_CONSTANT_IDK = 666.0f;
+static float SOME_CONSTANT_IDK_2 = 666.0f;
+
 void ftCo_800914A4(ftCo_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    ftCo_Fighter* fp;
+    CollData *coll_data;
+    bool ret;
+    Vec3 vec;
+    PAD_STACK(12);
+    
+    fp = GET_FIGHTER(gobj);
+    coll_data = &fp->coll_data;
+    
+    if (fp->cur_anim_frame <= SOME_CONSTANT_IDK) {
+        ret = ft_80082638(gobj, &fp->mv.co.damageice.x8);
+    } else {
+        ret = ft_800824A0(gobj, &fp->mv.co.damageice.x8);
+    }
+    
+    if ((coll_data->env_flags & 0x800) && fp->mv.co.damageice.x0 != 1) {
+        vec.x = coll_data->xA4_ecbCurrCorrect.left.x;
+        vec.y = coll_data->xA4_ecbCurrCorrect.left.y;
+        vec.z = SOME_CONSTANT_IDK_2;
+        ftKb_SpecialN_800F1F1C(gobj, &vec);
+        ftCo_80091620(gobj, &coll_data->left_wall.normal, &vec);
+        fp->mv.co.damageice.x0 = 1;
+    } else if ((coll_data->env_flags & 0x20) && fp->mv.co.damageice.x0 != 2) {
+        vec.x = coll_data->xA4_ecbCurrCorrect.right.x;
+        vec.y = coll_data->xA4_ecbCurrCorrect.right.y;
+        vec.z = SOME_CONSTANT_IDK_2;
+        ftKb_SpecialN_800F1F1C(gobj, &vec);
+        ftCo_80091620(gobj, &coll_data->right_wall.normal, &vec);
+        fp->mv.co.damageice.x0 = 2;
+    } else if ((coll_data->env_flags & 0x4000) && fp->mv.co.damageice.x0 != 3) {
+        vec.x = SOME_CONSTANT_IDK_2;
+        vec.y = coll_data->xA4_ecbCurrCorrect.top.y;
+        vec.z = SOME_CONSTANT_IDK_2;
+        ftKb_SpecialN_800F1F1C(gobj, &vec);
+        ftCo_80091620(gobj, &coll_data->ceiling.normal, &vec);
+        fp->mv.co.damageice.x0 = 3;
+    } else if (ret) {
+        ftCommon_8007D7FC(fp);
+    }
 }
 
-UNK_RET ftCo_80091620(UNK_PARAMS)
+static inline float my_sqrtf(float x)
 {
-    NOT_IMPLEMENTED;
+    static const double _half = .5;
+    static const double _three = 3.0;
+    u8 _[4] = { 0 };
+    volatile float y;
+    if (x > 0) {
+        double guess = __frsqrte((double) x);
+        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (_three - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
+
+void ftCo_80091620(HSD_GObj* gobj, Vec3 *normal, Vec3 *vec)
+{
+    ftCo_Fighter* fp;
+    CollData* coll_data;
+    float sp24;
+    Vec3 sp2C;
+    
+    fp = GET_FIGHTER(gobj);
+    coll_data = &fp->coll_data;
+    
+    sp2C.x = fp->cur_pos.x + vec->x;
+    sp2C.y = fp->cur_pos.y + vec->y;
+    sp2C.z = fp->cur_pos.z + vec->z;
+    
+    sp24 = atan2f(-normal->x, normal->y);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 0x406, NULL, &sp2C, &sp24);
+    
+    Camera_80030E44(2, &sp2C);
+    
+    ftCommon_8007EBAC(fp, 7, 0);
+    ft_80088148(fp, 0x123, 0x7f, 0x40);
+    
+    {
+        float x, y, z, mag;
+        x = fp->self_vel.x;
+        y = fp->self_vel.y;
+        z = fp->self_vel.z;
+        x *= x;
+        y *= y;
+        z *= z;
+        mag = my_sqrtf(x+y+z);
+        
+        if (mag > p_ftCommonData->x780) {
+            ft_80088148(fp, 0x123, 0x7f, 0x40);
+            
+            fp->cur_pos = sp2C;
+            fp->x2227_b6 &= (0 << 1);
+            ftCo_80090780((Fighter_GObj *)gobj);
+        } else {
+            lbVector_Mirror(&fp->self_vel, normal);
+            {
+                float x784 = p_ftCommonData->x784;
+                fp->self_vel.x *= x784;
+                fp->self_vel.y *= x784;
+            }
+            
+            if ((coll_data->env_flags & 0x800) != 0) {
+                fp->cur_pos.x = -((fp->x68C_transNPos.z * -fp->facing_dir) - (fp->cur_pos.x + vec->x));
+            } else {
+                fp->cur_pos.y = fp->cur_pos.y + vec->y + fp->x68C_transNPos.y;
+            }
+            
+            if (ft_80081D0C((Fighter_GObj *)gobj)) {
+                ftCommon_8007D7FC(fp);
+            }
+        }
+    }
 }
 
 void ftCo_80091854(HSD_GObj* gobj)
