@@ -83,9 +83,9 @@ void it_802D4F58(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802D4FFC
 
-void it_802D5044(void) {}
+void it_802D5044(Item_GObj* gobj) {}
 
-bool it_802D5048(void)
+bool it_802D5048(Item_GObj* gobj)
 {
     return false;
 }

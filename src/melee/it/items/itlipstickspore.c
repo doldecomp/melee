@@ -9,7 +9,7 @@
 
 #include <baselib/gobj.h>
 
-/* 29A5F8 */ static bool it_8029A5F8(void);
+/* 29A5F8 */ static bool it_8029A5F8(Item_GObj* gobj);
 
 /// #it_8029A114
 
@@ -33,7 +33,7 @@ void it_8029A5E0(Item_GObj* gobj)
     itResetVelocity(ip);
 }
 
-bool it_8029A5F8(void)
+bool it_8029A5F8(Item_GObj* gobj)
 {
     return false;
 }

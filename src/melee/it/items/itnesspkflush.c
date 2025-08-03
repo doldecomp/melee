@@ -5,8 +5,8 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2AB29C */ static bool it_802AB29C(void);
-/* 2AB2A4 */ static bool it_802AB2A4(void);
+/* 2AB29C */ static bool it_802AB29C(Item_GObj* gobj);
+/* 2AB2A4 */ static bool it_802AB2A4(Item_GObj* gobj);
 
 Fighter_GObj* it_802AA7E4(Item_GObj* gobj)
 {
@@ -54,12 +54,12 @@ void it_802AB140(Item_GObj* gobj)
 
 /// #it_802AB158
 
-bool it_802AB29C(void)
+bool it_802AB29C(Item_GObj* gobj)
 {
     return false;
 }
 
-bool it_802AB2A4(void)
+bool it_802AB2A4(Item_GObj* gobj)
 {
     return false;
 }

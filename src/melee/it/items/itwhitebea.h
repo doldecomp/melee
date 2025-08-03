@@ -8,22 +8,22 @@
 #include "it/items/types.h"
 
 /* 2E31F8 */ void it_802E31F8(Item_GObj*);
-/* 2E324C */ UNK_RET it_802E324C(UNK_PARAMS);
-/* 2E32B0 */ UNK_RET it_802E32B0(UNK_PARAMS);
+/* 2E324C */ bool it_802E324C(Item_GObj* gobj);
+/* 2E32B0 */ void it_802E32B0(Item_GObj* gobj);
 /* 2E32B4 */ void it_802E32B4(Item_GObj*);
 /* 2E3314 */ void it_802E3314(Item_GObj*);
-/* 2E3364 */ UNK_RET it_802E3364(UNK_PARAMS);
-/* 2E33AC */ UNK_RET it_802E33AC(UNK_PARAMS);
-/* 2E33DC */ UNK_RET it_802E33DC(UNK_PARAMS);
+/* 2E3364 */ bool it_802E3364(Item_GObj* gobj);
+/* 2E33AC */ void it_802E33AC(Item_GObj* gobj);
+/* 2E33DC */ bool it_802E33DC(Item_GObj* gobj);
 /* 2E3400 */ UNK_RET it_802E3400(UNK_PARAMS);
-/* 2E3470 */ UNK_RET it_802E3470(UNK_PARAMS);
-/* 2E34B8 */ UNK_RET it_802E34B8(UNK_PARAMS);
-/* 2E34BC */ UNK_RET it_802E34BC(UNK_PARAMS);
+/* 2E3470 */ bool it_802E3470(Item_GObj* gobj);
+/* 2E34B8 */ void it_802E34B8(Item_GObj* gobj);
+/* 2E34BC */ bool it_802E34BC(Item_GObj* gobj);
 /* 2E34DC */ void it_802E34DC(Item_GObj*);
 /* 2E3528 */ UNK_RET it_802E3528(UNK_PARAMS);
-/* 2E3588 */ bool it_802E3588(void);
-/* 2E3590 */ UNK_RET it_802E3590(UNK_PARAMS);
-/* 2E35AC */ UNK_RET it_802E35AC(UNK_PARAMS);
+/* 2E3588 */ bool it_802E3588(Item_GObj* gobj);
+/* 2E3590 */ void it_802E3590(Item_GObj* gobj);
+/* 2E35AC */ bool it_802E35AC(Item_GObj* gobj);
 /* 2E35CC */ UNK_RET it_802E35CC(UNK_PARAMS);
 /* 2E3784 */ void it_802E3784(Item_GObj*, Item_GObj*);
 /* 2E37A4 */ void it_802E37A4(Item_GObj*);
