@@ -35,6 +35,7 @@
 #include "lb/lbvector.h"
 
 #include <common_structs.h>
+#include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
@@ -285,84 +286,68 @@ void ftCo_800914A4(Fighter_GObj* gobj)
     }
 }
 
-static inline float my_sqrtf(float x)
+static void ftCo_SpawnEffect_x406(Fighter_GObj* gobj, Vec3* vec, f32 f)
 {
-    static const double _half = .5;
-    static const double _three = 3.0;
-    u8 _[4] = { 0 };
-    volatile float y;
-    if (x > 0) {
-        double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 0x406, NULL, vec, &f);
 }
 
-void ftCo_80091620(HSD_GObj* gobj, Vec3* normal, Vec3* vec)
+static f32 ftCo_SelfVelMag(Fighter* fp)
 {
-    Fighter* fp;
-    CollData* coll_data;
-    float sp24;
-    Vec3 sp2C;
+    return sqrtf((fp->self_vel.x * fp->self_vel.x) +
+                 (fp->self_vel.y * fp->self_vel.y) +
+                 (fp->self_vel.z * fp->self_vel.z));
+}
 
-    fp = GET_FIGHTER(gobj);
-    coll_data = &fp->coll_data;
+void ftCo_80091620(Fighter_GObj* gobj, Vec3* normal, Vec3* vec)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    CollData* coll_data = &fp->coll_data;
+
+    u8 _s[0x10];
+    Vec3 sp2C;
 
     sp2C.x = fp->cur_pos.x + vec->x;
     sp2C.y = fp->cur_pos.y + vec->y;
     sp2C.z = fp->cur_pos.z + vec->z;
 
-    sp24 = atan2f(-normal->x, normal->y);
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, 0x406, NULL, &sp2C,
-                  &sp24);
+    ftCo_SpawnEffect_x406(gobj, &sp2C, atan2f(-normal->x, normal->y));
 
     Camera_80030E44(2, &sp2C);
 
     ftCommon_8007EBAC(fp, 7, 0);
     ft_80088148(fp, 0x123, 0x7f, 0x40);
 
-    {
-        float x, y, z, mag;
-        x = fp->self_vel.x;
-        y = fp->self_vel.y;
-        z = fp->self_vel.z;
-        x *= x;
-        y *= y;
-        z *= z;
-        mag = my_sqrtf(x + y + z);
+    if (ftCo_SelfVelMag(fp) > p_ftCommonData->x780) {
+        ft_80088148(fp, 0x123, 0x7f, 0x40);
 
-        if (mag > p_ftCommonData->x780) {
-            ft_80088148(fp, 0x123, 0x7f, 0x40);
+        fp->cur_pos = sp2C;
+        fp->x2227_b6 &= (0 << 1);
+        ftCo_80090780(gobj);
+    } else {
+        lbVector_Mirror(&fp->self_vel, normal);
+        {
+            float x784 = p_ftCommonData->x784;
 
-            fp->cur_pos = sp2C;
-            fp->x2227_b6 &= (0 << 1);
-            ftCo_80090780((Fighter_GObj*) gobj);
+            fp->self_vel.x *= x784;
+            fp->self_vel.y *= x784;
+        }
+
+        if ((coll_data->env_flags & MPCOLL_FLAGS_B11) != 0 ||
+            (coll_data->env_flags & MPCOLL_FLAGS_B11) != 0)
+        {
+            fp->cur_pos.x = -((fp->x68C_transNPos.z * -fp->facing_dir) -
+                              (fp->cur_pos.x + vec->x));
         } else {
-            lbVector_Mirror(&fp->self_vel, normal);
-            {
-                float x784 = p_ftCommonData->x784;
-                fp->self_vel.x *= x784;
-                fp->self_vel.y *= x784;
-            }
+            fp->cur_pos.y = fp->cur_pos.y + vec->y + fp->x68C_transNPos.y;
+        }
 
-            if ((coll_data->env_flags & 0x800) != 0) {
-                fp->cur_pos.x = -((fp->x68C_transNPos.z * -fp->facing_dir) -
-                                  (fp->cur_pos.x + vec->x));
-            } else {
-                fp->cur_pos.y = fp->cur_pos.y + vec->y + fp->x68C_transNPos.y;
-            }
-
-            if (ft_80081D0C((Fighter_GObj*) gobj)) {
-                ftCommon_8007D7FC(fp);
-            }
+        if (ft_80081D0C(gobj)) {
+            ftCommon_8007D7FC(fp);
         }
     }
 }
-
 void ftCo_80091854(HSD_GObj* gobj)
 {
     Vec3 vec;
