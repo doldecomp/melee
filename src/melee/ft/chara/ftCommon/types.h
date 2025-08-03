@@ -128,7 +128,7 @@ union ftCommon_MotionVars {
         /* fp+235B */ u8 x1B;
     } damage;
     struct {
-        /* fp+2340 */ s8 x0;
+        /* fp+2340 */ u8 x0;
         /* fp+2341 */ s8 x1;
         /* fp+2342 */ s8 x2;
         /* fp+2343 */ s8 x3;

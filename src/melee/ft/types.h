@@ -505,8 +505,8 @@ struct ftCommonData {
     /* +774 */ int x774;
     /* +778 */ float passive_wall_vel_y_base;
     /* +77C */ float x77C;
-    /* +780 */ UNK_T x780;
-    /* +784 */ UNK_T x784;
+    /* +780 */ float x780;
+    /* +784 */ float x784;
     /* +788 */ float x788;
     /* +78C */ float x78C;
     /* +790 */ UNK_T x790;
