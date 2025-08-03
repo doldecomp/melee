@@ -1,8 +1,9 @@
+#include <melee/ft/forward.h>
+
 #include "lbaudio_ax.static.h"
 
 #include <baselib/axdriver.h>
 #include <baselib/synth.h>
-#include <melee/ft/forward.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lblanguage.h>
 
@@ -50,7 +51,9 @@ int lbAudioAx_80023130(int arg0)
     int i;
     if (arg0 >= 0 && arg0 < 0x83D60) {
         for (i = 0; i < 0x37; i++) {
-            if (s32_arr_803BB8D4[i][0] <= arg0 && arg0 <= s32_arr_803BB8D4[i][1]) {
+            if (s32_arr_803BB8D4[i][0] <= arg0 &&
+                arg0 <= s32_arr_803BB8D4[i][1])
+            {
                 return i;
             }
         }
@@ -341,7 +344,7 @@ extern int lbl_804D6418;
 void lbAudioAx_80027DBC(void)
 {
     HSD_AudioSFXKeyOffAll();
-    AXDriver_8038E968();
+    AXDriverStop();
     lbl_804D6418 = 0;
     lbl_803BB300[0] = '\0';
     lbAudioAx_80024C84();

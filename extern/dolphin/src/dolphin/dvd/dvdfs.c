@@ -64,7 +64,7 @@ static BOOL isSame(const char* path, const char* string)
     return FALSE;
 }
 
-s32 DVDConvertPathToEntrynum(char* pathPtr)
+s32 DVDConvertPathToEntrynum(const char* pathPtr)
 {
     const char* ptr;
     char* stringPtr;
