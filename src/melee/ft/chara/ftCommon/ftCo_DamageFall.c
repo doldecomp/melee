@@ -1,5 +1,5 @@
-#include <placeholder.h>
 #include <platform.h>
+#include <placeholder.h>
 
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
@@ -37,8 +37,8 @@ static u16 calcShift(float hitlag_mul, FtMotionId msid, int dmg)
     return fcp->x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) + fcp->x16C;
 }
 
-void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
-    GroundOrAir ground_or_air, float hitlag_mul)
+void ftCo_80090594(Fighter* fp, enum_t element, int dmg, FtMotionId msid,
+                   GroundOrAir ground_or_air, float hitlag_mul)
 {
     if (element == 10 || element == 12 || element == 6 || element == 7) {
         return;
@@ -59,7 +59,7 @@ void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
         fp->dmg.x1900 = fp->coll_data.floor.normal.x;
         fp->dmg.x1904 = fp->coll_data.floor.normal.y;
     }
-    fp->dmg.x18FD = (u8)(u32)Fighter_804D6530[fp->dmg.x18F8 * 2 + 1];
+    fp->dmg.x18FD = (u8) (u32) Fighter_804D6530[fp->dmg.x18F8 * 2 + 1];
 }
 
 Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)
@@ -96,15 +96,15 @@ void ftCo_80090780(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
-        ftCommon_8007D5D4((Fighter*)fp);
+        ftCommon_8007D5D4((Fighter*) fp);
     }
     if (ftGetParasolStatus(gobj) != -1) {
         ftCo_800CF4DC(gobj);
     } else {
         Fighter_ChangeMotionState(gobj, 0x26, 0x18001U, 0.0f, 1.0f, 0.0f,
-            NULL);
-        ftCommon_8007D468((Fighter*)fp);
-        ftCommon_8007EBAC((Fighter*)fp, 8U, 0U);
+                                  NULL);
+        ftCommon_8007D468((Fighter*) fp);
+        ftCommon_8007EBAC((Fighter*) fp, 8U, 0U);
     }
 }
 
@@ -121,7 +121,9 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
         RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
         RETURN_IF(ftCo_800D705C(gobj));
         RETURN_IF(ftCo_800CB870(gobj));
-        if (ABS(fp->input.lstick.x) >= p_ftCommonData->x210 && fp->x670_timer_lstick_tilt_x < p_ftCommonData->x214) {
+        if (ABS(fp->input.lstick.x) >= p_ftCommonData->x210 &&
+            fp->x670_timer_lstick_tilt_x < p_ftCommonData->x214)
+        {
             ftCo_Fall_Enter(gobj);
             return;
         }
