@@ -199,7 +199,7 @@ void AXDriver_8038BF6C(HSD_SM* v)
                 float pitch1 = powf(2.0F, v->x20 / 1200.0F);
                 float pitch2 = powf(2.0F, v->fadetime / 1200.0F);
 
-                v->vID = HSD_Synth_803896F0(
+                v->vID = HSD_SynthSFXPlayWithGroup(
                     v->fid, v->x1A, v->volume,
                     (v->flags & 0x20000) ? v->pan : v->x1C, v->pri, v->itdflag,
                     v->track, pitch1, pitch2, left_inv_sqrt * tmp2, left_sqrt,
@@ -221,22 +221,23 @@ void AXDriver_8038BF6C(HSD_SM* v)
                 break;
             }
             case 0x2:
-                HSD_Synth_80389F4C(v->vID, v->pri);
+                HSD_SynthSFXSetPriority(v->vID, v->pri);
                 break;
             case 0x4:
                 HSD_SynthSFXSetVolumeFade(v->vID, v->x1A, 0);
                 break;
             case 0x8:
-                HSD_Synth_80389CC4(v->vID, v->x1C);
+                HSD_SynthSFXSetUserVol(v->vID, v->x1C);
                 break;
             case 0x10:
                 break;
             case 0x20:
-                HSD_Synth_80389E2C(v->vID, 0, powf(2.0F, v->x20 / 1200.0F));
+                HSD_SynthSFXSetPitchRatio(v->vID, 0,
+                                          powf(2.0F, v->x20 / 1200.0F));
                 break;
             case 0x40:
-                HSD_Synth_80389E2C(v->vID, 1,
-                                   powf(2.0F, v->fadetime / 1200.0F));
+                HSD_SynthSFXSetPitchRatio(v->vID, 1,
+                                          powf(2.0F, v->fadetime / 1200.0F));
                 break;
             case 0x80: {
                 float left_vol = (v->x26 * v->x24) / 65535.0F;
@@ -402,7 +403,7 @@ void fn_8038CC1C(void)
         if (AXDriver_804D6038 != -1) {
             float x =
                 powf(2.0F, CLAMP(-0x2A30, AXDriver_804D77E4, 0x960) / 1200.0F);
-            HSD_Synth_80389E2C(AXDriver_804D6038, 1, x);
+            HSD_SynthSFXSetPitchRatio(AXDriver_804D6038, 1, x);
         }
     }
     v = AXDriver_804D7794;
@@ -438,7 +439,7 @@ void fn_8038CC1C(void)
         case 0x80000000:
             if (v->flags & 0x40) {
                 float x = powf(2.0F, v->fadetime / 1200.0F);
-                HSD_Synth_80389E2C(v->vID, 1, x);
+                HSD_SynthSFXSetPitchRatio(v->vID, 1, x);
                 v->flags &= 0xFFFFFFBF;
             }
             break;
@@ -611,7 +612,7 @@ bool AXDriver_8038D2B4(int arg0, u8 arg1)
     enabled = OSDisableInterrupts();
     if (v->vID != -1) {
         int tmp = arg1 < 0xFF ? arg1 : 0xFF;
-        HSD_Synth_80389CC4(v->vID, tmp);
+        HSD_SynthSFXSetUserVol(v->vID, tmp);
     } else {
         if ((v->flags & 0xC0000000) != 0x40000000) {
             __assert("axdriver.c", 0x30B,
