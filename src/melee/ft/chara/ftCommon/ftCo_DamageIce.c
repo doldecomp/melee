@@ -15,6 +15,7 @@
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"
 
+#include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -26,8 +27,10 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
+#include "ftKirby/ftKb_Init.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 

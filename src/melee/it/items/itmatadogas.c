@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+
 #include "itmatadogas.h"
 
 /// #it_802CAFD4
@@ -44,7 +45,7 @@ void it_802CB280(Item_GObj* gobj) {}
 
 /// #it_802CB844
 
-bool it_802CB8A4()
+bool it_802CB8A4(void)
 {
     return false;
 }
