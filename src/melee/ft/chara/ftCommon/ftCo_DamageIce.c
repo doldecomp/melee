@@ -113,19 +113,25 @@ void ftCo_80091030(Fighter_GObj* gobj)
     float param;
     struct UNK_SAMUS_S2 sp2C;
     Vec3 sp20;
-    HSD_JObj* temp_r7;
-    float temp_f1;
-    float temp_f2;
-    Fighter* fp = gobj->user_data;
+    HSD_JObj* effect_joint;
+    float* bubble_ratio;
+    float x788, x78C;
+    float rand, rand_range;
+    Fighter* fp;
+
+    fp = GET_FIGHTER(gobj);
+
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
     fp->x2227_b6 = true;
+
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce,
-        Ft_MF_KeepGfx | Ft_MF_Unk06, 0, 1, 0, NULL);
+                              Ft_MF_KeepGfx | Ft_MF_Unk06, 0, 1, 0, NULL);
     ftCo_8009E140(fp, 0);
     ftCommon_8007F824(fp->gobj);
     fp->x2222_b3 = true;
+
     if (fp->ground_or_air == GA_Air) {
         fp->self_vel = fp->x8c_kb_vel;
         fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
@@ -133,44 +139,38 @@ void ftCo_80091030(Fighter_GObj* gobj)
         fp->gr_vel = fp->xF0_ground_kb_vel;
         fp->xF0_ground_kb_vel = 0;
     }
+
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->mv.co.damageice.x0 = 0;
-    temp_f2 = p_ftCommonData->x788;
-    fp->mv.ca.specialhi.vel.x = (p_ftCommonData->x78C - temp_f2) * HSD_Randf() + temp_f2;
+    rand = HSD_Randf();
+    x788 = p_ftCommonData->x788;
+    x78C = p_ftCommonData->x78C;
+    rand_range = x78C - x788;
+    fp->mv.ca.specialhi.vel.x = rand_range * rand + x788;
     ftCo_800909D0(fp);
-    temp_f1 = fp->x34_scale.y * fp->co_attrs.bubble_ratio;
-    temp_r7 = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
-    {
-        param = temp_f1 / p_ftCommonData->x7A0;
-        {
-            HSD_GObj* temp_r3 = fp->gobj;
-            efAsync_Spawn(temp_r3, &GET_FIGHTER(temp_r3)->x60C, 3, 1045,
-                temp_r7, &param);
-            fp->x2219_b7 = true;
-            ftColl_8007B0C0(fp->gobj, Intangible);
-            {
-                float temp_r0;
-                sp20.x = ftCo_803B74B0.x;
-                sp20.y = ftCo_803B74B0.y;
-                temp_r0 = ftCo_803B74B0.z;
-                sp20.z = temp_r0;
-                sp2C.parts[0] = ftParts_8007500C(fp, FtPart_XRotN);
-                sp2C.parts[1] = FtPart_TransN;
-                sp2C.parts[2] = FtPart_TopN;
-                sp2C.vec2.x = sp20.x;
-                sp2C.vec2.y = sp20.y;
-                sp2C.vec2.z = temp_r0;
-                sp2C.vec1.x = sp2C.vec2.x;
-                sp2C.vec1.y = sp2C.vec2.y;
-                sp2C.vec1.z = temp_r0;
-                sp2C.scale = fp->co_attrs.bubble_ratio;
-                ftColl_8007B5AC(fp, fp->hurt_capsules, &sp2C);
-                ftCommon_8007EBAC(fp, 1, 0);
-                fp->x21F0 = ftCo_80091274;
-                fp->take_dmg_cb = ftCo_80090B48;
-            }
-        }
-    }
+
+    effect_joint = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
+    bubble_ratio = &fp->co_attrs.bubble_ratio;
+    param = fp->x34_scale.y * *bubble_ratio / p_ftCommonData->x7A0;
+
+    efAsync_Spawn(fp->gobj, &GET_FIGHTER(fp->gobj)->x60C, 3, 1045,
+                  effect_joint, &param);
+    fp->x2219_b0 = true;
+    ftColl_8007B0C0(fp->gobj, Intangible);
+
+    sp20 = ftCo_803B74B0;
+
+    sp2C.parts[0] = ftParts_8007500C(fp, FtPart_XRotN);
+    sp2C.parts[1] = FtPart_TransN;
+    sp2C.parts[2] = FtPart_TopN;
+    sp2C.vec1 = sp2C.vec2 = sp20;
+    sp2C.scale = *bubble_ratio;
+
+    ftColl_8007B5AC(fp, fp->hurt_capsules, &sp2C);
+    ftCommon_8007EBAC(fp, 1, 0);
+
+    fp->x21F0 = ftCo_80091274;
+    fp->take_dmg_cb = ftCo_80090B48;
 }
 
 void ftCo_80091274(ftCo_GObj* gobj)
