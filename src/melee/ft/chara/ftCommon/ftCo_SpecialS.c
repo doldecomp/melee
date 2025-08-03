@@ -15,7 +15,7 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 0960CC */ static void doEnter(ftCo_GObj* gobj);
+/* 0960CC */ static void doEnter(Fighter_GObj* gobj);
 
 /// Check @c SpecialS input without entering the state.
 bool ftCo_SpecialS_HasInput(Fighter* fp)
@@ -28,9 +28,9 @@ bool ftCo_SpecialS_HasInput(Fighter* fp)
     return false;
 }
 
-bool ftCo_SpecialS_CheckInput(ftCo_GObj* gobj)
+bool ftCo_SpecialS_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (ftData_SpecialS[fp->kind] == NULL) {
         return false;
     }
@@ -44,10 +44,10 @@ bool ftCo_SpecialS_CheckInput(ftCo_GObj* gobj)
     return false;
 }
 
-static void doEnter(ftCo_GObj* gobj)
+static void doEnter(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->gr_vel += -(fp->gr_vel * (1 - fp->co_attrs.xB8)) *
                   ft_GetGroundFrictionMultiplier(fp);
     ftData_SpecialS[fp->kind](gobj);

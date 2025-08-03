@@ -15,9 +15,9 @@
 
 #include <dolphin/mtx.h>
 
-/* 097EAC */ static void ftCo_80098324(ftCo_GObj* gobj, FtMotionId msid);
+/* 097EAC */ static void ftCo_80098324(Fighter_GObj* gobj, FtMotionId msid);
 
-static inline bool inlineA0(ftCo_Fighter* fp)
+static inline bool inlineA0(Fighter* fp)
 {
     if (ABS(fp->input.lstick.x) >= p_ftCommonData->x248 &&
         ftCo_GetLStickAngle(fp) < p_ftCommonData->x20)
@@ -28,9 +28,9 @@ static inline bool inlineA0(ftCo_Fighter* fp)
     }
 }
 
-bool ftCo_Down_CheckInput(ftCo_GObj* gobj)
+bool ftCo_Down_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     float stick_x;
     if (ftCo_800DF678(fp)) {
         stick_x = fp->input.cstick.x;
@@ -53,35 +53,35 @@ bool ftCo_Down_CheckInput(ftCo_GObj* gobj)
     return true;
 }
 
-void ftCo_80098324(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_80098324(Fighter_GObj* gobj, FtMotionId msid)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007CCE8(fp);
 }
 
-void ftCo_Down_Anim(ftCo_GObj* gobj)
+void ftCo_Down_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftCo_Down_IASA(ftCo_GObj* gobj) {}
+void ftCo_Down_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_Down_Phys(ftCo_GObj* gobj)
+void ftCo_Down_Phys(Fighter_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
-void ftCo_Down_Coll(ftCo_GObj* gobj)
+void ftCo_Down_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }
 
-static inline bool inlineB0(ftCo_Fighter* fp)
+static inline bool inlineB0(Fighter* fp)
 {
     if (fp->x67C < p_ftCommonData->x24C || fp->x67D < p_ftCommonData->x24C) {
         return true;
@@ -89,9 +89,9 @@ static inline bool inlineB0(ftCo_Fighter* fp)
     return false;
 }
 
-bool ftCo_80098400(ftCo_GObj* gobj)
+bool ftCo_80098400(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (inlineB0(fp) || ftCo_800DF644(fp)) {
         FtMotionId msid = fp->motion_id == ftCo_MS_DownBoundU
                               ? ftCo_MS_DownAttackU

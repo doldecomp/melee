@@ -52,7 +52,7 @@ int ftCo_803C5A68[] = {
 
 /// #ftCo_800A0148
 
-void ftCo_800A0384(ftCo_Fighter* fp)
+void ftCo_800A0384(Fighter* fp)
 {
     if (fp->cur_pos.y + fp->x1A88.x558 > Stage_GetBlastZoneTopOffset()) {
         ftCo_800B46B8(fp, 0x80, 0);
@@ -83,7 +83,7 @@ void ftCo_800A0384(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 0x7F);
 }
 
-void ftCo_800A0508(ftCo_Fighter* fp)
+void ftCo_800A0508(Fighter* fp)
 {
     ftCo_800B46B8(fp, 0x80, 0);
     ftCo_800B46B8(fp, 0x81, 0);
@@ -104,7 +104,7 @@ void ftCo_800A0508(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 0x7F);
 }
 
-void ftCo_800A05F4(ftCo_Fighter* fp)
+void ftCo_800A05F4(Fighter* fp)
 {
     if (fp->cur_pos.y + fp->x1A88.x558 > Stage_GetBlastZoneTopOffset()) {
         ftCo_800B46B8(fp, 0x80, 0);
@@ -137,7 +137,7 @@ void ftCo_800A05F4(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 0x7F);
 }
 
-void ftCo_800A0798(ftCo_Fighter* fp)
+void ftCo_800A0798(Fighter* fp)
 {
     if (ftCo_800A1CA8(fp)) {
         ftCo_800B46B8(fp, 0x80, 0);
@@ -166,7 +166,7 @@ void ftCo_800A0798(ftCo_Fighter* fp)
 
 /// #ftCo_800A08F0
 
-void ftCo_800A0AF4(ftCo_Fighter* fp)
+void ftCo_800A0AF4(Fighter* fp)
 {
     float rand = HSD_Randf();
     if (rand < 0.6f) {
@@ -203,7 +203,7 @@ void ftCo_800A0AF4(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 0x7F);
 }
 
-void ftCo_800A0C8C(ftCo_Fighter* fp)
+void ftCo_800A0C8C(Fighter* fp)
 {
     ftCo_800B463C(fp, 127);
 }
@@ -311,7 +311,7 @@ void ftCo_800A0DA4(Fighter* fp)
     M2C_FIELD(temp_r28, float*, 0x568) = var_f29;
 }
 
-bool ftCo_800A0F00(ftCo_GObj* gobj)
+bool ftCo_800A0F00(Fighter_GObj* gobj)
 {
     struct Fighter_x1A88_t* data = &GET_FIGHTER(gobj)->x1A88;
     PAD_STACK(4);
@@ -349,7 +349,7 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
 
 /// #ftCo_800A101C
 
-float ftCo_800A17E4(ftCo_Fighter* fp)
+float ftCo_800A17E4(Fighter* fp)
 {
     float result;
     if ((s8) fp->x1A88.x4 > 0) {
@@ -372,24 +372,24 @@ static inline float inlineB0(s8 val, float a, float b)
     return ret > +1.0 ? +1.0F : ret < -1.0 ? -1.0F : ret;
 }
 
-float ftCo_800A1874(ftCo_Fighter* fp)
+float ftCo_800A1874(Fighter* fp)
 {
     return inlineB0(fp->x1A88.x5, 127.0f, deg_to_rad);
 }
 
-float ftCo_800A1904(ftCo_Fighter* fp)
+float ftCo_800A1904(Fighter* fp)
 {
     float ret = fp->x1A88.x8 / 255.0;
     return ret > 1.0 ? 1.0F : ret;
 }
 
-float ftCo_800A1948(ftCo_Fighter* fp)
+float ftCo_800A1948(Fighter* fp)
 {
     float ret = fp->x1A88.x9 / 255.0;
     return ret > 1.0 ? 1.0F : ret;
 }
 
-HSD_Pad ftCo_800A198C(ftCo_Fighter* fp)
+HSD_Pad ftCo_800A198C(Fighter* fp)
 {
     return fp->x1A88.x0;
 }
@@ -399,7 +399,7 @@ float ftCo_800A1994(Fighter* fp)
     return inlineB0(fp->x1A88.x6, 127.0f, 128.0f);
 }
 
-float ftCo_800A1A24(ftCo_Fighter* fp)
+float ftCo_800A1A24(Fighter* fp)
 {
     return inlineB0(fp->x1A88.x7, 127.0f, deg_to_rad);
 }
@@ -420,7 +420,7 @@ bool ftCo_800A1B38(enum_t arg0)
     return false;
 }
 
-bool ftCo_800A1BA8(ftCo_Fighter* fp)
+bool ftCo_800A1BA8(Fighter* fp)
 {
     Fighter* other_fp = fp->x1A88.x44;
     if (other_fp == NULL) {
@@ -445,7 +445,7 @@ bool ftCo_800A1BA8(ftCo_Fighter* fp)
     }
 }
 
-bool ftCo_800A1C44(ftCo_Fighter* fp)
+bool ftCo_800A1C44(Fighter* fp)
 {
     if (fp->x2219_b1) {
         return true;
@@ -462,7 +462,7 @@ bool ftCo_800A1C44(ftCo_Fighter* fp)
     return false;
 }
 
-bool ftCo_800A1CA8(ftCo_Fighter* fp)
+bool ftCo_800A1CA8(Fighter* fp)
 {
     return fp->x2168 ? true : false;
 }
@@ -499,7 +499,7 @@ bool ftCo_800A1F98(int x, float y)
     return false;
 }
 
-bool ftCo_800A2040(ftCo_Fighter* fp)
+bool ftCo_800A2040(Fighter* fp)
 {
     if (Player_8003248C(fp->player_id, fp->x221F_b4) != 1) {
         return false;
@@ -512,13 +512,13 @@ bool ftCo_800A2040(ftCo_Fighter* fp)
 
 /// #ftCo_800A20A0
 
-void ftCo_800A20A0(ftCo_Fighter* fp)
+void ftCo_800A20A0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     PAD_STACK(2 * 4);
 
     if (fp->x1A88.x44 != NULL && fp->ground_or_air == GA_Ground) {
-        ftCo_Fighter* other_fp = data->x44;
+        Fighter* other_fp = data->x44;
         float diff_y, diff_x;
         diff_x = fp->cur_pos.x - other_fp->cur_pos.x;
         diff_y = fp->cur_pos.y - other_fp->cur_pos.y;
@@ -554,7 +554,7 @@ bool ftCo_800A2170(Fighter* fp0, Fighter* fp1)
     return false;
 }
 
-bool ftCo_800A21FC(ftCo_Fighter* fp)
+bool ftCo_800A21FC(Fighter* fp)
 {
     Vec3 vec;
     mp_UnkStruct0* data0;
@@ -747,7 +747,7 @@ float ftCo_800A2A70(Fighter* fp, bool arg1)
     }
 }
 
-bool ftCo_800A2BD4(ftCo_Fighter* fp)
+bool ftCo_800A2BD4(Fighter* fp)
 {
     return fp->facing_dir * (fp->x1A88.x54.x - fp->cur_pos.x) >= 0.0 ? true
                                                                      : false;
@@ -755,7 +755,7 @@ bool ftCo_800A2BD4(ftCo_Fighter* fp)
 
 bool ftCo_800A2C08(Fighter* fp)
 {
-    ftCo_Fighter* other_fp = fp->x1A88.x44;
+    Fighter* other_fp = fp->x1A88.x44;
     if (other_fp == NULL) {
         return true;
     }
@@ -787,7 +787,7 @@ enum_t ftCo_800A3134(Fighter* fp)
     }
 }
 
-bool ftCo_IsGrabbing(ftCo_Fighter* fp)
+bool ftCo_IsGrabbing(Fighter* fp)
 {
     if (fp->motion_id == ftCo_MS_CatchWait) {
         return true;
@@ -814,7 +814,7 @@ bool ftCo_IsGrabbing(ftCo_Fighter* fp)
     return false;
 }
 
-bool ftCo_800A3200(ftCo_Fighter* fp)
+bool ftCo_800A3200(Fighter* fp)
 {
     switch (fp->motion_id) {
     case ftCo_MS_CliffCatch:
@@ -828,7 +828,7 @@ bool ftCo_800A3200(ftCo_Fighter* fp)
 
 /// #ftCo_800A3234
 
-static inline bool inlineC0(ftCo_Fighter* fp)
+static inline bool inlineC0(Fighter* fp)
 {
     if (fp->coll_data.env_flags & MPCOLL_WALL) {
         return true;
@@ -837,7 +837,7 @@ static inline bool inlineC0(ftCo_Fighter* fp)
     }
 }
 
-bool ftCo_800A3498(ftCo_Fighter* fp)
+bool ftCo_800A3498(Fighter* fp)
 {
     struct Fighter_x1A88_t* temp_r4 = &fp->x1A88;
     if (fp->x1A88.xFA_b5) {
@@ -865,7 +865,7 @@ bool ftCo_800A3498(ftCo_Fighter* fp)
     return false;
 }
 
-bool ftCo_800A3554(ftCo_Fighter* fp, float arg1)
+bool ftCo_800A3554(Fighter* fp, float arg1)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (!ftCo_800A21FC(fp)) {
@@ -887,7 +887,7 @@ bool ftCo_800A3554(ftCo_Fighter* fp, float arg1)
     }
 }
 
-bool ftCo_800A3710(ftCo_Fighter* fp)
+bool ftCo_800A3710(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     Fighter* other_fp = fp->x1A88.x4C;
@@ -952,7 +952,7 @@ bool ftCo_IsAlly(Fighter* fp0, Fighter* fp1)
 
 /// #ftCo_800A4768
 
-void ftCo_800A49B4(ftCo_Fighter* fp)
+void ftCo_800A49B4(Fighter* fp)
 {
     float spC;
     float temp_f2;
@@ -979,7 +979,7 @@ void ftCo_800A49B4(ftCo_Fighter* fp)
     M2C_FIELD((fp + 0x1A88), float*, 0x5C) = var_f4;
 }
 
-static inline bool inlineD0(ftCo_Fighter* fp, ftCo_Fighter* fp1)
+static inline bool inlineD0(Fighter* fp, Fighter* fp1)
 {
     float y, x;
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -996,7 +996,7 @@ static inline bool inlineD0(ftCo_Fighter* fp, ftCo_Fighter* fp1)
     return false;
 }
 
-static inline bool inlineD1(ftCo_Fighter* fp)
+static inline bool inlineD1(Fighter* fp)
 {
     Fighter_GObj* gobj = fp->gobj;
     if (fp->x221F_b3 || fp->x2224_b2 || ftCo_800A0F00(gobj) ||
@@ -1008,21 +1008,21 @@ static inline bool inlineD1(ftCo_Fighter* fp)
     }
 }
 
-static inline void inlineD3(ftCo_Fighter* fp) {}
+static inline void inlineD3(Fighter* fp) {}
 
-ftCo_Fighter* ftCo_800A4A40(ftCo_Fighter* fp)
+Fighter* ftCo_800A4A40(Fighter* fp)
 {
     if (fp == NULL) {
         return NULL;
     }
     {
-        ftCo_GObj* cur;
-        ftCo_Fighter* cur_fp = NULL;
+        Fighter_GObj* cur;
+        Fighter* cur_fp = NULL;
         float var_f31;
         PAD_STACK(6 * 4);
         for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
             if (fp->gobj != cur) {
-                ftCo_Fighter* fp1 = GET_FIGHTER(cur);
+                Fighter* fp1 = GET_FIGHTER(cur);
                 if (!inlineD0(fp, fp1)) {
                     if (!inlineD1(fp1)) {
                         if (cur_fp == NULL) {
@@ -1031,7 +1031,7 @@ ftCo_Fighter* ftCo_800A4A40(ftCo_Fighter* fp)
                             cur_fp = fp1;
                             var_f31 = sqrtf__Ff(SQ(x) + SQ(y));
                         } else {
-                            ftCo_Fighter* fp1 = cur->user_data;
+                            Fighter* fp1 = cur->user_data;
                             float x = fp->cur_pos.x - fp1->cur_pos.x,
                                   y = fp->cur_pos.y - fp1->cur_pos.y,
                                   temp_f1_3 = sqrtf__Ff(SQ(x) + SQ(y));
@@ -1054,8 +1054,8 @@ ftCo_Fighter* ftCo_800A4A40(ftCo_Fighter* fp)
 
 /// #ftCo_800A50D4
 
-static inline void inlineD2(ftCo_Fighter* var_r28, ftCo_Fighter* fp,
-                            ftCo_Fighter* temp_r31, ftCo_Fighter* temp_r29)
+static inline void inlineD2(Fighter* var_r28, Fighter* fp,
+                            Fighter* temp_r31, Fighter* temp_r29)
 {
     f32 var_f31 = 0;
     f32 temp_f1;
@@ -1074,7 +1074,7 @@ static inline void inlineD2(ftCo_Fighter* var_r28, ftCo_Fighter* fp,
             temp_f2 = fp->cur_pos.x - M2C_FIELD(temp_r29, f32*, 0xB0);
             var_f31 = sqrtf__Ff((temp_f2 * temp_f2) + (temp_f1 * temp_f1));
         } else {
-            ftCo_Fighter* fp1;
+            Fighter* fp1;
             fp1 = GET_FIGHTER(var_r27);
             temp_f1_2 = fp->cur_pos.y - M2C_FIELD(fp1, f32*, 0xB4);
             temp_f2_2 = fp->cur_pos.x - M2C_FIELD(fp1, f32*, 0xB0);
@@ -1088,7 +1088,7 @@ static inline void inlineD2(ftCo_Fighter* var_r28, ftCo_Fighter* fp,
     }
 }
 
-Fighter* ftCo_800A50D4(ftCo_Fighter* fp)
+Fighter* ftCo_800A50D4(Fighter* fp)
 {
     Fighter_GObj* temp_r30;
     HSD_GObj* var_r27;
@@ -1122,14 +1122,14 @@ loop_24:
     return var_r28;
 }
 
-ftCo_Fighter* ftCo_800A5294(ftCo_Fighter* fp, int player_id)
+Fighter* ftCo_800A5294(Fighter* fp, int player_id)
 {
     PAD_STACK(2 * 4);
     if (fp == NULL) {
         return NULL;
     }
     {
-        ftCo_Fighter* cur_fp;
+        Fighter* cur_fp;
         HSD_GObj* cur;
         for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
             if (fp->gobj != cur) {
@@ -1147,16 +1147,16 @@ ftCo_Fighter* ftCo_800A5294(ftCo_Fighter* fp, int player_id)
 
 /// #ftCo_800A53DC
 
-ftCo_Fighter* ftCo_800A589C(Fighter* fp)
+Fighter* ftCo_800A589C(Fighter* fp)
 {
     if (fp == NULL) {
         return NULL;
     }
     {
-        ftCo_GObj* cur;
+        Fighter_GObj* cur;
         for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
             if (fp->gobj != cur) {
-                ftCo_Fighter* cur_fp = GET_FIGHTER(cur);
+                Fighter* cur_fp = GET_FIGHTER(cur);
                 if (fp->player_id == cur_fp->player_id) {
                     if (cur_fp->x221F_b3) {
                         return NULL;
@@ -1169,7 +1169,7 @@ ftCo_Fighter* ftCo_800A589C(Fighter* fp)
     return NULL;
 }
 
-bool ftCo_800A5908(ftCo_Fighter* fp)
+bool ftCo_800A5908(Fighter* fp)
 {
     if (fp->motion_id == ftCo_MS_DeadUpFallHitCameraFlat) {
         return true;
@@ -1197,7 +1197,7 @@ bool ftCo_800A5944(Item* ip)
     return false;
 }
 
-bool ftCo_800A5980(ftCo_Fighter* fp)
+bool ftCo_800A5980(Fighter* fp)
 {
     if (fp->motion_id >= ftCo_MS_LandingFallSpecial &&
         fp->motion_id < ftCo_MS_Attack100Start)
@@ -1265,7 +1265,7 @@ bool ftCo_800A5A5C(Fighter* fp)
     }
 }
 
-bool ftCo_800A5A90(ftCo_Fighter* fp)
+bool ftCo_800A5A90(Fighter* fp)
 {
     if (fp->motion_id >= ftCo_MS_SwordSwing1 &&
         fp->motion_id <= ftCo_MS_StarRodSwingDash)
@@ -1342,7 +1342,7 @@ void ftCo_800A8DE4(Fighter* fp)
 
 /// #ftCo_800A8EB0
 
-static inline float inverseInlineE0(ftCo_Fighter* fp)
+static inline float inverseInlineE0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     f32 cur_pos_x = fp->cur_pos.x;
@@ -1353,7 +1353,7 @@ static inline float inverseInlineE0(ftCo_Fighter* fp)
     }
 }
 
-static inline float inlineE0(ftCo_Fighter* fp)
+static inline float inlineE0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (data->x54.x - fp->cur_pos.x < 0.0f) {
@@ -1363,7 +1363,7 @@ static inline float inlineE0(ftCo_Fighter* fp)
     }
 }
 
-void ftCo_800A92CC(ftCo_Fighter* fp)
+void ftCo_800A92CC(Fighter* fp)
 {
     if (inverseInlineE0(fp) > 60.0) {
         ftCo_800B46B8(fp, 0x81, 0x7F);
@@ -1395,7 +1395,7 @@ void ftCo_800A92CC(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 0x7F);
 }
 
-void ftCo_800A949C(ftCo_Fighter* fp)
+void ftCo_800A949C(Fighter* fp)
 {
     if (inlineE0(fp) > 30.0) {
         ftCo_800B46B8(fp, 0x80, 0);
@@ -1422,7 +1422,7 @@ void ftCo_800A949C(ftCo_Fighter* fp)
     ftCo_800B463C(fp, 0x7F);
 }
 
-void ftCo_800A963C(ftCo_Fighter* fp)
+void ftCo_800A963C(Fighter* fp)
 {
     PAD_STACK(4 * 14);
     ftCo_800B46B8(fp, 0x81, 0x58);
@@ -1439,7 +1439,7 @@ void ftCo_800A963C(ftCo_Fighter* fp)
 
 /// #ftCo_800A9CB4
 
-void ftCo_800AA320(ftCo_Fighter* fp, int* arg1, int* arg2)
+void ftCo_800AA320(Fighter* fp, int* arg1, int* arg2)
 {
     if (fp->kind == FTKIND_NANA) {
         *arg1 = 0x40;
@@ -1494,7 +1494,7 @@ void ftCo_800AA320(ftCo_Fighter* fp, int* arg1, int* arg2)
 
 /// #ftCo_800AA844
 
-static inline bool inlineF0(ftCo_Fighter* fp)
+static inline bool inlineF0(Fighter* fp)
 {
     if (fp->motion_id == ftCo_MS_Ottotto ||
         fp->motion_id == ftCo_MS_OttottoWait)
@@ -1504,7 +1504,7 @@ static inline bool inlineF0(ftCo_Fighter* fp)
     return false;
 }
 
-void ftCo_800AABC8(ftCo_Fighter* fp)
+void ftCo_800AABC8(Fighter* fp)
 {
     PAD_STACK(2 * 4);
     if (inlineF0(fp)) {
@@ -1530,7 +1530,7 @@ void ftCo_800AABC8(ftCo_Fighter* fp)
 
 /// #ftCo_800AB224
 
-void ftCo_800ABA34(ftCo_Fighter* fp)
+void ftCo_800ABA34(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (fp->x1A88.xC == 11) {
@@ -1568,7 +1568,7 @@ void ftCo_800ABA34(ftCo_Fighter* fp)
 
 /// #ftCo_800ABBA8
 
-static inline bool inlineG0(ftCo_Fighter* fp)
+static inline bool inlineG0(Fighter* fp)
 {
     enum_t temp_r0 = fp->motion_id;
     bool ret;
@@ -1603,7 +1603,7 @@ void ftCo_800AC30C(Fighter* fp)
     }
 }
 
-static inline enum_t inlineH0(ftCo_Fighter* fp)
+static inline enum_t inlineH0(Fighter* fp)
 {
     if (fp->motion_id == ftCo_MS_BarrelWait) {
         return 1;
@@ -1614,7 +1614,7 @@ static inline enum_t inlineH0(ftCo_Fighter* fp)
     return 0;
 }
 
-static inline void inlineH1(ftCo_Fighter* fp, struct Fighter_x1A88_t* data)
+static inline void inlineH1(Fighter* fp, struct Fighter_x1A88_t* data)
 {
     if (data->x7C % ((10 - data->x10) * 5) == 0 && HSD_Randf() < 0.5f) {
         ftCo_800B463C(fp, 1);
@@ -1626,7 +1626,7 @@ static inline void inlineH1(ftCo_Fighter* fp, struct Fighter_x1A88_t* data)
     }
 }
 
-void ftCo_800AC434(ftCo_Fighter* fp)
+void ftCo_800AC434(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     Vec3 vec;
@@ -1664,7 +1664,7 @@ void ftCo_800AC434(ftCo_Fighter* fp)
 
 /// #ftCo_800ACD5C
 
-void ftCo_800AD42C(ftCo_Fighter* fp)
+void ftCo_800AD42C(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (!ftCo_800A3554(fp, 1.0f)) {
@@ -1709,7 +1709,7 @@ void ftCo_800AD42C(ftCo_Fighter* fp)
 
 /// #ftCo_800AF78C
 
-void ftCo_800AFC40(ftCo_Fighter* fp)
+void ftCo_800AFC40(Fighter* fp)
 {
     Fighter* temp_r3_3;
     Item_GObj* temp_r3;
@@ -1801,7 +1801,7 @@ void ftCo_800AFC40(ftCo_Fighter* fp)
 
 /// #ftCo_800B04DC
 
-static inline void inlineI0(ftCo_Fighter* fp, struct Fighter_x1A88_t* data)
+static inline void inlineI0(Fighter* fp, struct Fighter_x1A88_t* data)
 {
     data->xF8_b0 = false;
     data->xF9_b2 = true;
@@ -1840,7 +1840,7 @@ static inline bool inlineI2(Item_GObj* gobj)
     }
 }
 
-static inline void inlineI3(ftCo_Fighter* fp, struct Fighter_x1A88_t* data)
+static inline void inlineI3(Fighter* fp, struct Fighter_x1A88_t* data)
 {
     struct Fighter_x1A88_t* fp_data = &fp->x1A88;
     if (inlineI1(fp_data) != 0) {
@@ -1852,7 +1852,7 @@ static inline void inlineI3(ftCo_Fighter* fp, struct Fighter_x1A88_t* data)
     }
 }
 
-void ftCo_800B0760(ftCo_Fighter* fp)
+void ftCo_800B0760(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     PAD_STACK(2 * 4);
@@ -1904,7 +1904,7 @@ void ftCo_800B0918(Fighter* fp0, Fighter* fp1)
     }
 }
 
-static inline bool inlineJ0(ftCo_Fighter* fp, ftCo_Fighter* nana_fp)
+static inline bool inlineJ0(Fighter* fp, Fighter* nana_fp)
 {
     if (fp->motion_id == ftCo_MS_FireFlowerShoot ||
         fp->motion_id == ftCo_MS_FireFlowerShootAir)
@@ -1920,7 +1920,7 @@ static inline bool inlineJ0(ftCo_Fighter* fp, ftCo_Fighter* nana_fp)
     }
 }
 
-void ftCo_800B0AF4(ftCo_Fighter* fp)
+void ftCo_800B0AF4(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     Fighter* nana_fp = ftCo_800A589C(fp);
@@ -2075,7 +2075,7 @@ bool ftCo_800B0CA8(Fighter* fp0, Fighter* fp1)
     return 0;
 }
 
-static inline bool inlineK0(ftCo_Fighter* fp0)
+static inline bool inlineK0(Fighter* fp0)
 {
     if (fp0->motion_id >= 361 && fp0->motion_id <= 366) {
         return true;

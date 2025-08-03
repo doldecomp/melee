@@ -6,8 +6,6 @@
 #include "ft/forward.h"
 
 struct UNK_SAMUS_S2;
-typedef Fighter ftCo_Fighter;
-typedef Fighter_GObj ftCo_GObj;
 typedef struct ftCollisionBox ftCollisionBox;
 
 typedef enum ftCo_JumpInput {

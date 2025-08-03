@@ -95,7 +95,7 @@ extern char* ftCo_804D3B7C;
 
 /// #ftCo_800B3E04
 
-void ftCo_800B462C(ftCo_Fighter* fp)
+void ftCo_800B462C(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     data->x554.x0_p = &data->x454;
@@ -103,7 +103,7 @@ void ftCo_800B462C(ftCo_Fighter* fp)
 
 /// #ftCo_800B463C
 
-void ftCo_800B463C(ftCo_Fighter* fp, int arg1)
+void ftCo_800B463C(Fighter* fp, int arg1)
 {
     struct Fighter_x1A88_t* temp_r31 = (struct Fighter_x1A88_t*) &fp->x1A88;
     if (fp->x1A88.x554.x0_u32 >= temp_r31->x554.x0_u32) {
@@ -175,7 +175,7 @@ void ftCo_800B4A78(Fighter* fp)
 
 /// #ftCo_800B920C
 
-void ftCo_800B92D4(ftCo_Fighter* fp)
+void ftCo_800B92D4(Fighter* fp)
 {
     PAD_STACK(4 * 4);
     if (fp->x1A88.x44 == NULL) {

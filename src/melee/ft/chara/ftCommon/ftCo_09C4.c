@@ -11,9 +11,9 @@
 
 #include <baselib/gobj.h>
 
-/* 09C540 */ static void ftCo_8009C540(ftCo_GObj* gobj);
+/* 09C540 */ static void ftCo_8009C540(Fighter_GObj* gobj);
 
-bool ftCo_8009C4F8(ftCo_GObj* gobj)
+bool ftCo_8009C4F8(Fighter_GObj* gobj)
 {
     if (ftCo_80099F1C(gobj)) {
         ftCo_8009C540(gobj);
@@ -22,7 +22,7 @@ bool ftCo_8009C4F8(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009C540(ftCo_GObj* gobj)
+void ftCo_8009C540(Fighter_GObj* gobj)
 {
     u8 _[16] = { 0 };
     Fighter* fp = gobj->user_data;

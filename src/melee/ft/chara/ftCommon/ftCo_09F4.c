@@ -20,7 +20,7 @@
 #include <baselib/lobj.h>
 #include <melee/sc/types.h>
 
-/* 09F480 */ static void ftCo_8009F480(ftCo_GObj* gobj);
+/* 09F480 */ static void ftCo_8009F480(Fighter_GObj* gobj);
 /* 09F54C */ static void ftCo_8009F54C(HSD_GObj* gobj, int code);
 
 static HSD_LObj* lobj0;
@@ -37,7 +37,7 @@ static LightList node1 = { &node0, NULL };
 
 static LightList* node2[] = { &node1, NULL };
 
-void ftCo_8009F480(ftCo_GObj* gobj)
+void ftCo_8009F480(Fighter_GObj* gobj)
 {
     HSD_LObjAnimAll(gobj->hsd_obj);
 }

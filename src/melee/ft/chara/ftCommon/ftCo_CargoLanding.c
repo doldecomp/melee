@@ -15,31 +15,31 @@
 
 #include <dolphin/mtx.h>
 
-void ftCo_8009BD4C(ftCo_GObj* gobj)
+void ftCo_8009BD4C(Fighter_GObj* gobj)
 {
     u8 _[20] = { 0 };
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ca.specialhi.vel.x = fp->x2CC->cargo_hold.x28_LANDING_LAG;
     ftCo_800D5AEC(gobj, fp->x2CC->x4_motion_state + 8, 1, 0, 0, 1);
     ftAnim_SetAnimRate(gobj, 0);
     ftCo_8009C5A4(fp->victim_gobj, 0x10A);
 }
 
-void ftCo_CargoLanding_Anim(ftCo_GObj* gobj)
+void ftCo_CargoLanding_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.ca.specialhi.vel.x <= 0) {
         ftCo_8009B518(gobj);
     }
     fp->mv.ca.specialhi.vel.x -= 1;
 }
 
-void ftCo_CargoLanding_Phys(ftCo_GObj* gobj)
+void ftCo_CargoLanding_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_CargoLanding_Coll(ftCo_GObj* gobj)
+void ftCo_CargoLanding_Coll(Fighter_GObj* gobj)
 {
     ftCo_CargoWait_Coll(gobj);
 }

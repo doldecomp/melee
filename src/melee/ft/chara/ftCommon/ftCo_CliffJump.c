@@ -17,10 +17,10 @@
 
 #include <dolphin/mtx.h>
 
-/* 09B1B8 */ static void ftCo_8009B1B8(ftCo_GObj* gobj);
-/* 09B2F8 */ static void ftCo_8009B2F8(ftCo_GObj* gobj);
+/* 09B1B8 */ static void ftCo_8009B1B8(Fighter_GObj* gobj);
+/* 09B2F8 */ static void ftCo_8009B2F8(Fighter_GObj* gobj);
 
-bool ftCo_8009B170(ftCo_GObj* gobj)
+bool ftCo_8009B170(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (ftCo_Jump_GetInput(gobj)) {
@@ -30,9 +30,9 @@ bool ftCo_8009B170(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009B1B8(ftCo_GObj* gobj)
+void ftCo_8009B1B8(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffJumpQuick1
                           : ftCo_MS_CliffJumpSlow1;
@@ -43,29 +43,29 @@ void ftCo_8009B1B8(ftCo_GObj* gobj)
     ftCo_CliffCatch_Phys(gobj);
 }
 
-void ftCo_CliffJump1_Anim(ftCo_GObj* gobj)
+void ftCo_CliffJump1_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_8009B2F8(gobj);
     }
 }
 
-void ftCo_CliffJump1_IASA(ftCo_GObj* gobj) {}
+void ftCo_CliffJump1_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_CliffJump1_Phys(ftCo_GObj* gobj)
+void ftCo_CliffJump1_Phys(Fighter_GObj* gobj)
 {
     ftCo_CliffCatch_Phys(gobj);
 }
 
-void ftCo_CliffJump1_Coll(ftCo_GObj* gobj)
+void ftCo_CliffJump1_Coll(Fighter_GObj* gobj)
 {
     ftCo_CliffClimb_Coll(gobj);
 }
 
-void ftCo_8009B2F8(ftCo_GObj* gobj)
+void ftCo_8009B2F8(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2
                           : ftCo_MS_CliffJumpSlow2;
@@ -77,10 +77,10 @@ void ftCo_8009B2F8(ftCo_GObj* gobj)
     fp->self_vel.y = fp->co_attrs.ledge_jump_vertical_velocity;
 }
 
-void ftCo_8009B390(ftCo_GObj* gobj, float force_mul)
+void ftCo_8009B390(Fighter_GObj* gobj, float force_mul)
 {
     u8 _[16] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_CliffJumpQuick1
                           ? ftCo_MS_CliffJumpQuick2
                           : ftCo_MS_CliffJumpSlow2;
@@ -90,18 +90,18 @@ void ftCo_8009B390(ftCo_GObj* gobj, float force_mul)
     fp->self_vel.y = fp->co_attrs.ledge_jump_vertical_velocity * force_mul;
 }
 
-void ftCo_CliffJump2_Anim(ftCo_GObj* gobj)
+void ftCo_CliffJump2_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_Fall_Enter(gobj);
     }
 }
 
-void ftCo_CliffJump2_IASA(ftCo_GObj* gobj) {}
+void ftCo_CliffJump2_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_CliffJump2_Phys(ftCo_GObj* gobj)
+void ftCo_CliffJump2_Phys(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (!fp->mv.co.cliffjump.x0) {
         fp->mv.co.cliffjump.x0 = true;
     } else {
@@ -109,7 +109,7 @@ void ftCo_CliffJump2_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CliffJump2_Coll(ftCo_GObj* gobj)
+void ftCo_CliffJump2_Coll(Fighter_GObj* gobj)
 {
     ft_800835B0(gobj, ftCo_80096CC8, ft_80082B1C);
 }

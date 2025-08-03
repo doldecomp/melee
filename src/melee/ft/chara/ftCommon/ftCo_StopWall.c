@@ -15,11 +15,11 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 09EE30 */ static void ftCo_8009EE30(ftCo_GObj* gobj);
+/* 09EE30 */ static void ftCo_8009EE30(Fighter_GObj* gobj);
 
-bool ftCo_8009EDA4(ftCo_GObj* gobj)
+bool ftCo_8009EDA4(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
     if ((fp->facing_dir == -1 && coll->env_flags & MPCOLL_FLAGS_B11) ||
         (fp->facing_dir == +1 && coll->env_flags & MPCOLL_FLAGS_B05))
@@ -33,10 +33,10 @@ bool ftCo_8009EDA4(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009EE30(ftCo_GObj* gobj)
+void ftCo_8009EE30(Fighter_GObj* gobj)
 {
     u8 _[4] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     CollData* coll = &fp->coll_data;
     {
         Vec3 vec;
@@ -60,18 +60,18 @@ void ftCo_8009EE30(ftCo_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftCo_StopWall_Anim(ftCo_GObj* gobj)
+void ftCo_StopWall_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftCo_StopWall_IASA(ftCo_GObj* gobj) {}
+void ftCo_StopWall_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_StopWall_Phys(ftCo_GObj* gobj) {}
+void ftCo_StopWall_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_StopWall_Coll(ftCo_GObj* gobj)
+void ftCo_StopWall_Coll(Fighter_GObj* gobj)
 {
     ft_800843FC(gobj);
 }

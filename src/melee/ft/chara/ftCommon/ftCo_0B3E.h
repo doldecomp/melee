@@ -6,16 +6,16 @@
 
 #include "ftCommon/forward.h"
 
-/* 0B3E04 */ void ftCo_800B3E04(ftCo_Fighter* fp);
-/* 0B463C */ void ftCo_800B463C(ftCo_Fighter* fp, int);
-/* 0B46B8 */ void ftCo_800B46B8(ftCo_Fighter* fp, int, int);
+/* 0B3E04 */ void ftCo_800B3E04(Fighter* fp);
+/* 0B463C */ void ftCo_800B463C(Fighter* fp, int);
+/* 0B46B8 */ void ftCo_800B46B8(Fighter* fp, int, int);
 
 /// @todo Static declarations belong in #ftCo_0B3E.c
-/* 0B462C */ static UNK_RET ftCo_800B462C(ftCo_Fighter* fp);
-/* 0B4778 */ static void ftCo_800B4778(ftCo_Fighter* fp, int, s8, s8);
-/* 0B4880 */ static void ftCo_800B4880(ftCo_Fighter* fp, int);
+/* 0B462C */ static UNK_RET ftCo_800B462C(Fighter* fp);
+/* 0B4778 */ static void ftCo_800B4778(Fighter* fp, int, s8, s8);
+/* 0B4880 */ static void ftCo_800B4880(Fighter* fp, int);
 /* 0B49F4 */ static UNK_RET ftCo_800B49F4(UNK_PARAMS);
-/* 0B4A78 */ static void ftCo_800B4A78(ftCo_Fighter* fp);
+/* 0B4A78 */ static void ftCo_800B4A78(Fighter* fp);
 /* 0B4AB0 */ static UNK_RET ftCo_800B4AB0(UNK_PARAMS);
 /* 0B52AC */ static UNK_RET ftCo_800B52AC(UNK_PARAMS);
 /* 0B5AB0 */ static UNK_RET ftCo_800B5AB0(UNK_PARAMS);
@@ -33,7 +33,7 @@
 /* 0B8A9C */ static UNK_RET ftCo_800B8A9C(UNK_PARAMS);
 /* 0B9020 */ static UNK_RET ftCo_800B9020(UNK_PARAMS);
 /* 0B920C */ static UNK_RET ftCo_800B920C(UNK_PARAMS);
-/* 0B92D4 */ static void ftCo_800B92D4(ftCo_Fighter* fp);
+/* 0B92D4 */ static void ftCo_800B92D4(Fighter* fp);
 /* 0B9340 */ static UNK_RET ftCo_800B9340(UNK_PARAMS);
 /* 0B9504 */ static UNK_RET ftCo_800B9504(UNK_PARAMS);
 /* 0B9704 */ static UNK_RET ftCo_800B9704(UNK_PARAMS);
@@ -41,7 +41,7 @@
 /* 0B98C8 */ static UNK_RET ftCo_800B98C8(UNK_PARAMS);
 /* 0B9A04 */ static UNK_RET ftCo_800B9A04(UNK_PARAMS);
 /* 0B9CBC */ static UNK_RET ftCo_800B9CBC(UNK_PARAMS);
-/* 0B9F6C */ static bool ftCo_800B9F6C(ftCo_Fighter* fp);
+/* 0B9F6C */ static bool ftCo_800B9F6C(Fighter* fp);
 /* 0B9F90 */ static UNK_RET ftCo_800B9F90(UNK_PARAMS);
 /* 0BA080 */ static UNK_RET ftCo_800BA080(UNK_PARAMS);
 /* 0BA160 */ static UNK_RET ftCo_800BA160(UNK_PARAMS);

@@ -329,7 +329,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
     char part;
     u32 temp_r4_2;
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     HitCapsule* hit;
     if ((((u8) M2C_FIELD(cmd_x8, u8*, 0xF) >> 3U) & 1) &&
         fp->x1064_thrownHitbox.owner == NULL)
@@ -436,7 +436,7 @@ void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     u8 _[8] = { 0 };
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     *(float*) (fp + (((((u16) *cmd_x8 >> 7U) & 7) * 0x138) + 0x930)) =
         0.003906f * (float) (*cmd_x8 & 0x7FFFFF);
     cmd->x8 += 4;
@@ -452,7 +452,7 @@ void ftAction_80071708(Fighter_GObj* gobj, FtCmdState* cmd)
     char* cmd_x8 = cmd->x8;
     u8 temp_r3 = (u8) cmd_x8[3];
     int temp_r0 = (temp_r3 >> 1U) & 1;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     HitCapsule* hit = &fp->x914[(((u32) *cmd_x8 >> 2U) & 0xFFFFFF)];
     switch (temp_r0) {
     case 0:
@@ -501,7 +501,7 @@ void ftAction_80071810(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int* cmd_x8 = (int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     u8 temp_r0 = *(u8*) cmd_x8 & 3;
 
     switch (temp_r0) {
@@ -523,7 +523,7 @@ void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     int cmd_x8 = *(int*) cmd->x8 & 0x03FFFFFF;
     switch (cmd_x8) {
     case 0:
@@ -539,35 +539,35 @@ void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071908(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->throw_flags_b1 = true;
     cmd->x8 += 4;
 }
 
 void ftAction_8007192C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->throw_flags_b2 = true;
     cmd->x8 += 4;
 }
 
 void ftAction_80071950(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->allow_interrupt = true;
     cmd->x8 += 4;
 }
 
 void ftAction_80071974(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->throw_flags_b0 = true;
     cmd->x8 += 4;
 }
 
 void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     int temp_r0 = *(int*) cmd->x8 & 0x03FFFFFF;
     switch (temp_r0) {
     case 0:
@@ -610,7 +610,7 @@ void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     if (!(*(int*) cmd->x8 & 0x03FFFFFF) || fp->x197C != NULL) {
         fp->x2218_b1 = true;
@@ -621,7 +621,7 @@ void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x2218_b2 = ftcmd;
     cmd->x8 += 4;
 }
@@ -637,7 +637,7 @@ void ftAction_80071B50(Fighter_GObj* gobj, FtCmdState* cmd)
     u8 temp_r6_2;
 
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     temp_r8 = (s8) ((u16) *cmd_x8 >> 2U);
     cmd->x8 = cmd_x8 + 4;
     if (temp_r8 < 0xA) {
@@ -715,7 +715,7 @@ void ftAction_80071CA4(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtSFX* sfx = fp->ft_data->x4C_sfx;
     FtSFXArr* sfx_smash = sfx->smash;
     if (sfx_smash == NULL) {
@@ -795,7 +795,7 @@ void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x221E_b4 = ftcmd;
     cmd->x8 += 4;
 }
@@ -803,7 +803,7 @@ void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071FA0(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x221E_b5 = ftcmd;
     cmd->x8 += 4;
 }
@@ -1148,7 +1148,7 @@ void ftAction_800729C4(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_800729D4(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     int temp_r0 = (u8) M2C_FIELD(cmd_x8, s8*, 0) & 3;
     int temp_r4 = ((u32) M2C_FIELD(cmd_x8, s8*, 0) >> 0xEU) & 0x3FF;
     switch (temp_r0) {
@@ -1198,7 +1198,7 @@ void ftAction_80072B04(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x221E_b1 = ftcmd;
     cmd->x8 += 4;
 }
@@ -1206,7 +1206,7 @@ void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80072B3C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int cmd_x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     cmd_x8 = *(int*) cmd->x8 << 7;
     fp->x2100 = cmd_x8 >> 7;
     fp->x2101_bits_8 = (*cmd->x8 << 30) >> 31;
@@ -1221,7 +1221,7 @@ void ftAction_80072B84(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     u32 cmd_x8 = *cmd->x8;
     // ftCo_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6,
     // fp,
@@ -1260,7 +1260,7 @@ void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80072CB0(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x2225_b2 = ftcmd;
     cmd->x8 += 4;
 }
@@ -1274,7 +1274,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
     Vec3 vec1;
     Vec3 vec0;
     u8 var_r5;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ivec1.y = 1;
     if (ft_80084BFC(gobj, &ivec1.z, &ivec1.y) != 0) {
         if (ivec1.z != -1) {
@@ -1323,7 +1323,7 @@ void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
     int* sp40;
     UNK_T sp38;
     IntVec3 ivec0;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Vec3 vec1;
     Vec3 vec0;
     ivec1.y = 1;
@@ -1480,7 +1480,7 @@ void ftAction_80073240(Fighter_GObj* fighter_gobj)
 
 void ftAction_80073354(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =
         fp->cur_anim_frame + fp->x898_unk;
@@ -1526,7 +1526,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
 void ftAction_8007349C(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =
         fp->cur_anim_frame + fp->x898_unk;

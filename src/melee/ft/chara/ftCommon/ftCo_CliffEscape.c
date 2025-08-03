@@ -11,9 +11,9 @@
 #include "ft/types.h"
 
 /// @todo Shared code with #ftCo_8009AEA4.
-void ftCo_8009B040(ftCo_GObj* gobj)
+void ftCo_8009B040(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffEscapeQuick
                           : ftCo_MS_CliffEscapeSlow;
@@ -25,19 +25,19 @@ void ftCo_8009B040(ftCo_GObj* gobj)
     ftCo_CliffCatch_Phys(gobj);
 }
 
-void ftCo_CliffEscape_Anim(ftCo_GObj* gobj)
+void ftCo_CliffEscape_Anim(Fighter_GObj* gobj)
 {
     ftCo_CliffClimb_Anim(gobj);
 }
 
-void ftCo_CliffEscape_IASA(ftCo_GObj* gobj) {}
+void ftCo_CliffEscape_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_CliffEscape_Phys(ftCo_GObj* gobj)
+void ftCo_CliffEscape_Phys(Fighter_GObj* gobj)
 {
     ftCo_CliffClimb_Phys(gobj);
 }
 
-void ftCo_CliffEscape_Coll(ftCo_GObj* gobj)
+void ftCo_CliffEscape_Coll(Fighter_GObj* gobj)
 {
     ftCo_CliffClimb_Coll(gobj);
 }

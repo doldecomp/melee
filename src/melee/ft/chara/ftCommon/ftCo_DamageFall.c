@@ -26,7 +26,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 
-void ftCo_80090574(ftCo_GObj* gobj)
+void ftCo_80090574(Fighter_GObj* gobj)
 {
     ft_80081DD4(gobj);
 }
@@ -94,7 +94,7 @@ void ftCo_80090718(Fighter* fp)
 
 void ftCo_80090780(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4((Fighter*)fp);
     }
@@ -108,11 +108,11 @@ void ftCo_80090780(HSD_GObj* gobj)
     }
 }
 
-void ftCo_DamageFall_Anim(ftCo_GObj* gobj) { }
+void ftCo_DamageFall_Anim(Fighter_GObj* gobj) {}
 
 void ftCo_DamageFall_IASA(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (!ftCo_800C5240(gobj)) {
         RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
         RETURN_IF(ftCo_80095328(gobj, 0));
@@ -130,12 +130,12 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
     RETURN_IF(ftCo_800C5CD4(gobj));
 }
 
-void ftCo_DamageFall_Phys(ftCo_GObj* gobj)
+void ftCo_DamageFall_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftCo_DamageFall_Coll(ftCo_GObj* gobj)
+void ftCo_DamageFall_Coll(Fighter_GObj* gobj)
 {
     ft_8008370C(gobj, ftCo_80090984);
 }

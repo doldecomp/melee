@@ -29,8 +29,8 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-/* 09D7E4 */ static void ftCo_800BBC88(ftCo_GObj* gobj);
-/* 0BBCC0 */ static void ftCo_800BBCC0(ftCo_GObj* gobj);
+/* 09D7E4 */ static void ftCo_800BBC88(Fighter_GObj* gobj);
+/* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 
 float const ftCo_804D8B68 = 0;
 float const ftCo_804D8B6C = 1;
@@ -40,16 +40,16 @@ extern char* ftCo_804D3B98;
 
 #pragma force_active on
 
-void ftCo_800BBC88(ftCo_GObj* gobj)
+void ftCo_800BBC88(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x221E_b0 = true;
     ftColl_8007B62C(gobj, 2);
 }
 
-void ftCo_800BBCC0(ftCo_GObj* gobj)
+void ftCo_800BBCC0(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj1 = gobj->hsd_obj;
     if (fp->mv.co.yoshiegg.x14 <= 0) {
         Fighter_UpdateModelScale(gobj);
@@ -130,7 +130,7 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     fp->accessory4_cb = ftCo_800BBCC0;
 }
 
-void ftCo_YoshiEgg_Anim(ftCo_GObj* gobj)
+void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
@@ -165,9 +165,9 @@ void ftCo_YoshiEgg_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_YoshiEgg_IASA(ftCo_GObj* gobj) {}
+void ftCo_YoshiEgg_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_YoshiEgg_Phys(ftCo_GObj* gobj)
+void ftCo_YoshiEgg_Phys(Fighter_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->ground_or_air == GA_Ground) {
         ft_80084F3C(gobj);
@@ -176,7 +176,7 @@ void ftCo_YoshiEgg_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_YoshiEgg_Coll(ftCo_GObj* gobj)
+void ftCo_YoshiEgg_Coll(Fighter_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->ground_or_air == GA_Ground) {
         ft_8008403C(gobj, ftCo_800BC3AC);
@@ -185,19 +185,19 @@ void ftCo_YoshiEgg_Coll(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800BC388(ftCo_GObj* gobj)
+void ftCo_800BC388(Fighter_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
 }
 
-void ftCo_800BC3AC(ftCo_GObj* gobj)
+void ftCo_800BC3AC(Fighter_GObj* gobj)
 {
     ftCommon_8007D5D4(GET_FIGHTER(gobj));
 }
 
-void ftCo_800BC3D0(ftCo_GObj* gobj)
+void ftCo_800BC3D0(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C = -(fp->dmg.x1838_percentTemp * ftYs_SpecialN_8012CDB4(gobj) -
                   fp->x1A4C);
     if (fp->dmg.x18CC == 3 && ftCo_800C0C88(fp->dmg.x18D0)) {

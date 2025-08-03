@@ -24,17 +24,17 @@ void ftCo_800BC438(Fighter_GObj* gobj)
     Fighter_UpdateModelScale(gobj);
 }
 
-void ftCo_800BC458(ftCo_GObj* gobj)
+void ftCo_800BC458(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= ftKp_SpecialS_80132DD0(fp->victim_gobj);
     fp->mv.co.capturekoopa.x0 =
         ftCommon_8007DC08(fp, ftKp_SpecialS_80132DE0(fp->victim_gobj));
 }
 
-void ftCo_800BC4A8(ftCo_GObj* gobj)
+void ftCo_800BC4A8(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.ca.specialhi.vel.y) {
         HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, FtPart_YRotN)].joint;
         float mv_xC = fp->mv.co.capturekoopa.xC;
@@ -62,11 +62,11 @@ void ftCo_800BC4A8(ftCo_GObj* gobj)
     }
 }
 
-static inline void inlineA0(ftCo_GObj* gobj, ftCo_GObj* vic_gobj,
+static inline void inlineA0(Fighter_GObj* gobj, Fighter_GObj* vic_gobj,
                             HSD_GObjEvent cb)
 {
-    ftCo_Fighter* vic_fp = GET_FIGHTER(vic_gobj);
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* vic_fp = GET_FIGHTER(vic_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
@@ -85,7 +85,7 @@ static inline void inlineA0(ftCo_GObj* gobj, ftCo_GObj* vic_gobj,
     ftCommon_8007E2FC(gobj);
 }
 
-void ftCo_800BC7E0(ftCo_GObj* gobj, ftCo_GObj* vic_gobj)
+void ftCo_800BC7E0(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
 {
     inlineA0(gobj, vic_gobj, ftCo_800BC9C8);
 }
@@ -98,7 +98,7 @@ void ftCo_CaptureKoopa_Phys(HSD_GObj* gobj) {}
 
 void ftCo_CaptureKoopa_Coll(HSD_GObj* gobj) {}
 
-void ftCo_800BC8D4(ftCo_GObj* gobj, ftCo_GObj* vic_gobj)
+void ftCo_800BC8D4(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
 {
     inlineA0(gobj, vic_gobj, ftCo_800BCAF4);
 }

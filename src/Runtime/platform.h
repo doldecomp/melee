@@ -93,7 +93,7 @@ typedef void (*Event)(void);
 #define F32_MAX 3.4028235e38f
 
 #define SQ(x) ((x) * (x))
-#define MIN(a, b) (((a) > (b)) ? (b) : (a))
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
 #ifdef __cplusplus

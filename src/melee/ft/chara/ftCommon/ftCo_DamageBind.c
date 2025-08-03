@@ -17,7 +17,7 @@
 
 #include <common_structs.h>
 
-bool ftCo_800C44CC(ftCo_GObj* gobj)
+bool ftCo_800C44CC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x1860_element == 12 && !fp->x2228_b2) {
@@ -47,7 +47,7 @@ static void commonCall(Fighter* fp)
                                      (Player_80033BB8(fp->player_id) + 1))));
 }
 
-void ftCo_800C4550(ftCo_GObj* gobj)
+void ftCo_800C4550(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -63,7 +63,7 @@ void ftCo_800C4550(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_DamageBind_Anim(ftCo_GObj* gobj)
+void ftCo_DamageBind_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x1A4C -= p_ftCommonData->x670;
@@ -73,14 +73,14 @@ void ftCo_DamageBind_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_DamageBind_IASA(ftCo_GObj* gobj) {}
+void ftCo_DamageBind_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_DamageBind_Phys(ftCo_GObj* gobj)
+void ftCo_DamageBind_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_DamageBind_Coll(ftCo_GObj* gobj)
+void ftCo_DamageBind_Coll(Fighter_GObj* gobj)
 {
     ft_80084280(gobj);
 }

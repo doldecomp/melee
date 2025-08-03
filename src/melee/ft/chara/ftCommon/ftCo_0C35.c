@@ -16,7 +16,7 @@
 #include <baselib/jobj.h>
 #include <MSL/trigf.h>
 
-static void inlineA0(ftCo_GObj* gobj)
+static void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x18F4 = p_ftCommonData->x648;
@@ -28,7 +28,7 @@ static void inlineA0(ftCo_GObj* gobj)
     Fighter_UnkRecursiveFunc_8006D044(gobj);
 }
 
-void ftCo_800C3598(ftCo_GObj* gobj)
+void ftCo_800C3598(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
@@ -52,7 +52,7 @@ void ftCo_800C3598(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800C36DC(ftCo_GObj* gobj)
+void ftCo_800C36DC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
@@ -63,7 +63,7 @@ void ftCo_800C36DC(ftCo_GObj* gobj)
                         -fp->coll_data.floor.normal.x * fp->xF0_ground_kb_vel);
 }
 
-void ftCo_800C37A0(ftCo_GObj* gobj)
+void ftCo_800C37A0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x18F4 != 0) {
