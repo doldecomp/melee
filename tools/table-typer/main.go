@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"encoding/binary"
 	"fmt"
 	"log"
 	"maps"
@@ -36,8 +35,8 @@ func main() {
 
 	fnTypes := make(map[string]FuncType)
 	for _, path := range hFiles {
-		for _, tableAddr := range parseTableDecls(path, tableTypeName) {
-			if tab, ok := tables[tableAddr]; ok && len(tab)%tableType.Sizeof == 0 {
+		for _, name := range parseTableDecls(path, tableTypeName) {
+			if tab, ok := tables[name]; ok && len(tab)%tableType.NumEntries == 0 {
 				maps.Insert(fnTypes, tableType.parse(tab))
 			}
 		}
@@ -72,22 +71,21 @@ func findFiles(dir string, ext string) []string {
 	return files
 }
 
-func extractAsmTables(paths []string) map[string][]byte {
-	appendAsmData := func(b []byte, line string) []byte {
-		entry := strings.TrimSpace(line)
-		for _, s := range []string{".4byte ", "it_", ".L_", "0x"} {
-			entry = strings.TrimPrefix(entry, s)
-		}
-		if len(entry) == 0 {
-			return b
-		} else if entry == "NULL" {
-			entry = "0"
-		}
-		i, _ := strconv.ParseInt(entry, 16, 64)
-		return binary.BigEndian.AppendUint32(b, uint32(i))
-	}
+type AsmTableEntry struct {
+	Size  int
+	Value string
+}
 
-	tables := make(map[string][]byte)
+func (e AsmTableEntry) Integer() int64 {
+	if e.Value == "NULL" {
+		return 0
+	}
+	val, _ := strconv.ParseInt(e.Value, 16, e.Size*8)
+	return val
+}
+
+func extractAsmTables(paths []string) map[string][]AsmTableEntry {
+	tables := make(map[string][]AsmTableEntry)
 	for _, path := range paths {
 		contents, err := os.ReadFile(path)
 		if err != nil {
@@ -101,20 +99,34 @@ func extractAsmTables(paths []string) map[string][]byte {
 
 			globals := strings.Split(string(section), ".global ")
 			for _, global := range globals {
-				if !strings.Contains(global, ".4byte") {
+				if !strings.Contains(global, "byte") {
 					continue
 				}
 
 				lines := strings.Split(global, "\n")
 				addr := strings.TrimSpace(lines[0])
-				if strings.Contains(addr, "_") {
-					addr = addr[strings.Index(addr, "_")+1:]
-				}
-				var data []byte
+				var entries []AsmTableEntry
 				for _, line := range lines[2:] {
-					data = appendAsmData(data, line)
+					fields := strings.Fields(line)
+					if len(fields) != 2 {
+						continue
+					}
+					var size int
+					switch fields[0] {
+					case ".byte":
+						size = 1
+					case ".2byte":
+						size = 2
+					case ".4byte":
+						size = 4
+					case ".8byte":
+						size = 8
+					default:
+						continue
+					}
+					entries = append(entries, AsmTableEntry{Size: size, Value: fields[1]})
 				}
-				tables[addr] = data
+				tables[addr] = entries
 			}
 		}
 	}

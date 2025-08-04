@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"encoding/binary"
 	"fmt"
 	"iter"
 	"log"
@@ -55,13 +54,13 @@ func (fs FuncSignature) String() string {
 }
 
 type TableType struct {
-	Sizeof int
-	Fields []CType
+	NumEntries int
+	Fields     []CType
 }
 
 var tableTypes = map[string]TableType{
 	"ItemStateTable": {
-		Sizeof: 16,
+		NumEntries: 4,
 		Fields: []CType{
 			nil, // "enum_t",
 			FuncType{"bool", []string{"Item_GObj*"}},
@@ -71,19 +70,18 @@ var tableTypes = map[string]TableType{
 	},
 }
 
-func (tt TableType) parse(asmData []byte) iter.Seq2[string, FuncType] {
-	buf := bytes.NewBuffer(asmData)
+func (tt TableType) parse(entries []AsmTableEntry) iter.Seq2[string, FuncType] {
 	return func(yield func(string, FuncType) bool) {
-		for buf.Len() > 0 {
-			entry := buf.Next(tt.Sizeof)
-			for i, field := range tt.Fields {
+		for len(entries) > 0 {
+			for _, field := range tt.Fields {
+				entry := entries[0]
+				entries = entries[1:]
 				switch t := field.(type) {
 				case FuncType:
-					addr := binary.BigEndian.Uint32(entry[i*4:])
-					if addr == 0 {
+					if entry.Value == "NULL" {
 						continue
 					}
-					if !yield(fmt.Sprintf("%X", addr), t) {
+					if !yield(entry.Value, t) {
 						return
 					}
 				}
@@ -104,12 +102,6 @@ func parseTableDecls(path string, tableType string) []string {
 			decls = append(decls, match[1])
 		}
 	}
-	// TODO: could be more generic
-	for i := range decls {
-		if u := strings.LastIndexByte(decls[i], '_'); u != -1 {
-			decls[i] = decls[i][u+1:]
-		}
-	}
 	return decls
 }
 
@@ -119,10 +111,10 @@ func fixSignatures(path string, fnTypes map[string]FuncType) int {
 		log.Fatalf("Failed to read file %s: %v", path, err)
 	}
 	n := 0
-	for addr, ft := range fnTypes {
-		if bytes.Contains(content, []byte(addr)) {
+	for name, ft := range fnTypes {
+		if bytes.Contains(content, []byte(name)) {
 			var changed bool
-			content, changed = fixSignature(content, addr, ft)
+			content, changed = fixSignature(content, name, ft)
 			if changed {
 				n++
 			}
@@ -136,11 +128,11 @@ func fixSignatures(path string, fnTypes map[string]FuncType) int {
 	return n
 }
 
-func fixSignature(content []byte, addr string, ft FuncType) ([]byte, bool) {
+func fixSignature(content []byte, name string, ft FuncType) ([]byte, bool) {
 	changed := false
 	lines := bytes.Split(content, []byte("\n"))
 	for i, line := range lines {
-		if orig, sig, ok := parseFuncSignature(addr, line); ok {
+		if orig, sig, ok := parseFuncSignature(name, line); ok {
 			if !sig.Type.equivalentTo(ft) {
 				sig.Type = ft
 				sig.ParamNames = sig.ParamNames[:len(ft.Params)] // bit of a hack
