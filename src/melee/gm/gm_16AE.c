@@ -1007,7 +1007,7 @@ void fn_8016C7F0(void)
     }
     lbAudioAx_80023694();
     lbAudioAx_80024C84();
-    ifTime_802F4248();
+    ifTime_FreeCountdown();
     if (lbl_8046B6A0.match_result == 4 && lbl_8046B6A0.x24C8.x4_3) {
         gm_80167858(Player_GetPlayerId(0), Player_GetNametagSlotID(0), 0xD, 0);
         Camera_80030E44(4, NULL);
@@ -1089,7 +1089,7 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
             lbAudioAx_80024030(5);
             ifAll_802F3394();
             if (arg0->x24C8.x3_7) {
-                ifTime_802F40B8();
+                ifTime_ShowTimers();
             }
             if (!arg0->x24C8.x3_6) {
                 var_r4 = 0;
@@ -1206,7 +1206,8 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
                     }
                 } else {
                     if (arg0->timer_seconds != 0) {
-                        if (arg0->timer_seconds < 6 && ifTime_802F4898() == 0)
+                        if (arg0->timer_seconds < 6 &&
+                            ifTime_IsTimerHidden() == 0)
                         {
                             temp_r3_4 =
                                 lbl_8046B6A0.unk_1C[arg0->timer_seconds];
@@ -1974,7 +1975,7 @@ void gm_8016E934_OnEnter(void* arg0)
     } else {
         ifStatus_802F6EA4(3, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
     }
-    ifTime_802F446C();
+    ifTime_CreateTimers();
     ifStatus_802F665C(tmp->rules.x0_3);
 }
 
@@ -2048,7 +2049,7 @@ void gm_8016EBC0_OnEnter(void* arg0)
     tmp->rules.x6 = true;
     fn_8016E730(tmp);
     ifStatus_802F6EA4(1, -1, -1, 0, (void*) fn_8016B7B4, fn_8016B7F8);
-    ifTime_802F446C();
+    ifTime_CreateTimers();
     ifStatus_802F665C(tmp->rules.x0_3);
 }
 
