@@ -21,8 +21,8 @@ void HSD_MtxInverseTranspose(Mtx src, Mtx dest);
 void HSD_MtxGetRotation(Mtx m, Vec3* vec);
 void HSD_MtxGetTranslate(Mtx mat, Vec3* vec);
 void HSD_MtxGetScale(Mtx arg0, Vec3* arg1);
-void HSD_MkRotationMtx(Mtx arg0, Vec3* arg1);
-void HSD_Mtx_8037A230(Mtx arg0, Quaternion* arg1);
+void HSD_MkRotationMtx(Mtx arg0, Quaternion* arg1);
+void HSD_MtxQuat(Mtx arg0, Quaternion* arg1);
 void HSD_MtxSRT(Mtx m, Vec3* vec1, Vec3* vec2, Vec3* vec3, Vec3* vec4);
 void HSD_MtxSRTQuat(Mtx arg0, Vec3* arg1, Quaternion* arg2, Vec3* arg3,
                     Vec3* arg4);

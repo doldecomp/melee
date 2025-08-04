@@ -509,7 +509,7 @@ struct ftCommonData {
     /* +784 */ float x784;
     /* +788 */ float x788;
     /* +78C */ float x78C;
-    /* +790 */ UNK_T x790;
+    /* +790 */ float x790;
     /* +794 */ float x794;
     /* +798 */ float x798;
     /* +79C */ float x79C;
@@ -733,10 +733,10 @@ typedef struct ftCo_DatAttrs {
     /* +12C fp+254 */ int x12C;
     /* +130 fp+258 */ float x130;
     /* +134 fp+25C */ float bubble_ratio;
-    /* +138 fp+260 */ int x138;
-    /* +13C fp+264 */ int x13C;
+    /* +138 fp+260 */ float x138;
+    /* +13C fp+264 */ float x13C;
     /* +140 fp+268 */ float x140;
-    /* +144 fp+26C */ int x144;
+    /* +144 fp+26C */ float x144;
     /* +148 fp+270 */ float respawn_platform_scale;
     /* +14C fp+274 */ float x14C;
     /* +150 fp+278 */ int x150;

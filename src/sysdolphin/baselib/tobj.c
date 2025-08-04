@@ -367,7 +367,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     Vec3 scale;
     Mtx m;
     Vec3 trans;
-    Quaternion rot;
+    Vec3 rot;
 
     u8 _[8];
 
@@ -399,7 +399,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     trans.z = tobj->translate.z;
 
     PSMTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
-    HSD_MkRotationMtx(m, (Vec3*) &rot);
+    HSD_MkRotationMtx(m, &rot);
     MTXConcat(m, tobj->mtx, tobj->mtx);
     MTXScale(m, scale.x, scale.y, scale.z);
     MTXConcat(m, tobj->mtx, tobj->mtx);

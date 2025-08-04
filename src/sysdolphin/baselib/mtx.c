@@ -355,7 +355,7 @@ void HSD_MkRotationMtx(Mtx arg0, Vec3* arg1)
     arg0[2][3] = 0;
 }
 
-void HSD_Mtx_8037A230(Mtx arg0, Quaternion* arg1)
+void HSD_MtxQuat(Mtx arg0, Quaternion* arg1)
 {
     MTXQuat(arg0, arg1);
 }
