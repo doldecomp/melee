@@ -7,9 +7,9 @@
 
 #include "it/items/types.h"
 
-/* 2D66F8 */ UNK_RET it_802D66F8(UNK_PARAMS);
-/* 2D6740 */ UNK_RET it_802D6740(UNK_PARAMS);
-/* 2D6798 */ UNK_RET it_802D6798(UNK_PARAMS);
+/* 2D66F8 */ bool it_802D66F8(Item_GObj* gobj);
+/* 2D6740 */ void it_802D6740(Item_GObj* gobj);
+/* 2D6798 */ bool it_802D6798(Item_GObj* gobj);
 /* 2D6808 */ bool it_802D6808(Item_GObj*);
 /* 2D6810 */ bool it_802D6810(Item_GObj*);
 /* 2D6830 */ bool it_802D6830(Item_GObj*);

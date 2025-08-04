@@ -6,7 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2AFD44 */ static bool it_802AFD44(void);
+/* 2AFD44 */ static bool it_802AFD44(Item_GObj* gobj);
 
 /// #it_802AF940
 
@@ -22,7 +22,7 @@ void it_802AFD2C(Item_GObj* gobj)
     it->x40_vel.z = it->x40_vel.y = it->x40_vel.z = 0;
 }
 
-bool it_802AFD44(void)
+bool it_802AFD44(Item_GObj* gobj)
 {
     return false;
 }

@@ -35,9 +35,9 @@
 /* 2D4F50 */ bool it_802D4F50(Item_GObj*);
 /* 2D4F58 */ void it_802D4F58(Item_GObj*, Item_GObj*);
 /* 2D4F78 */ UNK_RET it_802D4F78(UNK_PARAMS);
-/* 2D4FFC */ UNK_RET it_802D4FFC(UNK_PARAMS);
-/* 2D5044 */ UNK_RET it_802D5044(UNK_PARAMS);
-/* 2D5048 */ UNK_RET it_802D5048(UNK_PARAMS);
+/* 2D4FFC */ bool it_802D4FFC(Item_GObj* gobj);
+/* 2D5044 */ void it_802D5044(Item_GObj* gobj);
+/* 2D5048 */ bool it_802D5048(Item_GObj* gobj);
 /* 3F8128 */ extern ItemStateTable it_803F8128[];
 /* 3F8180 */ extern ItemStateTable it_803F8180[];
 

@@ -2,9 +2,9 @@
 
 #include "it/it_26B1.h"
 
-/* 2D60C8 */ static bool it_802D60C8(void);
+/* 2D60C8 */ static bool it_802D60C8(Item_GObj* gobj);
 
-bool it_802D60C8(void)
+bool it_802D60C8(Item_GObj* gobj)
 {
     return false;
 }

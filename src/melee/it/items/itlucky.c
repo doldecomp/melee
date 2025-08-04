@@ -61,7 +61,7 @@ bool it_802D5528(Item_GObj* gobj)
 
 /// #it_802D5884
 
-void it_802D58BC(void) {}
+void it_802D58BC(Item_GObj* gobj) {}
 
 /// #it_802D58C0
 
@@ -75,12 +75,12 @@ void it_802D58BC(void) {}
 
 /// #it_802D59A8
 
-bool it_802D59D0(void)
+bool it_802D59D0(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802D59D8(void) {}
+void it_802D59D8(Item_GObj* gobj) {}
 
 /// #it_802D59DC
 
@@ -88,7 +88,7 @@ void it_802D59D8(void) {}
 
 /// #it_802D5A2C
 
-void it_802D5A64(void) {}
+void it_802D5A64(Item_GObj* gobj) {}
 
 /// #it_802D5A68
 
