@@ -9,12 +9,12 @@
 #include <baselib/gobj.h>
 
 /* 2AF32C */ static void it_802AF32C(HSD_GObj*);
-/* 2AF64C */ static int it_802AF64C(HSD_GObj*);
+/* 2AF64C */ static bool it_802AF64C(Item_GObj* gobj);
 /* 2AF844 */ static void it_802AF844(HSD_GObj*);
-/* 2AF848 */ static int it_802AF848(HSD_GObj*);
-/* 2AF90C */ static int it_802AF90C(HSD_GObj*);
+/* 2AF848 */ static bool it_802AF848(Item_GObj* gobj);
+/* 2AF90C */ static bool it_802AF90C(Item_GObj* gobj);
 /* 2AF914 */ static void it_802AF914(HSD_GObj*);
-/* 2AF918 */ static int it_802AF918(HSD_GObj*);
+/* 2AF918 */ static bool it_802AF918(Item_GObj* gobj);
 
 ItemStateTable it_803F6E98[] = { { 0, it_802AF64C, it_802AF844, it_802AF848 },
                                  { 1, it_802AF64C, it_802AF844, it_802AF848 },
@@ -173,7 +173,7 @@ void it_802AF434(Item_GObj* arg0)
     }
 }
 
-int it_802AF64C(HSD_GObj* arg0)
+bool it_802AF64C(Item_GObj* arg0)
 {
     Item* item;
     HSD_JObj* jobj;
@@ -233,7 +233,7 @@ void it_802AF844(HSD_GObj* arg0)
     return;
 }
 
-int it_802AF848(HSD_GObj* arg0)
+bool it_802AF848(Item_GObj* arg0)
 {
     Item* item;
     HSD_JObj* jobj;
@@ -246,7 +246,7 @@ int it_802AF848(HSD_GObj* arg0)
     return 0;
 }
 
-int it_802AF90C(HSD_GObj* arg0)
+bool it_802AF90C(Item_GObj* arg0)
 {
     return 1;
 }
@@ -256,7 +256,7 @@ void it_802AF914(HSD_GObj* arg0)
     return;
 }
 
-int it_802AF918(HSD_GObj* arg0)
+bool it_802AF918(Item_GObj* arg0)
 {
     return 1;
 }

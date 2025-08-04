@@ -13,20 +13,23 @@ import (
 
 func main() {
 	log.SetFlags(0)
-	if len(os.Args) != 4 {
-		fmt.Println("Usage: table-typer <table-type> <src dir> <asm dir>")
+	if len(os.Args) != 3 {
+		fmt.Println("Usage: table-typer <table-type> <root dir>")
 		return
 	}
-	tableTypeName, srcDir, asmDir := os.Args[1], os.Args[2], os.Args[3]
+
+	tableTypeName, rootDir := os.Args[1], os.Args[2]
 	tableType, ok := tableTypes[tableTypeName]
 	if !ok {
 		log.Fatalf("Unknown table type: %s", tableTypeName)
 	}
+	srcDir := filepath.Join(rootDir, "src", "melee")
 	cFiles := findFiles(srcDir, ".c")
 	hFiles := findFiles(srcDir, ".h")
 	if len(cFiles)+len(hFiles) == 0 {
-		log.Fatalln("No source files found in", srcDir)
+		log.Fatalln("No source files found in", rootDir)
 	}
+	asmDir := filepath.Join(rootDir, "build", "GALE01", "asm", "melee")
 	asmFiles := findFiles(asmDir, ".s")
 	if len(asmFiles) == 0 {
 		log.Fatalln("No asm files found in", asmDir)
@@ -91,43 +94,35 @@ func extractAsmTables(paths []string) map[string][]AsmTableEntry {
 		if err != nil {
 			log.Fatalln("Failed to read file:", path, err)
 		}
-		sections := bytes.Split(contents, []byte(".section "))
-		for _, section := range sections {
-			if bytes.Contains(section, []byte(".text")) || bytes.Contains(section, []byte(".sdata")) {
+		objects := bytes.Split(contents, []byte(".obj "))
+		for _, object := range objects {
+			if !bytes.Contains(object, []byte("byte")) {
 				continue
 			}
-
-			globals := strings.Split(string(section), ".global ")
-			for _, global := range globals {
-				if !strings.Contains(global, "byte") {
+			lines := strings.Split(string(object), "\n")
+			symbol, _, _ := strings.Cut(strings.TrimSpace(lines[0]), ",")
+			var entries []AsmTableEntry
+			for _, line := range lines[1:] {
+				fields := strings.Fields(line)
+				if len(fields) != 2 {
 					continue
 				}
-
-				lines := strings.Split(global, "\n")
-				addr := strings.TrimSpace(lines[0])
-				var entries []AsmTableEntry
-				for _, line := range lines[2:] {
-					fields := strings.Fields(line)
-					if len(fields) != 2 {
-						continue
-					}
-					var size int
-					switch fields[0] {
-					case ".byte":
-						size = 1
-					case ".2byte":
-						size = 2
-					case ".4byte":
-						size = 4
-					case ".8byte":
-						size = 8
-					default:
-						continue
-					}
-					entries = append(entries, AsmTableEntry{Size: size, Value: fields[1]})
+				var size int
+				switch fields[0] {
+				case ".byte":
+					size = 1
+				case ".2byte":
+					size = 2
+				case ".4byte":
+					size = 4
+				case ".8byte":
+					size = 8
+				default:
+					continue
 				}
-				tables[addr] = entries
+				entries = append(entries, AsmTableEntry{Size: size, Value: fields[1]})
 			}
+			tables[symbol] = entries
 		}
 	}
 	return tables
