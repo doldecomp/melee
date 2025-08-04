@@ -6,9 +6,9 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2B45E8 */ static bool it_802B45E8(void);
+/* 2B45E8 */ static bool it_802B45E8(Item_GObj* gobj);
 
-bool it_802B45E8(void)
+bool it_802B45E8(Item_GObj* gobj)
 {
     return false;
 }

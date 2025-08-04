@@ -45,7 +45,7 @@ void it_802CB280(Item_GObj* gobj) {}
 
 /// #it_802CB844
 
-bool it_802CB8A4(void)
+bool it_802CB8A4(Item_GObj* gobj)
 {
     return false;
 }

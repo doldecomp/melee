@@ -8,7 +8,7 @@
 
 /// #it_802E324C
 
-void it_802E32B0(void) {}
+void it_802E32B0(Item_GObj* gobj) {}
 
 /// #it_802E32B4
 
@@ -24,7 +24,7 @@ void it_802E32B0(void) {}
 
 /// #it_802E3470
 
-void it_802E34B8(void) {}
+void it_802E34B8(Item_GObj* gobj) {}
 
 /// #it_802E34BC
 
@@ -32,7 +32,7 @@ void it_802E34B8(void) {}
 
 /// #it_802E3528
 
-bool it_802E3588(void)
+bool it_802E3588(Item_GObj* gobj)
 {
     return false;
 }

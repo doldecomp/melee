@@ -3,7 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2C4434 */ static bool it_802C4434(void);
+/* 2C4434 */ static bool it_802C4434(Item_GObj* gobj);
 
 Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
 {
@@ -34,7 +34,7 @@ void it_802C4364(Item_GObj* gobj)
 
 /// #it_802C437C
 
-bool it_802C4434(void)
+bool it_802C4434(Item_GObj* gobj)
 {
     return false;
 }

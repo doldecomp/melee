@@ -26,3 +26,6 @@ insert_final_newline = false
 
 [/config/GALE01/*.txt]
 indent_style = tab
+
+[*.go]
+indent_style = tab
