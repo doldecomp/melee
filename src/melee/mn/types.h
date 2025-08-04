@@ -46,34 +46,34 @@ typedef struct HSD_GObj Menu_GObj;
 #endif
 
 struct PlayerInitData {
-    /*0x00*/ s8 c_kind; // character kind
+    /*0x00*/ s8 c_kind;    // character kind
     /*0x01*/ u8 slot_type; // slot type (0 = human, 1 = cpu?)
-    /*0x02*/ s8 stocks; // stocks
-    /*0x03*/ s8 color; // color
-    /*0x04*/ u8 slot; // port
-    /*0x05*/ s8 x5; // spawnpos32
+    /*0x02*/ s8 stocks;    // stocks
+    /*0x03*/ s8 color;     // color
+    /*0x04*/ u8 slot;      // port
+    /*0x05*/ s8 x5;        // spawnpos32
     /*0x06*/ s8 spawn_dir; // spawn direction
     /*0x07*/ u8 sub_color; // subcolor
-    /*0x08*/ s8 handicap; // handicap
-    /*0x09*/ u8 team; // team
-    /*0x0A*/ s8 xA; // nametag
+    /*0x08*/ s8 handicap;  // handicap
+    /*0x09*/ u8 team;      // team
+    /*0x0A*/ s8 xA;        // nametag
     /*0x0B*/ u8 xB;
     /*0x0C*/ u8 xC_b0 : 1;
-             u8 xC_b1 : 1;
-             u8 xC_b2 : 1;
-             u8 xC_b3 : 1;
-             u8 xC_b4 : 1;
-             u8 xC_b5 : 1;
-             u8 xC_b6 : 1;
-             u8 xC_b7 : 1;
+    u8 xC_b1 : 1;
+    u8 xC_b2 : 1;
+    u8 xC_b3 : 1;
+    u8 xC_b4 : 1;
+    u8 xC_b5 : 1;
+    u8 xC_b6 : 1;
+    u8 xC_b7 : 1;
     /*0x0D*/ u8 xD_b0 : 1;
-             u8 xD_b1 : 1;
-             u8 xD_b2 : 1;
-             u8 xD_b3 : 1;
-             u8 xD_b4 : 1;
-             u8 xD_b5 : 1;
-             u8 xD_b6 : 1;
-             u8 xD_b7 : 1;
+    u8 xD_b1 : 1;
+    u8 xD_b2 : 1;
+    u8 xD_b3 : 1;
+    u8 xD_b4 : 1;
+    u8 xD_b5 : 1;
+    u8 xD_b6 : 1;
+    u8 xD_b7 : 1;
     /*0x0E*/ u8 xE;
     /*0x0F*/ u8 cpu_level; // CPU level
     /*0x10*/ u16 x10;
@@ -96,7 +96,7 @@ struct StartMeleeRules {
     u32 x1_3 : 1;
     u32 x1_4 : 1;
     u32 x1_5 : 1;
-    u32 x1_6 : 1;
+    u32 timer_shows_hours : 1; // false=65:00.00, true=1:05:00.00
     u32 x1_7 : 1;
 
     u32 x2_0 : 1;
@@ -177,15 +177,15 @@ struct StartMeleeData {
 };
 
 struct VsModeData {
-/* +0 */ s8 loser;
-/* +1 */ s8 ordered_stage_index;
-/* +2 */ s8 winner;
-/* +3 */ u8 unk_0x3;
-/* +4 */ u8 unk_0x4;
-/* +5 */ u8 unk_0x5;
-/* +6 */ u8 unk_0x6;
-/* +7 */ u8 unk_0x7;
-/* +8 */ StartMeleeData data;
+    /* +0 */ s8 loser;
+    /* +1 */ s8 ordered_stage_index;
+    /* +2 */ s8 winner;
+    /* +3 */ u8 unk_0x3;
+    /* +4 */ u8 unk_0x4;
+    /* +5 */ u8 unk_0x5;
+    /* +6 */ u8 unk_0x6;
+    /* +7 */ u8 unk_0x7;
+    /* +8 */ StartMeleeData data;
 };
 
 struct CSSData {

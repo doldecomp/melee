@@ -1,6 +1,6 @@
-#include "gm_1B03.h"
-
 #include "gm_1B03.static.h"
+
+#include "gm_1B03.h"
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
@@ -44,7 +44,9 @@ static u32 gm_804D6878[2];
 
 MinorScene gm_803DD6A0_MinorScenes[] = {
     {
-        0x00, 0x03, 0,
+        0x00,
+        0x03,
+        0,
         gm_801B087C,
         gm_801B089C,
         {
@@ -77,7 +79,9 @@ static UNK_T gm_804D68A4_pad[0x4 / 4];
 
 MinorScene gm_803DD6D0_MinorScenes[] = {
     {
-        0x00, 0x02, 0,
+        0x00,
+        0x02,
+        0,
         gm_801B09C0,
         NULL,
         {
@@ -87,7 +91,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x01, 0x02, 0,
+        0x01,
+        0x02,
+        0,
         gm_801B0A34,
         NULL,
         {
@@ -97,7 +103,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x02, 0x02, 0,
+        0x02,
+        0x02,
+        0,
         gm_801B0AC8,
         NULL,
         {
@@ -107,7 +115,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x03, 0x02, 0,
+        0x03,
+        0x02,
+        0,
         gm_801B0B00,
         gm_801B0B24,
         {
@@ -117,7 +127,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x04, 0x02, 0,
+        0x04,
+        0x02,
+        0,
         gm_801B0B48,
         NULL,
         {
@@ -127,7 +139,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x05, 0x02, 0,
+        0x05,
+        0x02,
+        0,
         gm_801B0B8C,
         gm_801B0BF0,
         {
@@ -137,7 +151,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x06, 0x02, 0,
+        0x06,
+        0x02,
+        0,
         gm_801B0C18,
         gm_801B099C,
         {
@@ -147,7 +163,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x07, 0x02, 0,
+        0x07,
+        0x02,
+        0,
         gm_801B0C50,
         gm_801B099C,
         {
@@ -157,7 +175,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x08, 0x02, 0,
+        0x08,
+        0x02,
+        0,
         NULL,
         gm_801B099C,
         {
@@ -167,7 +187,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x09, 0x02, 0,
+        0x09,
+        0x02,
+        0,
         gm_801B0C74,
         gm_801B099C,
         {
@@ -177,7 +199,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x0A, 0x02, 0,
+        0x0A,
+        0x02,
+        0,
         gm_801B0CF0,
         gm_801B099C,
         {
@@ -187,7 +211,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x0B, 0x02, 0,
+        0x0B,
+        0x02,
+        0,
         gm_801B0DD0,
         gm_801B0F1C,
         {
@@ -197,7 +223,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x0C, 0x02, 0,
+        0x0C,
+        0x02,
+        0,
         NULL,
         gm_801B099C,
         {
@@ -207,7 +235,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x0D, 0x02, 0,
+        0x0D,
+        0x02,
+        0,
         gm_801B0F60,
         gm_801B0F90,
         {
@@ -217,7 +247,9 @@ MinorScene gm_803DD6D0_MinorScenes[] = {
         },
     },
     {
-        0x0E, 0x02, 0,
+        0x0E,
+        0x02,
+        0,
         NULL,
         NULL,
         {
@@ -247,19 +279,21 @@ void gm_801B0348(StartMeleeData* arg0)
     for (i = 0; i < 6; i++) {
         for (j = 0; j < 6; j++) {
             if (i == j) {
-               continue;
+                continue;
             }
             if (arg0->players[i].team == arg0->players[j].team &&
                 arg0->players[i].c_kind == arg0->players[j].c_kind &&
-                arg0->players[i].sub_color == arg0->players[j].sub_color) {
+                arg0->players[i].sub_color == arg0->players[j].sub_color)
+            {
                 arg0->players[j].sub_color++;
             }
         }
     }
 }
 
-static inline void player_standings_inline(StartMeleeData* arg0, MatchEnd* arg1,
-                                           int i, u32 is_big_loser, int var_r7)
+static inline void player_standings_inline(StartMeleeData* arg0,
+                                           MatchEnd* arg1, int i,
+                                           u32 is_big_loser, int var_r7)
 {
     if (is_big_loser == 0 && var_r7 > 0) {
         s8 var_r6 = arg1->player_standings[i].character_kind;
@@ -312,10 +346,13 @@ void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
         if (arg0->players[i].slot_type != 3) {
             var_r7 = gm_801B0474_inline(arg1, i);
             if (arg1->is_teams == 1) {
-                player_standings_inline(arg0, arg1, i, var_r7,
-                    arg1->team_standings[arg1->player_standings[i].team].is_big_loser);
+                player_standings_inline(
+                    arg0, arg1, i, var_r7,
+                    arg1->team_standings[arg1->player_standings[i].team]
+                        .is_big_loser);
             } else {
-                player_standings_inline(arg0, arg1, i, var_r7,
+                player_standings_inline(
+                    arg0, arg1, i, var_r7,
                     arg1->player_standings[i].is_big_loser);
             }
         }
@@ -352,7 +389,8 @@ void gm_801B0664(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
     arg0->team = 4;
 }
 
-void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color, u8 arg5, u8 level, u8 slot)
+void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
+                 u8 arg5, u8 level, u8 slot)
 {
     gm_80167B50(&css_data->data);
     css_data->match_type = type;
@@ -368,7 +406,8 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color, u8 
 
 #pragma push
 #pragma dont_inline on
-void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, s8* color, s8* arg4, u8* level)
+void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, s8* color,
+                 s8* arg4, u8* level)
 {
     s32 slot;
 
@@ -391,7 +430,8 @@ void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, s8* color, s8* arg4,
 }
 #pragma pop
 
-void gm_801B07B4(CSSData* css_data, s8 c_kind, s8 stocks, s8 color, u8 arg4, u8 level, u8 arg6)
+void gm_801B07B4(CSSData* css_data, s8 c_kind, s8 stocks, s8 color, u8 arg4,
+                 u8 level, u8 arg6)
 {
     s32 var_r0;
 
@@ -407,7 +447,8 @@ void gm_801B07B4(CSSData* css_data, s8 c_kind, s8 stocks, s8 color, u8 arg4, u8 
     css_data->data.data.players[var_r0].xA = arg4;
 }
 
-void gm_801B07E8(CSSData* css_data, s8* c_kind, s8* stocks, s8* color, s8* arg4, u8* level)
+void gm_801B07E8(CSSData* css_data, s8* c_kind, s8* stocks, s8* color,
+                 s8* arg4, u8* level)
 {
     s32 slot;
 
@@ -667,7 +708,9 @@ static UNK_T gm_804D68B0[0x8 / 4];
 
 MinorScene gm_803DD888_MinorScenes[] = {
     {
-        0, 2, 0,
+        0,
+        2,
+        0,
         gm_801B0FB8,
         NULL,
         {
@@ -695,7 +738,9 @@ static UNK_T gm_804D68BC;
 
 MinorScene gm_803DD8B8_MinorScenes[] = {
     {
-        0, 2, 0,
+        0,
+        2,
+        0,
         gm_801B0FF8,
         gm_801B138C,
         {
@@ -707,7 +752,6 @@ MinorScene gm_803DD8B8_MinorScenes[] = {
     { -1 },
 };
 
-
 void gm_801B0FF8(MinorScene* arg0)
 {
     GameRules* temp_r3;
@@ -717,7 +761,8 @@ void gm_801B0FF8(MinorScene* arg0)
     temp_r31 = arg0->info.unk_struct_0;
     lb_8001C550();
     lb_8001D164(0);
-    lbSnap_8001E218(HSD_MemAlloc(lbSnap_8001E204()), HSD_MemAlloc(lbSnap_8001E210()));
+    lbSnap_8001E218(HSD_MemAlloc(lbSnap_8001E204()),
+                    HSD_MemAlloc(lbSnap_8001E210()));
     {
         ssize_t i;
         for (i = 0; i < (signed) ARRAY_SIZE(mnGallery_804A0B90); i++) {
@@ -897,7 +942,9 @@ extern UNK_T gm_804D6860[];
 
 MinorScene gm_803DD9A0_MinorScenes[] = {
     {
-        0x00, 0x03, 0,
+        0x00,
+        0x03,
+        0,
         gm_801B14A0,
         gm_801B14DC,
         {
@@ -907,7 +954,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         },
     },
     {
-        0x01, 0x03, 0,
+        0x01,
+        0x03,
+        0,
         gm_801B1514,
         gm_801B154C,
         {
@@ -917,7 +966,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         },
     },
     {
-        0x02, 0x03, 0,
+        0x02,
+        0x03,
+        0,
         gm_801B1588,
         gm_801B15C8,
         {
@@ -927,7 +978,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         },
     },
     {
-        0x03, 0x03, 0,
+        0x03,
+        0x03,
+        0,
         gm_801B1648,
         gm_801B1688,
         {
@@ -937,7 +990,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         },
     },
     {
-        0x04, 0x03, 0,
+        0x04,
+        0x03,
+        0,
         gm_801B16A8,
         gm_801B16C8,
         {
@@ -947,7 +1002,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         },
     },
     {
-        0x80, 0x02, 0,
+        0x80,
+        0x02,
+        0,
         gm_801BFA6C,
         NULL,
         {
@@ -957,7 +1014,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         },
     },
     {
-        0x81, 0x02, 0,
+        0x81,
+        0x02,
+        0,
         gm_801BFABC,
         gm_801A6254,
         {
@@ -967,7 +1026,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         },
     },
     {
-        0xC0, 0x02, 0,
+        0xC0,
+        0x02,
+        0,
         gm_801BFCFC,
         gm_801A6308,
         {
@@ -981,7 +1042,9 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
 
 MinorScene gm_803DDA78_MinorScenes[] = {
     {
-        0x01, 0x02, 0,
+        0x01,
+        0x02,
+        0,
         gm_801B13B8,
         NULL,
         {
@@ -991,7 +1054,9 @@ MinorScene gm_803DDA78_MinorScenes[] = {
         },
     },
     {
-        0x03, 0x02, 0,
+        0x03,
+        0x02,
+        0,
         gm_801B16A8,
         NULL,
         {
@@ -1009,7 +1074,9 @@ static UNK_T gm_8048BE68[0x23C8 / 4];
 
 MinorScene gm_803DDAC0_MinorScenes[] = {
     {
-        0x00, 0x03, 0,
+        0x00,
+        0x03,
+        0,
         gm_801B1724,
         NULL,
         {
@@ -1019,7 +1086,9 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         },
     },
     {
-        0x01, 0x03, 0,
+        0x01,
+        0x03,
+        0,
         NULL,
         NULL,
         {
@@ -1029,7 +1098,9 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         },
     },
     {
-        0x02, 0x03, 0,
+        0x02,
+        0x03,
+        0,
         NULL,
         NULL,
         {
@@ -1039,7 +1110,9 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         },
     },
     {
-        0x03, 0x03, 0,
+        0x03,
+        0x03,
+        0,
         gm_801B174C,
         gm_801B1788,
         {
@@ -1049,7 +1122,9 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         },
     },
     {
-        0x04, 0x03, 0,
+        0x04,
+        0x03,
+        0,
         gm_801B1810,
         gm_801B1834,
         {
@@ -1059,7 +1134,9 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         },
     },
     {
-        0x05, 0x03, 0,
+        0x05,
+        0x03,
+        0,
         gm_801B18D4,
         gm_801B1A2C,
         {
@@ -1069,7 +1146,9 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
         },
     },
     {
-        0x06, 0x03, 0,
+        0x06,
+        0x03,
+        0,
         gm_801B1A84,
         gm_801B1AD4,
         {
@@ -1087,18 +1166,20 @@ static StartMeleeData gm_8048E4C0;
 extern UNK_T gm_8048E5F8[];
 
 MinorScene gm_803DDB80_MinorScenes[] = {
+    { 0x00,
+      0x03,
+      0,
+      gm_801B1B74,
+      gm_801B1C24,
+      {
+          MN_CSS,
+          gm_8048E230,
+          gm_8048E230,
+      } },
     {
-        0x00, 0x03, 0,
-        gm_801B1B74,
-        gm_801B1C24,
-        {
-            MN_CSS,
-            gm_8048E230,
-            gm_8048E230,
-        }
-    },
-    {
-        0x01, 0x03, 0,
+        0x01,
+        0x03,
+        0,
         gm_801B1EB8,
         gm_801B1EEC,
         {
@@ -1108,7 +1189,9 @@ MinorScene gm_803DDB80_MinorScenes[] = {
         },
     },
     {
-        0x02, 0x03, 0,
+        0x02,
+        0x03,
+        0,
         gm_801B1F70,
         gm_801B2204,
         {
@@ -1127,7 +1210,9 @@ extern StartMeleeData gm_80480530;
 
 MinorScene gm_803DDBE0_MinorScenes[] = {
     {
-        0x00, 0x03, 0,
+        0x00,
+        0x03,
+        0,
         gm_801B24B4,
         gm_801B2510,
         {
@@ -1137,7 +1222,9 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         },
     },
     {
-        0x01, 0x03, 0,
+        0x01,
+        0x03,
+        0,
         gm_801B254C,
         gm_801B25D4,
         {
@@ -1147,7 +1234,9 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         },
     },
     {
-        0x02, 0x03, 0,
+        0x02,
+        0x03,
+        0,
         gm_801B26AC,
         gm_801B2704,
         {
@@ -1157,7 +1246,9 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         },
     },
     {
-        0x03, 0x03, 0,
+        0x03,
+        0x03,
+        0,
         gm_801B2790,
         gm_801B2AF8,
         {
@@ -1178,7 +1269,9 @@ extern UNK_T gm_804D68D0[];
 
 MinorScene gm_803DDC58_MinorScenes[] = {
     {
-        0x00, 0x03, 0,
+        0x00,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1186,7 +1279,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x01, 0x03, 0,
+        0x01,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1194,7 +1289,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x08, 0x03, 0,
+        0x08,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1202,7 +1299,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x09, 0x03, 0,
+        0x09,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1210,7 +1309,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x10, 0x03, 0,
+        0x10,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1218,7 +1319,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x11, 0x03, 0,
+        0x11,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1226,7 +1329,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x18, 0x03, 0,
+        0x18,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1234,7 +1339,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x19, 0x03, 0,
+        0x19,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1242,7 +1349,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x20, 0x03, 0,
+        0x20,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1250,7 +1359,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x21, 0x03, 0,
+        0x21,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1258,7 +1369,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x28, 0x03, 0,
+        0x28,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1266,7 +1379,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x29, 0x03, 0,
+        0x29,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1274,7 +1389,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x30, 0x03, 0,
+        0x30,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1282,7 +1399,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x31, 0x03, 0,
+        0x31,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1290,7 +1409,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x38, 0x03, 0,
+        0x38,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1298,7 +1419,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x39, 0x03, 0,
+        0x39,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1306,7 +1429,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x40, 0x03, 0,
+        0x40,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1314,7 +1439,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x41, 0x03, 0,
+        0x41,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1322,7 +1449,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x48, 0x03, 0,
+        0x48,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1330,7 +1459,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x49, 0x03, 0,
+        0x49,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1338,7 +1469,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x50, 0x03, 0,
+        0x50,
+        0x03,
+        0,
         gm_801B3500,
         NULL,
         MN_INTRO_EASY,
@@ -1346,7 +1479,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_804D68D0,
     },
     {
-        0x51, 0x03, 0,
+        0x51,
+        0x03,
+        0,
         gm_801B3A34,
         gm_801B3B40,
         MN_VS,
@@ -1354,7 +1489,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_8047086C,
     },
     {
-        0x68, 0x03, 0,
+        0x68,
+        0x03,
+        0,
         NULL,
         gm_801B3F18,
         MN_COMING_SOON,
@@ -1362,7 +1499,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         NULL,
     },
     {
-        0x69, 0x03, 0,
+        0x69,
+        0x03,
+        0,
         gm_801B3D44,
         gm_801B3D84,
         MN_GAMEOVER,
@@ -1370,7 +1509,9 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_80470850,
     },
     {
-        0x70, 0x03, 0,
+        0x70,
+        0x03,
+        0,
         gm_801B3DD8,
         gm_801B3E44,
         MN_CSS,
@@ -1530,9 +1671,12 @@ void gm_801B1834(MinorScene* arg0)
     mei = gm_801A4284(arg0);
     if (gm_801A52D0(&mei->match_end) != 0) {
         gm_8016260C(mei->match_end.x5, mei->match_end.result);
-        gm_801628C4(mei->match_end.frame_count / 60, gm_80162800(&mei->match_end));
+        gm_801628C4(mei->match_end.frame_count / 60,
+                    gm_80162800(&mei->match_end));
     }
-    if ((gm_80167140(&mei->match_end) != 0) && (gm_8018F1B0(&mei->match_end) != 0)) {
+    if ((gm_80167140(&mei->match_end) != 0) &&
+        (gm_8018F1B0(&mei->match_end) != 0))
+    {
         gm_SetScenePendingMinor(5);
         return;
     }
@@ -1547,8 +1691,7 @@ void gm_801B18D4(MinorScene* arg0)
 
     smd = gm_801A427C(arg0);
 
-    for (i = 0; i < 4; i++)
-    {
+    for (i = 0; i < 4; i++) {
         smd->players[i] = gm_804876D8.players[i];
     }
 
@@ -1609,8 +1752,12 @@ void gm_801B1B74(MinorScene* arg0)
         lb_8001D164(0);
         lb_8001CE00();
     }
-    gm_801B06B0(css, 0x17U, (s8) (u8) vs_data->data.players[0].c_kind, 1, (s8) (u8) vs_data->data.players[0].color, vs_data->data.players[0].xA, 9U, gm_804D68C0);
-    gm_801B07B4(css, (s8) (u8) vs_data->data.players[1].c_kind, 1, (s8) (u8) vs_data->data.players[1].color, vs_data->data.players[1].xA, 0U, gm_804D68C0);
+    gm_801B06B0(css, 0x17U, (s8) (u8) vs_data->data.players[0].c_kind, 1,
+                (s8) (u8) vs_data->data.players[0].color,
+                vs_data->data.players[0].xA, 9U, gm_804D68C0);
+    gm_801B07B4(css, (s8) (u8) vs_data->data.players[1].c_kind, 1,
+                (s8) (u8) vs_data->data.players[1].color,
+                vs_data->data.players[1].xA, 0U, gm_804D68C0);
     lbDvd_800174BC();
     gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
 }
@@ -1646,7 +1793,8 @@ void gm_801B1EEC(MinorScene* arg0)
     gm_80473814.x6 = stage_id;
     vs_data->data.rules.xE = stage_id;
     lbAudioAx_80026F2C(0x18);
-    lbAudioAx_8002702C(8, lbAudioAx_80026EBC((enum InternalStageId) (u16)vs_data->data.rules.xE));
+    lbAudioAx_8002702C(8, lbAudioAx_80026EBC((enum InternalStageId)(
+                                                 u16) vs_data->data.rules.xE));
     lbAudioAx_80027168();
 }
 
@@ -1672,18 +1820,20 @@ void gm_801B1F70(MinorScene* arg0)
     data->rules.x2_1 = true;
     gm_80167A14(data->players);
 
-
     for (i = 0; i < 4; i++) {
         data->players[i] = vs->data.players[i];
         data->players[i].xC_b1 = false;
         data->players[i].xD_b2 = true;
     }
 
-    gm_801B0620(&data->players[0], vs->data.players[0].c_kind, vs->data.players[0].color, 1, gm_804D68C0);
+    gm_801B0620(&data->players[0], vs->data.players[0].c_kind,
+                vs->data.players[0].color, 1, gm_804D68C0);
 
     for (i = 1; i < 4; i++) {
         PlayerInitData* var_r30 = &data->players[i];
-        gm_801B0664(&data->players[i], vs->data.players[i].c_kind, vs->data.players[i].color, 1, vs->data.players[i].slot - 1);
+        gm_801B0664(&data->players[i], vs->data.players[i].c_kind,
+                    vs->data.players[i].color, 1,
+                    vs->data.players[i].slot - 1);
         if (i - 1 != 0) {
             data->players[i].slot_type = 3;
         }
@@ -1701,8 +1851,10 @@ void gm_801B2204(MinorScene* arg0)
     temp_r3 = gm_801A4284(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80163298(temp_r3->match_end.player_standings[0].character_kind,
-            (u16) gm_80188454((s8) temp_r3->match_end.player_standings[0].character_kind));
+    gm_80163298(
+        temp_r3->match_end.player_standings[0].character_kind,
+        (u16) gm_80188454(
+            (s8) temp_r3->match_end.player_standings[0].character_kind));
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
     if (gm_80173754(0x1C, gm_804D68C0) == 0) {
@@ -1944,7 +2096,7 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.x0_6 = true;
     arg0->rules.x0_7 = true;
     arg0->rules.x10 = 0;
-    arg0->rules.x1_6 = true;
+    arg0->rules.timer_shows_hours = true;
     arg0->rules.x4_2 = true;
     arg0->rules.x2_5 = false;
     arg0->rules.x5_0 = false;
@@ -2269,7 +2421,8 @@ void gm_801B999C(MinorScene* scene)
         return;
     }
     gm_80167A14(vs->data.players);
-    gm_801B0730(temp_r3, &vs->data.players[0].c_kind, NULL, &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
+    gm_801B0730(temp_r3, &vs->data.players[0].c_kind, NULL,
+                &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
     vs->data.players[1].c_kind = 0x1F;
     vs->data.players[1].xE = 0xF;
     vs->data.players[1].x1C = 1.0f;
@@ -2288,7 +2441,6 @@ void gm_801B9A3C(MinorScene* arg0)
     StartMeleeData* data;
     VsModeData* vs = &gm_80497618;
     int i;
-
 
     data = gm_801A427C(arg0);
     gm_80167A64(&data->rules);
@@ -2322,7 +2474,8 @@ void gm_801B9A3C(MinorScene* arg0)
         data->players[i].xD_b3 = true;
     }
 
-    gm_801B0620(&data->players[0], vs->data.players[0].c_kind, vs->data.players[0].color, 1, gm_804D68F8);
+    gm_801B0620(&data->players[0], vs->data.players[0].c_kind,
+                vs->data.players[0].color, 1, gm_804D68F8);
     data->players[0].xD_b2 = true;
     gm_8016F088(data);
     gm_80181A00(data->players[0].c_kind, (u8) data->players[0].xA);
@@ -2345,7 +2498,8 @@ void gm_801B9DD8(MinorScene* arg0)
         gm_SetScenePendingMinor(1);
         return;
     }
-    temp_r30 = gm_80164024(temp_r3->match_end.player_standings[0].character_kind);
+    temp_r30 =
+        gm_80164024(temp_r3->match_end.player_standings[0].character_kind);
     temp_r31 = gm_80180AE4();
     if (gm_801734D0(temp_r31) != 0x148) {
         gm_80164504();
@@ -2723,7 +2877,8 @@ static UNK_T gm_804D6900;
 
 void gm_801BA8FC(void)
 {
-    lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900, "sqEventInitDataLevelTbl", 0);
+    lbArchive_LoadSymbols("GmEvent.dat", &gm_804D6900,
+                          "sqEventInitDataLevelTbl", 0);
 }
 
 /// #gm_801BA938

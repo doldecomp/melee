@@ -3614,9 +3614,9 @@ melee/if/ifall.c:
 
 melee/if/iftime.c:
 	.text       start:0x802F3AE8 end:0x802F4910
-	.data       start:0x803F94E8 end:0x803F9598
-	.bss        start:0x804A1078 end:0x804A10C8
-	.sdata      start:0x804D5788 end:0x804D57A8
+	.data       start:0x803F94E8 end:0x803F9595
+	.bss        start:0x804A1078 end:0x804A10C4
+	.sdata      start:0x804D5788 end:0x804D57A1
 	.sdata2     start:0x804DDA38 end:0x804DDA48
 
 melee/if/ifstatus.c:
