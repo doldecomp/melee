@@ -109,14 +109,13 @@ void ftCo_FallSpecial_IASA(Fighter_GObj* gobj)
 
 void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
 {
-    float f1;
-    float lstick_x;
-    float base;
+    float lstick_x, drift, drift_max;
 
     ftCo_DatAttrs* ca;
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
     ca = &fp->co_attrs;
+
     ftCommon_8007D528(fp);
     if (fp->mv.co.fallspecial.xC != 0) {
         if (fp->x221A_b4) {
@@ -125,14 +124,12 @@ void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
             ftCommon_8007D494(fp, ca->grav, ca->terminal_vel);
         }
         {
-            f1 = ca->air_drift_stick_mul;
             lstick_x = fp->input.lstick.x;
-            f1 = lstick_x * f1;
-            base =
+            drift = lstick_x * ca->air_drift_stick_mul;
+            drift +=
                 lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
-
-            ftCommon_8007D140(fp, f1 + base, lstick_x * ca->air_drift_max,
-                              ca->aerial_friction);
+            drift_max = lstick_x * ca->air_drift_max;
+            ftCommon_8007D140(fp, drift, drift_max, ca->aerial_friction);
         }
     } else {
         if (fp->x221A_b4) {
@@ -141,20 +138,16 @@ void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
             ftCommon_8007D494(fp, ca->grav, ca->fast_fall_velocity);
         }
         {
-            f1 = ca->air_drift_stick_mul;
             lstick_x = fp->input.lstick.x;
-            f1 = lstick_x * f1;
-            base =
+            drift = lstick_x * ca->air_drift_stick_mul;
+            drift +=
                 lstick_x > 0 ? ca->aerial_drift_base : -ca->aerial_drift_base;
-            {
-                float drift_max = lstick_x * ca->air_drift_max;
-#define mv_x8 fp->mv.co.fallspecial.x8
-                float tmp4 = f1 + base;
-                if (ABS(drift_max) > mv_x8) {
-                    drift_max = drift_max < 0 ? -mv_x8 : mv_x8;
-                }
-                ftCommon_8007D140(fp, tmp4, drift_max, ca->aerial_friction);
+            drift_max = lstick_x * ca->air_drift_max;
+            if (ABS(drift_max) > fp->mv.co.fallspecial.x8) {
+                drift_max = drift_max < 0 ? -fp->mv.co.fallspecial.x8
+                                          : fp->mv.co.fallspecial.x8;
             }
+            ftCommon_8007D140(fp, drift, drift_max, ca->aerial_friction);
         }
     }
 }

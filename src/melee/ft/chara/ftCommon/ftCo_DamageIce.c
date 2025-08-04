@@ -141,25 +141,24 @@ static inline void inline_unk(Fighter* fp)
     ftCo_800909D0(fp);
     ftCo_80090AC0(fp);
     ftColl_8007B0C0(fp->gobj, Intangible);
-    
+
     {
-        Vec3 sp28;
         struct UNK_SAMUS_S2 sp2C;
-        
-        sp28 = ftCo_803B74B0;
-    
+        Vec3 sp28 = ftCo_803B74B0;
+
         sp2C.parts[0] = ftParts_8007500C(fp, FtPart_XRotN);
         sp2C.parts[1] = FtPart_TransN;
         sp2C.parts[2] = FtPart_TopN;
         sp2C.vec1 = sp2C.vec2 = sp28;
         sp2C.scale = fp->co_attrs.bubble_ratio;
-    
+
         ftColl_8007B5AC(fp, fp->hurt_capsules, &sp2C);
-        ftCommon_8007EBAC(fp, 1, 0);
-    
-        fp->x21F0 = ftCo_80091274;
-        fp->take_dmg_cb = ftCo_80090B48;
     }
+
+    ftCommon_8007EBAC(fp, 1, 0);
+
+    fp->x21F0 = ftCo_80091274;
+    fp->take_dmg_cb = ftCo_80090B48;
 }
 
 static inline JObjRotMtx(Mtx mtx, HSD_JObj *jobj)
@@ -243,9 +242,6 @@ void ftCo_80091274(Fighter_GObj* gobj)
         fp->x1A4C = 0;
     }
 }
-
-#define HSD_ASSERT2(file, line, msg, cond)                                    \
-    ((cond) ? ((void) 0) : __assert((file), (line), (#msg)))
 
 void ftCo_DamageIce_Anim(Fighter_GObj* gobj)
 {
