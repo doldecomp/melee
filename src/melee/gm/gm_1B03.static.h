@@ -45,7 +45,8 @@ struct MainMenuExitData {
 struct TrainingMenuData {
     u8 pad_x0[0x6 - 0x0];
     s16 x6;
-    u8 pad_x8[0xA4 - 0x8];
+    u8 pad_x8[0x14 - 0x8];
+    PlayerInitData players[6];
     HSD_GObj* xA4;
     HSD_JObj* xA8[39];
     u32 x144[39];
@@ -59,5 +60,7 @@ struct TrainingMenuData {
     HSD_Text* x1FC;
     u32 x200;
 }; /// 80473814
+
+extern struct TrainingMenuData gm_80473814;
 
 extern struct SoundTestData un_803F9FA4;

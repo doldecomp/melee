@@ -29,13 +29,15 @@ struct gm_8049E548_t {
 }; /* size = 0x10 */
 STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 
+struct EventData;
+
 /* 1B0348 */ void gm_801B0348(StartMeleeData*); /// Character tints?
 /* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
 /* 1B05F4 */ void gm_801B05F4(PlayerInitData*, int);
 /* 1B0620 */ void gm_801B0620(PlayerInitData*, u8 c_kind, u8 color, u8 stocks, u8);
 /* 1B0664 */ void gm_801B0664(PlayerInitData*, u8 c_kind, u8 color, u8 stocks, u8);
 /* 1B06B0 */ void gm_801B06B0(CSSData*, u8, s8, s8, s8, u8, u8, u8);
-/* 1B0730 */ void gm_801B0730(CSSData*, s8*, s8*, s8*, s8*, u8*);
+/* 1B0730 */ void gm_801B0730(CSSData*, s8*, s8*, u8*, s8*, u8*);
 /* 1B07B4 */ void gm_801B07B4(CSSData*, s8, s8, s8, u8, u8, u8);
 /* 1B07E8 */ void gm_801B07E8(CSSData*, s8*, s8*, s8*, s8*, u8*);
 /* 1B087C */ void gm_801B087C(MinorScene*);
@@ -91,7 +93,7 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B2204 */ void gm_801B2204(MinorScene*);
 /* 1B2298 */ void gm_801B2298_OnInit(void);
 /* 1B23C4 */ void gm_801B23C4_OnLoad(void);
-/* 1B23F0 */ UNK_RET gm_801B23F0(UNK_PARAMS);
+/* 1B23F0 */ UNK_T gm_801B23F0(void);
 /* 1B24B4 */ void gm_801B24B4(MinorScene*);
 /* 1B2510 */ void gm_801B2510(MinorScene*);
 /* 1B254C */ void gm_801B254C(MinorScene*);
@@ -230,11 +232,11 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B9154 */ void gm_801B9154(MinorScene*);
 /* 1B9180 */ void gm_801B9180_OnInit(void);
 /* 1B91A8 */ void gm_801B91A8_OnLoad(void);
-/* 1B91C8 */ UNK_RET gm_801B91C8(UNK_PARAMS);
+/* 1B91C8 */ void gm_801B91C8(MinorScene*);
 /* 1B922C */ void gm_801B922C(MinorScene*);
 /* 1B9254 */ void gm_801B9254(MinorScene*);
-/* 1B927C */ UNK_RET gm_801B927C(UNK_PARAMS);
-/* 1B931C */ UNK_RET gm_801B931C(UNK_PARAMS);
+/* 1B927C */ void gm_801B927C(MinorScene*);
+/* 1B931C */ void gm_801B931C(MinorScene*);
 /* 1B9560 */ void gm_801B9560(MinorScene*);
 /* 1B95B0 */ void gm_801B95B0_OnInit(void);
 /* 1B95D8 */ void gm_801B95D8_OnLoad(void);
@@ -314,9 +316,9 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1BA8B4 */ void gm_801BA8B4_OnInit(void);
 /* 1BA8DC */ void gm_801BA8DC_OnLoad(void);
 /* 1BA8FC */ UNK_RET gm_801BA8FC(UNK_PARAMS);
-/* 1BA938 */ UNK_RET gm_801BA938(UNK_PARAMS);
-/* 1BAA60 */ UNK_RET gm_801BAA60(UNK_PARAMS);
-/* 1BAAD0 */ UNK_RET gm_801BAAD0(UNK_PARAMS);
+/* 1BA938 */ UNK_RET gm_801BA938(struct EventData*, int, int, int);
+/* 1BAA60 */ void gm_801BAA60(MinorScene*);
+/* 1BAAD0 */ void gm_801BAAD0(MinorScene*);
 /* 1BAB40 */ UNK_RET gm_801BAB40(UNK_PARAMS);
 /* 1BAC9C */ UNK_RET gm_801BAC9C(UNK_PARAMS);
 /* 1BAD70 */ UNK_RET gm_801BAD70(UNK_PARAMS);

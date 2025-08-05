@@ -248,8 +248,8 @@ void gmMainLib_8015CDEC(void)
 s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
     if (arg1 == 0x78) {
-        if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_588)) {
-            return &gmMainLib_804D3EE0->unk_588[arg0];
+        if (arg0 < (signed) ARRAY_SIZE(gmMainLib_804D3EE0->unk_530.unk_588)) {
+            return &gmMainLib_804D3EE0->unk_530.unk_588[arg0];
         }
         return 0;
     } else {

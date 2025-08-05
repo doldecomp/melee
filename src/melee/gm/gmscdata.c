@@ -457,7 +457,7 @@ MajorScene gm_803DACA4[] = {
         gm_803DFAD8_MinorScenes,
     },
     {
-        0x01, 0x0A,
+        0x01, MJ_CAMERA_MODE,
         NULL,
         NULL,
         gm_801B2B7C_OnInit,

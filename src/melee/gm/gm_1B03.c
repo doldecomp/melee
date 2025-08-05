@@ -7,6 +7,7 @@
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmcamera.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
@@ -406,7 +407,7 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
 
 #pragma push
 #pragma dont_inline on
-void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, s8* color,
+void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, u8* color,
                  s8* arg4, u8* level)
 {
     s32 slot;
@@ -714,7 +715,7 @@ MinorScene gm_803DD888_MinorScenes[] = {
         gm_801B0FB8,
         NULL,
         {
-            0x07,
+            MN_DEBUG_MENU,
             gm_804D68B0,
             NULL,
         },
@@ -756,7 +757,7 @@ void gm_801B0FF8(MinorScene* arg0)
 {
     GameRules* temp_r3;
     struct gm_801B0FF8_arg0_x10_t* temp_r31;
-    int var_r0;
+    MajorSceneKind var_r0;
 
     temp_r31 = arg0->info.unk_struct_0;
     lb_8001C550();
@@ -784,135 +785,135 @@ void gm_801B0FF8(MinorScene* arg0)
     }
     temp_r31->x2 = 1;
     var_r0 = gm_801A4320();
-    if (var_r0 == 0x14) {
+    if (var_r0 == MJ_CHALLENGER_APPROACH) {
         var_r0 = gm_801737D8();
     }
     switch (var_r0) {
-    case 3:
+    case MJ_CLASSIC:
         temp_r31->x0 = 6;
         temp_r31->x1 = 0;
         return;
-    case 4:
+    case MJ_ADVENTURE:
         temp_r31->x0 = 6;
         temp_r31->x1 = 1;
         return;
-    case 5:
+    case MJ_ALLSTAR:
         temp_r31->x0 = 6;
         temp_r31->x1 = 2;
         return;
-    case 21:
+    case MJ_CLASSIC_GOVER:
         temp_r31->x0 = 6;
         temp_r31->x1 = 0;
         return;
-    case 22:
+    case MJ_ADVENTURE_GOVER:
         temp_r31->x0 = 6;
         temp_r31->x1 = 1;
         return;
-    case 23:
+    case MJ_ALLSTAR_GOVER:
         temp_r31->x0 = 6;
         temp_r31->x1 = 2;
         return;
-    case 43:
+    case MJ_EVENT:
         temp_r31->x0 = 7;
         temp_r31->x1 = 0;
         return;
-    case 15:
+    case MJ_TARGET_TEST:
         temp_r31->x0 = 9;
         temp_r31->x1 = 0;
         return;
-    case 33:
+    case MJ_10MAN_VS:
         temp_r31->x0 = 0x21;
         temp_r31->x1 = 0;
         return;
-    case 34:
+    case MJ_100MAN_VS:
         temp_r31->x0 = 0x21;
         temp_r31->x1 = 1;
         return;
-    case 35:
+    case MJ_3MIN_VS:
         temp_r31->x0 = 0x21;
         temp_r31->x1 = 2;
         return;
-    case 36:
+    case MJ_15MIN_VS:
         temp_r31->x0 = 0x21;
         temp_r31->x1 = 3;
         return;
-    case 37:
+    case MJ_ENDLESS_VS:
         temp_r31->x0 = 0x21;
         temp_r31->x1 = 4;
         return;
-    case 38:
+    case MJ_CRUEL_VS:
         temp_r31->x0 = 0x21;
         temp_r31->x1 = 5;
         return;
-    case 32:
+    case MJ_HOME_RUN_CONTEST:
         temp_r31->x0 = 9;
         temp_r31->x1 = 1;
         return;
-    case 28:
+    case MJ_TRAINING:
         temp_r31->x0 = 1;
         temp_r31->x1 = 4;
         return;
-    case 2:
+    case MJ_VS:
         temp_r31->x0 = 2;
         temp_r31->x1 = 0;
         return;
-    case 27:
+    case MJ_TOURNAMENT:
         temp_r31->x0 = 2;
         temp_r31->x1 = 1;
         return;
-    case 10:
+    case MJ_CAMERA_MODE:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 0;
         return;
-    case 31:
+    case MJ_STAMINA_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 1;
         return;
-    case 16:
+    case MJ_SUPER_SUDDEN_DEATH_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 2;
         return;
-    case 30:
+    case MJ_GIANT_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 3;
         return;
-    case 29:
+    case MJ_TINY_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 4;
         return;
-    case 17:
+    case MJ_INVISIBLE_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 5;
         return;
-    case 18:
+    case MJ_SLOMO_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 9;
         return;
-    case 19:
+    case MJ_LIGHTNING_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 8;
         return;
-    case 42:
+    case MJ_FIXED_CAMERA_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 6;
         return;
-    case 44:
+    case MJ_SINGLE_BUTTON_VS:
         temp_r31->x0 = 0xC;
         temp_r31->x1 = 7;
         return;
-    case 11:
+    case MJ_TOY_GALLERY:
         temp_r31->x0 = 3;
         temp_r31->x1 = 0;
         return;
-    case 12:
+    case MJ_TOY_LOTTERY:
         temp_r31->x0 = 3;
         temp_r31->x1 = 1;
         return;
-    case 13:
+    case MJ_TOY_COLLECTION:
         temp_r31->x0 = 3;
         temp_r31->x1 = 3;
         return;
-    case 1:
+    case MJ_MENU:
         temp_r31->x0 = 4;
         temp_r31->x1 = 4;
         return;
@@ -1752,11 +1753,11 @@ void gm_801B1B74(MinorScene* arg0)
         lb_8001D164(0);
         lb_8001CE00();
     }
-    gm_801B06B0(css, 0x17U, (s8) (u8) vs_data->data.players[0].c_kind, 1,
-                (s8) (u8) vs_data->data.players[0].color,
+    gm_801B06B0(css, 0x17U, vs_data->data.players[0].c_kind, 1,
+                vs_data->data.players[0].color,
                 vs_data->data.players[0].xA, 9U, gm_804D68C0);
-    gm_801B07B4(css, (s8) (u8) vs_data->data.players[1].c_kind, 1,
-                (s8) (u8) vs_data->data.players[1].color,
+    gm_801B07B4(css, vs_data->data.players[1].c_kind, 1,
+                vs_data->data.players[1].color,
                 vs_data->data.players[1].xA, 0U, gm_804D68C0);
     lbDvd_800174BC();
     gm_804D68C1 = lbTime_8000AF74((u32) gm_804D68C1, 1);
@@ -1774,8 +1775,6 @@ void gm_801B1EB8(MinorScene* arg0)
     sss->force_stage_id = -1;
     sss->unk_stage = 0;
 }
-
-extern struct TrainingMenuData gm_80473814;
 
 void gm_801B1EEC(MinorScene* arg0)
 {
@@ -1858,12 +1857,27 @@ void gm_801B2204(MinorScene* arg0)
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
     if (gm_80173754(0x1C, gm_804D68C0) == 0) {
-        gm_SetScenePendingMinor(0);
+        gm_SetScenePendingMinor(MJ_TITLE);
     }
     lbAudioAx_80024030(1);
 }
 
-/// #gm_801B2298_OnInit
+void gm_801B2298_OnInit(void)
+{
+    VsModeData* temp_r31 = &gmMainLib_804D3EE0->unk_D10;
+    int i;
+
+    gm_80167B50(temp_r31);
+
+    for (i = 0; i < 4; i++) {
+        temp_r31->data.players[i].color = i;
+        temp_r31->data.players[i].xE = 0;
+        if (i != 0) {
+            temp_r31->data.players[1].c_kind = 0x21;
+        }
+        gm_80473814.players[i] = temp_r31->data.players[i];
+    }
+}
 
 extern u8 gm_804D68C0;
 extern u8 gm_804D68C1;
@@ -1874,9 +1888,27 @@ void gm_801B23C4_OnLoad(void)
     gm_804D68C1 = 0;
 }
 
-/// #gm_801B23F0
+UNK_T gm_801B23F0(void)
+{
+    size_t size = GXGetTexBufferSize(0x280, 0x1E0, 4, 0, 0);
+    lbDvd_80017740(0, 0x7D6, 4, 4, OSRoundUp32B(size), 0, 1, 0x20, 0);
+    lbDvd_80017740(0, 0x7D7, 4, 4, lbSnap_8001E204(), 0, 1, 0x20, 0);
+    return lbDvd_80017740(0, 0x7D8, 4, 4, lbSnap_8001E210(), 0, 1, 0x20, 0);
+}
 
-/// #gm_801B24B4
+void gm_801B24B4(MinorScene* arg0)
+{
+    Unk80433380_48* temp_r31_2;
+    struct GameCache* temp_r31;
+
+    temp_r31 = &lbDvd_8001822C()->game_cache;
+    lbDvd_800174BC();
+    temp_r31->major_id = MJ_CAMERA_MODE;
+    lbDvd_80018254();
+    lb_8001C550();
+    temp_r31_2 = lbDvd_GetPreloadedArchive(0x7D8);
+    lbSnap_8001E218(lbDvd_GetPreloadedArchive(0x7D7), temp_r31_2);
+}
 
 void gm_801B2510(MinorScene* arg0)
 {
@@ -1887,15 +1919,127 @@ void gm_801B2510(MinorScene* arg0)
     }
 }
 
-/// #gm_801B254C
+void gm_801B254C(MinorScene* arg0)
+{
+    VsModeData* temp_r31;
+    u8* temp_r3;
+    CSSData* temp_r30;
+    struct GameCache* temp_r30_2;
 
-/// #gm_801B25D4
+    temp_r31 = &gmMainLib_804D3EE0->unk_950;
+    temp_r30 = gm_801A427C(arg0);
+    temp_r3 = gm_801A5250();
 
-/// #gm_801B26AC
+    temp_r30->match_type = 1;
+    temp_r30->ko_star_counts = temp_r3;
 
-/// #gm_801B2704
+    temp_r30->data = *temp_r31;
 
-/// #gm_801B2790
+    temp_r30_2 = &lbDvd_8001822C()->game_cache;
+    lbDvd_800174BC();
+    temp_r30_2->major_id = MJ_CAMERA_MODE;
+    lbDvd_80018254();
+}
+
+void gm_801B25D4(MinorScene* arg0)
+{
+    VsModeData* temp_r31;
+    u64 temp_ret;
+    CSSData* temp_r3;
+    int i;
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_950;
+    temp_r3 = gm_801A4284(arg0);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+
+    *temp_r31 = temp_r3->data;
+
+    temp_ret = 0;
+    for (i = 0; i < 6; i++) {
+        temp_ret |= lbAudioAx_80026E84(temp_r3->data.data.players[i].c_kind);
+    }
+
+    lbAudioAx_80026F2C(0x14);
+    lbAudioAx_8002702C(4, temp_ret);
+    lbAudioAx_80027168();
+}
+
+void gm_801B26AC(MinorScene* arg0)
+{
+    SSSData* sss;
+    VsModeData* vs;
+    vs = &gmMainLib_804D3EE0->unk_950;
+    sss = gm_801A427C(arg0);
+    sss->data = *vs;
+    gm_80167FC4(sss);
+}
+
+void gm_801B2704(MinorScene* arg0)
+{
+    VsModeData* temp_r31;
+    SSSData* var_r3;
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_950;
+    var_r3 = gm_801A4284(arg0);
+    if (var_r3->start_game != 0) {
+        *temp_r31 = var_r3->data;
+        lbAudioAx_80026F2C(0x18);
+        lbAudioAx_8002702C(8, lbAudioAx_80026EBC(temp_r31->data.rules.xE));
+        lbAudioAx_80027168();
+        return;
+    }
+    gm_SetScenePendingMinor(MN_MENU);
+}
+
+void gm_801B2790(MinorScene* arg0)
+{
+    VsModeData* temp_r31;
+    StartMeleeData* temp_r30;
+    int i;
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_950;
+    temp_r30 = gm_801A427C(arg0);
+    gm_80167BC8(temp_r31);
+
+    temp_r30->rules = temp_r31->data.rules;
+    temp_r30->rules.x0_0 = 0;
+
+    temp_r31->data.rules.x4_4 = false;
+
+    temp_r30->rules.x0_6 = temp_r31->data.rules.x4_7;
+
+    temp_r30->rules.x5_0 = true;
+    temp_r30->rules.x1_2 = true;
+    temp_r30->rules.x1_3 = true;
+    temp_r30->rules.x2_5 = false;
+    temp_r30->rules.x2_6 = false;
+    temp_r30->rules.x3_1 = false;
+    temp_r30->rules.x4_0 = false;
+
+    temp_r30->rules.x38 = gm_80165268;
+    temp_r30->rules.x3C = gm_80165268;
+    temp_r30->rules.x40 = gm_8016BE80;
+    temp_r30->rules.x44 = gmCamera_801A31FC;
+    temp_r30->rules.x48 = gmCamera_801A3098;
+    temp_r30->rules.x4C = gmCamera_801A30E4;
+
+    temp_r30->rules.xD = 1;
+    temp_r30->rules.x2_4 = false;
+
+    for (i = 0; i < 6; i++) {
+        temp_r30->players[i] = temp_r31->data.players[i];
+        temp_r30->players[i].xD_b3 = true;
+    }
+
+    gm_801B0348(temp_r30);
+    gm_8016F088(temp_r30);
+    gm_80168FC4();
+    lb_8001C550();
+    lbSnap_8001E218(lbDvd_GetPreloadedArchive(0x7D7), lbDvd_GetPreloadedArchive(0x7D8));
+}
 
 void gm_801B2AF8(MinorScene* arg0)
 {
@@ -1908,7 +2052,7 @@ void gm_801B2AF8(MinorScene* arg0)
     gm_80168710(&gm_80479D98.match_end, temp_r30);
     gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
     gm_801A5258(temp_r29, &gm_80479D98.match_end);
-    gm_SetScenePendingMinor(1);
+    gm_SetScenePendingMinor(MN_MENU);
 }
 
 void gm_801B2B7C_OnInit(void)
@@ -2048,7 +2192,7 @@ void gm_801B607C(void)
 
 UNK_T gm_801B6320(void)
 {
-    return &gmMainLib_804D3EE0->unk_584;
+    return &gmMainLib_804D3EE0->unk_530.unk_584;
 }
 
 /// #gm_801B632C
@@ -2369,7 +2513,15 @@ void gm_801B91A8_OnLoad(void)
     gm_801A55C4();
 }
 
-/// #gm_801B91C8
+void gm_801B91C8(MinorScene* arg0)
+{
+    VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
+    CSSData* css = gm_801A427C(arg0);
+    css->match_type = 2;
+    css->ko_star_counts = 0;
+    css->data = *vs;
+    lbDvd_800174BC();
+}
 
 void gm_801B922C(MinorScene* scene)
 {
@@ -2381,11 +2533,70 @@ void gm_801B9254(MinorScene* scene)
     gm_801A5754(scene, &gmMainLib_804D3EE0->unk_10D0);
 }
 
-/// #gm_801B927C
+void gm_801B927C(MinorScene* arg0)
+{
+    VsModeData* temp_r31;
+    s32 temp_r3_2;
+    struct {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        s8 x3; // stage id?
+        u8 x4;
+        VsModeData data;
+    }* temp_r3; // maybe SSSData?
 
-/// #gm_801B931C
+    temp_r31 = &gmMainLib_804D3EE0->unk_10D0;
+    temp_r3 = gm_801A4284(arg0);
+    if (temp_r3->x4 != 0) {
+        *temp_r31 = temp_r3->data;
 
-/// #gm_801B9560
+        lbAudioAx_80026F2C(0x18);
+        lbAudioAx_8002702C(
+            8, lbAudioAx_80026EBC((enum InternalStageId) temp_r3->x3));
+        lbAudioAx_80027168();
+        return;
+    }
+    gm_SetScenePendingMinor(0);
+}
+
+void gm_801B931C(MinorScene* arg0)
+{
+    VsModeData* temp_r30;
+    StartMeleeData* temp_r29;
+    int i;
+
+    temp_r30 = &gmMainLib_804D3EE0->unk_10D0;
+    temp_r29 = gm_801A427C(arg0);
+    gm_80167BC8(temp_r30);
+
+    temp_r29->rules = temp_r30->data.rules;
+
+    temp_r29->rules.x2_5 = false;
+    temp_r29->rules.x0_6 = false;
+    temp_r29->rules.x0_0 = 1;
+    temp_r29->rules.x44 = fn_801B9850;
+    temp_r29->rules.x3_0 = false;
+    gm_80167A14(temp_r29->players);
+
+    for (i = 0; i < 4; i++) {
+        temp_r29->players[i] = temp_r30->data.players[i];
+        temp_r29->players[i].xC_b7 = true;
+        temp_r29->players[i].stocks = 1;
+        temp_r29->players[i].x14 = 0x96;
+    }
+
+    gm_801B0348(temp_r29);
+    gm_8016F088(temp_r29);
+    gm_80168FC4();
+}
+
+void gm_801B9560(MinorScene* scene)
+{
+    VsModeData* vs = &gmMainLib_804D3EE0->unk_10D0;
+    gm_80168710(&gm_80479D98.match_end, vs);
+    gm_801A5AF0(scene, 0, 0);
+}
 
 void gm_801B95B0_OnInit(void)
 {
@@ -2417,7 +2628,7 @@ void gm_801B999C(MinorScene* scene)
 
     temp_r3 = gm_801A4284(scene);
     if (temp_r3->pending_scene_change == 2) {
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         return;
     }
     gm_80167A14(vs->data.players);
@@ -2883,9 +3094,38 @@ void gm_801BA8FC(void)
 
 /// #gm_801BA938
 
-/// #gm_801BAA60
+#pragma push
+#pragma dont_inline on
+void gm_801BAA60(MinorScene* arg0)
+{
+    struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
+    CSSData* css = gm_801A427C(arg0);
+    PAD_STACK(8);
 
-/// #gm_801BAAD0
+    gm_801B06B0(css, 0xE, temp_r31->x2, 0, temp_r31->x3, temp_r31->x4, 0,
+                temp_r31->x6);
+    if (temp_r31->x44 == 1) {
+        gm_801BA938(temp_r31, 1, 4, 1);
+    }
+}
+#pragma pop
+
+void gm_801BAAD0(MinorScene* arg0)
+{
+    CSSData* temp_r3;
+    struct EventData* temp_r31;
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_530;
+    temp_r3 = gm_801A4284(arg0);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(MJ_MENU);
+        return;
+    }
+    gm_801B0730(temp_r3, &temp_r31->x2, NULL, &temp_r31->x3, &temp_r31->x4, NULL);
+    temp_r31->x8 = -1;
+    temp_r31->x9 = -1;
+    temp_r31->xA = -1;
+}
 
 /// #gm_801BAB40
 
@@ -2983,12 +3223,12 @@ void gm_801BEB68(s32 arg0)
 
 void gm_801BEB74(u8 arg0)
 {
-    gmMainLib_804D3EE0->unk_535 = arg0;
+    gmMainLib_804D3EE0->unk_530.unk_535 = arg0;
 }
 
 u8 gm_801BEB80(void)
 {
-    return gmMainLib_804D3EE0->unk_535;
+    return gmMainLib_804D3EE0->unk_530.unk_535;
 }
 
 /// #gm_801BEB8C

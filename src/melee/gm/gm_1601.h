@@ -137,7 +137,7 @@ struct lbl_8046B488_t;
 /* 165108 */ void fn_80165108(int, int);
 /* 165190 */ void fn_80165190(s32, s32);
 /* 1651FC */ void fn_801651FC(s32, s32);
-/* 165268 */ void gm_80165268(void);
+/* 165268 */ void gm_80165268(int);
 /* 165290 */ void gm_80165290(int);
 /* 1652B0 */ void fn_801652B0(s32, s32);
 /* 1652D8 */ void* fn_801652D8(void);
