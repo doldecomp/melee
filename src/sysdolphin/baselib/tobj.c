@@ -367,11 +367,11 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     Vec3 scale;
     Mtx m;
     Vec3 trans;
-    Vec3 rot;
-
-    u8 _[8];
+    Quaternion rot;
 
     bool no_assert = false;
+
+    PAD_STACK(8);
 
     if (tobj->repeat_s && tobj->repeat_t) {
         no_assert = true;
@@ -399,7 +399,7 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     trans.z = tobj->translate.z;
 
     PSMTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
-    HSD_MkRotationMtx(m, &rot);
+    HSD_MkRotationMtx(m, (Vec3*) &rot);
     MTXConcat(m, tobj->mtx, tobj->mtx);
     MTXScale(m, scale.x, scale.y, scale.z);
     MTXConcat(m, tobj->mtx, tobj->mtx);
