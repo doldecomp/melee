@@ -1900,7 +1900,7 @@ f32 gm_80168B34(CharacterKind ckind, int arg1, int arg2)
     return base + arg2 * 30;
 }
 
-void gm_80168BF8(int arg0)
+float gm_80168BF8(int arg0)
 {
     CharacterKind ckind = Player_GetPlayerCharacter(arg0);
     u32 costume = Player_GetCostumeId(arg0);

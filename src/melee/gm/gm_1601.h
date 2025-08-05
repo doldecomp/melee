@@ -195,7 +195,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 1689E4 */ UNK_RET fn_801689E4(UNK_PARAMS);
 /* 168A6C */ UNK_RET fn_80168A6C(UNK_PARAMS);
 /* 168B34 */ float gm_80168B34(CharacterKind, int, int);
-/* 168BF8 */ void gm_80168BF8(int);
+/* 168BF8 */ float gm_80168BF8(int);
 /* 168C5C */ void gm_80168C5C(u32);
 /* 168E54 */ UNK_RET fn_80168E54(s8, s8, u8, u8);
 /* 168F2C */ void fn_80168F2C(void);
@@ -244,7 +244,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 16A488 */ UNK_RET fn_8016A488(UNK_PARAMS);
 /* 16A4C8 */ UNK_RET fn_8016A4C8(UNK_PARAMS);
 /* 16A92C */ void gm_8016A92C(StartMeleeRules*);
-/* 16A944 */ UNK_RET gm_8016A944(UNK_PARAMS);
+/* 16A944 */ bool gm_8016A944(UNK_PARAMS);
 /* 16A97C */ void* gm_8016A97C(void);
 /* 16A98C */ UNK_T gm_8016A98C(void);
 /* 16A998 */ UNK_RET gm_8016A998(UNK_PARAMS);
