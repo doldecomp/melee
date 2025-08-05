@@ -78,7 +78,7 @@ func main() {
 					if sigs == 1 {
 						s = ""
 					}
-					fmt.Printf("%d fix%s\n", sigs, s)
+					fmt.Printf("%3d fix%s\n", sigs, s)
 				}
 			}
 			fmt.Printf("\nFixed %v signatures across %v source files.\n", totalSigs, totalFiles)

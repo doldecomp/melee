@@ -21,18 +21,18 @@
 /* 222648 */ static void grTNess_80222648(void);
 /* 22266C */ static bool grTNess_8022266C(void);
 /* 222674 */ static HSD_GObj* grTNess_80222674(int param_1);
-/* 22275C */ static void grTNess_8022275C(HSD_GObj* gobj);
-/* 222788 */ static bool grTNess_80222788(HSD_GObj*);
-/* 222790 */ static void grTNess_80222790(HSD_GObj*);
-/* 222794 */ static void grTNess_80222794(HSD_GObj*);
-/* 222798 */ static void grTNess_80222798(HSD_GObj* gobj);
-/* 2227E8 */ static bool grTNess_802227E8(HSD_GObj*);
-/* 2227F0 */ static void grTNess_802227F0(HSD_GObj* gobj);
-/* 222824 */ static void grTNess_80222824(HSD_GObj*);
-/* 222828 */ static void grTNess_80222828(HSD_GObj* gobj);
-/* 222878 */ static bool grTNess_80222878(HSD_GObj*);
-/* 222880 */ static void grTNess_80222880(HSD_GObj* gobj);
-/* 2228A0 */ static void grTNess_802228A0(HSD_GObj*);
+/* 22275C */ static void grTNess_8022275C(Ground_GObj* gobj);
+/* 222788 */ static bool grTNess_80222788(Ground_GObj*);
+/* 222790 */ static void grTNess_80222790(Ground_GObj*);
+/* 222794 */ static void grTNess_80222794(Ground_GObj*);
+/* 222798 */ static void grTNess_80222798(Ground_GObj* gobj);
+/* 2227E8 */ static bool grTNess_802227E8(Ground_GObj*);
+/* 2227F0 */ static void grTNess_802227F0(Ground_GObj* gobj);
+/* 222824 */ static void grTNess_80222824(Ground_GObj*);
+/* 222828 */ static void grTNess_80222828(Ground_GObj* gobj);
+/* 222878 */ static bool grTNess_80222878(Ground_GObj*);
+/* 222880 */ static void grTNess_80222880(Ground_GObj* gobj);
+/* 2228A0 */ static void grTNess_802228A0(Ground_GObj*);
 /* 2228A4 */ static DynamicsDesc* grTNess_802228A4(enum_t);
 /* 2228AC */ static bool grTNess_802228AC(Vec3*, int, HSD_JObj*);
 
@@ -124,28 +124,28 @@ static HSD_GObj* grTNess_80222674(int id)
     return gobj;
 }
 
-static void grTNess_8022275C(HSD_GObj* gobj)
+static void grTNess_8022275C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTNess_80222788(HSD_GObj* arg0)
+static bool grTNess_80222788(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTNess_80222790(HSD_GObj* arg0)
+static void grTNess_80222790(Ground_GObj* arg0)
 {
     return;
 }
 
-static void grTNess_80222794(HSD_GObj* arg0)
+static void grTNess_80222794(Ground_GObj* arg0)
 {
     return;
 }
 
-static void grTNess_80222798(HSD_GObj* gobj)
+static void grTNess_80222798(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -154,23 +154,23 @@ static void grTNess_80222798(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTNess_802227E8(HSD_GObj* arg0)
+static bool grTNess_802227E8(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTNess_802227F0(HSD_GObj* gobj)
+static void grTNess_802227F0(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTNess_80222824(HSD_GObj* arg0)
+static void grTNess_80222824(Ground_GObj* arg0)
 {
     return;
 }
 
-static void grTNess_80222828(HSD_GObj* gobj)
+static void grTNess_80222828(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -179,17 +179,17 @@ static void grTNess_80222828(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTNess_80222878(HSD_GObj* arg0)
+static bool grTNess_80222878(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTNess_80222880(HSD_GObj* gobj)
+static void grTNess_80222880(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-static void grTNess_802228A0(HSD_GObj* arg0)
+static void grTNess_802228A0(Ground_GObj* arg0)
 {
     return;
 }

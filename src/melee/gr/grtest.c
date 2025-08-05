@@ -4,6 +4,7 @@
 
 #include "gr/grtest.h"
 
+#include "gr/forward.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
@@ -109,22 +110,22 @@ HSD_GObj* grTest_80207044(int gobj_id)
     return gobj;
 }
 
-void grTest_80207130(HSD_GObj* gobj)
+void grTest_80207130(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTest_8020715C(HSD_GObj* gobj)
+bool grTest_8020715C(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTest_80207164(HSD_GObj* gobj) {}
+void grTest_80207164(Ground_GObj* gobj) {}
 
-void grTest_80207168(HSD_GObj* gobj) {}
+void grTest_80207168(Ground_GObj* gobj) {}
 
-void grTest_8020716C(HSD_GObj* gobj)
+void grTest_8020716C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -133,12 +134,12 @@ void grTest_8020716C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTest_802071BC(HSD_GObj* gobj)
+bool grTest_802071BC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTest_802071C4(HSD_GObj* gobj)
+void grTest_802071C4(Ground_GObj* gobj)
 {
     HSD_JObj* iVar2;
     u32 uVar3;
@@ -186,27 +187,27 @@ void grTest_802071C4(HSD_GObj* gobj)
     }
 }
 
-void grTest_802073AC(HSD_GObj* gobj) {}
+void grTest_802073AC(Ground_GObj* gobj) {}
 
 void grTest_802073B0(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTest_802073D0(HSD_GObj* gobj)
+void grTest_802073D0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTest_802073FC(HSD_GObj* gobj)
+bool grTest_802073FC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTest_80207404(HSD_GObj* gobj) {}
+void grTest_80207404(Ground_GObj* gobj) {}
 
-void grTest_80207408(HSD_GObj* gobj) {}
+void grTest_80207408(Ground_GObj* gobj) {}
 
 struct DynamicsDesc* grTest_8020740C(int unused)
 {

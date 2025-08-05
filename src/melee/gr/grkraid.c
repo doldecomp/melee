@@ -114,64 +114,64 @@ HSD_GObj* grKraid_801FE0C4(int gobj_id)
     return gobj;
 }
 
-void grKraid_801FE1B0(HSD_GObj* gobj)
+void grKraid_801FE1B0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grKraid_801FE1DC(HSD_GObj* gobj)
+bool grKraid_801FE1DC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grKraid_801FE1E4(HSD_GObj* gobj)
+void grKraid_801FE1E4(Ground_GObj* gobj)
 {
     return;
 }
 
-void grKraid_801FE1E8(HSD_GObj* gobj)
+void grKraid_801FE1E8(Ground_GObj* gobj)
 {
     return;
 }
 
 /// #grKraid_801FE1EC
 
-bool grKraid_801FE2C8(HSD_GObj* gobj)
+bool grKraid_801FE2C8(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grKraid_801FE2D0
 
-void grKraid_801FE35C(HSD_GObj* gobj)
+void grKraid_801FE35C(Ground_GObj* gobj)
 {
     return;
 }
 
-void grKraid_801FE360(HSD_GObj* gobj)
+void grKraid_801FE360(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
 }
 
-bool grKraid_801FE3A4(HSD_GObj* gobj)
+bool grKraid_801FE3A4(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grKraid_801FE3AC(HSD_GObj* gobj)
+void grKraid_801FE3AC(Ground_GObj* gobj)
 {
     return;
 }
 
-void grKraid_801FE3B0(HSD_GObj* gobj)
+void grKraid_801FE3B0(Ground_GObj* gobj)
 {
     return;
 }
 
-void grKraid_801FE3B4(HSD_GObj* gobj)
+void grKraid_801FE3B4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -185,14 +185,14 @@ void grKraid_801FE3B4(HSD_GObj* gobj)
     grAnime_801C7FF8(gobj, 0xD, 0x7, 0x2, 0.0f, 1.0f);
 }
 
-bool grKraid_801FE438(HSD_GObj* gobj)
+bool grKraid_801FE438(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grKraid_801FE440
 
-void grKraid_801FE6D4(HSD_GObj* gobj)
+void grKraid_801FE6D4(Ground_GObj* gobj)
 {
     return;
 }
@@ -201,7 +201,7 @@ void grKraid_801FE6D4(HSD_GObj* gobj)
 
 /// #grKraid_801FE818
 
-bool grKraid_801FE9F8(HSD_GObj* gobj)
+bool grKraid_801FE9F8(Ground_GObj* gobj)
 {
     return false;
 }
@@ -228,7 +228,7 @@ void grKraid_801FF068(HSD_GObj* gobj, int val)
 
 /// #grKraid_801FF0E0
 
-void grKraid_801FF14C(HSD_GObj* gobj)
+void grKraid_801FF14C(Ground_GObj* gobj)
 {
     return;
 }

@@ -191,22 +191,22 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
     return gobj;
 }
 
-void grInishie1_801FAAA0(HSD_GObj* gobj)
+void grInishie1_801FAAA0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grInishie1_801FAACC(HSD_GObj* gobj)
+bool grInishie1_801FAACC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grInishie1_801FAAD4(HSD_GObj* gobj) {}
+void grInishie1_801FAAD4(Ground_GObj* gobj) {}
 
-void grInishie1_801FAAD8(HSD_GObj* gobj) {}
+void grInishie1_801FAAD8(Ground_GObj* gobj) {}
 
-void grInishie1_801FAADC(HSD_GObj* gobj)
+void grInishie1_801FAADC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -217,7 +217,7 @@ void grInishie1_801FAADC(HSD_GObj* gobj)
     grMaterial_801C8858(Ground_801C3FA4(gobj, 0x2D), 0x20000000U);
 }
 
-bool grInishie1_801FAB60(HSD_GObj* gobj)
+bool grInishie1_801FAB60(Ground_GObj* gobj)
 {
     return false;
 }
@@ -231,9 +231,9 @@ void grInishie1_801FAB68(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grInishie1_801FABB0(HSD_GObj* gobj) {}
+void grInishie1_801FABB0(Ground_GObj* gobj) {}
 
-void grInishie1_801FABB4(HSD_GObj* gobj)
+void grInishie1_801FABB4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -241,16 +241,16 @@ void grInishie1_801FABB4(HSD_GObj* gobj)
     gp->xC_callback = NULL;
 }
 
-bool grInishie1_801FABF4(HSD_GObj* gobj)
+bool grInishie1_801FABF4(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grInishie1_801FABFC(HSD_GObj* gobj) {}
+void grInishie1_801FABFC(Ground_GObj* gobj) {}
 
-void grInishie1_801FAC00(HSD_GObj* gobj) {}
+void grInishie1_801FAC00(Ground_GObj* gobj) {}
 
-void grInishie1_801FAC04(HSD_GObj* gobj)
+void grInishie1_801FAC04(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -259,12 +259,12 @@ void grInishie1_801FAC04(HSD_GObj* gobj)
     gp->gv.inishie12.xCC = 0;
 }
 
-bool grInishie1_801FAC50(HSD_GObj* gobj)
+bool grInishie1_801FAC50(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grInishie1_801FAC58(HSD_GObj* gobj)
+void grInishie1_801FAC58(Ground_GObj* gobj)
 {
     Vec3 vec;
     HSD_JObj* jobj;
@@ -293,7 +293,7 @@ void grInishie1_801FAC58(HSD_GObj* gobj)
     }
 }
 
-void grInishie1_801FAD80(HSD_GObj* gobj) {}
+void grInishie1_801FAD80(Ground_GObj* gobj) {}
 
 void grInishie1_801FAD84(HSD_GObj* gobj)
 {

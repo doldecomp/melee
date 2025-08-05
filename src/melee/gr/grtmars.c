@@ -21,18 +21,18 @@
 /* 221F6C */ static void grTMars_80221F6C(void);
 /* 221F90 */ static bool grTMars_80221F90(void);
 /* 221F98 */ static HSD_GObj* grTMars_80221F98(int);
-/* 222080 */ static void grTMars_80222080(HSD_GObj*);
-/* 2220AC */ static bool grTMars_802220AC(HSD_GObj*);
-/* 2220B4 */ static void grTMars_802220B4(HSD_GObj*);
-/* 2220B8 */ static void grTMars_802220B8(HSD_GObj*);
-/* 2220BC */ static void grTMars_802220BC(HSD_GObj*);
-/* 22210C */ static bool grTMars_8022210C(HSD_GObj*);
-/* 222114 */ static void grTMars_80222114(HSD_GObj*);
-/* 222148 */ static void grTMars_80222148(HSD_GObj*);
-/* 22214C */ static void grTMars_8022214C(HSD_GObj*);
-/* 22219C */ static bool grTMars_8022219C(HSD_GObj*);
-/* 2221A4 */ static void grTMars_802221A4(HSD_GObj*);
-/* 2221C4 */ static void grTMars_802221C4(HSD_GObj*);
+/* 222080 */ static void grTMars_80222080(Ground_GObj*);
+/* 2220AC */ static bool grTMars_802220AC(Ground_GObj*);
+/* 2220B4 */ static void grTMars_802220B4(Ground_GObj*);
+/* 2220B8 */ static void grTMars_802220B8(Ground_GObj*);
+/* 2220BC */ static void grTMars_802220BC(Ground_GObj*);
+/* 22210C */ static bool grTMars_8022210C(Ground_GObj*);
+/* 222114 */ static void grTMars_80222114(Ground_GObj*);
+/* 222148 */ static void grTMars_80222148(Ground_GObj*);
+/* 22214C */ static void grTMars_8022214C(Ground_GObj*);
+/* 22219C */ static bool grTMars_8022219C(Ground_GObj*);
+/* 2221A4 */ static void grTMars_802221A4(Ground_GObj*);
+/* 2221C4 */ static void grTMars_802221C4(Ground_GObj*);
 /* 2221C8 */ static DynamicsDesc* grTMars_802221C8(enum_t);
 /* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
@@ -126,28 +126,28 @@ static HSD_GObj* grTMars_80221F98(int id)
     return gobj;
 }
 
-static void grTMars_80222080(HSD_GObj* gobj)
+static void grTMars_80222080(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTMars_802220AC(HSD_GObj* arg0)
+static bool grTMars_802220AC(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_802220B4(HSD_GObj* arg0)
+static void grTMars_802220B4(Ground_GObj* arg0)
 {
     return;
 }
 
-static void grTMars_802220B8(HSD_GObj* arg0)
+static void grTMars_802220B8(Ground_GObj* arg0)
 {
     return;
 }
 
-static void grTMars_802220BC(HSD_GObj* gobj)
+static void grTMars_802220BC(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -157,20 +157,20 @@ static void grTMars_802220BC(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTMars_8022210C(HSD_GObj* arg0)
+static bool grTMars_8022210C(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_80222114(HSD_GObj* gobj)
+static void grTMars_80222114(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTMars_80222148(HSD_GObj* arg0) {}
+static void grTMars_80222148(Ground_GObj* arg0) {}
 
-static void grTMars_8022214C(HSD_GObj* gobj)
+static void grTMars_8022214C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -180,17 +180,17 @@ static void grTMars_8022214C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTMars_8022219C(HSD_GObj* arg0)
+static bool grTMars_8022219C(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_802221A4(HSD_GObj* gobj)
+static void grTMars_802221A4(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-static void grTMars_802221C4(HSD_GObj* arg0) {}
+static void grTMars_802221C4(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grTMars_802221C8(enum_t arg0)
 {

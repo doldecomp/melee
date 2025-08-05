@@ -24,18 +24,18 @@ static void grTRoy_80224468(void);
 static void grTRoy_8022446C(void);
 static bool grTRoy_80224490(void);
 static HSD_GObj* grTRoy_80224498(s32 gobj_id);
-static void grTRoy_80224580(HSD_GObj* gobj);
-static bool grTRoy_802245AC(HSD_GObj*);
-static void grTRoy_802245B4(HSD_GObj*);
-static void grTRoy_802245B8(HSD_GObj*);
-static void grTRoy_802245BC(HSD_GObj* gobj);
-static bool grTRoy_8022460C(HSD_GObj*);
-static void grTRoy_80224614(HSD_GObj* gobj);
-static void grTRoy_80224648(HSD_GObj*);
-static void grTRoy_8022464C(HSD_GObj* gobj);
-static bool grTRoy_8022469C(HSD_GObj*);
-static void grTRoy_802246A4(HSD_GObj*);
-static void grTRoy_802246C4(HSD_GObj*);
+static void grTRoy_80224580(Ground_GObj* gobj);
+static bool grTRoy_802245AC(Ground_GObj*);
+static void grTRoy_802245B4(Ground_GObj*);
+static void grTRoy_802245B8(Ground_GObj*);
+static void grTRoy_802245BC(Ground_GObj* gobj);
+static bool grTRoy_8022460C(Ground_GObj*);
+static void grTRoy_80224614(Ground_GObj* gobj);
+static void grTRoy_80224648(Ground_GObj*);
+static void grTRoy_8022464C(Ground_GObj* gobj);
+static bool grTRoy_8022469C(Ground_GObj*);
+static void grTRoy_802246A4(Ground_GObj*);
+static void grTRoy_802246C4(Ground_GObj*);
 static DynamicsDesc* grTRoy_802246C8(enum_t);
 static bool grTRoy_802246D0(Vec3*, int, HSD_JObj*);
 
@@ -134,22 +134,22 @@ static HSD_GObj* grTRoy_80224498(s32 gobj_id)
     return gobj;
 }
 
-static void grTRoy_80224580(HSD_GObj* gobj)
+static void grTRoy_80224580(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTRoy_802245AC(HSD_GObj* gobj)
+static bool grTRoy_802245AC(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grTRoy_802245B4(HSD_GObj* gobj) {}
+static void grTRoy_802245B4(Ground_GObj* gobj) {}
 
-static void grTRoy_802245B8(HSD_GObj* gobj) {}
+static void grTRoy_802245B8(Ground_GObj* gobj) {}
 
-static void grTRoy_802245BC(HSD_GObj* gobj)
+static void grTRoy_802245BC(Ground_GObj* gobj)
 {
     u8 _[8];
     Ground* gp = GET_GROUND(gobj);
@@ -157,20 +157,20 @@ static void grTRoy_802245BC(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-static bool grTRoy_8022460C(HSD_GObj* gobj)
+static bool grTRoy_8022460C(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grTRoy_80224614(HSD_GObj* gobj)
+static void grTRoy_80224614(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTRoy_80224648(HSD_GObj* gobj) {}
+static void grTRoy_80224648(Ground_GObj* gobj) {}
 
-static void grTRoy_8022464C(HSD_GObj* gobj)
+static void grTRoy_8022464C(Ground_GObj* gobj)
 {
     u8 _[8];
     Ground* gp = GET_GROUND(gobj);
@@ -178,17 +178,17 @@ static void grTRoy_8022464C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-static bool grTRoy_8022469C(HSD_GObj* gobj)
+static bool grTRoy_8022469C(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grTRoy_802246A4(HSD_GObj* gobj)
+static void grTRoy_802246A4(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-static void grTRoy_802246C4(HSD_GObj* gobj) {}
+static void grTRoy_802246C4(Ground_GObj* gobj) {}
 
 static DynamicsDesc* grTRoy_802246C8(enum_t arg0)
 {

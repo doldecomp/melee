@@ -63,38 +63,34 @@ type TableType struct {
 	Fields        []CType
 }
 
-var fntypePredicate = FuncType{"bool", []string{"Item_GObj*"}}
-var fntypeEvent = FuncType{"void", []string{"Item_GObj*"}}
-var fntypeInteraction = FuncType{"void", []string{"Item_GObj*", "Item_GObj*"}}
-
 var tableTypes = map[string]TableType{
 	"ItemStateTable": {
 		NumAsmEntries: 4,
 		Fields: []CType{
 			nil, // enum_t
-			fntypePredicate,
-			fntypeEvent,
-			fntypePredicate,
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"void", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
 		},
 	},
 	"ItemLogicTable": {
 		NumAsmEntries: 15,
 		Fields: []CType{
 			nil, // ItemStateTable*
-			fntypeEvent,
-			fntypeEvent,
-			fntypeEvent,
-			fntypeEvent,
-			fntypeEvent,
-			fntypePredicate,
-			fntypePredicate,
-			fntypeEvent,
-			fntypePredicate,
-			fntypePredicate,
-			fntypePredicate,
-			fntypePredicate,
-			fntypePredicate,
-			fntypeInteraction,
+			FuncType{"void", []string{"Item_GObj*"}},
+			FuncType{"void", []string{"Item_GObj*"}},
+			FuncType{"void", []string{"Item_GObj*"}},
+			FuncType{"void", []string{"Item_GObj*"}},
+			FuncType{"void", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"void", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"bool", []string{"Item_GObj*"}},
+			FuncType{"void", []string{"Item_GObj*", "Item_GObj*"}},
 		},
 	},
 	"sdata_ItemGXLink": {
@@ -106,10 +102,10 @@ var tableTypes = map[string]TableType{
 	"StageCallbacks": {
 		NumAsmEntries: 5,
 		Fields: []CType{
-			FuncType{"void", []string{"HSD_GObj*"}},
-			FuncType{"bool", []string{"HSD_GObj*"}},
-			FuncType{"void", []string{"HSD_GObj*"}},
-			FuncType{"void", []string{"HSD_GObj*"}},
+			FuncType{"void", []string{"Ground_GObj*"}},
+			FuncType{"bool", []string{"Ground_GObj*"}},
+			FuncType{"void", []string{"Ground_GObj*"}},
+			FuncType{"void", []string{"Ground_GObj*"}},
 			nil, // u32
 		},
 	},
