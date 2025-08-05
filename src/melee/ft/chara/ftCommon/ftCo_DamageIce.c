@@ -3,7 +3,7 @@
 
 #include "ftCommon/forward.h"
 #include "lb/forward.h"
-#include <dolphin/mtx.h>
+#include <baselib/mtx.h>
 #include <baselib/forward.h>
 
 #include "ftCo_DamageIce.h"
@@ -21,6 +21,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ft_0881.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -115,7 +116,7 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
         ftCo_8009E140(fp, 0);
         ftCommon_8007F824(fp->gobj);
         fp->x2222_b3 = true;
-    
+
         if (fp->ground_or_air == GA_Air) {
             fp->self_vel = fp->x8c_kb_vel;
             fp->x8c_kb_vel.x = fp->x8c_kb_vel.y = fp->x8c_kb_vel.z = 0;
@@ -123,11 +124,11 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
             fp->gr_vel = fp->xF0_ground_kb_vel;
             fp->xF0_ground_kb_vel = 0;
         }
-        
+
         ftCommon_8007E2F4(fp, 0x1FF);
         fp->mv.co.damageice.wall_hit_dir = 0;
     }
-        
+
     {
         float rand, rand_range, rot_min, rot_max;
 
@@ -137,7 +138,7 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
         rand_range = rot_max - rot_min;
         fp->mv.co.damageice.rot_speed = rand_range * rand + rot_min;
     }
-    
+
     ftCo_800909D0(fp);
     ftCo_80090AC0(fp);
     ftColl_8007B0C0(fp->gobj, Intangible);
@@ -161,14 +162,14 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
     fp->take_dmg_cb = ftCo_DamageIce_OnHit;
 }
 
-static inline JObjRotMtx(Mtx mtx, HSD_JObj *jobj)
+static inline void JObjRotMtx(Mtx mtx, HSD_JObj *jobj)
 {
     Quaternion rot;
     Mtx rot_mtx;
-    
+
     HSD_JObjGetRotation(jobj, &rot);
     if ((jobj->flags & JOBJ_USE_QUATERNION) == 0) {
-        HSD_MkRotationMtx(rot_mtx, &rot);
+        HSD_MkRotationMtx(rot_mtx, (Vec3*)&rot);
     } else {
         HSD_MtxQuat(rot_mtx, &rot);
     }
@@ -184,14 +185,14 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     PAD_STACK(16);
 
     fp = GET_FIGHTER(gobj);
-    
+
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
     fp->x2227_b6 = true;
-    
+
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce, Ft_MF_Unk06, 0, 1, 0, NULL);
 
-    ftCommon_8007DBCC(fp, false,
+    ftCommon_InitGrab(fp, false,
                       fp->dmg.x1838_percentTemp *
                           p_ftCommonData->x790_damageice_unk);
 
@@ -202,15 +203,15 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     pos.y = fp->co_attrs.x13C_damageice_unk;
     pos.z = fp->co_attrs.x138_damageice_unk;
     PSMTXTrans(spEC, pos.x, pos.y, pos.z);
-    
+
     JObjRotMtx(sp11C, yrotn);
     JObjRotMtx(sp14C, xrotn);
-    
+
     PSMTXConcat(spEC, sp11C, sp17C);
     PSMTXConcat(sp17C, sp14C, sp17C);
-    
+
     HSD_MtxGetTranslate(sp17C, &pos);
-    
+
     HSD_JObjAddTranslationY(yrotn, pos.y);
     HSD_JObjAddTranslationZ(yrotn, pos.z);
 

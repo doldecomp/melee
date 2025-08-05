@@ -735,8 +735,8 @@ typedef struct ftCo_DatAttrs {
     /* +134 fp+25C */ float damageice_ice_size;
     /* +138 fp+260 */ float x138_damageice_unk;
     /* +13C fp+264 */ float x13C_damageice_unk;
-    /* +140 fp+268 */ float damageicejump_vel_x_mult;
-    /* +144 fp+26C */ float damageicejump_vel_y;
+    /* +140 fp+268 */ float damageicejump_vel_y;
+    /* +144 fp+26C */ float damageicejump_vel_x_mult;
     /* +148 fp+270 */ float respawn_platform_scale;
     /* +14C fp+274 */ float x14C;
     /* +150 fp+278 */ int x150;
