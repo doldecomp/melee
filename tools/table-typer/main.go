@@ -39,12 +39,13 @@ func main() {
 	fnTypes := make(map[string]FuncType)
 	for _, path := range hFiles {
 		for _, name := range parseTableDecls(path, tableTypeName) {
-			if tab, ok := tables[name]; ok && len(tab)%tableType.NumEntries == 0 {
+			fmt.Println("Found table", name, "in", path)
+			if tab, ok := tables[name]; ok && len(tab)%tableType.NumAsmEntries == 0 {
 				maps.Insert(fnTypes, tableType.parse(tab))
 			}
 		}
 	}
-	fmt.Println("Found", len(fnTypes), "functions in asm tables with known types.")
+	fmt.Println("Identified", len(fnTypes), "candidate functions for updating.")
 
 	totalSigs := 0
 	totalFiles := 0
@@ -54,7 +55,11 @@ func main() {
 		totalSigs += sigs
 		if sigs > 0 {
 			totalFiles++
-			fmt.Printf("%d fixes\n", sigs)
+			s := "es"
+			if sigs == 1 {
+				s = ""
+			}
+			fmt.Printf("%d fix%s\n", sigs, s)
 		}
 	}
 	fmt.Printf("\nFixed %v signatures across %v source files.\n", totalSigs, totalFiles)

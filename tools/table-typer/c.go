@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -48,24 +49,52 @@ type FuncSignature struct {
 func (fs FuncSignature) String() string {
 	var params []string
 	for i := range fs.ParamNames {
-		params = append(params, fmt.Sprintf("%s %s", fs.Type.Params[i], fs.ParamNames[i]))
+		if fs.ParamNames[i] == "" {
+			params = append(params, fs.Type.Params[i]) // just type
+		} else {
+			params = append(params, fmt.Sprintf("%s %s", fs.Type.Params[i], fs.ParamNames[i]))
+		}
 	}
 	return fmt.Sprintf("%s %s(%s)", fs.Type.Return, fs.Name, strings.Join(params, ", "))
 }
 
 type TableType struct {
-	NumEntries int
-	Fields     []CType
+	NumAsmEntries int
+	Fields        []CType
 }
+
+var fntypePredicate = FuncType{"bool", []string{"Item_GObj*"}}
+var fntypeEvent = FuncType{"void", []string{"Item_GObj*"}}
+var fntypeInteraction = FuncType{"void", []string{"Item_GObj*", "Item_GObj*"}}
 
 var tableTypes = map[string]TableType{
 	"ItemStateTable": {
-		NumEntries: 4,
+		NumAsmEntries: 4,
 		Fields: []CType{
-			nil, // "enum_t",
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
+			nil, // enum_t
+			fntypePredicate,
+			fntypeEvent,
+			fntypePredicate,
+		},
+	},
+	"ItemLogicTable": {
+		NumAsmEntries: 15,
+		Fields: []CType{
+			nil, // ItemStateTable*
+			fntypeEvent,
+			fntypeEvent,
+			fntypeEvent,
+			fntypeEvent,
+			fntypeEvent,
+			fntypePredicate,
+			fntypePredicate,
+			fntypeEvent,
+			fntypePredicate,
+			fntypePredicate,
+			fntypePredicate,
+			fntypePredicate,
+			fntypePredicate,
+			fntypeInteraction,
 		},
 	},
 }
@@ -96,7 +125,7 @@ func parseTableDecls(path string, tableType string) []string {
 		log.Fatalf("Failed to read file %s: %v", path, err)
 	}
 	var decls []string
-	matches := regexp.MustCompile(fmt.Sprintf(`extern\s+%v\s+(\w+)\[\];`, tableType)).FindAllStringSubmatch(string(content), -1)
+	matches := regexp.MustCompile(fmt.Sprintf(`extern\s+(?:struct\s+)?%v\s+(\w+)\[`, tableType)).FindAllStringSubmatch(string(content), -1)
 	for _, match := range matches {
 		if len(match) > 1 {
 			decls = append(decls, match[1])
@@ -154,14 +183,17 @@ func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) 
 	for retStart > 0 && isIdentByte(line[retStart-1]) {
 		retStart--
 	}
-	returnType := bytes.TrimSpace(line[retStart:retEnd])
-	if len(returnType) == 0 {
+	returnType := string(bytes.TrimSpace(line[retStart:retEnd]))
+	if returnType == "" || returnType == "return" {
+		// actually a function call, not a declaration
 		return nil, FuncSignature{}, false
 	}
 	paramStart := i + len(name) + 1
 	paramEnd := paramStart + bytes.IndexByte(line[paramStart:], ')')
 	params := bytes.Split(line[paramStart:paramEnd], []byte(","))
+	isDecl := strings.Contains(string(line), ";")
 	var paramTypes, paramNames []string
+	renames := 0
 	for _, param := range params {
 		typ, name, _ := strings.Cut(strings.TrimSpace(string(param)), " ")
 		if strings.HasPrefix(name, "*") {
@@ -169,15 +201,18 @@ func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) 
 			name = strings.TrimPrefix(name, "*")
 		}
 		// TODO: handle this more generically
-		if name == "" {
+		if name == "" && !isDecl {
 			name = "gobj"
+			if renames++; renames > 1 {
+				name += strconv.Itoa(renames)
+			}
 		}
 		paramTypes = append(paramTypes, typ)
 		paramNames = append(paramNames, name)
 	}
 	orig := line[retStart : paramEnd+1]
 	sig := FuncSignature{
-		Type:       FuncType{Return: string(returnType), Params: paramTypes},
+		Type:       FuncType{Return: returnType, Params: paramTypes},
 		Name:       string(line[retEnd+1 : i+len(name)]),
 		ParamNames: paramNames,
 	}

@@ -6,15 +6,20 @@ Given a C type name, this tool:
 3. Parses the data to extract functions with known types
 4. Rewrites .c and .h files to use the correct types for those functions
 
-Currently this only works with one hard-coded type: `ItemStateTable`. In theory,
-it can support other table types, but you'll have to add them to `tableTypes`
-and possibly do a bit of touching up in other places.
+Currently the tool works for these types:
+- `ItemStateTable`
+- `ItemLogicTable`
 
-Note that the tool may rewrite a file to reference a type that the file does not
-currently `#include`.
+In theory, it can support other table types, but you'll have to add them to
+`tableTypes` and possibly do a bit of touching up in other places.
 
 Example usage:
 
 ```
-go run . ItemStateTable ../../src/ ../../asm/
+go run . ItemStateTable ../../
 ```
+
+## Known bugs
+
+The tool cannot add `#include` statements, so rewritten files may fail to
+compile if they reference a type that requires a missing `#include`.

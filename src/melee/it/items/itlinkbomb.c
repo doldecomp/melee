@@ -609,7 +609,7 @@ bool it_8029F958(HSD_GObj* gobj)
     return 0;
 }
 
-int it_8029F960(HSD_GObj* gobj)
+bool it_8029F960(Item_GObj* gobj)
 {
     Item* item;
     Item* item_2;
@@ -629,7 +629,7 @@ int it_8029F960(HSD_GObj* gobj)
     return 0;
 }
 
-int it_8029FA30(Item_GObj* gobj)
+bool it_8029FA30(Item_GObj* gobj)
 {
     Item* item;
     f32 temp_f1;
@@ -700,18 +700,18 @@ bool it_8029FCEC(Item_GObj* gobj)
     return 0;
 }
 
-int it_8029FD20(Item_GObj* gobj)
+bool it_8029FD20(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-int it_8029FD40(Item_GObj* gobj)
+bool it_8029FD40(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return 0;
 }
 
-int it_8029FD64(Item_GObj* gobj)
+bool it_8029FD64(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }

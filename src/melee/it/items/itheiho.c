@@ -241,7 +241,7 @@ bool it_802D8EA4(Item_GObj* gobj)
     return 0;
 }
 
-int it_802D8EC8(Item_GObj* gobj)
+bool it_802D8EC8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     s32** attr = ip->xC4_article_data->x4_specialAttributes;
