@@ -742,7 +742,7 @@ void fn_801651FC(s32 slot, s32 arg1)
     }
 }
 
-void gm_80165268(void)
+void gm_80165268(int unused)
 {
     Camera_8002FC7C(4, 3);
 }

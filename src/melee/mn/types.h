@@ -49,7 +49,7 @@ struct PlayerInitData {
     /*0x00*/ s8 c_kind;    // character kind
     /*0x01*/ u8 slot_type; // slot type (0 = human, 1 = cpu?)
     /*0x02*/ s8 stocks;    // stocks
-    /*0x03*/ s8 color;     // color
+    /*0x03*/ u8 color;     // color
     /*0x04*/ u8 slot;      // port
     /*0x05*/ s8 x5;        // spawnpos32
     /*0x06*/ s8 spawn_dir; // spawn direction

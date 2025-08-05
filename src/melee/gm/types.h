@@ -247,29 +247,42 @@ struct gmm_x0 {
     /* 0x0526 */ s16 unk_526;
     /* 0x0528 */ s32 unk_528;
     /* 0x052C */ s32 unk_52C;
-    /* 0x0530 */ char pad_530[5]; /* maybe part of x52C[2]? */
-    /* 0x0535 */ u8 unk_535;
-    /* 0x0536 */ char pad_536[0x46]; /* maybe part of unk_535[0x47]? */
-    /* 0x057C */ s32 unk_57C;
-    /* 0x0580 */ char pad_580[4];
-    /* 0x0584 */ M2C_UNK unk_584; /* inferred */
-    /* 0x0588 */ s8 unk_588[4];   /* inferred */
-    /* 0x0590 */ char pad_58B[4]; /* inferred */
-    /* 0x0590 */ VsModeData unk_590;
-    /* 0x06D0 */ VsModeData unk_6D0;
-    /* 0x0810 */ VsModeData unk_810;
+    struct EventData {
+        /* 0x0530 */ u8 x0;
+        /* 0x0531 */ u8 x1;
+        /* 0x0532 */ s8 x2;
+        /* 0x0533 */ u8 x3;
+        /* 0x0534 */ s8 x4;
+        /* 0x0535 */ u8 unk_535;
+        /* 0x0536 */ u8 x6;
+        /* 0x0537 */ u8 x7;
+        /* 0x0538 */ s8 x8;
+        /* 0x0539 */ s8 x9;
+        /* 0x053A */ s8 xA;
+        /* 0x053B */ char pad_B[0x44 - 0xB];
+        /* 0x0574 */ s8 x44;
+        /* 0x0578 */ int x48;
+        /* 0x057C */ s32 unk_57C;
+        /* 0x0580 */ char pad_580[4];
+        /* 0x0584 */ M2C_UNK unk_584; /* inferred */
+        /* 0x0588 */ s8 unk_588[4];   /* inferred */
+        /* 0x0590 */ char pad_58B[4]; /* inferred */
+    } unk_530;
+    /* 0x0590 */ VsModeData unk_590; ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0; ///< super sudden death
+    /* 0x0810 */ VsModeData unk_810; ///< invisible melee
     /* 0x0950 */ VsModeData unk_950;
-    /* 0x0A90 */ VsModeData unk_A90;
-    /* 0x0BD0 */ VsModeData unk_BD0;
-    /* 0x0D10 */ VsModeData unk_D10;
-    /* 0x0E50 */ VsModeData unk_E50;
-    /* 0x0F90 */ VsModeData unk_F90;
-    /* 0x10D0 */ VsModeData unk_10D0;
+    /* 0x0A90 */ VsModeData unk_A90; ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0; ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10; ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50; ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90; ///< giant melee
+    /* 0x10D0 */ VsModeData unk_10D0; ///< stamina melee
     /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
     /* 0x1350 */ VsModeData unk_1350; ///< lightning melee
-    /* 0x1490 */ VsModeData unk_1490;
+    /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless, cruel
     /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
-    /* 0x17C0 */ VsModeData unk_1710;
+    /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
