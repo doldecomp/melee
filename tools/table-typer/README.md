@@ -9,6 +9,7 @@ Given a C type name, this tool:
 Currently the tool works for these types:
 - `ItemStateTable`
 - `ItemLogicTable`
+- `sdata_ItemGXLink`
 
 In theory, it can support other table types, but you'll have to add them to
 `tableTypes` and possibly do a bit of touching up in other places.
@@ -16,7 +17,13 @@ In theory, it can support other table types, but you'll have to add them to
 Example usage:
 
 ```
-go run . ItemStateTable ../../
+# fix functions listed in ItemStateTable tables
+go run . fixtab -type=ItemStateTable
+```
+
+```
+# search for UNK_RET functions in asm data
+go run . unk
 ```
 
 ## Known bugs

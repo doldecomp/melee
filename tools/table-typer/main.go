@@ -7,62 +7,155 @@ import (
 	"maps"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
+
+	"lukechampine.com/flagg"
 )
 
 func main() {
 	log.SetFlags(0)
-	if len(os.Args) != 3 {
-		fmt.Println("Usage: table-typer <table-type> <root dir>")
-		return
-	}
+	root := flagg.Root
+	rootDir := root.String("root", "../../", "root directory containing C sources and asm")
+	cmdFixTab := flagg.New("fixtab", "Fix function types for a given table type")
+	tableTypeName := cmdFixTab.String("type", "", "table type to fix")
+	cmdUnk := flagg.New("unk", "Search for UNK_RET functions in asm data")
+	cmd := flagg.Parse(flagg.Tree{
+		Cmd: root,
+		Sub: []flagg.Tree{
+			{Cmd: cmdFixTab},
+			{Cmd: cmdUnk},
+		},
+	})
 
-	tableTypeName, rootDir := os.Args[1], os.Args[2]
-	tableType, ok := tableTypes[tableTypeName]
-	if !ok {
-		log.Fatalf("Unknown table type: %s", tableTypeName)
-	}
-	srcDir := filepath.Join(rootDir, "src", "melee")
-	cFiles := findFiles(srcDir, ".c")
+	// parse source and asm files
+	srcDir := filepath.Join(*rootDir, "src", "melee")
 	hFiles := findFiles(srcDir, ".h")
-	if len(cFiles)+len(hFiles) == 0 {
-		log.Fatalln("No source files found in", rootDir)
+	cFiles := findFiles(srcDir, ".c")
+	if len(hFiles)+len(cFiles) == 0 {
+		log.Fatalln("No source files found in", *rootDir)
 	}
-	asmDir := filepath.Join(rootDir, "build", "GALE01", "asm", "melee")
+	asmDir := filepath.Join(*rootDir, "build", "GALE01", "asm", "melee")
 	asmFiles := findFiles(asmDir, ".s")
 	if len(asmFiles) == 0 {
 		log.Fatalln("No asm files found in", asmDir)
 	}
+	fmt.Println("Sources: ", len(hFiles), ".h files,", len(cFiles), ".c files,", len(asmFiles), ".s files")
 	tables := extractAsmTables(asmFiles)
 
-	fnTypes := make(map[string]FuncType)
-	for _, path := range hFiles {
-		for _, name := range parseTableDecls(path, tableTypeName) {
-			fmt.Println("Found table", name, "in", path)
-			if tab, ok := tables[name]; ok && len(tab)%tableType.NumAsmEntries == 0 {
-				maps.Insert(fnTypes, tableType.parse(tab))
-			}
+	switch cmd {
+	case cmdFixTab:
+		if cmd.NArg() != 0 {
+			cmd.Usage()
+			return
 		}
-	}
-	fmt.Println("Identified", len(fnTypes), "candidate functions for updating.")
 
-	totalSigs := 0
-	totalFiles := 0
-	for _, path := range append(cFiles, hFiles...) {
-		fmt.Printf("\rChecking %-70v", path[:min(57, len(path))]+"...")
-		sigs := fixSignatures(path, fnTypes)
-		totalSigs += sigs
-		if sigs > 0 {
-			totalFiles++
-			s := "es"
-			if sigs == 1 {
-				s = ""
+		fix := func(tableTypeName string, tableType TableType) {
+			fnTypes := make(map[string]FuncType)
+			for _, path := range append(hFiles, cFiles...) {
+				for _, name := range parseTableDecls(path, tableTypeName) {
+					fmt.Println("Found table", name, "in", path)
+					if tab, ok := tables[name]; ok && len(tab)%tableType.NumAsmEntries == 0 {
+						maps.Insert(fnTypes, tableType.parse(tab))
+					}
+				}
 			}
-			fmt.Printf("%d fix%s\n", sigs, s)
+			fmt.Println("Identified", len(fnTypes), "candidate functions for updating.")
+			if len(fnTypes) == 0 {
+				fmt.Println("Nothing to do, exiting.")
+				return
+			}
+			totalSigs := 0
+			totalFiles := 0
+			for _, path := range append(hFiles, cFiles...) {
+				fmt.Printf("\rChecking %-70v", path[:min(57, len(path))]+"...")
+				sigs := fixSignatures(path, fnTypes)
+				totalSigs += sigs
+				if sigs > 0 {
+					totalFiles++
+					s := "es"
+					if sigs == 1 {
+						s = ""
+					}
+					fmt.Printf("%d fix%s\n", sigs, s)
+				}
+			}
+			fmt.Printf("\nFixed %v signatures across %v source files.\n", totalSigs, totalFiles)
+		}
+
+		switch *tableTypeName {
+		case "":
+			fmt.Println("No table type specified. Available types:")
+			for name := range tableTypes {
+				fmt.Println(" -", name)
+			}
+		case "all":
+			for name, typ := range tableTypes {
+				fmt.Println("Fixing table type", name)
+				fix(name, typ)
+			}
+		default:
+			tableType, ok := tableTypes[*tableTypeName]
+			if !ok {
+				log.Fatalf("Unknown table type: %s", *tableTypeName)
+			}
+			fix(*tableTypeName, tableType)
+		}
+
+	case cmdUnk:
+		if cmd.NArg() != 0 {
+			cmd.Usage()
+			return
+		}
+		fmt.Println("Found", len(tables), "asm tables in", asmDir)
+		fnNames := make(map[string]string)
+		for name, entries := range tables {
+			for _, entry := range entries {
+				if entry.Size != 4 {
+					continue
+				}
+				fnNames[entry.Value] = name
+			}
+		}
+		fmt.Println("Found", len(fnNames), "symbols in tables.")
+		candidates := make(map[string]struct{})
+		findUNKs := func(path string) (n int) {
+			content, err := os.ReadFile(path)
+			if err != nil {
+				log.Fatalf("Failed to read file %s: %v", path, err)
+			}
+			for name := range fnNames {
+				if bytes.Contains(content, []byte(fmt.Sprintf("UNK_RET %s", name))) {
+					n++
+					candidates[name] = struct{}{}
+				}
+			}
+			return n
+		}
+		total := 0
+		for _, path := range append(hFiles, cFiles...) {
+			fmt.Printf("\rChecking %-70v", path[:min(57, len(path))]+"...")
+			n := findUNKs(path)
+			total += n
+			if n > 0 {
+				fmt.Printf("%3d found, %4d total\n", n, len(candidates))
+			}
+		}
+		var tables []string
+		seen := make(map[string]struct{})
+		for name := range candidates {
+			if _, ok := seen[fnNames[name]]; !ok {
+				tables = append(tables, fnNames[name])
+				seen[fnNames[name]] = struct{}{}
+			}
+		}
+		sort.Strings(tables)
+		fmt.Println("\nFound", len(tables), "asm tables with UNK_RET functions:")
+		for _, name := range tables {
+			fmt.Println(name)
 		}
 	}
-	fmt.Printf("\nFixed %v signatures across %v source files.\n", totalSigs, totalFiles)
 }
 
 func findFiles(dir string, ext string) []string {

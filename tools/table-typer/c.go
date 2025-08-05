@@ -97,6 +97,22 @@ var tableTypes = map[string]TableType{
 			fntypeInteraction,
 		},
 	},
+	"sdata_ItemGXLink": {
+		NumAsmEntries: 1,
+		Fields: []CType{
+			FuncType{"void", []string{"HSD_GObj*", "int"}},
+		},
+	},
+	"StageCallbacks": {
+		NumAsmEntries: 5,
+		Fields: []CType{
+			FuncType{"void", []string{"HSD_GObj*"}},
+			FuncType{"bool", []string{"HSD_GObj*"}},
+			FuncType{"void", []string{"HSD_GObj*"}},
+			FuncType{"void", []string{"HSD_GObj*"}},
+			nil, // u32
+		},
+	},
 }
 
 func (tt TableType) parse(entries []AsmTableEntry) iter.Seq2[string, FuncType] {
@@ -125,7 +141,7 @@ func parseTableDecls(path string, tableType string) []string {
 		log.Fatalf("Failed to read file %s: %v", path, err)
 	}
 	var decls []string
-	matches := regexp.MustCompile(fmt.Sprintf(`extern\s+(?:struct\s+)?%v\s+(\w+)\[`, tableType)).FindAllStringSubmatch(string(content), -1)
+	matches := regexp.MustCompile(fmt.Sprintf(`%v\s+(\w+)\[(?:\d+)?\][\s={;]+`, tableType)).FindAllStringSubmatch(string(content), -1)
 	for _, match := range matches {
 		if len(match) > 1 {
 			decls = append(decls, match[1])
