@@ -92,14 +92,15 @@ void ifTime_SetTime(HSD_JObj* jobj, int seconds, int centiseconds)
     if (hours != 0) {
         u32 flags = ~HSD_JObjGetFlags(jobj) & JOBJ_HIDDEN;
         int hours_ten;
+        struct ifTime_data* x = &ifTime_data;
         HSD_JObjClearFlags(ifTime_data.digits[IFTIME_HOUR_SEP], flags);
-        HSD_JObjClearFlags(ifTime_data.digits[IFTIME_HOUR_ONE], flags);
+        HSD_JObjClearFlags(x->digits[IFTIME_HOUR_ONE], flags);
         ifTime_SetDigit(ifTime_data.digits[IFTIME_HOUR_ONE],
                         IFTIME_ONES_DIGIT(hours));
         hours_ten = IFTIME_TENS_DIGIT(hours);
         if (hours_ten > 0) {
             HSD_JObjClearFlags(ifTime_data.digits[IFTIME_HOUR_TEN], flags);
-            ifTime_SetDigit(ifTime_data.digits[IFTIME_HOUR_TEN], hours_ten);
+            ifTime_SetDigit(x->digits[IFTIME_HOUR_TEN], hours_ten);
         } else {
             HSD_JObjSetFlags(ifTime_data.digits[IFTIME_HOUR_TEN], flags);
         }
@@ -159,6 +160,11 @@ int ifTime_GetCountdownSeconds(void)
     return seconds;
 }
 
+static inline int ifTime_GetCountdownSeconds_dontinline(void)
+{
+    return ifTime_GetCountdownSeconds();
+}
+
 void ifTime_UpdateCountdown(HSD_GObj* arg0)
 {
     struct ifTime_data* x = &ifTime_data;
@@ -187,8 +193,11 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
 {
     struct ifTime_data* x = &ifTime_data;
     HSD_JObj* jobj = arg0->hsd_obj;
-    int seconds;
     int centiseconds;
+    int seconds;
+    u8 tmp;
+    PAD_STACK(8);
+
     gm_8016AE50();
     seconds = gm_8016AEEC();
     centiseconds = gm_8016AF0C();
@@ -200,9 +209,10 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
             OSReport("Error : jobj dont't get (ifAddTimeDownModel)\n");
             OSPanic("iftime.c", 300, "");
         }
-        HSD_GObjObject_80390A70(x->countdown_timer, HSD_GObj_804D7849, jobj2);
+        tmp = HSD_GObj_804D7849;
+        HSD_GObjObject_80390A70(x->countdown_timer, tmp, jobj2);
         GObj_SetupGXLink(x->countdown_timer, HSD_GObj_JObjCallback, 11, 0);
-        x->countdown_seconds = ifTime_GetCountdownSeconds();
+        x->countdown_seconds = ifTime_GetCountdownSeconds_dontinline();
         lb_8000C0E8(jobj2, x->countdown_seconds, x->countdown_timer_models[0]);
         HSD_JObjReqAnimAll(jobj2, 0.0f);
         HSD_JObjAnimAll(jobj2);
