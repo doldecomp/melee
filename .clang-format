@@ -47,7 +47,6 @@ IncludeCategories:
     SortPriority: -1
   - Regex: '^".*\.static\.h"$'
     Priority: 3
-    SortPriority: -1
   - Regex: '^<(.*/)?forward\.h>$'
     Priority: 2
     SortPriority: -3
