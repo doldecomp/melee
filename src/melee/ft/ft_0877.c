@@ -450,7 +450,7 @@ void ft_80088110(Fighter* fp)
     fp->x2168 = 0;
 }
 
-void ft_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
+void ft_PlaySFX(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
 {
     sfx_id = ft_80087D0C(fp, sfx_id);
     fp->x2160 = lbAudioAx_800237A8(sfx_id, sfx_vol, sfx_pan);

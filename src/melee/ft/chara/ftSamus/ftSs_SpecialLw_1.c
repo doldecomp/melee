@@ -47,17 +47,17 @@ void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
 
 void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
 {
-    struct UNK_SAMUS_S2 unk_struct;
+    ftHurtboxInit hurt;
     Fighter* fp = GET_FIGHTER(gobj);
     ftColl_8007B0C0(gobj, 2);
 
-    unk_struct.parts[0] = 2;
-    unk_struct.parts[1] = 1;
-    unk_struct.parts[2] = 0;
-    unk_struct.vec1.x = unk_struct.vec1.y = unk_struct.vec1.z = 0;
-    unk_struct.vec2.x = unk_struct.vec2.y = unk_struct.vec2.z = 0;
-    unk_struct.scale = 3;
-    ftColl_8007B5AC(fp, &fp->hurt_capsules[0], &unk_struct);
+    hurt.bone_idx = FtPart_XRotN;
+    hurt.height = HurtHeight_Mid;
+    hurt.is_grabbable = false;
+    hurt.a_offset.x = hurt.a_offset.y = hurt.a_offset.z = 0;
+    hurt.b_offset.x = hurt.b_offset.y = hurt.b_offset.z = 0;
+    hurt.scale = 3;
+    ftColl_HurtboxInit(fp, &fp->hurt_capsules[0], &hurt);
 }
 
 void ftSs_SpecialLw_8012AF38(HSD_GObj* gobj)

@@ -165,7 +165,7 @@ void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
         pos.x = da->xC * fp->facing_dir + pos.x;
         pos.y += da->x10 + fp->fv.pp.x2250;
         fp->fv.pp.x222C = it_802C1590(gobj, &pos, 106, fp->facing_dir);
-        ft_80088148(fp, 130021, 127, 64);
+        ft_PlaySFX(fp, 130021, 127, 64);
         if (fp->fv.pp.x222C != NULL) {
             fp->death2_cb = ftPp_Init_8011F060;
             fp->take_dmg_cb = ftPp_Init_8011F060;
@@ -180,7 +180,7 @@ void ftPp_SpecialN_8011F500(Fighter_GObj* gobj)
             } else {
                 ft_800881D8(fp, 130090, 127, 64);
             }
-            ft_80088148(fp, 130024, 127, 64);
+            ft_PlaySFX(fp, 130024, 127, 64);
             inlineA0(gobj, fp);
         }
     }

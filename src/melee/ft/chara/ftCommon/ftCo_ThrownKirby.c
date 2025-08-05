@@ -111,13 +111,13 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     HSD_JObjGetScale(jobj, &fp->mv.co.thrownkirby.scale);
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_SkipThrowException, 0, 1, 0,
                               thrower_gobj);
-    fp->x21F0 = ftCo_800BE7C0;
+    fp->take_dmg_2_cb = ftCo_800BE7C0;
     fp->take_dmg_cb = ftCo_800BE7C0;
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221E_b0 = true;
     ftColl_8007B62C(gobj, 2);
     ftCommon_8007EFC0(fp, 1);
-    ftCommon_8007DBCC(fp, 0, get_float(thrower_gobj));
+    ftCommon_InitGrab(fp, 0, get_float(thrower_gobj));
     ftAnim_8006EBA4(gobj);
     ftCommon_8007D5D4(fp);
     fp->mv.co.thrownkirby.x18_b0 = false;
@@ -126,7 +126,7 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     scale->x = scale->y = scale->z = inlineB0(gobj);
     HSD_JObjSetScale(fp->x20A0_accessory, scale);
     lb_8000C2F8(fp->x20A0_accessory,
-                fp->parts[ftParts_8007500C(fp, FtPart_YRotN)].joint);
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_YRotN)].joint);
 }
 
 void ftCo_800BDB58(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
@@ -164,7 +164,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     } else {
         fp->self_vel.x = 0;
     }
-    fp->x1A4C -= ftKb_SpecialN_800F5AC0();
+    fp->grab_timer -= ftKb_SpecialN_800F5AC0();
 }
 
 void ftCo_ThrownKirbyStar_Phys(Fighter_GObj* gobj)
@@ -173,7 +173,7 @@ void ftCo_ThrownKirbyStar_Phys(Fighter_GObj* gobj)
     inlineA0(gobj);
     fp->mv.co.thrownkirby.x14 =
         ftCommon_8007DC08(fp, ftKb_SpecialN_800F5AD8());
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ftCo_800BE494(gobj);
     }
 }
@@ -232,10 +232,10 @@ void ftCo_ThrownCopyStar_Phys(Fighter_GObj* gobj)
     } else {
         fp->self_vel.x = 0;
     }
-    fp->x1A4C -= ftKb_SpecialN_800F5AC0();
+    fp->grab_timer -= ftKb_SpecialN_800F5AC0();
     fp->mv.co.thrownkirby.x14 =
         ftCommon_8007DC08(fp, ftKb_SpecialN_800F5AD8());
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ftCo_800BE494(gobj);
     }
 }
@@ -264,7 +264,7 @@ void ftCo_800BE494(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_ThrownKirby, Ft_MF_Unk06, 0, 1, 0,
                               NULL);
-    fp->x21F0 = ftCo_800BE7C0;
+    fp->take_dmg_2_cb = ftCo_800BE7C0;
     fp->take_dmg_cb = ftCo_800BE7C0;
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x221E_b0 = false;
@@ -286,7 +286,7 @@ void ftCo_800BE494(Fighter_GObj* gobj)
         fp->fv.kb.hat.kind = FTKIND_KIRBY;
     }
     fp->mv.co.thrownkirby.x10 = ftKb_SpecialN_800F5A98();
-    ftCommon_8007DBCC(fp, 0, fp->mv.co.thrownkirby.x10);
+    ftCommon_InitGrab(fp, 0, fp->mv.co.thrownkirby.x10);
     fp->mv.co.thrownkirby.xC = ftKb_SpecialN_800F5A70();
     ftAnim_8006EBA4(gobj);
     ftCommon_8007D5D4(fp);
@@ -307,9 +307,9 @@ void ftCo_ThrownKirby_Phys(Fighter_GObj* gobj)
 {
     u8 _[28] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A4C -= ftKb_SpecialN_800F5AC0();
+    fp->grab_timer -= ftKb_SpecialN_800F5AC0();
     if (!fp->mv.co.thrownkirby.x18_b0) {
-        if (fp->x1A4C <= 0) {
+        if (fp->grab_timer <= 0) {
             inlineC0(gobj);
         }
     } else {
@@ -324,10 +324,11 @@ void ftCo_800BE6AC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 scale;
-    scale.x = scale.y = scale.z = (1 - fp->mv.co.thrownkirby.xC) +
-                                  (((fp->mv.co.thrownkirby.x10 - fp->x1A4C) /
-                                    fp->mv.co.thrownkirby.x10) *
-                                   fp->mv.co.thrownkirby.xC);
+    scale.x = scale.y = scale.z =
+        (1 - fp->mv.co.thrownkirby.xC) +
+        (((fp->mv.co.thrownkirby.x10 - fp->grab_timer) /
+          fp->mv.co.thrownkirby.x10) *
+         fp->mv.co.thrownkirby.xC);
     scale.x *= fp->mv.co.thrownkirby.scale.x;
     scale.y *= fp->mv.co.thrownkirby.scale.y;
     scale.z *= fp->mv.co.thrownkirby.scale.z;

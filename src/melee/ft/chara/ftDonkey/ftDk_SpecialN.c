@@ -30,7 +30,7 @@ static void setCallbacks(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = ftDk_Init_8010D774;
     fp->death2_cb = ftDk_Init_8010D774;
-    fp->x21F0 = ftDk_SpecialN_DestroyAllEffects;
+    fp->take_dmg_2_cb = ftDk_SpecialN_DestroyAllEffects;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
 }
@@ -110,7 +110,7 @@ void ftDk_SpecialNStart_Anim(HSD_GObj* gobj)
 static void clearCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x21F0 = NULL;
+    fp->take_dmg_2_cb = NULL;
     fp->pre_hitlag_cb = NULL;
     fp->post_hitlag_cb = NULL;
 }

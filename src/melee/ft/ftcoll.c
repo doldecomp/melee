@@ -489,7 +489,7 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
         } else {
             ftCo_80094138(fp1);
             ftCo_800BFFD0(fp1, 118, 0);
-            ft_80088148(fp1, 104, 0x7F, 0x40);
+            ft_PlaySFX(fp1, 104, 0x7F, 0x40);
             pl_8003E150(fp1->player_id, fp1->x221F_b4);
             efSync_Spawn(27, NULL, &hit0->hurt_coll_pos);
         }
@@ -748,7 +748,7 @@ void ftColl_80078384(Fighter* fp, HurtCapsule* hurt, HitCapsule* hit)
 
 void ftColl_80078488(Fighter* fp)
 {
-    ft_80088148(fp, 85, 0x7F, 0x40);
+    ft_PlaySFX(fp, 85, 0x7F, 0x40);
 }
 
 UNK_T ftColl_800784B4(UNK_T arg0, UNK_T arg1, UNK_T arg2)
@@ -1003,7 +1003,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                                     if ((u32) temp_r23->element != (u32) HitElement_Inert) {
                                       if (ftColl_80076ED8((Fighter*) victim_fp, temp_r23, this_fp, (HitCapsule*)&this_fp ->hurt_capsules [n]) != false) {
                                                             if (((int) this_fp ->x1988 != 0) || ((int) this_fp ->x198C != 0) || this_fp ->x221D_b6 || ((&this_fp->hurt_capsules[n])->state != 0)) {
-                                                                ft_80088148(this_fp, hit_sfx [temp_r23 ->sfx_severity], 0x7FU, 0x40U);
+                                                                ft_PlaySFX(this_fp, hit_sfx [temp_r23 ->sfx_severity], 0x7FU, 0x40U);
                                                                 var_r0_2 = true;
                                                             } else {
                                                                 var_r0_2 = false;
@@ -1249,16 +1249,16 @@ void ftColl_8007B4E0(Fighter_GObj* gobj)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_8007B5AC(Fighter* fp, HurtCapsule* hurt, struct UNK_SAMUS_S2* arg2)
+void ftColl_HurtboxInit(Fighter* fp, HurtCapsule* hurt, ftHurtboxInit* init)
 {
-    hurt->bone_idx = arg2->parts[0];
-    hurt->kind = arg2->parts[1];
-    hurt->is_grabbable = arg2->parts[2];
+    hurt->bone_idx = init->bone_idx;
+    hurt->height = init->height;
+    hurt->is_grabbable = init->is_grabbable;
     hurt->state = HurtCapsule_Enabled;
     hurt->bone = fp->parts[hurt->bone_idx].joint;
-    hurt->a_offset = arg2->vec1;
-    hurt->b_offset = arg2->vec2;
-    hurt->scale = arg2->scale;
+    hurt->a_offset = init->a_offset;
+    hurt->b_offset = init->b_offset;
+    hurt->scale = init->scale;
     fp->x221A_b6 = true;
 }
 

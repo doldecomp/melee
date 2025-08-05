@@ -868,7 +868,7 @@ void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, NULL,
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint, NULL,
                 &sp14);
 
     lb_800119DC(&sp14, 120, 3, 0.1, M_PI / 3);

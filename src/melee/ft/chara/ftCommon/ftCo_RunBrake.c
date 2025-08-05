@@ -44,7 +44,7 @@ void ftCo_RunBrake_Enter(Fighter_GObj* gobj)
     fp->mv.co.runbrake.x0 = false;
     fp->mv.co.runbrake.frames = fp->co_attrs.max_run_brake_frames;
     if (fp->x197C != NULL) {
-        ft_80088148(fp, 0x119, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0x119, 0x7F, 0x40);
     }
 }
 

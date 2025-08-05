@@ -28,7 +28,7 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     ft_1->x221B_b5 = false;
     ft_1->x221B_b7 = false;
     ft_1->facing_dir = ft_2->facing_dir;
-    ftCommon_8007DBCC(ft_1, 0, ftCo_800DA824(ft_2));
+    ftCommon_InitGrab(ft_1, 0, ftCo_800DA824(ft_2));
     ftCo_800DB368(ft_2, ft_1);
     ft_1->accessory1_cb = ftCo_800DB464;
     ftCommon_8007D5D4(ft_1);

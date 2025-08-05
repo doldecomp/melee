@@ -39,7 +39,7 @@
 bool ftCo_80097570(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint;
+    HSD_JObj* jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
     HSD_JObjSetupMatrix(jobj);
     {
         float f = fp->x2226_b0 ? jobj->mtx[1][2] : jobj->mtx[1][1];
@@ -52,12 +52,12 @@ bool ftCo_80097570(Fighter_GObj* gobj)
 
 void ftCo_80097630(Fighter* fp, enum_t* sfx_ids, float threshold)
 {
-    ft_80088148(fp,
-                threshold >= p_ftCommonData->x1F0   ? sfx_ids[0]
-                : threshold >= p_ftCommonData->x1F4 ? sfx_ids[1]
-                : threshold >= p_ftCommonData->x1F4 ? sfx_ids[2]
-                                                    : sfx_ids[3],
-                127, 64);
+    ft_PlaySFX(fp,
+               threshold >= p_ftCommonData->x1F0   ? sfx_ids[0]
+               : threshold >= p_ftCommonData->x1F4 ? sfx_ids[1]
+               : threshold >= p_ftCommonData->x1F4 ? sfx_ids[2]
+                                                   : sfx_ids[3],
+               127, 64);
 }
 
 void ftCo_800976A4(Fighter_GObj* gobj)
@@ -141,7 +141,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
 {
     // ftCo_80097570
     Fighter* fp = gobj->user_data;
-    HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint;
+    HSD_JObj* jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
     float rot0, rot1;
     HSD_JObjSetupMatrix(jobj);
     if (fp->x2226_b0) {

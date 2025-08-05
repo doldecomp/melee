@@ -40,15 +40,15 @@ void ftCo_800C318C(Fighter_GObj* gobj, bool arg1)
     ftCo_800DD168(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_DamageSong, Ft_MF_None, 0, 1, 0,
                               NULL);
-    ftCommon_8007DBCC(fp, 0, inlineA0(fp, arg1));
+    ftCommon_InitGrab(fp, 0, inlineA0(fp, arg1));
 }
 
 static inline bool inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A4C -= p_ftCommonData->x63C;
+    fp->grab_timer -= p_ftCommonData->x63C;
     ftCommon_8007DC08(fp, p_ftCommonData->x640);
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ftCo_800C3480(gobj);
         return true;
     } else {

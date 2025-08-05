@@ -34,7 +34,7 @@ static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
     }
     /// @todo #ftCo_CaptureWaitKoopa_Anim
     ftCo_800BC458(gobj);
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ftCo_800DA698(fp->victim_gobj, false);
         fp->facing_dir = -fp->facing_dir;
         ftCo_800DC750(gobj);

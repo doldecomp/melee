@@ -301,10 +301,10 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
         if ((float) fp->fv.mt.x2234_shadowBallCharge ==
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
-            ft_80088148(fp, 200118, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_PlaySFX(fp, 200118, SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
         }
-        ft_80088148(fp, 200115, SFX_VOLUME_MAX, SFX_PAN_MID);
+        ft_PlaySFX(fp, 200115, SFX_VOLUME_MAX, SFX_PAN_MID);
     }
 }
 
@@ -1174,7 +1174,7 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
                         mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES,
                         atan2f(sp20.y - sp2C.y, sp20.x - sp2C.x),
                         fp->facing_dir);
-            ft_80088148(fp, 200115, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_PlaySFX(fp, 200115, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
 }

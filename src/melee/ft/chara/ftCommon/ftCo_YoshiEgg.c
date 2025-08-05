@@ -98,34 +98,34 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
     fp->mv.co.yoshiegg.scale = scale;
     lb_8000C2F8(fp->x20A0_accessory == NULL ? NULL
                                             : fp->x20A0_accessory->child,
-                fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint);
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint);
     {
         ftCo_DatAttrs_xBC_t* temp_r27;
         Fighter* fp = GET_FIGHTER(gobj);
-        struct UNK_SAMUS_S2 unk_struct;
+        ftHurtboxInit hurt;
         PAD_STACK(16);
 
         ftColl_8007B0C0(gobj, Intangible);
         temp_r27 = &fp->co_attrs.xBC;
-        unk_struct.parts[0] = ftParts_8007500C(fp, FtPart_TransN);
-        unk_struct.parts[1] = FtPart_TransN;
-        unk_struct.parts[2] = FtPart_TopN;
-        unk_struct.vec1 = temp_r27->x4;
-        unk_struct.vec2 = temp_r27->x10;
-        unk_struct.scale = temp_r27->x1C;
-        ftColl_8007B5AC(fp, fp->hurt_capsules, &unk_struct);
+        hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
+        hurt.height = HurtHeight_Mid;
+        hurt.is_grabbable = false;
+        hurt.a_offset = temp_r27->x4;
+        hurt.b_offset = temp_r27->x10;
+        hurt.scale = temp_r27->x1C;
+        ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
     }
     ftYs_Shield_8012CC94(arg1, &fp->self_vel);
     fp->facing_dir = ftYs_Shield_8012CCC4(arg1);
     fp->dmg.x182c_behavior = ftYs_Shield_8012CCD0(arg1);
     fp->mv.ca.specialhi.vel.y = 0;
     fp->mv.co.yoshiegg.x0 = arg1;
-    fp->x21F0 = ftCo_800BC3D0;
+    fp->take_dmg_2_cb = ftCo_800BC3D0;
     ftCommon_8007EFC0(fp, 1);
     fp->mv.co.yoshiegg.x10 = ftYs_Shield_8012CCF0(arg1);
     fp->mv.co.yoshiegg.x14 = fp->mv.co.walk.fast_anim_frame;
     fp->mv.co.yoshiegg.xC = ftYs_Shield_8012CCE0(arg1);
-    ftCommon_8007DBCC(fp, 0, ftYs_Shield_8012CD00(arg1));
+    ftCommon_InitGrab(fp, 0, ftYs_Shield_8012CD00(arg1));
     HSD_JObjGetScale(jobj, &fp->mv.co.yoshiegg.x18);
     fp->accessory4_cb = ftCo_800BBCC0;
 }
@@ -134,10 +134,10 @@ void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A4C -= ftYs_SpecialN_8012CD10(gobj);
+    fp->grab_timer -= ftYs_SpecialN_8012CD10(gobj);
     fp->mv.co.yoshiegg.x4 = ftCommon_8007DC08(fp, ftYs_SpecialN_8012CD28());
-    if (fp->x1A4C <= 0) {
-        ft_80088148(fp, 280088, 127, 64);
+    if (fp->grab_timer <= 0) {
+        ft_PlaySFX(fp, 280088, 127, 64);
         {
             HSD_JObj* jobj = fp->parts[FtPart_TopN].joint;
             ftCo_DatAttrs* ca = &fp->co_attrs;
@@ -198,10 +198,11 @@ void ftCo_800BC3AC(Fighter_GObj* gobj)
 void ftCo_800BC3D0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A4C = -(fp->dmg.x1838_percentTemp * ftYs_SpecialN_8012CDB4(gobj) -
-                  fp->x1A4C);
+    fp->grab_timer =
+        -(fp->dmg.x1838_percentTemp * ftYs_SpecialN_8012CDB4(gobj) -
+          fp->grab_timer);
     if (fp->dmg.x18CC == 3 && ftCo_800C0C88(fp->dmg.x18D0)) {
-        fp->x1A4C = 0;
+        fp->grab_timer = 0;
     }
     fp->x1828 = 4;
 }

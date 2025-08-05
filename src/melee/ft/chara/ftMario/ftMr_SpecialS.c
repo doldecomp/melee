@@ -46,13 +46,14 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
         u8 _[4];
 
         fp->cmd_vars[2] = true;
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                     NULL, &coords);
 
         {
-            HSD_GObj* cape = it_802B2560(gobj, fp->facing_dir, &coords,
-                                         ftParts_8007500C(fp, FtPart_RThumbNb),
-                                         sa->specials.cape_kind);
+            HSD_GObj* cape =
+                it_802B2560(gobj, fp->facing_dir, &coords,
+                            ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
+                            sa->specials.cape_kind);
 
             fp->fv.mr.x223C_capeGObj = cape;
         }
@@ -193,7 +194,7 @@ void ftMr_SpecialS_Phys(HSD_GObj* gobj)
 
         if (fp->cmd_vars[0] == 1U) {
             fp->cmd_vars[0] = 2U;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint,
+            lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint,
                         NULL, &coords);
 
             coords.x += 3 * fp->facing_dir;
@@ -232,7 +233,7 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
             } else {
                 fp->self_vel.y = 0;
             }
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint,
+            lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint,
                         NULL, &coords);
             coords.x += 3 * fp->facing_dir;
             lb_800119DC(&coords, 120, 3, 0.1, M_PI_3);

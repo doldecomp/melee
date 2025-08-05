@@ -54,7 +54,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
             HSD_JObjGetScale(jobj, scale);
         }
         fp->x2226_b2 = true;
-        ftCommon_8007DBCC(fp, 0, ftKb_SpecialN_800F5AF0(fp->victim_gobj));
+        ftCommon_InitGrab(fp, 0, ftKb_SpecialN_800F5AF0(fp->victim_gobj));
     }
 }
 

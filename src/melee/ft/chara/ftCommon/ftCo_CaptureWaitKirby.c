@@ -96,10 +96,10 @@ void ftCo_CaptureWaitKirby_IASA(Fighter_GObj* gobj)
         inlineB0(gobj);
         ftCo_800BD6EC(gobj);
     }
-    fp->x1A4C -= ftKb_SpecialN_800F5B00(fp->victim_gobj);
+    fp->grab_timer -= ftKb_SpecialN_800F5B00(fp->victim_gobj);
     fp->mv.co.capturekirby.x18 =
         ftCommon_8007DC08(fp, ftKb_SpecialN_800F5B10(fp->victim_gobj));
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         Fighter_GObj* victim_gobj = fp->victim_gobj;
         fp->facing_dir = ftKb_SpecialN_800F5A60(victim_gobj);
         HSD_JObjSetScale(jobj, &jobj->scale);

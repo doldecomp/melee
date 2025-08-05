@@ -8,6 +8,7 @@
 #include "ftCommon/forward.h" // IWYU pragma: export
 #include "ftKirby/forward.h"
 #include "it/forward.h"
+#include "lb/forward.h"
 
 #include "common_structs.h"
 
@@ -20,10 +21,12 @@ struct ftCollisionBox {
     /* +10 */ Vec2 right;
 };
 
-struct UNK_SAMUS_S2 {
-    Fighter_Part parts[3];
-    Vec3 vec1;
-    Vec3 vec2;
+struct ftHurtboxInit {
+    Fighter_Part bone_idx;
+    HurtHeight height;
+    u32 is_grabbable;
+    Vec3 a_offset;
+    Vec3 b_offset;
     float scale;
 };
 
@@ -128,15 +131,12 @@ union ftCommon_MotionVars {
         /* fp+235B */ u8 x1B;
     } damage;
     struct {
-        /* fp+2340 */ u8 x0;
-        /* fp+2341 */ s8 x1;
-        /* fp+2342 */ s8 x2;
-        /* fp+2343 */ s8 x3;
-        /* fp+2344 */ float x4;
-        /* fp+2348 */ ftCollisionBox x8;
+        /* fp+2340 */ u8 wall_hit_dir;
+        /* fp+2344 */ float rot_speed;
+        /* fp+2348 */ ftCollisionBox ice_coll;
     } damageice;
     struct {
-        /* fp+2340 */ float x0;
+        /* fp+2340 */ float escape_timer;
     } damageicejump;
     struct {
         /* fp+2340 */ float x0;

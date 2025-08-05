@@ -41,8 +41,8 @@ void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 4.263599872589111f;
 
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, &sp14,
-                pos);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                &sp14, pos);
 }
 
 void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
@@ -54,8 +54,8 @@ void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 0.013600001111626625f;
 
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, &sp14,
-                pos);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                &sp14, pos);
 }
 
 // 0x800E5D90
@@ -218,13 +218,13 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 
         switch (ftKind) {
         case FTKIND_FOX:
-            ft_80088148(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                        SFX_PAN_MID);
+            ft_PlaySFX(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
+                       SFX_PAN_MID);
             return;
 
         case FTKIND_FALCO:
-            ft_80088148(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                        SFX_PAN_MID);
+            ft_PlaySFX(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
+                       SFX_PAN_MID);
             return;
         }
     }
@@ -265,7 +265,7 @@ void ftFx_SpecialN_Enter(HSD_GObj* gobj)
     fp->mv.fx.SpecialN.isBlasterLoop = false;
 
     blasterGObj = it_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
-                              ftParts_8007500C(fp, FtPart_RThumbNb),
+                              ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
                               da->x20_FOX_BLASTER_GUN_ITKIND);
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
 
@@ -300,7 +300,7 @@ void ftFx_SpecialAirN_Enter(
 
     fp->mv.fx.SpecialN.isBlasterLoop = false;
     blasterGObj = it_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
-                              ftParts_8007500C(fp, FtPart_RThumbNb),
+                              ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
                               da->x20_FOX_BLASTER_GUN_ITKIND);
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
 
@@ -406,13 +406,13 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
             ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case FTKIND_FOX:
-                ft_80088148(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                            SFX_PAN_MID);
+                ft_PlaySFX(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
+                           SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
-                ft_80088148(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                            SFX_PAN_MID);
+                ft_PlaySFX(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
+                           SFX_PAN_MID);
                 return;
             }
         }
@@ -556,13 +556,13 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
             ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case FTKIND_FOX:
-                ft_80088148(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                            SFX_PAN_MID);
+                ft_PlaySFX(fp, foxSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
+                           SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
-                ft_80088148(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
-                            SFX_PAN_MID);
+                ft_PlaySFX(fp, falcoSFX[-1 == fp->facing_dir], SFX_VOLUME_MAX,
+                           SFX_PAN_MID);
                 return;
             }
         }
@@ -749,7 +749,7 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
             if (fp->fv.fx.x222C_blasterGObj == NULL) {
                 HSD_GObj* blasterGObj =
                     it_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
-                                ftParts_8007500C(fp, FtPart_RThumbNb),
+                                ftParts_GetBoneIndex(fp, FtPart_RThumbNb),
                                 da->x20_FOX_BLASTER_GUN_ITKIND);
 
                 fp->fv.fx.x222C_blasterGObj = blasterGObj;
@@ -811,12 +811,12 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     case ftCo_MS_ThrowLw: {
                         switch (ftLib_800872A4(gobj)) {
                         case FTKIND_FOX:
-                            ft_80088148(fp, 110109, SFX_VOLUME_MAX,
-                                        SFX_PAN_MID);
+                            ft_PlaySFX(fp, 110109, SFX_VOLUME_MAX,
+                                       SFX_PAN_MID);
                             return;
                         case FTKIND_FALCO:
-                            ft_80088148(fp, 100105, SFX_VOLUME_MAX,
-                                        SFX_PAN_MID);
+                            ft_PlaySFX(fp, 100105, SFX_VOLUME_MAX,
+                                       SFX_PAN_MID);
                             return;
                         }
                     default:
@@ -825,13 +825,13 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                     case ftCo_MS_ThrowB:
                         switch (ftLib_800872A4(gobj)) {
                         case FTKIND_FOX:
-                            ft_80088148(fp, foxSFX[1 == fp->facing_dir],
-                                        SFX_VOLUME_MAX, SFX_PAN_MID);
+                            ft_PlaySFX(fp, foxSFX[1 == fp->facing_dir],
+                                       SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
 
                         case FTKIND_FALCO:
-                            ft_80088148(fp, falcoSFX[1 == fp->facing_dir],
-                                        SFX_VOLUME_MAX, SFX_PAN_MID);
+                            ft_PlaySFX(fp, falcoSFX[1 == fp->facing_dir],
+                                       SFX_VOLUME_MAX, SFX_PAN_MID);
                             return;
                         }
                         break;
@@ -846,10 +846,10 @@ void ftFx_Throw_Anim(HSD_GObj* gobj)
                 ftFox_SpecialN_SetNULL(gobj);
                 switch (ftLib_800872A4(gobj)) {
                 case FTKIND_FOX:
-                    ft_80088148(fp, 110100, SFX_VOLUME_MAX, SFX_PAN_MID);
+                    ft_PlaySFX(fp, 110100, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
                 case FTKIND_FALCO:
-                    ft_80088148(fp, 100096, SFX_VOLUME_MAX, SFX_PAN_MID);
+                    ft_PlaySFX(fp, 100096, SFX_VOLUME_MAX, SFX_PAN_MID);
                     return;
                 }
             }

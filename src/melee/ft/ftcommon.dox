@@ -62,7 +62,7 @@ void ftCommon_8007DA24(Fighter*);
 float ftCommon_CalcHitlag(int dmg, FtMotionId msid, float mul);
 void ftCommon_8007DB24(Fighter_GObj*);
 void ftCommon_8007DB58(Fighter_GObj*);
-void ftCommon_8007DBCC(Fighter*, bool, float);
+void ftCommon_InitGrab(Fighter*, bool, float);
 bool ftCommon_8007DC08(Fighter*, float);
 void ftCommon_8007DD7C(Fighter_GObj*, Vec3*);
 void ftCommon_8007DFD0(Fighter_GObj* gobj, Vec3* arg1);

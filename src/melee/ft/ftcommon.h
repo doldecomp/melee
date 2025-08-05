@@ -56,7 +56,7 @@
 /* 07DA74 */ float ftCommon_CalcHitlag(int dmg, FtMotionId msid, float mul);
 /* 07DB24 */ void ftCommon_8007DB24(Fighter_GObj*);
 /* 07DB58 */ void ftCommon_8007DB58(Fighter_GObj*);
-/* 07DBCC */ void ftCommon_8007DBCC(Fighter*, bool, float);
+/* 07DBCC */ void ftCommon_InitGrab(Fighter*, bool, float);
 /* 07DC08 */ bool ftCommon_8007DC08(Fighter*, float);
 /* 07DD7C */ void ftCommon_8007DD7C(Fighter_GObj*, Vec3*);
 /* 07DFD0 */ void ftCommon_8007DFD0(Fighter_GObj* gobj, Vec3* arg1);

@@ -667,7 +667,7 @@ void ftCh_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[2], 129);
     fp->no_normal_motion = 1;
     fp->x2229_b6 = 1;
-    fp->x2229_b7 = 1;
+    fp->no_kb = 1;
     fp->x222A_b0 = 1;
     fp->x222A_b1 = 1;
     fp->x2229_b3 = 1;

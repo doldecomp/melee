@@ -504,17 +504,17 @@ struct ftCommonData {
     /* +770 */ float x770;
     /* +774 */ int x774;
     /* +778 */ float passive_wall_vel_y_base;
-    /* +77C */ float x77C;
-    /* +780 */ float x780;
-    /* +784 */ float x784;
-    /* +788 */ float x788;
-    /* +78C */ float x78C;
-    /* +790 */ float x790;
-    /* +794 */ float x794;
-    /* +798 */ float x798;
-    /* +79C */ float x79C;
-    /* +7A0 */ float x7A0;
-    /* +7A4 */ float x7A4;
+    /* +77C */ float damageice_gravity_mult;
+    /* +780 */ float damageice_min_speed;
+    /* +784 */ float damageice_speed_mult_on_break;
+    /* +788 */ float damageice_rot_speed_min;
+    /* +78C */ float damageice_rot_speed_max;
+    /* +790 */ float x790_damageice_unk;
+    /* +794 */ float x794_damageice_unk;
+    /* +798 */ float x798_damageice_unk;
+    /* +79C */ float damageice_dmg_time_reduction_mult;
+    /* +7A0 */ float damageice_ice_size;
+    /* +7A4 */ float damageicejump_escape_time;
     /* +7A8 */ float x7A8;
     /* +7AC */ int x7AC;
     /* +7B0 */ int x7B0;
@@ -732,11 +732,11 @@ typedef struct ftCo_DatAttrs {
     /* +128 fp+250 */ float x128;
     /* +12C fp+254 */ int x12C;
     /* +130 fp+258 */ float x130;
-    /* +134 fp+25C */ float bubble_ratio;
-    /* +138 fp+260 */ float x138;
-    /* +13C fp+264 */ float x13C;
-    /* +140 fp+268 */ float x140;
-    /* +144 fp+26C */ float x144;
+    /* +134 fp+25C */ float damageice_ice_size;
+    /* +138 fp+260 */ float x138_damageice_unk;
+    /* +13C fp+264 */ float x13C_damageice_unk;
+    /* +140 fp+268 */ float damageicejump_vel_x_mult;
+    /* +144 fp+26C */ float damageicejump_vel_y;
     /* +148 fp+270 */ float respawn_platform_scale;
     /* +14C fp+274 */ float x14C;
     /* +150 fp+278 */ int x150;
@@ -1444,7 +1444,7 @@ struct Fighter {
         /// unconfirmed?
         /* fp+1A48 */ s32 x1A48_hitsTaken;
     } AbsorbAttr;
-    /* fp+1A4C */ float x1A4C;
+    /* fp+1A4C */ float grab_timer;
     /* fp+1A50 */ s8 x1A50;
     /* fp+1A51 */ s8 x1A51;
     /* fp+1A52 */ u8 x1A52;
@@ -1572,7 +1572,7 @@ struct Fighter {
     /* fp+21E4 */ HSD_GObjEvent death2_cb;
     /* fp+21E8 */ HSD_GObjEvent death3_cb;
     /* fp+21EC */ HSD_GObjEvent x21EC;
-    /* fp+21F0 */ HSD_GObjEvent x21F0;
+    /* fp+21F0 */ HSD_GObjEvent take_dmg_2_cb;
     /* fp+21F4 */ HSD_GObjEvent x21F4;
     /* fp+21F8 */ HSD_GObjEvent x21F8;
     /* fp+21FC */ UnkFlagStruct x21FC_flag;
@@ -1749,7 +1749,7 @@ struct Fighter {
     /* fp+2229:4 */ u8 x2229_b4 : 1;
     /* fp+2229:5 */ u8 no_normal_motion : 1;
     /* fp+2229:6 */ u8 x2229_b6 : 1;
-    /* fp+2229:7 */ u8 x2229_b7 : 1;
+    /* fp+2229:7 */ u8 no_kb : 1;
 
     /* fp+222A:0 */ u8 x222A_b0 : 1;
     /* fp+222A:1 */ u8 x222A_b1 : 1;

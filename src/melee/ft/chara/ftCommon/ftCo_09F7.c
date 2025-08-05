@@ -104,7 +104,7 @@ block_7:
     if (arg3 == 0) {
         goto block_9;
     }
-    temp_ret = ftParts_8007500C(temp_r30, var_r27);
+    temp_ret = ftParts_GetBoneIndex(temp_r30, var_r27);
     var_f1 = M2C_BITWISE(f32, temp_ret);
     var_r27 = temp_ret;
 block_9:

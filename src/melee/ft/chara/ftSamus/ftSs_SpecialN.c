@@ -365,7 +365,7 @@ void ftSs_SpecialNHold_Coll(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 348, 0x0C4C5080, fp->cur_anim_frame, 1,
                                   0, NULL);
         ftSamus_updateDamageDeathCBs(gobj);
-        ft_80088148(fp, 260021, 127, 64);
+        ft_PlaySFX(fp, 260021, 127, 64);
         fp->cmd_vars[1] = 1;
     }
 }

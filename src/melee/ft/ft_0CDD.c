@@ -223,13 +223,13 @@ void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
                 pos2.z = 0.0f;
                 efSync_Spawn(1073, fighter_gobj, &pos2, &fighter->facing_dir);
                 if (fighter->facing_dir == 1) {
-                    ft_80088148(fighter, 228, 127, 64);
+                    ft_PlaySFX(fighter, 228, 127, 64);
                 } else {
-                    ft_80088148(fighter, 229, 127, 64);
+                    ft_PlaySFX(fighter, 229, 127, 64);
                 }
             } else {
                 efSync_Spawn(1029, fighter_gobj, &pos2);
-                ft_80088148(fighter, 230, 127, 64);
+                ft_PlaySFX(fighter, 230, 127, 64);
             }
         }
     }
@@ -377,12 +377,12 @@ inline void ftCo_800CE650_inline3(HSD_GObj* gobj)
         sp90 = 0.0F;
         lb_8000B1CC(fp->parts->joint, NULL, &sp84);
         efSync_Spawn(0x3FF, gobj, &sp84, &fp->facing_dir, &sp90);
-        ft_80088148(fp, 0xEE, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0xEE, 0x7F, 0x40);
     } else {
         it_80292EF8(fp->item_gobj, &spA0);
         ftCo_800CDE94(fp, &spA0, &sp94);
         efSync_Spawn(0x405, gobj, &sp94);
-        ft_80088148(fp, 0xEF, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0xEF, 0x7F, 0x40);
     }
 }
 

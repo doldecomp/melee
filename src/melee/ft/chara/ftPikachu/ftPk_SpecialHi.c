@@ -181,8 +181,9 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
-                        &vec);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
+                &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
             fp->pre_hitlag_cb = efLib_PauseAll;
@@ -192,8 +193,9 @@ void ftPk_SpecialHiStart1_Anim(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
             float tempf;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
-                        &vec2);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
+                &vec2);
             tempf = HSD_Randf();
             vec2.x += 6 * tempf - 3;
             tempf = HSD_Randf();
@@ -220,8 +222,9 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
-                        &vec);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
+                &vec);
             efSync_Spawn(1012, gobj, &vec);
             fp->x2219_b0 = true;
             fp->pre_hitlag_cb = efLib_PauseAll;
@@ -231,8 +234,9 @@ void ftPk_SpecialAirHiStart1_Anim(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->kind != FTKIND_PICHU) {
             float tempf;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, 0,
-                        &vec2);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, 0,
+                &vec2);
             tempf = HSD_Randf();
             vec2.x += (10 * tempf) - 5;
             tempf = HSD_Randf();
@@ -262,11 +266,11 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
     float tempf = (fp->facing_dir * atan2f(fp->self_vel.x, fp->self_vel.y)) +
                   (pika_attr->x78 - half_pi);
 
-    ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), tempf);
+    ftParts_8007592C(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN), tempf);
     scl.x = pika_attr->x7C_scale.x;
     scl.y = pika_attr->x7C_scale.y;
     scl.z = pika_attr->x7C_scale.z;
-    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
+    jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
     HSD_JObjSetScale(jobj, &scl);
 
     velocity_vec = fp->self_vel;
@@ -329,12 +333,14 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
                 atan2f(collData->floor.normal.x, collData->floor.normal.y);
             float angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
             ftParts_8007592C(fighter2,
-                             ftParts_8007500C(fighter2, FtPart_XRotN), angle2);
+                             ftParts_GetBoneIndex(fighter2, FtPart_XRotN),
+                             angle2);
         }
         scl.x = pika_attr->x6C_scale.x;
         scl.y = pika_attr->x6C_scale.y;
         scl.z = pika_attr->x6C_scale.z;
-        jobj = fighter2->parts[ftParts_8007500C(fighter2, FtPart_XRotN)].joint;
+        jobj = fighter2->parts[ftParts_GetBoneIndex(fighter2, FtPart_XRotN)]
+                   .joint;
         HSD_JObjSetScale(jobj, &scl);
     }
 
@@ -451,13 +457,13 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
         float angle = (fp->facing_dir * atan2f(collData->floor.normal.x,
                                                collData->floor.normal.y)) +
                       pika_attr->x68;
-        ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), angle);
+        ftParts_8007592C(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN), angle);
     }
 
     scl.x = pika_attr->x6C_scale.x;
     scl.y = pika_attr->x6C_scale.y;
     scl.z = pika_attr->x6C_scale.z;
-    jobj = fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint;
+    jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
     HSD_JObjSetScale(jobj, &scl);
 }
 

@@ -248,7 +248,7 @@ static void inlineA0(Fighter_GObj* gobj, float f1, float f2)
 static void inlineA1(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN),
+    ftParts_8007592C(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN),
                      fp->facing_dir *
                          atan2f(fp->self_vel.x + fp->x8c_kb_vel.x,
                                 fp->self_vel.y + fp->x8c_kb_vel.y));
@@ -531,7 +531,7 @@ block_83:
         return;
     }
     if ((u32) fp->dmg.x1860_element == 5U) {
-        ftCo_80090B60(gobj);
+        ftCo_DamageIce_Init(gobj);
     }
 }
 
@@ -924,7 +924,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                fp->motion_id == ftCo_MS_DamageIce)
     {
         ftCo_8008DCE0(gobj, ftCo_MS_DamageIce, fp->facing_dir);
-        ftCo_80091030(gobj);
+        ftCo_DamageIce_HitWhileFrozen(gobj);
     } else if (!ftCo_800C74F4(gobj)) {
         ftCommon_8007DB58(gobj);
         ftCo_8008E908(gobj, facing_dir);
@@ -1150,7 +1150,7 @@ static void doFlyRoll(Fighter_GObj* gobj)
     float trajectory =
         fp->facing_dir * atan2f(fp->self_vel.x + fp->x8c_kb_vel.x,
                                 fp->self_vel.y + fp->x8c_kb_vel.y);
-    ftParts_8007592C(fp, ftParts_8007500C(fp, FtPart_XRotN), trajectory);
+    ftParts_8007592C(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN), trajectory);
 }
 
 void ftCo_DamageFly_Phys(Fighter_GObj* gobj)

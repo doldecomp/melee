@@ -65,7 +65,7 @@ void ftCo_Dash_Enter(Fighter_GObj* gobj, int arg1)
     ftCommon_800804A0(fp, fp->mv.ca.specials.grav);
     fp->mv.co.dash.x4 = arg1;
     if (fp->x197C != NULL) {
-        ft_80088148(fp, 0x118, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0x118, 0x7F, 0x40);
     }
 }
 

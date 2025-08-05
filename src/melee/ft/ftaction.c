@@ -347,7 +347,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
         temp_r3 = cmd->x8;
         part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xB);
         if (((u8) M2C_FIELD(temp_r3, u8*, 2) >> 2U) & 1) {
-            hit->jobj = fp->parts[ftParts_8007500C(fp, part)].joint;
+            hit->jobj = fp->parts[ftParts_GetBoneIndex(fp, part)].joint;
         } else {
             hit->jobj = fp->parts[(int) part].joint;
         }
@@ -652,8 +652,8 @@ void ftAction_80071B50(Fighter_GObj* gobj, FtCmdState* cmd)
                 temp_r6_2 = M2C_FIELD(temp_r6, u8*, 3);
                 switch (temp_r8) {
                 case 0:
-                    ft_80088148(fp, temp_r4_2, (int) temp_r5_2,
-                                (int) temp_r6_2);
+                    ft_PlaySFX(fp, temp_r4_2, (int) temp_r5_2,
+                               (int) temp_r6_2);
                     break;
                 case 1:
                     ft_80088478(fp, temp_r4_2, (int) temp_r5_2,
@@ -888,7 +888,7 @@ void ftAction_80071FC8(Fighter_GObj* gobj, FtCmdState* cmd)
         cmd->x8 += 4;
         switch (temp_r28) {
         case 0:
-            ft_80088148(fp, var_r27, (int) temp_r30, (int) temp_r29);
+            ft_PlaySFX(fp, var_r27, (int) temp_r30, (int) temp_r29);
             return;
         case 1:
             ft_80088478(fp, var_r27, (int) temp_r30, (int) temp_r29);
@@ -1351,7 +1351,7 @@ void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
         vec0.x = 0.0f;
         ftCo_8009F834(gobj, ivec1.x, 0, 0, 0, &vec1, &vec0, 0.0f);
         if (ivec1.y != 0) {
-            ft_80088148(fp, 0x46, 0x7F, 0x40);
+            ft_PlaySFX(fp, 0x46, 0x7F, 0x40);
             if (temp_r29 == 0) {
                 ftAction_80071B50(gobj, cmd);
             }

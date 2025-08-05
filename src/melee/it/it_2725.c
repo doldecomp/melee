@@ -6055,9 +6055,9 @@ void it_80274D6C(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     // item->xACC_itemHurtbox[1].b_pos.x =
     // item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
-    item->xACC_itemHurtbox[1].is_grabbable =
+    *(float*) &item->xACC_itemHurtbox[1].is_grabbable =
         item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
-    item->xACC_itemHurtbox[1].kind =
+    *(float*) &item->xACC_itemHurtbox[1].height =
         item->x378_itemColl.xA4_ecbCurrCorrect.left.x + item->pos.x;
     item->xB64 = item->x378_itemColl.xA4_ecbCurrCorrect.top.x +
                  item->x378_itemColl.xA4_ecbCurrCorrect.right.y + item->pos.y;
@@ -6071,9 +6071,9 @@ void it_80274DAC(Item_GObj* item_gobj)
     item->xACC_itemHurtbox[1].b_pos.z = 0.0f;
     item->xACC_itemHurtbox[1].bone_idx = 0.0f;
     item = item_gobj->user_data;
-    item->xACC_itemHurtbox[1].is_grabbable =
+    *(float*) &item->xACC_itemHurtbox[1].is_grabbable =
         item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
-    item->xACC_itemHurtbox[1].kind =
+    *(float*) &item->xACC_itemHurtbox[1].height =
         item->x378_itemColl.xA4_ecbCurrCorrect.left.x + item->pos.x;
     item->xB64 = item->x378_itemColl.xA4_ecbCurrCorrect.top.y +
                  item->x378_itemColl.xA4_ecbCurrCorrect.right.y + item->pos.y;

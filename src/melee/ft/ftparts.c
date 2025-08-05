@@ -291,7 +291,7 @@ int ftParts_80074A74(HSD_GObj* arg0, int arg1)
 
 /// #ftParts_80074E58
 
-Fighter_Part ftParts_8007500C(Fighter* fp, Fighter_Part part)
+Fighter_Part ftParts_GetBoneIndex(Fighter* fp, Fighter_Part part)
 {
     return ftPartsTable[fp->kind]->part_to_joint[part];
 }

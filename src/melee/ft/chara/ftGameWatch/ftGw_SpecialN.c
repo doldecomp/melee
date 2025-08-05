@@ -49,10 +49,10 @@ static void ftGw_SpecialN_CreateSausage(HSD_GObj* gobj)
                         vec1.y = 6.5f;
                         vec1.z = 0.0f;
 
-                        lb_8000B1CC(
-                            fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)]
-                                .joint,
-                            &vec1, &vec0);
+                        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(
+                                                  fp, FtPart_LThumbNb)]
+                                        .joint,
+                                    &vec1, &vec0);
 
                         {
                             fp1 = gobj->user_data;

@@ -123,8 +123,8 @@ struct HurtCapsule {
     Vec3 a_pos;
     Vec3 b_pos;
     int bone_idx;      // 0x40
-    enum_t kind;       // 0x44. 0 = low, 1 = mid, 2 = high
-    bool is_grabbable; // 0x48
+    HurtHeight height; // 0x44. 0 = low, 1 = mid, 2 = high
+    u32 is_grabbable;  // 0x48 (might be flags)
 };
 
 STATIC_ASSERT(sizeof(HurtCapsule) == 0x4C);
