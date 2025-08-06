@@ -8,6 +8,9 @@
 
 #include "gr/forward.h"
 
+#include "it/inlines.h"
+
+
 /* 219530 */ void grFigureGet_80219530(bool);
 /* 219534 */ void grFigureGet_80219534(void);
 /* 21959C */ void grFigureGet_8021959C(void);

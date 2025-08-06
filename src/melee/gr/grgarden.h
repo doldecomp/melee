@@ -2,6 +2,9 @@
 #define GALE01_202B6C
 
 #include <placeholder.h>
+#include <platform.h>
+
+#include "it/inlines.h"
 
 /* 202B6C */ void grGarden_80202B6C(bool);
 /* 202B70 */ void grGarden_80202B70(void);

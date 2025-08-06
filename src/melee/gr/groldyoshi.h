@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "it/inlines.h"
+
 /* 20E798 */ void grOldYoshi_8020E798(bool);
 /* 20E79C */ void grOldYoshi_8020E79C(void);
 /* 20E824 */ void grOldYoshi_8020E824(void);
