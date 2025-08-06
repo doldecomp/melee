@@ -6,7 +6,7 @@
 
 #include <baselib/gobj.h>
 
-void grGarden_80202B6C(void) {}
+void grGarden_80202B6C(bool arg) {}
 
 /// #grGarden_80202B70
 
@@ -116,9 +116,9 @@ void fn_80203498(void) {}
 
 /// #grGarden_80203560
 
-bool grGarden_802035C8(void)
+DynamicsDesc* grGarden_802035C8(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 /// #grGarden_802035D0

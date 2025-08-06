@@ -50,7 +50,8 @@ func (fs *FuncSignature) setType(ft FuncType) {
 	fs.Type = ft
 	// special case for void
 	if len(ft.Params) == 1 && ft.Params[0] == "void" {
-		fs.ParamNames = nil
+		fs.ParamNames[0] = ""
+		return
 	}
 	if len(fs.ParamNames) < len(ft.Params) {
 		// orig had too few params; fill in the rest with default names

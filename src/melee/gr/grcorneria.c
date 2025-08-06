@@ -369,12 +369,12 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2EA0
 
-bool grCorneria_801E2EE4(void)
+DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
-bool grCorneria_801E2EEC(Vec3* v, u32 arg1, HSD_JObj* jobj)
+bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 sp14;
     HSD_GObj* temp_r3;

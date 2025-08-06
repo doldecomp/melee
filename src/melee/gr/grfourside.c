@@ -18,7 +18,7 @@ static struct {
     int x0;
 }* grFs_804D69D8;
 
-void grFourside_801F2D0C(void) {}
+void grFourside_801F2D0C(bool arg) {}
 
 void grFourside_801F2D10(void)
 {
@@ -165,9 +165,9 @@ int grFourside_801F3F10(void)
 
 /// #fn_801F3F74
 
-bool grFourside_801F41E0(void)
+DynamicsDesc* grFourside_801F41E0(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grFourside_801F41E8(Vec3* a, int arg, HSD_JObj* joint)

@@ -4,17 +4,18 @@
 #include <platform.h>
 #include <placeholder.h>
 
-#include <melee/it/forward.h>
 #include "gr/forward.h"
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
+#include "it/inlines.h"
 
 /* 1DCCFC */ UNK_RET grCorneria_801DCCFC(UNK_PARAMS);
 /* 1DCE1C */ UNK_RET grCorneria_801DCE1C(UNK_PARAMS);
-/* 1DD2C0 */ UNK_RET grCorneria_801DD2C0(UNK_PARAMS);
-/* 1DD350 */ UNK_RET grCorneria_801DD350(UNK_PARAMS);
-/* 1DD478 */ UNK_RET grCorneria_801DD478(UNK_PARAMS);
-/* 1DD508 */ UNK_RET grCorneria_801DD508(UNK_PARAMS);
+/* 1DD2C0 */ void grCorneria_801DD2C0(bool);
+/* 1DD350 */ void grCorneria_801DD350(void);
+/* 1DD478 */ void grCorneria_801DD478(void);
+/* 1DD508 */ void grCorneria_801DD508(void);
 /* 1DD52C */ bool grCorneria_801DD52C(void);
 /* 1DD534 */ HSD_GObj* grCorneria_801DD534(int);
 /* 1DD620 */ UNK_RET grCorneria_801DD620(UNK_PARAMS);
@@ -97,8 +98,8 @@
 /* 1E2D90 */ bool grCorneria_801E2D90(enum_t);
 /* 1E2E50 */ UNK_RET grCorneria_801E2E50(UNK_PARAMS);
 /* 1E2EA0 */ UNK_RET grCorneria_801E2EA0(UNK_PARAMS);
-/* 1E2EE4 */ bool grCorneria_801E2EE4(void);
-/* 1E2EEC */ bool grCorneria_801E2EEC(Vec3* v, u32 arg1, HSD_JObj* jobj);
+/* 1E2EE4 */ DynamicsDesc* grCorneria_801E2EE4(enum_t);
+/* 1E2EEC */ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj);
 /* 1E2FCC */ float grCorneria_801E2FCC(void);
 
 #endif

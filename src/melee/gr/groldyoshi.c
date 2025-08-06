@@ -5,7 +5,7 @@
 
 #include <baselib/gobj.h>
 
-void grOldYoshi_8020E798(void) {}
+void grOldYoshi_8020E798(bool arg) {}
 
 /// #grOldYoshi_8020E79C
 
@@ -97,9 +97,9 @@ void grOldYoshi_8020F2A4(void) {}
 
 /// #grOldYoshi_8020F31C
 
-bool grOldYoshi_8020F404(void)
+DynamicsDesc* grOldYoshi_8020F404(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 /// #grOldYoshi_8020F40C

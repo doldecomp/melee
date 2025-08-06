@@ -3,10 +3,10 @@
 
 #include <placeholder.h>
 
-/* 20E798 */ UNK_RET grOldYoshi_8020E798(UNK_PARAMS);
-/* 20E79C */ UNK_RET grOldYoshi_8020E79C(UNK_PARAMS);
-/* 20E824 */ UNK_RET grOldYoshi_8020E824(UNK_PARAMS);
-/* 20E828 */ UNK_RET grOldYoshi_8020E828(UNK_PARAMS);
+/* 20E798 */ void grOldYoshi_8020E798(bool);
+/* 20E79C */ void grOldYoshi_8020E79C(void);
+/* 20E824 */ void grOldYoshi_8020E824(void);
+/* 20E828 */ void grOldYoshi_8020E828(void);
 /* 20E84C */ bool grOldYoshi_8020E84C(void);
 /* 20E854 */ UNK_RET grOldYoshi_8020E854(UNK_PARAMS);
 /* 20E93C */ UNK_RET grOldYoshi_8020E93C(UNK_PARAMS);
@@ -35,7 +35,7 @@
 /* 20F2A4 */ UNK_RET grOldYoshi_8020F2A4(UNK_PARAMS);
 /* 20F2A8 */ UNK_RET fn_8020F2A8(UNK_PARAMS);
 /* 20F31C */ UNK_RET grOldYoshi_8020F31C(UNK_PARAMS);
-/* 20F404 */ UNK_RET grOldYoshi_8020F404(UNK_PARAMS);
-/* 20F40C */ UNK_RET grOldYoshi_8020F40C(UNK_PARAMS);
+/* 20F404 */ DynamicsDesc* grOldYoshi_8020F404(enum_t);
+/* 20F40C */ bool grOldYoshi_8020F40C(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif
