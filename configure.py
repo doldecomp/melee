@@ -889,7 +889,7 @@ config.libs = [
             Object(Matching, "melee/gm/gm_1A45.c"),
             Object(Matching, "melee/gm/gmscdata.c"),
             Object(Matching, "melee/gm/gmmenu.c"),
-            Object(NonMatching, "melee/gm/gmvsmelee.c"),
+            Object(Matching, "melee/gm/gmvsmelee.c"),
             Object(Matching, "melee/gm/gmvsdata.c"),
             Object(Matching, "melee/gm/gmmovieend.c"),
             Object(NonMatching, "melee/gm/gmregtyfall.c"),
