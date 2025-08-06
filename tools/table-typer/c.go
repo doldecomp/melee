@@ -46,6 +46,23 @@ type FuncSignature struct {
 	ParamNames []string
 }
 
+func (fs *FuncSignature) setType(ft FuncType) {
+	fs.Type = ft
+	// special case for void
+	if len(ft.Params) == 1 && ft.Params[0] == "void" {
+		fs.ParamNames = nil
+	}
+	if len(fs.ParamNames) < len(ft.Params) {
+		// orig had too few params; fill in the rest with default names
+		for len(fs.ParamNames) < len(ft.Params) {
+			fs.ParamNames = append(fs.ParamNames, defaultName(ft.Params[len(fs.ParamNames)]))
+		}
+	} else if len(fs.ParamNames) > len(ft.Params) {
+		// orig had too many params; try to preserve what they had before
+		fs.ParamNames = fs.ParamNames[:len(ft.Params)]
+	}
+}
+
 func (fs FuncSignature) String() string {
 	var params []string
 	for i := range fs.ParamNames {
@@ -110,15 +127,6 @@ var tableTypes = map[string]TableType{
 			nil, // u8 + u8 + u16
 			FuncType{"void", []string{"MinorScene*"}},
 			FuncType{"void", []string{"MinorScene*"}},
-			nil, // ???
-			nil,
-			nil,
-			nil,
-			nil,
-			nil,
-			nil,
-			nil,
-			nil,
 		},
 	},
 
@@ -218,16 +226,7 @@ func fixSignature(content []byte, name string, ft FuncType) ([]byte, bool) {
 	for i, line := range lines {
 		if orig, sig, ok := parseFuncSignature(name, line); ok {
 			if !sig.Type.equivalentTo(ft) {
-				sig.Type = ft
-				if len(sig.ParamNames) < len(ft.Params) {
-					// orig had too few params; fill in the rest with default names
-					for len(sig.ParamNames) < len(ft.Params) {
-						sig.ParamNames = append(sig.ParamNames, defaultName(ft.Params[len(sig.ParamNames)]))
-					}
-				} else if len(sig.ParamNames) > len(ft.Params) {
-					// orig had too many params; try to preserve what they had before
-					sig.ParamNames = sig.ParamNames[:len(ft.Params)]
-				}
+				sig.setType(ft)
 				lines[i] = bytes.Replace(lines[i], orig, []byte(sig.String()), 1)
 				changed = true
 			}
@@ -267,7 +266,7 @@ func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) 
 			typ += "*"
 			name = strings.TrimPrefix(name, "*")
 		}
-		if name == "" && typ != "void" && !isDecl {
+		if name == "" && !isDecl {
 			name = defaultName(typ)
 			if renames++; renames > 1 {
 				name += strconv.Itoa(renames)
@@ -290,5 +289,4 @@ func isIdentByte(b byte) bool {
 		(b >= 'a' && b <= 'z') ||
 		(b >= 'A' && b <= 'Z') ||
 		(b >= '0' && b <= '9')
-
 }

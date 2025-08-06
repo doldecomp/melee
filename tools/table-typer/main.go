@@ -126,7 +126,7 @@ func main() {
 				log.Fatalf("Failed to read file %s: %v", path, err)
 			}
 			for name := range fnNames {
-				if bytes.Contains(content, []byte(fmt.Sprintf("UNK_RET %s", name))) {
+				if bytes.Contains(content, fmt.Appendf(nil, "UNK_RET %s", name)) {
 					n++
 					candidates[name] = struct{}{}
 				}
