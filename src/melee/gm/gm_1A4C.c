@@ -554,7 +554,163 @@ void fn_801A94BC(HSD_GObj* gobj)
 
 /// #gm_801A9630
 
-/// #gm_801A9B30_OnEnter
+extern u8 gm_804D67C8;
+extern u8 gm_804D67C9;
+
+char* gm_803DB8B8[] = {
+    "GmRegendSimpleCaptain.thp",
+    "GmRegendSimpleDonkey.thp",
+    "GmRegendSimpleFox.thp",
+    "GmRegendSimpleGamewatch.thp",
+    "GmRegendSimpleKirby.thp",
+    "GmRegendSimpleKoopa.thp",
+    "GmRegendSimpleLink.thp",
+    "GmRegendSimpleLuigi.thp",
+    "GmRegendSimpleMario.thp",
+    "GmRegendSimpleMarth.thp",
+    "GmRegendSimpleMewtwo.thp",
+    "GmRegendSimpleNess.thp",
+    "GmRegendSimplePeach.thp",
+    "GmRegendSimplePikachu.thp",
+    "GmRegendSimplePoponana.thp",
+    "GmRegendSimplePurin.thp",
+    "GmRegendSimpleSamus.thp",
+    "GmRegendSimpleYoshi.thp",
+    "GmRegendSimpleZeldaseak.thp",
+    "GmRegendSimpleFalco.thp",
+    "GmRegendSimpleClink.thp",
+    "GmRegendSimpleDrmario.thp",
+    "GmRegendSimpleRoy.thp",
+    "GmRegendSimplePichu.thp",
+    "GmRegendSimpleGanon.thp",
+};
+
+char* gm_803DBBF4[] = {
+    "GmRegendAdventureCaptain.thp",
+    "GmRegendAdventureDonkey.thp",
+    "GmRegendAdventureFox.thp",
+    "GmRegendAdventureGamewatch.thp",
+    "GmRegendAdventureKirby.thp",
+    "GmRegendAdventureKoopa.thp",
+    "GmRegendAdventureLink.thp",
+    "GmRegendAdventureLuigi.thp",
+    "GmRegendAdventureMario.thp",
+    "GmRegendAdventureMarth.thp",
+    "GmRegendAdventureMewtwo.thp",
+    "GmRegendAdventureNess.thp",
+    "GmRegendAdventurePeach.thp",
+    "GmRegendAdventurePikachu.thp",
+    "GmRegendAdventurePoponana.thp",
+    "GmRegendAdventurePurin.thp",
+    "GmRegendAdventureSamus.thp",
+    "GmRegendAdventureYoshi.thp",
+    "GmRegendAdventureZeldaseak.thp",
+    "GmRegendAdventureFalco.thp",
+    "GmRegendAdventureClink.thp",
+    "GmRegendAdventureDrmario.thp",
+    "GmRegendAdventureRoy.thp",
+    "GmRegendAdventurePichu.thp",
+    "GmRegendAdventureGanon.thp",
+};
+
+char* gm_803DBF10[] = {
+    "GmRegendAllstarCaptain.thp",
+    "GmRegendAllstarDonkey.thp",
+    "GmRegendAllstarFox.thp",
+    "GmRegendAllstarGamewatch.thp",
+    "GmRegendAllstarKirby.thp",
+    "GmRegendAllstarKoopa.thp",
+    "GmRegendAllstarLink.thp",
+    "GmRegendAllstarLuigi.thp",
+    "GmRegendAllstarMario.thp",
+    "GmRegendAllstarMarth.thp",
+    "GmRegendAllstarMewtwo.thp",
+    "GmRegendAllstarNess.thp",
+    "GmRegendAllstarPeach.thp",
+    "GmRegendAllstarPikachu.thp",
+    "GmRegendAllstarPoponana.thp",
+    "GmRegendAllstarPurin.thp",
+    "GmRegendAllstarSamus.thp",
+    "GmRegendAllstarYoshi.thp",
+    "GmRegendAllstarZeldaseak.thp",
+    "GmRegendAllstarFalco.thp",
+    "GmRegendAllstarClink.thp",
+    "GmRegendAllstarDrmario.thp",
+    "GmRegendAllstarRoy.thp",
+    "GmRegendAllstarPichu.thp",
+    "GmRegendAllstarGanon.thp",
+};
+
+void gm_801A9B30_OnEnter(UNK_T unused)
+{
+    struct {
+        int x0;
+        int x4;
+        int x8;
+        int xC;
+        float x10;
+        float x14;
+        u8 pad[0x40 - 0x18];
+        u32 x40;
+    }* temp_r3_3;
+    s32 temp_r31;
+    HSD_GObj* gobj;
+    HSD_GObj* temp_r29;
+    const char* thpfile;
+    s32 var_r3_3;
+    int var_r3;
+
+    gm_804D67C8 = 0x1E;
+    gm_804D67C9 = 0;
+    temp_r29 = GObj_Create(0x13, 0x14, 0);
+    HSD_SObjLib_803A55DC(temp_r29, 0x280, 0x1E0, 8);
+    temp_r29->gxlink_prios = 0x800;
+    lbAudioAx_80026F2C(0x12);
+    lbAudioAx_8002702C(2, 0x10);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
+    lbBgFlash_800209F4();
+    gobj = GObj_Create(0xE, 0xF, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, NULL);
+    GObj_SetupGXLink(gobj, lbMthp8001F928, 0xB, 0);
+    temp_r31 = gm_801BEFB0();
+    var_r3 = gm_801A4310();
+    if (var_r3 == MJ_DEBUG_GOVER) {
+        var_r3 = gm_801BF050();
+    }
+    switch (var_r3) {
+    case MJ_CLASSIC_GOVER:
+        thpfile = gm_803DB8B8[temp_r31];
+        break;
+    case MJ_ADVENTURE_GOVER:
+        thpfile = gm_803DBBF4[temp_r31];
+        break;
+    default:
+        thpfile = gm_803DBF10[temp_r31];
+        break;
+    }
+    lbMthp8001FAA0(thpfile, 0x230, 0x1A0);
+    temp_r3_3 = lbMthp8001F890(gobj);
+    temp_r3_3->x10 = 320.0F;
+    temp_r3_3->x14 = 240.0F;
+    temp_r3_3->x40 |= 2;
+    switch (gm_801A4310()) {
+    case MJ_CLASSIC_GOVER:
+        var_r3_3 = gm_8017DFF4(1);
+        break;
+    case MJ_ADVENTURE_GOVER:
+        var_r3_3 = gm_8017DFF4(0);
+        break;
+    default:
+        var_r3_3 = gm_8017DFF4(2);
+        break;
+    }
+    if (var_r3_3 == 4) {
+        lbAudioAx_800237A8(0x9C45, 0x7F, 0x40);
+    } else {
+        lbAudioAx_800237A8(0x9C41, 0x7F, 0x40);
+    }
+}
 
 static u8 gm_804D67C8;
 static u8 gm_804D67C9;

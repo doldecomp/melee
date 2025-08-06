@@ -28,8 +28,8 @@
 /* 01F67C */ void lbMthp_8001F67C(HSD_GObj*, int);
 /* 01F800 */ void lbMthp_8001F800(void);
 /* 01F87C */ void lbMthp_8001F87C(void);
-/* 01F890 */ UNK_RET lbMthp8001F890(UNK_PARAMS);
-/* 01F928 */ UNK_RET lbMthp8001F928(UNK_PARAMS);
-/* 01FAA0 */ UNK_RET lbMthp8001FAA0(UNK_PARAMS);
+/* 01F890 */ UNK_T lbMthp8001F890(HSD_GObj*);
+/* 01F928 */ void lbMthp8001F928(HSD_GObj*, int);
+/* 01FAA0 */ UNK_RET lbMthp8001FAA0(const char* filename, int, int);
 
 #endif
