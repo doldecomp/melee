@@ -3,6 +3,7 @@
 #include "gmmovieend.h"
 
 #include "gm_1B03.static.h"
+#include "gmvsdata.h"
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
@@ -933,15 +934,6 @@ void gm_801B138C(MinorScene* arg0)
     gm_801A42D4();
 }
 
-extern MatchExitInfo gm_80479D98;
-extern ResultsMatchInfo gm_8047C020;
-extern UNK_T gm_8047E2A4[];
-extern StartMeleeData gm_80480530;
-extern UNK_T gm_80480668[];
-extern UNK_T gm_804807B0[];
-extern UNK_T un_804A1F48[];
-extern UNK_T gm_804D6860[];
-
 MinorScene gm_803DD9A0_MinorScenes[] = {
     {
         0x00,
@@ -951,8 +943,8 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B14DC,
         {
             MN_CSS,
-            gm_804807B0,
-            gm_804807B0,
+            &gm_804807B0,
+            &gm_804807B0,
         },
     },
     {
@@ -963,8 +955,8 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801B154C,
         {
             MN_SSS,
-            gm_80480668,
-            gm_80480668,
+            &gm_80480668,
+            &gm_80480668,
         },
     },
     {
@@ -988,7 +980,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         {
             MN_SUDDEN_DEATH,
             &gm_80480530,
-            gm_8047E2A4,
+            &gm_8047E2A4,
         },
     },
     {
@@ -1011,8 +1003,8 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         NULL,
         {
             MN_APPROACH,
-            gm_804D6860,
-            gm_804D6860,
+            &gm_804D6860,
+            &gm_804D6860,
         },
     },
     {
@@ -1035,7 +1027,7 @@ MinorScene gm_803DD9A0_MinorScenes[] = {
         gm_801A6308,
         {
             MN_PRIZE_INTERFACE,
-            un_804A1F48,
+            &un_804A1F48,
             NULL,
         },
     },
@@ -1206,9 +1198,6 @@ MinorScene gm_803DDB80_MinorScenes[] = {
 };
 
 extern UNK_T gm_804D68C8[];
-extern UNK_T gm_804807B0[];
-extern UNK_T gm_80480668[];
-extern StartMeleeData gm_80480530;
 
 MinorScene gm_803DDBE0_MinorScenes[] = {
     {
@@ -1231,8 +1220,8 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         gm_801B25D4,
         {
             MN_CSS,
-            gm_804807B0,
-            gm_804807B0,
+            &gm_804807B0,
+            &gm_804807B0,
         },
     },
     {
@@ -1243,8 +1232,8 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
         gm_801B2704,
         {
             MN_SSS,
-            gm_80480668,
-            gm_80480668,
+            &gm_80480668,
+            &gm_80480668,
         },
     },
     {

@@ -531,7 +531,6 @@ struct MatchExitInfo {
     int x4;
     int x8;
     MatchEnd match_end;
-    int pad;
 };
 
 struct ResultsMatchInfo {

@@ -2,21 +2,12 @@
 
 #include "gm_unsplit.h"
 #include "gmmovieend.h"
-#include "gmscextern.h"
+#include "gmvsdata.h"
 
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/mn/types.h>
-
-extern UNK_T gm_8047E2A4[];
-extern UNK_T gm_80480668[];
-extern UNK_T gm_804807B0[];
-extern UNK_T gm_804D6860[];
-extern UNK_T un_804A1F48[];
-extern StartMeleeData gm_80480530;
-extern MatchExitInfo gm_80479D98;
-extern ResultsMatchInfo gm_8047C020;
 
 MinorScene gm_803DEEB0_MinorScenes[] = {
     {
@@ -27,8 +18,8 @@ MinorScene gm_803DEEB0_MinorScenes[] = {
         gm_801B8BE0,
         {
             MN_CSS,
-            gm_804807B0,
-            gm_804807B0,
+            &gm_804807B0,
+            &gm_804807B0,
         },
     },
     {
@@ -39,8 +30,8 @@ MinorScene gm_803DEEB0_MinorScenes[] = {
         gm_801B8C30,
         {
             MN_SSS,
-            gm_80480668,
-            gm_80480668,
+            &gm_80480668,
+            &gm_80480668,
         },
     },
     {
@@ -64,7 +55,7 @@ MinorScene gm_803DEEB0_MinorScenes[] = {
         {
             MN_SUDDEN_DEATH,
             &gm_80480530,
-            gm_8047E2A4,
+            &gm_8047E2A4,
         },
     },
     {
@@ -87,8 +78,8 @@ MinorScene gm_803DEEB0_MinorScenes[] = {
         NULL,
         {
             MN_APPROACH,
-            gm_804D6860,
-            gm_804D6860,
+            &gm_804D6860,
+            &gm_804D6860,
         },
     },
     {
@@ -111,7 +102,7 @@ MinorScene gm_803DEEB0_MinorScenes[] = {
         gm_801A6308,
         {
             MN_PRIZE_INTERFACE,
-            un_804A1F48,
+            &un_804A1F48,
             NULL,
         },
     },
