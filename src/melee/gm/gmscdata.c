@@ -8,10 +8,12 @@
 #include <melee/gm/gmfixedcamera.h>
 #include <melee/gm/gmgiant.h>
 #include <melee/gm/gmhomerun.h>
+#include <melee/gm/gmhowto.h>
 #include <melee/gm/gminvisible.h>
 #include <melee/gm/gmlightning.h>
 #include <melee/gm/gmmenu.h>
 #include <melee/gm/gmmovieend.h>
+#include <melee/gm/gmomake15.h>
 #include <melee/gm/gmprogressive.h>
 #include <melee/gm/gmregtyfall.h>
 #include <melee/gm/gmresult.h>

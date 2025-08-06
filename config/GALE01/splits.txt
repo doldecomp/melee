@@ -1838,13 +1838,24 @@ melee/gm/gmregtyfall.c:
 	.sdata2     start:0x804DAA00 end:0x804DAA28
 
 melee/gm/gm_1A4C.c:
-	.text       start:0x801A7A44 end:0x801AD088
+	.text       start:0x801A7A44 end:0x801ACC94
 	.rodata     start:0x803B7D68 end:0x803B7D80
-	.data       start:0x803DB430 end:0x803DD408
+	.data       start:0x803DB430 end:0x803DD2C0
 	.bss        start:0x80480A00 end:0x80480D70
 	.sdata      start:0x804D4290 end:0x804D42E8
-	.sbss       start:0x804D67B0 end:0x804D6868
-	.sdata2     start:0x804DAA28 end:0x804DAB98
+	.sbss       start:0x804D67B0 end:0x804D6850
+	.sdata2     start:0x804DAA28 end:0x804DAB90
+
+melee/gm/gmhowto.c:
+	.text       start:0x801ACC94 end:0x801ACE94
+	.data       start:0x803DD2C0 end:0x803DD3F8
+	.sbss       start:0x804D6850 end:0x804D6858
+
+melee/gm/gmomake15.c:
+	.text       start:0x801ACE94 end:0x801AD088
+	.data       start:0x803DD3F8 end:0x803DD408
+	.sbss       start:0x804D6858 end:0x804D6860
+	.sdata2     start:0x804DAB90 end:0x804DAB98
 
 melee/gm/gmprogressive.c:
 	.text       start:0x801AD088 end:0x801AD920
@@ -1858,6 +1869,7 @@ melee/gm/gmapproach.c:
 	.data       start:0x803DD458 end:0x803DD4D0
 	.bss        start:0x80480D98 end:0x80480DA8
 	.sdata      start:0x804D42F8 end:0x804D4300
+	.sbss       start:0x804D6860 end:0x804D6868
 	.sdata2     start:0x804DABB0 end:0x804DABC8
 
 melee/gm/gm_1ADD.c:

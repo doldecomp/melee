@@ -44,10 +44,5 @@
 /* 1AC67C */ void fn_801AC67C(HSD_GObj*);
 /* 1AC6D8 */ void gm_801AC6D8_OnEnter(UNK_T);
 /* 1ACC90 */ void gm_801ACC90_OnLeave(UNK_T);
-/* 1ACC94 */ UNK_T gm_801ACC94(void);
-/* 1ACCA0 */ void gm_801ACCA0_OnEnter(UNK_T);
-/* 1ACD8C */ void gm_801ACD8C_OnFrame(void);
-/* 1ACE94 */ void gm_801ACE94_OnEnter(UNK_T);
-/* 1ACF8C */ void gm_801ACF8C_OnFrame(void);
 
 #endif
