@@ -14,11 +14,13 @@
 #include <melee/gm/gmmenu.h>
 #include <melee/gm/gmmovieend.h>
 #include <melee/gm/gmomake15.h>
+#include <melee/gm/gmopening.h>
 #include <melee/gm/gmprogressive.h>
 #include <melee/gm/gmregtyfall.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gmsinglebutton.h>
 #include <melee/gm/gmslomo.h>
+#include <melee/gm/gmstaffroll.h>
 #include <melee/gm/gmstamina.h>
 #include <melee/gm/gmsupersudden.h>
 #include <melee/gm/gmtiny.h>

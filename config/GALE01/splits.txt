@@ -1838,13 +1838,26 @@ melee/gm/gmregtyfall.c:
 	.sdata2     start:0x804DAA00 end:0x804DAA28
 
 melee/gm/gm_1A4C.c:
-	.text       start:0x801A7A44 end:0x801ACC94
-	.rodata     start:0x803B7D68 end:0x803B7D80
-	.data       start:0x803DB430 end:0x803DD2C0
-	.bss        start:0x80480A00 end:0x80480D70
+	.text       start:0x801A7A44 end:0x801A9DD0
+	.data       start:0x803DB430 end:0x803DBF78
+	.bss        start:0x80480A00 end:0x80480D58
 	.sdata      start:0x804D4290 end:0x804D42E8
-	.sbss       start:0x804D67B0 end:0x804D6850
-	.sdata2     start:0x804DAA28 end:0x804DAB90
+	.sbss       start:0x804D67B0 end:0x804D67D0
+	.sdata2     start:0x804DAA28 end:0x804DAAA8
+
+melee/gm/gmopening.c:
+	.text       start:0x801A9DD0 end:0x801AA644
+	.rodata     start:0x803B7D68 end:0x803B7D80
+	.data       start:0x803DBF78 end:0x803DBFD8
+	.sbss       start:0x804D67D0 end:0x804D67F8
+	.sdata2     start:0x804DAAA8 end:0x804DAAD0
+
+melee/gm/gmstaffroll.c:
+	.text       start:0x801AA644 end:0x801ACC94
+	.data       start:0x803DBFD8 end:0x803DD2C0
+	.bss        start:0x80480D58 end:0x80480D70
+	.sbss       start:0x804D67F8 end:0x804D6850
+	.sdata2     start:0x804DAAD0 end:0x804DAB90
 
 melee/gm/gmhowto.c:
 	.text       start:0x801ACC94 end:0x801ACE94

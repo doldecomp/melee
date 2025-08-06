@@ -1,6 +1,7 @@
 #include "gmhowto.h"
 
 #include "gm_unsplit.h"
+#include "gmopening.h"
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

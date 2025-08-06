@@ -894,6 +894,8 @@ config.libs = [
             Object(Matching, "melee/gm/gmmovieend.c"),
             Object(NonMatching, "melee/gm/gmregtyfall.c"),
             Object(NonMatching, "melee/gm/gm_1A4C.c"),
+            Object(NonMatching, "melee/gm/gmopening.c"),
+            Object(NonMatching, "melee/gm/gmstaffroll.c"),
             Object(Matching, "melee/gm/gmhowto.c"),
             Object(Matching, "melee/gm/gmomake15.c"),
             Object(Matching, "melee/gm/gmprogressive.c"),

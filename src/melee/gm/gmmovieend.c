@@ -6,6 +6,7 @@
 #include "gmmovieend.h"
 
 #include "gm_unsplit.h"
+#include "gmopening.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
