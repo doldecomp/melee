@@ -1,6 +1,7 @@
 #include "gmgiant.h"
 
 #include "gm_unsplit.h"
+#include "gmmovieend.h"
 #include "gmscextern.h"
 
 #include <melee/gm/gmmain_lib.h>

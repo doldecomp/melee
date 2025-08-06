@@ -5,27 +5,6 @@
 #include <melee/gm/forward.h>
 #include <baselib/forward.h>
 
-/* 1A6254 */ void gm_801A6254(MinorScene*);
-/* 1A6308 */ void gm_801A6308(MinorScene*);
-/* 1A632C */ void gm_801A632C_OnEnter(UNK_T);
-/* 1A637C */ void gm_801A637C_OnEnter(UNK_T);
-/* 1A64A8 */ void gm_801A64A8_OnFrame(void);
-/* 1A659C */ bool gm_801A659C(int);
-/* 1A6630 */ void gm_801A6630(int);
-/* 1A6664 */ void fn_801A6664(HSD_GObj*);
-/* 1A6844 */ void fn_801A6844(HSD_GObj*);
-/* 1A6868 */ void fn_801A6868(HSD_GObj*);
-/* 1A68D8 */ UNK_RET gm_801A68D8(UNK_PARAMS);
-/* 1A6A48 */ void fn_801A6A48(HSD_GObj*, int);
-/* 1A6ACC */ void fn_801A6ACC(HSD_GObj*, int);
-/* 1A6B6C */ void fn_801A6B6C(HSD_GObj*);
-/* 1A6C30 */ void fn_801A6C30(HSD_GObj*);
-/* 1A6C54 */ UNK_RET gm_801A6C54(UNK_PARAMS);
-/* 1A6D78 */ void fn_801A6D78(HSD_GObj*, int);
-/* 1A6DC0 */ UNK_RET gm_801A6DC0(UNK_PARAMS);
-/* 1A6EE4 */ UNK_RET gm_801A6EE4(UNK_PARAMS);
-/* 1A7070 */ void gm_801A7070_OnEnter(UNK_T);
-/* 1A79D4 */ void gm_801A79D4_OnFrame(void);
 /* 1A7A44 */ void fn_801A7A44(HSD_GObj*);
 /* 1A7A68 */ void fn_801A7A68(HSD_GObj*);
 /* 1A7A8C */ void fn_801A7A8C(HSD_GObj*);

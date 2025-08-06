@@ -1,5 +1,7 @@
 #include "gm_1B03.h"
 
+#include "gmmovieend.h"
+
 #include "gm_1B03.static.h"
 
 #include <sysdolphin/baselib/controller.h>

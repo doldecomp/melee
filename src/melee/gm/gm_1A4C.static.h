@@ -18,8 +18,6 @@ struct gm_804D6804_t {
     /* +4 */ float x4;
 };
 
-/* 4D6730 */ static UNK_T gm_804D6730;
-
 /* 4D67F8 */ static struct {
     struct {
         u8 pad0[0x54];
@@ -61,5 +59,4 @@ struct gm_804D6804_t {
 /* 4D6848 */ static s32 gm_804D6848;
 /* 4D684C */ static s32 gm_804D684C;
 
-/* 3DD0F0 */ extern HSD_CObjDesc gm_803DD0F0;
 /* 3DD2C0 */ extern int gm_803DD2C0[74];
