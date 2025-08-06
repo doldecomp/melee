@@ -25,19 +25,19 @@ static void grShrine_80201CF0(void);
 static void grShrine_80201CF4(void);
 static bool grShrine_80201D18(void);
 static HSD_GObj* grShrine_80201D20(s32);
-static void grShrine_80201E08(HSD_GObj*);
-static bool grShrine_80201E34(HSD_GObj*);
-static void grShrine_80201E3C(HSD_GObj*);
-static void grShrine_80201E40(HSD_GObj*);
-static void grShrine_80201E44(HSD_GObj*);
-static bool grShrine_80201E88(HSD_GObj*);
-static void grShrine_80201E90(HSD_GObj*);
-static void grShrine_80201E94(HSD_GObj*);
+static void grShrine_80201E08(Ground_GObj*);
+static bool grShrine_80201E34(Ground_GObj*);
+static void grShrine_80201E3C(Ground_GObj*);
+static void grShrine_80201E40(Ground_GObj*);
+static void grShrine_80201E44(Ground_GObj*);
+static bool grShrine_80201E88(Ground_GObj*);
+static void grShrine_80201E90(Ground_GObj*);
+static void grShrine_80201E94(Ground_GObj*);
 static void grShrine_80201E98(HSD_GObj*);
-static void grShrine_80201E9C(HSD_GObj*);
-static bool grShrine_80201F14(HSD_GObj*);
-static void grShrine_80201F1C(HSD_GObj*);
-static void grShrine_80201F40(HSD_GObj*);
+static void grShrine_80201E9C(Ground_GObj*);
+static bool grShrine_80201F14(Ground_GObj*);
+static void grShrine_80201F1C(Ground_GObj*);
+static void grShrine_80201F40(Ground_GObj*);
 static DynamicsDesc* grShrine_80201F44(enum_t);
 static bool grShrine_80201F4C(Vec3*, int, HSD_JObj*);
 
@@ -131,40 +131,40 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
     return gobj;
 }
 
-static void grShrine_80201E08(HSD_GObj* gobj)
+static void grShrine_80201E08(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grShrine_80201E34(HSD_GObj* arg0)
+static bool grShrine_80201E34(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grShrine_80201E3C(HSD_GObj* arg0) {}
+static void grShrine_80201E3C(Ground_GObj* arg0) {}
 
-static void grShrine_80201E40(HSD_GObj* arg0) {}
+static void grShrine_80201E40(Ground_GObj* arg0) {}
 
-static void grShrine_80201E44(HSD_GObj* gobj)
+static void grShrine_80201E44(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
 }
 
-static bool grShrine_80201E88(HSD_GObj* arg0)
+static bool grShrine_80201E88(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grShrine_80201E90(HSD_GObj* arg0) {}
+static void grShrine_80201E90(Ground_GObj* arg0) {}
 
-static void grShrine_80201E94(HSD_GObj* arg0) {}
+static void grShrine_80201E94(Ground_GObj* arg0) {}
 
 static void grShrine_80201E98(HSD_GObj* arg0) {}
 
-static void grShrine_80201E9C(HSD_GObj* gobj)
+static void grShrine_80201E9C(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -176,18 +176,18 @@ static void grShrine_80201E9C(HSD_GObj* gobj)
     gp->x10_flags.b5 = true;
 }
 
-static bool grShrine_80201F14(HSD_GObj* arg0)
+static bool grShrine_80201F14(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grShrine_80201F1C(HSD_GObj* arg0)
+static void grShrine_80201F1C(Ground_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
     lb_800115F4();
 }
 
-static void grShrine_80201F40(HSD_GObj* arg0) {}
+static void grShrine_80201F40(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grShrine_80201F44(enum_t arg0)
 {

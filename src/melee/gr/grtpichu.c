@@ -22,18 +22,18 @@
 /* 222C10 */ static void grTPichu_80222C10(void);
 /* 222C34 */ static bool grTPichu_80222C34(void);
 /* 222C3C */ static HSD_GObj* grTPichu_80222C3C(int gobj_id);
-/* 222D24 */ static void grTPichu_80222D24(HSD_GObj* gobj);
-/* 222D50 */ static bool grTPichu_80222D50(HSD_GObj*);
-/* 222D58 */ static void grTPichu_80222D58(HSD_GObj*);
-/* 222D5C */ static void grTPichu_80222D5C(HSD_GObj*);
-/* 222D60 */ static void grTPichu_80222D60(HSD_GObj* gobj);
-/* 222DB0 */ static bool grTPichu_80222DB0(HSD_GObj*);
-/* 222DB8 */ static void grTPichu_80222DB8(HSD_GObj* gobj);
-/* 222DEC */ static void grTPichu_80222DEC(HSD_GObj*);
-/* 222DF0 */ static void grTPichu_80222DF0(HSD_GObj* gobj);
-/* 222E40 */ static bool grTPichu_80222E40(HSD_GObj*);
-/* 222E48 */ static void grTPichu_80222E48(HSD_GObj*);
-/* 222E68 */ static void grTPichu_80222E68(HSD_GObj*);
+/* 222D24 */ static void grTPichu_80222D24(Ground_GObj* gobj);
+/* 222D50 */ static bool grTPichu_80222D50(Ground_GObj*);
+/* 222D58 */ static void grTPichu_80222D58(Ground_GObj*);
+/* 222D5C */ static void grTPichu_80222D5C(Ground_GObj*);
+/* 222D60 */ static void grTPichu_80222D60(Ground_GObj* gobj);
+/* 222DB0 */ static bool grTPichu_80222DB0(Ground_GObj*);
+/* 222DB8 */ static void grTPichu_80222DB8(Ground_GObj* gobj);
+/* 222DEC */ static void grTPichu_80222DEC(Ground_GObj*);
+/* 222DF0 */ static void grTPichu_80222DF0(Ground_GObj* gobj);
+/* 222E40 */ static bool grTPichu_80222E40(Ground_GObj*);
+/* 222E48 */ static void grTPichu_80222E48(Ground_GObj*);
+/* 222E68 */ static void grTPichu_80222E68(Ground_GObj*);
 /* 222E6C */ static DynamicsDesc* grTPichu_80222E6C(int);
 /* 222E74 */ static bool grTPichu_80222E74(Vec3*, int, HSD_JObj*);
 
@@ -135,22 +135,22 @@ static HSD_GObj* grTPichu_80222C3C(int gobj_id)
     return gobj;
 }
 
-static void grTPichu_80222D24(HSD_GObj* gobj)
+static void grTPichu_80222D24(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTPichu_80222D50(HSD_GObj* arg0)
+static bool grTPichu_80222D50(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTPichu_80222D58(HSD_GObj* arg0) {}
+static void grTPichu_80222D58(Ground_GObj* arg0) {}
 
-static void grTPichu_80222D5C(HSD_GObj* arg0) {}
+static void grTPichu_80222D5C(Ground_GObj* arg0) {}
 
-static void grTPichu_80222D60(HSD_GObj* gobj)
+static void grTPichu_80222D60(Ground_GObj* gobj)
 {
     u8 _[4];
 
@@ -159,20 +159,20 @@ static void grTPichu_80222D60(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTPichu_80222DB0(HSD_GObj* arg0)
+static bool grTPichu_80222DB0(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTPichu_80222DB8(HSD_GObj* gobj)
+static void grTPichu_80222DB8(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTPichu_80222DEC(HSD_GObj* arg0) {}
+static void grTPichu_80222DEC(Ground_GObj* arg0) {}
 
-static void grTPichu_80222DF0(HSD_GObj* gobj)
+static void grTPichu_80222DF0(Ground_GObj* gobj)
 {
     u8 _[4];
 
@@ -181,17 +181,17 @@ static void grTPichu_80222DF0(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTPichu_80222E40(HSD_GObj* arg0)
+static bool grTPichu_80222E40(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTPichu_80222E48(HSD_GObj* arg0)
+static void grTPichu_80222E48(Ground_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
 }
 
-static void grTPichu_80222E68(HSD_GObj* arg0) {}
+static void grTPichu_80222E68(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grTPichu_80222E6C(int arg0)
 {

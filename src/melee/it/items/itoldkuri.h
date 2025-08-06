@@ -58,7 +58,7 @@
 /* 2D8450 */ void it_802D8450(Item_GObj* gobj);
 /* 2D846C */ bool it_802D846C(Item_GObj* gobj);
 /* 2D848C */ UNK_RET it_802D848C(UNK_PARAMS);
-/* 2D84D8 */ UNK_RET it_802D84D8(Item_GObj*, Item_GObj*);
+/* 2D84D8 */ void it_802D84D8(Item_GObj*, Item_GObj*);
 /* 3F8320 */ extern ItemStateTable it_803F8320[];
 
 #endif

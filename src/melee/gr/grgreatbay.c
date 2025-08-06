@@ -134,28 +134,28 @@ HSD_GObj* grGreatBay_801F4300(int gobj_id)
     return gobj;
 }
 
-void grGreatBay_801F4404(HSD_GObj* gobj)
+void grGreatBay_801F4404(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grGreatBay_801F4430(HSD_GObj* gobj)
+bool grGreatBay_801F4430(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grGreatBay_801F4438(HSD_GObj* gobj)
+void grGreatBay_801F4438(Ground_GObj* gobj)
 {
     return;
 }
 
-void grGreatBay_801F443C(HSD_GObj* gobj)
+void grGreatBay_801F443C(Ground_GObj* gobj)
 {
     return;
 }
 
-void grGreatBay_801F4440(HSD_GObj* gobj)
+void grGreatBay_801F4440(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -163,22 +163,22 @@ void grGreatBay_801F4440(HSD_GObj* gobj)
     gp->x11_flags.b012 = 1;
 }
 
-bool grGreatBay_801F44A0(HSD_GObj* gobj)
+bool grGreatBay_801F44A0(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grGreatBay_801F44A8(HSD_GObj* gobj)
+void grGreatBay_801F44A8(Ground_GObj* gobj)
 {
     return;
 }
 
-void grGreatBay_801F44AC(HSD_GObj* gobj)
+void grGreatBay_801F44AC(Ground_GObj* gobj)
 {
     return;
 }
 
-void grGreatBay_801F44B0(HSD_GObj* gobj)
+void grGreatBay_801F44B0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -186,17 +186,17 @@ void grGreatBay_801F44B0(HSD_GObj* gobj)
     gp->x11_flags.b012 = 3;
 }
 
-bool grGreatBay_801F4510(HSD_GObj* gobj)
+bool grGreatBay_801F4510(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grGreatBay_801F4518(HSD_GObj* gobj)
+void grGreatBay_801F4518(Ground_GObj* gobj)
 {
     return;
 }
 
-void grGreatBay_801F451C(HSD_GObj* gobj)
+void grGreatBay_801F451C(Ground_GObj* gobj)
 {
     return;
 }
@@ -206,7 +206,7 @@ void fn_801F4520(HSD_GObj* gobj)
     ftCo_800C07F8(gobj, 6, (int) fn_801F6708);
 }
 
-void grGreatBay_801F454C(HSD_GObj* gobj)
+void grGreatBay_801F454C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -226,40 +226,40 @@ void grGreatBay_801F454C(HSD_GObj* gobj)
     Ground_801C10B8(gobj, fn_801F4520);
 }
 
-bool grGreatBay_801F4650(HSD_GObj* gobj)
+bool grGreatBay_801F4650(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grGreatBay_801F4658(HSD_GObj* gobj)
+void grGreatBay_801F4658(Ground_GObj* gobj)
 {
     grGreatBay_801F5E28(gobj);
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-void grGreatBay_801F4690(HSD_GObj* gobj)
+void grGreatBay_801F4690(Ground_GObj* gobj)
 {
     return;
 }
 
 /// #grGreatBay_801F4694
 
-bool grGreatBay_801F4994(HSD_GObj* gobj)
+bool grGreatBay_801F4994(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grGreatBay_801F499C
 
-void grGreatBay_801F545C(HSD_GObj* gobj)
+void grGreatBay_801F545C(Ground_GObj* gobj)
 {
     return;
 }
 
 /// #grGreatBay_801F5460
 
-bool grGreatBay_801F55F8(HSD_GObj* gobj)
+bool grGreatBay_801F55F8(Ground_GObj* gobj)
 {
     return false;
 }
@@ -268,12 +268,12 @@ bool grGreatBay_801F55F8(HSD_GObj* gobj)
 
 /// #fn_801F5914
 
-void grGreatBay_801F5988(HSD_GObj* gobj)
+void grGreatBay_801F5988(Ground_GObj* gobj)
 {
     return;
 }
 
-void grGreatBay_801F598C(HSD_GObj* gobj)
+void grGreatBay_801F598C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
@@ -282,31 +282,31 @@ void grGreatBay_801F598C(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-bool grGreatBay_801F59F0(HSD_GObj* gobj)
+bool grGreatBay_801F59F0(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grGreatBay_801F59F8(HSD_GObj* gobj)
+void grGreatBay_801F59F8(Ground_GObj* gobj)
 {
     return;
 }
 
-void grGreatBay_801F59FC(HSD_GObj* gobj)
+void grGreatBay_801F59FC(Ground_GObj* gobj)
 {
     return;
 }
 
 /// #grGreatBay_801F5A00
 
-bool grGreatBay_801F5AF0(HSD_GObj* gobj)
+bool grGreatBay_801F5AF0(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grGreatBay_801F5AF8
 
-void grGreatBay_801F5D48(HSD_GObj* gobj)
+void grGreatBay_801F5D48(Ground_GObj* gobj)
 {
     return;
 }

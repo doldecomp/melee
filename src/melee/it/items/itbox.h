@@ -35,11 +35,11 @@
 /* 286C7C */ bool it_80286C7C(Item_GObj* gobj);
 /* 286CA8 */ void it_80286CA8(Item_GObj* gobj);
 /* 286CAC */ bool it_80286CAC(Item_GObj* gobj);
-/* 286CB4 */ int it_80286CB4(Item_GObj*);
-/* 286D48 */ int it_80286D48(Item_GObj*);
-/* 286DDC */ int it_80286DDC(Item_GObj*);
-/* 286E70 */ int it_80286E70(Item_GObj*);
-/* 286F04 */ int it_80286F04(Item_GObj*);
+/* 286CB4 */ bool it_80286CB4(Item_GObj*);
+/* 286D48 */ bool it_80286D48(Item_GObj*);
+/* 286DDC */ bool it_80286DDC(Item_GObj*);
+/* 286E70 */ bool it_80286E70(Item_GObj*);
+/* 286F04 */ bool it_80286F04(Item_GObj*);
 /* 286FC8 */ void it_80286FC8(Item_GObj*);
 /* 287044 */ bool it_80287044(Item_GObj* gobj);
 /* 28704C */ void it_8028704C(Item_GObj* gobj);

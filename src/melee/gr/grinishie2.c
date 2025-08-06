@@ -191,22 +191,22 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
     return gobj;
 }
 
-void grInishie2_801FCDC8(HSD_GObj* gobj)
+void grInishie2_801FCDC8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grInishie2_801FCDF4(HSD_GObj* gobj)
+bool grInishie2_801FCDF4(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grInishie2_801FCDFC(HSD_GObj* gobj) {}
+void grInishie2_801FCDFC(Ground_GObj* gobj) {}
 
-void grInishie2_801FCE00(HSD_GObj* gobj) {}
+void grInishie2_801FCE00(Ground_GObj* gobj) {}
 
-void grInishie2_801FCE04(HSD_GObj* arg0)
+void grInishie2_801FCE04(Ground_GObj* arg0)
 {
     HSD_JObj* temp_r27;
     HSD_JObj* temp_r28;
@@ -234,7 +234,7 @@ void grInishie2_801FCE04(HSD_GObj* arg0)
     gp->gv.inishie2.xC4_flags.b0 = 0;
 }
 
-bool grInishie2_801FCF24(HSD_GObj* gobj)
+bool grInishie2_801FCF24(Ground_GObj* gobj)
 {
     return 0;
 }
@@ -269,7 +269,7 @@ void grInishie2_801FCF2C(HSD_GObj* gobj)
     }
 }
 
-void grInishie2_801FCFCC(HSD_GObj* arg0)
+void grInishie2_801FCFCC(Ground_GObj* arg0)
 {
     grInishie2_801FD0B4(arg0);
     grInishie2_801FD3CC(arg0);
@@ -278,7 +278,7 @@ void grInishie2_801FCFCC(HSD_GObj* arg0)
     lb_800115F4();
 }
 
-void grInishie2_801FD014(HSD_GObj* gobj) {}
+void grInishie2_801FD014(Ground_GObj* gobj) {}
 
 #define test_random(val) ((val != 0) ? HSD_Randi(val) : 0)
 #define sign_inline(val) ((val == 0) ? -1.0f : 1.0f)
@@ -327,7 +327,7 @@ void grInishie2_801FD0B4(HSD_GObj* gobj)
     }
 }
 
-void grInishie2_801FD198(HSD_GObj* gobj)
+void grInishie2_801FD198(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -340,12 +340,12 @@ void grInishie2_801FD198(HSD_GObj* gobj)
     gp->gv.inishie2.xC6 = grI2_804D6A00->unk10[gp->gv.inishie2.xC8];
 }
 
-bool grInishie2_801FD21C(HSD_GObj* gobj)
+bool grInishie2_801FD21C(Ground_GObj* gobj)
 {
     return 0;
 }
 
-void grInishie2_801FD224(HSD_GObj* gobj)
+void grInishie2_801FD224(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -384,7 +384,7 @@ void grInishie2_801FD224(HSD_GObj* gobj)
     }
 }
 
-void grInishie2_801FD364(HSD_GObj* gobj) {}
+void grInishie2_801FD364(Ground_GObj* gobj) {}
 
 void grInishie2_801FD368(HSD_GObj* gobj)
 {
@@ -446,7 +446,7 @@ void grInishie2_801FD4CC(HSD_GObj* gobj)
 }
 
 // probably chooses which side to spawn Birdo on
-void grInishie2_801FD4F0(HSD_GObj* gobj)
+void grInishie2_801FD4F0(Ground_GObj* gobj)
 {
     Vec3 vec;
     s32 spawn_side;
@@ -475,12 +475,12 @@ void grInishie2_801FD4F0(HSD_GObj* gobj)
     Ground_801C2ED0(temp_r28, gp->map_id);
 }
 
-bool grInishie2_801FD64C(HSD_GObj* gobj)
+bool grInishie2_801FD64C(Ground_GObj* gobj)
 {
     return 0;
 }
 
-void grInishie2_801FD654(HSD_GObj* arg0)
+void grInishie2_801FD654(Ground_GObj* arg0)
 {
     Vec3 vec;
     Ground* gp;
@@ -497,7 +497,7 @@ void grInishie2_801FD654(HSD_GObj* arg0)
     Ground_801C2FE0(arg0);
 }
 
-void grInishie2_801FD740(HSD_GObj* gobj) {}
+void grInishie2_801FD740(Ground_GObj* gobj) {}
 
 void grInishie2_801FD744(HSD_GObj* gobj)
 {
@@ -659,7 +659,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
     HSD_JObjGetTranslation(jobj, &gp->gv.inishie23.xCC);
 }
 
-void grInishie2_801FDE8C(HSD_GObj* gobj)
+void grInishie2_801FDE8C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -667,12 +667,12 @@ void grInishie2_801FDE8C(HSD_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
 }
 
-bool grInishie2_801FDED0(HSD_GObj* gobj)
+bool grInishie2_801FDED0(Ground_GObj* gobj)
 {
     return 0;
 }
 
-void grInishie2_801FDED8(HSD_GObj* gobj)
+void grInishie2_801FDED8(Ground_GObj* gobj)
 {
     Vec3 sp1C;
     s32 var_r0;
@@ -714,7 +714,7 @@ s32 grInishie2_801FDFB4(s32 arg0)
     return 0;
 }
 
-void grInishie2_801FDFE4(HSD_GObj* gobj) {}
+void grInishie2_801FDFE4(Ground_GObj* gobj) {}
 
 bool grInishie2_801FDFE8(void)
 {

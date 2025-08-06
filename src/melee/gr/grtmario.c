@@ -26,19 +26,19 @@
 /* 21F8B8 */ static void grTMario_8021F8B8(void);
 /* 21F8DC */ static bool grTMario_8021F8DC(void);
 /* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(s32);
-/* 21F9CC */ static void grTMario_8021F9CC(HSD_GObj*);
-/* 21F9F8 */ static bool grTMario_8021F9F8(HSD_GObj*);
-/* 21FA00 */ static void grTMario_8021FA00(HSD_GObj*);
-/* 21FA04 */ static void grTMario_8021FA04(HSD_GObj*);
+/* 21F9CC */ static void grTMario_8021F9CC(Ground_GObj*);
+/* 21F9F8 */ static bool grTMario_8021F9F8(Ground_GObj*);
+/* 21FA00 */ static void grTMario_8021FA00(Ground_GObj*);
+/* 21FA04 */ static void grTMario_8021FA04(Ground_GObj*);
 /* 21FA08 */ static void lbl_8021FA08(HSD_GObj*);
-/* 21FA34 */ static void grTMario_8021FA34(HSD_GObj*);
-/* 21FA94 */ static bool grTMario_8021FA94(HSD_GObj*);
-/* 21FA9C */ static void grTMario_8021FA9C(HSD_GObj*);
-/* 21FAD0 */ static void grTMario_8021FAD0(HSD_GObj*);
-/* 21FAD4 */ static void grTMario_8021FAD4(HSD_GObj*);
-/* 21FB24 */ static bool grTMario_8021FB24(HSD_GObj*);
-/* 21FB2C */ static void grTMario_8021FB2C(HSD_GObj*);
-/* 21FB4C */ static void grTMario_8021FB4C(HSD_GObj*);
+/* 21FA34 */ static void grTMario_8021FA34(Ground_GObj*);
+/* 21FA94 */ static bool grTMario_8021FA94(Ground_GObj*);
+/* 21FA9C */ static void grTMario_8021FA9C(Ground_GObj*);
+/* 21FAD0 */ static void grTMario_8021FAD0(Ground_GObj*);
+/* 21FAD4 */ static void grTMario_8021FAD4(Ground_GObj*);
+/* 21FB24 */ static bool grTMario_8021FB24(Ground_GObj*);
+/* 21FB2C */ static void grTMario_8021FB2C(Ground_GObj*);
+/* 21FB4C */ static void grTMario_8021FB4C(Ground_GObj*);
 /* 21FB50 */ static int lbl_8021FB50(s32, HSD_GObj*);
 /* 21FBE8 */ static void grTMario_8021FBE8(Vec3*, f32);
 /* 21FC50 */ static DynamicsDesc* grTMario_8021FC50(enum_t);
@@ -142,61 +142,61 @@ HSD_GObj* grTMario_8021F8E4(s32 arg0)
     return gobj;
 }
 
-void grTMario_8021F9CC(HSD_GObj* gobj)
+void grTMario_8021F9CC(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTMario_8021F9F8(HSD_GObj* gobj)
+bool grTMario_8021F9F8(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTMario_8021FA00(HSD_GObj* gobj) {}
+void grTMario_8021FA00(Ground_GObj* gobj) {}
 
-void grTMario_8021FA04(HSD_GObj* gobj) {}
+void grTMario_8021FA04(Ground_GObj* gobj) {}
 
 void lbl_8021FA08(HSD_GObj* gobj)
 {
     ftCo_800C07F8(gobj, 6, (int) lbl_8021FB50);
 }
 
-void grTMario_8021FA34(HSD_GObj* gobj)
+void grTMario_8021FA34(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
     Ground_801C10B8(gobj, lbl_8021FA08);
 }
 
-bool grTMario_8021FA94(HSD_GObj* gobj)
+bool grTMario_8021FA94(Ground_GObj* gobj)
 {
     return 0;
 }
 
-void grTMario_8021FA9C(HSD_GObj* gobj)
+void grTMario_8021FA9C(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTMario_8021FAD0(HSD_GObj* gobj) {}
+void grTMario_8021FAD0(Ground_GObj* gobj) {}
 
-void grTMario_8021FAD4(HSD_GObj* gobj)
+void grTMario_8021FAD4(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTMario_8021FB24(HSD_GObj* gobj)
+bool grTMario_8021FB24(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTMario_8021FB2C(HSD_GObj* gobj)
+void grTMario_8021FB2C(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTMario_8021FB4C(HSD_GObj* gobj) {}
+void grTMario_8021FB4C(Ground_GObj* gobj) {}
 
 int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
 {

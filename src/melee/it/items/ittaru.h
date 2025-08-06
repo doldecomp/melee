@@ -41,11 +41,11 @@
 /* 2887E0 */ bool it_802887E0(Item_GObj* gobj);
 /* 28880C */ void it_8028880C(Item_GObj* gobj);
 /* 288810 */ bool it_80288810(Item_GObj* gobj);
-/* 288818 */ int it_80288818(Item_GObj*);
-/* 2888B8 */ int it_802888B8(Item_GObj*);
-/* 288958 */ int it_80288958(Item_GObj*);
-/* 2889F8 */ int it_802889F8(Item_GObj*);
-/* 288A98 */ int it_80288A98(Item_GObj*);
+/* 288818 */ bool it_80288818(Item_GObj*);
+/* 2888B8 */ bool it_802888B8(Item_GObj*);
+/* 288958 */ bool it_80288958(Item_GObj*);
+/* 2889F8 */ bool it_802889F8(Item_GObj*);
+/* 288A98 */ bool it_80288A98(Item_GObj*);
 /* 288C68 */ void it_80288C68(Item_GObj*, Item_GObj*);
 /* 3F58E0 */ extern ItemStateTable it_803F58E0[];
 

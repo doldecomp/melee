@@ -49,15 +49,15 @@
 /* 283504 */ bool it_80283504(Item_GObj* gobj);
 /* 283550 */ void it_80283550(Item_GObj* gobj);
 /* 283554 */ bool it_80283554(Item_GObj* gobj);
-/* 283588 */ int it_80283588(Item_GObj*);
+/* 283588 */ bool it_80283588(Item_GObj*);
 /* 2838FC */ bool it_802838FC(Item_GObj* gobj);
 /* 283960 */ void it_80283960(Item_GObj* gobj);
 /* 283990 */ bool it_80283990(Item_GObj* gobj);
-/* 2839BC */ int it_802839BC(Item_GObj*);
-/* 283A3C */ int it_80283A3C(Item_GObj*);
-/* 283A5C */ int it_80283A5C(Item_GObj*);
-/* 283A80 */ int it_80283A80(Item_GObj*);
-/* 283AA4 */ int it_80283AA4(Item_GObj*);
+/* 2839BC */ bool it_802839BC(Item_GObj*);
+/* 283A3C */ bool it_80283A3C(Item_GObj*);
+/* 283A5C */ bool it_80283A5C(Item_GObj*);
+/* 283A80 */ bool it_80283A80(Item_GObj*);
+/* 283AA4 */ bool it_80283AA4(Item_GObj*);
 /* 283AC4 */ void it_80283AC4(Item_GObj*, Item_GObj*);
 /* 3F55D0 */ extern ItemStateTable it_803F55D0[];
 

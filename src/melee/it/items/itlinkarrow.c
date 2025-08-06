@@ -815,7 +815,7 @@ bool it_802A98E8(HSD_GObj* gobj)
     return 1;
 }
 
-int it_802A9A80(Item_GObj* gobj)
+bool it_802A9A80(Item_GObj* gobj)
 {
     Item* item;
     itLinkArrowAttributes* attr;
@@ -826,14 +826,14 @@ int it_802A9A80(Item_GObj* gobj)
     return 1;
 }
 
-int it_802A9CE0(Item_GObj* gobj)
+bool it_802A9CE0(Item_GObj* gobj)
 {
     f32 pad;
     it_802A8330(gobj);
     return 1;
 }
 
-int it_802A9B08(Item_GObj* gobj)
+bool it_802A9B08(Item_GObj* gobj)
 {
     f32 sp28;
     f32 sp24;
@@ -891,7 +891,7 @@ int it_802A9B08(Item_GObj* gobj)
     return 1;
 }
 
-int it_802A9D4C(Item_GObj* gobj)
+bool it_802A9D4C(Item_GObj* gobj)
 {
     Item* item;
     HSD_JObj* jobj;
