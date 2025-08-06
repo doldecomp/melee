@@ -3,11 +3,6 @@
 #include <melee/sc/types.h>
 #include <melee/gm/types.h>
 
-static struct {
-    u8 pad[0x54];
-    HSD_GObj* x54;
-}* gm_80480D58[6];
-
 struct gm_804D67F8_t {
     char pad_0[0x948];
 };
@@ -66,5 +61,5 @@ struct gm_804D6804_t {
 /* 4D6848 */ static s32 gm_804D6848;
 /* 4D684C */ static s32 gm_804D684C;
 
-/* 3DD0F0 */ static HSD_CObjDesc gm_803DD0F0;
+/* 3DD0F0 */ extern HSD_CObjDesc gm_803DD0F0;
 /* 3DD2C0 */ extern int gm_803DD2C0[74];
