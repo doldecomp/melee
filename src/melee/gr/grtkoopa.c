@@ -17,7 +17,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTKoopa_80221648(int);
+static void grTKoopa_80221648(bool);
 static void grTKoopa_8022164C(void);
 static void grTKoopa_802216BC(void);
 static void grTKoopa_802216C0(void);
@@ -66,7 +66,7 @@ StageData grTKp_803E8CCC = {
     0,
 };
 
-static void grTKoopa_80221648(int arg0) {}
+static void grTKoopa_80221648(bool arg0) {}
 
 static void grTKoopa_8022164C(void)
 {

@@ -59,13 +59,11 @@ func (fs FuncSignature) String() string {
 }
 
 type TableType struct {
-	NumAsmEntries int
-	Fields        []CType
+	Fields []CType
 }
 
 var tableTypes = map[string]TableType{
 	"ItemStateTable": {
-		NumAsmEntries: 4,
 		Fields: []CType{
 			nil, // enum_t
 			FuncType{"bool", []string{"Item_GObj*"}},
@@ -74,7 +72,6 @@ var tableTypes = map[string]TableType{
 		},
 	},
 	"ItemLogicTable": {
-		NumAsmEntries: 15,
 		Fields: []CType{
 			nil, // ItemStateTable*
 			FuncType{"void", []string{"Item_GObj*"}},
@@ -94,13 +91,11 @@ var tableTypes = map[string]TableType{
 		},
 	},
 	"sdata_ItemGXLink": {
-		NumAsmEntries: 1,
 		Fields: []CType{
 			FuncType{"void", []string{"HSD_GObj*", "int"}},
 		},
 	},
 	"StageCallbacks": {
-		NumAsmEntries: 5,
 		Fields: []CType{
 			FuncType{"void", []string{"Ground_GObj*"}},
 			FuncType{"bool", []string{"Ground_GObj*"}},
@@ -109,6 +104,54 @@ var tableTypes = map[string]TableType{
 			nil, // u32
 		},
 	},
+
+	"MinorScene": {
+		Fields: []CType{
+			nil, // u8 + u8 + u16
+			FuncType{"void", []string{"MinorScene*"}},
+			FuncType{"void", []string{"MinorScene*"}},
+			nil, // ???
+			nil,
+			nil,
+			nil,
+			nil,
+			nil,
+			nil,
+			nil,
+			nil,
+		},
+	},
+
+	"StageData": {
+		Fields: []CType{
+			nil, // u32
+			nil, // StageCallbacks*
+			nil, // char*
+			FuncType{"void", []string{"void"}},
+			FuncType{"void", []string{"bool"}},
+			FuncType{"void", []string{"void"}},
+			FuncType{"void", []string{"void"}},
+			FuncType{"bool", []string{"void"}},
+			FuncType{"DynamicsDesc*", []string{"enum_t"}},
+			FuncType{"bool", []string{"Vec3*", "int", "HSD_JObj*"}},
+			nil, // u32
+			nil, // S16Vec3*
+			nil, // size_t
+		},
+	},
+}
+
+func defaultName(typ string) string {
+	switch typ {
+	case "HSD_GObj*", "Item_GObj*", "Ground_GObj*":
+		return "gobj"
+	case "Vec3*":
+		return "vec"
+	case "HSD_JObj*":
+		return "jobj"
+	default:
+		return "arg"
+	}
 }
 
 func (tt TableType) parse(entries []AsmTableEntry) iter.Seq2[string, FuncType] {
@@ -137,7 +180,7 @@ func parseTableDecls(path string, tableType string) []string {
 		log.Fatalf("Failed to read file %s: %v", path, err)
 	}
 	var decls []string
-	matches := regexp.MustCompile(fmt.Sprintf(`%v\s+(\w+)\[(?:\d+)?\][\s={;]+`, tableType)).FindAllStringSubmatch(string(content), -1)
+	matches := regexp.MustCompile(fmt.Sprintf(`%v\s+(\w+)`, tableType)).FindAllStringSubmatch(string(content), -1)
 	for _, match := range matches {
 		if len(match) > 1 {
 			decls = append(decls, match[1])
@@ -176,7 +219,15 @@ func fixSignature(content []byte, name string, ft FuncType) ([]byte, bool) {
 		if orig, sig, ok := parseFuncSignature(name, line); ok {
 			if !sig.Type.equivalentTo(ft) {
 				sig.Type = ft
-				sig.ParamNames = sig.ParamNames[:len(ft.Params)] // bit of a hack
+				if len(sig.ParamNames) < len(ft.Params) {
+					// orig had too few params; fill in the rest with default names
+					for len(sig.ParamNames) < len(ft.Params) {
+						sig.ParamNames = append(sig.ParamNames, defaultName(ft.Params[len(sig.ParamNames)]))
+					}
+				} else if len(sig.ParamNames) > len(ft.Params) {
+					// orig had too many params; try to preserve what they had before
+					sig.ParamNames = sig.ParamNames[:len(ft.Params)]
+				}
 				lines[i] = bytes.Replace(lines[i], orig, []byte(sig.String()), 1)
 				changed = true
 			}
@@ -202,6 +253,10 @@ func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) 
 	}
 	paramStart := i + len(name) + 1
 	paramEnd := paramStart + bytes.IndexByte(line[paramStart:], ')')
+	if paramEnd < paramStart {
+		// TODO: handle multi-line signatures
+		return nil, FuncSignature{}, false
+	}
 	params := bytes.Split(line[paramStart:paramEnd], []byte(","))
 	isDecl := strings.Contains(string(line), ";")
 	var paramTypes, paramNames []string
@@ -212,9 +267,8 @@ func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) 
 			typ += "*"
 			name = strings.TrimPrefix(name, "*")
 		}
-		// TODO: handle this more generically
-		if name == "" && !isDecl {
-			name = "gobj"
+		if name == "" && typ != "void" && !isDecl {
+			name = defaultName(typ)
 			if renames++; renames > 1 {
 				name += strconv.Itoa(renames)
 			}

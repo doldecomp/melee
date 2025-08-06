@@ -17,7 +17,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grFigure3_8020E504(int number);
+static void grFigure3_8020E504(bool number);
 static void grFigure3_8020E508(void);
 static void grFigure3_8020E578(void);
 static void grFigure3_8020E57C(void);
@@ -36,7 +36,7 @@ static bool grFigure3_8020E778(Ground_GObj*);
 static void grFigure3_8020E780(Ground_GObj* gobj);
 static void grFigure3_8020E784(Ground_GObj*);
 static DynamicsDesc* grFigure3_8020E788(enum_t);
-static int grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj);
+static bool grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj);
 
 static StageCallbacks grEF2_803E63D8[3] = {
     { grFigure3_8020E690, grFigure3_8020E6BC, grFigure3_8020E6C4,
@@ -67,7 +67,7 @@ void* grEF2_804D6A80;
 
 extern StageInfo stage_info;
 
-static void grFigure3_8020E504(int number) {}
+static void grFigure3_8020E504(bool number) {}
 
 static void grFigure3_8020E508(void)
 {

@@ -174,7 +174,7 @@ void grTGameWatch_802243E0(Ground_GObj* gobj)
     return;
 }
 
-DynamicsDesc* grTGameWatch_802243E4(int unused)
+DynamicsDesc* grTGameWatch_802243E4(enum_t unused)
 {
     return NULL;
 }

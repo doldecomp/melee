@@ -15,7 +15,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 221EF4 */ static void grTMars_80221EF4(int);
+/* 221EF4 */ static void grTMars_80221EF4(bool);
 /* 221EF8 */ static void grTMars_80221EF8(void);
 /* 221F68 */ static void grTMars_80221F68(void);
 /* 221F6C */ static void grTMars_80221F6C(void);
@@ -66,7 +66,7 @@ StageData grTMs_803E8F0C = {
     grTMars_802221C8, grTMars_802221D0, 0x00000001,
 };
 
-static void grTMars_80221EF4(int arg0) {}
+static void grTMars_80221EF4(bool arg0) {}
 
 static void grTMars_80221EF8(void)
 {

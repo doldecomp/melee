@@ -18,7 +18,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTRoy_802243F4(int);
+static void grTRoy_802243F4(bool);
 static void grTRoy_802243F8(void);
 static void grTRoy_80224468(void);
 static void grTRoy_8022446C(void);
@@ -77,7 +77,7 @@ StageData grTFe_803E981C = {
     1,
 };
 
-static void grTRoy_802243F4(int arg0) {}
+static void grTRoy_802243F4(bool arg0) {}
 
 static void grTRoy_802243F8(void)
 {

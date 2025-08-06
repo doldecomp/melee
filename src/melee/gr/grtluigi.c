@@ -50,7 +50,7 @@ StageData grTLg_803E8E4C = {
     1,
 };
 
-void grTLuigi_80221C10(int arg0) {}
+void grTLuigi_80221C10(bool arg0) {}
 
 void grTLuigi_80221C14(void)
 {
@@ -162,7 +162,7 @@ DynamicsDesc* grTLuigi_80221EE4(enum_t arg0)
     return NULL;
 }
 
-int grTLuigi_80221EEC(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grTLuigi_80221EEC(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

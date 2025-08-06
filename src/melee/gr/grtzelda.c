@@ -18,7 +18,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTZelda_80223E2C(int);                   /* static */
+void grTZelda_80223E2C(bool);                   /* static */
 void grTZelda_80223E30(void);                  /* static */
 void grTZelda_80223EA0(void);                  /* static */
 void grTZelda_80223EA4(void);                  /* static */
@@ -63,7 +63,7 @@ StageData grTZd_803E9694 = {
     1,
 };
 
-void grTZelda_80223E2C(int unk0) {}
+void grTZelda_80223E2C(bool unk0) {}
 
 void grTZelda_80223E30(void)
 {

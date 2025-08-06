@@ -24,7 +24,7 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-static void grBattle_80219C98(int);
+static void grBattle_80219C98(bool);
 static void grBattle_80219CA4(void);
 static void grBattle_80219D54(void);
 static void grBattle_80219D58(void);
@@ -139,7 +139,7 @@ StageData grNBa_803E7E38 = {
     0,
 };
 
-static void grBattle_80219C98(int arg0)
+static void grBattle_80219C98(bool arg0)
 {
     grNBa_804D6AC8 = 1;
 }

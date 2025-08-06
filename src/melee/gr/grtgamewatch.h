@@ -28,7 +28,7 @@ void grTGameWatch_80224368(Ground_GObj*);
 bool grTGameWatch_802243B8(Ground_GObj*);
 void grTGameWatch_802243C0(Ground_GObj*);
 void grTGameWatch_802243E0(Ground_GObj*);
-DynamicsDesc* grTGameWatch_802243E4(int);
+DynamicsDesc* grTGameWatch_802243E4(enum_t);
 bool grTGameWatch_802243EC(Vec3*, int, HSD_JObj*);
 
 #endif

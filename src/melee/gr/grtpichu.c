@@ -16,7 +16,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 222B98 */ static void grTPichu_80222B98(int);
+/* 222B98 */ static void grTPichu_80222B98(bool);
 /* 222B9C */ static void grTPichu_80222B9C(void);
 /* 222C0C */ static void grTPichu_80222C0C(void);
 /* 222C10 */ static void grTPichu_80222C10(void);
@@ -34,7 +34,7 @@
 /* 222E40 */ static bool grTPichu_80222E40(Ground_GObj*);
 /* 222E48 */ static void grTPichu_80222E48(Ground_GObj*);
 /* 222E68 */ static void grTPichu_80222E68(Ground_GObj*);
-/* 222E6C */ static DynamicsDesc* grTPichu_80222E6C(int);
+/* 222E6C */ static DynamicsDesc* grTPichu_80222E6C(enum_t);
 /* 222E74 */ static bool grTPichu_80222E74(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTPc_803E91B0[] = {
@@ -193,7 +193,7 @@ static void grTPichu_80222E48(Ground_GObj* arg0)
 
 static void grTPichu_80222E68(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grTPichu_80222E6C(int arg0)
+static DynamicsDesc* grTPichu_80222E6C(enum_t arg0)
 {
     return NULL;
 }

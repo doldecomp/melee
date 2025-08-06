@@ -63,7 +63,7 @@ typedef struct grTFalco_UnkStruct {
 
 grTFalco_UnkStruct* grTFc_804D6AF8;
 
-void grTFalco_802207F0(int arg0) {}
+void grTFalco_802207F0(bool arg0) {}
 
 void grTFalco_802207F4(void)
 {

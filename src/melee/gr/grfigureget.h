@@ -8,11 +8,11 @@
 
 #include "gr/forward.h"
 
-/* 219530 */ UNK_RET grFigureGet_80219530(UNK_PARAMS);
-/* 219534 */ UNK_RET grFigureGet_80219534(UNK_PARAMS);
-/* 21959C */ UNK_RET grFigureGet_8021959C(UNK_PARAMS);
-/* 2195A0 */ UNK_RET grFigureGet_802195A0(UNK_PARAMS);
-/* 2195C4 */ UNK_RET grFigureGet_802195C4(UNK_PARAMS);
+/* 219530 */ void grFigureGet_80219530(bool);
+/* 219534 */ void grFigureGet_80219534(void);
+/* 21959C */ void grFigureGet_8021959C(void);
+/* 2195A0 */ void grFigureGet_802195A0(void);
+/* 2195C4 */ bool grFigureGet_802195C4(void);
 /* 2195CC */ UNK_RET grFigureGet_802195CC(UNK_PARAMS);
 /* 2196B4 */ void grFigureGet_802196B4(Ground_GObj*);
 /* 2196E0 */ bool grFigureGet_802196E0(Ground_GObj*);
@@ -23,6 +23,6 @@
 /* 219B10 */ UNK_RET fn_80219B10(UNK_PARAMS);
 /* 219C34 */ void grFigureGet_80219C34(HSD_GObj*);
 /* 219C50 */ int grFigureGet_80219C50(HSD_GObj*);
-/* 219C90 */ UNK_RET grFigureGet_80219C90(UNK_PARAMS);
+/* 219C90 */ bool grFigureGet_80219C90(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

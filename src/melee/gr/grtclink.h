@@ -28,7 +28,7 @@ void grTCLink_8022019C(Ground_GObj*);
 bool grTCLink_802201EC(Ground_GObj*);
 void grTCLink_802201F4(Ground_GObj*);
 void grTCLink_80220214(Ground_GObj*);
-DynamicsDesc* grTCLink_80220218(int unused);
+DynamicsDesc* grTCLink_80220218(enum_t unused);
 bool grTCLink_80220220(Vec3*, int, HSD_JObj*);
 
 #endif

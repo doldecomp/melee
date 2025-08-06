@@ -56,7 +56,7 @@ func main() {
 			for _, path := range append(hFiles, cFiles...) {
 				for _, name := range parseTableDecls(path, tableTypeName) {
 					fmt.Println("Found table", name, "in", path)
-					if tab, ok := tables[name]; ok && len(tab)%tableType.NumAsmEntries == 0 {
+					if tab, ok := tables[name]; ok && len(tab)%len(tableType.Fields) == 0 {
 						maps.Insert(fnTypes, tableType.parse(tab))
 					}
 				}
@@ -181,8 +181,8 @@ func (e AsmTableEntry) Integer() int64 {
 	if e.Value == "NULL" {
 		return 0
 	}
-	val, _ := strconv.ParseInt(e.Value, 16, e.Size*8)
-	return val
+	i, _ := strconv.ParseInt(e.Value, 16, e.Size*8)
+	return i
 }
 
 func extractAsmTables(paths []string) map[string][]AsmTableEntry {
@@ -201,12 +201,9 @@ func extractAsmTables(paths []string) map[string][]AsmTableEntry {
 			symbol, _, _ := strings.Cut(strings.TrimSpace(lines[0]), ",")
 			var entries []AsmTableEntry
 			for _, line := range lines[1:] {
-				fields := strings.Fields(line)
-				if len(fields) != 2 {
-					continue
-				}
+				typ, val, _ := strings.Cut(strings.TrimSpace(line), " ")
 				var size int
-				switch fields[0] {
+				switch typ {
 				case ".byte":
 					size = 1
 				case ".2byte":
@@ -218,7 +215,11 @@ func extractAsmTables(paths []string) map[string][]AsmTableEntry {
 				default:
 					continue
 				}
-				entries = append(entries, AsmTableEntry{Size: size, Value: fields[1]})
+				// TODO: support other sizes
+				if size != 4 {
+					continue
+				}
+				entries = append(entries, AsmTableEntry{Size: size, Value: val})
 			}
 			tables[symbol] = entries
 		}

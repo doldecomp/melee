@@ -16,7 +16,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 223580 */ static void grTSamus_80223580(int);
+/* 223580 */ static void grTSamus_80223580(bool);
 /* 223584 */ static void grTSamus_80223584(void);
 /* 2235F4 */ static void grTSamus_802235F4(void);
 /* 2235F8 */ static void grTSamus_802235F8(void);
@@ -76,7 +76,7 @@ StageData grTSs_803E9454 = {
     1,
 };
 
-void grTSamus_80223580(int unk0) {}
+void grTSamus_80223580(bool unk0) {}
 
 void grTSamus_80223584(void)
 {

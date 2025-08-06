@@ -30,3 +30,9 @@ go run . unk
 
 The tool cannot add `#include` statements, so rewritten files may fail to
 compile if they reference a type that requires a missing `#include`.
+
+The tool does not properly parse multiple declarations, e.g. `Foo bar[], baz[];`
+
+The tool does not properly parse multi-line function signatures.
+
+(Basically, it needs proper C parsing instead of regex and substring matching.)

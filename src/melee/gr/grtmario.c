@@ -20,7 +20,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 21F840 */ static void grTMario_8021F840(int);
+/* 21F840 */ static void grTMario_8021F840(bool);
 /* 21F844 */ static void grTMario_8021F844(void);
 /* 21F8B4 */ static void grTMario_8021F8B4(void);
 /* 21F8B8 */ static void grTMario_8021F8B8(void);
@@ -85,7 +85,7 @@ StageData grTMr_803E85A4 = {
     0,
 };
 
-void grTMario_8021F840(int unk) {}
+void grTMario_8021F840(bool unk) {}
 
 void grTMario_8021F844(void)
 {

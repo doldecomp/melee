@@ -173,7 +173,7 @@ StageData grIz_803E0E5C = {
 };
 
 // functions start here
-void grIzumi_801CBB84(int x)
+void grIzumi_801CBB84(bool x)
 {
     return;
 }

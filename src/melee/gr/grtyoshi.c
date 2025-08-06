@@ -15,7 +15,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 223B48 */ static void grTYoshi_80223B48(int);
+/* 223B48 */ static void grTYoshi_80223B48(bool);
 /* 223B4C */ static void grTYoshi_80223B4C(void);
 /* 223BBC */ static void grTYoshi_80223BBC(void);
 /* 223BC0 */ static void grTYoshi_80223BC0(void);
@@ -79,7 +79,7 @@ StageData grTYs_803E95D4 = {
 
 extern StageInfo stage_info;
 
-static void grTYoshi_80223B48(int arg0) {}
+static void grTYoshi_80223B48(bool arg0) {}
 static void grTYoshi_80223B4C(void)
 {
     stage_info.unk8C.b4 = 0;

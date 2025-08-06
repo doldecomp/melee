@@ -29,7 +29,7 @@ void grTPurin_8022347C(Ground_GObj*);
 bool grTPurin_802234CC(Ground_GObj*);
 void grTPurin_802234D4(Ground_GObj*);
 void grTPurin_802234F4(Ground_GObj*);
-DynamicsDesc* grTPurin_802234F8(int);
+DynamicsDesc* grTPurin_802234F8(enum_t);
 bool grTPurin_80223578(Vec3*, int, HSD_JObj*);
 
 #endif

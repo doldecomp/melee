@@ -16,7 +16,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grtDrMario_8022050C(int);                   /* static */
+void grtDrMario_8022050C(bool);                   /* static */
 void grtDrMario_80220510(void);                  /* static */
 void grtDrMario_80220580(void);                  /* static */
 void grtDrMario_80220584(void);                  /* static */
@@ -61,7 +61,7 @@ StageData grTDr_803E88AC = {
     1,
 };
 
-void grtDrMario_8022050C(int unk0) {}
+void grtDrMario_8022050C(bool unk0) {}
 
 void grtDrMario_80220510(void)
 {

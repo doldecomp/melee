@@ -18,7 +18,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTDonkey_80220228(int);
+static void grTDonkey_80220228(bool);
 static void grTDonkey_8022022C(void);
 static void grTDonkey_8022029C(void);
 static void grTDonkey_802202A0(void);
@@ -67,7 +67,7 @@ StageData grTDk_803E87EC = {
 
 extern StageInfo stage_info;
 
-static void grTDonkey_80220228(int arg0) {}
+static void grTDonkey_80220228(bool arg0) {}
 
 static void grTDonkey_8022022C(void)
 {

@@ -30,7 +30,7 @@ S16Vec grLast_804D4968[1] = { { 0, 3, 0 } };
 
 static int* grNLa_804D6AD0;
 
-static void grLast_8021A620(int arg0)
+static void grLast_8021A620(bool arg0)
 {
     Ground_GObj* gobj;
     Ground* gp;
@@ -186,7 +186,7 @@ static void grLast_8021A7C8(void)
     grZakoGenerator_801CAE04(0);
 }
 
-static int grLast_8021A7EC(void)
+static bool grLast_8021A7EC(void)
 {
     return FALSE;
 }
@@ -962,7 +962,7 @@ static void grLast_8021C6AC(void)
     Ground_801C0574(&spC);
 }
 
-static DynamicsDesc* grLast_8021C740(int arg0)
+static DynamicsDesc* grLast_8021C740(enum_t arg0)
 {
     return NULL;
 }

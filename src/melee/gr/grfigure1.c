@@ -17,7 +17,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grFigure1_8020DFDC(int);
+static void grFigure1_8020DFDC(bool);
 static void grFigure1_8020DFE0(void);
 static void grFigure1_8020E050(void);
 static void grFigure1_8020E054(void);
@@ -67,7 +67,7 @@ UNK_T grEF1_804D6A70;
 
 extern StageInfo stage_info;
 
-static void grFigure1_8020DFDC(int n) {}
+static void grFigure1_8020DFDC(bool n) {}
 
 static void grFigure1_8020DFE0(void)
 {
@@ -184,4 +184,4 @@ static bool grFigure1_8020E268(Vec3* v, int n, HSD_JObj* o)
     return true;
 }
 
-void grFigure1_8020E270(int n) {}
+void grFigure1_8020E270(bool n) {}
