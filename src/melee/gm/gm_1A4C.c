@@ -1,8 +1,8 @@
 #include "gm_1A4C.h"
 
-#include "gm_unsplit.h"
-
 #include "gm_1A4C.static.h"
+
+#include "gm_unsplit.h"
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>

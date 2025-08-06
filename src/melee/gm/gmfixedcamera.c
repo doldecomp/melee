@@ -1,9 +1,9 @@
 #include "gmfixedcamera.h"
 
+#include "gm_1B03.static.h"
+
 #include "gm_unsplit.h"
 #include "gmvsdata.h"
-
-#include "gm_1B03.static.h"
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
