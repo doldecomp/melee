@@ -58,13 +58,6 @@ void gm_801A6630(int arg0)
 }
 #pragma pop
 
-struct sobj {
-    u8 pad0[0x10];
-    float x10, x14;
-    u8 pad18[0x3C - 0x18];
-    u8 x3C, x3D, x3E, x3F;
-};
-
 static int gm_804D6750;
 static HSD_GObj* gm_804D6754;
 static int gm_804D6758;
@@ -95,8 +88,8 @@ static struct {
 
 void fn_801A6664(HSD_GObj* arg0)
 {
-    struct sobj* temp_r3;
-    struct sobj* temp_r3_2;
+    HSD_SObj_803A477C_t* temp_r3;
+    HSD_SObj_803A477C_t* temp_r3_2;
 
     HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
     if ((s32) gm_804D6758 != 0) {

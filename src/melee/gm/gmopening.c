@@ -90,10 +90,7 @@ void gm_801AA28C_OnFrame(void)
 {
     HSD_GObj* temp_r3_2;
     int temp_r3;
-    struct {
-        u8 pad[0x10];
-        float x10, x14;
-    }* temp_r3_3;
+    HSD_SObj_803A477C_t* temp_r3_3;
     PAD_STACK(4);
 
     lbMthp_8001F578();
