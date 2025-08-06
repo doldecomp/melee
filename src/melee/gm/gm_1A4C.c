@@ -155,8 +155,8 @@ void fn_801A94BC(HSD_GObj* gobj)
 
 /// #gm_801A9630
 
-extern u8 gm_804D67C8;
-extern u8 gm_804D67C9;
+static u8 gm_804D67C8;
+static u8 gm_804D67C9;
 
 char* gm_803DB8B8[] = {
     // clang-format off
@@ -318,9 +318,6 @@ void gm_801A9B30_OnEnter(UNK_T unused)
         lbAudioAx_800237A8(0x9C41, 0x7F, 0x40);
     }
 }
-
-static u8 gm_804D67C8;
-static u8 gm_804D67C9;
 
 void gm_801A9D0C_OnFrame(void)
 {

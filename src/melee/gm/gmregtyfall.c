@@ -348,7 +348,7 @@ void gm_801A6DC0(void)
     }
 }
 
-static data_reorder(HSD_JObj* jobj)
+static void data_reorder(HSD_JObj* jobj)
 {
     HSD_JObjSetRotationX(jobj, 0);
 }
