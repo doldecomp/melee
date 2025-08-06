@@ -1,9 +1,9 @@
 #include "gmstamina.h"
 
-#include "gm_unsplit.h"
-#include "gmscextern.h"
-
 #include "gm_1B03.static.h"
+
+#include "gm_unsplit.h"
+#include "gmvsdata.h"
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
@@ -46,8 +46,8 @@ MinorScene gm_803DF138_MinorScenes[] = {
         gm_801B922C,
         {
             MN_CSS,
-            gm_804807B0,
-            gm_804807B0,
+            &gm_804807B0,
+            &gm_804807B0,
         },
     },
     {
@@ -58,8 +58,8 @@ MinorScene gm_803DF138_MinorScenes[] = {
         gm_801B927C,
         {
             MN_SSS,
-            gm_80480668,
-            gm_80480668,
+            &gm_80480668,
+            &gm_80480668,
         },
     },
     {

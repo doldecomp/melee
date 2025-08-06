@@ -80,7 +80,7 @@ u8 gm_801A5360(MatchEnd* match_end)
     if (loser != 0xFFFF) {
         return player;
     }
-    __assert("gmvsmelee.c", 0xB2U, "0");
+    HSD_ASSERT(0xB2, 0);
     return 0;
 }
 
@@ -141,7 +141,7 @@ void gm_801A5754(MinorScene* minor_data, VsModeData* vs_data)
     gm_80167FC4(sss_data);
 }
 
-void gm_801A57A8(MinorScene* minor_data, VsModeData* vs_data, s32 id)
+void gm_801A57A8(MinorScene* minor_data, VsModeData* vs_data, u8 id)
 {
     SSSData* sss_data;
 
@@ -192,11 +192,10 @@ void gm_801A583C(MinorScene* minor_data, VsModeData* vs_data,
     gm_80168FC4();
 }
 
-void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
+void gm_801A5AF0(MinorScene* minor_data, u8 id, u8 id2)
 {
     MatchExitInfo* match_exit_info = gm_801A4284(minor_data);
     int i;
-    bool result;
 
     for (i = 0; i < 6; i++) {
         if (match_exit_info->match_end.player_standings[i].slot_type == 0) {
@@ -259,7 +258,7 @@ void gm_801A5F00(MinorScene* minor_data)
     exit_info->match_end = gm_80479D98.match_end;
 }
 
-void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, int next_scene)
+void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, u8 next_scene)
 {
     MatchEnd* match_end;
     u8* tmp = gm_804D6730;

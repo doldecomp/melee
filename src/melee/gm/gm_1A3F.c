@@ -175,7 +175,7 @@ void gm_SetSceneMinor(u8 arg0)
     gm_80479D30.nums.prev_minor = arg0;
 }
 
-void gm_SetScenePendingMinor(int pending_minor)
+void gm_SetScenePendingMinor(u8 pending_minor)
 {
     gm_80479D30.nums.pending_minor = pending_minor + 1;
 }
