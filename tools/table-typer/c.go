@@ -148,6 +148,13 @@ var tableTypes = map[string]TableType{
 			nil, // size_t
 		},
 	},
+
+	"gm_803DF94C_t": {
+		Fields: []CType{
+			FuncType{"void", []string{"HSD_GObj*"}},
+			FuncType{"void", []string{"int"}},
+		},
+	},
 }
 
 func defaultName(typ string) string {
