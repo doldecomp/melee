@@ -160,7 +160,6 @@ void it_802C989C(HSD_GObj* item_gobj)
 
     item = item_gobj->user_data;
     // if (((u8) item->xDBC_itcmd_var4 >> 7U) & 1) {
-    // if ((((flag32*) item->xDBC_itcmd_var4)->word >> 7U) & 1) {
     // if ((((UnkFlagStruct*) item->xDBC_itcmd_var4)->u8 >> 7U) & 1) {
     if (((flag32*) item->xDBC_itcmd_var4)->flags.x0) {
         it_802C9B20((Item_GObj*) item_gobj);
