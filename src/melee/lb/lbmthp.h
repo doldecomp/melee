@@ -24,7 +24,7 @@
 /* 01F5F4 */ s32 lbMthp_8001F5F4(void);
 /* 01F604 */ s32 lbMthp_8001F604(void);
 /* 01F614 */ void lbMthp_8001F614(s32 arg0);
-/* 01F624 */ UNK_T lbMthp_8001F624(HSD_GObj*, int, int);
+/* 01F624 */ HSD_SObj_803A477C_t* lbMthp_8001F624(HSD_GObj*, int, int);
 /* 01F67C */ void lbMthp_8001F67C(HSD_GObj*, int);
 /* 01F800 */ void lbMthp_8001F800(void);
 /* 01F87C */ void lbMthp_8001F87C(void);
