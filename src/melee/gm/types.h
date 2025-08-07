@@ -1,15 +1,18 @@
 #ifndef MELEE_GM_TYPES_H
 #define MELEE_GM_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h"
-#include <melee/gm/forward.h> // IWYU pragma: export
+
 #include "dolphin/types.h"
-#include <melee/mn/types.h>
+
+#include <melee/gm/forward.h> // IWYU pragma: export
+#include <melee/pl/forward.h>
 
 #include <common_structs.h>
+#include <melee/mn/types.h>
 
 struct MinorScene {
     /* 00 */ u8 idx;
@@ -699,7 +702,7 @@ struct CameraVsData {
 
 struct TmVsData {
     u32 stage_id;
-    s32 slot_type[4];
+    Gm_PKind slot_type[4];
     u32 char_id[4];
     u32 color[4];
 };

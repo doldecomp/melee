@@ -2,8 +2,8 @@
 
 #include "gm_unsplit.h"
 
-#include <dolphin/gx.h>
 #include <math_ppc.h>
+#include <dolphin/gx.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
@@ -59,7 +59,7 @@ void fn_8017C0C8(void)
 {
     PlayerInitData sp8;
     gm_8016795C(&sp8);
-    sp8.slot_type = 1;
+    sp8.slot_type = Gm_PKind_Cpu;
     sp8.stocks = 1;
     sp8.xE = 4;
     sp8.cpu_level = Player_GetCpuLevel(2);
@@ -635,8 +635,10 @@ extern HSD_Archive* lbl_804D65C8;
 
 void gm_80181998(void)
 {
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC, "ScInfCnt_scene_models", 0);
-    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0, "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrNoCn", &lbl_804D65CC,
+                                      "ScInfCnt_scene_models", 0);
+    lbl_804D65C8 = lbArchive_80016DBC("IfHrReco", &lbl_804D65D0,
+                                      "ScInfCnt_scene_models", 0);
     fn_80181708();
 }
 

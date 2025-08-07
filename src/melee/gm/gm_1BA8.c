@@ -1,8 +1,10 @@
 #include "gm_1BA8.h"
 
+#include "gm_1B03.static.h"
+
 #include "gm_unsplit.h"
 
-#include "gm_1B03.static.h"
+#include <melee/pl/forward.h>
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
@@ -399,7 +401,7 @@ void gm_801BF4DC(MinorScene* arg0)
         int tmp = gm_801BF648(i);
         temp_r31->players[i].c_kind = tmp;
         temp_r31->players[i].color = gm_801BF670(i);
-        temp_r31->players[i].slot_type = 1;
+        temp_r31->players[i].slot_type = Gm_PKind_Cpu;
         temp_r31->players[i].cpu_level = 9;
         temp_r31->players[i].xE = 4;
         temp_r31->players[i].xC_b1 = false;
