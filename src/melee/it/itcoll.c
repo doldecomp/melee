@@ -448,7 +448,7 @@ void it_802701BC(Item_GObj* arg_item_gobj)
 {
     HSD_GObj* fighter_gobj;
     HitCapsule* arg_hit;
-    HurtCapsule* hurt;
+    FighterHurtCapsule* hurt;
     f32 pos_x;
     Fighter* fighter;
     Item* arg_item;
@@ -488,7 +488,7 @@ void it_802701BC(Item_GObj* arg_item_gobj)
                         hurt = &fighter->hurt_capsules[ft_hit_index];
                         if (hurt->is_grabbable &&
                             lbColl_80007ECC(
-                                arg_hit, &fighter->hurt_capsules[ft_hit_index],
+                                arg_hit, &fighter->hurt_capsules[ft_hit_index].capsule,
                                 ftCommon_8007F804(fighter), arg_item->scl,
                                 fighter->x34_scale.y, fighter->cur_pos.z))
                         {
@@ -1170,16 +1170,10 @@ void it_8027137C(Item_GObj* arg_item_gobj)
 
 void it_8027146C(Item_GObj* item_gobj)
 {
-    u32 index;
-    Item* item;
-    HitCapsule* hit;
-
-    item = item_gobj->user_data;
-    index = 0U;
-    while (index < 4U) {
-        hit = &item->x5D4_hitboxes[index].hit;
-        lbColl_80008A5C(hit);
-        index++;
+    int i;
+    Item* item = GET_ITEM(item_gobj);
+    for (i = 0; i < ARRAY_SIZE(item->x5D4_hitboxes); i++) {
+        lbColl_80008A5C(&item->x5D4_hitboxes[i].hit);
     }
 }
 
@@ -1230,10 +1224,10 @@ void it_80271534(Item_GObj* item_gobj, s32 index, HurtCapsule* arg_hurt)
 
 void it_80271590(Item_GObj* item_gobj, s32 index, HurtCapsule* arg_hurt)
 {
+    u8 _[8];
     Vec3 sp18;
     HurtCapsule* hurt;
     Item* item;
-    // PAD_STACK(8);
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
     if (item->xC4_article_data->x8_hurtbox != 0U) {
@@ -1255,7 +1249,6 @@ void it_8027163C(Item_GObj* item_gobj)
     // s32 var_r29;
     s32 index;
     BoneDynamicsDesc* bone_dyn_desc;
-    char* temp_r3;
     u32 cnt;
     // u32 var_r6;
     // DynamicsDesc* dyn_desc;
@@ -1268,15 +1261,13 @@ void it_8027163C(Item_GObj* item_gobj)
     // void* var_r4;
 
     item = item_gobj->user_data;
-    temp_r3 = "damage log over %d!!\n";
     article = item->xC4_article_data;
     it_hurtbox = (ItemDynamics*) article->x8_hurtbox;
     it_dynams = article->x14_dynamics;
     if (it_hurtbox != NULL) {
         if (it_hurtbox->count > 2) {
-            // OSReport(temp_r3 + 0x68, item);
-            OSReport(temp_r3 + 0x68, item_gobj->user_data);
-            __assert(temp_r3 + 0x18, 0x3F4U, "0");
+            OSReport("item hit num over!\n");
+            __assert("itcoll.c", 0x3F4, "0");
         }
         // var_r30 = item;
         cnt = 0U;
@@ -1297,8 +1288,8 @@ void it_8027163C(Item_GObj* item_gobj)
                                          // bytes instead of 24)
             if (bone_dyn_desc->bone_id != 0) {
                 if (item->xBBC_dynamicBoneTable == NULL) {
-                    OSReport(temp_r3 + 0x7C);
-                    __assert(temp_r3 + 0x18, 0x402U, "0");
+                    OSReport("item can't init hit!\n");
+                    __assert("itcoll.c", 0x402, "0");
                 }
                 hurt->bone =
                     item->xBBC_dynamicBoneTable->bones[bone_dyn_desc->bone_id];
@@ -1332,23 +1323,21 @@ void it_8027163C(Item_GObj* item_gobj)
         // if ((s32) it_dynams->unk8 > 2) { // ItemDynamics is only 8 bytes
         // long?
         if ((s32) it_dynams->count > 2) {
-            OSReport(temp_r3 + 0x94);
-            __assert(temp_r3 + 0x18, 0x415U, "0");
+            OSReport("item dynamics hit num over!\n");
+            __assert("itcoll.c", 0x415, "0");
         }
         cnt = 0U;
         // var_r4 = item;
         // item->xB68 = (s8) it_dynams->unk8;
-        item->xB68 = (s8) it_dynams->count;
+        item->xB68 = it_dynams->count;
         index = 0;
         // loop_18:
         // if (cnt < (u32) it_dynams->unk8) {
         while (cnt < (u32) it_dynams->count) {
-            cnt++;
             // bone_dyn_desc = it_dynams->unkC + index;
             bone_dyn_desc = &it_dynams->dyn_descs[index];
             bone_id = bone_dyn_desc->bone_id;
             // index += 0x14;
-            index++;
             item->xB6C_vars[cnt].xB90 = bone_id;
             item->xB6C_vars[cnt].xB7C =
                 item->xBBC_dynamicBoneTable->bones[bone_id];
@@ -1362,6 +1351,8 @@ void it_8027163C(Item_GObj* item_gobj)
                 ((AbsorbDesc*) bone_dyn_desc->dyn_desc.data)->x10_size;
             // var_r4 += 0x28;
             // goto loop_18;
+            index++;
+            cnt++;
         }
     }
 }
