@@ -149,8 +149,8 @@ typedef struct StageData {
     char* data1;
     void (*callback0)(void);
     void (*callback1)(int);
-    void (*callback2)(void); ///< on load callback
-    void (*callback3)(void); ///< on GO! callback
+    void (*OnLoad)(void);
+    void (*OnStart)(void);
     bool (*callback4)(void);
     DynamicsDesc* (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);
