@@ -23,57 +23,57 @@ bool grOldKongo_8020F524(HSD_GObj* gobj)
 
 /// #grOldKongo_8020F52C
 
-void grOldKongo_8020F618(HSD_GObj* gobj)
+void grOldKongo_8020F618(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grOldKongo_8020F644(HSD_GObj* gobj)
+bool grOldKongo_8020F644(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grOldKongo_8020F64C(void) {}
+void grOldKongo_8020F64C(Ground_GObj* arg) {}
 
-void grOldKongo_8020F650(void) {}
+void grOldKongo_8020F650(Ground_GObj* arg) {}
 
 /// #grOldKongo_8020F654
 
-bool grOldKongo_8020F6B4(HSD_GObj* gobj)
+bool grOldKongo_8020F6B4(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grOldKongo_8020F6BC(HSD_GObj* gobj)
+void grOldKongo_8020F6BC(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-void grOldKongo_8020F6E0(void) {}
+void grOldKongo_8020F6E0(Ground_GObj* arg) {}
 
 /// #grOldKongo_8020F6E4
 
-bool grOldKongo_8020F880(HSD_GObj* gobj)
+bool grOldKongo_8020F880(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grOldKongo_8020F888
 
-void grOldKongo_80210058(void) {}
+void grOldKongo_80210058(Ground_GObj* arg) {}
 
 /// #grOldKongo_8021005C
 
-bool grOldKongo_802100F4(HSD_GObj* gobj)
+bool grOldKongo_802100F4(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grOldKongo_802100FC
 
-void grOldKongo_80210450(void) {}
+void grOldKongo_80210450(Ground_GObj* arg) {}
 
 /// #fn_80210454
 
