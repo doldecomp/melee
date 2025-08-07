@@ -30,7 +30,7 @@ void grTGanon_80224938(Ground_GObj*);
 bool grTGanon_80224988(Ground_GObj*);
 void grTGanon_80224990(Ground_GObj*);
 void grTGanon_802249B0(Ground_GObj*);
-DynamicsDesc* grTGanon_802249B4(int);
+DynamicsDesc* grTGanon_802249B4(enum_t);
 bool grTGanon_80224A4C(Vec3*, int, HSD_JObj*);
 
 #endif

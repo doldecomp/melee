@@ -11,7 +11,7 @@
 
 #include "gr/forward.h"
 
-/* 2207F0 */ void grTFalco_802207F0(int);
+/* 2207F0 */ void grTFalco_802207F0(bool);
 /* 2207F4 */ void grTFalco_802207F4(void);
 /* 22086C */ void grTFalco_8022086C(void);
 /* 220870 */ void grTFalco_80220870(void);

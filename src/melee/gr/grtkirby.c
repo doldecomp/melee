@@ -17,7 +17,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTKirby_80221364(int);                   /* static */
+void grTKirby_80221364(bool);                   /* static */
 void grTKirby_80221368(void);                  /* static */
 void grTKirby_802213D8(void);                  /* static */
 void grTKirby_802213DC(void);                  /* static */
@@ -62,7 +62,7 @@ StageData grTKb_803E8C0C = {
     1,
 };
 
-void grTKirby_80221364(int unk) {}
+void grTKirby_80221364(bool unk) {}
 
 void grTKirby_80221368(void)
 {

@@ -48,7 +48,7 @@ StageData grTe_803E5764 = { 0x01,
 
 float grTe_804D6A48;
 
-void grTest_80206E2C(int unused) {}
+void grTest_80206E2C(bool unused) {}
 
 void grTest_80206E30(void)
 {
@@ -209,7 +209,7 @@ void grTest_80207404(Ground_GObj* gobj) {}
 
 void grTest_80207408(Ground_GObj* gobj) {}
 
-struct DynamicsDesc* grTest_8020740C(int unused)
+struct DynamicsDesc* grTest_8020740C(enum_t unused)
 {
     return false;
 }

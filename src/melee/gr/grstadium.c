@@ -156,7 +156,7 @@ StageData grPs_803E1334 = {
     ARRAY_SIZE(grPs_803E1248),
 };
 
-void grStadium_801D1018(int unused) {}
+void grStadium_801D1018(bool unused) {}
 
 void grStadium_801D101C(void)
 {
@@ -2383,7 +2383,7 @@ void fn_801D5074(Ground_GObj* gobj, int arg1)
     grDisplay_801C5DB0(gobj, arg1);
 }
 
-DynamicsDesc* grStadium_801D50B8(int unused)
+DynamicsDesc* grStadium_801D50B8(enum_t unused)
 {
     return NULL;
 }

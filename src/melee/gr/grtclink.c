@@ -193,7 +193,7 @@ void grTCLink_80220214(Ground_GObj* gobj)
     return;
 }
 
-DynamicsDesc* grTCLink_80220218(int unused)
+DynamicsDesc* grTCLink_80220218(enum_t unused)
 {
     return NULL;
 }

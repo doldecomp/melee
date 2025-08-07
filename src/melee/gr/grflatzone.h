@@ -7,11 +7,11 @@
 
 #include "it/inlines.h"
 
-/* 216E74 */ void grFlatzone_80216E74(int);
+/* 216E74 */ void grFlatzone_80216E74(bool);
 /* 216E78 */ void grFlatzone_80216E78(void);
 /* 216F38 */ void grFlatzone_80216F38(void);
 /* 216F3C */ void grFlatzone_80216F3C(void);
-/* 216F40 */ int grFlatzone_80216F40(void);
+/* 216F40 */ bool grFlatzone_80216F40(void);
 /* 216F48 */ HSD_GObj* grFlatzone_80216F48(s32);
 /* 217030 */ void grFlatzone_80217030(Ground_GObj*);
 /* 21705C */ bool grFlatzone_8021705C(Ground_GObj*);
@@ -52,5 +52,5 @@
 /* 218060 */ void grFlatzone_80218060(s32);
 /* 2181B4 */ void grFlatzone_802181B4(void);
 /* 218260 */ void grFlatzone_80218260(void);
-/* 2182B4 */ DynamicsDesc* grFlatzone_802182B4(int);
-/* 2182BC */ int grFlatzone_802182BC(Vec3*, int, HSD_JObj*);
+/* 2182B4 */ DynamicsDesc* grFlatzone_802182B4(enum_t);
+/* 2182BC */ bool grFlatzone_802182BC(Vec3*, int, HSD_JObj*);

@@ -19,7 +19,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grShrine_80201C60(int);
+static void grShrine_80201C60(bool);
 static void grShrine_80201C64(void);
 static void grShrine_80201CF0(void);
 static void grShrine_80201CF4(void);
@@ -68,7 +68,7 @@ StageData grSh_803E5130 = {
     0,
 };
 
-static void grShrine_80201C60(int arg0) {}
+static void grShrine_80201C60(bool arg0) {}
 
 static void grShrine_80201C64(void)
 {

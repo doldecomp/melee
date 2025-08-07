@@ -445,6 +445,11 @@ struct gm_8016A92C_arg0_t {
     struct lbl_8046B668_t* x58;
 };
 
+typedef struct gm_803DF94C_t {
+    void (*x0)(HSD_GObj*);
+    void (*x4)(int);
+} gm_803DF94C_t;
+
 struct MatchTeamData {
     int score;
     int subscore;

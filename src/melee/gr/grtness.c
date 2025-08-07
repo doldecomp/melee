@@ -15,7 +15,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 2225D0 */ static void grTNess_802225D0(int);
+/* 2225D0 */ static void grTNess_802225D0(bool);
 /* 2225D4 */ static void grTNess_802225D4(void);
 /* 222644 */ static void grTNess_80222644(void);
 /* 222648 */ static void grTNess_80222648(void);
@@ -65,7 +65,7 @@ StageData grTNs_803E908C = {
     grTNess_802228A4, grTNess_802228AC, 0x00000001,
 };
 
-static void grTNess_802225D0(int arg0)
+static void grTNess_802225D0(bool arg0)
 {
     return;
 }

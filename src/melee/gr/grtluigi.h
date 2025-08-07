@@ -10,7 +10,7 @@
 
 #include "gr/forward.h"
 
-/* 221C10 */ void grTLuigi_80221C10(int);
+/* 221C10 */ void grTLuigi_80221C10(bool);
 /* 221C14 */ void grTLuigi_80221C14(void);
 /* 221C84 */ void grTLuigi_80221C84(void);
 /* 221C88 */ void grTLuigi_80221C88(void);

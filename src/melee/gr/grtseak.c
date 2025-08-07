@@ -16,7 +16,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 223864 */ static void grTSeak_80223864(int);
+/* 223864 */ static void grTSeak_80223864(bool);
 /* 223868 */ static void grTSeak_80223868(void);
 /* 2238D8 */ static void grTSeak_802238D8(void);
 /* 2238DC */ static void grTSeak_802238DC(void);
@@ -76,7 +76,7 @@ StageData grTSk_803E9514 = {
     1,
 };
 
-void grTSeak_80223864(int unk0) {}
+void grTSeak_80223864(bool unk0) {}
 
 void grTSeak_80223868(void)
 {

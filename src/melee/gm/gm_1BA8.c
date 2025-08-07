@@ -36,6 +36,32 @@
 #include <melee/vi/vi1101.h>
 #include <melee/vi/vi1201v1.h>
 
+extern gm_803DF94C_t gm_804D4330, gm_804D43B8, gm_804D4340, gm_804D4348,
+    gm_804D4350, gm_804D4358, gm_804D4360, gm_804D4368, gm_804D4370,
+    gm_804D4378, gm_804D4380, gm_804D4388, gm_804D4390, gm_804D4398,
+    gm_804D4450, gm_804D43A8, gm_804D43B0, gm_804D4338, gm_804D43C0,
+    gm_804D43C8, gm_804D43D0, gm_804D43D8, gm_804D4400, gm_804D43E8,
+    gm_804D43F0, gm_804D43F8, gm_804D43E0, gm_804D4408, gm_804D4410,
+    gm_804D4418, gm_804D4420, gm_804D4428, gm_804D4430, gm_804D4438,
+    gm_804D44A8, gm_804D4448, gm_804D43A0, gm_804D4458, gm_804D4460,
+    gm_804D4468, gm_804D4470, gm_804D4478, gm_804D4480, gm_804D4488,
+    gm_804D4490, gm_804D4498, gm_804D44A0, gm_804D4440, gm_804D44B0,
+    gm_804D44B8, gm_804D44C0;
+
+gm_803DF94C_t* gm_803DF94C[] = {
+    &gm_804D4330, &gm_804D43B8, &gm_804D4340, &gm_804D4348, &gm_804D4350,
+    &gm_804D4358, &gm_804D4360, &gm_804D4368, &gm_804D4370, &gm_804D4378,
+    &gm_804D4380, &gm_804D4388, &gm_804D4390, &gm_804D4398, &gm_804D4450,
+    &gm_804D43A8, &gm_804D43B0, &gm_804D4338, &gm_804D43C0, &gm_804D43C8,
+    &gm_804D43D0, &gm_804D43D8, &gm_804D4400, &gm_804D43E8, &gm_804D43F0,
+    &gm_804D43F8, &gm_804D43E0, &gm_804D4408, &gm_804D4410, &gm_804D4418,
+    &gm_804D4420, &gm_804D4428, &gm_804D4430, &gm_804D4438, &gm_804D44A8,
+    &gm_804D4448, &gm_804D43A0, &gm_804D4458, &gm_804D4460, &gm_804D4468,
+    &gm_804D4470, &gm_804D4478, &gm_804D4480, &gm_804D4488, &gm_804D4490,
+    &gm_804D4498, &gm_804D44A0, &gm_804D4440, &gm_804D44B0, &gm_804D44B8,
+    &gm_804D44C0
+};
+
 /* 49E548 */ static struct gm_8049E548_t gm_8049E548;
 
 extern u8 gm_804D68F8;
@@ -204,19 +230,19 @@ u8 gm_801BEBA8(u8 arg0)
 
 /// #gm_801BEC54
 
-void gm_801BEC80(void)
+void gm_801BEC80(MinorScene* arg)
 {
     gm_801A42E8(1);
     gm_801A42D4();
 }
 
-void gm_801BECA8(void)
+void gm_801BECA8(MinorScene* arg)
 {
     lb_8001C550();
     lb_8001D164(0);
 }
 
-void gm_801BECD0(void)
+void gm_801BECD0(MinorScene* arg)
 {
     gm_80172898(4);
     if (gm_80173754(1, 0) == 0) {
@@ -225,7 +251,7 @@ void gm_801BECD0(void)
     }
 }
 
-void gm_801BED14(void)
+void gm_801BED14(MinorScene* arg)
 {
     gm_801A42E8(1);
     gm_801A42D4();
@@ -239,7 +265,7 @@ void gm_801BED14(void)
 
 /// #gm_801BEE9C
 
-void gm_801BEF84(void)
+void gm_801BEF84(MinorScene* arg)
 {
     lbMthp_8001F800();
 }
@@ -456,7 +482,7 @@ u8 gm_801BF718(void)
 extern u8 un_804D6F3C[8];
 extern u8 un_804D6FD8[8];
 
-void gm_801BF728(void)
+void gm_801BF728(MinorScene* arg)
 {
     s32 temp_r31;
     s32 temp_r31_2;
@@ -480,13 +506,13 @@ void gm_801BF728(void)
     gm_801BEFC0(HSD_Randi(4));
 }
 
-void gm_801BF834(void)
+void gm_801BF834(MinorScene* arg)
 {
     gm_801A42E8(0);
     gm_801A42D4();
 }
 
-void gm_801BF85C(void)
+void gm_801BF85C(MinorScene* arg)
 {
     PreloadCacheScene* temp_r31 = lbDvd_8001822C();
     PAD_STACK(4);
@@ -495,17 +521,17 @@ void gm_801BF85C(void)
     lbDvd_80018254();
 }
 
-void gm_801BF898(void)
+void gm_801BF898(MinorScene* arg)
 {
     lbMthp_8001F800();
 }
 
-void gm_801BF8B8(void)
+void gm_801BF8B8(MinorScene* arg)
 {
     lbMthp_8001F800();
 }
 
-void gm_801BF8D8(void)
+void gm_801BF8D8(MinorScene* arg)
 {
     lbMthp_8001F800();
 }

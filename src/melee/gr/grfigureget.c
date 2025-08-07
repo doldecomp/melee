@@ -16,7 +16,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 219530 */ static void grFigureGet_80219530(int);
+/* 219530 */ static void grFigureGet_80219530(bool);
 /* 219534 */ static void grFigureGet_80219534(void);
 /* 21959C */ static void grFigureGet_8021959C(void);
 /* 2195A0 */ static void grFigureGet_802195A0(void);
@@ -60,7 +60,7 @@ extern UNK_T grFigureGet_804D6AC0;
 
 extern StageInfo stage_info;
 
-static void grFigureGet_80219530(int arg0) {}
+static void grFigureGet_80219530(bool arg0) {}
 
 static void grFigureGet_80219534(void)
 {

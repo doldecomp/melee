@@ -82,7 +82,7 @@ static struct {
 // static s8 grFz_804D4928[8] = { 0x6A, 0x6F, 0x62, 0x6A, 0, 0, 0, 0 };
 static Vec3 grFz_803B8430;
 
-void grFlatzone_80216E74(int arg0)
+void grFlatzone_80216E74(bool arg0)
 {
     return;
 }
@@ -120,7 +120,7 @@ void grFlatzone_80216F3C(void)
     return;
 }
 
-int grFlatzone_80216F40(void)
+bool grFlatzone_80216F40(void)
 {
     return 0;
 }
@@ -775,12 +775,12 @@ void grFlatzone_80218260(void)
         }
     }
 }
-DynamicsDesc* grFlatzone_802182B4(int arg0)
+DynamicsDesc* grFlatzone_802182B4(enum_t arg0)
 {
     return NULL;
 }
 
-int grFlatzone_802182BC(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grFlatzone_802182BC(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return 1;
 }

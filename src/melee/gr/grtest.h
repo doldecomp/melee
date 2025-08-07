@@ -8,11 +8,11 @@
 
 #include "gr/forward.h"
 
-/* 206E2C */ UNK_RET grTest_80206E2C(int);
-/* 206E30 */ UNK_RET grTest_80206E30(UNK_PARAMS);
-/* 207014 */ UNK_RET grTest_80207014(UNK_PARAMS);
+/* 206E2C */ void grTest_80206E2C(bool);
+/* 206E30 */ void grTest_80206E30(void);
+/* 207014 */ void grTest_80207014(void);
 /* 207018 */ void grTest_80207018(void);
-/* 20703C */ bool grTest_8020703C(UNK_PARAMS);
+/* 20703C */ bool grTest_8020703C(void);
 /* 207044 */ HSD_GObj* grTest_80207044(int);
 /* 207130 */ void grTest_80207130(Ground_GObj*);
 /* 20715C */ bool grTest_8020715C(Ground_GObj*);
@@ -27,7 +27,7 @@
 /* 2073FC */ bool grTest_802073FC(Ground_GObj*);
 /* 207404 */ void grTest_80207404(Ground_GObj*);
 /* 207408 */ void grTest_80207408(Ground_GObj*);
-/* 20740C */ struct DynamicsDesc* grTest_8020740C(int);
+/* 20740C */ struct DynamicsDesc* grTest_8020740C(enum_t);
 /* 207414 */ bool grTest_80207414(Vec3* a, int id, HSD_JObj* jobj);
 
 #endif

@@ -2,12 +2,15 @@
 #define GALE01_202B6C
 
 #include <placeholder.h>
+#include <platform.h>
 
-/* 202B6C */ UNK_RET grGarden_80202B6C(UNK_PARAMS);
-/* 202B70 */ UNK_RET grGarden_80202B70(UNK_PARAMS);
-/* 202C24 */ UNK_RET grGarden_80202C24(UNK_PARAMS);
-/* 202C4C */ UNK_RET grGarden_80202C4C(UNK_PARAMS);
-/* 202C70 */ UNK_RET grGarden_80202C70(UNK_PARAMS);
+#include "it/inlines.h"
+
+/* 202B6C */ void grGarden_80202B6C(bool);
+/* 202B70 */ void grGarden_80202B70(void);
+/* 202C24 */ void grGarden_80202C24(void);
+/* 202C4C */ void grGarden_80202C4C(void);
+/* 202C70 */ bool grGarden_80202C70(void);
 /* 202C78 */ UNK_RET grGarden_80202C78(UNK_PARAMS);
 /* 202D60 */ UNK_RET grGarden_80202D60(UNK_PARAMS);
 /* 202D8C */ UNK_RET grGarden_80202D8C(UNK_PARAMS);
@@ -41,8 +44,8 @@
 /* 203498 */ UNK_RET fn_80203498(UNK_PARAMS);
 /* 20349C */ UNK_RET fn_8020349C(UNK_PARAMS);
 /* 203560 */ UNK_RET grGarden_80203560(UNK_PARAMS);
-/* 2035C8 */ UNK_RET grGarden_802035C8(UNK_PARAMS);
-/* 2035D0 */ UNK_RET grGarden_802035D0(UNK_PARAMS);
+/* 2035C8 */ DynamicsDesc* grGarden_802035C8(enum_t);
+/* 2035D0 */ bool grGarden_802035D0(Vec3*, int arg, HSD_JObj* jobj);
 /* 203624 */ float grGarden_80203624(void);
 
 #endif

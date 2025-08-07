@@ -18,7 +18,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTCaptain_8021FC60(int);
+static void grTCaptain_8021FC60(bool);
 static void grTCaptain_8021FC64(void);
 static void grTCaptain_8021FCD4(void);
 static void grTCaptain_8021FCD8(void);
@@ -65,7 +65,7 @@ StageData grTCa_803E8664 = {
     0,
 };
 
-static void grTCaptain_8021FC60(int arg0) {}
+static void grTCaptain_8021FC60(bool arg0) {}
 
 static void grTCaptain_8021FC64(void)
 {
