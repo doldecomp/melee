@@ -667,7 +667,7 @@ void Ground_801C0C2C(HSD_GObj* arg0)
 
 void Ground_801C0F78(StructPairWithStageID* pair)
 {
-    Ground_803DFEDC[pair->stage_id]->callback2();
+    Ground_803DFEDC[pair->stage_id]->OnLoad();
 }
 
 void Ground_801C0FB8(StructPairWithStageID* pair)
@@ -678,7 +678,7 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
         void (*unk8)(s32);
     }* cur;
     void* next;
-    Ground_803DFEDC[pair->stage_id]->callback3();
+    Ground_803DFEDC[pair->stage_id]->OnStart();
     for (cur = stage_info.x6A4; cur != NULL; cur = next) {
         next = cur->unk0;
         cur->unk8(cur->unk4);
