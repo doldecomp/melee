@@ -19,53 +19,53 @@ bool grBigBlueRoute_8020B9CC(void)
 
 /// #grBigBlueRoute_8020BABC
 
-bool grBigBlueRoute_8020BB00(void)
+bool grBigBlueRoute_8020BB00(Ground_GObj* arg)
 {
     return false;
 }
 
-void grBigBlueRoute_8020BB08(void) {}
+void grBigBlueRoute_8020BB08(Ground_GObj* arg) {}
 
-void grBigBlueRoute_8020BB0C(void) {}
+void grBigBlueRoute_8020BB0C(Ground_GObj* arg) {}
 
 /// #grBigBlueRoute_8020BB10
 
-bool grBigBlueRoute_8020BB58(void)
+bool grBigBlueRoute_8020BB58(Ground_GObj* arg)
 {
     return false;
 }
 
-void grBigBlueRoute_8020BB60(void) {}
+void grBigBlueRoute_8020BB60(Ground_GObj* arg) {}
 
-void grBigBlueRoute_8020BB64(void) {}
+void grBigBlueRoute_8020BB64(Ground_GObj* arg) {}
 
 /// #grBigBlueRoute_8020BB68
 
-bool grBigBlueRoute_8020BC24(void)
+bool grBigBlueRoute_8020BC24(Ground_GObj* arg)
 {
     return false;
 }
 
-void grBigBlueRoute_8020BC2C(void) {}
+void grBigBlueRoute_8020BC2C(Ground_GObj* arg) {}
 
-void grBigBlueRoute_8020BC30(void) {}
+void grBigBlueRoute_8020BC30(Ground_GObj* arg) {}
 
 /// #fn_8020BC34
 
 /// #grBigBlueRoute_8020BC68
 
-bool grBigBlueRoute_8020BF30(void)
+bool grBigBlueRoute_8020BF30(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grBigBlueRoute_8020BF38
 
-void grBigBlueRoute_8020C13C(void) {}
+void grBigBlueRoute_8020C13C(Ground_GObj* arg) {}
 
 /// #grBigBlueRoute_8020C140
 
-bool grBigBlueRoute_8020C1D4(void)
+bool grBigBlueRoute_8020C1D4(Ground_GObj* arg)
 {
     return false;
 }

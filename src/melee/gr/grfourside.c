@@ -50,54 +50,54 @@ bool grFourside_801F2DC8(void)
 
 /// #grFourside_801F2DD0
 
-void grFourside_801F2EBC(HSD_GObj* gobj)
+void grFourside_801F2EBC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grFourside_801F2EE8(void)
+bool grFourside_801F2EE8(Ground_GObj* arg)
 {
     return false;
 }
 
-void grFourside_801F2EF0(void) {}
+void grFourside_801F2EF0(Ground_GObj* arg) {}
 
-void grFourside_801F2EF4(void) {}
+void grFourside_801F2EF4(Ground_GObj* arg) {}
 
-void grFourside_801F2EF8(HSD_GObj* gobj)
+void grFourside_801F2EF8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grFourside_801F2F24(void)
+bool grFourside_801F2F24(Ground_GObj* arg)
 {
     return false;
 }
 
-void grFourside_801F2F2C(void) {}
+void grFourside_801F2F2C(Ground_GObj* arg) {}
 
-void grFourside_801F2F30(void) {}
+void grFourside_801F2F30(Ground_GObj* arg) {}
 
 /// #grFourside_801F2F34
 
-bool grFourside_801F3070(void)
+bool grFourside_801F3070(Ground_GObj* arg)
 {
     return false;
 }
 
-void grFourside_801F3078(HSD_GObj* gobj)
+void grFourside_801F3078(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-void grFourside_801F309C(void) {}
+void grFourside_801F309C(Ground_GObj* arg) {}
 
 /// #fn_801F30A0
 
-void grFourside_801F30F0(HSD_GObj* gobj)
+void grFourside_801F30F0(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(4);
@@ -107,49 +107,49 @@ void grFourside_801F30F0(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-bool grFourside_801F3144(void)
+bool grFourside_801F3144(Ground_GObj* arg)
 {
     return false;
 }
 
-void grFourside_801F314C(void) {}
+void grFourside_801F314C(Ground_GObj* arg) {}
 
-void grFourside_801F3150(void) {}
+void grFourside_801F3150(Ground_GObj* arg) {}
 
 /// #grFourside_801F3154
 
-bool grFourside_801F326C(void)
+bool grFourside_801F326C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grFourside_801F3274
 
-void grFourside_801F37F8(void) {}
+void grFourside_801F37F8(Ground_GObj* arg) {}
 
 /// #grFourside_801F37FC
 
-bool grFourside_801F388C(void)
+bool grFourside_801F388C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grFourside_801F3894
 
-void grFourside_801F3B6C(void) {}
+void grFourside_801F3B6C(Ground_GObj* arg) {}
 
 /// #grFourside_801F3B70
 
 /// #grFourside_801F3C40
 
-bool grFourside_801F3CC0(void)
+bool grFourside_801F3CC0(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grFourside_801F3CC8
 
-void grFourside_801F3F0C(void) {}
+void grFourside_801F3F0C(Ground_GObj* arg) {}
 
 int grFourside_801F3F10(void)
 {

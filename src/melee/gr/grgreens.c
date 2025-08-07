@@ -1,5 +1,7 @@
 #include <platform.h>
 
+#include "grgreens.h"
+
 static s8 grGr_804D6AAC;
 
 void grGreens_80213458(void)
@@ -22,62 +24,62 @@ bool grGreens_8021351C(void)
 
 /// #grGreens_8021360C
 
-bool grGreens_802138AC(void)
+bool grGreens_802138AC(Ground_GObj* arg)
 {
     return false;
 }
 
-void grGreens_802138B4(void) {}
+void grGreens_802138B4(Ground_GObj* arg) {}
 
-void grGreens_802138B8(void) {}
+void grGreens_802138B8(Ground_GObj* arg) {}
 
 /// #grGreens_802138BC
 
-bool grGreens_80213900(void)
+bool grGreens_80213900(Ground_GObj* arg)
 {
     return false;
 }
 
-void grGreens_80213908(void) {}
+void grGreens_80213908(Ground_GObj* arg) {}
 
-void grGreens_8021390C(void) {}
+void grGreens_8021390C(Ground_GObj* arg) {}
 
 /// #grGreens_80213910
 
-bool grGreens_8021393C(void)
+bool grGreens_8021393C(Ground_GObj* arg)
 {
     return false;
 }
 
-void grGreens_80213944(void) {}
+void grGreens_80213944(Ground_GObj* arg) {}
 
-void grGreens_80213948(void) {}
+void grGreens_80213948(Ground_GObj* arg) {}
 
 /// #grGreens_8021394C
 
-bool grGreens_80213978(void)
+bool grGreens_80213978(Ground_GObj* arg)
 {
     return false;
 }
 
-void grGreens_80213980(void) {}
+void grGreens_80213980(Ground_GObj* arg) {}
 
-void grGreens_80213984(void) {}
+void grGreens_80213984(Ground_GObj* arg) {}
 
 /// #grGreens_80213988
 
-bool grGreens_802139B4(void)
+bool grGreens_802139B4(Ground_GObj* arg)
 {
     return false;
 }
 
-void grGreens_802139BC(void) {}
+void grGreens_802139BC(Ground_GObj* arg) {}
 
-void grGreens_802139C0(void) {}
+void grGreens_802139C0(Ground_GObj* arg) {}
 
 /// #grGreens_802139C4
 
-bool grGreens_80213AAC(void)
+bool grGreens_80213AAC(Ground_GObj* arg)
 {
     return false;
 }
@@ -88,13 +90,13 @@ bool grGreens_80213AAC(void)
 
 /// #grGreens_80213C10
 
-void grGreens_80214654(void) {}
+void grGreens_80214654(Ground_GObj* arg) {}
 
 /// #fn_80214658
 
 /// #grGreens_80214674
 
-bool grGreens_80214794(void)
+bool grGreens_80214794(Ground_GObj* arg)
 {
     return false;
 }
