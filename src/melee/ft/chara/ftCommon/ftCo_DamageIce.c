@@ -418,7 +418,7 @@ void ftCo_80091854(HSD_GObj* gobj)
     } else {
         ftCommon_8007D5D4(fp);
         fp->x2227_b6 = false;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce, Ft_MF_Unk06, 0, 0,
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIceJump, Ft_MF_Unk06, 0, 0,
                                   0, NULL);
         ft_PlaySFX(fp, 0x123, SFX_VOLUME_MAX, SFX_PAN_MID);
         jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
