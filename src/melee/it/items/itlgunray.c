@@ -67,7 +67,7 @@ void it_802982AC(Item_GObj* gobj, Item_GObj* owner_gobj, Article* article)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-int it_80298300(HSD_GObj* gobj)
+bool it_80298300(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ItLGunRayAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
@@ -106,7 +106,7 @@ void it_802985D8(HSD_GObj* gobj)
     ip->xDD4_itemVar.lgunray.pos = ip->pos;
 }
 
-int it_802985F8(HSD_GObj* gobj)
+bool it_802985F8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (it_8029C4D4(gobj, &ip->x378_itemColl)) {

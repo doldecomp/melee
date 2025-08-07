@@ -43,10 +43,10 @@
 /* 297784 */ void it_80297784(Item_GObj* gobj);
 /* 297788 */ bool it_80297788(Item_GObj* gobj);
 /* 297790 */ UNK_RET it_80297790(UNK_PARAMS);
-/* 29789C */ int it_8029789C(Item_GObj*);
-/* 2978A4 */ int it_802978A4(Item_GObj*);
-/* 2978AC */ int it_802978AC(Item_GObj*);
-/* 2978B4 */ int it_802978B4(Item_GObj*);
+/* 29789C */ bool it_8029789C(Item_GObj*);
+/* 2978A4 */ bool it_802978A4(Item_GObj*);
+/* 2978AC */ bool it_802978AC(Item_GObj*);
+/* 2978B4 */ bool it_802978B4(Item_GObj*);
 /* 2978BC */ void it_802978BC(Item_GObj*, Item_GObj*);
 /* 3F63C0 */ extern ItemStateTable it_803F63C0[];
 

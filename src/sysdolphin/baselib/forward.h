@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+typedef struct _GObjFuncs GObjFuncs;
 typedef struct HSD_AnimJoint HSD_AnimJoint;
 typedef struct HSD_AObj HSD_AObj;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
@@ -79,6 +80,7 @@ typedef struct HSD_ShapeAnimJoint HSD_ShapeAnimJoint;
 typedef struct HSD_ShapeSet HSD_ShapeSet;
 typedef struct HSD_ShapeSetDesc HSD_ShapeSetDesc;
 typedef struct HSD_SM HSD_SM;
+typedef struct HSD_SObj_803A477C_t HSD_SObj_803A477C_t;
 typedef struct HSD_Spline HSD_Spline;
 typedef struct HSD_TExpDag HSD_TExpDag;
 typedef struct HSD_TExpRes HSD_TExpRes;

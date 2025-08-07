@@ -15,24 +15,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 223B48 */ static void grTYoshi_80223B48(int);
+/* 223B48 */ static void grTYoshi_80223B48(bool);
 /* 223B4C */ static void grTYoshi_80223B4C(void);
 /* 223BBC */ static void grTYoshi_80223BBC(void);
 /* 223BC0 */ static void grTYoshi_80223BC0(void);
 /* 223BE4 */ static bool grTYoshi_80223BE4(void);
 /* 223BEC */ static HSD_GObj* grTYoshi_80223BEC(int gobj_id);
-/* 223CD4 */ static void grTYoshi_80223CD4(HSD_GObj* gobj);
-/* 223D00 */ static bool grTYoshi_80223D00(HSD_GObj*);
-/* 223D08 */ static void grTYoshi_80223D08(HSD_GObj*);
-/* 223D0C */ static void grTYoshi_80223D0C(HSD_GObj*);
-/* 223D10 */ static void grTYoshi_80223D10(HSD_GObj* gobj);
-/* 223D60 */ static bool grTYoshi_80223D60(HSD_GObj*);
-/* 223D68 */ static void grTYoshi_80223D68(HSD_GObj* gobj);
-/* 223D9C */ static void grTYoshi_80223D9C(HSD_GObj*);
-/* 223DA0 */ static void grTYoshi_80223DA0(HSD_GObj* gobj);
-/* 223DF0 */ static bool grTYoshi_80223DF0(HSD_GObj*);
-/* 223DF8 */ static void grTYoshi_80223DF8(HSD_GObj*);
-/* 223E18 */ static void grTYoshi_80223E18(HSD_GObj*);
+/* 223CD4 */ static void grTYoshi_80223CD4(Ground_GObj* gobj);
+/* 223D00 */ static bool grTYoshi_80223D00(Ground_GObj*);
+/* 223D08 */ static void grTYoshi_80223D08(Ground_GObj*);
+/* 223D0C */ static void grTYoshi_80223D0C(Ground_GObj*);
+/* 223D10 */ static void grTYoshi_80223D10(Ground_GObj* gobj);
+/* 223D60 */ static bool grTYoshi_80223D60(Ground_GObj*);
+/* 223D68 */ static void grTYoshi_80223D68(Ground_GObj* gobj);
+/* 223D9C */ static void grTYoshi_80223D9C(Ground_GObj*);
+/* 223DA0 */ static void grTYoshi_80223DA0(Ground_GObj* gobj);
+/* 223DF0 */ static bool grTYoshi_80223DF0(Ground_GObj*);
+/* 223DF8 */ static void grTYoshi_80223DF8(Ground_GObj*);
+/* 223E18 */ static void grTYoshi_80223E18(Ground_GObj*);
 /* 223E1C */ static DynamicsDesc* grTYoshi_80223E1C(enum_t);
 /* 223E24 */ static bool grTYoshi_80223E24(Vec3*, int, HSD_JObj*);
 
@@ -79,7 +79,7 @@ StageData grTYs_803E95D4 = {
 
 extern StageInfo stage_info;
 
-static void grTYoshi_80223B48(int arg0) {}
+static void grTYoshi_80223B48(bool arg0) {}
 static void grTYoshi_80223B4C(void)
 {
     stage_info.unk8C.b4 = 0;
@@ -128,22 +128,22 @@ static HSD_GObj* grTYoshi_80223BEC(int gobj_id)
 
     return gobj;
 }
-static void grTYoshi_80223CD4(HSD_GObj* gobj)
+static void grTYoshi_80223CD4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTYoshi_80223D00(HSD_GObj* arg0)
+static bool grTYoshi_80223D00(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTYoshi_80223D08(HSD_GObj* arg0) {}
+static void grTYoshi_80223D08(Ground_GObj* arg0) {}
 
-static void grTYoshi_80223D0C(HSD_GObj* arg0) {}
+static void grTYoshi_80223D0C(Ground_GObj* arg0) {}
 
-static void grTYoshi_80223D10(HSD_GObj* gobj)
+static void grTYoshi_80223D10(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -152,20 +152,20 @@ static void grTYoshi_80223D10(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTYoshi_80223D60(HSD_GObj* arg0)
+static bool grTYoshi_80223D60(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTYoshi_80223D68(HSD_GObj* gobj)
+static void grTYoshi_80223D68(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTYoshi_80223D9C(HSD_GObj* arg0) {}
+static void grTYoshi_80223D9C(Ground_GObj* arg0) {}
 
-static void grTYoshi_80223DA0(HSD_GObj* gobj)
+static void grTYoshi_80223DA0(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -174,17 +174,17 @@ static void grTYoshi_80223DA0(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTYoshi_80223DF0(HSD_GObj* arg0)
+static bool grTYoshi_80223DF0(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTYoshi_80223DF8(HSD_GObj* arg0)
+static void grTYoshi_80223DF8(Ground_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
 }
 
-static void grTYoshi_80223E18(HSD_GObj* arg0) {}
+static void grTYoshi_80223E18(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grTYoshi_80223E1C(enum_t arg0)
 {

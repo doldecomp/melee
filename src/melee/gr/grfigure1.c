@@ -17,24 +17,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grFigure1_8020DFDC(int);
+static void grFigure1_8020DFDC(bool);
 static void grFigure1_8020DFE0(void);
 static void grFigure1_8020E050(void);
 static void grFigure1_8020E054(void);
 static bool grFigure1_8020E078(void);
 static HSD_GObj* grFigure1_8020E080(int);
-static void grFigure1_8020E168(HSD_GObj*);
-static bool grFigure1_8020E194(HSD_GObj*);
-static void grFigure1_8020E19C(HSD_GObj*);
-static void grFigure1_8020E1A0(HSD_GObj*);
-static void grFigure1_8020E1A4(HSD_GObj*);
-static bool grFigure1_8020E1D0(HSD_GObj*);
-static void grFigure1_8020E1D8(HSD_GObj*);
-static void grFigure1_8020E1FC(HSD_GObj*);
-static void grFigure1_8020E200(HSD_GObj*);
-static bool grFigure1_8020E250(HSD_GObj*);
-static void grFigure1_8020E258(HSD_GObj*);
-static void grFigure1_8020E25C(HSD_GObj*);
+static void grFigure1_8020E168(Ground_GObj*);
+static bool grFigure1_8020E194(Ground_GObj*);
+static void grFigure1_8020E19C(Ground_GObj*);
+static void grFigure1_8020E1A0(Ground_GObj*);
+static void grFigure1_8020E1A4(Ground_GObj*);
+static bool grFigure1_8020E1D0(Ground_GObj*);
+static void grFigure1_8020E1D8(Ground_GObj*);
+static void grFigure1_8020E1FC(Ground_GObj*);
+static void grFigure1_8020E200(Ground_GObj*);
+static bool grFigure1_8020E250(Ground_GObj*);
+static void grFigure1_8020E258(Ground_GObj*);
+static void grFigure1_8020E25C(Ground_GObj*);
 static DynamicsDesc* grFigure1_8020E260(enum_t);
 static bool grFigure1_8020E268(Vec3*, int, HSD_JObj*);
 
@@ -67,7 +67,7 @@ UNK_T grEF1_804D6A70;
 
 extern StageInfo stage_info;
 
-static void grFigure1_8020DFDC(int n) {}
+static void grFigure1_8020DFDC(bool n) {}
 
 static void grFigure1_8020DFE0(void)
 {
@@ -122,41 +122,41 @@ static HSD_GObj* grFigure1_8020E080(int gobj_id)
     return gobj;
 }
 
-static void grFigure1_8020E168(HSD_GObj* gobj)
+static void grFigure1_8020E168(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grFigure1_8020E194(HSD_GObj* arg0)
+static bool grFigure1_8020E194(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grFigure1_8020E19C(HSD_GObj* gobj) {}
+static void grFigure1_8020E19C(Ground_GObj* gobj) {}
 
-static void grFigure1_8020E1A0(HSD_GObj* arg0) {}
+static void grFigure1_8020E1A0(Ground_GObj* arg0) {}
 
-static void grFigure1_8020E1A4(HSD_GObj* gobj)
+static void grFigure1_8020E1A4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
 }
 
-static bool grFigure1_8020E1D0(HSD_GObj* arg0)
+static bool grFigure1_8020E1D0(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grFigure1_8020E1D8(HSD_GObj* gobj)
+static void grFigure1_8020E1D8(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-static void grFigure1_8020E1FC(HSD_GObj* arg0) {}
+static void grFigure1_8020E1FC(Ground_GObj* arg0) {}
 
-static void grFigure1_8020E200(HSD_GObj* gobj)
+static void grFigure1_8020E200(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -165,14 +165,14 @@ static void grFigure1_8020E200(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grFigure1_8020E250(HSD_GObj* arg0)
+static bool grFigure1_8020E250(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grFigure1_8020E258(HSD_GObj* gobj) {}
+static void grFigure1_8020E258(Ground_GObj* gobj) {}
 
-static void grFigure1_8020E25C(HSD_GObj* arg0) {}
+static void grFigure1_8020E25C(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grFigure1_8020E260(enum_t arg0)
 {
@@ -184,4 +184,4 @@ static bool grFigure1_8020E268(Vec3* v, int n, HSD_JObj* o)
     return true;
 }
 
-void grFigure1_8020E270(int n) {}
+void grFigure1_8020E270(bool n) {}

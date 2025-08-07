@@ -16,24 +16,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 223864 */ static void grTSeak_80223864(int);
+/* 223864 */ static void grTSeak_80223864(bool);
 /* 223868 */ static void grTSeak_80223868(void);
 /* 2238D8 */ static void grTSeak_802238D8(void);
 /* 2238DC */ static void grTSeak_802238DC(void);
 /* 223900 */ static bool grTSeak_80223900(void);
 /* 223908 */ static HSD_GObj* grTSeak_80223908(s32);
-/* 2239F0 */ static void grTSeak_802239F0(HSD_GObj*);
-/* 223A1C */ static bool grTSeak_80223A1C(HSD_GObj*);
-/* 223A24 */ static void grTSeak_80223A24(HSD_GObj*);
-/* 223A28 */ static void grTSeak_80223A28(HSD_GObj*);
-/* 223A2C */ static void grTSeak_80223A2C(HSD_GObj*);
-/* 223A7C */ static bool grTSeak_80223A7C(HSD_GObj*);
-/* 223A84 */ static void grTSeak_80223A84(HSD_GObj*);
-/* 223AB8 */ static void grTSeak_80223AB8(HSD_GObj*);
-/* 223ABC */ static void grTSeak_80223ABC(HSD_GObj*);
-/* 223B0C */ static bool grTSeak_80223B0C(HSD_GObj*);
-/* 223B14 */ static void grTSeak_80223B14(HSD_GObj*);
-/* 223B34 */ static void grTSeak_80223B34(HSD_GObj*);
+/* 2239F0 */ static void grTSeak_802239F0(Ground_GObj*);
+/* 223A1C */ static bool grTSeak_80223A1C(Ground_GObj*);
+/* 223A24 */ static void grTSeak_80223A24(Ground_GObj*);
+/* 223A28 */ static void grTSeak_80223A28(Ground_GObj*);
+/* 223A2C */ static void grTSeak_80223A2C(Ground_GObj*);
+/* 223A7C */ static bool grTSeak_80223A7C(Ground_GObj*);
+/* 223A84 */ static void grTSeak_80223A84(Ground_GObj*);
+/* 223AB8 */ static void grTSeak_80223AB8(Ground_GObj*);
+/* 223ABC */ static void grTSeak_80223ABC(Ground_GObj*);
+/* 223B0C */ static bool grTSeak_80223B0C(Ground_GObj*);
+/* 223B14 */ static void grTSeak_80223B14(Ground_GObj*);
+/* 223B34 */ static void grTSeak_80223B34(Ground_GObj*);
 /* 223B38 */ static DynamicsDesc* grTSeak_80223B38(enum_t);
 /* 223B40 */ static bool grTSeak_80223B40(Vec3*, int, HSD_JObj*);
 
@@ -76,7 +76,7 @@ StageData grTSk_803E9514 = {
     1,
 };
 
-void grTSeak_80223864(int unk0) {}
+void grTSeak_80223864(bool unk0) {}
 
 void grTSeak_80223868(void)
 {
@@ -132,55 +132,55 @@ HSD_GObj* grTSeak_80223908(s32 arg0)
     return gobj;
 }
 
-void grTSeak_802239F0(HSD_GObj* gobj)
+void grTSeak_802239F0(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTSeak_80223A1C(HSD_GObj* gobj)
+bool grTSeak_80223A1C(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTSeak_80223A24(HSD_GObj* gobj) {}
+void grTSeak_80223A24(Ground_GObj* gobj) {}
 
-void grTSeak_80223A28(HSD_GObj* gobj) {}
+void grTSeak_80223A28(Ground_GObj* gobj) {}
 
-void grTSeak_80223A2C(HSD_GObj* gobj)
+void grTSeak_80223A2C(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTSeak_80223A7C(HSD_GObj* gobj)
+bool grTSeak_80223A7C(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTSeak_80223A84(HSD_GObj* gobj)
+void grTSeak_80223A84(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTSeak_80223AB8(HSD_GObj* gobj) {}
+void grTSeak_80223AB8(Ground_GObj* gobj) {}
 
-void grTSeak_80223ABC(HSD_GObj* gobj)
+void grTSeak_80223ABC(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTSeak_80223B0C(HSD_GObj* gobj)
+bool grTSeak_80223B0C(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTSeak_80223B14(HSD_GObj* gobj)
+void grTSeak_80223B14(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTSeak_80223B34(HSD_GObj* gobj) {}
+void grTSeak_80223B34(Ground_GObj* gobj) {}
 
 DynamicsDesc* grTSeak_80223B38(enum_t arg0)
 {

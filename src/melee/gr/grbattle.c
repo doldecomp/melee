@@ -24,39 +24,39 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-static void grBattle_80219C98(int);
+static void grBattle_80219C98(bool);
 static void grBattle_80219CA4(void);
 static void grBattle_80219D54(void);
 static void grBattle_80219D58(void);
 static bool grBattle_80219D7C(void);
 static HSD_GObj* grBattle_80219D84(int gobj_id);
-static void grBattle_80219E6C(HSD_GObj*);
-static void grBattle_8021A114(HSD_GObj*);
-static void grBattle_8021A118(HSD_GObj*);
-static void grBattle_8021A11C(HSD_GObj*);
-static bool grBattle_8021A16C(HSD_GObj*);
-static void grBattle_8021A174(HSD_GObj*);
-static void grBattle_8021A198(HSD_GObj*);
-static void grBattle_8021A19C(HSD_GObj*);
-static bool grBattle_8021A1FC(HSD_GObj*);
-static void grBattle_8021A204(HSD_GObj*);
-static void grBattle_8021A208(HSD_GObj*);
-static void grBattle_8021A20C(HSD_GObj*);
-static bool grBattle_8021A264(HSD_GObj*);
-static void grBattle_8021A26C(HSD_GObj*);
-static void grBattle_8021A270(HSD_GObj*);
-static void grBattle_8021A274(HSD_GObj*);
-static bool grBattle_8021A2CC(HSD_GObj*);
-static void grBattle_8021A2D4(HSD_GObj*);
-static void grBattle_8021A2D8(HSD_GObj*);
-static void grBattle_8021A2DC(HSD_GObj*);
-static bool grBattle_8021A334(HSD_GObj*);
-static void grBattle_8021A33C(HSD_GObj*);
-static void grBattle_8021A340(HSD_GObj*);
-static void grBattle_8021A344(HSD_GObj*);
-static bool grBattle_8021A3B4(HSD_GObj*);
-static void grBattle_8021A3BC(HSD_GObj*);
-static void grBattle_8021A60C(HSD_GObj*);
+static void grBattle_80219E6C(Ground_GObj*);
+static void grBattle_8021A114(Ground_GObj*);
+static void grBattle_8021A118(Ground_GObj*);
+static void grBattle_8021A11C(Ground_GObj*);
+static bool grBattle_8021A16C(Ground_GObj*);
+static void grBattle_8021A174(Ground_GObj*);
+static void grBattle_8021A198(Ground_GObj*);
+static void grBattle_8021A19C(Ground_GObj*);
+static bool grBattle_8021A1FC(Ground_GObj*);
+static void grBattle_8021A204(Ground_GObj*);
+static void grBattle_8021A208(Ground_GObj*);
+static void grBattle_8021A20C(Ground_GObj*);
+static bool grBattle_8021A264(Ground_GObj*);
+static void grBattle_8021A26C(Ground_GObj*);
+static void grBattle_8021A270(Ground_GObj*);
+static void grBattle_8021A274(Ground_GObj*);
+static bool grBattle_8021A2CC(Ground_GObj*);
+static void grBattle_8021A2D4(Ground_GObj*);
+static void grBattle_8021A2D8(Ground_GObj*);
+static void grBattle_8021A2DC(Ground_GObj*);
+static bool grBattle_8021A334(Ground_GObj*);
+static void grBattle_8021A33C(Ground_GObj*);
+static void grBattle_8021A340(Ground_GObj*);
+static void grBattle_8021A344(Ground_GObj*);
+static bool grBattle_8021A3B4(Ground_GObj*);
+static void grBattle_8021A3BC(Ground_GObj*);
+static void grBattle_8021A60C(Ground_GObj*);
 static DynamicsDesc* grBattle_8021A610(enum_t);
 static bool grBattle_8021A618(Vec3*, int, HSD_JObj*);
 
@@ -139,7 +139,7 @@ StageData grNBa_803E7E38 = {
     0,
 };
 
-static void grBattle_80219C98(int arg0)
+static void grBattle_80219C98(bool arg0)
 {
     grNBa_804D6AC8 = 1;
 }
@@ -209,7 +209,7 @@ static HSD_GObj* grBattle_80219D84(int gobj_id)
     return gobj;
 }
 
-static void grBattle_80219E6C(HSD_GObj* gobj)
+static void grBattle_80219E6C(Ground_GObj* gobj)
 {
     Vec3 v;
     Ground* gp = gobj->user_data;
@@ -234,16 +234,16 @@ static void grBattle_80219E6C(HSD_GObj* gobj)
     HSD_JObjSetTranslate(Ground_801C2CF4(3), &v);
 }
 
-bool grBattle_8021A10C(HSD_GObj* arg0)
+bool grBattle_8021A10C(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grBattle_8021A114(HSD_GObj* arg0) {}
+static void grBattle_8021A114(Ground_GObj* arg0) {}
 
-static void grBattle_8021A118(HSD_GObj* arg0) {}
+static void grBattle_8021A118(Ground_GObj* arg0) {}
 
-static void grBattle_8021A11C(HSD_GObj* gobj)
+static void grBattle_8021A11C(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -252,20 +252,20 @@ static void grBattle_8021A11C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grBattle_8021A16C(HSD_GObj* arg0)
+static bool grBattle_8021A16C(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grBattle_8021A174(HSD_GObj* gobj)
+static void grBattle_8021A174(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-static void grBattle_8021A198(HSD_GObj* arg0) {}
+static void grBattle_8021A198(Ground_GObj* arg0) {}
 
-static void grBattle_8021A19C(HSD_GObj* gobj)
+static void grBattle_8021A19C(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -275,16 +275,16 @@ static void grBattle_8021A19C(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool grBattle_8021A1FC(HSD_GObj* arg0)
+static bool grBattle_8021A1FC(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grBattle_8021A204(HSD_GObj* arg0) {}
+static void grBattle_8021A204(Ground_GObj* arg0) {}
 
-static void grBattle_8021A208(HSD_GObj* arg0) {}
+static void grBattle_8021A208(Ground_GObj* arg0) {}
 
-static void grBattle_8021A20C(HSD_GObj* gobj)
+static void grBattle_8021A20C(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -298,16 +298,16 @@ static void grBattle_8021A20C(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool grBattle_8021A264(HSD_GObj* arg0)
+static bool grBattle_8021A264(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grBattle_8021A26C(HSD_GObj* arg0) {}
+static void grBattle_8021A26C(Ground_GObj* arg0) {}
 
-static void grBattle_8021A270(HSD_GObj* arg0) {}
+static void grBattle_8021A270(Ground_GObj* arg0) {}
 
-static void grBattle_8021A274(HSD_GObj* gobj)
+static void grBattle_8021A274(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -318,16 +318,16 @@ static void grBattle_8021A274(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool grBattle_8021A2CC(HSD_GObj* arg0)
+static bool grBattle_8021A2CC(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grBattle_8021A2D4(HSD_GObj* arg0) {}
+static void grBattle_8021A2D4(Ground_GObj* arg0) {}
 
-static void grBattle_8021A2D8(HSD_GObj* arg0) {}
+static void grBattle_8021A2D8(Ground_GObj* arg0) {}
 
-static void grBattle_8021A2DC(HSD_GObj* gobj)
+static void grBattle_8021A2DC(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -339,14 +339,14 @@ static void grBattle_8021A2DC(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool grBattle_8021A334(HSD_GObj* arg0)
+static bool grBattle_8021A334(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grBattle_8021A33C(HSD_GObj* arg0) {}
+static void grBattle_8021A33C(Ground_GObj* arg0) {}
 
-static void grBattle_8021A340(HSD_GObj* arg0) {}
+static void grBattle_8021A340(Ground_GObj* arg0) {}
 
 static inline void reset_bg_timer(Ground* gp)
 {
@@ -359,7 +359,7 @@ enum {
     BG_Done,
 };
 
-static void grBattle_8021A344(HSD_GObj* gobj)
+static void grBattle_8021A344(Ground_GObj* gobj)
 {
     u8 _[16];
 
@@ -372,12 +372,12 @@ static void grBattle_8021A344(HSD_GObj* gobj)
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
 }
 
-static bool grBattle_8021A3B4(HSD_GObj* arg0)
+static bool grBattle_8021A3B4(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grBattle_8021A3BC(HSD_GObj* gobj)
+static void grBattle_8021A3BC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -445,7 +445,7 @@ static void grBattle_8021A3BC(HSD_GObj* gobj)
     }
 }
 
-static void grBattle_8021A60C(HSD_GObj* arg0) {}
+static void grBattle_8021A60C(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grBattle_8021A610(enum_t arg0)
 {

@@ -1,16 +1,19 @@
 #ifndef GALE01_1F2D0C
 #define GALE01_1F2D0C
 
+#include <platform.h>
 #include <placeholder.h>
 
+#include "gr/forward.h"
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
+#include "it/inlines.h"
 
-/* 1F2D0C */ UNK_RET grFourside_801F2D0C(UNK_PARAMS);
-/* 1F2D10 */ UNK_RET grFourside_801F2D10(UNK_PARAMS);
-/* 1F2DA0 */ UNK_RET grFourside_801F2DA0(UNK_PARAMS);
-/* 1F2DA4 */ UNK_RET grFourside_801F2DA4(UNK_PARAMS);
+/* 1F2D0C */ void grFourside_801F2D0C(bool);
+/* 1F2D10 */ void grFourside_801F2D10(void);
+/* 1F2DA0 */ void grFourside_801F2DA0(void);
+/* 1F2DA4 */ void grFourside_801F2DA4(void);
 /* 1F2DC8 */ bool grFourside_801F2DC8(void);
 /* 1F2DD0 */ void grFourside_801F2DD0(int);
 /* 1F2EBC */ void grFourside_801F2EBC(HSD_GObj*);
@@ -45,7 +48,7 @@
 /* 1F3F0C */ UNK_RET grFourside_801F3F0C(UNK_PARAMS);
 /* 1F3F10 */ int grFourside_801F3F10(void);
 /* 1F3F74 */ UNK_RET fn_801F3F74(UNK_PARAMS);
-/* 1F41E0 */ bool grFourside_801F41E0(void);
+/* 1F41E0 */ DynamicsDesc* grFourside_801F41E0(enum_t);
 /* 1F41E8 */ bool grFourside_801F41E8(Vec3* a, int arg, HSD_JObj* joint);
 
 #endif

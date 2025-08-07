@@ -24,12 +24,12 @@
 /* 01F5F4 */ s32 lbMthp_8001F5F4(void);
 /* 01F604 */ s32 lbMthp_8001F604(void);
 /* 01F614 */ void lbMthp_8001F614(s32 arg0);
-/* 01F624 */ UNK_T lbMthp_8001F624(HSD_GObj*, int, int);
+/* 01F624 */ HSD_SObj_803A477C_t* lbMthp_8001F624(HSD_GObj*, int, int);
 /* 01F67C */ void lbMthp_8001F67C(HSD_GObj*, int);
 /* 01F800 */ void lbMthp_8001F800(void);
 /* 01F87C */ void lbMthp_8001F87C(void);
-/* 01F890 */ UNK_RET lbMthp8001F890(UNK_PARAMS);
-/* 01F928 */ UNK_RET lbMthp8001F928(UNK_PARAMS);
-/* 01FAA0 */ UNK_RET lbMthp8001FAA0(UNK_PARAMS);
+/* 01F890 */ UNK_T lbMthp8001F890(HSD_GObj*);
+/* 01F928 */ void lbMthp8001F928(HSD_GObj*, int);
+/* 01FAA0 */ UNK_RET lbMthp8001FAA0(const char* filename, int, int);
 
 #endif

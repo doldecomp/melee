@@ -80,18 +80,18 @@ Ground_GObj* grHeal_8021EFEC(u32 idx)
 
 /// #grHeal_8021F0D8
 
-bool grHeal_8021F170(HSD_GObj* gobj)
+bool grHeal_8021F170(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F178(HSD_GObj* gobj) {}
+void grHeal_8021F178(Ground_GObj* gobj) {}
 
-void grHeal_8021F17C(HSD_GObj* gobj) {}
+void grHeal_8021F17C(Ground_GObj* gobj) {}
 
 /// #grHeal_8021F180
 
-bool grHeal_8021F41C(HSD_GObj* gobj)
+bool grHeal_8021F41C(Ground_GObj* gobj)
 {
     return false;
 }
@@ -121,7 +121,7 @@ void grHeal_8021F474(Ground_GObj* ground)
     gp->gv.flatzone2.xC4 = 0;
 }
 
-void grHeal_8021F4BC(HSD_GObj* gobj) {}
+void grHeal_8021F4BC(Ground_GObj* gobj) {}
 
 void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
 {
@@ -151,16 +151,16 @@ void grHeal_8021F4E8(s32 arg0, HSD_JObj* parent_jobj)
     Ground_801C4A08(ground);
 }
 
-void grHeal_8021F5C8(HSD_GObj* gobj) {}
+void grHeal_8021F5C8(Ground_GObj* gobj) {}
 
-bool grHeal_8021F5CC(HSD_GObj* gobj)
+bool grHeal_8021F5CC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F5D4(HSD_GObj* gobj) {}
+void grHeal_8021F5D4(Ground_GObj* gobj) {}
 
-void grHeal_8021F5D8(HSD_GObj* gobj) {}
+void grHeal_8021F5D8(Ground_GObj* gobj) {}
 
 void grHeal_8021F5DC(Ground_GObj* ground)
 {
@@ -171,14 +171,14 @@ void grHeal_8021F5DC(Ground_GObj* ground)
     grAnime_801C8138(ground, gp->map_id, 0);
 }
 
-bool grHeal_8021F618(HSD_GObj* gobj)
+bool grHeal_8021F618(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F620(HSD_GObj* gobj) {}
+void grHeal_8021F620(Ground_GObj* gobj) {}
 
-void grHeal_8021F624(HSD_GObj* gobj) {}
+void grHeal_8021F624(Ground_GObj* gobj) {}
 
 void grHeal_8021F628(s32 arg0, HSD_JObj* jobj_parent)
 {
@@ -198,16 +198,16 @@ void grHeal_8021F628(s32 arg0, HSD_JObj* jobj_parent)
     Ground_801C4A08(ground);
 }
 
-void grHeal_8021F6F8(HSD_GObj* gobj) {}
+void grHeal_8021F6F8(Ground_GObj* gobj) {}
 
-bool grHeal_8021F6FC(HSD_GObj* gobj)
+bool grHeal_8021F6FC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grHeal_8021F704(HSD_GObj* gobj) {}
+void grHeal_8021F704(Ground_GObj* gobj) {}
 
-void grHeal_8021F708(HSD_GObj* gobj) {}
+void grHeal_8021F708(Ground_GObj* gobj) {}
 
 u32 grHeal_8021F70C(u32 character_id)
 {

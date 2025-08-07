@@ -100,7 +100,7 @@ typedef struct IceMountainParams {
 /* 1F8364 */ void grIceMt_801F8364(Ground_GObj*);
 /* 1F8398 */ void grIceMt_801F8398(Ground_GObj*);
 /* 1F83EC */ void grIceMt_801F83EC(Ground_GObj*);
-/* 1F85BC */ bool grIceMt_801F85BC(HSD_GObj* param1);
+/* 1F85BC */ bool grIceMt_801F85BC(Ground_GObj* param1);
 /* 1F85C4 */ void grIceMt_801F85C4(Ground_GObj*);
 /* 1F8608 */ void grIceMt_801F8608(Ground_GObj*);
 /* 1F865C */ void grIceMt_801F865C(Ground_GObj*);

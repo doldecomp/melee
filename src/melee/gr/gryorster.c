@@ -101,23 +101,23 @@ HSD_GObj* grYorster_8020203C(int gobj_id)
     return gobj;
 }
 
-void grYorster_80202124(HSD_GObj* gobj)
+void grYorster_80202124(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grYorster_80202150(HSD_GObj* gobj)
+bool grYorster_80202150(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grYorster_80202158(HSD_GObj* gobj)
+void grYorster_80202158(Ground_GObj* gobj)
 {
     return;
 }
 
-void grYorster_8020215C(HSD_GObj* gobj)
+void grYorster_8020215C(Ground_GObj* gobj)
 {
     return;
 }
@@ -131,7 +131,7 @@ void grYorster_80202160(HSD_GObj* gobj)
     gp->gv.yorster.xC4 = 0;
 }
 
-void grYorster_802021AC(HSD_GObj* gobj)
+void grYorster_802021AC(Ground_GObj* gobj)
 {
     int _[2];
 
@@ -144,12 +144,12 @@ void grYorster_802021AC(HSD_GObj* gobj)
     gp->gv.yorster.xC4 = 1;
 }
 
-bool grYorster_8020224C(HSD_GObj* gobj)
+bool grYorster_8020224C(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grYorster_80202254(HSD_GObj* gobj)
+void grYorster_80202254(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     if (gp->gv.yorster.xC4 == 0) {
@@ -159,7 +159,7 @@ void grYorster_80202254(HSD_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grYorster_802022A0(HSD_GObj* gobj)
+void grYorster_802022A0(Ground_GObj* gobj)
 {
     return;
 }

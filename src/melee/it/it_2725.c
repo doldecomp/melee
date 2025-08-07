@@ -5742,15 +5742,13 @@ void it_8027429C(Item_GObj* item_gobj, Vec3* arg1)
 
 void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
 {
-    HSD_JObj* item_jobj1;
-    HSD_JObj* item_jobj2;
     Item* item;
     flag32 word;
     u8 flag;
 
     item = item_gobj->user_data;
     lb_8000B804(item_gobj->hsd_obj, item->xC8_joint);
-    Item_8026849C((HSD_GObj*) item_gobj);
+    Item_8026849C(item_gobj);
     if (ftLib_80086960(gobj)) {
         // word = item->xDC8_word;
         // item->xDC8_word.word = (word & ~0x1E000) | (((((word >> 0xDU) & 0xF)
@@ -5762,9 +5760,7 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         // 0xF; item->xDC8_word.word = item->xDC8_word.word & ~0x1E000 |
         // (item->xDC8_word.word >> 0xDU) & 0xF | (((1 <<
         // ftLib_80086BE0(gobj))) << 0xD) & 0x1E000;
-        item->xDC8_word.word =
-            ((item->xDC8_word.word >> 0xDU) & 0xF) |
-            ((((1 << ftLib_80086BE0(gobj))) << 0xD) & 0x1E000);
+        item->xDC8_word.flags.xF |= 1 << ftLib_80086BE0(gobj);
         // item->xDC8_word.word |= (item->xDC8_word.word >> 0xDU) & 0xF | (((1
         // << ftLib_80086BE0(gobj))) << 0xD) & 0x1E000; item->xDC8_word.word =
         // ((item->xDC8_word.word | ((1 << ftLib_80086BE0(gobj)))) >> 0xDU) &
@@ -5779,14 +5775,9 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         }
         item->xDC4 = ftpart;
         item->x20_team_id = ftLib_80086EB4(gobj);
-        item_jobj2 = NULL;
         item->xD50_landNum = 0;
         item->xDC8_word.flags.x13 = 1;
-        item_jobj1 = item_gobj->hsd_obj;
-        if (item_jobj1 == NULL) {
-            item_jobj2 = item_jobj1->child;
-        }
-        HSD_JObjClearFlagsAll(item_jobj2, 16U);
+        HSD_JObjClearFlagsAll(HSD_JObjGetChild(item_gobj->hsd_obj), 16U);
         it_802756D0(item_gobj);
         it_8026B3A8(item_gobj);
         db_80225DD8(item_gobj, (Fighter_GObj*) gobj);
@@ -6189,7 +6180,7 @@ void it_80275070(Item_GObj* item_gobj, s32 bone_id)
 bool it_802750E8(Item_GObj* item_gobj, s32 mask)
 {
     Item* item = GET_ITEM(item_gobj);
-    return item->xDC0.word & mask;
+    return item->xDC0 & mask;
 }
 
 void it_802750F8(Item_GObj* item_gobj)
@@ -7008,6 +6999,8 @@ s32 it_802763E0(Item_GObj* item_gobj)
     return result;
 }
 
+#pragma push
+#pragma dont_inline on
 void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
 {
     if (coll->env_flags & MPCOLL_RIGHTWALL) {
@@ -7023,6 +7016,7 @@ void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
         *vec = coll->floor.normal;
     }
 }
+#pragma pop
 
 f32 it_8027649C(Item_GObj* item_gobj)
 {
@@ -7087,7 +7081,7 @@ void it_802765BC(Item_GObj* item_gobj, enum_t arg1)
 
     item1 = item_gobj->user_data;
     jobj = it_80272CC0(item_gobj, arg1);
-    bit_chk = (item1->xDC8_word.word >> 7U) & 3;
+    bit_chk = item1->xDC8_word.flags.x17;
     if (bit_chk == 0) {
         item2 = item_gobj->user_data;
         sp74.z = 0.0f;
@@ -7161,7 +7155,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
 
     item1 = item_gobj->user_data;
     jobj = it_80272CC0(item_gobj, arg1);
-    bit_chk = (item1->xDC8_word.word >> 7U) & 3;
+    bit_chk = item1->xDC8_word.flags.x17;
     if (bit_chk == 0) {
         item2 = item_gobj->user_data;
         sp80.z = 0.0f;
@@ -7355,8 +7349,8 @@ bool it_80277040(Item_GObj* item_gobj)
     CollData* coll;
     Item* item2;
     Item* item1;
-    f32 temp_f30;
     f32 temp_f31;
+    f32 temp_f30;
     f32 temp_f3;
     f32 var_f1;
     f32 angle1;
@@ -7426,7 +7420,7 @@ bool it_80277040(Item_GObj* item_gobj)
             chk = false;
         }
         if (!chk) {
-            if ((item1->x94.x != 0.0f) || (item1->x94.y != 0.0f)) {
+            if (item1->x94.x || item1->x94.y) {
                 if (sp38.x < 0.0f) {
                     int_dir1 = -1;
                 } else {

@@ -110,28 +110,28 @@ HSD_GObj* grTPurin_8022320C(int id)
     return gobj;
 }
 
-void grTPurin_802232F4(HSD_GObj* gobj)
+void grTPurin_802232F4(Ground_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTPurin_80223320(HSD_GObj* gobj)
+bool grTPurin_80223320(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTPurin_80223328(HSD_GObj* gobj)
+void grTPurin_80223328(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTPurin_8022332C(HSD_GObj* gobj)
+void grTPurin_8022332C(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTPurin_80223330(HSD_GObj* gobj)
+void grTPurin_80223330(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
@@ -141,12 +141,12 @@ void grTPurin_80223330(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grTPurin_80223380(HSD_GObj* gobj)
+bool grTPurin_80223380(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTPurin_80223388(HSD_GObj* gobj)
+void grTPurin_80223388(Ground_GObj* gobj)
 {
     s16* pos;
     HSD_JObj* jobj;
@@ -173,12 +173,12 @@ void grTPurin_80223388(HSD_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grTPurin_80223478(HSD_GObj* gobj)
+void grTPurin_80223478(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTPurin_8022347C(HSD_GObj* gobj)
+void grTPurin_8022347C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
@@ -188,17 +188,17 @@ void grTPurin_8022347C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grTPurin_802234CC(HSD_GObj* gobj)
+bool grTPurin_802234CC(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTPurin_802234D4(HSD_GObj* gobj)
+void grTPurin_802234D4(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTPurin_802234F4(HSD_GObj* gobj)
+void grTPurin_802234F4(Ground_GObj* gobj)
 {
     return;
 }

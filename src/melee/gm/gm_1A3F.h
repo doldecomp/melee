@@ -10,7 +10,7 @@
 /* 1A427C */ void* gm_801A427C(MinorScene*);
 /* 1A4284 */ void* gm_801A4284(MinorScene*);
 /* 1A428C */ void gm_SetSceneMinor(u8 arg0);
-/* 1A42A0 */ void gm_SetScenePendingMinor(int pending_minor);
+/* 1A42A0 */ void gm_SetScenePendingMinor(u8 pending_minor);
 /* 1A42B4 */ u8 gm_801A42B4(void);
 /* 1A42C4 */ u8 gm_801A42C4(void);
 /* 1A42D4 */ UNK_RET gm_801A42D4(UNK_PARAMS);

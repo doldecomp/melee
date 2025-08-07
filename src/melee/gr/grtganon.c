@@ -110,28 +110,28 @@ HSD_GObj* grTGanon_80224784(int id)
     return gobj;
 }
 
-void grTGanon_8022486C(HSD_GObj* gobj)
+void grTGanon_8022486C(Ground_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTGanon_80224898(HSD_GObj* gobj)
+bool grTGanon_80224898(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTGanon_802248A0(HSD_GObj* gobj)
+void grTGanon_802248A0(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTGanon_802248A4(HSD_GObj* gobj)
+void grTGanon_802248A4(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTGanon_802248A8(HSD_GObj* gobj)
+void grTGanon_802248A8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
@@ -141,23 +141,23 @@ void grTGanon_802248A8(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grTGanon_802248F8(HSD_GObj* gobj)
+bool grTGanon_802248F8(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTGanon_80224900(HSD_GObj* gobj)
+void grTGanon_80224900(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTGanon_80224934(HSD_GObj* gobj)
+void grTGanon_80224934(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTGanon_80224938(HSD_GObj* gobj)
+void grTGanon_80224938(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
@@ -167,17 +167,17 @@ void grTGanon_80224938(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grTGanon_80224988(HSD_GObj* gobj)
+bool grTGanon_80224988(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTGanon_80224990(HSD_GObj* gobj)
+void grTGanon_80224990(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTGanon_802249B0(HSD_GObj* gobj)
+void grTGanon_802249B0(Ground_GObj* gobj)
 {
     return;
 }

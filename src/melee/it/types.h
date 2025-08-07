@@ -33,39 +33,36 @@ struct CameraBoxFlags {
 };
 
 struct flag32 {
-    union {
-        struct {
-            u32 x0 : 1;
-            u32 x1 : 1;
-            u32 x2 : 1;
-            u32 x3 : 1;
-            u32 x4 : 1;
-            u32 x5 : 1;
-            u32 x6 : 1;
-            u32 x7 : 1;
-            u32 x8 : 1;
-            u32 x9 : 1;
-            u32 xA : 1;
-            u32 xB : 1;
-            u32 xC : 1;
-            u32 xD : 1;
-            u32 xE : 1;
-            u32 xF : 4;
-            u32 x13 : 1;
-            u32 x14 : 1;
-            u32 x15 : 1;
-            u32 x16 : 1;
-            u32 x17 : 2;
-            u32 x19 : 1;
-            u32 x1A : 1;
-            u32 x1B : 1;
-            u32 x1C : 1;
-            u32 x1D : 1;
-            u32 x1E : 1;
-            u32 x1F : 1;
-        } flags;
-        u32 word;
-    };
+    struct {
+        u32 x0 : 1;
+        u32 x1 : 1;
+        u32 x2 : 1;
+        u32 x3 : 1;
+        u32 x4 : 1;
+        u32 x5 : 1;
+        u32 x6 : 1;
+        u32 x7 : 1;
+        u32 x8 : 1;
+        u32 x9 : 1;
+        u32 xA : 1;
+        u32 xB : 1;
+        u32 xC : 1;
+        u32 xD : 1;
+        u32 xE : 1;
+        u32 xF : 4;
+        u32 x13 : 1;
+        u32 x14 : 1;
+        u32 x15 : 1;
+        u32 x16 : 1;
+        u32 x17 : 2;
+        u32 x19 : 1;
+        u32 x1A : 1;
+        u32 x1B : 1;
+        u32 x1C : 1;
+        u32 x1D : 1;
+        u32 x1E : 1;
+        u32 x1F : 1;
+    } flags;
 };
 
 struct DynamicBoneTable {
@@ -503,14 +500,8 @@ struct Item {
     union Struct2070 xD90; // some bit struct/union
     Vec2 xD94;
     S32Vec2 xD9C;
-    union {
-        UnkFlagStruct xDA4_flag;
-        u32 xDA4_word;
-    };
-    union {
-        UnkFlagStruct xDA8_flag;
-        u16 xDA8_short;
-    };
+    u32 xDA4_word;
+    u16 xDA8_short;
     union {
         UnkFlagStruct xDAA_flag; // Develop mode stuff?
         u8 xDAA_byte;
@@ -520,7 +511,7 @@ struct Item {
     u32 xDB4_itcmd_var2;
     u32 xDB8_itcmd_var3;
     u32 xDBC_itcmd_var4;
-    flag32 xDC0;
+    u32 xDC0;
     u32 xDC4;
     flag32 xDC8_word;
     struct {
