@@ -97,7 +97,7 @@ void ftCliffCommon_80081370(Fighter_GObj* gobj)
         Fighter* fp = gobj->user_data;
         efAsync_Spawn(gobj, &fp->x60C, 2, 1052, 0, &vec);
     }
-    ft_80088148(fp, 4, 127, 64);
+    ft_PlaySFX(fp, 4, 127, 64);
 }
 
 void ftCo_CliffCatch_Anim(Fighter_GObj* gobj)

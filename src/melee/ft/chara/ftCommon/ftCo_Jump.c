@@ -146,7 +146,7 @@ void ftCo_800CB110(Fighter_GObj* gobj, bool arg1, f32 jump_mul)
         ft_800881D8(fp, fp->ft_data->x4C_sfx->x10, SFX_VOLUME_MAX,
                     SFX_PAN_MID);
         if (fp->x197C != NULL) {
-            ft_80088148(fp, 0x11A, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_PlaySFX(fp, 0x11A, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
 }

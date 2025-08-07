@@ -621,7 +621,7 @@ void ftMh_Init_OnLoad(HSD_GObj* gobj)
         it_8026B3F8(items[1], 126);
         fp->no_normal_motion = true;
         fp->x2229_b6 = true;
-        fp->x2229_b7 = true;
+        fp->no_kb = true;
         fp->x222A_b0 = true;
         fp->x222A_b1 = true;
         fp->x2229_b3 = true;

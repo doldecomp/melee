@@ -5147,7 +5147,7 @@ void ftKb_PpSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
 Fighter_Part ftKb_SpecialNYs_80109238(Fighter_GObj* gobj)
 {
-    return ftParts_8007500C(GET_FIGHTER(gobj), FtPart_TransN2);
+    return ftParts_GetBoneIndex(GET_FIGHTER(gobj), FtPart_TransN2);
 }
 
 /// #ftKb_SpecialNYs_80109260
@@ -5396,8 +5396,9 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 
         scale.x = scale.y = scale.z = ftCommon_GetModelScale(fp);
         HSD_JObjSetScale(fp->x20A0_accessory, &scale);
-        lb_8000C2F8(fp->x20A0_accessory,
-                    fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint);
+        lb_8000C2F8(
+            fp->x20A0_accessory,
+            fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
     }
 }
 

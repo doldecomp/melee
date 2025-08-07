@@ -42,7 +42,7 @@ void ftCo_HammerTurn_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800C4F64(gobj);
     if (fp->mv.co.walk.fast_anim_frame) {
-        Fighter_Part part = ftParts_8007500C(fp, FtPart_TransN);
+        Fighter_Part part = ftParts_GetBoneIndex(fp, FtPart_TransN);
         HSD_JObj* jobj = fp->parts[part].x4_jobj2;
         --fp->mv.co.walk.fast_anim_frame;
         if (!fp->x2222_b6) {

@@ -78,7 +78,7 @@ void ftPe_8011BB6C(HSD_GObj* gobj, bool arg1)
     }
     fp->self_vel.y = 0;
     fp->x2219_b0 = true;
-    joint = fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint;
+    joint = fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint;
     spawnParticle(gobj, joint);
 }
 

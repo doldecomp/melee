@@ -132,7 +132,7 @@ static inline void ft_JumpAerial_Sound(Fighter* fp, FighterKind ftkind)
     if (ftkind != FTKIND_MEWTWO && (ftkind >= 0x10 || ftkind != FTKIND_NESS) &&
         fp->x197C != NULL)
     {
-        ft_80088148(fp, 0x11B, SFX_VOLUME_MAX, SFX_PAN_MID);
+        ft_PlaySFX(fp, 0x11B, SFX_VOLUME_MAX, SFX_PAN_MID);
     }
 }
 

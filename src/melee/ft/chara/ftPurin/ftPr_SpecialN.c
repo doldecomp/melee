@@ -77,7 +77,7 @@ void ftPr_SpecialS_8013D764(HSD_GObj* gobj)
         fp->mv.pr.specialn.facing_dir = 0;
 
         ftParts_80075AF0(fp, FtPart_TopN, M_PI_2);
-        ft_80088148(fp, 250070, 127, 64);
+        ft_PlaySFX(fp, 250070, 127, 64);
     }
 }
 

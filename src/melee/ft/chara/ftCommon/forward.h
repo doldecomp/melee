@@ -5,7 +5,7 @@
 
 #include "ft/forward.h"
 
-struct UNK_SAMUS_S2;
+typedef struct ftHurtboxInit ftHurtboxInit;
 typedef struct ftCollisionBox ftCollisionBox;
 
 typedef enum ftCo_JumpInput {

@@ -83,7 +83,7 @@ Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)
 void ftCo_80090718(Fighter* fp)
 {
     if (fp->dmg.x1908 != -1) {
-        ft_80088148(fp, fp->dmg.x1908, 127, 64);
+        ft_PlaySFX(fp, fp->dmg.x1908, 127, 64);
         fp->dmg.x1908 = -1;
     }
     if (fp->dmg.x190C != NULL) {

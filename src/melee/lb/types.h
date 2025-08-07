@@ -122,7 +122,7 @@ struct HurtCapsule {
 
 struct FighterHurtCapsule {
     HurtCapsule capsule;
-    enum_t kind;       // 0x44. 0 = low, 1 = mid, 2 = high
+    HurtHeight height; // 0x44. 0 = low, 1 = mid, 2 = high
     bool is_grabbable; // 0x48
 };
 

@@ -414,7 +414,7 @@ void ftCl_Init_80149114(HSD_GObj* gobj)
         ftmp = -fp->gr_vel;
     }
     fp->gr_vel = ftmp;
-    ft_80088148(fp, 70106, 127, 64);
+    ft_PlaySFX(fp, 70106, 127, 64);
 }
 
 void ftCl_Init_8014919C(HSD_GObj* gobj)

@@ -81,7 +81,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj);
 /* 06CFE0 */ void Fighter_8006CFE0(Fighter_GObj* gobj);
 /* 06D044 */ void Fighter_UnkRecursiveFunc_8006D044(Fighter_GObj* gobj);
 /* 06D10C */ void Fighter_8006D10C(Fighter_GObj* gobj);
-/* 06D1EC */ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj);
+/* 06D1EC */ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj);
 /* 06D9AC */ void Fighter_8006D9AC(Fighter_GObj* gobj);
 /* 06D9EC */ void Fighter_UnkCallCameraCallback_8006D9EC(Fighter_GObj* gobj);
 /* 06DA4C */ void Fighter_8006DA4C(Fighter_GObj* gobj);

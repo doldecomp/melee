@@ -685,12 +685,12 @@ bool fn_800D2A3C(HSD_GObj* gobj)
 
 void fn_800D2AD8(Fighter* fp)
 {
-    ft_80088148(fp, ftCo_MS_CaptureDamageKoopaAir, 0x7F, 0x40);
+    ft_PlaySFX(fp, ftCo_MS_CaptureDamageKoopaAir, 0x7F, 0x40);
 }
 
 void fn_800D2B04(Fighter* fp)
 {
-    ft_80088148(fp, ftCo_MS_CaptureWaitKoopaAir, 0x7F, 0x40);
+    ft_PlaySFX(fp, ftCo_MS_CaptureWaitKoopaAir, 0x7F, 0x40);
 }
 
 void fn_800D2B30(Fighter_GObj* gobj)
@@ -1075,7 +1075,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     ftCo_800D38B8(temp_r27_2, temp_r28_2->x4);
     ftCo_800D38B8(temp_r27_2, temp_r28_2->x8);
 
-    ft_80088148(temp_r31, 0x88, 0x7F, 0x40);
+    ft_PlaySFX(temp_r31, 0x88, 0x7F, 0x40);
     ft_8008805C(temp_r31, 0x88);
     sp2C = temp_r31->cur_pos;
     temp_f31 = Stage_GetBlastZoneTopOffset();

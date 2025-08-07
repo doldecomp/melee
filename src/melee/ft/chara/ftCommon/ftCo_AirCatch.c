@@ -148,8 +148,9 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
         if (fp->mv.co.aircatch.x0 == da->xA4) {
             Vec3 pos;
             u8 _[4] = { 0 };
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
-                        NULL, &pos);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                NULL, &pos);
             fp->fv.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
             if (fp->fv.lk.xC == NULL) {
                 ftCo_800968C8(gobj);
@@ -167,7 +168,8 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                 if (fp->mv.co.aircatch.x0 == da->xA8) {
                     Vec3 pos = { 1.8, 0, 0 };
                     HSD_JObj* jobj =
-                        fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint;
+                        fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)]
+                            .joint;
 
                     HSD_JObjSetupMatrix(jobj);
                     {
@@ -196,18 +198,18 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                         it_802A78B8(tether_gobj, &pos, x);
                     }
                     if (fp->kind == FTKIND_CLINK) {
-                        ft_80088148(fp, 0x111B9, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
                     } else {
-                        ft_80088148(fp, 0x27149, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x27149, 0x7F, 0x40);
                     }
                 } else if (fp->mv.co.aircatch.x0 ==
                            (float) M2C_FIELD(da, int*, 0xAC))
                 {
                     it_802A77DC(tether_gobj);
                     if (fp->kind == FTKIND_CLINK) {
-                        ft_80088148(fp, 0x111BC, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x111BC, 0x7F, 0x40);
                     } else {
-                        ft_80088148(fp, 0x2714C, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
                     }
                 } else if (fp->mv.co.aircatch.x0 == da->xB0) {
                     it_802A2B10(fp->fv.lk.xC);

@@ -142,7 +142,7 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
-    Fighter_Part part = ftParts_8007500C(fp, FtPart_TransN);
+    Fighter_Part part = ftParts_GetBoneIndex(fp, FtPart_TransN);
     HSD_JObj* jobj = fp->parts[part].x4_jobj2;
     fp->mv.co.lift.x4 -= 1;
     if (!fp->x2222_b6) {

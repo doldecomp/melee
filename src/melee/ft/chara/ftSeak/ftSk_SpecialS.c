@@ -148,10 +148,10 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
             if ((fp->facing_dir == +1 && fp->fv.sk.lstick_delta.x > +0.3F) ||
                 (fp->facing_dir == -1 && fp->fv.sk.lstick_delta.x < -0.3F))
             {
-                ft_80088148(fp, flags, 127, 64);
+                ft_PlaySFX(fp, flags, 127, 64);
                 fp->mv.sk.specials.x8 = 6;
             } else if (fp->fv.sk.lstick_delta.y > 0.5F) {
-                ft_80088148(fp, flags, 127, 64);
+                ft_PlaySFX(fp, flags, 127, 64);
                 fp->mv.sk.specials.x8 = 12;
             }
         }
@@ -171,7 +171,7 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
                 (fp->facing_dir == -1 && fp->fv.sk.lstick_delta.x > +0.3F &&
                  fp->input.lstick.x > 0))
             {
-                ft_80088148(fp, flags, 127, 64);
+                ft_PlaySFX(fp, flags, 127, 64);
                 fp->mv.sk.specials.xC = 6;
             }
         }

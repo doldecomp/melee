@@ -86,8 +86,8 @@
 /* 07B2C4 */ void ftColl_CreateAbsorbHit(Fighter_GObj*, AbsorbDesc*);
 /* 07B320 */ void ftColl_8007B320(Fighter_GObj*);
 /* 07B4E0 */ void ftColl_8007B4E0(Fighter_GObj*);
-/* 07B5AC */ void ftColl_8007B5AC(Fighter* fp, FighterHurtCapsule*,
-                                  struct UNK_SAMUS_S2*);
+/* 07B5AC */ void ftColl_HurtboxInit(Fighter* fp, FighterHurtCapsule*,
+                                     ftHurtboxInit*);
 /* 07B62C */ void ftColl_8007B62C(Fighter_GObj*, bool);
 /* 07B6A0 */ void ftColl_8007B6A0(Fighter_GObj* gobj);
 /* 07B6EC */ void ftColl_8007B6EC(Fighter_GObj*);

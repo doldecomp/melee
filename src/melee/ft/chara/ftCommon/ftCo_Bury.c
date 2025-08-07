@@ -224,7 +224,7 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
                               Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim, 0, 1, 0,
                               NULL);
     ftCommon_8007E2FC(gobj);
-    ftCommon_8007DBCC(
+    ftCommon_InitGrab(
         fp, 0,
         (fp->dmg.x1830_percent * p_ftCommonData->x60C) +
             ((p_ftCommonData->x5FC *
@@ -240,7 +240,7 @@ void ftCo_800C0D0C(Fighter_GObj* gobj)
     fp->mv.co.bury.x20 = fp->coll_data.floor.index;
     ft_80084CB0(fp, &fp->mv.co.bury.coll_box);
     lb_8000B1CC(fp->parts->joint, NULL, &joint_pos);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, NULL,
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint, NULL,
                 &hip_pos);
     {
         float y = hip_pos.y - joint_pos.y;
@@ -255,9 +255,9 @@ void ftCo_Bury_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A4C -= p_ftCommonData->x610;
+    fp->grab_timer -= p_ftCommonData->x610;
     ftCommon_8007DC08(fp, p_ftCommonData->x614);
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ftCo_800C13BC(gobj);
     }
     --fp->mv.co.bury.x0;
@@ -328,9 +328,9 @@ void ftCo_800C124C(Fighter_GObj* gobj)
 void ftCo_BuryWait_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A4C -= p_ftCommonData->x610;
+    fp->grab_timer -= p_ftCommonData->x610;
     ftCommon_8007DC08(fp, p_ftCommonData->x614);
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ftCo_800C13BC(gobj);
     }
 }

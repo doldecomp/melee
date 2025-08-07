@@ -14,7 +14,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 
-struct UNK_SAMUS_S2;
+ftHurtboxInit;
 
 /// Combo Count Logic
 void ftColl_800763C0(Fighter_GObj* attacker, Fighter_GObj* victim,
@@ -71,8 +71,8 @@ void ftColl_CreateReflectHit(Fighter_GObj*, ReflectDesc*,
                              HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(Fighter_GObj*, AbsorbDesc*);
 void ftColl_8007AF10(Fighter_GObj*);
-void ftColl_8007B5AC(Fighter* fp, HurtCapsule* arg1,
-                     struct UNK_SAMUS_S2* arg2);
+void ftColl_HurtboxInit(Fighter* fp, HurtCapsule* arg1,
+                     ftHurtboxInit* arg2);
 void ftColl_8007B7FC(Fighter*, int);
 bool ftColl_80076640(Fighter*, float*);
 void ftColl_80076764(int arg0, enum_t arg1, enum_t arg2, UNK_T arg3,

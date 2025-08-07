@@ -21,7 +21,7 @@ void ftCo_80099010(Fighter_GObj* gobj)
         if (percent < 0) {
             percent = 0;
         }
-        ftCommon_8007DBCC(fp, 0, percent + p_ftCommonData->x2FC);
+        ftCommon_InitGrab(fp, 0, percent + p_ftCommonData->x2FC);
     }
     ftCommon_8007EBAC(fp, 25, 0);
     ft_800885A8(fp, 95, 127, 64);
@@ -32,9 +32,9 @@ void ftCo_Furafura_Anim(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
     fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
-    fp->x1A4C -= p_ftCommonData->x300;
+    fp->grab_timer -= p_ftCommonData->x300;
     ftCommon_8007DC08(fp, p_ftCommonData->x304);
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ft_8008A2BC(gobj);
     }
 }

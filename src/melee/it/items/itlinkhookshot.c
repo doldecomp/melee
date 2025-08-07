@@ -358,9 +358,10 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
         } else {
             var_r27 = 0;
         }
-        if (it_802A2568(item,
-                        fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
-                        var_r27, fp->x34_scale.y) == NULL)
+        if (it_802A2568(
+                item,
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                var_r27, fp->x34_scale.y) == NULL)
         {
             Item_8026A8EC(gobj);
             return NULL;
@@ -370,7 +371,7 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
             item->xDD4_itemVar.linkhookshot.x0->x1D0_GObj->hsd_obj;
         fp->parts[139].joint = item->xDD4_itemVar.linkhookshot.xC;
         Item_8026AB54((HSD_GObj*) gobj, (HSD_GObj*) arg0,
-                      ftParts_8007500C(fp, FtPart_RThumbNb));
+                      ftParts_GetBoneIndex(fp, FtPart_RThumbNb));
         it_802A2428(gobj);
     }
     if ((enum FighterKind) fp->kind == FTKIND_CLINK) {

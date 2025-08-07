@@ -25,7 +25,7 @@ void ftParts_80074A8C(HSD_GObj*);
 void ftParts_80074E58(Fighter*);
 
 /// Fighter_BonePersonalToCommon
-Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part);
+Fighter_Part ftParts_GetBoneIndex(Fighter*, Fighter_Part);
 
 void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
 void ftParts_8007592C(Fighter*, s32, f32);

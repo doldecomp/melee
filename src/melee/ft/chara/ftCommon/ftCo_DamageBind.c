@@ -37,7 +37,7 @@ bool ftCo_800C44CC(Fighter_GObj* gobj)
 
 static void commonCall(Fighter* fp)
 {
-    ftCommon_8007DBCC(
+    ftCommon_InitGrab(
         fp, 0,
         (fp->dmg.x1830_percent * p_ftCommonData->x66C) +
             (p_ftCommonData->x65C *
@@ -66,9 +66,9 @@ void ftCo_800C4550(Fighter_GObj* gobj)
 void ftCo_DamageBind_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x1A4C -= p_ftCommonData->x670;
+    fp->grab_timer -= p_ftCommonData->x670;
     ftCommon_8007DC08(fp, p_ftCommonData->x674);
-    if (fp->x1A4C <= 0.0f) {
+    if (fp->grab_timer <= 0.0f) {
         ft_8008A2BC(gobj);
     }
 }

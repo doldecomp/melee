@@ -138,7 +138,7 @@ void ftAnim_8006DF0C(Fighter* fp)
     if (fp->x2221_b2) {
         temp_r30 = fp->parts[0].joint;
         temp_r31 = fp->parts[fp->ft_data->x8->x10].joint;
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint,
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint,
                     &p_ftCommonData->x808, &vec);
         HSD_MtxInverse(HSD_JObjGetMtxPtr(temp_r30), mtx);
         PSMTXMultVec(mtx, &vec, &vec);
@@ -349,8 +349,8 @@ void ftAnim_8006E9B4(Fighter_GObj* fighter_gobj)
             if (fp->x594_b0) {
                 ftAnim_8006E054(
                     fp, temp_r27,
-                    fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint,
-                    fp->parts[ftParts_8007500C(fp, 0x35)].joint);
+                    fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint,
+                    fp->parts[ftParts_GetBoneIndex(fp, 0x35)].joint);
             } else {
                 ftAnim_8006E7B8(fp, 0);
             }
@@ -373,8 +373,9 @@ void ftAnim_8006E9B4(Fighter_GObj* fighter_gobj)
             if (fp->x594_b0) {
                 ftAnim_8006E054(
                     fp, temp_r27_2,
-                    fp->parts[ftParts_8007500C(fp, FtPart_TransN)].x4_jobj2,
-                    fp->parts[ftParts_8007500C(fp, 0x35)].joint);
+                    fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)]
+                        .x4_jobj2,
+                    fp->parts[ftParts_GetBoneIndex(fp, 0x35)].joint);
             } else {
                 HSD_JObjAnimAll(temp_r27_2);
             }
@@ -919,7 +920,7 @@ void ftAnim_80070904(Fighter* fp, int start_idx, HSD_AnimJoint* animjoint)
 
 bool ftAnim_80070FD0(Fighter* fp)
 {
-    float rotation = ftParts_80075E78(fp, ftParts_8007500C(fp, 0x35));
+    float rotation = ftParts_80075E78(fp, ftParts_GetBoneIndex(fp, 0x35));
     if (fp->x100 != rotation) {
         fp->x100 = rotation;
         return true;

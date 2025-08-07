@@ -26,7 +26,7 @@ void ftCo_800987D0(Fighter_GObj* gobj)
     }
     Fighter_ChangeMotionState(gobj, 199, Ft_MF_None, 0, 1, 0, NULL);
     ft_800881D8(fp, fp->ft_data->x4C_sfx->x24, 127, 64);
-    ft_80088148(fp, 3, 127, 64);
+    ft_PlaySFX(fp, 3, 127, 64);
     ftCommon_8007CCE8(fp);
     ftCo_SpawnEf(gobj, fp->parts[FtPart_TopN].joint, 1, 1053);
     ftCo_800BFFD0(fp, 120, 0);

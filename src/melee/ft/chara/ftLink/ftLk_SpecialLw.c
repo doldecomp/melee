@@ -66,7 +66,7 @@ static void spawnBomb(HSD_GObj* gobj)
     if (ftCheckThrowB0(fp)) {
         Vec3 pos;
         u8 _[4];
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
                     NULL, &pos);
         {
             Fighter_Part part = da->x48;

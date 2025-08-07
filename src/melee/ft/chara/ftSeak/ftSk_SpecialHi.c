@@ -60,7 +60,7 @@ void fn_80112ED8(HSD_GObj* gobj)
     if (!fp->x2219_b0) {
         ftSk_SpecialHi_80112F48(gobj);
         ftSk_SpecialHi_80112FA8(gobj);
-        ft_80088148(fp, 115, 127, 64);
+        ft_PlaySFX(fp, 115, 127, 64);
     }
     fp->accessory4_cb = NULL;
 }
