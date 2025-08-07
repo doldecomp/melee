@@ -555,4 +555,11 @@ struct lb_804D63A8_t {
 };
 STATIC_ASSERT(sizeof(struct lb_804D63A8_t) == 0x1C0);
 
+struct lbColl_8000A10C_arg0_t {
+    float x0;
+    float x4;
+    Vec3 x8;
+    Vec3 x14;
+};
+
 #endif

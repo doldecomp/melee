@@ -1319,7 +1319,9 @@ struct Fighter {
         /* +00 */ Vec3 v1;
         /* +0C */ float v2;
         /* +10 */ HSD_JObj* jobj;
-        /* +14 */ u8 pad[0x28 - 0x14];
+        /* +14 */ float x14;
+        /* +18 */ Vec3 x18;
+        /* +24 */ u8 pad[0x28 - 0x24];
     } x1670[1]; ///< @todo figure out proper size
     /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1670 - 0x28];
     /* fp+1828 */ enum_t x1828;
@@ -1339,10 +1341,10 @@ struct Fighter {
         /* fp+1864 */ int x1864;
         /* fp+1868 */ HSD_GObj* x1868_source;
         /* fp+186C */ int x186c;
-        /* fp+1870 */ int x1870;
+        /* fp+1870 */ struct DmgLogEntry* x1870;
         /* fp+1874 */ int x1874;
         /* fp+1878 */ int x1878;
-        /* fp+187C */ int x187c;
+        /* fp+187C */ float x187c;
         /* fp+1880 */ int x1880;
         /* fp+1884 */ int x1884;
         /* fp+1888 */ int x1888;

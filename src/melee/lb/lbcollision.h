@@ -23,6 +23,8 @@ typedef struct {
     /* +20 */ enum_t sfx_kind;
 } lbColl_80008D30_arg1;
 
+struct lbColl_8000A10C_arg0_t;
+
 struct Fighter_x1614_t;
 
 /* 005BB0 */ int lbColl_80005BB0(HitCapsule*, int);
@@ -62,13 +64,13 @@ struct Fighter_x1614_t;
 /* 0089B8 */ void lbColl_800089B8(HitCapsule* hit, UNK_T arg1);
 /* 008A5C */ void lbColl_80008A5C(HitCapsule* hit);
 /* 008D30 */ void lbColl_80008D30(HitCapsule*, lbColl_80008D30_arg1*);
-/* 008DA4 */ UNK_RET lbColl_80008DA4(UNK_PARAMS);
-/* 008FC8 */ void lbColl_80008FC8(Vec3, Vec3, u8*, u8*, float);
+/* 008DA4 */ UNK_RET lbColl_80008DA4(GXColor*, GXColor*);
+/* 008FC8 */ void lbColl_80008FC8(Vec3, Vec3, GXColor*, GXColor*, float);
 /* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, GXColor*, GXColor*, float);
 /* 009DD4 */ UNK_RET lbColl_80009DD4(Vec3*, Vec3*, GXColor*);
 /* 009F54 */ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A044 */ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8);
-/* 00A10C */ bool lbColl_8000A10C(Vec3 (*)[2], u32, f32);
+/* 00A10C */ bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t*, u32, f32);
 /* 00A1A8 */ bool lbColl_8000A1A8(struct Fighter_x1614_t*, int, float scale_y);
 /* 00A244 */ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2,
                                   float arg3);

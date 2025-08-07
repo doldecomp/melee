@@ -15,10 +15,13 @@
 #include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <baselib/particle.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
 #include <MetroTRK/intrinsics.h>
 
 /* 006E58 */ static bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2,
@@ -27,10 +30,8 @@
                                          float scl, float arg10, float arg11);
 
 // .sdata
-extern char lbColl_804D3700[8];
-extern char lbColl_804D3708[8];
-extern int lbColl_804D36D4;
-extern int lbColl_804D36D8;
+static GXColor lbColl_804D36D4 = { 0, 0x80, 0xFF, 0x80 };
+static GXColor lbColl_804D36D8 = { 0, 0x40, 0x80, 0x80 };
 
 // .sdata2
 float const lbColl_804D79F0 = 1e-5;
@@ -59,10 +60,33 @@ int lbColl_803B9880[] = {
     0x000000F1, 0x000000F1, 0x000000F1, 0x0000005E, 0x0000005D, 0x0000005C,
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
-extern struct unk {
+
+extern GXColor lbColl_804D36AC;
+extern GXColor lbColl_804D36B0;
+extern GXColor lbColl_804D36B4;
+extern GXColor lbColl_804D36B8;
+extern GXColor lbColl_804D36BC;
+extern GXColor lbColl_804D36C0;
+
+struct unk {
     GXColor* pad;
     GXColor* pad_x;
-} lbColl_803B9928[];
+} lbColl_803B9928[] = {
+    &lbColl_804D36AC,
+    &lbColl_804D36B0,
+    &lbColl_804D36B4,
+    &lbColl_804D36B8,
+    &lbColl_804D36BC,
+    &lbColl_804D36C0,
+};
+
+u8 lbColl_803B9940[0x1A0] = { 0 };
+u8 lbColl_803B9AE0[0x1A0] = { 0 };
+u8 lbColl_803B9C80[0x120] = { 0 };
+u8 lbl_803B9DA0[0x80] = { 0 };
+u8 lbl_803B9E20[0xA0] = { 0 };
+u8 lbColl_803B9EC0[0x60] = { 0 };
+u8 lbColl_803B9F20[0xA0] = { 0 };
 
 // .text
 
@@ -1945,31 +1969,336 @@ void lbColl_80008D30(HitCapsule* arg0, lbColl_80008D30_arg1* arg1)
     arg0->unk_count = arg1->damage;
 }
 
-extern u8 lbColl_804D36A0[4];
-extern u8 lbColl_804D36A4[4];
-extern u8 lbColl_804D36A8[4];
-extern u8 lbColl_804D36DC[4];
+void lbColl_80008DA4(GXColor* arg0, GXColor* arg1)
+{
+    GXColor sp10;
+    GXBlendMode var_r3;
+    u8 var_r5;
+
+    sp10 = lbColl_804D7A50;
+    GXSetColorUpdate(GX_ENABLE);
+    GXSetAlphaUpdate(GX_DISABLE);
+    GXSetFog(GX_FOG_NONE, 0.0F, 0.0F, 0.0F, 0.0F, sp10);
+    if (arg0->a < 0xFF) {
+        var_r3 = GX_BM_BLEND;
+    } else {
+        var_r3 = GX_BM_NONE;
+    }
+    GXSetBlendMode(var_r3, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
+    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
+    if (arg0->a < 0xFF) {
+        var_r5 = 0;
+    } else {
+        var_r5 = 1;
+    }
+    GXSetZMode(1, GX_LEQUAL, var_r5);
+    GXSetZCompLoc(0);
+    GXSetNumTexGens(0);
+    GXSetTevClampMode(0, 0);
+    GXSetNumTevStages(1);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
+    GXSetTevColor(GX_TEVREG0, *arg0);
+    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_RASC, GX_CC_C0, GX_CC_ZERO);
+    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ONE, GX_CA_A0, GX_CA_ZERO);
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+    GXSetNumChans(1);
+    sp10 = *arg1;
+    GXSetChanAmbColor(GX_COLOR0A0, sp10);
+    sp10.r = 0xFF;
+    sp10.g = 0xFF;
+    sp10.b = 0xFF;
+    sp10.a = 0xFF;
+    GXSetChanMatColor(GX_COLOR0A0, sp10);
+    if (arg0->a < 0xFF) {
+        GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, 1, GX_DF_NONE, GX_AF_NONE);
+    } else {
+        GXSetChanCtrl(GX_COLOR0A0, 1, GX_SRC_REG, GX_SRC_REG, 1, GX_DF_CLAMP, GX_AF_NONE);
+    }
+}
+
+static inline bool isSmall(float x)
+{
+    if (x < 0.00001F && x > -0.00001F) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void lbColl_80008FC8(Vec3 arg0, Vec3 arg1, GXColor* arg2, GXColor* arg3, f32 arg4)
+{
+    Mtx sp104;
+    Mtx spD4;
+    Mtx spA4;
+    Mtx sp74;
+    Mtx sp44;
+    Vec3 sp38;
+    Vec3 sp2C;
+    Vec3 sp20;
+
+    f32 var_f31;
+
+    HSD_StateInvalidate(-1);
+    HSD_StateInitTev();
+    lbColl_80008DA4(arg2, arg3);
+    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), sp104);
+    PSMTXScale(spA4, arg4, arg4, arg4);
+    sp38.x = arg0.x - arg1.x;
+    sp38.y = arg0.y - arg1.y;
+    sp38.z = arg0.z - arg1.z;
+    var_f31 = sqrtf(SQ(sp38.x) + SQ(sp38.y) + SQ(sp38.z));
+    if (isSmall(var_f31) || (isSmall(sp38.x) && isSmall(sp38.y) && isSmall(sp38.z))) {
+        PSMTXIdentity(sp44);
+        sp44[0][0] = -1.0F;
+        sp44[1][0] = 0.0F;
+        sp44[2][0] = 0.0F;
+        sp44[0][1] = 0.0F;
+        sp44[1][1] = 1.0F;
+        sp44[2][1] = 0.0F;
+        sp44[0][2] = 0.0F;
+        sp44[1][2] = 0.0F;
+        sp44[2][2] = -1.0F;
+        PSMTXConcat(sp44, spA4, spD4);
+    } else {
+        PSMTXScale(sp74, var_f31, arg4, arg4);
+        if (isSmall(sp38.x) && isSmall(sp38.y)) {
+            sp2C.x = sp38.z;
+            sp2C.y = 0.0f;
+            sp2C.z = 0.0f;
+        } else {
+            sp2C.x = sp38.y;
+            sp2C.y = -sp38.x;
+            sp2C.z = 0.0f;
+        }
+        PSVECNormalize(&sp38, &sp38);
+        PSVECNormalize(&sp2C, &sp2C);
+        PSVECCrossProduct(&sp38, &sp2C, &sp20);
+        PSMTXIdentity(sp44);
+        sp44[0][0] = sp38.x;
+        sp44[1][0] = sp38.y;
+        sp44[2][0] = sp38.z;
+        sp44[0][1] = sp2C.x;
+        sp44[1][1] = sp2C.y;
+        sp44[2][1] = sp2C.z;
+        sp44[0][2] = sp20.x;
+        sp44[1][2] = sp20.y;
+        sp44[2][2] = sp20.z;
+        PSMTXConcat(sp44, spA4, spD4);
+        PSMTXConcat(sp44, sp74, sp74);
+        sp44[0][0] = -sp38.x;
+        sp44[1][0] = -sp38.y;
+        sp44[2][0] = -sp38.z;
+        sp44[0][1] = sp2C.x;
+        sp44[1][1] = sp2C.y;
+        sp44[2][1] = sp2C.z;
+        sp44[0][2] = -sp20.x;
+        sp44[1][2] = -sp20.y;
+        sp44[2][2] = -sp20.z;
+        PSMTXConcat(sp44, spA4, spA4);
+    }
+    PSMTXTrans(sp44, arg0.x, arg0.y, arg0.z);
+    PSMTXConcat(sp44, spD4, spD4);
+    PSMTXTrans(sp44, arg1.x, arg1.y, arg1.z);
+    PSMTXConcat(sp44, spA4, spA4);
+    PSMTXTrans(sp44, 0.5 * (arg0.x + arg1.x), 0.5 * (arg0.y + arg1.y), 0.5 * (arg0.z + arg1.z));
+    PSMTXConcat(sp44, sp74, sp74);
+    GXSetCullMode(GX_CULL_BACK);
+    GXClearVtxDesc();
+    GXSetArray(GX_VA_POS, lbColl_803B9940, 6);
+    GXSetArray(GX_VA_NRM, lbColl_803B9AE0, 6);
+    GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA4, 0xE);
+    GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_TEX_S, GX_RGBA4, 0xE);
+    PSMTXConcat(sp104, spD4, spD4);
+    GXLoadPosMtxImm(spD4, 0);
+    HSD_MtxInverse(spD4, spD4);
+    PSMTXTranspose(spD4, spD4);
+    GXLoadNrmMtxImm(spD4, 0);
+    GXCallDisplayList(lbColl_803B9C80, 0x120);
+    GXClearVtxDesc();
+    GXSetArray(GX_VA_POS, lbColl_803B9940, 6);
+    GXSetArray(GX_VA_NRM, lbColl_803B9AE0, 6);
+    GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA4, 0xE);
+    GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_TEX_S, GX_RGBA4, 0xE);
+    PSMTXConcat(sp104, spA4, spA4);
+    GXLoadPosMtxImm(spA4, 0);
+    HSD_MtxInverse(spA4, spA4);
+    PSMTXTranspose(spA4, spA4);
+    GXLoadNrmMtxImm(spA4, 0);
+    GXCallDisplayList(lbColl_803B9C80, 0x120);
+    if (!isSmall(var_f31)) {
+        GXClearVtxDesc();
+        GXSetArray(GX_VA_POS, lbl_803B9DA0, 6);
+        GXSetArray(GX_VA_NRM, lbColl_803B9EC0, 6);
+        GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA4, 0xE);
+        GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_TEX_S, GX_RGBA4, 6);
+        PSMTXConcat(sp104, sp74, sp74);
+        GXLoadPosMtxImm(sp74, 0);
+        HSD_MtxInverse(sp74, sp74);
+        PSMTXTranspose(sp74, sp74);
+        GXLoadNrmMtxImm(sp74, 0);
+        GXCallDisplayList(lbColl_803B9F20, 0xA0);
+    }
+    HSD_StateInvalidate(-1);
+    HSD_StateInitTev();
+}
+
+void lbColl_800096B4(MtxPtr arg0, Vec3 arg1, Vec3 arg2, GXColor* arg3, GXColor* arg4, f32 arg5)
+{
+    Mtx sp108;
+    Mtx spD8;
+    Mtx spA8;
+    Mtx sp78;
+    Mtx sp48;
+    Vec3 sp3C;
+    Vec3 sp30;
+    Vec3 sp24;
+    f32 var_f31;
+
+    HSD_StateInvalidate(-1);
+    HSD_StateInitTev();
+    lbColl_80008DA4(arg3, arg4);
+    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), sp108);
+    PSMTXScale(spA8, arg5, arg5, arg5);
+    sp3C.x = arg1.x - arg2.x;
+    sp3C.y = arg1.y - arg2.y;
+    sp3C.z = arg1.z - arg2.z;
+    var_f31 = sqrtf(SQ(sp3C.x) + SQ(sp3C.y) + SQ(sp3C.z));
+    if (isSmall(var_f31) || (isSmall(sp3C.x) && isSmall(sp3C.y) && isSmall(sp3C.z))) {
+        PSMTXIdentity(sp48);
+        sp48[0][0] = -1.0F;
+        sp48[1][0] = 0.0F;
+        sp48[2][0] = 0.0F;
+        sp48[0][1] = 0.0F;
+        sp48[1][1] = 1.0F;
+        sp48[2][1] = 0.0F;
+        sp48[0][2] = 0.0F;
+        sp48[1][2] = 0.0F;
+        sp48[2][2] = -1.0F;
+        PSMTXConcat(sp48, spA8, spD8);
+    } else {
+        PSMTXScale(sp78, var_f31, arg5, arg5);
+        if (isSmall(sp3C.x) && isSmall(sp3C.y)) {
+            sp30.x = sp3C.z;
+            sp30.y = 0.0F;
+            sp30.z = 0.0F;
+        } else {
+            sp30.x = sp3C.y;
+            sp30.y = -sp3C.x;
+            sp30.z = 0.0F;
+        }
+        PSVECNormalize(&sp3C, &sp3C);
+        PSVECNormalize(&sp30, &sp30);
+        PSVECCrossProduct(&sp3C, &sp30, &sp24);
+        PSMTXIdentity(sp48);
+        sp48[0][0] = sp3C.x;
+        sp48[1][0] = sp3C.y;
+        sp48[2][0] = sp3C.z;
+        sp48[0][1] = sp30.x;
+        sp48[1][1] = sp30.y;
+        sp48[2][1] = sp30.z;
+        sp48[0][2] = sp24.x;
+        sp48[1][2] = sp24.y;
+        sp48[2][2] = sp24.z;
+        PSMTXConcat(sp48, spA8, spD8);
+        PSMTXConcat(sp48, sp78, sp78);
+        sp48[0][0] = -sp3C.x;
+        sp48[1][0] = -sp3C.y;
+        sp48[2][0] = -sp3C.z;
+        sp48[0][1] = sp30.x;
+        sp48[1][1] = sp30.y;
+        sp48[2][1] = sp30.z;
+        sp48[0][2] = -sp24.x;
+        sp48[1][2] = -sp24.y;
+        sp48[2][2] = -sp24.z;
+        PSMTXConcat(sp48, spA8, spA8);
+    }
+    PSMTXTrans(sp48, arg1.x, arg1.y, arg1.z);
+    PSMTXConcat(sp48, spD8, spD8);
+    PSMTXTrans(sp48, arg2.x, arg2.y, arg2.z);
+    PSMTXConcat(sp48, spA8, spA8);
+    PSMTXTrans(sp48, 0.5 * (arg1.x + arg2.x), 0.5 * (arg1.y + arg2.y), 0.5 * (arg1.z + arg2.z));
+    PSMTXConcat(sp48, sp78, sp78);
+    PSMTXConcat(arg0, spD8, spD8);
+    PSMTXConcat(arg0, spA8, spA8);
+    PSMTXConcat(arg0, sp78, sp78);
+    GXSetCullMode(GX_CULL_BACK);
+    GXClearVtxDesc();
+    GXSetArray(GX_VA_POS, lbColl_803B9940, 6);
+    GXSetArray(GX_VA_NRM, lbColl_803B9AE0, 6);
+    GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA4, 0xE);
+    GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_TEX_S, GX_RGBA4, 0xE);
+    PSMTXConcat(sp108, spD8, spD8);
+    GXLoadPosMtxImm(spD8, 0);
+    HSD_MtxInverse(spD8, spD8);
+    PSMTXTranspose(spD8, spD8);
+    GXLoadNrmMtxImm(spD8, 0);
+    GXCallDisplayList(lbColl_803B9C80, 0x120);
+    GXClearVtxDesc();
+    GXSetArray(GX_VA_POS, lbColl_803B9940, 6);
+    GXSetArray(GX_VA_NRM, lbColl_803B9AE0, 6);
+    GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA4, 0xE);
+    GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_TEX_S, GX_RGBA4, 0xE);
+    PSMTXConcat(sp108, spA8, spA8);
+    GXLoadPosMtxImm(spA8, 0);
+    HSD_MtxInverse(spA8, spA8);
+    PSMTXTranspose(spA8, spA8);
+    GXLoadNrmMtxImm(spA8, 0);
+    GXCallDisplayList(lbColl_803B9C80, 0x120);
+    if (!isSmall(var_f31)) {
+        GXClearVtxDesc();
+        GXSetArray(GX_VA_POS, lbl_803B9DA0, 6);
+        GXSetArray(GX_VA_NRM, lbColl_803B9EC0, 6);
+        GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA4, 0xE);
+        GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_TEX_S, GX_RGBA4, 6);
+        PSMTXConcat(sp108, sp78, sp78);
+        GXLoadPosMtxImm(sp78, 0);
+        HSD_MtxInverse(sp78, sp78);
+        PSMTXTranspose(sp78, sp78);
+        GXLoadNrmMtxImm(sp78, 0);
+        GXCallDisplayList(lbColl_803B9F20, 0xA0);
+    }
+    HSD_StateInvalidate(-1);
+    HSD_StateInitTev();
+}
+
+extern GXColor lbColl_804D36A0;
+extern GXColor lbColl_804D36A4;
+extern GXColor lbColl_804D36A8;
+extern GXColor lbColl_804D36DC;
 
 bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
 {
-    u8* var_r5;
+    GXColor* var_r5;
     float var_f1;
     u32 var_r0;
 
     if (hit->state != HitCapsule_Disabled && !hit->x43_b2) {
         switch (hit->element) {
         case HitElement_Catch:
-            var_r5 = lbColl_804D36A4;
+            var_r5 = &lbColl_804D36A4;
             break;
         case HitElement_Inert:
-            var_r5 = lbColl_804D36DC;
+            var_r5 = &lbColl_804D36DC;
             break;
         default:
-            var_r5 = lbColl_804D36A0;
+            var_r5 = &lbColl_804D36A0;
             break;
         }
 
-        if (var_r5[3] == 0xFF) {
+        if (var_r5->a == 0xFF) {
             var_r0 = 0;
         } else {
             var_r0 = 2;
@@ -1980,7 +2309,7 @@ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
             } else {
                 var_f1 = hit->scale * arg8;
             }
-            lbColl_80008FC8(hit->x58, hit->x4C, var_r5, lbColl_804D36A8,
+            lbColl_80008FC8(hit->x58, hit->x4C, var_r5, &lbColl_804D36A8,
                             var_f1);
             return 1;
         }
@@ -1988,8 +2317,8 @@ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8)
     return 0;
 }
 
-extern u8 lbColl_804D36E8[4];
-extern u8 lbColl_804D36EC[4];
+extern GXColor lbColl_804D36E8;
+extern GXColor lbColl_804D36EC;
 
 bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8)
 {
@@ -1997,7 +2326,7 @@ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8)
     u32 var_r0;
 
     if (hit->state != HitCapsule_Disabled && !hit->x43_b2) {
-        if (lbColl_804D36E8[3] == 0xFF) {
+        if (lbColl_804D36E8.a == 0xFF) {
             var_r0 = 0;
         } else {
             var_r0 = 2;
@@ -2008,12 +2337,125 @@ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8)
             } else {
                 var_f1 = hit->scale * arg8;
             }
-            lbColl_80008FC8(hit->x58, hit->x4C, lbColl_804D36E8,
-                            lbColl_804D36EC, var_f1);
+            lbColl_80008FC8(hit->x58, hit->x4C, &lbColl_804D36E8,
+                            &lbColl_804D36EC, var_f1);
             return 1;
         }
     }
     return 0;
+}
+
+bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
+{
+    Mtx sp9C;
+    Vec3 sp90;
+    Vec3 sp84;
+    Vec3 sp78;
+    Vec3 sp6C;
+    Mtx sp3C;
+    float temp_f31;
+    MtxPtr var_r28;
+    GXColor* temp_r31_2;
+    u32 var_r0;
+    GXColor* temp_r3;
+
+    temp_r3 = lbColl_803B9928[hurt->state].pad;
+    if (temp_r3->a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        if (!hurt->skip_update_pos) {
+            lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
+            lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
+            if (arg2 != NULL) {
+                hurt->b_pos.z = arg3;
+                hurt->a_pos.z = arg3;
+            }
+            hurt->skip_update_pos = 1;
+        }
+        if (arg2 != NULL) {
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hurt->bone), sp9C);
+        }
+        temp_f31 = hurt->scale;
+        temp_r31_2 = lbColl_803B9928[hurt->state].pad_x;
+        sp84 = hurt->b_pos;
+        sp90 = hurt->a_pos;
+        if (arg2 != NULL) {
+            var_r28 = sp9C;
+        } else {
+            var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
+        }
+        HSD_MtxInverse(var_r28, sp3C);
+        PSMTXMultVec(sp3C, &sp90, &sp6C);
+        PSMTXMultVec(sp3C, &sp84, &sp78);
+        lbColl_800096B4(var_r28, sp6C, sp78, temp_r3, temp_r31_2, temp_f31);
+        return true;
+    }
+    return false;
+}
+
+static GXColor lbColl_804D36F8 = { 0xFF, 0, 0, 0x80 };
+static GXColor lbColl_804D36FC = { 0x80, 0, 0, 0x80 };
+
+bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
+{
+    GXColor* c = &lbColl_804D36F8;
+    u32 var_r0;
+    if (c->a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        lbColl_80008FC8(arg0->x14, arg0->x8, c, &lbColl_804D36FC, arg0->x0 * arg2);
+        return true;
+    }
+    return false;
+}
+
+static GXColor lbColl_804D36F0 = { 0xFF, 0xFF, 0, 0x80 };
+static GXColor lbColl_804D36F4 = { 0x80, 0x80, 0, 0x80 };
+
+bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
+{
+    u32 var_r0;
+
+    if (lbColl_804D36F0.a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        lbColl_80008FC8(arg0->x14, arg0->x8, &lbColl_804D36F0, &lbColl_804D36F4, arg0->x0 * scale_y);
+        return true;
+    }
+    return false;
+}
+
+GXColor lbColl_804D36E0 = { 0 };
+GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
+
+bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1)
+{
+    u32 var_r0;
+
+    GXColor* r31 = &lbColl_804D36E0;
+    GXColor* r30 = &lbColl_804D36E4;
+
+    if (r31->a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        HSD_JObjSetupMatrix(hurt->jobj);
+        lbColl_800096B4(HSD_JObjGetMtxPtr(hurt->jobj), hurt->v1, hurt->v1, r31,
+                        r30, hurt->v2);
+        return true;
+    }
+    return false;
 }
 
 bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
@@ -2070,87 +2512,10 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
             PSMTXMultVec(sp40, &sp88, &sp34);
             lbColl_800096B4(var_r28, sp28, sp34, temp_r3, temp_r31_2,
                             temp_f31);
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
-}
-
-GXColor lbColl_804D36E0 = { 0 };
-GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
-extern char lbColl_804D3700[8];
-extern char lbColl_804D3708[8];
-
-bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1)
-{
-    u32 var_r0;
-
-    GXColor* r31 = &lbColl_804D36E0;
-    GXColor* r30 = &lbColl_804D36E4;
-
-    if (r31->a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        HSD_JObjSetupMatrix(hurt->jobj);
-        lbColl_800096B4(HSD_JObjGetMtxPtr(hurt->jobj), hurt->v1, hurt->v1, r31,
-                        r30, hurt->v2);
-        return 1;
-    }
-    return 0;
-}
-
-bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
-{
-    Mtx sp9C;
-    Vec3 sp90;
-    Vec3 sp84;
-    Vec3 sp78;
-    Vec3 sp6C;
-    Mtx sp3C;
-    float temp_f31;
-    MtxPtr var_r28;
-    GXColor* temp_r31_2;
-    u32 var_r0;
-    GXColor* temp_r3;
-
-    temp_r3 = lbColl_803B9928[hurt->state].pad;
-    if (temp_r3->a == 0xFF) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 2;
-    }
-    if (var_r0 == arg1) {
-        if (!hurt->skip_update_pos) {
-            lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
-            lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
-            if (arg2 != NULL) {
-                hurt->b_pos.z = arg3;
-                hurt->a_pos.z = arg3;
-            }
-            hurt->skip_update_pos = 1;
-        }
-        if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hurt->bone), sp9C);
-        }
-        temp_f31 = hurt->scale;
-        temp_r31_2 = lbColl_803B9928[hurt->state].pad_x;
-        sp84 = hurt->b_pos;
-        sp90 = hurt->a_pos;
-        if (arg2 != NULL) {
-            var_r28 = sp9C;
-        } else {
-            var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
-        }
-        HSD_MtxInverse(var_r28, sp3C);
-        PSMTXMultVec(sp3C, &sp90, &sp6C);
-        PSMTXMultVec(sp3C, &sp84, &sp78);
-        lbColl_800096B4(var_r28, sp6C, sp78, temp_r3, temp_r31_2, temp_f31);
-        return 1;
-    }
-    return 0;
 }
 
 bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
@@ -2161,6 +2526,7 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
     Mtx sp3C;
     Vec3 sp30;
     Vec3 sp24;
+
     f32 temp_f31;
     MtxPtr var_r31;
     u32 var_r0;
@@ -2194,9 +2560,55 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
         PSMTXMultVec(sp3C, &sp84, &sp30);
         lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36CC, &lbColl_804D36D0,
                         temp_f31);
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
+}
+
+bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
+{
+    Mtx sp9C;
+    Vec3 sp90;
+    Vec3 sp84;
+    Vec3 sp30;
+    Vec3 sp24;
+    Mtx sp3C;
+
+    f32 temp_f31;
+    MtxPtr var_r31;
+    u32 var_r0;
+
+    if (lbColl_804D36D4.a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        if (!hit->skip_update_pos) {
+            lb_8000B1CC(hit->bone, &hit->offset, &hit->pos);
+            if (arg2 != NULL) {
+                hit->pos.z = pos_z;
+            }
+            hit->skip_update_pos = true;
+        }
+        if (arg2 != NULL) {
+            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
+        }
+        temp_f31 = hit->size;
+        sp84 = hit->pos;
+        sp90 = hit->pos;
+        if (arg2 != NULL) {
+            var_r31 = sp9C;
+        } else {
+            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
+        }
+        HSD_MtxInverse(var_r31, sp3C);
+        PSMTXMultVec(sp3C, &sp90, &sp24);
+        PSMTXMultVec(sp3C, &sp84, &sp30);
+        lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36D4, &lbColl_804D36D8, temp_f31);
+        return true;
+    }
+    return false;
 }
 
 bool lbColl_8000ACFC(UNK_T victim, HitCapsule* hitbox)

@@ -195,7 +195,7 @@ typedef struct it_266F_ItemVars {
     s32 x10;
     s32 x14;
     UnkFlagStruct x18;
-    Vec3 x1C[2];
+    struct lbColl_8000A10C_arg0_t x1C;
 } it_266F_ItemVars;
 
 struct Item {

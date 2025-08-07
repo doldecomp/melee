@@ -39,11 +39,11 @@
 /* 077C60 */ UNK_RET ftColl_80077C60(UNK_PARAMS);
 /* 078384 */ void ftColl_80078384(Fighter*, FighterHurtCapsule*, HitCapsule*);
 /* 078488 */ void ftColl_80078488(Fighter*);
-/* 0784B4 */ UNK_T ftColl_800784B4(UNK_T, UNK_T, UNK_T);
+/* 0784B4 */ void ftColl_800784B4(Fighter*, HitCapsule*, HitCapsule*);
 /* 078538 */ UNK_RET ftColl_80078538(UNK_PARAMS);
-/* 07861C */ UNK_RET ftColl_8007861C(bool, Fighter_GObj* gobj, int, int, int,
-                                     u32, int, UNK_T, int);
-/* 078710 */ UNK_RET ftColl_80078710(UNK_PARAMS);
+/* 07861C */ UNK_RET ftColl_8007861C(Fighter_GObj*, Fighter_GObj* gobj, int, int, int,
+                                     UNK_T, int, UNK_T, int);
+/* 078710 */ void ftColl_80078710(Fighter_GObj*, Fighter_GObj*, UNK_T arg2);
 /* 078754 */ void ftColl_80078754(Fighter_GObj*, Fighter_GObj*, bool);
 /* 0787B4 */ void ftColl_800787B4(Item_GObj*, Fighter_GObj*, int);
 /* 0788D4 */ void ftColl_800788D4(Fighter_GObj* gobj);
