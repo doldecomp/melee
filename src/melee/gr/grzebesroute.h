@@ -3,24 +3,26 @@
 
 #include <placeholder.h>
 
+#include "it/inlines.h"
+
 /* 20B160 */ UNK_RET grZebesRoute_8020B160(UNK_PARAMS);
 /* 20B164 */ UNK_RET grZebesRoute_8020B164(UNK_PARAMS);
 /* 20B1D4 */ UNK_RET grZebesRoute_8020B1D4(UNK_PARAMS);
 /* 20B1F4 */ UNK_RET grZebesRoute_8020B1F4(UNK_PARAMS);
 /* 20B258 */ UNK_RET grZebesRoute_8020B258(UNK_PARAMS);
 /* 20B260 */ UNK_RET grZebesRoute_8020B260(UNK_PARAMS);
-/* 20B348 */ UNK_RET grZebesRoute_8020B348(UNK_PARAMS);
-/* 20B374 */ UNK_RET grZebesRoute_8020B374(UNK_PARAMS);
-/* 20B37C */ UNK_RET grZebesRoute_8020B37C(UNK_PARAMS);
-/* 20B380 */ UNK_RET grZebesRoute_8020B380(UNK_PARAMS);
-/* 20B384 */ UNK_RET grZebesRoute_8020B384(UNK_PARAMS);
-/* 20B3B0 */ UNK_RET grZebesRoute_8020B3B0(UNK_PARAMS);
-/* 20B3B8 */ UNK_RET grZebesRoute_8020B3B8(UNK_PARAMS);
-/* 20B3BC */ UNK_RET grZebesRoute_8020B3BC(UNK_PARAMS);
-/* 20B3C0 */ UNK_RET grZebesRoute_8020B3C0(UNK_PARAMS);
-/* 20B424 */ UNK_RET grZebesRoute_8020B424(UNK_PARAMS);
-/* 20B42C */ UNK_RET grZebesRoute_8020B42C(UNK_PARAMS);
-/* 20B4D4 */ UNK_RET grZebesRoute_8020B4D4(UNK_PARAMS);
+/* 20B348 */ void grZebesRoute_8020B348(Ground_GObj*);
+/* 20B374 */ bool grZebesRoute_8020B374(Ground_GObj*);
+/* 20B37C */ void grZebesRoute_8020B37C(Ground_GObj*);
+/* 20B380 */ void grZebesRoute_8020B380(Ground_GObj*);
+/* 20B384 */ void grZebesRoute_8020B384(Ground_GObj*);
+/* 20B3B0 */ bool grZebesRoute_8020B3B0(Ground_GObj*);
+/* 20B3B8 */ void grZebesRoute_8020B3B8(Ground_GObj*);
+/* 20B3BC */ void grZebesRoute_8020B3BC(Ground_GObj*);
+/* 20B3C0 */ void grZebesRoute_8020B3C0(Ground_GObj*);
+/* 20B424 */ bool grZebesRoute_8020B424(Ground_GObj*);
+/* 20B42C */ void grZebesRoute_8020B42C(Ground_GObj*);
+/* 20B4D4 */ void grZebesRoute_8020B4D4(Ground_GObj*);
 /* 20B4D8 */ UNK_RET fn_8020B4D8(UNK_PARAMS);
 /* 20B548 */ UNK_RET grZebesRoute_8020B548(UNK_PARAMS);
 /* 20B854 */ UNK_RET grZebesRoute_8020B854(UNK_PARAMS);

@@ -21,36 +21,36 @@ bool grZebes_801D8550(void)
 
 /// #grZebes_801D8644
 
-bool grZebes_801D8814(void)
+bool grZebes_801D8814(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D881C
 
-void grZebes_801D90FC(void) {}
+void grZebes_801D90FC(Ground_GObj* arg) {}
 
 /// #grZebes_801D9100
 
-bool grZebes_801D9254(void)
+bool grZebes_801D9254(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D925C
 
-void grZebes_801D93D8(void) {}
+void grZebes_801D93D8(Ground_GObj* arg) {}
 
 /// #grZebes_801D93DC
 
-bool grZebes_801D9408(void)
+bool grZebes_801D9408(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D9410
 
-void grZebes_801D94EC(void) {}
+void grZebes_801D94EC(Ground_GObj* arg) {}
 
 void fn_801D94F0(Ground_GObj* gobj)
 {
@@ -59,38 +59,38 @@ void fn_801D94F0(Ground_GObj* gobj)
 
 /// #grZebes_801D9508
 
-bool grZebes_801D95B0(void)
+bool grZebes_801D95B0(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D95B8
 
-void grZebes_801D9754(void) {}
+void grZebes_801D9754(Ground_GObj* arg) {}
 
 /// #fn_801D9758
 
 /// #grZebes_801D9798
 
-bool grZebes_801D99D8(void)
+bool grZebes_801D99D8(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D99E0
 
-void grZebes_801D9F2C(void) {}
+void grZebes_801D9F2C(Ground_GObj* arg) {}
 
 /// #grZebes_801D9F30
 
-bool grZebes_801D9F7C(void)
+bool grZebes_801D9F7C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D9F84
 
-void grZebes_801DA0C0(void) {}
+void grZebes_801DA0C0(Ground_GObj* arg) {}
 
 /// #grZebes_801DA0C4
 

@@ -46,8 +46,8 @@ typedef struct HSD_GObj Menu_GObj;
 #endif
 
 struct PlayerInitData {
-    /*0x00*/ s8 c_kind;    // character kind
-    /*0x01*/ u8 slot_type; // slot type (0 = human, 1 = cpu?)
+    /*0x00*/ s8 c_kind;    ///< uses CharacterKind (CKIND_*) values
+    /*0x01*/ u8 slot_type; ///< uses Gm_PKind values
     /*0x02*/ s8 stocks;    // stocks
     /*0x03*/ u8 color;     // color
     /*0x04*/ u8 slot;      // port

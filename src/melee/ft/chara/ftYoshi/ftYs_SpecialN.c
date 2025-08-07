@@ -146,9 +146,31 @@ void fn_8012D0A0(Fighter_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-/// #fn_8012D128
+void fn_8012D128(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
 
-/// #fn_8012D1AC
+    u8 _[8];
+
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, 0x15F, 0x0C4C509AU, fp->cur_anim_frame, 0,
+                              1, NULL);
+    ftCommon_8007E2D0((Fighter*) gobj->user_data, 4, fn_8012D0A0, fn_8012D004,
+                      ftCo_800BBB8C);
+}
+
+void fn_8012D1AC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    u8 _[8];
+
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C509AU, fp->cur_anim_frame,
+                              0, 1, NULL);
+    ftCommon_8007E2D0((Fighter*) gobj->user_data, 4, fn_8012CF7C, fn_8012CEE0,
+                      ftCo_800BBB8C);
+}
 
 void fn_8012D230(Fighter_GObj* gobj)
 {
@@ -249,11 +271,64 @@ void ftYs_SpecialAirN1_0_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftYs_SpecialN1_1_Anim
+static void inlineA1(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[1] = 0;
+}
 
-/// #ftYs_SpecialN1_0_Anim
+static void inlineA0(Fighter_GObj* gobj, enum_t msid)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x1A60 != NULL) {
+        inlineA1(gobj);
+        Fighter_ChangeMotionState(gobj, msid, 0x80012U, 0.0f, 1.0f, 0.0f,
+                                  NULL);
+        ftYs_SpecialS_8012DF00(gobj);
+        ftCommon_8007E2F4(fp, 0x1FF);
+    }
+}
 
-/// #ftYs_SpecialAirN1_2_Anim
+void ftYs_SpecialN1_1_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->cmd_vars[0] != 0) {
+        inlineA0(gobj, 0x15E);
+    }
+}
+
+inline void* Fighter_GetVictimGobj(Fighter* fp)
+{
+    return fp->victim_gobj;
+}
+
+static void ftYs_SpecialN1_0_Anim_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((fp->cmd_vars[0]) && (Fighter_GetVictimGobj(fp) != NULL)) {
+        fp->cmd_vars[0] = 0;
+        fp->cmd_vars[1] = 0;
+        Fighter_ChangeMotionState(gobj, 0x15D, 0x80012U, ftYs_Init_804D9A38,
+                                  1, ftYs_Init_804D9A38,
+                                  NULL);
+        ftCommon_8007E2F4(fp, 0x1FF);
+    }
+}
+
+void ftYs_SpecialN1_0_Anim(Fighter_GObj* gobj)
+{
+    ftYs_SpecialN1_0_Anim_inline(gobj);
+}
+
+void ftYs_SpecialAirN1_2_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->cmd_vars[0] != 0) {
+        inlineA0(gobj, 0x163);
+    }
+}
 
 /// #ftYs_SpecialAirN1_1_Anim
 
@@ -413,7 +488,32 @@ void ftYs_SpecialS_8012E270(Fighter_GObj* gobj)
 
 /// #ftYs_SpecialAirHi_Enter
 
-/// #fn_8012E3B4
+inline void qwe(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->accessory4_cb = fn_8012E110;
+}
+inline void fn_8012E3B4_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.ys.x2238 != NULL) {
+        fp->take_dmg_cb = ftYs_Init_8012BA8C;
+        fp->death2_cb = ftYs_Init_8012BA8C;
+    }
+}
+void fn_8012E3B4(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, 0x16D, 0x0C4C5082U, fp->cur_anim_frame, 0,
+                              1, NULL);
+
+    fn_8012E3B4_inline(gobj);
+    qwe(gobj);
+
+    ftCommon_8007D468(fp);
+}
 
 /// #fn_8012E44C
 

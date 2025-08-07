@@ -5,6 +5,8 @@
 #include "gm_unsplit.h"
 #include "gmvsdata.h"
 
+#include <melee/pl/forward.h>
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
@@ -84,10 +86,10 @@ void gm_801B999C(MinorScene* scene)
     gm_80167A14(vs->data.players);
     gm_801B0730(temp_r3, &vs->data.players[0].c_kind, NULL,
                 &vs->data.players[0].color, &vs->data.players[0].xA, NULL);
-    vs->data.players[1].c_kind = 0x1F;
+    vs->data.players[1].c_kind = CHKIND_SANDBAG;
     vs->data.players[1].xE = 0xF;
     vs->data.players[1].x1C = 1.0f;
-    vs->data.players[1].slot_type = 1;
+    vs->data.players[1].slot_type = Gm_PKind_Cpu;
     vs->data.players[1].stocks = 1;
     vs->data.players[1].team = 1;
 }

@@ -302,7 +302,7 @@ bool fn_80026E58(int arg0)
     return false;
 }
 
-u64 lbAudioAx_80026E84(int c_kind)
+u64 lbAudioAx_80026E84(CharacterKind c_kind)
 {
     if (c_kind < 0 || c_kind >= CHKIND_MAX) {
         return 0;

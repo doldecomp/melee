@@ -1,8 +1,10 @@
 #include "gm_1BA8.h"
 
+#include "gm_1B03.static.h"
+
 #include "gm_unsplit.h"
 
-#include "gm_1B03.static.h"
+#include <melee/pl/forward.h>
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
@@ -396,10 +398,10 @@ void gm_801BF4DC(MinorScene* arg0)
     gm_80167A14(temp_r31->players);
 
     for (i = 0; i < 4; i++) {
-        int tmp = gm_801BF648(i);
-        temp_r31->players[i].c_kind = tmp;
+        CharacterKind kind = gm_801BF648(i);
+        temp_r31->players[i].c_kind = kind;
         temp_r31->players[i].color = gm_801BF670(i);
-        temp_r31->players[i].slot_type = 1;
+        temp_r31->players[i].slot_type = Gm_PKind_Cpu;
         temp_r31->players[i].cpu_level = 9;
         temp_r31->players[i].xE = 4;
         temp_r31->players[i].xC_b1 = false;
@@ -409,24 +411,24 @@ void gm_801BF4DC(MinorScene* arg0)
     }
 }
 
-void gm_801BF634(s32 arg0, s8 arg1)
+void gm_801BF634(s32 arg0, s8 character_kind)
 {
-    gm_8049E548.pad_0[arg0] = arg1;
+    gm_8049E548.c_kind[arg0] = character_kind;
 }
 
 s8 gm_801BF648(s32 arg0)
 {
-    return gm_8049E548.pad_0[arg0];
+    return gm_8049E548.c_kind[arg0];
 }
 
 void gm_801BF65C(s32 arg0, s8 arg1)
 {
-    M2C_FIELD(&gm_8049E548.pad_0[arg0], s8*, 4) = arg1;
+    gm_8049E548.x4[arg0] = arg1;
 }
 
 u8 gm_801BF670(s32 arg0)
 {
-    return M2C_FIELD(&gm_8049E548.pad_0[arg0], u8*, 4);
+    return gm_8049E548.x4[arg0];
 }
 
 void gm_801BF684(s16 arg0)
@@ -461,7 +463,7 @@ u8 gm_801BF6D8(void)
 
 void gm_801BF6E8(s8 arg0)
 {
-    M2C_FIELD(&gm_8049E548, s8*, 9) = arg0;
+    gm_8049E548.unk_9 = arg0;
 }
 
 u8 gm_801BF6F8(void)

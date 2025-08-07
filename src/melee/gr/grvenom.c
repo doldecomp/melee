@@ -24,61 +24,61 @@ bool grVenom_80203EA4(void)
 
 /// #grVenom_80203EAC
 
-void grVenom_80203F98(HSD_GObj* gobj)
+void grVenom_80203F98(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grVenom_80203FC4(void)
+bool grVenom_80203FC4(Ground_GObj* arg)
 {
     return false;
 }
 
-void grVenom_80203FCC(void) {}
+void grVenom_80203FCC(Ground_GObj* arg) {}
 
-void grVenom_80203FD0(void) {}
+void grVenom_80203FD0(Ground_GObj* arg) {}
 
 /// #grVenom_80203FD4
 
-bool grVenom_802040A4(void)
+bool grVenom_802040A4(Ground_GObj* arg)
 {
     return false;
 }
 
-void grVenom_802040AC(void) {}
+void grVenom_802040AC(Ground_GObj* arg) {}
 
-void grVenom_802040B0(void) {}
+void grVenom_802040B0(Ground_GObj* arg) {}
 
 /// #fn_802040B4
 
 /// #grVenom_802040F0
 
-bool grVenom_8020427C(void)
+bool grVenom_8020427C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grVenom_80204284
 
-void grVenom_80204424(void) {}
+void grVenom_80204424(Ground_GObj* arg) {}
 
 /// #grVenom_80204428
 
-bool grVenom_80204544(void)
+bool grVenom_80204544(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grVenom_8020454C
 
-void grVenom_80204B84(void) {}
+void grVenom_80204B84(Ground_GObj* arg) {}
 
 /// #grVenom_80204B88
 
-void grVenom_80204CE0(void) {}
+void grVenom_80204CE0(Ground_GObj* arg) {}
 
-bool grVenom_80204CE4(void)
+bool grVenom_80204CE4(Ground_GObj* arg)
 {
     return false;
 }
@@ -89,18 +89,18 @@ bool grVenom_80204CE4(void)
 
 /// #grVenom_80204DD4
 
-bool grVenom_80204EF4(void)
+bool grVenom_80204EF4(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grVenom_80204EFC
 
-void grVenom_80204F1C(void) {}
+void grVenom_80204F1C(Ground_GObj* arg) {}
 
 /// #grVenom_80204F20
 
-bool grVenom_802052D8(void)
+bool grVenom_802052D8(Ground_GObj* arg)
 {
     return false;
 }
@@ -109,22 +109,22 @@ bool grVenom_802052D8(void)
 
 /// #grVenom_802053B0
 
-void grVenom_802056AC(void) {}
+void grVenom_802056AC(Ground_GObj* arg) {}
 
 /// #grVenom_802056B0
 
-bool grVenom_80205750(void)
+bool grVenom_80205750(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grVenom_80205758
 
-void grVenom_80205AD0(void) {}
+void grVenom_80205AD0(Ground_GObj* arg) {}
 
 /// #grVenom_80205AD4
 
-bool grVenom_80205DF0(void)
+bool grVenom_80205DF0(Ground_GObj* arg)
 {
     return false;
 }
@@ -135,29 +135,29 @@ bool grVenom_80205DF0(void)
 
 /// #grVenom_80205F30
 
-void grVenom_80206870(void) {}
+void grVenom_80206870(Ground_GObj* arg) {}
 
 /// #grVenom_80206874
 
-bool grVenom_80206B68(void)
+bool grVenom_80206B68(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grVenom_80206B70
 
-void grVenom_80206B90(void) {}
+void grVenom_80206B90(Ground_GObj* arg) {}
 
 /// #grVenom_80206B94
 
-bool grVenom_80206BBC(void)
+bool grVenom_80206BBC(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grVenom_80206BC4
 
-void grVenom_80206BEC(void) {}
+void grVenom_80206BEC(Ground_GObj* arg) {}
 
 /// #grVenom_80206BF0
 

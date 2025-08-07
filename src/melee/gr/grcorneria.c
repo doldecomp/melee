@@ -34,14 +34,14 @@ bool grCorneria_801DD52C(void)
 
 /// #grCorneria_801DD620
 
-bool grCorneria_801DD64C(void)
+bool grCorneria_801DD64C(Ground_GObj* arg)
 {
     return false;
 }
 
-void grCorneria_801DD654(void) {}
+void grCorneria_801DD654(Ground_GObj* arg) {}
 
-void grCorneria_801DD658(void) {}
+void grCorneria_801DD658(Ground_GObj* arg) {}
 
 void fn_801DD65C(Ground_GObj* gobj)
 {
@@ -106,18 +106,18 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
 }
 
-bool grCorneria_801DD9A0(void)
+bool grCorneria_801DD9A0(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801DD9A8
 
-void grCorneria_801DDAC0(void) {}
+void grCorneria_801DDAC0(Ground_GObj* arg) {}
 
 /// #grCorneria_801DDAC4
 
-bool grCorneria_801DDCE8(void)
+bool grCorneria_801DDCE8(Ground_GObj* arg)
 {
     return false;
 }
@@ -132,22 +132,22 @@ bool grCorneria_801DDCE8(void)
 
 /// #grCorneria_801DE024
 
-void grCorneria_801DE4BC(void) {}
+void grCorneria_801DE4BC(Ground_GObj* arg) {}
 
 /// #grCorneria_801DE4C0
 
-bool grCorneria_801DE560(void)
+bool grCorneria_801DE560(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801DE568
 
-void grCorneria_801DE8E0(void) {}
+void grCorneria_801DE8E0(Ground_GObj* arg) {}
 
 /// #grCorneria_801DE8E4
 
-bool grCorneria_801DEC00(void)
+bool grCorneria_801DEC00(Ground_GObj* arg)
 {
     return false;
 }
@@ -158,62 +158,62 @@ bool grCorneria_801DEC00(void)
 
 /// #grCorneria_801DED50
 
-void grCorneria_801DF8CC(void) {}
+void grCorneria_801DF8CC(Ground_GObj* arg) {}
 
 /// #grCorneria_801DF8D0
 
-bool grCorneria_801DFBC4(void)
+bool grCorneria_801DFBC4(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801DFBCC
 
-void grCorneria_801DFBEC(void) {}
+void grCorneria_801DFBEC(Ground_GObj* arg) {}
 
 /// #grCorneria_801DFBF0
 
-bool grCorneria_801DFC1C(void)
+bool grCorneria_801DFC1C(Ground_GObj* arg)
 {
     return false;
 }
 
-void grCorneria_801DFC24(void) {}
+void grCorneria_801DFC24(Ground_GObj* arg) {}
 
-void grCorneria_801DFC28(void) {}
+void grCorneria_801DFC28(Ground_GObj* arg) {}
 
 /// #grCorneria_801DFC2C
 
-bool grCorneria_801DFC90(void)
+bool grCorneria_801DFC90(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801DFC98
 
-void grCorneria_801DFEB4(void) {}
+void grCorneria_801DFEB4(Ground_GObj* arg) {}
 
 /// #grCorneria_801DFEB8
 
-bool grCorneria_801DFF18(void)
+bool grCorneria_801DFF18(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801DFF20
 
-void grCorneria_801E013C(void) {}
+void grCorneria_801E013C(Ground_GObj* arg) {}
 
 /// #grCorneria_801E0140
 
-bool grCorneria_801E01A0(void)
+bool grCorneria_801E01A0(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801E01A8
 
-void grCorneria_801E03C4(void) {}
+void grCorneria_801E03C4(Ground_GObj* arg) {}
 
 /// #grCorneria_801E03C8
 
@@ -259,7 +259,7 @@ static inline void clearX10_b2(HSD_GObj* gobj)
     GET_GROUND(gobj)->x10_flags.b2 = false;
 }
 
-void grCorneria_801E0C3C(HSD_GObj* gobj)
+void grCorneria_801E0C3C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -273,33 +273,33 @@ void grCorneria_801E0C3C(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-bool grCorneria_801E0D28(void)
+bool grCorneria_801E0D28(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801E0D30
 
-void grCorneria_801E0DE0(void) {}
+void grCorneria_801E0DE0(Ground_GObj* arg) {}
 
 /// #grCorneria_801E0DE4
 
-bool grCorneria_801E0E0C(void)
+bool grCorneria_801E0E0C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801E0E14
 
-void grCorneria_801E0E3C(void) {}
+void grCorneria_801E0E3C(Ground_GObj* arg) {}
 
 /// #grCorneria_801E0E40
 
-void grCorneria_801E0F30(void) {}
+void grCorneria_801E0F30(Ground_GObj* arg) {}
 
 /// #grCorneria_801E0F34
 
-bool grCorneria_801E0F64(void)
+bool grCorneria_801E0F64(Ground_GObj* arg)
 {
     return false;
 }
@@ -308,16 +308,16 @@ bool grCorneria_801E0F64(void)
 
 /// #grCorneria_801E1030
 
-void grCorneria_801E1054(void) {}
+void grCorneria_801E1054(Ground_GObj* arg) {}
 
-bool grCorneria_801E1058(void)
+bool grCorneria_801E1058(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCorneria_801E1060
 
-void grCorneria_801E12CC(void) {}
+void grCorneria_801E12CC(Ground_GObj* arg) {}
 
 void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
