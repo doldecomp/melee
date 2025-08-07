@@ -118,11 +118,15 @@ struct HurtCapsule {
     Vec3 a_pos;
     Vec3 b_pos;
     int bone_idx;      // 0x40
+};
+
+struct FighterHurtCapsule {
+    HurtCapsule capsule;
     enum_t kind;       // 0x44. 0 = low, 1 = mid, 2 = high
     bool is_grabbable; // 0x48
 };
 
-STATIC_ASSERT(sizeof(HurtCapsule) == 0x4C);
+STATIC_ASSERT(sizeof(FighterHurtCapsule) == 0x4C);
 
 struct ReflectDesc {
     u32 x0_bone_id;

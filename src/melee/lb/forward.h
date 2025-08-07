@@ -13,6 +13,7 @@ typedef struct HitCapsule HitCapsule;
 typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
 typedef struct HurtCapsule HurtCapsule;
+typedef struct FighterHurtCapsule FighterHurtCapsule;
 typedef struct PreloadCache PreloadCache;
 typedef struct PreloadCacheScene PreloadCacheScene;
 typedef struct PreloadCacheSceneEntry PreloadCacheSceneEntry;

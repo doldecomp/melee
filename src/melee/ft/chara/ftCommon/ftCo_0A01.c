@@ -239,7 +239,7 @@ void ftCo_800A0CB0(Fighter* fp)
 void ftCo_800A0DA4(Fighter* fp)
 {
     Fighter* var_r31;
-    HurtCapsule* hurt;
+    FighterHurtCapsule* hurt;
     float temp_f0;
     float temp_f0_2;
     float temp_f0_3;
@@ -265,10 +265,10 @@ void ftCo_800A0DA4(Fighter* fp)
     var_f30 = 0.0f;
     while (var_r30 < (int) fp->hurt_capsules_len) {
         hurt = var_r31->hurt_capsules;
-        lbColl_800083C4(hurt);
+        lbColl_800083C4(&hurt->capsule);
         temp_f5 = fp->cur_pos.x;
-        temp_f4 = hurt->a_pos.x - temp_f5;
-        temp_f3 = hurt->scale * fp->x34_scale.y;
+        temp_f4 = hurt->capsule.a_pos.x - temp_f5;
+        temp_f3 = hurt->capsule.scale * fp->x34_scale.y;
         temp_f6 = fp->cur_pos.y;
         temp_f0 = temp_f4 - temp_f3;
         if (var_f31 > temp_f0) {
@@ -278,11 +278,11 @@ void ftCo_800A0DA4(Fighter* fp)
         if (var_f30 < temp_f0_2) {
             var_f30 = temp_f0_2;
         }
-        temp_f0_3 = (hurt->a_pos.y - temp_f6) + temp_f3;
+        temp_f0_3 = (hurt->capsule.a_pos.y - temp_f6) + temp_f3;
         if (var_f29 < temp_f0_3) {
             var_f29 = temp_f0_3;
         }
-        temp_f1 = hurt->b_pos.x - temp_f5;
+        temp_f1 = hurt->capsule.b_pos.x - temp_f5;
         temp_f0_4 = temp_f1 - temp_f3;
         if (var_f31 > temp_f0_4) {
             var_f31 = temp_f0_4;
@@ -291,7 +291,7 @@ void ftCo_800A0DA4(Fighter* fp)
         if (var_f30 < temp_f0_5) {
             var_f30 = temp_f0_5;
         }
-        temp_f0_6 = (hurt->b_pos.y - temp_f6) + temp_f3;
+        temp_f0_6 = (hurt->capsule.b_pos.y - temp_f6) + temp_f3;
         if (var_f29 < temp_f0_6) {
             var_f29 = temp_f0_6;
         }

@@ -6027,7 +6027,7 @@ void it_80274CAC(Item_GObj* item_gobj)
     }
 }
 
-void it_80274D04(Item_GObj* item_gobj, Vec3* pos)
+void it_80274D04(Item_GObj* item_gobj, Vec2* pos)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -6039,35 +6039,26 @@ void it_80274D04(Item_GObj* item_gobj, Vec3* pos)
     pos->y = sp20.y - sp14.y;
 }
 
-void it_80274D6C(Item_GObj* item_gobj)
+void it_80274D6C(Item_GObj* arg0)
 {
-    Item* item;
+    Item* item = GET_ITEM(arg0);
 
-    item = item_gobj->user_data;
-    // item->xACC_itemHurtbox[1].b_pos.x =
-    // item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
-    item->xACC_itemHurtbox[1].is_grabbable =
-        item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
-    item->xACC_itemHurtbox[1].kind =
-        item->x378_itemColl.xA4_ecbCurrCorrect.left.x + item->pos.x;
-    item->xB64 = item->x378_itemColl.xA4_ecbCurrCorrect.top.x +
-                 item->x378_itemColl.xA4_ecbCurrCorrect.right.y + item->pos.y;
+    float right_x = item->x378_itemColl.xA4_ecbCurrCorrect.right.x;
+    float right_y = item->x378_itemColl.xA4_ecbCurrCorrect.right.y;
+    float left_x = item->x378_itemColl.xA4_ecbCurrCorrect.left.x;
+    float top_y = item->x378_itemColl.xA4_ecbCurrCorrect.top.y;
+
+    item->xB60 = right_x + item->pos.x;
+    item->xB5C = left_x + item->pos.x;
+    item->xB64 = right_y + item->pos.y + top_y;
 }
 
-void it_80274DAC(Item_GObj* item_gobj)
+void it_80274DAC(Item_GObj* arg0)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    item->xACC_itemHurtbox[1].b_pos.z = 0.0f;
-    item->xACC_itemHurtbox[1].bone_idx = 0.0f;
-    item = item_gobj->user_data;
-    item->xACC_itemHurtbox[1].is_grabbable =
-        item->x378_itemColl.xA4_ecbCurrCorrect.right.x + item->pos.x;
-    item->xACC_itemHurtbox[1].kind =
-        item->x378_itemColl.xA4_ecbCurrCorrect.left.x + item->pos.x;
-    item->xB64 = item->x378_itemColl.xA4_ecbCurrCorrect.top.y +
-                 item->x378_itemColl.xA4_ecbCurrCorrect.right.y + item->pos.y;
+    Item* temp_r4 = GET_ITEM(arg0);
+    temp_r4->xB54.x = 0.0F;
+    temp_r4->xB54.y = 0.0F;
+    it_80274D6C(arg0);
 }
 
 void it_80274DFC(Item_GObj* item_gobj)
@@ -6500,7 +6491,7 @@ void it_8027572C(Item_GObj* item_gobj, s32 idx)
 void it_8027574C(Item_GObj* item_gobj)
 {
     Item* item = item_gobj->user_data;
-    it_80274D04(item_gobj, (Vec3*) &item->xACC_itemHurtbox[1].b_pos.z);
+    it_80274D04(item_gobj, &item->xB54);
     it_80274D6C(item_gobj);
 }
 
