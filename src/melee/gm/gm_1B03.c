@@ -39,7 +39,7 @@
 
 extern TmData gm_804771C4;
 
-/* 477738 */ extern ResultsMatchInfo gm_80477738;
+/* 477738 */ extern MatchEnd gm_80477738;
 /* 4876D8 */ static StartMeleeData gm_804876D8;
 /* 487810 */ static MatchExitInfo gm_80487810;
 
@@ -550,7 +550,7 @@ void gm_801B0A34(MinorScene* arg0)
 {
     struct UnkUnloadData* temp_r3 = gm_801A427C(arg0);
     temp_r3->x0 = un_803FA790;
-    temp_r3->x4 = fn_801B09F8;
+    temp_r3->x4 = fn_801B0A8C;
     lbAudioAx_80026F2C(0x12);
     lbAudioAx_8002702C(2, 0x20);
     lbAudioAx_80027168();
@@ -571,7 +571,7 @@ void gm_801B0AC8(MinorScene* arg0)
 {
     struct UnkUnloadData* temp_r3 = gm_801A427C(arg0);
     temp_r3->x0 = un_803FC4CC;
-    temp_r3->x4 = fn_801B09F8;
+    temp_r3->x4 = fn_801B0A8C;
 }
 
 void gm_801B0B00(MinorScene* arg0)
@@ -1154,22 +1154,24 @@ MinorScene gm_803DDAC0_MinorScenes[] = {
     { 0xFF },
 };
 
-extern UNK_T gm_8048E230[];
-extern UNK_T gm_8048E378[];
+extern CSSData gm_8048E230;
+extern SSSData gm_8048E378;
 static StartMeleeData gm_8048E4C0;
 extern UNK_T gm_8048E5F8[];
 
 MinorScene gm_803DDB80_MinorScenes[] = {
-    { 0x00,
-      0x03,
-      0,
-      gm_801B1B74,
-      gm_801B1C24,
-      {
-          MN_CSS,
-          gm_8048E230,
-          gm_8048E230,
-      } },
+    {
+        0x00,
+        0x03,
+        0,
+        gm_801B1B74,
+        gm_801B1C24,
+        {
+            MN_CSS,
+            &gm_8048E230,
+            &gm_8048E230,
+        },
+    },
     {
         0x01,
         0x03,
@@ -1178,8 +1180,8 @@ MinorScene gm_803DDB80_MinorScenes[] = {
         gm_801B1EEC,
         {
             MN_SSS,
-            gm_8048E378,
-            gm_8048E378,
+            &gm_8048E378,
+            &gm_8048E378,
         },
     },
     {
@@ -1257,260 +1259,6 @@ extern UNK_T gm_8047086C[];
 extern UNK_T gm_80472AF8[];
 extern UNK_T gm_80490880[];
 extern UNK_T gm_804D68D0[];
-
-MinorScene gm_803DDC58_MinorScenes[] = {
-    {
-        0x00,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x01,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x08,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x09,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x10,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x11,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x18,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x19,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x20,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x21,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x28,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x29,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x30,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x31,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x38,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x39,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x40,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x41,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x48,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x49,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x50,
-        0x03,
-        0,
-        gm_801B3500,
-        NULL,
-        MN_INTRO_EASY,
-        gm_80490880,
-        gm_804D68D0,
-    },
-    {
-        0x51,
-        0x03,
-        0,
-        gm_801B3A34,
-        gm_801B3B40,
-        MN_VS,
-        gm_80472AF8,
-        gm_8047086C,
-    },
-    {
-        0x68,
-        0x03,
-        0,
-        NULL,
-        gm_801B3F18,
-        MN_COMING_SOON,
-        NULL,
-        NULL,
-    },
-    {
-        0x69,
-        0x03,
-        0,
-        gm_801B3D44,
-        gm_801B3D84,
-        MN_GAMEOVER,
-        gm_80470850,
-        gm_80470850,
-    },
-    {
-        0x70,
-        0x03,
-        0,
-        gm_801B3DD8,
-        gm_801B3E44,
-        MN_CSS,
-        gm_80470708,
-        gm_80470708,
-    },
-    { 0xFF },
-};
 
 void gm_801B13B8(MinorScene* arg0)
 {
@@ -1713,11 +1461,10 @@ void gm_801B1AD4(MinorScene* arg0)
     ResultsMatchInfo* rmi;
 
     rmi = gm_801A427C(arg0);
-    /// why is there a subi? another match end struct?
-    gm_80477738.match_end = rmi->match_end;
+    gm_80477738 = rmi->match_end;
 
     gm_8016247C(gm_801688AC(&rmi->match_end));
-    if ((s32) gm_804771C4.x4 == 0) {
+    if (gm_804771C4.x4 == 0) {
         gm_SetScenePendingMinor(1);
         gm_8018F634()->x0 = 0x1F;
         return;
@@ -2038,7 +1785,7 @@ void gm_801B2AF8(MinorScene* arg0)
     u8* temp_r29;
 
     temp_r30 = &gmMainLib_804D3EE0->unk_950;
-    temp_r29 = (void*) gm_801A5250();
+    temp_r29 = gm_801A5250();
     gm_80168638(&gm_80479D98.match_end);
     gm_80168710(&gm_80479D98.match_end, temp_r30);
     gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
@@ -2050,250 +1797,3 @@ void gm_801B2B7C_OnInit(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_950);
 }
-
-/// #gm_801B2BA4
-
-/// #gm_801B2D54
-
-/// #gm_801B2F78_OnLoad
-
-void gm_801B34B8_OnInit(void)
-{
-    u8* temp_r3 = gmMainLib_8015CDC8();
-    temp_r3[0] = 0x21;
-    temp_r3[2] = 0;
-    temp_r3[1] = 3;
-    temp_r3[3] = 0;
-    temp_r3[4] = 0x78;
-    temp_r3[5] = 0;
-}
-
-/// #gm_801B3500
-
-/// #gm_801B3A34
-
-/// #gm_801B3B40
-
-void gm_801B3D44(MinorScene* arg0)
-{
-    struct UnkAllstarData* temp_r31 = gm_801A427C(arg0);
-    gm_8017C9A8(temp_r31, gm_8017EB30(), 1);
-}
-
-/// #gm_801B3D84
-
-/// #gm_801B3DD8
-
-/// #gm_801B3E44
-
-/// #gm_801B3F18
-
-/// #gm_801B3F40
-
-/// #gm_801B4064
-
-/// #gm_801B4170
-
-/// #gm_801B4254
-
-/// #gm_801B4294
-
-/// #gm_801B42E8
-
-/// #gm_801B4350
-
-/// #gm_801B4408
-
-/// #gm_801B4430
-
-/// #gm_801B44A0
-
-/// #gm_801B45A4
-
-/// #gm_801B461C
-
-/// #gm_801B4684
-
-/// #gm_801B4768
-
-/// #gm_801B47FC
-
-/// #gm_801B4860
-
-/// #gm_801B4974
-
-/// #gm_801B4B28
-
-/// #gm_801B4C5C
-
-/// #gm_801B4D34
-
-/// #gm_801B4DAC
-
-/// #gm_801B4E58
-
-/// #gm_801B4EB8
-
-/// #gm_801B4F44
-
-/// #gm_801B4FCC
-
-/// #gm_801B5078
-
-/// #gm_801B50C4
-
-/// #gm_801B518C
-
-/// #gm_801B51CC_OnInit
-
-/// #gm_801B5214_OnLoad
-
-/// #gm_801B5324
-
-/// #gm_801B5624
-
-/// #gm_801B59AC
-
-void fn_801B5AA8(int arg0)
-{
-    lbBgFlash_8002063C(0x78);
-}
-
-/// #gm_801B5ACC
-
-/// #gm_801B5E7C
-
-/// #gm_801B5EB4
-
-/// #gm_801B5EE4
-
-/// #gm_801B5F50
-
-/// #gm_801B5FB4
-
-void gm_801B607C(MinorScene* arg)
-{
-    gm_801A42E8(1);
-    gm_801A42D4();
-}
-
-/// #gm_801B60A4_OnLoad
-
-/// #gm_801B62D8_OnInit
-
-UNK_T gm_801B6320(void)
-{
-    return &gmMainLib_804D3EE0->unk_530.unk_584;
-}
-
-/// #gm_801B632C
-
-/// #gm_801B63C4
-
-static StartMeleeData gm_80490AA8;
-
-/// #gm_801B6428
-
-/// #gm_801B65D4
-
-/// #gm_801B67E8_OnInit
-
-extern u8 gm_804D68E8;
-extern u8 gm_804D68E9;
-
-void gm_801B6808_OnLoad(void)
-{
-    gm_804D68E8 = gm_801677F0();
-    gm_804D68E9 = 0;
-}
-
-void gm_801B6834(void)
-{
-    gm_80167B50(&gmMainLib_804D3EE0->unk_1490);
-}
-
-extern u8 gm_804D68F0;
-extern s8 gm_804D68F1;
-
-void gm_801B685C(void)
-{
-    gm_804D68F0 = gm_801677F0();
-    gm_804D68F1 = 0;
-    lb_8001C550();
-}
-
-/// #gm_801B688C
-
-void gm_801B69C0(StartMeleeData* arg0)
-{
-    gmMainLib_8015CC34();
-    arg0->rules.x0_0 = 0;
-    arg0->rules.x0_6 = true;
-    arg0->rules.x0_7 = true;
-    arg0->rules.x10 = 0;
-    arg0->rules.timer_shows_hours = true;
-    arg0->rules.x4_2 = true;
-    arg0->rules.x2_5 = false;
-    arg0->rules.x5_0 = false;
-    arg0->rules.x4_4 = false;
-    arg0->rules.x4_3 = true;
-    arg0->rules.x5_1 = true;
-    arg0->rules.x8 = 1;
-    arg0->rules.xE = 0x11D;
-    arg0->rules.x18 = 0;
-    arg0->rules.xB = 2;
-    arg0->rules.x2C = 0.5F;
-    arg0->rules.x20 = 0xFFFFFFFFFFFBFCFF;
-    arg0->rules.x44 = gm_80182174;
-    arg0->rules.x3_3 = true;
-    arg0->rules.x3_2 = true;
-    arg0->rules.x0_3 = 6;
-}
-
-/// #gm_801B6AD8
-
-/// #gm_801B6B70
-
-/// #gm_801B6BE8
-
-/// #gm_801B6F44
-
-/// #gm_801B7044
-
-/// #gm_801B70DC
-
-/// #gm_801B7154
-
-/// #gm_801B74F0
-
-/// #gm_801B75F0
-
-/// #gm_801B7688
-
-/// #gm_801B7700
-
-/// #gm_801B7AA0
-
-/// #gm_801B7B74
-
-/// #gm_801B7C0C
-
-/// #gm_801B7C84
-
-/// #gm_801B8024
-
-/// #gm_801B8110
-
-/// #gm_801B81A8
-
-/// #gm_801B8220
-
-/// #gm_801B8580
-
-/// #gm_801B863C
-
-/// #gm_801B86D4
-
-/// #gm_801B874C
-
-/// #gm_801B8AF8

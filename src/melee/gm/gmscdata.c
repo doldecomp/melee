@@ -3,8 +3,11 @@
 #include "gmscdata.h"
 
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmadventure.h>
+#include <melee/gm/gmallstar.h>
 #include <melee/gm/gmapproach.h>
 #include <melee/gm/gmcamera.h>
+#include <melee/gm/gmclassic.h>
 #include <melee/gm/gmfixedcamera.h>
 #include <melee/gm/gmgiant.h>
 #include <melee/gm/gmhomerun.h>
@@ -13,6 +16,7 @@
 #include <melee/gm/gmlightning.h>
 #include <melee/gm/gmmenu.h>
 #include <melee/gm/gmmovieend.h>
+#include <melee/gm/gmmultiman.h>
 #include <melee/gm/gmomake15.h>
 #include <melee/gm/gmopening.h>
 #include <melee/gm/gmprogressive.h>

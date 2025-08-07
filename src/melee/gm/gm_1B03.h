@@ -2,19 +2,15 @@
 #define MELEE_GM_1B03_H
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/forward.h>
-#include <melee/mn/forward.h>
+
 #include <melee/gm/forward.h>
+#include <melee/mn/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 struct gm_801B0FF8_arg0_x10_t {
     /* +0 */ s8 x0;
     /* +1 */ s8 x1;
     /* +2 */ s8 x2;
-};
-
-struct gm_801B0FF8_arg0_t {
-    /* +0 */ char pad_0[0x10];
-    /* +10 */ struct gm_801B0FF8_arg0_x10_t* x10;
 };
 
 struct gm_8049E548_t {
@@ -32,8 +28,10 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B0348 */ void gm_801B0348(StartMeleeData*); /// Character tints?
 /* 1B0474 */ void gm_801B0474(StartMeleeData*, MatchEnd*);
 /* 1B05F4 */ void gm_801B05F4(PlayerInitData*, int);
-/* 1B0620 */ void gm_801B0620(PlayerInitData*, u8 c_kind, u8 color, u8 stocks, u8);
-/* 1B0664 */ void gm_801B0664(PlayerInitData*, u8 c_kind, u8 color, u8 stocks, u8);
+/* 1B0620 */ void gm_801B0620(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
+                              u8);
+/* 1B0664 */ void gm_801B0664(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
+                              u8);
 /* 1B06B0 */ void gm_801B06B0(CSSData*, u8, s8, s8, s8, u8, u8, u8);
 /* 1B0730 */ void gm_801B0730(CSSData*, s8*, s8*, u8*, s8*, u8*);
 /* 1B07B4 */ void gm_801B07B4(CSSData*, s8, s8, s8, u8, u8, u8);
@@ -101,95 +99,5 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B2790 */ void gm_801B2790(MinorScene*);
 /* 1B2AF8 */ void gm_801B2AF8(MinorScene*);
 /* 1B2B7C */ void gm_801B2B7C_OnInit(void);
-/* 1B2BA4 */ UNK_RET gm_801B2BA4(UNK_PARAMS);
-/* 1B2D54 */ UNK_RET gm_801B2D54(UNK_PARAMS);
-/* 1B2F78 */ void gm_801B2F78_OnLoad(void);
-/* 1B34B8 */ void gm_801B34B8_OnInit(void);
-/* 1B3500 */ void gm_801B3500(MinorScene*);
-/* 1B3A34 */ void gm_801B3A34(MinorScene*);
-/* 1B3B40 */ void gm_801B3B40(MinorScene*);
-/* 1B3D44 */ void gm_801B3D44(MinorScene*);
-/* 1B3D84 */ void gm_801B3D84(MinorScene*);
-/* 1B3DD8 */ void gm_801B3DD8(MinorScene*);
-/* 1B3E44 */ void gm_801B3E44(MinorScene*);
-/* 1B3F18 */ void gm_801B3F18(MinorScene*);
-/* 1B3F40 */ void gm_801B3F40(MinorScene*);
-/* 1B4064 */ void gm_801B4064(MinorScene*);
-/* 1B4170 */ void gm_801B4170(MinorScene*);
-/* 1B4254 */ void gm_801B4254(MinorScene*);
-/* 1B4294 */ void gm_801B4294(MinorScene*);
-/* 1B42E8 */ void gm_801B42E8(MinorScene*);
-/* 1B4350 */ void gm_801B4350(MinorScene*);
-/* 1B4408 */ void gm_801B4408(MinorScene*);
-/* 1B4430 */ void gm_801B4430(MinorScene*);
-/* 1B44A0 */ void gm_801B44A0(MinorScene*);
-/* 1B45A4 */ void gm_801B45A4(MinorScene*);
-/* 1B461C */ void gm_801B461C(MinorScene*);
-/* 1B4684 */ void gm_801B4684(MinorScene*);
-/* 1B4768 */ void gm_801B4768(MinorScene*);
-/* 1B47FC */ void gm_801B47FC(MinorScene*);
-/* 1B4860 */ void gm_801B4860(MinorScene*);
-/* 1B4974 */ void gm_801B4974(MinorScene*);
-/* 1B4B28 */ void gm_801B4B28(MinorScene*);
-/* 1B4C5C */ void gm_801B4C5C(MinorScene*);
-/* 1B4D34 */ void gm_801B4D34(MinorScene*);
-/* 1B4DAC */ void gm_801B4DAC(MinorScene*);
-/* 1B4E58 */ void gm_801B4E58(MinorScene*);
-/* 1B4EB8 */ void gm_801B4EB8(MinorScene*);
-/* 1B4F44 */ void gm_801B4F44(MinorScene*);
-/* 1B4FCC */ void gm_801B4FCC(MinorScene*);
-/* 1B5078 */ void gm_801B5078(MinorScene*);
-/* 1B50C4 */ void gm_801B50C4(MinorScene*);
-/* 1B518C */ void gm_801B518C(MinorScene*);
-/* 1B51CC */ void gm_801B51CC_OnInit(void);
-/* 1B5214 */ void gm_801B5214_OnLoad(void);
-/* 1B5324 */ UNK_RET gm_801B5324(UNK_PARAMS);
-/* 1B5624 */ void gm_801B5624(MinorScene*);
-/* 1B59AC */ void gm_801B59AC(MinorScene*);
-/* 1B5AA8 */ void fn_801B5AA8(int);
-/* 1B5ACC */ void gm_801B5ACC(MinorScene*);
-/* 1B5E7C */ void gm_801B5E7C(MinorScene*);
-/* 1B5EB4 */ void gm_801B5EB4(MinorScene*);
-/* 1B5EE4 */ void gm_801B5EE4(MinorScene*);
-/* 1B5F50 */ void gm_801B5F50(MinorScene*);
-/* 1B5FB4 */ void gm_801B5FB4(MinorScene*);
-/* 1B607C */ void gm_801B607C(MinorScene*);
-/* 1B60A4 */ void gm_801B60A4_OnLoad(void);
-/* 1B62D8 */ void gm_801B62D8_OnInit(void);
-/* 1B6320 */ UNK_T gm_801B6320(void);
-/* 1B632C */ void gm_801B632C(MinorScene*);
-/* 1B63C4 */ void gm_801B63C4(MinorScene*);
-/* 1B6428 */ void gm_801B6428(MinorScene*);
-/* 1B65D4 */ void gm_801B65D4(MinorScene*);
-/* 1B67E8 */ void gm_801B67E8_OnInit(void);
-/* 1B6808 */ void gm_801B6808_OnLoad(void);
-/* 1B6834 */ UNK_RET gm_801B6834(UNK_PARAMS);
-/* 1B685C */ UNK_RET gm_801B685C(UNK_PARAMS);
-/* 1B688C */ UNK_RET gm_801B688C(UNK_PARAMS);
-/* 1B69C0 */ void gm_801B69C0(StartMeleeData*);
-/* 1B6AD8 */ void gm_801B6AD8(MinorScene*);
-/* 1B6B70 */ void gm_801B6B70(MinorScene*);
-/* 1B6BE8 */ void gm_801B6BE8(MinorScene*);
-/* 1B6F44 */ void gm_801B6F44(MinorScene*);
-/* 1B7044 */ void gm_801B7044(MinorScene*);
-/* 1B70DC */ void gm_801B70DC(MinorScene*);
-/* 1B7154 */ void gm_801B7154(MinorScene*);
-/* 1B74F0 */ void gm_801B74F0(MinorScene*);
-/* 1B75F0 */ void gm_801B75F0(MinorScene*);
-/* 1B7688 */ void gm_801B7688(MinorScene*);
-/* 1B7700 */ void gm_801B7700(MinorScene*);
-/* 1B7AA0 */ void gm_801B7AA0(MinorScene*);
-/* 1B7B74 */ void gm_801B7B74(MinorScene*);
-/* 1B7C0C */ void gm_801B7C0C(MinorScene*);
-/* 1B7C84 */ void gm_801B7C84(MinorScene*);
-/* 1B8024 */ void gm_801B8024(MinorScene*);
-/* 1B8110 */ void gm_801B8110(MinorScene*);
-/* 1B81A8 */ void gm_801B81A8(MinorScene*);
-/* 1B8220 */ void gm_801B8220(MinorScene*);
-/* 1B8580 */ void gm_801B8580(MinorScene*);
-/* 1B863C */ void gm_801B863C(MinorScene*);
-/* 1B86D4 */ void gm_801B86D4(MinorScene*);
-/* 1B874C */ void gm_801B874C(MinorScene*);
-/* 1B8AF8 */ void gm_801B8AF8(MinorScene*);
 
 #endif
