@@ -14,7 +14,8 @@ struct gm_801B0FF8_arg0_x10_t {
 };
 
 struct gm_8049E548_t {
-    /* 0x00 */ char pad_0[8];
+    /* 0x00 */ char c_kind[4];
+    /* 0x04 */ u8 x4[4];
     /* 0x08 */ s8 unk_8;
     /* 0x09 */ u8 unk_9;
     /* 0x0A */ s8 unk_A;

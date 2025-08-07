@@ -961,7 +961,7 @@ u8 gm_801677F0(void)
 void gm_8016795C(struct PlayerInitData* arg0)
 {
     memzero(arg0, sizeof(*arg0));
-    arg0->c_kind = 0x21;
+    arg0->c_kind = CHKIND_NONE;
     arg0->slot_type = Gm_PKind_NA;
     arg0->stocks = 0;
     arg0->color = 0;

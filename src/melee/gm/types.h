@@ -380,7 +380,7 @@ struct lbl_8046B6A0_t {
     /* 0x0030 */ u8 unk_30;
     /* 0x0034 */ f32 unk_34;
     /* 0x0038 */ struct {
-        u8 x0;
+        u8 x0; ///< CharacterKind
         u8 x1;
         u8 slot_type;
         s8 spawn_point;
