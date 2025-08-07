@@ -1,7 +1,12 @@
 #include "gmtou.h"
+
 #include "gm/gmtou.static.h"
+
 #include "placeholder.h"
+
 #include "mn/mnmain.h"
+
+#include <melee/pl/forward.h>
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -44,13 +49,16 @@ void gm_8019B8C4_OnEnter(void* arg0)
     lbl_804D6680[0] = 0;
     lbl_804D6680[2] = 0;
     gm_8018F634();
-    lbl_804D6660 = lbArchive_80016DBC("GmTou1p", &lbl_804D666C, "ScGamTour_scene_data", 0);
+    lbl_804D6660 = lbArchive_80016DBC("GmTou1p", &lbl_804D666C,
+                                      "ScGamTour_scene_data", 0);
     lbl_804D6638 = lbArchive_80016DBC(
         "TmBox.dat", lbl_804771B8->box2, "tournament_box2_array",
         lbl_804771B8->box3, "tournament_box3_array", lbl_804771B8->box4,
         "tournament_box4_array", 0);
-    lbl_804D6664 = lbArchive_80016DBC("GmTou3p", &lbl_804D6670, "ScGamTour_scene_data", 0);
-    lbl_804D6668 = lbArchive_80016DBC("GmTou4p", &lbl_804D6674, "ScGamTour_scene_data", 0);
+    lbl_804D6664 = lbArchive_80016DBC("GmTou3p", &lbl_804D6670,
+                                      "ScGamTour_scene_data", 0);
+    lbl_804D6668 = lbArchive_80016DBC("GmTou4p", &lbl_804D6674,
+                                      "ScGamTour_scene_data", 0);
     HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
     if (HSD_Randi(2) != 0) {
         lbAudioAx_80023F28(0x5D);
@@ -206,7 +214,7 @@ void fn_8019CA38(HSD_GObj* gobj)
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
-    if ((u32)lbl_80479A58.x6[idx] < 600) {
+    if ((u32) lbl_80479A58.x6[idx] < 600) {
         lbl_80479A58.x6[idx]++;
     } else {
         lbl_80479A58.x6[idx] = 0;
@@ -267,7 +275,7 @@ void fn_8019CDBC(HSD_GObj* gobj)
     sp24 = (5.999997f * temp_r27) - 21.5f;
     mn_8022F410(&sp28, 0.4f, &sp24);
 
-    switch (mn_8022F410(&sp28, 0.2f, &sp24)) {                              /* irregular */
+    switch (mn_8022F410(&sp28, 0.2f, &sp24)) { /* irregular */
     case 1:
         fn_8018FDC4(jobj, sp28, 19.5f, -6.0f);
         HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -197.0f);
@@ -285,7 +293,6 @@ void fn_8019CDBC(HSD_GObj* gobj)
         HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -172.0f);
         tmd->x534[idx]->x8 = 0.01f;
         break;
-
     }
     if (tmd->x37[idx].x4 != 0) {
         fn_8019044C(jobj, 201.0f);
@@ -365,8 +372,7 @@ void fn_8019EE80(TmVsData* arg0)
     s32 i;
 
     game_cache = &lbDvd_8001822C()->game_cache;
-    for (i = 0; i < gm_8018F634()->x30; i++)
-    {
+    for (i = 0; i < gm_8018F634()->x30; i++) {
         game_cache->entries[i].char_id = arg0->char_id[i];
         game_cache->entries[i].color = arg0->color[i];
     }
@@ -385,7 +391,7 @@ void fn_8019EF08(TmVsData* arg0)
 
     game_cache = &lbDvd_8001822C()->game_cache;
     for (i = 0; i < 4; i++) {
-        if (arg0->slot_type[i] != 3) {
+        if (arg0->slot_type[i] != Gm_PKind_NA) {
             game_cache->entries[i].char_id = arg0->char_id[i];
             game_cache->entries[i].color = arg0->color[i];
         }

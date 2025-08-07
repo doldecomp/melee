@@ -5,6 +5,8 @@
 #include "gmmovieend.h"
 #include "gmvsdata.h"
 
+#include <melee/pl/forward.h>
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
@@ -311,7 +313,7 @@ static inline void player_standings_inline(StartMeleeData* arg0,
         arg0->players[i].stocks = 1;
         arg0->players[i].x12 = 0x12C;
     } else {
-        arg0->players[i].slot_type = 3;
+        arg0->players[i].slot_type = Gm_PKind_NA;
     }
 }
 
@@ -346,7 +348,7 @@ void gm_801B0474(StartMeleeData* arg0, MatchEnd* arg1)
     arg0->rules.x2_5 = false;
 
     for (i = 0; i < 6; i++) {
-        if (arg0->players[i].slot_type != 3) {
+        if (arg0->players[i].slot_type != Gm_PKind_NA) {
             var_r7 = gm_801B0474_inline(arg1, i);
             if (arg1->is_teams == 1) {
                 player_standings_inline(
@@ -375,7 +377,7 @@ void gm_801B05F4(PlayerInitData* arg0, int arg1)
 
 void gm_801B0620(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
 {
-    arg0->slot_type = 0;
+    arg0->slot_type = Gm_PKind_Human;
     arg0->c_kind = arg1;
     arg0->color = arg2;
     arg0->stocks = arg3;
@@ -384,7 +386,7 @@ void gm_801B0620(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
 
 void gm_801B0664(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
 {
-    arg0->slot_type = 1;
+    arg0->slot_type = Gm_PKind_Cpu;
     arg0->c_kind = arg1;
     arg0->color = arg2;
     arg0->stocks = arg3;
@@ -1282,10 +1284,10 @@ void gm_801B13B8(MinorScene* arg0)
     temp_r28->players[2].c_kind = 6;
     temp_r28->players[3].c_kind = 6;
 
-    temp_r28->players[0].slot_type = 0;
-    temp_r28->players[1].slot_type = 0;
-    temp_r28->players[2].slot_type = 3;
-    temp_r28->players[3].slot_type = 3;
+    temp_r28->players[0].slot_type = Gm_PKind_Human;
+    temp_r28->players[1].slot_type = Gm_PKind_Human;
+    temp_r28->players[2].slot_type = Gm_PKind_NA;
+    temp_r28->players[3].slot_type = Gm_PKind_NA;
 
     temp_r28->players[0].xC_b0 = false;
     temp_r28->players[1].xC_b0 = false;
@@ -1328,7 +1330,7 @@ void gm_801B15C8(MinorScene* arg0)
     gm_801A5AF0(arg0, 4, 3);
     mei = gm_801A4284(arg0);
     for (i = 0; i < 6; i++) {
-        if (mei->match_end.player_standings[i].slot_type != 3) {
+        if (mei->match_end.player_standings[i].slot_type != Gm_PKind_NA) {
             gm_80162A98(mei->match_end.player_standings[i].x20);
             gm_80162B4C(mei->match_end.player_standings[i].self_destructs);
             gm_80162A4C(mei->match_end.player_standings[i].x44);
@@ -1571,7 +1573,7 @@ void gm_801B1F70(MinorScene* arg0)
                     vs->data.players[i].color, 1,
                     vs->data.players[i].slot - 1);
         if (i - 1 != 0) {
-            data->players[i].slot_type = 3;
+            data->players[i].slot_type = Gm_PKind_NA;
         }
     }
 

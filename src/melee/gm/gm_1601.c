@@ -1,6 +1,7 @@
+#include "gm_1601.h"
+
 #include "gm_1601.static.h"
 
-#include "gm_1601.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "runtime.h"
@@ -276,28 +277,28 @@ u32 gm_80160854(u8 slot, u8 team, u8 is_teams, u8 slot_type)
     if (is_teams != 0) {
         switch (team) { /* switch 1; irregular */
         case 0:         /* switch 1 */
-            if (slot_type == 0) {
+            if (slot_type == Gm_PKind_Human) {
                 color_idx = 0;
             } else {
                 color_idx = 5;
             }
             return color_idx;
         case 1: /* switch 1 */
-            if (slot_type == 0) {
+            if (slot_type == Gm_PKind_Human) {
                 color_idx = 1;
             } else {
                 color_idx = 6;
             }
             return color_idx;
         case 2: /* switch 1 */
-            if (slot_type == 0) {
+            if (slot_type == Gm_PKind_Human) {
                 color_idx = 3;
             } else {
                 color_idx = 8;
             }
             return color_idx;
         case 3: /* switch 1 */
-            if (slot_type == 0) {
+            if (slot_type == Gm_PKind_Human) {
                 color_idx = 2;
             } else {
                 color_idx = 7;
@@ -307,7 +308,7 @@ u32 gm_80160854(u8 slot, u8 team, u8 is_teams, u8 slot_type)
             return 4U;
         }
     } else {
-        if (slot_type != 0) {
+        if (slot_type != Gm_PKind_Human) {
             return 4U;
         }
         switch (slot) { /* irregular */
@@ -787,7 +788,7 @@ u8 fn_80165418(MatchEnd* match_end)
     u8 winner = 0;
     s32 i;
     for (i = 0; i < 4; i++) {
-        if (match_end->player_standings[i].slot_type != 3 &&
+        if (match_end->player_standings[i].slot_type != Gm_PKind_NA &&
             match_end->player_standings[i].is_small_loser == 0)
         {
             winner = i;
@@ -961,7 +962,7 @@ void gm_8016795C(struct PlayerInitData* arg0)
 {
     memzero(arg0, sizeof(*arg0));
     arg0->c_kind = 0x21;
-    arg0->slot_type = 3;
+    arg0->slot_type = Gm_PKind_NA;
     arg0->stocks = 0;
     arg0->color = 0;
     arg0->slot = 0;
@@ -1319,8 +1320,8 @@ int gm_801694A0(HSD_GObj* arg0)
     int count = lbl_8046B488.x7;
     PAD_STACK(8);
     for (i = 0; i < 6; i++) {
-        if (Player_GetPlayerSlotType(i) != 3 && Player_GetFlagsBit1(i) &&
-            Player_GetPlayerState(i) == 2)
+        if (Player_GetPlayerSlotType(i) != Gm_PKind_NA &&
+            Player_GetFlagsBit1(i) && Player_GetPlayerState(i) == 2)
         {
             count++;
         }
@@ -1377,7 +1378,7 @@ void gm_8016A164(void)
     fn_8016B138();
 
     for (i = 1; i < 6; i++) {
-        Player_SetSlottype(i, 3);
+        Player_SetSlottype(i, Gm_PKind_NA);
         Player_UnsetFlagsBit1(i);
     }
 }

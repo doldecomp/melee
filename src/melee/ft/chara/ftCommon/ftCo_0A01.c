@@ -263,7 +263,7 @@ void ftCo_800A0DA4(Fighter* fp)
     var_f29 = 0.0f;
     var_f31 = 0.0f;
     var_f30 = 0.0f;
-    while (var_r30 < (int) fp->hurt_capsules_len) {
+    while (var_r30 < fp->hurt_capsules_len) {
         hurt = var_r31->hurt_capsules;
         lbColl_800083C4(&hurt->capsule);
         temp_f5 = fp->cur_pos.x;
@@ -501,10 +501,10 @@ bool ftCo_800A1F98(int x, float y)
 
 bool ftCo_800A2040(Fighter* fp)
 {
-    if (Player_8003248C(fp->player_id, fp->x221F_b4) != 1) {
+    if (Player_8003248C(fp->player_id, fp->x221F_b4) != Gm_PKind_Cpu) {
         return false;
     }
-    if ((signed) fp->x1A88.xC == 5) {
+    if (fp->x1A88.xC == 5) {
         return false;
     }
     return true;

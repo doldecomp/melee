@@ -29,27 +29,20 @@ IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^<platform\.h>$'
     Priority: 1
-    SortPriority: -7
   - Regex: '^<placeholder\.h>$'
     Priority: 1
-    SortPriority: -6
   - Regex: '^"forward\.h"$'
     Priority: 2
-    SortPriority: -5
   - Regex: '^".*/forward\.h"$'
     Priority: 2
-    SortPriority: -4
   - Regex: '^<dolphin(/.*)?/forward\.h>$'
     Priority: 2
-    SortPriority: -2
   - Regex: '^<(sysdolphin/)?baselib(/.*)?/forward\.h>$'
     Priority: 2
-    SortPriority: -1
   - Regex: '^".*\.static\.h"$'
     Priority: 1
   - Regex: '^<(.*/)?forward\.h>$'
     Priority: 2
-    SortPriority: -3
   - Regex: '^<[^/]*>$'
     Priority: 6
     SortPriority: 3

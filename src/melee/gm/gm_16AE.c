@@ -1,6 +1,7 @@
+#include "gm_16AE.h"
+
 #include "gm_16AE.static.h"
 
-#include "gm_16AE.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 
@@ -1227,7 +1228,8 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
                 arg0->FighterMatchInfo[i].x1--;
                 temp_r0_2 = arg0->FighterMatchInfo[i].x1;
                 if (temp_r0_2 == 0x50) {
-                    if (arg0->FighterMatchInfo[i].slot_type == 0) {
+                    if (arg0->FighterMatchInfo[i].slot_type == Gm_PKind_Human)
+                    {
                         var_r3 = arg0->unk_20[i];
                     } else {
                         var_r3 = 0x7C865;
@@ -1510,7 +1512,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetPlayerId(arg0, arg1->slot - 1);
     }
-    if (arg1->slot_type == 0 &&
+    if (arg1->slot_type == Gm_PKind_Human &&
         (HSD_PadCopyStatus[(u8) Player_GetPlayerId(arg0)].button &
          HSD_PAD_A) &&
         (Player_GetPlayerCharacter(arg0) == CKIND_ZELDA ||
@@ -1893,7 +1895,7 @@ bool fn_8016E5C0(StartMeleeData* arg0)
     var_r4 = false;
     var_r6 = false;
     for (i = 0; i < 6; i++) {
-        if (arg0->players[i].slot_type == 0) {
+        if (arg0->players[i].slot_type == Gm_PKind_Human) {
             var_r4 = true;
             if (!(HSD_PadCopyStatus[(u8) i].button & (HSD_PAD_L | HSD_PAD_R)))
             {
@@ -2186,7 +2188,7 @@ void gm_8016F088(StartMeleeData* arg0)
     int i;
 
     for (i = 0; i < 6; i++) {
-        if (arg0->players[i].slot_type == 0 && i < 4) {
+        if (arg0->players[i].slot_type == Gm_PKind_Human && i < 4) {
             temp_r3 = arg0->players[i].slot;
             if (temp_r3 == 0) {
                 var_r3 = i;
