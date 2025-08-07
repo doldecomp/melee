@@ -1318,7 +1318,7 @@ struct Fighter {
     /* fp+119D */ u8 grabber_unk1;
     /* fp+119E */ u8 hurt_capsules_len;
     /* fp+119F */ u8 x119F;
-    /* fp+11A0 */ HurtCapsule hurt_capsules[15];
+    /* fp+11A0 */ FighterHurtCapsule hurt_capsules[15];
     /* fp+1614 */ UNK_T x1614;
     /* fp+1618 */ u8 filler_x1618[0x166C - 0x1618];
     /* fp+166C */ u8 x166C;

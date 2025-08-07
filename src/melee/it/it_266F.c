@@ -1711,7 +1711,7 @@ bool it_8026ECE0(Item_GObj* gobj, u32 arg1)
             chk = true;
         }
         if (ip->xDAA_flag.b3 && ip->xDD0_flag.b0 &&
-            (lb_800149E0(&ip->xACC_itemHurtbox[1].b_pos.z, arg1) != false))
+            (lb_800149E0(&ip->xB54.x, arg1) != false))
         {
             chk = true;
         }

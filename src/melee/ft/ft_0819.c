@@ -56,7 +56,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     {
         if (it_8026BC68(cur)) {
             Item* ip = GET_ITEM(cur);
-            if (lb_80014638(&fp->dmg.x1930, &ip->xACC_itemHurtbox[1].b_pos.z))
+            if (lb_80014638(&fp->dmg.x1930, &ip->xB54))
             {
                 ip->xCD0 = ip->pos.x > fp->cur_pos.x ? -1.0f : +1.0f;
                 ip->xCFC = gobj;

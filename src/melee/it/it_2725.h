@@ -82,7 +82,7 @@
 /* 274C78 */ bool it_80274C78(Item_GObj*);
 /* 274C88 */ void it_80274C88(Item_GObj*);
 /* 274CAC */ void it_80274CAC(Item_GObj*);
-/* 274D04 */ void it_80274D04(Item_GObj*, Vec3*);
+/* 274D04 */ void it_80274D04(Item_GObj*, Vec2*);
 /* 274D6C */ void it_80274D6C(Item_GObj*);
 /* 274DAC */ void it_80274DAC(Item_GObj*);
 /* 274DFC */ void it_80274DFC(Item_GObj*);
