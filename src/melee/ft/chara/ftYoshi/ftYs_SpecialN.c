@@ -146,9 +146,31 @@ void fn_8012D0A0(Fighter_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-/// #fn_8012D128
+void fn_8012D128(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
 
-/// #fn_8012D1AC
+    u8 _[8];
+
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, 0x15F, 0x0C4C509AU, fp->cur_anim_frame, 0,
+                              1, NULL);
+    ftCommon_8007E2D0((Fighter*) gobj->user_data, 4, fn_8012D0A0, fn_8012D004,
+                      ftCo_800BBB8C);
+}
+
+void fn_8012D1AC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    u8 _[8];
+
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C509AU, fp->cur_anim_frame,
+                              0, 1, NULL);
+    ftCommon_8007E2D0((Fighter*) gobj->user_data, 4, fn_8012CF7C, fn_8012CEE0,
+                      ftCo_800BBB8C);
+}
 
 void fn_8012D230(Fighter_GObj* gobj)
 {
