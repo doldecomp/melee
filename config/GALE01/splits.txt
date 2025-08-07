@@ -1900,12 +1900,37 @@ melee/gm/gm_1AED.c:
 	.sdata2     start:0x804DABF8 end:0x804DAC18
 
 melee/gm/gm_1B03.c:
-	.text       start:0x801B0348 end:0x801B8BB4
-	.data       start:0x803DD6A0 end:0x803DEEB0
-	.bss        start:0x80480DC8 end:0x804975F8
-	.sdata      start:0x804D4310 end:0x804D4330
-	.sbss       start:0x804D6878 end:0x804D68F8
-	.sdata2     start:0x804DAC18 end:0x804DAC38
+	.text       start:0x801B0348 end:0x801B2BA4
+	.data       start:0x803DD6A0 end:0x803DDC58
+	.bss        start:0x80480DC8 end:0x80490880
+	.sdata      start:0x804D4310 end:0x804D4318
+	.sbss       start:0x804D6878 end:0x804D68D0
+
+melee/gm/gmclassic.c:
+	.text       start:0x801B2BA4 end:0x801B3F40
+	.data       start:0x803DDC58 end:0x803DE1B8
+	.bss        start:0x80490880 end:0x804908A0
+	.sdata      start:0x804D4318 end:0x804D4330
+	.sbss       start:0x804D68D0 end:0x804D68D8
+
+melee/gm/gmadventure.c:
+	.text       start:0x801B3F40 end:0x801B5324
+	.data       start:0x803DE1B8 end:0x803DE930
+	.bss        start:0x80490910 end:0x80490940
+	.sbss       start:0x804D68D8 end:0x804D68E8
+	.sdata2     start:0x804DAC18 end:0x804DAC30
+
+melee/gm/gmallstar.c:
+	.text       start:0x801B5324 end:0x801B6320
+	.data       start:0x803DE930 end:0x803DECB8
+	.bss        start:0x80490940 end:0x80490960
+
+melee/gm/gmmultiman.c:
+	.text       start:0x801B6320 end:0x801B8BB4
+	.data       start:0x803DECB8 end:0x803DEEB0
+	.bss        start:0x80490960 end:0x804975F8
+	.sbss       start:0x804D68E8 end:0x804D68F8
+	.sdata2     start:0x804DAC30 end:0x804DAC38
 
 melee/gm/gmsupersudden.c:
 	.text       start:0x801B8BB4 end:0x801B8DA8
