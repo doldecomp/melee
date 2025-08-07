@@ -166,7 +166,7 @@ bool Player_8003219C(int slot);
 bool Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
 CharacterKind Player_GetPlayerCharacter(int slot);
-void Player_SetPlayerCharacter(s32 slot, s32 value);
+void Player_SetPlayerCharacter(s32 slot, CharacterKind value);
 Gm_PKind Player_GetPlayerSlotType(s32 slot);
 Gm_PKind Player_8003248C(s32 slot, bool arg1);
 void Player_SetSlottype(s32 slot, Gm_PKind value);

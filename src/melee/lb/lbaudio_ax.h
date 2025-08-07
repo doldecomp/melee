@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include <baselib/forward.h>
+#include <melee/ft/forward.h>
+#include <melee/gr/forward.h>
 
 #include <baselib/gobj.h>
-#include <melee/gr/forward.h>
 
 /// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1
@@ -87,7 +88,7 @@
 /* 0269AC */ UNK_RET fn_800269AC(UNK_PARAMS);
 /* 026C04 */ UNK_RET fn_80026C04(UNK_PARAMS);
 /* 026E58 */ bool fn_80026E58(int);
-/* 026E84 */ u64 lbAudioAx_80026E84(int);
+/* 026E84 */ u64 lbAudioAx_80026E84(CharacterKind);
 /* 026EBC */ u64 lbAudioAx_80026EBC(InternalStageId);
 /* 026F2C */ u64 lbAudioAx_80026F2C(s32);
 /* 02702C */ void lbAudioAx_8002702C(s32, u64);

@@ -375,19 +375,19 @@ void gm_801B05F4(PlayerInitData* arg0, int arg1)
     arg0->team = arg1;
 }
 
-void gm_801B0620(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
+void gm_801B0620(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
 {
     arg0->slot_type = Gm_PKind_Human;
-    arg0->c_kind = arg1;
+    arg0->c_kind = c_kind;
     arg0->color = arg2;
     arg0->stocks = arg3;
     gm_801B05F4(arg0, arg4);
 }
 
-void gm_801B0664(PlayerInitData* arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4)
+void gm_801B0664(PlayerInitData* arg0, u8 c_kind, u8 arg2, u8 arg3, u8 arg4)
 {
     arg0->slot_type = Gm_PKind_Cpu;
-    arg0->c_kind = arg1;
+    arg0->c_kind = c_kind;
     arg0->color = arg2;
     arg0->stocks = arg3;
     gm_801B05F4(arg0, arg4);

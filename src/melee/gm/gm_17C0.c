@@ -67,7 +67,7 @@ void fn_8017C0C8(void)
     sp8.x18 = Player_GetAttackRatio(2);
     sp8.x1C = Player_GetUnk50(2);
     sp8.color = 0;
-    sp8.c_kind = 0x1E;
+    sp8.c_kind = CKIND_CREZYH;
     sp8.team = 4;
     sp8.xC_b7 = true;
     sp8.x14 = lbl_804706C0.xC;

@@ -423,7 +423,7 @@ CharacterKind Player_GetPlayerCharacter(int slot)
     return player->player_character;
 }
 
-void Player_SetPlayerCharacter(s32 slot, s32 value)
+void Player_SetPlayerCharacter(s32 slot, CharacterKind value)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
