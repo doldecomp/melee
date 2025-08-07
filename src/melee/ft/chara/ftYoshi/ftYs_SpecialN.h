@@ -63,11 +63,11 @@
 /* 12DED8 */ void ftYs_SpecialAirN2_0_Coll(Fighter_GObj* gobj);
 /* 12DF18 */ void ftYs_SpecialS_8012DF18(Fighter_GObj* gobj);
 /* 12DF8C */ UNK_RET ftYs_SpecialS_8012DF8C(UNK_PARAMS);
-/* 12E110 */ UNK_RET fn_8012E110(UNK_PARAMS);
+/* 12E110 */ void fn_8012E110(HSD_GObj* gobj);
 /* 12E270 */ void ftYs_SpecialS_8012E270(Fighter_GObj* gobj);
 /* 12E2C4 */ void ftYs_SpecialHi_Enter(Fighter_GObj* gobj);
 /* 12E33C */ void ftYs_SpecialAirHi_Enter(Fighter_GObj* gobj);
-/* 12E3B4 */ UNK_RET fn_8012E3B4(UNK_PARAMS);
+/* 12E3B4 */ void fn_8012E3B4(Fighter_GObj* gobj);
 /* 12E44C */ void fn_8012E44C(Fighter_GObj* gobj);
 /* 12E4DC */ void ftYs_SpecialHi_Anim(Fighter_GObj* gobj);
 /* 12E538 */ void ftYs_SpecialAirHi_Anim(Fighter_GObj* gobj);
