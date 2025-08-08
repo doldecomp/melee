@@ -5,6 +5,7 @@
 #include <math_ppc.h>
 #include <dolphin/gx.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
 #include <melee/cm/camera.h>
@@ -14,6 +15,7 @@
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/types.h>
+#include <melee/gm/gmmain_lib.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
@@ -719,9 +721,81 @@ bool gm_80182510(void)
 
 /// #gm_80182DF0
 
-/// #fn_80182F40
-
 extern u8 lbl_804D65E8;
+
+void fn_80182F40(HSD_GObj* unused)
+{
+    int i;
+    int temp_r31;
+    int temp_r31_2;
+
+    if (gm_801A36A0(4) & 0x1100) {
+        lbAudioAx_80024C84();
+        lbAudioAx_80023694();
+        lbAudioAx_80024030(1);
+        gm_801A4B60();
+        gm_801A42E8(0);
+        gm_801A42D4();
+        return;
+    }
+    if (gm_801A4BA8() >= 0x4B0) {
+        lbAudioAx_80024C84();
+        lbAudioAx_80023694();
+        if (gm_801A42C4() == 3 && gmMainLib_8015DB00() % 2 == 0) {
+            gmMainLib_8015DB18();
+            gm_SetScenePendingMinor(0);
+        }
+        gm_801A4B60();
+        return;
+    }
+    switch (lbl_804D65E8) {
+    case 0:
+        if (gm_801A4BA8() == 0x190) {
+            lbl_804D65E8 = 1;
+            temp_r31 = gm_801BF6D8();
+            Camera_8002EEC8(60.0F);
+            Camera_8002E6FC(temp_r31);
+            Camera_8002ED9C(30.0F);
+            Camera_8002EC7C(0.017453292F * (HSD_Randi(0x47) - 0x23));
+            Camera_8002EB5C(0.017453292F * HSD_Randi(0x10));
+            for (i = 0; i < 4; i++) {
+                if (i != gm_801BF6D8()) {
+                    Player_SetPlayerAndEntityCpuLevel(i, 2);
+                }
+                Player_SetMoreFlagsBit4(i, 1);
+            }
+        }
+        break;
+    case 1:
+        if (gm_801A4BA8() == 0x280 || Player_800368F8(gm_801BF6D8()) == 0) {
+            lbl_804D65E8 = 2;
+            temp_r31_2 = gm_801BF6F8();
+            Camera_8002EEC8(60.0F);
+            Camera_8002E6FC(temp_r31_2);
+            Camera_8002ED9C(30.0F);
+            Camera_8002EC7C(0.017453292F * (HSD_Randi(0x47) - 0x23));
+            Camera_8002EB5C(0.017453292F * HSD_Randi(0x10));
+            Player_SetPlayerAndEntityCpuLevel(gm_801BF6F8(), 9);
+            for (i = 0; i < 4; i++) {
+                if (i != gm_801BF6F8()) {
+                    Player_SetPlayerAndEntityCpuLevel(i, 2);
+                }
+            }
+        }
+        break;
+    case 2:
+        if (gm_801A4BA8() == 0x370 || Player_800368F8(gm_801BF6F8()) == 0) {
+            Camera_8002F474();
+            for (i = 0; i < 4; i++) {
+                Player_SetPlayerAndEntityCpuLevel(i, 9);
+                Player_SetMoreFlagsBit4(i, 0);
+            }
+        }
+        break;
+    case 3:
+        break;
+    }
+}
 
 void gm_80183218(void)
 {
