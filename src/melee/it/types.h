@@ -309,7 +309,7 @@ struct Item {
     u8 xB69;
     u8 xB6A;
     u8 xB6B;
-    struct {
+    struct xB6C_t {
         Vec3 xB6C;
         // u32 xB6C; // struct DynamicsData* for DynamicsDesc->data?
         // u32 xB70; // int for DynamicsDesc->count?
