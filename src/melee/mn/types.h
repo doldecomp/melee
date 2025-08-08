@@ -78,7 +78,7 @@ struct PlayerInitData {
     /*0x0F*/ u8 cpu_level; // CPU level
     /*0x10*/ u16 x10;
     /*0x12*/ u16 x12;
-    /*0x14*/ u16 x14;
+    /*0x14*/ u16 hp;    ///< hit points, for stamina mode
     /*0x18*/ float x18; // offense ratio
     /*0x1C*/ float x1C; // defense ratio
     /*0x20*/ float x20;

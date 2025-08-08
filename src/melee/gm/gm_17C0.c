@@ -44,7 +44,7 @@ static struct lbl_804706C0_t {
     int x0;
     int x4;
     int x8;
-    int xC;
+    int xC; // HP (stamina)
     int x10;
     int x14;
 } lbl_804706C0;
@@ -70,7 +70,7 @@ void fn_8017C0C8(void)
     sp8.c_kind = CKIND_CREZYH;
     sp8.team = 4;
     sp8.xC_b7 = true;
-    sp8.x14 = lbl_804706C0.xC;
+    sp8.hp = lbl_804706C0.xC;
     sp8.xD_b2 = true;
     sp8.xD_b0 = true;
     sp8.xD_b2 = true;

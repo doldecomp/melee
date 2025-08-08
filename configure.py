@@ -910,7 +910,7 @@ config.libs = [
             Object(Matching, "melee/gm/gmsupersudden.c"),
             Object(Matching, "melee/gm/gmtiny.c"),
             Object(Matching, "melee/gm/gmgiant.c"),
-            Object(NonMatching, "melee/gm/gmstamina.c"),
+            Object(Matching, "melee/gm/gmstamina.c"),
             Object(NonMatching, "melee/gm/gmhomerun.c"),
             Object(Matching, "melee/gm/gmfixedcamera.c"),
             Object(Matching, "melee/gm/gmsinglebutton.c"),
