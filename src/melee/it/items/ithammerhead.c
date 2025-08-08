@@ -24,21 +24,21 @@ void it_80299E24(Item_GObj* gobj) {}
 
 /// #it_80299E48
 
-/// #it_80299E9C
+/// #itHammerhead_UnkMotion2_Anim
 
-/// #it_80299F1C
+/// #itHammerhead_UnkMotion2_Phys
 
-/// #it_80299F68
+/// #itHammerhead_UnkMotion2_Coll
 
 /// #it_80299F94
 
 /// #it_80299FB4
 
-/// #it_8029A000
+/// #itHammerhead_UnkMotion3_Anim
 
-void it_8029A080(Item_GObj* gobj) {}
+void itHammerhead_UnkMotion3_Phys(Item_GObj* gobj) {}
 
-/// #it_8029A084
+/// #itHammerhead_UnkMotion3_Coll
 
 bool it_8029A0B0(Item_GObj* arg0)
 {

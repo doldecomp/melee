@@ -21,8 +21,8 @@
 #include <MSL/math.h>
 
 ItemStateTable it_803F67D0[] = {
-    { 0, it_8029C6F4, it_8029C9CC, it_8029C9EC },
-    { 1, it_8029C6F4, it_8029C9CC, it_8029C9EC },
+    { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys, itFoxlaser_UnkMotion1_Coll },
+    { 1, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys, itFoxlaser_UnkMotion1_Coll },
 };
 
 inline void* getFoxLaser(Item* item)
@@ -103,7 +103,7 @@ static inline f32 fabsf(f32 x)
     }
 }
 
-bool it_8029C6F4(Item_GObj* item_gobj)
+bool itFoxlaser_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Article* article;
     Item* item;
@@ -146,13 +146,13 @@ bool it_8029C6F4(Item_GObj* item_gobj)
     return it_80273130(item_gobj);
 }
 
-void it_8029C9CC(Item_GObj* item_gobj)
+void itFoxlaser_UnkMotion1_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xDD4_itemVar.foxlaser.pos = item->pos;
 }
 
-bool it_8029C9EC(Item_GObj* item_gobj)
+bool itFoxlaser_UnkMotion1_Coll(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     Vec3 pos = item->pos;

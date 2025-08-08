@@ -6,19 +6,19 @@
 
 /// #it_802C84A0
 
-/// #it_802C8540
+/// #itGamewatchchef_UnkMotion0_Anim
 
-/// #it_802C8690
+/// #itGamewatchchef_UnkMotion0_Phys
 
-/// #it_802C86D0
+/// #itGamewatchchef_UnkMotion0_Coll
 
 /// #it_802C875C
 
-/// #it_802C87B4
+/// #itGamewatchchef_UnkMotion1_Anim
 
-void it_802C8828(Item_GObj* gobj) {}
+void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_802C882C
+/// #itGamewatchchef_UnkMotion1_Coll
 
 /// #it_802C88E4
 

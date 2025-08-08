@@ -18,11 +18,11 @@
 
 /// #it_802ABA4C
 
-/// #it_802ABBB0
+/// #itNesspkthunderball_UnkMotion_Anim
 
-/// #it_802ABCDC
+/// #itNesspkthunderball_UnkMotion_Phys
 
-/// #it_802AC000
+/// #itNesspkthunderball_UnkMotion_Coll
 
 /// #it_802AC050
 

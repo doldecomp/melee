@@ -46,17 +46,17 @@
 
 /// #it_802ED92C
 
-/// #it_802EDCD0
+/// #itKyasarin_UnkMotion9_Anim
 
-/// #it_802EDD18
+/// #itKyasarin_UnkMotion9_Phys
 
-/// #it_802EDD34
+/// #itKyasarin_UnkMotion9_Coll
 
-/// #it_802EDD54
+/// #itKyasarin_UnkMotion10_Anim
 
-void it_802EDD9C(Item_GObj* gobj) {}
+void itKyasarin_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #it_802EDDA0
+/// #itKyasarin_UnkMotion10_Coll
 
 /// #it_802EDDC0
 

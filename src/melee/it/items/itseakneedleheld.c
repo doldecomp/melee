@@ -8,11 +8,11 @@
 
 /// #it_802B1AAC
 
-/// #it_802B1AD4
+/// #itSeakneedleheld_UnkMotion_Anim
 
-void it_802B1C34(Item_GObj* gobj) {}
+void itSeakneedleheld_UnkMotion_Phys(Item_GObj* gobj) {}
 
-bool it_802B1C38(Item_GObj* gobj)
+bool itSeakneedleheld_UnkMotion_Coll(Item_GObj* gobj)
 {
     return false;
 }

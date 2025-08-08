@@ -7,8 +7,8 @@
 #include "it/item.h"
 
 ItemStateTable it_803F6110[] = {
-    { 0, it_80293754, it_8029375C, it_80293798 },
-    { 0, it_802938AC, it_802938B4, it_80293964 },
+    { 0, itKinoko_UnkMotion0_Anim, itKinoko_UnkMotion0_Phys, itKinoko_UnkMotion0_Coll },
+    { 0, itKinoko_UnkMotion1_Anim, itKinoko_UnkMotion1_Phys, itKinoko_UnkMotion1_Coll },
 };
 
 HSD_AnimJoint* it_80293660(int idx)
@@ -48,12 +48,12 @@ void it_802936E4(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
 }
 
-bool it_80293754(Item_GObj* gobj)
+bool itKinoko_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8029375C(Item_GObj* gobj)
+void itKinoko_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     KinokoAttrs* attrs = it->xC4_article_data->x4_specialAttributes;
@@ -64,7 +64,7 @@ void it_8029375C(Item_GObj* gobj)
     }
 }
 
-bool it_80293798(Item_GObj* gobj)
+bool itKinoko_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     CollData* cd = &it->x378_itemColl;
@@ -99,12 +99,12 @@ void it_80293884(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
 }
 
-bool it_802938AC(Item_GObj* gobj)
+bool itKinoko_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802938B4(Item_GObj* gobj)
+void itKinoko_UnkMotion1_Phys(Item_GObj* gobj)
 {
     f32 vel;
     Item* it = GET_ITEM(gobj);
@@ -130,7 +130,7 @@ void it_802938B4(Item_GObj* gobj)
     }
 }
 
-bool it_80293964(Item_GObj* gobj)
+bool itKinoko_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     CollData* cd = &it->x378_itemColl;

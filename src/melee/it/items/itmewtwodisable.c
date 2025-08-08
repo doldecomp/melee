@@ -13,11 +13,11 @@
 
 /// #it_802C4BB8
 
-/// #it_802C4C08
+/// #itMewtwodisable_UnkMotion_Anim
 
-void it_802C4C3C(Item_GObj* gobj) {}
+void itMewtwodisable_UnkMotion_Phys(Item_GObj* gobj) {}
 
-/// #it_802C4C40
+/// #itMewtwodisable_UnkMotion_Coll
 
 bool it_802C4C90(Item_GObj* arg0)
 {

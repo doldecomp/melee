@@ -8,27 +8,27 @@
 
 /// #it_802D70A4
 
-/// #it_802D7120
+/// #itFushigibana_UnkMotion0_Anim
 
-/// #it_802D7144
+/// #itFushigibana_UnkMotion0_Phys
 
-/// #it_802D7164
+/// #itFushigibana_UnkMotion0_Coll
 
 /// #it_802D718C
 
-/// #it_802D71E8
+/// #itFushigibana_UnkMotion1_Anim
 
-void it_802D72E4(Item_GObj* gobj) {}
+void itFushigibana_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_802D72E8
+/// #itFushigibana_UnkMotion1_Coll
 
 /// #it_802D7328
 
-bool it_802D736C(Item_GObj* gobj)
+bool itFushigibana_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802D7374
+/// #itFushigibana_UnkMotion2_Phys
 
-/// #it_802D73A4
+/// #itFushigibana_UnkMotion2_Coll

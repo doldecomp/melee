@@ -2,7 +2,7 @@
 
 #include "it/inlines.h"
 
-/* 2B37F0 */ static void it_802B37F0(Item_GObj*);
+/* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
 /// #it_802B3368
 
@@ -17,21 +17,21 @@ void it_802B3544(Item_GObj* gobj)
 
 /// #it_802B3554
 
-/// #it_802B3680
+/// #itPikachutjoltground_UnkMotion0_Anim
 
-/// #it_802B36BC
+/// #itPikachutjoltground_UnkMotion1_Anim
 
-/// #it_802B3790
+/// #itPikachutjoltground_UnkMotion0_Phys
 
-void it_802B37F0(Item_GObj* gobj)
+void itPikachutjoltground_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-/// #it_802B3808
+/// #itPikachutjoltground_UnkMotion0_Coll
 
-/// #it_802B397C
+/// #itPikachutjoltground_UnkMotion1_Coll
 
 /// #it_802B3A94
 

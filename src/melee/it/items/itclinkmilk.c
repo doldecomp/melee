@@ -8,11 +8,11 @@
 
 /// #it_802C8C74
 
-/// #it_802C8CDC
+/// #itClinkmilk_UnkMotion1_Anim
 
-void it_802C8F20(Item_GObj* gobj) {}
+void itClinkmilk_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-bool it_802C8F24(Item_GObj* gobj)
+bool itClinkmilk_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
