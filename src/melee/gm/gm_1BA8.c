@@ -456,7 +456,7 @@ void gm_801BF6C8(s8 arg0)
     gm_8049E548.unk_8 = arg0;
 }
 
-u8 gm_801BF6D8(void)
+int gm_801BF6D8(void)
 {
     return gm_8049E548.unk_8;
 }
@@ -466,7 +466,7 @@ void gm_801BF6E8(s8 arg0)
     gm_8049E548.unk_9 = arg0;
 }
 
-u8 gm_801BF6F8(void)
+int gm_801BF6F8(void)
 {
     return gm_8049E548.unk_9;
 }
