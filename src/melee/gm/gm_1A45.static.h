@@ -11,8 +11,7 @@ struct gm_80479D58_t {
     /* 0x11 */ u8 unk_11;
     /* 0x12 */ u8 unk_12;
     /* 0x13 */ u8 unk_13;
-    /* 0x14 */ bool (*unk_14)(void);
-    /* 0x18 */ bool (*unk_18)(void);
+    /* 0x14 */ bool (*unk_14[2])(void);
     /* 0x1C */ char pad_1C[0x4]; /* maybe part of unk_18[0xA]? */
     /* 0x20 */ u64 unk_20;
     /* 0x28 */ u64 unk_28;

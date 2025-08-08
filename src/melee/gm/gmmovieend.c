@@ -149,7 +149,7 @@ void gm_801A64A8_OnFrame(void)
         gm_804D673C--;
         return;
     }
-    if (gmMainLib_8046B0F0.xC != 0 && lbMthp_8001F604() == 0) {
+    if (gmMainLib_8046B0F0.xC && lbMthp_8001F604() == 0) {
         var_r30 = true;
     }
     if (gm_804D6738 >= 0x1A4 || (gm_801A36A0(gm_801BF010()) & 0x1000) ||

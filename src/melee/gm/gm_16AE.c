@@ -577,7 +577,7 @@ void fn_8016B918(void)
 bool fn_8016BAF4(void)
 {
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
         if (pad->err == 0 && (pad->trigger & 0x1000)) {
             return true;
@@ -589,7 +589,7 @@ bool fn_8016BAF4(void)
 bool fn_8016BBB4(void)
 {
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
         if (pad->err == 0 && (pad->trigger & 0x10)) {
             return true;
@@ -629,7 +629,7 @@ int fn_8016BC74(void)
             }
         }
     } else {
-        for (var_r30 = 0; var_r30 < 4; var_r30++) {
+        for (var_r30 = 0; var_r30 < PAD_MAX_CONTROLLERS; var_r30++) {
             temp_r3_3 = &HSD_PadCopyStatus[(u8) var_r30];
             if (temp_r3_3->err == 0) {
                 if (g_debugLevel >= 3) {
@@ -668,7 +668,7 @@ int gm_8016BE80(void)
     int var_r29;
     PAD_STACK(0x10);
 
-    for (var_r30 = 0; var_r30 < 4; var_r30++) {
+    for (var_r30 = 0; var_r30 < PAD_MAX_CONTROLLERS; var_r30++) {
         temp_r3 = &HSD_PadCopyStatus[(u8) var_r30];
         if (temp_r3->err == 0) {
             if (g_debugLevel >= 3) {
@@ -1001,7 +1001,7 @@ void fn_8016C7F0(void)
         lbl_8046B6A0.x24C8.x50(lbl_8046B6A0.match_result);
     }
     HSD_PadRumbleRemoveAll();
-    for (var_r29 = 0; var_r29 < 4; var_r29++) {
+    for (var_r29 = 0; var_r29 < PAD_MAX_CONTROLLERS; var_r29++) {
         HSD_PadRumbleOn(var_r29);
     }
     if (!lbl_8046B6A0.x24C8.x1_5) {
@@ -1127,7 +1127,7 @@ static inline int fn_8016CBE8_inline(void)
     HSD_PadStatus* pad;
     bool var_r0;
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         pad = &HSD_PadCopyStatus[(u8) i];
         if (pad->err == 0) {
             if (g_debugLevel >= 3) {

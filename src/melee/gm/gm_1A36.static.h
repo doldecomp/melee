@@ -4,6 +4,8 @@
 
 #include <platform.h>
 
+#include <dolphin/pad.h>
+
 struct gm_controller_map {
     /* 00 */ u64 button;
     /* 08 */ u64 trigger;
@@ -15,7 +17,7 @@ struct gm_controller_map {
 };
 
 static struct controller_map {
-    struct gm_controller_map x0[5];
+    struct gm_controller_map x0[PAD_MAX_CONTROLLERS + 1];
     /* F0 */ void (*xF0)(int);
     /* F4 */ u16 xF4;
     /* F6 */ u8 xF6;

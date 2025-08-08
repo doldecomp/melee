@@ -53,7 +53,7 @@ void gm_801ACD8C_OnFrame(void)
 
     lbMthp_8001F578();
     lbMthp_8001F5C4();
-    if (gmMainLib_8046B0F0.xC != 0 && lbMthp_8001F604() == 0) {
+    if (gmMainLib_8046B0F0.xC && lbMthp_8001F604() == 0) {
         var_r31 = true;
     }
     if (lbMthp_8001F604() != 0 || (gm_801A36A0(4) & 0x1100) || var_r31) {
