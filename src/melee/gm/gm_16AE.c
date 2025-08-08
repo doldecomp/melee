@@ -91,7 +91,7 @@ u32 gm_8016AEDC(void)
     return lbl_8046B6A0.frame_count;
 }
 
-bool gm_8016AEEC(void)
+int gm_8016AEEC(void)
 {
     return lbl_8046B6A0.timer_seconds;
 }

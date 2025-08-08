@@ -1467,13 +1467,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     HSD_Text* temp_r3;
     HSD_Text* temp_r3_2;
     HSD_Text* temp_r4;
-    struct {
-        u8 x0_0 : 6;
-        u8 x0_6 : 1;
-        u8 x0_7 : 1;
-        u8 _[0xC];
-        u32 x10;
-    }* temp_r3_4;
+    StartMeleeRules* rules;
     s16 temp_r0;
     s32 temp_r29_2;
     s32 var_r27;
@@ -1536,7 +1530,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
     gp2->x1C->x4A = 1;
 
     for (i = 0; i < 4; i++) {
-        if (Player_GetPlayerSlotType(i) != 3) {
+        if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
             UNK_T tmp = gm_80160A60(i);
             sp38[var_r28] = tmp;
             if (tmp != NULL) {
@@ -1563,12 +1557,12 @@ void grStadium_801D3460(Ground_GObj* gobj)
     }
 
     gp2->x1C->x48 = 0;
-    temp_r3_4 = (void*) gm_8016AE50(); /// @todo gm struct needs to be larger
+    rules = gm_8016AE50();
     temp_r4 = gp2->x1C;
     temp_r4->x34.x = 0.625f;
     temp_r4->x34.y = 0.625f;
 
-    if ((temp_r3_4->x10 == 0) | !temp_r3_4->x0_6) {
+    if ((rules->x10 == 0) | !rules->x0_6) {
         HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF58, grPs_804DAF5C,
                             "00:00 00");
         return;
