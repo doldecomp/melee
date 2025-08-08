@@ -435,10 +435,11 @@ struct gm_8017DB6C_arg0_t {
 STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
 
 struct gmMainLib_8046B0F0_t {
-    bool x0;
-    bool x4; // reset switch pressed
-    bool x8; // true = progressive, false = interlaced
-    int xC, x10, x14;
+    /* 00 */ bool x0;
+    /* 04 */ bool resetting;   ///< reset switch pressed
+    /* 08 */ bool progressive; ///< true = progressive, false = interlaced
+    /* 0C */ bool xC;          // movie playback done, maybe?
+    /* 10 */ int x10, x14;
 };
 
 extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;

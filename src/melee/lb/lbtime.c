@@ -54,15 +54,14 @@ u32 lbTime_8000AF74(u32 a, int b)
 
 u32 lbTime_8000AFBC(void)
 {
-    u64 uVar3 = OSGetTime() / (*(u32*) 0x800000F8 / 4);
-    if (uVar3 > UINT_MAX) {
-        uVar3 = UINT_MAX;
+    u64 secs = OSTicksToSeconds(OSGetTime());
+    if (secs > UINT_MAX) {
+        secs = UINT_MAX;
     }
-    return uVar3;
+    return secs;
 }
 
-void lbTime_8000B028(OSCalendarTime* td, unsigned int ticks)
+void lbTime_8000B028(OSCalendarTime* td, unsigned int secs)
 {
-    OSTicksToCalendarTime(
-        (u64) ticks * (long long) ((*(unsigned int*) 0x800000F8) >> 2), td);
+    OSTicksToCalendarTime(OSSecondsToTicks((u64) secs), td);
 }

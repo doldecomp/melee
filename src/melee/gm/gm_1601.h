@@ -199,7 +199,7 @@ struct lbl_8046B488_t;
 /* 169264 */ UNK_RET gm_80169264(UNK_PARAMS);
 /* 169290 */ UNK_RET gm_80169290(UNK_PARAMS);
 /* 1692BC */ UNK_RET gm_801692BC(UNK_PARAMS);
-/* 1692E8 */ void gm_801692E8(u32 ticks, datetime* datetime);
+/* 1692E8 */ void gm_801692E8(u32 secs, datetime* datetime);
 /* 169364 */ struct lbl_8046B488_t* fn_80169364(void);
 /* 169370 */ u8 gm_80169370(s32);
 /* 169384 */ u8 gm_80169384(void);

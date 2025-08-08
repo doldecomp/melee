@@ -189,7 +189,7 @@ void lb_800192A8(void (*cb)(void))
         lbAudioAx_80024F6C();
         HSD_Rumble_80378524(0);
         HSD_SisLib_803A5CC4(lb_804D63D0);
-        gmMainLib_8046B0F0.xC = 1;
+        gmMainLib_8046B0F0.xC = true;
     }
 }
 

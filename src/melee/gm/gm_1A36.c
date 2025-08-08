@@ -24,11 +24,11 @@ u64 gm_801A36C0(u8 idx)
 
 void gm_801A36E0(s32 idx, s32 arg1)
 {
-    if (idx == 4) {
-        controller_map.x0[0].x28 = arg1;
-        controller_map.x0[1].x28 = arg1;
-        controller_map.x0[2].x28 = arg1;
-        controller_map.x0[3].x28 = arg1;
+    int i;
+    if (idx == PAD_MAX_CONTROLLERS) {
+        for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
+            controller_map.x0[i].x28 = arg1;
+        }
         return;
     }
     controller_map.x0[idx].x28 = arg1;
@@ -111,7 +111,7 @@ void gm_801A3A74(void)
 
     PAD_STACK(0x10);
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         controller_map.x0[i].button  = HSD_PadCopyStatus[(u8) i].button;
         controller_map.x0[i].trigger = HSD_PadCopyStatus[(u8) i].trigger;
         controller_map.x0[i].repeat  = HSD_PadCopyStatus[(u8) i].repeat;
@@ -126,25 +126,26 @@ void gm_801A3A74(void)
         gm_801A3714(i, 0x80002, (u64) 1 << 39);
         controller_map.xF0(i);
     }
-    controller_map.x0[4].button = 0;
-    controller_map.x0[4].trigger = 0;
-    controller_map.x0[4].repeat = 0;
-    controller_map.x0[4].release = 0;
-    controller_map.x0[4].unk = 0;
+    controller_map.x0[PAD_MAX_CONTROLLERS].button = 0;
+    controller_map.x0[PAD_MAX_CONTROLLERS].trigger = 0;
+    controller_map.x0[PAD_MAX_CONTROLLERS].repeat = 0;
+    controller_map.x0[PAD_MAX_CONTROLLERS].release = 0;
+    controller_map.x0[PAD_MAX_CONTROLLERS].unk = 0;
 
 
-    for (i = 0; i < 4; i++) {
-        controller[4].button  |= controller[i].button;
-        controller[4].trigger |= controller[i].trigger;
-        controller[4].repeat  |= controller[i].repeat;
-        controller[4].release |= controller[i].release;
-        controller[4].unk     |= controller[i].unk;
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
+        controller[PAD_MAX_CONTROLLERS].button  |= controller[i].button;
+        controller[PAD_MAX_CONTROLLERS].trigger |= controller[i].trigger;
+        controller[PAD_MAX_CONTROLLERS].repeat  |= controller[i].repeat;
+        controller[PAD_MAX_CONTROLLERS].release |= controller[i].release;
+        controller[PAD_MAX_CONTROLLERS].unk     |= controller[i].unk;
     }
 }
 #pragma pop
 
 void gm_801A3E88(void)
 {
+    int i;
     static struct controller_map gm_803DA788 = {
         { 0 },
         NULL,
@@ -158,11 +159,9 @@ void gm_801A3E88(void)
 
     controller_map = gm_803DA788;
 
-    controller_map.x0[0].x28 = controller_map.xF4;
-    controller_map.x0[1].x28 = controller_map.xF4;
-    controller_map.x0[2].x28 = controller_map.xF4;
-    controller_map.x0[3].x28 = controller_map.xF4;
-    controller_map.x0[4].x28 = controller_map.xF4;
+    for (i = 0; i <= PAD_MAX_CONTROLLERS; i++) {
+        controller_map.x0[i].x28 = controller_map.xF4;
+    }
     controller_map.xF0 = fn_801A396C;
 }
 

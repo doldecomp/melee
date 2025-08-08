@@ -94,8 +94,6 @@ void gm_801B999C(MinorScene* scene)
     vs->data.players[1].team = 1;
 }
 
-#pragma push
-#pragma dont_inline on
 void gm_801B9A3C(MinorScene* arg0)
 {
     StartMeleeData* data;
@@ -141,7 +139,6 @@ void gm_801B9A3C(MinorScene* arg0)
     gm_80181A00(data->players[0].c_kind, (u8) data->players[0].xA);
     gm_80180B18();
 }
-#pragma pop
 
 void gm_801B9DD8(MinorScene* arg0)
 {

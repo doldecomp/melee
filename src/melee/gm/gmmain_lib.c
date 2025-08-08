@@ -974,7 +974,7 @@ void gmMainLib_8015F500(void)
     GXRenderModeObj* var_r0;
     GXRenderModeObj* var_r3;
 
-    if (gmMainLib_8046B0F0.x8) {
+    if (gmMainLib_8046B0F0.progressive) {
         if (gmMainLib_8015F4E8() != 0) {
             var_r0 = &gmMainLib_803D4A80;
         } else {
@@ -997,7 +997,7 @@ void gmMainLib_8015F588(bool arg0)
     GXRenderModeObj* var_r0;
     GXRenderModeObj* var_r3;
 
-    if (gmMainLib_8046B0F0.x8) {
+    if (gmMainLib_8046B0F0.progressive) {
         if (arg0) {
             var_r0 = &gmMainLib_803D4A80;
         } else {
@@ -1025,7 +1025,7 @@ void gmMainLib_8015FA34(int arg0)
     for (i = 1; i < 9; i++) {
         if ((arg0 != 0 && arg0 != 2) || lb_8001B6E0(i) != 0) {
             gmMainLib_8015F600(i, 0);
-        } else if (i == 1 && gmMainLib_8046B0F0.x0 == 0) {
+        } else if (i == 1 && !gmMainLib_8046B0F0.x0) {
             gm_80162B98();
         }
     }
@@ -1087,15 +1087,9 @@ int gmMainLib_8015FC74(void)
 void gmMainLib_8015FCC0(void)
 {
     struct gmMainLib_8046B0F0_t* tmp = &gmMainLib_8046B0F0;
-    bool val;
-    if (OSGetResetCode() == 0x80000000) {
-        val = true;
-    } else {
-        val = false;
-    }
-    tmp->x0 = val;
-    tmp->x4 = 0;
-    tmp->x8 = false;
+    tmp->x0 = OSGetResetCode() == 0x80000000 ? true : false;
+    tmp->resetting = false;
+    tmp->progressive = false;
     tmp->xC = 0;
     tmp->x10 = lbTime_8000AFBC();
 }

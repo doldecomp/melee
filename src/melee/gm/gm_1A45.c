@@ -68,7 +68,7 @@ bool gm_801A46B8(int bit)
 bool fn_801A46F4(void)
 {
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
         if (pad->err == 0 && (pad->trigger & 8) && (pad->button & HSD_PAD_X)) {
             return true;
@@ -80,7 +80,7 @@ bool fn_801A46F4(void)
 bool fn_801A47E4(void)
 {
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         HSD_PadStatus* pad = &HSD_PadMasterStatus[(u8) i];
         if (pad->err == 0 && (pad->trigger & 0x10)) {
             return true;
@@ -89,14 +89,12 @@ bool fn_801A47E4(void)
     return false;
 }
 
-#pragma push
-#pragma dont_inline on
 u64 gm_801A48A4(u8 arg0)
 {
-    u32 i;
+    int i;
     u64 result = 0;
 
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < ARRAY_SIZE(gm_803DA888); i++) {
         if (arg0 & 1) {
             result |= gm_803DA888[i];
         }
@@ -105,7 +103,6 @@ u64 gm_801A48A4(u8 arg0)
 
     return result;
 }
-#pragma pop
 
 void gm_801A4970(int (**arg0)(void))
 {
@@ -117,7 +114,7 @@ void gm_801A4970(int (**arg0)(void))
     PAD_STACK(8);
 
     var_r26 = 0;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         temp_r3 = &HSD_PadMasterStatus[(u8) i];
         if ((temp_r3->trigger & 2) && (temp_r3->button & 0x400)) {
             lbHeap_80015DF8();
@@ -144,7 +141,7 @@ void gm_801A4970(int (**arg0)(void))
 
     if (arg0[0] != NULL && arg0[0]() != 0) {
         if (gm_801A45E8(0)) {
-            gm_80479D58.unk_10 &= 0xFFFFFFFE;
+            gm_80479D58.unk_10 &= ~1;
         } else {
             gm_80479D58.unk_10 |= 1;
         }
@@ -158,8 +155,8 @@ void gm_801A4970(int (**arg0)(void))
 
 void gm_801A4B08(bool (*arg0)(void), bool (*arg1)(void))
 {
-    gm_80479D58.unk_14 = arg0;
-    gm_80479D58.unk_18 = arg1;
+    gm_80479D58.unk_14[0] = arg0;
+    gm_80479D58.unk_14[1] = arg1;
 }
 
 void gm_801A4B1C(void)
@@ -270,7 +267,7 @@ inline u64 maybe_gm_801A48A4(u8 i)
 
 void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
 {
-    int temp_r3;
+    int pad_queue_count;
     int i;
     struct gm_80479D58_t* temp_r25;
 
@@ -287,23 +284,23 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
 
     while (temp_r25->unk_C == 0) {
         hsd_80392E80();
-        gmMainLib_8046B0F0.xC = 0;
+        gmMainLib_8046B0F0.xC = false;
 
-        while ((temp_r3 = lb_80019894()) == 0) {
+        while ((pad_queue_count = lb_80019894()) == 0) {
             lb_800195D0();
         }
         lb_800195D0();
 
         if (HSD_PadGetResetSwitch()) {
-            gmMainLib_8046B0F0.x4 = true;
+            gmMainLib_8046B0F0.resetting = true;
             break;
         }
 
-        for (i = 0; i < temp_r3; i++) {
+        for (i = 0; i < pad_queue_count; i++) {
             HSD_PerfSetStartTime();
             lb_800198E0();
             if (g_debugLevel >= 3) {
-                gm_801A4970((void*) &temp_r25->unk_14);
+                gm_801A4970(temp_r25->unk_14);
             }
             if (gm_801A46B8(0) || !gm_801A45E8(0)) {
                 temp_r25->unk_38_0 = true;
@@ -353,7 +350,7 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
             if (g_debugLevel >= 3) {
                 OSCheckActiveThreads();
             }
-            gmMainLib_8046B0F0.xC = 0;
+            gmMainLib_8046B0F0.xC = false;
             if (temp_r25->unk_C != 0) {
                 break;
             }

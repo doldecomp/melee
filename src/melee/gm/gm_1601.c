@@ -1241,11 +1241,11 @@ void gm_80168FC4(void)
 
 /// #gm_801692BC
 
-void gm_801692E8(u32 ticks, datetime* datetime)
+void gm_801692E8(u32 secs, datetime* datetime)
 {
     OSCalendarTime tm;
 
-    lbTime_8000B028(&tm, ticks);
+    lbTime_8000B028(&tm, secs);
     datetime->year = tm.year;
     datetime->month = tm.mon + 1;
     datetime->day = tm.mday;
