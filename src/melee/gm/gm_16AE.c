@@ -1552,7 +1552,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     } else {
         Player_SetMoreFlagsBit2(arg0, 0);
     }
-    Player_SetOtherStamina(arg0, arg1->x14);
+    Player_SetOtherStamina(arg0, arg1->hp);
     Player_SetModelScale(arg0, arg1->x20);
     Player_SetAttackRatio(arg0, arg1->x18);
     Player_SetDefenseRatio(arg0, arg1->x1C);

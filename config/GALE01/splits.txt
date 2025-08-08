@@ -1949,11 +1949,14 @@ melee/gm/gmgiant.c:
 melee/gm/gmstamina.c:
 	.text       start:0x801B91C8 end:0x801B98E8
 	.data       start:0x803DF138 end:0x803DF198
+	.bss        start:0x804975F8 end:0x80497618
 	.sdata2     start:0x804DAC58 end:0x804DAC60
 
 melee/gm/gmhomerun.c:
 	.text       start:0x801B98E8 end:0x801B9F10
 	.data       start:0x803DF198 end:0x803DF1E0
+	.bss        start:0x80497618 end:0x80497758
+	.sbss       start:0x804D68F8 end:0x804D6900
 	.sdata2     start:0x804DAC60 end:0x804DAC68
 
 melee/gm/gmfixedcamera.c:
@@ -1981,9 +1984,9 @@ melee/gm/gmlightning.c:
 melee/gm/gm_1BA8.c:
 	.text       start:0x801BA8FC end:0x801BF948
 	.data       start:0x803DF618 end:0x803DFDD8
-	.bss        start:0x804975F8 end:0x8049E558
+	.bss        start:0x80497758 end:0x8049E558
 	.sdata      start:0x804D4330 end:0x804D44C8
-	.sbss       start:0x804D68F8 end:0x804D6940
+	.sbss       start:0x804D6900 end:0x804D6940
 	.sdata2     start:0x804DAC78 end:0x804DAC90
 
 melee/gm/gm_1BF9.c:

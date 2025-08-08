@@ -5,7 +5,10 @@
 #include "gm_unsplit.h"
 #include "gmvsdata.h"
 
+#include <placeholder.h>
+
 #include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/db/db.h>
@@ -29,6 +32,7 @@
 #include <melee/lb/types.h>
 #include <melee/mn/mngallery.h>
 #include <melee/mn/types.h>
+#include <melee/pl/player.h>
 #include <melee/un/un_2FC9.h>
 #include <melee/vi/types.h>
 #include <melee/vi/vi0102.h>
@@ -76,6 +80,12 @@ MinorScene gm_803DF138_MinorScenes[] = {
     },
     { -1 },
 };
+
+static struct {
+    u16 x0;
+    bool x4[4];
+    u16 x14[4];
+} gm_804975F8;
 
 extern MatchExitInfo gm_80479D98;
 
@@ -149,7 +159,7 @@ void gm_801B931C(MinorScene* arg0)
         temp_r29->players[i] = temp_r30->data.players[i];
         temp_r29->players[i].xC_b7 = true;
         temp_r29->players[i].stocks = 1;
-        temp_r29->players[i].x14 = 0x96;
+        temp_r29->players[i].hp = 150;
     }
 
     gm_801B0348(temp_r29);
@@ -175,10 +185,88 @@ void gm_801B95D8_OnLoad(void)
     gm_801A55C4();
 }
 
-/// #gm_801B9600
+int gm_801B9600(void)
+{
+    int i;
+    int j;
+    int count = 0;
+    PAD_STACK(4);
 
-/// #fn_801B96E8
+    for (i = 0; i < 4; i++) {
+        if (Player_GetPlayerSlotType(i) != Gm_PKind_NA &&
+            Player_GetStocks(i) == 0)
+        {
+            gm_804975F8.x4[i] = true;
+        }
+        if (!gm_804975F8.x4[i]) {
+            if (gmMainLib_804D3EE0->unk_10D0.data.rules.x8) {
+                for (j = 0; j < i; j++) {
+                    if (!gm_804975F8.x4[j] &&
+                        Player_GetTeam(i) == Player_GetTeam(j))
+                    {
+                        break;
+                    }
+                }
+                if (i == j) {
+                    count++;
+                }
+            } else {
+                count++;
+            }
+        }
+    }
+    return count;
+}
 
-/// #gm_801B97C4
+void fn_801B96E8(HSD_GObj* unused)
+{
+    int i;
+    PAD_STACK(4);
 
-/// #fn_801B9850
+    for (i = 0; i < 4; i++) {
+        if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
+            if (gm_804975F8.x14[i] > 0 && gm_804975F8.x14[i] < 0x64) {
+                gm_804975F8.x14[i]++;
+            } else if (gm_804975F8.x14[i] == 0x64) {
+                gm_804975F8.x14[i] = 0;
+                gm_SetGameSpeed(1.0F);
+            }
+        }
+    }
+
+    if (gm_801B9600() <= 1) {
+        gm_804975F8.x0++;
+        if (gm_804975F8.x0 > 0x64) {
+            gm_SetGameSpeed(1.0F);
+            gm_8016B33C(5);
+            gm_8016B328();
+        }
+    }
+}
+
+void gm_801B97C4(int slot, bool cond)
+{
+    if (slot < 4 && cond == 0) {
+        if (!gm_804975F8.x4[slot]) {
+            Player_UpdateMatchFrameCount(slot, cond);
+            gm_804975F8.x14[slot] = 1;
+            gm_SetGameSpeed(0.4F);
+        }
+        gm_804975F8.x4[slot] = true;
+    }
+}
+
+void fn_801B9850(void)
+{
+    int i;
+    gm_804975F8.x0 = 0;
+    for (i = 0; i < 4; i++) {
+        if (Player_GetPlayerSlotType(i) == Gm_PKind_NA) {
+            gm_804975F8.x4[i] = true;
+        } else {
+            gm_804975F8.x4[i] = false;
+        }
+        gm_804975F8.x14[i] = 0;
+    }
+    HSD_GObjProc_8038FD54(GObj_Create(0xF, 0x11, 0), fn_801B96E8, 0x15);
+}

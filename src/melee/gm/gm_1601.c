@@ -978,7 +978,7 @@ void gm_8016795C(struct PlayerInitData* arg0)
     arg0->xE = 4;
     arg0->cpu_level = 0;
     arg0->x12 = 0;
-    arg0->x14 = 0;
+    arg0->hp = 0;
     arg0->x18 = 1.0F;
     arg0->x1C = 1.0F;
     arg0->x20 = 1.0F;
