@@ -3819,7 +3819,7 @@ melee/un/un_2FC97.c:
 	.data       start:0x803FDC20 end:0x803FDD18
 	.bss        start:0x804A1FD8 end:0x804A2688
 
-melee/un/un_2FC98.c:
+melee/un/un_3028.c:
 	.text       start:0x80302834 end:0x80305058
 	.bss        start:0x804A2688 end:0x804A2F38
 

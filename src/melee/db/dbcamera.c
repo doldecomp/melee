@@ -1,16 +1,15 @@
-#include <melee/db/db.h>
-
+#include <math.h>
+#include <trigf.h>
 #include <melee/cm/camera.h>
+#include <melee/db/db.h>
+#include <melee/ft/inlines.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/ground.h>
 #include <melee/lb/lbshadow.h>
 #include <melee/lb/lbvector.h>
 #include <melee/un/un_2FC9.h>
-#include <melee/ft/inlines.h>
-
-#include <math.h>
-#include <trigf.h>
+#include <melee/un/un_3028.h>
 
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 
@@ -263,12 +262,12 @@ static void fn_80227188(void)
     }
 }
 
-void fn_CheckCameraInfo(int player, int buttons_down,
-                        int buttons_pressed, f32 cstick_x, f32 cstick_y)
+void fn_CheckCameraInfo(int player, int buttons_down, int buttons_pressed,
+                        f32 cstick_x, f32 cstick_y)
 {
     if (gm_8018841C() == 0 && gm_801A4310() != 0xA) {
         if (Camera_80030178() == 0 && Camera_80030154() == 0 &&
-                (ABS(cstick_x) > 0.6F || ABS(cstick_y) > 0.6F))
+            (ABS(cstick_x) > 0.6F || ABS(cstick_y) > 0.6F))
         {
             fn_CheckCameraInfo_helper();
             Camera_8003006C();
@@ -325,13 +324,15 @@ static inline HSD_PadStatus* get_pad(u8 i)
 
 static inline float cstick_threshold(float cstick, float val)
 {
-    if (ABS(cstick) < val) return 0;
+    if (ABS(cstick) < val) {
+        return 0;
+    }
     return cstick;
 }
 
-static void fn_802277E8(HSD_GObj *arg0, int port)
+static void fn_802277E8(HSD_GObj* arg0, int port)
 {
-    HSD_PadStatus *temp_r3;
+    HSD_PadStatus* temp_r3;
     UNK_T r4;
     float cstick_x, cstick_y;
     u32 buttons;
@@ -425,7 +426,7 @@ static void fn_80227B64(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
     }
 }
 
-void fn_80227BA8(HSD_GObj *camera, Vec3* arg1, f32 arg2, f32 arg3)
+void fn_80227BA8(HSD_GObj* camera, Vec3* arg1, f32 arg2, f32 arg3)
 {
     Vec3 sp28;
     Vec3 sp1C;
@@ -433,7 +434,7 @@ void fn_80227BA8(HSD_GObj *camera, Vec3* arg1, f32 arg2, f32 arg3)
 
     if (arg1 != NULL) {
         fn_802279E8(camera, &cm_80453004.mode7_eye_offset,
-                            &cm_80453004.mode7_int_offset, arg2, arg3);
+                    &cm_80453004.mode7_int_offset, arg2, arg3);
         sp28 = cm_80453004.mode7_int_offset;
         lbVector_Add(&sp28, arg1);
         cm_80453004.mode7_eye_pos = sp28;
@@ -444,7 +445,7 @@ void fn_80227BA8(HSD_GObj *camera, Vec3* arg1, f32 arg2, f32 arg3)
     }
     if (arg2 != 0.0F || arg3 != 0.0F) {
         fn_802279E8(camera, &cm_80453004.mode8_eye_pos,
-                            &cm_80453004.mode8_int_pos, arg2, arg3);
+                    &cm_80453004.mode8_int_pos, arg2, arg3);
     }
 }
 
@@ -481,7 +482,8 @@ void fn_80227D38(HSD_GObj* camera, Vec3* arg1, f32 arg2)
             HSD_CObjGetEyeVector(cobj, &sp28);
             dist = HSD_CObjGetEyeDistance(cobj);
             PSVECScale(&sp28, &sp28, dist * -(0.05F * arg2 - 1.0F));
-            PSVECSubtract(&cm_80453004.mode7_int_offset, &sp28, &cm_80453004.mode7_eye_offset);
+            PSVECSubtract(&cm_80453004.mode7_int_offset, &sp28,
+                          &cm_80453004.mode7_eye_offset);
         }
         sp40 = cm_80453004.mode7_int_offset;
         lbVector_Add(&sp40, arg1);
@@ -495,12 +497,14 @@ void fn_80227D38(HSD_GObj* camera, Vec3* arg1, f32 arg2)
             HSD_CObjGetEyeVector(cobj, &sp1C);
             dist = HSD_CObjGetEyeDistance(cobj);
             PSVECScale(&sp1C, &sp1C, dist * -(0.05F * arg2 - 1.0F));
-            PSVECSubtract(&cm_80453004.mode8_int_pos, &sp1C, &cm_80453004.mode8_eye_pos);
+            PSVECSubtract(&cm_80453004.mode8_int_pos, &sp1C,
+                          &cm_80453004.mode8_eye_pos);
         }
     }
 }
 
-static void fn_80227EB0(HSD_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg8, f32 arg9)
+static void fn_80227EB0(HSD_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg8,
+                        f32 arg9)
 {
     Vec3 sp2C;
     Vec3 sp20;
@@ -509,7 +513,8 @@ static void fn_80227EB0(HSD_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg8, f32 ar
 
     cobj = GET_COBJ(arg0);
     dist = HSD_CObjGetEyeDistance(cobj);
-    dist = 0.03F * (2.0F * (dist * tanf(deg_to_rad * HSD_CObjGetFov(cobj) / 2)));
+    dist =
+        0.03F * (2.0F * (dist * tanf(deg_to_rad * HSD_CObjGetFov(cobj) / 2)));
     if (arg8 != 0.0F) {
         HSD_CObjGetLeftVector(cobj, &sp2C);
         PSVECScale(&sp2C, &sp2C, dist * arg8);
@@ -543,8 +548,8 @@ static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
         cobj = GET_COBJ(camera);
         eye_dist = HSD_CObjGetEyeDistance(cobj);
         scale_factor =
-            0.03F * (2.0F * (eye_dist * tanf(deg_to_rad *
-                                             HSD_CObjGetFov(cobj) / 2)));
+            0.03F *
+            (2.0F * (eye_dist * tanf(deg_to_rad * HSD_CObjGetFov(cobj) / 2)));
         if (cstick_x != 0.0F) {
             HSD_CObjGetLeftVector(cobj, &left_vec);
             VECScale(&left_vec, &left_vec, scale_factor * cstick_x);
@@ -564,7 +569,8 @@ static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
     }
 }
 
-static inline void fn_80227EB0_dummy_inline(HSD_GObj* cam, Vec3* a, Vec3* b, float x, float y)
+static inline void fn_80227EB0_dummy_inline(HSD_GObj* cam, Vec3* a, Vec3* b,
+                                            float x, float y)
 {
     if (x != 0.0F || y != 0.0F) {
         fn_80227EB0(cam, a, b, x, y);
@@ -585,7 +591,8 @@ void fn_80228124(HSD_GObj* camera, Vec3* arg1, f32 arg2, f32 arg3)
     if (arg1 != NULL) {
         cobj = GET_COBJ(camera);
         dist = HSD_CObjGetEyeDistance(cobj);
-        dist = 0.03f * (2.0f * (dist * tanf(0.017453292f * HSD_CObjGetFov(cobj) / 2)));
+        dist = 0.03f *
+               (2.0f * (dist * tanf(0.017453292f * HSD_CObjGetFov(cobj) / 2)));
         if (arg2 != 0.0f) {
             HSD_CObjGetLeftVector(cobj, &sp20);
             PSVECScale(&sp20, &sp20, dist * arg2);
@@ -610,6 +617,6 @@ void fn_80228124(HSD_GObj* camera, Vec3* arg1, f32 arg2, f32 arg3)
         cm_80453004.mode7_int_pos = sp38;
     } else {
         fn_80227EB0_dummy_inline(camera, &cm_80453004.mode8_eye_pos,
-                &cm_80453004.mode8_int_pos, arg2, arg3);
+                                 &cm_80453004.mode8_int_pos, arg2, arg3);
     }
 }

@@ -1258,7 +1258,7 @@ config.libs = [
             Object(NonMatching, "melee/un/un_2FC95.c"),
             Object(NonMatching, "melee/un/un_2FC96.c"),
             Object(NonMatching, "melee/un/un_2FC97.c"),
-            Object(NonMatching, "melee/un/un_2FC98.c"),
+            Object(NonMatching, "melee/un/un_3028.c"),
         ],
     ),
     MeleeLib(
