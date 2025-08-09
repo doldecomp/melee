@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "un/un_3028.h"
+
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>

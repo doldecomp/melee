@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "un/un_3028.h"
+
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -90,7 +92,7 @@ bool gm_801AA644(void)
 
 bool gm_801AA664(int arg0)
 {
-    gm_80164840(arg0);
+    return gm_80164840(arg0);
 }
 
 bool gm_801AA688(void)

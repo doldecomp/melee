@@ -2,6 +2,7 @@
 
 #include <melee/pl/player.h>
 #include <melee/un/un_2FC9.h>
+#include <melee/un/un_3028.h>
 
 static struct {
     DevText* text;
@@ -9,8 +10,6 @@ static struct {
 } db_CpuHandicapInfo;
 
 UnkFlagStruct db_ShowCpuHandicapInfo;
-
-#include <math.h>
 
 void fn_SetupCpuHandicapInfo(void)
 {

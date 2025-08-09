@@ -5,6 +5,7 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
 #include <melee/un/un_2FC9.h>
+#include <melee/un/un_3028.h>
 
 static struct {
     GXColor bg;

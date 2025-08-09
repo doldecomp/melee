@@ -4,12 +4,15 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include "it/forward.h"
-#include <baselib/forward.h>
 
 #include "ftSeak/types.h"
+
+#include "it/forward.h"
+
 #include "it/itCommonItems.h"
 #include "it/items/types.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -33,16 +36,6 @@
 /* 2B2674 */ void it_802B2674(Item_GObj*);
 /* 2B26C0 */ void it_802B26C0(Item_GObj*);
 /* 2B26E0 */ void it_802B26E0(Item_GObj*);
-/* 2BAEEC */ void it_802BAEEC(Item_GObj*);
-/* 2BAF0C */ void it_802BAF0C(Item_GObj*);
-/* 2BB20C */ void it_802BB20C(Item_GObj*);
-/* 2BB290 */ HSD_GObj* it_802BB290(Item_GObj* gobj, Vec3* arg1,
-                                   float facing_dir);
-/* 2BCF84 */ void it_802BCF84(Item_GObj*);
-/* 2BCFC4 */ void it_802BCFC4(Item_GObj* gobj, float* arg1,
-                              itChainSegment* chainSegment, Item* item_data,
-                              float arg4);
-/* 2BDBF8 */ void it_802BDBF8(Item_GObj* gobj);
 /* 2BDC18 */ void it_802BDC18(Item_GObj* gobj);
 /* 2BDC38 */ bool it_802BDC38(Item_GObj* gobj);
 /* 2C0510 */ void it_802C0510(Item_GObj*, Vec3*, s32, s32, float facing_dir);
