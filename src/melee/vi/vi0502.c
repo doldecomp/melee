@@ -65,7 +65,7 @@ void vi0502_8031E124(CharacterKind player_kind, s8 player_costume,
     Player_SetPlayerCharacter(0, player_kind);
     Player_SetCostumeId(0, player_costume);
     Player_SetPlayerId(0, 0);
-    Player_SetSlottype(0, 2);
+    Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
     Player_80032768(0, &initial_pos);
     Player_80036F34(0, 8);
@@ -74,7 +74,7 @@ void vi0502_8031E124(CharacterKind player_kind, s8 player_costume,
     Player_SetPlayerCharacter(1, CKIND_KIRBY);
     Player_SetCostumeId(1, kirby_costume);
     Player_SetPlayerId(1, 0);
-    Player_SetSlottype(1, 2);
+    Player_SetSlottype(1, Gm_PKind_Demo);
     Player_SetFacingDirection(1, 1.0f);
     Player_80036F34(1, 14);
 

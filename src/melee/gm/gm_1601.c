@@ -715,8 +715,8 @@ void fn_80165108(int slot, int arg1)
         Camera_8002F73C(0xB, 5);
         return;
     }
-    if (((Player_GetPlayerSlotType(slot) == 0) ||
-         (Player_GetPlayerSlotType(slot) == 1)) &&
+    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(slot) != NULL))
     {
         Camera_8002F73C(slot, arg1);
@@ -725,8 +725,8 @@ void fn_80165108(int slot, int arg1)
 
 void fn_80165190(s32 slot, s32 arg1)
 {
-    if (((Player_GetPlayerSlotType(slot) == 0) ||
-         (Player_GetPlayerSlotType(slot) == 1)) &&
+    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(slot) != NULL))
     {
         Camera_8002F760(slot, arg1);
@@ -735,8 +735,8 @@ void fn_80165190(s32 slot, s32 arg1)
 
 void fn_801651FC(s32 slot, s32 arg1)
 {
-    if (((Player_GetPlayerSlotType(slot) == 0) ||
-         (Player_GetPlayerSlotType(slot) == 1)) &&
+    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(slot) != NULL))
     {
         Camera_8002F784(slot, arg1);
