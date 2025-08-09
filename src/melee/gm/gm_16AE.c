@@ -995,7 +995,7 @@ void fn_8016C7F0(void)
     u8 var_r29_2;
     int var_r28;
     u8* temp_r29_2;
-    struct UnkAllstarData* temp_r30;
+    UnkAllstarData* temp_r30;
 
     if (lbl_8046B6A0.x24C8.x50 != NULL) {
         lbl_8046B6A0.x24C8.x50(lbl_8046B6A0.match_result);

@@ -1255,13 +1255,6 @@ MinorScene gm_803DDBE0_MinorScenes[] = {
     { 0xFF },
 };
 
-extern UNK_T gm_80470708[];
-extern UNK_T gm_80470850[];
-extern UNK_T gm_8047086C[];
-extern UNK_T gm_80472AF8[];
-extern UNK_T gm_80490880[];
-extern UNK_T gm_804D68D0[];
-
 void gm_801B13B8(MinorScene* arg0)
 {
     StartMeleeData* temp_r28 = gm_801A427C(arg0);

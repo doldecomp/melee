@@ -7,8 +7,6 @@
 #include <melee/it/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-struct UnkAllstarData;
-
 /* 17C0C8 */ void fn_8017C0C8(void);
 /* 17C1A4 */ void fn_8017C1A4(HSD_GObj*);
 /* 17C71C */ void fn_8017C71C(void);
@@ -16,12 +14,13 @@ struct UnkAllstarData;
 /* 17C7EC */ void fn_8017C7EC(void);
 /* 17C838 */ void gm_8017C838(void);
 /* 17C984 */ void gm_8017C984(UNK_T);
-/* 17C9A8 */ void gm_8017C9A8(struct UnkAllstarData*, struct UnkAllstarData*, int);
-/* 17CA38 */ UNK_RET gm_8017CA38(UNK_PARAMS);
+/* 17C9A8 */ void gm_8017C9A8(DebugGameOverData*, UnkAllstarData*, u8);
+/* 17CA38 */ UNK_RET gm_8017CA38(DebugGameOverData*, UnkAllstarData*, UNK_T,
+                                 u8);
 /* 17CBAC */ UNK_RET gm_8017CBAC(UNK_PARAMS);
 /* 17CD94 */ UNK_RET gm_8017CD94(UNK_PARAMS);
 /* 17CE34 */ UNK_RET gm_8017CE34(UNK_PARAMS);
-/* 17D7AC */ UNK_RET gm_8017D7AC(UNK_PARAMS);
+/* 17D7AC */ UNK_RET gm_8017D7AC(MatchExitInfo*, UnkAllstarData*, int);
 /* 17D9C0 */ UNK_RET fn_8017D9C0(UNK_PARAMS);
 /* 17DB58 */ void gm_8017DB58(void* arg0);
 /* 17DB6C */ u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index);
@@ -29,8 +28,8 @@ struct UnkAllstarData;
 /* 17DB88 */ UNK_RET gm_8017DB88(UNK_PARAMS);
 /* 17DD7C */ UNK_RET fn_8017DD7C(UNK_PARAMS);
 /* 17DE54 */ UNK_RET fn_8017DE54(UNK_PARAMS);
-/* 17DEC8 */ struct UnkAllstarData* fn_8017DEC8(int);
-/* 17DF28 */ struct UnkAllstarData* fn_8017DF28(void);
+/* 17DEC8 */ UnkAllstarData* fn_8017DEC8(int);
+/* 17DF28 */ UnkAllstarData* fn_8017DF28(void);
 /* 17DF90 */ u8 fn_8017DF90(void);
 /* 17DFF4 */ int gm_8017DFF4(int);
 /* 17E068 */ bool gm_8017E068(void);
@@ -40,7 +39,7 @@ struct UnkAllstarData;
 /* 17E280 */ UNK_T gm_8017E280(u16, bool);
 /* 17E318 */ UNK_RET fn_8017E318(UNK_PARAMS);
 /* 17E3C8 */ UNK_RET fn_8017E3C8(UNK_PARAMS);
-/* 17E424 */ struct UnkAllstarData* gm_8017E424(void);
+/* 17E424 */ UnkAllstarData* gm_8017E424(void);
 /* 17E430 */ u8 gm_8017E430(void);
 /* 17E440 */ u8 gm_8017E440(void);
 /* 17E48C */ UNK_RET gm_8017E48C(UNK_PARAMS);
@@ -60,7 +59,7 @@ struct UnkAllstarData;
 /* 17E7E0 */ UNK_RET gm_8017E7E0(UNK_PARAMS);
 /* 17E7FC */ UNK_RET gm_8017E7FC(UNK_PARAMS);
 /* 17E8A4 */ void fn_8017E8A4(int);
-/* 17EB30 */ struct UnkAllstarData* gm_8017EB30(void);
+/* 17EB30 */ UnkAllstarData* gm_8017EB30(void);
 /* 17EB3C */ UNK_RET gm_8017EB3C(UNK_PARAMS);
 /* 17EB64 */ UNK_RET gm_8017EB64(UNK_PARAMS);
 /* 17EB98 */ UNK_RET gm_8017EB98(UNK_PARAMS);
