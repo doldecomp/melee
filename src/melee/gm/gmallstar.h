@@ -5,7 +5,7 @@
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 
-/* 1B5324 */ UNK_RET gm_801B5324(UNK_PARAMS);
+/* 1B5324 */ void gm_801B5324(UnkAllstarData*, u8);
 /* 1B5624 */ void gm_801B5624(MinorScene*);
 /* 1B59AC */ void gm_801B59AC(MinorScene*);
 /* 1B5AA8 */ void fn_801B5AA8(int);
