@@ -9,11 +9,11 @@
 
 /// #it_8029BB90
 
-/// #it_8029BC88
+/// #itKirbycutterbeam_UnkMotion_Anim
 
-/// #it_8029BCA8
+/// #itKirbycutterbeam_UnkMotion_Phys
 
-/// #it_8029BDD4
+/// #itKirbycutterbeam_UnkMotion_Coll
 
 bool it_8029BFB4(Item_GObj* arg0)
 {

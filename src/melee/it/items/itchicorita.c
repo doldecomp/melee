@@ -11,9 +11,9 @@
 #include "it/items/itchicoritaleaf.h"
 
 ItemStateTable it_803F7A98[] = {
-    { 0, it_802C96CC, it_802C9798, it_802C9850 },
-    { 1, it_802C990C, it_802C9970, it_802C9A28 },
-    { -1, it_802C9AB4, it_802C9AD8, it_802C9AF8 },
+    { 0, itChicorita_UnkMotion0_Anim, itChicorita_UnkMotion0_Phys, itChicorita_UnkMotion0_Coll },
+    { 1, itChicorita_UnkMotion1_Anim, itChicorita_UnkMotion1_Phys, itChicorita_UnkMotion1_Coll },
+    { -1, itChicorita_UnkMotion2_Anim, itChicorita_UnkMotion2_Phys, itChicorita_UnkMotion2_Coll },
 };
 
 void it_802C9588(Item_GObj* item_gobj)
@@ -67,7 +67,7 @@ void it_802C9670(Item_GObj* item_gobj)
     item->on_accessory = it_802C989C;
 }
 
-bool it_802C96CC(HSD_GObj* item_gobj)
+bool itChicorita_UnkMotion0_Anim(HSD_GObj* item_gobj)
 {
     HSD_JObj* item_jobj;
     Item* item;
@@ -102,7 +102,7 @@ bool it_802C96CC(HSD_GObj* item_gobj)
     return false;
 }
 
-void it_802C9798(HSD_GObj* item_gobj)
+void itChicorita_UnkMotion0_Phys(HSD_GObj* item_gobj)
 {
     Item* item;
     ItemAttr* attr;
@@ -144,7 +144,7 @@ void it_802C9798(HSD_GObj* item_gobj)
     item->xDD4_itemVar.chicorita.x64 = 0.0f;
 }
 
-bool it_802C9850(HSD_GObj* item_gobj)
+bool itChicorita_UnkMotion0_Coll(HSD_GObj* item_gobj)
 {
     if (((Item*) item_gobj->user_data)->ground_or_air == GA_Air) {
         it_8026E15C((Item_GObj*) item_gobj, it_802C9618);
@@ -173,7 +173,7 @@ void it_802C98E4(Item_GObj* item_gobj)
     Item_80268E5C((HSD_GObj*) item_gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C990C(HSD_GObj* item_gobj)
+bool itChicorita_UnkMotion1_Anim(HSD_GObj* item_gobj)
 {
     HSD_JObj* item_jobj;
     Item* item;
@@ -192,7 +192,7 @@ bool it_802C990C(HSD_GObj* item_gobj)
     return false;
 }
 
-void it_802C9970(HSD_GObj* item_gobj)
+void itChicorita_UnkMotion1_Phys(HSD_GObj* item_gobj)
 {
     Item* item;
     ItemAttr* attr;
@@ -234,7 +234,7 @@ void it_802C9970(HSD_GObj* item_gobj)
     item->xDD4_itemVar.chicorita.x64 = 0.0f;
 }
 
-bool it_802C9A28(HSD_GObj* item_gobj)
+bool itChicorita_UnkMotion1_Coll(HSD_GObj* item_gobj)
 {
     if (((Item*) item_gobj->user_data)->ground_or_air == GA_Air) {
         it_8026E15C((Item_GObj*) item_gobj, it_802C9618);
@@ -250,18 +250,18 @@ void it_802C9A74(Item_GObj* item_gobj)
     Item_80268E5C((HSD_GObj*) item_gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C9AB4(HSD_GObj* item_gobj)
+bool itChicorita_UnkMotion2_Anim(HSD_GObj* item_gobj)
 {
     it_80279FF8((Item_GObj*) item_gobj);
     return false;
 }
 
-void it_802C9AD8(HSD_GObj* item_gobj)
+void itChicorita_UnkMotion2_Phys(HSD_GObj* item_gobj)
 {
     it_8027A09C((Item_GObj*) item_gobj);
 }
 
-bool it_802C9AF8(HSD_GObj* item_gobj)
+bool itChicorita_UnkMotion2_Coll(HSD_GObj* item_gobj)
 {
     return it_8027A118((Item_GObj*) item_gobj, it_802C963C);
 }

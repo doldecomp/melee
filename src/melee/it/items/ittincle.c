@@ -10,122 +10,122 @@
 
 /// #it_802EB6DC
 
-bool it_802EB808(Item_GObj* gobj)
+bool itTincle_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802EB810
+/// #itTincle_UnkMotion0_Phys
 
-/// #it_802EB84C
+/// #itTincle_UnkMotion0_Coll
 
 /// #it_802EB870
 
-bool it_802EB994(Item_GObj* gobj)
+bool itTincle_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802EB99C
+/// #itTincle_UnkMotion1_Phys
 
-/// #it_802EB9D4
+/// #itTincle_UnkMotion1_Coll
 
 /// #it_802EBA00
 
-/// #it_802EBAF0
+/// #itTincle_UnkMotion2_Anim
 
-/// #it_802EBB38
+/// #itTincle_UnkMotion2_Phys
 
-/// #it_802EBCD0
+/// #itTincle_UnkMotion2_Coll
 
 /// #it_802EBD14
 
-bool it_802EBDC8(Item_GObj* gobj)
+bool itTincle_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802EBDD0
+/// #itTincle_UnkMotion3_Phys
 
-/// #it_802EBE30
+/// #itTincle_UnkMotion3_Coll
 
 /// #it_802EBE5C
 
-bool it_802EBF00(Item_GObj* gobj)
+bool itTincle_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802EBF08
+/// #itTincle_UnkMotion4_Phys
 
-/// #it_802EBF80
+/// #itTincle_UnkMotion4_Coll
 
 /// #it_802EBFAC
 
-bool it_802EC0FC(Item_GObj* gobj)
+bool itTincle_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802EC104
+/// #itTincle_UnkMotion5_Phys
 
-/// #it_802EC168
+/// #itTincle_UnkMotion5_Coll
 
 /// #it_802EC18C
 
 /// #it_802EC1F4
 
-/// #it_802EC25C
+/// #itTincle_UnkMotion7_Anim
 
-void it_802EC2E4(Item_GObj* gobj) {}
+void itTincle_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #it_802EC2E8
+/// #itTincle_UnkMotion7_Coll
 
 /// #it_802EC35C
 
-bool it_802EC390(Item_GObj* gobj)
+bool itTincle_UnkMotion8_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802EC398
+/// #itTincle_UnkMotion8_Phys
 
-/// #it_802EC3C8
+/// #itTincle_UnkMotion8_Coll
 
 /// #it_802EC3F4
 
-/// #it_802EC460
+/// #itTincle_UnkMotion9_Anim
 
-void it_802EC4A0(Item_GObj* gobj) {}
+void itTincle_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #it_802EC4A4
+/// #itTincle_UnkMotion9_Coll
 
 /// #it_802EC4D0
 
-/// #it_802EC55C
+/// #itTincle_UnkMotion10_Anim
 
-void it_802EC5D4(Item_GObj* gobj) {}
+void itTincle_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #it_802EC5D8
+/// #itTincle_UnkMotion10_Coll
 
 /// #it_802EC604
 
-/// #it_802EC62C
+/// #itTincle_UnkMotion11_Anim
 
-void it_802EC66C(Item_GObj* gobj) {}
+void itTincle_UnkMotion11_Phys(Item_GObj* gobj) {}
 
-/// #it_802EC670
+/// #itTincle_UnkMotion11_Coll
 
 /// #it_802EC69C
 
-bool it_802EC7A0(Item_GObj* gobj)
+bool itTincle_UnkMotion12_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802EC7A8
+/// #itTincle_UnkMotion12_Phys
 
-/// #it_802EC80C
+/// #itTincle_UnkMotion12_Coll
 
 /// #it_802EC830
 

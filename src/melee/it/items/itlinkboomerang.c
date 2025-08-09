@@ -364,12 +364,12 @@ void it_802A0F88(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, 2);
 }
 
-bool it_802A0FB0(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return it_802A0C34(gobj);
 }
 
-void it_802A0FD0(Item_GObj* gobj)
+void itLinkboomerang_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip;
     f32 angle;
@@ -391,9 +391,9 @@ void it_802A0FD0(Item_GObj* gobj)
     }
 }
 
-bool it_802A10C0(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    it_802A16E4(gobj);
+    itLinkboomerang_UnkMotion2_Coll(gobj);
     return false;
 }
 
@@ -417,13 +417,13 @@ void it_802A10E4(Item_GObj* gobj)
     loop_lb_8000BA0C(ip, child, attrs->x30);
 }
 
-bool it_802A12DC(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return it_802A0C34(gobj);
 }
 
-// NOTE: identical to it_802A0FD0
-void it_802A12FC(Item_GObj* gobj)
+// NOTE: identical to itLinkboomerang_UnkMotion1_Phys
+void itLinkboomerang_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip;
     f32 angle;
@@ -517,7 +517,7 @@ static void it_802A15EC_no_inline(Item_GObj* gobj, Point3d* arg1)
     it_802A15EC(gobj, arg1);
 }
 
-bool it_802A16E4(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion2_Coll(Item_GObj* gobj)
 {
     Item* ip;
     CollData* coll;

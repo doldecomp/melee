@@ -18,42 +18,42 @@ void it_802AFEF8(Item_GObj* gobj)
 
 /// #it_802B00F4
 
-/// #it_802B0210
+/// #itSeakneedlethrown_UnkMotion0_Anim
 
-/// #it_802B024C
+/// #itSeakneedlethrown_UnkMotion1_Anim
 
-/// #it_802B033C
+/// #itSeakneedlethrown_UnkMotion2_Anim
 
-/// #it_802B0444
+/// #itSeakneedlethrown_UnkMotion3_Anim
 
-/// #it_802B0464
+/// #itSeakneedlethrown_UnkMotion4_Anim
 
-void it_802B0544(Item_GObj* gobj) {}
+void itSeakneedlethrown_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_802B0548
+/// #itSeakneedlethrown_UnkMotion1_Phys
 
-void it_802B057C(Item_GObj* gobj) {}
+void itSeakneedlethrown_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_802B0580(Item_GObj* gobj)
+void itSeakneedlethrown_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-/// #it_802B0598
+/// #itSeakneedlethrown_UnkMotion4_Phys
 
-/// #it_802B05CC
+/// #itSeakneedlethrown_UnkMotion0_Coll
 
-/// #it_802B0900
+/// #itSeakneedlethrown_UnkMotion1_Coll
 
-/// #it_802B0AB8
+/// #itSeakneedlethrown_UnkMotion2_Coll
 
-bool it_802B0C5C(Item_GObj* gobj)
+bool itSeakneedlethrown_UnkMotion3_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802B0C64
+/// #itSeakneedlethrown_UnkMotion4_Coll
 
 /// #it_802B0D84
 

@@ -30,12 +30,12 @@
 /* 2ED8BC */ UNK_RET it_802ED8BC(UNK_PARAMS);
 /* 2ED8E4 */ bool it_802ED8E4(Item_GObj* gobj);
 /* 2ED92C */ bool it_802ED92C(Item_GObj* gobj);
-/* 2EDCD0 */ bool it_802EDCD0(Item_GObj* gobj);
-/* 2EDD18 */ void it_802EDD18(Item_GObj* gobj);
-/* 2EDD34 */ bool it_802EDD34(Item_GObj* gobj);
-/* 2EDD54 */ bool it_802EDD54(Item_GObj* gobj);
-/* 2EDD9C */ void it_802EDD9C(Item_GObj* gobj);
-/* 2EDDA0 */ bool it_802EDDA0(Item_GObj* gobj);
+/* 2EDCD0 */ bool itKyasarin_UnkMotion9_Anim(Item_GObj* gobj);
+/* 2EDD18 */ void itKyasarin_UnkMotion9_Phys(Item_GObj* gobj);
+/* 2EDD34 */ bool itKyasarin_UnkMotion9_Coll(Item_GObj* gobj);
+/* 2EDD54 */ bool itKyasarin_UnkMotion10_Anim(Item_GObj* gobj);
+/* 2EDD9C */ void itKyasarin_UnkMotion10_Phys(Item_GObj* gobj);
+/* 2EDDA0 */ bool itKyasarin_UnkMotion10_Coll(Item_GObj* gobj);
 /* 2EDDC0 */ bool it_802EDDC0(Item_GObj*);
 /* 2EE1E0 */ void it_802EE1E0(Item_GObj*, Item_GObj*);
 extern ItemStateTable it_803F90D0[];

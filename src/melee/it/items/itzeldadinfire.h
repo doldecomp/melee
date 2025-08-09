@@ -16,11 +16,11 @@
 /* 2C3CBC */ void it_802C3CBC(Item_GObj*);
 /* 2C3D44 */ void it_802C3D44(Item_GObj*);
 /* 2C3D74 */ UNK_RET it_802C3D74(UNK_PARAMS);
-/* 2C3E94 */ bool it_802C3E94(Item_GObj* gobj);
-/* 2C40A4 */ bool it_802C40A4(Item_GObj* gobj);
-/* 2C4208 */ void it_802C4208(Item_GObj* gobj);
-/* 2C4364 */ void it_802C4364(Item_GObj*);
-/* 2C437C */ bool it_802C437C(Item_GObj* gobj);
+/* 2C3E94 */ bool itZeldadinfire_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2C40A4 */ bool itZeldadinfire_UnkMotion1_Anim(Item_GObj* gobj);
+/* 2C4208 */ void itZeldadinfire_UnkMotion0_Phys(Item_GObj* gobj);
+/* 2C4364 */ void itZeldadinfire_UnkMotion1_Phys(Item_GObj*);
+/* 2C437C */ bool itZeldadinfire_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2C443C */ bool it_802C443C(Item_GObj*);
 /* 2C4550 */ bool it_802C4550(Item_GObj*);
 /* 2C4558 */ bool it_802C4558(Item_GObj*);

@@ -13,37 +13,37 @@ void it_802CA534(void) {}
 
 /// #it_802CA58C
 
-/// #it_802CA5D8
+/// #itKamex_UnkMotion0_Anim
 
-/// #it_802CA618
+/// #itKamex_UnkMotion0_Phys
 
-/// #it_802CA654
+/// #itKamex_UnkMotion0_Coll
 
 /// #it_802CA6A0
 
-/// #it_802CA724
+/// #itKamex_UnkMotion1_Anim
 
-/// #it_802CA7FC
+/// #itKamex_UnkMotion1_Phys
 
-/// #it_802CA890
+/// #itKamex_UnkMotion1_Coll
 
 /// #it_802CA8DC
 
 /// #it_802CA938
 
-/// #it_802CA984
+/// #itKamex_UnkMotion2_Anim
 
-/// #it_802CA9B8
+/// #itKamex_UnkMotion2_Phys
 
-/// #it_802CA9F4
+/// #itKamex_UnkMotion2_Coll
 
 /// #it_802CAA40
 
-/// #it_802CAAA4
+/// #itKamex_UnkMotion3_Anim
 
-/// #it_802CAAC8
+/// #itKamex_UnkMotion3_Phys
 
-/// #it_802CAAE8
+/// #itKamex_UnkMotion3_Coll
 
 /// #it_802CAB10
 
@@ -63,8 +63,8 @@ bool it_802CADC8(Item_GObj* arg0)
 
 /// #it_802CADF0
 
-/// #it_802CAE60
+/// #itKamex_UnkMotion_Anim
 
-/// #it_802CAE94
+/// #itKamex_UnkMotion_Phys
 
-/// #it_802CAFB4
+/// #itKamex_UnkMotion_Coll

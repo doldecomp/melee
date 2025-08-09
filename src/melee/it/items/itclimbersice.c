@@ -15,38 +15,38 @@
 
 /// #it_802C1950
 
-/// #it_802C198C
+/// #itClimbersice_UnkMotion0_Anim
 
-void it_802C1A14(Item_GObj* gobj) {}
+void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_802C1A18
+/// #itClimbersice_UnkMotion0_Coll
 
 /// #it_802C1A58
 
-bool it_802C1A80(Item_GObj* gobj)
+bool itClimbersice_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802C1A88
+/// #itClimbersice_UnkMotion1_Phys
 
-/// #it_802C1AB8
+/// #itClimbersice_UnkMotion1_Coll
 
 /// #it_802C1AE4
 
-/// #it_802C1B80
+/// #itClimbersice_UnkMotion2_Anim
 
-/// #it_802C1BB4
+/// #itClimbersice_UnkMotion2_Phys
 
-/// #it_802C1C7C
+/// #itClimbersice_UnkMotion2_Coll
 
 /// #fn_802C1D44
 
-/// #it_802C1D80
+/// #itClimbersice_UnkMotion3_Anim
 
-/// #it_802C1DB4
+/// #itClimbersice_UnkMotion3_Phys
 
-/// #it_802C1E94
+/// #itClimbersice_UnkMotion3_Coll
 
 bool it_802C1FC8(Item_GObj* arg0)
 {

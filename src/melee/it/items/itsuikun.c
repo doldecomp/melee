@@ -12,8 +12,8 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F7E08[] = {
-    { 0, it_802CFDAC, it_802CFEA8, it_802CFEE4 },
-    { -1, it_802D0010, it_802D0034, it_802D0054 },
+    { 0, itSuikun_UnkMotion0_Anim, itSuikun_UnkMotion0_Phys, itSuikun_UnkMotion0_Coll },
+    { -1, itSuikun_UnkMotion1_Anim, itSuikun_UnkMotion1_Phys, itSuikun_UnkMotion1_Coll },
 };
 
 void it_802CFC48(Item_GObj* gobj)
@@ -65,7 +65,7 @@ void it_802CFD3C(Item_GObj* gobj)
     it->xDD4_itemVar.pokemon.timer = sa->timer;
 }
 
-bool it_802CFDAC(Item_GObj* gobj)
+bool itSuikun_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     itPokemonAttributes* sa;
@@ -102,7 +102,7 @@ bool it_802CFDAC(Item_GObj* gobj)
     return false;
 }
 
-void it_802CFEA8(Item_GObj* gobj)
+void itSuikun_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
@@ -111,7 +111,7 @@ void it_802CFEA8(Item_GObj* gobj)
     }
 }
 
-bool it_802CFEE4(Item_GObj* gobj)
+bool itSuikun_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
@@ -147,19 +147,19 @@ void it_802CFFAC(Item_GObj* gobj)
     it->exited_hitlag = efLib_ResumeAll;
 }
 
-bool it_802D0010(Item_GObj* gobj)
+bool itSuikun_UnkMotion1_Anim(Item_GObj* gobj)
 {
     it_80279FF8(gobj);
 
     return false;
 }
 
-void it_802D0034(Item_GObj* gobj)
+void itSuikun_UnkMotion1_Phys(Item_GObj* gobj)
 {
     it_8027A09C(gobj);
 }
 
-bool it_802D0054(Item_GObj* gobj)
+bool itSuikun_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return it_8027A118(gobj, it_802CFCD8);
 }

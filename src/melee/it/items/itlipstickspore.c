@@ -9,7 +9,7 @@
 
 #include <baselib/gobj.h>
 
-/* 29A5F8 */ static bool it_8029A5F8(Item_GObj* gobj);
+/* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 
 /// #it_8029A114
 
@@ -19,21 +19,21 @@
 
 /// #it_8029A498
 
-/// #it_8029A504
+/// #itLipstickspore_UnkMotion0_Anim
 
-/// #it_8029A524
+/// #itLipstickspore_UnkMotion0_Phys
 
-/// #it_8029A58C
+/// #itLipstickspore_UnkMotion0_Coll
 
-/// #it_8029A5C0
+/// #itLipstickspore_UnkMotion1_Anim
 
-void it_8029A5E0(Item_GObj* gobj)
+void itLipstickspore_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-bool it_8029A5F8(Item_GObj* gobj)
+bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
