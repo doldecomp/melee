@@ -669,7 +669,7 @@ static struct {
     int pad;
 } lbl_80473594;
 
-u8 gm_80181A14(void)
+int gm_80181A14(void)
 {
     return lbl_80473594.x0;
 }

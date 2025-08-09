@@ -97,7 +97,7 @@
 /* 181708 */ UNK_RET fn_80181708(UNK_PARAMS);
 /* 181998 */ void gm_80181998(void);
 /* 181A00 */ void gm_80181A00(s32 arg0, s32 arg1);
-/* 181A14 */ u8 gm_80181A14(void);
+/* 181A14 */ int gm_80181A14(void);
 /* 181A24 */ u16 gm_80181A24(void);
 /* 181A34 */ s32 gm_80181A34(void);
 /* 181A44 */ UNK_RET gm_80181A44(int c_kind, int, bool);

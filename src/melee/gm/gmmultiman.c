@@ -4,10 +4,13 @@
  */
 #include "gmmultiman.h"
 
-#include <melee/gm/types.h>
-#include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/types.h>
 
 extern CSSData gm_804950F0;
 extern VsModeData gm_80495238;
@@ -249,7 +252,45 @@ void gm_801B685C(void)
     lb_8001C550();
 }
 
-/// #gm_801B688C
+bool gm_801B688C(bool arg0)
+{
+    s32 temp_r31;
+    int temp_r30;
+    VsModeData* temp_r29;
+    u8 temp_r3;
+
+    PAD_STACK(8);
+
+    temp_r29 = &gmMainLib_804D3EE0->unk_1490;
+    lb_8001C550();
+    lb_8001D164(0);
+    lb_8001CE00();
+    if ((gm_80181A14() != 0) && (gm_801A4310() == 0x24) &&
+        (gm_80173498() != 0x148))
+    {
+        gm_80164504();
+    }
+    temp_r30 = gm_80181A14();
+    temp_r31 = gm_80181A34();
+    gm_80173C70(temp_r29->data.players[0].c_kind, gm_80181A24(), temp_r31,
+                temp_r30);
+    gm_80173EEC();
+    gm_80172898(0x20);
+    if ((gm_80181A14() != 0) && (gm_801A4310() == 0x22)) {
+        temp_r3 = gm_80173460(temp_r29->data.players[0].c_kind);
+        if (temp_r3 != 0x21) {
+            gm_801736E8(temp_r29->data.players[0].c_kind,
+                        temp_r29->data.players[0].color, gm_804D68F0,
+                        temp_r29->data.players[0].xA, temp_r3, gm_801A4310());
+            gm_801A42F8(0x14);
+            return true;
+        }
+    }
+    if (gm_80173754(gm_801A4310(), gm_804D68F0) != 0) {
+        return true;
+    }
+    return false;
+}
 
 void gm_801B69C0(StartMeleeData* arg0)
 {
@@ -277,19 +318,159 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.x0_3 = 6;
 }
 
-/// #gm_801B6AD8
+static inline void gm_801B6AD8_inline(MinorScene* scene, int x)
+{
+    CSSData* temp_r3;
+    VsModeData* temp_r31;
+    struct GameCache* temp_r31_2;
 
-/// #gm_801B6B70
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A427C(scene);
+    temp_r31->data.players[0].stocks = 1;
+    temp_r31->data.players[0].x18 = 1.0F;
+    temp_r31->data.players[0].x1C = 1.0F;
+    gm_801B06B0(temp_r3, x, temp_r31->data.players[0].c_kind, 1,
+                temp_r31->data.players[0].color, temp_r31->data.players[0].xA,
+                0, gm_804D68F0);
+    temp_r31_2 = &lbDvd_8001822C()->game_cache;
+    lbDvd_800174BC();
+    temp_r31_2->entries[1].char_id = CKIND_BOY;
+    temp_r31_2->entries[1].color = 0;
+    temp_r31_2->entries[2].char_id = CKIND_GIRL;
+    temp_r31_2->entries[2].color = 0;
+    temp_r31_2->stage_id = 0x11D;
+    lbDvd_80018254();
+}
 
-/// #gm_801B6BE8
+void gm_801B6AD8(MinorScene* scene)
+{
+    gm_801B6AD8_inline(scene, 0x11);
+}
 
-/// #gm_801B6F44
+void gm_801B6B70(MinorScene* scene)
+{
+    VsModeData* temp_r31;
+    CSSData* temp_r3;
 
-/// #gm_801B7044
+    PAD_STACK(8);
 
-/// #gm_801B70DC
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+    gm_80167A14(temp_r31->data.players);
+    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
+                &temp_r31->data.players[0].color,
+                &temp_r31->data.players[0].xA, NULL);
+}
 
-void gm_801B7154(MinorScene* arg0)
+void gm_801B6BE8(MinorScene* scene)
+{
+    VsModeData* temp_r31;
+    UnkMultimanData* temp_r30;
+    StartMeleeData* temp_r3;
+    s32* temp_r29;
+    int i;
+
+    PAD_STACK(8);
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A427C(scene);
+
+    temp_r3->rules = temp_r31->data.rules;
+    gm_801B69C0(temp_r3);
+    gm_80167A14(temp_r3->players);
+
+    for (i = 0; i < 6; i++) {
+        temp_r3->players[i] = temp_r31->data.players[i];
+    }
+    gm_801B0620(temp_r3->players, temp_r31->data.players[0].c_kind,
+                temp_r31->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        temp_r3->players[i].team = !temp_r3->players[0].team;
+    }
+
+    gm_8016F088(temp_r3);
+    gm_80182554(temp_r3->players[0].c_kind, 0x21);
+    temp_r29 =
+        gmMainLib_8015D6A4(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r30 = gm_80182DF0(temp_r31->data.players[0].c_kind, 0x21);
+    temp_r30->x0_0 =
+        gmMainLib_8015D6BC(gm_80164024(temp_r31->data.players[0].c_kind));
+    gm_80181A44(temp_r31->data.players[0].c_kind, 0x21, temp_r30->x0_0);
+    if (temp_r30->x0_0) {
+        temp_r30->x4 = *temp_r29;
+        gm_80181B64(temp_r31->data.players[0].c_kind, 0x21, temp_r30->x4);
+        /*
+         */
+    } else {
+        temp_r30->x2 = *temp_r29;
+        gm_80181AC8(temp_r31->data.players[0].c_kind, 0x21, temp_r30->x2);
+        gm_80181B64(temp_r31->data.players[0].c_kind, 0x21, 0x0FFFFFFF);
+    }
+}
+
+void gm_801B6F44(MinorScene* scene)
+{
+    UnkMultimanData* temp_r3_2;
+    VsModeData* temp_r29;
+    s32* temp_r30;
+    MatchExitInfo* temp_r3;
+
+    PAD_STACK(8);
+
+    temp_r29 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1);
+        return;
+    }
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80182578();
+    temp_r30 =
+        gmMainLib_8015D6A4(gm_80164024(temp_r29->data.players[0].c_kind));
+    temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x21);
+    if (temp_r3_2->x0_0) {
+        gmMainLib_8015D6D8(gm_80164024(temp_r29->data.players[0].c_kind), 1);
+        *temp_r30 = temp_r3_2->x4;
+    } else {
+        gmMainLib_8015D6D8(gm_80164024(temp_r29->data.players[0].c_kind), 0);
+        *temp_r30 = temp_r3_2->x2;
+    }
+    if (!gm_801B688C(temp_r3_2->x0_0)) {
+        gm_SetScenePendingMinor(0);
+    }
+}
+
+void gm_801B7044(MinorScene* scene)
+{
+    gm_801B6AD8_inline(scene, 0x12);
+}
+
+void gm_801B70DC(MinorScene* scene)
+{
+    VsModeData* temp_r31;
+    CSSData* temp_r3;
+
+    PAD_STACK(8);
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+    gm_80167A14(temp_r31->data.players);
+    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
+                &temp_r31->data.players[0].color,
+                &temp_r31->data.players[0].xA, NULL);
+}
+
+void gm_801B7154(MinorScene* scene)
 {
     VsModeData* temp_r31;
     UnkMultimanData* temp_r30;
@@ -300,7 +481,7 @@ void gm_801B7154(MinorScene* arg0)
     PAD_STACK(8);
 
     temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_801A427C(arg0);
+    temp_r3 = gm_801A427C(scene);
 
     temp_r3->rules = temp_r31->data.rules;
     gm_801B69C0(temp_r3);
@@ -332,18 +513,67 @@ void gm_801B7154(MinorScene* arg0)
     gm_80181B64(temp_r31->data.players[0].c_kind, 0x22, 0x0FFFFFFF);
 }
 
-/// #gm_801B74F0
+void gm_801B74F0(MinorScene* scene)
+{
+    UnkMultimanData* temp_r3_2;
+    VsModeData* temp_r29;
+    s32* temp_r30;
+    MatchExitInfo* temp_r3;
+    PAD_STACK(8);
 
-/// #gm_801B75F0
+    temp_r29 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1);
+        return;
+    }
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80182578();
+    temp_r30 =
+        gmMainLib_8015D6F8(gm_80164024(temp_r29->data.players[0].c_kind));
+    temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x22);
+    if (temp_r3_2->x0_0) {
+        gmMainLib_8015D72C(gm_80164024(temp_r29->data.players[0].c_kind), 1);
+        *temp_r30 = temp_r3_2->x4;
+    } else {
+        gmMainLib_8015D72C(gm_80164024(temp_r29->data.players[0].c_kind), 0);
+        *temp_r30 = temp_r3_2->x2;
+    }
+    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
+        gm_SetScenePendingMinor(0);
+    }
+}
 
-/// #gm_801B7688
+void gm_801B75F0(MinorScene* scene)
+{
+    gm_801B6AD8_inline(scene, 0x13);
+}
+
+void gm_801B7688(MinorScene* scene)
+{
+    VsModeData* temp_r31;
+    CSSData* temp_r3;
+    PAD_STACK(8);
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+    gm_80167A14(temp_r31->data.players);
+    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
+                &temp_r31->data.players[0].color,
+                &temp_r31->data.players[0].xA, NULL);
+}
 
 static inline VsModeData* getMultimanData(void)
 {
     return &gmMainLib_804D3EE0->unk_1490;
 }
 
-void gm_801B7700(MinorScene* arg0)
+void gm_801B7700(MinorScene* scene)
 {
     StartMeleeData* temp_r3;
     VsModeData* temp_r30;
@@ -353,7 +583,7 @@ void gm_801B7700(MinorScene* arg0)
     int i;
 
     temp_r30 = getMultimanData();
-    temp_r3 = gm_801A427C(arg0);
+    temp_r3 = gm_801A427C(scene);
 
     temp_r3->rules = temp_r30->data.rules;
     gm_801B69C0(temp_r3);
@@ -383,18 +613,65 @@ void gm_801B7700(MinorScene* arg0)
         temp_r28->x2 = (u16) *temp_r27;
         gm_80181AC8(temp_r30->data.players[0].c_kind, 0x23, temp_r28->x2);
     } else {
-        temp_r28->x2 = 0U;
+        temp_r28->x2 = 0;
         gm_80181AC8(temp_r30->data.players[0].c_kind, 0x23, 0);
     }
 }
 
-/// #gm_801B7AA0
+void gm_801B7AA0(MinorScene* scene)
+{
+    UnkMultimanData* temp_r3_2;
+    VsModeData* temp_r30;
+    u16* temp_r31;
+    MatchExitInfo* temp_r3;
+    PAD_STACK(8);
 
-/// #gm_801B7B74
+    temp_r30 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1);
+        return;
+    }
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80182578();
+    temp_r31 =
+        gmMainLib_8015D74C(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r3_2 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x23);
+    if (temp_r3_2->x0_0) {
+        *temp_r31 = temp_r3_2->x2;
+    } else {
+        *temp_r31 = 0;
+    }
+    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
+        gm_SetScenePendingMinor(0);
+    }
+}
 
-/// #gm_801B7C0C
+void gm_801B7B74(MinorScene* scene)
+{
+    gm_801B6AD8_inline(scene, 0x14);
+}
 
-void gm_801B7C84(MinorScene* arg0)
+void gm_801B7C0C(MinorScene* scene)
+{
+    VsModeData* temp_r31;
+    CSSData* temp_r3;
+    PAD_STACK(8);
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+    gm_80167A14(temp_r31->data.players);
+    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
+                &temp_r31->data.players[0].color,
+                &temp_r31->data.players[0].xA, NULL);
+}
+
+void gm_801B7C84(MinorScene* scene)
 {
     VsModeData* temp_r30;
     StartMeleeData* temp_r3;
@@ -403,7 +680,7 @@ void gm_801B7C84(MinorScene* arg0)
     int i;
 
     temp_r30 = getMultimanData();
-    temp_r3 = gm_801A427C(arg0);
+    temp_r3 = gm_801A427C(scene);
 
     PAD_STACK(8);
 
@@ -440,16 +717,64 @@ void gm_801B7C84(MinorScene* arg0)
     }
 }
 
-/// #gm_801B8024
+void gm_801B8024(MinorScene* scene)
+{
+    UnkMultimanData* temp_r3_2;
+    VsModeData* temp_r29;
+    u16* temp_r30;
+    MatchExitInfo* temp_r3;
+    PAD_STACK(8);
 
-/// #gm_801B8110
+    temp_r29 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1);
+        return;
+    }
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80182578();
+    temp_r30 =
+        gmMainLib_8015D7A4(gm_80164024(temp_r29->data.players[0].c_kind));
+    temp_r3_2 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x24);
+    if (temp_r3_2->x0_0) {
+        *temp_r30 = temp_r3_2->x2;
+        gmMainLib_8015D780(gm_80164024(temp_r29->data.players[0].c_kind));
+    } else {
+        *temp_r30 = 0;
+    }
+    if (gm_801B688C(temp_r3_2->x0_0) == 0) {
+        gm_SetScenePendingMinor(0);
+    }
+}
 
-/// #gm_801B81A8
+void gm_801B8110(MinorScene* scene)
+{
+    gm_801B6AD8_inline(scene, 0x15);
+}
 
-void gm_801B8220(MinorScene* arg0)
+void gm_801B81A8(MinorScene* scene)
+{
+    VsModeData* temp_r31;
+    CSSData* temp_r3;
+    PAD_STACK(8);
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+    gm_80167A14(temp_r31->data.players);
+    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
+                &temp_r31->data.players[0].color,
+                &temp_r31->data.players[0].xA, NULL);
+}
+
+void gm_801B8220(MinorScene* scene)
 {
     VsModeData* temp_r30 = &gmMainLib_804D3EE0->unk_1490;
-    StartMeleeData* temp_r3 = gm_801A427C(arg0);
+    StartMeleeData* temp_r3 = gm_801A427C(scene);
     s32* temp_r29;
     UnkMultimanData* temp_r3_3;
     int i;
@@ -484,16 +809,59 @@ void gm_801B8220(MinorScene* arg0)
     gm_80181AC8(temp_r30->data.players[0].c_kind, 0x25, temp_r3_3->x2);
 }
 
-/// #gm_801B8580
+void gm_801B8580(MinorScene* scene)
+{
+    UnkMultimanData* temp_r3_2;
+    VsModeData* temp_r30;
+    s32* temp_r31;
+    MatchExitInfo* temp_r3;
+    PAD_STACK(8);
 
-/// #gm_801B863C
+    temp_r30 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1U);
+        return;
+    }
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80182578();
+    temp_r31 =
+        gmMainLib_8015D7BC(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r3_2 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x25);
+    *temp_r31 = temp_r3_2->x2;
+    if (!gm_801B688C(temp_r3_2->x0_0)) {
+        gm_SetScenePendingMinor(0U);
+    }
+}
 
-/// #gm_801B86D4
+void gm_801B863C(MinorScene* scene)
+{
+    gm_801B6AD8_inline(scene, 0x16);
+}
 
-void gm_801B874C(MinorScene* arg0)
+void gm_801B86D4(MinorScene* scene)
+{
+    VsModeData* temp_r31;
+    CSSData* temp_r3;
+    PAD_STACK(8);
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(scene);
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+    gm_80167A14(temp_r31->data.players);
+    gm_801B0730(temp_r3, &temp_r31->data.players[0].c_kind, NULL,
+                &temp_r31->data.players[0].color,
+                &temp_r31->data.players[0].xA, NULL);
+}
+
+void gm_801B874C(MinorScene* scene)
 {
     VsModeData* temp_r29 = &gmMainLib_804D3EE0->unk_1490;
-    StartMeleeData* temp_r3 = gm_801A427C(arg0);
+    StartMeleeData* temp_r3 = gm_801A427C(scene);
     s32* temp_r28;
     UnkMultimanData* temp_r3_3;
     int i;
@@ -530,4 +898,29 @@ void gm_801B874C(MinorScene* arg0)
     gm_80181AC8(temp_r29->data.players[0].c_kind, 0x26, temp_r3_3->x2);
 }
 
-/// #gm_801B8AF8
+void gm_801B8AF8(MinorScene* arg0)
+{
+    UnkMultimanData* temp_r3_2;
+    VsModeData* temp_r30;
+    s32* temp_r31;
+    MatchExitInfo* temp_r3;
+    PAD_STACK(8);
+
+    temp_r30 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A4284(arg0);
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1);
+        return;
+    }
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    gm_80182578();
+    temp_r31 =
+        gmMainLib_8015D7D4(gm_80164024((u8) temp_r30->data.players[0].c_kind));
+    temp_r3_2 =
+        gm_80182DF0((s32) (s8) (u8) temp_r30->data.players[0].c_kind, 0x26);
+    *temp_r31 = (s32) temp_r3_2->x2;
+    if (!gm_801B688C(temp_r3_2->x0_0)) {
+        gm_SetScenePendingMinor(0);
+    }
+}
