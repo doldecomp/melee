@@ -14,6 +14,12 @@
 #include <common_structs.h>
 #include <melee/mn/types.h>
 
+struct UnkMultimanData {
+    u16 x0_0 : 1;
+    u16 x2;
+    int x4;
+};
+
 struct DebugGameOverData {
     u32 x0;
     u8 pad_x4[0x4];
