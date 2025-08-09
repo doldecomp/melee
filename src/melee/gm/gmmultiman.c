@@ -231,9 +231,6 @@ UNK_T gm_801B6320(void)
 
 /// #gm_801B67E8_OnInit
 
-extern u8 gm_804D68E8;
-extern u8 gm_804D68E9;
-
 void gm_801B6808_OnLoad(void)
 {
     gm_804D68E8 = gm_801677F0();
@@ -244,9 +241,6 @@ void gm_801B6834(void)
 {
     gm_80167B50(&gmMainLib_804D3EE0->unk_1490);
 }
-
-extern u8 gm_804D68F0;
-extern s8 gm_804D68F1;
 
 void gm_801B685C(void)
 {
@@ -295,7 +289,48 @@ void gm_801B69C0(StartMeleeData* arg0)
 
 /// #gm_801B70DC
 
-/// #gm_801B7154
+void gm_801B7154(MinorScene* arg0)
+{
+    VsModeData* temp_r31;
+    UnkMultimanData* temp_r30;
+    s32* temp_r29;
+    StartMeleeData* temp_r3;
+    int i;
+
+    PAD_STACK(8);
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A427C(arg0);
+
+    temp_r3->rules = temp_r31->data.rules;
+    gm_801B69C0(temp_r3);
+    gm_80167A14(temp_r3->players);
+
+    for (i = 0; i < 6; i++) {
+        temp_r3->players[i] = temp_r31->data.players[i];
+    }
+
+    gm_801B0620(temp_r3->players, temp_r31->data.players[0].c_kind, temp_r31->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        temp_r3->players[i].team = !temp_r3->players[0].team;
+        temp_r3->players[i].xC_b1 = false;
+    }
+    gm_8016F088(temp_r3);
+    gm_80182554(temp_r3->players[0].c_kind, 0x22);
+    temp_r29 = gmMainLib_8015D6F8(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r30 = gm_80182DF0(temp_r31->data.players[0].c_kind, 0x22);
+    temp_r30->x0_0 = gmMainLib_8015D710(gm_80164024(temp_r31->data.players[0].c_kind));
+    gm_80181A44(temp_r31->data.players[0].c_kind, 0x22, temp_r30->x0_0);
+    if (temp_r30->x0_0) {
+        temp_r30->x4 = *temp_r29;
+        gm_80181B64(temp_r31->data.players[0].c_kind, 0x22, temp_r30->x4);
+        return;
+    }
+    temp_r30->x2 = *temp_r29;
+    gm_80181AC8(temp_r31->data.players[0].c_kind, 0x22, temp_r30->x2);
+    gm_80181B64(temp_r31->data.players[0].c_kind, 0x22, 0x0FFFFFFF);
+}
 
 /// #gm_801B74F0
 
@@ -303,7 +338,55 @@ void gm_801B69C0(StartMeleeData* arg0)
 
 /// #gm_801B7688
 
-/// #gm_801B7700
+static inline VsModeData* getMultimanData(void)
+{
+    return &gmMainLib_804D3EE0->unk_1490;
+}
+
+void gm_801B7700(MinorScene* arg0)
+{
+    StartMeleeData* temp_r3;
+    VsModeData* temp_r30;
+    UnkMultimanData* temp_r28;
+    s32 var_r29;
+    u16* temp_r27;
+    int i;
+
+    temp_r30 = getMultimanData();
+    temp_r3 = gm_801A427C(arg0);
+
+    temp_r3->rules = temp_r30->data.rules;
+    gm_801B69C0(temp_r3);
+    temp_r3->rules.x0_6 = true;
+    temp_r3->rules.x0_7 = false;
+    temp_r3->rules.x10 = 0xB4;
+    gm_80167A14(temp_r3->players);
+
+    for (i = 0; i < 6; i++) {
+        temp_r3->players[i] = temp_r30->data.players[i];
+    }
+
+    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind, temp_r30->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        temp_r3->players[i].team = !temp_r3->players[0].team;
+        temp_r3->players[i].xC_b1 = false;
+    }
+
+    gm_8016F088(temp_r3);
+    gm_80182554(temp_r3->players[0].c_kind, 0x23);
+    temp_r27 = gmMainLib_8015D74C(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r28 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x23);
+    temp_r28->x0_0 = *temp_r27 ? true : false;
+    gm_80181A44(temp_r30->data.players[0].c_kind, 0x23, temp_r28->x0_0);
+    if (temp_r28->x0_0) {
+        temp_r28->x2 = (u16) *temp_r27;
+        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x23, temp_r28->x2);
+    } else {
+        temp_r28->x2 = 0U;
+        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x23, 0);
+    }
+}
 
 /// #gm_801B7AA0
 
@@ -311,7 +394,51 @@ void gm_801B69C0(StartMeleeData* arg0)
 
 /// #gm_801B7C0C
 
-/// #gm_801B7C84
+void gm_801B7C84(MinorScene* arg0)
+{
+    VsModeData* temp_r30;
+    StartMeleeData* temp_r3;
+    UnkMultimanData* temp_r28;
+    u16* temp_r27;
+    int i;
+
+    temp_r30 = getMultimanData();
+    temp_r3 = gm_801A427C(arg0);
+
+    PAD_STACK(8);
+
+    temp_r3->rules = temp_r30->data.rules;
+    gm_801B69C0(temp_r3);
+    temp_r3->rules.x0_6 = true;
+    temp_r3->rules.x0_7 = false;
+    temp_r3->rules.x10 = 0x384;
+    gm_80167A14(temp_r3->players);
+
+    for (i = 0; i < 6; i++) {
+        temp_r3->players[i] = temp_r30->data.players[i];
+    }
+
+    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind, temp_r30->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        temp_r3->players[i].team = !temp_r3->players[0].team;
+        temp_r3->players[i].xC_b1 = false;
+    }
+
+    gm_8016F088(temp_r3);
+    gm_80182554(temp_r3->players[0].c_kind, 0x24);
+    temp_r27 = gmMainLib_8015D7A4(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r28 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x24);
+    temp_r28->x0_0 = *temp_r27 ? true : false;
+    gm_80181A44(temp_r30->data.players[0].c_kind, 0x24, temp_r28->x0_0);
+    if (temp_r28->x0_0) {
+        temp_r28->x2 = *temp_r27;
+        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x24, temp_r28->x2);
+    } else {
+        temp_r28->x2 = 0;
+        gm_80181AC8(temp_r30->data.players[0].c_kind, 0x24, 0);
+    }
+}
 
 /// #gm_801B8024
 
@@ -319,7 +446,43 @@ void gm_801B69C0(StartMeleeData* arg0)
 
 /// #gm_801B81A8
 
-/// #gm_801B8220
+void gm_801B8220(MinorScene* arg0)
+{
+    VsModeData* temp_r30 = &gmMainLib_804D3EE0->unk_1490;
+    StartMeleeData* temp_r3 = gm_801A427C(arg0);
+    s32* temp_r29;
+    UnkMultimanData* temp_r3_3;
+    int i;
+
+    PAD_STACK(8);
+
+    temp_r3->rules = temp_r30->data.rules;
+    gm_801B69C0(temp_r3);
+    temp_r3->rules.x0_6 = false;
+    temp_r3->rules.x0_7 = false;
+    temp_r3->rules.x10 = 0;
+    temp_r3->rules.x5_0 = true;
+    temp_r3->rules.x5_1 = false;
+    gm_80167A14(temp_r3->players);
+
+    for (i = 0; i < 6; i++) {
+        temp_r3->players[i] = temp_r30->data.players[i];
+    }
+
+    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind, temp_r30->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        temp_r3->players[i].team = !temp_r3->players[0].team;
+        temp_r3->players[i].xC_b1 = false;
+    }
+
+    gm_8016F088(temp_r3);
+    gm_80182554(temp_r3->players[0].c_kind, 0x25);
+    temp_r29 = gmMainLib_8015D7BC(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r3_3 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x25);
+    temp_r3_3->x2 = *temp_r29;
+    gm_80181AC8(temp_r30->data.players[0].c_kind, 0x25, temp_r3_3->x2);
+}
 
 /// #gm_801B8580
 
@@ -327,6 +490,44 @@ void gm_801B69C0(StartMeleeData* arg0)
 
 /// #gm_801B86D4
 
-/// #gm_801B874C
+void gm_801B874C(MinorScene* arg0)
+{
+    VsModeData* temp_r29 = &gmMainLib_804D3EE0->unk_1490;
+    StartMeleeData* temp_r3 = gm_801A427C(arg0);
+    s32* temp_r28;
+    UnkMultimanData* temp_r3_3;
+    int i;
+
+    PAD_STACK(8);
+
+    temp_r3->rules = temp_r29->data.rules;
+    gm_801B69C0(temp_r3);
+    temp_r3->rules.xB = -1;
+    temp_r3->rules.x0_6 = false;
+    temp_r3->rules.x0_7 = false;
+    temp_r3->rules.x10 = 0;
+    temp_r3->rules.x5_0 = true;
+    temp_r3->rules.x5_1 = false;
+    gm_80167A14(temp_r3->players);
+
+    for (i = 0; i < 6; i++) {
+        temp_r3->players[i] = temp_r29->data.players[i];
+    }
+
+    gm_801B0620(temp_r3->players, temp_r29->data.players[0].c_kind, temp_r29->data.players[0].color, 1, gm_804D68F0);
+
+    for (i = 1; i < 6; i++) {
+        temp_r3->players[i].team = !temp_r3->players[0].team;
+        temp_r3->players[i].xD_b4 = true;
+        temp_r3->players[i].xC_b1 = false;
+    }
+
+    gm_8016F088(temp_r3);
+    gm_80182554(temp_r3->players[0].c_kind, 0x26);
+    temp_r28 = gmMainLib_8015D7D4(gm_80164024(temp_r29->data.players[0].c_kind));
+    temp_r3_3 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x26);
+    temp_r3_3->x2 = *temp_r28;
+    gm_80181AC8(temp_r29->data.players[0].c_kind, 0x26, temp_r3_3->x2);
+}
 
 /// #gm_801B8AF8

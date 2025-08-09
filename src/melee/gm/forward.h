@@ -136,5 +136,6 @@ typedef struct CameraVsData CameraVsData;
 typedef struct TmVsData TmVsData;
 typedef struct DebugGameOverData DebugGameOverData;
 typedef struct UnkAllstarData UnkAllstarData;
+typedef struct UnkMultimanData UnkMultimanData;
 
 #endif
