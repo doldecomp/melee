@@ -5,7 +5,7 @@
 #include <melee/gm/gmmain_lib.h>
 
 extern UNK_T gm_80470708[];
-extern UNK_T gm_80470850[];
+extern DebugGameOverData gm_80470850;
 extern UNK_T gm_8047086C;
 extern UNK_T gm_80472AF8;
 extern UNK_T gm_80490880;
@@ -292,8 +292,8 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         gm_801B3D84,
         {
             MN_GAMEOVER,
-            gm_80470850,
-            gm_80470850,
+            &gm_80470850,
+            &gm_80470850,
         },
     },
     {
@@ -336,7 +336,7 @@ void gm_801B34B8_OnInit(void)
 
 void gm_801B3D44(MinorScene* arg0)
 {
-    struct UnkAllstarData* temp_r31 = gm_801A427C(arg0);
+    struct DebugGameOverData* temp_r31 = gm_801A427C(arg0);
     gm_8017C9A8(temp_r31, gm_8017EB30(), 1);
 }
 

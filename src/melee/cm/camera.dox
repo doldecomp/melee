@@ -12,7 +12,7 @@ struct _CameraBox;
 struct _CameraBox* Camera_80029020(void);
 void Camera_800290D4(struct _CameraBox*);
 void Camera_8002A278(f32 x, f32 y);
-void Camera_8002E6FC(u8);
+void Camera_8002E6FC(int);
 void Camera_8002E948(bool (*)(Vec3*));
 void Camera_8002EB5C(f32);
 void Camera_8002EC7C(f32);

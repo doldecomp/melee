@@ -16,7 +16,7 @@ struct gm_801B0FF8_arg0_x10_t {
 struct gm_8049E548_t {
     /* 0x00 */ char c_kind[4];
     /* 0x04 */ u8 x4[4];
-    /* 0x08 */ s8 unk_8;
+    /* 0x08 */ u8 unk_8;
     /* 0x09 */ u8 unk_9;
     /* 0x0A */ s8 unk_A;
     /* 0x0B */ char pad_B[1];
@@ -33,7 +33,8 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
                               u8);
 /* 1B0664 */ void gm_801B0664(PlayerInitData*, u8 c_kind, u8 color, u8 stocks,
                               u8);
-/* 1B06B0 */ void gm_801B06B0(CSSData*, u8, s8, s8, s8, u8, u8, u8);
+/* 1B06B0 */ void gm_801B06B0(CSSData*, u8 match_type, s8 c_kind, s8 stocks,
+                              s8 color, u8, u8 cpu_level, u8 slot);
 /* 1B0730 */ void gm_801B0730(CSSData*, s8*, s8*, u8*, s8*, u8*);
 /* 1B07B4 */ void gm_801B07B4(CSSData*, s8, s8, s8, u8, u8, u8);
 /* 1B07E8 */ void gm_801B07E8(CSSData*, s8*, s8*, s8*, s8*, u8*);

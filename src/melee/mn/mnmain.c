@@ -11,6 +11,7 @@
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
@@ -1674,10 +1675,28 @@ void mn_8022BEDC(HSD_GObj* gobj)
     mn_804D6BB4 = HSD_SisLib_803A611C(0, temp_r3, 7, 8, 0x80, 7, 0x80, 0);
 }
 
-/// #mn_8022BFBC
+static GXColor mn_804D4B50 = { 0x5A, 0x73, 0xFF, 0xFF };
+static GXColor mn_804D4B54 = { 0xFF, 0x5A, 0x41, 0xFF };
+static GXColor mn_804D4B58 = { 0x0E, 0xD2, 0x41, 0xFF };
+static GXColor mn_804D4B5C = { 0xF0, 0xC8, 0x5A, 0xFF };
+static GXColor mn_804D4B60 = { 0x9B, 0x41, 0xFF, 0xFF };
 
-#pragma push
-#pragma dont_inline on
+GXColor* mn_8022BFBC(int arg0)
+{
+    switch (arg0) {
+    case 0:
+        return &mn_804D4B50;
+    case 1:
+        return &mn_804D4B54;
+    case 2:
+        return &mn_804D4B58;
+    case 3:
+        return &mn_804D4B5C;
+    case 4:
+        return &mn_804D4B60;
+    }
+}
+
 int mn_8022C010(int arg0, int arg1)
 {
     if (arg0 == 0) {
@@ -1724,11 +1743,52 @@ int mn_8022C010(int arg0, int arg1)
         return 4;
     }
 }
-#pragma pop
 
 /// #mn_8022C068
 
-/// #fn_8022C128
+void fn_8022C128(HSD_GObj* arg0)
+{
+    GXColor* var_r29;
+    HSD_LObj* temp_r28;
+    HSD_LObj* var_r5;
+    int temp_r6;
+
+    temp_r28 = GET_LOBJ(arg0);
+    HSD_LObjAnimAll(temp_r28);
+
+    var_r29 = mn_8022BFBC(mn_8022C010(mn_804A04F0.x0, mn_804A04F0.x2));
+
+    if (var_r29 != mn_804A04F0.x14) {
+        mn_804A04F0.x12 = 0x10;
+        mn_804A04F0.x14 = var_r29;
+    }
+    if (mn_804A04F0.x12 != 0) {
+        mn_804A04F0.x12--;
+        var_r5 = temp_r28;
+        temp_r6 = mn_804A04F0.x12;
+        while (!(var_r5->flags & 2)) {
+            var_r5 = var_r5->next;
+        }
+        if (temp_r6 != 0) {
+            if (mn_804A04F0.x14->r - var_r5->color.r) {
+                var_r5->color.r +=
+                    (mn_804A04F0.x14->r - var_r5->color.r) / temp_r6;
+            }
+            if (mn_804A04F0.x14->g - var_r5->color.g) {
+                var_r5->color.g +=
+                    (mn_804A04F0.x14->g - var_r5->color.g) / temp_r6;
+            }
+            if (mn_804A04F0.x14->b - var_r5->color.b) {
+                var_r5->color.b +=
+                    (mn_804A04F0.x14->b - var_r5->color.b) / temp_r6;
+            }
+        } else {
+            var_r5->color.r = mn_804A04F0.x14->r;
+            var_r5->color.g = mn_804A04F0.x14->g;
+            var_r5->color.b = mn_804A04F0.x14->b;
+        }
+    }
+}
 
 /// #mn_8022C304
 
@@ -1860,7 +1920,88 @@ void mn_8022C4F4(HSD_GObj* arg0)
 
 /// #mn_8022D7F4
 
-/// #mn_8022DB10
+mn_unk1 mn_804A04F0;
+
+void mn_8022DB10(HSD_GObj* arg0)
+{
+    int var_r31;
+    int temp_r29;
+    void (*temp_r28)(HSD_GObj*);
+    u16 var_r27;
+    HSD_GObjProc* temp_r3_2;
+    u32 temp_r3;
+
+    PAD_STACK(8);
+
+    temp_r29 = mn_803EB6B0[0].xC;
+    temp_r3 = mn_80229624(4U);
+    mn_804A04F0.x8 = 0;
+    if (temp_r3 & 0x10) {
+        mn_804D6BC8.x0 = 5;
+        mn_804A04F0.x11 = 1;
+        lbAudioAx_80024030(1);
+        mn_804A04F0.x1 = mn_804A04F0.x0;
+        switch (mn_804A04F0.x2) {
+        case 0:
+            var_r31 = 1;
+            var_r27 = 0;
+            break;
+        case 1:
+            var_r31 = 2;
+            var_r27 = 0;
+            break;
+        case 2:
+            var_r31 = 3;
+            var_r27 = 0;
+            break;
+        case 3:
+            var_r31 = 4;
+            var_r27 = 0;
+            break;
+        case 4:
+            var_r31 = 5;
+            var_r27 = 0;
+            break;
+        }
+        mn_804D6BC8.x0 = 5;
+        mn_804A04F0.x1 = mn_804A04F0.x0;
+        mn_804A04F0.x0 = var_r31;
+        mn_804A04F0.x2 = var_r27;
+        HSD_GObj_80390CD4(mn_8022B3A0(1));
+        HSD_GObjPLink_80390228(HSD_GObj_804D781C);
+        if ((temp_r28 = mn_803EB6B0[var_r31].x10)) {
+            temp_r3_2 =
+                HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r28, 0);
+            temp_r3_2->flags_3 = HSD_GObj_804D783C;
+        }
+    } else if (temp_r3 & 0x20) {
+        u8* data;
+        lbAudioAx_80024030(0);
+        mn_804A04F0.x11 = 0;
+        mn_804D6BC8.x0 = 5;
+        data = gm_801A4B9C();
+        *data = 0;
+        gm_801A4B60();
+    } else if (temp_r3 & 1) {
+        lbAudioAx_80024030(2);
+        do {
+            if (mn_804A04F0.x2 != 0) {
+                mn_804A04F0.x2--;
+            } else {
+                mn_804A04F0.x2 = (u8) temp_r29 - 1;
+            }
+        } while (mn_80229938(0, mn_804A04F0.x2) == 0);
+    } else if (temp_r3 & 2) {
+        lbAudioAx_80024030(2);
+        do {
+            if (mn_804A04F0.x2 == (u8) temp_r29 - 1) {
+                mn_804A04F0.x2 = 0;
+            } else {
+                mn_804A04F0.x2++;
+            }
+        } while (mn_80229938(0, mn_804A04F0.x2) == 0);
+    }
+}
 
 void mn_8022DD38_OnFrame(void)
 {
@@ -1880,7 +2021,7 @@ void mn_8022DD38_OnFrame(void)
     }
 }
 
-u8 data_pad[0xd5c - 0xc4c] = { 0 };
+u8 data_pad[0xd5c - 0xcd4] = { 0 };
 
 static inline void mn_8022DDA8_inline(u16* sp2B4)
 {
@@ -1895,7 +2036,7 @@ static inline void mn_8022DDA8_inline(u16* sp2B4)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
     mn_804A04F0.x12 = 0;
     temp_r29 = mn_8022C010(mn_804A04F0.x0, *sp2B4);
-    mn_804A04F0.x14 = mn_8022BFBC();
+    mn_804A04F0.x14 = mn_8022BFBC(temp_r29);
     mn_8022C068(lobj, temp_r29, mn_804A04F0.x12);
 }
 

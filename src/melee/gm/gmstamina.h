@@ -5,7 +5,6 @@
 
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
-#include <sysdolphin/baselib/forward.h>
 
 /* 1B91C8 */ void gm_801B91C8(MinorScene*);
 /* 1B922C */ void gm_801B922C(MinorScene*);
@@ -16,7 +15,6 @@
 /* 1B95B0 */ void gm_801B95B0_OnInit(void);
 /* 1B95D8 */ void gm_801B95D8_OnLoad(void);
 /* 1B9600 */ int gm_801B9600(void);
-/* 1B96E8 */ void fn_801B96E8(HSD_GObj*);
 /* 1B97C4 */ void gm_801B97C4(int slot, bool);
 /* 1B9850 */ void fn_801B9850(void);
 

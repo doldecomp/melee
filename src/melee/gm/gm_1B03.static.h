@@ -3,19 +3,6 @@
 #include "dolphin/types.h"
 #include "gm/types.h"
 
-
-struct DebugGameOverData {
-    u32 x0;
-    u8 pad_x4[0x4];
-    u32 x8;
-    u8 pad_xC[0x4];
-    u32 x10;
-    u8 x14;
-    u8 x15;
-    u16 x16;
-    u16 x18;
-};
-
 struct DebugResultsData {
     u8 pad_x0[0x2284];
 }; /// data used by gm_801B0DD0

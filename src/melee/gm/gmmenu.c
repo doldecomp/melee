@@ -7,7 +7,7 @@
 void gm_801A50B8_OnLoad(void)
 {
     u8 var_r0;
-    struct UnkAllstarData* temp_r3;
+    UnkAllstarData* temp_r3;
 
     temp_r3 = gm_8017EB30();
     var_r0 = temp_r3->x0;
@@ -26,7 +26,7 @@ void gm_801A50B8_OnLoad(void)
 void gm_801A5130_OnLoad(void)
 {
     u8 var_r0;
-    struct UnkAllstarData* temp_r3;
+    UnkAllstarData* temp_r3;
 
     temp_r3 = gm_8017E424();
     var_r0 = temp_r3->x0;
@@ -44,7 +44,7 @@ void gm_801A5130_OnLoad(void)
 
 void gm_801A51A8_OnLoad(void)
 {
-    struct UnkAllstarData* tmp = &gm_80473A18;
+    UnkAllstarData* tmp = &gm_80473A18;
     u8 var_r0;
 
     if (tmp->x0 == 0x12 && tmp->xC.x6 != 0) {

@@ -73,6 +73,6 @@
 /* 18A314 */ UNK_RET gm_8018A314(UNK_PARAMS);
 /* 18A364 */ void fn_8018A364(int);
 
-/* 473A18 */ extern struct UnkAllstarData gm_80473A18;
+/* 473A18 */ extern UnkAllstarData gm_80473A18;
 
 #endif

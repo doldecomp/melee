@@ -1,9 +1,10 @@
 #ifndef MELEE_MN_MAIN_H
 #define MELEE_MN_MAIN_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
+#include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 #include <baselib/object.h>
 
@@ -17,7 +18,7 @@ typedef struct _mn_unk1 {
     u8 x11;
     u8 x12;
     u8 x13;
-    int x14;
+    GXColor* x14;
 } mn_unk1;
 
 typedef struct _mn_unk2 {
@@ -51,7 +52,7 @@ typedef struct _mn_unk2 {
 /* 22BDB4 */ void fn_8022BDB4(HSD_GObj*, int);
 /* 22BE34 */ HSD_GObj* mn_8022BE34(void);
 /* 22BEDC */ void mn_8022BEDC(HSD_GObj*);
-/* 22BFBC */ int mn_8022BFBC(void);
+/* 22BFBC */ GXColor* mn_8022BFBC(int);
 /* 22C010 */ int mn_8022C010(int, int);
 /* 22C068 */ void mn_8022C068(HSD_LObj*, int, int);
 /* 22C128 */ void fn_8022C128(HSD_GObj*);

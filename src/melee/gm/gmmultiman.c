@@ -10,8 +10,8 @@
 #include <melee/lb/lbcardnew.h>
 
 extern CSSData gm_804950F0;
-extern UNK_T gm_80495238[];
-extern UNK_T gm_80495370[];
+extern VsModeData gm_80495238;
+extern MatchExitInfo gm_80495370;
 extern StartMeleeData gm_80490AA8;
 extern StartMeleeData gm_80490BE0;
 extern StartMeleeData gm_80490960;

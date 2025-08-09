@@ -1795,8 +1795,8 @@ void it_802A6F80(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg3)
     PSVECCrossProduct(arg2, &vec0, &vec1);
     lbVector_Normalize(&vec0);
     lbVector_Normalize(&vec1);
-    PSMTXIdentity((MtxPtr) &m1);
-    PSMTXIdentity((MtxPtr) &m0);
+    PSMTXIdentity(m1);
+    PSMTXIdentity(m0);
 
     m0[0][0] = arg3;
     m0[1][1] = arg3;
@@ -1818,8 +1818,8 @@ void it_802A6F80(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg3)
     m1[1][3] = arg1->y;
     m1[2][3] = arg1->z;
 
-    PSMTXConcat((MtxPtr) &m0, (MtxPtr) &m1, (MtxPtr) &m0);
-    HSD_JObjCopyMtx(arg0, m0);
+    PSMTXConcat(m1, m0, m1);
+    HSD_JObjCopyMtx(arg0, m1);
     arg0->flags |= 0x03800000;
     HSD_JObjSetMtxDirty(arg0);
 }
@@ -1833,13 +1833,10 @@ void it_802A7168(Item* arg0, Vec3* arg1, f32 arg8)
     Vec3 vec_2;
     Vec3 vec_3;
     Vec3 vec_4;
-    Vec3 vec_5;
-    ItemLink* item_link_prev;
-    ItemLink* item_link_prev_2;
-    f32 pad[2];
+    PAD_STACK(4);
 
-    fp = arg0->owner->user_data;
-    if (fp->kind == 6) {
+    fp = GET_FIGHTER(arg0->owner);
+    if (fp->kind == FTKIND_LINK) {
         item_link = arg0->xDD4_itemVar.linkhookshot.x4;
     } else {
         item_link = arg0->xDD4_itemVar.linkhookshot.x4;
@@ -1850,30 +1847,28 @@ void it_802A7168(Item* arg0, Vec3* arg1, f32 arg8)
     }
 
     while (item_link != NULL) {
-        item_link_prev = item_link->prev;
-        if (item_link_prev != NULL) {
-            if (item_link_prev->flag0) {
-                vec = item_link_prev->pos;
+        if (item_link->next != NULL) {
+            if (item_link->next->flag0) {
+                vec = item_link->next->pos;
             } else {
                 vec = *arg1;
             }
         } else {
             vec = *arg1;
         }
-        item_link_prev_2 = item_link->prev;
 
-        if (item_link_prev_2 != NULL) {
-            vec_2 = item_link_prev_2->pos;
+        if (item_link->prev != NULL) {
+            vec_2 = item_link->prev->pos;
         } else {
             vec_2 = item_link->pos;
         }
-        jobj = item_link->x1D0_GObj->hsd_obj;
-        vec_4 = item_link->pos;
-        HSD_JObjSetTranslate(jobj, &vec_4);
-        vec_5.x = vec_2.x - vec.x;
-        vec_5.y = vec_2.y - vec.y;
-        vec_5.z = vec_2.z - vec.z;
-        it_802A6F80(jobj, &vec_4, &vec_5, arg8);
+        jobj = GET_JOBJ(item_link->x1D0_GObj);
+        vec_3 = item_link->pos;
+        HSD_JObjSetTranslate(jobj, &vec_3);
+        vec_4.x = vec_2.x - vec.x;
+        vec_4.y = vec_2.y - vec.y;
+        vec_4.z = vec_2.z - vec.z;
+        it_802A6F80(jobj, &vec_3, &vec_4, arg8);
         item_link = item_link->prev;
     }
 }

@@ -52,7 +52,7 @@
 /* 02E158 */ UNK_RET Camera_8002E158(UNK_PARAMS);
 /* 02E234 */ UNK_RET Camera_8002E234(UNK_PARAMS);
 /* 02E490 */ void Camera_8002E490(void*);
-/* 02E6FC */ void Camera_8002E6FC(u8);
+/* 02E6FC */ void Camera_8002E6FC(int);
 /* 02E818 */ void Camera_8002E818(Vec*);
 /* 02E948 */ void Camera_8002E948(bool (*)(Vec*));
 /* 02EA64 */ void Camera_8002EA64(Vec*);

@@ -229,7 +229,7 @@ void* gmMainLib_8015CDD4(void)
     return &gmMainLib_804D3EE0->unk_522;
 }
 
-void* gmMainLib_8015CDE0(void)
+struct gmm_x0_528_t* gmMainLib_8015CDE0(void)
 {
     return &gmMainLib_804D3EE0->unk_528;
 }
