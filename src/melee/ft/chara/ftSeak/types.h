@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_TYPES_H
 #define MELEE_FT_CHARA_FTSEAK_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 #include <baselib/forward.h>
@@ -49,10 +49,10 @@ typedef struct _ftSeakAttributes { // x2D4 (fp->dat_attrs)
     f32 x68;
     f32 x6C;
     f32 x70;
-    //u8 data_filler_1[0x04];
+    // u8 data_filler_1[0x04];
 } ftSeakAttributes;
 
-typedef struct itChainSegment {
+struct itChainSegment {
     float x00;
     float x04;
     float x08;
@@ -74,7 +74,7 @@ typedef struct itChainSegment {
     float x48;
     float x4C;
     float x50;
-} itChainSegment;
+};
 
 union ftSeak_MotionVars {
     struct ftSeak_SpecialNVars {

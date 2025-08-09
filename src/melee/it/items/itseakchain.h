@@ -1,15 +1,19 @@
 #ifndef GALE01_2BAEEC
 #define GALE01_2BAEEC
 
+#include "ftSeak/forward.h"
 #include "it/forward.h"
 
 #include "it/items/types.h"
 
-/* 2BAEEC */ UNK_RET it_802BAEEC(UNK_PARAMS);
-/* 2BAF0C */ UNK_RET it_802BAF0C(UNK_PARAMS);
+/* 2BAEEC */ void it_802BAEEC(Item_GObj*);
+/* 2BAEEC */ void it_802BAEEC(Item_GObj* gobj);
+/* 2BAF0C */ void it_802BAF0C(Item_GObj*);
+/* 2BAF0C */ void it_802BAF0C(Item_GObj* gobj);
 /* 2BAF2C */ UNK_RET it_802BAF2C(UNK_PARAMS);
-/* 2BB20C */ UNK_RET it_802BB20C(UNK_PARAMS);
-/* 2BB290 */ UNK_RET it_802BB290(UNK_PARAMS);
+/* 2BB20C */ void it_802BB20C(Item_GObj*);
+/* 2BB290 */ HSD_GObj* it_802BB290(Item_GObj* gobj, Vec3* arg1,
+                                   float facing_dir);
 /* 2BB428 */ UNK_RET fn_802BB428(UNK_PARAMS);
 /* 2BB44C */ UNK_RET fn_802BB44C(UNK_PARAMS);
 /* 2BB574 */ UNK_RET fn_802BB574(UNK_PARAMS);
@@ -29,9 +33,12 @@
 /* 2BCE94 */ void it_802BCE94(Item_GObj*);
 /* 2BCED4 */ UNK_RET it_802BCED4(UNK_PARAMS);
 /* 2BCF2C */ UNK_RET it_802BCF2C(UNK_PARAMS);
-/* 2BCF84 */ UNK_RET it_802BCF84(UNK_PARAMS);
-/* 2BCFC4 */ UNK_RET it_802BCFC4(UNK_PARAMS);
+/* 2BCF84 */ void it_802BCF84(Item_GObj*);
+/* 2BCFC4 */ void it_802BCFC4(Item_GObj* gobj, float* arg1,
+                              itChainSegment* chainSegment, Item* item_data,
+                              float arg4);
 /* 2BD10C */ void it_802BD10C(Item_GObj*, Item_GObj*);
+/* 2BDBF8 */ void it_802BDBF8(Item_GObj* gobj);
 /* 3F7438 */ extern ItemStateTable it_803F7438[];
 
 #endif

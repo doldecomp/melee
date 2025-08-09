@@ -8,6 +8,8 @@
 #include "gm_unsplit.h"
 #include "gmopening.h"
 
+#include "un/un_3028.h"
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
