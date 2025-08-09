@@ -696,7 +696,9 @@ int fn_80181BFC(int* arg0)
     int count = 0;
 
     for (i = 1; i < 6; i++) {
-        if (Player_GetFalls(i) == 0 && Player_GetPlayerSlotType(i) != 3) {
+        if (Player_GetFalls(i) == 0 &&
+            Player_GetPlayerSlotType(i) != Gm_PKind_NA)
+        {
             count += 1;
         } else if (arg0 != NULL) {
             *arg0 = i;
