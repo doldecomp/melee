@@ -2,7 +2,7 @@
 
 #include "grpushon.h"
 
-void grPushOn_802182C4(void) {}
+void grPushOn_802182C4(bool arg) {}
 
 /// #grPushOn_802182C8
 
@@ -68,7 +68,7 @@ void grPushOn_80218ED0(Ground_GObj* arg) {}
 
 /// #grPushOn_80219458
 
-bool grPushOn_80219528(void)
+bool grPushOn_80219528(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

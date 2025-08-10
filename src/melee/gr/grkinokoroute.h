@@ -5,10 +5,10 @@
 
 #include "it/inlines.h"
 
-/* 20741C */ UNK_RET grKinokoRoute_8020741C(UNK_PARAMS);
-/* 207420 */ UNK_RET grKinokoRoute_80207420(UNK_PARAMS);
-/* 207490 */ UNK_RET grKinokoRoute_80207490(UNK_PARAMS);
-/* 2074D8 */ UNK_RET grKinokoRoute_802074D8(UNK_PARAMS);
+/* 20741C */ void grKinokoRoute_8020741C(bool);
+/* 207420 */ void grKinokoRoute_80207420(void);
+/* 207490 */ void grKinokoRoute_80207490(void);
+/* 2074D8 */ void grKinokoRoute_802074D8(void);
 /* 207544 */ bool grKinokoRoute_80207544(void);
 /* 20754C */ UNK_RET grKinokoRoute_8020754C(UNK_PARAMS);
 /* 207634 */ void grKinokoRoute_80207634(Ground_GObj*);
@@ -34,7 +34,7 @@
 /* 208564 */ UNK_RET grKinokoRoute_80208564(UNK_PARAMS);
 /* 208660 */ UNK_RET fn_80208660(UNK_PARAMS);
 /* 2086EC */ UNK_RET grKinokoRoute_802086EC(UNK_PARAMS);
-/* 208754 */ bool grKinokoRoute_80208754(void);
-/* 20875C */ UNK_RET grKinokoRoute_8020875C(UNK_PARAMS);
+/* 208754 */ DynamicsDesc* grKinokoRoute_80208754(enum_t);
+/* 20875C */ bool grKinokoRoute_8020875C(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

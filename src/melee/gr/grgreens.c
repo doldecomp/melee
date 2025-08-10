@@ -4,7 +4,7 @@
 
 static s8 grGr_804D6AAC;
 
-void grGreens_80213458(void)
+void grGreens_80213458(bool arg)
 {
     grGr_804D6AAC = 1;
 }
@@ -133,12 +133,12 @@ void fn_80215D50(void) {}
 
 /// #fn_80216DE4
 
-bool grGreens_80216E64(void)
+DynamicsDesc* grGreens_80216E64(enum_t arg)
 {
     return false;
 }
 
-bool grGreens_80216E6C(void)
+bool grGreens_80216E6C(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

@@ -2,7 +2,7 @@
 
 #include "grrcruise.h"
 
-void grRCruise_801FF164(void) {}
+void grRCruise_801FF164(bool arg) {}
 
 /// #grRCruise_801FF168
 
@@ -126,12 +126,12 @@ void grRCruise_8020045C(Ground_GObj* arg) {}
 
 /// #fn_80201BE0
 
-bool grRCruise_80201C50(void)
+DynamicsDesc* grRCruise_80201C50(enum_t arg)
 {
     return false;
 }
 
-bool grRCruise_80201C58(void)
+bool grRCruise_80201C58(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

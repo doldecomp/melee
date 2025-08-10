@@ -7,7 +7,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
-void grMuteCity_801EFC68(void) {}
+void grMuteCity_801EFC68(bool arg) {}
 
 /// #grMuteCity_801EFC6C
 

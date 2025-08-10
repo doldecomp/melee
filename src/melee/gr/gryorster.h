@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 201FA0 */ void grYorster_80201FA0(int);
+/* 201FA0 */ void grYorster_80201FA0(bool);
 /* 201FA4 */ void grYorster_80201FA4(void);
 /* 20200C */ void grYorster_8020200C(void);
 /* 202010 */ void grYorster_80202010(void);

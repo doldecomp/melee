@@ -11,11 +11,11 @@
 
 #include "it/inlines.h"
 
-/* 2107DC */ UNK_RET grOldPupupu_802107DC(UNK_PARAMS);
-/* 2107E0 */ UNK_RET grOldPupupu_802107E0(UNK_PARAMS);
-/* 210884 */ UNK_RET grOldPupupu_80210884(UNK_PARAMS);
+/* 2107DC */ void grOldPupupu_802107DC(bool);
+/* 2107E0 */ void grOldPupupu_802107E0(void);
+/* 210884 */ void grOldPupupu_80210884(void);
 /* 210888 */ void grOldPupupu_80210888(void);
-/* 2108AC */ bool grOldPupupu_802108AC(HSD_GObj*);
+/* 2108AC */ bool grOldPupupu_802108AC(void);
 /* 2108B4 */ UNK_RET grOldPupupu_802108B4(UNK_PARAMS);
 /* 21099C */ void grOldPupupu_8021099C(Ground_GObj*);
 /* 2109C8 */ bool grOldPupupu_802109C8(Ground_GObj*);
@@ -55,7 +55,7 @@
 /* 211C14 */ bool grOldPupupu_80211C14(Ground_GObj*);
 /* 211C1C */ void grOldPupupu_80211C1C(Ground_GObj*);
 /* 211C9C */ void grOldPupupu_80211C9C(Ground_GObj*);
-/* 211CA0 */ bool grOldPupupu_80211CA0(HSD_GObj*);
+/* 211CA0 */ DynamicsDesc* grOldPupupu_80211CA0(enum_t);
 /* 211CA8 */ bool grOldPupupu_80211CA8(Vec3*, int, HSD_JObj*);
 
 #endif

@@ -5,10 +5,10 @@
 
 #include "it/inlines.h"
 
-/* 2182C4 */ UNK_RET grPushOn_802182C4(UNK_PARAMS);
-/* 2182C8 */ UNK_RET grPushOn_802182C8(UNK_PARAMS);
-/* 218330 */ UNK_RET grPushOn_80218330(UNK_PARAMS);
-/* 218378 */ UNK_RET grPushOn_80218378(UNK_PARAMS);
+/* 2182C4 */ void grPushOn_802182C4(bool);
+/* 2182C8 */ void grPushOn_802182C8(void);
+/* 218330 */ void grPushOn_80218330(void);
+/* 218378 */ void grPushOn_80218378(void);
 /* 2183DC */ bool grPushOn_802183DC(void);
 /* 2183E4 */ UNK_RET grPushOn_802183E4(UNK_PARAMS);
 /* 2184CC */ void grPushOn_802184CC(Ground_GObj*);
@@ -31,7 +31,7 @@
 /* 219204 */ UNK_RET grPushOn_80219204(UNK_PARAMS);
 /* 219230 */ int grPushOn_80219230(int);
 /* 2192A4 */ UNK_RET fn_802192A4(UNK_PARAMS);
-/* 219458 */ UNK_RET grPushOn_80219458(UNK_PARAMS);
-/* 219528 */ bool grPushOn_80219528(void);
+/* 219458 */ DynamicsDesc* grPushOn_80219458(enum_t);
+/* 219528 */ bool grPushOn_80219528(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif
