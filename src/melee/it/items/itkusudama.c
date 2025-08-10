@@ -21,76 +21,76 @@
 
 /// #it_8028A190
 
-/// #it_8028A298
+/// #itKusudama_UnkMotion0_Anim
 
-void it_8028A2C0(Item_GObj* gobj) {}
+void itKusudama_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_8028A2C4
+/// #itKusudama_UnkMotion0_Coll
 
-/// #it_8028A2F0
+/// #itKusudama_UnkMotion1_Anim
 
-void it_8028A3A4(Item_GObj* gobj) {}
+void itKusudama_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_8028A3A8
+/// #itKusudama_UnkMotion1_Coll
 
 /// #it_8028A3CC
 
-/// #it_8028A4C0
+/// #itKusudama_UnkMotion2_Anim
 
-/// #it_8028A4E8
+/// #itKusudama_UnkMotion2_Phys
 
-/// #it_8028A518
+/// #itKusudama_UnkMotion2_Coll
 
 /// #it_8028A544
 
-/// #it_8028A690
+/// #itKusudama_UnkMotion3_Anim
 
-void it_8028A7F0(Item_GObj* gobj) {}
+void itKusudama_UnkMotion3_Phys(Item_GObj* gobj) {}
 
-/// #it_8028A7F4
+/// #itKusudama_UnkMotion3_Coll
 
 /// #it_8028A93C
 
-bool it_8028A964(Item_GObj* gobj)
+bool itKusudama_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028A96C(Item_GObj* gobj) {}
+void itKusudama_UnkMotion4_Phys(Item_GObj* gobj) {}
 
 /// #it_8028A970
 
-bool it_8028A9AC(Item_GObj* gobj)
+bool itKusudama_UnkMotion6_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8028A9B4
+/// #itKusudama_UnkMotion6_Phys
 
-/// #it_8028AA00
+/// #itKusudama_UnkMotion5_Coll
 
 /// #it_8028AB28
 
-/// #it_8028AB64
+/// #itKusudama_UnkMotion6_Coll
 
 /// #it_8028AC74
 
-/// #it_8028AD18
+/// #itKusudama_UnkMotion7_Anim
 
-void it_8028AD38(Item_GObj* gobj) {}
+void itKusudama_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-bool it_8028AD3C(Item_GObj* gobj)
+bool itKusudama_UnkMotion7_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_8028AD44
 
-/// #it_8028ADD4
+/// #itKusudama_UnkMotion8_Anim
 
-void it_8028AE98(Item_GObj* gobj) {}
+void itKusudama_UnkMotion8_Phys(Item_GObj* gobj) {}
 
-bool it_8028AE9C(Item_GObj* gobj)
+bool itKusudama_UnkMotion8_Coll(Item_GObj* gobj)
 {
     return false;
 }

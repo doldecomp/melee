@@ -17,7 +17,7 @@ void it_802C70C0(Item_GObj*);
 void it_802C70E0(Item_GObj*);
 void it_802C7100(Item_GObj* item_gobj);
 void it_802C7158(HSD_GObj* arg0);
-bool it_802C7180(Item_GObj* item_gobj);
+bool itGamewatchturtle_UnkMotion1_Anim(Item_GObj* item_gobj);
 void it_802C71EC(HSD_GObj*, HSD_GObj*);
 
 #endif

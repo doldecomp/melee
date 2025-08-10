@@ -12,26 +12,26 @@
 #include <melee/it/item.h>
 
 /* 295138 */ static void it_80295138(Item_GObj*);
-/* 295188 */ static bool it_80295188(Item_GObj*);
-/* 295190 */ static void it_80295190(Item_GObj*);
-/* 295194 */ static bool it_80295194(Item_GObj*);
+/* 295188 */ static bool itRabbitc_UnkMotion0_Anim(Item_GObj*);
+/* 295190 */ static void itRabbitc_UnkMotion0_Phys(Item_GObj*);
+/* 295194 */ static bool itRabbitc_UnkMotion0_Coll(Item_GObj*);
 /* 2951C0 */ static void it_802951C0(Item_GObj*);
-/* 2951E8 */ static bool it_802951E8(Item_GObj*);
-/* 2951F0 */ static void it_802951F0(Item_GObj*);
-/* 295220 */ static bool it_80295220(Item_GObj*);
-/* 295290 */ static bool it_80295290(Item_GObj*);
-/* 2952DC */ static void it_802952DC(Item_GObj*);
-/* 29530C */ static bool it_8029530C(Item_GObj*);
-/* 295368 */ static bool it_80295368(Item_GObj*);
-/* 295370 */ static void it_80295370(Item_GObj*);
-/* 295374 */ static bool it_80295374(Item_GObj*);
+/* 2951E8 */ static bool itRabbitc_UnkMotion3_Anim(Item_GObj*);
+/* 2951F0 */ static void itRabbitc_UnkMotion1_Phys(Item_GObj*);
+/* 295220 */ static bool itRabbitc_UnkMotion1_Coll(Item_GObj*);
+/* 295290 */ static bool itRabbitc_UnkMotion2_Anim(Item_GObj*);
+/* 2952DC */ static void itRabbitc_UnkMotion3_Phys(Item_GObj*);
+/* 29530C */ static bool itRabbitc_UnkMotion3_Coll(Item_GObj*);
+/* 295368 */ static bool itRabbitc_UnkMotion4_Anim(Item_GObj*);
+/* 295370 */ static void itRabbitc_UnkMotion4_Phys(Item_GObj*);
+/* 295374 */ static bool itRabbitc_UnkMotion4_Coll(Item_GObj*);
 
 ItemStateTable it_803F6270[] = {
-    { -1, it_80295188, it_80295190, it_80295194 },
-    { -1, it_802951E8, it_802951F0, it_80295220 },
-    { -1, it_80295290, NULL, NULL },
-    { -1, it_802951E8, it_802952DC, it_8029530C },
-    { -1, it_80295368, it_80295370, it_80295374 },
+    { -1, itRabbitc_UnkMotion0_Anim, itRabbitc_UnkMotion0_Phys, itRabbitc_UnkMotion0_Coll },
+    { -1, itRabbitc_UnkMotion3_Anim, itRabbitc_UnkMotion1_Phys, itRabbitc_UnkMotion1_Coll },
+    { -1, itRabbitc_UnkMotion2_Anim, NULL, NULL },
+    { -1, itRabbitc_UnkMotion3_Anim, itRabbitc_UnkMotion3_Phys, itRabbitc_UnkMotion3_Coll },
+    { -1, itRabbitc_UnkMotion4_Anim, itRabbitc_UnkMotion4_Phys, itRabbitc_UnkMotion4_Coll },
 };
 
 bool it_80294DA0(Item_GObj* item_gobj)
@@ -121,14 +121,14 @@ void it_80295138(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_80295188(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_80295190(Item_GObj* item_gobj) {}
+void itRabbitc_UnkMotion0_Phys(Item_GObj* item_gobj) {}
 
-bool it_80295194(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion0_Coll(Item_GObj* item_gobj)
 {
     it_8026D62C(item_gobj, it_802951C0);
     return false;
@@ -139,12 +139,12 @@ void it_802951C0(HSD_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_802951E8(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion3_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_802951F0(Item_GObj* item_gobj)
+void itRabbitc_UnkMotion1_Phys(Item_GObj* item_gobj)
 {
     ItemAttr* attr;
 
@@ -152,7 +152,7 @@ void it_802951F0(Item_GObj* item_gobj)
     it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
-bool it_80295220(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion1_Coll(Item_GObj* item_gobj)
 {
     it_8026E15C(item_gobj, it_80295138);
     return false;
@@ -166,7 +166,7 @@ void it_8029524C(Item_GObj* item_gobj)
     it_80272A3C(it_80272CC0(item_gobj, 3));
 }
 
-bool it_80295290(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion2_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
@@ -179,7 +179,7 @@ void it_80295298(Item_GObj* item_gobj)
     it_80272A18(it_80272CC0(item_gobj, 3));
 }
 
-void it_802952DC(Item_GObj* item_gobj)
+void itRabbitc_UnkMotion3_Phys(Item_GObj* item_gobj)
 {
     ItemAttr* attr;
 
@@ -187,7 +187,7 @@ void it_802952DC(Item_GObj* item_gobj)
     it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
-bool it_8029530C(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion3_Coll(Item_GObj* item_gobj)
 {
     if (it_8026DA08(item_gobj) != 0) {
         return true;
@@ -200,14 +200,14 @@ void it_80295340(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 4, ITEM_ANIM_UPDATE);
 }
 
-bool it_80295368(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion4_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_80295370(Item_GObj* item_gobj) {}
+void itRabbitc_UnkMotion4_Phys(Item_GObj* item_gobj) {}
 
-bool it_80295374(Item_GObj* item_gobj)
+bool itRabbitc_UnkMotion4_Coll(Item_GObj* item_gobj)
 {
     it_8026E8C4(item_gobj, it_80295138, it_802951C0);
     return false;

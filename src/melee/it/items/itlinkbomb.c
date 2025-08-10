@@ -16,13 +16,13 @@
 static Vec3 it_803B8640;
 
 ItemStateTable it_803F6888[] = {
-    { 0, it_8029E074, it_8029E218, NULL },
-    { 0, it_8029E3D8, it_8029E574, it_8029E5A4 },
-    { 1, it_8029E920, it_8029EAF0, it_8029EB3C },
-    { 1, it_8029EF84, it_8029F04C, it_8029F098 },
-    { 0, it_8029F3DC, it_8029F60C, it_8029F670 },
-    { 2, it_8029F934, it_8029F954, it_8029F958 },
-    { 0, it_8029FB4C, it_8029FCE8, it_8029FCEC },
+    { 0, itLinkbomb_UnkMotion0_Anim, itLinkbomb_UnkMotion0_Phys, NULL },
+    { 0, itLinkbomb_UnkMotion1_Anim, itLinkbomb_UnkMotion1_Phys, itLinkbomb_UnkMotion1_Coll },
+    { 1, itLinkbomb_UnkMotion2_Anim, itLinkbomb_UnkMotion2_Phys, itLinkbomb_UnkMotion2_Coll },
+    { 1, itLinkbomb_UnkMotion3_Anim, itLinkbomb_UnkMotion3_Phys, itLinkbomb_UnkMotion3_Coll },
+    { 0, itLinkbomb_UnkMotion4_Anim, itLinkbomb_UnkMotion4_Phys, itLinkbomb_UnkMotion4_Coll },
+    { 2, itLinkbomb_UnkMotion5_Anim, itLinkbomb_UnkMotion5_Phys, itLinkbomb_UnkMotion5_Coll },
+    { 0, itLinkbomb_UnkMotion6_Anim, itLinkbomb_UnkMotion6_Phys, itLinkbomb_UnkMotion6_Coll },
 };
 
 // @todo This uses the de-duplicated function ftCo_800C6AFC
@@ -238,7 +238,7 @@ void it_8029DEB0(HSD_GObj* gobj)
     it_8026BCF4((Item_GObj*) gobj);
 }
 
-bool it_8029E074(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion0_Anim(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -263,7 +263,7 @@ bool it_8029E074(HSD_GObj* gobj)
     return 0;
 }
 
-void it_8029E218(HSD_GObj* gobj)
+void itLinkbomb_UnkMotion0_Phys(HSD_GObj* gobj)
 {
     return;
 }
@@ -274,7 +274,7 @@ void fn_8029E21C(HSD_GObj* gobj)
     it_8029D9A4(gobj, 1, 0x0);
 }
 
-bool it_8029E3D8(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion1_Anim(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -301,7 +301,7 @@ bool it_8029E3D8(HSD_GObj* gobj)
     return 0;
 }
 
-void it_8029E574(HSD_GObj* gobj)
+void itLinkbomb_UnkMotion1_Phys(HSD_GObj* gobj)
 {
     ItemAttr* temp_r4;
 
@@ -310,7 +310,7 @@ void it_8029E574(HSD_GObj* gobj)
                 temp_r4->x14_fall_speed_max);
 }
 
-bool it_8029E5A4(Item_GObj* gobj)
+bool itLinkbomb_UnkMotion1_Coll(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_8029F18C);
     return 0;
@@ -329,7 +329,7 @@ void it_8029E5D0(HSD_GObj* gobj)
     }
 }
 
-bool it_8029E920(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion2_Anim(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -356,7 +356,7 @@ bool it_8029E920(HSD_GObj* gobj)
     return 0;
 }
 
-void it_8029EAF0(Item_GObj* gobj)
+void itLinkbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
     ItemAttr* temp_r4;
 
@@ -379,7 +379,7 @@ static inline int it_LinkBomb_Inline_VelocityCompare(HSD_GObj* gobj, Vec3* vel)
     }
 }
 
-bool it_8029EB3C(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion2_Coll(HSD_GObj* gobj)
 {
     Item* item;
     s32 temp_r3;
@@ -412,24 +412,24 @@ void it_8029EC34(HSD_GObj* gobj)
     }
 }
 
-static inline void it_8029E3D8_fake_2(HSD_GObj* gobj)
+static inline void itLinkbomb_UnkMotion1_Anim_fake_2(HSD_GObj* gobj)
 {
     it_8029DB5C(gobj);
 }
 
-static inline void it_8029E3D8_fake(HSD_GObj* gobj)
+static inline void itLinkbomb_UnkMotion1_Anim_fake(HSD_GObj* gobj)
 {
     if (it_80272C6C(gobj) == 0) {
         fn_8029E21C(gobj);
     }
-    it_8029E3D8_fake_2(gobj);
+    itLinkbomb_UnkMotion1_Anim_fake_2(gobj);
 }
 
 // This should have a non-inlined it_8029DB5C, presumably expanded from
-// it_8029E3D8, but I can't figure out how to get a match for it_8029E3D8 that
+// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for itLinkbomb_UnkMotion1_Anim that
 // calls it_8029DB5C. Not sure if that's related to the unused
 // item/specialattributes.
-bool it_8029EF84(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion3_Anim(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -442,11 +442,11 @@ bool it_8029EF84(HSD_GObj* gobj)
     if (it_80272C6C(gobj) == 0) {
         it_8029EC34(gobj);
     }
-    it_8029E3D8_fake(gobj);
+    itLinkbomb_UnkMotion1_Anim_fake(gobj);
     return 0;
 }
 
-void it_8029F04C(Item_GObj* gobj)
+void itLinkbomb_UnkMotion3_Phys(Item_GObj* gobj)
 {
     ItemAttr* temp_r4;
     temp_r4 = GET_ITEM(gobj)->xCC_item_attr;
@@ -454,10 +454,10 @@ void it_8029F04C(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-bool it_8029F098(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion3_Coll(HSD_GObj* gobj)
 {
     GET_ITEM(gobj);
-    it_8029EB3C(gobj);
+    itLinkbomb_UnkMotion2_Coll(gobj);
     return 0;
 }
 
@@ -504,7 +504,7 @@ void it_8029F18C(HSD_GObj* gobj)
 
 // This regswap may or may not be related to the fake inline for it_8029DB5C,
 // but every other function matches with it.
-bool it_8029F3DC(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion4_Anim(HSD_GObj* gobj)
 {
     Article* article;
     Item* item;
@@ -530,7 +530,7 @@ bool it_8029F3DC(HSD_GObj* gobj)
     return 0;
 }
 
-void it_8029F60C(HSD_GObj* gobj)
+void itLinkbomb_UnkMotion4_Phys(HSD_GObj* gobj)
 {
     f32 temp_f2;
     Item* item;
@@ -551,7 +551,7 @@ void it_8029F60C(HSD_GObj* gobj)
     }
 }
 
-bool it_8029F670(Item_GObj* gobj)
+bool itLinkbomb_UnkMotion4_Coll(Item_GObj* gobj)
 {
     it_8026D62C(gobj, fn_8029E21C);
     return 0;
@@ -594,17 +594,17 @@ void it_8029F69C(HSD_GObj* gobj)
     lb_800119DC(&item_pos, 0x78, 1.0f, 0.02f, 1.0471976f);
 }
 
-bool it_8029F934(Item_GObj* gobj)
+bool itLinkbomb_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return it_802751D8(gobj);
 }
 
-void it_8029F954(HSD_GObj* gobj)
+void itLinkbomb_UnkMotion5_Phys(HSD_GObj* gobj)
 {
     return;
 }
 
-bool it_8029F958(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion5_Coll(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -663,7 +663,7 @@ void it_8029FB24(Item_GObj* gobj)
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
-bool it_8029FB4C(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion6_Anim(HSD_GObj* gobj)
 {
     Item* item;
     Article* article;
@@ -689,12 +689,12 @@ bool it_8029FB4C(HSD_GObj* gobj)
     return 0;
 }
 
-void it_8029FCE8(HSD_GObj* gobj)
+void itLinkbomb_UnkMotion6_Phys(HSD_GObj* gobj)
 {
     return;
 }
 
-bool it_8029FCEC(Item_GObj* gobj)
+bool itLinkbomb_UnkMotion6_Coll(Item_GObj* gobj)
 {
     it_8026E8C4(gobj, it_8029F18C, fn_8029E21C);
     return 0;

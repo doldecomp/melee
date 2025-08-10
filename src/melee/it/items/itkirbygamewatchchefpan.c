@@ -11,7 +11,7 @@
 ItemStateTable it_803F7958[] = {
     {
         -1,
-        it_802C76E8,
+        itKirbygamewatchchefpan_UnkMotion0_Anim,
         NULL,
         NULL,
     },
@@ -80,7 +80,7 @@ void it_802C7698(Item_GObj* item_gobj)
     }
 }
 
-static inline bool it_802C76E8_inline(Item_GObj* item_gobj)
+static inline bool itKirbygamewatchchefpan_UnkMotion0_Anim_inline(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
@@ -89,10 +89,10 @@ static inline bool it_802C76E8_inline(Item_GObj* item_gobj)
     return true;
 }
 
-bool it_802C76E8(Item_GObj* item_gobj)
+bool itKirbygamewatchchefpan_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    if (it_802C76E8_inline(item_gobj)) {
+    if (itKirbygamewatchchefpan_UnkMotion0_Anim_inline(item_gobj)) {
         it_802C75DC(item_gobj);
         return true;
     }

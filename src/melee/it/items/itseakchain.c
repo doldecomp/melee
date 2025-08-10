@@ -25,7 +25,7 @@ void it_802BAEEC(Item_GObj* gobj)
 
 /// #fn_802BB784
 
-/// #it_802BB880
+/// #itSeakchain_UnkMotion4_Anim
 
 /// #it_802BB938
 

@@ -14,9 +14,9 @@
 /* 2C9C80 */ void it_802C9C80(Item_GObj*, HSD_GObj*);
 /* 2C9CA0 */ bool it_802C9CA0(Item_GObj*);
 /* 2C9CC0 */ void it_802C9CC0(Item_GObj*);
-/* 2C9CE8 */ bool it_802C9CE8(HSD_GObj*);
-/* 2C9D1C */ void it_802C9D1C(HSD_GObj*);
-/* 2C9D20 */ bool it_802C9D20(HSD_GObj*);
+/* 2C9CE8 */ bool itChicoritaleaf_UnkMotion0_Anim(HSD_GObj*);
+/* 2C9D1C */ void itChicoritaleaf_UnkMotion0_Phys(HSD_GObj*);
+/* 2C9D20 */ bool itChicoritaleaf_UnkMotion0_Coll(HSD_GObj*);
 /* 3F7AC8 */ extern ItemStateTable it_803F7AC8[];
 
 #endif

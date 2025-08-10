@@ -13,13 +13,13 @@ void it_8027CE64(HSD_GObj*, Item_GObj*, s32); /* extern */
 ItemStateTable it_803F7918[] = {
     {
         0,
-        it_802C7180,
+        itGamewatchturtle_UnkMotion1_Anim,
         NULL,
         NULL,
     },
     {
         1,
-        it_802C7180,
+        itGamewatchturtle_UnkMotion1_Anim,
         NULL,
         NULL,
     },
@@ -99,7 +99,7 @@ void it_802C7158(HSD_GObj* arg0)
     Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C7180(Item_GObj* item_gobj)
+bool itGamewatchturtle_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     u32 unused[2];

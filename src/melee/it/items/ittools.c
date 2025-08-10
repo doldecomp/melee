@@ -8,19 +8,19 @@
 
 /// #it_802EF098
 
-/// #it_802EF128
+/// #itTools_UnkMotion4_Anim
 
-/// #it_802EF27C
+/// #itTools_UnkMotion4_Phys
 
-/// #it_802EF2BC
+/// #itTools_UnkMotion4_Coll
 
 /// #it_802EF320
 
-/// #it_802EF3C4
+/// #itTools_UnkMotion9_Anim
 
-void it_802EF468(Item_GObj* gobj) {}
+void itTools_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #it_802EF46C
+/// #itTools_UnkMotion9_Coll
 
 /// #it_802EF548
 

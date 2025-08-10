@@ -14,37 +14,37 @@
 
 /* 288DC4 */ static bool it_80288DC4(Item_GObj* gobj);
 /* 288E6C */ static void it_80288E6C(Item_GObj* gobj);
-/* 288EC4 */ static bool it_80288EC4(Item_GObj* gobj);
-/* 288ECC */ static void it_80288ECC(Item_GObj* gobj);
-/* 288ED0 */ static bool it_80288ED0(Item_GObj* gobj);
+/* 288EC4 */ static bool itEgg_UnkMotion0_Anim(Item_GObj* gobj);
+/* 288ECC */ static void itEgg_UnkMotion0_Phys(Item_GObj* gobj);
+/* 288ED0 */ static bool itEgg_UnkMotion0_Coll(Item_GObj* gobj);
 /* 288EFC */ static void it_80288EFC(Item_GObj* gobj);
-/* 288F24 */ static bool it_80288F24(Item_GObj* gobj);
-/* 288F2C */ static void it_80288F2C(Item_GObj* gobj);
-/* 288F5C */ static bool it_80288F5C(Item_GObj* gobj);
-/* 288FB0 */ static bool it_80288FB0(Item_GObj* gobj);
-/* 288FB8 */ static void it_80288FB8(Item_GObj* gobj);
-/* 289004 */ static void it_80289004(Item_GObj* gobj);
-/* 289050 */ static bool it_80289050(Item_GObj* gobj);
+/* 288F24 */ static bool itEgg_UnkMotion3_Anim(Item_GObj* gobj);
+/* 288F2C */ static void itEgg_UnkMotion1_Phys(Item_GObj* gobj);
+/* 288F5C */ static bool itEgg_UnkMotion1_Coll(Item_GObj* gobj);
+/* 288FB0 */ static bool itEgg_UnkMotion2_Anim(Item_GObj* gobj);
+/* 288FB8 */ static void itEgg_UnkMotion2_Phys(Item_GObj* gobj);
+/* 289004 */ static void itEgg_UnkMotion3_Phys(Item_GObj* gobj);
+/* 289050 */ static bool itEgg_UnkMotion3_Coll(Item_GObj* gobj);
 /* 289094 */ static void it_80289094(Item_GObj* gobj);
-/* 28912C */ static bool it_8028912C(Item_GObj* gobj);
-/* 28914C */ static void it_8028914C(Item_GObj* gobj);
-/* 289150 */ static bool it_80289150(Item_GObj* gobj);
+/* 28912C */ static bool itEgg_UnkMotion5_Anim(Item_GObj* gobj);
+/* 28914C */ static void itEgg_UnkMotion5_Phys(Item_GObj* gobj);
+/* 289150 */ static bool itEgg_UnkMotion5_Coll(Item_GObj* gobj);
 /* 289158 */ static void it_80289158(Item_GObj* gobj);
-/* 2891E0 */ static bool it_802891E0(Item_GObj* gobj);
-/* 28920C */ static void it_8028920C(Item_GObj* gobj);
-/* 289210 */ static bool it_80289210(Item_GObj* gobj);
-/* 28966C */ static bool it_8028966C(Item_GObj* gobj);
-/* 289674 */ static void it_80289674(Item_GObj* gobj);
-/* 289678 */ static bool it_80289678(Item_GObj* gobj);
+/* 2891E0 */ static bool itEgg_UnkMotion6_Anim(Item_GObj* gobj);
+/* 28920C */ static void itEgg_UnkMotion6_Phys(Item_GObj* gobj);
+/* 289210 */ static bool itEgg_UnkMotion6_Coll(Item_GObj* gobj);
+/* 28966C */ static bool itEgg_UnkMotion4_Anim(Item_GObj* gobj);
+/* 289674 */ static void itEgg_UnkMotion4_Phys(Item_GObj* gobj);
+/* 289678 */ static bool itEgg_UnkMotion4_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F5988[] = {
-    { -1, it_80288EC4, it_80288ECC, it_80288ED0 },
-    { -1, it_80288F24, it_80288F2C, it_80288F5C },
-    { -1, it_80288FB0, it_80288FB8, NULL },
-    { 0, it_80288F24, it_80289004, it_80289050 },
-    { -1, it_8028966C, it_80289674, it_80289678 },
-    { 1, it_8028912C, it_8028914C, it_80289150 },
-    { -1, it_802891E0, it_8028920C, it_80289210 },
+    { -1, itEgg_UnkMotion0_Anim, itEgg_UnkMotion0_Phys, itEgg_UnkMotion0_Coll },
+    { -1, itEgg_UnkMotion3_Anim, itEgg_UnkMotion1_Phys, itEgg_UnkMotion1_Coll },
+    { -1, itEgg_UnkMotion2_Anim, itEgg_UnkMotion2_Phys, NULL },
+    { 0, itEgg_UnkMotion3_Anim, itEgg_UnkMotion3_Phys, itEgg_UnkMotion3_Coll },
+    { -1, itEgg_UnkMotion4_Anim, itEgg_UnkMotion4_Phys, itEgg_UnkMotion4_Coll },
+    { 1, itEgg_UnkMotion5_Anim, itEgg_UnkMotion5_Phys, itEgg_UnkMotion5_Coll },
+    { -1, itEgg_UnkMotion6_Anim, itEgg_UnkMotion6_Phys, itEgg_UnkMotion6_Coll },
 };
 
 Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
@@ -124,14 +124,14 @@ void it_80288E6C(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_80288EC4(Item_GObj* gobj)
+bool itEgg_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80288ECC(Item_GObj* gobj) {}
+void itEgg_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-bool it_80288ED0(Item_GObj* gobj)
+bool itEgg_UnkMotion0_Coll(Item_GObj* gobj)
 {
     it_8026D62C(gobj, it_80288EFC);
     return false;
@@ -143,18 +143,18 @@ void it_80288EFC(Item_GObj* gobj)
     return;
 }
 
-bool it_80288F24(Item_GObj* gobj)
+bool itEgg_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80288F2C(Item_GObj* gobj)
+void itEgg_UnkMotion1_Phys(Item_GObj* gobj)
 {
     ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-bool it_80288F5C(Item_GObj* gobj)
+bool itEgg_UnkMotion1_Coll(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_80288E6C);
     return false;
@@ -165,12 +165,12 @@ void it_80288F88(Item_GObj* gobj)
     Item_80268E5C((Item_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_80288FB0(Item_GObj* gobj)
+bool itEgg_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80288FB8(Item_GObj* gobj) {}
+void itEgg_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 void it_80288FBC(Item_GObj* gobj)
 {
@@ -182,14 +182,14 @@ void it_80288FDC(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, 6);
 }
 
-void it_80289004(Item_GObj* gobj)
+void itEgg_UnkMotion3_Phys(Item_GObj* gobj)
 {
     ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-bool it_80289050(Item_GObj* gobj)
+bool itEgg_UnkMotion3_Coll(Item_GObj* gobj)
 {
     if (it_8026DA08(gobj)) {
         return it_80289218(gobj);
@@ -214,14 +214,14 @@ void it_80289094(Item_GObj* gobj)
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
 
-bool it_8028912C(Item_GObj* gobj)
+bool itEgg_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return it_802751D8(gobj);
 }
 
-void it_8028914C(Item_GObj* gobj) {}
+void itEgg_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-bool it_80289150(Item_GObj* gobj)
+bool itEgg_UnkMotion5_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -242,16 +242,16 @@ void it_80289158(Item_GObj* gobj)
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
-bool it_802891E0(Item_GObj* gobj)
+bool itEgg_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     --ip->xDD4_itemVar.egg.rand_max;
     return ip->xDD4_itemVar.egg.rand_max > 0 ? false : true;
 }
 
-void it_8028920C(Item_GObj* gobj) {}
+void itEgg_UnkMotion6_Phys(Item_GObj* gobj) {}
 
-bool it_80289210(Item_GObj* gobj)
+bool itEgg_UnkMotion6_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -302,14 +302,14 @@ void it_80289644(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
 
-bool it_8028966C(Item_GObj* gobj)
+bool itEgg_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80289674(Item_GObj* gobj) {}
+void itEgg_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-bool it_80289678(Item_GObj* gobj)
+bool itEgg_UnkMotion4_Coll(Item_GObj* gobj)
 {
     it_8026E8C4(gobj, it_80288E6C, it_80288EFC);
     return false;

@@ -6,9 +6,9 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2B45E8 */ static bool it_802B45E8(Item_GObj* gobj);
+/* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 
-bool it_802B45E8(Item_GObj* gobj)
+bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -25,15 +25,15 @@ bool it_802B45E8(Item_GObj* gobj)
 
 /// #it_802B43D0
 
-/// #it_802B4450
+/// #itPikachutjoltair_UnkMotion0_Anim
 
-void it_802B45D0(Item_GObj* gobj)
+void itPikachutjoltair_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-/// #it_802B45E8
+/// #itPikachutjoltair_UnkMotion0_Coll
 
 /// #it_802B45F0
 

@@ -11,18 +11,18 @@
 
 #include <baselib/gobj.h>
 
-ItemStateTable it_803F87F0[] = { { 0, it_802DE190, it_802DE198, it_802DE1FC },
-                                 { 0, it_802DE35C, it_802DE3D8, it_802DE408 },
-                                 { 0, it_802DE490, it_802DE498, NULL },
-                                 { 1, it_802DE544, it_802DE5EC, it_802DE61C },
-                                 { 1, it_802DE670, it_802DE694, it_802DE6C4 },
-                                 { 1, it_802DE884, it_802DEA0C, it_802DEB44 },
-                                 { 0, it_802DE884, it_802DEA0C, it_802DEB44 },
-                                 { 1, it_802DEE04, it_802DEE98, it_802DEEC8 },
-                                 { 0, it_802DEE04, it_802DEE98, it_802DEEC8 },
-                                 { 0, it_802DEF78, it_802DEF80, it_802DF104 },
-                                 { 2, it_802DFA68, it_802DFB90, it_802DFBAC },
-                                 { 3, it_802DF724, it_802DF93C, it_802DF970 },
+ItemStateTable it_803F87F0[] = { { 0, itZrshell_UnkMotion0_Anim, itZrshell_UnkMotion0_Phys, itZrshell_UnkMotion0_Coll },
+                                 { 0, itZrshell_UnkMotion1_Anim, itZrshell_UnkMotion1_Phys, itZrshell_UnkMotion1_Coll },
+                                 { 0, itZrshell_UnkMotion2_Anim, itZrshell_UnkMotion2_Phys, NULL },
+                                 { 1, itZrshell_UnkMotion3_Anim, itZrshell_UnkMotion3_Phys, itZrshell_UnkMotion3_Coll },
+                                 { 1, itZrshell_UnkMotion4_Anim, itZrshell_UnkMotion4_Phys, itZrshell_UnkMotion4_Coll },
+                                 { 1, itZrshell_UnkMotion6_Anim, itZrshell_UnkMotion6_Phys, itZrshell_UnkMotion6_Coll },
+                                 { 0, itZrshell_UnkMotion6_Anim, itZrshell_UnkMotion6_Phys, itZrshell_UnkMotion6_Coll },
+                                 { 1, itZrshell_UnkMotion8_Anim, itZrshell_UnkMotion8_Phys, itZrshell_UnkMotion8_Coll },
+                                 { 0, itZrshell_UnkMotion8_Anim, itZrshell_UnkMotion8_Phys, itZrshell_UnkMotion8_Coll },
+                                 { 0, itZrshell_UnkMotion9_Anim, itZrshell_UnkMotion9_Phys, itZrshell_UnkMotion9_Coll },
+                                 { 2, itZrshell_UnkMotion10_Anim, itZrshell_UnkMotion10_Phys, itZrshell_UnkMotion10_Coll },
+                                 { 3, itZrshell_UnkMotion11_Anim, itZrshell_UnkMotion11_Phys, itZrshell_UnkMotion11_Coll },
                                  { 4, NULL, NULL, NULL } };
 
 void it_802E02E8(Item_GObj* gobj)

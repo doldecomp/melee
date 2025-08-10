@@ -13,29 +13,29 @@ void it_802CB93C(void) {}
 
 /// #it_802CB994
 
-/// #it_802CB9E0
+/// #itLizardon_UnkMotion1_Anim
 
-/// #it_802CBA20
+/// #itLizardon_UnkMotion1_Phys
 
-/// #it_802CBA5C
+/// #itLizardon_UnkMotion1_Coll
 
 /// #it_802CBAA8
 
-/// #it_802CBB84
+/// #itLizardon_UnkMotion2_Anim
 
-/// #it_802CBC9C
+/// #itLizardon_UnkMotion2_Phys
 
-/// #it_802CBCD8
+/// #itLizardon_UnkMotion2_Coll
 
 /// #it_802CBD24
 
 /// #it_802CBFE4
 
-/// #it_802CC030
+/// #itLizardon_UnkMotion3_Anim
 
-/// #it_802CC064
+/// #itLizardon_UnkMotion3_Phys
 
-/// #it_802CC0A0
+/// #itLizardon_UnkMotion3_Coll
 
 /// #it_802CC0EC
 

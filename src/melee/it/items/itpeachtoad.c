@@ -14,13 +14,13 @@
 
 ItemStateTable it_803F7528[] = { {
                                      0,
-                                     it_802BE02C,
+                                     itPeachtoad_UnkMotion0_Anim,
                                      NULL,
                                      NULL,
                                  },
                                  {
                                      1,
-                                     it_802BE168,
+                                     itPeachtoad_UnkMotion1_Anim,
                                      NULL,
                                      NULL,
                                  } };
@@ -123,7 +123,7 @@ void it_802BDFE0(Item_GObj* item_gobj)
     it_80274574(item_gobj);
 }
 
-bool it_802BE02C(Item_GObj* item_gobj)
+bool itPeachtoad_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -157,7 +157,7 @@ void it_802BE100(Item_GObj* item_gobj)
     it_80274574(item_gobj);
 }
 
-bool it_802BE168(Item_GObj* item_gobj)
+bool itPeachtoad_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Item* item;
 

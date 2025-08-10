@@ -18,8 +18,8 @@
 /* 2AB90C */ void it_802AB90C(Item_GObj*);
 /* 2AB9C0 */ void it_802AB9C0(Item_GObj*);
 /* 2ABA4C */ UNK_RET it_802ABA4C(UNK_PARAMS);
-/* 2ABBB0 */ bool it_802ABBB0(Item_GObj* gobj);
-/* 2ABCDC */ void it_802ABCDC(Item_GObj* gobj);
+/* 2ABBB0 */ bool itNesspkthunderball_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2ABCDC */ void itNesspkthunderball_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2AC050 */ bool it_802AC050(Item_GObj*);
 /* 2AC074 */ bool it_802AC074(Item_GObj*);
 /* 2AC098 */ bool it_802AC098(Item_GObj*);

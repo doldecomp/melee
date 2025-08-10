@@ -17,17 +17,17 @@ int it_802B1DEC(Item_GObj* arg0)
 
 /// #it_802B2080
 
-/// #it_802B20DC
+/// #itPikachuthunder_UnkMotion0_Anim
 
 /// #it_802B211C
 
-/// #it_802B21A8
+/// #itPikachuthunder_UnkMotion1_Anim
 
-/// #it_802B21E0
+/// #itPikachuthunder_UnkMotion1_Coll
 
 /// #it_802B22B8
 
-/// #it_802B2340
+/// #itPikachuthunder_UnkMotion2_Anim
 
 bool it_802B2508(Item_GObj* arg0)
 {

@@ -16,17 +16,17 @@
 static float const deg_to_rad = M_PI / 180;
 
 ItemStateTable it_803F5AB0[] = {
-    { -1, it_8028B144, it_8028B14C, it_8028B150 },
-    { +4, it_8028B1A4, it_8028B2EC, it_8028B394 },
-    { +0, it_8028B1A4, it_8028B42C, it_8028B394 },
-    { -1, it_8028B5A8, it_8028B5B0, it_8028B5B4 },
-    { +1, it_8028B60C, it_8028B614, NULL },
-    { +2, it_8028B60C, it_8028B614, NULL },
-    { +3, it_8028B60C, it_8028B614, NULL },
-    { +4, it_8028B60C, it_8028B614, NULL },
-    { +5, it_8028B60C, it_8028B614, NULL },
-    { +6, it_8028B60C, it_8028B614, NULL },
-    { +7, it_8028B60C, it_8028B614, NULL },
+    { -1, itParasol_UnkMotion0_Anim, itParasol_UnkMotion0_Phys, itParasol_UnkMotion0_Coll },
+    { +4, itParasol_UnkMotion2_Anim, itParasol_UnkMotion1_Phys, itParasol_UnkMotion2_Coll },
+    { +0, itParasol_UnkMotion2_Anim, itParasol_UnkMotion2_Phys, itParasol_UnkMotion2_Coll },
+    { -1, itParasol_UnkMotion3_Anim, itParasol_UnkMotion3_Phys, itParasol_UnkMotion3_Coll },
+    { +1, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
+    { +2, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
+    { +3, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
+    { +4, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
+    { +5, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
+    { +6, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
+    { +7, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
 };
 
 int it_8028B08C(Item_GObj* item_gobj, int statenum)
@@ -52,14 +52,14 @@ void it_8028B0EC(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_8028B144(Item_GObj* item_gobj)
+bool itParasol_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_8028B14C(Item_GObj* item_gobj) {}
+void itParasol_UnkMotion0_Phys(Item_GObj* item_gobj) {}
 
-bool it_8028B150(Item_GObj* item_gobj)
+bool itParasol_UnkMotion0_Coll(Item_GObj* item_gobj)
 {
     it_8026D62C(item_gobj, it_8028B17C);
     return false;
@@ -88,7 +88,7 @@ static inline HSD_JObj* jobj_child(HSD_JObj* jobj)
     }
 }
 
-bool it_8028B1A4(Item_GObj* item_gobj)
+bool itParasol_UnkMotion2_Anim(Item_GObj* item_gobj)
 {
     f32 ry, fm;
     Item* item = item = GET_ITEM(item_gobj);
@@ -120,7 +120,7 @@ inline void decelerateItemX(Item* item, f32 decel_x)
     }
 }
 
-void it_8028B2EC(Item_GObj* item_gobj)
+void itParasol_UnkMotion1_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     ItemAttr* attr = item->xCC_item_attr;
@@ -129,7 +129,7 @@ void it_8028B2EC(Item_GObj* item_gobj)
     decelerateItemX(item, attrs[0]);
 }
 
-bool it_8028B394(Item_GObj* item_gobj)
+bool itParasol_UnkMotion2_Coll(Item_GObj* item_gobj)
 {
     it_8026E15C(item_gobj, it_8028B0EC);
     return false;
@@ -147,7 +147,7 @@ void it_8028B3E0(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 2, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
-void it_8028B42C(Item_GObj* item_gobj)
+void itParasol_UnkMotion2_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     ItemAttr* attr = item->xCC_item_attr;
@@ -189,14 +189,14 @@ void it_8028B580(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 3, ITEM_ANIM_UPDATE);
 }
 
-bool it_8028B5A8(Item_GObj* item_gobj)
+bool itParasol_UnkMotion3_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_8028B5B0(Item_GObj* item_gobj) {}
+void itParasol_UnkMotion3_Phys(Item_GObj* item_gobj) {}
 
-bool it_8028B5B4(Item_GObj* item_gobj)
+bool itParasol_UnkMotion3_Coll(Item_GObj* item_gobj)
 {
     it_8026E8C4(item_gobj, it_8028B0EC, it_8028B17C);
     return false;
@@ -207,12 +207,12 @@ void it_8028B5E8(Item_GObj* item_gobj)
     it_8028B618(item_gobj, 1.0F);
 }
 
-bool it_8028B60C(Item_GObj* item_gobj)
+bool itParasol_UnkMotion10_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_8028B614(Item_GObj* item_gobj) {}
+void itParasol_UnkMotion10_Phys(Item_GObj* item_gobj) {}
 
 static inline void animSpeed(Item_GObj* item_gobj, f32 speed, int statenum)
 {

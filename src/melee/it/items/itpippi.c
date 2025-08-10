@@ -10,12 +10,12 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F7FF8[] = {
-    { 0, it_802D3600, it_802D3624, it_802D3688 },
-    { 1, it_802D32FC, it_802D3370, it_802D33AC },
-    { 2, it_802D34A4, it_802D3508, it_802D3544 },
-    { 3, it_802D34A4, it_802D3508, it_802D3544 },
-    { 4, it_802D34A4, it_802D3508, it_802D3544 },
-    { 5, it_802D34A4, it_802D3508, it_802D3544 },
+    { 0, itPippi_UnkMotion0_Anim, itPippi_UnkMotion0_Phys, itPippi_UnkMotion0_Coll },
+    { 1, itPippi_UnkMotion1_Anim, itPippi_UnkMotion1_Phys, itPippi_UnkMotion1_Coll },
+    { 2, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
+    { 3, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
+    { 4, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
+    { 5, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
 };
 
 void it_802D3260(Item_GObj* gobj)
@@ -43,7 +43,7 @@ void it_802D32DC(Item_GObj* gobj, HSD_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-bool it_802D32FC(Item_GObj* gobj)
+bool itPippi_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     int timer;
@@ -59,7 +59,7 @@ bool it_802D32FC(Item_GObj* gobj)
     return false;
 }
 
-void it_802D3370(Item_GObj* gobj)
+void itPippi_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     if (it->ground_or_air == GA_Air) {
@@ -68,7 +68,7 @@ void it_802D3370(Item_GObj* gobj)
     }
 }
 
-bool it_802D33AC(Item_GObj* gobj)
+bool itPippi_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     if (it->ground_or_air == GA_Air) {
@@ -106,7 +106,7 @@ void it_802D33F8(Item_GObj* gobj)
     it->exited_hitlag = NULL;
 }
 
-bool it_802D34A4(Item_GObj* gobj)
+bool itPippi_UnkMotion5_Anim(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     if (it_80272C6C(gobj) == false) {
@@ -118,7 +118,7 @@ bool it_802D34A4(Item_GObj* gobj)
     return false;
 }
 
-void it_802D3508(Item_GObj* gobj)
+void itPippi_UnkMotion5_Phys(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
@@ -127,7 +127,7 @@ void it_802D3508(Item_GObj* gobj)
     }
 }
 
-bool it_802D3544(Item_GObj* gobj)
+bool itPippi_UnkMotion5_Coll(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     if (it->ground_or_air == GA_Air) {
@@ -151,14 +151,14 @@ void it_802D3590(Item_GObj* gobj)
     it->xDD4_itemVar.pokemon.timer = sa->timer;
 }
 
-bool it_802D3600(Item_GObj* gobj)
+bool itPippi_UnkMotion0_Anim(Item_GObj* gobj)
 {
     it_80279FF8(gobj);
 
     return false;
 }
 
-void it_802D3624(Item_GObj* gobj)
+void itPippi_UnkMotion0_Phys(Item_GObj* gobj)
 {
     if (it_8027A09C(gobj)) {
         Item* it = gobj->user_data;
@@ -169,7 +169,7 @@ void it_802D3624(Item_GObj* gobj)
     }
 }
 
-bool it_802D3688(Item_GObj* gobj)
+bool itPippi_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return it_8027A118(gobj, it_802D32D8);
 }

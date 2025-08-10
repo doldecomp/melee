@@ -13,9 +13,9 @@ UNK_T it_802EAF28(Item_GObj* item_gobj)
 
 /// #it_802EB268
 
-/// #it_802EB2C0
+/// #itGreatfoxlaser_UnkMotion1_Anim
 
-/// #it_802EB3C0
+/// #itGreatfoxlaser_UnkMotion1_Phys
 
 bool it_802EB444(Item_GObj* item_gobj)
 {

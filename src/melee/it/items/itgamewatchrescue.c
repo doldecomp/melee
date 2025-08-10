@@ -12,11 +12,11 @@
 
 /// #it_802C8208
 
-/// #it_802C8240
+/// #itGamewatchrescue_UnkMotion1_Anim
 
-void it_802C8350(Item_GObj* gobj) {}
+void itGamewatchrescue_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-bool it_802C8354(Item_GObj* gobj)
+bool itGamewatchrescue_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }

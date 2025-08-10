@@ -12,33 +12,33 @@
 
 /// #it_802D9DDC
 
-/// #it_802D9E38
+/// #itLikelike_UnkMotion0_Anim
 
-/// #it_802D9E80
+/// #itLikelike_UnkMotion0_Phys
 
-/// #it_802D9EF4
+/// #itLikelike_UnkMotion0_Coll
 
-/// #it_802D9F9C
+/// #itLikelike_UnkMotion7_Anim
 
-/// #it_802D9FDC
+/// #itLikelike_UnkMotion7_Phys
 
-/// #it_802DA05C
+/// #itLikelike_UnkMotion7_Coll
 
 /// #it_802DA104
 
-/// #it_802DA194
+/// #itLikelike_UnkMotion1_Anim
 
-/// #it_802DA1DC
+/// #itLikelike_UnkMotion1_Phys
 
-/// #it_802DA348
+/// #itLikelike_UnkMotion1_Coll
 
 /// #it_802DA4C0
 
-/// #it_802DA550
+/// #itLikelike_UnkMotion2_Anim
 
-/// #it_802DA598
+/// #itLikelike_UnkMotion2_Phys
 
-/// #it_802DA730
+/// #itLikelike_UnkMotion2_Coll
 
 /// #it_802DA8D8
 
@@ -46,85 +46,85 @@
 
 /// #it_802DAA10
 
-bool it_802DAAD0(Item_GObj* gobj)
+bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802DAAD8
+/// #itLikelike_UnkMotion5_Phys
 
-/// #it_802DAB48
+/// #itLikelike_UnkMotion4_Coll
 
-/// #it_802DAB84
+/// #itLikelike_UnkMotion5_Coll
 
 /// #it_802DABC0
 
-/// #it_802DAC20
+/// #itLikelike_UnkMotion17_Anim
 
-/// #it_802DAC98
+/// #itLikelike_UnkMotion17_Phys
 
-/// #it_802DACE4
+/// #itLikelike_UnkMotion17_Coll
 
 /// #it_802DAD18
 
-bool it_802DAE0C(Item_GObj* gobj)
+bool itLikelike_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802DAE14
+/// #itLikelike_UnkMotion3_Phys
 
-/// #it_802DAE30
+/// #itLikelike_UnkMotion3_Coll
 
 /// #it_802DAE6C
 
-/// #it_802DAEA8
+/// #itLikelike_UnkMotion16_Anim
 
-void it_802DAFC8(Item_GObj* gobj) {}
+void itLikelike_UnkMotion16_Phys(Item_GObj* gobj) {}
 
-/// #it_802DAFCC
+/// #itLikelike_UnkMotion16_Coll
 
 /// #it_802DB074
 
-/// #it_802DB0F0
+/// #itLikelike_UnkMotion8_Anim
 
-/// #it_802DB138
+/// #itLikelike_UnkMotion8_Phys
 
-/// #it_802DB2B0
+/// #itLikelike_UnkMotion8_Coll
 
 /// #it_802DB358
 
 /// #it_802DB398
 
-/// #it_802DB464
+/// #itLikelike_UnkMotion12_Anim
 
-/// #it_802DB500
+/// #itLikelike_UnkMotion12_Phys
 
-/// #it_802DB570
+/// #itLikelike_UnkMotion12_Coll
 
 /// #it_802DB5F0
 
-/// #it_802DB670
+/// #itLikelike_UnkMotion9_Anim
 
-void it_802DB70C(Item_GObj* gobj) {}
+void itLikelike_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #it_802DB710
+/// #itLikelike_UnkMotion9_Coll
 
 /// #it_802DB74C
 
-/// #it_802DB7CC
+/// #itLikelike_UnkMotion10_Anim
 
-void it_802DB868(Item_GObj* gobj) {}
+void itLikelike_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #it_802DB86C
+/// #itLikelike_UnkMotion10_Coll
 
 /// #it_802DB8A8
 
-/// #it_802DB914
+/// #itLikelike_UnkMotion13_Anim
 
-/// #it_802DB95C
+/// #itLikelike_UnkMotion13_Phys
 
-/// #it_802DB9B8
+/// #itLikelike_UnkMotion13_Coll
 
 /// #it_802DB9F4
 
@@ -132,66 +132,66 @@ void it_802DB868(Item_GObj* gobj) {}
 
 /// #it_802DBAF0
 
-/// #it_802DBC68
+/// #itLikelike_UnkMotion14_Anim
 
-void it_802DBD3C(Item_GObj* gobj) {}
+void itLikelike_UnkMotion14_Phys(Item_GObj* gobj) {}
 
-/// #it_802DBD40
+/// #itLikelike_UnkMotion14_Coll
 
-/// #it_802DBD7C
+/// #itLikelike_UnkMotion15_Anim
 
-void it_802DBE50(Item_GObj* gobj) {}
+void itLikelike_UnkMotion15_Phys(Item_GObj* gobj) {}
 
-/// #it_802DBE54
+/// #itLikelike_UnkMotion15_Coll
 
 /// #it_802DBE90
 
-/// #it_802DBED4
+/// #itLikelike_UnkMotion18_Anim
 
-void it_802DBF2C(Item_GObj* gobj) {}
+void itLikelike_UnkMotion18_Phys(Item_GObj* gobj) {}
 
 /// #it_802DBF30
 
 /// #it_802DC000
 
-bool it_802DC050(Item_GObj* gobj)
+bool itLikelike_UnkMotion19_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802DC058
+/// #itLikelike_UnkMotion19_Phys
 
-/// #it_802DC088
+/// #itLikelike_UnkMotion19_Coll
 
 /// #it_802DC0AC
 
-bool it_802DC114(Item_GObj* gobj)
+bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802DC11C
+/// #itLikelike_UnkMotion6_Phys
 
-/// #it_802DC268
+/// #itLikelike_UnkMotion6_Coll
 
 /// #it_802DC310
 
-/// #it_802DC370
+/// #itLikelike_UnkMotion20_Anim
 
-void it_802DC3B8(Item_GObj* gobj) {}
+void itLikelike_UnkMotion20_Phys(Item_GObj* gobj) {}
 
-/// #it_802DC3BC
+/// #itLikelike_UnkMotion20_Coll
 
 /// #it_802DC3DC
 
-bool it_802DC43C(Item_GObj* gobj)
+bool itLikelike_UnkMotion21_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802DC444
+/// #itLikelike_UnkMotion21_Phys
 
-/// #it_802DC460
+/// #itLikelike_UnkMotion21_Coll
 
 /// #it_802DC480
 

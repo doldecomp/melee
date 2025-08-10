@@ -8,13 +8,13 @@
 
 /// #it_8028FF1C
 
-/// #it_8028FF60
+/// #itMsbomb_UnkMotion0_Coll
 
 /// #it_8028FF8C
 
-/// #it_80290070
+/// #itMsbomb_UnkMotion1_Phys
 
-/// #it_802900A0
+/// #itMsbomb_UnkMotion1_Coll
 
 /// #it_802900CC
 
@@ -22,27 +22,27 @@
 
 /// #it_80290114
 
-/// #it_802901C0
+/// #itMsbomb_UnkMotion3_Phys
 
-/// #it_8029020C
+/// #itMsbomb_UnkMotion3_Coll
 
 /// #it_80290238
 
 /// #it_80290314
 
-/// #it_80290404
+/// #itMsbomb_UnkMotion4_Coll
 
 /// #it_8029047C
 
-/// #it_80290560
+/// #itMsbomb_UnkMotion5_Phys
 
-/// #it_802905AC
+/// #itMsbomb_UnkMotion5_Coll
 
 /// #it_802905D8
 
 /// #it_80290614
 
-/// #it_802906C4
+/// #itMsbomb_UnkMotion6_Anim
 
 /// #it_802906E4
 
@@ -50,7 +50,7 @@
 
 /// #it_80290794
 
-/// #it_802907BC
+/// #itMsbomb_UnkMotion7_Coll
 
 /// #it_802907F0
 

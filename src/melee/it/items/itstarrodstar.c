@@ -9,11 +9,11 @@
 
 /// #it_802989C8
 
-/// #it_80298ACC
+/// #itStarrodstar_UnkMotion0_Anim
 
-void it_80298BAC(Item_GObj* gobj) {}
+void itStarrodstar_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_80298BB0
+/// #itStarrodstar_UnkMotion0_Coll
 
 bool it_80298BE4(Item_GObj* arg0)
 {

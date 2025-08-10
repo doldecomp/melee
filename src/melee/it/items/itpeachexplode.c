@@ -10,13 +10,13 @@
 ItemStateTable it_803F7488[] = {
     {
         0,
-        it_802BD2EC,
+        itPeachexplode_UnkMotion1_Anim,
         NULL,
         NULL,
     },
     {
         1,
-        it_802BD2EC,
+        itPeachexplode_UnkMotion1_Anim,
         NULL,
         NULL,
     },
@@ -70,7 +70,7 @@ void it_802BD248(Item_GObj* item_gobj, Item_GObj* owner, bool arg2)
     it_80274574(item_gobj);
 }
 
-bool it_802BD2EC(Item_GObj* item_gobj)
+bool itPeachexplode_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     return it_802751D8(item_gobj);
 }

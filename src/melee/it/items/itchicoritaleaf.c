@@ -10,7 +10,7 @@
 #include "it/item.h"
 
 ItemStateTable it_803F7AC8[] = {
-    { 0, it_802C9CE8, it_802C9D1C, it_802C9D20 },
+    { 0, itChicoritaleaf_UnkMotion0_Anim, itChicoritaleaf_UnkMotion0_Phys, itChicoritaleaf_UnkMotion0_Coll },
 };
 
 void it_802C9B20(Item_GObj* chicorita_gobj)
@@ -74,7 +74,7 @@ void it_802C9CC0(Item_GObj* item_gobj)
     Item_80268E5C((HSD_GObj*) item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C9CE8(HSD_GObj* item_gobj)
+bool itChicoritaleaf_UnkMotion0_Anim(HSD_GObj* item_gobj)
 {
     Item* item;
 
@@ -86,9 +86,9 @@ bool it_802C9CE8(HSD_GObj* item_gobj)
     return false;
 }
 
-void it_802C9D1C(HSD_GObj* item_gobj) {}
+void itChicoritaleaf_UnkMotion0_Phys(HSD_GObj* item_gobj) {}
 
-bool it_802C9D20(HSD_GObj* item_gobj)
+bool itChicoritaleaf_UnkMotion0_Coll(HSD_GObj* item_gobj)
 {
     return it_8026DFB0((Item_GObj*) item_gobj);
 }

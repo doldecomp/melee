@@ -8,10 +8,10 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/* 2C7FAC */ static bool it_802C7FAC(Item_GObj*);
+/* 2C7FAC */ static bool itGamewatchpanic_UnkMotion1_Anim(Item_GObj*);
 
-ItemStateTable it_803F79A0[] = { { 0, it_802C7FAC, NULL, NULL },
-                                 { 1, it_802C7FAC, NULL, NULL } };
+ItemStateTable it_803F79A0[] = { { 0, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL },
+                                 { 1, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL } };
 
 HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {
@@ -85,7 +85,7 @@ void it_802C7F20(Item_GObj* gobj)
     }
 }
 
-bool it_802C7FAC(Item_GObj* gobj)
+bool itGamewatchpanic_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);

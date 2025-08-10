@@ -10,9 +10,9 @@
 /* 2AF940 */ UNK_RET it_802AF940(UNK_PARAMS);
 /* 2AFA2C */ void it_802AFA2C(Item_GObj*);
 /* 2AFA70 */ UNK_RET it_802AFA70(UNK_PARAMS);
-/* 2AFBA4 */ bool it_802AFBA4(Item_GObj* gobj);
-/* 2AFD2C */ void it_802AFD2C(Item_GObj*);
-/* 2AFD44 */ bool it_802AFD44(Item_GObj* gobj);
+/* 2AFBA4 */ bool itNesspkflushexplode_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2AFD2C */ void itNesspkflushexplode_UnkMotion0_Phys(Item_GObj*);
+/* 2AFD44 */ bool itNesspkflushexplode_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2AFD4C */ bool it_802AFD4C(Item_GObj*);
 /* 2AFD54 */ bool it_802AFD54(Item_GObj*);
 /* 2AFD5C */ bool it_802AFD5C(Item_GObj*);

@@ -9,11 +9,11 @@
 
 /// #it_80298ED0
 
-/// #it_802990CC
+/// #itSscopebeam_UnkMotion9_Anim
 
-void it_80299148(Item_GObj* gobj) {}
+void itSscopebeam_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #it_8029914C
+/// #itSscopebeam_UnkMotion9_Coll
 
 bool it_80299360(Item_GObj* arg0)
 {

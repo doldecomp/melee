@@ -9,9 +9,9 @@
 
 /// #it_802AA1D8
 
-/// #it_802AA22C
+/// #itNesspkfire_UnkMotion0_Anim
 
-/// #it_802AA264
+/// #itNesspkfire_UnkMotion0_Coll
 
 /// #it_802AA284
 

@@ -14,9 +14,9 @@
 ItemStateTable it_803F57A0[] = {
     {
         0,
-        it_802846FC,
-        it_80284704,
-        it_80284734,
+        itStar_UnkMotion0_Anim,
+        itStar_UnkMotion0_Phys,
+        itStar_UnkMotion0_Coll,
     },
 };
 
@@ -37,19 +37,19 @@ void it_802846D4(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802846FC(Item_GObj* item_gobj)
+bool itStar_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_80284704(Item_GObj* item_gobj)
+void itStar_UnkMotion0_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     ItemAttr* attr = item->xCC_item_attr;
     it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
-bool it_80284734(Item_GObj* item_gobj)
+bool itStar_UnkMotion0_Coll(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     bool val = false;

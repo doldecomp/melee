@@ -73,7 +73,7 @@ void it_802C6AB8(Item_GObj* item_gobj) {
     }
 }
 
-bool it_802C6B20(Item_GObj* item_gobj) {
+bool itGamewatchfire_UnkMotion0_Anim(Item_GObj* item_gobj) {
     HSD_JObj* temp_r30;
     Item* item = GET_ITEM(item_gobj);
     bool var_r3;

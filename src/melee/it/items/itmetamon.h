@@ -12,16 +12,16 @@
 /* 2D3070 */ void it_802D3070(Item_GObj*, Item_GObj*);
 /* 2D3090 */ void it_802D3090(Item_GObj*);
 /* 2D30C4 */ void it_802D30C4(Item_GObj*);
-/* 2D30EC */ bool it_802D30EC(Item_GObj*);
-/* 2D3120 */ void it_802D3120(Item_GObj*);
-/* 2D3124 */ bool it_802D3124(Item_GObj*);
-/* 2D3150 */ bool it_802D3150(Item_GObj*);
-/* 2D3184 */ void it_802D3184(Item_GObj*);
-/* 2D3188 */ bool it_802D3188(Item_GObj*);
+/* 2D30EC */ bool itMetamon_UnkMotion0_Anim(Item_GObj*);
+/* 2D3120 */ void itMetamon_UnkMotion0_Phys(Item_GObj*);
+/* 2D3124 */ bool itMetamon_UnkMotion0_Coll(Item_GObj*);
+/* 2D3150 */ bool itMetamon_UnkMotion1_Anim(Item_GObj*);
+/* 2D3184 */ void itMetamon_UnkMotion1_Phys(Item_GObj*);
+/* 2D3188 */ bool itMetamon_UnkMotion1_Coll(Item_GObj*);
 /* 2D31B4 */ void it_802D31B4(Item_GObj*);
-/* 2D31F4 */ bool it_802D31F4(Item_GObj*);
-/* 2D3218 */ void it_802D3218(Item_GObj*);
-/* 2D3238 */ bool it_802D3238(Item_GObj*);
+/* 2D31F4 */ bool itMetamon_UnkMotion2_Anim(Item_GObj*);
+/* 2D3218 */ void itMetamon_UnkMotion2_Phys(Item_GObj*);
+/* 2D3238 */ bool itMetamon_UnkMotion2_Coll(Item_GObj*);
 /* 3F7FC8 */ extern ItemStateTable it_803F7FC8[];
 
 #endif

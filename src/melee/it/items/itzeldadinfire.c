@@ -3,7 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2C4434 */ static bool it_802C4434(Item_GObj* gobj);
+/* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
 
 Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
 {
@@ -20,21 +20,21 @@ Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
 
 /// #it_802C3D74
 
-/// #it_802C3E94
+/// #itZeldadinfire_UnkMotion0_Anim
 
-/// #it_802C40A4
+/// #itZeldadinfire_UnkMotion1_Anim
 
-/// #it_802C4208
+/// #itZeldadinfire_UnkMotion0_Phys
 
-void it_802C4364(Item_GObj* gobj)
+void itZeldadinfire_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-/// #it_802C437C
+/// #itZeldadinfire_UnkMotion0_Coll
 
-bool it_802C4434(Item_GObj* gobj)
+bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }

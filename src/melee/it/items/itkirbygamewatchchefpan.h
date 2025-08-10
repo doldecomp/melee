@@ -10,7 +10,7 @@
 /* 2C7658 */ void it_802C7658(Item_GObj*);
 /* 2C7678 */ void it_802C7678(Item_GObj*);
 /* 2C7698 */ void it_802C7698(Item_GObj*);
-/* 2C76E8 */ bool it_802C76E8(Item_GObj*);
+/* 2C76E8 */ bool itKirbygamewatchchefpan_UnkMotion0_Anim(Item_GObj*);
 /* 2C7754 */ void it_802C7754(Item_GObj*, HSD_GObj* ref_gobj);
 /* 3F7958 */ extern ItemStateTable it_803F7958[];
 

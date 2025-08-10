@@ -14,9 +14,9 @@
 /* 2F0BC8 */ void it_802F0BC8(Item_GObj*, Item_GObj*);
 /* 2F0BE8 */ void it_802F0BE8(Item_GObj*);
 /* 2F0D2C */ void it_802F0D2C(Item_GObj*);
-/* 2F0E70 */ bool it_802F0E70(Item_GObj*);
-/* 2F0ED4 */ void it_802F0ED4(Item_GObj*);
-/* 2F0ED8 */ bool it_802F0ED8(Item_GObj*);
+/* 2F0E70 */ bool itMasterhandbullet_UnkMotion1_Anim(Item_GObj*);
+/* 2F0ED4 */ void itMasterhandbullet_UnkMotion1_Phys(Item_GObj*);
+/* 2F0ED8 */ bool itMasterhandbullet_UnkMotion1_Coll(Item_GObj*);
 /* 2F0F04 */ void it_802F0F04(Item_GObj*);
 /* 2F0F08 */ void it_802F0F08(Item_GObj*);
 /* 2F0F0C */ bool it_802F0F0C(Item_GObj*);

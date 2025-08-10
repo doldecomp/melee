@@ -30,22 +30,22 @@ bool it_802E87F0(Item_GObj* arg0)
 
 /// #it_802E883C
 
-/// #it_802E8864
+/// #itOctarockstone_UnkMotion0_Anim
 
-void it_802E8898(Item_GObj* gobj) {}
+void itOctarockstone_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_802E889C
+/// #itOctarockstone_UnkMotion0_Coll
 
 /// #it_802E890C
 
-bool it_802E896C(Item_GObj* gobj)
+bool itOctarockstone_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802E8974
+/// #itOctarockstone_UnkMotion1_Phys
 
-/// #it_802E8990
+/// #itOctarockstone_UnkMotion1_Coll
 
 void it_802E89B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

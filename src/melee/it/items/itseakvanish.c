@@ -12,7 +12,7 @@
 ItemStateTable it_803F70B8[] = {
     {
         0,
-        it_802B1DAC,
+        itSeakvanish_UnkMotion0_Anim,
         NULL,
         NULL,
     },
@@ -60,7 +60,7 @@ void it_802B1D40(Item_GObj* item_gobj, HSD_GObj* owner)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802B1DAC(Item_GObj* item_gobj)
+bool itSeakvanish_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     return it_802751D8(item_gobj);
 }

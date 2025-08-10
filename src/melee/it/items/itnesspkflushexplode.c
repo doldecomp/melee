@@ -6,7 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2AFD44 */ static bool it_802AFD44(Item_GObj* gobj);
+/* 2AFD44 */ static bool itNesspkflushexplode_UnkMotion0_Coll(Item_GObj* gobj);
 
 /// #it_802AF940
 
@@ -14,15 +14,15 @@
 
 /// #it_802AFA70
 
-/// #it_802AFBA4
+/// #itNesspkflushexplode_UnkMotion0_Anim
 
-void it_802AFD2C(Item_GObj* gobj)
+void itNesspkflushexplode_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     it->x40_vel.z = it->x40_vel.y = it->x40_vel.z = 0;
 }
 
-bool it_802AFD44(Item_GObj* gobj)
+bool itNesspkflushexplode_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }

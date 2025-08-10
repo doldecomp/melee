@@ -55,7 +55,7 @@ bool it_802C242C(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-bool it_802C23D4(Item_GObj* gobj)
+bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj)
 {
     s32 flags = 0;
     it_8026D9A0(gobj);
@@ -64,14 +64,14 @@ bool it_802C23D4(Item_GObj* gobj)
     return flags;
 }
 
-void it_802C23B4(Item_GObj* gobj)
+void itClimbersblizzard_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itClimbersBlizzardAttributes* attrs = GET_ATTRS(ip);
     ip->x40_vel.y += attrs->x8;
 }
 
-bool it_802C2380(Item_GObj* gobj)
+bool itClimbersblizzard_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xD44_lifeTimer <= 0.0f) {

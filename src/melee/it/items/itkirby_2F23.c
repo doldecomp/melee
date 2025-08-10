@@ -7,14 +7,14 @@
 
 /// #it_802F23EC
 
-bool it_802F2578(Item_GObj* gobj)
+bool itKirby_2F23_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F2580(Item_GObj* gobj) {}
+void itKirby_2F23_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-bool it_802F2584(Item_GObj* gobj)
+bool itKirby_2F23_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -23,14 +23,14 @@ bool it_802F2584(Item_GObj* gobj)
 
 /// #it_802F2810
 
-bool it_802F2888(Item_GObj* gobj)
+bool itKirby_2F23_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F2890(Item_GObj* gobj) {}
+void itKirby_2F23_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-bool it_802F2894(Item_GObj* gobj)
+bool itKirby_2F23_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }

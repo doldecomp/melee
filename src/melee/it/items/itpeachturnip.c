@@ -13,32 +13,32 @@
 ItemStateTable it_803F74A8[] = {
     {
         1,
-        it_802BD6D4,
-        it_802BD6DC,
+        itPeachturnip_UnkMotion4_Anim,
+        itPeachturnip_UnkMotion4_Phys,
         NULL,
     },
     {
         -1,
-        it_802BD6E0,
-        it_802BD718,
+        itPeachturnip_UnkMotion1_Anim,
+        itPeachturnip_UnkMotion1_Phys,
         NULL,
     },
     {
         2,
-        it_802BD7E0,
-        it_802BD818,
-        it_802BD864,
+        itPeachturnip_UnkMotion3_Anim,
+        itPeachturnip_UnkMotion3_Phys,
+        itPeachturnip_UnkMotion3_Coll,
     },
     {
         2,
-        it_802BD7E0,
-        it_802BD818,
-        it_802BD864,
+        itPeachturnip_UnkMotion3_Anim,
+        itPeachturnip_UnkMotion3_Phys,
+        itPeachturnip_UnkMotion3_Coll,
     },
     {
         -1,
-        it_802BD6D4,
-        it_802BD6DC,
+        itPeachturnip_UnkMotion4_Anim,
+        itPeachturnip_UnkMotion4_Phys,
         NULL,
     },
 };
@@ -173,22 +173,22 @@ void it_802BD628(Item_GObj* item_gobj)
     Item_802694CC(item_gobj);
 }
 
-bool it_802BD6D4(Item_GObj* item_gobj)
+bool itPeachturnip_UnkMotion4_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_802BD6DC(Item_GObj* item_gobj)
+void itPeachturnip_UnkMotion4_Phys(Item_GObj* item_gobj)
 {
     return;
 }
 
-bool it_802BD6E0(Item_GObj* item_gobj)
+bool itPeachturnip_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     return decrease_lifetimer(item_gobj);
 }
 
-void it_802BD718(Item_GObj* item_gobj)
+void itPeachturnip_UnkMotion1_Phys(Item_GObj* item_gobj)
 {
     ItemAttr* temp_r4;
 
@@ -214,13 +214,13 @@ void it_802BD748(Item_GObj* item_gobj)
     it_80274484(item_gobj, jobj, item->xDD4_itemVar.peachturnip.xDE0_scl);
 }
 
-bool it_802BD7E0(Item_GObj* item_gobj)
+bool itPeachturnip_UnkMotion3_Anim(Item_GObj* item_gobj)
 {
     return decrease_lifetimer(item_gobj);
 }
 
 // ProjectilePhysics_TurnipVelocity
-void it_802BD818(Item_GObj* item_gobj)
+void itPeachturnip_UnkMotion3_Phys(Item_GObj* item_gobj)
 {
     ItemAttr* attr;
 
@@ -229,7 +229,7 @@ void it_802BD818(Item_GObj* item_gobj)
     it_80274658(item_gobj, it_804D6D28->x68_float);
 }
 
-bool it_802BD864(Item_GObj* item_gobj)
+bool itPeachturnip_UnkMotion3_Coll(Item_GObj* item_gobj)
 {
     s32 first_check, second_check;
     bool chk;

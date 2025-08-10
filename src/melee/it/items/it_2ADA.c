@@ -12,16 +12,16 @@
 #include <common_structs.h>
 
 /* 2ADAF0 */ static void it_802ADAF0(Item_GObj* gobj);
-/* 2ADB48 */ static bool it_802ADB48(Item_GObj* gobj);
-/* 2ADB80 */ static void it_802ADB80(Item_GObj* gobj);
-/* 2ADBB0 */ static bool it_802ADBB0(Item_GObj* gobj);
+/* 2ADB48 */ static bool it_2ADA_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2ADB80 */ static void it_2ADA_UnkMotion0_Phys(Item_GObj* gobj);
+/* 2ADBB0 */ static bool it_2ADA_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F6C88[] = {
     {
         0,
-        it_802ADB48,
-        it_802ADB80,
-        it_802ADBB0,
+        it_2ADA_UnkMotion0_Anim,
+        it_2ADA_UnkMotion0_Phys,
+        it_2ADA_UnkMotion0_Coll,
     },
 };
 
@@ -60,7 +60,7 @@ void it_802ADAF0(Item_GObj* gobj)
     item->xDCE_flag.b7 = false;
 }
 
-bool it_802ADB48(Item_GObj* gobj)
+bool it_2ADA_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     item->xD44_lifeTimer -= 1;
@@ -70,13 +70,13 @@ bool it_802ADB48(Item_GObj* gobj)
     return false;
 }
 
-void it_802ADB80(Item_GObj* gobj)
+void it_2ADA_UnkMotion0_Phys(Item_GObj* gobj)
 {
     ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-bool it_802ADBB0(Item_GObj* gobj)
+bool it_2ADA_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return it_8026DFB0(gobj) ? true : false;
 }

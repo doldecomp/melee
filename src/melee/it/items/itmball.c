@@ -47,14 +47,14 @@ void it_80297944(Item_GObj* arg0)
     Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_8029799C(Item_GObj* gobj)
+bool itMball_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802979A4(Item_GObj* gobj) {}
+void itMball_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-bool it_802979A8(Item_GObj* arg0)
+bool itMball_UnkMotion0_Coll(Item_GObj* arg0)
 {
     it_8026D62C(arg0, it_802979D4);
     return 0;
@@ -71,19 +71,19 @@ void it_802979D4(Item_GObj* arg0)
     Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_80297A1C(Item_GObj* gobj)
+bool itMball_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80297A24(Item_GObj* arg0)
+void itMball_UnkMotion1_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
                 item->xCC_item_attr->x14_fall_speed_max);
 }
 
-bool it_80297A54(Item_GObj* arg0)
+bool itMball_UnkMotion1_Coll(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     f32 previous_vel_x;
@@ -101,12 +101,12 @@ void it_80297ABC(Item_GObj* arg0)
     Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_80297AE4(Item_GObj* gobj)
+bool itMball_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80297AEC(Item_GObj* gobj) {}
+void itMball_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 void it_80297AF0(Item_GObj* arg0)
 {
@@ -118,7 +118,7 @@ void it_80297B18(Item_GObj* arg0)
     Item_80268E5C(arg0, 3, 6);
 }
 
-void it_80297B40(Item_GObj* arg0)
+void itMball_UnkMotion3_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
@@ -126,7 +126,7 @@ void it_80297B40(Item_GObj* arg0)
     it_80274658(arg0, it_804D6D28->x68_float);
 }
 
-bool it_80297B8C(Item_GObj* arg0)
+bool itMball_UnkMotion3_Coll(Item_GObj* arg0)
 {
     it_8026E414(arg0, (void (*)(HSD_GObj*)) it_80297CC4);
     return 0;
@@ -142,14 +142,14 @@ bool it_80297BB8(Item_GObj* arg0)
 
 /// #it_80297BF8
 
-bool it_80297C84(Item_GObj* gobj)
+bool itMball_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80297C8C(Item_GObj* gobj) {}
+void itMball_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #it_80297C90
+/// #itMball_UnkMotion4_Coll
 
 void it_80297CC4(Item_GObj* arg0)
 {
@@ -190,17 +190,17 @@ void it_80297DD8(Item_GObj* arg0)
     }
 }
 
-/// #it_80297E28
+/// #itMball_UnkMotion5_Anim
 
-void it_80297E5C(Item_GObj* gobj) {}
+void itMball_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_80297E60
+/// #itMball_UnkMotion5_Coll
 
 /// #it_80297E8C
 
-/// #it_80297F94
+/// #itMball_UnkMotion6_Anim
 
-void it_80297FC8(Item_GObj* arg0)
+void itMball_UnkMotion6_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
 
@@ -208,7 +208,7 @@ void it_80297FC8(Item_GObj* arg0)
                 item->xCC_item_attr->x14_fall_speed_max);
 }
 
-bool it_80297FF8(Item_GObj* arg0)
+bool itMball_UnkMotion6_Coll(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     f32 previous_vel_x;

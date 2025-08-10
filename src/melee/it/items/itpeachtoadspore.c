@@ -18,8 +18,8 @@
 
 ItemStateTable it_803F7548[] = { {
     0,
-    it_802BE408,
-    it_802BE458,
+    itPeachtoadspore_UnkMotion0_Anim,
+    itPeachtoadspore_UnkMotion0_Phys,
     NULL,
 } };
 
@@ -87,7 +87,7 @@ void it_802BE2E8(Item_GObj* item_gobj, HSD_GObj* arg1)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802BE408(Item_GObj* item_gobj)
+bool itPeachtoadspore_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -104,7 +104,7 @@ bool it_802BE408(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802BE458(Item_GObj* item_gobj)
+void itPeachtoadspore_UnkMotion0_Phys(Item_GObj* item_gobj)
 {
     itPeachToadSporeAttributes* attr;
     Item* item;

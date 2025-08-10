@@ -11,19 +11,19 @@
 ItemStateTable it_803F74F8[] = {
     {
         -1,
-        it_802BDCC0,
+        itPeachparasol_UnkMotion2_Anim,
         NULL,
         NULL,
     },
     {
         0,
-        it_802BDCC0,
+        itPeachparasol_UnkMotion2_Anim,
         NULL,
         NULL,
     },
     {
         1,
-        it_802BDCC0,
+        itPeachparasol_UnkMotion2_Anim,
         NULL,
         NULL,
     },
@@ -106,7 +106,7 @@ void it_802BDC74(Item_GObj* item_gobj)
     item->x5D0_animFrameSpeed = 1.0F;
 }
 
-bool it_802BDCC0(Item_GObj* item_gobj)
+bool itPeachparasol_UnkMotion2_Anim(Item_GObj* item_gobj)
 {
     bool var_r3;
 

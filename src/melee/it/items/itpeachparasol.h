@@ -20,7 +20,7 @@
 /* 2BDC18 */ void it_802BDC18(Item_GObj*);
 /* 2BDC38 */ bool it_802BDC38(Item_GObj*);
 /* 2BDC74 */ void it_802BDC74(Item_GObj*);
-/* 2BDCC0 */ bool it_802BDCC0(Item_GObj*);
+/* 2BDCC0 */ bool itPeachparasol_UnkMotion2_Anim(Item_GObj*);
 /* 2BDD3C */ void it_802BDD3C(Item_GObj*);
 /* 2BDD40 */ void it_802BDD40(Item_GObj*, f32 arg1);
 /* 2BDDB4 */ void it_802BDDB4(Item_GObj*, f32 arg1);

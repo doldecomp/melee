@@ -18,9 +18,9 @@
                               int kind);
 /* 29C6CC */ void it_8029C6CC(f32 angle, f32 vel, HSD_GObj* parent, Vec3* vec,
                               int kind);
-/* 29C6F4 */ bool it_8029C6F4(Item_GObj*);
-/* 29C9CC */ void it_8029C9CC(Item_GObj*);
-/* 29C9EC */ bool it_8029C9EC(Item_GObj*);
+/* 29C6F4 */ bool itFoxlaser_UnkMotion1_Anim(Item_GObj*);
+/* 29C9CC */ void itFoxlaser_UnkMotion1_Phys(Item_GObj*);
+/* 29C9EC */ bool itFoxlaser_UnkMotion1_Coll(Item_GObj*);
 /* 29CA78 */ bool it_8029CA78(Item_GObj*);
 /* 29CA80 */ bool it_8029CA80(Item_GObj*);
 /* 29CC4C */ bool it_8029CC4C(Item_GObj*);

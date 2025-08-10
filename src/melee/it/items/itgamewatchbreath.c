@@ -11,8 +11,8 @@
 #include <melee/it/types.h>
 
 
-ItemStateTable it_803F7938[] = { { 0, it_802C744C, NULL, NULL },
-                                 { 1, it_802C744C, NULL, NULL } };
+ItemStateTable it_803F7938[] = { { 0, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL },
+                                 { 1, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL } };
 
 HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
                       float dir)
@@ -91,7 +91,7 @@ void it_802C7424(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C744C(Item_GObj* item_gobj)
+bool itGamewatchbreath_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     int pad[3];
     Item* item;

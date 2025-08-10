@@ -92,7 +92,7 @@ void it_802C64A8(Item_GObj* item_gobj) {
     Item_80268E5C((HSD_GObj* ) item_gobj, 3, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C653C(Item_GObj* item_gobj) {
+bool itGamewatchgreenhouse_UnkMotion2_Anim(Item_GObj* item_gobj) {
     Item* item;
     bool var_r3;
 

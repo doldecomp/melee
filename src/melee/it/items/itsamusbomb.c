@@ -8,27 +8,27 @@
 
 /// #it_802B4C10
 
-/// #it_802B4C38
+/// #itSamusbomb_UnkMotion0_Anim
 
-void it_802B4CC4(Item_GObj* gobj) {}
+void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_802B4CC8
+/// #itSamusbomb_UnkMotion0_Coll
 
 /// #it_802B4CF4
 
-/// #it_802B4D1C
+/// #itSamusbomb_UnkMotion1_Anim
 
-/// #it_802B4F1C
+/// #itSamusbomb_UnkMotion1_Phys
 
-/// #it_802B4F4C
+/// #itSamusbomb_UnkMotion1_Coll
 
 /// #it_802B4F78
 
-/// #it_802B4FA0
+/// #itSamusbomb_UnkMotion2_Anim
 
-/// #it_802B51A0
+/// #itSamusbomb_UnkMotion2_Phys
 
-/// #it_802B5284
+/// #itSamusbomb_UnkMotion2_Coll
 
 /// #it_802B52B8
 
@@ -42,7 +42,7 @@ void it_802B4CC4(Item_GObj* gobj) {}
 
 /// #it_802B53CC
 
-/// #it_802B5458
+/// #itSamusbomb_UnkMotion3_Anim
 
 /// #it_802B5478
 

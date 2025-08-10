@@ -10,53 +10,53 @@
 
 /// #it_802ECEB0
 
-/// #it_802ECF00
+/// #itKyasarin_UnkMotion0_Anim
 
-/// #it_802ECF70
+/// #itKyasarin_UnkMotion0_Coll
 
 /// #it_802ECFE0
 
-/// #it_802ED040
+/// #itKyasarin_UnkMotion1_Anim
 
-/// #it_802ED088
+/// #itKyasarin_UnkMotion3_Anim
 
 /// #it_802ED0D0
 
-/// #it_802ED124
+/// #itKyasarin_UnkMotion2_Anim
 
-/// #it_802ED198
+/// #itKyasarin_UnkMotion2_Coll
 
 /// #it_802ED25C
 
-/// #it_802ED2AC
+/// #itKyasarin_UnkMotion4_Anim
 
-/// #it_802ED31C
+/// #itKyasarin_UnkMotion4_Coll
 
 /// #it_802ED4F8
 
-/// #it_802ED520
+/// #itKyasarin_UnkMotion6_Anim
 
 /// #it_802ED774
 
-/// #it_802ED79C
+/// #itKyasarin_UnkMotion7_Anim
 
 /// #it_802ED8BC
 
-/// #it_802ED8E4
+/// #itKyasarin_UnkMotion5_Anim
 
-/// #it_802ED92C
+/// #itKyasarin_UnkMotion8_Anim
 
-/// #it_802EDCD0
+/// #itKyasarin_UnkMotion9_Anim
 
-/// #it_802EDD18
+/// #itKyasarin_UnkMotion9_Phys
 
-/// #it_802EDD34
+/// #itKyasarin_UnkMotion9_Coll
 
-/// #it_802EDD54
+/// #itKyasarin_UnkMotion10_Anim
 
-void it_802EDD9C(Item_GObj* gobj) {}
+void itKyasarin_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #it_802EDDA0
+/// #itKyasarin_UnkMotion10_Coll
 
 /// #it_802EDDC0
 

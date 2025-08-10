@@ -9,9 +9,9 @@
 
 /* 29BAB8 */ UNK_RET it_8029BAB8(UNK_PARAMS);
 /* 29BB90 */ UNK_RET it_8029BB90(UNK_PARAMS);
-/* 29BC88 */ bool it_8029BC88(Item_GObj* gobj);
-/* 29BCA8 */ void it_8029BCA8(Item_GObj* gobj);
-/* 29BDD4 */ bool it_8029BDD4(Item_GObj* gobj);
+/* 29BC88 */ bool itKirbycutterbeam_UnkMotion0_Anim(Item_GObj* gobj);
+/* 29BCA8 */ void itKirbycutterbeam_UnkMotion0_Phys(Item_GObj* gobj);
+/* 29BDD4 */ bool itKirbycutterbeam_UnkMotion0_Coll(Item_GObj* gobj);
 /* 29BFB4 */ bool it_8029BFB4(Item_GObj*);
 /* 29BFBC */ bool it_8029BFBC(Item_GObj*);
 /* 29BFC4 */ bool it_8029BFC4(Item_GObj*);

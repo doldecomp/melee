@@ -77,7 +77,7 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
     efSync_Spawn(0x4FA, gobj, jobj);
     ip->xDD4_itemVar.zeldadinfireexplode.xDE0 = 1;
     Item_802694CC(gobj);
-    it_802C4820(gobj);
+    itZeldadinfireexplode_UnkMotion0_Anim(gobj);
     temp_f1 = ip->xDD4_itemVar.zeldadinfireexplode.xDD4 / attrs->x0;
     if (temp_f1 < 0.4375f) {
         it_80273598(gobj, 0xB, 0xA);
@@ -93,7 +93,7 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
     db_80225DD8(gobj, ip->owner);
 }
 
-bool it_802C4820(Item_GObj* gobj)
+bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -125,7 +125,7 @@ bool it_802C4820(Item_GObj* gobj)
     it_80273130(gobj);
 }
 
-void it_802C4980(Item_GObj* gobj)
+void itZeldadinfireexplode_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 #ifndef BUGFIX
@@ -135,7 +135,7 @@ void it_802C4980(Item_GObj* gobj)
 #endif
 }
 
-bool it_802C4998(Item_GObj* gobj)
+bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }

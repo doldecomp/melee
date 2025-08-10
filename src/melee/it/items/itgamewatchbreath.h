@@ -12,7 +12,7 @@
 /* 2C73AC */ void it_802C73AC(Item_GObj*);
 /* 2C73CC */ void it_802C73CC(Item_GObj*);
 /* 2C7424 */ void it_802C7424(Item_GObj*);
-/* 2C744C */ bool it_802C744C(Item_GObj*);
+/* 2C744C */ bool itGamewatchbreath_UnkMotion1_Anim(Item_GObj*);
 /* 2C74B8 */ void it_802C74B8(Item_GObj*, Item_GObj*);
 /* 3F7938 */ extern ItemStateTable it_803F7938[];
 

@@ -98,7 +98,7 @@ void it_802F0484(HSD_GObj* gobj)
     ip->xDD4_itemVar.masterhandlaser.x8 = attrs->x4;
 }
 
-bool it_802F04F0(Item_GObj* gobj)
+bool itMasterhandlaser_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (it_80272C6C(gobj) == 0) {
@@ -111,9 +111,9 @@ bool it_802F04F0(Item_GObj* gobj)
     return false;
 }
 
-void it_802F059C(Item_GObj* gobj) {}
+void itMasterhandlaser_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-bool it_802F05A0(Item_GObj* gobj)
+bool itMasterhandlaser_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }

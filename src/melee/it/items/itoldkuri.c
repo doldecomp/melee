@@ -8,66 +8,66 @@
 
 /// #it_802D747C
 
-bool it_802D74D0(Item_GObj* gobj)
+bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802D74D8
+/// #itOldkuri_UnkMotion0_Phys
 
-/// #it_802D7550
+/// #itOldkuri_UnkMotion0_Coll
 
 /// #it_802D758C
 
-/// #it_802D75F8
+/// #itOldkuri_UnkMotion1_Anim
 
-/// #it_802D7670
+/// #itOldkuri_UnkMotion1_Phys
 
-/// #it_802D76EC
+/// #itOldkuri_UnkMotion1_Coll
 
 /// #it_802D775C
 
-/// #it_802D77C8
+/// #itOldkuri_UnkMotion2_Anim
 
-/// #it_802D788C
+/// #itOldkuri_UnkMotion2_Phys
 
-/// #it_802D795C
+/// #itOldkuri_UnkMotion2_Coll
 
-/// #it_802D7A18
+/// #itOldkuri_UnkMotion3_Anim
 
-/// #it_802D7A60
+/// #itOldkuri_UnkMotion3_Phys
 
-/// #it_802D7A90
+/// #itOldkuri_UnkMotion3_Coll
 
 /// #it_802D7AF0
 
-/// #it_802D7B3C
+/// #itOldkuri_UnkMotion4_Anim
 
-/// #it_802D7B84
+/// #itOldkuri_UnkMotion4_Phys
 
-/// #it_802D7BB4
+/// #itOldkuri_UnkMotion4_Coll
 
 /// #it_802D7C14
 
-/// #it_802D7C58
+/// #itOldkuri_UnkMotion5_Anim
 
-void it_802D7CB0(Item_GObj* gobj) {}
+void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #it_802D7CB4
 
 /// #it_802D7D18
 
-/// #it_802D7D7C
+/// #itOldkuri_UnkMotion6_Anim
 
-/// #it_802D7DC4
+/// #itOldkuri_UnkMotion6_Phys
 
-/// #it_802D7DF4
+/// #itOldkuri_UnkMotion6_Coll
 
-/// #it_802D7E18
+/// #itOldkuri_UnkMotion9_Anim
 
-/// #it_802D7EAC
+/// #itOldkuri_UnkMotion9_Phys
 
-/// #it_802D7ED4
+/// #itOldkuri_UnkMotion9_Coll
 
 /// #it_802D7F38
 
@@ -75,35 +75,35 @@ void it_802D7CB0(Item_GObj* gobj) {}
 
 /// #it_802D813C
 
-/// #it_802D8190
+/// #itOldkuri_UnkMotion7_Anim
 
-void it_802D81D8(Item_GObj* gobj) {}
+void itOldkuri_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #it_802D81DC
+/// #itOldkuri_UnkMotion7_Coll
 
 /// #it_802D81FC
 
-/// #it_802D8240
+/// #itOldkuri_UnkMotion8_Anim
 
-/// #it_802D8274
+/// #itOldkuri_UnkMotion8_Phys
 
-/// #it_802D82A4
+/// #itOldkuri_UnkMotion8_Coll
 
 /// #it_802D82C4
 
-/// #it_802D8330
+/// #itOldkuri_UnkMotion10_Anim
 
-void it_802D8378(Item_GObj* gobj) {}
+void itOldkuri_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #it_802D837C
+/// #itOldkuri_UnkMotion10_Coll
 
 /// #it_802D839C
 
-/// #it_802D8408
+/// #itOldkuri_UnkMotion11_Anim
 
-/// #it_802D8450
+/// #itOldkuri_UnkMotion11_Phys
 
-/// #it_802D846C
+/// #itOldkuri_UnkMotion11_Coll
 
 /// #it_802D848C
 

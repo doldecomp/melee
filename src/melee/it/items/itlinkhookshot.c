@@ -31,17 +31,17 @@
 ItemStateTable it_803F6998[] = { {
                                      -1,
                                      NULL,
-                                     it_802A2ED0,
+                                     itLinkhookshot_UnkMotion0_Phys,
                                      NULL,
                                  },
-                                 { -1, it_802A2D88, it_802A30FC, NULL },
-                                 { -1, it_802A2D88, it_802A3240, NULL },
-                                 { -1, it_802A2D88, it_802A338C, NULL },
-                                 { -1, it_802A2D88, it_802A34EC, NULL },
-                                 { -1, it_802A2D88, it_802A361C, NULL },
-                                 { -1, it_802A2D88, it_802A3814, NULL },
-                                 { -1, it_802A2D88, it_802A39E8, NULL },
-                                 { -1, it_802A2D88, it_802A3C84, NULL } };
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion1_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion2_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion3_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion4_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion5_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion6_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion7_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion8_Phys, NULL } };
 
 f32 it_804D6D48;
 
@@ -382,7 +382,7 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
     return gobj;
 }
 
-bool it_802A2D88(Item_GObj* arg0)
+bool itLinkhookshot_UnkMotion8_Anim(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item;
@@ -427,7 +427,7 @@ void fn_802A2E4C(Item_GObj* arg0)
     }
 }
 
-void it_802A2ED0(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion0_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = fn_802A2E4C;
@@ -507,7 +507,7 @@ void it_802A2EE4(Item_GObj* arg0)
     return;
 }
 
-void it_802A30FC(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion1_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = it_802A2EE4;
@@ -563,7 +563,7 @@ void fn_802A3110(HSD_GObj* arg0)
     it_802A7168(item, &vec, fp->x34_scale.y);
 }
 
-void it_802A3240(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion2_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = fn_802A3110;
@@ -590,7 +590,7 @@ void it_802A3254(Item_GObj* arg0)
     }
 }
 
-void it_802A338C(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion3_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3254;
@@ -625,7 +625,7 @@ void fn_802A33A0(Item_GObj* arg0)
     it_802A7168(item, &vec, fp->x34_scale.y);
 }
 
-void it_802A34EC(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion4_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = fn_802A33A0;
@@ -657,7 +657,7 @@ void it_802A3500(Item_GObj* arg0)
     it_802A7168(item, &pos, fp->x34_scale.y);
 }
 
-void it_802A361C(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion5_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3500;
@@ -715,7 +715,7 @@ void it_802A3630(Item_GObj* arg0)
     }
 }
 
-void it_802A3814(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion6_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3630;
@@ -768,7 +768,7 @@ void it_802A3828(Item_GObj* arg0)
     }
 }
 
-void it_802A39E8(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion7_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3828;
@@ -848,7 +848,7 @@ void it_802A39FC(Item_GObj* arg0)
     }
 }
 
-void it_802A3C84(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion8_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     item->xDD4_itemVar.linkhookshot.x10 = it_802A39FC;

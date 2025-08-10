@@ -15,9 +15,9 @@
 
 ItemStateTable it_803F7158[] = { {
     0,
-    it_802B3294,
-    it_802B32C8,
-    it_802B3324,
+    itYoshistar_UnkMotion0_Anim,
+    itYoshistar_UnkMotion0_Phys,
+    itYoshistar_UnkMotion0_Coll,
 } };
 
 typedef struct {
@@ -99,7 +99,7 @@ void it_802B322C(Item_GObj* item_gobj, HSD_GObj* owner)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802B3294(Item_GObj* item_gobj)
+bool itYoshistar_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     if (!it_80272C6C(item_gobj)) {
         return true;
@@ -107,7 +107,7 @@ bool it_802B3294(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802B32C8(Item_GObj* item_gobj)
+void itYoshistar_UnkMotion0_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     ItemAttr* attr = item->xCC_item_attr;
@@ -116,7 +116,7 @@ void it_802B32C8(Item_GObj* item_gobj)
     item->x40_vel.x += star->accel * item->facing_dir;
 }
 
-bool it_802B3324(Item_GObj* item_gobj)
+bool itYoshistar_UnkMotion0_Coll(Item_GObj* item_gobj)
 {
     it_8026E0F4(item_gobj);
     return false;
