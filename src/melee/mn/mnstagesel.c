@@ -534,7 +534,7 @@ int mnStageSel_8025BBD4(void)
     return mnStageSel_803F06D0[mnStageSel_802599EC()].xB;
 }
 
-u8 mnStageSel_8025BC08(int idx)
+int mnStageSel_8025BC08(int idx)
 {
     return mnStageSel_803F06D0[idx].xB;
 }
