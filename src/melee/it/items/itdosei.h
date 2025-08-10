@@ -5,7 +5,7 @@
 
 #include "it/items/types.h"
 
-/* 281164 */ void it_80281164(Item_GObj*);
+/* 281164 */ void it_3F14_Logic7_Spawned(Item_GObj*);
 /* 281390 */ UNK_RET fn_80281390(UNK_PARAMS);
 /* 2813F8 */ bool itDosei_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2816F0 */ void itDosei_UnkMotion0_Phys(Item_GObj* gobj);
@@ -23,14 +23,14 @@
 /* 2820CC */ bool itDosei_UnkMotion3_Anim(Item_GObj* gobj);
 /* 282130 */ void itDosei_UnkMotion3_Phys(Item_GObj* gobj);
 /* 282160 */ bool itDosei_UnkMotion5_Coll(Item_GObj* gobj);
-/* 28218C */ void it_8028218C(Item_GObj*);
+/* 28218C */ void it_3F14_Logic7_PickedUp(Item_GObj*);
 /* 2824B8 */ bool itDosei_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2826F4 */ void itDosei_UnkMotion4_Phys(Item_GObj* gobj);
-/* 2826F8 */ void it_802826F8(Item_GObj*);
-/* 2829FC */ void it_802829FC(Item_GObj*);
+/* 2826F8 */ void it_3F14_Logic7_Dropped(Item_GObj*);
+/* 2829FC */ void it_3F14_Logic7_Thrown(Item_GObj*);
 /* 282AC0 */ bool itDosei_UnkMotion5_Anim(Item_GObj* gobj);
 /* 282AC8 */ void itDosei_UnkMotion5_Phys(Item_GObj* gobj);
-/* 282B14 */ void it_80282B14(Item_GObj*);
+/* 282B14 */ void it_3F14_Logic7_EnteredAir(Item_GObj*);
 /* 282B84 */ bool itDosei_UnkMotion6_Anim(Item_GObj* gobj);
 /* 282BA8 */ void itDosei_UnkMotion6_Phys(Item_GObj* gobj);
 /* 282BAC */ bool itDosei_UnkMotion6_Coll(Item_GObj* gobj);
@@ -49,16 +49,16 @@
 /* 283504 */ bool itDosei_UnkMotion10_Anim(Item_GObj* gobj);
 /* 283550 */ void itDosei_UnkMotion10_Phys(Item_GObj* gobj);
 /* 283554 */ bool itDosei_UnkMotion10_Coll(Item_GObj* gobj);
-/* 283588 */ bool it_80283588(Item_GObj*);
+/* 283588 */ bool it_3F14_Logic7_DmgReceived(Item_GObj*);
 /* 2838FC */ bool itDosei_UnkMotion11_Anim(Item_GObj* gobj);
 /* 283960 */ void itDosei_UnkMotion11_Phys(Item_GObj* gobj);
 /* 283990 */ bool itDosei_UnkMotion11_Coll(Item_GObj* gobj);
-/* 2839BC */ bool it_802839BC(Item_GObj*);
-/* 283A3C */ bool it_80283A3C(Item_GObj*);
-/* 283A5C */ bool it_80283A5C(Item_GObj*);
-/* 283A80 */ bool it_80283A80(Item_GObj*);
-/* 283AA4 */ bool it_80283AA4(Item_GObj*);
-/* 283AC4 */ void it_80283AC4(Item_GObj*, Item_GObj*);
+/* 2839BC */ bool it_3F14_Logic7_DmgDealt(Item_GObj*);
+/* 283A3C */ bool it_3F14_Logic7_Reflected(Item_GObj*);
+/* 283A5C */ bool it_3F14_Logic7_Clanked(Item_GObj*);
+/* 283A80 */ bool it_3F14_Logic7_HitShield(Item_GObj*);
+/* 283AA4 */ bool it_3F14_Logic7_ShieldBounced(Item_GObj*);
+/* 283AC4 */ void it_3F14_Logic7_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F55D0 */ extern ItemStateTable it_803F55D0[];
 
 #endif

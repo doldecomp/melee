@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 2D42C4 */ void it_802D42C4(Item_GObj*);
+/* 2D42C4 */ void it_2725_Logic24_Spawned(Item_GObj*);
 /* 2D43AC */ UNK_RET it_802D43AC(UNK_PARAMS);
 /* 2D43B0 */ void it_802D43B0(Item_GObj*, Item_GObj*);
 /* 2D43EC */ UNK_RET it_802D43EC(UNK_PARAMS);
@@ -27,11 +27,11 @@
 /* 2D4BDC */ void itHitodeman_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2D4C4C */ bool itHitodeman_UnkMotion2_Coll(Item_GObj* gobj);
 /* 2D4C74 */ UNK_RET it_802D4C74(UNK_PARAMS);
-/* 2D4DE0 */ void it_802D4DE0(Item_GObj*);
+/* 2D4DE0 */ void it_2725_Logic43_Spawned(Item_GObj*);
 /* 2D4EF4 */ bool it_802D4EF4(Item_GObj*);
 /* 2D4F08 */ bool it_802D4F08(Item_GObj*);
 /* 2D4F28 */ bool it_802D4F28(Item_GObj*);
-/* 2D4F48 */ bool it_802D4F48(Item_GObj*);
+/* 2D4F48 */ bool it_2725_Logic43_Absorbed(Item_GObj*);
 /* 2D4F50 */ bool it_802D4F50(Item_GObj*);
 /* 2D4F58 */ void it_802D4F58(Item_GObj*, Item_GObj*);
 /* 2D4F78 */ UNK_RET it_802D4F78(UNK_PARAMS);

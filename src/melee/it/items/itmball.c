@@ -19,7 +19,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 
-void it_802978DC(Item_GObj* item_gobj)
+void it_3F14_Logic34_Destroyed(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (!(it->xDD4_itemVar.mball.b1)) {
@@ -27,7 +27,7 @@ void it_802978DC(Item_GObj* item_gobj)
     }
 }
 
-void it_80297904(Item_GObj* arg0)
+void it_3F14_Logic34_Spawned(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
 
@@ -96,7 +96,7 @@ bool itMball_UnkMotion1_Coll(Item_GObj* arg0)
     return 0;
 }
 
-void it_80297ABC(Item_GObj* arg0)
+void it_3F14_Logic34_PickedUp(Item_GObj* arg0)
 {
     Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
 }
@@ -108,12 +108,12 @@ bool itMball_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itMball_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_80297AF0(Item_GObj* arg0)
+void it_3F14_Logic34_Dropped(Item_GObj* arg0)
 {
     Item_80268E5C(arg0, 3, 6);
 }
 
-void it_80297B18(Item_GObj* arg0)
+void it_3F14_Logic34_Thrown(Item_GObj* arg0)
 {
     Item_80268E5C(arg0, 3, 6);
 }
@@ -132,7 +132,7 @@ bool itMball_UnkMotion3_Coll(Item_GObj* arg0)
     return 0;
 }
 
-bool it_80297BB8(Item_GObj* arg0)
+bool it_3F14_Logic34_DmgDealt(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     it_802725D4(arg0);
@@ -140,7 +140,7 @@ bool it_80297BB8(Item_GObj* arg0)
     return 0;
 }
 
-/// #it_80297BF8
+/// #it_3F14_Logic34_EnteredAir
 
 bool itMball_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -221,7 +221,7 @@ bool itMball_UnkMotion6_Coll(Item_GObj* arg0)
     return 0;
 }
 
-bool it_80298060(Item_GObj* arg0)
+bool it_3F14_Logic34_Clanked(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     it_802725D4(arg0);
@@ -229,13 +229,13 @@ bool it_80298060(Item_GObj* arg0)
     return 0;
 }
 
-bool it_802980A0(Item_GObj* arg0)
+bool it_3F14_Logic34_Reflected(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     return it_80273030(arg0);
 }
 
-bool it_802980D4(Item_GObj* arg0)
+bool it_3F14_Logic34_HitShield(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     it_802725D4(arg0);
@@ -243,13 +243,13 @@ bool it_802980D4(Item_GObj* arg0)
     return 0;
 }
 
-bool it_80298114(Item_GObj* arg0)
+bool it_3F14_Logic34_ShieldBounced(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     return itColl_BounceOffShield(arg0);
 }
 
-void it_80298148(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic34_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

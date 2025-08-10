@@ -6,7 +6,7 @@
 
 void it_802C9DFC(void) {}
 
-/// #it_802C9E00
+/// #it_2725_Logic2_Destroyed
 
 /// #it_802C9E24
 

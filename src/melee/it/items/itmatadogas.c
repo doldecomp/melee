@@ -33,11 +33,11 @@ void itMatadogas_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 /// #it_802CB4F0
 
-/// #it_802CB690
+/// #it_2725_Logic32_Spawned
 
-/// #it_802CB704
+/// #it_2725_Logic33_Spawned
 
-/// #it_802CB778
+/// #it_2725_Logic33_EvtUnk
 
 /// #it_802CB798
 

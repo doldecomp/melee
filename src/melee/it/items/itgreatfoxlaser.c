@@ -17,21 +17,21 @@ UNK_T it_802EAF28(Item_GObj* item_gobj)
 
 /// #itGreatfoxlaser_UnkMotion1_Phys
 
-bool it_802EB444(Item_GObj* item_gobj)
+bool it_2725_Logic27_DmgDealt(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_802EB44C(Item_GObj* item_gobj)
+bool it_2725_Logic27_Clanked(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_802EB454(Item_GObj* item_gobj)
+bool it_2725_Logic27_Absorbed(Item_GObj* item_gobj)
 {
     return false;
 }
 
-/// #it_802EB45C
+/// #it_2725_Logic27_Reflected
 
 /// #it_802EB5A8

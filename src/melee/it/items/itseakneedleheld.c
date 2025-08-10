@@ -6,7 +6,7 @@
 
 /// #it_802B19AC
 
-/// #it_802B1AAC
+/// #it_2725_Logic110_PickedUp
 
 /// #itSeakneedleheld_UnkMotion0_Anim
 
@@ -17,7 +17,7 @@ bool itSeakneedleheld_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802B1C40(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic110_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

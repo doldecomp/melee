@@ -82,8 +82,8 @@
 /* 2F3264 */ bool it_27CF_UnkMotion0_Coll(HSD_GObj*);
 /* 2F3290 */ void it_802F3290(Item_GObj*);
 /* 2F32F8 */ bool it_27CF_UnkMotion2_Anim(HSD_GObj*);
-/* 2F3330 */ bool it_802F3330(Item_GObj*);
-/* 2F3374 */ void it_802F3374(Item_GObj*, HSD_GObj*);
+/* 2F3330 */ bool it_2725_Logic114_DmgReceived(Item_GObj*);
+/* 2F3374 */ void it_2725_Logic114_EvtUnk(Item_GObj*, HSD_GObj*);
 /* 3F94A0 */ extern ItemStateTable it_803F94A0[];
 
 #endif

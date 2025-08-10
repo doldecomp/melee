@@ -3,7 +3,7 @@
 
 #include "it/it_26B1.h"
 
-/// #it_80292360
+/// #it_3F14_Logic22_Spawned
 
 /// #it_80292394
 
@@ -31,7 +31,7 @@ bool itStarrod_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itStarrod_UnkMotion1_Coll
 
-/// #it_80292514
+/// #it_3F14_Logic22_PickedUp
 
 bool itStarrod_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -40,19 +40,19 @@ bool itStarrod_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itStarrod_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_80292548
+/// #it_3F14_Logic22_Dropped
 
 /// #itStarrod_UnkMotion4_Coll
 
-/// #it_802925B4
+/// #it_3F14_Logic22_Thrown
 
 /// #itStarrod_UnkMotion4_Phys
 
 /// #itStarrod_UnkMotion3_Coll
 
-/// #it_8029266C
+/// #it_3F14_Logic22_DmgDealt
 
-/// #it_802926A8
+/// #it_3F14_Logic22_EnteredAir
 
 bool itStarrod_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -63,15 +63,15 @@ void itStarrod_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #itStarrod_UnkMotion5_Coll
 
-/// #it_80292710
+/// #it_3F14_Logic22_Clanked
 
-/// #it_8029274C
+/// #it_3F14_Logic22_Reflected
 
-/// #it_8029276C
+/// #it_3F14_Logic22_HitShield
 
-/// #it_802927A8
+/// #it_3F14_Logic22_ShieldBounced
 
-void it_802927C8(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic22_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

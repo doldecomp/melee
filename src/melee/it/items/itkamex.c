@@ -47,19 +47,19 @@ void it_802CA534(void) {}
 
 /// #it_802CAB10
 
-/// #it_802CACD0
+/// #it_2725_Logic31_Spawned
 
-bool it_802CADC0(Item_GObj* arg0)
+bool it_2725_Logic31_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802CADC8(Item_GObj* arg0)
+bool it_2725_Logic31_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-/// #it_802CADD0
+/// #it_2725_Logic31_EvtUnk
 
 /// #it_802CADF0
 

@@ -14,7 +14,7 @@ Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
 
 /// #it_802C3BAC
 
-/// #it_802C3CBC
+/// #it_2725_Logic65_Destroyed
 
 /// #it_802C3D44
 
@@ -39,19 +39,19 @@ bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802C443C
+/// #it_2725_Logic65_Reflected
 
-bool it_802C4550(Item_GObj* arg0)
+bool it_2725_Logic65_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802C4558(Item_GObj* arg0)
+bool it_2725_Logic65_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-void it_802C4560(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic65_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -10,7 +10,7 @@
 #include <dolphin/mtx.h>
 
 /* 2A77DC */ void it_802A77DC(Item_GObj* gobj);
-/* 2B7150 */ void it_802B7150(Item_GObj*);
+/* 2B7150 */ void it_2725_Logic53_Spawned(Item_GObj*);
 /* 2B7160 */ UNK_RET it_802B7160(UNK_PARAMS);
 /* 2B743C */ UNK_RET it_802B743C(UNK_PARAMS);
 /* 2B75FC */ UNK_RET it_802B75FC(UNK_PARAMS);
@@ -45,7 +45,7 @@
 /* 2BA3BC */ UNK_RET it_802BA3BC(UNK_PARAMS);
 /* 2BA5DC */ UNK_RET it_802BA5DC(UNK_PARAMS);
 /* 2BA760 */ UNK_RET it_802BA760(UNK_PARAMS);
-/* 2BA97C */ void it_802BA97C(Item_GObj*);
+/* 2BA97C */ void it_2725_Logic53_PickedUp(Item_GObj*);
 /* 2BA9B8 */ UNK_RET it_802BA9B8(UNK_PARAMS);
 /* 2BAA08 */ UNK_RET it_802BAA08(UNK_PARAMS);
 /* 2BAA58 */ void it_802BAA58(Item_GObj* gobj);
@@ -57,7 +57,7 @@
 /* 2BAC3C */ void it_802BAC3C(Fighter_GObj* gobj);
 /* 2BAC80 */ void it_802BAC80(Fighter_GObj* gobj);
 /* 2BACC4 */ void it_802BACC4(Fighter_GObj* gobj);
-/* 2BAEA0 */ void it_802BAEA0(Item_GObj*, Item_GObj*);
+/* 2BAEA0 */ void it_2725_Logic53_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F73A8 */ extern ItemStateTable it_803F73A8[];
 
 #endif

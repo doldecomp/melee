@@ -83,7 +83,7 @@ Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)
     return item_gobj;
 }
 
-void it_80288D98(Item_GObj* gobj)
+void it_3F14_Logic3_Spawned(Item_GObj* gobj)
 {
     GET_ITEM(gobj)->xDD4_itemVar.egg.x0 = false;
     it_80288EFC(gobj);
@@ -160,7 +160,7 @@ bool itEgg_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_80288F88(Item_GObj* gobj)
+void it_3F14_Logic3_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C((Item_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
 }
@@ -172,12 +172,12 @@ bool itEgg_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itEgg_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_80288FBC(Item_GObj* gobj)
+void it_3F14_Logic3_Dropped(Item_GObj* gobj)
 {
-    it_80288FDC(gobj);
+    it_3F14_Logic3_Thrown(gobj);
 }
 
-void it_80288FDC(Item_GObj* gobj)
+void it_3F14_Logic3_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, 6);
 }
@@ -192,7 +192,7 @@ void itEgg_UnkMotion3_Phys(Item_GObj* gobj)
 bool itEgg_UnkMotion3_Coll(Item_GObj* gobj)
 {
     if (it_8026DA08(gobj)) {
-        return it_80289218(gobj);
+        return it_3F14_Logic3_DmgDealt(gobj);
     }
     return false;
 }
@@ -256,7 +256,7 @@ bool itEgg_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_80289218(Item_GObj* gobj)
+bool it_3F14_Logic3_DmgDealt(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
 
@@ -273,31 +273,31 @@ bool it_80289218(Item_GObj* gobj)
     return false;
 }
 
-bool it_802893D4(Item_GObj* gobj)
+bool it_3F14_Logic3_Clanked(Item_GObj* gobj)
 {
     PAD_STACK(8);
-    return it_80289218(gobj);
+    return it_3F14_Logic3_DmgDealt(gobj);
 }
 
-bool it_80289470(Item_GObj* gobj)
+bool it_3F14_Logic3_HitShield(Item_GObj* gobj)
 {
     PAD_STACK(8);
-    return it_80289218(gobj);
+    return it_3F14_Logic3_DmgDealt(gobj);
 }
 
-bool it_8028950C(Item_GObj* gobj)
+bool it_3F14_Logic3_Reflected(Item_GObj* gobj)
 {
     PAD_STACK(8);
-    return it_80289218(gobj);
+    return it_3F14_Logic3_DmgDealt(gobj);
 }
 
-bool it_802895A8(Item_GObj* gobj)
+bool it_3F14_Logic3_DmgReceived(Item_GObj* gobj)
 {
     PAD_STACK(8);
-    return it_80289218(gobj);
+    return it_3F14_Logic3_DmgDealt(gobj);
 }
 
-void it_80289644(Item_GObj* gobj)
+void it_3F14_Logic3_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -315,7 +315,7 @@ bool itEgg_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802896AC(Item_GObj* gobj, Item_GObj* ref)
+void it_3F14_Logic3_EvtUnk(Item_GObj* gobj, Item_GObj* ref)
 {
     it_8026B894(gobj, ref);
 }

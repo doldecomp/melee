@@ -22,7 +22,7 @@ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itSamusbomb_UnkMotion1_Coll
 
-/// #it_802B4F78
+/// #it_2725_Logic50_EnteredAir
 
 /// #itSamusbomb_UnkMotion2_Anim
 
@@ -30,15 +30,15 @@ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itSamusbomb_UnkMotion2_Coll
 
-/// #it_802B52B8
+/// #it_2725_Logic50_DmgDealt
 
-/// #it_802B52EC
+/// #it_2725_Logic50_Clanked
 
-/// #it_802B5320
+/// #it_2725_Logic50_HitShield
 
-/// #it_802B5354
+/// #it_2725_Logic50_ShieldBounced
 
-/// #it_802B5374
+/// #it_2725_Logic50_Reflected
 
 /// #it_802B53CC
 
@@ -46,4 +46,4 @@ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #it_802B5478
 
-/// #it_802B54E4
+/// #it_2725_Logic50_EvtUnk

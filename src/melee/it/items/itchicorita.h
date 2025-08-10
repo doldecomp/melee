@@ -10,7 +10,7 @@
 
 /* 2C9588 */ void it_802C9588(Item_GObj*);
 /* 2C9618 */ void it_802C9618(HSD_GObj*);
-/* 2C961C */ void it_802C961C(Item_GObj*, HSD_GObj*);
+/* 2C961C */ void it_2725_Logic1_EvtUnk(Item_GObj*, HSD_GObj*);
 /* 2C963C */ void it_802C963C(HSD_GObj*);
 /* 2C9670 */ void it_802C9670(Item_GObj*);
 /* 2C96CC */ bool itChicorita_UnkMotion0_Anim(HSD_GObj*);

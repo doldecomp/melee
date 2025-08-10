@@ -13,7 +13,7 @@ ItemStateTable it_803F6130[] = {
     { 0, itDkinoko_UnkMotion1_Anim, itDkinoko_UnkMotion1_Phys, itDkinoko_UnkMotion1_Coll },
 };
 
-void it_80293A08(Item_GObj* gobj)
+void it_3F14_Logic27_Spawned(Item_GObj* gobj)
 {
     Item* it;
 
@@ -138,12 +138,12 @@ bool itDkinoko_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_80293D6C(Item_GObj* gobj)
+bool it_3F14_Logic27_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-void it_80293D74(Item_GObj* gobj, HSD_GObj* gobj_2)
+void it_3F14_Logic27_EvtUnk(Item_GObj* gobj, HSD_GObj* gobj_2)
 {
     it_8026B894(gobj, gobj_2);
 }

@@ -2,11 +2,11 @@
 #include <placeholder.h>
 #include "itlugia.h"
 
-/// #it_802D1438
+/// #it_2725_Logic17_Spawned
 
 void it_802D14D0(void) {}
 
-/// #it_802D14D4
+/// #it_2725_Logic17_EvtUnk
 
 /// #itLugia_UnkMotion1_Anim
 
@@ -77,11 +77,11 @@ bool itLugia_UnkMotion5_Coll(Item_GObj* gobj)
 
 /// #it_802D208C
 
-/// #it_802D2308
+/// #it_2725_Logic39_Spawned
 
-/// #it_802D234C
+/// #it_2725_Logic40_Spawned
 
-/// #it_802D2390
+/// #it_2725_Logic41_Spawned
 
 /// #it_802D23D4
 

@@ -9,7 +9,7 @@
 
 /// #it_802AD6B8
 
-/// #it_802AD6F0
+/// #it_2725_Logic58_PickedUp
 
 /// #itNessbat_UnkMotion0_Anim
 
@@ -29,7 +29,7 @@ bool itNessbat_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802AD9FC(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic58_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

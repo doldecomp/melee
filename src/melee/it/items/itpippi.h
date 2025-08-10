@@ -6,7 +6,7 @@
 #include "it/item.h"
 #include "it/items/types.h"
 
-void it_802D3260(Item_GObj*);
+void it_2725_Logic20_Spawned(Item_GObj*);
 void it_802D32D8(Item_GObj*);
 void it_802D32DC(Item_GObj*, Item_GObj*);
 bool itPippi_UnkMotion1_Anim(Item_GObj*);

@@ -4,7 +4,7 @@
 
 /// #it_802E2470
 
-/// #it_802E257C
+/// #it_2725_Logic8_DmgReceived
 
 /// #it_802E269C
 

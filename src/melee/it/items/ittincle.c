@@ -4,9 +4,9 @@
 
 /// #it_802EB5C8
 
-/// #it_802EB684
+/// #it_2725_Logic13_DmgReceived
 
-/// #it_802EB6A8
+/// #it_2725_Logic13_DmgDealt
 
 /// #it_802EB6DC
 

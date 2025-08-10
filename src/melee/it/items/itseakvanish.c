@@ -42,7 +42,7 @@ Item_GObj* it_802B1C60(HSD_GObj* parent, Vec3* pos, f32 dir)
     return NULL;
 }
 
-bool it_802B1D38(Item_GObj* item_gobj)
+bool it_2725_Logic42_DmgDealt(Item_GObj* item_gobj)
 {
     return false;
 }

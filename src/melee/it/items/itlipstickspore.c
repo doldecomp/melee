@@ -38,31 +38,31 @@ bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_8029A600(Item_GObj* arg0)
+bool it_3F14_Logic37_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_8029A608(Item_GObj* arg0)
+bool it_3F14_Logic37_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_8029A610(Item_GObj* arg0)
+bool it_3F14_Logic37_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_8029A618(Item_GObj* arg0)
+bool it_3F14_Logic37_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_8029A620
+/// #it_3F14_Logic37_Reflected
 
-/// #it_8029A704
+/// #it_3F14_Logic37_ShieldBounced
 
-void it_8029A728(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

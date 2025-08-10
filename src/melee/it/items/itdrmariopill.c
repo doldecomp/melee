@@ -446,7 +446,7 @@ Item_GObj* it_802C0850(Item_GObj* parent_gobj, Vec3* pos, s32 arg2,
     return gobj;
 }
 
-void it_802C11E0(Item_GObj* gobj)
+void it_2725_Logic6_PickedUp(Item_GObj* gobj)
 {
     itDrMarioPillAttributes* attrs;
     PAD_STACK(8);
@@ -456,7 +456,7 @@ void it_802C11E0(Item_GObj* gobj)
     it_8026B3A8(gobj);
 }
 
-bool it_802C1384(Item_GObj* gobj)
+bool it_2725_Logic88_DmgDealt(Item_GObj* gobj)
 {
     Item* ip;
     ip = gobj->user_data;
@@ -465,14 +465,14 @@ bool it_802C1384(Item_GObj* gobj)
     return true;
 }
 
-bool it_802C13CC(Item_GObj* gobj)
+bool it_2725_Logic88_Reflected(Item_GObj* gobj)
 {
     it_8026B3A8(gobj);
     return it_80273030(gobj);
 }
 
-// NOTE: identical to it_802C1384
-bool it_802C1400(Item_GObj* gobj)
+// NOTE: identical to it_2725_Logic88_DmgDealt
+bool it_2725_Logic88_Clanked(Item_GObj* gobj)
 {
     Item* ip;
     it_8026B3A8(gobj);
@@ -482,8 +482,8 @@ bool it_802C1400(Item_GObj* gobj)
     return true;
 }
 
-// NOTE: identical to it_802C1384
-bool it_802C145C(Item_GObj* gobj)
+// NOTE: identical to it_2725_Logic88_DmgDealt
+bool it_2725_Logic88_HitShield(Item_GObj* gobj)
 {
     Item* ip;
     it_8026B3A8(gobj);
@@ -493,8 +493,8 @@ bool it_802C145C(Item_GObj* gobj)
     return true;
 }
 
-// NOTE: identical to it_802C1384
-bool it_802C14B8(Item_GObj* gobj)
+// NOTE: identical to it_2725_Logic88_DmgDealt
+bool it_2725_Logic88_Absorbed(Item_GObj* gobj)
 {
     Item* ip;
     it_8026B3A8(gobj);
@@ -504,8 +504,8 @@ bool it_802C14B8(Item_GObj* gobj)
     return true;
 }
 
-// NOTE: identical to it_802C1384
-bool it_802C1514(Item_GObj* gobj)
+// NOTE: identical to it_2725_Logic88_DmgDealt
+bool it_2725_Logic88_ShieldBounced(Item_GObj* gobj)
 {
     Item* ip;
     it_8026B3A8(gobj);
@@ -515,7 +515,7 @@ bool it_802C1514(Item_GObj* gobj)
     return true;
 }
 
-void it_802C1570(Item_GObj* gobj, HSD_GObj* hobj)
+void it_2725_Logic88_EvtUnk(Item_GObj* gobj, HSD_GObj* hobj)
 {
     it_8026B894(gobj, hobj);
 }

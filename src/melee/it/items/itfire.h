@@ -5,9 +5,9 @@
 
 #include "it/items/types.h"
 
-/* 2CC6E4 */ void it_802CC6E4(Item_GObj*);
+/* 2CC6E4 */ void it_2725_Logic6_Spawned(Item_GObj*);
 /* 2CC740 */ UNK_RET it_802CC740(UNK_PARAMS);
-/* 2CC744 */ void it_802CC744(Item_GObj*, Item_GObj*);
+/* 2CC744 */ void it_2725_Logic6_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2CC764 */ bool itFire_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CC7A4 */ void itFire_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2CC7A8 */ bool itFire_UnkMotion1_Coll(Item_GObj* gobj);

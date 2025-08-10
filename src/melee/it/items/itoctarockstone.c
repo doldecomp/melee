@@ -4,29 +4,29 @@
 
 /// #it_802E878C
 
-bool it_802E87D8(Item_GObj* arg0)
+bool it_2725_Logic4_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802E87E0(Item_GObj* arg0)
+bool it_2725_Logic4_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802E87E8(Item_GObj* arg0)
+bool it_2725_Logic4_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802E87F0(Item_GObj* arg0)
+bool it_2725_Logic4_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_802E87F8
+/// #it_2725_Logic4_Reflected
 
-/// #it_802E881C
+/// #it_2725_Logic4_ShieldBounced
 
 /// #it_802E883C
 

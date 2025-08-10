@@ -6,11 +6,11 @@
 
 /// #it_802F1030
 
-/// #it_802F1094
+/// #it_2725_Logic86_EvtUnk
 
-/// #it_802F10B4
+/// #it_2725_Logic86_DmgDealt
 
-/// #it_802F10D8
+/// #it_2725_Logic86_Reflected
 
 /// #it_802F10F8
 

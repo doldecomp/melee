@@ -6,7 +6,7 @@
 #include "it/items/types.h"
 
 /* 2E2470 */ void it_802E2470(Item_GObj*);
-/* 2E257C */ bool it_802E257C(Item_GObj*);
+/* 2E257C */ bool it_2725_Logic8_DmgReceived(Item_GObj*);
 /* 2E269C */ UNK_RET it_802E269C(UNK_PARAMS);
 /* 2E26F4 */ bool itOldottosea_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2E273C */ void itOldottosea_UnkMotion0_Phys(Item_GObj* gobj);

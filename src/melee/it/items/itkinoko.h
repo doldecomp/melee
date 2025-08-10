@@ -18,7 +18,7 @@ typedef struct KinokoAttrs {
 } KinokoAttrs;
 
 HSD_AnimJoint* it_80293660(int idx);
-void it_8029367C(Item_GObj*);
+void it_3F14_Logic26_Spawned(Item_GObj*);
 void it_802936E4(Item_GObj*);
 bool itKinoko_UnkMotion0_Anim(Item_GObj*);
 void itKinoko_UnkMotion0_Phys(Item_GObj*);
@@ -28,8 +28,8 @@ void it_80293884(Item_GObj*);
 bool itKinoko_UnkMotion1_Anim(Item_GObj*);
 void itKinoko_UnkMotion1_Phys(Item_GObj*);
 bool itKinoko_UnkMotion1_Coll(Item_GObj*);
-bool it_802939E0(Item_GObj*);
-void it_802939E8(Item_GObj*, HSD_GObj*);
+bool it_3F14_Logic26_DmgDealt(Item_GObj*);
+void it_3F14_Logic26_EvtUnk(Item_GObj*, HSD_GObj*);
 
 extern ItemStateTable it_803F6110[];
 

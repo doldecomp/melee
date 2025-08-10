@@ -9,7 +9,7 @@
 
 /* 2D3008 */ void it_802D3008(Item_GObj*);
 /* 2D306C */ void it_802D306C(Item_GObj*);
-/* 2D3070 */ void it_802D3070(Item_GObj*, Item_GObj*);
+/* 2D3070 */ void it_2725_Logic19_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2D3090 */ void it_802D3090(Item_GObj*);
 /* 2D30C4 */ void it_802D30C4(Item_GObj*);
 /* 2D30EC */ bool itMetamon_UnkMotion0_Anim(Item_GObj*);

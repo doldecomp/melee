@@ -9,10 +9,10 @@
 #include "it/items/types.h"
 
 /* 2C9B20 */ void it_802C9B20(Item_GObj*);
-/* 2C9C20 */ void it_802C9C20(Item_GObj*);
-/* 2C9C78 */ bool it_802C9C78(Item_GObj*);
-/* 2C9C80 */ void it_802C9C80(Item_GObj*, HSD_GObj*);
-/* 2C9CA0 */ bool it_802C9CA0(Item_GObj*);
+/* 2C9C20 */ void it_2725_Logic30_Spawned(Item_GObj*);
+/* 2C9C78 */ bool it_2725_Logic30_HitShield(Item_GObj*);
+/* 2C9C80 */ void it_2725_Logic30_EvtUnk(Item_GObj*, HSD_GObj*);
+/* 2C9CA0 */ bool it_2725_Logic30_Reflected(Item_GObj*);
 /* 2C9CC0 */ void it_802C9CC0(Item_GObj*);
 /* 2C9CE8 */ bool itChicoritaleaf_UnkMotion0_Anim(HSD_GObj*);
 /* 2C9D1C */ void itChicoritaleaf_UnkMotion0_Phys(HSD_GObj*);

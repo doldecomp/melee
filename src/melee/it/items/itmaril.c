@@ -37,7 +37,7 @@ bool it_802D6848(Item_GObj* arg0)
 
 /// #it_802D6850
 
-/// #it_802D6870
+/// #it_2725_Logic28_Spawned
 
 /// #it_802D68FC
 

@@ -3,7 +3,7 @@
 
 #include "it/it_26B1.h"
 
-/// #it_80281164
+/// #it_3F14_Logic7_Spawned
 
 /// #fn_80281390
 
@@ -39,15 +39,15 @@ void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion5_Coll
 
-/// #it_8028218C
+/// #it_3F14_Logic7_PickedUp
 
 /// #itDosei_UnkMotion4_Anim
 
 void itDosei_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #it_802826F8
+/// #it_3F14_Logic7_Dropped
 
-/// #it_802829FC
+/// #it_3F14_Logic7_Thrown
 
 bool itDosei_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -56,7 +56,7 @@ bool itDosei_UnkMotion5_Anim(Item_GObj* gobj)
 
 /// #itDosei_UnkMotion5_Phys
 
-/// #it_80282B14
+/// #it_3F14_Logic7_EnteredAir
 
 /// #itDosei_UnkMotion6_Anim
 
@@ -94,7 +94,7 @@ void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion10_Coll
 
-/// #it_80283588
+/// #it_3F14_Logic7_DmgReceived
 
 /// #itDosei_UnkMotion11_Anim
 
@@ -102,17 +102,17 @@ void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion11_Coll
 
-/// #it_802839BC
+/// #it_3F14_Logic7_DmgDealt
 
-/// #it_80283A3C
+/// #it_3F14_Logic7_Reflected
 
-/// #it_80283A5C
+/// #it_3F14_Logic7_Clanked
 
-/// #it_80283A80
+/// #it_3F14_Logic7_HitShield
 
-/// #it_80283AA4
+/// #it_3F14_Logic7_ShieldBounced
 
-void it_80283AC4(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic7_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

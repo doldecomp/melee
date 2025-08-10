@@ -15,7 +15,7 @@
 /* 2C8240 */ bool itGamewatchrescue_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2C8350 */ void itGamewatchrescue_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2C8354 */ bool itGamewatchrescue_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2C835C */ void it_802C835C(Item_GObj*, Item_GObj*);
+/* 2C835C */ void it_2725_Logic81_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F79C0 */ extern ItemStateTable it_803F79C0[];
 
 #endif

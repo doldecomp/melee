@@ -6,7 +6,7 @@
 
 /// #it_802C8C34
 
-/// #it_802C8C74
+/// #it_2725_Logic80_PickedUp
 
 /// #itClinkmilk_UnkMotion1_Anim
 
@@ -17,4 +17,4 @@ bool itClinkmilk_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802C8F2C
+/// #it_2725_Logic80_EvtUnk

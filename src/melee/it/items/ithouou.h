@@ -5,7 +5,7 @@
 
 #include "it/items/types.h"
 
-/* 2D251C */ void it_802D251C(Item_GObj*);
+/* 2D251C */ void it_2725_Logic18_Spawned(Item_GObj*);
 /* 2D25B8 */ UNK_RET it_802D25B8(UNK_PARAMS);
 /* 2D25BC */ void it_802D25BC(Item_GObj*, Item_GObj*);
 /* 2D25DC */ bool itHouou_UnkMotion1_Anim(Item_GObj* gobj);
@@ -33,7 +33,7 @@
 /* 2D2C78 */ void it_802D2C78(Item_GObj* gobj);
 /* 2D2D04 */ bool it_802D2D04(Item_GObj* gobj);
 /* 2D2D2C */ UNK_RET it_802D2D2C(UNK_PARAMS);
-/* 2D2E80 */ void it_802D2E80(Item_GObj*);
+/* 2D2E80 */ void it_2725_Logic42_Spawned(Item_GObj*);
 /* 2D2ED0 */ void it_802D2ED0(Item_GObj*, Item_GObj*);
 /* 2D2EF0 */ UNK_RET it_802D2EF0(UNK_PARAMS);
 /* 2D2F3C */ bool it_802D2F3C(Item_GObj* gobj);

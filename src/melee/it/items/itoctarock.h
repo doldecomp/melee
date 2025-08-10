@@ -30,11 +30,11 @@
 /* 2E5428 */ bool itOctarock_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2E5514 */ void itOctarock_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2E5554 */ bool itOctarock_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2E561C */ void it_802E561C(Item_GObj*);
+/* 2E561C */ void it_2725_Logic2_PickedUp(Item_GObj*);
 /* 2E5644 */ bool itOctarock_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2E568C */ void itOctarock_UnkMotion5_Phys(Item_GObj* gobj);
-/* 2E5690 */ void it_802E5690(Item_GObj*);
-/* 2E56E8 */ void it_802E56E8(Item_GObj*);
+/* 2E5690 */ void it_2725_Logic2_Dropped(Item_GObj*);
+/* 2E56E8 */ void it_2725_Logic2_Thrown(Item_GObj*);
 /* 2E5738 */ bool itOctarock_UnkMotion6_Anim(Item_GObj* gobj);
 /* 2E5780 */ void itOctarock_UnkMotion6_Phys(Item_GObj* gobj);
 /* 2E57B0 */ bool itOctarock_UnkMotion6_Coll(Item_GObj* gobj);

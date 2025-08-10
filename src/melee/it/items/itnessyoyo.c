@@ -34,7 +34,7 @@
 
 /// #it_802BFAFC
 
-/// #it_802BFE34
+/// #it_2725_Logic59_PickedUp
 
 /// #it_802BFE5C
 
@@ -42,4 +42,4 @@
 
 /// #it_802C0010
 
-/// #it_802C016C
+/// #it_2725_Logic59_EvtUnk

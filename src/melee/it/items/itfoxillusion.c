@@ -93,14 +93,14 @@ Item_GObj* it_8029CEB4(HSD_GObj* parent, Vec3* pos, ItemKind kind, f32 dir)
     return NULL;
 }
 
-bool it_8029CF8C(Item_GObj* item_gobj)
+bool it_2725_Logic14_DmgDealt(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xCA8 = 0;
     return false;
 }
 
-void it_8029CFA0(Item_GObj* item_gobj)
+void it_2725_Logic14_Destroyed(Item_GObj* item_gobj)
 {
     u8 _[4] = { 0 };
     Item* item = GET_ITEM(item_gobj);

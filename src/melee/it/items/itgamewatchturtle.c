@@ -54,7 +54,7 @@ Item_GObj* it_802C6F40(HSD_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     return NULL;
 }
 
-void it_802C7044(Item_GObj* item_gobj)
+void it_2725_Logic75_Destroyed(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (it->owner != NULL) {
@@ -84,7 +84,7 @@ void it_802C70E0(Item_GObj* item_gobj)
     it_8026B73C(item_gobj);
 }
 
-void it_802C7100(Item_GObj* item_gobj)
+void it_2725_Logic75_PickedUp(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     it->xDAC_itcmd_var0 = 0;
@@ -115,7 +115,7 @@ bool itGamewatchturtle_UnkMotion1_Anim(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802C71EC(HSD_GObj* arg0, HSD_GObj* arg1)
+void it_2725_Logic75_EvtUnk(HSD_GObj* arg0, HSD_GObj* arg1)
 {
     it_8026B894(arg0, arg1);
 }

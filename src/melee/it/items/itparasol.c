@@ -37,7 +37,7 @@ int it_8028B08C(Item_GObj* item_gobj, int statenum)
     return it_803F5B60[it_803F5AB0[statenum].anim_id];
 }
 
-void it_8028B0B8(Item_GObj* item_gobj)
+void it_3F14_Logic13_Spawned(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xDCE_flag.b7 = false;
@@ -135,12 +135,12 @@ bool itParasol_UnkMotion2_Coll(Item_GObj* item_gobj)
     return false;
 }
 
-void it_8028B3C0(Item_GObj* item_gobj)
+void it_3F14_Logic13_Dropped(Item_GObj* item_gobj)
 {
-    it_8028B3E0(item_gobj);
+    it_3F14_Logic13_Thrown(item_gobj);
 }
 
-void it_8028B3E0(Item_GObj* item_gobj)
+void it_3F14_Logic13_Thrown(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     Item_8026AE84(item, 0xF7, 0x7F, 0x40);
@@ -156,35 +156,35 @@ void itParasol_UnkMotion2_Phys(Item_GObj* item_gobj)
     decelerateItemX(item, attrs[1]);
 }
 
-bool it_8028B4D4(Item_GObj* item_gobj)
+bool it_3F14_Logic13_DmgDealt(Item_GObj* item_gobj)
 {
     itColl_BounceOffVictim(item_gobj);
     return false;
 }
 
-bool it_8028B4F8(Item_GObj* item_gobj)
+bool it_3F14_Logic13_Clanked(Item_GObj* item_gobj)
 {
     itColl_BounceOffVictim(item_gobj);
     return false;
 }
 
-bool it_8028B51C(Item_GObj* item_gobj)
+bool it_3F14_Logic13_HitShield(Item_GObj* item_gobj)
 {
     itColl_BounceOffVictim(item_gobj);
     return false;
 }
 
-bool it_8028B540(Item_GObj* item_gobj)
+bool it_3F14_Logic13_Reflected(Item_GObj* item_gobj)
 {
     return it_80273030(item_gobj);
 }
 
-bool it_8028B560(Item_GObj* item_gobj)
+bool it_3F14_Logic13_ShieldBounced(Item_GObj* item_gobj)
 {
     return itColl_BounceOffShield(item_gobj);
 }
 
-void it_8028B580(Item_GObj* item_gobj)
+void it_3F14_Logic13_EnteredAir(Item_GObj* item_gobj)
 {
     Item_80268E5C(item_gobj, 3, ITEM_ANIM_UPDATE);
 }
@@ -202,7 +202,7 @@ bool itParasol_UnkMotion3_Coll(Item_GObj* item_gobj)
     return false;
 }
 
-void it_8028B5E8(Item_GObj* item_gobj)
+void it_3F14_Logic13_PickedUp(Item_GObj* item_gobj)
 {
     it_8028B618(item_gobj, 1.0F);
 }
@@ -259,7 +259,7 @@ void it_8028B850(Item_GObj* item_gobj, f32 speed)
     animSpeed(item_gobj, speed, 10);
 }
 
-void it_8028B8B8(Item_GObj* item_gobj, HSD_GObj* arg1)
+void it_3F14_Logic13_EvtUnk(Item_GObj* item_gobj, HSD_GObj* arg1)
 {
     it_8026B894(item_gobj, arg1);
 }

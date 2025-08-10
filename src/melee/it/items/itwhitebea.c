@@ -28,7 +28,7 @@ void itOldottosea_UnkMotion10_Phys(Item_GObj* gobj) {}
 
 /// #itOldottosea_UnkMotion10_Coll
 
-/// #it_802E34DC
+/// #it_2725_Logic3_Destroyed
 
 /// #it_802E3528
 
@@ -45,7 +45,7 @@ bool itOldottosea_UnkMotion11_Anim(Item_GObj* gobj)
 
 /// #it_802E3784
 
-// This function only called by it_8028F2B4 from itfreeze, so using those item
+// This function only called by it_3F14_Logic17_PickedUp from itfreeze, so using those item
 // vars
 void it_802E37A4(Item_GObj* gobj)
 {
@@ -130,15 +130,15 @@ void itWhitebea_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #itWhitebea_UnkMotion7_Coll
 
-/// #it_802E468C
+/// #it_2725_Logic9_PickedUp
 
 /// #itWhitebea_UnkMotion8_Anim
 
 void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
-/// #it_802E4700
+/// #it_2725_Logic9_Dropped
 
-/// #it_802E47C0
+/// #it_2725_Logic9_Thrown
 
 /// #itWhitebea_UnkMotion9_Anim
 

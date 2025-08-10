@@ -27,17 +27,17 @@ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itPatapata_UnkMotion3_Anim
 
-/// #it_802E0EE0
+/// #it_2725_Logic4_DmgReceived
 
 /// #it_802E0F1C
 
-/// #it_802E0F70
+/// #it_2725_Logic4_PickedUp
 
 /// #itPatapata_UnkMotion5_Anim
 
 void itPatapata_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_802E0FE4
+/// #it_2725_Logic4_Dropped
 
 /// #itPatapata_UnkMotion7_Anim
 
@@ -45,7 +45,7 @@ void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #itPatapata_UnkMotion7_Coll
 
-/// #it_802E10C8
+/// #it_2725_Logic4_Thrown
 
 /// #itPatapata_UnkMotion6_Anim
 

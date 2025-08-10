@@ -7,7 +7,7 @@ void it_802CD4D8(void) {}
 
 /// #it_802CD4FC
 
-/// #it_802CD7B8
+/// #it_2725_Logic9_DmgDealt
 
 /// #it_802CD7D4
 

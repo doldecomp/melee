@@ -47,7 +47,7 @@ void it_802BAEEC(Item_GObj* gobj)
 
 /// #it_802BCB88
 
-/// #it_802BCE94
+/// #it_2725_Logic54_PickedUp
 
 /// #it_802BCED4
 
@@ -57,4 +57,4 @@ void it_802BAEEC(Item_GObj* gobj)
 
 /// #it_802BCFC4
 
-/// #it_802BD10C
+/// #it_2725_Logic54_EvtUnk

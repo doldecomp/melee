@@ -30,7 +30,7 @@ ItemStateTable it_803F80F8[] = {
     { 2, itCerebi_UnkMotion2_Anim, itCerebi_UnkMotion2_Phys, itCerebi_UnkMotion2_Coll },
 };
 
-void it_802D3EF8(Item_GObj* gobj)
+void it_2725_Logic23_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     float* attr = item->xC4_article_data->x4_specialAttributes;

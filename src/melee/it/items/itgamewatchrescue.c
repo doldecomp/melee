@@ -21,4 +21,4 @@ bool itGamewatchrescue_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802C835C
+/// #it_2725_Logic81_EvtUnk

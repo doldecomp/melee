@@ -2,7 +2,7 @@
 #include <placeholder.h>
 #include "ithouou.h"
 
-/// #it_802D251C
+/// #it_2725_Logic18_Spawned
 
 void it_802D25B8(void) {}
 
@@ -73,7 +73,7 @@ bool itHouou_UnkMotion5_Coll(Item_GObj* gobj)
 
 /// #it_802D2D2C
 
-/// #it_802D2E80
+/// #it_2725_Logic42_Spawned
 
 /// #it_802D2ED0
 

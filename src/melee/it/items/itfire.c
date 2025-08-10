@@ -2,11 +2,11 @@
 #include <placeholder.h>
 #include "itfire.h"
 
-/// #it_802CC6E4
+/// #it_2725_Logic6_Spawned
 
 void it_802CC740(void) {}
 
-/// #it_802CC744
+/// #it_2725_Logic6_EvtUnk
 
 /// #itFire_UnkMotion1_Anim
 

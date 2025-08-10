@@ -72,7 +72,7 @@ void it_8028428C(Item_GObj* gobj)
         M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
 }
 
-void it_802842A4(Item_GObj* gobj)
+void it_3F14_Logic9_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     MaximTomatoSpecialAttr* sa = item->xC4_article_data->x4_specialAttributes;
@@ -89,7 +89,7 @@ void it_802842A4(Item_GObj* gobj)
     it_80284358(gobj);
 }
 
-void it_80284324(Item_GObj* gobj)
+void it_3F14_Logic9_Destroyed(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     // if ((((temp_r4->xDD4_itemVar.Egg.filler[4] << 0x18) & 0xC0000000) >>
@@ -171,7 +171,7 @@ bool itTomato_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802844E4(Item_GObj* gobj)
+void it_3F14_Logic9_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
@@ -187,7 +187,7 @@ bool itTomato_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itTomato_UnkMotion3_Phys(Item_GObj* gobj) {}
 
-void it_8028454C(Item_GObj* gobj)
+void it_3F14_Logic9_Dropped(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
@@ -197,7 +197,7 @@ void it_8028454C(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
-void it_802845BC(Item_GObj* gobj)
+void it_3F14_Logic9_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
@@ -215,7 +215,7 @@ bool itTomato_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_80284624(Item_GObj* gobj, Item_GObj* gobj_ref)
+void it_3F14_Logic9_EvtUnk(Item_GObj* gobj, Item_GObj* gobj_ref)
 {
     it_8026B894(gobj, gobj_ref);
 }

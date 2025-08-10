@@ -15,7 +15,7 @@
 /* 2A0534 */ void it_802A0534(Item_GObj* gobj, Vec3*);
 /* 2A07B4 */ void it_802A07B4(Item_GObj* gobj);
 /* 2A0810 */ void it_802A0810(Item_GObj* gobj);
-/* 2A087C */ void it_802A087C(Item_GObj*);
+/* 2A087C */ void it_2725_Logic18_Destroyed(Item_GObj*);
 /* 2A0930 */ void it_802A0930(Item_GObj*);
 /* 2A0C34 */ bool it_802A0C34(Item_GObj*);
 /* 2A0E70 */ void it_802A0E70(Item_GObj*);
@@ -37,7 +37,7 @@
 /* 2A1D60 */ void itLinkboomerang_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2A1F08 */ bool it_802A1F08(Item_GObj*);
 /* 2A1FA8 */ bool it_802A1FA8(Item_GObj*);
-/* 2A2048 */ bool it_802A2048(Item_GObj*);
+/* 2A2048 */ bool it_2725_Logic18_Absorbed(Item_GObj*);
 /* 2A20E8 */ bool it_802A20E8(Item_GObj*);
 /* 2A2288 */ bool it_802A2288(Item_GObj*);
 /* 2A2320 */ bool it_802A2320(Item_GObj*);

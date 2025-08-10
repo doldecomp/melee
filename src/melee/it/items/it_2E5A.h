@@ -30,9 +30,9 @@
 /* 2E68EC */ bool it_2E5A_UnkMotion2_Anim(HSD_GObj*);
 /* 2E690C */ void it_2E5A_UnkMotion2_Phys(HSD_GObj*);
 /* 2E6910 */ bool it_2E5A_UnkMotion2_Coll(HSD_GObj*);
-/* 2E6A40 */ bool it_802E6A40(Item_GObj*);
+/* 2E6A40 */ bool it_2725_Logic115_DmgDealt(Item_GObj*);
 /* 2E6A74 */ void it_802E6A74(HSD_GObj*);
-/* 2E6ACC */ void it_802E6ACC(Item_GObj*, HSD_GObj*);
+/* 2E6ACC */ void it_2725_Logic115_EvtUnk(Item_GObj*, HSD_GObj*);
 /* 3F8BD8 */ extern ItemStateTable it_803F8BD8[];
 
 #endif

@@ -75,7 +75,7 @@ Item_GObj* it_802F0340(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos,
     return spawned;
 }
 
-void it_802F044C(Item_GObj* gobj, Item_GObj* arg1)
+void it_2725_Logic84_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     it_8026B894(gobj, arg1);
 }

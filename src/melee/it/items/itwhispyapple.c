@@ -41,7 +41,7 @@ void itWhispyapple_UnkMotion3_Phys(Item_GObj* gobj) {}
 
 /// #it_802EEB28
 
-/// #it_802EEBB0
+/// #it_2725_Logic18_EnteredAir
 
 /// #itWhispyapple_UnkMotion6_Anim
 

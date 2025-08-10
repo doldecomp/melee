@@ -2,7 +2,7 @@
 
 #include "it/inlines.h"
 
-void it_802B7150(Item_GObj* gobj)
+void it_2725_Logic53_Spawned(Item_GObj* gobj)
 {
     GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = NULL;
 }
@@ -102,7 +102,7 @@ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj)
 
 /// #it_802BA760
 
-/// #it_802BA97C
+/// #it_2725_Logic53_PickedUp
 
 /// #it_802BA9B8
 
@@ -126,4 +126,4 @@ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj)
 
 /// #it_802BACC4
 
-/// #it_802BAEA0
+/// #it_2725_Logic53_EvtUnk

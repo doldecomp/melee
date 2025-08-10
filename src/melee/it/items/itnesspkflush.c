@@ -26,7 +26,7 @@ bool it_802AA7F0(Item_GObj* gobj)
 
 /// #it_802AA8C0
 
-/// #it_802AA9CC
+/// #it_2725_Logic102_Destroyed
 
 /// #it_802AAA50
 
@@ -64,19 +64,19 @@ bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802AB2AC
+/// #it_2725_Logic102_Reflected
 
-bool it_802AB3C0(Item_GObj* arg0)
+bool it_2725_Logic102_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802AB3C8(Item_GObj* arg0)
+bool it_2725_Logic102_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-void it_802AB3D0(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic102_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

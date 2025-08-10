@@ -5,7 +5,7 @@
 
 #include "it/items/types.h"
 
-/* 287458 */ void it_80287458(Item_GObj*);
+/* 287458 */ void it_3F14_Logic2_Spawned(Item_GObj*);
 /* 2874F0 */ UNK_RET it_802874F0(UNK_PARAMS);
 /* 287690 */ UNK_RET it_80287690(UNK_PARAMS);
 /* 287B28 */ bool itTaru_UnkMotion0_Anim(Item_GObj* gobj);
@@ -15,11 +15,11 @@
 /* 287D48 */ bool itTaru_UnkMotion1_Anim(Item_GObj* gobj);
 /* 287D50 */ void itTaru_UnkMotion1_Phys(Item_GObj* gobj);
 /* 287D80 */ bool itTaru_UnkMotion1_Coll(Item_GObj* gobj);
-/* 287E68 */ void it_80287E68(Item_GObj*);
+/* 287E68 */ void it_3F14_Logic2_PickedUp(Item_GObj*);
 /* 287E9C */ bool itTaru_UnkMotion2_Anim(Item_GObj* gobj);
 /* 287EA4 */ void itTaru_UnkMotion2_Phys(Item_GObj* gobj);
-/* 287EA8 */ void it_80287EA8(Item_GObj*);
-/* 287EC8 */ void it_80287EC8(Item_GObj*);
+/* 287EA8 */ void it_3F14_Logic2_Dropped(Item_GObj*);
+/* 287EC8 */ void it_3F14_Logic2_Thrown(Item_GObj*);
 /* 287F20 */ UNK_RET it_80287F20(UNK_PARAMS);
 /* 287F5C */ bool itTaru_UnkMotion3_Anim(Item_GObj* gobj);
 /* 287FE4 */ void itTaru_UnkMotion3_Phys(Item_GObj* gobj);
@@ -41,12 +41,12 @@
 /* 2887E0 */ bool itTaru_UnkMotion7_Anim(Item_GObj* gobj);
 /* 28880C */ void itTaru_UnkMotion7_Phys(Item_GObj* gobj);
 /* 288810 */ bool itTaru_UnkMotion7_Coll(Item_GObj* gobj);
-/* 288818 */ bool it_80288818(Item_GObj*);
-/* 2888B8 */ bool it_802888B8(Item_GObj*);
-/* 288958 */ bool it_80288958(Item_GObj*);
-/* 2889F8 */ bool it_802889F8(Item_GObj*);
-/* 288A98 */ bool it_80288A98(Item_GObj*);
-/* 288C68 */ void it_80288C68(Item_GObj*, Item_GObj*);
+/* 288818 */ bool it_3F14_Logic2_DmgDealt(Item_GObj*);
+/* 2888B8 */ bool it_3F14_Logic2_Clanked(Item_GObj*);
+/* 288958 */ bool it_3F14_Logic2_HitShield(Item_GObj*);
+/* 2889F8 */ bool it_3F14_Logic2_Reflected(Item_GObj*);
+/* 288A98 */ bool it_3F14_Logic2_DmgReceived(Item_GObj*);
+/* 288C68 */ void it_3F14_Logic2_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F58E0 */ extern ItemStateTable it_803F58E0[];
 
 #endif

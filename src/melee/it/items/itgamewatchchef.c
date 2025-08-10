@@ -2,7 +2,7 @@
 
 /// #it_802C837C
 
-/// #it_802C847C
+/// #it_2725_Logic112_DmgDealt
 
 /// #it_802C84A0
 
@@ -20,14 +20,14 @@ void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 /// #itGamewatchchef_UnkMotion1_Coll
 
-/// #it_802C88E4
+/// #it_2725_Logic112_Clanked
 
-/// #it_802C8940
+/// #it_2725_Logic112_HitShield
 
-/// #it_802C899C
+/// #it_2725_Logic112_Absorbed
 
-/// #it_802C8A08
+/// #it_2725_Logic112_ShieldBounced
 
-/// #it_802C8A28
+/// #it_2725_Logic112_Reflected
 
-/// #it_802C8B08
+/// #it_2725_Logic112_EvtUnk

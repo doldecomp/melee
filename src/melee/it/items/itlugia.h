@@ -7,9 +7,9 @@
 
 #include "it/items/types.h"
 
-/* 2D1438 */ void it_802D1438(Item_GObj*);
+/* 2D1438 */ void it_2725_Logic17_Spawned(Item_GObj*);
 /* 2D14D0 */ UNK_RET it_802D14D0(UNK_PARAMS);
-/* 2D14D4 */ void it_802D14D4(Item_GObj*, Item_GObj*);
+/* 2D14D4 */ void it_2725_Logic17_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2D14F4 */ bool itLugia_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2D1558 */ void itLugia_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2D1578 */ bool itLugia_UnkMotion1_Coll(Item_GObj* gobj);
@@ -37,9 +37,9 @@
 /* 2D1E8C */ UNK_RET it_802D1E8C(UNK_PARAMS);
 /* 2D1F64 */ UNK_RET it_802D1F64(UNK_PARAMS);
 /* 2D208C */ UNK_RET it_802D208C(UNK_PARAMS);
-/* 2D2308 */ void it_802D2308(Item_GObj*);
-/* 2D234C */ void it_802D234C(Item_GObj*);
-/* 2D2390 */ void it_802D2390(Item_GObj*);
+/* 2D2308 */ void it_2725_Logic39_Spawned(Item_GObj*);
+/* 2D234C */ void it_2725_Logic40_Spawned(Item_GObj*);
+/* 2D2390 */ void it_2725_Logic41_Spawned(Item_GObj*);
 /* 2D23D4 */ void it_802D23D4(Item_GObj*, Item_GObj*);
 /* 2D23F4 */ UNK_RET it_802D23F4(UNK_PARAMS);
 /* 2D246C */ bool it_802D246C(Item_GObj* gobj);

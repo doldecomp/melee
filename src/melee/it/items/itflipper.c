@@ -5,7 +5,7 @@
 
 /// #it_80290938
 
-/// #it_80290A20
+/// #it_3F14_Logic20_Spawned
 
 /// #it_80290A7C
 
@@ -37,7 +37,7 @@ bool itFlipper_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itFlipper_UnkMotion1_Coll
 
-/// #it_80290F8C
+/// #it_3F14_Logic20_PickedUp
 
 bool itFlipper_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -46,9 +46,9 @@ bool itFlipper_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_80290FC0
+/// #it_3F14_Logic20_Dropped
 
-/// #it_80290FE0
+/// #it_3F14_Logic20_Thrown
 
 /// #itFlipper_UnkMotion3_Anim
 
@@ -70,19 +70,19 @@ void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itFlipper_UnkMotion6_Coll
 
-/// #it_802915E8
+/// #it_3F14_Logic20_DmgDealt
 
-/// #it_802917C8
+/// #it_3F14_Logic20_Clanked
 
-/// #it_802918A0
+/// #it_3F14_Logic20_HitShield
 
-/// #it_80291978
+/// #it_3F14_Logic20_Reflected
 
-/// #it_80291998
+/// #it_3F14_Logic20_ShieldBounced
 
-/// #it_802919B8
+/// #it_3F14_Logic20_DmgReceived
 
-/// #it_80291B58
+/// #it_3F14_Logic20_EnteredAir
 
 bool itFlipper_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -93,7 +93,7 @@ void itFlipper_UnkMotion4_Phys(Item_GObj* gobj) {}
 
 /// #itFlipper_UnkMotion4_Coll
 
-void it_80291BC0(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic20_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

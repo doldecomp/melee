@@ -240,7 +240,7 @@ void it_80285314(Item_GObj* gobj)
     it_80272CC0(gobj, 5);
 }
 
-void it_80285338(Item_GObj* gobj)
+void it_3F14_Logic12_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSword_UnkArticle1* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -409,7 +409,7 @@ bool itSword_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_80285804(Item_GObj* gobj)
+void it_3F14_Logic12_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -450,7 +450,7 @@ bool itSword_UnkMotion2_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_80285B00(Item_GObj* gobj)
+void it_3F14_Logic12_Dropped(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
 
@@ -464,7 +464,7 @@ void it_80285B00(Item_GObj* gobj)
     inlineA4(gobj);
 }
 
-void it_80285C78(Item_GObj* gobj)
+void it_3F14_Logic12_Thrown(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
 
@@ -478,7 +478,7 @@ void it_80285C78(Item_GObj* gobj)
     inlineA4(gobj);
 }
 
-void it_80285DF0(Item_GObj* gobj)
+void it_3F14_Logic12_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     inlineA1(gobj);
@@ -501,7 +501,7 @@ bool itSword_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_80285FAC(Item_GObj* gobj)
+bool it_3F14_Logic12_DmgDealt(Item_GObj* gobj)
 {
     if (GET_ITEM(gobj)->msid == 3) {
         itColl_BounceOffVictim(gobj);
@@ -509,29 +509,29 @@ bool it_80285FAC(Item_GObj* gobj)
     return false;
 }
 
-bool it_80285FE0(Item_GObj* gobj)
+bool it_3F14_Logic12_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_80286000(Item_GObj* gobj)
+bool it_3F14_Logic12_Clanked(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool it_80286024(Item_GObj* gobj)
+bool it_3F14_Logic12_HitShield(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool itSword_BounceOffShield(Item_GObj* gobj)
+bool it_3F14_Logic12_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-void it_80286068(Item_GObj* gobj, HSD_GObj* ref_gobj)
+void it_3F14_Logic12_EvtUnk(Item_GObj* gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

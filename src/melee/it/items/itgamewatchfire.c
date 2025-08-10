@@ -36,7 +36,7 @@ HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir)
     return NULL;
 }
 
-void it_802C69FC(Item_GObj* item_gobj) {
+void it_2725_Logic73_Destroyed(Item_GObj* item_gobj) {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
         ftGw_AttackS4_ItemTorchSetFlag(item->owner);
@@ -62,7 +62,7 @@ void it_802C6A98(Item_GObj* item_gobj) {
     it_8026B73C(item_gobj);
 }
 
-void it_802C6AB8(Item_GObj* item_gobj) {
+void it_2725_Logic73_PickedUp(Item_GObj* item_gobj) {
     Item* item = GET_ITEM(item_gobj);
     item->xDB0_itcmd_var1 = 0;
     item->xDAC_itcmd_var0 = 0;
@@ -107,6 +107,6 @@ bool itGamewatchfire_UnkMotion0_Anim(Item_GObj* item_gobj) {
     return false;
 }
 
-void it_802C6C18(Item_GObj* item_gobj, Item_GObj* ref_gobj) {
+void it_2725_Logic73_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj) {
     it_8026B894(item_gobj, ref_gobj);
 }

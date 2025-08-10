@@ -20,7 +20,7 @@
 /* 2ABA4C */ UNK_RET it_802ABA4C(UNK_PARAMS);
 /* 2ABBB0 */ bool itNesspkthunderball_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2ABCDC */ void itNesspkthunderball_UnkMotion0_Phys(Item_GObj* gobj);
-/* 2AC050 */ bool it_802AC050(Item_GObj*);
+/* 2AC050 */ bool it_2725_Logic26_DmgDealt(Item_GObj*);
 /* 2AC074 */ bool it_802AC074(Item_GObj*);
 /* 2AC098 */ bool it_802AC098(Item_GObj*);
 /* 2AC338 */ bool it_802AC338(Item_GObj*);

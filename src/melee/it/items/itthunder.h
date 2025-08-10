@@ -5,7 +5,7 @@
 
 #include "it/items/types.h"
 
-/* 2CCAB4 */ void it_802CCAB4(Item_GObj*);
+/* 2CCAB4 */ void it_2725_Logic7_Spawned(Item_GObj*);
 /* 2CCB10 */ UNK_RET it_802CCB10(UNK_PARAMS);
 /* 2CCB14 */ void it_802CCB14(Item_GObj*, Item_GObj*);
 /* 2CCB34 */ bool itThunder_UnkMotion1_Anim(Item_GObj* gobj);

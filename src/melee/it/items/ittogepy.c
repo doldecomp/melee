@@ -19,7 +19,7 @@ ItemStateTable it_803F8058[] = {
     { 6, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
 };
 
-void it_802D36B0(Item_GObj* gobj)
+void it_2725_Logic21_Spawned(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
@@ -39,7 +39,7 @@ void it_802D3728(Item_GObj* gobj)
     return;
 }
 
-void it_802D372C(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic21_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

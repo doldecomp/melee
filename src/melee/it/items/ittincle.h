@@ -8,8 +8,8 @@
 #include "it/items/types.h"
 
 /* 2EB5C8 */ void it_802EB5C8(Item_GObj*);
-/* 2EB684 */ bool it_802EB684(Item_GObj*);
-/* 2EB6A8 */ bool it_802EB6A8(Item_GObj*);
+/* 2EB684 */ bool it_2725_Logic13_DmgReceived(Item_GObj*);
+/* 2EB6A8 */ bool it_2725_Logic13_DmgDealt(Item_GObj*);
 /* 2EB6DC */ UNK_RET it_802EB6DC(UNK_PARAMS);
 /* 2EB808 */ bool itTincle_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2EB810 */ void itTincle_UnkMotion0_Phys(Item_GObj* gobj);

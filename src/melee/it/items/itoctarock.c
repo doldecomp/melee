@@ -52,15 +52,15 @@ bool itOctarock_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itOctarock_UnkMotion1_Coll
 
-/// #it_802E561C
+/// #it_2725_Logic2_PickedUp
 
 /// #itOctarock_UnkMotion5_Anim
 
 void itOctarock_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_802E5690
+/// #it_2725_Logic2_Dropped
 
-/// #it_802E56E8
+/// #it_2725_Logic2_Thrown
 
 /// #itOctarock_UnkMotion6_Anim
 

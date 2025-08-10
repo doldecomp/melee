@@ -14,9 +14,9 @@
 /* 2C5000 */ HSD_GObj* it_802C5000(Item_GObj*, Vec3*, s32, s32, float);
 /* 2C519C */ void it_802C519C(Item_GObj*, Vec3*, s32, s32, float, float);
 /* 2C53F0 */ void it_802C53F0(Item_GObj*, Vec3*, float, float, float);
-/* 2C56A0 */ void it_802C56A0(Item_GObj*);
+/* 2C56A0 */ void it_2725_Logic101_Destroyed(Item_GObj*);
 /* 2C573C */ void it_802C573C(Item_GObj*);
-/* 2C578C */ void it_802C578C(Item_GObj*);
+/* 2C578C */ void it_2725_Logic101_PickedUp(Item_GObj*);
 /* 2C57C8 */ bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C5B0C */ void itMewtwoshadowball_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2C5B10 */ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj);
@@ -32,13 +32,13 @@
 /* 2C5F7C */ bool itMewtwoshadowball_UnkMotion17_Anim(Item_GObj* gobj);
 /* 2C6094 */ void itMewtwoshadowball_UnkMotion17_Phys(Item_GObj*);
 /* 2C60AC */ bool itMewtwoshadowball_UnkMotion17_Coll(Item_GObj* gobj);
-/* 2C60B4 */ bool it_802C60B4(Item_GObj*);
-/* 2C60BC */ bool it_802C60BC(Item_GObj*);
-/* 2C60C4 */ bool it_802C60C4(Item_GObj*);
-/* 2C60CC */ bool it_802C60CC(Item_GObj*);
-/* 2C6138 */ bool it_802C6138(Item_GObj*);
-/* 2C6140 */ bool it_802C6140(Item_GObj*);
-/* 2C61D4 */ void it_802C61D4(Item_GObj*, Item_GObj*);
+/* 2C60B4 */ bool it_2725_Logic101_DmgDealt(Item_GObj*);
+/* 2C60BC */ bool it_2725_Logic101_Clanked(Item_GObj*);
+/* 2C60C4 */ bool it_2725_Logic101_Absorbed(Item_GObj*);
+/* 2C60CC */ bool it_2725_Logic101_Reflected(Item_GObj*);
+/* 2C6138 */ bool it_2725_Logic101_HitShield(Item_GObj*);
+/* 2C6140 */ bool it_2725_Logic101_ShieldBounced(Item_GObj*);
+/* 2C61D4 */ void it_2725_Logic101_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7760 */ extern ItemStateTable it_803F7760[];
 
 #endif

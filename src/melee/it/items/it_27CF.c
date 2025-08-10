@@ -227,7 +227,7 @@ bool it_27CF_UnkMotion2_Anim(HSD_GObj* item_gobj)
     return false;
 }
 
-bool it_802F3330(Item_GObj* item_gobj)
+bool it_2725_Logic114_DmgReceived(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -238,7 +238,7 @@ bool it_802F3330(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802F3374(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2725_Logic114_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

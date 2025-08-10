@@ -8,12 +8,12 @@
 #include "it/items/types.h"
 
 /* 2E878C */ void it_802E878C(Item_GObj*);
-/* 2E87D8 */ bool it_802E87D8(Item_GObj*);
-/* 2E87E0 */ bool it_802E87E0(Item_GObj*);
-/* 2E87E8 */ bool it_802E87E8(Item_GObj*);
-/* 2E87F0 */ bool it_802E87F0(Item_GObj*);
-/* 2E87F8 */ bool it_802E87F8(Item_GObj*);
-/* 2E881C */ bool it_802E881C(Item_GObj*);
+/* 2E87D8 */ bool it_2725_Logic4_DmgDealt(Item_GObj*);
+/* 2E87E0 */ bool it_2725_Logic4_Clanked(Item_GObj*);
+/* 2E87E8 */ bool it_2725_Logic4_HitShield(Item_GObj*);
+/* 2E87F0 */ bool it_2725_Logic4_Absorbed(Item_GObj*);
+/* 2E87F8 */ bool it_2725_Logic4_Reflected(Item_GObj*);
+/* 2E881C */ bool it_2725_Logic4_ShieldBounced(Item_GObj*);
 /* 2E883C */ UNK_RET it_802E883C(UNK_PARAMS);
 /* 2E8864 */ bool itOctarockstone_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2E8898 */ void itOctarockstone_UnkMotion0_Phys(Item_GObj* gobj);

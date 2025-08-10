@@ -2,7 +2,7 @@
 #include <placeholder.h>
 #include "itoldkuri.h"
 
-/// #it_802D73D0
+/// #it_2725_Logic29_EvtUnk
 
 /// #it_802D73F0
 
@@ -47,15 +47,15 @@ bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion4_Coll
 
-/// #it_802D7C14
+/// #it_2725_Logic0_PickedUp
 
 /// #itOldkuri_UnkMotion5_Anim
 
 void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_802D7CB4
+/// #it_2725_Logic0_Dropped
 
-/// #it_802D7D18
+/// #it_2725_Logic0_Thrown
 
 /// #itOldkuri_UnkMotion6_Anim
 
@@ -69,7 +69,7 @@ void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #itOldkuri_UnkMotion9_Coll
 
-/// #it_802D7F38
+/// #it_2725_Logic0_DmgReceived
 
 /// #it_802D8098
 

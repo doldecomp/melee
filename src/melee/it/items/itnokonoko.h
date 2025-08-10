@@ -11,7 +11,7 @@
 #include <dolphin/mtx.h>
 
 /* 2DC69C */ void it_802DC69C(Item_GObj*);
-/* 2DC774 */ bool it_802DC774(Item_GObj*);
+/* 2DC774 */ bool it_2725_Logic3_DmgReceived(Item_GObj*);
 /* 2DC83C */ bool it_802DC83C(Item_GObj*);
 /* 2DC8B8 */ void fn_802DC8B8(Item_GObj*);
 /* 2DC910 */ bool itNokonoko_UnkMotion1_Anim(Item_GObj*);

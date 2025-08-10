@@ -7,7 +7,7 @@
 
 /* 2C9D40 */ void it_802C9D40(Item_GObj*);
 /* 2C9DFC */ UNK_RET it_802C9DFC(UNK_PARAMS);
-/* 2C9E00 */ void it_802C9E00(Item_GObj*);
+/* 2C9E00 */ void it_2725_Logic2_Destroyed(Item_GObj*);
 /* 2C9E24 */ void it_802C9E24(Item_GObj*, Item_GObj*);
 /* 2C9E44 */ UNK_RET it_802C9E44(UNK_PARAMS);
 /* 2C9E8C */ UNK_RET it_802C9E8C(UNK_PARAMS);

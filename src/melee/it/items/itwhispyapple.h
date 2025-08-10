@@ -25,7 +25,7 @@
 /* 2EEA6C */ void itWhispyapple_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2EEA70 */ void it_802EEA70(Item_GObj*);
 /* 2EEB28 */ void it_802EEB28(Item_GObj*);
-/* 2EEBB0 */ void it_802EEBB0(Item_GObj*);
+/* 2EEBB0 */ void it_2725_Logic18_EnteredAir(Item_GObj*);
 /* 2EEBD8 */ bool itWhispyapple_UnkMotion6_Anim(Item_GObj* gobj);
 /* 2EECC8 */ void itWhispyapple_UnkMotion6_Phys(Item_GObj* gobj);
 /* 2EECCC */ bool itWhispyapple_UnkMotion6_Coll(Item_GObj* gobj);

@@ -20,37 +20,37 @@
     ((itClimbersBlizzardAttributes*)                                          \
          ip->xC4_article_data->x4_specialAttributes)
 
-bool it_802C2424(Item_GObj* gobj)
+bool it_2725_Logic64_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C244C(Item_GObj* gobj)
+bool it_2725_Logic64_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C2454(Item_GObj* gobj)
+bool it_2725_Logic64_HitShield(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C245C(Item_GObj* gobj)
+bool it_2725_Logic64_Absorbed(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C2464(Item_GObj* gobj)
+bool it_2725_Logic64_ShieldBounced(Item_GObj* gobj)
 {
     return true;
 }
 
-void it_802C246C(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic64_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
 
-bool it_802C242C(Item_GObj* gobj)
+bool it_2725_Logic64_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }

@@ -65,7 +65,7 @@ HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
     return (HSD_GObj*) gobj;
 }
 
-void it_802AF298(Item_GObj* arg0)
+void it_2725_Logic100_Destroyed(Item_GObj* arg0)
 {
     Item* item;
     if (arg0 != NULL) {
@@ -127,7 +127,7 @@ void it_802AF32C(HSD_GObj* arg0)
     }
 }
 
-void it_802AF434(Item_GObj* arg0)
+void it_2725_Logic100_PickedUp(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item;
@@ -191,7 +191,7 @@ bool itLinkbow_UnkMotion5_Anim(Item_GObj* arg0)
         if ((item->x5CC_currentAnimFrame == 0.0f) ||
             ((item->x5CC_currentAnimFrame >= 24.0f)))
         {
-            it_802AF298((Item_GObj*) arg0);
+            it_2725_Logic100_Destroyed((Item_GObj*) arg0);
             return 1;
         }
         break;
@@ -261,7 +261,7 @@ bool itLinkbow_UnkMotion6_Coll(Item_GObj* arg0)
     return 1;
 }
 
-void it_802AF920(Item_GObj* arg0, Item_GObj* arg1)
+void it_2725_Logic100_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
 {
     it_8026B894(arg0, (HSD_GObj*) arg1);
 }

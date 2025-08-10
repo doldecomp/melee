@@ -8,7 +8,7 @@
 
 /// #it_802D9BA8
 
-/// #it_802D9CC4
+/// #it_2725_Logic5_DmgReceived
 
 /// #it_802D9DDC
 
@@ -144,15 +144,15 @@ void itLikelike_UnkMotion15_Phys(Item_GObj* gobj) {}
 
 /// #itLikelike_UnkMotion15_Coll
 
-/// #it_802DBE90
+/// #it_2725_Logic5_PickedUp
 
 /// #itLikelike_UnkMotion18_Anim
 
 void itLikelike_UnkMotion18_Phys(Item_GObj* gobj) {}
 
-/// #it_802DBF30
+/// #it_2725_Logic5_Dropped
 
-/// #it_802DC000
+/// #it_2725_Logic5_Thrown
 
 bool itLikelike_UnkMotion19_Anim(Item_GObj* gobj)
 {
@@ -193,6 +193,6 @@ bool itLikelike_UnkMotion21_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion21_Coll
 
-/// #it_802DC480
+/// #it_2725_Logic5_Destroyed
 
 /// #it_802DC4BC

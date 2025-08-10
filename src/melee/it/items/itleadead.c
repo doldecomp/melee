@@ -109,15 +109,15 @@ void itLeadead_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 /// #itLeadead_UnkMotion6_Coll
 
-/// #it_802EA0E0
+/// #it_2725_Logic1_PickedUp
 
 /// #itLeadead_UnkMotion13_Anim
 
 void itLeadead_UnkMotion13_Phys(Item_GObj* gobj) {}
 
-/// #it_802EA154
+/// #it_2725_Logic1_Dropped
 
-/// #it_802EA1B4
+/// #it_2725_Logic1_Thrown
 
 /// #itLeadead_UnkMotion14_Anim
 
@@ -156,7 +156,7 @@ bool itLeadead_UnkMotion17_Anim(Item_GObj* gobj)
 
 /// #itLeadead_UnkMotion17_Coll
 
-/// #it_802EA41C
+/// #it_2725_Logic1_Destroyed
 
 /// #it_802EA478
 

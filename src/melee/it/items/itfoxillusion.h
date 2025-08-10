@@ -13,8 +13,8 @@
 /* 29CD18 */ void it_8029CD18(HSD_GObj*, int);
 /* 29CD78 */ HSD_JObj* it_8029CD78(Item_GObj*);
 /* 29CEB4 */ Item_GObj* it_8029CEB4(HSD_GObj*, Vec3*, ItemKind, f32);
-/* 29CF8C */ bool it_8029CF8C(Item_GObj*);
-/* 29CFA0 */ void it_8029CFA0(Item_GObj*);
+/* 29CF8C */ bool it_2725_Logic14_DmgDealt(Item_GObj*);
+/* 29CFA0 */ void it_2725_Logic14_Destroyed(Item_GObj*);
 /* 29CFF0 */ void it_8029CFF0(Item_GObj*);
 /* 29D094 */ bool itFoxillusion_UnkMotion0_Anim(Item_GObj*);
 /* 29D24C */ void itFoxillusion_UnkMotion0_Phys(Item_GObj*);

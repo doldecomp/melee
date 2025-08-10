@@ -53,11 +53,11 @@
 /* 2EA010 */ bool itLeadead_UnkMotion6_Anim(Item_GObj* gobj);
 /* 2EA0A0 */ void itLeadead_UnkMotion6_Phys(Item_GObj* gobj);
 /* 2EA0A4 */ bool itLeadead_UnkMotion6_Coll(Item_GObj* gobj);
-/* 2EA0E0 */ void it_802EA0E0(Item_GObj*);
+/* 2EA0E0 */ void it_2725_Logic1_PickedUp(Item_GObj*);
 /* 2EA108 */ bool itLeadead_UnkMotion13_Anim(Item_GObj* gobj);
 /* 2EA150 */ void itLeadead_UnkMotion13_Phys(Item_GObj* gobj);
-/* 2EA154 */ void it_802EA154(Item_GObj*);
-/* 2EA1B4 */ void it_802EA1B4(Item_GObj*);
+/* 2EA154 */ void it_2725_Logic1_Dropped(Item_GObj*);
+/* 2EA1B4 */ void it_2725_Logic1_Thrown(Item_GObj*);
 /* 2EA204 */ bool itLeadead_UnkMotion14_Anim(Item_GObj* gobj);
 /* 2EA24C */ void itLeadead_UnkMotion14_Phys(Item_GObj* gobj);
 /* 2EA27C */ bool itLeadead_UnkMotion14_Coll(Item_GObj* gobj);
@@ -72,7 +72,7 @@
 /* 2EA3D8 */ bool itLeadead_UnkMotion17_Anim(Item_GObj* gobj);
 /* 2EA3E0 */ void itLeadead_UnkMotion17_Phys(Item_GObj* gobj);
 /* 2EA3FC */ bool itLeadead_UnkMotion17_Coll(Item_GObj* gobj);
-/* 2EA41C */ void it_802EA41C(Item_GObj*);
+/* 2EA41C */ void it_2725_Logic1_Destroyed(Item_GObj*);
 /* 2EA478 */ UNK_RET it_802EA478(UNK_PARAMS);
 /* 2EA674 */ UNK_RET it_802EA674(UNK_PARAMS);
 /* 2EA6F4 */ UNK_RET it_802EA6F4(UNK_PARAMS);

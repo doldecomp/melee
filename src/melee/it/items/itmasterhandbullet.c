@@ -79,7 +79,7 @@ void it_802F0AE0(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos, ItemKind kind,
     it_802F0AE0_sub(spawned, msid, gobj);
 }
 
-void it_802F0BC8(Item_GObj* gobj, Item_GObj* arg1)
+void it_2725_Logic85_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     it_8026B894(gobj, arg1);
 }
@@ -109,32 +109,32 @@ bool itMasterhandbullet_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_802F0F0C(Item_GObj* gobj)
+bool it_2725_Logic83_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802F0F14(Item_GObj* gobj)
+bool it_2725_Logic83_Reflected(Item_GObj* gobj)
 {
     return it_8027AE34(gobj);
 }
 
-bool it_802F0F34(Item_GObj* gobj)
+bool it_2725_Logic83_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802F0F3C(Item_GObj* gobj)
+bool it_2725_Logic83_Absorbed(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802F0F44(Item_GObj* gobj)
+bool it_2725_Logic83_ShieldBounced(Item_GObj* gobj)
 {
     return it_8027AF50(gobj);
 }
 
-bool it_802F0F64(Item_GObj* gobj)
+bool it_2725_Logic83_HitShield(Item_GObj* gobj)
 {
     return true;
 }
