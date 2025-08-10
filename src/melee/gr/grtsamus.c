@@ -18,8 +18,8 @@
 
 /* 223580 */ static void grTSamus_80223580(bool);
 /* 223584 */ static void grTSamus_80223584(void);
-/* 2235F4 */ static void grTSamus_802235F4(void);
-/* 2235F8 */ static void grTSamus_802235F8(void);
+/* 2235F4 */ static void grTsamus_UnkStage0_OnLoad(void);
+/* 2235F8 */ static void grTsamus_UnkStage0_OnStart(void);
 /* 22361C */ static bool grTSamus_8022361C(void);
 /* 223624 */ static HSD_GObj* grTSamus_80223624(s32);
 /* 22370C */ static void grTSamus_8022370C(Ground_GObj*);
@@ -68,8 +68,8 @@ StageData grTSs_803E9454 = {
     "/GrTSs.dat",
     grTSamus_80223584,
     grTSamus_80223580,
-    grTSamus_802235F4,
-    grTSamus_802235F8,
+    grTsamus_UnkStage0_OnLoad,
+    grTsamus_UnkStage0_OnStart,
     grTSamus_8022361C,
     grTSamus_80223854,
     grTSamus_8022385C,
@@ -92,9 +92,9 @@ void grTSamus_80223584(void)
     Ground_801C42AC();
 }
 
-void grTSamus_802235F4(void) {}
+void grTsamus_UnkStage0_OnLoad(void) {}
 
-void grTSamus_802235F8(void)
+void grTsamus_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

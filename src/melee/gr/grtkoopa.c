@@ -19,8 +19,8 @@
 
 static void grTKoopa_80221648(bool);
 static void grTKoopa_8022164C(void);
-static void grTKoopa_802216BC(void);
-static void grTKoopa_802216C0(void);
+static void grTkoopa_UnkStage0_OnLoad(void);
+static void grTkoopa_UnkStage0_OnStart(void);
 static bool grTKoopa_802216E4(void);
 static HSD_GObj* grTKoopa_802216EC(int gobj_id);
 static void grTKoopa_802217D4(Ground_GObj* gobj);
@@ -56,8 +56,8 @@ StageData grTKp_803E8CCC = {
     "/GrTKp.dat",
     grTKoopa_8022164C,
     grTKoopa_80221648,
-    grTKoopa_802216BC,
-    grTKoopa_802216C0,
+    grTkoopa_UnkStage0_OnLoad,
+    grTkoopa_UnkStage0_OnStart,
     grTKoopa_802216E4,
     grTKoopa_8022191C,
     grTKoopa_80221924,
@@ -80,9 +80,9 @@ static void grTKoopa_8022164C(void)
     Ground_801C4210();
     Ground_801C42AC();
 }
-static void grTKoopa_802216BC(void) {}
+static void grTkoopa_UnkStage0_OnLoad(void) {}
 
-static void grTKoopa_802216C0(void)
+static void grTkoopa_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

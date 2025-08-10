@@ -18,8 +18,8 @@
 
 /* 219530 */ static void grFigureGet_80219530(bool);
 /* 219534 */ static void grFigureGet_80219534(void);
-/* 21959C */ static void grFigureGet_8021959C(void);
-/* 2195A0 */ static void grFigureGet_802195A0(void);
+/* 21959C */ static void grFigureget_UnkStage0_OnLoad(void);
+/* 2195A0 */ static void grFigureget_UnkStage0_OnStart(void);
 /* 2195C4 */ static bool grFigureGet_802195C4(void);
 /* 2195CC */ static HSD_GObj* grFigureGet_802195CC(int);
 /* 2196B4 */ static void grFigureGet_802196B4(Ground_GObj*);
@@ -46,8 +46,8 @@ StageData grFigureGet_803E7D34 = {
     "/GrNFg.dat",
     grFigureGet_80219534,
     grFigureGet_80219530,
-    grFigureGet_8021959C,
-    grFigureGet_802195A0,
+    grFigureget_UnkStage0_OnLoad,
+    grFigureget_UnkStage0_OnStart,
     grFigureGet_802195C4,
     grFigureGet_80219C88,
     grFigureGet_80219C90,
@@ -73,9 +73,9 @@ static void grFigureGet_80219534(void)
     Ground_801C3BB4();
 }
 
-static void grFigureGet_8021959C(void) {}
+static void grFigureget_UnkStage0_OnLoad(void) {}
 
-static void grFigureGet_802195A0(void)
+static void grFigureget_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

@@ -17,8 +17,8 @@
 
 /* 221EF4 */ static void grTMars_80221EF4(bool);
 /* 221EF8 */ static void grTMars_80221EF8(void);
-/* 221F68 */ static void grTMars_80221F68(void);
-/* 221F6C */ static void grTMars_80221F6C(void);
+/* 221F68 */ static void grTmars_UnkStage0_OnLoad(void);
+/* 221F6C */ static void grTmars_UnkStage0_OnStart(void);
 /* 221F90 */ static bool grTMars_80221F90(void);
 /* 221F98 */ static HSD_GObj* grTMars_80221F98(int);
 /* 222080 */ static void grTMars_80222080(Ground_GObj*);
@@ -62,7 +62,7 @@ static StageCallbacks grTMs_803E8EB0[4] = {
 
 StageData grTMs_803E8F0C = {
     0x00000034,       grTMs_803E8EB0,   "/GrTMs.dat",     grTMars_80221EF8,
-    grTMars_80221EF4, grTMars_80221F68, grTMars_80221F6C, grTMars_80221F90,
+    grTMars_80221EF4, grTmars_UnkStage0_OnLoad, grTmars_UnkStage0_OnStart, grTMars_80221F90,
     grTMars_802221C8, grTMars_802221D0, 0x00000001,
 };
 
@@ -81,12 +81,12 @@ static void grTMars_80221EF8(void)
     Ground_801C42AC();
 }
 
-static void grTMars_80221F68(void)
+static void grTmars_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-static void grTMars_80221F6C(void)
+static void grTmars_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

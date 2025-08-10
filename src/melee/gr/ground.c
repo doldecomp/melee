@@ -70,7 +70,7 @@
 #include <baselib/spline.h>
 #include <baselib/wobj.h>
 
-/* 1BFFA8 */ static void Ground_801BFFA8(void);
+/* 1BFFA8 */ static void grOund_UnkStage0_OnStart(void);
 /* 1BFFAC */ static void Ground_801BFFAC(bool);
 /* 1C0A70 */ static bool Ground_801C0A70(Vec3* pos);
 /* 1C0C2C */ static void Ground_801C0C2C(HSD_GObj*);
@@ -94,10 +94,10 @@ static StageData Ground_803DFEA8 = {
     0,
     NULL,
     NULL,
-    Ground_801BFFA8,
+    grOund_UnkStage0_OnStart,
     Ground_801BFFAC,
-    Ground_801BFFA8,
-    Ground_801BFFA8,
+    grOund_UnkStage0_OnStart,
+    grOund_UnkStage0_OnStart,
     NULL,
     NULL,
     NULL,
@@ -178,7 +178,7 @@ static inline f32 fabsf(f32 x)
     }
 }
 
-static void Ground_801BFFA8(void) {}
+static void grOund_UnkStage0_OnStart(void) {}
 
 static void Ground_801BFFAC(bool arg0) {}
 

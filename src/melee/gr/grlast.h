@@ -9,8 +9,8 @@
 
 /* 21A620 */ static void grLast_8021A620(bool);
 /* 21A740 */ static void grLast_8021A740(void);
-/* 21A7C4 */ static void grLast_8021A7C4(void);
-/* 21A7C8 */ static void grLast_8021A7C8(void);
+/* 21A7C4 */ static void grLast_UnkStage0_OnLoad(void);
+/* 21A7C8 */ static void grLast_UnkStage0_OnStart(void);
 /* 21A7EC */ static bool grLast_8021A7EC(void);
 /* 21A7F4 */ static Ground_GObj* grLast_8021A7F4(int);
 /* 21A8E0 */ static void grLast_8021A8E0(Ground_GObj*);
