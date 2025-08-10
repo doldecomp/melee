@@ -10,19 +10,24 @@ import (
 	"strings"
 )
 
-func defaultName(typ string) string {
+func defaultName(typ string, prevParams []string) string {
+	name := "arg"
 	switch typ {
 	case "HSD_GObj*", "Item_GObj*", "Ground_GObj*":
-		return "gobj"
+		name = "gobj"
 	case "Vec3*":
-		return "vec"
+		name = "vec"
 	case "HSD_JObj*":
-		return "jobj"
+		name = "jobj"
 	case "bool":
-		return "flag"
-	default:
-		return "arg"
+		name = "flag"
 	}
+	for i, p := range prevParams {
+		if name == p {
+			name += strconv.Itoa(i)
+		}
+	}
+	return name
 }
 
 func normalizeType(t string) string {
@@ -91,7 +96,7 @@ func (ft CFuncType) New() CValue {
 		ParamNames: make([]string, len(ft.Params)),
 	}
 	for i := range ft.Params {
-		v.ParamNames[i] = defaultName(ft.Params[i])
+		v.ParamNames[i] = defaultName(ft.Params[i], v.ParamNames[:i])
 	}
 	return v
 }
@@ -119,7 +124,7 @@ func (fv *CFuncValue) setType(ft CFuncType) {
 	if len(fv.ParamNames) < len(ft.Params) {
 		// orig had too few params; fill in the rest with default names
 		for len(fv.ParamNames) < len(ft.Params) {
-			fv.ParamNames = append(fv.ParamNames, defaultName(ft.Params[len(fv.ParamNames)]))
+			fv.ParamNames = append(fv.ParamNames, defaultName(ft.Params[len(fv.ParamNames)], fv.ParamNames))
 		}
 	} else if len(fv.ParamNames) > len(ft.Params) {
 		// orig had too many params; try to preserve what they had before
@@ -318,7 +323,6 @@ func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 	params := bytes.Split(line[paramStart:paramEnd], []byte(","))
 	isDecl := strings.Contains(string(line), ";")
 	var paramTypes, paramNames []string
-	renames := 0
 	for _, param := range params {
 		typ, name, _ := strings.Cut(strings.TrimSpace(string(param)), " ")
 		if strings.HasPrefix(name, "*") {
@@ -326,10 +330,7 @@ func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 			name = strings.TrimPrefix(name, "*")
 		}
 		if name == "" && !isDecl {
-			name = defaultName(typ)
-			if renames++; renames > 1 {
-				name += strconv.Itoa(renames)
-			}
+			name = defaultName(typ, paramNames)
 		}
 		paramTypes = append(paramTypes, typ)
 		paramNames = append(paramNames, name)

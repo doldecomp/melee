@@ -53,10 +53,10 @@ func main() {
 		for _, path := range append(hFiles, cFiles...) {
 			for _, name := range parseTableDecls(path, typeName) {
 				if tab, ok := tables[name]; ok && len(tab)%len(st.Fields) == 0 {
-					for i := 0; i < len(tab); i += len(st.Fields) {
+					for index := range len(tab) / len(st.Fields) {
 						sv := st.New().(*CStructValue)
-						if sv.parse(tab[i : i+len(st.Fields)]) {
-							fn(path, name, i/len(st.Fields), sv)
+						if sv.parse(tab[index*len(st.Fields):][:len(st.Fields)]) {
+							fn(path, name, index, sv)
 						}
 					}
 				}
@@ -272,7 +272,8 @@ func main() {
 			}
 		}
 		fmt.Println("Found", len(fnNames), "symbols in tables.")
-		candidates := make(map[string]struct{})
+		var tables []string
+		seen := make(map[string]struct{})
 		findUNKs := func(path string) (n int) {
 			content, err := os.ReadFile(path)
 			if err != nil {
@@ -280,8 +281,11 @@ func main() {
 			}
 			for name := range fnNames {
 				if bytes.Contains(content, fmt.Appendf(nil, "UNK_RET %s", name)) {
-					n++
-					candidates[name] = struct{}{}
+					if _, ok := seen[fnNames[name]]; !ok {
+						tables = append(tables, fnNames[name])
+						seen[fnNames[name]] = struct{}{}
+						n++
+					}
 				}
 			}
 			return n
@@ -292,15 +296,7 @@ func main() {
 			n := findUNKs(path)
 			total += n
 			if n > 0 {
-				fmt.Printf("%3d found, %4d total\n", n, len(candidates))
-			}
-		}
-		var tables []string
-		seen := make(map[string]struct{})
-		for name := range candidates {
-			if _, ok := seen[fnNames[name]]; !ok {
-				tables = append(tables, fnNames[name])
-				seen[fnNames[name]] = struct{}{}
+				fmt.Printf("%3d found, %4d total\n", n, len(tables))
 			}
 		}
 		sort.Strings(tables)
