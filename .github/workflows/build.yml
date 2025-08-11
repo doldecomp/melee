@@ -58,9 +58,10 @@ jobs:
             set -x
             set +e
             ninja
-            set -e
-            ninja diff
-            echo "$?"
+            ! ninja diff | tee /dev/tty | grep -q '^ERROR'
+            result="$?"
+            echo "result: $result"
+            exit "$result"
           ;;
           'diff')
             root='build/${{matrix.version}}'
