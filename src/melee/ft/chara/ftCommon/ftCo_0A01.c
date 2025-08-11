@@ -1,24 +1,26 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "ftDonkey/forward.h"
-#include "ftKoopa/forward.h"
-#include "ftPopo/forward.h"
-#include "lb/forward.h"
-
 #include "ftCo_0A01.h"
 
 #include "ftCo_0B3E.h"
 #include "ftpickupitem.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ft/chara/ftPopo/ftPp_1211.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+#include "ftDonkey/forward.h"
+#include "ftKoopa/forward.h"
+#include "ftPopo/forward.h"
+
 #include "gm/gm_unsplit.h"
 #include "gr/grbigblue.h"
 #include "gr/grcorneria.h"
@@ -30,6 +32,9 @@
 #include "it/inlines.h"
 #include "it/item.h"
 #include "it/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lbcollision.h"
 #include "mp/mpisland.h"
 #include "mp/mplib.h"
@@ -47,6 +52,7 @@ int ftCo_803C5A68[] = {
 };
 
 /* static */ extern StageBlastZone** ftCo_803C6594;
+/* 0A2638 */ static void ftCo_800B1DA0(Fighter* fp);
 
 #pragma force_active on
 
@@ -1054,8 +1060,8 @@ Fighter* ftCo_800A4A40(Fighter* fp)
 
 /// #ftCo_800A50D4
 
-static inline void inlineD2(Fighter* var_r28, Fighter* fp,
-                            Fighter* temp_r31, Fighter* temp_r29)
+static inline void inlineD2(Fighter* var_r28, Fighter* fp, Fighter* temp_r31,
+                            Fighter* temp_r29)
 {
     f32 var_f31 = 0;
     f32 temp_f1;

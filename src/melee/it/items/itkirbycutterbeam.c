@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itkirbycutterbeam.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 

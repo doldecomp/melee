@@ -1,3 +1,5 @@
+#include "grgarden.h"
+
 #include <platform.h>
 
 #include "gr/ground.h"

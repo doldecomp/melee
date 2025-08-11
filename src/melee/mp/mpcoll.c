@@ -1,18 +1,21 @@
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
-#include "mp/forward.h"
-
 #include "mp/mpcoll.h"
 
 #include "math.h"
 
+#include <placeholder.h>
+
 #include "db/db.h"
 #include "ft/ftlib.h"
+
+#include "ftCommon/forward.h"
+
 #include "gr/grdynamicattr.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 
 #include <dolphin/os/OSError.h>
@@ -687,7 +690,8 @@ void mpColl_80043268(CollData* arg0, s32 arg1, s32 arg2, float arg8)
 
 const char* dummy_string_data = "i<MPCOLL_WALLID_MAX";
 
-void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, float arg8)
+static inline void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2,
+                                         float arg8)
 { // see mpColl_80043268
     int dummy = 0;
 
@@ -706,7 +710,8 @@ void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, float arg8)
     }
 }
 
-void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, float arg8)
+static inline void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2,
+                                        float arg8)
 {
     // inhibit inlining
     mpColl_80043268(arg0, arg1, arg2, arg8);

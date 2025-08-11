@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itlucky.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/it_26B1.h"
 

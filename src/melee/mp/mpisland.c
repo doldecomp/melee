@@ -7,7 +7,9 @@
 
 #include <baselib/memory.h>
 
-mp_UnkStruct0 mpIsland_80458E88;
+/* 05A6F8 */ static void mpIsland_8005A6F8(void);
+/* 05A728 */ static void mpIsland_8005A728(void);
+/* 458E88 */ static mp_UnkStruct0 mpIsland_80458E88;
 
 void mpIsland_8005A6F8(void)
 {

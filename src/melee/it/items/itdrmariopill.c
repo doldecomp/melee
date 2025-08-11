@@ -1,12 +1,10 @@
-#include "baselib/forward.h"
-#include "ft/forward.h"
-#include "it/forward.h"
-
 #include "itdrmariopill.h"
 
 #include "math_ppc.h"
 #include "placeholder.h"
 #include "platform.h"
+
+#include "baselib/forward.h"
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
@@ -14,9 +12,15 @@
 #include "db/db.h"
 #include "dolphin/mtx.h"
 #include "dolphin/types.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0BF0.h"
 #include "ft/ftlib.h"
 #include "ftDrMario/ftDr_Init.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -29,24 +33,35 @@
 #define GET_ATTRS(ip)                                                         \
     ((itDrMarioPillAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
-static bool itDrmariopill_UnkMotion0_Anim(Item_GObj*);
-static void itDrmariopill_UnkMotion0_Phys(Item_GObj*);
-static bool itDrmariopill_UnkMotion0_Coll(Item_GObj*);
-static bool itDrmariopill_UnkMotion2_Anim(Item_GObj*);
-static void itDrmariopill_UnkMotion2_Phys(Item_GObj*);
-static bool itDrmariopill_UnkMotion2_Coll(Item_GObj*);
-static bool itDrmariopill_UnkMotion6_Anim(Item_GObj*);
-static void itDrmariopill_UnkMotion6_Phys(Item_GObj*);
-static bool itDrmariopill_UnkMotion6_Coll(Item_GObj*);
+/* 2C0510 */ static void it_802C0510(Item_GObj* parent_gobj, Vec3* pos,
+                                     s32 arg2, ItemKind kind, f32 facing_dir);
+/* 2C0850 */ Item_GObj* it_802C0850(Item_GObj* parent_gobj, Vec3* pos,
+                                    s32 arg2, ItemKind kind, f32 facing_dir);
+/* 2C0C0C */ static bool itDrmariopill_UnkMotion0_Anim(Item_GObj*);
+/* 2C0C68 */ static void itDrmariopill_UnkMotion0_Phys(Item_GObj*);
+/* 2C0CC4 */ static bool itDrmariopill_UnkMotion0_Coll(Item_GObj*);
+/* 2C0E48 */ static bool itDrmariopill_UnkMotion2_Anim(Item_GObj*);
+/* 2C1114 */ static void itDrmariopill_UnkMotion2_Phys(Item_GObj*);
+/* 2C1148 */ static bool itDrmariopill_UnkMotion2_Coll(Item_GObj*);
+/* 2C1234 */ static bool itDrmariopill_UnkMotion6_Anim(Item_GObj*);
+/* 2C1340 */ static void itDrmariopill_UnkMotion6_Phys(Item_GObj*);
+/* 2C1360 */ static bool itDrmariopill_UnkMotion6_Coll(Item_GObj*);
 
 ItemStateTable it_803F75D0[] = {
-    { 0, itDrmariopill_UnkMotion0_Anim, itDrmariopill_UnkMotion0_Phys, itDrmariopill_UnkMotion0_Coll },
-    { 1, itDrmariopill_UnkMotion2_Anim, itDrmariopill_UnkMotion2_Phys, itDrmariopill_UnkMotion2_Coll },
-    { 2, itDrmariopill_UnkMotion2_Anim, itDrmariopill_UnkMotion2_Phys, itDrmariopill_UnkMotion2_Coll },
-    { 1, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys, itDrmariopill_UnkMotion6_Coll },
-    { 3, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys, itDrmariopill_UnkMotion6_Coll },
-    { 4, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys, itDrmariopill_UnkMotion6_Coll },
-    { 5, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys, itDrmariopill_UnkMotion6_Coll },
+    { 0, itDrmariopill_UnkMotion0_Anim, itDrmariopill_UnkMotion0_Phys,
+      itDrmariopill_UnkMotion0_Coll },
+    { 1, itDrmariopill_UnkMotion2_Anim, itDrmariopill_UnkMotion2_Phys,
+      itDrmariopill_UnkMotion2_Coll },
+    { 2, itDrmariopill_UnkMotion2_Anim, itDrmariopill_UnkMotion2_Phys,
+      itDrmariopill_UnkMotion2_Coll },
+    { 1, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys,
+      itDrmariopill_UnkMotion6_Coll },
+    { 3, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys,
+      itDrmariopill_UnkMotion6_Coll },
+    { 4, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys,
+      itDrmariopill_UnkMotion6_Coll },
+    { 5, itDrmariopill_UnkMotion6_Anim, itDrmariopill_UnkMotion6_Phys,
+      itDrmariopill_UnkMotion6_Coll },
 };
 
 // NOTE: 4 iterations instead of the usual 3

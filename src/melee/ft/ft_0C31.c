@@ -1,18 +1,21 @@
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-
 #include "ft_0C31.h"
 
 #include "ft_081B.h"
 #include "ft_0852.h"
 #include "ftcommon.h"
 
+#include <placeholder.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownBound.h"
 #include "ftCommon/types.h"
@@ -25,6 +28,12 @@
 #include <dolphin/mtx.h>
 #include <baselib/dobj.h>
 #include <baselib/jobj.h>
+
+/* 0C63BC */ static void fn_800C63BC(Fighter_GObj* gobj);
+/* 0C63E0 */ static void fn_800C63E0(Fighter_GObj* gobj);
+/* 0C74CC */ static void fn_800C74CC(Fighter_GObj* gobj);
+/* 0C7568 */ void fn_800C7568(Fighter_GObj* gobj);
+/* 0C7890 */ void fn_800C7890(Fighter_GObj* gobj);
 
 void ftCo_800C61B0(Fighter_GObj* gobj)
 {

@@ -1,10 +1,3 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "it/forward.h"
-#include "lb/forward.h"
-
 #include "ftcoll.h"
 
 #include "fighter.h"
@@ -15,14 +8,26 @@
 #include "ftdevice.h"
 #include "ftlib.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ef/efsync.h"
+
+#include "ft/forward.h"
+
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Bury.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/types.h"
 #include "gm/gm_unsplit.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
+
+#include "lb/forward.h"
+
 #include "lb/lbcollision.h"
 #include "lb/types.h"
 #include "pl/plbonuslib.h"
@@ -531,7 +536,7 @@ inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1, int arg3,
 }
 
 /// Loop through phantom hit victims
-HitCapsuleState checkTipLog(UNK_T victim, HitCapsule* hit)
+static inline HitCapsuleState checkTipLog(UNK_T victim, HitCapsule* hit)
 {
     HitVictim* hit_victims = hit->victims_2;
     usize_t i;
@@ -863,7 +868,8 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                                 {
                                     if (lbColl_80007ECC(
                                             this_hit,
-                                            &victim_fp->hurt_capsules[j].capsule,
+                                            &victim_fp->hurt_capsules[j]
+                                                 .capsule,
                                             ftCommon_8007F804(victim_fp),
                                             this_fp->x34_scale.y,
                                             victim_fp->x34_scale.y,
@@ -1249,7 +1255,8 @@ void ftColl_8007B4E0(Fighter_GObj* gobj)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_HurtboxInit(Fighter* fp, FighterHurtCapsule* hurt, ftHurtboxInit* init)
+void ftColl_HurtboxInit(Fighter* fp, FighterHurtCapsule* hurt,
+                        ftHurtboxInit* init)
 {
     hurt->capsule.bone_idx = init->bone_idx;
     hurt->height = init->height;
