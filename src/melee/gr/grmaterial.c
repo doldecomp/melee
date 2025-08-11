@@ -1,22 +1,31 @@
 #include "grmaterial.h"
 
-#include "lb/forward.h"
-#include <baselib/forward.h>
-
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/it_2E6A.h"
 #include "it/types.h"
+
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/id.h>
 #include <baselib/jobj.h>
 
+/* 1C897C */ static void grMaterial_801C897C(HSD_JObj* jobj, u32 flags);
+/* 1C8D44 */ static Item_GObj*
+grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
+                    void (*arg5)(Item_GObj*, Ground*),
+                    void (*arg6)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                    void (*arg7)(Item_GObj*, Ground*, HSD_GObj*));
+/* 1C8D98 */ static void grMaterial_801C8D98(HSD_GObj* gobj, int id);
+/* 1C8E48 */ static bool grMaterial_801C8E48(HSD_GObj* gobj);
+/* 1C8E74 */ static void grMaterial_801C8E74(void);
 /* 1C8EF8 */ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode);
+/* 3E0A20 */ static HSD_MObjInfo grMaterial_803E0A20 = { 0 };
 
-HSD_MObjInfo grMaterial_803E0A20 = { 0 };
-u32 data_section_pad[35] = { 0 };
+static u32 data_section_pad[35] = { 0 };
 
 static void grMaterial_801C87D0(HSD_JObj* jobj, u32 flags)
 {
@@ -153,17 +162,19 @@ void grMaterial_801C8CDC(Item_GObj* gobj)
     Item_8026A8EC(gobj);
 }
 
-Item_GObj* grMaterial_801C8CFC(int arg0, int arg1, Ground* arg2, HSD_JObj* arg3,
-                               void (*arg4)(Item_GObj*, Ground*),
-                               void (*arg5)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
-                               void (*arg6)(Item_GObj*, Ground*, HSD_GObj*))
+Item_GObj*
+grMaterial_801C8CFC(int arg0, int arg1, Ground* arg2, HSD_JObj* arg3,
+                    void (*arg4)(Item_GObj*, Ground*),
+                    void (*arg5)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                    void (*arg6)(Item_GObj*, Ground*, HSD_GObj*))
 {
     return it_802E6AEC(arg2, arg0, arg1, arg3, NULL, 0, arg4, arg5, arg6);
 }
 
-Item_GObj* grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
-                               void (*arg5)(Item_GObj*, Ground*),
-                               void (*arg6)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+Item_GObj* grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3,
+                               int arg4, void (*arg5)(Item_GObj*, Ground*),
+                               void (*arg6)(Item_GObj*, Ground*, Vec3*,
+                                            HSD_GObj*, f32),
                                void (*arg7)(Item_GObj*, Ground*, HSD_GObj*))
 {
     return it_802E6AEC(arg2, arg0, arg1, 0, arg3, arg4, arg5, arg6, arg7);
@@ -292,4 +303,3 @@ void grMaterial_801C94D8(void* obj)
 /// #fn_801C9664
 
 /// #grMaterial_801C9698
-

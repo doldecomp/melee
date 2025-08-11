@@ -1,3 +1,5 @@
+#include "itseakchain.h"
+
 #include "it/forward.h"
 
 #include "it/it_26B1.h"

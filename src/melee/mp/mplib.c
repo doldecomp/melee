@@ -1,8 +1,8 @@
-#include "mp/forward.h"
+#include "mplib.h"
 
 #include "mplib.static.h"
 
-#include "mplib.h"
+#include "mp/forward.h"
 
 #include "mp/types.h"
 

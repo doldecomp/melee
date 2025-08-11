@@ -1,13 +1,16 @@
-#include "synth.static.h"
-
 #include "synth.h"
+
+#include "synth.static.h"
 
 #include <dolphin/ai.h>
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
 
-static inline struct HSD_SynthSFXNode* getNode(int arg0);
+/* 389334 */ static int HSD_Synth_80389334(int arg0, u8 arg1, u8 arg2, u8 arg3,
+                                           int arg4, u8 arg5, float arg6,
+                                           float arg7, float arg8, float arg9,
+                                           float argA);
 
 void* HSD_AudioMalloc(size_t arg0)
 {

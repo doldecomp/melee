@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include "baselib/forward.h" // IWYU pragma: export
 
 struct HSD_GObjProc {
     /* 0x00 */ HSD_GObjProc* child;

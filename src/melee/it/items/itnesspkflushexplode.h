@@ -12,7 +12,6 @@
 /* 2AFA70 */ UNK_RET it_802AFA70(UNK_PARAMS);
 /* 2AFBA4 */ bool itNesspkflushexplode_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2AFD2C */ void itNesspkflushexplode_UnkMotion0_Phys(Item_GObj*);
-/* 2AFD44 */ bool itNesspkflushexplode_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2AFD4C */ bool it_2725_Logic103_Clanked(Item_GObj*);
 /* 2AFD54 */ bool it_2725_Logic103_Absorbed(Item_GObj*);
 /* 2AFD5C */ bool it_2725_Logic103_ShieldBounced(Item_GObj*);
