@@ -16,9 +16,9 @@ extern void it_8027B730(void);
 ItemStateTable it_803F83E0[] = {
     {
         -1,
-        it_802D858C,
-        it_802D8594,
-        it_802D85EC,
+        itMato_UnkMotion0_Anim,
+        itMato_UnkMotion0_Phys,
+        itMato_UnkMotion0_Coll,
     },
 };
 
@@ -39,12 +39,12 @@ void it_802D8554(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802D858C(Item_GObj* item_gobj)
+bool itMato_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     return false;
 }
 
-void it_802D8594(Item_GObj* item_gobj)
+void itMato_UnkMotion0_Phys(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (it->xDD4_itemVar.mato.x0 != NULL) {
@@ -54,7 +54,7 @@ void it_802D8594(Item_GObj* item_gobj)
     }
 }
 
-bool it_802D85EC(Item_GObj* item_gobj)
+bool itMato_UnkMotion0_Coll(Item_GObj* item_gobj)
 {
     return false;
 }

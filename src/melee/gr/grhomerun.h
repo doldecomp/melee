@@ -11,11 +11,11 @@
 
 #include "it/inlines.h"
 
-/* 21C750 */ UNK_RET grHomeRun_8021C750(UNK_PARAMS);
-/* 21C754 */ UNK_RET grHomeRun_8021C754(UNK_PARAMS);
-/* 21C7FC */ UNK_RET grHomeRun_8021C7FC(UNK_PARAMS);
-/* 21C800 */ UNK_RET grHomeRun_8021C800(UNK_PARAMS);
-/* 21C824 */ bool grHomeRun_8021C824(UNK_PARAMS);
+/* 21C750 */ void grHomeRun_8021C750(bool);
+/* 21C754 */ void grHomeRun_8021C754(void);
+/* 21C7FC */ void grHomeRun_8021C7FC(void);
+/* 21C800 */ void grHomeRun_8021C800(void);
+/* 21C824 */ bool grHomeRun_8021C824(void);
 /* 21C82C */ UNK_RET grHomeRun_8021C82C(UNK_PARAMS);
 /* 21C914 */ void grHomeRun_8021C914(Ground_GObj*);
 /* 21CB10 */ bool grHomeRun_8021CB10(Ground_GObj*);
@@ -69,8 +69,8 @@
 /* 21EC58 */ UNK_RET grHomeRun_8021EC58(UNK_PARAMS);
 /* 21ED74 */ UNK_RET grHomeRun_8021ED74(UNK_PARAMS);
 /* 21EDD4 */ UNK_RET grHomeRun_8021EDD4(UNK_PARAMS);
-/* 21EEB4 */ bool grHomeRun_8021EEB4(void);
-/* 21EEBC */ UNK_RET grHomeRun_8021EEBC(UNK_PARAMS);
+/* 21EEB4 */ DynamicsDesc* grHomeRun_8021EEB4(enum_t);
+/* 21EEBC */ bool grHomeRun_8021EEBC(Vec3*, int arg, HSD_JObj* jobj);
 /* 21EF10 */ float grHomeRun_8021EF10(void);
 
 #endif

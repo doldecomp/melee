@@ -6,7 +6,7 @@
 #include "lb/forward.h"
 #include "dolphin/mtx.h"
 
-/* 21EF38 */ void grHeal_8021EF38(int);
+/* 21EF38 */ void grHeal_8021EF38(bool);
 /* 21EF3C */ void grHeal_8021EF3C(void);
 /* 21EFBC */ void grHeal_8021EFBC(void);
 /* 21EFC0 */ void grHeal_8021EFC0(void);
@@ -38,7 +38,7 @@
 /* 21F708 */ void grHeal_8021F708(Ground_GObj*);
 /* 21F70C */ u32 grHeal_8021F70C(u32);
 /* 21F79C */ void grHeal_8021F79C(s32, s32, s32);
-/* 21F830 */ DynamicsDesc* grHeal_8021F830(int);
+/* 21F830 */ DynamicsDesc* grHeal_8021F830(enum_t);
 /* 21F838 */ bool grHeal_8021F838(Vec3*, int, HSD_JObj*);
 
 #endif

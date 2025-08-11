@@ -9,7 +9,7 @@ float grShrineRoute_802087B0(void)
     return grNKr_804DB868;
 }
 
-void grShrineRoute_802087B8(void) {}
+void grShrineRoute_802087B8(bool arg) {}
 
 /// #grShrineRoute_802087BC
 
@@ -114,7 +114,7 @@ void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
 /// #grShrineRoute_8020B0AC
 
-bool grShrineRoute_8020B104(void)
+DynamicsDesc* grShrineRoute_8020B104(enum_t arg)
 {
     return false;
 }

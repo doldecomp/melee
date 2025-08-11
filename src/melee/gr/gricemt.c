@@ -31,8 +31,8 @@
 //     "/GrTFc.dat",
 //     grTFalco_802207F4,
 //     grTFalco_802207F0,
-//     grTFalco_8022086C,
-//     grTFalco_80220870,
+//     grTfalco_UnkStage0_OnLoad,
+//     grTfalco_UnkStage0_OnStart,
 //     grTFalco_80220894,
 //     grTFalco_80220ACC,
 //     grTFalco_80220B78,
@@ -103,7 +103,7 @@ StageData grIm_803E4800 = {
 
 const float grIm_804DB574 = 0.0;
 
-void grIceMt_801F6868(int id) {}
+void grIceMt_801F6868(bool id) {}
 
 /// #grIceMt_801F686C
 void grIceMt_801F686C(void)
@@ -1081,7 +1081,7 @@ void grIceMt_801FA854(void)
     return;
 }
 
-DynamicsDesc* grIceMt_801FA8F8(int id)
+DynamicsDesc* grIceMt_801FA8F8(enum_t id)
 {
     return 0;
 }

@@ -18,9 +18,9 @@
 /* 2B312C */ bool it_802B312C(Item_GObj*);
 /* 2B314C */ bool it_802B314C(Item_GObj*);
 /* 2B322C */ void it_802B322C(Item_GObj*, HSD_GObj*);
-/* 2B3294 */ bool it_802B3294(Item_GObj*);
-/* 2B32C8 */ void it_802B32C8(Item_GObj*);
-/* 2B3324 */ bool it_802B3324(Item_GObj*);
+/* 2B3294 */ bool itYoshistar_UnkMotion0_Anim(Item_GObj*);
+/* 2B32C8 */ void itYoshistar_UnkMotion0_Phys(Item_GObj*);
+/* 2B3324 */ bool itYoshistar_UnkMotion0_Coll(Item_GObj*);
 /* 2B3348 */ void it_802B3348(Item_GObj*, HSD_GObj*);
 /* 3F7158 */ extern ItemStateTable it_803F7158[];
 

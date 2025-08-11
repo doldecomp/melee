@@ -19,8 +19,8 @@
 
 void grTKirby_80221364(bool);                   /* static */
 void grTKirby_80221368(void);                  /* static */
-void grTKirby_802213D8(void);                  /* static */
-void grTKirby_802213DC(void);                  /* static */
+void grTkirby_UnkStage0_OnLoad(void);                  /* static */
+void grTkirby_UnkStage0_OnStart(void);                  /* static */
 bool grTKirby_80221400(void);                  /* static */
 HSD_GObj* grTKirby_80221408(s32);              /* static */
 void grTKirby_802214F0(Ground_GObj*);             /* static */
@@ -54,8 +54,8 @@ StageData grTKb_803E8C0C = {
     "/GrTKb.dat",
     grTKirby_80221368,
     grTKirby_80221364,
-    grTKirby_802213D8,
-    grTKirby_802213DC,
+    grTkirby_UnkStage0_OnLoad,
+    grTkirby_UnkStage0_OnStart,
     grTKirby_80221400,
     grTKirby_80221638,
     grTKirby_80221640,
@@ -78,9 +78,9 @@ void grTKirby_80221368(void)
     Ground_801C42AC();
 }
 
-void grTKirby_802213D8(void) {}
+void grTkirby_UnkStage0_OnLoad(void) {}
 
-void grTKirby_802213DC(void)
+void grTkirby_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

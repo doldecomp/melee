@@ -13,8 +13,8 @@
 
 /* 220F10 */ void grTIceClimber_80220F10(bool);
 /* 220F14 */ void grTIceClimber_80220F14(void);
-/* 220F84 */ void grTIceClimber_80220F84(void);
-/* 220F88 */ void grTIceClimber_80220F88(void);
+/* 220F84 */ void grTiceclimber_UnkStage0_OnLoad(void);
+/* 220F88 */ void grTiceclimber_UnkStage0_OnStart(void);
 /* 220FAC */ bool grTIceClimber_80220FAC(void);
 /* 220FB4 */ HSD_GObj* grTIceClimber_80220FB4(int);
 /* 22109C */ void grTIceClimber_8022109C(Ground_GObj*);

@@ -37,8 +37,8 @@ StageData grTe_803E5764 = { 0x01,
                             "/GrTe.dat",
                             grTest_80206E30,
                             grTest_80206E2C,
-                            grTest_80207014,
-                            grTest_80207018,
+                            grTest_UnkStage0_OnLoad,
+                            grTest_UnkStage0_OnStart,
                             grTest_8020703C,
                             grTest_8020740C,
                             grTest_80207414,
@@ -70,9 +70,9 @@ void grTest_80206E30(void)
     Ground_801C3BB4();
 }
 
-void grTest_80207014(void) {}
+void grTest_UnkStage0_OnLoad(void) {}
 
-void grTest_80207018(void)
+void grTest_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }

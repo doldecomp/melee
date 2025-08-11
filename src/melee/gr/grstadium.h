@@ -14,8 +14,8 @@ typedef enum {
 
 /* 1D1018 */ void grStadium_801D1018(bool);
 /* 1D101C */ void grStadium_801D101C(void);
-/* 1D10C8 */ void grStadium_801D10C8(void);
-/* 1D10CC */ void grStadium_801D10CC(void);
+/* 1D10C8 */ void grStadium_UnkStage0_OnLoad(void);
+/* 1D10CC */ void grStadium_UnkStage0_OnStart(void);
 /* 1D10F0 */ bool grStadium_801D10F0(void);
 /* 1D10F8 */ Ground_GObj* grStadium_801D10F8(StadiumGrType);
 /* 1D11E4 */ void fn_801D11E4(Ground_GObj*);

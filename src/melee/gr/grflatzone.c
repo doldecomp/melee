@@ -44,8 +44,8 @@ StageData grFz_803E7A00 = {
     "/GrFz.dat",
     grFlatzone_80216E78,
     grFlatzone_80216E74,
-    grFlatzone_80216F38,
-    grFlatzone_80216F3C,
+    grFlatzone_UnkStage0_OnLoad,
+    grFlatzone_UnkStage0_OnStart,
     grFlatzone_80216F40,
     grFlatzone_802182B4,
     grFlatzone_802182BC,
@@ -110,12 +110,12 @@ void grFlatzone_80216E78(void)
     Ground_801C3990(Stage_GetBlastZoneBottomOffset() - 50.0f);
 }
 
-void grFlatzone_80216F38(void)
+void grFlatzone_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-void grFlatzone_80216F3C(void)
+void grFlatzone_UnkStage0_OnStart(void)
 {
     return;
 }

@@ -20,8 +20,8 @@
 
 static void grTCaptain_8021FC60(bool);
 static void grTCaptain_8021FC64(void);
-static void grTCaptain_8021FCD4(void);
-static void grTCaptain_8021FCD8(void);
+static void grTcaptain_UnkStage0_OnLoad(void);
+static void grTcaptain_UnkStage0_OnStart(void);
 static bool grTCaptain_8021FCFC(void);
 static HSD_GObj* grTCaptain_8021FD04(int gobj_id);
 static void grTCaptain_8021FDEC(Ground_GObj* gobj);
@@ -55,8 +55,8 @@ StageData grTCa_803E8664 = {
     "/GrTCa.dat",
     grTCaptain_8021FC64,
     grTCaptain_8021FC60,
-    grTCaptain_8021FCD4,
-    grTCaptain_8021FCD8,
+    grTcaptain_UnkStage0_OnLoad,
+    grTcaptain_UnkStage0_OnStart,
     grTCaptain_8021FCFC,
     grTCaptain_8021FF34,
     grTCaptain_8021FF3C,
@@ -79,9 +79,9 @@ static void grTCaptain_8021FC64(void)
     Ground_801C4210();
     Ground_801C42AC();
 }
-static void grTCaptain_8021FCD4(void) {}
+static void grTcaptain_UnkStage0_OnLoad(void) {}
 
-static void grTCaptain_8021FCD8(void)
+static void grTcaptain_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }

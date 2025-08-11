@@ -11,10 +11,10 @@
 
 #include "gr/forward.h"
 
-/* 1FCBC0 */ UNK_RET grInishie2_801FCBC0(UNK_PARAMS);
-/* 1FCBC4 */ UNK_RET grInishie2_801FCBC4(UNK_PARAMS);
-/* 1FCCAC */ UNK_RET grInishie2_801FCCAC(UNK_PARAMS);
-/* 1FCCB0 */ void grInishie2_801FCCB0(HSD_GObj*);
+/* 1FCBC0 */ void grInishie2_801FCBC0(bool);
+/* 1FCBC4 */ void grInishie2_801FCBC4(void);
+/* 1FCCAC */ void grInishie2_801FCCAC(void);
+/* 1FCCB0 */ void grInishie2_801FCCB0(void);
 /* 1FCCD4 */ bool grInishie2_801FCCD4(void);
 /* 1FCCDC */ HSD_GObj* grInishie2_801FCCDC(int);
 /* 1FCDC8 */ void grInishie2_801FCDC8(Ground_GObj*);
@@ -49,7 +49,7 @@
 /* 1FDED8 */ void grInishie2_801FDED8(Ground_GObj*);
 /* 1FDFB4 */ s32 grInishie2_801FDFB4(s32);
 /* 1FDFE4 */ void grInishie2_801FDFE4(Ground_GObj*);
-/* 1FDFE8 */ bool grInishie2_801FDFE8(void);
-/* 1FDFF0 */ bool grInishie2_801FDFF0(void);
+/* 1FDFE8 */ DynamicsDesc* grInishie2_801FDFE8(enum_t);
+/* 1FDFF0 */ bool grInishie2_801FDFF0(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

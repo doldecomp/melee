@@ -7,10 +7,10 @@
 
 #include "it/inlines.h"
 
-/* 1FF164 */ UNK_RET grRCruise_801FF164(UNK_PARAMS);
-/* 1FF168 */ UNK_RET grRCruise_801FF168(UNK_PARAMS);
-/* 1FF298 */ UNK_RET grRCruise_801FF298(UNK_PARAMS);
-/* 1FF29C */ UNK_RET grRCruise_801FF29C(UNK_PARAMS);
+/* 1FF164 */ void grRCruise_801FF164(bool);
+/* 1FF168 */ void grRCruise_801FF168(void);
+/* 1FF298 */ void grRCruise_801FF298(void);
+/* 1FF29C */ void grRCruise_801FF29C(void);
 /* 1FF2C0 */ bool grRCruise_801FF2C0(void);
 /* 1FF2C8 */ UNK_RET grRCruise_801FF2C8(UNK_PARAMS);
 /* 1FF3B4 */ void grRCruise_801FF3B4(Ground_GObj*);
@@ -57,7 +57,7 @@
 /* 201988 */ UNK_RET grRCruise_80201988(UNK_PARAMS);
 /* 201B60 */ UNK_RET grRCruise_80201B60(UNK_PARAMS);
 /* 201BE0 */ UNK_RET fn_80201BE0(UNK_PARAMS);
-/* 201C50 */ bool grRCruise_80201C50(void);
-/* 201C58 */ bool grRCruise_80201C58(void);
+/* 201C50 */ DynamicsDesc* grRCruise_80201C50(enum_t);
+/* 201C58 */ bool grRCruise_80201C58(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

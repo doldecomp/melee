@@ -13,8 +13,8 @@
 
 void grTGanon_802246D8(bool);
 void grTGanon_802246DC(void);
-void grTGanon_80224754(void);
-void grTGanon_80224758(void);
+void grTganon_UnkStage0_OnLoad(void);
+void grTganon_UnkStage0_OnStart(void);
 bool grTGanon_8022477C(void);
 HSD_GObj* grTGanon_80224784(int);
 void grTGanon_8022486C(Ground_GObj*);

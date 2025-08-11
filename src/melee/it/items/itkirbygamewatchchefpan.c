@@ -11,7 +11,7 @@
 ItemStateTable it_803F7958[] = {
     {
         -1,
-        it_802C76E8,
+        itKirbygamewatchchefpan_UnkMotion0_Anim,
         NULL,
         NULL,
     },
@@ -44,7 +44,7 @@ Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir
     return NULL;
 }
 
-void it_802C75DC(Item_GObj* item_gobj)
+void it_2725_Logic113_Destroyed(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
@@ -56,7 +56,7 @@ void it_802C760C(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item != NULL) {
-        it_802C75DC(item_gobj);
+        it_2725_Logic113_Destroyed(item_gobj);
         Item_8026A8EC(item_gobj);
     }
 }
@@ -71,7 +71,7 @@ void it_802C7678(Item_GObj* item_gobj)
     it_8026B73C(item_gobj);
 }
 
-void it_802C7698(Item_GObj* item_gobj)
+void it_2725_Logic113_PickedUp(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
@@ -80,7 +80,7 @@ void it_802C7698(Item_GObj* item_gobj)
     }
 }
 
-static inline bool it_802C76E8_inline(Item_GObj* item_gobj)
+static inline bool itKirbygamewatchchefpan_UnkMotion0_Anim_inline(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
@@ -89,17 +89,17 @@ static inline bool it_802C76E8_inline(Item_GObj* item_gobj)
     return true;
 }
 
-bool it_802C76E8(Item_GObj* item_gobj)
+bool itKirbygamewatchchefpan_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
-    if (it_802C76E8_inline(item_gobj)) {
-        it_802C75DC(item_gobj);
+    if (itKirbygamewatchchefpan_UnkMotion0_Anim_inline(item_gobj)) {
+        it_2725_Logic113_Destroyed(item_gobj);
         return true;
     }
     return false;
 }
 
-void it_802C7754(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2725_Logic113_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

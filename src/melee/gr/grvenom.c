@@ -6,7 +6,7 @@
 
 /// #grVenom_8020362C
 
-void grVenom_80203B14(void) {}
+void grVenom_80203B14(bool arg) {}
 
 /// #grVenom_80203B18
 
@@ -165,7 +165,7 @@ void grVenom_80206BEC(Ground_GObj* arg) {}
 
 /// #grVenom_80206D10
 
-bool grVenom_80206D74(void)
+DynamicsDesc* grVenom_80206D74(enum_t arg)
 {
     return false;
 }

@@ -9,21 +9,21 @@
 #include <baselib/gobj.h>
 
 /* 2AF32C */ static void it_802AF32C(HSD_GObj*);
-/* 2AF64C */ static bool it_802AF64C(Item_GObj* gobj);
-/* 2AF844 */ static void it_802AF844(HSD_GObj*);
-/* 2AF848 */ static bool it_802AF848(Item_GObj* gobj);
-/* 2AF90C */ static bool it_802AF90C(Item_GObj* gobj);
-/* 2AF914 */ static void it_802AF914(HSD_GObj*);
-/* 2AF918 */ static bool it_802AF918(Item_GObj* gobj);
+/* 2AF64C */ static bool itLinkbow_UnkMotion5_Anim(Item_GObj* gobj);
+/* 2AF844 */ static void itLinkbow_UnkMotion5_Phys(HSD_GObj*);
+/* 2AF848 */ static bool itLinkbow_UnkMotion5_Coll(Item_GObj* gobj);
+/* 2AF90C */ static bool itLinkbow_UnkMotion6_Anim(Item_GObj* gobj);
+/* 2AF914 */ static void itLinkbow_UnkMotion6_Phys(HSD_GObj*);
+/* 2AF918 */ static bool itLinkbow_UnkMotion6_Coll(Item_GObj* gobj);
 
-ItemStateTable it_803F6E98[] = { { 0, it_802AF64C, it_802AF844, it_802AF848 },
-                                 { 1, it_802AF64C, it_802AF844, it_802AF848 },
-                                 { 2, it_802AF64C, it_802AF844, it_802AF848 },
-                                 { 3, it_802AF64C, it_802AF844, it_802AF848 },
-                                 { 4, it_802AF64C, it_802AF844, it_802AF848 },
-                                 { 5, it_802AF64C, it_802AF844, it_802AF848 },
-                                 { -1, it_802AF90C, it_802AF914,
-                                   it_802AF918 } };
+ItemStateTable it_803F6E98[] = { { 0, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
+                                 { 1, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
+                                 { 2, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
+                                 { 3, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
+                                 { 4, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
+                                 { 5, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
+                                 { -1, itLinkbow_UnkMotion6_Anim, itLinkbow_UnkMotion6_Phys,
+                                   itLinkbow_UnkMotion6_Coll } };
 
 static s32 it_803F6F08[7] = { 0, 1, 2, 3, 4, 5, 6 };
 static s32 it_803F6F24[7] = { 3, 4, 5, 0, 1, 2, 6 };
@@ -65,7 +65,7 @@ HSD_GObj* it_802AF1A4(f32 facing_dir, Fighter_GObj* owner_gobj, Vec3* vec,
     return (HSD_GObj*) gobj;
 }
 
-void it_802AF298(Item_GObj* arg0)
+void it_2725_Logic100_Destroyed(Item_GObj* arg0)
 {
     Item* item;
     if (arg0 != NULL) {
@@ -127,7 +127,7 @@ void it_802AF32C(HSD_GObj* arg0)
     }
 }
 
-void it_802AF434(Item_GObj* arg0)
+void it_2725_Logic100_PickedUp(Item_GObj* arg0)
 {
     HSD_JObj* jobj;
     Item* item;
@@ -173,7 +173,7 @@ void it_802AF434(Item_GObj* arg0)
     }
 }
 
-bool it_802AF64C(Item_GObj* arg0)
+bool itLinkbow_UnkMotion5_Anim(Item_GObj* arg0)
 {
     Item* item;
     HSD_JObj* jobj;
@@ -191,7 +191,7 @@ bool it_802AF64C(Item_GObj* arg0)
         if ((item->x5CC_currentAnimFrame == 0.0f) ||
             ((item->x5CC_currentAnimFrame >= 24.0f)))
         {
-            it_802AF298((Item_GObj*) arg0);
+            it_2725_Logic100_Destroyed((Item_GObj*) arg0);
             return 1;
         }
         break;
@@ -228,12 +228,12 @@ bool it_802AF64C(Item_GObj* arg0)
     return 0;
 }
 
-void it_802AF844(HSD_GObj* arg0)
+void itLinkbow_UnkMotion5_Phys(HSD_GObj* arg0)
 {
     return;
 }
 
-bool it_802AF848(Item_GObj* arg0)
+bool itLinkbow_UnkMotion5_Coll(Item_GObj* arg0)
 {
     Item* item;
     HSD_JObj* jobj;
@@ -246,22 +246,22 @@ bool it_802AF848(Item_GObj* arg0)
     return 0;
 }
 
-bool it_802AF90C(Item_GObj* arg0)
+bool itLinkbow_UnkMotion6_Anim(Item_GObj* arg0)
 {
     return 1;
 }
 
-void it_802AF914(HSD_GObj* arg0)
+void itLinkbow_UnkMotion6_Phys(HSD_GObj* arg0)
 {
     return;
 }
 
-bool it_802AF918(Item_GObj* arg0)
+bool itLinkbow_UnkMotion6_Coll(Item_GObj* arg0)
 {
     return 1;
 }
 
-void it_802AF920(Item_GObj* arg0, Item_GObj* arg1)
+void it_2725_Logic100_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
 {
     it_8026B894(arg0, (HSD_GObj*) arg1);
 }

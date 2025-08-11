@@ -20,8 +20,8 @@
 
 /* 2228B4 */ static void grTPeach_802228B4(bool arg0);
 /* 2228B8 */ static void grTPeach_802228B8(void);
-/* 222928 */ static void grTPeach_80222928(void);
-/* 22292C */ static void grTPeach_8022292C(void);
+/* 222928 */ static void grTpeach_UnkStage0_OnLoad(void);
+/* 22292C */ static void grTpeach_UnkStage0_OnStart(void);
 /* 222950 */ static bool grTPeach_80222950(void);
 /* 222958 */ static Ground_GObj* grTPeach_80222958(int arg0);
 /* 222A40 */ static void grTPeach_80222A40(Ground_GObj* gobj);
@@ -77,8 +77,8 @@ StageData grTPe_803E914C = {
     "/GrTPe.dat",
     grTPeach_802228B8,
     grTPeach_802228B4,
-    grTPeach_80222928,
-    grTPeach_8022292C,
+    grTpeach_UnkStage0_OnLoad,
+    grTpeach_UnkStage0_OnStart,
     grTPeach_80222950,
     grTPeach_80222B88,
     grTPeach_80222B90,
@@ -103,9 +103,9 @@ void grTPeach_802228B8(void)
     Ground_801C42AC();
 }
 
-void grTPeach_80222928(void) {}
+void grTpeach_UnkStage0_OnLoad(void) {}
 
-void grTPeach_8022292C(void)
+void grTpeach_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

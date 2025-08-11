@@ -21,45 +21,45 @@ int it_802960CC(Item_GObj* gobj)
     return da->x28;
 }
 
-/// #it_802960E0
+/// #it_3F14_Logic5_Destroyed
 
-/// #it_80296120
+/// #it_3F14_Logic5_Spawned
 
 /// #it_802961E8
 
 /// #it_802962E0
 
-/// #it_802964A4
+/// #itTarucann_UnkMotion0_Anim
 
-void it_802964F8(Item_GObj* gobj) {}
+void itTarucann_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_802964FC
+/// #itTarucann_UnkMotion0_Coll
 
 /// #it_80296694
 
-/// #it_802966D0
+/// #itTarucann_UnkMotion1_Anim
 
-/// #it_80296724
+/// #itTarucann_UnkMotion1_Phys
 
-/// #it_80296754
+/// #itTarucann_UnkMotion1_Coll
 
-/// #it_8029683C
+/// #it_3F14_Logic5_PickedUp
 
-/// #it_80296898
+/// #itTarucann_UnkMotion2_Anim
 
-void it_802968D4(Item_GObj* gobj) {}
+void itTarucann_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_802968D8
+/// #it_3F14_Logic5_Dropped
 
-/// #it_80296930
+/// #it_3F14_Logic5_Thrown
 
 /// #it_802969D8
 
-/// #it_80296A70
+/// #itTarucann_UnkMotion6_Anim
 
-/// #it_80296AC4
+/// #itTarucann_UnkMotion6_Phys
 
-/// #it_80296C48
+/// #itTarucann_UnkMotion6_Coll
 
 /// #it_80296E88
 
@@ -67,52 +67,52 @@ void it_802968D4(Item_GObj* gobj) {}
 
 /// #it_80296EF0
 
-/// #it_80296F94
+/// #itTarucann_UnkMotion8_Anim
 
-/// #it_80296FE8
+/// #itTarucann_UnkMotion8_Phys
 
-/// #it_80297154
+/// #itTarucann_UnkMotion8_Coll
 
-/// #it_80297368
+/// #itTarucann_UnkMotion7_Anim
 
-/// #it_802973BC
+/// #itTarucann_UnkMotion7_Phys
 
-/// #it_802975D4
+/// #itTarucann_UnkMotion7_Coll
 
 /// #it_802975F4
 
-/// #it_80297674
+/// #itTarucann_UnkMotion9_Anim
 
-void it_80297784(Item_GObj* gobj) {}
+void itTarucann_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-bool it_80297788(Item_GObj* gobj)
+bool itTarucann_UnkMotion9_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_80297790
 
-bool it_8029789C(Item_GObj* arg0)
+bool it_3F14_Logic5_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_802978A4(Item_GObj* arg0)
+bool it_3F14_Logic5_Clanked(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_802978AC(Item_GObj* arg0)
+bool it_3F14_Logic5_HitShield(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_802978B4(Item_GObj* arg0)
+bool it_3F14_Logic5_Reflected(Item_GObj* arg0)
 {
     return false;
 }
 
-void it_802978BC(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic5_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

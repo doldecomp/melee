@@ -4,7 +4,7 @@
 
 static s16 grZe_804D6998;
 
-void grZebes_801D84A0(void) {}
+void grZebes_801D84A0(bool arg) {}
 
 /// #grZebes_801D84A4
 
@@ -145,12 +145,12 @@ void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
 
 /// #fn_801DCBFC
 
-bool grZebes_801DCCB8(void)
+DynamicsDesc* grZebes_801DCCB8(enum_t arg)
 {
     return false;
 }
 
-bool grZebes_801DCCC0(void)
+bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

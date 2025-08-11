@@ -1258,7 +1258,7 @@ f32 grKongo_801D8314(void)
     return var_f31;
 }
 
-void grKongo_801D5238(void) {}
+void grKongo_801D5238(bool arg) {}
 
 void grKongo_801D523C(void)
 {
@@ -1292,7 +1292,7 @@ void grKongo_801D52FC(void)
     grZakoGenerator_801CAE04(0);
 }
 
-s32 grKongo_801D5338(void)
+bool grKongo_801D5338(void)
 {
     return 0;
 }
@@ -1439,7 +1439,7 @@ void fn_801D7E60(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
 
 /// #grKongo_801D8314
 
-bool grKongo_801D8444(void)
+DynamicsDesc* grKongo_801D8444(enum_t arg)
 {
     return false;
 }

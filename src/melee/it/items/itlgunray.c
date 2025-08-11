@@ -16,15 +16,15 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-/* 298300 */ static bool it_80298300(Item_GObj*);
+/* 298300 */ static bool itLgunray_UnkMotion0_Anim(Item_GObj*);
 /* 2983AC */ static void it_802982AC(Item_GObj*, Item_GObj*, Article*);
-/* 2985D8 */ static void it_802985D8(Item_GObj*);
-/* 2985F8 */ static bool it_802985F8(Item_GObj*);
+/* 2985D8 */ static void itLgunray_UnkMotion0_Phys(Item_GObj*);
+/* 2985F8 */ static bool itLgunray_UnkMotion0_Coll(Item_GObj*);
 
 static float const scale = 1e-3f;
 
 ItemStateTable it_803F64F8[] = {
-    { 0, it_80298300, it_802985D8, it_802985F8 },
+    { 0, itLgunray_UnkMotion0_Anim, itLgunray_UnkMotion0_Phys, itLgunray_UnkMotion0_Coll },
 };
 
 void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)
@@ -67,7 +67,7 @@ void it_802982AC(Item_GObj* gobj, Item_GObj* owner_gobj, Article* article)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_80298300(Item_GObj* gobj)
+bool itLgunray_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ItLGunRayAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
@@ -100,13 +100,13 @@ bool it_80298300(Item_GObj* gobj)
     return it_80273130(gobj);
 }
 
-void it_802985D8(HSD_GObj* gobj)
+void itLgunray_UnkMotion0_Phys(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.lgunray.pos = ip->pos;
 }
 
-bool it_802985F8(Item_GObj* gobj)
+bool itLgunray_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (it_8029C4D4(gobj, &ip->x378_itemColl)) {
@@ -115,27 +115,27 @@ bool it_802985F8(Item_GObj* gobj)
     return false;
 }
 
-bool it_80298634(Item_GObj* gobj)
+bool it_3F14_Logic35_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_8029863C(Item_GObj* gobj)
+bool it_3F14_Logic35_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_80298644(Item_GObj* gobj)
+bool it_3F14_Logic35_HitShield(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_8029864C(Item_GObj* gobj)
+bool it_3F14_Logic35_Absorbed(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_80298654(Item_GObj* gobj)
+bool it_3F14_Logic35_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -155,7 +155,7 @@ bool it_80298654(Item_GObj* gobj)
     return false;
 }
 
-bool it_80298828(Item_GObj* gobj)
+bool it_3F14_Logic35_ShieldBounced(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(4);
@@ -171,7 +171,7 @@ bool it_80298828(Item_GObj* gobj)
     return false;
 }
 
-void it_802988C4(Item_GObj* gobj, HSD_GObj* ref_gobj)
+void it_3F14_Logic35_EvtUnk(Item_GObj* gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

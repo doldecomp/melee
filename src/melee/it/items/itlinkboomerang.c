@@ -205,7 +205,7 @@ void it_802A0810(Item_GObj* gobj)
     ip->xDD4_itemVar.linkboomerang.xF90[0] = NULL;
 }
 
-void it_802A087C(Item_GObj* gobj)
+void it_2725_Logic18_Destroyed(Item_GObj* gobj)
 {
     Item* ip;
     ip = GET_ITEM(gobj);
@@ -347,7 +347,7 @@ void it_802A0E70(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802A0F08(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip;
     ip = GET_ITEM(gobj);
@@ -364,12 +364,12 @@ void it_802A0F88(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, 2);
 }
 
-bool it_802A0FB0(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return it_802A0C34(gobj);
 }
 
-void it_802A0FD0(Item_GObj* gobj)
+void itLinkboomerang_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip;
     f32 angle;
@@ -391,9 +391,9 @@ void it_802A0FD0(Item_GObj* gobj)
     }
 }
 
-bool it_802A10C0(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    it_802A16E4(gobj);
+    itLinkboomerang_UnkMotion2_Coll(gobj);
     return false;
 }
 
@@ -417,13 +417,13 @@ void it_802A10E4(Item_GObj* gobj)
     loop_lb_8000BA0C(ip, child, attrs->x30);
 }
 
-bool it_802A12DC(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return it_802A0C34(gobj);
 }
 
-// NOTE: identical to it_802A0FD0
-void it_802A12FC(Item_GObj* gobj)
+// NOTE: identical to itLinkboomerang_UnkMotion1_Phys
+void itLinkboomerang_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip;
     f32 angle;
@@ -517,7 +517,7 @@ static void it_802A15EC_no_inline(Item_GObj* gobj, Point3d* arg1)
     it_802A15EC(gobj, arg1);
 }
 
-bool it_802A16E4(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion2_Coll(Item_GObj* gobj)
 {
     Item* ip;
     CollData* coll;
@@ -605,7 +605,7 @@ void it_802A19E0(Item_GObj* gobj)
     loop_lb_8000BA0C(ip, child, 1.0f);
 }
 
-bool it_802A1C30(Item_GObj* gobj)
+bool itLinkboomerang_UnkMotion3_Anim(Item_GObj* gobj)
 {
     HSD_JObj* child;
     Item* ip;
@@ -622,7 +622,7 @@ bool it_802A1C30(Item_GObj* gobj)
     return it_802A0C34(gobj);
 }
 
-void it_802A1D60_sub(Item_GObj* gobj, f32 angle)
+void itLinkboomerang_UnkMotion3_Phys_sub(Item_GObj* gobj, f32 angle)
 {
     Item* ip = GET_ITEM(gobj);
     itLinkBoomerangAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -642,7 +642,7 @@ void it_802A1D60_sub(Item_GObj* gobj, f32 angle)
     }
 }
 
-void it_802A1D60(Item_GObj* gobj)
+void itLinkboomerang_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     itLinkBoomerangAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -656,7 +656,7 @@ void it_802A1D60(Item_GObj* gobj)
         }
         ip->x40_vel.x = length * cosf(ip->xDD4_itemVar.linkboomerang.xF74);
         ip->x40_vel.y = length * sinf(ip->xDD4_itemVar.linkboomerang.xF74);
-        it_802A1D60_sub(gobj, it_802A13EC(gobj));
+        itLinkboomerang_UnkMotion3_Phys_sub(gobj, it_802A13EC(gobj));
     }
 }
 
@@ -694,7 +694,7 @@ bool it_802A1FA8(Item_GObj* gobj)
 }
 
 // NOTE: identical to it_802A1F08
-bool it_802A2048(Item_GObj* gobj)
+bool it_2725_Logic18_Absorbed(Item_GObj* gobj)
 {
     Item* ip;
     itLinkBoomerangAttributes* attrs;

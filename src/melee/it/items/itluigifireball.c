@@ -18,12 +18,12 @@
 #include <baselib/mtx.h>
 
 /* 2C027C */ static void it_802C027C(Item_GObj* gobj);
-/* 2C02E4 */ static bool it_802C02E4(Item_GObj* gobj);
-/* 2C031C */ static void it_802C031C(Item_GObj* gobj);
-/* 2C0368 */ static bool it_802C0368(Item_GObj* gobj);
+/* 2C02E4 */ static bool itLuigifireball_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2C031C */ static void itLuigifireball_UnkMotion0_Phys(Item_GObj* gobj);
+/* 2C0368 */ static bool itLuigifireball_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F75C0[] = {
-    { 0, it_802C02E4, it_802C031C, it_802C0368 },
+    { 0, itLuigifireball_UnkMotion0_Anim, itLuigifireball_UnkMotion0_Phys, itLuigifireball_UnkMotion0_Coll },
 };
 
 void it_802C01AC(Item_GObj* gobj, Vec3* pos, ItemKind kind, float facing_dir)
@@ -61,14 +61,14 @@ void it_802C027C(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C02E4(Item_GObj* gobj)
+bool itLuigifireball_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     --item->xD44_lifeTimer;
     return item->xD44_lifeTimer <= 0 ? true : false;
 }
 
-void it_802C031C(Item_GObj* gobj)
+void itLuigifireball_UnkMotion0_Phys(Item_GObj* gobj)
 {
     ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
@@ -80,7 +80,7 @@ static double calc_dist_2d_accurate(Vec3* v)
     return sqrtf_accurate(VEC2_SQ_LEN(*v));
 }
 
-bool it_802C0368(Item_GObj* gobj)
+bool itLuigifireball_UnkMotion0_Coll(Item_GObj* gobj)
 {
     it_8026D9A0(gobj);
     if (it_8027781C(gobj)) {
@@ -99,37 +99,37 @@ bool it_802C0368(Item_GObj* gobj)
     return false;
 }
 
-bool it_802C0490(Item_GObj* gobj)
+bool it_2725_Logic89_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C0498(Item_GObj* gobj)
+bool it_2725_Logic89_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_802C04B8(Item_GObj* gobj)
+bool it_2725_Logic89_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C04C0(Item_GObj* gobj)
+bool it_2725_Logic89_HitShield(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C04C8(Item_GObj* gobj)
+bool it_2725_Logic89_Absorbed(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802C04D0(Item_GObj* gobj)
+bool it_2725_Logic89_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-void it_802C04F0(Item_GObj* gobj, HSD_GObj* referenced_gobj)
+void it_2725_Logic89_EvtUnk(Item_GObj* gobj, HSD_GObj* referenced_gobj)
 {
     it_8026B894(gobj, referenced_gobj);
 }

@@ -75,7 +75,7 @@ Item_GObj* it_802F0340(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos,
     return spawned;
 }
 
-void it_802F044C(Item_GObj* gobj, Item_GObj* arg1)
+void it_2725_Logic84_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     it_8026B894(gobj, arg1);
 }
@@ -98,7 +98,7 @@ void it_802F0484(HSD_GObj* gobj)
     ip->xDD4_itemVar.masterhandlaser.x8 = attrs->x4;
 }
 
-bool it_802F04F0(Item_GObj* gobj)
+bool itMasterhandlaser_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (it_80272C6C(gobj) == 0) {
@@ -111,9 +111,9 @@ bool it_802F04F0(Item_GObj* gobj)
     return false;
 }
 
-void it_802F059C(Item_GObj* gobj) {}
+void itMasterhandlaser_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-bool it_802F05A0(Item_GObj* gobj)
+bool itMasterhandlaser_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }

@@ -13,8 +13,8 @@
 
 /* 219530 */ void grFigureGet_80219530(bool);
 /* 219534 */ void grFigureGet_80219534(void);
-/* 21959C */ void grFigureGet_8021959C(void);
-/* 2195A0 */ void grFigureGet_802195A0(void);
+/* 21959C */ void grFigureget_UnkStage0_OnLoad(void);
+/* 2195A0 */ void grFigureget_UnkStage0_OnStart(void);
 /* 2195C4 */ bool grFigureGet_802195C4(void);
 /* 2195CC */ UNK_RET grFigureGet_802195CC(UNK_PARAMS);
 /* 2196B4 */ void grFigureGet_802196B4(Ground_GObj*);

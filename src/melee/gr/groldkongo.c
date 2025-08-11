@@ -8,7 +8,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-void grOldKongo_8020F468(void) {}
+void grOldKongo_8020F468(bool arg) {}
 
 /// #grOldKongo_8020F46C
 
@@ -16,7 +16,7 @@ void grOldKongo_8020F4E4(void) {}
 
 /// #grOldKongo_8020F4E8
 
-bool grOldKongo_8020F524(HSD_GObj* gobj)
+bool grOldKongo_8020F524(void)
 {
     return false;
 }
@@ -83,7 +83,7 @@ void grOldKongo_80210450(Ground_GObj* arg) {}
 
 /// #grOldKongo_80210650
 
-bool grOldKongo_80210780(HSD_GObj* gobj)
+DynamicsDesc* grOldKongo_80210780(enum_t gobj)
 {
     return false;
 }

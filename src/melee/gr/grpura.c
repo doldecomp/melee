@@ -82,7 +82,7 @@ void* grPu_803E6E20;
 
 struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
 
-void grPura_80211CFC(int num) {}
+void grPura_80211CFC(bool num) {}
 
 /// #grPura_80211D00
 
@@ -389,7 +389,7 @@ void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
     mpLib_800565DC(5);
 }
 
-DynamicsDesc* grPura_802130C0(int arg0)
+DynamicsDesc* grPura_802130C0(enum_t arg0)
 {
     return false;
 }

@@ -14,13 +14,13 @@
 
 ItemStateTable it_803F7528[] = { {
                                      0,
-                                     it_802BE02C,
+                                     itPeachtoad_UnkMotion0_Anim,
                                      NULL,
                                      NULL,
                                  },
                                  {
                                      1,
-                                     it_802BE168,
+                                     itPeachtoad_UnkMotion1_Anim,
                                      NULL,
                                      NULL,
                                  } };
@@ -83,7 +83,7 @@ Item_GObj* it_802BDE18(Item_GObj* item_gobj, Vec3* pos, Fighter_Part part,
     return NULL;
 }
 
-void it_802BDEFC(Item_GObj* item_gobj)
+void it_2725_Logic91_Destroyed(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -113,7 +113,7 @@ void it_802BDFC0(Item_GObj* item_gobj)
     it_8026B73C(item_gobj);
 }
 
-void it_802BDFE0(Item_GObj* item_gobj)
+void it_2725_Logic91_PickedUp(Item_GObj* item_gobj)
 {
     u8 _[8];
 
@@ -123,7 +123,7 @@ void it_802BDFE0(Item_GObj* item_gobj)
     it_80274574(item_gobj);
 }
 
-bool it_802BE02C(Item_GObj* item_gobj)
+bool itPeachtoad_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -157,7 +157,7 @@ void it_802BE100(Item_GObj* item_gobj)
     it_80274574(item_gobj);
 }
 
-bool it_802BE168(Item_GObj* item_gobj)
+bool itPeachtoad_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -173,7 +173,7 @@ bool it_802BE168(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802BE1F4(Item_GObj* item_gobj, Item_GObj* ref_gobj)
+void it_2725_Logic91_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

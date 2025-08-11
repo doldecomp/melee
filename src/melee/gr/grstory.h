@@ -6,8 +6,8 @@
 #include <dolphin/mtx.h>
 
 /* 1E3030 */ void grStory_801E3030(void);
-/* 1E30A8 */ void grStory_801E30A8(void);
-/* 1E30AC */ void grStory_801E30AC(void);
+/* 1E30A8 */ void grStory_UnkStage0_OnLoad(void);
+/* 1E30AC */ void grStory_UnkStage0_OnStart(void);
 /* 1E30D0 */ bool grStory_801E30D0(void);
 /* 1E30D8 */ Ground_GObj* grStory_801E30D8(int);
 /* 1E31C0 */ void grStory_801E31C0(Ground_GObj*);

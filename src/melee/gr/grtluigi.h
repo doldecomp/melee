@@ -12,8 +12,8 @@
 
 /* 221C10 */ void grTLuigi_80221C10(bool);
 /* 221C14 */ void grTLuigi_80221C14(void);
-/* 221C84 */ void grTLuigi_80221C84(void);
-/* 221C88 */ void grTLuigi_80221C88(void);
+/* 221C84 */ void grTluigi_UnkStage0_OnLoad(void);
+/* 221C88 */ void grTluigi_UnkStage0_OnStart(void);
 /* 221CAC */ bool grTLuigi_80221CAC(void);
 /* 221CB4 */ HSD_GObj* grTLuigi_80221CB4(int);
 /* 221D9C */ void grTLuigi_80221D9C(Ground_GObj*);

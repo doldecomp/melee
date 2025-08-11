@@ -18,21 +18,21 @@ typedef struct {
 ItemStateTable it_803F7FC8[] = {
     {
         0,
-        it_802D30EC,
-        it_802D3120,
-        it_802D3124,
+        itMetamon_UnkMotion0_Anim,
+        itMetamon_UnkMotion0_Phys,
+        itMetamon_UnkMotion0_Coll,
     },
     {
         1,
-        it_802D3150,
-        it_802D3184,
-        it_802D3188,
+        itMetamon_UnkMotion1_Anim,
+        itMetamon_UnkMotion1_Phys,
+        itMetamon_UnkMotion1_Coll,
     },
     {
         -1,
-        it_802D31F4,
-        it_802D3218,
-        it_802D3238,
+        itMetamon_UnkMotion2_Anim,
+        itMetamon_UnkMotion2_Phys,
+        itMetamon_UnkMotion2_Coll,
     },
 };
 
@@ -48,7 +48,7 @@ void it_802D3008(Item_GObj* item_gobj)
 
 void it_802D306C(Item_GObj* item_gobj) {}
 
-void it_802D3070(Item_GObj* item_gobj, Item_GObj* gobj)
+void it_2725_Logic19_EvtUnk(Item_GObj* item_gobj, Item_GObj* gobj)
 {
     it_8026B894(item_gobj, gobj);
 }
@@ -64,7 +64,7 @@ void it_802D30C4(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802D30EC(Item_GObj* item_gobj)
+bool itMetamon_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     GET_ITEM(item_gobj);
     if (!it_80272C6C(item_gobj)) {
@@ -73,15 +73,15 @@ bool it_802D30EC(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802D3120(Item_GObj* item_gobj) {}
+void itMetamon_UnkMotion0_Phys(Item_GObj* item_gobj) {}
 
-bool it_802D3124(Item_GObj* item_gobj)
+bool itMetamon_UnkMotion0_Coll(Item_GObj* item_gobj)
 {
     it_8026E15C(item_gobj, it_802D306C);
     return false;
 }
 
-bool it_802D3150(Item_GObj* item_gobj)
+bool itMetamon_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     if (!it_80272C6C(item_gobj)) {
         return true;
@@ -89,9 +89,9 @@ bool it_802D3150(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802D3184(Item_GObj* item_gobj) {}
+void itMetamon_UnkMotion1_Phys(Item_GObj* item_gobj) {}
 
-bool it_802D3188(Item_GObj* item_gobj)
+bool itMetamon_UnkMotion1_Coll(Item_GObj* item_gobj)
 {
     it_8026E15C(item_gobj, it_802D306C);
     return false;
@@ -103,18 +103,18 @@ void it_802D31B4(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_802D31F4(Item_GObj* item_gobj)
+bool itMetamon_UnkMotion2_Anim(Item_GObj* item_gobj)
 {
     it_80279FF8(item_gobj);
     return false;
 }
 
-void it_802D3218(Item_GObj* item_gobj)
+void itMetamon_UnkMotion2_Phys(Item_GObj* item_gobj)
 {
     it_8027A09C(item_gobj);
 }
 
-bool it_802D3238(Item_GObj* item_gobj)
+bool itMetamon_UnkMotion2_Coll(Item_GObj* item_gobj)
 {
     return it_8027A118(item_gobj, it_802D3090);
 }

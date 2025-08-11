@@ -10,11 +10,11 @@ struct grBigBlueRoute_8020DA9C_t {
     /* +8 */ int x8;
 };
 
-/* 20B864 */ UNK_RET grBigBlueRoute_8020B864(UNK_PARAMS);
-/* 20B89C */ UNK_RET grBigBlueRoute_8020B89C(UNK_PARAMS);
-/* 20B920 */ UNK_RET grBigBlueRoute_8020B920(UNK_PARAMS);
-/* 20B95C */ UNK_RET grBigBlueRoute_8020B95C(UNK_PARAMS);
-/* 20B9CC */ bool grBigBlueRoute_8020B9CC(UNK_PARAMS);
+/* 20B864 */ void grBigBlueRoute_8020B864(bool);
+/* 20B89C */ void grBigBlueRoute_8020B89C(void);
+/* 20B920 */ void grBigBlueRoute_8020B920(void);
+/* 20B95C */ void grBigBlueRoute_8020B95C(void);
+/* 20B9CC */ bool grBigBlueRoute_8020B9CC(void);
 /* 20B9D4 */ UNK_RET grBigBlueRoute_8020B9D4(UNK_PARAMS);
 /* 20BABC */ void grBigBlueRoute_8020BABC(Ground_GObj*);
 /* 20BB00 */ bool grBigBlueRoute_8020BB00(Ground_GObj*);
@@ -47,7 +47,7 @@ struct grBigBlueRoute_8020DA9C_t {
 /* 20DE48 */ UNK_RET grBigBlueRoute_8020DE48(UNK_PARAMS);
 /* 20DEAC */ UNK_RET fn_8020DEAC(UNK_PARAMS);
 /* 20DED4 */ UNK_RET grBigBlueRoute_8020DED4(UNK_PARAMS);
-/* 20DF78 */ bool grBigBlueRoute_8020DF78(UNK_PARAMS);
-/* 20DF80 */ UNK_RET grBigBlueRoute_8020DF80(UNK_PARAMS);
+/* 20DF78 */ DynamicsDesc* grBigBlueRoute_8020DF78(enum_t);
+/* 20DF80 */ bool grBigBlueRoute_8020DF80(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

@@ -2,35 +2,35 @@
 #include <placeholder.h>
 #include "itfire.h"
 
-/// #it_802CC6E4
+/// #it_2725_Logic6_Spawned
 
 void it_802CC740(void) {}
 
-/// #it_802CC744
+/// #it_2725_Logic6_EvtUnk
 
-/// #it_802CC764
+/// #itFire_UnkMotion1_Anim
 
-void it_802CC7A4(Item_GObj* gobj) {}
+void itFire_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_802CC7A8
+/// #itFire_UnkMotion1_Coll
 
 void it_802CC7D4(void) {}
 
 /// #it_802CC7D8
 
-/// #it_802CC860
+/// #itFire_UnkMotion2_Anim
 
-/// #it_802CC91C
+/// #itFire_UnkMotion2_Phys
 
-bool it_802CC93C(Item_GObj* gobj)
+bool itFire_UnkMotion2_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802CC944
 
-/// #it_802CC9B8
+/// #itFire_UnkMotion0_Anim
 
-/// #it_802CC9DC
+/// #itFire_UnkMotion0_Phys
 
-/// #it_802CCA8C
+/// #itFire_UnkMotion0_Coll

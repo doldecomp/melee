@@ -154,8 +154,8 @@ StageData grNLa_803E7F90 = {
     "/GrNLa.dat",
     grLast_8021A740,
     grLast_8021A620,
-    grLast_8021A7C4,
-    grLast_8021A7C8,
+    grLast_UnkStage0_OnLoad,
+    grLast_UnkStage0_OnStart,
     grLast_8021A7EC,
     grLast_8021C740,
     grLast_8021C748,
@@ -179,9 +179,9 @@ static void grLast_8021A740(void)
     Camera_800311CC(30000);
 }
 
-static void grLast_8021A7C4(void) {}
+static void grLast_UnkStage0_OnLoad(void) {}
 
-static void grLast_8021A7C8(void)
+static void grLast_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

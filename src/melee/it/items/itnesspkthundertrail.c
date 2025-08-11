@@ -10,11 +10,11 @@
 
 /// #it_802AC604
 
-/// #it_802AC62C
+/// #itNesspkthundertrail_UnkMotion0_Anim
 
-/// #it_802AC6B0
+/// #itNesspkthundertrail_UnkMotion0_Phys
 
-bool it_802AC8A0(Item_GObj* gobj)
+bool itNesspkthundertrail_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }

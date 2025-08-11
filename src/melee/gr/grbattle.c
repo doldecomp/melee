@@ -26,8 +26,8 @@
 
 static void grBattle_80219C98(bool);
 static void grBattle_80219CA4(void);
-static void grBattle_80219D54(void);
-static void grBattle_80219D58(void);
+static void grBattle_UnkStage0_OnLoad(void);
+static void grBattle_UnkStage0_OnStart(void);
 static bool grBattle_80219D7C(void);
 static HSD_GObj* grBattle_80219D84(int gobj_id);
 static void grBattle_80219E6C(Ground_GObj*);
@@ -129,8 +129,8 @@ StageData grNBa_803E7E38 = {
     "/GrNBa.dat",
     grBattle_80219CA4,
     grBattle_80219C98,
-    grBattle_80219D54,
-    grBattle_80219D58,
+    grBattle_UnkStage0_OnLoad,
+    grBattle_UnkStage0_OnStart,
     grBattle_80219D7C,
     grBattle_8021A610,
     grBattle_8021A618,
@@ -165,9 +165,9 @@ static void grBattle_80219CA4(void)
     grNBa_804D6AC8 = 0;
 }
 
-static void grBattle_80219D54(void) {}
+static void grBattle_UnkStage0_OnLoad(void) {}
 
-static void grBattle_80219D58(void)
+static void grBattle_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }

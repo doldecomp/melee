@@ -67,7 +67,7 @@ typedef struct IceMountainParams {
     float xCC;
 } IceMountainParams;
 
-/* 1F6868 */ void grIceMt_801F6868(int id);
+/* 1F6868 */ void grIceMt_801F6868(bool id);
 /* 1F686C */ void grIceMt_801F686C(void);
 /* 1F7080 */ void grIceMt_801F7080(void);
 /* 1F71DC */ void grIceMt_801F71DC(void);
@@ -144,7 +144,7 @@ typedef struct IceMountainParams {
 /* 1FA7F0 */ UNK_RET grIceMt_801FA7F0(Ground*, UNK_T, UNK_T, UNK_T,
                                       mpLib_GroundEnum);
 /* 1FA854 */ UNK_RET grIceMt_801FA854(void);
-/* 1FA8F8 */ DynamicsDesc* grIceMt_801FA8F8(int id);
+/* 1FA8F8 */ DynamicsDesc* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);
 
 #endif

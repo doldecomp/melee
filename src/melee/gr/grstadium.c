@@ -146,8 +146,8 @@ StageData grPs_803E1334 = {
     "/GrPs",
     grStadium_801D101C,
     grStadium_801D1018,
-    grStadium_801D10C8,
-    grStadium_801D10CC,
+    grStadium_UnkStage0_OnLoad,
+    grStadium_UnkStage0_OnStart,
     grStadium_801D10F0,
     grStadium_801D50B8,
     grStadium_801D50C0,
@@ -181,9 +181,9 @@ void grStadium_801D101C(void)
     mpLib_800581DC(6, 4);
 }
 
-void grStadium_801D10C8(void) {}
+void grStadium_UnkStage0_OnLoad(void) {}
 
-void grStadium_801D10CC(void)
+void grStadium_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

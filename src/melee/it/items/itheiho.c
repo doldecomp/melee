@@ -15,34 +15,34 @@
 #include <baselib/random.h>
 
 /* 2D8894 */ static void it_802D8894(Item_GObj*);
-/* 2D88CC */ static bool it_802D88CC(Item_GObj* gobj);
-/* 2D88D4 */ static void it_802D88D4(Item_GObj*);
-/* 2D8910 */ static bool it_802D8910(Item_GObj* gobj);
+/* 2D88CC */ static bool itHeiho_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2D88D4 */ static void itHeiho_UnkMotion0_Phys(Item_GObj*);
+/* 2D8910 */ static bool itHeiho_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2D8918 */ static void it_802D8918(Item_GObj*);
-/* 2D8984 */ static bool it_802D8984(Item_GObj* gobj);
-/* 2D8A54 */ static void it_802D8A54(Item_GObj*);
-/* 2D8CC8 */ static bool it_802D8CC8(Item_GObj* gobj);
-/* 2D8DB4 */ static bool it_802D8DB4(Item_GObj* gobj);
-/* 2D8DBC */ static void it_802D8DBC(Item_GObj*);
-/* 2D8E44 */ static bool it_802D8E44(Item_GObj* gobj);
-/* 2D8E4C */ static bool it_802D8E4C(Item_GObj* gobj);
-/* 2D8E54 */ static void it_802D8E54(Item_GObj*);
-/* 2D8EA4 */ static bool it_802D8EA4(Item_GObj* gobj);
+/* 2D8984 */ static bool itHeiho_UnkMotion1_Anim(Item_GObj* gobj);
+/* 2D8A54 */ static void itHeiho_UnkMotion1_Phys(Item_GObj*);
+/* 2D8CC8 */ static bool itHeiho_UnkMotion1_Coll(Item_GObj* gobj);
+/* 2D8DB4 */ static bool itHeiho_UnkMotion2_Anim(Item_GObj* gobj);
+/* 2D8DBC */ static void itHeiho_UnkMotion2_Phys(Item_GObj*);
+/* 2D8E44 */ static bool itHeiho_UnkMotion2_Coll(Item_GObj* gobj);
+/* 2D8E4C */ static bool itHeiho_UnkMotion3_Anim(Item_GObj* gobj);
+/* 2D8E54 */ static void itHeiho_UnkMotion3_Phys(Item_GObj*);
+/* 2D8EA4 */ static bool itHeiho_UnkMotion3_Coll(Item_GObj* gobj);
 /* 2D9168 */ static void it_802D9168(Item_GObj*);
-/* 2D9274 */ static bool it_802D9274(Item_GObj* gobj);
-/* 2D9384 */ static void it_802D9384(Item_GObj*);
-/* 2D95F4 */ static bool it_802D95F4(Item_GObj* gobj);
+/* 2D9274 */ static bool itHeiho_UnkMotion4_Anim(Item_GObj* gobj);
+/* 2D9384 */ static void itHeiho_UnkMotion4_Phys(Item_GObj*);
+/* 2D95F4 */ static bool itHeiho_UnkMotion4_Coll(Item_GObj* gobj);
 /* 2D96B0 */ static void it_802D96B0(HSD_GObj* gobj);
 /* 2D9714 */ static void it_802D9714(Item_GObj*);
 /* 2D98AC */ static void it_802D98AC(Item_GObj*);
 /* 2D98C4 */ static void it_802D98C4(HSD_JObj*, Item*);
 
-ItemStateTable it_803F83F0[] = { { -1, it_802D88CC, it_802D88D4, it_802D8910 },
-                                 { 0, it_802D8984, it_802D8A54, it_802D8CC8 },
-                                 { -1, it_802D8DB4, it_802D8DBC, it_802D8E44 },
-                                 { -1, it_802D8E4C, it_802D8E54, it_802D8EA4 },
-                                 { 2, it_802D9274, it_802D9384,
-                                   it_802D95F4 } };
+ItemStateTable it_803F83F0[] = { { -1, itHeiho_UnkMotion0_Anim, itHeiho_UnkMotion0_Phys, itHeiho_UnkMotion0_Coll },
+                                 { 0, itHeiho_UnkMotion1_Anim, itHeiho_UnkMotion1_Phys, itHeiho_UnkMotion1_Coll },
+                                 { -1, itHeiho_UnkMotion2_Anim, itHeiho_UnkMotion2_Phys, itHeiho_UnkMotion2_Coll },
+                                 { -1, itHeiho_UnkMotion3_Anim, itHeiho_UnkMotion3_Phys, itHeiho_UnkMotion3_Coll },
+                                 { 2, itHeiho_UnkMotion4_Anim, itHeiho_UnkMotion4_Phys,
+                                   itHeiho_UnkMotion4_Coll } };
 
 void it_802D8618(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
 {
@@ -65,7 +65,7 @@ void it_802D8688(Item_GObj* gobj)
     if (ip->xDD4_itemVar.heiho.x54 != NULL) {
         it_8028F968(ip->xDD4_itemVar.heiho.x54);
         it_8028F9D8(ip->xDD4_itemVar.heiho.x54, &ip->pos, 1.0F);
-        it_8028FD7C(ip->xDD4_itemVar.heiho.x54);
+        it_3F14_Logic18_PickedUp(ip->xDD4_itemVar.heiho.x54);
     }
     ip->xDD4_itemVar.heiho.x2C = 0;
     ip->xDD4_itemVar.heiho.x22 = 0;
@@ -90,12 +90,12 @@ void it_802D8894(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802D88CC(Item_GObj* gobj)
+bool itHeiho_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return 0;
 }
 
-void it_802D88D4(Item_GObj* gobj)
+void itHeiho_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.heiho.x24 == 0) {
@@ -105,7 +105,7 @@ void it_802D88D4(Item_GObj* gobj)
     ip->xDD4_itemVar.heiho.x24 = ip->xDD4_itemVar.heiho.x24 - 1;
 }
 
-bool it_802D8910(Item_GObj* gobj)
+bool itHeiho_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return 0;
 }
@@ -120,7 +120,7 @@ void it_802D8918(Item_GObj* gobj)
     ip->on_accessory = it_802D96B0;
 }
 
-static inline void it_802D8984_inline(Item_GObj* gobj, int i)
+static inline void itHeiho_UnkMotion1_Anim_inline(Item_GObj* gobj, int i)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.heiho.x24 = 0;
@@ -129,14 +129,14 @@ static inline void it_802D8984_inline(Item_GObj* gobj, int i)
     ip->on_accessory = it_802D96B0;
 }
 
-bool it_802D8984(Item_GObj* gobj)
+bool itHeiho_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
     it_802D98C4(ip->xBBC_dynamicBoneTable->bones[1], ip);
     if (it_80272C6C(gobj) == 0) {
-        it_802D8984_inline(gobj, 1);
+        itHeiho_UnkMotion1_Anim_inline(gobj, 1);
     }
     if (ip->xDD4_itemVar.heiho.x2C > 0x3C0) {
         HSD_AObjSetFlags(child->aobj, 0x10000000U);
@@ -144,7 +144,7 @@ bool it_802D8984(Item_GObj* gobj)
     return 0;
 }
 
-void it_802D8A54(Item_GObj* gobj)
+void itHeiho_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -167,7 +167,7 @@ void it_802D8A54(Item_GObj* gobj)
     }
 }
 
-bool it_802D8CC8(Item_GObj* gobj)
+bool itHeiho_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Article* article = ip->xC4_article_data;
@@ -178,12 +178,12 @@ bool it_802D8CC8(Item_GObj* gobj)
         ip->x40_vel.x = ip->facing_dir * attr[ip->xDD4_itemVar.heiho.x21 + 1];
         ip->xDD4_itemVar.heiho.x24 = 0x14;
     } else if (temp_r31 == 1) {
-        it_802D8984_inline(gobj, 1);
+        itHeiho_UnkMotion1_Anim_inline(gobj, 1);
     }
     return 0;
 }
 
-bool it_802D8DB4(Item_GObj* gobj)
+bool itHeiho_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return 0;
 }
@@ -203,7 +203,7 @@ static void it_802D8EC8_inline(Item_GObj* gobj)
     }
 }
 
-void it_802D8DBC(Item_GObj* gobj)
+void itHeiho_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     ItemAttr* it_attr = ip->xCC_item_attr;
@@ -214,17 +214,17 @@ void it_802D8DBC(Item_GObj* gobj)
     it_80274A64(gobj);
 }
 
-bool it_802D8E44(Item_GObj* gobj)
+bool itHeiho_UnkMotion2_Coll(Item_GObj* gobj)
 {
     return 0;
 }
 
-bool it_802D8E4C(Item_GObj* gobj)
+bool itHeiho_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return 0;
 }
 
-void it_802D8E54(Item_GObj* gobj)
+void itHeiho_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
@@ -235,7 +235,7 @@ void it_802D8E54(Item_GObj* gobj)
     it_802D9168(gobj);
 }
 
-bool it_802D8EA4(Item_GObj* gobj)
+bool itHeiho_UnkMotion3_Coll(Item_GObj* gobj)
 {
     it_8026DA70(gobj);
     return 0;
@@ -298,14 +298,14 @@ void it_802D9168(Item_GObj* gobj)
     ip->on_accessory = it_802D96B0;
 }
 
-bool it_802D9274(Item_GObj* gobj)
+bool itHeiho_UnkMotion4_Anim(Item_GObj* gobj)
 {
     HSD_JObj* child;
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     it_802D98C4(ip->xBBC_dynamicBoneTable->bones[1], ip);
     if (it_80272C6C(gobj) == 0) {
-        it_802D8984_inline(gobj, 4);
+        itHeiho_UnkMotion1_Anim_inline(gobj, 4);
     }
     child = HSD_JObjGetChild(jobj);
     if (ip->xDD4_itemVar.heiho.x2C > 0x3C0) {
@@ -320,7 +320,7 @@ bool it_802D9274(Item_GObj* gobj)
     return 0;
 }
 
-void it_802D9384(Item_GObj* gobj)
+void itHeiho_UnkMotion4_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -343,7 +343,7 @@ void it_802D9384(Item_GObj* gobj)
     }
 }
 
-bool it_802D95F4(Item_GObj* gobj)
+bool itHeiho_UnkMotion4_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Article* article = ip->xC4_article_data;

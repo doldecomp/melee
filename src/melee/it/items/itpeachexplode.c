@@ -10,13 +10,13 @@
 ItemStateTable it_803F7488[] = {
     {
         0,
-        it_802BD2EC,
+        itPeachexplode_UnkMotion1_Anim,
         NULL,
         NULL,
     },
     {
         1,
-        it_802BD2EC,
+        itPeachexplode_UnkMotion1_Anim,
         NULL,
         NULL,
     },
@@ -46,7 +46,7 @@ Item_GObj* it_802BD158(Item_GObj* gobj, Vec3* pos, bool arg2, float dir)
     return NULL;
 }
 
-bool it_802BD240(Item_GObj* arg0)
+bool it_2725_Logic55_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
@@ -70,12 +70,12 @@ void it_802BD248(Item_GObj* item_gobj, Item_GObj* owner, bool arg2)
     it_80274574(item_gobj);
 }
 
-bool it_802BD2EC(Item_GObj* item_gobj)
+bool itPeachexplode_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     return it_802751D8(item_gobj);
 }
 
-void it_802BD30C(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic55_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

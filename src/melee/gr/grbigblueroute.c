@@ -100,7 +100,7 @@ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* arg0)
 
 /// #grBigBlueRoute_8020DED4
 
-bool grBigBlueRoute_8020DF78(void)
+DynamicsDesc* grBigBlueRoute_8020DF78(enum_t arg)
 {
     return false;
 }

@@ -171,12 +171,12 @@ void grCastle_801CF74C(Ground_GObj* arg) {}
 
 /// #grCastle_801D0A9C
 
-bool grCastle_801D0B04(void)
+DynamicsDesc* grCastle_801D0B04(enum_t arg)
 {
     return false;
 }
 
-bool grCastle_801D0B0C(Vec3* v, u32 arg1, HSD_JObj* jobj)
+bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 pos;
     float temp_f30;

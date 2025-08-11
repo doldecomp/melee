@@ -2,32 +2,32 @@
 
 /// #it_802C837C
 
-/// #it_802C847C
+/// #it_2725_Logic112_DmgDealt
 
 /// #it_802C84A0
 
-/// #it_802C8540
+/// #itGamewatchchef_UnkMotion0_Anim
 
-/// #it_802C8690
+/// #itGamewatchchef_UnkMotion0_Phys
 
-/// #it_802C86D0
+/// #itGamewatchchef_UnkMotion0_Coll
 
 /// #it_802C875C
 
-/// #it_802C87B4
+/// #itGamewatchchef_UnkMotion1_Anim
 
-void it_802C8828(Item_GObj* gobj) {}
+void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_802C882C
+/// #itGamewatchchef_UnkMotion1_Coll
 
-/// #it_802C88E4
+/// #it_2725_Logic112_Clanked
 
-/// #it_802C8940
+/// #it_2725_Logic112_HitShield
 
-/// #it_802C899C
+/// #it_2725_Logic112_Absorbed
 
-/// #it_802C8A08
+/// #it_2725_Logic112_ShieldBounced
 
-/// #it_802C8A28
+/// #it_2725_Logic112_Reflected
 
-/// #it_802C8B08
+/// #it_2725_Logic112_EvtUnk
