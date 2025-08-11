@@ -13,7 +13,6 @@
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/psappsrt.h>
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74
@@ -125,10 +124,10 @@ struct StageInfo {
 };
 
 typedef struct StageCallbacks {
-    /*  +0 */ void (*callback0)(HSD_GObj*); ///< initialization callback
-    /*  +4 */ bool (*callback1)(HSD_GObj*);
-    /*  +8 */ void (*callback2)(HSD_GObj*);
-    /*  +C */ void (*callback3)(HSD_GObj*);
+    /*  +0 */ void (*callback0)(Ground_GObj*); ///< initialization callback
+    /*  +4 */ bool (*callback1)(Ground_GObj*);
+    /*  +8 */ void (*callback2)(Ground_GObj*);
+    /*  +C */ void (*callback3)(Ground_GObj*);
     /* +10 */ union {
         /* +10 */ u32 flags;
         struct {
@@ -150,8 +149,8 @@ typedef struct StageData {
     char* data1;
     void (*callback0)(void);
     void (*callback1)(int);
-    void (*callback2)(void); ///< on load callback
-    void (*callback3)(void); ///< on GO! callback
+    void (*OnLoad)(void);
+    void (*OnStart)(void);
     bool (*callback4)(void);
     DynamicsDesc* (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);
@@ -525,7 +524,7 @@ struct grStadium_Display {
 struct grStadium_type9_GroundVars {
     /* C4:0 */ u8 xC4_b0 : 1;
     /* C4:1 */ u8 xC4_b1 : 1;
-    /* C8   */ UnkGeneratorStruct* xC8;
+    /* C8   */ HSD_Generator* xC8;
     /* CC   */ HSD_GObj* xCC_gobj;
     /* D0   */ HSD_GObj* xD0_gobj;
     /* D4   */ HSD_JObj* xD4_jobj;
@@ -600,7 +599,7 @@ struct Last_GroundVars {
     /* +10 gp+D4    */ float xD4;
     /* +14 gp+D8    */ float xD8;
     /* +18 gp+DC    */ float xDC;
-    /* +1C gp+E0    */ UnkGeneratorStruct* xE0;
+    /* +1C gp+E0    */ HSD_Generator* xE0;
 };
 
 struct Map_GroundVars {

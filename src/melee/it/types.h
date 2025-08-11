@@ -33,39 +33,36 @@ struct CameraBoxFlags {
 };
 
 struct flag32 {
-    union {
-        struct {
-            u32 x0 : 1;
-            u32 x1 : 1;
-            u32 x2 : 1;
-            u32 x3 : 1;
-            u32 x4 : 1;
-            u32 x5 : 1;
-            u32 x6 : 1;
-            u32 x7 : 1;
-            u32 x8 : 1;
-            u32 x9 : 1;
-            u32 xA : 1;
-            u32 xB : 1;
-            u32 xC : 1;
-            u32 xD : 1;
-            u32 xE : 1;
-            u32 xF : 4;
-            u32 x13 : 1;
-            u32 x14 : 1;
-            u32 x15 : 1;
-            u32 x16 : 1;
-            u32 x17 : 2;
-            u32 x19 : 1;
-            u32 x1A : 1;
-            u32 x1B : 1;
-            u32 x1C : 1;
-            u32 x1D : 1;
-            u32 x1E : 1;
-            u32 x1F : 1;
-        } flags;
-        u32 word;
-    };
+    struct {
+        u32 x0 : 1;
+        u32 x1 : 1;
+        u32 x2 : 1;
+        u32 x3 : 1;
+        u32 x4 : 1;
+        u32 x5 : 1;
+        u32 x6 : 1;
+        u32 x7 : 1;
+        u32 x8 : 1;
+        u32 x9 : 1;
+        u32 xA : 1;
+        u32 xB : 1;
+        u32 xC : 1;
+        u32 xD : 1;
+        u32 xE : 1;
+        u32 xF : 4;
+        u32 x13 : 1;
+        u32 x14 : 1;
+        u32 x15 : 1;
+        u32 x16 : 1;
+        u32 x17 : 2;
+        u32 x19 : 1;
+        u32 x1A : 1;
+        u32 x1B : 1;
+        u32 x1C : 1;
+        u32 x1D : 1;
+        u32 x1E : 1;
+        u32 x1F : 1;
+    } flags;
 };
 
 struct DynamicBoneTable {
@@ -103,10 +100,10 @@ struct ItemAttr {
     f32 x18;
     f32 x1C_damage_mul; // collision related? referenced on taking damage @
                         // 80270f90
-    ECB x20;
+    itECB x20;
     Vec2 x30_unk;        // 0x34
     Vec2 x38_grab_range; // 0x38
-    ECB x40;
+    itECB x40;
     f32 x50;       // 0x50
     f32 x54;       // 0x54
     f32 x58;       // 0x58
@@ -150,7 +147,7 @@ struct ItemStateDesc {
     HSD_MatAnimJoint* x4_matanim_joint;
 
     /// @at{0} @sz{4}
-    UNK_T x8_parameters;
+    HSD_ShapeAnimJoint* x8_parameters;
 
     /// @at{0} @sz{4}
     UNK_T xC_script;
@@ -303,19 +300,16 @@ struct Item {
     } x5D4_hitboxes[4];
     u32 xAC4_ignoreItemID; // Cannot hit items with this index?
     u8 xAC8_hurtboxNum;    // Number of hurtboxes this item has
-    HurtCapsule
-        xACC_itemHurtbox[2]; // xACC, xB18
-                             // Are these really size 0x4C? Code in itcoll.c
-                             // and it_266F.c adds 0x44 to iterate through.
-                             // (Conversely can see adding 0x4C to iterate in
-                             // ftcoll.c) Can see how vars don't line up in
-                             // it_80274D6C and it_80274DAC
+    HurtCapsule xACC_itemHurtbox[2]; // xACC, xB10
+    Vec2 xB54;
+    f32 xB5C;
+    f32 xB60;
     f32 xB64;
     u8 xB68; // int for ItemDynamics->count?
     u8 xB69;
     u8 xB6A;
     u8 xB6B;
-    struct {
+    struct xB6C_t {
         Vec3 xB6C;
         // u32 xB6C; // struct DynamicsData* for DynamicsDesc->data?
         // u32 xB70; // int for DynamicsDesc->count?
@@ -347,11 +341,11 @@ struct Item {
     u32 xBC8;
     Vec2 xBCC_unk;
     Vec2 xBD4_grabRange;
-    ECB xBDC;
-    ECB xBEC;
-    ECB xBFC;
-    ECB xC0C;
-    ECB xC1C;
+    itECB xBDC;
+    itECB xBEC;
+    itECB xBFC;
+    itECB xC0C;
+    itECB xC1C;
     s32 xC2C;
     s32 xC30;
 
@@ -503,14 +497,8 @@ struct Item {
     union Struct2070 xD90; // some bit struct/union
     Vec2 xD94;
     S32Vec2 xD9C;
-    union {
-        UnkFlagStruct xDA4_flag;
-        u32 xDA4_word;
-    };
-    union {
-        UnkFlagStruct xDA8_flag;
-        u16 xDA8_short;
-    };
+    u32 xDA4_word;
+    u16 xDA8_short;
     union {
         UnkFlagStruct xDAA_flag; // Develop mode stuff?
         u8 xDAA_byte;
@@ -520,7 +508,7 @@ struct Item {
     u32 xDB4_itcmd_var2;
     u32 xDB8_itcmd_var3;
     u32 xDBC_itcmd_var4;
-    flag32 xDC0;
+    u32 xDC0;
     u32 xDC4;
     flag32 xDC8_word;
     struct {
@@ -541,7 +529,9 @@ struct Item {
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
+        itClimbersBlizzard_ItemVars climbersblizzard;
         itCoin_ItemVars coin;
+        itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
@@ -570,6 +560,7 @@ struct Item {
         itLGunRay_ItemVars lgunray;
         itLinkArrow_ItemVars linkarrow;
         itLinkBomb_ItemVars linkbomb;
+        itLinkBoomerang_ItemVars linkboomerang;
         itLinkBow_ItemVars linkbow;
         itLinkHookshot_ItemVars linkhookshot;
         itMBall_ItemVars mball;
@@ -589,6 +580,8 @@ struct Item {
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
         itWhiteBea_ItemVars whitebea;
+        itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
+        itMasterHandBullet_ItemVars masterhandbullet;
         itMasterHandLaser_ItemVars masterhandlaser;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
@@ -725,7 +718,7 @@ struct HSD_ObjAllocUnk2 {
     // float x8;
     // float xC;
     // u8 pad_10[0xB0 - 0x10];
-    ECB ecb_arr[11];
+    itECB ecb_arr[11];
     int xB0;
     int xB4;
     int xB8;
@@ -736,7 +729,7 @@ struct HSD_ObjAllocUnk2 {
     u32 x144;
     u32 x148;
     u32 x14C;
-    u32 x150; // num of ECB/Vec3's with data?
+    u32 x150; // num of itECB/Vec3's with data?
     UnkFlagStruct x154;
 };
 

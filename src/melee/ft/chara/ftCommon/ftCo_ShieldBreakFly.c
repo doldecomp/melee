@@ -20,7 +20,7 @@
 
 void ftCo_80098B20(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 205, 64, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
@@ -30,7 +30,7 @@ void ftCo_80098B20(Fighter_GObj* gobj)
         fp->x2222_b3 = true;
     }
     ftCo_SpawnEf(gobj, fp->parts[fp->ft_data->x8->x11].joint, 0, 1051);
-    ft_80088148(fp, 130, 127, 64);
+    ft_PlaySFX(fp, 130, 127, 64);
     ftCommon_8007EBAC(fp, 24, 0U);
     ftColl_8007B62C(gobj, 2);
 }

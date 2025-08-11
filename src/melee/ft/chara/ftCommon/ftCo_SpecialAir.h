@@ -3,6 +3,6 @@
 
 #include "ftCommon/forward.h"
 
-/* 09614C */ bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj);
+/* 09614C */ bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj);
 
 #endif

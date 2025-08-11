@@ -1,10 +1,11 @@
 #include "db.h"
 
 #include <sysdolphin/baselib/memory.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
 #include <melee/un/un_2FC9.h>
+#include <melee/un/un_3028.h>
 
 static struct {
     GXColor bg;

@@ -18,16 +18,16 @@
 /* 1A5618 */ void gm_801A5618(MinorScene*, struct VsModeData*, int); /// CSS_Enter
 /* 1A5680 */ void gm_801A5680(MinorScene*, struct VsModeData*); /// CSS_Exit
 /* 1A5754 */ void gm_801A5754(MinorScene*, struct VsModeData*); /// SSS_Enter
-/* 1A57A8 */ void gm_801A57A8(MinorScene*, struct VsModeData*, s32); /// SSS_Exit
+/* 1A57A8 */ void gm_801A57A8(MinorScene*, struct VsModeData*, u8); /// SSS_Exit
 /* 1A583C */ void gm_801A583C(MinorScene*, struct VsModeData*,
     void (*callback)(StartMeleeData*, StartMeleeData*),
     void (*callback2)(PlayerInitData*, PlayerInitData*)); /// Match_Enter
-/* 1A5AF0 */ void gm_801A5AF0(MinorScene*, u32, u32); // Match_Exit
+/* 1A5AF0 */ void gm_801A5AF0(MinorScene*, u8, u8); // Match_Exit
 /* 1A5C3C */ void gm_801A5C3C(MinorScene*, struct VsModeData*,
     void (*callback)(StartMeleeData*, StartMeleeData*),
     void (*callback2)(PlayerInitData*, PlayerInitData*)); /// SuddenDeath_Enter ??
 /* 1A5EC8 */ void gm_801A5EC8(MinorScene*); /// SuddenDeath_Exit ??
 /* 1A5F00 */ void gm_801A5F00(MinorScene*); /// Results_Enter ??
-/* 1A5F64 */ void gm_801A5F64(MinorScene*, struct VsModeData*, int); /// Results_Exit ??
+/* 1A5F64 */ void gm_801A5F64(MinorScene*, struct VsModeData*, u8); /// Results_Exit ??
 
 #endif

@@ -44,10 +44,10 @@ typedef enum cmd_var_idx {
     cmd_unk0_bool,
 } cmd_var_idx;
 
-/* 08C22C */ static bool checkItemThrow(ftCo_GObj* gobj, float stick_x_sign);
-/* 08C348 */ static void decideFighter(ftCo_GObj* gobj, float stick_x_sign,
+/* 08C22C */ static bool checkItemThrow(Fighter_GObj* gobj, float stick_x_sign);
+/* 08C348 */ static void decideFighter(Fighter_GObj* gobj, float stick_x_sign,
                                        float stick_angle);
-/* 08C3E0 */ static void doEnter(ftCo_GObj* gobj, float stick_angle);
+/* 08C3E0 */ static void doEnter(Fighter_GObj* gobj, float stick_angle);
 
 static bool checkLStick(Fighter* fp)
 {
@@ -60,10 +60,10 @@ static bool checkLStick(Fighter* fp)
     return false;
 }
 
-bool ftCo_AttackS4_CheckInput(ftCo_GObj* gobj)
+bool ftCo_AttackS4_CheckInput(Fighter_GObj* gobj)
 {
     float stick_x_sign, stick_angle;
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (checkLStick(fp)) {
         stick_x_sign = fp->input.lstick.x >= 0 ? (float) +1 : -1;
         stick_angle = ftCo_GetLStickAngle(fp);
@@ -92,10 +92,10 @@ static bool checkFacingDir(Fighter* fp)
 }
 
 /// @todo Can maybe be combined with #ftCo_AttackS4_CheckInput
-bool ftCo_AttackS4_8008C114(ftCo_GObj* gobj)
+bool ftCo_AttackS4_8008C114(Fighter_GObj* gobj)
 {
     float stick_x_sign, stick_angle;
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (checkFacingDir(fp)) {
         stick_x_sign = fp->facing_dir;
         stick_angle = ftCo_GetLStickAngle(fp);
@@ -112,9 +112,9 @@ bool ftCo_AttackS4_8008C114(ftCo_GObj* gobj)
     return true;
 }
 
-static bool checkItemThrow(ftCo_GObj* gobj, float stick_x_sign)
+static bool checkItemThrow(Fighter_GObj* gobj, float stick_x_sign)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->item_gobj != NULL) {
         if (fp->input.held_inputs & HSD_PAD_LR ||
             it_8026B30C(fp->item_gobj) == 0 ||
@@ -142,7 +142,7 @@ static bool checkItemThrow(ftCo_GObj* gobj, float stick_x_sign)
 
 void decideFighter(HSD_GObj* gobj, float stick_x_sign, float stick_angle)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = stick_x_sign;
     switch (fp->kind) {
     case FTKIND_NESS:
@@ -166,9 +166,9 @@ void decideFighter(HSD_GObj* gobj, float stick_x_sign, float stick_angle)
     }
 }
 
-static void doEnter(ftCo_GObj* gobj, float stick_angle)
+static void doEnter(Fighter_GObj* gobj, float stick_angle)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid;
     if (stick_angle > p_ftCommonData->xB8 &&
         ftData_80085FD4(fp, ftCo_MS_AttackS4S)->x8 != NULL)
@@ -196,7 +196,7 @@ static void doEnter(ftCo_GObj* gobj, float stick_angle)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCo_AttackS4_Anim(ftCo_GObj* gobj)
+void ftCo_AttackS4_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -205,7 +205,7 @@ void ftCo_AttackS4_Anim(ftCo_GObj* gobj)
 
 void ftCo_AttackS4_IASA(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->allow_interrupt) {
         RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
         RETURN_IF(ftCo_Attack100_CheckInput(gobj));
@@ -232,12 +232,12 @@ void ftCo_AttackS4_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftCo_AttackS4_Phys(ftCo_GObj* gobj)
+void ftCo_AttackS4_Phys(Fighter_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
-void ftCo_AttackS4_Coll(ftCo_GObj* gobj)
+void ftCo_AttackS4_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }

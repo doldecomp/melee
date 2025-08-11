@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itgamewatchrescue.h"
 
 /// #it_802C8038
 
@@ -11,13 +12,13 @@
 
 /// #it_802C8208
 
-/// #it_802C8240
+/// #itGamewatchrescue_UnkMotion1_Anim
 
-void it_802C8350(void) {}
+void itGamewatchrescue_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-bool it_802C8354(void)
+bool itGamewatchrescue_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802C835C
+/// #it_2725_Logic81_EvtUnk

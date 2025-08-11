@@ -1,6 +1,6 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "mn/mn_2295.h"
+#include "mn/mnmain.h"
 #include "mn/types.h"
 
 #include <baselib/gobj.h>

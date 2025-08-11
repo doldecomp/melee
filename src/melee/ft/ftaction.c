@@ -329,7 +329,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
     char part;
     u32 temp_r4_2;
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     HitCapsule* hit;
     if ((((u8) M2C_FIELD(cmd_x8, u8*, 0xF) >> 3U) & 1) &&
         fp->x1064_thrownHitbox.owner == NULL)
@@ -347,7 +347,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, FtCmdState* cmd)
         temp_r3 = cmd->x8;
         part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xB);
         if (((u8) M2C_FIELD(temp_r3, u8*, 2) >> 2U) & 1) {
-            hit->jobj = fp->parts[ftParts_8007500C(fp, part)].joint;
+            hit->jobj = fp->parts[ftParts_GetBoneIndex(fp, part)].joint;
         } else {
             hit->jobj = fp->parts[(int) part].joint;
         }
@@ -436,7 +436,7 @@ void ftAction_8007169C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     u8 _[8] = { 0 };
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     *(float*) (fp + (((((u16) *cmd_x8 >> 7U) & 7) * 0x138) + 0x930)) =
         0.003906f * (float) (*cmd_x8 & 0x7FFFFF);
     cmd->x8 += 4;
@@ -452,7 +452,7 @@ void ftAction_80071708(Fighter_GObj* gobj, FtCmdState* cmd)
     char* cmd_x8 = cmd->x8;
     u8 temp_r3 = (u8) cmd_x8[3];
     int temp_r0 = (temp_r3 >> 1U) & 1;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     HitCapsule* hit = &fp->x914[(((u32) *cmd_x8 >> 2U) & 0xFFFFFF)];
     switch (temp_r0) {
     case 0:
@@ -501,7 +501,7 @@ void ftAction_80071810(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int* cmd_x8 = (int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     u8 temp_r0 = *(u8*) cmd_x8 & 3;
 
     switch (temp_r0) {
@@ -523,7 +523,7 @@ void ftAction_80071820(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     int cmd_x8 = *(int*) cmd->x8 & 0x03FFFFFF;
     switch (cmd_x8) {
     case 0:
@@ -539,35 +539,35 @@ void ftAction_800718A4(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071908(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->throw_flags_b1 = true;
     cmd->x8 += 4;
 }
 
 void ftAction_8007192C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->throw_flags_b2 = true;
     cmd->x8 += 4;
 }
 
 void ftAction_80071950(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->allow_interrupt = true;
     cmd->x8 += 4;
 }
 
 void ftAction_80071974(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->throw_flags_b0 = true;
     cmd->x8 += 4;
 }
 
 void ftAction_80071998(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     int temp_r0 = *(int*) cmd->x8 & 0x03FFFFFF;
     switch (temp_r0) {
     case 0:
@@ -610,7 +610,7 @@ void ftAction_80071A9C(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     if (!(*(int*) cmd->x8 & 0x03FFFFFF) || fp->x197C != NULL) {
         fp->x2218_b1 = true;
@@ -621,7 +621,7 @@ void ftAction_80071AE8(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071B28(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x2218_b2 = ftcmd;
     cmd->x8 += 4;
 }
@@ -637,7 +637,7 @@ void ftAction_80071B50(Fighter_GObj* gobj, FtCmdState* cmd)
     u8 temp_r6_2;
 
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     temp_r8 = (s8) ((u16) *cmd_x8 >> 2U);
     cmd->x8 = cmd_x8 + 4;
     if (temp_r8 < 0xA) {
@@ -652,8 +652,8 @@ void ftAction_80071B50(Fighter_GObj* gobj, FtCmdState* cmd)
                 temp_r6_2 = M2C_FIELD(temp_r6, u8*, 3);
                 switch (temp_r8) {
                 case 0:
-                    ft_80088148(fp, temp_r4_2, (int) temp_r5_2,
-                                (int) temp_r6_2);
+                    ft_PlaySFX(fp, temp_r4_2, (int) temp_r5_2,
+                               (int) temp_r6_2);
                     break;
                 case 1:
                     ft_80088478(fp, temp_r4_2, (int) temp_r5_2,
@@ -715,7 +715,7 @@ void ftAction_80071CA4(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80071CCC(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtSFX* sfx = fp->ft_data->x4C_sfx;
     FtSFXArr* sfx_smash = sfx->smash;
     if (sfx_smash == NULL) {
@@ -795,7 +795,7 @@ void ftAction_80071F34(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x221E_b4 = ftcmd;
     cmd->x8 += 4;
 }
@@ -803,7 +803,7 @@ void ftAction_80071F78(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80071FA0(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x221E_b5 = ftcmd;
     cmd->x8 += 4;
 }
@@ -888,7 +888,7 @@ void ftAction_80071FC8(Fighter_GObj* gobj, FtCmdState* cmd)
         cmd->x8 += 4;
         switch (temp_r28) {
         case 0:
-            ft_80088148(fp, var_r27, (int) temp_r30, (int) temp_r29);
+            ft_PlaySFX(fp, var_r27, (int) temp_r30, (int) temp_r29);
             return;
         case 1:
             ft_80088478(fp, var_r27, (int) temp_r30, (int) temp_r29);
@@ -937,7 +937,7 @@ void ftAction_80072320(Fighter_GObj* gobj, FtCmdState* cmd)
     char* temp_r4;
     u8 temp_r0;
     u8 temp_r29;
-    void* temp_r31;
+    Fighter* temp_r31;
 
     var_f31 = M2C_ERROR(saved_reg_f31);
     temp_r4 = cmd->x8;
@@ -968,23 +968,20 @@ void ftAction_80072320(Fighter_GObj* gobj, FtCmdState* cmd)
     case 0:
         sp8 = 0;
         spC = -1;
-        lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-        M2C_FIELD(temp_r31, int*, 0x2160) = lbAudioAx_800264E4();
+        M2C_FIELD(temp_r31, int*, 0x2160) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 1:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x36;
         spC = -1;
-        lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-        M2C_FIELD(temp_r31, int*, 0x214C) = lbAudioAx_800264E4();
+        M2C_FIELD(temp_r31, int*, 0x214C) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 2:
         if (!(((u8) M2C_FIELD(temp_r31, u8*, 0x2225) >> 1U) & 1)) {
             sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
                   (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x1E;
             spC = -1;
-            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-            M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4();
+            M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
             return;
         }
         temp_r0_2 = M2C_FIELD(temp_r31, int*, 4);
@@ -1002,37 +999,32 @@ void ftAction_80072320(Fighter_GObj* gobj, FtCmdState* cmd)
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x1E;
         spC = -1;
-        lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-        M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4();
+        M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 3:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x42;
         spC = -1;
-        lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-        M2C_FIELD(temp_r31, int*, 0x2150) = lbAudioAx_800264E4();
+        M2C_FIELD(temp_r31, int*, 0x2150) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 4:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x4E;
         spC = -1;
-        lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-        M2C_FIELD(temp_r31, int*, 0x2154) = lbAudioAx_800264E4();
+        M2C_FIELD(temp_r31, int*, 0x2154) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 5:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x5A;
         spC = -1;
-        lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-        M2C_FIELD(temp_r31, int*, 0x2158) = lbAudioAx_800264E4();
+        M2C_FIELD(temp_r31, int*, 0x2158) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 6:
         if (!(((u8) M2C_FIELD(temp_r31, u8*, 0x2225) >> 1U) & 1)) {
             sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
                   (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x2A;
             spC = -1;
-            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4();
+            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
             return;
         }
         temp_r0_3 = M2C_FIELD(temp_r31, int*, 4);
@@ -1045,11 +1037,10 @@ void ftAction_80072320(Fighter_GObj* gobj, FtCmdState* cmd)
             }
         } else {
         block_31:
-            sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-                  (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x2A;
+            sp8 = temp_r31->player_id +
+                  temp_r31->x221F_b4 + 0x2A;
             spC = -1;
-            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31);
-            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4();
+            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         }
         break;
     }
@@ -1157,7 +1148,7 @@ void ftAction_800729C4(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_800729D4(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     char* cmd_x8 = cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     int temp_r0 = (u8) M2C_FIELD(cmd_x8, s8*, 0) & 3;
     int temp_r4 = ((u32) M2C_FIELD(cmd_x8, s8*, 0) >> 0xEU) & 0x3FF;
     switch (temp_r0) {
@@ -1207,19 +1198,18 @@ void ftAction_80072B04(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80072B14(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x221E_b1 = ftcmd;
     cmd->x8 += 4;
 }
 
 void ftAction_80072B3C(Fighter_GObj* gobj, FtCmdState* cmd)
 {
-    u32 cmd_x8;
-    ftCo_Fighter* fp = gobj->user_data;
-    cmd_x8 = *cmd->x8;
-    fp->x2100 = (s8) ((int) ((cmd_x8 << 7) | ((cmd_x8 >> 0x19U) & 0x40)) >> 7);
-    fp->x2101 = (u8) ((M2C_FIELD(fp, u8*, 0x2101) & ~1) |
-                      (((int) ((u8) *cmd->x8 << 0x1E) >> 0x1F) & 1));
+    int cmd_x8;
+    Fighter* fp = gobj->user_data;
+    cmd_x8 = *(int*) cmd->x8 << 7;
+    fp->x2100 = cmd_x8 >> 7;
+    fp->x2101_bits_8 = (*cmd->x8 << 30) >> 31;
     cmd->x8 += 4;
 }
 
@@ -1231,7 +1221,7 @@ void ftAction_80072B84(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80072B94(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     u32 cmd_x8 = *cmd->x8;
     // ftCo_8009E318((int) ((cmd_x8 << 6) | ((cmd_x8 >> 0x1AU) & 0x20)) >> 6,
     // fp,
@@ -1270,7 +1260,7 @@ void ftAction_80072C6C(Fighter_GObj* gobj, FtCmdState* cmd)
 void ftAction_80072CB0(Fighter_GObj* gobj, FtCmdState* cmd)
 {
     int ftcmd = *(int*) cmd->x8;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x2225_b2 = ftcmd;
     cmd->x8 += 4;
 }
@@ -1284,7 +1274,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, FtCmdState* cmd)
     Vec3 vec1;
     Vec3 vec0;
     u8 var_r5;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ivec1.y = 1;
     if (ft_80084BFC(gobj, &ivec1.z, &ivec1.y) != 0) {
         if (ivec1.z != -1) {
@@ -1333,7 +1323,7 @@ void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
     int* sp40;
     UNK_T sp38;
     IntVec3 ivec0;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Vec3 vec1;
     Vec3 vec0;
     ivec1.y = 1;
@@ -1361,7 +1351,7 @@ void ftAction_80072E4C(Fighter_GObj* gobj, FtCmdState* cmd)
         vec0.x = 0.0f;
         ftCo_8009F834(gobj, ivec1.x, 0, 0, 0, &vec1, &vec0, 0.0f);
         if (ivec1.y != 0) {
-            ft_80088148(fp, 0x46, 0x7F, 0x40);
+            ft_PlaySFX(fp, 0x46, 0x7F, 0x40);
             if (temp_r29 == 0) {
                 ftAction_80071B50(gobj, cmd);
             }
@@ -1490,7 +1480,7 @@ void ftAction_80073240(Fighter_GObj* fighter_gobj)
 
 void ftAction_80073354(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =
         fp->cur_anim_frame + fp->x898_unk;
@@ -1536,7 +1526,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
 void ftAction_8007349C(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
     fp->x3E4_fighterCmdScript.x3E8_scriptFrameTimer =
         fp->cur_anim_frame + fp->x898_unk;

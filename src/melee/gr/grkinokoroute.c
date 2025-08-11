@@ -1,6 +1,8 @@
 #include <platform.h>
 
-void grKinokoRoute_8020741C(void) {}
+#include "grkinokoroute.h"
+
+void grKinokoRoute_8020741C(bool arg) {}
 
 /// #grKinokoRoute_80207420
 
@@ -17,49 +19,49 @@ bool grKinokoRoute_80207544(void)
 
 /// #grKinokoRoute_80207634
 
-bool grKinokoRoute_802078E8(void)
+bool grKinokoRoute_802078E8(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grKinokoRoute_802078F0
 
-void grKinokoRoute_80207A94(void) {}
+void grKinokoRoute_80207A94(Ground_GObj* arg) {}
 
 /// #grKinokoRoute_80207A98
 
-bool grKinokoRoute_80207ACC(void)
+bool grKinokoRoute_80207ACC(Ground_GObj* arg)
 {
     return false;
 }
 
-void grKinokoRoute_80207AD4(void) {}
+void grKinokoRoute_80207AD4(Ground_GObj* arg) {}
 
-void grKinokoRoute_80207AD8(void) {}
+void grKinokoRoute_80207AD8(Ground_GObj* arg) {}
 
 /// #grKinokoRoute_80207ADC
 
-bool grKinokoRoute_80207B20(void)
+bool grKinokoRoute_80207B20(Ground_GObj* arg)
 {
     return false;
 }
 
-void grKinokoRoute_80207B28(void) {}
+void grKinokoRoute_80207B28(Ground_GObj* arg) {}
 
-void grKinokoRoute_80207B2C(void) {}
+void grKinokoRoute_80207B2C(Ground_GObj* arg) {}
 
 /// #fn_80207B30
 
 /// #grKinokoRoute_80207B5C
 
-bool grKinokoRoute_80207C80(void)
+bool grKinokoRoute_80207C80(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grKinokoRoute_80207C88
 
-void grKinokoRoute_80208368(void) {}
+void grKinokoRoute_80208368(Ground_GObj* arg) {}
 
 /// #grKinokoRoute_8020836C
 
@@ -73,7 +75,7 @@ void grKinokoRoute_80208368(void) {}
 
 /// #grKinokoRoute_802086EC
 
-bool grKinokoRoute_80208754(void)
+DynamicsDesc* grKinokoRoute_80208754(enum_t arg)
 {
     return false;
 }

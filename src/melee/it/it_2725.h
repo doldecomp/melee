@@ -82,7 +82,7 @@
 /* 274C78 */ bool it_80274C78(Item_GObj*);
 /* 274C88 */ void it_80274C88(Item_GObj*);
 /* 274CAC */ void it_80274CAC(Item_GObj*);
-/* 274D04 */ void it_80274D04(Item_GObj*, Vec3*);
+/* 274D04 */ void it_80274D04(Item_GObj*, Vec2*);
 /* 274D6C */ void it_80274D6C(Item_GObj*);
 /* 274DAC */ void it_80274DAC(Item_GObj*);
 /* 274DFC */ void it_80274DFC(Item_GObj*);
@@ -136,7 +136,7 @@
 /* 2758D4 */ float it_802758D4(Item_GObj*);
 /* 2759DC */ void it_802759DC(Item_GObj*, Item_GObj*);
 /* 275BC8 */ void it_80275BC8(Item_GObj*, HSD_GObj*);
-/* 275D5C */ void it_80275D5C(Item_GObj*, ECB*);
+/* 275D5C */ void it_80275D5C(Item_GObj*, itECB*);
 /* 275DFC */ void it_80275DFC(Item_GObj*);
 /* 275E98 */ void it_80275E98(Item_GObj*, SpawnItem*);
 /* 276100 */ void it_80276100(Item_GObj*, Vec3*);
@@ -242,7 +242,7 @@
 /* 27C794 */ bool it_8027C794(Item_GObj*);
 /* 27C79C */ bool it_8027C79C(Item_GObj*);
 /* 27C824 */ bool it_8027C824(Item_GObj*, s32 (*arg1)(Item_GObj*));
-/* 27C8B0 */ void it_8027C8B0(Item_GObj*);
+/* 27C8B0 */ void it_2725_Logic9_Destroyed(Item_GObj*);
 /* 27C8D0 */ void it_8027C8D0(Vec3*, Vec3*, f32);
 /* 27C9D8 */ void it_8027C9D8(Item*);
 /* 27CA7C */ bool it_8027CA7C(HSD_GObj*);

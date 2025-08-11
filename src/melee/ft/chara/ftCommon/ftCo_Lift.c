@@ -21,18 +21,18 @@
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
-void ftCo_80096D9C(ftCo_GObj* gobj)
+void ftCo_80096D9C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.lift.x0 = false;
     Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_None, 0, 1, 0,
                               NULL);
     fp->take_dmg_cb = ftCo_800974C4;
 }
 
-void ftCo_LiftWait_Anim(ftCo_GObj* gobj) {}
+void ftCo_LiftWait_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_LiftWait_IASA(ftCo_GObj* arg0)
+void ftCo_LiftWait_IASA(Fighter_GObj* arg0)
 {
     RETURN_IF(ftCo_80094EA4(arg0));
     RETURN_IF(ftCo_800970E0(arg0));
@@ -40,15 +40,15 @@ void ftCo_LiftWait_IASA(ftCo_GObj* arg0)
     ;
 }
 
-void ftCo_LiftWait_Phys(ftCo_GObj* gobj)
+void ftCo_LiftWait_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_80096E68(ftCo_GObj* gobj)
+void ftCo_80096E68(Fighter_GObj* gobj)
 {
     u8 _[4] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
         Vec3 vec;
         u8 _[4] = { 0 };
@@ -60,14 +60,14 @@ void ftCo_80096E68(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_LiftWait_Coll(ftCo_GObj* gobj)
+void ftCo_LiftWait_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, ftCo_80096E68);
 }
 
 bool ftCo_80096EF8(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x228) {
         ftCo_80096F48(gobj);
         return true;
@@ -77,7 +77,7 @@ bool ftCo_80096EF8(HSD_GObj* gobj)
 
 void ftCo_80096F48(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtMotionId msid;
     if (!fp->mv.co.lift.x0) {
         msid = ftCo_MS_LiftWalk1;
@@ -94,31 +94,31 @@ void ftCo_LiftWalk_Anim(HSD_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (!ftAnim_IsFramesRemaining(gobj) && !ftCo_80096EF8(gobj)) {
-        ftCo_Fighter* fp = gobj->user_data;
+        Fighter* fp = gobj->user_data;
         Fighter_ChangeMotionState(gobj, ftCo_MS_LiftWait, Ft_MF_Unk24, 0, 1, 0,
                                   NULL);
         fp->take_dmg_cb = ftCo_800974C4;
     }
 }
 
-void ftCo_LiftWalk_IASA(ftCo_GObj* gobj)
+void ftCo_LiftWalk_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_80094EA4(gobj));
 }
 
-void ftCo_LiftWalk_Phys(ftCo_GObj* gobj)
+void ftCo_LiftWalk_Phys(Fighter_GObj* gobj)
 {
     ft_80085088(gobj);
 }
 
-void ftCo_LiftWalk_Coll(ftCo_GObj* gobj)
+void ftCo_LiftWalk_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, ftCo_80096E68);
 }
 
 bool ftCo_800970E0(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->input.lstick.x * fp->facing_dir <= p_ftCommonData->x22C) {
         ftCo_80097130(gobj);
         return true;
@@ -128,7 +128,7 @@ bool ftCo_800970E0(HSD_GObj* gobj)
 
 void ftCo_80097130(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.lift.x4 = p_ftCommonData->x230;
     fp->mv.co.lift.x8 = false;
     Fighter_ChangeMotionState(gobj, ftCo_MS_LiftTurn, Ft_MF_Unk24, 0, 1, 0,
@@ -141,8 +141,8 @@ void ftCo_80097130(HSD_GObj* gobj)
 void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
-    Fighter_Part part = ftParts_8007500C(fp, FtPart_TransN);
+    Fighter* fp = gobj->user_data;
+    Fighter_Part part = ftParts_GetBoneIndex(fp, FtPart_TransN);
     HSD_JObj* jobj = fp->parts[part].x4_jobj2;
     fp->mv.co.lift.x4 -= 1;
     if (!fp->x2222_b6) {
@@ -165,7 +165,7 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
         }
     }
     if (fp->mv.co.lift.x4 <= 0) {
-        ftCo_Fighter* fp = gobj->user_data;
+        Fighter* fp = gobj->user_data;
         Fighter_ChangeMotionState(gobj, 174, Ft_MF_Unk24, 0, 1, 0, NULL);
         fp->take_dmg_cb = ftCo_800974C4;
     }
@@ -189,7 +189,7 @@ void ftCo_LiftTurn_Coll(HSD_GObj* arg0)
 void ftCo_800974C4(HSD_GObj* gobj)
 {
     u8 _[4] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
         Vec3 vec;
         u8 _[4] = { 0 };
@@ -200,7 +200,7 @@ void ftCo_800974C4(HSD_GObj* gobj)
 
 void ftCo_8009750C(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Item_GObj* item_gobj = fp->item_gobj;
     if (item_gobj && it_8026B2B4(item_gobj) == 1) {
         Vec3 vec;

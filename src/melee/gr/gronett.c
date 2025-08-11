@@ -23,7 +23,7 @@ static struct {
     int x0;
 }* grOt_804D69C0;
 
-void grOnett_801E3734(void) {}
+void grOnett_801E3734(bool arg) {}
 
 void grOnett_801E3738(void)
 {
@@ -82,45 +82,45 @@ HSD_GObj* grOnett_801E37F4(int gobj_id)
     return gobj;
 }
 
-void grOnett_801E38DC(HSD_GObj* gobj)
+void grOnett_801E38DC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
 }
 
-bool grOnett_801E3920(void)
+bool grOnett_801E3920(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grOnett_801E3928(void) {}
+void grOnett_801E3928(Ground_GObj* gobj) {}
 
-void grOnett_801E392C(void) {}
+void grOnett_801E392C(Ground_GObj* gobj) {}
 
 /// #grOnett_801E3930
 
 /// #grOnett_801E3A34
 
-bool grOnett_801E3C58(void)
+bool grOnett_801E3C58(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grOnett_801E3C60
 
-void grOnett_801E3CE0(void) {}
+void grOnett_801E3CE0(Ground_GObj* gobj) {}
 
 /// #grOnett_801E3CE4
 
-bool grOnett_801E3D98(void)
+bool grOnett_801E3D98(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grOnett_801E3DA0
 
-void grOnett_801E40E0(void) {}
+void grOnett_801E40E0(Ground_GObj* gobj) {}
 
 /// #grOnett_801E40E4
 
@@ -131,14 +131,14 @@ void grOnett_801E41B0(HSD_GObj* gobj)
 
 /// #grOnett_801E41C8
 
-bool grOnett_801E43D8(void)
+bool grOnett_801E43D8(Ground_GObj* gobj)
 {
     return false;
 }
 
 /// #grOnett_801E43E0
 
-void grOnett_801E502C(void) {}
+void grOnett_801E502C(Ground_GObj* gobj) {}
 
 /// #grOnett_801E5030
 
@@ -154,7 +154,7 @@ void grOnett_801E502C(void) {}
 
 /// #grOnett_801E56FC
 
-bool grOnett_801E5760(void)
+DynamicsDesc* grOnett_801E5760(enum_t arg)
 {
     return false;
 }

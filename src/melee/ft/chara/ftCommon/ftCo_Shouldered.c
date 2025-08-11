@@ -27,12 +27,12 @@ float const ftCo_804D8750 = 0;
 float const ftCo_804D8754 = 1;
 double const ftCo_804D8758 = S32_TO_F32;
 
-/* 09C744 */ static void ftCo_8009C744(ftCo_GObj* gobj);
+/* 09C744 */ static void ftCo_8009C744(Fighter_GObj* gobj);
 
-void ftCo_8009C5A4(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_8009C5A4(Fighter_GObj* gobj, FtMotionId msid)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->motion_id != msid || msid != ftCo_MS_ShoulderedWait) {
         Fighter_ChangeMotionState(
             gobj, msid, fp->x2222_b6 ? Ft_MF_FreezeState : Ft_MF_None, 0, 1, 0,
@@ -43,10 +43,10 @@ void ftCo_8009C5A4(ftCo_GObj* gobj, FtMotionId msid)
     }
 }
 
-void ftCo_8009C640(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_8009C640(Fighter_GObj* gobj, FtMotionId msid)
 {
-    ftCo_Fighter* fp = gobj->user_data;
-    ftCommon_8007DBCC(fp, 0,
+    Fighter* fp = gobj->user_data;
+    ftCommon_InitGrab(fp, 0,
                       (int) (fp->dmg.x1830_percent * p_ftCommonData->x4A0 +
                              p_ftCommonData->x4A4));
     fp->mv.co.shouldered.x0 = 0;
@@ -54,16 +54,16 @@ void ftCo_8009C640(ftCo_GObj* gobj, FtMotionId msid)
     ftCo_8009C5A4(gobj, msid);
 }
 
-void ftCo_8009C744(ftCo_GObj* gobj)
+void ftCo_8009C744(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
-    ftCo_GObj* vic_gobj = fp->victim_gobj;
-    ftCo_Fighter* vic_fp = vic_gobj->user_data;
+    Fighter* fp = gobj->user_data;
+    Fighter_GObj* vic_gobj = fp->victim_gobj;
+    Fighter* vic_fp = vic_gobj->user_data;
     Vec3 pos;
     u8 _[12] = { 0 };
     HitCapsule* hit = &vic_fp->xDF4[1];
     ftCo_800DC920(vic_gobj, gobj);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_XRotN)].joint, NULL,
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
                 &pos);
     fp->dmg.kb_applied = ftColl_80079C70(fp, vic_fp, hit, hit->unk_count);
     fp->dmg.x1848_kb_angle = hit->kb_angle;
@@ -77,30 +77,30 @@ void ftCo_8009C744(ftCo_GObj* gobj)
     ftCo_8008E908(gobj, 0);
 }
 
-static inline float inlineA0(ftCo_GObj* gobj)
+static inline float inlineA0(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     return fp->ground_or_air == GA_Ground
                ? p_ftCommonData->x4A8
                : p_ftCommonData->x4A8 * p_ftCommonData->x4AC;
 }
 
-void ftCo_Shouldered_Anim(ftCo_GObj* gobj)
+void ftCo_Shouldered_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.shouldered.x4 = ftCommon_8007DC08(fp, inlineA0(fp->victim_gobj));
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         HitCapsule* hit;
-        ftCo_GObj* gobj1 = fp->victim_gobj;
-        ftCo_Fighter* fp1 = gobj1->user_data;
-        ftCo_GObj* gobj2 = fp1->victim_gobj;
+        Fighter_GObj* gobj1 = fp->victim_gobj;
+        Fighter* fp1 = gobj1->user_data;
+        Fighter_GObj* gobj2 = fp1->victim_gobj;
         {
-            ftCo_Fighter* fp1 = gobj1->user_data;
-            ftCo_Fighter* fp2 = gobj2->user_data;
+            Fighter* fp1 = gobj1->user_data;
+            Fighter* fp2 = gobj2->user_data;
             Vec3 pos;
             hit = &fp2->xDF4[1];
             lb_8000B1CC(
-                fp1->parts[(ftParts_8007500C(fp1, FtPart_TransN2))].joint,
+                fp1->parts[(ftParts_GetBoneIndex(fp1, FtPart_TransN2))].joint,
                 NULL, &pos);
             fp1->dmg.kb_applied =
                 ftColl_80079C70(fp1, fp2, hit, hit->unk_count);
@@ -132,8 +132,8 @@ void ftCo_Shouldered_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Shouldered_IASA(ftCo_GObj* gobj) {}
+void ftCo_Shouldered_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_Shouldered_Phys(ftCo_GObj* gobj) {}
+void ftCo_Shouldered_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_Shouldered_Coll(ftCo_GObj* gobj) {}
+void ftCo_Shouldered_Coll(Fighter_GObj* gobj) {}

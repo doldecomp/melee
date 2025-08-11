@@ -1,5 +1,8 @@
-#include "lbcardgame.static.h"
 #include "lbcardgame.h"
+
+#include "lbcardgame.static.h"
+
+#include "un/un_3028.h"
 
 #include <dolphin/card.h>
 #include <dolphin/os.h>
@@ -11,7 +14,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/hsd_3AA7.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lb_0192.h>
 #include <melee/lb/lbarchive.h>
@@ -281,8 +284,8 @@ void lb_8001CF18(void)
 void lb_8001D164(int arg0)
 {
     if (lb_80433318.x5C == 0) {
-        lbArchive_80016DBC("LbMcGame.", &lb_80433318.x5C,
-                           "MemCardIconData", 0);
+        lbArchive_80016DBC("LbMcGame.", &lb_80433318.x5C, "MemCardIconData",
+                           0);
         lbArchive_80016DBC("NtMemAc", &lb_80433318.x64,
                            "ScNtcCommon_scene_data", 0);
         lb_80433318.x60 = arg0;

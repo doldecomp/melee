@@ -10,7 +10,7 @@ extern "C" {
 typedef void (*RunCallback)(void);
 
 void Run(RunCallback);
-void __OSReboot(u32 resetCode, BOOL forceMenu);
+void __OSReboot(u32 resetCode, u32 bootDol);
 
 #ifdef __cplusplus
 }

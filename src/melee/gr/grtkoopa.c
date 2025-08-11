@@ -17,24 +17,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTKoopa_80221648(int);
+static void grTKoopa_80221648(bool);
 static void grTKoopa_8022164C(void);
-static void grTKoopa_802216BC(void);
-static void grTKoopa_802216C0(void);
+static void grTkoopa_UnkStage0_OnLoad(void);
+static void grTkoopa_UnkStage0_OnStart(void);
 static bool grTKoopa_802216E4(void);
 static HSD_GObj* grTKoopa_802216EC(int gobj_id);
-static void grTKoopa_802217D4(HSD_GObj* gobj);
-static bool grTKoopa_80221800(HSD_GObj*);
-static void grTKoopa_80221808(HSD_GObj*);
-static void grTKoopa_8022180C(HSD_GObj*);
-static void grTKoopa_80221810(HSD_GObj* gobj);
-static bool grTKoopa_80221860(HSD_GObj*);
-static void grTKoopa_80221868(HSD_GObj* gobj);
-static void grTKoopa_8022189C(HSD_GObj*);
-static void grTKoopa_802218A0(HSD_GObj* gobj);
-static bool grTKoopa_802218F0(HSD_GObj*);
-static void grTKoopa_802218F8(HSD_GObj*);
-static void grTKoopa_80221918(HSD_GObj*);
+static void grTKoopa_802217D4(Ground_GObj* gobj);
+static bool grTKoopa_80221800(Ground_GObj*);
+static void grTKoopa_80221808(Ground_GObj*);
+static void grTKoopa_8022180C(Ground_GObj*);
+static void grTKoopa_80221810(Ground_GObj* gobj);
+static bool grTKoopa_80221860(Ground_GObj*);
+static void grTKoopa_80221868(Ground_GObj* gobj);
+static void grTKoopa_8022189C(Ground_GObj*);
+static void grTKoopa_802218A0(Ground_GObj* gobj);
+static bool grTKoopa_802218F0(Ground_GObj*);
+static void grTKoopa_802218F8(Ground_GObj*);
+static void grTKoopa_80221918(Ground_GObj*);
 static DynamicsDesc* grTKoopa_8022191C(enum_t);
 static bool grTKoopa_80221924(Vec3*, int, HSD_JObj*);
 
@@ -56,8 +56,8 @@ StageData grTKp_803E8CCC = {
     "/GrTKp.dat",
     grTKoopa_8022164C,
     grTKoopa_80221648,
-    grTKoopa_802216BC,
-    grTKoopa_802216C0,
+    grTkoopa_UnkStage0_OnLoad,
+    grTkoopa_UnkStage0_OnStart,
     grTKoopa_802216E4,
     grTKoopa_8022191C,
     grTKoopa_80221924,
@@ -66,7 +66,7 @@ StageData grTKp_803E8CCC = {
     0,
 };
 
-static void grTKoopa_80221648(int arg0) {}
+static void grTKoopa_80221648(bool arg0) {}
 
 static void grTKoopa_8022164C(void)
 {
@@ -80,9 +80,9 @@ static void grTKoopa_8022164C(void)
     Ground_801C4210();
     Ground_801C42AC();
 }
-static void grTKoopa_802216BC(void) {}
+static void grTkoopa_UnkStage0_OnLoad(void) {}
 
-static void grTKoopa_802216C0(void)
+static void grTkoopa_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -120,21 +120,21 @@ static HSD_GObj* grTKoopa_802216EC(int gobj_id)
     return gobj;
 }
 
-static void grTKoopa_802217D4(HSD_GObj* gobj)
+static void grTKoopa_802217D4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTKoopa_80221800(HSD_GObj* arg0)
+static bool grTKoopa_80221800(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTKoopa_80221808(HSD_GObj* arg0) {}
-static void grTKoopa_8022180C(HSD_GObj* arg0) {}
+static void grTKoopa_80221808(Ground_GObj* arg0) {}
+static void grTKoopa_8022180C(Ground_GObj* arg0) {}
 
-static void grTKoopa_80221810(HSD_GObj* gobj)
+static void grTKoopa_80221810(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -143,20 +143,20 @@ static void grTKoopa_80221810(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTKoopa_80221860(HSD_GObj* arg0)
+static bool grTKoopa_80221860(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTKoopa_80221868(HSD_GObj* gobj)
+static void grTKoopa_80221868(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTKoopa_8022189C(HSD_GObj* arg0) {}
+static void grTKoopa_8022189C(Ground_GObj* arg0) {}
 
-static void grTKoopa_802218A0(HSD_GObj* gobj)
+static void grTKoopa_802218A0(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -165,17 +165,17 @@ static void grTKoopa_802218A0(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTKoopa_802218F0(HSD_GObj* arg0)
+static bool grTKoopa_802218F0(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTKoopa_802218F8(HSD_GObj* arg0)
+static void grTKoopa_802218F8(Ground_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
 }
 
-static void grTKoopa_80221918(HSD_GObj* arg0) {}
+static void grTKoopa_80221918(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grTKoopa_8022191C(enum_t arg0)
 {

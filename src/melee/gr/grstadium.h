@@ -12,10 +12,10 @@ typedef enum {
     PsType_Display = 1,
 } StadiumGrType;
 
-/* 1D1018 */ void grStadium_801D1018(int);
-/* 1D101C */ void grStadium_801D101C(UNK_PARAMS);
-/* 1D10C8 */ void grStadium_801D10C8(UNK_PARAMS);
-/* 1D10CC */ void grStadium_801D10CC(UNK_PARAMS);
+/* 1D1018 */ void grStadium_801D1018(bool);
+/* 1D101C */ void grStadium_801D101C(void);
+/* 1D10C8 */ void grStadium_UnkStage0_OnLoad(void);
+/* 1D10CC */ void grStadium_UnkStage0_OnStart(void);
 /* 1D10F0 */ bool grStadium_801D10F0(void);
 /* 1D10F8 */ Ground_GObj* grStadium_801D10F8(StadiumGrType);
 /* 1D11E4 */ void fn_801D11E4(Ground_GObj*);
@@ -43,15 +43,15 @@ typedef enum {
 /* 1D1840 */ void grStadium_801D1840(Ground_GObj*);
 /* 1D19D0 */ bool grStadium_801D19D0(Ground_GObj*);
 /* 1D19D8 */ void grStadium_801D19D8(Ground_GObj*);
-/* 1D19F8 */ UNK_RET grStadium_801D19F8(Ground_GObj*);
+/* 1D19F8 */ void grStadium_801D19F8(Ground_GObj*);
 /* 1D1A38 */ void grStadium_801D1A38(Ground_GObj*);
 /* 1D1B40 */ bool grStadium_801D1B40(Ground_GObj*);
-/* 1D1B48 */ UNK_RET grStadium_801D1B48(Ground_GObj*);
-/* 1D1D84 */ UNK_RET grStadium_801D1D84(Ground_GObj*);
-/* 1D1DE4 */ UNK_RET grStadium_801D1DE4(Ground_GObj*);
+/* 1D1B48 */ void grStadium_801D1B48(Ground_GObj*);
+/* 1D1D84 */ void grStadium_801D1D84(Ground_GObj*);
+/* 1D1DE4 */ void grStadium_801D1DE4(Ground_GObj*);
 /* 1D1E10 */ bool grStadium_801D1E10(Ground_GObj*);
-/* 1D1E18 */ UNK_RET grStadium_801D1E18(Ground_GObj*);
-/* 1D1E1C */ UNK_RET grStadium_801D1E1C(Ground_GObj*);
+/* 1D1E18 */ void grStadium_801D1E18(Ground_GObj*);
+/* 1D1E1C */ void grStadium_801D1E1C(Ground_GObj*);
 /* 1D1E20 */ void grStadium_801D1E20(void);
 /* 1D1EF8 */ void grStadium_801D1EF8(Ground_GObj*);
 /* 1D21E4 */ void grStadium_801D21E4(Ground_GObj*, bool);
@@ -87,8 +87,8 @@ typedef enum {
 /* 1D4548 */ void grStadium_801D4548(Ground_GObj*);
 /* 1D4FF8 */ bool grStadium_801D4FF8(int pl_slot);
 /* 1D5074 */ void fn_801D5074(Ground_GObj*, int);
-/* 1D50B8 */ DynamicsDesc* grStadium_801D50B8(int);
-/* 1D50C0 */ int grStadium_801D50C0(Vec3*, int, HSD_JObj*);
+/* 1D50B8 */ DynamicsDesc* grStadium_801D50B8(enum_t);
+/* 1D50C0 */ bool grStadium_801D50C0(Vec3*, int, HSD_JObj*);
 /* 1D511C */ void grStadium_801D511C(void);
 
 #endif

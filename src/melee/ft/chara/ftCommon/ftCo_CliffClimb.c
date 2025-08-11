@@ -20,11 +20,11 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 09AAFC */ static bool ftCo_8009AAFC(ftCo_GObj* gobj, bool arg1,
+/* 09AAFC */ static bool ftCo_8009AAFC(Fighter_GObj* gobj, bool arg1,
                                        float stick_x, float stick_angle);
-/* 09AB9C */ static void ftCo_8009AB9C(ftCo_GObj* gobj);
+/* 09AB9C */ static void ftCo_8009AB9C(Fighter_GObj* gobj);
 
-static inline bool inlineA0(ftCo_Fighter* fp)
+static inline bool inlineA0(Fighter* fp)
 {
     if (ABS(fp->input.lstick.x) >= p_ftCommonData->x494 ||
         ABS(fp->input.lstick.y) >= p_ftCommonData->x494)
@@ -34,9 +34,9 @@ static inline bool inlineA0(ftCo_Fighter* fp)
     return false;
 }
 
-bool ftCo_8009AA0C(ftCo_GObj* gobj)
+bool ftCo_8009AA0C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (inlineA0(fp)) {
         return ftCo_8009AAFC(gobj, true, fp->input.lstick.x,
                              ftCo_GetLStickAngle(fp));
@@ -49,9 +49,9 @@ bool ftCo_8009AA0C(ftCo_GObj* gobj)
     return false;
 }
 
-bool ftCo_8009AAFC(ftCo_GObj* gobj, int arg1, float stick_x, float angle)
+bool ftCo_8009AAFC(Fighter_GObj* gobj, int arg1, float stick_x, float angle)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (angle > p_ftCommonData->x20 ||
         (angle > -p_ftCommonData->x20 && stick_x * fp->facing_dir >= 0))
     {
@@ -70,9 +70,9 @@ bool ftCo_8009AAFC(ftCo_GObj* gobj, int arg1, float stick_x, float angle)
 }
 
 /// @todo Shared code with #ftCo_8009AEA4.
-void ftCo_8009AB9C(ftCo_GObj* gobj)
+void ftCo_8009AB9C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtMotionId msid = (float) fp->dmg.x1830_percent < p_ftCommonData->x488
                           ? ftCo_MS_CliffClimbQuick
                           : ftCo_MS_CliffClimbSlow;
@@ -84,16 +84,16 @@ void ftCo_8009AB9C(ftCo_GObj* gobj)
     ftCo_CliffCatch_Phys(gobj);
 }
 
-void ftCo_CliffClimb_Anim(ftCo_GObj* gobj)
+void ftCo_CliffClimb_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D92C(gobj);
     }
 }
 
-void ftCo_CliffClimb_IASA(ftCo_GObj* gobj) {}
+void ftCo_CliffClimb_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
+void ftCo_CliffClimb_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
@@ -121,10 +121,10 @@ void ftCo_CliffClimb_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CliffClimb_Coll(ftCo_GObj* gobj)
+void ftCo_CliffClimb_Coll(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (ft_800821DC(gobj)) {
             ftCo_8009AE14(gobj);

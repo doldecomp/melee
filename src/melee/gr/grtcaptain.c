@@ -18,24 +18,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTCaptain_8021FC60(int);
+static void grTCaptain_8021FC60(bool);
 static void grTCaptain_8021FC64(void);
-static void grTCaptain_8021FCD4(void);
-static void grTCaptain_8021FCD8(void);
+static void grTcaptain_UnkStage0_OnLoad(void);
+static void grTcaptain_UnkStage0_OnStart(void);
 static bool grTCaptain_8021FCFC(void);
 static HSD_GObj* grTCaptain_8021FD04(int gobj_id);
-static void grTCaptain_8021FDEC(HSD_GObj* gobj);
-static bool grTCaptain_8021FE18(HSD_GObj*);
-static void grTCaptain_8021FE20(HSD_GObj*);
-static void grTCaptain_8021FE24(HSD_GObj*);
-static void grTCaptain_8021FE28(HSD_GObj* gobj);
-static bool grTCaptain_8021FE78(HSD_GObj*);
-static void grTCaptain_8021FE80(HSD_GObj* gobj);
-static void grTCaptain_8021FEB4(HSD_GObj*);
-static void grTCaptain_8021FEB8(HSD_GObj* gobj);
-static bool grTCaptain_8021FF08(HSD_GObj*);
-static void grTCaptain_8021FF10(HSD_GObj*);
-static void grTCaptain_8021FF30(HSD_GObj*);
+static void grTCaptain_8021FDEC(Ground_GObj* gobj);
+static bool grTCaptain_8021FE18(Ground_GObj*);
+static void grTCaptain_8021FE20(Ground_GObj*);
+static void grTCaptain_8021FE24(Ground_GObj*);
+static void grTCaptain_8021FE28(Ground_GObj* gobj);
+static bool grTCaptain_8021FE78(Ground_GObj*);
+static void grTCaptain_8021FE80(Ground_GObj* gobj);
+static void grTCaptain_8021FEB4(Ground_GObj*);
+static void grTCaptain_8021FEB8(Ground_GObj* gobj);
+static bool grTCaptain_8021FF08(Ground_GObj*);
+static void grTCaptain_8021FF10(Ground_GObj*);
+static void grTCaptain_8021FF30(Ground_GObj*);
 static DynamicsDesc* grTCaptain_8021FF34(enum_t);
 static bool grTCaptain_8021FF3C(Vec3*, int, HSD_JObj*);
 
@@ -55,8 +55,8 @@ StageData grTCa_803E8664 = {
     "/GrTCa.dat",
     grTCaptain_8021FC64,
     grTCaptain_8021FC60,
-    grTCaptain_8021FCD4,
-    grTCaptain_8021FCD8,
+    grTcaptain_UnkStage0_OnLoad,
+    grTcaptain_UnkStage0_OnStart,
     grTCaptain_8021FCFC,
     grTCaptain_8021FF34,
     grTCaptain_8021FF3C,
@@ -65,7 +65,7 @@ StageData grTCa_803E8664 = {
     0,
 };
 
-static void grTCaptain_8021FC60(int arg0) {}
+static void grTCaptain_8021FC60(bool arg0) {}
 
 static void grTCaptain_8021FC64(void)
 {
@@ -79,9 +79,9 @@ static void grTCaptain_8021FC64(void)
     Ground_801C4210();
     Ground_801C42AC();
 }
-static void grTCaptain_8021FCD4(void) {}
+static void grTcaptain_UnkStage0_OnLoad(void) {}
 
-static void grTCaptain_8021FCD8(void)
+static void grTcaptain_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }
@@ -124,22 +124,22 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
     return gobj;
 }
 
-static void grTCaptain_8021FDEC(HSD_GObj* gobj)
+static void grTCaptain_8021FDEC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTCaptain_8021FE18(HSD_GObj* arg0)
+static bool grTCaptain_8021FE18(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTCaptain_8021FE20(HSD_GObj* arg0) {}
+static void grTCaptain_8021FE20(Ground_GObj* arg0) {}
 
-static void grTCaptain_8021FE24(HSD_GObj* arg0) {}
+static void grTCaptain_8021FE24(Ground_GObj* arg0) {}
 
-static void grTCaptain_8021FE28(HSD_GObj* gobj)
+static void grTCaptain_8021FE28(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -148,20 +148,20 @@ static void grTCaptain_8021FE28(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTCaptain_8021FE78(HSD_GObj* arg0)
+static bool grTCaptain_8021FE78(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTCaptain_8021FE80(HSD_GObj* gobj)
+static void grTCaptain_8021FE80(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTCaptain_8021FEB4(HSD_GObj* arg0) {}
+static void grTCaptain_8021FEB4(Ground_GObj* arg0) {}
 
-static void grTCaptain_8021FEB8(HSD_GObj* gobj)
+static void grTCaptain_8021FEB8(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -170,17 +170,17 @@ static void grTCaptain_8021FEB8(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTCaptain_8021FF08(HSD_GObj* arg0)
+static bool grTCaptain_8021FF08(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTCaptain_8021FF10(HSD_GObj* arg0)
+static void grTCaptain_8021FF10(Ground_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
 }
 
-static void grTCaptain_8021FF30(HSD_GObj* argo) {}
+static void grTCaptain_8021FF30(Ground_GObj* argo) {}
 
 static DynamicsDesc* grTCaptain_8021FF34(enum_t arg0)
 {

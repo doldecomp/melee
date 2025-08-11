@@ -61,7 +61,7 @@ bool ftSs_Init_80128A1C(HSD_GObj* gobj, UNK_T arg1, float farg1)
     int i;
 
     for (i = 0; i < fp->hurt_capsules_len; i++) {
-        if (lbColl_80008248(arg1, &fp->hurt_capsules[i], ftCommon_8007F804(fp),
+        if (lbColl_80008248(arg1, &fp->hurt_capsules[i].capsule, ftCommon_8007F804(fp),
                             farg1, fp->x34_scale.y, fp->cur_pos.z))
         {
             return true;

@@ -5,7 +5,7 @@
 #include "ft/chara/ftCommon/ftCo_Wait.h"
 #include "ft/fighter.h"
 
-bool ftCo_800CECE8(ftCo_GObj* gobj)
+bool ftCo_800CECE8(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (((u32) fp->cmd_vars[0] != 0) && (fp->input.x668 & 0x100)) {
@@ -46,24 +46,25 @@ third:
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCo_AttackS42_Anim(ftCo_GObj* gobj)
+void ftCo_AttackS42_Anim(Fighter_GObj* gobj)
 {
     ftCo_AttackS4_Anim(gobj);
 }
 
-void ftCo_AttackS42_IASA(ftCo_GObj* gobj)
+void ftCo_AttackS42_IASA(Fighter_GObj* gobj)
 {
-    if ((((Fighter*) gobj->user_data)->x2218 >> 7) & 1) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }
 
-void ftCo_AttackS42_Phys(ftCo_GObj* gobj)
+void ftCo_AttackS42_Phys(Fighter_GObj* gobj)
 {
     ftCo_AttackS4_Phys(gobj);
 }
 
-void ftCo_AttackS42_Coll(ftCo_GObj* gobj)
+void ftCo_AttackS42_Coll(Fighter_GObj* gobj)
 {
     ftCo_AttackS4_Coll(gobj);
 }

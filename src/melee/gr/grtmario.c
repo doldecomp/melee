@@ -2,6 +2,7 @@
 
 #include "lb/forward.h"
 
+#include "baselib/psstructs.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
@@ -18,27 +19,26 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <baselib/psappsrt.h>
 
-/* 21F840 */ static void grTMario_8021F840(int);
+/* 21F840 */ static void grTMario_8021F840(bool);
 /* 21F844 */ static void grTMario_8021F844(void);
-/* 21F8B4 */ static void grTMario_8021F8B4(void);
-/* 21F8B8 */ static void grTMario_8021F8B8(void);
+/* 21F8B4 */ static void grTmario_UnkStage0_OnLoad(void);
+/* 21F8B8 */ static void grTmario_UnkStage0_OnStart(void);
 /* 21F8DC */ static bool grTMario_8021F8DC(void);
 /* 21F8E4 */ static HSD_GObj* grTMario_8021F8E4(s32);
-/* 21F9CC */ static void grTMario_8021F9CC(HSD_GObj*);
-/* 21F9F8 */ static bool grTMario_8021F9F8(HSD_GObj*);
-/* 21FA00 */ static void grTMario_8021FA00(HSD_GObj*);
-/* 21FA04 */ static void grTMario_8021FA04(HSD_GObj*);
+/* 21F9CC */ static void grTMario_8021F9CC(Ground_GObj*);
+/* 21F9F8 */ static bool grTMario_8021F9F8(Ground_GObj*);
+/* 21FA00 */ static void grTMario_8021FA00(Ground_GObj*);
+/* 21FA04 */ static void grTMario_8021FA04(Ground_GObj*);
 /* 21FA08 */ static void lbl_8021FA08(HSD_GObj*);
-/* 21FA34 */ static void grTMario_8021FA34(HSD_GObj*);
-/* 21FA94 */ static bool grTMario_8021FA94(HSD_GObj*);
-/* 21FA9C */ static void grTMario_8021FA9C(HSD_GObj*);
-/* 21FAD0 */ static void grTMario_8021FAD0(HSD_GObj*);
-/* 21FAD4 */ static void grTMario_8021FAD4(HSD_GObj*);
-/* 21FB24 */ static bool grTMario_8021FB24(HSD_GObj*);
-/* 21FB2C */ static void grTMario_8021FB2C(HSD_GObj*);
-/* 21FB4C */ static void grTMario_8021FB4C(HSD_GObj*);
+/* 21FA34 */ static void grTMario_8021FA34(Ground_GObj*);
+/* 21FA94 */ static bool grTMario_8021FA94(Ground_GObj*);
+/* 21FA9C */ static void grTMario_8021FA9C(Ground_GObj*);
+/* 21FAD0 */ static void grTMario_8021FAD0(Ground_GObj*);
+/* 21FAD4 */ static void grTMario_8021FAD4(Ground_GObj*);
+/* 21FB24 */ static bool grTMario_8021FB24(Ground_GObj*);
+/* 21FB2C */ static void grTMario_8021FB2C(Ground_GObj*);
+/* 21FB4C */ static void grTMario_8021FB4C(Ground_GObj*);
 /* 21FB50 */ static int lbl_8021FB50(s32, HSD_GObj*);
 /* 21FBE8 */ static void grTMario_8021FBE8(Vec3*, f32);
 /* 21FC50 */ static DynamicsDesc* grTMario_8021FC50(enum_t);
@@ -75,8 +75,8 @@ StageData grTMr_803E85A4 = {
     "/GrTMr.dat",
     grTMario_8021F844,
     grTMario_8021F840,
-    grTMario_8021F8B4,
-    grTMario_8021F8B8,
+    grTmario_UnkStage0_OnLoad,
+    grTmario_UnkStage0_OnStart,
     grTMario_8021F8DC,
     grTMario_8021FC50,
     grTMario_8021FC58,
@@ -85,7 +85,7 @@ StageData grTMr_803E85A4 = {
     0,
 };
 
-void grTMario_8021F840(int unk) {}
+void grTMario_8021F840(bool unk) {}
 
 void grTMario_8021F844(void)
 {
@@ -101,9 +101,9 @@ void grTMario_8021F844(void)
     Ground_801C42AC();
 }
 
-void grTMario_8021F8B4(void) {}
+void grTmario_UnkStage0_OnLoad(void) {}
 
-void grTMario_8021F8B8(void)
+void grTmario_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -142,61 +142,61 @@ HSD_GObj* grTMario_8021F8E4(s32 arg0)
     return gobj;
 }
 
-void grTMario_8021F9CC(HSD_GObj* gobj)
+void grTMario_8021F9CC(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTMario_8021F9F8(HSD_GObj* gobj)
+bool grTMario_8021F9F8(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTMario_8021FA00(HSD_GObj* gobj) {}
+void grTMario_8021FA00(Ground_GObj* gobj) {}
 
-void grTMario_8021FA04(HSD_GObj* gobj) {}
+void grTMario_8021FA04(Ground_GObj* gobj) {}
 
 void lbl_8021FA08(HSD_GObj* gobj)
 {
     ftCo_800C07F8(gobj, 6, (int) lbl_8021FB50);
 }
 
-void grTMario_8021FA34(HSD_GObj* gobj)
+void grTMario_8021FA34(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
     Ground_801C10B8(gobj, lbl_8021FA08);
 }
 
-bool grTMario_8021FA94(HSD_GObj* gobj)
+bool grTMario_8021FA94(Ground_GObj* gobj)
 {
     return 0;
 }
 
-void grTMario_8021FA9C(HSD_GObj* gobj)
+void grTMario_8021FA9C(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTMario_8021FAD0(HSD_GObj* gobj) {}
+void grTMario_8021FAD0(Ground_GObj* gobj) {}
 
-void grTMario_8021FAD4(HSD_GObj* gobj)
+void grTMario_8021FAD4(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTMario_8021FB24(HSD_GObj* gobj)
+bool grTMario_8021FB24(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTMario_8021FB2C(HSD_GObj* gobj)
+void grTMario_8021FB2C(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTMario_8021FB4C(HSD_GObj* gobj) {}
+void grTMario_8021FB4C(Ground_GObj* gobj) {}
 
 int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
 {
@@ -220,15 +220,15 @@ int lbl_8021FB50(s32 unk, HSD_GObj* gobj)
 
 void grTMario_8021FBE8(Vec3* vec, f32 arg8)
 {
-    UnkGeneratorMember* temp_r3_2;
-    UnkGeneratorStruct* temp_r3;
+    HSD_psAppSRT* temp_r3_2;
+    HSD_Generator* temp_r3;
 
     temp_r3 = grLib_801C96F8(0x7530, 0x1E, vec);
     if (temp_r3 != NULL) {
-        temp_r3_2 = temp_r3->x54;
-        temp_r3_2->x24.x *= arg8;
-        temp_r3_2->x24.y *= arg8;
-        temp_r3_2->x24.z *= arg8;
+        temp_r3_2 = temp_r3->appsrt;
+        temp_r3_2->scale.x *= arg8;
+        temp_r3_2->scale.y *= arg8;
+        temp_r3_2->scale.z *= arg8;
     }
 }
 

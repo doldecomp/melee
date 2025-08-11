@@ -151,8 +151,9 @@ static inline void doLoopAnim(HSD_GObj* gobj, HSD_GObjEvent cb)
         {
             Vec3 pos;
             if (fp->mv.ms.specialn.cur_frame % 30 == 0) {
-                lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint,
-                            NULL, &pos);
+                lb_8000B1CC(
+                    fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint,
+                    NULL, &pos);
                 lb_800119DC(&pos, 10, 0.5, 0.05, 60 * deg_to_rad);
             }
             ++fp->mv.ms.specialn.cur_frame;
@@ -277,7 +278,7 @@ static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
     }
     if (fp->cur_anim_frame == 9) {
         Vec3 position;
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_HipN)].joint, 0,
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint, 0,
                     &position);
         lb_800119DC(&position, 120, 0.9f, 0.02f, 60 * deg_to_rad);
     }

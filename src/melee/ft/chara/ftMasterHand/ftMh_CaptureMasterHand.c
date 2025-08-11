@@ -27,10 +27,10 @@ void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageMasterHand, 0, 0, 1,
                               0, 0);
     fp->x221E_b0 = true;
-    fp->x2220_flag.b3 = true;
+    fp->x2220_b3 = true;
     fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 511);
-    fp->x2220_flag.b3 = true;
+    fp->x2220_b3 = true;
     ftAnim_8006EBA4(gobj);
 }
 
@@ -38,7 +38,7 @@ void ftMh_CaptureDamageMasterHand_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007DC08(fp, p_ftCommonData->x3A8);
-    if (fp->x1A4C <= 0) {
+    if (fp->grab_timer <= 0) {
         ftMh_CaptureDamageMasterHand_80155C94(gobj);
         ftMh_MS_381_8015483C(fp->victim_gobj);
     }

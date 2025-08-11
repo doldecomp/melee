@@ -1,63 +1,36 @@
 #ifndef MELEE_GM_TYPES_H
 #define MELEE_GM_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h"
+
+#include "dolphin/types.h"
+
 #include <melee/gm/forward.h> // IWYU pragma: export
-#include <melee/mn/types.h>
+#include <melee/pl/forward.h>
 
 #include <common_structs.h>
+#include <melee/mn/types.h>
 
-typedef enum MajorSceneKind {
-    /* 00 */ MJ_TITLE,
-    /* 01 */ MJ_MENU,
-    /* 02 */ MJ_VS,
-    /* 03 */ MJ_CLASSIC,
-    /* 04 */ MJ_ADVENTURE,
-    /* 05 */ MJ_ALLSTAR,
-    /* 06 */ MJ_DEBUG,
-    /* 07 */ MJ_DEBUG_SOUND_TEST,
-    /* 08 */ MJ_HANYU_CSS,
-    /* 09 */ MJ_HANYU_SSS,
-    /* 0A */ MJ_CAMERA_MODE,
-    /* 0B */ MJ_TOY_GALLERY,
-    /* 0C */ MJ_TOY_LOTTERY,
-    /* 0D */ MJ_TOY_COLLECTION,
-    /* 0E */ MJ_DEBUG_VS,
-    /* 0F */ MJ_TARGET_TEST,
-    /* 10 */ MJ_SUPER_SUDDEN_DEATH_VS,
-    /* 11 */ MJ_INVISIBLE_VS,
-    /* 12 */ MJ_SLOMO_VS,
-    /* 13 */ MJ_LIGHTNING_VS,
-    /* 14 */ MJ_CHALLENGER_APPROACH,
-    /* 15 */ MJ_CLASSIC_GOVER,
-    /* 16 */ MJ_ADVENTURE_GOVER,
-    /* 17 */ MJ_ALLSTAR_GOVER,
-    /* 18 */ MJ_OPENING_MV,
-    /* 19 */ MJ_DEBUG_CUTSCENE,
-    /* 1A */ MJ_DEBUG_GOVER, ///< trophy fall and 'congrats'
-    /* 1B */ MJ_TOURNAMENT,
-    /* 1C */ MJ_TRAINING,
-    /* 1D */ MJ_TINY_VS,
-    /* 1E */ MJ_GIANT_VS,
-    /* 1F */ MJ_STAMINA_VS,
-    /* 20 */ MJ_HOME_RUN_CONTEST,
-    /* 21 */ MJ_10MAN_VS,
-    /* 22 */ MJ_100MAN_VS,
-    /* 23 */ MJ_3MIN_VS,
-    /* 24 */ MJ_15MIN_VS,
-    /* 25 */ MJ_ENDLESS_VS,
-    /* 26 */ MJ_CRUEL_VS,
-    /* 27 */ MJ_PROGRESSIVE_SCAN,
-    /* 28 */ MJ_BOOT,
-    /* 29 */ MJ_MEMCARD,
-    /* 2A */ MJ_FIXED_CAMERA_VS,
-    /* 2B */ MJ_EVENT,
-    /* 2C */ MJ_SINGLE_BUTTON_VS,
-    /* 2D */ MJ_COUNT,
-} MajorSceneKind;
+struct UnkMultimanData {
+    u16 x0_0 : 1;
+    u16 x2;
+    int x4;
+};
+
+struct DebugGameOverData {
+    u32 x0;
+    u8 pad_x4[0x4];
+    u32 x8;
+    int xC;
+    u32 x10;
+    u8 x14;
+    u8 x15;
+    u16 x16;
+    u16 x18;
+};
 
 struct MinorScene {
     /* 00 */ u8 idx;
@@ -131,7 +104,12 @@ struct gmm_x1CB0 {
 /* +1C */ u8 padding_x16[0x1];
 };
 
-typedef union _UnkFlagStruct2 {
+struct gmm_x1F2C {
+    u8 padding_x0[0x78];
+    s8 x78;
+    s8 x79;
+    UnkFlagStruct x7A;
+    s8 x7B;
     struct {
         u16 b0 : 1;
         u16 b1 : 1;
@@ -143,33 +121,23 @@ typedef union _UnkFlagStruct2 {
         u16 b789 : 3;
         u16 b10_to_12 : 3;
         u16 b13_to_15 : 3;
-    };
-    u16 flags;
-} UnkFlagStruct2;
-
-struct gmm_x1F2C {
-    u8 padding_x0[0x78];
-    s8 x78;
-    s8 x79;
-    UnkFlagStruct x7A;
-    s8 x7B;
-    UnkFlagStruct2 x7C;
-    s16 x7E;
-    u8 x80;
-    u8 x81;
-    u8 x82;
-    s8 x83;
-    s32 x84;
-    s32 x88;
-    s32 x8C;
-    s32 x90;
-    s32 x94;
-    s32 x98;
-    s32 x9C;
-    s16 xA0;
-    s16 xA2;
-    s32 xA4;
-    s32 xA8;
+        s16 x7E;
+        u8 x80;
+        u8 x81;
+        u8 x82;
+        s8 x83;
+        s32 x84;
+        s32 x88;
+        s32 x8C;
+        s32 x90;
+        s32 x94;
+        s32 x98;
+        s32 x9C;
+        u16 xA0;
+        u16 xA2;
+        s32 xA4;
+        s32 xA8;
+    } x7C;
 };
 
 struct gmm_x2FF8_inner {
@@ -233,7 +201,8 @@ struct gmm_retval_EDBC {
 };
 
 struct gmm_x1868 {
-    /* 0x0000 */ s32 x1868;
+    /* 0x0000 */ u16 x1868; // unlocked characters bitmask
+    /* 0x0002 */ u16 x186A; // unlocked stages bitmask
     /* 0x0004 */ u8 unk_4;
     /* 0x0005 */ char pad_5[3]; /* maybe part of unk_4[4]? */
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;
@@ -297,29 +266,50 @@ struct gmm_x0 {
     /* 0x0522 */ s16 unk_522;
     /* 0x0524 */ s16 unk_524;
     /* 0x0526 */ s16 unk_526;
-    /* 0x0528 */ s32 unk_528;
-    /* 0x052C */ s32 unk_52C;
-    /* 0x0530 */ char pad_530[5]; /* maybe part of x52C[2]? */
-    /* 0x0535 */ u8 unk_535;
-    /* 0x0536 */ char pad_536[0x46]; /* maybe part of unk_535[0x47]? */
-    /* 0x057C */ s32 unk_57C;
-    /* 0x0580 */ char pad_580[4];
-    /* 0x0584 */ M2C_UNK unk_584; /* inferred */
-    /* 0x0588 */ s8 unk_588[4];   /* inferred */
-    /* 0x0590 */ char pad_58B[4]; /* inferred */
-    /* 0x0590 */ VsModeData unk_590;
-    /* 0x06D0 */ VsModeData unk_6D0;
-    /* 0x0810 */ VsModeData unk_810;
+    struct gmm_x0_528_t {
+        /* 0x0528 */ s8 c_kind;
+        /* 0x0529 */ s8 stocks;
+        /* 0x052A */ u8 color;
+        /* 0x052B */ u8 cpu_level;
+        /* 0x052C */ s8 x4;
+        /* 0x052D */ u8 x5;
+    } unk_528;
+    struct EventData {
+        /* 0x0530 */ u8 x0;
+        /* 0x0531 */ u8 x1;
+        /* 0x0532 */ s8 x2;
+        /* 0x0533 */ u8 x3;
+        /* 0x0534 */ s8 x4;
+        /* 0x0535 */ u8 unk_535;
+        /* 0x0536 */ u8 x6;
+        /* 0x0537 */ u8 x7;
+        /* 0x0538 */ s8 x8;
+        /* 0x0539 */ s8 x9;
+        /* 0x053A */ s8 xA;
+        /* 0x053B */ char pad_B[0x44 - 0xB];
+        /* 0x0574 */ s8 x44;
+        /* 0x0578 */ int x48;
+        /* 0x057C */ s32 unk_57C;
+        /* 0x0580 */ char pad_580[4];
+        /* 0x0584 */ M2C_UNK unk_584; /* inferred */
+        /* 0x0588 */ s8 unk_588[4];   /* inferred */
+        /* 0x0590 */ char pad_58B[4]; /* inferred */
+    } unk_530;
+    /* 0x0590 */ VsModeData unk_590; ///< VS melee
+    /* 0x06D0 */ VsModeData unk_6D0; ///< super sudden death
+    /* 0x0810 */ VsModeData unk_810; ///< invisible melee
     /* 0x0950 */ VsModeData unk_950;
-    /* 0x0A90 */ VsModeData unk_A90;
-    /* 0x0BD0 */ VsModeData unk_BD0;
-    /* 0x0D10 */ VsModeData unk_D10;
-    /* 0x0E50 */ VsModeData unk_E50;
-    /* 0x0F90 */ VsModeData unk_F90;
-    /* 0x10D0 */ VsModeData unk_10D0;
-    /* 0x1210 */ VsModeData unk_1210;
-    /* 0x1350 */ VsModeData unk_1350;
-    /* 0x1490 */ char pad_1490[0x1850 - 0x1490];
+    /* 0x0A90 */ VsModeData unk_A90; ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0; ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10; ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50; ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90; ///< giant melee
+    /* 0x10D0 */ VsModeData unk_10D0; ///< stamina melee
+    /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
+    /* 0x1350 */ VsModeData unk_1350; ///< lightning melee
+    /* 0x1490 */ VsModeData unk_1490; ///< multiman, 3/15 min, endless, cruel
+    /* 0x15D0 */ char pad_15D0[0x1710 - 0x15D0];
+    /* 0x17C0 */ VsModeData unk_1710; ///< opening movie?
     /* 0x1850 */ GameRules x1850;
     /* 0x1898 */ struct gmm_x1868 thing;
 }; /* size = 0x6E80 */
@@ -414,7 +404,7 @@ struct lbl_8046B6A0_t {
     /* 0x0030 */ u8 unk_30;
     /* 0x0034 */ f32 unk_34;
     /* 0x0038 */ struct {
-        u8 x0;
+        u8 x0; ///< CharacterKind
         u8 x1;
         u8 slot_type;
         s8 spawn_point;
@@ -469,10 +459,11 @@ struct gm_8017DB6C_arg0_t {
 STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
 
 struct gmMainLib_8046B0F0_t {
-    bool x0;
-    bool x4; // reset switch pressed
-    bool x8; // true = progressive, false = interlaced
-    int xC, x10, x14;
+    /* 00 */ bool x0;
+    /* 04 */ bool resetting;   ///< reset switch pressed
+    /* 08 */ bool progressive; ///< true = progressive, false = interlaced
+    /* 0C */ bool xC;          // movie playback done, maybe?
+    /* 10 */ int x10, x14;
 };
 
 extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
@@ -481,6 +472,11 @@ struct gm_8016A92C_arg0_t {
     char pad_0[0x58];
     struct lbl_8046B668_t* x58;
 };
+
+typedef struct gm_803DF94C_t {
+    void (*x0)(HSD_GObj*);
+    void (*x4)(int);
+} gm_803DF94C_t;
 
 struct MatchTeamData {
     int score;
@@ -504,19 +500,44 @@ struct MatchPlayerData {
     u16 self_destructs;
     u16 percent;
     u16 xE;
-    u16 kills;
-    u16 x12;
-    u16 x14;
-    u8 pad_x16[0x20 - 0x16];
-    int x20;
+    u16 kills[4];
+    u16 x18;
+    s32 x1C;
+    s32 x20;
     int x24;
     u32 x28;
     int score;
-    u8 pad_x30[0xA8 - 0x30];
+    u8 pad_x30[0x40 - 0x30];
+    u32 x40;
+    u32 x44;
+    u32 x48;
+    u32 x4C;
+    u32 x50;
+    u32 x54;
+    u32 x58;
+    u32 x5C;
+    u32 x60;
+    u32 x64;
+    u32 x68;
+    u32 x6C;
+    u32 x70;
+    u32 x74;
+    u32 x78;
+    u32 x7C;
+    u32 x80;
+    u32 x84;
+    u32 x88;
+    u32 x8C;
+    u32 x90;
+    u32 x94;
+    u32 x98;
+    u32 x9C;
+    u32 xA0;
+    u32 xA4;
 };
 
 struct MatchEnd {
-    int x0;
+    u32 x0; ///< timer
     u8 result;
     u8 x5;
     u8 is_teams;
@@ -531,7 +552,10 @@ struct MatchEnd {
     struct MatchTeamData team_standings[5];
     struct MatchPlayerData player_standings[6];
     u8 _x448[4];
-    u8 pad_x44C[0x186C - 0x44C];
+    struct UnkResultPlayerData {
+        u8 x0[0x100];
+        char pad_x100[0x508 - 0x100];
+    } x44C[4];
     u8 pad_x186C[0x227C - 0x186C];
 };
 
@@ -542,19 +566,19 @@ struct MatchExitInfo {
     MatchEnd match_end;
 };
 
-struct MatchExitInfo2 {
+struct ResultsMatchInfo {
     int x0;
     int x4;
     MatchEnd match_end;
 };
 
 struct UnkAllstarData {
-    s8 x0;
-    u8 x1;
-    u8 x2;
-    u8 x3;
+    s8 x0; ///< c_kind
+    u8 x1; ///< color
+    u8 x2; ///< cpu_level
+    u8 x3; ///< slot
     u8 x4;
-    u8 x5;
+    u8 x5; ///< stocks
     u8 x6;
     u8 x7;
     u8 x8;
@@ -574,10 +598,7 @@ struct UnkAllstarData {
         u8 x9;
         u8 xA;
         u8 xB;
-        u8 xC;
-        u8 xD;
-        u8 xE;
-        u8 xF;
+        int xC;
         s8 x10;
         u8 x11;
         u8 x12;
@@ -612,18 +633,102 @@ struct UnkAllstarData {
         u8 x2F;
         s8 x30;
     } xC;
-    s8 pad_x0[0xA0 - 0x31 - 0xC];
+    s8 pad_x0[0x74 - 0x40];
+    u16 x74;
+    s8 pad_x76[0xA0 - 0x76];
 };
 
 struct TmData {
     s32 x0;
     s32 x4;
-    u8 pad_x8[0x4E0 - 0x8];
+    u8 pad_x8[0x28 - 0x8];
+    u32 x28; ///< stage id
+    u8 x2C;
+    u8 x2D;
+    u8 x2E;
+    u8 x2F;
+    u8 x30;
+    u8 x31;
+    u8 x32;
+    u8 x33;
+    u8 pad_x34[0x37 - 0x34];
+    struct TmUnkMenuData {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        u8 x3;
+        u8 x4;
+        u8 x5;
+        u8 x6;
+        u8 x7;
+        u8 x8;
+        u16 x9;
+        u8 xB;
+        u8 xC;
+        u8 xD;
+        u8 pad_xE[0x11 - 0xE];
+    } x37[16];
+    u8 pad_x158[0x4B8 - 0x158];
+    struct UnkSelections {
+        u8 x0; ///< slot type?
+        u8 x1; ///< CSSIconHud
+        u8 x2;
+        u8 x3;
+        u8 pad_x4[0xA - 0x4];
+    } x4B8[4];
     HSD_Text* x4E0;
     HSD_Text* x4E4;
     HSD_Text* x4E8[6];
     HSD_Text* x500[6];
     HSD_Text* x518[3];
+    u8 pad_x524[0x534 - 0x524];
+    HSD_Text* x534[3];
+    u8 pad_x540[0x56B - 0x540];
+};
+
+struct NameData {
+    // a lot of this is shared with a struct for character stats as well
+    /* x0F0 */ s32 self_destructs;
+    /* x0F4 */ s32 attacks_hit;
+    /* x0F8 */ s32 attacks_total;
+    /* x0FC */ s32 damage_given;
+    /* x100 */ s32 damage_taken;
+    /* x104 */ s32 damage_recovered;
+    /* x108 */ s16 peak_damage;
+    /* x10A */ s16 matches;
+    /* x10C */ s16 victories;
+    /* x10E */ s16 losses;
+    /* x110 */ s32 play_time; // in minutes
+    /* x114 */ s32 x114;
+    /* x118 */ s32 ground_distance; // in meters
+    /* x11C */ s32 jump_distance;
+    /* x120 */ s32 drop_distance;
+    /* x124 */ s32 flight_distance;
+    /* x128 */ s32 coin_points;
+    /* x12C */ s32 swiped_coins;
+    /* x130 */ s32 lost_coins;
+
+    /* x1A1 */ bool rumble_toggle;
+    /* x198 */ void* x198; // some kind of text representation of the name
+};
+
+struct CameraVsData {
+    u32* x0; ///< state? gets set on button presses in OnFrame
+    union {
+        struct {
+            HSD_Text* slot_a;
+            HSD_Text* slot_b;
+            HSD_Text* bottom_text;
+        };
+        HSD_Text* text[3];
+    };
+};
+
+struct TmVsData {
+    u32 stage_id;
+    Gm_PKind slot_type[4];
+    u32 char_id[4];
+    u32 color[4];
 };
 
 #endif

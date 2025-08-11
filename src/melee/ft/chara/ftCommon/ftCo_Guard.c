@@ -42,20 +42,20 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-bool ftCo_80091A2C(ftCo_GObj* gobj)
+bool ftCo_80091A2C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     return fp->input.held_inputs & HSD_PAD_LR ? true : false;
 }
 
-static inline bool inlineA0(ftCo_Fighter* fp)
+static inline bool inlineA0(Fighter* fp)
 {
     return fp->input.held_inputs & HSD_PAD_LR ? true : false;
 }
 
-int ftCo_80091A4C(ftCo_GObj* gobj)
+int ftCo_80091A4C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
         fp->x672_input_timer_counter < p_ftCommonData->x2A0)
     {
@@ -70,11 +70,11 @@ int ftCo_80091A4C(ftCo_GObj* gobj)
 }
 
 /// @todo @c inline of #ftCo_80091A4C and something else.
-bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20)
+bool ftCo_80091AD8(Fighter_GObj* gobj, int mv_x20)
 {
     u8 _[16] = { 0 };
     bool ret0;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
         fp->x672_input_timer_counter < p_ftCommonData->x2A0)
     {
@@ -101,16 +101,16 @@ bool ftCo_80091AD8(ftCo_GObj* gobj, int mv_x20)
     return false;
 }
 
-void ftCo_80091B90(ftCo_GObj* gobj, int mv_x20)
+void ftCo_80091B90(Fighter_GObj* gobj, int mv_x20)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x20 = mv_x20;
 }
 
-void ftCo_80091B9C(ftCo_GObj* gobj)
+void ftCo_80091B9C(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x24 = p_ftCommonData->x68;
 }
 
@@ -170,7 +170,7 @@ void ftCo_80091BC4(Fighter* fp)
     }
 }
 
-static inline float inlineB0(ftCo_Fighter* fp)
+static inline float inlineB0(Fighter* fp)
 {
     if (fp->kind == FTKIND_YOSHI) {
         return fp->co_attrs.initial_shield_size;
@@ -193,11 +193,11 @@ void ftCo_80091D58(Fighter* fp)
     HSD_JObjSetScale(fp->parts[fp->ft_data->x8->x11].joint, &scl);
 }
 
-static inline void inlineD0(ftCo_GObj* gobj)
+static inline void inlineD0(Fighter_GObj* gobj)
 {
     float temp_f2_2;
     float temp_f3;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if ((int) M2C_FIELD(fp, int*, 4) != 0xE) {
         temp_f3 = M2C_FIELD(p_ftCommonData, float*, 0x2F4);
         temp_f2_2 = M2C_FIELD(fp, float*, 0x199C);
@@ -209,7 +209,7 @@ static inline void inlineD0(ftCo_GObj* gobj)
 
 void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->x2218_b3 || fp->x221B_b0) {
         ftCo_80091BC4(fp);
         if (fp->mv.co.guard.x4) {
@@ -240,7 +240,7 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 #pragma push
 #pragma force_active on
 
-void ftCo_80092158(ftCo_GObj* gobj, int arg1, HSD_JObj* arg2)
+void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 {
     u8 temp_ret = Player_GetUnk45(GET_FIGHTER(gobj)->player_id);
     u8* temp_r7 = &Fighter_804D650C[temp_ret];
@@ -253,7 +253,7 @@ void ftCo_80092158(ftCo_GObj* gobj, int arg1, HSD_JObj* arg2)
 }
 void ftCo_800921DC(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_80092158(gobj, 1047, fp->parts[fp->ft_data->x8->x11].joint);
     fp->x2219_b0 = true;
     fp->mv.co.guard.xC = false;
@@ -276,10 +276,10 @@ void ftCo_800921DC(HSD_GObj* gobj)
         HSD_JObjSetTranslate(fp->parts[fp->ft_data->x8->x11].joint, &trans);
     }
     ftCo_80091E78(gobj, 0);
-    ft_80088148(fp, 110, 127, 64);
+    ft_PlaySFX(fp, 110, 127, 64);
 }
 
-void ftCo_800923B4(ftCo_GObj* gobj)
+void ftCo_800923B4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     switch (fp->kind) {
@@ -289,7 +289,7 @@ void ftCo_800923B4(ftCo_GObj* gobj)
     case FTKIND_MARS:
         ftCo_800924C0(gobj);
         ftParts_80074B0C(gobj, 1, 1);
-        ft_80088148(fp, 190115, 127, 64);
+        ft_PlaySFX(fp, 190115, 127, 64);
         return;
     default:
         ftCo_800924C0(gobj);
@@ -297,10 +297,10 @@ void ftCo_800923B4(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_80092450(ftCo_GObj* gobj)
+void ftCo_80092450(Fighter_GObj* gobj)
 {
     AbsorbDesc absorb;
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     absorb.x0_bone_id = fp->ft_data->x8->x11;
     absorb.x10_size = 1;
     absorb.x4_offset.x = absorb.x4_offset.y = absorb.x4_offset.z = 0.0f;
@@ -308,7 +308,7 @@ void ftCo_80092450(ftCo_GObj* gobj)
     fp->x221A_b7 = true;
 }
 
-void ftCo_800924C0(ftCo_GObj* gobj)
+void ftCo_800924C0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOn, Ft_MF_SkipAnim, 0, 1, 0,
@@ -327,7 +327,7 @@ void ftCo_800924C0(ftCo_GObj* gobj)
 bool ftCo_800925A4(HSD_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->x221B_b0) {
         fp->mv.co.guard.x2C = fp->lightshield_amount;
         {
@@ -349,7 +349,7 @@ bool ftCo_800925A4(HSD_GObj* gobj)
             fp->x221B_b0 = false;
             pl_8003E0E8(fp->player_id, fp->x221F_b4);
             ftCo_80098B20(gobj);
-            ft_80088148(fp, 129, 127, 64);
+            ft_PlaySFX(fp, 129, 127, 64);
             return true;
         }
         if (fp->mv.co.guard.x10 > 0) {
@@ -362,9 +362,9 @@ bool ftCo_800925A4(HSD_GObj* gobj)
     return false;
 }
 
-void ftCo_GuardOn_Anim(ftCo_GObj* gobj)
+void ftCo_GuardOn_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x0 += 1;
     if (ftCo_800925A4(gobj) == 0) {
         if (fp->mv.co.guard.x0 >= fp->x2E8) {
@@ -375,9 +375,9 @@ void ftCo_GuardOn_Anim(ftCo_GObj* gobj)
     }
 }
 
-static inline bool inlineC0(ftCo_GObj* gobj, HSD_GObjEvent cb)
+static inline bool inlineC0(Fighter_GObj* gobj, HSD_GObjEvent cb)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if ((fp->mv.co.guard.xC && !fp->mv.co.guard.x10) ||
         (!fp->x221B_b0 && !fp->x2218_b3))
     {
@@ -390,7 +390,7 @@ static inline bool inlineC0(ftCo_GObj* gobj, HSD_GObjEvent cb)
     return false;
 }
 
-void ftCo_GuardOn_IASA(ftCo_GObj* gobj)
+void ftCo_GuardOn_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
     RETURN_IF(ftCo_80093694(gobj));
@@ -403,21 +403,21 @@ void ftCo_GuardOn_IASA(ftCo_GObj* gobj)
     RETURN_IF(ftCo_8009A080(gobj));
 }
 
-void ftCo_GuardOn_Phys(ftCo_GObj* gobj)
+void ftCo_GuardOn_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEE0(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-void ftCo_GuardOn_Coll(ftCo_GObj* gobj)
+void ftCo_GuardOn_Coll(Fighter_GObj* gobj)
 {
     ft_800845B4(gobj);
 }
 
-void ftCo_800928CC(ftCo_GObj* gobj)
+void ftCo_800928CC(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     switch (fp->kind) {
     case FTKIND_YOSHI:
         ftYs_Shield_8012C1D4(gobj);
@@ -428,9 +428,9 @@ void ftCo_800928CC(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_80092908(ftCo_GObj* gobj)
+void ftCo_80092908(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Guard, Ft_MF_SkipAnim, 0, 1, 0,
                               NULL);
     {
@@ -442,16 +442,16 @@ void ftCo_80092908(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Guard_Anim(ftCo_GObj* gobj)
+void ftCo_Guard_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x0 += 1;
     if (!ftCo_800925A4(gobj)) {
         ftCo_80091E78(gobj, 1);
     }
 }
 
-void ftCo_Guard_IASA(ftCo_GObj* gobj)
+void ftCo_Guard_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
     RETURN_IF(ftCo_8009515C(gobj));
@@ -462,29 +462,29 @@ void ftCo_Guard_IASA(ftCo_GObj* gobj)
     RETURN_IF(ftCo_8009A080(gobj));
 }
 
-void ftCo_Guard_Phys(ftCo_GObj* gobj)
+void ftCo_Guard_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEE0(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-void ftCo_Guard_Coll(ftCo_GObj* gobj)
+void ftCo_Guard_Coll(Fighter_GObj* gobj)
 {
     ft_800845B4(gobj);
 }
 
-void ftCo_80092BCC(ftCo_GObj* gobj)
+void ftCo_80092BCC(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (!(fp->input.held_inputs & HSD_PAD_LR)) {
         fp->mv.co.guard.xC = true;
     }
 }
 
-void ftCo_80092BE8(ftCo_GObj* gobj)
+void ftCo_80092BE8(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     pl_8003E114(fp->player_id, fp->x221F_b4, fp->shield_health);
     switch (fp->kind) {
     case FTKIND_YOSHI:
@@ -496,27 +496,27 @@ void ftCo_80092BE8(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_80092C54(ftCo_GObj* gobj)
+void ftCo_80092C54(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardOff, Ft_MF_None, 0, 1, 0,
                               NULL);
-    ft_80088148(fp, 127, 127, 64);
+    ft_PlaySFX(fp, 127, 127, 64);
 }
 
-void ftCo_GuardOff_Anim(ftCo_GObj* gobj)
+void ftCo_GuardOff_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->mv.co.guard.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftCo_GuardOff_IASA(ftCo_GObj* gobj)
+void ftCo_GuardOff_IASA(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     /// @todo #RETURN_IF chain
     if (!fp->mv.co.guard.x1C ||
         (!ftCo_SpecialS_CheckInput(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
@@ -532,19 +532,19 @@ void ftCo_GuardOff_IASA(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_GuardOff_Phys(ftCo_GObj* gobj)
+void ftCo_GuardOff_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_GuardOff_Coll(ftCo_GObj* gobj)
+void ftCo_GuardOff_Coll(Fighter_GObj* gobj)
 {
     ft_800845B4(gobj);
 }
 
-void ftCo_80092E50(ftCo_GObj* gobj)
+void ftCo_80092E50(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     bool b;
     if (fp->x19B0 == 10U) {
         b = true;
@@ -575,7 +575,7 @@ float ftCo_80092ED8(int arg0, float arg1)
 
 void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardSetOff, Ft_MF_None, 0, 1, 0,
                               NULL);
     fp->hitlag_cb = ftCo_80093240;
@@ -613,9 +613,9 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
     ftCo_80091D58(fp);
 }
 
-void ftCo_80093240(ftCo_GObj* gobj)
+void ftCo_80093240(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->x221A_b2 && fp->ground_or_air == GA_Ground) {
         if ((fp->input.lstick.x < 0
                  ? -fp->input.lstick.x
@@ -631,9 +631,9 @@ void ftCo_80093240(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800932DC(ftCo_GObj* gobj)
+void ftCo_800932DC(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
         if ((fp->input.lstick.x < 0
                  ? -fp->input.lstick.x
@@ -652,7 +652,7 @@ void ftCo_800932DC(ftCo_GObj* gobj)
 
 void ftCo_GuardSetOff_Anim(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.co.guard.xC) {
@@ -665,17 +665,17 @@ void ftCo_GuardSetOff_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCo_GuardSetOff_IASA(ftCo_GObj* gobj) {}
+void ftCo_GuardSetOff_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_GuardSetOff_Phys(ftCo_GObj* gobj)
+void ftCo_GuardSetOff_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEE0(gobj);
 }
 
-void ftCo_GuardSetOff_Coll(ftCo_GObj* gobj)
+void ftCo_GuardSetOff_Coll(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (!(fp->x221A_b2)) {
         ft_800845B4(gobj);
     } else {
@@ -683,9 +683,9 @@ void ftCo_GuardSetOff_Coll(ftCo_GObj* gobj)
     }
 }
 
-bool ftCo_80093694(ftCo_GObj* gobj)
+bool ftCo_80093694(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.co.guard.x0 < p_ftCommonData->x2A0 &&
         fp->input.x668 & (HSD_PAD_R | HSD_PAD_L) &&
         fp->x672_input_timer_counter < p_ftCommonData->x2A0)
@@ -696,11 +696,11 @@ bool ftCo_80093694(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009370C(ftCo_GObj* gobj, HSD_GObjEvent on_reflect)
+void ftCo_8009370C(Fighter_GObj* gobj, HSD_GObjEvent on_reflect)
 {
     u8 _[8] = { 0 };
     ReflectDesc reflect;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     reflect.x0_bone_id = fp->ft_data->x8->x11;
     reflect.x4_max_damage = fp->shield_health;
     reflect.x8_offset.x = reflect.x8_offset.y = reflect.x8_offset.z = 0;
@@ -711,21 +711,21 @@ void ftCo_8009370C(ftCo_GObj* gobj, HSD_GObjEvent on_reflect)
     ftColl_CreateReflectHit(gobj, &reflect, on_reflect);
 }
 
-void ftCo_80093790(ftCo_GObj* gobj)
+void ftCo_80093790(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCommon_8007DB24(gobj);
     {
         HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
         ftCo_80092158(gobj, 1050, jobj);
         fp->x2219_b0 = true;
-        ft_80088148(fp, 128, 127, 64);
+        ft_PlaySFX(fp, 128, 127, 64);
     }
 }
 
-void ftCo_80093850(ftCo_GObj* gobj)
+void ftCo_80093850(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     switch (fp->kind) {
     case FTKIND_YOSHI:
         ftYs_Shield_8012C850(gobj);
@@ -738,7 +738,7 @@ void ftCo_80093850(ftCo_GObj* gobj)
 
 void ftCo_8009388C(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardReflect,
                               Ft_MF_SkipAnim | Ft_MF_KeepGfx,
                               fp->cur_anim_frame, 1, 0, NULL);
@@ -755,7 +755,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
 }
 
 /// @todo Shares a lot of code with #ftCo_800923B4
-void ftCo_800939B4(ftCo_GObj* gobj)
+void ftCo_800939B4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     switch (fp->kind) {
@@ -765,7 +765,7 @@ void ftCo_800939B4(ftCo_GObj* gobj)
     case FTKIND_MARS:
         ftCo_80093A50(gobj);
         ftParts_80074B0C(gobj, 1, 1);
-        ft_80088148(fp, 190115, 127, 64);
+        ft_PlaySFX(fp, 190115, 127, 64);
         return;
     default:
         ftCo_80093A50(gobj);
@@ -775,9 +775,9 @@ void ftCo_800939B4(ftCo_GObj* gobj)
 }
 
 /// @todo Shared code with #ftCo_8009388C.
-void ftCo_80093A50(ftCo_GObj* gobj)
+void ftCo_80093A50(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->x672_input_timer_counter = 0xFE;
@@ -792,9 +792,9 @@ void ftCo_80093A50(ftCo_GObj* gobj)
     ftCo_800921DC(gobj);
 }
 
-void ftCo_80093BC0(ftCo_GObj* gobj)
+void ftCo_80093BC0(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->x221C_b3) {
         fp->x221C_b3 = false;
     }
@@ -834,14 +834,14 @@ void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
     RETURN_IF(ftCo_8009A080(gobj));
 }
 
-void ftCo_GuardReflect_Phys(ftCo_GObj* gobj)
+void ftCo_GuardReflect_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEE0(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-void ftCo_GuardReflect_Coll(ftCo_GObj* gobj)
+void ftCo_GuardReflect_Coll(Fighter_GObj* gobj)
 {
     ft_800845B4(gobj);
 }

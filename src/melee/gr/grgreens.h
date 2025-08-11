@@ -3,43 +3,45 @@
 
 #include <placeholder.h>
 
-/* 213458 */ UNK_RET grGreens_80213458(UNK_PARAMS);
-/* 213464 */ UNK_RET grGreens_80213464(UNK_PARAMS);
-/* 2134F4 */ UNK_RET grGreens_802134F4(UNK_PARAMS);
-/* 2134F8 */ UNK_RET grGreens_802134F8(UNK_PARAMS);
-/* 21351C */ UNK_RET grGreens_8021351C(UNK_PARAMS);
+#include "it/inlines.h"
+
+/* 213458 */ void grGreens_80213458(bool);
+/* 213464 */ void grGreens_80213464(void);
+/* 2134F4 */ void grGreens_802134F4(void);
+/* 2134F8 */ void grGreens_802134F8(void);
+/* 21351C */ bool grGreens_8021351C(void);
 /* 213524 */ UNK_RET grGreens_80213524(UNK_PARAMS);
-/* 21360C */ UNK_RET grGreens_8021360C(UNK_PARAMS);
-/* 2138AC */ UNK_RET grGreens_802138AC(UNK_PARAMS);
-/* 2138B4 */ UNK_RET grGreens_802138B4(UNK_PARAMS);
-/* 2138B8 */ UNK_RET grGreens_802138B8(UNK_PARAMS);
-/* 2138BC */ UNK_RET grGreens_802138BC(UNK_PARAMS);
-/* 213900 */ UNK_RET grGreens_80213900(UNK_PARAMS);
-/* 213908 */ UNK_RET grGreens_80213908(UNK_PARAMS);
-/* 21390C */ UNK_RET grGreens_8021390C(UNK_PARAMS);
-/* 213910 */ UNK_RET grGreens_80213910(UNK_PARAMS);
-/* 21393C */ UNK_RET grGreens_8021393C(UNK_PARAMS);
-/* 213944 */ UNK_RET grGreens_80213944(UNK_PARAMS);
-/* 213948 */ UNK_RET grGreens_80213948(UNK_PARAMS);
-/* 21394C */ UNK_RET grGreens_8021394C(UNK_PARAMS);
-/* 213978 */ UNK_RET grGreens_80213978(UNK_PARAMS);
-/* 213980 */ UNK_RET grGreens_80213980(UNK_PARAMS);
-/* 213984 */ UNK_RET grGreens_80213984(UNK_PARAMS);
-/* 213988 */ UNK_RET grGreens_80213988(UNK_PARAMS);
-/* 2139B4 */ UNK_RET grGreens_802139B4(UNK_PARAMS);
-/* 2139BC */ UNK_RET grGreens_802139BC(UNK_PARAMS);
-/* 2139C0 */ UNK_RET grGreens_802139C0(UNK_PARAMS);
-/* 2139C4 */ UNK_RET grGreens_802139C4(UNK_PARAMS);
-/* 213AAC */ UNK_RET grGreens_80213AAC(UNK_PARAMS);
+/* 21360C */ void grGreens_8021360C(Ground_GObj*);
+/* 2138AC */ bool grGreens_802138AC(Ground_GObj*);
+/* 2138B4 */ void grGreens_802138B4(Ground_GObj*);
+/* 2138B8 */ void grGreens_802138B8(Ground_GObj*);
+/* 2138BC */ void grGreens_802138BC(Ground_GObj*);
+/* 213900 */ bool grGreens_80213900(Ground_GObj*);
+/* 213908 */ void grGreens_80213908(Ground_GObj*);
+/* 21390C */ void grGreens_8021390C(Ground_GObj*);
+/* 213910 */ void grGreens_80213910(Ground_GObj*);
+/* 21393C */ bool grGreens_8021393C(Ground_GObj*);
+/* 213944 */ void grGreens_80213944(Ground_GObj*);
+/* 213948 */ void grGreens_80213948(Ground_GObj*);
+/* 21394C */ void grGreens_8021394C(Ground_GObj*);
+/* 213978 */ bool grGreens_80213978(Ground_GObj*);
+/* 213980 */ void grGreens_80213980(Ground_GObj*);
+/* 213984 */ void grGreens_80213984(Ground_GObj*);
+/* 213988 */ void grGreens_80213988(Ground_GObj*);
+/* 2139B4 */ bool grGreens_802139B4(Ground_GObj*);
+/* 2139BC */ void grGreens_802139BC(Ground_GObj*);
+/* 2139C0 */ void grGreens_802139C0(Ground_GObj*);
+/* 2139C4 */ void grGreens_802139C4(Ground_GObj*);
+/* 213AAC */ bool grGreens_80213AAC(Ground_GObj*);
 /* 213AB4 */ UNK_RET grGreens_80213AB4(UNK_PARAMS);
 /* 213B1C */ UNK_RET fn_80213B1C(UNK_PARAMS);
-/* 213C10 */ UNK_RET grGreens_80213C10(UNK_PARAMS);
-/* 214654 */ UNK_RET grGreens_80214654(UNK_PARAMS);
+/* 213C10 */ void grGreens_80213C10(Ground_GObj*);
+/* 214654 */ void grGreens_80214654(Ground_GObj*);
 /* 214658 */ UNK_RET fn_80214658(UNK_PARAMS);
-/* 214674 */ UNK_RET grGreens_80214674(UNK_PARAMS);
-/* 214794 */ UNK_RET grGreens_80214794(UNK_PARAMS);
-/* 21479C */ UNK_RET grGreens_8021479C(UNK_PARAMS);
-/* 214804 */ UNK_RET grGreens_80214804(UNK_PARAMS);
+/* 214674 */ void grGreens_80214674(Ground_GObj*);
+/* 214794 */ bool grGreens_80214794(Ground_GObj*);
+/* 21479C */ void grGreens_8021479C(Ground_GObj*);
+/* 214804 */ void grGreens_80214804(Ground_GObj*);
 /* 21483C */ UNK_RET grGreens_8021483C(UNK_PARAMS);
 /* 214B58 */ UNK_RET grGreens_80214B58(UNK_PARAMS);
 /* 214FA8 */ UNK_RET grGreens_80214FA8(UNK_PARAMS);
@@ -54,7 +56,7 @@
 /* 2166C4 */ UNK_RET grGreens_802166C4(UNK_PARAMS);
 /* 216C20 */ UNK_RET grGreens_80216C20(UNK_PARAMS);
 /* 216DE4 */ UNK_RET fn_80216DE4(UNK_PARAMS);
-/* 216E64 */ UNK_RET grGreens_80216E64(UNK_PARAMS);
-/* 216E6C */ UNK_RET grGreens_80216E6C(UNK_PARAMS);
+/* 216E64 */ DynamicsDesc* grGreens_80216E64(enum_t);
+/* 216E6C */ bool grGreens_80216E6C(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

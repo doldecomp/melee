@@ -46,8 +46,8 @@ StageData grTFc_803E8974 = {
     "/GrTFc.dat",
     grTFalco_802207F4,
     grTFalco_802207F0,
-    grTFalco_8022086C,
-    grTFalco_80220870,
+    grTfalco_UnkStage0_OnLoad,
+    grTfalco_UnkStage0_OnStart,
     grTFalco_80220894,
     grTFalco_80220ACC,
     grTFalco_80220B78,
@@ -63,7 +63,7 @@ typedef struct grTFalco_UnkStruct {
 
 grTFalco_UnkStruct* grTFc_804D6AF8;
 
-void grTFalco_802207F0(int arg0) {}
+void grTFalco_802207F0(bool arg0) {}
 
 void grTFalco_802207F4(void)
 {
@@ -79,9 +79,9 @@ void grTFalco_802207F4(void)
     Ground_801C42AC();
 }
 
-void grTFalco_8022086C(void) {}
+void grTfalco_UnkStage0_OnLoad(void) {}
 
-void grTFalco_80220870(void)
+void grTfalco_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -122,55 +122,55 @@ HSD_GObj* grTFalco_8022089C(int id)
     return gobj;
 }
 
-void grTFalco_80220984(HSD_GObj* gobj)
+void grTFalco_80220984(Ground_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTFalco_802209B0(HSD_GObj* arg0)
+bool grTFalco_802209B0(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grTFalco_802209B8(HSD_GObj* arg0) {}
+void grTFalco_802209B8(Ground_GObj* arg0) {}
 
-void grTFalco_802209BC(HSD_GObj* arg0) {}
+void grTFalco_802209BC(Ground_GObj* arg0) {}
 
-void grTFalco_802209C0(HSD_GObj* gobj)
+void grTFalco_802209C0(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTFalco_80220A10(HSD_GObj* arg0)
+bool grTFalco_80220A10(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grTFalco_80220A18(HSD_GObj* arg0)
+void grTFalco_80220A18(Ground_GObj* arg0)
 {
     lb_800115F4();
     Ground_801C2FE0(arg0);
 }
 
-void grTFalco_80220A4C(HSD_GObj* arg0) {}
+void grTFalco_80220A4C(Ground_GObj* arg0) {}
 
-void grTFalco_80220A50(HSD_GObj* gobj)
+void grTFalco_80220A50(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTFalco_80220AA0(HSD_GObj* arg0)
+bool grTFalco_80220AA0(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grTFalco_80220AA8(HSD_GObj* gobj)
+void grTFalco_80220AA8(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTFalco_80220AC8(HSD_GObj* arg0) {}
+void grTFalco_80220AC8(Ground_GObj* arg0) {}
 
 DynamicsDesc* grTFalco_80220ACC(enum_t arg0)
 {

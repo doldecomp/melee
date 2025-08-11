@@ -5,7 +5,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "mn/inlines.h"
-#include "mn/mn_2295.h"
+#include "mn/mnmain.h"
 #include "mn/types.h"
 #include "sc/types.h"
 

@@ -3,10 +3,10 @@
 
 #include "ftCommon/forward.h"
 
-/* 09CA98 */ bool ftCo_8009EF68(ftCo_GObj* gobj);
-/* 09CB78 */ void ftCo_StopCeil_Anim(ftCo_GObj* gobj);
-/* 09CBE8 */ void ftCo_StopCeil_IASA(ftCo_GObj* gobj);
-/* 09CBEC */ void ftCo_StopCeil_Phys(ftCo_GObj* gobj);
-/* 09CBF0 */ void ftCo_StopCeil_Coll(ftCo_GObj* gobj);
+/* 09CA98 */ bool ftCo_8009EF68(Fighter_GObj* gobj);
+/* 09CB78 */ void ftCo_StopCeil_Anim(Fighter_GObj* gobj);
+/* 09CBE8 */ void ftCo_StopCeil_IASA(Fighter_GObj* gobj);
+/* 09CBEC */ void ftCo_StopCeil_Phys(Fighter_GObj* gobj);
+/* 09CBF0 */ void ftCo_StopCeil_Coll(Fighter_GObj* gobj);
 
 #endif

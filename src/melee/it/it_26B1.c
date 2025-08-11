@@ -6,7 +6,7 @@
 
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
@@ -440,7 +440,7 @@ bool it_8026B774(HSD_GObj* gobj,
 {
     Item* ip = gobj->user_data;
 
-    if (((ip->xDC8_word.word >> 0xDU) & 0xF & (1 << arg1)) != 0) {
+    if (ip->xDC8_word.flags.xF & (1 << arg1)) {
         return true;
     }
     return false;

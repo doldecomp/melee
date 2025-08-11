@@ -10,10 +10,10 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-void ftCo_800BBB8C(ftCo_GObj* gobj, ftCo_GObj* attacker_gobj)
+void ftCo_800BBB8C(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_Fighter* attacker_fp = GET_FIGHTER(attacker_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* attacker_fp = GET_FIGHTER(attacker_gobj);
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
@@ -32,10 +32,10 @@ void ftCo_800BBB8C(ftCo_GObj* gobj, ftCo_GObj* attacker_gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftCo_CaptureYoshi_Anim(ftCo_GObj* gobj) {}
+void ftCo_CaptureYoshi_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_CaptureYoshi_IASA(ftCo_GObj* gobj) {}
+void ftCo_CaptureYoshi_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_CaptureYoshi_Phys(ftCo_GObj* gobj) {}
+void ftCo_CaptureYoshi_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_CaptureYoshi_Coll(ftCo_GObj* gobj) {}
+void ftCo_CaptureYoshi_Coll(Fighter_GObj* gobj) {}

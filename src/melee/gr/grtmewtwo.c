@@ -30,10 +30,10 @@ typedef struct grTMewtwo_UnkStruct {
     DynamicsDesc* x18;
 } grTMewtwo_UnkStruct;
 
-/* 2221D8 */ static void grTMewtwo_802221D8(int arg0);
+/* 2221D8 */ static void grTMewtwo_802221D8(bool arg0);
 /* 2221DC */ static void grTMewtwo_802221DC(void);
-/* 222254 */ static void grTMewtwo_80222254(void);
-/* 222258 */ static void grTMewtwo_80222258(void);
+/* 222254 */ static void grTmewtwo_UnkStage0_OnLoad(void);
+/* 222258 */ static void grTmewtwo_UnkStage0_OnStart(void);
 /* 22227C */ static bool grTMewtwo_8022227C(void);
 /* 222284 */ static Ground_GObj* grTMewtwo_80222284(int index);
 /* 22236C */ static void grTMewtwo_8022236C(Ground_GObj* gobj);
@@ -48,7 +48,7 @@ typedef struct grTMewtwo_UnkStruct {
 /* 222488 */ static bool grTMewtwo_80222488(Ground_GObj* gobj);
 /* 222490 */ static void grTMewtwo_80222490(Ground_GObj* gobj);
 /* 2224B0 */ static void grTMewtwo_802224B0(Ground_GObj* gobj);
-/* 2224B4 */ static DynamicsDesc* grTMewtwo_802224B4(int arg0);
+/* 2224B4 */ static DynamicsDesc* grTMewtwo_802224B4(enum_t arg0);
 /* 2225C8 */ static bool grTMewtwo_802225C8(Vec3* arg0, int arg1,
                                             HSD_JObj* arg2);
 /* 3E8FC0 */ static void grTMewtwo_803E8FC0(Ground_GObj* gobj);
@@ -91,8 +91,8 @@ StageData grTMewtwo_803E8FCC = {
     "/GrTMt.dat",
     grTMewtwo_802221DC,
     grTMewtwo_802221D8,
-    grTMewtwo_80222254,
-    grTMewtwo_80222258,
+    grTmewtwo_UnkStage0_OnLoad,
+    grTmewtwo_UnkStage0_OnStart,
     grTMewtwo_8022227C,
     grTMewtwo_802224B4,
     grTMewtwo_802225C8,
@@ -100,7 +100,7 @@ StageData grTMewtwo_803E8FCC = {
     NULL,
 };
 
-void grTMewtwo_802221D8(int arg0) {}
+void grTMewtwo_802221D8(bool arg0) {}
 
 void grTMewtwo_802221DC(void)
 {
@@ -116,9 +116,9 @@ void grTMewtwo_802221DC(void)
     Ground_801C42AC();
 }
 
-void grTMewtwo_80222254(void) {}
+void grTmewtwo_UnkStage0_OnLoad(void) {}
 
-void grTMewtwo_80222258(void)
+void grTmewtwo_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -245,7 +245,7 @@ static inline DynamicsDesc* inlineA1(int arg0)
     }
 }
 
-DynamicsDesc* grTMewtwo_802224B4(int arg0)
+DynamicsDesc* grTMewtwo_802224B4(enum_t arg0)
 {
     if (arg0 != -1) {
         int temp = mpLib_80056B6C(arg0);

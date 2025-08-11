@@ -1,6 +1,8 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "itmatadogas.h"
+
 /// #it_802CAFD4
 
 void it_802CB0F4(void) {}
@@ -9,33 +11,33 @@ void it_802CB0F4(void) {}
 
 /// #it_802CB118
 
-void it_802CB14C(void) {}
+void it_802CB14C(Item_GObj* gobj) {}
 
 /// #it_802CB150
 
-/// #it_802CB17C
+/// #itMatadogas_UnkMotion1_Anim
 
-void it_802CB280(void) {}
+void itMatadogas_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_802CB284
+/// #itMatadogas_UnkMotion1_Coll
 
 /// #it_802CB2B0
 
 /// #it_802CB350
 
-/// #it_802CB3B4
+/// #itMatadogas_UnkMotion2_Anim
 
-/// #it_802CB3D8
+/// #itMatadogas_UnkMotion2_Phys
 
-/// #it_802CB4C8
+/// #itMatadogas_UnkMotion2_Coll
 
 /// #it_802CB4F0
 
-/// #it_802CB690
+/// #it_2725_Logic32_Spawned
 
-/// #it_802CB704
+/// #it_2725_Logic33_Spawned
 
-/// #it_802CB778
+/// #it_2725_Logic33_EvtUnk
 
 /// #it_802CB798
 
@@ -43,7 +45,7 @@ void it_802CB280(void) {}
 
 /// #it_802CB844
 
-bool it_802CB8A4(void)
+bool it_802CB8A4(Item_GObj* gobj)
 {
     return false;
 }

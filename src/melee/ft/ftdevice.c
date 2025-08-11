@@ -15,6 +15,11 @@
 /* literal */ extern char* ftDevice_803C6B78;
 /* literal */ extern char* ftCo_804D3C18;
 
+struct ftDeviceUnk3 ft_80459A68[4];
+static int ft_804D6570;
+struct ftDeviceUnk4 ft_804D6578;
+int ftDevice_BuryThingCount;
+
 ftDeviceUnk2* ftCo_800C0658(Fighter* fp)
 {
     return (int) fp->x408.x28 != 0 ? &fp->x408 : &fp->x488;

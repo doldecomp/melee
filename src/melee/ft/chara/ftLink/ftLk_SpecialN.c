@@ -147,12 +147,12 @@ static inline bool unkCondition(ftLk_GObj* gobj)
     if (fp->fv.lk.x14 == NULL) {
         u8 _[36] = { 0 };
         Vec3 pos;
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                     NULL, &pos);
         {
-            Item_GObj* fv_x14 =
-                it_802AF1A4(fp->facing_dir, gobj, &pos,
-                            ftParts_8007500C(fp, FtPart_RThumbNb), da->x10);
+            Item_GObj* fv_x14 = it_802AF1A4(
+                fp->facing_dir, gobj, &pos,
+                ftParts_GetBoneIndex(fp, FtPart_RThumbNb), da->x10);
             fp->fv.lk.x14 = fv_x14;
             if (fv_x14 != NULL) {
                 setCallbacks(gobj);
@@ -221,12 +221,13 @@ static inline bool foo(ftLk_GObj* gobj)
         fp->cmd_vars[cmd_unk0_bool] = 0;
         {
             Vec3 vec3;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
-                        NULL, &vec3);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                NULL, &vec3);
             {
-                Item_GObj* arrow_gobj =
-                    it_802A83E0(fp->facing_dir, gobj, &vec3,
-                                ftParts_8007500C(fp, FtPart_LThumbNb), da->xC);
+                Item_GObj* arrow_gobj = it_802A83E0(
+                    fp->facing_dir, gobj, &vec3,
+                    ftParts_GetBoneIndex(fp, FtPart_LThumbNb), da->xC);
                 fp->fv.lk.arrow_gobj = arrow_gobj;
                 if (arrow_gobj != NULL) {
                     setCallbacks(gobj);
@@ -246,10 +247,10 @@ static inline void bar(ftLk_GObj* gobj)
     u8 _[0x20] = { 0 };
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
-                &vecs.a);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, NULL,
-                &vecs.b);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                NULL, &vecs.a);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                NULL, &vecs.b);
     lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
     fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
     fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
@@ -293,10 +294,10 @@ void ftLk_SpecialNLoop_Anim(ftLk_GObj* gobj)
 {
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
-                &vecs.a);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, NULL,
-                &vecs.b);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                NULL, &vecs.a);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                NULL, &vecs.b);
     lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
     fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
     fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
@@ -349,9 +350,9 @@ void ftLk_SpecialAirNStart_Anim(ftLk_GObj* gobj)
     if (!unkCondition(gobj)) {
         ftLk_Fighter* fp = GET_FIGHTER(gobj);
         ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
                     NULL, &vecs.a);
-        lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
                     NULL, &vecs.b);
         lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
         fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
@@ -382,10 +383,10 @@ void ftLk_SpecialAirNLoop_Anim(ftLk_GObj* gobj)
 {
     ftLk_Fighter* fp = GET_FIGHTER(gobj);
     ftLk_SpecialN_Vec3Group vecs = ftLk_Init_Vec3Group;
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint, NULL,
-                &vecs.a);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint, NULL,
-                &vecs.b);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                NULL, &vecs.a);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                NULL, &vecs.b);
     lb_8000B1CC(fp->parts->joint, NULL, &vecs.c);
     fp->mv.lk.specialn.x8.x = vecs.b.x - vecs.c.x;
     fp->mv.lk.specialn.x8.y = vecs.b.y - vecs.c.y;
@@ -543,10 +544,12 @@ static inline void doEndColl(ftLk_GObj* gobj)
         fp->cmd_vars[cmd_unk1_bool] = false;
         {
             Vec3 rpos, lpos;
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
-                        NULL, &rpos);
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_LThumbNb)].joint,
-                        NULL, &lpos);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                NULL, &rpos);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                NULL, &lpos);
             rpos.z = lpos.z = 0;
             item_gobj = fp->item_gobj;
             it_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,

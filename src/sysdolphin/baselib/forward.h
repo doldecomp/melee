@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+typedef struct _GObjFuncs GObjFuncs;
 typedef struct HSD_AnimJoint HSD_AnimJoint;
 typedef struct HSD_AObj HSD_AObj;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
@@ -33,6 +34,7 @@ typedef struct HSD_FogAdjDesc HSD_FogAdjDesc;
 typedef struct HSD_FogAdjInfo HSD_FogAdjInfo;
 typedef struct HSD_FogDesc HSD_FogDesc;
 typedef struct HSD_FogInfo HSD_FogInfo;
+typedef struct HSD_Generator HSD_Generator;
 typedef struct HSD_GObj HSD_GObj;
 typedef struct HSD_GObjProc HSD_GObjProc;
 typedef struct HSD_Hash HSD_Hash;
@@ -59,10 +61,12 @@ typedef struct HSD_Obj HSD_Obj;
 typedef struct HSD_PadData HSD_PadData;
 typedef struct HSD_PadRumbleListData HSD_PadRumbleListData;
 typedef struct HSD_PadStatus HSD_PadStatus;
+typedef struct HSD_Particle HSD_Particle;
 typedef struct HSD_PEDesc HSD_PEDesc;
 typedef struct HSD_PObj HSD_PObj;
 typedef struct HSD_PObjDesc HSD_PObjDesc;
 typedef struct HSD_PObjInfo HSD_PObjInfo;
+typedef struct HSD_psAppSRT HSD_psAppSRT;
 typedef struct HSD_RObj HSD_RObj;
 typedef struct HSD_RObjAnimJoint HSD_RObjAnimJoint;
 typedef struct HSD_RObjDesc HSD_RObjDesc;
@@ -76,6 +80,7 @@ typedef struct HSD_ShapeAnimJoint HSD_ShapeAnimJoint;
 typedef struct HSD_ShapeSet HSD_ShapeSet;
 typedef struct HSD_ShapeSetDesc HSD_ShapeSetDesc;
 typedef struct HSD_SM HSD_SM;
+typedef struct HSD_SObj_803A477C_t HSD_SObj_803A477C_t;
 typedef struct HSD_Spline HSD_Spline;
 typedef struct HSD_TExpDag HSD_TExpDag;
 typedef struct HSD_TExpRes HSD_TExpRes;
@@ -93,8 +98,6 @@ typedef struct RumbleInfo RumbleInfo;
 typedef struct sislib_UnkAlloc3 sislib_UnkAlloc3;
 typedef struct sislib_UnkAllocData sislib_UnkAllocData;
 typedef struct TextKerning TextKerning;
-typedef struct UnkGeneratorMember UnkGeneratorMember;
-typedef struct UnkGeneratorStruct UnkGeneratorStruct;
 typedef union HSD_CObjDesc HSD_CObjDesc;
 typedef union HSD_ObjData HSD_ObjData;
 typedef union HSD_Rumble HSD_Rumble;

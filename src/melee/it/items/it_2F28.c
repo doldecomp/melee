@@ -20,13 +20,13 @@
 
 extern float it_802758D4(Item_GObj*); /* extern */
 static void it_802F2A58(Item_GObj*);  /* static */
-static bool it_802F2AB0(Item_GObj*);  /* static */
-static void it_802F2AE8(HSD_GObj*);   /* static */
-// static bool it_802F2BA8(HSD_GObj*); /* static */
-static bool it_802F2BA8(Item_GObj*); /* static */
+static bool it_2F28_UnkMotion0_Anim(Item_GObj*);  /* static */
+static void it_2F28_UnkMotion0_Phys(HSD_GObj*);   /* static */
+// static bool it_2F28_UnkMotion0_Coll(HSD_GObj*); /* static */
+static bool it_2F28_UnkMotion0_Coll(Item_GObj*); /* static */
 
 ItemStateTable it_803F9470[] = {
-    { 0, it_802F2AB0, it_802F2AE8, it_802F2BA8 },
+    { 0, it_2F28_UnkMotion0_Anim, it_2F28_UnkMotion0_Phys, it_2F28_UnkMotion0_Coll },
 };
 
 void it_802F28C8(Item_GObj* item_gobj, int arg1, float arg2)
@@ -88,7 +88,7 @@ void it_802F2A58(Item_GObj* item_gobj)
     item->xDCE_flag.b7 = 0;
 }
 
-bool it_802F2AB0(Item_GObj* item_gobj)
+bool it_2F28_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -100,7 +100,7 @@ bool it_802F2AB0(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802F2AE8(HSD_GObj* item_gobj)
+void it_2F28_UnkMotion0_Phys(HSD_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     f32 var_f4 = sqrtf(SQ(item->x40_vel.x) + SQ(item->x40_vel.y));
@@ -117,8 +117,8 @@ void it_802F2AE8(HSD_GObj* item_gobj)
     return;
 }
 
-bool it_802F2BA8(Item_GObj* item_gobj)
-// bool it_802F2BA8(HSD_GObj* item_gobj)
+bool it_2F28_UnkMotion0_Coll(Item_GObj* item_gobj)
+// bool it_2F28_UnkMotion0_Coll(HSD_GObj* item_gobj)
 {
     if (it_8026DFB0(item_gobj) != 0) {
         // if (it_8026DFB0((Item_GObj*) item_gobj) != 0) {

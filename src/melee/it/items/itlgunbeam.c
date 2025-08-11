@@ -20,13 +20,13 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-static bool it_8029999C(Item_GObj*);
-static bool it_80299A68(Item_GObj*);
+static bool itLgunbeam_UnkMotion0_Anim(Item_GObj*);
+static bool itLgunbeam_UnkMotion0_Coll(Item_GObj*);
 static void it_802998A0(Item_GObj*, HSD_GObj*, s32);
-static void it_802999E4(Item_GObj*);
+static void itLgunbeam_UnkMotion0_Phys(Item_GObj*);
 
 ItemStateTable it_803F6630[] = {
-    { 0, it_8029999C, it_802999E4, it_80299A68 },
+    { 0, itLgunbeam_UnkMotion0_Anim, itLgunbeam_UnkMotion0_Phys, itLgunbeam_UnkMotion0_Coll },
 };
 
 void it_802993E0(Item_GObj* gobj, s32 flags)
@@ -189,7 +189,7 @@ void it_802998A0(Item_GObj* gobj, HSD_GObj* fighter_gobj, s32 arg2)
         Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         pos = ip->pos;
         Item_802694CC(gobj);
-        it_802999E4(gobj);
+        itLgunbeam_UnkMotion0_Phys(gobj);
         ip->pos.x -= ip->x40_vel.x;
         ip->pos.y -= ip->x40_vel.y;
         it_8026D9A0(gobj);
@@ -205,7 +205,7 @@ void it_802998A0(Item_GObj* gobj, HSD_GObj* fighter_gobj, s32 arg2)
     }
 }
 
-bool it_8029999C(HSD_GObj* gobj)
+bool itLgunbeam_UnkMotion0_Anim(HSD_GObj* gobj)
 {
     PAD_STACK(4 * 4);
     if (it_80273130(gobj) == 1) {
@@ -215,7 +215,7 @@ bool it_8029999C(HSD_GObj* gobj)
     return false;
 }
 
-void it_802999E4(HSD_GObj* gobj)
+void itLgunbeam_UnkMotion0_Phys(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(4);
@@ -235,7 +235,7 @@ void it_802999E4(HSD_GObj* gobj)
     lbVector_Normalize(&ip->xDD4_itemVar.lgunbeam.velocity);
 }
 
-bool it_80299A68(HSD_GObj* gobj)
+bool itLgunbeam_UnkMotion0_Coll(HSD_GObj* gobj)
 {
     s32 flags = 0;
     Item* ip = GET_ITEM(gobj);
@@ -272,12 +272,12 @@ bool it_80299A68(HSD_GObj* gobj)
     return false;
 }
 
-bool it_80299B6C(Item_GObj* gobj)
+bool it_3F14_Logic39_DmgDealt(Item_GObj* gobj)
 {
     return false;
 }
 
-bool it_80299B74(Item_GObj* gobj)
+bool it_3F14_Logic39_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.lgunbeam.angle0 += M_PI;
@@ -293,27 +293,27 @@ bool it_80299B74(Item_GObj* gobj)
     return false;
 }
 
-bool it_80299C08(Item_GObj* gobj)
+bool it_3F14_Logic39_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_80299C10(Item_GObj* gobj)
+bool it_3F14_Logic39_Absorbed(Item_GObj* gobj)
 {
     return false;
 }
 
-bool it_80299C18(Item_GObj* gobj)
+bool it_3F14_Logic39_ShieldBounced(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_80299C20(Item_GObj* gobj)
+bool it_3F14_Logic39_HitShield(Item_GObj* gobj)
 {
     return true;
 }
 
-void it_80299C28(Item_GObj* gobj, HSD_GObj* ref_gobj)
+void it_3F14_Logic39_EvtUnk(Item_GObj* gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

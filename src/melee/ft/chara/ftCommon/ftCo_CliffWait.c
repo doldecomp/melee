@@ -14,11 +14,11 @@
 #include "ft/types.h"
 #include "ftCommon/types.h"
 
-/* 09A9AC */ static bool ftCo_8009A9AC(ftCo_GObj* gobj);
+/* 09A9AC */ static bool ftCo_8009A9AC(Fighter_GObj* gobj);
 
-void ftCo_8009A804(ftCo_GObj* gobj)
+void ftCo_8009A804(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_CliffWait, Ft_MF_SkipNametagVis, 0,
                               1, 0, NULL);
     ftCommon_8007E2F4(fp, 511);
@@ -31,15 +31,15 @@ void ftCo_8009A804(ftCo_GObj* gobj)
     ftCommon_8007E2F4(fp, 511);
 }
 
-void ftCo_CliffWait_Anim(ftCo_GObj* gobj)
+void ftCo_CliffWait_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.co.cliff.x4 > 0) {
         fp->mv.co.cliff.x4 -= 1;
     }
 }
 
-void ftCo_CliffWait_IASA(ftCo_GObj* gobj)
+void ftCo_CliffWait_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_8009AE38(gobj));
     RETURN_IF(ftCo_8009AFD4(gobj));
@@ -58,9 +58,9 @@ void ftCo_CliffWait_Coll(Fighter_GObj* gobj)
     ftCo_CliffCatch_Coll(gobj);
 }
 
-bool ftCo_8009A9AC(ftCo_GObj* gobj)
+bool ftCo_8009A9AC(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.co.cliff.x4 <= 0) {
         fp->x2064_ledgeCooldown = p_ftCommonData->ledge_cooldown;
         fp->x2227_b1 = true;

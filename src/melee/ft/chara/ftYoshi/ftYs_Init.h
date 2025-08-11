@@ -28,9 +28,9 @@
 /* 12BC90 */ void ftYs_Init_LoadSpecialAttrs(HSD_GObj* gobj);
 /* 12BCC8 */ void ftYs_Init_OnKnockbackEnter(HSD_GObj* gobj);
 /* 12BD34 */ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj);
-/* 12BDA0 */ void ftYs_Init_8012BDA0(ftCo_GObj* gobj);
+/* 12BDA0 */ void ftYs_Init_8012BDA0(Fighter_GObj* gobj);
 /* 12BE3C */ void ftYs_Init_8012BE3C(HSD_GObj* gobj);
-/* 12BECC */ void ftYs_Init_8012BECC(ftCo_GObj* gobj);
+/* 12BECC */ void ftYs_Init_8012BECC(Fighter_GObj* gobj);
 /* 3CE6D0 */ extern MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount];
 
 #endif

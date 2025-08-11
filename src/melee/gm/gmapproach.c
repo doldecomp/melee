@@ -1,6 +1,6 @@
 #include "gmapproach.h"
 
-#include "gm_1601.h"
+#include "gm_unsplit.h"
 #include "gm_1A45.h"
 
 #include <sysdolphin/baselib/cobj.h>
@@ -24,6 +24,8 @@ static struct {
     u16 xC;
     u8 xE;
 } gm_80480D98;
+
+UNK_T gm_804D6860[2];
 
 static void fn_801AD920(HSD_GObj* gobj)
 {

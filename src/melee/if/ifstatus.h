@@ -17,7 +17,7 @@
 /* 2F6194 */ HSD_GObj* ifStatus_802F6194(HSD_GObj*, s32);
 /* 2F61FC */ void ifStatus_802F61FC(void);
 /* 2F6508 */ void ifStatus_802F6508(s32);
-/* 2F665C */ void ifStatus_802F665C(s8);
+/* 2F665C */ void ifStatus_802F665C(int);
 /* 2F66A4 */ void ifStatus_802F66A4(void);
 /* 2F6788 */ void ifStatus_802F6788(u8);
 /* 2F6804 */ void ifStatus_802F6804(void);

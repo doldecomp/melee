@@ -3,7 +3,7 @@
 #include "itcoin.h"
 
 #include "cm/camera.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
 #include "gr/grfigureget.h"
 #include "gr/ground.h"
@@ -24,32 +24,32 @@
 #include <baselib/jobj.h>
 
 /* 2F1588 */ static void it_802F1588(Item_GObj* gobj);
-/* 2F15B0 */ static bool it_802F15B0(Item_GObj* gobj);
-/* 2F15B8 */ static void it_802F15B8(Item_GObj* gobj);
-/* 2F1604 */ static bool it_802F1604(Item_GObj* gobj);
+/* 2F15B0 */ static bool itCoin_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2F15B8 */ static void itCoin_UnkMotion0_Phys(Item_GObj* gobj);
+/* 2F1604 */ static bool itCoin_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2F1630 */ static void it_802F1630(Item_GObj* gobj);
-/* 2F1850 */ static bool it_802F1850(Item_GObj* gobj);
-/* 2F1858 */ static void it_802F1858(Item_GObj* gobj);
-/* 2F185C */ static bool it_802F185C(Item_GObj* gobj);
-/* 2F18E4 */ static bool it_802F18E4(Item_GObj* gobj);
-/* 2F18EC */ static void it_802F18EC(Item_GObj* gobj);
-/* 2F1C68 */ static bool it_802F1C68(Item_GObj* gobj);
-/* 2F1C70 */ static void it_802F1C70(Item_GObj* gobj);
-/* 2F1CB4 */ static bool it_802F1CB4(Item_GObj* gobj);
-/* 2F1EE4 */ static bool it_802F1EE4(Item_GObj* gobj);
-/* 2F1EEC */ static void it_802F1EEC(Item_GObj* gobj);
-/* 2F1F1C */ static bool it_802F1F1C(Item_GObj* gobj);
-/* 2F1FD4 */ static bool it_802F1FD4(Item_GObj* gobj);
-/* 2F1FDC */ static void it_802F1FDC(Item_GObj* gobj);
-/* 2F1FE0 */ static bool it_802F1FE0(Item_GObj* gobj);
+/* 2F1850 */ static bool itCoin_UnkMotion1_Anim(Item_GObj* gobj);
+/* 2F1858 */ static void itCoin_UnkMotion1_Phys(Item_GObj* gobj);
+/* 2F185C */ static bool itCoin_UnkMotion1_Coll(Item_GObj* gobj);
+/* 2F18E4 */ static bool itCoin_UnkMotion2_Anim(Item_GObj* gobj);
+/* 2F18EC */ static void itCoin_UnkMotion2_Phys(Item_GObj* gobj);
+/* 2F1C68 */ static bool itCoin_UnkMotion3_Anim(Item_GObj* gobj);
+/* 2F1C70 */ static void itCoin_UnkMotion3_Phys(Item_GObj* gobj);
+/* 2F1CB4 */ static bool itCoin_UnkMotion3_Coll(Item_GObj* gobj);
+/* 2F1EE4 */ static bool itCoin_UnkMotion4_Anim(Item_GObj* gobj);
+/* 2F1EEC */ static void itCoin_UnkMotion4_Phys(Item_GObj* gobj);
+/* 2F1F1C */ static bool itCoin_UnkMotion4_Coll(Item_GObj* gobj);
+/* 2F1FD4 */ static bool itCoin_UnkMotion5_Anim(Item_GObj* gobj);
+/* 2F1FDC */ static void itCoin_UnkMotion5_Phys(Item_GObj* gobj);
+/* 2F1FE0 */ static bool itCoin_UnkMotion5_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F93C8[] = {
-    { -1, it_802F15B0, it_802F15B8, it_802F1604 },
-    { -1, it_802F1850, it_802F1858, it_802F185C },
-    { -1, it_802F18E4, it_802F18EC, NULL },
-    { -1, it_802F1C68, it_802F1C70, it_802F1CB4 },
-    { -1, it_802F1EE4, it_802F1EEC, it_802F1F1C },
-    { -1, it_802F1FD4, it_802F1FDC, it_802F1FE0 },
+    { -1, itCoin_UnkMotion0_Anim, itCoin_UnkMotion0_Phys, itCoin_UnkMotion0_Coll },
+    { -1, itCoin_UnkMotion1_Anim, itCoin_UnkMotion1_Phys, itCoin_UnkMotion1_Coll },
+    { -1, itCoin_UnkMotion2_Anim, itCoin_UnkMotion2_Phys, NULL },
+    { -1, itCoin_UnkMotion3_Anim, itCoin_UnkMotion3_Phys, itCoin_UnkMotion3_Coll },
+    { -1, itCoin_UnkMotion4_Anim, itCoin_UnkMotion4_Phys, itCoin_UnkMotion4_Coll },
+    { -1, itCoin_UnkMotion5_Anim, itCoin_UnkMotion5_Phys, itCoin_UnkMotion5_Coll },
 };
 
 void it_802F13B4(Item_GObj* gobj, int arg1)
@@ -82,7 +82,7 @@ void it_802F13B4(Item_GObj* gobj, int arg1)
     it_8026EECC(gobj, arg1);
 }
 
-void it_802F14E4(Item_GObj* gobj)
+void it_2725_Logic116_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -92,7 +92,7 @@ void it_802F14E4(Item_GObj* gobj)
     it_802F1588(gobj);
 }
 
-void it_802F1518(Item_GObj* gobj)
+void it_2725_Logic116_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -102,7 +102,7 @@ void it_802F1518(Item_GObj* gobj)
         gm_8017E280(ip->xDD4_itemVar.coin.x0, 1);
         it_8027CE44(gobj);
     }
-    it_8027C8B0(gobj);
+    it_2725_Logic9_Destroyed(gobj);
 }
 
 void it_802F1588(Item_GObj* gobj)
@@ -110,12 +110,12 @@ void it_802F1588(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_UNK_0x1);
 }
 
-bool it_802F15B0(Item_GObj* gobj)
+bool itCoin_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F15B8(Item_GObj* gobj)
+void itCoin_UnkMotion0_Phys(Item_GObj* gobj)
 {
     ItemAttr* attr;
     Item* ip = GET_ITEM(gobj);
@@ -128,7 +128,7 @@ void it_802F15B8(Item_GObj* gobj)
     it_80272860(gobj, ip->xDD4_itemVar.coin.x8, ip->xDD4_itemVar.coin.xC);
 }
 
-bool it_802F1604(Item_GObj* gobj)
+bool itCoin_UnkMotion0_Coll(Item_GObj* gobj)
 {
     it_8026E414(gobj, it_802F1630);
     return false;
@@ -160,20 +160,20 @@ void it_802F1630(Item_GObj* gobj)
     it_802756D0(gobj);
 }
 
-bool it_802F1850(Item_GObj* gobj)
+bool itCoin_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F1858(Item_GObj* gobj) {}
+void itCoin_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-bool it_802F185C(Item_GObj* gobj)
+bool itCoin_UnkMotion1_Coll(Item_GObj* gobj)
 {
     it_8026D62C(gobj, it_802F1588);
     return false;
 }
 
-void it_802F1888(Item_GObj* gobj)
+void it_2725_Logic116_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
@@ -182,19 +182,19 @@ void it_802F1888(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
 }
 
-bool it_802F18E4(Item_GObj* gobj)
+bool itCoin_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F18EC(Item_GObj* gobj) {}
+void itCoin_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_802F18F0(Item_GObj* gobj, Item_GObj* ref)
+void it_2725_Logic116_EvtUnk(Item_GObj* gobj, Item_GObj* ref)
 {
     it_8026B894(gobj, ref);
 }
 
-bool it_802F1910(Item_GObj* gobj)
+bool it_2725_Logic116_DmgReceived(Item_GObj* gobj)
 {
     Item* ip;
     itCoinAttributes* attr;
@@ -258,12 +258,12 @@ bool it_802F1910(Item_GObj* gobj)
     return false;
 }
 
-bool it_802F1C68(Item_GObj* gobj)
+bool itCoin_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F1C70(Item_GObj* gobj)
+void itCoin_UnkMotion3_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itCoinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -272,13 +272,13 @@ void it_802F1C70(Item_GObj* gobj)
     it_80272860(gobj, ip->xDD4_itemVar.coin.x8, ip->xDD4_itemVar.coin.xC);
 }
 
-bool it_802F1CB4(Item_GObj* gobj)
+bool itCoin_UnkMotion3_Coll(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_802F1630);
     return false;
 }
 
-void it_802F1CE0(Item_GObj* gobj)
+void it_2725_Logic116_Thrown(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     PAD_STACK(16);
@@ -288,25 +288,25 @@ void it_802F1CE0(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_UNK_0x1);
 }
 
-bool it_802F1EE4(Item_GObj* gobj)
+bool itCoin_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F1EEC(Item_GObj* gobj)
+void itCoin_UnkMotion4_Phys(Item_GObj* gobj)
 {
     ItemAttr* attr = GET_ITEM(gobj)->xCC_item_attr;
 
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
-bool it_802F1F1C(Item_GObj* gobj)
+bool itCoin_UnkMotion4_Coll(Item_GObj* gobj)
 {
     it_8026E414(gobj, it_802F1630);
     return false;
 }
 
-void it_802F1F48(Item_GObj* gobj)
+void it_2725_Logic116_EnteredAir(Item_GObj* gobj)
 {
     Item* ip;
     f32 item_dir;
@@ -330,14 +330,14 @@ void it_802F1F48(Item_GObj* gobj)
     mpColl_800436D8(&ip->x378_itemColl, coll_dir);
 }
 
-bool it_802F1FD4(Item_GObj* gobj)
+bool itCoin_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F1FDC(Item_GObj* gobj) {}
+void itCoin_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-bool it_802F1FE0(Item_GObj* gobj)
+bool itCoin_UnkMotion5_Coll(Item_GObj* gobj)
 {
     it_8026E8C4(gobj, it_802F1630, it_802F1588);
     return false;

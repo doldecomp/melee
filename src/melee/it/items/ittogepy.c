@@ -10,16 +10,16 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F8058[] = {
-    { 0, it_802D3A68, it_802D3A8C, it_802D3AF0 },
-    { 1, it_802D374C, it_802D37C0, it_802D37FC },
-    { 2, it_802D390C, it_802D3970, it_802D39AC },
-    { 3, it_802D390C, it_802D3970, it_802D39AC },
-    { 4, it_802D390C, it_802D3970, it_802D39AC },
-    { 5, it_802D390C, it_802D3970, it_802D39AC },
-    { 6, it_802D390C, it_802D3970, it_802D39AC },
+    { 0, itTogepy_UnkMotion0_Anim, itTogepy_UnkMotion0_Phys, itTogepy_UnkMotion0_Coll },
+    { 1, itTogepy_UnkMotion1_Anim, itTogepy_UnkMotion1_Phys, itTogepy_UnkMotion1_Coll },
+    { 2, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
+    { 3, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
+    { 4, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
+    { 5, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
+    { 6, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
 };
 
-void it_802D36B0(Item_GObj* gobj)
+void it_2725_Logic21_Spawned(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;
@@ -39,12 +39,12 @@ void it_802D3728(Item_GObj* gobj)
     return;
 }
 
-void it_802D372C(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic21_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
 
-bool it_802D374C(Item_GObj* gobj)
+bool itTogepy_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     int timer;
@@ -60,7 +60,7 @@ bool it_802D374C(Item_GObj* gobj)
     return false;
 }
 
-void it_802D37C0(Item_GObj* gobj)
+void itTogepy_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     if (it->ground_or_air == GA_Air) {
@@ -69,7 +69,7 @@ void it_802D37C0(Item_GObj* gobj)
     }
 }
 
-bool it_802D37FC(Item_GObj* gobj)
+bool itTogepy_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     if (it->ground_or_air == GA_Air) {
@@ -112,7 +112,7 @@ void it_802D3848(Item_GObj* gobj)
     it->exited_hitlag = NULL;
 }
 
-bool it_802D390C(Item_GObj* gobj)
+bool itTogepy_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     if (it_80272C6C(gobj) == false) {
@@ -124,7 +124,7 @@ bool it_802D390C(Item_GObj* gobj)
     return false;
 }
 
-void it_802D3970(Item_GObj* gobj)
+void itTogepy_UnkMotion6_Phys(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
     if (it->ground_or_air == GA_Air) {
@@ -133,7 +133,7 @@ void it_802D3970(Item_GObj* gobj)
     }
 }
 
-bool it_802D39AC(Item_GObj* gobj)
+bool itTogepy_UnkMotion6_Coll(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
     if (it->ground_or_air == GA_Air) {
@@ -157,14 +157,14 @@ void it_802D39F8(Item_GObj* gobj)
     it->xDD4_itemVar.pokemon.timer = sa->timer;
 }
 
-bool it_802D3A68(Item_GObj* gobj)
+bool itTogepy_UnkMotion0_Anim(Item_GObj* gobj)
 {
     it_80279FF8(gobj);
 
     return false;
 }
 
-void it_802D3A8C(Item_GObj* gobj)
+void itTogepy_UnkMotion0_Phys(Item_GObj* gobj)
 {
     if (it_8027A09C(gobj)) {
         Item* it = gobj->user_data;
@@ -175,7 +175,7 @@ void it_802D3A8C(Item_GObj* gobj)
     }
 }
 
-bool it_802D3AF0(Item_GObj* gobj)
+bool itTogepy_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return it_8027A118(gobj, it_802D3728);
 }

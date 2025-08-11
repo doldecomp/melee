@@ -60,7 +60,7 @@ void fn_80112ED8(HSD_GObj* gobj)
     if (!fp->x2219_b0) {
         ftSk_SpecialHi_80112F48(gobj);
         ftSk_SpecialHi_80112FA8(gobj);
-        ft_80088148(fp, 115, 127, 64);
+        ft_PlaySFX(fp, 115, 127, 64);
     }
     fp->accessory4_cb = NULL;
 }
@@ -338,7 +338,6 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, direction) != 0) {
         fp2 = gobj->user_data;
         attr2 = fp2->dat_attrs;
-        // M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
         if ((f32) fp2->mv.sk.specialhi.xC >= attr2->x3C) {
             var_r0 = 1;
         } else if (ftCo_8009A134((Fighter_GObj*) gobj) != 0) {

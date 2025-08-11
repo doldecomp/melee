@@ -13,6 +13,7 @@ typedef struct HitCapsule HitCapsule;
 typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
 typedef struct HurtCapsule HurtCapsule;
+typedef struct FighterHurtCapsule FighterHurtCapsule;
 typedef struct PreloadCache PreloadCache;
 typedef struct PreloadCacheScene PreloadCacheScene;
 typedef struct PreloadCacheSceneEntry PreloadCacheSceneEntry;
@@ -66,7 +67,14 @@ typedef enum HitCapsuleState {
     HitCapsule_Unk3,
     HitCapsule_Max = HitCapsule_Unk3,
 } HitCapsuleState;
+
 STATIC_ASSERT(HitCapsule_Max == 3);
+
+typedef enum HurtHeight {
+    HurtHeight_Low,
+    HurtHeight_Mid,
+    HurtHeight_High,
+} HurtHeight;
 
 typedef void (*RefractCallbackTypeA)(struct lbRefract_CallbackData*, s32, u32,
                                      s8, s8);

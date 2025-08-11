@@ -1,6 +1,6 @@
 #include "gm_1ADD.h"
 
-#include "gm_1601.h"
+#include "gm_unsplit.h"
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -384,7 +384,7 @@ u32 gm_801AEDC8(void)
 {
     u32 result = 0;
     int i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         if (get_master_status(i)->err == 0) {
             result |= get_copy_status(i)->trigger;
         }

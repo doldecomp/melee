@@ -1,8 +1,11 @@
 #include "db.h"
 
+#include "dbitem.static.h"
+
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_unsplit.h>
 #include <melee/it/inlines.h>
 #include <melee/it/it_266F.h>
 #include <melee/it/it_26B1.h>
@@ -11,9 +14,7 @@
 #include <melee/it/types.h>
 #include <melee/pl/player.h>
 #include <melee/un/un_2FC9.h>
-#include <sysdolphin/baselib/gobj.h>
-
-#include "dbitem.static.h"
+#include <melee/un/un_3028.h>
 
 void fn_SetupItemAndPokemonMenu(void)
 {
@@ -337,10 +338,18 @@ void fn_UpdateItemAndPokemonMenu(int player)
         DevText_SetCursorXY(db_ItemAndPokemonMenuText, 0, 0);
         if (db_ItemAndPokemonMenu.CurrentlySelectedItem < 0x23) {
             item = db_ItemNames[db_ItemAndPokemonMenu.CurrentlySelectedItem];
-        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < It_Kind_Octarock_Stone) {
-            item = db_BarrelEnemies[db_ItemAndPokemonMenu.CurrentlySelectedItem - It_Kind_Kuriboh];
-        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem < It_Kind_Arwing_Laser) {
-            item = db_AdventureEnemies[db_ItemAndPokemonMenu.CurrentlySelectedItem - It_Kind_Old_Kuri];
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem <
+                   It_Kind_Octarock_Stone)
+        {
+            item =
+                db_BarrelEnemies[db_ItemAndPokemonMenu.CurrentlySelectedItem -
+                                 It_Kind_Kuriboh];
+        } else if (db_ItemAndPokemonMenu.CurrentlySelectedItem <
+                   It_Kind_Arwing_Laser)
+        {
+            item = db_AdventureEnemies[db_ItemAndPokemonMenu
+                                           .CurrentlySelectedItem -
+                                       It_Kind_Old_Kuri];
         } else {
             while (1) {
             }

@@ -16,7 +16,7 @@
 #include <baselib/jobj.h>
 #include <MSL/trigf.h>
 
-static void inlineA0(ftCo_GObj* gobj)
+static void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x18F4 = p_ftCommonData->x648;
@@ -24,11 +24,11 @@ static void inlineA0(ftCo_GObj* gobj)
     if (fp->dmg.x18F4 > fp->dmg.x1954) {
         fp->dmg.x1954 = fp->dmg.x18F4;
     }
-    fp->x2220_flag.b4 = true;
+    fp->x2220_b4 = true;
     Fighter_UnkRecursiveFunc_8006D044(gobj);
 }
 
-void ftCo_800C3598(ftCo_GObj* gobj)
+void ftCo_800C3598(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
@@ -52,7 +52,7 @@ void ftCo_800C3598(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800C36DC(ftCo_GObj* gobj)
+void ftCo_800C36DC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
@@ -63,11 +63,11 @@ void ftCo_800C36DC(ftCo_GObj* gobj)
                         -fp->coll_data.floor.normal.x * fp->xF0_ground_kb_vel);
 }
 
-void ftCo_800C37A0(ftCo_GObj* gobj)
+void ftCo_800C37A0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x18F4 != 0) {
-        Fighter_Part part = ftParts_8007500C(fp, FtPart_TransN);
+        Fighter_Part part = ftParts_GetBoneIndex(fp, FtPart_TransN);
         HSD_JObj* jobj = fp->parts[part].x4_jobj2;
         {
             float rot_y = M_PI *
@@ -77,7 +77,7 @@ void ftCo_800C37A0(ftCo_GObj* gobj)
             ftParts_80075AF0(fp, part, rot_y);
             HSD_JObjSetRotationY(jobj, rot_y);
             if (fp->dmg.x18F4 == 0) {
-                fp->x2220_flag.b4 = false;
+                fp->x2220_b4 = false;
                 fp->facing_dir = -fp->facing_dir;
                 ftParts_80075AF0(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
                 ftParts_80075AF0(fp, part, 0);

@@ -26,7 +26,7 @@
                                    float unk_floatvar);
 /* 076640 */ bool ftColl_80076640(Fighter*, float*);
 /* 076764 */ void ftColl_80076764(int, enum_t, Fighter_GObj*, DynamicsDesc*,
-                                  Fighter* fp, HurtCapsule*);
+                                  Fighter* fp, FighterHurtCapsule*);
 /* 0768A0 */ void ftColl_800768A0(Fighter* fp, HitCapsule* dst);
 /* 07699C */ bool ftColl_8007699C(Fighter*, HitCapsule*, Fighter*,
                                   HitCapsule*);
@@ -37,7 +37,7 @@
 /* 077688 */ void ftColl_80077688(Item*, HitCapsule*, Fighter*, Vec3*, f32);
 /* 077970 */ UNK_RET ftColl_80077970(UNK_PARAMS);
 /* 077C60 */ UNK_RET ftColl_80077C60(UNK_PARAMS);
-/* 078384 */ void ftColl_80078384(Fighter*, HurtCapsule*, HitCapsule*);
+/* 078384 */ void ftColl_80078384(Fighter*, FighterHurtCapsule*, HitCapsule*);
 /* 078488 */ void ftColl_80078488(Fighter*);
 /* 0784B4 */ UNK_T ftColl_800784B4(UNK_T, UNK_T, UNK_T);
 /* 078538 */ UNK_RET ftColl_80078538(UNK_PARAMS);
@@ -66,7 +66,7 @@
                                   Fighter_GObj*);
 /* 07AC68 */ bool ftColl_8007AC68(u32 kb_angle);
 /* 07AC9C */ void ftColl_8007AC9C(HitCapsule*, int, Fighter_GObj*);
-/* 07AD18 */ void ftColl_8007AD18(ftCo_Fighter* fp, HitCapsule*);
+/* 07AD18 */ void ftColl_8007AD18(Fighter* fp, HitCapsule*);
 /* 07AE80 */ void ftColl_8007AE80(Fighter_GObj*);
 /* 07AEE0 */ void ftColl_8007AEE0(Fighter_GObj*);
 /* 07AEF8 */ void ftColl_8007AEF8(Fighter_GObj*);
@@ -86,8 +86,8 @@
 /* 07B2C4 */ void ftColl_CreateAbsorbHit(Fighter_GObj*, AbsorbDesc*);
 /* 07B320 */ void ftColl_8007B320(Fighter_GObj*);
 /* 07B4E0 */ void ftColl_8007B4E0(Fighter_GObj*);
-/* 07B5AC */ void ftColl_8007B5AC(ftCo_Fighter* fp, HurtCapsule*,
-                                  struct UNK_SAMUS_S2*);
+/* 07B5AC */ void ftColl_HurtboxInit(Fighter* fp, FighterHurtCapsule*,
+                                     ftHurtboxInit*);
 /* 07B62C */ void ftColl_8007B62C(Fighter_GObj*, bool);
 /* 07B6A0 */ void ftColl_8007B6A0(Fighter_GObj* gobj);
 /* 07B6EC */ void ftColl_8007B6EC(Fighter_GObj*);

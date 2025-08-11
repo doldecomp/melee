@@ -11,7 +11,7 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "gr/grlib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
@@ -1459,6 +1459,7 @@ void Item_80269978(HSD_GObj* gobj)
     }
 }
 
+// this function is where the item accessory callback is called if it exists
 static void Item_80269A9C(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);

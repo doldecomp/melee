@@ -10,28 +10,28 @@
 
 #include <baselib/gobj.h>
 
-/* 1FA908 */ void grInishie1_801FA908(void);
+/* 1FA908 */ void grInishie1_801FA908(bool);
 /* 1FA90C */ void grInishie1_801FA90C(void);
 /* 1FA984 */ void grInishie1_801FA984(void);
 /* 1FA988 */ void grInishie1_801FA988(void);
 /* 1FA9AC */ bool grInishie1_801FA9AC(void);
 /* 1FA9B4 */ HSD_GObj* grInishie1_801FA9B4(s32);
-/* 1FAAA0 */ void grInishie1_801FAAA0(HSD_GObj*);
-/* 1FAACC */ bool grInishie1_801FAACC(HSD_GObj*);
-/* 1FAAD4 */ void grInishie1_801FAAD4(HSD_GObj*);
-/* 1FAAD8 */ void grInishie1_801FAAD8(HSD_GObj*);
-/* 1FAADC */ void grInishie1_801FAADC(HSD_GObj*);
-/* 1FAB60 */ bool grInishie1_801FAB60(HSD_GObj*);
-/* 1FAB68 */ void grInishie1_801FAB68(HSD_GObj*);
-/* 1FABB0 */ void grInishie1_801FABB0(HSD_GObj*);
-/* 1FABB4 */ void grInishie1_801FABB4(HSD_GObj*);
-/* 1FABF4 */ bool grInishie1_801FABF4(HSD_GObj*);
-/* 1FABFC */ void grInishie1_801FABFC(HSD_GObj*);
-/* 1FAC00 */ void grInishie1_801FAC00(HSD_GObj*);
-/* 1FAC04 */ void grInishie1_801FAC04(HSD_GObj*);
-/* 1FAC50 */ bool grInishie1_801FAC50(HSD_GObj*);
-/* 1FAC58 */ void grInishie1_801FAC58(HSD_GObj*);
-/* 1FAD80 */ void grInishie1_801FAD80(HSD_GObj*);
+/* 1FAAA0 */ void grInishie1_801FAAA0(Ground_GObj*);
+/* 1FAACC */ bool grInishie1_801FAACC(Ground_GObj*);
+/* 1FAAD4 */ void grInishie1_801FAAD4(Ground_GObj*);
+/* 1FAAD8 */ void grInishie1_801FAAD8(Ground_GObj*);
+/* 1FAADC */ void grInishie1_801FAADC(Ground_GObj*);
+/* 1FAB60 */ bool grInishie1_801FAB60(Ground_GObj*);
+/* 1FAB68 */ void grInishie1_801FAB68(Ground_GObj*);
+/* 1FABB0 */ void grInishie1_801FABB0(Ground_GObj*);
+/* 1FABB4 */ void grInishie1_801FABB4(Ground_GObj*);
+/* 1FABF4 */ bool grInishie1_801FABF4(Ground_GObj*);
+/* 1FABFC */ void grInishie1_801FABFC(Ground_GObj*);
+/* 1FAC00 */ void grInishie1_801FAC00(Ground_GObj*);
+/* 1FAC04 */ void grInishie1_801FAC04(Ground_GObj*);
+/* 1FAC50 */ bool grInishie1_801FAC50(Ground_GObj*);
+/* 1FAC58 */ void grInishie1_801FAC58(Ground_GObj*);
+/* 1FAD80 */ void grInishie1_801FAD80(Ground_GObj*);
 /* 1FAD84 */ void grInishie1_801FAD84(HSD_GObj*);
 /* 1FB0AC */ void grInishie1_801FB0AC(HSD_GObj*, u32);
 /* 1FB3F0 */ void grInishie1_801FB3F0(HSD_GObj*);
@@ -48,7 +48,7 @@
 /* 1FC9AC */ void fn_801FC9AC(Ground*, s32, s32, s32, enum mpLib_GroundEnum);
 /* 1FCAAC */ s32 grInishie1_801FCAAC(s32);
 /* 1FCB10 */ void grInishie1_801FCB10(HSD_GObj*);
-/* 1FCBB0 */ bool grInishie1_801FCBB0(void);
-/* 1FCBB8 */ bool grInishie1_801FCBB8(void);
+/* 1FCBB0 */ DynamicsDesc* grInishie1_801FCBB0(enum_t);
+/* 1FCBB8 */ bool grInishie1_801FCBB8(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

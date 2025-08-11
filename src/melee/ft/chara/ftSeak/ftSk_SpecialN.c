@@ -123,7 +123,7 @@ void ftSk_SpecialNLoop_Anim(Fighter_GObj* gobj)
     switch (fp->mv.sk.specialn.x8) {
     case 0: {
         Fighter* fp = GET_FIGHTER(gobj);
-        ft_80088148(fp, 270134, 127, 64);
+        ft_PlaySFX(fp, 270134, 127, 64);
     }
     }
     ++fp->mv.sk.specialn.x8;
@@ -184,7 +184,7 @@ void ftSk_SpecialAirNLoop_Anim(Fighter_GObj* gobj)
     switch (fp->mv.sk.specialn.x8) {
     case 0: {
         Fighter* fp = GET_FIGHTER(gobj);
-        ft_80088148(fp, 270134, 127, 64);
+        ft_PlaySFX(fp, 270134, 127, 64);
     }
     }
     ++fp->mv.sk.specialn.x8;
@@ -473,7 +473,7 @@ void shootNeedles(Fighter_GObj* gobj)
             --fp->fv.sk.x0;
 
             efSync_Spawn(1283, gobj, &pos);
-            ft_80088148(fp, 270140, 127, 64);
+            ft_PlaySFX(fp, 270140, 127, 64);
         }
     }
 }

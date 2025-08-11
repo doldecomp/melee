@@ -63,10 +63,10 @@ void ftPk_SpecialN_Anim(HSD_GObj* gobj)
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
-                ft_80088148(fp, 240076, 127, 64);
+                ft_PlaySFX(fp, 240076, 127, 64);
                 break;
             case 23:
-                ft_80088148(fp, 230067, 127, 64);
+                ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             }
         }
@@ -97,10 +97,10 @@ void ftPk_SpecialAirN_Anim(HSD_GObj* gobj)
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
-                ft_80088148(fp, 240076, 127, 64);
+                ft_PlaySFX(fp, 240076, 127, 64);
                 break;
             case 23:
-                ft_80088148(fp, 230067, 127, 64);
+                ft_PlaySFX(fp, 230067, 127, 64);
                 break;
             }
         }
@@ -160,7 +160,7 @@ void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
     HSD_GObj* tempObj2;
 
     if (!fp->x2219_b0) {
-        Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
+        Fighter_Part part = ftParts_GetBoneIndex(fp, FtPart_HipN);
         tempObj = gobj;
         efSync_Spawn(1214, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;
@@ -178,7 +178,7 @@ void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
     HSD_GObj* tempObj2;
 
     if (!fp->x2219_b0) {
-        Fighter_Part part = ftParts_8007500C(fp, FtPart_HipN);
+        Fighter_Part part = ftParts_GetBoneIndex(fp, FtPart_HipN);
         tempObj = gobj;
         efSync_Spawn(1215, tempObj2 = tempObj, fp->parts[part].joint);
         fp->x2219_b0 = true;

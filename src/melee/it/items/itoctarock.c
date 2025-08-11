@@ -9,83 +9,83 @@
 
 /// #it_802E4C08
 
-/// #it_802E4C68
+/// #itOctarock_UnkMotion0_Anim
 
-/// #it_802E4CB0
+/// #itOctarock_UnkMotion0_Phys
 
-/// #it_802E4D78
+/// #itOctarock_UnkMotion0_Coll
 
 /// #it_802E4DB4
 
-bool it_802E4DF8(void)
+bool itOctarock_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802E4E00
+/// #itOctarock_UnkMotion2_Phys
 
-/// #it_802E4E30
+/// #itOctarock_UnkMotion2_Coll
 
 /// #it_802E4E6C
 
-/// #it_802E4F18
+/// #itOctarock_UnkMotion3_Anim
 
-/// #it_802E4FB0
+/// #itOctarock_UnkMotion3_Phys
 
-/// #it_802E4FD8
+/// #itOctarock_UnkMotion3_Coll
 
 /// #it_802E503C
 
-/// #it_802E50B0
+/// #itOctarock_UnkMotion4_Anim
 
-/// #it_802E51C4
+/// #itOctarock_UnkMotion4_Phys
 
-/// #it_802E521C
+/// #itOctarock_UnkMotion4_Coll
 
 /// #it_802E52E0
 
 /// #it_802E53C8
 
-/// #it_802E5428
+/// #itOctarock_UnkMotion1_Anim
 
-/// #it_802E5514
+/// #itOctarock_UnkMotion1_Phys
 
-/// #it_802E5554
+/// #itOctarock_UnkMotion1_Coll
 
-/// #it_802E561C
+/// #it_2725_Logic2_PickedUp
 
-/// #it_802E5644
+/// #itOctarock_UnkMotion5_Anim
 
-void it_802E568C(void) {}
+void itOctarock_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_802E5690
+/// #it_2725_Logic2_Dropped
 
-/// #it_802E56E8
+/// #it_2725_Logic2_Thrown
 
-/// #it_802E5738
+/// #itOctarock_UnkMotion6_Anim
 
-/// #it_802E5780
+/// #itOctarock_UnkMotion6_Phys
 
-/// #it_802E57B0
+/// #itOctarock_UnkMotion6_Coll
 
 /// #it_802E57D4
 
-/// #it_802E5834
+/// #itOctarock_UnkMotion7_Anim
 
-void it_802E587C(void) {}
+void itOctarock_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #it_802E5880
+/// #itOctarock_UnkMotion7_Coll
 
 /// #it_802E58A0
 
-bool it_802E5900(void)
+bool itOctarock_UnkMotion8_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802E5908
+/// #itOctarock_UnkMotion8_Phys
 
-/// #it_802E5924
+/// #itOctarock_UnkMotion8_Coll
 
 void it_802E5944(Item_GObj* gobj)
 {

@@ -3,7 +3,7 @@
 #include "types.h"
 
 #include "db/db.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -26,9 +26,9 @@ const Vec3 it_803B8718 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B8724 = { 0.0f, 0.0f, 0.0f };
 
 ItemStateTable it_803F8BD8[] = {
-    { 0, it_802E67A8, it_802E67F4, it_802E6824 },
-    { -1, it_802E67A8, it_802E67F4, NULL },
-    { 0, it_802E68EC, it_802E690C, it_802E6910 },
+    { 0, it_2E5A_UnkMotion1_Anim, it_2E5A_UnkMotion1_Phys, it_2E5A_UnkMotion0_Coll },
+    { -1, it_2E5A_UnkMotion1_Anim, it_2E5A_UnkMotion1_Phys, NULL },
+    { 0, it_2E5A_UnkMotion2_Anim, it_2E5A_UnkMotion2_Phys, it_2E5A_UnkMotion2_Coll },
 };
 
 bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
@@ -438,7 +438,7 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
     // it_80275D5C(item_gobj, attr + (temp_r25 + 0x58));
     // it_80275D5C(item_gobj, attr[var_r31].x58);
     // it_80275D5C(item_gobj, attr[var_r31 + 1].x2C);
-    it_80275D5C(item_gobj, (ECB*) &attr[var_r31 + 2].x0);
+    it_80275D5C(item_gobj, (itECB*) &attr[var_r31 + 2].x0);
 
     // item->xC0C.top = item->xC1C.top;
     // item->xC0C.bottom = item->xC1C.bottom;
@@ -581,7 +581,7 @@ void it_802E66A0(HSD_GObj* item_gobj)
     // HSD_JObjAnimAll(item_gobj->hsd_obj);
 }
 
-bool it_802E67A8(HSD_GObj* item_gobj)
+bool it_2E5A_UnkMotion1_Anim(HSD_GObj* item_gobj)
 {
     f32 var_f2;
     Item* item;
@@ -595,7 +595,7 @@ bool it_802E67A8(HSD_GObj* item_gobj)
     return it_802E657C((Item_GObj*) item_gobj);
 }
 
-void it_802E67F4(HSD_GObj* item_gobj)
+void it_2E5A_UnkMotion1_Phys(HSD_GObj* item_gobj)
 {
     ItemAttr* comm_attr;
 
@@ -604,7 +604,7 @@ void it_802E67F4(HSD_GObj* item_gobj)
                 comm_attr->x14_fall_speed_max);
 }
 
-bool it_802E6824(HSD_GObj* item_gobj)
+bool it_2E5A_UnkMotion0_Coll(HSD_GObj* item_gobj)
 {
     Item* item;
     PAD_STACK(10);
@@ -633,14 +633,14 @@ void it_802E6888(HSD_GObj* item_gobj)
     }
 }
 
-bool it_802E68EC(HSD_GObj* item_gobj)
+bool it_2E5A_UnkMotion2_Anim(HSD_GObj* item_gobj)
 {
     return it_802E657C((Item_GObj*) item_gobj);
 }
 
-void it_802E690C(HSD_GObj* item_gobj) {}
+void it_2E5A_UnkMotion2_Phys(HSD_GObj* item_gobj) {}
 
-bool it_802E6910(HSD_GObj* item_gobj)
+bool it_2E5A_UnkMotion2_Coll(HSD_GObj* item_gobj)
 {
     HSD_JObj* item_jobj;
     Item* item;
@@ -689,7 +689,7 @@ bool it_802E6910(HSD_GObj* item_gobj)
     return false;
 }
 
-bool it_802E6A40(Item_GObj* item_gobj)
+bool it_2725_Logic115_DmgDealt(Item_GObj* item_gobj)
 {
     lbAudioAx_80023870(0x93, 0x7F, 0x40, 0x1A);
     return true;
@@ -712,7 +712,7 @@ void it_802E6A74(HSD_GObj* gobj)
     }
 }
 
-void it_802E6ACC(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2725_Logic115_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

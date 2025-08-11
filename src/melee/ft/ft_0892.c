@@ -84,7 +84,7 @@ static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
 
     var_f2 = temp_r4->input.lstick.x;
     if ((var_f2 * temp_r4->facing_dir < 0.0F) ||
-        (fabs_inline(var_f2) < p_ftCommonData->x24))
+        (ABS(var_f2) < p_ftCommonData->x24))
     {
         return true;
     }

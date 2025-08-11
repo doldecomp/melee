@@ -272,26 +272,20 @@ void ft_80087C64(HSD_GObj* gobj, s32 arg1)
 /// Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
 s32 ft_80087C70(Fighter* fp, s32 arg1)
 {
-    u8 temp_r3;
-    u8 temp_r3_2;
-    u8 temp_r3_3;
-
     s32 var_r4 = arg1;
     s32 temp_r0 = (fp->x2228_b3) & 3;
 
     switch (temp_r0) {
     case 0:
-        temp_r3 = fp->x2220_flag.flags;
-        if ((temp_r3 >> 2U) & 1) {
+        if (fp->x2220_b5) {
             var_r4 += 1;
-        } else if ((temp_r3 >> 1U) & 1) {
+        } else if (fp->x2220_b6) {
             var_r4 += 2;
         }
         break;
     case 1:
-        temp_r3_2 = fp->x2220_flag.flags;
-        if (!((temp_r3_2 >> 2U) & 1)) {
-            if ((temp_r3_2 >> 1U) & 1) {
+        if (!fp->x2220_b5) {
+            if (fp->x2220_b6) {
                 var_r4 += 2;
             } else {
                 var_r4 += 2;
@@ -299,10 +293,9 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
         }
         break;
     case 2:
-        temp_r3_3 = fp->x2220_flag.flags;
-        if ((temp_r3_3 >> 2U) & 1) {
+        if (fp->x2220_b5) {
             var_r4 += 1;
-        } else if (!((temp_r3_3 >> 1U) & 1)) {
+        } else if (!fp->x2220_b6) {
             var_r4 += 1;
         }
         break;
@@ -313,7 +306,7 @@ s32 ft_80087C70(Fighter* fp, s32 arg1)
 s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
 {
     enum_t sfx = lbAudioAx_800233EC(sfx_id);
-    enum_t ssm_id = lbAudioAx_80023130();
+    enum_t ssm_id = lbAudioAx_80023130(sfx);
 
     switch (ssm_id) {
     case 0:
@@ -457,7 +450,7 @@ void ft_80088110(Fighter* fp)
     fp->x2168 = 0;
 }
 
-void ft_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
+void ft_PlaySFX(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
 {
     sfx_id = ft_80087D0C(fp, sfx_id);
     fp->x2160 = lbAudioAx_800237A8(sfx_id, sfx_vol, sfx_pan);

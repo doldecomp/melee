@@ -12,14 +12,14 @@ ItemStateTable it_803F6C98[] = {
     { 0, NULL, NULL, NULL },
 };
 
-void it_802ADC04(Item_GObj* gobj)
+void it_2725_Logic8_Destroyed(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
 
     if (it->owner == NULL) {
         return;
     }
-    ftKb_SpecialAirLw_800F539C((ftKb_GObj*) it->owner);
+    ftKb_SpecialAirLw_800F539C((Fighter_GObj*) it->owner);
 }
 
 void it_802ADC34(Item_GObj* gobj)
@@ -72,7 +72,7 @@ Item_GObj* it_802ADC54(HSD_GObj* parent, Vec3* pos, Fighter_Part sfx, u32 vars,
     return item_gobj;
 }
 
-void it_802ADD88(Item_GObj* gobj)
+void it_2725_Logic8_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

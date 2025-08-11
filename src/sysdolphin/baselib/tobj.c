@@ -369,9 +369,9 @@ static void MakeTextureMtx(HSD_TObj* tobj)
     Vec3 trans;
     Quaternion rot;
 
-    u8 _[8];
-
     bool no_assert = false;
+
+    PAD_STACK(8);
 
     if (tobj->repeat_s && tobj->repeat_t) {
         no_assert = true;

@@ -3,7 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/// #it_8029570C
+/// #it_3F14_Logic23_Spawned
 
 /// #it_80295748
 
@@ -11,68 +11,68 @@
 
 /// #it_802957AC
 
-bool it_80295804(void)
+bool itLipstick_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8029580C(void) {}
+void itLipstick_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_80295810
+/// #itLipstick_UnkMotion0_Coll
 
 /// #it_8029583C
 
-bool it_80295864(void)
+bool itLipstick_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8029586C
+/// #itLipstick_UnkMotion1_Phys
 
-/// #it_8029589C
+/// #itLipstick_UnkMotion1_Coll
 
-/// #it_802958C8
+/// #it_3F14_Logic23_PickedUp
 
-bool it_802958F0(Item_GObj* gobj)
+bool itLipstick_UnkMotion2_Anim(Item_GObj* gobj)
 {
     GET_ITEM(gobj)->xDAC_itcmd_var0 = 1;
     return false;
 }
 
-void it_80295904(void) {}
+void itLipstick_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_80295908
+/// #it_3F14_Logic23_Dropped
 
-/// #it_80295930
+/// #itLipstick_UnkMotion4_Coll
 
-/// #it_80295974
+/// #it_3F14_Logic23_Thrown
 
-/// #it_8029599C
+/// #itLipstick_UnkMotion4_Phys
 
-/// #it_802959E8
+/// #itLipstick_UnkMotion3_Coll
 
-/// #it_80295ACC
+/// #it_3F14_Logic23_DmgDealt
 
-/// #it_80295B08
+/// #it_3F14_Logic23_EnteredAir
 
-bool it_80295B30(void)
+bool itLipstick_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80295B38(void) {}
+void itLipstick_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_80295B3C
+/// #itLipstick_UnkMotion5_Coll
 
-/// #it_80295B70
+/// #it_3F14_Logic23_Clanked
 
-/// #it_80295BAC
+/// #it_3F14_Logic23_Reflected
 
-/// #it_80295BCC
+/// #it_3F14_Logic23_HitShield
 
-/// #it_80295C08
+/// #it_3F14_Logic23_ShieldBounced
 
-void it_80295C28(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic23_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

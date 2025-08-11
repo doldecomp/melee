@@ -3,10 +3,10 @@
 
 #include "ftCommon/forward.h"
 
-/* 09CD5C */ void ftCo_8009F39C(ftCo_GObj* gobj);
-/* 09CDC0 */ void ftCo_MissFoot_Anim(ftCo_GObj* gobj);
-/* 09CDFC */ void ftCo_MissFoot_IASA(ftCo_GObj* gobj);
-/* 09CE00 */ void ftCo_MissFoot_Phys(ftCo_GObj* gobj);
-/* 09CE20 */ void ftCo_MissFoot_Coll(ftCo_GObj* gobj);
+/* 09CD5C */ void ftCo_8009F39C(Fighter_GObj* gobj);
+/* 09CDC0 */ void ftCo_MissFoot_Anim(Fighter_GObj* gobj);
+/* 09CDFC */ void ftCo_MissFoot_IASA(Fighter_GObj* gobj);
+/* 09CE00 */ void ftCo_MissFoot_Phys(Fighter_GObj* gobj);
+/* 09CE20 */ void ftCo_MissFoot_Coll(Fighter_GObj* gobj);
 
 #endif

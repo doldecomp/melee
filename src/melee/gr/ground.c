@@ -1,7 +1,3 @@
-#include <placeholder.h>
-
-#include "gr/forward.h"
-
 #include "ground.h"
 
 #include "grcorneria.h"
@@ -16,10 +12,15 @@
 #include "platform.h"
 #include "stage.h"
 
+#include <placeholder.h>
+
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
+
+#include "gr/forward.h"
+
 #include "gr/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -37,9 +38,12 @@
 #include "mp/mplib.h"
 #include "mp/types.h"
 #include "pl/player.h"
+#include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
+#include "ty/tylist.h"
 #include "un/un_2FC9.h"
+#include "un/un_3028.h"
 
 #include <common_structs.h>
 #include <math.h>
@@ -66,7 +70,7 @@
 #include <baselib/spline.h>
 #include <baselib/wobj.h>
 
-/* 1BFFA8 */ static void Ground_801BFFA8(void);
+/* 1BFFA8 */ static void Ground_OnStart(void);
 /* 1BFFAC */ static void Ground_801BFFAC(bool);
 /* 1C0A70 */ static bool Ground_801C0A70(Vec3* pos);
 /* 1C0C2C */ static void Ground_801C0C2C(HSD_GObj*);
@@ -74,13 +78,13 @@
 /* 1C1D38 */ static void Ground_801C1D38(HSD_GObj*);
 /* 1C1E2C */ static void Ground_801C1E2C(HSD_GObj* gobj, int code);
 /* 1C1E94 */ static void Ground_801C1E94(void);
-/* 1C20E0 */ static UNK_T Ground_801C20E0(UnkArchiveStruct*, UNK_T);
+/* 1C20E0 */ UNK_T Ground_801C20E0(UnkArchiveStruct*, UNK_T);
 /* 1C24F8 */ static bool Ground_801C24F8(s32, u32, s32*);
-/* 1C28CC */ static void Ground_801C28CC(void*, s32);
+/* 1C28CC */ void Ground_801C28CC(void*, s32);
 /* 1C2BBC */ static void Ground_801C2BBC(HSD_GObj*, s32);
 /* 1C2BD4 */ static void Ground_801C2BD4(void*);
-/* 1C34AC */ static void Ground_801C34AC(s32, HSD_JObj*, struct HSD_Joint*);
-/* 1C466C */ static void Ground_801C466C(void);
+/* 1C34AC */ void Ground_801C34AC(s32, HSD_JObj*, struct HSD_Joint*);
+/* 1C466C */ void Ground_801C466C(void);
 /* 1C55AC */ static void Ground_801C55AC(Ground*);
 /* 1C5878 */ static void Ground_801C5878(void);
 
@@ -90,10 +94,10 @@ static StageData Ground_803DFEA8 = {
     0,
     NULL,
     NULL,
-    Ground_801BFFA8,
+    Ground_OnStart,
     Ground_801BFFAC,
-    Ground_801BFFA8,
-    Ground_801BFFA8,
+    Ground_OnStart,
+    Ground_OnStart,
     NULL,
     NULL,
     NULL,
@@ -174,7 +178,9 @@ static inline f32 fabsf(f32 x)
     }
 }
 
-static void Ground_801BFFA8(void) {}
+
+
+static void Ground_OnStart(void) {}
 
 static void Ground_801BFFAC(bool arg0) {}
 
@@ -663,7 +669,7 @@ void Ground_801C0C2C(HSD_GObj* arg0)
 
 void Ground_801C0F78(StructPairWithStageID* pair)
 {
-    Ground_803DFEDC[pair->stage_id]->callback2();
+    Ground_803DFEDC[pair->stage_id]->OnLoad();
 }
 
 void Ground_801C0FB8(StructPairWithStageID* pair)
@@ -674,7 +680,7 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
         void (*unk8)(s32);
     }* cur;
     void* next;
-    Ground_803DFEDC[pair->stage_id]->callback3();
+    Ground_803DFEDC[pair->stage_id]->OnStart();
     for (cur = stage_info.x6A4; cur != NULL; cur = next) {
         next = cur->unk0;
         cur->unk8(cur->unk4);
@@ -2326,7 +2332,7 @@ static void Ground_801C4640(HSD_GObj* gobj, int unused)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-HSD_LightDesc** Ground_801C466C_inline(void)
+LightList** Ground_801C466C_inline(void)
 {
     StageCallbacks* var_r26;
     int i;
@@ -2338,8 +2344,8 @@ HSD_LightDesc** Ground_801C466C_inline(void)
 
     for (i = 0; i < temp_r28; i++) {
         if (var_r26->flags_b0 == 1) {
-            return Ground_801C20E0(0,
-                                   grDatFiles_801C6330(i)->unk4->unk8[i].x18);
+            UnkArchiveStruct* archive = grDatFiles_801C6330(i);
+            return Ground_801C20E0(archive, archive->unk4->unk8[i].x18);
         }
         var_r26++;
     }
@@ -2369,7 +2375,7 @@ UNK_T Ground_803E069C[] = { NULL, NULL, NULL, NULL };
 
 struct a Ground_803E06AC = { NULL, NULL, 0x40000, -1, NULL, NULL, NULL };
 
-static HSD_LightDesc* Ground_803E06C8[3] = { 0 };
+static LightList* Ground_803E06C8[3] = { 0 };
 
 void Ground_801C466C(void)
 {
@@ -2377,10 +2383,10 @@ void Ground_801C466C(void)
     HSD_GObj* temp_r3;
     HSD_LObj* temp_r3_2;
     HSD_LObj* var_r27;
-    HSD_LightDesc** var_r27_2;
+    LightList** var_r27_2;
     HSD_LObj* var_r26_2;
-    HSD_LightDesc** var_r28_2;
-    HSD_LightDesc** var_r3;
+    LightList** var_r28_2;
+    LightList** var_r3;
     float var_f31;
     int temp_r28;
 
@@ -2432,9 +2438,9 @@ void Ground_801C466C(void)
                     AOBJ_ARG_AF, 1.0);
     var_r27_2 = var_r28_2;
     var_r26_2 = temp_r3_2;
-    if ((*var_r28_2)->next != NULL) {
+    if ((*var_r28_2)->anims != NULL) {
         while (var_r26_2 != NULL) {
-            if (Ground_801C43C4((*var_r27_2)->next->class_name) != 0) {
+            if (Ground_801C43C4((*var_r27_2)->anims[0]) != 0) {
                 if (var_r26_2->aobj != NULL) {
                     HSD_AObjSetFlags(var_r26_2->aobj, 0x20000000);
                 }
@@ -2472,7 +2478,7 @@ HSD_GObj* Ground_801C498C(void)
     return gobj;
 }
 
-HSD_LightDesc** Ground_801C49B4(void)
+LightList** Ground_801C49B4(void)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6324();
     if (stage_info.map_plit != NULL) {
@@ -2661,7 +2667,7 @@ SDATA UNK_T Ground_804D451C[] = { &Ground_803E06AC, &Ground_804D4514 };
 SDATA char Ground_804D4524[] = "fog.h";
 SDATA char Ground_804D452C[] = "fog";
 
-float vec_len(Vec3* v)
+static inline float vec_len(Vec3* v)
 {
     float x2 = v->x * v->x;
     float y2 = v->y * v->y;

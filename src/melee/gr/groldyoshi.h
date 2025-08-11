@@ -3,39 +3,41 @@
 
 #include <placeholder.h>
 
-/* 20E798 */ UNK_RET grOldYoshi_8020E798(UNK_PARAMS);
-/* 20E79C */ UNK_RET grOldYoshi_8020E79C(UNK_PARAMS);
-/* 20E824 */ UNK_RET grOldYoshi_8020E824(UNK_PARAMS);
-/* 20E828 */ UNK_RET grOldYoshi_8020E828(UNK_PARAMS);
+#include "it/inlines.h"
+
+/* 20E798 */ void grOldYoshi_8020E798(bool);
+/* 20E79C */ void grOldYoshi_8020E79C(void);
+/* 20E824 */ void grOldYoshi_8020E824(void);
+/* 20E828 */ void grOldYoshi_8020E828(void);
 /* 20E84C */ bool grOldYoshi_8020E84C(void);
 /* 20E854 */ UNK_RET grOldYoshi_8020E854(UNK_PARAMS);
-/* 20E93C */ UNK_RET grOldYoshi_8020E93C(UNK_PARAMS);
-/* 20E968 */ UNK_RET grOldYoshi_8020E968(UNK_PARAMS);
-/* 20E970 */ UNK_RET grOldYoshi_8020E970(UNK_PARAMS);
-/* 20E974 */ UNK_RET grOldYoshi_8020E974(UNK_PARAMS);
-/* 20E978 */ UNK_RET grOldYoshi_8020E978(UNK_PARAMS);
-/* 20E9E0 */ UNK_RET grOldYoshi_8020E9E0(UNK_PARAMS);
-/* 20E9E8 */ UNK_RET grOldYoshi_8020E9E8(UNK_PARAMS);
-/* 20E9EC */ UNK_RET grOldYoshi_8020E9EC(UNK_PARAMS);
-/* 20E9F0 */ UNK_RET grOldYoshi_8020E9F0(UNK_PARAMS);
-/* 20EA5C */ UNK_RET grOldYoshi_8020EA5C(UNK_PARAMS);
-/* 20EA64 */ UNK_RET grOldYoshi_8020EA64(UNK_PARAMS);
-/* 20EA88 */ UNK_RET grOldYoshi_8020EA88(UNK_PARAMS);
-/* 20EA8C */ UNK_RET grOldYoshi_8020EA8C(UNK_PARAMS);
-/* 20EAEC */ UNK_RET grOldYoshi_8020EAEC(UNK_PARAMS);
-/* 20EAF4 */ UNK_RET grOldYoshi_8020EAF4(UNK_PARAMS);
-/* 20EAF8 */ UNK_RET grOldYoshi_8020EAF8(UNK_PARAMS);
-/* 20EAFC */ UNK_RET grOldYoshi_8020EAFC(UNK_PARAMS);
-/* 20EC08 */ UNK_RET grOldYoshi_8020EC08(UNK_PARAMS);
-/* 20EC10 */ UNK_RET grOldYoshi_8020EC10(UNK_PARAMS);
-/* 20EFC8 */ UNK_RET grOldYoshi_8020EFC8(UNK_PARAMS);
-/* 20EFCC */ UNK_RET grOldYoshi_8020EFCC(UNK_PARAMS);
-/* 20F080 */ UNK_RET grOldYoshi_8020F080(UNK_PARAMS);
-/* 20F088 */ UNK_RET grOldYoshi_8020F088(UNK_PARAMS);
-/* 20F2A4 */ UNK_RET grOldYoshi_8020F2A4(UNK_PARAMS);
+/* 20E93C */ void grOldYoshi_8020E93C(Ground_GObj*);
+/* 20E968 */ bool grOldYoshi_8020E968(Ground_GObj*);
+/* 20E970 */ void grOldYoshi_8020E970(Ground_GObj*);
+/* 20E974 */ void grOldYoshi_8020E974(Ground_GObj*);
+/* 20E978 */ void grOldYoshi_8020E978(Ground_GObj*);
+/* 20E9E0 */ bool grOldYoshi_8020E9E0(Ground_GObj*);
+/* 20E9E8 */ void grOldYoshi_8020E9E8(Ground_GObj*);
+/* 20E9EC */ void grOldYoshi_8020E9EC(Ground_GObj*);
+/* 20E9F0 */ void grOldYoshi_8020E9F0(Ground_GObj*);
+/* 20EA5C */ bool grOldYoshi_8020EA5C(Ground_GObj*);
+/* 20EA64 */ void grOldYoshi_8020EA64(Ground_GObj*);
+/* 20EA88 */ void grOldYoshi_8020EA88(Ground_GObj*);
+/* 20EA8C */ void grOldYoshi_8020EA8C(Ground_GObj*);
+/* 20EAEC */ bool grOldYoshi_8020EAEC(Ground_GObj*);
+/* 20EAF4 */ void grOldYoshi_8020EAF4(Ground_GObj*);
+/* 20EAF8 */ void grOldYoshi_8020EAF8(Ground_GObj*);
+/* 20EAFC */ void grOldYoshi_8020EAFC(Ground_GObj*);
+/* 20EC08 */ bool grOldYoshi_8020EC08(Ground_GObj*);
+/* 20EC10 */ void grOldYoshi_8020EC10(Ground_GObj*);
+/* 20EFC8 */ void grOldYoshi_8020EFC8(Ground_GObj*);
+/* 20EFCC */ void grOldYoshi_8020EFCC(Ground_GObj*);
+/* 20F080 */ bool grOldYoshi_8020F080(Ground_GObj*);
+/* 20F088 */ void grOldYoshi_8020F088(Ground_GObj*);
+/* 20F2A4 */ void grOldYoshi_8020F2A4(Ground_GObj*);
 /* 20F2A8 */ UNK_RET fn_8020F2A8(UNK_PARAMS);
 /* 20F31C */ UNK_RET grOldYoshi_8020F31C(UNK_PARAMS);
-/* 20F404 */ UNK_RET grOldYoshi_8020F404(UNK_PARAMS);
-/* 20F40C */ UNK_RET grOldYoshi_8020F40C(UNK_PARAMS);
+/* 20F404 */ DynamicsDesc* grOldYoshi_8020F404(enum_t);
+/* 20F40C */ bool grOldYoshi_8020F40C(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

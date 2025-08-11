@@ -16,24 +16,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 223580 */ static void grTSamus_80223580(int);
+/* 223580 */ static void grTSamus_80223580(bool);
 /* 223584 */ static void grTSamus_80223584(void);
-/* 2235F4 */ static void grTSamus_802235F4(void);
-/* 2235F8 */ static void grTSamus_802235F8(void);
+/* 2235F4 */ static void grTsamus_UnkStage0_OnLoad(void);
+/* 2235F8 */ static void grTsamus_UnkStage0_OnStart(void);
 /* 22361C */ static bool grTSamus_8022361C(void);
 /* 223624 */ static HSD_GObj* grTSamus_80223624(s32);
-/* 22370C */ static void grTSamus_8022370C(HSD_GObj*);
-/* 223738 */ static bool grTSamus_80223738(HSD_GObj*);
-/* 223740 */ static void grTSamus_80223740(HSD_GObj*);
-/* 223744 */ static void grTSamus_80223744(HSD_GObj*);
-/* 223748 */ static void grTSamus_80223748(HSD_GObj*);
-/* 223798 */ static bool grTSamus_80223798(HSD_GObj*);
-/* 2237A0 */ static void grTSamus_802237A0(HSD_GObj*);
-/* 2237D4 */ static void grTSamus_802237D4(HSD_GObj*);
-/* 2237D8 */ static void grTSamus_802237D8(HSD_GObj*);
-/* 223828 */ static bool grTSamus_80223828(HSD_GObj*);
-/* 223830 */ static void grTSamus_80223830(HSD_GObj*);
-/* 223850 */ static void grTSamus_80223850(HSD_GObj*);
+/* 22370C */ static void grTSamus_8022370C(Ground_GObj*);
+/* 223738 */ static bool grTSamus_80223738(Ground_GObj*);
+/* 223740 */ static void grTSamus_80223740(Ground_GObj*);
+/* 223744 */ static void grTSamus_80223744(Ground_GObj*);
+/* 223748 */ static void grTSamus_80223748(Ground_GObj*);
+/* 223798 */ static bool grTSamus_80223798(Ground_GObj*);
+/* 2237A0 */ static void grTSamus_802237A0(Ground_GObj*);
+/* 2237D4 */ static void grTSamus_802237D4(Ground_GObj*);
+/* 2237D8 */ static void grTSamus_802237D8(Ground_GObj*);
+/* 223828 */ static bool grTSamus_80223828(Ground_GObj*);
+/* 223830 */ static void grTSamus_80223830(Ground_GObj*);
+/* 223850 */ static void grTSamus_80223850(Ground_GObj*);
 /* 223854 */ static DynamicsDesc* grTSamus_80223854(enum_t);
 /* 22385C */ static bool grTSamus_8022385C(Vec3*, int, HSD_JObj*);
 
@@ -68,15 +68,15 @@ StageData grTSs_803E9454 = {
     "/GrTSs.dat",
     grTSamus_80223584,
     grTSamus_80223580,
-    grTSamus_802235F4,
-    grTSamus_802235F8,
+    grTsamus_UnkStage0_OnLoad,
+    grTsamus_UnkStage0_OnStart,
     grTSamus_8022361C,
     grTSamus_80223854,
     grTSamus_8022385C,
     1,
 };
 
-void grTSamus_80223580(int unk0) {}
+void grTSamus_80223580(bool unk0) {}
 
 void grTSamus_80223584(void)
 {
@@ -92,9 +92,9 @@ void grTSamus_80223584(void)
     Ground_801C42AC();
 }
 
-void grTSamus_802235F4(void) {}
+void grTsamus_UnkStage0_OnLoad(void) {}
 
-void grTSamus_802235F8(void)
+void grTsamus_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -133,55 +133,55 @@ HSD_GObj* grTSamus_80223624(s32 arg0)
     return gobj;
 }
 
-void grTSamus_8022370C(HSD_GObj* gobj)
+void grTSamus_8022370C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTSamus_80223738(HSD_GObj* gobj)
+bool grTSamus_80223738(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTSamus_80223740(HSD_GObj* gobj) {}
+void grTSamus_80223740(Ground_GObj* gobj) {}
 
-void grTSamus_80223744(HSD_GObj* gobj) {}
+void grTSamus_80223744(Ground_GObj* gobj) {}
 
-void grTSamus_80223748(HSD_GObj* gobj)
+void grTSamus_80223748(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTSamus_80223798(HSD_GObj* gobj)
+bool grTSamus_80223798(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTSamus_802237A0(HSD_GObj* gobj)
+void grTSamus_802237A0(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTSamus_802237D4(HSD_GObj* gobj) {}
+void grTSamus_802237D4(Ground_GObj* gobj) {}
 
-void grTSamus_802237D8(HSD_GObj* gobj)
+void grTSamus_802237D8(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTSamus_80223828(HSD_GObj* gobj)
+bool grTSamus_80223828(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTSamus_80223830(HSD_GObj* gobj)
+void grTSamus_80223830(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTSamus_80223850(HSD_GObj* gobj) {}
+void grTSamus_80223850(Ground_GObj* gobj) {}
 
 DynamicsDesc* grTSamus_80223854(enum_t arg0)
 {

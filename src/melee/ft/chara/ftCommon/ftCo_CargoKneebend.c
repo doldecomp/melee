@@ -18,7 +18,7 @@
 
 #include <dolphin/mtx.h>
 
-void ftCo_8009B9C8(ftCo_GObj* gobj, int arg1)
+void ftCo_8009B9C8(Fighter_GObj* gobj, int arg1)
 {
     u8 _[20] = { 0 };
     Fighter* fp = gobj->user_data;
@@ -32,9 +32,9 @@ void ftCo_8009B9C8(ftCo_GObj* gobj, int arg1)
     ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedWait);
 }
 
-void ftCo_CargoKneebend_Anim(ftCo_GObj* gobj)
+void ftCo_CargoKneebend_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.ca.specialhi.vel.y <= 0) {
         ftCo_8009BB64(gobj);
     }

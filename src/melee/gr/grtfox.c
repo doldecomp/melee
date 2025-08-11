@@ -20,24 +20,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTFox_80220B80(int);                   /* static */
+void grTFox_80220B80(bool);                   /* static */
 void grTFox_80220B84(void);                  /* static */
-void grTFox_80220BFC(void);                  /* static */
-void grTFox_80220C00(void);                  /* static */
+void grTfox_UnkStage0_OnLoad(void);                  /* static */
+void grTfox_UnkStage0_OnStart(void);                  /* static */
 bool grTFox_80220C24(void);                  /* static */
 HSD_GObj* grTFox_80220C2C(s32);              /* static */
-void grTFox_80220D14(HSD_GObj*);             /* static */
-bool grTFox_80220D40(HSD_GObj*);             /* static */
-void grTFox_80220D48(HSD_GObj*);             /* static */
-void grTFox_80220D4C(HSD_GObj*);             /* static */
-void grTFox_80220D50(HSD_GObj*);             /* static */
-bool grTFox_80220DA0(HSD_GObj*);             /* static */
-void grTFox_80220DA8(HSD_GObj*);             /* static */
-void grTFox_80220DDC(HSD_GObj*);             /* static */
-void grTFox_80220DE0(HSD_GObj*);             /* static */
-bool grTFox_80220E30(HSD_GObj*);             /* static */
-void grTFox_80220E38(HSD_GObj*);             /* static */
-void grTFox_80220E58(HSD_GObj*);             /* static */
+void grTFox_80220D14(Ground_GObj*);             /* static */
+bool grTFox_80220D40(Ground_GObj*);             /* static */
+void grTFox_80220D48(Ground_GObj*);             /* static */
+void grTFox_80220D4C(Ground_GObj*);             /* static */
+void grTFox_80220D50(Ground_GObj*);             /* static */
+bool grTFox_80220DA0(Ground_GObj*);             /* static */
+void grTFox_80220DA8(Ground_GObj*);             /* static */
+void grTFox_80220DDC(Ground_GObj*);             /* static */
+void grTFox_80220DE0(Ground_GObj*);             /* static */
+bool grTFox_80220E30(Ground_GObj*);             /* static */
+void grTFox_80220E38(Ground_GObj*);             /* static */
+void grTFox_80220E58(Ground_GObj*);             /* static */
 DynamicsDesc* grTFox_80220E5C(enum_t);       /* static */
 bool grTFox_80220F08(Vec3*, int, HSD_JObj*); /* static */
 
@@ -64,15 +64,15 @@ StageData grTFx_803E8A34 = {
     "/GrTFx.dat",
     grTFox_80220B84,
     grTFox_80220B80,
-    grTFox_80220BFC,
-    grTFox_80220C00,
+    grTfox_UnkStage0_OnLoad,
+    grTfox_UnkStage0_OnStart,
     grTFox_80220C24,
     grTFox_80220E5C,
     grTFox_80220F08,
     1,
 };
 
-void grTFox_80220B80(int unk) {}
+void grTFox_80220B80(bool unk) {}
 
 void grTFox_80220B84(void)
 {
@@ -89,9 +89,9 @@ void grTFox_80220B84(void)
     Ground_801C42AC();
 }
 
-void grTFox_80220BFC(void) {}
+void grTfox_UnkStage0_OnLoad(void) {}
 
-void grTFox_80220C00(void)
+void grTfox_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -129,55 +129,55 @@ HSD_GObj* grTFox_80220C2C(s32 arg0)
     return gobj;
 }
 
-void grTFox_80220D14(HSD_GObj* gobj)
+void grTFox_80220D14(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTFox_80220D40(HSD_GObj* gobj)
+bool grTFox_80220D40(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTFox_80220D48(HSD_GObj* gobj) {}
+void grTFox_80220D48(Ground_GObj* gobj) {}
 
-void grTFox_80220D4C(HSD_GObj* gobj) {}
+void grTFox_80220D4C(Ground_GObj* gobj) {}
 
-void grTFox_80220D50(HSD_GObj* gobj)
+void grTFox_80220D50(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTFox_80220DA0(HSD_GObj* gobj)
+bool grTFox_80220DA0(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTFox_80220DA8(HSD_GObj* gobj)
+void grTFox_80220DA8(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTFox_80220DDC(HSD_GObj* gobj) {}
+void grTFox_80220DDC(Ground_GObj* gobj) {}
 
-void grTFox_80220DE0(HSD_GObj* gobj)
+void grTFox_80220DE0(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTFox_80220E30(HSD_GObj* gobj)
+bool grTFox_80220E30(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTFox_80220E38(HSD_GObj* gobj)
+void grTFox_80220E38(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTFox_80220E58(HSD_GObj* gobj) {}
+void grTFox_80220E58(Ground_GObj* gobj) {}
 
 DynamicsDesc* grTFox_80220E5C(enum_t arg0)
 {

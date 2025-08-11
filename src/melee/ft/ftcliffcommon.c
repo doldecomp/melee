@@ -21,10 +21,10 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-bool ftCliffCommon_80081298(ftCo_GObj* gobj)
+bool ftCliffCommon_80081298(Fighter_GObj* gobj)
 {
     Fighter* other_fp;
-    ftCo_GObj* other_gobj;
+    Fighter_GObj* other_gobj;
 
     u8 _[8];
 
@@ -50,7 +50,7 @@ bool ftCliffCommon_80081298(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCliffCommon_80081370(ftCo_GObj* gobj)
+void ftCliffCommon_80081370(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Vec3 vec;
@@ -94,22 +94,22 @@ void ftCliffCommon_80081370(ftCo_GObj* gobj)
         }
     }
     {
-        ftCo_Fighter* fp = gobj->user_data;
+        Fighter* fp = gobj->user_data;
         efAsync_Spawn(gobj, &fp->x60C, 2, 1052, 0, &vec);
     }
-    ft_80088148(fp, 4, 127, 64);
+    ft_PlaySFX(fp, 4, 127, 64);
 }
 
-void ftCo_CliffCatch_Anim(ftCo_GObj* gobj)
+void ftCo_CliffCatch_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_8009A804(gobj);
     }
 }
 
-void ftCo_CliffCatch_IASA(ftCo_GObj* arg0) {}
+void ftCo_CliffCatch_IASA(Fighter_GObj* arg0) {}
 
-void ftCo_CliffCatch_Phys(ftCo_GObj* gobj)
+void ftCo_CliffCatch_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (mpLib_80054ED8(fp->mv.co.cliff.ledge_id) != 0) {
@@ -127,7 +127,7 @@ void ftCo_CliffCatch_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CliffCatch_Coll(ftCo_GObj* gobj)
+void ftCo_CliffCatch_Coll(Fighter_GObj* gobj)
 {
     u8 _[8];
 
@@ -142,7 +142,7 @@ void ftCo_CliffCatch_Coll(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_Cliff_Cam(ftCo_GObj* gobj)
+void ftCo_Cliff_Cam(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCamera_UpdateCameraBox(gobj);

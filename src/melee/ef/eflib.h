@@ -7,8 +7,6 @@
 #include "ef/forward.h"
 #include <baselib/forward.h>
 
-#include "baselib/psappsrt.h"
-
 #include <baselib/objalloc.h>
 
 /* 05B4B8 */ void efLib_8005B4B8(void);
@@ -31,23 +29,25 @@
 /* 05C9A4 */ void efLib_8005C9A4(HSD_GObj*);
 /* 05C9D0 */ void fn_8005C9D0(HSD_GObj*);
 // /* 05C9FC */ Effect* efLib_8005C9FC();
-/* 05C9FC */ UnkGeneratorStruct* efLib_8005C9FC(u32, Vec3*);
+/* 05C9FC */ HSD_Generator* efLib_8005C9FC(s32, Vec3*);
 // /* 05C9FC */ Effect* efLib_8005C9FC(u32, Vec3*, f32, Vec3*, ...);
-/* 05CAB0 */ UnkGeneratorStruct* efLib_8005CAB0(u32);
-/* 05CB34 */ UnkGeneratorStruct* efLib_8005CB34(u32, Vec3*, f32);
-/* 05CC2C */ UnkGeneratorStruct* efLib_8005CC2C(int, HSD_JObj*);
-// /* 05CC84 */ UnkGeneratorStruct* efLib_8005CC84(u32,  HSD_JObj*, ...);
-/* 05CC84 */ UnkGeneratorStruct* efLib_8005CC84(u32, HSD_JObj*);
-/* 05CD2C */ UnkGeneratorStruct* efLib_8005CD2C(u32, void*, HSD_GObj*);
-/* 05CE48 */ UnkGeneratorStruct* efLib_8005CE48(u32, void*);
-/* 05CF40 */ UnkGeneratorStruct* efLib_8005CF40(u32, void*);
-/* 05D044 */ UnkGeneratorStruct* efLib_8005D044(u32, void*);
+/* 05CAB0 */ HSD_Generator* efLib_8005CAB0(s32);
+/* 05CB34 */ HSD_Generator* efLib_8005CB34(s32, Vec3*, f32);
+/* 05CC2C */ HSD_Generator* efLib_8005CC2C(s32, HSD_JObj*);
+// /* 05CC84 */ HSD_Generator* efLib_8005CC84(u32,  HSD_JObj*, ...);
+/* 05CC84 */ HSD_Generator* efLib_8005CC84(s32, HSD_JObj*);
+/* 05CD2C */ HSD_Generator* efLib_8005CD2C(s32, void*, HSD_GObj*);
+/* 05CE48 */ HSD_Generator* efLib_8005CE48(s32, void*);
+/* 05CF40 */ HSD_Generator* efLib_8005CF40(s32, void*);
+/* 05D044 */ HSD_Generator* efLib_8005D044(s32, void*);
 /* 05D174 */ void efLib_8005D174(s8, s32, HSD_JObj*, s32);
-/* 05DB20 */ void
-fn_8005DB20(s32, s32, s32,
-            HSD_JObj*); // Should this be the same type args as fn_8005DB70?
-/* 05DB70 */ void fn_8005DB70(int, int lo, int hi, HSD_JObj* jobj);
-/* 05DBC0 */ void efLib_8005DBC0(struct UnkGeneratorStruct2*);
+/* 05DB20 */ void fn_8005DB20(s32, s32, s32, HSD_JObj*);
+// /* 05DB70 */ void fn_8005DB70(s32, s32, s32, HSD_JObj*);
+/* 05DB70 */ void
+fn_8005DB70(int, int, int,
+            HSD_JObj*); // args must be int type to be able to satisfy passing
+                        // into HSD_JObjSetDPtclCallback
+/* 05DBC0 */ void efLib_8005DBC0(HSD_Particle*);
 /* 05DCD0 */ void fn_8005DCD0(void*);
 /* 05DDB8 */ void efLib_8005DDB8(Effect*);
 /* 05DE94 */ void efLib_8005DE94(Effect*);
@@ -69,7 +69,7 @@ fn_8005DB20(s32, s32, s32,
 /* 05F990 */ void efLib_8005F990(HSD_GObj*, s32);
 /* 05FAB8 */ void efLib_8005FAB8(Effect*);
 /* 05FBE4 */ void fn_8005FBE4(Effect*);
-/* 05FCD8 */ Effect* efLib_8005FCD8(int, HSD_GObj*, void*, void*);
+/* 05FCD8 */ Effect* efLib_8005FCD8(int, HSD_GObj*, HSD_JObj*, Vec3*);
 /* 458EB0 */ extern HSD_ObjAllocData Effect_AllocData;
 
 #endif

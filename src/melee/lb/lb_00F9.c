@@ -5,6 +5,9 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/cobj.h>
+#include <baselib/lobj.h>
+#include <baselib/memory.h>
+#include <melee/sc/types.h>
 
 static inline bool checkJObjFlags(HSD_JObj* jobj)
 {
@@ -23,7 +26,15 @@ void lb_8000F9F8(HSD_JObj* jobj)
 
 /// #lb_8000FA94
 
-/// #lb_8000FCDC
+UNK_T lb_804D63A0;
+UNK_T lb_804D63A8;
+
+void lb_8000FCDC(void)
+{
+    lb_804D63A0 = HSD_MemAlloc(0xBE00);
+    lb_804D63A8 = HSD_MemAlloc(0x1C0);
+    lb_8000FA94();
+}
 
 /// #lb_8000FD18
 
@@ -54,7 +65,33 @@ enum_t lb_80011ABC(void)
     return lb_804D63B4;
 }
 
-/// #lb_80011AC4
+HSD_LObj* lb_80011AC4(LightList** list)
+{
+    HSD_LObj* prev;
+    HSD_LObj* curr;
+    HSD_LObj* first;
+    HSD_LightAnim** temp_r4;
+
+    prev = NULL;
+    while (*list != NULL) {
+        curr = HSD_LObjLoadDesc((*list)->desc);
+        temp_r4 = (*list)->anims;
+        if (temp_r4 != NULL) {
+            HSD_LObjAddAnimAll(curr, temp_r4[0]);
+        }
+        if (prev != NULL) {
+            if (prev == NULL) {
+                __assert("lobj.h", 0x136, "lobj");
+            }
+            prev->next = curr;
+        } else {
+            first = curr;
+        }
+        prev = curr;
+        list++;
+    }
+    return first;
+}
 
 /// #lb_80011B74
 

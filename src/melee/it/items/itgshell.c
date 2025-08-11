@@ -13,94 +13,94 @@
 
 /// #it_8028BC2C
 
-/// #it_8028BDAC
+/// #it_3F14_Logic14_Spawned
 
 /// #it_8028BE54
 
-bool it_8028BEE8(void)
+bool itGshell_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028BEF0(void) {}
+void itGshell_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_8028BEF4
+/// #itGshell_UnkMotion0_Coll
 
 /// #it_8028C018
 
-/// #it_8028C054
+/// #itGshell_UnkMotion1_Anim
 
-/// #it_8028C0D0
+/// #itGshell_UnkMotion1_Phys
 
-/// #it_8028C100
+/// #itGshell_UnkMotion1_Coll
 
-/// #it_8028C148
+/// #it_3F14_Logic14_PickedUp
 
-bool it_8028C1A0(void)
+bool itGshell_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028C1A8(void) {}
+void itGshell_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_8028C1AC
+/// #it_3F14_Logic14_Thrown
 
-/// #it_8028C1FC
+/// #itGshell_UnkMotion3_Anim
 
-/// #it_8028C2A4
+/// #itGshell_UnkMotion3_Phys
 
-/// #it_8028C2D4
+/// #itGshell_UnkMotion3_Coll
 
-/// #it_8028C300
+/// #it_3F14_Logic14_Dropped
 
-/// #it_8028C328
+/// #itGshell_UnkMotion4_Anim
 
-/// #it_8028C34C
+/// #itGshell_UnkMotion4_Phys
 
-/// #it_8028C37C
+/// #itGshell_UnkMotion4_Coll
 
 /// #it_8028C3A8
 
-/// #it_8028C52C
+/// #itGshell_UnkMotion6_Anim
 
-/// #it_8028C6E4
+/// #itGshell_UnkMotion6_Phys
 
-/// #it_8028C75C
+/// #itGshell_UnkMotion6_Coll
 
 /// #it_8028C898
 
-/// #it_8028CA14
+/// #itGshell_UnkMotion8_Anim
 
-/// #it_8028CAC8
+/// #itGshell_UnkMotion8_Phys
 
-/// #it_8028CAF8
+/// #itGshell_UnkMotion8_Coll
 
-/// #it_8028CB24
+/// #it_3F14_Logic14_EnteredAir
 
-bool it_8028CB70(void)
+bool itGshell_UnkMotion9_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028CB78(void) {}
+void itGshell_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #it_8028CB7C
+/// #itGshell_UnkMotion9_Coll
 
-/// #it_8028CCA8
+/// #it_3F14_Logic14_DmgDealt
 
-/// #it_8028CCCC
+/// #it_3F14_Logic14_DmgReceived
 
-/// #it_8028CD04
+/// #it_3F14_Logic14_Reflected
 
-/// #it_8028CD3C
+/// #it_3F14_Logic14_Clanked
 
-/// #it_8028CE1C
+/// #it_3F14_Logic14_HitShield
 
-/// #it_8028CF2C
+/// #it_3F14_Logic14_ShieldBounced
 
 /// #it_8028CF68
 
-void it_8028CFC0(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic14_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

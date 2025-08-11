@@ -1,6 +1,8 @@
 #include <platform.h>
 
-void grPushOn_802182C4(void) {}
+#include "grpushon.h"
+
+void grPushOn_802182C4(bool arg) {}
 
 /// #grPushOn_802182C8
 
@@ -17,18 +19,18 @@ bool grPushOn_802183DC(void)
 
 /// #grPushOn_802184CC
 
-bool grPushOn_80218590(void)
+bool grPushOn_80218590(Ground_GObj* arg)
 {
     return false;
 }
 
-void grPushOn_80218598(void) {}
+void grPushOn_80218598(Ground_GObj* arg) {}
 
-void grPushOn_8021859C(void) {}
+void grPushOn_8021859C(Ground_GObj* arg) {}
 
 /// #grPushOn_802185A0
 
-bool grPushOn_80218670(void)
+bool grPushOn_80218670(Ground_GObj* arg)
 {
     return false;
 }
@@ -37,18 +39,18 @@ bool grPushOn_80218670(void)
 
 /// #grPushOn_802186C8
 
-void grPushOn_802187A4(void) {}
+void grPushOn_802187A4(Ground_GObj* arg) {}
 
 /// #grPushOn_802187A8
 
-bool grPushOn_80218880(void)
+bool grPushOn_80218880(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grPushOn_80218888
 
-void grPushOn_80218ED0(void) {}
+void grPushOn_80218ED0(Ground_GObj* arg) {}
 
 /// #grPushOn_80218ED4
 
@@ -66,7 +68,7 @@ void grPushOn_80218ED0(void) {}
 
 /// #grPushOn_80219458
 
-bool grPushOn_80219528(void)
+bool grPushOn_80219528(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

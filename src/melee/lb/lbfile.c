@@ -84,11 +84,13 @@ char* lbFile_80016204(const char* basename)
     return lbFile_80432058;
 }
 
+#ifndef BUGFIX
 typedef struct OldDVDFileInfo {
     /*0x00*/ DVDCommandBlock cb;
     /*0x30*/ u32 startAddr;
     /*0x34*/ u32 length;
 } OldDVDFileInfo;
+#endif
 
 /// @bug OldDVDFileInfo is needed to match stack allocation sizes. However,
 /// the actual DVDFileInfo is 4 bytes longer due to callback.
@@ -98,7 +100,11 @@ typedef struct OldDVDFileInfo {
 /// Get file size:
 size_t lbFile_8001634C(s32 fileno)
 {
+#ifdef BUGFIX
+    DVDFileInfo info;
+#else
     OldDVDFileInfo info;
+#endif
     size_t length;
     bool intr = OSDisableInterrupts();
 

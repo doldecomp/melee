@@ -48,9 +48,12 @@ struct SIPacket {
 };
 
 int SIBusy();
+BOOL SIIsChanBusy(int chan);
+BOOL SIRegisterPollingHandler(__OSInterruptHandler);
+BOOL SIUnregisterPollingHandler(__OSInterruptHandler);
 void SIInit();
 unsigned long SISync();
-unsigned long SIGetStatus();
+unsigned long SIGetStatus(int);
 void SISetCommand(long chan, unsigned long command);
 unsigned long SIGetCommand(long chan);
 void SITransferCommands();
@@ -61,7 +64,7 @@ int SIGetResponse(long chan, void* data);
 int SITransfer(long chan, void* output, unsigned long outputBytes, void* input,
                unsigned long inputBytes,
                void (*callback)(long, unsigned long, struct OSContext*),
-               long long time);
+               OSTime delay);
 unsigned long SIGetType(long chan);
 unsigned long SIGetTypeAsync(long chan, SITypeAndStatusCallback callback);
 

@@ -18,24 +18,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTLink_8022192C(int);                   /* static */
+void grTLink_8022192C(bool);                   /* static */
 void grTLink_80221930(void);                  /* static */
-void grTLink_802219A0(void);                  /* static */
-void grTLink_802219A4(void);                  /* static */
+void grTlink_UnkStage0_OnLoad(void);                  /* static */
+void grTlink_UnkStage0_OnStart(void);                  /* static */
 bool grTLink_802219C8(void);                  /* static */
 HSD_GObj* grTLink_802219D0(s32 arg0);         /* static */
-void grTLink_80221AB8(HSD_GObj*);             /* static */
-bool grTLink_80221AE4(HSD_GObj*);             /* static */
-void grTLink_80221AEC(HSD_GObj*);             /* static */
-void grTLink_80221AF0(HSD_GObj*);             /* static */
-void grTLink_80221AF4(HSD_GObj*);             /* static */
-bool grTLink_80221B44(HSD_GObj*);             /* static */
-void grTLink_80221B4C(HSD_GObj*);             /* static */
-void grTLink_80221B80(HSD_GObj*);             /* static */
-void grTLink_80221B84(HSD_GObj*);             /* static */
-bool grTLink_80221BD4(HSD_GObj*);             /* static */
-void grTLink_80221BDC(HSD_GObj*);             /* static */
-void grTLink_80221BFC(HSD_GObj*);             /* static */
+void grTLink_80221AB8(Ground_GObj*);             /* static */
+bool grTLink_80221AE4(Ground_GObj*);             /* static */
+void grTLink_80221AEC(Ground_GObj*);             /* static */
+void grTLink_80221AF0(Ground_GObj*);             /* static */
+void grTLink_80221AF4(Ground_GObj*);             /* static */
+bool grTLink_80221B44(Ground_GObj*);             /* static */
+void grTLink_80221B4C(Ground_GObj*);             /* static */
+void grTLink_80221B80(Ground_GObj*);             /* static */
+void grTLink_80221B84(Ground_GObj*);             /* static */
+bool grTLink_80221BD4(Ground_GObj*);             /* static */
+void grTLink_80221BDC(Ground_GObj*);             /* static */
+void grTLink_80221BFC(Ground_GObj*);             /* static */
 DynamicsDesc* grTLink_80221C00(enum_t);       /* static */
 bool grTLink_80221C08(Vec3*, int, HSD_JObj*); /* static */
 
@@ -55,15 +55,15 @@ StageData grTLk_803E8D8C = {
     "/GrTLk.dat",
     grTLink_80221930,
     grTLink_8022192C,
-    grTLink_802219A0,
-    grTLink_802219A4,
+    grTlink_UnkStage0_OnLoad,
+    grTlink_UnkStage0_OnStart,
     grTLink_802219C8,
     grTLink_80221C00,
     grTLink_80221C08,
     1,
 };
 
-void grTLink_8022192C(int unk0) {}
+void grTLink_8022192C(bool unk0) {}
 
 void grTLink_80221930(void)
 {
@@ -79,9 +79,9 @@ void grTLink_80221930(void)
     Ground_801C42AC();
 }
 
-void grTLink_802219A0(void) {}
+void grTlink_UnkStage0_OnLoad(void) {}
 
-void grTLink_802219A4(void)
+void grTlink_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -119,55 +119,55 @@ HSD_GObj* grTLink_802219D0(s32 arg0)
     return gobj;
 }
 
-void grTLink_80221AB8(HSD_GObj* gobj)
+void grTLink_80221AB8(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTLink_80221AE4(HSD_GObj* gobj)
+bool grTLink_80221AE4(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTLink_80221AEC(HSD_GObj* gobj) {}
+void grTLink_80221AEC(Ground_GObj* gobj) {}
 
-void grTLink_80221AF0(HSD_GObj* gobj) {}
+void grTLink_80221AF0(Ground_GObj* gobj) {}
 
-void grTLink_80221AF4(HSD_GObj* gobj)
+void grTLink_80221AF4(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTLink_80221B44(HSD_GObj* gobj)
+bool grTLink_80221B44(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTLink_80221B4C(HSD_GObj* gobj)
+void grTLink_80221B4C(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTLink_80221B80(HSD_GObj* gobj) {}
+void grTLink_80221B80(Ground_GObj* gobj) {}
 
-void grTLink_80221B84(HSD_GObj* gobj)
+void grTLink_80221B84(Ground_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool grTLink_80221BD4(HSD_GObj* gobj)
+bool grTLink_80221BD4(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTLink_80221BDC(HSD_GObj* gobj)
+void grTLink_80221BDC(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTLink_80221BFC(HSD_GObj* gobj) {}
+void grTLink_80221BFC(Ground_GObj* gobj) {}
 
 DynamicsDesc* grTLink_80221C00(enum_t arg0)
 {

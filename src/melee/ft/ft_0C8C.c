@@ -17,7 +17,7 @@
 #include "ftCommon/ftCo_Lift.h"
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftMasterHand/ftMh_Damage_0.h"
-#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
 #include "lb/lbbgflash.h"
 #include "pl/player.h"
 
@@ -90,7 +90,7 @@ void ftCo_800C8D00(Fighter_GObj* gobj)
 
 void fn_800C8E40(Fighter* fp, FtSFX* sfx)
 {
-    ft_80088148(fp, fp->ft_data->x4C_sfx->xC, SFX_VOLUME_MAX, SFX_PAN_MID);
+    ft_PlaySFX(fp, fp->ft_data->x4C_sfx->xC, SFX_VOLUME_MAX, SFX_PAN_MID);
 }
 
 void fn_800C8E74(Fighter_GObj* gobj)

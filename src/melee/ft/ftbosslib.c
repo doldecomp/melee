@@ -1,6 +1,3 @@
-#include "ftCommon/forward.h"
-#include "pl/forward.h"
-
 #include "ftbosslib.h"
 
 #include "ft_0877.h"
@@ -10,12 +7,19 @@
 #include "cm/camera.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftMasterHand/types.h"
 #include "it/it_26B1.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
+
+#include "pl/forward.h"
+
 #include "pl/player.h"
 
+#include <math_ppc.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -23,7 +27,7 @@
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 
-/// @todo Float reorder hack until hopefully fixing #my_sqrtf fixes it.
+/// @todo Float reorder hack
 static float get_zero(void)
 {
     return 0.0f;
@@ -44,51 +48,23 @@ void ftBossLib_8015BDB4(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     Gm_PKind kind = Player_GetPlayerSlotType(fp->player_id);
-    { // TODO: assert macro
-        bool bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
-                    kind == Gm_PKind_Cpu);
-        if (!bad) {
-            OSReport("boss is human or boss!\n");
-            __assert("ftbosslib.c", 103,
-                     "kind == Gm_PKind_Human || kind == Gm_PKind_Boss || kind "
-                     "== Gm_PKind_Cpu");
-        }
-    }
-}
-
-static inline float my_sqrtf(float x)
-{
-    static const double _half = .5;
-    static const double _three = 3.0;
-
-    u8 _[4] = { 0 };
-
-    volatile float y;
-    if (x > 0.0f) {
-        // returns an approximation to
-        double guess = __frsqrte((double) x);
-        // now have 12 sig bits
-        guess = _half * guess * (_three - guess * guess * x);
-        // now have 24 sig bits
-        guess = _half * guess * (_three - guess * guess * x);
-        // now have 32 sig bits
-        guess = _half * guess * (_three - guess * guess * x);
-        y = x * guess;
-        return y;
-    }
-    return x;
+    HSD_ASSERTREPORT(103,
+                     kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
+                         kind == Gm_PKind_Cpu,
+                     "boss is human or boss!\n");
 }
 
 static inline float my_lbvector_Len(Vec3* vec)
 {
-    return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+    return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
 void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, float* arg2, float arg3,
                         float arg4)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     Vec3 diff;
+
     lbVector_Diff(arg1, &fp->cur_pos, &diff);
 
     {
@@ -117,7 +93,7 @@ void ftBossLib_8015BF74(HSD_GObj* gobj, float x_diff_max)
 
     {
         float x_diff = vec.x - fp->cur_pos.x;
-        float abs_x_diff = fabs_inline(x_diff);
+        float abs_x_diff = ABS(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {
@@ -134,7 +110,7 @@ void ftBossLib_8015C010(HSD_GObj* gobj, float x_diff_max)
 
     {
         float x_diff = vec.x - fp->cur_pos.x;
-        float abs_x_diff = fabs_inline(x_diff);
+        float abs_x_diff = ABS(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
         } else {
@@ -323,16 +299,16 @@ void ftBossLib_8015C5F8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     switch (HSD_Randi(4)) {
     case 0:
-        ft_80088148(fp, 0x4E21A, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0x4E21A, 0x7F, 0x40);
         return;
     case 1:
-        ft_80088148(fp, 0x4E21B, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0x4E21B, 0x7F, 0x40);
         return;
     case 2:
-        ft_80088148(fp, 0x4E21C, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0x4E21C, 0x7F, 0x40);
         return;
     case 3:
-        ft_80088148(fp, 0x4E21D, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0x4E21D, 0x7F, 0x40);
         return;
     }
 }

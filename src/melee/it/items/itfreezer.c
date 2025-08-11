@@ -1,5 +1,6 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itfreezer.h"
 
 /// #it_802CCF9C
 
@@ -7,21 +8,21 @@ void it_802CCFFC(void) {}
 
 /// #it_802CD000
 
-/// #it_802CD020
+/// #itFreezer_UnkMotion1_Anim
 
-void it_802CD060(void) {}
+void itFreezer_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_802CD064
+/// #itFreezer_UnkMotion1_Coll
 
 /// #it_802CD090
 
 /// #it_802CD12C
 
-/// #it_802CD18C
+/// #itFreezer_UnkMotion2_Anim
 
-/// #it_802CD230
+/// #itFreezer_UnkMotion2_Phys
 
-bool it_802CD288(void)
+bool itFreezer_UnkMotion2_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -30,8 +31,8 @@ bool it_802CD288(void)
 
 /// #it_802CD2EC
 
-/// #it_802CD360
+/// #itFreezer_UnkMotion0_Anim
 
-/// #it_802CD384
+/// #itFreezer_UnkMotion0_Phys
 
-/// #it_802CD424
+/// #itFreezer_UnkMotion0_Coll

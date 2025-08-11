@@ -18,24 +18,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-static void grTDonkey_80220228(int);
+static void grTDonkey_80220228(bool);
 static void grTDonkey_8022022C(void);
-static void grTDonkey_8022029C(void);
-static void grTDonkey_802202A0(void);
+static void grTdonkey_UnkStage0_OnLoad(void);
+static void grTdonkey_UnkStage0_OnStart(void);
 static bool grTDonkey_802202C4(void);
 static HSD_GObj* grTDonkey_802202CC(int gobj_id);
-static void grTDonkey_802203B4(HSD_GObj* gobj);
-static bool grTDonkey_802203E0(HSD_GObj*);
-static void grTDonkey_802203E8(HSD_GObj*);
-static void grTDonkey_802203EC(HSD_GObj*);
-static void grTDonkey_802203F0(HSD_GObj* gobj);
-static bool grTDonkey_80220440(HSD_GObj*);
-static void grTDonkey_80220448(HSD_GObj* gobj);
-static void grTDonkey_8022047C(HSD_GObj*);
-static void grTDonkey_80220480(HSD_GObj* gobj);
-static bool grTDonkey_802204D0(HSD_GObj*);
-static void grTDonkey_802204D8(HSD_GObj*);
-static void grTDonkey_802204F8(HSD_GObj*);
+static void grTDonkey_802203B4(Ground_GObj* gobj);
+static bool grTDonkey_802203E0(Ground_GObj*);
+static void grTDonkey_802203E8(Ground_GObj*);
+static void grTDonkey_802203EC(Ground_GObj*);
+static void grTDonkey_802203F0(Ground_GObj* gobj);
+static bool grTDonkey_80220440(Ground_GObj*);
+static void grTDonkey_80220448(Ground_GObj* gobj);
+static void grTDonkey_8022047C(Ground_GObj*);
+static void grTDonkey_80220480(Ground_GObj* gobj);
+static bool grTDonkey_802204D0(Ground_GObj*);
+static void grTDonkey_802204D8(Ground_GObj*);
+static void grTDonkey_802204F8(Ground_GObj*);
 static DynamicsDesc* grTDonkey_802204FC(enum_t);
 static bool grTDonkey_80220504(Vec3*, int, HSD_JObj*);
 
@@ -55,8 +55,8 @@ StageData grTDk_803E87EC = {
     "/GrTDk.dat",
     grTDonkey_8022022C,
     grTDonkey_80220228,
-    grTDonkey_8022029C,
-    grTDonkey_802202A0,
+    grTdonkey_UnkStage0_OnLoad,
+    grTdonkey_UnkStage0_OnStart,
     grTDonkey_802202C4,
     grTDonkey_802204FC,
     grTDonkey_80220504,
@@ -67,7 +67,7 @@ StageData grTDk_803E87EC = {
 
 extern StageInfo stage_info;
 
-static void grTDonkey_80220228(int arg0) {}
+static void grTDonkey_80220228(bool arg0) {}
 
 static void grTDonkey_8022022C(void)
 {
@@ -82,9 +82,9 @@ static void grTDonkey_8022022C(void)
     Ground_801C42AC();
 }
 
-static void grTDonkey_8022029C(void) {}
+static void grTdonkey_UnkStage0_OnLoad(void) {}
 
-static void grTDonkey_802202A0(void)
+static void grTdonkey_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -121,22 +121,22 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
 
     return gobj;
 }
-static void grTDonkey_802203B4(HSD_GObj* gobj)
+static void grTDonkey_802203B4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTDonkey_802203E0(HSD_GObj* arg0)
+static bool grTDonkey_802203E0(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTDonkey_802203E8(HSD_GObj* arg0) {}
+static void grTDonkey_802203E8(Ground_GObj* arg0) {}
 
-static void grTDonkey_802203EC(HSD_GObj* arg0) {}
+static void grTDonkey_802203EC(Ground_GObj* arg0) {}
 
-static void grTDonkey_802203F0(HSD_GObj* gobj)
+static void grTDonkey_802203F0(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -145,20 +145,20 @@ static void grTDonkey_802203F0(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-static bool grTDonkey_80220440(HSD_GObj* arg0)
+static bool grTDonkey_80220440(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTDonkey_80220448(HSD_GObj* gobj)
+static void grTDonkey_80220448(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTDonkey_8022047C(HSD_GObj* arg0) {}
+static void grTDonkey_8022047C(Ground_GObj* arg0) {}
 
-static void grTDonkey_80220480(HSD_GObj* gobj)
+static void grTDonkey_80220480(Ground_GObj* gobj)
 {
     u8 _[8];
 
@@ -167,17 +167,17 @@ static void grTDonkey_80220480(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-static bool grTDonkey_802204D0(HSD_GObj* arg0)
+static bool grTDonkey_802204D0(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTDonkey_802204D8(HSD_GObj* arg0)
+static void grTDonkey_802204D8(Ground_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
 }
 
-static void grTDonkey_802204F8(HSD_GObj* arg0) {}
+static void grTDonkey_802204F8(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grTDonkey_802204FC(enum_t arg0)
 {

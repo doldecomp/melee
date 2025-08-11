@@ -72,17 +72,7 @@ static inline s32 __fpclassifyd(double x)
     ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                \
                                   : __fpclassifyd((double) (x)))
 
-/// @todo Is #fabs_inline fake? See #ftCo_AttackS3_CheckInput.
 #define ABS(x) ((x) < 0 ? -(x) : (x))
-
-static inline f32 fabs_inline(f32 x)
-{
-    if (x < 0) {
-        return -x;
-    } else {
-        return x;
-    }
-}
 
 static inline double fabs(double f)
 {

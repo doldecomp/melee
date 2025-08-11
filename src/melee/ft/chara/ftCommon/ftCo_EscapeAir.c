@@ -18,7 +18,7 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 099D70 */ static void ftCo_80099D70(ftCo_GObj* gobj);
+/* 099D70 */ static void ftCo_80099D70(Fighter_GObj* gobj);
 
 typedef enum cmd_var_idx {
     cmd_skip_decay,
@@ -26,7 +26,7 @@ typedef enum cmd_var_idx {
 
 bool ftCo_80099A58(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->input.x668 & (HSD_PAD_R | HSD_PAD_L)) {
         ftCo_80099A9C(gobj, p_ftCommonData->x334);
         return true;
@@ -34,7 +34,7 @@ bool ftCo_80099A58(Fighter_GObj* gobj)
     return false;
 }
 
-static inline void inlineA0(ftCo_Fighter* fp)
+static inline void inlineA0(Fighter* fp)
 {
     fp->mv.co.escapeair.self_vel = fp->self_vel;
     if (ABS(fp->input.lstick.x) < p_ftCommonData->escapeair_deadzone.x) {
@@ -54,7 +54,7 @@ static inline void inlineA0(ftCo_Fighter* fp)
 void ftCo_80099A9C(Fighter_GObj* gobj, int timer)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_800D705C(gobj);
     inlineA0(fp);
     fp->cmd_vars[cmd_skip_decay] = false;
@@ -74,9 +74,9 @@ void ftCo_EscapeAir_Anim(Fighter_GObj* gobj)
     }
 }
 
-void ftCo_EscapeAir_IASA(ftCo_GObj* gobj)
+void ftCo_EscapeAir_IASA(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->mv.co.escapeair.timer != 0) {
         bool b;
         Vec3 self_vel = fp->mv.co.escapeair.self_vel;
@@ -95,9 +95,9 @@ void ftCo_EscapeAir_IASA(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_EscapeAir_Phys(ftCo_GObj* gobj)
+void ftCo_EscapeAir_Phys(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (!fp->cmd_vars[cmd_skip_decay]) {
         fp->self_vel.x *= p_ftCommonData->escapeair_decay;
         fp->self_vel.y *= p_ftCommonData->escapeair_decay;
@@ -111,7 +111,7 @@ void ftCo_EscapeAir_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, ftCo_80099D70);
 }
 
-void ftCo_80099D70(ftCo_GObj* gobj)
+void ftCo_80099D70(Fighter_GObj* gobj)
 {
     ftCo_800D5CB0(gobj, 0, p_ftCommonData->x344);
 }

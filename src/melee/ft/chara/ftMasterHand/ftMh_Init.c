@@ -619,11 +619,11 @@ void ftMh_Init_OnLoad(HSD_GObj* gobj)
         ftBossLib_8015BDB4(gobj);
         it_8026B3F8(items[0], 125);
         it_8026B3F8(items[1], 126);
-        fp->x2229_b5_no_normal_motion = true;
+        fp->no_normal_motion = true;
         fp->x2229_b6 = true;
-        fp->x2229_b7 = true;
-        fp->x222A_flag.b0 = true;
-        fp->x222A_flag.b1 = true;
+        fp->no_kb = true;
+        fp->x222A_b0 = true;
+        fp->x222A_b1 = true;
         fp->x2229_b3 = true;
         fp->cur_pos.x = ftData_attr->x30_pos2.x;
         fp->cur_pos.y = ftData_attr->x30_pos2.y;

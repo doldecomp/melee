@@ -8,10 +8,10 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/* 2C7FAC */ static bool it_802C7FAC(Item_GObj*);
+/* 2C7FAC */ static bool itGamewatchpanic_UnkMotion1_Anim(Item_GObj*);
 
-ItemStateTable it_803F79A0[] = { { 0, it_802C7FAC, NULL, NULL },
-                                 { 1, it_802C7FAC, NULL, NULL } };
+ItemStateTable it_803F79A0[] = { { 0, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL },
+                                 { 1, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL } };
 
 HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {
@@ -42,7 +42,7 @@ HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
     return NULL;
 }
 
-void it_802C7E64(Item_GObj* gobj)
+void it_2725_Logic78_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL) {
@@ -54,7 +54,7 @@ void it_802C7E94(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip != NULL) {
-        it_802C7E64(gobj);
+        it_2725_Logic78_Destroyed(gobj);
         Item_8026A8EC(gobj);
     }
 }
@@ -69,7 +69,7 @@ void it_802C7F00(Item_GObj* gobj)
     it_8026B73C(gobj);
 }
 
-void it_802C7F20(Item_GObj* gobj)
+void it_2725_Logic78_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDB0_itcmd_var1 = 0;
@@ -85,7 +85,7 @@ void it_802C7F20(Item_GObj* gobj)
     }
 }
 
-bool it_802C7FAC(Item_GObj* gobj)
+bool itGamewatchpanic_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
@@ -101,7 +101,7 @@ bool it_802C7FAC(Item_GObj* gobj)
     return false;
 }
 
-void it_802C8018(Item_GObj* arg0, Item_GObj* arg1)
+void it_2725_Logic78_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
 {
     it_8026B894(arg0, arg1);
 }

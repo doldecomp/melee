@@ -21,7 +21,7 @@ struct Effect {
     /*  +C */ HSD_JObj* xC;
     /* +10 */ efLib_UnkCallback x10;
     /* +14 */ void* x14;
-    /* +18 */ Vec3 transform;
+    /* +18 */ Vec3 translate;
     /* +24 */ u16 x24;
     /* +26 */ s8 x26;
     /* +27 */ s8 x27;

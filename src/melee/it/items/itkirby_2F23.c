@@ -1,18 +1,20 @@
 #include <platform.h>
 #include <placeholder.h>
 
+#include "itkirby_2F23.h"
+
 /// #it_802F23AC
 
 /// #it_802F23EC
 
-bool it_802F2578(void)
+bool itKirby_2F23_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F2580(void) {}
+void itKirby_2F23_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-bool it_802F2584(void)
+bool itKirby_2F23_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -21,14 +23,14 @@ bool it_802F2584(void)
 
 /// #it_802F2810
 
-bool it_802F2888(void)
+bool itKirby_2F23_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F2890(void) {}
+void itKirby_2F23_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-bool it_802F2894(void)
+bool itKirby_2F23_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }

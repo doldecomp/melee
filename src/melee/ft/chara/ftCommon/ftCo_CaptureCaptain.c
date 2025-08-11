@@ -13,11 +13,11 @@
 
 #include <common_structs.h>
 
-void ftCo_8009CA0C(ftCo_GObj* gobj, ftCo_GObj* vic_gobj)
+void ftCo_8009CA0C(Fighter_GObj* gobj, Fighter_GObj* vic_gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
-    ftCo_Fighter* vic_fp = vic_gobj->user_data;
+    Fighter* fp = gobj->user_data;
+    Fighter* vic_fp = vic_gobj->user_data;
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
@@ -40,13 +40,13 @@ void ftCo_8009CA0C(ftCo_GObj* gobj, ftCo_GObj* vic_gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftCo_CaptureCaptain_Anim(ftCo_GObj* gobj) {}
+void ftCo_CaptureCaptain_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_CaptureCaptain_IASA(ftCo_GObj* gobj) {}
+void ftCo_CaptureCaptain_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_CaptureCaptain_Phys(ftCo_GObj* gobj) {}
+void ftCo_CaptureCaptain_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_CaptureCaptain_Coll(ftCo_GObj* gobj)
+void ftCo_CaptureCaptain_Coll(Fighter_GObj* gobj)
 {
     if (!GET_FIGHTER(gobj)->x2226_b2) {
         ft_80083B68(gobj);

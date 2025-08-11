@@ -10,15 +10,15 @@
 
 /// #it_802BE9D8
 
-/// #it_802BEB38
+/// #itNessyoyo_UnkMotion0_Phys
 
-/// #it_802BEB5C
+/// #itNessyoyo_UnkMotion1_Phys
 
-/// #it_802BEC58
+/// #itNessyoyo_UnkMotion2_Phys
 
-/// #it_802BED54
+/// #itNessyoyo_UnkMotion3_Phys
 
-/// #it_802BEE88
+/// #itNessyoyo_UnkMotion3_Anim
 
 /// #it_802BF030
 
@@ -34,7 +34,7 @@
 
 /// #it_802BFAFC
 
-/// #it_802BFE34
+/// #it_2725_Logic59_PickedUp
 
 /// #it_802BFE5C
 
@@ -42,4 +42,4 @@
 
 /// #it_802C0010
 
-/// #it_802C016C
+/// #it_2725_Logic59_EvtUnk

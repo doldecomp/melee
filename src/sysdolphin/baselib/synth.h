@@ -1,58 +1,64 @@
-#ifndef GALE01_388330
-#define GALE01_388330
+#ifndef SYSDOLPHIN_SYNTH_H
+#define SYSDOLPHIN_SYNTH_H
 
 #include <placeholder.h>
 
+#include <dolphin/ax.h>
+
+struct HSD_SynthSFXNode;
+
 /* 388330 */ void* HSD_AudioMalloc(size_t);
-/* 38838C */ UNK_RET HSD_AudioFree(UNK_PARAMS);
-/* 3883B4 */ UNK_RET HSD_SynthSFXSampleLoadCallback(UNK_PARAMS);
-/* 3887DC */ UNK_RET HSD_SynthSFXHeaderLoadCallback(UNK_PARAMS);
-/* 38893C */ UNK_RET HSD_SynthSFXLoadNewProc(UNK_PARAMS);
-/* 3889B8 */ UNK_RET HSD_SynthSFXLoad(UNK_PARAMS);
-/* 388B0C */ UNK_RET HSD_Synth_80388B0C(UNK_PARAMS);
-/* 388B50 */ s32 HSD_Synth_80388B50(void);
-/* 388B60 */ UNK_RET HSD_Synth_80388B60(UNK_PARAMS);
-/* 388CB0 */ UNK_RET HSD_Synth_80388CB0(UNK_PARAMS);
-/* 388D30 */ UNK_RET HSD_Synth_80388D30(UNK_PARAMS);
-/* 388DC8 */ UNK_RET HSD_Synth_80388DC8(UNK_PARAMS);
-/* 388E08 */ UNK_RET HSD_Synth_80388E08(UNK_PARAMS);
-/* 388EB4 */ UNK_RET HSD_SynthSFXGroupDataReaddressCallback(UNK_PARAMS);
-/* 388EFC */ UNK_RET HSD_SynthSFXGroupDataReaddress(UNK_PARAMS);
-/* 388FF0 */ UNK_RET HSD_SynthSFXBankDeflag(UNK_PARAMS);
-/* 389084 */ UNK_RET HSD_SynthSFXBankDeflagSync(UNK_PARAMS);
-/* 389094 */ UNK_RET HSD_Synth_80389094(UNK_PARAMS);
-/* 3890B4 */ UNK_RET HSD_Synth_803890B4(UNK_PARAMS);
-/* 38912C */ UNK_RET HSD_Synth_8038912C(UNK_PARAMS);
-/* 3891D0 */ UNK_RET dropcallback(UNK_PARAMS);
-/* 389334 */ UNK_RET HSD_Synth_80389334(UNK_PARAMS);
-/* 3896F0 */ UNK_RET HSD_Synth_803896F0(UNK_PARAMS);
-/* 38987C */ UNK_RET HSD_SynthSFXKeyOff(UNK_PARAMS);
-/* 3899B0 */ UNK_RET HSD_SynthSFXStopRange(UNK_PARAMS);
-/* 389A50 */ UNK_RET HSD_SynthSFXPause(UNK_PARAMS);
-/* 389AD0 */ UNK_RET HSD_SynthSFXResume(UNK_PARAMS);
-/* 389B50 */ UNK_RET HSD_SynthSFXCheck(UNK_PARAMS);
-/* 389BD8 */ UNK_RET HSD_SynthSFXSetVolumeFade(UNK_PARAMS);
-/* 389CC4 */ UNK_RET HSD_Synth_80389CC4(UNK_PARAMS);
-/* 389D24 */ UNK_RET HSD_SynthSFXSetMix(UNK_PARAMS);
-/* 389D8C */ UNK_RET HSD_SynthSFXUpdatePitch(UNK_PARAMS);
-/* 389E2C */ UNK_RET HSD_Synth_80389E2C(UNK_PARAMS);
-/* 389F4C */ UNK_RET HSD_Synth_80389F4C(UNK_PARAMS);
+/* 38838C */ void HSD_AudioFree(void*);
+/* 3883B4 */ void HSD_SynthSFXSampleLoadCallback(void*, int, void*,
+                                                 int cancelflag);
+/* 38893C */ void HSD_SynthSFXLoadNewProc(void);
+/* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int, int, int);
+/* 388B0C */ void HSD_SynthSFXWaitForLoadCompletion(void (*)(void));
+/* 388B50 */ int HSD_SynthSFXGetPendingLoadCount(void);
+/* 388B60 */ int HSD_SynthSFXCancelLoad(int);
+/* 388CB0 */ void HSD_SynthSFXAllocateBank(int);
+/* 388D30 */ void HSD_SynthSFXUnloadBank(int);
+/* 388DC8 */ void HSD_Synth_80388DC8(u8*);
+/* 388E08 */ void HSD_Synth_80388E08(int);
+/* 388EFC */ void HSD_SynthSFXGroupDataReaddress(AXVPB*, void* callback);
+/* 388FF0 */ void HSD_SynthSFXBankDeflag(int);
+/* 389084 */ void HSD_SynthSFXBankDeflagSync(void);
+/* 389094 */ u32 HSD_SynthGetSoundMode(void);
+/* 3890B4 */ void HSD_SynthSetSoundMode(int); // set sound mode
+/* 38912C */ void HSD_SynthSFXStopNode(struct HSD_SynthSFXNode*);
+/* 3891D0 */ void dropcallback(void*);
+/* 389334 */ // s32 HSD_Synth_80389334(u16, u8, u8, u8, u8, u8, f32, f32, f32,
+             //                       f32, f32);
+/* 3896F0 */ bool HSD_SynthSFXPlayWithGroup(int, u8, u8, u8, int, u8, int, f32,
+                                            f32, f32, f32, f32);
+void HSD_SynthSFXKeyOff(int);
+/* 3899B0 */ void HSD_SynthSFXStopRange(int);
+/* 389A50 */ void HSD_SynthSFXPause(int);
+/* 389AD0 */ void HSD_SynthSFXResume(int);
+/* 389B50 */ int HSD_SynthSFXCheck(int);
+/* 389BD8 */ void HSD_SynthSFXSetVolumeFade(int, u8, int);
+/* 389CC4 */ void HSD_SynthSFXSetUserVol(int, u8);
+/* 389D24 */ void HSD_SynthSFXSetMix(int, float, float, float);
+/* 389D8C */ void HSD_SynthSFXUpdatePitch(struct HSD_SynthSFXNode*);
+/* 389E2C */ void HSD_SynthSFXSetPitchRatio(int, int, float);
+/* 389F4C */ void HSD_SynthSFXSetPriority(int id, int prio);
 /* 38A000 */ UNK_RET HSD_Synth_8038A000(UNK_PARAMS);
-/* 38A5A4 */ UNK_RET HSD_SynthSFXUpdateVolume(UNK_PARAMS);
-/* 38A600 */ UNK_RET HSD_SynthSFXUpdateMix(UNK_PARAMS);
-/* 38AAB0 */ UNK_RET HSD_SynthSFXUpdateAllVolume(UNK_PARAMS);
-/* 38ABBC */ void HSD_SynthSFXSetDriverInactivatedCallback(UNK_T arg0);
-/* 38ABC4 */ void HSD_SynthSFXSetDriverMasterClockCallback(UNK_T arg0);
-/* 38ABCC */ void HSD_SynthSFXSetDriverPauseCallback(UNK_T arg0);
-/* 38ABD4 */ UNK_RET HSD_SynthCallback(UNK_PARAMS);
-/* 38AD60 */ UNK_RET fn_8038AD60(UNK_PARAMS);
+/* 38A5A4 */ void HSD_SynthSFXUpdateVolume(struct HSD_SynthSFXNode*);
+/* 38A600 */ void HSD_SynthSFXUpdateMix(struct HSD_SynthSFXNode*, int);
+/* 38AAB0 */ void HSD_SynthSFXUpdateAllVolume(int, u16, int);
+/* 38ABBC */ void HSD_SynthSFXSetDriverInactivatedCallback(UNK_T);
+/* 38ABC4 */ void HSD_SynthSFXSetDriverMasterClockCallback(UNK_T);
+/* 38ABCC */ void HSD_SynthSFXSetDriverPauseCallback(UNK_T);
+/* 38ABD4 */ void HSD_SynthCallback(void);
+/* 38AD60 */ void HSD_SynthResetStreamCounters(void);
 /* 38AD74 */ UNK_RET HSD_Synth_8038AD74(UNK_PARAMS);
 /* 38ADD0 */ UNK_RET HSD_Synth_8038ADD0(UNK_PARAMS);
 /* 38B120 */ UNK_RET HSD_Synth_8038B120(UNK_PARAMS);
 /* 38B380 */ UNK_RET HSD_SynthPStreamFirstHakoHeaderCallback(UNK_PARAMS);
-/* 38B3E0 */ UNK_RET HSD_SynthPStreamHeaderCallback(UNK_PARAMS);
-/* 38B5AC */ UNK_RET HSD_Synth_8038B5AC(UNK_PARAMS);
-/* 38B81C */ UNK_RET HSD_SynthStreamSetVolume(UNK_PARAMS);
-/* 38B938 */ UNK_RET HSD_SynthInit(UNK_PARAMS);
+/* 38B3E0 */ void HSD_SynthPStreamHeaderCallback(void*, s32, void*,
+                                                 s32 cancelflag);
+/* 38B5AC */ int HSD_Synth_8038B5AC(int, u8, int, int);
+/* 38B81C */ void HSD_SynthStreamSetVolume(float);
+/* 38B938 */ void HSD_SynthInit(int, int, int, int);
 
 #endif
