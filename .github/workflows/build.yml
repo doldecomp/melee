@@ -58,7 +58,7 @@ jobs:
             set -x
             set +e
             ninja
-            ! ninja diff | tee "$(tty)" | grep -q '^ERROR'
+            ! ninja diff | grep -q '^ERROR'
             result="$?"
             echo "result: $result"
             exit "$result"
