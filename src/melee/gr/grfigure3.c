@@ -19,8 +19,8 @@
 
 static void grFigure3_8020E504(bool number);
 static void grFigure3_8020E508(void);
-static void grFigure3_8020E578(void);
-static void grFigure3_8020E57C(void);
+static void grFigure3_UnkStage0_OnLoad(void);
+static void grFigure3_UnkStage0_OnStart(void);
 static bool grFigure3_8020E5A0(void);
 static HSD_GObj* grFigure3_8020E5A8(int gobj_id);
 static void grFigure3_8020E690(Ground_GObj* gobj);
@@ -53,8 +53,8 @@ StageData grEF2_803E6420 = {
     "/GrEF3.dat",
     grFigure3_8020E508,
     grFigure3_8020E504,
-    grFigure3_8020E578,
-    grFigure3_8020E57C,
+    grFigure3_UnkStage0_OnLoad,
+    grFigure3_UnkStage0_OnStart,
     grFigure3_8020E5A0,
     grFigure3_8020E788,
     grFigure3_8020E790,
@@ -81,9 +81,9 @@ static void grFigure3_8020E508(void)
     Ground_801C3BB4();
 }
 
-static void grFigure3_8020E578(void) {}
+static void grFigure3_UnkStage0_OnLoad(void) {}
 
-static void grFigure3_8020E57C(void)
+static void grFigure3_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }

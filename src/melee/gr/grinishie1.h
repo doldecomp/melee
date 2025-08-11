@@ -10,7 +10,7 @@
 
 #include <baselib/gobj.h>
 
-/* 1FA908 */ void grInishie1_801FA908(void);
+/* 1FA908 */ void grInishie1_801FA908(bool);
 /* 1FA90C */ void grInishie1_801FA90C(void);
 /* 1FA984 */ void grInishie1_801FA984(void);
 /* 1FA988 */ void grInishie1_801FA988(void);
@@ -48,7 +48,7 @@
 /* 1FC9AC */ void fn_801FC9AC(Ground*, s32, s32, s32, enum mpLib_GroundEnum);
 /* 1FCAAC */ s32 grInishie1_801FCAAC(s32);
 /* 1FCB10 */ void grInishie1_801FCB10(HSD_GObj*);
-/* 1FCBB0 */ bool grInishie1_801FCBB0(void);
-/* 1FCBB8 */ bool grInishie1_801FCBB8(void);
+/* 1FCBB0 */ DynamicsDesc* grInishie1_801FCBB0(enum_t);
+/* 1FCBB8 */ bool grInishie1_801FCBB8(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

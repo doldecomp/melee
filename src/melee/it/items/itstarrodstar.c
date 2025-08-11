@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itstarrodstar.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 
@@ -9,37 +11,37 @@
 
 /// #it_802989C8
 
-/// #it_80298ACC
+/// #itStarrodstar_UnkMotion0_Anim
 
-void it_80298BAC(Item_GObj* gobj) {}
+void itStarrodstar_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_80298BB0
+/// #itStarrodstar_UnkMotion0_Coll
 
-bool it_80298BE4(Item_GObj* arg0)
+bool it_3F14_Logic36_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_80298BEC(Item_GObj* arg0)
+bool it_3F14_Logic36_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_80298BF4(Item_GObj* arg0)
+bool it_3F14_Logic36_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_80298BFC(Item_GObj* arg0)
+bool it_3F14_Logic36_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_80298C04
+/// #it_3F14_Logic36_Reflected
 
-/// #it_80298CE8
+/// #it_3F14_Logic36_ShieldBounced
 
-void it_80298DCC(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic36_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

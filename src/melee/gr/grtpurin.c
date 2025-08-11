@@ -31,8 +31,8 @@ StageData grTPr_803E9394 = {
     "/GrTPr.dat",
     grTPurin_80223164,
     grTPurin_80223160,
-    grTPurin_802231DC,
-    grTPurin_802231E0,
+    grTpurin_UnkStage0_OnLoad,
+    grTpurin_UnkStage0_OnStart,
     grTPurin_80223204,
     grTPurin_802234F8,
     grTPurin_80223578,
@@ -65,12 +65,12 @@ void grTPurin_80223164(void)
     Ground_801C42AC();
 }
 
-void grTPurin_802231DC(void)
+void grTpurin_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-void grTPurin_802231E0(void)
+void grTpurin_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

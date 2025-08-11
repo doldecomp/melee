@@ -10,11 +10,11 @@
 
 #include "it/inlines.h"
 
-/* 20F468 */ UNK_RET grOldKongo_8020F468(UNK_PARAMS);
-/* 20F46C */ UNK_RET grOldKongo_8020F46C(UNK_PARAMS);
-/* 20F4E4 */ UNK_RET grOldKongo_8020F4E4(UNK_PARAMS);
-/* 20F4E8 */ UNK_RET grOldKongo_8020F4E8(UNK_PARAMS);
-/* 20F524 */ bool grOldKongo_8020F524(HSD_GObj*);
+/* 20F468 */ void grOldKongo_8020F468(bool);
+/* 20F46C */ void grOldKongo_8020F46C(void);
+/* 20F4E4 */ void grOldKongo_8020F4E4(void);
+/* 20F4E8 */ void grOldKongo_8020F4E8(void);
+/* 20F524 */ bool grOldKongo_8020F524(void);
 /* 20F52C */ UNK_RET grOldKongo_8020F52C(UNK_PARAMS);
 /* 20F618 */ void grOldKongo_8020F618(Ground_GObj*);
 /* 20F644 */ bool grOldKongo_8020F644(Ground_GObj*);
@@ -36,7 +36,7 @@
 /* 2105AC */ void grOldKongo_802105AC(HSD_GObj*);
 /* 2105C8 */ void grOldKongo_802105C8(HSD_GObj*);
 /* 210650 */ UNK_RET grOldKongo_80210650(UNK_PARAMS);
-/* 210780 */ bool grOldKongo_80210780(HSD_GObj*);
+/* 210780 */ DynamicsDesc* grOldKongo_80210780(enum_t);
 /* 210788 */ bool grOldKongo_80210788(Vec3*, int, HSD_JObj*);
 
 #endif

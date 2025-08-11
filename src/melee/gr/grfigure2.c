@@ -19,8 +19,8 @@
 #include <baselib/gobjproc.h>
 
 /* 20E274 */ static void grFigure2_8020E274(void);
-/* 20E2E4 */ static void grFigure2_8020E2E4(void);
-/* 20E2E8 */ static void grFigure2_8020E2E8(void);
+/* 20E2E4 */ static void grFigure2_UnkStage0_OnLoad(void);
+/* 20E2E8 */ static void grFigure2_UnkStage0_OnStart(void);
 /* 20E30C */ static bool grFigure2_8020E30C(void);
 /* 20E314 */ static HSD_GObj* grFigure2_8020E314(int gobj_id);
 /* 20E3FC */ static void grFigure2_8020E3FC(Ground_GObj* gobj);
@@ -54,8 +54,8 @@ StageData grEF2_803E6370 = {
     "/GrEF2.dat",
     grFigure2_8020E274,
     grFigure1_8020E270,
-    grFigure2_8020E2E4,
-    grFigure2_8020E2E8,
+    grFigure2_UnkStage0_OnLoad,
+    grFigure2_UnkStage0_OnStart,
     grFigure2_8020E30C,
     grFigure2_8020E4F4,
     grFigure2_8020E4FC,
@@ -79,9 +79,9 @@ static void grFigure2_8020E274(void)
     Ground_801C39C0();
     Ground_801C3BB4();
 }
-static void grFigure2_8020E2E4(void) {}
+static void grFigure2_UnkStage0_OnLoad(void) {}
 
-static void grFigure2_8020E2E8(void)
+static void grFigure2_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }

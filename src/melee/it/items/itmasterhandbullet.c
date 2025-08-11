@@ -1,13 +1,16 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "itmasterhandbullet.h"
 
-#include "it/forward.h"
+#include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
 #include "db/db.h"
 #include "dolphin/mtx.h"
 #include "ef/efsync.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -15,13 +18,17 @@
 #include "it/itCharItems.h"
 #include "it/item.h"
 
+/* 2F0D2C */ static void it_802F0D2C(Item_GObj* gobj);
+/* 2F0F04 */ static void it_802F0F04(HSD_GObj* gobj);
+
 void it_802F0F04(HSD_GObj* gobj) {}
 
 void it_802F0D2C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    itMasterHandBulletAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itMasterHandBulletAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
     Quaternion quad = { 0 };
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802F0F04;
@@ -35,7 +42,8 @@ void it_802F0BE8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    itMasterHandBulletAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itMasterHandBulletAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
     Quaternion quad = { 0 };
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802F0F04;
@@ -79,12 +87,12 @@ void it_802F0AE0(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos, ItemKind kind,
     it_802F0AE0_sub(spawned, msid, gobj);
 }
 
-void it_802F0BC8(Item_GObj* gobj, Item_GObj* arg1)
+void it_2725_Logic85_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     it_8026B894(gobj, arg1);
 }
 
-bool it_802F0E70(Item_GObj* gobj)
+bool itMasterhandbullet_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip;
     f32 temp_f1;
@@ -99,42 +107,42 @@ bool it_802F0E70(Item_GObj* gobj)
     return false;
 }
 
-void it_802F0ED4(Item_GObj* gobj) {}
+void itMasterhandbullet_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 void it_802F0F08(Item_GObj* gobj) {}
 
-bool it_802F0ED8(Item_GObj* gobj)
+bool itMasterhandbullet_UnkMotion1_Coll(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_802F0F08);
     return false;
 }
 
-bool it_802F0F0C(Item_GObj* gobj)
+bool it_2725_Logic83_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802F0F14(Item_GObj* gobj)
+bool it_2725_Logic83_Reflected(Item_GObj* gobj)
 {
     return it_8027AE34(gobj);
 }
 
-bool it_802F0F34(Item_GObj* gobj)
+bool it_2725_Logic83_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802F0F3C(Item_GObj* gobj)
+bool it_2725_Logic83_Absorbed(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_802F0F44(Item_GObj* gobj)
+bool it_2725_Logic83_ShieldBounced(Item_GObj* gobj)
 {
     return it_8027AF50(gobj);
 }
 
-bool it_802F0F64(Item_GObj* gobj)
+bool it_2725_Logic83_HitShield(Item_GObj* gobj)
 {
     return true;
 }

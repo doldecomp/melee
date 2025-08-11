@@ -113,7 +113,7 @@ typedef struct grInishie2_thing {
 
 grInishie2_thing* grI2_804D6A00;
 
-void grInishie2_801FCBC0(void) {}
+void grInishie2_801FCBC0(bool arg) {}
 
 void grInishie2_801FCBC4(void)
 {
@@ -148,7 +148,7 @@ void grInishie2_801FCBC4(void)
 
 void grInishie2_801FCCAC(void) {}
 
-void grInishie2_801FCCB0(HSD_GObj* gobj)
+void grInishie2_801FCCB0(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -716,12 +716,12 @@ s32 grInishie2_801FDFB4(s32 arg0)
 
 void grInishie2_801FDFE4(Ground_GObj* gobj) {}
 
-bool grInishie2_801FDFE8(void)
+DynamicsDesc* grInishie2_801FDFE8(enum_t arg)
 {
     return 0;
 }
 
-bool grInishie2_801FDFF0(void)
+bool grInishie2_801FDFF0(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return 1;
 }

@@ -29,8 +29,8 @@ StageData grTGn_803E98DC = {
     "/GrTGn.dat",
     grTGanon_802246DC,
     grTGanon_802246D8,
-    grTGanon_80224754,
-    grTGanon_80224758,
+    grTganon_UnkStage0_OnLoad,
+    grTganon_UnkStage0_OnStart,
     grTGanon_8022477C,
     grTGanon_802249B4,
     grTGanon_80224A4C,
@@ -65,12 +65,12 @@ void grTGanon_802246DC(void)
     Ground_801C42AC();
 }
 
-void grTGanon_80224754(void)
+void grTganon_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-void grTGanon_80224758(void)
+void grTganon_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

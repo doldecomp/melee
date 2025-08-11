@@ -12,8 +12,8 @@
 
 void grTPikachu_80222E7C(bool);
 void grTPikachu_80222E80(void);
-void grTPikachu_80222EF0(void);
-void grTPikachu_80222EF4(void);
+void grTpikachu_UnkStage0_OnLoad(void);
+void grTpikachu_UnkStage0_OnStart(void);
 bool grTPikachu_80222F18(void);
 HSD_GObj* grTPikachu_80222F20(int);
 void grTPikachu_80223008(Ground_GObj*);

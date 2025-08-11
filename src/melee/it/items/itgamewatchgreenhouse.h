@@ -5,9 +5,9 @@
 
 #include "it/items/types.h"
 
-/* 2C62F8 */ void it_802C62F8(Item_GObj*);
-/* 2C63B4 */ void it_802C63B4(Item_GObj*);
-/* 2C65C4 */ void it_802C65C4(Item_GObj*, Item_GObj*);
+/* 2C62F8 */ void it_2725_Logic71_Destroyed(Item_GObj*);
+/* 2C63B4 */ void it_2725_Logic71_PickedUp(Item_GObj*);
+/* 2C65C4 */ void it_2725_Logic71_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7898 */ extern ItemStateTable it_803F7898[];
 
 #endif

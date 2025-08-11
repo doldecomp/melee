@@ -22,6 +22,7 @@
 #include "lb/lb_0192.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbtime.h"
+#include "mn/mnstagesel.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
@@ -29,6 +30,7 @@
 
 #include <m2c_macros.h>
 #include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
 
@@ -715,8 +717,8 @@ void fn_80165108(int slot, int arg1)
         Camera_8002F73C(0xB, 5);
         return;
     }
-    if (((Player_GetPlayerSlotType(slot) == 0) ||
-         (Player_GetPlayerSlotType(slot) == 1)) &&
+    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(slot) != NULL))
     {
         Camera_8002F73C(slot, arg1);
@@ -725,8 +727,8 @@ void fn_80165108(int slot, int arg1)
 
 void fn_80165190(s32 slot, s32 arg1)
 {
-    if (((Player_GetPlayerSlotType(slot) == 0) ||
-         (Player_GetPlayerSlotType(slot) == 1)) &&
+    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(slot) != NULL))
     {
         Camera_8002F760(slot, arg1);
@@ -735,8 +737,8 @@ void fn_80165190(s32 slot, s32 arg1)
 
 void fn_801651FC(s32 slot, s32 arg1)
 {
-    if (((Player_GetPlayerSlotType(slot) == 0) ||
-         (Player_GetPlayerSlotType(slot) == 1)) &&
+    if (((Player_GetPlayerSlotType(slot) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(slot) == Gm_PKind_Cpu)) &&
         (Player_GetEntity(slot) != NULL))
     {
         Camera_8002F784(slot, arg1);
@@ -978,7 +980,7 @@ void gm_8016795C(struct PlayerInitData* arg0)
     arg0->xE = 4;
     arg0->cpu_level = 0;
     arg0->x12 = 0;
-    arg0->x14 = 0;
+    arg0->hp = 0;
     arg0->x18 = 1.0F;
     arg0->x1C = 1.0F;
     arg0->x20 = 1.0F;
@@ -1173,9 +1175,121 @@ void gm_80167BC8(VsModeData* vs_data)
     vs_data->data.rules.x3_0 = 0;
 }
 
-/// #gm_80167FC4
+static inline int pad_inline(SSSData* arg0, int base)
+{
+    int i;
+    for (i = 0; i < 5; i++) {
+        int j = (base + i) % 4;
+        if (HSD_PadMasterStatus[(u8) j].err == 0 &&
+            arg0->data.data.players[j].slot_type == Gm_PKind_Human)
+        {
+            return j;
+        }
+    }
+    return -1;
+}
 
-/// #gm_801685D4
+static const u8 lbl_803B790C[0xB][3] = {
+    { 0x00, 0x09, 0x0B },
+    { 0x01, 0x11, 0x0D },
+    { 0x02, 0x13, 0x0E },
+    { 0x03, 0x15, 0x0C },
+    { 0x04, 0x19, 0x0F },
+    { 0x05, 0x1B, 0x10 },
+    { 0x06, 0x24, 0x11 },
+    { 0x07, 0x25, 0x12 },
+    { 0x08, 0x1C, 0x13 },
+    { 0x09, 0x1D, 0x14 },
+    { 0x0A, 0x1E, 0x15 },
+};
+
+static inline int get_flag_unk(u16 temp_r30)
+{
+    int temp_r3_2 = (u8) Stage_8022519C(temp_r30);
+    int i;
+    for (i = 0; i != ARRAY_SIZE(lbl_803B790C); i++) {
+        if (temp_r3_2 == lbl_803B790C[i][1]) {
+            return lbl_803B790C[i][0];
+        }
+    }
+    return ARRAY_SIZE(lbl_803B790C);
+}
+
+static inline bool check_bit(u8 n, u16* mask)
+{
+    if ((n == 0xB) || (*mask & 1LL << n)) {
+        return true;
+    }
+    return false;
+}
+
+void gm_80167FC4(SSSData* arg0)
+{
+    int temp_r30;
+    GameRules* temp_r3;
+    int i;
+
+    u16* temp_r25;
+    s32 temp_r28;
+    u8 temp_r3_2;
+
+    PAD_STACK(8);
+
+    temp_r3 = gmMainLib_8015CC34();
+    if (temp_r3->unk_x7 == 1) {
+        arg0->force_stage_id = mnStageSel_8025BBD4();
+        return;
+    }
+    arg0->force_stage_id = -1;
+    switch (temp_r3->unk_x7) {
+    case 0:
+        arg0->unk_stage = 0;
+        return;
+    case 2:
+        for (i = 0; i < 0x1D; i++) {
+            temp_r28 = arg0->data.ordered_stage_index + i;
+            temp_r28 = (temp_r28 + 1) % 29;
+            temp_r30 = mnStageSel_8025BC08(temp_r28);
+            temp_r25 = gmMainLib_8015EDA4();
+
+            if (check_bit(get_flag_unk(temp_r30), temp_r25)) {
+                arg0->force_stage_id = temp_r30;
+                arg0->data.ordered_stage_index = temp_r28;
+                return;
+            }
+        }
+        break;
+    case 3:
+        arg0->data.loser = pad_inline(arg0, arg0->data.loser + 1);
+        if (arg0->data.loser < 0) {
+            arg0->data.loser = 0;
+            arg0->unk_stage = 0;
+        } else {
+            arg0->unk_stage = arg0->data.loser + 1;
+        }
+        break;
+    case 4:
+        if (arg0->data.winner == -1) {
+            arg0->unk_stage = pad_inline(arg0, HSD_Randi(4)) + 1;
+        } else {
+            arg0->unk_stage = pad_inline(arg0, arg0->data.winner) + 1;
+        }
+        break;
+    }
+}
+
+s8 gm_801685D4(u8 arg0, u8 arg1)
+{
+    s8* temp_r3;
+
+    if (gmMainLib_8015CC34()->handicap == 1) {
+        temp_r3 = gmMainLib_8015CE44(arg0, arg1);
+        if (temp_r3 != NULL) {
+            return *temp_r3;
+        }
+    }
+    return 0;
+}
 
 /// #gm_80168638
 
@@ -1241,11 +1355,11 @@ void gm_80168FC4(void)
 
 /// #gm_801692BC
 
-void gm_801692E8(u32 ticks, datetime* datetime)
+void gm_801692E8(u32 secs, datetime* datetime)
 {
     OSCalendarTime tm;
 
-    lbTime_8000B028(&tm, ticks);
+    lbTime_8000B028(&tm, secs);
     datetime->year = tm.year;
     datetime->month = tm.mon + 1;
     datetime->day = tm.mday;

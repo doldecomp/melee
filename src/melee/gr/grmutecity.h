@@ -7,11 +7,11 @@
 
 #include "it/inlines.h"
 
-/* 1EFC68 */ UNK_RET grMuteCity_801EFC68(UNK_PARAMS);
-/* 1EFC6C */ UNK_RET grMuteCity_801EFC6C(UNK_PARAMS);
-/* 1EFCDC */ UNK_RET grMuteCity_801EFCDC(UNK_PARAMS);
-/* 1EFCE0 */ UNK_RET grMuteCity_801EFCE0(UNK_PARAMS);
-/* 1EFD04 */ bool grMuteCity_801EFD04(UNK_PARAMS);
+/* 1EFC68 */ void grMuteCity_801EFC68(bool);
+/* 1EFC6C */ void grMuteCity_801EFC6C(void);
+/* 1EFCDC */ void grMuteCity_801EFCDC(void);
+/* 1EFCE0 */ void grMuteCity_801EFCE0(void);
+/* 1EFD04 */ bool grMuteCity_801EFD04(void);
 /* 1EFD0C */ UNK_RET grMuteCity_801EFD0C(UNK_PARAMS);
 /* 1EFDF8 */ void grMuteCity_801EFDF8(Ground_GObj*);
 /* 1F0118 */ bool grMuteCity_801F0118(Ground_GObj*);
@@ -72,7 +72,7 @@
 /* 1F290C */ UNK_RET grMuteCity_801F290C(UNK_PARAMS);
 /* 1F2AB0 */ UNK_RET grMuteCity_801F2AB0(UNK_PARAMS);
 /* 1F2B58 */ UNK_RET fn_801F2B58(UNK_PARAMS);
-/* 1F2BBC */ UNK_RET grMuteCity_801F2BBC(UNK_PARAMS);
-/* 1F2C10 */ UNK_RET grMuteCity_801F2C10(UNK_PARAMS);
+/* 1F2BBC */ DynamicsDesc* grMuteCity_801F2BBC(enum_t);
+/* 1F2C10 */ bool grMuteCity_801F2C10(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

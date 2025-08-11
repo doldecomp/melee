@@ -20,8 +20,8 @@
 
 void grTZelda_80223E2C(bool);                   /* static */
 void grTZelda_80223E30(void);                  /* static */
-void grTZelda_80223EA0(void);                  /* static */
-void grTZelda_80223EA4(void);                  /* static */
+void grTzelda_UnkStage0_OnLoad(void);                  /* static */
+void grTzelda_UnkStage0_OnStart(void);                  /* static */
 bool grTZelda_80223EC8(void);                  /* static */
 HSD_GObj* grTZelda_80223ED0(s32);              /* static */
 void grTZelda_80223FB8(Ground_GObj*);             /* static */
@@ -55,8 +55,8 @@ StageData grTZd_803E9694 = {
     "/GrTZd.dat",
     grTZelda_80223E30,
     grTZelda_80223E2C,
-    grTZelda_80223EA0,
-    grTZelda_80223EA4,
+    grTzelda_UnkStage0_OnLoad,
+    grTzelda_UnkStage0_OnStart,
     grTZelda_80223EC8,
     grTZelda_80224100,
     grTZelda_80224108,
@@ -79,9 +79,9 @@ void grTZelda_80223E30(void)
     Ground_801C42AC();
 }
 
-void grTZelda_80223EA0(void) {}
+void grTzelda_UnkStage0_OnLoad(void) {}
 
-void grTZelda_80223EA4(void)
+void grTzelda_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

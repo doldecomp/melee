@@ -49,8 +49,8 @@ StageData grTCLink_803E872C = {
     "/GrTCl.dat",
     grTCLink_8021FF48,
     grTCLink_8021FF44,
-    grTCLink_8021FFB8,
-    grTCLink_8021FFBC,
+    grTclink_UnkStage0_OnLoad,
+    grTclink_UnkStage0_OnStart,
     grTCLink_8021FFE0,
     grTCLink_80220218,
     grTCLink_80220220,
@@ -76,12 +76,12 @@ void grTCLink_8021FF48(void)
     Ground_801C42AC();
 }
 
-void grTCLink_8021FFB8(void)
+void grTclink_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-void grTCLink_8021FFBC(void)
+void grTclink_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

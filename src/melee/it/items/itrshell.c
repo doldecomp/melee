@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itrshell.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/it_26B1.h"
 
@@ -21,97 +23,97 @@
 
 /// #it_8028D56C
 
-/// #it_8028D59C
+/// #it_3F14_Logic15_Spawned
 
 /// #it_8028D62C
 
-bool it_8028D6C0(Item_GObj* gobj)
+bool itRshell_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028D6C8(Item_GObj* gobj) {}
+void itRshell_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_8028D6CC
+/// #itRshell_UnkMotion0_Coll
 
 /// #it_8028D7F0
 
-bool it_8028D818(Item_GObj* gobj)
+bool itRshell_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8028D820
+/// #itRshell_UnkMotion1_Phys
 
-/// #it_8028D850
+/// #itRshell_UnkMotion1_Coll
 
-/// #it_8028D898
+/// #it_3F14_Logic15_PickedUp
 
-bool it_8028D8D4(Item_GObj* gobj)
+bool itRshell_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028D8DC(Item_GObj* gobj) {}
+void itRshell_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_8028D8E0
+/// #it_3F14_Logic15_Thrown
 
-/// #it_8028D940
+/// #itRshell_UnkMotion3_Anim
 
-/// #it_8028D998
+/// #itRshell_UnkMotion3_Phys
 
-/// #it_8028D9C8
+/// #itRshell_UnkMotion3_Coll
 
-/// #it_8028D9F4
+/// #it_3F14_Logic15_Dropped
 
-/// #it_8028DA30
+/// #itRshell_UnkMotion4_Anim
 
-/// #it_8028DA88
+/// #itRshell_UnkMotion4_Phys
 
-/// #it_8028DAB8
+/// #itRshell_UnkMotion4_Coll
 
 /// #it_8028DAE4
 
-/// #it_8028DC5C
+/// #itRshell_UnkMotion5_Anim
 
-/// #it_8028DD88
+/// #itRshell_UnkMotion5_Phys
 
-/// #it_8028DFE8
+/// #itRshell_UnkMotion5_Coll
 
 /// #it_8028E170
 
-/// #it_8028E2D4
+/// #itRshell_UnkMotion6_Anim
 
-/// #it_8028E370
+/// #itRshell_UnkMotion6_Phys
 
-/// #it_8028E3A0
+/// #itRshell_UnkMotion6_Coll
 
-/// #it_8028E3CC
+/// #it_3F14_Logic15_EnteredAir
 
-bool it_8028E408(Item_GObj* gobj)
+bool itRshell_UnkMotion7_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028E410(Item_GObj* gobj) {}
+void itRshell_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #it_8028E414
+/// #itRshell_UnkMotion7_Coll
 
-/// #it_8028E540
+/// #it_3F14_Logic15_DmgDealt
 
-/// #it_8028E584
+/// #it_3F14_Logic15_DmgReceived
 
-/// #it_8028E5C8
+/// #it_3F14_Logic15_Reflected
 
-/// #it_8028E600
+/// #it_3F14_Logic15_Clanked
 
-/// #it_8028E624
+/// #it_3F14_Logic15_HitShield
 
-/// #it_8028E684
+/// #it_3F14_Logic15_ShieldBounced
 
 /// #it_8028E6C0
 
-void it_8028E718(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic15_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

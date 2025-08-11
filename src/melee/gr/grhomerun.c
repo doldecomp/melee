@@ -6,7 +6,7 @@
 #include "gr/ground.h"
 #include "gr/inlines.h"
 
-void grHomeRun_8021C750(void) {}
+void grHomeRun_8021C750(bool arg) {}
 
 /// #grHomeRun_8021C754
 
@@ -216,7 +216,7 @@ void fn_8021EB10(HSD_GObj* target_cam_gobj)
 
 /// #grHomeRun_8021EDD4
 
-bool grHomeRun_8021EEB4(void)
+DynamicsDesc* grHomeRun_8021EEB4(enum_t arg)
 {
     return false;
 }

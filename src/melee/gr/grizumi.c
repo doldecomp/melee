@@ -162,8 +162,8 @@ StageData grIz_803E0E5C = {
     "/GrIz.dat",
     grIzumi_801CBB88,
     grIzumi_801CBB84,
-    grIzumi_801CBC0C,
-    grIzumi_801CBCBC,
+    grIzumi_UnkStage0_OnLoad,
+    grIzumi_UnkStage0_OnStart,
     grIzumi_801CBCE0,
     grIzumi_801CD278,
     grIzumi_801CD280,
@@ -195,7 +195,7 @@ void grIzumi_801CBB88(void)
 }
 
 // https://decomp.me/scratch/4u5TX
-void grIzumi_801CBC0C(void)
+void grIzumi_UnkStage0_OnLoad(void)
 {
     HSD_GObj* gobj;
     HSD_LObj* lobj;
@@ -216,7 +216,7 @@ void grIzumi_801CBC0C(void)
 }
 
 // https://decomp.me/scratch/9AxrD
-void grIzumi_801CBCBC(void)
+void grIzumi_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

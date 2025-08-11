@@ -23,7 +23,7 @@ static struct {
     int x0;
 }* grOt_804D69C0;
 
-void grOnett_801E3734(void) {}
+void grOnett_801E3734(bool arg) {}
 
 void grOnett_801E3738(void)
 {
@@ -154,7 +154,7 @@ void grOnett_801E502C(Ground_GObj* gobj) {}
 
 /// #grOnett_801E56FC
 
-bool grOnett_801E5760(void)
+DynamicsDesc* grOnett_801E5760(enum_t arg)
 {
     return false;
 }

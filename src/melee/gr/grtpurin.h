@@ -13,8 +13,8 @@
 
 void grTPurin_80223160(bool);
 void grTPurin_80223164(void);
-void grTPurin_802231DC(void);
-void grTPurin_802231E0(void);
+void grTpurin_UnkStage0_OnLoad(void);
+void grTpurin_UnkStage0_OnStart(void);
 bool grTPurin_80223204(void);
 HSD_GObj* grTPurin_8022320C(int);
 void grTPurin_802232F4(Ground_GObj*);

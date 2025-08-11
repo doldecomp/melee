@@ -242,7 +242,7 @@
 /* 27C794 */ bool it_8027C794(Item_GObj*);
 /* 27C79C */ bool it_8027C79C(Item_GObj*);
 /* 27C824 */ bool it_8027C824(Item_GObj*, s32 (*arg1)(Item_GObj*));
-/* 27C8B0 */ void it_8027C8B0(Item_GObj*);
+/* 27C8B0 */ void it_2725_Logic9_Destroyed(Item_GObj*);
 /* 27C8D0 */ void it_8027C8D0(Vec3*, Vec3*, f32);
 /* 27C9D8 */ void it_8027C9D8(Item*);
 /* 27CA7C */ bool it_8027CA7C(HSD_GObj*);

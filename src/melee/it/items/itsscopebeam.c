@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itsscopebeam.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 
@@ -9,37 +11,37 @@
 
 /// #it_80298ED0
 
-/// #it_802990CC
+/// #itSscopebeam_UnkMotion9_Anim
 
-void it_80299148(Item_GObj* gobj) {}
+void itSscopebeam_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #it_8029914C
+/// #itSscopebeam_UnkMotion9_Coll
 
-bool it_80299360(Item_GObj* arg0)
+bool it_3F14_Logic38_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_80299368(Item_GObj* arg0)
+bool it_3F14_Logic38_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_80299370(Item_GObj* arg0)
+bool it_3F14_Logic38_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_80299378(Item_GObj* arg0)
+bool it_3F14_Logic38_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_80299380
+/// #it_3F14_Logic38_ShieldBounced
 
-/// #it_802993A0
+/// #it_3F14_Logic38_Reflected
 
-void it_802993C0(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic38_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -16,7 +16,7 @@
 // /* 2A2418 */ void it_802A2418(Item_GObj*);
 // /* 2A2B10 */ void it_802A2B10(Item_GObj* gobj);
 // /* 2A2BA4 */ Item_GObj* it_802A2BA4(Fighter_GObj*, Vec3*, float, int);
-// /* 2A7688 */ void it_802A7688(Item_GObj*);
+// /* 2A7688 */ void it_2725_Logic20_PickedUp(Item_GObj*);
 // /* 2A78B8 */ void it_802A78B8(HSD_GObj*, Vec3*, float);
 // /* 2A7AAC */ void it_802A7AAC(HSD_GObj*);
 // /* 2A7AF0 */ void it_802A7AF0(HSD_GObj*);
@@ -34,22 +34,22 @@
 /* 802A2B10 */ void it_802A2B10(Item_GObj* gobj);
 /* 802A2BA4 */ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2,
                                       s32 arg3);
-/* 802A2D88 */ bool it_802A2D88(Item_GObj* arg0);
-/* 802A2ED0 */ void it_802A2ED0(Item_GObj* arg0);
+/* 802A2D88 */ bool itLinkhookshot_UnkMotion8_Anim(Item_GObj* arg0);
+/* 802A2ED0 */ void itLinkhookshot_UnkMotion0_Phys(Item_GObj* arg0);
 /* 802A2EE4 */ void it_802A2EE4(Item_GObj* arg0);
-/* 802A30FC */ void it_802A30FC(Item_GObj* arg0);
-/* 802A3240 */ void it_802A3240(Item_GObj* arg0);
+/* 802A30FC */ void itLinkhookshot_UnkMotion1_Phys(Item_GObj* arg0);
+/* 802A3240 */ void itLinkhookshot_UnkMotion2_Phys(Item_GObj* arg0);
 /* 802A3254 */ void it_802A3254(Item_GObj* arg0);
-/* 802A338C */ void it_802A338C(Item_GObj* arg0);
-/* 802A34EC */ void it_802A34EC(Item_GObj* arg0);
+/* 802A338C */ void itLinkhookshot_UnkMotion3_Phys(Item_GObj* arg0);
+/* 802A34EC */ void itLinkhookshot_UnkMotion4_Phys(Item_GObj* arg0);
 /* 802A3500 */ void it_802A3500(Item_GObj* arg0);
-/* 802A361C */ void it_802A361C(Item_GObj* arg0);
+/* 802A361C */ void itLinkhookshot_UnkMotion5_Phys(Item_GObj* arg0);
 /* 802A3630 */ void it_802A3630(Item_GObj* arg0);
-/* 802A3814 */ void it_802A3814(Item_GObj* arg0);
+/* 802A3814 */ void itLinkhookshot_UnkMotion6_Phys(Item_GObj* arg0);
 /* 802A3828 */ void it_802A3828(Item_GObj* arg0);
-/* 802A39E8 */ void it_802A39E8(Item_GObj* arg0);
+/* 802A39E8 */ void itLinkhookshot_UnkMotion7_Phys(Item_GObj* arg0);
 /* 802A39FC */ void it_802A39FC(Item_GObj* arg0);
-/* 802A3C84 */ void it_802A3C84(Item_GObj* arg0);
+/* 802A3C84 */ void itLinkhookshot_UnkMotion8_Phys(Item_GObj* arg0);
 /* 802A3C98 */ float it_802A3C98(Vec3* arg0, Vec3* arg1, Vec3* arg2);
 /* 802A3D90 */ s32 it_802A3D90(ItemLink* arg0);
 /* 802A3E50 */ s32 it_802A3E50(ItemLink* arg0, enum FighterKind arg1,
@@ -90,7 +90,7 @@
                                 f32 val);
 /* 802A7168 */ void it_802A7168(Item* arg0, Vec3* arg1, f32 arg8);
 /* 802A7384 */ void it_802A7384(Item* arg0, Vec3* arg1, f32 arg8);
-/* 802A7688 */ void it_802A7688(Item_GObj* arg0);
+/* 802A7688 */ void it_2725_Logic20_PickedUp(Item_GObj* arg0);
 /* 802A76EC */ void it_802A76EC(HSD_GObj* arg0);
 /* 802A7764 */ void it_802A7764(HSD_GObj* arg0);
 /* 802A77DC */ void it_802A77DC(Item_GObj* gobj);

@@ -9,7 +9,16 @@
 #include <melee/it/types.h>
 #include <melee/lb/lb_00B0.h>
 
-HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir) {
+/* 2C68F8 */ static HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos,
+                                          Fighter_Part part, float dir);
+/* 2C6A2C */ static void it_802C6A2C(Item_GObj* item_gobj);
+/* 2C6A78 */ static void it_802C6A78(Item_GObj* item_gobj);
+/* 2C6A98 */ static void it_802C6A98(Item_GObj* item_gobj);
+/* 2C6B20 */ static bool itGamewatchfire_UnkMotion0_Anim(Item_GObj* item_gobj);
+
+HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
+                      float dir)
+{
     SpawnItem spawn;
     Item_GObj* result;
 
@@ -36,14 +45,16 @@ HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir)
     return NULL;
 }
 
-void it_802C69FC(Item_GObj* item_gobj) {
+void it_2725_Logic73_Destroyed(Item_GObj* item_gobj)
+{
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
         ftGw_AttackS4_ItemTorchSetFlag(item->owner);
     }
 }
 
-void it_802C6A2C(Item_GObj* item_gobj) {
+void it_802C6A2C(Item_GObj* item_gobj)
+{
     Item* item = GET_ITEM(item_gobj);
 
     if (item != NULL) {
@@ -54,15 +65,18 @@ void it_802C6A2C(Item_GObj* item_gobj) {
     }
 }
 
-void it_802C6A78(Item_GObj* item_gobj) {
+void it_802C6A78(Item_GObj* item_gobj)
+{
     it_8026B724(item_gobj);
 }
 
-void it_802C6A98(Item_GObj* item_gobj) {
+void it_802C6A98(Item_GObj* item_gobj)
+{
     it_8026B73C(item_gobj);
 }
 
-void it_802C6AB8(Item_GObj* item_gobj) {
+void it_2725_Logic73_PickedUp(Item_GObj* item_gobj)
+{
     Item* item = GET_ITEM(item_gobj);
     item->xDB0_itcmd_var1 = 0;
     item->xDAC_itcmd_var0 = 0;
@@ -73,7 +87,8 @@ void it_802C6AB8(Item_GObj* item_gobj) {
     }
 }
 
-bool it_802C6B20(Item_GObj* item_gobj) {
+bool itGamewatchfire_UnkMotion0_Anim(Item_GObj* item_gobj)
+{
     HSD_JObj* temp_r30;
     Item* item = GET_ITEM(item_gobj);
     bool var_r3;
@@ -107,6 +122,7 @@ bool it_802C6B20(Item_GObj* item_gobj) {
     return false;
 }
 
-void it_802C6C18(Item_GObj* item_gobj, Item_GObj* ref_gobj) {
+void it_2725_Logic73_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
+{
     it_8026B894(item_gobj, ref_gobj);
 }

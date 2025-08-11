@@ -21,8 +21,8 @@
 
 static void grShrine_80201C60(bool);
 static void grShrine_80201C64(void);
-static void grShrine_80201CF0(void);
-static void grShrine_80201CF4(void);
+static void grShrine_UnkStage0_OnLoad(void);
+static void grShrine_UnkStage0_OnStart(void);
 static bool grShrine_80201D18(void);
 static HSD_GObj* grShrine_80201D20(s32);
 static void grShrine_80201E08(Ground_GObj*);
@@ -58,8 +58,8 @@ StageData grSh_803E5130 = {
     "/GrSh.dat",
     grShrine_80201C64,
     grShrine_80201C60,
-    grShrine_80201CF0,
-    grShrine_80201CF4,
+    grShrine_UnkStage0_OnLoad,
+    grShrine_UnkStage0_OnStart,
     grShrine_80201D18,
     grShrine_80201F44,
     grShrine_80201F4C,
@@ -91,9 +91,9 @@ static void grShrine_80201C64(void)
     }
 }
 
-static void grShrine_80201CF0(void) {}
+static void grShrine_UnkStage0_OnLoad(void) {}
 
-static void grShrine_80201CF4(void)
+static void grShrine_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }

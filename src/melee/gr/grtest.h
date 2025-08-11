@@ -10,8 +10,8 @@
 
 /* 206E2C */ void grTest_80206E2C(bool);
 /* 206E30 */ void grTest_80206E30(void);
-/* 207014 */ void grTest_80207014(void);
-/* 207018 */ void grTest_80207018(void);
+/* 207014 */ void grTest_UnkStage0_OnLoad(void);
+/* 207018 */ void grTest_UnkStage0_OnStart(void);
 /* 20703C */ bool grTest_8020703C(void);
 /* 207044 */ HSD_GObj* grTest_80207044(int);
 /* 207130 */ void grTest_80207130(Ground_GObj*);

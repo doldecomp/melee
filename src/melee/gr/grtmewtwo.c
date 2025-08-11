@@ -32,8 +32,8 @@ typedef struct grTMewtwo_UnkStruct {
 
 /* 2221D8 */ static void grTMewtwo_802221D8(bool arg0);
 /* 2221DC */ static void grTMewtwo_802221DC(void);
-/* 222254 */ static void grTMewtwo_80222254(void);
-/* 222258 */ static void grTMewtwo_80222258(void);
+/* 222254 */ static void grTmewtwo_UnkStage0_OnLoad(void);
+/* 222258 */ static void grTmewtwo_UnkStage0_OnStart(void);
 /* 22227C */ static bool grTMewtwo_8022227C(void);
 /* 222284 */ static Ground_GObj* grTMewtwo_80222284(int index);
 /* 22236C */ static void grTMewtwo_8022236C(Ground_GObj* gobj);
@@ -91,8 +91,8 @@ StageData grTMewtwo_803E8FCC = {
     "/GrTMt.dat",
     grTMewtwo_802221DC,
     grTMewtwo_802221D8,
-    grTMewtwo_80222254,
-    grTMewtwo_80222258,
+    grTmewtwo_UnkStage0_OnLoad,
+    grTmewtwo_UnkStage0_OnStart,
     grTMewtwo_8022227C,
     grTMewtwo_802224B4,
     grTMewtwo_802225C8,
@@ -116,9 +116,9 @@ void grTMewtwo_802221DC(void)
     Ground_801C42AC();
 }
 
-void grTMewtwo_80222254(void) {}
+void grTmewtwo_UnkStage0_OnLoad(void) {}
 
-void grTMewtwo_80222258(void)
+void grTmewtwo_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

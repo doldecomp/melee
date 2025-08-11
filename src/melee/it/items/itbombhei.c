@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itbombhei.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/it_26B1.h"
 
@@ -7,126 +9,126 @@
 
 /// #it_8027D730
 
-/// #it_8027D76C
+/// #it_3F14_Logic6_Spawned
 
 /// #it_8027D820
 
 /// #fn_8027DAC8
 
-/// #it_8027DC74
+/// #itBombhei_UnkMotion0_Anim
 
-void it_8027DDE8(Item_GObj* gobj) {}
+void itBombhei_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_8027DDEC
+/// #itBombhei_UnkMotion0_Coll
 
 /// #it_8027DE18
 
-bool it_8027E018(Item_GObj* gobj)
+bool itBombhei_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8027E020
+/// #itBombhei_UnkMotion1_Phys
 
-/// #it_8027E050
+/// #itBombhei_UnkMotion1_Coll
 
-/// #it_8027E0B4
+/// #it_3F14_Logic6_PickedUp
 
-/// #it_8027E3E4
+/// #itBombhei_UnkMotion8_Anim
 
-void it_8027E644(Item_GObj* gobj) {}
+void itBombhei_UnkMotion8_Phys(Item_GObj* gobj) {}
 
-/// #it_8027E648
+/// #it_3F14_Logic6_Dropped
 
 /// #it_8027E978
 
-/// #it_8027EB7C
+/// #itBombhei_UnkMotion3_Anim
 
-void it_8027EDC0(Item_GObj* gobj) {}
+void itBombhei_UnkMotion3_Phys(Item_GObj* gobj) {}
 
-/// #it_8027EDC4
+/// #itBombhei_UnkMotion3_Coll
 
 /// #it_8027EE04
 
-/// #it_8027EFD0
+/// #itBombhei_UnkMotion2_Anim
 
-void it_8027F26C(Item_GObj* gobj) {}
+void itBombhei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_8027F270
+/// #itBombhei_UnkMotion2_Coll
 
 /// #it_8027F42C
 
-/// #it_8027F5E8
+/// #itBombhei_UnkMotion4_Anim
 
-void it_8027F89C(Item_GObj* gobj) {}
+void itBombhei_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #it_8027F8A0
+/// #itBombhei_UnkMotion4_Coll
 
 /// #it_8027F8E0
 
-/// #it_8027FC44
+/// #itBombhei_UnkMotion5_Anim
 
-void it_8027FC78(Item_GObj* gobj) {}
+void itBombhei_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_8027FC7C
+/// #itBombhei_UnkMotion5_Coll
 
 /// #fn_8027FCA8
 
-/// #it_8028000C
+/// #itBombhei_UnkMotion6_Anim
 
-/// #it_80280030
+/// #itBombhei_UnkMotion6_Phys
 
 /// #fn_8028007C
 
-/// #it_80280338
+/// #itBombhei_UnkMotion6_Coll
 
-/// #it_80280380
+/// #it_3F14_Logic6_Thrown
 
-/// #it_802806CC
+/// #itBombhei_UnkMotion10_Anim
 
-/// #it_80280928
+/// #itBombhei_UnkMotion10_Phys
 
 /// #fn_80280974
 
-/// #it_80280B18
+/// #itBombhei_UnkMotion10_Coll
 
 /// #it_80280B60
 
 /// #it_80280DC0
 
-/// #it_80280DF0
+/// #it_3F14_Logic6_DmgDealt
 
-/// #it_80280E30
+/// #it_3F14_Logic6_DmgReceived
 
-/// #it_80280E70
+/// #itBombhei_UnkMotion11_Anim
 
-void it_80280E90(Item_GObj* gobj) {}
+void itBombhei_UnkMotion11_Phys(Item_GObj* gobj) {}
 
-bool it_80280E94(Item_GObj* gobj)
+bool itBombhei_UnkMotion11_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_80280E9C
+/// #it_3F14_Logic6_EnteredAir
 
-bool it_80281030(Item_GObj* gobj)
+bool itBombhei_UnkMotion12_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80281038(Item_GObj* gobj) {}
+void itBombhei_UnkMotion12_Phys(Item_GObj* gobj) {}
 
-/// #it_8028103C
+/// #itBombhei_UnkMotion12_Coll
 
-/// #it_80281070
+/// #it_3F14_Logic6_Clanked
 
-/// #it_802810A4
+/// #it_3F14_Logic6_Reflected
 
-/// #it_802810C4
+/// #it_3F14_Logic6_HitShield
 
-/// #it_80281104
+/// #it_3F14_Logic6_ShieldBounced
 
-void it_80281144(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

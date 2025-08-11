@@ -1,8 +1,6 @@
-#include <placeholder.h>
-
-#include "lb/forward.h"
-
 #include "ftSeak/ftSk_SpecialS.h"
+
+#include <placeholder.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -17,15 +15,18 @@
 #include "ftNess/ftNs_AttackHi4.h"
 #include "ftSeak/ftSk_Init.h"
 #include "ftSeak/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itseakchain.h"
 #include "it/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
 
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/jobj.h>
 
 /// @todo Fix common data struct

@@ -1,14 +1,17 @@
+#include "grfigureget.h"
+
 #include <platform.h>
 
-#include "lb/forward.h"
-
 #include "gr/forward.h"
+
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+
+#include "lb/forward.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -18,8 +21,8 @@
 
 /* 219530 */ static void grFigureGet_80219530(bool);
 /* 219534 */ static void grFigureGet_80219534(void);
-/* 21959C */ static void grFigureGet_8021959C(void);
-/* 2195A0 */ static void grFigureGet_802195A0(void);
+/* 21959C */ static void grFigureget_UnkStage0_OnLoad(void);
+/* 2195A0 */ static void grFigureget_UnkStage0_OnStart(void);
 /* 2195C4 */ static bool grFigureGet_802195C4(void);
 /* 2195CC */ static HSD_GObj* grFigureGet_802195CC(int);
 /* 2196B4 */ static void grFigureGet_802196B4(Ground_GObj*);
@@ -46,8 +49,8 @@ StageData grFigureGet_803E7D34 = {
     "/GrNFg.dat",
     grFigureGet_80219534,
     grFigureGet_80219530,
-    grFigureGet_8021959C,
-    grFigureGet_802195A0,
+    grFigureget_UnkStage0_OnLoad,
+    grFigureget_UnkStage0_OnStart,
     grFigureGet_802195C4,
     grFigureGet_80219C88,
     grFigureGet_80219C90,
@@ -60,9 +63,9 @@ extern UNK_T grFigureGet_804D6AC0;
 
 extern StageInfo stage_info;
 
-static void grFigureGet_80219530(bool arg0) {}
+void grFigureGet_80219530(bool arg0) {}
 
-static void grFigureGet_80219534(void)
+void grFigureGet_80219534(void)
 {
     grFigureGet_804D6AC0 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
@@ -73,19 +76,19 @@ static void grFigureGet_80219534(void)
     Ground_801C3BB4();
 }
 
-static void grFigureGet_8021959C(void) {}
+void grFigureget_UnkStage0_OnLoad(void) {}
 
-static void grFigureGet_802195A0(void)
+void grFigureget_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
 
-static bool grFigureGet_802195C4(void)
+bool grFigureGet_802195C4(void)
 {
     return false;
 }
 
-static HSD_GObj* grFigureGet_802195CC(int gobj_id)
+HSD_GObj* grFigureGet_802195CC(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grFigureGet_803E7D00[gobj_id];
@@ -114,20 +117,20 @@ static HSD_GObj* grFigureGet_802195CC(int gobj_id)
     return gobj;
 }
 
-static void grFigureGet_802196B4(Ground_GObj* gobj)
+void grFigureGet_802196B4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grFigureGet_802196E0(Ground_GObj* gobj)
+bool grFigureGet_802196E0(Ground_GObj* gobj)
 {
     return false;
 }
 
-static void grFigureGet_802196E8(Ground_GObj* gobj) {}
+void grFigureGet_802196E8(Ground_GObj* gobj) {}
 
-static void grFigureGet_802196EC(Ground_GObj* gobj) {}
+void grFigureGet_802196EC(Ground_GObj* gobj) {}
 
 /// #grFigureGet_802196F0
 

@@ -12,8 +12,8 @@
 
 void grTCLink_8021FF44(bool);
 void grTCLink_8021FF48(void);
-void grTCLink_8021FFB8(void);
-void grTCLink_8021FFBC(void);
+void grTclink_UnkStage0_OnLoad(void);
+void grTclink_UnkStage0_OnStart(void);
 bool grTCLink_8021FFE0(void);
 HSD_GObj* grTCLink_8021FFE8(int);
 void grTCLink_802200D0(Ground_GObj*);

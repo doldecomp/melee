@@ -118,10 +118,10 @@ void gm_801A4014(MajorScene* scene)
         temp_r26->OnLoad(temp_r25->unk_struct_0);
     }
     gm_801A4D34(temp_r26->OnFrame, temp_r25);
-    if (gmMainLib_8046B0F0.x4 == 0 && temp_r26->OnLeave != NULL) {
+    if (!gmMainLib_8046B0F0.resetting && temp_r26->OnLeave != NULL) {
         temp_r26->OnLeave(temp_r25->unk_struct_1);
     }
-    if (gmMainLib_8046B0F0.x4 == 0) {
+    if (!gmMainLib_8046B0F0.resetting) {
         if (var_r27->Decide != NULL) {
             var_r27->Decide(var_r27);
         }
@@ -138,7 +138,7 @@ void gm_801A4014(MajorScene* scene)
     lb_8001CDB4();
     lb_8001B760(0xB);
     lbMthp_8001F800();
-    if (gmMainLib_8046B0F0.x4 != 0) {
+    if (gmMainLib_8046B0F0.resetting) {
         lbAudioAx_80027DBC();
         HSD_PadReset();
         while (lb_8001B6F8() == 0xB)
@@ -153,7 +153,7 @@ void gm_801A4014(MajorScene* scene)
         gm_801A50AC();
         memzero(&gm_80479D30, 0x14);
         gm_801A3EF4();
-        gmMainLib_8046B0F0.x0 = 1;
+        gmMainLib_8046B0F0.x0 = true;
         gm_801A42F8(MJ_BOOT);
         HSD_VISetBlack(0);
     }
@@ -284,14 +284,14 @@ u8 gm_801A43A0(u8 arg0)
             var_r3_2 = findSceneMatching(temp_r3);
 
             gm_801A4014(var_r3_2);
-            if (gmMainLib_8046B0F0.x4 == 0) {
+            if (!gmMainLib_8046B0F0.resetting) {
                 gm_80479D30.nums = gm_80479D30.nums2;
             }
         } else {
             gm_801A4014(var_r30);
         }
     }
-    if (gmMainLib_8046B0F0.x4 == 0 && var_r30->Unload != NULL) {
+    if (!gmMainLib_8046B0F0.resetting && var_r30->Unload != NULL) {
         var_r30->Unload();
     }
     return gm_80479D30.nums.pending_major;
@@ -324,8 +324,8 @@ void gm_801A4510(void)
 
     while (true) {
         u8 major = gm_801A43A0(gm_80479D30.nums.curr_major);
-        if (gmMainLib_8046B0F0.x4 != 0) {
-            gmMainLib_8046B0F0.x4 = 0;
+        if (gmMainLib_8046B0F0.resetting) {
+            gmMainLib_8046B0F0.resetting = false;
         }
         gamestate->nums.prev_major = gamestate->nums.curr_major;
         gamestate->nums.curr_major = major;

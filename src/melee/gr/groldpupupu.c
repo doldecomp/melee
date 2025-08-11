@@ -12,7 +12,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-void grOldPupupu_802107DC(void) {}
+void grOldPupupu_802107DC(bool arg) {}
 
 /// #grOldPupupu_802107E0
 
@@ -23,7 +23,7 @@ void grOldPupupu_80210888(void)
     grZakoGenerator_801CAE04(NULL);
 }
 
-bool grOldPupupu_802108AC(HSD_GObj* gobj)
+bool grOldPupupu_802108AC(void)
 {
     return false;
 }
@@ -146,7 +146,7 @@ bool grOldPupupu_80211C14(Ground_GObj* gobj)
 
 void grOldPupupu_80211C9C(Ground_GObj* arg) {}
 
-bool grOldPupupu_80211CA0(HSD_GObj* gobj)
+DynamicsDesc* grOldPupupu_80211CA0(enum_t gobj)
 {
     return false;
 }

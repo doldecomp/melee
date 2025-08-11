@@ -13,8 +13,8 @@
 
 /* 2207F0 */ void grTFalco_802207F0(bool);
 /* 2207F4 */ void grTFalco_802207F4(void);
-/* 22086C */ void grTFalco_8022086C(void);
-/* 220870 */ void grTFalco_80220870(void);
+/* 22086C */ void grTfalco_UnkStage0_OnLoad(void);
+/* 220870 */ void grTfalco_UnkStage0_OnStart(void);
 /* 220894 */ bool grTFalco_80220894(void);
 /* 22089C */ HSD_GObj* grTFalco_8022089C(int);
 /* 220984 */ void grTFalco_80220984(Ground_GObj*);

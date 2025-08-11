@@ -5,8 +5,8 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2AB29C */ static bool it_802AB29C(Item_GObj* gobj);
-/* 2AB2A4 */ static bool it_802AB2A4(Item_GObj* gobj);
+/* 2AB29C */ static bool itNesspkflush_UnkMotion1_Coll(Item_GObj* gobj);
+/* 2AB2A4 */ static bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj);
 
 Fighter_GObj* it_802AA7E4(Item_GObj* gobj)
 {
@@ -26,57 +26,57 @@ bool it_802AA7F0(Item_GObj* gobj)
 
 /// #it_802AA8C0
 
-/// #it_802AA9CC
+/// #it_2725_Logic102_Destroyed
 
 /// #it_802AAA50
 
 /// #it_802AAA80
 
-/// #it_802AAB70
+/// #itNesspkflush_UnkMotion0_Anim
 
-/// #it_802AAD48
+/// #itNesspkflush_UnkMotion1_Anim
 
-/// #it_802AAEE4
+/// #itNesspkflush_UnkMotion2_Anim
 
-/// #it_802AAFDC
+/// #itNesspkflush_UnkMotion0_Phys
 
-void it_802AB128(Item_GObj* gobj)
+void itNesspkflush_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-void it_802AB140(Item_GObj* gobj)
+void itNesspkflush_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-/// #it_802AB158
+/// #itNesspkflush_UnkMotion0_Coll
 
-bool it_802AB29C(Item_GObj* gobj)
+bool itNesspkflush_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-bool it_802AB2A4(Item_GObj* gobj)
+bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802AB2AC
+/// #it_2725_Logic102_Reflected
 
-bool it_802AB3C0(Item_GObj* arg0)
+bool it_2725_Logic102_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802AB3C8(Item_GObj* arg0)
+bool it_2725_Logic102_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-void it_802AB3D0(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic102_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

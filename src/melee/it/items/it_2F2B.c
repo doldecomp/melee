@@ -15,12 +15,12 @@
 
 #include <common_structs.h>
 
-/* 2F2CCC */ static bool it_802F2CCC(Item_GObj* gobj);
-/* 2F2CD4 */ static void it_802F2CD4(Item_GObj* gobj);
-/* 2F2CD8 */ static bool it_802F2CD8(Item_GObj* gobj);
+/* 2F2CCC */ static bool it_2F2B_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2F2CD4 */ static void it_2F2B_UnkMotion0_Phys(Item_GObj* gobj);
+/* 2F2CD8 */ static bool it_2F2B_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F9480[] = {
-    { -1, it_802F2CCC, it_802F2CD4, it_802F2CD8 },
+    { -1, it_2F2B_UnkMotion0_Anim, it_2F2B_UnkMotion0_Phys, it_2F2B_UnkMotion0_Coll },
 };
 
 void it_802F2BFC(Item_GObj* gobj, Fighter_GObj* owner_gobj)
@@ -42,14 +42,14 @@ void it_802F2BFC(Item_GObj* gobj, Fighter_GObj* owner_gobj)
     it_80273408(gobj);
 }
 
-bool it_802F2CCC(Item_GObj* gobj)
+bool it_2F2B_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802F2CD4(Item_GObj* gobj) {}
+void it_2F2B_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-bool it_802F2CD8(Item_GObj* gobj)
+bool it_2F2B_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }

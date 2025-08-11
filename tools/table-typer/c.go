@@ -3,13 +3,32 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"iter"
 	"log"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
 )
+
+func defaultName(typ string, prevParams []string) string {
+	name := "arg"
+	switch typ {
+	case "HSD_GObj*", "Item_GObj*", "Ground_GObj*":
+		name = "gobj"
+	case "Vec3*":
+		name = "vec"
+	case "HSD_JObj*":
+		name = "jobj"
+	case "bool":
+		name = "flag"
+	}
+	for i, p := range prevParams {
+		if name == p {
+			name += strconv.Itoa(i)
+		}
+	}
+	return name
+}
 
 func normalizeType(t string) string {
 	return strings.NewReplacer(
@@ -18,176 +37,213 @@ func normalizeType(t string) string {
 	).Replace(t)
 }
 
-type CType interface {
-	equivalentTo(other CType) bool
+func equivalent(a, b CType) bool {
+	switch a := a.(type) {
+	case CFuncType:
+		b, ok := b.(CFuncType)
+		if !ok {
+			return false
+		}
+		if normalizeType(a.Return) != normalizeType(b.Return) || len(a.Params) != len(b.Params) {
+			return false
+		}
+		for i, param := range a.Params {
+			if normalizeType(param) != normalizeType(b.Params[i]) {
+				return false
+			}
+		}
+		return true
+	default:
+		panic("unhandled CType")
+	}
 }
 
-type FuncType struct {
+type CValue interface{ Type() CType }
+type CType interface{ New() CValue }
+
+type CFuncType struct {
 	Return string
 	Params []string
 }
 
-func (ft FuncType) equivalentTo(other CType) bool {
-	ot, ok := other.(FuncType)
-	if !ok || normalizeType(ft.Return) != normalizeType(ot.Return) || len(ft.Params) != len(ot.Params) {
-		return false
-	}
-	for i, param := range ft.Params {
-		if normalizeType(param) != normalizeType(ot.Params[i]) {
-			return false
-		}
-	}
-	return true
-}
-
-type FuncSignature struct {
-	Type       FuncType
+type CFuncValue struct {
+	typ        CFuncType
 	Name       string
 	ParamNames []string
 }
 
-func (fs *FuncSignature) setType(ft FuncType) {
-	fs.Type = ft
+type CFieldType struct {
+	Name string
+	Type CType
+}
+
+type CStructType struct {
+	Fields []CFieldType
+}
+
+type CStructValue struct {
+	typ    CStructType
+	Fields []CValue
+}
+
+func (fv CFuncValue) Type() CType   { return fv.typ }
+func (sv CStructValue) Type() CType { return sv.typ }
+
+func (ft CFuncType) New() CValue {
+	v := &CFuncValue{
+		typ:        ft,
+		Name:       "",
+		ParamNames: make([]string, len(ft.Params)),
+	}
+	for i := range ft.Params {
+		v.ParamNames[i] = defaultName(ft.Params[i], v.ParamNames[:i])
+	}
+	return v
+}
+
+func (st CStructType) New() CValue {
+	v := &CStructValue{
+		typ:    st,
+		Fields: make([]CValue, len(st.Fields)),
+	}
+	for i := range st.Fields {
+		if st.Fields[i].Type != nil {
+			v.Fields[i] = st.Fields[i].Type.New()
+		}
+	}
+	return v
+}
+
+func (fv *CFuncValue) setType(ft CFuncType) {
+	fv.typ = ft
 	// special case for void
 	if len(ft.Params) == 1 && ft.Params[0] == "void" {
-		fs.ParamNames[0] = ""
+		fv.ParamNames[0] = ""
 		return
 	}
-	if len(fs.ParamNames) < len(ft.Params) {
+	if len(fv.ParamNames) < len(ft.Params) {
 		// orig had too few params; fill in the rest with default names
-		for len(fs.ParamNames) < len(ft.Params) {
-			fs.ParamNames = append(fs.ParamNames, defaultName(ft.Params[len(fs.ParamNames)]))
+		for len(fv.ParamNames) < len(ft.Params) {
+			fv.ParamNames = append(fv.ParamNames, defaultName(ft.Params[len(fv.ParamNames)], fv.ParamNames))
 		}
-	} else if len(fs.ParamNames) > len(ft.Params) {
+	} else if len(fv.ParamNames) > len(ft.Params) {
 		// orig had too many params; try to preserve what they had before
-		fs.ParamNames = fs.ParamNames[:len(ft.Params)]
+		fv.ParamNames = fv.ParamNames[:len(ft.Params)]
 	}
 }
 
-func (fs FuncSignature) String() string {
+func (fv CFuncValue) String() string {
 	var params []string
-	for i := range fs.ParamNames {
-		if fs.ParamNames[i] == "" {
-			params = append(params, fs.Type.Params[i]) // just type
+	for i := range fv.ParamNames {
+		if fv.ParamNames[i] == "" {
+			params = append(params, fv.typ.Params[i]) // just type
 		} else {
-			params = append(params, fmt.Sprintf("%s %s", fs.Type.Params[i], fs.ParamNames[i]))
+			params = append(params, fmt.Sprintf("%s %s", fv.typ.Params[i], fv.ParamNames[i]))
 		}
 	}
-	return fmt.Sprintf("%s %s(%s)", fs.Type.Return, fs.Name, strings.Join(params, ", "))
+	return fmt.Sprintf("%s %s(%s)", fv.typ.Return, fv.Name, strings.Join(params, ", "))
 }
 
-type TableType struct {
-	Fields []CType
-}
+var ignoredField = CFieldType{}
 
-var tableTypes = map[string]TableType{
+var structTypes = map[string]CStructType{
 	"ItemStateTable": {
-		Fields: []CType{
-			nil, // enum_t
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
+		Fields: []CFieldType{
+			ignoredField, // enum_t
+			{"animated", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"physics_updated", &CFuncType{"void", []string{"Item_GObj*"}}},
+			{"collided", &CFuncType{"bool", []string{"Item_GObj*"}}},
 		},
 	},
 	"ItemLogicTable": {
-		Fields: []CType{
-			nil, // ItemStateTable*
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"bool", []string{"Item_GObj*"}},
-			FuncType{"void", []string{"Item_GObj*", "Item_GObj*"}},
+		Fields: []CFieldType{
+			ignoredField, // ItemStateTable*
+			{"spawned", &CFuncType{"void", []string{"Item_GObj*"}}},
+			{"destroyed", &CFuncType{"void", []string{"Item_GObj*"}}},
+			{"picked_up", &CFuncType{"void", []string{"Item_GObj*"}}},
+			{"dropped", &CFuncType{"void", []string{"Item_GObj*"}}},
+			{"thrown", &CFuncType{"void", []string{"Item_GObj*"}}},
+			{"dmg_dealt", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"dmg_received", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"entered_air", &CFuncType{"void", []string{"Item_GObj*"}}},
+			{"reflected", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"clanked", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"absorbed", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"shield_bounced", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"hit_shield", &CFuncType{"bool", []string{"Item_GObj*"}}},
+			{"evt_unk", &CFuncType{"void", []string{"Item_GObj*", "Item_GObj*"}}},
 		},
 	},
 	"sdata_ItemGXLink": {
-		Fields: []CType{
-			FuncType{"void", []string{"HSD_GObj*", "int"}},
+		Fields: []CFieldType{
+			{"x0_renderFunc", &CFuncType{"void", []string{"HSD_GObj*", "int"}}},
 		},
 	},
+
 	"StageCallbacks": {
-		Fields: []CType{
-			FuncType{"void", []string{"Ground_GObj*"}},
-			FuncType{"bool", []string{"Ground_GObj*"}},
-			FuncType{"void", []string{"Ground_GObj*"}},
-			FuncType{"void", []string{"Ground_GObj*"}},
-			nil, // u32
+		Fields: []CFieldType{
+			{"callback0", &CFuncType{"void", []string{"Ground_GObj*"}}},
+			{"callback1", &CFuncType{"bool", []string{"Ground_GObj*"}}},
+			{"callback2", &CFuncType{"void", []string{"Ground_GObj*"}}},
+			{"callback3", &CFuncType{"void", []string{"Ground_GObj*"}}},
+			ignoredField, // u32
 		},
 	},
 
 	"MinorScene": {
-		Fields: []CType{
-			nil, // u8 + u8 + u16
-			FuncType{"void", []string{"MinorScene*"}},
-			FuncType{"void", []string{"MinorScene*"}},
+		Fields: []CFieldType{
+			ignoredField, // u8 + u8 + u16
+			{"Prep", &CFuncType{"void", []string{"MinorScene*"}}},
+			{"Decide", &CFuncType{"void", []string{"MinorScene*"}}},
 		},
 	},
 
 	"StageData": {
-		Fields: []CType{
-			nil, // u32
-			nil, // StageCallbacks*
-			nil, // char*
-			FuncType{"void", []string{"void"}},
-			FuncType{"void", []string{"bool"}},
-			FuncType{"void", []string{"void"}},
-			FuncType{"void", []string{"void"}},
-			FuncType{"bool", []string{"void"}},
-			FuncType{"DynamicsDesc*", []string{"enum_t"}},
-			FuncType{"bool", []string{"Vec3*", "int", "HSD_JObj*"}},
-			nil, // u32
-			nil, // S16Vec3*
-			nil, // size_t
+		Fields: []CFieldType{
+			ignoredField, // u32
+			ignoredField, // StageCallbacks*
+			ignoredField, // char*
+			{"callback0", &CFuncType{"void", []string{"void"}}},
+			{"callback1", &CFuncType{"void", []string{"bool"}}},
+			{"OnLoad", &CFuncType{"void", []string{"void"}}},
+			{"OnStart", &CFuncType{"void", []string{"void"}}},
+			{"callback4", &CFuncType{"bool", []string{"void"}}},
+			{"callback5", &CFuncType{"DynamicsDesc*", []string{"enum_t"}}},
+			{"callback6", &CFuncType{"bool", []string{"Vec3*", "int", "HSD_JObj*"}}},
+			ignoredField, // u32
+			ignoredField, // S16Vec3*
+			ignoredField, // size_t
 		},
 	},
 
 	"gm_803DF94C_t": {
-		Fields: []CType{
-			FuncType{"void", []string{"HSD_GObj*"}},
-			FuncType{"void", []string{"int"}},
+		Fields: []CFieldType{
+			{"x0", &CFuncType{"void", []string{"HSD_GObj*"}}},
+			{"x4", &CFuncType{"void", []string{"int"}}},
 		},
 	},
 }
 
-func defaultName(typ string) string {
-	switch typ {
-	case "HSD_GObj*", "Item_GObj*", "Ground_GObj*":
-		return "gobj"
-	case "Vec3*":
-		return "vec"
-	case "HSD_JObj*":
-		return "jobj"
-	default:
-		return "arg"
+func (cs *CStructValue) parse(entries []AsmTableEntry) bool {
+	if len(entries) != len(cs.Fields) {
+		return false
 	}
-}
-
-func (tt TableType) parse(entries []AsmTableEntry) iter.Seq2[string, FuncType] {
-	return func(yield func(string, FuncType) bool) {
-		for len(entries) > 0 {
-			for _, field := range tt.Fields {
-				entry := entries[0]
-				entries = entries[1:]
-				switch t := field.(type) {
-				case FuncType:
-					if entry.Value == "NULL" {
-						continue
-					}
-					if !yield(entry.Value, t) {
-						return
-					}
-				}
+	for i := range cs.Fields {
+		entry := entries[0]
+		entries = entries[1:]
+		switch f := cs.Fields[i].(type) {
+		case *CFuncValue:
+			_, err := strconv.Atoi(entry.Value)
+			if entry.Value == "NULL" || strings.Trim(entry.Value, "0x") == "" {
+				cs.Fields[i] = nil
+			} else if err == nil || strings.HasPrefix(entry.Value, "0x") {
+				return false
+			} else {
+				f.Name = entry.Value
 			}
 		}
 	}
+	return true
 }
 
 func parseTableDecls(path string, tableType string) []string {
@@ -205,19 +261,34 @@ func parseTableDecls(path string, tableType string) []string {
 	return decls
 }
 
-func fixSignatures(path string, fnTypes map[string]FuncType) int {
+func fixSignatures(path string, fnTypes map[string]*CFuncValue) int {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatalf("Failed to read file %s: %v", path, err)
 	}
+
 	n := 0
+	fix := func(name string, ft CFuncType) {
+		changed := false
+		lines := bytes.Split(content, []byte("\n"))
+		for i, line := range lines {
+			if raw, sig, ok := parseCFuncValue(name, line); ok {
+				if !equivalent(sig.typ, ft) {
+					sig.setType(ft)
+					lines[i] = bytes.Replace(lines[i], raw, []byte(sig.String()), 1)
+					changed = true
+				}
+			}
+		}
+		if changed {
+			content = bytes.Join(lines, []byte("\n"))
+			n++
+		}
+	}
+
 	for name, ft := range fnTypes {
 		if bytes.Contains(content, []byte(name)) {
-			var changed bool
-			content, changed = fixSignature(content, name, ft)
-			if changed {
-				n++
-			}
+			fix(name, ft.typ)
 		}
 	}
 	if n > 0 {
@@ -228,25 +299,10 @@ func fixSignatures(path string, fnTypes map[string]FuncType) int {
 	return n
 }
 
-func fixSignature(content []byte, name string, ft FuncType) ([]byte, bool) {
-	changed := false
-	lines := bytes.Split(content, []byte("\n"))
-	for i, line := range lines {
-		if orig, sig, ok := parseFuncSignature(name, line); ok {
-			if !sig.Type.equivalentTo(ft) {
-				sig.setType(ft)
-				lines[i] = bytes.Replace(lines[i], orig, []byte(sig.String()), 1)
-				changed = true
-			}
-		}
-	}
-	return bytes.Join(lines, []byte("\n")), changed
-}
-
-func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) {
+func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 	i := bytes.Index(line, []byte(name+"("))
 	if i < 0 {
-		return nil, FuncSignature{}, false
+		return nil, CFuncValue{}, false
 	}
 	retEnd := bytes.LastIndexByte(line[:i], ' ')
 	retStart := retEnd - 1
@@ -256,18 +312,17 @@ func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) 
 	returnType := string(bytes.TrimSpace(line[retStart:retEnd]))
 	if returnType == "" || returnType == "return" {
 		// actually a function call, not a declaration
-		return nil, FuncSignature{}, false
+		return nil, CFuncValue{}, false
 	}
 	paramStart := i + len(name) + 1
 	paramEnd := paramStart + bytes.IndexByte(line[paramStart:], ')')
 	if paramEnd < paramStart {
 		// TODO: handle multi-line signatures
-		return nil, FuncSignature{}, false
+		return nil, CFuncValue{}, false
 	}
 	params := bytes.Split(line[paramStart:paramEnd], []byte(","))
 	isDecl := strings.Contains(string(line), ";")
 	var paramTypes, paramNames []string
-	renames := 0
 	for _, param := range params {
 		typ, name, _ := strings.Cut(strings.TrimSpace(string(param)), " ")
 		if strings.HasPrefix(name, "*") {
@@ -275,17 +330,14 @@ func parseFuncSignature(name string, line []byte) ([]byte, FuncSignature, bool) 
 			name = strings.TrimPrefix(name, "*")
 		}
 		if name == "" && !isDecl {
-			name = defaultName(typ)
-			if renames++; renames > 1 {
-				name += strconv.Itoa(renames)
-			}
+			name = defaultName(typ, paramNames)
 		}
 		paramTypes = append(paramTypes, typ)
 		paramNames = append(paramNames, name)
 	}
 	orig := line[retStart : paramEnd+1]
-	sig := FuncSignature{
-		Type:       FuncType{Return: returnType, Params: paramTypes},
+	sig := CFuncValue{
+		typ:        CFuncType{Return: returnType, Params: paramTypes},
 		Name:       string(line[retEnd+1 : i+len(name)]),
 		ParamNames: paramNames,
 	}

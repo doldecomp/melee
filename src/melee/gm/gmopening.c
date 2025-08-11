@@ -154,7 +154,7 @@ void gm_801AA28C_OnFrame(void)
     if (gm_804D67D0 && (gm_804D67EC == gm_804D67E4)) {
         lbAudioAx_800236DC();
         gm_801A4B60();
-    } else if (gmMainLib_8046B0F0.xC != 0 && lbMthp_8001F604() == 0) {
+    } else if (gmMainLib_8046B0F0.xC && lbMthp_8001F604() == 0) {
         gmMainLib_8015F500();
         lbAudioAx_800236DC();
         lbAudioAx_80023694();

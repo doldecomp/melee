@@ -18,7 +18,7 @@
 #include "it/types.h"
 #include "gr/grheal.static.h"
 
-void grHeal_8021EF38(int arg0) {}
+void grHeal_8021EF38(bool arg0) {}
 
 void grHeal_8021EF3C(void)
 {
@@ -250,7 +250,7 @@ void grHeal_8021F79C(s32 arg0, s32 idx, s32 arg2)
     it_8026BE84(&bobomb_rain);
 }
 
-DynamicsDesc* grHeal_8021F830(int arg0)
+DynamicsDesc* grHeal_8021F830(enum_t arg0)
 {
     return false;
 }

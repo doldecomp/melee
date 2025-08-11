@@ -18,9 +18,9 @@
 #include <melee/it/item.h>
 
 ItemStateTable it_803F94A0[] = {
-    { -1, it_802F31B8, it_802F3260, it_802F3264 },
-    { -1, it_802F3078, it_802F3120, it_802F3150 },
-    { -1, it_802F32F8, NULL, NULL },
+    { -1, it_27CF_UnkMotion0_Anim, it_27CF_UnkMotion0_Phys, it_27CF_UnkMotion0_Coll },
+    { -1, it_27CF_UnkMotion1_Anim, it_27CF_UnkMotion1_Phys, it_27CF_UnkMotion1_Coll },
+    { -1, it_27CF_UnkMotion2_Anim, NULL, NULL },
 };
 
 void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr)
@@ -81,21 +81,21 @@ inline bool inline1(HSD_GObj* item_gobj) {
     return false;
 }
 
-bool it_802F3078(HSD_GObj* item_gobj) {
+bool it_27CF_UnkMotion1_Anim(HSD_GObj* item_gobj) {
     PAD_STACK(8);
     return inline1(item_gobj);
 }
 
-// void it_802F3120(Item_GObj* item_gobj) {
-void it_802F3120(HSD_GObj* item_gobj) {
+// void it_27CF_UnkMotion1_Phys(Item_GObj* item_gobj) {
+void it_27CF_UnkMotion1_Phys(HSD_GObj* item_gobj) {
     ItemAttr* attr;
 
     attr = ((Item*) item_gobj->user_data)->xCC_item_attr;
     it_80272860((Item_GObj*) item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
-// bool it_802F3150(Item_GObj* item_gobj) {
-bool it_802F3150(HSD_GObj* item_gobj) {
+// bool it_27CF_UnkMotion1_Coll(Item_GObj* item_gobj) {
+bool it_27CF_UnkMotion1_Coll(HSD_GObj* item_gobj) {
     it_8026E15C((Item_GObj*) item_gobj, it_802F317C);
     return false;
 }
@@ -109,14 +109,14 @@ void it_802F317C(HSD_GObj* item_gobj) {
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_802F31B8(HSD_GObj* item_gobj) {
+bool it_27CF_UnkMotion0_Anim(HSD_GObj* item_gobj) {
     PAD_STACK(8);
     return inline1(item_gobj);
 }
 
 #else
-// bool it_802F3078(Item_GObj* item_gobj) {
-bool it_802F3078(HSD_GObj* item_gobj)
+// bool it_27CF_UnkMotion1_Anim(Item_GObj* item_gobj) {
+bool it_27CF_UnkMotion1_Anim(HSD_GObj* item_gobj)
 {
     Item* item;
     f32 sp1C;
@@ -137,8 +137,8 @@ bool it_802F3078(HSD_GObj* item_gobj)
     return false;
 }
 
-// void it_802F3120(Item_GObj* item_gobj) {
-void it_802F3120(HSD_GObj* item_gobj)
+// void it_27CF_UnkMotion1_Phys(Item_GObj* item_gobj) {
+void it_27CF_UnkMotion1_Phys(HSD_GObj* item_gobj)
 {
     ItemAttr* attr;
 
@@ -147,8 +147,8 @@ void it_802F3120(HSD_GObj* item_gobj)
                 attr->x14_fall_speed_max);
 }
 
-// bool it_802F3150(Item_GObj* item_gobj) {
-bool it_802F3150(HSD_GObj* item_gobj)
+// bool it_27CF_UnkMotion1_Coll(Item_GObj* item_gobj) {
+bool it_27CF_UnkMotion1_Coll(HSD_GObj* item_gobj)
 {
     it_8026E15C((Item_GObj*) item_gobj, it_802F317C);
     return false;
@@ -164,8 +164,8 @@ void it_802F317C(HSD_GObj* item_gobj)
     Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-// bool it_802F31B8(Item_GObj* item_gobj) {
-bool it_802F31B8(HSD_GObj* item_gobj)
+// bool it_27CF_UnkMotion0_Anim(Item_GObj* item_gobj) {
+bool it_27CF_UnkMotion0_Anim(HSD_GObj* item_gobj)
 {
     Item* item;
     f32 sp1C;
@@ -187,14 +187,14 @@ bool it_802F31B8(HSD_GObj* item_gobj)
 }
 #endif
 
-// void it_802F3260(Item_GObj* item_gobj) {
-void it_802F3260(HSD_GObj* item_gobj)
+// void it_27CF_UnkMotion0_Phys(Item_GObj* item_gobj) {
+void it_27CF_UnkMotion0_Phys(HSD_GObj* item_gobj)
 {
     return;
 }
 
-// bool it_802F3264(Item_GObj* item_gobj) {
-bool it_802F3264(HSD_GObj* item_gobj)
+// bool it_27CF_UnkMotion0_Coll(Item_GObj* item_gobj) {
+bool it_27CF_UnkMotion0_Coll(HSD_GObj* item_gobj)
 {
     it_8026D62C((Item_GObj*) item_gobj, it_802F3020);
     return false;
@@ -214,8 +214,8 @@ void it_802F3290(Item_GObj* item_gobj)
     Item_80268E5C((HSD_GObj*) item_gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-// bool it_802F32F8(Item_GObj* item_gobj) {
-bool it_802F32F8(HSD_GObj* item_gobj)
+// bool it_27CF_UnkMotion2_Anim(Item_GObj* item_gobj) {
+bool it_27CF_UnkMotion2_Anim(HSD_GObj* item_gobj)
 {
     Item* item;
 
@@ -227,7 +227,7 @@ bool it_802F32F8(HSD_GObj* item_gobj)
     return false;
 }
 
-bool it_802F3330(Item_GObj* item_gobj)
+bool it_2725_Logic114_DmgReceived(Item_GObj* item_gobj)
 {
     Item* item;
 
@@ -238,7 +238,7 @@ bool it_802F3330(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802F3374(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2725_Logic114_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

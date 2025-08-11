@@ -28,8 +28,8 @@ StageData grTPk_803E92CC = {
     "/GrTPk.dat",
     grTPikachu_80222E80,
     grTPikachu_80222E7C,
-    grTPikachu_80222EF0,
-    grTPikachu_80222EF4,
+    grTpikachu_UnkStage0_OnLoad,
+    grTpikachu_UnkStage0_OnStart,
     grTPikachu_80222F18,
     grTPikachu_80223150,
     grTPikachu_80223158,
@@ -55,12 +55,12 @@ void grTPikachu_80222E80(void)
     Ground_801C42AC();
 }
 
-void grTPikachu_80222EF0(void)
+void grTpikachu_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-void grTPikachu_80222EF4(void)
+void grTpikachu_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

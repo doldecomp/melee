@@ -378,8 +378,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
     struct StartMeleeRules* small_thing;
 
     big_thing = gm_8016AE38();
-    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0)
-    {
+    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0) {
         if_802F7C30(arg1);
     }
 
@@ -396,16 +395,16 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
         }
     }
     if ((big_thing->x24C8.x2_0 != 0) &&
-        ((Player_GetPlayerSlotType(player_idx) == 0) ||
-         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        ((Player_GetPlayerSlotType(player_idx) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Inline with callback arg
-    if (big_thing->x24C8.x0_0 != 1 &&
-        big_thing->x24C8.x2_5 != 0 && &if_802F7BB4 != NULL)
+    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
+        &if_802F7BB4 != NULL)
     {
         if_802F7BB4(player_idx);
     }
@@ -431,16 +430,16 @@ void ifStatus_802F6AF8(s32 player_idx)
         }
     }
     if ((big_thing->x24C8.x2_0 != 0) &&
-        ((Player_GetPlayerSlotType(player_idx) == 0) ||
-         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        ((Player_GetPlayerSlotType(player_idx) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Inline with callback arg
-    if (big_thing->x24C8.x0_0 != 1 &&
-        big_thing->x24C8.x2_5 != 0 && &if_802F7AF8 != NULL)
+    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
+        &if_802F7AF8 != NULL)
     {
         if_802F7AF8(player_idx);
     }
@@ -466,16 +465,16 @@ void ifStatus_802F6C04(s32 player_idx)
         }
     }
     if ((big_thing->x24C8.x2_0 != 0) &&
-        ((Player_GetPlayerSlotType(player_idx) == 0) ||
-         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        ((Player_GetPlayerSlotType(player_idx) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Inline with callback arg
-    if (big_thing->x24C8.x0_0 != 1 &&
-        big_thing->x24C8.x2_5 != 0 && &if_802F7C30 != NULL)
+    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
+        &if_802F7C30 != NULL)
     {
         if_802F7C30(player_idx);
     }
@@ -501,16 +500,16 @@ void ifStatus_802F6D10(s32 player_idx)
         }
     }
     if ((big_thing->x24C8.x2_0 != 0) &&
-        ((Player_GetPlayerSlotType(player_idx) == 0) ||
-         (Player_GetPlayerSlotType(player_idx) == 1)) &&
+        ((Player_GetPlayerSlotType(player_idx) == Gm_PKind_Human) ||
+         (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Inline with callback arg
-    if (big_thing->x24C8.x0_0 != 1 &&
-        big_thing->x24C8.x2_5 != 0 && &if_802F7D08 != NULL)
+    if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
+        &if_802F7D08 != NULL)
     {
         if_802F7D08(player_idx);
     }

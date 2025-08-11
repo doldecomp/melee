@@ -124,7 +124,7 @@ void gm_801AD620_OnFrame(void)
     if (gm_80480D70.x10 == 3) {
         gm_80480D70.x1C++;
         if (gm_80480D70.x1C == 0xB) {
-            gmMainLib_8046B0F0.x8 = 1;
+            gmMainLib_8046B0F0.progressive = true;
             gmMainLib_8015F500();
             OSSetProgressiveMode(1);
         } else if (gm_80480D70.x1C == 0x6E) {

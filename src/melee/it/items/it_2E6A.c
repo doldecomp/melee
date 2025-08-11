@@ -12,7 +12,7 @@
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 
-static void it_802E6D60(HSD_GObj* arg0);
+static void it_2E6A_UnkMotion19_Phys(HSD_GObj* arg0);
 static bool it_802E7054(HSD_GObj* gobj);
 
 static ItemAttr it_803F8C08 = {
@@ -62,16 +62,16 @@ static ItemAttr it_803F8C08 = {
 };
 
 ItemStateTable it_803F8C8C[] = {
-    { 0, NULL, it_802E6D60, NULL },  { 1, NULL, it_802E6D60, NULL },
-    { 2, NULL, it_802E6D60, NULL },  { 3, NULL, it_802E6D60, NULL },
-    { 4, NULL, it_802E6D60, NULL },  { 5, NULL, it_802E6D60, NULL },
-    { 6, NULL, it_802E6D60, NULL },  { 7, NULL, it_802E6D60, NULL },
-    { 8, NULL, it_802E6D60, NULL },  { 9, NULL, it_802E6D60, NULL },
-    { 10, NULL, it_802E6D60, NULL }, { 11, NULL, it_802E6D60, NULL },
-    { 12, NULL, it_802E6D60, NULL }, { 13, NULL, it_802E6D60, NULL },
-    { 14, NULL, it_802E6D60, NULL }, { 15, NULL, it_802E6D60, NULL },
-    { 16, NULL, it_802E6D60, NULL }, { 17, NULL, it_802E6D60, NULL },
-    { 18, NULL, it_802E6D60, NULL }, { 19, NULL, it_802E6D60, NULL },
+    { 0, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 1, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 2, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 3, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 4, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 5, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 6, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 7, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 8, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 9, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 10, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 11, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 12, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 13, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 14, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 15, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 16, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 17, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 18, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 19, NULL, it_2E6A_UnkMotion19_Phys, NULL },
 };
 
 static const Vec3 it_803B8730 = { 1.0f, 1.0f, 1.0f };
@@ -135,7 +135,7 @@ Item_GObj* it_802E6AEC(Ground* arg0, int arg1, int arg2, HSD_JObj* arg3,
     return item_gobj;
 }
 
-void it_802E6D60(HSD_GObj* item_gobj)
+void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
 {
     Vec3 sp24;
     Quaternion sp14;
@@ -163,7 +163,7 @@ void it_802E6D60(HSD_GObj* item_gobj)
     }
 }
 
-bool it_802E6F7C(Item_GObj* item_gobj)
+bool it_2725_Logic117_DmgDealt(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.it_2E6A_1.x14 != NULL &&
@@ -175,7 +175,7 @@ bool it_802E6F7C(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_802E6FC0(Item_GObj* item_gobj)
+bool it_2725_Logic117_DmgReceived(Item_GObj* item_gobj)
 {
     Vec3 sp10;
     Item* item = GET_ITEM((HSD_GObj*) item_gobj);
@@ -206,7 +206,7 @@ bool it_802E7054(HSD_GObj* item_gobj)
     return false;
 }
 
-void it_802E709C(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2725_Logic117_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

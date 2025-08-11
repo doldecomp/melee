@@ -1,10 +1,12 @@
+#include "grzebesroute.h"
+
 #include <platform.h>
 
 #include "gr/inlines.h"
 
 #include <baselib/gobj.h>
 
-void grZebesRoute_8020B160(void) {}
+void grZebesRoute_8020B160(bool arg) {}
 
 /// #grZebesRoute_8020B164
 
@@ -64,12 +66,12 @@ void grZebesRoute_8020B4D4(Ground_GObj* arg) {}
 
 /// #grZebesRoute_8020B548
 
-bool grZebesRoute_8020B854(void)
+DynamicsDesc* grZebesRoute_8020B854(enum_t arg)
 {
     return false;
 }
 
-bool grZebesRoute_8020B85C(void)
+bool grZebesRoute_8020B85C(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

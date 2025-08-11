@@ -12,8 +12,8 @@
 
 void grTGameWatch_80224110(bool);
 void grTGameWatch_80224114(void);
-void grTGameWatch_80224184(void);
-void grTGameWatch_80224188(void);
+void grTgamewatch_UnkStage0_OnLoad(void);
+void grTgamewatch_UnkStage0_OnStart(void);
 bool grTGameWatch_802241AC(void);
 HSD_GObj* grTGameWatch_802241B4(int);
 void grTGameWatch_8022429C(Ground_GObj*);

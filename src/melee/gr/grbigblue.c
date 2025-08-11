@@ -1,8 +1,10 @@
+#include "grbigblue.h"
+
 #include <platform.h>
 
 #include "gr/inlines.h"
 
-void grBigBlue_801E57BC(void) {}
+void grBigBlue_801E57BC(bool arg) {}
 
 /// #grBigBlue_801E57C0
 
@@ -169,7 +171,7 @@ void grBigBlue_801EAB4C(Ground_GObj* arg) {}
 
 /// #fn_801EFB9C
 
-bool grBigBlue_801EFC0C(void)
+DynamicsDesc* grBigBlue_801EFC0C(enum_t arg)
 {
     return false;
 }

@@ -122,7 +122,7 @@ StageCallbacks grI1_803E48F4[] = {
     },
 };
 
-void grInishie1_801FA908(void) {}
+void grInishie1_801FA908(bool arg) {}
 
 // corresponds with the 3 - 13 - 3 block pattern on the stage
 #define BLOCK_COUNT 19
@@ -850,12 +850,12 @@ void grInishie1_801FCB10(HSD_GObj* gobj)
     }
 }
 
-bool grInishie1_801FCBB0(void)
+DynamicsDesc* grInishie1_801FCBB0(enum_t arg)
 {
     return false;
 }
 
-bool grInishie1_801FCBB8(void)
+bool grInishie1_801FCBB8(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itlizardon.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 
@@ -13,29 +15,29 @@ void it_802CB93C(void) {}
 
 /// #it_802CB994
 
-/// #it_802CB9E0
+/// #itLizardon_UnkMotion1_Anim
 
-/// #it_802CBA20
+/// #itLizardon_UnkMotion1_Phys
 
-/// #it_802CBA5C
+/// #itLizardon_UnkMotion1_Coll
 
 /// #it_802CBAA8
 
-/// #it_802CBB84
+/// #itLizardon_UnkMotion2_Anim
 
-/// #it_802CBC9C
+/// #itLizardon_UnkMotion2_Phys
 
-/// #it_802CBCD8
+/// #itLizardon_UnkMotion2_Coll
 
 /// #it_802CBD24
 
 /// #it_802CBFE4
 
-/// #it_802CC030
+/// #itLizardon_UnkMotion3_Anim
 
-/// #it_802CC064
+/// #itLizardon_UnkMotion3_Phys
 
-/// #it_802CC0A0
+/// #itLizardon_UnkMotion3_Coll
 
 /// #it_802CC0EC
 
@@ -47,24 +49,24 @@ void it_802CB93C(void) {}
 
 /// #it_802CC1CC
 
-/// #it_802CC3D4
+/// #it_2725_Logic34_Spawned
 
-/// #it_802CC440
+/// #it_2725_Logic35_Spawned
 
-/// #it_802CC4AC
+/// #it_2725_Logic36_Spawned
 
-/// #it_802CC518
+/// #it_2725_Logic37_Spawned
 
-/// #it_802CC584
+/// #it_2725_Logic37_EvtUnk
 
-/// #it_802CC5A4
+/// #it_2725_Logic37_Reflected
 
-bool it_802CC5C4(Item_GObj* arg0)
+bool it_2725_Logic37_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802CC5CC(Item_GObj* arg0)
+bool it_2725_Logic37_Absorbed(Item_GObj* arg0)
 {
     return true;
 }

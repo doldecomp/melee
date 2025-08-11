@@ -1,5 +1,3 @@
-#include "baselib/forward.h"
-
 #include "itzeldadinfireexplode.h"
 
 #include "placeholder.h"
@@ -16,6 +14,8 @@
 #include "it/itCharItems.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+
+/* 2C4998 */ bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj);
 
 Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Point3d* pos,
                        f32 facing_dir, f32 scale)
@@ -49,7 +49,7 @@ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Point3d* pos,
     return gobj;
 }
 
-void it_802C4670(Item_GObj* gobj)
+void it_2725_Logic66_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_802725D4(gobj);
@@ -77,7 +77,7 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
     efSync_Spawn(0x4FA, gobj, jobj);
     ip->xDD4_itemVar.zeldadinfireexplode.xDE0 = 1;
     Item_802694CC(gobj);
-    it_802C4820(gobj);
+    itZeldadinfireexplode_UnkMotion0_Anim(gobj);
     temp_f1 = ip->xDD4_itemVar.zeldadinfireexplode.xDD4 / attrs->x0;
     if (temp_f1 < 0.4375f) {
         it_80273598(gobj, 0xB, 0xA);
@@ -93,7 +93,7 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
     db_80225DD8(gobj, ip->owner);
 }
 
-bool it_802C4820(Item_GObj* gobj)
+bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -122,10 +122,10 @@ bool it_802C4820(Item_GObj* gobj)
             ip->xDD4_itemVar.zeldadinfireexplode.xDD8 * scale.x;
     }
 
-    it_80273130(gobj);
+    return it_80273130(gobj);
 }
 
-void it_802C4980(Item_GObj* gobj)
+void itZeldadinfireexplode_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 #ifndef BUGFIX
@@ -135,32 +135,32 @@ void it_802C4980(Item_GObj* gobj)
 #endif
 }
 
-bool it_802C4998(Item_GObj* gobj)
+bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-bool it_802C49A0(Item_GObj* arg0)
+bool it_2725_Logic66_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802C49A8(Item_GObj* arg0)
+bool it_2725_Logic66_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802C49B0(Item_GObj* arg0)
+bool it_2725_Logic66_ShieldBounced(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802C49B8(Item_GObj* arg0)
+bool it_2725_Logic66_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-void it_802C49C0(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic66_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

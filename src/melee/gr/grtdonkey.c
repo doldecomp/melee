@@ -20,8 +20,8 @@
 
 static void grTDonkey_80220228(bool);
 static void grTDonkey_8022022C(void);
-static void grTDonkey_8022029C(void);
-static void grTDonkey_802202A0(void);
+static void grTdonkey_UnkStage0_OnLoad(void);
+static void grTdonkey_UnkStage0_OnStart(void);
 static bool grTDonkey_802202C4(void);
 static HSD_GObj* grTDonkey_802202CC(int gobj_id);
 static void grTDonkey_802203B4(Ground_GObj* gobj);
@@ -55,8 +55,8 @@ StageData grTDk_803E87EC = {
     "/GrTDk.dat",
     grTDonkey_8022022C,
     grTDonkey_80220228,
-    grTDonkey_8022029C,
-    grTDonkey_802202A0,
+    grTdonkey_UnkStage0_OnLoad,
+    grTdonkey_UnkStage0_OnStart,
     grTDonkey_802202C4,
     grTDonkey_802204FC,
     grTDonkey_80220504,
@@ -82,9 +82,9 @@ static void grTDonkey_8022022C(void)
     Ground_801C42AC();
 }
 
-static void grTDonkey_8022029C(void) {}
+static void grTdonkey_UnkStage0_OnLoad(void) {}
 
-static void grTDonkey_802202A0(void)
+static void grTdonkey_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

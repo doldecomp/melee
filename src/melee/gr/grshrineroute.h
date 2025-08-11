@@ -6,10 +6,10 @@
 #include "it/inlines.h"
 
 /* 2087B0 */ float grShrineRoute_802087B0(void);
-/* 2087B8 */ UNK_RET grShrineRoute_802087B8(UNK_PARAMS);
-/* 2087BC */ UNK_RET grShrineRoute_802087BC(UNK_PARAMS);
-/* 20882C */ UNK_RET grShrineRoute_8020882C(UNK_PARAMS);
-/* 208850 */ UNK_RET grShrineRoute_80208850(UNK_PARAMS);
+/* 2087B8 */ void grShrineRoute_802087B8(bool);
+/* 2087BC */ void grShrineRoute_802087BC(void);
+/* 20882C */ void grShrineRoute_8020882C(void);
+/* 208850 */ void grShrineRoute_80208850(void);
 /* 2088B8 */ bool grShrineRoute_802088B8(void);
 /* 2088C0 */ UNK_RET grShrineRoute_802088C0(UNK_PARAMS);
 /* 2089AC */ void grShrineRoute_802089AC(Ground_GObj*);
@@ -48,7 +48,7 @@
 /* 20AF38 */ UNK_RET grShrineRoute_8020AF38(UNK_PARAMS);
 /* 20B020 */ UNK_RET grShrineRoute_8020B020(UNK_PARAMS);
 /* 20B0AC */ UNK_RET grShrineRoute_8020B0AC(UNK_PARAMS);
-/* 20B104 */ bool grShrineRoute_8020B104(void);
-/* 20B10C */ UNK_RET grShrineRoute_8020B10C(UNK_PARAMS);
+/* 20B104 */ DynamicsDesc* grShrineRoute_8020B104(enum_t);
+/* 20B10C */ bool grShrineRoute_8020B10C(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

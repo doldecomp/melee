@@ -12,8 +12,8 @@
 
 /* 1CBB84 */ void grIzumi_801CBB84(bool);
 /* 1CBB88 */ void grIzumi_801CBB88(void);
-/* 1CBC0C */ void grIzumi_801CBC0C(void);
-/* 1CBCBC */ void grIzumi_801CBCBC(void);
+/* 1CBC0C */ void grIzumi_UnkStage0_OnLoad(void);
+/* 1CBCBC */ void grIzumi_UnkStage0_OnStart(void);
 /* 1CBCE0 */ bool grIzumi_801CBCE0(void);
 /* 1CBCE8 */ HSD_GObj* grIzumi_801CBCE8(int gobj_id);
 /* 1CBDD4 */ void grIzumi_801CBDD4(Ground_GObj* gobj);

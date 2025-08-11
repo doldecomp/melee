@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itkamex.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 
@@ -21,45 +23,45 @@ void it_802CA534(void) {}
 
 /// #it_802CA6A0
 
-/// #it_802CA724
+/// #itKamex_UnkMotion1_Anim
 
-/// #it_802CA7FC
+/// #itKamex_UnkMotion1_Phys
 
-/// #it_802CA890
+/// #itKamex_UnkMotion1_Coll
 
 /// #it_802CA8DC
 
 /// #it_802CA938
 
-/// #it_802CA984
+/// #itKamex_UnkMotion2_Anim
 
-/// #it_802CA9B8
+/// #itKamex_UnkMotion2_Phys
 
-/// #it_802CA9F4
+/// #itKamex_UnkMotion2_Coll
 
 /// #it_802CAA40
 
-/// #it_802CAAA4
+/// #itKamex_UnkMotion3_Anim
 
-/// #it_802CAAC8
+/// #itKamex_UnkMotion3_Phys
 
-/// #it_802CAAE8
+/// #itKamex_UnkMotion3_Coll
 
 /// #it_802CAB10
 
-/// #it_802CACD0
+/// #it_2725_Logic31_Spawned
 
-bool it_802CADC0(Item_GObj* arg0)
+bool it_2725_Logic31_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802CADC8(Item_GObj* arg0)
+bool it_2725_Logic31_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-/// #it_802CADD0
+/// #it_2725_Logic31_EvtUnk
 
 /// #it_802CADF0
 

@@ -1,13 +1,15 @@
-#include <platform.h>
+#include "itbox.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/it_26B1.h"
 
 /// #it_80286088
 
-/// #it_802861CC
+/// #it_3F14_Logic1_Spawned
 
-/// #it_80286208
+/// #it_3F14_Logic1_Destroyed
 
 /// #it_80286248
 
@@ -17,100 +19,100 @@
 
 /// #fn_80286480
 
-/// #it_802864D8
+/// #itBox_UnkMotion0_Anim
 
-void it_80286518(Item_GObj* gobj) {}
+void itBox_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_8028651C
+/// #itBox_UnkMotion0_Coll
 
 /// #it_8028655C
 
-bool it_80286598(Item_GObj* gobj)
+bool itBox_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802865A0
+/// #itBox_UnkMotion1_Phys
 
-/// #it_80286754
+/// #itBox_UnkMotion1_Coll
 
-/// #it_80286780
+/// #it_3F14_Logic1_PickedUp
 
-bool it_802867A8(Item_GObj* gobj)
+bool itBox_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_802867B0(Item_GObj* gobj) {}
+void itBox_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_802867B4
+/// #it_3F14_Logic1_Thrown
 
-/// #it_802867F0
+/// #itBox_UnkMotion4_Phys
 
-/// #it_8028683C
+/// #itBox_UnkMotion3_Coll
 
-/// #it_80286964
+/// #it_3F14_Logic1_Dropped
 
-/// #it_802869A0
+/// #itBox_UnkMotion4_Coll
 
 /// #it_80286AA4
 
-/// #it_80286B74
+/// #itBox_UnkMotion6_Anim
 
-void it_80286B94(Item_GObj* gobj) {}
+void itBox_UnkMotion6_Phys(Item_GObj* gobj) {}
 
-bool it_80286B98(Item_GObj* gobj)
+bool itBox_UnkMotion6_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_80286BA0
 
-/// #it_80286C7C
+/// #itBox_UnkMotion7_Anim
 
-void it_80286CA8(Item_GObj* gobj) {}
+void itBox_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-bool it_80286CAC(Item_GObj* gobj)
+bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_80286CB4
+/// #it_3F14_Logic1_DmgDealt
 
-/// #it_80286D48
+/// #it_3F14_Logic1_Clanked
 
-/// #it_80286DDC
+/// #it_3F14_Logic1_HitShield
 
-/// #it_80286E70
+/// #it_3F14_Logic1_Reflected
 
-/// #it_80286F04
+/// #it_3F14_Logic1_DmgReceived
 
-/// #it_80286FC8
+/// #it_3F14_Logic1_EnteredAir
 
-bool it_80287044(Item_GObj* gobj)
+bool itBox_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8028704C(Item_GObj* gobj) {}
+void itBox_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #it_80287050
+/// #itBox_UnkMotion5_Coll
 
-void it_80287084(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic1_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
 
 /// #it_802870A4
 
-bool it_80287104(Item_GObj* gobj)
+bool itBox_UnkMotion8_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8028710C
+/// #itBox_UnkMotion8_Phys
 
-bool it_80287334(Item_GObj* gobj)
+bool itBox_UnkMotion8_Coll(Item_GObj* gobj)
 {
     return false;
 }

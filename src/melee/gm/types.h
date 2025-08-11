@@ -14,6 +14,24 @@
 #include <common_structs.h>
 #include <melee/mn/types.h>
 
+struct UnkMultimanData {
+    u16 x0_0 : 1;
+    u16 x2;
+    int x4;
+};
+
+struct DebugGameOverData {
+    u32 x0;
+    u8 pad_x4[0x4];
+    u32 x8;
+    int xC;
+    u32 x10;
+    u8 x14;
+    u8 x15;
+    u16 x16;
+    u16 x18;
+};
+
 struct MinorScene {
     /* 00 */ u8 idx;
     /* 01 */ u8 preload;
@@ -248,8 +266,14 @@ struct gmm_x0 {
     /* 0x0522 */ s16 unk_522;
     /* 0x0524 */ s16 unk_524;
     /* 0x0526 */ s16 unk_526;
-    /* 0x0528 */ s32 unk_528;
-    /* 0x052C */ s32 unk_52C;
+    struct gmm_x0_528_t {
+        /* 0x0528 */ s8 c_kind;
+        /* 0x0529 */ s8 stocks;
+        /* 0x052A */ u8 color;
+        /* 0x052B */ u8 cpu_level;
+        /* 0x052C */ s8 x4;
+        /* 0x052D */ u8 x5;
+    } unk_528;
     struct EventData {
         /* 0x0530 */ u8 x0;
         /* 0x0531 */ u8 x1;
@@ -435,10 +459,11 @@ struct gm_8017DB6C_arg0_t {
 STATIC_ASSERT(sizeof(struct gm_8017DB6C_arg0_t) == 0xC);
 
 struct gmMainLib_8046B0F0_t {
-    bool x0;
-    bool x4; // reset switch pressed
-    bool x8; // true = progressive, false = interlaced
-    int xC, x10, x14;
+    /* 00 */ bool x0;
+    /* 04 */ bool resetting;   ///< reset switch pressed
+    /* 08 */ bool progressive; ///< true = progressive, false = interlaced
+    /* 0C */ bool xC;          // movie playback done, maybe?
+    /* 10 */ int x10, x14;
 };
 
 extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
@@ -548,12 +573,12 @@ struct ResultsMatchInfo {
 };
 
 struct UnkAllstarData {
-    s8 x0;
-    u8 x1;
-    u8 x2;
-    u8 x3;
+    s8 x0; ///< c_kind
+    u8 x1; ///< color
+    u8 x2; ///< cpu_level
+    u8 x3; ///< slot
     u8 x4;
-    u8 x5;
+    u8 x5; ///< stocks
     u8 x6;
     u8 x7;
     u8 x8;
@@ -573,10 +598,7 @@ struct UnkAllstarData {
         u8 x9;
         u8 xA;
         u8 xB;
-        u8 xC;
-        u8 xD;
-        u8 xE;
-        u8 xF;
+        int xC;
         s8 x10;
         u8 x11;
         u8 x12;
@@ -611,7 +633,9 @@ struct UnkAllstarData {
         u8 x2F;
         s8 x30;
     } xC;
-    s8 pad_x0[0xA0 - 0x31 - 0xC];
+    s8 pad_x0[0x74 - 0x40];
+    u16 x74;
+    s8 pad_x76[0xA0 - 0x76];
 };
 
 struct TmData {

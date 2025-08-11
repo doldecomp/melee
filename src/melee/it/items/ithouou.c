@@ -2,61 +2,61 @@
 #include <placeholder.h>
 #include "ithouou.h"
 
-/// #it_802D251C
+/// #it_2725_Logic18_Spawned
 
 void it_802D25B8(void) {}
 
 /// #it_802D25BC
 
-/// #it_802D25DC
+/// #itHouou_UnkMotion1_Anim
 
-/// #it_802D2640
+/// #itHouou_UnkMotion1_Phys
 
-bool it_802D2660(Item_GObj* gobj)
+bool itHouou_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802D2668
 
-/// #it_802D26BC
+/// #itHouou_UnkMotion2_Anim
 
-/// #it_802D26FC
+/// #itHouou_UnkMotion2_Phys
 
-bool it_802D27A8(Item_GObj* gobj)
+bool itHouou_UnkMotion2_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802D27B0
 
-/// #it_802D27FC
+/// #itHouou_UnkMotion3_Anim
 
-/// #it_802D288C
+/// #itHouou_UnkMotion3_Phys
 
-bool it_802D2904(Item_GObj* gobj)
+bool itHouou_UnkMotion3_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802D290C
 
-/// #it_802D2970
+/// #itHouou_UnkMotion4_Anim
 
-/// #it_802D29D4
+/// #itHouou_UnkMotion4_Phys
 
-bool it_802D2A50(Item_GObj* gobj)
+bool itHouou_UnkMotion4_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802D2A58
 
-/// #it_802D2AC0
+/// #itHouou_UnkMotion5_Anim
 
-/// #it_802D2B24
+/// #itHouou_UnkMotion5_Phys
 
-bool it_802D2B44(Item_GObj* gobj)
+bool itHouou_UnkMotion5_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -73,7 +73,7 @@ bool it_802D2B44(Item_GObj* gobj)
 
 /// #it_802D2D2C
 
-/// #it_802D2E80
+/// #it_2725_Logic42_Spawned
 
 /// #it_802D2ED0
 

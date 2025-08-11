@@ -5,10 +5,10 @@
 
 #include "it/inlines.h"
 
-/* 213458 */ UNK_RET grGreens_80213458(UNK_PARAMS);
-/* 213464 */ UNK_RET grGreens_80213464(UNK_PARAMS);
-/* 2134F4 */ UNK_RET grGreens_802134F4(UNK_PARAMS);
-/* 2134F8 */ UNK_RET grGreens_802134F8(UNK_PARAMS);
+/* 213458 */ void grGreens_80213458(bool);
+/* 213464 */ void grGreens_80213464(void);
+/* 2134F4 */ void grGreens_802134F4(void);
+/* 2134F8 */ void grGreens_802134F8(void);
 /* 21351C */ bool grGreens_8021351C(void);
 /* 213524 */ UNK_RET grGreens_80213524(UNK_PARAMS);
 /* 21360C */ void grGreens_8021360C(Ground_GObj*);
@@ -56,7 +56,7 @@
 /* 2166C4 */ UNK_RET grGreens_802166C4(UNK_PARAMS);
 /* 216C20 */ UNK_RET grGreens_80216C20(UNK_PARAMS);
 /* 216DE4 */ UNK_RET fn_80216DE4(UNK_PARAMS);
-/* 216E64 */ bool grGreens_80216E64(void);
-/* 216E6C */ bool grGreens_80216E6C(void);
+/* 216E64 */ DynamicsDesc* grGreens_80216E64(enum_t);
+/* 216E6C */ bool grGreens_80216E6C(Vec3*, int arg, HSD_JObj* jobj);
 
 #endif

@@ -1,7 +1,11 @@
-#include <platform.h>
+#include "itclimbersice.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
+
+/* 2C23D4 */ static bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
 
 /// #it_802C1590
 
@@ -9,64 +13,64 @@
 
 /// #it_802C17DC
 
-/// #it_802C17FC
+/// #it_2725_Logic90_Destroyed
 
 /// #it_802C1854
 
 /// #it_802C1950
 
-/// #it_802C198C
+/// #itClimbersice_UnkMotion0_Anim
 
-void it_802C1A14(Item_GObj* gobj) {}
+void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_802C1A18
+/// #itClimbersice_UnkMotion0_Coll
 
 /// #it_802C1A58
 
-bool it_802C1A80(Item_GObj* gobj)
+bool itClimbersice_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802C1A88
+/// #itClimbersice_UnkMotion1_Phys
 
-/// #it_802C1AB8
+/// #itClimbersice_UnkMotion1_Coll
 
 /// #it_802C1AE4
 
-/// #it_802C1B80
+/// #itClimbersice_UnkMotion2_Anim
 
-/// #it_802C1BB4
+/// #itClimbersice_UnkMotion2_Phys
 
-/// #it_802C1C7C
+/// #itClimbersice_UnkMotion2_Coll
 
 /// #fn_802C1D44
 
-/// #it_802C1D80
+/// #itClimbersice_UnkMotion3_Anim
 
-/// #it_802C1DB4
+/// #itClimbersice_UnkMotion3_Phys
 
-/// #it_802C1E94
+/// #itClimbersice_UnkMotion3_Coll
 
-bool it_802C1FC8(Item_GObj* arg0)
+bool it_2725_Logic90_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_802C1FD0
+/// #it_2725_Logic90_Reflected
 
-bool it_802C1FF0(Item_GObj* arg0)
+bool it_2725_Logic90_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_802C1FF8
+/// #it_2725_Logic90_HitShield
 
-bool it_802C20E4(Item_GObj* arg0)
+bool it_2725_Logic90_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_802C20EC
+/// #it_2725_Logic90_ShieldBounced
 
-/// #it_802C210C
+/// #it_2725_Logic90_EvtUnk

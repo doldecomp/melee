@@ -46,8 +46,8 @@ StageData grTFc_803E8974 = {
     "/GrTFc.dat",
     grTFalco_802207F4,
     grTFalco_802207F0,
-    grTFalco_8022086C,
-    grTFalco_80220870,
+    grTfalco_UnkStage0_OnLoad,
+    grTfalco_UnkStage0_OnStart,
     grTFalco_80220894,
     grTFalco_80220ACC,
     grTFalco_80220B78,
@@ -79,9 +79,9 @@ void grTFalco_802207F4(void)
     Ground_801C42AC();
 }
 
-void grTFalco_8022086C(void) {}
+void grTfalco_UnkStage0_OnLoad(void) {}
 
-void grTFalco_80220870(void)
+void grTfalco_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }

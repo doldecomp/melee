@@ -1,3 +1,5 @@
+#include "groldyoshi.h"
+
 #include <platform.h>
 
 #include "gr/grzakogenerator.h"

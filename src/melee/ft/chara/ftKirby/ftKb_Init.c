@@ -1,13 +1,13 @@
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftKirby/forward.h"
-
 #include "ftKb_Init.static.h"
 
 #include "types.h"
 
+#include <placeholder.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
@@ -24,6 +24,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
 #include "ftCommon/ftCo_Fall.h"
+
+#include "ftKirby/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itkirby_2F23.h"
@@ -2517,11 +2520,14 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     },
 };
 
-/* static */ void ftKb_Init_800EE854(void);
-/* static */ void ftKb_Init_800EE874(void);
-/* static */ void ftKb_Init_800EE8B0(void);
-/* static */ void ftKb_Init_800EE8EC(void);
-/* static */ void ftKb_Init_800EE904(void);
+/* 0EE854 */ static void ftKb_Init_800EE854(void);
+/* 0EE874 */ static void ftKb_Init_800EE874(void);
+/* 0EE8B0 */ static void ftKb_Init_800EE8B0(void);
+/* 0EE8EC */ static void ftKb_Init_800EE8EC(void);
+/* 0EE904 */ static void ftKb_Init_800EE904(void);
+/* 105FEC */ static void fn_800F6AC8(HSD_GObj* gobj);
+/* 105FEC */ static void fn_80105FEC(void);
+/* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
 
 jtbl_t ftKb_Init_803CA0CC = {
     ftKb_Init_800EE854, ftKb_Init_800EE904, ftKb_Init_800EE904,

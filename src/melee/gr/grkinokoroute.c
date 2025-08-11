@@ -2,7 +2,7 @@
 
 #include "grkinokoroute.h"
 
-void grKinokoRoute_8020741C(void) {}
+void grKinokoRoute_8020741C(bool arg) {}
 
 /// #grKinokoRoute_80207420
 
@@ -75,7 +75,7 @@ void grKinokoRoute_80208368(Ground_GObj* arg) {}
 
 /// #grKinokoRoute_802086EC
 
-bool grKinokoRoute_80208754(void)
+DynamicsDesc* grKinokoRoute_80208754(enum_t arg)
 {
     return false;
 }
