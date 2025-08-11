@@ -1,13 +1,16 @@
-#include <platform.h>
-#include <placeholder.h>
+#include "itmasterhandbullet.h"
 
-#include "it/forward.h"
+#include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
 #include "db/db.h"
 #include "dolphin/mtx.h"
 #include "ef/efsync.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -15,13 +18,17 @@
 #include "it/itCharItems.h"
 #include "it/item.h"
 
+/* 2F0D2C */ static void it_802F0D2C(Item_GObj* gobj);
+/* 2F0F04 */ static void it_802F0F04(HSD_GObj* gobj);
+
 void it_802F0F04(HSD_GObj* gobj) {}
 
 void it_802F0D2C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    itMasterHandBulletAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itMasterHandBulletAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
     Quaternion quad = { 0 };
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802F0F04;
@@ -35,7 +42,8 @@ void it_802F0BE8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    itMasterHandBulletAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itMasterHandBulletAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
     Quaternion quad = { 0 };
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802F0F04;

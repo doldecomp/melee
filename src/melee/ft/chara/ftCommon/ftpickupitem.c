@@ -1,15 +1,15 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "it/forward.h"
-
 #include "ftpickupitem.h"
 
 #include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -25,9 +25,11 @@
 #include "ftCommon/ftCo_WarpStar.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyWait0.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "pl/pl_040D.h"
 #include "pl/plbonuslib.h"
 
 #include <common_structs.h>
@@ -35,6 +37,17 @@
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
+
+/* 0942A0 */ static Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj,
+                                                     u32 flags);
+/* 09447C */ static bool ftpickupitem_8009447C(Fighter_GObj* gobj,
+                                               Item_GObj* item_gobj);
+/* 094694 */ static void ftpickupitem_80094694(Fighter_GObj* gobj,
+                                               FtMotionId msid, bool loop);
+/* 0948A8 */ static void ftpickupitem_800948A8(Fighter_GObj* gobj,
+                                               Item_GObj* item_gobj);
+/* 094B6C */ static void ftpickupitem_80094B6C(Fighter_GObj* gobj,
+                                               Item_GObj* item_gobj);
 
 bool ftpickupitem_80094150(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {

@@ -1,7 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
-
 #include "gr/gricemt.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"
@@ -24,6 +24,13 @@
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+/* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
+                                     HSD_GObj* u3, f32 u4);
+/* 1F91EC */ static void FUN_801f91ec(HSD_GObj* param_1, s16* param_2,
+                                      int param_3, int param_4, int param_5,
+                                      int param_6, int param_7,
+                                      mpLib_GroundCallback param_8);
 
 // StageData grIm_803E8974 = {
 //     45,
@@ -763,7 +770,6 @@ void grIceMt_801F8B10(Ground_GObj* arg0)
 
 void grIceMt_801F8C60(Ground_GObj* arg0) {}
 
-/// #fn_801F8C64
 void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
 {
     Vec3 pos;

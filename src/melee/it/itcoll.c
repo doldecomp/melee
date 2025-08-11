@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "it/itcoll.h"
 
 #include "inlines.h"
 #include "types.h"
+
+#include <platform.h>
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -32,6 +32,11 @@
 #include <baselib/random.h>
 #include <baselib/state.h>
 #include <baselib/tev.h>
+
+/* 271830 */ static void it_80271830(Item* item, f32 arg_angle);
+/* 271B60 */ static void it_80271B60(Item_GObj* item_gobj);
+/* 271D2C */ static void it_80271D2C(Item_GObj* arg_item_gobj);
+/* 271F78 */ static void it_80271F78(Item_GObj* arg_item_gobj);
 
 // static s8 it_803F1360[0x16] = "damage log over %d!!\n";
 // static s8 it_803F1378[9] = "itcoll.c";
@@ -139,7 +144,8 @@ void it_8026FAC4(Item* arg_item0, HitCapsule* arg_hit, s32 arg2, void* arg3,
     }
 }
 
-static inline void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit, int arg2, Fighter* arg3)
+static inline void it_8026FC00_inline(Item* arg_item, HitCapsule* arg_hit,
+                                      int arg2, Fighter* arg3)
 {
     int i;
     for (i = 0; i < ARRAY_SIZE(arg_item->x5D4_hitboxes); i++) {
@@ -447,7 +453,8 @@ void it_802701BC(Item_GObj* arg_item_gobj)
                         hurt = &fighter->hurt_capsules[ft_hit_index];
                         if (hurt->is_grabbable &&
                             lbColl_80007ECC(
-                                arg_hit, &fighter->hurt_capsules[ft_hit_index].capsule,
+                                arg_hit,
+                                &fighter->hurt_capsules[ft_hit_index].capsule,
                                 ftCommon_8007F804(fighter), arg_item->scl,
                                 fighter->x34_scale.y, fighter->cur_pos.z))
                         {

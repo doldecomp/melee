@@ -1,7 +1,11 @@
-#include <platform.h>
+#include "itclimbersice.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
+
+/* 2C23D4 */ static bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
 
 /// #it_802C1590
 

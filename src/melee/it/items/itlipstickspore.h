@@ -16,7 +16,6 @@
 /* 29A58C */ bool itLipstickspore_UnkMotion0_Coll(Item_GObj* gobj);
 /* 29A5C0 */ bool itLipstickspore_UnkMotion1_Anim(Item_GObj* gobj);
 /* 29A5E0 */ void itLipstickspore_UnkMotion1_Phys(Item_GObj*);
-/* 29A5F8 */ bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 /* 29A600 */ bool it_3F14_Logic37_DmgDealt(Item_GObj*);
 /* 29A608 */ bool it_3F14_Logic37_Clanked(Item_GObj*);
 /* 29A610 */ bool it_3F14_Logic37_HitShield(Item_GObj*);

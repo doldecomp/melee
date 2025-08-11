@@ -1,5 +1,3 @@
-#include "baselib/forward.h"
-
 #include "itzeldadinfireexplode.h"
 
 #include "placeholder.h"
@@ -16,6 +14,8 @@
 #include "it/itCharItems.h"
 #include "it/itcoll.h"
 #include "it/item.h"
+
+/* 2C4998 */ bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj);
 
 Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Point3d* pos,
                        f32 facing_dir, f32 scale)
@@ -122,7 +122,7 @@ bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
             ip->xDD4_itemVar.zeldadinfireexplode.xDD8 * scale.x;
     }
 
-    it_80273130(gobj);
+    return it_80273130(gobj);
 }
 
 void itZeldadinfireexplode_UnkMotion0_Phys(Item_GObj* gobj)

@@ -1,5 +1,3 @@
-#include "ft/chara/ftLink/forward.h"
-
 #include "itlinkhookshot.h"
 
 #include "dolphin/mtx.h"
@@ -28,20 +26,32 @@
 
 #include <MSL/math_ppc.h>
 
+/* 2A5770 */ static void it_802A5770_inline(ItemLink* link_1,
+                                            itLinkHookshotAttributes* arg2,
+                                            Fighter* arg3, s32 var_r29);
+
 ItemStateTable it_803F6998[] = { {
                                      -1,
                                      NULL,
                                      itLinkhookshot_UnkMotion0_Phys,
                                      NULL,
                                  },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion1_Phys, NULL },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion2_Phys, NULL },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion3_Phys, NULL },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion4_Phys, NULL },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion5_Phys, NULL },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion6_Phys, NULL },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion7_Phys, NULL },
-                                 { -1, itLinkhookshot_UnkMotion8_Anim, itLinkhookshot_UnkMotion8_Phys, NULL } };
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion1_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion2_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion3_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion4_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion5_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion6_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion7_Phys, NULL },
+                                 { -1, itLinkhookshot_UnkMotion8_Anim,
+                                   itLinkhookshot_UnkMotion8_Phys, NULL } };
 
 f32 it_804D6D48;
 

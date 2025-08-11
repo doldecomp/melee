@@ -1,16 +1,19 @@
 #ifndef GALE01_0A0148
 #define GALE01_0A0148
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "gr/forward.h"
-#include "mp/forward.h"
 
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+#include "gr/forward.h"
+
 #include "gr/types.h"
+
+#include "mp/forward.h"
 
 #include <common_structs.h>
 
@@ -82,8 +85,8 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 09E4C0 */ static UNK_RET ftCo_800ADC28(UNK_PARAMS);
 /* 09E6E0 */ static void ftCo_800ADE48(Fighter* fp);
 /* 09EBC0 */ static void ftCo_800A1CC4(Fighter* fp, StageBlastZone*);
-/* 09EE38 */ static void ftCo_800A1F3C(Fighter* fp, float arg1,
-                                       float arg2, float arg3);
+/* 09EE38 */ static void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2,
+                                       float arg3);
 /* 09EE94 */ static bool ftCo_800A1F98(int x, float y);
 /* 09EF9C */ static void ftCo_800A20A0(Fighter* fp);
 /* 09F044 */ static UNK_RET ftCo_800AE7AC(UNK_PARAMS);
@@ -120,11 +123,9 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A1D10 */ static UNK_RET ftCo_800B1478(UNK_PARAMS);
 /* 0A1FD0 */ static Fighter* ftCo_800A50D4(Fighter* fp);
 /* 0A2068 */ static UNK_RET ftCo_800B17D0(UNK_PARAMS);
-/* 0A2190 */ static Fighter* ftCo_800A5294(Fighter* fp,
-                                                int player_id);
+/* 0A2190 */ static Fighter* ftCo_800A5294(Fighter* fp, int player_id);
 /* 0A22D8 */ static UNK_RET ftCo_800A53DC(UNK_PARAMS);
 /* 0A2350 */ static UNK_RET ftCo_800B1AB8(UNK_PARAMS);
-// /* 0A2638 */ static void ftCo_800B1DA0(Fighter* fp);
 /* 0A2788 */ static UNK_RET ftCo_800B1EF0(UNK_PARAMS);
 /* 0A2798 */ static Fighter* ftCo_800A589C(Fighter* fp);
 /* 0A2840 */ static bool ftCo_800A5944(Item* ip);
@@ -134,8 +135,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A3C48 */ static void ftCo_800B33B0(Fighter* fp);
 /* 0A5ACC */ static UNK_RET ftCo_800A5ACC(UNK_PARAMS);
 /* 0A5CE0 */ static UNK_T ftCo_800A5CE0(Fighter* fp);
-/* 0A5F4C */ static struct Fighter_x1A88_t* ftCo_800A5F4C(Fighter* fp,
-                                                          int);
+/* 0A5F4C */ static struct Fighter_x1A88_t* ftCo_800A5F4C(Fighter* fp, int);
 /* 0A61D8 */ static UNK_RET ftCo_800A61D8(UNK_PARAMS);
 /* 0A648C */ static int ftCo_800A648C(Fighter* fp);
 /* 0A6700 */ static bool ftCo_800A6700(Fighter* fp, Vec3*, Vec3*);

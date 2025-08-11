@@ -1,12 +1,13 @@
-#include <placeholder.h>
-
-#include "it/forward.h"
-
 #include "itlgunbeam.h"
+
+#include <placeholder.h>
 
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -20,13 +21,15 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-static bool itLgunbeam_UnkMotion0_Anim(Item_GObj*);
-static bool itLgunbeam_UnkMotion0_Coll(Item_GObj*);
-static void it_802998A0(Item_GObj*, HSD_GObj*, s32);
-static void itLgunbeam_UnkMotion0_Phys(Item_GObj*);
-
-ItemStateTable it_803F6630[] = {
-    { 0, itLgunbeam_UnkMotion0_Anim, itLgunbeam_UnkMotion0_Phys, itLgunbeam_UnkMotion0_Coll },
+/* 2993E0 */ static void it_802993E0(Item_GObj* gobj, s32 flags);
+/* 299528 */ static void it_80299528(Item_GObj* gobj, s32 arg1);
+/* 2998A0 */ static void it_802998A0(Item_GObj*, HSD_GObj*, s32);
+/* 29999C */ static bool itLgunbeam_UnkMotion0_Anim(Item_GObj*);
+/* 2999E4 */ static void itLgunbeam_UnkMotion0_Phys(Item_GObj*);
+/* 299A68 */ static bool itLgunbeam_UnkMotion0_Coll(Item_GObj*);
+/* 3F6630 */ ItemStateTable it_803F6630[] = {
+    { 0, itLgunbeam_UnkMotion0_Anim, itLgunbeam_UnkMotion0_Phys,
+      itLgunbeam_UnkMotion0_Coll },
 };
 
 void it_802993E0(Item_GObj* gobj, s32 flags)
