@@ -783,7 +783,7 @@ static char Ground_804D44F8[8] = "archive";
 #define assert_line(line, cond)                                               \
     ((cond) ? (void) 0 : __assert(__FILE__, line, #cond))
 
-static inline HSD_JObj* get_jobj_inline(float phi_f0)
+static HSD_JObj* get_jobj_inline(float phi_f0)
 {
     HSD_JObj* jobj;
     HSD_Joint sp14 = Ground_803B7E0C;
@@ -2330,7 +2330,7 @@ static void Ground_801C4640(HSD_GObj* gobj, int unused)
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
 }
 
-static inline LightList** Ground_801C466C_inline(void)
+static LightList** Ground_801C466C_inline(void)
 {
     StageCallbacks* var_r26;
     int i;
