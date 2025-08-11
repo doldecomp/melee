@@ -59,7 +59,7 @@ jobs:
             set +e
             ninja
             set -e
-            ! ninja diff | grep -q '^ERROR\>'
+            ninja diff
           ;;
           'diff')
             root='build/${{matrix.version}}'
