@@ -57,13 +57,11 @@ jobs:
             run_configure
             set +e
             ninja
-            output="$(ninja diff)"
-            echo "$output"
-            if [[ "$output" =~ ^ERROR\b ]]; then
-              exit 1
-            fi
-            set -e
-            grep -q '/^ERROR\b/' < <(ninja diff)
+
+            ninja diff | while IFS= read -r line; do
+                echo "$line"
+                case "$line" in ERROR*) exit 1 ;; esac
+            done
           ;;
           'diff')
             root='build/${{matrix.version}}'
