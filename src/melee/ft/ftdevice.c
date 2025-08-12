@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "ftdevice.h"
+
+#include <placeholder.h>
 
 #include "ft/inlines.h"
 

@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "gryorster.h"
+
+#include <platform.h>
 
 #include "gr/grdisplay.h"
 #include "gr/ground.h"

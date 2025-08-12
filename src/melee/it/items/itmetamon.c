@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "itmetamon.h"
+
+#include <platform.h>
 
 #include "it/inlines.h"
 

@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_FORWARD_H
 #define MELEE_FT_FORWARD_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include <baselib/forward.h>
 

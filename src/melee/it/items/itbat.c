@@ -11,11 +11,15 @@
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F57B0[] = {
-    { -1, itBat_UnkMotion0_Anim, itBat_UnkMotion0_Phys, itBat_UnkMotion0_Coll },
-    { -1, itBat_UnkMotion3_Anim, itBat_UnkMotion3_Phys, itBat_UnkMotion3_Coll },
-    { -1, itBat_UnkMotion2_Anim, itBat_UnkMotion2_Phys, itBat_UnkMotion2_Coll },
+    { -1, itBat_UnkMotion0_Anim, itBat_UnkMotion0_Phys,
+      itBat_UnkMotion0_Coll },
+    { -1, itBat_UnkMotion3_Anim, itBat_UnkMotion3_Phys,
+      itBat_UnkMotion3_Coll },
+    { -1, itBat_UnkMotion2_Anim, itBat_UnkMotion2_Phys,
+      itBat_UnkMotion2_Coll },
     { 0, itBat_UnkMotion3_Anim, itBat_UnkMotion3_Phys, itBat_UnkMotion3_Coll },
-    { -1, itBat_UnkMotion4_Anim, itBat_UnkMotion4_Phys, itBat_UnkMotion4_Coll },
+    { -1, itBat_UnkMotion4_Anim, itBat_UnkMotion4_Phys,
+      itBat_UnkMotion4_Coll },
 };
 
 Item_GObj* it_80284854(Vec3* pos)

@@ -14,8 +14,8 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/types.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>

@@ -1,8 +1,3 @@
-#include <platform.h>
-
-#include "forward.h"
-#include "it/forward.h"
-
 #include "ftMt_Init.h"
 
 #include "ftMt_SpecialHi.h"
@@ -10,12 +5,19 @@
 #include "ftMt_SpecialN.h"
 #include "ftMt_SpecialS.h"
 
+#include <platform.h>
+
+#include "forward.h"
+
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftMewtwo/types.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 
 #include <dolphin/mtx.h>

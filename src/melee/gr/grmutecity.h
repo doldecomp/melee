@@ -3,9 +3,9 @@
 
 #include <placeholder.h>
 
-#include <baselib/forward.h>
-
 #include "it/inlines.h"
+
+#include <baselib/forward.h>
 
 /* 1EFC68 */ void grMuteCity_801EFC68(bool);
 /* 1EFC6C */ void grMuteCity_801EFC6C(void);

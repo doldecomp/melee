@@ -1,11 +1,11 @@
 #ifndef GALE01_01E8F8
 #define GALE01_01E8F8
 
-#include <platform.h>
 #include <placeholder.h>
-#include <baselib/forward.h>
+#include <platform.h>
 
 #include "lb/forward.h"
+#include <baselib/forward.h>
 
 /* 01E910 */ UNK_RET fn_8001E910(UNK_PARAMS);
 /* 01EB14 */ UNK_RET fn_8001EB14(UNK_PARAMS);

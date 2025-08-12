@@ -3,12 +3,11 @@
 
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 void grTGameWatch_80224110(bool);
 void grTGameWatch_80224114(void);

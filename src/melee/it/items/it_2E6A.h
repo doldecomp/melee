@@ -12,7 +12,8 @@
 
 /* 2E6AEC */ Item_GObj* it_802E6AEC(Ground*, int, int, HSD_JObj*, Vec3*, int,
                                     void (*)(Item_GObj*, Ground*),
-                                    void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
+                                    void (*)(Item_GObj*, Ground*, Vec3*,
+                                             HSD_GObj*, f32),
                                     void (*)(Item_GObj*, Ground*, HSD_GObj*));
 /* 2E6F7C */ bool it_2725_Logic117_DmgDealt(Item_GObj*);
 /* 2E6FC0 */ bool it_2725_Logic117_DmgReceived(Item_GObj*);

@@ -16,7 +16,8 @@
 /* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj*, float, float anim_rate,
                                   float anim_blend_frames);
 /* 06EDD0 */ void ftAnim_8006EDD0(Fighter*, int, float, float);
-/* 06EED4 */ void ftAnim_8006EED4(Fighter*, Fighter_Part, FigaTree*, float, float);
+/* 06EED4 */ void ftAnim_8006EED4(Fighter*, Fighter_Part, FigaTree*, float,
+                                  float);
 /* 06F0FC */ void ftAnim_8006F0FC(Fighter_GObj*, float anim_rate);
 /* 06F190 */ void ftAnim_SetAnimRate(Fighter_GObj*, float);
 /* 06F238 */ bool ftAnim_IsFramesRemaining(Fighter_GObj*);
@@ -26,7 +27,8 @@
 /* 06F4C8 */ void ftAnim_8006F4C8(Fighter*, int, FigaTree*);
 /* 06F628 */ void ftAnim_8006F628(Fighter*, Fighter_Part, int);
 /* 06F7C8 */ void ftAnim_8006F7C8(Fighter*, Fighter_Part, int, FigaTree*);
-/* 06F954 */ void ftAnim_8006F954(Fighter*, Fighter_Part, int, FigaTree* unused);
+/* 06F954 */ void ftAnim_8006F954(Fighter*, Fighter_Part, int,
+                                  FigaTree* unused);
 /* 06F994 */ HSD_Joint* ftAnim_8006F994(Fighter*, HSD_JObj*, HSD_Joint*);
 /* 06FA58 */ void ftAnim_8006FA58(Fighter*, bool, HSD_Joint*);
 /* 06FB88 */ void ftAnim_8006FB88(Fighter*, bool, HSD_Joint*);

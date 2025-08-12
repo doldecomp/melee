@@ -1,8 +1,6 @@
-#include <placeholder.h>
-
-#include <baselib/forward.h>
-
 #include "it_26B1.h"
+
+#include <placeholder.h>
 
 #include "ft/ftlib.h"
 #include "ft/types.h"
@@ -25,6 +23,8 @@
 #include "it/items/itsscope.h"
 #include "it/items/itsword.h"
 #include "it/types.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <baselib/gobj.h>

@@ -1,14 +1,15 @@
-#include <platform.h>
-
-#include "lb/forward.h"
-
 #include "grfigure3.h"
+
+#include <platform.h>
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>

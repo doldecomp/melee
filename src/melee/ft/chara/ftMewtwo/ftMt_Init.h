@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftMewtwo/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 144DFC */ void ftMt_Init_OnDeath2(HSD_GObj* gobj);
 /* 144E48 */ void ftMt_Init_OnLoad(HSD_GObj* gobj);

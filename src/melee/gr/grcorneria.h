@@ -1,14 +1,15 @@
 #ifndef GALE01_1DCCFC
 #define GALE01_1DCCFC
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "gr/forward.h"
-#include "lb/forward.h"
-#include <baselib/forward.h>
 
 #include "it/inlines.h"
+
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
 /* 1DCCFC */ UNK_RET grCorneria_801DCCFC(UNK_PARAMS);
 /* 1DCE1C */ UNK_RET grCorneria_801DCE1C(UNK_PARAMS);

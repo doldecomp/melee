@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "runtime.h"
+
+#include <placeholder.h>
 
 static const unsigned long __constants[] = {
     0x00000000, 0x00000000, 0x41F00000, 0x00000000, 0x41E00000, 0x00000000,

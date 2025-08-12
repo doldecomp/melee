@@ -1,7 +1,7 @@
 #include "gmresultplayer.h"
 
-#include <melee/lb/lb_00B0.h>
 #include <melee/gm/types.h>
+#include <melee/lb/lb_00B0.h>
 
 /* 46E38C */ static int lbl_8046E38C[4];
 

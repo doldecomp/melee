@@ -1,6 +1,6 @@
-#include "it/forward.h"
-
 #include "it_2F28.h"
+
+#include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -18,15 +18,16 @@
 #include <melee/it/item.h>
 #include <MetroTRK/intrinsics.h>
 
-extern float it_802758D4(Item_GObj*); /* extern */
-static void it_802F2A58(Item_GObj*);  /* static */
-static bool it_2F28_UnkMotion0_Anim(Item_GObj*);  /* static */
-static void it_2F28_UnkMotion0_Phys(HSD_GObj*);   /* static */
+extern float it_802758D4(Item_GObj*);            /* extern */
+static void it_802F2A58(Item_GObj*);             /* static */
+static bool it_2F28_UnkMotion0_Anim(Item_GObj*); /* static */
+static void it_2F28_UnkMotion0_Phys(HSD_GObj*);  /* static */
 // static bool it_2F28_UnkMotion0_Coll(HSD_GObj*); /* static */
 static bool it_2F28_UnkMotion0_Coll(Item_GObj*); /* static */
 
 ItemStateTable it_803F9470[] = {
-    { 0, it_2F28_UnkMotion0_Anim, it_2F28_UnkMotion0_Phys, it_2F28_UnkMotion0_Coll },
+    { 0, it_2F28_UnkMotion0_Anim, it_2F28_UnkMotion0_Phys,
+      it_2F28_UnkMotion0_Coll },
 };
 
 void it_802F28C8(Item_GObj* item_gobj, int arg1, float arg2)

@@ -1,9 +1,9 @@
-#include <platform.h>
+#include "ftdynamics.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
-
-#include "ftdynamics.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"

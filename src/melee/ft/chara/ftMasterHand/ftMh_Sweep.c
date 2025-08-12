@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "ftMh_Sweep.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -1,9 +1,9 @@
-#include <platform.h>
-#include <placeholder.h>
-
 #include "ftCo_0C35.h"
 
 #include "ftCo_Damage.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"

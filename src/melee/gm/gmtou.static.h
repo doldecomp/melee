@@ -2,9 +2,11 @@
 #define MELEE_GM_GMTOU_STATIC_H
 
 #include "baselib/forward.h"
-#include "sc/forward.h"
+
 #include "dolphin/types.h"
 #include "gm/types.h"
+
+#include "sc/forward.h"
 
 typedef struct TmBoxArrays {
     void* box2;

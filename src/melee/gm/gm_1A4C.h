@@ -2,8 +2,9 @@
 #define MELEE_GM_1A50_H
 
 #include <placeholder.h>
-#include <melee/gm/forward.h>
+
 #include <baselib/forward.h>
+#include <melee/gm/forward.h>
 
 /* 1A7A44 */ void fn_801A7A44(HSD_GObj*);
 /* 1A7A68 */ void fn_801A7A68(HSD_GObj*);

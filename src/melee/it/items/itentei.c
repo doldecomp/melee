@@ -12,8 +12,10 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F7DC8[] = {
-    { 0, itEntei_UnkMotion0_Anim, itEntei_UnkMotion0_Phys, itEntei_UnkMotion0_Coll },
-    { -1, itEntei_UnkMotion1_Anim, itEntei_UnkMotion1_Phys, itEntei_UnkMotion1_Coll },
+    { 0, itEntei_UnkMotion0_Anim, itEntei_UnkMotion0_Phys,
+      itEntei_UnkMotion0_Coll },
+    { -1, itEntei_UnkMotion1_Anim, itEntei_UnkMotion1_Phys,
+      itEntei_UnkMotion1_Coll },
 };
 
 void it_802CF3E0(Item_GObj* gobj)

@@ -1,8 +1,8 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include <melee/cm/forward.h>
 #include <melee/gr/forward.h>

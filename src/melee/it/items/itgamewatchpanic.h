@@ -3,9 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "it/forward.h"
 
-#include "ft/types.h"
 #include "it/items/types.h"
 #include "it/types.h"
 

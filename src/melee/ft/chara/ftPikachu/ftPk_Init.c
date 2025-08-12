@@ -1,7 +1,3 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftPk_Init.h"
 
 #include "ftPk_SpecialHi.h"
@@ -9,6 +5,10 @@
 #include "ftPk_SpecialN.h"
 #include "ftPk_SpecialS.h"
 #include "types.h"
+
+#include <platform.h>
+
+#include "forward.h"
 
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"

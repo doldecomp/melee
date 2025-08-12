@@ -1,12 +1,10 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "lb/forward.h"
-
 #include "ftCo_BarrelWait.h"
 
 #include "ftCo_Damage.h"
 #include "ftCo_Lift.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
@@ -17,14 +15,17 @@
 #include "ft/ftdynamics.h"
 #include "ft/types.h"
 #include "gr/ground.h"
+
+#include "lb/forward.h"
+
 #include "lb/lbcollision.h"
 #include "mp/mpcoll.h"
 
 #include <common_structs.h>
 
 /* 09EC44 */ static void ftCo_8009EC44(Fighter_GObj* gobj);
-/* 09EC70 */ static void ftCo_8009EC70(Fighter_GObj* gobj, Vec3* pos, UNK_T arg2,
-                                       float kb_angle);
+/* 09EC70 */ static void ftCo_8009EC70(Fighter_GObj* gobj, Vec3* pos,
+                                       UNK_T arg2, float kb_angle);
 
 #pragma force_active on
 

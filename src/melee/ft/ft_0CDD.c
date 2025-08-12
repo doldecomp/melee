@@ -20,12 +20,12 @@
 #include <baselib/jobj.h>
 #include <melee/it/item.h>
 
-void ftCo_800CE0CC(HSD_GObj*);      /* extern */
-void ftCo_800CE14C(HSD_GObj*);      /* extern */
-void ftCo_800CE1D4(HSD_GObj*);      /* extern */
-void ftCo_800CE620(HSD_GObj*);      /* extern */
-void ftCo_800CE650(HSD_GObj*);      /* extern */
-void it_8028E938(Item_GObj*);       /* extern */
+void ftCo_800CE0CC(HSD_GObj*); /* extern */
+void ftCo_800CE14C(HSD_GObj*); /* extern */
+void ftCo_800CE1D4(HSD_GObj*); /* extern */
+void ftCo_800CE620(HSD_GObj*); /* extern */
+void ftCo_800CE650(HSD_GObj*); /* extern */
+void it_8028E938(Item_GObj*);  /* extern */
 
 // grounded
 void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)
@@ -165,8 +165,8 @@ void ftCo_800CE0CC(HSD_GObj* fighter_gobj)
     }
     f1 = fighter->cur_anim_frame;
     f2 = fighter->frame_speed_mul;
-    Fighter_ChangeMotionState(fighter_gobj, id, 0x0C4C5080, f1,
-                              f2, 0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, id, 0x0C4C5080, f1, f2, 0.0f,
+                              NULL);
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
 
@@ -187,8 +187,8 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
     }
     f1 = fighter->cur_anim_frame;
     f2 = fighter->frame_speed_mul;
-    Fighter_ChangeMotionState(fighter_gobj, id, 0x0C4C5080, f1,
-                              f2, 0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, id, 0x0C4C5080, f1, f2, 0.0f,
+                              NULL);
     ftCommon_8007D468(fighter);
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
@@ -280,7 +280,8 @@ void ftCo_800CE3E0(Fighter_GObj* fighter_gobj)
     fighter->mv.co.itemthrow.xC = 0;
     fighter->mv.co.itemthrow.x10 = 0.0f;
     fighter->mv.co.itemthrow.x14 = 0;
-    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShoot, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShoot, 0, 0.0f,
+                              1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
     fighter->accessory4_cb = ftCo_800CE650;
     fighter->take_dmg_cb = ftCo_800CE620;
@@ -296,7 +297,8 @@ void ftCo_800CE480(Fighter_GObj* fighter_gobj)
     fighter->mv.co.itemthrow.xC = 0;
     fighter->mv.co.itemthrow.x10 = 0.0f;
     fighter->mv.co.itemthrow.x14 = 0;
-    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir, 0,
+                              0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
     ftCommon_8007D468(fighter);
     fighter->accessory4_cb = ftCo_800CE650;
@@ -309,8 +311,8 @@ void ft_800CE528(Fighter_GObj* fighter_gobj)
 
     fighter = fighter_gobj->user_data;
     ftCommon_8007D7FC(fighter);
-    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShoot, 0x0C4C5880U,
-                              fighter->cur_anim_frame,
+    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShoot,
+                              0x0C4C5880U, fighter->cur_anim_frame,
                               fighter->frame_speed_mul, 0.0f, NULL);
     fighter->accessory4_cb = ftCo_800CE650;
     fighter->take_dmg_cb = ftCo_800CE620;
@@ -322,8 +324,8 @@ void ft_800CE5A0(Fighter_GObj* fighter_gobj)
 
     fighter = fighter_gobj->user_data;
     ftCommon_8007D5D4(fighter);
-    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir, 0x0C4C5880U,
-                              fighter->cur_anim_frame,
+    Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir,
+                              0x0C4C5880U, fighter->cur_anim_frame,
                               fighter->frame_speed_mul, 0.0f, NULL);
     ftCommon_8007D468(fighter);
     fighter->accessory4_cb = ftCo_800CE650;
@@ -414,7 +416,9 @@ void ftCo_800CE650(HSD_GObj* gobj)
         if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0) {
             temp_r3->mv.co.itemthrow.x10 += 1.0F;
         }
-        if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 && (temp_r3->input.x668 & 0x100)) {
+        if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 &&
+            (temp_r3->input.x668 & 0x100))
+        {
             temp_r3->mv.co.itemthrow.x10 = 0.0F;
         }
         if (zero_throw_flag_b0(temp_r3)) {
@@ -448,7 +452,9 @@ void ftCo_800CE650(HSD_GObj* gobj)
 
                 ftCo_800CE650_inline2(gobj);
             }
-            if (temp_r3->mv.co.itemthrow.x8 >= p_ftCommonData->x5A4 && temp_r3->mv.co.itemthrow.xC != 0) {
+            if (temp_r3->mv.co.itemthrow.x8 >= p_ftCommonData->x5A4 &&
+                temp_r3->mv.co.itemthrow.xC != 0)
+            {
                 if (temp_r3->mv.co.itemthrow.x10 >= p_ftCommonData->x5B0) {
                     temp_r3->mv.co.itemthrow.x14 = 0.0f;
                     ftAnim_SetAnimRate(gobj, 1.0f);

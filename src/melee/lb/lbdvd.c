@@ -1,11 +1,12 @@
-#include <placeholder.h>
+#include "lb_0192.h"
+#include "lbarchive.h"
 
 #include "lbdvd.static.h"
 
-#include "lb_0192.h"
-#include "lbarchive.h"
 #include "lbfile.h"
 #include "lbheap.h"
+
+#include <placeholder.h>
 
 #include "db/db.h"
 #include "ef/efasync.h"
@@ -82,7 +83,8 @@ static bool lbDvd_80017644(int heap)
             entry = &preloadCache.entries[i];
             if ((entry->state == 3 || entry->state == 4) &&
                 entry->heap == heap && entry->load_score < 0 &&
-                entry->load_state == 2) {
+                entry->load_state == 2)
+            {
                 lbDvd_800174E8(i);
             }
         }
@@ -98,14 +100,18 @@ void lbDvd_80017700(int arg0)
     }
 }
 
-inline int same(int a, int b) {
+inline int same(int a, int b)
+{
     int result = 0;
-    if (a == b)
+    if (a == b) {
         result = 1;
+    }
     return result;
 }
 
-void* lbDvd_80017740(int type, int entry_num, s32 transient_heap, s32 heap, u32 size, s8 load_state, s16 load_score, s8 arg7, s32 effect_index)
+void* lbDvd_80017740(int type, int entry_num, s32 transient_heap, s32 heap,
+                     u32 size, s8 load_state, s16 load_score, s8 arg7,
+                     s32 effect_index)
 {
     PreloadEntry* entry;
     s32 temp_ret;
@@ -137,7 +143,7 @@ loop_1:
             entry->load_score = 0x270F;
         }
     } else {
-block_13:
+    block_13:
         var_r4 += 1;
         var_ctr -= 1;
         if (var_ctr == 0) {
@@ -168,7 +174,8 @@ block_13:
     return entry;
 }
 
-void lbDvd_800178E8(int arg0, char* arg1, int arg2, int arg3, int arg4, u8 arg5, s16 arg6, u8 arg7, int arg8)
+void lbDvd_800178E8(int arg0, char* arg1, int arg2, int arg3, int arg4,
+                    u8 arg5, s16 arg6, u8 arg7, int arg8)
 {
     u8 _[8];
     int temp_r3 = DVDConvertPathToEntrynum(lbFile_80016204(arg1));
@@ -228,7 +235,7 @@ void lbDvd_CachePreloadedFile(s32 index)
             preloadEntry->size = size;
         }
         data = lbHeap_80015BD0(preloadEntry->heap,
-                              (preloadEntry->size + 0x1F) & 0xFFFFFFE0);
+                               (preloadEntry->size + 0x1F) & 0xFFFFFFE0);
         preloadEntry->raw_data = data;
         type = preloadEntry->type;
         if ((type == 2) || (((u8) (type - 3)) <= 1)) {

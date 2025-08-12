@@ -1,14 +1,15 @@
 #ifndef GALE01_1F2D0C
 #define GALE01_1F2D0C
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "gr/forward.h"
-#include "lb/forward.h"
-#include <baselib/forward.h>
 
 #include "it/inlines.h"
+
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
 /* 1F2D0C */ void grFourside_801F2D0C(bool);
 /* 1F2D10 */ void grFourside_801F2D10(void);

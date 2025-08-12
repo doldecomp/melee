@@ -1,5 +1,9 @@
 #include "gmcamera.h"
+
 #include "gm/gmcamera.static.h"
+#include <placeholder.h>
+#include <platform.h>
+
 #include "baselib/sislib.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A45.h"
@@ -7,9 +11,6 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbsnap.h"
 #include "mn/mnmain.h"
-
-#include <platform.h>
-#include <placeholder.h>
 
 // void* HSD_SisLib_803A5ACC(u8, int, float, float, float); /* extern */
 // void HSD_SisLib_803A6368(void*, u32);                    /* extern */
@@ -37,7 +38,8 @@ u8* gmCamera_801A2224(u8* arg0, u32 arg1)
 {
     u32 masked_arg1;
     u32 cond_flag = 0;
-    u8 *slus2_arr_ptr = ((SisLibUnkStruct*)HSD_SisLib_804D1124)->x0C_ptr->x08_arr;
+    u8* slus2_arr_ptr =
+        ((SisLibUnkStruct*) HSD_SisLib_804D1124)->x0C_ptr->x08_arr;
 
     if (arg1 >= 0x2710U) {
         arg1 = 0x270F;
@@ -84,7 +86,8 @@ HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
     u32* temp_r27;
     gmCameraUnkStruct2* temp_r5;
 
-    text = HSD_SisLib_803A5ACC(3, (s32) gmCamera_80479BC8.gcus.x54, arg1, arg2, 0.0f, 640.0f, 32.0f);
+    text = HSD_SisLib_803A5ACC(3, (s32) gmCamera_80479BC8.gcus.x54, arg1, arg2,
+                               0.0f, 640.0f, 32.0f);
     text->x24.x = arg3;
     text->x24.y = arg4;
     text->x49 = 1;
@@ -166,7 +169,8 @@ void gmCamera_801A2650(void)
 {
     gmCamera_80479BC8.gcus.x20 = 2;
     HSD_SisLib_803A62A0(3, "SdVsCam", "SIS_VsCameraData");
-    gmCamera_80479BC8.gcus.x54 = HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
+    gmCamera_80479BC8.gcus.x54 =
+        HSD_SisLib_803A611C(3, 0, 9, 13, 0, 14, 0, 11);
 }
 #pragma dont_inline reset
 
@@ -249,7 +253,7 @@ void gmCamera_801A3634_OnEnter(UNK_T arg0)
 {
     PAD_STACK(8);
 
-    gmCamera_80479C20.x0 = (u32* ) arg0;
+    gmCamera_80479C20.x0 = (u32*) arg0;
     gmCamera_801A2650();
     gmCamera_80479C20.slot_a = NULL;
     gmCamera_80479C20.slot_b = NULL;

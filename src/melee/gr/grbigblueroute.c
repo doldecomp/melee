@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "grbigblueroute.h"
+
+#include <platform.h>
 
 /// #grBigBlueRoute_8020B864
 

@@ -1,8 +1,8 @@
 #ifndef GALE01_2D5050
 #define GALE01_2D5050
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 

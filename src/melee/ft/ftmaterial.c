@@ -1,10 +1,11 @@
+#include "ftmaterial.h"
+
 #include <placeholder.h>
+
+#include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ftmaterial.h"
-
-#include "ft/fighter.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/types.h"

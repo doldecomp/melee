@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "ft_0819.h"
+
+#include <placeholder.h>
 
 #include "ft/ft_0C31.h"
 #include "ft/inlines.h"
@@ -56,8 +56,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     {
         if (it_8026BC68(cur)) {
             Item* ip = GET_ITEM(cur);
-            if (lb_80014638(&fp->dmg.x1930, &ip->xB54))
-            {
+            if (lb_80014638(&fp->dmg.x1930, &ip->xB54)) {
                 ip->xCD0 = ip->pos.x > fp->cur_pos.x ? -1.0f : +1.0f;
                 ip->xCFC = gobj;
                 ip->xCB0_source_ply = fp->player_id;

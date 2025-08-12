@@ -1,10 +1,8 @@
 
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ftCaptain/forward.h"
-
 #include "ftCaptain/ftCa_SpecialLw.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -16,6 +14,9 @@
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCaptain/forward.h"
+
 #include "ftCaptain/types.h"
 #include "ftCommon/ftCo_Fall.h"
 

@@ -1,8 +1,8 @@
 #ifndef MELEE_MP_FORWARD_H
 #define MELEE_MP_FORWARD_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "gr/forward.h"
 #include "lb/forward.h"

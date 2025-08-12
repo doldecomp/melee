@@ -1,5 +1,3 @@
-#include "ftCommon/forward.h"
-
 #include "ftSs_SpecialLw_0.h"
 
 #include "ftSs_Init.h"
@@ -14,6 +12,9 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
@@ -61,8 +62,9 @@ bool ftSs_Init_80128A1C(HSD_GObj* gobj, UNK_T arg1, float farg1)
     int i;
 
     for (i = 0; i < fp->hurt_capsules_len; i++) {
-        if (lbColl_80008248(arg1, &fp->hurt_capsules[i].capsule, ftCommon_8007F804(fp),
-                            farg1, fp->x34_scale.y, fp->cur_pos.z))
+        if (lbColl_80008248(arg1, &fp->hurt_capsules[i].capsule,
+                            ftCommon_8007F804(fp), farg1, fp->x34_scale.y,
+                            fp->cur_pos.z))
         {
             return true;
         }

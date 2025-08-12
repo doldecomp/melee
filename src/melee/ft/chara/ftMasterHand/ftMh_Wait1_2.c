@@ -1,10 +1,8 @@
-#include <platform.h>
-
-#include <baselib/forward.h>
-
 #include "ftMh_Wait1_2.h"
 
 #include "ftMh_Wait1_0.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -12,6 +10,8 @@
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
 #include "ftMasterHand/types.h"
+
+#include <baselib/forward.h>
 
 #pragma push
 #pragma dont_inline on

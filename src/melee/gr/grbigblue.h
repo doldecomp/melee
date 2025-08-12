@@ -3,11 +3,10 @@
 
 #include <placeholder.h>
 
-#include "lb/forward.h"
 #include "gr/forward.h"
+#include "lb/forward.h"
 
 #include <dolphin/mtx.h>
-
 
 /* 1E57BC */ void grBigBlue_801E57BC(bool);
 /* 1E57C0 */ void grBigBlue_801E57C0(void);

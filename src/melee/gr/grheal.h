@@ -2,9 +2,11 @@
 #define GALE01_21EF38
 
 #include <placeholder.h>
+
+#include "dolphin/mtx.h"
+
 #include "gr/forward.h"
 #include "lb/forward.h"
-#include "dolphin/mtx.h"
 
 /* 21EF38 */ void grHeal_8021EF38(bool);
 /* 21EF3C */ void grHeal_8021EF3C(void);

@@ -1,11 +1,8 @@
-#include <platform.h>
-
-#include "ftLink/forward.h"
-#include <baselib/forward.h>
-
 #include "ftLk_SpecialS.h"
 
 #include "ftLk_Init.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -22,9 +19,14 @@
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/ftCo_SpecialS.h"
+
+#include "ftLink/forward.h"
+
 #include "ftLink/types.h"
 #include "it/items/itlinkboomerang.h"
 #include "lb/lb_00B0.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <math.h>

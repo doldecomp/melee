@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "gr/grpura.h"
+
+#include <platform.h>
 
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"

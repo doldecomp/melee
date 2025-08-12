@@ -25,9 +25,12 @@
 /* 2D429C */ static bool itCerebi_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F80F8[] = {
-    { 0, itCerebi_UnkMotion0_Anim, itCerebi_UnkMotion0_Phys, itCerebi_UnkMotion0_Coll },
-    { 1, itCerebi_UnkMotion1_Anim, itCerebi_UnkMotion1_Phys, itCerebi_UnkMotion1_Coll },
-    { 2, itCerebi_UnkMotion2_Anim, itCerebi_UnkMotion2_Phys, itCerebi_UnkMotion2_Coll },
+    { 0, itCerebi_UnkMotion0_Anim, itCerebi_UnkMotion0_Phys,
+      itCerebi_UnkMotion0_Coll },
+    { 1, itCerebi_UnkMotion1_Anim, itCerebi_UnkMotion1_Phys,
+      itCerebi_UnkMotion1_Coll },
+    { 2, itCerebi_UnkMotion2_Anim, itCerebi_UnkMotion2_Phys,
+      itCerebi_UnkMotion2_Coll },
 };
 
 void it_2725_Logic23_Spawned(Item_GObj* gobj)

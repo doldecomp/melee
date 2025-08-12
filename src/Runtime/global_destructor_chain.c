@@ -17,4 +17,5 @@ void __destroy_global_chain(void)
     }
 }
 
-SECTION_DTORS static void* const __destroy_global_chain_reference = __destroy_global_chain;
+SECTION_DTORS static void* const __destroy_global_chain_reference =
+    __destroy_global_chain;

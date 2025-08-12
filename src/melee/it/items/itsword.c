@@ -1,13 +1,11 @@
 /// @file
 /// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
-#include <platform.h>
-#include <placeholder.h>
-
-#include "it/items/forward.h"
-
 #include "itsword.h"
 
 #include "types.h" // IWYU pragma: keep
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/ftlib.h"
 #include "it/inlines.h"
@@ -16,6 +14,9 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+
+#include "it/items/forward.h"
+
 #include "it/types.h"
 
 #include <common_structs.h>
@@ -42,11 +43,16 @@
 /* 285F78 */ static bool itSword_UnkMotion4_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F5800[] = {
-    { 0, itSword_UnkMotion0_Anim, itSword_UnkMotion0_Phys, itSword_UnkMotion0_Coll },
-    { 0, itSword_UnkMotion3_Anim, itSword_UnkMotion3_Phys, itSword_UnkMotion3_Coll },
-    { 0, itSword_UnkMotion2_Anim, itSword_UnkMotion2_Phys, itSword_UnkMotion2_Coll },
-    { 1, itSword_UnkMotion3_Anim, itSword_UnkMotion3_Phys, itSword_UnkMotion3_Coll },
-    { 0, itSword_UnkMotion4_Anim, itSword_UnkMotion4_Phys, itSword_UnkMotion4_Coll },
+    { 0, itSword_UnkMotion0_Anim, itSword_UnkMotion0_Phys,
+      itSword_UnkMotion0_Coll },
+    { 0, itSword_UnkMotion3_Anim, itSword_UnkMotion3_Phys,
+      itSword_UnkMotion3_Coll },
+    { 0, itSword_UnkMotion2_Anim, itSword_UnkMotion2_Phys,
+      itSword_UnkMotion2_Coll },
+    { 1, itSword_UnkMotion3_Anim, itSword_UnkMotion3_Phys,
+      itSword_UnkMotion3_Coll },
+    { 0, itSword_UnkMotion4_Anim, itSword_UnkMotion4_Phys,
+      itSword_UnkMotion4_Coll },
 };
 
 Item_GObj* itSword_Spawn(Vec3* pos)

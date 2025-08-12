@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "rumble.h"
+
+#include <platform.h>
 
 /// @todo Circular dependency
 #include "controller.h" // IWYU pragma: keep

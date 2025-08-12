@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "ftCo_CargoLanding.h"
 
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
+
+#include <platform.h>
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"

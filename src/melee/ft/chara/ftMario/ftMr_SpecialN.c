@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "ftMr_SpecialN.h"
+
+#include <platform.h>
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"

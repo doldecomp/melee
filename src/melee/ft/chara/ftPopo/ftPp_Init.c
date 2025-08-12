@@ -1,11 +1,11 @@
-#include "forward.h"
-
 #include "ftPp_Init.h"
 
 #include "ftPp_1211.h"
 #include "ftPp_SpecialN.h"
 #include "ftPp_SpecialS.h"
 #include "types.h"
+
+#include "forward.h"
 
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"

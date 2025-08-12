@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftFx_SpecialHi.h"
 
 #include "math.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

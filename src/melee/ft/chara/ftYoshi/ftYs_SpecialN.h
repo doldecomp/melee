@@ -1,8 +1,8 @@
 #ifndef GALE01_12CDE8
 #define GALE01_12CDE8
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ftYoshi/forward.h"
 #include <baselib/forward.h>

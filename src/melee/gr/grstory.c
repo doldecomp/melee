@@ -2,6 +2,9 @@
 
 #include <platform.h>
 
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grlib.h>
@@ -14,9 +17,6 @@
 #include <melee/it/items/itheiho.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
 
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
@@ -143,8 +143,8 @@ inline int randi(int max)
 static inline void reset_shyguy_timer(Ground* gp)
 {
     // Reset the timer
-    gp->u.shyguys.timer = shyguy_vars->timer_min
-        + randi(shyguy_vars->timer_rand);
+    gp->u.shyguys.timer =
+        shyguy_vars->timer_min + randi(shyguy_vars->timer_rand);
 
     // This value really is overwritten in the game code.
     // Maybe a leftover hardcoded value from debugging?

@@ -1,10 +1,8 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftPe_FloatAttack.h"
 
 #include "ftPe_Float.h"
+
+#include <platform.h>
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0CDD.h"
@@ -12,6 +10,9 @@
 #include "ft/ftanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"

@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <baselib/forward.h>
 
 #include "it/items/types.h"
+
+#include <baselib/forward.h>
 
 /* 2D5ABC */ void it_2725_Logic26_Spawned(Item_GObj*);
 /* 2D5B14 */ void it_802D5B14(Item_GObj*);

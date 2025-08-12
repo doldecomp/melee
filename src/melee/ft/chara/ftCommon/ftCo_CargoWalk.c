@@ -1,5 +1,3 @@
-#include <platform.h>
-
 #include "ftCo_CargoWalk.h"
 
 #include "ftCo_09C4.h"
@@ -7,6 +5,8 @@
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
+
+#include <platform.h>
 
 #include "ft/ftwalkcommon.h"
 #include "ft/types.h"

@@ -1,9 +1,9 @@
 #ifndef __GALE01_0EE528
 #define __GALE01_0EE528
 
-#include <placeholder.h>
-
 #include "ftKb_Init.h" // IWYU pragma: export
+
+#include <placeholder.h>
 
 /* 0F6178 */ static void fn_800F6178(Fighter_GObj*);
 /* 0F6210 */ static void fn_800F6210(Fighter_GObj*);

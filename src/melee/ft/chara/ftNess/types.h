@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "ftNess/forward.h" // IWYU pragma: export
-#include <baselib/forward.h>
 
 #include "lb/types.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

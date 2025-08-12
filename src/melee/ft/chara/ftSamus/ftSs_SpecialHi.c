@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "ftSs_SpecialHi.h"
 
 #include "inlines.h"
 #include "math.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

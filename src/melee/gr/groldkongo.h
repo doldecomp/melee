@@ -1,14 +1,14 @@
 #ifndef GALE01_20F468
 #define GALE01_20F468
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
+#include "it/inlines.h"
 
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "it/inlines.h"
 
 /* 20F468 */ void grOldKongo_8020F468(bool);
 /* 20F46C */ void grOldKongo_8020F46C(void);

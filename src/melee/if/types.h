@@ -1,8 +1,8 @@
 #ifndef MELEE_IF_TYPES_H
 #define MELEE_IF_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "if/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>

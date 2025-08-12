@@ -1,7 +1,7 @@
 
-#include <platform.h>
-
 #include "gr/grinishie1.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efsync.h"

@@ -2,8 +2,9 @@
 #define MELEE_GM_16F1_H
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/forward.h>
+
 #include <melee/gm/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 16F180 */ int fn_8016F180(int);
 /* 16F1B8 */ int gmDecisionGetType(int kind);

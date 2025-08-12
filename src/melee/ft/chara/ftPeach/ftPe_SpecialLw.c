@@ -1,12 +1,8 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-#include <baselib/forward.h>
-
 #include "ftPe_SpecialLw.h"
 
 #include "ftPe_Init.h"
+
+#include <platform.h>
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -15,13 +11,21 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftpickupitem.h"
 #include "ftPeach/types.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/items/itpeachturnip.h"
 #include "lb/lb_00B0.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <baselib/random.h>

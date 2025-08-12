@@ -1,8 +1,8 @@
 #ifndef MELEE_PL_PLTRICK_H
 #define MELEE_PL_PLTRICK_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/types.h"
 

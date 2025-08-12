@@ -9,7 +9,6 @@
 
 #include <dolphin/mtx.h>
 
-
 /* 2BD32C */ s32 it_802BD32C(Item_GObj*);
 /* 2BD45C */ void it_802BD45C(Item_GObj* gobj);
 /* 2BD47C */ void it_2725_Logic56_Destroyed(Item_GObj*);

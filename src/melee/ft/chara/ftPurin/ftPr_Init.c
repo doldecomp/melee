@@ -1,7 +1,3 @@
-#include <placeholder.h>
-
-#include "forward.h"
-
 #include "ftPr_Init.h"
 
 #include "ftPr_SpecialHi.h"
@@ -10,8 +6,13 @@
 #include "ftPr_SpecialS.h"
 #include "types.h"
 
+#include <placeholder.h>
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_0852.h"
 #include "ft/ft_0877.h"

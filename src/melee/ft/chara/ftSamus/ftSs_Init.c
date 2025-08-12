@@ -1,6 +1,3 @@
-#include "forward.h"
-#include "ftCommon/forward.h"
-
 #include "ftSs_Init.h"
 
 #include "ftSs_SpecialHi.h"
@@ -10,6 +7,8 @@
 #include "ftSs_SpecialS.h"
 #include "types.h"
 
+#include "forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
@@ -18,6 +17,9 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_AirCatch.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"

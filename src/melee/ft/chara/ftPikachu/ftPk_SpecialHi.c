@@ -1,8 +1,6 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftPk_SpecialHi.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -15,6 +13,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "ftPikachu/types.h"

@@ -1,12 +1,13 @@
 #include <platform.h>
 
-#include "lb/forward.h"
-
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
@@ -61,9 +62,17 @@ static StageCallbacks grTMs_803E8EB0[4] = {
 };
 
 StageData grTMs_803E8F0C = {
-    0x00000034,       grTMs_803E8EB0,   "/GrTMs.dat",     grTMars_80221EF8,
-    grTMars_80221EF4, grTmars_UnkStage0_OnLoad, grTmars_UnkStage0_OnStart, grTMars_80221F90,
-    grTMars_802221C8, grTMars_802221D0, 0x00000001,
+    0x00000034,
+    grTMs_803E8EB0,
+    "/GrTMs.dat",
+    grTMars_80221EF8,
+    grTMars_80221EF4,
+    grTmars_UnkStage0_OnLoad,
+    grTmars_UnkStage0_OnStart,
+    grTMars_80221F90,
+    grTMars_802221C8,
+    grTMars_802221D0,
+    0x00000001,
 };
 
 static void grTMars_80221EF4(bool arg0) {}

@@ -1,11 +1,9 @@
-#include <platform.h>
-
-#include "it/forward.h"
-
 #include "it/it_266F.h"
 
 #include "inlines.h"
 #include "types.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "db/db.h"
@@ -14,6 +12,9 @@
 #include "gm/gm_unsplit.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -990,8 +991,7 @@ bool it_8026DDFC(Item_GObj* gobj)
     if (ip->xD50_landNum == 1) {
         if (ip->xD54_throwNum != 0) {
             u8* tmp = &it_804D6D28->x48_byte;
-            if ((ip->xD54_throwNum ==
-                 ((*tmp >> 4) & 0xF)) ||
+            if ((ip->xD54_throwNum == ((*tmp >> 4) & 0xF)) ||
                 (HSD_Randi(*tmp & 0xF) == 0))
             {
                 ip->destroy_type = 1;
@@ -2077,7 +2077,7 @@ bool it_8026F8B4(Item_GObj* item_gobj, Vec3* arg1, Vec3* arg2, bool chk)
     if (HSD_Randi(it_804D6D28->x138) != 0) {
         return false;
     }
-    rand_int =  HSD_Randi(it_804D6D28->x13C) ;
+    rand_int = HSD_Randi(it_804D6D28->x13C);
     rand_int += it_804D6D28->x140;
     if (chk == false) {
         arg2->x = it_804D6D28->x54_float * (2.0f * (HSD_Randf() - 0.5f));

@@ -1,10 +1,8 @@
-#include <platform.h>
-
-#include <baselib/forward.h>
-
 #include "ftPe_SpecialN.h"
 
 #include "ftPe_Init.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -18,6 +16,8 @@
 #include "it/items/itpeachtoad.h"
 #include "it/items/itpeachtoadspore.h"
 #include "lb/lb_00B0.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

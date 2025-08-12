@@ -3,6 +3,7 @@
 
 #include <baselib/forward.h>
 #include <melee/gr/forward.h>
+
 #include <dolphin/mtx.h>
 
 /* 1E3030 */ void grStory_801E3030(void);

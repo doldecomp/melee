@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftCo_CaptureCaptain.h"
 
 #include "ftCo_Lift.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -1,8 +1,8 @@
 #include "lbanim.h"
 
+#include <baselib/aobj.h>
 #include <baselib/fobj.h>
 #include <baselib/jobj.h>
-#include <baselib/aobj.h>
 
 static HSD_FObj* lbAnim_InitFrames(FigaTrack* track, s8 frames)
 {

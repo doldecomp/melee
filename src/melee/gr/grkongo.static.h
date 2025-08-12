@@ -1,12 +1,12 @@
 #ifndef __GALE01_1D5238
 #define __GALE01_1D5238
 
-#include <platform.h>
 #include <placeholder.h>
-
-#include "mp/forward.h"
+#include <platform.h>
 
 #include "gr/types.h"
+
+#include "mp/forward.h"
 
 /* 1D7700 */ static void fn_801D7700(Ground* gp, UNK_T, UNK_T, UNK_T,
                                      mpLib_GroundEnum arg4);

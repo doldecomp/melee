@@ -17,7 +17,8 @@ ItemStateTable it_803F7958[] = {
     },
 };
 
-Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part part, float dir)
+Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
+                       float dir)
 {
     SpawnItem spawn;
     Item_GObj* result;
@@ -80,7 +81,8 @@ void it_2725_Logic113_PickedUp(Item_GObj* item_gobj)
     }
 }
 
-static inline bool itKirbygamewatchchefpan_UnkMotion0_Anim_inline(Item_GObj* item_gobj)
+static inline bool
+itKirbygamewatchchefpan_UnkMotion0_Anim_inline(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
@@ -103,4 +105,3 @@ void it_2725_Logic113_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }
-

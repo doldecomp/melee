@@ -26,9 +26,11 @@ const Vec3 it_803B8718 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B8724 = { 0.0f, 0.0f, 0.0f };
 
 ItemStateTable it_803F8BD8[] = {
-    { 0, it_2E5A_UnkMotion1_Anim, it_2E5A_UnkMotion1_Phys, it_2E5A_UnkMotion0_Coll },
+    { 0, it_2E5A_UnkMotion1_Anim, it_2E5A_UnkMotion1_Phys,
+      it_2E5A_UnkMotion0_Coll },
     { -1, it_2E5A_UnkMotion1_Anim, it_2E5A_UnkMotion1_Phys, NULL },
-    { 0, it_2E5A_UnkMotion2_Anim, it_2E5A_UnkMotion2_Phys, it_2E5A_UnkMotion2_Coll },
+    { 0, it_2E5A_UnkMotion2_Anim, it_2E5A_UnkMotion2_Phys,
+      it_2E5A_UnkMotion2_Coll },
 };
 
 bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)

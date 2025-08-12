@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "ftDk_HeavyLanding.h"
 
 #include "ftDk_HeavyTurn.h"
 #include "ftDk_HeavyWait0.h"
+
+#include <platform.h>
 
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"

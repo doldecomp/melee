@@ -1,13 +1,14 @@
-#include <platform.h>
-
-#include "ftPopo/forward.h"
-
 #include "ftNn_Init.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftPopo/forward.h"
+
 #include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
 #include "ftPopo/ftPp_SpecialN.h"

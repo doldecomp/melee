@@ -6,6 +6,7 @@
 #include <placeholder.h>
 
 #include <melee/mn/forward.h>
+
 #include <melee/sc/types.h>
 
 struct stagelistinfo {

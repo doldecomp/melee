@@ -1,16 +1,19 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-
 #include "ftCo_HammerJump.h"
 
 #include "ftCo_HammerFall.h"
 #include "ftCo_HammerKneeBend.h"
 #include "ftCo_HammerWait.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ftcommon.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Jump.h"
 
 bool ftCo_800C5A50(Fighter_GObj* gobj)

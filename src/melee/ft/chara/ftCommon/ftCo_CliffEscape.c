@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftCo_CliffEscape.h"
 
 #include "ftCo_CliffClimb.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftanim.h"

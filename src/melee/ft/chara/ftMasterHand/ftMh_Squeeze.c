@@ -1,10 +1,10 @@
-#include <platform.h>
-
 #include "ftMh_Squeeze.h"
 
 #include "ftMh_CaptureMasterHand.h"
 #include "ftMh_Squeezing.h"
 #include "ftMh_Throw.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

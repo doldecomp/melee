@@ -1,15 +1,15 @@
 #ifndef GALE01_2107DC
 #define GALE01_2107DC
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h"
 
+#include "it/inlines.h"
+
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
-
-#include "it/inlines.h"
 
 /* 2107DC */ void grOldPupupu_802107DC(bool);
 /* 2107E0 */ void grOldPupupu_802107E0(void);

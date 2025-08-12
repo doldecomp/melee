@@ -1,8 +1,8 @@
 #ifndef __GALE01_1DCCFC
 #define __GALE01_1DCCFC
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/inlines.h"
 

@@ -1,16 +1,16 @@
 #ifndef MELEE_FT_CHARA_FTCOMMON_TYPES_H
 #define MELEE_FT_CHARA_FTCOMMON_TYPES_H
 
-#include <platform.h>
+#include "common_structs.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h" // IWYU pragma: export
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
-
-#include "common_structs.h"
 
 #include <dolphin/mtx.h>
 

@@ -1,9 +1,9 @@
 #ifndef __GALE01_1EFC68
 #define __GALE01_1EFC68
 
-#include <placeholder.h>
-
 #include "platform.h"
+
+#include <placeholder.h>
 
 #include <dolphin/mtx.h>
 

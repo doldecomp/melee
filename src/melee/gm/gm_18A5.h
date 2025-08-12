@@ -2,11 +2,12 @@
 #define MELEE_GM_18A5_H
 
 #include <placeholder.h>
+
 #include <melee/ft/forward.h>
-#include <sysdolphin/baselib/forward.h>
 #include <melee/gm/forward.h>
-#include <melee/sc/forward.h>
 #include <melee/mn/forward.h>
+#include <melee/sc/forward.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 18A514 */ UNK_RET fn_8018A514(UNK_PARAMS);
 /* 18A970 */ void fn_8018A970(int);
@@ -39,7 +40,8 @@
 /* 18F6A8 */ u32 fn_8018F6A8(int);
 /* 18F6DC */ int fn_8018F6DC(int);
 /* 18F6FC */ CharacterKind fn_8018F6FC(CSSIconHud);
-/* 18F71C */ float fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
+/* 18F71C */ float
+fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 18F74C */ int fn_8018F74C(void);
 /* 18F808 */ int fn_8018F808(void);
 /* 18F888 */ UNK_RET fn_8018F888(UNK_PARAMS);
@@ -52,7 +54,8 @@
 /* 1901F8 */ HSD_GObj* fn_801901F8(HSD_CObjDesc*);
 /* 19027C */ void fn_8019027C(UNK_T lights);
 /* 1902F0 */ UNK_RET fn_801902F0(UNK_PARAMS);
-/* 19035C */ HSD_GObj* fn_8019035C(bool, DynamicModelDesc*, int, int, int, bool, void (*)(HSD_GObj*), float);
+/* 19035C */ HSD_GObj* fn_8019035C(bool, DynamicModelDesc*, int, int, int,
+                                   bool, void (*)(HSD_GObj*), float);
 /* 19044C */ void fn_8019044C(HSD_JObj*, float);
 /* 190480 */ void fn_80190480(float);
 /* 1904D0 */ UNK_RET fn_801904D0(UNK_PARAMS);

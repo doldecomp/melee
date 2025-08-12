@@ -3,15 +3,17 @@
 
 #include <platform.h>
 
-#include "ftCommon/forward.h"
-#include <baselib/forward.h>
-
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/types.h"
+
+#include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 

@@ -1,11 +1,9 @@
-#include <platform.h>
-
-#include "it/forward.h"
-
 #include "ftCo_Lift.h"
 
 #include "ftCo_DamageFall.h"
 #include "ftCo_ItemThrow.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -14,6 +12,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/item.h"
 

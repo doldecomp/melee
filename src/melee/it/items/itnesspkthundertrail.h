@@ -2,6 +2,7 @@
 #define GALE01_2AC43C
 
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 /* 2AC43C */ UNK_RET it_802AC43C(UNK_PARAMS);

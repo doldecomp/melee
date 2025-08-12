@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftCo_HammerLanding.h"
 
 #include "ftCo_HammerWait.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

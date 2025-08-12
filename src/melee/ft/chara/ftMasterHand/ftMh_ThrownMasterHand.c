@@ -1,5 +1,3 @@
-#include "ftCommon/forward.h"
-
 #include "ftMh_ThrownMasterHand.h"
 
 #include "ft/fighter.h"
@@ -7,6 +5,9 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftMasterHand/types.h"
 
 void ftMh_CaptureWaitMasterHand_80155D1C(HSD_GObj* gobj)

@@ -1,5 +1,3 @@
-#include <placeholder.h>
-
 #include "cobj.h"
 
 #include "aobj.h"
@@ -11,6 +9,8 @@
 #include "util.h"
 #include "video.h"
 #include "wobj.h"
+
+#include <placeholder.h>
 
 #include <math.h>
 #include <dolphin/gx.h>

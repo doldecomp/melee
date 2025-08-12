@@ -1,7 +1,8 @@
-#include "it/forward.h"
-
 #include "itgamewatchbreath.h"
+
 #include "ftGameWatch/ftGw_AttackAir.h"
+
+#include "it/forward.h"
 
 #include <melee/db/db.h>
 #include <melee/it/inlines.h>
@@ -10,9 +11,10 @@
 #include <melee/it/item.h>
 #include <melee/it/types.h>
 
-
-ItemStateTable it_803F7938[] = { { 0, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL },
-                                 { 1, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL } };
+ItemStateTable it_803F7938[] = {
+    { 0, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL },
+    { 1, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL }
+};
 
 HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
                       float dir)

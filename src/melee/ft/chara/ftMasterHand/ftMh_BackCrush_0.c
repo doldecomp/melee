@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftMh_BackCrush_0.h"
 
 #include "ftMh_Wait1_2.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftanim.h"

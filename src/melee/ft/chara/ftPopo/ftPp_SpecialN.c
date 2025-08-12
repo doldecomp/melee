@@ -1,11 +1,9 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "it/forward.h"
-
 #include "ftPp_SpecialN.h"
 
 #include "ftPp_Init.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -17,6 +15,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftPopo/types.h"
+
+#include "it/forward.h"
+
 #include "it/items/it_27CF.h"
 #include "it/items/itclimbersice.h"
 #include "lb/lb_00B0.h"

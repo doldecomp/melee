@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_PSDISP_H
 #define SYSDOLPHIN_BASELIB_PSDISP_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include <dolphin/gx.h>
 

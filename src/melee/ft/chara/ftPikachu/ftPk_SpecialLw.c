@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftPk_SpecialLw.h"
 
 #include "math.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efasync.h"

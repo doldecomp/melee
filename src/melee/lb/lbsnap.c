@@ -1,10 +1,9 @@
-#include <placeholder.h>
-
-#include "lbsnap.static.h"
-
 #include "lbarchive.h"
 #include "lbcardnew.h"
 #include "lblanguage.h"
+
+#include "lbsnap.static.h"
+#include <placeholder.h>
 
 #include "ft/ft_0877.h"
 #include "gm/gm_unsplit.h"

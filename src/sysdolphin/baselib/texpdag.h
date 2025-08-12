@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_TEXPDAG_H
 #define SYSDOLPHIN_BASELIB_TEXPDAG_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h"
 
@@ -18,8 +18,8 @@ typedef struct HSD_TExpDag {
 } HSD_TExpDag;
 
 /* 385798 */ int assign_reg(int num, u32*, HSD_TExpDag* list, int* order);
-/* 385944 */ void order_dag(int, UNK_T, UNK_T, HSD_TExpDag*, int,
-                            int, int, int, UNK_T, UNK_T, UNK_T);
+/* 385944 */ void order_dag(int, UNK_T, UNK_T, HSD_TExpDag*, int, int, int,
+                            int, UNK_T, UNK_T, UNK_T);
 /* 385B8C */ UNK_RET CalcDistance(UNK_PARAMS);
 /* 385C60 */ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list);
 /* 386100 */ void make_full_dependancy_mtx(int, UNK_T, UNK_T);

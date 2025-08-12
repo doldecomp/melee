@@ -4,9 +4,10 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include <baselib/forward.h>
 
 #include "it/items/types.h"
+
+#include <baselib/forward.h>
 
 /* 28B08C */ int it_8028B08C(Item_GObj* item_gobj, int statenum);
 /* 28B0B8 */ void it_3F14_Logic13_Spawned(Item_GObj* item_gobj);

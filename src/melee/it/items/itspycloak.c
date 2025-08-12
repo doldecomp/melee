@@ -1,14 +1,14 @@
-#include <platform.h>
-
-#include <baselib/forward.h>
-
 #include "itspycloak.h"
+
+#include <platform.h>
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -133,9 +133,13 @@ void it_3F14_Logic33_EvtUnk(Item_GObj* gobj, HSD_GObj* ref)
 }
 
 ItemStateTable it_803F6370[] = {
-    { 0, itSpycloak_UnkMotion0_Anim, itSpycloak_UnkMotion0_Phys, itSpycloak_UnkMotion0_Coll },
-    { 0, itSpycloak_UnkMotion3_Anim, itSpycloak_UnkMotion1_Phys, itSpycloak_UnkMotion1_Coll },
+    { 0, itSpycloak_UnkMotion0_Anim, itSpycloak_UnkMotion0_Phys,
+      itSpycloak_UnkMotion0_Coll },
+    { 0, itSpycloak_UnkMotion3_Anim, itSpycloak_UnkMotion1_Phys,
+      itSpycloak_UnkMotion1_Coll },
     { 0, itSpycloak_UnkMotion2_Anim, NULL, NULL },
-    { 0, itSpycloak_UnkMotion3_Anim, itSpycloak_UnkMotion3_Phys, itSpycloak_UnkMotion3_Coll },
-    { 0, itSpycloak_UnkMotion4_Anim, itSpycloak_UnkMotion4_Phys, itSpycloak_UnkMotion4_Coll },
+    { 0, itSpycloak_UnkMotion3_Anim, itSpycloak_UnkMotion3_Phys,
+      itSpycloak_UnkMotion3_Coll },
+    { 0, itSpycloak_UnkMotion4_Anim, itSpycloak_UnkMotion4_Phys,
+      itSpycloak_UnkMotion4_Coll },
 };

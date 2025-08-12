@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftZelda/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 1392DC */ void ftZd_Init_OnDeath(HSD_GObj* gobj);
 /* 139334 */ void ftZd_Init_OnLoad(HSD_GObj* gobj);

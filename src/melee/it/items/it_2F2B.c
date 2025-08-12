@@ -1,11 +1,12 @@
-#include <platform.h>
-
-#include "ftYoshi/forward.h"
-
 #include "it_2F2B.h"
+
+#include <platform.h>
 
 #include "ft/chara/ftYoshi/ftYs_Guard.h"
 #include "ft/ftlib.h"
+
+#include "ftYoshi/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -20,7 +21,8 @@
 /* 2F2CD8 */ static bool it_2F2B_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F9480[] = {
-    { -1, it_2F2B_UnkMotion0_Anim, it_2F2B_UnkMotion0_Phys, it_2F2B_UnkMotion0_Coll },
+    { -1, it_2F2B_UnkMotion0_Anim, it_2F2B_UnkMotion0_Phys,
+      it_2F2B_UnkMotion0_Coll },
 };
 
 void it_802F2BFC(Item_GObj* gobj, Fighter_GObj* owner_gobj)

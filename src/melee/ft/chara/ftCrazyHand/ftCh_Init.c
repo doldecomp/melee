@@ -1,18 +1,20 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "baselib/forward.h"
-#include "ftCrazyHand/forward.h"
-
 #include "ftCh_Init.h"
 
 #include "types.h"
+
+#include <placeholder.h>
+#include <platform.h>
+
+#include "baselib/forward.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCrazyHand/forward.h"
+
 #include "ftMasterHand/types.h"
 #include "it/it_26B1.h"
 #include "pl/player.h"

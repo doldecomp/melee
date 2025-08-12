@@ -1,9 +1,9 @@
 #ifndef GALE01_0860C4
 #define GALE01_0860C4
 
-#include <baselib/forward.h>
-
 #include "ft/types.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

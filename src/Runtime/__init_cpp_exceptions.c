@@ -1,5 +1,5 @@
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include <__init_cpp_exceptions.h>
 #include <Gecko_ExceptionPPC.h>
@@ -34,6 +34,9 @@ void __init_cpp_exceptions(void)
 #endif
 }
 
-SECTION_CTORS void* const __init_cpp_exceptions_reference  = __init_cpp_exceptions;
-SECTION_DTORS void* const __destroy_global_chain_reference = __destroy_global_chain;
-SECTION_DTORS void* const __fini_cpp_exceptions_reference  = __fini_cpp_exceptions;
+SECTION_CTORS void* const __init_cpp_exceptions_reference =
+    __init_cpp_exceptions;
+SECTION_DTORS void* const __destroy_global_chain_reference =
+    __destroy_global_chain;
+SECTION_DTORS void* const __fini_cpp_exceptions_reference =
+    __fini_cpp_exceptions;

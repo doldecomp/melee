@@ -1,13 +1,14 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-
 #include "ftCo_PassiveStand.h"
 
 #include "ftCo_DownAttack.h"
 #include "math.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"

@@ -2,6 +2,7 @@
 #define MELEE_VI_1201_V2_H
 
 #include <placeholder.h>
+
 #include <baselib/forward.h>
 
 /* 3204C0 */ void un_803204C0(HSD_GObj*);

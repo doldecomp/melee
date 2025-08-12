@@ -10,13 +10,20 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F8058[] = {
-    { 0, itTogepy_UnkMotion0_Anim, itTogepy_UnkMotion0_Phys, itTogepy_UnkMotion0_Coll },
-    { 1, itTogepy_UnkMotion1_Anim, itTogepy_UnkMotion1_Phys, itTogepy_UnkMotion1_Coll },
-    { 2, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
-    { 3, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
-    { 4, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
-    { 5, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
-    { 6, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys, itTogepy_UnkMotion6_Coll },
+    { 0, itTogepy_UnkMotion0_Anim, itTogepy_UnkMotion0_Phys,
+      itTogepy_UnkMotion0_Coll },
+    { 1, itTogepy_UnkMotion1_Anim, itTogepy_UnkMotion1_Phys,
+      itTogepy_UnkMotion1_Coll },
+    { 2, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys,
+      itTogepy_UnkMotion6_Coll },
+    { 3, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys,
+      itTogepy_UnkMotion6_Coll },
+    { 4, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys,
+      itTogepy_UnkMotion6_Coll },
+    { 5, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys,
+      itTogepy_UnkMotion6_Coll },
+    { 6, itTogepy_UnkMotion6_Anim, itTogepy_UnkMotion6_Phys,
+      itTogepy_UnkMotion6_Coll },
 };
 
 void it_2725_Logic21_Spawned(Item_GObj* gobj)

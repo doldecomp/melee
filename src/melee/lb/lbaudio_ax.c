@@ -1,6 +1,6 @@
-#include <melee/ft/forward.h>
-
 #include "lbaudio_ax.static.h"
+
+#include <melee/ft/forward.h>
 
 #include <baselib/axdriver.h>
 #include <baselib/synth.h>

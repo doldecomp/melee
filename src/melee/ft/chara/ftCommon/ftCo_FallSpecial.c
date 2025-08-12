@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftCo_FallSpecial.h"
 
 #include "ftCo_DamageFall.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -31,8 +31,8 @@ void ftCo_800968C8(Fighter_GObj* gobj)
 
 /// @todo Real solution is @c 0. Inline needs to be fixed.
 #define SOLUTION 1
-void ftCo_80096900(Fighter_GObj* gobj, int arg1, int arg2, bool allow_interrupt,
-                   float arg4, float arg5)
+void ftCo_80096900(Fighter_GObj* gobj, int arg1, int arg2,
+                   bool allow_interrupt, float arg4, float arg5)
 {
 #if SOLUTION == 0
     ftCo_800969D8(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0);

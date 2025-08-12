@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTKOOPA_TYPES_H
 #define MELEE_FT_CHARA_FTKOOPA_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 struct ftKoopa_FighterVars {
     /* 0x222C */ float x222C;

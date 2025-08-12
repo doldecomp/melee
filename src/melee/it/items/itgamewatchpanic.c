@@ -10,8 +10,10 @@
 
 /* 2C7FAC */ static bool itGamewatchpanic_UnkMotion1_Anim(Item_GObj*);
 
-ItemStateTable it_803F79A0[] = { { 0, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL },
-                                 { 1, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL } };
+ItemStateTable it_803F79A0[] = {
+    { 0, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL },
+    { 1, itGamewatchpanic_UnkMotion1_Anim, NULL, NULL }
+};
 
 HSD_GObj* it_802C7D60(Item_GObj* parent, Vec3* pos, Fighter_Part arg2, f32 dir)
 {

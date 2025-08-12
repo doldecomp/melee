@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "groldkongo.h"
+
+#include <platform.h>
 
 #include "gr/granime.h"
 #include "gr/ground.h"

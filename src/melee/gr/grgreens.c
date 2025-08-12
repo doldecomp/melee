@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "grgreens.h"
+
+#include <platform.h>
 
 static s8 grGr_804D6AAC;
 

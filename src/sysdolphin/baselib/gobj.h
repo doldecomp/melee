@@ -1,8 +1,8 @@
 #ifndef GALE01_390730
 #define GALE01_390730
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h" // IWYU pragma: export
 

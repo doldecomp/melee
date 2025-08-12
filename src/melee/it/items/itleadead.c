@@ -1,6 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
 #include "itleadead.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 /// #it_802E8BCC
 

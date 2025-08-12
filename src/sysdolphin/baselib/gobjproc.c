@@ -1,10 +1,10 @@
-#include <placeholder.h>
-
 #include "gobjproc.h"
 
 #include "debug.h"
 #include "gobj.h"
 #include "objalloc.h"
+
+#include <placeholder.h>
 
 extern HSD_ObjAllocData gobjproc_alloc_data;
 
@@ -27,17 +27,23 @@ void HSD_GObjProc_8038FAA8(HSD_GObjProc* gproc)
     //
     // Start at the current proc's GObj, and scan backwards through
     // all previous GObjs' procs.
-    if (HSD_GObj_804D7844[p_link + s_link *
-            (HSD_GObjLibInitData.p_link_max + 1)] != NULL) {
+    if (HSD_GObj_804D7844[p_link + s_link * (HSD_GObjLibInitData.p_link_max +
+                                             1)] != NULL)
+    {
         HSD_GObj* cur_gobj = proc_gobj;
         while (cur_gobj != NULL) {
             dst_proc = cur_gobj->proc;
             while (dst_proc != NULL) {
                 if (dst_proc->s_link == s_link) {
-                    if (HSD_GObj_804D7844[p_link + s_link *
-                            (HSD_GObjLibInitData.p_link_max + 1)] == dst_proc) {
-                        HSD_GObj_804D7844[p_link + s_link *
-                            (HSD_GObjLibInitData.p_link_max + 1)] = gproc;
+                    if (HSD_GObj_804D7844[p_link +
+                                          s_link *
+                                              (HSD_GObjLibInitData.p_link_max +
+                                               1)] == dst_proc)
+                    {
+                        HSD_GObj_804D7844[p_link +
+                                          s_link *
+                                              (HSD_GObjLibInitData.p_link_max +
+                                               1)] = gproc;
                     }
                     goto insert_at_dst;
                 }
@@ -46,15 +52,16 @@ void HSD_GObjProc_8038FAA8(HSD_GObjProc* gproc)
             cur_gobj = cur_gobj->prev;
         }
     } else {
-        HSD_GObj_804D7844[p_link + s_link *
-            (HSD_GObjLibInitData.p_link_max + 1)] = gproc;
+        HSD_GObj_804D7844[p_link + s_link * (HSD_GObjLibInitData.p_link_max +
+                                             1)] = gproc;
     }
 
     // If we got here, we still don't have a destination,
     // so scan through the global GObjProcs instead.
     while (p_link-- != 0) {
-        dst_proc = HSD_GObj_804D7844[p_link + s_link *
-            (HSD_GObjLibInitData.p_link_max + 1)];
+        dst_proc =
+            HSD_GObj_804D7844[p_link +
+                              s_link * (HSD_GObjLibInitData.p_link_max + 1)];
         if (dst_proc != NULL) {
             goto insert_at_dst;
         }
@@ -67,10 +74,9 @@ void HSD_GObjProc_8038FAA8(HSD_GObjProc* gproc)
         HSD_GObj_804D7840[s_link] = gproc;
         gproc->prev = NULL;
     } else {
-
-    // Alternatively, we jump here if we have a valid destination,
-    // so we insert it in the linked list.
-insert_at_dst:
+        // Alternatively, we jump here if we have a valid destination,
+        // so we insert it in the linked list.
+    insert_at_dst:
         gproc->next = dst_proc->next;
         dst_proc->next = gproc;
         gproc->prev = dst_proc;
@@ -84,7 +90,8 @@ insert_at_dst:
     gproc->child = proc_gobj->proc;
     proc_gobj->proc = gproc;
     if (HSD_GObj_804CE3E4.b0 && gproc->prev == HSD_GObj_804D7838 &&
-        gproc->next == HSD_GObj_804D7830 && s_link == HSD_GObj_804D7834) {
+        gproc->next == HSD_GObj_804D7830 && s_link == HSD_GObj_804D7834)
+    {
         HSD_GObj_804D7830 = gproc;
     }
 }

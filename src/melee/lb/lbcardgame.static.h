@@ -1,13 +1,14 @@
 #ifndef __GALE01_019880
 #define __GALE01_019880
 
-#include <platform.h>
+#include "lbcardgame.h" // IWYU pragma: export
+
 #include <placeholder.h>
+#include <platform.h>
+
 #include <dolphin/os/OSAlarm.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <melee/sc/types.h>
-
-#include "lbcardgame.h" // IWYU pragma: export
 
 struct lb_80433318_t {
     /* +0  */ int x0;

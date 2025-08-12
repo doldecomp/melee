@@ -1,40 +1,42 @@
 
 #include <platform.h>
 
-#include "lb/forward.h"
-#include <baselib/forward.h>
-
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTKirby_80221364(bool);                   /* static */
+void grTKirby_80221364(bool);                  /* static */
 void grTKirby_80221368(void);                  /* static */
-void grTkirby_UnkStage0_OnLoad(void);                  /* static */
-void grTkirby_UnkStage0_OnStart(void);                  /* static */
+void grTkirby_UnkStage0_OnLoad(void);          /* static */
+void grTkirby_UnkStage0_OnStart(void);         /* static */
 bool grTKirby_80221400(void);                  /* static */
 HSD_GObj* grTKirby_80221408(s32);              /* static */
-void grTKirby_802214F0(Ground_GObj*);             /* static */
-bool grTKirby_8022151C(Ground_GObj*);             /* static */
-void grTKirby_80221524(Ground_GObj*);             /* static */
-void grTKirby_80221528(Ground_GObj*);             /* static */
-void grTKirby_8022152C(Ground_GObj*);             /* static */
-bool grTKirby_8022157C(Ground_GObj*);             /* static */
-void grTKirby_80221584(Ground_GObj*);             /* static */
-void grTKirby_802215B8(Ground_GObj*);             /* static */
-void grTKirby_802215BC(Ground_GObj*);             /* static */
-bool grTKirby_8022160C(Ground_GObj*);             /* static */
-void grTKirby_80221614(Ground_GObj*);             /* static */
-void grTKirby_80221634(Ground_GObj*);             /* static */
+void grTKirby_802214F0(Ground_GObj*);          /* static */
+bool grTKirby_8022151C(Ground_GObj*);          /* static */
+void grTKirby_80221524(Ground_GObj*);          /* static */
+void grTKirby_80221528(Ground_GObj*);          /* static */
+void grTKirby_8022152C(Ground_GObj*);          /* static */
+bool grTKirby_8022157C(Ground_GObj*);          /* static */
+void grTKirby_80221584(Ground_GObj*);          /* static */
+void grTKirby_802215B8(Ground_GObj*);          /* static */
+void grTKirby_802215BC(Ground_GObj*);          /* static */
+bool grTKirby_8022160C(Ground_GObj*);          /* static */
+void grTKirby_80221614(Ground_GObj*);          /* static */
+void grTKirby_80221634(Ground_GObj*);          /* static */
 DynamicsDesc* grTKirby_80221638(enum_t);       /* static */
 bool grTKirby_80221640(Vec3*, int, HSD_JObj*); /* static */
 

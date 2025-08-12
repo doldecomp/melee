@@ -1,8 +1,8 @@
 #ifndef GALE01_2F7EFC
 #define GALE01_2F7EFC
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 /* 2F7EFC */ int ifStock_802F7EFC(int, int);
 /* 2F8298 */ UNK_RET ifStock_802F8298(UNK_PARAMS);

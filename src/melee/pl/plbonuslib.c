@@ -1,5 +1,3 @@
-#include <platform.h>
-
 #include "plbonuslib.h"
 
 #include "inlines.h"
@@ -8,6 +6,8 @@
 #include "player.h"
 #include "plbonus.h"
 #include "plbonusinline.h"
+
+#include <platform.h>
 
 #include <ft/ft_0877.h>
 #include <ft/ft_0892.h>

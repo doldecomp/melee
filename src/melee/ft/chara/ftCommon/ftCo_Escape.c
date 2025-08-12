@@ -1,14 +1,14 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-
 #include "ftCo_Escape.h"
 
 #include "ftCo_ItemThrow.h"
 #include "math.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
@@ -16,6 +16,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/types.h"
 #include "ftSamus/ftSs_SpecialLw_1.h"
 #include "ftSamus/types.h"
@@ -25,7 +28,8 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 0992A8 */ static void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid, bool);
+/* 0992A8 */ static void ftCo_800992A8(Fighter_GObj* gobj, FtMotionId msid,
+                                       bool);
 /* 099314 */ static void ftCo_80099314(Fighter_GObj* gobj, FtMotionId msid,
                                        bool arg2);
 /* 099390 */ static void ftCo_80099390(Fighter_GObj* gobj, FtMotionId msid,

@@ -109,7 +109,8 @@ static inline u8 set_gm_804D6870_inline(void)
 {
     if ((HSD_PadCopyStatus->button & 0x40) &&
         (HSD_PadCopyStatus->button & 0x20) &&
-        (HSD_PadCopyStatus->button & 0x100)) {
+        (HSD_PadCopyStatus->button & 0x100))
+    {
         gm_804D6870 = 1;
     }
     return gm_804D6870;
@@ -236,7 +237,8 @@ void gm_801AF568_OnFrame(void)
         }
         if ((HSD_PadCopyStatus->button & 0x40) &&
             (HSD_PadCopyStatus->button & 0x20) &&
-            (HSD_PadCopyStatus->button & 0x200)) {
+            (HSD_PadCopyStatus->button & 0x200))
+        {
             gm_801A4B60();
         }
         return;

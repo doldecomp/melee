@@ -2,6 +2,7 @@
 #define GALE01_31E6CC
 
 #include <placeholder.h>
+
 #include <baselib/forward.h>
 
 /* 31E6CC */ void vi_8031E6CC_OnFrame(void);

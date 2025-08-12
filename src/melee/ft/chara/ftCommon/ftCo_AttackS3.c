@@ -1,13 +1,13 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftCo_AttackS3.h"
 
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Wait.h"
 #include "ftpickupitem.h"
 #include "math.h"
+
+#include <platform.h>
+
+#include "forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
-
 #include "ft/types.h"
+
+#include <baselib/forward.h>
 
 /* 14F418 */ void ftGl_Init_OnDeath(HSD_GObj* gobj);
 /* 14F440 */ void ftGl_Init_OnLoad(HSD_GObj* gobj);

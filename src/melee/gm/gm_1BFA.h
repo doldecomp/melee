@@ -2,6 +2,7 @@
 #define MELEE_GM_1BFA_H
 
 #include <placeholder.h>
+
 #include <melee/gm/forward.h>
 
 /* 1BFA6C */ void gm_801BFA6C(MinorScene*);

@@ -1,10 +1,6 @@
-#include <platform.h>
-
-#include "ftLink/forward.h"
-#include "it/forward.h"
-#include <baselib/forward.h>
-
 #include "ftLk_SpecialLw.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -16,9 +12,15 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftpickupitem.h"
+
+#include "ftLink/forward.h"
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/items/it_27CF.h"
 #include "lb/lb_00B0.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

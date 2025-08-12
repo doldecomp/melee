@@ -1,9 +1,9 @@
 #ifndef __GALE01_23EA2C
 #define __GALE01_23EA2C
 
-#include <placeholder.h>
-
 #include "mndiagram.h" // IWYU pragma: export
+
+#include <placeholder.h>
 
 struct mnDiagram_804A0750_t {
     char pad_0[0x1C];

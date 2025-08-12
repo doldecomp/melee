@@ -2,11 +2,11 @@
 
 #include <dolphin/card.h>
 #include <dolphin/vi.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/un/types.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobj.h>
 
 /* 4D6B30 */ u16 db_gameLaunchButtonState;
 /* 4D6B2C */ char** db_bonus_names;
@@ -19,11 +19,11 @@ int g_debugLevel = 1;
 char db_build_timestamp[] = "DATE Feb 13 2002  TIME 22:06:27";
 
 static struct {
-/*  +0 */ HSD_Pad current;
-/*  +4 */ HSD_Pad prev;
-/*  +8 */ HSD_Pad pressed;
-/*  +C */ HSD_Pad released;
-/* +10 */ HSD_Pad repeat;
+    /*  +0 */ HSD_Pad current;
+    /*  +4 */ HSD_Pad prev;
+    /*  +8 */ HSD_Pad pressed;
+    /*  +C */ HSD_Pad released;
+    /* +10 */ HSD_Pad repeat;
 } db_ButtonStates[4];
 
 extern unsigned char _stack_end[];

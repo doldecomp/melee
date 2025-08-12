@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "lb/lb_00B0.h"
+
+#include <placeholder.h>
 
 #include "sc/types.h" // IWYU pragma: keep
 

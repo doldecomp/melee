@@ -3,10 +3,9 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/mtx.h>
-
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <sysdolphin/baselib/mtx.h>
 #include <MSL/trigf.h>
 
 // functions

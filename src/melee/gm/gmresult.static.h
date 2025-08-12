@@ -2,9 +2,11 @@
 #define MELEE_GM_RESULT_STATIC_H
 
 #include <placeholder.h>
+
 #include "baselib/forward.h"
 #include "gm/forward.h"
 #include "sc/forward.h"
+
 #include <dolphin/mtx.h>
 
 struct ResultsPlayerData {
@@ -15,7 +17,8 @@ struct ResultsPlayerData {
     /* +08 */ HSD_GObj* fighter_gobj;
     /* +0C */ HSD_GObj* camera;
     /* +10 */ HSD_Text* stats_text[3][10]; ///< 3 pages with 10 entries?
-    // /* +10 */ HSD_Text* stats_x10[10]; ///< these text arrays are the scrollable stats
+    // /* +10 */ HSD_Text* stats_x10[10]; ///< these text arrays are the
+    // scrollable stats
     // /* +3C */ HSD_Text* stats_x3C[10];
     // /* +60 */ HSD_Text* stats_x60[10];
     /* +88 */ HSD_Text* ko_count;

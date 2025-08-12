@@ -1,11 +1,11 @@
-#include <platform.h>
-
 #include "ftMh_Entry.h"
 
 #include "ftMh_Damage_0.h"
 #include "ftMh_Wait1_2.h"
 #include "math.h"
 #include "types.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ft/fighter.h"

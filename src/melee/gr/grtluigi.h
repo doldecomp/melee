@@ -3,12 +3,11 @@
 
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 /* 221C10 */ void grTLuigi_80221C10(bool);
 /* 221C14 */ void grTLuigi_80221C14(void);

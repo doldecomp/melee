@@ -14,7 +14,7 @@
 
 s32 mnInfo_80251A08(s32 arg0)
 {
-    switch (arg0) {                           /* irregular */
+    switch (arg0) { /* irregular */
     case 0x3E:
         return 0;
     case 0x34:
@@ -62,7 +62,8 @@ void mnInfo_80251F04(HSD_GObj* gobj, u32 idx, u32 arg2)
     if (data->right_column[idx] != NULL) {
         HSD_SisLib_803A5CC4(data->right_column[idx]);
     }
-    text = HSD_SisLib_803A5ACC(0, 0, -5.0f, (3.45f * idx) + -5.9f, 17.0f, 514.2857f, 142.85715f);
+    text = HSD_SisLib_803A5ACC(0, 0, -5.0f, (3.45f * idx) + -5.9f, 17.0f,
+                               514.2857f, 142.85715f);
     data->right_column[idx] = text;
     text->x24.x = 0.035f;
     text->x24.y = 0.035f;

@@ -47,13 +47,20 @@ static Vec3 const it_803B86C8 = { 0 };
 /* 2D1410 */ static bool itMarumine_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F7E78[] = {
-    { 0, itMarumine_UnkMotion0_Anim, itMarumine_UnkMotion0_Phys, itMarumine_UnkMotion0_Coll },
-    { 1, itMarumine_UnkMotion1_Anim, itMarumine_UnkMotion1_Phys, itMarumine_UnkMotion1_Coll },
-    { 2, itMarumine_UnkMotion2_Anim, itMarumine_UnkMotion2_Phys, itMarumine_UnkMotion2_Coll },
-    { 3, itMarumine_UnkMotion3_Anim, itMarumine_UnkMotion3_Phys, itMarumine_UnkMotion3_Coll },
-    { 4, itMarumine_UnkMotion4_Anim, itMarumine_UnkMotion4_Phys, itMarumine_UnkMotion4_Coll },
-    { 5, itMarumine_UnkMotion5_Anim, itMarumine_UnkMotion5_Phys, itMarumine_UnkMotion5_Coll },
-    { 6, itMarumine_UnkMotion6_Anim, itMarumine_UnkMotion6_Phys, itMarumine_UnkMotion6_Coll },
+    { 0, itMarumine_UnkMotion0_Anim, itMarumine_UnkMotion0_Phys,
+      itMarumine_UnkMotion0_Coll },
+    { 1, itMarumine_UnkMotion1_Anim, itMarumine_UnkMotion1_Phys,
+      itMarumine_UnkMotion1_Coll },
+    { 2, itMarumine_UnkMotion2_Anim, itMarumine_UnkMotion2_Phys,
+      itMarumine_UnkMotion2_Coll },
+    { 3, itMarumine_UnkMotion3_Anim, itMarumine_UnkMotion3_Phys,
+      itMarumine_UnkMotion3_Coll },
+    { 4, itMarumine_UnkMotion4_Anim, itMarumine_UnkMotion4_Phys,
+      itMarumine_UnkMotion4_Coll },
+    { 5, itMarumine_UnkMotion5_Anim, itMarumine_UnkMotion5_Phys,
+      itMarumine_UnkMotion5_Coll },
+    { 6, itMarumine_UnkMotion6_Anim, itMarumine_UnkMotion6_Phys,
+      itMarumine_UnkMotion6_Coll },
 };
 
 void it_802D09D0(Item_GObj* gobj)

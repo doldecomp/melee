@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftNs_SpecialLw.h"
 
 #include "ftNs_Init.h"
+
+#include <platform.h>
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"

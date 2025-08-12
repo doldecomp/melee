@@ -1,14 +1,14 @@
-#include <platform.h>
-
-#include "forward.h"
-#include "ftCommon/forward.h"
-
 #include "ftLg_SpecialLw.h"
 
 #include "types.h"
 
+#include <platform.h>
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
@@ -16,6 +16,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "lb/lbrefract.h"

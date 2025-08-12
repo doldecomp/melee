@@ -4,12 +4,11 @@
 
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 void grTPurin_80223160(bool);
 void grTPurin_80223164(void);

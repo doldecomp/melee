@@ -8,7 +8,7 @@ s32 ReadUARTN(u8*, u32);
 
 bool MSL_ConsoleIo_804D7080;
 
-int __read_console(u32 arg0, u8* buf, u32* n, void(*unused)(void))
+int __read_console(u32 arg0, u8* buf, u32* n, void (*unused)(void))
 {
     u8 _[8];
 
@@ -45,7 +45,7 @@ int __read_console(u32 arg0, u8* buf, u32* n, void(*unused)(void))
     return return_status;
 }
 
-int __write_console(u32 arg0, u8* buf, u32* n, void(*unused)(void))
+int __write_console(u32 arg0, u8* buf, u32* n, void (*unused)(void))
 {
     u8 _[8];
     s32 uart_status = 0;

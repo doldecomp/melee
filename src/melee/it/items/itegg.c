@@ -1,5 +1,3 @@
-#include <baselib/forward.h>
-
 #include "itegg.h"
 
 #include "ef/efsync.h"
@@ -8,6 +6,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+
+#include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 #include <baselib/random.h>
@@ -38,13 +38,17 @@
 /* 289678 */ static bool itEgg_UnkMotion4_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F5988[] = {
-    { -1, itEgg_UnkMotion0_Anim, itEgg_UnkMotion0_Phys, itEgg_UnkMotion0_Coll },
-    { -1, itEgg_UnkMotion3_Anim, itEgg_UnkMotion1_Phys, itEgg_UnkMotion1_Coll },
+    { -1, itEgg_UnkMotion0_Anim, itEgg_UnkMotion0_Phys,
+      itEgg_UnkMotion0_Coll },
+    { -1, itEgg_UnkMotion3_Anim, itEgg_UnkMotion1_Phys,
+      itEgg_UnkMotion1_Coll },
     { -1, itEgg_UnkMotion2_Anim, itEgg_UnkMotion2_Phys, NULL },
     { 0, itEgg_UnkMotion3_Anim, itEgg_UnkMotion3_Phys, itEgg_UnkMotion3_Coll },
-    { -1, itEgg_UnkMotion4_Anim, itEgg_UnkMotion4_Phys, itEgg_UnkMotion4_Coll },
+    { -1, itEgg_UnkMotion4_Anim, itEgg_UnkMotion4_Phys,
+      itEgg_UnkMotion4_Coll },
     { 1, itEgg_UnkMotion5_Anim, itEgg_UnkMotion5_Phys, itEgg_UnkMotion5_Coll },
-    { -1, itEgg_UnkMotion6_Anim, itEgg_UnkMotion6_Phys, itEgg_UnkMotion6_Coll },
+    { -1, itEgg_UnkMotion6_Anim, itEgg_UnkMotion6_Phys,
+      itEgg_UnkMotion6_Coll },
 };
 
 Item_GObj* it_80288C88(Item_GObj* gobj, Vec3* pos, Vec3* vel, float dir)

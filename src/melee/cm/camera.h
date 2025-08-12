@@ -1,13 +1,14 @@
 #ifndef GALE01_028B9C
 #define GALE01_028B9C
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "cm/forward.h"
-#include <baselib/forward.h>
 
 #include "dolphin/gx/GXStruct.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <baselib/cobj.h>

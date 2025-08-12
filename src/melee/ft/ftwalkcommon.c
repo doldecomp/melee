@@ -1,7 +1,3 @@
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include <baselib/forward.h>
-
 #include "ftwalkcommon.h"
 
 #include "fighter.h"
@@ -9,9 +5,16 @@
 #include "ftcommon.h"
 #include "math.h"
 
+#include "ft/forward.h"
+
 #include "ft/ftanim.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/types.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>

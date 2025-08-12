@@ -1,10 +1,10 @@
 #ifndef __GALE01_01D2BC
 #define __GALE01_01D2BC
 
-#include <platform.h>
-#include <placeholder.h>
-
 #include "lbsnap.h" // IWYU pragma: export
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "it/types.h"
 

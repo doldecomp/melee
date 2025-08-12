@@ -1,7 +1,4 @@
 #include "baselib/forward.h"
-#include "pl/forward.h"
-#include "sc/forward.h"
-#include "un/forward.h"
 
 #include "baselib/jobj.h"
 #include "baselib/memory.h"
@@ -16,8 +13,17 @@
 #include "lb/lbvector.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
+
+#include "pl/forward.h"
+
 #include "pl/player.h"
+
+#include "sc/forward.h"
+
 #include "sc/types.h"
+
+#include "un/forward.h"
+
 #include "un/types.h"
 #include "un/un_2FC9.h"
 

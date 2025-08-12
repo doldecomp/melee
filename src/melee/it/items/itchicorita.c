@@ -1,6 +1,6 @@
-#include "it/forward.h"
-
 #include "itchicorita.h"
+
+#include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -11,9 +11,12 @@
 #include "it/items/itchicoritaleaf.h"
 
 ItemStateTable it_803F7A98[] = {
-    { 0, itChicorita_UnkMotion0_Anim, itChicorita_UnkMotion0_Phys, itChicorita_UnkMotion0_Coll },
-    { 1, itChicorita_UnkMotion1_Anim, itChicorita_UnkMotion1_Phys, itChicorita_UnkMotion1_Coll },
-    { -1, itChicorita_UnkMotion2_Anim, itChicorita_UnkMotion2_Phys, itChicorita_UnkMotion2_Coll },
+    { 0, itChicorita_UnkMotion0_Anim, itChicorita_UnkMotion0_Phys,
+      itChicorita_UnkMotion0_Coll },
+    { 1, itChicorita_UnkMotion1_Anim, itChicorita_UnkMotion1_Phys,
+      itChicorita_UnkMotion1_Coll },
+    { -1, itChicorita_UnkMotion2_Anim, itChicorita_UnkMotion2_Phys,
+      itChicorita_UnkMotion2_Coll },
 };
 
 void it_802C9588(Item_GObj* item_gobj)

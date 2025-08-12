@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftKoopa/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 132A0C */ void ftKp_Init_OnDeath(HSD_GObj* gobj);
 /* 132A64 */ void ftKp_Init_UnkMotionStates3(HSD_GObj* gobj);

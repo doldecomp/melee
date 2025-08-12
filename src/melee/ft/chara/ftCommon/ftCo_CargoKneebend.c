@@ -1,11 +1,11 @@
-#include <platform.h>
-
 #include "ftCo_CargoKneebend.h"
 
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -1,6 +1,3 @@
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-
 #include "ftMr_Init.h"
 
 #include "ftMr_SpecialHi.h"
@@ -15,6 +12,10 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 
 MotionState ftMr_Init_MotionStateTable[ftMr_MS_SelfCount] = {

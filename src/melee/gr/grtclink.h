@@ -3,12 +3,11 @@
 
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 void grTCLink_8021FF44(bool);
 void grTCLink_8021FF48(void);

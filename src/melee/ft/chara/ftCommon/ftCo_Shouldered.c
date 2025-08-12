@@ -1,11 +1,9 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "lb/forward.h"
-
 #include "ftCo_Shouldered.h"
 
 #include "ftCo_Damage.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"
@@ -16,6 +14,9 @@
 #include "ft/types.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>

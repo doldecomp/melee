@@ -1,6 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
 #include "itsamusbomb.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 /// #it_802B4AC8
 

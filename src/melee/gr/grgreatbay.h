@@ -1,15 +1,14 @@
 #ifndef GALE01_1F423C
 #define GALE01_1F423C
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 /* 1F423C */ void grGreatBay_801F423C(bool);
 /* 1F4240 */ void grGreatBay_801F4240(void);

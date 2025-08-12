@@ -1,8 +1,8 @@
 #ifndef MELEE_PL_PL040D_H
 #define MELEE_PL_PL040D_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 /* 040DDC */ void pl_80040DDC(int);
 /* 040ED4 */ void pl_80040ED4(int, int, int, int, int, float);

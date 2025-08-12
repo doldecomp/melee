@@ -1,14 +1,12 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftCo_DownBound.h"
 
 #include "ftCo_09F7.h"
 #include "ftCo_Down.h"
 #include "ftCo_DownAttack.h"
 #include "ftCo_DownStand.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -21,6 +19,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 #include "ftSandbag/ftSb_Init.h"

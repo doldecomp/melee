@@ -1,9 +1,10 @@
 #ifndef MELEE_GM_GMTOU_H
 #define MELEE_GM_GMTOU_H
 
+#include "placeholder.h"
+
 #include "baselib/forward.h"
 #include "gm/forward.h"
-#include "placeholder.h"
 
 /* 19B8C4 */ void gm_8019B8C4_OnEnter(void*);
 /* 19B9C8 */ void gm_8019B9C8_OnLeave(void*);
@@ -13,7 +14,8 @@
 /* 19BF8C */ void fn_8019BF8C(HSD_GObj*);
 /* 19C048 */ void fn_8019C048(HSD_GObj*);
 /* 19C3EC */ void fn_8019C3EC(HSD_GObj*);
-/* 19C570 */ void fn_8019C570(HSD_GObj*); ///< updates visibility of char icons on the "press start" screen
+/* 19C570 */ void fn_8019C570(HSD_GObj*); ///< updates visibility of char icons
+                                          ///< on the "press start" screen
 /* 19C6AC */ void fn_8019C6AC(HSD_GObj*);
 /* 19C744 */ void fn_8019C744(HSD_GObj*);
 /* 19CA38 */ void fn_8019CA38(HSD_GObj*);

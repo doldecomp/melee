@@ -2,9 +2,10 @@
 #define GALE01_293D94
 
 #include "it/forward.h"
-#include <baselib/forward.h>
 
 #include "it/items/types.h"
+
+#include <baselib/forward.h>
 
 /* 293D94 */ void it_80293D94(Item_GObj* gobj);
 /* 293DCC */ int it_80293DCC(Item_GObj* gobj);

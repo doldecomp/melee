@@ -1,11 +1,11 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-
 #include "ftDk_HeavyWalk.h"
 
 #include "ftDk_HeavyFall.h"
 #include "ftDk_HeavyWait0.h"
+
+#include <platform.h>
+
+#include "ft/forward.h"
 
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"

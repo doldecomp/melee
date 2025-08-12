@@ -9,8 +9,10 @@
 #include "it/items/itkinoko.h"
 
 ItemStateTable it_803F6130[] = {
-    { 0, itDkinoko_UnkMotion0_Anim, itDkinoko_UnkMotion0_Phys, itDkinoko_UnkMotion0_Coll },
-    { 0, itDkinoko_UnkMotion1_Anim, itDkinoko_UnkMotion1_Phys, itDkinoko_UnkMotion1_Coll },
+    { 0, itDkinoko_UnkMotion0_Anim, itDkinoko_UnkMotion0_Phys,
+      itDkinoko_UnkMotion0_Coll },
+    { 0, itDkinoko_UnkMotion1_Anim, itDkinoko_UnkMotion1_Phys,
+      itDkinoko_UnkMotion1_Coll },
 };
 
 void it_3F14_Logic27_Spawned(Item_GObj* gobj)

@@ -1,13 +1,13 @@
 #ifndef GALE01_220F10
 #define GALE01_220F10
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
-#include <melee/it/forward.h>
-#include <melee/gr/forward.h>
 #include "lb/forward.h"
 #include <baselib/forward.h>
+#include <melee/gr/forward.h>
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -29,7 +29,8 @@
 /* 2211DC */ bool grTIceClimber_802211DC(Ground_GObj*);
 /* 2211E4 */ void grTIceClimber_802211E4(Ground_GObj*);
 /* 221204 */ void grTIceClimber_80221204(Ground_GObj*);
-/* 221208 */ void grTIceClimber_80221208(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
+/* 221208 */ void grTIceClimber_80221208(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                                         f32);
 /* 221288 */ void grTIceClimber_80221288(HSD_GObj*);
 /* 221354 */ DynamicsDesc* grTIceClimber_80221354(enum_t);
 /* 22135C */ bool grTIceClimber_8022135C(Vec3*, int, HSD_JObj*);

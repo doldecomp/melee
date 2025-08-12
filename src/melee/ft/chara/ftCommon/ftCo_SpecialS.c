@@ -1,16 +1,16 @@
-#include <platform.h>
-
-#include <baselib/forward.h>
-
 #include "ftCo_SpecialS.h"
 
 #include "math.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/types.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

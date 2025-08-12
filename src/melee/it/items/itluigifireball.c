@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "itluigifireball.h"
+
+#include <platform.h>
 
 #include "db/db.h"
 #include "ef/efasync.h"
@@ -23,7 +23,8 @@
 /* 2C0368 */ static bool itLuigifireball_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F75C0[] = {
-    { 0, itLuigifireball_UnkMotion0_Anim, itLuigifireball_UnkMotion0_Phys, itLuigifireball_UnkMotion0_Coll },
+    { 0, itLuigifireball_UnkMotion0_Anim, itLuigifireball_UnkMotion0_Phys,
+      itLuigifireball_UnkMotion0_Coll },
 };
 
 void it_802C01AC(Item_GObj* gobj, Vec3* pos, ItemKind kind, float facing_dir)

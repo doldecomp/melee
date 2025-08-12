@@ -1,5 +1,5 @@
-#include <stdio.h>
 #include <console_io.h>
+#include <stdio.h>
 
 FILE __files[3] = {
     {
@@ -21,9 +21,9 @@ FILE __files[3] = {
         0,
         0,
         0,
-        (unsigned char*)&(stdin)->char_buffer,
+        (unsigned char*) &(stdin)->char_buffer,
         1,
-        (unsigned char*)&(stdin)->char_buffer,
+        (unsigned char*) &(stdin)->char_buffer,
         0,
         0,
         0,
@@ -53,9 +53,9 @@ FILE __files[3] = {
         0,
         0,
         0,
-        (unsigned char*)&(stdout)->char_buffer,
+        (unsigned char*) &(stdout)->char_buffer,
         1,
-        (unsigned char*)&(stdout)->char_buffer,
+        (unsigned char*) &(stdout)->char_buffer,
         0,
         0,
         0,
@@ -85,9 +85,9 @@ FILE __files[3] = {
         0,
         0,
         0,
-        (unsigned char*)&(stderr)->char_buffer,
+        (unsigned char*) &(stderr)->char_buffer,
         1,
-        (unsigned char*)&(stderr)->char_buffer,
+        (unsigned char*) &(stderr)->char_buffer,
         0,
         0,
         0,
