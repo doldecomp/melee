@@ -1,17 +1,18 @@
 #ifndef GALE01_1601C4
 #define GALE01_1601C4
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
+#include "dolphin/gx/GXStruct.h"
+#include "dolphin/mtx.h"
+#include "dolphin/types.h"
 
 #include "ft/forward.h"
 #include "gm/forward.h"
 #include "mn/forward.h"
 #include "sc/forward.h"
 
-#include "dolphin/gx/GXStruct.h"
-#include "dolphin/mtx.h"
-#include "dolphin/types.h"
 #include <printf.h>
 
 struct lbl_8046B488_t;

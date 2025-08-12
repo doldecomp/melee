@@ -1,6 +1,7 @@
+#include "gm_16AE.h"
+
 #include "gm_16AE.static.h"
 
-#include "gm_16AE.h"
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 

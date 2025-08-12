@@ -1,4 +1,3 @@
-#include "gmvsmelee.static.h"
 #include "gmvsmelee.h"
 
 #include "gmvsmelee.static.h"
