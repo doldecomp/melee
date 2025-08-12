@@ -57,14 +57,9 @@ jobs:
             run_configure
             set -x
             set +e
-            grep --version
-            awk --version
             ninja
-            ninja diff
+            set -e
             grep -q '/^ERROR\b/' < <(ninja diff)
-            result="$?"
-            echo "result: $result"
-            exit "$result"
           ;;
           'diff')
             root='build/${{matrix.version}}'
