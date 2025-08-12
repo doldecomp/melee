@@ -1,5 +1,6 @@
 /// @todo this file needs to be named "grpstadium.c" for asserts, oops!
 #include "grstadium.h"
+
 #include "dolphin/gx/GXStruct.h"
 
 #include <sysdolphin/baselib/archive.h>
@@ -1793,12 +1794,12 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         temp_r3_3->x34.y = 1.0f;
         temp_r31->x1C->x49 = 1;
     }
-    sp28[1] = *(GXColor*)&grPs_803B7F8C[0];
-    sp28[2] = *(GXColor*)&grPs_803B7F8C[1];
+    sp28[1] = *(GXColor*) &grPs_803B7F8C[0];
+    sp28[2] = *(GXColor*) &grPs_803B7F8C[1];
     var_r28 = 0;
     var_r30_2 = 0;
-    sp28[3] = *(GXColor*)&grPs_803B7F8C[2];
-    sp28[4] = *(GXColor*)&grPs_803B7F8C[3];
+    sp28[3] = *(GXColor*) &grPs_803B7F8C[2];
+    sp28[4] = *(GXColor*) &grPs_803B7F8C[3];
     temp_r29 = sp28[var_r30].r;
     do {
         if (Player_GetPlayerSlotType(var_r30_2) != 3 &&
@@ -1826,7 +1827,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 }
                 sp28[0].g = (u8) (s32) var_f0_3;
                 sp28[0].b = 0xFF;
-                temp_r31->x1C->x30 = *(U8Vec4*)&sp28[0];
+                temp_r31->x1C->x30 = *(U8Vec4*) &sp28[0];
                 temp_r3_5 = gm_80160A60(var_r30_2);
                 if (temp_r3_5 != 0) {
                     HSD_SisLib_803A6B98(temp_r31->x1C, grPs_804DAF58,

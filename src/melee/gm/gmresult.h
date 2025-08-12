@@ -2,9 +2,12 @@
 #define MELEE_GM_RESULT_H
 
 #include <placeholder.h>
+
 #include "baselib/forward.h"
 #include "gm/forward.h"
+
 #include "gm/gmresult.static.h"
+
 #include "dolphin/gx/GXStruct.h"
 
 /* 174274 */ MatchEnd* fn_80174274(void);

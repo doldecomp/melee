@@ -395,14 +395,13 @@ union ftKb_MotionVars {
         /* fp+2340 */ int x0;
         /* fp+2344 */ int x4;
         /* fp+2348 */ int x8;
-        /* fp+234C */ int xC;   
-        /* fp+2350 */ int x10;     
-        /* fp+2354 */ int x14; 
+        /* fp+234C */ int xC;
+        /* fp+2350 */ int x10;
+        /* fp+2354 */ int x14;
         /* fp+2358 */ Vec3 x18;
-                                char pad1[0x60];
+        char pad1[0x60];
         /* fp+23C4 */ float xC4;
     } specialhi;
-
 };
 
 #endif

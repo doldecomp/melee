@@ -1,4 +1,5 @@
 #include "lbcardnew.static.h"
+
 #include "lbcardnew.h"
 
 #include <dolphin/card.h>
