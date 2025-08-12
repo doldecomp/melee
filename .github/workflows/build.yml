@@ -59,6 +59,7 @@ jobs:
             set +e
             ninja
             ninja diff | awk '/^ERROR\>/ { exit 1 }'
+            ninja diff
             result="$?"
             echo "result: $result"
             exit "$result"
