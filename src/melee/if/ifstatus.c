@@ -1,12 +1,16 @@
 #include "ifstatus.h"
 
 #include "ifall.h"
+#include "m2c_macros.h"
+#include "placeholder.h"
 
 #include "gm/gm_unsplit.h"
 #include "gm/types.h"
 #include "if/if_2F72.h"
 #include "if/ifstock.h"
 #include "if/types.h"
+#include "sc/types.h"
+#include "lb/lbarchive.h"
 #include "pl/player.h"
 
 #include <baselib/gobj.h>
@@ -37,7 +41,16 @@ typedef struct UnkX {
 
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
-/* 3F9628 */ static Thing_803F9628 ifStatus_803F9628;
+/* 3F9628 */ static Element_803F9628 ifStatus_803F9628[8] = {
+    { NULL, 0, if_802F74D0, 0x7C860U, 0x08000000U, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C857U, 0x0A000000U, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C855U, 0x08000000U, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, 0, 0, 0, 0 },
+};
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
 
@@ -538,16 +551,51 @@ void ifStatus_802F6E3C(s32 player_num)
 
 /// #ifStatus_802F7034
 
-/// #ifStatus_802F7134
+void ifStatus_802F7134(void)
+{
+    u32 _pad;
+    HSD_Archive** archive;
+    SceneDesc* desc;
+    PAD_STACK(20);
+
+    ifStatus_803F9628[0].x0 = NULL;
+    ifStatus_803F9628[0].x4 = 0;
+    ifStatus_803F9628[1].x0 = NULL;
+    ifStatus_803F9628[1].x4 = 0;
+    ifStatus_803F9628[2].x0 = NULL;
+    ifStatus_803F9628[2].x4 = 0;
+    ifStatus_803F9628[3].x0 = NULL;
+    ifStatus_803F9628[3].x4 = 0;
+    ifStatus_803F9628[4].x0 = NULL;
+    ifStatus_803F9628[4].x4 = 0;
+    ifStatus_803F9628[5].x0 = NULL;
+    ifStatus_803F9628[5].x4 = 0;
+    ifStatus_803F9628[6].x0 = NULL;
+    ifStatus_803F9628[6].x4 = 0;
+    ifStatus_803F9628[7].x0 = NULL;
+    ifStatus_803F9628[7].x4 = 0;
+
+    archive = ifAll_802F3690();
+    lbArchive_LoadSections(*archive, (void**) &desc, "ScInfCnt_scene_models", 0);
+
+    ifStatus_803F9628[0].x14 = M2C_FIELD(&desc, s32**, 0)[0];
+    ifStatus_803F9628[1].x14 = M2C_FIELD(&desc, s32**, 0)[1];
+    ifStatus_803F9628[2].x14 = M2C_FIELD(&desc, s32**, 0)[2];
+    ifStatus_803F9628[3].x14 = M2C_FIELD(&desc, s32**, 0)[3];
+    ifStatus_803F9628[4].x14 = M2C_FIELD(&desc, s32**, 0)[4];
+    ifStatus_803F9628[5].x14 = M2C_FIELD(&desc, s32**, 0)[5];
+    ifStatus_803F9628[6].x14 = M2C_FIELD(&desc, s32**, 0)[6];
+    ifStatus_803F9628[7].x14 = M2C_FIELD(&desc, s32**, 0)[7];
+}
 
 // free
 void ifStatus_802F7220(void)
 {
     s32 i;
     for (i = 0; i < 8; i++) {
-        if (ifStatus_803F9628.things[i].x0 != NULL) {
-            HSD_GObjPLink_80390228(ifStatus_803F9628.things[i].x0);
-            ifStatus_803F9628.things[i].x0 = NULL;
+        if (ifStatus_803F9628[i].x0 != NULL) {
+            HSD_GObjPLink_80390228(ifStatus_803F9628[i].x0);
+            ifStatus_803F9628[i].x0 = NULL;
         }
     }
 }
