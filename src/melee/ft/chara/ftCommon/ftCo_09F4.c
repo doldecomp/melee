@@ -4,9 +4,6 @@
 #include <platform.h>
 
 #include "ft/ftdevice.h"
-
-#include "ftCommon/forward.h"
-
 #include "gr/ground.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -69,15 +66,15 @@ void ftCo_8009F578(Fighter* fp)
 
 void ftCo_8009F5AC(Fighter* fp)
 {
-    ftDeviceUnk2* data = ftCo_800C0658(fp);
-    if (!data->x7C_b1) {
+    ColorOverlay* data = ftCo_800C0658(fp);
+    if (!data->x7C_flag2) {
         return;
     }
     if (fp->x2221_b3) {
         {
             Vec3 position;
-            float angle_yz = data->lobj_rot_yz * deg_to_rad;
-            float angle_x = data->lobj_rot_x * deg_to_rad *
+            float angle_yz = data->x78_light_rot_yz * deg_to_rad;
+            float angle_x = data->x74_light_rot_x * deg_to_rad *
                             HSD_JObjGetRotationY(GET_JOBJ(fp->gobj)) / M_PI_2;
             position.y = -sinf(-angle_yz);
             position.z = cosf(-angle_yz);
@@ -85,18 +82,18 @@ void ftCo_8009F5AC(Fighter* fp)
             position.z *= cosf(angle_x);
             HSD_LObjSetPosition(fp->x588, &position);
         }
-        if (data->x7C_b2) {
+        if (data->x7C_light_enable) {
             GXColor color = node0.color;
-            color.a = data->lobj_color.a;
+            color.a = data->x50_light_color.a;
             HSD_LObjSetColor(fp->x588, color);
             HSD_LObjSetFlags(fp->x588, LOBJ_ALPHA);
         } else {
-            HSD_LObjSetColor(fp->x588, data->lobj_color);
+            HSD_LObjSetColor(fp->x588, data->x50_light_color);
             HSD_LObjClearFlags(fp->x588, LOBJ_ALPHA);
         }
         fp->x2221_b3 = false;
     }
-    if (data->x7C_b2) {
+    if (data->x7C_light_enable) {
         HSD_LObj_803668EC(lobj0);
     } else {
         HSD_LObjSetCurrentAll(lobj1);
@@ -107,8 +104,8 @@ void ftCo_8009F5AC(Fighter* fp)
 
 void ftCo_8009F75C(Fighter* fp, bool set_alpha)
 {
-    ftDeviceUnk2* data = ftCo_800C0658(fp);
-    if (data->x7C_b1 && data->x7C_b2) {
+    ColorOverlay* data = ftCo_800C0658(fp);
+    if (data->x7C_flag2 && data->x7C_light_enable) {
         if (set_alpha) {
             HSD_LObjSetFlags(fp->x588, LOBJ_ALPHA);
         } else {
@@ -126,7 +123,7 @@ void ftCo_8009F75C(Fighter* fp, bool set_alpha)
 
 void ftCo_8009F7F8(Fighter* fp)
 {
-    if (ftCo_800C0658(fp)->x7C_b1) {
+    if (ftCo_800C0658(fp)->x7C_flag2) {
         HSD_LObj_803668EC(lobj0);
         HSD_LObjSetupInit(HSD_CObjGetCurrent());
     }

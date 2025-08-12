@@ -1161,7 +1161,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
     item_data->x524_cmd.x0 = 0.0f;
 }
 
-extern struct r13_ColAnimStruct* it_804D6D04;
+extern struct Fighter_804D653C_t* it_804D6D04;
 
 // Change item state
 void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
@@ -1203,7 +1203,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
     }
 
     if (!(flags & ITEM_COLANIM_PRESERVE) &&
-        it_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)
+        it_804D6D04[item_data->x548_colorOverlay.x28_colanim.i].unk5 != 0)
     {
         it_80279BBC(item_data);
     }

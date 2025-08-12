@@ -4703,7 +4703,7 @@ static ItCmd it_804D51C8[2] = {
 // static char it_804D51E8[];
 
 // s8 it_804D6D00; // Not sure of type
-struct r13_ColAnimStruct* it_804D6D04;
+struct Fighter_804D653C_t* it_804D6D04;
 // s32 it_804D6D08; // Not sure of type
 // s32 it_804D6D0C; // Not sure of type
 // u32 it_804D6D10; // Not sure of type
@@ -7906,7 +7906,7 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
     Vec3* var_r5;
     // Fighter_GObj* temp_r3_2;
     ColorOverlay* var_r4;
-    // ftDeviceUnk2* var_r4;
+    // ColorOverlay* var_r4;
     s32 temp_r3_4;
     s32 temp_r3_5;
     s32 temp_r3_6;

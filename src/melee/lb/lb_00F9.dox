@@ -30,7 +30,7 @@
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
 /* 014258 */ bool lb_80014258(HSD_GObj* gobj, UNK_T arg1, FtCmd cmd);
 /* 014498 */ void lb_80014498(UNK_T arg0);
-/* 0144C8 */ bool lb_800144C8(ftDeviceUnk2*, void*, s32, s32);
+/* 0144C8 */ bool lb_800144C8(ColorOverlay*, void*, s32, s32);
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8);
 /* 014638 */ UNK_T lb_80014638(void);

@@ -3,17 +3,23 @@
 
 #include <platform.h>
 
+struct lb_80011A50_t;
+
 typedef struct AbsorbDesc AbsorbDesc;
 typedef struct CollData CollData;
+typedef struct ColorOverlay ColorOverlay;
 typedef struct DynamicsDesc DynamicsDesc;
 typedef struct FigaTrack FigaTrack;
 typedef struct FigaTree FigaTree;
-typedef struct HSD_AllocEntry HSD_AllocEntry;
+typedef struct FighterHurtCapsule FighterHurtCapsule;
+typedef struct ColorOverlay_UnkInner ColorOverlay_UnkInner;
+typedef struct ftDeviceUnk2 ftDeviceUnk2;
 typedef struct HitCapsule HitCapsule;
 typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
+typedef struct HSD_AllocEntry HSD_AllocEntry;
 typedef struct HurtCapsule HurtCapsule;
-typedef struct FighterHurtCapsule FighterHurtCapsule;
+typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 typedef struct PreloadCache PreloadCache;
 typedef struct PreloadCacheScene PreloadCacheScene;
 typedef struct PreloadCacheSceneEntry PreloadCacheSceneEntry;
@@ -21,7 +27,6 @@ typedef struct PreloadEntry PreloadEntry;
 typedef struct ReflectDesc ReflectDesc;
 typedef struct ShieldDesc ShieldDesc;
 typedef struct Unk80433380_48 Unk80433380_48;
-typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 
 typedef enum HurtCapsuleState {
     HurtCapsule_Enabled,

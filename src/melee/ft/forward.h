@@ -25,8 +25,6 @@ typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftData ftData;
 typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
-typedef struct ftDeviceUnk1 ftDeviceUnk1;
-typedef struct ftDeviceUnk2 ftDeviceUnk2;
 typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
 typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
 typedef struct FtSFX FtSFX;
