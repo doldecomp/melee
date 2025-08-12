@@ -61,7 +61,7 @@ jobs:
 
             ninja
 
-            result=0
+            result="$?"
 
             ninja diff | while IFS= read -r line; do
                 echo "$line"
