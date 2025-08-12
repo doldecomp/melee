@@ -14,6 +14,7 @@
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
+#include "ft/ftcliffcommon.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"

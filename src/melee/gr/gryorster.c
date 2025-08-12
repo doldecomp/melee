@@ -159,15 +159,9 @@ void grYorster_80202254(HSD_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-void grYorster_802022A0(HSD_GObj* gobj)
-{
-    return;
-}
+void grYorster_802022A0(HSD_GObj* gobj) {}
 
-void grYorster_802022A4()
-{
-    return;
-}
+void grYorster_802022A4(void) {}
 
 /// #grYorster_80202428
 

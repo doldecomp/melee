@@ -1,13 +1,12 @@
+#include "lbcardnew.static.h"
 #include "lbcardnew.h"
 
-#include "lbcardnew.static.h"
-
 #include <dolphin/card.h>
-#include <melee/lb/lb_0192.h>
 #include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/hsd_3AA7.h>
 #include <sysdolphin/baselib/hsd_3B27.h>
+#include <sysdolphin/baselib/memory.h>
+#include <melee/lb/lb_0192.h>
 
 int lb_80019BB8(int arg0)
 {
@@ -237,7 +236,7 @@ int lb_8001A184(void)
     var_r25 = 0;
     lb_80432A68.x8AC = 0;
     temp_r3 = CARDProbeEx(lb_80432A68.chan, &lb_80432A68.memsize,
-            &lb_80432A68.sectorsize);
+                          &lb_80432A68.sectorsize);
     lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
     if (lb_80432A68.unk_34 == 0) {
         if (lb_80432A68.unk_10 != NULL) {
@@ -248,8 +247,8 @@ int lb_8001A184(void)
         }
         var_r26 = OSDisableInterrupts();
         var_r25 = 1;
-        temp_r3_2 = CARDMountAsync(lb_80432A68.chan,
-                lb_80432A68.work_area, NULL, fn_8001A008);
+        temp_r3_2 = CARDMountAsync(lb_80432A68.chan, lb_80432A68.work_area,
+                                   NULL, fn_8001A008);
 
         lb_80432A68.unk_34 = lb_80019BB8(temp_r3_2);
         if (temp_r3_2 == 0 || temp_r3_2 == -6 || temp_r3_2 == -0xD) {
@@ -330,7 +329,7 @@ int lb_8001A594(char* filename, void* arg1)
         lb_80432A68.unk_34 = 0xC;
     } else {
         temp_r3 = CARDFreeBlocks(lb_80432A68.chan, &lb_80432A68.unused_bytes,
-                &lb_80432A68.unused_files);
+                                 &lb_80432A68.unused_files);
 
         lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
         if (lb_80432A68.unk_34 == 0) {
@@ -338,15 +337,16 @@ int lb_8001A594(char* filename, void* arg1)
                 lb_80432A68.unk_34 = 7;
             } else {
                 temp_r24 = CARDOpen(lb_80432A68.chan, filename,
-                        &lb_80432A68.file_info);
+                                    &lb_80432A68.file_info);
                 CARDClose(&lb_80432A68.file_info);
                 if (lb_80432A68.lib_area == NULL) {
                     __assert("lbcardnew.c", 0x2C8, "_p(lib_area)");
                 }
-                hsd_803B24E4(&lb_80432A68.unk_A8, lb_80432A68.chan, 0x2000, lb_80432A68.lib_area);
+                hsd_803B24E4(&lb_80432A68.unk_A8, lb_80432A68.chan, 0x2000,
+                             lb_80432A68.lib_area);
                 if (temp_r24 == 0) {
                     temp_r3_2 = hsd_803B2550(&lb_80432A68.unk_A8, filename,
-                            fn_8001A0B0);
+                                             fn_8001A0B0);
 
                     lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3_2);
                     if (lb_80432A68.unk_34 == 0) {
@@ -363,12 +363,15 @@ int lb_8001A594(char* filename, void* arg1)
                     while (var_r25->unk0 != -1) {
                         if (var_r25->unk0 != 0) {
                             hsd_803AC3E0((void*) &lb_80432A68.unk_A8, i,
-                                var_r25->unk0, var_r25->unk4, var_r25->unk8);
+                                         var_r25->unk0, var_r25->unk4,
+                                         var_r25->unk8);
                         }
                         i++;
                         var_r25++;
                     }
-                    if (lb_80432A68.unused_bytes < (hsd_803B2674((void*) &lb_80432A68.unk_A8) << 0xD)) {
+                    if (lb_80432A68.unused_bytes <
+                        (hsd_803B2674((void*) &lb_80432A68.unk_A8) << 0xD))
+                    {
                         lb_80432A68.unk_34 = 5;
                     } else {
                         lb_80432A68.unk_34 = 4;
@@ -469,8 +472,8 @@ int lb_8001AAE4(const char* old_name, const char* new_name)
     var_r30 = 0;
     lb_80432A68.x8AC = 0;
     temp_r28 = OSDisableInterrupts();
-    temp_r3 = CARDRenameAsync(lb_80432A68.chan, old_name, new_name,
-            fn_8001A008);
+    temp_r3 =
+        CARDRenameAsync(lb_80432A68.chan, old_name, new_name, fn_8001A008);
     lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
@@ -489,9 +492,9 @@ int lb_8001AC04(UNK_T arg0)
     int temp_r3;
     int var_r3;
 
-    temp_r3 = hsd_803B286C(&lb_80432A68.unk_A8, arg0,
-            lb_80432A68.unk_14, lb_80432A68.unk_18,
-            lb_80432A68.unk_1C, fn_8001A0B0);
+    temp_r3 =
+        hsd_803B286C(&lb_80432A68.unk_A8, arg0, lb_80432A68.unk_14,
+                     lb_80432A68.unk_18, lb_80432A68.unk_1C, fn_8001A0B0);
     lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3);
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
@@ -517,14 +520,14 @@ int lb_8001ACEC(UNK_T arg0)
     volatile int sp14;
     volatile int sp10;
 
-    //var_r30 = arg0 + (0 * 0xC);
+    // var_r30 = arg0 + (0 * 0xC);
     lb_80432A68.unk_34 = 0;
     for (i = 0; i < 9; i++) {
         sp18 = lb_80432A68.xF4[i];
         sp10 = lb_80432A68.xD0[i];
         if (lb_80432A68.xF4[i] != 0) {
-            temp_r3 = hsd_803B29D8(&lb_80432A68.unk_A8, i,
-                    var_r30[i].unk8, fn_8001A0B0);
+            temp_r3 = hsd_803B29D8(&lb_80432A68.unk_A8, i, var_r30[i].unk8,
+                                   fn_8001A0B0);
             lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(temp_r3);
             lb_80432A68.unk_38[i].unk_4 = temp_r3;
             temp_r0 = lb_80432A68.unk_38[i].unk_0;
@@ -556,14 +559,14 @@ int lb_8001AE38(UNK_T arg0)
     volatile int sp14;
     volatile int sp10;
 
-    //var_r30 = arg0 + (0 * 0xC);
+    // var_r30 = arg0 + (0 * 0xC);
     lb_80432A68.unk_34 = 0;
     for (i = 0; i < 9; i++) {
         sp18 = lb_80432A68.xF4[i];
         sp10 = lb_80432A68.xD0[i];
         if (lb_80432A68.xF4[i] != 0) {
-            temp_r3 = hsd_803B2A4C(&lb_80432A68.unk_A8, i,
-                    var_r30[i].unk8, fn_8001A0B0);
+            temp_r3 = hsd_803B2A4C(&lb_80432A68.unk_A8, i, var_r30[i].unk8,
+                                   fn_8001A0B0);
             lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(temp_r3);
             lb_80432A68.unk_38[i].unk_4 = temp_r3;
             temp_r0 = lb_80432A68.unk_38[i].unk_0;
@@ -582,9 +585,9 @@ int lb_8001AE38(UNK_T arg0)
 
 int lb_8001AF84(void)
 {
-    int temp_r3 = hsd_803B2928(&lb_80432A68.unk_A8,
-            lb_80432A68.unk_14, lb_80432A68.unk_18,
-            lb_80432A68.unk_1C, fn_8001A0B0);
+    int temp_r3 =
+        hsd_803B2928(&lb_80432A68.unk_A8, lb_80432A68.unk_14,
+                     lb_80432A68.unk_18, lb_80432A68.unk_1C, fn_8001A0B0);
 
     lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3);
 
@@ -599,9 +602,9 @@ int lb_8001AF84(void)
 
 int lb_8001B068(void)
 {
-    int temp_r3 = hsd_803B27F4(&lb_80432A68.unk_A8,
-            lb_80432A68.unk_14, lb_80432A68.unk_18,
-            lb_80432A68.unk_1C, fn_8001A0B0);
+    int temp_r3 =
+        hsd_803B27F4(&lb_80432A68.unk_A8, lb_80432A68.unk_14,
+                     lb_80432A68.unk_18, lb_80432A68.unk_1C, fn_8001A0B0);
 
     lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3);
 
@@ -616,7 +619,7 @@ int lb_8001B068(void)
 
 // UnclePunch map calls this "MemoryCard_ScanForSnapshots"
 // Stubbing it out for now
-int lb_8001B14C()
+int lb_8001B14C(void)
 {
     lb_80432A68.unk_34 = 0;
     return lb_80432A68.unk_34;
@@ -633,7 +636,8 @@ loop_1:
     if (CARDGetStatus(lb_80432A68.chan, fileno, &spC) == 0 &&
         strncmp((const char*) spC.company, lb_80432A68.x2C, 2) == 0 &&
         strncmp((const char*) spC.gameName, lb_80432A68.x2F, 4) == 0 &&
-        strcmp(spC.fileName, arg0) == 0) {
+        strcmp(spC.fileName, arg0) == 0)
+    {
         lb_80432A68.unk_34 = 0;
     } else {
         fileno += 1;
@@ -757,7 +761,8 @@ int lb_8001BA44(int arg0, const char* arg1, UNK_T arg2)
     return var_r3;
 }
 
-int lb_8001BB48(int arg0, char* arg1, void* arg2, void* arg3, const char* arg4, int arg5, int arg6, UNK_T arg7)
+int lb_8001BB48(int arg0, char* arg1, void* arg2, void* arg3, const char* arg4,
+                int arg5, int arg6, UNK_T arg7)
 {
     lb_80019EF0(arg0, arg3, arg7, 0);
     setup_task(0, 0x10000);
@@ -771,7 +776,8 @@ int lb_8001BB48(int arg0, char* arg1, void* arg2, void* arg3, const char* arg4, 
     return lb_80019CB0(0x10);
 }
 
-int lb_8001BC18(int arg0, char* arg1, void** arg2, void* arg3, const char* arg4, int arg5, int arg6, UNK_T arg7)
+int lb_8001BC18(int arg0, char* arg1, void** arg2, void* arg3,
+                const char* arg4, int arg5, int arg6, UNK_T arg7)
 {
     s32 var_r3 = lb_8001BB48(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
     if (var_r3 == 0xB) {
@@ -807,7 +813,8 @@ int lb_8001BD34(int chan, const char* arg1, UNK_T arg2, UNK_T arg3)
     return var_r3;
 }
 
-int lb_8001BE30(int arg0, const char* arg1, UNK_T arg2, const char* arg3, int arg4, int arg5, UNK_T arg6, UNK_T arg7)
+int lb_8001BE30(int arg0, const char* arg1, UNK_T arg2, const char* arg3,
+                int arg4, int arg5, UNK_T arg6, UNK_T arg7)
 {
     lb_80019EF0(arg0, 0, arg6, arg7);
     setup_task(0, 0x10000);
@@ -822,7 +829,8 @@ int lb_8001BE30(int arg0, const char* arg1, UNK_T arg2, const char* arg3, int ar
     return lb_80019CB0(0x10);
 }
 
-int lb_8001BF04(int arg0, char* arg1, void* arg2, const char* arg3, int arg4, int arg5, UNK_T arg6)
+int lb_8001BF04(int arg0, char* arg1, void* arg2, const char* arg3, int arg4,
+                int arg5, UNK_T arg6)
 {
     lb_80019EF0(arg0, 0, arg6, 0);
     setup_task(0, 0x10000);
@@ -860,7 +868,8 @@ int lb_8001BFD8(int arg0, UNK_T arg1, UNK_T arg2, UNK_T arg3)
     return var_r3;
 }
 
-int lb_8001C0F4(int arg0, const char* arg1, const char* arg2, const char* arg3, UNK_T arg4)
+int lb_8001C0F4(int arg0, const char* arg1, const char* arg2, const char* arg3,
+                UNK_T arg4)
 {
     struct CardTask* task;
 
@@ -947,8 +956,8 @@ void lb_8001C4A8(void* arg0, void* arg1)
     i = 0;
     while (var_r30->unk0 != -1) {
         if (var_r30->unk0 != 0) {
-            hsd_803AC3E0((struct hsd_803AC3E0_arg0_t*) &lb_80432A68.unk_A8,
-                    i, var_r30->unk0, var_r30->unk4, var_r30->unk8);
+            hsd_803AC3E0((struct hsd_803AC3E0_arg0_t*) &lb_80432A68.unk_A8, i,
+                         var_r30->unk0, var_r30->unk4, var_r30->unk8);
         }
         i++;
         var_r30++;

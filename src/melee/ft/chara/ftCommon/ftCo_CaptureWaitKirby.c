@@ -83,7 +83,7 @@ static inline void inlineB0(ftCo_GObj* gobj)
     {
         fp->x670_timer_lstick_tilt_x = 254;
         if (fp->input.lstick.x < 0) {
-            ftKb_SpecialN_800F5A04(fp->victim_gobj);
+            ftKb_SpecialN_800F5A04(fp->victim_gobj, lstick_x);
         }
     }
 }
