@@ -58,7 +58,7 @@ jobs:
             set -x
             set +e
             ninja
-            ! ninja diff | grep -q '^ERROR'
+            ninja diff | awk '/^ERROR\b/ { exit 1 }'
             result="$?"
             echo "result: $result"
             exit "$result"
