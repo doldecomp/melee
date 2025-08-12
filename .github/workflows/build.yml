@@ -59,10 +59,16 @@ jobs:
             set +e
             ninja
 
+            result=0
+
             ninja diff | while IFS= read -r line; do
                 echo "$line"
-                case "$line" in *ERROR*) exit 1 ;; esac
+                if [[ "$line" =~ \<ERROR\> ]]; then
+                  result=1
+                fi
             done
+
+            exit "$result"
           ;;
           'diff')
             root='build/${{matrix.version}}'
