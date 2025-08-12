@@ -1,3 +1,7 @@
+#include <platform.h>
+
+#include "ftCommon/forward.h"
+
 #include "ft/fighter.h"
 
 #include "ft_07C1.h"
@@ -16,8 +20,6 @@
 #include "ftlib.h"
 #include "ftparts.h"
 
-#include <platform.h>
-
 #include "cm/camera.h"
 #include "db/db.h"
 #include "ef/efasync.h"
@@ -35,9 +37,6 @@
 #include "ft/ftmaterial.h"
 #include "ft/ftmetal.h"
 #include "ft/types.h"
-
-#include "ftCommon/forward.h"
-
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
 #include "ftCommon/ftCo_0C35.h"
@@ -2663,7 +2662,8 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
         hold_item_bool = 1;
     }
 
-    temp_bool = !((fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp)));
+    temp_bool =
+        !((fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp)));
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
@@ -3023,7 +3023,7 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
         fp->AbsorbAttr.x1A48_hitsTaken = 0;
         fp->x1960_vibrateMult = 1.0f;
         fp->x1964 = 0.0f;
-        fp->dmg.x1950 = 1;
+        fp->dmg.x1950 = 0;
 
         if (!fp->x2219_b6 || fp->dmg.x18F4) {
             ftCo_800C2FD8(gobj);
