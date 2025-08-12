@@ -55,10 +55,21 @@ jobs:
           'link')
             config_args="--map --require-protos $config_args"
             run_configure
+
             set +e
+
             ninja
-            set -e
-            ninja diff
+
+            result="$?"
+
+            while IFS= read -r line; do
+                echo "$line"
+                if [[ "$line" == *"ERROR"* ]]; then
+                  result=1
+                fi
+            done < <(ninja diff)
+
+            exit "$result"
           ;;
           'diff')
             root='build/${{matrix.version}}'

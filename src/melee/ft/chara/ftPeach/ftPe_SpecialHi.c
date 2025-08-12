@@ -229,17 +229,17 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftPe_DatAttrs* da = fp->dat_attrs;
-    float abs_lstick_x = fabs_inline(fp->input.lstick.x);
+    float abs_lstick_x = ABS(fp->input.lstick.x);
     if (!fp->cmd_vars[0] && abs_lstick_x > da->x7C) {
         float deg = da->x80 * ((abs_lstick_x - da->x7C) / (1.0 - da->x7C));
         float rad =
             fp->input.lstick.x > 0 ? -(deg * deg_to_rad) : +(deg * deg_to_rad);
-        float abs_lstick_angle = fabs_inline(fp->lstick_angle);
-        if (fabs_inline(rad) > abs_lstick_angle) {
+        float abs_lstick_angle = ABS(fp->lstick_angle);
+        if (ABS(rad) > abs_lstick_angle) {
             fp->lstick_angle = rad;
         }
     }
-    if (ftCheckThrowB3(fp) && fabs_inline(fp->input.lstick.x) > da->x78) {
+    if (ftCheckThrowB3(fp) && ABS(fp->input.lstick.x) > da->x78) {
         ftCommon_8007D9FC(fp);
         ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
     }

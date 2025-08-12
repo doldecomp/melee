@@ -26,7 +26,7 @@
 static void onAccessory4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HSD_JObj* jobj0 = fp->parts[ftParts_8007500C(fp, FtPart_TransN)].joint;
+    HSD_JObj* jobj0 = fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint;
     HSD_JObj* jobj1;
     if (fp->kind == FTKIND_LINK) {
         jobj1 = fp->parts[FtPart_L2ndNa].joint;
@@ -146,9 +146,9 @@ static void doColl(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1, 0, NULL);
 }
 
-void ftLk_SpecialHi_ProcessPartLThumbNb(HSD_GObj* gobj)
+Fighter_Part ftLk_SpecialHi_ProcessPartLThumbNb(HSD_GObj* gobj)
 {
-    ftParts_8007500C(GET_FIGHTER(gobj), FtPart_LThumbNb);
+    return ftParts_GetBoneIndex(GET_FIGHTER(gobj), FtPart_LThumbNb);
 }
 
 void ftLk_SpecialHi_GetPosWithAdjustedY(HSD_GObj* gobj, Vec3* pos)

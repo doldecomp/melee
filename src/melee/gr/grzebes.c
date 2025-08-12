@@ -1,10 +1,35 @@
+#include "grzebes.h"
+
 #include <platform.h>
 
 #include "gr/inlines.h"
 
-static s16 grZe_804D6998;
+/* 1D84A0 */ static void grZebes_801D84A0(bool arg);
+/* 1D8528 */ static void grZebes_801D8528(void);
+/* 1D8550 */ static bool grZebes_801D8550(void);
+/* 1D8814 */ static bool grZebes_801D8814(Ground_GObj* arg);
+/* 1D90FC */ static void grZebes_801D90FC(Ground_GObj* arg);
+/* 1D9254 */ static bool grZebes_801D9254(Ground_GObj* arg);
+/* 1D93D8 */ static void grZebes_801D93D8(Ground_GObj* arg);
+/* 1D9408 */ static bool grZebes_801D9408(Ground_GObj* arg);
+/* 1D94EC */ static void grZebes_801D94EC(Ground_GObj* arg);
+/* 1D94F0 */ static void fn_801D94F0(Ground_GObj* gobj);
+/* 1D95B0 */ static bool grZebes_801D95B0(Ground_GObj* arg);
+/* 1D9754 */ static void grZebes_801D9754(Ground_GObj* arg);
+/* 1D99D8 */ static bool grZebes_801D99D8(Ground_GObj* arg);
+/* 1D9F2C */ static void grZebes_801D9F2C(Ground_GObj* arg);
+/* 1D9F7C */ static bool grZebes_801D9F7C(Ground_GObj* arg);
+/* 1DA0C0 */ static void grZebes_801DA0C0(Ground_GObj* arg);
+/* 1DA3E8 */ static void grZebes_801DA3E8(void);
+/* 1DA9D8 */ static void fn_801DA9D8(UNK_T arg0, Ground* gp, float* y,
+                                     float z);
+/* 1DA9F0 */ static void fn_801DA9F0(UNK_T arg0, Ground* gp, float y,
+                                     float* x);
+/* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
+/* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
+/* 4D6998 */ static s16 grZe_804D6998;
 
-void grZebes_801D84A0(void) {}
+void grZebes_801D84A0(bool arg) {}
 
 /// #grZebes_801D84A4
 
@@ -21,36 +46,36 @@ bool grZebes_801D8550(void)
 
 /// #grZebes_801D8644
 
-bool grZebes_801D8814(void)
+bool grZebes_801D8814(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D881C
 
-void grZebes_801D90FC(void) {}
+void grZebes_801D90FC(Ground_GObj* arg) {}
 
 /// #grZebes_801D9100
 
-bool grZebes_801D9254(void)
+bool grZebes_801D9254(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D925C
 
-void grZebes_801D93D8(void) {}
+void grZebes_801D93D8(Ground_GObj* arg) {}
 
 /// #grZebes_801D93DC
 
-bool grZebes_801D9408(void)
+bool grZebes_801D9408(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D9410
 
-void grZebes_801D94EC(void) {}
+void grZebes_801D94EC(Ground_GObj* arg) {}
 
 void fn_801D94F0(Ground_GObj* gobj)
 {
@@ -59,38 +84,38 @@ void fn_801D94F0(Ground_GObj* gobj)
 
 /// #grZebes_801D9508
 
-bool grZebes_801D95B0(void)
+bool grZebes_801D95B0(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D95B8
 
-void grZebes_801D9754(void) {}
+void grZebes_801D9754(Ground_GObj* arg) {}
 
 /// #fn_801D9758
 
 /// #grZebes_801D9798
 
-bool grZebes_801D99D8(void)
+bool grZebes_801D99D8(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D99E0
 
-void grZebes_801D9F2C(void) {}
+void grZebes_801D9F2C(Ground_GObj* arg) {}
 
 /// #grZebes_801D9F30
 
-bool grZebes_801D9F7C(void)
+bool grZebes_801D9F7C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grZebes_801D9F84
 
-void grZebes_801DA0C0(void) {}
+void grZebes_801DA0C0(Ground_GObj* arg) {}
 
 /// #grZebes_801DA0C4
 
@@ -145,12 +170,12 @@ void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
 
 /// #fn_801DCBFC
 
-bool grZebes_801DCCB8(void)
+DynamicsDesc* grZebes_801DCCB8(enum_t arg)
 {
     return false;
 }
 
-bool grZebes_801DCCC0(void)
+bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

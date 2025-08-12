@@ -19,7 +19,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbtime.h>
-#include <melee/mn/mn_2295.h>
+#include <melee/mn/mnmain.h>
 #include <melee/sc/types.h>
 
 static StaticModelDesc gmTitle_80479B28;
@@ -30,7 +30,7 @@ Vec3 gmTitle_803DA4FC = { 0, 1330.0F, 130.0F };
 Vec3 gmTitle_803DA508 = { 0, -3, 0 };
 
 static HSD_CameraDescPerspective* gmTitle_804D6708;
-static HSD_LightDesc** gmTitle_804D670C;
+static LightList** gmTitle_804D670C;
 static HSD_FogDesc* gmTitle_804D6710;
 static int gmTitle_804D6714;
 static u32 gmTitle_804D6718;

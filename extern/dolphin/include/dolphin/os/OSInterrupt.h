@@ -8,9 +8,6 @@
 extern "C" {
 #endif
 
-typedef s16 __OSInterrupt;
-typedef u32 OSInterruptMask;
-
 #define __OS_INTERRUPT_MEM_0 0
 #define __OS_INTERRUPT_MEM_1 1
 #define __OS_INTERRUPT_MEM_2 2
@@ -101,9 +98,6 @@ typedef u32 OSInterruptMask;
      OS_INTERRUPTMASK_PI_ERROR | OS_INTERRUPTMASK_PI_VI |                     \
      OS_INTERRUPTMASK_PI_PE_TOKEN | OS_INTERRUPTMASK_PI_PE_FINISH |           \
      OS_INTERRUPTMASK_PI_DEBUG | OS_INTERRUPTMASK_PI_HSP)
-
-typedef void (*__OSInterruptHandler)(__OSInterrupt interrupt,
-                                     OSContext* context);
 
 extern volatile __OSInterrupt __OSLastInterrupt;
 extern volatile u32 __OSLastInterruptSrr0;

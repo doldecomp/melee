@@ -1,12 +1,14 @@
 #ifndef GALE01_2FC9B4
 #define GALE01_2FC9B4
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
+#include "un/types.h"
+
+#include <baselib/forward.h>
 #include <melee/mn/forward.h>
 #include <melee/un/forward.h>
-#include <baselib/forward.h>
 
 #include <baselib/video.h>
 
@@ -37,17 +39,17 @@
 /* 2FD90C */ void un_802FD90C(void);
 /* 2FD910 */ void un_802FD910(void);
 /* 2FD91C */ void un_802FD91C(void);
-/* 2FD928 */ void un_802FD928(unsigned char slot, int arg1, void* arg2);
+/* 2FD928 */ void un_802FD928(unsigned char slot, int arg1, GXColor* arg2);
 /* 2FD9D8 */ void un_802FD9D8(unsigned char slot);
 /* 2FDA4C */ void fn_802FDA4C(HSD_GObj* gobj, int pass);
 /* 2FDA78 */ void fn_802FDA78(HSD_GObj* gobj);
 /* 2FE260 */ void un_802FE260(void);
 /* 2FE390 */ void un_802FE390(void);
-/* 2FE3F8 */ UNK_RET un_802FE3F8(UNK_PARAMS);
+/* 2FE3F8 */ void un_802FE3F8(int a, int b, short* c, short* d);
 /* 2FE470 */ void fn_802FE470(HSD_GObj* gobj);
 /* 2FE6A8 */ void un_802FE6A8(void);
 /* 2FE8CC */ void un_802FE8CC(void);
-/* 2FE918 */ UNK_RET un_802FE918(UNK_PARAMS);
+/* 2FE918 */ void un_802FE918(int a, int b, int c);
 /* 2FEBE0 */ void un_802FEBE0_OnEnter(void* arg0);
 /* 2FED10 */ void un_802FED10_OnLeave(UNK_T);
 /* 2FED14 */ void fn_802FED14(HSD_GObj* gobj);
@@ -66,7 +68,7 @@
 /* 2FF710 */ void un_802FF710(void);
 /* 2FF78C */ HSD_GObj* un_802FF78C(void);
 /* 2FF7DC */ void un_802FF7DC(void);
-/* 2FF884 */ bool un_802FF884(void);
+/* 2FF884 */ bool un_802FF884(char*);
 /* 2FF88C */ int un_802FF88C(void);
 /* 2FF934 */ void un_802FF934(void);
 /* 2FF958 */ int un_802FF958(void);
@@ -78,7 +80,7 @@
 /* 2FFC6C */ bool un_802FFC6C(bool);
 /* 2FFCC8 */ bool fn_802FFCC8(void);
 /* 2FFCD0 */ UNK_RET un_802FFCD0(UNK_PARAMS);
-/* 2FFD94 */ void un_802FFD94(int a, int b, int c);
+/* 2FFD94 */ void un_802FFD94(int a, void* b, void* c);
 /* 2FFE0C */ int fn_802FFE0C(int);
 /* 2FFE6C */ bool fn_802FFE6C(bool);
 /* 2FFEA4 */ bool un_802FFEA4(bool);
@@ -93,8 +95,8 @@
 /* 300378 */ UNK_RET un_80300378(UNK_PARAMS);
 /* 3003C4 */ UNK_RET un_803003C4(UNK_PARAMS);
 /* 300410 */ UNK_RET un_80300410(UNK_PARAMS);
-/* 300480 */ UNK_RET un_80300480(UNK_PARAMS);
-/* 3004B4 */ UNK_RET un_803004B4(UNK_PARAMS);
+/* 300480 */ int un_80300480(int);
+/* 3004B4 */ int un_803004B4(int);
 /* 3004E8 */ UNK_RET un_803004E8(UNK_PARAMS);
 /* 30051C */ UNK_RET un_8030051C(UNK_PARAMS);
 /* 300550 */ UNK_RET un_80300550(UNK_PARAMS);
@@ -192,61 +194,7 @@
                                      u8 camera_priority);
 /* 3027A0 */ void DevText_AddToList(DevText** list, DevText* text);
 /* 302810 */ void DevText_Show(HSD_GObj* gobj, DevText* text);
-/* 302834 */ DevText* DevText_Create(int, int, int, int, int, char*);
-/* 3029B4 */ void DevText_EraseFirstLine(DevText* text);
-/* 302A3C */ void DevText_SetCursorXY(DevText* text, int x, int y);
-/* 302A88 */ void DevText_SetCursorX(DevText* text, int x);
-/* 302AB0 */ void DevText_HideCursor(DevText* text);
-/* 302AC0 */ void DevText_80302AC0(DevText* text);
-/* 302AD0 */ void DevText_ShowBackground(DevText* text);
-/* 302AE0 */ void DevText_HideBackground(DevText* text);
-/* 302AF0 */ void DevText_ShowText(DevText* text);
-/* 302B00 */ void DevText_HideText(DevText* text);
-/* 302B10 */ void DevText_SetScale(DevText* text, float x, float y);
-/* 302B1C */ void DevText_SetXY(DevText* text, int x, int y);
-/* 302B48 */ u8 DevText_StoreColorIndex(DevText* text, u8 index);
-/* 302B64 */ GXColor DevText_SetTextColor(DevText* text, GXColor color);
-/* 302B90 */ GXColor DevText_SetBGColor(DevText* text, GXColor color);
-/* 302BB0 */ void DevText_Erase(DevText* text);
-/* 302BE4 */ void DevText_Print(DevText* text, char* str);
-/* 302D0C */ void DevText_PrintInt(DevText* text, int num);
-/* 302D4C */ void DevText_Printf(DevText* text, char* format, ...);
-/* 302DF0 */ UNK_T un_80302DF0(void);
-/* 302DF8 */ void un_80302DF8(un_80302DF8_t* arg0, int arg1);
-/* 302E00 */ UNK_RET un_80302E00(UNK_PARAMS);
-/* 302EA4 */ UNK_RET un_80302EA4(UNK_PARAMS);
-/* 302FFC */ UNK_RET un_80302FFC(UNK_PARAMS);
-/* 303444 */ UNK_RET un_80303444(UNK_PARAMS);
-/* 303720 */ UNK_RET un_80303720(UNK_PARAMS);
-/* 3039A4 */ UNK_RET un_803039A4(UNK_PARAMS);
-/* 303AC4 */ UNK_RET un_80303AC4(UNK_PARAMS);
-/* 303EF4 */ UNK_RET fn_80303EF4(UNK_PARAMS);
-/* 303FD4 */ UNK_RET un_80303FD4(UNK_PARAMS);
-/* 304138 */ UNK_RET un_80304138(UNK_PARAMS);
-/* 304168 */ UNK_RET un_80304168(UNK_PARAMS);
-/* 304210 */ void un_80304210(void* arg0, int arg1, int arg2, int arg3,
-                              int arg4);
-/* 304334 */ void un_80304334(un_80304334_t* arg0);
-/* 304344 */ UNK_RET un_80304344(UNK_PARAMS);
-/* 304470 */ int un_80304470(void);
-/* 304510 */ UNK_RET un_80304510(UNK_PARAMS);
-/* 3045A0 */ int un_803045A0(void);
-/* 304690 */ int un_80304690(void);
-/* 304780 */ int un_80304780(void);
-/* 304870 */ UNK_RET un_80304870(UNK_PARAMS);
-/* 3048C0 */ bool un_803048C0(s32);
-/* 304924 */ UNK_RET un_80304924(UNK_PARAMS);
-/* 304988 */ UNK_RET un_80304988(UNK_PARAMS);
-/* 3049F4 */ UNK_RET un_803049F4(UNK_PARAMS);
-/* 304A58 */ void un_80304A58(s32);
-/* 304B0C */ UNK_RET un_80304B0C(UNK_PARAMS);
-/* 304B94 */ int un_80304B94(int);
-/* 304CC8 */ UNK_RET un_80304CC8(UNK_PARAMS);
-/* 304D30 */ UNK_RET un_80304D30(UNK_PARAMS);
-/* 3124BC */ void un_803124BC(void);
-/* 3127D4 */ void un_803127D4(void);
-/* 31C2CC */ UNK_RET un_8031C2CC(UNK_PARAMS);
-/* 31C454 */ UNK_RET un_8031C454(UNK_PARAMS);
+
 /* 4D6E6C */ extern void* un_804D6E6C;
 /* 4D6EF4 */ extern struct un_804D6EF4_t* un_804D6EF4;
 

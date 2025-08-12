@@ -1,8 +1,6 @@
-#include <placeholder.h>
-
-#include "lb/forward.h"
-
 #include "ftSeak/ftSk_SpecialS.h"
+
+#include <placeholder.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -17,15 +15,18 @@
 #include "ftNess/ftNs_AttackHi4.h"
 #include "ftSeak/ftSk_Init.h"
 #include "ftSeak/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itseakchain.h"
 #include "it/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
 
 #include <common_structs.h>
 #include <math.h>
 #include <math_ppc.h>
+#include <trigf.h>
 #include <baselib/jobj.h>
 
 /// @todo Fix common data struct
@@ -148,10 +149,10 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
             if ((fp->facing_dir == +1 && fp->fv.sk.lstick_delta.x > +0.3F) ||
                 (fp->facing_dir == -1 && fp->fv.sk.lstick_delta.x < -0.3F))
             {
-                ft_80088148(fp, flags, 127, 64);
+                ft_PlaySFX(fp, flags, 127, 64);
                 fp->mv.sk.specials.x8 = 6;
             } else if (fp->fv.sk.lstick_delta.y > 0.5F) {
-                ft_80088148(fp, flags, 127, 64);
+                ft_PlaySFX(fp, flags, 127, 64);
                 fp->mv.sk.specials.x8 = 12;
             }
         }
@@ -171,7 +172,7 @@ void ftSk_SpecialS_80110788(HSD_GObj* gobj)
                 (fp->facing_dir == -1 && fp->fv.sk.lstick_delta.x > +0.3F &&
                  fp->input.lstick.x > 0))
             {
-                ft_80088148(fp, flags, 127, 64);
+                ft_PlaySFX(fp, flags, 127, 64);
                 fp->mv.sk.specials.xC = 6;
             }
         }

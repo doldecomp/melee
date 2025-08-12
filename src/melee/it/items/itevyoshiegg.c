@@ -1,84 +1,86 @@
-#include <platform.h>
+#include "itevyoshiegg.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/it_26B1.h"
 
 /// #it_8029B0C8
 
-/// #it_8029B188
+/// #it_3F14_Logic42_Destroyed
 
-/// #it_8029B1AC
+/// #it_3F14_Logic42_Spawned
 
 /// #it_8029B1D8
 
-bool it_8029B230(void)
+bool itEvyoshiegg_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8029B238(void) {}
+void itEvyoshiegg_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_8029B23C
+/// #itEvyoshiegg_UnkMotion0_Coll
 
 /// #it_8029B268
 
-bool it_8029B290(void)
+bool itEvyoshiegg_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8029B298
+/// #itEvyoshiegg_UnkMotion1_Phys
 
-/// #it_8029B2C8
+/// #itEvyoshiegg_UnkMotion1_Coll
 
-/// #it_8029B2F4
+/// #it_3F14_Logic42_PickedUp
 
-bool it_8029B31C(void)
+bool itEvyoshiegg_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8029B324(void) {}
+void itEvyoshiegg_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_8029B328
+/// #it_3F14_Logic42_Dropped
 
-/// #it_8029B348
+/// #it_3F14_Logic42_Thrown
 
-/// #it_8029B370
+/// #itEvyoshiegg_UnkMotion3_Phys
 
-/// #it_8029B3BC
+/// #itEvyoshiegg_UnkMotion3_Coll
 
-/// #it_8029B400
+/// #itEvyoshiegg_UnkMotion5_Anim
 
-void it_8029B460(void) {}
+void itEvyoshiegg_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-bool it_8029B464(void)
+bool itEvyoshiegg_UnkMotion5_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_8029B46C
+/// #it_3F14_Logic42_DmgDealt
 
-/// #it_8029B4AC
+/// #it_3F14_Logic42_Clanked
 
-/// #it_8029B4EC
+/// #it_3F14_Logic42_HitShield
 
-/// #it_8029B52C
+/// #it_3F14_Logic42_Reflected
 
-/// #it_8029B56C
+/// #it_3F14_Logic42_DmgReceived
 
-/// #it_8029B670
+/// #it_3F14_Logic42_EnteredAir
 
-bool it_8029B698(void)
+bool itEvyoshiegg_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_8029B6A0(void) {}
+void itEvyoshiegg_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #it_8029B6A4
+/// #itEvyoshiegg_UnkMotion4_Coll
 
-void it_8029B6D8(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic42_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -435,5 +435,5 @@ void ftLk_800EB334(HSD_GObj* gobj)
         new_ground_vel = -fp->gr_vel;
     }
     fp->gr_vel = new_ground_vel;
-    ft_80088148(fp, 160106, 127, 64);
+    ft_PlaySFX(fp, 160106, 127, 64);
 }

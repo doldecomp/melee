@@ -11,8 +11,8 @@
 #include <melee/it/types.h>
 
 
-ItemStateTable it_803F7938[] = { { 0, it_802C744C, NULL, NULL },
-                                 { 1, it_802C744C, NULL, NULL } };
+ItemStateTable it_803F7938[] = { { 0, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL },
+                                 { 1, itGamewatchbreath_UnkMotion1_Anim, NULL, NULL } };
 
 HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
                       float dir)
@@ -43,7 +43,7 @@ HSD_GObj* it_802C720C(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     return NULL;
 }
 
-void it_802C7310(Item_GObj* item_gobj)
+void it_2725_Logic76_Destroyed(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
@@ -74,7 +74,7 @@ void it_802C73AC(Item_GObj* item_gobj)
     it_8026B73C(item_gobj);
 }
 
-void it_802C73CC(Item_GObj* item_gobj)
+void it_2725_Logic76_PickedUp(Item_GObj* item_gobj)
 {
     Item* temp_r3;
 
@@ -91,7 +91,7 @@ void it_802C7424(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-bool it_802C744C(Item_GObj* item_gobj)
+bool itGamewatchbreath_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     int pad[3];
     Item* item;
@@ -113,7 +113,7 @@ bool it_802C744C(Item_GObj* item_gobj)
     return false;
 }
 
-void it_802C74B8(Item_GObj* item_gobj, Item_GObj* ref_gobj)
+void it_2725_Logic76_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

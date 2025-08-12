@@ -1,36 +1,37 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itcrazyhandbomb.h"
 
 /// #it_802F0F6C
 
 /// #it_802F1030
 
-/// #it_802F1094
+/// #it_2725_Logic86_EvtUnk
 
-/// #it_802F10B4
+/// #it_2725_Logic86_DmgDealt
 
-/// #it_802F10D8
+/// #it_2725_Logic86_Reflected
 
 /// #it_802F10F8
 
-bool it_802F1168(void)
+bool itCrazyhandbomb_UnkMotion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802F1170
+/// #itCrazyhandbomb_UnkMotion0_Phys
 
-/// #it_802F1304
+/// #itCrazyhandbomb_UnkMotion0_Coll
 
 void it_802F1340(void) {}
 
 /// #it_802F1344
 
-/// #it_802F1384
+/// #itCrazyhandbomb_UnkMotion1_Anim
 
-void it_802F13A4(void) {}
+void itCrazyhandbomb_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-bool it_802F13A8(void)
+bool itCrazyhandbomb_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }

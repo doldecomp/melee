@@ -1,6 +1,10 @@
 #include "gmvsmelee.static.h"
 #include "gmvsmelee.h"
 
+#include "gmvsmelee.static.h"
+
+#include <melee/pl/forward.h>
+
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
@@ -14,24 +18,25 @@
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbtime.h>
 
-/* 4D6730 */ extern u8 gm_804D6730[6];
+/* 4D6730 */ static u8 gm_804D6730[6];
 
 VsModeData* gm_801A5244(void)
 {
     return &gmMainLib_804D3EE0->unk_590;
 }
 
-u8 *gm_801A5250(void)
+u8* gm_801A5250(void)
 {
     return gm_804D6730;
 }
 
-void gm_801A5258(u8 *n_ko, MatchEnd* match_end)
+void gm_801A5258(u8* n_ko, MatchEnd* match_end)
 {
     s32 i;
     for (i = 0; i < 6; i++) {
-        if (match_end->player_standings[i].slot_type == 0) {
-            n_ko[i] = lbTime_8000AF74((u32)n_ko[i], match_end->player_standings[i].x20);
+        if (match_end->player_standings[i].slot_type == Gm_PKind_Human) {
+            n_ko[i] = lbTime_8000AF74((u32) n_ko[i],
+                                      match_end->player_standings[i].x20);
         }
     }
 }
@@ -40,7 +45,7 @@ bool gm_801A52D0(MatchEnd* end_info)
 {
     s32 i;
     for (i = 0; i < 6; i++) {
-        if (end_info->player_standings[i].slot_type == 0) {
+        if (end_info->player_standings[i].slot_type == Gm_PKind_Human) {
             return true;
         }
     }
@@ -60,7 +65,9 @@ u8 gm_801A5360(MatchEnd* match_end)
         for (i = 0; i < 6; i++) {
             losers[i] =
                 match_end->player_standings[i].is_small_loser +
-                (match_end->team_standings[match_end->player_standings[i].team].is_small_loser << 8);
+                (match_end->team_standings[match_end->player_standings[i].team]
+                     .is_small_loser
+                 << 8);
         }
     } else {
         for (i = 0; i < 6; i++) {
@@ -69,7 +76,9 @@ u8 gm_801A5360(MatchEnd* match_end)
     }
 
     for (i = 0; i < 6; i++) {
-        if ((match_end->player_standings[i].slot_type == 0) && (losers[i] < loser)) {
+        if ((match_end->player_standings[i].slot_type == Gm_PKind_Human) &&
+            (losers[i] < loser))
+        {
             loser = losers[i];
             player = i;
         }
@@ -78,7 +87,7 @@ u8 gm_801A5360(MatchEnd* match_end)
     if (loser != 0xFFFF) {
         return player;
     }
-    __assert("gmvsmelee.c", 0xB2U, "0");
+    HSD_ASSERT(0xB2, 0);
     return 0;
 }
 
@@ -97,7 +106,6 @@ void gm_801A55EC_OnLoad(void)
 {
     memzero(&gm_804D6730, 6);
 }
-
 
 void gm_801A5614_OnUnload(void) {}
 
@@ -139,7 +147,7 @@ void gm_801A5754(MinorScene* minor_data, VsModeData* vs_data)
     gm_80167FC4(sss_data);
 }
 
-void gm_801A57A8(MinorScene* minor_data, VsModeData* vs_data, s32 id)
+void gm_801A57A8(MinorScene* minor_data, VsModeData* vs_data, u8 id)
 {
     SSSData* sss_data;
 
@@ -147,10 +155,10 @@ void gm_801A57A8(MinorScene* minor_data, VsModeData* vs_data, s32 id)
     if (sss_data->start_game != 0) {
         *vs_data = sss_data->data;
         lbAudioAx_80026F2C(0x18);
-        lbAudioAx_8002702C(8, lbAudioAx_80026EBC((u16)vs_data->data.rules.xE));
+        lbAudioAx_8002702C(8,
+                           lbAudioAx_80026EBC((u16) vs_data->data.rules.xE));
         lbAudioAx_80027168();
-    }
-    else {
+    } else {
         gm_SetScenePendingMinor(id);
     }
 }
@@ -172,7 +180,7 @@ void gm_801A583C(MinorScene* minor_data, VsModeData* vs_data,
     match_start_data->rules.x4_1 = 1;
 
     if (callback != NULL) {
-        callback(match_start_data,&vs_data->data);
+        callback(match_start_data, &vs_data->data);
     }
 
     for (i = 0; i < 6; ++i) {
@@ -181,7 +189,8 @@ void gm_801A583C(MinorScene* minor_data, VsModeData* vs_data,
 
     if (callback2 != NULL) {
         for (i = 0; i < 6; ++i) {
-            callback2(&match_start_data->players[i],&vs_data->data.players[i]);
+            callback2(&match_start_data->players[i],
+                      &vs_data->data.players[i]);
         }
     }
 
@@ -190,20 +199,26 @@ void gm_801A583C(MinorScene* minor_data, VsModeData* vs_data,
     gm_80168FC4();
 }
 
-void gm_801A5AF0(MinorScene* minor_data, u32 id, u32 id2)
+void gm_801A5AF0(MinorScene* minor_data, u8 id, u8 id2)
 {
     MatchExitInfo* match_exit_info = gm_801A4284(minor_data);
     int i;
 
     for (i = 0; i < 6; i++) {
-        if (match_exit_info->match_end.player_standings[i].slot_type == 0) {
-            gm_80162574(match_exit_info->match_end.player_standings[i].character_kind, match_exit_info->match_end.result);
+        if (match_exit_info->match_end.player_standings[i].slot_type ==
+            Gm_PKind_Human)
+        {
+            gm_80162574(
+                match_exit_info->match_end.player_standings[i].character_kind,
+                match_exit_info->match_end.result);
         }
     }
 
     if (gm_801A52D0(&match_exit_info->match_end)) {
-        gm_8016260C(match_exit_info->match_end.x5, match_exit_info->match_end.result);
-        gm_801628C4(match_exit_info->match_end.frame_count / 60, gm_80162800(&match_exit_info->match_end));
+        gm_8016260C(match_exit_info->match_end.x5,
+                    match_exit_info->match_end.result);
+        gm_801628C4(match_exit_info->match_end.frame_count / 60,
+                    gm_80162800(&match_exit_info->match_end));
     }
 
     if (!gm_80167140(&match_exit_info->match_end)) {
@@ -224,7 +239,7 @@ void gm_801A5C3C(MinorScene* minor_data, VsModeData* vs_data,
     match_start_data->rules = vs_data->data.rules;
 
     if (callback != NULL) {
-        callback(match_start_data,&vs_data->data);
+        callback(match_start_data, &vs_data->data);
     }
 
     for (i = 0; i < 6; ++i) {
@@ -233,7 +248,8 @@ void gm_801A5C3C(MinorScene* minor_data, VsModeData* vs_data,
 
     if (callback2 != NULL) {
         for (i = 0; i < 6; ++i) {
-            callback2(&match_start_data->players[i],&vs_data->data.players[i]);
+            callback2(&match_start_data->players[i],
+                      &vs_data->data.players[i]);
         }
     }
     gm_801B0348(match_start_data);
@@ -251,12 +267,12 @@ void gm_801A5EC8(MinorScene* minor_data)
 
 void gm_801A5F00(MinorScene* minor_data)
 {
-    struct MatchExitInfo2* exit_info = gm_801A427C(minor_data);
+    struct ResultsMatchInfo* exit_info = gm_801A427C(minor_data);
     gm_80177724(exit_info);
     exit_info->match_end = gm_80479D98.match_end;
 }
 
-void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, int next_scene)
+void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, u8 next_scene)
 {
     MatchEnd* match_end;
     u8* tmp = gm_804D6730;
@@ -273,8 +289,7 @@ void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, int next_scene)
     gm_801A5258(tmp, match_end);
 
     if (gm_801A52D0(match_end)) {
-        gm_801688AC(match_end);
-        gm_8016247C();
+        gm_8016247C(gm_801688AC(match_end));
         if (minor_data[1].idx != 0xFF) {
             gm_8016279C();
             unk_bool = false;
@@ -282,31 +297,20 @@ void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, int next_scene)
             unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
             if (unk != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
-                            (match_end->player_standings[idx].x3),
-                            idx,
-                            match_end->player_standings[idx].x4,
-                            unk,
-                            0);
+                            (match_end->player_standings[idx].x3), idx,
+                            match_end->player_standings[idx].x4, unk, 0);
                 gm_SetScenePendingMinor(0x80);
                 unk_bool = true;
-            }
-            else if ((unk = gm_80172D78()) != 0x21) {
+            } else if ((unk = gm_80172D78()) != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
-                            (match_end->player_standings[idx].x3),
-                            idx,
-                            match_end->player_standings[idx].x4,
-                            unk,
-                            0);
+                            (match_end->player_standings[idx].x3), idx,
+                            match_end->player_standings[idx].x4, unk, 0);
                 gm_SetScenePendingMinor(0x80);
                 unk_bool = true;
-            }
-            else if ((unk = gm_80172E74()) != 0x21) {
+            } else if ((unk = gm_80172E74()) != 0x21) {
                 gm_801736E8(match_end->player_standings[idx].character_kind,
-                            (match_end->player_standings[idx].x3),
-                            idx,
-                            match_end->player_standings[idx].x4,
-                            unk,
-                            0);
+                            (match_end->player_standings[idx].x3), idx,
+                            match_end->player_standings[idx].x4, unk, 0);
                 gm_SetScenePendingMinor(0x80);
                 unk_bool = true;
             }

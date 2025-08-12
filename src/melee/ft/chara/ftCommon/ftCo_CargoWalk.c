@@ -14,9 +14,9 @@
 
 #include <baselib/gobj.h>
 
-/* 09B6C8 */ static void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start);
+/* 09B6C8 */ static void ftCo_8009B6C8(Fighter_GObj* gobj, float anim_start);
 
-bool ftCo_8009B67C(ftCo_GObj* gobj)
+bool ftCo_8009B67C(Fighter_GObj* gobj)
 {
     if (ftWalkCommon_800DFC70(gobj)) {
         ftCo_8009B6C8(gobj, 0);
@@ -25,7 +25,7 @@ bool ftCo_8009B67C(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start)
+void ftCo_8009B6C8(Fighter_GObj* gobj, float anim_start)
 {
     u8 _[20] = { 0 };
     Fighter* fp = gobj->user_data;
@@ -37,12 +37,12 @@ void ftCo_8009B6C8(ftCo_GObj* gobj, float anim_start)
                   ftWalkCommon_GetWalkType(gobj) + ftCo_MS_ShoulderedWait);
 }
 
-void ftCo_CargoWalk_Anim(ftCo_GObj* gobj)
+void ftCo_CargoWalk_Anim(Fighter_GObj* gobj)
 {
     ftWalkCommon_800DFDDC(gobj);
 }
 
-void ftCo_CargoWalk_IASA(ftCo_GObj* gobj)
+void ftCo_CargoWalk_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_8009BF3C(gobj));
     RETURN_IF(ftCo_8009BB1C(gobj));

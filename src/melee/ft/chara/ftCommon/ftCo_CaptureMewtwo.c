@@ -13,11 +13,11 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-static inline void doEnter(ftCo_GObj* gobj, ftCo_GObj* victim_gobj,
+static inline void doEnter(Fighter_GObj* gobj, Fighter_GObj* victim_gobj,
                            FtMotionId msid, FtMotionId victim_msid)
 {
-    ftCo_Fighter* victim_fp = GET_FIGHTER(victim_gobj);
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* victim_fp = GET_FIGHTER(victim_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
@@ -36,12 +36,12 @@ static inline void doEnter(ftCo_GObj* gobj, ftCo_GObj* victim_gobj,
     ftCo_800BD0E8(gobj, victim_msid);
 }
 
-void ftCo_800BCF18(ftCo_GObj* gobj, ftCo_GObj* victim_gobj)
+void ftCo_800BCF18(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 {
     doEnter(gobj, victim_gobj, ftCo_MS_CaptureMewtwo, ftCo_MS_ThrownMewtwo);
 }
 
-void ftCo_800BD000(ftCo_GObj* gobj, ftCo_GObj* victim_gobj)
+void ftCo_800BD000(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 {
     doEnter(gobj, victim_gobj, ftCo_MS_CaptureMewtwoAir,
             ftCo_MS_ThrownMewtwoAir);

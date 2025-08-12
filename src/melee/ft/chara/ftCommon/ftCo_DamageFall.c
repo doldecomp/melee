@@ -26,45 +26,40 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 
-void ftCo_80090574(ftCo_GObj* gobj)
+void ftCo_80090574(Fighter_GObj* gobj)
 {
     ft_80081DD4(gobj);
 }
 
-static u16 calcShift(ftCommonData* fcp, f32 hitlag)
+static u16 calcShift(float hitlag_mul, FtMotionId msid, int dmg)
 {
-    return fcp->x168 * hitlag + fcp->x16C;
+    ftCommonData* fcp = p_ftCommonData;
+    return fcp->x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) + fcp->x16C;
 }
 
-void ftCo_80090594(ftCo_Fighter* fp, enum_t element, int dmg, FtMotionId msid,
+void ftCo_80090594(Fighter* fp, enum_t element, int dmg, FtMotionId msid,
                    GroundOrAir ground_or_air, float hitlag_mul)
 {
-    ftCo_Fighter* fp2 = fp;
-    ftCommonData* fCom;
     if (element == 10 || element == 12 || element == 6 || element == 7) {
         return;
     }
-    if (fp2->motion_id == ftCo_MS_DamageIce) {
+    if (fp->motion_id == ftCo_MS_DamageIce) {
         return;
     }
 
-    fCom = p_ftCommonData;
-    fp2->dmg.x18fa_model_shift_frames =
-        (u16) (fCom->x168 * ftCommon_CalcHitlag(dmg, msid, hitlag_mul) +
-               p_ftCommonData->x16C);
-    fp2->dmg.x18FC = 0;
+    fp->dmg.x18fa_model_shift_frames = calcShift(hitlag_mul, msid, dmg);
+    fp->dmg.x18FC = 0;
 
     if (element == 2) {
-        fp2->dmg.x18F8 = 2;
+        fp->dmg.x18F8 = 2;
     } else if (ground_or_air == GA_Air) {
-        fp2->dmg.x18F8 = 0;
+        fp->dmg.x18F8 = 0;
     } else {
-        fp2->dmg.x18F8 = 1;
-        fp2->dmg.x1900 = fp2->coll_data.floor.normal.x;
-        fp2->dmg.x1904 = fp2->coll_data.floor.normal.y;
+        fp->dmg.x18F8 = 1;
+        fp->dmg.x1900 = fp->coll_data.floor.normal.x;
+        fp->dmg.x1904 = fp->coll_data.floor.normal.y;
     }
-    // fp2->dmg.x18FD = (u8) ((Vec2*) (Fighter_804D6530 + (fp2->dmg.x18F8 *
-    // 2))[1]);
+    fp->dmg.x18FD = (u8) (u32) Fighter_804D6530[fp->dmg.x18F8 * 2 + 1];
 }
 
 Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)
@@ -88,7 +83,7 @@ Vec2* ftCo_80090690(Fighter* fp, Vec2* shift)
 void ftCo_80090718(Fighter* fp)
 {
     if (fp->dmg.x1908 != -1) {
-        ft_80088148(fp, fp->dmg.x1908, 127, 64);
+        ft_PlaySFX(fp, fp->dmg.x1908, 127, 64);
         fp->dmg.x1908 = -1;
     }
     if (fp->dmg.x190C != NULL) {
@@ -99,7 +94,7 @@ void ftCo_80090718(Fighter* fp)
 
 void ftCo_80090780(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4((Fighter*) fp);
     }
@@ -113,11 +108,11 @@ void ftCo_80090780(HSD_GObj* gobj)
     }
 }
 
-void ftCo_DamageFall_Anim(ftCo_GObj* gobj) {}
+void ftCo_DamageFall_Anim(Fighter_GObj* gobj) {}
 
 void ftCo_DamageFall_IASA(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (!ftCo_800C5240(gobj)) {
         RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
         RETURN_IF(ftCo_80095328(gobj, 0));
@@ -137,12 +132,12 @@ void ftCo_DamageFall_IASA(HSD_GObj* gobj)
     RETURN_IF(ftCo_800C5CD4(gobj));
 }
 
-void ftCo_DamageFall_Phys(ftCo_GObj* gobj)
+void ftCo_DamageFall_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftCo_DamageFall_Coll(ftCo_GObj* gobj)
+void ftCo_DamageFall_Coll(Fighter_GObj* gobj)
 {
     ft_8008370C(gobj, ftCo_80090984);
 }

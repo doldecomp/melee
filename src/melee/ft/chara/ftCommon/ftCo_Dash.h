@@ -5,11 +5,11 @@
 
 #include "ftCommon/forward.h"
 
-/* 0CA094 */ bool ftCo_Dash_CheckInput(ftCo_GObj* gobj);
-/* 0CA120 */ void ftCo_Dash_Enter(ftCo_GObj* gobj, int arg1);
-/* 0CA1F4 */ void ftCo_Dash_Anim(ftCo_GObj* gobj);
-/* 0CA230 */ void ftCo_Dash_IASA(ftCo_GObj* gobj);
-/* 0CA53C */ void ftCo_Dash_Phys(ftCo_GObj* gobj);
-/* 0CA5D0 */ void ftCo_Dash_Coll(ftCo_GObj* gobj);
+/* 0CA094 */ bool ftCo_Dash_CheckInput(Fighter_GObj* gobj);
+/* 0CA120 */ void ftCo_Dash_Enter(Fighter_GObj* gobj, int arg1);
+/* 0CA1F4 */ void ftCo_Dash_Anim(Fighter_GObj* gobj);
+/* 0CA230 */ void ftCo_Dash_IASA(Fighter_GObj* gobj);
+/* 0CA53C */ void ftCo_Dash_Phys(Fighter_GObj* gobj);
+/* 0CA5D0 */ void ftCo_Dash_Coll(Fighter_GObj* gobj);
 
 #endif

@@ -1,3 +1,5 @@
+#include "groldyoshi.h"
+
 #include <platform.h>
 
 #include "gr/grzakogenerator.h"
@@ -5,7 +7,7 @@
 
 #include <baselib/gobj.h>
 
-void grOldYoshi_8020E798(void) {}
+void grOldYoshi_8020E798(bool arg) {}
 
 /// #grOldYoshi_8020E79C
 
@@ -23,83 +25,83 @@ bool grOldYoshi_8020E84C(void)
 
 /// #grOldYoshi_8020E854
 
-void grOldYoshi_8020E93C(HSD_GObj* gobj)
+void grOldYoshi_8020E93C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grOldYoshi_8020E968(void)
+bool grOldYoshi_8020E968(Ground_GObj* arg)
 {
     return false;
 }
 
-void grOldYoshi_8020E970(void) {}
+void grOldYoshi_8020E970(Ground_GObj* arg) {}
 
-void grOldYoshi_8020E974(void) {}
+void grOldYoshi_8020E974(Ground_GObj* arg) {}
 
 /// #grOldYoshi_8020E978
 
-bool grOldYoshi_8020E9E0(void)
+bool grOldYoshi_8020E9E0(Ground_GObj* arg)
 {
     return false;
 }
 
-void grOldYoshi_8020E9E8(void) {}
+void grOldYoshi_8020E9E8(Ground_GObj* arg) {}
 
-void grOldYoshi_8020E9EC(void) {}
+void grOldYoshi_8020E9EC(Ground_GObj* arg) {}
 
 /// #grOldYoshi_8020E9F0
 
-bool grOldYoshi_8020EA5C(void)
+bool grOldYoshi_8020EA5C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grOldYoshi_8020EA64
 
-void grOldYoshi_8020EA88(void) {}
+void grOldYoshi_8020EA88(Ground_GObj* arg) {}
 
 /// #grOldYoshi_8020EA8C
 
-bool grOldYoshi_8020EAEC(void)
+bool grOldYoshi_8020EAEC(Ground_GObj* arg)
 {
     return false;
 }
 
-void grOldYoshi_8020EAF4(void) {}
+void grOldYoshi_8020EAF4(Ground_GObj* arg) {}
 
-void grOldYoshi_8020EAF8(void) {}
+void grOldYoshi_8020EAF8(Ground_GObj* arg) {}
 
 /// #grOldYoshi_8020EAFC
 
-bool grOldYoshi_8020EC08(void)
+bool grOldYoshi_8020EC08(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grOldYoshi_8020EC10
 
-void grOldYoshi_8020EFC8(void) {}
+void grOldYoshi_8020EFC8(Ground_GObj* arg) {}
 
 /// #grOldYoshi_8020EFCC
 
-bool grOldYoshi_8020F080(void)
+bool grOldYoshi_8020F080(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grOldYoshi_8020F088
 
-void grOldYoshi_8020F2A4(void) {}
+void grOldYoshi_8020F2A4(Ground_GObj* arg) {}
 
 /// #fn_8020F2A8
 
 /// #grOldYoshi_8020F31C
 
-bool grOldYoshi_8020F404(void)
+DynamicsDesc* grOldYoshi_8020F404(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 /// #grOldYoshi_8020F40C

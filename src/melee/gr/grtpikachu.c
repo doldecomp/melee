@@ -28,8 +28,8 @@ StageData grTPk_803E92CC = {
     "/GrTPk.dat",
     grTPikachu_80222E80,
     grTPikachu_80222E7C,
-    grTPikachu_80222EF0,
-    grTPikachu_80222EF4,
+    grTpikachu_UnkStage0_OnLoad,
+    grTpikachu_UnkStage0_OnStart,
     grTPikachu_80222F18,
     grTPikachu_80223150,
     grTPikachu_80223158,
@@ -55,12 +55,12 @@ void grTPikachu_80222E80(void)
     Ground_801C42AC();
 }
 
-void grTPikachu_80222EF0(void)
+void grTpikachu_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-void grTPikachu_80222EF4(void)
+void grTpikachu_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -100,28 +100,28 @@ HSD_GObj* grTPikachu_80222F20(int id)
     return gobj;
 }
 
-void grTPikachu_80223008(HSD_GObj* gobj)
+void grTPikachu_80223008(Ground_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grTPikachu_80223034(HSD_GObj* gobj)
+bool grTPikachu_80223034(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTPikachu_8022303C(HSD_GObj* gobj)
+void grTPikachu_8022303C(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTPikachu_80223040(HSD_GObj* gobj)
+void grTPikachu_80223040(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTPikachu_80223044(HSD_GObj* gobj)
+void grTPikachu_80223044(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
@@ -131,23 +131,23 @@ void grTPikachu_80223044(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grTPikachu_80223094(HSD_GObj* gobj)
+bool grTPikachu_80223094(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTPikachu_8022309C(HSD_GObj* gobj)
+void grTPikachu_8022309C(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-void grTPikachu_802230D0(HSD_GObj* gobj)
+void grTPikachu_802230D0(Ground_GObj* gobj)
 {
     return;
 }
 
-void grTPikachu_802230D4(HSD_GObj* gobj)
+void grTPikachu_802230D4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* joint = (HSD_JObj*) gobj->hsd_obj;
@@ -157,22 +157,22 @@ void grTPikachu_802230D4(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grTPikachu_80223124(HSD_GObj* gobj)
+bool grTPikachu_80223124(Ground_GObj* gobj)
 {
     return false;
 }
 
-void grTPikachu_8022312C(HSD_GObj* gobj)
+void grTPikachu_8022312C(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void grTPikachu_8022314C(HSD_GObj* gobj)
+void grTPikachu_8022314C(Ground_GObj* gobj)
 {
     return;
 }
 
-DynamicsDesc* grTPikachu_80223150(int unused)
+DynamicsDesc* grTPikachu_80223150(enum_t unused)
 {
     return NULL;
 }

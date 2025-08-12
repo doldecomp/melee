@@ -3,7 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/* 2C4434 */ static bool it_802C4434(void);
+/* 2C4434 */ static bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj);
 
 Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
 {
@@ -14,44 +14,44 @@ Fighter_GObj* it_802C3AF0(Item_GObj* arg0)
 
 /// #it_802C3BAC
 
-/// #it_802C3CBC
+/// #it_2725_Logic65_Destroyed
 
 /// #it_802C3D44
 
 /// #it_802C3D74
 
-/// #it_802C3E94
+/// #itZeldadinfire_UnkMotion0_Anim
 
-/// #it_802C40A4
+/// #itZeldadinfire_UnkMotion1_Anim
 
-/// #it_802C4208
+/// #itZeldadinfire_UnkMotion0_Phys
 
-void it_802C4364(Item_GObj* gobj)
+void itZeldadinfire_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-/// #it_802C437C
+/// #itZeldadinfire_UnkMotion0_Coll
 
-bool it_802C4434(void)
+bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802C443C
+/// #it_2725_Logic65_Reflected
 
-bool it_802C4550(Item_GObj* arg0)
+bool it_2725_Logic65_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802C4558(Item_GObj* arg0)
+bool it_2725_Logic65_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-void it_802C4560(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_2725_Logic65_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

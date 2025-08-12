@@ -1,15 +1,18 @@
 #include <platform.h>
 
-#include "ft/forward.h"
-#include "ftPopo/forward.h"
-
 #include "ef/eflib.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0892.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftNana/ftNn_Init.h"
+
+#include "ftPopo/forward.h"
+
 #include "ftPopo/ftPp_Init.h"
 #include "ftPopo/types.h"
 #include "pl/player.h"
@@ -17,6 +20,17 @@
 #include <common_structs.h>
 #include <dolphin/pad.h>
 #include <melee/ft/chara/ftPopo/ftPp_SpecialS.h>
+
+/* 12114C */ static void ftPp_SpecialS_8012114C(void* arg0);
+/* 121AC8 */ static void ftPp_SpecialHiThrow_0_IASA(Fighter_GObj* gobj);
+/* 121ACC */ static void ftPp_SpecialAirHiThrow_0_IASA(Fighter_GObj* gobj);
+/* 121EB0 */ static void ftPp_SpecialHiStart_1_IASA(Fighter_GObj* gobj);
+/* 121EB4 */ static void ftPp_SpecialAirHiStart_1_IASA(Fighter_GObj* gobj);
+/* 1221B0 */ static void ftPp_SpecialAirHiThrow_1_IASA(Fighter_GObj* gobj);
+/* 12248C */ static void ftPp_SpecialHiThrow2_IASA(Fighter_GObj* gobj);
+/* 122490 */ static void ftPp_SpecialAirHiThrow2_IASA(Fighter_GObj* gobj);
+/* 122B0C */ static void ftPp_SpecialLw_IASA(Fighter_GObj* gobj);
+/* 122B10 */ static void ftPp_SpecialAirLw_IASA(Fighter_GObj* gobj);
 
 static void setRefGObjFlagAndClear(Fighter* fp)
 {

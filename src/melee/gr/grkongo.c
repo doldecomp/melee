@@ -25,7 +25,7 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
-void grKongo_801D5490(HSD_GObj* arg0)
+void grKongo_801D5490(Ground_GObj* arg0)
 {
     Ground* temp_r31;
     PAD_STACK(8);
@@ -49,11 +49,11 @@ void grKongo_801D5490(HSD_GObj* arg0)
     Ground_801C2FE0(arg0);
 }
 
-s32 grKongo_801D5574(void)
+bool grKongo_801D5574(Ground_GObj* arg)
 {
     return 0;
 }
-void grKongo_801D557C(HSD_GObj* arg0)
+void grKongo_801D557C(Ground_GObj* arg0)
 {
     grKongo_801D7134(arg0, 0);
     grKongo_801D77E0(arg0, 0);
@@ -63,7 +63,7 @@ void grKongo_801D557C(HSD_GObj* arg0)
     mpLib_8005667C(4);
 }
 
-void grKongo_801D55D4(void)
+void grKongo_801D55D4(Ground_GObj* arg)
 {
     return;
 }
@@ -162,7 +162,7 @@ static inline s32 random_adder_f(f32 temp_f0, f32 temp_f2)
 #endif
 }
 
-void grKongo_801D55D8(HSD_GObj* arg0)
+void grKongo_801D55D8(Ground_GObj* arg0)
 {
     Vec3 sp14;
     Ground* temp_r31;
@@ -213,7 +213,7 @@ void grKongo_801D55D8(HSD_GObj* arg0)
 #endif
 }
 
-s32 grKongo_801D5774(void)
+bool grKongo_801D5774(Ground_GObj* arg)
 {
     return 0;
 }
@@ -256,7 +256,7 @@ static inline f32 tau_range(f32 a)
     return 0.0F;
 }
 
-void grKongo_801D577C(HSD_GObj* arg0)
+void grKongo_801D577C(Ground_GObj* arg0)
 {
     Ground* temp_r31 = arg0->user_data;
     HSD_JObj* temp_r30 = Ground_801C3FA4(arg0, 1);
@@ -447,24 +447,24 @@ block_124:
     }
 }
 
-void grKongo_801D5FA4(void) {}
+void grKongo_801D5FA4(Ground_GObj* arg) {}
 
-void grKongo_801D5FA8(HSD_GObj* arg0)
+void grKongo_801D5FA8(Ground_GObj* arg0)
 {
     Ground* temp_r3 = arg0->user_data;
     grAnime_801C8138(arg0, temp_r3->map_id, 0);
 }
 
-s32 grKongo_801D5FD4(void)
+bool grKongo_801D5FD4(Ground_GObj* arg)
 {
     return 0;
 }
 
-void grKongo_801D5FDC(void) {}
+void grKongo_801D5FDC(Ground_GObj* arg) {}
 
-void grKongo_801D5FE0(void) {}
+void grKongo_801D5FE0(Ground_GObj* arg) {}
 
-void grKongo_801D5FE4(HSD_GObj* arg0)
+void grKongo_801D5FE4(Ground_GObj* arg0)
 {
     Ground* temp_r31;
     PAD_STACK(8);
@@ -473,31 +473,31 @@ void grKongo_801D5FE4(HSD_GObj* arg0)
     temp_r31->x11_flags.b012 = 1;
 }
 
-s32 grKongo_801D6028(void)
+bool grKongo_801D6028(Ground_GObj* arg)
 {
     return 0;
 }
 
-void grKongo_801D6030(void) {}
+void grKongo_801D6030(Ground_GObj* arg) {}
 
-void grKongo_801D6034(void) {}
+void grKongo_801D6034(Ground_GObj* arg) {}
 
-void grKongo_801D6038(HSD_GObj* arg0)
+void grKongo_801D6038(Ground_GObj* arg0)
 {
     Ground* temp_r3 = arg0->user_data;
     grAnime_801C8138(arg0, temp_r3->map_id, 0);
 }
 
-s32 grKongo_801D6064(void)
+bool grKongo_801D6064(Ground_GObj* arg)
 {
     return 0;
 }
 
-void grKongo_801D606C(void) {}
+void grKongo_801D606C(Ground_GObj* arg) {}
 
-void grKongo_801D6070(void) {}
+void grKongo_801D6070(Ground_GObj* arg) {}
 
-void grKongo_801D6074(HSD_GObj* arg0)
+void grKongo_801D6074(Ground_GObj* arg0)
 {
     Ground* temp_r31;
     HSD_JObj* temp_r30;
@@ -520,12 +520,12 @@ void grKongo_801D6074(HSD_GObj* arg0)
     HSD_JObjSetTranslateX(temp_r30, temp_r31->gv.kongo.xCC);
 }
 
-s32 grKongo_801D6190(void)
+bool grKongo_801D6190(Ground_GObj* arg)
 {
     return 0;
 }
 
-void grKongo_801D6198(HSD_GObj* arg0)
+void grKongo_801D6198(Ground_GObj* arg0)
 {
     Ground* temp_r3;
     PAD_STACK(8);
@@ -582,7 +582,7 @@ void grKongo_801D6198(HSD_GObj* arg0)
     }
 }
 
-void grKongo_801D6378(void)
+void grKongo_801D6378(Ground_GObj* arg)
 {
     return;
 }
@@ -601,7 +601,7 @@ void grKongo_801D828C(HSD_GObj* gobj)
     }
 }
 
-void grKongo_801D637C(HSD_GObj* arg0)
+void grKongo_801D637C(Ground_GObj* arg0)
 {
     Ground* temp_r31;
     HSD_JObj* temp_r30;
@@ -621,12 +621,12 @@ void grKongo_801D637C(HSD_GObj* arg0)
     HSD_JObjSetTranslateX(temp_r30, temp_r31->gv.kongo.xCC);
 }
 
-s32 grKongo_801D64B4(void)
+bool grKongo_801D64B4(Ground_GObj* arg)
 {
     return 0;
 }
 
-void grKongo_801D64BC(HSD_GObj* arg0)
+void grKongo_801D64BC(Ground_GObj* arg0)
 {
     if ((grAnime_801C83D0(arg0, 0, 1) != 0) ||
         (grAnime_801C84A4(arg0, 0, 1) != 0))
@@ -635,14 +635,14 @@ void grKongo_801D64BC(HSD_GObj* arg0)
     }
 }
 
-void grKongo_801D6518(void)
+void grKongo_801D6518(Ground_GObj* arg)
 {
     return;
 }
 
 static const s32 grKg_803B7FD4[7] = { 7, 4, 8, 5, 9, 6, 0 };
 
-void grKongo_801D651C(HSD_GObj* gobj)
+void grKongo_801D651C(Ground_GObj* gobj)
 {
     Vec3 sp2C;
     s32 list[6];
@@ -667,7 +667,7 @@ void grKongo_801D651C(HSD_GObj* gobj)
     HSD_JObjSetTranslate(jobj, &sp2C);
 }
 
-s32 grKongo_801D6660(void)
+bool grKongo_801D6660(Ground_GObj* arg)
 {
     return 0;
 }
@@ -685,7 +685,7 @@ static inline float lbVector_Len_t(Vec3* vec)
     return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void grKongo_801D6668(HSD_GObj* arg0)
+void grKongo_801D6668(Ground_GObj* arg0)
 {
     Vec3 sp5C;
     Vec3 sp50;
@@ -768,7 +768,7 @@ void grKongo_801D6668(HSD_GObj* arg0)
     }
 }
 
-void grKongo_801D69AC(void) {}
+void grKongo_801D69AC(Ground_GObj* arg) {}
 
 typedef struct _struct_grKg_803E188C_0x18 {
     /* 0x00 */ s32 unk0;
@@ -1138,7 +1138,7 @@ void grKongo_801D7134(HSD_GObj* gobj, s32 arg1)
         HSD_JObjGetRotationZ(temp_f30_2, grKg_804D6984.unk0);
         HSD_JObjSetRotationZ(grKg_804D6984.unk0, var_f31);
         temp_f3 = var_f31 - temp_f30_2;
-        if (fabs_inline(temp_f3) > (deg_to_rad * grKg_804D6980->unkB0)) {
+        if (ABS(temp_f3) > (deg_to_rad * grKg_804D6980->unkB0)) {
             gp->gv.kongo2.xC8 = -temp_f3;
         }
     }
@@ -1258,7 +1258,7 @@ f32 grKongo_801D8314(void)
     return var_f31;
 }
 
-void grKongo_801D5238(void) {}
+void grKongo_801D5238(bool arg) {}
 
 void grKongo_801D523C(void)
 {
@@ -1292,7 +1292,7 @@ void grKongo_801D52FC(void)
     grZakoGenerator_801CAE04(0);
 }
 
-s32 grKongo_801D5338(void)
+bool grKongo_801D5338(void)
 {
     return 0;
 }
@@ -1439,7 +1439,7 @@ void fn_801D7E60(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
 
 /// #grKongo_801D8314
 
-bool grKongo_801D8444(void)
+DynamicsDesc* grKongo_801D8444(enum_t arg)
 {
     return false;
 }

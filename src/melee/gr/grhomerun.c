@@ -6,7 +6,7 @@
 #include "gr/ground.h"
 #include "gr/inlines.h"
 
-void grHomeRun_8021C750(void) {}
+void grHomeRun_8021C750(bool arg) {}
 
 /// #grHomeRun_8021C754
 
@@ -23,40 +23,40 @@ bool grHomeRun_8021C824(void)
 
 /// #grHomeRun_8021C914
 
-bool grHomeRun_8021CB10(void)
+bool grHomeRun_8021CB10(Ground_GObj* arg)
 {
     return false;
 }
 
-void grHomeRun_8021CB18(void) {}
+void grHomeRun_8021CB18(Ground_GObj* arg) {}
 
-void grHomeRun_8021CB1C(void) {}
+void grHomeRun_8021CB1C(Ground_GObj* arg) {}
 
 /// #grHomeRun_8021CB20
 
-bool grHomeRun_8021D678(void)
+bool grHomeRun_8021D678(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grHomeRun_8021D680
 
-void grHomeRun_8021DEB0(void) {}
+void grHomeRun_8021DEB0(Ground_GObj* arg) {}
 
 /// #grHomeRun_8021DEB4
 
-bool grHomeRun_8021DEE0(void)
+bool grHomeRun_8021DEE0(Ground_GObj* arg)
 {
     return false;
 }
 
-void grHomeRun_8021DEE8(void) {}
+void grHomeRun_8021DEE8(Ground_GObj* arg) {}
 
-void grHomeRun_8021DEEC(void) {}
+void grHomeRun_8021DEEC(Ground_GObj* arg) {}
 
 /// #grHomeRun_8021DEF0
 
-bool grHomeRun_8021DF48(void)
+bool grHomeRun_8021DF48(Ground_GObj* arg)
 {
     return false;
 }
@@ -65,24 +65,24 @@ bool grHomeRun_8021DF48(void)
 
 /// #grHomeRun_8021E008
 
-void grHomeRun_8021E038(HSD_GObj* gobj)
+void grHomeRun_8021E038(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grHomeRun_8021E064(void)
+bool grHomeRun_8021E064(Ground_GObj* arg)
 {
     return false;
 }
 
-void grHomeRun_8021E06C(void) {}
+void grHomeRun_8021E06C(Ground_GObj* arg) {}
 
-void grHomeRun_8021E070(void) {}
+void grHomeRun_8021E070(Ground_GObj* arg) {}
 
 /// #grHomeRun_8021E074
 
-bool grHomeRun_8021E0CC(void)
+bool grHomeRun_8021E0CC(Ground_GObj* arg)
 {
     return false;
 }
@@ -91,24 +91,24 @@ bool grHomeRun_8021E0CC(void)
 
 /// #grHomeRun_8021E18C
 
-void grHomeRun_8021E1BC(HSD_GObj* gobj)
+void grHomeRun_8021E1BC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grHomeRun_8021E1E8(void)
+bool grHomeRun_8021E1E8(Ground_GObj* arg)
 {
     return false;
 }
 
-void grHomeRun_8021E1F0(void) {}
+void grHomeRun_8021E1F0(Ground_GObj* arg) {}
 
-void grHomeRun_8021E1F4(void) {}
+void grHomeRun_8021E1F4(Ground_GObj* arg) {}
 
 /// #grHomeRun_8021E1F8
 
-bool grHomeRun_8021E250(void)
+bool grHomeRun_8021E250(Ground_GObj* arg)
 {
     return false;
 }
@@ -117,24 +117,24 @@ bool grHomeRun_8021E250(void)
 
 /// #grHomeRun_8021E310
 
-void grHomeRun_8021E340(HSD_GObj* gobj)
+void grHomeRun_8021E340(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grHomeRun_8021E36C(void)
+bool grHomeRun_8021E36C(Ground_GObj* arg)
 {
     return false;
 }
 
-void grHomeRun_8021E374(void) {}
+void grHomeRun_8021E374(Ground_GObj* arg) {}
 
-void grHomeRun_8021E378(void) {}
+void grHomeRun_8021E378(Ground_GObj* arg) {}
 
 /// #grHomeRun_8021E37C
 
-bool grHomeRun_8021E3D4(void)
+bool grHomeRun_8021E3D4(Ground_GObj* arg)
 {
     return false;
 }
@@ -143,20 +143,20 @@ bool grHomeRun_8021E3D4(void)
 
 /// #grHomeRun_8021E494
 
-void grHomeRun_8021E4C4(HSD_GObj* gobj)
+void grHomeRun_8021E4C4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, false);
 }
 
-bool grHomeRun_8021E4F0(void)
+bool grHomeRun_8021E4F0(Ground_GObj* arg)
 {
     return false;
 }
 
-void grHomeRun_8021E4F8(void) {}
+void grHomeRun_8021E4F8(Ground_GObj* arg) {}
 
-void grHomeRun_8021E4FC(void) {}
+void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 
 /// #grHomeRun_8021E500
 
@@ -216,7 +216,7 @@ void fn_8021EB10(HSD_GObj* target_cam_gobj)
 
 /// #grHomeRun_8021EDD4
 
-bool grHomeRun_8021EEB4(void)
+DynamicsDesc* grHomeRun_8021EEB4(enum_t arg)
 {
     return false;
 }

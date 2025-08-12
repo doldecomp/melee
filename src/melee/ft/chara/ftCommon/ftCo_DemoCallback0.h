@@ -3,6 +3,6 @@
 
 #include "ftCommon/forward.h"
 
-/* 0C6150 */ void ftCo_800C6150(ftCo_GObj* gobj);
+/* 0C6150 */ void ftCo_800C6150(Fighter_GObj* gobj);
 
 #endif

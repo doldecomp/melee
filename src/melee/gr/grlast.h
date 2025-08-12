@@ -7,11 +7,11 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/jobj.h>
 
-/* 21A620 */ static void grLast_8021A620(int);
+/* 21A620 */ static void grLast_8021A620(bool);
 /* 21A740 */ static void grLast_8021A740(void);
-/* 21A7C4 */ static void grLast_8021A7C4(void);
-/* 21A7C8 */ static void grLast_8021A7C8(void);
-/* 21A7EC */ static bool grLast_8021A7EC(UNK_PARAMS);
+/* 21A7C4 */ static void grLast_UnkStage0_OnLoad(void);
+/* 21A7C8 */ static void grLast_UnkStage0_OnStart(void);
+/* 21A7EC */ static bool grLast_8021A7EC(void);
 /* 21A7F4 */ static Ground_GObj* grLast_8021A7F4(int);
 /* 21A8E0 */ static void grLast_8021A8E0(Ground_GObj*);
 /* 21A90C */ static bool grLast_8021A90C(Ground_GObj*);
@@ -61,7 +61,7 @@
 /* 21C500 */ static void grLast_8021C500(Ground_GObj*);
 /* 21C640 */ static void grLast_8021C640(void);
 /* 21C6AC */ static void grLast_8021C6AC(void);
-/* 21C740 */ static DynamicsDesc* grLast_8021C740(int);
+/* 21C740 */ static DynamicsDesc* grLast_8021C740(enum_t);
 /* 21C748 */ static bool grLast_8021C748(Vec3*, int, HSD_JObj*);
 
 #endif

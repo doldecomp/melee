@@ -21,12 +21,12 @@
 
 #include <common_structs.h>
 
-/* 08B498 */ static void decideFighter(ftCo_GObj* gobj);
-/* 08B4D4 */ static void doEnter(ftCo_GObj* gobj);
+/* 08B498 */ static void decideFighter(Fighter_GObj* gobj);
+/* 08B4D4 */ static void doEnter(Fighter_GObj* gobj);
 
 bool ftCo_AttackDash_CheckInput(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A) {
         if (fp->item_gobj != NULL) {
             if (fp->input.held_inputs & HSD_PAD_LR ||
@@ -47,7 +47,7 @@ bool ftCo_AttackDash_CheckInput(HSD_GObj* gobj)
     return false;
 }
 
-static void decideFighter(ftCo_GObj* gobj)
+static void decideFighter(Fighter_GObj* gobj)
 {
     switch (GET_FIGHTER(gobj)->kind) {
     case FTKIND_KIRBY:
@@ -59,9 +59,9 @@ static void decideFighter(ftCo_GObj* gobj)
     }
 }
 
-static void doEnter(ftCo_GObj* gobj)
+static void doEnter(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
     Fighter_ChangeMotionState(gobj, ftCo_MS_AttackDash, Ft_MF_None, 0, 1, 0,
                               NULL);
@@ -69,7 +69,7 @@ static void doEnter(ftCo_GObj* gobj)
     fp->mv.co.attackdash.x0 = 0;
 }
 
-void ftCo_AttackDash_Anim(ftCo_GObj* gobj)
+void ftCo_AttackDash_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -82,9 +82,9 @@ void ftCo_AttackDash_SetMv0(HSD_GObj* gobj)
     GET_FIGHTER(gobj)->mv.co.attackdash.x0 = p_ftCommonData->x68;
 }
 
-void ftCo_AttackDash_IASA(ftCo_GObj* gobj)
+void ftCo_AttackDash_IASA(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!ftCo_800D8AE0(gobj) && fp->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
@@ -92,12 +92,12 @@ void ftCo_AttackDash_IASA(ftCo_GObj* gobj)
 
 void ftCo_AttackDash_Phys(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ft_80085030(gobj, p_ftCommonData->x50 * fp->co_attrs.gr_friction,
                 fp->facing_dir);
 }
 
-void ftCo_AttackDash_Coll(ftCo_GObj* gobj)
+void ftCo_AttackDash_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }

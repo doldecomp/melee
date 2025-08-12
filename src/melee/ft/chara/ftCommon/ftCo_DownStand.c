@@ -34,7 +34,7 @@ bool ftCo_800980BC(Fighter_GObj* gobj)
     return false;
 }
 
-void ftCo_80098160(ftCo_GObj* gobj, FtMotionId msid)
+void ftCo_80098160(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter_ChangeMotionState(gobj, msid, Ft_MF_None, 0, 1, 0, NULL);
 }
@@ -48,7 +48,7 @@ void ftCo_DownStand_Anim(Fighter_GObj* gobj)
 
 void ftCo_DownStand_IASA(HSD_GObj* gobj) {}
 
-void ftCo_DownStand_Phys(ftCo_GObj* gobj)
+void ftCo_DownStand_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }

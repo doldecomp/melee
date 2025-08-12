@@ -131,7 +131,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r26 = fighter + (0U * 0x4C);
             // phi_r30 = phi_r30;
             while (phi_r25 < (u8) fighter->hurt_capsules_len) {
-                if (lbColl_8000A584(phi_r26->hurt_capsules, 1, arg1,
+                if (lbColl_8000A584(&phi_r26->hurt_capsules[0].capsule, 1, arg1,
                                     ftCommon_8007F804(fighter),
                                     fighter->cur_pos.z) != 0)
                 {
@@ -146,7 +146,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r26 = fighter;
                 // phi_r30 = phi_r30;
                 while (phi_r25 < (u8) fighter->hurt_capsules_len) {
-                    if (lbColl_8000A244(phi_r26->hurt_capsules, arg1,
+                    if (lbColl_8000A244(&phi_r26->hurt_capsules[0].capsule, arg1,
                                         ftCommon_8007F804(fighter),
                                         fighter->cur_pos.z) != 0)
                     {
@@ -164,7 +164,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r26 = fighter;
                 // phi_r30 = phi_r30;
                 while (phi_r25 < fighter->hurt_capsules_len) {
-                    if (lbColl_8000A584(phi_r26->hurt_capsules, phi_r24, arg1,
+                    if (lbColl_8000A584(&phi_r26->hurt_capsules[0].capsule, phi_r24, arg1,
                                         ftCommon_8007F804(fighter),
                                         fighter->cur_pos.z) != 0)
                     {
@@ -421,7 +421,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
     if (fighter->x221F_b3 == 0 && ftLib_80086A8C(gobj)) {
         switch (Camera_80031060()) {
         case 1:
-            if (fighter->x2220_flag.b7) {
+            if (fighter->x2220_b7) {
                 fighter2 = gobj->user_data;
                 jobj = GET_JOBJ(gobj);
 

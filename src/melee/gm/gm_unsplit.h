@@ -11,18 +11,23 @@
 #ifndef MELEE_GM_UNSPLIT_H
 #define MELEE_GM_UNSPLIT_H
 
-#include <melee/gm/gm_1601.h>
-#include <melee/gm/gm_16AE.h>
-#include <melee/gm/gm_16F1.h>
-#include <melee/gm/gm_17C0.h>
-#include <melee/gm/gm_1832.h>
-#include <melee/gm/gm_18A5.h>
-#include <melee/gm/gm_19EF.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
-#include <melee/gm/gm_1AED.h>
-#include <melee/gm/gm_1B03.h>
-#include <melee/gm/gm_1BFA.h>
+#include <melee/gm/gm_1601.h> // IWYU pragma: export
+#include <melee/gm/gm_16AE.h> // IWYU pragma: export
+#include <melee/gm/gm_16F1.h> // IWYU pragma: export
+#include <melee/gm/gm_17AD.h> // IWYU pragma: export
+#include <melee/gm/gm_17BA.h> // IWYU pragma: export
+#include <melee/gm/gm_17C0.h> // IWYU pragma: export
+#include <melee/gm/gm_1832.h> // IWYU pragma: export
+#include <melee/gm/gm_18A5.h> // IWYU pragma: export
+#include <melee/gm/gm_19EF.h> // IWYU pragma: export
+#include <melee/gm/gm_1A36.h> // IWYU pragma: export
+#include <melee/gm/gm_1A3F.h> // IWYU pragma: export
+#include <melee/gm/gm_1A45.h> // IWYU pragma: export
+#include <melee/gm/gm_1A4C.h> // IWYU pragma: export
+#include <melee/gm/gm_1ADD.h> // IWYU pragma: export
+#include <melee/gm/gm_1AED.h> // IWYU pragma: export
+#include <melee/gm/gm_1B03.h> // IWYU pragma: export
+#include <melee/gm/gm_1BA8.h> // IWYU pragma: export
+#include <melee/gm/gm_1BFA.h> // IWYU pragma: export
 
 #endif

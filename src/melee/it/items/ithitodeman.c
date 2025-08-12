@@ -1,12 +1,14 @@
-#include <platform.h>
+#include "ithitodeman.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 
-/// #it_802D42C4
+/// #it_2725_Logic24_Spawned
 
 void it_802D43AC(void) {}
 
@@ -22,7 +24,7 @@ void it_802D43AC(void) {}
 
 /// #it_802D472C
 
-bool it_802D48A8(void)
+bool it_802D48A8(Item_GObj* gobj)
 {
     return false;
 }
@@ -31,11 +33,11 @@ bool it_802D48A8(void)
 
 /// #it_802D4990
 
-/// #it_802D49E8
+/// #itHitodeman_UnkMotion1_Anim
 
-/// #it_802D4B14
+/// #itHitodeman_UnkMotion1_Phys
 
-bool it_802D4B48(void)
+bool itHitodeman_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
@@ -44,15 +46,15 @@ void it_802D4B50(void) {}
 
 /// #it_802D4B54
 
-/// #it_802D4BB8
+/// #itHitodeman_UnkMotion2_Anim
 
-/// #it_802D4BDC
+/// #itHitodeman_UnkMotion2_Phys
 
-/// #it_802D4C4C
+/// #itHitodeman_UnkMotion2_Coll
 
 /// #it_802D4C74
 
-/// #it_802D4DE0
+/// #it_2725_Logic43_Spawned
 
 bool it_802D4EF4(Item_GObj* gobj)
 {
@@ -64,7 +66,7 @@ bool it_802D4EF4(Item_GObj* gobj)
 
 /// #it_802D4F28
 
-bool it_802D4F48(Item_GObj* arg0)
+bool it_2725_Logic43_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
@@ -83,9 +85,9 @@ void it_802D4F58(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802D4FFC
 
-void it_802D5044(void) {}
+void it_802D5044(Item_GObj* gobj) {}
 
-bool it_802D5048(void)
+bool it_802D5048(Item_GObj* gobj)
 {
     return false;
 }

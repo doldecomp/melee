@@ -82,7 +82,7 @@ void* grPu_803E6E20;
 
 struct HSD_ImageDesc grPu_803E7620 = { &grPu_803E6E20, 32, 32, 4, 0, 0, 0 };
 
-void grPura_80211CFC(int num) {}
+void grPura_80211CFC(bool num) {}
 
 /// #grPura_80211D00
 
@@ -173,39 +173,39 @@ HSD_GObj* grPura_80211E08(int gobj_id)
 }
 
 /// #grPura_80211EF0
-void grPura_80211EF0(HSD_GObj* arg0)
+void grPura_80211EF0(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80211F1C(HSD_GObj* arg0)
+bool grPura_80211F1C(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211F24(HSD_GObj* arg0) {}
+void grPura_80211F24(Ground_GObj* arg0) {}
 
-void grPura_80211F28(HSD_GObj* arg0) {}
+void grPura_80211F28(Ground_GObj* arg0) {}
 
 /// #grPura_80211F2C
-void grPura_80211F2C(HSD_GObj* arg0)
+void grPura_80211F2C(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80211F58(HSD_GObj* arg0)
+bool grPura_80211F58(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211F60(HSD_GObj* arg0) {}
+void grPura_80211F60(Ground_GObj* arg0) {}
 
-void grPura_80211F64(HSD_GObj* arg0) {}
+void grPura_80211F64(Ground_GObj* arg0) {}
 
 /// #grPura_80211F68
-void grPura_80211F68(HSD_GObj* arg0)
+void grPura_80211F68(Ground_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
@@ -215,12 +215,12 @@ void grPura_80211F68(HSD_GObj* arg0)
     grPura_80212FC0(arg0);
 }
 
-bool grPura_80211FD0(HSD_GObj* arg0)
+bool grPura_80211FD0(Ground_GObj* arg0)
 {
     return false;
 }
 
-void grPura_80211FD8(HSD_GObj* arg0)
+void grPura_80211FD8(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
@@ -229,10 +229,10 @@ void grPura_80211FD8(HSD_GObj* arg0)
     lb_800115F4();
 }
 
-void grPura_80212020(HSD_GObj* arg0) {}
+void grPura_80212020(Ground_GObj* arg0) {}
 
 /// #grPura_80212024
-void grPura_80212024(HSD_GObj* arg0)
+void grPura_80212024(Ground_GObj* arg0)
 {
     s16 uVar1;
     Ground* gp = GET_GROUND(arg0);
@@ -249,17 +249,17 @@ void grPura_80212024(HSD_GObj* arg0)
     gp->gv.pura.xC8 = 0;
 }
 
-bool grPura_802120D8(HSD_GObj* arg0)
+bool grPura_802120D8(Ground_GObj* arg0)
 {
     return false;
 }
 
 /// #grPura_802120E0
 
-void grPura_8021228C(HSD_GObj* arg0) {}
+void grPura_8021228C(Ground_GObj* arg0) {}
 
 /// #grPura_80212290
-void grPura_80212290(HSD_GObj* arg0)
+void grPura_80212290(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     HSD_JObj* jobj = arg0->hsd_obj;
@@ -271,13 +271,13 @@ void grPura_80212290(HSD_GObj* arg0)
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
-bool grPura_80212314(HSD_GObj* arg0)
+bool grPura_80212314(Ground_GObj* arg0)
 {
     return false;
 }
 
 /// #grPura_8021231C
-void grPura_8021231C(HSD_GObj* arg0)
+void grPura_8021231C(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     HSD_JObj* jobj = arg0->hsd_obj;
@@ -302,7 +302,7 @@ void grPura_8021231C(HSD_GObj* arg0)
     }
 }
 
-void grPura_802125EC(HSD_GObj* arg0) {}
+void grPura_802125EC(Ground_GObj* arg0) {}
 
 /// #grPura_802125F0
 void grPura_802125F0(HSD_GObj* arg0)
@@ -389,7 +389,7 @@ void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
     mpLib_800565DC(5);
 }
 
-DynamicsDesc* grPura_802130C0(int arg0)
+DynamicsDesc* grPura_802130C0(enum_t arg0)
 {
     return false;
 }

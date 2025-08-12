@@ -19,21 +19,21 @@
 ItemStateTable it_803F6818[] = {
     {
         0,
-        it_8029D094,
-        it_8029D24C,
-        it_8029D488,
+        itFoxillusion_UnkMotion0_Anim,
+        itFoxillusion_UnkMotion0_Phys,
+        itFoxillusion_UnkMotion0_Coll,
     },
     {
         1,
-        it_8029D490,
-        it_8029D554,
-        it_8029D790,
+        itFoxillusion_UnkMotion1_Anim,
+        itFoxillusion_UnkMotion1_Phys,
+        itFoxillusion_UnkMotion1_Coll,
     },
     {
         2,
-        it_8029D7EC,
-        it_8029D870,
-        it_8029D940,
+        itFoxillusion_UnkMotion2_Anim,
+        itFoxillusion_UnkMotion2_Phys,
+        itFoxillusion_UnkMotion2_Coll,
     },
 };
 
@@ -93,14 +93,14 @@ Item_GObj* it_8029CEB4(HSD_GObj* parent, Vec3* pos, ItemKind kind, f32 dir)
     return NULL;
 }
 
-bool it_8029CF8C(Item_GObj* item_gobj)
+bool it_2725_Logic14_DmgDealt(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xCA8 = 0;
     return false;
 }
 
-void it_8029CFA0(Item_GObj* item_gobj)
+void it_2725_Logic14_Destroyed(Item_GObj* item_gobj)
 {
     u8 _[4] = { 0 };
     Item* item = GET_ITEM(item_gobj);
@@ -132,7 +132,7 @@ void it_8029CFF0(Item_GObj* item_gobj)
     item->xDD4_itemVar.foxillusion.xDDC = NULL;
 }
 
-bool it_8029D094(Item_GObj* item_gobj)
+bool itFoxillusion_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
     Item* temp_r31;
     Item* item;
@@ -157,7 +157,7 @@ bool it_8029D094(Item_GObj* item_gobj)
     return false;
 }
 
-void it_8029D24C(Item_GObj* item_gobj)
+void itFoxillusion_UnkMotion0_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
@@ -177,17 +177,17 @@ void it_8029D24C(Item_GObj* item_gobj)
     }
 }
 
-bool it_8029D488(Item_GObj* arg0)
+bool itFoxillusion_UnkMotion0_Coll(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_8029D490(Item_GObj* item_gobj)
+bool itFoxillusion_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
-    return it_8029D094(item_gobj);
+    return itFoxillusion_UnkMotion0_Anim(item_gobj);
 }
 
-void it_8029D554(Item_GObj* item_gobj)
+void itFoxillusion_UnkMotion1_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     HSD_JObj* jobj = GET_JOBJ(item_gobj);
@@ -208,7 +208,7 @@ void it_8029D554(Item_GObj* item_gobj)
     }
 }
 
-bool it_8029D790(Item_GObj* arg0)
+bool itFoxillusion_UnkMotion1_Coll(Item_GObj* arg0)
 {
     return false;
 }
@@ -223,7 +223,7 @@ void it_8029D798(Item_GObj* item_gobj)
     Item_80268E5C(item_gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-bool it_8029D7EC(Item_GObj* item_gobj)
+bool itFoxillusion_UnkMotion2_Anim(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     bool tmp = item->owner != NULL
@@ -240,7 +240,7 @@ bool it_8029D7EC(Item_GObj* item_gobj)
     return false;
 }
 
-void it_8029D870(Item_GObj* item_gobj)
+void itFoxillusion_UnkMotion2_Phys(Item_GObj* item_gobj)
 {
     Vec3 sp10;
     Item* item = GET_ITEM(item_gobj);
@@ -251,7 +251,7 @@ void it_8029D870(Item_GObj* item_gobj)
     }
 }
 
-bool it_8029D940(Item_GObj* arg0)
+bool itFoxillusion_UnkMotion2_Coll(Item_GObj* arg0)
 {
     return false;
 }

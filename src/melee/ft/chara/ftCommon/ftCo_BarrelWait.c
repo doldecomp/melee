@@ -22,8 +22,8 @@
 
 #include <common_structs.h>
 
-/* 09EC44 */ static void ftCo_8009EC44(ftCo_GObj* gobj);
-/* 09EC70 */ static void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos, UNK_T arg2,
+/* 09EC44 */ static void ftCo_8009EC44(Fighter_GObj* gobj);
+/* 09EC70 */ static void ftCo_8009EC70(Fighter_GObj* gobj, Vec3* pos, UNK_T arg2,
                                        float kb_angle);
 
 #pragma force_active on
@@ -34,10 +34,10 @@ static inline void setCamData(ftCommonData* cd, CameraBox* cam)
     cam->x48 = cd->x4E4;
 }
 
-void ftCo_8009EB18(ftCo_GObj* gobj)
+void ftCo_8009EB18(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCommon_8007DB58(gobj);
     ftCo_8009750C(gobj);
     ftCo_800DD168(gobj);
@@ -54,27 +54,27 @@ void ftCo_8009EB18(ftCo_GObj* gobj)
     ftCommon_8007EFC0(fp, 1);
 }
 
-void ftCo_BarrelWait_Anim(ftCo_GObj* gobj) {}
+void ftCo_BarrelWait_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_BarrelWait_IASA(ftCo_GObj* gobj)
+void ftCo_BarrelWait_IASA(Fighter_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->input.x668 & HSD_PAD_AB) {
         Ground_801C4DD0();
     }
 }
 
-void ftCo_BarrelWait_Phys(ftCo_GObj* gobj) {}
+void ftCo_BarrelWait_Phys(Fighter_GObj* gobj) {}
 
-void ftCo_BarrelWait_Coll(ftCo_GObj* gobj) {}
+void ftCo_BarrelWait_Coll(Fighter_GObj* gobj) {}
 
-void ftCo_8009EC44(ftCo_GObj* gobj)
+void ftCo_8009EC44(Fighter_GObj* gobj)
 {
     float param;
     u8 _[4] = { 0 };
     Ground_801C4DA0(&GET_FIGHTER(gobj)->cur_pos, &param);
 }
 
-void ftCo_8009EC70(ftCo_GObj* gobj, Vec3* pos, UNK_T arg2, float kb_angle)
+void ftCo_8009EC70(Fighter_GObj* gobj, Vec3* pos, UNK_T arg2, float kb_angle)
 {
     HitCapsule hit;
     Fighter* fp = gobj->user_data;

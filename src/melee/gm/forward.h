@@ -87,9 +87,9 @@ typedef enum MinorSceneKind {
     /* +21 */ MN_INTRO_ALLSTAR,             ///< Unused?
     /* +22 */ MN_GAMEOVER,
     /* +23 */ MN_COMING_SOON,
-    /* +24 */ MN_TOU,
-    /* +25 */ MN_TOU_BRACKET,
-    /* +26 */ MN_TOU_FINISH,
+    /* +24 */ MN_TOU_SETUP,                 ///< Selections and settings
+    /* +25 */ MN_TOU_BRACKET,               ///< Tournament "Match Type"
+    /* +26 */ MN_TOU_ALT,                   ///< Winner Out/Loser Out "Match Type"
     /* +27 */ MN_PRIZE_INTERFACE,           ///< Achievement/Special Message Pop-up
     /* +28 */ MN_PROG_SCAN,
     /* +29 */ MN_APPROACH,                  ///< Challenger Approaching
@@ -129,7 +129,13 @@ typedef struct Placeholder_8016AE50_ret_val Placeholder_8016AE50_ret_val;
 typedef struct MatchPlayerData MatchPlayerData;
 typedef struct MatchEnd MatchEnd;
 typedef struct MatchExitInfo MatchExitInfo;
+typedef struct ResultsMatchInfo ResultsMatchInfo;
 typedef struct TmData TmData;
 typedef struct ResultsData ResultsData;
+typedef struct CameraVsData CameraVsData;
+typedef struct TmVsData TmVsData;
+typedef struct DebugGameOverData DebugGameOverData;
+typedef struct UnkAllstarData UnkAllstarData;
+typedef struct UnkMultimanData UnkMultimanData;
 
 #endif

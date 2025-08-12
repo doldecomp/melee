@@ -9,18 +9,18 @@
 
 /* 2F0F6C */ UNK_RET it_802F0F6C(UNK_PARAMS);
 /* 2F1030 */ UNK_RET it_802F1030(UNK_PARAMS);
-/* 2F1094 */ void it_802F1094(Item_GObj*, Item_GObj*);
-/* 2F10B4 */ bool it_802F10B4(Item_GObj*);
-/* 2F10D8 */ bool it_802F10D8(Item_GObj*);
+/* 2F1094 */ void it_2725_Logic86_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2F10B4 */ bool it_2725_Logic86_DmgDealt(Item_GObj*);
+/* 2F10D8 */ bool it_2725_Logic86_Reflected(Item_GObj*);
 /* 2F10F8 */ UNK_RET it_802F10F8(UNK_PARAMS);
-/* 2F1168 */ UNK_RET it_802F1168(UNK_PARAMS);
-/* 2F1170 */ UNK_RET it_802F1170(UNK_PARAMS);
-/* 2F1304 */ UNK_RET it_802F1304(UNK_PARAMS);
+/* 2F1168 */ bool itCrazyhandbomb_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2F1170 */ void itCrazyhandbomb_UnkMotion0_Phys(Item_GObj* gobj);
+/* 2F1304 */ bool itCrazyhandbomb_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2F1340 */ UNK_RET it_802F1340(UNK_PARAMS);
 /* 2F1344 */ UNK_RET it_802F1344(UNK_PARAMS);
-/* 2F1384 */ UNK_RET it_802F1384(UNK_PARAMS);
-/* 2F13A4 */ UNK_RET it_802F13A4(UNK_PARAMS);
-/* 2F13A8 */ UNK_RET it_802F13A8(UNK_PARAMS);
+/* 2F1384 */ bool itCrazyhandbomb_UnkMotion1_Anim(Item_GObj* gobj);
+/* 2F13A4 */ void itCrazyhandbomb_UnkMotion1_Phys(Item_GObj* gobj);
+/* 2F13A8 */ bool itCrazyhandbomb_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2F13B0 */ UNK_RET it_802F13B0(UNK_PARAMS);
 /* 3F93A8 */ extern ItemStateTable it_803F93A8[];
 

@@ -1,51 +1,53 @@
-#include <platform.h>
+#include "ittaru.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/it_26B1.h"
 
-/// #it_80287458
+/// #it_3F14_Logic2_Spawned
 
 /// #it_802874F0
 
 /// #it_80287690
 
-/// #it_80287B28
+/// #itTaru_UnkMotion0_Anim
 
-void it_80287B68(void) {}
+void itTaru_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #it_80287B6C
+/// #itTaru_UnkMotion0_Coll
 
 /// #it_80287D0C
 
-bool it_80287D48(void)
+bool itTaru_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_80287D50
+/// #itTaru_UnkMotion1_Phys
 
-/// #it_80287D80
+/// #itTaru_UnkMotion1_Coll
 
-/// #it_80287E68
+/// #it_3F14_Logic2_PickedUp
 
-bool it_80287E9C(void)
+bool itTaru_UnkMotion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void it_80287EA4(void) {}
+void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_80287EA8
+/// #it_3F14_Logic2_Dropped
 
-/// #it_80287EC8
+/// #it_3F14_Logic2_Thrown
 
 /// #it_80287F20
 
-/// #it_80287F5C
+/// #itTaru_UnkMotion3_Anim
 
-/// #it_80287FE4
+/// #itTaru_UnkMotion3_Phys
 
-/// #it_80288030
+/// #itTaru_UnkMotion3_Coll
 
 /// #it_80288194
 
@@ -53,51 +55,51 @@ void it_80287EA4(void) {}
 
 /// #it_802881FC
 
-/// #it_8028824C
+/// #itTaru_UnkMotion5_Anim
 
-/// #it_80288308
+/// #itTaru_UnkMotion5_Phys
 
-/// #it_8028833C
+/// #itTaru_UnkMotion5_Coll
 
-/// #it_80288454
+/// #itTaru_UnkMotion4_Anim
 
-/// #it_802884DC
+/// #itTaru_UnkMotion4_Phys
 
-/// #it_802885A8
+/// #itTaru_UnkMotion4_Coll
 
 /// #it_802885C8
 
-/// #it_80288698
+/// #itTaru_UnkMotion6_Anim
 
-void it_802886B8(void) {}
+void itTaru_UnkMotion6_Phys(Item_GObj* gobj) {}
 
-bool it_802886BC(void)
+bool itTaru_UnkMotion6_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802886C4
 
-/// #it_802887E0
+/// #itTaru_UnkMotion7_Anim
 
-void it_8028880C(void) {}
+void itTaru_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-bool it_80288810(void)
+bool itTaru_UnkMotion7_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_80288818
+/// #it_3F14_Logic2_DmgDealt
 
-/// #it_802888B8
+/// #it_3F14_Logic2_Clanked
 
-/// #it_80288958
+/// #it_3F14_Logic2_HitShield
 
-/// #it_802889F8
+/// #it_3F14_Logic2_Reflected
 
-/// #it_80288A98
+/// #it_3F14_Logic2_DmgReceived
 
-void it_80288C68(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic2_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

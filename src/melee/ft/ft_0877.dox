@@ -6,7 +6,7 @@
 extern HSD_Joint* ft_8045A1E0[6];
 
 // SFX_PlayCharacterSFX
-void ft_80088148(Fighter*, enum_t, int, int);
+void ft_PlaySFX(Fighter*, enum_t, int, int);
 
 /// Interrupt_Wait
 void ftCo_Wait_IASA(HSD_GObj*);

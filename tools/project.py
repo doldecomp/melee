@@ -54,10 +54,10 @@ class Object:
             "asflags": None,
             "asm_dir": None,
             "cflags": None,
+            "extab_padding": None,
             "extra_asflags": [],
             "extra_cflags": [],
             "extra_clang_flags": [],
-            "host": None,
             "lib": None,
             "mw_version": None,
             "progress_category": None,
@@ -73,7 +73,6 @@ class Object:
         self.asm_path: Optional[Path] = None
         self.src_obj_path: Optional[Path] = None
         self.asm_obj_path: Optional[Path] = None
-        self.host_obj_path: Optional[Path] = None
         self.ctx_path: Optional[Path] = None
 
     def resolve(self, config: "ProjectConfig", lib: Library) -> "Object":
@@ -91,7 +90,7 @@ class Object:
         set_default("add_to_all", True)
         set_default("asflags", config.asflags)
         set_default("asm_dir", config.asm_dir)
-        set_default("host", False)
+        set_default("extab_padding", None)
         set_default("mw_version", config.linker_version)
         set_default("scratch_preset_id", config.scratch_preset_id)
         set_default("shift_jis", config.shift_jis)
@@ -121,7 +120,6 @@ class Object:
         base_name = Path(self.name).with_suffix("")
         obj.src_obj_path = build_dir / "src" / f"{base_name}.o"
         obj.asm_obj_path = build_dir / "mod" / f"{base_name}.o"
-        obj.host_obj_path = build_dir / "host" / f"{base_name}.o"
         obj.ctx_path = build_dir / "src" / f"{base_name}.ctx"
         return obj
 
@@ -153,6 +151,7 @@ class ProjectConfig:
         self.wrapper: Optional[Path] = None  # If None, download wibo on Linux
         self.sjiswrap_tag: Optional[str] = None  # Git tag
         self.sjiswrap_path: Optional[Path] = None  # If None, download
+        self.ninja_path: Optional[Path] = None  # If None, use system PATH
         self.objdiff_tag: Optional[str] = None  # Git tag
         self.objdiff_path: Optional[Path] = None  # If None, download
 
@@ -304,6 +303,39 @@ def file_is_cpp(path: Path) -> bool:
 
 def file_is_c_cpp(path: Path) -> bool:
     return file_is_c(path) or file_is_cpp(path)
+
+
+_listdir_cache = {}
+
+
+def check_path_case(path: Path):
+    parts = path.parts
+    if path.is_absolute():
+        curr = Path(parts[0])
+        start = 1
+    else:
+        curr = Path(".")
+        start = 0
+
+    for part in parts[start:]:
+        if curr in _listdir_cache:
+            entries = _listdir_cache[curr]
+        else:
+            try:
+                entries = os.listdir(curr)
+            except (FileNotFoundError, PermissionError):
+                sys.exit(f"Cannot access: {curr}")
+            _listdir_cache[curr] = entries
+
+        for entry in entries:
+            if entry.lower() == part.lower():
+                curr = curr / entry
+                break
+        else:
+            sys.exit(f"Cannot resolve: {path}")
+
+    if path != curr:
+        print(f"⚠️  Case mismatch: expected={path} actual={curr}")
 
 
 def make_flags_str(flags: Optional[List[str]]) -> str:
@@ -617,6 +649,12 @@ def generate_build_ninja(
     mwcc_sjis_cmd = f"{wrapper_cmd}{sjiswrap} {mwcc} $cflags -MMD -c $in -o $basedir"
     mwcc_sjis_implicit: List[Optional[Path]] = [*mwcc_implicit, sjiswrap]
 
+    # MWCC with extab post-processing
+    mwcc_extab_cmd = f"{CHAIN}{mwcc_cmd} && {dtk} extab clean --padding \"$extab_padding\" $out $out"
+    mwcc_extab_implicit: List[Optional[Path]] = [*mwcc_implicit, dtk]
+    mwcc_sjis_extab_cmd = f"{CHAIN}{mwcc_sjis_cmd} && {dtk} extab clean --padding \"$extab_padding\" $out $out"
+    mwcc_sjis_extab_implicit: List[Optional[Path]] = [*mwcc_sjis_implicit, dtk]
+
     # MWLD
     mwld = compiler_path / "mwldeppc.exe"
     mwld_cmd = f"{wrapper_cmd}{mwld} $ldflags -o $out @$out.rsp"
@@ -625,17 +663,23 @@ def generate_build_ninja(
     # GNU as
     gnu_as = binutils / f"powerpc-eabi-as{EXE}"
     gnu_as_cmd = (
-        f"{CHAIN}{gnu_as} $asflags -o $out $in -MD $out.d"
-        + f" && {dtk} elf fixup $out $out"
+        f"{CHAIN}{gnu_as} $asflags -o $out $in" + f" && {dtk} elf fixup $out $out"
     )
     gnu_as_implicit = [binutils_implicit or gnu_as, dtk]
+    # As a workaround for https://github.com/encounter/dtk-template/issues/51
+    # include macros.inc directly as an implicit dependency
+    gnu_as_implicit.append(build_path / "include" / "macros.inc")
 
     if os.name != "nt":
         transform_dep = config.tools_dir / "transform_dep.py"
         mwcc_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_sjis_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+        mwcc_extab_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+        mwcc_sjis_extab_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_implicit.append(transform_dep)
         mwcc_sjis_implicit.append(transform_dep)
+        mwcc_extab_implicit.append(transform_dep)
+        mwcc_sjis_extab_implicit.append(transform_dep)
 
     n.comment("Link ELF file")
     n.rule(
@@ -675,13 +719,33 @@ def generate_build_ninja(
     )
     n.newline()
 
+    n.comment("MWCC build (with extab post-processing)")
+    n.rule(
+        name="mwcc_extab",
+        command=mwcc_extab_cmd,
+        description="MWCC $out",
+        depfile="$basefile.d",
+        deps="gcc",
+    )
+    n.newline()
+
+    n.comment("MWCC build (with UTF-8 to Shift JIS wrapper and extab post-processing)")
+    n.rule(
+        name="mwcc_sjis_extab",
+        command=mwcc_sjis_extab_cmd,
+        description="MWCC $out",
+        depfile="$basefile.d",
+        deps="gcc",
+    )
+
     n.comment("Assemble asm")
     n.rule(
         name="as",
         command=gnu_as_cmd,
         description="AS $out",
-        depfile="$out.d",
-        deps="gcc",
+        # See https://github.com/encounter/dtk-template/issues/51
+        # depfile="$out.d",
+        # deps="gcc",
     )
     n.newline()
 
@@ -732,24 +796,6 @@ def generate_build_ninja(
             inputs=implicit,
             order_only=prev_step,
         )
-
-    n.comment("Host build")
-    n.variable("host_cflags", "-I include -Wno-trigraphs")
-    n.variable(
-        "host_cppflags",
-        "-std=c++98 -I include -fno-exceptions -fno-rtti -D_CRT_SECURE_NO_WARNINGS -Wno-trigraphs -Wno-c++11-extensions",
-    )
-    n.rule(
-        name="host_cc",
-        command="clang $host_cflags -c -o $out $in",
-        description="CC $out",
-    )
-    n.rule(
-        name="host_cpp",
-        command="clang++ $host_cppflags -c -o $out $in",
-        description="CXX $out",
-    )
-    n.newline()
 
     # Add all build steps needed before we compile (e.g. processing assets)
     write_custom_step("pre-compile")
@@ -850,7 +896,6 @@ def generate_build_ninja(
         link_steps: List[LinkStep] = []
         used_compiler_versions: Set[str] = set()
         source_inputs: List[Path] = []
-        host_source_inputs: List[Path] = []
         source_added: Set[Path] = set()
 
         def c_build(obj: Object, src_path: Path) -> Optional[Path]:
@@ -881,20 +926,33 @@ def generate_build_ninja(
 
             # Add MWCC build rule
             lib_name = obj.options["lib"]
+            build_rule = "mwcc"
+            build_implcit = mwcc_implicit
+            variables = {
+                "mw_version": Path(obj.options["mw_version"]),
+                "cflags": cflags_str,
+                "basedir": os.path.dirname(obj.src_obj_path),
+                "basefile": obj.src_obj_path.with_suffix(""),
+            }
+
+            if obj.options["shift_jis"] and obj.options["extab_padding"] is not None:
+                build_rule = "mwcc_sjis_extab"
+                build_implcit = mwcc_sjis_extab_implicit
+                variables["extab_padding"] = "".join(f"{i:02x}" for i in obj.options["extab_padding"])
+            elif obj.options["shift_jis"]:
+                build_rule = "mwcc_sjis"
+                build_implcit = mwcc_sjis_implicit
+            elif obj.options["extab_padding"] is not None:
+                build_rule = "mwcc_extab"
+                build_implcit = mwcc_extab_implicit
+                variables["extab_padding"] = "".join(f"{i:02x}" for i in obj.options["extab_padding"])
             n.comment(f"{obj.name}: {lib_name} (linked {obj.completed})")
             n.build(
                 outputs=obj.src_obj_path,
-                rule="mwcc_sjis" if obj.options["shift_jis"] else "mwcc",
+                rule=build_rule,
                 inputs=src_path,
-                variables={
-                    "mw_version": Path(obj.options["mw_version"]),
-                    "cflags": cflags_str,
-                    "basedir": os.path.dirname(obj.src_obj_path),
-                    "basefile": obj.src_obj_path.with_suffix(""),
-                },
-                implicit=(
-                    mwcc_sjis_implicit if obj.options["shift_jis"] else mwcc_implicit
-                ),
+                variables=variables,
+                implicit=build_implcit,
                 order_only="pre-compile",
             )
 
@@ -916,21 +974,6 @@ def generate_build_ninja(
                     implicit=decompctx,
                     variables={"includes": includes},
                 )
-
-            # Add host build rule
-            if obj.options["host"] and obj.host_obj_path is not None:
-                n.build(
-                    outputs=obj.host_obj_path,
-                    rule="host_cc" if file_is_c(src_path) else "host_cpp",
-                    inputs=src_path,
-                    variables={
-                        "basedir": os.path.dirname(obj.host_obj_path),
-                        "basefile": obj.host_obj_path.with_suffix(""),
-                    },
-                    order_only="pre-compile",
-                )
-                if obj.options["add_to_all"]:
-                    host_source_inputs.append(obj.host_obj_path)
             n.newline()
 
             if obj.options["add_to_all"]:
@@ -984,8 +1027,9 @@ def generate_build_ninja(
             link_built_obj = obj.completed
             built_obj_path: Optional[Path] = None
             if obj.src_path is not None and obj.src_path.exists():
+                check_path_case(obj.src_path)
                 if file_is_c_cpp(obj.src_path):
-                    # Add MWCC & host build rules
+                    # Add C/C++ build rule
                     built_obj_path = c_build(obj, obj.src_path)
                 elif file_is_asm(obj.src_path):
                     # Add assembler build rule
@@ -998,7 +1042,12 @@ def generate_build_ninja(
                 link_built_obj = False
 
             # Assembly overrides
-            if obj.asm_path is not None and obj.asm_path.exists():
+            if (
+                not link_built_obj
+                and obj.asm_path is not None
+                and obj.asm_path.exists()
+            ):
+                check_path_case(obj.asm_path)
                 link_built_obj = True
                 built_obj_path = asm_build(obj, obj.asm_path, obj.asm_obj_path)
 
@@ -1150,17 +1199,6 @@ def generate_build_ninja(
         n.newline()
 
         ###
-        # Helper rule for building all source files, with a host compiler
-        ###
-        n.comment("Build all source files with a host compiler")
-        n.build(
-            outputs="all_source_host",
-            rule="phony",
-            inputs=host_source_inputs,
-        )
-        n.newline()
-
-        ###
         # Check hash
         ###
         n.comment("Check hash")
@@ -1213,7 +1251,7 @@ def generate_build_ninja(
         n.build(
             outputs=report_path,
             rule="report",
-            implicit=[objdiff, "all_source"],
+            implicit=[objdiff, "objdiff.json", "all_source"],
             order_only="post-build",
         )
 
@@ -1367,7 +1405,7 @@ def generate_build_ninja(
         description=f"RUN {configure_script}",
     )
     n.build(
-        outputs="build.ninja",
+        outputs=["build.ninja", "objdiff.json"],
         rule="configure",
         implicit=[
             build_config_path,
@@ -1415,9 +1453,14 @@ def generate_objdiff_config(
             existing_config = json.load(r)
             existing_units = {unit["name"]: unit for unit in existing_config["units"]}
 
+    if config.ninja_path:
+        ninja = str(config.ninja_path.absolute())
+    else:
+        ninja = "ninja"
+
     objdiff_config: Dict[str, Any] = {
         "min_version": "2.0.0-beta.5",
-        "custom_make": "ninja",
+        "custom_make": ninja,
         "build_target": False,
         "watch_patterns": [
             "*.c",

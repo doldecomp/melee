@@ -17,7 +17,7 @@
 #include <baselib/mtx.h>
 
 ItemStateTable it_803F6788[] = {
-    { 0, it_8029B868, it_8029B8A0, it_8029B8EC },
+    { 0, itMariofireball_UnkMotion0_Anim, itMariofireball_UnkMotion0_Phys, itMariofireball_UnkMotion0_Coll },
 };
 
 void it_8029B6F8(Item_GObj* gobj, Vec3* pos, ItemKind kind, f32 facing_dir)
@@ -58,14 +58,14 @@ void it_8029B7C0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-bool it_8029B868(Item_GObj* gobj)
+bool itMariofireball_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     --item->xD44_lifeTimer;
     return item->xD44_lifeTimer <= 0 ? true : false;
 }
 
-void it_8029B8A0(Item_GObj* gobj)
+void itMariofireball_UnkMotion0_Phys(Item_GObj* gobj)
 {
     ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
@@ -77,7 +77,7 @@ static double calc_dist_2d_accurate(Vec3* v)
     return sqrtf_accurate(VEC2_SQ_LEN(*v));
 }
 
-bool it_8029B8EC(Item_GObj* gobj)
+bool itMariofireball_UnkMotion0_Coll(Item_GObj* gobj)
 {
     it_8026D9A0(gobj);
     if (it_8027781C(gobj)) {
@@ -98,37 +98,37 @@ bool it_8029B8EC(Item_GObj* gobj)
     return false;
 }
 
-bool it_8029BA38(Item_GObj* gobj)
+bool it_2725_Logic87_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_8029BA40(Item_GObj* gobj)
+bool it_2725_Logic87_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_8029BA60(Item_GObj* gobj)
+bool it_2725_Logic87_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_8029BA68(Item_GObj* gobj)
+bool it_2725_Logic87_HitShield(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_8029BA70(Item_GObj* gobj)
+bool it_2725_Logic87_Absorbed(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_8029BA78(Item_GObj* gobj)
+bool it_2725_Logic87_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-void it_8029BA98(Item_GObj* gobj, HSD_GObj* referenced_gobj)
+void it_2725_Logic87_EvtUnk(Item_GObj* gobj, HSD_GObj* referenced_gobj)
 {
     it_8026B894(gobj, referenced_gobj);
 }

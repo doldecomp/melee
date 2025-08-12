@@ -23,11 +23,11 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 08B788 */ static void decideAngle(ftCo_GObj* gobj);
+/* 08B788 */ static void decideAngle(Fighter_GObj* gobj);
 
-bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
+bool ftCo_AttackS3_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x98)
     {
@@ -56,9 +56,9 @@ bool ftCo_AttackS3_CheckInput(ftCo_GObj* gobj)
     return false;
 }
 
-static void decideAngle(ftCo_GObj* gobj)
+static void decideAngle(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!ftpickupitem_80094790(gobj)) {
         FtMotionId msid;
         float stick_angle = ftCo_GetLStickAngle(fp);
@@ -87,26 +87,26 @@ static void decideAngle(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_AttackS3_Anim(ftCo_GObj* gobj)
+void ftCo_AttackS3_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftCo_AttackS3_IASA(ftCo_GObj* gobj)
+void ftCo_AttackS3_IASA(Fighter_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->allow_interrupt) {
         ftCo_Wait_IASA(gobj);
     }
 }
 
-void ftCo_AttackS3_Phys(ftCo_GObj* gobj)
+void ftCo_AttackS3_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_AttackS3_Coll(ftCo_GObj* gobj)
+void ftCo_AttackS3_Coll(Fighter_GObj* gobj)
 {
     ft_80084104(gobj);
 }

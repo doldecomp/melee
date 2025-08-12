@@ -46,7 +46,7 @@
 /* literal */ SDATA char ftCo_804D3C48[] = "jobj.h";
 /* literal */ SDATA char ftCo_804D3C50[] = "jobj";
 
-bool ftCo_800C3A14(ftCo_GObj* gobj)
+bool ftCo_800C3A14(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CollData coll = *getFtColl(fp);
@@ -71,7 +71,7 @@ bool ftCo_800C3A14(ftCo_GObj* gobj)
     return false;
 }
 
-bool ftCo_800C3B10(ftCo_GObj* gobj)
+bool ftCo_800C3B10(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2228_b6) {
@@ -98,7 +98,7 @@ bool ftCo_800C3B10(ftCo_GObj* gobj)
     return false;
 }
 
-void ftCo_800C3BE8(ftCo_GObj* gobj)
+void ftCo_800C3BE8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 anim_vel = { 0 };
@@ -117,7 +117,7 @@ void ftCo_800C3BE8(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_800C3CC0(ftCo_GObj* gobj)
+void ftCo_800C3CC0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 drift;
@@ -137,7 +137,7 @@ void ftCo_800C3CC0(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
+void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
 {
     u8 _[16] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
@@ -148,8 +148,9 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
         if (fp->mv.co.aircatch.x0 == da->xA4) {
             Vec3 pos;
             u8 _[4] = { 0 };
-            lb_8000B1CC(fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint,
-                        NULL, &pos);
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                NULL, &pos);
             fp->fv.lk.xC = it_802A2BA4(gobj, &pos, fp->facing_dir, da->xBC);
             if (fp->fv.lk.xC == NULL) {
                 ftCo_800968C8(gobj);
@@ -167,7 +168,8 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
                 if (fp->mv.co.aircatch.x0 == da->xA8) {
                     Vec3 pos = { 1.8, 0, 0 };
                     HSD_JObj* jobj =
-                        fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint;
+                        fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)]
+                            .joint;
 
                     HSD_JObjSetupMatrix(jobj);
                     {
@@ -196,18 +198,18 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
                         it_802A78B8(tether_gobj, &pos, x);
                     }
                     if (fp->kind == FTKIND_CLINK) {
-                        ft_80088148(fp, 0x111B9, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
                     } else {
-                        ft_80088148(fp, 0x27149, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x27149, 0x7F, 0x40);
                     }
                 } else if (fp->mv.co.aircatch.x0 ==
                            (float) M2C_FIELD(da, int*, 0xAC))
                 {
                     it_802A77DC(tether_gobj);
                     if (fp->kind == FTKIND_CLINK) {
-                        ft_80088148(fp, 0x111BC, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x111BC, 0x7F, 0x40);
                     } else {
-                        ft_80088148(fp, 0x2714C, 0x7F, 0x40);
+                        ft_PlaySFX(fp, 0x2714C, 0x7F, 0x40);
                     }
                 } else if (fp->mv.co.aircatch.x0 == da->xB0) {
                     it_802A2B10(fp->fv.lk.xC);
@@ -273,13 +275,13 @@ void ftCo_AirCatch_Anim(ftCo_GObj* gobj)
     return;
 }
 
-void ftCo_AirCatchHit_Anim(ftCo_GObj* gobj) {}
+void ftCo_AirCatchHit_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_AirCatch_IASA(ftCo_GObj* gobj) {}
+void ftCo_AirCatch_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_AirCatchHit_IASA(ftCo_GObj* gobj) {}
+void ftCo_AirCatchHit_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_AirCatch_Phys(ftCo_GObj* gobj)
+void ftCo_AirCatch_Phys(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
@@ -295,14 +297,14 @@ void ftCo_AirCatch_Phys(ftCo_GObj* gobj)
     ftCommon_8007D268(fp);
 }
 
-void ftCo_AirCatchHit_Phys(ftCo_GObj* gobj)
+void ftCo_AirCatchHit_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel = fp->pos_delta;
     ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
 }
 
-void ftCo_AirCatch_Coll(ftCo_GObj* gobj)
+void ftCo_AirCatch_Coll(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     if (ft_80081D0C(gobj) != GA_Ground) {

@@ -1,6 +1,3 @@
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-
 #include "ft/ft_0D14.h"
 
 #include "placeholder.h"
@@ -8,12 +5,18 @@
 #include "stdbool.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallAerial.h"
 #include "ftCommon/ftCo_ItemThrow.h"
@@ -43,8 +46,14 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
-static void fn_800D9CE8(Fighter_GObj* arg0);
-static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
+/* 0D17FC */ static void fn_800D17FC(Fighter_GObj* gobj);
+/* 0D1C40 */ static void fn_800D1C40(Fighter_GObj* gobj);
+/* 0D20EC */ static void fn_800D20EC(Fighter_GObj* gobj);
+/* 0D2530 */ static void fn_800D2530(Fighter_GObj* gobj);
+/* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
+/* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
+/* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
+/* 105FEC */ static void fn_80105FEC(void);
 
 bool Fighter_SuperMushroomApply(Fighter_GObj* gobj)
 {
@@ -57,11 +66,11 @@ bool Fighter_SuperMushroomApply(Fighter_GObj* gobj)
     {
         fp->mv.co.mushroom.x4(gobj);
     }
-    if (fp->x2220_flag.b5) {
+    if (fp->x2220_b5) {
         fp->x2008 = p_ftCommonData->x688;
         return false;
     }
-    if (fp->x2220_flag.b6) {
+    if (fp->x2220_b6) {
         if (fp->ground_or_air == GA_Ground) {
             ftCo_800D2490(gobj, 1);
         } else {
@@ -82,7 +91,7 @@ void ftCo_800D15D0(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     f32 percent;
     fn_800D2BF8(gobj);
-    fp->x2220_flag.b5 = true;
+    fp->x2220_b5 = true;
     fp->x2008 = p_ftCommonData->x688;
     percent = fp->dmg.x1830_percent;
     if (percent > p_ftCommonData->x68C) {
@@ -204,7 +213,7 @@ void ftCo_800D1B04(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fn_800D2BF8(gobj);
-    fp->x2220_flag.b5 = 0;
+    fp->x2220_b5 = 0;
     ftCo_800D2770(gobj, fp->x34_scale.x);
     if (fp->mv.co.mushroom.x8) {
         ftCommon_8007E2FC(gobj);
@@ -315,11 +324,11 @@ bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
     {
         fp->mv.co.mushroom.x4(gobj);
     }
-    if (fp->x2220_flag.b6) {
+    if (fp->x2220_b6) {
         fp->x2008 = p_ftCommonData->x688;
         return false;
     }
-    if (fp->x2220_flag.b5) {
+    if (fp->x2220_b5) {
         if (fp->ground_or_air == GA_Ground) {
             ftCo_800D1BA0(gobj, 1);
         } else {
@@ -340,7 +349,7 @@ void ftCo_800D1F6C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fn_800D2BF8(gobj);
-    fp->x2220_flag.b6 = true;
+    fp->x2220_b6 = true;
     fp->x2008 = p_ftCommonData->x688;
     ftCo_800D2770(gobj, fp->mv.co.walk.fast_anim_frame);
     ftCommon_8007E2FC(gobj);
@@ -460,7 +469,7 @@ void ftCo_800D23F4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fn_800D2BF8(gobj);
-    fp->x2220_flag.b6 = false;
+    fp->x2220_b6 = false;
     ftCo_800D2770(gobj, fp->x34_scale.x);
     if (fp->mv.co.mushroom.x8) {
         ftCommon_8007E2FC(gobj);
@@ -685,12 +694,12 @@ bool fn_800D2A3C(HSD_GObj* gobj)
 
 void fn_800D2AD8(Fighter* fp)
 {
-    ft_80088148(fp, ftCo_MS_CaptureDamageKoopaAir, 0x7F, 0x40);
+    ft_PlaySFX(fp, ftCo_MS_CaptureDamageKoopaAir, 0x7F, 0x40);
 }
 
 void fn_800D2B04(Fighter* fp)
 {
-    ft_80088148(fp, ftCo_MS_CaptureWaitKoopaAir, 0x7F, 0x40);
+    ft_PlaySFX(fp, ftCo_MS_CaptureWaitKoopaAir, 0x7F, 0x40);
 }
 
 void fn_800D2B30(Fighter_GObj* gobj)
@@ -879,7 +888,7 @@ bool ftCo_800D3158(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int* temp_r29 = &p_ftCommonData->x520;
 
-    if (fp->x222A_flag.b1 || fp->x2228_b5 || fp->x2228_b2) {
+    if (fp->x222A_b1 || fp->x2228_b5 || fp->x2228_b2) {
         return false;
     }
     if (fp->x2219_b2) {
@@ -1040,7 +1049,6 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     f32 temp_f31;
     s32 temp_r29;
     s32 temp_r6;
-    s32 temp_ret;
     s32 var_r3;
     u8* temp_r8;
     u8 temp_r3;
@@ -1056,7 +1064,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     temp_r27->mv.co.unk_800D3680.x40 = p_ftCommonData->x500;
     Fighter_ChangeMotionState(gobj, 1, 0U, 0.0F, 1.0F, 0.0F, NULL);
     temp_r28 = gobj->user_data;
-    if (((u8) temp_r28->x221D >> 1U) & 1) {
+    if (temp_r28->x221D_b6) {
         ft_800880D8(temp_r28);
         temp_r28->x2004 = 0;
     }
@@ -1076,7 +1084,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     ftCo_800D38B8(temp_r27_2, temp_r28_2->x4);
     ftCo_800D38B8(temp_r27_2, temp_r28_2->x8);
 
-    ft_80088148(temp_r31, 0x88, 0x7F, 0x40);
+    ft_PlaySFX(temp_r31, 0x88, 0x7F, 0x40);
     ft_8008805C(temp_r31, 0x88);
     sp2C = temp_r31->cur_pos;
     temp_f31 = Stage_GetBlastZoneTopOffset();
@@ -1099,8 +1107,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
     temp_r5 = temp_r9[2];
     temp_r29 = temp_r5 | (((temp_r9[1] << 8) & ~0xFF0000) |
                           ((temp_r4 << 0x10) & 0xFF0000));
-    temp_ret = gm_801693BC(temp_r28_3->player_id);
-    if (temp_ret != 0) {
+    if (gm_801693BC(temp_r28_3->player_id)) {
         var_r3 = 0x42C;
     } else {
         var_r3 = 0x42B;

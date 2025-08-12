@@ -7,7 +7,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
-void grMuteCity_801EFC68(void) {}
+void grMuteCity_801EFC68(bool arg) {}
 
 /// #grMuteCity_801EFC6C
 
@@ -27,51 +27,51 @@ bool grMuteCity_801EFD04(void)
 
 /// #grMuteCity_801EFDF8
 
-bool grMuteCity_801F0118(void)
+bool grMuteCity_801F0118(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grMuteCity_801F0120
 
-void grMuteCity_801F01B0(void) {}
+void grMuteCity_801F01B0(Ground_GObj* arg) {}
 
 /// #grMuteCity_801F01B4
 
-bool grMuteCity_801F0288(void)
+bool grMuteCity_801F0288(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grMuteCity_801F0290
 
-void grMuteCity_801F040C(void) {}
+void grMuteCity_801F040C(Ground_GObj* arg) {}
 
-void grMuteCity_801F0410(HSD_GObj* gobj)
+void grMuteCity_801F0410(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool grMuteCity_801F043C(void)
+bool grMuteCity_801F043C(Ground_GObj* arg)
 {
     return false;
 }
 
-void grMuteCity_801F0444(void) {}
+void grMuteCity_801F0444(Ground_GObj* arg) {}
 
-void grMuteCity_801F0448(void) {}
+void grMuteCity_801F0448(Ground_GObj* arg) {}
 
 /// #grMuteCity_801F044C
 
-bool grMuteCity_801F04A8(void)
+bool grMuteCity_801F04A8(Ground_GObj* arg)
 {
     return false;
 }
 
-void grMuteCity_801F04B0(void) {}
+void grMuteCity_801F04B0(Ground_GObj* arg) {}
 
-void grMuteCity_801F04B4(void) {}
+void grMuteCity_801F04B4(Ground_GObj* arg) {}
 
 /// #grMuteCity_801F04B8
 

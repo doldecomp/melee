@@ -34,7 +34,7 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-bool ftCo_800C1D38(ftCo_GObj* gobj)
+bool ftCo_800C1D38(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
@@ -64,7 +64,7 @@ bool ftCo_800C1E0C(Fighter* fp)
     return false;
 }
 
-void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer, int vel_y_exponent,
+void ftCo_800C1E64(Fighter_GObj* gobj, int msid, int timer, int vel_y_exponent,
                    float facing_dir)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -110,13 +110,13 @@ void ftCo_800C1E64(ftCo_GObj* gobj, int msid, int timer, int vel_y_exponent,
     ft_800881D8(fp, fp->ft_data->x4C_sfx->x24, 0x7F, 0x40);
     ftCommon_8007EBAC(fp, 12, 0);
     if (timer == 0) {
-        ft_80088148(fp, 3, 0x7F, 0x40);
+        ft_PlaySFX(fp, 3, 0x7F, 0x40);
     }
     ftCo_800BFFD0(fp, 120, 0);
     ftColl_8007B760(gobj, p_ftCommonData->x764);
 }
 
-static inline void inlineA0(ftCo_GObj* gobj)
+static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_PassiveWallJump, Ft_MF_None,
@@ -125,14 +125,14 @@ static inline void inlineA0(ftCo_GObj* gobj)
     fp->mv.co.passivewall.timer = 0;
 }
 
-void ftCo_PassiveWall_Anim(ftCo_GObj* gobj)
+void ftCo_PassiveWall_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(16);
     if (fp->mv.co.passivewall.timer != 0) {
         --fp->mv.co.passivewall.timer;
         if (fp->mv.co.passivewall.timer == 0) {
-            ft_80088148(fp, 8, 127, 64);
+            ft_PlaySFX(fp, 8, 127, 64);
             if (fp->mv.co.passivewall.x8) {
                 inlineA0(gobj);
             } else {
@@ -158,7 +158,7 @@ void ftCo_PassiveWall_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_PassiveWall_IASA(ftCo_GObj* gobj)
+void ftCo_PassiveWall_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->mv.co.passivewall.timer) {
@@ -178,7 +178,7 @@ void ftCo_PassiveWall_IASA(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_PassiveWall_Phys(ftCo_GObj* gobj)
+void ftCo_PassiveWall_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
@@ -194,7 +194,7 @@ void ftCo_PassiveWall_Phys(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_PassiveWall_Coll(ftCo_GObj* gobj)
+void ftCo_PassiveWall_Coll(Fighter_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->mv.co.passivewall.timer) {
         ft_80083318(gobj, ftCo_80096CC8, ft_80082B1C);

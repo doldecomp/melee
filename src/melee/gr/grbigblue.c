@@ -1,8 +1,10 @@
+#include "grbigblue.h"
+
 #include <platform.h>
 
 #include "gr/inlines.h"
 
-void grBigBlue_801E57BC(void) {}
+void grBigBlue_801E57BC(bool arg) {}
 
 /// #grBigBlue_801E57C0
 
@@ -19,25 +21,25 @@ bool grBigBlue_801E59F0(void)
 
 /// #grBigBlue_801E5AE4
 
-bool grBigBlue_801E5B10(void)
+bool grBigBlue_801E5B10(Ground_GObj* arg)
 {
     return false;
 }
 
-void grBigBlue_801E5B18(void) {}
+void grBigBlue_801E5B18(Ground_GObj* arg) {}
 
-void grBigBlue_801E5B1C(void) {}
+void grBigBlue_801E5B1C(Ground_GObj* arg) {}
 
 /// #grBigBlue_801E5B20
 
-bool grBigBlue_801E6114(void)
+bool grBigBlue_801E6114(Ground_GObj* arg)
 {
     return false;
 }
 
-void grBigBlue_801E611C(void) {}
+void grBigBlue_801E611C(Ground_GObj* arg) {}
 
-void grBigBlue_801E6120(void) {}
+void grBigBlue_801E6120(Ground_GObj* arg) {}
 
 void fn_801E6124(Ground_GObj* gobj)
 {
@@ -46,40 +48,40 @@ void fn_801E6124(Ground_GObj* gobj)
 
 /// #grBigBlue_801E613C
 
-bool grBigBlue_801E61BC(void)
+bool grBigBlue_801E61BC(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grBigBlue_801E61C4
 
-void grBigBlue_801E61FC(void) {}
+void grBigBlue_801E61FC(Ground_GObj* arg) {}
 
 /// #grBigBlue_801E6200
 
-bool grBigBlue_801E6288(void)
+bool grBigBlue_801E6288(Ground_GObj* arg)
 {
     return false;
 }
 
-void grBigBlue_801E6290(void) {}
+void grBigBlue_801E6290(Ground_GObj* arg) {}
 
-void grBigBlue_801E6294(void) {}
+void grBigBlue_801E6294(Ground_GObj* arg) {}
 
 /// #grBigBlue_801E6298
 
-bool grBigBlue_801E6354(void)
+bool grBigBlue_801E6354(Ground_GObj* arg)
 {
     return false;
 }
 
-void grBigBlue_801E635C(void) {}
+void grBigBlue_801E635C(Ground_GObj* arg) {}
 
-void grBigBlue_801E6360(void) {}
+void grBigBlue_801E6360(Ground_GObj* arg) {}
 
 /// #grBigBlue_801E6364
 
-bool grBigBlue_801E687C(void)
+bool grBigBlue_801E687C(Ground_GObj* arg)
 {
     return false;
 }
@@ -90,14 +92,14 @@ bool grBigBlue_801E687C(void)
 
 /// #grBigBlue_801E6904
 
-bool grBigBlue_801E6C58(void)
+bool grBigBlue_801E6C58(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grBigBlue_801E6C60
 
-void grBigBlue_801E855C(void) {}
+void grBigBlue_801E855C(Ground_GObj* arg) {}
 
 /// #fn_801E8560
 
@@ -115,25 +117,25 @@ void grBigBlue_801E855C(void) {}
 
 /// #grBigBlue_801E8D64
 
-bool grBigBlue_801E93D0(void)
+bool grBigBlue_801E93D0(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grBigBlue_801E93D8
 
-void grBigBlue_801E9F38(void) {}
+void grBigBlue_801E9F38(Ground_GObj* arg) {}
 
 /// #grBigBlue_801E9F3C
 
-bool grBigBlue_801EA054(void)
+bool grBigBlue_801EA054(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grBigBlue_801EA05C
 
-void grBigBlue_801EAB4C(void) {}
+void grBigBlue_801EAB4C(Ground_GObj* arg) {}
 
 /// #grBigBlue_801EAB50
 
@@ -169,7 +171,7 @@ void grBigBlue_801EAB4C(void) {}
 
 /// #fn_801EFB9C
 
-bool grBigBlue_801EFC0C(void)
+DynamicsDesc* grBigBlue_801EFC0C(enum_t arg)
 {
     return false;
 }

@@ -33,7 +33,7 @@ static u8 hidden; // HUD hidden bool
 void ifAll_802F3394(void)
 {
     ifStatus_802F6898();
-    ifTime_802F405C();
+    ifTime_HideTimers();
     un_802FD450();
     ifMagnify_802FC8E8();
     un_802FD668();
@@ -44,7 +44,7 @@ void ifAll_802F3394(void)
 void ifAll_802F33CC(void)
 {
     ifStatus_802F68F0();
-    ifTime_802F40B8();
+    ifTime_ShowTimers();
     un_802FD45C();
     ifMagnify_802FC940();
     un_802FD674();
@@ -226,7 +226,7 @@ void ifAll_802F390C(void)
     ifStatus_802F7134();
     ifStatus_802F66A4();
     ifStock_802FAEC4();
-    ifTime_802F480C();
+    ifTime_Reset();
     if_802F7E24();
     ifMagnify_802FC870();
     un_802FE260();
@@ -246,7 +246,7 @@ void ifAll_802F3A64(void)
     ifStock_802FB484();
     ifMagnify_802FC750();
     if_802F7E7C();
-    ifTime_802F483C();
+    ifTime_FreeTimers();
     ifStatus_802F6804();
     ifStatus_802F7220();
 

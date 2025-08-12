@@ -4,65 +4,65 @@
 
 /// #it_8028FE90
 
-/// #it_8028FED4
+/// #it_3F14_Logic19_Spawned
 
 /// #it_8028FF1C
 
-/// #it_8028FF60
+/// #itMsbomb_UnkMotion0_Coll
 
 /// #it_8028FF8C
 
-/// #it_80290070
+/// #itMsbomb_UnkMotion1_Phys
 
-/// #it_802900A0
+/// #itMsbomb_UnkMotion1_Coll
 
-/// #it_802900CC
+/// #it_3F14_Logic19_PickedUp
 
-/// #it_802900F4
+/// #it_3F14_Logic19_Dropped
 
-/// #it_80290114
+/// #it_3F14_Logic19_Thrown
 
-/// #it_802901C0
+/// #itMsbomb_UnkMotion3_Phys
 
-/// #it_8029020C
+/// #itMsbomb_UnkMotion3_Coll
 
 /// #it_80290238
 
 /// #it_80290314
 
-/// #it_80290404
+/// #itMsbomb_UnkMotion4_Coll
 
 /// #it_8029047C
 
-/// #it_80290560
+/// #itMsbomb_UnkMotion5_Phys
 
-/// #it_802905AC
+/// #itMsbomb_UnkMotion5_Coll
 
 /// #it_802905D8
 
 /// #it_80290614
 
-/// #it_802906C4
+/// #itMsbomb_UnkMotion6_Anim
 
-/// #it_802906E4
+/// #it_3F14_Logic19_DmgDealt
 
-/// #it_80290738
+/// #it_3F14_Logic19_DmgReceived
 
-/// #it_80290794
+/// #it_3F14_Logic19_EnteredAir
 
-/// #it_802907BC
+/// #itMsbomb_UnkMotion7_Coll
 
-/// #it_802907F0
+/// #it_3F14_Logic19_Clanked
 
-/// #it_80290830
+/// #it_3F14_Logic19_Reflected
 
-/// #it_80290850
+/// #it_3F14_Logic19_HitShield
 
-/// #it_802908A4
+/// #it_3F14_Logic19_ShieldBounced
 
 /// #it_802908D8
 
-void it_80290918(Item_GObj* gobj, Item_GObj* ref_gobj)
+void it_3F14_Logic19_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

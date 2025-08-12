@@ -1,13 +1,13 @@
-#include "forward.h"
-#include "baselib/forward.h"
+#include "efasync.h"
 
 #include "efasync.static.h"
 
-#include "efasync.h"
 #include "eflib.h"
 #include "efsync.h"
 #include "math.h"
 #include "types.h"
+
+#include "baselib/forward.h"
 
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"
@@ -15,85 +15,87 @@
 #include "baselib/psstructs.h"
 #include "baselib/random.h"
 #include "cm/camera.h"
+
+#include "forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbdvd.h"
 
-extern struct _struct_efLib_80458EE0_0x8 efLib_80458EE0[16];
-extern s32 efLib_804D64E8;
-extern s32 efLib_804D64F0;
-static s8 efAsync_803BFB00[0x25] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-static s8 efAsync_803BFD68[0xD] = "EfCoData.dat";
-static s8 efAsync_803BFD78[0x13] = "effCommonDataTable";
-static s8 efAsync_803BFD8C[0xD] = "EfMrData.dat";
-static s8 efAsync_803BFD9C[0x12] = "effMarioDataTable";
-static s8 efAsync_803BFDB0[0xD] = "EfSsData.dat";
-static s8 efAsync_803BFDC0[0x12] = "effSamusDataTable";
-static s8 efAsync_803BFDD4[0xD] = "EfFxData.dat";
-static s8 efAsync_803BFDE4[0x10] = "effFoxDataTable";
-static s8 efAsync_803BFDF4[0xD] = "EfCaData.dat";
-static s8 efAsync_803BFE04[0x14] = "effCaptainDataTable";
-static s8 efAsync_803BFE18[0xD] = "EfKbData.dat";
-static s8 efAsync_803BFE28[0x12] = "effKirbyDataTable";
-static s8 efAsync_803BFE3C[0xD] = "EfLkData.dat";
-static s8 efAsync_803BFE4C[0x11] = "effLinkDataTable";
-static s8 efAsync_803BFE60[0xD] = "EfPkData.dat";
-static s8 efAsync_803BFE70[0x14] = "effPikachuDataTable";
-static s8 efAsync_803BFE84[0xD] = "EfDkData.dat";
-static s8 efAsync_803BFE94[0x13] = "effDonkeyDataTable";
-static s8 efAsync_803BFEA8[0xD] = "EfYsData.dat";
-static s8 efAsync_803BFEB8[0x12] = "effYoshiDataTable";
-static s8 efAsync_803BFECC[0xD] = "EfNsData.dat";
-static s8 efAsync_803BFEDC[0x11] = "effNessDataTable";
-static s8 efAsync_803BFEF0[0xD] = "EfPrData.dat";
-static s8 efAsync_803BFF00[0x12] = "effPurinDataTable";
-static s8 efAsync_803BFF14[0xD] = "EfKpData.dat";
-static s8 efAsync_803BFF24[0x12] = "effKoopaDataTable";
-static s8 efAsync_803BFF38[0xD] = "EfMtData.dat";
-static s8 efAsync_803BFF48[0x13] = "effMewtwoDataTable";
-static s8 efAsync_803BFF5C[0xD] = "EfIcData.dat";
-static s8 efAsync_803BFF6C[0x17] = "effIceclimberDataTable";
-static s8 efAsync_803BFF84[0xD] = "EfPeData.dat";
-static s8 efAsync_803BFF94[0x12] = "effPeachDataTable";
-static s8 efAsync_803BFFA8[0xD] = "EfMsData.dat";
-static s8 efAsync_803BFFB8[0x11] = "effMarsDataTable";
-static s8 efAsync_803BFFCC[0xD] = "EfZdData.dat";
-static s8 efAsync_803BFFDC[0x12] = "effZeldaDataTable";
-static s8 efAsync_803BFFF0[0xD] = "EfLgData.dat";
-static s8 efAsync_803C0000[0x12] = "effLuigiDataTable";
-static s8 efAsync_803C0014[0xD] = "EfGnData.dat";
-static s8 efAsync_803C0024[0x12] = "effGanonDataTable";
-static s8 efAsync_803C0038[0xB] = "EfKbMs.dat";
-static s8 efAsync_803C0044[0x16] = "effKirbyMarsDataTable";
-static s8 efAsync_803C005C[0xB] = "EfKbZd.dat";
-static s8 efAsync_803C0068[0x17] = "effKirbyZeldaDataTable";
-static s8 efAsync_803C0080[0xD] = "EfMnData.dat";
-static s8 efAsync_803C0090[0x11] = "effMenuDataTable";
-static s8 efAsync_803C00A4[0xB] = "EfKbMr.dat";
-static s8 efAsync_803C00B0[0x17] = "effKirbyMarioDataTable";
-static s8 efAsync_803C00C8[0xB] = "EfKbFx.dat";
-static s8 efAsync_803C00D4[0x15] = "effKirbyFoxDataTable";
-static s8 efAsync_803C00EC[0xB] = "EfKbSs.dat";
-static s8 efAsync_803C00F8[0x17] = "effKirbySamusDataTable";
-static s8 efAsync_803C0110[0xB] = "EfKbPk.dat";
-static s8 efAsync_803C011C[0x19] = "effKirbyPikachuDataTable";
-static s8 efAsync_803C0138[0xB] = "EfKbLg.dat";
-static s8 efAsync_803C0144[0x17] = "effKirbyLuigiDataTable";
-static s8 efAsync_803C015C[0xB] = "EfKbCa.dat";
-static s8 efAsync_803C0168[0x19] = "effKirbyCaptainDataTable";
-static s8 efAsync_803C0184[0xB] = "EfKbDk.dat";
-static s8 efAsync_803C0190[0x18] = "effKirbyDonkeyDataTable";
-static s8 efAsync_803C01A8[0xB] = "EfKbKp.dat";
-static s8 efAsync_803C01B4[0x17] = "effKirbyKoopaDataTable";
-static s8 efAsync_803C01CC[0xB] = "EfKbIc.dat";
-static s8 efAsync_803C01D8[0x15] = "effKirbyIceDataTable";
-static s8 efAsync_803C01F0[0xB] = "EfKbGn.dat";
-static s8 efAsync_803C01FC[0x17] = "effKirbyGanonDataTable";
-static s8 efAsync_803C0214[0xB] = "EfKbFe.dat";
-static s8 efAsync_803C0220[0x18] = "effKirbyEmblemDataTable";
-static s8 efAsync_803C0238[0xD] = "EfFeData.dat";
-static s8 efAsync_803C0248[0x13] = "effEmblemDataTable";
-static struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51] = {
+/* 06744C */ static void efAsync_8006744C(HSD_GObj* gobj, ef_UnkStruct3* arg1);
+/* 3BFB00 */ static s8 efAsync_803BFB00[0x25] =
+    "!(jobj->flags & JOBJ_USE_QUATERNION)";
+/* 3BFD68 */ static s8 efAsync_803BFD68[0xD] = "EfCoData.dat";
+/* 3BFD78 */ static s8 efAsync_803BFD78[0x13] = "effCommonDataTable";
+/* 3BFD8C */ static s8 efAsync_803BFD8C[0xD] = "EfMrData.dat";
+/* 3BFD9C */ static s8 efAsync_803BFD9C[0x12] = "effMarioDataTable";
+/* 3BFDB0 */ static s8 efAsync_803BFDB0[0xD] = "EfSsData.dat";
+/* 3BFDC0 */ static s8 efAsync_803BFDC0[0x12] = "effSamusDataTable";
+/* 3BFDD4 */ static s8 efAsync_803BFDD4[0xD] = "EfFxData.dat";
+/* 3BFDE4 */ static s8 efAsync_803BFDE4[0x10] = "effFoxDataTable";
+/* 3BFDF4 */ static s8 efAsync_803BFDF4[0xD] = "EfCaData.dat";
+/* 3BFE04 */ static s8 efAsync_803BFE04[0x14] = "effCaptainDataTable";
+/* 3BFE18 */ static s8 efAsync_803BFE18[0xD] = "EfKbData.dat";
+/* 3BFE28 */ static s8 efAsync_803BFE28[0x12] = "effKirbyDataTable";
+/* 3BFE3C */ static s8 efAsync_803BFE3C[0xD] = "EfLkData.dat";
+/* 3BFE4C */ static s8 efAsync_803BFE4C[0x11] = "effLinkDataTable";
+/* 3BFE60 */ static s8 efAsync_803BFE60[0xD] = "EfPkData.dat";
+/* 3BFE70 */ static s8 efAsync_803BFE70[0x14] = "effPikachuDataTable";
+/* 3BFE84 */ static s8 efAsync_803BFE84[0xD] = "EfDkData.dat";
+/* 3BFE94 */ static s8 efAsync_803BFE94[0x13] = "effDonkeyDataTable";
+/* 3BFEA8 */ static s8 efAsync_803BFEA8[0xD] = "EfYsData.dat";
+/* 3BFEB8 */ static s8 efAsync_803BFEB8[0x12] = "effYoshiDataTable";
+/* 3BFECC */ static s8 efAsync_803BFECC[0xD] = "EfNsData.dat";
+/* 3BFEDC */ static s8 efAsync_803BFEDC[0x11] = "effNessDataTable";
+/* 3BFEF0 */ static s8 efAsync_803BFEF0[0xD] = "EfPrData.dat";
+/* 3BFF00 */ static s8 efAsync_803BFF00[0x12] = "effPurinDataTable";
+/* 3BFF14 */ static s8 efAsync_803BFF14[0xD] = "EfKpData.dat";
+/* 3BFF24 */ static s8 efAsync_803BFF24[0x12] = "effKoopaDataTable";
+/* 3BFF38 */ static s8 efAsync_803BFF38[0xD] = "EfMtData.dat";
+/* 3BFF48 */ static s8 efAsync_803BFF48[0x13] = "effMewtwoDataTable";
+/* 3BFF5C */ static s8 efAsync_803BFF5C[0xD] = "EfIcData.dat";
+/* 3BFF6C */ static s8 efAsync_803BFF6C[0x17] = "effIceclimberDataTable";
+/* 3BFF84 */ static s8 efAsync_803BFF84[0xD] = "EfPeData.dat";
+/* 3BFF94 */ static s8 efAsync_803BFF94[0x12] = "effPeachDataTable";
+/* 3BFFA8 */ static s8 efAsync_803BFFA8[0xD] = "EfMsData.dat";
+/* 3BFFB8 */ static s8 efAsync_803BFFB8[0x11] = "effMarsDataTable";
+/* 3BFFCC */ static s8 efAsync_803BFFCC[0xD] = "EfZdData.dat";
+/* 3BFFDC */ static s8 efAsync_803BFFDC[0x12] = "effZeldaDataTable";
+/* 3BFFF0 */ static s8 efAsync_803BFFF0[0xD] = "EfLgData.dat";
+/* 3C0000 */ static s8 efAsync_803C0000[0x12] = "effLuigiDataTable";
+/* 3C0014 */ static s8 efAsync_803C0014[0xD] = "EfGnData.dat";
+/* 3C0024 */ static s8 efAsync_803C0024[0x12] = "effGanonDataTable";
+/* 3C0038 */ static s8 efAsync_803C0038[0xB] = "EfKbMs.dat";
+/* 3C0044 */ static s8 efAsync_803C0044[0x16] = "effKirbyMarsDataTable";
+/* 3C005C */ static s8 efAsync_803C005C[0xB] = "EfKbZd.dat";
+/* 3C0068 */ static s8 efAsync_803C0068[0x17] = "effKirbyZeldaDataTable";
+/* 3C0080 */ static s8 efAsync_803C0080[0xD] = "EfMnData.dat";
+/* 3C0090 */ static s8 efAsync_803C0090[0x11] = "effMenuDataTable";
+/* 3C00A4 */ static s8 efAsync_803C00A4[0xB] = "EfKbMr.dat";
+/* 3C00B0 */ static s8 efAsync_803C00B0[0x17] = "effKirbyMarioDataTable";
+/* 3C00C8 */ static s8 efAsync_803C00C8[0xB] = "EfKbFx.dat";
+/* 3C00D4 */ static s8 efAsync_803C00D4[0x15] = "effKirbyFoxDataTable";
+/* 3C00EC */ static s8 efAsync_803C00EC[0xB] = "EfKbSs.dat";
+/* 3C00F8 */ static s8 efAsync_803C00F8[0x17] = "effKirbySamusDataTable";
+/* 3C0110 */ static s8 efAsync_803C0110[0xB] = "EfKbPk.dat";
+/* 3C011C */ static s8 efAsync_803C011C[0x19] = "effKirbyPikachuDataTable";
+/* 3C0138 */ static s8 efAsync_803C0138[0xB] = "EfKbLg.dat";
+/* 3C0144 */ static s8 efAsync_803C0144[0x17] = "effKirbyLuigiDataTable";
+/* 3C015C */ static s8 efAsync_803C015C[0xB] = "EfKbCa.dat";
+/* 3C0168 */ static s8 efAsync_803C0168[0x19] = "effKirbyCaptainDataTable";
+/* 3C0184 */ static s8 efAsync_803C0184[0xB] = "EfKbDk.dat";
+/* 3C0190 */ static s8 efAsync_803C0190[0x18] = "effKirbyDonkeyDataTable";
+/* 3C01A8 */ static s8 efAsync_803C01A8[0xB] = "EfKbKp.dat";
+/* 3C01B4 */ static s8 efAsync_803C01B4[0x17] = "effKirbyKoopaDataTable";
+/* 3C01CC */ static s8 efAsync_803C01CC[0xB] = "EfKbIc.dat";
+/* 3C01D8 */ static s8 efAsync_803C01D8[0x15] = "effKirbyIceDataTable";
+/* 3C01F0 */ static s8 efAsync_803C01F0[0xB] = "EfKbGn.dat";
+/* 3C01FC */ static s8 efAsync_803C01FC[0x17] = "effKirbyGanonDataTable";
+/* 3C0214 */ static s8 efAsync_803C0214[0xB] = "EfKbFe.dat";
+/* 3C0220 */ static s8 efAsync_803C0220[0x18] = "effKirbyEmblemDataTable";
+/* 3C0238 */ static s8 efAsync_803C0238[0xD] = "EfFeData.dat";
+/* 3C0248 */ static s8 efAsync_803C0248[0x13] = "effEmblemDataTable";
+/* 3C025C */ struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51] = {
     { "EfCoData.dat", "effCommonDataTable", NULL },
     { "EfMrData.dat", "effMarioDataTable", NULL },
     { "EfSsData.dat", "effSamusDataTable", NULL },
@@ -146,12 +148,15 @@ static struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51] = {
     { "EfFeData.dat", "effEmblemDataTable", NULL },
     { NULL, NULL, NULL },
 };
-static s8 efAsync_803C04C0[0x1B] = "[EfASync] unknown type %d\n";
-static s8 efAsync_803C04DC[0xA] = "efasync.c";
-static s8 efAsync_804D39E8[7] = "jobj.h";
-static s8 efAsync_804D39F0[5] = "jobj";
-static s8 efAsync_804D39F8 = 48;
-// static f64 efAsync_804D8208 = 2 * M_PI;
+/* 3C04C0 */ static s8 efAsync_803C04C0[0x1B] = "[EfASync] unknown type %d\n";
+/* 3C04DC */ static s8 efAsync_803C04DC[0xA] = "efasync.c";
+/* 458EE0 */ extern struct _struct_efLib_80458EE0_0x8 efLib_80458EE0[16];
+/* 4D39E8 */ static s8 efAsync_804D39E8[7] = "jobj.h";
+/* 4D39F0 */ static s8 efAsync_804D39F0[5] = "jobj";
+/* 4D39F8 */ static s8 efAsync_804D39F8 = 48;
+/* 4D64E8 */ extern s32 efLib_804D64E8;
+/* 4D64F0 */ extern s32 efLib_804D64F0;
+/* 4D8208 */ static f64 efAsync_804D8208 = 2 * M_PI;
 
 // Effect* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list arg2) {
 #if 1

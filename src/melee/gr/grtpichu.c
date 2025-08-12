@@ -16,25 +16,25 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 222B98 */ static void grTPichu_80222B98(int);
+/* 222B98 */ static void grTPichu_80222B98(bool);
 /* 222B9C */ static void grTPichu_80222B9C(void);
-/* 222C0C */ static void grTPichu_80222C0C(void);
-/* 222C10 */ static void grTPichu_80222C10(void);
+/* 222C0C */ static void grTpichu_UnkStage0_OnLoad(void);
+/* 222C10 */ static void grTpichu_UnkStage0_OnStart(void);
 /* 222C34 */ static bool grTPichu_80222C34(void);
 /* 222C3C */ static HSD_GObj* grTPichu_80222C3C(int gobj_id);
-/* 222D24 */ static void grTPichu_80222D24(HSD_GObj* gobj);
-/* 222D50 */ static bool grTPichu_80222D50(HSD_GObj*);
-/* 222D58 */ static void grTPichu_80222D58(HSD_GObj*);
-/* 222D5C */ static void grTPichu_80222D5C(HSD_GObj*);
-/* 222D60 */ static void grTPichu_80222D60(HSD_GObj* gobj);
-/* 222DB0 */ static bool grTPichu_80222DB0(HSD_GObj*);
-/* 222DB8 */ static void grTPichu_80222DB8(HSD_GObj* gobj);
-/* 222DEC */ static void grTPichu_80222DEC(HSD_GObj*);
-/* 222DF0 */ static void grTPichu_80222DF0(HSD_GObj* gobj);
-/* 222E40 */ static bool grTPichu_80222E40(HSD_GObj*);
-/* 222E48 */ static void grTPichu_80222E48(HSD_GObj*);
-/* 222E68 */ static void grTPichu_80222E68(HSD_GObj*);
-/* 222E6C */ static DynamicsDesc* grTPichu_80222E6C(int);
+/* 222D24 */ static void grTPichu_80222D24(Ground_GObj* gobj);
+/* 222D50 */ static bool grTPichu_80222D50(Ground_GObj*);
+/* 222D58 */ static void grTPichu_80222D58(Ground_GObj*);
+/* 222D5C */ static void grTPichu_80222D5C(Ground_GObj*);
+/* 222D60 */ static void grTPichu_80222D60(Ground_GObj* gobj);
+/* 222DB0 */ static bool grTPichu_80222DB0(Ground_GObj*);
+/* 222DB8 */ static void grTPichu_80222DB8(Ground_GObj* gobj);
+/* 222DEC */ static void grTPichu_80222DEC(Ground_GObj*);
+/* 222DF0 */ static void grTPichu_80222DF0(Ground_GObj* gobj);
+/* 222E40 */ static bool grTPichu_80222E40(Ground_GObj*);
+/* 222E48 */ static void grTPichu_80222E48(Ground_GObj*);
+/* 222E68 */ static void grTPichu_80222E68(Ground_GObj*);
+/* 222E6C */ static DynamicsDesc* grTPichu_80222E6C(enum_t);
 /* 222E74 */ static bool grTPichu_80222E74(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTPc_803E91B0[] = {
@@ -68,8 +68,8 @@ StageData grTPc_803E920C = {
     "/GrTPc.dat",
     grTPichu_80222B9C,
     grTPichu_80222B98,
-    grTPichu_80222C0C,
-    grTPichu_80222C10,
+    grTpichu_UnkStage0_OnLoad,
+    grTpichu_UnkStage0_OnStart,
     grTPichu_80222C34,
     grTPichu_80222E6C,
     grTPichu_80222E74,
@@ -95,9 +95,9 @@ static void grTPichu_80222B9C(void)
     Ground_801C42AC();
 }
 
-static void grTPichu_80222C0C(void) {}
+static void grTpichu_UnkStage0_OnLoad(void) {}
 
-static void grTPichu_80222C10(void)
+static void grTpichu_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -135,22 +135,22 @@ static HSD_GObj* grTPichu_80222C3C(int gobj_id)
     return gobj;
 }
 
-static void grTPichu_80222D24(HSD_GObj* gobj)
+static void grTPichu_80222D24(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTPichu_80222D50(HSD_GObj* arg0)
+static bool grTPichu_80222D50(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTPichu_80222D58(HSD_GObj* arg0) {}
+static void grTPichu_80222D58(Ground_GObj* arg0) {}
 
-static void grTPichu_80222D5C(HSD_GObj* arg0) {}
+static void grTPichu_80222D5C(Ground_GObj* arg0) {}
 
-static void grTPichu_80222D60(HSD_GObj* gobj)
+static void grTPichu_80222D60(Ground_GObj* gobj)
 {
     u8 _[4];
 
@@ -159,20 +159,20 @@ static void grTPichu_80222D60(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTPichu_80222DB0(HSD_GObj* arg0)
+static bool grTPichu_80222DB0(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTPichu_80222DB8(HSD_GObj* gobj)
+static void grTPichu_80222DB8(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTPichu_80222DEC(HSD_GObj* arg0) {}
+static void grTPichu_80222DEC(Ground_GObj* arg0) {}
 
-static void grTPichu_80222DF0(HSD_GObj* gobj)
+static void grTPichu_80222DF0(Ground_GObj* gobj)
 {
     u8 _[4];
 
@@ -181,19 +181,19 @@ static void grTPichu_80222DF0(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTPichu_80222E40(HSD_GObj* arg0)
+static bool grTPichu_80222E40(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTPichu_80222E48(HSD_GObj* arg0)
+static void grTPichu_80222E48(Ground_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
 }
 
-static void grTPichu_80222E68(HSD_GObj* arg0) {}
+static void grTPichu_80222E68(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grTPichu_80222E6C(int arg0)
+static DynamicsDesc* grTPichu_80222E6C(enum_t arg0)
 {
     return NULL;
 }

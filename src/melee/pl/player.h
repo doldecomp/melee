@@ -5,9 +5,11 @@
 
 #include "ft/forward.h"
 #include "pl/forward.h"
-#include <baselib/forward.h>
 
 #include "pl/types.h"
+
+#include <baselib/forward.h>
+#include <melee/pl/forward.h>
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
@@ -164,10 +166,10 @@ bool Player_8003219C(int slot);
 bool Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
 CharacterKind Player_GetPlayerCharacter(int slot);
-void Player_SetPlayerCharacter(s32 slot, s32 value);
-enum_t Player_GetPlayerSlotType(s32 slot);
-enum_t Player_8003248C(s32 slot, bool arg1);
-void Player_SetSlottype(s32 slot, enum_t value);
+void Player_SetPlayerCharacter(s32 slot, CharacterKind value);
+Gm_PKind Player_GetPlayerSlotType(s32 slot);
+Gm_PKind Player_8003248C(s32 slot, bool arg1);
+void Player_SetSlottype(s32 slot, Gm_PKind value);
 s8 Player_800325C8(s32 slot, bool b);
 s8 Player_80032610(s32 slot, bool arg1);
 void Player_LoadPlayerCoords(s32 slot, Vec3* out_vec);
@@ -299,7 +301,7 @@ s32 Player_GetJoystickCountByIndex(s32 slot, s32 index);
 void Player_800366DC(s32 slot, s32 arg1);
 void Player_80036790(s32 slot, f32 arg1);
 void Player_80036844(s32 slot, s32 arg1);
-void Player_800368F8(s32 slot);
+bool Player_800368F8(int slot);
 void Player_80036978(s32 slot, s32 arg1);
 void Player_InitOrResetPlayer(s32 slot);
 void Player_80036CF0(s32 slot);

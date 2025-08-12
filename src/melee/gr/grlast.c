@@ -30,7 +30,7 @@ S16Vec grLast_804D4968[1] = { { 0, 3, 0 } };
 
 static int* grNLa_804D6AD0;
 
-static void grLast_8021A620(int arg0)
+static void grLast_8021A620(bool arg0)
 {
     Ground_GObj* gobj;
     Ground* gp;
@@ -154,8 +154,8 @@ StageData grNLa_803E7F90 = {
     "/GrNLa.dat",
     grLast_8021A740,
     grLast_8021A620,
-    grLast_8021A7C4,
-    grLast_8021A7C8,
+    grLast_UnkStage0_OnLoad,
+    grLast_UnkStage0_OnStart,
     grLast_8021A7EC,
     grLast_8021C740,
     grLast_8021C748,
@@ -179,14 +179,14 @@ static void grLast_8021A740(void)
     Camera_800311CC(30000);
 }
 
-static void grLast_8021A7C4(void) {}
+static void grLast_UnkStage0_OnLoad(void) {}
 
-static void grLast_8021A7C8(void)
+static void grLast_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
 
-static int grLast_8021A7EC(void)
+static bool grLast_8021A7EC(void)
 {
     return FALSE;
 }
@@ -429,13 +429,13 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     if (gp->u.last.xC4 > grLast_804DBB94) {
         float randf;
         gp->u.last.xC4 = grLast_804DBB94;
-        gp->u.last.xCC = -fabs_inline(gp->u.last.xCC);
+        gp->u.last.xCC = -ABS(gp->u.last.xCC);
         randf = HSD_Randf();
         gp->u.last.xD4 = grLast_804DBB80 * -randf - grLast_804DBB7C;
     } else if (gp->u.last.xC4 < grLast_804DBB98) {
         float randf;
         gp->u.last.xC4 = grLast_804DBB98;
-        gp->u.last.xCC = fabs_inline(gp->u.last.xCC);
+        gp->u.last.xCC = ABS(gp->u.last.xCC);
         gp->u.last.xD4 = grLast_804DBB80 * HSD_Randf() + grLast_804DBB7C;
     }
     HSD_JObjSetRotationX(jobj, gp->u.last.xC4 * gp->u.last.xDC);
@@ -443,12 +443,12 @@ static void grLast_8021ADD0(Ground_GObj* gobj)
     if (gp->u.last.xC8 > grLast_804DBB9C) {
         float randf;
         gp->u.last.xC8 = grLast_804DBB9C;
-        gp->u.last.xD0 = -fabs_inline(gp->u.last.xD0);
+        gp->u.last.xD0 = -ABS(gp->u.last.xD0);
         randf = HSD_Randf();
         gp->u.last.xD8 = grLast_804DBB80 * -randf - grLast_804DBB7C;
     } else if (gp->u.last.xC8 < grLast_804DBBA0) {
         gp->u.last.xC8 = grLast_804DBBA0;
-        gp->u.last.xD0 = fabs_inline(gp->u.last.xD0);
+        gp->u.last.xD0 = ABS(gp->u.last.xD0);
         gp->u.last.xD8 = grLast_804DBB80 * HSD_Randf() + grLast_804DBB7C;
     }
     HSD_JObjSetRotationY(jobj, gp->u.last.xC8 * gp->u.last.xDC);
@@ -962,7 +962,7 @@ static void grLast_8021C6AC(void)
     Ground_801C0574(&spC);
 }
 
-static DynamicsDesc* grLast_8021C740(int arg0)
+static DynamicsDesc* grLast_8021C740(enum_t arg0)
 {
     return NULL;
 }

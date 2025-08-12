@@ -57,20 +57,10 @@ void ftPk_SpecialLw_SetState_Unk0(HSD_GObj* gobj)
     fp->mv.pk.specialhi.x4 = 3;
 }
 
-static inline float nested_sum_fabs(float fighter_pos_y, float pika_attr_xBC,
-                                    float pika_attr_xBC_abs, float vec_y)
-{
-    if (fighter_pos_y + pika_attr_xBC_abs - vec_y < 0.0f) {
-        return -(fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y);
-    } else {
-        return fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y;
-    }
-}
-
 bool ftPk_SpecialLw_8012765C(HSD_GObj* gobj)
 {
     Vec3 vec;
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
     Item_GObj* thunder_gobj = fp->mv.pk.speciallw.x0;
 
@@ -84,9 +74,8 @@ bool ftPk_SpecialLw_8012765C(HSD_GObj* gobj)
         return false;
     }
 
-    if (fabs_inline(fp->cur_pos.x - vec.x) < fabs_inline(pika_attr->xC4)) {
-        float final_y_pos = nested_sum_fabs(
-            fp->cur_pos.y, pika_attr->xBC, fabs_inline(pika_attr->xBC), vec.y);
+    if (ABS(fp->cur_pos.x - vec.x) < ABS(pika_attr->xC4)) {
+        float final_y_pos = ABS(fp->cur_pos.y + ABS(pika_attr->xBC) - vec.y);
 
         if ((final_y_pos < pika_attr->xC8) && fp->mv.pk.speciallw.x0 != NULL &&
             !it_802B1DEC(fp->mv.pk.speciallw.x0))

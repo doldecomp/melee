@@ -6,7 +6,7 @@
 #include <dolphin/os.h>
 #include <dolphin/os/OSContext.h>
 
-typedef void (*ReportCallback)(unsigned char*, size_t);
+typedef void (*ReportCallback)(const unsigned char*, size_t);
 typedef void (*PanicCallback)(OSContext*, ...);
 
 ATTRIBUTE_NORETURN void __assert(char*, u32, char*);
@@ -20,11 +20,15 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
 #define HSD_ASSERTMSG(line, cond, msg)                                        \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, msg))
+#define HSD_ASSERTREPORT(line, cond, ...) \
+    ((cond) ? (void)0 : (OSReport(__VA_ARGS__), __assert(__FILE__, line, #cond)))
 #else
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
 #define HSD_ASSERTMSG(line, cond, msg)                                        \
     ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
+#define HSD_ASSERTREPORT(line, cond, ...) \
+    ((cond) ? (void)0 : (OSReport(__VA_ARGS__), __assert(__FILE__, __LINE__, #cond)))
 #endif
 
 int report_func(__file_handle arg0, unsigned char* arg1, size_t* arg2,

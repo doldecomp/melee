@@ -1,7 +1,9 @@
 #include "db.h"
 
-#include <melee/un/un_2FC9.h>
+#include "un/un_3028.h"
+
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/un/un_2FC9.h>
 
 static char db_SoundInfoText_buf[0x70];
 

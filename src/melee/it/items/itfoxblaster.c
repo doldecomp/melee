@@ -1,5 +1,3 @@
-#include <melee/ft/chara/ftFox/forward.h>
-
 #include "itfoxblaster.h"
 
 #include "ef/eflib.h"
@@ -19,30 +17,54 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-void it_802ADF10(HSD_GObj* item_gobj);
-bool it_802AEBCC(HSD_GObj* item_gobj);
-void it_802AEED4(HSD_GObj* item_gobj);
-bool it_802AEF08(HSD_GObj* item_gobj);
-bool it_802AEF10(HSD_GObj* item_gobj);
-void it_802AEFB8(HSD_GObj* item_gobj);
-bool it_802AEFBC(HSD_GObj* item_gobj);
-bool it_802AF064(HSD_GObj* item_gobj);
-void it_802AF178(HSD_GObj* item_gobj);
-bool it_802AF17C(HSD_GObj* item_gobj);
-
-ItemStateTable it_803F6CA8[11] = {
-    { 0, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 1, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 2, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 3, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 4, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 5, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 6, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 7, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { 8, it_802AEBCC, it_802AEED4, it_802AEF08 },
-    { -1, it_802AEF10, it_802AEFB8, it_802AEFBC },
-    { -1, it_802AF064, it_802AF178, it_802AF17C }
+/* 2ADDD0 */ static void it_802ADDD0(Item_GObj* item_gobj, s32 visibility);
+/* 2ADEF0 */ static void it_802ADEF0(HSD_GObj* item_gobj);
+/* 2ADF10 */ static void it_802ADF10(HSD_GObj* item_gobj);
+/* 2AE1D0 */ static void it_802AE1D0(Item_GObj* item_gobj);
+/* 2AE200 */ void it_802AE200(Item_GObj* item_gobj);
+/* 2AE538 */ static void it_802AE538(Item_GObj* item_gobj);
+/* 2AE608 */ static void it_802AE608(Item_GObj* item_gobj);
+/* 2AE63C */ static void it_802AE63C(Item_GObj* item_gobj);
+/* 2AE7B8 */ static void it_802AE7B8(Item_GObj* item_gobj);
+/* 2AE8A8 */ static Item_GObj* it_802AE8A8(f32 facing_dir,
+                                           Fighter_GObj* fighter_gobj,
+                                           Vec3* arg2, Fighter_Part ft_part,
+                                           ItemKind it_kind);
+/* 2AEAB4 */ static void it_802AEAB4(Item_GObj* item_gobj);
+/* 2AEBCC */ static bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj);
+/* 2AEED4 */ static void itFoxblaster_UnkMotion8_Phys(HSD_GObj* item_gobj);
+/* 2AEF08 */ static bool itFoxblaster_UnkMotion8_Coll(HSD_GObj* item_gobj);
+/* 2AEF10 */ static bool itFoxblaster_UnkMotion9_Anim(HSD_GObj* item_gobj);
+/* 2AEFB8 */ static void itFoxblaster_UnkMotion9_Phys(HSD_GObj* item_gobj);
+/* 2AEFBC */ static bool itFoxblaster_UnkMotion9_Coll(HSD_GObj* item_gobj);
+/* 2AF064 */ static bool itFoxblaster_UnkMotion10_Anim(HSD_GObj* item_gobj);
+/* 2AF178 */ static void itFoxblaster_UnkMotion10_Phys(HSD_GObj* item_gobj);
+/* 2AF17C */ static bool itFoxblaster_UnkMotion10_Coll(HSD_GObj* item_gobj);
+/* 3F6CA8 */ ItemStateTable it_803F6CA8[11] = {
+    { 0, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 1, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 2, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 3, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 4, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 5, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 6, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 7, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { 8, itFoxblaster_UnkMotion8_Anim, itFoxblaster_UnkMotion8_Phys,
+      itFoxblaster_UnkMotion8_Coll },
+    { -1, itFoxblaster_UnkMotion9_Anim, itFoxblaster_UnkMotion9_Phys,
+      itFoxblaster_UnkMotion9_Coll },
+    { -1, itFoxblaster_UnkMotion10_Anim, itFoxblaster_UnkMotion10_Phys,
+      itFoxblaster_UnkMotion10_Coll }
 };
+
 // Used for jobj->translate.z calc for xDD4
 f32 it_803F6D58[14] = { 0.0F,    -0.51F,  -1.02F,  -1.53F,  -1.39F,
                         -1.251F, -1.112F, -0.973F, -0.834F, -0.695F,
@@ -659,7 +681,7 @@ static int it_803F6E68[11] = { 0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 10 };
 /// get the item state for the current fighter move, and set that. Then call
 /// Item_802694CC to do advance animation + script
 /// @param item_gobj
-void it_802AEB00(Item_GObj* item_gobj)
+void it_2725_Logic96_PickedUp(Item_GObj* item_gobj)
 {
     Item* item;
     enum_t ft_special_state = 9;
@@ -732,7 +754,7 @@ static inline void clear_blaster(HSD_GObj* item_gobj)
 /// blaster item if no longer needed
 /// @param item_gobj
 /// @return false
-bool it_802AEBCC(HSD_GObj* item_gobj)
+bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj)
 {
     // HSD_GObj* gobj;
     int blaster_action;
@@ -840,7 +862,7 @@ bool it_802AEBCC(HSD_GObj* item_gobj)
 
 /// @brief Calls model transformation functions
 /// @param item_gobj
-void it_802AEED4(HSD_GObj* item_gobj)
+void itFoxblaster_UnkMotion8_Phys(HSD_GObj* item_gobj)
 {
     it_802AE63C(item_gobj);
     it_802AE200(item_gobj);
@@ -849,7 +871,7 @@ void it_802AEED4(HSD_GObj* item_gobj)
 /// @brief Does nothing
 /// @param item_gobj
 /// @return false
-bool it_802AEF08(HSD_GObj* item_gobj)
+bool itFoxblaster_UnkMotion8_Coll(HSD_GObj* item_gobj)
 {
     return false;
 }
@@ -857,7 +879,7 @@ bool it_802AEF08(HSD_GObj* item_gobj)
 /// @brief If blaster item exists, clear references from it
 /// @param item_gobj
 /// @return true
-bool it_802AEF10(HSD_GObj* item_gobj)
+bool itFoxblaster_UnkMotion9_Anim(HSD_GObj* item_gobj)
 {
     Item* item;
 
@@ -886,13 +908,13 @@ bool it_802AEF10(HSD_GObj* item_gobj)
 
 /// @brief Does nothing
 /// @param item_gobj
-void it_802AEFB8(HSD_GObj* item_gobj) {}
+void itFoxblaster_UnkMotion9_Phys(HSD_GObj* item_gobj) {}
 
 /// @brief If blaster item exists, clear references from it (identical to
-/// it_802AEF10)
+/// itFoxblaster_UnkMotion9_Anim)
 /// @param item_gobj
 /// @return true
-bool it_802AEFBC(HSD_GObj* item_gobj)
+bool itFoxblaster_UnkMotion9_Coll(HSD_GObj* item_gobj)
 {
     Item* item;
 
@@ -929,7 +951,7 @@ static inline void copy_jobj_scale(HSD_JObj* dst, HSD_JObj* src, Vec3* scale)
 /// match the owner's
 /// @param item_gobj
 /// @return false
-bool it_802AF064(HSD_GObj* item_gobj)
+bool itFoxblaster_UnkMotion10_Anim(HSD_GObj* item_gobj)
 {
     if (item_gobj != NULL) {
         Item* it = GET_ITEM(item_gobj);
@@ -946,12 +968,12 @@ bool it_802AF064(HSD_GObj* item_gobj)
 
 /// @brief Does nothing
 /// @param item_gobj
-void it_802AF178(HSD_GObj* item_gobj) {}
+void itFoxblaster_UnkMotion10_Phys(HSD_GObj* item_gobj) {}
 
 /// @brief Does nothing
 /// @param item_gobj
 /// @return false
-bool it_802AF17C(HSD_GObj* item_gobj)
+bool itFoxblaster_UnkMotion10_Coll(HSD_GObj* item_gobj)
 {
     return false;
 }
@@ -959,7 +981,7 @@ bool it_802AF17C(HSD_GObj* item_gobj)
 /// @brief Calls function it_8026B894
 /// @param item_gobj
 /// @param ref_gobj
-void it_802AF184(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2725_Logic96_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     // Remove all GObj interaction references from item
     // Returns whether or not the referenced_gobj was the #Item::owner.

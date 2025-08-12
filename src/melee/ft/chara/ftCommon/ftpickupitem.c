@@ -1,15 +1,15 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "it/forward.h"
-
 #include "ftpickupitem.h"
 
 #include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
@@ -25,9 +25,11 @@
 #include "ftCommon/ftCo_WarpStar.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyWait0.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "pl/pl_040D.h"
 #include "pl/plbonuslib.h"
 
 #include <common_structs.h>
@@ -36,11 +38,22 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
-bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
+/* 0942A0 */ static Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj,
+                                                     u32 flags);
+/* 09447C */ static bool ftpickupitem_8009447C(Fighter_GObj* gobj,
+                                               Item_GObj* item_gobj);
+/* 094694 */ static void ftpickupitem_80094694(Fighter_GObj* gobj,
+                                               FtMotionId msid, bool loop);
+/* 0948A8 */ static void ftpickupitem_800948A8(Fighter_GObj* gobj,
+                                               Item_GObj* item_gobj);
+/* 094B6C */ static void ftpickupitem_80094B6C(Fighter_GObj* gobj,
+                                               Item_GObj* item_gobj);
+
+bool ftpickupitem_80094150(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
     itPickup* pickup;
     Vec4* offset0;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     PAD_STACK(8);
 
     if (Item_IsGrabbable(item_gobj) &&
@@ -79,10 +92,10 @@ bool ftpickupitem_80094150(ftCo_GObj* gobj, Item_GObj* item_gobj)
 }
 
 /// Find item in pickup range?
-Item_GObj* ftpickupitem_800942A0(ftCo_GObj* gobj, u32 flags)
+Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
 {
     itPickup* pickup;
-    ftCo_Fighter* fp;
+    Fighter* fp;
     Vec4* offset0;
 
     fp = GET_FIGHTER(gobj);
@@ -145,9 +158,9 @@ Item_GObj* ftpickupitem_800942A0(ftCo_GObj* gobj, u32 flags)
     }
 }
 
-bool ftpickupitem_8009447C(ftCo_GObj* gobj, Item_GObj* item_gobj)
+bool ftpickupitem_8009447C(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
         __assert(__FILE__, 174, "item_gobj");
@@ -200,9 +213,9 @@ block_35:
     return false;
 }
 
-void ftpickupitem_80094694(ftCo_GObj* gobj, FtMotionId msid, bool loop)
+void ftpickupitem_80094694(Fighter_GObj* gobj, FtMotionId msid, bool loop)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     {
         float anim_spd;
         if (msid == ftCo_MS_HeavyGet) {
@@ -232,7 +245,7 @@ void ftpickupitem_80094694(ftCo_GObj* gobj, FtMotionId msid, bool loop)
     }
 }
 
-bool ftpickupitem_80094790(ftCo_GObj* gobj)
+bool ftpickupitem_80094790(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
     if (GET_FIGHTER(gobj)->x1978 == NULL) {
@@ -249,9 +262,9 @@ bool ftpickupitem_80094790(ftCo_GObj* gobj)
     return false;
 }
 
-void ftpickupitem_80094818(ftCo_GObj* gobj, int arg1)
+void ftpickupitem_80094818(Fighter_GObj* gobj, int arg1)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     PAD_STACK(8);
     if (fp->x1978 != NULL) {
         pl_8003E17C(fp->player_id, fp->x221F_b4, fp->x1978);
@@ -263,9 +276,9 @@ void ftpickupitem_80094818(ftCo_GObj* gobj, int arg1)
     }
 }
 
-void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
+void ftpickupitem_800948A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     PAD_STACK(8);
     if (fp->item_gobj != NULL) {
         fp->x1978 = item_gobj;
@@ -292,9 +305,9 @@ void ftpickupitem_800948A8(ftCo_GObj* gobj, Item_GObj* item_gobj)
     }
 }
 
-void ftpickupitem_Anim(ftCo_GObj* gobj)
+void ftpickupitem_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (ftCheckThrowB3(fp)) {
         Item_GObj* item_gobj =
             ftpickupitem_800942A0(gobj, fp->mv.co.itemget.x0 ? 2 : 1);
@@ -325,22 +338,22 @@ void ftpickupitem_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftpickupitem_IASA(ftCo_GObj* gobj) {}
+void ftpickupitem_IASA(Fighter_GObj* gobj) {}
 
-void ftpickupitem_Phys(ftCo_GObj* gobj)
+void ftpickupitem_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftpickupitem_Coll(ftCo_GObj* gobj)
+void ftpickupitem_Coll(Fighter_GObj* gobj)
 {
     ft_800841B8(gobj, ftpickupitem_80094D90);
 }
 
-void ftpickupitem_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj)
+void ftpickupitem_80094B6C(Fighter_GObj* gobj, Item_GObj* item_gobj)
 {
     Vec3 vec;
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     PAD_STACK(4);
     if (item_gobj == NULL) {
         OSReport("ftGetImmItem item_gobj is NULL!!\n");
@@ -393,9 +406,9 @@ void ftpickupitem_80094B6C(ftCo_GObj* gobj, Item_GObj* item_gobj)
     }
 }
 
-void ftpickupitem_80094D90(ftCo_GObj* gobj)
+void ftpickupitem_80094D90(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_8009750C(gobj);
     /// @todo #ftpickupitem_80094DF8
     if (fp->item_gobj != NULL) {
@@ -407,9 +420,9 @@ void ftpickupitem_80094D90(ftCo_GObj* gobj)
     ftCo_Fall_Enter(gobj);
 }
 
-void ftpickupitem_80094DF8(ftCo_GObj* gobj)
+void ftpickupitem_80094DF8(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->item_gobj != NULL) {
         ftpickupitem_80094B6C(gobj, fp->item_gobj);
     }

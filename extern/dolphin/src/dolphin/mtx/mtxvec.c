@@ -50,6 +50,32 @@ asm void PSMTXMultVec(register Mtx44 m, register Vec* src, register Vec* dst)
     // clang-format on
 }
 
+asm void PSMTXMultVecSR(register Mtx44 m, register Vec* src, register Vec* dst)
+{
+    // clang-format off
+    psq_l   f0, 0x0(m), 0, qr0
+    psq_l   f6, Vec.x(src), 0, qr0
+    psq_l   f2, 0x10(m), 0, qr0
+    ps_mul  f8, f0, f6
+    psq_l   f4, 0x20(m), 0, qr0
+    ps_mul  f10, f2, f6
+    psq_l   f7, Vec.z(src), 1, qr0
+    ps_mul  f12, f4, f6
+    psq_l   f3, 0x18(m), 0, qr0
+    ps_sum0 f8, f8, f8, f8
+    psq_l   f5, 0x28(m), 0, qr0
+    ps_sum0 f10, f10, f10, f10
+    psq_l   f1, 0x8(m), 0, qr0
+    ps_sum0 f12, f12, f12, f12
+    ps_madd f9, f1, f7, f8
+    psq_st  f9, Vec.x(dst), 1, qr0
+    ps_madd f11, f3, f7, f10
+    psq_st  f11, Vec.y(dst), 1, qr0
+    ps_madd f13, f5, f7, f12
+    psq_st  f13, Vec.z(dst), 1, qr0
+    // clang-format on
+}
+
 void C_MTXMultVecArray(Mtx m, Vec* srcBase, Vec* dstBase, u32 count)
 {
     u32 i;

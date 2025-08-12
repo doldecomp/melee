@@ -15,24 +15,24 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 221EF4 */ static void grTMars_80221EF4(int);
+/* 221EF4 */ static void grTMars_80221EF4(bool);
 /* 221EF8 */ static void grTMars_80221EF8(void);
-/* 221F68 */ static void grTMars_80221F68(void);
-/* 221F6C */ static void grTMars_80221F6C(void);
+/* 221F68 */ static void grTmars_UnkStage0_OnLoad(void);
+/* 221F6C */ static void grTmars_UnkStage0_OnStart(void);
 /* 221F90 */ static bool grTMars_80221F90(void);
 /* 221F98 */ static HSD_GObj* grTMars_80221F98(int);
-/* 222080 */ static void grTMars_80222080(HSD_GObj*);
-/* 2220AC */ static bool grTMars_802220AC(HSD_GObj*);
-/* 2220B4 */ static void grTMars_802220B4(HSD_GObj*);
-/* 2220B8 */ static void grTMars_802220B8(HSD_GObj*);
-/* 2220BC */ static void grTMars_802220BC(HSD_GObj*);
-/* 22210C */ static bool grTMars_8022210C(HSD_GObj*);
-/* 222114 */ static void grTMars_80222114(HSD_GObj*);
-/* 222148 */ static void grTMars_80222148(HSD_GObj*);
-/* 22214C */ static void grTMars_8022214C(HSD_GObj*);
-/* 22219C */ static bool grTMars_8022219C(HSD_GObj*);
-/* 2221A4 */ static void grTMars_802221A4(HSD_GObj*);
-/* 2221C4 */ static void grTMars_802221C4(HSD_GObj*);
+/* 222080 */ static void grTMars_80222080(Ground_GObj*);
+/* 2220AC */ static bool grTMars_802220AC(Ground_GObj*);
+/* 2220B4 */ static void grTMars_802220B4(Ground_GObj*);
+/* 2220B8 */ static void grTMars_802220B8(Ground_GObj*);
+/* 2220BC */ static void grTMars_802220BC(Ground_GObj*);
+/* 22210C */ static bool grTMars_8022210C(Ground_GObj*);
+/* 222114 */ static void grTMars_80222114(Ground_GObj*);
+/* 222148 */ static void grTMars_80222148(Ground_GObj*);
+/* 22214C */ static void grTMars_8022214C(Ground_GObj*);
+/* 22219C */ static bool grTMars_8022219C(Ground_GObj*);
+/* 2221A4 */ static void grTMars_802221A4(Ground_GObj*);
+/* 2221C4 */ static void grTMars_802221C4(Ground_GObj*);
 /* 2221C8 */ static DynamicsDesc* grTMars_802221C8(enum_t);
 /* 2221D0 */ static bool grTMars_802221D0(Vec3*, int, HSD_JObj*);
 
@@ -62,11 +62,11 @@ static StageCallbacks grTMs_803E8EB0[4] = {
 
 StageData grTMs_803E8F0C = {
     0x00000034,       grTMs_803E8EB0,   "/GrTMs.dat",     grTMars_80221EF8,
-    grTMars_80221EF4, grTMars_80221F68, grTMars_80221F6C, grTMars_80221F90,
+    grTMars_80221EF4, grTmars_UnkStage0_OnLoad, grTmars_UnkStage0_OnStart, grTMars_80221F90,
     grTMars_802221C8, grTMars_802221D0, 0x00000001,
 };
 
-static void grTMars_80221EF4(int arg0) {}
+static void grTMars_80221EF4(bool arg0) {}
 
 static void grTMars_80221EF8(void)
 {
@@ -81,12 +81,12 @@ static void grTMars_80221EF8(void)
     Ground_801C42AC();
 }
 
-static void grTMars_80221F68(void)
+static void grTmars_UnkStage0_OnLoad(void)
 {
     return;
 }
 
-static void grTMars_80221F6C(void)
+static void grTmars_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -126,28 +126,28 @@ static HSD_GObj* grTMars_80221F98(int id)
     return gobj;
 }
 
-static void grTMars_80222080(HSD_GObj* gobj)
+static void grTMars_80222080(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTMars_802220AC(HSD_GObj* arg0)
+static bool grTMars_802220AC(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_802220B4(HSD_GObj* arg0)
+static void grTMars_802220B4(Ground_GObj* arg0)
 {
     return;
 }
 
-static void grTMars_802220B8(HSD_GObj* arg0)
+static void grTMars_802220B8(Ground_GObj* arg0)
 {
     return;
 }
 
-static void grTMars_802220BC(HSD_GObj* gobj)
+static void grTMars_802220BC(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -157,20 +157,20 @@ static void grTMars_802220BC(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTMars_8022210C(HSD_GObj* arg0)
+static bool grTMars_8022210C(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_80222114(HSD_GObj* gobj)
+static void grTMars_80222114(Ground_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void grTMars_80222148(HSD_GObj* arg0) {}
+static void grTMars_80222148(Ground_GObj* arg0) {}
 
-static void grTMars_8022214C(HSD_GObj* gobj)
+static void grTMars_8022214C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -180,17 +180,17 @@ static void grTMars_8022214C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool grTMars_8022219C(HSD_GObj* arg0)
+static bool grTMars_8022219C(Ground_GObj* arg0)
 {
     return false;
 }
 
-static void grTMars_802221A4(HSD_GObj* gobj)
+static void grTMars_802221A4(Ground_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-static void grTMars_802221C4(HSD_GObj* arg0) {}
+static void grTMars_802221C4(Ground_GObj* arg0) {}
 
 static DynamicsDesc* grTMars_802221C8(enum_t arg0)
 {

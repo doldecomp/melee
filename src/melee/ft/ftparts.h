@@ -37,13 +37,13 @@
 /* 074A4C */ void ftParts_80074A4C(Fighter_GObj*, enum_t, enum_t);
 /* 074A74 */ int ftParts_80074A74(Fighter_GObj*, int);
 /* 074A8C */ void ftParts_80074A8C(Fighter_GObj*);
-/* 074ACC */ void ftParts_80074ACC(ftCo_GObj* gobj);
+/* 074ACC */ void ftParts_80074ACC(Fighter_GObj* gobj);
 /* 074B0C */ void ftParts_80074B0C(Fighter_GObj*, int, int);
 /* 074B6C */ void ftParts_80074B6C(void);
 /* 074CA0 */ void ftParts_80074CA0(u32*, s32, u32*);
 /* 074D7C */ void ftParts_80074D7C(u32*, s32, u32*);
 /* 074E58 */ void ftParts_80074E58(Fighter*);
-/* 07500C */ Fighter_Part ftParts_8007500C(Fighter*, Fighter_Part);
+/* 07500C */ Fighter_Part ftParts_GetBoneIndex(Fighter*, Fighter_Part);
 /* 075028 */ int ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
                                   size_t joint_idx);
 /* 07506C */ u32 ftParts_8007506C(FighterKind ftkind, u32 part);

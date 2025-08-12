@@ -10,9 +10,9 @@
 #include "ft/ft_081B.h"
 #include "ft/ftanim.h"
 
-void ftCo_80098F3C(ftCo_GObj* gobj)
+void ftCo_80098F3C(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     FtMotionId msid = fp->motion_id == ftCo_MS_ShieldBreakDownU
                           ? ftCo_MS_ShieldBreakStandU
                           : ftCo_MS_ShieldBreakStandD;
@@ -22,21 +22,21 @@ void ftCo_80098F3C(ftCo_GObj* gobj)
                               0, 1, 0, NULL);
 }
 
-void ftCo_ShieldBreakStand_Anim(ftCo_GObj* gobj)
+void ftCo_ShieldBreakStand_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80099010(gobj);
     }
 }
 
-void ftCo_ShieldBreakStand_IASA(ftCo_GObj* gobj) {}
+void ftCo_ShieldBreakStand_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_ShieldBreakStand_Phys(ftCo_GObj* gobj)
+void ftCo_ShieldBreakStand_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_ShieldBreakStand_Coll(ftCo_GObj* gobj)
+void ftCo_ShieldBreakStand_Coll(Fighter_GObj* gobj)
 {
     ft_80083F88(gobj);
 }

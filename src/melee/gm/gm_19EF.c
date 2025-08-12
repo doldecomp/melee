@@ -15,17 +15,35 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/sc/types.h>
 
+static HSD_Archive* lbl_804D6698;
+static HSD_Archive* lbl_804D66F0;
+static HSD_JObj* lbl_804D66F4;
+static u32 lbl_804D66F8;
+
+static struct {
+    u8 pad0[0x8];
+    int x8;
+    u8 padC[0x18 - 0xC];
+    int x18;
+    u8 pad1C[0x22 - 0x1C];
+    u16 x22;
+} lbl_80479A98;
+
 // seems to handle "Go!" animations, based on .dat filenames
 
 /// #fn_8019F9C4
 
 /// #gm_801A0A10_OnEnter
 
-/// #gm_801A0B18_OnLeave
-
-static HSD_Archive* lbl_804D66F0;
-static HSD_JObj* lbl_804D66F4;
-static u32 lbl_804D66F8;
+void gm_801A0B18_OnLeave(void* arg0_)
+{
+    DebugGameOverData* arg0 = arg0_;
+    arg0->x4 = lbl_80479A98.x8;
+    arg0->xC = lbl_80479A98.x18;
+    arg0->x18 = lbl_80479A98.x22;
+    lbAudioAx_800236DC();
+    lbArchive_80016EFC(lbl_804D6698);
+}
 
 static void fn_801A0B60(HSD_GObj* gobj)
 {

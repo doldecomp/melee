@@ -1,35 +1,36 @@
 #include <platform.h>
 #include <placeholder.h>
+#include "itthunder.h"
 
-/// #it_802CCAB4
+/// #it_2725_Logic7_Spawned
 
 void it_802CCB10(void) {}
 
 /// #it_802CCB14
 
-/// #it_802CCB34
+/// #itThunder_UnkMotion1_Anim
 
-/// #it_802CCBAC
+/// #itThunder_UnkMotion1_Phys
 
-/// #it_802CCBCC
+/// #itThunder_UnkMotion1_Coll
 
 /// #it_802CCBF8
 
 /// #it_802CCC68
 
-/// #it_802CCCC4
+/// #itThunder_UnkMotion2_Anim
 
-/// #it_802CCD9C
+/// #itThunder_UnkMotion2_Phys
 
-bool it_802CCE20(void)
+bool itThunder_UnkMotion2_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
 /// #it_802CCE28
 
-/// #it_802CCE9C
+/// #itThunder_UnkMotion0_Anim
 
-/// #it_802CCEC0
+/// #itThunder_UnkMotion0_Phys
 
-/// #it_802CCF74
+/// #itThunder_UnkMotion0_Coll

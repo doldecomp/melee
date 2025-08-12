@@ -75,7 +75,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     ftColl_8007B0C0(gobj, 0);
 
     co_xBC = &fp->co_attrs.xBC;
-    part = ftParts_8007500C(fp, FtPart_HipN);
+    part = ftParts_GetBoneIndex(fp, FtPart_HipN);
     fp2 = GET_FIGHTER(gobj);
     jobj = fp->parts[part].joint;
 
@@ -123,14 +123,14 @@ static inline void inlineA0(Fighter_GObj* gobj)
     FORCE_PAD_STACK(4 * 4);
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        struct UNK_SAMUS_S2 foo;
+        ftHurtboxInit hurt;
         ftColl_8007B0C0(gobj, Intangible);
-        foo.parts[0] = fp->ft_data->x8->x11;
-        foo.parts[1] = FtPart_TransN;
-        foo.parts[2] = FtPart_TransN;
-        foo.vec1 = foo.vec2 = ftYs_Unk1_803B75C0;
-        foo.scale = 1;
-        ftColl_8007B5AC(fp, fp->hurt_capsules, &foo);
+        hurt.bone_idx = fp->ft_data->x8->x11;
+        hurt.height = HurtHeight_Mid;
+        hurt.is_grabbable = true;
+        hurt.a_offset = hurt.b_offset = ftYs_Unk1_803B75C0;
+        hurt.scale = 1;
+        ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
     }
 }
 
@@ -202,7 +202,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 
             ftCo_DatAttrs_xBC_t* co_xBC = &fp0->co_attrs.xBC;
 
-            ssize_t bone_idx = ftParts_8007500C(fp0, 4);
+            ssize_t bone_idx = ftParts_GetBoneIndex(fp0, 4);
             Fighter* fp1 = GET_FIGHTER(gobj);
 
             /// @todo Why is this still using @c fp0?
@@ -305,7 +305,7 @@ bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
 
 Fighter_Part ftYs_Shield_8012CC6C(Fighter_GObj* gobj)
 {
-    return ftParts_8007500C(GET_FIGHTER(gobj), 52);
+    return ftParts_GetBoneIndex(GET_FIGHTER(gobj), 52);
 }
 
 void ftYs_Shield_8012CC94(HSD_GObj* gobj, Vec3* out)

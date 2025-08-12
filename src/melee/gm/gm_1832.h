@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 #include <sysdolphin/baselib/forward.h>
+#include <melee/gm/types.h>
 
 /* 1849E0 */ void fn_801849E0(HSD_GObj*);
 /* 184A04 */ void fn_80184A04(HSD_GObj*);
@@ -60,7 +61,7 @@
 /* 188EE8 */ UNK_RET fn_80188EE8(UNK_PARAMS);
 /* 1891F4 */ UNK_RET fn_801891F4(UNK_PARAMS);
 /* 189B88 */ UNK_RET fn_80189B88(UNK_PARAMS);
-/* 189CDC */ UNK_RET gm_80189CDC(UNK_PARAMS);
+/* 189CDC */ UNK_RET gm_80189CDC(StartMeleeData*);
 /* 18A000 */ UNK_RET fn_8018A000(UNK_PARAMS);
 /* 18A160 */ UNK_RET gm_8018A160(UNK_PARAMS);
 /* 18A188 */ UNK_RET gm_8018A188(UNK_PARAMS);
@@ -72,6 +73,6 @@
 /* 18A314 */ UNK_RET gm_8018A314(UNK_PARAMS);
 /* 18A364 */ void fn_8018A364(int);
 
-/* 473A18 */ extern struct UnkAllstarData gm_80473A18;
+/* 473A18 */ extern UnkAllstarData gm_80473A18;
 
 #endif

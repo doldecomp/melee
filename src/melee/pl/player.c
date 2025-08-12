@@ -108,7 +108,9 @@ void Player_80031790(int slot)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+    if ((player->slot_type == Gm_PKind_Human) ||
+        (player->slot_type == Gm_PKind_Cpu))
+    {
         for (i = 0; i < 2; i++) {
             /// transformed will either be [1,0] (normal) or [0,1]
             /// (transformed) checks to see if the player is in a transformed
@@ -128,7 +130,9 @@ void Player_80031848(int slot)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+    if ((player->slot_type == Gm_PKind_Human) ||
+        (player->slot_type == Gm_PKind_Cpu))
+    {
         for (i = 0; i < 2; i++) {
             /// transformed will either be [1,0] (normal) or [0,1]
             /// (transformed) checks to see if the player is in a transformed
@@ -142,7 +146,9 @@ void Player_80031848(int slot)
 
 static void func_8008688C_wrapper(StaticPlayer* player)
 {
-    if ((player->slot_type == 0) || (player->slot_type == 1)) {
+    if ((player->slot_type == Gm_PKind_Human) ||
+        (player->slot_type == Gm_PKind_Cpu))
+    {
         s32 i;
         for (i = 0; i < 2; i++) {
             if ((player->player_entity[player->transformed[i]])) {
@@ -417,7 +423,7 @@ CharacterKind Player_GetPlayerCharacter(int slot)
     return player->player_character;
 }
 
-void Player_SetPlayerCharacter(s32 slot, s32 value)
+void Player_SetPlayerCharacter(s32 slot, CharacterKind value)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -425,9 +431,9 @@ void Player_SetPlayerCharacter(s32 slot, s32 value)
     player->player_character = value;
 }
 
-enum_t Player_GetPlayerSlotType(s32 slot)
+Gm_PKind Player_GetPlayerSlotType(s32 slot)
 {
-    s32 slot_type;
+    Gm_PKind slot_type;
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -435,9 +441,9 @@ enum_t Player_GetPlayerSlotType(s32 slot)
     return slot_type;
 }
 
-enum_t Player_8003248C(s32 slot, bool arg1)
+Gm_PKind Player_8003248C(s32 slot, bool arg1)
 {
-    enum_t slot_type;
+    Gm_PKind slot_type;
     struct Unk_Struct_w_Array* unk_struct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     StaticPlayer* player;
@@ -448,7 +454,9 @@ enum_t Player_8003248C(s32 slot, bool arg1)
 
     if (arg1 == 1) {
         if (unk_struct->vec_arr[player->player_character].z == 0) {
-            if (player->slot_type == 0 || player->slot_type == 1) {
+            if (player->slot_type == Gm_PKind_Human ||
+                player->slot_type == Gm_PKind_Cpu)
+            {
                 return 1;
             }
         }
@@ -458,7 +466,7 @@ enum_t Player_8003248C(s32 slot, bool arg1)
     return slot_type;
 }
 
-void Player_SetSlottype(s32 slot, enum_t value)
+void Player_SetSlottype(s32 slot, Gm_PKind value)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1804,7 +1812,7 @@ u8 Player_GetUnk45(s32 slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    if (player->slot_type == 0) {
+    if (player->slot_type == Gm_PKind_Human) {
         return player->unk45;
     }
 
@@ -1874,12 +1882,12 @@ void Player_80036844(s32 slot, s32 arg1)
     }
 }
 
-void Player_800368F8(s32 slot)
+bool Player_800368F8(int slot)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    ftLib_80086BB4(player->player_entity[player->transformed[0]]);
+    return ftLib_80086BB4(player->player_entity[player->transformed[0]]);
 }
 
 void Player_80036978(s32 slot, s32 arg1)
@@ -1931,7 +1939,7 @@ void Player_InitOrResetPlayer(s32 slot)
     player->player_poses.byIndex[3].x = zerofloat;
 
     player->costume_id = 0;
-    player->slot_type = 3;
+    player->slot_type = Gm_PKind_NA;
     player->transformed[0] = 0;
     player->transformed[1] = 1;
 
@@ -2091,7 +2099,7 @@ void Player_80036F34(s32 slot, s32 arg1)
     some_struct.unk8 = arg1;
     some_struct.b0 = 0;
 
-    player->slot_type = 2;
+    player->slot_type = Gm_PKind_Demo;
     player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
     if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
         (ftMapping_list[player->player_character].has_transformation == 0))
@@ -2118,7 +2126,7 @@ void Player_80037054(s32 slot, s32 arg1)
     some_struct.unk8 = arg1;
     some_struct.b0 = 1;
 
-    player->slot_type = 2;
+    player->slot_type = Gm_PKind_Demo;
     player->player_entity[0] = ftDemo_CreateFighter(&some_struct);
     if ((ftMapping_list[player->player_character].extra_internal_id != -1) &&
         (ftMapping_list[player->player_character].has_transformation == 0))

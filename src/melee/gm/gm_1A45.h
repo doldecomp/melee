@@ -31,4 +31,6 @@
 /* 1A4CE0 */ MinorSceneHandler* gm_801A4CE0(u8 id);
 /* 1A4D34 */ void gm_801A4D34(void (*)(void), struct MinorSceneInfo*);
 
+/* 4D6724 */ extern void (*gm_804D6724)(void);
+
 #endif

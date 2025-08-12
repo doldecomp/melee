@@ -260,8 +260,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->facing_dir1 = fp->facing_dir;
     fp->x34_scale.y = fp->x34_scale.x;
 
-    fp->x2220_flag.b5 = 0;
-    fp->x2220_flag.b6 = 0;
+    fp->x2220_b5 = 0;
+    fp->x2220_b6 = 0;
 
     fp->x200C = 0;
     fp->x2010 = 0;
@@ -275,7 +275,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x221A_b6 = 0;
     fp->x221D_b2 = 0;
     fp->x221E_b7 = 0;
-    fp->x2220_flag.b7 = 0;
+    fp->x2220_b7 = 0;
     fp->x2221_b4 = 0;
     fp->x2221_b5 = 0;
     fp->x2221_b6 = 1;
@@ -352,8 +352,8 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x1964 = 0;
     fp->dmg.x189C_unk_num_frames = 0;
 
-    fp->x2220_flag.b3 = 0;
-    fp->x2220_flag.b4 = 0;
+    fp->x2220_b3 = 0;
+    fp->x2220_b4 = 0;
 
     fp->dmg.x1914 = 0;
     fp->dmg.int_value = 0;
@@ -587,14 +587,14 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 {
     Vec3 vec;
     Vec3 vec2;
-    HSD_JObj* jobj = fp->parts[ftParts_8007500C(fp, 2)].joint;
+    HSD_JObj* jobj = fp->parts[ftParts_GetBoneIndex(fp, 2)].joint;
 
     HSD_JObjGetTranslation(jobj, &vec);
 
     fp->x1A6C = (vec.y / 8.55f);
 
     lb_8000B1CC(jobj, 0, &vec);
-    lb_8000B1CC(fp->parts[ftParts_8007500C(fp, 1)].joint, 0, &vec2);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, 1)].joint, 0, &vec2);
     fp->x1A70.x = vec2.x - vec.x;
     fp->x1A70.y = vec2.y - vec.y;
     fp->x1A70.z = vec2.z - vec.z;
@@ -767,16 +767,16 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x221F_b3 = 0;
 
-    fp->x2220_flag.b0 = 0;
+    fp->x2220_b0 = 0;
 
     fp->x2221_b2 = 0;
 
-    fp->x2229_b5_no_normal_motion = 0;
+    fp->no_normal_motion = 0;
     fp->x2229_b6 = 0;
-    fp->x2229_b7 = 0;
+    fp->no_kb = 0;
 
-    fp->x222A_flag.b0 = 0;
-    fp->x222A_flag.b1 = 0;
+    fp->x222A_b0 = 0;
+    fp->x222A_b1 = 0;
 
     fp->x2228_b5 = 0;
     fp->x2228_b6 = 0;
@@ -837,7 +837,7 @@ void Fighter_80068E64(Fighter_GObj* gobj)
 static void Fighter_Create_Inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x2229_b5_no_normal_motion) {
+    if (!fp->no_normal_motion) {
         fp->x2EC = lbAnim_8001E8F8(ftData_80085E50(fp, 0x23));
         if (!fp->x2228_b2) {
             fp->x2DC = lbAnim_8001E8F8(ftData_80085E50(fp, 7));
@@ -905,7 +905,7 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006C80C, 9);
     HSD_GObjProc_8038FD54(gobj, &Fighter_UnkProcessGrab_8006CA5C, 0xC);
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006CB94, 0xD);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_UnkProcessShieldHit_8006D1EC, 0xE);
+    HSD_GObjProc_8038FD54(gobj, &Fighter_ProcessHit_8006D1EC, 0xE);
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006D9AC, 0x10);
     HSD_GObjProc_8038FD54(gobj, &Fighter_UnkCallCameraCallback_8006D9EC, 0x12);
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006DA4C, 0x16);
@@ -920,7 +920,7 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
     } else if (Player_GetFlagsBit3(fp->player_id) != 0) {
         ftCo_800C61B0(gobj);
     } else {
-        if (!fp->x2229_b5_no_normal_motion) {
+        if (!fp->no_normal_motion) {
             ftCommon_8007D92C(gobj);
         } else {
             OSReport("ellegal flag fp->no_normal_motion\n");
@@ -1016,7 +1016,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     if (fp->dmg.x18F4 != 0) {
         fp->dmg.x18F4 = 0;
-        fp->x2220_flag.b4 = 0;
+        fp->x2220_b4 = 0;
     }
 
     if ((flags & Ft_MF_Unk19) == 0) {
@@ -1067,8 +1067,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     fp->x221F_b1 = 0;
     fp->x221E_b5 = 0;
     fp->x221E_b6 = 0;
-    fp->x2220_flag.b3 = 0;
-    fp->x2220_flag.b7 = 0;
+    fp->x2220_b3 = 0;
+    fp->x2220_b7 = 0;
 
     fp->x209C = 0;
 
@@ -1387,7 +1387,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         fp->post_hitlag_cb = 0;
         fp->pre_hitlag_cb = 0;
         fp->take_dmg_cb = 0;
-        fp->x21F0 = 0;
+        fp->take_dmg_2_cb = 0;
         fp->x21F4 = 0;
         fp->x21F8 = 0;
         fp->death2_cb = 0;
@@ -1501,15 +1501,15 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x2220_flag.b5 || fp->x2220_flag.b6) {
+        if (fp->x2220_b5 || fp->x2220_b6) {
             if (fp->x2008) {
                 fp->x2008--;
             }
 
             if (fp->x2008 == 0) {
-                if (fp->x2220_flag.b5) {
+                if (fp->x2220_b5) {
                     Fighter_SuperMushroomEnd(gobj);
-                } else if (fp->x2220_flag.b6) {
+                } else if (fp->x2220_b6) {
                     Fighter_PoisonMushroomEnd(gobj);
                 }
             }
@@ -1837,19 +1837,19 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
             }
 
-            if (fabs_inline(fp->input.lstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.lstick.x) <= p_ftCommonData->x0) {
                 fp->input.lstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.lstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.lstick.y) <= p_ftCommonData->x4) {
                 fp->input.lstick.y = 0.0f;
             }
 
-            if (fabs_inline(fp->input.cstick.x) <= p_ftCommonData->x0) {
+            if (ABS(fp->input.cstick.x) <= p_ftCommonData->x0) {
                 fp->input.cstick.x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.cstick.y) <= p_ftCommonData->x4) {
+            if (ABS(fp->input.cstick.y) <= p_ftCommonData->x4) {
                 fp->input.cstick.y = 0.0f;
             }
 
@@ -2387,7 +2387,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             fp->x2225_b0 = 0;
         }
     } else {
-        if (!fp->x222A_flag.b1 && !fp->x2228_b5) {
+        if (!fp->x222A_b1 && !fp->x2228_b5) {
             // if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom)
             // + stage.crowdReactStart from above...
             if (fp->prev_pos.y >= Stage_CalcUnkCamY() &&
@@ -2395,7 +2395,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
             {
                 // plays this sound you always hear when you get close to the
                 // bottom blast zone
-                ft_80088148(fp, 96, 127, 64);
+                ft_PlaySFX(fp, 96, 127, 64);
                 fp->x2225_b0 = 1;
             }
         }
@@ -2578,7 +2578,7 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
             ftColl_80078A2C(gobj);
             if (fp->victim_gobj) {
                 if (!fp->x2225_b1) {
-                    ft_80088148(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
+                    ft_PlaySFX(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
                 }
                 ftColl_80078754(gobj, fp->victim_gobj, 0);
                 fp->grab_cb(gobj);
@@ -2589,7 +2589,7 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
 
             if (fp->x1A60) {
                 if (!fp->x2225_b1) {
-                    ft_80088148(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
+                    ft_PlaySFX(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
                 }
                 it_8027B4A4(gobj, fp->x1A60);
                 if (fp->x2194) {
@@ -2663,7 +2663,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     }
 
     temp_bool =
-        !((fp->x2220_flag.b3 || fp->x2220_flag.b4 || ftCo_8008E984(fp)));
+        !((fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp)));
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
@@ -2790,7 +2790,7 @@ void Fighter_8006D10C(Fighter_GObj* gobj)
     }
 }
 
-void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
+void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool bool1 = 0;
@@ -2846,11 +2846,11 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
             ftCo_Damage_CalcKnockback(fp);
             ftKb_SpecialN_800F5BA4(fp);
 
-            if (fp->x21F0) {
-                fp->x21F0(gobj);
+            if (fp->take_dmg_2_cb) {
+                fp->take_dmg_2_cb(gobj);
             }
 
-            if (!fp->x2229_b7) {
+            if (!fp->no_kb) {
                 switch (fp->x1828) {
                 case 0:
                     ftCo_8008EC90(gobj);
@@ -2897,7 +2897,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(Fighter_GObj* gobj)
         } else if (fp->x19A4) {
             if (bool3) {
                 ftCo_80098B20(gobj);
-                ft_80088148(fp, 0x82, 0x7F, 0x40);
+                ft_PlaySFX(fp, 0x82, 0x7F, 0x40);
             } else {
                 if (fp->shield_hit_cb) {
                     fp->shield_hit_cb(gobj);

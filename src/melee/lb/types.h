@@ -7,8 +7,8 @@
 #include "lb/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
-#include <dolphin/mtx.h>
 #include <dolphin/card.h>
+#include <dolphin/mtx.h>
 
 struct DynamicsData {
     /* +0 */ HSD_JObj* jobj;
@@ -75,19 +75,14 @@ struct HitCapsule {
     /* +42:5 */ u8 x42_b5 : 1;
     /* +42:6 */ u8 x42_b6 : 1;
     /* +42:7 */ u8 x42_b7 : 1;
-    /* +43 */ union {
-        /* +43 */ u8 x43;
-        struct {
-            /* +43:0 */ u8 x43_b0 : 1;
-            /* +43:1 */ u8 x43_b1 : 1;
-            /* +43:2 */ u8 x43_b2 : 1;
-            /* +43:3 */ u8 x43_b3 : 1;
-            /* +43:4 */ u8 x43_b4 : 1;
-            /* +43:5 */ u8 x43_b5 : 1;
-            /* +43:6 */ u8 x43_b6 : 1;
-            /* +43:7 */ u8 x43_b7 : 1;
-        };
-    };
+    /* +43:0 */ u8 x43_b0 : 1;
+    /* +43:1 */ u8 x43_b1 : 1;
+    /* +43:2 */ u8 x43_b2 : 1;
+    /* +43:3 */ u8 x43_b3 : 1;
+    /* +43:4 */ u8 x43_b4 : 1;
+    /* +43:5 */ u8 x43_b5 : 1;
+    /* +43:6 */ u8 x43_b6 : 1;
+    /* +43:7 */ u8 x43_b7 : 1;
     /* +44 */ u8 x44; // victims_1 count
     /* +45 */ u8 x45; // victims_2 count
     /* +46 */ u8 x46[0x48 - 0x46];
@@ -123,11 +118,15 @@ struct HurtCapsule {
     Vec3 a_pos;
     Vec3 b_pos;
     int bone_idx;      // 0x40
-    enum_t kind;       // 0x44. 0 = low, 1 = mid, 2 = high
+};
+
+struct FighterHurtCapsule {
+    HurtCapsule capsule;
+    HurtHeight height; // 0x44. 0 = low, 1 = mid, 2 = high
     bool is_grabbable; // 0x48
 };
 
-STATIC_ASSERT(sizeof(HurtCapsule) == 0x4C);
+STATIC_ASSERT(sizeof(FighterHurtCapsule) == 0x4C);
 
 struct ReflectDesc {
     u32 x0_bone_id;
@@ -169,16 +168,11 @@ struct lbRefract_CallbackData {
 };
 
 typedef struct _ECBFlagStruct {
-    union {
-        struct {
-            u8 b0 : 1;
-            u8 b1234 : 4;
-            u8 b5 : 1;
-            u8 b6 : 1;
-            u8 b7 : 1;
-        };
-        u8 raw;
-    };
+    u8 b0 : 1;
+    u8 b1234 : 4;
+    u8 b5 : 1;
+    u8 b6 : 1;
+    u8 b7 : 1;
 } ECBFlagStruct;
 
 typedef struct SurfaceData {
@@ -186,6 +180,13 @@ typedef struct SurfaceData {
     u32 unk;
     Vec3 normal;
 } SurfaceData;
+
+typedef struct _itECB {
+    f32 top;
+    f32 bottom;
+    f32 right;
+    f32 left;
+} itECB;
 
 typedef struct _ftECB {
     Vec2 top;
@@ -232,8 +233,6 @@ struct CollData {
             /* fp+800 */ float x110_f32;
             /* fp+804 */ float x114_f32;
             /* fp+808 */ float x118_f32;
-            /* fp+80C */ float x11C_f32;
-            /* fp+810 */ float x120_f32;
         };
     };
     /* fp+814 */ float x124;
@@ -257,8 +256,8 @@ struct HSD_AllocEntry {
 };
 
 struct PreloadCacheSceneEntry {
-    struct PreloadCache* field0_0x0;
-    struct PreloadCache* field1_0x4;
+    u32 char_id;
+    u8 color;
 };
 
 struct PreloadEntry {
@@ -283,12 +282,14 @@ struct PreloadEntry {
 // emitted by e.g. lbDvd_80018CF4
 struct PreloadCacheScene {
     u32 is_heap_persistent[2];
-    u8 major_id;
-    u8 field2_0x9;
-    u8 field3_0xa;
-    u8 field4_0xb;
-    u32 stage_id;
-    PreloadCacheSceneEntry entries[8];
+    struct GameCache {
+        u8 major_id;
+        u8 field2_0x9;
+        u8 field3_0xa;
+        u8 field4_0xb;
+        u32 stage_id;
+        PreloadCacheSceneEntry entries[8];
+    } game_cache;
     s32 major_scene_changes;
 };
 
@@ -343,18 +344,19 @@ struct lb_80432A68_t {
     /* 0x098 */ u8 pad_AC[0xD0 - 0xAC]; /* maybe part of unk_80[0x123]? */
     /* 0x0A8 */ int xD0[9];
     /* 0x0A8 */ volatile int xF4[9];
-    /* 0x098 */ u8 pad_500[0x50C - 0xF4 - 9*4]; /* maybe part of unk_80[0x123]? */
+    /* 0x098 */ u8
+        pad_500[0x50C - 0xF4 - 9 * 4]; /* maybe part of unk_80[0x123]? */
     /* 0x50C */ void (*x50C)(int);
     /* 0x510 */ struct CardTask {
-                    int x0;
-                    int x4;
-                    UNK_T x8;
-                    char* xC;
-                    char x10[0x20];
-                    u8 x18;
-                    char x19[7];
-                    u8 unk20[0x1C];
-                } task_array[11];
+        int x0;
+        int x4;
+        UNK_T x8;
+        char* xC;
+        char x10[0x20];
+        u8 x18;
+        char x19[7];
+        u8 unk20[0x1C];
+    } task_array[11];
     /* 0x8AC */ int x8AC;
 }; /* size = 0x8B0 */
 STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);

@@ -9,6 +9,11 @@
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
 
+/* 1C5B90 */ static void grDisplay_801C5B90(HSD_JObj* jobj, void* arg1,
+                                            u32 arg2, int arg3);
+/* 1C5F60 */ static void grDisplay_801C5F60(HSD_GObj* gobj, int code);
+/* 1C6620 */ static void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1);
+
 void grDisplay_801C5B90(HSD_JObj* jobj, void* arg1, u32 arg2, int arg3)
 {
     Mtx sp3C;

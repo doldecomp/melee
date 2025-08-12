@@ -1,13 +1,13 @@
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftKirby/forward.h"
-
 #include "ftKb_Init.static.h"
 
 #include "types.h"
 
+#include <placeholder.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
@@ -25,6 +25,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
 #include "ftCommon/ftCo_Fall.h"
+
+#include "ftKirby/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itkirby_2F23.h"
@@ -2519,11 +2522,14 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
     },
 };
 
-/* static */ void ftKb_Init_800EE854(void);
-/* static */ void ftKb_Init_800EE874(void);
-/* static */ void ftKb_Init_800EE8B0(void);
-/* static */ void ftKb_Init_800EE8EC(void);
-/* static */ void ftKb_Init_800EE904(void);
+/* 0EE854 */ static void ftKb_Init_800EE854(void);
+/* 0EE874 */ static void ftKb_Init_800EE874(void);
+/* 0EE8B0 */ static void ftKb_Init_800EE8B0(void);
+/* 0EE8EC */ static void ftKb_Init_800EE8EC(void);
+/* 0EE904 */ static void ftKb_Init_800EE904(void);
+/* 105FEC */ static void fn_800F6AC8(HSD_GObj* gobj);
+/* 105FEC */ static void fn_80105FEC(void);
+/* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
 
 jtbl_t ftKb_Init_803CA0CC = {
     ftKb_Init_800EE854, ftKb_Init_800EE904, ftKb_Init_800EE904,
@@ -5501,7 +5507,7 @@ void ftKb_PpSpecialAirN_IASA(Fighter_GObj* gobj) {}
 
 Fighter_Part ftKb_SpecialNYs_80109238(Fighter_GObj* gobj)
 {
-    return ftParts_8007500C(GET_FIGHTER(gobj), FtPart_TransN2);
+    return ftParts_GetBoneIndex(GET_FIGHTER(gobj), FtPart_TransN2);
 }
 
 /// #ftKb_SpecialNYs_80109260
@@ -5750,8 +5756,9 @@ void ftKb_SpecialNMs_8010B2FC(HSD_GObj* gobj)
 
         scale.x = scale.y = scale.z = ftCommon_GetModelScale(fp);
         HSD_JObjSetScale(fp->x20A0_accessory, &scale);
-        lb_8000C2F8(fp->x20A0_accessory,
-                    fp->parts[ftParts_8007500C(fp, FtPart_RThumbNb)].joint);
+        lb_8000C2F8(
+            fp->x20A0_accessory,
+            fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint);
     }
 }
 

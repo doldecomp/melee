@@ -700,7 +700,7 @@ void ftCo_8009E614(Fighter* fp)
 bool ftCo_8009E714(Fighter_GObj* gobj, Fighter_Part bone_id, int arg2, float x,
                    float y, float arg5, float arg6, float arg7)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = fp->parts[bone_id].joint;
     int var_r31 = arg2;
     Vec3 out_vec;
@@ -718,7 +718,7 @@ bool ftCo_8009E714(Fighter_GObj* gobj, Fighter_Part bone_id, int arg2, float x,
 
 /// #ftCo_8009E7B4
 
-void ftCo_8009EAF8(ftCo_GObj* gobj)
+void ftCo_8009EAF8(Fighter_GObj* gobj)
 {
     Ground_801C4E20();
 }

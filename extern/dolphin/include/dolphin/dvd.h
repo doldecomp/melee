@@ -130,7 +130,7 @@ struct DVDDiskID * DVDGetCurrentDiskID(void);
 BOOL DVDCheckDisk(void);
 
 // dvdfs.c
-s32 DVDConvertPathToEntrynum(char* pathPtr);
+s32 DVDConvertPathToEntrynum(const char* pathPtr);
 BOOL DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo);
 BOOL DVDOpen(char* fileName, DVDFileInfo* fileInfo);
 BOOL DVDClose(DVDFileInfo* fileInfo);

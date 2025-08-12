@@ -1,14 +1,13 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "lb/forward.h"
-
 #include "lbcollision.h"
 
 #include "lb_00B0.h"
 #include "lbaudio_ax.h"
 #include "lbvector.h"
+
+#include <placeholder.h>
+#include <platform.h>
+
+#include "lb/forward.h"
 
 #include "lb/types.h"
 
@@ -85,7 +84,7 @@ int lbColl_80005BB0(HitCapsule* arg0, int arg1)
         -1);
 }
 
-void vector_sub(Vec3* a, Vec3* b, Vec3* result)
+static inline void vector_sub(Vec3* a, Vec3* b, Vec3* result)
 {
     result->x = a->x - b->x;
     result->y = a->y - b->y;
@@ -110,8 +109,8 @@ static inline bool nearzero(float x)
     }
 }
 
-bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2, Vec3* arg3, float arg8,
-                    float arg9)
+bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
+                     Vec3* arg3, float arg8, float arg9)
 {
     float temp_f2;
     float tmp_x;
@@ -130,25 +129,49 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2, Vec3*
     tmp_x = arg1->x;
 
     if (sp38.x > arg1->x) {
-        if (sp38.x  + temp_f2 < sp2C.x) return 0;
-        if (arg1->x - temp_f2 > sp2C.x) return 0;
+        if (sp38.x + temp_f2 < sp2C.x) {
+            return 0;
+        }
+        if (arg1->x - temp_f2 > sp2C.x) {
+            return 0;
+        }
     } else {
-        if (sp38.x  - temp_f2 > sp2C.x) return 0;
-        if (arg1->x + temp_f2 < sp2C.x) return 0;
+        if (sp38.x - temp_f2 > sp2C.x) {
+            return 0;
+        }
+        if (arg1->x + temp_f2 < sp2C.x) {
+            return 0;
+        }
     }
     if (sp38.y > arg1->y) {
-        if (sp38.y  + temp_f2 < sp2C.y) return 0;
-        if (arg1->y - temp_f2 > sp2C.y) return 0;
+        if (sp38.y + temp_f2 < sp2C.y) {
+            return 0;
+        }
+        if (arg1->y - temp_f2 > sp2C.y) {
+            return 0;
+        }
     } else {
-        if (sp38.y  - temp_f2 > sp2C.y) return 0;
-        if (arg1->y + temp_f2 < sp2C.y) return 0;
+        if (sp38.y - temp_f2 > sp2C.y) {
+            return 0;
+        }
+        if (arg1->y + temp_f2 < sp2C.y) {
+            return 0;
+        }
     }
     if (sp38.z > arg1->z) {
-        if (sp38.z  + temp_f2 < sp2C.z) return 0;
-        if (arg1->z - temp_f2 > sp2C.z) return 0;
+        if (sp38.z + temp_f2 < sp2C.z) {
+            return 0;
+        }
+        if (arg1->z - temp_f2 > sp2C.z) {
+            return 0;
+        }
     } else {
-        if (sp38.z  - temp_f2 > sp2C.z) return 0;
-        if (arg1->z + temp_f2 < sp2C.z) return 0;
+        if (sp38.z - temp_f2 > sp2C.z) {
+            return 0;
+        }
+        if (arg1->z + temp_f2 < sp2C.z) {
+            return 0;
+        }
     }
 
     d1.x = arg1->x - sp38.x;
@@ -188,7 +211,8 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2, Vec3*
     }
 }
 
-float lbColl_80005EBC(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2, float* arg3)
+float lbColl_80005EBC(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
+                      float* arg3)
 {
     Vec3 sp50;
     Vec3 d1;
@@ -1374,7 +1398,6 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
     diff_cb.z = c->z - b->z;
 
     if (diff_cb.x || diff_cb.y || diff_cb.z) {
-
         normal_x.x = x;
         normal_x.y = 0.0f;
         normal_x.z = 0.0f;
@@ -1390,9 +1413,8 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
 
         offset_dist = dist + dist_offset;
 
-        dot_diff_cb = diff_cb.x * diff_cb.x
-                    + diff_cb.y * diff_cb.y
-                    + diff_cb.z * diff_cb.z;
+        dot_diff_cb = diff_cb.x * diff_cb.x + diff_cb.y * diff_cb.y +
+                      diff_cb.z * diff_cb.z;
 
         diff_ba.x = b->x - a->x;
         diff_ba.y = b->y - a->y;
@@ -1401,16 +1423,14 @@ void lbColl_800077A0(Vec3* a, MtxPtr arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         if (nearzero(dot_diff_cb)) {
             scl = 0.0f;
         } else {
-            n0 = 2.0f * diff_cb.x * diff_ba.x
-               + 2.0f * diff_cb.y * diff_ba.y
-               + 2.0f * diff_cb.z * diff_ba.z;
+            n0 = 2.0f * diff_cb.x * diff_ba.x + 2.0f * diff_cb.y * diff_ba.y +
+                 2.0f * diff_cb.z * diff_ba.z;
 
-            ba_dot = diff_ba.x * diff_ba.x
-                   + diff_ba.y * diff_ba.y
-                   + diff_ba.z * diff_ba.z;
+            ba_dot = diff_ba.x * diff_ba.x + diff_ba.y * diff_ba.y +
+                     diff_ba.z * diff_ba.z;
 
-            n1 = n0 * n0 - (4.0f * dot_diff_cb *
-                            -(offset_dist * offset_dist - ba_dot));
+            n1 = n0 * n0 -
+                 (4.0f * dot_diff_cb * -(offset_dist * offset_dist - ba_dot));
 
             if (n1 < 0.0f) {
                 n1 = 0.0f;
@@ -1672,7 +1692,8 @@ inline float getHit1C(HitCapsule* hit, float arg3)
     return var_f1;
 }
 
-bool lbColl_80008248(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, f32 arg3, f32 arg4, f32 arg5)
+bool lbColl_80008248(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, f32 arg3,
+                     f32 arg4, f32 arg5)
 {
     f32 var_f1;
     Vec3 sp70;
@@ -1702,11 +1723,10 @@ bool lbColl_80008248(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, f32 arg3, f3
     } else {
         var_f1 = arg0->scale * arg3;
     }
-    return lbColl_80006E58(
-            &arg0->x58, &arg0->x4C, &arg1->a_pos,
-            &arg1->b_pos, &sp70, &sp64,
-            var_r9, &arg0->hurt_coll_pos, &arg0->coll_distance,
-            var_f1, arg1->scale, 3.0f * arg4);
+    return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos, &arg1->b_pos,
+                           &sp70, &sp64, var_r9, &arg0->hurt_coll_pos,
+                           &arg0->coll_distance, var_f1, arg1->scale,
+                           3.0f * arg4);
 }
 
 void lbColl_800083C4(HurtCapsule* arg0)
@@ -2126,8 +2146,7 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
         HSD_MtxInverse(var_r28, sp3C);
         PSMTXMultVec(sp3C, &sp90, &sp6C);
         PSMTXMultVec(sp3C, &sp84, &sp78);
-        lbColl_800096B4(var_r28, sp6C, sp78, temp_r3, temp_r31_2,
-                        temp_f31);
+        lbColl_800096B4(var_r28, sp6C, sp78, temp_r3, temp_r31_2, temp_f31);
         return 1;
     }
     return 0;

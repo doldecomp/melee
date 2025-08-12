@@ -5,10 +5,10 @@
 
 #include "baselib/forward.h"
 #include "gm/forward.h"
-
-#include "gm/gmresult.static.h"
-
+#include <dolphin/mtx.h>
 #include "dolphin/gx/GXStruct.h"
+
+struct ResultsPlayerData;
 
 /* 174274 */ MatchEnd* fn_80174274(void);
 /* 174284 */ s32 fn_80174284(u8);

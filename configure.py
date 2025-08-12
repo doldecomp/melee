@@ -102,6 +102,12 @@ parser.add_argument(
     help="path to sjiswrap.exe (optional)",
 )
 parser.add_argument(
+    "--ninja",
+    metavar="BINARY",
+    type=Path,
+    help="path to ninja binary (optional)"
+)
+parser.add_argument(
     "--verbose",
     action="store_true",
     help="print verbose output",
@@ -120,7 +126,9 @@ parser.add_argument(
 )
 parser.add_argument(
     "--warn",
-    choices=["off", "on", "all"],
+    dest="warn",
+    type=str,
+    choices=["all", "off", "error"],
     default="off",
     help="warning level (default 'off')",
 )
@@ -163,6 +171,7 @@ config.compilers_path = args.compilers
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
+config.ninja_path = args.ninja
 config.progress = args.progress
 if not is_windows():
     config.wrapper = args.wrapper
@@ -243,7 +252,7 @@ if args.debug:
     # Or -sym dwarf-2 for Wii compilers
     cflags_base.extend(["-sym on", "-DDEBUG=1"])
 else:
-    cflags_base.append("-DNDEBUG=1")
+    cflags_base.extend(["-sym off", "-DNDEBUG=1"])
 
 cflags_base.append(f"-maxerrors {args.max_errors}")
 if args.max_errors == 0:
@@ -873,8 +882,8 @@ config.libs = [
             Object(NonMatching, "melee/gm/gm_16F1.c"),
             Object(NonMatching, "melee/gm/gmresult.c"),
             Object(NonMatching, "melee/gm/gmresultplayer.c"),
-            Object(NonMatching, "melee/gm/gm_17AD.c"),
-            Object(NonMatching, "melee/gm/gm_17BA.c"),
+            Object(Matching, "melee/gm/gm_17AD.c"),
+            Object(Matching, "melee/gm/gm_17BA.c"),
             Object(NonMatching, "melee/gm/gmregcommon.c"),
             Object(NonMatching, "melee/gm/gm_17C0.c"),
             Object(NonMatching, "melee/gm/gm_1832.c"),
@@ -884,18 +893,40 @@ config.libs = [
             Object(Matching, "melee/gm/gmpause.c"),
             Object(Equivalent, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),
-            Object(NonMatching, "melee/gm/gm_1A36.c"),
+            Object(Matching, "melee/gm/gm_1A36.c"),
             Object(NonMatching, "melee/gm/gm_1A3F.c"),
             Object(Matching, "melee/gm/gm_1A45.c"),
             Object(Matching, "melee/gm/gmscdata.c"),
             Object(Matching, "melee/gm/gmmenu.c"),
-            Object(NonMatching, "melee/gm/gmvsmelee.c"),
+            Object(Matching, "melee/gm/gmvsmelee.c"),
+            Object(Matching, "melee/gm/gmvsdata.c"),
+            Object(Matching, "melee/gm/gmmovieend.c"),
+            Object(NonMatching, "melee/gm/gmregtyfall.c"),
             Object(NonMatching, "melee/gm/gm_1A4C.c"),
+            Object(NonMatching, "melee/gm/gmopening.c"),
+            Object(NonMatching, "melee/gm/gmstaffroll.c"),
+            Object(Matching, "melee/gm/gmhowto.c"),
+            Object(Matching, "melee/gm/gmomake15.c"),
             Object(Matching, "melee/gm/gmprogressive.c"),
             Object(Matching, "melee/gm/gmapproach.c"),
             Object(Matching, "melee/gm/gm_1ADD.c"),
             Object(Matching, "melee/gm/gm_1AED.c"),
             Object(NonMatching, "melee/gm/gm_1B03.c"),
+            Object(NonMatching, "melee/gm/gmclassic.c"),
+            Object(NonMatching, "melee/gm/gmadventure.c"),
+            Object(NonMatching, "melee/gm/gmallstar.c"),
+            Object(NonMatching, "melee/gm/gmmultiman.c"),
+            Object(Matching, "melee/gm/gmsupersudden.c"),
+            Object(Matching, "melee/gm/gmtiny.c"),
+            Object(Matching, "melee/gm/gmgiant.c"),
+            Object(Matching, "melee/gm/gmstamina.c"),
+            Object(Matching, "melee/gm/gmhomerun.c"),
+            Object(Matching, "melee/gm/gmfixedcamera.c"),
+            Object(Matching, "melee/gm/gmsinglebutton.c"),
+            Object(Matching, "melee/gm/gminvisible.c"),
+            Object(Matching, "melee/gm/gmslomo.c"),
+            Object(Matching, "melee/gm/gmlightning.c"),
+            Object(NonMatching, "melee/gm/gm_1BA8.c"),
             Object(Matching, "melee/gm/gm_1BF9.c"),
             Object(NonMatching, "melee/gm/gm_1BFA.c"),
         ],
@@ -935,7 +966,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/gryorster.c"),
             Object(NonMatching, "melee/gr/grgarden.c"),
             Object(NonMatching, "melee/gr/grvenom.c"),
-            Object(NonMatching, "melee/gr/grtest.c"),
+            Object(Matching, "melee/gr/grtest.c"),
             Object(NonMatching, "melee/gr/grkinokoroute.c"),
             Object(NonMatching, "melee/gr/grshrineroute.c"),
             Object(NonMatching, "melee/gr/grzebesroute.c"),
@@ -1005,7 +1036,8 @@ config.libs = [
     MeleeLib(
         "mn (Menus)",
         [
-            Object(NonMatching, "melee/mn/mn_2295.c"),
+            Object(NonMatching, "melee/mn/mnmain.c"),
+            Object(NonMatching, "melee/mn/mnmainrule.c"),
             Object(NonMatching, "melee/mn/mnruleplus.c"),
             Object(NonMatching, "melee/mn/mnitemsw.c"),
             Object(NonMatching, "melee/mn/mnstagesw.c"),
@@ -1228,7 +1260,14 @@ config.libs = [
     MeleeLib(
         "un (Unknown)",
         [
-            Object(NonMatching, "melee/un/un_2FC9.c"),
+            Object(NonMatching, "melee/un/un_2FC91.c"),
+            Object(Matching, "melee/un/un_2FC92.c"),
+            Object(NonMatching, "melee/un/un_2FC93.c"),
+            Object(NonMatching, "melee/un/un_2FC94.c"),
+            Object(NonMatching, "melee/un/un_2FC95.c"),
+            Object(NonMatching, "melee/un/un_2FC96.c"),
+            Object(NonMatching, "melee/un/un_2FC97.c"),
+            Object(NonMatching, "melee/un/un_3028.c"),
         ],
     ),
     MeleeLib(
@@ -1331,7 +1370,7 @@ config.libs = [
     DolphinLib(
         "OdemuExi2",
         [
-            Object(NonMatching, "dolphin/odenotstub/odenotstub.c"),
+            Object(Matching, "dolphin/odenotstub/odenotstub.c"),
         ],
     ),
     DolphinLib(
@@ -1381,7 +1420,7 @@ config.libs = [
             Object(Matching, "dolphin/dvd/dvdfs.c"),
             Object(Matching, "dolphin/dvd/dvd.c"),
             Object(Matching, "dolphin/dvd/dvdqueue.c"),
-            Object(NonMatching, "dolphin/dvd/dvderror.c"),
+            Object(Matching, "dolphin/dvd/dvderror.c"),
             Object(Matching, "dolphin/dvd/fstload.c"),
         ],
     ),
@@ -1408,10 +1447,10 @@ config.libs = [
     DolphinLib(
         "mtx",
         [
-            Object(NonMatching, "dolphin/mtx/mtx.c"),
-            Object(NonMatching, "dolphin/mtx/mtxvec.c"),
+            Object(Matching, "dolphin/mtx/mtx.c"),
+            Object(Matching, "dolphin/mtx/mtxvec.c"),
             Object(Matching, "dolphin/mtx/mtx44.c"),
-            Object(NonMatching, "dolphin/mtx/vec.c"),
+            Object(Matching, "dolphin/mtx/vec.c"),
         ],
         fix_epilogue=True,
     ),
@@ -1432,11 +1471,11 @@ config.libs = [
             Object(Matching, "dolphin/os/OSLink.c"),
             Object(Matching, "dolphin/os/OSMemory.c"),
             Object(Matching, "dolphin/os/OSMutex.c"),
-            Object(NonMatching, "dolphin/os/OSReboot.c"),
+            Object(Matching, "dolphin/os/OSReboot.c"),
             Object(Matching, "dolphin/os/OSReset.c"),
-            Object(NonMatching, "dolphin/os/OSResetSW.c"),
+            Object(Matching, "dolphin/os/OSResetSW.c"),
             Object(Matching, "dolphin/os/OSRtc.c"),
-            Object(NonMatching, "dolphin/os/OSSerial.c"),
+            Object(Matching, "dolphin/os/OSSerial.c"),
             Object(Matching, "dolphin/os/OSSync.c"),
             Object(Matching, "dolphin/os/OSThread.c"),
             Object(Matching, "dolphin/os/OSTime.c"),
@@ -1456,7 +1495,7 @@ config.libs = [
     DolphinLib(
         "vi",
         [
-            Object(NonMatching, "dolphin/vi/vi.c"),
+            Object(Matching, "dolphin/vi/vi.c"),
         ],
     ),
     DolphinLib(

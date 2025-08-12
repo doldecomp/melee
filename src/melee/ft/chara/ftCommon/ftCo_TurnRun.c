@@ -50,7 +50,7 @@ void ftCo_TurnRun_Enter(Fighter_GObj* gobj, float anim_start)
                               anim_start, 1.0F, 0.0F, NULL);
     fp->mv.co.turnrun.x14 = 0;
     if (fp->x197C != NULL) {
-        ft_80088148(fp, 0x119, 0x7F, 0x40);
+        ft_PlaySFX(fp, 0x119, 0x7F, 0x40);
     }
 }
 

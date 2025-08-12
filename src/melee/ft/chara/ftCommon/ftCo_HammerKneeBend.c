@@ -9,7 +9,7 @@
 #include "ftCommon/ftCo_KneeBend.h"
 #include "ftCommon/types.h"
 
-void ftCo_800C5B88(ftCo_GObj* gobj, enum_t arg1)
+void ftCo_800C5B88(Fighter_GObj* gobj, enum_t arg1)
 {
     u8 _[8] = { 0 };
     /// @todo Cannot move below @c fp, which suggests an inline
@@ -24,7 +24,7 @@ void ftCo_800C5B88(ftCo_GObj* gobj, enum_t arg1)
     ftCo_800C4E94(fp);
 }
 
-void ftCo_HammerKneeBend_Anim(ftCo_GObj* gobj)
+void ftCo_HammerKneeBend_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800C4F64(gobj);
@@ -34,17 +34,17 @@ void ftCo_HammerKneeBend_Anim(ftCo_GObj* gobj)
     --fp->mv.co.hammerkneebend.x8;
 }
 
-void ftCo_HammerKneeBend_IASA(ftCo_GObj* gobj)
+void ftCo_HammerKneeBend_IASA(Fighter_GObj* gobj)
 {
     ftCo_KneeBend_Check_ShortHop(gobj);
 }
 
-void ftCo_HammerKneeBend_Phys(ftCo_GObj* gobj)
+void ftCo_HammerKneeBend_Phys(Fighter_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftCo_HammerKneeBend_Coll(ftCo_GObj* gobj)
+void ftCo_HammerKneeBend_Coll(Fighter_GObj* gobj)
 {
     ftCo_HammerWait_Coll(gobj);
 }

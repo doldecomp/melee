@@ -13,9 +13,14 @@
 #include <dolphin/mtx.h>
 
 #define NUM_UNLOCKABLE_CHARACTERS 11
+#define NUM_UNLOCKABLE_STAGES 11
 
 struct lbl_8046B488_t {
-    /* 0x000 */ char pad_0[0x10];
+    /* 0x000 */ char pad_0[0x7];
+    /* 0x007 */ u8 x7;
+    /* 0x008 */ u8 x8;
+    /* 0x009 */ char pad_9[0x0F - 0x9];
+    /* 0x00F */ u8 xF;
     /* 0x010:0 */ u8 unk_10_b0 : 1;
     /* 0x010:1 */ u8 unk_10_b1 : 1;
     /* 0x010:2 */ u8 unk_10_b2 : 1;
@@ -73,11 +78,19 @@ struct ResultAnimEntry {
 /* 166A8C */ static f32 fn_80166A8C(Vec3*, Vec3*);
 /* 166CBC */ static u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0,
                                    ssize_t index);
-/* 169364 */ static UNK_T fn_80169364(void);
 /* 1693A8 */ static s32 fn_801693A8(void);
 /* 16A1E4 */ static s32 fn_8016A1E4(void);
+
 /* 3B75F8 */ static const struct gmMainLib_8015ED8C_arg0_t lbl_803B75F8 = { 0 };
 /* 3B7808 */ static const s16 lbl_803B7808[0x3C / 2] = { 0 };
+
+static const u8 lbl_803B7844[] = {
+    0x06, 0x0B, 0x07, 0x19, 0x14, 0x12, 0x11, 0x0E,
+    0x1C, 0x18, 0x08, 0x1A, 0x04, 0x10, 0x17, 0x22,
+    0x20, 0x13, 0x09, 0x21, 0x0D, 0x0F, 0x1F, 0x16,
+    0x15, 0x1E, 0x0A, 0x0C, 0x23, 0x05, 0x1D, 0x1B,
+};
+
 /* 3B7864 */ extern const GXColor lbl_803B7864[9];
 /* 3B7888 */ static const u8 lbl_803B7888[0x1C] = { 0 };
 /* 3B78A4 */ static const u8 lbl_803B78A4[0x24] = { 0 };

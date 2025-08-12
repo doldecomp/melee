@@ -14,9 +14,9 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-bool ftCo_SpecialAir_CheckInput(ftCo_GObj* gobj)
+bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->input.x668 & HSD_PAD_B) {
         if (fp->input.lstick.y >= p_ftCommonData->x21C) {
             if (ftData_SpecialAirHi[fp->kind] == NULL) {

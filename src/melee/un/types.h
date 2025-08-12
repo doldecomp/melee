@@ -34,16 +34,6 @@ struct DevText {
     /* +30 */ struct DevText* next;
 };
 
-struct un_80302DF8_t {
-    /* +0 */ char pad_0[0xC];
-    /* +C */ int xC;
-};
-
-struct un_80304334_t {
-    /* +0 */ char pad_0[1];
-    /* +1 */ u8 x1;
-};
-
 struct un_804D6EF4_t {
     /* +0 */ char pad_0[0x18];
     /* +14 */ HSD_JObj* x14;
@@ -53,5 +43,30 @@ struct un_804D6EF4_t {
     /* +54 */ short x54;
     /* +56 */ short x56;
 };
+
+struct un_80304138_objalloc_t_x8 {
+    int x0;
+    int (*x4)(int);
+    char* x8;
+    char** xC;
+    void* x10;
+    float x14;
+    float x18;
+    float x1C;
+};
+STATIC_ASSERT(sizeof(struct un_80304138_objalloc_t_x8) == 0x20);
+
+struct un_80304138_objalloc_t {
+    unsigned char x0;
+    unsigned char x1;
+    DevText* x4;
+    struct un_80304138_objalloc_t_x8* x8;
+    int (*xC)(int);
+    HSD_GObj* x10;
+    HSD_GObjProc* x14;
+    struct un_80304138_objalloc_t* prev;
+    struct un_80304138_objalloc_t* next;
+};
+STATIC_ASSERT(sizeof(struct un_80304138_objalloc_t) == 0x20);
 
 #endif

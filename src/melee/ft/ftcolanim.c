@@ -33,9 +33,9 @@ FtCmd ftCo_803C6ADC[3] = {
 /* literal */ char ftCo_803C6B08[] = "ftcolanimlist.c";
 /* literal */ SDATA char ftCo_804D3C10[] = "0";
 
-void ftCo_Sleep_Anim(ftCo_GObj* gobj) {}
+void ftCo_Sleep_Anim(Fighter_GObj* gobj) {}
 
-void ftCo_Sleep_IASA(ftCo_GObj* gobj) {}
+void ftCo_Sleep_IASA(Fighter_GObj* gobj) {}
 
 static void ftCo_800BFE74(Fighter_GObj* gobj, FtCmdState* cmd)
 {

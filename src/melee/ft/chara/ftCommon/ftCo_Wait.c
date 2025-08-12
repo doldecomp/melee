@@ -31,7 +31,7 @@
 
 void ftCo_Wait_Anim(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2224_b2) {
         ftCo_DownSpot_Enter(gobj);
     } else {
@@ -39,7 +39,7 @@ void ftCo_Wait_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCo_Wait_IASA(ftCo_GObj* gobj)
+void ftCo_Wait_IASA(Fighter_GObj* gobj)
 {
     RETURN_IF(ftCo_SpecialS_CheckInput(gobj));
     RETURN_IF(ftCo_Attack100_CheckInput(gobj));

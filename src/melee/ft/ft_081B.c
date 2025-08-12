@@ -746,7 +746,7 @@ void ft_80084F3C(Fighter_GObj* gobj)
     ftCo_DatAttrs* co = &fp->co_attrs;
     f32 var_f1 = co->gr_friction;
     PAD_STACK(8);
-    if (fabs_inline(fp->gr_vel) > co->walk_max_vel) {
+    if (ABS(fp->gr_vel) > co->walk_max_vel) {
         var_f1 *= p_ftCommonData->x6C;
     }
     ftCommon_8007C930(fp, var_f1);
@@ -772,7 +772,7 @@ void ft_80084FA8(Fighter_GObj* gobj)
 
 void ft_80085030(HSD_GObj* gobj, float gr_friction, float facing_dir)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->x594_b0) {
         fp->xE4_ground_accel_1 =
             fp->x6A4_transNOffset.z * facing_dir - fp->gr_vel;

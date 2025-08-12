@@ -99,4 +99,6 @@ typedef enum ftSk_Submotion {
     ftSk_SM_SelfCount = ftSk_SM_Count - ftCo_SM_Count,
 } ftSk_Submotion;
 
+typedef struct itChainSegment itChainSegment;
+
 #endif

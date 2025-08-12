@@ -398,7 +398,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
 
     fp->x221E_b0 = true;
 
-    ft_80088148(fp, 0x30DA1, SFX_VOLUME_MAX, SFX_PAN_MID);
+    ft_PlaySFX(fp, 0x30DA1, SFX_VOLUME_MAX, SFX_PAN_MID);
 }
 
 /// Mewtwo's grounded Teleport Zoom Motion State handler

@@ -18,8 +18,9 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
+#include <melee/sc/types.h>
 
-/* 09F480 */ static void ftCo_8009F480(ftCo_GObj* gobj);
+/* 09F480 */ static void ftCo_8009F480(Fighter_GObj* gobj);
 /* 09F54C */ static void ftCo_8009F54C(HSD_GObj* gobj, int code);
 
 static HSD_LObj* lobj0;
@@ -32,18 +33,11 @@ static HSD_LightDesc node0 = {
     (void*) floats, 0,    0,
 };
 
-/// @todo #node1_t and #node2_t are fake types.
-static struct node1_t {
-    HSD_LightDesc* x0;
-    UNK_T x4;
-} node1 = { &node0, NULL };
+static LightList node1 = { &node0, NULL };
 
-static struct node2_t {
-    /* +0 */ struct node1_t* x0;
-    /* +4 */ UNK_T x4;
-} node2 = { &node1, NULL };
+static LightList* node2[] = { &node1, NULL };
 
-void ftCo_8009F480(ftCo_GObj* gobj)
+void ftCo_8009F480(Fighter_GObj* gobj)
 {
     HSD_LObjAnimAll(gobj->hsd_obj);
 }
@@ -69,7 +63,7 @@ void ftCo_8009F54C(HSD_GObj* gobj, int code)
 
 void ftCo_8009F578(Fighter* fp)
 {
-    fp->x588 = lb_80011AC4((HSD_LightDesc**) &node2.x0);
+    fp->x588 = lb_80011AC4(node2);
 }
 
 void ftCo_8009F5AC(Fighter* fp)

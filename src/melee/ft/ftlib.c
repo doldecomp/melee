@@ -291,7 +291,7 @@ void ftLib_800865D8(HSD_GObj* gobj, float* x, float* y)
 void* ftLib_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->parts[ftParts_8007500C(fp, 4)].joint;
+    return fp->parts[ftParts_GetBoneIndex(fp, 4)].joint;
 }
 
 void* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
@@ -501,7 +501,7 @@ bool ftLib_80086A58(HSD_GObj* gobj, S32Vec2* x)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x2229_b3 && !fp->x2220_flag.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_b7) {
         *x = fp->x2188;
     }
 
@@ -513,7 +513,7 @@ bool ftLib_80086A8C(HSD_GObj* gobj)
     HSD_GObj* camera_gobj;
 
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x2229_b3 && !fp->x2220_flag.b7) {
+    if (!fp->x2229_b3 && !fp->x2220_b7) {
         camera_gobj = Camera_80030A50();
         if (camera_gobj != NULL) {
             HSD_CObj* temp_r30 = GET_COBJ(camera_gobj);
@@ -560,11 +560,11 @@ void ftLib_80086B90(HSD_GObj* gobj, Vec3* v)
     *v = cam->x1C;
 }
 
-void ftLib_80086BB4(HSD_GObj* gobj)
+bool ftLib_80086BB4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CameraBox* cam = fp->x890_cameraBox;
-    Camera_80031154(&cam->x10);
+    return Camera_80031154(&cam->x10);
 }
 
 u8 ftLib_80086BE0(HSD_GObj* gobj)
@@ -654,7 +654,7 @@ bool ftLib_80086ED0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221E_b0 || fp->x221E_b2 ||
         Player_GetMoreFlagsBit4(fp->player_id) || fp->x2228_b2 ||
-        fp->x2229_b3 || fp->x2220_flag.b7)
+        fp->x2229_b3 || fp->x2220_b7)
     {
         return false;
     }
@@ -787,7 +787,7 @@ void ftLib_800871A8(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);
     Camera_80030E44(2, &fp->cur_pos);
-    ft_80088148(fp, 0x121, 0x7F, 0x40);
+    ft_PlaySFX(fp, 0x121, 0x7F, 0x40);
 }
 
 bool ftLib_80087284(HSD_GObj* gobj)

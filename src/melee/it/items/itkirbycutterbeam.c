@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itkirbycutterbeam.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 
@@ -9,32 +11,32 @@
 
 /// #it_8029BB90
 
-/// #it_8029BC88
+/// #itKirbycutterbeam_UnkMotion0_Anim
 
-/// #it_8029BCA8
+/// #itKirbycutterbeam_UnkMotion0_Phys
 
-/// #it_8029BDD4
+/// #itKirbycutterbeam_UnkMotion0_Coll
 
-bool it_8029BFB4(Item_GObj* arg0)
+bool it_2725_Logic7_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_8029BFBC(Item_GObj* arg0)
+bool it_2725_Logic7_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_8029BFC4(Item_GObj* arg0)
+bool it_2725_Logic7_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_8029BFCC
+/// #it_2725_Logic7_Reflected
 
-/// #it_8029C208
+/// #it_2725_Logic7_ShieldBounced
 
-bool it_8029C4AC(Item_GObj* arg0)
+bool it_2725_Logic7_HitShield(Item_GObj* arg0)
 {
     return true;
 }

@@ -1,3 +1,4 @@
+#include "itsonans.h"
 
 /// #it_802CD44C
 
@@ -7,28 +8,28 @@ void it_802CD4D8(void) {}
 
 /// #it_802CD4FC
 
-/// #it_802CD7B8
+/// #it_2725_Logic9_DmgDealt
 
 /// #it_802CD7D4
 
-/// #it_802CD8E4
+/// #itSonans_UnkMotion0_Anim
 
-/// #it_802CD954
+/// #itSonans_UnkMotion0_Phys
 
-/// #it_802CD974
+/// #itSonans_UnkMotion0_Coll
 
 /// #it_802CD9C0
 
-/// #it_802CDA0C
+/// #itSonans_UnkMotion1_Anim
 
-/// #it_802CDA3C
+/// #itSonans_UnkMotion1_Phys
 
-/// #it_802CDA5C
+/// #itSonans_UnkMotion1_Coll
 
 /// #it_802CDAA8
 
-/// #it_802CDB0C
+/// #itSonans_UnkMotion2_Anim
 
-/// #it_802CDB30
+/// #itSonans_UnkMotion2_Phys
 
-/// #it_802CDBB8
+/// #itSonans_UnkMotion2_Coll

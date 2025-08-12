@@ -1,6 +1,8 @@
 #include <platform.h>
 
-void grRCruise_801FF164(void) {}
+#include "grrcruise.h"
+
+void grRCruise_801FF164(bool arg) {}
 
 /// #grRCruise_801FF168
 
@@ -17,82 +19,82 @@ bool grRCruise_801FF2C0(void)
 
 /// #grRCruise_801FF3B4
 
-bool grRCruise_801FF3E0(void)
+bool grRCruise_801FF3E0(Ground_GObj* arg)
 {
     return false;
 }
 
-void grRCruise_801FF3E8(void) {}
+void grRCruise_801FF3E8(Ground_GObj* arg) {}
 
-void grRCruise_801FF3EC(void) {}
+void grRCruise_801FF3EC(Ground_GObj* arg) {}
 
 /// #grRCruise_801FF3F0
 
-bool grRCruise_801FF434(void)
+bool grRCruise_801FF434(Ground_GObj* arg)
 {
     return false;
 }
 
-void grRCruise_801FF43C(void) {}
+void grRCruise_801FF43C(Ground_GObj* arg) {}
 
-void grRCruise_801FF440(void) {}
+void grRCruise_801FF440(Ground_GObj* arg) {}
 
 /// #fn_801FF444
 
 /// #grRCruise_801FF5B4
 
-bool grRCruise_801FF6CC(void)
+bool grRCruise_801FF6CC(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grRCruise_801FF6D4
 
-void grRCruise_801FF738(void) {}
+void grRCruise_801FF738(Ground_GObj* arg) {}
 
 /// #grRCruise_801FF73C
 
-bool grRCruise_801FF794(void)
+bool grRCruise_801FF794(Ground_GObj* arg)
 {
     return false;
 }
 
-void grRCruise_801FF79C(void) {}
+void grRCruise_801FF79C(Ground_GObj* arg) {}
 
-void grRCruise_801FF7A0(void) {}
+void grRCruise_801FF7A0(Ground_GObj* arg) {}
 
 /// #grRCruise_801FF7A4
 
-bool grRCruise_801FF8DC(void)
+bool grRCruise_801FF8DC(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grRCruise_801FF8E4
 
-void grRCruise_801FF920(void) {}
+void grRCruise_801FF920(Ground_GObj* arg) {}
 
 /// #grRCruise_801FF924
 
-bool grRCruise_801FFAD4(void)
+bool grRCruise_801FFAD4(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grRCruise_801FFADC
 
-void grRCruise_80200070(void) {}
+void grRCruise_80200070(Ground_GObj* arg) {}
 
 /// #grRCruise_80200074
 
-bool grRCruise_8020014C(void)
+bool grRCruise_8020014C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grRCruise_80200154
 
-void grRCruise_8020045C(void) {}
+void grRCruise_8020045C(Ground_GObj* arg) {}
 
 /// #fn_80200460
 
@@ -124,12 +126,12 @@ void grRCruise_8020045C(void) {}
 
 /// #fn_80201BE0
 
-bool grRCruise_80201C50(void)
+DynamicsDesc* grRCruise_80201C50(enum_t arg)
 {
     return false;
 }
 
-bool grRCruise_80201C58(void)
+bool grRCruise_80201C58(Vec3* arg, int arg0, HSD_JObj* jobj)
 {
     return true;
 }

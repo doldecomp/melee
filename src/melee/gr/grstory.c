@@ -48,8 +48,8 @@ StageData grSt_803E274C = {
     "/GrSt.dat",
     grStory_801E3030,
     grStory_801E302C,
-    grStory_801E30A8,
-    grStory_801E30AC,
+    grStory_UnkStage0_OnLoad,
+    grStory_UnkStage0_OnStart,
     grStory_801E30D0,
     grStory_801E36D0,
     grStory_801E36D8,
@@ -73,9 +73,9 @@ void grStory_801E3030(void)
     Ground_801C3BB4();
 }
 
-void grStory_801E30A8(void) {}
+void grStory_UnkStage0_OnLoad(void) {}
 
-void grStory_801E30AC(void)
+void grStory_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }

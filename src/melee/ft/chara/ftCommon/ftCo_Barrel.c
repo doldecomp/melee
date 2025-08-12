@@ -1,22 +1,27 @@
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-
 #include "ftCo_Barrel.h"
 
+#include <placeholder.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_Lift.h"
 #include "it/items/ittarucann.h"
 #include "lb/lbcollision.h"
 #include "mp/mpcoll.h"
+
+/* 0C9290 */ static void fn_800C9290(Fighter_GObj* gobj);
 
 void ftCo_Barrel_Death2_Cb(Fighter_GObj* gobj)
 {

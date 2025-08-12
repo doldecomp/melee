@@ -124,10 +124,10 @@ struct StageInfo {
 };
 
 typedef struct StageCallbacks {
-    /*  +0 */ void (*callback0)(HSD_GObj*); ///< initialization callback
-    /*  +4 */ bool (*callback1)(HSD_GObj*);
-    /*  +8 */ void (*callback2)(HSD_GObj*);
-    /*  +C */ void (*callback3)(HSD_GObj*);
+    /*  +0 */ void (*callback0)(Ground_GObj*); ///< initialization callback
+    /*  +4 */ bool (*callback1)(Ground_GObj*);
+    /*  +8 */ void (*callback2)(Ground_GObj*);
+    /*  +C */ void (*callback3)(Ground_GObj*);
     /* +10 */ union {
         /* +10 */ u32 flags;
         struct {
@@ -149,8 +149,8 @@ typedef struct StageData {
     char* data1;
     void (*callback0)(void);
     void (*callback1)(int);
-    void (*callback2)(void); ///< on load callback
-    void (*callback3)(void); ///< on GO! callback
+    void (*OnLoad)(void);
+    void (*OnStart)(void);
     bool (*callback4)(void);
     DynamicsDesc* (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);

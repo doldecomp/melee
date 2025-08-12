@@ -6,6 +6,29 @@
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
+/* 1CD4A0 */ static void grCastle_801CD4A0(void);
+/* 1CD4C8 */ static bool grCastle_801CD4C8(void);
+/* 1CD600 */ static bool grCastle_801CD600(Ground_GObj* arg);
+/* 1CD608 */ static void grCastle_801CD608(Ground_GObj* arg);
+/* 1CD60C */ static void grCastle_801CD60C(Ground_GObj* arg);
+/* 1CD8A0 */ static bool grCastle_801CD8A0(Ground_GObj* arg);
+/* 1CDC3C */ static bool grCastle_801CDC3C(Ground_GObj* arg);
+/* 1CDF50 */ static void grCastle_801CDF50(Ground_GObj* arg);
+/* 1CE3A0 */ static void fn_801CE3A0(void);
+/* 1CE3A4 */ static bool grCastle_801CE3A4(Ground_GObj* arg);
+/* 1CE7E4 */ static void grCastle_801CE7E4(Ground_GObj* arg);
+/* 1CE858 */ static bool grCastle_801CE858(Ground_GObj* arg);
+/* 1CE8E4 */ void grCastle_801CE8E4(Ground_GObj* arg);
+/* 1CE9DC */ static void fn_801CE9DC(void);
+/* 1CE9E0 */ static bool grCastle_801CE9E0(Ground_GObj* arg);
+/* 1CEAC8 */ static void grCastle_801CEAC8(Ground_GObj* arg);
+/* 1CEEFC */ static bool grCastle_801CEEFC(Ground_GObj* arg);
+/* 1CF0F0 */ static void grCastle_801CF0F0(Ground_GObj* arg);
+/* 1CF300 */ static bool grCastle_801CF300(Ground_GObj* arg);
+/* 1CF74C */ static void grCastle_801CF74C(Ground_GObj* arg);
+/* 1D0B04 */ static DynamicsDesc* grCastle_801D0B04(enum_t arg);
+/* 1D0B0C */ static bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj);
+
 /// #grCastle_801CD338
 
 /// #grCastle_801CD37C
@@ -23,20 +46,20 @@ bool grCastle_801CD4C8(void)
 
 /// #grCastle_801CD5BC
 
-bool grCastle_801CD600(void)
+bool grCastle_801CD600(Ground_GObj* arg)
 {
     return false;
 }
 
-void grCastle_801CD608(void) {}
+void grCastle_801CD608(Ground_GObj* arg) {}
 
-void grCastle_801CD60C(void) {}
+void grCastle_801CD60C(Ground_GObj* arg) {}
 
 /// #fn_801CD610
 
 /// #grCastle_801CD658
 
-bool grCastle_801CD8A0(void)
+bool grCastle_801CD8A0(Ground_GObj* arg)
 {
     return false;
 }
@@ -49,14 +72,14 @@ bool grCastle_801CD8A0(void)
 
 /// #grCastle_801CDA0C
 
-bool grCastle_801CDC3C(void)
+bool grCastle_801CDC3C(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCastle_801CDC44
 
-void grCastle_801CDF50(void) {}
+void grCastle_801CDF50(Ground_GObj* arg) {}
 
 /// #grCastle_801CDF54
 
@@ -70,7 +93,7 @@ void grCastle_801CDF50(void) {}
 
 void fn_801CE3A0(void) {}
 
-bool grCastle_801CE3A4(void)
+bool grCastle_801CE3A4(Ground_GObj* arg)
 {
     return false;
 }
@@ -79,53 +102,53 @@ bool grCastle_801CE3A4(void)
 
 /// #grCastle_801CE578
 
-void grCastle_801CE7E4(void) {}
+void grCastle_801CE7E4(Ground_GObj* arg) {}
 
 /// #grCastle_801CE7E8
 
-bool grCastle_801CE858(void)
+bool grCastle_801CE858(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCastle_801CE860
 
-void grCastle_801CE8E4(void) {}
+void grCastle_801CE8E4(Ground_GObj* arg) {}
 
 /// #grCastle_801CE8E8
 
 void fn_801CE9DC(void) {}
 
-bool grCastle_801CE9E0(void)
+bool grCastle_801CE9E0(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCastle_801CE9E8
 
-void grCastle_801CEAC8(void) {}
+void grCastle_801CEAC8(Ground_GObj* arg) {}
 
 /// #grCastle_801CEACC
 
-bool grCastle_801CEEFC(void)
+bool grCastle_801CEEFC(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCastle_801CEF04
 
-void grCastle_801CF0F0(void) {}
+void grCastle_801CF0F0(Ground_GObj* arg) {}
 
 /// #grCastle_801CF0F4
 
-bool grCastle_801CF300(void)
+bool grCastle_801CF300(Ground_GObj* arg)
 {
     return false;
 }
 
 /// #grCastle_801CF308
 
-void grCastle_801CF74C(void) {}
+void grCastle_801CF74C(Ground_GObj* arg) {}
 
 /// #fn_801CF750
 
@@ -171,12 +194,12 @@ void grCastle_801CF74C(void) {}
 
 /// #grCastle_801D0A9C
 
-bool grCastle_801D0B04(void)
+DynamicsDesc* grCastle_801D0B04(enum_t arg)
 {
     return false;
 }
 
-bool grCastle_801D0B0C(Vec3* v, u32 arg1, HSD_JObj* jobj)
+bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 pos;
     float temp_f30;

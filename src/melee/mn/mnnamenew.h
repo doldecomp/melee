@@ -1,1 +1,32 @@
+#ifndef MELEE_MN_NAME_NEW_H
+#define MELEE_MN_NAME_NEW_H
 
+#include <placeholder.h>
+
+/* 23B0F8 */ UNK_RET mnNameNew_8023B0F8(UNK_PARAMS);
+/* 23B224 */ UNK_RET mnNameNew_8023B224(UNK_PARAMS);
+/* 23B314 */ UNK_RET mnNameNew_8023B314(UNK_PARAMS);
+/* 23B3FC */ UNK_RET mnNameNew_KeySetup(UNK_PARAMS);
+/* 23BAA8 */ UNK_RET mnNameNew_8023BAA8(UNK_PARAMS);
+/* 23BD4C */ UNK_RET PickAutoName(UNK_PARAMS);
+/* 23BEE0 */ UNK_RET NameContainsOnlySpaces(UNK_PARAMS);
+/* 23BFE4 */ UNK_RET WriteCharactersForNameAtIndex(UNK_PARAMS);
+/* 23C148 */ UNK_RET AddCharacterToName(UNK_PARAMS);
+/* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);
+/* 23C54C */ UNK_RET mnNameNew_MainInput(UNK_PARAMS);
+/* 23CE4C */ UNK_RET mnNameNew_8023CE4C(UNK_PARAMS);
+/* 23CFC8 */ UNK_RET fn_8023CFC8(UNK_PARAMS);
+/* 23D0F8 */ UNK_RET fn_8023D0F8(UNK_PARAMS);
+/* 23D130 */ UNK_RET mnNameNew_8023D130(UNK_PARAMS);
+/* 23D3E8 */ UNK_RET mnNameNew_GlyphVariantSetup(UNK_PARAMS);
+/* 23DA08 */ UNK_RET mnNameNew_8023DA08(UNK_PARAMS);
+/* 23DAEC */ UNK_RET fn_8023DAEC(UNK_PARAMS);
+/* 23DBE8 */ UNK_RET fn_8023DBE8(UNK_PARAMS);
+/* 23E0D8 */ UNK_RET mnNameNew_8023E0D8(UNK_PARAMS);
+/* 23E264 */ UNK_RET InitNameEntryUIState(UNK_PARAMS);
+/* 23E32C */ UNK_RET mnNameNew_8023E32C(UNK_PARAMS);
+/* 23E630 */ UNK_RET mnNameNew_EnterFromMnName(UNK_PARAMS);
+/* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(UNK_T, int);
+/* 23EA08 */ void mnNameNew_8023EA08(UNK_T);
+
+#endif

@@ -20,13 +20,13 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 09C02C */ static bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid);
-/* 09C170 */ static void ftCo_8009C170(ftCo_GObj* gobj);
-/* 09C45C */ static void ftCo_8009C45C(ftCo_GObj* gobj);
+/* 09C02C */ static bool ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid);
+/* 09C170 */ static void ftCo_8009C170(Fighter_GObj* gobj);
+/* 09C45C */ static void ftCo_8009C45C(Fighter_GObj* gobj);
 
-void ftCo_CargoWait2_Anim(ftCo_GObj* gobj)
+void ftCo_CargoWait2_Anim(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftCo_8008F744(gobj);
     if (!fp->x221C_b6) {
         if (fp->ground_or_air == GA_Air) {
@@ -37,14 +37,14 @@ void ftCo_CargoWait2_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CargoWait2_Phys(ftCo_GObj* gobj)
+void ftCo_CargoWait2_Phys(Fighter_GObj* gobj)
 {
     ftCo_Damage_Phys(gobj);
 }
 
-void ftCo_CargoWait2_Coll(ftCo_GObj* gobj)
+void ftCo_CargoWait2_Coll(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Ground) {
         if (ft_80082708(gobj) == GA_Ground) {
             ftCommon_8007D5D4(fp);
@@ -54,7 +54,7 @@ void ftCo_CargoWait2_Coll(ftCo_GObj* gobj)
     }
 }
 
-static inline FtMotionId inlineA0(ftCo_Fighter* fp)
+static inline FtMotionId inlineA0(Fighter* fp)
 {
     FtMotionId msid = fp->motion_id;
     if (fp->input.x668 & HSD_PAD_AB) {
@@ -81,7 +81,7 @@ static inline FtMotionId inlineA0(ftCo_Fighter* fp)
     return msid;
 }
 
-bool ftCo_8009BF3C(ftCo_GObj* gobj)
+bool ftCo_8009BF3C(Fighter_GObj* gobj)
 {
     FtMotionId msid = inlineA0(gobj->user_data);
     if (msid != GET_FIGHTER(gobj)->motion_id) {
@@ -91,10 +91,10 @@ bool ftCo_8009BF3C(ftCo_GObj* gobj)
     return false;
 }
 
-bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid)
+bool ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid)
 {
     u8 _[16] = { 0 };
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     {
         MotionFlags mf;
         FtMotionId msid1;
@@ -120,7 +120,7 @@ bool ftCo_8009C02C(ftCo_GObj* gobj, FtMotionId msid)
     }
 }
 
-void ftCo_CargoThrowF_Anim(ftCo_GObj* gobj)
+void ftCo_CargoThrowF_Anim(Fighter_GObj* gobj)
 {
     ftCo_800DD724(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -128,19 +128,19 @@ void ftCo_CargoThrowF_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CargoThrowF_IASA(ftCo_GObj* gobj)
+void ftCo_CargoThrowF_IASA(Fighter_GObj* gobj)
 {
     ftCo_ThrowF_IASA(gobj);
 }
 
-void ftCo_CargoThrowF_Phys(ftCo_GObj* gobj)
+void ftCo_CargoThrowF_Phys(Fighter_GObj* gobj)
 {
     ftCo_ThrowF_Phys(gobj);
 }
 
-static inline void inlineB0(ftCo_GObj* gobj, FtMotionId msid)
+static inline void inlineB0(Fighter_GObj* gobj, FtMotionId msid)
 {
-    ftCo_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     float facing_dir = fp->facing_dir;
     if (facing_dir != fp->facing_dir1) {
         fp->facing_dir = fp->facing_dir1;
@@ -155,85 +155,85 @@ static inline void inlineB0(ftCo_GObj* gobj, FtMotionId msid)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
-static inline void inlineB1(ftCo_GObj* gobj, FighterEvent cb, int offset)
+static inline void inlineB1(Fighter_GObj* gobj, FighterEvent cb, int offset)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     cb(fp);
     inlineB0(gobj, fp->motion_id + offset);
 }
 
-void ftCo_8009C170(ftCo_GObj* gobj)
+void ftCo_8009C170(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     inlineB1(gobj, ftCommon_8007D5D4, 4);
 }
 
-void ftCo_CargoThrowF_Coll(ftCo_GObj* gobj)
+void ftCo_CargoThrowF_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, ftCo_8009C170);
 }
 
-void ftCo_CargoThrowB_Anim(ftCo_GObj* gobj)
+void ftCo_CargoThrowB_Anim(Fighter_GObj* gobj)
 {
     ftCo_ThrowB_Anim(gobj);
 }
 
-void ftCo_CargoThrowB_IASA(ftCo_GObj* gobj)
+void ftCo_CargoThrowB_IASA(Fighter_GObj* gobj)
 {
     ftCo_ThrowB_IASA(gobj);
 }
 
-void ftCo_CargoThrowB_Phys(ftCo_GObj* gobj)
+void ftCo_CargoThrowB_Phys(Fighter_GObj* gobj)
 {
     ftCo_ThrowB_Phys(gobj);
 }
 
-void ftCo_CargoThrowB_Coll(ftCo_GObj* gobj)
+void ftCo_CargoThrowB_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, ftCo_8009C170);
 }
 
-void ftCo_CargoThrowHi_Anim(ftCo_GObj* gobj)
+void ftCo_CargoThrowHi_Anim(Fighter_GObj* gobj)
 {
     ftCo_ThrowHi_Anim(gobj);
 }
 
-void ftCo_CargoThrowHi_IASA(ftCo_GObj* gobj)
+void ftCo_CargoThrowHi_IASA(Fighter_GObj* gobj)
 {
     ftCo_ThrowHi_IASA(gobj);
 }
 
-void ftCo_CargoThrowHi_Phys(ftCo_GObj* gobj)
+void ftCo_CargoThrowHi_Phys(Fighter_GObj* gobj)
 {
     ftCo_ThrowHi_Phys(gobj);
 }
 
-void ftCo_CargoThrowHi_Coll(ftCo_GObj* gobj)
+void ftCo_CargoThrowHi_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, ftCo_8009C170);
 }
 
-void ftCo_CargoThrowLw_Anim(ftCo_GObj* gobj)
+void ftCo_CargoThrowLw_Anim(Fighter_GObj* gobj)
 {
     ftCo_ThrowLw_Anim(gobj);
 }
 
-void ftCo_CargoThrowLw_IASA(ftCo_GObj* gobj)
+void ftCo_CargoThrowLw_IASA(Fighter_GObj* gobj)
 {
     ftCo_ThrowLw_IASA(gobj);
 }
 
-void ftCo_CargoThrowLw_Phys(ftCo_GObj* gobj)
+void ftCo_CargoThrowLw_Phys(Fighter_GObj* gobj)
 {
     ftCo_ThrowLw_Phys(gobj);
 }
 
-void ftCo_CargoThrowLw_Coll(ftCo_GObj* gobj)
+void ftCo_CargoThrowLw_Coll(Fighter_GObj* gobj)
 {
     ft_8008403C(gobj, ftCo_8009C170);
 }
 
-void ftCo_CargoThrowAir_Anim(ftCo_GObj* gobj)
+void ftCo_CargoThrowAir_Anim(Fighter_GObj* gobj)
 {
     ftCo_800DD724(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -241,19 +241,19 @@ void ftCo_CargoThrowAir_Anim(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_CargoThrowAir_IASA(ftCo_GObj* gobj) {}
+void ftCo_CargoThrowAir_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_CargoThrowAir_Phys(ftCo_GObj* gobj)
+void ftCo_CargoThrowAir_Phys(Fighter_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftCo_CargoThrowAir_Coll(ftCo_GObj* gobj)
+void ftCo_CargoThrowAir_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74(gobj, ftCo_8009C45C);
 }
 
-void ftCo_8009C45C(ftCo_GObj* gobj)
+void ftCo_8009C45C(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     inlineB1(gobj, ftCommon_8007D7FC, -4);

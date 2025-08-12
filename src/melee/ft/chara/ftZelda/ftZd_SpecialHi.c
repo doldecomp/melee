@@ -80,7 +80,7 @@ static void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
     _[0] = 0;
 
     {
-        ssize_t boneIndex = ftParts_8007500C(fp, 4);
+        ssize_t boneIndex = ftParts_GetBoneIndex(fp, 4);
         HSD_JObj* jObj = fp->parts[boneIndex].joint;
 
         {
@@ -135,7 +135,7 @@ void ftZd_SpecialAirHi_Enter(HSD_GObj* gobj)
 
             u8 _[20];
 
-            ssize_t boneIndex = ftParts_8007500C(fp, 4);
+            ssize_t boneIndex = ftParts_GetBoneIndex(fp, 4);
             HSD_JObj* jObj = fp->parts[boneIndex].joint;
 
             lb_8000B1CC(jObj, NULL, &vec);

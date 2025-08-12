@@ -37,37 +37,37 @@ bool it_802D6848(Item_GObj* arg0)
 
 /// #it_802D6850
 
-/// #it_802D6870
+/// #it_2725_Logic28_Spawned
 
 /// #it_802D68FC
 
-/// #it_802D6978
+/// #itMaril_UnkMotion0_Anim
 
-/// #it_802D699C
+/// #itMaril_UnkMotion0_Phys
 
-/// #it_802D69BC
+/// #itMaril_UnkMotion0_Coll
 
 /// #it_802D69E4
 
 /// #it_802D6A54
 
-/// #it_802D6AD4
+/// #itMaril_UnkMotion1_Anim
 
-/// #it_802D6C2C
+/// #itMaril_UnkMotion1_Phys
 
-/// #it_802D6C60
+/// #itMaril_UnkMotion1_Coll
 
 /// #it_802D6DDC
 
-/// #it_802D6E04
+/// #itMaril_UnkMotion2_Anim
 
-/// #it_802D6E3C
+/// #itMaril_UnkMotion2_Phys
 
-/// #it_802D6E6C
+/// #itMaril_UnkMotion2_Coll
 
-/// #it_802D6E98
+/// #itMaril_UnkMotion3_Anim
 
-/// #it_802D6ED0
+/// #itMaril_UnkMotion3_Phys
 
 /// #it_802D6F00
 

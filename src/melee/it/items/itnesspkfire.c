@@ -1,5 +1,7 @@
-#include <platform.h>
+#include "itnesspkfire.h"
+
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
 
@@ -9,27 +11,27 @@
 
 /// #it_802AA1D8
 
-/// #it_802AA22C
+/// #itNesspkfire_UnkMotion0_Anim
 
-/// #it_802AA264
+/// #itNesspkfire_UnkMotion0_Coll
 
-/// #it_802AA284
+/// #it_2725_Logic23_DmgDealt
 
-/// #it_802AA2E8
+/// #it_2725_Logic23_Clanked
 
-bool it_802AA34C(Item_GObj* arg0)
+bool it_2725_Logic23_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_802AA354(Item_GObj* arg0)
+bool it_2725_Logic23_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-/// #it_802AA35C
+/// #it_2725_Logic23_Reflected
 
-/// #it_802AA37C
+/// #it_2725_Logic23_ShieldBounced
 
 void it_802AA474(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

@@ -55,11 +55,11 @@ static inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 }
 
 ItemStateTable it_803F6A28[5] = {
-    { -1, it_802A8B20, it_802A8C70, it_802A8C74 },
-    { 0, it_802A8CC8, it_802A90F0, it_802A9138 },
-    { -1, it_802A934C, it_802A93B4, it_802A943C },
-    { -1, it_802A9444, it_802A944C, it_802A9450 },
-    { -1, it_802A96E4, it_802A98E4, it_802A98E8 },
+    { -1, itLinkarrow_UnkMotion0_Anim, itLinkarrow_UnkMotion0_Phys, itLinkarrow_UnkMotion0_Coll },
+    { 0, itLinkarrow_UnkMotion1_Anim, itLinkarrow_UnkMotion1_Phys, itLinkarrow_UnkMotion1_Coll },
+    { -1, itLinkarrow_UnkMotion2_Anim, itLinkarrow_UnkMotion2_Phys, itLinkarrow_UnkMotion2_Coll },
+    { -1, itLinkarrow_UnkMotion3_Anim, itLinkarrow_UnkMotion3_Phys, itLinkarrow_UnkMotion3_Coll },
+    { -1, itLinkarrow_UnkMotion4_Anim, itLinkarrow_UnkMotion4_Phys, itLinkarrow_UnkMotion4_Coll },
 };
 f32 numbers[] = { 2, 4, 6, 8, 10, 12, 14, 16 };
 f32 numbers_l[] = { 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -360,7 +360,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     }
 }
 
-void it_802A8984(Item_GObj* gobj)
+void it_2725_Logic98_Destroyed(Item_GObj* gobj)
 {
     Item* item;
     enum ItemKind temp_r0;
@@ -402,13 +402,13 @@ void it_802A8A7C(Item_GObj* gobj)
     }
 }
 
-void it_802A8AF8(Item_GObj* gobj)
+void it_2725_Logic98_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
 }
 
 // Item could be passed to influence stack
-static void inline it_802A8CC8_inline_s_2(HSD_GObj* gobj, Item* item)
+static void inline itLinkarrow_UnkMotion1_Anim_inline_s_2(HSD_GObj* gobj, Item* item)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     Vec3 scale;
@@ -416,11 +416,11 @@ static void inline it_802A8CC8_inline_s_2(HSD_GObj* gobj, Item* item)
     HSD_JObjSetScale(jobj, &scale);
 }
 
-int it_802A8B20(HSD_GObj* gobj)
+bool itLinkarrow_UnkMotion0_Anim(HSD_GObj* gobj)
 {
     Item* item;
     item = GET_ITEM(gobj);
-    it_802A8CC8_inline_s_2(gobj, item);
+    itLinkarrow_UnkMotion1_Anim_inline_s_2(gobj, item);
     if (item->xDD4_itemVar.linkarrow.xE0 != NULL) {
         if (item->owner == item->xDD4_itemVar.linkarrow.xE0) {
             switch (item->kind) {
@@ -450,12 +450,12 @@ int it_802A8B20(HSD_GObj* gobj)
     return 0;
 }
 
-void it_802A8C70(HSD_GObj* gobj)
+void itLinkarrow_UnkMotion0_Phys(HSD_GObj* gobj)
 {
     return;
 }
 
-int it_802A8C74(HSD_GObj* gobj)
+bool itLinkarrow_UnkMotion0_Coll(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -479,7 +479,7 @@ static int inline it_802A8330_inline(Item_GObj* gobj)
     return 0;
 }
 
-static void inline it_802A8CC8_inline(HSD_GObj* gobj, int i)
+static void inline itLinkarrow_UnkMotion1_Anim_inline(HSD_GObj* gobj, int i)
 {
     Item* item;
     HSD_JObj* jobj;
@@ -497,7 +497,7 @@ static void inline it_802A8CC8_inline(HSD_GObj* gobj, int i)
     }
 }
 
-int it_802A8CC8(HSD_GObj* gobj)
+bool itLinkarrow_UnkMotion1_Anim(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     {
@@ -524,17 +524,17 @@ int it_802A8CC8(HSD_GObj* gobj)
     }
 
     if (item->xDAC_itcmd_var0 == 1) {
-        it_802A8CC8_inline(gobj, 0);
+        itLinkarrow_UnkMotion1_Anim_inline(gobj, 0);
     }
     if (item->xDB0_itcmd_var1 == 1) {
-        it_802A8CC8_inline(gobj, 1);
+        itLinkarrow_UnkMotion1_Anim_inline(gobj, 1);
     }
 
     item->xDD4_itemVar.linkarrow.xB0 += 1;
     return it_802A8330_inline(gobj);
 }
 
-void it_802A90F0(HSD_GObj* gobj)
+void itLinkarrow_UnkMotion1_Phys(HSD_GObj* gobj)
 {
     Item* item;
     itLinkArrowAttributes* attr;
@@ -542,10 +542,10 @@ void it_802A90F0(HSD_GObj* gobj)
     item = gobj->user_data;
     attr = item->xC4_article_data->x4_specialAttributes;
     item->xDD4_itemVar.linkarrow.x18 = item->pos;
-    item->x40_vel.y -= fabs_inline(attr->x1C);
+    item->x40_vel.y -= ABS(attr->x1C);
 }
 
-static inline bool it_802A9138_inline(Item_GObj* gobj)
+static inline bool itLinkarrow_UnkMotion1_Coll_inline(Item_GObj* gobj)
 {
     Vec3 sp1C;
     Item* item_2;
@@ -567,7 +567,7 @@ static inline bool it_802A9138_inline(Item_GObj* gobj)
     return 0;
 }
 
-int it_802A9138(Item_GObj* gobj)
+bool itLinkarrow_UnkMotion1_Coll(Item_GObj* gobj)
 {
     HSD_JObj* jobj;
     f32 temp_f1;
@@ -591,19 +591,19 @@ int it_802A9138(Item_GObj* gobj)
             -atan2f(item->pos.y - item->xDD4_itemVar.linkarrow.x18.y,
                     item->xDD4_itemVar.linkarrow.x18.x - item->pos.x);
     }
-    if (fabs_inline(item->xDD4_itemVar.linkarrow.x94) > attr->x20) {
+    if (ABS(item->xDD4_itemVar.linkarrow.x94) > attr->x20) {
         item->xDD4_itemVar.linkarrow.x94 =
             (item->xDD4_itemVar.linkarrow.x94 < 0.0f) ? -attr->x20 : attr->x20;
     }
     HSD_JObjSetRotationZ(jobj, item->xDD4_itemVar.linkarrow.x94);
-    if (it_802A9138_inline(gobj) != 0) {
+    if (itLinkarrow_UnkMotion1_Coll_inline(gobj) != 0) {
         it_802A9458((HSD_GObj*) gobj);
     }
     it_802A7E40(gobj);
     return 0;
 }
 
-int it_802A934C(Item_GObj* gobj)
+bool itLinkarrow_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* item;
     f32 pad[1];
@@ -614,7 +614,7 @@ int it_802A934C(Item_GObj* gobj)
     return it_802A8330_inline(gobj);
 }
 
-void it_802A93B4(HSD_GObj* gobj)
+void itLinkarrow_UnkMotion2_Phys(HSD_GObj* gobj)
 {
     Item* item;
     item = GET_ITEM(gobj);
@@ -631,22 +631,22 @@ void it_802A93B4(HSD_GObj* gobj)
     item->pos.z = 0.0f;
 }
 
-int it_802A943C(HSD_GObj* gobj)
+bool itLinkarrow_UnkMotion2_Coll(HSD_GObj* gobj)
 {
     return 0;
 }
 
-int it_802A9444(HSD_GObj* gobj)
+bool itLinkarrow_UnkMotion3_Anim(HSD_GObj* gobj)
 {
     return 0;
 }
 
-void it_802A944C(HSD_GObj* gobj)
+void itLinkarrow_UnkMotion3_Phys(HSD_GObj* gobj)
 {
     return;
 }
 
-int it_802A9450(HSD_GObj* gobj)
+bool itLinkarrow_UnkMotion3_Coll(HSD_GObj* gobj)
 {
     return 0;
 }
@@ -704,7 +704,7 @@ static bool inline itlinkarrow_inline_bool(Item_GObj* gobj)
     return var_r0;
 }
 
-int it_802A96E4(Item_GObj* gobj)
+bool itLinkarrow_UnkMotion4_Anim(Item_GObj* gobj)
 {
     f32 var_f32;
     Item* item;
@@ -759,12 +759,12 @@ int it_802A96E4(Item_GObj* gobj)
     return 0;
 }
 
-void it_802A98E4(HSD_GObj* gobj)
+void itLinkarrow_UnkMotion4_Phys(HSD_GObj* gobj)
 {
     return;
 }
 
-int it_802A98E8(HSD_GObj* gobj)
+bool itLinkarrow_UnkMotion4_Coll(HSD_GObj* gobj)
 {
     f32 temp_f0;
     f32 temp_f1;
@@ -815,7 +815,7 @@ int it_802A98E8(HSD_GObj* gobj)
     return 1;
 }
 
-int it_802A9A80(Item_GObj* gobj)
+bool it_2725_Logic98_DmgDealt(Item_GObj* gobj)
 {
     Item* item;
     itLinkArrowAttributes* attr;
@@ -826,14 +826,14 @@ int it_802A9A80(Item_GObj* gobj)
     return 1;
 }
 
-int it_802A9CE0(Item_GObj* gobj)
+bool it_2725_Logic98_Clanked(Item_GObj* gobj)
 {
     f32 pad;
     it_802A8330(gobj);
     return 1;
 }
 
-int it_802A9B08(Item_GObj* gobj)
+bool it_2725_Logic98_HitShield(Item_GObj* gobj)
 {
     f32 sp28;
     f32 sp24;
@@ -866,7 +866,7 @@ int it_802A9B08(Item_GObj* gobj)
             item->x40_vel.y = 0.0f;
             item->x40_vel.x = 0.0f;
             Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
-            it_802A9CE0(gobj);
+            it_2725_Logic98_Clanked(gobj);
             item->xDD4_itemVar.linkarrow.xC4 = item->xCF4_fighterGObjUnk;
             temp_f31 = ftLib_800869D4(item->xDD4_itemVar.linkarrow.xC4);
             item->xDD4_itemVar.linkarrow.xD4 =
@@ -891,7 +891,7 @@ int it_802A9B08(Item_GObj* gobj)
     return 1;
 }
 
-int it_802A9D4C(Item_GObj* gobj)
+bool it_2725_Logic98_Reflected(Item_GObj* gobj)
 {
     Item* item;
     HSD_JObj* jobj;
@@ -925,7 +925,7 @@ int it_802A9D4C(Item_GObj* gobj)
     return 0;
 }
 
-void it_802AA034(Item_GObj* gobj, Item_GObj* arg1)
+void it_2725_Logic98_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     it_8026B894(gobj, (HSD_GObj*) arg1);
 }

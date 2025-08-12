@@ -18,13 +18,13 @@
 
 /// #it_802ABA4C
 
-/// #it_802ABBB0
+/// #itNesspkthunderball_UnkMotion0_Anim
 
-/// #it_802ABCDC
+/// #itNesspkthunderball_UnkMotion0_Phys
 
-/// #it_802AC000
+/// #itNesspkthunderball_UnkMotion0_Coll
 
-/// #it_802AC050
+/// #it_2725_Logic26_DmgDealt
 
 /// #it_802AC074
 

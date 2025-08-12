@@ -19,9 +19,9 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 08CA38 */ void doEnter(ftCo_GObj* gobj);
+/* 08CA38 */ void doEnter(Fighter_GObj* gobj);
 
-static bool checkLStick(ftCo_Fighter* fp)
+static bool checkLStick(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.y >= p_ftCommonData->xCC &&
@@ -33,9 +33,9 @@ static bool checkLStick(ftCo_Fighter* fp)
     }
 }
 
-bool ftCo_AttackHi4_CheckInput(ftCo_GObj* gobj)
+bool ftCo_AttackHi4_CheckInput(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (checkLStick(fp) || ftCo_800DF2D8(fp)) {
         if (fp->item_gobj != NULL && (ftCo_80094E54(fp) || ftCo_800DF30C(fp)))
         {
@@ -55,7 +55,7 @@ bool ftCo_AttackHi4_CheckInput(ftCo_GObj* gobj)
     return false;
 }
 
-static bool checkLStickNoD0(ftCo_Fighter* fp)
+static bool checkLStickNoD0(Fighter* fp)
 {
     if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.y >= p_ftCommonData->xCC)
@@ -68,7 +68,7 @@ static bool checkLStickNoD0(ftCo_Fighter* fp)
 
 bool ftCo_AttackHi4_CheckInputNoD0(HSD_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (checkLStickNoD0(fp) || ftCo_800DF2D8(fp)) {
         if (fp->item_gobj != NULL && (ftCo_80094E54(fp) || ftCo_800DF30C(fp)))
         {
@@ -88,16 +88,16 @@ bool ftCo_AttackHi4_CheckInputNoD0(HSD_GObj* gobj)
     return false;
 }
 
-void doEnter(ftCo_GObj* gobj)
+void doEnter(Fighter_GObj* gobj)
 {
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
     Fighter_ChangeMotionState(gobj, ftCo_MS_AttackHi4, Ft_MF_None, 0, 1, 0,
                               NULL);
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCo_AttackHi4_Anim(ftCo_GObj* gobj)
+void ftCo_AttackHi4_Anim(Fighter_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);

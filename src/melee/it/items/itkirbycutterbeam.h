@@ -9,15 +9,15 @@
 
 /* 29BAB8 */ UNK_RET it_8029BAB8(UNK_PARAMS);
 /* 29BB90 */ UNK_RET it_8029BB90(UNK_PARAMS);
-/* 29BC88 */ UNK_RET it_8029BC88(UNK_PARAMS);
-/* 29BCA8 */ UNK_RET it_8029BCA8(UNK_PARAMS);
-/* 29BDD4 */ UNK_RET it_8029BDD4(UNK_PARAMS);
-/* 29BFB4 */ bool it_8029BFB4(Item_GObj*);
-/* 29BFBC */ bool it_8029BFBC(Item_GObj*);
-/* 29BFC4 */ bool it_8029BFC4(Item_GObj*);
-/* 29BFCC */ bool it_8029BFCC(Item_GObj*);
-/* 29C208 */ bool it_8029C208(Item_GObj*);
-/* 29C4AC */ bool it_8029C4AC(Item_GObj*);
+/* 29BC88 */ bool itKirbycutterbeam_UnkMotion0_Anim(Item_GObj* gobj);
+/* 29BCA8 */ void itKirbycutterbeam_UnkMotion0_Phys(Item_GObj* gobj);
+/* 29BDD4 */ bool itKirbycutterbeam_UnkMotion0_Coll(Item_GObj* gobj);
+/* 29BFB4 */ bool it_2725_Logic7_DmgDealt(Item_GObj*);
+/* 29BFBC */ bool it_2725_Logic7_Clanked(Item_GObj*);
+/* 29BFC4 */ bool it_2725_Logic7_Absorbed(Item_GObj*);
+/* 29BFCC */ bool it_2725_Logic7_Reflected(Item_GObj*);
+/* 29C208 */ bool it_2725_Logic7_ShieldBounced(Item_GObj*);
+/* 29C4AC */ bool it_2725_Logic7_HitShield(Item_GObj*);
 /* 29C4B4 */ void it_8029C4B4(Item_GObj*, Item_GObj*);
 /* 3F6798 */ extern ItemStateTable it_803F6798[];
 

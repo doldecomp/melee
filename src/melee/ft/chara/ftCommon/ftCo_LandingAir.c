@@ -11,12 +11,12 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj)
+void ftCo_LandingAir_EnterWithLag(Fighter_GObj* gobj)
 {
     u8 _[20] = { 0 };
     float lag;
     FtMotionId msid = ftCo_MS_None;
-    ftCo_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0]) {
         switch (fp->motion_id) {
         case ftCo_MS_AttackAirN:
@@ -56,7 +56,7 @@ void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj)
     }
 }
 
-void ftCo_LandingAir_EnterWithMsidLag(ftCo_GObj* gobj, FtMotionId msid,
+void ftCo_LandingAir_EnterWithMsidLag(Fighter_GObj* gobj, FtMotionId msid,
                                       float lag)
 {
     u8 _[8] = { 0 };
@@ -65,19 +65,19 @@ void ftCo_LandingAir_EnterWithMsidLag(ftCo_GObj* gobj, FtMotionId msid,
     ftAnim_SetAnimRate(gobj, (ftAnim_8006F484(gobj) + 0.1f) / lag);
 }
 
-void ftCo_LandingAir_Anim(ftCo_GObj* gobj)
+void ftCo_LandingAir_Anim(Fighter_GObj* gobj)
 {
     ftCo_Landing_Anim(gobj);
 }
 
-void ftCo_LandingAir_IASA(ftCo_GObj* gobj) {}
+void ftCo_LandingAir_IASA(Fighter_GObj* gobj) {}
 
-void ftCo_LandingAir_Phys(ftCo_GObj* gobj)
+void ftCo_LandingAir_Phys(Fighter_GObj* gobj)
 {
     ftCo_Landing_Phys(gobj);
 }
 
-void ftCo_LandingAir_Coll(ftCo_GObj* gobj)
+void ftCo_LandingAir_Coll(Fighter_GObj* gobj)
 {
     ftCo_Landing_Coll(gobj);
 }
