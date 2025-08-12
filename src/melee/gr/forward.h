@@ -143,4 +143,9 @@ typedef enum InternalStageId {
     HOMERUN = 0x43,
 } InternalStageId;
 
+typedef struct unkCastle unkCastle;
+
+typedef void (*unkCastleCallback)(void*, struct unkCastle*);
+typedef void (*unkCastleCallback2)(void*, struct unkCastle*, Ground_GObj*);
+
 #endif
