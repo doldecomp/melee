@@ -1,15 +1,14 @@
 #ifndef GALE01_2207F0
 #define GALE01_2207F0
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 /* 2207F0 */ void grTFalco_802207F0(bool);
 /* 2207F4 */ void grTFalco_802207F4(void);

@@ -1,8 +1,6 @@
-#include <platform.h>
-
-#include "it/forward.h"
-
 #include "ftNess/ftNs_SpecialN.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -15,6 +13,9 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftNess/ftNs_Init.h"
 #include "ftNess/types.h"
+
+#include "it/forward.h"
+
 #include "it/items/itnesspkflush.h"
 #include "lb/lb_00B0.h"
 

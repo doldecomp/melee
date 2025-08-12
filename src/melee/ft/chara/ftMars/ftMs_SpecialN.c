@@ -1,17 +1,15 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftMars/forward.h"
-#include "lb/forward.h"
-#include <baselib/forward.h>
-
 #include "ftMs_SpecialN.h"
 
 #include "math.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ef/eflib.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
@@ -21,10 +19,18 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+
+#include "ftMars/forward.h"
+
 #include "ftMars/ftMs_Init.h"
 #include "ftMars/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

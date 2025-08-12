@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "ftCl_AppealS.h"
 
 #include "ftCl_Init.h"
 #include "inlines.h"
+
+#include <platform.h>
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"

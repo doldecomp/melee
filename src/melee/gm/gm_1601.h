@@ -1,19 +1,20 @@
 #ifndef GALE01_1601C4
 #define GALE01_1601C4
 
-#include <melee/gm/gm_17C0.h>
-
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
+#include "dolphin/gx/GXStruct.h"
+#include "dolphin/mtx.h"
+#include "dolphin/types.h"
 
 #include "ft/forward.h"
 #include "gm/forward.h"
 #include "mn/forward.h"
 #include "sc/forward.h"
-#include "dolphin/gx/GXStruct.h"
-#include "dolphin/mtx.h"
-#include "dolphin/types.h"
+
 #include <printf.h>
+#include <melee/gm/gm_17C0.h>
 
 struct lbl_8046B488_t;
 
@@ -21,10 +22,12 @@ struct lbl_8046B488_t;
 /* 160244 */ u8 gm_80160244(s8);
 /* 1602C0 */ void gm_801602C0(s8);
 /* 1603B0 */ void gm_801603B0(void);
-/* 160400 */ u32 fn_80160400(s32); ///< gets character victory theme id
+/* 160400 */ u32 fn_80160400(s32);   ///< gets character victory theme id
 /* 160438 */ char* gm_80160438(s32); ///< gets character result anim path
 /* 160474 */ bool gm_80160474(enum CharacterKind, enum MajorSceneKind);
-/* 1604DC */ char* gm_801604DC(enum CharacterKind, enum MajorSceneKind); ///< gets characters trophy model
+/* 1604DC */ char*
+    gm_801604DC(enum CharacterKind,
+                enum MajorSceneKind); ///< gets characters trophy model
 /* 160564 */ char* gm_80160564(enum CharacterKind, enum MajorSceneKind);
 /* 1605EC */ u8 fn_801605EC(s32);
 /* 160638 */ s8 gm_80160638(s32);
@@ -34,7 +37,8 @@ struct lbl_8046B488_t;
 /* 1607A8 */ UNK_RET fn_801607A8(UNK_PARAMS);
 /* 1607F4 */ UNK_RET fn_801607F4(UNK_PARAMS);
 /* 160840 */ u8 fn_80160840(u8);
-/* 160854 */ u32 gm_80160854(u8, u8, u8, u8); ///< gets the player hud color index
+/* 160854 */ u32 gm_80160854(u8, u8, u8,
+                             u8);     ///< gets the player hud color index
 /* 160968 */ GXColor gm_80160968(u8); ///< gets the player hud color
 /* 160980 */ UNK_RET gm_80160980(UNK_PARAMS);
 /* 1609E0 */ UNK_RET fn_801609E0(UNK_PARAMS);
@@ -176,7 +180,8 @@ struct lbl_8046B488_t;
 /* 167A14 */ void gm_80167A14(struct PlayerInitData*);
 /* 167A64 */ void gm_80167A64(struct StartMeleeRules*);
 /* 167B50 */ void gm_80167B50(struct VsModeData*);
-/* 167BC8 */ void gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
+/* 167BC8 */ void
+gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 167FC4 */ void gm_80167FC4(struct SSSData*);
 /* 1685D4 */ s8 gm_801685D4(u8, u8);
 /* 168638 */ void gm_80168638(MatchEnd*);

@@ -1,13 +1,13 @@
 #ifndef GALE01_1BFFA8
 #define GALE01_1BFFA8
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
+#include "gr/types.h"
 
 #include "lb/forward.h"
 #include <baselib/forward.h>
-
-#include "gr/types.h"
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>

@@ -1,10 +1,9 @@
 #include "gobj.h"
-
 #include "gobjplink.h"
 #include "gobjproc.h"
 #include "memory.h"
 
-static HSD_GObjLibInitDataType HSD_GObj_80408620 =  {
+static HSD_GObjLibInitDataType HSD_GObj_80408620 = {
     0x3F,
     0x3F,
     2,
@@ -31,28 +30,32 @@ void HSD_GObj_80391304(HSD_GObjLibInitDataType* arg0)
 
     HSD_GObjLibInitData = *arg0;
 
-    HSD_GObj_Entities = HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->p_link_max + 1));
+    HSD_GObj_Entities =
+        HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->p_link_max + 1));
     plinklow_gobjs = HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->p_link_max + 1));
     for (i = 0; i < arg0->p_link_max + 1; i++) {
         ((HSD_GObj**) HSD_GObj_Entities)[i] = plinklow_gobjs[i] = NULL;
     }
 
-    HSD_GObj_804D7824 = HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->gx_link_max + 2));
-    HSD_GObj_804D7820 = HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->gx_link_max + 2));
+    HSD_GObj_804D7824 =
+        HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->gx_link_max + 2));
+    HSD_GObj_804D7820 =
+        HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->gx_link_max + 2));
 
     for (i = 0; i < arg0->gx_link_max + 2; i++) {
         HSD_GObj_804D7824[i] = HSD_GObj_804D7820[i] = 0;
     }
 
-    HSD_GObj_804D7840 = HSD_MemAlloc(sizeof(HSD_GObjProc*)
-                                     * (arg0->gproc_pri_max + 1));
+    HSD_GObj_804D7840 =
+        HSD_MemAlloc(sizeof(HSD_GObjProc*) * (arg0->gproc_pri_max + 1));
 
     for (i = 0; i < arg0->gproc_pri_max + 1; i++) {
         HSD_GObj_804D7840[i] = 0;
     }
 
-    HSD_GObj_804D7844 = HSD_MemAlloc(sizeof(HSD_GObjProc*) * (arg0->gproc_pri_max + 1)
-                                                   * (arg0->p_link_max + 1));
+    HSD_GObj_804D7844 =
+        HSD_MemAlloc(sizeof(HSD_GObjProc*) * (arg0->gproc_pri_max + 1) *
+                     (arg0->p_link_max + 1));
 
     for (i = 0; i < (arg0->gproc_pri_max + 1) * (arg0->p_link_max + 1); i++) {
         HSD_GObj_804D7844[i] = 0;

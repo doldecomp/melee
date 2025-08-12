@@ -1,10 +1,11 @@
+#include "ft/ftparts.h"
+
 #include <placeholder.h>
+
+#include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ft/ftparts.h"
-
-#include "ft/fighter.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lbrefract.h"
@@ -297,7 +298,7 @@ Fighter_Part ftParts_GetBoneIndex(Fighter* fp, Fighter_Part part)
 }
 
 int ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
-                    size_t joint_idx)
+                     size_t joint_idx)
 {
     FighterPartsTable* from_table = ftPartsTable[from_table_idx];
     if (joint_idx < from_table->parts_num) {

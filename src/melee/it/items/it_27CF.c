@@ -1,8 +1,9 @@
-#include "it/forward.h"
-
 #include "it_27CF.h"
 
 #include "ef/efasync.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -18,8 +19,10 @@
 #include <melee/it/item.h>
 
 ItemStateTable it_803F94A0[] = {
-    { -1, it_27CF_UnkMotion0_Anim, it_27CF_UnkMotion0_Phys, it_27CF_UnkMotion0_Coll },
-    { -1, it_27CF_UnkMotion1_Anim, it_27CF_UnkMotion1_Phys, it_27CF_UnkMotion1_Coll },
+    { -1, it_27CF_UnkMotion0_Anim, it_27CF_UnkMotion0_Phys,
+      it_27CF_UnkMotion0_Coll },
+    { -1, it_27CF_UnkMotion1_Anim, it_27CF_UnkMotion1_Phys,
+      it_27CF_UnkMotion1_Coll },
     { -1, it_27CF_UnkMotion2_Anim, NULL, NULL },
 };
 

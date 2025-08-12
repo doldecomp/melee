@@ -10,12 +10,18 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F7FF8[] = {
-    { 0, itPippi_UnkMotion0_Anim, itPippi_UnkMotion0_Phys, itPippi_UnkMotion0_Coll },
-    { 1, itPippi_UnkMotion1_Anim, itPippi_UnkMotion1_Phys, itPippi_UnkMotion1_Coll },
-    { 2, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
-    { 3, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
-    { 4, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
-    { 5, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys, itPippi_UnkMotion5_Coll },
+    { 0, itPippi_UnkMotion0_Anim, itPippi_UnkMotion0_Phys,
+      itPippi_UnkMotion0_Coll },
+    { 1, itPippi_UnkMotion1_Anim, itPippi_UnkMotion1_Phys,
+      itPippi_UnkMotion1_Coll },
+    { 2, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys,
+      itPippi_UnkMotion5_Coll },
+    { 3, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys,
+      itPippi_UnkMotion5_Coll },
+    { 4, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys,
+      itPippi_UnkMotion5_Coll },
+    { 5, itPippi_UnkMotion5_Anim, itPippi_UnkMotion5_Phys,
+      itPippi_UnkMotion5_Coll },
 };
 
 void it_2725_Logic20_Spawned(Item_GObj* gobj)

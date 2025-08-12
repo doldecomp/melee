@@ -5,11 +5,11 @@
 
 #include "baselib/forward.h"
 
+#include "it/inlines.h"
+
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
-
-#include "it/inlines.h"
 
 /* 21C750 */ void grHomeRun_8021C750(bool);
 /* 21C754 */ void grHomeRun_8021C754(void);

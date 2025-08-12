@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftMario/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 static usize_t const aux_states_count = 2;
 

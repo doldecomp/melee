@@ -3,11 +3,11 @@
 
 #include <placeholder.h>
 
+#include "it/inlines.h"
+
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "it/inlines.h"
 
 /* 1CD338 */ void grCastle_801CD338(bool);
 /* 1CD37C */ void grCastle_801CD37C(void);

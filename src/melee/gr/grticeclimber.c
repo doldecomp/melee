@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "gr/grticeclimber.h"
+
+#include <placeholder.h>
 
 #include "cm/camera.h"
 #include "ef/efsync.h"
@@ -171,7 +171,8 @@ void grTIceClimber_802211E4(Ground_GObj* gobj)
 
 void grTIceClimber_80221204(Ground_GObj* gobj) {}
 
-void grTIceClimber_80221208(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
+void grTIceClimber_80221208(Item_GObj* gobj, Ground* u1, Vec3* u2,
+                            HSD_GObj* u3, f32 u4)
 {
     Vec3 pos;
     Item* it = GET_ITEM(gobj);

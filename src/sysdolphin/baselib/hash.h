@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
-
 #include "baselib/class.h"
+
+#include "baselib/forward.h"
 
 #define hash(s) (s % 0x65)
 

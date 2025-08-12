@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "ftCo_Furafura.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

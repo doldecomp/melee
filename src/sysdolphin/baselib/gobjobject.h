@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJOBJECT_H
 #define SYSDOLPHIN_BASELIB_GOBJOBJECT_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h" // IWYU pragma: export
 

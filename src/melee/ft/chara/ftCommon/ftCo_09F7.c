@@ -1,16 +1,16 @@
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftCo_09F7.h"
 
 #include "ftCo_0B3E.h"
+
+#include <placeholder.h>
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
 
 #include <math.h>
 #include <trigf.h>

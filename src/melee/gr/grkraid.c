@@ -1,10 +1,10 @@
-#include <platform.h>
-
-#include "baselib/forward.h"
-
 #include "grkraid.h"
 
 #include "types.h"
+
+#include <platform.h>
+
+#include "baselib/forward.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"

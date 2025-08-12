@@ -2,10 +2,9 @@
 
 #include "gm/gm_1A36.static.h"
 
+#include <baselib/controller.h>
 #include <melee/gm/gmscdata.h>
 #include <melee/gm/types.h>
-
-#include <baselib/controller.h>
 
 u64 gm_801A3680(u8 idx)
 {
@@ -75,7 +74,6 @@ static void fn_801A396C(int idx)
 {
     struct controller_map* controller = &controller_map;
     if (controller_map.x0[idx].trigger || controller_map.x0[idx].release) {
-
         controller_map.x0[idx].unk = controller->x0[idx].trigger;
         controller_map.x0[idx].x28 = controller->xF4;
         controller_map.x0[idx].x2C = 0;
@@ -112,9 +110,9 @@ void gm_801A3A74(void)
     PAD_STACK(0x10);
 
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
-        controller_map.x0[i].button  = HSD_PadCopyStatus[(u8) i].button;
+        controller_map.x0[i].button = HSD_PadCopyStatus[(u8) i].button;
         controller_map.x0[i].trigger = HSD_PadCopyStatus[(u8) i].trigger;
-        controller_map.x0[i].repeat  = HSD_PadCopyStatus[(u8) i].repeat;
+        controller_map.x0[i].repeat = HSD_PadCopyStatus[(u8) i].repeat;
         controller_map.x0[i].release = HSD_PadCopyStatus[(u8) i].release;
         gm_801A3714(i, 0x01100, (u64) 1 << 32);
         gm_801A3714(i, 0x00200, (u64) 1 << 33);
@@ -132,13 +130,12 @@ void gm_801A3A74(void)
     controller_map.x0[PAD_MAX_CONTROLLERS].release = 0;
     controller_map.x0[PAD_MAX_CONTROLLERS].unk = 0;
 
-
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
-        controller[PAD_MAX_CONTROLLERS].button  |= controller[i].button;
+        controller[PAD_MAX_CONTROLLERS].button |= controller[i].button;
         controller[PAD_MAX_CONTROLLERS].trigger |= controller[i].trigger;
-        controller[PAD_MAX_CONTROLLERS].repeat  |= controller[i].repeat;
+        controller[PAD_MAX_CONTROLLERS].repeat |= controller[i].repeat;
         controller[PAD_MAX_CONTROLLERS].release |= controller[i].release;
-        controller[PAD_MAX_CONTROLLERS].unk     |= controller[i].unk;
+        controller[PAD_MAX_CONTROLLERS].unk |= controller[i].unk;
     }
 }
 #pragma pop
@@ -147,14 +144,7 @@ void gm_801A3E88(void)
 {
     int i;
     static struct controller_map gm_803DA788 = {
-        { 0 },
-        NULL,
-        0x14,
-        0x8,
-        0x28,
-        0x4,
-        0x64,
-        0x2,
+        { 0 }, NULL, 0x14, 0x8, 0x28, 0x4, 0x64, 0x2,
     };
 
     controller_map = gm_803DA788;

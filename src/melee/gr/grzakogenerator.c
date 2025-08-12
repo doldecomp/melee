@@ -1,6 +1,6 @@
-#include "grzakogenerator.static.h"
-
 #include "grzakogenerator.h"
+
+#include "grzakogenerator.static.h"
 
 /// #grZakoGenerator_801CA394
 

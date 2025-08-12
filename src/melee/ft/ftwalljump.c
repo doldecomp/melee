@@ -1,12 +1,13 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftwalljump.h"
 
 #include "fighter.h"
 
+#include <platform.h>
+
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_PassiveWall.h"
 #include "mp/mplib.h"
 

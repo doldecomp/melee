@@ -45,8 +45,8 @@ bool itOldottosea_UnkMotion11_Anim(Item_GObj* gobj)
 
 /// #it_802E3784
 
-// This function only called by it_3F14_Logic17_PickedUp from itfreeze, so using those item
-// vars
+// This function only called by it_3F14_Logic17_PickedUp from itfreeze, so
+// using those item vars
 void it_802E37A4(Item_GObj* gobj)
 {
     if (gobj != NULL) {

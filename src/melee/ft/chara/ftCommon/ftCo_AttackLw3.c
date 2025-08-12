@@ -1,8 +1,3 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-#include <baselib/forward.h>
-
 #include "ftCo_AttackLw3.h"
 
 #include "ftCo_Attack1.h"
@@ -14,6 +9,8 @@
 #include "ftCo_ItemThrow.h"
 #include "ftpickupitem.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
@@ -22,12 +19,17 @@
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Dash.h"
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
 #include "ftCommon/types.h"
 #include "ftGameWatch/ftGw_AttackLw3.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

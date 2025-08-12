@@ -1,25 +1,25 @@
 #include "gmpause.h"
 
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/types.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/sc/types.h>
+#include <math.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <math.h>
+#include <melee/gm/gm_unsplit.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/sc/types.h>
 
 struct PauseData {
-/* +0 */ HSD_JObj* background;
-/* +4 */ HSD_JObj* analog_stick;
-/* +8 */ HSD_JObj* lras;
-/* +C */ HSD_JObj* z;
-/* +10 */ HSD_JObj* analog_stick_outline;
-/* +14 */ s32 slot;
+    /* +0 */ HSD_JObj* background;
+    /* +4 */ HSD_JObj* analog_stick;
+    /* +8 */ HSD_JObj* lras;
+    /* +C */ HSD_JObj* z;
+    /* +10 */ HSD_JObj* analog_stick_outline;
+    /* +14 */ s32 slot;
 };
 
 static struct PauseData lbl_80479B10;
@@ -44,7 +44,7 @@ void fn_801A0E34(HSD_GObj* arg0)
 void gm_801A0FEC(s32 slot, u8 flag)
 {
     lbl_80479B10.slot = slot;
-    HSD_JObjReqAnimAll(lbl_80479B10.background, (f32)(slot + 1));
+    HSD_JObjReqAnimAll(lbl_80479B10.background, (f32) (slot + 1));
     // flag is set by match rules
     if (flag != 0) {
         HSD_JObjClearFlagsAll(lbl_80479B10.background, JOBJ_HIDDEN);
@@ -60,7 +60,8 @@ void gm_801A0FEC(s32 slot, u8 flag)
         }
         if (flag & 4) {
             HSD_JObjClearFlagsAll(lbl_80479B10.analog_stick, JOBJ_HIDDEN);
-            HSD_JObjClearFlagsAll(lbl_80479B10.analog_stick_outline, JOBJ_HIDDEN);
+            HSD_JObjClearFlagsAll(lbl_80479B10.analog_stick_outline,
+                                  JOBJ_HIDDEN);
         }
     } else {
         HSD_JObjSetFlagsAll(lbl_80479B10.background, JOBJ_HIDDEN);
@@ -80,7 +81,8 @@ void fn_801A1134(void)
     HSD_GObj* gobj;
     HSD_JObj* jobj;
 
-    lbl_804D6700 = lbArchive_80016DBC("GmPause", &scene, "ScGamPause_scene_data", 0);
+    lbl_804D6700 =
+        lbArchive_80016DBC("GmPause", &scene, "ScGamPause_scene_data", 0);
     gobj = GObj_Create(0xEU, 2U, 0U);
     lbl_804D6704 = gobj;
     jobj = HSD_JObjLoadJoint(scene->models[0]->joint);

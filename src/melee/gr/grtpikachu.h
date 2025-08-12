@@ -3,12 +3,11 @@
 
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 void grTPikachu_80222E7C(bool);
 void grTPikachu_80222E80(void);

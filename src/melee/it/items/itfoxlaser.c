@@ -1,13 +1,13 @@
-#include <placeholder.h>
-
-#include "lb/forward.h"
-
 #include "itfoxlaser.h"
+
+#include <placeholder.h>
 
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/types.h"
+
+#include "lb/forward.h"
 
 #include <common_structs.h>
 #include <baselib/gobj.h>
@@ -21,8 +21,10 @@
 #include <MSL/math.h>
 
 ItemStateTable it_803F67D0[] = {
-    { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys, itFoxlaser_UnkMotion1_Coll },
-    { 1, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys, itFoxlaser_UnkMotion1_Coll },
+    { 0, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,
+      itFoxlaser_UnkMotion1_Coll },
+    { 1, itFoxlaser_UnkMotion1_Anim, itFoxlaser_UnkMotion1_Phys,
+      itFoxlaser_UnkMotion1_Coll },
 };
 
 inline void* getFoxLaser(Item* item)

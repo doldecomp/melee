@@ -1,11 +1,9 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftMr_SpecialLw.h"
 
 #include "inlines.h"
 #include "types.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -16,6 +14,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "lb/lbrefract.h"

@@ -1,6 +1,3 @@
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-
 #include "ftlib.h"
 
 #include "cm/camera.h"
@@ -16,9 +13,15 @@
 #include "ft/ftdata.h"
 #include "ft/ftmetal.h"
 #include "ft/ftparts.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftGameWatch/ftGw_Init.h"
 #include "ftKirby/ftKb_Init.h"
 #include "gm/gm_unsplit.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"

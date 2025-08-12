@@ -4,11 +4,11 @@
 #include <placeholder.h>
 
 #include "baselib/forward.h"
-#include "lb/forward.h"
 
 #include "dolphin/mtx.h"
 
 #include "gr/forward.h"
+#include "lb/forward.h"
 
 /* 211CFC */ void grPura_80211CFC(bool);
 /* 211D00 */ void grPura_80211D00(void);

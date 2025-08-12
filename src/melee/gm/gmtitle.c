@@ -77,7 +77,9 @@ static inline void fn_801A1498_inline(void)
                        gmTitle_80479B38.matanim_joint,
                        gmTitle_80479B38.shapeanim_joint);
     HSD_GObjProc_8038FD54(gobj, gmTitle_801A146C, 0);
-    if (gm_801A4310() == MJ_TITLE || (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2)) {
+    if (gm_801A4310() == MJ_TITLE ||
+        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2))
+    {
         var_r0 = false;
     } else {
         var_r0 = true;
@@ -129,7 +131,9 @@ HSD_GObj* gmTitle_801A165C(void)
                        gmTitle_80479B28.matanim_joint,
                        gmTitle_80479B28.shapeanim_joint);
 
-    if (gm_801A4310() == MJ_TITLE || (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2)) {
+    if (gm_801A4310() == MJ_TITLE ||
+        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2))
+    {
         var_r0 = false;
     } else {
         var_r0 = true;
@@ -231,15 +235,14 @@ HSD_Archive* gmTitle_801A1AC0(void)
     const char usd[] = "GmTtAll.usd";
 
     return lbArchive_LoadSymbols(
-        lbLang_IsSettingUS() ? usd : dat,
-        &gmTitle_80479B28.joint, "TtlMoji_Top_joint",
-        &gmTitle_80479B28.animjoint, "TtlMoji_Top_animjoint",
-        &gmTitle_80479B28.matanim_joint, "TtlMoji_Top_matanim_joint",
-        &gmTitle_80479B28.shapeanim_joint, "TtlMoji_Top_shapeanim_joint",
+        lbLang_IsSettingUS() ? usd : dat, &gmTitle_80479B28.joint,
+        "TtlMoji_Top_joint", &gmTitle_80479B28.animjoint,
+        "TtlMoji_Top_animjoint", &gmTitle_80479B28.matanim_joint,
+        "TtlMoji_Top_matanim_joint", &gmTitle_80479B28.shapeanim_joint,
+        "TtlMoji_Top_shapeanim_joint",
 
-        &gmTitle_804D6708, "ScTitle_cam_int1_camera",
-        &gmTitle_804D670C, "ScTitle_scene_lights",
-        &gmTitle_804D6710, "ScTitle_fog",
+        &gmTitle_804D6708, "ScTitle_cam_int1_camera", &gmTitle_804D670C,
+        "ScTitle_scene_lights", &gmTitle_804D6710, "ScTitle_fog",
 
         &gmTitle_80479B38.joint, "TtlBg_Top_joint",
         &gmTitle_80479B38.animjoint, "TtlBg_Top_animjoint",

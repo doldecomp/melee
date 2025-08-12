@@ -1,8 +1,8 @@
 #ifndef MELEE_TY_DISPLAY_H
 #define MELEE_TY_DISPLAY_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 /* 3182D4 */ void un_803182D4_OnFrame(void);
 /* 31830C */ UNK_RET un_8031830C(UNK_PARAMS);

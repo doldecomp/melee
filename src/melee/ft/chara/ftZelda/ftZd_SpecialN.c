@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "ftZd_SpecialN.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

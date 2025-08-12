@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTPOPO_TYPES_H
 #define MELEE_FT_CHARA_FTPOPO_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
 #include "it/forward.h"

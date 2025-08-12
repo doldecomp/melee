@@ -1,15 +1,16 @@
-#include <platform.h>
-
-#include "ftPikachu/forward.h"
-
 #include "ftPc_Init.h"
 
 #include "types.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftPikachu/forward.h"
+
 #include "ftPikachu/ftPk_Init.h"
 #include "ftPikachu/ftPk_SpecialHi.h"
 #include "ftPikachu/ftPk_SpecialLw.h"

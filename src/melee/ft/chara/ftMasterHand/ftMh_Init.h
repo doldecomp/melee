@@ -1,10 +1,10 @@
 #ifndef GALE01_14FC68
 #define GALE01_14FC68
 
+#include "ft/types.h"
+
 #include "ftMasterHand/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 14FC68 */ void ftMh_Init_OnDeath(HSD_GObj* gobj);
 /* 14FC6C */ void ftMh_Init_OnLoad(HSD_GObj* gobj);

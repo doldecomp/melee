@@ -1,10 +1,8 @@
-#include <platform.h>
-
-#include "lb/forward.h"
-
 #include "ftPk_SpecialS.h"
 
 #include "ftPk_SpecialN.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -15,6 +13,8 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftPikachu/types.h"
+
+#include "lb/forward.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

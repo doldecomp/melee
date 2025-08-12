@@ -1,6 +1,6 @@
-#include "it/forward.h"
-
 #include "itrabbitc.h"
+
+#include "it/forward.h"
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -27,11 +27,15 @@
 /* 295374 */ static bool itRabbitc_UnkMotion4_Coll(Item_GObj*);
 
 ItemStateTable it_803F6270[] = {
-    { -1, itRabbitc_UnkMotion0_Anim, itRabbitc_UnkMotion0_Phys, itRabbitc_UnkMotion0_Coll },
-    { -1, itRabbitc_UnkMotion3_Anim, itRabbitc_UnkMotion1_Phys, itRabbitc_UnkMotion1_Coll },
+    { -1, itRabbitc_UnkMotion0_Anim, itRabbitc_UnkMotion0_Phys,
+      itRabbitc_UnkMotion0_Coll },
+    { -1, itRabbitc_UnkMotion3_Anim, itRabbitc_UnkMotion1_Phys,
+      itRabbitc_UnkMotion1_Coll },
     { -1, itRabbitc_UnkMotion2_Anim, NULL, NULL },
-    { -1, itRabbitc_UnkMotion3_Anim, itRabbitc_UnkMotion3_Phys, itRabbitc_UnkMotion3_Coll },
-    { -1, itRabbitc_UnkMotion4_Anim, itRabbitc_UnkMotion4_Phys, itRabbitc_UnkMotion4_Coll },
+    { -1, itRabbitc_UnkMotion3_Anim, itRabbitc_UnkMotion3_Phys,
+      itRabbitc_UnkMotion3_Coll },
+    { -1, itRabbitc_UnkMotion4_Anim, itRabbitc_UnkMotion4_Phys,
+      itRabbitc_UnkMotion4_Coll },
 };
 
 bool it_3F14_Logic30_ShieldBounced(Item_GObj* item_gobj)

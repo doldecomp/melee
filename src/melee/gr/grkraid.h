@@ -3,12 +3,11 @@
 
 #include <placeholder.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 typedef struct grKr_804D6A08_t {
     void* unk;

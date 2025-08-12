@@ -1,16 +1,15 @@
-#include <placeholder.h>
-
-#include "baselib/forward.h"
-#include "ef/forward.h"
-#include "ft/forward.h"
-
 #include "eflib.h"
 
 #include "efasync.h"
 #include "inlines.h"
 #include "types.h"
 
+#include <placeholder.h>
+
 #include "baselib/displayfunc.h"
+
+#include "baselib/forward.h"
+
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
@@ -22,6 +21,10 @@
 #include "baselib/psstructs.h"
 #include "baselib/state.h"
 #include "dolphin/mtx.h"
+
+#include "ef/forward.h"
+#include "ft/forward.h"
+
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Bury.h"

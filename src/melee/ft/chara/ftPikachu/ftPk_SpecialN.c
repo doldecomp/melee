@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftPk_SpecialN.h"
 
 #include "types.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

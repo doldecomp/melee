@@ -1,10 +1,12 @@
-#include "grcorneria.static.h"
+#include "grcorneria.h"
 
 #include "granime.h"
-#include "grcorneria.h"
+
+#include "grcorneria.static.h"
+
 #include "grmaterial.h"
-#include "grzakogenerator.h"
 #include "ground.h"
+#include "grzakogenerator.h"
 #include "inlines.h"
 #include "types.h"
 
@@ -91,16 +93,24 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     gr->gv.corneria.x11A = 0;
     gr->gv.corneria.x110 = 0;
     gr->gv.corneria.x114 = 0.0f;
-    gr->gv.corneria.x120 = grMaterial_801C8CFC(0, 0, gr, Ground_801C3FA4(ground_gobj, 2), fn_801E12D0, fn_801E12D4, 0);
-    grMaterial_801C8DE0(gr->gv.corneria.x120, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f, 0.0f, 4.0f);
+    gr->gv.corneria.x120 =
+        grMaterial_801C8CFC(0, 0, gr, Ground_801C3FA4(ground_gobj, 2),
+                            fn_801E12D0, fn_801E12D4, 0);
+    grMaterial_801C8DE0(gr->gv.corneria.x120, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f,
+                        0.0f, 4.0f);
     grMaterial_801C8E08(gr->gv.corneria.x120);
-    gr->gv.corneria.x124 = grMaterial_801C8CFC(0, 2, gr, Ground_801C3FA4(ground_gobj, 3), fn_801E12D0, fn_801E12D4, 0);
+    gr->gv.corneria.x124 =
+        grMaterial_801C8CFC(0, 2, gr, Ground_801C3FA4(ground_gobj, 3),
+                            fn_801E12D0, fn_801E12D4, 0);
     grMaterial_801C8E08(gr->gv.corneria.x124);
-    grMaterial_801C8DE0(gr->gv.corneria.x124, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f, 0.0f, 4.0f);
+    grMaterial_801C8DE0(gr->gv.corneria.x124, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f,
+                        0.0f, 4.0f);
     HSD_JObjClearFlags(Ground_801C3FA4(ground_gobj, 6), JOBJ_HIDDEN);
     HSD_JObjSetFlags(Ground_801C3FA4(ground_gobj, 5), JOBJ_HIDDEN);
-    gr->gv.corneria.xC8 = grZakoGenerator_801CA394(grCn_803E1FE8, 1, fn_801E2454, 0.3f);
-    gr->gv.corneria.xCC = grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
+    gr->gv.corneria.xC8 =
+        grZakoGenerator_801CA394(grCn_803E1FE8, 1, fn_801E2454, 0.3f);
+    gr->gv.corneria.xCC =
+        grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
     Ground_801C10B8(ground_gobj, fn_801DD65C);
     gr->x11_flags.b012 = 1;
     gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
@@ -229,7 +239,8 @@ int grCorneria_801E0A74(f32* arg0)
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
-            *arg0 < x + 3200.0f * Ground_801C0498() / 2) {
+            *arg0 < x + 3200.0f * Ground_801C0498() / 2)
+        {
             return 8;
         }
     }
@@ -237,7 +248,8 @@ int grCorneria_801E0A74(f32* arg0)
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 3200.0f * Ground_801C0498() / 2 &&
-            *arg0 < x + 3200.0f * Ground_801C0498() / 2) {
+            *arg0 < x + 3200.0f * Ground_801C0498() / 2)
+        {
             return 9;
         }
     }
@@ -245,7 +257,8 @@ int grCorneria_801E0A74(f32* arg0)
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
         if (*arg0 > x - 4800.0f * Ground_801C0498() / 2 &&
-            *arg0 < x + 4800.0f * Ground_801C0498() / 2) {
+            *arg0 < x + 4800.0f * Ground_801C0498() / 2)
+        {
             return 4;
         }
     }

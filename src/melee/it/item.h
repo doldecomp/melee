@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "it/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/objalloc.h>

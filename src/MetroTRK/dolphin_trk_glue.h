@@ -1,8 +1,8 @@
 #ifndef _METROTRK_TRK_GLUE_H
 #define _METROTRK_TRK_GLUE_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "MetroTRK/dserror.h"
 

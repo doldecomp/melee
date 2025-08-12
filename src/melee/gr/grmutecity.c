@@ -1,8 +1,7 @@
-#include <platform.h>
+#include "grmutecity.h"
 
 #include "grmutecity.static.h"
-
-#include "grmutecity.h"
+#include <platform.h>
 
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"

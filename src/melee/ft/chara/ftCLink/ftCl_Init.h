@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include "ftLink/forward.h"
-
 #include "ft/types.h"
+
+#include "ftLink/forward.h"
 
 /* 148C64 */ void ftCl_Init_OnDeath(ftLk_GObj* gobj);
 /* 148CE4 */ void ftCl_Init_OnLoad(ftLk_GObj* gobj);

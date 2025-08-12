@@ -1,18 +1,21 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "it/forward.h"
-
 #include "ithassam.h"
 
 #include "math.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "cm/camera.h"
 #include "ef/eflib.h"
+
+#include "ft/forward.h"
+
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "gm/gm_unsplit.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -47,10 +50,14 @@
 /* 2CE6E8 */ static bool itHassam_UnkMotion3_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F7CF8[] = {
-    { 0, itHassam_UnkMotion0_Anim, itHassam_UnkMotion0_Phys, itHassam_UnkMotion0_Coll },
-    { 1, itHassam_UnkMotion1_Anim, itHassam_UnkMotion1_Phys, itHassam_UnkMotion1_Coll },
-    { 2, itHassam_UnkMotion2_Anim, itHassam_UnkMotion2_Phys, itHassam_UnkMotion2_Coll },
-    { -1, itHassam_UnkMotion3_Anim, itHassam_UnkMotion3_Phys, itHassam_UnkMotion3_Coll },
+    { 0, itHassam_UnkMotion0_Anim, itHassam_UnkMotion0_Phys,
+      itHassam_UnkMotion0_Coll },
+    { 1, itHassam_UnkMotion1_Anim, itHassam_UnkMotion1_Phys,
+      itHassam_UnkMotion1_Coll },
+    { 2, itHassam_UnkMotion2_Anim, itHassam_UnkMotion2_Phys,
+      itHassam_UnkMotion2_Coll },
+    { -1, itHassam_UnkMotion3_Anim, itHassam_UnkMotion3_Phys,
+      itHassam_UnkMotion3_Coll },
 };
 
 void it_802CDBE0(Item_GObj* gobj)

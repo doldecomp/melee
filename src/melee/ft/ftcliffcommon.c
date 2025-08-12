@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "ft/ftcliffcommon.h"
+
+#include <platform.h>
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"

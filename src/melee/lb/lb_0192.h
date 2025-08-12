@@ -1,8 +1,8 @@
 #ifndef MELEE_LB_0192_H
 #define MELEE_LB_0192_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 /* 0192A8 */ void lb_800192A8(void (*cb)(void));
 /* 01955C */ UNK_RET lb_8001955C(UNK_PARAMS);

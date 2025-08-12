@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "ft_07C6.h"
+
+#include <placeholder.h>
 
 void ft_8007C630(HSD_GObj* gobj)
 {

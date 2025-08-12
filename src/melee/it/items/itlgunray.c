@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "itlgunray.h"
+
+#include <placeholder.h>
 
 #include "db/db.h"
 #include "it/inlines.h"
@@ -24,7 +24,8 @@
 static float const scale = 1e-3f;
 
 ItemStateTable it_803F64F8[] = {
-    { 0, itLgunray_UnkMotion0_Anim, itLgunray_UnkMotion0_Phys, itLgunray_UnkMotion0_Coll },
+    { 0, itLgunray_UnkMotion0_Anim, itLgunray_UnkMotion0_Phys,
+      itLgunray_UnkMotion0_Coll },
 };
 
 void it_80298168(HSD_GObj* owner_gobj, Vec3* pos, f32 facing_dir)

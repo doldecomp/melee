@@ -1,10 +1,10 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftMt_SpecialLw.h"
 
 #include "ftMt_Init.h"
+
+#include <platform.h>
+
+#include "forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

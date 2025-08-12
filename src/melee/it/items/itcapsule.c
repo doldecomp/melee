@@ -1,9 +1,9 @@
-#include <platform.h>
-#include <placeholder.h>
-
 #include "itcapsule.h"
 
 #include "math.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -269,7 +269,7 @@ bool it_3F14_Logic0_Reflected(Item_GObj* item_gobj)
     return it_3F14_Logic0_DmgDealt_autoinlined(item_gobj);
 }
 
-bool it_3F14_Logic0_HitShield(Item_GObj *item_gobj)
+bool it_3F14_Logic0_HitShield(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (it->msid == 3) {

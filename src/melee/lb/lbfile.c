@@ -139,8 +139,8 @@ void lbFile_800164A4(s32 file, u32 dest, size_t* size, s32 pri,
     int type;
     *size = lbFile_8001634C(file);
     type = (dest >= 0x80000000) ? 0x21 : 0x23;
-    HSD_DevComRequest(file, 0, dest, ROUND_UP_32(*size), type, pri,
-                      callback, args);
+    HSD_DevComRequest(file, 0, dest, ROUND_UP_32(*size), type, pri, callback,
+                      args);
 }
 
 void lbFile_80016580(const char* basename, u32 src, u32* dest,

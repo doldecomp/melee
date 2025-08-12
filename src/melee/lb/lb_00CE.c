@@ -1,10 +1,10 @@
-#include <platform.h>
-
-#include <baselib/forward.h>
-
 #include "lb/lb_00CE.h"
 
+#include <platform.h>
+
 #include "MSL/math_ppc.h"
+
+#include <baselib/forward.h>
 
 #include <math.h>
 #include <trigf.h>

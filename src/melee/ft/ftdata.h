@@ -1,13 +1,14 @@
 #ifndef GALE01_085560
 #define GALE01_085560
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
-#include <baselib/forward.h>
 
 #include "ft/types.h"
+
+#include <baselib/forward.h>
 
 struct ftData_80086060_arg0 {
     u32 unk0;

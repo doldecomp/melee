@@ -22,11 +22,15 @@
 /* 28FE14 */ void itFoods_UnkMotion3_Phys(Item_GObj* arg0);
 /* 28FE44 */ bool itFoods_UnkMotion3_Coll(Item_GObj* arg0);
 
-ItemStateTable it_803F83F0[] = { { -1, itFoods_UnkMotion0_Anim, itFoods_UnkMotion0_Phys, itFoods_UnkMotion0_Coll },
-                                 { -1, itFoods_UnkMotion1_Anim, itFoods_UnkMotion1_Phys, itFoods_UnkMotion1_Coll },
-                                 { -1, itFoods_UnkMotion2_Anim, itFoods_UnkMotion2_Phys, NULL },
-                                 { -1, itFoods_UnkMotion3_Anim, itFoods_UnkMotion3_Phys,
-                                   itFoods_UnkMotion3_Coll } };
+ItemStateTable it_803F83F0[] = {
+    { -1, itFoods_UnkMotion0_Anim, itFoods_UnkMotion0_Phys,
+      itFoods_UnkMotion0_Coll },
+    { -1, itFoods_UnkMotion1_Anim, itFoods_UnkMotion1_Phys,
+      itFoods_UnkMotion1_Coll },
+    { -1, itFoods_UnkMotion2_Anim, itFoods_UnkMotion2_Phys, NULL },
+    { -1, itFoods_UnkMotion3_Anim, itFoods_UnkMotion3_Phys,
+      itFoods_UnkMotion3_Coll }
+};
 
 void it_8028F9D8(Item_GObj* arg0, Vec3* arg1, f32 arg8)
 {

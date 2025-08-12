@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "gronett.h"
 
 #include "types.h"
+
+#include <platform.h>
 
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"

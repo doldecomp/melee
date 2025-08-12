@@ -1,6 +1,6 @@
-#include "it/forward.h"
-
 #include "it_2E6A.h"
+
+#include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -62,16 +62,26 @@ static ItemAttr it_803F8C08 = {
 };
 
 ItemStateTable it_803F8C8C[] = {
-    { 0, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 1, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 2, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 3, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 4, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 5, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 6, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 7, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 8, NULL, it_2E6A_UnkMotion19_Phys, NULL },  { 9, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 10, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 11, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 12, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 13, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 14, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 15, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 16, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 17, NULL, it_2E6A_UnkMotion19_Phys, NULL },
-    { 18, NULL, it_2E6A_UnkMotion19_Phys, NULL }, { 19, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 0, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 1, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 2, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 3, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 4, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 5, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 6, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 7, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 8, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 9, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 10, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 11, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 12, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 13, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 14, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 15, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 16, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 17, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 18, NULL, it_2E6A_UnkMotion19_Phys, NULL },
+    { 19, NULL, it_2E6A_UnkMotion19_Phys, NULL },
 };
 
 static const Vec3 it_803B8730 = { 1.0f, 1.0f, 1.0f };

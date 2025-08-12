@@ -1,9 +1,3 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-
 #include "ftPe_Init.h"
 
 #include "ftPe_AttackS4.h"
@@ -16,12 +10,19 @@
 #include "ftPe_SpecialS.h"
 #include "types.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ft/ft_0CEE.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "lb/lbanim.h"
 

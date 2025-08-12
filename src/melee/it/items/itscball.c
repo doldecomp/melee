@@ -1,5 +1,3 @@
-#include <baselib/forward.h>
-
 #include "itscball.h"
 
 #include "it/inlines.h"
@@ -7,6 +5,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+
+#include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 
@@ -27,11 +27,15 @@
 /* 294D18 */ static bool itScball_UnkMotion4_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F6220[] = {
-    { -1, itScball_UnkMotion0_Anim, itScball_UnkMotion0_Phys, itScball_UnkMotion0_Coll },
-    { -1, itScball_UnkMotion1_Anim, itScball_UnkMotion1_Phys, itScball_UnkMotion1_Coll },
+    { -1, itScball_UnkMotion0_Anim, itScball_UnkMotion0_Phys,
+      itScball_UnkMotion0_Coll },
+    { -1, itScball_UnkMotion1_Anim, itScball_UnkMotion1_Phys,
+      itScball_UnkMotion1_Coll },
     { -1, itScball_UnkMotion2_Anim, NULL, NULL },
-    { 0, itScball_UnkMotion3_Anim, itScball_UnkMotion3_Phys, itScball_UnkMotion3_Coll },
-    { -1, itScball_UnkMotion4_Anim, itScball_UnkMotion4_Phys, itScball_UnkMotion4_Coll },
+    { 0, itScball_UnkMotion3_Anim, itScball_UnkMotion3_Phys,
+      itScball_UnkMotion3_Coll },
+    { -1, itScball_UnkMotion4_Anim, itScball_UnkMotion4_Phys,
+      itScball_UnkMotion4_Coll },
 };
 
 void it_3F14_Logic30_Spawned(Item_GObj* gobj)

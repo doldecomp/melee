@@ -1,9 +1,9 @@
 #include "particle.static.h"
 
-#include <baselib/cobj.h>
-#include <baselib/state.h>
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
+#include <baselib/cobj.h>
+#include <baselib/state.h>
 
 HSD_ObjAllocData hsd_804D0F60;
 HSD_ObjAllocData hsd_804D0F90;

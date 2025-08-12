@@ -1,10 +1,10 @@
-#include <placeholder.h>
-
-#include "forward.h"
-
 #include "ftPr_SpecialLw.h"
 
 #include "ftPr_SpecialHi.h"
+
+#include <placeholder.h>
+
+#include "forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

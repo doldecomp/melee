@@ -1,15 +1,17 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_INLINES_H
 #define MELEE_FT_CHARA_FTSAMUS_INLINES_H
 
-#include "it/forward.h"
-#include <baselib/forward.h>
-
 #include "ef/eflib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftSamus/ftSs_Init.h"
 #include "ftSamus/types.h"
+
+#include "it/forward.h"
+
 #include "it/items/itsamuschargeshot.h"
+
+#include <baselib/forward.h>
 
 #include <stddef.h>
 #include <baselib/gobj.h>

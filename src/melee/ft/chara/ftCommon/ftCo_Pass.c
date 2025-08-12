@@ -1,7 +1,3 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-
 #include "ftCo_Pass.h"
 
 #include "ftCo_0C60.h"
@@ -12,7 +8,12 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_SpecialAir.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"

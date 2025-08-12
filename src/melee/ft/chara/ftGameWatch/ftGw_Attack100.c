@@ -1,12 +1,14 @@
-#include "forward.h"
-#include "ft/forward.h"
-
 #include "ftGw_Attack100.h"
 
 #include "ftGw_Attack11.h"
 #include "ftGw_Init.h"
 
+#include "forward.h"
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"

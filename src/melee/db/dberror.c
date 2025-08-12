@@ -1,13 +1,13 @@
 #include "db.h"
 
-#include <melee/lb/lb_0192.h>
-#include <melee/lb/lbcardnew.h>
+#include <dolphin/base/PPCArch.h>
 #include <dolphin/db.h>
 #include <dolphin/os.h>
-#include <dolphin/base/PPCArch.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/particle.h>
 #include <sysdolphin/baselib/video.h>
+#include <melee/lb/lb_0192.h>
+#include <melee/lb/lbcardnew.h>
 
 void db_ClearFPUExceptions(void)
 {

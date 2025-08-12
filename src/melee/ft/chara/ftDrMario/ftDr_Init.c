@@ -1,17 +1,19 @@
-#include "forward.h"
-#include "ftCommon/forward.h"
-#include "ftMario/forward.h"
-
 #include "ftDr_Init.h"
 
 #include "ftDr_AppealS.h"
 #include "types.h"
+
+#include "forward.h"
 
 #include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+#include "ftMario/forward.h"
+
 #include "ftMario/ftMr_Init.h"
 #include "ftMario/ftMr_SpecialHi.h"
 #include "ftMario/ftMr_SpecialLw.h"

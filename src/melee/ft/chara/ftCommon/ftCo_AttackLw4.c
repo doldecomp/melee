@@ -1,10 +1,10 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftCo_AttackLw4.h"
 
 #include "ftCo_Wait.h"
+
+#include <platform.h>
+
+#include "forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

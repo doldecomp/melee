@@ -1,5 +1,3 @@
-#include "it/forward.h"
-
 #include "ftCo_HammerWait.h"
 
 #include "ftCo_0C60.h"
@@ -18,6 +16,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftdevice.h"
 #include "ft/types.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"

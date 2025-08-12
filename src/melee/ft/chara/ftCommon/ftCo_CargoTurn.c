@@ -1,11 +1,11 @@
-#include <platform.h>
-
 #include "ftCo_CargoTurn.h"
 
 #include "ftCo_CargoJump.h"
 #include "ftCo_CargoThrow.h"
 #include "ftCo_CargoWait.h"
 #include "ftCo_Shouldered.h"
+
+#include <platform.h>
 
 #include "ft/ft_081B.h"
 #include "ft/ftanim.h"
@@ -31,7 +31,7 @@ void ftCo_8009B860(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* fp_x2CC = fp->x2CC;
     ftCo_Turn_Enter(gobj, fp_x2CC->x4_motion_state + 4, 0, 0,
-                  fp_x2CC->cargo_hold.x20_TURN_SPEED, 0);
+                    fp_x2CC->cargo_hold.x20_TURN_SPEED, 0);
     ftCo_8009C5A4(fp->victim_gobj, ftCo_MS_ShoulderedTurn);
 }
 

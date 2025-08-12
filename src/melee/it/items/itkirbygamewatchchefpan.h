@@ -2,9 +2,11 @@
 #define ITKIRBY_GAMEWATCH_CHEFPAN_H
 
 #include <melee/it/forward.h>
+
 #include <melee/it/items/types.h>
 
-/* 2C74D8 */ Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part, float dir);
+/* 2C74D8 */ Item_GObj* it_802C74D8(HSD_GObj* parent, Vec3* pos, Fighter_Part,
+                                    float dir);
 /* 2C75DC */ void it_2725_Logic113_Destroyed(Item_GObj*);
 /* 2C760C */ void it_802C760C(Item_GObj*);
 /* 2C7658 */ void it_802C7658(Item_GObj*);

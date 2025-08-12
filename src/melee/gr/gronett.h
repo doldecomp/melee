@@ -5,9 +5,9 @@
 
 #include "gr/forward.h"
 #include <baselib/forward.h>
+#include <lb/forward.h>
 
 #include <dolphin/mtx.h>
-#include <lb/forward.h>
 
 /* 1E3734 */ void grOnett_801E3734(bool);
 /* 1E3738 */ void grOnett_801E3738(void);

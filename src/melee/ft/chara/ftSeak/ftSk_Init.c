@@ -1,11 +1,11 @@
-#include "forward.h"
-
 #include "ftSeak/ftSk_Init.h"
 
 #include "ftSk_SpecialHi.h"
 #include "ftSk_SpecialLw.h"
 #include "ftSk_SpecialN.h"
 #include "ftSk_SpecialS.h"
+
+#include "forward.h"
 
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"

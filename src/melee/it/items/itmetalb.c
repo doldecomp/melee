@@ -10,11 +10,15 @@
 #include "pl/plbonuslib.h"
 
 ItemStateTable it_803F62C0[] = {
-    { -1, itMetalb_UnkMotion0_Anim, itMetalb_UnkMotion0_Phys, itMetalb_UnkMotion0_Coll },
-    { -1, itMetalb_UnkMotion3_Anim, itMetalb_UnkMotion1_Phys, itMetalb_UnkMotion1_Coll },
+    { -1, itMetalb_UnkMotion0_Anim, itMetalb_UnkMotion0_Phys,
+      itMetalb_UnkMotion0_Coll },
+    { -1, itMetalb_UnkMotion3_Anim, itMetalb_UnkMotion1_Phys,
+      itMetalb_UnkMotion1_Coll },
     { -1, itMetalb_UnkMotion2_Anim, NULL, NULL },
-    { -1, itMetalb_UnkMotion3_Anim, itMetalb_UnkMotion3_Phys, itMetalb_UnkMotion3_Coll },
-    { -1, itMetalb_UnkMotion4_Anim, itMetalb_UnkMotion4_Phys, itMetalb_UnkMotion4_Coll },
+    { -1, itMetalb_UnkMotion3_Anim, itMetalb_UnkMotion3_Phys,
+      itMetalb_UnkMotion3_Coll },
+    { -1, itMetalb_UnkMotion4_Anim, itMetalb_UnkMotion4_Phys,
+      itMetalb_UnkMotion4_Coll },
 };
 
 void it_3F14_Logic32_Spawned(Item_GObj* gobj)

@@ -1,5 +1,3 @@
-#include <platform.h>
-
 #include "ftMh_Wait1_0.h"
 
 #include "ftMh_BackAirplane3.h"
@@ -21,6 +19,8 @@
 #include "ftMh_TagCrush.h"
 #include "ftMh_Wait1_2.h"
 #include "ftMh_Walk.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

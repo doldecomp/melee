@@ -1,5 +1,6 @@
 /// @todo this file needs to be named "grpstadium.c" for asserts, oops!
 #include "grstadium.h"
+
 #include "dolphin/gx/GXStruct.h"
 
 #include <sysdolphin/baselib/archive.h>

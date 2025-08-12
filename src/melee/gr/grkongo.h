@@ -1,12 +1,12 @@
 #ifndef GALE01_1D5238
 #define GALE01_1D5238
 
-#include <platform.h>
 #include <placeholder.h>
-
-#include <baselib/forward.h>
+#include <platform.h>
 
 #include "it/inlines.h"
+
+#include <baselib/forward.h>
 
 /* 1D5238 */ void grKongo_801D5238(bool);
 /* 1D523C */ void grKongo_801D523C(void);

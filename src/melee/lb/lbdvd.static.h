@@ -1,9 +1,9 @@
 #ifndef __GALE01_0174BC
 #define __GALE01_0174BC
 
-#include <placeholder.h>
-
 #include "lbdvd.h" // IWYU pragma: export
+
+#include <placeholder.h>
 
 #include "lb/types.h"
 

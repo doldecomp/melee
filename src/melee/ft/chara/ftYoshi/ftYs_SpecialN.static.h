@@ -1,9 +1,9 @@
 #ifndef __GALE01_12CDE8
 #define __GALE01_12CDE8
 
-#include <placeholder.h>
-
 #include "ftYs_SpecialN.h" // IWYU pragma: export
+
+#include <placeholder.h>
 
 /* 12CEE0 */ void fn_8012CEE0(HSD_GObj*);
 /* 12CF7C */ void fn_8012CF7C(HSD_GObj*);

@@ -491,7 +491,8 @@ void gm_801B7154(MinorScene* scene)
         temp_r3->players[i] = temp_r31->data.players[i];
     }
 
-    gm_801B0620(temp_r3->players, temp_r31->data.players[0].c_kind, temp_r31->data.players[0].color, 1, gm_804D68F0);
+    gm_801B0620(temp_r3->players, temp_r31->data.players[0].c_kind,
+                temp_r31->data.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
         temp_r3->players[i].team = !temp_r3->players[0].team;
@@ -499,9 +500,11 @@ void gm_801B7154(MinorScene* scene)
     }
     gm_8016F088(temp_r3);
     gm_80182554(temp_r3->players[0].c_kind, 0x22);
-    temp_r29 = gmMainLib_8015D6F8(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r29 =
+        gmMainLib_8015D6F8(gm_80164024(temp_r31->data.players[0].c_kind));
     temp_r30 = gm_80182DF0(temp_r31->data.players[0].c_kind, 0x22);
-    temp_r30->x0_0 = gmMainLib_8015D710(gm_80164024(temp_r31->data.players[0].c_kind));
+    temp_r30->x0_0 =
+        gmMainLib_8015D710(gm_80164024(temp_r31->data.players[0].c_kind));
     gm_80181A44(temp_r31->data.players[0].c_kind, 0x22, temp_r30->x0_0);
     if (temp_r30->x0_0) {
         temp_r30->x4 = *temp_r29;
@@ -596,7 +599,8 @@ void gm_801B7700(MinorScene* scene)
         temp_r3->players[i] = temp_r30->data.players[i];
     }
 
-    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind, temp_r30->data.players[0].color, 1, gm_804D68F0);
+    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind,
+                temp_r30->data.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
         temp_r3->players[i].team = !temp_r3->players[0].team;
@@ -605,7 +609,8 @@ void gm_801B7700(MinorScene* scene)
 
     gm_8016F088(temp_r3);
     gm_80182554(temp_r3->players[0].c_kind, 0x23);
-    temp_r27 = gmMainLib_8015D74C(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r27 =
+        gmMainLib_8015D74C(gm_80164024(temp_r30->data.players[0].c_kind));
     temp_r28 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x23);
     temp_r28->x0_0 = *temp_r27 ? true : false;
     gm_80181A44(temp_r30->data.players[0].c_kind, 0x23, temp_r28->x0_0);
@@ -695,7 +700,8 @@ void gm_801B7C84(MinorScene* scene)
         temp_r3->players[i] = temp_r30->data.players[i];
     }
 
-    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind, temp_r30->data.players[0].color, 1, gm_804D68F0);
+    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind,
+                temp_r30->data.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
         temp_r3->players[i].team = !temp_r3->players[0].team;
@@ -704,7 +710,8 @@ void gm_801B7C84(MinorScene* scene)
 
     gm_8016F088(temp_r3);
     gm_80182554(temp_r3->players[0].c_kind, 0x24);
-    temp_r27 = gmMainLib_8015D7A4(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r27 =
+        gmMainLib_8015D7A4(gm_80164024(temp_r30->data.players[0].c_kind));
     temp_r28 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x24);
     temp_r28->x0_0 = *temp_r27 ? true : false;
     gm_80181A44(temp_r30->data.players[0].c_kind, 0x24, temp_r28->x0_0);
@@ -794,7 +801,8 @@ void gm_801B8220(MinorScene* scene)
         temp_r3->players[i] = temp_r30->data.players[i];
     }
 
-    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind, temp_r30->data.players[0].color, 1, gm_804D68F0);
+    gm_801B0620(temp_r3->players, temp_r30->data.players[0].c_kind,
+                temp_r30->data.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
         temp_r3->players[i].team = !temp_r3->players[0].team;
@@ -803,7 +811,8 @@ void gm_801B8220(MinorScene* scene)
 
     gm_8016F088(temp_r3);
     gm_80182554(temp_r3->players[0].c_kind, 0x25);
-    temp_r29 = gmMainLib_8015D7BC(gm_80164024(temp_r30->data.players[0].c_kind));
+    temp_r29 =
+        gmMainLib_8015D7BC(gm_80164024(temp_r30->data.players[0].c_kind));
     temp_r3_3 = gm_80182DF0(temp_r30->data.players[0].c_kind, 0x25);
     temp_r3_3->x2 = *temp_r29;
     gm_80181AC8(temp_r30->data.players[0].c_kind, 0x25, temp_r3_3->x2);
@@ -882,7 +891,8 @@ void gm_801B874C(MinorScene* scene)
         temp_r3->players[i] = temp_r29->data.players[i];
     }
 
-    gm_801B0620(temp_r3->players, temp_r29->data.players[0].c_kind, temp_r29->data.players[0].color, 1, gm_804D68F0);
+    gm_801B0620(temp_r3->players, temp_r29->data.players[0].c_kind,
+                temp_r29->data.players[0].color, 1, gm_804D68F0);
 
     for (i = 1; i < 6; i++) {
         temp_r3->players[i].team = !temp_r3->players[0].team;
@@ -892,7 +902,8 @@ void gm_801B874C(MinorScene* scene)
 
     gm_8016F088(temp_r3);
     gm_80182554(temp_r3->players[0].c_kind, 0x26);
-    temp_r28 = gmMainLib_8015D7D4(gm_80164024(temp_r29->data.players[0].c_kind));
+    temp_r28 =
+        gmMainLib_8015D7D4(gm_80164024(temp_r29->data.players[0].c_kind));
     temp_r3_3 = gm_80182DF0(temp_r29->data.players[0].c_kind, 0x26);
     temp_r3_3->x2 = *temp_r28;
     gm_80181AC8(temp_r29->data.players[0].c_kind, 0x26, temp_r3_3->x2);

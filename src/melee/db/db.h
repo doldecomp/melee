@@ -3,6 +3,7 @@
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
+
 #include <common_structs.h>
 
 extern char db_build_timestamp[];
@@ -72,7 +73,8 @@ extern int db_MiscVisualEffectsStatus;
 /* 227BA8 */ static void fn_80227BA8(HSD_GObj* camera, Vec3*, float, float);
 /* 227CAC */ static void fn_80227CAC(HSD_GObj* camera, float cstick_y);
 /* 227D38 */ static void fn_80227D38(HSD_GObj* camera, Vec3*, float);
-/* 227EB0 */ static void fn_80227EB0(HSD_GObj* camera, Vec3*, Vec3*, float, float);
+/* 227EB0 */ static void fn_80227EB0(HSD_GObj* camera, Vec3*, Vec3*, float,
+                                     float);
 /* 227FE0 */ static void fn_80227FE0(HSD_GObj* camera, float x, float y);
 /* 228124 */ static void fn_80228124(HSD_GObj* camera, Vec3*, float, float);
 /* 228318 */ void fn_SetupSoundInfo(void);

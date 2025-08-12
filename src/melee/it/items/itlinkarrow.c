@@ -55,11 +55,16 @@ static inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 }
 
 ItemStateTable it_803F6A28[5] = {
-    { -1, itLinkarrow_UnkMotion0_Anim, itLinkarrow_UnkMotion0_Phys, itLinkarrow_UnkMotion0_Coll },
-    { 0, itLinkarrow_UnkMotion1_Anim, itLinkarrow_UnkMotion1_Phys, itLinkarrow_UnkMotion1_Coll },
-    { -1, itLinkarrow_UnkMotion2_Anim, itLinkarrow_UnkMotion2_Phys, itLinkarrow_UnkMotion2_Coll },
-    { -1, itLinkarrow_UnkMotion3_Anim, itLinkarrow_UnkMotion3_Phys, itLinkarrow_UnkMotion3_Coll },
-    { -1, itLinkarrow_UnkMotion4_Anim, itLinkarrow_UnkMotion4_Phys, itLinkarrow_UnkMotion4_Coll },
+    { -1, itLinkarrow_UnkMotion0_Anim, itLinkarrow_UnkMotion0_Phys,
+      itLinkarrow_UnkMotion0_Coll },
+    { 0, itLinkarrow_UnkMotion1_Anim, itLinkarrow_UnkMotion1_Phys,
+      itLinkarrow_UnkMotion1_Coll },
+    { -1, itLinkarrow_UnkMotion2_Anim, itLinkarrow_UnkMotion2_Phys,
+      itLinkarrow_UnkMotion2_Coll },
+    { -1, itLinkarrow_UnkMotion3_Anim, itLinkarrow_UnkMotion3_Phys,
+      itLinkarrow_UnkMotion3_Coll },
+    { -1, itLinkarrow_UnkMotion4_Anim, itLinkarrow_UnkMotion4_Phys,
+      itLinkarrow_UnkMotion4_Coll },
 };
 f32 numbers[] = { 2, 4, 6, 8, 10, 12, 14, 16 };
 f32 numbers_l[] = { 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -408,7 +413,8 @@ void it_2725_Logic98_PickedUp(Item_GObj* gobj)
 }
 
 // Item could be passed to influence stack
-static void inline itLinkarrow_UnkMotion1_Anim_inline_s_2(HSD_GObj* gobj, Item* item)
+static void inline itLinkarrow_UnkMotion1_Anim_inline_s_2(HSD_GObj* gobj,
+                                                          Item* item)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     Vec3 scale;

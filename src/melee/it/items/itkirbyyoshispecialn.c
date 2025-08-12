@@ -1,11 +1,12 @@
-#include <platform.h>
-
-#include "ftKirby/forward.h"
-
 #include "itkirbyyoshispecialn.h"
+
+#include <platform.h>
 
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/ftlib.h"
+
+#include "ftKirby/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -20,7 +21,9 @@
 /* 2F2E74 */ static bool itKirbyyoshispecialn_UnkMotion0_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F9490[] = {
-    { -1, itKirbyyoshispecialn_UnkMotion0_Anim, itKirbyyoshispecialn_UnkMotion0_Phys, itKirbyyoshispecialn_UnkMotion0_Coll },
+    { -1, itKirbyyoshispecialn_UnkMotion0_Anim,
+      itKirbyyoshispecialn_UnkMotion0_Phys,
+      itKirbyyoshispecialn_UnkMotion0_Coll },
 };
 
 /// @todo Shared code with #it_802F2BFC.

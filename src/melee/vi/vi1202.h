@@ -2,6 +2,7 @@
 #define GALE01_32110C
 
 #include <placeholder.h>
+
 #include <baselib/forward.h>
 
 /* 32110C */ void un_8032110C(HSD_GObj*);

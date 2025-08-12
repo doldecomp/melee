@@ -1,10 +1,3 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "lb/forward.h"
-
 #include "ftCo_Bury.h"
 
 #include "ftCo_AirCatch.h"
@@ -18,8 +11,14 @@
 #include "ftCo_Lift.h"
 #include "ftCo_SpecialAir.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
@@ -28,10 +27,16 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "gr/ground.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "mp/mplib.h"

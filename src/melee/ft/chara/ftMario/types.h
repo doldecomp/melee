@@ -7,9 +7,10 @@
 #include "ft/forward.h"
 #include "ftMario/forward.h" // IWYU pragma: export
 #include "it/forward.h"
-#include <baselib/forward.h>
 
 #include "lb/types.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

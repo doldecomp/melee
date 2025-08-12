@@ -1,18 +1,18 @@
 #include "gm_19EF.h"
 
-#include "gm_unsplit.h"
 #include "gm_1A36.h"
+#include "gm_unsplit.h"
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
 #include <melee/sc/types.h>
 
 static HSD_Archive* lbl_804D6698;

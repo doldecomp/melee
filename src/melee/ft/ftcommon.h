@@ -9,8 +9,7 @@
 /* 07C930 */ void ftCommon_8007C930(Fighter*, float);
 /* 07C98C */ void ftCommon_8007C98C(Fighter*, float vel, float,
                                     float gr_friction);
-/* 07CA80 */ void ftCommon_8007CA80(Fighter* fp, float result, float,
-                                    float);
+/* 07CA80 */ void ftCommon_8007CA80(Fighter* fp, float result, float, float);
 /* 07CADC */ void ftCommon_8007CADC(Fighter*, float, float, float);
 /* 07CB74 */ void ftCommon_8007CB74(Fighter_GObj*);
 /* 07CC1C */ Fighter_GObj* ftCommon_8007CC1C(Fighter_GObj*);

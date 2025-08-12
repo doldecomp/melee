@@ -3,11 +3,11 @@
 #include "axdriver.static.h"
 
 #include <math_ppc.h>
+#include <string.h>
 #include <dolphin/axfx.h>
 #include <sysdolphin/baselib/axdriver.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/synth.h>
-#include <string.h>
 
 void* AXDriverAlloc(size_t size)
 {
@@ -571,8 +571,8 @@ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel,
         HSD_ASSERT(0x2EA, 0);
     }
 
-    v->unk = (vidhigh << 7) |
-             ((u8*) v - (u8*) AXDriver_804C45A0) / sizeof(HSD_SM);
+    v->unk =
+        (vidhigh << 7) | ((u8*) v - (u8*) AXDriver_804C45A0) / sizeof(HSD_SM);
     vidhigh++;
 
     enabled = OSDisableInterrupts();
@@ -892,9 +892,7 @@ bool AXDriver_8038E30C(s32 arg0, s32 arg1, void* arg2, u8* arg3, u32 arg4)
     if (arg0 < 0 || arg0 > 1) {
         return false;
     }
-    if (arg1 < 0 || arg1 > 4 ||
-        (arg1 != AXDRIVER_AUX_OFF && arg2 == NULL))
-    {
+    if (arg1 < 0 || arg1 > 4 || (arg1 != AXDRIVER_AUX_OFF && arg2 == NULL)) {
         return false;
     }
     AXDriver_804D77D4 = arg3;

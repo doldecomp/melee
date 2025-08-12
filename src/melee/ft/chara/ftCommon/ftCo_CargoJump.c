@@ -1,8 +1,3 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-#include <baselib/forward.h>
-
 #include "ftCo_CargoJump.h"
 
 #include "ftCo_CargoFall.h"
@@ -10,11 +5,18 @@
 #include "ftCo_CargoThrow.h"
 #include "ftCo_Shouldered.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ftCommon/ftCo_Jump.h"
 #include "ftDonkey/types.h"
+
+#include <baselib/forward.h>
 
 bool ftCo_8009BB1C(Fighter_GObj* gobj)
 {

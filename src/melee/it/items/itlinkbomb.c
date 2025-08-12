@@ -17,12 +17,18 @@ static Vec3 it_803B8640;
 
 ItemStateTable it_803F6888[] = {
     { 0, itLinkbomb_UnkMotion0_Anim, itLinkbomb_UnkMotion0_Phys, NULL },
-    { 0, itLinkbomb_UnkMotion1_Anim, itLinkbomb_UnkMotion1_Phys, itLinkbomb_UnkMotion1_Coll },
-    { 1, itLinkbomb_UnkMotion2_Anim, itLinkbomb_UnkMotion2_Phys, itLinkbomb_UnkMotion2_Coll },
-    { 1, itLinkbomb_UnkMotion3_Anim, itLinkbomb_UnkMotion3_Phys, itLinkbomb_UnkMotion3_Coll },
-    { 0, itLinkbomb_UnkMotion4_Anim, itLinkbomb_UnkMotion4_Phys, itLinkbomb_UnkMotion4_Coll },
-    { 2, itLinkbomb_UnkMotion5_Anim, itLinkbomb_UnkMotion5_Phys, itLinkbomb_UnkMotion5_Coll },
-    { 0, itLinkbomb_UnkMotion6_Anim, itLinkbomb_UnkMotion6_Phys, itLinkbomb_UnkMotion6_Coll },
+    { 0, itLinkbomb_UnkMotion1_Anim, itLinkbomb_UnkMotion1_Phys,
+      itLinkbomb_UnkMotion1_Coll },
+    { 1, itLinkbomb_UnkMotion2_Anim, itLinkbomb_UnkMotion2_Phys,
+      itLinkbomb_UnkMotion2_Coll },
+    { 1, itLinkbomb_UnkMotion3_Anim, itLinkbomb_UnkMotion3_Phys,
+      itLinkbomb_UnkMotion3_Coll },
+    { 0, itLinkbomb_UnkMotion4_Anim, itLinkbomb_UnkMotion4_Phys,
+      itLinkbomb_UnkMotion4_Coll },
+    { 2, itLinkbomb_UnkMotion5_Anim, itLinkbomb_UnkMotion5_Phys,
+      itLinkbomb_UnkMotion5_Coll },
+    { 0, itLinkbomb_UnkMotion6_Anim, itLinkbomb_UnkMotion6_Phys,
+      itLinkbomb_UnkMotion6_Coll },
 };
 
 // @todo This uses the de-duplicated function ftCo_800C6AFC
@@ -426,9 +432,9 @@ static inline void itLinkbomb_UnkMotion1_Anim_fake(HSD_GObj* gobj)
 }
 
 // This should have a non-inlined it_8029DB5C, presumably expanded from
-// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for itLinkbomb_UnkMotion1_Anim that
-// calls it_8029DB5C. Not sure if that's related to the unused
-// item/specialattributes.
+// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for
+// itLinkbomb_UnkMotion1_Anim that calls it_8029DB5C. Not sure if that's
+// related to the unused item/specialattributes.
 bool itLinkbomb_UnkMotion3_Anim(HSD_GObj* gobj)
 {
     Item* item;

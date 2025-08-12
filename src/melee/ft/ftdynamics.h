@@ -3,10 +3,11 @@
 
 #include <platform.h>
 
-#include "lb/lbanim.h"
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
+
+#include "lb/lbanim.h"
 
 /* 09CF84 */ void ftCo_8009CF84(Fighter* fp);
 /* 09D074 */ void ftCo_8009D074(Fighter* fp);
@@ -22,7 +23,8 @@
 /* 09EAF8 */ void ftCo_8009EAF8(HSD_GObj* gobj);
 
 /// @todo
-/* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool, FigaTree*);
+/* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool,
+                                       FigaTree*);
 /* 09D18C */ static void ftCo_8009D18C(Fighter* fp);
 /* 09D2A4 */ static void ftCo_8009D2A4(Fighter* fp);
 /* 09D3BC */ static void ftCo_8009D3BC(Fighter* fp);

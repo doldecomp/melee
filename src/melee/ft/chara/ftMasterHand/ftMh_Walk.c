@@ -1,11 +1,9 @@
-#include <platform.h>
-
-#include "ftMasterHand/forward.h"
-
 #include "ftMh_Walk.h"
 
 #include "ftMh_Slap.h"
 #include "ftMh_Wait1_2.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -13,6 +11,9 @@
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
+
+#include "ftMasterHand/forward.h"
+
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/player.h"

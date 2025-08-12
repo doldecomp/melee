@@ -1,8 +1,8 @@
 #ifndef GALE01_05B4B8
 #define GALE01_05B4B8
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ef/forward.h"
 #include <baselib/forward.h>

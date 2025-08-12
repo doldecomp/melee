@@ -1,11 +1,13 @@
+#include "ftPr_SpecialN.h"
+
 #include <placeholder.h>
 
 #include "forward.h"
-#include "ft/forward.h"
-
-#include "ftPr_SpecialN.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"

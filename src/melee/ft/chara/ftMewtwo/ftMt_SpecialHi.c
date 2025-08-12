@@ -1,11 +1,12 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftMt_SpecialHi.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"

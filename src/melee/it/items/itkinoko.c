@@ -7,8 +7,10 @@
 #include "it/item.h"
 
 ItemStateTable it_803F6110[] = {
-    { 0, itKinoko_UnkMotion0_Anim, itKinoko_UnkMotion0_Phys, itKinoko_UnkMotion0_Coll },
-    { 0, itKinoko_UnkMotion1_Anim, itKinoko_UnkMotion1_Phys, itKinoko_UnkMotion1_Coll },
+    { 0, itKinoko_UnkMotion0_Anim, itKinoko_UnkMotion0_Phys,
+      itKinoko_UnkMotion0_Coll },
+    { 0, itKinoko_UnkMotion1_Anim, itKinoko_UnkMotion1_Phys,
+      itKinoko_UnkMotion1_Coll },
 };
 
 HSD_AnimJoint* it_80293660(int idx)

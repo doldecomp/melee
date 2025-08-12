@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "lb/lbvector.h"
+
+#include <platform.h>
 
 #include "lb/lbrefract.h"
 

@@ -4,12 +4,11 @@
 
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 void grTGanon_802246D8(bool);
 void grTGanon_802246DC(void);

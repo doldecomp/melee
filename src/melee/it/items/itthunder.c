@@ -1,6 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
 #include "itthunder.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 /// #it_2725_Logic7_Spawned
 

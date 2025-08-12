@@ -1,10 +1,8 @@
-#include <platform.h>
-
-#include "lb/forward.h"
-
 #include "ftMs_SpecialLw.h"
 
 #include "math.h"
+
+#include <platform.h>
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"
@@ -18,6 +16,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftMars/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 

@@ -1,9 +1,6 @@
-#include <platform.h>
-
-#include "lb/forward.h"
-#include <baselib/forward.h>
-
 #include "gr/grtlink.h"
+
+#include <platform.h>
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -11,31 +8,36 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTLink_8022192C(bool);                   /* static */
+void grTLink_8022192C(bool);                  /* static */
 void grTLink_80221930(void);                  /* static */
-void grTlink_UnkStage0_OnLoad(void);                  /* static */
-void grTlink_UnkStage0_OnStart(void);                  /* static */
+void grTlink_UnkStage0_OnLoad(void);          /* static */
+void grTlink_UnkStage0_OnStart(void);         /* static */
 bool grTLink_802219C8(void);                  /* static */
 HSD_GObj* grTLink_802219D0(s32 arg0);         /* static */
-void grTLink_80221AB8(Ground_GObj*);             /* static */
-bool grTLink_80221AE4(Ground_GObj*);             /* static */
-void grTLink_80221AEC(Ground_GObj*);             /* static */
-void grTLink_80221AF0(Ground_GObj*);             /* static */
-void grTLink_80221AF4(Ground_GObj*);             /* static */
-bool grTLink_80221B44(Ground_GObj*);             /* static */
-void grTLink_80221B4C(Ground_GObj*);             /* static */
-void grTLink_80221B80(Ground_GObj*);             /* static */
-void grTLink_80221B84(Ground_GObj*);             /* static */
-bool grTLink_80221BD4(Ground_GObj*);             /* static */
-void grTLink_80221BDC(Ground_GObj*);             /* static */
-void grTLink_80221BFC(Ground_GObj*);             /* static */
+void grTLink_80221AB8(Ground_GObj*);          /* static */
+bool grTLink_80221AE4(Ground_GObj*);          /* static */
+void grTLink_80221AEC(Ground_GObj*);          /* static */
+void grTLink_80221AF0(Ground_GObj*);          /* static */
+void grTLink_80221AF4(Ground_GObj*);          /* static */
+bool grTLink_80221B44(Ground_GObj*);          /* static */
+void grTLink_80221B4C(Ground_GObj*);          /* static */
+void grTLink_80221B80(Ground_GObj*);          /* static */
+void grTLink_80221B84(Ground_GObj*);          /* static */
+bool grTLink_80221BD4(Ground_GObj*);          /* static */
+void grTLink_80221BDC(Ground_GObj*);          /* static */
+void grTLink_80221BFC(Ground_GObj*);          /* static */
 DynamicsDesc* grTLink_80221C00(enum_t);       /* static */
 bool grTLink_80221C08(Vec3*, int, HSD_JObj*); /* static */
 

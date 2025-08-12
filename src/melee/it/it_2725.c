@@ -1,11 +1,9 @@
-#include <platform.h>
-
-#include "it/forward.h"
-
 #include "it_2725.h"
 
 #include "inlines.h"
 #include "it_266F.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "db/db.h"
@@ -22,6 +20,9 @@
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/itcoll.h"
 #include "it/items/it_27CF.h"

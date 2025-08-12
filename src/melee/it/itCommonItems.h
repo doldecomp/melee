@@ -3,14 +3,15 @@
 #ifndef MELEE_IT_ITCOMMONITEMS_H
 #define MELEE_IT_ITCOMMONITEMS_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "it/forward.h"
-#include <melee/gr/forward.h>
-#include <baselib/forward.h>
 
 #include "lb/types.h"
+
+#include <baselib/forward.h>
+#include <melee/gr/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

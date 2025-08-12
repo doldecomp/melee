@@ -1,14 +1,16 @@
-#include "baselib/forward.h"
-#include "it/forward.h"
-
 #include "itpeachtoadspore.h"
 
 #include "common_structs.h"
+
+#include "baselib/forward.h"
 
 #include "baselib/random.h"
 #include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

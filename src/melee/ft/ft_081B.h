@@ -1,13 +1,13 @@
 #ifndef GALE01_081B38
 #define GALE01_081B38
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
+#include "ft/types.h"
 
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 081B38 */ void ft_80081B38(Fighter_GObj* gobj);
 /* 081C88 */ void ft_80081C88(Fighter_GObj* dst_gobj, float scl_y);
@@ -18,13 +18,14 @@
 /* 0821DC */ bool ft_800821DC(Fighter_GObj* gobj);
 /* 0822A4 */ bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, int direction);
 /* 08239C */ bool ft_8008239C(Fighter_GObj* gobj, int facing_direction,
-                              ftCollisionBox*  height_attributes);
+                              ftCollisionBox* height_attributes);
 /* 0824A0 */ bool ft_800824A0(Fighter_GObj*, ftCollisionBox*);
 /* 082578 */ bool ft_80082578(Fighter_GObj*);
 /* 082638 */ bool ft_80082638(Fighter_GObj* gobj, ftCollisionBox*);
 /* 082708 */ GroundOrAir ft_80082708(Fighter_GObj* gobj);
 /* 0827A0 */ bool ft_800827A0(Fighter_GObj* gobj);
-/* 082838 */ ftCollisionBox* ft_80082838(ftCollisionBox*, ftCollisionBox*, float);
+/* 082838 */ ftCollisionBox* ft_80082838(ftCollisionBox*, ftCollisionBox*,
+                                         float);
 /* 082888 */ bool ft_80082888(Fighter_GObj*, ftCollisionBox*);
 /* 082978 */ bool ft_80082978(Fighter_GObj*, ftCollisionBox*);
 /* 082A68 */ bool ft_80082A68(Fighter_GObj* gobj);

@@ -1,7 +1,8 @@
+#include "printf.h"
+
 #include "ansi_fp.h"
 #include "ctype.h"
 #include "limits.h"
-#include "printf.h"
 #include "stdarg.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -1049,7 +1050,7 @@ int printf(const char* format, ...)
     {
         va_list args;
         va_start(args, format);
-        res = __pformatter(&__FileWrite, (void*)stdout, format, args);
+        res = __pformatter(&__FileWrite, (void*) stdout, format, args);
     }
 
     return res;

@@ -3,9 +3,10 @@
 
 #include <platform.h>
 
+#include "baselib/class.h"
+
 #include "baselib/forward.h" // IWYU pragma: export
 
-#include "baselib/class.h"
 #include "baselib/object.h"
 
 #include <dolphin/gx.h>

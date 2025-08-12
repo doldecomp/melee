@@ -1,6 +1,6 @@
-#include "lbcardnew.static.h"
-
 #include "lbcardnew.h"
+
+#include "lbcardnew.static.h"
 
 #include <dolphin/card.h>
 #include <sysdolphin/baselib/controller.h>

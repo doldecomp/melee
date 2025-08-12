@@ -3,11 +3,13 @@
 
 #include <placeholder.h>
 
-#include "ef/forward.h" // IWYU pragma: export
-#include <baselib/forward.h>
-
 #include "dolphin/mtx.h"
+
+#include "ef/forward.h" // IWYU pragma: export
+
 #include "sc/types.h"
+
+#include <baselib/forward.h>
 
 struct ef_UnkStruct2 {
     /* +0 */ HSD_JObj* x0;

@@ -30,12 +30,17 @@
 /* 2845F0 */ static bool itTomato_UnkMotion5_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F5740[] = {
-    { -1, itTomato_UnkMotion0_Anim, itTomato_UnkMotion0_Phys, itTomato_UnkMotion0_Coll },
-    { -1, itTomato_UnkMotion1_Anim, itTomato_UnkMotion1_Phys, itTomato_UnkMotion1_Coll },
-    { -1, itTomato_UnkMotion4_Anim, itTomato_UnkMotion4_Phys, itTomato_UnkMotion4_Coll },
+    { -1, itTomato_UnkMotion0_Anim, itTomato_UnkMotion0_Phys,
+      itTomato_UnkMotion0_Coll },
+    { -1, itTomato_UnkMotion1_Anim, itTomato_UnkMotion1_Phys,
+      itTomato_UnkMotion1_Coll },
+    { -1, itTomato_UnkMotion4_Anim, itTomato_UnkMotion4_Phys,
+      itTomato_UnkMotion4_Coll },
     { -1, itTomato_UnkMotion3_Anim, itTomato_UnkMotion3_Phys, NULL },
-    { -1, itTomato_UnkMotion4_Anim, itTomato_UnkMotion4_Phys, itTomato_UnkMotion4_Coll },
-    { -1, itTomato_UnkMotion5_Anim, itTomato_UnkMotion5_Phys, itTomato_UnkMotion5_Coll },
+    { -1, itTomato_UnkMotion4_Anim, itTomato_UnkMotion4_Phys,
+      itTomato_UnkMotion4_Coll },
+    { -1, itTomato_UnkMotion5_Anim, itTomato_UnkMotion5_Phys,
+      itTomato_UnkMotion5_Coll },
 };
 
 Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)

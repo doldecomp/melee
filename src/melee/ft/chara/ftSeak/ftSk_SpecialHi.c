@@ -1,13 +1,13 @@
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftSeak/forward.h"
-
 #include "ftSk_SpecialHi.h"
+
+#include <placeholder.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
@@ -19,6 +19,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Pass.h"
+
+#include "ftSeak/forward.h"
+
 #include "it/items/itseakvanish.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbrefract.h"

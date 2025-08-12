@@ -2,12 +2,12 @@
 
 #include "mnmain.h"
 
-#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbarchive.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbaudio_ax.h>
 #include <melee/sc/types.h>
 
 extern HSD_FogDesc* MenMain_fog;
@@ -78,107 +78,132 @@ void mn_80231804(HSD_Archive* archive, int arg1)
     mn_804A04F0.x2 = 0;
     HSD_SisLib_803A5E70();
 
-    lbArchive_LoadSections(archive,
-            (void**) &MenMainBack_Top.joint, "MenMainBack_Top_joint",
-            &MenMainBack_Top.animjoint, "MenMainBack_Top_animjoint",
-            &MenMainBack_Top.matanim_joint, "MenMainBack_Top_matanim_joint",
-            &MenMainBack_Top.shapeanim_joint, "MenMainBack_Top_shapeanim_joint",
+    lbArchive_LoadSections(
+        archive, (void**) &MenMainBack_Top.joint, "MenMainBack_Top_joint",
+        &MenMainBack_Top.animjoint, "MenMainBack_Top_animjoint",
+        &MenMainBack_Top.matanim_joint, "MenMainBack_Top_matanim_joint",
+        &MenMainBack_Top.shapeanim_joint, "MenMainBack_Top_shapeanim_joint",
 
-            &MenMain_cam, "ScMenMain_cam_int1_camera",
-            &MenMain_lights, "ScMenMain_scene_lights",
-            &MenMain_fog, "ScMenMain_fog",
+        &MenMain_cam, "ScMenMain_cam_int1_camera", &MenMain_lights,
+        "ScMenMain_scene_lights", &MenMain_fog, "ScMenMain_fog",
 
-            &MenMainPanel_Top.joint, "MenMainPanel_Top_joint",
-            &MenMainPanel_Top.animjoint, "MenMainPanel_Top_animjoint",
-            &MenMainPanel_Top.matanim_joint, "MenMainPanel_Top_matanim_joint",
-            &MenMainPanel_Top.shapeanim_joint, "MenMainPanel_Top_shapeanim_joint",
+        &MenMainPanel_Top.joint, "MenMainPanel_Top_joint",
+        &MenMainPanel_Top.animjoint, "MenMainPanel_Top_animjoint",
+        &MenMainPanel_Top.matanim_joint, "MenMainPanel_Top_matanim_joint",
+        &MenMainPanel_Top.shapeanim_joint, "MenMainPanel_Top_shapeanim_joint",
 
-            &MenMainConRl_Top.joint, "MenMainConRl_Top_joint",
-            &MenMainConRl_Top.animjoint, "MenMainConRl_Top_animjoint",
-            &MenMainConRl_Top.matanim_joint, "MenMainConRl_Top_matanim_joint",
-            &MenMainConRl_Top.shapeanim_joint, "MenMainConRl_Top_shapeanim_joint",
+        &MenMainConRl_Top.joint, "MenMainConRl_Top_joint",
+        &MenMainConRl_Top.animjoint, "MenMainConRl_Top_animjoint",
+        &MenMainConRl_Top.matanim_joint, "MenMainConRl_Top_matanim_joint",
+        &MenMainConRl_Top.shapeanim_joint, "MenMainConRl_Top_shapeanim_joint",
 
-            &MenMainCursorRl_Top.joint, "MenMainCursorRl_Top_joint",
-            &MenMainCursorRl_Top.animjoint, "MenMainCursorRl_Top_animjoint",
-            &MenMainCursorRl_Top.matanim_joint, "MenMainCursorRl_Top_matanim_joint",
-            &MenMainCursorRl_Top.shapeanim_joint, "MenMainCursorRl_Top_shapeanim_joint",
+        &MenMainCursorRl_Top.joint, "MenMainCursorRl_Top_joint",
+        &MenMainCursorRl_Top.animjoint, "MenMainCursorRl_Top_animjoint",
+        &MenMainCursorRl_Top.matanim_joint,
+        "MenMainCursorRl_Top_matanim_joint",
+        &MenMainCursorRl_Top.shapeanim_joint,
+        "MenMainCursorRl_Top_shapeanim_joint",
 
-            &MenMainCursorRl_Top.joint, "MenMainCursorRl_Top_joint",
-            &MenMainCursorRl_Top.animjoint, "MenMainCursorRl_Top_animjoint",
-            &MenMainCursorRl_Top.matanim_joint, "MenMainCursorRl_Top_matanim_joint",
-            &MenMainCursorRl_Top.shapeanim_joint, "MenMainCursorRl_Top_shapeanim_joint",
+        &MenMainCursorRl_Top.joint, "MenMainCursorRl_Top_joint",
+        &MenMainCursorRl_Top.animjoint, "MenMainCursorRl_Top_animjoint",
+        &MenMainCursorRl_Top.matanim_joint,
+        "MenMainCursorRl_Top_matanim_joint",
+        &MenMainCursorRl_Top.shapeanim_joint,
+        "MenMainCursorRl_Top_shapeanim_joint",
 
-            &MenMainNmRl_Top.joint, "MenMainNmRl_Top_joint",
-            &MenMainNmRl_Top.animjoint, "MenMainNmRl_Top_animjoint",
-            &MenMainNmRl_Top.matanim_joint, "MenMainNmRl_Top_matanim_joint",
-            &MenMainNmRl_Top.shapeanim_joint, "MenMainNmRl_Top_shapeanim_joint",
+        &MenMainNmRl_Top.joint, "MenMainNmRl_Top_joint",
+        &MenMainNmRl_Top.animjoint, "MenMainNmRl_Top_animjoint",
+        &MenMainNmRl_Top.matanim_joint, "MenMainNmRl_Top_matanim_joint",
+        &MenMainNmRl_Top.shapeanim_joint, "MenMainNmRl_Top_shapeanim_joint",
 
-            &MenMainCursorTr01_Top.joint, "MenMainCursorTr01_Top_joint",
-            &MenMainCursorTr01_Top.animjoint, "MenMainCursorTr01_Top_animjoint",
-            &MenMainCursorTr01_Top.matanim_joint, "MenMainCursorTr01_Top_matanim_joint",
-            &MenMainCursorTr01_Top.shapeanim_joint, "MenMainCursorTr01_Top_shapeanim_joint",
+        &MenMainCursorTr01_Top.joint, "MenMainCursorTr01_Top_joint",
+        &MenMainCursorTr01_Top.animjoint, "MenMainCursorTr01_Top_animjoint",
+        &MenMainCursorTr01_Top.matanim_joint,
+        "MenMainCursorTr01_Top_matanim_joint",
+        &MenMainCursorTr01_Top.shapeanim_joint,
+        "MenMainCursorTr01_Top_shapeanim_joint",
 
-            &MenMainCursorTr02_Top.joint, "MenMainCursorTr02_Top_joint",
-            &MenMainCursorTr02_Top.animjoint, "MenMainCursorTr02_Top_animjoint",
-            &MenMainCursorTr02_Top.matanim_joint, "MenMainCursorTr02_Top_matanim_joint",
-            &MenMainCursorTr02_Top.shapeanim_joint, "MenMainCursorTr02_Top_shapeanim_joint",
+        &MenMainCursorTr02_Top.joint, "MenMainCursorTr02_Top_joint",
+        &MenMainCursorTr02_Top.animjoint, "MenMainCursorTr02_Top_animjoint",
+        &MenMainCursorTr02_Top.matanim_joint,
+        "MenMainCursorTr02_Top_matanim_joint",
+        &MenMainCursorTr02_Top.shapeanim_joint,
+        "MenMainCursorTr02_Top_shapeanim_joint",
 
-            &MenMainCursorTr03_Top.joint, "MenMainCursorTr03_Top_joint",
-            &MenMainCursorTr03_Top.animjoint, "MenMainCursorTr03_Top_animjoint",
-            &MenMainCursorTr03_Top.matanim_joint, "MenMainCursorTr03_Top_matanim_joint",
-            &MenMainCursorTr03_Top.shapeanim_joint, "MenMainCursorTr03_Top_shapeanim_joint",
+        &MenMainCursorTr03_Top.joint, "MenMainCursorTr03_Top_joint",
+        &MenMainCursorTr03_Top.animjoint, "MenMainCursorTr03_Top_animjoint",
+        &MenMainCursorTr03_Top.matanim_joint,
+        "MenMainCursorTr03_Top_matanim_joint",
+        &MenMainCursorTr03_Top.shapeanim_joint,
+        "MenMainCursorTr03_Top_shapeanim_joint",
 
-            &MenMainCursorTr04_Top.joint, "MenMainCursorTr04_Top_joint",
-            &MenMainCursorTr04_Top.animjoint, "MenMainCursorTr04_Top_animjoint",
-            &MenMainCursorTr04_Top.matanim_joint, "MenMainCursorTr04_Top_matanim_joint",
-            &MenMainCursorTr04_Top.shapeanim_joint, "MenMainCursorTr04_Top_shapeanim_joint",
+        &MenMainCursorTr04_Top.joint, "MenMainCursorTr04_Top_joint",
+        &MenMainCursorTr04_Top.animjoint, "MenMainCursorTr04_Top_animjoint",
+        &MenMainCursorTr04_Top.matanim_joint,
+        "MenMainCursorTr04_Top_matanim_joint",
+        &MenMainCursorTr04_Top.shapeanim_joint,
+        "MenMainCursorTr04_Top_shapeanim_joint",
 
-            &MenMainCursorRl01_Top.joint, "MenMainCursorRl01_Top_joint",
-            &MenMainCursorRl01_Top.animjoint, "MenMainCursorRl01_Top_animjoint",
-            &MenMainCursorRl01_Top.matanim_joint, "MenMainCursorRl01_Top_matanim_joint",
-            &MenMainCursorRl01_Top.shapeanim_joint, "MenMainCursorRl01_Top_shapeanim_joint",
+        &MenMainCursorRl01_Top.joint, "MenMainCursorRl01_Top_joint",
+        &MenMainCursorRl01_Top.animjoint, "MenMainCursorRl01_Top_animjoint",
+        &MenMainCursorRl01_Top.matanim_joint,
+        "MenMainCursorRl01_Top_matanim_joint",
+        &MenMainCursorRl01_Top.shapeanim_joint,
+        "MenMainCursorRl01_Top_shapeanim_joint",
 
-            &MenMainCursorRl02_Top.joint, "MenMainCursorRl02_Top_joint",
-            &MenMainCursorRl02_Top.animjoint, "MenMainCursorRl02_Top_animjoint",
-            &MenMainCursorRl02_Top.matanim_joint, "MenMainCursorRl02_Top_matanim_joint",
-            &MenMainCursorRl02_Top.shapeanim_joint, "MenMainCursorRl02_Top_shapeanim_joint",
+        &MenMainCursorRl02_Top.joint, "MenMainCursorRl02_Top_joint",
+        &MenMainCursorRl02_Top.animjoint, "MenMainCursorRl02_Top_animjoint",
+        &MenMainCursorRl02_Top.matanim_joint,
+        "MenMainCursorRl02_Top_matanim_joint",
+        &MenMainCursorRl02_Top.shapeanim_joint,
+        "MenMainCursorRl02_Top_shapeanim_joint",
 
-            &MenMainCursorRl03_Top.joint, "MenMainCursorRl03_Top_joint",
-            &MenMainCursorRl03_Top.animjoint, "MenMainCursorRl03_Top_animjoint",
-            &MenMainCursorRl03_Top.matanim_joint, "MenMainCursorRl03_Top_matanim_joint",
-            &MenMainCursorRl03_Top.shapeanim_joint, "MenMainCursorRl03_Top_shapeanim_joint",
+        &MenMainCursorRl03_Top.joint, "MenMainCursorRl03_Top_joint",
+        &MenMainCursorRl03_Top.animjoint, "MenMainCursorRl03_Top_animjoint",
+        &MenMainCursorRl03_Top.matanim_joint,
+        "MenMainCursorRl03_Top_matanim_joint",
+        &MenMainCursorRl03_Top.shapeanim_joint,
+        "MenMainCursorRl03_Top_shapeanim_joint",
 
-            &MenMainCursorRl04_Top.joint, "MenMainCursorRl04_Top_joint",
-            &MenMainCursorRl04_Top.animjoint, "MenMainCursorRl04_Top_animjoint",
-            &MenMainCursorRl04_Top.matanim_joint, "MenMainCursorRl04_Top_matanim_joint",
-            &MenMainCursorRl04_Top.shapeanim_joint, "MenMainCursorRl04_Top_shapeanim_joint",
+        &MenMainCursorRl04_Top.joint, "MenMainCursorRl04_Top_joint",
+        &MenMainCursorRl04_Top.animjoint, "MenMainCursorRl04_Top_animjoint",
+        &MenMainCursorRl04_Top.matanim_joint,
+        "MenMainCursorRl04_Top_matanim_joint",
+        &MenMainCursorRl04_Top.shapeanim_joint,
+        "MenMainCursorRl04_Top_shapeanim_joint",
 
-            &MenMainCursorRl05_Top.joint, "MenMainCursorRl05_Top_joint",
-            &MenMainCursorRl05_Top.animjoint, "MenMainCursorRl05_Top_animjoint",
-            &MenMainCursorRl05_Top.matanim_joint, "MenMainCursorRl05_Top_matanim_joint",
-            &MenMainCursorRl05_Top.shapeanim_joint, "MenMainCursorRl05_Top_shapeanim_joint",
+        &MenMainCursorRl05_Top.joint, "MenMainCursorRl05_Top_joint",
+        &MenMainCursorRl05_Top.animjoint, "MenMainCursorRl05_Top_animjoint",
+        &MenMainCursorRl05_Top.matanim_joint,
+        "MenMainCursorRl05_Top_matanim_joint",
+        &MenMainCursorRl05_Top.shapeanim_joint,
+        "MenMainCursorRl05_Top_shapeanim_joint",
 
-            &MenMainConIs_Top.joint, "MenMainConIs_Top_joint",
-            &MenMainConIs_Top.animjoint, "MenMainConIs_Top_animjoint",
-            &MenMainConIs_Top.matanim_joint, "MenMainConIs_Top_matanim_joint",
-            &MenMainConIs_Top.shapeanim_joint, "MenMainConIs_Top_shapeanim_joint",
+        &MenMainConIs_Top.joint, "MenMainConIs_Top_joint",
+        &MenMainConIs_Top.animjoint, "MenMainConIs_Top_animjoint",
+        &MenMainConIs_Top.matanim_joint, "MenMainConIs_Top_matanim_joint",
+        &MenMainConIs_Top.shapeanim_joint, "MenMainConIs_Top_shapeanim_joint",
 
-            &MenMainCursorIs_Top.joint, "MenMainCursorIs_Top_joint",
-            &MenMainCursorIs_Top.animjoint, "MenMainCursorIs_Top_animjoint",
-            &MenMainCursorIs_Top.matanim_joint, "MenMainCursorIs_Top_matanim_joint",
-            &MenMainCursorIs_Top.shapeanim_joint, "MenMainCursorIs_Top_shapeanim_joint",
+        &MenMainCursorIs_Top.joint, "MenMainCursorIs_Top_joint",
+        &MenMainCursorIs_Top.animjoint, "MenMainCursorIs_Top_animjoint",
+        &MenMainCursorIs_Top.matanim_joint,
+        "MenMainCursorIs_Top_matanim_joint",
+        &MenMainCursorIs_Top.shapeanim_joint,
+        "MenMainCursorIs_Top_shapeanim_joint",
 
-            &MenMainConSs_Top.joint, "MenMainConSs_Top_joint",
-            &MenMainConSs_Top.animjoint, "MenMainConSs_Top_animjoint",
-            &MenMainConSs_Top.matanim_joint, "MenMainConSs_Top_matanim_joint",
-            &MenMainConSs_Top.shapeanim_joint, "MenMainConSs_Top_shapeanim_joint",
+        &MenMainConSs_Top.joint, "MenMainConSs_Top_joint",
+        &MenMainConSs_Top.animjoint, "MenMainConSs_Top_animjoint",
+        &MenMainConSs_Top.matanim_joint, "MenMainConSs_Top_matanim_joint",
+        &MenMainConSs_Top.shapeanim_joint, "MenMainConSs_Top_shapeanim_joint",
 
-            &MenMainCursorSs_Top.joint, "MenMainCursorSs_Top_joint",
-            &MenMainCursorSs_Top.animjoint, "MenMainCursorSs_Top_animjoint",
-            &MenMainCursorSs_Top.matanim_joint, "MenMainCursorSs_Top_matanim_joint",
-            &MenMainCursorSs_Top.shapeanim_joint, "MenMainCursorSs_Top_shapeanim_joint",
+        &MenMainCursorSs_Top.joint, "MenMainCursorSs_Top_joint",
+        &MenMainCursorSs_Top.animjoint, "MenMainCursorSs_Top_animjoint",
+        &MenMainCursorSs_Top.matanim_joint,
+        "MenMainCursorSs_Top_matanim_joint",
+        &MenMainCursorSs_Top.shapeanim_joint,
+        "MenMainCursorSs_Top_shapeanim_joint",
 
-            0);
+        0);
 
     mn_804D6BD4 = arg1;
     mn_8022C304();

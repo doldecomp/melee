@@ -1,12 +1,10 @@
 #ifndef MELEE_LB_CARDNEW_H
 #define MELEE_LB_CARDNEW_H
 
-#include <platform.h>
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <platform.h>
 
-#include <platform.h>
-#include <placeholder.h>
+#include <sysdolphin/baselib/gobj.h>
 
 /* 019BB8 */ int lb_80019BB8(int);
 /* 019C38 */ struct CardTask* lb_80019C38(void);
@@ -36,13 +34,17 @@
 /* 01B8C8 */ bool lb_8001B8C8(int);
 /* 01B99C */ int lb_8001B99C(int, const char*, UNK_T);
 /* 01BA44 */ bool lb_8001BA44(int, const char*, UNK_T);
-/* 01BB48 */ int lb_8001BB48(int, char*, void*, void*, const char*, int, int, UNK_T);
-/* 01BC18 */ int lb_8001BC18(int, char*, void**, void*, const char*, int, int, UNK_T);
+/* 01BB48 */ int lb_8001BB48(int, char*, void*, void*, const char*, int, int,
+                             UNK_T);
+/* 01BC18 */ int lb_8001BC18(int, char*, void**, void*, const char*, int, int,
+                             UNK_T);
 /* 01BD34 */ enum_t lb_8001BD34(int chan, const char*, UNK_T, UNK_T);
-/* 01BE30 */ int lb_8001BE30(int, const char*, UNK_T, const char*, int, int, UNK_T, UNK_T);
+/* 01BE30 */ int lb_8001BE30(int, const char*, UNK_T, const char*, int, int,
+                             UNK_T, UNK_T);
 /* 01BF04 */ int lb_8001BF04(int, char*, void*, const char*, int, int, UNK_T);
 /* 01BFD8 */ int lb_8001BFD8(int, UNK_T, UNK_T, UNK_T);
-/* 01C0F4 */ int lb_8001C0F4(int, const char*, const char*, const char*, UNK_T);
+/* 01C0F4 */ int lb_8001C0F4(int, const char*, const char*, const char*,
+                             UNK_T);
 /* 01C2D8 */ int lb_8001C2D8(int, const char*, const char*, const char*);
 /* 01C404 */ int lb_8001C404(int);
 /* 01C4A8 */ void lb_8001C4A8(void*, void*);

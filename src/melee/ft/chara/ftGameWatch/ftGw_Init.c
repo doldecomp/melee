@@ -1,5 +1,3 @@
-#include "ftCommon/forward.h"
-
 #include "ftGw_Init.h"
 
 #include "ftGw_Attack100.h"
@@ -19,6 +17,9 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/types.h"
 

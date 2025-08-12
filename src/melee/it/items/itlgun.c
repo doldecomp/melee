@@ -31,12 +31,16 @@
 /* 28EB34 */ static bool itLgun_UnkMotion5_Coll(Item_GObj*);
 
 ItemStateTable it_803F5CC8[] = {
-    { -1, itLgun_UnkMotion0_Anim, itLgun_UnkMotion0_Phys, itLgun_UnkMotion0_Coll },
-    { -1, itLgun_UnkMotion4_Anim, itLgun_UnkMotion1_Phys, itLgun_UnkMotion4_Coll },
+    { -1, itLgun_UnkMotion0_Anim, itLgun_UnkMotion0_Phys,
+      itLgun_UnkMotion0_Coll },
+    { -1, itLgun_UnkMotion4_Anim, itLgun_UnkMotion1_Phys,
+      itLgun_UnkMotion4_Coll },
     { -1, itLgun_UnkMotion2_Anim, itLgun_UnkMotion2_Phys, NULL },
     { 0, itLgun_UnkMotion3_Anim, itLgun_UnkMotion3_Phys, NULL },
-    { +1, itLgun_UnkMotion4_Anim, itLgun_UnkMotion4_Phys, itLgun_UnkMotion4_Coll },
-    { -1, itLgun_UnkMotion5_Anim, itLgun_UnkMotion5_Phys, itLgun_UnkMotion5_Coll },
+    { +1, itLgun_UnkMotion4_Anim, itLgun_UnkMotion4_Phys,
+      itLgun_UnkMotion4_Coll },
+    { -1, itLgun_UnkMotion5_Anim, itLgun_UnkMotion5_Phys,
+      itLgun_UnkMotion5_Coll },
 };
 
 void it_3F14_Logic16_Spawned(Item_GObj* gobj)

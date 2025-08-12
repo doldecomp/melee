@@ -37,12 +37,18 @@
 /* 2D98AC */ static void it_802D98AC(Item_GObj*);
 /* 2D98C4 */ static void it_802D98C4(HSD_JObj*, Item*);
 
-ItemStateTable it_803F83F0[] = { { -1, itHeiho_UnkMotion0_Anim, itHeiho_UnkMotion0_Phys, itHeiho_UnkMotion0_Coll },
-                                 { 0, itHeiho_UnkMotion1_Anim, itHeiho_UnkMotion1_Phys, itHeiho_UnkMotion1_Coll },
-                                 { -1, itHeiho_UnkMotion2_Anim, itHeiho_UnkMotion2_Phys, itHeiho_UnkMotion2_Coll },
-                                 { -1, itHeiho_UnkMotion3_Anim, itHeiho_UnkMotion3_Phys, itHeiho_UnkMotion3_Coll },
-                                 { 2, itHeiho_UnkMotion4_Anim, itHeiho_UnkMotion4_Phys,
-                                   itHeiho_UnkMotion4_Coll } };
+ItemStateTable it_803F83F0[] = {
+    { -1, itHeiho_UnkMotion0_Anim, itHeiho_UnkMotion0_Phys,
+      itHeiho_UnkMotion0_Coll },
+    { 0, itHeiho_UnkMotion1_Anim, itHeiho_UnkMotion1_Phys,
+      itHeiho_UnkMotion1_Coll },
+    { -1, itHeiho_UnkMotion2_Anim, itHeiho_UnkMotion2_Phys,
+      itHeiho_UnkMotion2_Coll },
+    { -1, itHeiho_UnkMotion3_Anim, itHeiho_UnkMotion3_Phys,
+      itHeiho_UnkMotion3_Coll },
+    { 2, itHeiho_UnkMotion4_Anim, itHeiho_UnkMotion4_Phys,
+      itHeiho_UnkMotion4_Coll }
+};
 
 void it_802D8618(s32 arg0, Vec3* arg1, s32 arg2, s32 arg3)
 {
@@ -151,8 +157,7 @@ void itHeiho_UnkMotion1_Phys(Item_GObj* gobj)
     PAD_STACK(8);
     ip->x40_vel.x = ip->facing_dir * attr[ip->xDD4_itemVar.heiho.x21 + 1];
     if (ip->xDD4_itemVar.heiho.x2C > 960) {
-        ip->x40_vel.y =
-            -((-0.04f * ABS(ip->x40_vel.x)) - ip->x40_vel.y);
+        ip->x40_vel.y = -((-0.04f * ABS(ip->x40_vel.x)) - ip->x40_vel.y);
     }
     it_802D9714(gobj);
     if (ip->xDD4_itemVar.heiho.x24 != 0) {
@@ -328,8 +333,7 @@ void itHeiho_UnkMotion4_Phys(Item_GObj* gobj)
     ip->x40_vel.x =
         1.5F * (ip->facing_dir * attr[ip->xDD4_itemVar.heiho.x21 + 1]);
     if (ip->xDD4_itemVar.heiho.x2C > 960) {
-        ip->x40_vel.y =
-            -((-0.04f * ABS(ip->x40_vel.x)) - ip->x40_vel.y);
+        ip->x40_vel.y = -((-0.04f * ABS(ip->x40_vel.x)) - ip->x40_vel.y);
     }
     if (ip->xDD4_itemVar.heiho.x24 != 0) {
         HSD_JObjAddRotationY(HSD_GObjGetHSDObj(gobj), 0.15707964f);

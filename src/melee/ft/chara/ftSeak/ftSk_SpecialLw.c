@@ -12,8 +12,8 @@
 #include "ftZelda/ftZd_SpecialLw.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include <math.h>
 
+#include <math.h>
 #include <baselib/gobj.h>
 
 static void fn_80114034(Fighter_GObj* gobj)
@@ -157,8 +157,8 @@ void ftSk_SpecialLw_8011444C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x16B, 0xC4C508E, fp->cur_anim_frame,
-                              1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16B, 0xC4C508E, fp->cur_anim_frame, 1.0F,
+                              0.0F, NULL);
     fp->accessory4_cb = fn_80114034;
 }
 
@@ -167,8 +167,8 @@ void ftSk_SpecialLw_801144B8(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x169, 0xC4C508E, fp->cur_anim_frame,
-                              1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, 0x169, 0xC4C508E, fp->cur_anim_frame, 1.0F,
+                              0.0F, NULL);
     fp->accessory4_cb = fn_80114034;
 }
 
@@ -225,8 +225,8 @@ void ftSk_SpecialLw_80114680(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x16C, 0xC4C508E, fp->cur_anim_frame,
-                              1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16C, 0xC4C508E, fp->cur_anim_frame, 1.0F,
+                              0.0F, NULL);
     fp->accessory4_cb = fn_801140B0;
 }
 
@@ -235,8 +235,8 @@ void ftSk_SpecialLw_801146EC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x16A, 0xC4C508E, fp->cur_anim_frame,
-                              1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16A, 0xC4C508E, fp->cur_anim_frame, 1.0F,
+                              0.0F, NULL);
     fp->accessory4_cb = fn_801140B0;
 }
 
@@ -254,7 +254,7 @@ void ftSk_SpecialLw_80114758(Fighter_GObj* gobj)
     } else {
         var_r4 = 0x16C;
     }
-    Fighter_ChangeMotionState(gobj, var_r4, 0, attributes->x70, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, var_r4, 0, attributes->x70, 1.0F, 0.0F,
+                              NULL);
     fp->accessory4_cb = fn_801140B0;
 }

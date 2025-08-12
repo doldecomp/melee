@@ -1,8 +1,6 @@
-#include <platform.h>
-
-#include "lb/forward.h"
-
 #include "gr/grbattle.h"
+
+#include <platform.h>
 
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
@@ -10,10 +8,13 @@
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
-#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
 
 #include <dolphin/mtx.h>
@@ -390,7 +391,6 @@ static void grBattle_8021A3BC(Ground_GObj* gobj)
     u8 _[20];
 
     switch (gp->u.battle.bg_state) {
-
     case BG_Waiting:
         if (gp->u.battle.bg_timer-- < 0) {
             gp->u.battle.bg_state = BG_Transitioning;

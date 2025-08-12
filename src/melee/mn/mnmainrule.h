@@ -1,8 +1,9 @@
 #ifndef MELEE_MN_MAINRULE_H
 #define MELEE_MN_MAINRULE_H
 
-#include <sysdolphin/baselib/forward.h>
 #include <placeholder.h>
+
+#include <sysdolphin/baselib/forward.h>
 
 struct mn_80231634_t {
     /*  +0 */ char pad_0[0x10];

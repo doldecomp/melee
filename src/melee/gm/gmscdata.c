@@ -1,6 +1,6 @@
-#include "gm/forward.h"
-
 #include "gmscdata.h"
+
+#include "gm/forward.h"
 
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmadventure.h>

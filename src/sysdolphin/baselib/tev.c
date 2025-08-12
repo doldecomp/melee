@@ -1,8 +1,8 @@
-#include <placeholder.h>
-
 #include "tev.h"
 
 #include "debug.h"
+
+#include <placeholder.h>
 
 #include <__mem.h>
 #include <dolphin/gx.h>

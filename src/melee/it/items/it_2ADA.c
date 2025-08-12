@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "it_2ADA.h"
+
+#include <platform.h>
 
 #include "it/inlines.h"
 #include "it/it_266F.h"

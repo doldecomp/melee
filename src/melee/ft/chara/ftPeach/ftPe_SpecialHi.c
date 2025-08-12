@@ -1,12 +1,8 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-#include <baselib/forward.h>
-
 #include "ftPe_SpecialHi.h"
 
 #include "ftPe_Init.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -16,11 +12,19 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftpickupitem.h"
 #include "ftPeach/types.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <math.h>

@@ -1,9 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include <baselib/forward.h>
-
 #include "gm_1A36.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "db/db.h"
 #include "gm/gm_unsplit.h"
@@ -21,6 +19,8 @@
 #include "lb/lbmthp.h"
 #include "lb/lbsnap.h"
 #include "lb/lbtime.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd.h>
@@ -185,8 +185,8 @@ int main(void)
     HSD_SisLib_803A6048(0xC000);
     gmMainLib_8015FBA4();
 
-    if (g_debugLevel != DbLKind_Master && db_gameLaunchButtonState & HSD_PAD_R &&
-        hsd_803931A4(-1))
+    if (g_debugLevel != DbLKind_Master &&
+        db_gameLaunchButtonState & HSD_PAD_R && hsd_803931A4(-1))
     {
         hsd_80393A54(1);
         while (!hsd_80393A04()) {

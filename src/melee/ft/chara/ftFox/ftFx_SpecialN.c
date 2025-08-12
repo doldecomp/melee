@@ -1,5 +1,3 @@
-#include "ftCommon/forward.h"
-
 #include "ftFx_SpecialN.h"
 
 #include "ftFx_Init.h"
@@ -15,6 +13,9 @@
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftpickupitem.h"

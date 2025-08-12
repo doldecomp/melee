@@ -26,11 +26,15 @@
 /* 284160 */ static bool itHeart_UnkMotion4_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F56C8[] = {
-    { 0xFFFFFFFF, itHeart_UnkMotion0_Anim, itHeart_UnkMotion0_Phys, itHeart_UnkMotion0_Coll },
-    { 0xFFFFFFFF, itHeart_UnkMotion3_Anim, itHeart_UnkMotion3_Phys, itHeart_UnkMotion3_Coll },
+    { 0xFFFFFFFF, itHeart_UnkMotion0_Anim, itHeart_UnkMotion0_Phys,
+      itHeart_UnkMotion0_Coll },
+    { 0xFFFFFFFF, itHeart_UnkMotion3_Anim, itHeart_UnkMotion3_Phys,
+      itHeart_UnkMotion3_Coll },
     { 0xFFFFFFFF, itHeart_UnkMotion2_Anim, itHeart_UnkMotion2_Phys, NULL },
-    { 0xFFFFFFFF, itHeart_UnkMotion3_Anim, itHeart_UnkMotion3_Phys, itHeart_UnkMotion3_Coll },
-    { 0xFFFFFFFF, itHeart_UnkMotion4_Anim, itHeart_UnkMotion4_Phys, itHeart_UnkMotion4_Coll },
+    { 0xFFFFFFFF, itHeart_UnkMotion3_Anim, itHeart_UnkMotion3_Phys,
+      itHeart_UnkMotion3_Coll },
+    { 0xFFFFFFFF, itHeart_UnkMotion4_Anim, itHeart_UnkMotion4_Phys,
+      itHeart_UnkMotion4_Coll },
 };
 
 Item_GObj* it_80283AE4(Item_GObj* gobj, Vec3* pos, s32 arg2)

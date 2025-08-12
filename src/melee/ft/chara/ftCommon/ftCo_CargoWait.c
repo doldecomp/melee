@@ -1,7 +1,3 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-
 #include "ftCo_CargoWait.h"
 
 #include "ftCo_09C4.h"
@@ -12,7 +8,12 @@
 #include "ftCo_CargoWalk.h"
 #include "ftCo_Shouldered.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ftDonkey/types.h"
@@ -26,7 +27,8 @@ bool ftCo_8009B4D0(Fighter_GObj* gobj)
     return false;
 }
 
-static inline void inlineA0(Fighter_GObj* gobj, void (*cb)(Fighter_GObj* gobj, int))
+static inline void inlineA0(Fighter_GObj* gobj,
+                            void (*cb)(Fighter_GObj* gobj, int))
 {
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, fp->x2CC->x4_motion_state, Ft_MF_None, 0,

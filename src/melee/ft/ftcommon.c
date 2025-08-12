@@ -1,6 +1,3 @@
-#include "ft/forward.h"
-#include "it/forward.h"
-
 #include "ftcommon.h"
 
 #include "fighter.h"
@@ -12,6 +9,9 @@
 #include "ftparts.h"
 
 #include "ef/eflib.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
@@ -27,6 +27,9 @@
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCommon/ftpickupitem.h"
 #include "gm/gm_unsplit.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "it/items/it_2E5A.h"
@@ -42,6 +45,7 @@
 #include "vi/vi1202.h"
 
 #include <common_structs.h>
+#include <math.h>
 #include <trigf.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
@@ -49,7 +53,6 @@
 #include <baselib/jobj.h>
 #include <baselib/rumble.h>
 #include <melee/it/items/itpeachparasol.h>
-#include <math.h>
 
 const Vec3 ftCo_803B74A0 = { 0 };
 

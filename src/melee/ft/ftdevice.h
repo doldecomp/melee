@@ -1,8 +1,8 @@
 #ifndef GALE01_0C0658
 #define GALE01_0C0658
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/types.h"
 

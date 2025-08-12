@@ -2,6 +2,7 @@
 #define MELEE_VI_0401_H
 
 #include <placeholder.h>
+
 #include <baselib/forward.h>
 
 /* 31D030 */ UNK_RET un_8031D030(UNK_PARAMS);

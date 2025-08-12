@@ -3,10 +3,11 @@
 
 #include <placeholder.h>
 
+#include "gm/types.h"
+
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
-#include "gm/types.h"
 
 struct EventData;
 

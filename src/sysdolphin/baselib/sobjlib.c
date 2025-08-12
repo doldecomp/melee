@@ -20,4 +20,3 @@ void HSD_SObjLib_803A44A4(void)
 {
     HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, 0x9C, 4);
 }
-

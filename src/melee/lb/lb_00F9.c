@@ -2,9 +2,9 @@
 
 #include "lb/types.h"
 
+#include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/cobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <melee/sc/types.h>
@@ -138,11 +138,12 @@ void lb_800138D8(HSD_GObj* gobj, s8 arg1)
 
 HSD_CObj* lb_80013B14(HSD_CameraDescPerspective* desc)
 {
-    HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc* ) desc);
+    HSD_CObj* cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) desc);
     Scissor scissor;
 
     if (HSD_CObjGetProjectionType(cobj) == 1 &&
-        HSD_CObjGetAspect(cobj) == 1.18F) {
+        HSD_CObjGetAspect(cobj) == 1.18F)
+    {
         HSD_CObjSetAspect(cobj, 1.2173333F);
     }
     HSD_CObjGetScissor(cobj, &scissor);

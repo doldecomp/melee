@@ -1,13 +1,15 @@
 #include "gm_1A45.h"
 
-#include "gm_unsplit.h"
 #include "gm_1A36.h"
+
+#include "gm_1A45.static.h"
+
+#include "gm_unsplit.h"
 
 #include "db/db.h"
 #include "gm/gmscdata.h"
 #include "lb/lb_00F9.h"
 #include "lb/lb_0192.h"
-#include "lb/lbaudio_ax.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lbcardnew.h"
@@ -15,27 +17,17 @@
 #include "lb/lbheap.h"
 #include "un/un_2FC9.h"
 
+#include <dolphin/os/OSThread.h>
 #include <baselib/controller.h>
 #include <baselib/gobjproc.h>
 #include <baselib/initialize.h>
-#include <baselib/perf.h>
 #include <baselib/leak.h>
 #include <baselib/particle.h>
+#include <baselib/perf.h>
 #include <baselib/sobjlib.h>
 
-#include <dolphin/os/OSThread.h>
-
-#include "gm_1A45.static.h"
-
 static u64 gm_803DA888[8] = {
-    0,
-    0x82FFFA,
-    0,
-    0x8EFFFA,
-    0x800FFA,
-    0x808FFA,
-    0x800FFA,
-    0,
+    0, 0x82FFFA, 0, 0x8EFFFA, 0x800FFA, 0x808FFA, 0x800FFA, 0,
 };
 
 u64 gm_803DA8C8[2] = { -1, -1 };
@@ -224,10 +216,11 @@ void gm_801A4BD4(void)
     gm_801A4B40(0);
     gm_801A4B50(0);
 
-    lb_80019880(1.0F/60 * OS_TIMER_CLOCK);
+    lb_80019880(1.0F / 60 * OS_TIMER_CLOCK);
     HSD_GObj_803912E0(&gm_80479D48.initdata);
     gm_80479D48.initdata.gproc_pri_max = 0x18;
-    HSD_SObjLib_804D7960 = HSD_GObj_803912A8(&gm_80479D48.initdata, &HSD_SObjLib_8040C3A4);
+    HSD_SObjLib_804D7960 =
+        HSD_GObj_803912A8(&gm_80479D48.initdata, &HSD_SObjLib_8040C3A4);
     HSD_SObjLib_803A44A4();
     gm_80479D48.initdata.unk_2 = &gm_80479D58.unk_28;
     HSD_GObj_80391304(&gm_80479D48.initdata);
@@ -317,7 +310,8 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
                 }
             }
             if (gm_80479D58.unk_10 != gm_80479D58.unk_11 ||
-                    temp_r25->unk_12 != temp_r25->unk_13) {
+                temp_r25->unk_12 != temp_r25->unk_13)
+            {
                 temp_r25->unk_20 = maybe_gm_801A48A4(temp_r25->unk_10);
                 temp_r25->unk_11 = temp_r25->unk_10;
                 temp_r25->unk_13 = temp_r25->unk_12;
@@ -376,4 +370,3 @@ void gm_801A4D34(void (*arg0)(void), MinorSceneInfo* arg1)
     }
     HSD_VIWaitXFBFlush();
 }
-

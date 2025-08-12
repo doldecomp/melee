@@ -1,6 +1,7 @@
 #include "lbmemory.h"
 
 #include <platform.h>
+
 #include <baselib/debug.h>
 
 struct Allocator {

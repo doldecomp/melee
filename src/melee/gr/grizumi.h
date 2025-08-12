@@ -3,12 +3,11 @@
 
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 /* 1CBB84 */ void grIzumi_801CBB84(bool);
 /* 1CBB88 */ void grIzumi_801CBB88(void);

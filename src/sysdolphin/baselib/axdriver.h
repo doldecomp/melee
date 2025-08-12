@@ -1,8 +1,8 @@
 #ifndef _AXDRIVER_H_
 #define _AXDRIVER_H_
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h"
 

@@ -9,8 +9,8 @@
 #include <baselib/object.h>
 
 typedef struct _mn_unk1 {
-    u8 x0; // current menu
-    u8 x1; // previous menu
+    u8 x0;  // current menu
+    u8 x1;  // previous menu
     u16 x2; // selected index
     s32 x4; // selected value
     u64 x8;

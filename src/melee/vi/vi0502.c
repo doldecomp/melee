@@ -1,6 +1,3 @@
-#include "ft/forward.h"
-#include <baselib/forward.h>
-
 #include "vi0502.h"
 
 #include "baselib/gobj.h"
@@ -8,9 +5,12 @@
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
+
+#include "ft/forward.h"
+
 #include "ft/ftdemo.h"
-#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
+#include "gm/gm_unsplit.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
@@ -22,6 +22,8 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "vi/vi.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>

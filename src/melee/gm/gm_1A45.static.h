@@ -1,6 +1,6 @@
 #include <baselib/gobj.h>
-#include <melee/sc/types.h>
 #include <melee/gm/types.h>
+#include <melee/sc/types.h>
 
 struct gm_80479D58_t {
     /* 0x00 */ u32 unk_0;
@@ -21,7 +21,6 @@ struct gm_80479D58_t {
     /* 0x38 */ u8 unk_38_1 : 1;
 }; /* size = 0x40 */
 STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
-
 
 /* 479D30 */ static struct {
     HSD_GObjLibInitDataType initdata;

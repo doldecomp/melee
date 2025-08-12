@@ -1,11 +1,11 @@
 #ifndef GALE01_00E9F0
 #define GALE01_00E9F0
 
+#include "common_structs.h"
+
 #include <platform.h>
 
 #include <baselib/forward.h>
-
-#include "common_structs.h"
 
 #include <dolphin/mtx.h>
 

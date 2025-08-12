@@ -1,15 +1,18 @@
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-
 #include "ft/chara/ftCommon/ftCo_DownSpot.h"
 
+#include <placeholder.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/inlines.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_DownBound.h"
 
 void ftCo_DownSpot_Enter(Fighter_GObj* gobj)
