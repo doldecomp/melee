@@ -56,7 +56,9 @@ jobs:
             set -x
             config_args="--map --require-protos $config_args"
             run_configure
-            set +e
+
+            set +e pipefail
+
             ninja
 
             result=0
