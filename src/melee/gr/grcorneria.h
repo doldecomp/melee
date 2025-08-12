@@ -5,9 +5,7 @@
 #include <platform.h>
 
 #include "gr/forward.h"
-
-#include "it/inlines.h"
-
+#include "it/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -21,8 +19,6 @@
 /* 1DD534 */ HSD_GObj* grCorneria_801DD534(int);
 /* 1DD620 */ void grCorneria_801DD620(Ground_GObj*);
 /* 1DD64C */ bool grCorneria_801DD64C(Ground_GObj*);
-/* 1DD654 */ void grCorneria_801DD654(Ground_GObj*);
-/* 1DD658 */ void grCorneria_801DD658(Ground_GObj*);
 /* 1DD65C */ void fn_801DD65C(Ground_GObj* gobj);
 /* 1DD674 */ void grCorneria_801DD674(Ground_GObj*);
 /* 1DD9A0 */ bool grCorneria_801DD9A0(Ground_GObj*);
@@ -34,7 +30,6 @@
 /* 1DDDA8 */ UNK_RET grCorneria_801DDDA8(UNK_PARAMS);
 /* 1DDE88 */ UNK_RET grCorneria_801DDE88(UNK_PARAMS);
 /* 1DE024 */ void grCorneria_801DE024(Ground_GObj*);
-/* 1DE4BC */ void grCorneria_801DE4BC(Ground_GObj*);
 /* 1DE4C0 */ void grCorneria_801DE4C0(Ground_GObj*);
 /* 1DE560 */ bool grCorneria_801DE560(Ground_GObj*);
 /* 1DE568 */ void grCorneria_801DE568(Ground_GObj*);

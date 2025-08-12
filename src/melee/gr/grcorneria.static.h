@@ -4,7 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "it/inlines.h"
+#include "gr/forward.h"
 
 /* 1DD654 */ static void grCorneria_801DD654(Ground_GObj*);
 /* 1DD658 */ static void grCorneria_801DD658(Ground_GObj*);
