@@ -61,7 +61,7 @@ jobs:
 
             ninja diff | while IFS= read -r line; do
                 echo "$line"
-                case "$line" in ERROR*) exit 1 ;; esac
+                case "$line" in *ERROR*) exit 1 ;; esac
             done
           ;;
           'diff')
