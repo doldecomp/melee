@@ -282,13 +282,13 @@ int lbSnap_8001DE8C(void* arg0)
     return ret;
 }
 
-void lbSnap_8001DF20(void)
+int lbSnap_8001DF20(void)
 {
     lbSnap_803BACC8.x14 =
         lbSnap_80433380.x0->xC +
         ((int) &lbSnap_80433380.x0->x38 - (int) &lbSnap_80433380.x0->x0);
     lbSnap_803BACC8.x1C = lbSnap_80433380.x0;
-    lb_8001C4A8(&lbSnap_803BACC8.x14, &lbSnap_803BACC8);
+    return lb_8001C4A8(&lbSnap_803BACC8.x14, &lbSnap_803BACC8);
 }
 
 int lbSnap_8001DF6C(int chan)
