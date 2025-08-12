@@ -61,7 +61,7 @@ jobs:
             awk --version
             ninja
             ninja diff
-            ninja diff | awk '/^ERROR\b/ { exit 1 }'
+            awk '/^ERROR\b/ { exit 1 }' < <(ninja diff)
             result="$?"
             echo "result: $result"
             exit "$result"
