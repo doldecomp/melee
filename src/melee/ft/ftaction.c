@@ -1,9 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftaction.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -18,6 +16,9 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_09F7.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcommand.h"
@@ -968,20 +969,23 @@ void ftAction_80072320(Fighter_GObj* gobj, FtCmdState* cmd)
     case 0:
         sp8 = 0;
         spC = -1;
-        M2C_FIELD(temp_r31, int*, 0x2160) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+        M2C_FIELD(temp_r31, int*, 0x2160) = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 1:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x36;
         spC = -1;
-        M2C_FIELD(temp_r31, int*, 0x214C) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+        M2C_FIELD(temp_r31, int*, 0x214C) = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 2:
         if (!(((u8) M2C_FIELD(temp_r31, u8*, 0x2225) >> 1U) & 1)) {
             sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
                   (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x1E;
             spC = -1;
-            M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+            M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(
+                lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
             return;
         }
         temp_r0_2 = M2C_FIELD(temp_r31, int*, 4);
@@ -999,32 +1003,37 @@ void ftAction_80072320(Fighter_GObj* gobj, FtCmdState* cmd)
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x1E;
         spC = -1;
-        M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+        M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 3:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x42;
         spC = -1;
-        M2C_FIELD(temp_r31, int*, 0x2150) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+        M2C_FIELD(temp_r31, int*, 0x2150) = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 4:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x4E;
         spC = -1;
-        M2C_FIELD(temp_r31, int*, 0x2154) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+        M2C_FIELD(temp_r31, int*, 0x2154) = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 5:
         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x5A;
         spC = -1;
-        M2C_FIELD(temp_r31, int*, 0x2158) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+        M2C_FIELD(temp_r31, int*, 0x2158) = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         return;
     case 6:
         if (!(((u8) M2C_FIELD(temp_r31, u8*, 0x2225) >> 1U) & 1)) {
             sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
                   (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x2A;
             spC = -1;
-            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(
+                lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
             return;
         }
         temp_r0_3 = M2C_FIELD(temp_r31, int*, 4);
@@ -1037,10 +1046,10 @@ void ftAction_80072320(Fighter_GObj* gobj, FtCmdState* cmd)
             }
         } else {
         block_31:
-            sp8 = temp_r31->player_id +
-                  temp_r31->x221F_b4 + 0x2A;
+            sp8 = temp_r31->player_id + temp_r31->x221F_b4 + 0x2A;
             spC = -1;
-            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
+            M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(
+                lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
         }
         break;
     }

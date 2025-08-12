@@ -1,8 +1,8 @@
 #ifndef MELEE_LB_TYPES_H
 #define MELEE_LB_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "lb/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
@@ -117,7 +117,7 @@ struct HurtCapsule {
     u8 x24_b7 : 1; // 0x24 0x01
     Vec3 a_pos;
     Vec3 b_pos;
-    int bone_idx;      // 0x40
+    int bone_idx; // 0x40
 };
 
 struct FighterHurtCapsule {

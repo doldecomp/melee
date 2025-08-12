@@ -1,11 +1,11 @@
 #include "lbheap.static.h"
 
-#include <melee/lb/lbmemory.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/initialize.h>
 #include <baselib/memory.h>
+#include <melee/lb/lbmemory.h>
 
 struct {
     u32 unk0;
@@ -13,11 +13,8 @@ struct {
     u32 unk8;
     u32 unkC;
 } lbHeap_803BA380[5] = {
-    { 2, 1, 6, 0x800 },
-    { 3, 1, 2, 0x4F8800 },
-    { 4, 2, 6, 0x64B400 },
-    { 5, 4, 6, 0x96C800 },
-    { 6, 0, 0, 0 },
+    { 2, 1, 6, 0x800 },    { 3, 1, 2, 0x4F8800 }, { 4, 2, 6, 0x64B400 },
+    { 5, 4, 6, 0x96C800 }, { 6, 0, 0, 0 },
 };
 
 void lbHeap_800158D0(int arg0, int arg1)
@@ -97,12 +94,7 @@ int lbHeap_80015D6C(u32 heap0, UNK_T cb, u32 heap1)
 }
 
 char* lbHeap_803BA448[] = {
-    "     Hsd",
-    "    ARAM",
-    "     Seq",
-    "    Stay",
-    "    AllM",
-    "    AllA",
+    "     Hsd", "    ARAM", "     Seq", "    Stay", "    AllM", "    AllA",
 };
 
 void lbHeap_80015DF8(void)
@@ -172,7 +164,8 @@ void lbHeap_80015F3C(void)
                 temp_r5->unk_18 = (s32) lbHeap_80431FA0.unk_0;
                 break;
             case 2:
-                temp_r5->unk_18 = (u32) lbHeap_80431FA0.unk_4 - temp_r5->unk_1C;
+                temp_r5->unk_18 =
+                    (u32) lbHeap_80431FA0.unk_4 - temp_r5->unk_1C;
                 break;
             case 4:
                 temp_r5->unk_18 = (s32) lbHeap_80431FA0.unk_8;

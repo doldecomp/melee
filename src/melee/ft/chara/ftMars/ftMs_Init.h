@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftMars/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 136258 */ void ftMs_Init_OnDeath(HSD_GObj* gobj);
 /* 1362B0 */ void ftMs_Init_OnItemPickup(HSD_GObj* gobj, bool flag);

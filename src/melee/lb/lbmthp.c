@@ -1,7 +1,7 @@
 #include "lbmthp.static.h"
 
-#include <melee/lb/types.h>
 #include <melee/lb/lbanim.h>
+#include <melee/lb/types.h>
 
 /// #fn_8001E910
 

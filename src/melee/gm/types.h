@@ -40,11 +40,11 @@ struct MinorScene {
     /* 04 */ void (*Prep)(MinorScene*);
     /* 08 */ void (*Decide)(MinorScene*);
 
-             struct MinorSceneInfo {
-    /* 0C */     u8 class_id;
-    /* 10 */     void* unk_struct_0; ///< data passed to OnLoad callback
-    /* 14 */     void* unk_struct_1; ///< data passed to OnLeave callback
-             } info;
+    struct MinorSceneInfo {
+        /* 0C */ u8 class_id;
+        /* 10 */ void* unk_struct_0; ///< data passed to OnLoad callback
+        /* 14 */ void* unk_struct_1; ///< data passed to OnLeave callback
+    } info;
 };
 
 struct MajorScene {
@@ -93,15 +93,15 @@ struct sceneData {
 };
 
 struct gmm_x1CB0 {
-/* +0 */ u8 item_freq;
-/* +1 */ u8 pad_x1[0x8 - 0x1];
-/* +8 */ u64 item_mask;
-/* +10 */ u8 rumble[4];
-/* +14 */ u8 sound_balance;
-/* +15 */ u8 deflicker;
-/* +16 */ u8 saved_language; /* 0x1CC6 */
-/* +18 */ u32 stage_mask;
-/* +1C */ u8 padding_x16[0x1];
+    /* +0 */ u8 item_freq;
+    /* +1 */ u8 pad_x1[0x8 - 0x1];
+    /* +8 */ u64 item_mask;
+    /* +10 */ u8 rumble[4];
+    /* +14 */ u8 sound_balance;
+    /* +15 */ u8 deflicker;
+    /* +16 */ u8 saved_language; /* 0x1CC6 */
+    /* +18 */ u32 stage_mask;
+    /* +1C */ u8 padding_x16[0x1];
 };
 
 struct gmm_x1F2C {
@@ -321,11 +321,11 @@ struct gmm_x0 {
     /* 0x06D0 */ VsModeData unk_6D0; ///< super sudden death
     /* 0x0810 */ VsModeData unk_810; ///< invisible melee
     /* 0x0950 */ VsModeData unk_950;
-    /* 0x0A90 */ VsModeData unk_A90; ///< fixed camera mode
-    /* 0x0BD0 */ VsModeData unk_BD0; ///< single button melee
-    /* 0x0D10 */ VsModeData unk_D10; ///< training mode
-    /* 0x0E50 */ VsModeData unk_E50; ///< tiny melee
-    /* 0x0F90 */ VsModeData unk_F90; ///< giant melee
+    /* 0x0A90 */ VsModeData unk_A90;  ///< fixed camera mode
+    /* 0x0BD0 */ VsModeData unk_BD0;  ///< single button melee
+    /* 0x0D10 */ VsModeData unk_D10;  ///< training mode
+    /* 0x0E50 */ VsModeData unk_E50;  ///< tiny melee
+    /* 0x0F90 */ VsModeData unk_F90;  ///< giant melee
     /* 0x10D0 */ VsModeData unk_10D0; ///< stamina melee
     /* 0x1210 */ VsModeData unk_1210; ///< slowmo melee
     /* 0x1350 */ VsModeData unk_1350; ///< lightning melee

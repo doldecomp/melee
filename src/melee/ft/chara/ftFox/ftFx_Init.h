@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftFox/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 0E5534 */ bool ftFx_Init_800E5534(HSD_GObj* gobj);
 /* 0E5554 */ void ftFx_Init_OnDeath(HSD_GObj* gobj);

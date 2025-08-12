@@ -1,10 +1,10 @@
 #ifndef GALE01_1147C0
 #define GALE01_1147C0
 
+#include "ft/types.h"
+
 #include "ftNess/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 1147C0 */ void ftNs_Init_OnDeath(HSD_GObj* gobj);
 /* 11480C */ void ftNs_Init_OnLoad(HSD_GObj* gobj);

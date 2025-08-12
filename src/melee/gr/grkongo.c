@@ -1,4 +1,4 @@
-#include "mp/forward.h"
+#include "gr/grkongo.h"
 
 #include "grkongo.static.h"
 
@@ -8,13 +8,15 @@
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
-#include "gr/grkongo.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/stage.h"
 #include "it/items/itklap.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 #include "MSL/math.h"
 #include "MSL/math_ppc.h" // IWYU pragma: keep

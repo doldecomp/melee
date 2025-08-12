@@ -12,8 +12,10 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F7E08[] = {
-    { 0, itSuikun_UnkMotion0_Anim, itSuikun_UnkMotion0_Phys, itSuikun_UnkMotion0_Coll },
-    { -1, itSuikun_UnkMotion1_Anim, itSuikun_UnkMotion1_Phys, itSuikun_UnkMotion1_Coll },
+    { 0, itSuikun_UnkMotion0_Anim, itSuikun_UnkMotion0_Phys,
+      itSuikun_UnkMotion0_Coll },
+    { -1, itSuikun_UnkMotion1_Anim, itSuikun_UnkMotion1_Phys,
+      itSuikun_UnkMotion1_Coll },
 };
 
 void it_2725_Logic14_Spawned(Item_GObj* gobj)

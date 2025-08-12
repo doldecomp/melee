@@ -1,21 +1,27 @@
 #include <platform.h>
 
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "ftKoopa/forward.h"
-#include <baselib/forward.h>
-
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
+
+#include "ftKoopa/forward.h"
+
 #include "ftKoopa/ftKp_Init.h"
+
+#include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 

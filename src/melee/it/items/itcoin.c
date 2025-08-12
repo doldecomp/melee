@@ -1,12 +1,13 @@
-#include "it/forward.h"
-
 #include "itcoin.h"
 
 #include "cm/camera.h"
-#include "gm/gm_unsplit.h"
 #include "gm/gm_1A36.h"
+#include "gm/gm_unsplit.h"
 #include "gr/grfigureget.h"
 #include "gr/ground.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -44,12 +45,17 @@
 /* 2F1FE0 */ static bool itCoin_UnkMotion5_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F93C8[] = {
-    { -1, itCoin_UnkMotion0_Anim, itCoin_UnkMotion0_Phys, itCoin_UnkMotion0_Coll },
-    { -1, itCoin_UnkMotion1_Anim, itCoin_UnkMotion1_Phys, itCoin_UnkMotion1_Coll },
+    { -1, itCoin_UnkMotion0_Anim, itCoin_UnkMotion0_Phys,
+      itCoin_UnkMotion0_Coll },
+    { -1, itCoin_UnkMotion1_Anim, itCoin_UnkMotion1_Phys,
+      itCoin_UnkMotion1_Coll },
     { -1, itCoin_UnkMotion2_Anim, itCoin_UnkMotion2_Phys, NULL },
-    { -1, itCoin_UnkMotion3_Anim, itCoin_UnkMotion3_Phys, itCoin_UnkMotion3_Coll },
-    { -1, itCoin_UnkMotion4_Anim, itCoin_UnkMotion4_Phys, itCoin_UnkMotion4_Coll },
-    { -1, itCoin_UnkMotion5_Anim, itCoin_UnkMotion5_Phys, itCoin_UnkMotion5_Coll },
+    { -1, itCoin_UnkMotion3_Anim, itCoin_UnkMotion3_Phys,
+      itCoin_UnkMotion3_Coll },
+    { -1, itCoin_UnkMotion4_Anim, itCoin_UnkMotion4_Phys,
+      itCoin_UnkMotion4_Coll },
+    { -1, itCoin_UnkMotion5_Anim, itCoin_UnkMotion5_Phys,
+      itCoin_UnkMotion5_Coll },
 };
 
 void it_802F13B4(Item_GObj* gobj, int arg1)

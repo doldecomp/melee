@@ -1,8 +1,8 @@
 #ifndef MELEE_IF_IFALL_H
 #define MELEE_IF_IFALL_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include <baselib/forward.h>
 

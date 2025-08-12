@@ -1,12 +1,14 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "baselib/forward.h"
-#include "it/forward.h"
-
 #include "itmball.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
+#include "baselib/forward.h"
+
 #include "ef/efasync.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"

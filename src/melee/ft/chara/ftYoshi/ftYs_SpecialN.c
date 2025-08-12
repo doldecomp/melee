@@ -166,8 +166,8 @@ void fn_8012D1AC(Fighter_GObj* gobj)
     u8 _[8];
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C509AU, fp->cur_anim_frame,
-                              0, 1, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C509AU, fp->cur_anim_frame, 0,
+                              1, NULL);
     ftCommon_8007E2D0((Fighter*) gobj->user_data, 4, fn_8012CF7C, fn_8012CEE0,
                       ftCo_800BBB8C);
 }
@@ -310,9 +310,8 @@ static void ftYs_SpecialN1_0_Anim_inline(Fighter_GObj* gobj)
     if ((fp->cmd_vars[0]) && (Fighter_GetVictimGobj(fp) != NULL)) {
         fp->cmd_vars[0] = 0;
         fp->cmd_vars[1] = 0;
-        Fighter_ChangeMotionState(gobj, 0x15D, 0x80012U, ftYs_Init_804D9A38,
-                                  1, ftYs_Init_804D9A38,
-                                  NULL);
+        Fighter_ChangeMotionState(gobj, 0x15D, 0x80012U, ftYs_Init_804D9A38, 1,
+                                  ftYs_Init_804D9A38, NULL);
         ftCommon_8007E2F4(fp, 0x1FF);
     }
 }

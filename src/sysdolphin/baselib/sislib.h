@@ -1,13 +1,14 @@
 #ifndef SYSDOLPHIN_BASELIB_SISLIB_H
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
-#include <platform.h>
 #include <placeholder.h>
-
-#include "baselib/forward.h"
+#include <platform.h>
 
 #include "baselib/archive.h"
 #include "baselib/cobj.h"
+
+#include "baselib/forward.h"
+
 #include "dolphin/gx/GXStruct.h"
 
 #include <dolphin/mtx.h>

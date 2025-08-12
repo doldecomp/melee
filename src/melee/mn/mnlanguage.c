@@ -11,8 +11,8 @@
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/inlines.h>
-#include <melee/mn/mnmain.h>
 #include <melee/mn/mnlanguage.h>
+#include <melee/mn/mnmain.h>
 
 extern HSD_Archive* mn_804D6BB8;
 static HSD_GObj* mnLanguage_804D6C50;

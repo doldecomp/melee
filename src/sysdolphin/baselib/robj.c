@@ -1,5 +1,3 @@
-#include <placeholder.h>
-
 #include "robj.h"
 
 #include "aobj.h"
@@ -9,10 +7,12 @@
 #include "id.h"
 #include "jobj.h"
 #include "list.h"
+#include "memory.h"
 #include "mtx.h"
 #include "object.h"
-#include "memory.h"
 #include "util.h"
+
+#include <placeholder.h>
 
 #include <__mem.h>
 #include <math.h>
@@ -314,7 +314,8 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 
 static int HSD_RObj_80406E74[3] = { 0x32, 0x33, 0x34 };
 
-static void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*, int, HSD_ObjData*))
+static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
+                                  void (*arg2)(void*, int, HSD_ObjData*))
 {
     HSD_JObj* jobj;
     int i;
@@ -334,7 +335,8 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*,
         while (robj != NULL) {
             if (((robj->flags & 0x80000000) ? 1 : 0) &&
                 (robj->flags & 0x70000000) == 0x10000000 &&
-                (robj->flags & 0x0FFFFFFF) == 4) {
+                (robj->flags & 0x0FFFFFFF) == 4)
+            {
                 break;
             }
             robj = robj->next;
@@ -343,7 +345,9 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*,
     if (robj == NULL) {
         return;
     }
-    if (!(HSD_JObjGetFlags(robj->u.jobj) & 8) || jobj_parent(robj->u.jobj) == NULL) {
+    if (!(HSD_JObjGetFlags(robj->u.jobj) & 8) ||
+        jobj_parent(robj->u.jobj) == NULL)
+    {
         PSMTXCopy(HSD_JObjGetMtxPtr(robj->u.jobj), sp80);
         jobj = obj;
 
@@ -362,12 +366,11 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*,
             sp70.p.x *= var_f1;
             sp70.p.y *= var_f1;
             sp70.p.z *= var_f1;
-            arg2(obj, HSD_RObj_80406E74[i], (HSD_ObjData* ) &sp70);
+            arg2(obj, HSD_RObj_80406E74[i], (HSD_ObjData*) &sp70);
         }
     } else {
-        HSD_MtxInverseConcat(
-                HSD_JObjGetMtxPtr(jobj_parent(robj->u.jobj)),
-                HSD_JObjGetMtxPtr(robj->u.jobj), sp40);
+        HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(robj->u.jobj)),
+                             HSD_JObjGetMtxPtr(robj->u.jobj), sp40);
         jobj = obj;
 
         for (i = 0; i < 3; i++) {
@@ -393,9 +396,8 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*,
         jobj = jobj_parent(robj->u.jobj);
         while (jobj != NULL) {
             if (jobj_parent(jobj) != NULL) {
-                HSD_MtxInverseConcat(
-                        HSD_JObjGetMtxPtr(jobj_parent(jobj)),
-                        HSD_JObjGetMtxPtr(jobj), sp80);
+                HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(jobj)),
+                                     HSD_JObjGetMtxPtr(jobj), sp80);
             } else {
                 PSMTXCopy(HSD_JObjGetMtxPtr(jobj), sp80);
             }
@@ -429,7 +431,8 @@ static void resolveCnsOrientation(HSD_RObj* robj, void* obj, void (*arg2)(void*,
     arg2(obj, 0x37, NULL);
 }
 
-static void resolveLimits(HSD_RObj* robj, void* obj, HSD_ObjUpdateFunc update_func)
+static void resolveLimits(HSD_RObj* robj, void* obj,
+                          HSD_ObjUpdateFunc update_func)
 {
     HSD_JObj* jobj = (HSD_JObj*) obj;
     HSD_RObj* rp;
@@ -679,8 +682,8 @@ static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
 extern float HSD_ByteCodeEval(u8*, float*, u32);
 
 static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
-                        HSD_ObjUpdateFunc update_func) {
-
+                        HSD_ObjUpdateFunc update_func)
+{
     HSD_Rvalue* rvalue;
     HSD_JObj* jobj;
     Vec3 scale;
@@ -707,9 +710,10 @@ static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
         arg_buf = HSD_MemAlloc(arg_buf_size * sizeof(float));
     }
     if (arg_buf_size < exp->nb_args) {
-        OSReport("Number of argment of expression exceeds the argument buffer\n"
-                 "size. (requested num of arg %d, allocated %d)\n",
-                 exp->nb_args, arg_buf_size);
+        OSReport(
+            "Number of argment of expression exceeds the argument buffer\n"
+            "size. (requested num of arg %d, allocated %d)\n",
+            exp->nb_args, arg_buf_size);
         HSD_Panic(__FILE__, 0x45E, "");
     }
     cur_arg = arg_buf;

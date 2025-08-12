@@ -1,12 +1,13 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-
 #include "ftCo_ShieldBreakFall.h"
 
 #include "ftCo_ShieldBreakDown.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
 

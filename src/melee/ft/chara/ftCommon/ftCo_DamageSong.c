@@ -1,9 +1,9 @@
-#include <placeholder.h>
-
 #include "ftCo_DamageSong.h"
 
 #include "ftCo_0C35.h"
 #include "ftCo_Lift.h"
+
+#include <placeholder.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

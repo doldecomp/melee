@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftZd_SpecialS.h"
 
 #include "ftZd_Init.h"
+
+#include <platform.h>
 
 #include "ef/efsync.h"
 #include "ft/fighter.h"

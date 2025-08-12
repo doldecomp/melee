@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "ftCa_SpecialN.h"
 
 #include "math.h"
 #include "types.h"
+
+#include <platform.h>
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"

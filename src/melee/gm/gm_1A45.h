@@ -1,9 +1,10 @@
 #ifndef MELEE_GM_1A45_H
 #define MELEE_GM_1A45_H
 
+#include <placeholder.h>
+
 #include <baselib/forward.h>
 #include <melee/gm/forward.h>
-#include <placeholder.h>
 
 /* 1A45E8 */ bool gm_801A45E8(int bit);
 /* 1A4624 */ int gm_801A4624(void);

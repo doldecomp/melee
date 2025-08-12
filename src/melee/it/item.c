@@ -1,5 +1,3 @@
-#include "lb/forward.h"
-
 #include "item.h"
 
 #include "it_266F.h"
@@ -18,6 +16,9 @@
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"

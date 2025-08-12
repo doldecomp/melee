@@ -1,6 +1,6 @@
-#include "it/forward.h"
-
 #include "itchicoritaleaf.h"
+
+#include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -10,7 +10,8 @@
 #include "it/item.h"
 
 ItemStateTable it_803F7AC8[] = {
-    { 0, itChicoritaleaf_UnkMotion0_Anim, itChicoritaleaf_UnkMotion0_Phys, itChicoritaleaf_UnkMotion0_Coll },
+    { 0, itChicoritaleaf_UnkMotion0_Anim, itChicoritaleaf_UnkMotion0_Phys,
+      itChicoritaleaf_UnkMotion0_Coll },
 };
 
 void it_802C9B20(Item_GObj* chicorita_gobj)

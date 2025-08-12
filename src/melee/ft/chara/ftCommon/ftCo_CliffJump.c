@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "ftCo_CliffJump.h"
 
 #include "ftCo_CliffClimb.h"
 #include "ftCo_FallSpecial.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

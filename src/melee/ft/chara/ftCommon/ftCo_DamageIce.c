@@ -1,11 +1,3 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ftCommon/forward.h"
-#include "lb/forward.h"
-#include <baselib/mtx.h>
-#include <baselib/forward.h>
-
 #include "ftCo_DamageIce.h"
 
 #include "ftCo_DownAttack.h"
@@ -15,6 +7,9 @@
 #include "ftCo_HammerWait.h"
 #include "ftCo_Lift.h"
 #include "ftCo_PassiveStand.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -29,18 +24,27 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <math_ppc.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
+#include <baselib/mtx.h>
 #include <baselib/random.h>
 
 /* 0909D0 */ static void ftCo_800909D0(Fighter* fp);
@@ -87,7 +91,8 @@ void ftCo_800909D0(Fighter* fp)
     }
 }
 
-static inline void ftCo_SpawnEffect_x415(Fighter_GObj* gobj, HSD_JObj* joint, float* param)
+static inline void ftCo_SpawnEffect_x415(Fighter_GObj* gobj, HSD_JObj* joint,
+                                         float* param)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efAsync_Spawn(gobj, &fp->x60C, 3, 0x415, joint, param);
@@ -162,14 +167,14 @@ static inline void ftCo_DamageIce_StartJump(Fighter* fp)
     fp->take_dmg_cb = ftCo_DamageIce_OnHit;
 }
 
-static inline void JObjRotMtx(Mtx mtx, HSD_JObj *jobj)
+static inline void JObjRotMtx(Mtx mtx, HSD_JObj* jobj)
 {
     Quaternion rot;
     Mtx rot_mtx;
 
     HSD_JObjGetRotation(jobj, &rot);
     if ((jobj->flags & JOBJ_USE_QUATERNION) == 0) {
-        HSD_MkRotationMtx(rot_mtx, (Vec3*)&rot);
+        HSD_MkRotationMtx(rot_mtx, (Vec3*) &rot);
     } else {
         HSD_MtxQuat(rot_mtx, &rot);
     }
@@ -190,7 +195,8 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     ftCo_800DD168(gobj);
     fp->x2227_b6 = true;
 
-    Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce, Ft_MF_Unk06, 0, 1, 0, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIce, Ft_MF_Unk06, 0, 1, 0,
+                              NULL);
 
     ftCommon_InitGrab(fp, false,
                       fp->dmg.x1838_percentTemp *
@@ -418,8 +424,8 @@ void ftCo_80091854(HSD_GObj* gobj)
     } else {
         ftCommon_8007D5D4(fp);
         fp->x2227_b6 = false;
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIceJump, Ft_MF_Unk06, 0, 0,
-                                  0, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageIceJump, Ft_MF_Unk06, 0,
+                                  0, 0, NULL);
         ft_PlaySFX(fp, 0x123, SFX_VOLUME_MAX, SFX_PAN_MID);
         jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint;
         vec = ftCo_803B74BC;

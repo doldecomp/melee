@@ -3,9 +3,10 @@
 
 #include <platform.h>
 
+#include "baselib/cobj.h"
+
 #include "baselib/forward.h"
 
-#include "baselib/cobj.h"
 #include "baselib/list.h"
 #include "baselib/objalloc.h"
 #include "baselib/tobj.h"

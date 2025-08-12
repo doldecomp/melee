@@ -1,19 +1,21 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-#include "lb/forward.h"
-#include <baselib/forward.h>
-
 #include "ftLk_AttackAir.h"
 
 #include "ftLk_Init.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftLink/types.h"
+
+#include "lb/forward.h"
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>

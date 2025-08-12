@@ -17,9 +17,6 @@
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/gm/types.h>
@@ -29,6 +26,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/mp/mpcoll.h>
@@ -42,7 +40,7 @@ static struct {
 static struct {
     HSD_ImageDesc x40[3];
     HSD_ImageDesc x88[3];
-    u8 pad[0xE0 - 0x88 - 3*0x18];
+    u8 pad[0xE0 - 0x88 - 3 * 0x18];
     u8 xE0;
     u8 xE1;
     u8 xE2;
@@ -135,11 +133,13 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
     u8 _[0x30];
     Mtx sp1C;
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE, GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
+                  GX_AF_NONE);
     GXSetNumTexGens(0);
     GXSetZMode(1, GX_LEQUAL, 1);
     GXSetNumTevStages(1);
-    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
     GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
     GXSetCullMode(GX_CULL_NONE);
     GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
@@ -180,10 +180,14 @@ double fn_801855BC(double arg8)
 
     if (arg8 > 0.0) {
         temp_f2_2 = __frsqrte(arg8);
-        temp_f2_3 = 0.5 * temp_f2_2 * -(((f64) arg8 * (temp_f2_2 * temp_f2_2)) - 3.0);
-        temp_f2_4 = 0.5 * temp_f2_3 * -(((f64) arg8 * (temp_f2_3 * temp_f2_3)) - 3.0);
-        temp_f2 = 0.5 * temp_f2_4 * -(((f64) arg8 * (temp_f2_4 * temp_f2_4)) - 3.0);
-        return arg8 * (0.5 * temp_f2 * -(((f64) arg8 * (temp_f2 * temp_f2)) - 3.0));
+        temp_f2_3 =
+            0.5 * temp_f2_2 * -(((f64) arg8 * (temp_f2_2 * temp_f2_2)) - 3.0);
+        temp_f2_4 =
+            0.5 * temp_f2_3 * -(((f64) arg8 * (temp_f2_3 * temp_f2_3)) - 3.0);
+        temp_f2 =
+            0.5 * temp_f2_4 * -(((f64) arg8 * (temp_f2_4 * temp_f2_4)) - 3.0);
+        return arg8 *
+               (0.5 * temp_f2 * -(((f64) arg8 * (temp_f2 * temp_f2)) - 3.0));
     }
     if (0.0 == arg8) {
         return 0.0;
@@ -339,7 +343,8 @@ void gm_801877A8_OnEnter(void* arg0_)
 
     lbl_804D6618 = *arg0;
     fn_80187714();
-    lbl_804D6610 = lbArchive_80016DBC("IrAls", &lbl_804D6614, "ScItrAllstar_scene_data", 0);
+    lbl_804D6610 = lbArchive_80016DBC("IrAls", &lbl_804D6614,
+                                      "ScItrAllstar_scene_data", 0);
 
     temp_r30 = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(lbl_804D6614->cameras[0].desc);
@@ -360,7 +365,6 @@ void gm_801877A8_OnEnter(void* arg0_)
     fn_801873F0();
     lbAudioAx_80023F28(0x2D);
 }
-
 
 /// #fn_80187910
 

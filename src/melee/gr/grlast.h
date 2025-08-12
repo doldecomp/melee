@@ -5,6 +5,7 @@
 
 #include <melee/gr/forward.h>
 #include <melee/lb/forward.h>
+
 #include <sysdolphin/baselib/jobj.h>
 
 /* 21A620 */ static void grLast_8021A620(bool);

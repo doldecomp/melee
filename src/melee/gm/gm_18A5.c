@@ -1,7 +1,8 @@
-#include "ft/forward.h"
 #include "gm_18A5.h"
 
 #include "gm_18A5.static.h"
+
+#include "ft/forward.h"
 
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
@@ -101,7 +102,9 @@ int fn_8018F4A0(void)
 {
     int temp_r3 = mnStageSel_8025BBD4();
     if (!gm_80164430(temp_r3)) {
-        printf("This is impossible stage num from mnSelStageRandom() -> stage %d \n", temp_r3);
+        printf("This is impossible stage num from mnSelStageRandom() -> stage "
+               "%d \n",
+               temp_r3);
         __assert("gmtoulib.c", 0x53D, "0");
     }
     return temp_r3;
@@ -126,7 +129,7 @@ char* fn_8018F5F0(void)
 /// it controls various menu jobj states ie animation state, visibility, etc
 u32 fn_8018F62C(HSD_GObj* gobj)
 {
-    return (u32)gobj->user_data;
+    return (u32) gobj->user_data;
 }
 
 TmData* gm_8018F634(void)
@@ -177,7 +180,7 @@ CharacterKind fn_8018F6FC(CSSIconHud arg0)
         }
         return arg0 + 1;
     }
-    return (CharacterKind)arg0;
+    return (CharacterKind) arg0;
 }
 
 float fn_8018F71C(int arg0, int arg1)
@@ -277,7 +280,8 @@ void fn_8019027C(UNK_T lights)
 
 /// #fn_801902F0
 
-HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3, int arg4, bool arg5, void (*arg6)(HSD_GObj*), f32 arg8)
+HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
+                      int arg4, bool arg5, void (*arg6)(HSD_GObj*), f32 arg8)
 {
     HSD_GObj* gobj = GObj_Create(0xE, arg3, 0);
     HSD_JObj* jobj = HSD_JObjLoadJoint(model->joint);
@@ -449,15 +453,15 @@ void gm_801963B4_OnEnter(void* arg0)
     lbAudioAx_8002702C(2, 8);
     lbAudioAx_80027168();
     lbAudioAx_80027648();
-    lbl_804D6640 = lbArchive_80016DBC("GmTou1p", &lbl_804D664C, "ScGamTour_scene_data", 0);
-    lbl_804D6644 = lbArchive_80016DBC("GmTou2p", &lbl_804D6650, "ScGamTour_scene_data", 0);
+    lbl_804D6640 = lbArchive_80016DBC("GmTou1p", &lbl_804D664C,
+                                      "ScGamTour_scene_data", 0);
+    lbl_804D6644 = lbArchive_80016DBC("GmTou2p", &lbl_804D6650,
+                                      "ScGamTour_scene_data", 0);
     lbl_804D6648 = lbArchive_LoadArchive("MnExtAll");
     filename = "TmBox.dat";
-    lbl_804D6638 = lbArchive_80016DBC(filename,
-            &lbl_804771B8.x0, "tournament_box2_array",
-            &lbl_804771B8.x4, "tournament_box3_array",
-            &lbl_804771B8.x8, "tournament_box4_array",
-            0);
+    lbl_804D6638 = lbArchive_80016DBC(
+        filename, &lbl_804771B8.x0, "tournament_box2_array", &lbl_804771B8.x4,
+        "tournament_box3_array", &lbl_804771B8.x8, "tournament_box4_array", 0);
     HSD_SisLib_803A62A0(0, fn_8018F5F0(), "SIS_TournamentData");
     fn_801935B8();
     lbAudioAx_800237A8(0x7539, 0x7F, 0x40);

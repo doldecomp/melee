@@ -1,12 +1,13 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftDonkey/ftDk_SpecialS.h"
 
 #include "ftDk_SpecialLw.h"
 
+#include <platform.h>
+
 #include "ef/eflib.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"

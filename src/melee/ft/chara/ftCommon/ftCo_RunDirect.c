@@ -1,10 +1,11 @@
+#include "ftCo_RunDirect.h"
+
 #include <placeholder.h>
+
+#include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ftCo_RunDirect.h"
-
-#include "ft/fighter.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0D14.h"
 #include "ft/inlines.h"

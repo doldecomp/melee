@@ -1,6 +1,3 @@
-#include <platform.h>
-#include <placeholder.h>
-
 #include "ftCo_Damage.h"
 
 #include "ftCo_0C35.h"
@@ -19,6 +16,9 @@
 #include "ftCo_PassiveStand.h"
 #include "ftCo_PassiveWall.h"
 #include "ftCo_Wait.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -456,7 +456,8 @@ block_62:
 block_63:
     M2C_FIELD(fp, s32*, 0x2344) = var_r0;
     M2C_FIELD(fp, s8*, 0x2359) = 0;
-    M2C_FIELD(fp, void (**)(Fighter_GObj*), 0x21D0) = ftCo_Damage_OnEveryHitlag;
+    M2C_FIELD(fp, void (**)(Fighter_GObj*), 0x21D0) =
+        ftCo_Damage_OnEveryHitlag;
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->x671_timer_lstick_tilt_y = 0xFE;
     M2C_FIELD(fp, void (**)(Fighter_GObj*), 0x21D8) = ftCo_Damage_OnExitHitlag;

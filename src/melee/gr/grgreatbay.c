@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "grgreatbay.h"
+
+#include <platform.h>
 
 #include "baselib/psstructs.h"
 #include "ft/ftdevice.h"

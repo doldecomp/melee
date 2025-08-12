@@ -1,5 +1,3 @@
-#include "lb/forward.h"
-
 #include "ftGw_SpecialLw.h"
 
 #include "ftGw_Init.h"
@@ -16,6 +14,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "it/items/itgamewatchpanic.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>

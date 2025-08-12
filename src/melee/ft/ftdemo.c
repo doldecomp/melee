@@ -1,10 +1,8 @@
-#include <platform.h>
-
-#include "pl/forward.h"
-
 #include "ftdemo.h"
 
 #include "ftdynamics.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -24,6 +22,9 @@
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_DemoCallback0.h"
 #include "lb/lbshadow.h"
+
+#include "pl/forward.h"
+
 #include "pl/types.h"
 
 #include <math.h>

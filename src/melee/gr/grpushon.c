@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "grpushon.h"
+
+#include <platform.h>
 
 void grPushOn_802182C4(bool arg) {}
 

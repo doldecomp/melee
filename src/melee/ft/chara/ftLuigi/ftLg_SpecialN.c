@@ -1,11 +1,11 @@
-#include <platform.h>
-
-#include "forward.h"
-#include "it/forward.h"
-
 #include "ftLg_SpecialN.h"
 
+#include <platform.h>
+
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
@@ -15,6 +15,9 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Wait.h"
+
+#include "it/forward.h"
+
 #include "it/items/itluigifireball.h"
 #include "lb/lb_00B0.h"
 

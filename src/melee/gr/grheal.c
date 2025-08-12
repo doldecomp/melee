@@ -1,22 +1,28 @@
-#include <platform.h>
-#include "gr/forward.h"
 #include "gr/grheal.h"
+
+#include "gr/grheal.static.h"
+
 #include "placeholder.h"
+
+#include <platform.h>
+
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "dolphin/types.h"
+
+#include "gr/forward.h"
+
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/stage.h"
 #include "it/it_26B1.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "it/types.h"
-#include "gr/grheal.static.h"
 
 void grHeal_8021EF38(bool arg0) {}
 
@@ -125,11 +131,11 @@ void grHeal_8021F4BC(Ground_GObj* gobj) {}
 
 void fn_8021F4C0(Ground* gp, void* arg2, s32 arg4, s32 arg5, s32 arg6)
 {
-    if ((((*(u8*)((u8*)arg4 + 0x34) >> 3U) & 0xF) == 1)
-            && ((arg6 - 1) <= 1U))
-        {
-            gp->gv.unk.xC4 = 1;
-        }
+    if ((((*(u8*) ((u8*) arg4 + 0x34) >> 3U) & 0xF) == 1) &&
+        ((arg6 - 1) <= 1U))
+    {
+        gp->gv.unk.xC4 = 1;
+    }
 }
 
 void grHeal_8021F4E8(s32 arg0, HSD_JObj* parent_jobj)
@@ -215,11 +221,11 @@ u32 grHeal_8021F70C(u32 character_id)
     int frame;
 
     frame = 0;
-    if ((s32)character_id == 0x13) {
+    if ((s32) character_id == 0x13) {
         character_id = 0x12;
     }
 
-    entry = (s32*)&grHeal_803E851C[0xD];
+    entry = (s32*) &grHeal_803E851C[0xD];
 
     while (entry[frame] != -1 && entry[frame] != character_id) {
         frame++;

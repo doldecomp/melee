@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "itfflowerflame.h"
+
+#include <placeholder.h>
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -25,11 +25,15 @@
 /* 29B074 */ static bool itFflowerflame_UnkMotion4_Coll(Item_GObj*);
 
 ItemStateTable it_803F66C8[] = {
-    { 0, itFflowerflame_UnkMotion0_Anim, itFflowerflame_UnkMotion0_Phys, itFflowerflame_UnkMotion0_Coll },
-    { 0, itFflowerflame_UnkMotion1_Anim, itFflowerflame_UnkMotion1_Phys, itFflowerflame_UnkMotion1_Coll },
+    { 0, itFflowerflame_UnkMotion0_Anim, itFflowerflame_UnkMotion0_Phys,
+      itFflowerflame_UnkMotion0_Coll },
+    { 0, itFflowerflame_UnkMotion1_Anim, itFflowerflame_UnkMotion1_Phys,
+      itFflowerflame_UnkMotion1_Coll },
     { 0, itFflowerflame_UnkMotion2_Anim, NULL, NULL },
-    { 0, itFflowerflame_UnkMotion3_Anim, itFflowerflame_UnkMotion3_Phys, itFflowerflame_UnkMotion3_Coll },
-    { 0, itFflowerflame_UnkMotion4_Anim, itFflowerflame_UnkMotion4_Phys, itFflowerflame_UnkMotion4_Coll },
+    { 0, itFflowerflame_UnkMotion3_Anim, itFflowerflame_UnkMotion3_Phys,
+      itFflowerflame_UnkMotion3_Coll },
+    { 0, itFflowerflame_UnkMotion4_Anim, itFflowerflame_UnkMotion4_Phys,
+      itFflowerflame_UnkMotion4_Coll },
 };
 
 HSD_GObj* it_8029A748(Item_GObj* arg0, Vec3* arg1, Fighter_Part arg2, f32 arg3)

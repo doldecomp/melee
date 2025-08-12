@@ -96,9 +96,9 @@ void HSD_DevComARAMCallback(ARQRequest* arg0)
     }
 
     if (HSD_DevCom_804D7808->callback != NULL) {
-        HSD_DevCom_804D7808->callback((void*)
-            HSD_DevCom_804D7808->dcReq, (int) HSD_DevCom_804D7808->args,
-            var_r5, HSD_DevCom_804D7808->cancelflag);
+        HSD_DevCom_804D7808->callback((void*) HSD_DevCom_804D7808->dcReq,
+                                      (int) HSD_DevCom_804D7808->args, var_r5,
+                                      HSD_DevCom_804D7808->cancelflag);
     }
 
     HSD_DevComUnlink(HSD_DevCom_804D7808);
@@ -131,7 +131,7 @@ static inline int HSD_DevComGetDestType(int type)
 static inline void DevComLinkNext(HSD_DevCom* dc)
 {
     int i;
-    for (i = 1; i < INIT_N_DEVCOMS-1; i++) {
+    for (i = 1; i < INIT_N_DEVCOMS - 1; i++) {
         dc[i].next = &dc[i] + 1;
     }
     dc[i].next = NULL;

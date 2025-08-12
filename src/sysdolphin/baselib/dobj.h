@@ -3,10 +3,11 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h" // IWYU pragma: export
-
 #include "baselib/class.h"
 #include "baselib/fobj.h"
+
+#include "baselib/forward.h" // IWYU pragma: export
+
 #include "baselib/mobj.h"
 
 #include <dolphin/mtx.h>

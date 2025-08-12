@@ -85,7 +85,8 @@ extern HSD_PadStatus HSD_PadMasterStatus[4];
 extern HSD_PadStatus HSD_PadGameStatus[4];
 extern HSD_PadStatus HSD_PadCopyStatus[4];
 
-static inline float HSD_PadGetNmlStickY(u8 slot) {
+static inline float HSD_PadGetNmlStickY(u8 slot)
+{
     return HSD_PadCopyStatus[slot].nml_stickY;
 }
 

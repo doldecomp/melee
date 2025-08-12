@@ -1,11 +1,9 @@
-#include <platform.h>
-
-#include "lb/forward.h"
-
 #include "ftCo_YoshiEgg.h"
 
 #include "ftCo_Bury.h"
 #include "ftCo_CaptureKoopa.h"
+
+#include <platform.h>
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
@@ -21,6 +19,9 @@
 #include "ftCommon/types.h"
 #include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_SpecialN.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>

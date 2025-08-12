@@ -2,6 +2,10 @@
 
 #include <dolphin/dvd.h>
 #include <dolphin/vi.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/initialize.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -9,10 +13,6 @@
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbsnap.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/initialize.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/video.h>
 
 static struct strings {
     const char* x0;
@@ -88,9 +88,9 @@ static HSD_Text* lb_804D63D0;
 
 struct lb_804329F0_t {
     struct UnkArrElem {
-    /* 0x00 */ s64 x0;
-    /* 0x08 */ s64 x8;
-    /* 0x10 */ int x10;
+        /* 0x00 */ s64 x0;
+        /* 0x08 */ s64 x8;
+        /* 0x10 */ int x10;
     } x0[2];
     u32 x4;
     u64 x38;
@@ -149,11 +149,11 @@ void lb_800192A8(void (*cb)(void))
         if (lbLang_IsSavedLanguageJP()) {
             HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, -68.0F, "%s", jp_msg[i].x0);
             HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, -34.0F, "%s", jp_msg[i].x4);
-            HSD_SisLib_803A6B98(lb_804D63D0, 0.0F,   0.0F, "%s", jp_msg[i].x8);
+            HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, 0.0F, "%s", jp_msg[i].x8);
         } else {
             HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, -68.0F, "%s", us_msg[i].x0);
             HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, -34.0F, "%s", us_msg[i].x4);
-            HSD_SisLib_803A6B98(lb_804D63D0, 0.0F,   0.0F, "%s", us_msg[i].x8);
+            HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, 0.0F, "%s", us_msg[i].x8);
         }
 
         while (true) {
@@ -161,13 +161,19 @@ void lb_800192A8(void (*cb)(void))
                 prev_i = i;
                 if (i != -1) {
                     if (lbLang_IsSavedLanguageJP()) {
-                        HSD_SisLib_803A70A0(lb_804D63D0, 0, "%s", jp_msg[i].x0);
-                        HSD_SisLib_803A70A0(lb_804D63D0, 1, "%s", jp_msg[i].x4);
-                        HSD_SisLib_803A70A0(lb_804D63D0, 2, "%s", jp_msg[i].x8);
+                        HSD_SisLib_803A70A0(lb_804D63D0, 0, "%s",
+                                            jp_msg[i].x0);
+                        HSD_SisLib_803A70A0(lb_804D63D0, 1, "%s",
+                                            jp_msg[i].x4);
+                        HSD_SisLib_803A70A0(lb_804D63D0, 2, "%s",
+                                            jp_msg[i].x8);
                     } else {
-                        HSD_SisLib_803A70A0(lb_804D63D0, 0, "%s", us_msg[i].x0);
-                        HSD_SisLib_803A70A0(lb_804D63D0, 1, "%s", us_msg[i].x4);
-                        HSD_SisLib_803A70A0(lb_804D63D0, 2, "%s", us_msg[i].x8);
+                        HSD_SisLib_803A70A0(lb_804D63D0, 0, "%s",
+                                            us_msg[i].x0);
+                        HSD_SisLib_803A70A0(lb_804D63D0, 1, "%s",
+                                            us_msg[i].x4);
+                        HSD_SisLib_803A70A0(lb_804D63D0, 2, "%s",
+                                            us_msg[i].x8);
                     }
                 }
             }
@@ -289,7 +295,7 @@ void lb_80019AAC(Event arg0)
 
     for (i = 0; i < 2; i++) {
         struct UnkArrElem* cur = &lb_804329F0.x0[i];
-        cur->x0 = 1.0F/60 * OS_TIMER_CLOCK;
+        cur->x0 = 1.0F / 60 * OS_TIMER_CLOCK;
         cur->x8 = 0;
         cur->x10 = 0;
     }
@@ -298,7 +304,7 @@ void lb_80019AAC(Event arg0)
     lb_804329F0.x48 = 0;
     lb_804329F0.x0[0].x0 = 0; // huh? overwritten?
     lb_804329F0.x40 = 0;
-    lb_804329F0.x38 = 1.0F/60 * OS_TIMER_CLOCK;
+    lb_804329F0.x38 = 1.0F / 60 * OS_TIMER_CLOCK;
 
     lb_80019628();
 }

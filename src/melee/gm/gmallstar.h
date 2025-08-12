@@ -2,6 +2,7 @@
 #define MELEE_GM_ALLSTAR_H
 
 #include <placeholder.h>
+
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 

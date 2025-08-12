@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftSamus/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 12832C */ void ftSs_Init_OnDeath(HSD_GObj* gobj);
 /* 12837C */ void ftSs_Init_OnLoad(HSD_GObj* gobj);

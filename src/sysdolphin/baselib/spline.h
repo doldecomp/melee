@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_SPLINE_H
 #define SYSDOLPHIN_BASELIB_SPLINE_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/forward.h"
 

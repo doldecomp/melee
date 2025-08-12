@@ -20,9 +20,17 @@
 #include <dolphin/os.h>
 #include <melee/lb/lbarchive.h>
 
-static HSD_WObjDesc HSD_SisLib_8040C490 = { NULL, { 0, 0, 1 }, NULL, };
+static HSD_WObjDesc HSD_SisLib_8040C490 = {
+    NULL,
+    { 0, 0, 1 },
+    NULL,
+};
 
-static HSD_WObjDesc HSD_SisLib_8040C4A4 = { NULL, { 0, 0, 0 }, NULL, };
+static HSD_WObjDesc HSD_SisLib_8040C4A4 = {
+    NULL,
+    { 0, 0, 0 },
+    NULL,
+};
 
 static u32 HSD_SisLib_804D7968;
 
@@ -57,7 +65,7 @@ sislib_UnkAlloc3* HSD_SisLib_804D797C;
 // extern u8 *HSD_SisLib_804D7978;
 // sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0f };
 
-//u8 HSD_SisLib_8040C490[0x60] = { 0 };
+// u8 HSD_SisLib_8040C490[0x60] = { 0 };
 
 static f32
     HSD_SisLib_8040CB00; /* unable to generate initializer: unknown type */
@@ -129,7 +137,8 @@ void* HSD_SisLib_803A5798(s32 size)
 
         temp_r26 = (u8*) HSD_SisLib_804D7970->data_1;
         temp_r25 = HSD_SisLib_804D7970->data_0;
-        temp_r27 = HSD_SisLib_804D7970->size - size - sizeof(sislib_UnkAllocData);
+        temp_r27 =
+            HSD_SisLib_804D7970->size - size - sizeof(sislib_UnkAllocData);
         if (temp_r27 < 0) {
             OSReport("Memory Empty\n");
             OSPanic("sislib.c", 0x5F, "");
@@ -531,7 +540,8 @@ s32 HSD_SisLib_803A611C(int arg0, HSD_GObj* arg1, u16 arg2, u8 arg3, u8 arg4,
     } else {
         temp_r27->x4 = GObj_Create(arg2, arg3, arg4);
         if (temp_r27->x4 != NULL) {
-            HSD_CObj* temp_r3 = HSD_CObjLoadDesc((HSD_CObjDesc*) &HSD_SisLib_8040C4B8);
+            HSD_CObj* temp_r3 =
+                HSD_CObjLoadDesc((HSD_CObjDesc*) &HSD_SisLib_8040C4B8);
             if (temp_r3 != NULL) {
                 HSD_CObjSetOrtho(temp_r3, 0.0f, -480.0f, 0.0f, 640.0f);
                 {
@@ -553,7 +563,6 @@ s32 HSD_SisLib_803A611C(int arg0, HSD_GObj* arg1, u16 arg2, u8 arg3, u8 arg4,
 
 void HSD_SisLib_803A62A0(s32 arg0, char* arg1, char* arg2)
 {
-
     HSD_Archive* tmp = HSD_SisLib_803A945C(arg1);
     HSD_SisLib_804D1110[arg0] = tmp;
     if (tmp == NULL) {
@@ -561,7 +570,8 @@ void HSD_SisLib_803A62A0(s32 arg0, char* arg1, char* arg2)
         OSPanic("sislib.c", 0x24A, "");
     }
     {
-        SIS* sis = HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[arg0], arg2);
+        SIS* sis =
+            HSD_ArchiveGetPublicAddress(HSD_SisLib_804D1110[arg0], arg2);
         HSD_SisLib_804D1124[arg0] = sis;
         if (sis == NULL) {
             OSReport("Cannot find symbol %s.\n", arg2);
@@ -1173,7 +1183,7 @@ void HSD_SisLib_803A74F0(HSD_Text* arg0, s32 arg1, u8* arg2)
     }
 }
 
-void HSD_SisLib_803A7548(HSD_Text *arg0, int arg1, float arg2, float arg3)
+void HSD_SisLib_803A7548(HSD_Text* arg0, int arg1, float arg2, float arg3)
 {
     u8* temp_r3 = fn_803A6FEC((u8*) arg0->x5C, arg1, NULL);
     u8* temp_r4;

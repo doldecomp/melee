@@ -16,14 +16,22 @@
 /* 2AF914 */ static void itLinkbow_UnkMotion6_Phys(HSD_GObj*);
 /* 2AF918 */ static bool itLinkbow_UnkMotion6_Coll(Item_GObj* gobj);
 
-ItemStateTable it_803F6E98[] = { { 0, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
-                                 { 1, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
-                                 { 2, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
-                                 { 3, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
-                                 { 4, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
-                                 { 5, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys, itLinkbow_UnkMotion5_Coll },
-                                 { -1, itLinkbow_UnkMotion6_Anim, itLinkbow_UnkMotion6_Phys,
-                                   itLinkbow_UnkMotion6_Coll } };
+ItemStateTable it_803F6E98[] = {
+    { 0, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys,
+      itLinkbow_UnkMotion5_Coll },
+    { 1, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys,
+      itLinkbow_UnkMotion5_Coll },
+    { 2, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys,
+      itLinkbow_UnkMotion5_Coll },
+    { 3, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys,
+      itLinkbow_UnkMotion5_Coll },
+    { 4, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys,
+      itLinkbow_UnkMotion5_Coll },
+    { 5, itLinkbow_UnkMotion5_Anim, itLinkbow_UnkMotion5_Phys,
+      itLinkbow_UnkMotion5_Coll },
+    { -1, itLinkbow_UnkMotion6_Anim, itLinkbow_UnkMotion6_Phys,
+      itLinkbow_UnkMotion6_Coll }
+};
 
 static s32 it_803F6F08[7] = { 0, 1, 2, 3, 4, 5, 6 };
 static s32 it_803F6F24[7] = { 3, 4, 5, 0, 1, 2, 6 };

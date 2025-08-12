@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftCo_StopCeil.h"
 
 #include "ftCo_FallSpecial.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

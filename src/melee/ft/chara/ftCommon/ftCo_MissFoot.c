@@ -1,12 +1,13 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-
 #include "ftCo_MissFoot.h"
 
 #include "ftCo_DamageFall.h"
 
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"

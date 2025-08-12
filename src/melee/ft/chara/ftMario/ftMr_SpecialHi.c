@@ -1,10 +1,10 @@
-#include <platform.h>
-
 #include "ftMr_SpecialHi.h"
 
 #include "inlines.h"
 #include "math.h"
 #include "types.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -1,11 +1,11 @@
 #ifndef MELEE_GR_INLINES_H
 #define MELEE_GR_INLINES_H
 
-#include <baselib/forward.h>
-
 #include "gr/granime.h"
 #include "gr/ground.h"
 #include "gr/types.h"
+
+#include <baselib/forward.h>
 
 #include <baselib/gobj.h>
 

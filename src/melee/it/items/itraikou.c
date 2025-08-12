@@ -13,8 +13,10 @@
 #include <baselib/random.h>
 
 ItemStateTable it_803F7DE8[] = {
-    { 0, itRaikou_UnkMotion0_Anim, itRaikou_UnkMotion0_Phys, itRaikou_UnkMotion0_Coll },
-    { -1, itRaikou_UnkMotion1_Anim, itRaikou_UnkMotion1_Phys, itRaikou_UnkMotion1_Coll },
+    { 0, itRaikou_UnkMotion0_Anim, itRaikou_UnkMotion0_Phys,
+      itRaikou_UnkMotion0_Coll },
+    { -1, itRaikou_UnkMotion1_Anim, itRaikou_UnkMotion1_Phys,
+      itRaikou_UnkMotion1_Coll },
 };
 
 void it_802CF814(Item_GObj* gobj)

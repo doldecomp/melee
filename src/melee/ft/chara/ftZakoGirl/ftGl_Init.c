@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "ftZakoGirl/ftGl_Init.h"
+
+#include <platform.h>
 
 #include "ft/ftparts.h"
 #include "ft/inlines.h"

@@ -1,15 +1,14 @@
 #ifndef GALE01_1FCBC0
 #define GALE01_1FCBC0
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
-
-#include "gr/forward.h"
 
 /* 1FCBC0 */ void grInishie2_801FCBC0(bool);
 /* 1FCBC4 */ void grInishie2_801FCBC4(void);

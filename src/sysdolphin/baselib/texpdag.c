@@ -123,26 +123,31 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
     }
 
     make_full_dependancy_mtx(num, sp1AC, sp12C);
-    //sp8 = &spAC;
+    // sp8 = &spAC;
     var_r29 = sp2C;
-    //spC = &sp28;
-    //sp10 = var_r29;
+    // spC = &sp28;
+    // sp10 = var_r29;
     order_dag(num, sp1AC, sp12C, list, 0, 0, 0, 0, spAC, &sp28, var_r29);
     var_r28 = result;
     var_r27 = 0;
     while (var_r27 < num) {
-        *var_r28 = (HSD_TExp* ) list[*var_r29].tev;
+        *var_r28 = (HSD_TExp*) list[*var_r29].tev;
         temp_r0 = (*var_r28)->tev.c_dst;
         if (temp_r0 != 0xFF) {
             resource->reg[temp_r0 + 4].color = 3;
 
             for (i = 0; i < 4; i++) {
-                if (HSD_TExpGetType((*var_r28)->tev.c_in[i].exp) == HSD_TE_TEV) {
+                if (HSD_TExpGetType((*var_r28)->tev.c_in[i].exp) == HSD_TE_TEV)
+                {
                     tev = &(*var_r28)->tev;
                     if (tev->c_in[i].sel == 1) {
-                        tev->c_in[i].arg = HSD_TExpDag_80407AA0_44[tev->c_in[i].exp->tev.c_dst];
+                        tev->c_in[i].arg =
+                            HSD_TExpDag_80407AA0_44[tev->c_in[i]
+                                                        .exp->tev.c_dst];
                     } else {
-                        tev->c_in[i].arg = HSD_TExpDag_80407AA0_54[tev->c_in[i].exp->tev.c_dst];
+                        tev->c_in[i].arg =
+                            HSD_TExpDag_80407AA0_54[tev->c_in[i]
+                                                        .exp->tev.c_dst];
                     }
                 }
             }
@@ -152,9 +157,11 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
             resource->reg[temp_r0_2 + 4].alpha = 1;
 
             for (i = 0; i < 4; i++) {
-                if (HSD_TExpGetType((*var_r28)->tev.a_in[i].exp) == HSD_TE_TEV) {
+                if (HSD_TExpGetType((*var_r28)->tev.a_in[i].exp) == HSD_TE_TEV)
+                {
                     tev = &(*var_r28)->tev;
-                    tev->a_in[i].arg = HSD_TExpDag_80407AA0_64[tev->a_in[i].exp->tev.a_dst];
+                    tev->a_in[i].arg =
+                        HSD_TExpDag_80407AA0_64[tev->a_in[i].exp->tev.a_dst];
                 }
             }
         }

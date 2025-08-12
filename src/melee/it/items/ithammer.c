@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ithammer.h"
 
 #include "ithammerhead.h"
+
+#include <platform.h>
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -38,12 +38,16 @@ typedef struct itHammerData {
 /* 294310 */ static bool itHammer_UnkMotion5_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F6150[] = {
-    { -1, itHammer_UnkMotion0_Anim, itHammer_UnkMotion0_Phys, itHammer_UnkMotion0_Coll },
-    { -1, itHammer_UnkMotion4_Anim, itHammer_UnkMotion1_Phys, itHammer_UnkMotion1_Coll },
+    { -1, itHammer_UnkMotion0_Anim, itHammer_UnkMotion0_Phys,
+      itHammer_UnkMotion0_Coll },
+    { -1, itHammer_UnkMotion4_Anim, itHammer_UnkMotion1_Phys,
+      itHammer_UnkMotion1_Coll },
     { 0, itHammer_UnkMotion3_Anim, NULL, NULL },
     { 1, itHammer_UnkMotion3_Anim, NULL, NULL },
-    { -1, itHammer_UnkMotion4_Anim, itHammer_UnkMotion4_Phys, itHammer_UnkMotion4_Coll },
-    { -1, itHammer_UnkMotion5_Anim, itHammer_UnkMotion5_Phys, itHammer_UnkMotion5_Coll },
+    { -1, itHammer_UnkMotion4_Anim, itHammer_UnkMotion4_Phys,
+      itHammer_UnkMotion4_Coll },
+    { -1, itHammer_UnkMotion5_Anim, itHammer_UnkMotion5_Phys,
+      itHammer_UnkMotion5_Coll },
 };
 
 static inline void thing(void* gobj)

@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "itmato.h"
+
+#include <platform.h>
 
 #include "it/inlines.h"
 #include "it/itCommonItems.h"

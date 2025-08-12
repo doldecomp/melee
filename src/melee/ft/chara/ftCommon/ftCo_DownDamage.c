@@ -1,5 +1,3 @@
-#include <platform.h>
-
 #include "ftCo_DownDamage.h"
 
 #include "ftCo_Damage.h"
@@ -8,6 +6,8 @@
 #include "ftCo_DownStand.h"
 #include "ftCo_FlyReflect.h"
 #include "ftCo_PassiveWall.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

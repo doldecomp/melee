@@ -1,31 +1,49 @@
 #ifndef __GALE01_028B9C
 #define __GALE01_028B9C
 
-#include "baselib/forward.h"
 #include "camera.h" // IWYU pragma: export
-#include <melee/cm/types.h>
-#include <sysdolphin/baselib/cobj.h>
+
+#include "baselib/forward.h"
+
 #include "baselib/wobj.h"
+
 #include <math.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <melee/cm/types.h>
 
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
 
 // .data
-/* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = {
-    Camera_8002B3D4, Camera_8002CDDC, Camera_8002D318,
-    Camera_8002D85C, Camera_8002DDC4, Camera_8002C908,
-    Camera_8002E490, 0, 0
-};
+/* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = { Camera_8002B3D4,
+                                                        Camera_8002CDDC,
+                                                        Camera_8002D318,
+                                                        Camera_8002D85C,
+                                                        Camera_8002DDC4,
+                                                        Camera_8002C908,
+                                                        Camera_8002E490,
+                                                        0,
+                                                        0 };
 /* 3BCB3C */ static HSD_WObjDesc cm_803BCB3C = {
     NULL, { 0.0f, 40.241425f, 300.241f }, 0
 };
-/* 3BCB50 */ static HSD_WObjDesc cm_803BCB50 = {
-    NULL, { 0.0f, 10.0f, 0.0f }, 0
-};
+/* 3BCB50 */ static HSD_WObjDesc cm_803BCB50 = { NULL,
+                                                 { 0.0f, 10.0f, 0.0f },
+                                                 0 };
 /* 3BCB64 */ static HSD_CameraDescPerspective cm_803BCB64 = {
-    0, 0, 1, { 0, 0x280, 0, 0x1E0}, { 0, 0x280, 0, 0x1E0},
-     &cm_803BCB3C, &cm_803BCB50, 0.0f, NULL, 0.1f, 16384.0f, 30.0f, 1.2173333f
+    0,
+    0,
+    1,
+    { 0, 0x280, 0, 0x1E0 },
+    { 0, 0x280, 0, 0x1E0 },
+    &cm_803BCB3C,
+    &cm_803BCB50,
+    0.0f,
+    NULL,
+    0.1f,
+    16384.0f,
+    30.0f,
+    1.2173333f
 };
 
 /* 3BCB9C */ static f32 cm_803BCB9C[5] = { 0.0f, 1.5f, 1.32f, 1.16f, 1.0f };
@@ -76,7 +94,7 @@
 /// sdata2
 /* 4D7E00 */ float const cm_804D7E00 = -3.4028235E+38f;
 /* 4D7E04 */ float const cm_804D7E04 = 1.0f;
-/* 4D7E08 */ float const cm_804D7E08 = 0.1f; // near clip
+/* 4D7E08 */ float const cm_804D7E08 = 0.1f;     // near clip
 /* 4D7E10 */ float const cm_804D7E0C = 16384.0f; // far clip
 /* 4D7E10 */ float const cm_804D7E10 = -1.0f;
 /* 4D7E14 */ float const cm_804D7E14 = 0.0f;
@@ -97,7 +115,7 @@
 /* 4D7E58 */ float const cm_804D7E58 = 0.000099999997f;
 /* 4D7E5C */ float const cm_804D7E5C = 1000.0f;
 /* 4D7E60 */ float const cm_804D7E60 = 0.017453292f; // deg2rad
-/* 4D7E64 */ float const cm_804D7E64 = 1.5707964f; // rad2deg
+/* 4D7E64 */ float const cm_804D7E64 = 1.5707964f;   // rad2deg
 /* 4D7E68 */ float const cm_804D7E68 = 0.001f;
 /* 4D7E6C */ float const cm_804D7E6C = -0.001f;
 /* 4D7E70 */ float const cm_804D7E70 = 30.0f;

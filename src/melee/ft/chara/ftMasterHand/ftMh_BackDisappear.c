@@ -1,11 +1,11 @@
-#include <platform.h>
-
 #include "ftMh_BackDisappear.h"
 
 #include "ftMh_TagCancel.h"
 #include "ftMh_ThrownMasterHand.h"
 #include "ftMh_Wait1_1.h"
 #include "ftMh_Wait1_2.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftDr_AppealS.h"
 
 #include "ftDr_Init.h"
+
+#include <platform.h>
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"

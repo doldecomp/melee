@@ -1,18 +1,21 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_TYPES_H
 #define MELEE_FT_CHARA_FTKIRBY_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
-#include "it/forward.h"
-#include "lb/forward.h"
-#include <baselib/forward.h>
 
 #include "ftGameWatch/types.h"
 #include "ftMars/types.h"
 #include "ftNess/types.h"
+
+#include "it/forward.h"
+#include "lb/forward.h"
+
 #include "lb/types.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 

@@ -1,6 +1,3 @@
-#include "ftCaptain/forward.h"
-#include "ftCommon/forward.h"
-
 #include "ftCa_Init.h"
 
 #include "ftCa_SpecialHi.h"
@@ -16,6 +13,9 @@
 #include "ft/ftstarrodswing.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCaptain/forward.h"
+#include "ftCommon/forward.h"
 
 MotionState ftCa_Init_MotionStateTable[ftCa_MS_SelfCount] = {
     {

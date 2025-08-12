@@ -3,11 +3,13 @@
 
 #include <platform.h>
 
-#include "it/forward.h"
-#include <baselib/forward.h>
-
 #include "ft/types.h"
+
+#include "it/forward.h"
+
 #include "it/items/types.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 

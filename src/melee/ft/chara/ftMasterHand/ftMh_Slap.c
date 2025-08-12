@@ -1,5 +1,3 @@
-#include "ftMasterHand/forward.h"
-
 #include "ftMh_Slap.h"
 
 #include "ftMh_Wait1_2.h"
@@ -9,6 +7,9 @@
 #include "ft/ftanim.h"
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
+
+#include "ftMasterHand/forward.h"
+
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>

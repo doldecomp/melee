@@ -2,6 +2,7 @@
 #define MELEE_GM_16AE_H
 
 #include <placeholder.h>
+
 #include <melee/gm/forward.h>
 #include <melee/it/forward.h>
 #include <melee/mn/forward.h>

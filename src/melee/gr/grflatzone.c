@@ -2,9 +2,9 @@
 
 #include "gr/grdisplay.h"
 #include "gr/grdynamicattr.h"
+#include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
-#include "gr/grlib.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "gr/types.h"

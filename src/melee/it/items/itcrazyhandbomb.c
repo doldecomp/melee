@@ -1,6 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
 #include "itcrazyhandbomb.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 /// #it_802F0F6C
 

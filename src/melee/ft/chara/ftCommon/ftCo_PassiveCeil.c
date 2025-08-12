@@ -1,5 +1,3 @@
-#include "ftCommon/forward.h"
-
 #include "ftCo_PassiveCeil.h"
 
 #include "ftCo_DamageFall.h"
@@ -15,6 +13,9 @@
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftKirby/ftKb_Init.h"
 

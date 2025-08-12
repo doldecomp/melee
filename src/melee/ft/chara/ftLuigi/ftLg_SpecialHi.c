@@ -1,11 +1,11 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftLg_SpecialHi.h"
 
 #include "math.h"
 #include "types.h"
+
+#include <platform.h>
+
+#include "forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

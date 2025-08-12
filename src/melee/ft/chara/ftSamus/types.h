@@ -1,13 +1,13 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_TYPES_H
 #define MELEE_FT_CHARA_FTSAMUS_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
+#include "ftCommon/types.h"
 
 #include "it/forward.h"
 #include <baselib/forward.h>
-
-#include "ftCommon/types.h"
 
 #include <dolphin/mtx.h>
 

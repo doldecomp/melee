@@ -1,18 +1,22 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "baselib/forward.h"
-#include "ft/forward.h"
-#include "it/forward.h"
-
 #include "itmasterhandlaser.h"
 
 #include "math_ppc.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
+#include "baselib/forward.h"
+
 #include "baselib/jobj.h"
 #include "db/db.h"
 #include "ef/efsync.h"
+
+#include "ft/forward.h"
+
 #include "ft/inlines.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

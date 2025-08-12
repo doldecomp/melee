@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "list.h"
 
 #include "debug.h"
+
+#include <platform.h>
 
 #include <__mem.h>
 

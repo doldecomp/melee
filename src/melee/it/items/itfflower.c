@@ -29,14 +29,18 @@
 /* 29360C */ static bool itFflower_UnkMotion7_Coll(Item_GObj* gobj);
 
 ItemStateTable it_803F6090[] = {
-    { 0, itFflower_UnkMotion0_Anim, itFflower_UnkMotion0_Phys, itFflower_UnkMotion0_Coll },
-    { 0, itFflower_UnkMotion6_Anim, itFflower_UnkMotion1_Phys, itFflower_UnkMotion1_Coll },
+    { 0, itFflower_UnkMotion0_Anim, itFflower_UnkMotion0_Phys,
+      itFflower_UnkMotion0_Coll },
+    { 0, itFflower_UnkMotion6_Anim, itFflower_UnkMotion1_Phys,
+      itFflower_UnkMotion1_Coll },
     { 0, itFflower_UnkMotion5_Anim, itFflower_UnkMotion5_Phys, NULL },
     { 1, itFflower_UnkMotion5_Anim, itFflower_UnkMotion5_Phys, NULL },
     { 2, itFflower_UnkMotion5_Anim, itFflower_UnkMotion5_Phys, NULL },
     { 3, itFflower_UnkMotion5_Anim, itFflower_UnkMotion5_Phys, NULL },
-    { 4, itFflower_UnkMotion6_Anim, itFflower_UnkMotion6_Phys, itFflower_UnkMotion6_Coll },
-    { 0, itFflower_UnkMotion7_Anim, itFflower_UnkMotion7_Phys, itFflower_UnkMotion7_Coll },
+    { 4, itFflower_UnkMotion6_Anim, itFflower_UnkMotion6_Phys,
+      itFflower_UnkMotion6_Coll },
+    { 0, itFflower_UnkMotion7_Anim, itFflower_UnkMotion7_Phys,
+      itFflower_UnkMotion7_Coll },
 };
 
 static inline void msid_check(Item_GObj* gobj, Item* ip)

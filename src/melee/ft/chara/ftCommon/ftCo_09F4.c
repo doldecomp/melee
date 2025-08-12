@@ -1,11 +1,12 @@
-#include <platform.h>
+#include "ftCo_09F4.h"
+
 #include <placeholder.h>
+#include <platform.h>
+
+#include "ft/ftdevice.h"
 
 #include "ftCommon/forward.h"
 
-#include "ftCo_09F4.h"
-
-#include "ft/ftdevice.h"
 #include "gr/ground.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"

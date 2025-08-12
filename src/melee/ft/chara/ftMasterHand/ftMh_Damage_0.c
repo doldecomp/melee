@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftMh_Damage_0.h"
 
 #include "ftMh_ThrownMasterHand.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"

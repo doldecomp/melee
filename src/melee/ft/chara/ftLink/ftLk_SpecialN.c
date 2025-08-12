@@ -1,12 +1,9 @@
-#include <platform.h>
-
-#include "ftLink/forward.h"
-#include "it/forward.h"
-
 #include "ftLk_SpecialN.h"
 
 #include "ftLk_Init.h"
 #include "math.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -18,7 +15,13 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftpickupitem.h"
+
+#include "ftLink/forward.h"
+
 #include "ftLink/types.h"
+
+#include "it/forward.h"
+
 #include "it/items/it_27CF.h"
 #include "it/items/itlinkarrow.h"
 #include "it/items/itlinkbow.h"

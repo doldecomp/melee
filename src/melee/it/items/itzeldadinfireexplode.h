@@ -7,7 +7,8 @@
 
 #include "it/items/types.h"
 
-/* 2C4580 */ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Vec3* pos, f32 facing_dir, f32 scale);
+/* 2C4580 */ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1,
+                                    Vec3* pos, f32 facing_dir, f32 scale);
 /* 2C4670 */ void it_2725_Logic66_Destroyed(Item_GObj*);
 /* 2C46C4 */ void it_802C46C4(Item_GObj*, Item*);
 /* 2C4820 */ bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj*);

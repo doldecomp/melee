@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftCo_CaptureYoshi.h"
 
 #include "ftCo_Lift.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_0D14.h"

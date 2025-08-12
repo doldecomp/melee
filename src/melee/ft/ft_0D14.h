@@ -1,8 +1,8 @@
 #ifndef GALE01_0D14E4
 #define GALE01_0D14E4
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
@@ -318,7 +318,8 @@
 /* 0DE2A8 */ void ftCo_800DE2A8(Fighter_GObj*, Fighter_GObj* gobj);
 /* 0DE2CC */ UNK_RET ftCo_800DE2CC(UNK_PARAMS);
 /* 0DE2F0 */ void ftCo_800DE2F0(Fighter_GObj* gobj);
-/* 0DE3FC */ bool ftCo_800DE3FC(Fighter_GObj* gobj, FtMotionId msid, float arg2);
+/* 0DE3FC */ bool ftCo_800DE3FC(Fighter_GObj* gobj, FtMotionId msid,
+                                float arg2);
 /* 0DE508 */ void ftCo_800DE508(Fighter_GObj* gobj);
 /* 0DE5A4 */ void ftCo_800DE5A4(Fighter_GObj*);
 /* 0DE69C */ void ftCo_ThrownF_Anim(Fighter_GObj* gobj);
@@ -345,7 +346,8 @@
 /* 0DE9B8 */ UNK_RET ftCo_800DE9B8(UNK_PARAMS);
 /* 0DE9D8 */ bool ftCo_800DE9D8(Fighter_GObj* gobj);
 /* 0DEA28 */ UNK_RET ftCo_800DEA28(UNK_PARAMS);
-/* 0DEAE8 */ void ftCo_800DEAE8(Fighter_GObj* gobj, enum_t asid0, enum_t asid1);
+/* 0DEAE8 */ void ftCo_800DEAE8(Fighter_GObj* gobj, enum_t asid0,
+                                enum_t asid1);
 /* 0DEBD0 */ UNK_RET ftCo_800DEBD0(UNK_PARAMS);
 /* 0DECF4 */ void ftCo_AppealS_Anim(Fighter_GObj* gobj);
 /* 0DED30 */ void ftCo_AppealS_IASA(Fighter_GObj* gobj);

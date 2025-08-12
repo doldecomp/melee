@@ -1,14 +1,14 @@
-#include <platform.h>
-
-#include <baselib/forward.h>
-
 #include "mnsoundtest.h"
+
+#include <platform.h>
 
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "mn/inlines.h"
 #include "mn/types.h"
 #include "sc/types.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/os.h>
 #include <baselib/controller.h>

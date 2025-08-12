@@ -1,10 +1,10 @@
+#include "gr/grtest.h"
+
 #include <platform.h>
 
 #include "baselib/forward.h"
-
-#include "gr/grtest.h"
-
 #include "gr/forward.h"
+
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"

@@ -1,8 +1,8 @@
 #ifndef GALE01_01FC08
 #define GALE01_01FC08
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 /* 01FC08 */ UNK_RET fn_8001FC08(UNK_PARAMS);
 /* 01FEC4 */ UNK_RET fn_8001FEC4(UNK_PARAMS);

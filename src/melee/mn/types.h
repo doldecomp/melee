@@ -1,11 +1,11 @@
 #ifndef MELEE_MN_TYPES_H
 #define MELEE_MN_TYPES_H
 
+#include "platform.h"
+
 #include <placeholder.h>
 
 #include "mn/forward.h" // IWYU pragma: export
-
-#include "platform.h"
 
 #include <baselib/sislib.h>
 

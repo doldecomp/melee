@@ -1,16 +1,17 @@
 #ifndef GALE01_272560
 #define GALE01_272560
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "ft/forward.h"
 #include "it/forward.h"
-#include <baselib/forward.h>
 
 #include "it/itCharItems.h"
 #include "it/items/types.h"
 #include "lb/types.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/gx.h>
 

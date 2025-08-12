@@ -1,5 +1,3 @@
-#include "sc/forward.h"
-
 #include "mnhyaku.h"
 
 #include "lb/lbarchive.h"
@@ -7,6 +5,9 @@
 #include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/types.h"
+
+#include "sc/forward.h"
+
 #include "sc/types.h"
 
 static HSD_GObj* mnHyaku_804D6C58;

@@ -1,10 +1,11 @@
+#include "ft/ft_0C8C.h"
+
 #include <placeholder.h>
+
+#include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ft/ft_0C8C.h"
-
-#include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0D14.h"

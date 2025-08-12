@@ -3,10 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "ftPeach/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 11B51C */ void ftPe_Init_OnDeath(HSD_GObj* gobj);
 /* 11B628 */ void ftPe_Init_OnLoad(HSD_GObj* gobj);

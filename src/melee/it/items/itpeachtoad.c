@@ -1,11 +1,13 @@
-#include "baselib/forward.h"
-#include "it/forward.h"
-
 #include "itpeachtoad.h"
+
+#include "baselib/forward.h"
 
 #include "db/db.h"
 #include "ftKirby/ftKb_Init.h"
 #include "ftPeach/ftPe_SpecialN.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"

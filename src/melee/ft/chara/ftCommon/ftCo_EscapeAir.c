@@ -1,11 +1,11 @@
-#include <platform.h>
-
 #include "ftCo_EscapeAir.h"
 
 #include "ftCo_AirCatch.h"
 #include "ftCo_FallSpecial.h"
 #include "ftCo_ItemThrow.h"
 #include "math.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

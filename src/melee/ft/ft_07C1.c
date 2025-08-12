@@ -1,17 +1,20 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "it/forward.h"
-#include "lb/forward.h"
-
 #include "ft/ft_07C1.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcoll.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_HammerWait.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 

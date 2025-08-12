@@ -1,9 +1,9 @@
-#include <platform.h>
-#include <placeholder.h>
-
 #include "ft/ft_081B.h"
 
 #include "inlines.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_0819.h"
@@ -42,15 +42,14 @@ void ft_80081B38(Fighter_GObj* gobj)
     coll->x34_flags.b1234 = 1;
     bones = fp->parts;
     temp_r29 = fp->ft_data->x44;
-    mpColl_80042078(
-        coll, gobj, bones->joint, bones[temp_r29->unk0].joint,
-        bones[temp_r29->unk2].joint, bones[temp_r29->unk4].joint,
-        bones[temp_r29->unk6].joint, bones[temp_r29->unk8].joint,
-        bones[temp_r29->unkA].joint,
-        temp_r29->unkC * fp->x34_scale.y);
+    mpColl_80042078(coll, gobj, bones->joint, bones[temp_r29->unk0].joint,
+                    bones[temp_r29->unk2].joint, bones[temp_r29->unk4].joint,
+                    bones[temp_r29->unk6].joint, bones[temp_r29->unk8].joint,
+                    bones[temp_r29->unkA].joint,
+                    temp_r29->unkC * fp->x34_scale.y);
     temp_f3 = fp->x34_scale.y;
-    mpColl_80042374(coll, temp_r29->unk10 * temp_f3,
-                    temp_r29->unk14 * temp_f3, temp_r29->unk18 * temp_f3);
+    mpColl_80042374(coll, temp_r29->unk10 * temp_f3, temp_r29->unk14 * temp_f3,
+                    temp_r29->unk18 * temp_f3);
     coll->x50 = fp->co_attrs.weight;
     temp_f0 = 10.0f * fp->x34_scale.y;
     if (coll->x104 == 1) {
@@ -59,7 +58,7 @@ void ft_80081B38(Fighter_GObj* gobj)
     }
 }
 
-void ft_80081C88(Fighter_GObj *dst_gobj, f32 scl_y)
+void ft_80081C88(Fighter_GObj* dst_gobj, f32 scl_y)
 {
     float temp_f0;
 
@@ -68,7 +67,8 @@ void ft_80081C88(Fighter_GObj *dst_gobj, f32 scl_y)
     {
         CollData* temp_r5 = &fp->coll_data;
 
-        float tmp = temp_r3->unkC * scl_y;;
+        float tmp = temp_r3->unkC * scl_y;
+        ;
         if (fp->coll_data.x104 == 1) {
             temp_r5->x124 = tmp;
         }
@@ -287,7 +287,8 @@ bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, int dir)
     }
 }
 
-bool ft_8008239C(Fighter_GObj* gobj, int dir, ftCollisionBox* height_attributes)
+bool ft_8008239C(Fighter_GObj* gobj, int dir,
+                 ftCollisionBox* height_attributes)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCollisionBox* collbox;
@@ -326,7 +327,8 @@ bool ft_800824A0(Fighter_GObj* arg0, ftCollisionBox* arg1)
     coll = &fp->coll_data;
     fp->coll_data.prev_topn = fp->coll_data.cur_topn;
     fp->coll_data.cur_topn = fp->cur_pos;
-    temp_r31 = mpColl_8004730C(coll, ft_80082838(&collbox, arg1, fp->facing_dir));
+    temp_r31 =
+        mpColl_8004730C(coll, ft_80082838(&collbox, arg1, fp->facing_dir));
     fp->cur_pos = coll->cur_topn;
     if (ft_80081A00(arg0)) {
         return false;
@@ -417,7 +419,8 @@ bool ft_800827A0(Fighter_GObj* gobj)
     }
 }
 
-ftCollisionBox* ft_80082838(ftCollisionBox* arg0, ftCollisionBox* arg1, f32 arg2)
+ftCollisionBox* ft_80082838(ftCollisionBox* arg0, ftCollisionBox* arg1,
+                            f32 arg2)
 {
     if (arg2 < 0.0f) {
         arg0->top = arg1->top;
@@ -428,7 +431,7 @@ ftCollisionBox* ft_80082838(ftCollisionBox* arg0, ftCollisionBox* arg1, f32 arg2
         arg0->left.x = -arg1->right.x;
         return arg0;
     }
-    return (ftCollisionBox* ) arg1;
+    return (ftCollisionBox*) arg1;
 }
 
 bool ft_80082888(Fighter_GObj* arg0, ftCollisionBox* arg1)
@@ -538,7 +541,7 @@ void ftCo_AirCatchHit_Coll(Fighter_GObj* gobj)
     }
 }
 
-//void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
+// void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
 void ft_80082C74(void* gobj, void (*arg1)(Fighter_GObj*))
 {
     CollData* coll;
@@ -714,7 +717,7 @@ int ft_80084A18(Fighter_GObj* gobj)
     return mpLib_80054ED8(fp->coll_data.floor.index);
 }
 
-float ft_GetGroundFrictionMultiplier(Fighter *fp)
+float ft_GetGroundFrictionMultiplier(Fighter* fp)
 {
     if (fp->kind == FTKIND_POPO || fp->kind == FTKIND_NANA) {
         return 1.0F;

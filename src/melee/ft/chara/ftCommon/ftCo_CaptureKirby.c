@@ -1,14 +1,15 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-
 #include "ftCo_CaptureKirby.h"
 
 #include "ftCo_Lift.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"

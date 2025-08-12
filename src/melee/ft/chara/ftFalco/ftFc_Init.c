@@ -1,14 +1,15 @@
-#include <platform.h>
-
-#include "ftFox/forward.h"
-
 #include "ftFc_Init.h"
+
+#include <platform.h>
 
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftFox/forward.h"
+
 #include "ftFox/ftFx_AppealS.h"
 #include "ftFox/ftFx_Init.h"
 #include "ftFox/ftFx_SpecialHi.h"

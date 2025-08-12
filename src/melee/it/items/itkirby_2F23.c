@@ -1,7 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
-
 #include "itkirby_2F23.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 /// #it_802F23AC
 

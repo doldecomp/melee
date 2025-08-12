@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "if/iftime.h"
+
+#include <placeholder.h>
 
 #include "dolphin/os.h"
 #include "gm/gm_unsplit.h"

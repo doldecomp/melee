@@ -16,10 +16,14 @@
 static float const deg_to_rad = M_PI / 180;
 
 ItemStateTable it_803F5AB0[] = {
-    { -1, itParasol_UnkMotion0_Anim, itParasol_UnkMotion0_Phys, itParasol_UnkMotion0_Coll },
-    { +4, itParasol_UnkMotion2_Anim, itParasol_UnkMotion1_Phys, itParasol_UnkMotion2_Coll },
-    { +0, itParasol_UnkMotion2_Anim, itParasol_UnkMotion2_Phys, itParasol_UnkMotion2_Coll },
-    { -1, itParasol_UnkMotion3_Anim, itParasol_UnkMotion3_Phys, itParasol_UnkMotion3_Coll },
+    { -1, itParasol_UnkMotion0_Anim, itParasol_UnkMotion0_Phys,
+      itParasol_UnkMotion0_Coll },
+    { +4, itParasol_UnkMotion2_Anim, itParasol_UnkMotion1_Phys,
+      itParasol_UnkMotion2_Coll },
+    { +0, itParasol_UnkMotion2_Anim, itParasol_UnkMotion2_Phys,
+      itParasol_UnkMotion2_Coll },
+    { -1, itParasol_UnkMotion3_Anim, itParasol_UnkMotion3_Phys,
+      itParasol_UnkMotion3_Coll },
     { +1, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
     { +2, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },
     { +3, itParasol_UnkMotion10_Anim, itParasol_UnkMotion10_Phys, NULL },

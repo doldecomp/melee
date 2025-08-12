@@ -1,10 +1,10 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftSb_Init.h"
 
 #include "math.h"
+
+#include <platform.h>
+
+#include "forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

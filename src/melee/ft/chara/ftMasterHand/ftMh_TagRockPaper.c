@@ -1,11 +1,9 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftMh_TagRockPaper.h"
 
 #include "ftMh_ThrownMasterHand.h"
 #include "ftMh_Wait1_2.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -14,6 +12,9 @@
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 

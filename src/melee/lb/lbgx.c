@@ -1,6 +1,6 @@
-#include <placeholder.h>
-
 #include "lbgx.h"
+
+#include <placeholder.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>

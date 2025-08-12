@@ -1,12 +1,9 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ftSamus/forward.h"
-#include "it/forward.h"
-
 #include "ftCo_AirCatch.h"
 
 #include "ftCo_FallSpecial.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -17,7 +14,13 @@
 #include "ft/ftparts.h"
 #include "ftCommon/types.h"
 #include "ftLink/types.h"
+
+#include "ftSamus/forward.h"
+
 #include "ftSamus/types.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"

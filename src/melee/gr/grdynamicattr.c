@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "gr/grdynamicattr.h"
+
+#include <platform.h>
 
 #include "gr/types.h"
 #include "mp/mplib.h"

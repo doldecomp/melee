@@ -1,14 +1,15 @@
-#include <platform.h>
-
-#include "forward.h"
-
 #include "ftDk_SpecialLw.h"
 
 #include "ftDk_Init.h"
 
+#include <platform.h>
+
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+
+#include "forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"

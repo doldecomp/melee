@@ -1,6 +1,7 @@
-#include <platform.h>
-#include <placeholder.h>
 #include "itarwinglaser.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 bool it_802E8418(Item_GObj* gobj)
 {

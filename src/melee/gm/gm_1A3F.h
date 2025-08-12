@@ -2,6 +2,7 @@
 #define MELEE_GM_1A3F_H
 
 #include <placeholder.h>
+
 #include <melee/gm/forward.h>
 
 /* 1A3EF4 */ void gm_801A3EF4(void);

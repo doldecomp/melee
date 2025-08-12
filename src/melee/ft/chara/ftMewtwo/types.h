@@ -3,9 +3,9 @@
 
 #include <platform.h>
 
-#include <baselib/forward.h>
-
 #include "lb/types.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 

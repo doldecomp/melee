@@ -1,9 +1,9 @@
-#include "ft/forward.h"
-#include "pl/forward.h"
-
 #include "player.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftdata.h"
@@ -14,6 +14,9 @@
 #include "gm/gm_unsplit.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
+
+#include "pl/forward.h"
+
 #include "pl/plattack.h"
 #include "pl/plbonus.h"
 #include "pl/plstale.h"

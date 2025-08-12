@@ -21,5 +21,4 @@
 /* 2F289C */ UNK_RET it_802F289C(UNK_PARAMS);
 /* 3F9450 */ extern ItemStateTable it_803F9450[];
 
-
 #endif

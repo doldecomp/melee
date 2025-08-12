@@ -1,8 +1,8 @@
-#include "baselib/forward.h"
-
 #include "vi0401.h"
 
 #include "vi.h"
+
+#include "baselib/forward.h"
 
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"

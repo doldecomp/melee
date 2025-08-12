@@ -1,30 +1,36 @@
-#include <platform.h>
-#include <placeholder.h>
-
-#include "ft/forward.h"
-#include "ftCommon/forward.h"
-#include "it/forward.h"
-#include <baselib/forward.h>
-
 #include "ftCo_ItemThrow.h"
 
 #include "ftCo_FallSpecial.h"
 #include "ftCo_Lift.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
+
+#include "it/forward.h"
+
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "pl/plbonuslib.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <math.h>

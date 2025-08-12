@@ -1,14 +1,13 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
-#include <platform.h>
 #include <placeholder.h>
-
-#include "ft/forward.h" // IWYU pragma: export
-#include "it/forward.h"
-#include <baselib/forward.h>
+#include <platform.h>
 
 #include "cm/types.h"
+
+#include "ft/forward.h" // IWYU pragma: export
+
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
@@ -34,8 +33,13 @@
 #include "ftZakoBoy/types.h"
 #include "ftZelda/types.h"
 #include "gr/types.h"
+
+#include "it/forward.h"
+
 #include "lb/lbanim.h"
 #include "lb/types.h"
+
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <dolphin/gx.h>

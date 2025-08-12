@@ -1,5 +1,3 @@
-#include "forward.h"
-
 #include "lobj.h"
 
 #include "aobj.h"
@@ -10,6 +8,8 @@
 #include "wobj.h"
 
 #include "dolphin/gx/GXEnum.h"
+
+#include "forward.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>

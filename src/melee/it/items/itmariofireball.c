@@ -17,7 +17,8 @@
 #include <baselib/mtx.h>
 
 ItemStateTable it_803F6788[] = {
-    { 0, itMariofireball_UnkMotion0_Anim, itMariofireball_UnkMotion0_Phys, itMariofireball_UnkMotion0_Coll },
+    { 0, itMariofireball_UnkMotion0_Anim, itMariofireball_UnkMotion0_Phys,
+      itMariofireball_UnkMotion0_Coll },
 };
 
 void it_8029B6F8(Item_GObj* gobj, Vec3* pos, ItemKind kind, f32 facing_dir)

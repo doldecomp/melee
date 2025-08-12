@@ -1,11 +1,11 @@
-#include "forward.h"
-
 #include "ftZd_Init.h"
 
 #include "ftZd_SpecialHi.h"
 #include "ftZd_SpecialLw.h"
 #include "ftZd_SpecialN.h"
 #include "ftZd_SpecialS.h"
+
+#include "forward.h"
 
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"

@@ -3,9 +3,9 @@
 
 #include <placeholder.h>
 
-#include <dolphin/mtx.h>
-
 #include "it/inlines.h"
+
+#include <dolphin/mtx.h>
 
 /* 1FF164 */ void grRCruise_801FF164(bool);
 /* 1FF168 */ void grRCruise_801FF168(void);

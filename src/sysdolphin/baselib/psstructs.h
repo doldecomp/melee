@@ -3,9 +3,10 @@
 
 #include <platform.h>
 
+#include "baselib/archive.h"
+
 #include "baselib/forward.h"
 
-#include "baselib/archive.h"
 #include "baselib/jobj.h"
 
 #include <dolphin/gx.h>

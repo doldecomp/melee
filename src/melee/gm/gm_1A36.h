@@ -1,8 +1,8 @@
 #ifndef MELEE_GM_1A36_H
 #define MELEE_GM_1A36_H
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 /* 1A3680 */ u64 gm_801A3680(u8);
 /* 1A36A0 */ u64 gm_801A36A0(u8);

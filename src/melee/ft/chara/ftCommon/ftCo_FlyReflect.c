@@ -1,13 +1,11 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftCo_FlyReflect.h"
 
 #include "ftCo_Damage.h"
 #include "ftCo_DownBound.h"
 #include "ftCo_PassiveCeil.h"
 #include "ftCo_PassiveWall.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -16,6 +14,9 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
 #include "lb/lbrefract.h"
@@ -114,8 +115,8 @@ void ftCo_800C18A8(Fighter_GObj* gobj, ftCommon_MotionState msid, Vec3* normal,
     vec0.y = fp->cur_pos.y + offset->y;
     vec0.z = fp->cur_pos.z + offset->z;
     param = atan2f(-normal->x, normal->y);
-    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5, (1 << 1) | (1 << 2) | (1 << 10), NULL,
-                  &vec0, &param);
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 5,
+                  (1 << 1) | (1 << 2) | (1 << 10), NULL, &vec0, &param);
     Camera_80030E44(2, &vec0);
     vec1 = fp->self_vel;
     lbVector_Add_xy(&vec1, &fp->x8c_kb_vel);

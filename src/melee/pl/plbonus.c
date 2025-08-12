@@ -1,6 +1,3 @@
-#include <platform.h>
-#include <placeholder.h>
-
 #include "plbonus.h"
 
 #include "inlines.h"
@@ -9,6 +6,9 @@
 #include "player.h"
 #include "plstale.h"
 #include "types.h"
+
+#include <placeholder.h>
+#include <platform.h>
 
 #include <baselib/debug.h>
 #include <gm/gm_unsplit.h>

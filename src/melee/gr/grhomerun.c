@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "grhomerun.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "gr/ground.h"

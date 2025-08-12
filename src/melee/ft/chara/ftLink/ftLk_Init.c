@@ -1,5 +1,3 @@
-#include "ftCommon/forward.h"
-
 #include "ftLk_Init.h"
 
 #include "ftLk_SpecialHi.h"
@@ -18,6 +16,9 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCLink/ftCl_Init.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_AirCatch.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "it/it_26B1.h"

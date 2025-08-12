@@ -1,11 +1,11 @@
-#include <platform.h>
-
 #include "ftCo_CliffWait.h"
 
 #include "ftCo_CliffAttack.h"
 #include "ftCo_CliffClimb.h"
 #include "ftCo_CliffJump.h"
 #include "ftCo_DamageFall.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ftcliffcommon.h"

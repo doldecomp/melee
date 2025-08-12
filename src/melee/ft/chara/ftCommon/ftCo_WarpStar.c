@@ -1,9 +1,8 @@
-#include <platform.h>
-
-#include "ftCommon/forward.h"
-
 #include "ftCo_WarpStar.h"
+
 #include "stdbool.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -14,6 +13,9 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/types.h"
 #include "gr/stage.h"
 #include "it/item.h"
@@ -177,7 +179,8 @@ void ftCo_800C4C60(Fighter_GObj* gobj)
                       fp->mv.co.jump.jump_mul;
     fp->self_vel.y *= p_ftCommonData->x438;
     fp->self_vel.z = 0;
-    fp->self_vel.y = fp->co_attrs.jump_v_initial_velocity * fp->mv.co.jump.jump_mul;
+    fp->self_vel.y =
+        fp->co_attrs.jump_v_initial_velocity * fp->mv.co.jump.jump_mul;
     {
         float n0 = -fp->facing_dir * p_ftCommonData->x78;
         float n1 = fp->co_attrs.jump_h_initial_velocity * n0;

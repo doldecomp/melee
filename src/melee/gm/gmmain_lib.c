@@ -1,6 +1,5 @@
-#include <platform.h>
-
 #include "gmmain_lib.static.h"
+#include <platform.h>
 
 #include <dolphin/os/OSReset.h>
 #include <sysdolphin/baselib/random.h>

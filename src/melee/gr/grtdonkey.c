@@ -1,9 +1,6 @@
-#include <platform.h>
-
-#include "lb/forward.h"
-#include <baselib/forward.h>
-
 #include "gr/grtdonkey.h"
+
+#include <platform.h>
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -11,7 +8,12 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
+
+#include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>

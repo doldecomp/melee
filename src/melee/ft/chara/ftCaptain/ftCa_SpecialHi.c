@@ -1,8 +1,8 @@
-#include <platform.h>
-
 #include "ftCa_SpecialHi.h"
 
 #include "math.h"
+
+#include <platform.h>
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"

@@ -1,8 +1,8 @@
 #ifndef GALE01_2F7288
 #define GALE01_2F7288
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 /* 2F7288 */ UNK_RET fn_802F7288(UNK_PARAMS);
 /* 2F73C4 */ UNK_RET if_802F73C4(UNK_PARAMS);

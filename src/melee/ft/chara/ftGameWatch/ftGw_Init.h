@@ -1,11 +1,11 @@
 #ifndef GALE01_14A250
 #define GALE01_14A250
 
+#include "ft/types.h"
+
 #include "ftGameWatch/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
-
-#include "ft/types.h"
 
 /* 14A250 */ void ftGw_Init_OnDeath(HSD_GObj* gobj);
 /* 14A37C */ void ftGw_Init_OnLoad(HSD_GObj* gobj);

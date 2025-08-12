@@ -1,9 +1,9 @@
-#include <platform.h>
-
 #include "ftCo_09C4.h"
 
 #include "ftCo_Pass.h"
 #include "ftCo_Shouldered.h"
+
+#include <platform.h>
 
 #include "ft/ftanim.h"
 #include "ft/types.h"

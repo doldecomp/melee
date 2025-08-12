@@ -16,8 +16,8 @@ struct CameraBox {
     /* +C:1 */ u8 xC_b1 : 1;
     /* +C:2 */ u8 xC_b2 : 1;
     s16 xE;
-    Vec3 x10; // might be Vec2?
-    Vec3 x1C; // position?
+    Vec3 x10;  // might be Vec2?
+    Vec3 x1C;  // position?
     float x28; // direction?
     Vec2 x2C;
     Vec3 x34; // size?
@@ -76,7 +76,9 @@ typedef struct Camera {
     /* 0x00C */ f32 nearz;
     /* 0x010 */ f32 farz;
     /* 0x014 */ CameraTransformState transform;
-    /* 0x04C */ CameraTransformState transform_copy; // this runs the same tween logic, but isnt used for anything?
+    /* 0x04C */ CameraTransformState
+        transform_copy; // this runs the same tween logic, but isnt used for
+                        // anything?
     /* 0x084 */ Vec2 translation;
     /* 0x08C */ s32 _8C[5]; /* maybe part of translation[4]? */
     /* 0x0A0 */ HSD_GObj* xA0;
@@ -103,7 +105,7 @@ typedef struct Camera {
     /* 0x320 */ Vec3 pause_eye_offset; /* offset from focused player */
     /* 0x32C */ f32 x32C;
     /* 0x330 */ f32 pause_eye_distance; /* distance to focused player */
-    /* 0x334 */ Vec3 pause_up; /* up vector */
+    /* 0x334 */ Vec3 pause_up;          /* up vector */
     /* 0x340 */ u8 x340;
     /* 0x341:0 */ u8 x341_b0 : 1;
     /* 0x341:1 */ u8 x341_b1_b2 : 2;

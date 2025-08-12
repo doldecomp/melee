@@ -1,14 +1,15 @@
-#include <platform.h>
-
-#include "ft/forward.h"
-
 #include "ftPe_Float.h"
 
 #include "ftPe_FloatAttack.h"
 #include "ftPe_FloatFall.h"
 
+#include <platform.h>
+
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"

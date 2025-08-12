@@ -1,11 +1,12 @@
-#include "ftMars/forward.h"
-
 #include "ftEmblem/ftFe_Init.h"
 
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "ftMars/forward.h"
+
 #include "ftMars/ftMs_Init.h"
 #include "ftMars/ftMs_SpecialHi.h"
 #include "ftMars/ftMs_SpecialLw.h"

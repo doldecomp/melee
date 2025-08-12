@@ -1,8 +1,9 @@
 #ifndef GALE01_019880
 #define GALE01_019880
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 /* 01C600 */ UNK_RET lb_8001C600(UNK_PARAMS);

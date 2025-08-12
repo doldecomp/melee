@@ -1,6 +1,6 @@
-#include <platform.h>
-
 #include "gr/grinishie2.h"
+
+#include <platform.h>
 
 #include "cm/camera.h"
 #include "gm/gm_unsplit.h"
