@@ -10,6 +10,7 @@
 
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/pl/forward.h>
+#include <melee/sc/forward.h>
 
 #include <common_structs.h>
 #include <melee/mn/types.h>
@@ -505,9 +506,11 @@ struct MatchTeamData {
 
 struct MatchPlayerData {
     u8 slot_type;
-    u8 character_kind;
+    s8 character_kind;
     s8 character_id;
     u8 x3 : 6;
+    u8 x3_6 : 1;
+    u8 x3_7 : 1;
     u8 x4;
     u8 is_big_loser;
     u8 is_small_loser;
@@ -584,7 +587,9 @@ struct MatchExitInfo {
 };
 
 struct ResultsMatchInfo {
-    int x0;
+    u8 x0_0 : 1;
+    u8 x0_1 : 1;
+    u8 x1;
     int x4;
     MatchEnd match_end;
 };
@@ -781,5 +786,57 @@ struct gm_80479D58_t {
     /* +10 */ struct gm_801677C0_s unk_10;
 };
 STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
+
+struct ResultsPlayerData {
+    /* +00 */ u8 x0; ///< flags
+    /* +01 */ u8 page;
+    /* +02 */ u16 x2;
+    /* +04 */ f32 scroll_offset;
+    /* +08 */ HSD_GObj* fighter_gobj;
+    /* +0C */ HSD_GObj* camera;
+    /* +10 */ HSD_Text* stats_text[3][10]; ///< 3 pages with 10 entries?
+    // /* +10 */ HSD_Text* stats_x10[10]; ///< these text arrays are the
+    // scrollable stats
+    // /* +3C */ HSD_Text* stats_x3C[10];
+    // /* +60 */ HSD_Text* stats_x60[10];
+    /* +88 */ HSD_Text* ko_count;
+    /* +8C */ HSD_Text* ko_time;
+    /* +90 */ HSD_JObj* jobjs[15];
+    /* +CC */ Vec3 stats_position;
+};
+
+struct ResultsData {
+    /* +00 */ u8 x0_0 : 1;
+    /* +00 */ u8 x0_1 : 1;
+    /* +00 */ u8 x0_2 : 1;
+    /* +00 */ u8 x0_3 : 1;
+    /* +00 */ u8 x0_4 : 1;
+    /* +00 */ u8 x0_5 : 1;
+    /* +00 */ u8 x0_6 : 1;
+    /* +00 */ u8 x0_7 : 1;
+
+    /* +01 */ u8 x1; ///< some sort of state
+    /* +02 */ u8 num_pages;
+    /* +03 */ char pad_03[0x4 - 0x3];
+    /* +04 */ u8 x4; ///< winner?
+    /* +05 */ u8 x5; ///< team winner?
+    /* +06 */ u8 x6; ///< also winner?
+    /* +08 */ s32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ SceneDesc* pnlsce;
+    /* +14 */ SceneDesc* flmsce;
+    /* +18 */ HSD_GObj* x18; ///< main proc?
+    /* +1C */ HSD_CObj* cobj;
+    /* +20 */ HSD_JObj* x20; ///< winner logo?
+    /* +24 */ HSD_JObj* x24;
+    /* +28 */ HSD_JObj* x28;
+    /* +2C */ HSD_Text* x2C;
+    /* +30 */ HSD_JObj* x30;
+    /* +34 */ HSD_JObj* x34[6];
+    /* +4C */ Vec3 x4C[6];
+    /* +94 */ MatchEnd* x94;
+    /* +98 */ struct ResultsPlayerData player_data[6];
+};
+STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
 
 #endif

@@ -1585,7 +1585,7 @@ void gm_801B2204(MinorScene* arg0)
     gm_80163298(
         temp_r3->match_end.player_standings[0].character_kind,
         (u16) gm_80188454(
-            (s8) temp_r3->match_end.player_standings[0].character_kind));
+            temp_r3->match_end.player_standings[0].character_kind));
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
     if (gm_80173754(0x1C, gm_804D68C0) == 0) {
