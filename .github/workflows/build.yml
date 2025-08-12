@@ -60,8 +60,8 @@ jobs:
             grep --version
             awk --version
             ninja
-            ninja diff | awk '/^ERROR\b/ { exit 1 }'
             ninja diff
+            ninja diff | awk '/^ERROR\b/ { exit 1 }'
             result="$?"
             echo "result: $result"
             exit "$result"
