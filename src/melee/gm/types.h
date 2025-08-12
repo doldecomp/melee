@@ -22,7 +22,7 @@ struct UnkMultimanData {
 
 struct DebugGameOverData {
     u32 x0;
-    u8 pad_x4[0x4];
+    int x4;
     u32 x8;
     int xC;
     u32 x10;
