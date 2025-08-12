@@ -57,8 +57,10 @@ jobs:
             run_configure
             set -x
             set +e
+            grep --version
+            awk --version
             ninja
-            ninja diff | awk '/^ERROR\>/ { exit 1 }'
+            ninja diff | awk '/^ERROR\b/ { exit 1 }'
             ninja diff
             result="$?"
             echo "result: $result"
