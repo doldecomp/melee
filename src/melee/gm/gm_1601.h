@@ -18,6 +18,8 @@
 
 struct lbl_8046B488_t;
 
+#include <melee/gm/gm_17C0.h>
+
 /* 1601C4 */ u8 gm_801601C4(s8);
 /* 160244 */ u8 gm_80160244(s8);
 /* 1602C0 */ void gm_801602C0(s8);
