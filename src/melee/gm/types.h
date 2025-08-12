@@ -531,8 +531,8 @@ struct MatchPlayerData {
     u32 x90;
     u32 x94;
     u32 x98;
-    u32 x9C;
-    u32 xA0;
+    int x9C;
+    int xA0;
     u32 xA4;
 };
 
