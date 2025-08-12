@@ -1,22 +1,18 @@
 #ifndef GALE01_1CD338
 #define GALE01_1CD338
 
-
 #include "lb/forward.h"
 #include "gr/forward.h"
 #include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <baselib/forward.h>
 
-typedef struct unkCastle {
+struct unkCastle  {
     /* 0x000 */ u8 _pad[0x10C];
     /* 0x10C */ HSD_GObj* x10C[5];
     /* 0x120 */ u8 _pad2[0x134-0x120];
     /* 0x134 */ u8 x134[5];
-} unkCastle;
-
-typedef void (*unkCastleCallback)(UNK_T, unkCastle*);
-typedef void (*unkCastleCallback2)(UNK_T, unkCastle*, Ground_GObj*);
+};
 
 /* 1CD338 */ void grCastle_801CD338(bool);
 /* 1CD37C */ void grCastle_801CD37C(void);
