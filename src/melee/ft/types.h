@@ -913,53 +913,6 @@ struct ftCmdScript {
     void* x3F4_scriptReturn;             // 0x3F4
 };
 
-struct ftDeviceUnk1 {
-    /*  +0 */ u8 x0[0x7B - 0x00];
-    /* +7B */ u8 x7B;
-};
-
-struct ftDeviceUnk2 {
-    /*  +0 */ UNK_T x0;
-    /*  +4 */ UNK_T x4;
-    /*  +8 */ UNK_T x8;
-    /*  +C */ UNK_T xC;
-    /* +10 */ UNK_T x10;
-    /* +14 */ UNK_T x14;
-    /* +18 */ UNK_T x18;
-    /* +1C */ UNK_T x1C;
-    /* +20 */ UNK_T x20;
-    /* +24 */ UNK_T x24;
-    /* +28 */ ftDeviceUnk1* x28;
-    /* +2C */ UNK_T x2C;
-    /* +30 */ UNK_T x30;
-    /* +34 */ UNK_T x34;
-    /* +38 */ UNK_T x38;
-    /* +3C */ UNK_T x3C;
-    /* +40 */ UNK_T x40;
-    /* +44 */ UNK_T x44;
-    /* +48 */ UNK_T x48;
-    /* +4C */ UNK_T x4C;
-    /* +50 */ GXColor lobj_color;
-    /* +54 */ UNK_T x54;
-    /* +58 */ UNK_T x58;
-    /* +5C */ UNK_T x5C;
-    /* +60 */ UNK_T x60;
-    /* +64 */ UNK_T x64;
-    /* +68 */ UNK_T x68;
-    /* +6C */ UNK_T x6C;
-    /* +70 */ UNK_T x70;
-    /* +74 */ float lobj_rot_x;
-    /* +74 */ float lobj_rot_yz;
-    /* +7C:0 */ u8 x7C_b0 : 1;
-    /* +7C:1 */ u8 x7C_b1 : 1;
-    /* +7C:2 */ u8 x7C_b2 : 1;
-    /* +7C:3 */ u8 x7C_b3 : 1;
-    /* +7C:4 */ u8 x7C_b4 : 1;
-    /* +7C:5 */ u8 x7C_b5 : 1;
-    /* +7C:6 */ u8 x7C_b6 : 1;
-    /* +7C:7 */ u8 x7C_b7 : 1;
-};
-
 struct ftDeviceUnk3 {
     UNK_T x0;
     u32 x4;
@@ -1181,9 +1134,9 @@ struct Fighter {
     /*  fp+3FC */ UNK_T x3FC;
     /*  fp+400 */ UNK_T x400;
     /*  fp+404 */ UNK_T x404;
-    /*  fp+408 */ ftDeviceUnk2 x408;
-    /*  fp+488 */ ftDeviceUnk2 x488;
-    /*  fp+508 */ ftDeviceUnk2 x508;
+    /*  fp+408 */ ColorOverlay x408;
+    /*  fp+488 */ ColorOverlay x488;
+    /*  fp+508 */ ColorOverlay x508;
     /*  fp+588 */ HSD_LObj* x588;
     /*  fp+58C */ s32 x58C;
     /*  fp+590 */ FigaTree* x590;
@@ -1953,11 +1906,5 @@ struct ft_80459B88_t {
     /* +4 */ KirbyHatStruct* hats[FTKIND_MAX];
 };
 STATIC_ASSERT(sizeof(struct ft_80459B88_t) == 0x88);
-
-struct Fighter_804D653C_t {
-    u32 unk;
-    u8 unk4;
-    u8 unk5;
-};
 
 #endif

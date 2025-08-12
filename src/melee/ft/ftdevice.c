@@ -20,12 +20,12 @@ static int ft_804D6570;
 struct ftDeviceUnk4 ft_804D6578;
 int ftDevice_BuryThingCount;
 
-ftDeviceUnk2* ftCo_800C0658(Fighter* fp)
+ColorOverlay* ftCo_800C0658(Fighter* fp)
 {
-    return (int) fp->x408.x28 != 0 ? &fp->x408 : &fp->x488;
+    return (int) fp->x408.x28_colanim.ptr != 0 ? &fp->x408 : &fp->x488;
 }
 
-ftDeviceUnk2* ftCo_800C0674(Fighter_GObj* gobj)
+ColorOverlay* ftCo_800C0674(Fighter_GObj* gobj)
 {
     return ftCo_800C0658(GET_FIGHTER(gobj));
 }
@@ -33,12 +33,12 @@ ftDeviceUnk2* ftCo_800C0674(Fighter_GObj* gobj)
 /// @todo Wrong return type. Union?
 enum_t ftCo_800C0694(Fighter* fp)
 {
-    return (int) ftCo_800C0658(fp)->x28;
+    return ftCo_800C0658(fp)->x28_colanim.i;
 }
 
 int ftCo_800C06B4(Fighter* fp)
 {
-    return (int) &fp->x508.x28->x7B;
+    return (int) &fp->x508.x28_colanim.ptr->x7B;
 }
 
 void ftCo_800C06C0(void)

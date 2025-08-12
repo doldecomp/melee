@@ -8,6 +8,7 @@
 #include <baselib/forward.h>
 
 #include <dolphin/card.h>
+#include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
 struct DynamicsData {
@@ -360,5 +361,80 @@ struct lb_80432A68_t {
     /* 0x8AC */ int x8AC;
 }; /* size = 0x8B0 */
 STATIC_ASSERT(sizeof(struct lb_80432A68_t) == 0x8B0);
+
+struct ColorOverlay_UnkInner {
+    /*  +0 */ int x0;
+    /*  +0 */ u8 x4[0x7B - 0x4];
+    /* +7B */ u8 x7B;
+};
+
+struct ColorOverlay {
+    s32 x0_timer;   // 0x0
+    s32 x4_pri;     // 0x4  this colanims priority, lower = will persist
+    s32* x8_ptr1;   // 0x8
+    s32 xC_loop;    // 0xc
+    s32* x10_ptr2;  // 0x10
+    s32 x14;        // 0x14
+    s32* x18_alloc; // 0x18
+    s32 x1c;        // 0x1c
+    s32 x20;        // 0x20
+    s32 x24;        // 0x24
+    union {
+        enum_t i;
+        struct ColorOverlay_UnkInner* ptr;
+    } x28_colanim;            // 0x28, id for the color animation in effect
+    GXColor x2C_hex;          // 0x2C
+    f32 x30_color_red;        // 0x30
+    f32 x34_color_green;      // 0x34
+    f32 x38_color_blue;       // 0x38
+    f32 x3C_color_alpha;      // 0x3C
+    f32 x40_colorblend_red;   // 0x40
+    f32 x44_colorblend_green; // 0x44
+    f32 x48_colorblend_blue;  // 0x48
+    f32 x4C_colorblend_alpha; // 0x4C
+    GXColor x50_light_color;  // 0x50
+    f32 x54_light_red;        // 0x54
+    f32 x58_light_green;      // 0x58
+    f32 x5C_light_blue;       // 0x5C
+    f32 x60_light_alpha;      // 0x60
+    f32 x64_lightblend_red;   // 0x64
+    f32 x68_lightblend_green; // 0x68
+    f32 x6C_lightblend_blue;  // 0x6c
+    f32 x70_lightblend_alpha; // 0x70
+    f32 x74_light_rot_x;      // 0x74
+    f32 x78_light_rot_yz;     // 0x78
+    u8 x7C_color_enable : 1;  // 0x7c, 0x80
+    u8 x7C_flag2 : 1;         // 0x7c, 0x40
+    u8 x7C_light_enable : 1;  // 0x7c, 0x20
+    u8 x7C_flag4 : 1;         // 0x7c, 0x10
+    u8 x7C_flag5 : 1;         // 0x7c, 0x08
+    u8 x7C_flag6 : 1;         // 0x7c, 0x04
+    u8 x7C_flag7 : 1;         // 0x7c, 0x02
+    u8 x7C_flag8 : 1;         // 0x7c, 0x01
+};
+
+struct lb_80011A50_t {
+    /*  +0 */ s8 x0;
+    /*  +1 */ s8 x1;
+    /*  +2 */ s8 x2;
+    /*  +3 */ s8 x3;
+    /*  +4 */ Vec3 x4;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ s32 x28;
+    /* +2C */ f32 x2C;
+};
+STATIC_ASSERT(sizeof(struct lb_80011A50_t) == 0x30);
+
+struct Fighter_804D653C_t {
+    void* unk;
+    u8 unk4;
+    u8 unk5;
+};
+STATIC_ASSERT(sizeof(struct Fighter_804D653C_t) == 8);
 
 #endif
