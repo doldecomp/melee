@@ -57,6 +57,11 @@ jobs:
             run_configure
             set +e
             ninja
+            output="$(ninja diff)"
+            echo "$output"
+            if [[ "$output" =~ ^ERROR\b ]]; then
+              exit 1
+            fi
             set -e
             grep -q '/^ERROR\b/' < <(ninja diff)
           ;;
