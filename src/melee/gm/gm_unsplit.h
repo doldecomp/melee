@@ -14,6 +14,8 @@
 #include <melee/gm/gm_1601.h> // IWYU pragma: export
 #include <melee/gm/gm_16AE.h> // IWYU pragma: export
 #include <melee/gm/gm_16F1.h> // IWYU pragma: export
+#include <melee/gm/gm_17AD.h> // IWYU pragma: export
+#include <melee/gm/gm_17BA.h> // IWYU pragma: export
 #include <melee/gm/gm_17C0.h> // IWYU pragma: export
 #include <melee/gm/gm_1832.h> // IWYU pragma: export
 #include <melee/gm/gm_18A5.h> // IWYU pragma: export

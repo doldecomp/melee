@@ -22,7 +22,7 @@ struct UnkMultimanData {
 
 struct DebugGameOverData {
     u32 x0;
-    u8 pad_x4[0x4];
+    int x4;
     u32 x8;
     int xC;
     u32 x10;
@@ -286,11 +286,33 @@ struct gmm_x0 {
         /* 0x0538 */ s8 x8;
         /* 0x0539 */ s8 x9;
         /* 0x053A */ s8 xA;
-        /* 0x053B */ char pad_B[0x44 - 0xB];
+        /* 0x053B */ u8 xB_0 : 1;
+        /* 0x053B */ u8 xB_1 : 1;
+        /* 0x053B */ u8 xB_2 : 1;
+        /* 0x053B */ u8 xB_3 : 1;
+        /* 0x053B */ u8 xB_4 : 1;
+        /* 0x053B */ u8 xB_5 : 1;
+        /* 0x053B */ u8 xB_6 : 1;
+        /* 0x053B */ u8 xB_7 : 1;
+        /* 0x053C */ int xC;
+        /* 0x0540 */ int x10;
+        /* 0x0544 */ int x14;
+        /* 0x0548 */ int x18;
+        /* 0x054C */ float x1C;
+        /* 0x0550 */ int x20;
+        /* 0x0554 */ int x24;
+        /* 0x0558 */ int x28;
+        /* 0x055C */ int x2C; // timer seconds
+        /* 0x0560 */ int x30;
+        /* 0x0564 */ int x34;
+        /* 0x0568 */ u8 x38;
+        /* 0x056C */ int x3C;
+        /* 0x0570 */ int x40;
         /* 0x0574 */ s8 x44;
+        /* 0x0575 */ s8 x45;
         /* 0x0578 */ int x48;
-        /* 0x057C */ s32 unk_57C;
-        /* 0x0580 */ char pad_580[4];
+        /* 0x057C */ u8 x4C[4];
+        /* 0x0580 */ u8 x50[4];
         /* 0x0584 */ M2C_UNK unk_584; /* inferred */
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
@@ -531,8 +553,8 @@ struct MatchPlayerData {
     u32 x90;
     u32 x94;
     u32 x98;
-    u32 x9C;
-    u32 xA0;
+    int x9C;
+    int xA0;
     u32 xA4;
 };
 
