@@ -57,18 +57,18 @@ jobs:
             config_args="--map --require-protos $config_args"
             run_configure
 
-            set +e pipefail
+            set +e
 
             ninja
 
             result="$?"
 
-            ninja diff | while IFS= read -r line; do
+            while IFS= read -r line; do
                 echo "$line"
                 if [[ "$line" == *"ERROR"* ]]; then
                   result=1
                 fi
-            done
+            done < <(ninja diff)
 
             exit "$result"
           ;;
