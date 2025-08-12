@@ -63,7 +63,7 @@ jobs:
 
             ninja diff | while IFS= read -r line; do
                 echo "$line"
-                if [[ "$line" =~ \<ERROR\> ]]; then
+                if [[ "$line" =~ \bERROR\b ]]; then
                   result=1
                 fi
             done
