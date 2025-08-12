@@ -1382,7 +1382,7 @@ u8 gm_80169370(s32 arg0)
     return lbl_8046B488.pad_0[arg0];
 }
 
-u8 gm_80169384(void)
+int gm_80169384(void)
 {
     return lbl_8046B488.x7;
 }
