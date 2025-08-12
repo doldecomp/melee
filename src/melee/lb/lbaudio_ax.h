@@ -105,6 +105,6 @@
 /* 028B2C */ int lbAudioAx_80028B2C(void);
 /* 028B4C */ int lbAudioAx_80028B4C(void);
 /* 028B6C */ UNK_RET lbAudioAx_80028B6C(UNK_PARAMS);
-/* 028B90 */ UNK_RET lbAudioAx_80028B90(UNK_PARAMS);
+/* 028B90 */ UNK_RET lbAudioAx_80028B90(void);
 
 #endif
