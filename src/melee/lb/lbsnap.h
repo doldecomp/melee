@@ -20,7 +20,7 @@
 /* 01DA5C */ void lbSnap_8001DA5C(int);
 /* 01DC0C */ int lbSnap_8001DC0C(int);
 /* 01DE8C */ int lbSnap_8001DE8C(void*);
-/* 01DF20 */ void lbSnap_8001DF20(void);
+/* 01DF20 */ int lbSnap_8001DF20(void);
 /* 01DF6C */ int lbSnap_8001DF6C(int);
 /* 01E058 */ int lbSnap_8001E058(int, int);
 /* 01E204 */ int lbSnap_8001E204(void);
