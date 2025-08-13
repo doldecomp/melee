@@ -132,6 +132,11 @@ func (fv *CFuncValue) setType(ft CFuncType) {
 	}
 }
 
+func (ft *CFuncType) isUnk() bool {
+	return ft.Return == "UNK_RET" ||
+		(len(ft.Params) == 1 && ft.Params[0] == "UNK_PARAMS")
+}
+
 func (fv CFuncValue) String() string {
 	var params []string
 	for i := range fv.ParamNames {
@@ -190,11 +195,31 @@ var structTypes = map[string]CStructType{
 		},
 	},
 
+	"MajorScene": {
+		Fields: []CFieldType{
+			ignoredField, // u8 + u8 + padding
+			{"Load", &CFuncType{"void", []string{"void"}}},
+			{"Unload", &CFuncType{"void", []string{"void"}}},
+			{"Init", &CFuncType{"void", []string{"void"}}},
+			ignoredField, // MinorScene*
+		},
+	},
+
 	"MinorScene": {
 		Fields: []CFieldType{
 			ignoredField, // u8 + u8 + u16
 			{"Prep", &CFuncType{"void", []string{"MinorScene*"}}},
 			{"Decide", &CFuncType{"void", []string{"MinorScene*"}}},
+		},
+	},
+
+	"MinorSceneHandler": {
+		Fields: []CFieldType{
+			ignoredField,
+			{"OnFrame", &CFuncType{"void", []string{"void"}}},
+			{"OnLoad", &CFuncType{"void", []string{"void*"}}},
+			{"OnLeave", &CFuncType{"void", []string{"void*"}}},
+			{"unk_func", &CFuncType{"void", []string{"void"}}},
 		},
 	},
 
@@ -251,17 +276,23 @@ func parseTableDecls(path string, tableType string) []string {
 	if err != nil {
 		log.Fatalf("Failed to read file %s: %v", path, err)
 	}
+
 	var decls []string
-	matches := regexp.MustCompile(fmt.Sprintf(`%v\s+(\w+)`, tableType)).FindAllStringSubmatch(string(content), -1)
+	matches := regexp.MustCompile(fmt.Sprintf(`(?s)%s\s+([\w\[\],\s]+)[;=]`, tableType)).FindAllStringSubmatch(string(content), -1)
 	for _, match := range matches {
 		if len(match) > 1 {
-			decls = append(decls, match[1])
+			for _, decl := range strings.Split(match[1], ",") {
+				if i := strings.IndexByte(decl, '['); i >= 0 {
+					decl = decl[:i]
+				}
+				decls = append(decls, strings.Trim(strings.TrimSpace(decl), "[]*"))
+			}
 		}
 	}
 	return decls
 }
 
-func fixSignatures(path string, fnTypes map[string]*CFuncValue) int {
+func fixSignatures(path string, fnTypes map[string]*CFuncValue, conservative bool) int {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatalf("Failed to read file %s: %v", path, err)
@@ -273,6 +304,9 @@ func fixSignatures(path string, fnTypes map[string]*CFuncValue) int {
 		lines := bytes.Split(content, []byte("\n"))
 		for i, line := range lines {
 			if raw, sig, ok := parseCFuncValue(name, line); ok {
+				if conservative && !sig.typ.isUnk() {
+					continue
+				}
 				if !equivalent(sig.typ, ft) {
 					sig.setType(ft)
 					lines[i] = bytes.Replace(lines[i], raw, []byte(sig.String()), 1)
@@ -305,6 +339,10 @@ func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 		return nil, CFuncValue{}, false
 	}
 	retEnd := bytes.LastIndexByte(line[:i], ' ')
+	if retEnd < 0 {
+		// TODO: handle multi-line signatures
+		return nil, CFuncValue{}, false
+	}
 	retStart := retEnd - 1
 	for retStart > 0 && isIdentByte(line[retStart-1]) {
 		retStart--
@@ -325,6 +363,12 @@ func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 	var paramTypes, paramNames []string
 	for _, param := range params {
 		typ, name, _ := strings.Cut(strings.TrimSpace(string(param)), " ")
+		switch typ {
+		case "struct", "unsigned":
+			var moreTyp string
+			moreTyp, name, _ = strings.Cut(strings.TrimSpace(name), " ")
+			typ += " " + moreTyp
+		}
 		if strings.HasPrefix(name, "*") {
 			typ += "*"
 			name = strings.TrimPrefix(name, "*")
