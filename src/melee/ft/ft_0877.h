@@ -9,25 +9,25 @@
 
 #include <baselib/forward.h>
 
-/* 0877F8 */ s32 ft_800877F8(Fighter_GObj*, s32);
-/* 087818 */ s32 ft_80087818(Fighter_GObj*, s32);
-/* 087838 */ s32 ft_80087838(Fighter_GObj* gobj);
-/* 087858 */ s32 ft_80087858(Fighter_GObj* gobj);
-/* 087878 */ s32 ft_80087878(Fighter_GObj*, s32);
-/* 0878BC */ s32 ft_800878BC(Fighter_GObj* gobj);
-/* 087900 */ s32 ft_80087900(Fighter_GObj* gobj);
-/* 087944 */ s32 ft_80087944(Fighter_GObj* gobj);
-/* 087988 */ s32 ft_80087988(Fighter_GObj* gobj);
-/* 0879D8 */ s32 ft_800879D8(Fighter_GObj* gobj);
-/* 0879F8 */ s32 ft_800879F8(Fighter_GObj* gobj);
-/* 087A18 */ s32 ft_80087A18(Fighter_GObj* gobj);
+/* 0877F8 */ bool ft_800877F8(Fighter_GObj*, s32);
+/* 087818 */ bool ft_80087818(Fighter_GObj*, s32);
+/* 087838 */ bool ft_80087838(Fighter_GObj* gobj);
+/* 087858 */ bool ft_80087858(Fighter_GObj* gobj);
+/* 087878 */ bool ft_80087878(Fighter_GObj*, s32);
+/* 0878BC */ bool ft_800878BC(Fighter_GObj* gobj);
+/* 087900 */ bool ft_80087900(Fighter_GObj* gobj);
+/* 087944 */ bool ft_80087944(Fighter_GObj* gobj);
+/* 087988 */ bool ft_80087988(Fighter_GObj* gobj);
+/* 0879D8 */ bool ft_800879D8(Fighter_GObj* gobj);
+/* 0879F8 */ bool ft_800879F8(Fighter_GObj* gobj);
+/* 087A18 */ bool ft_80087A18(Fighter_GObj* gobj);
 /* 087A80 */ s8 ft_80087A80(Fighter_GObj* gobj);
 /* 087A8C */ float ft_80087A8C(Fighter_GObj* gobj);
 /* 087A98 */ s32 ft_80087A98(Fighter_GObj* gobj);
-/* 087AA4 */ s32 ft_80087AA4(Fighter_GObj* gobj);
+/* 087AA4 */ bool ft_80087AA4(Fighter_GObj* gobj);
 /* 087AB4 */ u8 ft_80087AB4(Fighter_GObj* gobj);
 /* 087AC0 */ void ft_80087AC0(Fighter_GObj*, s32);
-/* 087AEC */ s32 ft_80087AEC(Fighter_GObj* gobj);
+/* 087AEC */ bool ft_80087AEC(Fighter_GObj* gobj);
 /* 087B34 */ s32 ft_80087B34(Fighter_GObj* gobj);
 /* 087BAC */ void ft_80087BAC(Fighter_GObj*, s32);
 /* 087BC0 */ void ft_80087BC0(Fighter_GObj*, int);

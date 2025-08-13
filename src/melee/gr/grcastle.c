@@ -225,7 +225,7 @@ void grCastle_801D0680(void* arg0, unkCastle* arg1)
 
 static void grCastle_801D06CC_sub(unkCastle* arg0, Ground_GObj* gobj, s32 i)
 {
-    if ((ftLib_80086960(gobj)) || (itGetKind(gobj) != 0xA0)) {
+    if (ftLib_80086960(gobj) || itGetKind(gobj) != Pokemon_Random) {
         arg0->x134[i] = 1;
         grMaterial_801C8CDC(arg0->x10C[i]);
         arg0->x10C[i] = NULL;

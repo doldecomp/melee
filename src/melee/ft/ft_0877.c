@@ -15,31 +15,31 @@
 
 #define TEST(expr) (expr) ? true : false
 
-s32 ft_800877F8(HSD_GObj* gobj, s32 arg1)
+bool ft_800877F8(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return TEST(fp->input.held_inputs & arg1);
 }
 
-s32 ft_80087818(HSD_GObj* gobj, s32 arg1)
+bool ft_80087818(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return TEST(fp->input.x668 & arg1);
 }
 
-s32 ft_80087838(HSD_GObj* gobj)
+bool ft_80087838(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return TEST(fp->x221D_b7 & 1);
 }
 
-s32 ft_80087858(HSD_GObj* gobj)
+bool ft_80087858(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return TEST(fp->x2227_b1 & 1);
 }
 
-s32 ft_80087878(HSD_GObj* gobj, s32 arg1)
+bool ft_80087878(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -52,7 +52,7 @@ s32 ft_80087878(HSD_GObj* gobj, s32 arg1)
     return false;
 }
 
-s32 ft_800878BC(HSD_GObj* gobj)
+bool ft_800878BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -63,29 +63,29 @@ s32 ft_800878BC(HSD_GObj* gobj)
     return false;
 }
 
-s32 ft_80087900(HSD_GObj* gobj)
+bool ft_80087900(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->item_gobj != NULL) && (itGetKind(fp->item_gobj) == 0x1E)) {
+    if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_ScBall) {
         return true;
     }
 
     return false;
 }
 
-s32 ft_80087944(HSD_GObj* gobj)
+bool ft_80087944(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->item_gobj != NULL) && (itGetKind(fp->item_gobj) == 0x7)) {
+    if (fp->item_gobj != NULL && itGetKind(fp->item_gobj) == It_Kind_Dosei) {
         return true;
     }
 
     return false;
 }
 
-s32 ft_80087988(HSD_GObj* gobj)
+bool ft_80087988(HSD_GObj* gobj)
 {
     if ((ftGetParasolStatus(gobj) == 4) || (ftGetParasolStatus(gobj) == 5)) {
         return true;
@@ -94,7 +94,7 @@ s32 ft_80087988(HSD_GObj* gobj)
     return false;
 }
 
-s32 ft_800879D8(HSD_GObj* gobj)
+bool ft_800879D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -105,7 +105,7 @@ s32 ft_800879D8(HSD_GObj* gobj)
     return false;
 }
 
-s32 ft_800879F8(HSD_GObj* gobj)
+bool ft_800879F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -116,7 +116,7 @@ s32 ft_800879F8(HSD_GObj* gobj)
     return false;
 }
 
-s32 ft_80087A18(HSD_GObj* gobj)
+bool ft_80087A18(HSD_GObj* gobj)
 {
     s32 var1;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -150,7 +150,7 @@ s32 ft_80087A98(HSD_GObj* gobj)
     return fp->x213C;
 }
 
-s32 ft_80087AA4(HSD_GObj* gobj)
+bool ft_80087AA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->x2227_b5;
@@ -179,7 +179,7 @@ void ft_80087AC0(HSD_GObj* gobj, s32 arg1)
     fp->x221E_b0 = var2;
 }
 
-s32 ft_80087AEC(HSD_GObj* gobj)
+bool ft_80087AEC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
