@@ -193,43 +193,37 @@ void lb_80011710(DynamicsDesc* arg0, DynamicsDesc* arg1)
 
 void lb_800119DC(Point3d* arg0, int arg1, float arg2, float arg3, float arg4)
 {
-    PAD_STACK(8);
-    {
-        struct lb_80011A50_t sp1C;
-        sp1C.x0 = 2;
-        sp1C.x1 = 0x64;
-        sp1C.x4 = *arg0;
-        sp1C.x20 = arg2;
-        sp1C.x24 = arg3;
-        sp1C.x28 = arg1;
-        sp1C.x2C = arg4;
-        sp1C.x10 = -10000.0f;
-        sp1C.x14 = 10000.0f;
-        sp1C.x18 = 10000.0f;
-        sp1C.x1C = -10000.0f;
-        lb_800100B0(&sp1C, arg2);
-    }
+    struct lb_80011A50_t sp1C;
+    sp1C.x0 = 2;
+    sp1C.x1 = 0x64;
+    sp1C.x4 = *arg0;
+    sp1C.x20 = arg2;
+    sp1C.x24 = arg3;
+    sp1C.x28 = arg1;
+    sp1C.x2C = arg4;
+    sp1C.x10 = -10000.0f;
+    sp1C.x14 = 10000.0f;
+    sp1C.x18 = 10000.0f;
+    sp1C.x1C = -10000.0f;
+    lb_800100B0(&sp1C, arg2);
 }
 
 void lb_80011A50(Vec3* arg0, int arg1, float arg2, float arg3, float arg4,
                  float arg5, float arg6, float arg7, float arg8)
 {
-    PAD_STACK(8);
-    {
-        struct lb_80011A50_t x2C;
-        x2C.x0 = 1;
-        x2C.x1 = 0;
-        x2C.x4 = *arg0;
-        x2C.x20 = arg2;
-        x2C.x24 = arg3;
-        x2C.x28 = arg1;
-        x2C.x2C = arg4;
-        x2C.x10 = arg5;
-        x2C.x14 = arg6;
-        x2C.x18 = arg7;
-        x2C.x1C = arg8;
-        lb_800100B0(&x2C, arg2);
-    }
+    struct lb_80011A50_t x2C;
+    x2C.x0 = 1;
+    x2C.x1 = 0;
+    x2C.x4 = *arg0;
+    x2C.x20 = arg2;
+    x2C.x24 = arg3;
+    x2C.x28 = arg1;
+    x2C.x2C = arg4;
+    x2C.x10 = arg5;
+    x2C.x14 = arg6;
+    x2C.x18 = arg7;
+    x2C.x1C = arg8;
+    lb_800100B0(&x2C, arg2);
 }
 
 enum_t lb_80011ABC(void)
