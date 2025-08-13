@@ -195,6 +195,16 @@ var structTypes = map[string]CStructType{
 		},
 	},
 
+	"MajorScene": {
+		Fields: []CFieldType{
+			ignoredField, // u8 + u8 + padding
+			{"Load", &CFuncType{"void", []string{"void"}}},
+			{"Unload", &CFuncType{"void", []string{"void"}}},
+			{"Init", &CFuncType{"void", []string{"void"}}},
+			ignoredField, // MinorScene*
+		},
+	},
+
 	"MinorScene": {
 		Fields: []CFieldType{
 			ignoredField, // u8 + u8 + u16

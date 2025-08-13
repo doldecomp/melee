@@ -91,7 +91,7 @@
 /* 1736E8 */ void gm_801736E8(u8, u8, int, u8, u8, u8);
 /* 173754 */ int gm_80173754(s8, int);
 /* 1737D8 */ u8 gm_801737D8(void);
-/* 1737E8 */ UNK_RET gm_801737E8_OnLoad(UNK_PARAMS);
+/* 1737E8 */ void gm_801737E8_OnLoad(void);
 /* 173834 */ UNK_RET fn_80173834(UNK_PARAMS);
 /* 17390C */ UNK_RET gm_8017390C(UNK_PARAMS);
 /* 173AA4 */ UNK_RET gm_80173AA4(UNK_PARAMS);

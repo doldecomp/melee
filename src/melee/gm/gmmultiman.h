@@ -13,8 +13,8 @@
 /* 1B65D4 */ void gm_801B65D4(MinorScene*);
 /* 1B67E8 */ void gm_801B67E8_OnInit(void);
 /* 1B6808 */ void gm_801B6808_OnLoad(void);
-/* 1B6834 */ UNK_RET gm_801B6834(UNK_PARAMS);
-/* 1B685C */ UNK_RET gm_801B685C(UNK_PARAMS);
+/* 1B6834 */ void gm_801B6834(void);
+/* 1B685C */ void gm_801B685C(void);
 /* 1B688C */ bool gm_801B688C(bool);
 /* 1B69C0 */ void gm_801B69C0(StartMeleeData*);
 /* 1B6AD8 */ void gm_801B6AD8(MinorScene*);
