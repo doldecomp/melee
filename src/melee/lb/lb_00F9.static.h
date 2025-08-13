@@ -49,5 +49,6 @@ struct _m2c_stack_lb_800119DC {
 /* 4D63A8 */ static struct lb_804D63A8_t* lb_804D63A8;
 /* 4D63B4 */ static enum_t lb_804D63B4;
 /* 4D63C0 */ static struct Fighter_804D653C_t* lb_804D63C0;
+/* 4D3770 */ static GXColor yellow;
 
 #endif

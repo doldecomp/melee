@@ -1269,17 +1269,15 @@ void it_8027163C(Item_GObj* item_gobj)
             // hurt->a_offset = (s32) bone_dyn_desc->unk4;
             // hurt->a_offset = (Vec3) ((u8) &bone_dyn_desc->dyn_desc.data->_4
             // + 0x0);
-            hurt->a_offset =
-                ((HurtCapsule*) bone_dyn_desc->dyn_desc.data)->a_offset;
+            hurt->a_offset = bone_dyn_desc->dyn_desc.data->desc.hurt.a_offset;
             // hurt->unk8 = (s32) bone_dyn_desc->unk8;
             // hurt->unkC = (s32) bone_dyn_desc->unkC;
             // hurt->b_offset = (s32) bone_dyn_desc->unk10;
-            hurt->b_offset =
-                ((HurtCapsule*) bone_dyn_desc->dyn_desc.data)->b_offset;
+            hurt->b_offset = bone_dyn_desc->dyn_desc.data->desc.hurt.b_offset;
             // hurt->unk14 = (s32) bone_dyn_desc->unk14;
             // hurt->unk18 = (s32) bone_dyn_desc->unk18;
             // hurt->scale = (f32) bone_dyn_desc->unk1C;
-            hurt->scale = ((HurtCapsule*) bone_dyn_desc->dyn_desc.data)->scale;
+            hurt->scale = bone_dyn_desc->dyn_desc.data->desc.hurt.scale;
             // goto loop_10;
         }
     } else {
@@ -1308,13 +1306,13 @@ void it_8027163C(Item_GObj* item_gobj)
             item->xB6C_vars[cnt].xB7C =
                 item->xBBC_dynamicBoneTable->bones[bone_id];
             item->xB6C_vars[cnt].xB6C =
-                ((AbsorbDesc*) bone_dyn_desc->dyn_desc.data)->x4_offset;
+                bone_dyn_desc->dyn_desc.data->desc.absorb.x4_offset;
             // item->xB6C_vars[cnt].xB70 = (s32) bone_dyn_desc->dyn_desc.count;
             // var_r4->unkB74 = (s32) bone_dyn_desc->unkC;
             // item->xB6C_vars[cnt].xB74 = (s32) bone_dyn_desc->dyn_desc.pos.x;
             // var_r4->unkB78 = (f32) bone_dyn_desc->unk10;
             item->xB6C_vars[cnt].xB78 =
-                ((AbsorbDesc*) bone_dyn_desc->dyn_desc.data)->x10_size;
+                bone_dyn_desc->dyn_desc.data->desc.absorb.x10_size;
             // var_r4 += 0x28;
             // goto loop_18;
             index++;

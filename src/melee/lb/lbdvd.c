@@ -305,7 +305,7 @@ void lbDvd_80017E64(void* key, int index, void* value, bool cancelflag)
     lbDvd_80017CC4();
 }
 
-void* lbDvd_GetPreloadedArchive(s32 arg0)
+void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
 {
     s8 type;
     ssize_t i;
@@ -317,7 +317,7 @@ void* lbDvd_GetPreloadedArchive(s32 arg0)
     for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {
         entry = &preloadCache.entries[i];
         if ((s8) entry->state != 0 && entry->load_score > 0 &&
-            (s16) entry->entry_num == arg0)
+            (s16) entry->entry_num == entry_num)
         {
             break;
         }
@@ -333,7 +333,7 @@ void* lbDvd_GetPreloadedArchive(s32 arg0)
     }
 
     OSRestoreInterrupts(interrupt);
-    lbDvd_800189EC(arg0);
+    lbDvd_800189EC(entry_num);
     if (((s32) entry->load_state) == 1) {
         PreloadEntry* entry = &preloadCache.entries[i];
         type = entry->type;

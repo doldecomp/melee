@@ -11,23 +11,6 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
-struct DynamicsData {
-    /* +0 */ HSD_JObj* jobj;
-    /* +4 */ u8 _4[0x90 - 0x4];
-    /* +90 */ struct DynamicsData* next;
-};
-
-struct DynamicsDesc {
-    /* +0 */ struct DynamicsData* data;
-    /* +4 */ unsigned int count;
-    /* +8 */ Vec3 pos;
-};
-
-struct BoneDynamicsDesc {
-    enum_t bone_id;
-    DynamicsDesc dyn_desc;
-};
-
 struct HitResult {
     HSD_JObj* bone;
 
@@ -369,9 +352,16 @@ struct ColorOverlay_UnkInner {
 };
 
 struct ColorOverlay {
-    s32 x0_timer;   // 0x0
-    s32 x4_pri;     // 0x4  this colanims priority, lower = will persist
-    s32* x8_ptr1;   // 0x8
+    s32 x0_timer; // 0x0
+    s32 x4_pri;   // 0x4  this colanims priority, lower = will persist
+    union {
+        GXColor light_color;
+        struct {
+            s32 unk : 6;
+            s32 x : 13;
+            s32 yz : 13;
+        } light_rot;
+    }* x8_ptr1;     // 0x8
     s32 xC_loop;    // 0xc
     s32* x10_ptr2;  // 0x10
     s32 x14;        // 0x14
@@ -415,7 +405,7 @@ struct ColorOverlay {
 
 struct lb_80011A50_t {
     /*  +0 */ s8 x0;
-    /*  +1 */ s8 x1;
+    /*  +1 */ u8 x1;
     /*  +2 */ s8 x2;
     /*  +3 */ s8 x3;
     /*  +4 */ Vec3 x4;
@@ -427,8 +417,9 @@ struct lb_80011A50_t {
     /* +24 */ f32 x24;
     /* +28 */ s32 x28;
     /* +2C */ f32 x2C;
+    /* +30 */ int x30;
+    /* +34 */ struct lb_80011A50_t* next;
 };
-STATIC_ASSERT(sizeof(struct lb_80011A50_t) == 0x30);
 
 struct Fighter_804D653C_t {
     void* unk;
@@ -436,5 +427,84 @@ struct Fighter_804D653C_t {
     u8 unk5;
 };
 STATIC_ASSERT(sizeof(struct Fighter_804D653C_t) == 8);
+
+struct lb_00F9_UnkDesc1Inner {
+    /* 0x00 */ f32 unk_0;
+    /* 0x04 */ f32 unk_4;  /* inferred */
+    /* 0x08 */ s32 unk_8;  /* inferred */
+    /* 0x0C */ s32 unk_C;  /* inferred */
+    /* 0x10 */ s32 unk_10; /* inferred */
+    /* 0x14 */ s32 unk_14; /* inferred */
+    /* 0x18 */ f32 unk_18; /* inferred */
+    /* 0x1C */ s32 unk_1C; /* inferred */
+    /* 0x20 */ s32 unk_20; /* inferred */
+    /* 0x24 */ f32 unk_24; /* inferred */
+    /* 0x28 */ s32 unk_28; /* inferred */
+    /* 0x2C */ s32 unk_2C; /* inferred */
+    /* 0x30 */ s32 unk_30; /* inferred */
+    /* 0x34 */ f32 unk_34; /* inferred */
+    /* 0x38 */ f32 unk_38; /* inferred */
+};
+STATIC_ASSERT(sizeof(struct lb_00F9_UnkDesc1Inner) == 0x3C);
+
+struct lb_00F9_UnkDesc1 {
+    struct lb_00F9_UnkDesc1Inner array[2];
+};
+
+struct lb_00F9_UnkDesc0 {
+    /* 0x00 */ f32 unk_0;
+    /* 0x04 */ f32 unk_4;
+    /* 0x08 */ s32 unk_8;
+    /* 0x0C */ f32 unk_C;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ s32 unk_24;
+    /* 0x28 */ s32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ s32 unk_30;
+    /* 0x34 */ s32 unk_34;
+    /* 0x38 */ f32 unk_38;
+    char pad_3C[0x78 - 0x3C];
+    int unk_78;
+    int unk_7C;
+    int unk_80;
+    f32 unk_84;
+    f32 unk_88;
+    f32 unk_8C;
+};
+
+struct ftDynamics_UnkDesc {
+    HSD_JObj* jobj;
+};
+
+union PolymorphicDesc {
+    u8 _[0x90];
+    struct lb_00F9_UnkDesc0 lb_unk0;
+    struct lb_00F9_UnkDesc1 lb_unk1;
+    struct ftDynamics_UnkDesc ft_unk;
+    struct AbsorbDesc absorb;
+    struct HurtCapsule hurt;
+};
+STATIC_ASSERT(sizeof(union PolymorphicDesc) == 0x90);
+
+struct DynamicsData {
+    union PolymorphicDesc desc;
+    /* 0x90 */ struct DynamicsData* next;
+}; /* size = 0x94 */
+STATIC_ASSERT(sizeof(struct DynamicsData) == 0x94);
+
+struct DynamicsDesc {
+    /* +0 */ struct DynamicsData* data;
+    /* +4 */ unsigned int count;
+    /* +8 */ Vec3 pos;
+};
+
+struct BoneDynamicsDesc {
+    enum_t bone_id;
+    DynamicsDesc dyn_desc;
+};
 
 #endif
