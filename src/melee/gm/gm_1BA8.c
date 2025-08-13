@@ -1035,7 +1035,7 @@ void gm_801BEA4C(int arg0)
     gm_801BEA10(arg0);
 }
 
-void gm_801BEA88(int arg0)
+void gm_801BEA88(int arg0, int arg1)
 {
     PAD_STACK(0x10);
     gm_801BEA10(arg0);
