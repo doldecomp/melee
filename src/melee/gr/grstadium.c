@@ -1662,7 +1662,7 @@ void grStadium_801D3A0C(Ground_GObj* gobj)
     sp24.z = 0xFF;
     temp_r30->x1C->x30 = sp24;
     temp_r30->x1C->x4A = 1;
-    if (gp->u.display.xF0 == 0) {
+    if (gp->u.display.xF0 == Gm_PKind_Human) {
         temp_r3 = temp_r30->x1C;
         temp_r3->x34.x = 0.625F;
         temp_r3->x34.y = 1.5F;
@@ -1695,7 +1695,7 @@ const float grPs_804DAF68 = 52;
 const float grPs_804DAF6C = -3;
 const float grPs_804DAF74 = 56;
 
-void grStadium_801D3B4C(int arg0, int arg1)
+void grStadium_801D3B4C(int arg0, int slot_type)
 {
     Ground_GObj* gobj;
     Ground* gp;
@@ -1704,7 +1704,7 @@ void grStadium_801D3B4C(int arg0, int arg1)
         gobj = Ground_801C2BA4(PsType_Display);
         gp = GET_GROUND(gobj);
         gp->u.display.xEE = arg0;
-        gp->u.display.xF0 = arg1;
+        gp->u.display.xF0 = slot_type;
         grStadium_801D2528(gobj, 9, 0);
     }
 }
