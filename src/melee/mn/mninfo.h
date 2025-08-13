@@ -18,7 +18,7 @@ typedef struct MnInfoData {
 } MnInfoData;
 
 /// was using this to try and fix some matches, unsuccessfully
-#ifdef M2CTX
+#ifdef M2CTX_DUAL
 typedef struct MenuInfo_GObj MenuInfo_GObj;
 struct MenuInfo_GObj {
     /*  +0 */ u16 classifier;

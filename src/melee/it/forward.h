@@ -29,7 +29,7 @@ typedef struct itSword_ItemVars itSword_ItemVars;
 typedef struct SpawnItem SpawnItem;
 typedef struct UnkItemArticles3 UnkItemArticles3;
 
-#ifdef M2CTX
+#ifdef M2CTX_DUAL
 typedef struct Item_GObj Item_GObj;
 struct Item_GObj {
     /*  +0 */ u16 classifier;
