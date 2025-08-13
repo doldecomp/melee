@@ -5,6 +5,7 @@
 #include <platform.h>
 
 #include "if/forward.h" // IWYU pragma: export
+#include "sc/forward.h"
 #include <baselib/forward.h>
 
 struct IfDamageFlags {
@@ -60,20 +61,14 @@ struct Element_803F9628_Obj_14 {
 struct Element_803F9628 {
     /* +00 */ HSD_GObj* x0;
     /* +04 */ u32 x4;
-    /* +08 */ UNK_T x8;
+    /* +08 */ void(*x8)(HSD_GObj*);
     /* +0C */ u32 xC;  // flags?
     /* +10 */ u32 x10; // flags?
-    /* +14 */ s32 x14;
+    /* +14 */ DynamicModelDesc* x14;
     /* +18 */ u32 x18;
     /* +1C */ u32 x1C;
     /* +20 */ u32 x20;
     /* +24 */ u32 x24;
-    /* +28 */ u32 x28;
-};
-
-struct Thing_803F9628 {
-    Element_803F9628 things[8];
-    u32 extra[6];
 };
 
 struct Placeholder_8016AE50_flags {
