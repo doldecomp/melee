@@ -1,12 +1,19 @@
 #include "lb_00F9.static.h"
 
+#include "stddef.h"
+
+#include "baselib/debug.h"
+#include "baselib/displayfunc.h"
 #include "baselib/rumble.h"
 #include "baselib/tobj.h"
+#include "dolphin/gx/GXVert.h"
 #include "dolphin/pad.h"
 #include "lb/lbarchive.h"
+#include "lb/lbdvd.h"
 #include "lb/types.h"
 
 #include <baselib/cobj.h>
+#include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
@@ -52,7 +59,67 @@ void lb_8000FD18(DynamicsDesc* desc)
 
 /// #lb_8000FD48
 
-/// #lb_800100B0
+static inline struct lb_80011A50_t* inlineA0()
+{
+    struct lb_80011A50_t* ret = lb_804D63AC;
+    if (ret == NULL) {
+        return NULL;
+    }
+    {
+        struct lb_80011A50_t* temp = lb_804D63B0;
+        lb_804D63AC = ret->next;
+        lb_804D63B0 = ret;
+        ret->next = temp;
+    }
+    return ret;
+}
+
+static inline struct lb_80011A50_t* inlineA1()
+{
+    struct lb_80011A50_t* cur = lb_804D63B0;
+    if (lb_804D63B0 == NULL) {
+        return NULL;
+    }
+    {
+        struct lb_80011A50_t* ret = cur;
+        int max = cur->x1;
+        while (cur != NULL) {
+            if (max < cur->x1) {
+                max = cur->x1;
+                ret = cur;
+            }
+            cur = cur->next;
+        }
+        return cur;
+    }
+}
+
+struct lb_80011A50_t* lb_800100B0(struct lb_80011A50_t* arg0, f32 arg1)
+{
+    struct lb_80011A50_t* ret = inlineA0();
+    if (ret == NULL) {
+        ret = inlineA1();
+        if (ret == NULL) {
+            return NULL;
+        }
+        if (ret->x1 < arg0->x1) {
+            return NULL;
+        }
+    }
+    ret->x0 = arg0->x0;
+    ret->x1 = arg0->x1;
+    ret->x4 = arg0->x4;
+    ret->x20 = arg0->x20;
+    ret->x24 = arg0->x24;
+    ret->x28 = arg0->x28;
+    ret->x2C = arg0->x2C;
+    ret->x10 = arg0->x10;
+    ret->x14 = arg0->x14;
+    ret->x18 = arg0->x18;
+    ret->x1C = arg0->x1C;
+    ret->x30 = 0;
+    return ret;
+}
 
 /// #lb_800101C8
 
@@ -85,49 +152,78 @@ bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
 
 /// #lb_800115F4
 
-/// #lb_80011710
+void lb_80011710(DynamicsDesc* arg0, DynamicsDesc* arg1)
+{
+    int i;
+    struct lb_00F9_UnkDesc1Inner* data0;
+    struct DynamicsData* data1;
+
+    arg1->pos.x = arg0->pos.x;
+    arg1->pos.y = arg0->pos.y;
+    arg1->pos.z = arg0->pos.z;
+    data1 = arg1->data;
+    data0 = &arg0->data->desc.lb_unk1.array[0];
+    for (data1 = arg1->data, i = 0; i < arg0->count; data1 = data1->next, i++)
+    {
+        data1->desc.lb_unk0.unk_10 = data0[i].unk_0;
+        data1->desc.lb_unk0.unk_14 = data0[i].unk_4;
+        data1->desc.lb_unk0.unk_1C = data0[i].unk_8;
+        data1->desc.lb_unk0.unk_20 = data0[i].unk_C;
+        data1->desc.lb_unk0.unk_24 = data0[i].unk_10;
+        data1->desc.lb_unk0.unk_28 = data0[i].unk_14;
+        data1->desc.lb_unk0.unk_2C = data0[i].unk_18;
+        data1->desc.lb_unk0.unk_30 = data0[i].unk_1C;
+        data1->desc.lb_unk0.unk_34 = data0[i].unk_20;
+        data1->desc.lb_unk0.unk_38 = data0[i].unk_24;
+        data1->desc.lb_unk0.unk_78 = data0[i].unk_28;
+        data1->desc.lb_unk0.unk_7C = data0[i].unk_2C;
+        data1->desc.lb_unk0.unk_80 = data0[i].unk_30;
+        data1->desc.lb_unk0.unk_84 = data0[i].unk_34;
+        data1->desc.lb_unk0.unk_88 = data0[i].unk_38;
+        if (data1->desc.lb_unk0.unk_C != 0.0f) {
+            data1->desc.lb_unk0.unk_8C =
+                arg0->pos.z / data1->desc.lb_unk0.unk_C;
+        } else {
+            data1->desc.lb_unk0.unk_8C = 0.0f;
+        }
+    }
+}
 
 /// #lb_800117F4
 
 void lb_800119DC(Point3d* arg0, int arg1, float arg2, float arg3, float arg4)
 {
-    PAD_STACK(8);
-    {
-        struct lb_80011A50_t sp1C;
-        sp1C.x0 = 2;
-        sp1C.x1 = 0x64;
-        sp1C.x4 = *arg0;
-        sp1C.x20 = arg2;
-        sp1C.x24 = arg3;
-        sp1C.x28 = arg1;
-        sp1C.x2C = arg4;
-        sp1C.x10 = -10000.0f;
-        sp1C.x14 = 10000.0f;
-        sp1C.x18 = 10000.0f;
-        sp1C.x1C = -10000.0f;
-        lb_800100B0(&sp1C, arg2);
-    }
+    struct lb_80011A50_t sp1C;
+    sp1C.x0 = 2;
+    sp1C.x1 = 0x64;
+    sp1C.x4 = *arg0;
+    sp1C.x20 = arg2;
+    sp1C.x24 = arg3;
+    sp1C.x28 = arg1;
+    sp1C.x2C = arg4;
+    sp1C.x10 = -10000.0f;
+    sp1C.x14 = 10000.0f;
+    sp1C.x18 = 10000.0f;
+    sp1C.x1C = -10000.0f;
+    lb_800100B0(&sp1C, arg2);
 }
 
 void lb_80011A50(Vec3* arg0, int arg1, float arg2, float arg3, float arg4,
                  float arg5, float arg6, float arg7, float arg8)
 {
-    PAD_STACK(8);
-    {
-        struct lb_80011A50_t x2C;
-        x2C.x0 = 1;
-        x2C.x1 = 0;
-        x2C.x4 = *arg0;
-        x2C.x20 = arg2;
-        x2C.x24 = arg3;
-        x2C.x28 = arg1;
-        x2C.x2C = arg4;
-        x2C.x10 = arg5;
-        x2C.x14 = arg6;
-        x2C.x18 = arg7;
-        x2C.x1C = arg8;
-        lb_800100B0(&x2C, arg2);
-    }
+    struct lb_80011A50_t x2C;
+    x2C.x0 = 1;
+    x2C.x1 = 0;
+    x2C.x4 = *arg0;
+    x2C.x20 = arg2;
+    x2C.x24 = arg3;
+    x2C.x28 = arg1;
+    x2C.x2C = arg4;
+    x2C.x10 = arg5;
+    x2C.x14 = arg6;
+    x2C.x18 = arg7;
+    x2C.x1C = arg8;
+    lb_800100B0(&x2C, arg2);
 }
 
 enum_t lb_80011ABC(void)
@@ -163,7 +259,13 @@ HSD_LObj* lb_80011AC4(LightList** list)
     return first;
 }
 
-/// #lb_80011B74
+void lb_80011B74(HSD_DObj* dobj, u32 flags)
+{
+    if (dobj->next != NULL) {
+        lb_80011B74(dobj->next, flags);
+    }
+    dobj->mobj->rendermode |= flags;
+}
 
 /// #lb_80011C18
 
@@ -175,7 +277,35 @@ HSD_LObj* lb_80011AC4(LightList** list)
 
 /// #lb_8001204C
 
-/// #lb_800121FC
+static void* setImageFromPreloadedArchive(HSD_ImageDesc* image_desc,
+                                          s16 entry_num)
+{
+    void* image_ptr = lbDvd_GetPreloadedArchive(entry_num);
+    image_desc->image_ptr = image_ptr;
+    return image_ptr;
+}
+
+HSD_ImageDesc* lb_800121FC(HSD_ImageDesc* image_desc, int width, int height,
+                           GXTexFmt format, s16 entry_num)
+{
+    image_desc->width = width;
+    image_desc->height = height;
+    image_desc->mipmap = 0;
+    image_desc->minLOD = 0.0f;
+    image_desc->maxLOD = 0.0f;
+    image_desc->format = format;
+    HSD_ASSERT(41, !image_desc->image_ptr);
+    {
+        size_t buffer_size = GXGetTexBufferSize(
+            image_desc->width, image_desc->height, image_desc->format, 0, 0);
+        if (entry_num == 0 ||
+            !setImageFromPreloadedArchive(image_desc, entry_num))
+        {
+            image_desc->image_ptr = HSD_MemAlloc((buffer_size + 0x1F) & ~0x1F);
+        }
+    }
+    return image_desc;
+}
 
 void lb_800122C8(HSD_ImageDesc* arg0, u16 arg1, u16 arg2, int arg3)
 {
@@ -254,19 +384,31 @@ int lb_80013BE4(ColorOverlay* arg0)
 
 /// #lb_80013C18
 
-/// #lb_80013D68
+int lb_80013D68(ColorOverlay* arg0)
+{
+    ++arg0->x8_ptr1;
+    arg0->x50_light_color.r = arg0->x8_ptr1->light_color.r;
+    arg0->x50_light_color.g = arg0->x8_ptr1->light_color.g;
+    arg0->x50_light_color.b = arg0->x8_ptr1->light_color.b;
+    arg0->x50_light_color.a = arg0->x8_ptr1->light_color.a;
+    arg0->x54_light_red = arg0->x50_light_color.r;
+    arg0->x58_light_green = arg0->x50_light_color.g;
+    arg0->x5C_light_blue = arg0->x50_light_color.b;
+    arg0->x60_light_alpha = arg0->x50_light_color.a;
+    arg0->x70_lightblend_alpha = 0.0f;
+    arg0->x6C_lightblend_blue = 0.0f;
+    arg0->x68_lightblend_green = 0.0f;
+    arg0->x64_lightblend_red = 0.0f;
+    ++arg0->x8_ptr1;
+    return 0;
+}
 
 /// #lb_80013E3C
 
 int lb_80013F78(ColorOverlay* arg0)
 {
-    s16 temp_r0;
-
-    arg0->x74_light_rot_x =
-        ((M2C_FIELD(arg0->x8_ptr1, s32*, 0) << 6) & 0xFFFC0000) >> 0x13;
-    temp_r0 = M2C_FIELD(arg0->x8_ptr1, s16*, 2);
-    arg0->x78_light_rot_yz =
-        ((temp_r0 << 0x13) | ((temp_r0 >> 0xD) & 0x40000)) >> 0x13;
+    arg0->x74_light_rot_x = arg0->x8_ptr1->light_rot.x;
+    arg0->x78_light_rot_yz = arg0->x8_ptr1->light_rot.yz;
     ++arg0->x8_ptr1;
     return 0;
 }
@@ -278,7 +420,25 @@ int lb_80013FF0(struct lb_80013FF0_t* arg0)
     return 0;
 }
 
-/// #lb_80014014
+int lb_80014014(ColorOverlay* arg0)
+{
+    arg0->x7C_color_enable = true;
+    ++arg0->x8_ptr1;
+    arg0->x2C_hex.r = arg0->x8_ptr1->light_color.r;
+    arg0->x2C_hex.g = arg0->x8_ptr1->light_color.g;
+    arg0->x2C_hex.b = arg0->x8_ptr1->light_color.b;
+    arg0->x2C_hex.a = arg0->x8_ptr1->light_color.a;
+    arg0->x30_color_red = arg0->x2C_hex.r;
+    arg0->x34_color_green = arg0->x2C_hex.g;
+    arg0->x38_color_blue = arg0->x2C_hex.b;
+    arg0->x3C_color_alpha = arg0->x2C_hex.a;
+    arg0->x4C_colorblend_alpha = 0.0f;
+    arg0->x48_colorblend_blue = 0.0f;
+    arg0->x44_colorblend_green = 0.0f;
+    arg0->x40_colorblend_red = 0.0f;
+    ++arg0->x8_ptr1;
+    return 0;
+}
 
 /// #lb_800140F8
 
@@ -343,4 +503,27 @@ void lb_800145F4(void)
 
 /// #lb_80014770
 
-/// #lb_800149E0
+bool lb_800149E0(Mtx arg0, u32 arg1)
+{
+    PAD_STACK(16);
+    if (arg1 == 0) {
+        HSD_StateInitDirect(0, 2);
+        {
+            MtxPtr mtx = HSD_CObjGetCurrent()->view_mtx;
+            GXLoadPosMtxImm(mtx, 0);
+            GXSetLineWidth(12, GX_TO_ONE);
+            GXBegin(GX_LINESTRIP, GX_VTXFMT0, 2);
+
+            {
+                float y = arg0[1][0];
+                GXPosition3f32(arg0[0][2], y, 0.0f);
+                GXColor4u8(yellow.r, yellow.g, yellow.b, yellow.a);
+
+                GXPosition3f32(arg0[0][3], y, 0.0f);
+                GXColor4u8(yellow.r, yellow.g, yellow.b, yellow.a);
+            }
+        }
+        return true;
+    }
+    return false;
+}
