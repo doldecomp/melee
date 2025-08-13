@@ -1586,7 +1586,7 @@ void Fighter_8006A360(Fighter_GObj* gobj)
                 if (fp->x2104 == 0) {
                     fp->x2221_b4 = 0;
 
-                    if (fp->item_gobj && itGetKind(fp->item_gobj) == 0x67) {
+                    if (fp->item_gobj && itGetKind(fp->item_gobj) == It_Kind_Peach_Parasol) {
                         fp->x2221_b5 = 1;
                         ftCo_800968C8(gobj);
                     } else {
@@ -1638,7 +1638,7 @@ void Fighter_8006A360(Fighter_GObj* gobj)
         }
 
         if (fp->item_gobj) {
-            if (itGetKind(fp->item_gobj) != 0x1C) {
+            if (itGetKind(fp->item_gobj) != It_Kind_Hammer) {
                 !fp;
             } else {
                 ftCo_800C511C(gobj);

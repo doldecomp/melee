@@ -544,7 +544,7 @@ void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
     if ((temp_r31 != temp_r3) && (it_8026B7BC(arg2) != 0)) {
         pl_80038824(arg0, 0x9A);
 
-        if (itGetKind(arg2) == 7) {
+        if (itGetKind(arg2) == It_Kind_Dosei) {
             pl_80038788(arg0, 0xB6, 1);
         }
 
@@ -556,7 +556,7 @@ void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
         }
     }
 
-    if (itGetKind(arg2) == 6) {
+    if (itGetKind(arg2) == It_Kind_BombHei) {
         if (it_8026B960(arg2) <= pl_804D6470->x180) {
             pl_800419AC(arg0, arg1, (u16) it_8026B7CC(arg2));
         }
