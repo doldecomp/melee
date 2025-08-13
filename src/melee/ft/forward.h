@@ -34,7 +34,7 @@ typedef struct MotionState MotionState;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef u32 MotionFlags;
 
-#ifdef M2CTX
+#ifdef M2CTX_DUAL
 typedef struct Fighter_GObj Fighter_GObj;
 struct Fighter_GObj {
     /*  +0 */ u16 classifier;
