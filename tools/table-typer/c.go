@@ -251,11 +251,17 @@ func parseTableDecls(path string, tableType string) []string {
 	if err != nil {
 		log.Fatalf("Failed to read file %s: %v", path, err)
 	}
+
 	var decls []string
-	matches := regexp.MustCompile(fmt.Sprintf(`%v\s+(\w+)`, tableType)).FindAllStringSubmatch(string(content), -1)
+	matches := regexp.MustCompile(fmt.Sprintf(`(?s)%s\s+([\w\[\],\s]+)[;=]`, tableType)).FindAllStringSubmatch(string(content), -1)
 	for _, match := range matches {
 		if len(match) > 1 {
-			decls = append(decls, match[1])
+			for _, decl := range strings.Split(match[1], ",") {
+				if i := strings.IndexByte(decl, '['); i >= 0 {
+					decl = decl[:i]
+				}
+				decls = append(decls, strings.Trim(strings.TrimSpace(decl), "[]*"))
+			}
 		}
 	}
 	return decls
@@ -305,6 +311,10 @@ func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 		return nil, CFuncValue{}, false
 	}
 	retEnd := bytes.LastIndexByte(line[:i], ' ')
+	if retEnd < 0 {
+		// TODO: handle multi-line signatures
+		return nil, CFuncValue{}, false
+	}
 	retStart := retEnd - 1
 	for retStart > 0 && isIdentByte(line[retStart-1]) {
 		retStart--

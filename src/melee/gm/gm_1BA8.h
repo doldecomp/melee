@@ -53,7 +53,7 @@ struct EventData;
 /* 1BE638 */ void gm_801BE638(HSD_GObj*);
 /* 1BEA10 */ void gm_801BEA10(int);
 /* 1BEA4C */ void gm_801BEA4C(int);
-/* 1BEA88 */ void gm_801BEA88(int, int);
+/* 1BEA88 */ void gm_801BEA88(int);
 /* 1BEAF0 */ void gm_801BEAF0(int);
 /* 1BEB2C */ void gm_801BEB2C(int);
 /* 1BEB68 */ void gm_801BEB68(int);
