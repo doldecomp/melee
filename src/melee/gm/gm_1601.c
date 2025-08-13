@@ -622,7 +622,7 @@ void gm_801641E4(u8 stage, u8 enable)
 /// Are all stages unlocked?
 bool gm_80164600(void)
 {
-    u16* stage_unlock_mask = (void*) gmMainLib_8015EDA4();
+    u16* stage_unlock_mask = gmMainLib_8015EDA4();
     int i;
 
     for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {

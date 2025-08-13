@@ -5,11 +5,11 @@
 
 enum_t lbLang_GetLanguageSetting(void);
 enum_t lbLang_SetLanguageSetting(enum_t language);
-enum_t lbLang_IsSettingJP(void);
-enum_t lbLang_IsSettingUS(void);
+bool lbLang_IsSettingJP(void);
+bool lbLang_IsSettingUS(void);
 enum_t lbLang_GetSavedLanguage(void);
 void lbLang_SetSavedLanguage(enum_t language);
-enum_t lbLang_IsSavedLanguageJP(void);
-enum_t lbLang_IsSavedLanguageUS(void);
+bool lbLang_IsSavedLanguageJP(void);
+bool lbLang_IsSavedLanguageUS(void);
 
 #endif

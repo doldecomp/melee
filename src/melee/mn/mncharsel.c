@@ -780,13 +780,17 @@ void mnCharSel_80266D70_OnLeave(void* unused)
     if (mnCharSel_804D6CF5 == 1) {
         data = mnCharSel_804D6CB0;
         type = data->data.data.players[mnCharSel_804D6CF0].slot_type;
-        if ((type == 0 || type == 1) && mnCharSel_804A0BD0[0]->x5 == 0) {
+        if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
+            mnCharSel_804A0BD0[0]->x5 == 0)
+        {
             tmp |= lbAudioAx_80026E84(
                 data->data.data.players[mnCharSel_804D6CF0].c_kind);
         }
         data = mnCharSel_804D6CB0;
         type = data->data.data.players[mnCharSel_804D6CF1].slot_type;
-        if ((type == 0 || type == 1) && mnCharSel_804A0BD0[1]->x5 == 0) {
+        if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
+            mnCharSel_804A0BD0[1]->x5 == 0)
+        {
             tmp |= lbAudioAx_80026E84(
                 data->data.data.players[mnCharSel_804D6CF1].c_kind);
         }
@@ -799,7 +803,9 @@ void mnCharSel_80266D70_OnLeave(void* unused)
         for (i = 0; i < var_r28; i++) {
             data = mnCharSel_804D6CB0;
             type = data->data.data.players[i].slot_type;
-            if ((type == 0 || type == 1) && mnCharSel_804A0BD0[i]->x5 == 0) {
+            if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&
+                mnCharSel_804A0BD0[i]->x5 == 0)
+            {
                 tmp |= lbAudioAx_80026E84(data->data.data.players[i].c_kind);
             }
         }

@@ -399,7 +399,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
          (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
     /// @todo Inline with callback arg
@@ -434,7 +434,7 @@ void ifStatus_802F6AF8(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
     /// @todo Inline with callback arg
@@ -469,7 +469,7 @@ void ifStatus_802F6C04(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
     /// @todo Inline with callback arg
@@ -504,7 +504,7 @@ void ifStatus_802F6D10(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == Gm_PKind_Cpu)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
     /// @todo Inline with callback arg

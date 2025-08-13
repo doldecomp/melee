@@ -509,7 +509,7 @@ struct grStadium_Display {
     /* EA   */ s16 xEA;
     /* EC   */ s16 xEC;
     /* EE   */ s16 xEE; ///< The focused player, or 99 if none
-    /* F0   */ s16 xF0;
+    /* F0   */ s16 xF0; ///< Slot type of the focused player
     /* F2   */ s16 xF2;
     /* F4   */ CameraBox* xF4;
     /* F8:0 */ u8 xF8_0 : 1;

@@ -496,12 +496,11 @@ void fn_8016B88C(int arg0)
     lbl_8046B6A0.hud_enabled = 0;
 }
 
-void gm_8016B8D4(s32 arg0, s32 arg1)
+void gm_8016B8D4(s32 arg0, u8 slot_type)
 {
-    u8 tmp = arg1;
     lbl_8046B6A0.FighterMatchInfo[arg0].x1 = 0x82;
-    lbl_8046B6A0.FighterMatchInfo[arg0].slot_type = tmp;
-    grStadium_801D3B4C(arg0, tmp);
+    lbl_8046B6A0.FighterMatchInfo[arg0].slot_type = slot_type;
+    grStadium_801D3B4C(arg0, slot_type);
 }
 
 static inline int fn_8016B918_inline(int var_r31)
@@ -1188,7 +1187,6 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
     s32 var_r3;
     u16 temp_r3_2;
     u8 temp_r0_2;
-    u8 temp_r3_5;
     int i;
     PAD_STACK(4);
 
@@ -1201,7 +1199,7 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
             arg0->frame_count++;
         }
         if (arg0->x24C8.x0_6) {
-            if (++arg0->unk_2C >= 0x3C) {
+            if (++arg0->unk_2C >= 60) {
                 arg0->unk_2C = 0;
                 if (arg0->x24C8.x0_7) {
                     if (arg0->timer_seconds < -1) {
@@ -1224,7 +1222,6 @@ void fn_8016CD98(lbl_8046B6A0_t* arg0)
             }
         }
         for (i = 0; i < 4; i++) {
-            temp_r3_5 = arg0->FighterMatchInfo[i].x1;
             if (arg0->FighterMatchInfo[i].x1 != 0) {
                 arg0->FighterMatchInfo[i].x1--;
                 temp_r0_2 = arg0->FighterMatchInfo[i].x1;
@@ -1524,7 +1521,7 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
         } else {
             Player_SetPlayerCharacter(arg0, CKIND_ZELDA);
         }
-        tmp->FighterMatchInfo[arg0].x4_b4 = 1;
+        tmp->FighterMatchInfo[arg0].x4_b4 = true;
     }
 
     tmp->FighterMatchInfo[arg0].spawn_point = arg1->x5;

@@ -58,11 +58,11 @@ struct PlayerInitData {
     /*0x09*/ u8 team;      // team
     /*0x0A*/ s8 xA;        // nametag
     /*0x0B*/ u8 xB;
-    /*0x0C*/ u8 xC_b0 : 1;
+    /*0x0C*/ u8 xC_b0 : 1; ///< rumble enabled
     u8 xC_b1 : 1;
     u8 xC_b2 : 1;
     u8 xC_b3 : 1;
-    u8 xC_b4 : 1;
+    u8 xC_b4 : 1; ///< invisible
     u8 xC_b5 : 1;
     u8 xC_b6 : 1;
     u8 xC_b7 : 1;
@@ -74,13 +74,13 @@ struct PlayerInitData {
     u8 xD_b5 : 1;
     u8 xD_b6 : 1;
     u8 xD_b7 : 1;
-    /*0x0E*/ u8 xE;
+    /*0x0E*/ u8 xE;        ///< CPU type
     /*0x0F*/ u8 cpu_level; // CPU level
     /*0x10*/ u16 x10;
     /*0x12*/ u16 x12;
     /*0x14*/ u16 hp;    ///< hit points, for stamina mode
-    /*0x18*/ float x18; // offense ratio
-    /*0x1C*/ float x1C; // defense ratio
+    /*0x18*/ float x18; ///< offense ratio
+    /*0x1C*/ float x1C; ///< defense ratio
     /*0x20*/ float x20;
 };
 
@@ -88,7 +88,7 @@ struct StartMeleeRules {
     u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
     u32 x0_3 : 3;
     u32 x0_6 : 1;
-    u32 x0_7 : 1;
+    u32 x0_7 : 1; ///< timer counts up
 
     u32 x1_0 : 1;
     u32 x1_1 : 1;
@@ -97,12 +97,13 @@ struct StartMeleeRules {
     u32 x1_4 : 1;
     u32 x1_5 : 1;
     u32 timer_shows_hours : 1; // false=65:00.00, true=1:05:00.00
-    u32 x1_7 : 1;
+
+    u32 x1_7 : 1; ///< friendly fire on
 
     u32 x2_0 : 1;
     u32 x2_1 : 1;
     u32 x2_2 : 1;
-    u32 x2_3 : 1;
+    u32 x2_3 : 1; ///< single-button mode enabled
     u32 x2_4 : 1;
     u32 x2_5 : 1;
     u32 x2_6 : 1;
@@ -136,7 +137,7 @@ struct StartMeleeRules {
     u32 x5_7 : 1;
 
     u8 x6;
-    u8 x7;
+    u8 x7; // end graphic / SFX type
     u8 x8; // is teams
     u8 x9;
     u8 xA;
@@ -155,13 +156,13 @@ struct StartMeleeRules {
     float x2C;
     float x30; // damage ratio
     float x34; // game speed
-    void (*x38)(int);
-    void (*x3C)(int);
-    int (*x40)(void);
-    void (*x44)(void);
-    void (*x48)(void);
-    void (*x4C)(void);
-    void (*x50)(int);
+    void (*x38)(int);  // on unpause callback
+    void (*x3C)(int);  // on pause callback (conditional?)
+    int (*x40)(void);  // on pause callback
+    void (*x44)(void); // on VS match start callback
+    void (*x48)(void); // ingame pre-frame callback
+    void (*x4C)(void); // ingame post-frame callback
+    void (*x50)(int);  // on VS match end callback
     struct {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;
