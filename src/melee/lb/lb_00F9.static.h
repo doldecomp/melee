@@ -44,11 +44,13 @@ struct _m2c_stack_lb_800119DC {
 /* 013BE4 */ static int lb_80013BE4(ColorOverlay*);
 /* 013FF0 */ static int lb_80013FF0(struct lb_80013FF0_t*);
 /* 014234 */ static int lb_80014234(struct lb_80013FF0_t*);
+/* 4D3770 */ static GXColor yellow;
 /* 4D63A0 */ static struct lb_804D63A0_t* lb_804D63A0;
 /* 4D63A4 */ static struct DynamicsData* cur_data;
 /* 4D63A8 */ static struct lb_804D63A8_t* lb_804D63A8;
+/* 4D63AC */ struct lb_80011A50_t* lb_804D63AC;
+/* 4D63B0 */ struct lb_80011A50_t* lb_804D63B0;
 /* 4D63B4 */ static enum_t lb_804D63B4;
 /* 4D63C0 */ static struct Fighter_804D653C_t* lb_804D63C0;
-/* 4D3770 */ static GXColor yellow;
 
 #endif

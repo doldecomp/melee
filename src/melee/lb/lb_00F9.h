@@ -70,7 +70,5 @@
 /* 014638 */ bool lb_80014638(Vec3*, UNK_T);
 /* 014770 */ bool lb_80014770(Vec3*, int);
 /* 0149E0 */ bool lb_800149E0(Mtx, u32);
-/* 4D63AC */ struct lb_80011A50_t* lb_804D63AC;
-/* 4D63B0 */ struct lb_80011A50_t* lb_804D63B0;
 
 #endif
