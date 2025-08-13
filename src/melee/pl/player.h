@@ -104,7 +104,7 @@ typedef struct _StaticPlayer {
     /*0xA8*/ int nametag_slot_id;
 
     /*0xAC*/ struct {
-        u8 b0 : 1;
+        u8 b0 : 1; // rumble enabled
         u8 b1 : 1;
         u8 b2 : 1;
         u8 b3 : 1;

@@ -17,14 +17,14 @@ enum_t lbLang_SetLanguageSetting(enum_t language)
     return language;
 }
 
-enum_t lbLang_IsSettingJP(void)
+bool lbLang_IsSettingJP(void)
 {
-    return (gmMainLib_804D3EE0->language) == 0 ? 1 : 0;
+    return (gmMainLib_804D3EE0->language) == 0 ? true : false;
 }
 
-enum_t lbLang_IsSettingUS(void)
+bool lbLang_IsSettingUS(void)
 {
-    return (gmMainLib_804D3EE0->language) == 1 ? 1 : 0;
+    return (gmMainLib_804D3EE0->language) == 1 ? true : false;
 }
 
 enum_t lbLang_GetSavedLanguage(void)
@@ -39,12 +39,12 @@ void lbLang_SetSavedLanguage(enum_t language)
     }
 }
 
-enum_t lbLang_IsSavedLanguageJP(void)
+bool lbLang_IsSavedLanguageJP(void)
 {
-    return (gmMainLib_8015CC58()->saved_language == 0) ? 1 : 0;
+    return (gmMainLib_8015CC58()->saved_language == 0) ? true : false;
 }
 
-enum_t lbLang_IsSavedLanguageUS(void)
+bool lbLang_IsSavedLanguageUS(void)
 {
-    return (gmMainLib_8015CC58()->saved_language == 1) ? 1 : 0;
+    return (gmMainLib_8015CC58()->saved_language == 1) ? true : false;
 }

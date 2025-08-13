@@ -339,8 +339,8 @@ struct gmm_x0 {
 struct lbl_8046B6A0_24C_t {
     UNK_T x0;
     u8 x4;
-    u8 x5;
-    u8 x6;
+    u8 x5; ///< match mode
+    u8 x6; ///< is teams
     u32 x8;
     u8 xC;
     u8 padD[0x24 - 0xD];
@@ -409,7 +409,7 @@ struct lbl_8046B6A0_t {
     /* 0x0008 */ u8 match_result;
     /* 0x0009 */ u8 unk_9;
     /* 0x000A */ u8 unk_A;
-    /* 0x000B */ u8 unk_B;
+    /* 0x000B */ u8 unk_B; // end graphic / SFX type
     /* 0x000C */ u8 unk_C;
     /* 0x000D */ u8 unk_D;
     /* 0x000E */ u8 match_over;
@@ -421,7 +421,7 @@ struct lbl_8046B6A0_t {
     /* 0x0020 */ u32* unk_20;
     /* 0x0024 */ u32 frame_count;
     /* 0x0028 */ u32 timer_seconds;
-    /* 0x002C */ u16 unk_2C;
+    /* 0x002C */ u16 unk_2C; ///< timer frames
     /* 0x002E */ u16 unk_2E;
     /* 0x0030 */ u8 unk_30;
     /* 0x0034 */ f32 unk_34;
@@ -432,9 +432,9 @@ struct lbl_8046B6A0_t {
         s8 spawn_point;
         u8 x4_b0 : 1;
         u8 x4_b1 : 1;
-        u8 x4_b2 : 1;
+        u8 x4_b2 : 1; ///< invisible
         u8 x4_b3 : 1;
-        u8 x4_b4 : 1;
+        u8 x4_b4 : 1; ///< Zelda/Sheik transforming on load
         u8 x4_b5 : 1;
         u8 x4_b6 : 1;
         u8 x4_b7 : 1;
@@ -489,11 +489,6 @@ struct gmMainLib_8046B0F0_t {
 };
 
 extern struct gmMainLib_8046B0F0_t gmMainLib_8046B0F0;
-
-struct gm_8016A92C_arg0_t {
-    char pad_0[0x58];
-    struct lbl_8046B668_t* x58;
-};
 
 typedef struct gm_803DF94C_t {
     void (*x0)(HSD_GObj*);
