@@ -15,10 +15,12 @@ import (
 func main() {
 	log.SetFlags(0)
 	var typeName string
+	var conservative bool
 	root := flagg.Root
 	rootDir := root.String("root", "../../", "root directory containing C sources and asm")
 	cmdFixTab := flagg.New("fixtab", "Fix function types for a given table type")
 	cmdFixTab.StringVar(&typeName, "type", "", "table type to fix")
+	cmdFixTab.BoolVar(&conservative, "conservative", false, "only fix UNK_RET/UNK_PARAMS functions")
 	cmdRename := flagg.New("rename", "Rename anonymous functions based on hardcoded patterns")
 	cmdRename.StringVar(&typeName, "type", "", "type of struct to derive names from")
 	cmdList := flagg.New("list", "List anonymous functions based on hardcoded patterns")
@@ -108,7 +110,7 @@ func main() {
 			totalFiles := 0
 			for _, path := range append(hFiles, cFiles...) {
 				fmt.Printf("\rChecking %-70v", path[:min(57, len(path))]+"...")
-				sigs := fixSignatures(path, fnTypes)
+				sigs := fixSignatures(path, fnTypes, conservative)
 				totalSigs += sigs
 				if sigs > 0 {
 					totalFiles++
