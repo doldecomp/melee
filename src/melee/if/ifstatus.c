@@ -1,12 +1,16 @@
 #include "ifstatus.h"
 
 #include "ifall.h"
+#include "m2c_macros.h"
+#include "placeholder.h"
 
 #include "gm/gm_unsplit.h"
 #include "gm/types.h"
 #include "if/if_2F72.h"
 #include "if/ifstock.h"
 #include "if/types.h"
+#include "sc/types.h"
+#include "lb/lbarchive.h"
 #include "pl/player.h"
 
 #include <baselib/gobj.h>
@@ -37,7 +41,16 @@ typedef struct UnkX {
 
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
-/* 3F9628 */ static Thing_803F9628 ifStatus_803F9628;
+/* 3F9628 */ static Element_803F9628 ifStatus_803F9628[8] = {
+    { NULL, 0, if_802F74D0, 0x7C860U, 0x08000000U, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C857U, 0x0A000000U, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C855U, 0x08000000U, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, 0, 0, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, 0, 0, 0, 0 },
+};
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
 
@@ -538,16 +551,34 @@ void ifStatus_802F6E3C(s32 player_num)
 
 /// #ifStatus_802F7034
 
-/// #ifStatus_802F7134
+void ifStatus_802F7134(void)
+{
+    u8 _[8];
+    HSD_Archive** archive;
+    DynamicModelDesc** volatile models;
+    int i;
+
+    for (i = 0; i < 8; i++) {
+        ifStatus_803F9628[i].x0 = NULL;
+        ifStatus_803F9628[i].x4 = 0;
+    }
+
+    archive = ifAll_802F3690();
+    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models", 0);
+
+    for (i = 0; i < 8; i++) {
+        ifStatus_803F9628[i].x14 = models[i];
+    }
+}
 
 // free
 void ifStatus_802F7220(void)
 {
     s32 i;
     for (i = 0; i < 8; i++) {
-        if (ifStatus_803F9628.things[i].x0 != NULL) {
-            HSD_GObjPLink_80390228(ifStatus_803F9628.things[i].x0);
-            ifStatus_803F9628.things[i].x0 = NULL;
+        if (ifStatus_803F9628[i].x0 != NULL) {
+            HSD_GObjPLink_80390228(ifStatus_803F9628[i].x0);
+            ifStatus_803F9628[i].x0 = NULL;
         }
     }
 }
