@@ -553,39 +553,22 @@ void ifStatus_802F6E3C(s32 player_num)
 
 void ifStatus_802F7134(void)
 {
-    u32 _pad;
+    u8 _[8];
     HSD_Archive** archive;
-    SceneDesc* desc;
-    PAD_STACK(20);
+    DynamicModelDesc** volatile models;
+    int i;
 
-    ifStatus_803F9628[0].x0 = NULL;
-    ifStatus_803F9628[0].x4 = 0;
-    ifStatus_803F9628[1].x0 = NULL;
-    ifStatus_803F9628[1].x4 = 0;
-    ifStatus_803F9628[2].x0 = NULL;
-    ifStatus_803F9628[2].x4 = 0;
-    ifStatus_803F9628[3].x0 = NULL;
-    ifStatus_803F9628[3].x4 = 0;
-    ifStatus_803F9628[4].x0 = NULL;
-    ifStatus_803F9628[4].x4 = 0;
-    ifStatus_803F9628[5].x0 = NULL;
-    ifStatus_803F9628[5].x4 = 0;
-    ifStatus_803F9628[6].x0 = NULL;
-    ifStatus_803F9628[6].x4 = 0;
-    ifStatus_803F9628[7].x0 = NULL;
-    ifStatus_803F9628[7].x4 = 0;
+    for (i = 0; i < 8; i++) {
+        ifStatus_803F9628[i].x0 = NULL;
+        ifStatus_803F9628[i].x4 = 0;
+    }
 
     archive = ifAll_802F3690();
-    lbArchive_LoadSections(*archive, (void**) &desc, "ScInfCnt_scene_models", 0);
+    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models", 0);
 
-    ifStatus_803F9628[0].x14 = M2C_FIELD(&desc, s32**, 0)[0];
-    ifStatus_803F9628[1].x14 = M2C_FIELD(&desc, s32**, 0)[1];
-    ifStatus_803F9628[2].x14 = M2C_FIELD(&desc, s32**, 0)[2];
-    ifStatus_803F9628[3].x14 = M2C_FIELD(&desc, s32**, 0)[3];
-    ifStatus_803F9628[4].x14 = M2C_FIELD(&desc, s32**, 0)[4];
-    ifStatus_803F9628[5].x14 = M2C_FIELD(&desc, s32**, 0)[5];
-    ifStatus_803F9628[6].x14 = M2C_FIELD(&desc, s32**, 0)[6];
-    ifStatus_803F9628[7].x14 = M2C_FIELD(&desc, s32**, 0)[7];
+    for (i = 0; i < 8; i++) {
+        ifStatus_803F9628[i].x14 = models[i];
+    }
 }
 
 // free
