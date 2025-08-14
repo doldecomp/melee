@@ -514,7 +514,15 @@ void fn_8012E3B4(Fighter_GObj* gobj)
     ftCommon_8007D468(fp);
 }
 
-/// #fn_8012E44C
+void fn_8012E44C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, 0x16C, 0x0C4C5082U, fp->cur_anim_frame, 0, 1, NULL);
+    fn_8012E3B4_inline(gobj);
+    qwe(gobj);
+}
 
 void ftYs_SpecialHi_Anim(Fighter_GObj* gobj)
 {
