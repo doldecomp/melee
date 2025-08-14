@@ -37,7 +37,7 @@
     attributeName* ext_attr = (attributeName*) fp->ft_data->ext_attr;         \
     *sA2 = *ext_attr;
 
-#ifdef M2CTX_DUAL
+#ifdef M2C
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData((HSD_GObj*) gobj))
 #else
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))

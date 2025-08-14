@@ -87,7 +87,7 @@ def pcpp_import(in_file: Path, quiet: bool) -> str:
                 "FIGHTERVARS_SIZE",
             ]
             self.passthru_keywords = [
-                "M2CTX_DUAL",
+                "M2C",
             ]
 
             for val in includes:

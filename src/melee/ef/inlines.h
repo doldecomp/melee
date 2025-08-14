@@ -7,7 +7,7 @@
 
 #include <baselib/gobj.h>
 
-#ifdef M2CTX_DUAL
+#ifdef M2C
 #define GET_EFFECT(gobj) ((Effect*) HSD_GObjGetUserData((HSD_GObj*) gobj))
 #else
 #define GET_EFFECT(gobj) ((Effect*) HSD_GObjGetUserData(gobj))
