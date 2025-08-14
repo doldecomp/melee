@@ -1,7 +1,9 @@
 #include "ityoshieggthrow.h"
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
 
 void it_802B2890(Item_GObj* item_gobj)
 {
