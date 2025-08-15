@@ -1,5 +1,6 @@
 #include "lb_00F9.static.h"
 
+#include "math.h"
 #include "stddef.h"
 
 #include "baselib/debug.h"
@@ -66,6 +67,7 @@ static inline struct lb_80011A50_t* inlineA0()
         return NULL;
     }
     {
+        /// @todo inline appears in #lb_800115F4
         struct lb_80011A50_t* temp = lb_804D63B0;
         lb_804D63AC = ret->next;
         lb_804D63B0 = ret;
@@ -111,13 +113,13 @@ struct lb_80011A50_t* lb_800100B0(struct lb_80011A50_t* arg0, f32 arg1)
     ret->x4 = arg0->x4;
     ret->x20 = arg0->x20;
     ret->x24 = arg0->x24;
-    ret->x28 = arg0->x28;
+    ret->unk_count0 = arg0->unk_count0;
     ret->x2C = arg0->x2C;
     ret->x10 = arg0->x10;
     ret->x14 = arg0->x14;
     ret->x18 = arg0->x18;
     ret->x1C = arg0->x1C;
-    ret->x30 = 0;
+    ret->unk_count1 = 0;
     return ret;
 }
 
@@ -150,7 +152,64 @@ bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
 
 /// #lb_8001044C
 
-/// #lb_800115F4
+static inline double inlineB0()
+{
+    float ret = 0.0f;
+    struct lb_80011A50_t* cur = lb_804D63B0;
+
+    while (cur != NULL) {
+        if (cur->x0 == 1) {
+            ret += cur->x20;
+        }
+        cur->x20 -= cur->x24;
+        if (cur->x20 < 0.0) {
+            cur->x20 = 0.0;
+        }
+        if (cur->unk_count0 > 0) {
+            --cur->unk_count0;
+        }
+        ++cur->unk_count1;
+        if (cur->unk_count0 == 0) {
+            struct lb_80011A50_t* var_r3 = lb_804D63B0;
+            struct lb_80011A50_t* prev = cur;
+            cur = cur->next;
+            if (prev == var_r3) {
+                lb_804D63B0 = cur;
+            } else {
+                while (var_r3->next != prev) {
+                    var_r3 = var_r3->next;
+                }
+                var_r3->next = prev->next;
+            }
+            {
+                /// @todo inline appears in #lb_800115F4
+                struct lb_80011A50_t* temp = lb_804D63AC;
+                lb_804D63AC = prev;
+                prev->next = temp;
+            }
+        } else {
+            cur = cur->next;
+        }
+    }
+    return ret;
+}
+
+void lb_800115F4(void)
+{
+    if (inlineB0() > 0.1) {
+        if (lb_804D63B4 > 0) {
+            lb_804D63B4 = 2;
+            return;
+        }
+        lb_804D63B4 = 1;
+        return;
+    }
+    if (lb_804D63B4 > 0) {
+        lb_804D63B4 = -1;
+        return;
+    }
+    lb_804D63B4 = 0;
+}
 
 void lb_80011710(DynamicsDesc* arg0, DynamicsDesc* arg1)
 {
@@ -199,7 +258,7 @@ void lb_800119DC(Point3d* arg0, int arg1, float arg2, float arg3, float arg4)
     sp1C.x4 = *arg0;
     sp1C.x20 = arg2;
     sp1C.x24 = arg3;
-    sp1C.x28 = arg1;
+    sp1C.unk_count0 = arg1;
     sp1C.x2C = arg4;
     sp1C.x10 = -10000.0f;
     sp1C.x14 = 10000.0f;
@@ -217,7 +276,7 @@ void lb_80011A50(Vec3* arg0, int arg1, float arg2, float arg3, float arg4,
     x2C.x4 = *arg0;
     x2C.x20 = arg2;
     x2C.x24 = arg3;
-    x2C.x28 = arg1;
+    x2C.unk_count0 = arg1;
     x2C.x2C = arg4;
     x2C.x10 = arg5;
     x2C.x14 = arg6;
@@ -307,16 +366,40 @@ HSD_ImageDesc* lb_800121FC(HSD_ImageDesc* image_desc, int width, int height,
     return image_desc;
 }
 
-void lb_800122C8(HSD_ImageDesc* arg0, u16 arg1, u16 arg2, int arg3)
+void lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy, bool clear)
 {
-    HSD_ImageDescCopyFromEFB(arg0, arg1, arg2, arg3, 1);
+    HSD_ImageDescCopyFromEFB(image_desc, origx, origy, clear, true);
 }
 
 /// #lb_800122F0
 
 /// #lb_8001271C
 
-/// #lb_8001285C
+void lb_8001285C(HSD_ImageDesc* image_desc, GXTexObj* tex_obj)
+{
+    PAD_STACK(4);
+    GXInitTexObj(tex_obj, image_desc->image_ptr, image_desc->width,
+                 image_desc->height, image_desc->format, GX_CLAMP, GX_CLAMP,
+                 image_desc->mipmap);
+    GXGetTexObjFmt(tex_obj);
+    GXClearVtxDesc();
+    GXSetCullMode(GX_CULL_BACK);
+    GXSetNumTexGens(1);
+    GXSetNumTevStages(1);
+    GXSetZMode(0, GX_ALWAYS, 0);
+    GXLoadTexObj(tex_obj, GX_TEXMAP0);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_S, GX_RGBA6, 0);
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_RGBA6, 0);
+    GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
+    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ONE,
+                    GX_CC_TEXC);
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                    GX_TEVPREV);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
+                   GX_LO_CLEAR);
+}
 
 /// #lb_80012994
 
@@ -403,7 +486,31 @@ int lb_80013D68(ColorOverlay* arg0)
     return 0;
 }
 
-/// #lb_80013E3C
+static inline void inlineD0(ColorOverlay* arg0, union ColorOverlay_x8_t* arg1)
+{
+    {
+        f32 temp_f3 = arg0->x8_ptr1->val & 0x03FFFFFF;
+        arg0->x64_lightblend_red =
+            ((0.5f + arg0->x8_ptr1->light_color.r) - arg0->x50_light_color.r) /
+            temp_f3;
+        arg0->x68_lightblend_green =
+            ((0.5f + arg0->x8_ptr1->light_color.g) - arg0->x50_light_color.g) /
+            temp_f3;
+        arg0->x6C_lightblend_blue =
+            ((0.5f + arg0->x8_ptr1->light_color.b) - arg0->x50_light_color.b) /
+            temp_f3;
+        arg0->x70_lightblend_alpha =
+            ((0.5f + arg0->x8_ptr1->light_color.a) - arg0->x50_light_color.a) /
+            temp_f3;
+    }
+}
+
+int lb_80013E3C(ColorOverlay* arg0)
+{
+    inlineD0(arg0, ++arg0->x8_ptr1);
+    ++arg0->x8_ptr1;
+    return 0;
+}
 
 int lb_80013F78(ColorOverlay* arg0)
 {
@@ -499,7 +606,44 @@ void lb_800145F4(void)
     }
 }
 
-/// #lb_80014638
+static inline float inlineC0(Vec3* a, Vec3* b, Vec3* c)
+{
+    if (ABS(b->z - a->z) < 0.01f) {
+        return 1.0f;
+    } else {
+        return (c->z - a->z) / (b->z - a->z);
+    }
+}
+
+bool lb_80014638(struct lb_80014638_arg0_t* arg0,
+                 struct lb_80014638_arg1_t* arg1)
+{
+    Vec3 sp30, sp24, sp18;
+    PAD_STACK(4);
+
+    sp30 = arg0->x0;
+    sp24 = arg0->xC;
+    sp18 = arg1->x8;
+    sp30.x = sp30.x + arg1->unk_x;
+    sp30.y += arg1->unk_x;
+    sp30.z += arg1->unk_y;
+    if (sp30.z < sp24.z) {
+        return false;
+    }
+    if (sp30.z < sp18.z || sp24.z > sp18.z) {
+        return false;
+    }
+    {
+        float z = inlineC0(&sp30, &sp24, &sp18);
+        if (z * (sp24.x - sp30.x) + sp30.x > sp18.y) {
+            return false;
+        }
+        if (z * (sp24.y - sp30.y) + sp30.y < sp18.x) {
+            return false;
+        }
+    }
+    return true;
+}
 
 /// #lb_80014770
 

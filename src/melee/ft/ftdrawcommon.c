@@ -227,7 +227,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         phi_r30 = 1U;
     }
     if ((fighter->x21FC_flag.b4 != 0) && (fighter->x2223_b5 != 0) &&
-        (lb_80014770(&fighter->dmg.x1930, arg1) != 0))
+        (lb_80014770(&fighter->dmg.x1930.x0, arg1) != 0))
     {
         phi_r30 = 1U;
     }
