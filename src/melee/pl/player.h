@@ -190,7 +190,7 @@ f32 Player_GetFacingDirection(s32 slot);
 void Player_SetFacingDirection(s32 slot, f32 direction);
 void Player_SetFacingDirectionConditional(s32 slot, bool b, f32 direction);
 u32 Player_GetCostumeId(int slot);
-void Player_SetCostumeId(int slot, s8 costume_id);
+void Player_SetCostumeId(int slot, int costume_id);
 u8 Player_GetControllerIndex(int slot);
 void Player_SetControllerIndex(int slot, s8 controller_index);
 int Player_GetTeam(int slot);

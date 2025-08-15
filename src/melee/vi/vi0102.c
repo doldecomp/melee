@@ -40,7 +40,7 @@ extern GXColor erase_colors_vi0102;
 extern HSD_Archive* un_804D6F38;
 static un_804D6F60_t un_804D6F60;
 
-void vi0102_8031CB00(s8 mario_costume, s8 luigi_costume)
+void vi0102_8031CB00(int mario_costume, int luigi_costume)
 {
     Camera_80028B9C(6);
     lb_8000FCDC();

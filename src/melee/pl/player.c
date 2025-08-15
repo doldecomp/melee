@@ -740,7 +740,7 @@ u32 Player_GetCostumeId(int slot)
     return costume_id;
 }
 
-void Player_SetCostumeId(int slot, s8 costume_id)
+void Player_SetCostumeId(int slot, int costume_id)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

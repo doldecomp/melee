@@ -16,6 +16,7 @@
 #include <melee/ef/eflib.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftdemo.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
@@ -281,15 +282,88 @@ void gm_80186DFC_OnFrame(void)
     }
 }
 
+static struct enterdata {
+    int x0, x4;
+} lbl_804D6618;
+
+static struct {
+    int x0, x4;
+    HSD_JObj* x8;
+    HSD_JObj* xC;
+} lbl_804736B0;
+
 /// #gm_80186E30_OnEnter
 
-/// #fn_80186EFC
+void fn_80186EFC(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    PAD_STACK(8);
+    HSD_JObjReqAnimAll(lbl_804736B0.xC, 0.0F);
+    HSD_JObjAnimAll(jobj);
+    if (lbl_804736B0.x4 < 0x8C) {
+        lbl_804736B0.x4++;
+    } else {
+        lbl_804736B0.x0 = 1;
+    }
+}
 
 /// #fn_80186F6C
 
-/// #fn_801873F0
+extern HSD_Archive* lbl_804D6610;
 
-/// #fn_80187494
+#pragma push
+#pragma dont_inline on
+HSD_GObjProc* fn_801873F0(void)
+{
+    ftDemo_ObjAllocInit();
+    Player_InitAllPlayers();
+    Player_80036E20(lbl_804D6618.x0, lbl_804D6610, 1);
+    Player_SetPlayerCharacter(0, lbl_804D6618.x0);
+    Player_SetCostumeId(0, lbl_804D6618.x4);
+    Player_SetPlayerId(0, 0);
+    Player_SetSlottype(0, Gm_PKind_Demo);
+    Player_SetFacingDirection(0, 0.0f);
+    Player_SetModelScale(0, 1.0f);
+    Player_80036F34(0, 6);
+    return HSD_GObjProc_8038FD54(Player_GetEntity(0), fn_80186F6C, 0x16U);
+}
+#pragma pop
+
+void fn_80187494(HSD_GObj* gobj, int arg1)
+{
+    int temp_ret = HSD_CObjSetCurrent(gobj->hsd_obj);
+    PAD_STACK(4);
+    if (temp_ret != 0) {
+        Camera_800313E0(gobj, 1);
+        gobj->gxlink_prios = 0x801;
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_CObjEndCurrent();
+    }
+}
+
+static SceneDesc* lbl_804D6614;
+
+void fn_801874FC(void)
+{
+    HSD_JObj* sp8;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+
+    gobj = GObj_Create(0xE, 0xF, 0);
+    jobj = HSD_JObjLoadJoint(lbl_804D6614->models[0]->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    HSD_GObjProc_8038FD54(gobj, fn_80186EFC, 0);
+    gm_8016895C(jobj, lbl_804D6614->models[0], 0);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+    lb_80011E24(jobj, &sp8, 0x3A, -1);
+    HSD_JObjSetTranslateZ(sp8, 10000.0F);
+    lb_80011E24(jobj, &sp8, 0x3B, -1);
+    HSD_JObjSetTranslateZ(sp8, 10000.0F);
+    lb_80011E24(jobj, &lbl_804736B0.x8, 5, -1);
+    lb_80011E24(jobj, &lbl_804736B0.xC, 6, -1);
+}
 
 /// #fn_801874FC
 
@@ -311,22 +385,18 @@ void fn_80187714(void)
 #pragma pop
 
 extern HSD_Archive* lbl_804D6610;
-extern s32 lbl_804736B0[];
 
 void gm_8018776C_OnFrame(void)
 {
-    if (lbl_804736B0[0] != 0) {
+    if (lbl_804736B0.x0 != 0) {
         lbArchive_80016EFC(lbl_804D6610);
         lbAudioAx_800236DC();
         gm_801A4B60();
     }
 }
 
-extern SceneDesc* lbl_804D6614;
-static struct enterdata {
-    int x0, x4;
-} lbl_804D6618;
-
+#pragma push
+#pragma dont_inline on
 void gm_801877A8_OnEnter(void* arg0_)
 {
     struct enterdata* arg0 = arg0_;
@@ -338,8 +408,8 @@ void gm_801877A8_OnEnter(void* arg0_)
     HSD_Fog* fog;
     PAD_STACK(8);
 
-    lbl_804736B0[0] = 0;
-    lbl_804736B0[1] = 0;
+    lbl_804736B0.x0 = 0;
+    lbl_804736B0.x4 = 0;
 
     lbl_804D6618 = *arg0;
     fn_80187714();
@@ -365,12 +435,18 @@ void gm_801877A8_OnEnter(void* arg0_)
     fn_801873F0();
     lbAudioAx_80023F28(0x2D);
 }
+#pragma pop
 
 /// #fn_80187910
 
 /// #fn_80187AB4
 
-/// #fn_80187C9C
+void fn_80187C9C(HSD_GObj* gobj, int arg1)
+{
+    GXSetZMode(0, GX_NEVER, 0);
+    HSD_GObj_JObjCallback(gobj, arg1);
+    HSD_StateInvalidate(0x40);
+}
 
 /// #fn_80187CF4
 
@@ -382,7 +458,13 @@ void gm_801877A8_OnEnter(void* arg0_)
 
 /// #gm_801883C0
 
-/// #gm_8018841C
+bool gm_8018841C(void)
+{
+    if (gm_801A4310() == MJ_TRAINING) {
+        return true;
+    }
+    return false;
+}
 
 static int lbl_80473700[69];
 
