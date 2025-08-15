@@ -14,7 +14,7 @@ typedef struct un_804D6F60_t {
 } un_804D6F60_t; /* size = 0x8 */
 STATIC_ASSERT(sizeof(un_804D6F60_t) == 0x8);
 
-/* 31CB00 */ void vi0102_8031CB00(s8, s8);
+/* 31CB00 */ void vi0102_8031CB00(int, int);
 /* 31CC68 */ void vi0102_JObjCallback(HSD_GObj*);
 /* 31CC8C */ void vi0102_CameraCallback(HSD_GObj*, int);
 /* 31CD20 */ void vi0102_8031CD20(HSD_GObj*);

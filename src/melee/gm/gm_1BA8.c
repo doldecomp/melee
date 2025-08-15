@@ -1181,7 +1181,7 @@ void gm_801BEFC0(int arg0)
 }
 #pragma pop
 
-u8 gm_801BEFD0(void)
+int gm_801BEFD0(void)
 {
     return M2C_FIELD(&gm_8049C178, u8*, 1);
 }
