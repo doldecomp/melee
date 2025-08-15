@@ -6049,9 +6049,9 @@ void it_80274D6C(Item_GObj* arg0)
     float left_x = item->x378_itemColl.xA4_ecbCurrCorrect.left.x;
     float top_y = item->x378_itemColl.xA4_ecbCurrCorrect.top.y;
 
-    item->xB54.right_x = right_x + item->pos.x;
-    item->xB54.left_x = left_x + item->pos.x;
-    item->xB54.top_right_y = right_y + item->pos.y + top_y;
+    item->xB54.x8.y = right_x + item->pos.x;
+    item->xB54.x8.x = left_x + item->pos.x;
+    item->xB54.x8.z = right_y + item->pos.y + top_y;
 }
 
 void it_80274DAC(Item_GObj* arg0)

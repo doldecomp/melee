@@ -24,10 +24,10 @@ void ft_80081938(HSD_GObj* gobj)
     new_var = &fp->coll_data.xA4_ecbCurrCorrect;
     lx = new_var->left.x;
     rx = new_var->right.x;
-    fp->dmg.x193c.x = lx + sp44.x;
-    fp->dmg.x193c.y = rx + sp44.x;
-    fp->dmg.x193c.z = fp->cur_pos.y + fp->co_attrs.x15C;
-    fp->dmg.x1930 = fp->dmg.x193c;
+    fp->dmg.x1930.xC.x = lx + sp44.x;
+    fp->dmg.x1930.xC.y = rx + sp44.x;
+    fp->dmg.x1930.xC.z = fp->cur_pos.y + fp->co_attrs.x15C;
+    fp->dmg.x1930.x0 = fp->dmg.x1930.xC;
 }
 
 void ft_800819A8(HSD_GObj* gobj)
@@ -42,9 +42,9 @@ void ft_800819A8(HSD_GObj* gobj)
     p_var = &fp->coll_data.xA4_ecbCurrCorrect;
     lx = p_var->left.x;
     rx = p_var->right.x;
-    fp->dmg.x1930.x = lx + sp44.x;
-    fp->dmg.x1930.y = rx + sp44.x;
-    fp->dmg.x1930.z = fp->cur_pos.y + fp->co_attrs.x15C;
+    fp->dmg.x1930.x0.x = lx + sp44.x;
+    fp->dmg.x1930.x0.y = rx + sp44.x;
+    fp->dmg.x1930.x0.z = fp->cur_pos.y + fp->co_attrs.x15C;
 }
 
 static inline void inlineA0(Fighter_GObj* gobj)
@@ -78,9 +78,9 @@ bool ft_80081A00(Fighter_GObj* fp_gobj)
         sp64 = fp->coll_data.cur_topn;
         lx = fp->coll_data.xA4_ecbCurrCorrect.left.x;
         rx = fp->coll_data.xA4_ecbCurrCorrect.right.x;
-        fp->dmg.x193c.x = lx + sp64.x;
-        fp->dmg.x193c.y = rx + sp64.x;
-        fp->dmg.x193c.z = fp->cur_pos.y + fp->co_attrs.x15C;
+        fp->dmg.x1930.xC.x = lx + sp64.x;
+        fp->dmg.x1930.xC.y = rx + sp64.x;
+        fp->dmg.x1930.xC.z = fp->cur_pos.y + fp->co_attrs.x15C;
         inlineA0(fp_gobj);
         if (fp->dmg.x1950) {
             ftCo_800C703C(fp_gobj);

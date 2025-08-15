@@ -1349,8 +1349,7 @@ struct Fighter {
         /* fp+1924 */ int x1924;
         /* fp+1928 */ float x1928;
         /* fp+192C */ float x192c;
-        /* fp+1930 */ Vec3 x1930;
-        /* fp+193C */ Vec3 x193c;
+        /* fp+1930 */ struct lb_80014638_arg0_t x1930;
         /* fp+1948 */ int x1948;
         /* fp+194C */ int x194C;
         /* fp+1950 */ bool x1950;
