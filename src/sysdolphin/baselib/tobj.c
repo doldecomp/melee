@@ -1568,7 +1568,7 @@ void HSD_ImageDescFree(HSD_ImageDesc* idesc)
 }
 
 void HSD_ImageDescCopyFromEFB(HSD_ImageDesc* idesc, u16 origx, u16 origy,
-                              GXBool clear, int sync)
+                              GXBool clear, bool sync)
 {
     if (!idesc) {
         return;

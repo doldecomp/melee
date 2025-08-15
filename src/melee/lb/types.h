@@ -354,13 +354,14 @@ struct ColorOverlay_UnkInner {
 struct ColorOverlay {
     s32 x0_timer; // 0x0
     s32 x4_pri;   // 0x4  this colanims priority, lower = will persist
-    union {
+    union ColorOverlay_x8_t {
         GXColor light_color;
         struct {
             s32 unk : 6;
             s32 x : 13;
             s32 yz : 13;
         } light_rot;
+        u32 val;
     }* x8_ptr1;     // 0x8
     s32 xC_loop;    // 0xc
     s32* x10_ptr2;  // 0x10
@@ -404,7 +405,7 @@ struct ColorOverlay {
 };
 
 struct lb_80011A50_t {
-    /*  +0 */ s8 x0;
+    /*  +0 */ u8 x0;
     /*  +1 */ u8 x1;
     /*  +2 */ s8 x2;
     /*  +3 */ s8 x3;
@@ -415,11 +416,24 @@ struct lb_80011A50_t {
     /* +1C */ f32 x1C;
     /* +20 */ f32 x20;
     /* +24 */ f32 x24;
-    /* +28 */ s32 x28;
+    /* +28 */ int unk_count0;
     /* +2C */ f32 x2C;
-    /* +30 */ int x30;
+    /* +30 */ int unk_count1;
     /* +34 */ struct lb_80011A50_t* next;
 };
+
+struct lb_80014638_arg0_t {
+    /*  +0 */ Vec3 x0;
+    /*  +C */ Vec3 xC;
+};
+STATIC_ASSERT(sizeof(struct lb_80014638_arg0_t) == 0x18);
+
+struct lb_80014638_arg1_t {
+    /*  +0 */ float unk_x;
+    /*  +4 */ float unk_y;
+    /*  +8 */ Vec3 x8;
+};
+STATIC_ASSERT(sizeof(struct lb_80014638_arg1_t) == 0x14);
 
 struct Fighter_804D653C_t {
     void* unk;
@@ -506,5 +520,29 @@ struct BoneDynamicsDesc {
     enum_t bone_id;
     DynamicsDesc dyn_desc;
 };
+
+struct lb_8000FD18_t {
+    char pad_0[0x94];
+};
+
+struct lb_80013FF0_t {
+    /* 0x00 */ int x0;
+    UNK_T x4;
+    /* 0x08 */ int* unk_8;
+    /* 0x0C */ char pad_C[0x70];
+    /* 0x7C */ u8 x7C_0 : 1;
+    /* 0x7C */ u8 x7C_1 : 1;
+    /* 0x7D */ char pad_7D[3];
+}; /* size = 0x80 */
+
+struct lb_804D63A0_t {
+    /* +0 */ char pad_0[0xBE00];
+};
+STATIC_ASSERT(sizeof(struct lb_804D63A0_t) == 0xBE00);
+
+struct lb_804D63A8_t {
+    /* +0 */ char pad_0[0x1C0];
+};
+STATIC_ASSERT(sizeof(struct lb_804D63A8_t) == 0x1C0);
 
 #endif

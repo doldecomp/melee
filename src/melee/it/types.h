@@ -306,10 +306,7 @@ struct Item {
     u32 xAC4_ignoreItemID;           // Cannot hit items with this index?
     u8 xAC8_hurtboxNum;              // Number of hurtboxes this item has
     HurtCapsule xACC_itemHurtbox[2]; // xACC, xB10
-    Vec2 xB54;
-    f32 xB5C;
-    f32 xB60;
-    f32 xB64;
+    struct lb_80014638_arg1_t xB54;
     u8 xB68; // int for ItemDynamics->count?
     u8 xB69;
     u8 xB6A;

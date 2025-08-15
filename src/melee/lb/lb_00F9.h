@@ -40,11 +40,12 @@
 /* 0121FC */ HSD_ImageDesc* lb_800121FC(HSD_ImageDesc* image_desc, int width,
                                         int height, GXTexFmt format,
                                         s16 entry_num);
-/* 0122C8 */ void lb_800122C8(HSD_ImageDesc*, u16, u16,
-                              int); ///< #HSD_ImageDescCopyFromEFB wrapper
+/* 0122C8 */ void
+lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
+            bool clear); ///< #HSD_ImageDescCopyFromEFB wrapper
 /* 0122F0 */ UNK_RET lb_800122F0(UNK_PARAMS);
 /* 01271C */ UNK_RET lb_8001271C(UNK_PARAMS);
-/* 01285C */ UNK_RET lb_8001285C(UNK_PARAMS);
+/* 01285C */ void lb_8001285C(HSD_ImageDesc*, GXTexObj*);
 /* 012994 */ UNK_RET lb_80012994(UNK_PARAMS);
 /* 013614 */ UNK_RET fn_80013614(UNK_PARAMS);
 /* 0138AC */ void fn_800138AC(void* ptr); ///< #HSD_Free wrapper
@@ -54,7 +55,7 @@
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
 /* 013C18 */ UNK_RET lb_80013C18(UNK_PARAMS);
 /* 013D68 */ int lb_80013D68(ColorOverlay*);
-/* 013E3C */ UNK_RET lb_80013E3C(UNK_PARAMS);
+/* 013E3C */ int lb_80013E3C(ColorOverlay*);
 /* 013F78 */ int lb_80013F78(
     ColorOverlay*); ///< Copy light rotation from #ColorOverlay::x8_ptr1
 /* 014014 */ int lb_80014014(ColorOverlay*);
@@ -67,7 +68,8 @@
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8 slot); ///< Reset pad rumble
 /* 0145F4 */ void lb_800145F4(void);
-/* 014638 */ bool lb_80014638(Vec3*, UNK_T);
+/* 014638 */ bool lb_80014638(struct lb_80014638_arg0_t*,
+                              struct lb_80014638_arg1_t*);
 /* 014770 */ bool lb_80014770(Vec3*, int);
 /* 0149E0 */ bool lb_800149E0(Mtx, u32);
 

@@ -6028,7 +6028,7 @@ void it_80274CAC(Item_GObj* item_gobj)
     }
 }
 
-void it_80274D04(Item_GObj* item_gobj, Vec2* pos)
+void it_80274D04(Item_GObj* item_gobj, struct lb_80014638_arg1_t* arg1)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -6036,8 +6036,8 @@ void it_80274D04(Item_GObj* item_gobj, Vec2* pos)
 
     it_8026BB88(item_gobj, &sp20);
     it_8026BBCC(item_gobj, &sp14);
-    pos->x = sp20.x - sp14.x;
-    pos->y = sp20.y - sp14.y;
+    arg1->unk_x = sp20.x - sp14.x;
+    arg1->unk_y = sp20.y - sp14.y;
 }
 
 void it_80274D6C(Item_GObj* arg0)
@@ -6049,16 +6049,16 @@ void it_80274D6C(Item_GObj* arg0)
     float left_x = item->x378_itemColl.xA4_ecbCurrCorrect.left.x;
     float top_y = item->x378_itemColl.xA4_ecbCurrCorrect.top.y;
 
-    item->xB60 = right_x + item->pos.x;
-    item->xB5C = left_x + item->pos.x;
-    item->xB64 = right_y + item->pos.y + top_y;
+    item->xB54.right_x = right_x + item->pos.x;
+    item->xB54.left_x = left_x + item->pos.x;
+    item->xB54.top_right_y = right_y + item->pos.y + top_y;
 }
 
 void it_80274DAC(Item_GObj* arg0)
 {
     Item* temp_r4 = GET_ITEM(arg0);
-    temp_r4->xB54.x = 0.0F;
-    temp_r4->xB54.y = 0.0F;
+    temp_r4->xB54.unk_x = 0.0F;
+    temp_r4->xB54.unk_y = 0.0F;
     it_80274D6C(arg0);
 }
 
