@@ -1,5 +1,4 @@
 #include "lb_00F9.static.h"
-#include "lb/forward.h"
 
 #include "math.h"
 #include "stddef.h"
@@ -8,8 +7,12 @@
 #include "baselib/displayfunc.h"
 #include "baselib/rumble.h"
 #include "baselib/tobj.h"
+#include "dolphin/gx/GXGeometry.h"
 #include "dolphin/gx/GXVert.h"
 #include "dolphin/pad.h"
+
+#include "lb/forward.h"
+
 #include "lb/lbarchive.h"
 #include "lb/lbdvd.h"
 #include "lb/types.h"
@@ -346,6 +349,201 @@ void lb_80011B74(HSD_DObj* dobj, u32 flags)
 /// #lb_80011E24
 
 /// #lb_8001204C
+#if 0
+int lb_8001204C(HSD_JObj* arg0, HSD_JObj** arg1, ...)
+{
+    HSD_JObj* var_ctr;
+    HSD_JObj* var_r0_2;
+    HSD_JObj* var_r0_3;
+    HSD_JObj* var_r0_4;
+    HSD_JObj* var_r0_5;
+    HSD_JObj* var_r0_6;
+    u16* var_r5;
+    HSD_JObj* var_r6;
+    HSD_JObj* var_r6_3;
+    HSD_JObj* var_r8;
+    HSD_JObj** var_r4;
+    s32 n;
+    int count;
+    u16 temp_r7;
+
+    var_r4 = arg1;
+    var_r5 = (u16*) arg1[1];
+    var_r6 = arg1[1];
+    count = 0;
+    n = -1;
+    if (arg0 == NULL) {
+        goto block_4;
+    }
+    if (var_r4 == NULL) {
+        goto block_4;
+    }
+    if (var_r5 == NULL) {
+        goto block_4;
+    }
+    if (var_r6 != 0) {
+        goto block_5;
+    }
+block_4:
+    return 0;
+block_5:
+    var_ctr = var_r6;
+    if ((int) var_r6 <= 0) {
+        goto block_52;
+    }
+loop_6:
+    temp_r7 = *var_r5;
+    if (n > temp_r7) {
+        goto block_8;
+    }
+    if (n != -1) {
+        goto block_9;
+    }
+block_8: {
+    s32 var_r10;
+    var_r6 = arg0;
+    var_r10 = 0;
+    goto loop_48;
+block_9:
+    var_r10 = n;
+    goto loop_48;
+block_10:
+    if (var_r10 == temp_r7) {
+        goto block_49;
+    }
+    var_r8 = var_r6;
+    {
+        if (var_r6->flags & 0x1000) {
+            goto if_19;
+        }
+        if (var_r6 != NULL) {
+            goto if_14;
+        }
+        var_r0_2 = NULL;
+        goto else_15;
+    if_14:
+        var_r0_2 = var_r6->child;
+    else_15:
+        if (var_r0_2 == NULL) {
+            goto if_19;
+        }
+        if (var_r6 != NULL) {
+            goto if_18;
+        }
+        var_r0_3 = NULL;
+        goto end_for_47;
+    if_18:
+        var_r0_3 = var_r6->child;
+        goto end_for_47;
+    }
+if_19:
+    if (var_r6 != NULL) {
+        goto block_21;
+    }
+    var_r0_4 = NULL;
+    goto block_22;
+block_21:
+    var_r0_4 = var_r6->next;
+block_22:
+    if (var_r0_4 == NULL) {
+        goto loop_26;
+    }
+    if (var_r6 != NULL) {
+        goto block_25;
+    }
+    var_r0_3 = NULL;
+    goto end_for_47;
+block_25:
+    var_r0_3 = var_r6->next;
+    goto end_for_47;
+loop_26:
+    if (var_r8 != NULL) {
+        goto block_28;
+    }
+    var_r0_5 = NULL;
+    goto block_29;
+block_28:
+    var_r0_5 = var_r8->parent;
+block_29:
+    if (var_r0_5 != NULL) {
+        goto block_31;
+    }
+    var_r0_3 = NULL;
+    goto end_for_47;
+block_31:
+    if (var_r8 != NULL) {
+        goto block_33;
+    }
+    {
+        HSD_JObj* var_r6_2;
+        var_r6_2 = NULL;
+        goto block_34;
+    block_33:
+        var_r6_2 = var_r8->parent;
+    block_34:
+        if (var_r6_2 != NULL) {
+            goto block_36;
+        }
+        var_r0_6 = NULL;
+        goto block_37;
+    block_36:
+        var_r0_6 = var_r6_2->next;
+    }
+block_37:
+    if (var_r0_6 == NULL) {
+        goto block_44;
+    }
+    if (var_r8 != NULL) {
+        goto block_40;
+    }
+    var_r6_3 = NULL;
+    goto block_41;
+block_40:
+    var_r6_3 = var_r8->parent;
+block_41:
+    if (var_r6_3 != NULL) {
+        goto block_43;
+    }
+    var_r0_3 = NULL;
+    goto end_for_47;
+block_43:
+    var_r0_3 = var_r6_3->next;
+    goto end_for_47;
+block_44:
+    if (var_r8 != NULL) {
+        goto block_46;
+    }
+    var_r8 = NULL;
+    goto loop_26;
+block_46:
+    var_r8 = var_r8->parent;
+    goto loop_26;
+end_for_47:
+    var_r6 = var_r0_3;
+    var_r10 += 1;
+loop_48:
+    if (var_r6 != NULL) {
+        goto block_10;
+    }
+block_49:
+    *var_r4 = var_r6;
+    n = var_r10;
+    var_r4 += 1;
+    if (var_r6 == NULL) {
+        goto block_51;
+    }
+    count += 1;
+}
+block_51:
+    var_r5 += 2;
+    var_ctr -= 1;
+    if (var_ctr != NULL) {
+        goto loop_6;
+    }
+block_52:
+    return count;
+}
+#endif
 
 static void* setImageFromPreloadedArchive(HSD_ImageDesc* image_desc,
                                           s16 entry_num)
@@ -384,7 +582,72 @@ void lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy, bool clear)
 
 /// #lb_800122F0
 
-/// #lb_8001271C
+void lb_8001271C(GXTexObj* arg0, float x0, float arg2, float tex_width,
+                 float tex_height, float scale_x, float scale_y)
+{
+#define SOLUTION 0
+#if SOLUTION == 0
+    f32 s, t;
+    PAD_STACK(16);
+
+    t = tex_width / GXGetTexObjWidth(arg0);
+    s = tex_height / GXGetTexObjHeight(arg0);
+
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+    {
+        GXPosition2f32(x0, -arg2);
+        GXTexCoord2f32(0.0f, 0.0f);
+    }
+    {
+        GXPosition2f32(x0 + tex_width * scale_x, -arg2);
+        GXTexCoord2f32(s, 0.0f);
+    }
+    {
+        GXPosition2f32(x0 + tex_width * scale_x,
+                       -(arg2 + tex_height * scale_y));
+        GXTexCoord2f32(s, t);
+    }
+    {
+        GXPosition2f32(x0, -(arg2 + tex_height * scale_y));
+        GXTexCoord2f32(0.0f, t);
+    }
+    GXEnd();
+
+#elif SOLUTION == 1
+    f32 y2;
+    f32 x1;
+    f32 s1;
+    f32 t2;
+    f32 y0;
+    PAD_STACK(16);
+
+    t2 = tex_width / GXGetTexObjWidth(arg0);
+    s1 = tex_height / GXGetTexObjHeight(arg0);
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+
+    {
+        y0 = -arg2;
+        GXPosition2f32(x0, y0);
+        x1 = x0 + (tex_width * scale_x);
+        GXTexCoord2f32(0.0f, 0.0f);
+        y2 = -(arg2 + (tex_height * scale_y));
+    }
+    {
+        GXPosition2f32(x1, y0);
+        GXTexCoord2f32(s1, 0.0f);
+    }
+    {
+        GXPosition2f32(x1, y2);
+        GXTexCoord2f32(s1, t2);
+    }
+    {
+        GXPosition2f32(x0, y2);
+        GXTexCoord2f32(0.0f, t2);
+    }
+    GXEnd();
+#endif
+#undef SOLUTION
+}
 
 void lb_8001285C(HSD_ImageDesc* image_desc, GXTexObj* tex_obj)
 {
@@ -464,7 +727,7 @@ bool lb_80013BB0(ColorOverlay* arg)
 
 bool lb_80013BB8(ColorOverlay* arg0)
 {
-    arg0->x0_timer += *((s32*) (void*) &arg0->x8_ptr1->light_color) & 0x03FFFFFF;
+    arg0->x0_timer += arg0->x8_ptr1->unk.timer;
     ++arg0->x8_ptr1;
     return false;
 }
@@ -476,7 +739,28 @@ bool lb_80013BE4(ColorOverlay* arg0)
     return false;
 }
 
-/// #lb_80013C18
+bool lb_80013C18(ColorOverlay* arg0)
+{
+    arg0->x7C_light_enable = arg0->x8_ptr1->light_rot2.light_enable;
+    arg0->x74_light_rot_x = arg0->x8_ptr1->light_rot2.x;
+    arg0->x78_light_rot_yz = arg0->x8_ptr1->light_rot2.yz;
+    ++arg0->x8_ptr1;
+    arg0->x50_light_color.r = arg0->x8_ptr1->light_color.r;
+    arg0->x50_light_color.g = arg0->x8_ptr1->light_color.g;
+    arg0->x50_light_color.b = arg0->x8_ptr1->light_color.b;
+    arg0->x50_light_color.a = arg0->x8_ptr1->light_color.a;
+    arg0->x54_light_red = arg0->x50_light_color.r;
+    arg0->x58_light_green = arg0->x50_light_color.g;
+    arg0->x5C_light_blue = arg0->x50_light_color.b;
+    arg0->x60_light_alpha = arg0->x50_light_color.a;
+    arg0->x70_lightblend_alpha = 0.0f;
+    arg0->x6C_lightblend_blue = 0.0f;
+    arg0->x68_lightblend_green = 0.0f;
+    arg0->x64_lightblend_red = 0.0f;
+    ++arg0->x8_ptr1;
+    arg0->x7C_flag2 = true;
+    return false;
+}
 
 bool lb_80013D68(ColorOverlay* arg0)
 {
@@ -494,41 +778,30 @@ bool lb_80013D68(ColorOverlay* arg0)
     arg0->x68_lightblend_green = 0.0f;
     arg0->x64_lightblend_red = 0.0f;
     ++arg0->x8_ptr1;
-    return 0;
-}
-
-static inline void inlineD0(ColorOverlay* arg0, union ColorOverlay_x8_t* arg1)
-{
-    {
-        f32 temp_f3 = arg0->x8_ptr1->val & 0x03FFFFFF;
-        arg0->x64_lightblend_red =
-            ((0.5f + arg0->x8_ptr1->light_color.r) - arg0->x50_light_color.r) /
-            temp_f3;
-        arg0->x68_lightblend_green =
-            ((0.5f + arg0->x8_ptr1->light_color.g) - arg0->x50_light_color.g) /
-            temp_f3;
-        arg0->x6C_lightblend_blue =
-            ((0.5f + arg0->x8_ptr1->light_color.b) - arg0->x50_light_color.b) /
-            temp_f3;
-        arg0->x70_lightblend_alpha =
-            ((0.5f + arg0->x8_ptr1->light_color.a) - arg0->x50_light_color.a) /
-            temp_f3;
-    }
+    return false;
 }
 
 bool lb_80013E3C(ColorOverlay* arg0)
 {
-    inlineD0(arg0, ++arg0->x8_ptr1);
+    float f = arg0->x8_ptr1++->unk.timer;
+    arg0->x64_lightblend_red =
+        ((0.5f + arg0->x8_ptr1->light_color.r) - arg0->x50_light_color.r) / f;
+    arg0->x68_lightblend_green =
+        ((0.5f + arg0->x8_ptr1->light_color.g) - arg0->x50_light_color.g) / f;
+    arg0->x6C_lightblend_blue =
+        ((0.5f + arg0->x8_ptr1->light_color.b) - arg0->x50_light_color.b) / f;
+    arg0->x70_lightblend_alpha =
+        ((0.5f + arg0->x8_ptr1->light_color.a) - arg0->x50_light_color.a) / f;
     ++arg0->x8_ptr1;
-    return 0;
+    return false;
 }
 
 bool lb_80013F78(ColorOverlay* arg0)
 {
-    arg0->x74_light_rot_x = arg0->x8_ptr1->light_rot.x;
-    arg0->x78_light_rot_yz = arg0->x8_ptr1->light_rot.yz;
+    arg0->x74_light_rot_x = arg0->x8_ptr1->light_rot1.x;
+    arg0->x78_light_rot_yz = arg0->x8_ptr1->light_rot1.yz;
     ++arg0->x8_ptr1;
-    return 0;
+    return false;
 }
 
 bool lb_80013FF0(ColorOverlay* arg0)
@@ -555,10 +828,23 @@ bool lb_80014014(ColorOverlay* arg0)
     arg0->x44_colorblend_green = 0.0f;
     arg0->x40_colorblend_red = 0.0f;
     ++arg0->x8_ptr1;
-    return 0;
+    return false;
 }
 
-/// #lb_800140F8
+bool lb_800140F8(ColorOverlay* arg0)
+{
+    float f = arg0->x8_ptr1++->unk.timer;
+    arg0->x40_colorblend_red =
+        ((0.5f + arg0->x8_ptr1->light_color.r) - arg0->x2C_hex.r) / f;
+    arg0->x44_colorblend_green =
+        ((0.5f + arg0->x8_ptr1->light_color.g) - arg0->x2C_hex.g) / f;
+    arg0->x48_colorblend_blue =
+        ((0.5f + arg0->x8_ptr1->light_color.b) - arg0->x2C_hex.b) / f;
+    arg0->x4C_colorblend_alpha =
+        ((0.5f + arg0->x8_ptr1->light_color.a) - arg0->x2C_hex.a) / f;
+    ++arg0->x8_ptr1;
+    return false;
+}
 
 bool lb_80014234(ColorOverlay* arg0)
 {
@@ -668,7 +954,6 @@ bool lb_800149E0(Mtx arg0, u32 arg1)
             GXLoadPosMtxImm(mtx, 0);
             GXSetLineWidth(12, GX_TO_ONE);
             GXBegin(GX_LINESTRIP, GX_VTXFMT0, 2);
-
             {
                 float y = arg0[1][0];
                 GXPosition3f32(arg0[0][2], y, 0.0f);
@@ -677,6 +962,7 @@ bool lb_800149E0(Mtx arg0, u32 arg1)
                 GXPosition3f32(arg0[0][3], y, 0.0f);
                 GXColor4u8(yellow.r, yellow.g, yellow.b, yellow.a);
             }
+            GXEnd();
         }
         return true;
     }
