@@ -22,13 +22,13 @@
 /* 00FD18 */ void lb_8000FD18(DynamicsDesc*);
 /* 00FD48 */ void lb_8000FD48(HSD_JObj*, DynamicsDesc*, size_t);
 /* 0100B0 */ struct lb_80011A50_t* lb_800100B0(struct lb_80011A50_t*, float);
-/* 0101C8 */ UNK_RET lb_800101C8(UNK_PARAMS);
-/* 0103B8 */ UNK_RET lb_800103B8(UNK_PARAMS);
+/* 0101C8 */ void lb_800101C8(Vec3*, Vec3*);
+/* 0103B8 */ void lb_800103B8(Vec3*, Vec3*);
 /* 01044C */ void lb_8001044C(DynamicsDesc*, UNK_T, int, float pos_y, bool,
                               Fighter_Part part, int, bool);
 /* 0115F4 */ void lb_800115F4(void);
 /* 011710 */ void lb_80011710(DynamicsDesc*, DynamicsDesc*);
-/* 0117F4 */ bool lb_800117F4(UNK_T, float*, float*, u32, int);
+/* 0117F4 */ bool lb_800117F4(DynamicsDesc*, GXColor*, UNK_T, int, u32);
 /* 0119DC */ void lb_800119DC(Vec3*, int, float, float, float);
 /* 011A50 */ void lb_80011A50(Vec3*, int, float, float, float, float, float,
                               float, float);
