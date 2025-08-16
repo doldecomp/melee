@@ -33,7 +33,6 @@ typedef struct _mn_unk2 {
 /* 229894 */ void mn_80229894(s32, u16, s32);
 /* 229938 */ bool mn_80229938(s32 arg0, s32 arg1);
 /* 229A04 */ int mn_80229A04(int, int);
-/* 229A7C */ void mn_80229A7C(void*, int, int);
 /* 229B2C */ HSD_GObj* mn_80229B2C(void);
 /* 229BF4 */ void fn_80229BF4(HSD_GObj*);
 /* 229DC0 */ HSD_GObj* mn_80229DC0(void);
