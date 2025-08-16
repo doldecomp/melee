@@ -27,7 +27,7 @@ let
   bintools' = ppcCrossBinutils.overrideAttrs (oa: {
     patches = oa.patches ++ [
       (fetchpatch {
-        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/${tag}/dkppc/patches/binutils-${oa.version}.patch";
+        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/devkitPPC_r47/dkppc/patches/binutils-${oa.version}.patch";
         hash = "sha256-IOqa20LQYBxfR1KKxkp0hVV21CKd9IZrvNeEyuW09us=";
       })
     ];
