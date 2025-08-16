@@ -39,8 +39,9 @@ stdenvNoCC.mkDerivation {
   nativeBuildInputs = [
     makeWrapper
   ];
+  #for bindir in '${lib.getBin gcc'}/bin' '${lib.getBin bintools'}/bin'; do
   buildCommand = ''
-    for bindir in '${lib.getBin gcc'}/bin' '${lib.getBin bintools'}/bin'; do
+    for bindir in '${lib.getBin bintools'}/bin'; do
       cd "$bindir"
       for f in powerpc-none-eabi-*; do
         short="$(echo "$f" | sed s/powerpc-none-eabi-/powerpc-eabi-/)"
