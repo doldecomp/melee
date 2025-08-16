@@ -1,1 +1,13 @@
+#ifndef MELEE_MN_INFOBONUS_H
+#define MELEE_MN_INFOBONUS_H
 
+#include <placeholder.h>
+
+/* 2528F8 */ UNK_RET mnInfoBonus_802528F8(UNK_PARAMS);
+/* 2529B4 */ UNK_RET mnInfoBonus_802529B4(UNK_PARAMS);
+/* 252ADC */ UNK_RET mnInfoBonus_80252ADC(UNK_PARAMS);
+/* 252C50 */ UNK_RET fn_80252C50(UNK_PARAMS);
+/* 252E4C */ UNK_RET fn_80252E4C(UNK_PARAMS);
+/* 252F8C */ void mnInfoBonus_80252F8C(void);
+
+#endif

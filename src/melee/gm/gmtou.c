@@ -273,9 +273,9 @@ void fn_8019CDBC(HSD_GObj* gobj)
     sp28 = jobj->translate.x;
     temp_r27 = tmd->x37[idx].xC;
     sp24 = (5.999997f * temp_r27) - 21.5f;
-    mn_8022F410(&sp28, 0.4f, &sp24);
+    mn_8022F410(&sp28, &sp24, 0.4f);
 
-    switch (mn_8022F410(&sp28, 0.2f, &sp24)) { /* irregular */
+    switch (mn_8022F410(&sp28, &sp24, 0.2f)) {
     case 1:
         fn_8018FDC4(jobj, sp28, 19.5f, -6.0f);
         HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -197.0f);

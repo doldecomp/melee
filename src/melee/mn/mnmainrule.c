@@ -34,6 +34,12 @@ extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConSs_Top;
 extern StaticModelDesc MenMainCursorSs_Top;
 
+/// #fn_8022F538
+
+/// #mn_8022FB88
+
+/// #mn_8022FD18
+
 /// #mn_8022FEC8
 
 /// #mn_80230198
