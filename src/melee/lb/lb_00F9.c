@@ -464,7 +464,7 @@ bool lb_80013BB0(ColorOverlay* arg)
 
 bool lb_80013BB8(ColorOverlay* arg0)
 {
-    arg0->x0_timer += arg0->x8_ptr1->light_color.a & 0x03;
+    arg0->x0_timer += *((s32*) (void*) &arg0->x8_ptr1->light_color) & 0x03FFFFFF;
     ++arg0->x8_ptr1;
     return false;
 }
