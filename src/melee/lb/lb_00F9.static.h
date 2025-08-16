@@ -18,11 +18,11 @@ STATIC_ASSERT(sizeof(struct _m2c_stack_lb_80014638) == 0x40);
 /* 0103D8 */ static bool lb_800103D8(Vec3* vec, float x0, float x1, float x2,
                                      float x3, float offset);
 /* 011B74 */ static void lb_80011B74(HSD_DObj* dobj, u32 flags);
-/* 013BB0 */ static bool lb_80013BB0(void);
-/* 013BB8 */ static int lb_80013BB8(struct lb_80013FF0_t*);
-/* 013BE4 */ static int lb_80013BE4(ColorOverlay*);
-/* 013FF0 */ static int lb_80013FF0(struct lb_80013FF0_t*);
-/* 014234 */ static int lb_80014234(struct lb_80013FF0_t*);
+/* 013BB0 */ static bool lb_80013BB0(ColorOverlay* arg);
+/* 013BB8 */ static bool lb_80013BB8(ColorOverlay* arg);
+/* 013BE4 */ static bool lb_80013BE4(ColorOverlay* arg);
+/* 013FF0 */ static bool lb_80013FF0(ColorOverlay* arg);
+/* 014234 */ static bool lb_80014234(ColorOverlay* arg);
 /* 4D3770 */ static GXColor yellow;
 /* 4D63A0 */ static struct lb_804D63A0_t* lb_804D63A0;
 /* 4D63A4 */ static struct DynamicsData* cur_data;

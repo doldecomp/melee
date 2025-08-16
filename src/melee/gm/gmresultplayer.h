@@ -2,6 +2,7 @@
 #define MELEE_GM_RESULTPLAYER_H
 
 #include <placeholder.h>
+#include "baselib/forward.h"
 
 struct ResultsMatchInfo;
 
@@ -18,15 +19,15 @@ struct ResultsMatchInfo;
 /* 1795D4 */ UNK_RET fn_801795D4(UNK_PARAMS);
 /* 1796F0 */ UNK_RET fn_801796F0(UNK_PARAMS);
 /* 179854 */ UNK_RET fn_80179854(UNK_PARAMS);
-/* 179990 */ UNK_RET fn_80179990(UNK_PARAMS);
-/* 179D3C */ UNK_RET fn_80179D3C(UNK_PARAMS);
-/* 179D60 */ UNK_RET fn_80179D60(UNK_PARAMS);
-/* 179D84 */ UNK_RET fn_80179D84(UNK_PARAMS);
-/* 179DA8 */ UNK_RET fn_80179DA8(UNK_PARAMS);
-/* 179DCC */ UNK_RET fn_80179DCC(UNK_PARAMS);
-/* 179E34 */ UNK_RET fn_80179E34(UNK_PARAMS);
-/* 179E9C */ UNK_RET fn_80179E9C(UNK_PARAMS);
-/* 179F04 */ UNK_RET fn_80179F04(UNK_PARAMS);
+/* 179990 */ void fn_80179990(HSD_GObj*, int, int);
+/* 179D3C */ void fn_80179D3C(HSD_GObj*, int);
+/* 179D60 */ void fn_80179D60(HSD_GObj*, int);
+/* 179D84 */ void fn_80179D84(HSD_GObj*, int);
+/* 179DA8 */ void fn_80179DA8(HSD_GObj*, int);
+/* 179DCC */ void fn_80179DCC(HSD_GObj*, int);
+/* 179E34 */ void fn_80179E34(HSD_GObj*, int);
+/* 179E9C */ void fn_80179E9C(HSD_GObj*, int);
+/* 179F04 */ void fn_80179F04(HSD_GObj*, int);
 /* 179F6C */ UNK_RET fn_80179F6C(int idx, int value);
 /* 179F84 */ UNK_RET fn_80179F84(UNK_PARAMS);
 /* 17A004 */ UNK_RET fn_8017A004(UNK_PARAMS);

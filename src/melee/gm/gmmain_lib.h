@@ -44,7 +44,7 @@
 /* 15CF5C */ s32 gmMainLib_8015CF5C(s32);
 /* 15CF70 */ void gmMainLib_8015CF70(s32, s32);
 /* 15CF84 */ void gmMainLib_8015CF84(void);
-/* 15CF94 */ s32 gmMainLib_8015CF94(void);
+/* 15CF94 */ bool gmMainLib_8015CF94(void);
 /* 15CFAC */ s32 func_8015CFAC(void);
 /* 15CFB4 */ s8* gmMainLib_8015CFB4(u8);
 /* 15CFCC */ s32 gmMainLib_8015CFCC(u8);
@@ -77,7 +77,7 @@
 /* 15D48C */ s32 gmMainLib_8015D48C(u8);
 /* 15D4A8 */ s32 gmMainLib_8015D4A8(u8);
 /* 15D4E8 */ void gmMainLib_8015D4E8(u8, s32);
-/* 15D508 */ s32 gmMainLib_8015D508(void);
+/* 15D508 */ bool gmMainLib_8015D508(void);
 /* 15D5DC */ s32 gmMainLib_8015D5DC(void);
 /* 15D640 */ s32 gmMainLib_8015D640(void);
 /* 15D6A4 */ s32* gmMainLib_8015D6A4(u8);
