@@ -780,7 +780,7 @@ void gm_801653C8(HSD_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-f64 fn_801653E8(u8 arg0)
+f32 fn_801653E8(u8 arg0)
 {
     return (0.1f * arg0);
 }

@@ -1394,8 +1394,8 @@ void gm_801B1788(MinorScene* arg0)
 
 void gm_801B1810(MinorScene* arg0)
 {
-    gm_801A427C(arg0);
-    gm_801905F0();
+    StartMeleeData* data = gm_801A427C(arg0);
+    gm_801905F0(data);
 }
 
 void gm_801B1834(MinorScene* arg0)
