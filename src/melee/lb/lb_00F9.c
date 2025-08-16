@@ -1,4 +1,5 @@
 #include "lb_00F9.static.h"
+#include "lb/forward.h"
 
 #include "math.h"
 #include "stddef.h"
@@ -20,6 +21,16 @@
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <melee/sc/types.h>
+
+typedef bool (*lb_803BA248_fn)(ColorOverlay*);
+
+lb_803BA248_fn lb_803BA248[] = {
+    lb_80013BB0, lb_80013BB8, lb_80013BE4, lb_80013C18, lb_80013D68,
+    lb_80013E3C, lb_80013F78, lb_80013FF0, lb_80014014, lb_800140F8,
+    lb_80014234, NULL,        NULL,        NULL,        NULL,
+    NULL,        NULL,        NULL,        NULL,        NULL,
+    NULL,        NULL,
+};
 
 static inline bool checkJObjFlags(HSD_JObj* jobj)
 {
@@ -446,28 +457,28 @@ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective* desc)
     return cobj;
 }
 
-bool lb_80013BB0(void)
+bool lb_80013BB0(ColorOverlay* arg)
 {
     return true;
 }
 
-int lb_80013BB8(struct lb_80013FF0_t* arg0)
+bool lb_80013BB8(ColorOverlay* arg0)
 {
-    arg0->x0 += *arg0->unk_8 & 0x03FFFFFF;
-    ++arg0->unk_8;
-    return 0;
+    arg0->x0_timer += arg0->x8_ptr1->light_color.a & 0x03;
+    ++arg0->x8_ptr1;
+    return false;
 }
 
-int lb_80013BE4(ColorOverlay* arg0)
+bool lb_80013BE4(ColorOverlay* arg0)
 {
     arg0->x7C_color_enable = arg0->x7C_flag2 = false;
     ++arg0->x8_ptr1;
-    return 0;
+    return false;
 }
 
 /// #lb_80013C18
 
-int lb_80013D68(ColorOverlay* arg0)
+bool lb_80013D68(ColorOverlay* arg0)
 {
     ++arg0->x8_ptr1;
     arg0->x50_light_color.r = arg0->x8_ptr1->light_color.r;
@@ -505,14 +516,14 @@ static inline void inlineD0(ColorOverlay* arg0, union ColorOverlay_x8_t* arg1)
     }
 }
 
-int lb_80013E3C(ColorOverlay* arg0)
+bool lb_80013E3C(ColorOverlay* arg0)
 {
     inlineD0(arg0, ++arg0->x8_ptr1);
     ++arg0->x8_ptr1;
     return 0;
 }
 
-int lb_80013F78(ColorOverlay* arg0)
+bool lb_80013F78(ColorOverlay* arg0)
 {
     arg0->x74_light_rot_x = arg0->x8_ptr1->light_rot.x;
     arg0->x78_light_rot_yz = arg0->x8_ptr1->light_rot.yz;
@@ -520,14 +531,14 @@ int lb_80013F78(ColorOverlay* arg0)
     return 0;
 }
 
-int lb_80013FF0(struct lb_80013FF0_t* arg0)
+bool lb_80013FF0(ColorOverlay* arg0)
 {
-    arg0->x7C_1 = false;
-    ++arg0->unk_8;
-    return 0;
+    arg0->x7C_flag2 = false;
+    ++arg0->x8_ptr1;
+    return false;
 }
 
-int lb_80014014(ColorOverlay* arg0)
+bool lb_80014014(ColorOverlay* arg0)
 {
     arg0->x7C_color_enable = true;
     ++arg0->x8_ptr1;
@@ -549,11 +560,11 @@ int lb_80014014(ColorOverlay* arg0)
 
 /// #lb_800140F8
 
-int lb_80014234(struct lb_80013FF0_t* arg0)
+bool lb_80014234(ColorOverlay* arg0)
 {
-    arg0->x7C_0 = false;
-    ++arg0->unk_8;
-    return 0;
+    arg0->x7C_color_enable = false;
+    ++arg0->x8_ptr1;
+    return false;
 }
 
 /// #lb_80014258
