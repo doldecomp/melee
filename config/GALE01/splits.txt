@@ -2565,19 +2565,20 @@ melee/db/dballoc.c:
 	.sbss       start:0x804D6BA0 end:0x804D6BA8
 
 melee/mn/mnmain.c:
-	.text       start:0x802295AC end:0x8022FEC8
+	.text       start:0x802295AC end:0x8022F538
 	.rodata     start:0x803B84E8 end:0x803B8510
 	.data       start:0x803EAE68 end:0x803EC600
 	.bss        start:0x804A04F0 end:0x804A0648
 	.sdata      start:0x804D4B30 end:0x804D4B88
-	.sbss       start:0x804D6BA8 end:0x804D6BE0
-	.sdata2     start:0x804DBD88 end:0x804DBE10
+	.sbss       start:0x804D6BA8 end:0x804D6BD0
+	.sdata2     start:0x804DBD88 end:0x804DBDF0
 
 melee/mn/mnmainrule.c:
-	.text       start:0x8022FEC8 end:0x8023201C
+	.text       start:0x8022F538 end:0x8023201C
 	.data       start:0x803EC600 end:0x803ED1D0
 	.sdata      start:0x804D4B88 end:0x804D4B98
-	.sdata2     start:0x804DBE10 end:0x804DBE38
+	.sbss       start:0x804D6BD0 end:0x804D6BE0
+	.sdata2     start:0x804DBDF0 end:0x804DBE38
 
 melee/mn/mnruleplus.c:
 	.text       start:0x8023201C end:0x80233A98
