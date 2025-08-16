@@ -138,7 +138,7 @@ struct lb_80011A50_t* lb_800100B0(struct lb_80011A50_t* arg0, f32 arg1)
     return ret;
 }
 
-void lb_800101C8(Point3d* arg0, Point3d* arg1)
+void lb_800101C8(Vec3* arg0, Vec3* arg1)
 {
     struct lb_80011A50_t* var_r30 = lb_804D63B0;
     arg1->x = 0.0f;
