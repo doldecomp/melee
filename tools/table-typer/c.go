@@ -114,21 +114,14 @@ func (st CStructType) New() CValue {
 	return v
 }
 
-func (fv *CFuncValue) setType(ft CFuncType) {
-	fv.typ = ft
-	// special case for void
-	if len(ft.Params) == 1 && ft.Params[0] == "void" {
-		fv.ParamNames[0] = ""
-		return
-	}
-	if len(fv.ParamNames) < len(ft.Params) {
-		// orig had too few params; fill in the rest with default names
-		for len(fv.ParamNames) < len(ft.Params) {
-			fv.ParamNames = append(fv.ParamNames, defaultName(ft.Params[len(fv.ParamNames)], fv.ParamNames))
+func (fv *CFuncValue) fix(fixed *CFuncValue) {
+	oldNames := fv.ParamNames
+	*fv = *fixed
+	for i := range fv.ParamNames {
+		// preserve existing names
+		if len(oldNames) > i && oldNames[i] != "" {
+			fv.ParamNames[i] = oldNames[i]
 		}
-	} else if len(fv.ParamNames) > len(ft.Params) {
-		// orig had too many params; try to preserve what they had before
-		fv.ParamNames = fv.ParamNames[:len(ft.Params)]
 	}
 }
 
@@ -299,16 +292,17 @@ func fixSignatures(path string, fnTypes map[string]*CFuncValue, conservative boo
 	}
 
 	n := 0
-	fix := func(name string, ft CFuncType) {
+	fix := func(name string, fv *CFuncValue) {
 		changed := false
 		lines := bytes.Split(content, []byte("\n"))
 		for i, line := range lines {
-			if raw, sig, ok := parseCFuncValue(name, line); ok {
+			if raw, ok := locateFunc(name, line); ok {
+				sig := parseCFuncValue(raw)
 				if conservative && !sig.typ.isUnk() {
 					continue
 				}
-				if !equivalent(sig.typ, ft) {
-					sig.setType(ft)
+				if !equivalent(sig.typ, fv.typ) {
+					sig.fix(fv)
 					lines[i] = bytes.Replace(lines[i], raw, []byte(sig.String()), 1)
 					changed = true
 				}
@@ -322,7 +316,7 @@ func fixSignatures(path string, fnTypes map[string]*CFuncValue, conservative boo
 
 	for name, ft := range fnTypes {
 		if bytes.Contains(content, []byte(name)) {
-			fix(name, ft.typ)
+			fix(name, ft)
 		}
 	}
 	if n > 0 {
@@ -333,15 +327,18 @@ func fixSignatures(path string, fnTypes map[string]*CFuncValue, conservative boo
 	return n
 }
 
-func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
+func locateFunc(name string, line []byte) ([]byte, bool) {
 	i := bytes.Index(line, []byte(name+"("))
 	if i < 0 {
-		return nil, CFuncValue{}, false
+		return nil, false
+	} else if bytes.Contains(line[:i], []byte("(")) {
+		// function call expression
+		return nil, false
 	}
 	retEnd := bytes.LastIndexByte(line[:i], ' ')
 	if retEnd < 0 {
 		// TODO: handle multi-line signatures
-		return nil, CFuncValue{}, false
+		return nil, false
 	}
 	retStart := retEnd - 1
 	for retStart > 0 && isIdentByte(line[retStart-1]) {
@@ -350,16 +347,24 @@ func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 	returnType := string(bytes.TrimSpace(line[retStart:retEnd]))
 	if returnType == "" || returnType == "return" {
 		// actually a function call, not a declaration
-		return nil, CFuncValue{}, false
+		return nil, false
 	}
-	paramStart := i + len(name) + 1
+	paramStart := retEnd + bytes.IndexByte(line[retEnd:], '(')
 	paramEnd := paramStart + bytes.IndexByte(line[paramStart:], ')')
-	if paramEnd < paramStart {
+	if paramStart < 0 || paramEnd < 0 {
 		// TODO: handle multi-line signatures
-		return nil, CFuncValue{}, false
+		return nil, false
 	}
-	params := bytes.Split(line[paramStart:paramEnd], []byte(","))
-	isDecl := strings.Contains(string(line), ";")
+	return line[retStart : paramEnd+1], true
+}
+
+func parseCFuncValue(src []byte) *CFuncValue {
+	returnType := string(bytes.TrimSpace(src[:bytes.IndexByte(src, ' ')]))
+	name := string(bytes.TrimSpace(src[bytes.IndexByte(src, ' ')+1 : bytes.IndexByte(src, '(')]))
+
+	paramStart := bytes.IndexByte(src, '(') + 1
+	paramEnd := bytes.IndexByte(src, ')')
+	params := bytes.Split(src[paramStart:paramEnd], []byte(","))
 	var paramTypes, paramNames []string
 	for _, param := range params {
 		typ, name, _ := strings.Cut(strings.TrimSpace(string(param)), " ")
@@ -373,19 +378,14 @@ func parseCFuncValue(name string, line []byte) ([]byte, CFuncValue, bool) {
 			typ += "*"
 			name = strings.TrimPrefix(name, "*")
 		}
-		if name == "" && !isDecl {
-			name = defaultName(typ, paramNames)
-		}
 		paramTypes = append(paramTypes, typ)
 		paramNames = append(paramNames, name)
 	}
-	orig := line[retStart : paramEnd+1]
-	sig := CFuncValue{
+	return &CFuncValue{
 		typ:        CFuncType{Return: returnType, Params: paramTypes},
-		Name:       string(line[retEnd+1 : i+len(name)]),
+		Name:       name,
 		ParamNames: paramNames,
 	}
-	return orig, sig, true
 }
 
 func isIdentByte(b byte) bool {

@@ -1,4 +1,7 @@
 #include "gmresultplayer.h"
+#include "baselib/forward.h"
+#include "baselib/gobj.h"
+#include "cm/camera.h"
 
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
@@ -36,21 +39,69 @@ void gm_80177724(struct ResultsMatchInfo* arg0)
 
 /// #fn_80179990
 
-/// #fn_80179D3C
+void fn_80179D3C(HSD_GObj* gobj, int arg1)
+{
+    fn_80179990(gobj, arg1, 0);
+}
 
-/// #fn_80179D60
+void fn_80179D60(HSD_GObj* gobj, int arg1)
+{
+    fn_80179990(gobj, arg1, 1);
+}
 
-/// #fn_80179D84
+void fn_80179D84(HSD_GObj* gobj, int arg1)
+{
+    fn_80179990(gobj, arg1, 2);
+}
 
-/// #fn_80179DA8
+void fn_80179DA8(HSD_GObj* gobj, int arg1)
+{
+    fn_80179990(gobj, arg1, 3);
+}
 
-/// #fn_80179DCC
+void fn_80179DCC(HSD_GObj* gobj, int arg1)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    if (HSD_CObjSetCurrent(cobj)) {
+        Camera_800313E0(gobj, 0);
+        gobj->gxlink_prios = 0x80;
+        HSD_GObj_80390ED0(gobj, 7U);
+        HSD_CObjEndCurrent();
+    }
+}
 
-/// #fn_80179E34
+void fn_80179E34(HSD_GObj* gobj, int arg1)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    if (HSD_CObjSetCurrent(cobj)) {
+        Camera_800313E0(gobj, 0);
+        gobj->gxlink_prios = 0x80;
+        HSD_GObj_80390ED0(gobj, 7U);
+        HSD_CObjEndCurrent();
+    }
+}
 
-/// #fn_80179E9C
+void fn_80179E9C(HSD_GObj* gobj, int arg1)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    if (HSD_CObjSetCurrent(cobj)) {
+        Camera_800313E0(gobj, 0);
+        gobj->gxlink_prios = 0x80;
+        HSD_GObj_80390ED0(gobj, 7U);
+        HSD_CObjEndCurrent();
+    }
+}
 
-/// #fn_80179F04
+void fn_80179F04(HSD_GObj* gobj, int arg1)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    if (HSD_CObjSetCurrent(cobj)) {
+        Camera_800313E0(gobj, 0);
+        gobj->gxlink_prios = 0x80;
+        HSD_GObj_80390ED0(gobj, 7U);
+        HSD_CObjEndCurrent();
+    }
+}
 
 void fn_80179F6C(int idx, int value)
 {

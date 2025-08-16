@@ -894,7 +894,7 @@ void un_80304344(struct un_80304138_objalloc_t* arg0)
     un_804D6E44 = next;
 }
 
-int un_80304470(void)
+bool un_80304470(void)
 {
     int i;
     int sum = 0;
@@ -915,7 +915,7 @@ int un_80304470(void)
     }
 }
 
-int un_80304510(void)
+bool un_80304510(void)
 {
     int i;
     int sum = 0;

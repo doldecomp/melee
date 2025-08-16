@@ -525,16 +525,6 @@ struct lb_8000FD18_t {
     char pad_0[0x94];
 };
 
-struct lb_80013FF0_t {
-    /* 0x00 */ int x0;
-    UNK_T x4;
-    /* 0x08 */ int* unk_8;
-    /* 0x0C */ char pad_C[0x70];
-    /* 0x7C */ u8 x7C_0 : 1;
-    /* 0x7C */ u8 x7C_1 : 1;
-    /* 0x7D */ char pad_7D[3];
-}; /* size = 0x80 */
-
 struct lb_804D63A0_t {
     /* +0 */ char pad_0[0xBE00];
 };

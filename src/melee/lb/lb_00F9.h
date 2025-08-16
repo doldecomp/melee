@@ -53,13 +53,13 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
 /* 0138D8 */ void lb_800138D8(HSD_GObj* gobj, s8 arg1);
 /* 0138EC */ UNK_RET lb_800138EC(UNK_PARAMS);
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
-/* 013C18 */ UNK_RET lb_80013C18(UNK_PARAMS);
-/* 013D68 */ int lb_80013D68(ColorOverlay*);
-/* 013E3C */ int lb_80013E3C(ColorOverlay*);
+/* 013C18 */ bool lb_80013C18(ColorOverlay* arg);
+/* 013D68 */ bool lb_80013D68(ColorOverlay* arg);
+/* 013E3C */ bool lb_80013E3C(ColorOverlay* arg);
 /* 013F78 */ int lb_80013F78(
     ColorOverlay*); ///< Copy light rotation from #ColorOverlay::x8_ptr1
-/* 014014 */ int lb_80014014(ColorOverlay*);
-/* 0140F8 */ UNK_RET lb_800140F8(UNK_PARAMS);
+/* 014014 */ bool lb_80014014(ColorOverlay* arg);
+/* 0140F8 */ bool lb_800140F8(ColorOverlay* arg);
 /* 014258 */ bool lb_80014258(HSD_GObj* gobj, void* arg1, FtCmd cmd);
 /* 014498 */ void lb_80014498(ColorOverlay*);
 /* 0144C8 */ bool lb_800144C8(ColorOverlay*, struct Fighter_804D653C_t*, int,

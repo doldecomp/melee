@@ -47,8 +47,8 @@
                               int arg2, int arg3, int arg4);
 /* 304334 */ void un_80304334(struct un_80304138_objalloc_t* arg0);
 /* 304344 */ void un_80304344(struct un_80304138_objalloc_t*);
-/* 304470 */ int un_80304470(void);
-/* 304510 */ int un_80304510(void);
+/* 304470 */ bool un_80304470(void);
+/* 304510 */ bool un_80304510(void);
 /* 3045A0 */ int un_803045A0(void);
 /* 304690 */ int un_80304690(void);
 /* 304780 */ bool un_80304780(void);

@@ -15,23 +15,24 @@ import (
 func main() {
 	log.SetFlags(0)
 	var typeName string
+	var fix bool
 	var conservative bool
 	root := flagg.Root
 	rootDir := root.String("root", "../../", "root directory containing C sources and asm")
-	cmdFixTab := flagg.New("fixtab", "Fix function types for a given table type")
-	cmdFixTab.StringVar(&typeName, "type", "", "table type to fix")
-	cmdFixTab.BoolVar(&conservative, "conservative", false, "only fix UNK_RET/UNK_PARAMS functions")
+	cmdFindFns := flagg.New("findfns", "Find function types to fix")
+	cmdFindFns.StringVar(&typeName, "type", "", "Enumerate functions in tables with a known type")
+	cmdFindFns.BoolVar(&fix, "fix", false, "Immediately apply fixes instead of listing them")
+	cmdFixFns := flagg.New("fixfns", "Fix function types")
+	cmdFixFns.BoolVar(&conservative, "conservative", false, "only fix UNK_RET/UNK_PARAMS functions")
 	cmdRename := flagg.New("rename", "Rename anonymous functions based on hardcoded patterns")
 	cmdRename.StringVar(&typeName, "type", "", "type of struct to derive names from")
-	cmdList := flagg.New("list", "List anonymous functions based on hardcoded patterns")
-	cmdList.StringVar(&typeName, "type", "", "type of struct to derive names from")
 	cmdUnk := flagg.New("unk", "Search for UNK_RET functions in asm data")
 	cmd := flagg.Parse(flagg.Tree{
 		Cmd: root,
 		Sub: []flagg.Tree{
-			{Cmd: cmdFixTab},
+			{Cmd: cmdFindFns},
+			{Cmd: cmdFixFns},
 			{Cmd: cmdRename},
-			{Cmd: cmdList},
 			{Cmd: cmdUnk},
 		},
 	})
@@ -84,14 +85,37 @@ func main() {
 			fn(typeName, tableType)
 		}
 	}
+	applyRewrites := func(fnTypes map[string]*CFuncValue) {
+		fmt.Println("Identified", len(fnTypes), "candidate functions for updating.")
+		if len(fnTypes) == 0 {
+			fmt.Println("Nothing to do, exiting.")
+			return
+		}
+		totalSigs := 0
+		totalFiles := 0
+		for _, path := range append(hFiles, cFiles...) {
+			fmt.Printf("\rChecking %-70v", path[:min(57, len(path))]+"...")
+			sigs := fixSignatures(path, fnTypes, conservative)
+			totalSigs += sigs
+			if sigs > 0 {
+				totalFiles++
+				s := "es"
+				if sigs == 1 {
+					s = ""
+				}
+				fmt.Printf("%3d fix%s\n", sigs, s)
+			}
+		}
+		fmt.Println()
+		fmt.Printf("Fixed %v signatures across %v source files.\n", totalSigs, totalFiles)
+	}
 
 	switch cmd {
-	case cmdFixTab:
+	case cmdFindFns:
 		if cmd.NArg() != 0 {
 			cmd.Usage()
 			return
 		}
-
 		runTypes(typeName, func(typeName string, st CStructType) {
 			fnTypes := make(map[string]*CFuncValue)
 			visitStructs(typeName, st, func(path, name string, index int, sv *CStructValue) {
@@ -101,29 +125,41 @@ func main() {
 					}
 				}
 			})
-			fmt.Println("Identified", len(fnTypes), "candidate functions for updating.")
-			if len(fnTypes) == 0 {
-				fmt.Println("Nothing to do, exiting.")
-				return
-			}
-			totalSigs := 0
-			totalFiles := 0
-			for _, path := range append(hFiles, cFiles...) {
-				fmt.Printf("\rChecking %-70v", path[:min(57, len(path))]+"...")
-				sigs := fixSignatures(path, fnTypes, conservative)
-				totalSigs += sigs
-				if sigs > 0 {
-					totalFiles++
-					s := "es"
-					if sigs == 1 {
-						s = ""
-					}
-					fmt.Printf("%3d fix%s\n", sigs, s)
+			if fix {
+				applyRewrites(fnTypes)
+			} else {
+				var lines []string
+				for name, fn := range fnTypes {
+					lines = append(lines, fmt.Sprintf("%s: %s", name, fn))
+				}
+				sort.Strings(lines)
+				for _, line := range lines {
+					fmt.Println(line)
 				}
 			}
-			fmt.Println()
-			fmt.Printf("Fixed %v signatures across %v source files.\n", totalSigs, totalFiles)
 		})
+
+	case cmdFixFns:
+		if cmd.NArg() != 1 {
+			cmd.Usage()
+			return
+		}
+		fixList, err := os.ReadFile(cmd.Arg(0))
+		if err != nil {
+			log.Fatal(err)
+		}
+		fnTypes := make(map[string]*CFuncValue)
+		for _, line := range bytes.Split(fixList, []byte("\n")) {
+			if line = bytes.TrimSpace(line); len(line) == 0 {
+				continue
+			}
+			name, fixed, ok := bytes.Cut(line, []byte(": "))
+			if !ok {
+				log.Fatalf("Invalid format: %q", line)
+			}
+			fnTypes[string(name)] = parseCFuncValue(fixed)
+		}
+		applyRewrites(fnTypes)
 
 	case cmdRename:
 		if cmd.NArg() != 0 {
@@ -234,27 +270,6 @@ func main() {
 				fmt.Printf("Renamed %d symbols in %d files.\n", len(renames), totalFiles)
 			} else {
 				fmt.Println("Nothing to rename.")
-			}
-		})
-
-	case cmdList:
-		if cmd.NArg() != 0 {
-			cmd.Usage()
-			return
-		}
-
-		runTypes(typeName, func(typeName string, st CStructType) {
-			var decls []string
-			visitStructs(typeName, st, func(path, name string, index int, sv *CStructValue) {
-				for _, f := range sv.Fields {
-					if fn, ok := f.(*CFuncValue); ok {
-						decls = append(decls, fmt.Sprintf("%s: %s", path, fn))
-					}
-				}
-			})
-			sort.Strings(decls)
-			for _, decl := range decls {
-				fmt.Println(decl)
 			}
 		})
 
