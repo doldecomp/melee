@@ -24,6 +24,10 @@ stdenv.mkDerivation rec {
     mimalloc
   ];
 
+  cmakeFlags = [
+    "-DFETCHCONTENT_TRY_FIND_PACKAGE_MODE=ALWAYS"
+  ];
+
   meta = with lib; {
     description = "Quick-and-dirty wrapper to run 32-bit windows EXEs on linux";
     longDescription = ''
