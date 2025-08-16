@@ -1,22 +1,27 @@
 { lib
 , stdenv
 , fetchFromGitHub
+, mimalloc
 , cmake
 }:
 
 stdenv.mkDerivation rec {
   pname = "wibo";
-  version = "0.6.16";
+  version = "0.7.0";
 
   src = fetchFromGitHub {
     owner = "decompals";
     repo = "wibo";
     rev = version;
-    hash = "sha256-QnqvLcGMGdX7uCwFo2MWNZETZrZ9NUJbR7PujN+7Ghc=";
+    hash = "sha256-PEqfvpS3p8Zooee7k59SN2UiSZWfITuB/VULIrfup4w=";
   };
 
   nativeBuildInputs = [
     cmake
+  ];
+
+  buildInputs = [
+    mimalloc
   ];
 
   meta = with lib; {
