@@ -24,6 +24,12 @@ rustPlatform.buildRustPackage rec {
     ];
   };
 
+  cargoBuildFlags = [
+    "--workspace" "--exclude objdiff-wasm"
+  ];
+
+  cargoTestFlags = cargoBuildFlags;
+
   cargoLock.lockFile = "${src}/Cargo.lock";
   cargoLock.outputHashes = {
     "gimli-0.32.0" = "sha256-a00uNPu3YbP/z8Xx+MilnAvHMVvDGnDbMqNLmovosQQ=";
