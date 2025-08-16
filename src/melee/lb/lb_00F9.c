@@ -15,6 +15,7 @@
 
 #include "lb/lbarchive.h"
 #include "lb/lbdvd.h"
+#include "lb/lbvector.h"
 #include "lb/types.h"
 
 #include <baselib/cobj.h>
@@ -125,23 +126,60 @@ struct lb_80011A50_t* lb_800100B0(struct lb_80011A50_t* arg0, f32 arg1)
     ret->x0 = arg0->x0;
     ret->x1 = arg0->x1;
     ret->x4 = arg0->x4;
-    ret->x20 = arg0->x20;
+    ret->unk_scale = arg0->unk_scale;
     ret->x24 = arg0->x24;
     ret->unk_count0 = arg0->unk_count0;
-    ret->x2C = arg0->x2C;
+    ret->unk_angle_float = arg0->unk_angle_float;
     ret->x10 = arg0->x10;
     ret->x14 = arg0->x14;
     ret->x18 = arg0->x18;
     ret->x1C = arg0->x1C;
-    ret->unk_count1 = 0;
+    ret->unk_angle_int = 0;
     return ret;
 }
 
-/// #lb_800101C8
-
-void lb_800103B8(void)
+void lb_800101C8(Point3d* arg0, Point3d* arg1)
 {
-    lb_800101C8();
+    struct lb_80011A50_t* var_r30 = lb_804D63B0;
+    arg1->x = 0.0f;
+    arg1->y = 0.0f;
+    arg1->z = 0.0f;
+    for (; var_r30 != NULL; var_r30 = var_r30->next) {
+        float scale0 =
+            0.5 * var_r30->unk_scale *
+            (1.0 + cosf(var_r30->unk_angle_int * var_r30->unk_angle_float));
+        if (var_r30->x0 == 1) {
+            if (arg0->x > var_r30->x10 && arg0->x < var_r30->x18) {
+                if (arg0->y < var_r30->x14 && arg0->y > var_r30->x1C) {
+                    arg1->x += var_r30->x4.x * scale0;
+                    arg1->y += var_r30->x4.y * scale0;
+                    arg1->z += var_r30->x4.z * scale0;
+                }
+            }
+        } else {
+            Vec3 delta;
+            delta.x = arg0->x - var_r30->x4.x;
+            delta.y = arg0->y - var_r30->x4.y;
+            delta.z = arg0->z - var_r30->x4.z;
+            {
+                f32 scale1;
+                f32 var_f0 = 0.05 * lbVector_Normalize(&delta);
+                if (var_f0 < 1.0) {
+                    var_f0 = 1.0f;
+                }
+                scale1 = 1.0 / (var_f0 * var_f0);
+                arg1->x += scale1 * (delta.x * scale0);
+                arg1->y += scale1 * (delta.y * scale0);
+                arg1->z += scale1 * (delta.z * scale0);
+            }
+        }
+    }
+    lbVector_Normalize(arg1);
+}
+
+void lb_800103B8(Vec3* a, Vec3* b)
+{
+    lb_800101C8(a, b);
 }
 
 bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
@@ -173,16 +211,16 @@ static inline double inlineB0()
 
     while (cur != NULL) {
         if (cur->x0 == 1) {
-            ret += cur->x20;
+            ret += cur->unk_scale;
         }
-        cur->x20 -= cur->x24;
-        if (cur->x20 < 0.0) {
-            cur->x20 = 0.0;
+        cur->unk_scale -= cur->x24;
+        if (cur->unk_scale < 0.0) {
+            cur->unk_scale = 0.0;
         }
         if (cur->unk_count0 > 0) {
             --cur->unk_count0;
         }
-        ++cur->unk_count1;
+        ++cur->unk_angle_int;
         if (cur->unk_count0 == 0) {
             struct lb_80011A50_t* var_r3 = lb_804D63B0;
             struct lb_80011A50_t* prev = cur;
@@ -262,7 +300,47 @@ void lb_80011710(DynamicsDesc* arg0, DynamicsDesc* arg1)
     }
 }
 
-/// #lb_800117F4
+bool lb_800117F4(DynamicsDesc* arg0, GXColor* arg1, UNK_T arg2, int arg3,
+                 u32 arg4)
+{
+    Mtx view_mtx;
+    struct DynamicsData* cur;
+    int i;
+    PAD_STACK(8 * 4);
+
+    if (arg1->a < 0xFF) {
+        if (arg4 != 2) {
+            return false;
+        }
+        goto block_5;
+    }
+    if (arg4 != 0) {
+        return false;
+    }
+block_5:
+    HSD_StateInitDirect(0, 2);
+    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), &view_mtx[0]);
+    GXLoadPosMtxImm(&view_mtx[0], 0);
+    GXSetLineWidth(12, GX_TO_ONE);
+    GXBegin(GX_LINESTRIP, GX_VTXFMT0, arg0->count);
+    for (cur = arg0->data, i = 0; cur != NULL; cur = cur->next, i++) {
+        HSD_JObjSetMtxDirtyInline(cur->desc.ft_unk.jobj);
+        HSD_JObjSetupMatrix(cur->desc.ft_unk.jobj);
+        {
+            float x = cur->desc.ft_unk.jobj->mtx[0][3];
+            float y = cur->desc.ft_unk.jobj->mtx[1][3];
+            float z = cur->desc.ft_unk.jobj->mtx[2][3];
+            if (i < arg3) {
+                GXPosition3f32(x, y, z);
+                GXColor4u8(arg1->r / 2, arg1->g / 2, arg1->b / 2, arg1->a);
+            } else {
+                GXPosition3f32(x, y, z);
+                GXColor4u8(arg1->r, arg1->g, arg1->b, arg1->a);
+            }
+        }
+    }
+    return true;
+}
 
 void lb_800119DC(Point3d* arg0, int arg1, float arg2, float arg3, float arg4)
 {
@@ -270,10 +348,10 @@ void lb_800119DC(Point3d* arg0, int arg1, float arg2, float arg3, float arg4)
     sp1C.x0 = 2;
     sp1C.x1 = 0x64;
     sp1C.x4 = *arg0;
-    sp1C.x20 = arg2;
+    sp1C.unk_scale = arg2;
     sp1C.x24 = arg3;
     sp1C.unk_count0 = arg1;
-    sp1C.x2C = arg4;
+    sp1C.unk_angle_float = arg4;
     sp1C.x10 = -10000.0f;
     sp1C.x14 = 10000.0f;
     sp1C.x18 = 10000.0f;
@@ -288,10 +366,10 @@ void lb_80011A50(Vec3* arg0, int arg1, float arg2, float arg3, float arg4,
     x2C.x0 = 1;
     x2C.x1 = 0;
     x2C.x4 = *arg0;
-    x2C.x20 = arg2;
+    x2C.unk_scale = arg2;
     x2C.x24 = arg3;
     x2C.unk_count0 = arg1;
-    x2C.x2C = arg4;
+    x2C.unk_angle_float = arg4;
     x2C.x10 = arg5;
     x2C.x14 = arg6;
     x2C.x18 = arg7;

@@ -433,11 +433,11 @@ struct lb_80011A50_t {
     /* +14 */ f32 x14;
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
-    /* +20 */ f32 x20;
+    /* +20 */ f32 unk_scale;
     /* +24 */ f32 x24;
     /* +28 */ int unk_count0;
-    /* +2C */ f32 x2C;
-    /* +30 */ int unk_count1;
+    /* +2C */ f32 unk_angle_float;
+    /* +30 */ int unk_angle_int;
     /* +34 */ struct lb_80011A50_t* next;
 };
 
