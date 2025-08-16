@@ -36,7 +36,7 @@
 /* 011AC4 */ HSD_LObj* lb_80011AC4(LightList**);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);
 /* 011E24 */ int lb_80011E24(HSD_JObj*, HSD_JObj**, ...);
-/* 01204C */ void lb_8001204C(HSD_JObj*, HSD_JObj**, u16*, int);
+/* 01204C */ int lb_8001204C(HSD_JObj*, HSD_JObj**, u16*, int);
 /* 0121FC */ HSD_ImageDesc* lb_800121FC(HSD_ImageDesc* image_desc, int width,
                                         int height, GXTexFmt format,
                                         s16 entry_num);
@@ -44,7 +44,8 @@
 lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
             bool clear); ///< #HSD_ImageDescCopyFromEFB wrapper
 /* 0122F0 */ UNK_RET lb_800122F0(UNK_PARAMS);
-/* 01271C */ UNK_RET lb_8001271C(UNK_PARAMS);
+/* 01271C */ void lb_8001271C(GXTexObj*, float, float, float, float, float,
+                              float);
 /* 01285C */ void lb_8001285C(HSD_ImageDesc*, GXTexObj*);
 /* 012994 */ UNK_RET lb_80012994(UNK_PARAMS);
 /* 013614 */ UNK_RET fn_80013614(UNK_PARAMS);
@@ -53,13 +54,13 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
 /* 0138D8 */ void lb_800138D8(HSD_GObj* gobj, s8 arg1);
 /* 0138EC */ UNK_RET lb_800138EC(UNK_PARAMS);
 /* 013B14 */ HSD_CObj* lb_80013B14(HSD_CameraDescPerspective*);
-/* 013C18 */ bool lb_80013C18(ColorOverlay* arg);
-/* 013D68 */ bool lb_80013D68(ColorOverlay* arg);
-/* 013E3C */ bool lb_80013E3C(ColorOverlay* arg);
+/* 013C18 */ bool lb_80013C18(ColorOverlay*);
+/* 013D68 */ bool lb_80013D68(ColorOverlay*);
+/* 013E3C */ bool lb_80013E3C(ColorOverlay*);
 /* 013F78 */ int lb_80013F78(
     ColorOverlay*); ///< Copy light rotation from #ColorOverlay::x8_ptr1
-/* 014014 */ bool lb_80014014(ColorOverlay* arg);
-/* 0140F8 */ bool lb_800140F8(ColorOverlay* arg);
+/* 014014 */ bool lb_80014014(ColorOverlay*);
+/* 0140F8 */ bool lb_800140F8(ColorOverlay*);
 /* 014258 */ bool lb_80014258(HSD_GObj* gobj, void* arg1, FtCmd cmd);
 /* 014498 */ void lb_80014498(ColorOverlay*);
 /* 0144C8 */ bool lb_800144C8(ColorOverlay*, struct Fighter_804D653C_t*, int,
