@@ -338,6 +338,9 @@ func locateFunc(name string, line []byte) ([]byte, bool) {
 	i := bytes.Index(line, []byte(name+"("))
 	if i < 0 {
 		return nil, false
+	} else if bytes.Contains(line[:i], []byte("(")) {
+		// function call expression
+		return nil, false
 	}
 	retEnd := bytes.LastIndexByte(line[:i], ' ')
 	if retEnd < 0 {
@@ -353,8 +356,8 @@ func locateFunc(name string, line []byte) ([]byte, bool) {
 		// actually a function call, not a declaration
 		return nil, false
 	}
-	paramStart := bytes.IndexByte(line, '(')
-	paramEnd := bytes.IndexByte(line, ')')
+	paramStart := retEnd + bytes.IndexByte(line[retEnd:], '(')
+	paramEnd := paramStart + bytes.IndexByte(line[paramStart:], ')')
 	if paramStart < 0 || paramEnd < 0 {
 		// TODO: handle multi-line signatures
 		return nil, false
