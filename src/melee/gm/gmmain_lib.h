@@ -119,7 +119,7 @@
 /* 15EA80 */ UNK_RET gmMainLib_8015EA80(UNK_PARAMS);
 /* 15ECB0 */ int gmMainLib_8015ECB0(void);
 /* 15ECBC */ UNK_RET gmMainLib_8015ECBC(UNK_PARAMS);
-/* 15ED30 */ u8 gmMainLib_8015ED30(void);
+/* 15ED30 */ int gmMainLib_8015ED30(void);
 /* 15ED3C */ u8 GetRumbleSettingOfPort(s32 arg0);
 /* 15ED4C */ void gmMainLib_8015ED4C(s32 arg0, s8 arg1);
 /* 15ED5C */ s32 gmMainLib_8015ED5C(void);

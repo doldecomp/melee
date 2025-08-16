@@ -792,7 +792,7 @@ void gmMainLib_8015ECBC(void)
     }
 }
 
-u8 gmMainLib_8015ED30(void)
+int gmMainLib_8015ED30(void)
 {
     return gmMainLib_804D3EE0->x1850.unk_xc;
 }

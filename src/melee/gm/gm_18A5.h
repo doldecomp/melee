@@ -18,7 +18,7 @@
 /* 18DC18 */ UNK_RET fn_8018DC18(UNK_PARAMS);
 /* 18DF68 */ UNK_RET fn_8018DF68(UNK_PARAMS);
 /* 18E46C */ void fn_8018E46C(HSD_GObj*, int);
-/* 18E618 */ UNK_RET fn_8018E618(UNK_PARAMS);
+/* 18E618 */ void fn_8018E618(int, int, float);
 /* 18E85C */ UNK_RET fn_8018E85C(UNK_PARAMS);
 /* 18EC48 */ UNK_RET fn_8018EC48(UNK_PARAMS);
 /* 18EC7C */ UNK_RET fn_8018EC7C(UNK_PARAMS);
@@ -26,10 +26,10 @@
 /* 18F00C */ UNK_RET fn_8018F00C(UNK_PARAMS);
 /* 18F1B0 */ s32 gm_8018F1B0(MatchEnd*);
 /* 17F294 */ int fn_8017F294(void);
-/* 18F310 */ UNK_RET fn_8018F310(UNK_PARAMS);
+/* 18F310 */ int fn_8018F310(int);
 /* 18F3BC */ u8 fn_8018F3BC(s32 arg0);
-/* 18F3D0 */ UNK_RET fn_8018F3D0(UNK_PARAMS);
-/* 18F410 */ UNK_RET fn_8018F410(UNK_PARAMS);
+/* 18F3D0 */ int fn_8018F3D0(int);
+/* 18F410 */ int fn_8018F410(void);
 /* 18F4A0 */ int fn_8018F4A0(void);
 /* 18F508 */ UNK_RET fn_8018F508(UNK_PARAMS);
 /* 18F5F0 */ char* fn_8018F5F0(void);
@@ -53,16 +53,16 @@ fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 190174 */ HSD_GObj* fn_80190174(HSD_CObjDesc*);
 /* 1901F8 */ HSD_GObj* fn_801901F8(HSD_CObjDesc*);
 /* 19027C */ void fn_8019027C(UNK_T lights);
-/* 1902F0 */ UNK_RET fn_801902F0(UNK_PARAMS);
+/* 1902F0 */ void fn_801902F0(int);
 /* 19035C */ HSD_GObj* fn_8019035C(bool, DynamicModelDesc*, int, int, int,
                                    bool, void (*)(HSD_GObj*), float);
 /* 19044C */ void fn_8019044C(HSD_JObj*, float);
 /* 190480 */ void fn_80190480(float);
 /* 1904D0 */ UNK_RET fn_801904D0(UNK_PARAMS);
-/* 190520 */ UNK_RET fn_80190520(UNK_PARAMS);
-/* 1905F0 */ UNK_RET gm_801905F0(UNK_PARAMS);
-/* 190ABC */ UNK_RET fn_80190ABC(UNK_PARAMS);
-/* 190EA4 */ UNK_RET gm_80190EA4(UNK_PARAMS);
+/* 190520 */ void fn_80190520(float x, float y, float z);
+/* 1905F0 */ void gm_801905F0(StartMeleeData*);
+/* 190ABC */ void fn_80190ABC(int);
+/* 190EA4 */ void gm_80190EA4(void);
 /* 190FE4 */ UNK_RET gm_80190FE4(UNK_PARAMS);
 /* 1910E0 */ void fn_801910E0(HSD_GObj*);
 /* 191154 */ void fn_80191154(HSD_GObj*);
@@ -106,7 +106,7 @@ fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 19655C */ s32 fn_8019655C(void);
 /* 196564 */ bool fn_80196564(TmData*);
 /* 196594 */ bool fn_80196594(TmData*);
-/* 1965C4 */ UNK_RET fn_801965C4(UNK_PARAMS);
+/* 1965C4 */ void fn_801965C4(void);
 /* 196684 */ UNK_RET fn_80196684(UNK_PARAMS);
 /* 1967E0 */ UNK_RET fn_801967E0(UNK_PARAMS);
 /* 196CF8 */ UNK_RET fn_80196CF8(UNK_PARAMS);

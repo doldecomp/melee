@@ -656,9 +656,15 @@ struct UnkAllstarData {
 };
 
 struct TmData {
-    s32 x0;
-    s32 x4;
-    u8 pad_x8[0x28 - 0x8];
+    int x0;
+    int x4;
+    int x8;
+    int xC;
+    int x10;
+    int x14;
+    u8 pad_x18[0x20 - 0x18];
+    int x20;
+    int x24;
     u32 x28; ///< stage id
     u8 x2C;
     u8 x2D;
@@ -684,14 +690,17 @@ struct TmData {
         u8 xC;
         u8 xD;
         u8 pad_xE[0x11 - 0xE];
-    } x37[16];
+    } x37[16]; ///< @todo needs to be larger, see gm_80190EA4
     u8 pad_x158[0x4B8 - 0x158];
     struct UnkSelections {
-        u8 x0; ///< slot type?
+        u8 x0; ///< slot type
         u8 x1; ///< CSSIconHud
         u8 x2;
-        u8 x3;
-        u8 pad_x4[0xA - 0x4];
+        u8 x3; ///< color
+        u8 x4; ///< CPU level
+        u8 x5;
+        u16 x6;
+        u8 pad_x4[0xA - 0x8];
     } x4B8[4];
     HSD_Text* x4E0;
     HSD_Text* x4E4;
