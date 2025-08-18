@@ -98,7 +98,7 @@ static inline Fighter_GObj* getFtVictim(Fighter* fp)
     return fp->victim_gobj;
 }
 
-static inline HSD_GObj* getFtTargetItem(Fighter* fp)
+static inline Item_GObj* getFtTargetItem(Fighter* fp)
 {
     return fp->target_item_gobj;
 }

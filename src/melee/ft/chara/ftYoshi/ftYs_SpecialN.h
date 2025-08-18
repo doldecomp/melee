@@ -9,6 +9,7 @@
 
 #include <dolphin/mtx.h>
 
+/* 12CC6C */ Fighter_Part ftYs_SpecialN_GetBoneIndex(Fighter_GObj* gobj);
 /* 12CC94 */ void ftYs_SpecialN_SetupItemVel(Fighter_GObj* gobj, Vec3* out);
 /* 12CCC4 */ float ftYs_SpecialN_GetFacingDir(Fighter_GObj* gobj);
 /* 12CCD0 */ float ftYs_SpecialN_GetDatAttr18(Fighter_GObj* gobj);

@@ -37,7 +37,6 @@
 /* 12CBDC */ void ftYs_GuardOn_1_Phys(Fighter_GObj* gobj);
 /* 12CBFC */ void ftYs_GuardOn_1_Coll(Fighter_GObj* gobj);
 /* 12CC1C */ bool ftYs_Shield_8012CC1C(Fighter_GObj* gobj);
-/* 12CC6C */ Fighter_Part ftYs_SpecialN_GetBoneIndex(Fighter_GObj* gobj);
 /* 3CEA98 */ extern char ftYs_Init_DatFilename[];
 /* 3CEAA4 */ extern char ftYs_Init_DataName[];
 /* 3CEC70 */ extern char ftYs_Init_AnimDatFilename[];
