@@ -7,6 +7,7 @@
 
 #include "ftYoshi/forward.h"
 
+#include "ftYoshi/ftYs_SpecialN.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
