@@ -757,4 +757,29 @@ struct TmVsData {
     u32 color[4];
 };
 
+struct gm_801677C0_s {
+    /*  +1 */ u8 x0;
+    /*  +2 */ u8 x1;
+    /*  +3 */ u8 x2;
+    /*  +4 */ u8 x3;
+    /*  +4 */ bool (*x4[2])(void);
+    /*  +C */ UNK_T xC;
+    /* +20 */ u64 unk_20;
+    /* +28 */ u64 unk_28;
+    /* +30 */ void (*unk_30)(void);
+    /* +34 */ int unk_34;
+    /* +38 */ u8 unk_38_0 : 1;
+    /* +38 */ u8 unk_38_1 : 1;
+};
+STATIC_ASSERT(sizeof(struct gm_801677C0_s) == 0x30);
+
+struct gm_80479D58_t {
+    /*  +0 */ u32 unk_0;
+    /*  +4 */ u32 unk_4;
+    /*  +8 */ u32 unk_8;
+    /*  +C */ int unk_C;
+    /* +10 */ struct gm_801677C0_s unk_10;
+};
+STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
+
 #endif
