@@ -117,6 +117,8 @@ typedef enum MatchOutcome {
     OUTCOME_0x9,
 } MatchOutcome;
 
+struct gm_801677C0_s;
+
 typedef struct MajorScene MajorScene;
 typedef struct MinorScene MinorScene;
 typedef struct MinorSceneHandler MinorSceneHandler;
