@@ -34,7 +34,7 @@ void it_802F2BFC(Item_GObj* gobj, Fighter_GObj* owner_gobj)
     item->xDD0_flag.b1 = false;
     item->xBC_itemStateContainer = it_803F9480;
     it_80274F48(gobj, item->xC4_article_data->x10_modelDesc->x8_bone_attach_id,
-                owner_gobj, ftYs_Shield_8012CC6C(owner_gobj));
+                owner_gobj, ftYs_SpecialN_GetBoneIndex(owner_gobj));
     Item_80268E5C(gobj, 0, 0);
     it_802762BC(item);
     it_802756D0(gobj);
@@ -62,7 +62,7 @@ void it_802F2CE0(Item_GObj* gobj, bool clear_destroy_type)
     it_80275070(gobj,
                 item->xC4_article_data->x10_modelDesc->x8_bone_attach_id);
     lb_8000B1CC(ftLib_80086630(item->grab_victim,
-                               ftYs_Shield_8012CC6C(item->grab_victim)),
+                               ftYs_SpecialN_GetBoneIndex(item->grab_victim)),
                 NULL, &item->pos);
     it_8027B4A4(item->grab_victim, gobj);
     it_8027B378(item->grab_victim, gobj, 0);

@@ -589,11 +589,11 @@ typedef struct it_27CF_ItemVars {
 typedef struct it_27CF_DatAttrs {
     Vec3 pos;
     Vec3 vel;
-    f32 float1; // lifetime
-    f32 float2;
-    f32 float3; // item var x0
-    f32 x24;    // item->xC98
-    int x28;    // ItemKind
+    float lifetime; // lifetime
+    float float2;
+    float float3; // item var x0
+    float x24;    // item->xC98
+    ItemKind kind;
 } it_27CF_DatAttrs;
 
 typedef struct it_2F28_ItemVars {

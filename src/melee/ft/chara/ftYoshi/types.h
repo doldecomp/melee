@@ -24,16 +24,15 @@ typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     float x1C;
     float x20;
     float x24;
-    s32 x28;
-    s32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    f32 x3c;
-    f32 x40;
-    f32 x44;
-    s32 x48;
-    s32 x4C;
+    float x28;
+    float x2C;
+    float x30;
+    float x34;
+    int x38;
+    Vec2 x3C;
+    float x44;
+    int x48;
+    int x4C;
     u8 pad_x50[0x6C - 0x50];
     float x6C;
     float x70;
@@ -45,6 +44,15 @@ typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     u8 pad_x124[0x138 - 0x124];
 } ftYoshiAttributes;
 STATIC_ASSERT(sizeof(struct _ftYoshiAttributes) == 0x138);
+
+struct ftYs_DatAttrs {
+    /*  +0 */ char pad_0[0x10];
+    /* +10 */ Vec2 x10;
+    /* +18 */ float x18;
+    /* +1C */ UNK_T x1C;
+    /* +20 */ UNK_T x20;
+    /* +24 */ float x24;
+};
 
 struct S_UNK_YOSHI2 {
     s32 x0;

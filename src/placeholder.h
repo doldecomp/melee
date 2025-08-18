@@ -21,7 +21,7 @@ typedef jmp_t jtbl_t[];
 #define NOT_IMPLEMENTED asm { nop }
 #else
 #include <dolphin/os.h>
-#define NOT_IMPLEMENTED \
+#define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #endif
 
@@ -83,6 +83,11 @@ typedef jmp_t jtbl_t[];
 #define FORCE_PAD_STACK(bytes)                                                \
     do {                                                                      \
         UNUSED unsigned char _[(bytes)] = { 0 };                              \
+    } while (0)
+
+#define FORCE_PAD_STACK_4                                                     \
+    do {                                                                      \
+        UNUSED u32 _0 = 0;                                                    \
     } while (0)
 
 #define FORCE_PAD_STACK_8                                                     \

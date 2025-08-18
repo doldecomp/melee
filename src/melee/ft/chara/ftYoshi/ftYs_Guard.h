@@ -37,13 +37,7 @@
 /* 12CBDC */ void ftYs_GuardOn_1_Phys(Fighter_GObj* gobj);
 /* 12CBFC */ void ftYs_GuardOn_1_Coll(Fighter_GObj* gobj);
 /* 12CC1C */ bool ftYs_Shield_8012CC1C(Fighter_GObj* gobj);
-/* 12CC6C */ Fighter_Part ftYs_Shield_8012CC6C(Fighter_GObj* gobj);
-/* 12CC94 */ void ftYs_Shield_8012CC94(Fighter_GObj* gobj, Vec3* out);
-/* 12CCC4 */ float ftYs_Shield_8012CCC4(Fighter_GObj* gobj);
-/* 12CCD0 */ float ftYs_Shield_8012CCD0(Fighter_GObj* gobj);
-/* 12CCE0 */ float ftYs_Shield_8012CCE0(Fighter_GObj* gobj);
-/* 12CCF0 */ float ftYs_Shield_8012CCF0(Fighter_GObj* gobj);
-/* 12CD00 */ float ftYs_Shield_8012CD00(Fighter_GObj* gobj);
+/* 12CC6C */ Fighter_Part ftYs_SpecialN_GetBoneIndex(Fighter_GObj* gobj);
 /* 3CEA98 */ extern char ftYs_Init_DatFilename[];
 /* 3CEAA4 */ extern char ftYs_Init_DataName[];
 /* 3CEC70 */ extern char ftYs_Init_AnimDatFilename[];

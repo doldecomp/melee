@@ -4211,7 +4211,7 @@ void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
 void fn_800F6178(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    it_802F23EC(fp->x1A60, gobj, -fp->facing_dir);
+    it_802F23EC(fp->target_item_gobj, gobj, -fp->facing_dir);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNCapture1,
                               Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_KeepSfx,
                               0, 1, 0, NULL);
@@ -4506,7 +4506,7 @@ void ftKb_SpecialN_800F9070(HSD_GObj* gobj)
 void ftKb_SpecialN_800F9090(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x1A60 != NULL && fp->kind == FTKIND_KIRBY &&
+    if (fp->target_item_gobj != NULL && fp->kind == FTKIND_KIRBY &&
         fp->fv.kb.hat.kind == FTKIND_KIRBY)
     {
         bool capturing = false;
@@ -4515,9 +4515,9 @@ void ftKb_SpecialN_800F9090(HSD_GObj* gobj)
         {
             capturing = true;
         }
-        it_802F28C8(fp->x1A60, capturing, 0);
+        it_802F28C8(fp->target_item_gobj, capturing, 0);
         fp->x1A64 = NULL;
-        fp->x1A60 = NULL;
+        fp->target_item_gobj = NULL;
     }
 }
 
