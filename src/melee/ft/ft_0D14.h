@@ -5,7 +5,6 @@
 #include <platform.h>
 
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -316,7 +315,7 @@
 /* 0DDD64 */ void ftCo_ThrowLw_Coll(Fighter_GObj* gobj);
 /* 0DDDE4 */ UNK_RET ftCo_800DDDE4(UNK_PARAMS);
 /* 0DE2A8 */ void ftCo_800DE2A8(Fighter_GObj*, Fighter_GObj* gobj);
-/* 0DE2CC */ UNK_RET ftCo_800DE2CC(UNK_PARAMS);
+/* 0DE2CC */ void ftCo_800DE2CC(Fighter_GObj*, Fighter_GObj*);
 /* 0DE2F0 */ void ftCo_800DE2F0(Fighter_GObj* gobj);
 /* 0DE3FC */ bool ftCo_800DE3FC(Fighter_GObj* gobj, FtMotionId msid,
                                 float arg2);

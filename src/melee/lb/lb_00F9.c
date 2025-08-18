@@ -75,7 +75,7 @@ void lb_8000FD18(DynamicsDesc* desc)
 
 /// #lb_8000FD48
 
-static inline struct lb_80011A50_t* inlineA0()
+static inline struct lb_80011A50_t* inlineA0(void)
 {
     struct lb_80011A50_t* ret = lb_804D63AC;
     if (ret == NULL) {
@@ -91,7 +91,7 @@ static inline struct lb_80011A50_t* inlineA0()
     return ret;
 }
 
-static inline struct lb_80011A50_t* inlineA1()
+static inline struct lb_80011A50_t* inlineA1(void)
 {
     struct lb_80011A50_t* cur = lb_804D63B0;
     if (lb_804D63B0 == NULL) {
@@ -204,7 +204,7 @@ bool lb_800103D8(Vec3* vec, float x0, float x1, float x2, float x3,
 
 /// #lb_8001044C
 
-static inline double inlineB0()
+static inline double inlineB0(void)
 {
     float ret = 0.0f;
     struct lb_80011A50_t* cur = lb_804D63B0;

@@ -403,7 +403,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x221B_b6 = 0;
 
-    fp->x1A60 = 0;
+    fp->target_item_gobj = 0;
     fp->x1A64 = 0;
 
     fp->x221B_b7 = 0;
@@ -1586,7 +1586,9 @@ void Fighter_8006A360(Fighter_GObj* gobj)
                 if (fp->x2104 == 0) {
                     fp->x2221_b4 = 0;
 
-                    if (fp->item_gobj && itGetKind(fp->item_gobj) == It_Kind_Peach_Parasol) {
+                    if (fp->item_gobj &&
+                        itGetKind(fp->item_gobj) == It_Kind_Peach_Parasol)
+                    {
                         fp->x2221_b5 = 1;
                         ftCo_800968C8(gobj);
                     } else {
@@ -2588,11 +2590,11 @@ void Fighter_UnkProcessGrab_8006CA5C(Fighter_GObj* gobj)
             }
             ftColl_8007BC90(gobj);
 
-            if (fp->x1A60) {
+            if (fp->target_item_gobj) {
                 if (!fp->x2225_b1) {
                     ft_PlaySFX(fp, fp->ft_data->x4C_sfx->x30, 0x7F, 0x40);
                 }
-                it_8027B4A4(gobj, fp->x1A60);
+                it_8027B4A4(gobj, fp->target_item_gobj);
                 if (fp->x2194) {
                     fp->x2194(gobj);
                 }
@@ -2905,7 +2907,9 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
             }
             bool1 = fp->x19A4;
         } else if (fp->dmg.int_value) {
-            if ((fp->dmg.x191C) && (!fp->victim_gobj) && (!fp->x1A60)) {
+            if ((fp->dmg.x191C) && (!fp->victim_gobj) &&
+                (!fp->target_item_gobj))
+            {
                 ftCommon_8007DB58(gobj);
                 ftCo_80099D9C(gobj);
             }

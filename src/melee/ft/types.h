@@ -1408,7 +1408,7 @@ struct Fighter {
     /* fp+1A54 */ s32 x1A54;
     /* fp+1A58 */ Fighter_GObj* victim_gobj;
     /* fp+1A5C */ Fighter_GObj* x1A5C;
-    /* fp+1A60 */ Item_GObj* x1A60;
+    /* fp+1A60 */ Item_GObj* target_item_gobj;
     /* fp+1A64 */ UNK_T x1A64;
     /* fp+1A68 */ u16 x1A68;
     /* fp+1A6A */ u16 x1A6A;

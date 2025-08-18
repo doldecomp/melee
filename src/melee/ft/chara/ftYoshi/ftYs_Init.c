@@ -32,6 +32,9 @@
 #include <baselib/debug.h>
 #include <baselib/mobj.h>
 
+/// @todo Belongs in #ftYs_Guard.c?
+/* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
+
 #undef __FILE__
 #define __FILE__ "ftyoshi.c"
 

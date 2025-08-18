@@ -761,7 +761,8 @@ config.libs = [
             # Yoshi
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
-            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
+            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
             # Bowser
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Init.c"),
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Unk1.c"),
