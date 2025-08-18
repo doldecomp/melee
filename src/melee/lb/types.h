@@ -351,25 +351,43 @@ struct ColorOverlay_UnkInner {
     /* +7B */ u8 x7B;
 };
 
+union ColorOverlay_x8_t {
+    GXColor light_color;
+    struct {
+        s32 unk : 6;
+        s32 x : 13;
+        s32 yz : 13;
+    } light_rot1;
+    struct {
+        u32 x0_0 : 1;
+        u32 x0_1 : 1;
+        u32 x0_2 : 1;
+        u32 x0_3 : 1;
+        u32 x0_4 : 1;
+        u32 x0_5 : 1;
+        u32 light_enable : 1;
+        u32 x0_7 : 1;
+        s32 x : 12;
+        s32 yz : 12;
+    } light_rot2;
+    struct {
+        u32 unk : 6;
+        u32 timer : 26;
+    } unk;
+};
+STATIC_ASSERT(sizeof(union ColorOverlay_x8_t) == 0x4);
+
 struct ColorOverlay {
     s32 x0_timer; // 0x0
     s32 x4_pri;   // 0x4  this colanims priority, lower = will persist
-    union ColorOverlay_x8_t {
-        GXColor light_color;
-        struct {
-            s32 unk : 6;
-            s32 x : 13;
-            s32 yz : 13;
-        } light_rot;
-        u32 val;
-    }* x8_ptr1;     // 0x8
-    s32 xC_loop;    // 0xc
-    s32* x10_ptr2;  // 0x10
-    s32 x14;        // 0x14
-    s32* x18_alloc; // 0x18
-    s32 x1c;        // 0x1c
-    s32 x20;        // 0x20
-    s32 x24;        // 0x24
+    union ColorOverlay_x8_t* x8_ptr1; // 0x8
+    s32 xC_loop;                      // 0xc
+    s32* x10_ptr2;                    // 0x10
+    s32 x14;                          // 0x14
+    s32* x18_alloc;                   // 0x18
+    s32 x1c;                          // 0x1c
+    s32 x20;                          // 0x20
+    s32 x24;                          // 0x24
     union {
         enum_t i;
         struct ColorOverlay_UnkInner* ptr;
@@ -403,6 +421,7 @@ struct ColorOverlay {
     u8 x7C_flag7 : 1;         // 0x7c, 0x02
     u8 x7C_flag8 : 1;         // 0x7c, 0x01
 };
+STATIC_ASSERT(sizeof(struct ColorOverlay) == 0x80);
 
 struct lb_80011A50_t {
     /*  +0 */ u8 x0;
@@ -414,11 +433,11 @@ struct lb_80011A50_t {
     /* +14 */ f32 x14;
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
-    /* +20 */ f32 x20;
+    /* +20 */ f32 unk_scale;
     /* +24 */ f32 x24;
     /* +28 */ int unk_count0;
-    /* +2C */ f32 x2C;
-    /* +30 */ int unk_count1;
+    /* +2C */ f32 unk_angle_float;
+    /* +30 */ int unk_angle_int;
     /* +34 */ struct lb_80011A50_t* next;
 };
 
@@ -524,16 +543,6 @@ struct BoneDynamicsDesc {
 struct lb_8000FD18_t {
     char pad_0[0x94];
 };
-
-struct lb_80013FF0_t {
-    /* 0x00 */ int x0;
-    UNK_T x4;
-    /* 0x08 */ int* unk_8;
-    /* 0x0C */ char pad_C[0x70];
-    /* 0x7C */ u8 x7C_0 : 1;
-    /* 0x7C */ u8 x7C_1 : 1;
-    /* 0x7D */ char pad_7D[3];
-}; /* size = 0x80 */
 
 struct lb_804D63A0_t {
     /* +0 */ char pad_0[0xBE00];

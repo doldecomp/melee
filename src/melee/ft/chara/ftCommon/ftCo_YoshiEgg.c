@@ -30,7 +30,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-/* 09D7E4 */ static void ftCo_800BBC88(Fighter_GObj* gobj);
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
 
 float const ftCo_804D8B68 = 0;
@@ -116,17 +115,17 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
         hurt.scale = temp_r27->x1C;
         ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
     }
-    ftYs_Shield_8012CC94(arg1, &fp->self_vel);
-    fp->facing_dir = ftYs_Shield_8012CCC4(arg1);
-    fp->dmg.x182c_behavior = ftYs_Shield_8012CCD0(arg1);
+    ftYs_SpecialN_SetupItemVel(arg1, &fp->self_vel);
+    fp->facing_dir = ftYs_SpecialN_GetFacingDir(arg1);
+    fp->dmg.x182c_behavior = ftYs_SpecialN_GetDatAttr18(arg1);
     fp->mv.ca.specialhi.vel.y = 0;
     fp->mv.co.yoshiegg.x0 = arg1;
     fp->take_dmg_2_cb = ftCo_800BC3D0;
     ftCommon_8007EFC0(fp, 1);
-    fp->mv.co.yoshiegg.x10 = ftYs_Shield_8012CCF0(arg1);
+    fp->mv.co.yoshiegg.x10 = ftYs_SpecialN_GetDatAttr20(arg1);
     fp->mv.co.yoshiegg.x14 = fp->mv.co.walk.fast_anim_frame;
-    fp->mv.co.yoshiegg.xC = ftYs_Shield_8012CCE0(arg1);
-    ftCommon_InitGrab(fp, 0, ftYs_Shield_8012CD00(arg1));
+    fp->mv.co.yoshiegg.xC = ftYs_SpecialN_GetDatAttr1C(arg1);
+    ftCommon_InitGrab(fp, 0, ftYs_SpecialN_GetDatAttr24(arg1));
     HSD_JObjGetScale(jobj, &fp->mv.co.yoshiegg.x18);
     fp->accessory4_cb = ftCo_800BBCC0;
 }
@@ -135,8 +134,8 @@ void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->grab_timer -= ftYs_SpecialN_8012CD10(gobj);
-    fp->mv.co.yoshiegg.x4 = ftCommon_8007DC08(fp, ftYs_SpecialN_8012CD28());
+    fp->grab_timer -= ftYs_SpecialN_GetExtAttr28(gobj);
+    fp->mv.co.yoshiegg.x4 = ftCommon_8007DC08(fp, ftYs_SpecialN_GetExtAttr2C());
     if (fp->grab_timer <= 0) {
         ft_PlaySFX(fp, 280088, 127, 64);
         {
@@ -149,7 +148,7 @@ void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj)
         }
         ftCommon_8007D5D4(fp);
         Fighter_UpdateModelScale(gobj);
-        ftColl_8007B760(gobj, ftYs_SpecialN_8012CD70());
+        ftColl_8007B760(gobj, ftYs_SpecialN_GetExtAttr38());
         ftCo_Fall_Enter_YoshiEgg(gobj);
         return;
     }
@@ -162,7 +161,7 @@ void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj)
     }
     if (fp->mv.co.yoshiegg.x8 <= 0 && fp->mv.co.yoshiegg.x4) {
         fp->mv.co.yoshiegg.x8 = ftYs_SpecialN_8012CD40();
-        ftAnim_SetAnimRate(gobj, ftYs_SpecialN_8012CD58());
+        ftAnim_SetAnimRate(gobj, ftYs_SpecialN_GetExtAttr34());
     }
 }
 
@@ -199,9 +198,8 @@ void ftCo_800BC3AC(Fighter_GObj* gobj)
 void ftCo_800BC3D0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->grab_timer =
-        -(fp->dmg.x1838_percentTemp * ftYs_SpecialN_8012CDB4(gobj) -
-          fp->grab_timer);
+    fp->grab_timer = -(fp->dmg.x1838_percentTemp * ftYs_SpecialN_8012CDB4() -
+                       fp->grab_timer);
     if (fp->dmg.x18CC == 3 && ftCo_800C0C88(fp->dmg.x18D0)) {
         fp->grab_timer = 0;
     }

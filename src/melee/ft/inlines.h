@@ -98,6 +98,11 @@ static inline Fighter_GObj* getFtVictim(Fighter* fp)
     return fp->victim_gobj;
 }
 
+static inline Item_GObj* getFtTargetItem(Fighter* fp)
+{
+    return fp->target_item_gobj;
+}
+
 static inline bool ftGetGroundAir(Fighter* fp)
 {
     return fp->ground_or_air;
@@ -225,6 +230,11 @@ static inline bool ftCheckThrowB4(Fighter* fp)
     } else {
         return false;
     }
+}
+
+static inline float ftGetFacingDir(Fighter_GObj* gobj)
+{
+    return GET_FIGHTER(gobj)->facing_dir;
 }
 
 /// Ternary macro for fcmpo-based facing direction check

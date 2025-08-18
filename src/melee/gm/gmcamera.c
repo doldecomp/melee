@@ -4,8 +4,10 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/forward.h"
 #include "baselib/controller.h"
+
+#include "baselib/forward.h"
+
 #include "baselib/jobj.h"
 #include "baselib/sislib.h"
 #include "cm/cmsnap.h"
@@ -313,7 +315,9 @@ void gmCamera_801A2AAC(void)
         gmCamera_801A3048(2);
     } else if (HSD_PadCopyStatus[3].trigger & 0x100) {
         lbAudioAx_80024030(1);
-        if ((gmCamera_80479BC8.gcus.x44 < 2) && (gmCamera_80479BC8.gcus.x44 >= 0)) {
+        if ((gmCamera_80479BC8.gcus.x44 < 2) &&
+            (gmCamera_80479BC8.gcus.x44 >= 0))
+        {
             gmCamera_801A3048(6);
         } else {
             lbAudioAx_80024030(3);
@@ -389,7 +393,9 @@ void gmCamera_801A3098(void)
 void gmCamera_801A30E4(void)
 {
     s32 i;
-    if ((gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].flags.x0 != 0) && (gmCamera_80479BC8.gcus.x14 != 0) && (gm_801A45E8(1) == 0)) {
+    if ((gmCamera_803DA6B4[gmCamera_80479BC8.gcus.xC].flags.x0 != 0) &&
+        (gmCamera_80479BC8.gcus.x14 != 0) && (gm_801A45E8(1) == 0))
+    {
         HSD_JObjClearFlagsAll(gmCamera_80479BC8.gcus.x4, JOBJ_HIDDEN);
     } else {
         HSD_JObjSetFlagsAll(gmCamera_80479BC8.gcus.x4, JOBJ_HIDDEN);
@@ -411,7 +417,8 @@ void fn_801A31D8(HSD_GObj* gobj)
 
 /// #gmCamera_801A31FC
 
-static void gmCamera_801A25C8_no_inline() {
+static void gmCamera_801A25C8_no_inline(void)
+{
     gmCamera_801A25C8();
 }
 
