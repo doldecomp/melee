@@ -27,7 +27,7 @@ let
   bintools' = ppcCrossBinutils.overrideAttrs (oa: {
     patches = oa.patches ++ [
       (fetchpatch {
-        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/${tag}/dkppc/patches/binutils-${oa.version}.patch";
+        url = "https://raw.githubusercontent.com/devkitPro/buildscripts/devkitPPC_r47/dkppc/patches/binutils-${oa.version}.patch";
         hash = "sha256-IOqa20LQYBxfR1KKxkp0hVV21CKd9IZrvNeEyuW09us=";
       })
     ];
@@ -39,8 +39,9 @@ stdenvNoCC.mkDerivation {
   nativeBuildInputs = [
     makeWrapper
   ];
+  #for bindir in '${lib.getBin gcc'}/bin' '${lib.getBin bintools'}/bin'; do
   buildCommand = ''
-    for bindir in '${lib.getBin gcc'}/bin' '${lib.getBin bintools'}/bin'; do
+    for bindir in '${lib.getBin bintools'}/bin'; do
       cd "$bindir"
       for f in powerpc-none-eabi-*; do
         short="$(echo "$f" | sed s/powerpc-none-eabi-/powerpc-eabi-/)"

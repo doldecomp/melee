@@ -19,6 +19,11 @@ buildPythonPackage {
     hash = "sha256-dutmRYEP1XQwnbrG3d/VZdldl4x+pWxq84aj1xTKApI=";
   };
 
+  postPatch = ''
+    substituteInPlace pyproject.toml \
+      --replace-fail 'graphviz = "^0.20.1"' ""
+  '';
+
   pyproject = true;
 
   propagatedBuildInputs = [

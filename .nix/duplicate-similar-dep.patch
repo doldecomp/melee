@@ -1,0 +1,33 @@
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -2520,7 +2520,7 @@ checksum = "154934ea70c58054b556dd430b99a98c2a7ff5309ac9891597e339b5c28f4371"
+ dependencies = [
+  "console",
+  "once_cell",
+- "similar 2.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
++ "similar",
+ ]
+
+ [[package]]
+@@ -3501,7 +3501,7 @@ dependencies = [
+  "serde",
+  "serde_json",
+  "shell-escape",
+- "similar 2.7.0 (git+https://github.com/encounter/similar.git?branch=no_std)",
++ "similar",
+  "syn",
+  "tempfile",
+  "time",
+@@ -4885,12 +4885,6 @@ version = "0.3.7"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "d66dc143e6b11c1eddc06d5c423cfc97062865baf299914ab64caa38182078fe"
+
+-[[package]]
+-name = "similar"
+-version = "2.7.0"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "bbbb5d9659141646ae647b42fe094daf6c6192d1620870b449d9557f748b2daa"
+-
+ [[package]]
+ name = "similar"
+ version = "2.7.0"
