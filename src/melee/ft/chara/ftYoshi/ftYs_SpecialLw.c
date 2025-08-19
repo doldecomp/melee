@@ -25,6 +25,7 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
+/* 12E644 */ static void fn_8012E644(Fighter_GObj*);
 /* 12EAD8 */ static void ftYs_SpecialS_8012EAD8(Fighter_GObj*);
 
 void fn_8012E644(Fighter_GObj* gobj)
