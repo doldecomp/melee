@@ -1,4 +1,5 @@
-#include "ftYs_SpecialLw.h"
+#include "ftYs_SpecialS.h"
+
 #include "placeholder.h"
 
 #include "ft/fighter.h"
