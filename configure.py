@@ -716,7 +716,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_Init.c"),
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialN.c"),
-            Object(NonMatching, "melee/ft/chara/ftSeak/ftSk_SpecialHi.c"),
+            Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialLw.c"),
             # Ness
             Object(Matching, "melee/ft/chara/ftNess/ftNs_Init.c"),
