@@ -1,6 +1,8 @@
-#include "ftYoshi/ftYs_SpecialN.static.h"
+#include "ftYs_SpecialN.h"
 
 #include "placeholder.h"
+
+#include <placeholder.h>
 
 #include "baselib/forward.h"
 
@@ -26,6 +28,10 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
+
+/* 12CEE0 */ static void fn_8012CEE0(Fighter_GObj*);
+/* 12CF7C */ static void fn_8012CF7C(Fighter_GObj*);
+/* 12DF00 */ static void ftYs_SpecialS_8012DF00(Fighter_GObj*);
 
 Fighter_Part ftYs_SpecialN_GetBoneIndex(Fighter_GObj* gobj)
 {
@@ -122,9 +128,10 @@ HSD_Joint* ftYs_SpecialN_8012CDD4(Fighter_GObj* gobj)
     return ca->x48_items[3];
 }
 
-static inline void setupCallbacks(
-    Fighter_GObj* gobj, HSD_GObjEvent grab_cb, HSD_GObjEvent arg1,
-    void (*grabbed_cb)(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj))
+static void setupCallbacks(Fighter_GObj* gobj, HSD_GObjEvent grab_cb,
+                           HSD_GObjEvent arg1,
+                           void (*grabbed_cb)(Fighter_GObj* gobj,
+                                              Fighter_GObj* attacker_gobj))
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007E2D0(fp, 4, grab_cb, arg1, grabbed_cb);
@@ -309,7 +316,7 @@ void fn_8012D4F0(Fighter_GObj* gobj)
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
 }
 
-static inline void checkAnimEnd(Fighter_GObj* gobj, HSD_GObjEvent cb)
+static void checkAnimEnd(Fighter_GObj* gobj, HSD_GObjEvent cb)
 {
     FORCE_PAD_STACK_8;
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -327,9 +334,9 @@ void ftYs_SpecialAirN1_0_Anim(Fighter_GObj* gobj)
     checkAnimEnd(gobj, ftCo_Fall_Enter);
 }
 
-static inline void changeMotionState(Fighter_GObj* gobj, enum_t msid,
-                                     HSD_GObj* (*target_getter)(Fighter* fp),
-                                     bool arg3)
+static void changeMotionState(Fighter_GObj* gobj, enum_t msid,
+                              HSD_GObj* (*target_getter)(Fighter* fp),
+                              bool arg3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[0] && target_getter(fp) != NULL) {
@@ -386,8 +393,8 @@ static inline void inlineB0(Fighter_GObj* gobj, HSD_GObjEvent on_anim_end)
                     {
                         Fighter* fp = GET_FIGHTER(gobj);
                         lb_8000B1CC(
-                            fp->parts[ftYs_SpecialN_GetBoneIndex(gobj)].joint, NULL,
-                            &item_attrs.pos);
+                            fp->parts[ftYs_SpecialN_GetBoneIndex(gobj)].joint,
+                            NULL, &item_attrs.pos);
                     }
                     ftYs_SpecialN_SetupItemVel(gobj, &item_attrs.vel);
                     item_attrs.float2 = ftYs_SpecialN_GetFacingDir(gobj);
@@ -412,7 +419,7 @@ void ftYs_SpecialN2_1_Anim(Fighter_GObj* gobj)
     inlineB0(gobj, ft_8008A2BC);
 }
 
-static inline void inlineA0(Fighter* fp)
+static void inlineA0(Fighter* fp)
 {
     Fighter_GObj* victim_gobj = getFtVictim(fp);
     if (victim_gobj != NULL) {
@@ -421,7 +428,7 @@ static inline void inlineA0(Fighter* fp)
     }
 }
 
-static inline void inlineA1(Fighter_GObj* gobj, HSD_GObjEvent anim_end_cb)
+static void inlineA1(Fighter_GObj* gobj, HSD_GObjEvent anim_end_cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[1]) {

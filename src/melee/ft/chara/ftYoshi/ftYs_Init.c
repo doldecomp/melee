@@ -21,6 +21,10 @@
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
+
+#include "ftYoshi/ftYs_SpecialHi.h"
+#include "ftYoshi/ftYs_SpecialS.h"
+
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
