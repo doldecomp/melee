@@ -74,7 +74,6 @@ struct ftLk_FighterVars {
     /* fp+2240 */ Item_GObj* x14;
     /* fp+2244 */ Item_GObj* x18;
     /* fp+2248 */ u32 x1C;
-    u8 _[FIGHTERVARS_SIZE - 0x20];
 };
 
 union ftLk_MotionVars {
