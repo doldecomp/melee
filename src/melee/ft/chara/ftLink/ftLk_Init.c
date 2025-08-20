@@ -296,8 +296,6 @@ Fighter_CostumeStrings ftLk_Init_CostumeStrings[] = {
 
 int ftLk_Init_803C82EC[31] = { 0 };
 
-ftLk_SpecialN_Vec3Group const ftLk_Init_Vec3Group = { 0 };
-
 bool ftLk_Init_BoomerangExists(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

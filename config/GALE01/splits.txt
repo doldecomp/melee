@@ -1053,7 +1053,6 @@ melee/ft/chara/ftFox/ftFx_SpecialS.c:
 
 melee/ft/chara/ftLink/ftLk_Init.c:
 	.text       start:0x800EAD64 end:0x800EB3BC
-	.rodata     start:0x803B7520 end:0x803B7548
 	.data       start:0x803C7E18 end:0x803C8368
 	.sdata2     start:0x804D92D8 end:0x804D92E8
 
@@ -1075,6 +1074,7 @@ melee/ft/chara/ftLink/ftLk_SpecialS.c:
 
 melee/ft/chara/ftLink/ftLk_SpecialN.c:
 	.text       start:0x800ECBC4 end:0x800EE528
+	.rodata     start:0x803B7520 end:0x803B7544
 	.sdata2     start:0x804D9340 end:0x804D9350
 
 melee/ft/chara/ftKirby/ftKb_Init.c:

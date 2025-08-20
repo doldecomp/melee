@@ -307,9 +307,9 @@ Fighter_CostumeStrings ftCl_Init_CostumeStrings[] = {
     { ftCl_Init_803D1380, ftCl_Init_803D138C, ftCl_Init_803D13A8 },
 };
 
-void ftCl_Init_OnDeath(ftLk_GObj* gobj)
+void ftCl_Init_OnDeath(Fighter_GObj* gobj)
 {
-    ftLk_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
     ftParts_80074A4C(gobj, 1, 0);
     ftParts_80074A4C(gobj, 2, 0);
@@ -326,7 +326,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    ftLk_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
     ftLk_DatAttrs* ea = ftdata->ext_attr;
     void** items = ftdata->x48_items;
@@ -349,7 +349,7 @@ void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)
 {
     u8 _[4];
 
-    ftLk_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     if (it_8026B2B4(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 1);
@@ -373,7 +373,7 @@ void ftCl_Init_OnItemDropExt(HSD_GObj* gobj, bool flag)
 {
     u8 _[4];
 
-    ftLk_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     if (it_8026B2B4(fp->item_gobj) == true) {
         ftParts_80074A4C(gobj, 1, 0);
@@ -411,7 +411,7 @@ void ftCl_Init_OnKnockbackExit(HSD_GObj* gobj)
 
 void ftCl_Init_80149114(HSD_GObj* gobj)
 {
-    ftLk_Fighter* fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftLk_DatAttrs* ea = fp->ft_data->ext_attr;
     float ftmp = ftCo_80092ED8(fp->x19A4, ea->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
@@ -428,7 +428,7 @@ void ftCl_Init_8014919C(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    ftLk_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x5F8 == 0) {
         ftLk_DatAttrs* da = fp->dat_attrs;
         ftColl_8007B1B8(gobj, (ShieldDesc*) &da->xC4, ftCl_Init_80149114);
@@ -441,7 +441,7 @@ void ftCl_Init_8014919C(HSD_GObj* gobj)
 bool ftCl_Init_8014920C(HSD_GObj* gobj)
 {
     s32 temp_r0;
-    ftLk_Fighter* fp;
+    Fighter* fp;
 
     if (gobj == NULL) {
         return true;
@@ -470,7 +470,7 @@ void ftCl_Init_80149268(HSD_GObj* gobj)
 void ftCl_Init_801492C4(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
-        ftLk_Fighter* fp = GET_FIGHTER(gobj);
+        Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL && fp->fv.lk.x18 != 0) {
             fp->fv.lk.x18 = 0;
         };
@@ -484,7 +484,7 @@ void ftCl_Init_801492C4(HSD_GObj* gobj)
 bool ftCl_Init_801492F4(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
-        ftLk_Fighter* fp = GET_FIGHTER(gobj);
+        Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL) {
             return fp->cmd_vars[1];
         }
@@ -494,7 +494,7 @@ bool ftCl_Init_801492F4(HSD_GObj* gobj)
 
 void ftCl_Init_80149318(HSD_GObj* gobj)
 {
-    ftLk_Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800DEAE8(gobj, 342, 343);
     fp->cmd_vars[1] = false;
 }
