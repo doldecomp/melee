@@ -844,7 +844,7 @@ melee/ft/ft_0C8C.c:
 
 melee/ft/chara/ftCommon/ftCo_Barrel.c:
 	.text       start:0x800C9058 end:0x800C9468
-	.sdata      start:0x804D3C98 end:0x804D3CA8
+	.sdata      start:0x804D3C98 end:0x804D3CA5
 	.sdata2     start:0x804D8E68 end:0x804D8E78
 
 melee/ft/chara/ftCommon/ftCo_Walk.c:

@@ -378,4 +378,20 @@ union ftCommon_MotionVars {
     } unk_deadup;
 };
 
+/// @todo Fake, need to find real size of #HitCapsule
+struct SmallerHitCapsule {
+    /*  +0 */ HitCapsuleState state;
+    /*  +4 */ u32 x4;
+    /*  +8 */ u32 unk_count;
+    /*  +C */ float damage;
+    /* +10 */ Vec3 b_offset;
+    /* +1C */ float scale;
+    /* +20 */ int kb_angle;
+    /* +24 */ u32 x24;
+    /* +28 */ u32 x28;
+    /* +2C */ u32 x2C;
+    /* +30 */ u32 element;
+    /* +34 */ char pad_34[0xFC];
+};
+
 #endif
