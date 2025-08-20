@@ -603,7 +603,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0B3E.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_YoshiEgg.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_YoshiEgg.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureKoopa.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureDamageKoopa.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKoopa.c"),

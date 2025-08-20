@@ -656,7 +656,7 @@ melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c:
 
 melee/ft/chara/ftCommon/ftCo_YoshiEgg.c:
 	.text       start:0x800BBC88 end:0x800BC438
-	.sdata      start:0x804D3B88 end:0x804D3BA0
+	.sdata      start:0x804D3B88 end:0x804D3B9E
 	.sdata2     start:0x804D8B68 end:0x804D8B70
 
 melee/ft/chara/ftCommon/ftCo_CaptureKoopa.c:
