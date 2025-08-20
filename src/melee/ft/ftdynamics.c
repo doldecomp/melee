@@ -537,7 +537,8 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
         HSD_JObjSetupMatrix(GET_JOBJ(gobj));
         for (i = 0; i < dynamics_num; i++) {
             HSD_JObj* cur;
-            for (cur = fp->dynamic_bone_sets[i].dyn_desc.data->jobj;
+            for (cur =
+                     fp->dynamic_bone_sets[i].dyn_desc.data->desc.ft_unk.jobj;
                  cur != NULL; cur = cur->child)
             {
                 HSD_JObjSetupMatrix(cur);
@@ -608,7 +609,7 @@ enum_t ftCo_8009E318(Fighter_GObj* gobj, enum Fighter_Part arg1, f32 arg2)
         for (cur = fp->dynamic_bone_sets[i].dyn_desc.data, j = 0; cur != NULL;
              cur = cur->next, j++)
         {
-            if (cur->jobj == part_jobj) {
+            if (cur->desc.ft_unk.jobj == part_jobj) {
                 if (fp->parts[arg1].flags_b0) {
                     fp->parts[arg1].flags_b0 = false;
                     fp->dynamic_bone_sets[i].bone_id = j + 1;

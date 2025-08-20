@@ -98,9 +98,23 @@ static inline Fighter_GObj* getFtVictim(Fighter* fp)
     return fp->victim_gobj;
 }
 
+static inline Item_GObj* getFtTargetItem(Fighter* fp)
+{
+    return fp->target_item_gobj;
+}
+
 static inline bool ftGetGroundAir(Fighter* fp)
 {
     return fp->ground_or_air;
+}
+
+static inline int getStickDirX(Fighter* fp)
+{
+    if (fp->input.lstick.x < 0.0f) {
+        return -1;
+    } else {
+        return +1;
+    }
 }
 
 static inline float stickGetDir(float x1, float x2)
@@ -224,6 +238,20 @@ static inline bool ftCheckThrowB4(Fighter* fp)
         return true;
     } else {
         return false;
+    }
+}
+
+static inline float ftGetFacingDir(Fighter_GObj* gobj)
+{
+    return GET_FIGHTER(gobj)->facing_dir;
+}
+
+static inline int ftGetFacingDirInt(Fighter* fp)
+{
+    if (fp->facing_dir < 0.0f) {
+        return -1;
+    } else {
+        return +1;
     }
 }
 

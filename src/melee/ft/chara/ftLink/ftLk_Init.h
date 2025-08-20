@@ -26,7 +26,6 @@
 /* 0EB334 */ void ftLk_800EB334(HSD_GObj* gobj);
 /* 0EC354 */ void ftLk_SpecialS_Enter(HSD_GObj* gobj);
 /* 0EC404 */ void ftLk_SpecialAirS_Enter(HSD_GObj* gobj);
-/* 3B7520 */ extern ftLk_SpecialN_Vec3Group const ftLk_Init_Vec3Group;
 /* 3C7E18 */ extern MotionState ftLk_Init_MotionStateTable[ftLk_MS_SelfCount];
 /* 3C80B8 */ extern char ftLk_Init_DatFilename[];
 /* 3C80C4 */ extern char ftLk_Init_DataName[];

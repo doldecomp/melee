@@ -183,9 +183,9 @@ if not config.non_matching:
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20250520"
 config.dtk_tag = "v1.6.2"
-config.objdiff_tag = "v2.7.1"
+config.objdiff_tag = "v3.0.0"
 config.sjiswrap_tag = "v1.2.1"
-config.wibo_tag = "0.6.16"
+config.wibo_tag = "0.7.0"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -592,7 +592,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Shouldered.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCaptain.c"),
             Object(NonMatching, "melee/ft/ftdynamics.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_BarrelWait.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_BarrelWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopWall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_StopCeil.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownDamage.c"),
@@ -603,7 +603,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0A01.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_0B3E.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_YoshiEgg.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_YoshiEgg.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureKoopa.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureDamageKoopa.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureWaitKoopa.c"),
@@ -629,7 +629,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/ftafterimage.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageSong.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_0C35.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_AirCatch.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageBind.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_WarpStar.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_HammerWait.c"),
@@ -646,7 +646,7 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0C88.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownSpot.c"),
             Object(Matching, "melee/ft/ft_0C8C.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Barrel.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Barrel.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Walk.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Turn.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_TurnRun.c"),
@@ -716,7 +716,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_Init.c"),
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialN.c"),
-            Object(NonMatching, "melee/ft/chara/ftSeak/ftSk_SpecialHi.c"),
+            Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftSeak/ftSk_SpecialLw.c"),
             # Ness
             Object(Matching, "melee/ft/chara/ftNess/ftNs_Init.c"),
@@ -761,7 +761,10 @@ config.libs = [
             # Yoshi
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
-            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
+            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialLw.c"),
+            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialS.c"),
             # Bowser
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Init.c"),
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Unk1.c"),

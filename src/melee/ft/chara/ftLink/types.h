@@ -55,7 +55,7 @@ struct ftLk_DatAttrs {
     /* +A0 */ UNK_T xA0;
     /* +A4 */ int xA4;
     /* +A8 */ s32 xA8;
-    /* +AC */ UNK_T xAC;
+    /* +AC */ int xAC;
     /* +B0 */ int xB0;
     /* +B4 */ float xB4;
     /* +B8 */ int xB8;
@@ -74,7 +74,6 @@ struct ftLk_FighterVars {
     /* fp+2240 */ Item_GObj* x14;
     /* fp+2244 */ Item_GObj* x18;
     /* fp+2248 */ u32 x1C;
-    u8 _[FIGHTERVARS_SIZE - 0x20];
 };
 
 union ftLk_MotionVars {

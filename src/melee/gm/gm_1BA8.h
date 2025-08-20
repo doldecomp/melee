@@ -76,7 +76,7 @@ struct EventData;
 /* 1BEFA4 */ void gm_801BEFA4(s8);
 /* 1BEFB0 */ int gm_801BEFB0(void);
 /* 1BEFC0 */ void gm_801BEFC0(int);
-/* 1BEFD0 */ u8 gm_801BEFD0(void);
+/* 1BEFD0 */ int gm_801BEFD0(void);
 /* 1BEFE0 */ void gm_801BEFE0(s8);
 /* 1BEFF0 */ u8 gm_801BEFF0(void);
 /* 1BF000 */ void gm_801BF000(s8);

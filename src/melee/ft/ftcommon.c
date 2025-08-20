@@ -1001,15 +1001,15 @@ HSD_GObj* ftCommon_8007E2A4(HSD_GObj* gobj)
     return gobj;
 }
 
-void ftCommon_8007E2D0(Fighter* fp, s16 arg1, void (*cb0)(HSD_GObj*),
-                       void (*cb1)(HSD_GObj*),
-                       void (*cb2)(HSD_GObj*, HSD_GObj*))
+void ftCommon_8007E2D0(Fighter* fp, s16 arg1, HSD_GObjEvent grab_cb,
+                       HSD_GObjEvent unk_cb,
+                       void (*grabbed_cb)(HSD_GObj*, HSD_GObj*))
 {
-    fp->x221E_b6 = 1;
+    fp->x221E_b6 = true;
     fp->x1A68 = arg1;
-    fp->grab_cb = cb0;
-    fp->grabbed_cb = cb2;
-    fp->x2194 = cb1;
+    fp->grab_cb = grab_cb;
+    fp->grabbed_cb = grabbed_cb;
+    fp->x2194 = unk_cb;
 }
 
 void ftCommon_8007E2F4(Fighter* fp, s16 val)

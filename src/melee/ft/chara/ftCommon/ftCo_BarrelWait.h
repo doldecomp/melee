@@ -4,7 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 #include <dolphin/mtx.h>
 
@@ -13,5 +13,7 @@
 /* 09EC0C */ void ftCo_BarrelWait_IASA(Fighter_GObj* gobj);
 /* 09EC3C */ void ftCo_BarrelWait_Phys(Fighter_GObj* gobj);
 /* 09EC40 */ void ftCo_BarrelWait_Coll(Fighter_GObj* gobj);
+/* 09EC70 */ void ftCo_8009EC70(Fighter_GObj* gobj, Vec3* pos, UNK_T arg2,
+                                float kb_angle);
 
 #endif

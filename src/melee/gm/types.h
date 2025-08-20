@@ -656,9 +656,15 @@ struct UnkAllstarData {
 };
 
 struct TmData {
-    s32 x0;
-    s32 x4;
-    u8 pad_x8[0x28 - 0x8];
+    int x0;
+    int x4;
+    int x8;
+    int xC;
+    int x10;
+    int x14;
+    u8 pad_x18[0x20 - 0x18];
+    int x20;
+    int x24;
     u32 x28; ///< stage id
     u8 x2C;
     u8 x2D;
@@ -684,14 +690,17 @@ struct TmData {
         u8 xC;
         u8 xD;
         u8 pad_xE[0x11 - 0xE];
-    } x37[16];
+    } x37[16]; ///< @todo needs to be larger, see gm_80190EA4
     u8 pad_x158[0x4B8 - 0x158];
     struct UnkSelections {
-        u8 x0; ///< slot type?
+        u8 x0; ///< slot type
         u8 x1; ///< CSSIconHud
         u8 x2;
-        u8 x3;
-        u8 pad_x4[0xA - 0x4];
+        u8 x3; ///< color
+        u8 x4; ///< CPU level
+        u8 x5;
+        u16 x6;
+        u8 pad_x4[0xA - 0x8];
     } x4B8[4];
     HSD_Text* x4E0;
     HSD_Text* x4E4;
@@ -747,5 +756,30 @@ struct TmVsData {
     u32 char_id[4];
     u32 color[4];
 };
+
+struct gm_801677C0_s {
+    /*  +1 */ u8 x0;
+    /*  +2 */ u8 x1;
+    /*  +3 */ u8 x2;
+    /*  +4 */ u8 x3;
+    /*  +4 */ bool (*x4[2])(void);
+    /*  +C */ UNK_T xC;
+    /* +20 */ u64 unk_20;
+    /* +28 */ u64 unk_28;
+    /* +30 */ void (*unk_30)(void);
+    /* +34 */ int unk_34;
+    /* +38 */ u8 unk_38_0 : 1;
+    /* +38 */ u8 unk_38_1 : 1;
+};
+STATIC_ASSERT(sizeof(struct gm_801677C0_s) == 0x30);
+
+struct gm_80479D58_t {
+    /*  +0 */ u32 unk_0;
+    /*  +4 */ u32 unk_4;
+    /*  +8 */ u32 unk_8;
+    /*  +C */ int unk_C;
+    /* +10 */ struct gm_801677C0_s unk_10;
+};
+STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
 
 #endif

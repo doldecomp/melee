@@ -3,13 +3,20 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 
 /// #it_8029B0C8
 
 /// #it_3F14_Logic42_Destroyed
 
-/// #it_3F14_Logic42_Spawned
+void it_3F14_Logic42_Spawned(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM((HSD_GObj*) gobj);
+    // This should be EvYoshiEgg
+    it->xDD4_itemVar.bombhei.xDD4 = 0;
+    it_8029B268(gobj);
+}
 
 /// #it_8029B1D8
 

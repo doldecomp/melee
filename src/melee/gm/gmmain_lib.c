@@ -287,7 +287,7 @@ void gmMainLib_8015CF84(void)
     gmMainLib_804D3EE0->thing.x1B3C = 1;
 }
 
-s32 gmMainLib_8015CF94(void)
+bool gmMainLib_8015CF94(void)
 {
     if (gmMainLib_804D3EE0->thing.x1B3C) {
         return 1;
@@ -490,7 +490,7 @@ void gmMainLib_8015D4E8(u8 arg0, s32 arg1)
     base[arg0].x7C.b0 = arg1;
 }
 
-s32 gmMainLib_8015D508(void)
+bool gmMainLib_8015D508(void)
 {
     struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
     s32 i;
@@ -792,7 +792,7 @@ void gmMainLib_8015ECBC(void)
     }
 }
 
-u8 gmMainLib_8015ED30(void)
+int gmMainLib_8015ED30(void)
 {
     return gmMainLib_804D3EE0->x1850.unk_xc;
 }

@@ -656,7 +656,7 @@ melee/ft/chara/ftCommon/ftCo_CaptureYoshi.c:
 
 melee/ft/chara/ftCommon/ftCo_YoshiEgg.c:
 	.text       start:0x800BBC88 end:0x800BC438
-	.sdata      start:0x804D3B88 end:0x804D3BA0
+	.sdata      start:0x804D3B88 end:0x804D3B9E
 	.sdata2     start:0x804D8B68 end:0x804D8B70
 
 melee/ft/chara/ftCommon/ftCo_CaptureKoopa.c:
@@ -769,8 +769,8 @@ melee/ft/chara/ftCommon/ftCo_0C35.c:
 
 melee/ft/chara/ftCommon/ftCo_AirCatch.c:
 	.text       start:0x800C3A14 end:0x800C44CC
-	.rodata     start:0x803B74C8 end:0x803B74F0
-	.sdata      start:0x804D3C48 end:0x804D3C58
+	.rodata     start:0x803B74C8 end:0x803B74EC
+	.sdata      start:0x804D3C48 end:0x804D3C55
 	.sdata2     start:0x804D8CF0 end:0x804D8D38
 
 melee/ft/chara/ftCommon/ftCo_DamageBind.c:
@@ -844,7 +844,7 @@ melee/ft/ft_0C8C.c:
 
 melee/ft/chara/ftCommon/ftCo_Barrel.c:
 	.text       start:0x800C9058 end:0x800C9468
-	.sdata      start:0x804D3C98 end:0x804D3CA8
+	.sdata      start:0x804D3C98 end:0x804D3CA5
 	.sdata2     start:0x804D8E68 end:0x804D8E78
 
 melee/ft/chara/ftCommon/ftCo_Walk.c:
@@ -1053,7 +1053,6 @@ melee/ft/chara/ftFox/ftFx_SpecialS.c:
 
 melee/ft/chara/ftLink/ftLk_Init.c:
 	.text       start:0x800EAD64 end:0x800EB3BC
-	.rodata     start:0x803B7520 end:0x803B7548
 	.data       start:0x803C7E18 end:0x803C8368
 	.sdata2     start:0x804D92D8 end:0x804D92E8
 
@@ -1075,6 +1074,7 @@ melee/ft/chara/ftLink/ftLk_SpecialS.c:
 
 melee/ft/chara/ftLink/ftLk_SpecialN.c:
 	.text       start:0x800ECBC4 end:0x800EE528
+	.rodata     start:0x803B7520 end:0x803B7544
 	.sdata2     start:0x804D9340 end:0x804D9350
 
 melee/ft/chara/ftKirby/ftKb_Init.c:
@@ -1272,20 +1272,30 @@ melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c:
 
 melee/ft/chara/ftYoshi/ftYs_Init.c:
 	.text       start:0x8012B6E8 end:0x8012C030
+	.rodata     start:0x803B75C0 end:0x803B75CC
 	.data       start:0x803CE6D0 end:0x803CEA98
-	.sdata      start:0x804D3E40 end:0x804D3E58
-	.sdata2     start:0x804D9A18 end:0x804D9A28
+	.sdata      start:0x804D3E40 end:0x804D3E80
+	.sdata2     start:0x804D9A18 end:0x804D9A38
 
 melee/ft/chara/ftYoshi/ftYs_Guard.c:
-	.text       start:0x8012C030 end:0x8012CD10
-	.data       start:0x803CEA98 end:0x803CED48
+	.text       start:0x8012C030 end:0x8012CC6C
+	.data       start:0x803CEA98 end:0x803CEDBC
 
 melee/ft/chara/ftYoshi/ftYs_SpecialN.c:
-	.text       start:0x8012CD10 end:0x80132A0C
-	.rodata     start:0x803B75C0 end:0x803B75D0
-	.data       start:0x803CED48 end:0x803CEDC0
-	.sdata      start:0x804D3E58 end:0x804D3E80
-	.sdata2     start:0x804D9A28 end:0x804D9AC8
+	.text       start:0x8012CC6C end:0x8012DF18
+	.sdata2     start:0x804D9A38 end:0x804D9A40
+
+melee/ft/chara/ftYoshi/ftYs_SpecialHi.c:
+	.text       start:0x8012DF18 end:0x8012E644
+	.sdata2     start:0x804D9A40 end:0x804D9A58
+
+melee/ft/chara/ftYoshi/ftYs_SpecialLw.c:
+	.text       start:0x8012E644 end:0x8012EB48
+	.sdata2     start:0x804D9A58 end:0x804D9A68
+
+melee/ft/chara/ftYoshi/ftYs_SpecialS.c:
+	.text       start:0x8012EB48 end:0x80132A0C
+	.sdata2     start:0x804D9A68 end:0x804D9AC8
 
 melee/ft/chara/ftKoopa/ftKp_Init.c:
 	.text       start:0x80132A0C end:0x8013383C
@@ -2565,19 +2575,20 @@ melee/db/dballoc.c:
 	.sbss       start:0x804D6BA0 end:0x804D6BA8
 
 melee/mn/mnmain.c:
-	.text       start:0x802295AC end:0x8022FEC8
+	.text       start:0x802295AC end:0x8022F538
 	.rodata     start:0x803B84E8 end:0x803B8510
 	.data       start:0x803EAE68 end:0x803EC600
 	.bss        start:0x804A04F0 end:0x804A0648
 	.sdata      start:0x804D4B30 end:0x804D4B88
-	.sbss       start:0x804D6BA8 end:0x804D6BE0
-	.sdata2     start:0x804DBD88 end:0x804DBE10
+	.sbss       start:0x804D6BA8 end:0x804D6BD0
+	.sdata2     start:0x804DBD88 end:0x804DBDF0
 
 melee/mn/mnmainrule.c:
-	.text       start:0x8022FEC8 end:0x8023201C
+	.text       start:0x8022F538 end:0x8023201C
 	.data       start:0x803EC600 end:0x803ED1D0
 	.sdata      start:0x804D4B88 end:0x804D4B98
-	.sdata2     start:0x804DBE10 end:0x804DBE38
+	.sbss       start:0x804D6BD0 end:0x804D6BE0
+	.sdata2     start:0x804DBDF0 end:0x804DBE38
 
 melee/mn/mnruleplus.c:
 	.text       start:0x8023201C end:0x80233A98
