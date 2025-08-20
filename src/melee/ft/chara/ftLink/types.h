@@ -55,7 +55,7 @@ struct ftLk_DatAttrs {
     /* +A0 */ UNK_T xA0;
     /* +A4 */ int xA4;
     /* +A8 */ s32 xA8;
-    /* +AC */ UNK_T xAC;
+    /* +AC */ int xAC;
     /* +B0 */ int xB0;
     /* +B4 */ float xB4;
     /* +B8 */ int xB8;

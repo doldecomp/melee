@@ -769,8 +769,8 @@ melee/ft/chara/ftCommon/ftCo_0C35.c:
 
 melee/ft/chara/ftCommon/ftCo_AirCatch.c:
 	.text       start:0x800C3A14 end:0x800C44CC
-	.rodata     start:0x803B74C8 end:0x803B74F0
-	.sdata      start:0x804D3C48 end:0x804D3C58
+	.rodata     start:0x803B74C8 end:0x803B74EC
+	.sdata      start:0x804D3C48 end:0x804D3C55
 	.sdata2     start:0x804D8CF0 end:0x804D8D38
 
 melee/ft/chara/ftCommon/ftCo_DamageBind.c:

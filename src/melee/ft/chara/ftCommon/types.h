@@ -394,4 +394,11 @@ struct SmallerHitCapsule {
     /* +34 */ char pad_34[0xFC];
 };
 
+struct TetherAttributes {
+    char pad_0[0x38];
+    /* +38 */ float pos_x_0;
+    /* +3C */ float x3C;
+    /* +40 */ float pos_x_1;
+};
+
 #endif
