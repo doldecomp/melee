@@ -2,6 +2,7 @@
 
 #include "ftCo_Bury.h"
 #include "ftCo_CaptureKoopa.h"
+#include "placeholder.h"
 
 #include <platform.h>
 
@@ -17,7 +18,6 @@
 #include "ftCaptain/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/types.h"
-#include "ftYoshi/ftYs_Guard.h"
 #include "ftYoshi/ftYs_SpecialN.h"
 
 #include "lb/forward.h"
@@ -31,14 +31,6 @@
 #include <baselib/jobj.h>
 
 /* 0BBCC0 */ static void ftCo_800BBCC0(Fighter_GObj* gobj);
-
-float const ftCo_804D8B68 = 0;
-float const ftCo_804D8B6C = 1;
-extern char* ftCo_804D3B88;
-extern char* ftCo_804D3B90;
-extern char* ftCo_804D3B98;
-
-#pragma force_active on
 
 void ftCo_800BBC88(Fighter_GObj* gobj)
 {
@@ -78,33 +70,14 @@ void ftCo_800BBCC0(Fighter_GObj* gobj)
     }
 }
 
-void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
+static inline void inlineA0(Fighter_GObj* gobj)
 {
-    Vec3 scale;
-    Fighter* fp = GET_FIGHTER(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-
-    if (fp->ground_or_air == GA_Ground) {
-        ftCommon_8007D5D4(fp);
-    }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_YoshiEgg, Ft_MF_Unk06, 0, 1, 0,
-                              arg1);
-    fp->take_dmg_cb = ftCo_800BC438;
-    ftCommon_8007E2F4(fp, 0x1FF);
-    fp->x221E_b0 = true;
-    scale.x = scale.y = scale.z = fp->co_attrs.xBC.size;
-    ftCommon_SetAccessory(fp, ftYs_SpecialN_8012CDD4(arg1));
-    HSD_JObjSetScale(fp->x20A0_accessory, &scale);
-    fp->mv.co.yoshiegg.scale = scale;
-    lb_8000C2F8(fp->x20A0_accessory == NULL ? NULL
-                                            : fp->x20A0_accessory->child,
-                fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint);
+    FORCE_PAD_STACK_8;
+    FORCE_PAD_STACK_4;
     {
-        ftCo_DatAttrs_xBC_t* temp_r27;
         Fighter* fp = GET_FIGHTER(gobj);
+        ftCo_DatAttrs_xBC_t* temp_r27;
         ftHurtboxInit hurt;
-        PAD_STACK(16);
-
         ftColl_8007B0C0(gobj, Intangible);
         temp_r27 = &fp->co_attrs.xBC;
         hurt.bone_idx = ftParts_GetBoneIndex(fp, FtPart_TransN);
@@ -115,27 +88,55 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
         hurt.scale = temp_r27->x1C;
         ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
     }
-    ftYs_SpecialN_SetupItemVel(arg1, &fp->self_vel);
-    fp->facing_dir = ftYs_SpecialN_GetFacingDir(arg1);
-    fp->dmg.x182c_behavior = ftYs_SpecialN_GetDatAttr18(arg1);
-    fp->mv.ca.specialhi.vel.y = 0;
-    fp->mv.co.yoshiegg.x0 = arg1;
-    fp->take_dmg_2_cb = ftCo_800BC3D0;
-    ftCommon_8007EFC0(fp, 1);
-    fp->mv.co.yoshiegg.x10 = ftYs_SpecialN_GetDatAttr20(arg1);
-    fp->mv.co.yoshiegg.x14 = fp->mv.co.walk.fast_anim_frame;
-    fp->mv.co.yoshiegg.xC = ftYs_SpecialN_GetDatAttr1C(arg1);
-    ftCommon_InitGrab(fp, 0, ftYs_SpecialN_GetDatAttr24(arg1));
-    HSD_JObjGetScale(jobj, &fp->mv.co.yoshiegg.x18);
-    fp->accessory4_cb = ftCo_800BBCC0;
+}
+
+void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
+{
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        HSD_JObj* jobj = GET_JOBJ(gobj);
+
+        if (fp->ground_or_air == GA_Ground) {
+            ftCommon_8007D5D4(fp);
+        }
+        Fighter_ChangeMotionState(gobj, ftCo_MS_YoshiEgg, Ft_MF_Unk06, 0, 1, 0,
+                                  arg1);
+        fp->take_dmg_cb = ftCo_800BC438;
+        ftCommon_8007E2F4(fp, 0x1FF);
+        fp->x221E_b0 = true;
+        {
+            Vec3 scale;
+            scale.x = scale.y = scale.z = fp->co_attrs.xBC.size;
+            ftCommon_SetAccessory(fp, ftYs_SpecialN_8012CDD4(arg1));
+            HSD_JObjSetScale(fp->x20A0_accessory, &scale);
+            fp->mv.co.yoshiegg.scale = scale;
+        }
+        lb_8000C2F8(HSD_JObjGetChild(fp->x20A0_accessory),
+                    fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint);
+        inlineA0(gobj);
+        ftYs_SpecialN_SetupItemVel(arg1, &fp->self_vel);
+        fp->facing_dir = ftYs_SpecialN_GetFacingDir(arg1);
+        fp->dmg.x182c_behavior = ftYs_SpecialN_GetDatAttr18(arg1);
+        fp->mv.ca.specialhi.vel.y = 0;
+        fp->mv.co.yoshiegg.x0 = arg1;
+        fp->take_dmg_2_cb = ftCo_800BC3D0;
+        ftCommon_8007EFC0(fp, 1);
+        fp->mv.co.yoshiegg.x10 = ftYs_SpecialN_GetDatAttr20(arg1);
+        fp->mv.co.yoshiegg.x14 = fp->mv.co.walk.fast_anim_frame;
+        fp->mv.co.yoshiegg.xC = ftYs_SpecialN_GetDatAttr1C(arg1);
+        ftCommon_InitGrab(fp, 0, ftYs_SpecialN_GetDatAttr24(arg1));
+        HSD_JObjGetScale(jobj, &fp->mv.co.yoshiegg.x18);
+        fp->accessory4_cb = ftCo_800BBCC0;
+    }
 }
 
 void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     fp->grab_timer -= ftYs_SpecialN_GetExtAttr28(gobj);
-    fp->mv.co.yoshiegg.x4 = ftCommon_8007DC08(fp, ftYs_SpecialN_GetExtAttr2C());
+    fp->mv.co.yoshiegg.x4 =
+        ftCommon_8007DC08(fp, ftYs_SpecialN_GetExtAttr2C());
     if (fp->grab_timer <= 0) {
         ft_PlaySFX(fp, 280088, 127, 64);
         {
