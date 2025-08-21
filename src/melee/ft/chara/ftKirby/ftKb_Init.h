@@ -771,6 +771,7 @@
 /* 109A84 */ void fn_80109A84(Fighter_GObj* gobj);
 /* 109B00 */ void fn_80109B00(Fighter_GObj* gobj);
 /* 109B7C */ void fn_80109B7C(Fighter_GObj* gobj);
+/* 109BF8 */ void fn_80109BF8(Fighter_GObj* gobj);
 /* 109D6C */ void ftKb_YsSpecialN1_Anim(Fighter_GObj* gobj);
 /* 109DB8 */ void ftKb_YsSpecialAirNCapture2_Anim(Fighter_GObj* gobj);
 /* 109E04 */ void ftKb_YsSpecialAirNCapture1_Anim(Fighter_GObj* gobj);

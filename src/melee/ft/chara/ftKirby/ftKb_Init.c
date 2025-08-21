@@ -5680,7 +5680,10 @@ void ftKb_YsSpecialNCapture2_0_Coll(Fighter_GObj* gobj)
     ft_8008403C(gobj, fn_80109B7C);
 }
 
-/// #ftKb_YsSpecialNCapture2_1_Coll
+void ftKb_YsSpecialNCapture2_1_Coll(Fighter_GObj* gobj)
+{
+    ft_8008403C(gobj, fn_80109BF8);
+}
 
 /// #ftKb_YsSpecialAirN2_1_Coll
 
