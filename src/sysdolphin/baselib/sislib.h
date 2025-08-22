@@ -126,7 +126,7 @@ s32 HSD_SisLib_803A67EC(u8*, u8*);
 HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1);
 void HSD_SisLib_803A660C(s32, s32, s32);
 void HSD_SisLib_803A6530(s32, s32, s32);
-void HSD_SisLib_803A6478(u8*, u8*);
+u8* HSD_SisLib_803A6478(u8*, u8*);
 void HSD_SisLib_803A6368(HSD_Text*, s32);
 void HSD_SisLib_803A62A0(s32, char*, char*);
 s32 HSD_SisLib_803A611C(int, HSD_GObj*, u16, u8, u8, u8, u8, u32);
