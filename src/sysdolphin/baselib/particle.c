@@ -1,9 +1,16 @@
+#include "particle.h"
+
 #include "particle.static.h"
 
 #include <dolphin/gx.h>
 #include <dolphin/gx/GXGeometry.h>
+#include <dolphin/mcc.h>
 #include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
 #include <baselib/state.h>
+#include <MetroTRK/ppc_reg.h>
 
 HSD_ObjAllocData hsd_804D0F60;
 HSD_ObjAllocData hsd_804D0F90;
@@ -103,7 +110,13 @@ void hsd_80392474(void)
 
 /// #fn_80392480
 
-/// #hsd_80392528
+#pragma push
+#pragma dont_inline on
+void hsd_80392528(Event arg0)
+{
+    fn_80392480(arg0, 0x80);
+}
+#pragma pop
 
 /// #hsd_8039254C
 
@@ -137,7 +150,19 @@ void hsd_80393840(void) {}
 
 /// #hsd_80393844
 
-/// #hsd_80393A04
+extern int hsd_804D78A0;
+
+bool hsd_80393A04(void)
+{
+    if (hsd_804D78A0 == 0) {
+        return 0;
+    }
+    if (FIOQuery() == 0) {
+        hsd_804D78A0 = 0;
+        return 0;
+    }
+    return 1;
+}
 
 void hsd_80393A54(int arg0)
 {
@@ -320,7 +345,14 @@ void fn_8039710C(void) {}
 
 /// #fn_80397814
 
-/// #hsd_80397DA4
+static u8 hsd_804CF8E8[0x1000];
+
+void hsd_80397DA4(OSContext* arg0)
+{
+    OSThread sp10;
+    OSCreateThread(&sp10, fn_80397814, arg0, hsd_804CF8E8 + 0xFFC, sizeof(hsd_804CF8E8), 0, 1);
+    OSResumeThread(&sp10);
+}
 
 void Exception_StoreDebugLevel(int arg0)
 {
@@ -332,11 +364,253 @@ void hsd_80397DFC(u32 arg0)
     hsd_804D78CC = (arg0 + 0xF) >> 4;
 }
 
-/// #baselib_mfspr
+static s8 lbl_8040BF10[0x32] = "unsupported no. of special purpose register (%d).";
 
-/// #fn_803982E4
+int baselib_mfspr(int spr)
+{
+    register int result;
+    switch (spr) {
+#ifdef MWERKS_GEKKO
+    case 0x1:
+        asm { mfxer result }
+        break;
+    case 0x8:
+        asm { mflr result }
+        break;
+    case 0x9:
+        asm { mfctr result }
+        break;
+    case 0x12:
+        asm { mfdsisr result }
+        break;
+    case 0x13:
+        asm { mfdar result }
+        break;
+    case 0x16:
+        asm { mfdec result }
+        break;
+    case 0x19:
+        asm { mfsdr1 result }
+        break;
+    case 0x1A:
+        asm { mfsrr0 result }
+        break;
+    case 0x1B:
+        asm { mfsrr1 result }
+        break;
+    case 0x110:
+        asm { mfsprg result, 0 }
+        break;
+    case 0x111:
+        asm { mfsprg result, 1 }
+        break;
+    case 0x112:
+        asm { mfsprg result, 2 }
+        break;
+    case 0x113:
+        asm { mfsprg result, 3 }
+        break;
+    case 0x118:
+        asm { mfspr result, 0x118 } ///< unknown spr?
+        break;
+    case 0x11A:
+        asm { mfear result }
+        break;
+    case 0x11F:
+        asm { mfspr result, pvr }
+        break;
+    case 0x210:
+        asm { mfibatu result, 0 }
+        break;
+    case 0x211:
+        asm { mfibatl result, 0 }
+        break;
+    case 0x212:
+        asm { mfibatu result, 1 }
+        break;
+    case 0x213:
+        asm { mfibatl result, 1 }
+        break;
+    case 0x214:
+        asm { mfibatu result, 2 }
+        break;
+    case 0x215:
+        asm { mfibatl result, 2 }
+        break;
+    case 0x216:
+        asm { mfibatu result, 3 }
+        break;
+    case 0x217:
+        asm { mfibatl result, 3 }
+        break;
+    case 0x218:
+        asm { mfdbatu result, 0 }
+        break;
+    case 0x219:
+        asm { mfdbatl result, 0 }
+        break;
+    case 0x21A:
+        asm { mfdbatu result, 1 }
+        break;
+    case 0x21B:
+        asm { mfdbatl result, 1 }
+        break;
+    case 0x21C:
+        asm { mfdbatu result, 2 }
+        break;
+    case 0x21D:
+        asm { mfdbatl result, 2 }
+        break;
+    case 0x21E:
+        asm { mfdbatu result, 3 }
+        break;
+    case 0x21F:
+        asm { mfdbatl result, 3 }
+        break;
+    case 0x390:
+        asm { mfspr result, gqr0 }
+        break;
+    case 0x391:
+        asm { mfspr result, gqr1 }
+        break;
+    case 0x392:
+        asm { mfspr result, gqr2 }
+        break;
+    case 0x393:
+        asm { mfspr result, gqr3 }
+        break;
+    case 0x394:
+        asm { mfspr result, gqr4 }
+        break;
+    case 0x395:
+        asm { mfspr result, gqr5 }
+        break;
+    case 0x396:
+        asm { mfspr result, gqr6 }
+        break;
+    case 0x397:
+        asm { mfspr result, gqr7 }
+        break;
+    case 0x398:
+        asm { mfspr result, SPR_HID2 } ///< hid2 gives incorrect codegen? compiler bug?
+        break;
+    case 0x399:
+        asm { mfspr result, wpar }
+        break;
+    case 0x39A:
+        asm { mfspr result, dma_u }
+        break;
+    case 0x39B:
+        asm { mfspr result, dma_l }
+        break;
+    case 0x3A8:
+        asm { mfspr result, ummcr0 }
+        break;
+    case 0x3A9:
+        asm { mfspr result, upmc1 }
+        break;
+    case 0x3AA:
+        asm { mfspr result, upmc2 }
+        break;
+    case 0x3AB:
+        asm { mfspr result, usia }
+        break;
+    case 0x3AC:
+        asm { mfspr result, ummcr1 }
+        break;
+    case 0x3AD:
+        asm { mfspr result, upmc3 }
+        break;
+    case 0x3AE:
+        asm { mfspr result, upmc4 }
+        break;
+    case 0x3AF:
+        asm { mfspr result, SPR_USDA } ///< usda not recognized by compiler?
+        break;
+    case 0x3B8:
+        asm { mfspr result, mmcr0 }
+        break;
+    case 0x3B9:
+        asm { mfspr result, pmc1 }
+        break;
+    case 0x3BA:
+        asm { mfspr result, pmc2 }
+        break;
+    case 0x3BB:
+        asm { mfspr result, sia }
+        break;
+    case 0x3BC:
+        asm { mfspr result, mmcr1 }
+        break;
+    case 0x3BD:
+        asm { mfspr result, pmc3 }
+        break;
+    case 0x3BE:
+        asm { mfspr result, pmc4 }
+        break;
+    case 0x3BF:
+        asm { mfspr result, sda }
+        break;
+    case 0x3F0:
+        asm { mfspr result, hid0 }
+        break;
+    case 0x3F1:
+        asm { mfspr result, hid1 }
+        break;
+    case 0x3F2:
+        asm { mfspr result, iabr }
+        break;
+    case 0x3F5:
+        asm { mfspr result, dabr }
+        break;
+    case 0x3F9:
+        asm { mfspr result, l2cr }
+        break;
+    case 0x3FB:
+        asm { mfspr result, ictc }
+        break;
+    case 0x3FC:
+        asm { mfspr result, thrm1 }
+        break;
+    case 0x3FD:
+        asm { mfspr result, thrm2 }
+        break;
+    case 0x3FE:
+        asm { mfspr result, thrm3 }
+        break;
+#endif
+    default:
+        OSReport("unsupported no. of special purpose register (%d).", spr);
+        return 0;
+    }
+    return result;
+}
 
-/// #hsd_80398310
+void fn_803982E4(HSD_GObj* arg0, int unused)
+{
+    HSD_CObjSetCurrent(arg0->hsd_obj);
+    fn_80392934();
+    hsd_8039254C();
+}
+
+static HSD_CObjDesc lbl_8040BF70 = { 0 };
+
+HSD_GObj* hsd_80398310(u16 arg0, u8 arg1, u8 arg2, u32 arg3)
+{
+    HSD_GObj* temp_r3;
+    HSD_CObj* cobj;
+
+    temp_r3 = GObj_Create(arg0, arg1, arg2);
+    if (temp_r3 == NULL) {
+        return NULL;
+    }
+    cobj = HSD_CObjLoadDesc(&lbl_8040BF70);
+    HSD_GObjObject_80390A70(temp_r3, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(temp_r3, fn_803982E4, arg3);
+    hsd_80392528(fn_80392A3C);
+    fn_80392A08(4, 1, 0);
+    return temp_r3;
+}
 
 /// #hsd_803983A4
 

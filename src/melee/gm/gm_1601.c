@@ -769,7 +769,7 @@ void fn_801652B0(s32 arg0, s32 arg1)
 /// #fn_801652D8
 
 /// creates the develop mode stress test
-HSD_GObj* gm_80165388(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+HSD_GObj* gm_80165388(u16 arg0, u8 arg1, u8 arg2, s32 arg3)
 {
     HSD_GObj* temp_r3;
 
