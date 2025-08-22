@@ -242,6 +242,7 @@ struct HSD_AllocEntry {
 struct PreloadCacheSceneEntry {
     u32 char_id;
     u8 color;
+    u8 x5;
 };
 
 struct PreloadEntry {

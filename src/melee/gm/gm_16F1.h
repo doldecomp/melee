@@ -74,8 +74,8 @@
 /* 172E74 */ u8 gm_80172E74(void);
 /* 172F00 */ u16 gm_80172F00(u32);
 /* 172FAC */ UNK_RET fn_80172FAC(UNK_PARAMS);
-/* 173098 */ u8 fn_80173098(int);
-/* 173224 */ u8 gm_80173224(int, int);
+/* 173098 */ u8 fn_80173098(u8);
+/* 173224 */ u8 gm_80173224(u8, int);
 /* 1732D8 */ UNK_RET gm_801732D8(UNK_PARAMS);
 /* 17335C */ UNK_RET gm_8017335C(UNK_PARAMS);
 /* 1733D8 */ UNK_RET gm_801733D8(UNK_PARAMS);
@@ -88,12 +88,12 @@
 /* 173644 */ bool fn_80173644(void);
 /* 17367C */ bool fn_8017367C(void);
 /* 1736DC */ UNK_T gm_801736DC(void);
-/* 1736E8 */ void gm_801736E8(u8, u8, int, u8, u8, u8);
-/* 173754 */ int gm_80173754(s8, int);
+/* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
+/* 173754 */ int gm_80173754(s8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);
 /* 1737E8 */ void gm_801737E8_OnLoad(void);
 /* 173834 */ UNK_RET fn_80173834(UNK_PARAMS);
-/* 17390C */ UNK_RET gm_8017390C(UNK_PARAMS);
+/* 17390C */ UNK_RET gm_8017390C(u8, int);
 /* 173AA4 */ UNK_RET gm_80173AA4(UNK_PARAMS);
 /* 173B30 */ UNK_RET gm_80173B30(int);
 /* 173BC4 */ UNK_RET gm_80173BC4(s8);

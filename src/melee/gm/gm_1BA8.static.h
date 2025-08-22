@@ -9,7 +9,7 @@ static struct gm_804D6900_t {
     int x0;
     struct gm_804D6900_x4_t {
         int x0;
-        int x4;
+        intptr_t x4;
     }* x4;
     StartMeleeRules* x8;
     struct {
@@ -21,4 +21,5 @@ static struct gm_804D6900_t {
         UNK_T x10;
     }** x10;
     s8* x14;
+    s8* x18;
 }** gm_804D6900;

@@ -278,6 +278,7 @@ void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, u8 next_scene)
     bool unk_bool;
     int idx;
     u8 unk;
+    u16 foo;
 
     match_end = &gm_80479D98.match_end;
     if (!gm_801743A4(match_end->result)) {
@@ -313,8 +314,9 @@ void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, u8 next_scene)
                 gm_SetScenePendingMinor(0x80);
                 unk_bool = true;
             }
-            if (gm_80172F00(gmMainLib_8015EDB0()->x0) != 0x148) {
-                gm_80164504();
+            foo = gm_80172F00(gmMainLib_8015EDB0()->x0);
+            if (foo != 0x148) {
+                gm_80164504(foo);
             }
             gm_80173DE4(&gm_80479D98.match_end);
             gm_80172898(1);

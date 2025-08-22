@@ -168,6 +168,7 @@ void gm_801B9DD8(MinorScene* arg0)
     s32* temp_r3_2;
     u8 temp_r30;
     MatchExitInfo* temp_r3;
+    u16 tmp;
 
     temp_r3 = gm_801A4284(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
@@ -180,8 +181,8 @@ void gm_801B9DD8(MinorScene* arg0)
     temp_r30 =
         gm_80164024(temp_r3->match_end.player_standings[0].character_kind);
     temp_r31 = gm_80180AE4();
-    if (gm_801734D0(temp_r31) != 0x148) {
-        gm_80164504();
+    if ((tmp = gm_801734D0(temp_r31)) != 0x148) {
+        gm_80164504(tmp);
     }
     temp_r3_2 = gmMainLib_8015D084(temp_r30);
     if (temp_r31 > *temp_r3_2) {
