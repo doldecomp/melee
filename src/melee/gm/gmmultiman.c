@@ -258,6 +258,7 @@ bool gm_801B688C(bool arg0)
     int temp_r30;
     VsModeData* temp_r29;
     u8 temp_r3;
+    u16 tmp;
 
     PAD_STACK(8);
 
@@ -266,9 +267,9 @@ bool gm_801B688C(bool arg0)
     lb_8001D164(0);
     lb_8001CE00();
     if ((gm_80181A14() != 0) && (gm_801A4310() == 0x24) &&
-        (gm_80173498() != 0x148))
+        ((tmp = gm_80173498()) != 0x148))
     {
-        gm_80164504();
+        gm_80164504(tmp);
     }
     temp_r30 = gm_80181A14();
     temp_r31 = gm_80181A34();

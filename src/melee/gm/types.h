@@ -9,6 +9,7 @@
 #include "dolphin/types.h"
 
 #include <melee/gm/forward.h> // IWYU pragma: export
+#include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
 #include <melee/sc/forward.h>
 
@@ -310,10 +311,10 @@ struct gmm_x0 {
         /* 0x056C */ int x3C;
         /* 0x0570 */ int x40;
         /* 0x0574 */ s8 x44;
-        /* 0x0575 */ s8 x45;
-        /* 0x0578 */ int x48;
-        /* 0x057C */ u8 x4C[4];
-        /* 0x0580 */ u8 x50[4];
+        /* 0x0575 */ u8 x45;
+        /* 0x0578 */ InternalStageId x48;
+        /* 0x057C */ s8 x4C[4]; ///< CharacterKind
+        /* 0x0580 */ u8 x50[4]; ///< character color
         /* 0x0584 */ M2C_UNK unk_584; /* inferred */
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
@@ -344,7 +345,11 @@ struct lbl_8046B6A0_24C_t {
     u8 x6; ///< is teams
     u32 x8;
     u8 xC;
-    u8 padD[0x24 - 0xD];
+    u8 xD;
+    u8 xE;
+    u8 padF[0x16 - 0xF];
+    u8 x16;
+    u8 pad17[0x24 - 0x17];
     struct {
         u8 x0;
         u8 pad_x1[0xB];
