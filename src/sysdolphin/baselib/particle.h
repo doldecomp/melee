@@ -19,12 +19,12 @@
 /* 3921B8 */ UNK_RET hsd_803921B8(UNK_PARAMS);
 /* 3922FC */ UNK_RET hsd_803922FC(UNK_PARAMS);
 /* 392474 */ UNK_RET hsd_80392474(UNK_PARAMS);
-/* 392480 */ UNK_RET fn_80392480(UNK_PARAMS);
+/* 392480 */ int fn_80392480(Event, int);
 /* 392528 */ void hsd_80392528(Event);
 /* 39254C */ UNK_RET hsd_8039254C(UNK_PARAMS);
 /* 392934 */ UNK_RET fn_80392934(UNK_PARAMS);
-/* 392A08 */ UNK_RET fn_80392A08(UNK_PARAMS);
-/* 392A3C */ UNK_RET fn_80392A3C(UNK_PARAMS);
+/* 392A08 */ UNK_RET fn_80392A08(int, int, int);
+/* 392A3C */ void fn_80392A3C(void);
 /* 392CCC */ s32 fn_80392CCC(s32);
 /* 392CD8 */ UNK_RET fn_80392CD8(UNK_PARAMS);
 /* 392E2C */ UNK_RET fn_80392E2C(UNK_PARAMS);
@@ -91,13 +91,13 @@
 /* 397374 */ UNK_RET fn_80397374(UNK_PARAMS);
 /* 397520 */ UNK_RET hsd_80397520(UNK_PARAMS);
 /* 3975D4 */ UNK_RET hsd_803975D4(UNK_PARAMS);
-/* 397814 */ UNK_RET fn_80397814(UNK_PARAMS);
+/* 397814 */ void* fn_80397814(void*);
 /* 397DA4 */ void hsd_80397DA4(OSContext*);
 /* 397DF4 */ void Exception_StoreDebugLevel(int);
 /* 397DFC */ void hsd_80397DFC(u32 arg0);
-/* 397E0C */ UNK_RET baselib_mfspr(UNK_PARAMS);
-/* 3982E4 */ UNK_RET fn_803982E4(UNK_PARAMS);
-/* 398310 */ HSD_GObj* hsd_80398310(s32, s32, s32, s32);
+/* 397E0C */ int baselib_mfspr(int);
+/* 3982E4 */ void fn_803982E4(HSD_GObj*, int);
+/* 398310 */ HSD_GObj* hsd_80398310(u16, u8, u8, u32);
 /* 3983A4 */ UNK_RET hsd_803983A4(UNK_PARAMS);
 /* 3984F4 */ void psInitDataBankLoad(int bank, int* cmdBank, int* texBank,
                                      u32* ref, int* formBank);

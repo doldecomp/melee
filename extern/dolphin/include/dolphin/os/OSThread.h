@@ -80,6 +80,7 @@ OSThread* OSGetCurrentThread(void);
 s32 OSEnableScheduler(void);
 s32 OSDisableScheduler(void);
 long OSCheckActiveThreads(void);
+int OSCreateThread(struct OSThread * thread, void * (* func)(void *), void * param, void * stack, unsigned long stackSize, long priority, unsigned short attr);
 
 #define IsSuspended(suspend) (suspend > 0)
 

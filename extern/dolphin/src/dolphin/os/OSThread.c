@@ -98,7 +98,6 @@ static struct OSThread * SetEffectivePriority(struct OSThread * thread, long pri
 static void UpdatePriority(struct OSThread * thread);
 static struct OSThread * SelectThread(int yield);
 void OSYieldThread(void);
-int OSCreateThread(struct OSThread * thread, void * (* func)(void *), void * param, void * stack, unsigned long stackSize, long priority, unsigned short attr);
 void OSExitThread(void * val);
 void OSCancelThread(struct OSThread * thread);
 int OSJoinThread(struct OSThread * thread, void * val);

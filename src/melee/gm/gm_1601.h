@@ -147,7 +147,7 @@ struct lbl_8046B488_t;
 /* 165290 */ void gm_80165290(int);
 /* 1652B0 */ void fn_801652B0(s32, s32);
 /* 1652D8 */ void* fn_801652D8(void);
-/* 165388 */ HSD_GObj* gm_80165388(s32, s32, s32, s32);
+/* 165388 */ HSD_GObj* gm_80165388(u16, u8, u8, s32);
 /* 1653C8 */ void gm_801653C8(HSD_GObj*);
 /* 1653E8 */ float fn_801653E8(u8);
 /* 165418 */ u8 fn_80165418(MatchEnd*);
