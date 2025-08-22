@@ -618,7 +618,7 @@ void HSD_SisLib_803A6368(HSD_Text* arg0, s32 arg1)
     }
 }
 
-void HSD_SisLib_803A6478(u8* arg0, u8* arg1)
+u8* HSD_SisLib_803A6478(u8* arg0, u8* arg1)
 {
     while (*arg1 != 0) {
         if (*arg1 >= 0x20) {
@@ -642,6 +642,7 @@ void HSD_SisLib_803A6478(u8* arg0, u8* arg1)
         }
     }
     *arg0 = 0;
+    return arg0;
 }
 
 void HSD_SisLib_803A6530(s32 arg0, s32 arg1, s32 arg2)

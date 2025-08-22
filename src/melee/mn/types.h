@@ -313,9 +313,10 @@ struct CSSTag {
 };
 
 struct CSSKOStar {
-    TextGlyphTexture* text; // 0x00
+    HSD_Text* text;         // 0x00
     float x4;               // 0x04
     u8 joint;               // 0x08
+    u8 joint2;              // 0x09
     int xc;                 // 0x0C
     int x10;                // 0x10
     int x14;                // 0x14
