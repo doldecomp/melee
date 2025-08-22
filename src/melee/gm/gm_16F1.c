@@ -165,7 +165,7 @@ void fn_801701AC(void)
     lbl_804D65A0 = 0;
 }
 
-u8 fn_801701B8(void)
+int fn_801701B8(void)
 {
     return lbl_804D65A0;
 }

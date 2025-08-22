@@ -321,4 +321,4 @@ struct lbl_803D5A4C_t {
         { 0x29A },
     };
 
-/* 4D65A0 */ static s8 lbl_804D65A0;
+/* 4D65A0 */ static u8 lbl_804D65A0;

@@ -2,39 +2,38 @@
 
 #include "gm/gmresult.static.h"
 
-#include "placeholder.h"
+#include "gm_unsplit.h"
+#include "gmresultplayer.h"
 
 #include "baselib/dobj.h"
-
-#include "baselib/forward.h"
-
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+#include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/types.h"
 
-#include "gm/forward.h"
-
-#include "gm/gm_1601.h"
-#include "gm/gm_16AE.h"
-#include "gm/gm_16F1.h"
-#include "gm/gm_17AD.h"
 #include "gm/types.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbvector.h"
 #include "sc/types.h"
 
-#include <melee/pl/forward.h>
+#include <melee/mn/mnmain.h>
+#include <melee/pl/player.h>
+#include <melee/un/un_2FC9.h>
 
 MatchEnd* fn_80174274(void)
 {
     return lbl_8046DBE8.x94;
 }
 
+#pragma push
+#pragma dont_inline on
 s32 fn_80174284(u8 slot)
 {
     bool do_call;
@@ -60,6 +59,7 @@ s32 fn_80174284(u8 slot)
 
     return count;
 }
+#pragma pop
 
 void fn_80174338(void)
 {
@@ -76,10 +76,9 @@ void fn_80174380(void)
     lbAudioAx_80024030(2);
 }
 
-bool gm_801743A4(enum MatchOutcome outcome)
+bool gm_801743A4(u8 outcome)
 {
-    /// outcome == OUTCOME_LRASTART || outcome == OUTCOME_RETRY?
-    if ((u8) (outcome - OUTCOME_LRASTART) <= OUTCOME_TIMEOUT) {
+    if (outcome == OUTCOME_LRASTART || outcome == OUTCOME_RETRY) {
         return true;
     }
     return false;
@@ -143,7 +142,7 @@ void fn_80174FD0(HSD_JObj* jobj, s32 arg1)
     HSD_TObjAnim(tobj);
 }
 
-void fn_80175038(HSD_GObj* gobj, s32 flag)
+void fn_80175038(HSD_GObj* gobj, int flag)
 {
     HSD_JObjDispAll(GET_JOBJ(gobj), NULL, HSD_GObj_80390EB8(flag), 0U);
 }
@@ -399,7 +398,7 @@ void fn_80176A6C(void)
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 8U);
-    if ((lbl_8046DBE8.x0 >> 2U) & 1) {
+    if (lbl_8046DBE8.x0_5) {
         gobj->gxlink_prios = 1;
     } else {
         gobj->gxlink_prios = 0x4D81;
@@ -419,7 +418,82 @@ void fn_80176BCC(HSD_GObj* gobj)
     HSD_JObjAnimAll((HSD_JObj*) gobj->hsd_obj);
 }
 
-/// #fn_80176BF0
+static const u8 lbl_803B7B18[40][2] = {
+    { 0x00, 0x0 },
+    { 0x01, 0x1 },
+    { 0x02, 0x2 },
+    { 0x03, 0x3 },
+    { 0x04, 0x5 },
+    { 0x05, 0x6 },
+    { 0x06, 0xD },
+    { 0x07, 0x6 },
+    { 0x08, 0x6 },
+    { 0x09, 0x7 },
+    { 0x0A, 0x9 },
+    { 0x0B, 0x8 },
+    { 0x0C, 0x6 },
+    { 0x0D, 0x9 },
+    { 0x0E, 0x4 },
+    { 0x0F, 0x9 },
+    { 0x10, 0xA },
+    { 0x11, 0xC },
+    { 0x12, 0xD },
+    { 0x13, 0xD },
+    { 0x14, 0x2 },
+    { 0x15, 0xD },
+    { 0x16, 0x6 },
+    { 0x17, 0x7 },
+    { 0x18, 0x9 },
+    { 0x19, 0xD },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0 },
+    { 0x40, 0x80 },
+};
+
+static inline int fn_80176BF0_inline(u8 arg1)
+{
+    int i;
+    for (i = 0; i < 0x21; i++) {
+        if (arg1 == lbl_803B7B18[i][0]) {
+            return lbl_803B7B18[i][1];
+        }
+    }
+    return -1;
+}
+
+HSD_JObj* fn_80176BF0(HSD_JObj* arg0, u8 arg1, int arg2)
+{
+    HSD_JObj* jobj;
+    int var_r31;
+    HSD_JObj* var_r30;
+    int var_r29;
+
+    var_r31 = 0;
+    var_r30 = NULL;
+    lb_80011E24(arg0, &jobj, 5, -1);
+    if (arg2 != 0) {
+        var_r29 = 11;
+    } else {
+        var_r29 = fn_80176BF0_inline(arg1);
+    }
+    for (jobj = HSD_JObjGetChild(jobj); jobj != NULL; jobj = HSD_JObjGetNext(jobj)) {
+        if (var_r31 != var_r29) {
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        } else {
+            var_r30 = jobj;
+        }
+        var_r31++;
+    }
+    return var_r30;
+}
 
 void fn_80176D18(HSD_GObj* gobj)
 {
@@ -428,11 +502,159 @@ void fn_80176D18(HSD_GObj* gobj)
 
 /// #fn_80176D3C
 
-/// #fn_80176F60
+void fn_80176F60(void)
+{
+    Vec3 sp8[4];
+
+    ResultsData* data = &lbl_8046DBE8;
+    HSD_AObj* aobj;
+    MatchEnd* temp_r30;
+    HSD_GObj* temp_r29;
+    DynamicModelDesc* temp_r27;
+    HSD_JObj* jobj;
+    int i;
+    u8 tmp;
+
+    temp_r30 = data->x94;
+    temp_r27 = *data->flmsce->models;
+    temp_r29 = GObj_Create(0xE, 0xF, 0);
+    jobj = HSD_JObjLoadJoint(temp_r27->joint);
+    HSD_GObjObject_80390A70(temp_r29, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(temp_r29, fn_80175038, 0xB, 0);
+    lb_8000C0E8(jobj, 0, temp_r27);
+    HSD_JObjReqAnimAll(jobj, 0.0F);
+    data->x20 = fn_80176BF0(jobj, temp_r30->player_standings[data->x6].character_kind, gm_801743A4(temp_r30->result));
+    aobj = data->x20->u.dobj->mobj->aobj;
+    tmp = gm_80160854(data->x6, Player_GetTeam(data->x6), temp_r30->is_teams == 1, temp_r30->player_standings[data->x4].slot_type);
+    HSD_AObjSetCurrentFrame(aobj, 1.0F + tmp);
+    HSD_AObjSetRate(aobj, 0.0F);
+    HSD_MObjAnim(data->x20->u.dobj->mobj);
+    HSD_AObjSetCurrentFrame(aobj, 0.0F);
+    HSD_AObjSetRate(aobj, 1.0F);
+    mn_8022F3D8(data->x20, 4, MOBJ_MASK);
+    mn_8022F3D8(data->x20, 5, MOBJ_MASK);
+    mn_8022F3D8(data->x20, 6, MOBJ_MASK);
+    HSD_GObjProc_8038FD54(temp_r29, fn_80176BCC, 0);
+    if (jobj == NULL) {
+        jobj = NULL;
+    } else {
+        jobj = jobj->child;
+    }
+
+    for (i = 0; i < 4; i++) {
+        HSD_JObjGetTranslation(jobj, &sp8[i]);
+        if (jobj == NULL) {
+            jobj = NULL;
+        } else {
+            jobj = jobj->next;
+        }
+    }
+    fn_80176D3C(sp8);
+}
 
 /// #fn_801771C0
 
-/// #gm_80177368_OnEnter
+extern HSD_Archive* lbl_804D65B8;
+
+static struct {
+    u8 x0, x1;
+    int x4;
+} lbl_8046E190[4];
+
+void gm_80177368_OnEnter(void* arg0_)
+{
+    ResultsMatchInfo* arg0 = arg0_;
+    HSD_GObj* temp_r3_2;
+    HSD_GObj* temp_r3_4;
+    HSD_LObj* temp_r3_3;
+    MatchEnd* temp_r29;
+    ResultsData* data = &lbl_8046DBE8;
+    int i;
+
+    PAD_STACK(0x20);
+
+    memzero(&lbl_8046DBE8, 0x5A8);
+    lbl_8046DBE8.x1 = 0;
+    lbl_8046DBE8.x0_0 = false;
+    lbl_8046DBE8.x94 = &arg0->match_end;
+    lbl_8046DBE8.x0_4 = arg0->x0_0;
+    lbl_8046DBE8.x0_5 = arg0->x0_1;
+
+    temp_r29 = lbl_8046DBE8.x94;
+    if (gm_801743A4(lbl_8046DBE8.x94->result)) {
+        lbl_8046DBE8.num_pages = 2;
+    } else {
+        lbl_8046DBE8.num_pages = 3;
+        if (temp_r29->x5 == 3) {
+            lbl_8046DBE8.player_data[0].page = 2;
+            lbl_8046DBE8.player_data[1].page = 2;
+            lbl_8046DBE8.player_data[2].page = 2;
+            lbl_8046DBE8.player_data[3].page = 2;
+        }
+    }
+    if (fn_801701B8() == 0) {
+        for (i = 0; i < 4; i++) {
+            lbl_8046E190[i].x0 = 2;
+            lbl_8046E190[i].x1 = fn_80174284(i) * 2 + 2;
+        }
+    } else {
+        for (i = 0; i < 4; i++) {
+            lbl_8046E190[i].x0 = 2;
+            lbl_8046E190[i].x1 = 0;
+        }
+    }
+    fn_801771C0(&lbl_8046DBE8);
+    if (temp_r29->player_standings[data->x6].slot_type == Gm_PKind_Human) {
+        if (!gm_801743A4(temp_r29->result)
+                && temp_r29->player_standings[data->x6].x3_6) {
+            lb_80014574(data->x6, 3, 0x20, 0);
+        }
+    }
+    un_802FF1B4();
+    lbl_804D65B8 = lbArchive_80016DBC("GmRst",
+            &data->pnlsce, "pnlsce",
+            &data->flmsce, "flmsce", 0);
+    if (data->pnlsce == NULL) {
+        OSReport("Error : Cannot read archive file (File Name : %s).", "GmRst");
+    }
+    if (data->flmsce == NULL) {
+        OSReport("Error : Cannot read archive file (File Name : %s).", "GmRst");
+    }
+    fn_80176A6C();
+    temp_r3_2 = GObj_Create(0xB, 3, 0);
+    if (temp_r3_2 == NULL) {
+        OSReport("Error : gobj dont't get (gmResultAddLight)\n");
+        __assert("gmresult.c", 0x68C, "0");
+    }
+    temp_r3_3 = lb_80011AC4(data->pnlsce->lights);
+    if (temp_r3_3 == NULL) {
+        OSReport("Error : lobj dont't get (gmResultAddLight)\n");
+        __assert("gmresult.c", 0x68F, "0");
+    }
+    HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D784A, temp_r3_3);
+    GObj_SetupGXLink(temp_r3_2, HSD_GObj_LObjCallback, 0xA, 0);
+    temp_r3_4 = GObj_Create(0xE, 0xF, 0);
+    data->x18 = temp_r3_4;
+    if (temp_r3_4 == NULL) {
+        OSReport("Error : gobj dont't get (gmResultAddModel)\n");
+        __assert("gmresult.c", 0x6A2, "0");
+    }
+    HSD_GObjProc_8038FD54(temp_r3_4, fn_80179350, 0);
+    fn_80176F60();
+    fn_8017AA78(&arg0->x1);
+    fn_8017A004();
+    if (!gm_801743A4(temp_r29->result)) {
+        lbAudioAx_80023F28(fn_80160400(temp_r29->player_standings[data->x6].character_kind));
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (temp_r29->player_standings[i].slot_type != Gm_PKind_NA) {
+            fn_8017A9B4(i);
+            data->player_data[i].fighter_gobj = fn_8017A67C(temp_r29->player_standings[i].character_kind, temp_r29->player_standings[i].x3, i);
+            data->player_data[i].camera = fn_8017A318(i);
+        }
+    }
+}
 
 void gm_80177704_OnLeave(void* unused)
 {
