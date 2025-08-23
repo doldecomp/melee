@@ -35,7 +35,7 @@ void ftCo_800BD620(Fighter_GObj* gobj)
                               NULL);
     Fighter_UpdateModelScale(gobj);
     fp->accessory1_cb = ftCo_800DB464;
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     ftColl_8007B62C(gobj, 2);
     ftCommon_8007D5D4(fp);
     ftCommon_8007E2F4(fp, 0x1FF);

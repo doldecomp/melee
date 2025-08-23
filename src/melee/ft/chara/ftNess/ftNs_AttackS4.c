@@ -101,20 +101,16 @@ void ftNs_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
     Fighter* fighter_data1 = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr;
 
-    if (fighter_data1->x2218_b3 == 0) {
-        if (fighter_data1->cmd_vars[0] !=
-            false) // Check if reflect bubble flag is enabled in fp script
-        {
+    if (!fighter_data1->reflecting) {
+        // Check if reflect bubble flag is enabled in fp script
+        if (fighter_data1->cmd_vars[0] != 0) {
             ness_attr = fighter_data1->dat_attrs;
             ftColl_CreateReflectHit(
                 gobj, &ness_attr->xB8_BASEBALL_BAT,
                 ftNs_AttackS4_OnReflect); // Create reflect bubble
         }
-    }
-
-    else if (fighter_data1->cmd_vars[0] == false)
-    {
-        fighter_data1->x2218_b3 = 0; // Toggle reflect bubble OFF//
+    } else if (fighter_data1->cmd_vars[0] == false) {
+        fighter_data1->reflecting = false; // Toggle reflect bubble OFF
     }
 
     if (!ftAnim_IsFramesRemaining(

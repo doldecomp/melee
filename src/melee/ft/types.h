@@ -1529,7 +1529,7 @@ struct Fighter {
     /* fp+21E8 */ HSD_GObjEvent death3_cb;
     /* fp+21EC */ HSD_GObjEvent x21EC;
     /* fp+21F0 */ HSD_GObjEvent take_dmg_2_cb;
-    /* fp+21F4 */ HSD_GObjEvent x21F4;
+    /* fp+21F4 */ HSD_GObjEvent hurtbox_detect_cb;
     /* fp+21F8 */ HSD_GObjEvent x21F8;
     /* fp+21FC */ UnkFlagStruct x21FC_flag;
     /* fp+21FC */ u8 filler_x21FC[0x2200 - 0x21FD];
@@ -1552,7 +1552,7 @@ struct Fighter {
     /* fp+2218:0 */ u8 allow_interrupt : 1;
     /* fp+2218:1 */ u8 x2218_b1 : 1;
     /* fp+2218:2 */ u8 x2218_b2 : 1;
-    /* fp+2218:3 */ u8 x2218_b3 : 1;
+    /* fp+2218:3 */ u8 reflecting : 1;
     /* fp+2218:4 */ u8 x2218_b4 : 1;
     /* fp+2218:5 */ u8 x2218_b5 : 1;
     /* fp+2218:6 */ u8 x2218_b6 : 1;
@@ -1602,7 +1602,7 @@ struct Fighter {
     /* fp+221D:6 */ u16 x221D_b6 : 1;
     /* fp+221D:7 */ u16 x221D_b7 : 1;
 
-    /* fp+221E:0 */ u8 x221E_b0 : 1;
+    /* fp+221E:0 */ u8 invisible : 1;
     /* fp+221E:1 */ u8 x221E_b1 : 1;
     /* fp+221E:2 */ u8 x221E_b2 : 1;
     /* fp+221E:3 */ u8 x221E_b3 : 1;
@@ -1631,13 +1631,13 @@ struct Fighter {
     /* fp+2221:1 */ u8 x2221_b1 : 1;
     /* fp+2221:2 */ u8 x2221_b2 : 1;
     /* fp+2221:3 */ u8 x2221_b3 : 1;
-    /* fp+2221:4 */ u8 x2221_b4 : 1;
-    /* fp+2221:5 */ u8 x2221_b5 : 1;
-    /* fp+2221:6 */ u8 x2221_b6 : 1;
+    /* fp+2221:4 */ u8 x2221_b4 : 1; ///< parasol-related
+    /* fp+2221:5 */ u8 x2221_b5 : 1; ///< parasol-related
+    /* fp+2221:6 */ u8 x2221_b6 : 1; ///< parasol-related
     /* fp+2221:7 */ u8 x2221_b7 : 1;
 
-    /* fp+2222:0 */ u8 x2222_b0 : 1;
-    /* fp+2222:1 */ u8 x2222_b1 : 1;
+    /* fp+2222:0 */ u8 x2222_b0 : 1; ///< can cargo grab? only set for DK
+    /* fp+2222:1 */ u8 can_multijump : 1; ///< set for Kirby and Jigglypuff
     /* fp+2222:2 */ u8 x2222_b2 : 1;
     /* fp+2222:3 */ u8 x2222_b3 : 1;
     /* fp+2222:4 */ u8 x2222_b4 : 1;
@@ -1661,7 +1661,7 @@ struct Fighter {
     /* fp+2224:4 */ u8 x2224_b4 : 1;
     /* fp+2224:5 */ u8 x2224_b5 : 1;
     /* fp+2224:6 */ u8 x2224_b6 : 1;
-    /* fp+2224:7 */ u8 x2224_b7 : 1;
+    /* fp+2224:7 */ u8 can_walljump : 1;
 
     /* fp+2225:0 */ u8 x2225_b0 : 1;
     /* fp+2225:1 */ u8 x2225_b1 : 1;
@@ -1695,7 +1695,7 @@ struct Fighter {
     /* fp+2228:2 */ u8 x2228_b2 : 1;
     /* fp+2228:3 */ u8 x2228_b3 : 2;
     /* fp+2228:5 */ u8 x2228_b5 : 1;
-    /* fp+2228:6 */ u8 x2228_b6 : 1;
+    /* fp+2228:6 */ u8 used_tether : 1;
     /* fp+2228:7 */ u8 x2228_b7 : 1;
 
     /* fp+2229:0 */ u8 x2229_b0 : 1;

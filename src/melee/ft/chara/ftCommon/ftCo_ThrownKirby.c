@@ -117,7 +117,7 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     fp->take_dmg_2_cb = ftCo_800BE7C0;
     fp->take_dmg_cb = ftCo_800BE7C0;
     ftCommon_8007E2F4(fp, 0x1FF);
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     ftColl_8007B62C(gobj, 2);
     ftCommon_8007EFC0(fp, 1);
     ftCommon_InitGrab(fp, 0, get_float(thrower_gobj));
@@ -270,7 +270,7 @@ void ftCo_800BE494(Fighter_GObj* gobj)
     fp->take_dmg_2_cb = ftCo_800BE7C0;
     fp->take_dmg_cb = ftCo_800BE7C0;
     ftCommon_8007E2F4(fp, 0x1FF);
-    fp->x221E_b0 = false;
+    fp->invisible = false;
     ftColl_8007B62C(gobj, 0);
     if (!fp->mv.co.thrownkirby.x18_b0) {
         Vec2 self_vel;

@@ -105,10 +105,8 @@ bool ftLk_SpecialN_IsActiveAnd2071b6(Fighter_GObj* gobj)
         if (!fp->x2070.x2071_b6) {
             return false;
         }
-        /// @attention Fall-through.
-    default:
-        return true;
     }
+    return true;
 }
 
 void ftLk_SpecialN_ProcessFv10(Fighter_GObj* gobj)

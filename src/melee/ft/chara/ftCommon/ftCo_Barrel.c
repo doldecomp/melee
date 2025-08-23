@@ -50,7 +50,7 @@ void ftCo_Barrel_Enter(Fighter_GObj* gobj, Item_GObj* item_gobj)
     ftCommon_8007D5D4(fp);
     ftCommon_8007E2FC(gobj);
     fp->x1988 = 2;
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007EFC0(fp, 1U);
     ftColl_800787B4(fp->mv.co.barrel.x8, gobj, 0);

@@ -1223,7 +1223,7 @@ void ftColl_CreateReflectHit(Fighter_GObj* gobj, ReflectDesc* reflect,
                              HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2218_b3 = true;
+    fp->reflecting = true;
     fp->x2218_b4 = false;
     fp->reflect_hit_cb = cb;
     fp->ReflectAttr.x1A30_maxDamage = reflect->x4_max_damage;

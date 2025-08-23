@@ -392,7 +392,7 @@ void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
                               0.0f, 0.0f, 0);
 
     fp->x2223_b4 = true;
-    fp->x221E_b0 = true;
+    fp->invisible = true;
 }
 
 // AS_SheikUpBLand
@@ -425,8 +425,7 @@ void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, 0x164, fighterFlags, fp->cur_anim_frame,
                               0.0, 0.0, NULL);
-    // fp->unk221E = (u8) (fp->unk221E | 0x80);
-    fp->x221E_b0 = true;
+    fp->invisible = true;
 }
 
 // AS_SheikUpBTravelGround
@@ -439,7 +438,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     fp->x1968_jumpsUsed = (u8) fp->co_attrs.max_jumps;
     fp->x2223_b4 = 1;
     ftColl_8007B62C(gobj, 2);
-    fp->x221E_b0 = 1;
+    fp->invisible = 1;
     fp->accessory4_cb = fn_80112ED8;
 }
 
@@ -676,8 +675,7 @@ static void ftSk_SpecialHi_80113EAC_inline(Fighter_GObj* gobj)
     fp->mv.co.common.x14 = fp->self_vel.y;
     fp->mv.co.common.x18 = fp->gr_vel;
     fp->gr_vel = fp->self_vel.x = fp->self_vel.y = 0.0f;
-    // fp->unk221E = (u8) (fp->unk221E & ~0x80);
-    fp->x221E_b0 = 0;
+    fp->invisible = false;
     fp->accessory4_cb = fn_80113038;
 }
 
@@ -699,7 +697,7 @@ static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj)
     fp->mv.co.common.x14 = fp->self_vel.y;
     fp->mv.co.common.x18 = fp->gr_vel;
     fp->gr_vel = fp->self_vel.x = fp->self_vel.y = 0.0f;
-    fp->x221E_b0 = 0;
+    fp->invisible = false;
     fp->accessory4_cb = fn_80113038;
 }
 

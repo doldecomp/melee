@@ -175,7 +175,7 @@ static void reflect(HSD_GObj* gobj)
         ftColl_CreateReflectHit(gobj, &sa->cape_reflection, NULL);
     } else if (fp->cmd_vars[1] == 0 && fp->mv.mr.SpecialS.reflecting == true) {
         fp->mv.mr.SpecialS.reflecting = false;
-        fp->x2218_b3 = false;
+        fp->reflecting = false;
     }
 
     ftColl_8007AEF8(gobj);
@@ -265,8 +265,8 @@ void ftMr_SpecialAirS_Coll(HSD_GObj* gobj)
 static void collUpdateVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((s32) fp->mv.mr.SpecialS.reflecting != false) {
-        fp->x2218_b3 = 1;
+    if (fp->mv.mr.SpecialS.reflecting) {
+        fp->reflecting = true;
     }
     setCallbacks(fp);
     fp->accessory4_cb = ftMr_SpecialS_CreateCape;

@@ -331,7 +331,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     ftLk_DatAttrs* ea = ftdata->ext_attr;
     void** items = ftdata->x48_items;
 
-    fp->x2224_b7 = true;
+    fp->can_walljump = true;
     ea->attackairlw_hit_anim_frame_end =
         lbAnim_8001E8F8(ftData_80085E50(fp, 72));
     ftLk_Init_OnLoadForCLink(fp);

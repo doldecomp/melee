@@ -176,7 +176,7 @@ void ft_80087AC0(HSD_GObj* gobj, s32 arg1)
     var0 = var1;
     var2 = fp->x221E_b7;
     var2 = var0;
-    fp->x221E_b0 = var2;
+    fp->invisible = var2;
 }
 
 bool ft_80087AEC(HSD_GObj* gobj)
@@ -273,7 +273,7 @@ void ft_80087C64(HSD_GObj* gobj, s32 arg1)
 s32 ft_80087C70(Fighter* fp, s32 arg1)
 {
     s32 var_r4 = arg1;
-    s32 temp_r0 = (fp->x2228_b3) & 3;
+    s32 temp_r0 = fp->x2228_b3;
 
     switch (temp_r0) {
     case 0:

@@ -89,7 +89,7 @@ bool ftMt_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj)
         case ftMt_MS_SpecialAirNCancel:
         case ftMt_MS_SpecialAirNEnd:
 
-            if (fp->x2070.x2071_b6 != false) {
+            if (fp->x2070.x2071_b6) {
                 return true;
             }
             return false;

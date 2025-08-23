@@ -473,7 +473,7 @@ void ftFc_Init_OnLoad(HSD_GObj* gobj)
 
     u8 _[8];
 
-    fp->x2224_b7 = 1;
+    fp->can_walljump = true;
     ftFx_Init_OnLoadForFalco(fp);
 
     sa2 = fp->dat_attrs;

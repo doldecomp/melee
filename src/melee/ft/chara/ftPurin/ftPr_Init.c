@@ -544,7 +544,7 @@ void ftPr_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PUSH_ATTRS(fp, ftPurinAttributes);
-    fp->x2222_b1 = 1;
+    fp->can_multijump = true;
     fp->x2D0 = fp->dat_attrs;
     ftPr_Init_8013C360(gobj);
 }

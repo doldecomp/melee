@@ -3056,7 +3056,7 @@ void ftKb_Init_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftKb_DatAttrs);
 
-    fp->x2222_b1 = true;
+    fp->can_multijump = true;
     fp->x2D0 = fp->dat_attrs;
     fp->fv.kb.hat.x8_b0 = Player_GetFlagsAEBit1(fp->player_id);
     it_8026B3F8(item_list[0], 50);

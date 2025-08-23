@@ -22,8 +22,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
 
-    // is a walljump character? is airborne?
-    if (fp0->x2224_b7) {
+    if (fp0->can_walljump) {
         CollData* coll_data = &fp0->coll_data;
         if ((fp0->coll_data.env_flags & MPCOLL_FLAGS_B11) ||
             (coll_data->env_flags & MPCOLL_FLAGS_B05))
