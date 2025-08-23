@@ -76,7 +76,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
     fp->fv.ca.during_specials = false;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->x21F4 = ftCa_SpecialS_OnDetect;
+    fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
 
     resetVel(fp);
 
@@ -109,7 +109,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     fp->fv.ca.during_specials = false;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->x21F4 = ftCa_SpecialS_OnDetect;
+    fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
     {
         /// @todo Too much stack for #resetVel.
         Vec3* vel = &fp->self_vel;

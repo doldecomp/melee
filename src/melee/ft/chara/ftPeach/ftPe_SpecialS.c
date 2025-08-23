@@ -281,7 +281,7 @@ static void enterAirJump(Fighter_GObj* gobj)
                               0, NULL);
     fp = gobj->user_data;
     fp->x21F8 = ftCommon_8007F76C;
-    fp->x21F4 = doAirEnd0;
+    fp->hurtbox_detect_cb = doAirEnd0;
 }
 
 void ftPe_SpecialSEnd_Anim(HSD_GObj* gobj)

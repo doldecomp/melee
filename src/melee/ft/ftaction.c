@@ -275,8 +275,7 @@ void ftAction_80071028(Fighter_GObj* gobj, FtCmdState* cmd)
     float unk;
     // permuter jank?
     FtCmdState* new_var;
-    // if !invisible
-    if (!fp->x221E_b0) {
+    if (!fp->invisible) {
         if (gmScriptEventCast(cmd->x8, struct test1)->useUnkBone) {
             bone = fp->ft_data->x8->x12;
         } else {

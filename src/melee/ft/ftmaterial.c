@@ -251,7 +251,7 @@ void ftMaterial_800BFD04(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Sleep, Ft_MF_None, 0, 1, 0, NULL);
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     fp->x221E_b1 = true;
     fp->x221E_b2 = true;
     fp->x2219_b1 = true;

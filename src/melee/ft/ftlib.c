@@ -420,7 +420,7 @@ bool ftLib_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
         return true;
     }
 
-    if (fp->x221E_b0 || fp->x221E_b5 ||
+    if (fp->invisible || fp->x221E_b5 ||
         (!fp->x221E_b3 && fp->item_gobj == arg1) ||
         (!fp->x221E_b4 && (fp->x197C == arg1 || fp->x1980 == arg1)))
     {
@@ -655,7 +655,7 @@ bool ftLib_80086EC0(HSD_GObj* gobj)
 bool ftLib_80086ED0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221E_b0 || fp->x221E_b2 ||
+    if (fp->invisible || fp->x221E_b2 ||
         Player_GetMoreFlagsBit4(fp->player_id) || fp->x2228_b2 ||
         fp->x2229_b3 || fp->x2220_b7)
     {
@@ -678,7 +678,7 @@ bool ftLib_80086F4C(HSD_GObj* gobj)
 float ftLib_80086F80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x221E_b0) {
+    if (fp->invisible) {
         return fp->ft_data->x0->xFC;
     }
 

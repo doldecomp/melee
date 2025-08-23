@@ -351,7 +351,7 @@ void ftCa_Init_OnLoadForGanon(Fighter* fp)
 void ftCa_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2224_b7 = true;
+    fp->can_walljump = true;
     PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 

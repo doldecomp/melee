@@ -1075,7 +1075,7 @@ void ftCo_800D3680(Fighter_GObj* gobj)
 
     temp_r27_2 = gobj->user_data;
     temp_r28_2 = temp_r27_2->ft_data->x4C_sfx;
-    temp_r27_2->x221E_b0 = 1;
+    temp_r27_2->invisible = true;
     temp_r27_2->x221F_b1 = 1;
     Camera_80030E44(4, &temp_r27_2->cur_pos);
     ftCo_800D35FC(temp_r27_2);

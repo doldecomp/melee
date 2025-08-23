@@ -342,7 +342,7 @@ void ftPc_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* ftdata = fp->ft_data;
     void** items = ftdata->x48_items;
-    fp->x2224_b7 = true;
+    fp->can_walljump = true;
     ftPk_Init_OnLoadForPichu(fp);
 
     {

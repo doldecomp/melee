@@ -59,7 +59,7 @@ bool ftCo_800C3A14(Fighter_GObj* gobj)
 bool ftCo_800C3B10(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2228_b6) {
+    if (fp->used_tether) {
         return false;
     }
     if (fp->kind != FTKIND_LINK && fp->kind != FTKIND_CLINK &&
@@ -77,7 +77,7 @@ bool ftCo_800C3B10(Fighter_GObj* gobj)
     }
     if (fp->input.held_inputs & HSD_PAD_LR && fp->input.x668 & HSD_PAD_A) {
         ftCo_800C3BE8(gobj);
-        fp->x2228_b6 = true;
+        fp->used_tether = true;
         return true;
     }
     return false;

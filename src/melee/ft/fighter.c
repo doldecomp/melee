@@ -277,10 +277,10 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x221D_b2 = 0;
     fp->x221E_b7 = 0;
     fp->x2220_b7 = 0;
-    fp->x2221_b4 = 0;
-    fp->x2221_b5 = 0;
-    fp->x2221_b6 = 1;
-    fp->x2221_b7 = 0;
+    fp->x2221_b4 = false;
+    fp->x2221_b5 = false;
+    fp->x2221_b6 = true;
+    fp->x2221_b7 = false;
 
     fp->x61D = 255;
 
@@ -443,9 +443,9 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->shield_unk1 = 0;
     fp->x19BC_shieldDamageTaken3 = 6;
 
-    fp->x221F_b6 = 0;
-    fp->x2218_b3 = 0;
-    fp->x2218_b4 = 0;
+    fp->x221F_b6 = false;
+    fp->reflecting = false;
+    fp->x2218_b4 = false;
     fp->ReflectAttr.x1A3C_damageOver = 0;
     fp->ReflectAttr.x1A2C_reflectHitDirection = 0;
     fp->x2218_b6 = false;
@@ -752,7 +752,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
     fp->x594_s32 = 0;
     fp->x21FC_flag.u8 = 1;
 
-    fp->x221E_b0 = 0;
+    fp->invisible = false;
     fp->x221E_b1 = 0;
     fp->x221E_b2 = 0;
     fp->x221F_b1 = 0;
@@ -772,7 +772,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x2221_b2 = 0;
 
-    fp->no_normal_motion = 0;
+    fp->no_normal_motion = false;
     fp->x2229_b6 = 0;
     fp->no_kb = 0;
 
@@ -780,12 +780,12 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
     fp->x222A_b1 = 0;
 
     fp->x2228_b5 = 0;
-    fp->x2228_b6 = 0;
+    fp->used_tether = false;
 
     fp->x2221_b3 = 0;
 
-    fp->x2222_b0 = 0;
-    fp->x2222_b1 = 0;
+    fp->x2222_b0 = false;
+    fp->can_multijump = false;
     fp->x2222_b4 = 0;
     fp->x2222_b5 = 0;
     fp->x2222_b6 = 0;
@@ -794,7 +794,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x40 = 0.0f;
 
-    fp->x2224_b7 = 0;
+    fp->can_walljump = false;
 
     fp->x60C = 0;
 
@@ -986,8 +986,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         ftAnim_80070654(gobj);
     }
 
-    if ((flags & Ft_MF_SkipParasol) == 0) {
-        fp->x2221_b4 = 0;
+    if (!(flags & Ft_MF_SkipParasol)) {
+        fp->x2221_b4 = false;
         if ((ftGetParasolStatus(gobj) != -1) &&
             (ftGetParasolStatus(gobj) != 6))
         {
@@ -1055,14 +1055,14 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     fp->shield_unk1 = 0.0f;
 
     fp->x221D_b5 = 0;
-    fp->x2218_b3 = 0;
+    fp->reflecting = false;
     fp->x2218_b6 = 0;
     fp->x221C_b4 = 0;
 
     fp->x1A6A = 0;
 
     fp->x221D_b7 = 0;
-    fp->x221E_b0 = 0;
+    fp->invisible = false;
     fp->x221E_b1 = 0;
     fp->x221E_b2 = 0;
     fp->x221F_b1 = 0;
@@ -1084,7 +1084,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     ftCo_800DEEA8(gobj);
 
     fp->smash_attrs.x2138_smashSinceHitbox = -1.0f;
-    fp->x2224_b4 = 0;
+    fp->x2224_b4 = false;
 
     if ((flags & Ft_MF_SkipItemVis) == 0) {
         fp->x221E_b3 = 1;
@@ -1137,7 +1137,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         fp->x2227_b5 = false;
         pl_80040330(fp->player_id, fp->x221F_b4, fp->x2140);
         fp->x2140 = 0;
-        fp->x2228_b6 = false;
+        fp->used_tether = false;
         fp->x2180 = 6;
     }
 
@@ -1378,20 +1378,20 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         fp->coll_cb = new_motion_state->coll_cb;
         fp->cam_cb = new_motion_state->cam_cb;
 
-        fp->accessory1_cb = 0;
-        fp->accessory4_cb = 0;
-        fp->deal_dmg_cb = 0;
-        fp->shield_hit_cb = 0;
-        fp->reflect_hit_cb = 0;
-        fp->hitlag_cb = 0;
-        fp->x21CC = 0;
-        fp->post_hitlag_cb = 0;
-        fp->pre_hitlag_cb = 0;
-        fp->take_dmg_cb = 0;
-        fp->take_dmg_2_cb = 0;
-        fp->x21F4 = 0;
-        fp->x21F8 = 0;
-        fp->death2_cb = 0;
+        fp->accessory1_cb = NULL;
+        fp->accessory4_cb = NULL;
+        fp->deal_dmg_cb = NULL;
+        fp->shield_hit_cb = NULL;
+        fp->reflect_hit_cb = NULL;
+        fp->hitlag_cb = NULL;
+        fp->x21CC = NULL;
+        fp->post_hitlag_cb = NULL;
+        fp->pre_hitlag_cb = NULL;
+        fp->take_dmg_cb = NULL;
+        fp->take_dmg_2_cb = NULL;
+        fp->hurtbox_detect_cb = NULL;
+        fp->x21F8 = NULL;
+        fp->death2_cb = NULL;
     }
 }
 
@@ -1584,12 +1584,12 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             if (fp->x2104) {
                 fp->x2104--;
                 if (fp->x2104 == 0) {
-                    fp->x2221_b4 = 0;
+                    fp->x2221_b4 = false;
 
                     if (fp->item_gobj &&
                         itGetKind(fp->item_gobj) == It_Kind_Peach_Parasol)
                     {
-                        fp->x2221_b5 = 1;
+                        fp->x2221_b5 = true;
                         ftCo_800968C8(gobj);
                     } else {
                         ftCo_80095744(gobj, 0);
@@ -2938,8 +2938,8 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
                     ftData_OnAbsorb[fp->kind](gobj);
                 }
             } else if (fp->unk_gobj != NULL) {
-                if (fp->x21F4) {
-                    fp->x21F4(gobj);
+                if (fp->hurtbox_detect_cb) {
+                    fp->hurtbox_detect_cb(gobj);
                 }
             }
         }

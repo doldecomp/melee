@@ -35,7 +35,7 @@
 void ftCo_800BBC88(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     ftColl_8007B62C(gobj, 2);
 }
 
@@ -103,7 +103,7 @@ void ftCo_800BBED4(Fighter_GObj* gobj, Fighter_GObj* arg1)
                                   arg1);
         fp->take_dmg_cb = ftCo_800BC438;
         ftCommon_8007E2F4(fp, 0x1FF);
-        fp->x221E_b0 = true;
+        fp->invisible = true;
         {
             Vec3 scale;
             scale.x = scale.y = scale.z = fp->co_attrs.xBC.size;

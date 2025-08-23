@@ -196,9 +196,9 @@ void ftMt_SpecialAirS_Phys(HSD_GObj* gobj)
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
-        fp->x2218_b3 = 1;
-        fp->x2218_b4 = 1;
+    if (fp->mv.mt.SpecialS.isConfusionReflect) {
+        fp->reflecting = true;
+        fp->x2218_b4 = true;
         fp->reflect_hit_cb = ftMt_SpecialS_OnReflect;
     }
 }
@@ -282,8 +282,8 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
 
     case CONFUSION_REFLECT_OFF:
         if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
-            fp->x2218_b3 = 0;
-            fp->x2218_b4 = 0;
+            fp->reflecting = false;
+            fp->x2218_b4 = false;
             fp->reflect_hit_cb = NULL;
             fp->mv.mt.SpecialS.isConfusionReflect = false;
         }

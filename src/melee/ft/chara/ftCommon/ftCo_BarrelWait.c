@@ -47,7 +47,7 @@ void ftCo_8009EB18(Fighter_GObj* gobj)
     fp->accessory1_cb = ftCo_8009EC44;
     ftCommon_8007E2FC(gobj);
     fp->x1988 = 2;
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     ftCommon_8007E2F4(fp, 0x1FF);
     setCamData(p_ftCommonData, fp->x890_cameraBox);
     ftCommon_8007EFC0(fp, 1);

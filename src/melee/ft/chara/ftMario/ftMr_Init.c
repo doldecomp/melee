@@ -178,7 +178,7 @@ void ftMr_Init_OnLoad(HSD_GObj* gobj)
     ftData* ftDataInfo = fp->ft_data;
     void** items = ftDataInfo->x48_items;
 
-    fp->x2224_b7 = true;
+    fp->can_walljump = true;
 
     PUSH_ATTRS(fp, ftMario_DatAttrs);
 

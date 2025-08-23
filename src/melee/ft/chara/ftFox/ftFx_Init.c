@@ -490,7 +490,7 @@ void ftFx_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     void** item_list = fp->ft_data->x48_items;
 
-    fp->x2224_b7 = 1;
+    fp->can_walljump = true;
 
     PUSH_ATTRS(fp, ftFox_DatAttrs);
 
