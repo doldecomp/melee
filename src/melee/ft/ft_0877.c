@@ -183,8 +183,8 @@ bool ft_80087AEC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x34_scale.y != fp->x34_scale.x) ||
-        ((fp->x2226_b4) || (fp->x2223_b7) || (fp->x197C != 0)))
+    if (fp->x34_scale.y != fp->x34_scale.x ||
+        fp->x2226_b4 || fp->is_metal || fp->x197C != NULL)
     {
         return true;
     }
@@ -337,7 +337,7 @@ s32 ft_80087D0C(Fighter* fighter, s32 sfx_id)
         case 383:
         case 371:
             sfx_id = ft_80087C70(fighter, sfx);
-            if (fighter->x2223_b7) {
+            if (fighter->is_metal) {
                 sfx_id += 3;
             }
             sfx = sfx_id;

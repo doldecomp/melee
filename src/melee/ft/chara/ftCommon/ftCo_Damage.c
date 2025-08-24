@@ -135,8 +135,8 @@ not_squatwait:
     {
         float armor =
             fp->dmg.armor0 > fp->dmg.armor1 ? fp->dmg.armor0 : fp->dmg.armor1;
-        if (fp->x2223_b7) {
-            armor += p_ftCommonData->unk_armor;
+        if (fp->is_metal) {
+            armor += p_ftCommonData->metal_armor;
         }
         fp->dmg.kb_applied -= armor;
         if (fp->dmg.kb_applied < p_ftCommonData->kb_min) {

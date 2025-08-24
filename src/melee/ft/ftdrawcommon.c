@@ -278,9 +278,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         if (!fighter->invisible && !fighter->x221E_b5 && arg2 != 0) {
             ftParts_800750C8(fighter, 1, 0);
             ftParts_800750C8(fighter, 4, 0);
-            if ((fighter->x2223_b7 != 0) || (fighter->x2226_b5 != 0) ||
-                (fighter->x2227_b3 != 0))
-            {
+            if (fighter->is_metal || fighter->x2226_b5 || fighter->x2227_b3) {
                 ftParts_800750C8(fighter, 0, 0);
                 ftParts_800750C8(fighter, 2, 1);
             } else {

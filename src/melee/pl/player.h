@@ -109,7 +109,7 @@ typedef struct _StaticPlayer {
         u8 b2 : 1;
         u8 b3 : 1;
         u8 b4 : 1;
-        u8 b5 : 1;
+        u8 is_metal : 1;
         u8 b6 : 1;
         u8 b7 : 1;
     } flags;
@@ -264,8 +264,8 @@ void Player_UnsetFlagsBit1(int slot);
 s32 Player_GetFlagsBit3(s32 slot);
 void Player_SetFlagsBit3(s32 slot, u8 bit3);
 int Player_GetFlagsBit4(int slot);
-u8 Player_GetFlagsBit5(s32 slot);
-void Player_SetFlagsBit5(s32 slot, u8 bit5);
+u8 Player_GetFlagsBit5(s32 slot); ///< player is metal
+void Player_SetFlagsBit5(s32 slot, u8 is_metal); ///< player is metal
 u8 Player_GetFlagsBit6(s32 slot);
 void Player_SetFlagsBit6(s32 slot, u8 bit6);
 u8 Player_GetFlagsBit7(s32 slot);

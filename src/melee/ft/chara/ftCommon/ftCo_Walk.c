@@ -57,7 +57,7 @@ void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8)
     f32 accel_mul = 1.0F;
     float* anim_vars = &fp->x2DC;
 
-    if (fp->x2223_b7) {
+    if (fp->is_metal) {
         accel_mul = *Fighter_804D651C;
     }
 
