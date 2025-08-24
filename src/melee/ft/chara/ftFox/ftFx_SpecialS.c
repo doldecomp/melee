@@ -92,7 +92,7 @@ void ftFx_SpecialSStart_Enter(HSD_GObj* gobj)
     da = fp->dat_attrs;
 
     fp->cmd_vars[2] = 0;
-    fp->mv.fx.SpecialS.gravityDelay = (s32) da->x24_FOX_ILLUSION_GRAVITY_DELAY;
+    fp->mv.fx.SpecialS.gravityDelay = da->x24_FOX_ILLUSION_GRAVITY_DELAY;
     fp->mv.fx.SpecialS.ghostGObj = NULL;
 
     fp->gr_vel /= da->x28_FOX_ILLUSION_GROUND_VEL_X;
@@ -114,7 +114,7 @@ void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj)
     da = getFtSpecialAttrs(fp);
 
     fp->cmd_vars[2] = 0;
-    fp->mv.fx.SpecialS.gravityDelay = (s32) da->x24_FOX_ILLUSION_GRAVITY_DELAY;
+    fp->mv.fx.SpecialS.gravityDelay = da->x24_FOX_ILLUSION_GRAVITY_DELAY;
     fp->mv.fx.SpecialS.ghostGObj = NULL;
 
     fp->self_vel.y = 0.0f;
@@ -215,7 +215,7 @@ void ftFx_SpecialAirSStart_Coll(HSD_GObj* gobj)
         cliffCatchDir = 1;
     }
 
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
         ftFx_SpecialAirSStart_AirToGround(gobj);
         return;
     }
@@ -256,9 +256,9 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* ghostGObj;
 
-    if ((u32) fp->cmd_vars[2] == 1U) {
-        fp->cmd_vars[2] = 0U;
-        if ((s32) fp->kind == FTKIND_FOX) {
+    if (fp->cmd_vars[2] == 1) {
+        fp->cmd_vars[2] = 0;
+        if (fp->kind == FTKIND_FOX) {
             ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x38, fp->facing_dir);
         } else {
             ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x39, fp->facing_dir);
@@ -303,8 +303,8 @@ void ftFx_SpecialS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_PAD_B) != false) {
-        if ((s32) fp->ground_or_air == GA_Air) {
+    if ((fp->input.x668 & HSD_PAD_B)) {
+        if (fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;
         } else {
@@ -320,8 +320,8 @@ void ftFx_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->input.x668 & HSD_PAD_B) != false) {
-        if ((s32) fp->ground_or_air == GA_Air) {
+    if ((fp->input.x668 & HSD_PAD_B)) {
+        if (fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirSEnd_Enter(gobj);
             return;
         } else {
@@ -394,7 +394,7 @@ void ftFx_SpecialAirS_Coll(HSD_GObj* gobj)
     } else {
         cliffCatchDir = 1;
     }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
         ftFx_SpecialAirS_AirToGround(gobj);
         return;
     }
@@ -581,7 +581,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     } else {
         cliffCatchDir = 1;
     }
-    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
         ftCo_800D5CB0(gobj, 0, da->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }
