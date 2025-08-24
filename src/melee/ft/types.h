@@ -1286,11 +1286,17 @@ struct Fighter {
     /* fp+119E */ u8 hurt_capsules_len;
     /* fp+119F */ u8 x119F;
     /* fp+11A0 */ FighterHurtCapsule hurt_capsules[15];
-    /* fp+1614 */ UNK_T x1614;
-    /* fp+1618 */ u8 filler_x1618[0x166C - 0x1618];
-    /* fp+166C */ u8 x166C;
-    /* fp+1670 */ UNK_T x1670;
-    /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1674];
+    /* fp+1614 */ struct {
+        u8 pad[0x2C];
+    } x1614[2];
+    /* fp+166C */ u8 x166C; ///< number of valid entries in x1670 array
+    /* fp+1670 */ struct Fighter_x1670_t {
+        /* +00 */ Vec3 v1;
+        /* +0C */ float v2;
+        /* +10 */ HSD_JObj* jobj;
+        /* +14 */ u8 pad[0x28 - 0x14];
+    } x1670[1]; ///< @todo figure out proper size
+    /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1670 - 0x28];
     /* fp+1828 */ enum_t x1828;
     /* fp+182C */ struct dmg {
         /* fp+182C */ float x182c_behavior;

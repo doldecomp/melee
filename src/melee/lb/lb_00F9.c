@@ -300,7 +300,7 @@ void lb_80011710(DynamicsDesc* arg0, DynamicsDesc* arg1)
     }
 }
 
-bool lb_800117F4(DynamicsDesc* arg0, GXColor* arg1, UNK_T arg2, int arg3,
+bool lb_800117F4(DynamicsDesc* arg0, GXColor* arg1, GXColor* arg2, int arg3,
                  u32 arg4)
 {
     Mtx view_mtx;
@@ -312,12 +312,9 @@ bool lb_800117F4(DynamicsDesc* arg0, GXColor* arg1, UNK_T arg2, int arg3,
         if (arg4 != 2) {
             return false;
         }
-        goto block_5;
-    }
-    if (arg4 != 0) {
+    } else if (arg4 != 0) {
         return false;
     }
-block_5:
     HSD_StateInitDirect(0, 2);
     HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), &view_mtx[0]);
     GXLoadPosMtxImm(&view_mtx[0], 0);
