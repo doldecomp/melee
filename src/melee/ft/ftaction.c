@@ -1382,17 +1382,17 @@ void ftAction_80072FE0(Fighter_GObj* gobj, FtCmdState* cmd)
 
 void ftAction_80073008(Fighter_GObj* gobj, FtCmdState* cmd)
 {
+    char* temp_r6;
     char* temp_r8 = cmd->x8;
     u32 temp_r8_2 = M2C_FIELD(temp_r8, u16*, 0) & 0x3FF;
+    int temp_r5;
+
     cmd->x8 = temp_r8 + 4;
-    {
-        char* temp_r6 = cmd->x8;
-        u8 temp_r5 = (u8) M2C_FIELD(temp_r6, s8*, 0);
-        cmd->x8 = temp_r6 + 4;
-        ftCo_800DEE84((int) (float) temp_r5, temp_r5, temp_r6, temp_r8_2,
-                      (float) temp_r8_2,
-                      0.003906f * (float) M2C_FIELD(temp_r8, u16*, 2));
-    }
+    temp_r6 = cmd->x8;
+    temp_r5 = *temp_r6;
+    cmd->x8 = temp_r6 + 4;
+
+    ftCo_800DEE84(gobj, (f32) temp_r5, (char*) temp_r5, (u32) temp_r6, temp_r8_2, 0.003906f * M2C_FIELD(temp_r8, u16*, 2));
 }
 
 void ftAction_8007309C(Fighter_GObj* gobj, FtCmdState* cmd)

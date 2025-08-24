@@ -156,6 +156,14 @@ union ftCommon_MotionVars {
         /* fp+2340 */ bool x0; // itemget action is heavy type?
     } itemget;
     struct {
+        /* fp+2340 */ UNK_T x0;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ float x8;
+        /* fp+234C */ HSD_GObj* victim;
+        /* fp+2350 */ float self_vel_y;
+        /* fp+2354 */ float self_vel_x;
+    } fighterthrow;
+    struct {
         /* fp+2340 */ float facing_dir;
         /* fp+2344 */ float x4;
         /* fp+2348 */ int x8;

@@ -528,7 +528,7 @@ struct ftCommonData {
     /* +7BC */ float x7BC;
     /* +7C0 */ float x7C0;
     /* +7C4 */ float kb_smashcharge_mul;
-    /* +7C8 */ int x7C8;
+    /* +7C8 */ float x7C8;
     /* +7CC */ int x7CC;
     /* +7D0 */ int x7D0;
     /* +7D4 */ float hit_weight_mul;
@@ -539,7 +539,9 @@ struct ftCommonData {
     /* +7E8 */ u32 unk_kb_angle_min;
     /* +7EC */ u32 unk_kb_angle_max;
     /* +7F0 */ int x7F0;
-    /* +7F4 */ u8 x7F4[0x800 - 0x7F4];
+    /* +7F4 */ float x7F4;
+    /* +7F8 */ float x7F8;
+    /* +7FC */ float x7FC;
     /* +800 */ float x800;
     /* +804 */ u8 x804[4];
     /* +804 */ Vec3 x808;
@@ -794,8 +796,8 @@ STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
     /// speed multiplier?
     /* fp+2124 */ float x2124_frameSpeedMul;
     /* fp+2128 */ s32 x2128;
-    /* fp+212C */ s8 x212C;
-    /* fp+212D */ s8 x212D;
+    /* fp+212C */ u8 x212C;
+    /* fp+212D */ u8 x212D;
     /* fp+212E */ s8 x212E;
     /* fp+212F */ s8 x212F;
     /// bool for smash sfx?
