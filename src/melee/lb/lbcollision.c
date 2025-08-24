@@ -9,6 +9,7 @@
 
 #include "lb/forward.h"
 
+#include "ft/types.h"
 #include "lb/types.h"
 
 #include <math.h>
@@ -2080,7 +2081,7 @@ GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
 extern char lbColl_804D3700[8];
 extern char lbColl_804D3708[8];
 
-bool lbColl_8000A460(Foo* hurt, u32 arg1)
+bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1)
 {
     u32 var_r0;
 

@@ -4,17 +4,12 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
-
-typedef struct {
-    Vec3 v1;
-    float v2;
-    HSD_JObj* jobj;
-} Foo;
 
 typedef struct {
     /*  +0 */ HitCapsuleState state;
@@ -75,7 +70,7 @@ typedef struct {
 /* 00A1A8 */ bool lbColl_8000A1A8(UNK_T, int, float scale_y);
 /* 00A244 */ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2,
                                   float arg3);
-/* 00A460 */ bool lbColl_8000A460(Foo* hurt, u32 arg1);
+/* 00A460 */ bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1);
 /* 00A584 */ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2,
                                   MtxPtr arg3, float arg8);
 /* 00A78C */ bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2,
