@@ -1563,9 +1563,9 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     tmp->FighterMatchInfo[arg0].x4_b1 = arg1->xC_b3;
     tmp->FighterMatchInfo[arg0].x4_b0 = arg1->xC_b2;
     if (arg1->xC_b2) {
-        Player_SetFlagsBit5(arg0, 1);
+        Player_SetFlagsBit5(arg0, true);
     } else {
-        Player_SetFlagsBit5(arg0, 0);
+        Player_SetFlagsBit5(arg0, false);
     }
     tmp->FighterMatchInfo[arg0].x4_b2 = arg1->xC_b4;
     if (arg1->xC_b4) {

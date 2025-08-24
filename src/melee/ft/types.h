@@ -489,7 +489,7 @@ struct ftCommonData {
     /* +6D8 */ void* x6D8[1];
     /* +6DC */ GXColor x6DC_colorsByPlayer[4];
     /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
-    /* +6F0 */ float unk_armor;
+    /* +6F0 */ float metal_armor;
     /* +6F4 */ int x6F4_unkDamage;
     /* +6F8 */ int x6F8;
     /* +6FC */ int x6FC;
@@ -640,6 +640,7 @@ struct ftData {
     /* +50 */ u8 x50[0x54 - 0x50];
     /* +54 */ int x54;
     /* +58 */ void* x58;
+    /* +5C */ HSD_Joint* x5C;
 };
 
 typedef struct _ThrowFlags {
@@ -761,8 +762,17 @@ struct FighterBone {
     /* +8:5 */ u8 flags_b5 : 1;
     /* +8:6 */ u8 flags_b6 : 1;
     /* +8:7 */ u8 flags_b7 : 1;
-    /* +9 */ u8 x9_pad[3];
+    /* +9:0 */ u8 flags2_b0 : 1;
+    /* +9:1 */ u8 flags2_b1 : 1;
+    /* +9:2 */ u8 flags2_b2 : 1;
+    /* +9:3 */ u8 flags2_b3 : 1;
+    /* +9:4 */ u8 flags2_b4 : 1;
+    /* +9:5 */ u8 flags2_b5 : 1;
+    /* +9:6 */ u8 flags2_b6 : 1;
+    /* +9:7 */ u8 flags2_b7 : 1;
+    /* +A */ u8 xA_pad[2];
     /* +C */ u8 xC;
+    /* +C */ u8 xD : 7;
 };
 STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
 
@@ -1427,13 +1437,13 @@ struct Fighter {
     /* fp+2021 */ s8 x2021;
     /* fp+2022 */ s8 x2022;
     /* fp+2024 */ s32 x2024;
-    /* fp+2028 */ s32 x2028;
-    /* fp+202C */ s32 x202C;
+    /* fp+2028 */ int metal_timer;
+    /* fp+202C */ int metal_health;
     /* fp+2030 */ s32 x2030;
     /* fp+2034 */ s32 x2034;
     /* fp+2038 */ s32 x2038;
     /* fp+203C */ s32 x203C;
-    /* fp+2040 */ void* x2040;
+    /* fp+2040 */ HSD_DObj** x2040;
     /* fp+203C */ u8 filler_x203C[0x2064 - 0x2044];
     /* fp+2064 */ int x2064_ledgeCooldown;
     /* fp+2068 */ s32 x2068_attackID;
@@ -1651,8 +1661,8 @@ struct Fighter {
     /* fp+2223:3 */ u8 x2223_b3 : 1;
     /* fp+2223:4 */ u8 x2223_b4 : 1;
     /* fp+2223:5 */ u8 x2223_b5 : 1;
-    /* fp+2223:6 */ u8 x2223_b6 : 1;
-    /* fp+2223:7 */ u8 x2223_b7 : 1;
+    /* fp+2223:6 */ u8 is_always_metal : 1; ///< e.g. classic metal mario
+    /* fp+2223:7 */ u8 is_metal : 1;
 
     /* fp+2224:0 */ u8 x2224_b0 : 1;
     /* fp+2224:1 */ u8 x2224_b1 : 1;

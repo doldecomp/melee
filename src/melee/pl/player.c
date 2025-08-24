@@ -1571,19 +1571,19 @@ int Player_GetFlagsBit4(int slot)
 u8 Player_GetFlagsBit5(s32 slot)
 {
     StaticPlayer* player;
-    u8 bit5;
+    u8 is_metal;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    bit5 = player->flags.b5;
-    return bit5;
+    is_metal = player->flags.is_metal;
+    return is_metal;
 }
 
-void Player_SetFlagsBit5(s32 slot, u8 bit5)
+void Player_SetFlagsBit5(s32 slot, u8 is_metal)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player->flags.b5 = bit5;
+    player->flags.is_metal = is_metal;
 }
 
 u8 Player_GetFlagsBit6(s32 slot)
@@ -1998,7 +1998,7 @@ void Player_InitOrResetPlayer(s32 slot)
     player->flags.b2 = 0;
     player->flags.b3 = 0;
     player->flags.b4 = 0;
-    player->flags.b5 = 0;
+    player->flags.is_metal = false;
     player->flags.b6 = 0;
     player->flags.b7 = 0;
 

@@ -475,9 +475,10 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->death3_cb = NULL;
     fp->x221E_b4 = true;
     fp->x197C = 0;
-    fp->x2223_b7 = false;
-    fp->x2028 = 0;
-    fp->x202C = 0;
+
+    fp->is_metal = false;
+    fp->metal_timer = 0;
+    fp->metal_health = 0;
 
     ftCo_800C88A0(fp);
 
@@ -699,7 +700,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
     fp->x61C = argdata->unk5;
     fp->x618_player_id = Player_GetPlayerId(fp->player_id);
     fp->x61A_controller_index = Player_GetControllerIndex(fp->player_id);
-    fp->x2223_b6 = Player_GetFlagsBit5(fp->player_id);
+    fp->is_always_metal = Player_GetFlagsBit5(fp->player_id);
     fp->x2226_b3 = Player_GetFlagsBit6(fp->player_id);
     fp->x2226_b6 = Player_GetFlagsBit7(fp->player_id);
     fp->x2225_b5 = Player_GetMoreFlagsBit1(fp->player_id);
@@ -1527,12 +1528,11 @@ void Fighter_8006A360(Fighter_GObj* gobj)
             }
         }
 
-        if (fp->x2223_b7) {
-            if (fp->x2028) {
-                fp->x2028--;
-                if (!fp->x2028 || fp->x202C <= 0) {
-                    ftCo_800C8540(gobj);
-                }
+        if (fp->is_metal && fp->metal_timer != 0) {
+            fp->metal_timer--;
+            if (fp->metal_timer == 0 || fp->metal_health <= 0) {
+                // Exit fighter metal mode
+                ftCo_800C8540(gobj);
             }
         }
 
@@ -2634,8 +2634,8 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
 {
     if (!fp->x2226_b4 || fp->x2226_b3) {
         fp->dmg.x1830_percent += damage_amount;
-        if (fp->x2028) {
-            fp->x202C -= damage_amount;
+        if (fp->metal_timer != 0) {
+            fp->metal_health -= damage_amount;
         }
 
         if (fp->x2034) {

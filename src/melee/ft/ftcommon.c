@@ -1441,8 +1441,8 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x2220_b6 = src->x2220_b6;
     dst->x2008 = src->x2008;
     ftLib_SetScale(dst_gobj, src->x34_scale.y);
-    if (src->x2223_b7) {
-        ftCo_800C8348(dst_gobj, src->x2028, src->x202C);
+    if (src->is_metal) {
+        ftCo_800C8348(dst_gobj, src->metal_timer, src->metal_health);
         ftCo_800C8540(gobj);
     }
     if (src->x2226_b4) {

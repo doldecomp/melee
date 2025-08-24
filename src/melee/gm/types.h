@@ -436,7 +436,7 @@ struct lbl_8046B6A0_t {
         u8 x1;
         u8 slot_type;
         s8 spawn_point;
-        u8 x4_b0 : 1;
+        u8 x4_b0 : 1; ///< metal
         u8 x4_b1 : 1;
         u8 x4_b2 : 1; ///< invisible
         u8 x4_b3 : 1;

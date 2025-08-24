@@ -979,7 +979,7 @@ void ftCo_800D331C(Fighter_GObj* gobj)
         Item_8026A8EC(fp->x1980);
         ftCommon_8007FF74(gobj);
     }
-    if (fp->x2223_b7) {
+    if (fp->is_metal) {
         ftCo_800C8540(gobj);
     }
     if (fp->x2226_b4) {

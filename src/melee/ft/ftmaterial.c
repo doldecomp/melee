@@ -49,7 +49,7 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     }
 
     if (!fp->x2223_b2 && (!fp->x2228_b0 || !fp->x2224_b0)) {
-        if (fp->x2223_b7) {
+        if (fp->is_metal) {
             mobj = ft_804D6580;
         } else if (fp->x2227_b3) {
             mobj = ft_804D6588;

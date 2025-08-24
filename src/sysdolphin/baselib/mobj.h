@@ -68,6 +68,8 @@
 #define RENDER_NO_ZUPDATE (1 << 29)
 #define RENDER_XLU (1 << 30)
 
+#define RENDER_BLENDING (RENDER_XLU | RENDER_NO_ZUPDATE)
+
 struct HSD_MObj {
     HSD_Class parent;
     u32 rendermode;

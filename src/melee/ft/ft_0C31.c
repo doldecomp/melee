@@ -395,6 +395,7 @@ void ftCo_800C8064(void)
     ft_804D6580 = var_r0;
 }
 
+/// @todo maybe uses a shared inline with ftmetal functions?
 void ft_800C80A4(Fighter* fp)
 {
     size_t i;
