@@ -69,7 +69,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0B0858 */ UNK_RET ftCo_800B3958(UNK_PARAMS);
 
 /// @todo Static functions belong in #ftCo_0A01.c
-/* 09D044 */ static UNK_RET ftCo_800A0148(UNK_PARAMS);
+/* 09D044 */ static void ftCo_800A0148(Fighter*);
 /* 09D06C */ static UNK_RET ftCo_800AC7D4(UNK_PARAMS);
 /* 09D280 */ static void ftCo_800A0384(Fighter* fp);
 /* 09D3DC */ static UNK_RET ftCo_800ACB44(UNK_PARAMS);
@@ -124,7 +124,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A1FD0 */ static Fighter* ftCo_800A50D4(Fighter* fp);
 /* 0A2068 */ static UNK_RET ftCo_800B17D0(UNK_PARAMS);
 /* 0A2190 */ static Fighter* ftCo_800A5294(Fighter* fp, int player_id);
-/* 0A22D8 */ static UNK_RET ftCo_800A53DC(UNK_PARAMS);
+/* 0A22D8 */ static Fighter* ftCo_800A53DC(Fighter*);
 /* 0A2350 */ static UNK_RET ftCo_800B1AB8(UNK_PARAMS);
 /* 0A2788 */ static UNK_RET ftCo_800B1EF0(UNK_PARAMS);
 /* 0A2798 */ static Fighter* ftCo_800A589C(Fighter* fp);
@@ -133,9 +133,9 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A2D50 */ static UNK_RET ftCo_800B24B8(UNK_PARAMS);
 /* 0A3028 */ static void ftCo_800B2790(Fighter* fp);
 /* 0A3C48 */ static void ftCo_800B33B0(Fighter* fp);
-/* 0A5ACC */ static UNK_RET ftCo_800A5ACC(UNK_PARAMS);
-/* 0A5CE0 */ static UNK_T ftCo_800A5CE0(Fighter* fp);
-/* 0A5F4C */ static struct Fighter_x1A88_t* ftCo_800A5F4C(Fighter* fp, int);
+/* 0A5ACC */ static bool ftCo_800A5ACC(Fighter*);
+/* 0A5CE0 */ static Fighter* ftCo_800A5CE0(Fighter* fp);
+/* 0A5F4C */ static Item* ftCo_800A5F4C(Fighter* fp, ItemKind);
 /* 0A61D8 */ static UNK_RET ftCo_800A61D8(UNK_PARAMS);
 /* 0A648C */ static int ftCo_800A648C(Fighter* fp);
 /* 0A6700 */ static bool ftCo_800A6700(Fighter* fp, Vec3*, Vec3*);
@@ -149,11 +149,11 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A866C */ static UNK_RET ftCo_800A866C(UNK_PARAMS);
 /* 0A8940 */ static void ftCo_800A8940(Fighter* fp);
 /* 0A8DE4 */ static void ftCo_800A8DE4(Fighter* fp);
-/* 0A8EB0 */ static UNK_RET ftCo_800A8EB0(UNK_PARAMS);
+/* 0A8EB0 */ static void ftCo_800A8EB0(Fighter*);
 /* 0A92CC */ static void ftCo_800A92CC(Fighter* fp);
 /* 0A949C */ static void ftCo_800A949C(Fighter* fp);
 /* 0A963C */ static void ftCo_800A963C(Fighter* fp);
-/* 0A96B8 */ static UNK_RET ftCo_800A96B8(UNK_PARAMS);
+/* 0A96B8 */ static void ftCo_800A96B8(Fighter*);
 /* 0A9904 */ static UNK_RET ftCo_800A9904(UNK_PARAMS);
 /* 0A9CB4 */ static void ftCo_800A9CB4(Fighter* fp);
 /* 0AA320 */ static void ftCo_800AA320(Fighter* fp, int*, int*);
