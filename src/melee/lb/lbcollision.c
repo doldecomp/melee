@@ -60,7 +60,7 @@ int lbColl_803B9880[] = {
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
 extern struct unk {
-    u8* pad;
+    GXColor* pad;
     GXColor* pad_x;
 } lbColl_803B9928[];
 
@@ -1889,7 +1889,7 @@ bool lbColl_80008820(HitCapsule* capsule, int type, void* victim)
 
 GXColor const lbColl_804D7A50 = { 0 };
 
-extern u8 lbColl_804D36CC[4];
+extern GXColor lbColl_804D36CC;
 extern GXColor lbColl_804D36D0;
 
 void lbColl_800089B8(HitCapsule* hit, UNK_T arg1)
@@ -2031,14 +2031,14 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
         MtxPtr var_r28;
         u32 var_r0;
         u32 var_r4;
-        u8* temp_r3;
+        GXColor* temp_r3;
 
         var_r4 = arg1;
         if (hurt->state == Intangible) {
             var_r4 = 2;
         }
         temp_r3 = lbColl_803B9928[var_r4].pad;
-        if (temp_r3[3] == 0xFF) {
+        if (temp_r3->a == 0xFF) {
             var_r0 = 0;
         } else {
             var_r0 = 2;
@@ -2076,7 +2076,7 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
     }
 }
 
-u8 lbColl_804D36E0[4] = { 0 };
+GXColor lbColl_804D36E0 = { 0 };
 GXColor lbColl_804D36E4 = { 0x80, 0x40, 0x00, 0x80 };
 extern char lbColl_804D3700[8];
 extern char lbColl_804D3708[8];
@@ -2085,10 +2085,10 @@ bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1)
 {
     u32 var_r0;
 
-    u8* r31 = lbColl_804D36E0;
+    GXColor* r31 = &lbColl_804D36E0;
     GXColor* r30 = &lbColl_804D36E4;
 
-    if (r31[3] == 0xFF) {
+    if (r31->a == 0xFF) {
         var_r0 = 0;
     } else {
         var_r0 = 2;
@@ -2114,10 +2114,10 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
     MtxPtr var_r28;
     GXColor* temp_r31_2;
     u32 var_r0;
-    u8* temp_r3;
+    GXColor* temp_r3;
 
     temp_r3 = lbColl_803B9928[hurt->state].pad;
-    if (temp_r3[3] == 0xFF) {
+    if (temp_r3->a == 0xFF) {
         var_r0 = 0;
     } else {
         var_r0 = 2;
@@ -2165,7 +2165,7 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
     MtxPtr var_r31;
     u32 var_r0;
 
-    if (lbColl_804D36CC[3] == 0xFF) {
+    if (lbColl_804D36CC.a == 0xFF) {
         var_r0 = 0;
     } else {
         var_r0 = 2;
@@ -2192,7 +2192,7 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
         HSD_MtxInverse(var_r31, sp3C);
         PSMTXMultVec(sp3C, &sp90, &sp24);
         PSMTXMultVec(sp3C, &sp84, &sp30);
-        lbColl_800096B4(var_r31, sp24, sp30, lbColl_804D36CC, &lbColl_804D36D0,
+        lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36CC, &lbColl_804D36D0,
                         temp_f31);
         return 1;
     }

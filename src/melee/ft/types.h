@@ -793,7 +793,7 @@ STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
     /* fp+212F */ s8 x212F;
     /// bool for smash sfx?
     /* fp+2130 */ s32 x2130_sfxBool;
-    /* fp+2134 */ s8 x2134_vibrateFrame;
+    /* fp+2134 */ u8 x2134_vibrateFrame;
     /* fp+2135 */ s8 x2135;
     /* fp+2136 */ s8 x2136;
     /* fp+2137 */ s8 x2137;
@@ -975,7 +975,9 @@ struct Fighter_x1A88_t {
     /*  +18 */ int x18;
     /*  +1C */ int x1C;
     /*  +20 */ int x20;
-    /*  +24 */ u8 x24[0x34 - 0x24];
+    /*  +24 */ u8 x24[0x2C - 0x24];
+    /*  +2C */ int x2C;
+    /*  +30 */ float x30;
     /*  +34 */ float x34;
     /*  +38 */ float x38;
     /*  +3C */ UNK_T x3C;
@@ -988,7 +990,8 @@ struct Fighter_x1A88_t {
     /*  +5C */ float x5C;
     /*  +60 */ int x60;
     /*  +64 */ Vec2 x64;
-    /*  +64 */ u8 x6C[0x7C - 0x6C];
+    /*  +6C */ Vec2 x6C;
+    /*  +74 */ Vec2 x74;
     /*  +7C */ int x7C;
     /*  +80 */ u8 x80[0xF8 - 0x80];
     /*  +F8:0 */ u8 xF8_b0 : 1;
@@ -1010,8 +1013,7 @@ struct Fighter_x1A88_t {
     /*  +FA:0 */ u8 xFA_b0 : 1;
     /*  +FA:1 */ u8 xFA_b1 : 1;
     /*  +FA:2 */ u8 xFA_b2 : 1;
-    /*  +FA:3 */ u8 xFA_b3 : 1;
-    /*  +FA:4 */ u8 xFA_b4 : 1;
+    /*  +FA:3 */ u8 xFA_b34 : 2;
     /*  +FA:5 */ u8 xFA_b5 : 1;
     /*  +FA:6 */ u8 xFA_b6 : 1;
     /*  +FA:7 */ u8 xFA_b7 : 1;
@@ -1038,7 +1040,9 @@ struct Fighter_x1A88_t {
         void* x0_p;
     } x554;
     /* +558 */ float x558;
-    /* +558 */ u8 x55C[0x568 - 0x55C];
+    /* +55C */ float x55C;
+    /* +560 */ float x560;
+    /* +564 */ float x564;
     /* +568 */ float x568;
     /* +56C */ float x56C;
     /* +570 */ UNK_T x570;
