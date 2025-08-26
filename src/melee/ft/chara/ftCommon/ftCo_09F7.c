@@ -1,6 +1,6 @@
 #include "ftCo_09F7.h"
 
-#include "ftCo_0B3E.h"
+#include <melee/ft/ftcmdscript.h>
 
 #include <placeholder.h>
 

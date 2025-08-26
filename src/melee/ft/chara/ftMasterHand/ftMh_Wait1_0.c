@@ -220,7 +220,7 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
 
             u8 _[20];
 
-            ftBossLib_8015BD24(fp->x1A88.x10, &fp->fv.mh.x223C,
+            ftBossLib_8015BD24(fp->x1A88.level, &fp->fv.mh.x223C,
                                fp->fv.mh.x2238, da->x18, da->x20, da->x1C);
             if (ftBossLib_8015C44C(28) == ftMh_MS_TagRockPaper) {
                 // Crazy Hand Combo Attack

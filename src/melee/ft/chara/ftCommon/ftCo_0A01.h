@@ -59,7 +59,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A2040 */ bool ftCo_800A2040(Fighter* fp);
 /* 0A2804 */ bool ftCo_800A5908(Fighter* fp);
 /* 0A287C */ bool ftCo_800A5980(Fighter* fp);
-/* 0A28BC */ bool ftCo_800A59C0(UNK_T);
+/* 0A28BC */ bool ftCo_800A59C0(Item*);
 /* 0A28E0 */ enum_t ftCo_800A59E4(Fighter* fp);
 /* 0A2924 */ bool ftCo_800A5A28(Fighter* fp);
 /* 0A41F4 */ bool ftCo_800B395C(Fighter_GObj* gobj, int);
@@ -151,8 +151,6 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A8DE4 */ static void ftCo_800A8DE4(Fighter* fp);
 /* 0A8EB0 */ static void ftCo_800A8EB0(Fighter*);
 /* 0A92CC */ static void ftCo_800A92CC(Fighter* fp);
-/* 0A949C */ static void ftCo_800A949C(Fighter* fp);
-/* 0A963C */ static void ftCo_800A963C(Fighter* fp);
 /* 0A96B8 */ static void ftCo_800A96B8(Fighter*);
 /* 0A9904 */ static UNK_RET ftCo_800A9904(UNK_PARAMS);
 /* 0A9CB4 */ static void ftCo_800A9CB4(Fighter* fp);
