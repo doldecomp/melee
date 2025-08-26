@@ -12,6 +12,10 @@
 #include <dolphin/mtx.h>
 #include <baselib/objalloc.h>
 
+extern struct Fighter_804D64FC_t {
+    u8** cmdscripts;
+}* Fighter_804D64FC;
+
 /* 0679B0 */ void Fighter_800679B0(void);
 /* 067A84 */ void Fighter_FirstInitialize_80067A84(void);
 /* 067ABC */ void Fighter_LoadCommonData(void);
@@ -65,7 +69,6 @@
 /* 459080 */ extern HSD_ObjAllocData fighter_x2040_alloc_data;
 /* 4590AC */ extern HSD_ObjAllocData fighter_x59C_alloc_data;
 /* 4598B8 */ extern ftData* gFtDataList[FTKIND_MAX];
-/* 4D64FC */ extern UNK_T Fighter_804D64FC;
 /* 4D6500 */ extern UNK_T Fighter_804D6500;
 /* 4D6504 */ extern HSD_Joint* Fighter_804D6504;
 /* 4D6508 */ extern u8* Fighter_804D6508;

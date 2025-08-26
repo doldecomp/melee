@@ -3,6 +3,7 @@
 #include "ftcmdscript.h"
 
 #include <melee/ft/types.h>
+#include <melee/ft/chara/ftCommon/ftCo_0A01.h>
 
 /// #ftCo_800B4AB0
 

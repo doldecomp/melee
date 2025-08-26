@@ -123,7 +123,7 @@ u32 Fighter_804D64F8 = 0;
 #define g_spawnNumCounter Fighter_804D64F8
 
 // the following seems to be an array, initialized in reverse in
-UNK_T Fighter_804D64FC = NULL;
+struct Fighter_804D64FC_t* Fighter_804D64FC = NULL;
 UNK_T Fighter_804D6500 = NULL;
 HSD_Joint* Fighter_804D6504 = NULL;
 u8* Fighter_804D6508 = NULL;

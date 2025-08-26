@@ -6,35 +6,8 @@
 #include <sysdolphin/baselib/debug.h>
 #include <melee/ft/chara/ftCommon/ftCo_0A01.h>
 #include <melee/ft/types.h>
+#include <melee/ft/fighter.h>
 #include <melee/lb/lb_00CE.h>
-
-typedef enum CPUCommand {
-    CpuCmd_PressA = 1,
-    CpuCmd_ReleaseA,
-    CpuCmd_PressB,
-    CpuCmd_ReleaseB,
-    CpuCmd_PressX,
-    CpuCmd_ReleaseX,
-    CpuCmd_PressY,
-    CpuCmd_ReleaseY,
-    CpuCmd_PressR,
-    CpuCmd_ReleaseR,
-    CpuCmd_PressL,
-    CpuCmd_ReleaseL,
-    CpuCmd_PressZ,
-    CpuCmd_ReleaseZ,
-    CpuCmd_PressUp,
-    CpuCmd_ReleaseUp,
-    CpuCmd_PressDown,
-    CpuCmd_ReleaseDown,
-    CpuCmd_PressRight,
-    CpuCmd_ReleaseRight,
-    CpuCmd_PressLeft,
-    CpuCmd_ReleaseLeft,
-    CpuCmd_PressStart = 0x17,
-    CpuCmd_ReleaseStart,
-    CpuCmd_ReleaseAll,
-} CPUCommand;
 
 void ftCo_800B3E04(Fighter* fp)
 {
@@ -45,7 +18,6 @@ void ftCo_800B3E04(Fighter* fp)
     int temp_r27_3;
     int temp_r25;
 
-    Fighter* target;
     f32 angle;
     int clamp_x;
     int clamp_y;
@@ -57,21 +29,27 @@ void ftCo_800B3E04(Fighter* fp)
     if (data->csP == NULL) {
         return;
     }
-    if (data->x44C == 0) {
+
+    // If the duration is already zero, there's nothing to do.
+    if (data->command_duration == 0) {
         return;
     }
-    data->x44C--;
-    if (data->x44C != 0) {
+
+    data->command_duration--;
+
+    // If duration hasn't reached zero, the previous command is still running
+    if (data->command_duration != 0) {
         return;
     }
+
     cur = data->csP;
-    if (data->csP < data->x454) {
+    if (data->csP < data->buffer) {
         HSD_ASSERTREPORT(0x21, 0, "csP is bad address\n");
     }
-    if (data->csP >= data->x454 + sizeof(data->x454)) {
+    if (data->csP >= data->buffer + sizeof(data->buffer)) {
         HSD_ASSERTREPORT(0x24, 0, "csP is bad address\n");
     }
-    while (data->x44C == 0) {
+    while (data->command_duration == 0) {
         switch ((u8) *cur++) {
         case CpuCmd_PressA:
             data->x0 |= HSD_PAD_A;
@@ -147,63 +125,63 @@ void ftCo_800B3E04(Fighter* fp)
         case CpuCmd_ReleaseLeft:
             data->x0 &= ~HSD_PAD_DPADLEFT;
             break;
-        case 0x86:
+        case CpuCmd_PressAFor:
             data->x0 |= HSD_PAD_A;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x87:
+        case CpuCmd_ReleaseAFor:
             data->x0 &= ~HSD_PAD_A;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x88:
+        case CpuCmd_PressBFor:
             data->x0 |= HSD_PAD_B;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x89:
+        case CpuCmd_ReleaseBFor:
             data->x0 &= ~HSD_PAD_B;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x8A:
+        case CpuCmd_PressXFor:
             data->x0 |= HSD_PAD_X;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x8B:
+        case CpuCmd_ReleaseXFor:
             data->x0 &= ~HSD_PAD_X;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x8C:
+        case CpuCmd_PressYFor:
             data->x0 |= HSD_PAD_Y;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x8D:
+        case CpuCmd_ReleaseYFor:
             data->x0 &= ~HSD_PAD_Y;
-            data->x44C = (u8) *cur++;
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x80:
+        case CpuCmd_SetLstickX:
             data->lstickX = *cur++;
             break;
-        case 0x81:
+        case CpuCmd_SetLstickY:
             data->lstickY = *cur++;
             break;
-        case 0x82:
-            data->x6 = *cur++;
+        case CpuCmd_SetCstickX:
+            data->cstickX = *cur++;
             break;
-        case 0x83:
-            data->x7 = *cur++;
+        case CpuCmd_SetCstickY:
+            data->cstickY = *cur++;
             break;
-        case 0x84:
+        case CpuCmd_SetRtrigger:
             data->rtrigger = *cur++;
             break;
-        case 0x85:
-            data->x8 = *cur++;
+        case CpuCmd_SetLtrigger:
+            data->ltrigger = *cur++;
             break;
         case CpuCmd_ReleaseAll:
             data->x0 = 0;
             break;
-        case 0x8E:
-            data->x44C = (u8) *cur++;
+        case CpuCmd_WaitFor:
+            data->command_duration = (u8) *cur++;
             break;
-        case 0x8F:
+        case CpuCmd_LstickTowardDestination:
             magnitude = *cur;
             cur++;
             angle = lb_8000D008(data->x54.y - fp->cur_pos.y,
@@ -211,7 +189,7 @@ void ftCo_800B3E04(Fighter* fp)
             data->lstickX = magnitude * cosf(angle);
             data->lstickY = magnitude * sinf(angle);
             break;
-        case 0x90:
+        case CpuCmd_LstickXTowardDestination:
             if (data->x54.x > fp->cur_pos.x) {
                 data->lstickX = *cur;
             } else {
@@ -219,7 +197,8 @@ void ftCo_800B3E04(Fighter* fp)
             }
             cur++;
             break;
-        case 0x94:
+        case CpuCmd_LstickTowardFighter: {
+            Fighter* target;
             magnitude = *cur;
             cur++;
             target = data->x44;
@@ -230,7 +209,8 @@ void ftCo_800B3E04(Fighter* fp)
                 data->lstickY = magnitude * sinf(angle);
             }
             break;
-        case 0x95: {
+        }
+        case CpuCmd_LstickXTowardFighter: {
             Fighter* target = data->x44;
             s8 stick_x = *cur++;
             if (target != NULL) {
@@ -243,7 +223,7 @@ void ftCo_800B3E04(Fighter* fp)
             }
             break;
         }
-        case 0x91:
+        case CpuCmd_LstickXForward:
             if (fp->facing_dir >= 0.0) {
                 data->lstickX = *cur;
             } else {
@@ -251,18 +231,18 @@ void ftCo_800B3E04(Fighter* fp)
             }
             cur++;
             break;
-        case 0x92: {
+        case CpuCmd_WaitIfMotionId: {
             u8 motion_id = *cur++;
             if (fp->motion_id == motion_id) {
-                data->x44C = 1;
+                data->command_duration = 1;
                 return;
             }
             break;
         }
-        case 0x93:
+        case CpuCmd_Unk0x93:
             data->x18 = (u8) *cur++;
             break;
-        case 0xC0: {
+        case CpuCmd_LstickTowardDestinationClamped: {
             temp_r25 = *cur;
             cur++;
             temp_r27_3 = *cur;
@@ -288,7 +268,7 @@ void ftCo_800B3E04(Fighter* fp)
             data->lstickY = var_r24_2;
             break;
         }
-        case 0xC1: {
+        case CpuCmd_LstickXTowardDestinationClamped: {
             int dx;
             int clamp_x;
             int stick_x;
@@ -309,7 +289,7 @@ void ftCo_800B3E04(Fighter* fp)
             data->lstickX = stick_x;
             break;
         }
-        case 0xC2: {
+        case CpuCmd_LstickForwardClamped: {
             int dx;
             int clamp_x;
             dx = *cur;
@@ -329,8 +309,8 @@ void ftCo_800B3E04(Fighter* fp)
             data->lstickX = var_r3_2;
             break;
         }
-        case 0x7F:
-            data->x44C = 0;
+        case CpuCmd_Done:
+            data->command_duration = 0;
             data->csP = NULL;
             return;
         }
@@ -338,63 +318,66 @@ void ftCo_800B3E04(Fighter* fp)
     data->csP = cur;
 }
 
+/// Resets the write position to the start of the script buffer area
 void ftCo_800B462C(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    data->x554 = data->x454;
+    data->write_pos = data->buffer;
 }
 
-void ftCo_800B463C(Fighter* fp, u8 arg1)
+/// Writes a command to the current location in the script buffer area
+void ftCo_800B463C(Fighter* fp, u8 command)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    if (data->x554 >= data->x454 + sizeof(data->x454)) {
+    if (data->write_pos >= data->buffer + sizeof(data->buffer)) {
         HSD_ASSERTREPORT(501, 0, "command script buffer over flow!\n");
     }
-    *data->x554 = arg1;
-    data->x554++;
+    *data->write_pos = command;
+    data->write_pos++;
 }
 
-void ftCo_800B46B8(Fighter* fp, u8 arg1, u8 arg2)
+void ftCo_800B46B8(Fighter* fp, u8 command1, u8 command2)
 {
-    ftCo_800B463C(fp, arg1);
-    ftCo_800B463C(fp, arg2);
+    ftCo_800B463C(fp, command1);
+    ftCo_800B463C(fp, command2);
 }
 
-void ftCo_800B4778(Fighter* fp, u8 arg1, u8 arg2, u8 arg3)
+void ftCo_800B4778(Fighter* fp, u8 command1, u8 command2, u8 command3)
 {
-    ftCo_800B463C(fp, arg1);
-    ftCo_800B463C(fp, arg2);
-    ftCo_800B463C(fp, arg3);
+    ftCo_800B463C(fp, command1);
+    ftCo_800B463C(fp, command2);
+    ftCo_800B463C(fp, command3);
 }
 
-extern u8*** Fighter_804D64FC;
-
-void ftCo_800B4880(Fighter* fp, int arg1)
+/**
+ * Runs an existing command script from a table loaded from .dat
+ */
+void ftCo_800B4880(Fighter* fp, int script_idx)
 {
-    u8* var_r29 = (*Fighter_804D64FC)[arg1];
-    while (*var_r29 != 0x7F) {
-        ftCo_800B463C(fp, *var_r29);
-        if (*var_r29 > 0xBF) {
-            var_r29++;
-            ftCo_800B463C(fp, *var_r29);
+    u8* cmd = Fighter_804D64FC->cmdscripts[script_idx];
+    while (*cmd != CpuCmd_Done) {
+        ftCo_800B463C(fp, *cmd);
+        if (*cmd > CpuCmd_OneArgEnd) {
+            cmd++;
+            ftCo_800B463C(fp, *cmd);
         }
-        if (*var_r29 > 0x7F) {
-            var_r29++;
-            ftCo_800B463C(fp, *var_r29);
+        if (*cmd > CpuCmd_ZeroArgEnd) {
+            cmd++;
+            ftCo_800B463C(fp, *cmd);
         }
-        var_r29++;
+        cmd++;
     }
-    ftCo_800B463C(fp, *var_r29);
+    ftCo_800B463C(fp, *cmd);
 }
 
 void ftCo_800B49F4(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
 
-    ftCo_800B463C(fp, 0x7F);
+    ftCo_800B463C(fp, CpuCmd_Done);
 
-    data->csP = data->x454;
-    data->x44C = 1;
+    data->csP = data->buffer;
+    data->command_duration = 1;
 }
 
 void ftCo_800B4A78(Fighter* fp)
@@ -403,11 +386,11 @@ void ftCo_800B4A78(Fighter* fp)
     data->x0 = 0;
     data->lstickX = 0;
     data->lstickY = 0;
-    data->x6 = 0;
-    data->x7 = 0;
+    data->cstickX = 0;
+    data->cstickY = 0;
     data->rtrigger = 0;
-    data->x8 = 0;
+    data->ltrigger = 0;
     data->csP = NULL;
-    data->x44C = 0;
-    data->x554 = data->x454;
+    data->command_duration = 0;
+    ftCo_800B462C(fp);
 }

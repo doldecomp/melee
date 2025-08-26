@@ -233,7 +233,7 @@ void ft_80087BAC(HSD_GObj* gobj, s32 arg1)
 void ft_80087BC0(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_800A101C(fp, arg1, fp->x1A88.x10, fp->x1A88.x14);
+    ftCo_800A101C(fp, arg1, fp->x1A88.level, fp->x1A88.x14);
 }
 
 void ft_80087BEC(HSD_GObj* gobj, int arg1)

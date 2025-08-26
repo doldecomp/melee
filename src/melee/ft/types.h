@@ -963,12 +963,12 @@ struct Fighter_x1A88_t {
     /*   +0 */ HSD_Pad x0;
     /*   +4 */ s8 lstickX;
     /*   +5 */ s8 lstickY;
-    /*   +6 */ u8 x6;
-    /*   +7 */ u8 x7;
-    /*   +8 */ u8 x8;
+    /*   +6 */ s8 cstickX;
+    /*   +7 */ s8 cstickY;
+    /*   +8 */ u8 ltrigger;
     /*   +9 */ u8 rtrigger; ///< R trigger analog value, 0 to 255
     /*   +C */ enum_t xC;
-    /*  +10 */ int x10;
+    /*  +10 */ int level; ///< CPU level, 0-9
     /*  +14 */ int x14;
     /*  +18 */ int x18;
     /*  +1C */ int x1C;
@@ -1026,10 +1026,10 @@ struct Fighter_x1A88_t {
     /*  +FC */ struct Fighter_x1A88_xFC_t xFC;
     /* +444 */ struct Fighter_x1A88_xFC_t* x444;
     /* +448 */ struct Fighter_x1A88_xFC_t* x448;
-    /* +44C */ u32 x44C;
-    /* +450 */ s8* csP; ///< command script pointer
-    /* +454 */ s8 x454[0x100]; ///< command script buffer area
-    /* +554 */ s8* x554;
+    /* +44C */ u32 command_duration;
+    /* +450 */ s8* csP; ///< command script pointer, for reading commands
+    /* +454 */ s8 buffer[0x100]; ///< command script buffer area
+    /* +554 */ s8* write_pos; ///< where to write commands in the buffer area
     /* +558 */ float x558;
     /* +55C */ float x55C;
     /* +560 */ float x560;
