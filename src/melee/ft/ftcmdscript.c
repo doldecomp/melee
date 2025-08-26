@@ -1,10 +1,12 @@
-#include "ftCo_0B3E.h"
+#include "ftcmdscript.h"
 
-#include <melee/ft/types.h>
-#include <melee/ft/chara/ftCommon/ftCo_0A01.h>
-#include <melee/lb/lb_00CE.h>
-#include <sysdolphin/baselib/debug.h>
+#include <placeholder.h>
+
 #include <math.h>
+#include <sysdolphin/baselib/debug.h>
+#include <melee/ft/chara/ftCommon/ftCo_0A01.h>
+#include <melee/ft/types.h>
+#include <melee/lb/lb_00CE.h>
 
 typedef enum CPUCommand {
     CpuCmd_PressA = 1,
@@ -64,12 +66,10 @@ void ftCo_800B3E04(Fighter* fp)
     }
     cur = data->csP;
     if (data->csP < data->x454) {
-        OSReport("csP is bad address\n");
-        __assert("ftcmdscript.c", 0x21, "0");
+        HSD_ASSERTREPORT(0x21, 0, "csP is bad address\n");
     }
     if (data->csP >= data->x454 + sizeof(data->x454)) {
-        OSReport("csP is bad address\n");
-        __assert("ftcmdscript.c", 0x24, "0");
+        HSD_ASSERTREPORT(0x24, 0, "csP is bad address\n");
     }
     while (data->x44C == 0) {
         switch ((u8) *cur++) {
@@ -206,7 +206,8 @@ void ftCo_800B3E04(Fighter* fp)
         case 0x8F:
             magnitude = *cur;
             cur++;
-            angle = lb_8000D008(data->x54.y - fp->cur_pos.y, data->x54.x - fp->cur_pos.x);
+            angle = lb_8000D008(data->x54.y - fp->cur_pos.y,
+                                data->x54.x - fp->cur_pos.x);
             data->lstickX = magnitude * cosf(angle);
             data->lstickY = magnitude * sinf(angle);
             break;
@@ -223,7 +224,8 @@ void ftCo_800B3E04(Fighter* fp)
             cur++;
             target = data->x44;
             if (target != NULL) {
-                angle = lb_8000D008(target->cur_pos.y - fp->cur_pos.y, target->cur_pos.x - fp->cur_pos.x);
+                angle = lb_8000D008(target->cur_pos.y - fp->cur_pos.y,
+                                    target->cur_pos.x - fp->cur_pos.x);
                 data->lstickX = magnitude * cosf(angle);
                 data->lstickY = magnitude * sinf(angle);
             }
@@ -265,7 +267,8 @@ void ftCo_800B3E04(Fighter* fp)
             cur++;
             temp_r27_3 = *cur;
             cur++;
-            angle = lb_8000D008(data->x54.y - fp->cur_pos.y, data->x54.x - fp->cur_pos.x);
+            angle = lb_8000D008(data->x54.y - fp->cur_pos.y,
+                                data->x54.x - fp->cur_pos.x);
             var_r24 = data->lstickX + (s8) (temp_r25 * cosf(angle));
             clamp_x = (s8) (temp_r27_3 * cosf(angle));
             if (var_r24 > clamp_x) {
@@ -345,8 +348,7 @@ void ftCo_800B463C(Fighter* fp, u8 arg1)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (data->x554 >= data->x454 + sizeof(data->x454)) {
-        OSReport("command script buffer over flow!\n");
-        __assert("ftcmdscript.c", 501, "0");
+        HSD_ASSERTREPORT(501, 0, "command script buffer over flow!\n");
     }
     *data->x554 = arg1;
     data->x554++;
@@ -385,8 +387,6 @@ void ftCo_800B4880(Fighter* fp, int arg1)
     ftCo_800B463C(fp, *var_r29);
 }
 
-static s8 ftCo_804D3B68 = 0x30;
-
 void ftCo_800B49F4(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -411,97 +411,3 @@ void ftCo_800B4A78(Fighter* fp)
     data->x44C = 0;
     data->x554 = data->x454;
 }
-
-/// #ftCo_800B4AB0
-
-/// #ftCo_800B52AC
-
-/// #ftCo_800B5AB0
-
-/// #ftCo_800B6208
-
-/// #ftCo_800B630C
-
-/// #ftCo_800B63D8
-
-/// #ftCo_800B658C
-
-/// #ftCo_800B683C
-
-/// #ftCo_800B7180
-
-/// #ftCo_800B732C
-
-/// #ftCo_800B7638
-
-/// #ftCo_800B77E8
-
-/// #ftCo_800B885C
-
-/// #ftCo_800B89CC
-
-/// #ftCo_800B8A9C
-
-/// #ftCo_800B9020
-
-/// #ftCo_800B920C
-
-#pragma push
-#pragma dont_inline on
-void ftCo_800B92D4(Fighter* fp)
-{
-    PAD_STACK(4 * 4);
-    if (fp->x1A88.x44 == NULL) {
-        fp->x1A88.x44 = NULL;
-        fp->x1A88.x18 = fp->x1A88.x1C;
-        ftCo_800A0C8C(fp);
-    } else {
-        ftCo_800B46B8(fp, 0x94, 0x7F);
-        ftCo_800B463C(fp, 0x7F);
-    }
-}
-#pragma pop
-
-/// #ftCo_800B9340
-
-/// #ftCo_800B9504
-
-/// #ftCo_800B9704
-
-/// #ftCo_800B9790
-
-/// #ftCo_800B98C8
-
-/// #ftCo_800B9A04
-
-/// #ftCo_800B9CBC
-
-bool ftCo_800B9F6C(Fighter* fp)
-{
-    if (fp->motion_id == ftCo_MS_GuardOn || fp->motion_id == ftCo_MS_Guard) {
-        return true;
-    }
-    return false;
-}
-
-/// #ftCo_800B9F90
-
-/// #ftCo_800BA080
-
-/// #ftCo_800BA160
-
-/// #ftCo_800BA224
-
-/// #ftCo_800BA2E8
-
-/// #ftCo_800BA674
-
-/// #ftCo_800BA9A0
-
-/// #ftCo_800BB104
-
-/// #ftCo_800BB220
-
-/// #ftCo_800BB768
-
-/// #ftCo_800BB9B4
