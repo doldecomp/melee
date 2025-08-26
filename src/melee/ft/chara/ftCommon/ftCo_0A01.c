@@ -421,10 +421,10 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
 float ftCo_800A17E4(Fighter* fp)
 {
     float result;
-    if (fp->x1A88.x4 > 0) {
-        result = fp->x1A88.x4 / 127.0F;
+    if (fp->x1A88.lstickX > 0) {
+        result = fp->x1A88.lstickX / 127.0F;
     } else {
-        result = fp->x1A88.x4 / 128.0F;
+        result = fp->x1A88.lstickX / 128.0F;
     }
     if (result > 1.0) {
         return 1.0;
@@ -442,7 +442,7 @@ static inline float inlineB0(s8 val, float a, float b)
 
 float ftCo_800A1874(Fighter* fp)
 {
-    return inlineB0(fp->x1A88.x5, 127.0f, 128.0F);
+    return inlineB0(fp->x1A88.lstickY, 127.0f, 128.0F);
 }
 
 float ftCo_800A1904(Fighter* fp)
@@ -453,7 +453,7 @@ float ftCo_800A1904(Fighter* fp)
 
 float ftCo_800A1948(Fighter* fp)
 {
-    float ret = fp->x1A88.x9 / 255.0;
+    float ret = fp->x1A88.rtrigger / 255.0;
     return ret > 1.0 ? 1.0F : ret;
 }
 
@@ -1394,9 +1394,9 @@ bool ftCo_800A5980(Fighter* fp)
     return false;
 }
 
-bool ftCo_800A59C0(UNK_T arg0)
+bool ftCo_800A59C0(Item* ip)
 {
-    if ((u32) (((u8) *M2C_FIELD(arg0, u8**, 0xCC) >> 3U) & 0xF) == 3) {
+    if (ip->xCC_item_attr->x0_78 == 3) {
         return true;
     }
     return false;
@@ -1408,8 +1408,11 @@ bool ftCo_800A59E4(Fighter* fp)
         return false;
     }
     if (fp->motion_id == ftCo_MS_KneeBend ||
-        fp->motion_id - (unsigned) ftCo_MS_RunDirect <= 1 ||
-        fp->motion_id - (unsigned) ftCo_MS_Sleep <= 2)
+        fp->motion_id == ftCo_MS_RunDirect ||
+        fp->motion_id == ftCo_MS_RunBrake ||
+        fp->motion_id == ftCo_MS_Sleep ||
+        fp->motion_id == ftCo_MS_Rebirth ||
+        fp->motion_id == ftCo_MS_RebirthWait)
     {
         return true;
     }
@@ -1698,6 +1701,16 @@ void ftCo_800A8DE4(Fighter* fp)
     }
 }
 
+static inline int angle_x_units(float angle)
+{
+    return 127.0F * cosf(angle);
+}
+
+static inline int angle_y_units(float angle)
+{
+    return 127.0F * sinf(angle);
+}
+
 void ftCo_800A8EB0(Fighter* fp)
 {
     float angle;
@@ -1713,43 +1726,43 @@ void ftCo_800A8EB0(Fighter* fp)
     ftCo_800B463C(fp, 4);
     if (data->x54.x - fp->cur_pos.x > 0.0) {
         angle = M_PI;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x14);
 
         angle = -M_PI_2;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x23);
 
         angle = 0.0F;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x14);
 
         angle = M_PI_2;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x14);
     } else {
         angle = 0.0F;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x14);
 
         angle = -M_PI_2;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x23);
 
         angle = M_PI;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x14);
 
         angle = M_PI_2;
-        ftCo_800B46B8(fp, 0x80, (u8) (127.0f * cosf(angle)));
-        ftCo_800B46B8(fp, 0x81, (u8) (127.0f * sinf(angle)));
+        ftCo_800B46B8(fp, 0x80, angle_x_units(angle));
+        ftCo_800B46B8(fp, 0x81, angle_y_units(angle));
         ftCo_800B46B8(fp, 0x8E, 0x14);
     }
     ftCo_800B463C(fp, 0x7F);
@@ -2073,7 +2086,7 @@ void ftCo_800AC30C(Fighter* fp)
         return;
     }
     if (data->x7C % 3 == 0 && !(data->x10 * 0.1F < HSD_Randf())) {
-        if (fp->x1A88.x4 < 0) {
+        if (fp->x1A88.lstickX < 0) {
             ftCo_800B46B8(fp, 0x80, 0x7F);
         } else {
             ftCo_800B46B8(fp, 0x80, 0x81);
@@ -2394,13 +2407,13 @@ void ftCo_800B0AF4(Fighter* fp)
             ftPp_SpecialLw_Enter(fp->gobj);
             return;
         }
-        data->x4 = data->x448->x6;
-        data->x5 = data->x448->x7;
+        data->lstickX = data->x448->x6;
+        data->lstickY = data->x448->x7;
         data->x6 = data->x448->x8;
         data->x7 = data->x448->x9;
         data->x0 = data->x448->x0;
         data->x8 = data->x448->x4;
-        data->x9 = data->x448->x5;
+        data->rtrigger = data->x448->x5;
         if (fp->x2225_b3) {
             fp->cur_pos.x =
                 0.95 * fp->cur_pos.x + 0.05 * data->x448->cur_pos.x;

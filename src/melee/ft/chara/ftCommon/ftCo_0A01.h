@@ -59,7 +59,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0A2040 */ bool ftCo_800A2040(Fighter* fp);
 /* 0A2804 */ bool ftCo_800A5908(Fighter* fp);
 /* 0A287C */ bool ftCo_800A5980(Fighter* fp);
-/* 0A28BC */ bool ftCo_800A59C0(UNK_T);
+/* 0A28BC */ bool ftCo_800A59C0(Item*);
 /* 0A28E0 */ enum_t ftCo_800A59E4(Fighter* fp);
 /* 0A2924 */ bool ftCo_800A5A28(Fighter* fp);
 /* 0A41F4 */ bool ftCo_800B395C(Fighter_GObj* gobj, int);

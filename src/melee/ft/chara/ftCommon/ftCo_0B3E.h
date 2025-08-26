@@ -7,14 +7,14 @@
 #include "ftCommon/forward.h"
 
 /* 0B3E04 */ void ftCo_800B3E04(Fighter* fp);
-/* 0B463C */ void ftCo_800B463C(Fighter* fp, int);
-/* 0B46B8 */ void ftCo_800B46B8(Fighter* fp, int, int);
+/* 0B463C */ void ftCo_800B463C(Fighter* fp, u8);
+/* 0B46B8 */ void ftCo_800B46B8(Fighter* fp, u8, u8);
 
 /// @todo Static declarations belong in #ftCo_0B3E.c
 /* 0B462C */ static UNK_RET ftCo_800B462C(Fighter* fp);
-/* 0B4778 */ static void ftCo_800B4778(Fighter* fp, int, s8, s8);
+/* 0B4778 */ static void ftCo_800B4778(Fighter* fp, u8, u8, u8);
 /* 0B4880 */ static void ftCo_800B4880(Fighter* fp, int);
-/* 0B49F4 */ static UNK_RET ftCo_800B49F4(UNK_PARAMS);
+/* 0B49F4 */ static void ftCo_800B49F4(Fighter*);
 /* 0B4A78 */ static void ftCo_800B4A78(Fighter* fp);
 /* 0B4AB0 */ static UNK_RET ftCo_800B4AB0(UNK_PARAMS);
 /* 0B52AC */ static UNK_RET ftCo_800B52AC(UNK_PARAMS);

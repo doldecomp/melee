@@ -961,14 +961,12 @@ STATIC_ASSERT(sizeof(struct Fighter_x1A88_xFC_t) == 0x348);
 
 struct Fighter_x1A88_t {
     /*   +0 */ HSD_Pad x0;
-    /*   +4 */ s8 x4;
-    /*   +5 */ u8 x5;
+    /*   +4 */ s8 lstickX;
+    /*   +5 */ s8 lstickY;
     /*   +6 */ u8 x6;
     /*   +7 */ u8 x7;
     /*   +8 */ u8 x8;
-    /*   +9 */ u8 x9;
-    /*   +A */ u8 xA;
-    /*   +B */ u8 xB;
+    /*   +9 */ u8 rtrigger; ///< R trigger analog value, 0 to 255
     /*   +C */ enum_t xC;
     /*  +10 */ int x10;
     /*  +14 */ int x14;
@@ -1028,17 +1026,10 @@ struct Fighter_x1A88_t {
     /*  +FC */ struct Fighter_x1A88_xFC_t xFC;
     /* +444 */ struct Fighter_x1A88_xFC_t* x444;
     /* +448 */ struct Fighter_x1A88_xFC_t* x448;
-    /* +44C */ UNK_T x44C;
-    /* +450 */ UNK_T x450;
-    /* +454 */ u32 x454;
-    /* +458 */ u8 x458[0x554 - 0x458];
-    /* +554 */ union Fighter_x1A88_x544_t {
-        struct {
-            u8 x0_u8;
-        };
-        u32 x0_u32;
-        void* x0_p;
-    } x554;
+    /* +44C */ u32 x44C;
+    /* +450 */ s8* csP; ///< command script pointer
+    /* +454 */ s8 x454[0x100]; ///< command script buffer area
+    /* +554 */ s8* x554;
     /* +558 */ float x558;
     /* +55C */ float x55C;
     /* +560 */ float x560;
