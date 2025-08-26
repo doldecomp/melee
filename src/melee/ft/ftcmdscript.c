@@ -326,27 +326,27 @@ void ftCo_800B462C(Fighter* fp)
 }
 
 /// Writes a command to the current location in the script buffer area
-void ftCo_800B463C(Fighter* fp, u8 command)
+void ftCo_800B463C(Fighter* fp, u8 cmd)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (data->write_pos >= data->buffer + sizeof(data->buffer)) {
         HSD_ASSERTREPORT(501, 0, "command script buffer over flow!\n");
     }
-    *data->write_pos = command;
+    *data->write_pos = cmd;
     data->write_pos++;
 }
 
-void ftCo_800B46B8(Fighter* fp, u8 command1, u8 command2)
+void ftCo_800B46B8(Fighter* fp, u8 cmd, u8 arg)
 {
-    ftCo_800B463C(fp, command1);
-    ftCo_800B463C(fp, command2);
+    ftCo_800B463C(fp, cmd);
+    ftCo_800B463C(fp, arg);
 }
 
-void ftCo_800B4778(Fighter* fp, u8 command1, u8 command2, u8 command3)
+void ftCo_800B4778(Fighter* fp, u8 cmd, u8 arg1, u8 arg2)
 {
-    ftCo_800B463C(fp, command1);
-    ftCo_800B463C(fp, command2);
-    ftCo_800B463C(fp, command3);
+    ftCo_800B463C(fp, cmd);
+    ftCo_800B463C(fp, arg1);
+    ftCo_800B463C(fp, arg2);
 }
 
 /**

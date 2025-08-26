@@ -1,6 +1,5 @@
 #include "ftCo_0A01.h"
 
-#include <melee/ft/ftcmdscript.h>
 #include "ftpickupitem.h"
 
 #include <placeholder.h>
@@ -8,10 +7,8 @@
 
 #include "ft/chara/ftPopo/ftPp_1211.h"
 #include "ft/fighter.h"
-
-#include "ft/forward.h"
-
 #include "ft/ft_0877.h"
+#include "ft/ftcpuattack.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -19,12 +16,15 @@
 #include "ftCommon/forward.h"
 #include "ftDonkey/forward.h"
 #include "ftKoopa/forward.h"
+#include "ftMewtwo/forward.h"
 #include "ftPopo/forward.h"
+#include "ftSamus/forward.h"
 
 #include "gm/gm_unsplit.h"
 #include "gr/grbigblue.h"
 #include "gr/grcorneria.h"
 #include "gr/grinishie1.h"
+#include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grvenom.h"
 #include "gr/stage.h"
@@ -32,9 +32,7 @@
 #include "it/inlines.h"
 #include "it/item.h"
 #include "it/types.h"
-
-#include "lb/forward.h"
-
+#include "lb/lb_00CE.h"
 #include "lb/lbcollision.h"
 #include "mp/mpisland.h"
 #include "mp/mplib.h"
@@ -44,6 +42,7 @@
 #include <math.h>
 #include <math_ppc.h>
 #include <dolphin/mtx.h>
+#include <melee/ft/ftcmdscript.h>
 #include <MetroTRK/intrinsics.h>
 
 /**
@@ -56,7 +55,29 @@ int ftCo_803C5A68[] = {
     5, 2, 2, 2, 3, 3, 3, 4, 0, 0, 8, 4, 1, 4, 4, 5, 5,
 };
 
-/* static */ extern StageBlastZone* ftCo_803C6594[];
+typedef struct ftCo_803C6594_t {
+    /* 00 */ Vec3 x0;
+    /* 0C */ f32 xC;
+    /* 10 */ f32 x10;
+    /* 14 */ f32 x14;
+    /* 18 */ f32 x18;
+    /* 1C */ f32 x1C;
+    /* 20 */ f32 x20;
+    /* 24 */ f32 x24;
+    /* 28 */ f32 x28;
+    /* 2C */ f32 x2C;
+    /* 30 */ f32 x30;
+    /* 34 */ f32 x34;
+    /* 38 */ f32 x38;
+    /* 3C */ f32 x3C;
+    /* 40 */ f32 x40;
+    /* 44 */ u8 x44;
+    /* 48 */ f32 x48;
+    /* 4C */ f32 x4C;
+    /* 50 */ struct ftCo_803C6594_t* next;
+} ftCo_803C6594_t;
+
+/* static */ extern ftCo_803C6594_t* ftCo_803C6594[];
 /* 0A2638 */ static void ftCo_800B1DA0(Fighter* fp);
 
 void ftCo_800A0148(Fighter* fp)
@@ -149,6 +170,11 @@ void ftCo_800A0508(Fighter* fp)
     ftCo_800B463C(fp, CpuCmd_Done);
 
     ftCo_800B463C(fp, CpuCmd_Done);
+}
+
+static inline void ftCo_800A0508_dontinline(Fighter* fp)
+{
+    ftCo_800A0508(fp);
 }
 
 void ftCo_800A05F4(Fighter* fp)
@@ -402,7 +428,7 @@ bool ftCo_800A0F00(Fighter_GObj* gobj)
     return false;
 }
 
-bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
+bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, int arg4,
                    int arg5, int arg6, float arg7, float arg8, float arg9,
                    float arg10, float arg11)
 {
@@ -417,7 +443,190 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int arg2, int arg3, int arg4,
     }
 }
 
-/// #ftCo_800A101C
+void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
+{
+    Vec3 sp50;
+    Vec3 sp44;
+
+    s32 var_r31;
+    struct Fighter_x1A88_t* temp_r30;
+    Fighter* temp_r3_2;
+    f32 temp_f0;
+    f32 temp_f0_3;
+    f32 temp_f1;
+    f32 temp_f3_2;
+    s32 temp_r6;
+    s32 var_r0;
+    int i;
+
+    int sp34;
+    int sp30;
+
+    PAD_STACK(0xC);
+
+    temp_r30 = &arg0->x1A88;
+    if (arg0->kind == FTKIND_NANA) {
+        temp_r30->xF9_b2 = true;
+        temp_r30->xC = 6;
+        temp_r30->x3C = 15.0f;
+    } else {
+        temp_r30->xC = arg1;
+        temp_r30->x3C = 40.0f;
+    }
+    temp_r30->level = arg2;
+    temp_r30->x14 = arg3;
+    switch (temp_r30->xC) {
+    case 1:
+    case 25:
+        temp_r30->x18 = 0xC;
+        temp_r30->x1C = 0xC;
+        temp_r30->x20 = 0;
+        break;
+    case 3:
+        temp_r30->x18 = 1;
+        temp_r30->x1C = 1;
+        temp_r30->x20 = 0xB;
+        break;
+    case 15:
+        temp_r30->x18 = 0;
+        temp_r30->x1C = 0;
+        temp_r30->x20 = 0;
+        break;
+    default:
+        temp_r30->x18 = 1;
+        temp_r30->x1C = 1;
+        temp_r30->x20 = 0xA;
+        break;
+    }
+    temp_r30->x24 = 0x12C;
+    temp_r30->x28 = 0;
+    temp_r30->x2C = 5;
+    temp_r30->x30 = 0;
+    temp_r30->xF9_b0 = false;
+    temp_r30->x38 = 5.0f;
+    temp_r30->x40 = 50.0f;
+    temp_r30->x44 = NULL;
+    temp_r30->x48 = 0;
+    temp_r30->x50 = 0;
+    temp_r30->x98 = arg0->cur_pos;
+    if (ftCo_800A0FB0(&sp50, &sp34, &sp30, &sp44, -1, -1, -1, arg0->cur_pos.x,
+                      10.0f + arg0->cur_pos.y, arg0->cur_pos.x,
+                      arg0->cur_pos.y - 1000.0f, 0.0f))
+    {
+        temp_r30->x64.x = temp_r30->x54.x = sp50.x;
+        temp_r30->x64.y = temp_r30->x54.y = sp50.y;
+    } else {
+        temp_r30->x64.x = temp_r30->x54.x = arg0->cur_pos.x;
+        temp_r30->x64.y = temp_r30->x54.y = arg0->cur_pos.y;
+    }
+    temp_r30->x60 = 0;
+    temp_r30->x74.y = 0.0f;
+    temp_r30->x74.x = 0.0f;
+    temp_r30->x6C.y = 0.0f;
+    temp_r30->x6C.x = 0.0f;
+    temp_r30->xF8_b0 = false;
+    temp_r30->xF8_b12 = 0;
+    temp_r6 = 10.0 * HSD_Randf();
+    temp_r30->x7C = temp_r6;
+    temp_r30->x80 = temp_r6;
+    temp_r30->x84 = 0;
+    temp_r30->x90 = 0;
+    temp_r30->x88 = 0;
+    temp_r30->x8C = 0;
+    temp_r30->csP = NULL;
+    temp_r30->command_duration = 0;
+    temp_r30->write_pos = temp_r30->buffer;
+    temp_r30->xA4 = 0;
+    temp_r30->xC8 = 0;
+    temp_r30->xEC = 0;
+    temp_r30->xF8_b5 = false;
+    temp_r30->xF8_b6 = false;
+    temp_r30->xF8_b7 = false;
+    temp_r30->xF9_b1 = false;
+    temp_r30->x0 = 0;
+    temp_r30->lstickX = 0;
+    temp_r30->lstickY = 0;
+    temp_r30->cstickX = 0;
+    temp_r30->cstickY = 0;
+    temp_r30->rtrigger = 0;
+    temp_r30->ltrigger = 0;
+    temp_r30->xF9_b2 = false;
+    temp_r30->xF9_b3 = false;
+    temp_r30->xF9_b4 = false;
+    temp_r30->xF9_b6 = false;
+    temp_r30->xF9_b5 = false;
+    temp_r30->xF9_b7 = false;
+    temp_r30->xFA_b7 = false;
+    temp_r30->xFB_b0 = false;
+    temp_r30->x94 = 0;
+    temp_r30->xFA_b1 = false;
+    temp_r30->xFA_b2 = false;
+    temp_r30->xFA_b34 = 1;
+    temp_r30->xFA_b5 = false;
+    temp_r30->xFA_b6 = false;
+    temp_r30->x55C = 1.0f;
+    temp_r30->x560 = 1.0f;
+    temp_r30->x564 = 0.5f * (temp_r30->x55C + temp_r30->x560);
+    temp_r30->x568 = 2.0f;
+    temp_r30->x444 = &temp_r30->xFC[5];
+    temp_r30->x448 = temp_r30->xFC;
+    if (arg0->kind == FTKIND_NANA) {
+        temp_r3_2 = ftCo_800A589C(arg0);
+        for (i = 0; i < 30; i++) {
+            temp_r30->xFC[i].x0 = 0;
+            temp_r30->xFC[i].lstickX = 0;
+            temp_r30->xFC[i].lstickY = 0;
+            temp_r30->xFC[i].x4 = 0;
+            temp_r30->xFC[i].x5 = 0;
+            temp_r30->xFC[i].cur_pos = temp_r3_2->cur_pos;
+            temp_r30->xFC[i].facing_dir = temp_r3_2->facing_dir;
+        }
+    } else {
+        for (i = 0; i < 30; i++) {
+            temp_r30->xFC[i].x0 = 0;
+            temp_r30->xFC[i].lstickX = 0;
+            temp_r30->xFC[i].lstickY = 0;
+            temp_r30->xFC[i].x4 = 0;
+            temp_r30->xFC[i].x5 = 0;
+            temp_r30->xFC[i].cur_pos.x = 0.0F;
+            temp_r30->xFC[i].cur_pos.y = 0.0F;
+            temp_r30->xFC[i].cur_pos.z = 0.0F;
+            temp_r30->xFC[i].facing_dir = 1.0F;
+        }
+    }
+    temp_f3_2 = arg0->co_attrs.grav;
+    temp_f1 = arg0->co_attrs.jump_v_initial_velocity *
+              arg0->co_attrs.air_jump_v_multiplier;
+    if ((temp_f3_2 < 0.00001f) && (temp_f3_2 > -0.00001f)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        temp_r30->x558 = 10.0f;
+    } else {
+        temp_r30->x558 = temp_f1 * temp_f1 / (2.0 * temp_f3_2);
+    }
+    temp_r30->half_width = 10.0f;
+    temp_r30->half_height = 10.0f;
+    temp_r30->x570 = 1.0f;
+    ftCo_800B9704(arg0);
+    switch (arg0->kind) {
+    case FTKIND_DONKEY:
+    case FTKIND_KOOPA:
+        temp_r30->x56C = 8.5f;
+        break;
+    case FTKIND_GKOOPS:
+        temp_r30->x56C = 17.0f;
+        break;
+    case FTKIND_NANA:
+        temp_r30->x56C = 1.0f;
+        break;
+    default:
+        temp_r30->x56C = 3.5f;
+        break;
+    }
+}
 
 float ftCo_800A17E4(Fighter* fp)
 {
@@ -499,20 +708,17 @@ bool ftCo_800A1BA8(Fighter* fp)
     }
     {
         Vec3 coll_vec;
-        PAD_STACK(2 * 4);
-        {
-            UNK_T sp14;
-            UNK_T sp10;
-            UNK_T spC;
-            if (fp->facing_dir > 0.0) {
-                return mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y,
-                        other_fp->cur_pos.x, other_fp->cur_pos.y,
-                        &coll_vec, &sp10, &spC, &sp14, -1, -1);
-            }
-            return mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y,
-                    other_fp->cur_pos.x, other_fp->cur_pos.y,
-                    &coll_vec, &sp10, &spC, &sp14, -1, -1);
+        Vec3 sp14;
+        UNK_T sp10;
+        UNK_T spC;
+        if (fp->facing_dir > 0.0) {
+            return mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y,
+                                  other_fp->cur_pos.x, other_fp->cur_pos.y,
+                                  &coll_vec, &sp10, &spC, &sp14, -1, -1);
         }
+        return mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y,
+                              other_fp->cur_pos.x, other_fp->cur_pos.y,
+                              &coll_vec, &sp10, &spC, &sp14, -1, -1);
     }
 }
 
@@ -538,7 +744,78 @@ bool ftCo_800A1CA8(Fighter* fp)
     return fp->x2168 ? true : false;
 }
 
-/// #ftCo_800A1CC4
+static inline bool ftCo_800A1CC4_inline0(Fighter* fp, ftCo_803C6594_t* var_r29,
+                                         mp_UnkStruct0* temp_r3)
+{
+    if (mpIsland_8005AC14(&var_r29->x0, -10.0F) == temp_r3) {
+        if (var_r29->x44 != 0) {
+            float temp_f1 = fp->cur_pos.x;
+            if (temp_f1 > var_r29->x48 && temp_f1 < var_r29->x4C) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
+
+static inline void ftCo_800A1CC4_inline1(Fighter* fp, float x, float y)
+{
+    fp->x1A88.x60 = 0x12C;
+    fp->x1A88.x64.x = fp->x1A88.x54.x;
+    fp->x1A88.x64.y = fp->x1A88.x54.y;
+    fp->x1A88.x54.x = x;
+    fp->x1A88.x54.y = y;
+    fp->x1A88.x38 = 5.0F;
+}
+
+static void ftCo_800A1CC4(Fighter* fp, ftCo_803C6594_t* var_r29)
+{
+    struct Fighter_x1A88_t* data;
+
+    PAD_STACK(0x10);
+
+    data = &fp->x1A88;
+    if (var_r29 != NULL && data->x60 == 0 && data->xC != 0 &&
+        fp->ground_or_air != GA_Air && !ftCo_800A21FC(fp))
+    {
+        mp_UnkStruct0* temp_r3 = mpIsland_8005AB54(fp->coll_data.floor.index);
+        if (temp_r3 != NULL) {
+            float dy = data->x54.y - fp->cur_pos.y;
+            float angle = lb_8000D008(dy, ABS(data->x54.x - fp->cur_pos.x));
+            for (; var_r29 != NULL; var_r29 = var_r29->next) {
+                if (!ftCo_800A1CC4_inline0(fp, var_r29, temp_r3)) {
+                    continue;
+                }
+                if (angle > var_r29->x3C) {
+                    if (var_r29->x14 >= 0.0F) {
+                        ftCo_800A1CC4_inline1(fp, var_r29->xC, var_r29->x10);
+                        return;
+                    }
+                } else if (angle < var_r29->x40) {
+                    if (var_r29->x20 >= 0.0F) {
+                        ftCo_800A1CC4_inline1(fp, var_r29->x18, var_r29->x1C);
+                        return;
+                    }
+                } else if (fp->facing_dir > 0.0F) {
+                    if (var_r29->x2C >= 0.0F) {
+                        ftCo_800A1CC4_inline1(fp, var_r29->x24, var_r29->x28);
+                        return;
+                    }
+                } else {
+                    if (var_r29->x38 >= 0.0F) {
+                        ftCo_800A1CC4_inline1(fp, var_r29->x30, var_r29->x34);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}
 
 void ftCo_800A1F3C(Fighter* fp, float arg1, float arg2, float arg3)
 {
@@ -599,6 +876,11 @@ void ftCo_800A20A0(Fighter* fp)
     } else {
         data->xF8_b6 = false;
     }
+}
+
+static inline void ftCo_800A20A0_dontinline(Fighter* fp)
+{
+    ftCo_800A20A0(fp);
 }
 
 bool ftCo_800A2170(Fighter* fp0, Fighter* fp1)
@@ -690,19 +972,19 @@ block_13:
 block_15:
         return mpIsland_8005AC8C(arg0);
 block_16:
-        if (ftCo_800A1F98(0x5A, arg0->x18) != 0) {
-            return 1;
-        }
-        if (ftCo_800A1F98(0x5A, arg0->xC) != 0) {
-            return 1;
-        }
+    if (ftCo_800A1F98(0x5A, arg0->x14.y) != 0) {
+        return 1;
+    }
+    if (ftCo_800A1F98(0x5A, arg0->x8.y) != 0) {
+        return 1;
+    }
         return 0;
     }
 block_21:
     if (temp_cr0_eq == 0) {
         return 0;
     }
-    if (arg0->x18 <= 5.0 || Ground_801C5794() == 0) {
+    if (arg0->x14.y <= 5.0 || Ground_801C5794() == 0) {
         return 0;
     }
     return 1;
@@ -715,7 +997,7 @@ static inline bool inlineL1(mp_UnkStruct0* arg0)
     if (stage_info.internal_stage_id != ONETT) {
         return false;
     }
-    if (!(arg0->xC <= 5.0)) {
+    if (!(arg0->x8.y <= 5.0)) {
         if (Ground_801C5794() != 0) {
             return true;
         }
@@ -748,9 +1030,9 @@ bool ftCo_800A28D0(Fighter* fp, float arg1)
         {
             float x_offset;
             if (fp->facing_dir > 0.0) {
-                x_offset = ABS(data->x14 - fp->cur_pos.x);
+                x_offset = ABS(data->x14.x - fp->cur_pos.x);
             } else {
-                x_offset = ABS(data->x8 - fp->cur_pos.x);
+                x_offset = ABS(data->x8.x - fp->cur_pos.x);
             }
             if (x_offset < (5.0 * arg1)) {
                 return true;
@@ -772,8 +1054,8 @@ bool ftCo_800A2998(Fighter* fp, float arg1)
         }
         {
             float diff_x8, diff_x14;
-            diff_x14 = ABS(data->x14 - fp->cur_pos.x);
-            diff_x8 = ABS(data->x8 - fp->cur_pos.x);
+            diff_x14 = ABS(data->x14.x - fp->cur_pos.x);
+            diff_x8 = ABS(data->x8.x - fp->cur_pos.x);
             if (diff_x14 < diff_x8) {
                 if (diff_x14 < 5.0 * arg1) {
                     return true;
@@ -801,12 +1083,12 @@ float ftCo_800A2A70(Fighter* fp, bool arg1)
         {
             float r;
             if (arg1) {
-                float x = data->x8 - fp->cur_pos.x,
-                      y = data->xC - fp->cur_pos.y;
+                float x = data->x8.x - fp->cur_pos.x,
+                      y = data->x8.y - fp->cur_pos.y;
                 r = sqrtf(SQ(x) + SQ(y));
             } else {
-                float x = data->x14 - fp->cur_pos.x,
-                      y = data->x18 - fp->cur_pos.y;
+                float x = data->x14.x - fp->cur_pos.x,
+                      y = data->x14.y - fp->cur_pos.y;
                 r = sqrtf(SQ(x) + SQ(y));
             }
             return r;
@@ -893,7 +1175,78 @@ bool ftCo_800A3200(Fighter* fp)
     }
 }
 
-/// #ftCo_800A3234
+bool ftCo_800A3234(Fighter* fp)
+{
+    Vec3 sp34;
+    Vec3 sp28;
+
+    bool var_r0;
+    struct Fighter_x1A88_t* temp_r31;
+
+    PAD_STACK(0xC);
+
+    temp_r31 = &fp->x1A88;
+    if (fp->x1A88.xFA_b6) {
+        if (fp->pos_delta.y < 0.1f) {
+            return true;
+        }
+        return false;
+    }
+    if (fp->ground_or_air != GA_Air) {
+        return false;
+    }
+    if (fp->pos_delta.y > 0.0) {
+        return false;
+    }
+    if (fp->motion_id == 0xF4) {
+        return false;
+    }
+    if (fp->kind == FTKIND_YOSHI && fp->x34_scale.y > 1.0F &&
+        temp_r31->x7C < 0x384)
+    {
+        return false;
+    }
+    if (lb_8000D008(temp_r31->x54.y - fp->cur_pos.y,
+                    ABS(temp_r31->x54.x - fp->cur_pos.x)) < -1.3089969f)
+    {
+        return false;
+    }
+    if (fp->facing_dir > 0.0f) {
+        if (fp->coll_data.env_flags & 0x3F) {
+            var_r0 = true;
+        } else {
+            var_r0 = false;
+        }
+    } else if (fp->coll_data.env_flags & 0xFC0) {
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if (var_r0) {
+        return true;
+    }
+
+    {
+        int sp18;
+        int sp14;
+        float topn_x = fp->coll_data.prev_topn.x;
+        float topn_y = fp->coll_data.prev_topn.y;
+        float bottom_x = fp->coll_data.xA4_ecbCurrCorrect.bottom.x;
+        float bottom_y = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
+        float y = fp->coll_data.prev_topn.y + bottom_y;
+        if (ftCo_800A0FB0(&sp34, &sp18, &sp14, &sp28, -1, -1, -1,
+                          topn_x + bottom_x, topn_y + bottom_y,
+                          fp->coll_data.cur_topn.x + bottom_x,
+                          fp->coll_data.cur_topn.y + bottom_y, 0.0f))
+        {
+            return false;
+        }
+        if (temp_r31->x54.y > y) {
+            return true;
+        }
+    }
+    return false;
+}
 
 static inline bool inlineC0(Fighter* fp)
 {
@@ -1143,8 +1496,6 @@ Fighter* ftCo_800A4A40(Fighter* fp)
 
 /// #ftCo_800A4E8C
 
-/// #ftCo_800A50D4
-
 /// Returns the closest enemy fighter
 Fighter* ftCo_800A50D4(Fighter* fp)
 {
@@ -1219,6 +1570,11 @@ Fighter* ftCo_800A5294(Fighter* fp, int player_id)
         }
     }
     return NULL;
+}
+
+static inline Fighter* ftCo_800A5294_dontinline(Fighter* fp, int player_id)
+{
+    return ftCo_800A5294(fp, player_id);
 }
 
 Fighter* ftCo_800A53DC(Fighter* fp)
@@ -1681,6 +2037,11 @@ void ftCo_800A80E4(Fighter* fp)
     }
 }
 
+static inline void ftCo_800A80E4_dontinline(Fighter* fp)
+{
+    ftCo_800A80E4(fp);
+}
+
 /// #ftCo_800A8210
 
 /// #ftCo_800A866C
@@ -1962,9 +2323,247 @@ void ftCo_800A96B8(Fighter* fp)
 }
 #pragma pop
 
-/// #ftCo_800A9904
+static inline bool is_small(float x)
+{
+    if (x < 0.00001F && x > -0.00001F) {
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_800A9CB4
+void ftCo_800A9904(Fighter* fp)
+{
+    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+
+    f32 var_f0;
+    f32 temp_f3;
+    f32 var_f4;
+    f32 var_f5;
+
+    f32* temp_r3;
+
+    Vec3 sp4C;
+    Vec3 sp40;
+    f32 sp3C;
+    f32 sp38;
+
+    PAD_STACK(0x24);
+
+    if (ftCo_800A3498(fp) != 0) {
+        if (fp->co_attrs.max_jumps > fp->x1968_jumpsUsed) {
+            ftCo_800B46B8(fp, CpuCmd_LstickTowardDestination, 0x7F);
+            ftCo_800B463C(fp, CpuCmd_PressY);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseY);
+            ftCo_800B463C(fp, CpuCmd_Done);
+        } else {
+            ftCo_800A96B8(fp);
+        }
+    } else if (temp_r31->xFA_b5) {
+        f32 dx = temp_r31->x54.x - fp->cur_pos.x;
+        if (is_small(fp->pos_delta.x)) {
+            var_f0 = 1000.0F;
+        } else {
+            var_f0 = dx / fp->pos_delta.x;
+        }
+        temp_r3 = &fp->co_attrs.grav;
+        if (is_small(fp->co_attrs.grav)) {
+            var_f5 = 1000.0F;
+        } else {
+            var_f5 = -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) /
+                     fp->co_attrs.grav;
+        }
+        if (var_f5 <= 0.0F) {
+            var_f4 = (fp->pos_delta.y * var_f0) + fp->cur_pos.y;
+        } else if (var_f0 < var_f5) {
+            var_f4 = fp->cur_pos.y + (fp->pos_delta.y * var_f0 -
+                                      0.5 * (*temp_r3 * sqrtf(var_f0)));
+        } else {
+            var_f4 =
+                fp->cur_pos.y +
+                (fp->pos_delta.y * var_f5 - 0.5 * (*temp_r3 * sqrtf(var_f5)) -
+                 ((var_f0 - var_f5) * fp->co_attrs.terminal_vel));
+        }
+        {
+            int stick = 4.7000003F * (temp_r31->level + 1) + 80.0f;
+            if (var_f0 < 0.0 || var_f4 < temp_r31->x54.y) {
+                ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, stick);
+            } else {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            }
+        }
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    } else if (mpLib_8004F8A4(&sp4C, &sp3C, &sp38, &sp40, -1, -1,
+                              fp->cur_pos.x, fp->cur_pos.y, temp_r31->x54.x,
+                              temp_r31->x54.y) != 0)
+    {
+        ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x81);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    } else {
+        ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    }
+}
+
+static inline enum_t ftCo_800A9CB4_inline0(Fighter* fp)
+{
+    if (stage_info.internal_stage_id == SHRINE) {
+        if (fp->cur_pos.x > -150.0f && fp->cur_pos.x < -90.0f) {
+            return 1;
+        }
+    } else if (stage_info.internal_stage_id == FOURSIDE) {
+        return 2;
+    }
+    return 0;
+}
+
+static inline bool ftCo_800A9CB4_inline1(Fighter* fp)
+{
+    Vec3 sp3C;
+    if (fp->x1A88.xFA_b6) {
+        return false;
+    }
+    if (fp->x34_scale.y < 1.0f) {
+        return true;
+    }
+    if (stage_info.internal_stage_id == ICEMTN) {
+        grLib_801C9E60(&sp3C);
+        if (sp3C.y < 0.0) {
+            return true;
+        }
+    } else if (stage_info.internal_stage_id == RCRUISE) {
+        return true;
+    }
+    return false;
+}
+
+void ftCo_800A9CB4(Fighter* fp)
+{
+    struct Fighter_x1A88_t* temp_r31 = &fp->x1A88;
+
+    f32 temp_f1;
+    f32 dx;
+    f32 var_f0;
+    f32 var_f1_2;
+    f32 var_f2;
+    f32 var_f5;
+
+    f32* temp_r3;
+    enum_t var_r0_2;
+    int var_r0_6;
+
+    PAD_STACK(0x58);
+
+    if (ftCo_800A1CA8(fp)) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (ftCo_800A3234(fp)) {
+        if (fp->co_attrs.max_jumps > fp->x1968_jumpsUsed) {
+            if (temp_r31->xFA_b6) {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
+                ftCo_800B463C(fp, CpuCmd_PressY);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseY);
+                ftCo_800B463C(fp, CpuCmd_Done);
+            } else if (fp->kind == FTKIND_YOSHI && fp->x34_scale.y < 1.0 &&
+                       ABS(temp_r31->x54.x - fp->cur_pos.x) < 20.0f)
+            {
+                ftCo_800A0508_dontinline(fp);
+            } else {
+                ftCo_800B46B8(fp, CpuCmd_LstickTowardDestination, 0x7F);
+                ftCo_800B463C(fp, CpuCmd_PressY);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseY);
+                ftCo_800B463C(fp, CpuCmd_Done);
+            }
+            return;
+        }
+        if ((var_r0_2 = ftCo_800A9CB4_inline0(fp))) {
+            if (var_r0_2 == 1) {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
+                ftCo_800B463C(fp, CpuCmd_PressR);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseR);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B463C(fp, CpuCmd_Done);
+            } else {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x50);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
+                ftCo_800B463C(fp, CpuCmd_PressR);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseR);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B463C(fp, CpuCmd_Done);
+            }
+            return;
+        }
+        if (ftCo_800A9CB4_inline1(fp)) {
+            ftCo_800A96B8(fp);
+            return;
+        }
+    }
+    if (temp_r31->xFA_b6) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0x81);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    dx = temp_r31->x54.x - fp->cur_pos.x;
+    var_f1_2 = ABS(dx);
+    if (!is_small(fp->pos_delta.x)) {
+        var_f0 = dx / fp->pos_delta.x;
+    } else if (var_f1_2 > 0.0) {
+        var_f0 = -1.0F;
+    } else {
+        var_f0 = 0.0F;
+    }
+    temp_r3 = &fp->co_attrs.grav;
+    if (is_small(fp->co_attrs.grav)) {
+        var_f5 = 1000.0F;
+    } else {
+        var_f5 = -(-fp->co_attrs.terminal_vel - fp->pos_delta.y) /
+                 fp->co_attrs.grav;
+    }
+    if (var_f5 <= 0.0F) {
+        var_f2 = (fp->pos_delta.y * var_f0) + fp->cur_pos.y;
+    } else if (var_f0 < var_f5) {
+        var_f2 = fp->cur_pos.y +
+                 (fp->pos_delta.y * var_f0 - 0.5 * (*temp_r3 * sqrtf(var_f0)));
+    } else {
+        var_f2 = fp->cur_pos.y +
+                 (fp->pos_delta.y * var_f5 - 0.5 * (*temp_r3 * sqrtf(var_f5)) -
+                  ((var_f0 - var_f5) * fp->co_attrs.terminal_vel));
+    }
+    if (var_f0 < 0.0) {
+        ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
+    } else {
+        if (var_f2 < temp_r31->x54.y) {
+            var_r0_6 = (int) (temp_r31->x54.y - var_f2) * 2;
+            if (var_r0_6 > 0x20) {
+                var_r0_6 = 0x20;
+            }
+            ftCo_800B4778(fp, CpuCmd_LstickXTowardDestinationClamped, var_r0_6,
+                          0x7F);
+        } else {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        }
+    }
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
 
 /**
  * Determine how much to move the stick based on CPU level
@@ -2021,10 +2620,6 @@ void ftCo_800AA320(Fighter* fp, int* stick, int* clamp)
     }
 }
 
-/// #ftCo_800AA42C
-
-/// #ftCo_800AA844
-
 static inline bool isInTeeter(Fighter* fp)
 {
     if (fp->motion_id == ftCo_MS_Ottotto ||
@@ -2033,6 +2628,178 @@ static inline bool isInTeeter(Fighter* fp)
         return true;
     }
     return false;
+}
+
+static inline int ftCo_800AA42C_inline0(float clamp, float dist, float near,
+                                        float far)
+{
+    float raw;
+
+    if (dist > far) {
+        return clamp;
+    }
+    if (dist < near) {
+        return 0;
+    }
+    raw = 127.0F * p_ftCommonData->x0;
+    if (raw > clamp) {
+        raw = clamp;
+    }
+    if (raw < 80.0F) {
+        raw = 80.0F;
+    }
+    {
+        float scale = (dist - near) / (far - near);
+        float tmp = raw + scale * (clamp - raw);
+        int new_clamp = tmp;
+        if (new_clamp > clamp) {
+            new_clamp = clamp;
+        }
+        return new_clamp;
+    }
+}
+
+static inline bool isFacingDestination(Fighter* fp)
+{
+    if (fp->facing_dir * (fp->x1A88.x54.x - fp->cur_pos.x) >= 0.0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void ftCo_800AA42C(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data;
+    f32 near;
+    f32 dist;
+    bool facing_dest;
+    bool running;
+
+    int stick;
+    int clamp;
+
+    PAD_STACK(0x8);
+
+    data = &fp->x1A88;
+    ftCo_800AA320(fp, &stick, &clamp);
+    if (isInTeeter(fp)) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (fp->facing_dir * (fp->x1A88.x54.x - fp->cur_pos.x) >= 0.0) {
+        facing_dest = true;
+    } else {
+        facing_dest = false;
+    }
+    if (!facing_dest) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    {
+        float dx = data->x54.x - fp->cur_pos.x;
+        float dy = data->x54.y - fp->cur_pos.y;
+        dist = sqrtf(dx * dx + dy * dy);
+    }
+    near = data->x38;
+    if (dist - near > data->x3C) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        if (data->xF8_b0) {
+            if (fp->motion_id == ftCo_MS_Dash ||
+                fp->motion_id == ftCo_MS_Run ||
+                fp->motion_id == ftCo_MS_TurnRun)
+            {
+                running = true;
+            } else {
+                running = false;
+            }
+            if (running) {
+                ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
+            } else {
+                ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 2);
+                ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x7F);
+            }
+        } else {
+            ftCo_800B4778(fp, CpuCmd_LstickXTowardDestinationClamped, stick,
+                          clamp);
+        }
+    } else if (dist > near) {
+        int tmp;
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        tmp = ftCo_800AA42C_inline0(clamp, dist, data->x38, data->x3C);
+        ftCo_800B4778(fp, CpuCmd_LstickXTowardDestinationClamped, stick, tmp);
+    } else {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    }
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
+void ftCo_800AA844(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data;
+
+    int sp38;
+    int sp34;
+    Vec3 sp28;
+    Vec3 sp1C;
+    int sp18;
+    int sp14;
+
+    data = &fp->x1A88;
+    if (isInTeeter(fp)) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    ftCo_800AA320(fp, &sp38, &sp34);
+    if (ftCo_800A28D0(fp, 1.0F)) {
+        if (ftCo_800A1CA8(fp) && fp->coll_data.floor.index != -1 &&
+            (mpLib_80054CEC(fp->coll_data.floor.index) & 0x100) &&
+            ftCo_800A0FB0(&sp28, &sp18, &sp14, &sp1C, -1, -1, -1,
+                          fp->cur_pos.x, fp->cur_pos.y - 10.0F, fp->cur_pos.x,
+                          fp->cur_pos.y - 1000.0F, 0.0F))
+        {
+            ftCo_800A08F0(fp);
+        } else if (data->x54.y > fp->cur_pos.y) {
+            ftCo_800A0148(fp);
+        } else if (ABS(data->x54.x - fp->cur_pos.x) > 40.0) {
+            ftCo_800A0148(fp);
+        } else if (inlineC0(fp)) {
+            ftCo_800A0148(fp);
+        } else {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B4778(fp, CpuCmd_LstickForwardClamped, sp38, sp34);
+            ftCo_800B463C(fp, CpuCmd_Done);
+        }
+        return;
+    } else if (inlineC0(fp)) {
+        ftCo_800A0148(fp);
+    } else {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B4778(fp, CpuCmd_LstickForwardClamped, sp38, sp34);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    }
 }
 
 void ftCo_800AABC8(Fighter* fp)
@@ -2056,11 +2823,309 @@ void ftCo_800AABC8(Fighter* fp)
     }
 }
 
-/// #ftCo_800AACD0
+static inline void ftCo_800AABC8_dontinline(Fighter* fp)
+{
+    ftCo_800AABC8(fp);
+}
 
-/// #ftCo_800AAF48
+void ftCo_800AACD0(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    mp_UnkStruct0* temp_r3_2;
 
-/// #ftCo_800AB224
+    u8 _[8];
+
+    int stick;
+    int clamp;
+    Vec3 sp24;
+    Vec3 sp18;
+
+    PAD_STACK(0xC);
+
+    if (isInTeeter(fp)) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0x7F);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    ftCo_800AA320(fp, &stick, &clamp);
+    if (fp->coll_data.floor.index != -1 &&
+        (mpLib_80054CEC(fp->coll_data.floor.index) & 0x100))
+    {
+        ftCo_800A08F0(fp);
+        return;
+    }
+    temp_r3_2 = mpIsland_8005AB54(fp->coll_data.floor.index);
+    if (temp_r3_2 != NULL) {
+        /// @todo Are mp_UnkStruct0/5 the same type?
+        mpIsland_8005ACE8((mp_UnkStruct5*) temp_r3_2, &sp24, &sp18);
+        if ((data->x54.x < sp24.x || data->x54.x > sp18.x) &&
+            !ftCo_800A2BD4(fp))
+        {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B463C(fp, CpuCmd_Done);
+            return;
+        }
+    }
+    if (stage_info.internal_stage_id != ICEMTN && inlineC0(fp)) {
+        ftCo_800A0148(fp);
+        return;
+    }
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    ftCo_800B4778(fp, CpuCmd_LstickForwardClamped, stick, clamp);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
+bool ftCo_800AAF48(Fighter* fp)
+{
+    struct Fighter_x1A88_t* temp_r29 = &fp->x1A88;
+    mp_UnkStruct0* cur;
+
+    f32 dx;
+    f32 dy;
+
+    Vec3 sp44;
+    Vec3 sp38;
+    Vec3 sp2C;
+    f32 sp28;
+    f32 sp24;
+    PAD_STACK(0xC);
+
+    if (temp_r29->x60 != 0) {
+        return false;
+    }
+    if (stage_info.internal_stage_id != SHRINE) {
+        return false;
+    }
+    if (fp->facing_dir > 0.0) {
+        for (cur = mpIsland_80458E88.next; cur != NULL; cur = cur->next) {
+            sp44 = cur->x8;
+            dx = sp44.x - fp->cur_pos.x;
+            dy = sp44.y - fp->cur_pos.y;
+            if (dx < 0.0F) {
+                continue;
+            }
+            if (dy < 0.0F) {
+                continue;
+            }
+            if (mpLib_8004F8A4(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                               fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y))
+            {
+                continue;
+            }
+            if (mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y,
+                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
+            {
+                continue;
+            }
+            if (dy < 2.0F * temp_r29->x558 + temp_r29->x568 &&
+                dx < 5.0F * temp_r29->x564)
+            {
+                fp->x1A88.x60 = 0x12C;
+                fp->x1A88.x64.x = fp->x1A88.x54.x;
+                fp->x1A88.x64.y = fp->x1A88.x54.y;
+                fp->x1A88.x54.x = sp44.x;
+                fp->x1A88.x54.y = sp44.y;
+                fp->x1A88.x38 = 5.0F;
+                return true;
+            }
+        }
+    } else {
+        for (cur = mpIsland_80458E88.next; cur != NULL; cur = cur->next) {
+            Vec3 spC = cur->x14;
+            dx = fp->cur_pos.x - spC.x;
+            dy = fp->cur_pos.y - spC.y;
+            if (dx < 0.0F) {
+                continue;
+            }
+            if (dy < 0.0F) {
+                continue;
+            }
+            if (mpLib_8004F8A4(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                               fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y))
+            {
+                continue;
+            }
+            if (mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y,
+                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
+            {
+                continue;
+            }
+            if (dy < 2.0F * temp_r29->x558 + temp_r29->x568 &&
+                dx < 5.0F * temp_r29->x564)
+            {
+                fp->x1A88.x60 = 0x12C;
+                fp->x1A88.x64.x = fp->x1A88.x54.x;
+                fp->x1A88.x64.y = fp->x1A88.x54.y;
+                fp->x1A88.x54.x = spC.x;
+                fp->x1A88.x54.y = spC.y;
+                fp->x1A88.x38 = 5.0f;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+static inline void ftCo_800AD54C_inline0(Fighter* fp)
+{
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 10);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
+
+void ftCo_800AB224(Fighter* fp)
+{
+    struct Fighter_x1A88_t* temp_r31;
+
+    f32 temp_f1;
+    f32 var_f1_3;
+    f32 var_f2;
+    f32 var_f31;
+
+    Fighter* temp_r0;
+    s32 var_r0_5;
+    s32 var_r0_6;
+
+    u8 _[0x48];
+
+    float sp40;
+    float sp3C;
+    Vec3 sp30;
+    Vec3 sp24;
+
+    PAD_STACK(0xC);
+
+    temp_r31 = &fp->x1A88;
+    if (temp_r31->xFA_b6) {
+        if (fp->facing_dir > 0.0) {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B463C(fp, CpuCmd_Done);
+            return;
+        }
+        if (!ftCo_800A28D0(fp, 1.0F)) {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0xB0);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_Done);
+            return;
+        }
+        ftCo_800A0384(fp);
+        return;
+    }
+    if (temp_r31->xF9_b1) {
+        temp_r0 = temp_r31->x44;
+        if (temp_r0 != NULL) {
+            if (ftCo_800A2C08(fp)) {
+                if (ftCo_800A2170(fp, temp_r0)) {
+                    var_f1_3 = ABS(temp_r0->cur_pos.x - fp->cur_pos.x);
+                    if (var_f1_3 < 37.5) {
+                        ftCo_800A0148(fp);
+                        return;
+                    }
+                }
+            }
+        }
+        if (!temp_r31->xF8_b6 || fp->ground_or_air != GA_Ground ||
+            !(HSD_Randf() < 0.05f * temp_r31->level) ||
+            (temp_r31->xF8_b6 = false, ftCo_800BA2E8(fp, temp_r0) == 0))
+        {
+            goto block_49;
+        }
+    } else {
+    block_49:
+        if (ftCo_800A21FC(fp)) {
+            ftCo_800AA42C(fp);
+            return;
+        }
+        var_f2 = ABS(temp_r31->x54.x - fp->cur_pos.x);
+        temp_f1 = temp_r31->x54.y - fp->cur_pos.y;
+        if (var_f2 < 0.00001F && var_f2 > -0.00001F) {
+            var_r0_5 = 1;
+        } else {
+            var_r0_5 = 0;
+        }
+        if (var_r0_5 != 0) {
+            if (temp_f1 > 0.0) {
+                var_f31 = +M_PI_2;
+            } else {
+                var_f31 = -M_PI_2;
+            }
+        } else {
+            var_f31 = lb_8000D008(temp_f1, var_f2);
+        }
+        if (var_f31 > 0.6108652334660292) {
+            if (mpLib_8004F8A4(&sp24, &sp3C, &sp40, &sp30, -1, -1,
+                               fp->coll_data.cur_topn.x,
+                               fp->coll_data.cur_topn.y,
+                               fp->coll_data.cur_topn.x, fp->x1A88.x54.y))
+            {
+                var_r0_6 = 1;
+            } else {
+                var_r0_6 = 0;
+            }
+            if (var_r0_6 != 0) {
+                if (ftCo_800A28D0(fp, 1.0F)) {
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                    ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
+                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
+                    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                    ftCo_800B463C(fp, CpuCmd_Done);
+                } else if (ftCo_800AAF48(fp) != 0) {
+                    ftCo_800A0148(fp);
+                } else {
+                    ftCo_800AABC8_dontinline(fp);
+                }
+            } else if (stage_info.internal_stage_id == ICEMTN) {
+                ftCo_800A0148(fp);
+            } else if (!ftCo_800A2BD4(fp)) {
+                if (var_f31 < 1.3089969288557768) {
+                    ftCo_800AD54C_inline0(fp);
+                } else {
+                    ftCo_800AABC8_dontinline(fp);
+                }
+            } else {
+                ftCo_800A0148(fp);
+            }
+        } else if (var_f31 > -0.7853981573134661) {
+            if (!ftCo_800A2BD4(fp)) {
+                ftCo_800AD54C_inline0(fp);
+            } else {
+                ftCo_800AA844(fp);
+            }
+        } else {
+            ftCo_800AACD0(fp);
+        }
+    }
+}
 
 void ftCo_800ABA34(Fighter* fp)
 {
@@ -2183,13 +3248,331 @@ void ftCo_800AC434(Fighter* fp)
     }
 }
 
-/// #ftCo_800AC5A0
+void ftCo_800AC5A0(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data;
+    bool var_r0;
+    s8 stick_x;
+    s8 stick_y;
 
-/// #ftCo_800AC7D4
+    data = &fp->x1A88;
+    if (!fp->x221A_b3) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, CpuCmd_ReleaseR);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (data->x7C % 120 > 120 - data->level * 12) {
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if (var_r0) {
+        float kb_x = fp->x8c_kb_vel.x;
+        float kb_y = fp->x8c_kb_vel.y;
+        float kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
+        if (!is_small(kb_mag)) {
+            float x = kb_x * (1.0F / kb_mag);
+            float y = kb_y * (1.0F / kb_mag);
+            if (kb_x > 0.0F) {
+                stick_y = 127.0F * -y;
+                stick_x = 127.0F * +x;
+            } else {
+                stick_y = 127.0F * +y;
+                stick_x = 127.0F * -x;
+            }
+        }
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, stick_y);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, stick_x);
+    } else {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    }
+    if (data->xFA_b1) {
+        ftCo_800B463C(fp, CpuCmd_PressR);
+    }
+    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
 
-/// #ftCo_800ACB44
+void ftCo_800AC7D4(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Fighter* temp_r3;
+    int temp_r0_2;
+    enum_t var_r0;
 
-/// #ftCo_800ACD5C
+    PAD_STACK(8);
+
+    var_r0 = ftCo_800A3134(fp);
+    if (var_r0 == 0) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (var_r0 == 1) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    temp_r0_2 = data->xC;
+    if ((temp_r0_2 == 0xF) || (temp_r0_2 == 0)) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    temp_r3 = ftCo_800A4BEC(fp);
+    if (temp_r3 == NULL) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    } else if (ftCo_800A1AB4(fp, temp_r3) < 15.0) {
+        if (HSD_Randf() < 0.1F * data->level) {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B463C(fp, CpuCmd_ReleaseA);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_PressA);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseA);
+            ftCo_800B463C(fp, CpuCmd_Done);
+        } else {
+            if (temp_r3->cur_pos.x - fp->cur_pos.x < 0.0F) {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0x50);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            } else {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0xB0);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            }
+            ftCo_800B463C(fp, CpuCmd_Done);
+        }
+    } else {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    }
+}
+
+void ftCo_800ACB44(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Fighter* temp_r3;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f2;
+    s32 temp_r0_2;
+    s32 var_r0;
+
+    var_r0 = ftCo_800A3200(fp);
+    if (var_r0 == 1) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (var_r0 == 0) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (data->xC == 0xF || data->xC == 0) {
+        ftCo_800A0AF4(fp);
+        return;
+    }
+    temp_r3 = ftCo_800A4BEC(fp);
+    if (temp_r3 == NULL) {
+        ftCo_800A0AF4(fp);
+        return;
+    }
+    temp_f1_2 = ftCo_800A1AB4(fp, temp_r3);
+    if (data->xF9_b2 && temp_f1_2 < 30.0) {
+        if (0.1F * data->level > HSD_Randf()) {
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_PressR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+            ftCo_800B463C(fp, CpuCmd_Done);
+        } else {
+            ftCo_800B463C(fp, CpuCmd_ReleaseA);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_PressA);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseA);
+            ftCo_800B463C(fp, CpuCmd_Done);
+        }
+    } else {
+        ftCo_800A0AF4(fp);
+    }
+}
+
+void ftCo_800ACD5C(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+
+    PAD_STACK(0x18);
+
+    if (data->xF9_b1) {
+        Fighter* enemy = data->x44;
+        if (enemy != NULL && data->xF8_b6) {
+            data->xF8_b6 = false;
+            ftCo_800BA674(fp, enemy);
+            return;
+        }
+    }
+    if (data->x88 > 0 && gm_801A4310() != 0x1C) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B463C(fp, CpuCmd_PressUp);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B463C(fp, CpuCmd_ReleaseUp);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        data->x88 = 0;
+        data->x8C = gm_8016C75C(fp->gobj);
+        return;
+    }
+    if (data->xC == 0xB && fp->item_gobj == NULL) {
+        ftCo_800B4880(fp, 0x26);
+        return;
+    }
+    if (ftCo_800A3554(fp, 1.0f) == 0) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if ((fp->kind == FTKIND_ZELDA || fp->kind == FTKIND_SEAK) && data->xF8_b5)
+    {
+        ftCo_800B4880(fp, 0x26);
+        data->xF8_b5 = false;
+        return;
+    }
+    if (!ftCo_800A2C08(fp)) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_LstickXForward, 0xB0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B46B8(fp, CpuCmd_WaitFor, 0xA);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (data->level < 5) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+    if (fp->kind == FTKIND_DONKEY) {
+        if (fp->motion_id != ftDk_MS_SpecialNLoop && fp->fv.dk.x222C == 0) {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B463C(fp, CpuCmd_PressB);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseB);
+            ftCo_800B463C(fp, CpuCmd_Done);
+            return;
+        }
+    } else if (fp->kind == FTKIND_SAMUS) {
+        if (fp->motion_id != ftSs_MS_SpecialNHold && fp->fv.ss.x2230 == 0) {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B463C(fp, CpuCmd_PressB);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseB);
+            ftCo_800B463C(fp, CpuCmd_Done);
+            return;
+        }
+    } else if (fp->kind == FTKIND_MEWTWO) {
+        ftMewtwoAttributes* da = fp->dat_attrs;
+        if (fp->fv.mt.x2234_shadowBallCharge ==
+            da->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
+        {
+            if (fp->motion_id == ftMt_MS_SpecialNLoop ||
+                fp->motion_id == ftMt_MS_SpecialNLoopFull)
+            {
+                ftCo_800B463C(fp, CpuCmd_PressR);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseR);
+                ftCo_800B463C(fp, CpuCmd_Done);
+                return;
+            }
+        } else if (fp->motion_id != ftMt_MS_SpecialNLoop &&
+                   fp->fv.mt.x2234_shadowBallCharge == 0)
+        {
+            ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+            ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+            ftCo_800B463C(fp, CpuCmd_PressB);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseB);
+            ftCo_800B463C(fp, CpuCmd_Done);
+            return;
+        }
+    } else if (fp->kind == FTKIND_KIRBY) {
+        if (fp->fv.kb.hat.kind == FTKIND_DONKEY) {
+            if (fp->motion_id != ftKb_MS_DkSpecialNLoop && fp->fv.kb.xBC == 0)
+            {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B463C(fp, CpuCmd_PressB);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseB);
+                ftCo_800B463C(fp, CpuCmd_Done);
+                return;
+            }
+        } else if (fp->fv.kb.hat.kind == FTKIND_SAMUS) {
+            if (fp->motion_id != ftKb_MS_SsSpecialNHold && fp->fv.kb.xA8 == 0)
+            {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B463C(fp, CpuCmd_PressB);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseB);
+                ftCo_800B463C(fp, CpuCmd_Done);
+                return;
+            }
+        } else if (fp->fv.kb.hat.kind == FTKIND_MEWTWO) {
+            struct ftKb_DatAttrs* da = fp->dat_attrs;
+            if (fp->fv.kb.x9C == da->specialn_mt_charge_time) {
+                if (fp->motion_id == ftKb_MS_MtSpecialNLoop ||
+                    fp->motion_id == ftKb_MS_MtSpecialNLoopFull)
+                {
+                    ftCo_800B463C(fp, CpuCmd_PressR);
+                    ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                    ftCo_800B463C(fp, CpuCmd_ReleaseR);
+                    return;
+                }
+            } else if (fp->motion_id != ftKb_MS_MtSpecialNLoop &&
+                       fp->fv.kb.x9C == 0)
+            {
+                ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+                ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+                ftCo_800B463C(fp, CpuCmd_PressB);
+                ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+                ftCo_800B463C(fp, CpuCmd_ReleaseB);
+                ftCo_800B463C(fp, CpuCmd_Done);
+                return;
+            }
+        }
+    }
+    ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
+    ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+    ftCo_800B463C(fp, CpuCmd_Done);
+}
 
 void ftCo_800AD42C(Fighter* fp)
 {
@@ -2214,11 +3597,172 @@ void ftCo_800AD42C(Fighter* fp)
     }
 }
 
-/// #ftCo_800AD54C
+void ftCo_800AD54C(Fighter* fp)
+{
+    u8 _[8];
+    int stick;
+    int clamp;
+    PAD_STACK(8);
 
-/// #ftCo_800AD7FC
+    ftCo_800AA320(fp, &stick, &clamp);
+    if (fp->ground_or_air == GA_Air) {
+        ftCo_800B4778(fp, CpuCmd_LstickForwardClamped, stick, clamp);
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    } else if (ftCo_800A28D0(fp, 1.0F)) {
+        ftCo_800AD54C_inline0(fp);
+    } else if (inlineC0(fp)) {
+        if (HSD_Randf() < 0.5f) {
+            ftCo_800A0384(fp);
+        } else {
+            ftCo_800AD54C_inline0(fp);
+        }
+    } else if (mpIsland_8005AB54(fp->coll_data.floor.index) != NULL) {
+        ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
+        ftCo_800B4778(fp, CpuCmd_LstickForwardClamped, stick, clamp);
+        ftCo_800B463C(fp, CpuCmd_Done);
+    }
+}
 
-/// #ftCo_800ADC28
+static inline bool is_capsule_egg_ball(ItemKind kind)
+{
+    if (kind == It_Kind_Capsule || kind == It_Kind_Egg ||
+        kind == It_Kind_M_Ball)
+    {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * CPU item throw behavior
+ */
+void ftCo_800AD7FC(Fighter* fp)
+{
+    Fighter* enemy;
+    struct Fighter_x1A88_t* data;
+    Item* item;
+    f32 angle;
+
+    PAD_STACK(0x10);
+
+    data = &fp->x1A88;
+    if (fp->item_gobj == NULL) {
+        data->x18 = data->x1C;
+        ftCo_800B463C(fp, CpuCmd_Done);
+        return;
+    }
+
+    enemy = data->x44;
+    item = GET_ITEM(fp->item_gobj);
+    if (enemy != NULL && data->xC == 0x1D) {
+        if (!ftCo_800A2C08(fp)) {
+            ftCo_800AD54C_inline0(fp);
+        } else {
+            angle = lb_8000D008(enemy->cur_pos.y - fp->cur_pos.y,
+                                ABS(enemy->cur_pos.x - fp->cur_pos.x));
+            if (angle > 1.3089969288557768) {
+                ftCo_800B4880(fp, 0x2B);
+            } else if (angle < -1.3089969288557768) {
+                ftCo_800B4880(fp, 0x2C);
+            } else {
+                ftCo_800B4880(fp, 0x2A);
+            }
+            data->x18 = data->x1C;
+        }
+    } else {
+        if (enemy != NULL) {
+            float unused = ftCo_800A1AB4(fp, enemy);
+            angle = lb_8000D008(enemy->cur_pos.y - fp->cur_pos.y,
+                                ABS(enemy->cur_pos.x - fp->cur_pos.x));
+            if (angle > 1.3089969288557768) {
+                ftCo_800B4880(fp, 0xD);
+            } else if (angle < -1.3089969288557768) {
+                ftCo_800B4880(fp, 0xE);
+            } else {
+                if (!ftCo_800A2C08(fp)) {
+                    if (is_capsule_egg_ball(item->kind)) {
+                        ftCo_800B4880(fp, 0xE);
+                    } else {
+                        ftCo_800B4880(fp, 0x28);
+                    }
+                } else if (angle < 0.26179938577115536 &&
+                           angle > -0.26179938577115536)
+                {
+                    ftCo_800B4880(fp, 0xF);
+                } else {
+                    if (is_capsule_egg_ball(item->kind)) {
+                        ftCo_800B4880(fp, 0xE);
+                    } else {
+                        ftCo_800B4880(fp, 0x28);
+                    }
+                }
+            }
+        } else {
+            if (is_capsule_egg_ball(item->kind)) {
+                ftCo_800B4880(fp, 0xE);
+            } else {
+                ftCo_800B4880(fp, 0x28);
+            }
+        }
+        data->x18 = data->x1C;
+    }
+}
+
+/// Handle charging neutral-B
+void ftCo_800ADC28(Fighter* fp)
+{
+    if (fp->x1A88.x18 == 0xA) {
+        return;
+    }
+
+    if (fp->kind == FTKIND_DONKEY) {
+        if (fp->motion_id == ftDk_MS_SpecialNLoop) {
+            ftCo_800B463C(fp, CpuCmd_PressR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+        }
+    } else if (fp->kind == FTKIND_SAMUS) {
+        if (fp->motion_id == ftSs_MS_SpecialNHold) {
+            ftCo_800B463C(fp, CpuCmd_PressR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        }
+    } else if (fp->kind == FTKIND_MEWTWO) {
+        if (fp->motion_id == ftMt_MS_SpecialNLoop ||
+            fp->motion_id == ftMt_MS_SpecialNLoopFull)
+        {
+            ftCo_800B463C(fp, CpuCmd_PressR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        }
+    } else if (fp->kind == FTKIND_KIRBY) {
+        FighterKind kind = fp->fv.kb.hat.kind;
+        if (kind == FTKIND_DONKEY && fp->motion_id == ftKb_MS_DkSpecialNLoop) {
+            ftCo_800B463C(fp, CpuCmd_PressR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        } else if (kind == FTKIND_SAMUS &&
+                   fp->motion_id == ftKb_MS_SsSpecialNHold)
+        {
+            ftCo_800B463C(fp, CpuCmd_PressR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        } else if (kind == FTKIND_MEWTWO &&
+                   (fp->motion_id == ftKb_MS_MtSpecialNLoop ||
+                    fp->motion_id == ftKb_MS_MtSpecialNLoopFull))
+        {
+            ftCo_800B463C(fp, CpuCmd_PressR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+            ftCo_800B463C(fp, CpuCmd_ReleaseR);
+            ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
+        }
+    }
+}
 
 /// #ftCo_800ADE48
 
@@ -2231,8 +3775,6 @@ void ftCo_800AD42C(Fighter* fp)
 /// #ftCo_800AEFB8
 
 /// #ftCo_800AF290
-
-/// #ftCo_800AF78C
 
 static inline bool inlineI1(struct Fighter_x1A88_t* data)
 {
@@ -2274,6 +3816,123 @@ static inline bool inlineI2(Item_GObj* gobj)
         return true;
     }
     return false;
+}
+
+static inline void ftCo_800AF78C_inline0(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    if (ftCo_800A1C44(fp)) {
+        data->xF8_b6 = false;
+    } else {
+        if ((data->x44 != NULL) && (fp->ground_or_air == GA_Ground)) {
+            if (ftCo_800A1AB4(fp, data->x44) <
+                M2C_FIELD(Fighter_804D64FC, float**, 0x20)[fp->kind])
+            {
+                data->xF8_b6 = true;
+            } else {
+                data->xF8_b6 = false;
+            }
+        } else {
+            data->xF8_b6 = false;
+        }
+    }
+}
+
+void ftCo_800AF78C(Fighter* fp)
+{
+    Vec3 sp4C;
+
+    Fighter** temp_r31;
+    struct Fighter_x1A88_t* temp_r30;
+    struct Fighter_x1A88_t* temp_r27;
+
+    Fighter* temp_r3_2;
+    Fighter* temp_r4_2;
+    f32 temp_f2_2;
+    f32 temp_f3;
+    f32 var_f4;
+    s32 temp_r3;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r0_3;
+
+    PAD_STACK(8);
+
+    temp_r30 = &fp->x1A88;
+    temp_r3 = ftCo_800A229C(fp, &sp4C);
+    if (temp_r3 != 0) {
+        ftCo_800AE7AC(fp, &sp4C, temp_r3);
+        return;
+    }
+    temp_r3_2 = ftCo_800A5CE0(fp);
+    temp_r30->x44 = temp_r3_2;
+    if (temp_r3_2 != NULL) {
+        temp_r30->xF8_b0 = true;
+        temp_r30->xF9_b2 = false;
+        temp_r30->xF9_b4 = false;
+        temp_r30->xF9_b3 = false;
+        temp_r30->xF9_b5 = false;
+        temp_r30->xF9_b6 = false;
+        temp_r30->xF9_b7 = false;
+        temp_r30->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (temp_r30->x18 != temp_r30->x20 && temp_r30->x18 != temp_r30->x1C) {
+            temp_r30->x60 = 0;
+        }
+        if (temp_r30->x18 == 4) {
+            var_r0 = false;
+        } else {
+            temp_r30->xFA_b2 = false;
+            var_r0 = true;
+        }
+        if (var_r0) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    if (fp->x221D_b6) {
+        var_r0_2 = 1;
+    } else if (fp->x2168 != 0 && fp->x2338.x == 0) {
+        var_r0_2 = 1;
+    } else {
+        var_r0_2 = 0;
+    }
+    if (var_r0_2 != 0) {
+        ftCo_800AECF0(fp);
+        return;
+    }
+    temp_r30->xF8_b0 = true;
+    temp_r30->xF9_b2 = true;
+    temp_r30->xF9_b4 = true;
+    temp_r30->xF9_b3 = false;
+    temp_r30->xF9_b5 = true;
+    temp_r30->xF9_b6 = true;
+    temp_r30->xF9_b7 = true;
+    temp_r30->xF9_b1 = false;
+
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    temp_r31 = &fp->x1A88.x44;
+
+    temp_r27 = &fp->x1A88;
+    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+        temp_r27->x4C = NULL;
+    } else if (fp->x2168 != 0) {
+        temp_r27->x4C = NULL;
+    } else {
+        temp_r27->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+    }
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+
+    ftCo_800AF78C_inline0(fp);
+    if (inlineI1_alt(fp)) {
+        if (temp_r30->x4C != NULL) {
+            ftCo_800A866C(fp);
+        } else {
+            ftCo_800A80E4(fp);
+        }
+    }
+    ftCo_800ADE48(fp);
 }
 
 void ftCo_800AFC40(Fighter* fp)
@@ -2331,9 +3990,206 @@ void ftCo_800AFC40(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// #ftCo_800AFE3C
+void ftCo_800AFE3C(Fighter* fp, int arg1)
+{
+    struct Fighter_x1A88_t* temp_r31;
 
-/// #ftCo_800B00F8
+    Vec3 sp2C;
+
+    Fighter* temp_r3_2;
+    Fighter* temp_r3_6;
+    s32 temp_r3;
+
+    PAD_STACK(0x14);
+
+    temp_r31 = &fp->x1A88;
+    temp_r3 = ftCo_800A229C(fp, &sp2C);
+    if (temp_r3 != 0) {
+        ftCo_800AE7AC(fp, &sp2C, temp_r3);
+        return;
+    }
+    temp_r3_2 = ftCo_800A5CE0(fp);
+    temp_r31->x44 = temp_r3_2;
+    if (temp_r3_2 != NULL) {
+        temp_r31->xF8_b0 = true;
+        temp_r31->xF9_b2 = false;
+        temp_r31->xF9_b4 = false;
+        temp_r31->xF9_b3 = false;
+        temp_r31->xF9_b5 = false;
+        temp_r31->xF9_b6 = false;
+        temp_r31->xF9_b7 = false;
+        temp_r31->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (inlineI1_alt(fp)) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    temp_r31->xF8_b0 = false;
+    temp_r31->xF9_b2 = true;
+    temp_r31->xF9_b4 = true;
+    temp_r31->xF9_b3 = true;
+    temp_r31->xF9_b5 = true;
+    temp_r31->xF9_b6 = true;
+    temp_r31->xF9_b7 = true;
+    temp_r31->xF9_b1 = false;
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+        temp_r31->x4C = NULL;
+    } else {
+        if (fp->x2168 != 0) {
+            temp_r31->x4C = NULL;
+        } else {
+            temp_r31->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
+    }
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+    if (inlineI1_alt(fp)) {
+        if ((temp_r3_6 = ftCo_800A5294_dontinline(fp, arg1))) {
+            ftCo_800A75DC(fp, temp_r3_6);
+        } else {
+            ftCo_800A75DC(fp, temp_r31->x44);
+        }
+    }
+    ftCo_800ADE48(fp);
+}
+
+void ftCo_800B00F8(Fighter* fp)
+{
+    Vec3 sp28;
+    Fighter* temp_r3;
+    Item_GObj* temp_r3_3;
+    enum ItemKind temp_r0;
+    s32 temp_r3_2;
+    s32 temp_r3_4;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r0_3;
+    int var_r0_10;
+    int var_r0_4;
+    int var_r0_5;
+    int var_r0_6;
+    int var_r0_7;
+    int var_r0_8;
+    int var_r0_9;
+    struct Fighter_x1A88_t* temp_r31;
+    struct Fighter_x1A88_t* temp_r4;
+    int tmp;
+
+    PAD_STACK(0x10);
+
+    temp_r31 = &fp->x1A88;
+    tmp = ftCo_800A229C(fp, &sp28);
+    if (tmp) {
+        ftCo_800AE7AC(fp, &sp28, tmp);
+        return;
+    }
+    temp_r3 = ftCo_800A5CE0(fp);
+    temp_r31->x44 = temp_r3;
+    if (temp_r3 != NULL) {
+        temp_r31->xF8_b0 = true;
+        temp_r31->xF9_b2 = false;
+        temp_r31->xF9_b4 = false;
+        temp_r31->xF9_b3 = false;
+        temp_r31->xF9_b5 = false;
+        temp_r31->xF9_b6 = false;
+        temp_r31->xF9_b7 = false;
+        temp_r31->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        temp_r3_2 = temp_r31->x18;
+        if ((temp_r3_2 != temp_r31->x20) && (temp_r3_2 != temp_r31->x1C)) {
+            temp_r31->x60 = 0;
+        }
+        if (temp_r31->x18 == 4) {
+            var_r0 = 0;
+        } else {
+            temp_r31->xFA_b2 = false;
+            var_r0 = 1;
+        }
+        if (var_r0 != 0) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    temp_r3_3 = fp->item_gobj;
+    if (temp_r3_3 != NULL && !inlineI2(temp_r3_3)) {
+        temp_r31->x4C = NULL;
+    } else {
+        if (fp->x2168 != 0) {
+            temp_r31->x4C = NULL;
+        } else {
+            temp_r31->x4C = ftCo_800A61D8(fp);
+        }
+    }
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+    temp_r4 = &fp->x1A88;
+    temp_r3_4 = fp->x1A88.x18;
+    if (temp_r3_4 != fp->x1A88.x20 && temp_r3_4 != temp_r4->x1C) {
+        temp_r4->x60 = 0;
+    }
+    if (temp_r4->x18 == 4) {
+        var_r0_3 = 0;
+    } else {
+        temp_r4->xFA_b2 = false;
+        var_r0_3 = 1;
+    }
+    if (var_r0_3 != 0) {
+        if (temp_r31->x4C != NULL) {
+            ftCo_800A866C(fp);
+        } else if (((temp_r31->x7C % 60) * 5) == 0) {
+            if (HSD_Randf() < 0.5) {
+                ftCo_800A8940(fp);
+            }
+            if (HSD_Randf() > 0.5) {
+                var_r0_4 = 1;
+            } else {
+                var_r0_4 = 0;
+            }
+            temp_r31->xF8_b0 = var_r0_4;
+            if (HSD_Randf() > 0.5) {
+                var_r0_5 = 1;
+            } else {
+                var_r0_5 = 0;
+            }
+            temp_r31->xF9_b2 = var_r0_5;
+            if (HSD_Randf() > 0.5) {
+                var_r0_6 = 1;
+            } else {
+                var_r0_6 = 0;
+            }
+            temp_r31->xF9_b4 = var_r0_6;
+            if (HSD_Randf() > 0.5) {
+                var_r0_7 = 1;
+            } else {
+                var_r0_7 = 0;
+            }
+            temp_r31->xF9_b3 = var_r0_7;
+            if (HSD_Randf() > 0.5) {
+                var_r0_8 = 1;
+            } else {
+                var_r0_8 = 0;
+            }
+            temp_r31->xF9_b5 = var_r0_8;
+            if (HSD_Randf() > 0.5) {
+                var_r0_9 = 1;
+            } else {
+                var_r0_9 = 0;
+            }
+            temp_r31->xF9_b6 = var_r0_9;
+            if (HSD_Randf() > 0.5) {
+                var_r0_10 = 1;
+            } else {
+                var_r0_10 = 0;
+            }
+            temp_r31->xF9_b7 = var_r0_10;
+            temp_r31->xF9_b1 = false;
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 /// #ftCo_800B04DC
 
@@ -2365,53 +4221,68 @@ static inline void inlineI3(Fighter* fp, struct Fighter_x1A88_t* data)
 void ftCo_800B0760(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    PAD_STACK(2 * 4);
-    inlineI0(fp, data);
-    if (fp->item_gobj != NULL) {
-        if (!inlineI2(fp->item_gobj)) {
-            data->x4C = NULL;
-        }
+    PAD_STACK(4 * 4);
+
+    data->xF8_b0 = true;
+    data->xF9_b2 = true;
+    data->xF9_b4 = true;
+    data->xF9_b3 = false;
+    data->xF9_b5 = false;
+    data->xF9_b6 = false;
+    data->xF9_b7 = false;
+    data->xF9_b1 = false;
+
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+
+    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+        data->x4C = NULL;
+    } else if (fp->x2168 != 0) {
+        data->x4C = NULL;
     } else {
-        if (fp->x2168 != 0) {
-            data->x4C = NULL;
-        } else {
-            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
-        }
+        data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
     }
     fp->x1A88.x50 = ftCo_800A648C(fp);
     inlineI3(fp, data);
     ftCo_800ADE48(fp);
 }
 
-/// @todo Maybe a macro?
-static inline float inlineM0(float x)
+static inline void ftCo_800B0760_dontinline(Fighter* fp)
 {
-    return x >= 0 ? 127.0F * x : 128.0F * x;
+    ftCo_800B0760(fp);
+}
+
+/// @todo Maybe a macro?
+static inline u8 inlineM0(float x)
+{
+    if (x >= 0) {
+        return 127.0F * x;
+    } else {
+        return 128.0F * x;
+    }
 }
 
 void ftCo_800B0918(Fighter* fp0, Fighter* fp1)
 {
-    struct Fighter_x1A88_t* temp_r4 = &fp1->x1A88;
-    temp_r4->x444 = temp_r4->x444->x1C;
-    temp_r4->x448 = temp_r4->x448->x1C;
-    if (temp_r4->x444 == temp_r4->x444) {
-        temp_r4->x444 = &temp_r4->xFC;
+    struct Fighter_x1A88_t* data;
+
+    data = &fp1->x1A88;
+    data->x444++;
+    data->x448++;
+    if (data->x444 == data->xFC + ARRAY_SIZE(data->xFC)) {
+        data->x444 = data->xFC;
     }
-    if (temp_r4->x448 == temp_r4->x444) {
-        temp_r4->x448 = &temp_r4->xFC;
+    if (data->x448 == data->xFC + ARRAY_SIZE(data->xFC)) {
+        data->x448 = data->xFC;
     }
-    temp_r4->x444->x6 = inlineM0(fp0->input.lstick.x);
-    temp_r4->x444->x7 = inlineM0(fp0->input.lstick.y);
-    temp_r4->x444->x8 = inlineM0(fp0->input.cstick.x);
-    temp_r4->x444->x9 = inlineM0(fp0->input.cstick.y);
-    temp_r4->x444->x4 = fp0->input.x650;
-    temp_r4->x444->x5 = fp0->input.x650;
-    temp_r4->x444->x0 = fp0->input.held_inputs;
-    {
-        struct Fighter_x1A88_xFC_t* temp_r6 = temp_r4->x444;
-        temp_r6->cur_pos = fp0->cur_pos;
-        temp_r4->x444->facing_dir = fp0->facing_dir;
-    }
+    data->x444->lstickX = inlineM0(fp0->input.lstick.x);
+    data->x444->lstickY = inlineM0(fp0->input.lstick.y);
+    data->x444->cstickX = inlineM0(fp0->input.cstick.x);
+    data->x444->cstickY = inlineM0(fp0->input.cstick.y);
+    data->x444->x4 = fp0->input.x650;
+    data->x444->x5 = fp0->input.x650;
+    data->x444->x0 = fp0->input.held_inputs;
+    data->x444->cur_pos = fp0->cur_pos;
+    data->x444->facing_dir = fp0->facing_dir;
 }
 
 static inline bool inlineJ0(Fighter* fp, Fighter* nana_fp)
@@ -2440,10 +4311,10 @@ void ftCo_800B0AF4(Fighter* fp)
             ftPp_SpecialLw_Enter(fp->gobj);
             return;
         }
-        data->lstickX = data->x448->x6;
-        data->lstickY = data->x448->x7;
-        data->cstickX = data->x448->x8;
-        data->cstickY = data->x448->x9;
+        data->lstickX = data->x448->lstickX;
+        data->lstickY = data->x448->lstickY;
+        data->cstickX = data->x448->cstickX;
+        data->cstickY = data->x448->cstickY;
         data->x0 = data->x448->x0;
         data->ltrigger = data->x448->x4;
         data->rtrigger = data->x448->x5;
@@ -2600,11 +4471,198 @@ bool ftCo_800B0E98(Fighter* fp0, Fighter* fp1)
     return false;
 }
 
-/// #ftCo_800B101C
+static inline bool isPopoUpB(Fighter* fp)
+{
+    if (fp->motion_id >= ftPp_MS_SpecialHi_0 &&
+        fp->motion_id <= ftPp_MS_SpecialHi_5)
+    {
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_800B126C
+static inline bool ftCo_800B101C_inline0(Fighter* fp, Fighter* other)
+{
+    struct Fighter_x1A88_t* temp_r4 = &fp->x1A88;
+    if (isPopoUpB(fp)) {
+        temp_r4->xFB_b0 = true;
+        return true;
+    } else {
+        float dx = fp->cur_pos.x - other->cur_pos.x;
+        float dy = other->cur_pos.y - fp->cur_pos.y;
+        if (SQ(dx) + SQ(dy) > SQ(25.0)) {
+            return true;
+        } else if (ftCo_800B0CA8(fp, other)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
 
-/// #ftCo_800B1478
+void ftCo_800B101C(Fighter* fp)
+{
+    HSD_GObj* var_r4;
+    f32 temp_f0;
+    f32 temp_f2;
+    f32 temp_f3;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r3;
+    struct Fighter_x1A88_t* temp_r31;
+    Fighter* var_r29;
+
+    PAD_STACK(8);
+
+    temp_r31 = &fp->x1A88;
+    temp_r31->xF9_b2 = true;
+    temp_r31->xF9_b4 = true;
+    var_r29 = ftCo_800A589C(fp);
+    if (var_r29 == NULL) {
+        ftCo_800AEFB8(fp);
+        return;
+    }
+    ftCo_800B0918(var_r29, fp);
+
+    // Set Nana's AI level based on percent
+    temp_f0 = var_r29->dmg.x1830_percent / 20.0F;
+    var_r0 = temp_f0;
+    if ((int) temp_f0 > 9) {
+        var_r0 = 9;
+    }
+    temp_r31->level = var_r0;
+
+    if (temp_r31->xFA_b7) {
+        ftCo_800A7AAC(fp);
+        if (ftCo_800B101C_inline0(fp, var_r29)) {
+            temp_r31->xFA_b7 = false;
+            temp_r31->x18 = temp_r31->x1C;
+            fp->x1A88.lstickX = 0;
+            fp->x1A88.lstickY = 0;
+            fp->x1A88.x0 = 0;
+            fp->x1A88.ltrigger = 0;
+            fp->x1A88.rtrigger = 0;
+        }
+    } else {
+        ftCo_800B0760_dontinline(fp);
+        if (ftCo_800B0E98(fp, var_r29)) {
+            temp_r31->x18 = 0;
+            temp_r31->xFA_b7 = true;
+            temp_r31->xF9_b2 = false;
+            temp_r31->xF9_b4 = false;
+        }
+    }
+    if (fp->ground_or_air == GA_Ground) {
+        temp_r31->xFB_b0 = false;
+    }
+}
+
+void ftCo_800B126C(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+
+    data->xF8_b0 = true;
+    data->xF9_b2 = false;
+    data->xF9_b4 = false;
+    data->xF9_b3 = false;
+    data->xF9_b5 = true;
+    data->xF9_b6 = true;
+    data->xF9_b7 = true;
+    data->x2C = 1;
+    data->xF9_b1 = false;
+
+    PAD_STACK(0x10);
+
+    fp->x1A88.x44 = ftCo_800A4BEC(fp);
+    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+        data->x4C = NULL;
+    } else {
+        if (fp->x2168 != 0) {
+            data->x4C = NULL;
+        } else {
+            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
+    }
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+
+    if (inlineI1_alt(fp)) {
+        if (data->x4C != NULL && fp->item_gobj == NULL) {
+            ftCo_800A866C(fp);
+        } else if ((data->x7C % 60) * 5 == 0 && HSD_Randf() < 0.5) {
+            ftCo_800A8940(fp);
+        }
+    }
+    ftCo_800ADE48(fp);
+}
+
+void ftCo_800B1478(Fighter* fp)
+{
+    struct Fighter_x1A88_t* temp_r31;
+    Fighter** temp_r27;
+    Fighter* temp_r3;
+    Fighter* var_r4;
+
+    PAD_STACK(0x18);
+
+    temp_r31 = &fp->x1A88;
+    temp_r3 = ftCo_800A5CE0(fp);
+    temp_r27 = &fp->x1A88.x44;
+
+    fp->x1A88.x44 = temp_r3;
+
+    if (temp_r3 != NULL) {
+        temp_r31->xF8_b0 = true;
+        temp_r31->xF9_b2 = false;
+        temp_r31->xF9_b4 = false;
+        temp_r31->xF9_b3 = false;
+        temp_r31->xF9_b5 = false;
+        temp_r31->xF9_b6 = false;
+        temp_r31->xF9_b7 = false;
+        temp_r31->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (inlineI1_alt(fp)) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+
+    temp_r31->xF8_b0 = true;
+    temp_r31->xF9_b2 = true;
+    temp_r31->xF9_b4 = true;
+    temp_r31->xF9_b3 = true;
+    temp_r31->xF9_b5 = true;
+    temp_r31->xF9_b6 = true;
+    temp_r31->xF9_b7 = true;
+    temp_r31->xF9_b1 = false;
+
+    *temp_r27 = ftCo_800A4BEC(fp);
+    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+        temp_r31->x4C = NULL;
+    } else {
+        if (fp->x2168 != 0) {
+            temp_r31->x4C = NULL;
+        } else {
+            temp_r31->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
+    }
+    fp->x1A88.x50 = ftCo_800A648C(fp);
+
+    ftCo_800AF78C_inline0(fp);
+
+    if (inlineI1_alt(fp)) {
+        if (temp_r31->x4C != NULL) {
+            ftCo_800A866C(fp);
+        } else {
+            var_r4 = ftCo_800A53DC(fp);
+            if (var_r4 == NULL) {
+                var_r4 = temp_r31->x44;
+            }
+            ftCo_800A75DC(fp, var_r4);
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 /// #ftCo_800B17D0
 
@@ -2628,6 +4686,8 @@ void ftCo_800B1DA0(Fighter* fp)
 /// #ftCo_800B24B8
 
 /// #ftCo_800B2790
+
+void ftCo_800B1DA0(Fighter*); /* static */
 
 /// #ftCo_800B2AFC
 
