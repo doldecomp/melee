@@ -935,18 +935,18 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
             mp_island =
                 mpIsland_8005AB54(item_link_next_2->x30_collData.floor.index);
             if (mp_island != NULL) {
-                if ((mp_island->x14 < item_link->pos.x) &&
-                    (mp_island->x18 > item_link->pos.y))
+                if ((mp_island->x14.x < item_link->pos.x) &&
+                    (mp_island->x14.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x18;
+                    item_link->pos.y = mp_island->x14.y;
                     return coll->env_flags & 0x18FFF;
                 }
-                if ((mp_island->x8 > item_link->pos.x) &&
-                    (mp_island->xC > item_link->pos.y))
+                if ((mp_island->x8.x > item_link->pos.x) &&
+                    (mp_island->x8.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x18;
+                    item_link->pos.y = mp_island->x14.y;
                     return coll->env_flags & 0x18FFF;
                 }
             }
@@ -1009,18 +1009,18 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
             mp_island =
                 mpIsland_8005AB54(item_link_next_2->x30_collData.floor.index);
             if (mp_island != NULL) {
-                if ((mp_island->x14 < item_link->pos.x) &&
-                    (mp_island->x18 > item_link->pos.y))
+                if ((mp_island->x14.x < item_link->pos.x) &&
+                    (mp_island->x14.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x18;
+                    item_link->pos.y = mp_island->x14.y;
                     return coll->env_flags & 0x18FFF;
                 }
-                if ((mp_island->x8 > item_link->pos.x) &&
-                    (mp_island->xC > item_link->pos.y))
+                if ((mp_island->x8.x > item_link->pos.x) &&
+                    (mp_island->x8.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
-                    item_link->pos.y = mp_island->x18;
+                    item_link->pos.y = mp_island->x14.y;
                     return coll->env_flags & 0x18FFF;
                 }
             }

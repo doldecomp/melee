@@ -9,18 +9,18 @@
 
 /* 05A6F8 */ static void mpIsland_8005A6F8(void);
 /* 05A728 */ static void mpIsland_8005A728(void);
-/* 458E88 */ static mp_UnkStruct0 mpIsland_80458E88;
+/* 458E88 */ struct mpIsland_80458E88_t mpIsland_80458E88;
 
 void mpIsland_8005A6F8(void)
 {
     mpIsland_80458E88.next = NULL;
     mpIsland_80458E88.x4 = 0;
-    mpIsland_80458E88.x8 = 0;
-    mpIsland_80458E88.xC = 0;
-    mpIsland_80458E88.x18 = 0;
-    mpIsland_80458E88.x1C = 0;
-    mpIsland_80458E88.x10 = 0;
-    mpIsland_80458E88.x14 = 0;
+    mpIsland_80458E88.x8.x = 0;
+    mpIsland_80458E88.x8.y = 0;
+    mpIsland_80458E88.x14.y = 0;
+    mpIsland_80458E88.x14.z = 0;
+    mpIsland_80458E88.x8.z = 0;
+    mpIsland_80458E88.x14.x = 0;
     mpIsland_80458E88.x20 = 0;
 }
 
@@ -50,9 +50,9 @@ void mpIsland_8005A728(void)
     int v20;               // r26
     int v21;               // r27
     float v22;             // fp31
-    float* v22_2;
+    s32* v22_2;
     int* v23; // r19
-    float* v24_2;
+    s32* v24_2;
     mpisland* v24;           // r3
     mpisland* v25;           // r25
     int v26;                 // r4
@@ -68,8 +68,8 @@ void mpIsland_8005A728(void)
     v1 = mpLib_8004D174();
     v2 = mpLib_8004D16C();
     v23 = &mpIsland_80458E88.x4;
-    v24_2 = &mpIsland_80458E88.x8;
-    v22_2 = &mpIsland_80458E88.xC;
+    v24_2 = &mpIsland_80458E88.x8.x;
+    v22_2 = &mpIsland_80458E88.x8.y;
     mpIsland_8005A6F8();
 
     memzero(v33, 0x600u);
@@ -276,17 +276,13 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
     return NULL;
 }
 
-/// @todo Very fake match.
 bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 {
-    int temp_cr0_eq;
-    temp_cr0_eq = (int) mpLib_8004D17C() + 8 + 0x34 * arg0->x28;
-    temp_cr0_eq = *(int*) temp_cr0_eq;
-    temp_cr0_eq &= 0x700;
-    if (temp_cr0_eq != 0) {
+    mpLib_804D64C0_t* temp_r3 = &mpLib_8004D17C()[arg0->x28];
+    if (temp_r3->flags & 0x700) {
         return true;
     }
-    if (temp_cr0_eq != 0) {
+    if (temp_r3->flags & 0x700) {
         return true;
     }
     return false;
@@ -294,45 +290,39 @@ bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 
 void mpIsland_8005ACE8(mp_UnkStruct5* arg0, Vec3* arg1, Vec3* arg2)
 {
-    /*  r0 */ int v14;
-    /* r31 */ int v7;
-    /*  r0 */ int v13;
-    /* r27 */ mp_UnkStruct6* v6;
-    /* r23 */ int i;
-    /* r30 */ u16* v10;
-    /* r29 */ int v9;
-    /* r28 */ int v11;
-    /* r27 */ int v12;
-    /*  r3 */ u16* v8;
+    int var_r31;
+    mp_UnkStruct2* var_r30;
+    int temp_r29;
+    bool var_r28;
+    bool var_r27;
+    int i;
 
-    v6 = (mp_UnkStruct6*) (mpLib_8004D17C() + 0x34 * arg0->x28);
-    v7 = *v6->x4;
-    v8 = (u16*) mpLib_8004D174();
-    v9 = v6->x4[1];
-    v10 = &v8[4 * v7];
-    v11 = 1;
-    v12 = 1;
+    mpLib_804D64C0_t* temp_r3;
+    temp_r3 = &mpLib_8004D17C()[arg0->x28];
+    var_r31 = temp_r3->x4[0];
+    var_r30 = &mpLib_8004D174()[var_r31];
+    temp_r29 = temp_r3->x4[1];
+
+    var_r28 = true;
+    var_r27 = true;
     if (arg1 != NULL) {
-        v14 = arg0->xC;
-        *(int*) &arg1->x = arg0->x8;
-        *(int*) &arg1->y = v14;
-        *(int*) &arg1->z = arg0->x10;
+        *arg1 = arg0->x8;
     } else {
-        v11 = 0;
+        var_r28 = false;
     }
     if (arg2 != NULL) {
-        v14 = arg0->x18;
-        *(int*) &arg2->x = arg0->x14;
-        *(int*) &arg2->y = v14;
-        *(int*) &arg2->z = arg0->x1C;
+        *arg2 = arg0->x14;
     } else {
-        v12 = 0;
+        var_r27 = false;
     }
-    for (i = 0; i < v9 && v11 && v12; ++i, v10 += 4, ++v7) {
-        if (v11 && **(u16**) v10 == arg0->x4) {
-            mpLib_80054158(v7, (Vec3*) arg1);
-        } else if (v12 && *(u16*) (*(int*) v10 + 2) == arg0->x6) {
-            mpLib_80053FF4(v7, (Vec3*) arg2);
-        };
+
+    for (i = 0; i < temp_r29 && var_r28 && var_r27; var_r31++) {
+        if (var_r28 && var_r30->x0->x0 == arg0->x4) {
+            mpLib_80054158(var_r31, arg1);
+        } else if (var_r27 && var_r30->x0->x2 == arg0->x6) {
+            mpLib_80053FF4(var_r31, arg2);
+        }
+        i++;
+        var_r30++;
     }
 }

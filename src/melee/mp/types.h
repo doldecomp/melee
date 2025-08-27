@@ -6,15 +6,26 @@
 #include "gr/forward.h"
 #include "mp/forward.h" // IWYU pragma: export
 
+#include <dolphin/mtx.h>
+
+struct mpIsland_80458E88_t {
+    /*  +0 */ mp_UnkStruct0* next;
+    /*  +4 */ int x4;
+    /*  +8 */ S32Vec3 x8;
+    /* +14 */ S32Vec3 x14;
+    /* +20 */ int x20;
+    /* +24 */ short x24;
+    /* +26 */ short x26;
+    /* +28 */ short x28;
+    /* +2A */ short x2A;
+    /* +2C */ mp_UnkStruct3* ptr;
+};
+
 struct mp_UnkStruct0 {
     /*  +0 */ mp_UnkStruct0* next;
     /*  +4 */ int x4;
-    /*  +8 */ float x8;
-    /*  +C */ float xC;
-    /* +10 */ int x10;
-    /* +14 */ float x14;
-    /* +18 */ float x18;
-    /* +1C */ int x1C;
+    /*  +8 */ Vec3 x8;
+    /* +14 */ Vec3 x14;
     /* +20 */ int x20;
     /* +24 */ short x24;
     /* +26 */ short x26;
@@ -24,7 +35,8 @@ struct mp_UnkStruct0 {
 };
 
 struct mp_UnkStruct1 {
-    /* +0 */ int x0;
+    /* +0 */ u16 x0;
+    /* +2 */ u16 x2;
     /* +4 */ short x4;
     /* +6 */ short x6;
 };
@@ -49,12 +61,8 @@ struct mp_UnkStruct5 {
     /*  +0 */ u8 x0[0x4];
     /*  +4 */ u16 x4;
     /*  +6 */ u16 x6;
-    /*  +8 */ int x8;
-    /*  +C */ int xC;
-    /* +10 */ int x10;
-    /* +14 */ int x14;
-    /* +18 */ int x18;
-    /* +1C */ int x1C;
+    /*  +8 */ Vec3 x8;
+    /* +14 */ Vec3 x14;
     /* +20 */ u8 x20[0x28 - 0x20];
     /* +28 */ short x28;
     /* +2A */ short x2A;
@@ -81,8 +89,8 @@ STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);
 
 struct mpLib_804D64C0_t {
     /* 0x00 */ UNK_T x0;
-    /* 0x04 */ UNK_T x4;
-    /* 0x08 */ UNK_T x8;
+    /* 0x04 */ s16* x4;
+    /* 0x08 */ u32 flags;
     /* 0x0C */ s16 xC;
     /* 0x0E */ s16 xE;
     /* 0x10 */ char pad_0[0x14];

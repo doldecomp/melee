@@ -25,10 +25,11 @@
 /* 04E684 */ UNK_RET mpLib_8004E684(UNK_PARAMS);
 /* 04EBF8 */ UNK_RET mpLib_8004EBF8(UNK_PARAMS);
 /* 04ED5C */ UNK_RET mpLib_8004ED5C(UNK_PARAMS);
-/* 04F008 */ bool mpLib_8004F008(Vec3*, int*, int, int, int, int, int, int,
+/* 04F008 */ bool mpLib_8004F008(Vec3*, int*, int*, Vec3*, int, int, int, int,
                                  int, float, float, float, float, float);
 /* 04F400 */ UNK_RET mpLib_8004F400(UNK_PARAMS);
-/* 04F8A4 */ UNK_RET mpLib_8004F8A4(UNK_PARAMS);
+/* 04F8A4 */ bool mpLib_8004F8A4(Vec3*, float*, float*, Vec3*, int, int, float,
+                                 float, float, float);
 /* 04FC2C */ UNK_RET mpLib_8004FC2C(UNK_PARAMS);
 /* 050068 */ UNK_RET mpLib_80050068(UNK_PARAMS);
 /* 0501CC */ bool mpLib_800501CC(float surface_normal_y,
@@ -39,7 +40,7 @@
 /* 0509B8 */ bool mpLib_800509B8(float surface_normal_y,
                                  float surface_normal_x, float left_x,
                                  float left_y, Vec3* coll_vec, UNK_T, UNK_T,
-                                 UNK_T, u32, u32);
+                                 Vec3*, u32, u32);
 /* 050D68 */ UNK_RET mpLib_80050D68(UNK_PARAMS);
 /* 0511A4 */ UNK_RET mpLib_800511A4(UNK_PARAMS);
 /* 0515A0 */ UNK_RET mpLib_800515A0(UNK_PARAMS);

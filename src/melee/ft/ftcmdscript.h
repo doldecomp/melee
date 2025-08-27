@@ -34,7 +34,9 @@ typedef enum CPUCommand {
     // Signifies the end of a command sequence
     CpuCmd_Done = 0x7F,
 
+#ifndef M2CTX
     CpuCmd_ZeroArgEnd = 0x7F, ///< Previous commands take zero arguments
+#endif
 
     // These commands set analog stick/trigger values
     CpuCmd_SetLstickX,
@@ -77,11 +79,19 @@ typedef enum CPUCommand {
 /// CPU commands must fit in a u8!
 STATIC_ASSERT(CpuCmd_Count <= U8_MAX);
 
+#ifdef M2CTX
+typedef CPUCommand cmd_t;
+typedef s8 arg_t;
+#else
+typedef u8 cmd_t;
+typedef u8 arg_t;
+#endif
+
 /* 0B3E04 */ void ftCo_800B3E04(Fighter*); ///< Run any pending CPU commands
-/* 0B463C */ void ftCo_800B463C(Fighter*, u8 command);
-/* 0B46B8 */ void ftCo_800B46B8(Fighter*, u8 command1, u8 command2);
+/* 0B463C */ void ftCo_800B463C(Fighter*, cmd_t cmd);
+/* 0B46B8 */ void ftCo_800B46B8(Fighter*, cmd_t cmd, arg_t arg);
 /* 0B462C */ void ftCo_800B462C(Fighter*);
-/* 0B4778 */ void ftCo_800B4778(Fighter*, u8 command1, u8 command2, u8 command3);
+/* 0B4778 */ void ftCo_800B4778(Fighter*, cmd_t cmd, arg_t arg1, arg_t arg2);
 /* 0B4880 */ void ftCo_800B4880(Fighter*, int script_idx);
 /* 0B49F4 */ void ftCo_800B49F4(Fighter*);
 /* 0B4A78 */ void ftCo_800B4A78(Fighter*);
