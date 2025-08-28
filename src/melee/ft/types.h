@@ -44,6 +44,7 @@
 #include <common_structs.h>
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <melee/ft/dobjlist.h>
 
 #define FTPART_INVALID 0xFF
 
@@ -568,11 +569,6 @@ struct FtSFX {
     int x34;
 };
 
-struct DObjList {
-    usize_t count;
-    HSD_DObj** data;
-};
-
 typedef struct {
     u32 unk0;
     f32 unk4;
@@ -603,7 +599,8 @@ struct ftData {
     }* x0;
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct ftData_x8 {
-        /*  +0 */ u8 x0[0x8];
+        /*  +0 */ u32 x0;
+        /*  +4 */ u8 x4[0x4];
         /*  +8 */ struct ftData_x8_x8 {
             /*  +8 */ u32 x8;
             /*  +C */ u16** xC;
@@ -635,7 +632,8 @@ struct ftData {
     /* +3C */ struct UnkFloat6_Camera* x3C;
     /* +40 */ UNK_T _40;
     /* +44 */ ftData_x44_t* x44;
-    /* +48 */ UNK_T* x48_items;
+    /* +48 */ UNK_T* x48_items; ///< @todo might be similar to KirbyHat? see
+                                ///< ftPr_Init_8013C360
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ u8 x50[0x54 - 0x50];
     /* +54 */ int x54;
@@ -754,25 +752,34 @@ typedef struct ftCo_DatAttrs {
 struct FighterBone {
     /* +0 */ HSD_JObj* joint;
     /* +4 */ HSD_JObj* x4_jobj2; // used for interpolation
-    /* +8:0 */ u8 flags_b0 : 1;
-    /* +8:1 */ u8 flags_b1 : 1;
-    /* +8:2 */ u8 flags_b2 : 1;
-    /* +8:3 */ u8 flags_b3 : 1;
-    /* +8:4 */ u8 flags_b4 : 1;
-    /* +8:5 */ u8 flags_b5 : 1;
-    /* +8:6 */ u8 flags_b6 : 1;
-    /* +8:7 */ u8 flags_b7 : 1;
-    /* +9:0 */ u8 flags2_b0 : 1;
-    /* +9:1 */ u8 flags2_b1 : 1;
-    /* +9:2 */ u8 flags2_b2 : 1;
-    /* +9:3 */ u8 flags2_b3 : 1;
-    /* +9:4 */ u8 flags2_b4 : 1;
-    /* +9:5 */ u8 flags2_b5 : 1;
-    /* +9:6 */ u8 flags2_b6 : 1;
-    /* +9:7 */ u8 flags2_b7 : 1;
-    /* +A */ u8 xA_pad[2];
-    /* +C */ u8 xC;
-    /* +C */ u8 xD : 7;
+    union {
+        struct {
+            /* +8:0 */ u8 flags_b0 : 1;
+            /* +8:1 */ u8 flags_b1 : 1;
+            /* +8:2 */ u8 flags_b2 : 1;
+            /* +8:3 */ u8 flags_b3 : 1;
+            /* +8:4 */ u8 flags_b4 : 1;
+            /* +8:5 */ u8 flags_b5 : 1;
+            /* +8:6 */ u8 flags_b6 : 1;
+            /* +8:7 */ u8 flags_b7 : 1;  ///< jobj lighting flag
+            /* +9:0 */ u8 flags2_b0 : 1; ///< jobj texgen flag
+            /* +9:1 */ u8 flags2_b1 : 1; ///< jobj specular flag
+            /* +9:2 */ u8 flags2_b2 : 1;
+            /* +9:3 */ u8 flags2_b3 : 1;
+            /* +9:4 */ u8 flags2_b4 : 1;
+            /* +9:5 */ u8 flags2_b5 : 1;
+            /* +9:6 */ u8 flags2_b6 : 1;
+            /* +9:7 */ u8 flags2_b7 : 1;
+        };
+        u16 flags8;
+    };
+    union {
+        struct {
+            /* +C */ u8 xC;
+            /* +D */ u8 xD : 7;
+        };
+        u32 flagsC;
+    };
 };
 STATIC_ASSERT(sizeof(struct FighterBone) == 0x10);
 
@@ -1183,7 +1190,8 @@ struct Fighter {
     /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
     /*  fp+5A4 */ UNK_T x5A4;
     /*  fp+5A8 */ UNK_T x5A8;
-    /*  fp+5AC */ u8 _5AC[0x5B8 - 0x5AC];
+    /*  fp+5AC */ u32 x5AC;
+    /*  fp+5B0 */ u8 _5B0[0x5B8 - 0x5B0];
     /*  fp+5B8 */ s32 x5B8;
     /*  fp+5BC */ UNK_T x5BC;
     /*  fp+598 */ u8 filler_x598[0x5C8 - 0x5C0];
@@ -1193,19 +1201,9 @@ struct Fighter {
     /*  fp+5D4 */ HSD_TObj* costume_tobjs[5];
     /*  fp+5E8 */ FighterBone* parts;
     /*  fp+5EC */ DObjList dobj_list;
-    union {
-        struct {
-            s8 x0, x1;
-        }
-        /// @todo This is nonsense. Used by #ftParts_80074A74.
-        x5F4_arr[2];
-        struct {
-            /*  fp+5F4 */ s8 x5F4;
-            /*  fp+5F5 */ s8 x5F5;
-            /*  fp+5F6 */ s8 x5F6;
-            /*  fp+5F7 */ s8 x5F7;
-        };
-    };
+    /*  fp+5F4 */ struct {
+        s8 x0, x1;
+    } x5F4_arr[2];
     /*  fp+5F8 */ s8 x5F8;
     /*  fp+5FC */ u8 filler_x5FC[0x60C - 0x5F9];
     /*  fp+60C */ void* x60C;
@@ -1453,7 +1451,7 @@ struct Fighter {
     /* fp+2030 */ s32 x2030;
     /* fp+2034 */ s32 x2034;
     /* fp+2038 */ s32 x2038;
-    /* fp+203C */ s32 x203C;
+    /* fp+203C */ u32 x203C;
     /* fp+2040 */ HSD_DObj** x2040;
     /* fp+203C */ u8 filler_x203C[0x2064 - 0x2044];
     /* fp+2064 */ int x2064_ledgeCooldown;
@@ -1905,14 +1903,14 @@ typedef struct ftDynamics {
 
 typedef struct KirbyHatStruct {
     /*  +0 */ HSD_Joint* hat_joint;
-    /*  +4 */ s32 joint_num;
+    /*  +4 */ u32 joint_num;
     /*  +8 */ void* hat_vis_table;
     /*  +C */ ftDynamics* hat_dynamics[5];
 } KirbyHatStruct;
 
 typedef struct Kirby_Unk {
     /*  +0 */ HSD_Joint* x0;
-    /*  +4 */ HSD_Joint** x4;
+    /*  +4 */ HSD_Joint* x4;
     /*  +8 */ UNK_T x8;
     /*  +C */ UNK_T xC;
     /* +10 */ ftDynamics* x10;

@@ -268,7 +268,7 @@ void ftCo_80099954(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
-    if (fp->x5F5 == 1) {
+    if (fp->x5F4_arr[0].x1 == 1) {
         ftYs_Init_8012BE3C(gobj);
     }
     ftCo_800998EC(gobj);

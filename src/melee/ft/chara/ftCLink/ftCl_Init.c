@@ -342,7 +342,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[3], ea->xC);
     it_8026B3F8(items[4], ea->x10);
     it_8026B3F8(items[5], It_Kind_CLink_Milk);
-    ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], items[6]);
+    ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, items[6]);
 }
 
 void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)

@@ -463,8 +463,11 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ftPr_Init_803D05B4[fp->x619_costume_id]) {
+        /// @todo clean up memory accesses - this looks similar to
+        /// ftKb_SpecialN_800EFB4C
         UNK_T* items = fp->ft_data->x48_items;
         UNK_T* items_shifted = items[1];
+
         if (!joints[fp->x619_costume_id]) {
             UnkCostumeStruct* costume_list =
                 CostumeListsForeachCharacter[fp->kind].costume_list;
@@ -473,16 +476,16 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
                 ftPr_Init_803D05B4[fp->x619_costume_id]);
         }
 
-        fp->fv.pr.x2244 = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        fp->fv.pr.x2240.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
         ftParts_80074148();
         fp->fv.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.pr.x223C, &fp->fv.pr.x2240);
 
-        ftParts_8007487C(&items_shifted[1], &fp->fv.pr.x2248,
-                         fp->x619_costume_id, &fp->fv.pr.x2240,
-                         &fp->fv.pr.x2240);
+        ftParts_8007487C((void*) &items_shifted[1], &fp->fv.pr.x2248,
+                         fp->x619_costume_id, &fp->fv.pr.x2240.count,
+                         &fp->fv.pr.x2240.count);
         ftCo_8009DC54(fp);
         return;
     }
@@ -497,8 +500,8 @@ void ftPr_Init_8013C494(HSD_GObj* gobj)
     if (fp->fv.pr.x223C != NULL) {
         HSD_JObjRemoveAll(fp->fv.pr.x223C);
         fp->fv.pr.x223C = NULL;
-        HSD_ObjFree(&fighter_x2040_alloc_data, fp->fv.pr.x2244);
-        fp->fv.pr.x2244 = NULL;
+        HSD_ObjFree(&fighter_x2040_alloc_data, fp->fv.pr.x2240.data);
+        fp->fv.pr.x2240.data = NULL;
     }
 }
 
@@ -521,9 +524,9 @@ void ftPr_Init_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
 {
     if (fp->fv.pr.x223C) {
         if (arg2) {
-            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
+            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240.count);
         } else {
-            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
+            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240.count);
         }
     }
 }

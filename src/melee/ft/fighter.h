@@ -84,7 +84,15 @@ extern struct Fighter_804D64FC_t {
 /* 4D6534 */ extern UNK_T Fighter_804D6534;
 /* 4D6538 */ extern struct Fighter_804D653C_t* Fighter_804D6538;
 /* 4D653C */ extern struct Fighter_804D653C_t* Fighter_804D653C;
-/* 4D6540 */ extern int** Fighter_804D6540;
+/* 4D6540 */ extern struct Fighter_804D6540_t {
+    struct Fighter_804D6540_x0_t {
+        u8 x0;
+        u8 x1;
+        u8 x2;
+        u8 x3;
+    }* x0;
+    int x4;
+}** Fighter_804D6540;
 /* 4D6544 */ extern FighterPartsTable** ftPartsTable;
 /* 4D6548 */ extern UNK_T Fighter_804D6548;
 /* 4D654C */ extern UNK_T Fighter_804D654C;

@@ -342,7 +342,7 @@ void ftLk_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[2], da->xBC);
     it_8026B3F8(item_list[3], da->xC);
     it_8026B3F8(item_list[4], da->x10);
-    ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], item_list[6]);
+    ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, item_list[6]);
 }
 
 void ftLk_800EAF38(HSD_GObj* gobj)
