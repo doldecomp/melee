@@ -4,8 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
-
+#include "ft/dobjlist.h"
 #include "ftGameWatch/types.h"
 #include "ftMars/types.h"
 #include "ftNess/types.h"
@@ -27,11 +26,10 @@ struct ftKb_FighterVars {
         /*  +9   fp+2235 */ u8 x9[3];
         /*  +C   fp+2238 */ FighterKind kind;
         /* +10   fp+223C */ HSD_JObj* jobj;
-        /* +14   fp+2240 */ u32 x14;
-        /* +18   fp+2244 */ UNK_T unk_hsd_obj;
+        /* +14   fp+2240 */ DObjList x14;
         /* +1C   fp+2248 */ UNK_T x1C;
         /* +20   fp+224C */ UNK_T x20;
-        /* +24   fp+2250 */ UNK_T x24;
+        /* +24   fp+2250 */ u32 x24;
     } hat;
     /* fp+224C   */ u8 _28[0x60 - 0x28];
     /* fp+228C   */ UNK_T x60;
