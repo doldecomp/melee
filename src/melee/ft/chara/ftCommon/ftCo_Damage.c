@@ -57,8 +57,6 @@
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
-/* 08E5A4 */ static void ftCo_8008E5A4(Fighter* fp);
-
 int ftCo_803C5520[2][12] = {
     { 81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87 },
     { 84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87 },

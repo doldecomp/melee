@@ -11,6 +11,7 @@
 /* 08DC0C */ void ftCo_Damage_CalcVel(Fighter* fp, float x, float y);
 /* 08DCE0 */ void ftCo_8008DCE0(Fighter_GObj* gobj, int, float facing_dir);
 /* 08E498 */ bool ftCo_Damage_CheckAirMotion(Fighter* fp);
+/* 08E5A4 */ void ftCo_8008E5A4(Fighter*);
 /* 08E4F0 */ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj);
 /* 08E714 */ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj);
 /* 08E908 */ void ftCo_8008E908(Fighter_GObj* gobj, float);

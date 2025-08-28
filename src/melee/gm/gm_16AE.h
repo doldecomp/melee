@@ -25,9 +25,9 @@
 /* 16B014 */ bool gm_8016B014(void);
 /* 16B094 */ bool gm_8016B094(void);
 /* 16B0B4 */ bool gm_8016B0B4(void);
-/* 16B0D4 */ bool gm_8016B0D4(void);
+/* 16B0D4 */ bool gm_8016B0D4(void); ///< friendly fire enabled
 /* 16B0E8 */ bool gm_8016B0E8(void);
-/* 16B0FC */ bool gm_8016B0FC(void);
+/* 16B0FC */ bool gm_8016B0FC(void); ///< single-button mode enabled
 /* 16B110 */ bool gm_8016B110(void);
 /* 16B124 */ bool gm_8016B124(void);
 /* 16B138 */ void fn_8016B138(void);
