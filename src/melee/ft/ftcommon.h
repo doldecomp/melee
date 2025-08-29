@@ -90,7 +90,7 @@
 /* 07EFC0 */ void ftCommon_8007EFC0(Fighter*, u32 val);
 /* 07EFC8 */ void ftCommon_8007EFC8(Fighter_GObj*, void (*)(Fighter_GObj*));
 /* 07F578 */ void ftCommon_8007F578(Fighter_GObj*);
-/* 07F5CC */ void ftCommon_8007F5CC(Fighter_GObj*, s32);
+/* 07F5CC */ void ftCommon_8007F5CC(Item_GObj*, bool);
 /* 07F694 */ float ftCommon_GetModelScale(Fighter*);
 /* 07F6A4 */ void ftCommon_8007F6A4(Fighter*, HSD_JObj*);
 /* 07F76C */ void ftCommon_8007F76C(Fighter_GObj*);

@@ -106,7 +106,7 @@ bool ftCo_800C8B2C(Fighter* gobj, int arg1, bool arg2)
     return false;
 }
 
-void ftCo_800C8B60(Fighter* fp, int arg1, s8 arg2)
+void ftCo_800C8B60(Fighter* fp, u8 arg1, u8 arg2)
 {
     fp->x2226_b5 = arg1;
     fp->smash_attrs.x2134_vibrateFrame = arg2;

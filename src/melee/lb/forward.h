@@ -72,7 +72,6 @@ typedef enum HitCapsuleState {
     HitCapsule_Unk3,
     HitCapsule_Max = HitCapsule_Unk3,
 } HitCapsuleState;
-
 STATIC_ASSERT(HitCapsule_Max == 3);
 
 typedef enum HurtHeight {
