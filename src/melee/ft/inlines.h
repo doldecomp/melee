@@ -267,7 +267,7 @@ static inline int ftGetFacingDirInt(Fighter* fp)
 /// @todo Fix naming.
 #define gmScriptEventCast(p_event, type) ((type*) p_event)
 #define gmScriptEventUpdatePtr(event, type)                                   \
-    (event = (void*) ((uintptr_t) event + (sizeof(type))))
+    (event = (void*) ((uintptr_t) event + 4))
 
 inline CommandInfo* getCmdScript(Fighter* fp)
 {
