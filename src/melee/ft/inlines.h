@@ -8,6 +8,7 @@
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "it/it_26B1.h"
+#include "lb/lbcommand.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
@@ -268,7 +269,7 @@ static inline int ftGetFacingDirInt(Fighter* fp)
 #define gmScriptEventUpdatePtr(event, type)                                   \
     (event = (void*) ((uintptr_t) event + (sizeof(type))))
 
-inline ftCmdScript* getCmdScript(Fighter* fp)
+inline CommandInfo* getCmdScript(Fighter* fp)
 {
     return &fp->x3E4_fighterCmdScript;
 }

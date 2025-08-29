@@ -37,6 +37,7 @@
 #include "it/forward.h"
 
 #include "lb/lbanim.h"
+#include "lb/lbcommand.h"
 #include "lb/types.h"
 
 #include <baselib/forward.h>
@@ -933,14 +934,6 @@ struct ftSubactionList {
     u8 x0_opcode;
 };
 
-struct ftCmdScript {
-    float x3E4_scriptEventTimer;         // 0x3E4
-    float x3E8_scriptFrameTimer;         // 0x3E8
-    ftSubactionList* x3EC_scriptCurrent; // 0x3EC
-    s32 x3F0_scriptLoopNum;              // 0x3F0
-    void* x3F4_scriptReturn;             // 0x3F4
-};
-
 struct ftDeviceUnk3 {
     UNK_T x0;
     u32 x4;
@@ -1162,11 +1155,7 @@ struct Fighter {
     /*  fp+2EC */ float x2EC;
     /*  fp+2F0 */ BoneDynamicsDesc dynamic_bone_sets[Ft_Dynamics_NumMax];
     /*  fp+3E0 */ int dynamics_num;
-    /*  fp+3E4 */ ftCmdScript x3E4_fighterCmdScript;
-    /*  fp+3F8 */ UNK_T x3F8;
-    /*  fp+3FC */ UNK_T x3FC;
-    /*  fp+400 */ UNK_T x400;
-    /*  fp+404 */ UNK_T x404;
+    /*  fp+3E4 */ CommandInfo x3E4_fighterCmdScript;
     /*  fp+408 */ ColorOverlay x408;
     /*  fp+488 */ ColorOverlay x488;
     /*  fp+508 */ ColorOverlay x508;

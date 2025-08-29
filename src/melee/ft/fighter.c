@@ -1264,9 +1264,9 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                 } else {
                     ftData_80085CD8(fp, fp, fp->anim_id);
                 }
-                fp->x3E4_fighterCmdScript.x3EC_scriptCurrent =
-                    unk_struct_x18->xC;
-                fp->x3E4_fighterCmdScript.x3F0_scriptLoopNum = 0;
+                fp->x3E4_fighterCmdScript.u =
+                    (union CmdUnion*) unk_struct_x18->xC;
+                fp->x3E4_fighterCmdScript.loop_count = 0;
 
                 if (anim_start) {
                     if (fp->x590 != 0U) {
@@ -1289,8 +1289,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = 0.0F;
                         fp->x6CC = fp->x6C0;
                     }
-                    fp->x3E4_fighterCmdScript.x3E4_scriptEventTimer =
-                        -anim_start;
+                    fp->x3E4_fighterCmdScript.timer = -anim_start;
                 } else {
                     if (fp->x590 != 0U) {
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
@@ -1298,7 +1297,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                                         : (anim_blend)        ? anim_blend
                                                               : *unk_byte_ptr);
                     }
-                    fp->x3E4_fighterCmdScript.x3E4_scriptEventTimer = 0.0f;
+                    fp->x3E4_fighterCmdScript.timer = 0.0f;
                 }
 
                 ftAnim_8006E9B4(gobj);
@@ -1361,7 +1360,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
             fp->x594_s32 = 0;
             ftAnim_80070758(jobj);
             ftAnim_80070758(fp->x8AC_animSkeleton);
-            fp->x3E4_fighterCmdScript.x3EC_scriptCurrent = 0;
+            fp->x3E4_fighterCmdScript.u = NULL;
             fp->x8A4_animBlendFrames = 0;
             fp->x8A8_unk = 0;
         }
