@@ -257,7 +257,8 @@ struct gmm_x1868 {
 struct gmm_x0 {
     /* 0x0000 */ u8 language;
     /* 0x0001 */ u8 unk_1;
-    /* 0x0002 */ char pad_2[0x37]; /* maybe part of x1[0x38]? */
+    /* 0x0002 */ u8 unk_2;
+    /* 0x0003 */ char pad_3[0x36]; /* maybe part of x1[0x38]? */
     /* 0x0039 */ u8 x39[0xB];
     /* 0x0044 */ s32 unk_44;
     /* 0x0048 */ char pad_48[0x24]; /* maybe part of x44[0xA]? */
@@ -315,7 +316,12 @@ struct gmm_x0 {
         /* 0x0578 */ InternalStageId x48;
         /* 0x057C */ s8 x4C[4];       ///< CharacterKind
         /* 0x0580 */ u8 x50[4];       ///< character color
-        /* 0x0584 */ M2C_UNK unk_584; /* inferred */
+        struct gmm_x0_584_t {
+            /* 0x0584 */ s8 unk_584;
+            /* 0x0585 */ s8 unk_585;
+            /* 0x0586 */ s8 unk_586;
+            /* 0x0587 */ s8 unk_587;
+        } unk_584;
         /* 0x0588 */ s8 unk_588[4];   /* inferred */
         /* 0x0590 */ char pad_58B[4]; /* inferred */
     } unk_530;
@@ -477,6 +483,29 @@ struct gmMainLib_8015ED8C_arg0_t {
     s16 _380[34];
     s16 _3C4[34];
     s16 _408[34];
+};
+
+struct gmMainLib_8015EF30_s {
+    /*  +0 */ s16 x0;
+    /*  +2 */ s16 x2;
+    /*  +4 */ s32 x4;
+    /*  +8 */ s32 x8;
+    /*  +C */ s32 xC;
+    /*  +10 */ s32 x10;
+    /*  +14 */ s32 x14;
+    /*  +18 */ s16 x18;
+    /*  +1A */ s16 x1A;
+    /*  +1C */ s16 x1C;
+    /*  +1E */ s16 x1E;
+    /*  +20 */ s32 x20;
+    /*  +24 */ s32 x24;
+    /*  +28 */ s32 x28;
+    /*  +2C */ s32 x2C;
+    /*  +30 */ s32 x30;
+    /*  +34 */ s32 x34;
+    /*  +38 */ s32 x38;
+    /*  +3C */ s32 x3C;
+    /*  +40 */ s32 x40;
 };
 
 struct gm_8017DB6C_arg0_t {
@@ -782,6 +811,15 @@ struct gm_801677C0_s {
     /* +38 */ u8 unk_38_1 : 1;
 };
 STATIC_ASSERT(sizeof(struct gm_801677C0_s) == 0x30);
+
+struct gm_801B51CC_OnInit_s {
+    /*  +0 */ u8 x0;
+    /*  +1 */ u8 x1;
+    /*  +2 */ u8 x2;
+    /*  +3 */ u8 x3;
+    /*  +4 */ u8 x4;
+    /*  +5 */ u8 x5;
+};
 
 struct gm_80479D58_t {
     /*  +0 */ u32 unk_0;

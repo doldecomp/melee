@@ -930,7 +930,28 @@ void gmMainLib_8015EEC8(void)
     memzero(&gmMainLib_804D3EE0->thing.x1A68, 0xD8);
 }
 
-/// #gmMainLib_8015EF30
+void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0)
+{
+    arg0->x0 = 0;
+    arg0->x4 = 0;
+    arg0->x8 = 0;
+    arg0->xC = 0;
+    arg0->x10 = 0;
+    arg0->x18 = 0;
+    arg0->x1A = 0;
+    arg0->x1C = 0;
+    arg0->x1E = 0;
+    arg0->x20 = 0;
+    arg0->x24 = 0;
+    arg0->x14 = 0;
+    arg0->x28 = 0;
+    arg0->x2C = 0;
+    arg0->x30 = 0;
+    arg0->x34 = 0;
+    arg0->x3C = 0;
+    arg0->x40 = 0;
+    arg0->x38 = 0;
+}
 
 /// #gmMainLib_8015EF84
 

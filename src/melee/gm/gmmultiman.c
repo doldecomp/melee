@@ -232,7 +232,14 @@ UNK_T gm_801B6320(void)
 
 /// #gm_801B65D4
 
-/// #gm_801B67E8_OnInit
+void gm_801B67E8_OnInit(void)
+{
+    struct gmm_x0_584_t* temp_r4 =
+        (struct gmm_x0_584_t*) &gmMainLib_804D3EE0->unk_530.unk_584.unk_584;
+    gmMainLib_804D3EE0->unk_530.unk_584.unk_584 = 0x21;
+    temp_r4->unk_585 = 0;
+    temp_r4->unk_586 = 0x78;
+}
 
 void gm_801B6808_OnLoad(void)
 {
