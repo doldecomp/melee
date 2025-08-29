@@ -3222,7 +3222,13 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
 
 /// #ftKb_UnkIntBoolFunc0
 
-/// #ftKb_Init_UnkCallbackPairs0_0
+void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.x14.data != NULL && fp->fv.kb.hat.jobj == NULL) {
+        ftAnim_800705E0(&fp->fv.kb.x44);
+    }
+}
 
 /// #ftKb_Init_UnkCallbackPairs0_1
 
@@ -3364,7 +3370,31 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F0F5C
 
-/// #ftKb_SpecialN_800F0FC0
+void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
+{
+    u8 sp14[0x90];
+
+    Fighter* fp = fp = GET_FIGHTER(gobj);
+    KirbyHatStruct* temp_r29;
+
+    PAD_STACK(4);
+
+    if (fp->fv.kb.hat.x14.data != NULL) {
+        return;
+    }
+
+    temp_r29 = ft_80459B88.hats[2];
+    ftKb_SpecialN_800EF040(gobj, 3, temp_r29);
+    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    fp->fv.kb.hat.x20 = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    ftKb_SpecialN_800EF0E4(gobj, 3, sp14);
+    ftKb_SpecialN_800EF35C(gobj, 3, sp14);
+    ftKb_SpecialN_800EF438(gobj, temp_r29);
+    ftParts_8007487C(temp_r29, &fp->fv.kb.hat.x24, fp->x619_costume_id,
+                     &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x1C);
+    ftAnim_80070200(fp, &temp_r29->hat_vis_table, &fp->fv.kb.x44,
+                    &fp->fv.kb.hat.x14);
+}
 
 /// #ftKb_SpecialN_800F10A4
 

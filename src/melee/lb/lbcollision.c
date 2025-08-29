@@ -1478,12 +1478,12 @@ bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, float x, float y)
                            &b->hurt_coll_pos, &a->hurt_coll_pos, b_val, a_val);
 }
 
-void lbColl_80007B78(Mtx a, Mtx b, float x, float y)
+bool lbColl_80007B78(Mtx a, struct Fighter_x1614_t* b, float x, float y)
 {
     /// @todo Eliminate casts.
-    lbColl_800067F8((Vec3*) &b[1][1], (Vec3*) &b[0][2], (Vec3*) &a[1][1],
-                    (Vec3*) &a[0][2], (Vec3*) &b[1][4], (Vec3*) &a[1][4],
-                    b[0][0] * y, a[0][0] * x, x);
+    return lbColl_800067F8(&b->x14, &b->x8, (Vec3*) &a[1][1], (Vec3*) &a[0][2],
+                           &b->x20, (Vec3*) &a[1][4], b->x0 * y, a[0][0] * x,
+                           x);
 }
 
 bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,

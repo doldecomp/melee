@@ -522,7 +522,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftcamera.c"),
             Object(NonMatching, "melee/ft/ftcoll.c"),
             Object(Matching, "melee/ft/ft_07C1.c"),
-            Object(NonMatching, "melee/ft/ft_07C6.c"),
+            Object(Matching, "melee/ft/ft_07C6.c"),
             Object(Matching, "melee/ft/ftcommon.c"),
             Object(NonMatching, "melee/ft/ftdrawcommon.c"),
             Object(Matching, "melee/ft/ftcliffcommon.c"),

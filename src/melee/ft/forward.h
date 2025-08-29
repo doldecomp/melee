@@ -18,6 +18,7 @@ typedef struct Fighter_x1670_t Fighter_x1670_t;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
 typedef struct FighterBone FighterBone;
+typedef struct FighterPartsTable FighterPartsTable;
 typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef struct ft_800898B4_t ft_800898B4_t;
 typedef struct ftCmdScript ftCmdScript;

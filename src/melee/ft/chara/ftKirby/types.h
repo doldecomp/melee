@@ -27,11 +27,16 @@ struct ftKb_FighterVars {
         /*  +C   fp+2238 */ FighterKind kind;
         /* +10   fp+223C */ HSD_JObj* jobj;
         /* +14   fp+2240 */ DObjList x14;
-        /* +1C   fp+2248 */ UNK_T x1C;
+        /* +1C   fp+2248 */ u32 x1C;
         /* +20   fp+224C */ UNK_T x20;
         /* +24   fp+2250 */ u32 x24;
     } hat;
-    /* fp+224C   */ u8 _28[0x60 - 0x28];
+    /* fp+224C   */ HSD_DObj** x28;
+    /* fp+2250   */ u8 _2C[0x44 - 0x2C];
+    /* fp+2270   */ struct KirbyFV_x44_t {
+        int x0;
+    } x44;
+    /* fp+224C   */ u8 _48[0x60 - 0x48];
     /* fp+228C   */ UNK_T x60;
     /* fp+2290   */ UNK_T x64;
     /* fp+2294   */ u8 _68[0x7C - 0x68];
@@ -376,14 +381,8 @@ struct ftKb_DatAttrs {
 
     /* +3EC */ AbsorbDesc specialn_pe_absorbdesc;
     /* +400 */ ReflectDesc specialn_zd_reflectdesc;
-
-    // Final Cutter
-    /* +424 */ float specialhi_initial_velocity;
-    /* +428 */ float specialhi_unk2;
-    /* +42C */ float specialhi_duration;
-    /* +430 */ float specialhi_deceleration_rate;
 };
-STATIC_ASSERT(sizeof(struct ftKb_DatAttrs) == 0x434);
+STATIC_ASSERT(sizeof(struct ftKb_DatAttrs) == 0x424);
 
 union ftKb_MotionVars {
     struct ftGameWatch_SpecialNVars specialn_gw;

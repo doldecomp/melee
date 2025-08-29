@@ -23,6 +23,8 @@ typedef struct {
     /* +20 */ enum_t sfx_kind;
 } lbColl_80008D30_arg1;
 
+struct Fighter_x1614_t;
+
 /* 005BB0 */ int lbColl_80005BB0(HitCapsule*, int);
 /* 005C44 */ bool lbColl_80005C44(const Vec3*, const Vec3*, const Vec3*, Vec3*,
                                   float, float);
@@ -36,7 +38,7 @@ typedef struct {
 /* 0077A0 */ void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*,
                                   float* angle, float, float);
 /* 007AFC */ bool lbColl_80007AFC(HitCapsule*, HitCapsule*, float, float);
-/* 007B78 */ UNK_RET lbColl_80007B78(Mtx, Mtx, float, float);
+/* 007B78 */ bool lbColl_80007B78(Mtx, struct Fighter_x1614_t*, float, float);
 /* 007BCC */ bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, UNK_T,
                                   s32, float, float, float);
 /* 007D68 */ void lbColl_JObjSetupMatrix(HSD_JObj*);
@@ -67,7 +69,7 @@ typedef struct {
 /* 009F54 */ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A044 */ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A10C */ bool lbColl_8000A10C(Vec3 (*)[2], u32, f32);
-/* 00A1A8 */ bool lbColl_8000A1A8(UNK_T, int, float scale_y);
+/* 00A1A8 */ bool lbColl_8000A1A8(struct Fighter_x1614_t*, int, float scale_y);
 /* 00A244 */ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2,
                                   float arg3);
 /* 00A460 */ bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1);

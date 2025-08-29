@@ -49,11 +49,11 @@
 #define FTPART_INVALID 0xFF
 
 // Table in PlCo.dat
-typedef struct _FighterPartsTable {
+struct FighterPartsTable {
     u8* joint_to_part;
     u8* part_to_joint;
     u32 parts_num;
-} FighterPartsTable;
+};
 
 // Points to data in PlCo.dat
 struct ftCommonData {
@@ -617,7 +617,12 @@ struct ftData {
     /* +10 */ u8* x10;
     /* +14 */ struct S_TEMP4* x14;
     /* +18 */ u8* x18;
-    /* +1C */ UNK_T x1C;
+    /* +1C */ struct ftData_x1C {
+        u16 x0;
+        u16 x2;
+        u8* x4; ///< an array of Fighter part indices
+        HSD_AnimJoint** x8;
+    }** x1C;
     /* +20 */ struct {
         /* +0 */ UNK_T x0;
         /* +4 */ HSD_Joint* x8;
@@ -630,7 +635,11 @@ struct ftData {
         /* +0 */ Fighter_Part x0;
         /* +4 */ float scale;
     }* x34;
-    /* +38 */ UNK_T x38;
+    /* +38 */ struct ftData_x38 {
+        int x0;
+        Vec3 x4;
+        float x10;
+    }* x38;
     /* +3C */ struct UnkFloat6_Camera* x3C;
     /* +40 */ UNK_T _40;
     /* +44 */ ftData_x44_t* x44;
@@ -1282,7 +1291,14 @@ struct Fighter {
     /*  fp+8A4 */ float x8A4_animBlendFrames;
     /*  fp+8A8 */ float x8A8_unk;
     /*  fp+8AC */ HSD_JObj* x8AC_animSkeleton;
-    /*  fp+8AC */ u8 filler_x8AC[0x914 - 0x8B0];
+    /*  fp+8B0 */ struct Fighter_x8B0_t {
+        int x0;
+        float x4;
+        float x8;
+        float xC;
+        s8 x10;
+        s8 x11;
+    } x8B0[5];
     /*  fp+914 */ HitCapsule x914[4];
     /*  fp+DF4 */ HitCapsule xDF4[2];
     /* fp+1064 */ HitCapsule x1064_thrownHitbox;
@@ -1291,8 +1307,12 @@ struct Fighter {
     /* fp+119E */ u8 hurt_capsules_len;
     /* fp+119F */ u8 x119F;
     /* fp+11A0 */ FighterHurtCapsule hurt_capsules[15];
-    /* fp+1614 */ struct {
-        u8 pad[0x2C];
+    /* fp+1614 */ struct Fighter_x1614_t {
+        f32 x0;
+        HSD_JObj* x4;
+        Vec3 x8;
+        Vec3 x14;
+        Vec3 x20;
     } x1614[2];
     /* fp+166C */ u8 x166C; ///< number of valid entries in x1670 array
     /* fp+1670 */ struct Fighter_x1670_t {
