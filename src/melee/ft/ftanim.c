@@ -731,11 +731,81 @@ void ftAnim_8006F954(Fighter* fp, Fighter_Part arg1, int arg2,
     }
 }
 
-/// #ftAnim_8006F994
+HSD_Joint* ftAnim_8006F994(Fighter* fp, HSD_JObj* arg1, HSD_Joint* arg2)
+{
+    int i;
+    s32 sp14;
 
-/// #ftAnim_8006FA58
+    i = sp14 = 0;
+    while (arg2 != NULL) {
+        while (ftParts_8007506C(fp->kind, i) != 0) {
+            i++;
+        }
+        if (arg1 == fp->parts[i].joint || arg1 == fp->parts[i].x4_jobj2) {
+            return arg2;
+        }
+        i++;
+        ftAnim_GetNextJointInTree(&arg2, &sp14);
+    }
+}
 
-/// #ftAnim_8006FB88
+void ftAnim_8006FA58(Fighter* fp, int arg1, HSD_Joint* arg2)
+{
+    int i = arg1;
+    s32 sp14 = 0;
+
+    while (arg2 != NULL) {
+        while (ftParts_8007506C(fp->kind, i) != 0) {
+            i++;
+        }
+        if (i == fp->ft_data->x8->x10) {
+            if (fp->parts[i].flags_b0) {
+                lb_8000B760(fp->parts[i].joint, arg2);
+            } else if (!fp->parts[i].flags_b5) {
+                lb_8000B5DC(fp->parts[i].joint, arg2);
+            }
+            ftCommon_8007F6A4(fp, fp->parts[i].joint);
+        } else {
+            if (fp->parts[i].flags_b0) {
+                lb_8000B6A4(fp->parts[i].joint, arg2);
+            } else if (!fp->parts[i].flags_b5) {
+                lb_8000B4FC(fp->parts[i].joint, arg2);
+            }
+        }
+        i++;
+        ftAnim_GetNextJointInTree(&arg2, &sp14);
+    }
+}
+
+void ftAnim_8006FB88(Fighter* fp, int arg1, HSD_Joint* arg2)
+{
+    int i = arg1;
+    s32 sp14 = 0;
+
+    while (arg2 != NULL) {
+        while (ftParts_8007506C(fp->kind, i) != 0) {
+            i++;
+        }
+        if (i == fp->ft_data->x8->x10) {
+            if (fp->parts[i].flags_b0) {
+                lb_8000B760(fp->parts[i].x4_jobj2, arg2);
+                HSD_JObjClearFlags(fp->parts[i].x4_jobj2, 0x20000);
+            } else if (!fp->parts[i].flags_b5) {
+                lb_8000B5DC(fp->parts[i].x4_jobj2, arg2);
+            }
+            ftCommon_8007F6A4(fp, fp->parts[i].x4_jobj2);
+        } else {
+            if (fp->parts[i].flags_b0) {
+                lb_8000B6A4(fp->parts[i].x4_jobj2, arg2);
+                HSD_JObjClearFlags(fp->parts[i].x4_jobj2, 0x20000);
+            } else if (!fp->parts[i].flags_b5) {
+                lb_8000B4FC(fp->parts[i].x4_jobj2, arg2);
+            }
+        }
+        i++;
+        ftAnim_GetNextJointInTree(&arg2, &sp14);
+    }
+}
 
 /// #ftAnim_8006FCE4
 
@@ -836,11 +906,35 @@ void ftAnim_80070308(Fighter_GObj* fighter_gobj)
 
 /// #ftAnim_80070458
 
-/// #ftAnim_800704F0
+extern struct {
+    HSD_GObjEvent x0;
+    void (*x4)(Fighter_GObj*, int, float frame);
+} ftData_UnkCallbackPairs0[FTKIND_MAX];
+
+static inline void tobjAnim(HSD_TObj** temp_r30, f32 frame)
+{
+    HSD_AObjReqAnim((*temp_r30)->aobj, frame);
+    HSD_TObjAnim(*temp_r30);
+}
+
+void ftAnim_800704F0(Fighter_GObj* arg0, int arg1, f32 frame)
+{
+    Fighter* temp_r31;
+    HSD_TObj** temp_r30;
+
+    temp_r31 = arg0->user_data;
+    if (arg1 >= temp_r31->n_costume_tobjs) {
+        OSReport("texture no exist! %d %d\n", temp_r31->player_id, arg1);
+        __assert("ftanim.c", 0x4F0U, "0");
+    }
+    tobjAnim(&temp_r31->costume_tobjs[arg1], frame);
+    if (ftData_UnkCallbackPairs0[temp_r31->kind].x4 != NULL) {
+        ftData_UnkCallbackPairs0[temp_r31->kind].x4(arg0, arg1, frame);
+    }
+    temp_r31->x221E_b7 = true;
+}
 
 /// #ftAnim_800705E0
-
-extern HSD_GObjEvent ftData_UnkCallbackPairs0[FTKIND_MAX][2];
 
 static void ftAnim_80070654_inline(Fighter* fp)
 {
@@ -857,8 +951,8 @@ void ftAnim_80070654(Fighter_GObj* fighter_gobj)
 
     ftAnim_80070654_inline(fp);
 
-    if (ftData_UnkCallbackPairs0[fp->kind][0] != NULL) {
-        ftData_UnkCallbackPairs0[fp->kind][0](fighter_gobj);
+    if (ftData_UnkCallbackPairs0[fp->kind].x0 != NULL) {
+        ftData_UnkCallbackPairs0[fp->kind].x0(fighter_gobj);
     }
     fp->x221E_b7 = false;
 }
@@ -876,6 +970,64 @@ void ftAnim_80070734(HSD_JObj* jobj, float frame)
 void ftAnim_80070758(HSD_JObj* jobj)
 {
     HSD_JObjRemoveAnimAllByFlags(jobj, 1);
+}
+
+void ftAnim_8007077C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    int i;
+
+    for (i = 0; i < ARRAY_SIZE(fp->x8B0); i++) {
+        fp->x8B0[i].x11 = -1;
+        fp->x8B0[i].x10 = -1;
+    }
+}
+
+void ftAnim_800707B0(Fighter_GObj* arg0)
+{
+    Fighter* fp = GET_FIGHTER(arg0);
+    int i;
+    int j;
+
+    f32 var_f29;
+    f32 var_f28;
+    f32 temp_f0_2;
+
+    FighterBone* temp_r3;
+    struct Fighter_x8B0_t* temp_r4;
+
+    for (i = 0; i < (signed) ARRAY_SIZE(fp->x8B0); i++) {
+        temp_r4 = &fp->x8B0[i];
+        if (temp_r4->x11 != -1) {
+            struct ftData_x1C* temp_r26 = fp->ft_data->x1C[i];
+            u8* var_r29 = temp_r26->x4;
+
+            temp_r4->x8 += temp_r4->xC;
+            if (temp_r4->x4 <= temp_r4->x8) {
+                temp_r4->x8 = temp_r4->x4;
+                var_f28 = 1.0F;
+                var_f29 = 0.0F;
+            } else {
+                temp_f0_2 =
+                    temp_r4->xC / (temp_r4->xC + (temp_r4->x4 - temp_r4->x8));
+                var_f28 = temp_f0_2;
+                var_f29 = 1.0F - temp_f0_2;
+            }
+            for (j = 0; j < temp_r26->x2; j++) {
+                int temp_r0 = var_r29[j];
+                if (fp->parts[temp_r0].flags_b5) {
+                    if (var_f29) {
+                        temp_r3 = &fp->parts[temp_r0];
+                        lb_8000C490(temp_r3->x4_jobj2, temp_r3->joint,
+                                    temp_r3->joint, var_f28, var_f29);
+                    } else {
+                        lbCopyJObjSRT(fp->parts[temp_r0].x4_jobj2,
+                                      fp->parts[temp_r0].joint);
+                    }
+                }
+            }
+        }
+    }
 }
 
 void ftAnim_80070904(Fighter* fp, int start_idx, HSD_AnimJoint* animjoint)
@@ -900,13 +1052,26 @@ void ftAnim_80070904(Fighter* fp, int start_idx, HSD_AnimJoint* animjoint)
     }
 }
 
-/// #ftAnim_800707B0
-
-/// #ftAnim_80070904
-
 /// #ftAnim_80070A10
 
-/// #ftAnim_ApplyPartAnim
+void ftAnim_ApplyPartAnim(Fighter_GObj* gobj, s32 arg1, s32 arg2, f32 arg3)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    struct Fighter_x8B0_t* temp_r30;
+    struct ftData_x1C* temp_r29;
+
+    temp_r30 = &fp->x8B0[arg1];
+    temp_r29 = fp->ft_data->x1C[arg1];
+    temp_r30->x11 = arg2;
+    temp_r30->x4 = arg3;
+    temp_r30->x8 = 0.0F;
+    if (arg3) {
+        temp_r30->xC = lb_8000BFF0(temp_r29->x8[arg2]) / arg3;
+    } else {
+        temp_r30->xC = 0.0F;
+    }
+    ftAnim_80070904(fp, temp_r29->x0, temp_r29->x8[arg2]);
+}
 
 /// #ftAnim_80070C48
 
@@ -916,7 +1081,12 @@ void ftAnim_80070904(Fighter* fp, int start_idx, HSD_AnimJoint* animjoint)
 
 /// #ftAnim_80070F28
 
-/// #ftAnim_80070FB4
+void ftAnim_80070FB4(Fighter_GObj* arg0, s32 arg1, s32 arg2)
+{
+    Fighter* fp = GET_FIGHTER(arg0);
+    struct Fighter_x8B0_t* tmp = &fp->x8B0[arg1];
+    tmp->x10 = arg2;
+}
 
 bool ftAnim_80070FD0(Fighter* fp)
 {

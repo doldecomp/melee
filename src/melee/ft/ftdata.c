@@ -1317,47 +1317,15 @@ ftData_UnkModelStruct ftData_UnkIntBoolFunc0 = {
     },
 };
 
-HSD_GObjEvent ftData_UnkCallbackPairs0[][FTKIND_MAX] = {
-    {
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        ftKb_Init_UnkCallbackPairs0_0,
-        ftKb_Init_UnkCallbackPairs0_1,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-    },
-    {
-        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-    }
+struct {
+    HSD_GObjEvent x0;
+    void (*x4)(Fighter_GObj*, int, float frame);
+} ftData_UnkCallbackPairs0[FTKIND_MAX] = {
+    { NULL, NULL },
+    { NULL, NULL },
+    { NULL, NULL },
+    { NULL, NULL },
+    { ftKb_Init_UnkCallbackPairs0_0, ftKb_Init_UnkCallbackPairs0_1 },
 };
 
 /// Costume and Joint Strings

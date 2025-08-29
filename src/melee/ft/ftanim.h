@@ -5,6 +5,8 @@
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
+struct KirbyFV_x44_t;
+
 /* 06DBF4 */ void ftAnim_8006DBF4(HSD_AnimJoint**, int*);
 /* 06DCF4 */ void ftAnim_8006DCF4(HSD_MatAnimJoint**, int*);
 /* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint**, s32* pdepth);
@@ -39,11 +41,12 @@
 /* 06FF74 */ void ftAnim_8006FF74(Fighter*, int start_idx);
 /* 070010 */ void ftAnim_80070010(Fighter*, int, HSD_Joint*, float, float);
 /* 070108 */ void ftAnim_80070108(Fighter*, int, HSD_Joint*, float, float);
-/* 070200 */ UNK_RET ftAnim_80070200(UNK_PARAMS);
+/* 070200 */ UNK_RET ftAnim_80070200(Fighter*, void**, struct KirbyFV_x44_t*,
+                                     DObjList*);
 /* 070308 */ void ftAnim_80070308(Fighter_GObj*);
 /* 070458 */ UNK_RET ftAnim_80070458(UNK_PARAMS);
-/* 0704F0 */ void ftAnim_800704F0(Fighter_GObj*, s32, float);
-/* 0705E0 */ UNK_RET ftAnim_800705E0(UNK_PARAMS);
+/* 0704F0 */ void ftAnim_800704F0(Fighter_GObj*, int, float);
+/* 0705E0 */ UNK_RET ftAnim_800705E0(UNK_T);
 /* 070654 */ void ftAnim_80070654(Fighter_GObj*);
 /* 070710 */ void ftAnim_80070710(HSD_JObj*, float frame);
 /* 070734 */ void ftAnim_80070734(HSD_JObj*, float frame);

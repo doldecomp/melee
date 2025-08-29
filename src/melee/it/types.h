@@ -585,6 +585,7 @@ struct Item {
         itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
         itMasterHandBullet_ItemVars masterhandbullet;
         itMasterHandLaser_ItemVars masterhandlaser;
+        itUnk4_ItemVars unk4;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
