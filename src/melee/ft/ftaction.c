@@ -237,44 +237,49 @@ range
 
 void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // Fighter* fp = gobj->user_data;
-    // int gfx_id;
-    // int bone;
-    // int use_common_bone_id;
-    // int destroy_on_state_change;
-    // Vec3 offset;
-    // Vec3 range;
-    // float unk;
-    // // permuter jank?
-    // CommandInfo* new_var;
-    // PAD_STACK(4);
-    // if (!fp->invisible) {
-    //     if (cmd->u->test1.useUnkBone) {
-    //         bone = fp->ft_data->x8->x12;
-    //     } else {
-    //         bone = cmd->u->test1.boneId;
-    //     }
-    //     use_common_bone_id = cmd->u->test1.useCommonBoneIDs;
-    //     destroy_on_state_change = cmd->u->test1.destroyOnStateChange;
-    //     // gmScriptEventUpdatePtr((new_var = cmd)->x8, struct test1);
-    //     gfx_id = new_var->u->test2.gfxID;
-    //     unk = new_var->u->test2.unkFloat;
-    //     // gmScriptEventUpdatePtr(new_var->x8, struct test2);
-    //     offset.z = (1 / 256.0f) * new_var->u->test3.offsetZ;
-    //     offset.y = (1 / 256.0f) * new_var->u->test3.offsetY;
-    //     // gmScriptEventUpdatePtr(new_var->x8, struct test3);
-    //     offset.x = (1 / 256.0f) * new_var->u->test4.offsetX;
-    //     range.z = (1 / 256.0f) * new_var->u->test4.rangeZ;
-    //     // gmScriptEventUpdatePtr(new_var->x8, struct test4);
-    //     range.y = (1 / 256.0f) * new_var->u->test5.rangeY;
-    //     range.x = (1 / 256.0f) * new_var->u->test5.rangeX;
-    //     // gmScriptEventUpdatePtr(new_var->x8, struct test5);
-    //     ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
-    //                   destroy_on_state_change, &offset, &range, unk);
-    // } else {
-    //     // skip the gfxspawn event
-    //     ftAction_800711DC(gobj, cmd);
-    // }
+    Fighter* fp = GET_FIGHTER(gobj);
+    float unk;
+    Vec3 offset;
+    Vec3 range;
+    // permuter jank?
+    {
+        CommandInfo* new_var;
+        if (!fp->invisible) {
+            int bone;
+            if (cmd->u->test1.useUnkBone) {
+                bone = fp->ft_data->x8->x12;
+            } else {
+                bone = cmd->u->test1.boneId;
+            }
+            {
+                int use_common_bone_id = cmd->u->test1.useCommonBoneIDs;
+                int destroy_on_state_change =
+                    cmd->u->test1.destroyOnStateChange;
+                gmScriptEventUpdatePtr((new_var = cmd)->u, struct test1);
+                {
+                    int gfx_id = new_var->u->test2.gfxID;
+                    unk = new_var->u->test2.unkFloat;
+                    gmScriptEventUpdatePtr(new_var->u, struct test2);
+                    {
+                        offset.z = (1 / 256.0f) * new_var->u->test3.offsetZ;
+                        offset.y = (1 / 256.0f) * new_var->u->test3.offsetY;
+                        gmScriptEventUpdatePtr(new_var->u, struct test3);
+                        offset.x = (1 / 256.0f) * new_var->u->test4.offsetX;
+                        range.z = (1 / 256.0f) * new_var->u->test4.rangeZ;
+                        gmScriptEventUpdatePtr(new_var->u, struct test4);
+                        range.y = (1 / 256.0f) * new_var->u->test5.rangeY;
+                        range.x = (1 / 256.0f) * new_var->u->test5.rangeX;
+                        gmScriptEventUpdatePtr(new_var->u, struct test5);
+                        ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
+                                      destroy_on_state_change, &offset, &range,
+                                      unk);
+                    }
+                }
+            }
+        } else {
+            ftAction_800711DC(gobj, cmd);
+        }
+    }
 }
 
 /// Skip GFX Spawn
