@@ -267,9 +267,15 @@ void ftYs_GuardDamage_Anim(HSD_GObj* gobj)
 
 void ftYs_GuardDamage_IASA(HSD_GObj* arg0) {}
 
-/// #ftYs_GuardDamage_Phys
+void ftYs_GuardDamage_Phys(Fighter_GObj* gobj)
+{
+    ftCo_GuardSetOff_Phys(gobj);
+}
 
-/// #ftYs_GuardDamage_Coll
+void ftYs_GuardDamage_Coll(Fighter_GObj* gobj)
+{
+    ftCo_GuardSetOff_Coll(gobj);
+}
 
 void ftYs_Shield_8012C850(HSD_GObj* gobj)
 {
@@ -294,11 +300,20 @@ void ftYs_Shield_8012CACC(HSD_GObj* arg0) {}
 
 /// #ftYs_GuardOn_1_Anim
 
-/// #ftYs_GuardOn_1_IASA
+void ftYs_GuardOn_1_IASA(Fighter_GObj* gobj)
+{
+    ftCo_GuardReflect_IASA(gobj);
+}
 
-/// #ftYs_GuardOn_1_Phys
+void ftYs_GuardOn_1_Phys(Fighter_GObj* gobj)
+{
+    ftCo_GuardReflect_Phys(gobj);
+}
 
-/// #ftYs_GuardOn_1_Coll
+void ftYs_GuardOn_1_Coll(Fighter_GObj* gobj)
+{
+    ftCo_GuardReflect_Coll(gobj);
+}
 
 bool ftYs_Shield_8012CC1C(HSD_GObj* gobj)
 {
