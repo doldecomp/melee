@@ -1097,7 +1097,22 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     }
 }
 
-/// #mpColl_80043E90
+bool mpColl_80043E90(CollData* arg0, s32* arg1)
+{
+    s32 sp10;
+    s32 temp_r31 = mpLib_80052534(arg0->floor.index);
+
+    f32 f1 = arg0->cur_topn.x + arg0->xA4_ecbCurrCorrect.bottom.x;
+    f32 f2 = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+    f32 f3 = arg0->cur_topn.x + arg0->xA4_ecbCurrCorrect.left.x;
+    f32 f4 = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.left.y;
+
+    if (mpLib_800509B8(f1, f2, f3, f4, NULL, &sp10, 0, NULL, arg0->x48, arg0->x4C) && sp10 != temp_r31) {
+        *arg1 = sp10;
+        return true;
+    }
+    return false;
+}
 
 /// #mpColl_80043F40
 

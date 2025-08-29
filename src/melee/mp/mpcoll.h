@@ -37,7 +37,7 @@
 /* 043ADC */ void mpColl_80043ADC(CollData*);
 /* 043BBC */ bool mpColl_80043BBC(CollData*, s32*);
 /* 043C6C */ void mpColl_80043C6C(CollData*, s32, s32);
-/* 043E90 */ s32 mpColl_80043E90(CollData*, s32*);
+/* 043E90 */ bool mpColl_80043E90(CollData*, s32*);
 /* 043F40 */ void mpColl_80043F40(CollData*, s32, s32);
 /* 044164 */ bool mpColl_80044164(CollData* cd, int* p_ledge_id);
 /* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
