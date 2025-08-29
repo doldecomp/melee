@@ -5,6 +5,7 @@
 #include <platform.h>
 
 #include <melee/gm/forward.h>
+#include <melee/gm/types.h>
 
 /* 15CC34 */ GameRules* gmMainLib_8015CC34(void);
 /* 15CC40 */ struct gmm_x1868* gmMainLib_8015CC40(void);
