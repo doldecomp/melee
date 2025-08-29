@@ -1677,7 +1677,7 @@ struct Fighter {
     /* fp+2221:6 */ u8 x2221_b6 : 1; ///< parasol-related
     /* fp+2221:7 */ u8 x2221_b7 : 1;
 
-    /* fp+2222:0 */ u8 x2222_b0 : 1; ///< can cargo grab? only set for DK
+    /* fp+2222:0 */ u8 x2222_b0 : 1;      ///< can cargo grab? only set for DK
     /* fp+2222:1 */ u8 can_multijump : 1; ///< set for Kirby and Jigglypuff
     /* fp+2222:2 */ u8 x2222_b2 : 1;
     /* fp+2222:3 */ u8 x2222_b3 : 1;
@@ -1828,69 +1828,6 @@ struct ftData_UnkCountStruct {
 struct UnkFloat6_Camera {
     Vec3 x0;
     Vec3 xC;
-};
-
-struct FtCmdState {
-    float x0; // timer
-    float x4; // frame
-    union {
-        char* x8; // script
-        struct {
-            union {
-                s16 x0;
-                struct {
-                    u8 x0_b0 : 1;
-                    u8 x0_b1 : 1;
-                    u8 x0_b2 : 1;
-                    u8 x0_b3 : 1;
-                    u8 x0_b4 : 1;
-                    u8 x0_b5 : 1;
-                    u8 x0_b6 : 1;
-                    u8 x0_b7 : 1;
-                    u8 x1_b0 : 1;
-                    u8 x1_b1 : 1;
-                    u8 x1_b2 : 1;
-                    u8 x1_b3 : 1;
-                    u8 x1_b4 : 1;
-                    u8 x1_b5 : 1;
-                    u8 x1_b6 : 1;
-                    u8 x1_b7 : 1;
-                };
-                struct {
-                    u8 x0_b0_8 : 6;
-                    u16 x0_b0_2 : 8;
-                    u32 x0_b0_3 : 18;
-                };
-                struct {
-                    u32 x0_6_26_1 : 6;
-                    u32 x0_6_26_2 : 26;
-                };
-            };
-            union {
-                s16 x2;
-                struct {
-                    u8 x2_b0 : 1;
-                    u8 x2_b1 : 1;
-                    u8 x2_b2 : 1;
-                    u8 x2_b3 : 1;
-                    u8 x2_b4 : 1;
-                    u8 x2_b5 : 1;
-                    u8 x2_b6 : 1;
-                    u8 x2_b7 : 1;
-                    u8 x3_b0 : 1;
-                    u8 x3_b1 : 1;
-                    u8 x3_b2 : 1;
-                    u8 x3_b3 : 1;
-                    u8 x3_b4 : 1;
-                    u8 x3_b5 : 1;
-                    u8 x3_b6 : 1;
-                    u8 x3_b7 : 1;
-                };
-            };
-        }* x8_bits;
-    };
-    int xC;        // stack_depth
-    void*(x10[5]); // stack
 };
 
 typedef struct ftData_UnkModelStruct {

@@ -7,6 +7,7 @@
 #include "cm/forward.h"
 
 #include "ft/types.h"
+#include "gm/types.h"
 
 #include "it/forward.h" // IWYU pragma: export
 

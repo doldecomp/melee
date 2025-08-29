@@ -1498,15 +1498,15 @@ void ftCommon_8007F578(HSD_GObj* gobj)
     }
 }
 
-void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
+void ftCommon_8007F5CC(Item_GObj* gobj, bool arg1)
 {
     Fighter* fp = gobj->user_data;
-    HSD_GObj* item = fp->item_gobj;
+    Item_GObj* item = fp->item_gobj;
 
-    u8 _[8];
+    PAD_STACK(8);
 
     if (item != NULL && fp->x221E_b3 != arg1) {
-        if (arg1 == 0) {
+        if (!arg1) {
             ftCommon_8007F578(gobj);
         } else if (item != NULL) {
             if (ftData_OnItemVisible[fp->kind] != NULL) {

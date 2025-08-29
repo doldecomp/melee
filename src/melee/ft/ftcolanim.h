@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#include "ftCommon/forward.h"
+#include "ft/forward.h"
 
 /* 0BFE6C */ void ftCo_Sleep_Anim(Fighter_GObj* gobj);
 /* 0BFE70 */ void ftCo_Sleep_IASA(Fighter_GObj* gobj);

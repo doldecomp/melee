@@ -1183,6 +1183,7 @@ void ftColl_8007B0C0(Fighter_GObj* gobj, HurtCapsuleState arg1)
     }
 }
 
+/// Set hurt capsule state
 void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
                      HurtCapsuleState state)
 {
@@ -1193,7 +1194,7 @@ void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
         int bone_idx = hurt->capsule.bone_idx;
         if (bone_idx == bone_id) {
             hurt->capsule.state = state;
-            if (state != HitCapsule_Disabled) {
+            if (state != HurtCapsule_Enabled) {
                 fp->x221A_b5 = 1;
             }
             return;

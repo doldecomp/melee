@@ -14,9 +14,9 @@
 #include "ft/ft_0C31.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-#include "gm/gm_1A36.h"
-#include "gm/gm_1B03.h"
 #include "gm/gm_unsplit.h"
+#include "gm/inlines.h"
+#include "gm/types.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -241,11 +241,9 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcollision.h"
-#include "lb/lbcommand.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "pl/pl_040D.h"
 #include "pl/plattack.h"
 #include "pl/plbonuslib.h"
 #include "pl/plstale.h"
@@ -8600,39 +8598,39 @@ void it_80278F2C(Item_GObj* item_gobj, FtCmdState* cmd)
     Vec3 sp20;
     Vec3 sp14;
     u16 temp_r9;
-    s32 temp_r5;
+    // s32 temp_r5;
     PAD_STACK(28);
 
-    cmd->x8 += 4;
-    temp_r5 = cmd->x8_bits->x0 & 0x3FF;
-    temp_r9 = cmd->x8_bits->x0;
+    ++cmd->u;
+    // temp_r5 = cmd->x8_bits->x0 & 0x3FF;
+    // temp_r9 = cmd->x8_bits->x0;
     // cmd->x8 = (char*) (&cmd->x8 + 4);
-    cmd->x8 += 4;
-    sp20.x = 0.003906f * (f32) cmd->x8_bits->x0;
+    ++cmd->u;
+    // sp20.x = 0.003906f * (f32) cmd->x8_bits->x0;
     // sp20.x = 0.003906f * (((f32) cmd->x8_bits->x0 - it_804DC798) -
     // it_804DC7A0);
-    sp20.y = 0.003906f * (f32) cmd->x8_bits->x2;
-    cmd->x8 += 4;
+    // sp20.y = 0.003906f * (f32) cmd->x8_bits->x2;
+    ++cmd->u;
     // cmd->x8 = (char*) (&cmd->x8 + 4);
-    sp20.z = 0.003906f * (f32) cmd->x8_bits->x0;
-    sp14.x = 0.003906f * (f32) cmd->x8_bits->x2;
-    cmd->x8 += 4;
+    // sp20.z = 0.003906f * (f32) cmd->x8_bits->x0;
+    // sp14.x = 0.003906f * (f32) cmd->x8_bits->x2;
+    ++cmd->u;
     // cmd->x8 = (char*) (&cmd->x8 + 4);
-    sp14.y = 0.003906f * (f32) cmd->x8_bits->x0;
-    sp14.z = 0.003906f * (f32) cmd->x8_bits->x2;
+    // sp14.y = 0.003906f * (f32) cmd->x8_bits->x0;
+    // sp14.z = 0.003906f * (f32) cmd->x8_bits->x2;
     // cmd->x8 = (char*) (&cmd->x8 + 4);
-    cmd->x8 += 4;
+    ++cmd->u;
 
     // void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
     // Vec3* arg4, s32 arg5, f32 arg6)
     //  it_80278800((Item_GObj*) temp_r9, temp_r6->x0 & 0x3FF, &sp20, &sp14, 0,
     //  temp_r9, temp_r10_2, (f32) (s32) (f32) temp_r10->x2, 0.003906f);
-    it_80278800(item_gobj, temp_r9, temp_r5, &sp20, &sp14, 0, 0.003906f);
+    // it_80278800(item_gobj, temp_r9, temp_r5, &sp20, &sp14, 0, 0.003906f);
 }
 
 void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-#if 1
+#if 0
     HitCapsule* hitcapsule;
     s32 temp_r31;
     u32 temp_r28;
@@ -8642,10 +8640,10 @@ void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
     PAD_STACK(12);
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    var_r4 = ((u16) cmd->x8_bits->x0 >> 7U) & 7;
+    // var_r4 = ((u16) cmd->x8_bits->x0 >> 7U) & 7;
     hitcapsule = &item->x5D4_hitboxes[var_r4].hit;
     temp_r28 = var_r4;
-    temp_r5_2 = ((u8) cmd->x8_bits->x0 >> 4U) & 7;
+    // temp_r5_2 = ((u8) cmd->x8_bits->x0 >> 4U) & 7;
     if ((hitcapsule->state == HitCapsule_Disabled) ||
         (hitcapsule->x4 != temp_r5_2))
     {
@@ -8655,7 +8653,7 @@ void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
         item->xDAA_flag.b2 = 0;
         it_8026FCF8(item, hitcapsule);
     }
-    temp_r31 = ((u32) cmd->x8_bits->x0 >> 0xDU) & S8_MAX;
+    // temp_r31 = ((u32) cmd->x8_bits->x0 >> 0xDU) & S8_MAX;
     if (temp_r31 != 0U) {
         if (!item->xBBC_dynamicBoneTable) {
             OSReport((char*) &it_803F22E8);
@@ -8665,9 +8663,9 @@ void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
     } else {
         hitcapsule->jobj = item_gobj->hsd_obj;
     }
-    it_80272460(hitcapsule,
-                item->xC3C * ((cmd->x8_bits->x2 & 0x1FFF) * item->xC40),
-                item_gobj);
+    // it_80272460(hitcapsule,
+    //             item->xC3C * ((cmd->x8_bits->x2 & 0x1FFF) * item->xC40),
+    //             item_gobj);
     cmd->x8 = cmd->x8 + 4;
     hitcapsule->scale = 0.003906f * (f32) (u16) cmd->x8_bits->x0;
     item->x3C = hitcapsule->scale;
@@ -8675,81 +8673,81 @@ void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
     // 0.003906f); it_80275594(item_gobj, temp_r28, cmd->x8_bits, 1.0f /
     // item->scl, 0.003906f);
     it_80275594(item_gobj, temp_r28, 1.0f / item->scl);
-    hitcapsule->b_offset.x = 0.003906f * (f32) (s16) cmd->x8_bits->x2;
+    // hitcapsule->b_offset.x = 0.003906f * (f32) (s16) cmd->x8_bits->x2;
     cmd->x8 = cmd->x8 + 4;
     hitcapsule->b_offset.y = 0.003906f * (f32) (s16) cmd->x8_bits->x0;
-    hitcapsule->b_offset.z = 0.003906f * (f32) (s16) cmd->x8_bits->x2;
+    // hitcapsule->b_offset.z = 0.003906f * (f32) (s16) cmd->x8_bits->x2;
     cmd->x8 = cmd->x8 + 4;
     hitcapsule->kb_angle = ((u16) cmd->x8_bits->x0 >> 7U) & 0x1FF;
     // hitcapsule->x24 = ((u32) cmd->x8_bits->x0 >> 14U) & 0x1FF;
     hitcapsule->x24 = ((u32) cmd->x8_bits->x0 >> 14U) & 0x1FF;
-    hitcapsule->x28 = ((u16) cmd->x8_bits->x2 >> 5U) & 0x1FF;
+    // hitcapsule->x28 = ((u16) cmd->x8_bits->x2 >> 5U) & 0x1FF;
     hitcapsule->x43_b1 = 1;
     cmd->x8 = cmd->x8 + 4;
     hitcapsule->x2C = ((u16) cmd->x8_bits->x0 >> 7U) & 0x1FF;
     hitcapsule->element = ((u8) cmd->x8_bits->x0 >> 2U) & 0x1F;
     // hitcapsule->unk40 = (u8) ((hitcapsule->unk40 & ~0x80) |
     // ((cmd->x8_bits->unk1 << 6) & 0x80));
-    hitcapsule->x40_b0 = cmd->x8_bits->x0_b6;
+    hitcapsule->x40_b0 = cmd->x8_bits->unk6.unk1;
     hitcapsule->x40_b1 = 0;
     hitcapsule->x34 = (s32) ((cmd->x8_bits->x0 << 0xF) & 0xFF800000) >> 0x18;
-    hitcapsule->sfx_severity = ((u16) cmd->x8_bits->x2 >> 6U) & 7;
+    // hitcapsule->sfx_severity = ((u16) cmd->x8_bits->x2 >> 6U) & 7;
     // hitcapsule->sfx_kind = ((u8) cmd->x8[0]->unk3 >> 2U) & 0xF;
-    hitcapsule->sfx_kind = ((u8) cmd->x8_bits->x2 >> 2U) & 0xF;
+    // hitcapsule->sfx_kind = ((u8) cmd->x8_bits->x2 >> 2U) & 0xF;
     // hitcapsule->sfx_kind = cmd->x8_bits->x3_b5;
     // hitcapsule->x40_b2 = (u8) ((hitcapsule->x40_b2 & ~0x20) |
     // ((cmd->x8_bits->unk3 << 5) & 0x20));
-    hitcapsule->x40_b2 = cmd->x8_bits->x3_b7;
+    // hitcapsule->x40_b2 = cmd->x8_bits->x3_b7;
     // hitcapsule->x40_b3 = (u8) ((hitcapsule->x40_b3 & ~0x10) |
     // ((cmd->x8_bits->unk3 << 3) & 0x10));
-    hitcapsule->x40_b3 = cmd->x8_bits->x3_b6;
+    // hitcapsule->x40_b3 = cmd->x8_bits->x3_b6;
     cmd->x8 = cmd->x8 + 4;
     hitcapsule->x40_b4 = ((u8) cmd->x8_bits->x0 << 4) & 0xFF0;
     // hitcapsule->x41_b4 = cmd->x8_bits->x0_b7;
     // hitcapsule->x41_b4 = (u8) ((hitcapsule->x41_b4 & ~8) | (((u8)
     // cmd->x8_bits->unk1 >> 4U) & 8)); hitcapsule->x41_b4 = ((u8)
     // cmd->x8_bits->x0 >> 4U) & 8;
-    hitcapsule->x41_b4 = cmd->x8_bits->x1_b0;
+    // hitcapsule->x41_b4 = cmd->x8_bits->x1_b0;
     // hitcapsule->x41_b5 = (u8) ((hitcapsule->x41_b5 & ~4) | (((u8)
     // cmd->x8[0]->unk1 >> 4U) & 4)); hitcapsule->x41_b5 = ((u8)
     // cmd->x8_bits->x0 >> 4U) & 4;
-    hitcapsule->x41_b5 = cmd->x8_bits->x1_b1;
+    // hitcapsule->x41_b5 = cmd->x8_bits->x1_b1;
     // hitcapsule->x41_b6 = (u8) ((hitcapsule->x41_b6 & ~2) | (((u8)
     // cmd->x8[0]->unk1 >> 4U) & 2));
-    hitcapsule->x41_b6 = cmd->x8_bits->x1_b2;
+    // hitcapsule->x41_b6 = cmd->x8_bits->x1_b2;
     // hitcapsule->x41_b6 = cmd->x8_bits->x1_b6;
     // hitcapsule->x41_b7 = (u8) ((hitcapsule->x41_b7 & ~1) | (((u8)
     // cmd->x8[0]->unk1 >> 4U) & 1));
-    hitcapsule->x41_b7 = cmd->x8_bits->x1_b3;
+    // hitcapsule->x41_b7 = cmd->x8_bits->x1_b3;
     // hitcapsule->x41_b7 = cmd->x8_bits->x1_b7;
     // hitcapsule->x42_b0 = (u8) ((hitcapsule->x42_b0 & ~0x80) |
     // ((cmd->x8[0]->unk1 << 4) & 0x80));
-    hitcapsule->x42_b0 = cmd->x8_bits->x1_b4;
+    // hitcapsule->x42_b0 = cmd->x8_bits->x1_b4;
     // hitcapsule->x42_b0 = cmd->x8_bits->x1_b0;
     // hitcapsule->x42_b1 = (u8) ((hitcapsule->x42_b1 & ~0x40) |
     // ((cmd->x8[0]->unk1 << 4) & 0x40));
-    hitcapsule->x42_b1 = cmd->x8_bits->x1_b5;
+    // hitcapsule->x42_b1 = cmd->x8_bits->x1_b5;
     // hitcapsule->x42_b1 = cmd->x8_bits->x1_b1;
     // hitcapsule->x42_b2 = (u8) ((hitcapsule->x42_b2 & ~0x20) |
     // ((cmd->x8[0]->unk1 << 4) & 0x20));
-    hitcapsule->x42_b2 = cmd->x8_bits->x1_b6;
+    // hitcapsule->x42_b2 = cmd->x8_bits->x1_b6;
     // hitcapsule->x42_b2 = cmd->x8_bits->x1_b2;
     // hitcapsule->x42_b3 = (u8) ((hitcapsule->x42_b3 & ~0x10) |
     // ((cmd->x8[0]->unk1 << 4) & 0x10));
-    hitcapsule->x42_b3 = cmd->x8_bits->x1_b7;
-    hitcapsule->x42_b4 = cmd->x8_bits->x2_b0;
-    hitcapsule->x42_b5 = cmd->x8_bits->x2_b1;
-    hitcapsule->x42_b6 = cmd->x8_bits->x2_b2;
-    hitcapsule->x42_b7 = cmd->x8_bits->x2_b3;
+    // hitcapsule->x42_b3 = cmd->x8_bits->x1_b7;
+    // hitcapsule->x42_b4 = cmd->x8_bits->x2_b0;
+    // hitcapsule->x42_b5 = cmd->x8_bits->x2_b1;
+    // hitcapsule->x42_b6 = cmd->x8_bits->x2_b2;
+    // hitcapsule->x42_b7 = cmd->x8_bits->x2_b3;
     // hitcapsule->x43 = cmd->x8_bits->x2;
-    hitcapsule->x43_b0 = cmd->x8_bits->x2_b4;
+    // hitcapsule->x43_b0 = cmd->x8_bits->x2_b4;
     // hitcapsule->hit_grabbed_victim_only = (u8)
     // ((hitcapsule->hit_grabbed_victim_only & ~0x80) | (((u8) cmd->x8_bits->x0
     // << 5) & 0x80)); hitcapsule->hit_grabbed_victim_only = ((u8)
     // cmd->x8_bits->x0 << 5) & 0x80; hitcapsule->hit_grabbed_victim_only =
     // cmd->x8_bits->x2_b5;
     // (&item->x5D4_hitboxes[var_r4])->x138 = cmd->x8_bits->x2_b5;
-    item->x5D4_hitboxes[var_r4].x138 = (u8) cmd->x8_bits->x2;
+    // item->x5D4_hitboxes[var_r4].x138 = (u8) cmd->x8_bits->x2;
     // cmd->unk8 = (void* ) (cmd->unk8 + 4);
     // cmd->x8[0] = cmd->x8[1];
     cmd->x8 = cmd->x8 + 4;
@@ -8769,11 +8767,11 @@ void it_80279544(Item_GObj* item_gobj, FtCmdState* cmd)
     // temp_r4 = &((struct it_278F_struct_1A*) cmd)->x8[0];
     item = GET_ITEM((HSD_GObj*) item_gobj);
     // item = item_gobj->user_data;
-    it_80272460(
-        &item->x5D4_hitboxes[(cmd->x8_bits->x0 >> 7U) & 7].hit,
-        (s32) (u32) (item->xC3C *
-                     ((f32) ((u16) cmd->x8_bits->x2 & 0x1FFF) * item->xC40)),
-        item_gobj);
+    // it_80272460(
+    // &item->x5D4_hitboxes[(cmd->x8_bits->x0 >> 7U) & 7].hit,
+    // (s32) (u32) (item->xC3C *
+    // ((f32) ((u16) cmd->x8_bits->x2 & 0x1FFF) * item->xC40)),
+    // item_gobj);
     // cmd->unk8 = (void* ) (cmd->unk8 + 4);
     // ((struct it_278F_struct_1A*) cmd)->x8[0] = ((struct it_278F_struct_1A*)
     // cmd)->x8[1];
@@ -8782,16 +8780,16 @@ void it_80279544(Item_GObj* item_gobj, FtCmdState* cmd)
 
 void it_802795EC(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    s32 temp_r4_2;
+    // s32 temp_r4_2;
     HitCapsule* hitcapsule;
     Item* item;
 
-    temp_r4_2 = ((u16) cmd->x8_bits->x0 >> 7U) & 7;
+    // temp_r4_2 = ((u16) cmd->x8_bits->x0 >> 7U) & 7;
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    hitcapsule = &item->x5D4_hitboxes[temp_r4_2].hit;
-    hitcapsule->scale = 0.003906f * (cmd->x8_bits->x0 & 0x7FFFFF);
-    item->x3C = hitcapsule->scale;
-    it_80275594(item_gobj, temp_r4_2, 1.0f / item->scl);
+    // hitcapsule = &item->x5D4_hitboxes[temp_r4_2].hit;
+    // hitcapsule->scale = 0.003906f * (cmd->x8_bits->x0 & 0x7FFFFF);
+    // item->x3C = hitcapsule->scale;
+    // it_80275594(item_gobj, temp_r4_2, 1.0f / item->scl);
     cmd->x8 = cmd->x8 + 4;
 }
 
@@ -8800,14 +8798,14 @@ void it_802795EC(Item_GObj* item_gobj, FtCmdState* cmd)
 
 void it_80279680(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    it_80272560(item_gobj, cmd->x8_bits->x0_6_26_2);
-    cmd->x8 += 4;
+    it_80272560(item_gobj, cmd->u->unk2.hit_idx);
+    ++cmd->u;
 }
 
 void it_802796C4(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     it_802725D4(item_gobj);
-    cmd->x8 += 4;
+    ++cmd->u;
 }
 
 #pragma pop
@@ -8815,22 +8813,22 @@ void it_802796C4(Item_GObj* item_gobj, FtCmdState* cmd)
 void it_802796FC(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
-    it->xDAC_itcmd_var0 = cmd->x8_bits->x0_6_26_2;
-    cmd->x8 += 4;
+    it->xDAC_itcmd_var0 = cmd->u->unk2.hit_idx;
+    ++cmd->u;
 }
 
 void it_80279720(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
-    it->xDB0_itcmd_var1 = cmd->x8_bits->x0_6_26_2;
-    cmd->x8 += 4;
+    it->xDB0_itcmd_var1 = cmd->u->unk2.hit_idx;
+    ++cmd->u;
 }
 
 void it_80279744(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
-    it->xDB4_itcmd_var2 = cmd->x8_bits->x0_6_26_2;
-    cmd->x8 += 4;
+    it->xDB4_itcmd_var2 = cmd->u->unk2.hit_idx;
+    ++cmd->u;
 }
 
 void it_80279768(Item_GObj* item_gobj, FtCmdState* cmd)
@@ -8838,84 +8836,87 @@ void it_80279768(Item_GObj* item_gobj, FtCmdState* cmd)
     Item* item = item_gobj->user_data;
     item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 24U & 0x80);
     // item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 25U & 0x80);
-    cmd->x8 += 4;
+    ++cmd->u;
 }
 
+#pragma push
+#pragma dont_inline on
 void it_8027978C(Item_GObj* item_gobj, FtCmdState* cmd)
 {
-    Item* item;
-    s32 temp_r4_2;
-    u8 temp_r7;
-    u8 temp_r5_2;
-    u8 temp_r6_2;
+    // #if 1
+    //     Item* item;
+    //     s32 temp_r4_2;
+    //     u8 temp_r7;
+    //     u8 temp_r5_2;
+    //     // u8 temp_r6_2;
 
-    item = GET_ITEM((HSD_GObj*) item_gobj);
-    temp_r7 = ((u16) cmd->x8_bits->x0 >> 2U) & U8_MAX;
-    cmd->x8 = cmd->x8 + 4;
-#if 1
-    if (temp_r7 < 10U) {
-        if (temp_r7 < 3U) {
-            if (temp_r7 < 0U) {
-            } else {
-                temp_r4_2 = (s32) cmd->x8_bits->x0;
-                cmd->x8 = cmd->x8 + 4;
-                temp_r5_2 = cmd->x8_bits->x2;
-                // temp_r6_2 = (u8) ((u16) cmd->x8_bits->x2 >> 8U);
-                temp_r6_2 = cmd->x8_bits->x2;
-                switch (temp_r7) {
-                case 0:
-                    Item_8026AE84(item, temp_r4_2, (s32) temp_r5_2,
-                                  (s32) temp_r6_2);
-                    break;
-                case 1:
-                    Item_8026AF0C(item, temp_r4_2, (s32) temp_r5_2,
-                                  (s32) temp_r6_2);
-                    break;
-                case 2:
-                    Item_8026AFA0(item, temp_r4_2, (s32) temp_r5_2,
-                                  (s32) temp_r6_2);
-                    break;
-                }
-            }
-        }
-    } else if (temp_r7 >= 12U) {
-    } else {
-        cmd->x8 = cmd->x8 + 4;
-        switch (temp_r7) {
-        case 10:
-            Item_8026B034(item);
-            break;
-        case 11:
-            Item_8026B074(item);
-            break;
-        }
-    }
-#else
-    temp_r4_2 = (s32) cmd->x8_bits->x0;
-    cmd->x8 = cmd->x8 + 4;
-    temp_r5_2 = cmd->x8_bits->x2;
-    // temp_r6_2 = (u8) ((u16) cmd->x8_bits->x2 >> 8U);
-    temp_r6_2 = cmd->x8_bits->x2;
-    switch (temp_r7) {
-    case 0:
-        Item_8026AE84(item, temp_r4_2, (s32) temp_r5_2, (s32) temp_r6_2);
-        break;
-    case 1:
-        Item_8026AF0C(item, temp_r4_2, (s32) temp_r5_2, (s32) temp_r6_2);
-        break;
-    case 2:
-        Item_8026AFA0(item, temp_r4_2, (s32) temp_r5_2, (s32) temp_r6_2);
-        break;
-    case 10:
-        Item_8026B034(item);
-        break;
-    case 11:
-        Item_8026B074(item);
-        break;
-    }
-#endif
-    cmd->x8 = cmd->x8 + 4;
+    //     item = GET_ITEM((HSD_GObj*) item_gobj);
+    //     // temp_r7 = ((u16) cmd->x8_bits->x0 >> 2U) & U8_MAX;
+    //     cmd->x8 = cmd->x8 + 4;
+    //     if (temp_r7 < 10U) {
+    //         if (temp_r7 < 3U) {
+    //             if (temp_r7 < 0U) {
+    //             } else {
+    //                 // temp_r4_2 = (s32) cmd->x8_bits->x0;
+    //                 cmd->x8 = cmd->x8 + 4;
+    //                 // temp_r5_2 = cmd->x8_bits->x2;
+    //                 // temp_r6_2 = (u8) ((u16) cmd->x8_bits->x2 >> 8U);
+    //                 // temp_r6_2 = cmd->x8_bits->x2;
+    //                 // switch (temp_r7) {
+    //                 // case 0:
+    //                 //     Item_8026AE84(item, temp_r4_2, (s32) temp_r5_2,
+    //                 //                   (s32) temp_r6_2);
+    //                 //     break;
+    //                 // case 1:
+    //                 //     Item_8026AF0C(item, temp_r4_2, (s32) temp_r5_2,
+    //                 //                   (s32) temp_r6_2);
+    //                 //     break;
+    //                 // case 2:
+    //                 //     Item_8026AFA0(item, temp_r4_2, (s32) temp_r5_2,
+    //                 //                   (s32) temp_r6_2);
+    //                 //     break;
+    //                 // }
+    //             }
+    //         }
+    //     } else if (temp_r7 >= 12U) {
+    //     } else {
+    //         cmd->x8 = cmd->x8 + 4;
+    //         switch (temp_r7) {
+    //         case 10:
+    //             Item_8026B034(item);
+    //             break;
+    //         case 11:
+    //             Item_8026B074(item);
+    //             break;
+    //         }
+    //     }
+    // #else
+    //     temp_r4_2 = (s32) cmd->x8_bits->x0;
+    //     cmd->x8 = cmd->x8 + 4;
+    //     temp_r5_2 = cmd->x8_bits->x2;
+    //     // temp_r6_2 = (u8) ((u16) cmd->x8_bits->x2 >> 8U);
+    //     temp_r6_2 = cmd->x8_bits->x2;
+    //     switch (temp_r7) {
+    //     case 0:
+    //         Item_8026AE84(item, temp_r4_2, (s32) temp_r5_2, (s32)
+    //         temp_r6_2); break;
+    //     case 1:
+    //         Item_8026AF0C(item, temp_r4_2, (s32) temp_r5_2, (s32)
+    //         temp_r6_2); break;
+    //     case 2:
+    //         Item_8026AFA0(item, temp_r4_2, (s32) temp_r5_2, (s32)
+    //         temp_r6_2); break;
+    //     case 10:
+    //         Item_8026B034(item);
+    //         break;
+    //     case 11:
+    //         Item_8026B074(item);
+    //         break;
+    //     }
+    // #endif
+    //     cmd->x8 = cmd->x8 + 4;
 }
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
@@ -8923,8 +8924,8 @@ void it_8027978C(Item_GObj* item_gobj, FtCmdState* cmd)
 void it_80279888(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     PAD_STACK(4);
-    it_80273598(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
-                cmd->x8_bits->x2 & 0x1FFF);
+    // it_80273598(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
+    // cmd->x8_bits->x2 & 0x1FFF);
     cmd->x8 = cmd->x8 + 4;
 }
 
@@ -8932,7 +8933,7 @@ void it_802798D4(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     PAD_STACK(4);
     it_80273600(item_gobj);
-    cmd->x8 = cmd->x8 + 4;
+    NEXT_CMD(cmd);
 }
 
 #pragma pop
@@ -8940,22 +8941,21 @@ void it_802798D4(Item_GObj* item_gobj, FtCmdState* cmd)
 void it_8027990C(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     PAD_STACK(4);
-    it_80273648(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
-                cmd->x8_bits->x2 & 0x1FFF);
-    cmd->x8 += 4;
+    it_80273648(item_gobj, cmd->u->unk33.unk1, cmd->u->unk33.unk0);
+    NEXT_CMD(cmd);
 }
 
 void it_80279958(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
-    it_80279B88(it, cmd->x8_bits->x0_b0_2, cmd->x8_bits->x0_b0_3);
-    cmd->x8 += 4;
+    it_80279B88(it, cmd->u->unk13.unk1, cmd->u->unk13.unk2);
+    NEXT_CMD(cmd);
 }
 
 void it_802799A8(Item_GObj* item_gobj, FtCmdState* cmd)
 {
     it_80279BBC(item_gobj->user_data);
-    cmd->x8 += 4;
+    ++cmd->u;
 }
 
 void it_802799E4(Item_GObj* item_gobj)
@@ -8982,10 +8982,11 @@ void it_802799E4(Item_GObj* item_gobj)
                 }
             } else if (!(temp_r29->x0 > 0.0f)) {
             block_9:
-                temp_r28 = temp_r29->x8_bits->x0_b0_8;
-                if (Command_Execute((CommandInfo*) temp_r29, temp_r28) == 0) {
-                    it_803F22A8[temp_r28 - 10U](item_gobj, temp_r29);
-                }
+                // temp_r28 = temp_r29->x8_bits->x0_b0_8;
+                // if (Command_Execute((CommandInfo*) temp_r29, temp_r28) == 0)
+                // {
+                //     it_803F22A8[temp_r28 - 10U](item_gobj, temp_r29);
+                // }
                 goto loop_4;
             }
         }
