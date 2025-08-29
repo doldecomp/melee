@@ -655,6 +655,17 @@ void gm_801B4294(MinorScene* arg0)
 
 /// #gm_801B518C
 
-/// #gm_801B51CC_OnInit
+void gm_801B51CC_OnInit(void)
+{
+    struct gm_801B51CC_OnInit_s* temp_r3;
+
+    temp_r3 = gmMainLib_8015CDD4();
+    temp_r3->x0 = 0x21;
+    temp_r3->x2 = 0;
+    temp_r3->x1 = 3;
+    temp_r3->x3 = 0;
+    temp_r3->x4 = 0x78;
+    temp_r3->x5 = 0;
+}
 
 /// #gm_801B5214_OnLoad
