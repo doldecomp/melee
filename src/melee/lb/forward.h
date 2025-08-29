@@ -8,6 +8,7 @@ struct lb_80011A50_t;
 typedef struct AbsorbDesc AbsorbDesc;
 typedef struct CollData CollData;
 typedef struct ColorOverlay ColorOverlay;
+typedef struct CommandInfo CommandInfo;
 typedef struct DynamicsDesc DynamicsDesc;
 typedef struct FigaTrack FigaTrack;
 typedef struct FigaTree FigaTree;

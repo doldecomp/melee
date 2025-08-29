@@ -7,14 +7,14 @@
 
 #pragma force_active on
 
-/* 0BFE74 */ static void ftCo_800BFE74(Fighter_GObj* gobj, FtCmdState* cmd);
-/* 0BFEB4 */ static void ftCo_800BFEB4(Fighter_GObj* gobj, FtCmdState* cmd);
-/* 0BFEF4 */ static void ftCo_800BFEF4(Fighter_GObj* gobj, FtCmdState* cmd);
-/* 0BFE94 */ static void ftCo_800BFE94(Fighter_GObj* gobj, FtCmdState* cmd);
-/* 0BFED4 */ static void ftCo_800BFED4(Fighter_GObj* gobj, FtCmdState* cmd);
-/* 0BFF14 */ static void ftCo_800BFF14(Fighter_GObj* gobj, FtCmdState* cmd);
+/* 0BFE74 */ static void ftCo_800BFE74(Fighter_GObj* gobj, CommandInfo* cmd);
+/* 0BFEB4 */ static void ftCo_800BFEB4(Fighter_GObj* gobj, CommandInfo* cmd);
+/* 0BFEF4 */ static void ftCo_800BFEF4(Fighter_GObj* gobj, CommandInfo* cmd);
+/* 0BFE94 */ static void ftCo_800BFE94(Fighter_GObj* gobj, CommandInfo* cmd);
+/* 0BFED4 */ static void ftCo_800BFED4(Fighter_GObj* gobj, CommandInfo* cmd);
+/* 0BFF14 */ static void ftCo_800BFF14(Fighter_GObj* gobj, CommandInfo* cmd);
 /* 0BFF34 */ static UNK_RET ft_800BFF34(UNK_PARAMS);
-/* 0BFF70 */ static void ft_800BFF70(Fighter_GObj* gobj, FtCmdState* cmd,
+/* 0BFF70 */ static void ft_800BFF70(Fighter_GObj* gobj, CommandInfo* cmd,
                                      int arg0);
 
 FtCmd ftCo_803C6AD0[3] = {
@@ -37,39 +37,39 @@ void ftCo_Sleep_Anim(Fighter_GObj* gobj) {}
 
 void ftCo_Sleep_IASA(Fighter_GObj* gobj) {}
 
-static void ftCo_800BFE74(Fighter_GObj* gobj, FtCmdState* cmd)
+static void ftCo_800BFE74(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAction_80071028(gobj, cmd);
 }
 
-static void ftCo_800BFE94(Fighter_GObj* gobj, FtCmdState* cmd)
+static void ftCo_800BFE94(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAction_800711DC(gobj, cmd);
 }
 
-static void ftCo_800BFEB4(Fighter_GObj* gobj, FtCmdState* cmd)
+static void ftCo_800BFEB4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAction_80071B50(gobj, cmd);
 }
 
-static void ftCo_800BFED4(Fighter_GObj* gobj, FtCmdState* cmd)
+static void ftCo_800BFED4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAction_80071CA4(gobj, cmd);
 }
 
-static void ftCo_800BFEF4(Fighter_GObj* gobj, FtCmdState* cmd)
+static void ftCo_800BFEF4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAction_800730B8(gobj, cmd);
 }
 
-static void ftCo_800BFF14(Fighter_GObj* gobj, FtCmdState* cmd)
+static void ftCo_800BFF14(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftAction_80073108(gobj, cmd);
 }
 
 /// #ft_800BFF34
 
-void ft_800BFF70(Fighter_GObj* gobj, FtCmdState* cmd, int arg0)
+void ft_800BFF70(Fighter_GObj* gobj, CommandInfo* cmd, int arg0)
 {
     int i = arg0 - 21;
     ftCo_803C6ADC[i](gobj, cmd);

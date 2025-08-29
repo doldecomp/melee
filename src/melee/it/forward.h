@@ -55,7 +55,7 @@ struct Item_GObj {
 typedef HSD_GObj Item_GObj;
 #endif
 
-typedef void (*ItCmd)(Item_GObj* gobj, FtCmdState* cmd);
+typedef void (*ItCmd)(Item_GObj* gobj, CommandInfo* cmd);
 
 typedef enum Item_StateChangeFlags {
     ITEM_UNK_0x1 = (1 << 0),

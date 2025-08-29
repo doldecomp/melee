@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -21,8 +22,6 @@ typedef struct FighterBone FighterBone;
 typedef struct FighterPartsTable FighterPartsTable;
 typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef struct ft_800898B4_t ft_800898B4_t;
-typedef struct ftCmdScript ftCmdScript;
-typedef struct FtCmdState FtCmdState;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftData ftData;
@@ -68,7 +67,7 @@ typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
 typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* gobj, int arg1, Mtx vmtx);
 typedef void (*Fighter_UnkPtrEvent)(int arg0, int* arg1, int* arg2);
 typedef void (*FighterEvent)(Fighter* fp);
-typedef void (*FtCmd)(Fighter_GObj* gobj, FtCmdState* cmd);
+typedef void (*FtCmd)(Fighter_GObj* gobj, CommandInfo* cmd);
 typedef bool (*ftDevice_Callback0)(UNK_T, HSD_GObj*, Vec3*);
 
 typedef enum FighterKind {

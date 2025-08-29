@@ -3,32 +3,7 @@
 
 #include <platform.h>
 
-typedef struct _Command_04_Struct {
-    u32* ptr[1];
-} Command_04_Struct;
-
-typedef struct _Command_09_Struct {
-    u32 id : 6;
-    u32 param_1 : 8;
-    u32 param_2 : 18;
-} Command_09_Struct;
-
-/// @todo Unify with #ftCmdScript
-typedef struct _CommandInfo {
-    f32 timer;       // 0x00
-    f32 frame_count; // 0x04
-    union {
-        u32* data_position; // 0x08
-
-        struct _Command_04_Struct Command_04;
-
-        struct _Command_09_Struct* Command_09;
-    } u;
-    u32 loop_count;       // 0x0C
-    u32* event_return[4]; // 0x10 - Array Size is purely made-up for now
-    u32 loop_count_dup;   // 0x14
-    u32 unk_x18;          // 0x18
-} CommandInfo;
+#include "lb/forward.h"
 
 void Command_00(CommandInfo* info);
 void Command_01(CommandInfo* info);

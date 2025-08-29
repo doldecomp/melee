@@ -15,8 +15,6 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
-#include "gm/inlines.h"
-#include "gm/types.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -237,6 +235,7 @@
 #include "items/ittarucann.h"
 #include "items/ittomato.h"
 #include "items/itwstar.h"
+#include "lb/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
@@ -5430,7 +5429,7 @@ void it_80273670(Item_GObj* item_gobj, int arg1, f32 arg8)
     }
     HSD_JObjAnimAll(item_jobj1);
     HSD_JObjRemoveAnimAll(item_jobj1);
-    item->x524_cmd.x8 = NULL;
+    item->x524_cmd.u = NULL;
 }
 
 void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
@@ -8593,7 +8592,7 @@ block_6E8:
     return;
 }
 
-void it_80278F2C(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80278F2C(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -8628,7 +8627,7 @@ void it_80278F2C(Item_GObj* item_gobj, FtCmdState* cmd)
     // it_80278800(item_gobj, temp_r9, temp_r5, &sp20, &sp14, 0, 0.003906f);
 }
 
-void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
 {
 #if 0
     HitCapsule* hitcapsule;
@@ -8758,7 +8757,7 @@ void it_802790C0(Item_GObj* item_gobj, FtCmdState* cmd)
 #endif
 }
 
-void it_80279544(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279544(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     // struct it_278F_struct_1B* temp_r4;
     Item* item;
@@ -8775,10 +8774,10 @@ void it_80279544(Item_GObj* item_gobj, FtCmdState* cmd)
     // cmd->unk8 = (void* ) (cmd->unk8 + 4);
     // ((struct it_278F_struct_1A*) cmd)->x8[0] = ((struct it_278F_struct_1A*)
     // cmd)->x8[1];
-    cmd->x8 = cmd->x8 + 4;
+    // cmd->x8 = cmd->x8 + 4;
 }
 
-void it_802795EC(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_802795EC(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     // s32 temp_r4_2;
     HitCapsule* hitcapsule;
@@ -8790,19 +8789,19 @@ void it_802795EC(Item_GObj* item_gobj, FtCmdState* cmd)
     // hitcapsule->scale = 0.003906f * (cmd->x8_bits->x0 & 0x7FFFFF);
     // item->x3C = hitcapsule->scale;
     // it_80275594(item_gobj, temp_r4_2, 1.0f / item->scl);
-    cmd->x8 = cmd->x8 + 4;
+    // cmd->x8 = cmd->x8 + 4;
 }
 
 #pragma push
 #pragma dont_inline on
 
-void it_80279680(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279680(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     it_80272560(item_gobj, cmd->u->unk2.hit_idx);
     ++cmd->u;
 }
 
-void it_802796C4(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_802796C4(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     it_802725D4(item_gobj);
     ++cmd->u;
@@ -8810,28 +8809,28 @@ void it_802796C4(Item_GObj* item_gobj, FtCmdState* cmd)
 
 #pragma pop
 
-void it_802796FC(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_802796FC(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
     it->xDAC_itcmd_var0 = cmd->u->unk2.hit_idx;
     ++cmd->u;
 }
 
-void it_80279720(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279720(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
     it->xDB0_itcmd_var1 = cmd->u->unk2.hit_idx;
     ++cmd->u;
 }
 
-void it_80279744(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279744(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
     it->xDB4_itcmd_var2 = cmd->u->unk2.hit_idx;
     ++cmd->u;
 }
 
-void it_80279768(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279768(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* item = item_gobj->user_data;
     item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 24U & 0x80);
@@ -8841,7 +8840,7 @@ void it_80279768(Item_GObj* item_gobj, FtCmdState* cmd)
 
 #pragma push
 #pragma dont_inline on
-void it_8027978C(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_8027978C(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     // #if 1
     //     Item* item;
@@ -8921,15 +8920,15 @@ void it_8027978C(Item_GObj* item_gobj, FtCmdState* cmd)
 #pragma push
 #pragma dont_inline on
 
-void it_80279888(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279888(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     PAD_STACK(4);
     // it_80273598(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
     // cmd->x8_bits->x2 & 0x1FFF);
-    cmd->x8 = cmd->x8 + 4;
+    // cmd->x8 = cmd->x8 + 4;
 }
 
-void it_802798D4(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_802798D4(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     PAD_STACK(4);
     it_80273600(item_gobj);
@@ -8938,21 +8937,21 @@ void it_802798D4(Item_GObj* item_gobj, FtCmdState* cmd)
 
 #pragma pop
 
-void it_8027990C(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_8027990C(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     PAD_STACK(4);
     it_80273648(item_gobj, cmd->u->unk33.unk1, cmd->u->unk33.unk0);
     NEXT_CMD(cmd);
 }
 
-void it_80279958(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279958(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
     it_80279B88(it, cmd->u->unk13.unk1, cmd->u->unk13.unk2);
     NEXT_CMD(cmd);
 }
 
-void it_802799A8(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_802799A8(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     it_80279BBC(item_gobj->user_data);
     ++cmd->u;
@@ -8960,55 +8959,56 @@ void it_802799A8(Item_GObj* item_gobj, FtCmdState* cmd)
 
 void it_802799E4(Item_GObj* item_gobj)
 {
-    Item* item;
-    FtCmdState* temp_r29;
-    u32 temp_r28;
+    // Item* item;
+    // CommandInfo* temp_r29;
+    // u32 temp_r28;
 
-    item = item_gobj->user_data;
-    // temp_r29 = (FtCmdState*) item->x524_cmd;
-    temp_r29 = &item->x524_cmd;
-    item->x524_cmd.x4 = item->x5CC_currentAnimFrame;
-    item->xDBC_itcmd_var4 = 0;
-    if (item->x524_cmd.x8 != NULL) {
-        if (F32_MAX != temp_r29->x0) {
-            temp_r29->x0 = temp_r29->x0 - item->x5D0_animFrameSpeed;
-        }
-    loop_4:
-        if (temp_r29->x8 != NULL) {
-            if (F32_MAX == temp_r29->x0) {
-                if (!(temp_r29->x4 >= item->x5D0_animFrameSpeed)) {
-                    temp_r29->x0 = -temp_r29->x4;
-                    goto block_9;
-                }
-            } else if (!(temp_r29->x0 > 0.0f)) {
-            block_9:
-                // temp_r28 = temp_r29->x8_bits->x0_b0_8;
-                // if (Command_Execute((CommandInfo*) temp_r29, temp_r28) == 0)
-                // {
-                //     it_803F22A8[temp_r28 - 10U](item_gobj, temp_r29);
-                // }
-                goto loop_4;
-            }
-        }
-    }
+    // item = item_gobj->user_data;
+    // // temp_r29 = (CommandInfo*) item->x524_cmd;
+    // temp_r29 = &item->x524_cmd;
+    // item->x524_cmd.x4 = item->x5CC_currentAnimFrame;
+    // item->xDBC_itcmd_var4 = 0;
+    // if (item->x524_cmd.u != NULL) {
+    //     if (F32_MAX != temp_r29->x0) {
+    //         temp_r29->x0 = temp_r29->x0 - item->x5D0_animFrameSpeed;
+    //     }
+    // loop_4:
+    //     if (temp_r29->x8 != NULL) {
+    //         if (F32_MAX == temp_r29->x0) {
+    //             if (!(temp_r29->x4 >= item->x5D0_animFrameSpeed)) {
+    //                 temp_r29->x0 = -temp_r29->x4;
+    //                 goto block_9;
+    //             }
+    //         } else if (!(temp_r29->x0 > 0.0f)) {
+    //         block_9:
+    //             // temp_r28 = temp_r29->x8_bits->x0_b0_8;
+    //             // if (Command_Execute((CommandInfo*) temp_r29, temp_r28) ==
+    //             0)
+    //             // {
+    //             //     it_803F22A8[temp_r28 - 10U](item_gobj, temp_r29);
+    //             // }
+    //             goto loop_4;
+    //         }
+    //     }
+    // }
 }
 
 #pragma push
 #pragma dont_inline on
 
-void it_80279AF0(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279AF0(Item_GObj* item_gobj, CommandInfo* cmd)
 {
-    it_80278F2C(item_gobj, (FtCmdState*) cmd);
+    it_80278F2C(item_gobj, (CommandInfo*) cmd);
 }
 
 #pragma pop
 
-void it_80279B10(Item_GObj* item_gobj, FtCmdState* cmd)
+void it_80279B10(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     it_8027978C(item_gobj, cmd);
 }
 
-void fn_80279B30(Item_GObj* item_gobj, FtCmdState* cmd, int arg2)
+void fn_80279B30(Item_GObj* item_gobj, CommandInfo* cmd, int arg2)
 {
     int idx = arg2 - 21;
     it_804D51C8[idx](item_gobj, cmd);
@@ -9035,7 +9035,7 @@ void it_80279BE0(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     while (lb_80014258((HSD_GObj*) item_gobj, &item->x548_colorOverlay,
-                       (void (*)(Fighter_GObj*, FtCmdState*)) fn_80279B30))
+                       (void (*)(Fighter_GObj*, CommandInfo*)) fn_80279B30))
     {
         lb_80014498(&item->x548_colorOverlay);
     }

@@ -1,5 +1,5 @@
-#ifndef MELEE_GM_INLINES_H
-#define MELEE_GM_INLINES_H
+#ifndef MELEE_LB_INLINES_H
+#define MELEE_LB_INLINES_H
 
 /// @todo Is a macro the best way?
 #define SKIP_CMD(cmd, n)                                                      \
