@@ -129,7 +129,7 @@ void ftMr_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->dat_attrs;
-    ftCo_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
+    ftCo_LandingFallSpecial_Enter(gobj, false, sa->specialhi.landing_lag);
 }
 
 void ftMr_SpecialHi_Coll(HSD_GObj* gobj)

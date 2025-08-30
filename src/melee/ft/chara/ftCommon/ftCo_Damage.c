@@ -1070,7 +1070,7 @@ void ftCo_Damage_Coll(Fighter_GObj* gobj)
             if (mag >= p_ftCommonData->x1E0) {
                 ftCo_80097D40(gobj);
             } else if (mag >= p_ftCommonData->x1E4) {
-                ftCo_800D5BF8(gobj);
+                ftCo_Landing_Enter_Basic(gobj);
             } else {
                 ftCommon_8007D7FC(fp);
             }

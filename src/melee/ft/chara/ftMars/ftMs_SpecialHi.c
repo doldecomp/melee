@@ -219,7 +219,7 @@ void ftMs_SpecialHi_80138884(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = fp->dat_attrs;
-    ftCo_800D5CB0(gobj, 0, da->x2C);
+    ftCo_LandingFallSpecial_Enter(gobj, false, da->x2C);
 }
 
 // 801388B4 00135494

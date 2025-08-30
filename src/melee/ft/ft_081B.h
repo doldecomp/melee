@@ -50,7 +50,7 @@
                               HSD_GObjEvent);
 /* 08370C */ void ft_8008370C(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083844 */ UNK_RET ft_80083844(UNK_PARAMS);
-/* 083910 */ UNK_RET ft_80083910(UNK_PARAMS);
+/* 083910 */ UNK_RET ft_80083910(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083A48 */ void ft_80083A48(void*, HSD_GObjEvent);
 /* 083B68 */ void ft_80083B68(Fighter_GObj* gobj);
 /* 083C00 */ UNK_RET ft_80083C00(UNK_PARAMS);

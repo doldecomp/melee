@@ -773,7 +773,7 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (ft_8008239C(gobj, fp->facing_dir, box)) {
-        ftCo_800D5CB0(gobj, 0, pika_attr->xB0);
+        ftCo_LandingFallSpecial_Enter(gobj, false, pika_attr->xB0);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
         return;

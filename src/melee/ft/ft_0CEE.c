@@ -35,17 +35,17 @@ void ftCo_ItemParasolDamageFall_Phys(Fighter_GObj* gobj)
 
 void ftCo_ItemParasolOpen_Coll(Fighter_GObj* gobj)
 {
-    ft_8008370C(gobj, (void (*)(HSD_GObj*)) ftCo_800D5BF8);
+    ft_8008370C(gobj, (void (*)(HSD_GObj*)) ftCo_Landing_Enter_Basic);
 }
 
 void ftCo_ItemParasolFall_Coll(Fighter_GObj* gobj)
 {
-    ft_8008370C(gobj, (void (*)(HSD_GObj*)) ftCo_800D5BF8);
+    ft_8008370C(gobj, (void (*)(HSD_GObj*)) ftCo_Landing_Enter_Basic);
 }
 
 void ftCo_ItemParasolFallSpecial_Coll(Fighter_GObj* gobj)
 {
-    ft_8008370C(gobj, (HSD_GObjEvent) ft_800D5C54);
+    ft_8008370C(gobj, (HSD_GObjEvent) ftCo_LandingFallSpecial_Enter_Basic);
 }
 
 void ftCo_ItemParasolDamageFall_Coll(Fighter_GObj* gobj)
