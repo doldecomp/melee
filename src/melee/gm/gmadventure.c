@@ -1281,7 +1281,7 @@ void gm_801B4064(MinorScene* arg0)
     temp_r27->x0.xA = temp_r31->x9;
     tmp = gm_80490910[getIndex(arg0->idx)];
 
-    #pragma clang diagnostic ignored "-Wpointer-to-int-cast"
+#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
     wtf = (u8) gm_8017E48C(arg0); // casting pointer to u8? WTF?
 
     gm_8017CE34(temp_r28, temp_r27, temp_r31->xA, temp_r31->x4, var_r30,
@@ -1461,29 +1461,35 @@ void gm_801B47FC(MinorScene* scene)
     temp_r31->x0.x7 = 0x20;
 }
 
-void gm_801B4860(MinorScene* scene)
+static inline void gm_801B4860_inline0(MinorScene* scene)
 {
-    MatchExitInfo* temp_r3;
-    UnkAdventureData* temp_r30;
-    MatchExitInfo* temp_r29;
-
-    temp_r3 = gm_801A4284(scene);
-    if (temp_r3->match_end.result != 1) {
+    MatchExitInfo* exit_info = gm_801A4284(scene);
+    if (exit_info->match_end.result != 1) {
         UnkAdventureData* tmp = gm_8017E424();
         tmp->x76 = 1;
     } else {
-        temp_r3->match_end.player_standings[0].stocks++;
+        exit_info->match_end.player_standings[0].stocks++;
     }
-    temp_r29 = gm_801A4284(scene);
-    temp_r30 = gm_8017E424();
+}
 
-    setValUnk(scene->idx, temp_r29->x8);
+static inline void gm_801B4860_inline1(MinorScene* scene)
+{
+    MatchExitInfo* exit_info = gm_801A4284(scene);
+    UnkAdventureData* adv_data = gm_8017E424();
 
-    if (gm_8017D7AC(temp_r29, &temp_r30->x0, 0x69) &&
+    setValUnk(scene->idx, exit_info->x8);
+
+    if (gm_8017D7AC(exit_info, &adv_data->x0, 0x69) &&
         gm_8017E4C4(scene->idx)[1].x0 == 0xFF)
     {
-        gm_8017CBAC(temp_r30, gmMainLib_8015CDD4(), 0x16);
+        gm_8017CBAC(adv_data, gmMainLib_8015CDD4(), 0x16);
     }
+}
+
+void gm_801B4860(MinorScene* scene)
+{
+    gm_801B4860_inline0(scene);
+    gm_801B4860_inline1(scene);
 }
 
 void gm_801B4974(MinorScene* arg0)
@@ -1532,27 +1538,28 @@ void gm_801B4974(MinorScene* arg0)
     temp_r28->x6 = temp_r31[temp_r30->x4 - 3];
 }
 
-void gm_801B4B28(MinorScene* scene)
+static inline void inline0(MinorScene* scene)
 {
-    MinorScene* temp_r31;
-    UnkAdventureData* temp_r3;
-    struct gm_803DE650_t* temp_r29;
-
-    temp_r3 = gm_8017E424();
-    if (temp_r3->x0.xC.x11 != 1) {
+    UnkAdventureData* adv_data = gm_8017E424();
+    if (adv_data->x0.xC.x11 != 1) {
         UNK_T unused1 = gm_80169520();
         UNK_T unused2 = gm_80169540();
-        temp_r31 = gm_8017E48C(scene);
-        temp_r29 = gm_8017E4C4(scene->idx);
+        MinorScene* temp_r31 = gm_8017E48C(scene);
+        struct gm_803DE650_t* temp_r29 = gm_8017E4C4(scene->idx);
         gm_8016A22C(temp_r29->xA[0], temp_r29->xA[1], temp_r29->xA[2],
                     temp_r29->xD, temp_r29->xE, temp_r29->xF, 1, 0, 1,
-                    temp_r3->x0.x0, temp_r3->x0.x1,
-                    temp_r3->x4C(temp_r31, temp_r3->x0.x2, 0), temp_r29->x4,
+                    adv_data->x0.x0, adv_data->x0.x1,
+                    adv_data->x4C(temp_r31, adv_data->x0.x2, 0), temp_r29->x4,
                     gm_8017BE8C(temp_r29->xA), 1, 0, 1,
-                    temp_r3->x64(temp_r31, temp_r3->x0.x2),
-                    temp_r3->x68(temp_r31, temp_r3->x0.x2));
-        temp_r3->x0.xC.x11 = 1;
+                    adv_data->x64(temp_r31, adv_data->x0.x2),
+                    adv_data->x68(temp_r31, adv_data->x0.x2));
+        adv_data->x0.xC.x11 = 1;
     }
+}
+
+void gm_801B4B28(MinorScene* scene)
+{
+    inline0(scene);
     gm_801B4064(scene);
 }
 
