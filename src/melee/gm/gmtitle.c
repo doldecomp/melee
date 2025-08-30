@@ -78,7 +78,7 @@ static inline void fn_801A1498_inline(void)
                        gmTitle_80479B38.shapeanim_joint);
     HSD_GObjProc_8038FD54(gobj, gmTitle_801A146C, 0);
     if (gm_801A4310() == MJ_TITLE ||
-        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2))
+        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
     {
         var_r0 = false;
     } else {
@@ -132,7 +132,7 @@ HSD_GObj* gmTitle_801A165C(void)
                        gmTitle_80479B28.shapeanim_joint);
 
     if (gm_801A4310() == MJ_TITLE ||
-        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2))
+        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
     {
         var_r0 = false;
     } else {
@@ -147,7 +147,7 @@ HSD_GObj* gmTitle_801A165C(void)
         HSD_GObjProc_8038FD54(gobj, gmTitle_801A1630, 0);
     }
     HSD_JObjAnimAll(jobj);
-    if (gm_80164840(9) || gm_80164840(0x17)) {
+    if (gm_80164840(CKIND_MARS) || gm_80164840(CKIND_EMBLEM)) {
         var_r0 = true;
     } else {
         var_r0 = false;

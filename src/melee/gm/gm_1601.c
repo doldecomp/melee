@@ -649,7 +649,8 @@ void gm_801647D0(void)
 
 /// #gm_801647F8
 
-bool gm_80164840(u8 id)
+/// Is a specific character unlocked?
+bool gm_80164840(u8 ckind)
 {
     int i;
     u16* temp_r31;
@@ -657,12 +658,12 @@ bool gm_80164840(u8 id)
 
     temp_r31 = gmMainLib_8015ED8C();
     for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
-        if (lbl_803B75F8.id[id] == lbl_803B75F8.thing[i].unk1) {
+        if (lbl_803B75F8.id[ckind] == lbl_803B75F8.thing[i].unk1) {
             var_r0 = lbl_803B75F8.thing[i].unk0;
             break;
         }
     }
-    if ((var_r0 == 11) || (*temp_r31 & (1LL << var_r0))) {
+    if (var_r0 == NUM_UNLOCKABLE_CHARACTERS || (*temp_r31 & (1LL << var_r0))) {
         return true;
     }
     return false;

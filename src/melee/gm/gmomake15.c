@@ -57,7 +57,7 @@ void gm_801ACF8C_OnFrame(void)
             if (var_r31 == 0) {
                 lbAudioAx_80024030(1);
             }
-            gm_801A42E8(0);
+            gm_801A42E8(MJ_TITLE);
             gm_801A42D4();
         }
     }

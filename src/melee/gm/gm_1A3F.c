@@ -195,9 +195,9 @@ void gm_801A42D4(void)
     gm_80479D30.pending = 1;
 }
 
-void gm_801A42E8(s8 arg0)
+void gm_801A42E8(s8 pending_major)
 {
-    M2C_FIELD(&gm_80479D30, s8*, 1) = arg0;
+    gm_80479D30.nums.pending_major = pending_major;
 }
 
 void gm_801A42F8(int pending_major)

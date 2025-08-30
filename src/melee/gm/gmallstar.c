@@ -370,20 +370,20 @@ void gm_801B5E7C(MinorScene* arg0)
 {
     MatchExitInfo* exit = gm_801A4284(arg0);
     gm_80473A18.x74 = exit->match_end.player_standings[0].percent;
-    gm_8017D7AC(exit, &gm_80473A18, 0x69);
+    gm_8017D7AC(exit, &gm_80473A18.x0, 0x69);
 }
 
 void gm_801B5EB4(MinorScene* arg0)
 {
     DebugGameOverData* data = gm_801A427C(arg0);
-    gm_8017C9A8(data, &gm_80473A18, 2);
+    gm_8017C9A8(data, &gm_80473A18.x0, 2);
 }
 
 void gm_801B5EE4(MinorScene* arg0)
 {
     DebugGameOverData* data = gm_801A4284(arg0);
     UnkAllstarData* r30 = &gm_80473A18;
-    gm_8017CA38(data, r30, gmMainLib_8015CDE0(), 2);
+    gm_8017CA38(data, &r30->x0, gmMainLib_8015CDE0(), 2);
     if (data->xC != 0) {
         r30->x74 = 0;
     }
@@ -398,7 +398,7 @@ void gm_801B5F50(MinorScene* arg0)
     temp_r3 = gmMainLib_8015CDE0();
     gm_801B06B0(temp_r31, 0xD, temp_r3->c_kind, temp_r3->stocks,
                 temp_r3->color, temp_r3->x4, temp_r3->cpu_level,
-                gm_80473A18.x3);
+                gm_80473A18.x0.x3);
     lbDvd_800174BC();
 }
 
@@ -411,16 +411,16 @@ void gm_801B5FB4(MinorScene* arg0)
     UnkAllstarData* r29 = &gm_80473A18;
 
     if (temp_r31->pending_scene_change == 2) {
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         return;
     }
     gm_801B0730(temp_r31, &temp_r30->c_kind, &temp_r30->stocks,
                 &temp_r30->color, &temp_r30->x4, &temp_r30->cpu_level);
-    r29->x0 = temp_r30->c_kind;
-    r29->x1 = temp_r30->color;
-    r29->x2 = temp_r30->cpu_level;
-    r29->x5 = temp_r30->stocks;
-    r29->x4 = temp_r30->x4;
+    r29->x0.x0 = temp_r30->c_kind;
+    r29->x0.x1 = temp_r30->color;
+    r29->x0.x2 = temp_r30->cpu_level;
+    r29->x0.x5 = temp_r30->stocks;
+    r29->x0.x4 = temp_r30->x4;
     gm_SetScenePendingMinor((temp_r30->x5 * 8) & 0xF8);
     gm_80168F88();
     gm_801B5324(r29, temp_r30->x5);
@@ -428,7 +428,7 @@ void gm_801B5FB4(MinorScene* arg0)
 
 void gm_801B607C(MinorScene* unused)
 {
-    gm_801A42E8(1);
+    gm_801A42E8(MJ_MENU);
     gm_801A42D4();
 }
 

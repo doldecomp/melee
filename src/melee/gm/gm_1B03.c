@@ -489,30 +489,30 @@ void gm_801B089C(MinorScene* scene)
     int* temp_r3 = gm_801A4284(scene);
     if (g_debugLevel >= 3) {
         if (*temp_r3 & 0x100) {
-            gm_801A42E8(0xE);
+            gm_801A42E8(MJ_DEBUG_VS);
         } else if (*temp_r3 & 0x1000) {
             gm_80173EEC();
             gm_80172898(0x100);
-            if (gm_80173754(1, 0) == 0) {
-                gm_801A42E8(1);
+            if (!gm_80173754(1, 0)) {
+                gm_801A42E8(MJ_MENU);
             }
         } else if (*temp_r3 & 0x400) {
-            gm_801A42E8(7);
+            gm_801A42E8(MJ_DEBUG_SOUND_TEST);
         } else if (*temp_r3 & 0x800) {
-            gm_801A42E8(6);
+            gm_801A42E8(MJ_DEBUG);
         } else {
             gm_801BF708(1);
-            gm_801A42E8(0x18);
+            gm_801A42E8(MJ_OPENING_MV);
         }
     } else if (*temp_r3 & 0x1000) {
         gm_80173EEC();
         gm_80172898(0x100);
-        if (gm_80173754(1, 0) == 0) {
-            gm_801A42E8(1);
+        if (!gm_80173754(1, 0)) {
+            gm_801A42E8(MJ_MENU);
         }
     } else {
         gm_801BF708(1);
-        gm_801A42E8(0x18);
+        gm_801A42E8(MJ_OPENING_MV);
     }
     gm_801A42D4();
 }
@@ -1588,8 +1588,8 @@ void gm_801B2204(MinorScene* arg0)
             temp_r3->match_end.player_standings[0].character_kind));
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
-    if (gm_80173754(0x1C, gm_804D68C0) == 0) {
-        gm_SetScenePendingMinor(MJ_TITLE);
+    if (!gm_80173754(0x1C, gm_804D68C0)) {
+        gm_SetScenePendingMinor(0);
     }
     lbAudioAx_80024030(1);
 }
@@ -1683,7 +1683,7 @@ void gm_801B25D4(MinorScene* arg0)
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
     temp_r3 = gm_801A4284(arg0);
     if (temp_r3->pending_scene_change == 2) {
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         return;
     }
 
@@ -1723,7 +1723,7 @@ void gm_801B2704(MinorScene* arg0)
         lbAudioAx_80027168();
         return;
     }
-    gm_SetScenePendingMinor(MN_MENU);
+    gm_SetScenePendingMinor(1);
 }
 
 void gm_801B2790(MinorScene* arg0)
@@ -1785,7 +1785,7 @@ void gm_801B2AF8(MinorScene* arg0)
     gm_80168710(&gm_80479D98.match_end, temp_r30);
     gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
     gm_801A5258(temp_r29, &gm_80479D98.match_end);
-    gm_SetScenePendingMinor(MN_MENU);
+    gm_SetScenePendingMinor(1);
 }
 
 void gm_801B2B7C_OnInit(void)

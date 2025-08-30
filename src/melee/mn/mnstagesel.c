@@ -758,7 +758,7 @@ void mnStageSel_8025B850_OnFrame(void)
         lb_800145F4();
         HSD_GObjPLink_80390228(mnStageSel_804D6C9C);
         mn_8022F268();
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         gm_801A4B60();
         return;
     }

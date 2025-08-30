@@ -610,7 +610,7 @@ int fn_8016BC74(void)
     PAD_STACK(0x18);
 
     if (gm_8016B41C() || gm_801A4310() == MJ_CHALLENGER_APPROACH ||
-        (gm_801A4310() == 2 && gm_801A42C4() == 0x81))
+        (gm_801A4310() == MJ_VS && gm_801A42C4() == 0x81))
     {
         temp_r3 = Player_GetPlayerId(0);
         temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
@@ -893,13 +893,13 @@ void fn_8016C46C(int arg0)
 {
     if (lbl_8046B6A0.unk_9 != 0) {
         switch (gm_801A4310()) {
-        case 3:
+        case MJ_CLASSIC:
             fn_8017EE40(arg0);
             return;
-        case 4:
+        case MJ_ADVENTURE:
             fn_8017E8A4(arg0);
             return;
-        case 5:
+        case MJ_ALLSTAR:
             fn_8018A364(arg0);
             break;
         }
@@ -1024,7 +1024,7 @@ void fn_8016C7F0(void)
         if (gm_801A4310() == MJ_TARGET_TEST) {
             var_r29_2 = gm_80164024(*temp_r29_2);
         } else {
-            var_r29_2 = gm_80164024(temp_r30->x0);
+            var_r29_2 = gm_80164024(temp_r30->x0.x0);
         }
         temp_r30_2 = gmMainLib_8015D438(var_r29_2);
         gmMainLib_8015D450(var_r29_2);
