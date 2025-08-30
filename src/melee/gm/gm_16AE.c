@@ -1024,7 +1024,7 @@ void fn_8016C7F0(void)
         if (gm_801A4310() == MJ_TARGET_TEST) {
             var_r29_2 = gm_80164024(*temp_r29_2);
         } else {
-            var_r29_2 = gm_80164024(temp_r30->x0.x0);
+            var_r29_2 = gm_80164024(temp_r30->x0.ckind);
         }
         temp_r30_2 = gmMainLib_8015D438(var_r29_2);
         gmMainLib_8015D450(var_r29_2);

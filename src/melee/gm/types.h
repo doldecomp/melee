@@ -23,15 +23,15 @@ struct UnkMultimanData {
 };
 
 struct DebugGameOverData {
-    u32 x0;
-    int x4;
-    u32 x8;
-    int xC;
-    u32 x10;
-    u8 x14;
-    u8 x15;
-    u16 x16;
-    u16 x18;
+    /* 00 */ u32 x0;
+    /* 04 */ int x4;
+    /* 08 */ u32 x8;
+    /* 0C */ int xC;
+    /* 10 */ u32 ckind;
+    /* 14 */ u8 slot;
+    /* 15 */ u8 x15;
+    /* 16 */ u16 x16;
+    /* 18 */ u16 x18;
 };
 
 struct MinorScene {
@@ -120,9 +120,9 @@ struct gmm_x1F2C {
         u16 b4 : 1;
         u16 b5 : 1;
         u16 b6 : 1;
-        u16 b789 : 3;
-        u16 b10_to_12 : 3;
-        u16 b13_to_15 : 3;
+        u16 b789 : 3;      ///< stocks
+        u16 b10_to_12 : 3; ///< stocks
+        u16 b13_to_15 : 3; ///< stocks
         s16 x7E;
         u8 x80;
         u8 x81;
@@ -266,7 +266,7 @@ struct gmm_x0 {
     /* 0x007C */ char pad_7C[0x4A0]; /* maybe part of x6C[0x4B]? */
     struct gmm_x0_528_t {
         /* 0x0528 */ s8 c_kind;
-        /* 0x0529 */ s8 stocks;
+        /* 0x0529 */ u8 stocks;
         /* 0x052A */ u8 color;
         /* 0x052B */ u8 cpu_level;
         /* 0x052C */ s8 x4;
@@ -624,12 +624,12 @@ struct ResultsMatchInfo {
 };
 
 struct Unk1PData {
-    /* 00 */ s8 x0; ///< CharacterKind
-    /* 01 */ u8 x1; ///< color
-    /* 02 */ u8 x2; ///< cpu_level
-    /* 03 */ u8 x3; ///< slot
+    /* 00 */ s8 ckind;
+    /* 01 */ u8 color;
+    /* 02 */ u8 cpu_level;
+    /* 03 */ u8 slot;
     /* 04 */ u8 x4;
-    /* 05 */ u8 x5; ///< stocks
+    /* 05 */ u8 stocks;
     /* 06 */ u8 x6;
     /* 07 */ u8 x7;
     /* 08 */ u8 x8;
@@ -650,7 +650,7 @@ struct Unk1PData {
         /* 1C */ int x1C;
         /* 20 */ int x20;
         struct Unk1PData_x24 {
-            /* 24 */ s8 x0; ///< CharacterKind
+            /* 24 */ s8 ckind;
             /* 28 */ int x4;
             /* 2C */ int x8;
         } x24[3];

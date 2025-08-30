@@ -1442,9 +1442,9 @@ void gm_801BEF84(MinorScene* arg)
 
 #pragma push
 #pragma dont_inline on
-void gm_801BEFA4(s8 arg0)
+void gm_801BEFA4(s8 ckind)
 {
-    gm_8049C178[0] = arg0;
+    gm_8049C178[0] = ckind;
 }
 #pragma pop
 
@@ -1491,7 +1491,7 @@ void gm_801BF020(s8 arg0)
     M2C_FIELD(&gm_8049C178, s8*, 8) = arg0;
 }
 
-u8 gm_801BF030(void)
+int gm_801BF030(void)
 {
     return M2C_FIELD(&gm_8049C178, u8*, 8);
 }

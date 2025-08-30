@@ -43,7 +43,7 @@
 /* 17E318 */ UNK_RET fn_8017E318(UNK_PARAMS);
 /* 17E3C8 */ UNK_RET fn_8017E3C8(UNK_PARAMS);
 /* 17E424 */ UnkAdventureData* gm_8017E424(void);
-/* 17E430 */ u8 gm_8017E430(void);
+/* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
 /* 17E48C */ MinorScene* gm_8017E48C(MinorScene*);
 /* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
@@ -91,7 +91,7 @@
 /* 180630 */ void fn_80180630(int, int, int, bool, lbl_8046B6A0_24C_t*);
 /* 180AC0 */ int fn_80180AC0(void);
 /* 180AE4 */ s32 gm_80180AE4(void);
-/* 180AF4 */ UNK_RET gm_80180AF4(UNK_PARAMS);
+/* 180AF4 */ Fighter_GObj* gm_80180AF4(void);
 /* 180B18 */ UNK_RET gm_80180B18(UNK_PARAMS);
 /* 180BA0 */ UNK_RET gm_80180BA0(UNK_PARAMS);
 /* 180C14 */ UNK_RET fn_80180C14(UNK_PARAMS);

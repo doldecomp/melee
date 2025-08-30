@@ -1217,11 +1217,7 @@ void gm_801B3F40(MinorScene* arg0)
     struct gm_803DE650_t* temp_r31;
     UnkAdventureData* temp_r3;
     u64 temp_ret;
-    struct IntroData {
-        u8 x0;
-        u8 x1;
-        u16 x2;
-    }* temp_r30;
+    IntroData* temp_r30;
     int i;
 
     temp_ret = 0;
@@ -1231,10 +1227,10 @@ void gm_801B3F40(MinorScene* arg0)
     temp_r3->x0.x7 = arg0->idx;
     temp_r30->x1 = gm_8017BE84((u32) arg0->idx);
     temp_r30->x2 = temp_r31->x6;
-    temp_r30->x0 = temp_r3->x0.x3;
-    temp_ret |= lbAudioAx_80026E84(temp_r3->x0.x0);
+    temp_r30->x0 = temp_r3->x0.slot;
+    temp_ret |= lbAudioAx_80026E84(temp_r3->x0.ckind);
     for (i = 0; i < 3; i++) {
-        s8 ckind = temp_r3->x0.xC.x24[i].x0;
+        s8 ckind = temp_r3->x0.xC.x24[i].ckind;
         if (ckind != CHKIND_NONE) {
             temp_ret |= lbAudioAx_80026E84(ckind);
         }
@@ -1321,7 +1317,7 @@ void gm_801B42E8(MinorScene* scene)
     CSSData* css = gm_801A427C(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDD4();
     gm_801B06B0(css, 0xC, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level, gm_8017E424()->x0.x3);
+                temp_r31->x4, temp_r31->cpu_level, gm_8017E424()->x0.slot);
 }
 
 void gm_801B4350(MinorScene* scene)
@@ -1336,10 +1332,10 @@ void gm_801B4350(MinorScene* scene)
     }
     gm_801B0730(css, &temp_r29->c_kind, &temp_r29->stocks, &temp_r29->color,
                 &temp_r29->x4, &temp_r29->cpu_level);
-    temp_r31->x0.x0 = temp_r29->c_kind;
-    temp_r31->x0.x1 = temp_r29->color;
-    temp_r31->x0.x2 = temp_r29->cpu_level;
-    temp_r31->x0.x5 = temp_r29->stocks;
+    temp_r31->x0.ckind = temp_r29->c_kind;
+    temp_r31->x0.color = temp_r29->color;
+    temp_r31->x0.cpu_level = temp_r29->cpu_level;
+    temp_r31->x0.stocks = temp_r29->stocks;
     temp_r31->x0.x4 = temp_r29->x4;
     gm_SetScenePendingMinor(temp_r29->x5 << 3);
     gm_80168F88();
@@ -1358,10 +1354,10 @@ void gm_801B4430(MinorScene* scene)
     UnkAdventureData* temp_r3 = gm_8017E424();
     u8 var_r0;
 
-    if (temp_r3->x0.x0 == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
+    if (temp_r3->x0.ckind == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
         var_r0 = CKIND_SEAK;
     } else {
-        var_r0 = temp_r3->x0.x0;
+        var_r0 = temp_r3->x0.ckind;
     }
     temp_r30->x0 = var_r0;
     temp_r30->x1 = temp_r31->color;
@@ -1401,7 +1397,7 @@ void gm_801B45A4(MinorScene* scene)
     struct gm_804DAC18_t sp10 = { 0 };
     struct gm_804DAC18_t spC = { 0x08, 0x07, 0x21 };
 
-    gm_8017BEC8(temp_r7->x0.x0, temp_r7->x0.x1, &spC, &sp10);
+    gm_8017BEC8(temp_r7->x0.ckind, temp_r7->x0.color, &spC, &sp10);
     temp_r31->x1 = sp10.x0;
     temp_r31->x3 = sp10.x1;
 }
@@ -1512,9 +1508,9 @@ void gm_801B4974(MinorScene* arg0)
     temp_r25 = gm_801A427C(arg0);
     temp_r24 = gmMainLib_8015CDD4();
     temp_r3 = gm_8017E424();
-    var_r4 = temp_r3->x0.x0;
-    if (var_r4 == 0x12 && temp_r3->x0.xC.x12 != 0) {
-        var_r4 = 0x13;
+    var_r4 = temp_r3->x0.ckind;
+    if (var_r4 == CKIND_ZELDA && temp_r3->x0.xC.x12 != 0) {
+        var_r4 = CKIND_SEAK;
     }
     temp_r25->x0 = var_r4;
     temp_r25->x1 = temp_r24->color;
@@ -1525,11 +1521,11 @@ void gm_801B4974(MinorScene* arg0)
     temp_r25_2 = gm_8017E4C4(arg0->idx);
     gm_8016A22C(temp_r25_2->xA[0], temp_r25_2->xA[1], temp_r25_2->xA[2],
                 temp_r25_2->xD, temp_r25_2->xE, temp_r25_2->xF, 1, 0, 1,
-                temp_r29->x0.x0, temp_r29->x0.x1,
-                temp_r29->x4C(temp_r27, temp_r29->x0.x2, 0), temp_r25_2->x4,
-                gm_8017BE8C(temp_r25_2->xA), 1, 0, 1,
-                temp_r29->x64(temp_r27, temp_r29->x0.x2),
-                temp_r29->x68(temp_r27, temp_r29->x0.x2));
+                temp_r29->x0.ckind, temp_r29->x0.color,
+                temp_r29->x4C(temp_r27, temp_r29->x0.cpu_level, 0),
+                temp_r25_2->x4, gm_8017BE8C(temp_r25_2->xA), 1, 0, 1,
+                temp_r29->x64(temp_r27, temp_r29->x0.cpu_level),
+                temp_r29->x68(temp_r27, temp_r29->x0.cpu_level));
 
     temp_r29->x0.xC.x11 = 1;
     temp_r28->x3 = *temp_r24_2;
@@ -1548,11 +1544,11 @@ static inline void inline0(MinorScene* scene)
         struct gm_803DE650_t* temp_r29 = gm_8017E4C4(scene->idx);
         gm_8016A22C(temp_r29->xA[0], temp_r29->xA[1], temp_r29->xA[2],
                     temp_r29->xD, temp_r29->xE, temp_r29->xF, 1, 0, 1,
-                    adv_data->x0.x0, adv_data->x0.x1,
-                    adv_data->x4C(temp_r31, adv_data->x0.x2, 0), temp_r29->x4,
+                    adv_data->x0.ckind, adv_data->x0.color,
+                    adv_data->x4C(temp_r31, adv_data->x0.cpu_level, 0), temp_r29->x4,
                     gm_8017BE8C(temp_r29->xA), 1, 0, 1,
-                    adv_data->x64(temp_r31, adv_data->x0.x2),
-                    adv_data->x68(temp_r31, adv_data->x0.x2));
+                    adv_data->x64(temp_r31, adv_data->x0.cpu_level),
+                    adv_data->x68(temp_r31, adv_data->x0.cpu_level));
         adv_data->x0.xC.x11 = 1;
     }
 }
@@ -1604,7 +1600,7 @@ void gm_801B4DAC(MinorScene* scene)
         struct gm_804DAC18_t sp10 = { 0x14, 0x21, 0x21 };
         struct gm_804DAC18_t spC = { 0 };
         spC.x0 = data->players[1].color;
-        gm_8017BEC8(temp_r30->x0.x0, temp_r30->x0.x1, &sp10, &spC);
+        gm_8017BEC8(temp_r30->x0.ckind, temp_r30->x0.color, &sp10, &spC);
         data->players[1].c_kind = CKIND_FALCO;
         data->players[1].color = spC.x0;
     }
@@ -1671,7 +1667,7 @@ void gm_801B50C4(MinorScene* scene)
     UnkAdventureData* temp_r30 = gm_8017E424();
 
     UnkAdventureData* temp_r3 = gm_8017E424();
-    if (temp_r3->x0.x5 == temp_r31->match_end.player_standings[0].stocks) {
+    if (temp_r3->x0.stocks == temp_r31->match_end.player_standings[0].stocks) {
         temp_r3->x78 = 1;
     }
 
@@ -1716,7 +1712,7 @@ void gm_801B5214_OnLoad(void)
     }
 
     gm_8017DB58(data->x0.xC.x24);
-    data->x0.x3 = gm_801677F0();
+    data->x0.slot = gm_801677F0();
     data->x48 = gm_8017E500;
     data->x4C = gm_8017E5C8;
     data->x50 = gm_8017E630;

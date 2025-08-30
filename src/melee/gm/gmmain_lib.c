@@ -365,10 +365,10 @@ s32 gmMainLib_8015D1AC(u8 arg0)
     return base[arg0].x7C.b789;
 }
 
-void gmMainLib_8015D1C8(u8 arg0, s32 arg1)
+void gmMainLib_8015D1C8(u8 arg0, int stocks)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.b789 = arg1;
+    base[arg0].x7C.b789 = stocks;
 }
 
 s32* gmMainLib_8015D1E8(u8 arg0)
@@ -410,10 +410,10 @@ s32 gmMainLib_8015D2D4(u8 arg0)
     return base[arg0].x7C.b10_to_12;
 }
 
-void gmMainLib_8015D2F0(u8 arg0, s32 arg1)
+void gmMainLib_8015D2F0(u8 arg0, int stocks)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.b10_to_12 = arg1;
+    base[arg0].x7C.b10_to_12 = stocks;
 }
 
 s32* gmMainLib_8015D310(u8 arg0)
@@ -455,10 +455,10 @@ s32 gmMainLib_8015D3FC(u8 arg0)
     return base[arg0].x7C.b13_to_15;
 }
 
-void gmMainLib_8015D418(u8 arg0, s32 arg1)
+void gmMainLib_8015D418(u8 arg0, int stocks)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.b13_to_15 = arg1;
+    base[arg0].x7C.b13_to_15 = stocks;
 }
 
 s32* gmMainLib_8015D438(u8 arg0)

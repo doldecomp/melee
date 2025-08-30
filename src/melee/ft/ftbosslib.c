@@ -265,7 +265,7 @@ enum_t ftBossLib_8015C4C4(void)
     return 0;
 }
 
-s32 ftBossLib_8015C530(enum_t arg0)
+s32 ftBossLib_8015C530(int cpu_level)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
 
@@ -274,7 +274,7 @@ s32 ftBossLib_8015C530(enum_t arg0)
     if (gobj != NULL) {
         ftMasterHand_SpecialAttrs* ftCo_DatAttrs =
             GET_FIGHTER(gobj)->ft_data->ext_attr;
-        switch (arg0) {
+        switch (cpu_level) {
         case 0:
             return ftCo_DatAttrs->x0;
         case 1:

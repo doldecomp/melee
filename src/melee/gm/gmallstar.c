@@ -398,7 +398,7 @@ void gm_801B5F50(MinorScene* arg0)
     temp_r3 = gmMainLib_8015CDE0();
     gm_801B06B0(temp_r31, 0xD, temp_r3->c_kind, temp_r3->stocks,
                 temp_r3->color, temp_r3->x4, temp_r3->cpu_level,
-                gm_80473A18.x0.x3);
+                gm_80473A18.x0.slot);
     lbDvd_800174BC();
 }
 
@@ -416,10 +416,10 @@ void gm_801B5FB4(MinorScene* arg0)
     }
     gm_801B0730(temp_r31, &temp_r30->c_kind, &temp_r30->stocks,
                 &temp_r30->color, &temp_r30->x4, &temp_r30->cpu_level);
-    r29->x0.x0 = temp_r30->c_kind;
-    r29->x0.x1 = temp_r30->color;
-    r29->x0.x2 = temp_r30->cpu_level;
-    r29->x0.x5 = temp_r30->stocks;
+    r29->x0.ckind = temp_r30->c_kind;
+    r29->x0.color = temp_r30->color;
+    r29->x0.cpu_level = temp_r30->cpu_level;
+    r29->x0.stocks = temp_r30->stocks;
     r29->x0.x4 = temp_r30->x4;
     gm_SetScenePendingMinor((temp_r30->x5 * 8) & 0xF8);
     gm_80168F88();
