@@ -904,7 +904,8 @@ loop_37:
     return var_r9;
 }
 
-int HSD_SisLib_803A6B98(HSD_Text* arg0, float x, float y, void* arg1, ...)
+int HSD_SisLib_803A6B98(HSD_Text* arg0, float x, float y, const char* arg1,
+                        ...)
 {
     s8 sp10C;
     HSD_Text** sp88;

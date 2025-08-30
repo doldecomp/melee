@@ -143,9 +143,12 @@ struct gmm_x1F2C {
 };
 
 struct gmm_x2FF8_inner {
-    u8 padding[0x1A2];
-    s8 x1A2;
-    u8 padding_x1A2;
+    /* 000 */ u8 padding[0x198];
+    /* 198 */ char namedata[8];
+    /* 1A0 */ s8 x1A0;
+    /* 1A1 */ u8 x1A1;
+    /* 1A2 */ s8 x1A2;
+    /* 1A3 */ u8 padding_x1A2;
 };
 
 struct gmm_x2FF8 {
@@ -269,7 +272,7 @@ struct gmm_x0 {
         /* 0x0529 */ u8 stocks;
         /* 0x052A */ u8 color;
         /* 0x052B */ u8 cpu_level;
-        /* 0x052C */ s8 x4;
+        /* 0x052C */ u8 x4; ///< nametag ID
         /* 0x052D */ u8 x5;
     } unk_51C, unk_522, unk_528;
     struct EventData {
@@ -277,7 +280,7 @@ struct gmm_x0 {
         /* 0x0531 */ u8 x1;
         /* 0x0532 */ s8 x2;
         /* 0x0533 */ u8 x3;
-        /* 0x0534 */ s8 x4;
+        /* 0x0534 */ u8 x4;
         /* 0x0535 */ u8 unk_535;
         /* 0x0536 */ u8 x6;
         /* 0x0537 */ u8 x7;
@@ -461,23 +464,6 @@ STATIC_ASSERT(sizeof(struct lbl_8046B6A0_t) == 0x2528);
 struct datetime {
     u16 year;
     u8 month, day, hour, minute, second;
-};
-
-struct gmMainLib_8015ED8C_arg0_t {
-    f32 _0[132];
-    u16 stage_idx_map[30]; ///< used by random stage select
-    u8 pad_x24C[32];
-    GXColor hud_colors[9];
-    u8 pad_x290[0x2AC - 0x290];
-    u8 id[0x24];
-    struct {
-        u8 unk0, unk1;
-        u8 unkpad[4];
-    } thing[11];
-    u8 pad_x312[0x380 - 0x312];
-    s16 _380[34];
-    s16 _3C4[34];
-    s16 _408[34];
 };
 
 struct gmMainLib_8015EF30_s {

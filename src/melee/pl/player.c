@@ -1772,7 +1772,7 @@ pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot)
     return stale_move_table;
 }
 
-s32 Player_80036394(s32 slot)
+FighterKind Player_80036394(s32 slot)
 {
     StaticPlayer* player;
     HSD_GObj* entity;

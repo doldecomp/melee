@@ -1464,7 +1464,7 @@ static TextGlyphTexture grPs_8049F040;
 void grStadium_801D3460(Ground_GObj* gobj)
 {
     U8Vec4 sp48;
-    void* sp38[4];
+    const char* sp38[4];
     HSD_Text* temp_r3;
     HSD_Text* temp_r3_2;
     HSD_Text* temp_r4;
@@ -1532,9 +1532,9 @@ void grStadium_801D3460(Ground_GObj* gobj)
 
     for (i = 0; i < 4; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
-            UNK_T tmp = gm_80160A60(i);
-            sp38[var_r28] = tmp;
-            if (tmp != NULL) {
+            const char* character_name = gm_80160A60(i);
+            sp38[var_r28] = character_name;
+            if (character_name != NULL) {
                 var_r28++;
             }
         }
@@ -1727,7 +1727,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     f32 var_f0_2;
     f32 var_f0_3;
     s32 temp_r29;
-    char* temp_r3_5;
+    const char* character_name;
     s32 var_r25;
     s32 var_r28;
     s32 var_r30;
@@ -1822,11 +1822,11 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 sp28[0].g = (u8) (s32) var_f0_3;
                 sp28[0].b = 0xFF;
                 temp_r31->x1C->x30 = *(U8Vec4*) &sp28[0];
-                temp_r3_5 = gm_80160A60(var_r30_2);
-                if (temp_r3_5 != 0) {
+                character_name = gm_80160A60(var_r30_2);
+                if (character_name != NULL) {
                     HSD_SisLib_803A6B98(temp_r31->x1C, grPs_804DAF58,
                                         (f32) (temp_r29 + var_r28), "%s",
-                                        temp_r3_5);
+                                        character_name);
                 }
                 var_r28 += 0x20;
             }
