@@ -634,19 +634,7 @@ MinorScene gm_803DE1B8_MinorScenes[] = {
     { -1 },
 };
 
-static struct gm_803DE650_t {
-    u8 x0;
-    u8 x1; // rule flags?
-    u16 x2;
-    u16 x4;
-    u16 x6;
-    u8 x8;
-    u8 x9;
-    s8 xA[3]; ///< CharacterKind (opponents?)
-    u8 xD;
-    u8 xE;
-    u8 xF;
-} gm_803DE650[] = {
+struct gm_803DE650_t gm_803DE650[] = {
     {
         0x00,
         0x00,

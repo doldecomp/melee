@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_ADVENTURE_H
 #define MELEE_GM_ADVENTURE_H
 
-#include <melee/gm/forward.h>
+#include <melee/gm/types.h>
 
 /* 1B3F40 */ void gm_801B3F40(MinorScene*);
 /* 1B4064 */ void gm_801B4064(MinorScene*);
@@ -33,5 +33,7 @@
 /* 1B518C */ void gm_801B518C(MinorScene*);
 /* 1B51CC */ void gm_801B51CC_OnInit(void);
 /* 1B5214 */ void gm_801B5214_OnLoad(void);
+/* 3DE1B8 */ extern MinorScene gm_803DE1B8_MinorScenes[49];
+/* 3DE650 */ extern struct gm_803DE650_t gm_803DE650[46];
 
 #endif

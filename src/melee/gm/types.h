@@ -309,8 +309,8 @@ struct gmm_x0 {
         /* 0x0574 */ s8 x44;
         /* 0x0575 */ u8 x45;
         /* 0x0578 */ InternalStageId x48;
-        /* 0x057C */ s8 x4C[4];       ///< CharacterKind
-        /* 0x0580 */ u8 x50[4];       ///< character color
+        /* 0x057C */ s8 x4C[4]; ///< CharacterKind
+        /* 0x0580 */ u8 x50[4]; ///< character color
         struct gmm_x0_584_t {
             /* 0x0584 */ s8 unk_584;
             /* 0x0585 */ s8 unk_585;
@@ -869,5 +869,19 @@ struct ResultsData {
     /* +98 */ struct ResultsPlayerData player_data[6];
 };
 STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
+
+struct gm_803DE650_t {
+    u8 x0;
+    u8 x1; // rule flags?
+    u16 x2;
+    u16 x4;
+    u16 x6;
+    u8 x8;
+    u8 x9;
+    s8 xA[3]; ///< CharacterKind (opponents?)
+    u8 xD;
+    u8 xE;
+    u8 xF;
+};
 
 #endif
