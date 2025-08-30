@@ -13,7 +13,7 @@
 #include <baselib/debug.h>
 #include <gm/gm_unsplit.h>
 
-static inline void setKindToOne_inline(int player, int kind)
+static void setKindToOne_inline(int player, int kind)
 {
     pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(player);
     HSD_ASSERTMSG(56, player != 6, "player != Gm_Player_Other");
