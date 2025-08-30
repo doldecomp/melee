@@ -352,7 +352,7 @@ void gm_801B3DD8(MinorScene* scene)
     CSSData* css = gm_801A427C(scene);
     struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
     gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
-                temp_r31->x4, temp_r31->cpu_level, gm_8017EB30()->x0.x3);
+                temp_r31->x4, temp_r31->cpu_level, gm_8017EB30()->x0.slot);
     lbDvd_800174BC();
 }
 

@@ -411,7 +411,7 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
 
 #pragma push
 #pragma dont_inline on
-void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, u8* color,
+void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
                  s8* arg4, u8* level)
 {
     s32 slot;
@@ -629,8 +629,8 @@ void gm_801B0C74(MinorScene* arg0)
     data = gm_801A427C(arg0);
     data->x0 = 0x1869F;
     data->x8 = 1;
-    data->x10 = un_803FA258[0x4D];
-    data->x14 = 0;
+    data->ckind = un_803FA258[0x4D];
+    data->slot = 0;
     data->x15 = 0x78;
     data->x18 = HSD_Randi(0x3E8);
     data->x16 = (HSD_Randi(0xA) + 1);

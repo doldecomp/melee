@@ -56,23 +56,23 @@
 /* 15D0D8 */ s32 gmMainLib_8015D0D8(u8);
 /* 15D0F4 */ s32 gmMainLib_8015D0F4(u8);
 /* 15D134 */ void gmMainLib_8015D134(u8);
-/* 15D194 */ u8* gmMainLib_8015D194(u8);
+/* 15D194 */ u8* gmMainLib_8015D194(u8); ///< returns a CPU level pointer
 /* 15D1AC */ s32 gmMainLib_8015D1AC(u8);
-/* 15D1C8 */ void gmMainLib_8015D1C8(u8, s32);
+/* 15D1C8 */ void gmMainLib_8015D1C8(u8, int stocks);
 /* 15D1E8 */ s32* gmMainLib_8015D1E8(u8);
 /* 15D200 */ s32 gmMainLib_8015D200(u8);
 /* 15D21C */ s32 gmMainLib_8015D21C(u8);
 /* 15D25C */ void gmMainLib_8015D25C(u8);
 /* 15D2BC */ u8* gmMainLib_8015D2BC(u8);
 /* 15D2D4 */ s32 gmMainLib_8015D2D4(u8);
-/* 15D2F0 */ void gmMainLib_8015D2F0(u8, s32);
+/* 15D2F0 */ void gmMainLib_8015D2F0(u8, int stocks);
 /* 15D310 */ s32* gmMainLib_8015D310(u8);
 /* 15D328 */ s32 gmMainLib_8015D328(u8);
 /* 15D344 */ s32 gmMainLib_8015D344(u8);
 /* 15D384 */ void gmMainLib_8015D384(u8);
 /* 15D3E4 */ u8* gmMainLib_8015D3E4(u8);
 /* 15D3FC */ s32 gmMainLib_8015D3FC(u8);
-/* 15D418 */ void gmMainLib_8015D418(u8, s32);
+/* 15D418 */ void gmMainLib_8015D418(u8, int stocks);
 /* 15D438 */ s32* gmMainLib_8015D438(u8);
 /* 15D450 */ s32* gmMainLib_8015D450(u8);
 /* 15D48C */ s32 gmMainLib_8015D48C(u8);
