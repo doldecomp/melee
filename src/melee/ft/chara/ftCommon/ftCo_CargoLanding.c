@@ -20,7 +20,8 @@ void ftCo_8009BD4C(Fighter_GObj* gobj)
     u8 _[20] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ca.specialhi.vel.x = fp->x2CC->cargo_hold.x28_LANDING_LAG;
-    ftCo_800D5AEC(gobj, fp->x2CC->x4_motion_state + 8, 1, 0, 0, 1);
+    ftCo_Landing_Enter(gobj, fp->x2CC->x4_motion_state + 8, true, Ft_MF_None,
+                       0.0F, 1.0F);
     ftAnim_SetAnimRate(gobj, 0);
     ftCo_8009C5A4(fp->victim_gobj, 0x10A);
 }

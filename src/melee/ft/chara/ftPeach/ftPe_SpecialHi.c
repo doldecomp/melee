@@ -284,7 +284,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 static void ftPe_SpecialHi_8011DD8C(HSD_GObj* gobj)
 {
     ftPe_DatAttrs* da = GET_FIGHTER(gobj)->dat_attrs;
-    ftCo_800D5CB0(gobj, 0, da->x74);
+    ftCo_LandingFallSpecial_Enter(gobj, false, da->x74);
 }
 
 static void doColl(HSD_GObj* gobj, HSD_GObjEvent cb)

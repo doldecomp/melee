@@ -125,7 +125,8 @@ static void doAirColl(HSD_GObj* gobj)
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (ft_CheckGroundAndLedge(gobj, 0)) {
         if (fp->mv.ca.specialhi.x2_b1) {
-            ftCo_800D5CB0(gobj, 0, da->specialhi_landing_lag);
+            ftCo_LandingFallSpecial_Enter(gobj, false,
+                                          da->specialhi_landing_lag);
         } else {
             ft_80083B68(gobj);
         }
@@ -286,7 +287,7 @@ void ftCa_SpecialHiThrow0_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (ft_80081D0C(gobj)) {
-        ftCo_800D5CB0(gobj, 0, da->specialhi_landing_lag);
+        ftCo_LandingFallSpecial_Enter(gobj, false, da->specialhi_landing_lag);
     }
 }
 

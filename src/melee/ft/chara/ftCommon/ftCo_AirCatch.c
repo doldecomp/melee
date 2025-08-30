@@ -295,6 +295,7 @@ void ftCo_AirCatch_Coll(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
     if (ft_80081D0C(gobj) != GA_Ground) {
-        ftCo_800D5AEC(gobj, 42, 0, 0, 0, 1);
+        ftCo_Landing_Enter(gobj, ftCo_MS_Landing, false, Ft_MF_None, 0.0F,
+                           1.0F);
     }
 }

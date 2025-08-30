@@ -649,7 +649,7 @@ void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
         ledge_grab_dir = 1;
     }
     if (ft_CheckGroundAndLedge((Fighter_GObj*) gobj, ledge_grab_dir) != 0) {
-        ftCo_800D5CB0((Fighter_GObj*) gobj, 0, attributes->x5C);
+        ftCo_LandingFallSpecial_Enter((Fighter_GObj*) gobj, false, attributes->x5C);
         return;
     }
     if (!ftCliffCommon_80081298((Fighter_GObj*) gobj)) {

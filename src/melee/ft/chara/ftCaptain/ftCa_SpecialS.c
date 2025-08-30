@@ -395,7 +395,8 @@ void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (ft_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
-        ftCo_800D5CB0(gobj, 0, da->specials_miss_landing_lag);
+        ftCo_LandingFallSpecial_Enter(gobj, false,
+                                      da->specials_miss_landing_lag);
     }
 }
 
@@ -409,6 +410,7 @@ void ftCa_SpecialAirS_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) == true) {
         fp->gr_vel = fp->self_vel.x;
         efLib_DestroyAll(gobj);
-        ftCo_800D5CB0(gobj, 0, da->specials_hit_landing_lag);
+        ftCo_LandingFallSpecial_Enter(gobj, false,
+                                      da->specials_hit_landing_lag);
     }
 }

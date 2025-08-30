@@ -8,6 +8,7 @@
 
 #include "ft/forward.h" // IWYU pragma: export
 
+#include "ft/ftwaitanim.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
@@ -94,7 +95,8 @@ struct ftCommonData {
     /* +84 */ u8 x84[4];
     /* +88 */ float x88;
     /* +8C */ int x8C;
-    /* +90 */ u8 x90[0x98 - 0x90];
+    /* +90 */ float x90;
+    /* +94 */ float x94;
     /* +98 */ float x98;
     /* +9C */ float x9C;
     /* +A0 */ float xA0;
@@ -274,8 +276,8 @@ struct ftCommonData {
     /* +360 */ UNK_T x360;
     /* +364 */ UNK_T x364;
     /* +368 */ UNK_T x368;
-    /* +36C */ UNK_T x36C;
-    /* +370 */ UNK_T x370;
+    /* +36C */ float x36C;
+    /* +370 */ float x370;
     /* +374 */ UNK_T x374;
     /* +378 */ UNK_T x378;
     /* +37C */ UNK_T x37C;
@@ -629,7 +631,7 @@ struct ftData {
         /* +4 */ HSD_Joint* x8;
     }* x20;
     /* +24 */ UNK_T x24;
-    /* +28 */ UNK_T x28;
+    /* +28 */ WaitStruct* x28;
     /* +2C */ struct ftDynamics* x2C;
     /* +30 */ UNK_T x30;
     /* +34 */ struct ftData_x34 {
@@ -1829,7 +1831,7 @@ typedef struct ftData_UnkModelStruct {
 struct ftData_80085FD4_ret {
     /* +0 */ UNK_T x0;
     /* +4 */ UNK_T x4;
-    /* +8 */ UNK_T x8;
+    /* +8 */ u32 x8;
     /* +C */ UNK_T xC;
     /* +10:0 */ u8 x10_b0 : 1;
     /* +10:1 */ u8 x10_b1 : 1;

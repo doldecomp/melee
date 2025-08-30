@@ -653,7 +653,7 @@ void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
 
         if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir) != 0) {
-            ftCo_800D5CB0(gobj, 0, attributes->x6C);
+            ftCo_LandingFallSpecial_Enter(gobj, false, attributes->x6C);
             return;
         }
     }

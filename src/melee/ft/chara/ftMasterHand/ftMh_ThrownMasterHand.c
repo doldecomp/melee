@@ -15,7 +15,7 @@ void ftMh_CaptureWaitMasterHand_80155D1C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->invisible = false;
     fp->facing_dir = -fp->facing_dir;
-    ftCo_800DC750(gobj);
+    ftCo_CaptureCut_Enter(gobj);
 }
 
 void ftMh_CaptureWaitMasterHand_Anim(HSD_GObj* gobj) {}

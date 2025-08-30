@@ -503,7 +503,7 @@ void ft_80082B1C(Fighter_GObj* gobj)
     if (fp->self_vel.y > ftCo_800D0EC8(fp)) {
         ft_8008A2BC(gobj);
     } else {
-        ftCo_800D5BF8(gobj);
+        ftCo_Landing_Enter_Basic(gobj);
     }
 }
 
@@ -536,7 +536,7 @@ void ftCo_AirCatchHit_Coll(Fighter_GObj* gobj)
         if (fp2->self_vel.y > ftCo_800D0EC8(fp2)) {
             ft_8008A2BC(gobj);
         } else {
-            ftCo_800D5BF8(gobj);
+            ftCo_Landing_Enter_Basic(gobj);
         }
     }
 }
@@ -598,7 +598,7 @@ void ft_80082D40(Fighter_GObj* gobj, f32 arg1)
         if (fp2->self_vel.y > ftCo_800D0EC8(fp2)) {
             ft_8008A2BC(gobj);
         } else {
-            ftCo_800D5BF8(gobj);
+            ftCo_Landing_Enter_Basic(gobj);
         }
     }
 }

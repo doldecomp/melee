@@ -582,7 +582,7 @@ void ftFx_SpecialAirSEnd_Coll(HSD_GObj* gobj)
         cliffCatchDir = 1;
     }
     if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
-        ftCo_800D5CB0(gobj, 0, da->x50_FOX_ILLUSION_LANDING_LAG);
+        ftCo_LandingFallSpecial_Enter(gobj, false, da->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }
     if (ftCliffCommon_80081298(gobj)) {
