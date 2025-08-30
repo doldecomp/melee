@@ -1933,7 +1933,7 @@ melee/gm/gmadventure.c:
 	.text       start:0x801B3F40 end:0x801B5324
 	.data       start:0x803DE1B8 end:0x803DE930
 	.bss        start:0x80490910 end:0x80490940
-	.sbss       start:0x804D68D8 end:0x804D68E8
+	.sbss       start:0x804D68D8 end:0x804D68E4
 	.sdata2     start:0x804DAC18 end:0x804DAC30
 
 melee/gm/gmallstar.c:
