@@ -35,8 +35,8 @@
 /* 15CDA4 */ void* gmMainLib_8015CDA4(void);
 /* 15CDB0 */ void* gmMainLib_8015CDB0(void);
 /* 15CDBC */ void* gmMainLib_8015CDBC(void);
-/* 15CDC8 */ void* gmMainLib_8015CDC8(void);
-/* 15CDD4 */ void* gmMainLib_8015CDD4(void);
+/* 15CDC8 */ struct gmm_x0_528_t* gmMainLib_8015CDC8(void);
+/* 15CDD4 */ struct gmm_x0_528_t* gmMainLib_8015CDD4(void);
 /* 15CDE0 */ struct gmm_x0_528_t* gmMainLib_8015CDE0(void);
 /* 15CDEC */ void gmMainLib_8015CDEC(void);
 /* 15CE44 */ s8* gmMainLib_8015CE44(s32, s32);

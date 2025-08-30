@@ -218,12 +218,12 @@ void* gmMainLib_8015CDBC(void)
     return &gmMainLib_804D3EE0->thing.x1A60;
 }
 
-void* gmMainLib_8015CDC8(void)
+struct gmm_x0_528_t* gmMainLib_8015CDC8(void)
 {
     return &gmMainLib_804D3EE0->unk_51C;
 }
 
-void* gmMainLib_8015CDD4(void)
+struct gmm_x0_528_t* gmMainLib_8015CDD4(void)
 {
     return &gmMainLib_804D3EE0->unk_522;
 }
@@ -986,8 +986,6 @@ void gmMainLib_8015F4F4(u8 arg0)
 {
     gmMainLib_8015CC40()->x1CB0.deflicker = arg0;
 }
-
-/// #gmMainLib_8015F500
 
 void gmMainLib_8015F500(void)
 {

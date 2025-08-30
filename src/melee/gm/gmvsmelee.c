@@ -125,7 +125,7 @@ void gm_801A5680(MinorScene* minor_data, VsModeData* vs_data)
 
     css_data = gm_801A4284(minor_data);
     if (css_data->pending_scene_change == 2) {
-        gm_801A42F8(MJ_MENU); // returns to CSS
+        gm_801A42F8(MJ_MENU);
         return;
     }
     *vs_data = css_data->data;

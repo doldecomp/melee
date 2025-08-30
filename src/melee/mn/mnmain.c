@@ -3180,13 +3180,13 @@ int mn_8022F470(int* x, int* target, int dx)
 #pragma dont_inline on
 void mn_8022F4CC(void)
 {
-    if (gm_801A4310() == 0x1B) {
+    if (gm_801A4310() == MJ_TOURNAMENT) {
         HSD_SisLib_803A5E70();
         mn_8022EBDC();
         gm_80190EA4();
         return;
     }
-    if (gm_801A4310() == 1) {
+    if (gm_801A4310() == MJ_MENU) {
         mn_80229894(2, 3, 3);
         return;
     }

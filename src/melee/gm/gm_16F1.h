@@ -89,7 +89,7 @@
 /* 17367C */ bool fn_8017367C(void);
 /* 1736DC */ UNK_T gm_801736DC(void);
 /* 1736E8 */ void gm_801736E8(u8, u8, u8, u8, u8, u8);
-/* 173754 */ int gm_80173754(s8, u8);
+/* 173754 */ bool gm_80173754(s8, u8);
 /* 1737D8 */ u8 gm_801737D8(void);
 /* 1737E8 */ void gm_801737E8_OnLoad(void);
 /* 173834 */ UNK_RET fn_80173834(UNK_PARAMS);

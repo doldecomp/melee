@@ -264,11 +264,6 @@ struct gmm_x0 {
     /* 0x0048 */ char pad_48[0x24]; /* maybe part of x44[0xA]? */
     /* 0x006C */ u32 unk_6C[4];
     /* 0x007C */ char pad_7C[0x4A0]; /* maybe part of x6C[0x4B]? */
-    /* 0x051C */ s32 unk_51C;
-    /* 0x0520 */ s16 unk_520;
-    /* 0x0522 */ s16 unk_522;
-    /* 0x0524 */ s16 unk_524;
-    /* 0x0526 */ s16 unk_526;
     struct gmm_x0_528_t {
         /* 0x0528 */ s8 c_kind;
         /* 0x0529 */ s8 stocks;
@@ -276,7 +271,7 @@ struct gmm_x0 {
         /* 0x052B */ u8 cpu_level;
         /* 0x052C */ s8 x4;
         /* 0x052D */ u8 x5;
-    } unk_528;
+    } unk_51C, unk_522, unk_528;
     struct EventData {
         /* 0x0530 */ u8 x0;
         /* 0x0531 */ u8 x1;
@@ -615,7 +610,7 @@ struct MatchEnd {
 
 struct MatchExitInfo {
     int x0;
-    int x4;
+    u32 x4; ///< remaining time shown on timer, in frames
     int x8;
     MatchEnd match_end;
 };
@@ -628,70 +623,72 @@ struct ResultsMatchInfo {
     MatchEnd match_end;
 };
 
-struct UnkAllstarData {
-    s8 x0; ///< c_kind
-    u8 x1; ///< color
-    u8 x2; ///< cpu_level
-    u8 x3; ///< slot
-    u8 x4;
-    u8 x5; ///< stocks
-    u8 x6;
-    u8 x7;
-    u8 x8;
-    u8 x9;
-    u8 xA;
-    u8 xB;
-    struct UnkAllstarData_xC {
-        u8 x0;
-        u8 x1;
-        u8 x2;
-        u8 x3;
-        u8 x4;
-        u8 x5;
-        u8 x6;
-        u8 x7;
-        u8 x8;
-        u8 x9;
-        u8 xA;
-        u8 xB;
-        int xC;
-        s8 x10;
-        u8 x11;
-        u8 x12;
-        u8 x13;
-        u8 x14;
-        u8 x15;
-        u8 x16;
-        u8 x17;
-        s8 x18;
-        u8 x19;
-        u8 x1A;
-        u8 x1B;
-        u8 x1C;
-        u8 x1D;
-        u8 x1E;
-        u8 x1F;
-        s8 x20;
-        u8 x21;
-        u8 x22;
-        u8 x23;
-        s8 x24;
-        u8 x25;
-        u8 x26;
-        u8 x27;
-        u8 x28;
-        u8 x29;
-        u8 x2A;
-        u8 x2B;
-        u8 x2C;
-        u8 x2D;
-        u8 x2E;
-        u8 x2F;
-        s8 x30;
+struct Unk1PData {
+    /* 00 */ s8 x0; ///< CharacterKind
+    /* 01 */ u8 x1; ///< color
+    /* 02 */ u8 x2; ///< cpu_level
+    /* 03 */ u8 x3; ///< slot
+    /* 04 */ u8 x4;
+    /* 05 */ u8 x5; ///< stocks
+    /* 06 */ u8 x6;
+    /* 07 */ u8 x7;
+    /* 08 */ u8 x8;
+    /* 09 */ u8 x9;
+    /* 0A */ u8 xA;
+    /* 0B */ u8 xB;
+    /* 0C */ struct Unk1PData_xC {
+        /* 0C */ u8 xC;
+        /* 0D */ u8 xD;
+        /* 0E */ u8 xE;
+        /* 0F */ u8 xF;
+        /* 10 */ u8 x10;
+        /* 11 */ u8 x11;
+        /* 12 */ u8 x12;
+        /* 13 */ u8 x13;
+        /* 14 */ u16 x14;
+        /* 18 */ int x18;
+        /* 1C */ int x1C;
+        /* 20 */ int x20;
+        struct Unk1PData_x24 {
+            /* 24 */ s8 x0; ///< CharacterKind
+            /* 28 */ int x4;
+            /* 2C */ int x8;
+        } x24[3];
     } xC;
-    s8 pad_x0[0x74 - 0x40];
+};
+
+struct UnkAdventureData {
+    /* 00 */ Unk1PData x0;
+    /* 48 */ UNK_T x48;
+    /* 4C */ u8 (*x4C)(MinorScene*, u8, u8);
+    /* 50 */ UNK_T x50;
+    /* 54 */ UNK_T x54;
+    /* 58 */ UNK_T x58;
+    /* 5C */ UNK_T x5C;
+    /* 60 */ UNK_T x60;
+    /* 64 */ float (*x64)(MinorScene*, u8);
+    /* 68 */ float (*x68)(MinorScene*, u8);
+    /* 6C */ UNK_T x6C;
+    /* 70 */ UNK_T x70;
+    /* 74 */ u8 x74;
+    /* 75 */ u8 x75;
+    /* 76 */ u8 x76;
+    /* 77 */ u8 x77;
+    /* 78 */ u8 x78;
+    /* 79 */ s8 pad_x79[0x7C - 0x79];
+    /* 7C */ u8 x7C; ///< CharacterKind
+    /* 7D */ s8 pad_x7D[0x80 - 0x7D];
+};
+
+struct UnkAllstarData {
+    /* 00 */ Unk1PData x0;
+    s8 pad_x0[0x74 - 0x48];
     u16 x74;
-    s8 pad_x76[0xA0 - 0x76];
+    u8 x76;
+    u8 x77;
+    s8 pad_x78[0x7C - 0x78];
+    u8 x7C;
+    s8 pad_x7D[0xA0 - 0x7D];
 };
 
 struct TmData {
@@ -811,15 +808,6 @@ struct gm_801677C0_s {
     /* +38 */ u8 unk_38_1 : 1;
 };
 STATIC_ASSERT(sizeof(struct gm_801677C0_s) == 0x30);
-
-struct gm_801B51CC_OnInit_s {
-    /*  +0 */ u8 x0;
-    /*  +1 */ u8 x1;
-    /*  +2 */ u8 x2;
-    /*  +3 */ u8 x3;
-    /*  +4 */ u8 x4;
-    /*  +5 */ u8 x5;
-};
 
 struct gm_80479D58_t {
     /*  +0 */ u32 unk_0;

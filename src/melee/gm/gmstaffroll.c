@@ -98,7 +98,7 @@ bool gm_801AA664(int arg0)
 bool gm_801AA688(void)
 {
     PAD_STACK(4);
-    return gm_80164840(9) || gm_80164840(0x17);
+    return gm_80164840(CKIND_MARS) || gm_80164840(CKIND_EMBLEM);
 }
 
 void gm_801AA6D8(s16 arg0)

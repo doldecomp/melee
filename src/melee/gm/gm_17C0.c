@@ -9,6 +9,7 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
 #include <melee/cm/camera.h>
+#include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ft_0877.h>
@@ -25,6 +26,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
+#include <melee/lb/lbtime.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
@@ -51,7 +53,7 @@ static struct lbl_804706C0_t {
     int x14;
 } lbl_804706C0;
 
-static UnkAllstarData lbl_80472C30;
+static UnkAdventureData lbl_80472C30;
 static UnkAllstarData lbl_80472CB0;
 static struct lbl_80472D28_t lbl_80472D28;
 static struct lbl_80472E48_t lbl_80472E48;
@@ -273,7 +275,7 @@ void fn_8017C7A0(void)
 void fn_8017C7EC(void)
 {
     lbl_8046B6A0_t* temp_r31;
-    UnkAllstarData* temp_r30;
+    Unk1PData* temp_r30;
 
     temp_r30 = fn_8017DF28();
     temp_r31 = gm_8016AE44();
@@ -288,7 +290,7 @@ void gm_8017C838(void)
     int i;
     s8 var_r3;
     s8* var_r31;
-    UnkAllstarData* temp_r30;
+    UnkAdventureData* temp_r30;
 
     PAD_STACK(8);
 
@@ -307,7 +309,7 @@ void gm_8017C838(void)
         break;
     case 0x44:
         sp10[0] = 4;
-        if (temp_r30->x0 == 4 && temp_r30->x1 == 0) {
+        if (temp_r30->x0.x0 == 4 && temp_r30->x0.x1 == 0) {
             var_r3 = 1;
         } else {
             var_r3 = 0;
@@ -349,10 +351,10 @@ void gm_8017C984(UNK_T arg0)
 
 extern u8 lbl_803B7C08[][5];
 
-void gm_8017C9A8(DebugGameOverData* arg0, UnkAllstarData* arg1, u8 arg2)
+void gm_8017C9A8(DebugGameOverData* arg0, Unk1PData* arg1, u8 arg2)
 {
     PAD_STACK(8);
-    arg0->x0 = arg1->xC.xC;
+    arg0->x0 = arg1->xC.x18;
     arg0->x8 = arg2;
     arg0->x10 = arg1->x0;
     arg0->x14 = arg1->x3;
@@ -369,15 +371,82 @@ void gm_8017C9A8(DebugGameOverData* arg0, UnkAllstarData* arg1, u8 arg2)
 
 /// #gm_8017CE34
 
-/// #gm_8017D7AC
+bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
+{
+    u8 temp_r0;
+
+    arg1->xC.x14 =
+        lbTime_8000AEC8(arg1->xC.x14, arg0->match_end.player_standings[0].xE);
+    gm_8016247C(arg0->match_end.player_standings[0].xE);
+    arg1->xC.x1C =
+        lbTime_8000AEC8(arg1->xC.x1C, arg0->match_end.player_standings[0].x44);
+    gm_80162968(arg0->match_end.frame_count / 60);
+    if (!(arg1->x8 & 0x80)) {
+        arg1->xC.x20 =
+            lbTime_8000AEC8(arg1->xC.x20, arg0->match_end.frame_count);
+    }
+    if (arg0->match_end.player_standings[0].character_id == 7) {
+        arg1->xC.x12 = 1;
+    } else {
+        arg1->xC.x12 = 0;
+    }
+    if (fn_8016B510() != 0) {
+        arg1->xC.xF = 1;
+    }
+    if (fn_8016B4BC() != 0) {
+        arg1->xC.xE = 1;
+    }
+    temp_r0 = arg0->match_end.result;
+    if ((temp_r0 == 7 || temp_r0 == 8) && g_debugLevel <= 2) {
+        switch (gm_801A4310()) {
+        case 3:
+            fn_80162BFC(arg1->x0, arg1->xC.x18);
+            break;
+        case 4:
+            fn_80162DF8(arg1->x0, arg1->xC.x18);
+            break;
+        case 5:
+            fn_80162FF4(arg1->x0, arg1->xC.x18);
+            break;
+        }
+        gm_801A42F8(1);
+        return 0;
+    }
+    fn_8017E3C8();
+    if (!(arg1->x8 & 0x80)) {
+        arg1->x5 = arg0->match_end.player_standings[0].stocks;
+        if (arg1->x5 != 0) {
+            if (arg0->match_end.result == 1) {
+                arg1->x5--;
+                if (arg1->x5 == 0) {
+                    gm_SetScenePendingMinor(arg2);
+                    return 0;
+                }
+                if (!(arg1->x8 & 0x40)) {
+                    arg1->xC.x10++;
+                    gm_SetScenePendingMinor(gm_801A42C4());
+                    return 0;
+                }
+            }
+        } else {
+            arg1->xC.x10 = 0;
+            gm_SetScenePendingMinor(arg2);
+            return 0;
+        }
+    }
+    arg1->xC.x18 = arg0->x0;
+    arg1->xC.x10 = 0;
+    return 1;
+}
 
 /// #fn_8017D9C0
 
-void gm_8017DB58(void* arg0)
+void gm_8017DB58(struct Unk1PData_x24* arg0)
 {
-    M2C_FIELD(arg0, s8*, 0) = 0x21;
-    M2C_FIELD(arg0, s8*, 0xC) = 0x21;
-    M2C_FIELD(arg0, s8*, 0x18) = 0x21;
+    int i;
+    for (i = 0; i < 3; i++) {
+        arg0[i].x0 = CHKIND_NONE;
+    }
 }
 
 u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index)
@@ -396,29 +465,29 @@ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index)
 
 /// #fn_8017DE54
 
-UnkAllstarData* fn_8017DEC8(int arg0)
+Unk1PData* fn_8017DEC8(int arg0)
 {
     switch (arg0) {
     case 0:
-        return gm_8017E424();
+        return &gm_8017E424()->x0;
     case 1:
-        return gm_8017EB30();
+        return &gm_8017EB30()->x0;
     case 2:
-        return &gm_80473A18;
+        return &gm_80473A18.x0;
     default:
         return NULL;
     }
 }
 
-UnkAllstarData* fn_8017DF28(void)
+Unk1PData* fn_8017DF28(void)
 {
     switch (gm_801A4310()) {
     case MJ_CLASSIC:
-        return gm_8017EB30();
+        return &gm_8017EB30()->x0;
     case MJ_ADVENTURE:
-        return gm_8017E424();
+        return &gm_8017E424()->x0;
     case MJ_ALLSTAR:
-        return &gm_80473A18;
+        return &gm_80473A18.x0;
     default:
         return NULL;
     }
@@ -440,7 +509,7 @@ u8 fn_8017DF90(void)
 
 int gm_8017DFF4(int arg0)
 {
-    UnkAllstarData* var_r3 = fn_8017DEC8(arg0);
+    Unk1PData* var_r3 = fn_8017DEC8(arg0);
     if (var_r3 != NULL) {
         return var_r3->x2;
     }
@@ -449,7 +518,7 @@ int gm_8017DFF4(int arg0)
 
 int gm_8017E068(void)
 {
-    UnkAllstarData* var_r3 = fn_8017DF28();
+    Unk1PData* var_r3 = fn_8017DF28();
     if (var_r3 != NULL) {
         return var_r3->x2;
     }
@@ -458,28 +527,24 @@ int gm_8017E068(void)
 
 int fn_8017E0E4(void)
 {
-    UnkAllstarData* var_r3 = fn_8017DF28();
+    Unk1PData* var_r3 = fn_8017DF28();
     if (var_r3 != NULL) {
-        return var_r3->xC.x0;
+        return var_r3->xC.xC;
     }
     return -1;
 }
 
 bool fn_8017E160(void)
 {
-    UnkAllstarData* var_r3 = fn_8017DF28();
-    struct UnkAllstarData_xC* temp_r3_2;
+    Unk1PData* var_r3 = fn_8017DF28();
+    struct Unk1PData_xC* temp_r3_2;
 
     if (var_r3 != NULL) {
-        if (var_r3->xC.x18 != 0x21) {
-            return true;
-        }
-        temp_r3_2 = &var_r3->xC;
-        if (temp_r3_2->x24 != 0x21) {
-            return true;
-        }
-        if (temp_r3_2->x30 != 0x21) {
-            return true;
+        int i;
+        for (i = 0; i < 3; i++) {
+            if (var_r3->xC.x24[i].x0 != 0x21) {
+                return true;
+            }
         }
         return false;
     }
@@ -494,14 +559,14 @@ bool fn_8017E160(void)
 
 /// #fn_8017E3C8
 
-UnkAllstarData* gm_8017E424(void)
+UnkAdventureData* gm_8017E424(void)
 {
     return &lbl_80472C30;
 }
 
 u8 gm_8017E430(void)
 {
-    return lbl_80472C30.x3;
+    return lbl_80472C30.x0.x3;
 }
 
 /// #gm_8017E440
@@ -748,7 +813,7 @@ void fn_80182F40(HSD_GObj* unused)
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);
         gm_801A4B60();
-        gm_801A42E8(0);
+        gm_801A42E8(MJ_TITLE);
         gm_801A42D4();
         return;
     }
