@@ -397,6 +397,9 @@ union ftCommon_MotionVars {
         /* fp+2348 */ UNK_T x8;
         /* fp+234C */ u8 xC;
     } thrown;
+    struct {
+        /* fp+2340 */ FtMotionId prev_msid;
+    } parasol_open;
 };
 
 /// @todo Fake, need to find real size of #HitCapsule

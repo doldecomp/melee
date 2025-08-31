@@ -6,7 +6,6 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
@@ -16,6 +15,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftpickupitem.h"
 #include "ftPeach/types.h"
 
@@ -42,22 +42,22 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.pe.specialhi.kind == It_Kind_Capsule) {
         fp->mv.pe.specialhi.kind = It_Kind_Peach_Parasol;
-        if (fp->fv.pe.unk_item_gobj == NULL) {
+        if (fp->fv.pe.parasol_gobj_0 == NULL) {
             Vec3 pos;
             lb_8000B1CC(fp->parts[FtPart_109].joint, NULL, &pos);
             {
                 HSD_GObj* igobj = fp->item_gobj;
                 if (igobj != NULL) {
-                    fp->fv.pe.parasol_gobj = igobj;
+                    fp->fv.pe.parasol_gobj_1 = igobj;
                     it_8026BB44(fp->item_gobj);
                     it_8026B724(fp->item_gobj);
                     ftCommon_8007E6DC(gobj, fp->item_gobj, true);
                 }
             }
-            fp->fv.pe.unk_item_gobj =
+            fp->fv.pe.parasol_gobj_0 =
                 it_802BDA64(gobj, &pos, FtPart_109, fp->facing_dir);
-            fp->item_gobj = fp->fv.pe.unk_item_gobj;
-            if (fp->fv.pe.unk_item_gobj != NULL) {
+            fp->item_gobj = fp->fv.pe.parasol_gobj_0;
+            if (fp->fv.pe.parasol_gobj_0 != NULL) {
                 fp->death3_cb = ftPe_Init_OnDeath2;
                 fp->take_dmg_cb = ftPe_Init_OnDeath2;
             }
@@ -71,14 +71,14 @@ void ftPe_SpecialHi_8011D424(HSD_GObj* gobj)
 bool ftPe_8011D518(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->fv.pe.unk_item_gobj = NULL;
+    fp->fv.pe.parasol_gobj_0 = NULL;
     fp->death3_cb = NULL;
     fp->take_dmg_cb = NULL;
     {
-        HSD_GObj* parasol_gobj = fp->fv.pe.parasol_gobj;
+        HSD_GObj* parasol_gobj = fp->fv.pe.parasol_gobj_1;
         if (parasol_gobj != NULL) {
             fp->item_gobj = parasol_gobj;
-            fp->fv.pe.parasol_gobj = NULL;
+            fp->fv.pe.parasol_gobj_1 = NULL;
             it_8026BB20(fp->item_gobj);
             it_8026B73C(fp->item_gobj);
             ftpickupitem_80094818(gobj, true);
@@ -97,8 +97,8 @@ static void setupParasol(HSD_GObj* gobj)
 void ftPe_8011D598(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pe.unk_item_gobj != NULL) {
-        it_802BDB94(fp->fv.pe.unk_item_gobj);
+    if (fp->fv.pe.parasol_gobj_0 != NULL) {
+        it_802BDB94(fp->fv.pe.parasol_gobj_0);
         ftPe_8011D518(gobj);
     }
 }
@@ -106,8 +106,8 @@ void ftPe_8011D598(HSD_GObj* gobj)
 static void ensureUnkItem(HSD_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.pe.unk_item_gobj != NULL) {
-        cb(fp->fv.pe.unk_item_gobj);
+    if (fp->fv.pe.parasol_gobj_0 != NULL) {
+        cb(fp->fv.pe.parasol_gobj_0);
     }
 }
 
