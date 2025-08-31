@@ -3,6 +3,7 @@
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_BarrelWait.h"
+#include "ftCo_CaptureCut.h"
 #include "ftCo_Damage.h"
 #include "ftCo_EscapeAir.h"
 #include "ftCo_HammerJump.h"
@@ -10,6 +11,7 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Lift.h"
 #include "ftCo_SpecialAir.h"
+#include "ftCo_Throw.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -20,7 +22,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"

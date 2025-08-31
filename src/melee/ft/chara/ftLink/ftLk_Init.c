@@ -9,7 +9,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"

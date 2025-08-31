@@ -12,7 +12,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcolanim.h"

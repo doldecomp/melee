@@ -11,7 +11,6 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -19,6 +18,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_TurnRun.h"
 
 bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)

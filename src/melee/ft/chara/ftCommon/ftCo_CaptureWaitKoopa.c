@@ -8,8 +8,10 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 
 void ftCo_800BCC20(Fighter_GObj* gobj)
 {

@@ -6,7 +6,7 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -23,6 +23,7 @@
 #include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_JumpAerial.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/inlines.h"
 
@@ -62,5 +63,5 @@ void ftCo_ItemParasolFallSpecial_Phys(Fighter_GObj* gobj)
 
 void ftCo_ItemParasolFallSpecial_Coll(Fighter_GObj* gobj)
 {
-    ft_8008370C(gobj, (HSD_GObjEvent) ftCo_LandingFallSpecial_Enter_Basic);
+    ft_8008370C(gobj, ftCo_LandingFallSpecial_Enter_Basic);
 }

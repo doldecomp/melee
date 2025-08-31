@@ -6,8 +6,8 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/types.h"
 
 void ftCo_HammerLanding_Enter(Fighter_GObj* gobj)

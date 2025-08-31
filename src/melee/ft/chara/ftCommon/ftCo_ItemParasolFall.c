@@ -6,7 +6,6 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0D14.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -18,6 +17,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_JumpAerial.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_SpecialAir.h"
 #include "ftCommon/inlines.h"
 

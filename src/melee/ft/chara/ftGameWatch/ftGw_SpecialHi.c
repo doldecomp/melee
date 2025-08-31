@@ -9,7 +9,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
@@ -17,6 +17,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "it/items/itgamewatchrescue.h"
 #include "lb/lb_00B0.h"
 
@@ -255,7 +256,8 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
             if (ft_80081D0C(gobj) != false) {
                 ftGw_SpecialHi_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);
-                ftCo_LandingFallSpecial_Enter(gobj, false, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                ftCo_LandingFallSpecial_Enter(
+                    gobj, false, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 fp->death2_cb = NULL;
                 fp->take_dmg_cb = NULL;
             }
@@ -266,7 +268,8 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
                 ledgeGrabDir = -1;
             }
             if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
-                ftCo_LandingFallSpecial_Enter(gobj, false, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                ftCo_LandingFallSpecial_Enter(
+                    gobj, false, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
             } else if (ftCliffCommon_80081298(gobj) != false) {
                 ftCliffCommon_80081370(gobj);
             }

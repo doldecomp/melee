@@ -5,13 +5,14 @@
 #include <platform.h>
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_AttackAir.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_LandingAir.h"
 #include "ftGameWatch/types.h"
 #include "it/items/it_27CF.h"

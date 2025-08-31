@@ -6,11 +6,11 @@
 #include <platform.h>
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftDonkey/types.h"
 
 #include <dolphin/mtx.h>
