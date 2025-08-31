@@ -412,4 +412,10 @@ enum {
     Ft_Dynamics_NumMax = 10,
 };
 
+enum EntityKind {
+    EntityKind_None,
+    EntityKind_Fighter,
+    EntityKind_Item,
+};
+
 #endif

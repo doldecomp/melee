@@ -391,6 +391,12 @@ union ftCommon_MotionVars {
         /* fp+2348 */ u8 pad_x48[0x68 - 0x48];
         /* fp+2368 */ int x68;
     } unk_deadup;
+    struct {
+        /* fp+2340 */ bool unk_bool;
+        /* fp+2344 */ float anim_timer;
+        /* fp+2348 */ UNK_T x8;
+        /* fp+234C */ u8 xC;
+    } thrown;
 };
 
 /// @todo Fake, need to find real size of #HitCapsule

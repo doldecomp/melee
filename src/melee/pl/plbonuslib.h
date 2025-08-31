@@ -64,7 +64,7 @@
 /* 0403FC */ void pl_800403FC(int, int, int slot, int, int);
 /* 040460 */ void pl_80040460(int slot, int);
 /* 04049C */ void pl_8004049C(int, ItemKind);
-/* 040614 */ void pl_80040614(int, float);
+/* 040614 */ void pl_80040614(int, bool, float);
 /* 04065C */ void pl_8004065C(int, int);
 /* 040688 */ void pl_80040688(int, int, int);
 /* 0407C8 */ float pl_800407C8(int);

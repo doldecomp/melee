@@ -1204,7 +1204,7 @@ void pl_8004049C(int player, ItemKind arg1)
     pl_80038824(player, var_r30);
 }
 
-void pl_80040614(int arg0, float arg8)
+void pl_80040614(int arg0, bool arg1, float arg8)
 {
     RETURN_IF(!arg8);
 

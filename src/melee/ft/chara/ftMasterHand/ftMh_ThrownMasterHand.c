@@ -8,6 +8,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Thrown.h"
 #include "ftMasterHand/types.h"
 
 void ftMh_CaptureWaitMasterHand_80155D1C(HSD_GObj* gobj)

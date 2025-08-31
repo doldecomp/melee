@@ -669,6 +669,9 @@ config.libs = [
             Object(NonMatching, "melee/ft/ft_0CEE.c"),
             Object(NonMatching, "melee/ft/ftchangeparam.c"),
             Object(NonMatching, "melee/ft/ft_0D14.c"),
+            # Common throw-related
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Thrown.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_AppealS.c"),
             # Donkey Kong (common states)
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_HeavyWalk.c"),
