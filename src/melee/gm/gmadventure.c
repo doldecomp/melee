@@ -1245,7 +1245,6 @@ void gm_801B4064(MinorScene* arg0)
     StartMeleeData* temp_r28;
     UnkAdventureData* temp_r27;
     u8 tmp;
-    u8 wtf;
 
     PAD_STACK(8);
 
@@ -1265,11 +1264,8 @@ void gm_801B4064(MinorScene* arg0)
     temp_r27->x0.xA = temp_r31->x9;
     tmp = gm_80490910[getIndex(arg0->idx)];
 
-#pragma clang diagnostic ignored "-Wpointer-to-int-cast"
-    wtf = (u8) gm_8017E48C(arg0); // casting pointer to u8? WTF?
-
     gm_8017CE34(temp_r28, temp_r27, temp_r31->xA, temp_r31->x4, var_r30,
-                var_r29, temp_r31->x2, temp_r31->x6, wtf, tmp);
+                var_r29, temp_r31->x2, temp_r31->x6, gm_8017E48C(arg0), tmp);
     gm_8016F088(temp_r28);
     if (temp_r31->x1 & 8) {
         temp_r28->rules.x44 = gm_8017C838;
@@ -1478,7 +1474,7 @@ void gm_801B4860(MinorScene* scene)
 
 void gm_801B4974(MinorScene* arg0)
 {
-    MinorScene* temp_r27;
+    int count;
     UnkAdventureData* temp_r29;
     UnkAdventureData* temp_r3;
     struct gm_803DE650_t* temp_r25_2;
@@ -1505,15 +1501,15 @@ void gm_801B4974(MinorScene* arg0)
     temp_r30 = gm_8017E4C4(arg0->idx);
     temp_r24_2 = gm_80169520();
     temp_r31 = gm_80169540();
-    temp_r27 = gm_8017E48C(arg0);
+    count = gm_8017E48C(arg0);
     temp_r25_2 = gm_8017E4C4(arg0->idx);
     gm_8016A22C(temp_r25_2->xA[0], temp_r25_2->xA[1], temp_r25_2->xA[2],
                 temp_r25_2->xD, temp_r25_2->xE, temp_r25_2->xF, 1, 0, 1,
                 temp_r29->x0.ckind, temp_r29->x0.color,
-                temp_r29->x4C(temp_r27, temp_r29->x0.cpu_level, 0),
+                temp_r29->x4C(count, temp_r29->x0.cpu_level, 0),
                 temp_r25_2->x4, gm_8017BE8C(temp_r25_2->xA), 1, 0, 1,
-                temp_r29->x64(temp_r27, temp_r29->x0.cpu_level),
-                temp_r29->x68(temp_r27, temp_r29->x0.cpu_level));
+                temp_r29->x64(count, temp_r29->x0.cpu_level),
+                temp_r29->x68(count, temp_r29->x0.cpu_level));
 
     temp_r29->x0.xC.x11 = 1;
     temp_r28->x3 = *temp_r24_2;
@@ -1528,15 +1524,15 @@ static inline void inline0(MinorScene* scene)
     if (adv_data->x0.xC.x11 != 1) {
         UNK_T unused1 = gm_80169520();
         UNK_T unused2 = gm_80169540();
-        MinorScene* temp_r31 = gm_8017E48C(scene);
+        int count = gm_8017E48C(scene);
         struct gm_803DE650_t* temp_r29 = gm_8017E4C4(scene->idx);
         gm_8016A22C(temp_r29->xA[0], temp_r29->xA[1], temp_r29->xA[2],
                     temp_r29->xD, temp_r29->xE, temp_r29->xF, 1, 0, 1,
                     adv_data->x0.ckind, adv_data->x0.color,
-                    adv_data->x4C(temp_r31, adv_data->x0.cpu_level, 0), temp_r29->x4,
+                    adv_data->x4C(count, adv_data->x0.cpu_level, 0), temp_r29->x4,
                     gm_8017BE8C(temp_r29->xA), 1, 0, 1,
-                    adv_data->x64(temp_r31, adv_data->x0.cpu_level),
-                    adv_data->x68(temp_r31, adv_data->x0.cpu_level));
+                    adv_data->x64(count, adv_data->x0.cpu_level),
+                    adv_data->x68(count, adv_data->x0.cpu_level));
         adv_data->x0.xC.x11 = 1;
     }
 }

@@ -22,7 +22,7 @@
 /* 17CBAC */ UNK_RET gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
 /* 17CD94 */ UNK_RET gm_8017CD94(UNK_PARAMS);
 /* 17CE34 */ UNK_RET gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8,
-                                 u8, u8, int, int, u8, int);
+                                 u8, u8, int, int, u8 count, int);
 /* 17D7AC */ bool gm_8017D7AC(MatchExitInfo*, Unk1PData*, u8);
 /* 17D9C0 */ UNK_RET fn_8017D9C0(UNK_PARAMS);
 /* 17DB58 */ void gm_8017DB58(struct Unk1PData_x24* arg0);
@@ -45,12 +45,12 @@
 /* 17E424 */ UnkAdventureData* gm_8017E424(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
-/* 17E48C */ MinorScene* gm_8017E48C(MinorScene*);
+/* 17E48C */ int gm_8017E48C(MinorScene*);
 /* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
 /* 17E500 */ UNK_RET gm_8017E500(UNK_PARAMS);
-/* 17E528 */ float gm_8017E528(MinorScene*, u8);
-/* 17E578 */ float gm_8017E578(MinorScene*, u8);
-/* 17E5C8 */ u8 gm_8017E5C8(MinorScene*, u8, u8);
+/* 17E528 */ float gm_8017E528(int count, u8);
+/* 17E578 */ float gm_8017E578(int count, u8);
+/* 17E5C8 */ u8 gm_8017E5C8(int count, u8, u8);
 /* 17E5FC */ UNK_RET gm_8017E5FC(UNK_PARAMS);
 /* 17E630 */ UNK_RET gm_8017E630(UNK_PARAMS);
 /* 17E664 */ UNK_RET gm_8017E664(UNK_PARAMS);
