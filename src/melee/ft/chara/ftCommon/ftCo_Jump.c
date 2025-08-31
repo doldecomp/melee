@@ -13,6 +13,7 @@
 #include "ft/ft_0881.h"
 #include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
+#include "ft/ft_0DF1.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -20,7 +21,6 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_AirCatch.h"
-#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_EscapeAir.h"
 #include "ftCommon/ftCo_Fall.h"

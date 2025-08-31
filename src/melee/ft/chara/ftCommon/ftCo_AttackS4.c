@@ -19,6 +19,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0CDD.h"
 #include "ft/ft_0D14.h"
+#include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcommon.h"
