@@ -778,7 +778,28 @@ f32 fn_80160F58(u8 ckind)
 
 /// #gm_801623D8
 
-/// #gm_801623FC
+void gm_801623FC(int arg0)
+{
+    s32* temp_r30;
+    u32 var_r29;
+    u32* temp_r31;
+    u32* temp_r3;
+
+    var_r29 = arg0;
+    temp_r30 = gmMainLib_8015CCF0();
+    temp_r31 = gmMainLib_8015CCFC();
+    temp_r3 = &gmMainLib_8015EDBC()->x14;
+    if (var_r29 > *temp_r31) {
+        *temp_r31 = var_r29;
+    }
+    if (var_r29 > *temp_r3) {
+        *temp_r3 = var_r29;
+    }
+    if (var_r29 > 0x270F) {
+        var_r29 = 0x270F;
+    }
+    *temp_r30 = (s32) var_r29;
+}
 
 /// #gm_8016247C
 

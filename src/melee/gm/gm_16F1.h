@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 
+#include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -27,8 +28,8 @@
 /* 1701C0 */ UNK_RET fn_801701C0(UNK_PARAMS);
 /* 171A88 */ int fn_80171A88(void);
 /* 171AD4 */ UNK_RET fn_80171AD4(UNK_PARAMS);
-/* 171B00 */ UNK_RET fn_80171B00(UNK_PARAMS);
-/* 171B2C */ UNK_RET fn_80171B2C(UNK_PARAMS);
+/* 171B00 */ bool fn_80171B00(int);
+/* 171B2C */ bool fn_80171B2C(int);
 /* 171B64 */ UNK_RET fn_80171B64(UNK_PARAMS);
 /* 171BA4 */ UNK_RET fn_80171BA4(UNK_PARAMS);
 /* 171DC4 */ void fn_80171DC4(HSD_GObj*);
@@ -59,7 +60,7 @@
 /* 172700 */ bool fn_80172700(void);
 /* 172734 */ bool fn_80172734(void);
 /* 172768 */ bool fn_80172768(void);
-/* 17279C */ UNK_RET fn_8017279C(UNK_PARAMS);
+/* 17279C */ bool fn_8017279C(int, u16);
 /* 17280C */ UNK_RET fn_8017280C(UNK_PARAMS);
 /* 172898 */ void gm_80172898(int);
 /* 17297C */ UNK_RET gm_8017297C(UNK_PARAMS);
@@ -73,16 +74,16 @@
 /* 172DD4 */ u8 gm_80172DD4(UNK_T);
 /* 172E74 */ u8 gm_80172E74(void);
 /* 172F00 */ u16 gm_80172F00(u32);
-/* 172FAC */ UNK_RET fn_80172FAC(UNK_PARAMS);
+/* 172FAC */ bool fn_80172FAC(void);
 /* 173098 */ u8 fn_80173098(int);
 /* 173224 */ u8 gm_80173224(int, int);
-/* 1732D8 */ UNK_RET gm_801732D8(UNK_PARAMS);
-/* 17335C */ UNK_RET gm_8017335C(UNK_PARAMS);
-/* 1733D8 */ UNK_RET gm_801733D8(UNK_PARAMS);
-/* 17341C */ UNK_RET gm_8017341C(UNK_PARAMS);
+/* 1732D8 */ CharacterKind gm_801732D8(u8);
+/* 17335C */ int gm_8017335C(void);
+/* 1733D8 */ int gm_801733D8(void);
+/* 17341C */ int gm_8017341C(void);
 /* 173460 */ u8 gm_80173460(s8);
 /* 173498 */ u16 gm_80173498(UNK_PARAMS);
-/* 1734D0 */ u16 gm_801734D0(int);
+/* 1734D0 */ u16 gm_801734D0(u32);
 /* 173510 */ bool fn_80173510(void);
 /* 1735F0 */ bool fn_801735F0(void);
 /* 173644 */ bool fn_80173644(void);

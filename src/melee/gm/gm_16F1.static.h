@@ -2,7 +2,14 @@
 
 #include <melee/gm/types.h>
 
-static u8 lbl_8046DBC8[0xe];
+static struct {
+    u8 x0;
+    u8 x1;
+    struct {
+        u8 x0;
+        u8 x1;
+    } x2[6];
+} lbl_8046DBC8;
 /* 46DBD8 */ static UNK_T lbl_8046DBD8[4];
 
 static int lbl_803D5648[] = {

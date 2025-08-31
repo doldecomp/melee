@@ -852,7 +852,7 @@ struct gmm_retval_EDBC* gmMainLib_8015EDBC(void)
     return &gmMainLib_804D3EE0->thing.unk_30;
 }
 
-u8* gmMainLib_8015EDC8(void)
+struct gmm_x1868_1A8_t* gmMainLib_8015EDC8(void)
 {
     return &gmMainLib_804D3EE0->thing.unk_1A8;
 }
