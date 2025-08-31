@@ -407,10 +407,10 @@ struct ftCommonData {
     /* +580 */ int x580;
     /* +584 */ int x584;
     /* +588 */ int x588;
-    /* +58C */ UNK_T x58C;
-    /* +590 */ UNK_T x590;
-    /* +594 */ UNK_T x594;
-    /* +598 */ UNK_T x598;
+    /* +58C */ float x58C;
+    /* +590 */ float x590;
+    /* +594 */ float open_parasol_threshold;
+    /* +598 */ float close_parasol_threshold;
     /* +59C */ float x59C;
     /* +5A0 */ float x5A0;
     /* +5A4 */ int x5A4;
@@ -1512,7 +1512,7 @@ struct Fighter {
     /* fp+2101:7 */ u8 x2101_bits_8 : 1;
     /* fp+2102 */ s8 x2102;
     /* fp+2103 */ s8 x2103;
-    /* fp+2104 */ s32 x2104;
+    /* fp+2104 */ int x2104;
     /* fp+2108 */ int capture_timer;
     /* fp+210C */ u8 wall_jump_input_timer;
     /* fp+210C */ u8 filler_x210C[3];

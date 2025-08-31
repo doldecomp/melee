@@ -17,11 +17,11 @@ struct ftPeach_FighterVars {
     /* fp+222C */ bool has_float;
     /* fp+2230 */ float x4;
     /* fp+2234 */ FtMotionId attacks4_motion_id;
-    /* fp+2238 */ HSD_GObj* unk_item_gobj;
-    /* fp+223C */ HSD_GObj* parasol_gobj;
+    /* fp+2238 */ Item_GObj* parasol_gobj_0;
+    /* fp+223C */ Item_GObj* parasol_gobj_1;
     /* fp+2240 */ bool specialairn_used;
-    /* fp+2244 */ HSD_GObj* toad_gobj;
-    /* fp+2248 */ HSD_GObj* veg_gobj;
+    /* fp+2244 */ Item_GObj* toad_gobj;
+    /* fp+2248 */ Item_GObj* veg_gobj;
 };
 
 typedef struct ftPe_DatAttrs {

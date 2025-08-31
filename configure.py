@@ -666,7 +666,10 @@ config.libs = [
             Object(NonMatching, "melee/ft/ftlipstickswing.c"),
             Object(NonMatching, "melee/ft/ft_0CDD.c"),
             Object(Matching, "melee/ft/ftattacks4combo.c"),
-            Object(NonMatching, "melee/ft/ft_0CEE.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolOpen.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolFallSpecial.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemParasolDamageFall.c"),
             Object(NonMatching, "melee/ft/ftchangeparam.c"),
             Object(NonMatching, "melee/ft/ft_0D14.c"),
             # Common throw-related

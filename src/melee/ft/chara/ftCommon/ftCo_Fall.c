@@ -9,7 +9,6 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
@@ -25,6 +24,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_HammerFall.h"
 #include "ftCommon/ftCo_HammerWait.h"
+#include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_SpecialAir.h"

@@ -7,16 +7,15 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0CEE.h"
 #include "ft/ft_0D14.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "mp/mplib.h"
-#include "un/un_2FC9.h"
 #include "vi/vi1202.h"
 
 #include <common_structs.h>
@@ -173,8 +172,9 @@ void ftCo_80096D28(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->mv.co.fallspecial.x10 || fp->self_vel.y < ftCo_800D0EC8(fp)) {
-        ftCo_LandingFallSpecial_Enter(gobj, fp->mv.co.fallspecial.allow_interrupt,
-                      fp->mv.co.fallspecial.x14);
+        ftCo_LandingFallSpecial_Enter(gobj,
+                                      fp->mv.co.fallspecial.allow_interrupt,
+                                      fp->mv.co.fallspecial.x14);
     } else {
         ft_8008A2BC(gobj);
     }

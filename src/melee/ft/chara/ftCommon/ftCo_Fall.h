@@ -4,7 +4,6 @@
 #include <placeholder.h>
 
 #include "ft/forward.h"
-#include "ftCommon/forward.h"
 
 /* 0CC730 */ void ftCo_Fall_Enter(Fighter_GObj* gobj);
 /* 0CC830 */ void ftCo_Fall_Enter_YoshiEgg(Fighter_GObj* gobj);

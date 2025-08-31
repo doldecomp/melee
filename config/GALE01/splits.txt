@@ -933,9 +933,21 @@ melee/ft/ftattacks4combo.c:
 	.sdata      start:0x804D3CD0 end:0x804D3CD2
 	.sdata2     start:0x804D8F30 end:0x804D8F38
 
-melee/ft/ft_0CEE.c:
-	.text       start:0x800CEE70 end:0x800CF594
-	.sdata2     start:0x804D8F38 end:0x804D8F60
+melee/ft/chara/ftCommon/ftCo_ItemParasolOpen.c:
+	.text       start:0x800CEE70 end:0x800CF280
+	.sdata2     start:0x804D8F38 end:0x804D8F44
+
+melee/ft/chara/ftCommon/ftCo_ItemParasolFall.c:
+	.text       start:0x800CF280 end:0x800CF3C8
+	.sdata2     start:0x804D8F48 end:0x804D8F50
+
+melee/ft/chara/ftCommon/ftCo_ItemParasolFallSpecial.c:
+	.text       start:0x800CF3C8 end:0x800CF4DC
+	.sdata2     start:0x804D8F50 end:0x804D8F58
+
+melee/ft/chara/ftCommon/ftCo_ItemParasolDamageFall.c:
+	.text       start:0x800CF4DC end:0x800CF594
+	.sdata2     start:0x804D8F58 end:0x804D8F60
 
 melee/ft/ftchangeparam.c:
 	.text       start:0x800CF594 end:0x800D14E4
