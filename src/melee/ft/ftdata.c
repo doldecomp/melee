@@ -32,6 +32,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Attack1.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_AttackDash.h"
@@ -107,6 +108,7 @@
 #include "ftCommon/ftCo_Shouldered.h"
 #include "ftCommon/ftCo_StopCeil.h"
 #include "ftCommon/ftCo_StopWall.h"
+#include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/ftCo_ThrownKirby.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
 #include "ftCommon/ftCo_ThrownMewtwo.h"

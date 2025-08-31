@@ -943,11 +943,19 @@ melee/ft/ftchangeparam.c:
 	.sdata2     start:0x804D8F60 end:0x804D8F68
 
 melee/ft/ft_0D14.c:
-	.text       start:0x800D14E4 end:0x800DF938
+	.text       start:0x800D14E4 end:0x800DE3FC
 	.rodata     start:0x803B7500 end:0x803B7520
 	.data       start:0x803C6FF0 end:0x803C70F0
 	.sdata      start:0x804D3CD8 end:0x804D3D78
-	.sdata2     start:0x804D8F68 end:0x804D9140
+	.sdata2     start:0x804D8F68 end:0x804D9110
+
+melee/ft/chara/ftCommon/ftCo_Thrown.c:
+	.text       start:0x800DE3FC end:0x800DE9B8
+	.sdata2     start:0x804D9110 end:0x804D9118
+
+melee/ft/chara/ftCommon/ftCo_AppealS.c:
+	.text       start:0x800DE9B8 end:0x800DF938
+	.sdata2     start:0x804D9118 end:0x804D9140
 
 melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c:
 	.text       start:0x800DF938 end:0x800DFA98

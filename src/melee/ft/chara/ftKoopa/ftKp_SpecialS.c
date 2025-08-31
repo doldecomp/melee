@@ -15,6 +15,7 @@
 
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
 
 #include "ftKoopa/forward.h"

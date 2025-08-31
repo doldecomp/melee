@@ -5,13 +5,15 @@
 
 #include "forward.h"
 
-#include "ft/ft_0D14.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
+
+#include "ftCommon/ftCo_AppealS.h"
+
 #include "ftMario/forward.h"
 
 #include "ftMario/ftMr_Init.h"
@@ -318,7 +320,7 @@ void ftDr_Init_80149910(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    ftCo_800DEAE8(gobj, 0x155, 0x156);
+    ftCo_800DEAE8(gobj, ftMr_MS_AppealSR, ftMr_MS_AppealSL);
     fp->cmd_vars[0] = 1;
     fp->cmd_vars[1] = 0;
 }

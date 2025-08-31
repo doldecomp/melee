@@ -16,6 +16,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_Jump.h"

@@ -25,9 +25,7 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
-
 #include "lb/lb_00B0.h"
-
 #include "lb/lbcollision.h"
 #include "lb/types.h"
 #include "pl/plbonuslib.h"
@@ -37,35 +35,6 @@
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
-
-// types
-enum EntityKind {
-    EntityKind_None,
-    EntityKind_Fighter,
-    EntityKind_Item,
-};
-
-typedef struct DmgLogEntry {
-    /*  +0 */ enum EntityKind x0;
-    /*  +4 */ FighterKind kind;
-    /*  +8 */ HSD_GObj* gobj;
-    /// @todo Might be a fake union
-    /*  +C */ union {
-        HitCapsule* hit0;
-        DynamicsDesc* unk_anim0;
-    };
-    /// @todo Might be a fake union
-    /* +10 */ union {
-        HitCapsule* hit1;
-        FighterHurtCapsule* hurt1;
-    };
-    /* +14 */ Vec3 pos;
-    /* +20 */ int x20;
-    /* +24 */ size_t size_of_xC;
-} DmgLogEntry;
-STATIC_ASSERT(sizeof(DmgLogEntry) == 0x28);
-
-// functions
 
 /* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry** log,
                                          int idx, bool);
@@ -304,8 +273,9 @@ void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
     }
 }
 
-static inline void ftColl_80076808_dontinline(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
-                     bool arg4)
+static inline void ftColl_80076808_dontinline(Fighter* fp, HitCapsule* hit,
+                                              int arg2, void* victim,
+                                              bool arg4)
 {
     ftColl_80076808(fp, hit, arg2, victim, arg4);
 }
@@ -453,8 +423,8 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     return false;
 }
 
-static inline bool ftColl_8007699C_dontinline(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
-                     HitCapsule* hit1)
+static inline bool ftColl_8007699C_dontinline(Fighter* fp0, HitCapsule* hit0,
+                                              Fighter* fp1, HitCapsule* hit1)
 {
     ftColl_8007699C(fp0, hit0, fp1, hit1);
 }
@@ -766,7 +736,9 @@ static inline int getUnkVal(Fighter* fp, int i)
 void ftColl_80078384(Fighter* fp, FighterHurtCapsule* arg1, HitCapsule* arg2)
 {
     bool var_r0;
-    if (fp->x1988 != 0 || fp->x198C != 0 || fp->x221D_b6 || arg1->capsule.state != HurtCapsule_Enabled) {
+    if (fp->x1988 != 0 || fp->x198C != 0 || fp->x221D_b6 ||
+        arg1->capsule.state != HurtCapsule_Enabled)
+    {
         ft_PlaySFX(fp, ftColl_803C0C40[arg2->sfx_severity], 0x7F, 0x40);
         var_r0 = true;
     } else {
@@ -800,14 +772,16 @@ void ftColl_80078538(void)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2, int arg3,
-                     int arg4, UNK_T arg5, int arg6, UNK_T arg7, int arg8);
+void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
+                     int arg3, int arg4, UNK_T arg5, int arg6, UNK_T arg7,
+                     int arg8);
 
 void ftColl_80078710(Fighter_GObj* arg0, Fighter_GObj* arg1, UNK_T arg2)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     PAD_STACK(8);
-    ftColl_8007861C(arg0, arg1, 1, fp->kind, fp->x2070.x2070_int, &fp->x2074, fp->x2074.x2088, arg2, 0);
+    ftColl_8007861C(arg0, arg1, 1, fp->kind, fp->x2070.x2070_int, &fp->x2074,
+                    fp->x2074.x2088, arg2, 0);
 }
 
 void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
@@ -878,26 +852,24 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                  (!victim_fp->x222A_b0 &&
                   (!gm_8016B168() || gm_8016B0D4() ||
                    victim_fp->team != this_fp->team) &&
-                  victim_fp->x1988 == 0 &&
-                  victim_fp->x198C == 0 &&
+                  victim_fp->x1988 == 0 && victim_fp->x198C == 0 &&
                   !victim_fp->x221D_b6 &&
-                   !(victim_fp->x1A6A & this_fp->x1A68) &&
-                   !victim_fp->x2224_b2)))
+                  !(victim_fp->x1A6A & this_fp->x1A68) &&
+                  !victim_fp->x2224_b2)))
             {
                 for (i = 0; i < 4; i++) {
                     this_hit = HitCapsuleGetPtr(this_fp, i);
                     if (this_hit->state != HitCapsule_Disabled &&
                         this_hit->element == HitElement_Catch &&
                         ((this_hit->x40_b2 &&
-                           victim_fp->ground_or_air == GA_Air) ||
-                          (this_hit->x40_b3 &&
-                            victim_fp->ground_or_air == GA_Ground)))
+                          victim_fp->ground_or_air == GA_Air) ||
+                         (this_hit->x40_b3 &&
+                          victim_fp->ground_or_air == GA_Ground)))
                     {
                         if (!lbColl_8000ACFC(victim_fp, this_hit)) {
                             for (j = 0; j < victim_fp->hurt_capsules_len; j++)
                             {
-                                if (victim_fp->hurt_capsules[j].is_grabbable)
-                                {
+                                if (victim_fp->hurt_capsules[j].is_grabbable) {
                                     if (lbColl_80007ECC(
                                             this_hit,
                                             &victim_fp->hurt_capsules[j]
@@ -910,8 +882,9 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                                         if (ft_80084CE4(this_fp, victim_fp) ==
                                             false)
                                         {
-                                            ftColl_80076808_dontinline(this_fp, this_hit,
-                                                            0, victim_fp, 0);
+                                            ftColl_80076808_dontinline(
+                                                this_fp, this_hit, 0,
+                                                victim_fp, 0);
                                             ftGrabDist(this_fp, victim_fp);
                                         }
                                         goto next_gobj;

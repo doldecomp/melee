@@ -10,6 +10,7 @@
 #include "ft/ft_0D14.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_Jump.h"
