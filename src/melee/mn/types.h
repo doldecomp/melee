@@ -56,7 +56,7 @@ struct PlayerInitData {
     /*0x07*/ u8 sub_color; // subcolor
     /*0x08*/ s8 handicap;  // handicap
     /*0x09*/ u8 team;      // team
-    /*0x0A*/ s8 xA;        // nametag
+    /*0x0A*/ u8 xA;        // nametag
     /*0x0B*/ u8 xB;
     /*0x0C*/ u8 xC_b0 : 1; ///< rumble enabled
     u8 xC_b1 : 1;

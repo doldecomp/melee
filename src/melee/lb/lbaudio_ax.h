@@ -39,7 +39,7 @@
 /* 024184 */ int lbAudioAx_80024184(int, int, int, int);
 /* 024304 */ UNK_RET lbAudioAx_80024304(UNK_PARAMS);
 /* 02438C */ void lbAudioAx_8002438C(s32);
-/* 0243F4 */ UNK_RET lbAudioAx_800243F4(UNK_PARAMS);
+/* 0243F4 */ UNK_RET lbAudioAx_800243F4(int);
 /* 0244F4 */ UNK_RET fn_800244F4(UNK_PARAMS);
 /* 0245D4 */ void lbAudioAx_800245D4(u8);
 /* 0245F4 */ s32

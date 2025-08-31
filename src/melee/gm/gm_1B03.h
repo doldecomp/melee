@@ -35,7 +35,8 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
                               u8);
 /* 1B06B0 */ void gm_801B06B0(CSSData*, u8 match_type, s8 c_kind, s8 stocks,
                               s8 color, u8, u8 cpu_level, u8 slot);
-/* 1B0730 */ void gm_801B0730(CSSData*, s8*, u8*, u8*, s8*, u8*);
+/* 1B0730 */ void gm_801B0730(CSSData*, s8* ckind, u8* stocks, u8* color,
+                              u8* nametag, u8* cpu_level);
 /* 1B07B4 */ void gm_801B07B4(CSSData*, s8, s8, s8, u8, u8, u8);
 /* 1B07E8 */ void gm_801B07E8(CSSData*, s8*, s8*, s8*, s8*, u8*);
 /* 1B087C */ void gm_801B087C(MinorScene*);

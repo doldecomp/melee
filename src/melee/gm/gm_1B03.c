@@ -412,7 +412,7 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
 #pragma push
 #pragma dont_inline on
 void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
-                 s8* arg4, u8* level)
+                 u8* nametag, u8* level)
 {
     s32 slot;
 
@@ -429,8 +429,8 @@ void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
     if (level != NULL) {
         *level = css_data->data.data.players[slot].cpu_level;
     }
-    if (arg4 != NULL) {
-        *arg4 = css_data->data.data.players[slot].xA;
+    if (nametag != NULL) {
+        *nametag = css_data->data.data.players[slot].xA;
     }
 }
 #pragma pop

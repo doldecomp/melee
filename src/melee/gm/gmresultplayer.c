@@ -35,7 +35,7 @@ void fn_80177748(void)
 {
     MatchEnd* temp_r3;
     int i;
-    int temp_r21;
+    CharacterKind ckind;
     int var_r24;
 
     ResultsData* data = &lbl_8046DBE8;
@@ -44,9 +44,9 @@ void fn_80177748(void)
 
     for (i = 0; i < 4; i++) {
         if (temp_r3->player_standings[i].slot_type != Gm_PKind_NA) {
-            temp_r21 = (s8) temp_r3->player_standings[i].character_kind;
+            ckind = temp_r3->player_standings[i].character_kind;
             HSD_JObjClearFlagsAll(data->player_data[i].jobjs[0], JOBJ_HIDDEN);
-            inline0(data->player_data[i].jobjs[0], gm_80168B34(temp_r21, 0, 0));
+            inline0(data->player_data[i].jobjs[0], gm_80168B34(ckind, 0, 0));
             HSD_JObjClearFlagsAll(data->player_data[i].jobjs[4], JOBJ_HIDDEN);
             if (gm_801743A4(temp_r3->result) != 0) {
                 var_r24 = 4;

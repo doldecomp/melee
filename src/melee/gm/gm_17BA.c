@@ -67,10 +67,7 @@ static inline const char* fn_8017BB94_inline(int arg0, int target)
                 return lbl_803D79D0[target];
             }
         } else {
-            struct {
-                u8 pad[0x198];
-                char namedata[8];
-            }* tmp = GetPersistentNameData(temp_r3);
+            struct gmm_x2FF8_inner* tmp = GetPersistentNameData(temp_r3);
             return tmp->namedata;
         }
     }
