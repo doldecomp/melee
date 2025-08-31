@@ -41,6 +41,7 @@
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
 #include "ftCommon/ftCo_0C35.h"
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Bury.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
@@ -57,7 +58,6 @@
 #include "ftPeach/types.h"
 #include "gm/gm_unsplit.h"
 #include "gr/stage.h"
-#include "gr/types.h"
 #include "if/ifmagnify.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -74,7 +74,6 @@
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 #include "pl/pltrick.h"
-#include "un/un_2FC9.h"
 #include "vi/vi1202.h"
 
 #include <common_structs.h>

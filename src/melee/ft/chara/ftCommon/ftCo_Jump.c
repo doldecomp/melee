@@ -20,6 +20,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_AirCatch.h"
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_EscapeAir.h"
 #include "ftCommon/ftCo_Fall.h"

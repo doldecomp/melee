@@ -11,9 +11,9 @@
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AppealS.h"
 #include "it/types.h"
 
 #include <common_structs.h>

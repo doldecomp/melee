@@ -17,6 +17,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Thrown.h"
 #include "ftMasterHand/types.h"
 #include "pl/player.h"
 
