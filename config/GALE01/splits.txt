@@ -954,12 +954,71 @@ melee/ft/ftchangeparam.c:
 	.data       start:0x803C6F78 end:0x803C6FF0
 	.sdata2     start:0x804D8F60 end:0x804D8F68
 
-melee/ft/ft_0D14.c:
-	.text       start:0x800D14E4 end:0x800DE3FC
+melee/ft/chara/ftCommon/ftCo_KinokoGiantStart.c:
+	.text       start:0x800D14E4 end:0x800D1A8C
+	.sdata2     start:0x804D8F68 end:0x804D8F78
+
+melee/ft/chara/ftCommon/ftCo_KinokoGiantEnd.c:
+	.text       start:0x800D1A8C end:0x800D1E80
+	.sdata2     start:0x804D8F78 end:0x804D8F80
+
+melee/ft/chara/ftCommon/ftCo_KinokoSmallStart.c:
+	.text       start:0x800D1E80 end:0x800D237C
+	.sdata2     start:0x804D8F80 end:0x804D8F88
+
+melee/ft/chara/ftCommon/ftCo_KinokoSmallEnd.c:
+	.text       start:0x800D237C end:0x800D2770
+	.sdata2     start:0x804D8F88 end:0x804D8F90
+
+melee/ft/ft_0D27.c:
+	.text       start:0x800D2770 end:0x800D2D50
+	.data       start:0x803C6FF0 end:0x803C7030
+	.sdata      start:0x804D3CD8 end:0x804D3CE5
+	.sdata2     start:0x804D8F90 end:0x804D8F94
+
+melee/ft/chara/ftCommon/ftCo_ItemScrew.c:
+	.text       start:0x800D2D50 end:0x800D2FA4
+	.sdata2     start:0x804D8F98 end:0x804D8FA0
+
+melee/ft/chara/ftCommon/ftCo_DamageScrew.c:
+	.text       start:0x800D2FA4 end:0x800D3158
+	.sdata2     start:0x804D8FA0 end:0x804D8FA8
+
+melee/ft/ft_0D31.c:
+	.text       start:0x800D3158 end:0x800D5AEC
+	.sdata2     start:0x804D8FA8 end:0x804D8FE0
+
+melee/ft/chara/ftCommon/ftCo_Landing.c:
+	.text       start:0x800D5AEC end:0x800D5F58
+	.data       start:0x803C7030 end:0x803C709C
+	.sdata2     start:0x804D8FE0 end:0x804D8FEC
+
+melee/ft/chara/ftCommon/ftCo_Squat.c:
+	.text       start:0x800D5F58 end:0x800D627C
+	.sdata2     start:0x804D8FF0 end:0x804D8FF8
+
+melee/ft/chara/ftCommon/ftCo_SquatWait.c:
+	.text       start:0x800D627C end:0x800D65D8
+	.sdata2     start:0x804D8FF8 end:0x804D9000
+
+melee/ft/chara/ftCommon/ftCo_SquatRv.c:
+	.text       start:0x800D65D8 end:0x800D67C4
+	.sdata2     start:0x804D9000 end:0x804D9008
+
+melee/ft/chara/ftCommon/ftCo_Attack100.c:
+	.text       start:0x800D67C4 end:0x800DC750
 	.rodata     start:0x803B7500 end:0x803B7520
-	.data       start:0x803C6FF0 end:0x803C70F0
-	.sdata      start:0x804D3CD8 end:0x804D3D78
-	.sdata2     start:0x804D8F68 end:0x804D9110
+	.data       start:0x803C709C end:0x803C70F0
+	.sdata      start:0x804D3CE8 end:0x804D3D78
+	.sdata2     start:0x804D9008 end:0x804D90F0
+
+melee/ft/chara/ftCommon/ftCo_CaptureCut.c:
+	.text       start:0x800DC750 end:0x800DD100
+	.sdata2     start:0x804D90F0 end:0x804D90FC
+
+melee/ft/chara/ftCommon/ftCo_Throw.c:
+	.text       start:0x800DD100 end:0x800DE3FC
+	.sdata2     start:0x804D9100 end:0x804D9110
 
 melee/ft/chara/ftCommon/ftCo_Thrown.c:
 	.text       start:0x800DE3FC end:0x800DE9B8

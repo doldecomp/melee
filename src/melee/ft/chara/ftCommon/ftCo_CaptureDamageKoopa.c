@@ -1,7 +1,9 @@
 #include "ftCo_CaptureDamageKoopa.h"
 
+#include "ftCo_CaptureCut.h"
 #include "ftCo_CaptureKoopa.h"
 #include "ftCo_CaptureWaitKoopa.h"
+#include "ftCo_Throw.h"
 
 #include <platform.h>
 
@@ -9,7 +11,7 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 

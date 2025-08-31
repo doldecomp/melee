@@ -1,13 +1,15 @@
 #include "ftCo_BarrelWait.h"
 
+#include "ftCo_CaptureCut.h"
 #include "ftCo_Damage.h"
 #include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
 
 #include <placeholder.h>
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"

@@ -6,7 +6,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0D14.h"
+#include "ft/ft_0D31.h"
 #include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcommon.h"

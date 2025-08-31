@@ -5,9 +5,9 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/object.h>
+#include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_0852.h>
-#include <melee/ft/ft_0D14.h>
 #include <melee/ft/ftaction.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>
