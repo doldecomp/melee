@@ -954,8 +954,16 @@ melee/ft/chara/ftCommon/ftCo_Thrown.c:
 	.sdata2     start:0x804D9110 end:0x804D9118
 
 melee/ft/chara/ftCommon/ftCo_AppealS.c:
-	.text       start:0x800DE9B8 end:0x800DF938
-	.sdata2     start:0x804D9118 end:0x804D9140
+	.text       start:0x800DE9B8 end:0x800DEE84
+	.sdata2     start:0x804D9118 end:0x804D912C
+
+melee/ft/ft_0DF0.c:
+	.text       start:0x800DEE84 end:0x800DF1C8
+	.sdata2     start:0x804D9130 end:0x804D9138
+
+melee/ft/ft_0DF1.c:
+	.text       start:0x800DF1C8 end:0x800DF938
+	.sdata2     start:0x804D9138 end:0x804D913C
 
 melee/ft/chara/ftDonkey/ftDk_HeavyWait0.c:
 	.text       start:0x800DF938 end:0x800DFA98
