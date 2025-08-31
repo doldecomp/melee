@@ -27,6 +27,7 @@
 #include "ft/ft_0C88.h"
 #include "ft/ft_0C8C.h"
 #include "ft/ft_0D14.h"
+#include "ft/ft_0DF0.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
