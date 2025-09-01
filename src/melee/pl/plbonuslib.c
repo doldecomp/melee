@@ -458,7 +458,7 @@ void pl_8003E17C(int player_id, int arg1,
     }
 }
 
-int pl_8003E2CC(int arg0, int pl_itemlog_kind)
+u32 pl_8003E2CC(int arg0, int pl_itemlog_kind)
 {
     HSD_ASSERTMSG(555, pl_itemlog_kind < 39,
                   "pl_itemlog_kind < Pl_ItemLog_Terminate");
@@ -467,7 +467,7 @@ int pl_8003E2CC(int arg0, int pl_itemlog_kind)
         ->x0_staleMoveTable.x674[pl_itemlog_kind];
 }
 
-int pl_8003E334(int arg0, int pl_itemlog_kind)
+u32 pl_8003E334(int arg0, int pl_itemlog_kind)
 {
     HSD_ASSERTMSG(564, pl_itemlog_kind < 39,
                   "pl_itemlog_kind < Pl_ItemLog_Terminate");
@@ -492,7 +492,7 @@ int pl_8003E39C(int arg0)
     return sum;
 }
 
-int pl_8003E420(int arg0)
+u32 pl_8003E420(int arg0)
 {
     int sum = 0;
     int pl_itemlog_kind;
@@ -523,16 +523,16 @@ void pl_8003E70C(Item_GObj* igobj)
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(ftLib_80086BE0(temp_r30));
     temp_r3 = itGetKind(igobj);
-    temp_r31->x0_staleMoveTable.x5C4[temp_r3] += 1;
+    temp_r31->x0_staleMoveTable.total_attack_count_struct.x598[temp_r3] += 1;
 }
 
-int pl_8003E7D4(int arg0, int kind)
+u32 pl_8003E7D4(int arg0, int kind)
 {
     HSD_ASSERTMSG(649, 0xA1 <= kind && kind < 0xBF,
                   "It_PKind_Start <= kind && kind < It_PKind_Terminate");
 
     return Player_GetStaleMoveTableIndexPtr2(arg0)
-        ->x0_staleMoveTable.x5C4[kind];
+        ->x0_staleMoveTable.total_attack_count_struct.x598[kind];
 }
 
 void pl_8003E854(int arg0, int arg1, Item_GObj* arg2)
@@ -1329,12 +1329,12 @@ int pl_80040A54(int arg0)
 
 int pl_80040A78(int arg0)
 {
-    return Player_GetTotalAttackCountPtr(arg0)->xD0;
+    return Player_GetTotalAttackCountPtr(arg0)->x4[0x33];
 }
 
 int pl_80040A9C(int arg0)
 {
-    int* val = &Player_GetTotalAttackCountPtr(arg0)->xCC;
+    u32* val = &Player_GetTotalAttackCountPtr(arg0)->x4[0x32];
     int sum = 0;
     unsigned int cursor_i = 51;
     int ctr;

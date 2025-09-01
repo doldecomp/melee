@@ -64,11 +64,11 @@ struct lbl_803D6300_t lbl_803D6300[] = {
     {0x0042, 0x0000, NULL},
 };
 
-int fn_8016F180(int arg0)
+int fn_8016F180(int kind)
 {
     struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
-    while (curr->x0 != arg0) {
-        if (curr->x0 == 0x29A) {
+    while (curr->kind != kind) {
+        if (curr->kind == 0x29A) {
             return 0;
         }
         curr++;
@@ -76,28 +76,27 @@ int fn_8016F180(int arg0)
     return curr->x4;
 }
 
-int gmDecisionGetType(int kind)
+Gm_DecType gmDecisionGetType(int kind)
 {
-    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
-    while (curr->x0 != kind) {
-        if (curr->x0 == 0x29A) {
-            return 0;
+    struct lbl_803D5A4C_t* curr;
+    for (curr = lbl_803D5A4C; curr->kind != kind; curr++) {
+        if (curr->kind == 0x29A) {
+            return Gm_DecType_Flag;
         }
-        curr++;
     }
     return curr->x5;
 }
 
 short fn_8016F1F0(int idx)
 {
-    return lbl_803D5A4C[idx].x0;
+    return lbl_803D5A4C[idx].kind;
 }
 
-int gm_8016F208(int arg0)
+int gm_8016F208(int kind)
 {
     struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
-    while (curr->x0 != arg0) {
-        if (curr->x0 == 0x29A) {
+    while (curr->kind != kind) {
+        if (curr->kind == 0x29A) {
             return 0;
         }
         curr++;
@@ -113,11 +112,11 @@ int fn_8016F280(int arg0)
     return gm_8016F208(arg0) - 2;
 }
 
-int gm_8016F2F8(int arg0, u8 arg1)
+int gm_8016F2F8(int kind, u8 arg1)
 {
     struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
-    while (curr->x0 != arg0) {
-        if (curr->x0 == 0x29A) {
+    while (curr->kind != kind) {
+        if (curr->kind == 0x29A) {
             return -1;
         }
         curr++;

@@ -7,8 +7,13 @@
 #include <melee/gm/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+typedef enum Gm_DecType {
+    Gm_DecType_Flag,  ///< true/false boolean player bonus
+    Gm_DecType_Point, ///< integer-valued player bonus
+} Gm_DecType;
+
 /* 16F180 */ int fn_8016F180(int);
-/* 16F1B8 */ int gmDecisionGetType(int kind);
+/* 16F1B8 */ Gm_DecType gmDecisionGetType(int kind);
 /* 16F1F0 */ short fn_8016F1F0(int idx);
 /* 16F208 */ int gm_8016F208(int);
 /* 16F280 */ int fn_8016F280(int);
@@ -35,7 +40,7 @@
 /* 171DC4 */ void fn_80171DC4(HSD_GObj*);
 /* 1720B4 */ int gm_801720B4(void);
 /* 1720F8 */ int gm_801720F8(void);
-/* 172140 */ UNK_RET gm_80172140(UNK_PARAMS);
+/* 172140 */ int gm_80172140(UNK_PARAMS);
 /* 172174 */ UNK_RET gm_80172174(UNK_PARAMS);
 /* 17219C */ UNK_RET gm_8017219C(UNK_PARAMS);
 /* 1721EC */ bool gm_801721EC(void);

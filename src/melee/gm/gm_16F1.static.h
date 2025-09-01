@@ -60,10 +60,10 @@ static int lbl_803D5648[] = {
 };
 
 struct lbl_803D5A4C_t {
-    /* +0 */ short x0;
+    /* +0 */ short kind;
     /* +2 */ u16 x2;
     /* +4 */ u8 x4;
-    /* +5 */ u8 x5;
+    /* +5 */ u8 x5; ///< Gm_DecType
     /* +6 */ u8 x6;
 };
 
