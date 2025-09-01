@@ -16,6 +16,7 @@
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmadventure.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
@@ -672,7 +673,17 @@ u8 gm_8017E430(void)
 
 /// #gm_8017E440
 
-/// #gm_8017E48C
+int gm_8017E48C(MinorScene* scene)
+{
+    int count = 0;
+    int i;
+    for (i = 0; scene->idx != gm_803DE1B8_MinorScenes[i].idx; i++) {
+        if (gm_803DE1B8_MinorScenes[i].info.class_id == 2) {
+            count++;
+        }
+    }
+    return count;
+}
 
 /// #gm_8017E4C4
 

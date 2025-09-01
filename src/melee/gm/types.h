@@ -651,14 +651,14 @@ struct Unk1PData {
 struct UnkAdventureData {
     /* 00 */ Unk1PData x0;
     /* 48 */ UNK_T x48;
-    /* 4C */ u8 (*x4C)(MinorScene*, u8, u8);
+    /* 4C */ u8 (*x4C)(int, u8, u8);
     /* 50 */ UNK_T x50;
     /* 54 */ UNK_T x54;
     /* 58 */ UNK_T x58;
     /* 5C */ UNK_T x5C;
     /* 60 */ UNK_T x60;
-    /* 64 */ float (*x64)(MinorScene*, u8);
-    /* 68 */ float (*x68)(MinorScene*, u8);
+    /* 64 */ float (*x64)(int, u8);
+    /* 68 */ float (*x68)(int, u8);
     /* 6C */ UNK_T x6C;
     /* 70 */ UNK_T x70;
     /* 74 */ u8 x74;
