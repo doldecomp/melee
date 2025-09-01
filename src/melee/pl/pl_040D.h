@@ -14,17 +14,17 @@
 /* 041300 */ UNK_RET pl_80041300(UNK_PARAMS);
 /* 04134C */ UNK_RET pl_8004134C(UNK_PARAMS);
 /* 04138C */ UNK_RET fn_8004138C(UNK_PARAMS);
-/* 0414C0 */ UNK_RET pl_800414C0(UNK_PARAMS);
+/* 0414C0 */ float pl_800414C0(int);
 /* 041524 */ void pl_80041524(int);
 /* 0415B0 */ UNK_RET fn_800415B0(UNK_PARAMS);
 /* 041720 */ void pl_80041720(int, int, u16);
 /* 041744 */ void pl_80041744(int, int, u16);
 /* 041770 */ UNK_RET fn_80041770(UNK_PARAMS);
-/* 04182C */ UNK_RET pl_8004182C(UNK_PARAMS);
+/* 04182C */ UNK_RET pl_8004182C(int);
 /* 0418F4 */ void pl_800418F4(int);
 /* 0419AC */ void pl_800419AC(int, int, unsigned short);
 /* 041B08 */ void pl_80041B08(void);
 /* 041BC8 */ UNK_RET fn_80041BC8(UNK_PARAMS);
-/* 041BFC */ UNK_RET pl_80041BFC(UNK_PARAMS);
+/* 041BFC */ UNK_RET pl_80041BFC(int);
 
 #endif
