@@ -222,32 +222,59 @@ static void HSD_PadClamp(HSD_PadStatus* mp)
                        p->clamp_analogABMin, p->clamp_analogABMax);
 }
 
+static inline f32 sq(f32 x)
+{
+    return x * x;
+}
+
+static inline f32 vec2DSqDist(f32 x, f32 y)
+{
+    f32 ret;
+    ret = (x * x) + (y * y);
+    return ret;
+}
+
+static inline f32 vec2Dlen(s8 x, s8 y)
+{
+    return sqrtf(vec2DSqDist(x, y));
+}
+
 static void HSD_PadADConvertCheck1(HSD_PadStatus* mp, s8 x, s8 y, u32 up,
                                    u32 down, u32 left, u32 right)
 {
     PadLibData* p = &HSD_PadLibData;
-    f32 r, a, ha;
-    PAD_STACK(8);
+    f32 r;
+    f32 a;
+    f32 ha;
 
-    r = sqrtf(((f32) x * (f32) x) + ((f32) y * (f32) y));
-    a = atan2f_check(y, x);
+    r = sq(x);
+    r = vec2Dlen(x, y);
+
+    if (fabs(x) == 0.0f) {
+        a = y >= 0 ? 1.5707963267948966 : -1.5707963267948966;
+    } else {
+        a = (f32) atan2f(y, x);
+    }
+
     ha = 0.5F * p->adc_angle;
-    if (!(r < p->adc_th)) {
-        if (a < -2.356194490192345 + ha) {
-            mp->button |= left;
-        }
-        if (a >= -2.356194490192345 - ha && a <= -0.7853981633974483 + ha) {
-            mp->button |= down;
-        }
-        if (a > -0.7853981633974483 - ha && a < 0.7853981633974483 + ha) {
-            mp->button |= right;
-        }
-        if (a >= 0.7853981633974483 - ha && a <= 2.356194490192345 + ha) {
-            mp->button |= up;
-        }
-        if (a > 2.356194490192345 - ha) {
-            mp->button |= left;
-        }
+    if (r < p->adc_th) {
+        return;
+    }
+
+    if (a < -2.356194490192345 + ha) {
+        mp->button |= left;
+    }
+    if (a >= -2.356194490192345 - ha && a <= -0.7853981633974483 + ha) {
+        mp->button |= down;
+    }
+    if (a > -0.7853981633974483 - ha && a < 0.7853981633974483 + ha) {
+        mp->button |= right;
+    }
+    if (a >= 0.7853981633974483 - ha && a <= 2.356194490192345 + ha) {
+        mp->button |= up;
+    }
+    if (a > 2.356194490192345 - ha) {
+        mp->button |= left;
     }
 }
 
