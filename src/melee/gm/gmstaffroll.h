@@ -1,10 +1,11 @@
 #ifndef MELEE_GM_STAFFROLL_H
 #define MELEE_GM_STAFFROLL_H
 
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 /* 1AA644 */ bool gm_801AA644(void);
-/* 1AA664 */ bool gm_801AA664(int);
+/* 1AA664 */ bool gm_801AA664(CharacterKind);
 /* 1AA688 */ bool gm_801AA688(void);
 /* 1AA6D8 */ void gm_801AA6D8(s16);
 /* 1AA6FC */ bool gm_801AA6FC(void);

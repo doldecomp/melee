@@ -477,12 +477,12 @@ void Player_SetSlottype(s32 slot, Gm_PKind value)
     player->slot_type = value;
 }
 
-s8 Player_800325C8(s32 slot, bool b)
+s8 Player_800325C8(CharacterKind kind, bool b)
 {
     if (!b) {
-        return ftMapping_list[slot].internal_id;
+        return ftMapping_list[kind].internal_id;
     } else if (b == 1) {
-        return ftMapping_list[slot].extra_internal_id;
+        return ftMapping_list[kind].extra_internal_id;
     }
 
     return -1;

@@ -1213,7 +1213,7 @@ void gm_801B3F40(MinorScene* arg0)
     temp_r31 = gm_8017E4C4(arg0->idx);
     temp_r3 = gm_8017E424();
     temp_r3->x0.x7 = arg0->idx;
-    temp_r30->x1 = gm_8017BE84((u32) arg0->idx);
+    temp_r30->x1 = gm_8017BE84(arg0->idx);
     temp_r30->x2 = temp_r31->x6;
     temp_r30->x0 = temp_r3->x0.slot;
     temp_ret |= lbAudioAx_80026E84(temp_r3->x0.ckind);
@@ -1368,22 +1368,17 @@ void gm_801B44A0(MinorScene* scene)
     }
 }
 
-struct gm_804DAC18_t {
-    u8 x0; ///< color
-    u8 x1;
-    u8 x2;
-};
-
 void gm_801B45A4(MinorScene* scene)
 {
     CutsceneData* temp_r31 = gm_801A427C(scene);
     UnkAdventureData* temp_r7 = gm_8017E424();
-    struct gm_804DAC18_t sp10 = { 0 };
-    struct gm_804DAC18_t spC = { 0x08, 0x07, 0x21 };
+    u8 colors[3] = { 0 };
+    s8 ckinds[3] = { CKIND_MARIO, CKIND_LUIGI, CHKIND_NONE };
 
-    gm_8017BEC8(temp_r7->x0.ckind, temp_r7->x0.color, &spC, &sp10);
-    temp_r31->x1 = sp10.x0;
-    temp_r31->x3 = sp10.x1;
+    gmRegSetupEnemyColorTable(temp_r7->x0.ckind, temp_r7->x0.color, ckinds,
+                              colors);
+    temp_r31->x1 = colors[0];
+    temp_r31->x3 = colors[1];
 }
 
 void gm_801B461C(MinorScene* scene)
@@ -1581,12 +1576,13 @@ void gm_801B4DAC(MinorScene* scene)
     StartMeleeData* data = gm_801A427C(scene);
     gm_801B4064(scene);
     if (temp_r30->x7C == CKIND_FALCO) {
-        struct gm_804DAC18_t sp10 = { 0x14, 0x21, 0x21 };
-        struct gm_804DAC18_t spC = { 0 };
-        spC.x0 = data->players[1].color;
-        gm_8017BEC8(temp_r30->x0.ckind, temp_r30->x0.color, &sp10, &spC);
+        s8 ckinds[3] = { CKIND_FALCO, CHKIND_NONE, CHKIND_NONE };
+        u8 colors[3] = { 0 };
+        colors[0] = data->players[1].color;
+        gmRegSetupEnemyColorTable(temp_r30->x0.ckind, temp_r30->x0.color,
+                                  ckinds, colors);
         data->players[1].c_kind = CKIND_FALCO;
-        data->players[1].color = spC.x0;
+        data->players[1].color = colors[0];
     }
 }
 

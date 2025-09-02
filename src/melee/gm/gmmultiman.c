@@ -314,7 +314,7 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.x4_4 = false;
     arg0->rules.x4_3 = true;
     arg0->rules.x5_1 = true;
-    arg0->rules.x8 = 1;
+    arg0->rules.is_teams = true;
     arg0->rules.xE = 0x11D;
     arg0->rules.x18 = 0;
     arg0->rules.xB = 2;

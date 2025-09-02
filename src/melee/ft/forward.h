@@ -135,7 +135,10 @@ typedef enum CharacterKind {
     /* 17 */ CKIND_EMBLEM,    // Roy (Emblem)
     /* 18 */ CKIND_PICHU,     // Pichu
     /* 19 */ CKIND_GANON,     // Ganondorf (Ganon)
-    /* 1A */ CKIND_MASTERH,   // Master Hand (MasterH)
+
+    CKIND_PLAYABLE_COUNT,
+
+    /* 1A */ CKIND_MASTERH = CKIND_PLAYABLE_COUNT, // Master Hand (MasterH)
     /* 1B */ CKIND_BOY,       // Male Wireframe (Boy)
     /* 1C */ CKIND_GIRL,      // Female Wireframe (Girl)
     /* 1D */ CKIND_GKOOPS,    // Giga Bowser (GKoops)

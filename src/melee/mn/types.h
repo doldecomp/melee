@@ -138,7 +138,7 @@ struct StartMeleeRules {
 
     u8 x6;
     u8 x7; // end graphic / SFX type
-    u8 x8; // is teams
+    u8 is_teams;
     u8 x9;
     u8 xA;
     s8 xB; // item frequency

@@ -90,7 +90,7 @@ bool gm_801AA644(void)
     return gmMainLib_8015EDD4();
 }
 
-bool gm_801AA664(int arg0)
+bool gm_801AA664(CharacterKind arg0)
 {
     return gm_80164840(arg0);
 }

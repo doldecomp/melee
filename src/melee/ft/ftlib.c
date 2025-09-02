@@ -986,10 +986,10 @@ void ftLib_80087574(s8 ft_kind)
 void ftLib_80087610(u8 arg0)
 {
     u8 i;
-    for (i = 0; i <= 25; i++) {
+    for (i = 0; i <= CKIND_PLAYABLE_COUNT - 1; i++) {
         if (gm_80164840(i)) {
             ftKb_SpecialN_800EED50(Player_800325C8(i, 0), arg0);
-            if ((u8) (i - 18) <= 1) {
+            if (i == CKIND_ZELDA || i == CKIND_SEAK) {
                 ftKb_SpecialN_800EED50(Player_800325C8(i, 1), arg0);
             }
         }

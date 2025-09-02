@@ -514,10 +514,10 @@ u8 gm_80172E74(void)
             count += 1;
         }
     }
-    if (count >= 0xE && !gm_80164840(9)) {
-        return 9;
+    if (count >= 0xE && !gm_80164840(CKIND_MARS)) {
+        return CKIND_MARS;
     }
-    return 0x21;
+    return CHKIND_NONE;
 }
 
 u16 gm_80172F00(u32 arg0)
@@ -583,10 +583,10 @@ int gm_8017335C(void)
 
 int gm_801733D8(void)
 {
-    if (!gm_80164840(3) && fn_80172FAC()) {
-        return 3;
+    if (!gm_80164840(CKIND_GAMEWATCH) && fn_80172FAC()) {
+        return CKIND_GAMEWATCH;
     }
-    return 0x21;
+    return CHKIND_NONE;
 }
 
 int gm_8017341C(void)
@@ -599,10 +599,10 @@ int gm_8017341C(void)
 
 u8 gm_80173460(s8 arg0)
 {
-    if (!gm_80164840(0x14)) {
-        return 0x14;
+    if (!gm_80164840(CKIND_FALCO)) {
+        return CKIND_FALCO;
     }
-    return 0x21;
+    return CHKIND_NONE;
 }
 
 u16 gm_80173498(void)

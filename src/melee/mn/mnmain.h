@@ -68,7 +68,7 @@ typedef struct _mn_unk2 {
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
 /* 22DDA8 */ void mn_8022DDA8_OnEnter(void*);
-/* 22E950 */ int mn_8022E950(int);
+/* 22E950 */ bool mn_8022E950(int);
 /* 22E978 */ void mn_8022E978(u8 item_idx, u8 enable); ///< set/unset item mask bit
 /* 22EA08 */ void mn_8022EA08(char* buf, u32 num);
 /* 22EA78 */ void mn_8022EA78(char* buf, int buf_end, u32 num);

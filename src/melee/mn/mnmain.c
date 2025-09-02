@@ -2845,7 +2845,7 @@ void mn_8022DDA8_OnEnter(void* arg0_)
     lb_8001CE00();
 }
 
-int mn_8022E950(int arg0)
+bool mn_8022E950(int arg0)
 {
     return gm_80164840(gm_8016400C(arg0));
 }

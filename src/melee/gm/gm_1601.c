@@ -137,11 +137,11 @@ static struct lbl_803D5168_t {
 };
 
 static struct {
-    u8 x0;
-    u8 x1;
-    u8 x2;
-    u8 x3;
-} lbl_803D51A0[] = {
+    /* 0 */ u8 ncolors;
+    /* 1 */ u8 x1;
+    /* 2 */ u8 x2;
+    /* 3 */ u8 x3;
+} lbl_803D51A0[CKIND_PLAYABLE_COUNT] = {
     { 0x06, 0x02, 0x05, 0x04 }, { 0x05, 0x02, 0x03, 0x04 },
     { 0x04, 0x01, 0x02, 0x03 }, { 0x04, 0x01, 0x02, 0x03 },
     { 0x06, 0x03, 0x02, 0x04 }, { 0x04, 0x01, 0x02, 0x00 },
@@ -2055,36 +2055,36 @@ void gm_80168FC4(void)
 
 /// #fn_80169000
 
-u8 gm_80169238(u8 arg0)
+u8 gm_80169238(u8 ckind)
 {
-    if (arg0 >= ARRAY_SIZE(lbl_803D51A0)) {
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
     }
-    return lbl_803D51A0[arg0].x0;
+    return lbl_803D51A0[ckind].ncolors;
 }
 
-u8 gm_80169264(u8 arg0)
+u8 gm_80169264(u8 ckind)
 {
-    if (arg0 >= ARRAY_SIZE(lbl_803D51A0)) {
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
     }
-    return lbl_803D51A0[arg0].x1;
+    return lbl_803D51A0[ckind].x1;
 }
 
-u8 gm_80169290(u8 arg0)
+u8 gm_80169290(u8 ckind)
 {
-    if (arg0 >= ARRAY_SIZE(lbl_803D51A0)) {
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
     }
-    return lbl_803D51A0[arg0].x3;
+    return lbl_803D51A0[ckind].x3;
 }
 
-u8 gm_801692BC(u8 arg0)
+u8 gm_801692BC(u8 ckind)
 {
-    if (arg0 >= ARRAY_SIZE(lbl_803D51A0)) {
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
         return 0;
     }
-    return lbl_803D51A0[arg0].x2;
+    return lbl_803D51A0[ckind].x2;
 }
 
 void gm_801692E8(u32 secs, datetime* datetime)
