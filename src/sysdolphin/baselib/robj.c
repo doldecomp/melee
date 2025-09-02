@@ -314,121 +314,129 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 
 static int HSD_RObj_80406E74[3] = { 0x32, 0x33, 0x34 };
 
-static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
-                                  void (*arg2)(void*, int, HSD_ObjData*))
+static inline HSD_RObj* inlined_HSD_RObjGetByType(HSD_RObj* robj, u32 type,
+                                                  u32 subtype)
 {
+    bool has_type;
+    HSD_RObj* curr;
+
+    if (robj == NULL) {
+        return NULL;
+    }
+
+    for (curr = robj; curr != NULL; curr = curr->next) {
+        if (curr->flags & 0x80000000) {
+            has_type = true;
+        } else {
+            has_type = false;
+        }
+
+        if (has_type) {
+            if ((curr->flags & ROBJ_TYPE_MASK) == type &&
+                (!subtype || subtype == (curr->flags & 0xFFFFFFF)))
+            {
+                return curr;
+            }
+        }
+    }
+
+    return NULL;
+}
+
+static void resolveCnsOrientation(HSD_RObj* robj, void* obj,
+                                  void (*update_func)(void*, int,
+                                                      HSD_ObjData*))
+{
+    Mtx mtx0;
+    float sval;
+    u8 _[4];
+    Vec3 v;
+    Mtx mtx1;
     HSD_JObj* jobj;
     int i;
-    float var_f1;
-    float x, y, z;
-    Vec3 v;
-
-    Mtx sp80;
-    HSD_ObjData sp70;
-    Mtx sp40;
 
     HSD_ASSERT(0x276, obj);
 
-    if (robj == NULL) {
-        robj = NULL;
-    } else {
-        while (robj != NULL) {
-            if (((robj->flags & 0x80000000) ? 1 : 0) &&
-                (robj->flags & 0x70000000) == 0x10000000 &&
-                (robj->flags & 0x0FFFFFFF) == 4)
-            {
-                break;
-            }
-            robj = robj->next;
-        }
-    }
+    robj = inlined_HSD_RObjGetByType(robj, 0x10000000, 4);
     if (robj == NULL) {
         return;
     }
     if (!(HSD_JObjGetFlags(robj->u.jobj) & 8) ||
         jobj_parent(robj->u.jobj) == NULL)
     {
-        PSMTXCopy(HSD_JObjGetMtxPtr(robj->u.jobj), sp80);
+        PSMTXCopy(HSD_JObjGetMtxPtr(robj->u.jobj), mtx0);
         jobj = obj;
 
         for (i = 0; i < 3; i++) {
-            sp70.p.x = sp80[0][i];
-            sp70.p.y = sp80[1][i];
-            sp70.p.z = sp80[2][i];
-            var_f1 = VECMag(&sp70.p);
-            if (var_f1 > 1e-10F) {
-                var_f1 = 1.0F / var_f1;
+            HSD_MtxColVec(mtx0, i, &v);
+            sval = VECMag(&v);
+            if (sval > 1e-10F) {
+                sval = 1.0F / sval;
             }
-            v.x = SQ(jobj->mtx[0][i]);
-            v.y = SQ(jobj->mtx[1][i]);
-            v.z = SQ(jobj->mtx[2][i]);
-            var_f1 *= sqrtf(v.x + v.y + v.z);
-            sp70.p.x *= var_f1;
-            sp70.p.y *= var_f1;
-            sp70.p.z *= var_f1;
-            arg2(obj, HSD_RObj_80406E74[i], (HSD_ObjData*) &sp70);
+            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            v.x *= sval;
+            v.y *= sval;
+            v.z *= sval;
+            update_func(obj, HSD_RObj_80406E74[i], (HSD_ObjData*) &v);
         }
     } else {
         HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(robj->u.jobj)),
-                             HSD_JObjGetMtxPtr(robj->u.jobj), sp40);
+                             HSD_JObjGetMtxPtr(robj->u.jobj), mtx1);
         jobj = obj;
 
         for (i = 0; i < 3; i++) {
-            sp70.p.x = sp40[0][i];
-            sp70.p.y = sp40[1][i];
-            sp70.p.z = sp40[2][i];
-            var_f1 = VECMag(&sp70.p);
-            if (var_f1 > 1e-10F) {
-                var_f1 = 1.0F / var_f1;
+            v.x = mtx1[0][i];
+            v.y = mtx1[1][i];
+            v.z = mtx1[2][i];
+            sval = VECMag(&v);
+            if (sval > 1e-10F) {
+                sval = 1.0F / sval;
             }
-            v.x = SQ(jobj->mtx[0][i]);
-            v.y = SQ(jobj->mtx[1][i]);
-            v.z = SQ(jobj->mtx[2][i]);
-            var_f1 *= sqrtf(v.x + v.y + v.z);
-            sp70.p.x *= var_f1;
-            sp70.p.y *= var_f1;
-            sp70.p.z *= var_f1;
-            sp40[0][i] = sp70.p.x;
-            sp40[1][i] = sp70.p.y;
-            sp40[2][i] = sp70.p.z;
+            sval *= HSD_MtxColMagFloat(jobj->mtx, i);
+            v.x *= sval;
+            v.y *= sval;
+            v.z *= sval;
+            mtx1[0][i] = v.x;
+            mtx1[1][i] = v.y;
+            mtx1[2][i] = v.z;
         }
 
         jobj = jobj_parent(robj->u.jobj);
         while (jobj != NULL) {
             if (jobj_parent(jobj) != NULL) {
                 HSD_MtxInverseConcat(HSD_JObjGetMtxPtr(jobj_parent(jobj)),
-                                     HSD_JObjGetMtxPtr(jobj), sp80);
+                                     HSD_JObjGetMtxPtr(jobj), mtx0);
             } else {
-                PSMTXCopy(HSD_JObjGetMtxPtr(jobj), sp80);
+                PSMTXCopy(HSD_JObjGetMtxPtr(jobj), mtx0);
             }
 
             for (i = 0; i < 3; i++) {
-                sp70.p.x = sp80[0][i];
-                sp70.p.y = sp80[1][i];
-                sp70.p.z = sp80[2][i];
-                var_f1 = VECMag(&sp70.p);
-                if (var_f1 > 1e-10F) {
-                    var_f1 = 1.0F / var_f1;
+                v.x = mtx0[0][i];
+                v.y = mtx0[1][i];
+                v.z = mtx0[2][i];
+                sval = VECMag(&v);
+                if (sval > 1e-10F) {
+                    sval = 1.0F / sval;
                 }
-                sp70.p.x *= var_f1;
-                sp70.p.y *= var_f1;
-                sp70.p.z *= var_f1;
-                sp80[0][i] = sp70.p.x;
-                sp80[1][i] = sp70.p.y;
-                sp80[2][i] = sp70.p.z;
+                v.x *= sval;
+                v.y *= sval;
+                v.z *= sval;
+                mtx0[0][i] = v.x;
+                mtx0[1][i] = v.y;
+                mtx0[2][i] = v.z;
             }
-            PSMTXConcat(sp80, sp40, sp40);
+            PSMTXConcat(mtx0, mtx1, mtx1);
             jobj = jobj_parent(jobj);
         }
 
         for (i = 0; i < 3; i++) {
-            sp70.p.x = sp40[0][i];
-            sp70.p.y = sp40[1][i];
-            sp70.p.z = sp40[2][i];
-            arg2(obj, HSD_RObj_80406E74[i], &sp70);
+            v.x = mtx1[0][i];
+            v.y = mtx1[1][i];
+            v.z = mtx1[2][i];
+            update_func(obj, HSD_RObj_80406E74[i], (HSD_ObjData*) &v);
         }
     }
-    arg2(obj, 0x37, NULL);
+    update_func(obj, 0x37, NULL);
 }
 
 static void resolveLimits(HSD_RObj* robj, void* obj,

@@ -1605,7 +1605,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/mtx.c"),
             Object(Matching, "sysdolphin/baselib/util.c"),
             Object(Matching, "sysdolphin/baselib/objalloc.c"),
-            Object(NonMatching, "sysdolphin/baselib/robj.c"),
+            Object(Matching, "sysdolphin/baselib/robj.c"),
             Object(Matching, "sysdolphin/baselib/id.c"),
             Object(Matching, "sysdolphin/baselib/wobj.c"),
             Object(Matching, "sysdolphin/baselib/fog.c"),
