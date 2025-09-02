@@ -134,7 +134,7 @@ void gm_801B9A3C(MinorScene* arg0)
     data->rules.x4_2 = false;
     data->rules.x4_4 = false;
 
-    data->rules.x8 = 0;
+    data->rules.is_teams = false;
     data->rules.xB = -1;
     data->rules.x10 = 0xA;
     data->rules.x34 = 1.0f;

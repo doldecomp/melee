@@ -351,7 +351,7 @@ struct lbl_8046B6A0_24C_t {
     UNK_T x0;
     u8 x4;
     u8 x5; ///< match mode
-    u8 x6; ///< is teams
+    u8 is_teams;
     u32 x8;
     u8 xC;
     u8 xD;

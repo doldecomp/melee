@@ -428,7 +428,7 @@ void gm_801905F0(StartMeleeData* arg0)
 
     gm_80168FC4();
     gm_80167A64(&arg0->rules);
-    arg0->rules.x8 = 0;
+    arg0->rules.is_teams = false;
     arg0->rules.xE = gm_804771C4.x28;
     fn_801640B0(&arg0->rules.x20);
     arg0->rules.x0_0 = temp_r31->mode;

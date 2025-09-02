@@ -170,7 +170,7 @@ void Player_SetPlayerCharacter(s32 slot, CharacterKind value);
 Gm_PKind Player_GetPlayerSlotType(s32 slot);
 Gm_PKind Player_8003248C(s32 slot, bool arg1);
 void Player_SetSlottype(s32 slot, Gm_PKind value);
-s8 Player_800325C8(s32 slot, bool b);
+s8 Player_800325C8(CharacterKind, bool b);
 s8 Player_80032610(s32 slot, bool arg1);
 void Player_LoadPlayerCoords(s32 slot, Vec3* out_vec);
 void Player_80032768(s32 slot, Vec3* arg_vec);

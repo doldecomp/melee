@@ -277,7 +277,7 @@ void gm_801B0348(StartMeleeData* arg0)
     int i;
     int j;
 
-    if (arg0->rules.x8 != 1) {
+    if (arg0->rules.is_teams != true) {
         return;
     }
 

@@ -300,18 +300,18 @@ void gm_8017C838(void)
     temp_r30 = gm_8017E424();
     temp_r3 = gm_8016AE38();
     var_r31 = sp10;
-    sp10[0] = 0x21;
-    sp10[1] = 0x21;
-    sp10[2] = 0x21;
+    sp10[0] = FTKIND_NONE;
+    sp10[1] = FTKIND_NONE;
+    sp10[2] = FTKIND_NONE;
     switch (temp_r3->x24C8.xE) {
     case 0x3B:
-        sp10[0] = 0xE;
+        sp10[0] = FTKIND_YOSHI;
         break;
     case 0x3F:
-        sp10[0] = 6;
+        sp10[0] = FTKIND_LINK;
         break;
     case 0x44:
-        sp10[0] = 4;
+        sp10[0] = FTKIND_KIRBY;
         if (temp_r30->x0.ckind == CKIND_KIRBY && temp_r30->x0.color == 0) {
             var_r3 = 1;
         } else {
@@ -321,20 +321,20 @@ void gm_8017C838(void)
         break;
     case 0x48:
         sp10[0] = 0xC;
-        if (gm_80164840(0x18) != 0) {
-            sp10[1] = 0x17;
+        if (gm_80164840(CKIND_PICHU) != 0) {
+            sp10[1] = FTKIND_PICHU;
         }
-        if (gm_80164840(0xF) != 0) {
-            sp10[2] = 0xF;
+        if (gm_80164840(CKIND_PURIN) != 0) {
+            sp10[2] = FTKIND_PURIN;
         }
         break;
     case 0x4C:
-        sp10[0] = 0xA;
-        sp10[1] = 0xB;
+        sp10[0] = FTKIND_POPO;
+        sp10[1] = FTKIND_NANA;
         break;
     case 0x4E:
-        sp10[0] = 0x1D;
-        sp10[1] = 0x1E;
+        sp10[0] = FTKIND_BOY;
+        sp10[1] = FTKIND_GIRL;
         break;
     }
 
