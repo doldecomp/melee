@@ -53,9 +53,8 @@ static inline void ftCo_Barrel_ApplyKnockback(Fighter* fp, float kb_angle,
     fp->dmg.x1860_element = hit->element;
 }
 
-static FtMotionId ftCo_ItemParasolGetFallMotionId(Fighter_GObj* gobj,
-                                                  ftPeach_MotionState pe_msid,
-                                                  FtMotionId co_msid)
+static inline FtMotionId ftCo_ItemParasolGetFallMotionId(
+    Fighter_GObj* gobj, ftPeach_MotionState pe_msid, FtMotionId co_msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->kind == FTKIND_PEACH && fp->fv.pe.parasol_gobj_0 != NULL) {
