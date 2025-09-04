@@ -581,7 +581,7 @@ int gm_8017335C(void)
     return 0x148;
 }
 
-int gm_801733D8(void)
+u8 gm_801733D8(void)
 {
     if (!gm_80164840(CKIND_GAMEWATCH) && fn_80172FAC()) {
         return CKIND_GAMEWATCH;
@@ -589,7 +589,7 @@ int gm_801733D8(void)
     return CHKIND_NONE;
 }
 
-int gm_8017341C(void)
+u16 gm_8017341C(void)
 {
     if (gmMainLib_8015D5DC() && !gm_80164430(0x1C)) {
         return 0x1C;

@@ -132,7 +132,7 @@ struct gmm_x1F2C {
         s32 x88;
         s32 x8C;
         s32 x90;
-        s32 x94;
+        u32 x94;
         s32 x98;
         s32 x9C;
         u16 xA0;
@@ -321,8 +321,8 @@ struct gmm_x0 {
         /* 0x0580 */ u8 x50[4]; ///< character color
         struct gmm_x0_584_t {
             /* 0x0584 */ s8 unk_584;
-            /* 0x0585 */ s8 unk_585;
-            /* 0x0586 */ s8 unk_586;
+            /* 0x0585 */ u8 unk_585;
+            /* 0x0586 */ u8 unk_586;
             /* 0x0587 */ s8 unk_587;
         } unk_584;
         /* 0x0588 */ s8 unk_588[4];   /* inferred */

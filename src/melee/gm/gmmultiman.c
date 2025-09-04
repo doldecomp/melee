@@ -7,43 +7,50 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
+#include <melee/gr/ground.h>
 #include <melee/lb/lbcardgame.h>
 #include <melee/lb/lbcardnew.h>
 #include <melee/lb/lbdvd.h>
+#include <melee/lb/lbtime.h>
 #include <melee/lb/types.h>
 
-extern CSSData gm_804950F0;
-extern VsModeData gm_80495238;
-extern MatchExitInfo gm_80495370;
-extern StartMeleeData gm_80490AA8;
-extern StartMeleeData gm_80490BE0;
-extern StartMeleeData gm_80490960;
-extern u8 gm_804D68E8;
-extern u8 gm_804D68E9;
-extern u8 gm_804D68F0;
-extern s8 gm_804D68F1;
+static CSSData gm_80490960;
+static StartMeleeData gm_80490AA8;
+static MatchExitInfo gm_80490BE0[2]; // second entry is just bss padding
+static CSSData gm_804950F0;
+static StartMeleeData gm_80495238;
+static MatchExitInfo gm_80495370;
+
+static u8 gm_804D68E8;
+static u8 gm_804D68E9;
+#pragma push
+#pragma force_active on
+static u32 pad;
+#pragma pop
+static u8 gm_804D68F0;
+static s8 gm_804D68F1;
 
 MinorScene gm_803DECB8_MinorScenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        3,
         0,
         gm_801B632C,
         gm_801B63C4,
         {
-            0x08,
+            MN_CSS,
             &gm_80490960,
             &gm_80490960,
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        3,
         0,
         gm_801B6428,
         gm_801B65D4,
         {
-            0x02,
+            MN_VS,
             &gm_80490AA8,
             &gm_80490BE0,
         },
@@ -53,8 +60,8 @@ MinorScene gm_803DECB8_MinorScenes[] = {
 
 MinorScene gm_803DED00_MinorScenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        3,
         0,
         gm_801B6AD8,
         gm_801B6B70,
@@ -65,8 +72,8 @@ MinorScene gm_803DED00_MinorScenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        3,
         0,
         gm_801B6BE8,
         gm_801B6F44,
@@ -81,8 +88,8 @@ MinorScene gm_803DED00_MinorScenes[] = {
 
 MinorScene gm_803DED48_MinorScenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        3,
         0,
         gm_801B7044,
         gm_801B70DC,
@@ -93,8 +100,8 @@ MinorScene gm_803DED48_MinorScenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        3,
         0,
         gm_801B7154,
         gm_801B74F0,
@@ -109,8 +116,8 @@ MinorScene gm_803DED48_MinorScenes[] = {
 
 MinorScene gm_803DED90_MinorScenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        3,
         0,
         gm_801B75F0,
         gm_801B7688,
@@ -121,8 +128,8 @@ MinorScene gm_803DED90_MinorScenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        3,
         0,
         gm_801B7700,
         gm_801B7AA0,
@@ -137,8 +144,8 @@ MinorScene gm_803DED90_MinorScenes[] = {
 
 MinorScene gm_803DEDD8_MinorScenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        3,
         0,
         gm_801B7B74,
         gm_801B7C0C,
@@ -149,8 +156,8 @@ MinorScene gm_803DEDD8_MinorScenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        3,
         0,
         gm_801B7C84,
         gm_801B8024,
@@ -165,8 +172,8 @@ MinorScene gm_803DEDD8_MinorScenes[] = {
 
 MinorScene gm_803DEE20_MinorScenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        3,
         0,
         gm_801B8110,
         gm_801B81A8,
@@ -177,8 +184,8 @@ MinorScene gm_803DEE20_MinorScenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        3,
         0,
         gm_801B8220,
         gm_801B8580,
@@ -193,8 +200,8 @@ MinorScene gm_803DEE20_MinorScenes[] = {
 
 MinorScene gm_803DEE68_MinorScenes[] = {
     {
-        0x00,
-        0x03,
+        0,
+        3,
         0,
         gm_801B863C,
         gm_801B86D4,
@@ -205,8 +212,8 @@ MinorScene gm_803DEE68_MinorScenes[] = {
         },
     },
     {
-        0x01,
-        0x03,
+        1,
+        3,
         0,
         gm_801B874C,
         gm_801B8AF8,
@@ -224,18 +231,177 @@ UNK_T gm_801B6320(void)
     return &gmMainLib_804D3EE0->unk_530.unk_584;
 }
 
-/// #gm_801B632C
+void gm_801B632C(MinorScene* arg0)
+{
+    struct gmm_x0_584_t* temp_r31 = &gmMainLib_804D3EE0->unk_530.unk_584;
+    CSSData* temp_r30 = gm_801A427C(arg0);
 
-/// #gm_801B63C4
+    if (gm_804D68E9 != 0) {
+        lb_8001C550();
+        lb_8001D164(0);
+        lb_8001CE00();
+    }
+    gm_80167A64(&temp_r30->data.data.rules);
+    gm_801B06B0(temp_r30, 0xF, temp_r31->unk_584, 1, temp_r31->unk_585, temp_r31->unk_586, 0, gm_804D68E8);
+    lbDvd_800174BC();
+    gm_804D68E9 = lbTime_8000AF74(gm_804D68E9, 1);
+}
 
-/// #gm_801B6428
+void gm_801B63C4(MinorScene* arg0)
+{
+    struct gmm_x0_584_t* temp_r31 = &gmMainLib_804D3EE0->unk_530.unk_584;
+    CSSData* temp_r3 = gm_801A4284(arg0);
 
-/// #gm_801B65D4
+    if (temp_r3->pending_scene_change == 2) {
+        gm_801A42F8(1);
+        return;
+    }
+
+    gm_801B0730(temp_r3, &temp_r31->unk_584, NULL, &temp_r31->unk_585, &temp_r31->unk_586, NULL);
+    gm_80168F88();
+}
+
+void gm_801B6428(MinorScene* arg0)
+{
+    struct gmm_x0_584_t* temp_r31;
+    StartMeleeData* temp_r3 = gm_801A427C(arg0);
+    s32 temp_r3_2;
+    u8 var_r4_2;
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_530.unk_584;
+
+    temp_r3->rules = gm_80490960.data.data.rules;
+
+    temp_r3->rules.x0_0 = 1;
+    temp_r3->rules.is_teams = false;
+    temp_r3->rules.x0_6 = true;
+    temp_r3->rules.x10 = 0;
+    temp_r3->rules.x0_7 = true;
+    temp_r3->rules.timer_shows_hours = true;
+    temp_r3->rules.x4_2 = true;
+    temp_r3->rules.x2_5 = false;
+    temp_r3->rules.x5_1 = true;
+    temp_r3->rules.x4_3 = true;
+    temp_r3->rules.x4_4 = false;
+    temp_r3->rules.x3_1 = false;
+    temp_r3->rules.x3_3 = true;
+    temp_r3->rules.x3_2 = true;
+    temp_r3->rules.xC = -1;
+    temp_r3->rules.x18 = 0;
+    temp_r3->rules.x20 = 0;
+    temp_r3->rules.x3_7 = true;
+    temp_r3->rules.x9 = 1;
+    temp_r3->rules.xB = -1;
+    temp_r3->rules.x3C = gm_80165290;
+    gm_80167A14(temp_r3->players);
+    if (temp_r31->unk_584 == 0xE) {
+        var_r4_2 = 0x20;
+    } else {
+        var_r4_2 = temp_r31->unk_584;
+    }
+    gm_801B0620(temp_r3->players, var_r4_2, temp_r31->unk_585, 1, gm_804D68E8);
+    temp_r3->players[0].xA = temp_r31->unk_586;
+    temp_r3->players[0].xC_b1 = false;
+    temp_r3->rules.xE = gm_801647F8(temp_r3->players[0].c_kind);
+    {
+        PreloadCacheScene* scene = lbDvd_8001822C();
+        scene->game_cache.stage_id = temp_r3->rules.xE;
+    }
+    lbDvd_80018254();
+    gm_8016F088(temp_r3);
+}
+
+void gm_801B65D4(MinorScene* arg0)
+{
+    s32 temp_r25;
+    u8 temp_r25_2;
+    s32 var_r29;
+    s32* temp_r26;
+    u32* temp_r31;
+    struct gmm_retval_ED98* temp_r3_5;
+    struct gmm_retval_EDB0* temp_r3_6;
+    struct gmm_retval_EDBC* temp_r3_3;
+    struct gmm_x0_584_t* temp_r28;
+    u16 temp_r3_8;
+    u32 temp_r0;
+    u8 temp_r3_2;
+    MatchExitInfo* temp_r3;
+    s32 sp14;
+    s32 sp10;
+
+    PAD_STACK(4);
+
+    var_r29 = 0;
+    temp_r3 = gm_801A4284(arg0);
+    temp_r28 = &gmMainLib_804D3EE0->unk_530.unk_584;
+    gm_80162968(temp_r3->match_end.frame_count / 60);
+    gm_8016247C(temp_r3->match_end.player_standings[0].xE);
+    if (temp_r3->match_end.result == 8) {
+        gm_SetScenePendingMinor(1U);
+        return;
+    }
+    temp_r3_2 = gm_80164024(temp_r28->unk_584);
+    temp_r31 = gmMainLib_8015D438(temp_r3_2);
+    temp_r26 = gmMainLib_8015D450(temp_r3_2);
+    Ground_801C1DE4(&sp14, &sp10);
+    if (sp14 == 0) {
+        temp_r25 = 1 << temp_r3_2;
+        if (!(temp_r25 & gmMainLib_8015EDBC()->x8)) {
+            *temp_r26 = temp_r3->match_end.frame_count;
+            temp_r3_3 = gmMainLib_8015EDBC();
+            temp_r3_3->x8 |= temp_r25;
+        } else {
+            if (*temp_r26 > temp_r3->match_end.frame_count) {
+                *temp_r26 = temp_r3->match_end.frame_count;
+            }
+        }
+        temp_r3_5 = gmMainLib_8015ED98();
+        temp_r3_5->x1C |= temp_r25;
+        temp_r3_6 = gmMainLib_8015EDB0();
+        temp_r3_6->x4 |= temp_r25;
+    }
+    if (gmMainLib_8015D48C(temp_r3_2) == 0) {
+        if (sp14 == 0) {
+            gmMainLib_8015D4E8(temp_r3_2, 1);
+            var_r29 = 1;
+            *temp_r31 = temp_r3->match_end.frame_count;
+        } else {
+            if (*temp_r31 < sp10 - sp14) {
+                *temp_r31 = sp10 - sp14;
+            }
+        }
+    } else if (sp14 == 0) {
+        if (*temp_r31 > temp_r3->match_end.frame_count) {
+            *temp_r31 = temp_r3->match_end.frame_count;
+        }
+        var_r29 = 1;
+    }
+    if (var_r29 != 0) {
+        temp_r25_2 = gm_801733D8();
+        temp_r3_8 = gm_8017341C();
+        if (temp_r3_8 != 0x148) {
+            gm_80164504(temp_r3_8);
+        }
+        gm_80173AA4();
+        gm_80173EEC();
+        gm_80172898(0x80);
+        if (temp_r25_2 != CHKIND_NONE) {
+            gm_801736E8(temp_r28->unk_584, temp_r28->unk_585, gm_804D68E8, temp_r28->unk_586, temp_r25_2, 0xF);
+            gm_801A42E8(0x14);
+            gm_801A42D4();
+            return;
+        }
+        goto block_22;
+    }
+block_22:
+    if (gm_80173754(0xF, gm_804D68E8) == 0) {
+        gm_SetScenePendingMinor(0U);
+    }
+}
 
 void gm_801B67E8_OnInit(void)
 {
-    struct gmm_x0_584_t* temp_r4 =
-        (struct gmm_x0_584_t*) &gmMainLib_804D3EE0->unk_530.unk_584.unk_584;
+    struct gmm_x0_584_t* temp_r4 = &gmMainLib_804D3EE0->unk_530.unk_584;
     gmMainLib_804D3EE0->unk_530.unk_584.unk_584 = 0x21;
     temp_r4->unk_585 = 0;
     temp_r4->unk_586 = 0x78;
@@ -300,6 +466,30 @@ bool gm_801B688C(bool arg0)
     return false;
 }
 
+static void gm_801B6AD8_inline(MinorScene* scene, int x)
+{
+    CSSData* temp_r3;
+    VsModeData* temp_r31;
+    struct GameCache* temp_r31_2;
+
+    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
+    temp_r3 = gm_801A427C(scene);
+    temp_r31->data.players[0].stocks = 1;
+    temp_r31->data.players[0].x18 = 1.0F;
+    temp_r31->data.players[0].x1C = 1.0F;
+    gm_801B06B0(temp_r3, x, temp_r31->data.players[0].c_kind, 1,
+                temp_r31->data.players[0].color, temp_r31->data.players[0].xA,
+                0, gm_804D68F0);
+    temp_r31_2 = &lbDvd_8001822C()->game_cache;
+    lbDvd_800174BC();
+    temp_r31_2->entries[1].char_id = CKIND_BOY;
+    temp_r31_2->entries[1].color = 0;
+    temp_r31_2->entries[2].char_id = CKIND_GIRL;
+    temp_r31_2->entries[2].color = 0;
+    temp_r31_2->stage_id = 0x11D;
+    lbDvd_80018254();
+}
+
 void gm_801B69C0(StartMeleeData* arg0)
 {
     gmMainLib_8015CC34();
@@ -324,30 +514,6 @@ void gm_801B69C0(StartMeleeData* arg0)
     arg0->rules.x3_3 = true;
     arg0->rules.x3_2 = true;
     arg0->rules.x0_3 = 6;
-}
-
-static inline void gm_801B6AD8_inline(MinorScene* scene, int x)
-{
-    CSSData* temp_r3;
-    VsModeData* temp_r31;
-    struct GameCache* temp_r31_2;
-
-    temp_r31 = &gmMainLib_804D3EE0->unk_1490;
-    temp_r3 = gm_801A427C(scene);
-    temp_r31->data.players[0].stocks = 1;
-    temp_r31->data.players[0].x18 = 1.0F;
-    temp_r31->data.players[0].x1C = 1.0F;
-    gm_801B06B0(temp_r3, x, temp_r31->data.players[0].c_kind, 1,
-                temp_r31->data.players[0].color, temp_r31->data.players[0].xA,
-                0, gm_804D68F0);
-    temp_r31_2 = &lbDvd_8001822C()->game_cache;
-    lbDvd_800174BC();
-    temp_r31_2->entries[1].char_id = CKIND_BOY;
-    temp_r31_2->entries[1].color = 0;
-    temp_r31_2->entries[2].char_id = CKIND_GIRL;
-    temp_r31_2->entries[2].color = 0;
-    temp_r31_2->stage_id = 0x11D;
-    lbDvd_80018254();
 }
 
 void gm_801B6AD8(MinorScene* scene)

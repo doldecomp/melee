@@ -990,7 +990,7 @@ void fn_8016C7F0(void)
     s32 sp20;
     u8 _[0x18];
 
-    s32* temp_r30_2;
+    u32* temp_r30_2;
     int var_r29;
     u8 var_r29_2;
     int var_r28;
