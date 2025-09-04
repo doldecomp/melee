@@ -941,7 +941,7 @@ config.libs = [
             Object(NonMatching, "melee/gm/gmclassic.c"),
             Object(NonMatching, "melee/gm/gmadventure.c"),
             Object(NonMatching, "melee/gm/gmallstar.c"),
-            Object(NonMatching, "melee/gm/gmmultiman.c"),
+            Object(Matching, "melee/gm/gmmultiman.c"),
             Object(Matching, "melee/gm/gmsupersudden.c"),
             Object(Matching, "melee/gm/gmtiny.c"),
             Object(Matching, "melee/gm/gmgiant.c"),

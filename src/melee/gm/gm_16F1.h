@@ -84,8 +84,8 @@ typedef enum Gm_DecType {
 /* 173224 */ u8 gm_80173224(int, int);
 /* 1732D8 */ CharacterKind gm_801732D8(u8);
 /* 17335C */ int gm_8017335C(void);
-/* 1733D8 */ int gm_801733D8(void);
-/* 17341C */ int gm_8017341C(void);
+/* 1733D8 */ u8 gm_801733D8(void);
+/* 17341C */ u16 gm_8017341C(void);
 /* 173460 */ u8 gm_80173460(s8);
 /* 173498 */ u16 gm_80173498(UNK_PARAMS);
 /* 1734D0 */ u16 gm_801734D0(u32);
