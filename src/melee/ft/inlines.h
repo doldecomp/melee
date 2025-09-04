@@ -256,6 +256,11 @@ static inline int ftGetFacingDirInt(Fighter* fp)
     }
 }
 
+static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
+{
+    return ftGetFacingDirInt(GET_FIGHTER(gobj));
+}
+
 /// Ternary macro for fcmpo-based facing direction check
 #define CLIFFCATCH_O(fp)                                                      \
     ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT

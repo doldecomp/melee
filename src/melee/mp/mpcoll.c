@@ -1,6 +1,8 @@
 #include "mp/mpcoll.h"
 
 #include "math.h"
+#include "platform.h"
+#include "stdbool.h"
 
 #include <placeholder.h>
 
@@ -1107,7 +1109,10 @@ bool mpColl_80043E90(CollData* arg0, s32* arg1)
     f32 f3 = arg0->cur_topn.x + arg0->xA4_ecbCurrCorrect.left.x;
     f32 f4 = arg0->cur_topn.y + arg0->xA4_ecbCurrCorrect.left.y;
 
-    if (mpLib_800509B8(f1, f2, f3, f4, NULL, &sp10, 0, NULL, arg0->x48, arg0->x4C) && sp10 != temp_r31) {
+    if (mpLib_800509B8(f1, f2, f3, f4, NULL, &sp10, 0, NULL, arg0->x48,
+                       arg0->x4C) &&
+        sp10 != temp_r31)
+    {
         *arg1 = sp10;
         return true;
     }
@@ -1466,7 +1471,45 @@ bool mpColl_8004730C(CollData* cdata, ftCollisionBox* arg1)
 
 /// #mpColl_800475F4
 
-/// #mpColl_800476B4
+bool mpColl_800476B4(CollData* coll, bool (*arg1)(Fighter_GObj*, enum_t),
+                     Fighter_GObj* gobj)
+{
+    f32 y_f31;
+    f32 x_f30;
+    bool temp;
+
+    mpColl_80041C8C(coll);
+    if (coll->x130_flags & 0x10) {
+        x_f30 = coll->x84_ecb.bottom.x;
+        y_f31 = coll->x84_ecb.bottom.y;
+    }
+    if (coll->x104 == 1) {
+        mpColl_800424DC(coll, 6U);
+    } else {
+        mpColl_8004293C(coll);
+    }
+    if (coll->x130_flags & 0x10) {
+        coll->x84_ecb.bottom.x = x_f30;
+        coll->x84_ecb.bottom.y = y_f31;
+    }
+    mpColl_80042384(coll);
+    coll->prev_env_flags = coll->env_flags;
+    coll->env_flags = 0;
+    if (((coll->xA4_ecbCurrCorrect.top.y - coll->xA4_ecbCurrCorrect.bottom.y) <
+         6.0F) &&
+        ((coll->xA4_ecbCurrCorrect.right.y - coll->xA4_ecbCurrCorrect.left.y) <
+         6.0F))
+    {
+        mpColl_804D649C = 1;
+    } else {
+        mpColl_804D649C = 0;
+    }
+    mpColl_804D64A0 = (void (*)(void)) arg1;
+    mpColl_804D64A4 = (void (*)(void)) gobj;
+    temp = mpColl_80043754(mpColl_80046904, coll, 3U);
+    mpColl_80043324(coll, temp, 1);
+    return temp;
+}
 
 bool mpColl_800477E0(CollData* arg0)
 {
