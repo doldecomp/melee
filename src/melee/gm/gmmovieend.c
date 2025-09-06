@@ -26,7 +26,7 @@ void gm_801A6254(MinorScene* arg0)
     u8 temp_ret;
     u8 temp_r0;
     MatchExitInfo* temp_r30;
-    u8* temp_r31;
+    lbl_8046DBD8_t* temp_r31;
 
     temp_r30 = gm_801A4284(arg0);
     temp_r31 = gm_801736DC();
@@ -36,9 +36,9 @@ void gm_801A6254(MinorScene* arg0)
     if (temp_r0 != 7 && temp_r0 != 8 &&
         temp_r30->match_end.player_standings[0].stocks != 0)
     {
-        gm_80164910(temp_r31[4]);
+        gm_80164910(temp_r31->x4);
     } else {
-        temp_ret = gm_80160638(temp_r31[4]);
+        temp_ret = gm_80160638(temp_r31->x4);
         gmMainLib_8015DB2C(temp_ret);
     }
     gm_80173EEC();

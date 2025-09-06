@@ -1005,7 +1005,7 @@ inline static unsigned short* idk(void)
     }
 }
 
-bool un_803048C0(int arg0)
+int un_803048C0(int arg0)
 {
     return idk()[arg0] & 0xFF;
 }

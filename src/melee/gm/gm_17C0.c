@@ -854,7 +854,7 @@ int gm_80181A14(void)
     return lbl_80473594.x0;
 }
 
-u16 gm_80181A24(void)
+u32 gm_80181A24(void)
 {
     return lbl_80473594.x2;
 }
