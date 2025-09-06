@@ -8,6 +8,7 @@
 
 #include "dolphin/types.h"
 
+#include <melee/ft/forward.h>
 #include <melee/gm/forward.h> // IWYU pragma: export
 #include <melee/gr/forward.h>
 #include <melee/pl/forward.h>
@@ -177,8 +178,9 @@ struct GameRules {
 STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
 
 struct gmm_retval_ED98 {
-    UNK_T x0;
-    u8 padding[0x8];
+    u32 x0;
+    u32 x4;
+    u8 padding[0x4];
     s32 xC;
     s32 x10;
     s32 x14;
@@ -193,17 +195,17 @@ struct gmm_retval_EDB0 {
 
 struct gmm_retval_EDBC {
     s32 x0;
-    s32 x4;
+    u32 x4;
     s32 x8;
-    int xC;
-    u8 padding[0x14 - 0x10];
+    u32 xC;
+    int x10;
     u32 x14;
     u16 x18[2];
     u8 pad_x1C[0x4C - 0x1C];
     s32 x4C[4];
     u8 padding_x4C[0xB0 - 0x4C - 4 * 4];
-    s32 xB0[4];
-    char pad_F0[0xB8];
+    s32 xB0[0x19];
+    int x114[0x19];
 };
 
 struct gmm_x1868 {
@@ -639,7 +641,7 @@ struct Unk1PData {
         /* 14 */ u16 x14;
         /* 18 */ int x18;
         /* 1C */ int x1C;
-        /* 20 */ int x20;
+        /* 20 */ u32 x20;
         struct Unk1PData_x24 {
             /* 24 */ s8 ckind;
             /* 28 */ int x4;
@@ -873,6 +875,17 @@ struct gm_803DE650_t {
     u8 xD;
     u8 xE;
     u8 xF;
+};
+
+struct lbl_8046DBD8_t {
+    u8 x0; // c_kind
+    u8 x1; // color
+    u8 x2; // stocks
+    u8 x3;
+    u8 x4; // c_kind
+    u8 x5;
+    u8 x6;
+    u16 x8;
 };
 
 #endif

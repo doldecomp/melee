@@ -94,7 +94,7 @@
 /* 15D7BC */ s32* gmMainLib_8015D7BC(u8);
 /* 15D7D4 */ s32* gmMainLib_8015D7D4(u8);
 /* 15D7EC */ s16* gmMainLib_8015D7EC(u8);
-/* 15D804 */ void* gmMainLib_8015D804(s32);
+/* 15D804 */ u32* gmMainLib_8015D804(s32);
 /* 15D818 */ s32 gmMainLib_8015D818(u32);
 /* 15D8B0 */ void gmMainLib_8015D8B0(u32);
 /* 15D8D8 */ s32 gmMainLib_8015D8D8(u32);

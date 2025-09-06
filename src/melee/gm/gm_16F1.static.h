@@ -10,7 +10,8 @@ static struct {
         u8 x1;
     } x2[6];
 } lbl_8046DBC8;
-/* 46DBD8 */ static UNK_T lbl_8046DBD8[4];
+
+/* 46DBD8 */ static lbl_8046DBD8_t lbl_8046DBD8;
 
 static int lbl_803D5648[] = {
     // TODO this is the start of a data section

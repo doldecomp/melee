@@ -53,13 +53,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
 
 void gm_801BFABC(MinorScene* arg0)
 {
-    struct {
-        u8 x0; // c_kind
-        u8 x1; // color
-        u8 x2; // stocks
-        u8 x3;
-        u8 x4; // c_kind
-    }* temp_r31;
+    lbl_8046DBD8_t* temp_r31;
     StartMeleeData* temp_r30;
     u8 tmp;
 
