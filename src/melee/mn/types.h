@@ -19,7 +19,7 @@ typedef struct {
 } Menu;
 // size 0x8
 
-#ifdef M2CTX
+#ifdef M2C
 typedef struct Menu_GObj Menu_GObj;
 struct Menu_GObj {
     /*  +0 */ u16 classifier;
