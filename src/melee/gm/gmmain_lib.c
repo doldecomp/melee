@@ -607,7 +607,7 @@ s16* gmMainLib_8015D7EC(u8 arg0)
     return &base[arg0].x7C.x7E;
 }
 
-void* gmMainLib_8015D804(s32 arg0)
+u32* gmMainLib_8015D804(s32 arg0)
 {
     struct gmm_x1868* thing = &gmMainLib_804D3EE0->thing;
     return &thing->x1B80[arg0];
