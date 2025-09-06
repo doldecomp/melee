@@ -100,12 +100,12 @@
 /* 0567C0 */ bool mpLib_800567C0(s32 wall_id, Vec3* ecb_side_vtx,
                                  Vec3* result);
 /* 0569EC */ void mpLib_800569EC(void);
-/* 056A1C */ UNK_T mpLib_80056A1C(void);
-/* 056A54 */ UNK_T mpLib_80056A54(void);
-/* 056A8C */ UNK_T mpLib_80056A8C(void);
-/* 056AC4 */ UNK_T mpLib_80056AC4(void);
-/* 056AFC */ UNK_T mpLib_80056AFC(void);
-/* 056B34 */ UNK_T mpLib_80056B34(void);
+/* 056A1C */ int* mpLib_80056A1C(int, int*);
+/* 056A54 */ int mpLib_80056A54(int, int*);
+/* 056A8C */ int* mpLib_80056A8C(int, int*);
+/* 056AC4 */ int mpLib_80056AC4(int, int*);
+/* 056AFC */ int* mpLib_80056AFC(int, int*);
+/* 056B34 */ int mpLib_80056B34(int, int*);
 /* 056B6C */ enum_t mpLib_80056B6C(enum_t);
 /* 056C54 */ bool mpLib_80056C54(s32 idx, Vec3* pos, bool, Vec3*, bool, bool,
                                  float, float, float, float);

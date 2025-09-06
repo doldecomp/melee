@@ -59,9 +59,11 @@ typedef u32 HSD_Pad;
 #define MPCOLL_FLAGS_B16 (1 << 16)
 #define MPCOLL_FLAGS_B20 (1 << 20) // 0x100000
 #define MPCOLL_FLAGS_B21 (1 << 21) // 0x200000
-#define MPCOLL_FLAGS_B23 (1 << 23)
-#define MPCOLL_FLAGS_B24 (1 << 24)
-#define MPCOLL_FLAGS_B25 (1 << 25)
+#define MPCOLL_FLAGS_B23 (1 << 23) // 0x800000
+#define MPCOLL_FLAGS_B24 (1 << 24) // 0x1000000
+#define MPCOLL_FLAGS_B25 (1 << 25) // 0x2000000
+#define MPCOLL_FLAGS_B28 (1 << 28) // 0x10000000
+#define MPCOLL_FLAGS_B29 (1 << 29) // 0x20000000
 
 typedef union UnkFlagStruct {
     u8 u8;

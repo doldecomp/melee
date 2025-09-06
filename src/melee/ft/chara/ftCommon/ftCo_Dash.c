@@ -164,5 +164,5 @@ void ftCo_Dash_Phys(Fighter_GObj* gobj)
 
 void ftCo_Dash_Coll(Fighter_GObj* gobj)
 {
-    ft_800844EC();
+    ft_800844EC(gobj);
 }

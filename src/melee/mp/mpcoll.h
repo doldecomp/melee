@@ -3,6 +3,7 @@
 
 #include <platform.h>
 
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "mp/forward.h"
 #include <baselib/forward.h>
@@ -54,25 +55,25 @@
 /* 046F78 */ UNK_RET fn_80046F78(UNK_PARAMS);
 /* 0471F8 */ bool mpColl_800471F8(CollData*);
 /* 04730C */ bool mpColl_8004730C(CollData*, ftCollisionBox*);
-/* 0473CC */ int mpColl_800473CC(CollData*);
-/* 0474E0 */ void mpColl_800474E0(CollData*);
+/* 0473CC */ bool mpColl_800473CC(CollData*);
+/* 0474E0 */ bool mpColl_800474E0(CollData*);
 /* 0475F4 */ bool mpColl_800475F4(CollData*, ftCollisionBox*);
-/* 0476B4 */ void mpColl_800476B4(CollData*);
+/* 0476B4 */ bool mpColl_800476B4(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
 /* 0477E0 */ bool mpColl_800477E0(CollData*);
 /* 0478F4 */ void mpColl_800478F4(CollData*);
 /* 047A08 */ void mpColl_80047A08(CollData*, ftCollisionBox*);
-/* 047AC8 */ void mpColl_80047AC8(CollData*);
-/* 047BF4 */ void mpColl_80047BF4(CollData*);
-/* 047D20 */ void mpColl_80047D20(CollData*);
-/* 047E14 */ void mpColl_80047E14(CollData*);
-/* 047F40 */ void mpColl_80047F40(CollData*);
-/* 04806C */ void mpColl_8004806C(CollData*);
+/* 047AC8 */ bool mpColl_80047AC8(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
+/* 047BF4 */ bool mpColl_80047BF4(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
+/* 047D20 */ bool mpColl_80047D20(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
+/* 047E14 */ bool mpColl_80047E14(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
+/* 047F40 */ bool mpColl_80047F40(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
+/* 04806C */ bool mpColl_8004806C(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
 /* 048160 */ bool mpColl_80048160(CollData*);
 /* 048274 */ bool mpColl_80048274(CollData*);
 /* 048388 */ bool mpColl_80048388(CollData*);
 /* 048464 */ bool mpColl_80048464(CollData*);
 /* 048578 */ bool mpColl_80048578(CollData*);
-/* 048654 */ void mpColl_80048654(CollData*);
+/* 048654 */ bool mpColl_80048654(CollData*);
 /* 048768 */ bool mpColl_80048768(CollData*);
 /* 048844 */ bool mpColl_80048844(CollData*, f32);
 /* 0488F4 */ UNK_RET mpColl_800488F4(UNK_PARAMS);
@@ -89,8 +90,8 @@
 /* 04B21C */ bool mpColl_8004B21C(CollData*, ftCollisionBox*);
 /* 04B2DC */ bool mpColl_8004B2DC(CollData*);
 /* 04B3F0 */ bool mpColl_8004B3F0(CollData*, ftCollisionBox*);
-/* 04B4B0 */ UNK_RET mpColl_8004B4B0(UNK_PARAMS);
-/* 04B5C4 */ void mpColl_8004B5C4(CollData*);
+/* 04B4B0 */ bool mpColl_8004B4B0(CollData*);
+/* 04B5C4 */ bool mpColl_8004B5C4(CollData*);
 /* 04B6D8 */ UNK_RET mpColl_8004B6D8(UNK_PARAMS);
 /* 04B894 */ UNK_RET mpColl_8004B894(UNK_PARAMS);
 /* 04BDD4 */ UNK_RET mpColl_8004BDD4(UNK_PARAMS);

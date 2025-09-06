@@ -197,7 +197,7 @@ struct CollData {
     /* fp+744 */ float x54;
     /* fp+748 */ float x58;
     /* fp+74C */ float x5C;
-    /* fp+750 */ s32 x60;
+    /* fp+750 */ float x60;
     /* fp+754 */ ftECB x64_ecb;
     /* fp+774 */ ftECB x84_ecb;
     /* fp+794 */ ftECB xA4_ecbCurrCorrect;

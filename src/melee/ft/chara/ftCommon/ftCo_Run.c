@@ -153,5 +153,5 @@ void ftCo_Run_Phys(Fighter_GObj* gobj)
 
 void ftCo_Run_Coll(Fighter_GObj* gobj)
 {
-    ft_800844EC();
+    ft_800844EC(gobj);
 }
