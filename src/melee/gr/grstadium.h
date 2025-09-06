@@ -82,7 +82,7 @@ typedef enum {
 /* 1D410C */ UNK_RET grStadium_801D410C(UNK_PARAMS);
 /* 1D4150 */ UNK_RET grStadium_801D4150(UNK_PARAMS);
 /* 1D4194 */ void grStadium_801D4194(Ground_GObj*);
-/* 1D4220 */ void fn_801D4220(UNK_T, int, UNK_T, bool);
+/* 1D4220 */ void fn_801D4220(int, int, UNK_T, bool);
 /* 1D42B8 */ bool grStadium_801D42B8(void);
 /* 1D4354 */ Ground* grStadium_801D4354(Ground_GObj*);
 /* 1D435C */ void grStadium_801D435C(Ground_GObj*);

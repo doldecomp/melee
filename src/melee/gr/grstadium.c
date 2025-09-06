@@ -1920,7 +1920,7 @@ void grStadium_801D4194(Ground_GObj* arg0)
     HSD_SisLib_803A6368(gp2->x18, 3);
 }
 
-void fn_801D4220(UNK_T un0, int un1, UNK_T un2, bool cancelflag)
+void fn_801D4220(int un0, int un1, UNK_T un2, bool cancelflag)
 {
     Ground_GObj* map_gobj;
     Ground* gp;

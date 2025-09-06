@@ -5,7 +5,7 @@
 
 #include <baselib/forward.h>
 
-/* 01615C */ void lbFile_8001615C(void*, int, void*, bool);
+/* 01615C */ void lbFile_8001615C(int, int, void*, bool);
 /* 0161A0 */ bool lbFile_800161A0(void);
 /* 0161C4 */ void lbFile_800161C4(int file, u32 src, u32 dest, u32 size,
                                   int type, int pri);
