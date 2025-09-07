@@ -503,8 +503,7 @@ static inline HSD_SM* AXDriver_8038CFF4_inline(void)
     }
 }
 
-int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel,
-                      float pitch)
+int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
 {
     HSD_SM* v;
     int sample_idx;
