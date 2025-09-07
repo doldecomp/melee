@@ -9,7 +9,7 @@ struct HSD_SynthSFXNode;
 
 /* 388330 */ void* HSD_AudioMalloc(size_t);
 /* 38838C */ void HSD_AudioFree(void*);
-/* 3883B4 */ void HSD_SynthSFXSampleLoadCallback(void*, int, void*,
+/* 3883B4 */ void HSD_SynthSFXSampleLoadCallback(int, int, void*,
                                                  int cancelflag);
 /* 38893C */ void HSD_SynthSFXLoadNewProc(void);
 /* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int, int, int);

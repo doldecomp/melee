@@ -3,7 +3,9 @@
 
 #include <dolphin/types.h>
 
-typedef void (*ARQCallback)(u32 pointerToARQRequest);
+struct ARQRequest;
+
+typedef void (*ARQCallback)(struct ARQRequest *);
 
 struct ARQRequest
 {

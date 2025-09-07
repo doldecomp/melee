@@ -31,7 +31,7 @@ void HSD_AudioFree(void* arg0)
 
 extern void* HSD_Synth_804D7730;
 
-static void HSD_SynthSFXHeaderLoadCallback(void* arg0, int arg1, void* arg2,
+static void HSD_SynthSFXHeaderLoadCallback(int arg0, int arg1, void* arg2,
                                            int arg3)
 {
     AXVPB** temp_r3_2;

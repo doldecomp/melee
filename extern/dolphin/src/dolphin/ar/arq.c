@@ -53,17 +53,17 @@ void __ARQServiceQueueLo(void) {
     }
 }
 
-void __ARQCallbackHack(u32 unused) {
+void __ARQCallbackHack(ARQRequest* unused) {
     
 }
 
 void __ARQInterruptServiceRoutine() {
     if (__ARQCallbackHi) {
-        __ARQCallbackHi((u32)__ARQRequestPendingHi);
+        __ARQCallbackHi(__ARQRequestPendingHi);
         __ARQRequestPendingHi = NULL;
         __ARQCallbackHi = NULL;        
     } else if (__ARQCallbackLo) {
-        __ARQCallbackLo((u32)__ARQRequestPendingLo);
+        __ARQCallbackLo(__ARQRequestPendingLo);
         __ARQRequestPendingLo = NULL;
         __ARQCallbackLo = NULL;        
     }
