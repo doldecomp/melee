@@ -1079,7 +1079,7 @@ bool AXDriver_8038E844(int arg0)
     return true;
 }
 
-bool AXDriver_8038E8EC(const char* path, int arg1, int arg2)
+bool AXDriver_8038E8EC(const char* path, u8 arg1, int arg2)
 {
     int entrynum = DVDConvertPathToEntrynum(path);
     if (AXDriver_804D6038 != -1) {
