@@ -75,7 +75,7 @@ struct HSD_SM {
 /* 38E5DC */ int AXDriver_8038E5DC(void);
 /* 38E6C0 */ bool AXDriver_8038E6C0(int arg0);
 /* 38E844 */ bool AXDriver_8038E844(int arg0);
-/* 38E8EC */ bool AXDriver_8038E8EC(const char* arg0, int arg1, int arg2);
+/* 38E8EC */ bool AXDriver_8038E8EC(const char* arg0, u8 arg1, int arg2);
 /* 38E968 */ bool AXDriverStop(void);
 /* 38E9A8 */ bool AXDriverPause(void);
 /* 38E9E0 */ bool AXDriverResume(void);
