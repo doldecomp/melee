@@ -379,7 +379,7 @@ static struct VictoryTheme lbl_803D5480[0x1B] = {
     },
 };
 
-u8 gm_801601C4(s8 arg0)
+int gm_801601C4(s8 arg0)
 {
     f32 temp_f1;
 
@@ -394,7 +394,7 @@ u8 gm_801601C4(s8 arg0)
     return 0x7F;
 }
 
-u8 gm_80160244(s8 arg0)
+int gm_80160244(s8 arg0)
 {
     f32 temp_f2;
 
@@ -411,8 +411,8 @@ u8 gm_80160244(s8 arg0)
 
 void gm_801602C0(s8 arg0)
 {
-    u8 a = gm_80160244(arg0);
-    u8 b = gm_801601C4(arg0);
+    int a = gm_80160244(arg0);
+    int b = gm_801601C4(arg0);
 
     PAD_STACK(8);
 
@@ -424,7 +424,7 @@ void gm_801602C0(s8 arg0)
 #pragma dont_inline on
 void gm_801603B0(void)
 {
-    u8 temp_r31;
+    int temp_r31;
     s8 temp_r3;
 
     temp_r3 = gmMainLib_8015ED74();

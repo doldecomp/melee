@@ -42,7 +42,7 @@
 /* 0880AC */ void ft_800880AC(Fighter*);
 /* 0880D8 */ void ft_800880D8(Fighter*);
 /* 088110 */ void ft_80088110(Fighter*);
-/* 088148 */ void ft_PlaySFX(Fighter*, enum_t, int, int);
+/* 088148 */ void ft_PlaySFX(Fighter*, enum_t, u8, u8);
 /* 3C57D0 */ extern char ftMr_Init_DatFilename[];
 /* 3C57DC */ extern char ftMr_Init_DataName[];
 /* 3C595C */ extern char ftMr_Init_AnimDatFilename[];

@@ -7,16 +7,52 @@
 
 #include <melee/ft/forward.h>
 
-/* 4D3880 */ static float lbl_804D3880 = 1.0f; ///< synth volume
-/* 4D38CC */ static int lbl_804D38CC = 0x7F;
+extern f32 lbl_804D63F0;
+extern int lbl_804D63F4;
+extern int lbl_804D63FC;
+extern int lbl_804D6400;
+extern int lbl_804D6404;
 
-/* 4D6408 */ static int lbl_804D6408;
-/* 4D640C */ static int lbl_804D640C;
-/* 4D6418 */ static int lbl_804D6418;
-/* 4D6420 */ static int lbl_804D6420;
-/* 4D6424 */ static int lbl_804D6424;
-/* 4D6430 */ static int lbl_804D6430;
-/* 4D6434 */ static int lbl_804D6434;
+static int lbl_804D3874 = 1;
+static int lbl_804D387C = 0x7F;
+static f32 lbl_804D3880 = 1.0F; ///< synth volume
+static int lbl_804D3884 = 0x7F;
+static int lbl_804D3888 = 0x7F;
+static int lbl_804D388C = 0x7F;
+static int lbl_804D3898 = 0x7F;
+static int lbl_804D38A0 = 0x7F;
+static int lbl_804D38A8 = 0x7F;
+static f32 lbl_804D38AC = 1.0F;
+static f32 lbl_804D38B0 = 1.0F;
+static f32 lbl_804D38B4 = 1.0F;
+static f32 lbl_804D38B8 = 1.0F;
+static f32 lbl_804D38BC = 1.0F;
+static f32 lbl_804D38C0 = 1.0F;
+static f32 lbl_804D38C4 = 1.0F;
+static f32 lbl_804D38C8 = 1.0F;
+static int lbl_804D38CC = 0x7F;
+static int lbl_804D38D4 = 7;
+static int lbl_804D38D8 = 1;
+static int lbl_804D38DC = -1;
+static int lbl_804D38E0 = 1;
+static f32 lbl_804D38E4 = 1.0f;
+static f32 lbl_804D38E8 = 1.0f;
+static f32 lbl_804D38EC = 1.0f;
+static int lbl_804D38F0 = -1;
+static int lbl_804D38F4 = -1;
+
+static int lbl_804D6408;
+static int lbl_804D640C;
+static bool lbl_804D6410; ///< is paused
+static int lbl_804D6414;
+static int lbl_804D6418;
+static s32 lbl_804D641C;
+static int lbl_804D6420;
+static int lbl_804D6424;
+static s32 lbl_804D6428;
+static s32 lbl_804D642C;
+static int lbl_804D6430;
+static int lbl_804D6434;
 
 static HSD_ObjAllocData lbl_80433710;
 

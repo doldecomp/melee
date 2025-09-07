@@ -55,7 +55,7 @@ struct HSD_SM {
 /* 38C678 */ u32 AXDriver_8038C678(u32 param_type, u32 param_value);
 /* 38C6C0 */ void AXDriver_8038C6C0(HSD_SM* v);
 /* 38CFF4 */ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track,
-                                   int channel, float pitch);
+                                   int channel);
 /* 38D2B4 */ bool AXDriver_8038D2B4(int arg0, u8 arg1);
 /* 38D3B8 */ bool AXDriver_8038D3B8(s32 arg0, u8 arg1);
 /* 38D4E4 */ bool AXDriver_8038D4E4(s32 arg0, s16 arg1);

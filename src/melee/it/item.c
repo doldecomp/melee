@@ -2116,7 +2116,7 @@ u32 Item_8026AE60(void)
     return result;
 }
 
-void Item_8026AE84(Item* item_data, enum_t sfx, int pan, int volume)
+void Item_8026AE84(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {
@@ -2128,7 +2128,7 @@ void Item_8026AE84(Item* item_data, enum_t sfx, int pan, int volume)
     }
 }
 
-void Item_8026AF0C(Item* item_data, enum_t sfx, int pan, int volume)
+void Item_8026AF0C(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {
@@ -2143,7 +2143,7 @@ void Item_8026AF0C(Item* item_data, enum_t sfx, int pan, int volume)
     }
 }
 
-void Item_8026AFA0(Item* item_data, enum_t sfx, int pan, int volume)
+void Item_8026AFA0(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {

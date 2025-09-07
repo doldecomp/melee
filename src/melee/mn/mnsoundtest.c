@@ -2,6 +2,8 @@
 
 #include <platform.h>
 
+#include "gm/gm_unsplit.h"
+#include "gm/gmmain_lib.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "mn/inlines.h"
@@ -123,10 +125,6 @@ u32 data_4[] = { 25, 8,  1,  6,  16, 17, 4,  2,  13, 0,  11, 5,  12, 14, 18,
                  6,  8,  11, 18, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 13,
                  25, 26, 28, 27, 10, 7,  9,  31, 23, 30, 4,  0,  39, 3,  32 };
 
-void gmMainLib_8015ED74(void); /* extern */
-s32 gm_801601C4(void);         /* extern */
-s32 gm_80160244(void);         /* extern */
-
 void mnSoundTest_8024A790(HSD_GObj* arg0)
 {
     f32 temp_f1;
@@ -150,29 +148,25 @@ void mnSoundTest_8024A790(HSD_GObj* arg0)
                (1.0f - HSD_PadCopyStatus[2].nml_analogR) *
                (1.0f - HSD_PadCopyStatus[3].nml_analogR);
     if ((temp_f31 < 0.9f) || (temp_r31->unk8 < 1.0f)) {
-        gmMainLib_8015ED74();
-        temp_f1 = temp_f31 * (f32) gm_801601C4();
+        temp_f1 = temp_f31 * (f32) gm_801601C4(gmMainLib_8015ED74());
         temp_r30 = (s32) (temp_r31->unk8 * temp_f1);
         lbAudioAx_80024614(temp_r30);
         mnSoundTest_804D6C48 = temp_r30;
     } else {
-        gmMainLib_8015ED74();
-        temp_r3 = gm_801601C4();
+        temp_r3 = gm_801601C4(gmMainLib_8015ED74());
         if (temp_r3 != (s32) mnSoundTest_804D6C48) {
             lbAudioAx_80024614(temp_r3);
             mnSoundTest_804D6C48 = temp_r3;
         }
     }
     if ((temp_f30 < 0.9f) || (temp_r31->unkC < 1.0f)) {
-        gmMainLib_8015ED74();
-        temp_f1_2 = temp_f30 * (f32) gm_80160244();
+        temp_f1_2 = temp_f30 * gm_80160244(gmMainLib_8015ED74());
         temp_r30_2 = (s32) (temp_r31->unkC * temp_f1_2);
         lbAudioAx_800245F4(temp_r30_2);
         mnSoundTest_804D6C4C = temp_r30_2;
         return;
     }
-    gmMainLib_8015ED74();
-    temp_r3_2 = gm_80160244();
+    temp_r3_2 = gm_80160244(gmMainLib_8015ED74());
     if (temp_r3_2 != (s32) mnSoundTest_804D6C4C) {
         lbAudioAx_800245F4(temp_r3_2);
         mnSoundTest_804D6C4C = temp_r3_2;
@@ -387,7 +381,7 @@ void fn_8024AED0(HSD_GObj* arg0)
         mnSoundTest_8024AA70(mnSoundTest_804D6C40, user_data->unk0);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         temp_r3_2 = HSD_GObjProc_8038FD54(arg0, fn_8024B2B0, 0U);
-        temp_r3_2->flags_1 = HSD_GObj_804D783C;
+        temp_r3_2->flags_3 = HSD_GObj_804D783C;
         return;
     }
     temp_r26 = mnSoundTest_804D6C40->user_data;
@@ -418,8 +412,8 @@ void fn_8024AED0(HSD_GObj* arg0)
             temp_r3_4 = mnSoundTest_804D6C40->user_data;
             temp_r27_2 = mnSoundTest_804D6C40->hsd_obj;
             temp_r3_4->unkC = 1.0f;
-            gmMainLib_8015ED74();
-            mnSoundTest_804D6C4C = lbAudioAx_800245F4(gm_80160244());
+            mnSoundTest_804D6C4C =
+                lbAudioAx_800245F4(gm_80160244(gmMainLib_8015ED74()));
             temp_r28_3 = lbAudioAx_80023A44(temp_r28_2, temp_r30);
             lbAudioAx_80023694();
             lbAudioAx_80023B24(temp_r28_3);

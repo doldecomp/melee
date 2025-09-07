@@ -110,15 +110,19 @@ void un_802FF934(void)
 
 int un_802FF958(void)
 {
-    lbAudioAx_800245F4(un_804D5854);
-    lbAudioAx_80024614(un_804D5858);
-    lbAudioAx_800245D4(un_804D5850);
+    u8 tmp = un_804D5854;
+    lbAudioAx_800245F4(tmp);
+    tmp = un_804D5858;
+    lbAudioAx_80024614(tmp);
+    tmp = un_804D5850;
+    lbAudioAx_800245D4(tmp);
     return 0;
 }
 
 int un_802FF99C(int arg0)
 {
-    lbAudioAx_80024634(un_804D6DAC);
+    u8 tmp = un_804D6DAC;
+    lbAudioAx_80024634(tmp);
     un_802FFB58(arg0);
     return 0;
 }
