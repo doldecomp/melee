@@ -819,4 +819,16 @@ struct CommandInfo {
     u32 unk_x18;         // 0x18
 };
 
+struct LbShadow {
+    u8 x0_b0 : 1;
+    u8 x0_b1 : 1;
+    u8 x0_b2 : 1;
+    u8 x0_b3 : 1;
+    u8 x0_b4 : 1;
+    u8 x0_b5 : 1;
+    u8 x0_b6 : 1;
+    u8 x0_b7 : 1;
+    HSD_Shadow* shadow;
+};
+
 #endif
