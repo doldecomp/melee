@@ -434,8 +434,8 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, int arg4,
 {
     *arg1 = -1;
     {
-        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0,
-                                 0, arg7, arg8, arg9, arg10, arg11);
+        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg7, arg8, arg9,
+                                 arg10, arg11, arg4, arg5, arg6, 0, 0);
         if (ret && ftCo_800A1B38(*arg1)) {
             return false;
         }
