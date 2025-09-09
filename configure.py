@@ -491,7 +491,7 @@ config.libs = [
             Object(NonMatching, "melee/pl/pltrick.c"),
             Object(NonMatching, "melee/pl/plbonus.c"),
             Object(NonMatching, "melee/pl/plbonuslib.c"),
-            Object(NonMatching, "melee/pl/pl_040D.c"),
+            Object(Matching, "melee/pl/pl_040D.c"),
         ],
     ),
     MeleeLib(

@@ -290,7 +290,7 @@ float Player_800360D8(s32 slot);
 void Player_SetStructFunc(s32 slot, void* arg_func);
 pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot);
-int* Player_GetUnk6A8Ptr(int slot);
+struct pl_x5EC_t* Player_GetUnk6A8Ptr(int slot);
 pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot);
 FighterKind Player_80036394(s32 slot);
 s32 Player_80036428(s32 slot);

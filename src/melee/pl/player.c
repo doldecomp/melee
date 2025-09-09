@@ -1752,10 +1752,10 @@ StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot)
     return stale_move_table;
 }
 
-int* Player_GetUnk6A8Ptr(int slot)
+struct pl_x5EC_t* Player_GetUnk6A8Ptr(int slot)
 {
     StaticPlayer* player;
-    int* unk6A8;
+    struct pl_x5EC_t* unk6A8;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     unk6A8 = &player->stale_moves.x5EC;
