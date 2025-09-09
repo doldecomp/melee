@@ -71,13 +71,41 @@ struct StaleMoveTable {
         u16 attack_instance;
     } StaleMoves[10];
     /*  +2C */ pl_800386D8_t total_attack_count_struct;
-    /* +5EC */ int x5EC;
-    /* +5F0 */ u8 x5F0[0x674 - 0x5F0];
+    /* +5EC */ struct pl_x5EC_t {
+        u8 x0; ///< player slot
+        f32 x4;
+        u32 x8;
+        u32 xC;
+        struct {
+            float x0; ///< combo damage?
+            s16 x4;
+            u16 x6;
+            s16 x8;
+            int xC;
+            s16 x10;
+            u16 x12_b0 : 1;
+        } x10[6];
+    } x5EC;
     /* +674 */ u32 x674[39];
     /* +710 */ int x710[39];
     /* +7AC */ int x7AC[39];
     /* +848 */ int x848[30];
-    /* +8E4 */ u8 x8C0[0x904 - 0x8C0];
+    /* +8C0 */ struct pl_x8C0_t {
+        int x0;
+        struct {
+            u16 x0;
+            u8 x2;
+            u8 x3_b0 : 1;
+        } x4[5];
+    } x8C0;
+    /* +8D8 */ struct pl_x8D8_t {
+        int x0;
+        struct {
+            u32 x0;
+            u8 x4_b0 : 1;
+            u8 x4_b1 : 1;
+        } x4[5];
+    } x8D8;
     /* +904 */ unsigned int x904[215];
     /* +C60 */ float xC60;
     /* +C64 */ float xC64;
@@ -204,7 +232,9 @@ struct pl_800386E8_arg0_t {
 }; /* size = 0x5B4 */
 
 struct pl_804D6470_t {
-    /*   +0 */ u8 x0[0x18];
+    /*   +0 */ u8 x0[0x4];
+    /*   +4 */ int x4;
+    /*   +8 */ u8 x8[0x10];
     /*  +18 */ unsigned int x18;
     /*  +1C */ unsigned int x1C;
     /*  +20 */ u8 x20[0x24 - 0x20];
@@ -251,7 +281,7 @@ struct pl_804D6470_t {
     /*  +C8 */ unsigned int xC8;
     /*  +CC */ float xCC;
     /*  +D0 */ float xD0;
-    /*  +D4 */ u8 xD4[0xD8 - 0xD4];
+    /*  +D4 */ float xD4;
     /*  +D8 */ float xD8;
     /*  +DC */ u32 xDC;
     /*  +E0 */ unsigned int xE0;
@@ -291,7 +321,7 @@ struct pl_804D6470_t {
     /* +170 */ unsigned int x170;
     /* +174 */ unsigned int x174;
     /* +178 */ unsigned int x178;
-    /* +17C */ u8 x17C[0x180 - 0x17C];
+    /* +17C */ int x17C;
     /* +180 */ float x180;
 }; // UNKNOWN SIZE
 
