@@ -9,7 +9,11 @@
 
 /// #it_2725_Logic86_EvtUnk
 
-/// #it_2725_Logic86_DmgDealt
+bool it_2725_Logic86_DmgDealt(Item_GObj*)
+{
+    it_802F1344();
+    return 1;
+}
 
 /// #it_2725_Logic86_Reflected
 
