@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/it_2725.h"
 
 /// #it_802CB8AC
 
