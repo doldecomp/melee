@@ -5670,11 +5670,20 @@ void ftKb_YsSpecialAirNCapture2_Phys(Fighter_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-/// #ftKb_YsSpecialAirNCapture1_Phys
+void ftKb_YsSpecialAirNCapture1_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
-/// #ftKb_YsSpecialNCapture1_Phys
+void ftKb_YsSpecialNCapture1_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
-/// #ftKb_YsSpecialAirCapture1_Phys
+void ftKb_YsSpecialAirCapture1_Phys(Fighter_GObj* gobj)
+{
+    ft_80084EEC(gobj);
+}
 
 /// #ftKb_YsSpecialAirCapture2_Phys
 
