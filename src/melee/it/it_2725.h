@@ -8,6 +8,7 @@
 #include "it/forward.h"
 
 #include "it/itCharItems.h"
+#include "it/items/itcrazyhandbomb.h"
 #include "it/items/types.h"
 #include "lb/types.h"
 

@@ -25,7 +25,7 @@
 /* 2CC064 */ void itLizardon_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2CC0A0 */ bool itLizardon_UnkMotion3_Coll(Item_GObj* gobj);
 /* 2CC0EC */ UNK_RET it_802CC0EC(UNK_PARAMS);
-/* 2CC160 */ bool it_802CC160(Item_GObj* gobj);
+/* 2CC160 */ s32 it_802CC160(Item_GObj* gobj);
 /* 2CC184 */ void it_802CC184(Item_GObj* gobj);
 /* 2CC1A4 */ bool it_802CC1A4(Item_GObj* gobj);
 /* 2CC1CC */ UNK_RET it_802CC1CC(UNK_PARAMS);

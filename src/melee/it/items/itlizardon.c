@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/it_2725.h"
 
 /// #it_802CB8AC
 
@@ -41,7 +42,11 @@ void it_802CB93C(void) {}
 
 /// #it_802CC0EC
 
-/// #it_802CC160
+s32 it_802CC160(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return 0;
+}
 
 /// #it_802CC184
 
