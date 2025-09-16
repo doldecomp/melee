@@ -3020,7 +3020,7 @@ melee/it/items/itsscope.c:
 melee/it/items/itstarrod.c:
 	.text       start:0x80292360 end:0x802927E8
 	.data       start:0x803F5F90 end:0x803F5FF0
-	.sdata2     start:0x804DCAF0 end:0x804DCAF8
+	.sdata2     start:0x804DCAF0 end:0x804DCAF4
 
 melee/it/items/itharisen.c:
 	.text       start:0x802927E8 end:0x80292D48
@@ -3099,8 +3099,8 @@ melee/it/items/itlgunray.c:
 
 melee/it/items/itstarrodstar.c:
 	.text       start:0x802988E4 end:0x80298DEC
-	.data       start:0x803F6530 end:0x803F6568
-	.sdata      start:0x804D5310 end:0x804D5320
+	.data       start:0x803F6530 end:0x803F6565
+	.sdata      start:0x804D5310 end:0x804D531D
 	.sdata2     start:0x804DCC08 end:0x804DCC10
 
 melee/it/items/itsscopebeam.c:
