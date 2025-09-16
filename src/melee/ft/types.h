@@ -319,7 +319,7 @@ struct ftCommonData {
     /* +414 */ UNK_T x414;
     /* +418 */ int x418;
     /* +41C */ int x41C;
-    /* +420 */ UNK_T x420;
+    /* +420 */ float x420;
     /* +424 */ float x424;
     /* +428 */ int x428;
     /* +42C */ float x42C;
