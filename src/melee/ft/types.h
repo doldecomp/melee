@@ -988,7 +988,7 @@ struct Fighter_x1A88_t {
     /*  +28 */ int x28;
     /*  +2C */ int x2C;
     /*  +30 */ int x30;
-    /*  +34 */ float x34;
+    /*  +34 */ int x34;
     /*  +38 */ float x38;
     /*  +3C */ float x3C;
     /*  +40 */ float x40;
@@ -1015,11 +1015,12 @@ struct Fighter_x1A88_t {
     /*  +C8 */ u8 xC8;
     /*  +C9 */ u8 pad_xC9[0xEC - 0xC9];
     /*  +EC */ u8 xEC;
-    /*  +ED */ u8 pad_xED[0xF8 - 0xED];
+    /*  +ED */ u8 pad_xED[0xF0 - 0xED];
+    /*  +F0 */ Fighter* xF0;
+    /*  +F4 */ Item* xF4;
     /*  +F8:0 */ u8 xF8_b0 : 1;
     /*  +F8:1 */ u8 xF8_b12 : 2;
-    /*  +F8:3 */ u8 xF8_b3 : 1;
-    /*  +F8:4 */ u8 xF8_b4 : 1;
+    /*  +F8:3 */ u8 xF8_b34 : 2;
     /*  +F8:5 */ u8 xF8_b5 : 1;
     /*  +F8:6 */ u8 xF8_b6 : 1;
     /*  +F8:7 */ u8 xF8_b7 : 1;

@@ -12,7 +12,6 @@ typedef struct mp_UnkStruct1 mp_UnkStruct1;
 typedef struct mp_UnkStruct2 mp_UnkStruct2;
 typedef struct mp_UnkStruct3 mp_UnkStruct3;
 typedef struct mp_UnkStruct4 mp_UnkStruct4;
-typedef struct mp_UnkStruct5 mp_UnkStruct5;
 typedef struct mp_UnkStruct6 mp_UnkStruct6;
 typedef struct mp_UnkStruct7 mp_UnkStruct7;
 typedef struct mpisland mpisland;

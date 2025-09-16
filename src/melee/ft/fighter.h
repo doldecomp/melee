@@ -14,6 +14,10 @@
 
 extern struct Fighter_804D64FC_t {
     u8** cmdscripts;
+    u8 pad_x4[8];
+    UNK_T* xC;
+    u8 pad_x10[0x10];
+    float* x20;
 }* Fighter_804D64FC;
 
 /* 0679B0 */ void Fighter_800679B0(void);
