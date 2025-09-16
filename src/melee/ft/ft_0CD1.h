@@ -5,7 +5,7 @@
 
 #include "ftCommon/forward.h"
 
-/* 0CD140 */ UNK_RET ftCo_800CD140(UNK_PARAMS);
+/* 0CD140 */ void ftCo_800CD140(Fighter_GObj*, int, int, int);
 /* 0CD1BC */ void ftCo_800CD1BC(Fighter_GObj*);
 /* 0CD204 */ void ftCo_800CD204(Fighter_GObj*);
 /* 0CD278 */ void ftCo_800CD278(Fighter_GObj*);

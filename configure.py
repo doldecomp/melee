@@ -660,7 +660,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_FallAerial.c"),
             Object(Matching, "melee/ft/ftswing.c"),
             Object(NonMatching, "melee/ft/ft_0CD1.c"),
-            Object(NonMatching, "melee/ft/ftstarrodswing.c"),
+            Object(Matching, "melee/ft/ftstarrodswing.c"),
             Object(NonMatching, "melee/ft/ftlipstickswing.c"),
             Object(NonMatching, "melee/ft/ft_0CDD.c"),
             Object(Matching, "melee/ft/ftattacks4combo.c"),
