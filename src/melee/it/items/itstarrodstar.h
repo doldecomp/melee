@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 2988E4 */ UNK_RET it_802988E4(UNK_PARAMS);
+/* 2988E4 */ void it_802988E4(Fighter_GObj*, Vec*, int);
 /* 2989C8 */ UNK_RET it_802989C8(UNK_PARAMS);
 /* 298ACC */ bool itStarrodstar_UnkMotion0_Anim(Item_GObj* gobj);
 /* 298BAC */ void itStarrodstar_UnkMotion0_Phys(Item_GObj* gobj);

@@ -3020,7 +3020,7 @@ melee/it/items/itsscope.c:
 melee/it/items/itstarrod.c:
 	.text       start:0x80292360 end:0x802927E8
 	.data       start:0x803F5F90 end:0x803F5FF0
-	.sdata2     start:0x804DCAF0 end:0x804DCAF8
+	.sdata2     start:0x804DCAF0 end:0x804DCAF4
 
 melee/it/items/itharisen.c:
 	.text       start:0x802927E8 end:0x80292D48
