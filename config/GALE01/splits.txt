@@ -909,8 +909,12 @@ melee/ft/ftswing.c:
 	.sdata      start:0x804D3CB8 end:0x804D3CBA
 
 melee/ft/ft_0CD1.c:
-	.text       start:0x800CD140 end:0x800CD82C
-	.sdata2     start:0x804D8EF8 end:0x804D8F08
+	.text       start:0x800CD140 end:0x800CD350
+	.sdata2     start:0x804D8EF8 end:0x804D8EFC
+
+melee/ft/ft_0CD3.c:
+	.text       start:0x800CD350 end:0x800CD82C
+	.sdata2     start:0x804D8F00 end:0x804D8F08
 
 melee/ft/ftstarrodswing.c:
 	.text       start:0x800CD82C end:0x800CDAB4

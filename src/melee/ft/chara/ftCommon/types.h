@@ -400,6 +400,11 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ FtMotionId prev_msid;
     } parasol_open;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ int x4;
+        /* fp+2344 */ float x8;
+    } swing;
 };
 
 /// @todo Fake, need to find real size of #HitCapsule

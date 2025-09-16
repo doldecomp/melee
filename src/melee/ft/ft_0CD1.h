@@ -5,7 +5,7 @@
 
 #include "ftCommon/forward.h"
 
-/* 0CD140 */ void ftCo_800CD140(Fighter_GObj*, int, int, int);
+/* 0CD140 */ void ftCo_800CD140(Fighter_GObj*, int, int, int, float);
 /* 0CD1BC */ void ftCo_800CD1BC(Fighter_GObj*);
 /* 0CD204 */ void ftCo_800CD204(Fighter_GObj*);
 /* 0CD278 */ void ftCo_800CD278(Fighter_GObj*);
@@ -27,8 +27,8 @@
 /* 0CD560 */ void ftCo_ParasolSwing_Phys(Fighter_GObj* gobj);
 /* 0CD580 */ void ftCo_ParasolSwing_Coll(Fighter_GObj* gobj);
 /* 0CD5A8 */ void ftCo_800CD5A8(Fighter_GObj*, int, int, float);
-/* 0CD604 */ UNK_RET ft_800CD604(UNK_PARAMS);
-/* 0CD65C */ UNK_RET ft_800CD65C(UNK_PARAMS);
+/* 0CD604 */ void ft_800CD604(Fighter_GObj*);
+/* 0CD65C */ void ft_800CD65C(Fighter_GObj* gobj);
 /* 0CD6A0 */ void ftCo_HarisenSwing_Anim(Fighter_GObj* gobj);
 /* 0CD7C4 */ void ftCo_HarisenSwing_IASA(Fighter_GObj* gobj);
 /* 0CD7E4 */ void ftCo_HarisenSwing_Phys(Fighter_GObj* gobj);

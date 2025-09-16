@@ -14,7 +14,7 @@ void ftCo_800CD82C(Fighter_GObj* gobj, int arg1, int arg2, float arg3)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[0] = 540000;
     fp->cmd_vars[1] = 0;
-    ftCo_800CD140(gobj, arg1, 0, arg2);
+    ftCo_800CD140(gobj, arg1, 0, arg2, arg3);
     fp->accessory4_cb = ft_800CD914;
     fp->take_dmg_cb = ft_800CD31C;
 }
