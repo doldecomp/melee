@@ -104,7 +104,7 @@ extern struct Fighter_804D64FC_t {
 }** Fighter_804D6540;
 /* 4D6544 */ extern FighterPartsTable** ftPartsTable;
 /* 4D6548 */ extern UNK_T Fighter_804D6548;
-/* 4D654C */ extern UNK_T Fighter_804D654C;
+/* 4D654C */ extern float (*Fighter_804D654C)[5];
 /* 4D6550 */ extern int** Fighter_804D6550;
 /* 4D6554 */ extern ftCommonData* p_ftCommonData;
 
