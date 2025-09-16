@@ -121,7 +121,7 @@ typedef enum ftDk_MotionState {
     ftDk_MS_ThrowAirFHi,
     ftDk_MS_ThrowAirFLw,
     ftDk_MS_SpecialNStart,
-    ftDk_MS_SpecialNLoop,
+    /* 172 */ ftDk_MS_SpecialNLoop,
     ftDk_MS_SpecialNCancel,
     ftDk_MS_SpecialN,
     ftDk_MS_SpecialNFull,

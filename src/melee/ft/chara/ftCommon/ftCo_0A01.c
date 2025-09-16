@@ -1708,15 +1708,15 @@ Fighter* ftCo_800A589C(Fighter* fp)
     return NULL;
 }
 
-bool ftCo_800A5908(Fighter* fp)
+bool ftCo_800A5908(Item* ip)
 {
-    if (fp->motion_id == ftCo_MS_DeadUpFallHitCameraFlat) {
+    if (ip->kind == It_Kind_Heart) {
         return true;
     }
-    if (fp->motion_id == ftCo_MS_DeadUpFallIce) {
+    if (ip->kind == It_Kind_Tomato) {
         return true;
     }
-    if (fp->motion_id == ftCo_MS_Turn) {
+    if (ip->kind == It_Kind_Foods) {
         return true;
     }
     return false;
@@ -1761,48 +1761,45 @@ bool ftCo_800A59C0(Item* ip)
     return false;
 }
 
-bool ftCo_800A59E4(Fighter* fp)
+bool ftCo_800A59E4(Item* ip)
 {
-    if (fp == NULL) {
+    if (ip == NULL) {
         return false;
     }
-    if (fp->motion_id == ftCo_MS_KneeBend ||
-        fp->motion_id == ftCo_MS_RunDirect ||
-        fp->motion_id == ftCo_MS_RunBrake ||
-        fp->motion_id == ftCo_MS_Sleep ||
-        fp->motion_id == ftCo_MS_Rebirth ||
-        fp->motion_id == ftCo_MS_RebirthWait)
+    if (ip->kind == It_Kind_Harisen || ip->kind == It_Kind_StarRod ||
+        ip->kind == It_Kind_LipStick || ip->kind == It_Kind_Bat ||
+        ip->kind == It_Kind_Sword || ip->kind == It_Kind_Parasol)
     {
         return true;
     }
     return false;
 }
 
-bool ftCo_800A5A28(Fighter* fp)
+bool ftCo_800A5A28(Item* ip)
 {
-    switch (fp->motion_id) {
-    case ftCo_MS_DeadDown:
-    case ftCo_MS_DeadUpFall:
-    case ftCo_MS_DeadUpFallHitCamera:
-    case ftCo_MS_Wait:
-    case ftCo_MS_WalkSlow:
-    case ftCo_MS_WalkFast:
-    case ftCo_MS_TurnRun:
-    case ftCo_MS_Dash:
-    case ftCo_MS_FallAerialB:
+    switch (ip->kind) {
+    case It_Kind_Capsule:
+    case It_Kind_BombHei:
+    case It_Kind_Dosei:
+    case It_Kind_G_Shell:
+    case It_Kind_R_Shell:
+    case It_Kind_Freeze:
+    case It_Kind_MSBomb:
+    case It_Kind_Flipper:
+    case It_Kind_M_Ball:
         return true;
     default:
         return false;
     }
 }
 
-bool ftCo_800A5A5C(Fighter* fp)
+bool ftCo_800A5A5C(Item* ip)
 {
-    switch (fp->motion_id) {
-    case ftCo_MS_DeadLeft:
-    case ftCo_MS_DeadRight:
-    case ftCo_MS_DeadUpStar:
-    case ftCo_MS_DeadUpStarIce:
+    switch (ip->kind) {
+    case It_Kind_Box:
+    case It_Kind_Taru:
+    case It_Kind_Kusudama:
+    case It_Kind_TaruCann:
         return true;
     default:
         return false;
@@ -2861,8 +2858,7 @@ void ftCo_800AACD0(Fighter* fp)
     }
     temp_r3_2 = mpIsland_8005AB54(fp->coll_data.floor.index);
     if (temp_r3_2 != NULL) {
-        /// @todo Are mp_UnkStruct0/5 the same type?
-        mpIsland_8005ACE8((mp_UnkStruct5*) temp_r3_2, &sp24, &sp18);
+        mpIsland_8005ACE8(temp_r3_2, &sp24, &sp18);
         if ((data->x54.x < sp24.x || data->x54.x > sp18.x) &&
             !ftCo_800A2BD4(fp))
         {
@@ -3803,21 +3799,6 @@ static inline bool inlineI1_alt(Fighter* fp)
     }
 }
 
-static inline bool inlineI2(Item_GObj* gobj)
-{
-    ItemKind temp_r0 = GET_ITEM(gobj)->kind;
-    if (temp_r0 == It_Kind_Heart) {
-        return true;
-    }
-    if (temp_r0 == It_Kind_Tomato) {
-        return true;
-    }
-    if (temp_r0 == It_Kind_Foods) {
-        return true;
-    }
-    return false;
-}
-
 static inline void ftCo_800AF78C_inline0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
@@ -3915,7 +3896,7 @@ void ftCo_800AF78C(Fighter* fp)
     temp_r31 = &fp->x1A88.x44;
 
     temp_r27 = &fp->x1A88;
-    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         temp_r27->x4C = NULL;
     } else if (fp->x2168 != 0) {
         temp_r27->x4C = NULL;
@@ -3968,7 +3949,7 @@ void ftCo_800AFC40(Fighter* fp)
     temp_r31->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
     temp_r28 = &fp->x1A88;
-    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         temp_r28->x4C = NULL;
     } else {
         if (fp->x2168 != 0) {
@@ -4035,7 +4016,7 @@ void ftCo_800AFE3C(Fighter* fp, int arg1)
     temp_r31->xF9_b7 = true;
     temp_r31->xF9_b1 = false;
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         temp_r31->x4C = NULL;
     } else {
         if (fp->x2168 != 0) {
@@ -4059,8 +4040,6 @@ void ftCo_800B00F8(Fighter* fp)
 {
     Vec3 sp28;
     Fighter* temp_r3;
-    Item_GObj* temp_r3_3;
-    enum ItemKind temp_r0;
     s32 temp_r3_2;
     s32 temp_r3_4;
     s32 var_r0;
@@ -4114,8 +4093,7 @@ void ftCo_800B00F8(Fighter* fp)
         return;
     }
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    temp_r3_3 = fp->item_gobj;
-    if (temp_r3_3 != NULL && !inlineI2(temp_r3_3)) {
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         temp_r31->x4C = NULL;
     } else {
         if (fp->x2168 != 0) {
@@ -4234,7 +4212,7 @@ void ftCo_800B0760(Fighter* fp)
 
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
 
-    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         data->x4C = NULL;
     } else if (fp->x2168 != 0) {
         data->x4C = NULL;
@@ -4574,7 +4552,7 @@ void ftCo_800B126C(Fighter* fp)
     PAD_STACK(0x10);
 
     fp->x1A88.x44 = ftCo_800A4BEC(fp);
-    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         data->x4C = NULL;
     } else {
         if (fp->x2168 != 0) {
@@ -4637,7 +4615,7 @@ void ftCo_800B1478(Fighter* fp)
     temp_r31->xF9_b1 = false;
 
     *temp_r27 = ftCo_800A4BEC(fp);
-    if (fp->item_gobj != NULL && !inlineI2(fp->item_gobj)) {
+    if (fp->item_gobj != NULL && !ftCo_800A5908(GET_ITEM(fp->item_gobj))) {
         temp_r31->x4C = NULL;
     } else {
         if (fp->x2168 != 0) {

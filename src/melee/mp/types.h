@@ -23,7 +23,8 @@ struct mpIsland_80458E88_t {
 
 struct mp_UnkStruct0 {
     /*  +0 */ mp_UnkStruct0* next;
-    /*  +4 */ int x4;
+    /*  +4 */ u16 x4;
+    /*  +6 */ u16 x6;
     /*  +8 */ Vec3 x8;
     /* +14 */ Vec3 x14;
     /* +20 */ int x20;
@@ -55,22 +56,6 @@ struct mp_UnkStruct3 {
     int x0;
     int x4;
     int xC;
-};
-
-struct mp_UnkStruct5 {
-    /*  +0 */ u8 x0[0x4];
-    /*  +4 */ u16 x4;
-    /*  +6 */ u16 x6;
-    /*  +8 */ Vec3 x8;
-    /* +14 */ Vec3 x14;
-    /* +20 */ u8 x20[0x28 - 0x20];
-    /* +28 */ short x28;
-    /* +2A */ short x2A;
-    /* +2C */ u16 x2C;
-    /* +30 */ int x30;
-    /* +34 */ int x34;
-    /* +38 */ int x38;
-    /* +3C */ int x3C;
 };
 
 struct mp_UnkStruct6 {

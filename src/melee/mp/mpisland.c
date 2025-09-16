@@ -288,7 +288,7 @@ bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
     return false;
 }
 
-void mpIsland_8005ACE8(mp_UnkStruct5* arg0, Vec3* arg1, Vec3* arg2)
+void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 {
     int var_r31;
     mp_UnkStruct2* var_r30;
