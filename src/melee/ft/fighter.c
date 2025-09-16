@@ -147,7 +147,7 @@ struct Fighter_804D653C_t* Fighter_804D653C = NULL;
 struct Fighter_804D6540_t** Fighter_804D6540 = NULL;
 FighterPartsTable** ftPartsTable = NULL;
 UNK_T Fighter_804D6548 = NULL;
-UNK_T Fighter_804D654C = NULL;
+float (*Fighter_804D654C)[5] = NULL;
 int** Fighter_804D6550 = NULL;
 ftCommonData* p_ftCommonData;
 

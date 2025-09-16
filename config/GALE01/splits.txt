@@ -905,8 +905,8 @@ melee/ft/chara/ftCommon/ftCo_FallAerial.c:
 
 melee/ft/ftswing.c:
 	.text       start:0x800CCE94 end:0x800CD140
-	.data       start:0x803C6D70 end:0x803C6EB8
-	.sdata      start:0x804D3CB8 end:0x804D3CC0
+	.data       start:0x803C6D70 end:0x803C6EB4
+	.sdata      start:0x804D3CB8 end:0x804D3CBA
 
 melee/ft/ft_0CD1.c:
 	.text       start:0x800CD140 end:0x800CD82C
