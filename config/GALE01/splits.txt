@@ -923,8 +923,8 @@ melee/ft/ftstarrodswing.c:
 
 melee/ft/ftlipstickswing.c:
 	.text       start:0x800CDAB4 end:0x800CDD14
-	.data       start:0x803C6EF8 end:0x803C6F40
-	.sdata2     start:0x804D8F10 end:0x804D8F18
+	.data       start:0x803C6EF8 end:0x803C6F39
+	.sdata2     start:0x804D8F10 end:0x804D8F14
 
 melee/ft/ft_0CDD.c:
 	.text       start:0x800CDD14 end:0x800CECE8

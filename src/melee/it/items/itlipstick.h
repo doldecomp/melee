@@ -8,8 +8,8 @@
 #include "it/items/types.h"
 
 /* 29570C */ void it_3F14_Logic23_Spawned(Item_GObj*);
-/* 295748 */ UNK_RET it_80295748(UNK_PARAMS);
-/* 295770 */ UNK_RET it_80295770(UNK_PARAMS);
+/* 295748 */ void it_80295748(Item_GObj*, Vec*);
+/* 295770 */ void it_80295770(Item_GObj*, Vec*, float, int);
 /* 2957AC */ UNK_RET it_802957AC(UNK_PARAMS);
 /* 295804 */ bool itLipstick_UnkMotion0_Anim(Item_GObj* gobj);
 /* 29580C */ void itLipstick_UnkMotion0_Phys(Item_GObj* gobj);

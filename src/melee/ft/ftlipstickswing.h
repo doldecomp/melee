@@ -11,6 +11,6 @@
 /* 0CDB34 */ void ftCo_LipstickSwing_IASA(Fighter_GObj* gobj);
 /* 0CDB54 */ void ftCo_LipstickSwing_Phys(Fighter_GObj* gobj);
 /* 0CDB74 */ void ftCo_LipstickSwing_Coll(Fighter_GObj* gobj);
-/* 0CDB9C */ UNK_RET ft_800CDB9C(UNK_PARAMS);
+/* 0CDB9C */ void ft_800CDB9C(Fighter_GObj*);
 
 #endif
