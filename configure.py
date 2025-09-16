@@ -250,9 +250,7 @@ cflags_base = [
 # Debug flags
 if args.debug:
     # Or -sym dwarf-2 for Wii compilers
-    cflags_base.extend(["-sym on", "-DDEBUG=1"])
-else:
-    cflags_base.extend(["-sym off", "-DNDEBUG=1"])
+    cflags_base.append("-sym on")
 
 cflags_base.append(f"-maxerrors {args.max_errors}")
 if args.max_errors == 0:
