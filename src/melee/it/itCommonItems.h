@@ -717,4 +717,9 @@ typedef struct itOctarock_ItemVars {
     /* +20 ip+DF4 */ Vec3 x20;
 } itOctarock_ItemVars;
 
+typedef struct itStarRodStar_ItemVars {
+    int x0;
+    float x4;
+} itStarRodStar_ItemVars;
+
 #endif
