@@ -14,9 +14,7 @@ struct ftPopo_FighterVars {
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
-    /* 0x2248 */ u32 x2248;
+    /* 0x2240 */ Vec x2240;
     /* 0x224C */ u32 x224C;
     /* 0x2250 */ float x2250;
 };
@@ -36,10 +34,25 @@ typedef struct ftIceClimberAttributes {
     float x2C;
     u8 _30[0x68 - 0x30];
     int x68;
-    u8 _6C[0xC4 - 0x6C];
+    u8 _6C[0xB0 - 0x6C];
+    float xB0;
+    float xB4;
+    u8 _B8[0xC4 - 0xB8];
     float xC4;
     float xC8;
-    u8 _CC[0x90];
+    u8 _CC[0xD0 - 0xCC];
+    float xD0;
+    u8 _D4[0x12C - 0xD4];
+    float x12C;
+    float x130;
+    float x134;
+    float x138;
+    float x13C;
+    float x140;
+    float x144;
+    float x148;
+    float x14C;
+    u8 _150[0x15C - 0x150];
 } ftIceClimberAttributes;
 STATIC_ASSERT(sizeof(ftIceClimberAttributes) == 0x15C);
 
@@ -54,6 +67,9 @@ union ftPp_MotionVars {
         /* fp+2358 */ UNK_T x18;
         /* fp+235C */ float x1C;
     } specials;
+    struct {
+        /* fp+2340 */ int x0;
+    } unk_80123954;
 };
 
 #endif
