@@ -126,7 +126,7 @@ struct ftCommonData {
     /* +100 */ float x100;
     /* +104 */ float kb_min;
     /* +108 */ UNK_T x108;
-    /* +10C */ UNK_T x10C;
+    /* +10C */ float x10C;
     /* +110 */ UNK_T x110;
     /* +114 */ UNK_T x114;
     /* +118 */ UNK_T x118;
@@ -267,7 +267,7 @@ struct ftCommonData {
     /* +33C */ float escapeair_decay;
     /* +340 */ float x340;
     /* +344 */ float x344;
-    /* +348 */ UNK_T x348;
+    /* +348 */ int x348;
     /* +34C */ UNK_T x34C;
     /* +350 */ UNK_T x350;
     /* +354 */ UNK_T x354;
@@ -280,16 +280,8 @@ struct ftCommonData {
     /* +370 */ float x370;
     /* +374 */ UNK_T x374;
     /* +378 */ UNK_T x378;
-    /* +37C */ UNK_T x37C;
-    /* +380 */ UNK_T x380;
-    /* +384 */ UNK_T x384;
-    /* +388 */ UNK_T x388;
-    /* +38C */ UNK_T x38C;
-    /* +390 */ UNK_T x390;
-    /* +394 */ UNK_T x394;
-    /* +398 */ UNK_T x398;
-    /* +39C */ UNK_T x39C;
-    /* +3A0 */ UNK_T x3A0;
+    /* +37C */ float x37C;
+    /* +380 */ lbColl_80008D30_arg1 x380;
     /* +3A4 */ float grab_timer_decrement;
     /* +3A8 */ float x3A8;
     /* +3AC */ UNK_T x3AC;
@@ -594,13 +586,16 @@ typedef struct ftData_x44_t {
 
 struct ftData {
     /*  +0 */ struct {
-        /*   +0 */ u8 x0[0x8C];
+        /*   +0 */ u8 x0[0x88];
+        /*  +88 */ float weight;
         /*  +8C */ float x8C;
         /*  +90 */ u8 x90[0xFC - 0x90];
         /*  +FC */ float xFC;
         /* +100 */ u8 x100[0x168 - 0x100];
         /* +168 */ float x168;
         /* +16C */ int x16C_idx;
+        /* +170 */ u8 x170[0x180 - 0x170];
+        /* +180 */ unsigned char weight_independent_throws_mask;
     }* x0;
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct ftData_x8 {
@@ -1532,7 +1527,7 @@ struct Fighter {
     /* fp+2168 */ int x2168;
     /* fp+216C */ float unk_grab_val;
     /* fp+2170 */ float x2170;
-    /* fp+2174 */ u8 filler_x2174[0x2180 - 0x2174];
+    /* fp+2174 */ Vec x2174;
     /* fp+2180 */ s32 x2180;
     /* fp+2184 */ HSD_JObj* x2184;
     /* fp+2188 */ S32Vec2 x2188;

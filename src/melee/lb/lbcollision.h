@@ -11,18 +11,6 @@
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
-typedef struct {
-    /*  +0 */ HitCapsuleState state;
-    /*  +4 */ u32 damage;
-    /*  +8 */ int kb_angle;
-    /*  +C */ u32 unkC;
-    /* +10 */ u32 unk10;
-    /* +14 */ u32 unk14;
-    /* +18 */ u32 element;
-    /* +1C */ int sfx_severity;
-    /* +20 */ enum_t sfx_kind;
-} lbColl_80008D30_arg1;
-
 struct lbColl_8000A10C_arg0_t;
 
 struct Fighter_x1614_t;

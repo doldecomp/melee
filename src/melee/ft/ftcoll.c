@@ -1068,7 +1068,8 @@ void ftColl_8007925C(Fighter_GObj* gobj)
 extern double const ftColl_804D8308;
 extern float const ftColl_804D8314;
 
-void ftColl_80079AB0(void)
+float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, int unk_count, float arg3,
+                      float attack, float defense, float weight)
 {
     NOT_IMPLEMENTED;
 }

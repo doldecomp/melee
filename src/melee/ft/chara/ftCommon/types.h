@@ -405,6 +405,12 @@ union ftCommon_MotionVars {
         /* fp+2344 */ int x4;
         /* fp+2344 */ float x8;
     } swing;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ int x4;
+        /* fp+2348 */ int x8;
+        /* fp+234C */ Vec xC;
+    } throw;
 };
 
 /// @todo Fake, need to find real size of #HitCapsule
