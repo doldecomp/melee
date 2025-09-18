@@ -1,6 +1,8 @@
-#include <dolphin/mtx.h>
+#include "ft/chara/ftCommon/types.h"
 
-Vec3 ftNn_Unk2_803CDD60[] = {
-    { 12, 0, -6 },
-    { 6, 6, 6 },
+ftCollisionBox ftNn_Unk2_803CDD60 = {
+    12,
+    0,
+    { -6, 6 },
+    { 6, 6 },
 };

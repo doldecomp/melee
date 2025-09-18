@@ -1314,7 +1314,7 @@ melee/ft/chara/ftPopo/ftPp_SpecialS.c:
 
 melee/ft/chara/ftNana/ftNn_Init.c:
 	.text       start:0x80122EDC end:0x801243AC
-	.data       start:0x803CD7F8 end:0x803CDD60
+	.data       start:0x803CD7F8 end:0x803CDD5C
 	.sdata2     start:0x804D9898 end:0x804D98F0
 
 melee/ft/chara/ftNana/ftNn_Unk0.c:
