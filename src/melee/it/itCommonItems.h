@@ -316,6 +316,18 @@ typedef struct {
 } itGShell_ItemVars;
 STATIC_ASSERT(sizeof(itGShell_ItemVars) == 88);
 
+typedef struct {
+    unsigned char xDD4_b0 : 1;
+    unsigned char xDD4_b1 : 1;
+    unsigned char xDD4_b2 : 1;
+    unsigned char xDD4_b3 : 1;
+    unsigned char xDD4_b4 : 1;
+    unsigned char xDD4_b5 : 1;
+    unsigned char xDD4_b6 : 1;
+    unsigned char xDD4_b7 : 1;
+} itMsBomb_ItemVars;
+STATIC_ASSERT(sizeof(itMsBomb_ItemVars) == 1);
+
 typedef struct itPokemonAttributes {
     f32 x0;
     s32 timer;
