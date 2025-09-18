@@ -311,10 +311,10 @@ typedef struct {
     /* ip+DEC */ unsigned char xDEC_b7 : 1;
     /* ip+DF0 */ char pad_DF0[0xE10 - 0xDF0];
     /* ip+E10 */ int xE10;
-    /* ip+E14 */ char pad_E14[0xE24 - 0xE14];
-    /* ip+E24 */ Vec3 vel;
+    /* ip+E14 */ char pad_E14[0xE20 - 0xE14];
+    /* ip+E20 */ Vec3 vel;
 } itGShell_ItemVars;
-STATIC_ASSERT(sizeof(itGShell_ItemVars) == 92);
+STATIC_ASSERT(sizeof(itGShell_ItemVars) == 88);
 
 typedef struct itPokemonAttributes {
     f32 x0;
