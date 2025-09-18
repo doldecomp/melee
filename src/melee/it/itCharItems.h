@@ -41,6 +41,13 @@ typedef struct {
 } itDrMarioPillAttributes;
 
 typedef struct {
+    /* x0 */ f32 x0;
+    /* x4 */ f32 x4;
+    /* x8 */ f32 x8;
+    /* xC */ f32 xC;
+} itFireAttributes;
+
+typedef struct {
     /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
                        // that transforms the item model (possibly frame number
                        // of animation?)
@@ -431,6 +438,11 @@ typedef struct itPikachutJoltGround_ItemVars {
     /* +0 +DD4 */ char pad_0[0x8];
     /* +8 +DDC */ UNK_T unk_8;
 } itPikachutJoltGround_ItemVars;
+
+typedef struct itPikachutJoltAir_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x4];
+    /* +4 +DD8 */ u32 xDD8;
+} itPikachutJoltAir_ItemVars;
 
 typedef struct itSamusGrapple_ItemVars {
     /*  +0 +DD4 */ char pad_0[0x10];

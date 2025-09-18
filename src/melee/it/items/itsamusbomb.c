@@ -3,6 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/it_2725.h"
+
 /// #it_802B4AC8
 
 /// #it_802B4BA0
@@ -37,13 +39,19 @@ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic50_HitShield
 
-/// #it_2725_Logic50_ShieldBounced
+bool it_2725_Logic50_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 /// #it_2725_Logic50_Reflected
 
 /// #it_802B53CC
 
-/// #itSamusbomb_UnkMotion3_Anim
+bool itSamusbomb_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
 
 /// #it_802B5478
 

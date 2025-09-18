@@ -1,6 +1,10 @@
 #include "itoctarockstone.h"
 
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
+
+#include "it/inlines.h"
+#include "it/it_2725.h"
 
 /// #it_802E878C
 
@@ -26,7 +30,10 @@ bool it_2725_Logic4_Absorbed(Item_GObj* arg0)
 
 /// #it_2725_Logic4_Reflected
 
-/// #it_2725_Logic4_ShieldBounced
+bool it_2725_Logic4_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 /// #it_802E883C
 
@@ -43,9 +50,16 @@ bool itOctarockstone_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOctarockstone_UnkMotion1_Phys
+void itOctarockstone_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itOctarockstone_UnkMotion1_Coll
+bool itOctarockstone_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    return it_8026DFB0(gobj);
+}
 
 void it_802E89B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

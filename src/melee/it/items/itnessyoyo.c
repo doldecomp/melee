@@ -1,6 +1,16 @@
-/// #it_802BE598
+#include "itnessyoyo.h"
 
-/// #it_802BE5B8
+#include "it/it_26B1.h"
+
+void it_802BE598(Item_GObj* gobj)
+{
+    it_8026B724(gobj);
+}
+
+void it_802BE5B8(Item_GObj* gobj)
+{
+    it_8026B73C(gobj);
+}
 
 /// #it_802BE5D8
 

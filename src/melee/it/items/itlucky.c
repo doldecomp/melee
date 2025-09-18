@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802D5050
 
@@ -47,13 +48,19 @@ bool itLucky_UnkMotion6_Anim(Item_GObj* gobj)
 
 /// #it_802D55DC
 
-/// #it_802D5600
+void it_802D5600(Item_GObj* gobj)
+{
+    it_8027A09C(gobj);
+}
 
 /// #it_802D5620
 
 /// #it_802D5648
 
-/// #it_802D56F0
+void it_802D56F0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #it_802D5710
 

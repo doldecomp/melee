@@ -1,5 +1,8 @@
 #include "itgamewatchchef.h"
 
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+
 /// #it_802C837C
 
 /// #it_2725_Logic112_DmgDealt
@@ -26,8 +29,14 @@ void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic112_Absorbed
 
-/// #it_2725_Logic112_ShieldBounced
+bool it_2725_Logic112_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 /// #it_2725_Logic112_Reflected
 
-/// #it_2725_Logic112_EvtUnk
+void it_2725_Logic112_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

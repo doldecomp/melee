@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_26B1.h"
 
 /// #it_802E05A0
 
@@ -68,6 +69,9 @@ void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #it_802E1694
 
-/// #it_802E16D8
+void it_802E16D8(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #it_802E16F8

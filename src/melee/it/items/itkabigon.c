@@ -3,13 +3,19 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+
 /// #it_802C9D40
 
 void it_802C9DFC(void) {}
 
 /// #it_2725_Logic2_Destroyed
 
-/// #it_802C9E24
+void it_802C9E24(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802C9E44
 
@@ -38,7 +44,10 @@ bool itKabigon_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #itKabigon_UnkMotion2_Anim
 
-/// #itKabigon_UnkMotion2_Phys
+void itKabigon_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    it_8027A09C(gobj);
+}
 
 /// #itKabigon_UnkMotion2_Coll
 

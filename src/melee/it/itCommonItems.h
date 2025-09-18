@@ -744,6 +744,11 @@ typedef struct itOctarock_ItemVars {
     /* +20 ip+DF4 */ Vec3 x20;
 } itOctarock_ItemVars;
 
+typedef struct itSonans_ItemVars {
+    /* ip+DD4 */ u8 _0[0x60 - 0x0];
+    /* ip+E34 */ f32 x60;
+} itSonans_ItemVars;
+
 typedef struct itStarRodStar_ItemVars {
     int x0;
     float x4;

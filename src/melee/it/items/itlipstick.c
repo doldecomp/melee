@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_3F14_Logic23_Spawned
 
@@ -66,11 +67,17 @@ void itLipstick_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic23_Clanked
 
-/// #it_3F14_Logic23_Reflected
+bool it_3F14_Logic23_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 /// #it_3F14_Logic23_HitShield
 
-/// #it_3F14_Logic23_ShieldBounced
+bool it_3F14_Logic23_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 void it_3F14_Logic23_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

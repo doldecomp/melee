@@ -9,7 +9,10 @@ int it_802B1DEC(Item_GObj* arg0)
 
 /// #it_802B1DF8
 
-/// #it_802B1FC8
+s32 it_802B1FC8(Item_GObj* gobj)
+{
+    return it_802B22B8(gobj);
+}
 
 /// #it_802B1FE8
 

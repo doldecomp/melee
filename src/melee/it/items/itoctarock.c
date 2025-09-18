@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802E4A44
 
@@ -74,7 +75,10 @@ void itOctarock_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 void itOctarock_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itOctarock_UnkMotion7_Coll
+bool itOctarock_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    return it_8027C79C(gobj);
+}
 
 /// #it_802E58A0
 
@@ -83,9 +87,16 @@ bool itOctarock_UnkMotion8_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOctarock_UnkMotion8_Phys
+void itOctarock_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itOctarock_UnkMotion8_Coll
+bool itOctarock_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    return it_8027C794(gobj);
+}
 
 void it_802E5944(Item_GObj* gobj)
 {

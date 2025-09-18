@@ -1,6 +1,8 @@
 #include "ittincle.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
 
 /// #it_802EB5C8
 
@@ -127,9 +129,15 @@ bool itTincle_UnkMotion12_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion12_Coll
 
-/// #it_802EC830
+void it_802EC830(Item_GObj* gobj)
+{
+    Item_8026A8EC(gobj);
+}
 
-/// #it_802EC850
+void it_802EC850(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #it_802EC870
 

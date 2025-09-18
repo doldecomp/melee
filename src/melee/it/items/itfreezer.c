@@ -2,12 +2,16 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_26B1.h"
 
 /// #it_802CCF9C
 
 void it_802CCFFC(void) {}
 
-/// #it_802CD000
+void it_802CD000(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #itFreezer_UnkMotion1_Anim
 

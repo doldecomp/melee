@@ -49,7 +49,10 @@ bool itEvyoshiegg_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itEvyoshiegg_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic42_Dropped
+void it_3F14_Logic42_Dropped(Item_GObj* gobj)
+{
+    it_3F14_Logic42_Thrown(gobj);
+}
 
 /// #it_3F14_Logic42_Thrown
 

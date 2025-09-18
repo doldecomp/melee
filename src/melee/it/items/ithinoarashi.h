@@ -8,6 +8,8 @@
 #include "it/items/types.h"
 
 /* 2D5CF8 */ void it_802D5CF8(Item_GObj*);
+/* 2D5EEC */ void it_802D5EEC(Item_GObj*);
+/* 2D6084 */ void itHinoarashi_UnkMotion1_Phys(Item_GObj*);
 /* 2D6100 */ bool it_2725_Logic27_DmgReceived(Item_GObj*);
 /* 2D61A8 */ void it_802D61A8(Item_GObj*, Item_GObj*);
 /* 3F8270 */ extern ItemStateTable it_803F8270[];

@@ -1,6 +1,7 @@
 #include "itmaril.h"
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802D66F8
 
@@ -13,7 +14,10 @@ bool it_802D6808(Item_GObj* arg0)
     return false;
 }
 
-/// #it_802D6810
+bool it_802D6810(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 bool it_802D6830(Item_GObj* arg0)
 {
@@ -35,7 +39,10 @@ bool it_802D6848(Item_GObj* arg0)
     return true;
 }
 
-/// #it_802D6850
+void it_802D6850(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #it_2725_Logic28_Spawned
 
@@ -43,7 +50,10 @@ bool it_802D6848(Item_GObj* arg0)
 
 /// #itMaril_UnkMotion0_Anim
 
-/// #itMaril_UnkMotion0_Phys
+void itMaril_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    it_8027A09C(gobj);
+}
 
 /// #itMaril_UnkMotion0_Coll
 

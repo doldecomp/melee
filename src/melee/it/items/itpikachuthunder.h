@@ -19,7 +19,7 @@
 /* 2B211C */ UNK_RET it_802B211C(UNK_PARAMS);
 /* 2B21A8 */ bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2B21E0 */ bool itPikachuthunder_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2B22B8 */ UNK_RET it_802B22B8(UNK_PARAMS);
+/* 2B22B8 */ s32 it_802B22B8(Item_GObj* gobj);
 /* 2B2340 */ bool itPikachuthunder_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2B2508 */ bool it_2725_Logic39_DmgDealt(Item_GObj*);
 /* 2B2510 */ bool it_2725_Logic39_HitShield(Item_GObj*);

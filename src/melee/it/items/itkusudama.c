@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802896CC
 
@@ -77,7 +78,10 @@ bool itKusudama_UnkMotion6_Anim(Item_GObj* gobj)
 
 /// #it_8028AC74
 
-/// #itKusudama_UnkMotion7_Anim
+bool itKusudama_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
 
 void itKusudama_UnkMotion7_Phys(Item_GObj* gobj) {}
 

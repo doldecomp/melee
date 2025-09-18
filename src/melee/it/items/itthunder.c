@@ -2,16 +2,24 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_2725_Logic7_Spawned
 
 void it_802CCB10(void) {}
 
-/// #it_802CCB14
+void it_802CCB14(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #itThunder_UnkMotion1_Anim
 
-/// #itThunder_UnkMotion1_Phys
+void itThunder_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    it_8027A344(gobj);
+}
 
 /// #itThunder_UnkMotion1_Coll
 

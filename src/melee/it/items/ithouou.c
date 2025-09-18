@@ -2,16 +2,25 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_2725_Logic18_Spawned
 
 void it_802D25B8(void) {}
 
-/// #it_802D25BC
+void it_802D25BC(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #itHouou_UnkMotion1_Anim
 
-/// #itHouou_UnkMotion1_Phys
+void itHouou_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    it_8027A344(gobj);
+}
 
 bool itHouou_UnkMotion1_Coll(Item_GObj* gobj)
 {
@@ -55,7 +64,10 @@ bool itHouou_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #itHouou_UnkMotion5_Anim
 
-/// #itHouou_UnkMotion5_Phys
+void itHouou_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    it_8027A344(gobj);
+}
 
 bool itHouou_UnkMotion5_Coll(Item_GObj* gobj)
 {
@@ -76,7 +88,10 @@ bool itHouou_UnkMotion5_Coll(Item_GObj* gobj)
 
 /// #it_2725_Logic42_Spawned
 
-/// #it_802D2ED0
+void it_802D2ED0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #it_802D2EF0
 
@@ -84,4 +99,7 @@ bool itHouou_UnkMotion5_Coll(Item_GObj* gobj)
 
 /// #it_802D2F70
 
-/// #it_802D2FE8
+bool it_802D2FE8(Item_GObj* gobj)
+{
+    return it_8026DA08(gobj);
+}

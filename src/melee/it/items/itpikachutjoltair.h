@@ -11,7 +11,7 @@
 /* 2B3F20 */ UNK_RET it_802B3F20(UNK_PARAMS);
 /* 2B3F88 */ UNK_RET it_802B3F88(UNK_PARAMS);
 /* 2B4224 */ UNK_RET it_802B4224(UNK_PARAMS);
-/* 2B43B0 */ UNK_RET it_802B43B0(UNK_PARAMS);
+/* 2B43B0 */ void it_802B43B0(Item_GObj* gobj);
 /* 2B43D0 */ UNK_RET it_802B43D0(UNK_PARAMS);
 /* 2B4450 */ bool itPikachutjoltair_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2B45D0 */ void itPikachutjoltair_UnkMotion0_Phys(Item_GObj*);

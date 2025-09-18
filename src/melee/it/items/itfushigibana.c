@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_2725.h"
 
 /// #it_2725_Logic29_Spawned
 
@@ -11,7 +12,10 @@
 
 /// #itFushigibana_UnkMotion0_Anim
 
-/// #itFushigibana_UnkMotion0_Phys
+void itFushigibana_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    it_8027A09C(gobj);
+}
 
 /// #itFushigibana_UnkMotion0_Coll
 

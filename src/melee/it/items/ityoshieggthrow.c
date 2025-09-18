@@ -3,6 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/item.h"
 
 void it_802B2890(Item_GObj* item_gobj)
@@ -22,4 +23,19 @@ bool itYoshieggthrow_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802B2FA8(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
+}
+
+bool itYoshieggthrow_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
+
+bool it_802B2E5C(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
+
+bool it_802B2F88(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
 }

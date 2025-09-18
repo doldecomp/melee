@@ -4,12 +4,16 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802927E8
 
 /// #it_8029282C
 
-/// #it_3F14_Logic24_Spawned
+void it_3F14_Logic24_Spawned(Item_GObj* gobj)
+{
+    it_8029290C(gobj);
+}
 
 /// #it_8029287C
 
@@ -75,11 +79,17 @@ void itHarisen_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic24_Clanked
 
-/// #it_3F14_Logic24_Reflected
+bool it_3F14_Logic24_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 /// #it_3F14_Logic24_HitShield
 
-/// #it_3F14_Logic24_ShieldBounced
+bool it_3F14_Logic24_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 void it_3F14_Logic24_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

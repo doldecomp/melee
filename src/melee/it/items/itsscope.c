@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_80291BE0
 
@@ -66,7 +67,17 @@ void itSscope_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic21_Reflected
 
+bool it_3F14_Logic21_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
+
 /// #it_3F14_Logic21_ShieldBounced
+
+bool it_3F14_Logic21_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 /// #it_3F14_Logic21_EnteredAir
 

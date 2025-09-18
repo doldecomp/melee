@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_80286088
 
@@ -57,7 +58,10 @@ void itBox_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #it_80286AA4
 
-/// #itBox_UnkMotion6_Anim
+bool itBox_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
 
 void itBox_UnkMotion6_Phys(Item_GObj* gobj) {}
 

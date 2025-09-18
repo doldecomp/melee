@@ -9,7 +9,10 @@ void it_802BAEEC(Item_GObj* gobj)
     it_8026B724(gobj);
 }
 
-/// #it_802BAF0C
+void it_802BAF0C(Item_GObj* gobj)
+{
+    it_8026B73C(gobj);
+}
 
 /// #it_802BAF2C
 
@@ -31,7 +34,10 @@ void it_802BAEEC(Item_GObj* gobj)
 
 /// #it_802BB938
 
-/// #it_802BBAEC
+void it_802BBAEC(void)
+{
+     it_802BB938();
+}
 
 /// #it_802BBB0C
 

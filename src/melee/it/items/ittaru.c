@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_3F14_Logic2_Spawned
 
@@ -37,7 +38,10 @@ bool itTaru_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic2_Dropped
+void it_3F14_Logic2_Dropped(Item_GObj* gobj)
+{
+    it_80287F20(gobj);
+}
 
 /// #it_3F14_Logic2_Thrown
 
@@ -49,7 +53,10 @@ void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itTaru_UnkMotion3_Coll
 
-/// #it_80288194
+void it_80288194(Item_GObj* gobj)
+{
+    it_802881FC(gobj);
+}
 
 /// #it_802881B4
 
@@ -65,11 +72,17 @@ void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itTaru_UnkMotion4_Phys
 
-/// #itTaru_UnkMotion4_Coll
+bool itTaru_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    return itTaru_UnkMotion5_Coll(gobj);
+}
 
 /// #it_802885C8
 
-/// #itTaru_UnkMotion6_Anim
+bool itTaru_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
 
 void itTaru_UnkMotion6_Phys(Item_GObj* gobj) {}
 

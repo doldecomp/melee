@@ -3,11 +3,16 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/it_26B1.h"
+
 /// #it_802CAFD4
 
 void it_802CB0F4(void) {}
 
-/// #it_802CB0F8
+void it_802CB0F8(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802CB118
 
@@ -37,7 +42,10 @@ void itMatadogas_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic33_Spawned
 
-/// #it_2725_Logic33_EvtUnk
+void it_2725_Logic33_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802CB798
 

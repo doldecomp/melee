@@ -14,7 +14,7 @@
 /* 2928D4 */ bool itHarisen_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2928DC */ void itHarisen_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2928E0 */ bool itHarisen_UnkMotion0_Coll(Item_GObj* gobj);
-/* 29290C */ UNK_RET it_8029290C(UNK_PARAMS);
+/* 29290C */ void it_8029290C(Item_GObj* gobj);
 /* 292934 */ bool itHarisen_UnkMotion8_Anim(Item_GObj* gobj);
 /* 29293C */ void itHarisen_UnkMotion1_Phys(Item_GObj* gobj);
 /* 29296C */ bool itHarisen_UnkMotion1_Coll(Item_GObj* gobj);

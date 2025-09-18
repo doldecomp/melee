@@ -16,7 +16,14 @@ void it_8028ECE0(Item_GObj* gobj)
     GET_ITEM(gobj)->xDD4_itemVar.freeze.unk_1C = NULL;
 }
 
-/// #it_8028ECF0
+Item* it_8028ECF0(Item_GObj* gobj, Vec3* v)
+{
+    Item* ip = GET_ITEM(gobj);
+    v->x = ip->pos.x;
+    v->y = ip->pos.y;
+    v->z = ip->pos.z;
+    return ip;
+}
 
 /// #it_3F14_Logic17_Destroyed
 
@@ -31,7 +38,10 @@ bool itFreeze_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itFreeze_UnkMotion0_Phys
+void itFreeze_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    it_8028EDBC(gobj);
+}
 
 /// #itFreeze_UnkMotion0_Coll
 

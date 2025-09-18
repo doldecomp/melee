@@ -1,6 +1,7 @@
 #include "itgreatfoxlaser.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 
 UNK_T it_802EAF28(Item_GObj* item_gobj)
 {
@@ -34,4 +35,7 @@ bool it_2725_Logic27_Absorbed(Item_GObj* item_gobj)
 
 /// #it_2725_Logic27_Reflected
 
-/// #it_802EB5A8
+void it_802EB5A8(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}

@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_80290938
 
@@ -52,6 +53,11 @@ void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic20_Thrown
 
+void it_3F14_Logic20_Dropped(Item_GObj* gobj)
+{
+    it_3F14_Logic20_Thrown(gobj);
+}
+
 /// #itFlipper_UnkMotion3_Anim
 
 /// #itFlipper_UnkMotion3_Phys
@@ -78,9 +84,15 @@ void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic20_HitShield
 
-/// #it_3F14_Logic20_Reflected
+bool it_3F14_Logic20_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
-/// #it_3F14_Logic20_ShieldBounced
+bool it_3F14_Logic20_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 /// #it_3F14_Logic20_DmgReceived
 

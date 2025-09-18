@@ -59,7 +59,7 @@
 /* 2EC7A0 */ bool itTincle_UnkMotion12_Anim(Item_GObj* gobj);
 /* 2EC7A8 */ void itTincle_UnkMotion12_Phys(Item_GObj* gobj);
 /* 2EC80C */ bool itTincle_UnkMotion12_Coll(Item_GObj* gobj);
-/* 2EC830 */ UNK_RET it_802EC830(UNK_PARAMS);
+/* 2EC830 */ void it_802EC830(Item_GObj* gobj);
 /* 2EC850 */ void it_802EC850(Item_GObj*, Item_GObj*);
 /* 2EC870 */ UNK_RET it_802EC870(UNK_PARAMS);
 /* 2EC9E8 */ UNK_RET it_802EC9E8(UNK_PARAMS);

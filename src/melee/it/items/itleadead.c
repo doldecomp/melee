@@ -3,6 +3,10 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
+#include "it/it_266F.h"
+#include "it/it_2725.h"
+
 /// #it_802E8BCC
 
 /// #it_802E8CD8
@@ -135,7 +139,10 @@ bool itLeadead_UnkMotion15_Anim(Item_GObj* gobj)
 
 void itLeadead_UnkMotion15_Phys(Item_GObj* gobj) {}
 
-/// #itLeadead_UnkMotion15_Coll
+bool itLeadead_UnkMotion15_Coll(Item_GObj* gobj)
+{
+    return it_8027C79C(gobj);
+}
 
 /// #it_802EA334
 
@@ -144,18 +151,32 @@ bool itLeadead_UnkMotion16_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLeadead_UnkMotion16_Phys
+void itLeadead_UnkMotion16_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itLeadead_UnkMotion16_Coll
+bool itLeadead_UnkMotion16_Coll(Item_GObj* gobj)
+{
+    return it_8027C794(gobj);
+}
 
 bool itLeadead_UnkMotion17_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #itLeadead_UnkMotion17_Phys
+void itLeadead_UnkMotion17_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itLeadead_UnkMotion17_Coll
+bool itLeadead_UnkMotion17_Coll(Item_GObj* gobj)
+{
+    return it_8026DFB0(gobj);
+}
 
 /// #it_2725_Logic1_Destroyed
 

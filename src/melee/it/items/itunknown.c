@@ -6,7 +6,10 @@
 
 void it_802CE7CC(void) {}
 
-/// #it_802CE7D0
+void it_802CE7D0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+}
 
 /// #itUnknown_UnkMotion0_Anim
 

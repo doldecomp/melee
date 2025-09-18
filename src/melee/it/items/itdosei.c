@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_3F14_Logic7_Spawned
 
@@ -106,13 +107,19 @@ void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic7_DmgDealt
 
-/// #it_3F14_Logic7_Reflected
+bool it_3F14_Logic7_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 /// #it_3F14_Logic7_Clanked
 
 /// #it_3F14_Logic7_HitShield
 
-/// #it_3F14_Logic7_ShieldBounced
+bool it_3F14_Logic7_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 void it_3F14_Logic7_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

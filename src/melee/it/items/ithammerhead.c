@@ -22,9 +22,10 @@ bool itHammerhead_UnkMotion1_Anim(Item_GObj* gobj)
 
 void itHammerhead_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic40_Dropped
-
-/// #it_3F14_Logic40_Thrown
+void it_3F14_Logic40_Dropped(Item_GObj* gobj)
+{
+    it_3F14_Logic40_Thrown(gobj);
+}
 
 /// #itHammerhead_UnkMotion2_Anim
 
@@ -32,7 +33,10 @@ void itHammerhead_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 /// #itHammerhead_UnkMotion2_Coll
 
-/// #it_80299F94
+void it_80299F94(void)
+{
+    it_80299FB4();
+}
 
 /// #it_80299FB4
 

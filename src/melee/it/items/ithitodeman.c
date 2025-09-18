@@ -7,6 +7,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_2725_Logic24_Spawned
 
@@ -62,9 +63,15 @@ bool it_802D4EF4(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D4F08
+bool it_802D4F08(Item_GObj* gobj)
+{
+    return it_8027AF50(gobj);
+}
 
-/// #it_802D4F28
+bool it_802D4F28(Item_GObj* gobj)
+{
+    return it_8027AE34(gobj);
+}
 
 bool it_2725_Logic43_Absorbed(Item_GObj* arg0)
 {

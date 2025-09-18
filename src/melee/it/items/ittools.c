@@ -1,6 +1,7 @@
 #include "ittools.h"
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802EEFA8
 
@@ -32,7 +33,10 @@ void itTools_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic22_Absorbed
 
-/// #it_2725_Logic22_ShieldBounced
+bool it_2725_Logic22_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 /// #it_2725_Logic22_Reflected
 
