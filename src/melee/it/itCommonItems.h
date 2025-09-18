@@ -342,6 +342,19 @@ typedef struct {
 } itMsBomb_ItemVars;
 STATIC_ASSERT(sizeof(itMsBomb_ItemVars) == 1);
 
+typedef struct {
+    int padDD4;
+    float xDD8;
+    int xDDC;
+    HSD_GObj* xDE0;
+    int xDE4;
+    float xDE8;
+    float xDEC;
+    float xDF0;
+    unsigned int xDF4;
+} itZeldaDinFire_ItemVars;
+STATIC_ASSERT(sizeof(itZeldaDinFire_ItemVars) == 36);
+
 typedef struct itPokemonAttributes {
     f32 x0;
     s32 timer;
