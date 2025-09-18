@@ -295,11 +295,26 @@ typedef struct itTincle_ItemVars {
 } itTincle_ItemVars;
 
 typedef struct {
-    /* ip+DD4 */ char pad_0[0x3C];
+    /* ip+DD4 */ float xDD4;
+    /* ip+DD8 */ float xDD8;
+    /* ip+DDC */ float xDDC;
+    /* ip+DE0 */ float xDE0;
+    /* ip+DE4 */ float xDE4;
+    /* ip+DE8 */ int xDE8;
+    /* ip+DEC */ unsigned char xDEC_b0 : 1;
+    /* ip+DEC */ unsigned char xDEC_b1 : 1;
+    /* ip+DEC */ unsigned char xDEC_b2 : 1;
+    /* ip+DEC */ unsigned char xDEC_b3 : 1;
+    /* ip+DEC */ unsigned char xDEC_b4 : 1;
+    /* ip+DEC */ unsigned char xDEC_b5 : 1;
+    /* ip+DEC */ unsigned char xDEC_b6 : 1;
+    /* ip+DEC */ unsigned char xDEC_b7 : 1;
+    /* ip+DF0 */ char pad_DF0[0xE10 - 0xDF0];
     /* ip+E10 */ int xE10;
-    /* ip+E14 */ char pad_40[0xC];
+    /* ip+E14 */ char pad_E14[0xE24 - 0xE14];
     /* ip+E24 */ Vec3 vel;
 } itGShell_ItemVars;
+STATIC_ASSERT(sizeof(itGShell_ItemVars) == 92);
 
 typedef struct itPokemonAttributes {
     f32 x0;
