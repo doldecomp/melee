@@ -2976,7 +2976,7 @@ melee/it/items/itparasol.c:
 melee/it/items/itgshell.c:
 	.text       start:0x8028B8D8 end:0x8028CFE0
 	.data       start:0x803F5BA8 end:0x803F5C48
-	.sdata      start:0x804D5270 end:0x804D5280
+	.sdata      start:0x804D5270 end:0x804D527D
 	.sdata2     start:0x804DCA38 end:0x804DCA50
 
 melee/it/items/itrshell.c:
