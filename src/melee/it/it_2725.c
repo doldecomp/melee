@@ -3198,7 +3198,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     },
     {
         // Zelda din fire
-        it_803F76F8,
+        ItemStateTable_ZeldaDinFire,
         NULL,
         it_2725_Logic65_Destroyed,
         NULL,

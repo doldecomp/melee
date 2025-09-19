@@ -592,6 +592,7 @@ struct Item {
         itMasterHandLaser_ItemVars masterhandlaser;
         itUnk4_ItemVars unk4;
         itStarRodStar_ItemVars starrodstar;
+        itZeldaDinFire_ItemVars zeldadinfire;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
