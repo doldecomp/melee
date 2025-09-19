@@ -92,7 +92,7 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B2204 */ void gm_801B2204(MinorScene*);
 /* 1B2298 */ void gm_801B2298_OnInit(void);
 /* 1B23C4 */ void gm_801B23C4_OnLoad(void);
-/* 1B23F0 */ UNK_T gm_801B23F0(void);
+/* 1B23F0 */ void gm_801B23F0(void);
 /* 1B24B4 */ void gm_801B24B4(MinorScene*);
 /* 1B2510 */ void gm_801B2510(MinorScene*);
 /* 1B254C */ void gm_801B254C(MinorScene*);

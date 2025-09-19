@@ -4,8 +4,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "lb/forward.h" // IWYU pragma: export
-#include <baselib/forward.h>
+#include <melee/lb/forward.h> // IWYU pragma: export
+#include <sysdolphin/baselib/forward.h>
+#include <melee/gr/forward.h>
 
 #include <dolphin/card.h>
 #include <dolphin/gx.h>
@@ -239,7 +240,7 @@ struct HSD_AllocEntry {
 };
 
 struct PreloadCacheSceneEntry {
-    u32 char_id;
+    int char_id;
     u8 color;
     u8 x5;
 };
@@ -261,17 +262,14 @@ struct PreloadEntry {
     s32 effect_index;
 };
 
-// TODO: this struct might need to be smaller,
-// based on the number of iters in the struct-copy code
-// emitted by e.g. lbDvd_80018CF4
 struct PreloadCacheScene {
-    u32 is_heap_persistent[2];
+    bool is_heap_persistent[2];
     struct GameCache {
         u8 major_id;
         u8 field2_0x9;
         u8 field3_0xa;
         u8 field4_0xb;
-        u32 stage_id;
+        InternalStageId stage_id;
         PreloadCacheSceneEntry entries[8];
     } game_cache;
     s32 major_scene_changes;

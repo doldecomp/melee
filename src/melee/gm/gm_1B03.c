@@ -1620,12 +1620,12 @@ void gm_801B23C4_OnLoad(void)
     gm_804D68C1 = 0;
 }
 
-UNK_T gm_801B23F0(void)
+void gm_801B23F0(void)
 {
     size_t size = GXGetTexBufferSize(0x280, 0x1E0, 4, 0, 0);
     lbDvd_80017740(0, 0x7D6, 4, 4, OSRoundUp32B(size), 0, 1, 0x20, 0);
     lbDvd_80017740(0, 0x7D7, 4, 4, lbSnap_8001E204(), 0, 1, 0x20, 0);
-    return lbDvd_80017740(0, 0x7D8, 4, 4, lbSnap_8001E210(), 0, 1, 0x20, 0);
+    lbDvd_80017740(0, 0x7D8, 4, 4, lbSnap_8001E210(), 0, 1, 0x20, 0);
 }
 
 void gm_801B24B4(MinorScene* arg0)
