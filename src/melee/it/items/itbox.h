@@ -11,7 +11,7 @@
 /* 286248 */ UNK_RET it_80286248(UNK_PARAMS);
 /* 286340 */ UNK_RET it_80286340(UNK_PARAMS);
 /* 2863BC */ UNK_RET it_802863BC(UNK_PARAMS);
-/* 286480 */ UNK_RET fn_80286480(UNK_PARAMS);
+/* 286480 */ void fn_80286480(Item_GObj*);
 /* 2864D8 */ bool itBox_UnkMotion0_Anim(Item_GObj* gobj);
 /* 286518 */ void itBox_UnkMotion0_Phys(Item_GObj* gobj);
 /* 28651C */ bool itBox_UnkMotion0_Coll(Item_GObj* gobj);

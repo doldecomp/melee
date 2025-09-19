@@ -13,7 +13,13 @@ bool it_2725_Logic13_DmgReceived(Item_GObj* gobj)
     return false;
 }
 
-/// #it_2725_Logic13_DmgDealt
+bool it_2725_Logic13_DmgDealt(Item_GObj* gobj)
+{
+    if ((s32) GET_ITEM(gobj)->msid != 7) {
+        it_802EC1F4();
+    }
+    return false;
+}
 
 /// #it_802EB6DC
 
@@ -39,7 +45,11 @@ bool itTincle_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion1_Phys
 
-/// #itTincle_UnkMotion1_Coll
+bool itTincle_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_802EBA00);
+    return false;
+}
 
 /// #it_802EBA00
 
@@ -58,7 +68,11 @@ bool itTincle_UnkMotion3_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion3_Phys
 
-/// #itTincle_UnkMotion3_Coll
+bool itTincle_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_802EC18C);
+    return false;
+}
 
 /// #it_802EBE5C
 
@@ -69,7 +83,11 @@ bool itTincle_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion4_Phys
 
-/// #itTincle_UnkMotion4_Coll
+bool itTincle_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_802EC18C);
+    return false;
+}
 
 /// #it_802EBFAC
 
@@ -105,7 +123,11 @@ bool itTincle_UnkMotion8_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion8_Phys
 
-/// #itTincle_UnkMotion8_Coll
+bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_802EC3F4);
+    return false;
+}
 
 /// #it_802EC3F4
 
@@ -113,7 +135,11 @@ bool itTincle_UnkMotion8_Anim(Item_GObj* gobj)
 
 void itTincle_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #itTincle_UnkMotion9_Coll
+bool itTincle_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802EC35C);
+    return false;
+}
 
 /// #it_802EC4D0
 
@@ -121,7 +147,11 @@ void itTincle_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 void itTincle_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #itTincle_UnkMotion10_Coll
+bool itTincle_UnkMotion10_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802EC35C);
+    return false;
+}
 
 void it_802EC604(HSD_GObj* gobj)
 {
@@ -132,7 +162,11 @@ void it_802EC604(HSD_GObj* gobj)
 
 void itTincle_UnkMotion11_Phys(Item_GObj* gobj) {}
 
-/// #itTincle_UnkMotion11_Coll
+bool itTincle_UnkMotion11_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802EC35C);
+    return false;
+}
 
 /// #it_802EC69C
 

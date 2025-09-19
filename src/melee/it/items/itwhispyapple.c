@@ -1,6 +1,7 @@
 #include "itwhispyapple.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -20,7 +21,11 @@
 
 void itWhispyapple_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #itWhispyapple_UnkMotion1_Coll
+bool itWhispyapple_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, fn_802EE7FC);
+    return false;
+}
 
 void fn_802EE7FC(HSD_GObj* gobj)
 {

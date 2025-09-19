@@ -78,6 +78,11 @@ typedef struct itBombHei_ItemVars {
     float xDEC;
 } itBombHei_ItemVars;
 
+typedef struct itBox_ItemVars {
+    s32 xDD4;
+    s32 xDD8;
+} itBox_ItemVars;
+
 typedef struct itDosei_ItemVars {
     s32 xDD4;
     s32 xDD8;
@@ -506,6 +511,11 @@ typedef struct itNokoNoko_DatAttrs {
     f32 x4;
     f32 x8;
 } itNokoNoko_DatAttrs;
+
+typedef struct itTaru_ItemVars {
+    s32 xDD4;
+    s32 xDD8;
+} itTaru_ItemVars;
 
 typedef struct itTaruCann_DatAttrs {
     /*  +0 */ char pad_0[0x28];

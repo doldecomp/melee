@@ -5,6 +5,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "gm/gm_1BA8.h"
 #include "it/item.h"
 
@@ -32,7 +33,11 @@ bool itEvyoshiegg_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itEvyoshiegg_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itEvyoshiegg_UnkMotion0_Coll
+bool itEvyoshiegg_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8029B268);
+    return false;
+}
 
 void it_8029B268(Item_GObj* gobj)
 {
@@ -46,7 +51,10 @@ bool itEvyoshiegg_UnkMotion3_Anim(Item_GObj* gobj)
 
 /// #itEvyoshiegg_UnkMotion1_Phys
 
-/// #itEvyoshiegg_UnkMotion1_Coll
+bool itEvyoshiegg_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    return it_8026E32C(gobj, it_8029B1D8);
+}
 
 void it_3F14_Logic42_PickedUp(Item_GObj* gobj)
 {

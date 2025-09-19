@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -25,7 +26,11 @@ bool itHarisen_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itHarisen_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itHarisen_UnkMotion0_Coll
+bool itHarisen_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8029290C);
+    return false;
+}
 
 void it_8029290C(Item_GObj* gobj)
 {
@@ -39,7 +44,11 @@ bool itHarisen_UnkMotion8_Anim(Item_GObj* gobj)
 
 /// #itHarisen_UnkMotion1_Phys
 
-/// #itHarisen_UnkMotion1_Coll
+bool itHarisen_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_8029287C);
+    return false;
+}
 
 /// #it_80292998
 
@@ -72,7 +81,11 @@ void it_3F14_Logic24_Thrown(Item_GObj* gobj)
 
 /// #itHarisen_UnkMotion8_Phys
 
-/// #itHarisen_UnkMotion7_Coll
+bool itHarisen_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_8029287C);
+    return false;
+}
 
 /// #it_3F14_Logic24_DmgDealt
 

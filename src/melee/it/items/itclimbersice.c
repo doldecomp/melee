@@ -5,6 +5,7 @@
 
 #include "it/forward.h"
 #include "it/item.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 
 /* 2C23D4 */ static bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
@@ -42,7 +43,11 @@ bool itClimbersice_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itClimbersice_UnkMotion1_Phys
 
-/// #itClimbersice_UnkMotion1_Coll
+bool itClimbersice_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802C1950);
+    return false;
+}
 
 /// #it_802C1AE4
 

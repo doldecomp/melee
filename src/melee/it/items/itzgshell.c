@@ -5,6 +5,7 @@
 #include "gr/grzakogenerator.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -39,7 +40,11 @@ bool itZrshell_UnkMotion0_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion1_Phys
 
-/// #itZrshell_UnkMotion1_Coll
+bool itZrshell_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E32C(gobj, it_802DE0F0);
+    return false;
+}
 
 /// #it_2725_Logic11_PickedUp
 
@@ -56,7 +61,11 @@ bool itZrshell_UnkMotion2_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion3_Phys
 
-/// #itZrshell_UnkMotion3_Coll
+bool itZrshell_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, fn_802DDC8C);
+    return false;
+}
 
 void it_2725_Logic11_Dropped(Item_GObj* gobj)
 {
@@ -71,7 +80,11 @@ bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itZrshell_UnkMotion4_Phys
 
-/// #itZrshell_UnkMotion4_Coll
+bool itZrshell_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, fn_802DDC8C);
+    return false;
+}
 
 /// #it_802DE6F0
 
@@ -87,7 +100,11 @@ bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itZrshell_UnkMotion8_Phys
 
-/// #itZrshell_UnkMotion8_Coll
+bool itZrshell_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, fn_802DDC8C);
+    return false;
+}
 
 /// #it_2725_Logic11_EnteredAir
 

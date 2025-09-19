@@ -6,6 +6,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/item.h"
 #include "it/it_2725.h"
 
@@ -81,7 +82,11 @@ void itRshell_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itRshell_UnkMotion3_Phys
 
-/// #itRshell_UnkMotion3_Coll
+bool itRshell_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_8028D090);
+    return false;
+}
 
 /// #it_3F14_Logic15_Dropped
 
@@ -89,7 +94,11 @@ void itRshell_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itRshell_UnkMotion4_Phys
 
-/// #itRshell_UnkMotion4_Coll
+bool itRshell_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_8028D090);
+    return false;
+}
 
 /// #it_8028DAE4
 
@@ -105,7 +114,11 @@ void itRshell_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itRshell_UnkMotion6_Phys
 
-/// #itRshell_UnkMotion6_Coll
+bool itRshell_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_8028D090);
+    return false;
+}
 
 /// #it_3F14_Logic15_EnteredAir
 

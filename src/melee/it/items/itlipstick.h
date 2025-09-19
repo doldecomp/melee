@@ -12,7 +12,7 @@
 /* 29570C */ void it_3F14_Logic23_Spawned(Item_GObj*);
 /* 295748 */ void it_80295748(Item_GObj* gobj, Vec* pos);
 /* 295770 */ void it_80295770(Item_GObj*, Vec*, float, int);
-/* 2957AC */ UNK_RET it_802957AC(UNK_PARAMS);
+/* 2957AC */ void it_802957AC(Item_GObj*);
 /* 295804 */ bool itLipstick_UnkMotion0_Anim(Item_GObj* gobj);
 /* 29580C */ void itLipstick_UnkMotion0_Phys(Item_GObj* gobj);
 /* 295810 */ bool itLipstick_UnkMotion0_Coll(Item_GObj* gobj);

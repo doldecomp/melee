@@ -3,11 +3,12 @@
 #include <placeholder.h>
 #include <platform.h>
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 
 /// #it_2725_Logic7_Spawned
 
-void it_802CCB10(void) {}
+void it_802CCB10(Item_GObj* gobj) {}
 
 void it_802CCB14(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -21,7 +22,11 @@ void itThunder_UnkMotion1_Phys(Item_GObj* gobj)
     it_8027A344(gobj);
 }
 
-/// #itThunder_UnkMotion1_Coll
+bool itThunder_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802CCB10);
+    return false;
+}
 
 /// #it_802CCBF8
 

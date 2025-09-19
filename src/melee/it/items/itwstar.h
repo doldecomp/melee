@@ -14,7 +14,7 @@
 /* 294430 */ void it_80294430(Item_GObj*, float, float);
 /* 2944AC */ void it_802944AC(Item_GObj*, ftCollisionBox*);
 /* 29451C */ void it_3F14_Logic29_Spawned(Item_GObj*);
-/* 29455C */ UNK_RET it_8029455C(UNK_PARAMS);
+/* 29455C */ void it_8029455C(Item_GObj*);
 /* 2945AC */ bool itWstar_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2945B4 */ void itWstar_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2945F8 */ bool itWstar_UnkMotion0_Coll(Item_GObj* gobj);

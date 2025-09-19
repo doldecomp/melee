@@ -5,6 +5,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -44,7 +45,11 @@ bool itSscope_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itSscope_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itSscope_UnkMotion0_Coll
+bool itSscope_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802920B8);
+    return false;
+}
 
 void it_802920B8(Item_GObj* gobj)
 {

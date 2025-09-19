@@ -4,11 +4,12 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 
 /// #it_802CAFD4
 
-void it_802CB0F4(void) {}
+void it_802CB0F4(Item_GObj* gobj) {}
 
 void it_802CB0F8(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -19,13 +20,21 @@ void it_802CB0F8(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 void it_802CB14C(Item_GObj* gobj) {}
 
-/// #it_802CB150
+bool it_802CB150(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802CB0F4);
+    return false;
+}
 
 /// #itMatadogas_UnkMotion1_Anim
 
 void itMatadogas_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #itMatadogas_UnkMotion1_Coll
+bool itMatadogas_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802CB0F4);
+    return false;
+}
 
 /// #it_802CB2B0
 

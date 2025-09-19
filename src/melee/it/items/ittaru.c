@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 
@@ -93,7 +94,15 @@ bool itTaru_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #it_802886C4
 
-/// #itTaru_UnkMotion7_Anim
+bool itTaru_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.taru.xDD8 -= 1;
+    if (ip->xDD4_itemVar.taru.xDD8 > 0) {
+        return false;
+    }
+    return true;
+}
 
 void itTaru_UnkMotion7_Phys(Item_GObj* gobj) {}
 

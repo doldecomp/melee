@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -28,7 +29,11 @@ bool itFlipper_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itFlipper_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itFlipper_UnkMotion0_Coll
+bool itFlipper_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_80290F00);
+    return false;
+}
 
 void it_80290F00(Item_GObj* gobj)
 {
@@ -42,7 +47,11 @@ bool itFlipper_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itFlipper_UnkMotion1_Phys
 
-/// #itFlipper_UnkMotion1_Coll
+bool itFlipper_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_80290E78);
+    return false;
+}
 
 void it_3F14_Logic20_PickedUp(Item_GObj* gobj)
 {

@@ -530,6 +530,7 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         itBombHei_ItemVars bombhei;
+        itBox_ItemVars box;
         itCapsule_ItemVars capsule;
         itDosei_ItemVars dosei;
         itChicorita_ItemVars chicorita;
@@ -583,6 +584,7 @@ struct Item {
         itSonans_ItemVars sonans;
         itStar_ItemVars star;
         itSword_ItemVars sword;
+        itTaru_ItemVars taru;
         itTincle_ItemVars tincle;
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;

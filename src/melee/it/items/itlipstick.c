@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -27,7 +28,11 @@ bool itLipstick_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itLipstick_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itLipstick_UnkMotion0_Coll
+bool itLipstick_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8029583C);
+    return false;
+}
 
 void it_8029583C(Item_GObj* gobj)
 {
@@ -41,7 +46,11 @@ bool itLipstick_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itLipstick_UnkMotion1_Phys
 
-/// #itLipstick_UnkMotion1_Coll
+bool itLipstick_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802957AC);
+    return false;
+}
 
 void it_3F14_Logic23_PickedUp(Item_GObj* gobj)
 {

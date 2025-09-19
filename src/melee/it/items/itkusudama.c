@@ -36,7 +36,11 @@ bool itKusudama_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itKusudama_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itKusudama_UnkMotion0_Coll
+bool itKusudama_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8028A3CC);
+    return false;
+}
 
 /// #itKusudama_UnkMotion1_Anim
 
@@ -58,7 +62,11 @@ bool itKusudama_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itKusudama_UnkMotion2_Phys
 
-/// #itKusudama_UnkMotion2_Coll
+bool itKusudama_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_8028A190);
+    return false;
+}
 
 /// #it_8028A544
 

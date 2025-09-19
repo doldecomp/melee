@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 
 /// #it_2725_Logic29_Spawned
@@ -43,4 +44,8 @@ bool itFushigibana_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itFushigibana_UnkMotion2_Phys
 
-/// #itFushigibana_UnkMotion2_Coll
+bool itFushigibana_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802D705C);
+    return false;
+}

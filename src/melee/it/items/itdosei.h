@@ -6,12 +6,12 @@
 #include "it/items/types.h"
 
 /* 281164 */ void it_3F14_Logic7_Spawned(Item_GObj*);
-/* 281390 */ UNK_RET fn_80281390(UNK_PARAMS);
+/* 281390 */ void fn_80281390(Item_GObj*);
 /* 2813F8 */ bool itDosei_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2816F0 */ void itDosei_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2816F4 */ bool itDosei_UnkMotion0_Coll(Item_GObj* gobj);
 /* 281734 */ UNK_RET fn_80281734(UNK_PARAMS);
-/* 2817A0 */ UNK_RET it_802817A0(UNK_PARAMS);
+/* 2817A0 */ void it_802817A0(Item_GObj*);
 /* 281AB4 */ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj);
 /* 281B44 */ void itDosei_UnkMotion1_Phys(Item_GObj* gobj);
 /* 281B7C */ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj);
@@ -38,7 +38,7 @@
 /* 282C54 */ bool itDosei_UnkMotion8_Anim(Item_GObj* gobj);
 /* 282C78 */ void itDosei_UnkMotion8_Phys(Item_GObj* gobj);
 /* 282CA8 */ bool itDosei_UnkMotion8_Coll(Item_GObj* gobj);
-/* 282CD4 */ UNK_RET fn_80282CD4(UNK_PARAMS);
+/* 282CD4 */ void fn_80282CD4(Item_GObj*);
 /* 282D48 */ bool itDosei_UnkMotion7_Anim(Item_GObj* gobj);
 /* 282DA0 */ void itDosei_UnkMotion7_Phys(Item_GObj* gobj);
 /* 282DA4 */ bool itDosei_UnkMotion7_Coll(Item_GObj* gobj);

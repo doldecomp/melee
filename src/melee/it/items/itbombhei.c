@@ -4,6 +4,7 @@
 #include <platform.h>
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/it_266F.h"
 
 
 /// #it_8027D670
@@ -20,7 +21,11 @@
 
 void itBombhei_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itBombhei_UnkMotion0_Coll
+bool itBombhei_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8027DE18);
+    return false;
+}
 
 /// #it_8027DE18
 
@@ -71,7 +76,11 @@ void itBombhei_UnkMotion4_Phys(Item_GObj* gobj) {}
 
 void itBombhei_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itBombhei_UnkMotion5_Coll
+bool itBombhei_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, fn_8027FCA8);
+    return false;
+}
 
 /// #fn_8027FCA8
 

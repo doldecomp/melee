@@ -15,14 +15,14 @@
 /* 289B50 */ UNK_RET it_80289B50(UNK_PARAMS);
 /* 289BE8 */ UNK_RET it_80289BE8(UNK_PARAMS);
 /* 28A114 */ UNK_RET it_8028A114(UNK_PARAMS);
-/* 28A190 */ UNK_RET it_8028A190(UNK_PARAMS);
+/* 28A190 */ void it_8028A190(Item_GObj*);
 /* 28A298 */ bool itKusudama_UnkMotion0_Anim(Item_GObj* gobj);
 /* 28A2C0 */ void itKusudama_UnkMotion0_Phys(Item_GObj* gobj);
 /* 28A2C4 */ bool itKusudama_UnkMotion0_Coll(Item_GObj* gobj);
 /* 28A2F0 */ bool itKusudama_UnkMotion1_Anim(Item_GObj* gobj);
 /* 28A3A4 */ void itKusudama_UnkMotion1_Phys(Item_GObj* gobj);
 /* 28A3A8 */ bool itKusudama_UnkMotion1_Coll(Item_GObj* gobj);
-/* 28A3CC */ UNK_RET it_8028A3CC(UNK_PARAMS);
+/* 28A3CC */ void it_8028A3CC(Item_GObj*);
 /* 28A4C0 */ bool itKusudama_UnkMotion2_Anim(Item_GObj* gobj);
 /* 28A4E8 */ void itKusudama_UnkMotion2_Phys(Item_GObj* gobj);
 /* 28A518 */ bool itKusudama_UnkMotion2_Coll(Item_GObj* gobj);

@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -23,7 +24,11 @@
 
 void it_802D53F0(Item_GObj* gobj) {}
 
-/// #it_802D53F4
+bool it_802D53F4(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802D546C);
+    return false;
+}
 
 /// #it_802D5420
 
@@ -36,7 +41,11 @@ bool itLucky_UnkMotion5_Anim(Item_GObj* gobj)
 
 /// #itLucky_UnkMotion5_Phys
 
-/// #itLucky_UnkMotion5_Coll
+bool itLucky_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802D50F0);
+    return false;
+}
 
 bool itLucky_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -80,7 +89,11 @@ void it_802D56F0(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 void it_802D58BC(Item_GObj* gobj) {}
 
-/// #it_802D58C0
+bool it_802D58C0(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802D58EC);
+    return false;
+}
 
 void it_802D58EC(HSD_GObj* gobj)
 {
@@ -91,7 +104,11 @@ void it_802D58EC(HSD_GObj* gobj)
 
 /// #itLucky_UnkMotion3_Phys
 
-/// #itLucky_UnkMotion3_Coll
+bool itLucky_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802D582C);
+    return false;
+}
 
 void it_2725_Logic44_PickedUp(Item_GObj* gobj)
 {

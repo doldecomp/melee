@@ -200,7 +200,7 @@
 /* 0F56F8 */ void ftKb_SpecialAirS_Phys(Fighter_GObj* gobj);
 /* 0F5718 */ void ftKb_SpecialS_Coll(Fighter_GObj* gobj);
 /* 0F5778 */ void ftKb_SpecialAirS_Coll(Fighter_GObj* gobj);
-/* 0F5800 */ UNK_RET ftKb_SpecialN_800F5800(UNK_PARAMS);
+/* 0F5800 */ void ftKb_SpecialN_800F5800(HSD_GObj*, Vec3*);
 /* 0F5820 */ void ftKb_SpecialN_800F5820(Fighter_GObj* gobj,
                                          ftCollisionBox* victim_coll_box,
                                          float victim_scale_x);

@@ -3,11 +3,12 @@
 #include <placeholder.h>
 #include <platform.h>
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 
 /// #it_802CCF9C
 
-void it_802CCFFC(void) {}
+void it_802CCFFC(Item_GObj* gobj) {}
 
 void it_802CD000(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -18,7 +19,11 @@ void it_802CD000(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 void itFreezer_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #itFreezer_UnkMotion1_Coll
+bool itFreezer_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802CCFFC);
+    return false;
+}
 
 /// #it_802CD090
 

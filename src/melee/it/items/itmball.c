@@ -196,7 +196,11 @@ void it_80297DD8(Item_GObj* arg0)
 
 void itMball_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itMball_UnkMotion5_Coll
+bool itMball_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_80297E8C);
+    return false;
+}
 
 /// #it_80297E8C
 

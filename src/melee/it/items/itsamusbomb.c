@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -19,7 +20,11 @@ void it_802B4C10(Item_GObj* gobj)
 
 void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itSamusbomb_UnkMotion0_Coll
+bool itSamusbomb_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802B4CF4);
+    return false;
+}
 
 void it_802B4CF4(Item_GObj* gobj)
 {
@@ -30,7 +35,11 @@ void it_802B4CF4(Item_GObj* gobj)
 
 /// #itSamusbomb_UnkMotion1_Phys
 
-/// #itSamusbomb_UnkMotion1_Coll
+bool itSamusbomb_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E248(gobj, it_802B4C10);
+    return false;
+}
 
 void it_2725_Logic50_EnteredAir(Item_GObj* gobj)
 {

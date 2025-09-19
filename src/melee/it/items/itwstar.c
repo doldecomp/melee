@@ -1,6 +1,7 @@
 #include "itwstar.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/item.h"
 
 /// #it_80294364
@@ -20,7 +21,11 @@ bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itWstar_UnkMotion0_Phys
 
-/// #itWstar_UnkMotion0_Coll
+bool itWstar_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_80294624);
+    return false;
+}
 
 void it_80294624(Item_GObj* gobj)
 {
@@ -34,7 +39,11 @@ bool itWstar_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itWstar_UnkMotion1_Phys
 
-/// #itWstar_UnkMotion1_Coll
+bool itWstar_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_8029455C);
+    return false;
+}
 
 /// #it_802946B0
 

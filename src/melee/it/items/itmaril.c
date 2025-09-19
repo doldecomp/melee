@@ -1,6 +1,7 @@
 #include "itmaril.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -84,7 +85,11 @@ void it_802D6DDC(HSD_GObj* gobj)
 
 /// #itMaril_UnkMotion2_Phys
 
-/// #itMaril_UnkMotion2_Coll
+bool itMaril_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802D69E4);
+    return false;
+}
 
 /// #itMaril_UnkMotion3_Anim
 
