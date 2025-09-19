@@ -3,6 +3,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
+#include "it/it_2725.h"
+
 /// #it_802D9A2C
 
 /// #it_802D9B78
@@ -73,7 +76,11 @@ bool itLikelike_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion3_Phys
+void itLikelike_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y += ip->xCC_item_attr->x10_fall_speed;
+}
 
 /// #itLikelike_UnkMotion3_Coll
 
@@ -162,7 +169,10 @@ bool itLikelike_UnkMotion19_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion19_Phys
 
-/// #itLikelike_UnkMotion19_Coll
+bool itLikelike_UnkMotion19_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #it_802DC0AC
 
@@ -181,7 +191,10 @@ bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itLikelike_UnkMotion20_Phys(Item_GObj* gobj) {}
 
-/// #itLikelike_UnkMotion20_Coll
+bool itLikelike_UnkMotion20_Coll(Item_GObj* gobj)
+{
+    return it_8027C79C(gobj);
+}
 
 /// #it_802DC3DC
 
@@ -190,9 +203,16 @@ bool itLikelike_UnkMotion21_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion21_Phys
+void itLikelike_UnkMotion21_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itLikelike_UnkMotion21_Coll
+bool itLikelike_UnkMotion21_Coll(Item_GObj* gobj)
+{
+    return it_8027C794(gobj);
+}
 
 /// #it_2725_Logic5_Destroyed
 

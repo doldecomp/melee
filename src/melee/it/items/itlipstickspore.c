@@ -7,6 +7,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/types.h"
 
 #include <baselib/gobj.h>
@@ -21,13 +22,19 @@
 
 /// #it_8029A498
 
-/// #itLipstickspore_UnkMotion0_Anim
+bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    return it_80273130(gobj);
+}
 
 /// #itLipstickspore_UnkMotion0_Phys
 
 /// #itLipstickspore_UnkMotion0_Coll
 
-/// #itLipstickspore_UnkMotion1_Anim
+bool itLipstickspore_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    return it_80273130(gobj);
+}
 
 void itLipstickspore_UnkMotion1_Phys(Item_GObj* gobj)
 {
@@ -62,7 +69,11 @@ bool it_3F14_Logic37_Absorbed(Item_GObj* arg0)
 
 /// #it_3F14_Logic37_Reflected
 
-/// #it_3F14_Logic37_ShieldBounced
+bool it_3F14_Logic37_ShieldBounced(Item_GObj* gobj)
+{
+    itColl_BounceOffShield(gobj);
+    return false;
+}
 
 void it_3F14_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

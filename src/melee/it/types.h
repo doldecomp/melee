@@ -531,6 +531,7 @@ struct Item {
     union {
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;
+        itDosei_ItemVars dosei;
         itChicorita_ItemVars chicorita;
         itClimbersBlizzard_ItemVars climbersblizzard;
         itCoin_ItemVars coin;
@@ -573,11 +574,13 @@ struct Item {
         itOctarock_ItemVars octarock;
         itPeachTurnip_ItemVars peachturnip;
         itPikachutJoltGround_ItemVars pikachujoltground;
+        itPikachutJoltAir_ItemVars pikachujoltair;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
         itPokemon_ItemVars pokemon;
         itSamusGrapple_ItemVars samusgrapple;
+        itSonans_ItemVars sonans;
         itStar_ItemVars star;
         itSword_ItemVars sword;
         itTincle_ItemVars tincle;

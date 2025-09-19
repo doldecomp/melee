@@ -245,3 +245,33 @@ void it_2725_Logic114_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }
+
+void it_802B26C0(Item_GObj* gobj)
+{
+    it_8026B724(gobj);
+}
+
+void it_802B26E0(Item_GObj* gobj)
+{
+    it_8026B73C(gobj);
+}
+
+void it_802C6DB8(Item_GObj* gobj)
+{
+    it_8026B724(gobj);
+}
+
+void it_802C6DD8(Item_GObj* gobj)
+{
+    it_8026B73C(gobj);
+}
+
+void it_802C7AD0(Item_GObj* gobj)
+{
+    it_8026B724(gobj);
+}
+
+void it_802C7AF0(Item_GObj* gobj)
+{
+    it_8026B73C(gobj);
+}

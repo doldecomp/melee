@@ -6,6 +6,7 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
+#include "ef/eflib.h"
 
 bool it_2725_Logic111_DmgDealt(Item_GObj* arg0)
 {
@@ -25,4 +26,10 @@ bool it_2725_Logic111_HitShield(Item_GObj* arg0)
 void it_2725_Logic111_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
+}
+
+bool it_2725_Logic111_Absorbed(Item_GObj* gobj)
+{
+    efLib_DestroyAll(gobj);
+    return true;
 }

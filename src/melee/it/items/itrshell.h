@@ -11,7 +11,7 @@
 /* 28D090 */ UNK_RET it_8028D090(UNK_PARAMS);
 /* 28D100 */ UNK_RET it_8028D100(UNK_PARAMS);
 /* 28D26C */ UNK_RET it_8028D26C(UNK_PARAMS);
-/* 28D390 */ UNK_RET it_8028D390(UNK_PARAMS);
+/* 28D390 */ s32 it_8028D390(Item_GObj* gobj);
 /* 28D3B8 */ UNK_RET it_8028D3B8(UNK_PARAMS);
 /* 28D4A8 */ UNK_RET fn_8028D4A8(UNK_PARAMS);
 /* 28D4E4 */ UNK_RET it_8028D4E4(UNK_PARAMS);
@@ -21,7 +21,7 @@
 /* 28D6C0 */ bool itRshell_UnkMotion0_Anim(Item_GObj* gobj);
 /* 28D6C8 */ void itRshell_UnkMotion0_Phys(Item_GObj* gobj);
 /* 28D6CC */ bool itRshell_UnkMotion0_Coll(Item_GObj* gobj);
-/* 28D7F0 */ UNK_RET it_8028D7F0(UNK_PARAMS);
+/* 28D7F0 */ void it_8028D7F0(Item_GObj* gobj);
 /* 28D818 */ bool itRshell_UnkMotion1_Anim(Item_GObj* gobj);
 /* 28D820 */ void itRshell_UnkMotion1_Phys(Item_GObj* gobj);
 /* 28D850 */ bool itRshell_UnkMotion1_Coll(Item_GObj* gobj);

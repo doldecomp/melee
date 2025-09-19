@@ -1,10 +1,22 @@
 #include "itpikachutjoltground.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
-/// #it_802B3368
+void* it_802B3368(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            return ip->xDD4_itemVar.pikachujoltground.unk_8;
+        }
+    }
+    return NULL;
+}
 
 /// #it_802B338C
 
@@ -45,4 +57,7 @@ void itPikachutjoltground_UnkMotion1_Phys(Item_GObj* gobj)
 
 /// #it_2725_Logic106_ShieldBounced
 
-/// #it_2725_Logic106_EvtUnk
+void it_2725_Logic106_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}

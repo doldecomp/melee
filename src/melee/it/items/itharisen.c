@@ -4,12 +4,17 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802927E8
 
 /// #it_8029282C
 
-/// #it_3F14_Logic24_Spawned
+void it_3F14_Logic24_Spawned(Item_GObj* gobj)
+{
+    it_8029290C(gobj);
+}
 
 /// #it_8029287C
 
@@ -22,7 +27,10 @@ void itHarisen_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itHarisen_UnkMotion0_Coll
 
-/// #it_8029290C
+void it_8029290C(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itHarisen_UnkMotion8_Anim(Item_GObj* gobj)
 {
@@ -41,7 +49,10 @@ bool itHarisen_UnkMotion8_Anim(Item_GObj* gobj)
 
 /// #it_80292A28
 
-/// #it_3F14_Logic24_PickedUp
+void it_3F14_Logic24_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itHarisen_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -54,7 +65,10 @@ void itHarisen_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 /// #itHarisen_UnkMotion8_Coll
 
-/// #it_3F14_Logic24_Thrown
+void it_3F14_Logic24_Thrown(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 7, 6);
+}
 
 /// #itHarisen_UnkMotion8_Phys
 
@@ -62,7 +76,10 @@ void itHarisen_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic24_DmgDealt
 
-/// #it_3F14_Logic24_EnteredAir
+void it_3F14_Logic24_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+}
 
 bool itHarisen_UnkMotion9_Anim(Item_GObj* gobj)
 {
@@ -75,11 +92,17 @@ void itHarisen_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic24_Clanked
 
-/// #it_3F14_Logic24_Reflected
+bool it_3F14_Logic24_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 /// #it_3F14_Logic24_HitShield
 
-/// #it_3F14_Logic24_ShieldBounced
+bool it_3F14_Logic24_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 void it_3F14_Logic24_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

@@ -2,7 +2,11 @@
 
 #include "it/forward.h"
 
+#include "gr/grzakogenerator.h"
 #include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 /* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
 
@@ -54,9 +58,16 @@ bool itZrshell_UnkMotion2_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion3_Coll
 
-/// #it_2725_Logic11_Dropped
+void it_2725_Logic11_Dropped(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, 6);
+}
 
-/// #itZrshell_UnkMotion4_Anim
+bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    it_802DDBE8(gobj);
+    return false;
+}
 
 /// #itZrshell_UnkMotion4_Phys
 
@@ -101,15 +112,26 @@ bool itZrshell_UnkMotion9_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion10_Anim
 
-/// #itZrshell_UnkMotion10_Phys
+void itZrshell_UnkMotion10_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
 /// #itZrshell_UnkMotion10_Coll
 
-/// #it_2725_Logic11_DmgDealt
+bool it_2725_Logic11_DmgDealt(Item_GObj* gobj)
+{
+    it_80272940(gobj);
+    return false;
+}
 
 /// #it_2725_Logic11_DmgReceived
 
-/// #it_2725_Logic11_Reflected
+bool it_2725_Logic11_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 /// #it_2725_Logic11_Clanked
 
@@ -119,9 +141,15 @@ bool itZrshell_UnkMotion9_Anim(Item_GObj* arg0)
 
 /// #fn_802DFE7C
 
-/// #it_802DFED4
+void it_802DFED4(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
-/// #it_2725_Logic11_Destroyed
+void it_2725_Logic11_Destroyed(Item_GObj* gobj)
+{
+    grZakoGenerator_801CACB8((Ground_GObj*) gobj);
+}
 
 /// #it_802DFF14
 

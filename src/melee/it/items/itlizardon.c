@@ -4,13 +4,18 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 
 /// #it_802CB8AC
 
 void it_802CB93C(void) {}
 
-/// #it_802CB940
+void it_802CB940(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802CB960
 
@@ -48,9 +53,15 @@ s32 it_802CC160(Item_GObj* gobj)
     return 0;
 }
 
-/// #it_802CC184
+void it_802CC184(Item_GObj* gobj)
+{
+    it_8027A09C(gobj);
+}
 
-/// #it_802CC1A4
+bool it_802CC1A4(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CB960);
+}
 
 /// #it_802CC1CC
 
@@ -62,9 +73,15 @@ s32 it_802CC160(Item_GObj* gobj)
 
 /// #it_2725_Logic37_Spawned
 
-/// #it_2725_Logic37_EvtUnk
+void it_2725_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
-/// #it_2725_Logic37_Reflected
+bool it_2725_Logic37_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 bool it_2725_Logic37_HitShield(Item_GObj* arg0)
 {
@@ -83,3 +100,8 @@ bool it_2725_Logic37_Absorbed(Item_GObj* arg0)
 /// #it_802CC684
 
 /// #it_802CC6C4
+
+bool it_802CC6C4(Item_GObj* gobj)
+{
+    return it_8026DFB0(gobj);
+}

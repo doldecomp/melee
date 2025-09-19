@@ -20,13 +20,13 @@
 /* 287EA4 */ void itTaru_UnkMotion2_Phys(Item_GObj* gobj);
 /* 287EA8 */ void it_3F14_Logic2_Dropped(Item_GObj*);
 /* 287EC8 */ void it_3F14_Logic2_Thrown(Item_GObj*);
-/* 287F20 */ UNK_RET it_80287F20(UNK_PARAMS);
+/* 287F20 */ void it_80287F20(Item_GObj* gobj);
 /* 287F5C */ bool itTaru_UnkMotion3_Anim(Item_GObj* gobj);
 /* 287FE4 */ void itTaru_UnkMotion3_Phys(Item_GObj* gobj);
 /* 288030 */ bool itTaru_UnkMotion3_Coll(Item_GObj* gobj);
-/* 288194 */ UNK_RET it_80288194(UNK_PARAMS);
+/* 288194 */ void it_80288194(Item_GObj* gobj);
 /* 2881B4 */ UNK_RET it_802881B4(UNK_PARAMS);
-/* 2881FC */ UNK_RET it_802881FC(UNK_PARAMS);
+/* 2881FC */ void it_802881FC(Item_GObj* gobj);
 /* 28824C */ bool itTaru_UnkMotion5_Anim(Item_GObj* gobj);
 /* 288308 */ void itTaru_UnkMotion5_Phys(Item_GObj* gobj);
 /* 28833C */ bool itTaru_UnkMotion5_Coll(Item_GObj* gobj);

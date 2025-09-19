@@ -2,6 +2,7 @@
 
 #include "it/forward.h"
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 
 void it_802BAEEC(Item_GObj* gobj)
@@ -9,7 +10,10 @@ void it_802BAEEC(Item_GObj* gobj)
     it_8026B724(gobj);
 }
 
-/// #it_802BAF0C
+void it_802BAF0C(Item_GObj* gobj)
+{
+    it_8026B73C(gobj);
+}
 
 /// #it_802BAF2C
 
@@ -18,6 +22,10 @@ void it_802BAEEC(Item_GObj* gobj)
 /// #it_802BB290
 
 /// #fn_802BB428
+s32 fn_802BB428(Item_GObj* gobj)
+{
+    return it_802BCA30(GET_ITEM(gobj));
+}
 
 /// #fn_802BB44C
 
@@ -31,7 +39,10 @@ void it_802BAEEC(Item_GObj* gobj)
 
 /// #it_802BB938
 
-/// #it_802BBAEC
+s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
+{
+    return it_802BB938(link, arg1, arg2);
+}
 
 /// #it_802BBB0C
 

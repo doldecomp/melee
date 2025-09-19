@@ -4,6 +4,8 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/item.h"
+#include "it/it_2725.h"
 
 /* 2C23D4 */ static bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
 
@@ -11,7 +13,10 @@
 
 /// #it_802C16F8
 
-/// #it_802C17DC
+void it_802C17DC(Item_GObj* gobj)
+{
+    Item_8026A8EC(gobj);
+}
 
 /// #it_2725_Logic90_Destroyed
 
@@ -25,7 +30,10 @@ void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itClimbersice_UnkMotion0_Coll
 
-/// #it_802C1A58
+void it_802C1A58(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itClimbersice_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -57,7 +65,10 @@ bool it_2725_Logic90_DmgDealt(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic90_Reflected
+bool it_2725_Logic90_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 bool it_2725_Logic90_Clanked(Item_GObj* arg0)
 {
@@ -71,6 +82,9 @@ bool it_2725_Logic90_Absorbed(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic90_ShieldBounced
+bool it_2725_Logic90_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 /// #it_2725_Logic90_EvtUnk

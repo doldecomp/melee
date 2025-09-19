@@ -1,12 +1,16 @@
 #include "itseakneedleheld.h"
 
 #include "it/it_26B1.h"
+#include "it/item.h"
 
 /// #it_802B18B0
 
 /// #it_802B19AC
 
-/// #it_2725_Logic110_PickedUp
+void it_2725_Logic110_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #itSeakneedleheld_UnkMotion0_Anim
 

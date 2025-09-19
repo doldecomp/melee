@@ -9,7 +9,7 @@
 
 /* 2896CC */ HSD_GObj* it_802896CC(Vec3*);
 /* 289784 */ void it_3F14_Logic4_Spawned(Item_GObj*);
-/* 2897C8 */ UNK_RET it_802897C8(UNK_PARAMS);
+/* 2897C8 */ void it_802897C8(float angle);
 /* 289910 */ UNK_RET it_80289910(UNK_PARAMS);
 /* 289A00 */ UNK_RET it_80289A00(UNK_PARAMS);
 /* 289B50 */ UNK_RET it_80289B50(UNK_PARAMS);

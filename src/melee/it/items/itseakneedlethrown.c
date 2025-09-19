@@ -4,6 +4,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802AFD8C
 
@@ -24,7 +25,10 @@ void it_2725_Logic109_Destroyed(Item_GObj* gobj)
 
 /// #itSeakneedlethrown_UnkMotion2_Anim
 
-/// #itSeakneedlethrown_UnkMotion3_Anim
+bool itSeakneedlethrown_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    return it_80273130(gobj);
+}
 
 /// #itSeakneedlethrown_UnkMotion4_Anim
 

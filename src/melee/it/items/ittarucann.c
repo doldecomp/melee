@@ -61,7 +61,10 @@ void itTarucann_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itTarucann_UnkMotion6_Coll
 
-/// #it_80296E88
+void it_80296E88(Item_GObj* gobj)
+{
+    it_80296EF0(gobj);
+}
 
 /// #it_80296EA8
 
@@ -77,7 +80,10 @@ void itTarucann_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itTarucann_UnkMotion7_Phys
 
-/// #itTarucann_UnkMotion7_Coll
+bool itTarucann_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    return itTarucann_UnkMotion8_Coll(gobj);
+}
 
 /// #it_802975F4
 

@@ -12,6 +12,7 @@
 /* 2B6CD0 */ bool it_2725_Logic52_HitShield(Item_GObj*);
 /* 2B6D24 */ bool it_2725_Logic52_ShieldBounced(Item_GObj*);
 /* 2B6E4C */ bool it_2725_Logic52_Reflected(Item_GObj*);
+/* 2B7080 */ bool itSamusmissile_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2B7104 */ void it_2725_Logic52_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7340 */ extern ItemStateTable it_803F7340[];
 

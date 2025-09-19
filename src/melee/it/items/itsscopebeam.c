@@ -6,6 +6,7 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_80298DEC
 
@@ -37,9 +38,15 @@ bool it_3F14_Logic38_Absorbed(Item_GObj* arg0)
     return true;
 }
 
-/// #it_3F14_Logic38_ShieldBounced
+bool it_3F14_Logic38_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
-/// #it_3F14_Logic38_Reflected
+bool it_3F14_Logic38_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 void it_3F14_Logic38_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

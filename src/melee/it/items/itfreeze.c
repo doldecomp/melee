@@ -16,7 +16,14 @@ void it_8028ECE0(Item_GObj* gobj)
     GET_ITEM(gobj)->xDD4_itemVar.freeze.unk_1C = NULL;
 }
 
-/// #it_8028ECF0
+Item* it_8028ECF0(Item_GObj* gobj, Vec3* v)
+{
+    Item* ip = GET_ITEM(gobj);
+    v->x = ip->pos.x;
+    v->y = ip->pos.y;
+    v->z = ip->pos.z;
+    return ip;
+}
 
 /// #it_3F14_Logic17_Destroyed
 
@@ -31,11 +38,17 @@ bool itFreeze_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itFreeze_UnkMotion0_Phys
+void itFreeze_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    it_8028EDBC(gobj);
+}
 
 /// #itFreeze_UnkMotion0_Coll
 
-/// #it_8028F1D8
+void it_8028F1D8(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itFreeze_UnkMotion3_Anim(Item_GObj* gobj)
 {
@@ -56,7 +69,7 @@ void it_3F14_Logic17_PickedUp(Item_GObj* gobj)
         item->xDD4_itemVar.freeze.unk_1C = NULL;
     }
 
-    Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
 bool itFreeze_UnkMotion2_Anim(Item_GObj* gobj)
@@ -66,12 +79,12 @@ bool itFreeze_UnkMotion2_Anim(Item_GObj* gobj)
 
 void it_3F14_Logic17_Dropped(Item_GObj* gobj)
 {
-    Item_80268E5C((HSD_GObj*) gobj, 1, 6);
+    Item_80268E5C(gobj, 1, 6);
 }
 
 void it_3F14_Logic17_Thrown(Item_GObj* gobj)
 {
-    Item_80268E5C((HSD_GObj*) gobj, 3, 6);
+    Item_80268E5C(gobj, 3, 6);
 }
 
 void itFreeze_UnkMotion3_Phys(Item_GObj* gobj)

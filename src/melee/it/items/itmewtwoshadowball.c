@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802C4D10
 
@@ -36,7 +37,10 @@ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itMewtwoshadowball_UnkMotion8_Coll
 
-/// #itMewtwoshadowball_UnkMotion9_Anim
+bool itMewtwoshadowball_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    return it_80273130(gobj);
+}
 
 void itMewtwoshadowball_UnkMotion9_Phys(Item_GObj* gobj) {}
 

@@ -10,15 +10,15 @@
 /* 28EB88 */ UNK_RET it_8028EB88(UNK_PARAMS);
 /* 28EC98 */ UNK_RET it_8028EC98(UNK_PARAMS);
 /* 28ECE0 */ void it_8028ECE0(Item_GObj* gobj);
-/* 28ECF0 */ UNK_RET it_8028ECF0(UNK_PARAMS);
+/* 28ECF0 */ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v);
 /* 28ED10 */ void it_3F14_Logic17_Destroyed(Item_GObj*);
 /* 28ED50 */ void it_3F14_Logic17_Spawned(Item_GObj*);
-/* 28EDBC */ UNK_RET it_8028EDBC(UNK_PARAMS);
+/* 28EDBC */ UNK_RET it_8028EDBC(Item_GObj* gobj);
 /* 28EF34 */ UNK_RET it_8028EF34(UNK_PARAMS);
 /* 28EF88 */ bool itFreeze_UnkMotion0_Anim(Item_GObj* gobj);
 /* 28EF90 */ void itFreeze_UnkMotion0_Phys(Item_GObj* gobj);
 /* 28EFB0 */ bool itFreeze_UnkMotion0_Coll(Item_GObj* gobj);
-/* 28F1D8 */ UNK_RET it_8028F1D8(UNK_PARAMS);
+/* 28F1D8 */ void it_8028F1D8(Item_GObj* gobj);
 /* 28F200 */ bool itFreeze_UnkMotion3_Anim(Item_GObj* gobj);
 /* 28F208 */ void itFreeze_UnkMotion1_Phys(Item_GObj* gobj);
 /* 28F238 */ bool itFreeze_UnkMotion1_Coll(Item_GObj* gobj);

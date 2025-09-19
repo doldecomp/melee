@@ -1,10 +1,17 @@
 #include "ittincle.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
+#include "it/it_266F.h"
 
 /// #it_802EB5C8
 
-/// #it_2725_Logic13_DmgReceived
+bool it_2725_Logic13_DmgReceived(Item_GObj* gobj)
+{
+    it_802EC18C(gobj);
+    return false;
+}
 
 /// #it_2725_Logic13_DmgDealt
 
@@ -17,7 +24,11 @@ bool itTincle_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion0_Phys
 
-/// #itTincle_UnkMotion0_Coll
+bool itTincle_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026DA08(gobj);
+    return false;
+}
 
 /// #it_802EB870
 
@@ -69,7 +80,11 @@ bool itTincle_UnkMotion5_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion5_Phys
 
-/// #itTincle_UnkMotion5_Coll
+bool itTincle_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026DAA8(gobj);
+    return false;
+}
 
 /// #it_802EC18C
 
@@ -108,7 +123,10 @@ void itTincle_UnkMotion10_Phys(Item_GObj* gobj) {}
 
 /// #itTincle_UnkMotion10_Coll
 
-/// #it_802EC604
+void it_802EC604(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
+}
 
 /// #itTincle_UnkMotion11_Anim
 
@@ -125,11 +143,21 @@ bool itTincle_UnkMotion12_Anim(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion12_Phys
 
-/// #itTincle_UnkMotion12_Coll
+bool itTincle_UnkMotion12_Coll(Item_GObj* gobj)
+{
+    it_8026DAA8(gobj);
+    return false;
+}
 
-/// #it_802EC830
+void it_802EC830(Item_GObj* gobj)
+{
+    Item_8026A8EC(gobj);
+}
 
-/// #it_802EC850
+void it_802EC850(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802EC870
 
