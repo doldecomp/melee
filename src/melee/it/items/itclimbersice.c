@@ -30,7 +30,10 @@ void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itClimbersice_UnkMotion0_Coll
 
-/// #it_802C1A58
+void it_802C1A58(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itClimbersice_UnkMotion1_Anim(Item_GObj* gobj)
 {

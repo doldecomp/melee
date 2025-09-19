@@ -531,6 +531,7 @@ struct Item {
     union {
         itBombHei_ItemVars bombhei;
         itCapsule_ItemVars capsule;
+        itDosei_ItemVars dosei;
         itChicorita_ItemVars chicorita;
         itClimbersBlizzard_ItemVars climbersblizzard;
         itCoin_ItemVars coin;

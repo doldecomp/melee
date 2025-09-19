@@ -5,10 +5,15 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "gm/gm_1BA8.h"
+#include "it/item.h"
 
 /// #it_8029B0C8
 
-/// #it_3F14_Logic42_Destroyed
+void it_3F14_Logic42_Destroyed(Item_GObj* gobj)
+{
+    gm_801BEB68(1);
+}
 
 void it_3F14_Logic42_Spawned(Item_GObj* gobj)
 {
@@ -29,7 +34,10 @@ void itEvyoshiegg_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itEvyoshiegg_UnkMotion0_Coll
 
-/// #it_8029B268
+void it_8029B268(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itEvyoshiegg_UnkMotion3_Anim(Item_GObj* gobj)
 {
@@ -40,7 +48,10 @@ bool itEvyoshiegg_UnkMotion3_Anim(Item_GObj* gobj)
 
 /// #itEvyoshiegg_UnkMotion1_Coll
 
-/// #it_3F14_Logic42_PickedUp
+void it_3F14_Logic42_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itEvyoshiegg_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -54,7 +65,10 @@ void it_3F14_Logic42_Dropped(Item_GObj* gobj)
     it_3F14_Logic42_Thrown(gobj);
 }
 
-/// #it_3F14_Logic42_Thrown
+void it_3F14_Logic42_Thrown(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 3, 6);
+}
 
 /// #itEvyoshiegg_UnkMotion3_Phys
 
@@ -79,7 +93,10 @@ bool itEvyoshiegg_UnkMotion5_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic42_DmgReceived
 
-/// #it_3F14_Logic42_EnteredAir
+void it_3F14_Logic42_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itEvyoshiegg_UnkMotion4_Anim(Item_GObj* gobj)
 {

@@ -3,6 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_2725_Logic25_Destroyed
 
@@ -42,15 +43,24 @@ void it_802ECE90(Item_GObj* gobj)
 
 /// #itKyasarin_UnkMotion4_Coll
 
-/// #it_802ED4F8
+void it_802ED4F8(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
 
 /// #itKyasarin_UnkMotion6_Anim
 
-/// #it_802ED774
+void it_802ED774(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+}
 
 /// #itKyasarin_UnkMotion7_Anim
 
-/// #it_802ED8BC
+void it_802ED8BC(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 /// #itKyasarin_UnkMotion5_Anim
 
@@ -82,5 +92,5 @@ bool itKyasarin_UnkMotion10_Coll(Item_GObj* gobj)
 
 void it_802EE1E0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }

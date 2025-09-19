@@ -1,5 +1,6 @@
 #include "itnesspkthunderball.h"
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 
 /// #it_802AB3F0
@@ -8,7 +9,18 @@
 
 /// #it_802AB4B8
 
-/// #it_802AB568
+HSD_GObj* it_802AB568(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            return ip->owner;
+        }
+    }
+    return NULL;
+}
 
 /// #it_802AB58C
 
@@ -24,17 +36,33 @@
 
 /// #itNesspkthunderball_UnkMotion0_Coll
 
-/// #it_2725_Logic26_DmgDealt
+bool it_2725_Logic26_DmgDealt(Item_GObj* gobj)
+{
+    it_802AB90C(gobj);
+    return true;
+}
 
-/// #it_802AC074
+bool it_802AC074(Item_GObj* gobj)
+{
+    it_802AB90C(gobj);
+    return true;
+}
 
 /// #it_802AC098
 
-/// #it_802AC338
+bool it_802AC338(Item_GObj* gobj)
+{
+    it_802AB90C(gobj);
+    return true;
+}
 
 /// #it_802AC35C
 
-/// #it_802AC3F8
+bool it_802AC3F8(Item_GObj* gobj)
+{
+    it_802AB90C(gobj);
+    return true;
+}
 
 void it_802AC41C(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

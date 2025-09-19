@@ -3,6 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
+#include "it/item.h"
 
 /// #it_802E05A0
 
@@ -33,7 +35,10 @@ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #it_802E0F1C
 
-/// #it_2725_Logic4_PickedUp
+void it_2725_Logic4_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 /// #itPatapata_UnkMotion5_Anim
 
@@ -45,7 +50,11 @@ void itPatapata_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itPatapata_UnkMotion7_Coll
+bool itPatapata_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    it_8026DA08(gobj);
+    return false;
+}
 
 /// #it_2725_Logic4_Thrown
 
@@ -71,7 +80,7 @@ void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 void it_802E16D8(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 /// #it_802E16F8

@@ -6,12 +6,17 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-void it_802B2890(Item_GObj* item_gobj)
+void it_802B2890(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM((HSD_GObj*) item_gobj);
-    item->owner = NULL;
-    item->xDC8_word.flags.x13 = false;
-    Item_8026A8EC(item_gobj);
+    Item* ip = GET_ITEM(gobj);
+    ip->owner = NULL;
+    ip->xDC8_word.flags.x13 = false;
+    Item_8026A8EC(gobj);
+}
+
+void it_2725_Logic43_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
 bool itYoshieggthrow_UnkMotion1_Coll(Item_GObj* gobj)

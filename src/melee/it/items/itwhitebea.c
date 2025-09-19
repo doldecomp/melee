@@ -4,6 +4,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/types.h"
+#include "it/item.h"
 
 /// #it_802E31F8
 
@@ -19,7 +20,10 @@ void itOldottosea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #itOldottosea_UnkMotion9_Phys
 
-/// #itOldottosea_UnkMotion9_Coll
+bool itOldottosea_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #it_802E3400
 
@@ -56,7 +60,7 @@ bool itOldottosea_UnkMotion11_Coll(Item_GObj* gobj)
 
 void it_802E3784(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 // This function only called by it_3F14_Logic17_PickedUp from itfreeze, so
@@ -103,7 +107,13 @@ bool itWhitebea_UnkMotion3_Anim(Item_GObj* gobj)
 
 /// #itWhitebea_UnkMotion4_Anim
 
-/// #itWhitebea_UnkMotion4_Phys
+void itWhitebea_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+    }
+}
 
 /// #itWhitebea_UnkMotion4_Coll
 
@@ -144,7 +154,10 @@ void itWhitebea_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #itWhitebea_UnkMotion7_Coll
 
-/// #it_2725_Logic9_PickedUp
+void it_2725_Logic9_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
 
 /// #itWhitebea_UnkMotion8_Anim
 
@@ -158,7 +171,10 @@ void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #itWhitebea_UnkMotion9_Phys
 
-/// #itWhitebea_UnkMotion9_Coll
+bool itWhitebea_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #it_802E48B4
 

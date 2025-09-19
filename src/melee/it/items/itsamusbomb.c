@@ -4,12 +4,16 @@
 #include <platform.h>
 
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802B4AC8
 
 /// #it_802B4BA0
 
-/// #it_802B4C10
+void it_802B4C10(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 0, 0x11);
+}
 
 /// #itSamusbomb_UnkMotion0_Anim
 
@@ -17,7 +21,10 @@ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itSamusbomb_UnkMotion0_Coll
 
-/// #it_802B4CF4
+void it_802B4CF4(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, 0x11);
+}
 
 /// #itSamusbomb_UnkMotion1_Anim
 
@@ -25,7 +32,10 @@ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itSamusbomb_UnkMotion1_Coll
 
-/// #it_2725_Logic50_EnteredAir
+void it_2725_Logic50_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 2, 0x11);
+}
 
 /// #itSamusbomb_UnkMotion2_Anim
 

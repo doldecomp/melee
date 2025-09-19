@@ -8,9 +8,9 @@
 #include <dolphin/mtx.h>
 
 /* 27D670 */ void it_8027D670(Vec3* const);
-/* 27D730 */ void it_8027D730(Item_GObj*);
-/* 27D76C */ void it_3F14_Logic6_Spawned(Item_GObj*);
-/* 27D820 */ UNK_RET it_8027D820(UNK_PARAMS);
+/* 27D730 */ void it_8027D730(Item_GObj* gobj);
+/* 27D76C */ void it_3F14_Logic6_Spawned(Item_GObj* gobj);
+/* 27D820 */ void it_8027D820(Item_GObj* gobj);
 /* 27DAC8 */ UNK_RET fn_8027DAC8(UNK_PARAMS);
 /* 27DC74 */ bool itBombhei_UnkMotion0_Anim(Item_GObj* gobj);
 /* 27DDE8 */ void itBombhei_UnkMotion0_Phys(Item_GObj* gobj);

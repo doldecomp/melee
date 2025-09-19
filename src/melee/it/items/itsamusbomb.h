@@ -12,11 +12,11 @@
 /* 2B4AC8 */ void it_802B4AC8(Item_GObj* gobj, Vec3*, float facing_dir,
                               float x);
 /* 2B4BA0 */ UNK_RET it_802B4BA0(UNK_PARAMS);
-/* 2B4C10 */ UNK_RET it_802B4C10(UNK_PARAMS);
+/* 2B4C10 */ void it_802B4C10(Item_GObj* gobj);
 /* 2B4C38 */ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2B4CC4 */ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2B4CC8 */ bool itSamusbomb_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2B4CF4 */ UNK_RET it_802B4CF4(UNK_PARAMS);
+/* 2B4CF4 */ void it_802B4CF4(Item_GObj* gobj);
 /* 2B4D1C */ bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2B4F1C */ void itSamusbomb_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2B4F4C */ bool itSamusbomb_UnkMotion1_Coll(Item_GObj* gobj);

@@ -5,7 +5,11 @@
 
 /// #it_802C837C
 
-/// #it_2725_Logic112_DmgDealt
+bool it_2725_Logic112_DmgDealt(Item_GObj* gobj)
+{
+    it_802C875C(gobj);
+    return false;
+}
 
 /// #it_802C84A0
 

@@ -13,7 +13,18 @@ bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802B3EFC
+u32 it_802B3EFC(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            return ip->xDD4_itemVar.pikachujoltair.xDD8;
+        }
+    }
+    return 0;
+}
 
 /// #it_802B3F20
 

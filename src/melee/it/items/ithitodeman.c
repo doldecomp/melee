@@ -47,11 +47,18 @@ void it_802D4B50(void) {}
 
 /// #it_802D4B54
 
-/// #itHitodeman_UnkMotion2_Anim
+bool itHitodeman_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 /// #itHitodeman_UnkMotion2_Phys
 
-/// #itHitodeman_UnkMotion2_Coll
+bool itHitodeman_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802D43AC);
+}
 
 /// #it_802D4C74
 

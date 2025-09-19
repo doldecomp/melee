@@ -11,7 +11,7 @@
 
 void it_2725_Logic86_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 bool it_2725_Logic86_DmgDealt(Item_GObj* gobj)

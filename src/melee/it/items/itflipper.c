@@ -5,6 +5,7 @@
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_80290938
 
@@ -29,7 +30,10 @@ void itFlipper_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itFlipper_UnkMotion0_Coll
 
-/// #it_80290F00
+void it_80290F00(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itFlipper_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -40,7 +44,10 @@ bool itFlipper_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itFlipper_UnkMotion1_Coll
 
-/// #it_3F14_Logic20_PickedUp
+void it_3F14_Logic20_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itFlipper_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -66,7 +73,10 @@ void it_3F14_Logic20_Dropped(Item_GObj* gobj)
 
 /// #it_80291254
 
-/// #it_8029131C
+void it_8029131C(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 5, 0x12);
+}
 
 /// #it_80291344
 
@@ -96,7 +106,10 @@ bool it_3F14_Logic20_ShieldBounced(Item_GObj* gobj)
 
 /// #it_3F14_Logic20_DmgReceived
 
-/// #it_3F14_Logic20_EnteredAir
+void it_3F14_Logic20_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itFlipper_UnkMotion4_Anim(Item_GObj* gobj)
 {

@@ -10,14 +10,21 @@
 
 /// #it_802D70A4
 
-/// #itFushigibana_UnkMotion0_Anim
+bool itFushigibana_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 void itFushigibana_UnkMotion0_Phys(Item_GObj* gobj)
 {
     it_8027A09C(gobj);
 }
 
-/// #itFushigibana_UnkMotion0_Coll
+bool itFushigibana_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802D705C);
+}
 
 /// #it_802D718C
 

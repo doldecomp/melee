@@ -47,14 +47,21 @@ void it_802CA538(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802CAA40
 
-/// #itKamex_UnkMotion3_Anim
+bool itKamex_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 void itKamex_UnkMotion3_Phys(Item_GObj* gobj)
 {
     it_8027A09C(gobj);
 }
 
-/// #itKamex_UnkMotion3_Coll
+bool itKamex_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CA558);
+}
 
 /// #it_802CAB10
 

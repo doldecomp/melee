@@ -1,9 +1,13 @@
 #include "itrshell.h"
 
+#include "m2c_macros.h"
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
+#include "it/it_2725.h"
 
 /// #it_8028CFE0
 
@@ -13,7 +17,19 @@
 
 /// #it_8028D26C
 
-/// #it_8028D390
+s32 it_8028D390(Item_GObj* gobj)
+{
+    // TODO: clean up with union
+    Item* ip = GET_ITEM(gobj);
+    s32* decp = &M2C_FIELD(ip, s32*, 0xDEC);
+    s32 dec = *decp;
+
+    *decp = dec - 1;
+    if (*decp == 0) {
+        M2C_FIELD(ip, s32*, 0xDF0) = 1;
+    }
+    return dec;
+}
 
 /// #it_8028D3B8
 
@@ -36,7 +52,10 @@ void itRshell_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itRshell_UnkMotion0_Coll
 
-/// #it_8028D7F0
+void it_8028D7F0(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itRshell_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -105,7 +124,11 @@ void itRshell_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic15_Reflected
 
-/// #it_3F14_Logic15_Clanked
+bool it_3F14_Logic15_Clanked(Item_GObj* gobj)
+{
+    itColl_BounceOffVictim(gobj);
+    return false;
+}
 
 /// #it_3F14_Logic15_HitShield
 

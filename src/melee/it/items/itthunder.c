@@ -11,7 +11,7 @@ void it_802CCB10(void) {}
 
 void it_802CCB14(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 /// #itThunder_UnkMotion1_Anim
@@ -38,8 +38,15 @@ bool itThunder_UnkMotion2_Coll(Item_GObj* gobj)
 
 /// #it_802CCE28
 
-/// #itThunder_UnkMotion0_Anim
+bool itThunder_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 /// #itThunder_UnkMotion0_Phys
 
-/// #itThunder_UnkMotion0_Coll
+bool itThunder_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CCB10);
+}

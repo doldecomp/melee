@@ -5,12 +5,16 @@
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "cm/camera.h"
 
 /// #it_802C9D40
 
 void it_802C9DFC(void) {}
 
-/// #it_2725_Logic2_Destroyed
+void it_2725_Logic2_Destroyed(Item_GObj* gobj)
+{
+    Camera_80031044(2);
+}
 
 void it_802C9E24(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -42,13 +46,20 @@ bool itKabigon_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #it_802CA324
 
-/// #itKabigon_UnkMotion2_Anim
+bool itKabigon_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 void itKabigon_UnkMotion2_Phys(Item_GObj* gobj)
 {
     it_8027A09C(gobj);
 }
 
-/// #itKabigon_UnkMotion2_Coll
+bool itKabigon_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802C9E44);
+}
 
 /// #it_802CA3F4

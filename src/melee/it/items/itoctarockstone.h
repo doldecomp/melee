@@ -14,7 +14,7 @@
 /* 2E87F0 */ bool it_2725_Logic4_Absorbed(Item_GObj*);
 /* 2E87F8 */ bool it_2725_Logic4_Reflected(Item_GObj*);
 /* 2E881C */ bool it_2725_Logic4_ShieldBounced(Item_GObj*);
-/* 2E883C */ UNK_RET it_802E883C(UNK_PARAMS);
+/* 2E883C */ void it_802E883C(HSD_GObj* gobj);
 /* 2E8864 */ bool itOctarockstone_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2E8898 */ void itOctarockstone_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2E889C */ bool itOctarockstone_UnkMotion0_Coll(Item_GObj* gobj);

@@ -36,7 +36,7 @@
 /* 2D5884 */ bool it_802D5884(Item_GObj* gobj);
 /* 2D58BC */ void it_802D58BC(Item_GObj* gobj);
 /* 2D58C0 */ bool it_802D58C0(Item_GObj* gobj);
-/* 2D58EC */ UNK_RET it_802D58EC(UNK_PARAMS);
+/* 2D58EC */ void it_802D58EC(HSD_GObj* gobj);
 /* 2D5914 */ bool itLucky_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2D594C */ void itLucky_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2D597C */ bool itLucky_UnkMotion3_Coll(Item_GObj* gobj);

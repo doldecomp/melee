@@ -78,6 +78,14 @@ typedef struct itBombHei_ItemVars {
     float xDEC;
 } itBombHei_ItemVars;
 
+typedef struct itDosei_ItemVars {
+    s32 xDD4;
+    s32 xDD8;
+    s32 xDDC;
+    s32 xDE0;
+    Vec3 xDE4;
+} itDosei_ItemVars;
+
 typedef struct itHeart_ItemVars {
     s32 xDD4_heal;
     union {
@@ -187,6 +195,11 @@ typedef struct ItLGunBeamAttr {
     float xC;       // related to position calcs for var angle0 - [1.22173]
     float x10;      // related to position calcs for var angle0 - [2/3 * pi]
 } ItLGunBeamAttr;
+
+typedef struct itLipstickAttributes {
+    /* +0 */ float x0;
+    /* +4 */ Vec3 x4;
+} itLipstickAttributes;
 
 /// Eggs spawned on Yoshi stages / by Chansey
 typedef struct itEgg_ItemVars {
@@ -309,7 +322,8 @@ typedef struct {
     /* ip+DEC */ unsigned char xDEC_b5 : 1;
     /* ip+DEC */ unsigned char xDEC_b6 : 1;
     /* ip+DEC */ unsigned char xDEC_b7 : 1;
-    /* ip+DF0 */ char pad_DF0[0xE10 - 0xDF0];
+    /* ip+DF0 */ s32 xDF0;
+    /* ip+DF4 */ char pad_DF4[0xE10 - 0xDF4];
     /* ip+E10 */ int xE10;
     /* ip+E14 */ char pad_E14[0xE20 - 0xE14];
     /* ip+E20 */ Vec3 vel;
@@ -743,6 +757,11 @@ typedef struct itOctarock_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x20];
     /* +20 ip+DF4 */ Vec3 x20;
 } itOctarock_ItemVars;
+
+typedef struct itSScopeAttributes {
+    /* +0 */ char _padding[0x34];
+    /* +34 */ Vec3 x34;
+} itSScopeAttributes;
 
 typedef struct itSonans_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];

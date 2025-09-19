@@ -5,7 +5,18 @@
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
-/// #it_802B3368
+void* it_802B3368(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            return ip->xDD4_itemVar.pikachujoltground.unk_8;
+        }
+    }
+    return NULL;
+}
 
 /// #it_802B338C
 

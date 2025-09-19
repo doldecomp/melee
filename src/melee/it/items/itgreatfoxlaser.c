@@ -37,5 +37,5 @@ bool it_2725_Logic27_Absorbed(Item_GObj* item_gobj)
 
 void it_802EB5A8(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }

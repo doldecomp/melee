@@ -9,7 +9,7 @@
 
 void it_2725_Logic15_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 void itKireihana_UnkMotion3_Phys(Item_GObj* gobj)
@@ -17,7 +17,18 @@ void itKireihana_UnkMotion3_Phys(Item_GObj* gobj)
     it_8027A344(gobj);
 }
 
+bool itKireihana_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
+
 void itKireihana_UnkMotion0_Phys(Item_GObj* gobj)
 {
     it_8027A09C(gobj);
+}
+
+void itKireihana_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8027A118(gobj, it_802D0138);
 }

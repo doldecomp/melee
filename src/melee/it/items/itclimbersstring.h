@@ -5,6 +5,7 @@
 
 #include "it/items/types.h"
 
+/* 2C28B8 */ void fn_802C28B8(Item_GObj* gobj);
 /* 2C37BC */ void it_2725_Logic70_PickedUp(Item_GObj*);
 /* 2C3AA4 */ void it_2725_Logic70_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F76B8 */ extern ItemStateTable it_803F76B8[];

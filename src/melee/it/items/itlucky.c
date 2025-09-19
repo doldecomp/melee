@@ -5,6 +5,7 @@
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802D5050
 
@@ -46,20 +47,27 @@ bool itLucky_UnkMotion6_Anim(Item_GObj* gobj)
 
 /// #it_802D5560
 
-/// #it_802D55DC
+bool it_802D55DC(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 void it_802D5600(Item_GObj* gobj)
 {
     it_8027A09C(gobj);
 }
 
-/// #it_802D5620
+bool it_802D5620(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802D5420);
+}
 
 /// #it_802D5648
 
 void it_802D56F0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 /// #it_802D5710
@@ -74,7 +82,10 @@ void it_802D58BC(Item_GObj* gobj) {}
 
 /// #it_802D58C0
 
-/// #it_802D58EC
+void it_802D58EC(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 /// #itLucky_UnkMotion3_Anim
 
@@ -82,7 +93,10 @@ void it_802D58BC(Item_GObj* gobj) {}
 
 /// #itLucky_UnkMotion3_Coll
 
-/// #it_2725_Logic44_PickedUp
+void it_2725_Logic44_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itLucky_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -91,9 +105,15 @@ bool itLucky_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itLucky_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_2725_Logic44_Dropped
+void it_2725_Logic44_Dropped(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
-/// #it_2725_Logic44_EnteredAir
+void it_2725_Logic44_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 /// #it_802D5A2C
 

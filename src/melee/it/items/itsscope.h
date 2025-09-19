@@ -5,13 +5,14 @@
 
 #include "it/forward.h"
 
+#include "it/itCommonItems.h"
 #include "it/items/types.h"
 
 #include <dolphin/mtx.h>
 
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
 /* 291C98 */ void it_3F14_Logic21_Spawned(Item_GObj*);
-/* 291CCC */ UNK_RET it_80291CCC(UNK_PARAMS);
+/* 291CCC */ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos);
 /* 291CF4 */ UNK_RET it_80291CF4(UNK_PARAMS);
 /* 291D38 */ UNK_RET it_80291D38(UNK_PARAMS);
 /* 291DAC */ UNK_RET it_80291DAC(UNK_PARAMS);
@@ -21,7 +22,7 @@
 /* 292080 */ bool itSscope_UnkMotion0_Anim(Item_GObj* gobj);
 /* 292088 */ void itSscope_UnkMotion0_Phys(Item_GObj* gobj);
 /* 29208C */ bool itSscope_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2920B8 */ UNK_RET it_802920B8(UNK_PARAMS);
+/* 2920B8 */ void it_802920B8(Item_GObj* gobj);
 /* 2920E0 */ bool itSscope_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2920E8 */ void itSscope_UnkMotion1_Phys(Item_GObj* gobj);
 /* 292118 */ bool itSscope_UnkMotion3_Coll(Item_GObj* gobj);

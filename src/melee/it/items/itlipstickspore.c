@@ -69,7 +69,11 @@ bool it_3F14_Logic37_Absorbed(Item_GObj* arg0)
 
 /// #it_3F14_Logic37_Reflected
 
-/// #it_3F14_Logic37_ShieldBounced
+bool it_3F14_Logic37_ShieldBounced(Item_GObj* gobj)
+{
+    itColl_BounceOffShield(gobj);
+    return false;
+}
 
 void it_3F14_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

@@ -10,7 +10,7 @@
 
 void it_2725_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 /// #it_802D73F0
@@ -70,11 +70,20 @@ void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #itOldkuri_UnkMotion6_Phys
 
-/// #itOldkuri_UnkMotion6_Coll
+bool itOldkuri_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #itOldkuri_UnkMotion9_Anim
 
-/// #itOldkuri_UnkMotion9_Phys
+void itOldkuri_UnkMotion9_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+    }
+}
 
 /// #itOldkuri_UnkMotion9_Coll
 
@@ -134,5 +143,5 @@ bool itOldkuri_UnkMotion11_Coll(Item_GObj* gobj)
 
 void it_802D84D8(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }

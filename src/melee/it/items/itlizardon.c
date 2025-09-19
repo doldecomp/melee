@@ -58,7 +58,10 @@ void it_802CC184(Item_GObj* gobj)
     it_8027A09C(gobj);
 }
 
-/// #it_802CC1A4
+bool it_802CC1A4(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CB960);
+}
 
 /// #it_802CC1CC
 

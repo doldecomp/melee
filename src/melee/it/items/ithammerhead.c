@@ -6,6 +6,7 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_80299C48
 
@@ -33,9 +34,9 @@ void it_3F14_Logic40_Dropped(Item_GObj* gobj)
 
 /// #itHammerhead_UnkMotion2_Coll
 
-void it_80299F94(void)
+void it_80299F94(Item_GObj* gobj)
 {
-    it_80299FB4();
+    it_80299FB4(gobj);
 }
 
 /// #it_80299FB4
@@ -61,7 +62,11 @@ bool it_3F14_Logic40_HitShield(Item_GObj* arg0)
     return false;
 }
 
-/// #it_3F14_Logic40_Reflected
+bool it_3F14_Logic40_Reflected(Item_GObj* gobj)
+{
+    it_80273030(gobj);
+    return false;
+}
 
 bool it_3F14_Logic40_DmgReceived(Item_GObj* arg0)
 {

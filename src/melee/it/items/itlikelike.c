@@ -169,7 +169,10 @@ bool itLikelike_UnkMotion19_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion19_Phys
 
-/// #itLikelike_UnkMotion19_Coll
+bool itLikelike_UnkMotion19_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #it_802DC0AC
 

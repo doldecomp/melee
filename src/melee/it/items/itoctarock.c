@@ -3,6 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802E4A44
 
@@ -31,7 +32,13 @@ bool itOctarock_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itOctarock_UnkMotion3_Anim
 
-/// #itOctarock_UnkMotion3_Phys
+void itOctarock_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+    }
+}
 
 /// #itOctarock_UnkMotion3_Coll
 
@@ -53,7 +60,10 @@ bool itOctarock_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itOctarock_UnkMotion1_Coll
 
-/// #it_2725_Logic2_PickedUp
+void it_2725_Logic2_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 /// #itOctarock_UnkMotion5_Anim
 
@@ -67,7 +77,10 @@ void itOctarock_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #itOctarock_UnkMotion6_Phys
 
-/// #itOctarock_UnkMotion6_Coll
+bool itOctarock_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #it_802E57D4
 

@@ -5,6 +5,7 @@
 
 #include "it/inlines.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802E878C
 
@@ -28,14 +29,21 @@ bool it_2725_Logic4_Absorbed(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic4_Reflected
+bool it_2725_Logic4_Reflected(Item_GObj* gobj)
+{
+    it_80273030(gobj);
+    return false;
+}
 
 bool it_2725_Logic4_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-/// #it_802E883C
+void it_802E883C(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #itOctarockstone_UnkMotion0_Anim
 

@@ -2,9 +2,9 @@
 
 #include <placeholder.h>
 #include <platform.h>
-
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+
 
 /// #it_8027D670
 
@@ -75,7 +75,11 @@ void itBombhei_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #fn_8027FCA8
 
-/// #itBombhei_UnkMotion6_Anim
+bool itBombhei_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    it_8027D820(gobj);
+    return false;
+}
 
 /// #itBombhei_UnkMotion6_Phys
 

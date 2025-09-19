@@ -6,6 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
 
@@ -57,9 +58,16 @@ bool itZrshell_UnkMotion2_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion3_Coll
 
-/// #it_2725_Logic11_Dropped
+void it_2725_Logic11_Dropped(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, 6);
+}
 
-/// #itZrshell_UnkMotion4_Anim
+bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    it_802DDBE8(gobj);
+    return false;
+}
 
 /// #itZrshell_UnkMotion4_Phys
 
@@ -112,7 +120,11 @@ void itZrshell_UnkMotion10_Phys(Item_GObj* gobj)
 
 /// #itZrshell_UnkMotion10_Coll
 
-/// #it_2725_Logic11_DmgDealt
+bool it_2725_Logic11_DmgDealt(Item_GObj* gobj)
+{
+    it_80272940(gobj);
+    return false;
+}
 
 /// #it_2725_Logic11_DmgReceived
 
@@ -131,7 +143,7 @@ bool it_2725_Logic11_Reflected(Item_GObj* gobj)
 
 void it_802DFED4(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
-    it_8026B894(gobj, (HSD_GObj*) ref_gobj);
+    it_8026B894(gobj, ref_gobj);
 }
 
 void it_2725_Logic11_Destroyed(Item_GObj* gobj)

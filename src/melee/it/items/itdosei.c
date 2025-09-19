@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 
@@ -61,7 +62,12 @@ bool itDosei_UnkMotion5_Anim(Item_GObj* gobj)
 
 /// #it_3F14_Logic7_EnteredAir
 
-/// #itDosei_UnkMotion6_Anim
+bool itDosei_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    return false;
+}
 
 void itDosei_UnkMotion6_Phys(Item_GObj* gobj) {}
 
@@ -69,7 +75,12 @@ void itDosei_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 /// #it_80282BFC
 
-/// #itDosei_UnkMotion8_Anim
+bool itDosei_UnkMotion8_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    return false;
+}
 
 /// #itDosei_UnkMotion8_Phys
 
@@ -112,9 +123,17 @@ bool it_3F14_Logic7_Reflected(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-/// #it_3F14_Logic7_Clanked
+bool it_3F14_Logic7_Clanked(Item_GObj* gobj)
+{
+    itColl_BounceOffVictim(gobj);
+    return false;
+}
 
-/// #it_3F14_Logic7_HitShield
+bool it_3F14_Logic7_HitShield(Item_GObj* gobj)
+{
+    itColl_BounceOffVictim(gobj);
+    return false;
+}
 
 bool it_3F14_Logic7_ShieldBounced(Item_GObj* gobj)
 {

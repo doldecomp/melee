@@ -5,7 +5,11 @@
 
 /// #it_802EEFA8
 
-/// #it_2725_Logic22_DmgDealt
+bool it_2725_Logic22_DmgDealt(Item_GObj* gobj)
+{
+    it_802EF320(gobj);
+    return false;
+}
 
 /// #it_802EF098
 
@@ -25,7 +29,11 @@ void itTools_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #it_802EF548
 
-/// #it_2725_Logic22_DmgReceived
+bool it_2725_Logic22_DmgReceived(Item_GObj* gobj)
+{
+    it_802EF548(gobj);
+    return false;
+}
 
 /// #it_2725_Logic22_Clanked
 

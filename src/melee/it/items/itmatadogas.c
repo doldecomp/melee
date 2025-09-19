@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802CAFD4
 
@@ -30,11 +31,18 @@ void itMatadogas_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 /// #it_802CB350
 
-/// #itMatadogas_UnkMotion2_Anim
+bool itMatadogas_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 /// #itMatadogas_UnkMotion2_Phys
 
-/// #itMatadogas_UnkMotion2_Coll
+bool itMatadogas_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CB0F4);
+}
 
 /// #it_802CB4F0
 

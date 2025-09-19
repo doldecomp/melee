@@ -1,6 +1,8 @@
 #include "itnessyoyo.h"
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
 
 void it_802BE598(Item_GObj* gobj)
 {
@@ -20,7 +22,10 @@ void it_802BE5B8(Item_GObj* gobj)
 
 /// #it_802BE9D8
 
-/// #itNessyoyo_UnkMotion0_Phys
+void itNessyoyo_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    it_802BF900(GET_ITEM(gobj));
+}
 
 /// #itNessyoyo_UnkMotion1_Phys
 
@@ -44,7 +49,10 @@ void it_802BE5B8(Item_GObj* gobj)
 
 /// #it_802BFAFC
 
-/// #it_2725_Logic59_PickedUp
+void it_2725_Logic59_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #it_802BFE5C
 
