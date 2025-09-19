@@ -363,7 +363,7 @@ typedef struct {
     f32 xD8;
     f32 xDC;
     HSD_GObj* xE0;
-    s32 xE4;
+    int xE4;
     f32 xE8;
     f32 xEC;
     s32 xF0;

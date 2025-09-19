@@ -2341,8 +2341,8 @@ void ftCo_800A9904(Fighter* fp)
 
     Vec3 sp4C;
     Vec3 sp40;
-    f32 sp3C;
-    f32 sp38;
+    int sp3C;
+    int sp38;
 
     PAD_STACK(0x24);
 
@@ -2894,8 +2894,8 @@ bool ftCo_800AAF48(Fighter* fp)
     Vec3 sp44;
     Vec3 sp38;
     Vec3 sp2C;
-    f32 sp28;
-    f32 sp24;
+    int sp28;
+    int sp24;
     PAD_STACK(0xC);
 
     if (temp_r29->x60 != 0) {
@@ -3002,8 +3002,8 @@ void ftCo_800AB224(Fighter* fp)
 
     u8 _[0x48];
 
-    float sp40;
-    float sp3C;
+    int sp40;
+    int sp3C;
     Vec3 sp30;
     Vec3 sp24;
 

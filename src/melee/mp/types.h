@@ -40,11 +40,14 @@ struct mp_UnkStruct1 {
     /* +2 */ u16 x2;
     /* +4 */ short x4;
     /* +6 */ short x6;
+    /* +8 */ short x8;
+    /* +A */ u8 pad_xA[0xE - 0xA];
+    /* +E */ u16 xE;
 };
 
 struct mp_UnkStruct2 {
     /* +0 */ mp_UnkStruct1* x0;
-    /* +4 */ int x4;
+    /* +4 */ u32 x4;
 };
 
 struct mpisland {
@@ -65,7 +68,8 @@ struct mp_UnkStruct6 {
 };
 
 struct mpLib_804D64B8_t {
-    /* 0x00 */ char pad_0[8];
+    /* 0x00 */ f32 x0;
+    /* 0x04 */ f32 x4;
     /* 0x08 */ f32 unk_8;      /* inferred */
     /* 0x0C */ f32 unk_C;      /* inferred */
     /* 0x10 */ char pad_10[8]; /* maybe part of unk_C[3]? */
@@ -73,28 +77,30 @@ struct mpLib_804D64B8_t {
 STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);
 
 struct mpLib_804D64C0_t {
-    /* 0x00 */ UNK_T x0;
-    /* 0x04 */ s16* x4;
+    /* 0x00 */ mpLib_804D64C0_t* next;
+    /* 0x04 */ struct mpLib_804D64C0_x4_t {
+        s16 x0;
+        s16 x2;
+        u8 pad_x4[0x10 - 0x4];
+        s16 x10;
+        s16 x12;
+        u8 pad_x14[0x24 - 0x14];
+        s16 x24;
+        s16 x26;
+    }* x4;
     /* 0x08 */ u32 flags;
     /* 0x0C */ s16 xC;
-    /* 0x0E */ s16 xE;
-    /* 0x10 */ char pad_0[0x14];
-    /* 0x24 */ mpLib_GroundCallback x24;
+    /* 0x0E */ u8 xE : 1;
+    /* 0x10 */ float x10;
+    /* 0x14 */ float x14;
+    /* 0x18 */ float x18;
+    /* 0x1C */ float x1C;
+    /* 0x20 */ char pad_20[0x4];
+    /* 0x24 */ mpLib_Callback x24;
     /* 0x28 */ Ground* x28;
     /* 0x2C */ int unk_2C; /* inferred */
     /* 0x30 */ int unk_30; /* inferred */
 }; /* size = 0x34 */
 STATIC_ASSERT(sizeof(struct mpLib_804D64C0_t) == 0x34);
-
-struct mp_UnkStruct7 {
-    /* +0 */ struct mp_UnkStruct7* next;
-    /* +4 */ s32 x4;
-    /* +8 */ s32 x8;
-    /* +C */ u8 xC[0x10 - 0xC];
-    /* +10 */ float x10;
-    /* +14 */ float x14;
-    /* +18 */ float x18;
-    /* +1C */ float x1C;
-};
 
 #endif

@@ -8,10 +8,10 @@
 
 #include "mp/forward.h"
 
-/* 1D7700 */ static void fn_801D7700(Ground* gp, UNK_T, UNK_T, UNK_T,
-                                     mpLib_GroundEnum arg4);
-/* 1D7E60 */ static void fn_801D7E60(Ground* gp, UNK_T, UNK_T, UNK_T,
-                                     mpLib_GroundEnum arg4);
+/* 1D7700 */ static void fn_801D7700(Ground* gp, s32, CollData*, s32,
+                                     mpLib_GroundEnum arg4, float);
+/* 1D7E60 */ static void fn_801D7E60(Ground* gp, s32, CollData*, s32,
+                                     mpLib_GroundEnum arg4, float);
 /* 1D8134 */ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1);
 /* 1D8444 */ static DynamicsDesc* grKongo_801D8444(enum_t);
 

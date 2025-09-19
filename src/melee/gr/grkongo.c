@@ -1417,8 +1417,8 @@ void fn_801D542C(HSD_GObj* arg0)
 
 /// #grKongo_801D7BBC
 
-void fn_801D7E60(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
-                 mpLib_GroundEnum arg4)
+void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
+                 mpLib_GroundEnum arg4, float arg8)
 {
     if (arg4 == mpLib_GroundEnum_Unk2) {
         gp->gv.kongo3.xC6 = gp->gv.kongo3.xC8 + 1;
