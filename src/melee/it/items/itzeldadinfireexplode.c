@@ -17,6 +17,10 @@
 
 /* 2C4998 */ bool itZeldadinfireexplode_UnkMotion0_Coll(Item_GObj* gobj);
 
+ItemStateTable it_803F7740[] = { { 0, itZeldadinfireexplode_UnkMotion0_Anim,
+                                   itZeldadinfireexplode_UnkMotion0_Phys,
+                                   itZeldadinfireexplode_UnkMotion0_Coll } };
+
 Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Point3d* pos,
                        f32 facing_dir, f32 scale)
 {
@@ -25,9 +29,9 @@ Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Point3d* pos,
     PAD_STACK(4);
 
     spawn.kind = It_Kind_Zelda_DinFire_Explode;
-    spawn.pos = *pos;
-    spawn.pos.z = 0.0f;
-    spawn.prev_pos = spawn.pos;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    spawn.pos = spawn.prev_pos;
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
@@ -60,16 +64,16 @@ void it_2725_Logic66_Destroyed(Item_GObj* gobj)
 
 void it_802C46C4(Item_GObj* gobj, Item* arg1)
 {
-    HSD_JObj* jobj;
     Item* ip;
-    f32 temp_f1;
     itZeldaDinFireExplodeAttributes* attrs;
+    HSD_JObj* jobj;
+    f32 temp_f1;
 
     ip = GET_ITEM(gobj);
     jobj = GET_JOBJ(gobj);
     attrs = ip->xC4_article_data->x4_specialAttributes;
     it_8026B3A8(gobj);
-    ip->xDCC_flag.b0 = 0;
+    ip->xDC8_word.flags.x13 = 0;
     it_80272940(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_80275158(gobj, 60.0f);
@@ -96,8 +100,8 @@ void it_802C46C4(Item_GObj* gobj, Item* arg1)
 bool itZeldadinfireexplode_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
     itZeldaDinFireExplodeAttributes* attrs;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 temp_f1;
     Vec3 scale;
 

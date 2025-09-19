@@ -3411,8 +3411,8 @@ melee/it/items/itzeldadinfire.c:
 melee/it/items/itzeldadinfireexplode.c:
 	.text       start:0x802C4580 end:0x802C49E0
 	.data       start:0x803F7740 end:0x803F7750
-	.sdata      start:0x804D5560 end:0x804D5570
-	.sdata2     start:0x804DD238 end:0x804DD250
+	.sdata      start:0x804D5560 end:0x804D556D
+	.sdata2     start:0x804DD238 end:0x804DD24C
 
 melee/it/items/itmewtwodisable.c:
 	.text       start:0x802C49E0 end:0x802C4D10
