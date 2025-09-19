@@ -1714,7 +1714,7 @@ void gm_801BF85C(MinorScene* arg)
     PreloadCacheScene* temp_r31 = lbDvd_8001822C();
     PAD_STACK(4);
     lbDvd_800174BC();
-    temp_r31->is_heap_persistent[1] = 0;
+    temp_r31->is_heap_persistent[1] = false;
     lbDvd_80018254();
 }
 

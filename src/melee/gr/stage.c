@@ -404,7 +404,7 @@ s32 Stage_8022519C(InternalStageId idx)
     return unk_arr_803E9960[idx].stage_id;
 }
 
-void Stage_802251B4(InternalStageId idx, s32 arg1)
+void Stage_802251B4(InternalStageId idx)
 {
     Ground_801C06B8(unk_arr_803E9960[idx].stage_id);
 }
