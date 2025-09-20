@@ -4,6 +4,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 void itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
 {
@@ -33,4 +34,13 @@ void it_2725_Logic28_Thrown(Item_GObj* gobj)
 void it_802F0320(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
+}
+
+bool it_2725_Logic28_ShieldBounced(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3) {
+        itColl_BounceOffShield(gobj);
+    }
+    return false;
 }

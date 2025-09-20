@@ -6,11 +6,18 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
+#include "it/inlines.h"
 
 /// #it_80299C48
 
-/// #it_3F14_Logic40_Spawned
+void it_3F14_Logic40_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHammerheadAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_80275158(gobj, attrs->x4);
+}
 
 /// #it_80299D7C
 
@@ -32,7 +39,11 @@ void it_3F14_Logic40_Dropped(Item_GObj* gobj)
 
 /// #itHammerhead_UnkMotion2_Phys
 
-/// #itHammerhead_UnkMotion2_Coll
+bool itHammerhead_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_80299F94);
+    return false;
+}
 
 void it_80299F94(Item_GObj* gobj)
 {
@@ -45,7 +56,11 @@ void it_80299F94(Item_GObj* gobj)
 
 void itHammerhead_UnkMotion3_Phys(Item_GObj* gobj) {}
 
-/// #itHammerhead_UnkMotion3_Coll
+bool itHammerhead_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_3F14_Logic40_Thrown);
+    return false;
+}
 
 bool it_3F14_Logic40_DmgDealt(Item_GObj* arg0)
 {

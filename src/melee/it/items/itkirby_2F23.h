@@ -18,7 +18,7 @@
 /* 2F2888 */ bool itKirby_2F23_UnkMotion1_Anim(Item_GObj*);
 /* 2F2890 */ void itKirby_2F23_UnkMotion1_Phys(Item_GObj*);
 /* 2F2894 */ bool itKirby_2F23_UnkMotion1_Coll(Item_GObj*);
-/* 2F289C */ UNK_RET it_802F289C(UNK_PARAMS);
+/* 2F289C */ void it_802F289C(Item_GObj*);
 /* 3F9450 */ extern ItemStateTable it_803F9450[];
 
 #endif

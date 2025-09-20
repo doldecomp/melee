@@ -34,7 +34,15 @@ bool itSeakneedlethrown_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itSeakneedlethrown_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itSeakneedlethrown_UnkMotion1_Phys
+void itSeakneedlethrown_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.seakneedlethrown.xDD8;
+    ip->x40_vel.y += ip->xDD4_itemVar.seakneedlethrown.xDE0;
+    if (ip->x40_vel.y < ip->xDD4_itemVar.seakneedlethrown.xDDC) {
+        ip->x40_vel.y = ip->xDD4_itemVar.seakneedlethrown.xDDC;
+    }
+}
 
 void itSeakneedlethrown_UnkMotion2_Phys(Item_GObj* gobj) {}
 
@@ -44,7 +52,15 @@ void itSeakneedlethrown_UnkMotion3_Phys(Item_GObj* gobj)
     itResetVelocity(ip);
 }
 
-/// #itSeakneedlethrown_UnkMotion4_Phys
+void itSeakneedlethrown_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.seakneedlethrown.xDD8;
+    ip->x40_vel.y += ip->xDD4_itemVar.seakneedlethrown.xDE0;
+    if (ip->x40_vel.y < ip->xDD4_itemVar.seakneedlethrown.xDDC) {
+        ip->x40_vel.y = ip->xDD4_itemVar.seakneedlethrown.xDDC;
+    }
+}
 
 /// #itSeakneedlethrown_UnkMotion0_Coll
 

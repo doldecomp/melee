@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_80295ED4
 
@@ -39,7 +40,12 @@ void itTarucann_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itTarucann_UnkMotion1_Anim
 
-/// #itTarucann_UnkMotion1_Phys
+void itTarucann_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itTarucann_UnkMotion1_Coll
 

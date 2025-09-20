@@ -13,7 +13,7 @@
 /* 290C38 */ UNK_RET it_80290C38(UNK_PARAMS);
 /* 290CE8 */ UNK_RET it_80290CE8(UNK_PARAMS);
 /* 290DD4 */ UNK_RET it_80290DD4(UNK_PARAMS);
-/* 290E78 */ UNK_RET it_80290E78(UNK_PARAMS);
+/* 290E78 */ void it_80290E78(Item_GObj*);
 /* 290EC8 */ bool itFlipper_UnkMotion0_Anim(Item_GObj* gobj);
 /* 290ED0 */ void itFlipper_UnkMotion0_Phys(Item_GObj* gobj);
 /* 290ED4 */ bool itFlipper_UnkMotion0_Coll(Item_GObj* gobj);

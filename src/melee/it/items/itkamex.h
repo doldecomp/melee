@@ -11,8 +11,8 @@
 /* 2CA49C */ void it_802CA49C(Item_GObj*);
 /* 2CA534 */ UNK_RET it_802CA534(UNK_PARAMS);
 /* 2CA538 */ void it_802CA538(Item_GObj*, Item_GObj*);
-/* 2CA558 */ UNK_RET it_802CA558(UNK_PARAMS);
-/* 2CA58C */ UNK_RET it_802CA58C(UNK_PARAMS);
+/* 2CA558 */ void it_802CA558(Item_GObj* gobj);
+/* 2CA58C */ void it_802CA58C(Item_GObj* gobj);
 /* 2CA5D8 */ bool it_802CA5D8(Item_GObj* gobj);
 /* 2CA618 */ void it_802CA618(Item_GObj* gobj);
 /* 2CA654 */ bool it_802CA654(Item_GObj* gobj);

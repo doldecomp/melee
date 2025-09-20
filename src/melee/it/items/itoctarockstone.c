@@ -45,7 +45,13 @@ void it_802E883C(HSD_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itOctarockstone_UnkMotion0_Anim
+bool itOctarockstone_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    return false;
+}
 
 void itOctarockstone_UnkMotion0_Phys(Item_GObj* gobj) {}
 

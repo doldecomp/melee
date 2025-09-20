@@ -3,7 +3,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -36,7 +38,11 @@ bool itBox_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itBox_UnkMotion1_Phys
 
-/// #itBox_UnkMotion1_Coll
+bool itBox_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, fn_80286480);
+    return false;
+}
 
 void it_3F14_Logic1_PickedUp(Item_GObj* gobj)
 {
@@ -82,7 +88,15 @@ bool itBox_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #it_80286BA0
 
-/// #itBox_UnkMotion7_Anim
+bool itBox_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.box.xDD8 -= 1;
+    if (ip->xDD4_itemVar.box.xDD8 > 0) {
+        return false;
+    }
+    return true;
+}
 
 void itBox_UnkMotion7_Phys(Item_GObj* gobj) {}
 
@@ -113,7 +127,11 @@ bool itBox_UnkMotion5_Anim(Item_GObj* gobj)
 
 void itBox_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itBox_UnkMotion5_Coll
+bool itBox_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, fn_80286480, it_8028655C);
+    return false;
+}
 
 void it_3F14_Logic1_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

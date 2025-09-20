@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -17,7 +18,11 @@ void it_802CB940(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802CB960
+s32 it_802CB960(Item_GObj* gobj)
+{
+    it_80273454(gobj);
+    return it_802CB994(gobj);
+}
 
 /// #it_802CB994
 
@@ -39,7 +44,13 @@ void it_802CB940(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802CBFE4
 
-/// #itLizardon_UnkMotion3_Anim
+bool itLizardon_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        return true;
+    }
+    return false;
+}
 
 /// #itLizardon_UnkMotion3_Phys
 
@@ -95,7 +106,15 @@ bool it_2725_Logic37_Absorbed(Item_GObj* arg0)
 
 /// #it_802CC5D4
 
-/// #it_802CC650
+bool it_802CC650(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
 
 /// #it_802CC684
 

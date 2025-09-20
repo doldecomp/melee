@@ -4,11 +4,21 @@
 #include <platform.h>
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
+
+#define GET_ATTRS(ip)                                                         \
+    ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
 /// #it_802D9A2C
 
-/// #it_802D9B78
+void it_802D9B78(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attrs = GET_ATTRS(ip);
+    ip->facing_dir = -ip->facing_dir;
+    ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+}
 
 /// #it_802D9BA8
 
@@ -67,7 +77,12 @@ bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion17_Phys
 
-/// #itLikelike_UnkMotion17_Coll
+bool itLikelike_UnkMotion17_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8026D564(gobj);
+    return it_8027C794(gobj);
+}
 
 /// #it_802DAD18
 
@@ -167,7 +182,12 @@ bool itLikelike_UnkMotion19_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion19_Phys
+void itLikelike_UnkMotion19_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itLikelike_UnkMotion19_Coll(Item_GObj* gobj)
 {

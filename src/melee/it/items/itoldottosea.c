@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/inlines.h"
+#include "it/it_2725.h"
 
 /// #it_802E2470
 
@@ -32,7 +33,12 @@ bool itOldottosea_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOldottosea_UnkMotion4_Phys
+void itOldottosea_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itOldottosea_UnkMotion4_Coll
 

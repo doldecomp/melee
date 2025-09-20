@@ -5,6 +5,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 
 /// #it_2725_Logic6_Spawned
@@ -20,9 +21,13 @@ void it_2725_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 void itFire_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #itFire_UnkMotion1_Coll
+bool itFire_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E7E0(gobj, it_802CC7D4);
+    return false;
+}
 
-void it_802CC7D4(void) {}
+void it_802CC7D4(Item_GObj* gobj) {}
 
 /// #it_802CC7D8
 

@@ -5,6 +5,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -13,7 +14,12 @@
 
 /// #it_80291BE0
 
-/// #it_3F14_Logic21_Spawned
+void it_3F14_Logic21_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xD4C = *(s32*)ip->xC4_article_data->x4_specialAttributes;
+    it_802920B8(gobj);
+}
 
 itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
 {
@@ -44,7 +50,11 @@ bool itSscope_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itSscope_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itSscope_UnkMotion0_Coll
+bool itSscope_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802920B8);
+    return false;
+}
 
 void it_802920B8(Item_GObj* gobj)
 {
@@ -56,7 +66,12 @@ bool itSscope_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itSscope_UnkMotion1_Phys
+void itSscope_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itSscope_UnkMotion3_Coll
 
@@ -128,7 +143,11 @@ bool itSscope_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itSscope_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itSscope_UnkMotion4_Coll
+bool itSscope_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_80292030, it_802920B8);
+    return false;
+}
 
 void it_3F14_Logic21_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

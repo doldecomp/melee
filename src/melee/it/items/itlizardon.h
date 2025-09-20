@@ -10,8 +10,8 @@
 /* 2CB8AC */ void it_802CB8AC(Item_GObj*);
 /* 2CB93C */ UNK_RET it_802CB93C(UNK_PARAMS);
 /* 2CB940 */ void it_802CB940(Item_GObj*, Item_GObj*);
-/* 2CB960 */ UNK_RET it_802CB960(UNK_PARAMS);
-/* 2CB994 */ UNK_RET it_802CB994(UNK_PARAMS);
+/* 2CB960 */ s32 it_802CB960(Item_GObj* gobj);
+/* 2CB994 */ s32 it_802CB994(Item_GObj* gobj);
 /* 2CB9E0 */ bool itLizardon_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CBA20 */ void itLizardon_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2CBA5C */ bool itLizardon_UnkMotion1_Coll(Item_GObj* gobj);

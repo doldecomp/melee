@@ -8,7 +8,7 @@
 #include "it/items/types.h"
 
 /* 2D9A2C */ UNK_RET it_802D9A2C(UNK_PARAMS);
-/* 2D9B78 */ UNK_RET it_802D9B78(UNK_PARAMS);
+/* 2D9B78 */ void it_802D9B78(Item_GObj*);
 /* 2D9BA8 */ void it_802D9BA8(Item_GObj*);
 /* 2D9CC4 */ bool it_2725_Logic5_DmgReceived(Item_GObj*);
 /* 2D9DDC */ UNK_RET it_802D9DDC(UNK_PARAMS);

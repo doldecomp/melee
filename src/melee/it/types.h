@@ -530,6 +530,7 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         itBombHei_ItemVars bombhei;
+        itBox_ItemVars box;
         itCapsule_ItemVars capsule;
         itDosei_ItemVars dosei;
         itChicorita_ItemVars chicorita;
@@ -539,6 +540,7 @@ struct Item {
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
+        itFlipper_ItemVars flipper;
         itFoods_ItemVars foods;
         itFoxBlaster_ItemVars foxblaster;
         itFoxIllusion_ItemVars foxillusion;
@@ -579,10 +581,13 @@ struct Item {
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
         itPokemon_ItemVars pokemon;
+        itSamusBomb_ItemVars samusbomb;
         itSamusGrapple_ItemVars samusgrapple;
+        itSeakNeedleThrown_ItemVars seakneedlethrown;
         itSonans_ItemVars sonans;
         itStar_ItemVars star;
         itSword_ItemVars sword;
+        itTaru_ItemVars taru;
         itTincle_ItemVars tincle;
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;

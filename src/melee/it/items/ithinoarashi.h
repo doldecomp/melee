@@ -14,11 +14,10 @@
 /* 2D5F34 */ void it_802D5F34(HSD_GObj*);
 /* 2D6084 */ void itHinoarashi_UnkMotion1_Phys(Item_GObj*);
 /* 2D60A4 */ bool itHinoarashi_UnkMotion1_Coll(Item_GObj*);
+/* 2D60D0 */ void itHinoarashi_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2D6100 */ bool it_2725_Logic27_DmgReceived(Item_GObj*);
 /* 2D61A8 */ void it_802D61A8(Item_GObj*, Item_GObj*);
 /* 3F8270 */ extern ItemStateTable it_803F8270[];
 /* 3F82A0 */ extern ItemStateTable it_803F82A0[];
-
-
 
 #endif

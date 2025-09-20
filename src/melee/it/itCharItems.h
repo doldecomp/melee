@@ -444,10 +444,22 @@ typedef struct itPikachutJoltAir_ItemVars {
     /* +4 +DD8 */ u32 xDD8;
 } itPikachutJoltAir_ItemVars;
 
+typedef struct itSamusBomb_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x4];
+    /* +4 +DD8 */ s32 xDD8;
+} itSamusBomb_ItemVars;
+
 typedef struct itSamusGrapple_ItemVars {
     /*  +0 +DD4 */ char pad_0[0x10];
     /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
 } itSamusGrapple_ItemVars;
+
+typedef struct itSeakNeedleThrown_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x4];
+    /* +4 +DD8 */ f32 xDD8;
+    /* +8 +DDC */ f32 xDDC;
+    /* +C +DE0 */ f32 xDE0;
+} itSeakNeedleThrown_ItemVars;
 
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;

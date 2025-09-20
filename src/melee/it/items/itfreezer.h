@@ -6,7 +6,7 @@
 #include "it/items/types.h"
 
 /* 2CCF9C */ void it_802CCF9C(Item_GObj*);
-/* 2CCFFC */ UNK_RET it_802CCFFC(UNK_PARAMS);
+/* 2CCFFC */ void it_802CCFFC(Item_GObj*);
 /* 2CD000 */ void it_802CD000(Item_GObj*, Item_GObj*);
 /* 2CD020 */ bool itFreezer_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CD060 */ void itFreezer_UnkMotion1_Phys(Item_GObj* gobj);
