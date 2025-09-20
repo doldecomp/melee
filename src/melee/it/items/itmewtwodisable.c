@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/inlines.h"
 #include "it/item.h"
 #include "it/it_2725.h"
 
@@ -20,7 +21,15 @@ void it_802C49E0(Item_GObj* gobj)
 
 /// #it_802C4BB8
 
-/// #itMewtwodisable_UnkMotion0_Anim
+bool itMewtwodisable_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
 
 void itMewtwodisable_UnkMotion0_Phys(Item_GObj* gobj) {}
 

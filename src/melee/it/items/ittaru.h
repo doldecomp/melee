@@ -6,8 +6,8 @@
 #include "it/items/types.h"
 
 /* 287458 */ void it_3F14_Logic2_Spawned(Item_GObj*);
-/* 2874F0 */ UNK_RET it_802874F0(UNK_PARAMS);
-/* 287690 */ UNK_RET it_80287690(UNK_PARAMS);
+/* 2874F0 */ void it_802874F0(Item_GObj* gobj);
+/* 287690 */ void it_80287690(Item_GObj* gobj);
 /* 287B28 */ bool itTaru_UnkMotion0_Anim(Item_GObj* gobj);
 /* 287B68 */ void itTaru_UnkMotion0_Phys(Item_GObj* gobj);
 /* 287B6C */ bool itTaru_UnkMotion0_Coll(Item_GObj* gobj);

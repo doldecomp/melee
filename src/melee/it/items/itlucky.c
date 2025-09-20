@@ -4,12 +4,18 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802D5050
 
-/// #it_802D50F0
+void it_802D50F0(Item_GObj* gobj)
+{
+    it_80273454(gobj);
+    it_802D533C(gobj);
+}
 
 /// #it_802D5124
 
@@ -23,7 +29,11 @@
 
 void it_802D53F0(Item_GObj* gobj) {}
 
-/// #it_802D53F4
+bool it_802D53F4(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802D546C);
+    return false;
+}
 
 /// #it_802D5420
 
@@ -34,16 +44,30 @@ bool itLucky_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLucky_UnkMotion5_Phys
+void itLucky_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itLucky_UnkMotion5_Coll
+bool itLucky_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802D50F0);
+    return false;
+}
 
 bool itLucky_UnkMotion6_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #itLucky_UnkMotion6_Phys
+void itLucky_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #it_802D5560
 
@@ -80,7 +104,11 @@ void it_802D56F0(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 void it_802D58BC(Item_GObj* gobj) {}
 
-/// #it_802D58C0
+bool it_802D58C0(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802D58EC);
+    return false;
+}
 
 void it_802D58EC(HSD_GObj* gobj)
 {
@@ -89,9 +117,18 @@ void it_802D58EC(HSD_GObj* gobj)
 
 /// #itLucky_UnkMotion3_Anim
 
-/// #itLucky_UnkMotion3_Phys
+void itLucky_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itLucky_UnkMotion3_Coll
+bool itLucky_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802D582C);
+    return false;
+}
 
 void it_2725_Logic44_PickedUp(Item_GObj* gobj)
 {
@@ -119,7 +156,11 @@ void it_2725_Logic44_EnteredAir(Item_GObj* gobj)
 
 void it_802D5A64(Item_GObj* gobj) {}
 
-/// #it_802D5A68
+bool it_802D5A68(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_802D582C, it_802D58EC);
+    return false;
+}
 
 void it_2725_Logic44_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

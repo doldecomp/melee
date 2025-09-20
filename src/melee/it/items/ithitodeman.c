@@ -36,7 +36,19 @@ bool it_802D48A8(Item_GObj* gobj)
 
 /// #itHitodeman_UnkMotion1_Anim
 
-/// #itHitodeman_UnkMotion1_Phys
+typedef struct {
+    u8 _pad[0x4C];
+    f32 x4C;
+} itHitodemanAttributes;
+
+void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->xDB0_itcmd_var1 != 0) {
+        ip->x40_vel.x = -((-ip->facing_dir * attrs->x4C) - ip->x40_vel.x);
+    }
+}
 
 bool itHitodeman_UnkMotion1_Coll(Item_GObj* gobj)
 {

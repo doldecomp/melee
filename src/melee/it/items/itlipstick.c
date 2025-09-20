@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -27,7 +28,11 @@ bool itLipstick_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itLipstick_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itLipstick_UnkMotion0_Coll
+bool itLipstick_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8029583C);
+    return false;
+}
 
 void it_8029583C(Item_GObj* gobj)
 {
@@ -39,9 +44,18 @@ bool itLipstick_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLipstick_UnkMotion1_Phys
+void itLipstick_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itLipstick_UnkMotion1_Coll
+bool itLipstick_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802957AC);
+    return false;
+}
 
 void it_3F14_Logic23_PickedUp(Item_GObj* gobj)
 {
@@ -86,7 +100,11 @@ bool itLipstick_UnkMotion5_Anim(Item_GObj* gobj)
 
 void itLipstick_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itLipstick_UnkMotion5_Coll
+bool itLipstick_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_802957AC, it_8029583C);
+    return false;
+}
 
 /// #it_3F14_Logic23_Clanked
 

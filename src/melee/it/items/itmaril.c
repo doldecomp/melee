@@ -1,8 +1,10 @@
 #include "itmaril.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802D66F8
 
@@ -71,7 +73,12 @@ bool itMaril_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itMaril_UnkMotion1_Anim
 
-/// #itMaril_UnkMotion1_Phys
+void itMaril_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027A344(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.chicorita.x64;
+}
 
 /// #itMaril_UnkMotion1_Coll
 
@@ -82,13 +89,27 @@ void it_802D6DDC(HSD_GObj* gobj)
 
 /// #itMaril_UnkMotion2_Anim
 
-/// #itMaril_UnkMotion2_Phys
+void itMaril_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itMaril_UnkMotion2_Coll
+bool itMaril_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_802D69E4);
+    return false;
+}
 
 /// #itMaril_UnkMotion3_Anim
 
-/// #itMaril_UnkMotion3_Phys
+void itMaril_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #it_802D6F00
 

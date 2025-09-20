@@ -1,5 +1,6 @@
 #include "itunknown.h"
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 
@@ -58,7 +59,14 @@ void it_2725_Logic38_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802CF0D4
 
-/// #it_802CF120
+bool it_802CF120(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (--ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
 
 /// #it_802CF154
 

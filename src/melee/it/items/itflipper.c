@@ -4,8 +4,10 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_80290938
 
@@ -28,7 +30,11 @@ bool itFlipper_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itFlipper_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itFlipper_UnkMotion0_Coll
+bool itFlipper_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_80290F00);
+    return false;
+}
 
 void it_80290F00(Item_GObj* gobj)
 {
@@ -40,9 +46,18 @@ bool itFlipper_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itFlipper_UnkMotion1_Phys
+void itFlipper_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itFlipper_UnkMotion1_Coll
+bool itFlipper_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_80290E78);
+    return false;
+}
 
 void it_3F14_Logic20_PickedUp(Item_GObj* gobj)
 {
@@ -86,7 +101,14 @@ void it_8029131C(Item_GObj* gobj)
 
 /// #itFlipper_UnkMotion6_Phys
 
-/// #itFlipper_UnkMotion6_Coll
+bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
+        it_8026E0F4(gobj);
+    }
+    return false;
+}
 
 /// #it_3F14_Logic20_DmgDealt
 
@@ -118,7 +140,11 @@ bool itFlipper_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itFlipper_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itFlipper_UnkMotion4_Coll
+bool itFlipper_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_80290E78, it_80290F00);
+    return false;
+}
 
 void it_3F14_Logic20_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

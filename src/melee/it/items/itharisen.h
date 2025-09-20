@@ -10,7 +10,7 @@
 /* 2927E8 */ void it_802927E8(Item_GObj*);
 /* 29282C */ void it_8029282C(Item_GObj*);
 /* 29285C */ void it_3F14_Logic24_Spawned(Item_GObj*);
-/* 29287C */ UNK_RET it_8029287C(UNK_PARAMS);
+/* 29287C */ void it_8029287C(Item_GObj*);
 /* 2928D4 */ bool itHarisen_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2928DC */ void itHarisen_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2928E0 */ bool itHarisen_UnkMotion0_Coll(Item_GObj* gobj);

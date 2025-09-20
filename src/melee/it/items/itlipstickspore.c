@@ -6,6 +6,7 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/types.h"
@@ -29,7 +30,13 @@ bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itLipstickspore_UnkMotion0_Phys
 
-/// #itLipstickspore_UnkMotion0_Coll
+bool itLipstickspore_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    if (it_8026DFB0(gobj)) {
+        return true;
+    }
+    return false;
+}
 
 bool itLipstickspore_UnkMotion1_Anim(Item_GObj* gobj)
 {

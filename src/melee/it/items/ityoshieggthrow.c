@@ -44,3 +44,18 @@ bool it_802B2F88(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
+
+void itYoshieggthrow_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
+
+bool it_802B2C04(Item_GObj* gobj)
+{
+    if (((Item*)gobj->user_data)->msid != 2) {
+        it_802B2C38(gobj);
+    }
+    return false;
+}

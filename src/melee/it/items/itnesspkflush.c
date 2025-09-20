@@ -28,7 +28,19 @@ bool it_802AA7F0(Item_GObj* gobj)
 
 /// #it_2725_Logic102_Destroyed
 
-/// #it_802AAA50
+void it_802AAA50(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            ip->owner = NULL;
+            ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner = NULL;
+            ip->xDC8_word.flags.x13 = 0;
+        }
+    }
+}
 
 /// #it_802AAA80
 

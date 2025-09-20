@@ -4,12 +4,19 @@
 #include <platform.h>
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802927E8
 
-/// #it_8029282C
+void it_8029282C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->scl = ip->xCC_item_attr->x60_scale;
+    Item_8026849C(gobj);
+}
 
 void it_3F14_Logic24_Spawned(Item_GObj* gobj)
 {
@@ -25,7 +32,11 @@ bool itHarisen_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itHarisen_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itHarisen_UnkMotion0_Coll
+bool itHarisen_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8029290C);
+    return false;
+}
 
 void it_8029290C(Item_GObj* gobj)
 {
@@ -37,17 +48,46 @@ bool itHarisen_UnkMotion8_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHarisen_UnkMotion1_Phys
+void itHarisen_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itHarisen_UnkMotion1_Coll
+bool itHarisen_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_8029287C);
+    return false;
+}
 
-/// #it_80292998
+void it_80292998(Item_GObj* gobj, f32 frameSpeed)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = frameSpeed;
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
-/// #it_802929C8
+void it_802929C8(Item_GObj* gobj, f32 frameSpeed)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = frameSpeed;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
-/// #it_802929F8
+void it_802929F8(Item_GObj* gobj, f32 frameSpeed)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = frameSpeed;
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
-/// #it_80292A28
+void it_80292A28(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = 1.0f;
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
 
 void it_3F14_Logic24_PickedUp(Item_GObj* gobj)
 {
@@ -72,7 +112,11 @@ void it_3F14_Logic24_Thrown(Item_GObj* gobj)
 
 /// #itHarisen_UnkMotion8_Phys
 
-/// #itHarisen_UnkMotion7_Coll
+bool itHarisen_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_8029287C);
+    return false;
+}
 
 /// #it_3F14_Logic24_DmgDealt
 
@@ -88,7 +132,11 @@ bool itHarisen_UnkMotion9_Anim(Item_GObj* gobj)
 
 void itHarisen_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #itHarisen_UnkMotion9_Coll
+bool itHarisen_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_8029287C, it_8029290C);
+    return false;
+}
 
 /// #it_3F14_Logic24_Clanked
 

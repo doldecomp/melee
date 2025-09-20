@@ -78,6 +78,11 @@ typedef struct itBombHei_ItemVars {
     float xDEC;
 } itBombHei_ItemVars;
 
+typedef struct itBox_ItemVars {
+    s32 xDD4;
+    s32 xDD8;
+} itBox_ItemVars;
+
 typedef struct itDosei_ItemVars {
     s32 xDD4;
     s32 xDD8;
@@ -245,6 +250,15 @@ typedef struct itHeiho_ItemVars {
     f32 x78;
 } itHeiho_ItemVars;
 
+typedef struct itFlipper_ItemVars {
+    s32 xDD4;
+    s32 xDD8;
+    s32 xDDC;
+    s32 xDE0;
+    s32 xDE4;
+    s32 xDE8;
+} itFlipper_ItemVars;
+
 typedef struct itFoods_ItemVars {
     /* +0 ip+DD4 */ s32 x0;
     /* +4 ip+DD8 */ s32 heal_amount;
@@ -285,6 +299,19 @@ typedef struct {
     f32 x0;
     f32 x4;
 } itMBallAttributes;
+
+typedef struct {
+    struct {
+        f32 x0;
+        f32 x4;
+    }* x0;
+    f32 x4;
+} itLikelikeAttributes;
+
+typedef struct {
+    f32 x0;
+    f32 x4;
+} itHammerheadAttributes;
 
 typedef struct {
     u8 b0 : 1;
@@ -329,6 +356,11 @@ typedef struct {
     /* ip+E20 */ Vec3 vel;
 } itGShell_ItemVars;
 STATIC_ASSERT(sizeof(itGShell_ItemVars) == 88);
+
+typedef struct {
+    u8 _pad[0x14];
+    Vec3 x14;
+} itRshellAttributes;
 
 typedef struct {
     unsigned char xDD4_b0 : 1;
@@ -506,6 +538,11 @@ typedef struct itNokoNoko_DatAttrs {
     f32 x4;
     f32 x8;
 } itNokoNoko_DatAttrs;
+
+typedef struct itTaru_ItemVars {
+    s32 xDD4;
+    s32 xDD8;
+} itTaru_ItemVars;
 
 typedef struct itTaruCann_DatAttrs {
     /*  +0 */ char pad_0[0x28];
