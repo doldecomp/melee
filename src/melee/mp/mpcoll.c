@@ -693,12 +693,12 @@ void mpColl_80042DB0(CollData* ecb, float time)
 void mpColl_80043268(CollData* coll, s32 arg1, s32 arg2, float arg8)
 {
     mpLib_Callback sp1C;
-    s32 sp18;
+    Ground* sp18;
     s32 temp_r31;
 
     temp_r31 = mpLib_80056B6C(arg1);
     if (temp_r31 != -1) {
-        sp18 = 0;
+        sp18 = NULL;
         mpLib_800580FC(temp_r31, &sp1C, &sp18);
         if (sp1C != 0) {
             s32 thing;
@@ -720,12 +720,12 @@ static inline void func_80043324_inline2(CollData* coll, s32 arg1, s32 arg2,
     int dummy = 0;
 
     mpLib_Callback callback;
-    s32 thing;
+    Ground* thing;
     s32 temp_r29;
 
     temp_r29 = mpLib_80056B6C(arg1);
     if (temp_r29 != -1) {
-        thing = 0;
+        thing = NULL;
         mpLib_800581BC(temp_r29, &callback, &thing);
 
         if (callback != NULL) {
@@ -798,10 +798,10 @@ void mpColl_80043324(CollData* coll, s32 arg1, s32 arg2)
 void mpColl_80043558(CollData* coll, s32 arg1)
 {
 #if SOLUTION == 0
-    s32 sp1C;
-    void (*sp18)(s32, s32, CollData*, s32, s32, float);
-    s32 sp14;
-    void (*sp10)(s32, s32, CollData*, s32, s32, float);
+    Ground* sp1C;
+    mpLib_Callback sp18;
+    Ground* sp14;
+    mpLib_Callback sp10;
     s32 temp_r3;
     s32 temp_r3_2;
     s32 temp_r3_3;
@@ -810,7 +810,7 @@ void mpColl_80043558(CollData* coll, s32 arg1)
     if (temp_r3 == 1) {
         temp_r3_2 = mpLib_80056B6C(arg1);
         if (temp_r3_2 != -1) {
-            sp1C = 0;
+            sp1C = NULL;
             mpLib_800580FC(temp_r3_2, &sp18, &sp1C);
             if (sp18 != NULL) {
                 (*sp18)(sp1C, temp_r3_2, coll, coll->x50, 2, 0.0f);
@@ -819,7 +819,7 @@ void mpColl_80043558(CollData* coll, s32 arg1)
     } else if (temp_r3 == 2) {
         temp_r3_3 = mpLib_80056B6C(arg1);
         if (temp_r3_3 != -1) {
-            sp14 = 0;
+            sp14 = NULL;
             mpLib_800581BC(temp_r3_3, &sp10, &sp14);
             if (sp10 != NULL) {
                 (*sp10)(sp14, temp_r3_3, coll, coll->x50, 0, 0.0f);
@@ -1213,7 +1213,7 @@ static inline bool mpColl_80044164_inline(CollData* cd, int* p_ledge_id)
     int temp_r3_2;
 
     Vec3 sp14;
-    s32 sp10;
+    int sp10;
 
     temp_f5 = cd->x54;
     temp_f4 = 0.5f * cd->x5C;
@@ -1286,7 +1286,7 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
     s32 temp_r3_2;
 
     Vec3 sp14;
-    s32 sp10;
+    int sp10;
 
     temp_f5 = cd->x54;
     temp_f4 = 0.5f * cd->x5C;
@@ -1658,16 +1658,15 @@ bool mpColl_80046904(CollData* coll, u32 flags)
 }
 #pragma pop
 
-static inline bool fn_80046F78_inline(CollData* coll, s32* sp14)
+static inline bool fn_80046F78_inline(CollData* coll, int* sp14)
 {
     if (coll->x38 != mpColl_804D64AC) {
         float x0 = coll->cur_topn_correct.x;
         float y0 = coll->cur_topn_correct.y;
         float x1 = coll->cur_topn.x;
         float y1 = coll->cur_topn.y;
-        return mpLib_800524DC(&coll->x140, (int) sp14, NULL, NULL,
-                              (s32) coll->x48, (s32) coll->x4C, x0, y0, x1,
-                              y1);
+        return mpLib_800524DC(&coll->x140, sp14, NULL, NULL, (s32) coll->x48,
+                              (s32) coll->x4C, x0, y0, x1, y1);
     } else {
         float x0 = coll->cur_topn_correct.x;
         float y0 = coll->cur_topn_correct.y;
@@ -1680,7 +1679,7 @@ static inline bool fn_80046F78_inline(CollData* coll, s32* sp14)
 
 bool fn_80046F78(CollData* coll, u32 arg1)
 {
-    s32 sp14;
+    int sp14;
     f32 sp10;
     s32 temp_r3;
 

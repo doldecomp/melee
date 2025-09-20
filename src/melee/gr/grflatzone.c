@@ -404,7 +404,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
     case 2:
         if (grAnime_801C83D0(gobj, 0, 1) != 0) {
             Vec3 pos_2;
-            s32 ret;
+            int ret;
             f32 other_x;
             f32 other_z;
             s32 var_r0;

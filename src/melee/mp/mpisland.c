@@ -7,8 +7,6 @@
 
 #include <baselib/memory.h>
 
-/* 05A6F8 */ static void mpIsland_8005A6F8(void);
-/* 05A728 */ static void mpIsland_8005A728(void);
 /* 458E88 */ struct mpIsland_80458E88_t mpIsland_80458E88;
 
 void mpIsland_8005A6F8(void)
@@ -299,9 +297,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 
     mpLib_804D64C0_t* temp_r3;
     temp_r3 = &mpLib_8004D17C()[arg0->x28];
-    var_r31 = temp_r3->x4[0];
+    var_r31 = temp_r3->x4->x0;
     var_r30 = &mpLib_8004D174()[var_r31];
-    temp_r29 = temp_r3->x4[1];
+    temp_r29 = temp_r3->x4->x2;
 
     var_r28 = true;
     var_r27 = true;

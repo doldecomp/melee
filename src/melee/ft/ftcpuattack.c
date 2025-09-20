@@ -462,8 +462,8 @@ int ftCo_800B732C(Fighter* fp)
 {
     Vec3 sp20;
     Vec3 sp14;
-    f32 sp10;
-    f32 spC;
+    int sp10;
+    int spC;
     f32 temp_f1;
     f32 temp_f31;
     f32 temp_f31_2;
@@ -556,8 +556,8 @@ int ftCo_800B7638(Fighter* fp)
 
     Vec3 sp24;
     Vec3 sp18;
-    f32 sp14;
-    f32 sp10;
+    int sp14;
+    int sp10;
 
     PAD_STACK(4);
 
