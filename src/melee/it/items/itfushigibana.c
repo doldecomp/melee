@@ -4,6 +4,7 @@
 #include <platform.h>
 #include "it/it_266F.h"
 #include "it/it_2725.h"
+#include "it/inlines.h"
 
 /// #it_2725_Logic29_Spawned
 
@@ -42,7 +43,12 @@ bool itFushigibana_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itFushigibana_UnkMotion2_Phys
+void itFushigibana_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itFushigibana_UnkMotion2_Coll(Item_GObj* gobj)
 {

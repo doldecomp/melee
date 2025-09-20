@@ -44,7 +44,12 @@ bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion3_Anim
 
-/// #itOldkuri_UnkMotion3_Phys
+void itOldkuri_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itOldkuri_UnkMotion3_Coll
 
@@ -52,7 +57,12 @@ bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion4_Anim
 
-/// #itOldkuri_UnkMotion4_Phys
+void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itOldkuri_UnkMotion4_Coll
 
@@ -68,7 +78,12 @@ void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #itOldkuri_UnkMotion6_Anim
 
-/// #itOldkuri_UnkMotion6_Phys
+void itOldkuri_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itOldkuri_UnkMotion6_Coll(Item_GObj* gobj)
 {
@@ -106,7 +121,12 @@ bool itOldkuri_UnkMotion7_Coll(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion8_Anim
 
-/// #itOldkuri_UnkMotion8_Phys
+void itOldkuri_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itOldkuri_UnkMotion8_Coll(Item_GObj* gobj)
 {

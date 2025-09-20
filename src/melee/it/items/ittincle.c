@@ -4,6 +4,7 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "it/it_266F.h"
+#include "it/it_2725.h"
 
 /// #it_802EB5C8
 
@@ -121,7 +122,12 @@ bool itTincle_UnkMotion8_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion8_Phys
+void itTincle_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
 {

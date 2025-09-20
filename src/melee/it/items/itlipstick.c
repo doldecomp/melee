@@ -44,7 +44,12 @@ bool itLipstick_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLipstick_UnkMotion1_Phys
+void itLipstick_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itLipstick_UnkMotion1_Coll(Item_GObj* gobj)
 {

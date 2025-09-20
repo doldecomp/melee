@@ -61,7 +61,12 @@ bool itSscope_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itSscope_UnkMotion1_Phys
+void itSscope_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itSscope_UnkMotion3_Coll
 

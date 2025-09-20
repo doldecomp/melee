@@ -4,6 +4,7 @@
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802D66F8
 
@@ -83,7 +84,12 @@ void it_802D6DDC(HSD_GObj* gobj)
 
 /// #itMaril_UnkMotion2_Anim
 
-/// #itMaril_UnkMotion2_Phys
+void itMaril_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itMaril_UnkMotion2_Coll(Item_GObj* gobj)
 {
@@ -93,7 +99,12 @@ bool itMaril_UnkMotion2_Coll(Item_GObj* gobj)
 
 /// #itMaril_UnkMotion3_Anim
 
-/// #itMaril_UnkMotion3_Phys
+void itMaril_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #it_802D6F00
 

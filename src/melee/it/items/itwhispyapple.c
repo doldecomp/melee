@@ -4,6 +4,7 @@
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802EE200
 
@@ -34,7 +35,12 @@ void fn_802EE7FC(HSD_GObj* gobj)
 
 /// #itWhispyapple_UnkMotion5_Anim
 
-/// #itWhispyapple_UnkMotion5_Phys
+void itWhispyapple_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itWhispyapple_UnkMotion5_Coll
 

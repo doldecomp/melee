@@ -5,6 +5,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_266F.h"
+#include "it/inlines.h"
 
 
 /// #it_8027D670
@@ -34,7 +35,12 @@ bool itBombhei_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itBombhei_UnkMotion1_Phys
+void itBombhei_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itBombhei_UnkMotion1_Coll
 
@@ -108,7 +114,13 @@ bool itBombhei_UnkMotion6_Anim(Item_GObj* gobj)
 
 /// #it_80280B60
 
-/// #it_80280DC0
+void it_80280DC0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(gobj);
+    }
+}
 
 /// #it_3F14_Logic6_DmgDealt
 

@@ -38,7 +38,12 @@ bool itZrshell_UnkMotion0_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion1_Anim
 
-/// #itZrshell_UnkMotion1_Phys
+void itZrshell_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itZrshell_UnkMotion1_Coll(Item_GObj* gobj)
 {
@@ -59,7 +64,12 @@ bool itZrshell_UnkMotion2_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion3_Anim
 
-/// #itZrshell_UnkMotion3_Phys
+void itZrshell_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itZrshell_UnkMotion3_Coll(Item_GObj* gobj)
 {
@@ -78,7 +88,12 @@ bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itZrshell_UnkMotion4_Phys
+void itZrshell_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itZrshell_UnkMotion4_Coll(Item_GObj* gobj)
 {
@@ -98,7 +113,12 @@ bool itZrshell_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #itZrshell_UnkMotion8_Anim
 
-/// #itZrshell_UnkMotion8_Phys
+void itZrshell_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itZrshell_UnkMotion8_Coll(Item_GObj* gobj)
 {

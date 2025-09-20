@@ -7,6 +7,7 @@
 #include "it/it_2725.h"
 #include "it/it_266F.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 extern f32 it_804DC9E4;
 
@@ -60,7 +61,12 @@ bool itKusudama_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itKusudama_UnkMotion2_Phys
+void itKusudama_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itKusudama_UnkMotion2_Coll(Item_GObj* gobj)
 {

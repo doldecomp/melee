@@ -15,7 +15,7 @@
 /* 28D3B8 */ UNK_RET it_8028D3B8(UNK_PARAMS);
 /* 28D4A8 */ UNK_RET fn_8028D4A8(UNK_PARAMS);
 /* 28D4E4 */ UNK_RET it_8028D4E4(UNK_PARAMS);
-/* 28D56C */ UNK_RET it_8028D56C(UNK_PARAMS);
+/* 28D56C */ f32 it_8028D56C(Item_GObj*, f32, f32);
 /* 28D59C */ void it_3F14_Logic15_Spawned(Item_GObj*);
 /* 28D62C */ UNK_RET it_8028D62C(UNK_PARAMS);
 /* 28D6C0 */ bool itRshell_UnkMotion0_Anim(Item_GObj* gobj);

@@ -7,6 +7,7 @@
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802D5050
 
@@ -39,7 +40,12 @@ bool itLucky_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLucky_UnkMotion5_Phys
+void itLucky_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itLucky_UnkMotion5_Coll(Item_GObj* gobj)
 {
@@ -52,7 +58,12 @@ bool itLucky_UnkMotion6_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLucky_UnkMotion6_Phys
+void itLucky_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #it_802D5560
 
@@ -102,7 +113,12 @@ void it_802D58EC(HSD_GObj* gobj)
 
 /// #itLucky_UnkMotion3_Anim
 
-/// #itLucky_UnkMotion3_Phys
+void itLucky_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itLucky_UnkMotion3_Coll(Item_GObj* gobj)
 {

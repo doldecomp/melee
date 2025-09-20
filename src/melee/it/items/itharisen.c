@@ -7,10 +7,16 @@
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802927E8
 
-/// #it_8029282C
+void it_8029282C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->scl = ip->xCC_item_attr->x60_scale;
+    Item_8026849C(gobj);
+}
 
 void it_3F14_Logic24_Spawned(Item_GObj* gobj)
 {
@@ -42,7 +48,12 @@ bool itHarisen_UnkMotion8_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHarisen_UnkMotion1_Phys
+void itHarisen_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itHarisen_UnkMotion1_Coll(Item_GObj* gobj)
 {
@@ -50,11 +61,26 @@ bool itHarisen_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_80292998
+void it_80292998(Item_GObj* gobj, f32 frameSpeed)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = frameSpeed;
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
-/// #it_802929C8
+void it_802929C8(Item_GObj* gobj, f32 frameSpeed)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = frameSpeed;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
-/// #it_802929F8
+void it_802929F8(Item_GObj* gobj, f32 frameSpeed)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = frameSpeed;
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 /// #it_80292A28
 

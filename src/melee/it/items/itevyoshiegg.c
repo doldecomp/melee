@@ -8,6 +8,7 @@
 #include "it/it_266F.h"
 #include "gm/gm_1BA8.h"
 #include "it/item.h"
+#include "it/it_2725.h"
 
 /// #it_8029B0C8
 
@@ -49,7 +50,12 @@ bool itEvyoshiegg_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itEvyoshiegg_UnkMotion1_Phys
+void itEvyoshiegg_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itEvyoshiegg_UnkMotion1_Coll(Item_GObj* gobj)
 {

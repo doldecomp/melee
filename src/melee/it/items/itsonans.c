@@ -35,7 +35,16 @@ void itSonans_UnkMotion0_Phys(Item_GObj* gobj)
 
 /// #it_802CD9C0
 
-/// #itSonans_UnkMotion1_Anim
+f32 it_804DD3B8 = 0.0f;
+
+bool itSonans_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (--ip->xD44_lifeTimer == it_804DD3B8) {
+        return true;
+    }
+    return false;
+}
 
 void itSonans_UnkMotion1_Phys(Item_GObj* gobj)
 {

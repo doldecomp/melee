@@ -6,6 +6,7 @@
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802B4AC8
 
@@ -33,7 +34,12 @@ void it_802B4CF4(Item_GObj* gobj)
 
 /// #itSamusbomb_UnkMotion1_Anim
 
-/// #itSamusbomb_UnkMotion1_Phys
+void itSamusbomb_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 bool itSamusbomb_UnkMotion1_Coll(Item_GObj* gobj)
 {

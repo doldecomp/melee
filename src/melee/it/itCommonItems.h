@@ -292,6 +292,19 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
+    struct {
+        f32 x0;
+        f32 x4;
+    }* x0;
+    f32 x4;
+} itLikelikeAttributes;
+
+typedef struct {
+    f32 x0;
+    f32 x4;
+} itHammerheadAttributes;
+
+typedef struct {
     u8 b0 : 1;
     u8 b1 : 1;
     u8 b2 : 1;
@@ -334,6 +347,11 @@ typedef struct {
     /* ip+E20 */ Vec3 vel;
 } itGShell_ItemVars;
 STATIC_ASSERT(sizeof(itGShell_ItemVars) == 88);
+
+typedef struct {
+    u8 _pad[0x14];
+    Vec3 x14;
+} itRshellAttributes;
 
 typedef struct {
     unsigned char xDD4_b0 : 1;
