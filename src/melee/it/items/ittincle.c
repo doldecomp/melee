@@ -16,8 +16,8 @@ bool it_2725_Logic13_DmgReceived(Item_GObj* gobj)
 
 bool it_2725_Logic13_DmgDealt(Item_GObj* gobj)
 {
-    if ((s32) GET_ITEM(gobj)->msid != 7) {
-        it_802EC1F4();
+    if (GET_ITEM(gobj)->msid != 7) {
+        it_802EC1F4(gobj);
     }
     return false;
 }
@@ -115,7 +115,12 @@ void itTincle_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #itTincle_UnkMotion7_Coll
 
-/// #it_802EC35C
+void it_802EC35C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->pos.z = -10.0f;
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
 
 bool itTincle_UnkMotion8_Anim(Item_GObj* gobj)
 {

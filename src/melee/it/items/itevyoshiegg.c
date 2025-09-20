@@ -59,7 +59,8 @@ void itEvyoshiegg_UnkMotion1_Phys(Item_GObj* gobj)
 
 bool itEvyoshiegg_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    return it_8026E32C(gobj, it_8029B1D8);
+    it_8026E32C(gobj, it_8029B1D8);
+    return false;
 }
 
 void it_3F14_Logic42_PickedUp(Item_GObj* gobj)
@@ -119,7 +120,11 @@ bool itEvyoshiegg_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itEvyoshiegg_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itEvyoshiegg_UnkMotion4_Coll
+bool itEvyoshiegg_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_8029B1D8, it_8029B268);
+    return false;
+}
 
 void it_3F14_Logic42_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

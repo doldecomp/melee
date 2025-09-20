@@ -82,7 +82,12 @@ void it_802929F8(Item_GObj* gobj, f32 frameSpeed)
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
 
-/// #it_80292A28
+void it_80292A28(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x5D0_animFrameSpeed = 1.0f;
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
 
 void it_3F14_Logic24_PickedUp(Item_GObj* gobj)
 {
@@ -127,7 +132,11 @@ bool itHarisen_UnkMotion9_Anim(Item_GObj* gobj)
 
 void itHarisen_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #itHarisen_UnkMotion9_Coll
+bool itHarisen_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_8029287C, it_8029290C);
+    return false;
+}
 
 /// #it_3F14_Logic24_Clanked
 

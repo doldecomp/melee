@@ -127,7 +127,11 @@ bool itBox_UnkMotion5_Anim(Item_GObj* gobj)
 
 void itBox_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itBox_UnkMotion5_Coll
+bool itBox_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, fn_80286480, it_8028655C);
+    return false;
+}
 
 void it_3F14_Logic1_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

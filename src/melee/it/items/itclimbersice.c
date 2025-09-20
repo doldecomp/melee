@@ -57,7 +57,15 @@ bool itClimbersice_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #it_802C1AE4
 
-/// #itClimbersice_UnkMotion2_Anim
+bool itClimbersice_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
 
 /// #itClimbersice_UnkMotion2_Phys
 
@@ -65,7 +73,15 @@ bool itClimbersice_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #fn_802C1D44
 
-/// #itClimbersice_UnkMotion3_Anim
+bool itClimbersice_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
 
 /// #itClimbersice_UnkMotion3_Phys
 

@@ -540,6 +540,7 @@ struct Item {
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
+        itFlipper_ItemVars flipper;
         itFoods_ItemVars foods;
         itFoxBlaster_ItemVars foxblaster;
         itFoxIllusion_ItemVars foxillusion;
@@ -580,7 +581,9 @@ struct Item {
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
         itPokemon_ItemVars pokemon;
+        itSamusBomb_ItemVars samusbomb;
         itSamusGrapple_ItemVars samusgrapple;
+        itSeakNeedleThrown_ItemVars seakneedlethrown;
         itSonans_ItemVars sonans;
         itStar_ItemVars star;
         itSword_ItemVars sword;

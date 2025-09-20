@@ -250,6 +250,15 @@ typedef struct itHeiho_ItemVars {
     f32 x78;
 } itHeiho_ItemVars;
 
+typedef struct itFlipper_ItemVars {
+    s32 xDD4;
+    s32 xDD8;
+    s32 xDDC;
+    s32 xDE0;
+    s32 xDE4;
+    s32 xDE8;
+} itFlipper_ItemVars;
+
 typedef struct itFoods_ItemVars {
     /* +0 ip+DD4 */ s32 x0;
     /* +4 ip+DD8 */ s32 heal_amount;

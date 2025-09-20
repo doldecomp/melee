@@ -125,7 +125,11 @@ void itDosei_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #itDosei_UnkMotion10_Coll
+bool itDosei_UnkMotion10_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, fn_80282CD4, it_80282BFC);
+    return false;
+}
 
 /// #it_3F14_Logic7_DmgReceived
 

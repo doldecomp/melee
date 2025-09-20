@@ -73,7 +73,12 @@ bool itMaril_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itMaril_UnkMotion1_Anim
 
-/// #itMaril_UnkMotion1_Phys
+void itMaril_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027A344(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.chicorita.x64;
+}
 
 /// #itMaril_UnkMotion1_Coll
 

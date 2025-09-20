@@ -101,7 +101,14 @@ void it_8029131C(Item_GObj* gobj)
 
 /// #itFlipper_UnkMotion6_Phys
 
-/// #itFlipper_UnkMotion6_Coll
+bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
+        it_8026E0F4(gobj);
+    }
+    return false;
+}
 
 /// #it_3F14_Logic20_DmgDealt
 
@@ -133,7 +140,11 @@ bool itFlipper_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itFlipper_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itFlipper_UnkMotion4_Coll
+bool itFlipper_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_80290E78, it_80290F00);
+    return false;
+}
 
 void it_3F14_Logic20_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -17,7 +18,12 @@ void it_802CA538(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802CA558
+void it_802CA558(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_80273454(gobj);
+    it_802CA58C(gobj);
+}
 
 /// #it_802CA58C
 
@@ -39,7 +45,13 @@ void it_802CA538(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802CA938
 
-/// #itKamex_UnkMotion2_Anim
+bool itKamex_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        return true;
+    }
+    return false;
+}
 
 /// #itKamex_UnkMotion2_Phys
 
@@ -84,7 +96,14 @@ void it_2725_Logic31_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802CADF0
 
-/// #it_802CAE60
+bool it_802CAE60(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (--ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
 
 /// #it_802CAE94
 

@@ -100,7 +100,11 @@ bool itLipstick_UnkMotion5_Anim(Item_GObj* gobj)
 
 void itLipstick_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itLipstick_UnkMotion5_Coll
+bool itLipstick_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_802957AC, it_8029583C);
+    return false;
+}
 
 /// #it_3F14_Logic23_Clanked
 

@@ -13,7 +13,7 @@
 /* 2D5124 */ UNK_RET it_802D5124(UNK_PARAMS);
 /* 2D51C8 */ UNK_RET it_802D51C8(UNK_PARAMS);
 /* 2D52E4 */ UNK_RET it_802D52E4(UNK_PARAMS);
-/* 2D533C */ UNK_RET it_802D533C(UNK_PARAMS);
+/* 2D533C */ void it_802D533C(Item_GObj* gobj);
 /* 2D53AC */ bool it_802D53AC(Item_GObj* gobj);
 /* 2D53F0 */ void it_802D53F0(Item_GObj* gobj);
 /* 2D53F4 */ bool it_802D53F4(Item_GObj* gobj);

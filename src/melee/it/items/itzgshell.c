@@ -141,7 +141,13 @@ bool itZrshell_UnkMotion9_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion11_Anim
 
-/// #itZrshell_UnkMotion11_Phys
+void itZrshell_UnkMotion11_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->x40_vel.y > 0.0f) {
+        it_802762BC(ip);
+    }
+}
 
 /// #itZrshell_UnkMotion11_Coll
 

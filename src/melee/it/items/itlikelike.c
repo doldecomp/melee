@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 
 #define GET_ATTRS(ip)                                                         \
@@ -76,7 +77,12 @@ bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion17_Phys
 
-/// #itLikelike_UnkMotion17_Coll
+bool itLikelike_UnkMotion17_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8026D564(gobj);
+    return it_8027C794(gobj);
+}
 
 /// #it_802DAD18
 

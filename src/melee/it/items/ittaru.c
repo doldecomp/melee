@@ -6,6 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_3F14_Logic2_Spawned
 
@@ -35,7 +36,12 @@ void itTaru_UnkMotion1_Phys(Item_GObj* gobj)
 
 /// #itTaru_UnkMotion1_Coll
 
-/// #it_3F14_Logic2_PickedUp
+void it_3F14_Logic2_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDB0_itcmd_var1 = 1;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itTaru_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -70,7 +76,12 @@ void it_80288194(Item_GObj* gobj)
 
 /// #itTaru_UnkMotion5_Anim
 
-/// #itTaru_UnkMotion5_Phys
+void itTaru_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_802874F0(gobj);
+    it_80287690(gobj);
+}
 
 /// #itTaru_UnkMotion5_Coll
 

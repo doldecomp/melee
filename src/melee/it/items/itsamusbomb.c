@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/inlines.h"
@@ -56,13 +57,38 @@ void it_2725_Logic50_EnteredAir(Item_GObj* gobj)
 
 /// #itSamusbomb_UnkMotion2_Phys
 
-/// #itSamusbomb_UnkMotion2_Coll
+bool itSamusbomb_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_802B4C10, it_802B4CF4);
+    return false;
+}
 
-/// #it_2725_Logic50_DmgDealt
+bool it_2725_Logic50_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 3) {
+        it_802B53CC(gobj);
+    }
+    return false;
+}
 
-/// #it_2725_Logic50_Clanked
+bool it_2725_Logic50_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 3) {
+        it_802B53CC(gobj);
+    }
+    return false;
+}
 
-/// #it_2725_Logic50_HitShield
+bool it_2725_Logic50_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 3) {
+        it_802B53CC(gobj);
+    }
+    return false;
+}
 
 bool it_2725_Logic50_ShieldBounced(Item_GObj* gobj)
 {
@@ -80,4 +106,9 @@ bool itSamusbomb_UnkMotion3_Anim(Item_GObj* gobj)
 
 /// #it_802B5478
 
-/// #it_2725_Logic50_EvtUnk
+void it_2725_Logic50_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B894(gobj, ref_gobj);
+    ip->xDD4_itemVar.samusbomb.xDD8 = 0;
+}

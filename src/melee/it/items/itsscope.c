@@ -14,7 +14,12 @@
 
 /// #it_80291BE0
 
-/// #it_3F14_Logic21_Spawned
+void it_3F14_Logic21_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xD4C = *(s32*)ip->xC4_article_data->x4_specialAttributes;
+    it_802920B8(gobj);
+}
 
 itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
 {
@@ -138,7 +143,11 @@ bool itSscope_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itSscope_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itSscope_UnkMotion4_Coll
+bool itSscope_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_80292030, it_802920B8);
+    return false;
+}
 
 void it_3F14_Logic21_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

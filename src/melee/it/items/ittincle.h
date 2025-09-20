@@ -35,7 +35,7 @@
 /* 2EC104 */ void itTincle_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2EC168 */ bool itTincle_UnkMotion5_Coll(Item_GObj* gobj);
 /* 2EC18C */ void it_802EC18C(Item_GObj* gobj);
-/* 2EC1F4 */ void it_802EC1F4(void);
+/* 2EC1F4 */ void it_802EC1F4(Item_GObj* gobj);
 /* 2EC25C */ bool itTincle_UnkMotion7_Anim(Item_GObj* gobj);
 /* 2EC2E4 */ void itTincle_UnkMotion7_Phys(Item_GObj* gobj);
 /* 2EC2E8 */ bool itTincle_UnkMotion7_Coll(Item_GObj* gobj);

@@ -18,7 +18,7 @@
 /* 291DAC */ UNK_RET it_80291DAC(UNK_PARAMS);
 /* 291F14 */ UNK_RET it_80291F14(UNK_PARAMS);
 /* 291FA8 */ UNK_RET it_80291FA8(UNK_PARAMS);
-/* 292030 */ UNK_RET it_80292030(UNK_PARAMS);
+/* 292030 */ void it_80292030(Item_GObj* gobj);
 /* 292080 */ bool itSscope_UnkMotion0_Anim(Item_GObj* gobj);
 /* 292088 */ void itSscope_UnkMotion0_Phys(Item_GObj* gobj);
 /* 29208C */ bool itSscope_UnkMotion0_Coll(Item_GObj* gobj);

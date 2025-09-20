@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -102,7 +103,15 @@ void it_802D2ED0(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802D2EF0
 
-/// #it_802D2F3C
+bool it_802D2F3C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
 
 /// #it_802D2F70
 

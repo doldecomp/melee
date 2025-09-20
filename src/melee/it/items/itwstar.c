@@ -86,7 +86,11 @@ bool itWstar_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itWstar_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itWstar_UnkMotion4_Coll
+bool itWstar_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_8029455C, it_80294624);
+    return false;
+}
 
 void it_3F14_Logic30_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
