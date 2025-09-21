@@ -51,7 +51,7 @@ struct ftKb_FighterVars {
     /* fp+22E0   */ int xB4;
     /* fp+22E4   */ UNK_T xB8;
     /* fp+22E8   */ int xBC;
-    /* fp+22EC   */ UNK_T xC0;
+    /* fp+22EC   */ Item_GObj* xC0;
     /* fp+22F0   */ bool xC4;
     /* fp+22F4   */ UNK_T xC8;
     /* fp+22F8   */ bool xCC;

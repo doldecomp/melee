@@ -59,7 +59,7 @@
 /* 17E738 */ UNK_RET gm_8017E738(UNK_PARAMS);
 /* 17E76C */ UNK_RET gm_8017E76C(UNK_PARAMS);
 /* 17E7A0 */ void gm_8017E7A0(int);
-/* 17E7E0 */ UNK_RET gm_8017E7E0(UNK_PARAMS);
+/* 17E7E0 */ bool gm_8017E7E0(void);
 /* 17E7FC */ void gm_8017E7FC(int);
 /* 17E8A4 */ void fn_8017E8A4(int);
 /* 17EB30 */ UnkAllstarData* gm_8017EB30(void);

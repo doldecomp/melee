@@ -1853,7 +1853,13 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
 
 /// #gm_801688AC
 
-/// #gm_80168940
+int gm_80168940(MatchEnd* match_end)
+{
+    if (match_end->player_standings[0].slot_type == 0) {
+        return match_end->player_standings[0].xE;
+    }
+    return 0;
+}
 
 void gm_8016895C(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
 {
@@ -2264,11 +2270,20 @@ void gm_8016A424(s8 arg0)
     lbl_8046B488.xF = arg0;
 }
 
-/// #gm_8016A434
+void gm_8016A434(void)
+{
+    lbl_8046B488.unk_10_b3 = 1;
+}
 
-/// #fn_8016A450
+void fn_8016A450(void)
+{
+    lbl_8046B488.unk_10_b4 = 1;
+}
 
-/// #fn_8016A46C
+void fn_8016A46C(void)
+{
+    lbl_8046B488.unk_10_b6 = 1;
+}
 
 /// #fn_8016A488
 

@@ -1,8 +1,10 @@
 #include "grgreens.h"
 
 #include <platform.h>
+#include "gr/inlines.h"
 
 static s8 grGr_804D6AAC;
+static s8 grGr_804D6AAD;
 
 void grGreens_80213458(bool arg)
 {
@@ -90,9 +92,15 @@ bool grGreens_80213AAC(Ground_GObj* arg)
 
 /// #grGreens_80213C10
 
-void grGreens_80214654(Ground_GObj* arg) {}
+void grGreens_80214654(Ground_GObj* arg) {}                                             /* size = 0x10 */
 
-/// #fn_80214658
+Ground* fn_80214658(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    gp->gv.greens.x0_flags.b0 = 0;
+    grGr_804D6AAD = 0;
+    return gp;
+}
 
 /// #grGreens_80214674
 

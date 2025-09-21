@@ -124,7 +124,13 @@
 
 /// #ftCo_JumpAerialF1_Coll
 
-/// #fn_800D769C
+static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid)
+{
+    if (ft->motion_id >= ftCo_MS_ItemScopeStartEmpty) {
+        return msid + 8;
+    }
+    return msid;
+}
 
 /// #ft_800D76B8
 

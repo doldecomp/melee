@@ -33,7 +33,7 @@
 /* 2100FC */ void grOldKongo_802100FC(Ground_GObj*);
 /* 210450 */ void grOldKongo_80210450(Ground_GObj*);
 /* 210454 */ UNK_RET fn_80210454(UNK_PARAMS);
-/* 2105AC */ void grOldKongo_802105AC(HSD_GObj*);
+/* 2105AC */ void grOldKongo_802105AC(Ground_GObj*);
 /* 2105C8 */ void grOldKongo_802105C8(HSD_GObj*);
 /* 210650 */ UNK_RET grOldKongo_80210650(UNK_PARAMS);
 /* 210780 */ DynamicsDesc* grOldKongo_80210780(enum_t);

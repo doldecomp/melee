@@ -6,8 +6,10 @@
 
 #include "ft/types.h"
 
+#include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftKirby/forward.h"
+#include "it/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -23,8 +25,8 @@
 /* 0EEA24 */ void ftKb_Init_OnItemVisible(Fighter_GObj* gobj);
 /* 0EEA6C */ void ftKb_Init_OnItemDrop(Fighter_GObj* gobj, bool);
 /* 0EEAC0 */ void ftKb_Init_LoadSpecialAttrs(Fighter_GObj* gobj);
-/* 0EEB00 */ void ftKb_Init_800EEB00(Fighter_GObj* gobj, void*);
-/* 0EEB1C */ void ftKb_Init_800EEB1C(Fighter_GObj* gobj, void*);
+/* 0EEB00 */ void ftKb_Init_800EEB00(Fighter_GObj* gobj, ArticleDynamicBones**);
+/* 0EEB1C */ void ftKb_Init_800EEB1C(Fighter_GObj* gobj, s32*);
 /* 0EEB38 */ void ftKb_Init_OnKnockbackEnter(Fighter_GObj* gobj);
 /* 0EEB7C */ void ftKb_Init_OnKnockbackExit(Fighter_GObj* gobj);
 /* 0EEBC0 */ void ftKb_Init_UnkDemoCallbacks0(int, int*, int*);
@@ -228,7 +230,7 @@
 /* 0F5AF0 */ float ftKb_SpecialN_800F5AF0(Fighter_GObj* gobj);
 /* 0F5B00 */ float ftKb_SpecialN_800F5B00(Fighter_GObj* gobj);
 /* 0F5B10 */ float ftKb_SpecialN_800F5B10(Fighter_GObj* gobj);
-/* 0F5B20 */ UNK_RET ftKb_SpecialN_800F5B20(Fighter_GObj* gobj);
+/* 0F5B20 */ void ftKb_SpecialN_800F5B20(Fighter_GObj* gobj, Vec2* out);
 /* 0F5B3C */ float ftKb_SpecialN_800F5B3C(Fighter_GObj* gobj);
 /* 0F5B4C */ float ftKb_SpecialN_800F5B4C(Fighter_GObj* gobj);
 /* 0F5B5C */ void ftKb_SpecialN_800F5B5C(Fighter_GObj* gobj);
@@ -651,7 +653,7 @@
 /* 105E8C */ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj);
 /* 105F3C */ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj);
 /* 105FF0 */ void ftKb_SpecialNSk_80105FF0(Fighter_GObj* gobj);
-/* 106020 */ void ftKb_SpecialNSk_80106020(Fighter_GObj* gobj);
+/* 106020 */ s32 ftKb_SpecialNSk_80106020(Fighter_GObj* gobj);
 /* 10603C */ void ftKb_SpecialNSk_8010603C(Fighter_GObj* gobj);
 /* 10612C */ void ftKb_SpecialNSk_8010612C(Fighter_GObj* gobj);
 /* 1061E4 */ void ftKb_SpecialNSk_801061E4(Fighter_GObj* gobj);
@@ -737,7 +739,7 @@
 /* 108B50 */ void ftKb_MtSpecialAirNLoopFull_Coll(Fighter_GObj* gobj);
 /* 108BD8 */ void ftKb_MtSpecialAirNCancel_Coll(Fighter_GObj* gobj);
 /* 108C60 */ void ftKb_MtSpecialAirNEnd_Coll(Fighter_GObj* gobj);
-/* 108CE8 */ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj);
+/* 108CE8 */ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj, Item_GObj* it_gobj);
 /* 108D04 */ void ftKb_SpecialNIc_80108D04(Fighter_GObj* gobj);
 /* 108D64 */ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj);
 /* 108E14 */ void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj);

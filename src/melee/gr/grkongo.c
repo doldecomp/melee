@@ -10,6 +10,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/stage.h"
 #include "it/items/itklap.h"
 #include "lb/lb_00B0.h"
@@ -1435,7 +1436,13 @@ void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
 
 /// #fn_801D8134
 
-/// #grKongo_801D8270
+void grKongo_801D8270(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->gv.inishie2.xC6 == 1) {
+        gp->gv.inishie2.xC6 = 2;
+    }
+}
 
 /// #grKongo_801D828C
 
