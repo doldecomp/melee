@@ -7,6 +7,7 @@
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
+#include "ftCommon/ftCo_AttackDash.h"
 #include "ftKirby/forward.h"
 #include <baselib/forward.h>
 
