@@ -153,7 +153,7 @@ bool ftCo_800DF678(Fighter* fp)
 {
     if (ABS(fp->input.cstick1.x) < p_ftCommonData->x248 &&
         ABS(fp->input.cstick.x) >= p_ftCommonData->x248 &&
-        ftCo_GetCStickAngle(fp) < p_ftCommonData->x20)
+        ftCo_GetCStickAngle(fp) < p_ftCommonData->x20_radians)
     {
         return true;
     }

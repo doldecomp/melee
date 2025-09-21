@@ -112,10 +112,10 @@ FtMotionId ftCo_AttackAir_GetMsidFromCStick(Fighter* fp)
     {
         return ftCo_MS_AttackAirN;
     }
-    if (stick_angle > p_ftCommonData->x20) {
+    if (stick_angle > p_ftCommonData->x20_radians) {
         return ftCo_MS_AttackAirHi;
     }
-    if (stick_angle < -p_ftCommonData->x20) {
+    if (stick_angle < -p_ftCommonData->x20_radians) {
         return ftCo_MS_AttackAirLw;
     }
     if (stick_x * fp->facing_dir >= 0) {
