@@ -22,7 +22,7 @@ void ft_800881D8(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan)
                                                    fp->x221F_b4);
                 return;
             }
-            ft_800887CC(fp);
+            ft_80088770(fp);
         }
     } else {
         switch (fp->kind) {
@@ -38,7 +38,7 @@ void ft_800881D8(Fighter* fp, int sfx_id, u8 sfx_vol, u8 sfx_pan)
                                                        fp->x221F_b4);
                     return;
                 }
-                ft_800887CC(fp);
+                ft_80088770(fp);
             }
         }
     }
