@@ -781,7 +781,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c"),
             # Yoshi
-            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
