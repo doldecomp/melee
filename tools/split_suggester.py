@@ -756,7 +756,7 @@ def main(args):
         return
 
     # Determine (and create) a directory to create the new files in
-    newParentDir = parentDir.replace("\\asm\\", "\\src\\")
+    newParentDir = parentDir.replace("\\build\\GALE01\\asm\\", "\\src\\")
     if newParentDir.endswith("\\ft\\chara"):  # Add a subfolder for characters
         charFolderName = "ft" + filename[2].upper() + filename[3:]
         newParentDir = os.path.join(newParentDir, charFolderName)
