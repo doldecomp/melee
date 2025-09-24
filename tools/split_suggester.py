@@ -200,7 +200,7 @@ def parseSymbolsTxt():
         for line in mapFile:
             line = line.split(";")[0]
             name = line.split("=")[0].strip()
-            addr = line.split(":")[1].strip()
+            addr = line.split(":")[1].strip()[2:]
             mapNames[addr] = name
     return mapNames
 
@@ -873,16 +873,13 @@ if __name__ == "__main__":
 
     try:
         main(args)
-        print(0)
         sys.exit(0)
     except ProgramError as err:
         message, code = err.args
         print(message, file=sys.stderr)
-        print(code)
         sys.exit(code)
     except Exception as err:
         import traceback
         print(traceback.format_exc())
         print(err, file=sys.stderr)
-        print(4)
         sys.exit(4)
