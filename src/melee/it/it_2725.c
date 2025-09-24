@@ -9881,7 +9881,7 @@ bool it_8027B798(Item_GObj* item_gobj, Vec3* arg1)
     if (degree_angle != 361) {
         angle = 0.0174533f * (f32) degree_angle;
     } else if (item->ground_or_air == GA_Air) {
-        angle = p_ftCommonData->x144;
+        angle = p_ftCommonData->x144_radians;
     } else {
         temp_f3 = p_ftCommonData->x14C;
         if (temp_f1 < temp_f3) {
