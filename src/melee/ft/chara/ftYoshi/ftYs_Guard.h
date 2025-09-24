@@ -10,6 +10,9 @@
 
 #include <dolphin/mtx.h>
 
+/* 12BDA0 */ void ftYs_Init_8012BDA0(Fighter_GObj* gobj);
+/* 12BE3C */ void ftYs_Init_8012BE3C(HSD_GObj* gobj);
+/* 12BECC */ void ftYs_Init_8012BECC(Fighter_GObj* gobj);
 /* 12C030 */ void ftYs_GuardOn_0_Anim(Fighter_GObj* gobj);
 /* 12C114 */ void ftYs_GuardOn_0_IASA(Fighter_GObj* gobj);
 /* 12C194 */ void ftYs_GuardOn_0_Phys(Fighter_GObj* gobj);

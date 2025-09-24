@@ -1370,15 +1370,17 @@ melee/ft/chara/ftSamus/ftSs_SpecialLw_1.c:
 	.sdata2     start:0x804D9A08 end:0x804D9A18
 
 melee/ft/chara/ftYoshi/ftYs_Init.c:
-	.text       start:0x8012B6E8 end:0x8012C030
+	.text       start:0x8012B6E8 end:0x8012BDA0
 	.rodata     start:0x803B75C0 end:0x803B75CC
 	.data       start:0x803CE6D0 end:0x803CEA98
-	.sdata      start:0x804D3E40 end:0x804D3E80
-	.sdata2     start:0x804D9A18 end:0x804D9A38
+	.sdata      start:0x804D3E40 end:0x804D3E58
+	.sdata2     start:0x804D9A18 end:0x804D9A28
 
 melee/ft/chara/ftYoshi/ftYs_Guard.c:
-	.text       start:0x8012C030 end:0x8012CC6C
+	.text       start:0x8012BDA0 end:0x8012CC6C
 	.data       start:0x803CEA98 end:0x803CEDBC
+	.sdata      start:0x804D3E58 end:0x804D3E68
+	.sdata2     start:0x804D9A28 end:0x804D9A38
 
 melee/ft/chara/ftYoshi/ftYs_SpecialN.c:
 	.text       start:0x8012CC6C end:0x8012DF18
@@ -1394,6 +1396,7 @@ melee/ft/chara/ftYoshi/ftYs_SpecialLw.c:
 
 melee/ft/chara/ftYoshi/ftYs_SpecialS.c:
 	.text       start:0x8012EB48 end:0x80132A0C
+	.sdata      start:0x804D3E68 end:0x804D3E80
 	.sdata2     start:0x804D9A68 end:0x804D9AC8
 
 melee/ft/chara/ftKoopa/ftKp_Init.c:
