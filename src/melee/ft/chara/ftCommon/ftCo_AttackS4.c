@@ -176,19 +176,19 @@ static void doEnter(Fighter_GObj* gobj, float stick_angle)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid;
-    if (stick_angle > p_ftCommonData->xB8 &&
+    if (stick_angle > p_ftCommonData->xB8_radians &&
         ftData_80085FD4(fp, ftCo_MS_AttackS4S)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4Hi;
-    } else if (stick_angle > p_ftCommonData->xBC &&
+    } else if (stick_angle > p_ftCommonData->xBC_radians &&
                ftData_80085FD4(fp, ftCo_MS_AttackS4LwS)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4HiS;
-    } else if (stick_angle < p_ftCommonData->xC4 &&
+    } else if (stick_angle < p_ftCommonData->xC4_radians &&
                ftData_80085FD4(fp, ftCo_MS_AttackLw4)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4Lw;
-    } else if (stick_angle < p_ftCommonData->xC0 &&
+    } else if (stick_angle < p_ftCommonData->xC0_radians &&
                ftData_80085FD4(fp, ftCo_MS_AttackHi4)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4LwS;

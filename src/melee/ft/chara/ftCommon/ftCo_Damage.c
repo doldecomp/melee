@@ -81,7 +81,7 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
         return deg_to_rad * fp->dmg.x1848_kb_angle;
     }
     if (fp->ground_or_air == GA_Air) {
-        return p_ftCommonData->x144;
+        return p_ftCommonData->x144_radians;
     } else if (f < p_ftCommonData->x14C) {
         return 0;
     } else {

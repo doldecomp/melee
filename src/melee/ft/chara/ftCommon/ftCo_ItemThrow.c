@@ -114,7 +114,7 @@ int ftCo_80094EA4(HSD_GObj* gobj)
                 msid = ftCo_MS_HeavyThrowLw4;
             } else {
                 if (ABS(stick_x) >= p_ftCommonData->x98) {
-                    if (ABS(stick_angle) <= p_ftCommonData->x20) {
+                    if (ABS(stick_angle) <= p_ftCommonData->x20_radians) {
                         msid = stick_x * fp->facing_dir >= 0
                                    ? ftCo_MS_HeavyThrowF
                                    : ftCo_MS_HeavyThrowB;
@@ -125,12 +125,12 @@ int ftCo_80094EA4(HSD_GObj* gobj)
                 block_32:
                     if (stick_y >=
                             p_ftCommonData->attackhi3_stick_threshold_y &&
-                        stick_angle > p_ftCommonData->x20)
+                        stick_angle > p_ftCommonData->x20_radians)
                     {
                         msid = ftCo_MS_HeavyThrowHi;
                     } else {
                         if (stick_y <= p_ftCommonData->xB0 &&
-                            (stick_angle < -p_ftCommonData->x20))
+                            (stick_angle < -p_ftCommonData->x20_radians))
                         {
                             msid = ftCo_MS_HeavyThrowLw;
                         } else if (ret != 0) {
@@ -240,9 +240,9 @@ bool ftCo_80095328(Fighter_GObj* gobj, bool* arg1)
             return true;
         }
     }
-    if (angle > p_ftCommonData->x20) {
+    if (angle > p_ftCommonData->x20_radians) {
         msid = var_f29 < p_ftCommonData->x3FC ? 0x72 : 0x66;
-    } else if (angle < -p_ftCommonData->x20) {
+    } else if (angle < -p_ftCommonData->x20_radians) {
         msid = var_f29 < p_ftCommonData->x3FC ? 0x73 : 0x67;
     } else if (var_f31 * fp->facing_dir >= 0.0F) {
         msid = var_f30 < p_ftCommonData->x3FC ? 0x70 : 0x64;
@@ -429,7 +429,7 @@ void ftCo_80095A30(HSD_GObj* gobj)
                     } else {
                         var_f1_3 = ftCo_GetLStickAngle(fp);
                     }
-                    if (var_f1_3 <= p_ftCommonData->x20) {
+                    if (var_f1_3 <= p_ftCommonData->x20_radians) {
                         if (fp->input.lstick.x * fp->facing_dir >= 0.0f) {
                             var_r0_2 = 0x5E;
                         } else {
@@ -443,12 +443,12 @@ void ftCo_80095A30(HSD_GObj* gobj)
                 block_25:
                     if (fp->input.lstick.y >=
                             p_ftCommonData->attackhi3_stick_threshold_y &&
-                        ftCo_GetLStickAngle(fp) > p_ftCommonData->x20)
+                        ftCo_GetLStickAngle(fp) > p_ftCommonData->x20_radians)
                     {
                         var_r29 = 0x60;
                     } else {
                         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
-                            ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
+                            ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20_radians)
                         {
                             var_r29 = 0x61;
                         } else {

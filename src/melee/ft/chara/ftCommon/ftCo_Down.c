@@ -20,7 +20,7 @@
 static inline bool inlineA0(Fighter* fp)
 {
     if (ABS(fp->input.lstick.x) >= p_ftCommonData->x248 &&
-        ftCo_GetLStickAngle(fp) < p_ftCommonData->x20)
+        ftCo_GetLStickAngle(fp) < p_ftCommonData->x20_radians)
     {
         return true;
     } else {
