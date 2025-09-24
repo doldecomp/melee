@@ -554,6 +554,19 @@ struct grFourside_GroundVars {
     /*  +4 gp+C8 */ s32 x4;
 };
 
+struct grGreens_GroundVars {
+    /*  +0 gp+C4 */  struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x0_flags;
+};
+
 struct grOnett_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
@@ -674,6 +687,7 @@ struct Ground {
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;
             struct grFourside_GroundVars fourside;
+            struct grGreens_GroundVars greens;
             struct grIceMt_GroundVars icemt;
             struct grIceMt_GroundVars2 icemt2;
             struct grInishie1_GroundVars inishie1;

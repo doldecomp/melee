@@ -41,7 +41,9 @@
 /* 3FA258 */ static struct {
     int x0;
     int x4;
-} un_803FA258 = { 0 };
+    u8 _pad[0x130];
+    void* x138;
+} un_803FA258;
 /* 3FA658 */ static int un_803FA658;
 /* 3FA8E8 */ static int un_803FA8E8;
 /* 3FB168 */ static int un_803FB168;
@@ -631,7 +633,11 @@ bool un_803015F8(bool update_scene)
 
 /// #un_80301BA8
 
-/// #un_80301C64
+void un_80301C64(un_80301C64_t* arg0)
+{
+    arg0->x0 = un_803FA258.x138;
+    arg0->x4 = 0;
+}
 
 /// #un_80301C80
 

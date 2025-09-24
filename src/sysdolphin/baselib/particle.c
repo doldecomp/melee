@@ -297,7 +297,15 @@ void hsd_80393DA0(u8* arg0, size_t arg1)
 
 /// #hsd_803966A0
 
-/// #hsd_80396868
+extern struct {
+    /* 0x00 */ u8 _pad[0x10];
+    /* 0x10 */ u32 x10;
+} lbl_8040BC3C;
+
+void hsd_80396868(void)
+{
+    lbl_8040BC3C.x10 = (lbl_8040BC3C.x10 & 0x0FFFFFF0) | 0x80000000;
+}
 
 /// #hsd_80396884
 

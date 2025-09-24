@@ -711,7 +711,10 @@ int gm_8017E48C(MinorScene* scene)
 
 /// #gm_8017E7A0
 
-/// #gm_8017E7E0
+bool gm_8017E7E0(void)
+{
+    return lbl_80472C30.x7C == 0x14;
+}
 
 /// #gm_8017E7FC
 

@@ -44,6 +44,11 @@ struct un_804D6EF4_t {
     /* +56 */ short x56;
 };
 
+typedef struct {
+    void* x0;
+    s32 x4;
+} un_80301C64_t;
+
 struct un_80304138_objalloc_t_x8 {
     int x0;
     int (*x4)(int);
