@@ -7,6 +7,7 @@
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
+#include "ftCommon/ftCo_AttackDash.h"
 #include "ftKirby/forward.h"
 #include <baselib/forward.h>
 
@@ -24,7 +25,7 @@
 /* 0EEA6C */ void ftKb_Init_OnItemDrop(Fighter_GObj* gobj, bool);
 /* 0EEAC0 */ void ftKb_Init_LoadSpecialAttrs(Fighter_GObj* gobj);
 /* 0EEB00 */ void ftKb_Init_800EEB00(Fighter_GObj* gobj, void*);
-/* 0EEB1C */ void ftKb_Init_800EEB1C(Fighter_GObj* gobj, void*);
+/* 0EEB1C */ void ftKb_Init_800EEB1C(Fighter_GObj* gobj, s32* arg1);
 /* 0EEB38 */ void ftKb_Init_OnKnockbackEnter(Fighter_GObj* gobj);
 /* 0EEB7C */ void ftKb_Init_OnKnockbackExit(Fighter_GObj* gobj);
 /* 0EEBC0 */ void ftKb_Init_UnkDemoCallbacks0(int, int*, int*);
