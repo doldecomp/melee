@@ -14,6 +14,7 @@
 
 #include "ft/forward.h"
 
+#include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
@@ -22,6 +23,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Guard.h"
 #include "ftYoshi/ftYs_SpecialHi.h"
 #include "ftYoshi/ftYs_SpecialS.h"
 
@@ -577,4 +579,44 @@ void ftYs_Init_8012BE3C(HSD_GObj* gobj)
         Fighter* fp1 = GET_FIGHTER(gobj);
         efAsync_Spawn(gobj, &fp1->x60C, 4, 1231, jobj, xBC);
     }
+}
+
+static void ftYs_Init_8012B8A4_no_inline_2(HSD_GObj* gobj)
+{
+    ftYs_Init_8012B8A4(gobj);
+}
+
+static void ftYs_Init_8012B8A4_no_inline(HSD_GObj* gobj)
+{
+    ftYs_Init_8012B8A4_no_inline_2(gobj);
+}
+
+static void ftYs_Init_8012BECC_sub(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    struct {
+        u8 _pad[4];
+        Vec3 v;
+    } s;
+
+    ftColl_8007B0C0(gobj, HurtCapsule_Disabled);
+    fp->mv.ys.guard.xA = 0;
+    fp->mv.ys.guard.x0 = 0;
+    fp->mv.ys.guard.xD = p_ftCommonData->x268;
+    fp->mv.ys.guard.x20 = 0;
+    fp->mv.ys.guard.x1C = 0;
+    s.v.x = s.v.y = s.v.z = 0;
+    HSD_JObjSetTranslate(fp->parts[fp->ft_data->x8->x11].joint, &s.v);
+    ftYs_Init_8012B8A4_no_inline(gobj);
+    ftCo_80091D58(fp);
+    ft_PlaySFX(fp, 0x6E, 0x7F, 0x40);
+}
+
+void ftYs_Init_8012BECC(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_0, 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+    ftCo_80092450(gobj);
+    ftYs_Init_8012BECC_sub(gobj);
 }
