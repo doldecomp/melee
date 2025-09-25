@@ -20,6 +20,8 @@ extern struct Fighter_804D64FC_t {
     float* x20;
 }* Fighter_804D64FC;
 
+struct plAllocInfo;
+
 /* 0679B0 */ void Fighter_800679B0(void);
 /* 067A84 */ void Fighter_FirstInitialize_80067A84(void);
 /* 067ABC */ void Fighter_LoadCommonData(void);
@@ -30,10 +32,10 @@ extern struct Fighter_804D64FC_t {
 /* 06876C */ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
 /* 068854 */ void Fighter_ResetInputData_80068854(Fighter_GObj* gobj);
 /* 068914 */ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
-                                               struct S_TEMP1* argdata);
+                                               struct plAllocInfo* argdata);
 /* 068E40 */ u32 Fighter_NewSpawn_80068E40(void);
 /* 068E64 */ void Fighter_80068E64(Fighter_GObj* gobj);
-/* 068E98 */ Fighter_GObj* Fighter_Create(struct S_TEMP1* input);
+/* 068E98 */ Fighter_GObj* Fighter_Create(struct plAllocInfo* input);
 /* 0693AC */ void Fighter_ChangeMotionState(Fighter_GObj* gobj,
                                             FtMotionId msid, MotionFlags flags,
                                             f32 anim_start, f32 anim_speed,

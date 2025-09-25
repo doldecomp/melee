@@ -854,14 +854,6 @@ struct UnkCostumeList {
     u8 numCostumes;
 };
 
-struct S_TEMP1 {
-    FighterKind fighterKind;
-    u8 playerID;
-    u8 unk5;
-    /* +6:0 */ u8 flags_b0 : 1;
-    /* +6:1 */ u8 flags_b1 : 1;
-};
-
 struct MotionState {
     enum_t anim_id;
 

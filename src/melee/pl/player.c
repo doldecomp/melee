@@ -34,22 +34,6 @@ typedef struct _ftMapping {
     s8 has_transformation;
 } ftMapping;
 
-struct plAllocInfo {
-    s32 internal_id;
-    u8 slot;
-    s8 unk8;
-    struct {
-        u8 b0 : 1;
-        u8 has_transformation : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    };
-};
-
 /// TODO delete after fixing functions that use this
 struct Unk_Struct_w_Array {
     char some_str[8 + 4]; //"PdPm.dat"
@@ -234,10 +218,10 @@ void Player_80031AD0(int slot)
     first_struct.slot = slot;
     first_struct.b0 = false;
     first_struct.has_transformation = false;
-    first_struct.unk8 = -1;
+    first_struct.x5 = -1;
 
     /// @todo Eliminate cast.
-    player->player_entity[0] = Fighter_Create((struct S_TEMP1*) &first_struct);
+    player->player_entity[0] = Fighter_Create(&first_struct);
     player->player_state = 2;
 
     internal_id = byte_check =
@@ -253,11 +237,11 @@ void Player_80031AD0(int slot)
         second_struct.slot = slot;
         second_struct.b0 = true;
         second_struct.has_transformation = has_transformation;
-        second_struct.unk8 = -1;
+        second_struct.x5 = -1;
 
         /// @todo Eliminate cast.
         player->player_entity[1] =
-            Fighter_Create((struct S_TEMP1*) &second_struct);
+            Fighter_Create(&second_struct);
 
         if (player->player_state != 1) {
             player->player_state = 2;
