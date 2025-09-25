@@ -1246,10 +1246,10 @@ struct Fighter {
         /*  fp+654 */ float x654;
         /*  fp+658 */ float x658;
         /*  fp+65C */ HSD_Pad held_inputs;
-        /*  fp+660 */ s32 x660;
-        /*  fp+664 */ s32 x664;
-        /*  fp+668 */ HSD_Pad x668;
-        /*  fp+66C */ s32 x66C;
+        /*  fp+660 */ HSD_Pad x660; ///< previous held inputs
+        /*  fp+664 */ HSD_Pad x664;
+        /*  fp+668 */ HSD_Pad x668; ///< pressed inputs
+        /*  fp+66C */ HSD_Pad x66C; ///< released inputs
     } input;
     /*  fp+670 */ u8 x670_timer_lstick_tilt_x;
     /*  fp+671 */ u8 x671_timer_lstick_tilt_y;

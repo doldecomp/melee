@@ -7,8 +7,8 @@
 
 bool ftCo_800CECE8(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (((u32) fp->cmd_vars[0] != 0) && (fp->input.x668 & 0x100)) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->cmd_vars[0] != 0 && (fp->input.x668 & HSD_PAD_A)) {
         ftCo_800CED30(gobj);
         return true;
     }
@@ -20,7 +20,7 @@ bool ftCo_800CECE8(Fighter_GObj* gobj)
 // Otherwise a simple switch statement is functionally equivalent.
 void ftCo_800CED30(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     FighterKind kind = fp->kind;
 
     if (kind == FTKIND_CLINK) {
@@ -41,8 +41,9 @@ void ftCo_800CED30(Fighter_GObj* gobj)
         }
     }
 third:
-    fp->allow_interrupt = 0;
-    Fighter_ChangeMotionState(gobj, 0x155, 0U, 0.0f, 1.0f, 0.0f, NULL);
+    fp->allow_interrupt = false;
+    Fighter_ChangeMotionState(gobj, ftLk_MS_AttackS42, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
     ftAnim_8006EBA4(gobj);
 }
 

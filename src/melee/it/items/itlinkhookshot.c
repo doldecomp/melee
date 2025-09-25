@@ -363,7 +363,7 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
     if (gobj != NULL) {
         item = gobj->user_data;
         item->xDD4_itemVar.linkhookshot.x14 = 0;
-        if ((s32) fp->motion_id == 0x168) {
+        if (fp->motion_id == 0x168) {
             var_r27 = 1;
         } else {
             var_r27 = 0;
@@ -376,7 +376,7 @@ Item_GObj* it_802A2BA4(Fighter_GObj* arg0, Vec3* arg1, f32 arg2, s32 arg3)
             Item_8026A8EC(gobj);
             return NULL;
         }
-        item->xDD4_itemVar.linkhookshot.x8 = (HSD_GObj*) arg0;
+        item->xDD4_itemVar.linkhookshot.x8 = arg0;
         item->xDD4_itemVar.linkhookshot.xC =
             item->xDD4_itemVar.linkhookshot.x0->x1D0_GObj->hsd_obj;
         fp->parts[139].joint = item->xDD4_itemVar.linkhookshot.xC;
@@ -705,13 +705,13 @@ void it_802A3630(Item_GObj* arg0)
     it_802A2EE4_inline_alt(item->xDD4_itemVar.linkhookshot.x4, &pos);
 
     if (it_802A3630_inline(item, &fp->cur_pos, &pos) != 0) {
-        ftCo_80090780((Fighter_GObj*) item->owner);
+        ftCo_80090780(item->owner);
         it_802A2B10(arg0);
         return;
     }
 
     if (it_802A5AE0(item->xDD4_itemVar.linkhookshot.x0, &pos, attr) != 0) {
-        it_802A7A04((HSD_GObj*) arg0);
+        it_802A7A04(arg0);
         it_802A7168(item, &pos, fp->x34_scale.y);
         return;
     }
@@ -720,8 +720,8 @@ void it_802A3630(Item_GObj* arg0)
         it_802A77DC(arg0);
         return;
     }
-    if (fp->input.x668 & 0x100) {
-        it_802A79A0((HSD_GObj*) arg0);
+    if (fp->input.x668 & HSD_PAD_A) {
+        it_802A79A0(arg0);
     }
 }
 
@@ -784,7 +784,7 @@ void itLinkhookshot_UnkMotion7_Phys(Item_GObj* arg0)
     item->xDD4_itemVar.linkhookshot.x10 = it_802A3828;
 }
 
-void it_802A39FC(Item_GObj* arg0)
+void it_802A39FC(Item_GObj* gobj)
 {
     Item* item;
     Fighter* fp;
@@ -801,7 +801,7 @@ void it_802A39FC(Item_GObj* arg0)
     f32 temp_f0;
     f32 temp_f0_2;
 
-    item = arg0->user_data;
+    item = gobj->user_data;
     attr = item->xC4_article_data->x4_specialAttributes;
     fp = item->owner->user_data;
     item_link = item->xDD4_itemVar.linkhookshot.x4;
@@ -822,8 +822,8 @@ void it_802A39FC(Item_GObj* arg0)
         var_r0 = 0;
     }
     if (var_r0 != 0) {
-        ftCo_80090780((Fighter_GObj*) item->owner);
-        it_802A2B10(arg0);
+        ftCo_80090780(item->owner);
+        it_802A2B10(gobj);
         return;
     }
 
@@ -844,23 +844,23 @@ void it_802A39FC(Item_GObj* arg0)
     fp->pos_delta.y = temp_f0_2;
     it_802A7384(item, &pos_2, fp->x34_scale.y);
     if (fp->ground_or_air != 1) {
-        it_802A77DC(arg0);
+        it_802A77DC(gobj);
         return;
     }
-    if (fp->input.x668 & 0x100) {
-        it_802A79A0((HSD_GObj*) arg0);
+    if (fp->input.x668 & HSD_PAD_A) {
+        it_802A79A0(gobj);
         return;
     }
     fp->mv.lk.specialn.x0.y -= 1.0F;
     if (fp->mv.lk.specialn.x0.y <= 0.0f) {
         ftCo_80090780((Fighter_GObj*) item->owner);
-        it_802A2B10(arg0);
+        it_802A2B10(gobj);
     }
 }
 
-void itLinkhookshot_UnkMotion8_Phys(Item_GObj* arg0)
+void itLinkhookshot_UnkMotion8_Phys(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM((HSD_GObj*) arg0);
+    Item* item = GET_ITEM(gobj);
     item->xDD4_itemVar.linkhookshot.x10 = it_802A39FC;
 }
 
