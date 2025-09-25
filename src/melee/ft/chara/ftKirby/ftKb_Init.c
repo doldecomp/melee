@@ -4943,7 +4943,10 @@ void ftKb_LkSpecialAirNLoop_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_FxSpecialAirNLoop_Coll
 
-/// #ftKb_FxSpecialAirNEnd_Coll
+void ftKb_FxSpecialAirNEnd_Coll(Fighter_GObj* gobj)
+{
+    ftCo_AirCatchHit_Coll(gobj);
+}
 
 bool ftKb_SpecialNNs_800FEC78(HSD_GObj* gobj)
 {
