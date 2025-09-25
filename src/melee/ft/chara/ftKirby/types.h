@@ -55,10 +55,10 @@ struct ftKb_FighterVars {
     /* fp+22F0   */ bool xC4;
     /* fp+22F4   */ UNK_T xC8;
     /* fp+22F8   */ bool xCC;
-    /* fp+22FC   */ Item_GObj* xD0;
-    /* fp+2300   */ UNK_T xD4;
-    /* fp+2304   */ UNK_T xD8;
-    /* fp+2308   */ UNK_T xDC;
+    /* fp+22FC   */ Item_GObj* xD0; ///< Peach toad item
+    /* fp+2300   */ int xD4;
+    /* fp+2304   */ int xD8;
+    /* fp+2308   */ Item_GObj* xDC; ///< Game & Watch pan item
     /* fp+230C   */ int xE0;
     /* fp+2310   */ short xE4;
     /* fp+2314   */ float xE8;

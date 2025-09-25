@@ -886,6 +886,7 @@
 /* 10CD44 */ void ftKb_SpecialNGw_8010CD44(Fighter_GObj* gobj);
 /* 10D074 */ void ftKb_SpecialNGw_8010D074(Fighter_GObj* gobj);
 /* 10D0A8 */ void ftKb_SpecialNGw_8010D0A8(Fighter_GObj* gobj);
+/* 10D100 */ void fn_8010D100(Fighter_GObj* gobj);
 /* 10D130 */ void ftKb_SpecialNGw_8010D130(Fighter_GObj* gobj);
 /* 10D160 */ bool ftKb_SpecialNGw_8010D160(Fighter_GObj* gobj);
 /* 10D188 */ void ftKb_SpecialNGw_8010D188(Fighter_GObj* gobj);
@@ -900,8 +901,8 @@
 /* 10D544 */ void ftKb_GwSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 10D580 */ void ftKb_SpecialNGw_8010D580(Fighter_GObj* gobj);
 /* 10D5F0 */ void ftKb_SpecialNGw_8010D5F0(Fighter_GObj* gobj);
-/* 10D660 */ void ftKb_SpecialNGw_8010D660(Fighter_GObj* gobj);
-/* 10D6D0 */ void ftKb_SpecialNGw_8010D6D0(Fighter_GObj* gobj);
+/* 10D660 */ void ftKb_SpecialNGw_8010D660(Fighter_GObj* gobj, float);
+/* 10D6D0 */ void ftKb_SpecialNGw_8010D6D0(Fighter_GObj* gobj, float);
 /* 3C8368 */ extern MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount];
 /* 3CA04C */ extern MotionState ftKb_Init_UnkMotionStates0[];
 /* 3CA308 */ extern char ftKb_Init_DatFilename[];
