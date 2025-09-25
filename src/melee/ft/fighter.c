@@ -1873,23 +1873,20 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
             if (gm_8016B0FC()) {
                 fp->input.x650 = 0.0f;
                 if (ftCo_800A2040(fp)) {
-                    fp->input.held_inputs = (fp->input.held_inputs & 0xD00);
+                    fp->input.held_inputs &= HSD_PAD_A | HSD_PAD_XY;
                 } else {
-                    fp->input.held_inputs = (fp->input.held_inputs & 0x100);
+                    fp->input.held_inputs &= HSD_PAD_A;
                 }
             } else {
-                if ((fp->input.held_inputs & 0x60)) {
-                    fp->input.held_inputs =
-                        (s32) (fp->input.held_inputs | 0x80000000);
+                if (fp->input.held_inputs & (HSD_PAD_L | HSD_PAD_R)) {
+                    fp->input.held_inputs |= HSD_PAD_LR;
                     fp->input.x650 = 1.0f;
                 } else if (fp->input.x650) {
-                    fp->input.held_inputs =
-                        (fp->input.held_inputs | 0x80000000);
+                    fp->input.held_inputs |= HSD_PAD_LR;
                 }
-                if (gm_801A45E8(0) == 0) {
-                    if ((fp->input.held_inputs & 0x10)) {
-                        fp->input.held_inputs =
-                            (fp->input.held_inputs | 0x80000000 | 0x100);
+                if (!gm_801A45E8(0)) {
+                    if (fp->input.held_inputs & HSD_PAD_Z) {
+                        fp->input.held_inputs |= HSD_PAD_LR | HSD_PAD_A;
                         fp->input.x650 = p_ftCommonData->x14;
                     }
                 }
@@ -2052,44 +2049,44 @@ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj)
                 fp->x672_input_timer_counter = 0xFE;
             }
 
-            if (fp->input.x668 & 0x100) {
+            if (fp->input.x668 & HSD_PAD_A) {
                 fp->x683 = fp->x67C;
                 fp->x67C = 0;
             } else if (fp->x67C < 0xFF) {
                 fp->x67C++;
             }
 
-            if (fp->input.x668 & 0x200) {
+            if (fp->input.x668 & HSD_PAD_B) {
                 fp->x67D = 0;
             } else if (fp->x67D < 0xFF) {
                 fp->x67D++;
             }
 
-            if (fp->input.x668 & 0xC00) {
+            if (fp->input.x668 & HSD_PAD_XY) {
                 fp->x67E = 0;
             } else if (fp->x67E < 0xFF) {
                 fp->x67E++;
             }
 
-            if (fp->input.x668 & 8) {
+            if (fp->input.x668 & HSD_PAD_DPADUP) {
                 fp->x681 = 0;
             } else if (fp->x681 < 0xFF) {
                 fp->x681++;
             }
 
-            if (fp->input.x668 & 4) {
+            if (fp->input.x668 & HSD_PAD_DPADDOWN) {
                 fp->x682 = 0;
             } else if (fp->x682 < 0xFF) {
                 fp->x682++;
             }
 
-            if (fp->input.x668 & 0x80000000) {
+            if (fp->input.x668 & HSD_PAD_LR) {
                 fp->x67F = 0;
             } else if (fp->x67F < 0xFF) {
                 fp->x67F++;
             }
 
-            if (fp->input.x668 & 0x60) {
+            if (fp->input.x668 & (HSD_PAD_L | HSD_PAD_R)) {
                 fp->x684 = fp->x680;
                 fp->x680 = 0;
             } else if (fp->x680 < 0xFF) {

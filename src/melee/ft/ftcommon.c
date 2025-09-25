@@ -1749,7 +1749,7 @@ bool ftCommon_8007FFD8(Fighter* fp, float arg8)
     s32 phi_r31;
     s8 b0, b1;
     phi_r31 = false;
-    if ((fp->input.x668 & 0x80000F00) != 0) {
+    if (fp->input.x668 & (HSD_PAD_AB | HSD_PAD_XY | HSD_PAD_LR)) {
         fp->x2018 -= arg8;
         phi_r31 = true;
     }

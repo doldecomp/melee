@@ -191,9 +191,8 @@ void ftGw_SpecialN_IASA(HSD_GObj* gobj)
     if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_PAD_B) &&
-        ((float) fp->mv.gw.SpecialN.maxSausage <
-         gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
+    if (fp->cmd_vars[1] != 0 && (fp->input.x668 & HSD_PAD_B) &&
+        fp->mv.gw.SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX)
     {
         ftGw_SpecialN_Loop(gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
     }
@@ -210,9 +209,8 @@ void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
     if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->cmd_vars[1] != 0U) && (fp->input.x668 & HSD_PAD_B) &&
-        ((float) fp->mv.gw.SpecialN.maxSausage <
-         gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
+    if (fp->cmd_vars[1] != 0 && (fp->input.x668 & HSD_PAD_B) &&
+        fp->mv.gw.SpecialN.maxSausage < gawAttrs->x1C_GAMEWATCH_CHEF_MAX)
     {
         ftGw_SpecialAirN_Loop(gobj, gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
     }

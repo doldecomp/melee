@@ -172,7 +172,7 @@ bool ftCo_800DF6F8(Fighter* fp)
 
 bool ftCo_800DF72C(Fighter* fp)
 {
-    if (gm_8016B0FC() == 0) {
+    if (!gm_8016B0FC()) {
         if (fp->facing_dir * fp->input.cstick1.x < p_ftCommonData->x7FC &&
             fp->facing_dir * fp->input.cstick.x >= p_ftCommonData->x7FC)
         {

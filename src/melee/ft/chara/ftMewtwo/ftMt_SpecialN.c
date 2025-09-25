@@ -796,13 +796,13 @@ void ftMt_SpecialNLoop_IASA(HSD_GObj* gobj)
             ftMewtwo_SpecialN_SetCall(gobj);
             return;
         }
-        if ((recentInput & HSD_PAD_B) != false) {
+        if (recentInput & HSD_PAD_B) {
             if (fp->mv.mt.SpecialN.releaseLag <= 0) {
                 Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNEnd, 0, 0.0f,
                                           1.0f, 0.0f, NULL);
                 ftMewtwo_SpecialN_SetCall(gobj);
             }
-        } else if ((recentInput & HSD_PAD_LR) != false) {
+        } else if (recentInput & HSD_PAD_LR) {
             Fighter_ChangeMotionState(gobj, ftMt_MS_SpecialNCancel, 0, 0.0f,
                                       1.0f, 0.0f, NULL);
             ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
