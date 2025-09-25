@@ -691,17 +691,17 @@ static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
             fp->x688 = fp->x689 = fp->x68A = fp->x68B = 0xFF;
 }
 
-void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
+void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct plAllocInfo* argdata)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 costume_id;
-    fp->kind = argdata->fighterKind;
-    fp->player_id = argdata->playerID;
+    fp->kind = argdata->internal_id;
+    fp->player_id = argdata->slot;
 
-    fp->x221F_b4 = argdata->flags_b0;
+    fp->x221F_b4 = argdata->b0;
 
     fp->x34_scale.x = Player_GetModelScale(fp->player_id);
-    fp->x61C = argdata->unk5;
+    fp->x61C = argdata->x5;
     fp->x618_player_id = Player_GetPlayerId(fp->player_id);
     fp->x61A_controller_index = Player_GetControllerIndex(fp->player_id);
     fp->is_always_metal = Player_GetFlagsBit5(fp->player_id);
@@ -854,7 +854,7 @@ static void Fighter_Create_Inline2(Fighter_GObj* gobj)
     }
 }
 
-Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
+Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
 {
     Fighter_GObj* gobj;
     Fighter* fp;
@@ -865,7 +865,7 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
     fp = HSD_ObjAlloc(&fighter_alloc_data);
     fp->dat_attrs_backup = HSD_ObjAlloc(&fighter_dat_attrs_alloc_data);
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
-    ftData_8008572C(input->fighterKind);
+    ftData_8008572C(input->internal_id);
     Fighter_UnkInitLoad_80068914(gobj, input);
     efAsync_8006737C(ftData_UnkBytePerCharacter[fp->kind]);
     ftData_80085820(fp->kind, fp->x619_costume_id);
@@ -921,7 +921,7 @@ Fighter_GObj* Fighter_Create(struct S_TEMP1* input)
         ftMh_MS_341_8014FE10(gobj);
     } else if (fp->kind == FTKIND_CREZYH) {
         ftCh_Init_80155FCC(gobj);
-    } else if (input->flags_b1 != 0) {
+    } else if (input->has_transformation) {
         ftMaterial_800BFD04(gobj);
     } else if (Player_GetFlagsBit3(fp->player_id) != 0) {
         ftCo_800C61B0(gobj);

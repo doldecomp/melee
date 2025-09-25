@@ -51,10 +51,10 @@ void Fighter_UpdateModelScale(Fighter_GObj* gobj);
 /* 06876C */ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
 /* 068854 */ void Fighter_ResetInputData_80068854(Fighter_GObj* gobj);
 /* 068914 */ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
-                                               struct S_TEMP1* argdata);
+                                               struct plAllocInfo* argdata);
 /* 068E40 */ u32 Fighter_NewSpawn_80068E40(void);
 /* 068E64 */ void Fighter_80068E64(Fighter_GObj* gobj);
-Fighter_GObj* Fighter_Create(struct S_TEMP1* input);
+Fighter_GObj* Fighter_Create(struct plAllocInfo* input);
 void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                                MotionFlags flags, float anim_start,
                                float anim_speed, float anim_blend,
