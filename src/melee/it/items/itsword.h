@@ -18,7 +18,7 @@
 /* 285024 */ void it_80285024(Item_GObj* gobj, int);
 /* 2852B8 */ void it_802852B8(Item_GObj* gobj, float*, float*);
 /* 285300 */ itSword_UnkBytes* it_80285300(Item_GObj* gobj);
-/* 285314 */ void it_80285314(Item_GObj* gobj);
+/* 285314 */ HSD_JObj* it_80285314(Item_GObj* gobj);
 /* 285338 */ void it_3F14_Logic12_Spawned(Item_GObj* gobj);
 /* 285804 */ void it_3F14_Logic12_PickedUp(Item_GObj* gobj);
 /* 285B00 */ void it_3F14_Logic12_Dropped(Item_GObj* gobj);

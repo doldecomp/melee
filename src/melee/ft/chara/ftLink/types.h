@@ -6,6 +6,7 @@
 
 #include "ft/forward.h"
 #include "ftLink/forward.h" // IWYU pragma: export
+#include "ftMars/types.h"
 #include "it/forward.h"
 
 #include "lb/types.h"
@@ -37,14 +38,7 @@ struct ftLk_DatAttrs {
     /* +50 */ float attackairlw_hit_anim_frame_start;
     /* +54 */ float attackairlw_hit_anim_frame_end;
     /* +58 */ u32 attackairlw_anim_flags[3];
-    /* +64 */ UNK_T x64;
-    /* +68 */ UNK_T x68;
-    /* +6C */ UNK_T x6C;
-    /* +70 */ UNK_T x70;
-    /* +74 */ UNK_T x74;
-    /* +78 */ UNK_T x78;
-    /* +7C */ UNK_T x7C;
-    /* +80 */ UNK_T x80;
+    /* +64 */ struct SwordAttrs x64;
     /* +84 */ UNK_T x84;
     /* +88 */ s32 x88;
     /* +8C */ UNK_T x8C;

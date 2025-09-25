@@ -1502,24 +1502,10 @@ struct Fighter {
     /* fp+20A0 */ HSD_JObj* x20A0_accessory;
     /* fp+20A4 */ LbShadow x20A4;
     /* fp+20AC */ HSD_GObj* unk_gobj;
-    /* fp+20B0 */ UNK_T x20B0;
-    /* fp+20B4 */ UNK_T x20B4;
-    /* fp+20B8 */ UNK_T x20B8;
-    /* fp+20BC */ UNK_T x20BC;
-    /* fp+20C0 */ UNK_T x20C0;
-    /* fp+20C4 */ UNK_T x20C4;
-    /* fp+20C8 */ UNK_T x20C8;
-    /* fp+20CC */ UNK_T x20CC;
-    /* fp+20D0 */ UNK_T x20D0;
-    /* fp+20D4 */ UNK_T x20D4;
-    /* fp+20D8 */ UNK_T x20D8;
-    /* fp+20DC */ UNK_T x20DC;
-    /* fp+20E0 */ UNK_T x20E0;
-    /* fp+20E4 */ UNK_T x20E4;
-    /* fp+20E8 */ UNK_T x20E8;
-    /* fp+20EC */ UNK_T x20EC;
-    /* fp+20F0 */ UNK_T x20F0;
-    /* fp+20F4 */ UNK_T x20F4;
+    /* fp+20B0 */ struct Fighter_x20B0_t {
+        Vec3 x0;
+        Vec3 xC;
+    } x20B0[3];
     /* fp+20F8 */ float x20F8;
     /* fp+20FC */ float x20FC;
     /* fp+2100 */ s8 x2100;
