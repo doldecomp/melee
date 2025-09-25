@@ -1690,7 +1690,7 @@ u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
     player->flagsAE.b1 = bit1;
 }
 
-u8 Player_GetUnk4C(s32 slot)
+int Player_GetUnk4C(s32 slot)
 {
     StaticPlayer* player;
     u8 unk4C;

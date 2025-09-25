@@ -478,8 +478,8 @@ struct ftCommonData {
     /* +6B0 */ int x6B0;
     /* +6B4 */ int x6B4;
     /* +6B8 */ int x6B8;
-    /* +6BC */ UNK_T x6BC;
-    /* +6C0 */ UNK_T x6C0;
+    /* +6BC */ int x6BC;
+    /* +6C0 */ int x6C0;
     /* +6C4 */ float x6C4;
     /* +6C8 */ int x6C8;
     /* +6CC */ int x6CC;
@@ -506,9 +506,9 @@ struct ftCommonData {
     /* +728 */ float x728;
     /* +72C */ float x72C;
     /* +730 */ float x730;
-    /* +734 */ float x734;
-    /* +738 */ float x738;
-    /* +73C */ UNK_T x73C;
+    /* +734 */ float x734; ///< leadead capture timer decrement
+    /* +738 */ float x738; ///< leadead grab break threshold
+    /* +73C */ int x73C;
     /* +740 */ float x740;
     /* +744 */ float x744;
     /* +748 */ float x748;
