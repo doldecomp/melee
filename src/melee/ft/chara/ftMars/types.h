@@ -14,6 +14,13 @@ struct ftMars_FighterVars {
     u8 _[FIGHTERVARS_SIZE - 4];
 };
 
+struct SwordAttrs {
+    u8 pad_x0[0x14];
+    int x14;
+    float x18;
+    float x1C;
+};
+
 typedef struct _MarsAttributes {
     int x0;
     int x4;
@@ -41,7 +48,7 @@ typedef struct _MarsAttributes {
     float x5C;
     float x60;
     AbsorbDesc x64;
-    u8 x78[0x98 - 0x78];
+    struct SwordAttrs x78;
 } MarsAttributes;
 
 union ftMars_MotionVars {
