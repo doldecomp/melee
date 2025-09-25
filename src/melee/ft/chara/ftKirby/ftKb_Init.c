@@ -4033,7 +4033,10 @@ void ftKb_SpecialHi_800F346C(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialAirLwEnd_IASA
 
-/// #ftKb_SpecialLw1_Phys
+void ftKb_SpecialLw1_Phys(Fighter_GObj* gobj)
+{
+    ft_80084FA8(gobj);
+}
 
 /// #ftKb_SpecialLw_Phys
 
@@ -4367,7 +4370,10 @@ void fn_800F6AC8(HSD_GObj* gobj)
 
 /// #ftKb_SpecialNCapture_Anim
 
-/// #ftKb_SpecialNCapture1_Anim
+void ftKb_SpecialNCapture1_Anim(Fighter_GObj* gobj)
+{
+    ftKb_SpecialN_800F5DE8(gobj);
+}
 
 /// #ftKb_SpecialAirNCapture_Anim
 
@@ -4623,7 +4629,10 @@ void ftKb_SpecialN_800F9090(HSD_GObj* gobj)
 
 /// #ftKb_LgSpecialAirN_IASA
 
-/// #ftKb_LgSpecialN_Phys
+void ftKb_LgSpecialN_Phys(Fighter_GObj* gobj)
+{
+    ft_80084F3C(gobj);
+}
 
 /// #ftKb_LgSpecialAirN_Phys
 
