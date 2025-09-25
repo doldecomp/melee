@@ -555,7 +555,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialS.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialAir.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_FallSpecial.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_FallSpecial.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Lift.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DownBound.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DownStand.c"),

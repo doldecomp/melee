@@ -25,54 +25,16 @@
 
 void ftCo_800968C8(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCo_80096900(gobj, 1, 0, true, 1, fp->x2EC);
 }
 
-/// @todo Real solution is @c 0. Inline needs to be fixed.
-#define SOLUTION 1
-void ftCo_80096900(Fighter_GObj* gobj, int arg1, int arg2,
-                   bool allow_interrupt, float arg4, float arg5)
+static inline void inline0(Fighter_GObj* gobj, int arg1, int arg2,
+                           bool allow_interrupt, float arg4, float arg5,
+                           float arg6, bool unk)
 {
-#if SOLUTION == 0
-    ftCo_800969D8(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0);
-#elif SOLUTION == 1
-
-    ftCo_DatAttrs* ca;
-    Fighter* fp;
-    fp = GET_FIGHTER(gobj);
-    ca = &fp->co_attrs;
-    if (fp->x2224_b2) {
-        ftCo_80090780(gobj);
-        return;
-    }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_FallSpecial, Ft_MF_KeepFastFall, 0,
-                              1, 0, NULL);
-    fp->mv.co.fallspecial.x8 = ca->air_drift_max * arg4;
-    fp->mv.co.fallspecial.xC = arg1;
-    fp->mv.co.fallspecial.x10 = arg2;
-    fp->mv.co.fallspecial.x14 = arg5;
-    fp->mv.co.fallspecial.allow_interrupt = allow_interrupt;
-    fp->mv.co.fallspecial.x0 = 26;
-    fp->mv.co.fallspecial.x4 = 0;
-    if (fp->ground_or_air == GA_Ground) {
-        ftCommon_8007D60C(fp);
-    } else {
-        ftCommon_8007D698(fp);
-    }
-    un_80322598(fp->x8_spawnNum, fp->cur_pos.y);
-#endif
-}
-#undef SOLUTION
-
-void ftCo_800969D8(Fighter_GObj* gobj, int arg1, int arg2, int allow_interrupt,
-                   float arg4, float arg5, float arg6)
-{
-    u8 _[8] = { 0 };
-    ftCo_DatAttrs* ca;
-    Fighter* fp;
-    fp = GET_FIGHTER(gobj);
-    ca = &fp->co_attrs;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* ca = &fp->co_attrs;
     if (fp->x2224_b2) {
         ftCo_80090780(gobj);
         return;
@@ -88,13 +50,28 @@ void ftCo_800969D8(Fighter_GObj* gobj, int arg1, int arg2, int allow_interrupt,
     fp->mv.co.fallspecial.x4 = 0;
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D60C(fp);
+    } else if (unk) {
+        ftCommon_8007D698(fp);
     }
     un_80322598(fp->x8_spawnNum, fp->cur_pos.y);
 }
 
+void ftCo_80096900(Fighter_GObj* gobj, int arg1, int arg2,
+                   bool allow_interrupt, float arg4, float arg5)
+{
+    inline0(gobj, arg1, arg2, allow_interrupt, arg4, arg5, 0, true);
+}
+
+void ftCo_800969D8(Fighter_GObj* gobj, int arg1, int arg2, int allow_interrupt,
+                   float arg4, float arg5, float arg6)
+{
+    PAD_STACK(8);
+    inline0(gobj, arg1, arg2, allow_interrupt, arg4, arg5, arg6, false);
+}
+
 void ftCo_FallSpecial_Anim(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCo_Fall_Anim_Inner(gobj, &fp->mv.co.fallspecial.x4, ftCo_SM_FallSpecial,
                          ftCo_SM_FallSpecialF, ftCo_SM_FallSpecialB);
     ftCo_800CC988(gobj, fp->mv.co.fallspecial.x4);
@@ -159,8 +136,7 @@ void ftCo_FallSpecial_Coll(Fighter_GObj* gobj)
 
 bool ftCo_80096CC8(Fighter_GObj* gobj, enum_t arg1)
 {
-    u8 _[8] = { 0 };
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (arg1 != -1 && (!(mpLib_80054CEC(arg1) & (1 << 8)) ||
                        fp->input.lstick.y > p_ftCommonData->x25C))
     {
@@ -171,7 +147,7 @@ bool ftCo_80096CC8(Fighter_GObj* gobj, enum_t arg1)
 
 void ftCo_80096D28(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.co.fallspecial.x10 || fp->self_vel.y < ftCo_800D0EC8(fp)) {
         ftCo_LandingFallSpecial_Enter(gobj,
                                       fp->mv.co.fallspecial.allow_interrupt,
