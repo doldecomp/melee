@@ -283,7 +283,7 @@ void Player_SetFlagsAEBit1(int slot, u8 bit1);
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1);
 #endif
 
-u8 Player_GetUnk4C(s32 slot);
+int Player_GetUnk4C(s32 slot);
 void Player_SetUnk4C(s32 slot, u8 unk4C);
 bool Player_80036058(s32 slot);
 float Player_800360D8(s32 slot);
