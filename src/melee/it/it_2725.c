@@ -9031,12 +9031,8 @@ void it_80279BBC(Item* item)
 
 void it_80279BE0(Item_GObj* item_gobj)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    while (lb_80014258((HSD_GObj*) item_gobj, &item->x548_colorOverlay,
-                       (void (*)(Fighter_GObj*, CommandInfo*)) fn_80279B30))
-    {
+    Item* item = GET_ITEM(item_gobj);
+    while (lb_80014258(item_gobj, &item->x548_colorOverlay, fn_80279B30)) {
         lb_80014498(&item->x548_colorOverlay);
     }
 }
