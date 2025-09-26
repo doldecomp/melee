@@ -120,6 +120,10 @@ union ftCommon_MotionVars {
         /* fp+2340 */ bool x0;
     } attack1;
     struct {
+        /* fp+2340 */ bool x0;
+        /* fp+2344 */ bool x4;
+    } attack100;
+    struct {
         /* fp+2340 */ int x0;
     } attackdash;
     struct {
