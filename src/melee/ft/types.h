@@ -311,7 +311,7 @@ struct ftCommonData {
     /* +408 */ float x408;
     /* +40C */ float x40C;
     /* +410 */ int x410;
-    /* +414 */ UNK_T x414;
+    /* +414 */ int x414;
     /* +418 */ int x418;
     /* +41C */ int x41C;
     /* +420 */ float x420;
@@ -614,7 +614,7 @@ struct ftData {
             /*  +8 */ u32 x8;
             /*  +C */ u16** xC;
         } x8;
-        /* +10 */ u8 x10;
+        /* +10 */ u8 x10; ///< Fighter_Part
         /* +11 */ u8 x11;
         /* +12 */ u8 x12;
         /* +13 */ u8 x13;
@@ -1144,7 +1144,13 @@ struct Fighter {
     /*  fp+294 */ itPickup x294_itPickup;
     /*  fp+2C4 */ Vec2 x2C4;
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
-    /*  fp+2D0 */ void* x2D0;
+    /*  fp+2D0 */ struct Fighter_x2D0_t {
+        int x0;
+        int x4;
+        int x8;
+        float xC;
+        float x10;
+    }* x2D0;
     /*  fp+2D4 */ void* dat_attrs;
     /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;
@@ -1479,7 +1485,7 @@ struct Fighter {
     /* fp+2094 */ Fighter_GObj* x2094;
     /* fp+2098 */ u16 x2098;
     /* fp+209A */ u16 x209A;
-    /* fp+209C */ s16 x209C;
+    /* fp+209C */ u16 x209C;
     /* fp+20A0 */ HSD_JObj* x20A0_accessory;
     /* fp+20A4 */ LbShadow x20A4;
     /* fp+20AC */ HSD_GObj* unk_gobj;

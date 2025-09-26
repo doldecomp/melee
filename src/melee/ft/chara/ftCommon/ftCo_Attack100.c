@@ -19,7 +19,9 @@
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
 
+#include <math.h>
 #include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
 #include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
@@ -30,15 +32,21 @@
 #include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
 #include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
 #include <melee/ft/chara/ftCommon/ftCo_Escape.h>
+#include <melee/ft/chara/ftCommon/ftCo_Fall.h>
+#include <melee/ft/chara/ftCommon/ftCo_FallAerial.h>
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/chara/ftCommon/ftCo_Guard.h>
+#include <melee/ft/chara/ftCommon/ftCo_JumpAerial.h>
 #include <melee/ft/chara/ftCommon/ftCo_Lift.h>
 #include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
+#include <melee/ft/chara/ftCommon/ftpickupitem.h>
+#include <melee/ft/chara/ftGameWatch/ftGw_Attack100.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
@@ -56,57 +64,311 @@
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
 
-/// #ftCo_800D67C4
+bool ftCo_800D67C4(Fighter* fp)
+{
+    if (fp->input.x668 & HSD_PAD_B) {
+        if (ABS(fp->input.lstick.x) < p_ftCommonData->x218 &&
+            ABS(fp->input.lstick.y) < p_ftCommonData->x21C)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #ftCo_800D6824
+bool ftCo_800D6824(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (ftData_SpecialN[fp->kind] == NULL) {
+        return false;
+    }
+    if (fp->x689 == 0) {
+        ftData_SpecialN[fp->kind](gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_800D688C
+bool ftCo_800D688C(Fighter* fp)
+{
+    if (fp->input.x668 & HSD_PAD_B) {
+        if (fp->input.lstick.y < -p_ftCommonData->x21C) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #ftCo_800D68C0
+bool ftCo_800D68C0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (ftData_SpecialLw[fp->kind] == NULL) {
+        return false;
+    }
+    if (fp->x687 == 0) {
+        ftData_SpecialLw[fp->kind](gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_800D6928
+bool ftCo_800D6928(Fighter* fp)
+{
+    if (fp->input.x668 & 0x200) {
+        if (fp->input.lstick.y >= p_ftCommonData->x21C) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #ftCo_Attack100_CheckInput
+bool ftCo_Attack100_CheckInput(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (ftData_SpecialHi[fp->kind] == NULL) {
+        return false;
+    }
+    if (fp->x686 == 0) {
+        ftData_SpecialHi[fp->kind](gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_800D69C4
+bool ftCo_800D69C4(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (ftData_SpecialHi[fp->kind] == NULL) {
+        return false;
+    }
+    if (fp->x686 == 0 && fp->x68B >= p_ftCommonData->x1C) {
+        ftData_SpecialAirHi[fp->kind](gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_Attack_800D6A50
+bool ftCo_Attack_800D6A50(Fighter_GObj* gobj)
+{
+    ftCo_DatAttrs* co;
+    Fighter* fp = GET_FIGHTER(gobj);
+    co = &fp->co_attrs;
+    if ((fp->input.x668 & HSD_PAD_A) || (fp->input.x66C & HSD_PAD_A)) {
+        fp->x1A54++;
+    }
+    if (fp->x1A54 >= co->rapid_jab_window && fp->x2218_b2) {
+        fn_800D6AC4(gobj);
+        return true;
+    }
+    return false;
+}
 
-/// #fn_800D6AC4
+void fn_800D6AC4(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    switch (fp->kind) {
+    case FTKIND_GAMEWATCH:
+        ftGw_Attack100Start_Enter(gobj);
+        break;
+    default:
+        fn_800D6B8C(gobj);
+        break;
+    }
+}
 
-/// #ftCo_800D6B00
+void ftCo_800D6B00(Fighter_GObj* gobj, enum_t msid)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!ftpickupitem_80094790(gobj)) {
+        fp->throw_flags = 0;
+        Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+        ftAnim_8006EBA4(gobj);
+        fp->mv.co.attack100.x0 = false;
+        fp->mv.co.attack100.x4 = false;
+    }
+}
 
-/// #fn_800D6B8C
+void fn_800D6B8C(Fighter_GObj* gobj)
+{
+    PAD_STACK(4);
+    ftCo_800D6B00(gobj, ftCo_MS_Attack100Start);
+}
 
-/// #ftCo_Attack100Start_Anim
+void ftCo_Attack100Start_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftCo_MS_Attack100Loop,
+                                  Ft_MF_SkipAttackCount, 0.0F, 1.0F, 0.0F,
+                                  NULL);
+    }
+}
 
-/// #ftCo_800D6C60
+void ftCo_800D6C60(Fighter_GObj* gobj, HSD_GObjEvent callback)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool var_r0;
+    if (fp->cur_anim_frame >= 0.0F && fp->cur_anim_frame < fp->frame_speed_mul)
+    {
+        fp->mv.co.attack100.x0 = true;
+        ft_800892A0(gobj);
+        ft_80089824(gobj);
+    }
+    if (fp->throw_flags_b3) {
+        fp->throw_flags_b3 = false;
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if (var_r0) {
+        if (fp->mv.co.attack100.x0 && !fp->mv.co.attack100.x4) {
+            callback(gobj);
+        } else if (!ftpickupitem_80094790(gobj)) {
+            fp->mv.co.attack100.x4 = false;
+        }
+    }
+}
 
-/// #ftCo_Attack100Loop_Anim
+void ftCo_Attack100Loop_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool var_r0;
+    PAD_STACK(4);
+    if (fp->cur_anim_frame >= 0.0F && fp->cur_anim_frame < fp->frame_speed_mul)
+    {
+        fp->mv.co.attack100.x0 = true;
+        ft_800892A0(gobj);
+        ft_80089824(gobj);
+    }
+    if (fp->throw_flags_b3) {
+        fp->throw_flags_b3 = false;
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if (var_r0) {
+        if (fp->mv.co.attack100.x0 && !fp->mv.co.attack100.x4) {
+            Fighter_ChangeMotionState(gobj, ftCo_MS_Attack100End, 0, 0.0F,
+                                      1.0F, 0.0F, NULL);
+        } else if (!ftpickupitem_80094790(gobj)) {
+            fp->mv.co.attack100.x4 = false;
+        }
+    }
+}
 
-/// #ftCo_Attack100End_Anim
+void ftCo_Attack100End_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
-/// #ftCo_Attack100Loop_IASA
+void ftCo_Attack100Loop_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if ((fp->input.x668 & HSD_PAD_A) || (fp->input.x66C & HSD_PAD_A)) {
+        fp->mv.co.attack100.x4 = true;
+    }
+}
 
-/// #ftCo_Attack100Start_Phys
+void ftCo_Attack100Start_Phys(Fighter_GObj* gobj)
+{
+    ft_80084FA8(gobj);
+}
 
-/// #ftCo_Attack100Loop_Phys
+void ftCo_Attack100Loop_Phys(Fighter_GObj* gobj)
+{
+    ft_80084FA8(gobj);
+}
 
-/// #ftCo_Attack100End_Phys
+void ftCo_Attack100End_Phys(Fighter_GObj* gobj)
+{
+    ft_80084FA8(gobj);
+}
 
-/// #ftCo_Attack100Start_Coll
+void ftCo_Attack100Start_Coll(Fighter_GObj* gobj)
+{
+    ft_80084104(gobj);
+}
 
-/// #ftCo_Attack100Loop_Coll
+void ftCo_Attack100Loop_Coll(Fighter_GObj* gobj)
+{
+    ft_80084104(gobj);
+}
 
-/// #ftCo_Attack100End_Coll
+void ftCo_Attack100End_Coll(Fighter_GObj* gobj)
+{
+    ft_80084104(gobj);
+}
 
-/// #fn_800D6F58
+void fn_800D6F58(Fighter_GObj* gobj, Item_GObj* item_gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_Part part;
+    if (fp->item_gobj != NULL) {
+        fp->x1978 = item_gobj;
+    } else {
+        fp->item_gobj = item_gobj;
+    }
+    ftpickupitem_80094818(gobj, true);
+    if (itGetKind(fp->item_gobj) == It_Kind_WStar) {
+        part = FtPart_TopN;
+    } else {
+        part = fp->ft_data->x8->x10;
+    }
+    pl_8003E854(fp->player_id, fp->x221F_b4, item_gobj);
+    Item_8026AB54(item_gobj, gobj, part);
+    ftpickupitem_8009447C(gobj, item_gobj);
+    {
+        HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x10].joint;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 0, 0x422, jobj);
+    }
+    fp->x2224_b1 = true;
+}
 
-/// #ftCo_800D705C
+bool ftCo_800D705C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool tmp = fp->item_gobj == NULL && (fp->input.held_inputs & HSD_PAD_LR) &&
+               (fp->input.x668 & HSD_PAD_A) && !fp->x2224_b1 &&
+               fp->x683 >= p_ftCommonData->x1C;
+    if (tmp) {
+        fp->x209C = p_ftCommonData->x414;
+        return true;
+    }
+    return false;
+}
 
-/// #ftCo_800D7100
+bool ftCo_800D7100(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    bool tmp = fp->item_gobj == NULL && (fp->input.held_inputs & HSD_PAD_LR) &&
+               (fp->input.x668 & HSD_PAD_A) && !fp->x2224_b1 &&
+               fp->x683 >= p_ftCommonData->x1C;
+    if (tmp) {
+        Item_GObj* item_gobj = ftpickupitem_800942A0(gobj, 1);
+        if (item_gobj != NULL) {
+            fn_800D6F58(gobj, item_gobj);
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #ftCo_800D71D8
+void ftCo_800D71D8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x209C != 0) {
+        Item_GObj* item_gobj = ftpickupitem_800942A0(gobj, 1U);
+        fp->x209C -= 1;
+        if (fp->x209C == 0) {
+            fp->x2224_b1 = true;
+        }
+        if (item_gobj != NULL) {
+            fn_800D6F58(gobj, item_gobj);
+            fp->x209C = 0;
+        }
+    }
+}
 
 /// #ftCo_800D7268
 
@@ -116,13 +378,42 @@
 
 /// #ftCo_800D74A4
 
-/// #ftCo_JumpAerialF1_Anim
+void ftCo_JumpAerialF1_Anim(Fighter_GObj* gobj)
+{
+    ftCo_DatAttrs* co;
+    Fighter* temp_r30 = GET_FIGHTER(gobj);
+    int tmp = temp_r30->x2D0->x0;
+    PAD_STACK(4);
+    co = &temp_r30->co_attrs;
+    ft_800CB6EC(temp_r30, tmp);
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        if (temp_r30->x1968_jumpsUsed >= co->max_jumps) {
+            ftCo_FallAerial_Enter(gobj);
+        } else {
+            ftCo_Fall_Enter(gobj);
+        }
+    }
+}
 
-/// #ftCo_JumpAerialF1_IASA
+void ftCo_JumpAerialF1_IASA(Fighter_GObj* gobj)
+{
+    ftCo_JumpAerial_IASA(gobj);
+}
 
-/// #ftCo_JumpAerialF1_Phys
+void ftCo_JumpAerialF1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_DatAttrs* co = &fp->co_attrs;
+    struct Fighter_x2D0_t* temp_r6 = fp->x2D0;
+    ft_80084E1C(gobj, p_ftCommonData->x258,
+                co->air_drift_stick_mul * temp_r6->xC,
+                co->air_drift_max * temp_r6->x10);
+}
 
-/// #ftCo_JumpAerialF1_Coll
+void ftCo_JumpAerialF1_Coll(Fighter_GObj* gobj)
+{
+    ft_80082F28(gobj);
+}
 
 static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid)
 {
@@ -148,17 +439,35 @@ void ftCo_ItemScopeAirStart_Anim(Fighter_GObj* gobj) {}
 
 /// #fn_800D79B4
 
-/// #ftCo_ItemScopeStart_IASA
+void ftCo_ItemScopeStart_IASA(Fighter_GObj* gobj)
+{
+    fn_800D79B4(gobj, fn_800D7BDC, fn_800D8140);
+}
 
-/// #ftCo_ItemScopeAirStart_IASA
+void ftCo_ItemScopeAirStart_IASA(Fighter_GObj* gobj)
+{
+    fn_800D79B4(gobj, fn_800D7C60, fn_800D81D0);
+}
 
-/// #ftCo_ItemScopeStart_Phys
+void ftCo_ItemScopeStart_Phys(Fighter_GObj* gobj)
+{
+    ftCo_800CDE54(gobj);
+}
 
-/// #ftCo_ItemScopeAirStart_Phys
+void ftCo_ItemScopeAirStart_Phys(Fighter_GObj* gobj)
+{
+    ftCo_800CDE74(gobj);
+}
 
-/// #ftCo_ItemScopeStart_Coll
+void ftCo_ItemScopeStart_Coll(Fighter_GObj* gobj)
+{
+    ft_800841B8(gobj, fn_800D78B0);
+}
 
-/// #ftCo_ItemScopeAirStart_Coll
+void ftCo_ItemScopeAirStart_Coll(Fighter_GObj* gobj)
+{
+    ft_80082C74(gobj, fn_800D7830);
+}
 
 /// #fn_800D7BDC
 
@@ -176,11 +485,20 @@ void ftCo_ItemScopeAirStart_Anim(Fighter_GObj* gobj) {}
 
 /// #ftCo_ItemScopeAirRapid_IASA
 
-/// #ftCo_ItemScopeRapid_Phys
+void ftCo_ItemScopeRapid_Phys(Fighter_GObj* gobj)
+{
+    ftCo_800CDE54(gobj);
+}
 
-/// #ftCo_ItemScopeAirRapid_Phys
+void ftCo_ItemScopeAirRapid_Phys(Fighter_GObj* gobj)
+{
+    ftCo_800CDE74(gobj);
+}
 
-/// #ftCo_ItemScopeRapid_Coll
+void ftCo_ItemScopeRapid_Coll(Fighter_GObj* gobj)
+{
+    ft_800841B8(gobj, fn_800D7D70);
+}
 
 /// #ftCo_ItemScopeAirRapid_Coll
 
@@ -295,9 +613,13 @@ bool ftCo_800D8A38(Fighter_GObj* gobj)
 
 /// #ftCo_800D8B9C
 
-void fn_800D8BFC(Fighter_GObj* arg0)
+void fn_800D8BFC(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftpickupitem_800948A8(gobj, fp->target_item_gobj);
+    fp->x1A64 = NULL;
+    fp->target_item_gobj = NULL;
+    ftpickupitem_80094694(gobj, 0x5D, 1);
 }
 
 void ftCo_800D8C54(Fighter_GObj* gobj, FtMotionId msid)
@@ -327,7 +649,15 @@ void ftCo_Catch_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_CatchDash_Anim
+void ftCo_CatchDash_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!fn_800D9228(gobj) && !fn_800D9930(gobj) &&
+        !ftAnim_IsFramesRemaining(gobj))
+    {
+        ft_8008A2BC(gobj);
+    }
+}
 
 void ftCo_Catch_IASA(Fighter_GObj* gobj) {}
 

@@ -19,6 +19,10 @@ struct ftData_80086060_arg0 {
     s32 unk2C;
 };
 
+extern HSD_GObjEvent ftData_SpecialN[FTKIND_MAX];
+extern HSD_GObjEvent ftData_SpecialLw[FTKIND_MAX];
+extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
+
 /* 085560 */ void ftData_80085560(int idx, int increment);
 /* 0855C8 */ void ftData_800855C8(enum_t id, int slot);
 /* 08572C */ void ftData_8008572C(FighterKind);

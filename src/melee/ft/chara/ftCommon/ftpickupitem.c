@@ -38,14 +38,6 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
-/* 0942A0 */ static Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj,
-                                                     u32 flags);
-/* 09447C */ static bool ftpickupitem_8009447C(Fighter_GObj* gobj,
-                                               Item_GObj* item_gobj);
-/* 094694 */ static void ftpickupitem_80094694(Fighter_GObj* gobj,
-                                               FtMotionId msid, bool loop);
-/* 0948A8 */ static void ftpickupitem_800948A8(Fighter_GObj* gobj,
-                                               Item_GObj* item_gobj);
 /* 094B6C */ static void ftpickupitem_80094B6C(Fighter_GObj* gobj,
                                                Item_GObj* item_gobj);
 
