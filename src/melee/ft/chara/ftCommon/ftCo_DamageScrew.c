@@ -84,7 +84,7 @@ void ftCo_800D3004(Fighter_GObj* gobj)
                                   0.0F, NULL);
     }
     fp->self_vel.x = 0.0F;
-    fp->self_vel.y = fp->co_attrs.x128;
+    fp->self_vel.y = fp->co_attrs.x140;
     fp->self_vel.z = 0.0F;
 }
 

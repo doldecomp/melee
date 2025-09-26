@@ -219,9 +219,8 @@ void ftpickupitem_80094694(Fighter_GObj* gobj, FtMotionId msid, bool loop)
     {
         float anim_spd;
         if (msid == ftCo_MS_HeavyGet) {
-            anim_spd = ftCo_CalcYScaledKnockback(
-                Fighter_804D6524, 1, fp->x34_scale.y,
-                M2C_FIELD(Fighter_804D6524, float*, 8));
+            anim_spd = ftCo_CalcYScaledKnockback(1, fp->x34_scale.y,
+                                                 Fighter_804D6524[2]);
         } else {
             anim_spd = 1;
         }

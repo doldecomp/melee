@@ -1523,7 +1523,7 @@ float ftCommon_GetModelScale(Fighter* fp)
 void ftCommon_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 {
     Vec3 scale;
-    float val = 1.0f / fp->ft_data->x0->x8C;
+    float val = 1.0f / fp->ft_data->x0->model_scaling;
     scale.z = val;
     scale.y = val;
     scale.x = val;
@@ -1708,7 +1708,7 @@ void ftCommon_8007FDA0(HSD_GObj* gobj)
     u8 _[16];
 
     fp = gobj->user_data;
-    temp_r30 = &fp->co_attrs.x120;
+    temp_r30 = &fp->co_attrs.x130;
     phi_f31 = fminf(p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708,
                     p_ftCommonData->x70C);
     temp_f1 = 1.0f / phi_f31;
@@ -1796,10 +1796,10 @@ void ftCommon_80080174(Fighter* fp)
     u8 _[16];
 
     if (fp->x197C != NULL) {
-        it_80294E78(fp->x197C, fp->x34_scale.y * fp->co_attrs.x11C);
+        it_80294E78(fp->x197C, fp->x34_scale.y * fp->co_attrs.x12C);
     }
     if (fp->x1980 != NULL) {
-        v = &fp->co_attrs.x120;
+        v = &fp->co_attrs.x130;
         if ((phi_f2 = p_ftCommonData->x710 * fp->x2024 +
                       p_ftCommonData->x708) > (phi_f3 = p_ftCommonData->x70C))
         {

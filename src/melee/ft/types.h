@@ -605,18 +605,7 @@ typedef struct ftData_x44_t {
 } ftData_x44_t;
 
 struct ftData {
-    /*  +0 */ struct {
-        /*   +0 */ u8 x0[0x88];
-        /*  +88 */ float weight;
-        /*  +8C */ float x8C;
-        /*  +90 */ u8 x90[0xFC - 0x90];
-        /*  +FC */ float xFC;
-        /* +100 */ u8 x100[0x168 - 0x100];
-        /* +168 */ float x168;
-        /* +16C */ int x16C_idx;
-        /* +170 */ u8 x170[0x180 - 0x170];
-        /* +180 */ unsigned char weight_independent_throws_mask;
-    }* x0;
+    /*  +0 */ struct ftCo_DatAttrs* x0;
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct ftData_x8 {
         /*  +0 */ u32 x0;
@@ -659,12 +648,12 @@ struct ftData {
         float x10;
     }* x38;
     /* +3C */ struct UnkFloat6_Camera* x3C;
-    /* +40 */ UNK_T _40;
+    /* +40 */ Vec4* x40;
     /* +44 */ ftData_x44_t* x44;
     /* +48 */ UNK_T* x48_items; ///< @todo might be similar to KirbyHat? see
                                 ///< ftPr_Init_8013C360
     /* +4C */ FtSFX* x4C_sfx;
-    /* +50 */ u8 x50[0x54 - 0x50];
+    /* +50 */ Vec2* x50;
     /* +54 */ int x54;
     /* +58 */ void* x58;
     /* +5C */ HSD_Joint* x5C;
@@ -757,25 +746,25 @@ typedef struct ftCo_DatAttrs {
     /* +10C fp+21C */ float passiveceil_vel_x;
     /* +110 fp+220 */ float trophy_scale;
     /* +114 fp+224 */ Vec3 x114;
-    /* +118 fp+230 */ Vec3 x118;
-    /* +11C fp+23C */ float x11C;
-    /* +120 fp+240 */ Vec3 x120;
-    /* +124 fp+24C */ float x124;
-    /* +128 fp+250 */ float x128;
-    /* +12C fp+254 */ int x12C;
-    /* +130 fp+258 */ float x130;
-    /* +134 fp+25C */ float damageice_ice_size;
-    /* +138 fp+260 */ float x138_damageice_unk;
-    /* +13C fp+264 */ float x13C_damageice_unk;
-    /* +140 fp+268 */ float damageicejump_vel_y;
-    /* +144 fp+26C */ float damageicejump_vel_x_mult;
-    /* +148 fp+270 */ float respawn_platform_scale;
-    /* +14C fp+274 */ float x14C;
-    /* +150 fp+278 */ int x150;
-    /* +154 fp+27C */ int camera_zoom_target_bone;
-    /* +158 fp+280 */ Vec3 x158;
-    /* +15C fp+28C */ float x15C;
-    /* +160 fp+290 */ int weight_dependent_throw_speed_flags;
+    /* +120 fp+230 */ Vec3 x120;
+    /* +12C fp+23C */ float x12C;
+    /* +130 fp+240 */ Vec3 x130;
+    /* +13C fp+24C */ float x13C;
+    /* +140 fp+250 */ float x140;
+    /* +144 fp+254 */ float x144;
+    /* +148 fp+258 */ float x148;
+    /* +14C fp+25C */ float damageice_ice_size;
+    /* +150 fp+260 */ float x150_damageice_unk;
+    /* +154 fp+264 */ float x154_damageice_unk;
+    /* +158 fp+268 */ float damageicejump_vel_y;
+    /* +15C fp+26C */ float damageicejump_vel_x_mult;
+    /* +160 fp+270 */ float respawn_platform_scale;
+    /* +164 fp+274 */ float x164;
+    /* +168 fp+278 */ float x168;
+    /* +16C fp+27C */ int camera_zoom_target_bone;
+    /* +170 fp+280 */ Vec3 x170;
+    /* +17C fp+28C */ float x17C;
+    /* +180 fp+290 */ u8 weight_independent_throws_mask;
 } ftCo_DatAttrs;
 
 struct FighterBone {
