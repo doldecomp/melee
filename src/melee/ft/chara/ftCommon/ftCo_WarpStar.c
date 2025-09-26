@@ -45,7 +45,7 @@ void ftCo_800C4724(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    it_80294430(fp->item_gobj, fp->co_attrs.x14C, fp->x2C4.y);
+    it_80294430(fp->item_gobj, fp->co_attrs.x164, fp->x2C4.y);
     fp->mv.co.warpstar.facing_dir = fp->facing_dir;
     fp->facing_dir = 0;
     fp->mv.co.warpstar.x1C = 120;

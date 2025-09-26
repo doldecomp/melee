@@ -81,7 +81,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     float x_diff = fp0->pos_delta.x - wall_pos.x;
                     x_diff = x_diff < 0 ? -x_diff : x_diff;
 
-                    if (x_diff > fp0->co_attrs.x130) {
+                    if (x_diff > fp0->co_attrs.x148) {
                         // walljump input phase one completed, now start the
                         // walljump input timer and check for the control stick
                         // movement away from the wall in the next phase

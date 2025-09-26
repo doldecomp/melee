@@ -208,8 +208,8 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     yrotn = fp->parts[ftParts_GetBoneIndex(fp, FtPart_YRotN)].joint;
 
     pos.x = 0;
-    pos.y = fp->co_attrs.x13C_damageice_unk;
-    pos.z = fp->co_attrs.x138_damageice_unk;
+    pos.y = fp->co_attrs.x154_damageice_unk;
+    pos.z = fp->co_attrs.x150_damageice_unk;
     PSMTXTrans(spEC, pos.x, pos.y, pos.z);
 
     JObjRotMtx(sp11C, yrotn);

@@ -64,8 +64,8 @@ void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8)
     }
 
     if (fp->x34_scale.y != 1.0F) {
-        accel_mul = ftCo_CalcYScaledKnockback(
-            Fighter_804D6524, accel_mul, fp->x34_scale.y, Fighter_804D6524[3]);
+        accel_mul = ftCo_CalcYScaledKnockback(accel_mul, fp->x34_scale.y,
+                                              Fighter_804D6524[3]);
     }
     if ((u32) fp->x197C != NULL) {
         accel_mul *= *Fighter_804D6520;
