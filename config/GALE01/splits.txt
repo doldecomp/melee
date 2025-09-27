@@ -1012,12 +1012,14 @@ melee/ft/chara/ftCommon/ftCo_SquatRv.c:
 melee/ft/chara/ftCommon/ftCo_Attack100.c:
 	.text       start:0x800D67C4 end:0x800DC750
 	.rodata     start:0x803B7500 end:0x803B7520
-	.data       start:0x803C709C end:0x803C70E0
-	.sdata      start:0x804D3CE8 end:0x804D3D68
+	.data       start:0x803C709C end:0x803C70D0
+	.sdata      start:0x804D3CE8 end:0x804D3D58
 	.sdata2     start:0x804D9008 end:0x804D90F0
 
 melee/ft/chara/ftCommon/ftCo_CaptureCut.c:
 	.text       start:0x800DC750 end:0x800DD100
+	.data       start:0x803C70D0 end:0x803C70E0
+	.sdata      start:0x804D3D58 end:0x804D3D68
 	.sdata2     start:0x804D90F0 end:0x804D90FC
 
 melee/ft/chara/ftCommon/ftCo_Throw.c:
