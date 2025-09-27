@@ -351,6 +351,12 @@ union ftCommon_MotionVars {
         /* fp+2340 */ Item_GObj* x0;
     } captureleadead;
     struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344 */ float x4;
+        /* fp+2348 */ u8 pad_x8[0x18 - 0x8];
+        /* fp+2358 */ HSD_JObj* x18;
+    } capturedamage;
+    struct {
         /* fp+2340 */ bool timer;
         /* fp+2344 */ float x4;
         /* fp+2348 */ Vec3 x8;

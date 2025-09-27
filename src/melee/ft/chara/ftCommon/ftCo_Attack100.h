@@ -3,6 +3,7 @@
 
 #include <melee/ft/forward.h>
 #include <melee/it/forward.h>
+void fn_800DAA40(Fighter_GObj*, Fighter_GObj*);
 
 /* 0D67C4 */ bool ftCo_800D67C4(Fighter*);
 /* 0D6824 */ bool ftCo_800D6824(Fighter_GObj*);
@@ -125,6 +126,7 @@
 /* 0DA824 */ float ftCo_800DA824(Fighter*);
 /* 0DAC70 */ void ftCo_CapturePulledHi_Anim(Fighter_GObj* gobj);
 /* 0DAC74 */ void ftCo_CapturePulledHi_IASA(Fighter_GObj* gobj);
+/* 0DAC78 */ void fn_800DAC78(Fighter_GObj*, Vec3*);
 /* 0DADE8 */ void ftCo_CapturePulledHi_Phys(Fighter_GObj* gobj);
 /* 0DAE94 */ void ftCo_CapturePulledHi_Coll(Fighter_GObj* gobj);
 /* 0DB004 */ void ftCo_CapturePulledLw_Anim(Fighter_GObj* gobj);
@@ -157,10 +159,13 @@
 /* 0DC328 */ void ftCo_CaptureDamageHi_IASA(Fighter_GObj* gobj);
 /* 0DC32C */ void ftCo_CaptureDamageHi_Phys(Fighter_GObj* gobj);
 /* 0DC34C */ void ftCo_CaptureDamageHi_Coll(Fighter_GObj* gobj);
+/* 0DC384 */ void fn_800DC384(Fighter_GObj* gobj);
 /* 0DC3A4 */ void ftCo_800DC3A4(Fighter_GObj* gobj);
+/* 0DC404 */ void fn_800DC404(Fighter_GObj*);
 /* 0DC468 */ void ftCo_CaptureDamageLw_Anim(Fighter_GObj* gobj);
 /* 0DC4AC */ void ftCo_CaptureDamageLw_IASA(Fighter_GObj* gobj);
 /* 0DC4B0 */ void ftCo_CaptureDamageLw_Phys(Fighter_GObj* gobj);
 /* 0DC5EC */ void ftCo_CaptureDamageLw_Coll(Fighter_GObj* gobj);
+/* 0DC624 */ void fn_800DC624(HSD_GObj* gobj);
 
 #endif
