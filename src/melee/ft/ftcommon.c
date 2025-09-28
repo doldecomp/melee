@@ -454,7 +454,7 @@ void ftCommon_8007D28C(Fighter* fp, float arg8)
                       temp_r4->aerial_friction);
 }
 
-void ftCommon_8007D2E8(Fighter* fp, float arg8, float arg9)
+void ftCommon_8007D2E8(Fighter* fp, float arg8, float arg9, float argA)
 {
     float result = arg8;
     if (!arg9) {
@@ -502,7 +502,7 @@ void ftCommon_8007D3A8(Fighter* fp, float arg8, float arg9, float argA)
         phi_f2 = 0;
     }
 
-    ftCommon_8007D2E8(fp, phi_f2, phi_f4);
+    ftCommon_8007D2E8(fp, phi_f2, phi_f4, argA);
 }
 
 void ftCommon_8007D440(Fighter* fp, float val)

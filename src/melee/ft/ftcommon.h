@@ -28,7 +28,7 @@
 /* 07D174 */ void ftCommon_8007D174(Fighter*, float, float, float, float);
 /* 07D268 */ void ftCommon_8007D268(Fighter*);
 /* 07D28C */ void ftCommon_8007D28C(Fighter*, float);
-/* 07D2E8 */ void ftCommon_8007D2E8(Fighter*, float, float);
+/* 07D2E8 */ void ftCommon_8007D2E8(Fighter*, float, float, float);
 /* 07D344 */ void ftCommon_8007D344(Fighter*, float, float, float);
 /* 07D3A8 */ void ftCommon_8007D3A8(Fighter*, float, float, float);
 /* 07D440 */ void ftCommon_8007D440(Fighter*, float);
