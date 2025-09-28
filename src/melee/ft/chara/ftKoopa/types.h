@@ -23,19 +23,22 @@ union ftKoopa_MotionVars {
         /* fp+2344 */ bool x4;
         /* fp+2348 */ int facing_dir;
         /* fp+2348 */ bool xC;
+        /* fp+234C */ s32 x10;
+        /* fp+2350 */ s32 x14;
+        /* fp+2354 */ s32 x18;
     } specials;
 };
 
 typedef struct _ftKoopaAttributes {
     float x0;
-    u32 x4;
+    s32 x4;
     float x8;
     float xC;
     float x10;
     float x14;
     float x18;
     float x1C;
-    u32 x20;
+    s32 x20;
     float x24;
     float x28;
     u32 x2C;
