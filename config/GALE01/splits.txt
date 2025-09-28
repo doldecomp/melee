@@ -342,14 +342,16 @@ melee/ft/ft_081B.c:
 
 melee/ft/ft_0852.c:
 	.text       start:0x8008521C end:0x80085560
-	.data       start:0x803C0EC0 end:0x803C0FC8
 	.bss        start:0x804598B8 end:0x80459A68
 	.sdata      start:0x804D3AA8 end:0x804D3AB8
 
 melee/ft/ftdata.c:
 	.text       start:0x80085560 end:0x800860C4
-	.data       start:0x803C0FC8 end:0x803C5460
+	.data       start:0x803C0EC0 end:0x803C2800
 	.sdata      start:0x804D3AB8 end:0x804D3AC8
+
+melee/ft/ftmotionstates.c:
+	.data       start:0x803C2800 end:0x803C5460
 
 melee/ft/ftlib.c:
 	.text       start:0x800860C4 end:0x800877F8

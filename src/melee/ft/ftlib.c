@@ -36,8 +36,6 @@
 #include <baselib/random.h>
 #include <baselib/rumble.h>
 
-extern s8 ftData_UnkBytePerCharacter[];
-
 s32 ftLib_800860C4(void)
 {
     s32 ret = 0;

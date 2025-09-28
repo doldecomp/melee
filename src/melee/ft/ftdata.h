@@ -10,35 +10,26 @@
 
 #include <baselib/forward.h>
 
-struct ftData_80086060_arg0 {
-    u32 unk0;
-    s32 unk4;
-    s32 unk8;
-    u8 unkC;
-    u8 pad[0x20];
-    s32 unk2C;
-};
-
 extern HSD_GObjEvent ftData_SpecialN[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialLw[FTKIND_MAX];
 extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
 
 /* 085560 */ void ftData_80085560(int idx, int increment);
-/* 0855C8 */ void ftData_800855C8(enum_t id, int slot);
+/* 0855C8 */ void ftData_800855C8(FighterKind kind, u8 color);
 /* 08572C */ void ftData_8008572C(FighterKind);
-/* 08578C */ void ftData_8008578C(enum_t id, int slot);
-/* 0857E0 */ void ftData_800857E0(bool);
+/* 08578C */ void ftData_8008578C(int, u8 color);
+/* 0857E0 */ void ftData_800857E0(FighterKind);
 /* 085820 */ void ftData_80085820(FighterKind, int costume_id);
 /* 0858E4 */ void ftData_800858E4(FighterKind, int costume_id);
 /* 0859A8 */ void ftData_800859A8(Fighter*);
-/* 085A14 */ void ftData_80085A14(bool);
+/* 085A14 */ void ftData_80085A14(FighterKind);
 /* 085B10 */ void ftData_80085B10(Fighter*);
 /* 085B98 */ void ftData_80085B98(Fighter*, int, int);
 /* 085CD8 */ void ftData_80085CD8(Fighter*, Fighter*, enum_t msid);
 /* 085E50 */ FigaTree* ftData_80085E50(Fighter*, enum_t msid);
 /* 085FD4 */ struct ftData_80085FD4_ret* ftData_80085FD4(Fighter* fp,
                                                          FtMotionId msid);
-/* 086060 */ Fighter* ftData_80086060(struct ftData_80086060_arg0* arg0);
+/* 086060 */ Fighter* ftData_80086060(Fighter* arg0);
 /* 3C10D0 */ extern Event ftData_Table_Unk1[FTKIND_MAX];
 /* 3C1154 */ extern HSD_GObjEvent ftData_OnLoad[FTKIND_MAX];
 /* 3C11D8 */ extern HSD_GObjEvent ftData_OnDeath[FTKIND_MAX];
@@ -58,7 +49,7 @@ extern HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX];
 /* 3C24EC */ extern Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX];
 /* 3C2570 */ extern Fighter_UnkPtrEvent ftData_UnkDemoCallbacks0[FTKIND_MAX];
 /* 3C25F4 */ extern ftData_UnkCountStruct ftData_UnkIntPairs[FTKIND_MAX];
-/* 3C26FC */ extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
+/* 3C26FC */ extern u8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 /* 3C2800 */ extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 /* 3C52A0 */ extern MotionState ftData_803C52A0[14];
 

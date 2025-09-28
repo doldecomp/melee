@@ -3200,7 +3200,10 @@ void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
 
 /// #ftKb_SpecialN_800EED50
 
-/// #ftKb_Init_UnkMotionStates5
+void ftKb_Init_UnkMotionStates5(void)
+{
+    Player_80031DC8(ftKb_SpecialN_800EED50);
+}
 
 /// #ftKb_SpecialN_800EEEC4
 
