@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -17,7 +18,7 @@ func main() {
 	log.SetFlags(0)
 	var typeName string
 	var fix bool
-	var conservative, onlyMatched bool
+	var conservative, seqCandidates bool
 	root := flagg.Root
 	rootDir := root.String("root", "../../", "root directory containing C sources and asm")
 	cmdFindFns := flagg.New("findfns", "Find function types to fix")
@@ -29,7 +30,7 @@ func main() {
 	cmdRename.StringVar(&typeName, "type", "", "type of struct to derive names from")
 	cmdUnk := flagg.New("unk", "Search for UNK_RET functions in asm data")
 	cmdOpSeq := flagg.New("opseq", "Search for a sequence of opcodes")
-	cmdOpSeq.BoolVar(&onlyMatched, "m", true, "only print functions that are 100% matched")
+	cmdOpSeq.BoolVar(&seqCandidates, "candidates", false, "list non-matching candidates instead of matching functions")
 	cmd := flagg.Parse(flagg.Tree{
 		Cmd: root,
 		Sub: []flagg.Tree{
@@ -40,8 +41,6 @@ func main() {
 			{Cmd: cmdOpSeq},
 		},
 	})
-
-	report := loadReport(filepath.Join(*rootDir, "build", "GALE01", "report.json"))
 
 	// parse source and asm files
 	srcDir := filepath.Join(*rootDir, "src", "melee")
@@ -55,7 +54,6 @@ func main() {
 	if len(asmFiles) == 0 {
 		log.Fatalln("No asm files found in", asmDir)
 	}
-	fmt.Println("Sources: ", len(hFiles), ".h files,", len(cFiles), ".c files,", len(asmFiles), ".s files")
 	tables := extractAsmTables(asmFiles)
 
 	visitStructs := func(typeName string, st CStructType, fn func(string, string, int, *CStructValue)) {
@@ -333,9 +331,97 @@ func main() {
 			cmd.Usage()
 			return
 		}
-		ops := bytes.Split([]byte(cmd.Arg(0)), []byte(","))
-		for i := range ops {
-			ops[i] = append([]byte("*/	"), bytes.TrimSpace(ops[i])...)
+
+		report := loadReport(*rootDir)
+
+		var ops [][]byte
+		if _, err := os.Stat(cmd.Arg(0)); err == nil {
+			content, err := os.ReadFile(cmd.Arg(0))
+			if err != nil {
+				log.Fatalln("Failed to read file:", cmd.Arg(0), err)
+			}
+			ops = bytes.Split(bytes.TrimSpace(content), []byte("\n"))
+		} else {
+			ops = bytes.Split([]byte(cmd.Arg(0)), []byte(","))
+		}
+
+		matchOp := func(line []byte, op []byte, vars map[string]string) bool {
+			_, line, _ = bytes.Cut(line, []byte("*/\t"))
+			lineParts := bytes.Fields(line)
+			opParts := bytes.Fields(op)
+			if len(lineParts) == 0 || !bytes.Equal(lineParts[0], opParts[0]) {
+				return false
+			} else if len(opParts) == 1 {
+				return true
+			} else if len(lineParts) != len(opParts) {
+				return false
+			}
+			for i := 1; i < len(lineParts); i++ {
+				lp := bytes.TrimSuffix(lineParts[i], []byte(","))
+				op := bytes.TrimSuffix(opParts[i], []byte(","))
+				if bytes.Equal(op, []byte("_")) {
+					continue
+				}
+				v, ok := vars[string(op)]
+				if !ok {
+					vars[string(op)] = string(lp)
+				} else if v != string(lp) {
+					return false
+				}
+			}
+			return true
+		}
+		matchLines := func(lines [][]byte) bool {
+			if bytes.HasPrefix(lines[0], []byte(".L_")) {
+				return false
+			}
+			vars := make(map[string]string)
+			skip := 0
+			for j := 0; j < len(ops); j++ {
+				if skip+j >= len(lines) {
+					return false
+				}
+				for bytes.HasPrefix(lines[skip+j], []byte(".L_")) {
+					skip++
+				}
+				if !matchOp(lines[skip+j], ops[j], vars) {
+					return false
+				}
+			}
+			return true
+		}
+		locateFuncDef := func(name string) string {
+			for _, path := range cFiles {
+				content, err := os.ReadFile(path)
+				if err != nil {
+					return err.Error()
+				}
+				lines := bytes.Split(content, []byte("\n"))
+				for i, line := range lines {
+					off := bytes.Index(line, []byte(name))
+					if off == -1 {
+						continue
+					}
+					if off == 0 || bytes.Contains(line, []byte("/// #"+name)) {
+						return fmt.Sprintf("%s:%d", path, i+1)
+					}
+					// look for a type immediately prior
+					parts := bytes.Fields(line[:off])
+					ok := len(parts) > 0
+					for _, p := range parts {
+						// each part should start with a letter
+						c := p[0]
+						if !(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_' || c == '*') {
+							ok = false
+							break
+						}
+					}
+					if ok {
+						return fmt.Sprintf("%s:%d", path, i+1)
+					}
+				}
+			}
+			return "(no definition or placeholder for " + name + ")"
 		}
 
 		var results [][2]string
@@ -346,23 +432,12 @@ func main() {
 			}
 			lines := bytes.Split(contents, []byte("\n"))
 			var decl []byte
-			for i := 0; i < len(lines)-len(ops); i++ {
+			for i := range lines {
 				if bytes.HasPrefix(lines[i], []byte(".fn")) {
 					decl, _, _ = bytes.Cut(bytes.TrimPrefix(lines[i], []byte(".fn ")), []byte(","))
 				}
-				match := true
-				for j, op := range ops {
-					if !bytes.Contains(lines[i+j], op) {
-						match = false
-						break
-					}
-				}
-				if match {
-					if onlyMatched && !report.isMatched(string(decl)) {
-						continue
-					}
-					s := fmt.Sprintf("%s:%d", path, i+1)
-					results = append(results, [2]string{s, string(decl)})
+				if matchLines(lines[i:]) && (seqCandidates == !report.isMatched(string(decl))) {
+					results = append(results, [2]string{fmt.Sprintf("%s:%d", path, i+1), string(decl)})
 				}
 			}
 		}
@@ -370,7 +445,7 @@ func main() {
 			return report.size(results[i][1]) < report.size(results[j][1])
 		})
 		for _, res := range results {
-			fmt.Printf("%4d %s\n", report.size(res[1]), res[0])
+			fmt.Printf("%s %s\n", res[0], locateFuncDef(res[1]))
 		}
 	}
 }
@@ -455,10 +530,16 @@ func (mr *MatchReport) size(fnName string) int {
 	return mr.matches[fnName].Size
 }
 
-func loadReport(path string) *MatchReport {
-	content, err := os.ReadFile(path)
+func loadReport(root string) *MatchReport {
+	// ensure report is up-to-date
+	if out, err := exec.Command("ninja", "-C", root).CombinedOutput(); err != nil {
+		fmt.Printf("Ninja output:\n%s\n", out)
+		log.Fatalf("Failed to run ninja: %v", err)
+	}
+
+	content, err := os.ReadFile(filepath.Join(root, "build", "GALE01", "report.json"))
 	if err != nil {
-		log.Fatalf("Failed to read report file %s: %v", path, err)
+		log.Fatalf("Failed to read report file: %v", err)
 	}
 	var report struct {
 		Units []struct {
@@ -467,7 +548,7 @@ func loadReport(path string) *MatchReport {
 		}
 	}
 	if err := json.Unmarshal(content, &report); err != nil {
-		log.Fatalf("Failed to unmarshal report file %s: %v", path, err)
+		log.Fatalf("Failed to unmarshal report file: %v", err)
 	}
 	matches := make(map[string]MatchReportFunction)
 	for _, unit := range report.Units {
