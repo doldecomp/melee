@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -16,7 +17,7 @@ func main() {
 	log.SetFlags(0)
 	var typeName string
 	var fix bool
-	var conservative bool
+	var conservative, onlyMatched bool
 	root := flagg.Root
 	rootDir := root.String("root", "../../", "root directory containing C sources and asm")
 	cmdFindFns := flagg.New("findfns", "Find function types to fix")
@@ -27,6 +28,8 @@ func main() {
 	cmdRename := flagg.New("rename", "Rename anonymous functions based on hardcoded patterns")
 	cmdRename.StringVar(&typeName, "type", "", "type of struct to derive names from")
 	cmdUnk := flagg.New("unk", "Search for UNK_RET functions in asm data")
+	cmdOpSeq := flagg.New("opseq", "Search for a sequence of opcodes")
+	cmdOpSeq.BoolVar(&onlyMatched, "m", true, "only print functions that are 100% matched")
 	cmd := flagg.Parse(flagg.Tree{
 		Cmd: root,
 		Sub: []flagg.Tree{
@@ -34,8 +37,11 @@ func main() {
 			{Cmd: cmdFixFns},
 			{Cmd: cmdRename},
 			{Cmd: cmdUnk},
+			{Cmd: cmdOpSeq},
 		},
 	})
+
+	report := loadReport(filepath.Join(*rootDir, "build", "GALE01", "report.json"))
 
 	// parse source and asm files
 	srcDir := filepath.Join(*rootDir, "src", "melee")
@@ -321,6 +327,51 @@ func main() {
 		for _, name := range tables {
 			fmt.Println(name)
 		}
+
+	case cmdOpSeq:
+		if cmd.NArg() != 1 {
+			cmd.Usage()
+			return
+		}
+		ops := bytes.Split([]byte(cmd.Arg(0)), []byte(","))
+		for i := range ops {
+			ops[i] = append([]byte("*/	"), bytes.TrimSpace(ops[i])...)
+		}
+
+		var results [][2]string
+		for _, path := range asmFiles {
+			contents, err := os.ReadFile(path)
+			if err != nil {
+				log.Fatalln("Failed to read file:", path, err)
+			}
+			lines := bytes.Split(contents, []byte("\n"))
+			var decl []byte
+			for i := 0; i < len(lines)-len(ops); i++ {
+				if bytes.HasPrefix(lines[i], []byte(".fn")) {
+					decl, _, _ = bytes.Cut(bytes.TrimPrefix(lines[i], []byte(".fn ")), []byte(","))
+				}
+				match := true
+				for j, op := range ops {
+					if !bytes.Contains(lines[i+j], op) {
+						match = false
+						break
+					}
+				}
+				if match {
+					if onlyMatched && !report.isMatched(string(decl)) {
+						continue
+					}
+					s := fmt.Sprintf("%s:%d", path, i+1)
+					results = append(results, [2]string{s, string(decl)})
+				}
+			}
+		}
+		sort.Slice(results, func(i, j int) bool {
+			return report.size(results[i][1]) < report.size(results[j][1])
+		})
+		for _, res := range results {
+			fmt.Printf("%4d %s\n", report.size(res[1]), res[0])
+		}
 	}
 }
 
@@ -383,4 +434,46 @@ func extractAsmTables(paths []string) map[string][]AsmTableEntry {
 		}
 	}
 	return tables
+}
+
+type MatchReportFunction struct {
+	Name         string  `json:"name"`
+	Size         int     `json:"size,string"`
+	MatchPercent float64 `json:"fuzzy_match_percent"`
+}
+
+type MatchReport struct {
+	matches map[string]MatchReportFunction
+}
+
+func (mr *MatchReport) isMatched(fnName string) bool {
+	f, ok := mr.matches[fnName]
+	return ok && f.MatchPercent == 100
+}
+
+func (mr *MatchReport) size(fnName string) int {
+	return mr.matches[fnName].Size
+}
+
+func loadReport(path string) *MatchReport {
+	content, err := os.ReadFile(path)
+	if err != nil {
+		log.Fatalf("Failed to read report file %s: %v", path, err)
+	}
+	var report struct {
+		Units []struct {
+			Name      string
+			Functions []MatchReportFunction
+		}
+	}
+	if err := json.Unmarshal(content, &report); err != nil {
+		log.Fatalf("Failed to unmarshal report file %s: %v", path, err)
+	}
+	matches := make(map[string]MatchReportFunction)
+	for _, unit := range report.Units {
+		for _, fn := range unit.Functions {
+			matches[fn.Name] = fn
+		}
+	}
+	return &MatchReport{matches: matches}
 }
