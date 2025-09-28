@@ -1313,12 +1313,13 @@ melee/ft/chara/ftPopo/ftPp_SpecialN.c:
 
 melee/ft/chara/ftPopo/ftPp_SpecialS.c:
 	.text       start:0x8011F68C end:0x80122EDC
+	.data       start:0x803CD7F8 end:0x803CD838
 	.sdata      start:0x804D3E10 end:0x804D3E20
 	.sdata2     start:0x804D9848 end:0x804D9898
 
 melee/ft/chara/ftNana/ftNn_Init.c:
 	.text       start:0x80122EDC end:0x801243AC
-	.data       start:0x803CD7F8 end:0x803CDD5C
+	.data       start:0x803CD838 end:0x803CDD5C
 	.sdata2     start:0x804D9898 end:0x804D98F0
 
 melee/ft/chara/ftNana/ftNn_Unk0.c:

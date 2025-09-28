@@ -26,6 +26,10 @@
 /* 120854 */ void ftPp_SpecialS2_Coll(Fighter_GObj* gobj);
 /* 120A48 */ void ftPp_SpecialAirS1_Coll(Fighter_GObj* gobj);
 /* 120C58 */ void ftPp_SpecialAirS2_Coll(Fighter_GObj* gobj);
+/* 120E68 */ void ftPp_SpecialS_80120E68(Fighter_GObj* gobj);
+/* 120FE0 */ bool ftPp_SpecialS_80120FE0(Fighter_GObj* gobj);
+/* 1210C8 */ void ftPp_SpecialS_801210C8(Fighter_GObj* gobj);
+/* 12114C */ void ftPp_SpecialS_8012114C(Fighter_GObj* gobj);
 /* 121164 */ void ftPp_SpecialS_80121164(Fighter_GObj* gobj);
 /* 1221AC */ void ftPp_SpecialHiThrow_1_IASA(Fighter_GObj* gobj);
 /* 1221B4 */ void ftPp_SpecialHiThrow_1_Phys(Fighter_GObj* gobj);

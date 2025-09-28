@@ -12,7 +12,7 @@ struct ftPopo_FighterVars {
     /* 0x2230:0 */ u8 x2230_b0 : 1;
     /* 0x2231 */ u8 filler_x2231[3];
     /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
+    /* 0x2238 */ Item_GObj* x2238;
     /* 0x223C */ u32 x223C;
     /* 0x2240 */ Vec x2240;
     /* 0x224C */ u32 x224C;
@@ -32,9 +32,27 @@ typedef struct ftIceClimberAttributes {
     float x24;
     float x28;
     float x2C;
-    u8 _30[0x68 - 0x30];
+    float x30;
+    float x34;
+    float x38;
+    float x3C;
+    float x40;
+    float x44;
+    float x48;
+    float x4C;
+    float x50;
+    float x54;
+    float x58;
+    float x5C;
+    float x60;
+    float x64;
     int x68;
-    u8 _6C[0xB0 - 0x6C];
+    float x6C;
+    float x70;
+    u8 _74[0x94 - 0x74];
+    float x94;
+    float x98;
+    u8 _9C[0xB0 - 0x9C];
     float xB0;
     float xB4;
     u8 _B8[0xC4 - 0xB8];
@@ -60,11 +78,14 @@ union ftPp_MotionVars {
     struct ftPp_SpecialSVars {
         /* fp+2340 */ float x0;
         /* fp+2344 */ int x4;
-        /* fp+2348 */ int x8;
+        /* fp+2348 */ struct ftPp_SpecialSVars_x8_t {
+            int x0;
+            HSD_GObj* x4;
+        }* x8;
         /* fp+234C */ int xC;
         /* fp+2350 */ int x10;
         /* fp+2354 */ int x14;
-        /* fp+2358 */ UNK_T x18;
+        /* fp+2358 */ int x18;
         /* fp+235C */ float x1C;
     } specials;
     struct {
