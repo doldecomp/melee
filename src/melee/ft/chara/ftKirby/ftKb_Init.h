@@ -32,9 +32,9 @@
 /* 0EEB7C */ void ftKb_Init_OnKnockbackExit(Fighter_GObj* gobj);
 /* 0EEBC0 */ void ftKb_Init_UnkDemoCallbacks0(int, int*, int*);
 /* 0EEBF8 */ char* ftKb_Init_GetMotionFileString(enum_t);
-/* 0EEC34 */ void ftKb_SpecialN_800EEC34(Fighter_GObj* gobj);
+/* 0EEC34 */ void ftKb_SpecialN_800EEC34(int, int, int);
 /* 0EED50 */ void ftKb_SpecialN_800EED50(s32, s32);
-/* 0EEE9C */ void ftKb_Init_UnkMotionStates5(Fighter_GObj* gobj);
+/* 0EEE9C */ void ftKb_Init_UnkMotionStates5(void);
 /* 0EEEC4 */ void ftKb_SpecialN_800EEEC4(Fighter_GObj* gobj,
                                          FighterKind victim_kind);
 /* 0EEF04 */ void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int, Mtx);

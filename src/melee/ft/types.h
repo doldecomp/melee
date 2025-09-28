@@ -876,12 +876,12 @@ struct MotionState {
 };
 
 struct S_TEMP4 {
-    s32 x0;
+    char* x0;
     s32 x4;
     s32 x8;
     ftSubactionList* xC;
     s32 x10_animCurrFlags;
-    s32 x14;
+    u32 x14;
 };
 
 struct Fighter_CostumeStrings {
@@ -1063,7 +1063,7 @@ struct Fighter_x1A88_t {
 STATIC_ASSERT(sizeof(struct Fighter_x1A88_t) == 0x57C);
 
 struct Fighter_x59C_t {
-    char pad_0[0x8000];
+    u8 x0[0x8000];
 };
 STATIC_ASSERT(sizeof(struct Fighter_x59C_t) == 0x8000);
 
@@ -1165,7 +1165,7 @@ struct Fighter {
     /*  fp+488 */ ColorOverlay x488;
     /*  fp+508 */ ColorOverlay x508;
     /*  fp+588 */ HSD_LObj* x588;
-    /*  fp+58C */ s32 x58C;
+    /*  fp+58C */ u32 x58C;
     /*  fp+590 */ FigaTree* x590;
     /*  fp+594 */ union {
         struct {
@@ -1190,7 +1190,7 @@ struct Fighter {
         };
         /* fp+594 */ s32 x594_s32;
     };
-    /*  fp+598 */ s32 x598;
+    /*  fp+598 */ FigaTree* x598;
     /*  fp+59C */ struct Fighter_x59C_t* x59C;
     /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
     /*  fp+5A4 */ UNK_T x5A4;
@@ -1217,7 +1217,7 @@ struct Fighter {
     /*  fp+619 */ u8 x619_costume_id;
     /*  fp+61A */ u8 x61A_controller_index;
     /*  fp+61B */ u8 team;
-    /*  fp+61C */ u8 x61C;
+    /*  fp+61C */ s8 x61C;
     /*  fp+61D */ u8 x61D;
     /*  fp+61E */ u8 filler_x61E[0x620 - 0x61E];
     /*  fp+620 */ struct {
@@ -1817,9 +1817,9 @@ typedef struct ftData_UnkModelStruct {
 } ftData_UnkModelStruct;
 
 struct ftData_80085FD4_ret {
-    /* +0 */ UNK_T x0;
+    /* +0 */ const char* x0;
     /* +4 */ UNK_T x4;
-    /* +8 */ UNK_T x8;
+    /* +8 */ size_t x8;
     /* +C */ UNK_T xC;
     /* +10:0 */ u8 x10_b0 : 1;
     /* +10:1 */ u8 x10_b1 : 1;
