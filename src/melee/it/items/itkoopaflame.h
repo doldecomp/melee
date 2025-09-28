@@ -7,6 +7,8 @@
 
 #include "it/items/types.h"
 
+/* 2ACBA0 */ Item_GObj* it_802ACBA0(Item_GObj* arg0, Vec3* arg1, f32 farg1, bool arg2,
+                                    s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 /* 2AD2E8 */ bool it_2725_Logic111_DmgDealt(Item_GObj*);
 /* 2AD2F0 */ bool it_2725_Logic111_Reflected(Item_GObj*);
 /* 2AD384 */ bool it_2725_Logic111_Clanked(Item_GObj*);

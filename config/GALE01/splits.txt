@@ -1405,16 +1405,26 @@ melee/ft/chara/ftYoshi/ftYs_SpecialS.c:
 	.sdata2     start:0x804D9A68 end:0x804D9AC8
 
 melee/ft/chara/ftKoopa/ftKp_Init.c:
-	.text       start:0x80132A0C end:0x8013383C
+	.text       start:0x80132A0C end:0x80132EFC
 	.data       start:0x803CEDC0 end:0x803CF2A0
 	.sdata2     start:0x804D9AC8 end:0x804D9AD0
 
-melee/ft/chara/ftKoopa/ftKp_Unk1.c:
-	.data       start:0x803CF2A0 end:0x803CF420
-
 melee/ft/chara/ftKoopa/ftKp_SpecialS.c:
-	.text       start:0x8013383C end:0x80136258
-	.sdata2     start:0x804D9AD0 end:0x804D9B08
+	.text       start:0x80132EFC end:0x80134518
+	.sdata2     start:0x804D9AD0 end:0x804D9AE0
+
+melee/ft/chara/ftKoopa/ftKp_SpecialLw.c:
+	.text       start:0x80134518 end:0x80134ACC
+	.sdata2     start:0x804D9AE0 end:0x804D9AF0
+
+melee/ft/chara/ftKoopa/ftKp_SpecialN.c:
+	.text       start:0x80134ACC end:0x80135A2C
+	.data       start:0x803CF2A0 end:0x803CF420
+	.sdata2     start:0x804D9AF0 end:0x804D9B00
+
+melee/ft/chara/ftKoopa/ftKp_SpecialHi.c:
+	.text       start:0x80135A2C end:0x80136258
+	.sdata2     start:0x804D9B00 end:0x804D9B08
 
 melee/ft/chara/ftMars/ftMs_Init.c:
 	.text       start:0x80136258 end:0x80136744

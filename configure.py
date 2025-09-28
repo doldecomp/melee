@@ -790,8 +790,10 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialS.c"),
             # Bowser
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Init.c"),
-            Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Unk1.c"),
-            Object(NonMatching, "melee/ft/chara/ftKoopa/ftKp_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftKoopa/ftKp_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftKoopa/ftKp_SpecialLw.c"),
+            Object(Matching, "melee/ft/chara/ftKoopa/ftKp_SpecialN.c"),
+            Object(Matching, "melee/ft/chara/ftKoopa/ftKp_SpecialHi.c"),
             # Marth
             Object(Matching, "melee/ft/chara/ftMars/ftMs_Init.c"),
             Object(Matching, "melee/ft/chara/ftMars/ftMs_SpecialN.c"),
