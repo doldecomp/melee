@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strings"
 	"time"
@@ -31,6 +32,7 @@ func main() {
 	cmdUnk := flagg.New("unk", "Search for UNK_RET functions in asm data")
 	cmdOpSeq := flagg.New("opseq", "Search for a sequence of opcodes")
 	cmdOpSeq.BoolVar(&seqCandidates, "candidates", false, "list non-matching candidates instead of matching functions")
+	cmdDups := flagg.New("dups", "Find duplicated functions")
 	cmd := flagg.Parse(flagg.Tree{
 		Cmd: root,
 		Sub: []flagg.Tree{
@@ -39,6 +41,7 @@ func main() {
 			{Cmd: cmdRename},
 			{Cmd: cmdUnk},
 			{Cmd: cmdOpSeq},
+			{Cmd: cmdDups},
 		},
 	})
 
@@ -457,6 +460,114 @@ func main() {
 		})
 		for _, res := range results {
 			fmt.Printf("%s %s\n", res[0], locateFuncDef(res[1]))
+		}
+
+	case cmdDups:
+		if cmd.NArg() > 1 {
+			cmd.Usage()
+			return
+		}
+
+		report := loadReport(rootDir)
+
+		normBody := func(lines [][]byte) string {
+			var sb strings.Builder
+			for _, line := range lines {
+				if bytes.HasPrefix(line, []byte(".endfn")) {
+					break
+				} else if bytes.HasPrefix(line, []byte(".L_")) {
+					continue
+				}
+				_, line, _ = bytes.Cut(line, []byte("*/\t"))
+				parts := bytes.Fields(line)
+				if len(parts) == 0 {
+					continue
+				}
+				sb.Write(parts[0])
+				sb.WriteByte('\n')
+			}
+			return sb.String()
+		}
+		fns := make(map[string][]string)
+		for _, path := range asmFiles {
+			contents, err := os.ReadFile(path)
+			if err != nil {
+				log.Fatalln("Failed to read file:", path, err)
+			}
+			groups := bytes.Split(contents, []byte("\n.fn "))
+			for _, group := range groups[1:] {
+				lines := bytes.Split(group, []byte("\n"))
+				name, _, _ := bytes.Cut(lines[0], []byte(","))
+				body := normBody(lines[1:])
+				fns[body] = append(fns[body], string(name))
+			}
+		}
+
+		type fnBody struct {
+			size       int
+			refs       []string
+			candidates []string
+		}
+		candBytes := func(b fnBody) int {
+			return len(b.candidates) * b.size
+		}
+		var bodies []fnBody
+		for _, names := range fns {
+			var fb fnBody
+			for _, name := range names {
+				if report.isMatched(name) {
+					fb.refs = append(fb.refs, name)
+					fb.size = report.size(name)
+				} else {
+					fb.candidates = append(fb.candidates, name)
+					fb.size = report.size(name)
+				}
+			}
+			if len(fb.candidates) > 0 && (len(fb.refs) > 0 || len(fb.candidates) > 1) {
+				bodies = append(bodies, fb)
+			}
+		}
+
+		switch cmd.NArg() {
+		case 0:
+			sort.Slice(bodies, func(i, j int) bool {
+				return candBytes(bodies[i]) > candBytes(bodies[j])
+			})
+			for _, body := range bodies {
+				var name string
+				if len(body.refs) > 0 {
+					name = body.refs[0]
+				} else if len(body.candidates) > 0 {
+					name = body.candidates[0]
+				}
+				fmt.Printf("%v: %v matched, %v unmatched (+%.2f KB)\n", name, len(body.refs), len(body.candidates), float64(candBytes(body))/1024)
+			}
+		case 1:
+			target := cmd.Arg(0)
+			for _, body := range bodies {
+				if slices.Contains(append(body.refs, body.candidates...), target) {
+					for i := range body.refs {
+						if body.refs[i] == target {
+							body.refs = slices.Delete(body.refs, i, i+1)
+							break
+						}
+					}
+					for i := range body.candidates {
+						if body.candidates[i] == target {
+							body.candidates = slices.Delete(body.candidates, i, i+1)
+							break
+						}
+					}
+					if len(body.refs) > 0 {
+						fmt.Println("Matched duplicates:", strings.Join(body.refs, ", "))
+					}
+					if len(body.candidates) > 0 {
+						fmt.Println("Unmatched duplicates:", strings.Join(body.candidates, ", "))
+					}
+					return
+				}
+			}
+			fmt.Printf("Function %q has no duplicates.\n", target)
 		}
 	}
 }
