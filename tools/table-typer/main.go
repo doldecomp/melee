@@ -20,7 +20,6 @@ func main() {
 	var fix bool
 	var conservative, seqCandidates bool
 	root := flagg.Root
-	rootDir := root.String("root", "../../", "root directory containing C sources and asm")
 	cmdFindFns := flagg.New("findfns", "Find function types to fix")
 	cmdFindFns.StringVar(&typeName, "type", "", "Enumerate functions in tables with a known type")
 	cmdFindFns.BoolVar(&fix, "fix", false, "Immediately apply fixes instead of listing them")
@@ -42,14 +41,25 @@ func main() {
 		},
 	})
 
+	// locate root dir
+	rootDir := "."
+	for i := 0; ; i++ {
+		if _, err := os.Stat(filepath.Join(rootDir, "src", "melee")); err == nil {
+			break
+		} else if i > 10 {
+			log.Fatalln("Failed to locate root directory. Please run this tool within the project directory.")
+		}
+		rootDir = filepath.Join(rootDir, "..")
+	}
+
 	// parse source and asm files
-	srcDir := filepath.Join(*rootDir, "src", "melee")
+	srcDir := filepath.Join(rootDir, "src", "melee")
 	hFiles := findFiles(srcDir, ".h")
 	cFiles := findFiles(srcDir, ".c")
 	if len(hFiles)+len(cFiles) == 0 {
-		log.Fatalln("No source files found in", *rootDir)
+		log.Fatalln("No source files found in", rootDir)
 	}
-	asmDir := filepath.Join(*rootDir, "build", "GALE01", "asm", "melee")
+	asmDir := filepath.Join(rootDir, "build", "GALE01", "asm", "melee")
 	asmFiles := findFiles(asmDir, ".s")
 	if len(asmFiles) == 0 {
 		log.Fatalln("No asm files found in", asmDir)
@@ -267,7 +277,7 @@ func main() {
 			for _, path := range append(append(hFiles, cFiles...), asmFiles...) {
 				renameFile(path)
 			}
-			renameFile(filepath.Join(*rootDir, "config", "GALE01", "symbols.txt"))
+			renameFile(filepath.Join(rootDir, "config", "GALE01", "symbols.txt"))
 
 			fmt.Println()
 			if totalFiles > 0 {
@@ -332,7 +342,7 @@ func main() {
 			return
 		}
 
-		report := loadReport(*rootDir)
+		report := loadReport(rootDir)
 
 		var ops [][]byte
 		if _, err := os.Stat(cmd.Arg(0)); err == nil {
