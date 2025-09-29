@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"lukechampine.com/flagg"
 )
@@ -542,9 +543,17 @@ func (mr *MatchReport) size(fnName string) int {
 
 func loadReport(root string) *MatchReport {
 	// ensure report is up-to-date
-	if out, err := exec.Command("ninja", "-C", root).CombinedOutput(); err != nil {
-		fmt.Printf("Ninja output:\n%s\n", out)
-		log.Fatalf("Failed to run ninja: %v", err)
+	errChan := make(chan error, 1)
+	go func() { errChan <- exec.Command("ninja", "-C", root).Run() }()
+	var err error
+	select {
+	case err = <-errChan:
+	case <-time.After(2 * time.Second):
+		fmt.Println("Waiting for ninja to finish...")
+		err = <-errChan
+	}
+	if err != nil {
+		log.Fatalln("ninja failed, rerun manually")
 	}
 
 	content, err := os.ReadFile(filepath.Join(root, "build", "GALE01", "report.json"))
