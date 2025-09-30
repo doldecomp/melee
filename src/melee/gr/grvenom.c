@@ -95,7 +95,10 @@ bool grVenom_80204EF4(Ground_GObj* arg)
     return false;
 }
 
-/// #grVenom_80204EFC
+bool grVenom_80204EFC(Ground_GObj* arg)
+{
+    return Ground_801C2FE0(arg);
+}
 
 void grVenom_80204F1C(Ground_GObj* arg) {}
 
@@ -145,7 +148,9 @@ bool grVenom_80206B68(Ground_GObj* arg)
     return false;
 }
 
-/// #grVenom_80206B70
+void grVenom_80206B70(Ground_GObj* arg) {
+    grVenom_80205F30(arg);
+}
 
 void grVenom_80206B90(Ground_GObj* arg) {}
 
