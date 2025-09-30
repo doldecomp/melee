@@ -4,6 +4,7 @@
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
+#include "baselib/memory.h"
 #include "gm/gm_1601.h" // for gm_801677E8
 #include "gm/gm_16AE.h"
 #include "gm/gm_1A3F.h"
@@ -152,7 +153,10 @@ void un_80306BB8(HSD_GObj* gobj)
 
 /// #un_80306C5C
 
-/// #Toy_RemoveUserData
+void Toy_RemoveUserData(void* ptr)
+{
+    HSD_Free(ptr);
+}
 
 /// #un_80306D14
 

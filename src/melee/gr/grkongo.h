@@ -54,7 +54,7 @@
 /* 1D7BBC */ void grKongo_801D7BBC(HSD_GObj*);
 /* 1D7E78 */ UNK_RET grKongo_801D7E78(UNK_PARAMS);
 /* 1D7F78 */ bool grKongo_801D7F78(HSD_GObj*);
-/* 1D8058 */ UNK_RET grKongo_801D8058(UNK_PARAMS);
+/* 1D8058 */ void grKongo_801D8058(Ground_GObj*);
 /* 1D8078 */ HSD_GObj* grKongo_801D8078(HSD_GObj*);
 /* 1D8270 */ void grKongo_801D8270(Ground_GObj*);
 /* 1D828C */ void grKongo_801D828C(HSD_GObj*);

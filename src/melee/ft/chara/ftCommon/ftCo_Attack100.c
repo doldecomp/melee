@@ -583,9 +583,15 @@ void ftCo_ItemScopeEnd_IASA(Fighter_GObj* gobj) {}
 
 void ftCo_ItemScopeAirEnd_IASA(Fighter_GObj* gobj) {}
 
-/// #ftCo_ItemScopeEnd_Phys
+void ftCo_ItemScopeEnd_Phys(Fighter_GObj* gobj)
+{
+    ftCo_800CDE54(gobj);
+}
 
-/// #ftCo_ItemScopeAirEnd_Phys
+void ftCo_ItemScopeAirEnd_Phys(Fighter_GObj* gobj)
+{
+    ftCo_800CDE74(gobj);
+}
 
 /// #ftCo_ItemScopeEnd_Coll
 
@@ -923,9 +929,15 @@ void ftCo_CaptureWaitHi_IASA(Fighter_GObj* gobj)
 
 /// #fn_800DBBF8
 
-/// #ftCo_CaptureWaitLw_Anim
+void ftCo_CaptureWaitLw_Anim(Fighter_GObj* gobj)
+{
+    ftCo_CaptureWaitHi_Anim(gobj);
+}
 
-/// #ftCo_CaptureWaitLw_IASA
+void ftCo_CaptureWaitLw_IASA(Fighter_GObj* gobj)
+{
+    fn_800DC014(gobj);
+}
 
 /// #ftCo_CaptureWaitLw_Phys
 

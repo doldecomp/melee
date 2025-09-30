@@ -177,7 +177,9 @@ bool grCorneria_801DFBC4(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801DFBCC
+void grCorneria_801DFBCC(Ground_GObj* arg) {
+    grCorneria_801DED50(arg);
+}
 
 void grCorneria_801DFBEC(Ground_GObj* arg) {}
 
