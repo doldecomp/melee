@@ -21,7 +21,7 @@ void it_2725_Logic6_Spawned(Item_GObj* gobj)
     it_80279CDC(gobj, attrs->x0);
 }
 
-void it_802CC740(Item_GObj*) {}
+void it_802CC740(Item_GObj* gobj) {}
 
 void it_2725_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
