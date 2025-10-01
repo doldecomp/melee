@@ -133,7 +133,7 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
             control = -control;
         }
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
         }
     }
@@ -189,7 +189,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
             control = -control;
         }
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
         }
     }
@@ -223,7 +223,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.z *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
         return;
     }
-    ftCommon_8007D494(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
+    ftCommon_Fall(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
                       ca->terminal_vel);
     ftCommon_8007CF58(fp);
 }

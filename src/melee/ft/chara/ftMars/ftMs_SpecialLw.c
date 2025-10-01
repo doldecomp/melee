@@ -124,8 +124,8 @@ void ftMs_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = getFtSpecialAttrsD(fp);
-    ftCommon_8007D494(fp, da->x54, da->x58);
-    ftCommon_8007CE94(fp, da->x50);
+    ftCommon_Fall(fp, da->x54, da->x58);
+    ftCommon_ApplyFrictionAir(fp, da->x50);
     ftColl_8007AEE0(gobj);
 }
 

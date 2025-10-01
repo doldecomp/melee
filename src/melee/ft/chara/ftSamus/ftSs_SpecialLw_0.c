@@ -97,7 +97,7 @@ inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, float angle)
     fp = GET_FIGHTER(gobj);
     fp->self_vel.x = samus_attr->x8 * cosf(angle);
     fp->self_vel.y = samus_attr->x8 * sinf(angle);
-    ftCommon_8007D440(fp, ftAttr->air_drift_max * samus_attr->x10);
+    ftCommon_ClampSelfVelX(fp, ftAttr->air_drift_max * samus_attr->x10);
 }
 
 void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
@@ -195,7 +195,7 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
         float samus_attr_xC = samus_attr->xC;
         ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_init_vel * samus_attr_xC,
                           ftAttr->walk_max_vel * samus_attr_xC);
-        ftCommon_8007CB74(gobj);
+        ftCommon_ApplyGroundMovement(gobj);
     } else {
         ft_80084F3C(gobj);
     }
@@ -209,7 +209,7 @@ void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     u8 _[8];
 
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
     ftCommon_8007D344(fp, 0.0f,
                       ftAttr->ground_to_air_jump_momentum_multiplier *
                           samus_attr->x10,

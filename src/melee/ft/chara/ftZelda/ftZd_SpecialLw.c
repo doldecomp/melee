@@ -167,7 +167,7 @@ void ftZd_SpecialAirLw_Phys(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
 
-    ftCommon_8007D494(fp, attributes->x78, attributes->x7C);
+    ftCommon_Fall(fp, attributes->x78, attributes->x7C);
     ftCommon_8007CEF4(fp);
 }
 
@@ -257,7 +257,7 @@ void ftZd_SpecialAirLw2_Phys(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->dat_attrs;
 
-    ftCommon_8007D494(fp, attributes->x78, attributes->x7C);
+    ftCommon_Fall(fp, attributes->x78, attributes->x7C);
     ftCommon_8007CEF4(fp);
 }
 

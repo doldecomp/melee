@@ -175,7 +175,7 @@ void ftCo_ThrownKirbyStar_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     inlineA0(gobj);
     fp->mv.co.thrownkirby.x14 =
-        ftCommon_8007DC08(fp, ftKb_SpecialN_800F5AD8());
+        ftCommon_GrabMash(fp, ftKb_SpecialN_800F5AD8());
     if (fp->grab_timer <= 0) {
         ftCo_800BE494(gobj);
     }
@@ -237,7 +237,7 @@ void ftCo_ThrownCopyStar_Phys(Fighter_GObj* gobj)
     }
     fp->grab_timer -= ftKb_SpecialN_800F5AC0();
     fp->mv.co.thrownkirby.x14 =
-        ftCommon_8007DC08(fp, ftKb_SpecialN_800F5AD8());
+        ftCommon_GrabMash(fp, ftKb_SpecialN_800F5AD8());
     if (fp->grab_timer <= 0) {
         ftCo_800BE494(gobj);
     }

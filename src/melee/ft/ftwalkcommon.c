@@ -186,27 +186,26 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
     }
 
     {
-        float walk_vel =
+        float accel =
             fp->input.lstick.x * fp->co_attrs.walk_init_vel * accel_mul;
-        walk_vel += getWalkAccel(fp, accel_mul);
+        accel += getWalkAccel(fp, accel_mul);
 
         {
-            float stick_mul =
+            float target_vel =
                 fp->input.lstick.x * fp->co_attrs.walk_max_vel * accel_mul;
 
-            if (stick_mul) {
-                float gr_vel = fp->gr_vel / stick_mul;
+            if (target_vel) {
+                float mult = fp->gr_vel / target_vel;
 
-                if (gr_vel > 0 && gr_vel < 1) {
-                    walk_vel *= (1 - gr_vel) * p_ftCommonData->x30;
+                if (mult > 0 && mult < 1) {
+                    accel *= (1 - mult) * p_ftCommonData->x30;
                 }
             }
 
-            fp->mv.co.walk.x0 = stick_mul * p_ftCommonData->x440;
-            ftCommon_8007C98C(fp, walk_vel, stick_mul,
-                              fp->co_attrs.gr_friction);
+            fp->mv.co.walk.x0 = target_vel * p_ftCommonData->x440;
+            ftCommon_8007C98C(fp, accel, target_vel, fp->co_attrs.gr_friction);
         }
 
-        ftCommon_8007CB74(gobj);
+        ftCommon_ApplyGroundMovement(gobj);
     }
 }

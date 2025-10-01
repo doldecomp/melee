@@ -594,7 +594,7 @@ void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
         mpColl_80043670(cd);
         cd->cur_topn = vec;
         HSD_JObjSetTranslate(jobj, &vec);
-        ftCommon_8007D5BC(fp4);
+        ftCommon_UnlockECB(fp4);
         mpColl_800471F8(cd);
         fp4->cur_pos = cd->cur_topn;
         HSD_JObjSetTranslate(jobj, &fp4->cur_pos);

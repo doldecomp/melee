@@ -1225,7 +1225,7 @@ void ftNs_SpecialHi_Phys(HSD_GObj* gobj)
     }
 
     fp0->mv.ns.specialhi.unkVector1 = fp0->self_vel;
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 
     {
         Fighter* fp = gobj->user_data;
@@ -1248,13 +1248,13 @@ void ftNs_SpecialAirHiStart_Phys(HSD_GObj* gobj)
     if (gravity_timer != 0) {
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
-        ftCommon_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+        ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
                           fp->co_attrs.terminal_vel);
     }
 
     {
         float friction = fp->co_attrs.aerial_friction;
-        ftCommon_8007CE94(fp, friction);
+        ftCommon_ApplyFrictionAir(fp, friction);
     }
 }
 
@@ -1273,13 +1273,13 @@ void ftNs_SpecialAirHiHold_Phys(
     if (gravity_timer != 0) {
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
-        ftCommon_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+        ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
                           fp->co_attrs.terminal_vel);
     }
 
     {
         float friction = fp->co_attrs.aerial_friction;
-        ftCommon_8007CE94(fp, friction);
+        ftCommon_ApplyFrictionAir(fp, friction);
     }
 }
 
@@ -1295,13 +1295,13 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     if (gravity_timer != 0) {
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
-        ftCommon_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+        ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
                           fp->co_attrs.terminal_vel);
     }
 
     {
         float friction = fp->co_attrs.aerial_friction;
-        ftCommon_8007CE94(fp, friction);
+        ftCommon_ApplyFrictionAir(fp, friction);
     }
 }
 
@@ -1403,8 +1403,8 @@ void ftNs_SpecialAirHiRebound_Phys(
 
     fighter_attr = &fp->co_attrs;
     fighter_attr == NULL;
-    ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
-    ftCommon_8007CE94(fp, fighter_attr->aerial_friction);
+    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_ApplyFrictionAir(fp, fighter_attr->aerial_friction);
 }
 
 // 0x80119460
@@ -1725,7 +1725,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
             lbVector_sqrtf_accurate(fmuls1 + fmuls2);
             DriftMax = new_var->co_attrs.air_drift_max;
             DriftMax == 0.0f;
-            ftCommon_8007D440(new_var, new_var->co_attrs.air_drift_max);
+            ftCommon_ClampSelfVelX(new_var, new_var->co_attrs.air_drift_max);
             if (new_var->self_vel.x >= 0.0f) {
                 phi_f0 = 1.0f;
             } else {
@@ -1760,7 +1760,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 lbVector_sqrtf_accurate(fmuls3 + fmuls4);
                 DriftMax = new_var->co_attrs.air_drift_max;
                 DriftMax == 0.0f;
-                ftCommon_8007D440(new_var, new_var->co_attrs.air_drift_max);
+                ftCommon_ClampSelfVelX(new_var, new_var->co_attrs.air_drift_max);
                 if (fighter_data4->self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {
@@ -1798,7 +1798,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 lbVector_sqrtf_accurate(fmuls5 + fmuls6);
                 DriftMax = new_var->co_attrs.air_drift_max;
                 DriftMax == 0.0f;
-                ftCommon_8007D440(new_var, new_var->co_attrs.air_drift_max);
+                ftCommon_ClampSelfVelX(new_var, new_var->co_attrs.air_drift_max);
                 if (fighter_data5->self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {

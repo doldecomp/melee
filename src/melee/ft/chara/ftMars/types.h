@@ -26,7 +26,7 @@ typedef struct _MarsAttributes {
     int x4;
     int x8;
     float specialn_friction;
-    float x10;
+    float specialn_start_friction;
     float x14;
     float x18;
     float x1C;

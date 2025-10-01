@@ -114,7 +114,7 @@ void ftCo_800C3CC0(Fighter_GObj* gobj)
                                   Ft_MF_KeepFastFall, 0, 1, 0, NULL);
     }
     drift = fp->co_attrs.air_drift_max;
-    ftCommon_8007D440(fp, drift);
+    ftCommon_ClampSelfVelX(fp, drift);
     fp->mv.co.aircatchhit.x0 = 20;
     fp->mv.co.aircatchhit.x4 = 0;
     if (fp->ground_or_air == GA_Ground) {
@@ -273,13 +273,13 @@ void ftCo_AirCatch_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co = &fp->co_attrs;
     PAD_STACK(8);
-    ftCommon_8007D528(fp);
-    if (fp->x221A_b4) {
-        ftCommon_8007D4E4(fp);
+    ftCommon_CheckFallFast(fp);
+    if (fp->fall_fast) {
+        ftCommon_FallFast(fp);
     } else if (fp->mv.co.aircatch.x0 < 20 && fp->pos_delta.y < 0.0) {
-        ftCommon_8007D494(fp, co->grav * 0.2, co->terminal_vel);
+        ftCommon_Fall(fp, co->grav * 0.2, co->terminal_vel);
     } else {
-        ftCommon_8007D494(fp, co->grav, co->terminal_vel);
+        ftCommon_Fall(fp, co->grav, co->terminal_vel);
     }
     ftCommon_8007D268(fp);
 }
@@ -288,7 +288,7 @@ void ftCo_AirCatchHit_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->self_vel = fp->pos_delta;
-    ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
 }
 
 void ftCo_AirCatch_Coll(Fighter_GObj* gobj)

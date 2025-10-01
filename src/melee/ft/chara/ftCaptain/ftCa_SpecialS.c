@@ -350,7 +350,7 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
             ftCo_Fall_Enter(gobj);
             return;
         }
-        ftCommon_8007D468(fp);
+        ftCommon_ClampAirDrift(fp);
         ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
         return;
     }
@@ -383,7 +383,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
                 ftCo_Fall_Enter(gobj);
                 return;
             } else {
-                ftCommon_8007D468(fp1);
+                ftCommon_ClampAirDrift(fp1);
                 ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_hit_landing_lag);
             }
         }

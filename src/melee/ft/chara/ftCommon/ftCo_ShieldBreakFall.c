@@ -19,7 +19,7 @@ void ftCo_80098D90(Fighter_GObj* gobj)
                                   Ft_MF_Unk06 | Ft_MF_SkipMatAnim |
                                   Ft_MF_SkipColAnim,
                               0, 1, 0, NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
     ftCommon_8007EBAC(fp, 8, 0);
 }
 

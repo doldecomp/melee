@@ -96,8 +96,8 @@ void ftMs_SpecialNStart_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
     PAD_STACK(4 * 2);
-    ftCommon_8007C930(fp, da->x10);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, da->specialn_start_friction);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftMs_SpecialAirNStart_Phys(HSD_GObj* gobj)
@@ -105,8 +105,8 @@ void ftMs_SpecialAirNStart_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* da = fp->dat_attrs;
     PAD_STACK(4 * 2);
-    ftCommon_8007D4B8(fp);
-    ftCommon_8007CE94(fp, da->x10);
+    ftCommon_FallBasic(fp);
+    ftCommon_ApplyFrictionAir(fp, da->specialn_start_friction);
 }
 
 void ftMs_SpecialNStart_Coll(HSD_GObj* gobj)

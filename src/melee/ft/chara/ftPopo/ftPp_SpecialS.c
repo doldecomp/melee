@@ -365,7 +365,7 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
     Fighter* temp_r5;
     Fighter* temp_r5_2;
     f32 temp_f1;
-    f32 var_f0;
+    f32 target_vel;
     ftIceClimberAttributes* temp_r30;
 
     PAD_STACK(0x18);
@@ -373,20 +373,20 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     temp_r30 = fp->dat_attrs;
     if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
-        var_f0 = fp->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
-        ftCommon_8007CA80(fp, fp->mv.pp.specials.x1C, var_f0, fp->co_attrs.gr_friction);
+        target_vel = fp->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
+        ftCommon_8007CA80(fp, fp->mv.pp.specials.x1C, target_vel, fp->co_attrs.gr_friction);
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
             temp_r5->xE4_ground_accel_1 += da->x6C * temp_r5->coll_data.floor.normal.x;
         }
-        ftCommon_8007CC78(fp, temp_r30->x38);
-        ftCommon_8007CC1C(gobj);
+        ftCommon_ClampGrVel(fp, temp_r30->x38);
+        ftCommon_ApplyGroundMovementNoSlide(gobj);
     } else {
         float friction = fp->co_attrs.gr_friction;
-        ftCommon_8007C930(fp, friction);
-        ftCommon_8007CC78(fp, temp_r30->x38);
-        ftCommon_8007CC1C(gobj);
+        ftCommon_ApplyFrictionGround(fp, friction);
+        ftCommon_ClampGrVel(fp, temp_r30->x38);
+        ftCommon_ApplyGroundMovementNoSlide(gobj);
     }
     fp->mv.pp.specials.x14 += 1;
     if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
@@ -403,7 +403,7 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
         temp_r5_2->death2_cb = ftPp_Init_8011F060;
         temp_r5_2->pre_hitlag_cb = efLib_PauseAll;
         temp_r5_2->post_hitlag_cb = efLib_ResumeAll;
-        ftCommon_8007D440(temp_r27, temp_r28->x3C);
+        ftCommon_ClampSelfVelX(temp_r27, temp_r28->x3C);
         fp->self_vel.y += temp_r30->x60;
         fp->mv.pp.specials.x10 = 0;
         fp->mv.pp.specials.x14 = 0;
@@ -420,27 +420,27 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
     Fighter* temp_r5;
     Fighter* temp_r5_2;
     f32 temp_f1;
-    f32 var_f0;
+    f32 target_vel;
 
     PAD_STACK(0x18);
 
     temp_r31 = GET_FIGHTER(gobj);
     temp_r30 = temp_r31->dat_attrs;
     if (temp_r31->cmd_vars[0] == 0 && temp_r31->mv.pp.specials.x1C != 0.0F) {
-        var_f0 = temp_r31->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
-        ftCommon_8007CA80(temp_r31, temp_r31->mv.pp.specials.x1C, var_f0, temp_r31->co_attrs.gr_friction);
+        target_vel = temp_r31->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
+        ftCommon_8007CA80(temp_r31, temp_r31->mv.pp.specials.x1C, target_vel, temp_r31->co_attrs.gr_friction);
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
             temp_r5->xE4_ground_accel_1 += da->x6C * temp_r5->coll_data.floor.normal.x;
         }
-        ftCommon_8007CC78(temp_r31, temp_r30->x38);
-        ftCommon_8007CC1C(gobj);
+        ftCommon_ClampGrVel(temp_r31, temp_r30->x38);
+        ftCommon_ApplyGroundMovementNoSlide(gobj);
     } else {
         float friction = temp_r31->co_attrs.gr_friction;
-        ftCommon_8007C930(temp_r31, friction);
-        ftCommon_8007CC78(temp_r31, temp_r30->x38);
-        ftCommon_8007CC1C(gobj);
+        ftCommon_ApplyFrictionGround(temp_r31, friction);
+        ftCommon_ClampGrVel(temp_r31, temp_r30->x38);
+        ftCommon_ApplyGroundMovementNoSlide(gobj);
     }
     temp_r31->mv.pp.specials.x14 += 1;
     if (((u32) temp_r31->cmd_vars[2] != 0) && (temp_r31->input.x668 & HSD_PAD_B)) {
@@ -457,7 +457,7 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         temp_r5_2->death2_cb = ftPp_Init_8011F060;
         temp_r5_2->pre_hitlag_cb = efLib_PauseAll;
         temp_r5_2->post_hitlag_cb = efLib_ResumeAll;
-        ftCommon_8007D440(temp_r27, temp_r28->x3C);
+        ftCommon_ClampSelfVelX(temp_r27, temp_r28->x3C);
         temp_r31->self_vel.y += temp_r30->x64;
         temp_r31->mv.pp.specials.x10 = 0;
         temp_r31->mv.pp.specials.x14 = 0;
@@ -482,9 +482,9 @@ void ftPp_SpecialAirS1_Phys(Fighter_GObj* gobj)
     }
     fp->mv.pp.specials.x18 += 1;
     if (fp->mv.pp.specials.x18 < da->x5C) {
-        ftCommon_8007D494(fp, da->x4C, da->x54);
+        ftCommon_Fall(fp, da->x4C_gravity, da->x54_terminal_vel);
     } else {
-        ftCommon_8007D4B8(fp);
+        ftCommon_FallBasic(fp);
     }
     if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
         f32 var_f0 = fp->mv.pp.specials.x1C > 0.0F ? da->x3C : -da->x3C;
@@ -511,9 +511,9 @@ void ftPp_SpecialAirS2_Phys(Fighter_GObj* gobj)
     }
     fp->mv.pp.specials.x18 += 1;
     if (fp->mv.pp.specials.x18 < da->x5C) {
-        ftCommon_8007D494(fp, da->x50, da->x58);
+        ftCommon_Fall(fp, da->x50_gravity, da->x58_terminal_vel);
     } else {
-        ftCommon_8007D4B8(fp);
+        ftCommon_FallBasic(fp);
     }
     if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
         f32 var_f0 = fp->mv.pp.specials.x1C > 0.0F ? da->x3C : -da->x3C;
@@ -550,7 +550,7 @@ static inline void inline3(Fighter_GObj* gobj, int msid)
     fp->x74_anim_vel.x = fp->xE4_ground_accel_1;
     Fighter_ChangeMotionState(gobj, msid, 0xC4C528A, fp->cur_anim_frame, 1.0F, 0.0F, NULL);
     inlineA0(gobj);
-    ftCommon_8007D440(fp, temp_r30->x3C);
+    ftCommon_ClampSelfVelX(fp, temp_r30->x3C);
 }
 
 void ftPp_SpecialS1_Coll(Fighter_GObj* gobj)
@@ -626,7 +626,7 @@ static inline void inline4(Fighter_GObj* gobj, int msid)
     inlineA0(gobj);
     fp->x74_anim_vel.y = 0.0F;
     fp->self_vel.y = 0.0F;
-    ftCommon_8007CC78(fp, da->x38);
+    ftCommon_ClampGrVel(fp, da->x38);
 }
 
 void ftPp_SpecialAirS1_Coll(Fighter_GObj* gobj)

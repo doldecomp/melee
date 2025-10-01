@@ -263,7 +263,7 @@ void ftCo_Bury_Anim(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x610;
-    ftCommon_8007DC08(fp, p_ftCommonData->x614);
+    ftCommon_GrabMash(fp, p_ftCommonData->x614);
     if (fp->grab_timer <= 0) {
         ftCo_800C13BC(gobj);
     }
@@ -336,7 +336,7 @@ void ftCo_BuryWait_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x610;
-    ftCommon_8007DC08(fp, p_ftCommonData->x614);
+    ftCommon_GrabMash(fp, p_ftCommonData->x614);
     if (fp->grab_timer <= 0) {
         ftCo_800C13BC(gobj);
     }
@@ -397,7 +397,7 @@ void ftCo_BuryJump_Phys(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
     ftCommon_8007D268(fp);
 }
 

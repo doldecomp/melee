@@ -218,7 +218,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
                               FTMEWTWO_SPECIALS_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
 
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 
     ftMewtwo_SpecialAirS_SetGrab(gobj);
 

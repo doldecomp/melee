@@ -49,7 +49,7 @@ static inline bool inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x63C;
-    ftCommon_8007DC08(fp, p_ftCommonData->x640);
+    ftCommon_GrabMash(fp, p_ftCommonData->x640);
     if (fp->grab_timer <= 0) {
         ftCo_800C3480(gobj);
         return true;

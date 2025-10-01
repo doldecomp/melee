@@ -470,9 +470,9 @@ struct ftCommonData {
     /* +690 */ int x690;
     /* +694 */ float x694;
     /* +698 */ float x698;
-    /* +69C */ float x69C;
-    /* +6A0 */ float x6A0;
-    /* +6A4 */ float x6A4;
+    /* +69C */ float warpstarfall_drift_scaling;
+    /* +6A0 */ float warpstarfall_drift_flat;
+    /* +6A4 */ float warpstarfall_drift_max;
     /* +6A8 */ float x6A8;
     /* +6AC */ int x6AC;
     /* +6B0 */ int x6B0;
@@ -696,7 +696,7 @@ typedef struct ftCo_DatAttrs {
     /* +028 fp+138 */ float dash_run_terminal_velocity;
     /* +02C fp+13C */ float run_animation_scaling;
     /* +030 fp+140 */ float max_run_brake_frames;
-    /* +034 fp+144 */ float grounded_max_horizontal_velocity;
+    /* +034 fp+144 */ float ground_max_horizontal_velocity;
     /* +038 fp+148 */ float jump_startup_time;
     /* +03C fp+14C */ float jump_h_initial_velocity;
     /* +040 fp+150 */ float jump_v_initial_velocity;
@@ -713,7 +713,7 @@ typedef struct ftCo_DatAttrs {
     /* +06C fp+17C */ float air_drift_max;
     /* +070 fp+180 */ float aerial_friction;
     /* +074 fp+184 */ float fast_fall_velocity;
-    /* +078 fp+188 */ float horizontal_air_mobility_constant;
+    /* +078 fp+188 */ float air_max_horizontal_velocity;
     /* +07C fp+18C */ float jab_2_input_window;
     /* +080 fp+190 */ float jab_3_input_window;
     /* +084 fp+194 */ float frames_to_change_direction_on_standing_turn;
@@ -1593,7 +1593,7 @@ struct Fighter {
     /* fp+221A:1 */ u8 x221A_b1 : 1;
     /* fp+221A:2 */ u8 x221A_b2 : 1;
     /* fp+221A:3 */ u8 x221A_b3 : 1;
-    /* fp+221A:4 */ u8 x221A_b4 : 1;
+    /* fp+221A:4 */ u8 fall_fast : 1;
     /* fp+221A:5 */ u8 x221A_b5 : 1;
     /* fp+221A:6 */ u8 x221A_b6 : 1;
     /* fp+221A:7 */ u8 x221A_b7 : 1;

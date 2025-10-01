@@ -11,20 +11,20 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-void ftCommon_8007C930(Fighter*, float);
+void ftCommon_ApplyFrictionGround(Fighter*, float);
 void ftCommon_8007C98C(Fighter*, float vel, float, float gr_friction);
 void ftCommon_8007CA80(Fighter* fp, float result, float, float);
 void ftCommon_8007CADC(Fighter*, float, float, float);
-void ftCommon_8007CB74(Fighter_GObj*);
-Fighter_GObj* ftCommon_8007CC1C(Fighter_GObj*);
-void ftCommon_8007CC78(Fighter*, float);
+void ftCommon_ApplyGroundMovement(Fighter_GObj*);
+Fighter_GObj* ftCommon_ApplyGroundMovementNoSlide(Fighter_GObj*);
+void ftCommon_ClampGrVel(Fighter*, float);
 void ftCommon_8007CCA0(Fighter*, float);
 void ftCommon_8007CCE8(Fighter*);
 float ftCommon_8007CD6C(float, float decrement);
 float ftCommon_8007CDA4(Fighter*);
 float ftCommon_8007CDF8(Fighter*);
 void ftCommon_8007CE4C(Fighter*, float);
-void ftCommon_8007CE94(Fighter*, float);
+void ftCommon_ApplyFrictionAir(Fighter*, float);
 void ftCommon_8007CEF4(Fighter*);
 bool ftCommon_8007CF58(Fighter*);
 bool ftCommon_8007D050(Fighter*, float);
@@ -35,21 +35,21 @@ void ftCommon_8007D28C(Fighter*, float);
 void ftCommon_8007D2E8(Fighter*, float, float);
 void ftCommon_8007D344(Fighter*, float, float, float);
 void ftCommon_8007D3A8(Fighter*, float, float, float);
-void ftCommon_8007D440(Fighter*, float);
-void ftCommon_8007D468(Fighter*);
-void ftCommon_8007D494(Fighter*, float, float);
-void ftCommon_8007D4B8(Fighter*);
-void ftCommon_8007D4E4(Fighter*);
+void ftCommon_ClampSelfVelX(Fighter*, float);
+void ftCommon_ClampAirDrift(Fighter*);
+void ftCommon_Fall(Fighter*, float, float);
+void ftCommon_FallBasic(Fighter*);
+void ftCommon_FallFast(Fighter*);
 void ftCommon_ClampFallSpeed(Fighter*, float);
-void ftCommon_8007D508(Fighter*, float, float);
-bool ftCommon_8007D528(Fighter*);
-void ftCommon_8007D5BC(Fighter*);
+void ftCommon_Ascend(Fighter*, float, float);
+bool ftCommon_CheckFallFast(Fighter*);
+void ftCommon_UnlockECB(Fighter*);
 
 /// Air_StoreBool_LoseGroundJump_NoECBfor10Frames
 void ftCommon_8007D5D4(Fighter*);
 
 void ftCommon_8007D60C(Fighter*);
-void ftCommon_8007D698(Fighter*);
+void ftCommon_UseAllJumps(Fighter*);
 void ftCommon_8007D6A4(Fighter*);
 void ftCommon_8007D780(Fighter*);
 void ftCommon_8007D7FC(Fighter*);
@@ -57,13 +57,13 @@ void ftCommon_8007D92C(Fighter_GObj*);
 float ftCo_GetLStickAngle(Fighter* fp);
 float ftCo_GetCStickAngle(Fighter* fp);
 float ftCommon_8007D9D4(Fighter*);
-void ftCommon_8007D9FC(Fighter*);
+void ftCommon_UpdateFacing(Fighter*);
 void ftCommon_8007DA24(Fighter*);
 float ftCommon_CalcHitlag(int dmg, FtMotionId msid, float mul);
 void ftCommon_8007DB24(Fighter_GObj*);
 void ftCommon_8007DB58(Fighter_GObj*);
 void ftCommon_InitGrab(Fighter*, bool, float);
-bool ftCommon_8007DC08(Fighter*, float);
+bool ftCommon_GrabMash(Fighter*, float);
 void ftCommon_8007DD7C(Fighter_GObj*, Vec3*);
 void ftCommon_8007DFD0(Fighter_GObj* gobj, Vec3* arg1);
 void ftCommon_8007E0E4(Fighter_GObj*);

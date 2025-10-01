@@ -1348,37 +1348,38 @@ void ft_80084DB0(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co_attrs = getFtAttrs(fp);
 
-    ftCommon_8007D528(fp);
-    if (fp->x221A_b4) {
-        ftCommon_8007D4E4(fp);
+    ftCommon_CheckFallFast(fp);
+    if (fp->fall_fast) {
+        ftCommon_FallFast(fp);
     } else {
-        ftCommon_8007D494(fp, co_attrs->grav, co_attrs->terminal_vel);
+        ftCommon_Fall(fp, co_attrs->grav, co_attrs->terminal_vel);
     }
     ftCommon_8007D268(fp);
 }
 
-void ft_80084E1C(Fighter_GObj* gobj, float arg8, float arg9, float argA)
+void ft_80084E1C(Fighter_GObj* gobj, float threshold, float drift_max,
+                 float target_max)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co_attrs = getFtAttrs(fp);
-    float var_f1;
-    float var_f2;
+    float drift;
+    float target_vel;
 
-    ftCommon_8007D528(fp);
-    if (fp->x221A_b4) {
-        ftCommon_8007D4E4(fp);
+    ftCommon_CheckFallFast(fp);
+    if (fp->fall_fast) {
+        ftCommon_FallFast(fp);
     } else {
-        ftCommon_8007D494(fp, co_attrs->grav, co_attrs->terminal_vel);
+        ftCommon_Fall(fp, co_attrs->grav, co_attrs->terminal_vel);
     }
 
-    if (ABS(fp->input.lstick.x) >= arg8) {
-        var_f1 = fp->input.lstick.x * arg9;
-        var_f2 = fp->input.lstick.x * argA;
+    if (ABS(fp->input.lstick.x) >= threshold) {
+        drift = fp->input.lstick.x * drift_max;
+        target_vel = fp->input.lstick.x * target_max;
     } else {
-        var_f2 = 0.0F;
-        var_f1 = 0.0F;
+        target_vel = 0.0F;
+        drift = 0.0F;
     }
-    ftCommon_8007D140(fp, var_f1, var_f2, co_attrs->aerial_friction);
+    ftCommon_8007D140(fp, drift, target_vel, co_attrs->aerial_friction);
 }
 
 void ft_80084EEC(Fighter_GObj* gobj)
@@ -1386,21 +1387,21 @@ void ft_80084EEC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co_attrs = getFtAttrs(fp);
 
-    ftCommon_8007D494(fp, co_attrs->grav, co_attrs->terminal_vel);
-    ftCommon_8007CE94(fp, co_attrs->aerial_friction);
+    ftCommon_Fall(fp, co_attrs->grav, co_attrs->terminal_vel);
+    ftCommon_ApplyFrictionAir(fp, co_attrs->aerial_friction);
 }
 
 void ft_80084F3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* co = &fp->co_attrs;
-    f32 var_f1 = co->gr_friction;
+    f32 friction = co->gr_friction;
     PAD_STACK(8);
     if (ABS(fp->gr_vel) > co->walk_max_vel) {
-        var_f1 *= p_ftCommonData->x6C;
+        friction *= p_ftCommonData->x6C;
     }
-    ftCommon_8007C930(fp, var_f1);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, friction);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ft_80084FA8(Fighter_GObj* gobj)
@@ -1433,9 +1434,9 @@ void ft_80085030(Fighter_GObj* gobj, float gr_friction, float facing_dir)
         fp->xE4_ground_accel_1 =
             fp->x6A4_transNOffset.z * facing_dir - fp->gr_vel;
     } else {
-        ftCommon_8007C930(fp, gr_friction);
+        ftCommon_ApplyFrictionGround(fp, gr_friction);
     }
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ft_80085088(Fighter_GObj* gobj)
@@ -1459,9 +1460,9 @@ void ft_800850E0(Fighter_GObj* gobj, float arg8, float arg9)
     if (fp->x594_b0) {
         fp->gr_vel = fp->x6A4_transNOffset.z * arg9;
     } else {
-        ftCommon_8007C930(fp, arg8);
+        ftCommon_ApplyFrictionGround(fp, arg8);
     }
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ft_80085134(Fighter_GObj* gobj)

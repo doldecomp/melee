@@ -173,7 +173,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 363, 206327942, fp->cur_anim_frame, 1.0f,
                               0.0f, 0);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
@@ -195,7 +195,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
                               0.0f, 0);
     fp->take_dmg_cb = &ftPk_SpecialLw_SetState_Unk1;
     fp->accessory4_cb = &ftPk_SpecialLw_SpawnEffect;
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
@@ -213,7 +213,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 365, 206327950, fp->cur_anim_frame, 1.0f,
                               0.0f, 0);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
@@ -231,7 +231,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk07(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 366, 206327942, fp->cur_anim_frame, 1.0f,
                               0.0f, 0);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void ftPk_SpecialLwStart_Anim(HSD_GObj* gobj)
@@ -371,7 +371,7 @@ void ftPk_SpecialAirLwLoop1_Phys(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
     float pika_B8 = pika_attr->xB8;
     float terminal_velocity = fp->co_attrs.terminal_vel;
-    ftCommon_8007D494(fp, pika_B8, terminal_velocity);
+    ftCommon_Fall(fp, pika_B8, terminal_velocity);
     ftCommon_8007CF58(fp);
 }
 

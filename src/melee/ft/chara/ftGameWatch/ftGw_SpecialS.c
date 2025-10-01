@@ -281,12 +281,12 @@ void ftGw_SpecialAirS_Phys(HSD_GObj* gobj)
                 fp->self_vel.y = 0.0f;
             }
         }
-        ftCommon_8007D494(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1,
+        ftCommon_Fall(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1,
                           gawAttrs->x30_GAMEWATCH_JUDGE_FRICTION2);
     } else {
-        ftCommon_8007D4B8(fp);
+        ftCommon_FallBasic(fp);
     }
-    ftCommon_8007CE94(fp, gawAttrs->x24_GAMEWATCH_JUDGE_MOMENTUM_MUL);
+    ftCommon_ApplyFrictionAir(fp, gawAttrs->x24_GAMEWATCH_JUDGE_MOMENTUM_MUL);
 }
 
 static void ftGw_SpecialS_GroundToAir(HSD_GObj*);

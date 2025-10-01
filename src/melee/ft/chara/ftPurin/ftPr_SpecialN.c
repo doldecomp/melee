@@ -228,8 +228,8 @@ void ftPr_SpecialNFull_Phys(Fighter_GObj* gobj)
 void ftPr_SpecialNEnd_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007C930(fp, fp->co_attrs.gr_friction);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.gr_friction);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftPr_SpecialAirNStart_Phys(HSD_GObj* gobj)
@@ -239,14 +239,14 @@ void ftPr_SpecialAirNStart_Phys(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     da = fp->dat_attrs;
-    ftCommon_8007D494(fp, da->x3C, da->x40);
+    ftCommon_Fall(fp, da->x3C, da->x40);
 }
 
 void ftPr_SpecialAirNChargeLoop_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
-    ftCommon_8007D494(fp, da->x3C, da->x40);
+    ftCommon_Fall(fp, da->x3C, da->x40);
 }
 
 void ftPr_SpecialAirNChargeFull_Phys(HSD_GObj* gobj)
@@ -256,7 +256,7 @@ void ftPr_SpecialAirNChargeFull_Phys(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     da = fp->dat_attrs;
-    ftCommon_8007D494(fp, da->x3C, da->x40);
+    ftCommon_Fall(fp, da->x3C, da->x40);
 }
 
 /// #ftPr_SpecialAirNChargeRelease_Phys
@@ -267,7 +267,7 @@ void ftPr_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
-    ftCommon_8007D494(fp, da->x3C, da->x40);
+    ftCommon_Fall(fp, da->x3C, da->x40);
 }
 
 void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
@@ -279,7 +279,7 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
     if (fp->self_vel.y <= -da->x40) {
         ftCommon_8007D268(fp);
     }
-    ftCommon_8007D494(fp, da->x3C, da->x40);
+    ftCommon_Fall(fp, da->x3C, da->x40);
 }
 
 void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)

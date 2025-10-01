@@ -111,7 +111,7 @@ void ftCo_800DE5A4(Fighter_GObj* arg0)
     }
     if (fp->grab_timer) {
         fp->grab_timer -= p_ftCommonData->grab_timer_decrement;
-        ftCommon_8007DC08(fp, p_ftCommonData->x3C8);
+        ftCommon_GrabMash(fp, p_ftCommonData->x3C8);
         if (fp->grab_timer <= 0.0f) {
             if (fp->mv.co.thrown.xC || fn_800DC044(arg0)) {
                 fn_800DC070(arg0);

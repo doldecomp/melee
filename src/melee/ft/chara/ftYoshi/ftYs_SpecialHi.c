@@ -118,7 +118,7 @@ void fn_8012E3B4(Fighter_GObj* gobj)
                               fp->cur_anim_frame, 1.0F, 0.0F, NULL);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void fn_8012E44C(Fighter_GObj* gobj)

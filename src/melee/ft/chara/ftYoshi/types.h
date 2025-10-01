@@ -34,8 +34,8 @@ typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     int x48;
     int x4C;
     u8 pad_x50[0x6C - 0x50];
-    float x6C;
-    float x70;
+    float specials_start_gravity;
+    float specials_start_terminal_vel;
     u8 pad_x74[0x114 - 0x74];
     float x114;
     float x118;

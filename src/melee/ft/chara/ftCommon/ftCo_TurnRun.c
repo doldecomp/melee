@@ -92,7 +92,7 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
     getAccelAndTarget(fp, &accel, &target_vel);
 
     if (!target_vel) {
-        ftCommon_8007C930(fp, co_attrs->gr_friction *
+        ftCommon_ApplyFrictionGround(fp, co_attrs->gr_friction *
                                   p_ftCommonData->x60_someFrictionMul);
     } else if (fp->mv.co.turnrun.accel_mul * accel < 0) {
         if (accel > 0) {
@@ -114,10 +114,10 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
         }
         fp->xE4_ground_accel_1 = accel;
     } else {
-        ftCommon_8007C930(fp, co_attrs->gr_friction *
+        ftCommon_ApplyFrictionGround(fp, co_attrs->gr_friction *
                                   p_ftCommonData->x60_someFrictionMul);
     }
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftCo_TurnRun_Coll(Fighter_GObj* gobj)

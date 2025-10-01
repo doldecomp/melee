@@ -229,11 +229,11 @@ void ftPe_SpecialAirN_Phys(HSD_GObj* gobj)
                 fp->self_vel.y = 0;
             }
         }
-        ftCommon_8007D494(fp, da->xA0, da->xA4);
+        ftCommon_Fall(fp, da->xA0, da->xA4);
     } else {
-        ftCommon_8007D4B8(fp);
+        ftCommon_FallBasic(fp);
     }
-    ftCommon_8007CE94(fp, da->x98);
+    ftCommon_ApplyFrictionAir(fp, da->x98);
     ftColl_8007AEE0(gobj);
 }
 
@@ -333,8 +333,8 @@ void ftPe_SpecialAirNHit_Phys(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
-    ftCommon_8007D494(fp, da->xA0, da->xA4);
-    ftCommon_8007CE94(fp, da->x98);
+    ftCommon_Fall(fp, da->xA0, da->xA4);
+    ftCommon_ApplyFrictionAir(fp, da->x98);
 }
 
 void ftPe_SpecialNHit_Coll(HSD_GObj* gobj)

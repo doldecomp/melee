@@ -245,7 +245,7 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
         }
     }
     if (ftCheckThrowB3(fp) && ABS(fp->input.lstick.x) > da->x78) {
-        ftCommon_8007D9FC(fp);
+        ftCommon_UpdateFacing(fp);
         ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
     }
 }
@@ -277,7 +277,7 @@ void ftPe_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         fp->self_vel.y = fp->self_vel.y * da->x8C;
         fp->self_vel.z = fp->self_vel.z * da->x8C;
     } else {
-        ftCommon_8007D494(fp, da->x88, ca->terminal_vel);
+        ftCommon_Fall(fp, da->x88, ca->terminal_vel);
         ftCommon_8007CF58(fp);
     }
 }
@@ -340,7 +340,7 @@ void ftPe_SpecialHiEnd_Phys(HSD_GObj* gobj)
         float vel_y = fp->self_vel.y;
         ft_80085154(gobj);
         fp->self_vel.y = vel_y;
-        ftCommon_8007D494(fp, ca->grav, ca->terminal_vel);
+        ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
     } else {
         ft_80084FA8(gobj);
     }
@@ -358,7 +358,7 @@ void ftPe_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     fp->self_vel.y *= da->x8C;
     fp->self_vel.z *= da->x8C;
     fp->self_vel.y = vel_y;
-    ftCommon_8007D494(fp, ca->grav, ca->terminal_vel);
+    ftCommon_Fall(fp, ca->grav, ca->terminal_vel);
 }
 
 void ftPe_SpecialHi_8011E064(HSD_GObj* gobj)

@@ -619,7 +619,7 @@ void ftPp_SpecialHi_4_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* attrs = fp->dat_attrs;
     ftCo_DatAttrs* co_attrs = getFtAttrs(fp);
-    ftCommon_8007D494(fp, attrs->x144, attrs->x148);
+    ftCommon_Fall(fp, attrs->x144, attrs->x148);
     if (ABS(fp->input.lstick.x) > attrs->x138) {
         ftCommon_8007D344(fp, 0.0f, co_attrs->air_drift_stick_mul * attrs->xB0,
                           co_attrs->air_drift_max * attrs->xB4);

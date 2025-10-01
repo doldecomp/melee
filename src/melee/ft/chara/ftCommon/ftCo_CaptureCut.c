@@ -83,8 +83,8 @@ void ftCo_CaptureCut_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
 
     if (fp->ground_or_air == GA_Ground) {
-        ftCommon_8007C930(fp, p_ftCommonData->x36C * fp->co_attrs.gr_friction);
-        ftCommon_8007CB74(gobj);
+        ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x36C * fp->co_attrs.gr_friction);
+        ftCommon_ApplyGroundMovement(gobj);
         return;
     }
 
@@ -204,7 +204,7 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             if (var_r30->ground_or_air == GA_Ground) {
                 var_r3_3 = mpColl_80048654(temp_r28_2);
             } else {
-                ftCommon_8007D5BC(var_r30);
+                ftCommon_UnlockECB(var_r30);
                 var_r3_3 = mpColl_800477E0(temp_r28_2);
             }
             if (var_r3_3) {

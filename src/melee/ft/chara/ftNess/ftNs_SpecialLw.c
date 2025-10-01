@@ -181,7 +181,7 @@ void ftNs_SpecialAirLwStart_Phys(HSD_GObj* gobj)
     if (gravity_timer != 0) {
         fp->mv.ns.speciallw.gravityDelay = gravity_timer - 1;
     } else {
-        ftCommon_8007D494(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
+        ftCommon_Fall(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
                           da->terminal_vel);
     }
 
@@ -236,7 +236,7 @@ void ftNs_SpecialAirLwStart_AirToGround(
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwStart,
                               FTNESS_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 // 0x8011A2A8
@@ -350,7 +350,7 @@ void ftNs_SpecialAirLwHold_Phys(HSD_GObj* gobj)
         if (gravity_timer != 0) {
             fp->mv.ns.speciallw.gravityDelay = gravity_timer - 1;
         } else {
-            ftCommon_8007D494(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
+            ftCommon_Fall(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
                               da->terminal_vel);
         }
 
@@ -416,7 +416,7 @@ void ftNs_SpecialAirLwHold_AirToGround(
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwHold,
                               FTNESS_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
     fp = GET_FIGHTER(gobj);
     ness_attr = fp->dat_attrs;
     ftColl_CreateAbsorbHit(gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -575,7 +575,7 @@ void ftNs_SpecialAirLwTurn_Phys(
     if (magnetTimer != 0) {
         fp->mv.ns.speciallw.gravityDelay = magnetTimer - 1;
     } else {
-        ftCommon_8007D494(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
+        ftCommon_Fall(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
                           da->terminal_vel);
     }
 
@@ -633,7 +633,7 @@ void ftNs_SpecialAirLwTurn_AirToGround(
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwTurn,
                               FTNESS_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 // 0x8011AB10
@@ -840,7 +840,7 @@ void ftNs_SpecialAirLwHit_Phys(
     if (temp_r3 != 0) {
         fp->mv.ns.speciallw.gravityDelay = temp_r3 - 1;
     } else {
-        ftCommon_8007D494(fp, attrs->x8C_PSI_MAGNET_FALL_ACCEL,
+        ftCommon_Fall(fp, attrs->x8C_PSI_MAGNET_FALL_ACCEL,
                           attributes->terminal_vel);
     }
 
@@ -905,7 +905,7 @@ void ftNs_SpecialAirLwHit_AirToGround(
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwHit,
                               FTNESS_SPECIALLW_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
     fp = GET_FIGHTER(gobj);
     ness_attr = fp->dat_attrs;
     ftColl_CreateAbsorbHit(gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -1023,7 +1023,7 @@ void ftNs_SpecialAirLwEnd_Phys(
     if (gravity_timer != 0) {
         fp->mv.ns.speciallw.gravityDelay = gravity_timer - 1;
     } else {
-        ftCommon_8007D494(fp, attrs->x8C_PSI_MAGNET_FALL_ACCEL,
+        ftCommon_Fall(fp, attrs->x8C_PSI_MAGNET_FALL_ACCEL,
                           attributes->terminal_vel);
     }
 
@@ -1078,7 +1078,7 @@ void ftNs_SpecialAirLwEnd_AirToGround(
     Fighter_ChangeMotionState(gobj, ftNs_MS_SpecialLwEnd,
                               FTNESS_SPECIALLW_END_FLAG,
                               temp_r31->cur_anim_frame, 1.0f, 0.0f, NULL);
-    ftCommon_8007D468(temp_r31);
+    ftCommon_ClampAirDrift(temp_r31);
 }
 
 // 0x8011B4AC

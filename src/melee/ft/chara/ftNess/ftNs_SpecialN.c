@@ -567,13 +567,13 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
     if (fp->mv.ns.specialn.falling_acceleration_delay != 0) {
         fp->mv.ns.specialn.falling_acceleration_delay--;
     } else {
-        ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
+        ftCommon_Fall(fp, sa->x14_PKFLASH_FALL_ACCEL,
                           fp->co_attrs.terminal_vel);
     }
 
     {
         float airFriction = fp->co_attrs.aerial_friction;
-        ftCommon_8007CE94(fp, airFriction);
+        ftCommon_ApplyFrictionAir(fp, airFriction);
     }
 }
 
@@ -588,13 +588,13 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
     if (fp->mv.ns.specialn.falling_acceleration_delay != 0) {
         fp->mv.ns.specialn.falling_acceleration_delay--;
     } else {
-        ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
+        ftCommon_Fall(fp, sa->x14_PKFLASH_FALL_ACCEL,
                           fp->co_attrs.terminal_vel);
     }
 
     {
         float airFriction = fp->co_attrs.aerial_friction;
-        ftCommon_8007CE94(fp, airFriction);
+        ftCommon_ApplyFrictionAir(fp, airFriction);
     }
 }
 
@@ -609,13 +609,13 @@ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
     if (fp->mv.ns.specialn.falling_acceleration_delay != 0) {
         fp->mv.ns.specialn.falling_acceleration_delay--;
     } else {
-        ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
+        ftCommon_Fall(fp, sa->x14_PKFLASH_FALL_ACCEL,
                           fp->co_attrs.terminal_vel);
     }
 
     {
         float airFriction = fp->co_attrs.aerial_friction;
-        ftCommon_8007CE94(fp, airFriction);
+        ftCommon_ApplyFrictionAir(fp, airFriction);
     }
 }
 

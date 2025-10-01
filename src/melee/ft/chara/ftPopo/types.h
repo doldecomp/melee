@@ -39,10 +39,10 @@ typedef struct ftIceClimberAttributes {
     float x40;
     float x44;
     float x48;
-    float x4C;
-    float x50;
-    float x54;
-    float x58;
+    float x4C_gravity;
+    float x50_gravity;
+    float x54_terminal_vel;
+    float x58_terminal_vel;
     float x5C;
     float x60;
     float x64;

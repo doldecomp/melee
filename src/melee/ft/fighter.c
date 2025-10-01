@@ -379,7 +379,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x2222_b7 = 0;
     fp->x2223_b0 = 0;
-    fp->x221A_b4 = 0;
+    fp->fall_fast = 0;
     fp->x2219_b0 = 0;
 
     fp->x20A0_accessory = 0;
@@ -1106,7 +1106,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     }
 
     if ((flags & Ft_MF_KeepFastFall) == 0) {
-        fp->x221A_b4 = 0;
+        fp->fall_fast = 0;
     }
 
     if ((flags & Ft_MF_SkipColAnim) == 0) {
@@ -1372,7 +1372,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         if (animflags_bool) {
             if (!fp->x594_b0 && !fp->x594_b0) {
                 !fp;
-                ftCommon_8007CC78(fp, fp->co_attrs.dash_run_terminal_velocity);
+                ftCommon_ClampGrVel(fp, fp->co_attrs.dash_run_terminal_velocity);
             }
         }
 
@@ -2466,7 +2466,7 @@ void Fighter_8006C27C(Fighter_GObj* gobj)
         if (fp->ecb_lock) {
             fp->ecb_lock--;
             if (!fp->ecb_lock) {
-                ftCommon_8007D5BC(fp);
+                ftCommon_UnlockECB(fp);
             }
         }
 

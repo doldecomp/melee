@@ -110,8 +110,8 @@ void ftKp_SpecialAirLw_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* da = fp->dat_attrs;
     PAD_STACK(16);
-    ftCommon_8007D494(fp, da->x8C, da->x90);
-    ftCommon_8007CE94(fp, da->x88);
+    ftCommon_Fall(fp, da->x8C, da->x90);
+    ftCommon_ApplyFrictionAir(fp, da->x88);
     if ((fp->self_vel.y < da->x94) || (fp->cmd_vars[1] != 0)) {
         fp->self_vel.y = da->x94;
     }
@@ -136,7 +136,7 @@ void ftKp_SpecialAirLw_Coll(Fighter_GObj* gobj)
             ftKp_SpecialLw_80134A5C(gobj);
         } else {
             ftCommon_8007D5D4(fp);
-            ftCommon_8007D5BC(fp);
+            ftCommon_UnlockECB(fp);
         }
     } else if ((fp->cmd_vars[0] != 0) && (ftCliffCommon_80081298(gobj) != 0)) {
         ftCliffCommon_80081370(gobj);

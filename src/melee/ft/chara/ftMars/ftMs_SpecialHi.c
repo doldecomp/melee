@@ -103,7 +103,7 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
     }
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
@@ -128,7 +128,7 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
     }
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
@@ -166,7 +166,7 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
         } else {
             da = fp->dat_attrs;
             attr2 = &fp->co_attrs;
-            ftCommon_8007D494(fp, da->x44, da->x48);
+            ftCommon_Fall(fp, da->x44, da->x48);
             ftCommon_8007D344(fp, 0.0f, attr2->air_drift_stick_mul * da->x28,
                               attr2->air_drift_max * da->x28);
         }
@@ -204,12 +204,12 @@ void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
                 fp->cmd_vars[2] = 1;
             }
         } else {
-            ftCommon_8007D494(fp, da->x44, da->x48);
+            ftCommon_Fall(fp, da->x44, da->x48);
             ftCommon_8007D344(fp, 0.0f, attr2->air_drift_stick_mul * da->x28,
                               attr2->air_drift_max * da->x28);
         }
     } else {
-        ftCommon_8007D494(fp, attr2->grav, attr2->terminal_vel);
+        ftCommon_Fall(fp, attr2->grav, attr2->terminal_vel);
         ftCommon_8007CF58(fp);
     }
 }
