@@ -9,6 +9,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 void it_2725_Logic6_Spawned(Item_GObj* gobj)
 {
