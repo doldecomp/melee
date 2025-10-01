@@ -59,7 +59,7 @@ void it_802CC7D8(Item_GObj* gobj)
     ip->exited_hitlag = efLib_ResumeAll;
 }
 
-void itFire_UnkMotion2_Anim_inline(Item_GObj* gobj)
+static void itFire_UnkMotion2_Anim_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFireAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
