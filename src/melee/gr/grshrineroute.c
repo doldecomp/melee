@@ -1,5 +1,7 @@
 #include "grshrineroute.h"
 
+#include "ground.h"
+
 #include <platform.h>
 
 extern float grNKr_804DB868;
