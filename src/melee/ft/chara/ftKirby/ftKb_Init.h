@@ -250,6 +250,7 @@
 /* 0F6C98 */ void fn_800F6C98(Fighter_GObj* gobj);
 /* 0F6D0C */ void fn_800F6D0C(Fighter_GObj* gobj);
 /* 0F6D80 */ void fn_800F6D80(Fighter_GObj* gobj);
+/* 0F6DF4 */ void fn_800F6DF4(Fighter_GObj* gobj);
 /* 0F70A0 */ void ftKb_SpecialN_Anim(Fighter_GObj* gobj);
 /* 0F71CC */ void ftKb_SpecialAirN_Anim(Fighter_GObj* gobj);
 /* 0F72F8 */ void ftKb_SpecialNLoop_Anim(Fighter_GObj* gobj);
