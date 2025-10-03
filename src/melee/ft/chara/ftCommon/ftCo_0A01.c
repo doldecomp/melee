@@ -1229,15 +1229,15 @@ bool ftCo_800A3234(Fighter* fp)
     {
         int sp18;
         int sp14;
-        float topn_x = fp->coll_data.prev_topn.x;
-        float topn_y = fp->coll_data.prev_topn.y;
+        float topn_x = fp->coll_data.prev_pos.x;
+        float topn_y = fp->coll_data.prev_pos.y;
         float bottom_x = fp->coll_data.xA4_ecbCurrCorrect.bottom.x;
         float bottom_y = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
-        float y = fp->coll_data.prev_topn.y + bottom_y;
+        float y = fp->coll_data.prev_pos.y + bottom_y;
         if (ftCo_800A0FB0(&sp34, &sp18, &sp14, &sp28, -1, -1, -1,
                           topn_x + bottom_x, topn_y + bottom_y,
-                          fp->coll_data.cur_topn.x + bottom_x,
-                          fp->coll_data.cur_topn.y + bottom_y, 0.0f))
+                          fp->coll_data.cur_pos.x + bottom_x,
+                          fp->coll_data.cur_pos.y + bottom_y, 0.0f))
         {
             return false;
         }
@@ -1277,7 +1277,7 @@ bool ftCo_800A3498(Fighter* fp)
             return true;
         }
     } else if (temp_r4->x54.y >
-               temp_r4->x568 + (fp->coll_data.cur_topn.y +
+               temp_r4->x568 + (fp->coll_data.cur_pos.y +
                                 fp->coll_data.xA4_ecbCurrCorrect.bottom.y))
     {
         return true;
@@ -2251,7 +2251,7 @@ static void ftCo_800A963C(Fighter* fp, bool unused)
 void ftCo_800A96B8(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    float sum = fp->coll_data.cur_topn.y + fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
+    float sum = fp->coll_data.cur_pos.y + fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
     bool tmp = fp->x1A88.x54.y > sum ? true : false;
 
     PAD_STACK(0x10);
@@ -3076,9 +3076,9 @@ void ftCo_800AB224(Fighter* fp)
         }
         if (var_f31 > 0.6108652334660292) {
             if (mpLib_8004F8A4(&sp24, &sp3C, &sp40, &sp30, -1, -1,
-                               fp->coll_data.cur_topn.x,
-                               fp->coll_data.cur_topn.y,
-                               fp->coll_data.cur_topn.x, fp->x1A88.x54.y))
+                               fp->coll_data.cur_pos.x,
+                               fp->coll_data.cur_pos.y,
+                               fp->coll_data.cur_pos.x, fp->x1A88.x54.y))
             {
                 var_r0_6 = 1;
             } else {

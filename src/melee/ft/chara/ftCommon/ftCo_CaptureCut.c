@@ -195,9 +195,9 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             sp3C.y = var_r31->cur_pos.y + tmp.y;
             sp3C.z = var_r31->cur_pos.z + tmp.z;
 
-            temp_r28_2->prev_topn = sp3C;
+            temp_r28_2->prev_pos = sp3C;
             mpColl_80043670(temp_r28_2);
-            temp_r28_2->cur_topn = sp4C;
+            temp_r28_2->cur_pos = sp4C;
 
             HSD_JObjSetTranslate(temp_r29, &sp4C);
 
@@ -211,7 +211,7 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
                 if (var_r30->ground_or_air != GA_Ground) {
                     ftCommon_8007D7FC(var_r30);
                 }
-                var_r30->cur_pos = temp_r28_2->cur_topn;
+                var_r30->cur_pos = temp_r28_2->cur_pos;
             } else {
                 if (var_r30->ground_or_air != GA_Air) {
                     ftCommon_8007D5D4(var_r30);

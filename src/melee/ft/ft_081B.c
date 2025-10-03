@@ -51,8 +51,8 @@ void ft_80081B38(Fighter_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     fp->ecb_lock = 0;
     coll = &fp->coll_data;
-    fp->coll_data.cur_topn = fp->cur_pos;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
+    fp->coll_data.cur_pos = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
     mpColl_80041EE4(coll);
     coll->x34_flags.b1234 = 1;
     bones = fp->parts;
@@ -114,10 +114,10 @@ GroundOrAir ft_80081D0C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
 
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     temp_r31 = mpColl_800471F8(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return GA_Ground;
     }
@@ -137,8 +137,8 @@ bool ft_80081DD4(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x221A_b2) {
         var_r28 = mpColl_800477E0(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
@@ -159,7 +159,7 @@ bool ft_80081DD4(Fighter_GObj* gobj)
             coll->x5C = tmp;
         }
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj) != 0) {
         return false;
     }
@@ -180,8 +180,8 @@ bool ft_80081F2C(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x221A_b2) {
         var_r28 = mpColl_80048274(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
@@ -202,7 +202,7 @@ bool ft_80081F2C(Fighter_GObj* gobj)
             coll->x5C = tmp;
         }
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -222,8 +222,8 @@ bool ft_80082084(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x221A_b2) {
         var_r28 = mpColl_80048388(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
@@ -244,7 +244,7 @@ bool ft_80082084(Fighter_GObj* gobj)
             coll->x5C = tmp;
         }
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -260,10 +260,10 @@ bool ft_800821DC(Fighter_GObj* gobj)
     bool temp_r31;
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     temp_r31 = mpColl_80048160(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -280,15 +280,15 @@ bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, int dir)
     CollData* coll = &fp->coll_data;
     bool var_r28;
 
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_800471F8(coll);
     } else {
         mpColl_800436D8(coll, dir);
         var_r28 = mpColl_800473CC(coll);
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -305,8 +305,8 @@ bool ft_8008239C(Fighter_GObj* gobj, int dir,
     bool var_r28;
     ftCollisionBox box;
 
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     collbox = ft_80082838(&box, height_attributes, fp->facing_dir);
     if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_8004730C(coll, collbox);
@@ -314,7 +314,7 @@ bool ft_8008239C(Fighter_GObj* gobj, int dir,
         mpColl_800436D8(coll, dir);
         var_r28 = mpColl_800475F4(coll, collbox);
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -333,11 +333,11 @@ bool ft_800824A0(Fighter_GObj* gobj, ftCollisionBox* ecb)
     ftCollisionBox collbox;
     ftCollisionBox* box;
 
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     box = ft_80082838(&collbox, ecb, fp->facing_dir);
     temp_r31 = mpColl_8004730C(coll, box);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -353,10 +353,10 @@ bool ft_80082578(Fighter_GObj* arg0)
     CollData* coll = &fp->coll_data;
     u8 _[4];
 
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     mpColl_800477E0(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(arg0)) {
         return false;
     }
@@ -377,11 +377,11 @@ bool ft_80082638(Fighter_GObj* gobj, ftCollisionBox* arg1)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     box = ft_80082838(&sp18, arg1, fp->facing_dir);
     mpColl_80047A08(coll, box);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj) != 0) {
         return false;
     }
@@ -397,11 +397,11 @@ GroundOrAir ft_80082708(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     CollData* cd = &fp->coll_data;
-    cd->prev_topn = cd->cur_topn;
-    cd->cur_topn = fp->cur_pos;
+    cd->prev_pos = cd->cur_pos;
+    cd->cur_pos = fp->cur_pos;
     {
         bool fall_off_ledge = mpColl_8004B108(cd);
-        fp->cur_pos = cd->cur_topn;
+        fp->cur_pos = cd->cur_pos;
         return fall_off_ledge ? GA_Air : GA_Ground;
     }
 }
@@ -414,10 +414,10 @@ bool ft_800827A0(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     tmp = mpColl_8004B2DC(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
 
     if (tmp) {
         return true;
@@ -451,12 +451,12 @@ bool ft_80082888(Fighter_GObj* arg0, ftCollisionBox* arg1)
 
     fp = GET_FIGHTER(arg0);
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
 
     box = ft_80082838(&sp18, arg1, fp->facing_dir);
     tmp = mpColl_8004B21C(coll, box);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
 
     if (tmp) {
         return true;
@@ -475,11 +475,11 @@ bool ft_80082978(HSD_GObj* gobj, ftCollisionBox* arg1)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     box = ft_80082838(&sp18, arg1, fp->facing_dir);
     tmp = mpColl_8004B3F0(coll, box);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
 
     if (tmp) {
         return true;
@@ -492,12 +492,12 @@ bool ft_80082A68(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
-    fp->coll_data.cur_topn = fp->cur_pos;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.prev_topn.y += 10.0f;
-    fp->coll_data.cur_topn.y -= 10.0f;
+    fp->coll_data.cur_pos = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.prev_pos.y += 10.0f;
+    fp->coll_data.cur_pos.y -= 10.0f;
     if (mpColl_800471F8(coll)) {
-        fp->cur_pos = coll->cur_topn;
+        fp->cur_pos = coll->cur_pos;
         return true;
     } else {
         return false;
@@ -525,10 +525,10 @@ void ftCo_AirCatchHit_Coll(Fighter_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     temp_r31 = mpColl_800471F8(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
 
     if (ft_80081A00(gobj)) {
         var_r0 = false;
@@ -569,10 +569,10 @@ void ft_80082D40(Fighter_GObj* gobj, f32 arg1)
 
     fp = GET_FIGHTER(gobj);
     coll = &fp->coll_data;
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     temp_r31 = mpColl_80048768(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj) != 0) {
         var_r0 = false;
     } else if (temp_r31 != 0) {
@@ -656,15 +656,15 @@ static inline bool ft_80083090_inline(Fighter_GObj* gobj,
         dir = 1;
     }
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_80047AC8(coll, arg1, gobj);
     } else {
         mpColl_800436D8(coll, dir);
         temp = mpColl_80047E14(coll, arg1, gobj);
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -713,15 +713,15 @@ static inline bool ft_80083318_inline(Fighter_GObj* gobj,
         dir = 1;
     }
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_80047BF4(coll, arg1, gobj);
     } else {
         mpColl_800436D8(coll, dir);
         temp = mpColl_80047F40(coll, arg1, gobj);
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
 
     if (ft_80081A00(gobj)) {
         return false;
@@ -761,15 +761,15 @@ static inline bool ft_80083464_inline(Fighter_GObj* gobj,
         dir = 1;
     }
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_80047D20(coll, arg1, gobj);
     } else {
         mpColl_800436D8(coll, dir);
         temp = mpColl_8004806C(coll, arg1, gobj);
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -820,15 +820,15 @@ static inline bool ft_8008370C_inline(Fighter_GObj* gobj)
     }
 
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_800471F8(coll);
     } else {
         mpColl_800436D8(coll, dir);
         temp = mpColl_800473CC(coll);
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -856,10 +856,10 @@ static inline bool ft_80083844_inline(Fighter_GObj* gobj)
     CollData* coll = &fp->coll_data;
     bool temp_r31;
 
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     temp_r31 = mpColl_80048654(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -891,15 +891,15 @@ static inline bool ft_80083910_inline(Fighter_GObj* gobj)
     }
 
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         temp = mpColl_80048654(coll);
     } else {
         mpColl_800436D8(coll, dir);
         temp = mpColl_800474E0(coll);
     }
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -956,10 +956,10 @@ static inline bool ft_80083CE4_inline(Fighter_GObj* gobj,
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
 
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     mpColl_800476B4(coll, cb1, gobj);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (ft_80081A00(gobj)) {
         return false;
     }
@@ -988,10 +988,10 @@ void ft_80083DCC(Fighter_GObj* gobj)
     PAD_STACK(16);
 
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     mpColl_800478F4(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     ft_80081A00(gobj);
 }
 
@@ -1045,12 +1045,12 @@ static inline bool ft_80084280_inline(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
     bool temp;
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     coll->x60 = fp->input.lstick.x;
     mpColl_800436D8(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B4B0(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
 
     if (temp) {
         return true;
@@ -1086,12 +1086,12 @@ static inline bool ft_800843FC_inline(Fighter_GObj* gobj)
     bool temp;
 
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     fp->coll_data.x60 = fp->input.lstick.x;
     mpColl_800436D8(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B5C4(coll);
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (temp) {
         return true;
     } else {
@@ -1144,10 +1144,10 @@ void ft_800846B0(Fighter_GObj* gobj, ftCollisionBox* box, HSD_GObjEvent cb)
     PAD_STACK(8);
 
     coll = &fp->coll_data;
-    coll->prev_topn = coll->cur_topn;
-    coll->cur_topn = fp->cur_pos;
+    coll->prev_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
     temp = mpColl_8004B21C(coll, ft_80082838(&temp_box, box, fp->facing_dir));
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (temp) {
         ret = true;
     } else {
@@ -1170,11 +1170,11 @@ void ft_800847D0(Fighter_GObj* gobj, ftCollisionBox* box)
     PAD_STACK(8);
 
     coll = &fp->coll_data;
-    fp->coll_data.prev_topn = fp->coll_data.cur_topn;
-    fp->coll_data.cur_topn = fp->cur_pos;
+    fp->coll_data.prev_pos = fp->coll_data.cur_pos;
+    fp->coll_data.cur_pos = fp->cur_pos;
     dir = fp->facing_dir;
     temp = mpColl_8004B3F0(coll, ft_80082838(&temp_box, box, dir));
-    fp->cur_pos = coll->cur_topn;
+    fp->cur_pos = coll->cur_pos;
     if (temp) {
         ret = true;
     } else {

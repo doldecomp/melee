@@ -590,13 +590,13 @@ void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
         vec2.x = fp3->cur_pos.x + ftCo_800DDDE4_inline3(fp3);
         vec2.y = fp3->cur_pos.y + ftCo_800DDDE4_inline2(fp3);
         vec2.z = fp3->cur_pos.z + ftCo_800DDDE4_inline3(fp3);
-        fp4->coll_data.prev_topn = vec2;
+        fp4->coll_data.prev_pos = vec2;
         mpColl_80043670(cd);
-        cd->cur_topn = vec;
+        cd->cur_pos = vec;
         HSD_JObjSetTranslate(jobj, &vec);
         ftCommon_UnlockECB(fp4);
         mpColl_800471F8(cd);
-        fp4->cur_pos = cd->cur_topn;
+        fp4->cur_pos = cd->cur_pos;
         HSD_JObjSetTranslate(jobj, &fp4->cur_pos);
     }
     fp2->x1A5C = NULL;

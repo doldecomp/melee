@@ -6667,12 +6667,12 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
             sp34.y = sp1C.y + temp_f31;
             sp34.z = sp1C.z + it_804DC73C;
             // sp34.z = sp1C.z + 0.0f;
-            coll1->prev_topn = sp34;
+            coll1->prev_pos = sp34;
             mpColl_80043670(coll1);
-            coll1->cur_topn = sp44;
+            coll1->cur_pos = sp44;
             if (mpColl_800471F8(coll1)) {
                 it_802762B0(item1);
-                item1->pos = coll1->cur_topn;
+                item1->pos = coll1->cur_pos;
                 return;
             }
             it_802762BC(item1);
@@ -6692,7 +6692,7 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
     item = GET_ITEM((HSD_GObj*) item_gobj);
     sp24 = item->xBFC;
     it_802762BC(item);
-    item->x378_itemColl.cur_topn = item->pos;
+    item->x378_itemColl.cur_pos = item->pos;
     if (arg_gobj != NULL) {
         switch (it_80272D40((Item_GObj*) arg_gobj)) { /* irregular */
         case 0:
@@ -6788,7 +6788,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     item1 = item_gobj->user_data;
     attr = item1->xCC_item_attr;
     coll = &item1->x378_itemColl;
-    item1->x378_itemColl.cur_topn = item1->pos;
+    item1->x378_itemColl.cur_pos = item1->pos;
     mpColl_80041EE4(coll);
     kind = item1->kind;
     if (kind < It_Kind_L_Gun_Ray) {
@@ -6836,7 +6836,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
         it_80276174(item_gobj, &spawn->pos);
         return;
     }
-    coll->prev_topn = spawn->pos;
+    coll->prev_pos = spawn->pos;
     mpColl_80043670(coll);
 }
 
@@ -6844,10 +6844,10 @@ void it_80276100(Item_GObj* item_gobj, Vec3* pos)
 {
     Item* item = GET_ITEM(item_gobj);
     CollData* coll = &item->x378_itemColl;
-    coll->prev_topn = *pos;
+    coll->prev_pos = *pos;
     mpColl_80043670(coll);
     mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
 }
 
 void it_80276174(Item_GObj* item_gobj, Vec3* pos)
@@ -6858,7 +6858,7 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     Item* item;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    item->x378_itemColl.prev_topn = *pos;
+    item->x378_itemColl.prev_pos = *pos;
     mpColl_80043670(&item->x378_itemColl);
     if (mpLib_80051EC8(&temp_pos, NULL, NULL, NULL, 1, -1, -1, item->pos.x,
                        item->pos.y, item->pos.x,
@@ -6874,8 +6874,8 @@ void it_80276214(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->x378_itemColl.prev_topn = item->x378_itemColl.cur_topn;
-    item->x378_itemColl.cur_topn = item->pos;
+    item->x378_itemColl.prev_pos = item->x378_itemColl.cur_pos;
+    item->x378_itemColl.cur_pos = item->pos;
     if (item->xDCE_flag.b7 == 1) {
         it_80276278(item_gobj);
     }
