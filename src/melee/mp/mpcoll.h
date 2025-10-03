@@ -11,7 +11,7 @@
 #include <dolphin/mtx.h>
 
 /* 041C78 */ void mpColl_80041C78(void);
-/* 041C8C */ void mpColl_80041C8C(CollData* cd);
+/* 041C8C */ void mpCollPrev(CollData* cd);
 /* 041DD0 */ void mpColl_80041DD0(CollData* cd, u32 flags);
 /* 041EE4 */ void mpColl_80041EE4(CollData*);
 /* 042078 */ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*,
@@ -27,7 +27,7 @@
 /* 042D24 */ void mpColl_80042D24(CollData* cd);
 /* 042DB0 */ void mpColl_80042DB0(CollData* ecb, float time);
 /* 043268 */ void mpColl_80043268(CollData*, s32, s32, float);
-/* 043324 */ void mpColl_80043324(CollData*, s32, s32);
+/* 043324 */ void mpCollEnd(CollData*, s32, s32);
 /* 043558 */ void mpColl_80043558(CollData*, s32);
 /* 043670 */ void mpColl_80043670(CollData*);
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);

@@ -74,7 +74,7 @@ void mpColl_80041C78(void)
 }
 
 // 80041C8C https://decomp.me/scratch/VvSaI
-void mpColl_80041C8C(CollData* cd)
+void mpCollPrev(CollData* cd)
 {
     u8 _[8];
 
@@ -740,7 +740,7 @@ static inline void func_80043324_inline(CollData* coll, s32 arg1, s32 arg2,
     mpColl_80043268(coll, arg1, arg2, arg8);
 }
 
-void mpColl_80043324(CollData* coll, s32 arg1, s32 arg2)
+void mpCollEnd(CollData* coll, s32 arg1, s32 arg2)
 {
     s32 temp_r3;
 
@@ -1755,7 +1755,7 @@ static inline bool inline0(CollData* coll, int i, bool j)
         mpColl_804D649C = false;
     }
     result = mpColl_80043754(mpColl_80046904, coll, i);
-    mpColl_80043324(coll, result, j);
+    mpCollEnd(coll, result, j);
     return result;
 }
 
@@ -1774,7 +1774,7 @@ static inline bool inline4(CollData* coll, int i)
         mpColl_804D649C = false;
     }
     result = mpColl_80043754(fn_80046F78, coll, i);
-    mpColl_80043324(coll, result, 1);
+    mpCollEnd(coll, result, 1);
     return result;
 }
 
@@ -1793,7 +1793,7 @@ static inline bool inline2(CollData* coll, int i)
         mpColl_804D649C = false;
     }
     result = mpColl_80043754((void*) fn_8004ACE4, coll, i);
-    mpColl_80043324(coll, result, 0);
+    mpCollEnd(coll, result, 0);
     return result;
 }
 
@@ -1812,7 +1812,7 @@ static inline bool inline3(CollData* coll, int i)
         mpColl_804D649C = false;
     }
     result = mpColl_80043754(fn_8004C534, coll, i);
-    mpColl_80043324(coll, result, 0);
+    mpCollEnd(coll, result, 0);
     return result;
 }
 
@@ -1835,41 +1835,41 @@ static inline bool inline1(CollData* coll, int i,
     mpColl_804D64A0 = arg1;
     mpColl_804D64A4 = arg2;
     result = mpColl_80043754(mpColl_80046904, coll, i);
-    mpColl_80043324(coll, result, 1);
+    mpCollEnd(coll, result, 1);
     return result;
 }
 
 bool mpColl_800471F8(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 6);
     return inline0(coll, 0, true);
 }
 
 bool mpColl_8004730C(CollData* coll, ftCollisionBox* arg1)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042C58(coll, arg1);
     return inline0(coll, 0, true);
 }
 
 bool mpColl_800473CC(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 6);
     return inline0(coll, 4, true);
 }
 
 bool mpColl_800474E0(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 5);
     return inline0(coll, 4, true);
 }
 
 bool mpColl_800475F4(CollData* coll, ftCollisionBox* arg1)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042C58(coll, arg1);
     return inline0(coll, 4, true);
 }
@@ -1877,28 +1877,28 @@ bool mpColl_800475F4(CollData* coll, ftCollisionBox* arg1)
 bool mpColl_800476B4(CollData* coll, bool (*arg1)(Fighter_GObj*, enum_t),
                      Fighter_GObj* gobj)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 6);
     return inline1(coll, 3, arg1, gobj);
 }
 
 bool mpColl_800477E0(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 6);
     return inline0(coll, 1, true);
 }
 
 bool mpColl_800478F4(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 5);
     return inline0(coll, 1, true);
 }
 
 bool mpColl_80047A08(CollData* coll, ftCollisionBox* arg1)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042C58(coll, arg1);
     return inline0(coll, 1, true);
 }
@@ -1906,7 +1906,7 @@ bool mpColl_80047A08(CollData* coll, ftCollisionBox* arg1)
 bool mpColl_80047AC8(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 6);
     return inline1(coll, 2, arg1, arg2);
 }
@@ -1914,7 +1914,7 @@ bool mpColl_80047AC8(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 bool mpColl_80047BF4(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 0xA);
     return inline1(coll, 2, arg1, arg2);
 }
@@ -1922,7 +1922,7 @@ bool mpColl_80047BF4(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 bool mpColl_80047D20(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     if (coll->x104 == 1) {
         mpColl_800424DC(coll, 0x12);
     } else {
@@ -1935,7 +1935,7 @@ bool mpColl_80047D20(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 bool mpColl_80047E14(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 6);
     return inline1(coll, 6, arg1, arg2);
 }
@@ -1943,7 +1943,7 @@ bool mpColl_80047E14(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 bool mpColl_80047F40(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 0xA);
     return inline1(coll, 6, arg1, arg2);
 }
@@ -1951,7 +1951,7 @@ bool mpColl_80047F40(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 bool mpColl_8004806C(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     if (coll->x104 == 1) {
         mpColl_800424DC(coll, 0x12);
     } else {
@@ -1963,21 +1963,21 @@ bool mpColl_8004806C(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 
 bool mpColl_80048160(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 0xA);
     return inline0(coll, 0, true);
 }
 
 bool mpColl_80048274(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 0xA);
     return inline0(coll, 1, true);
 }
 
 bool mpColl_80048388(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     if (coll->x104 == 1) {
         mpColl_800424DC(coll, 0x12);
     } else {
@@ -1989,14 +1989,14 @@ bool mpColl_80048388(CollData* coll)
 
 bool mpColl_80048464(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 0xA);
     return inline0(coll, 4, true);
 }
 
 bool mpColl_80048578(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     if (coll->x104 == 1) {
         mpColl_800424DC(coll, 0x12);
     } else {
@@ -2008,14 +2008,14 @@ bool mpColl_80048578(CollData* coll)
 
 bool mpColl_80048654(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 5);
     return inline0(coll, 0, true);
 }
 
 bool mpColl_80048768(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     if (coll->x104 == 1) {
         mpColl_800424DC(coll, 0x12);
     } else {
@@ -2027,7 +2027,7 @@ bool mpColl_80048768(CollData* coll)
 
 bool mpColl_80048844(CollData* coll, f32 arg1)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     return inline4(coll, 0);
 }
 
@@ -2312,42 +2312,42 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
 
 bool mpColl_8004B108(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 5);
     return inline2(coll, 0);
 }
 
 bool mpColl_8004B21C(CollData* coll, ftCollisionBox* arg1)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042C58(coll, arg1);
     return inline2(coll, 0);
 }
 
 bool mpColl_8004B2DC(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 5);
     return inline2(coll, 2);
 }
 
 bool mpColl_8004B3F0(CollData* coll, ftCollisionBox* arg1)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042C58(coll, arg1);
     return inline2(coll, 2);
 }
 
 bool mpColl_8004B4B0(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 5);
     return inline2(coll, 1);
 }
 
 bool mpColl_8004B5C4(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 9);
     return inline2(coll, 1);
 }
@@ -2423,7 +2423,7 @@ bool mpColl_8004B6D8(CollData* arg0)
 
 bool mpColl_8004C750(CollData* coll)
 {
-    mpColl_80041C8C(coll);
+    mpCollPrev(coll);
     mpColl_80042D24_inline(coll, 5);
     return inline3(coll, 2);
 }
@@ -2509,7 +2509,7 @@ bool mpColl_8004D024(Vec3* arg0)
     spC.prev_pos.z = arg0->z;
     spC.cur_pos = *arg0;
     spC.x130_flags |= 0x20;
-    mpColl_80041C8C(&spC);
+    mpCollPrev(&spC);
     mpColl_80042D24(&spC);
     inline0(&spC, 0, true);
     if (spC.x34_flags.b6) {
