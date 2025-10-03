@@ -36,8 +36,8 @@ bool ftCo_800C3A14(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CollData coll = *getFtColl(fp);
     PAD_STACK(8);
-    coll.x58 += 5.0;
-    coll.x5C += 5.0;
+    coll.ledge_snap_y += 5.0;
+    coll.ledge_snap_height += 5.0;
     if (fp->facing_dir > (f64) 0.0F) {
         if (mpColl_80044164(&coll, &fp->coll_data.ledge_id_unk1)) {
             fp->coll_data.env_flags |= MPCOLL_FLAGS_B24;

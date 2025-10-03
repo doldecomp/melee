@@ -19,7 +19,7 @@
                                   HSD_JObj*, HSD_JObj*, float);
 /* 04220C */ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float, float,
                                   float, float);
-/* 042374 */ void mpColl_80042374(CollData*, float, float, float);
+/* 042374 */ void mpColl_SetLedgeSnap(CollData*, float, float, float);
 /* 042384 */ void mpColl_80042384(CollData* cd);
 /* 0424DC */ void mpColl_800424DC(CollData* cd, u32 flags);
 /* 04293C */ void mpColl_8004293C(CollData* cd);

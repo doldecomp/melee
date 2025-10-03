@@ -135,17 +135,17 @@ void mpColl_80041DD0(CollData* cd, u32 flags)
     clamp_above(&top, cd->xC4_ecb.top.y + cd->cur_pos_correct.y);
 
     if (flags & 0b100) {
-        float x54 = cd->x54;
-        float tmp = 0.5f * cd->x5C;
+        float x54 = cd->ledge_snap_x;
+        float tmp = 0.5f * cd->ledge_snap_height;
         float offset;
 
         right += x54;
         left -= x54;
 
-        clamp_below(&bottom, cd->x58 - tmp + cd->cur_pos.y);
-        clamp_below(&bottom, cd->x58 - tmp + cd->cur_pos_correct.y);
+        clamp_below(&bottom, cd->ledge_snap_y - tmp + cd->cur_pos.y);
+        clamp_below(&bottom, cd->ledge_snap_y - tmp + cd->cur_pos_correct.y);
 
-        offset = cd->x58 + tmp;
+        offset = cd->ledge_snap_y + tmp;
         clamp_above(&top, cd->cur_pos.y + offset);
         clamp_above(&top, cd->cur_pos_correct.y + offset);
     }
@@ -195,9 +195,9 @@ void mpColl_80041EE4(CollData* cd)
     cd->x50 = 0.0f;
     cd->x48 = -1;
     cd->x4C = -1;
-    cd->x54 = 0.0f;
-    cd->x58 = 0.0f;
-    cd->x5C = 0.0f;
+    cd->ledge_snap_x = 0.0f;
+    cd->ledge_snap_y = 0.0f;
+    cd->ledge_snap_height = 0.0f;
     memzero(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
     memzero(&cd->xC4_ecb, sizeof(ftECB));
     memzero(&cd->xE4_ecb, sizeof(ftECB));
@@ -272,11 +272,12 @@ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float arg1, float arg2,
 }
 
 // 80042374 https://decomp.me/scratch/SgKfv
-void mpColl_80042374(CollData* coll, float arg8, float arg9, float argA)
+void mpColl_SetLedgeSnap(CollData* coll, float ledge_snap_x,
+                         float ledge_snap_y, float ledge_snap_height)
 {
-    coll->x54 = arg8;
-    coll->x58 = arg9;
-    coll->x5C = argA;
+    coll->ledge_snap_x = ledge_snap_x;
+    coll->ledge_snap_y = ledge_snap_y;
+    coll->ledge_snap_height = ledge_snap_height;
 }
 
 // 80042384 https://decomp.me/scratch/P8djI
@@ -1212,9 +1213,9 @@ static inline bool mpColl_80044164_inline(CollData* cd, int* p_ledge_id)
     Vec3 sp14;
     int sp10;
 
-    temp_f5 = cd->x54;
-    temp_f4 = 0.5f * cd->x5C;
-    temp_f6 = cd->x58;
+    temp_f5 = cd->ledge_snap_x;
+    temp_f4 = 0.5f * cd->ledge_snap_height;
+    temp_f6 = cd->ledge_snap_y;
     if (cd->cur_pos_correct.x < cd->cur_pos.x) {
         var_f31 = cd->cur_pos_correct.x;
         var_f29 = temp_f5 + (cd->cur_pos.x + cd->xA4_ecbCurrCorrect.right.x);
@@ -1285,9 +1286,9 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
     Vec3 sp14;
     int sp10;
 
-    temp_f5 = cd->x54;
-    temp_f4 = 0.5f * cd->x5C;
-    temp_f6 = cd->x58;
+    temp_f5 = cd->ledge_snap_x;
+    temp_f4 = 0.5f * cd->ledge_snap_height;
+    temp_f6 = cd->ledge_snap_y;
     if (cd->cur_pos_correct.x < cd->cur_pos.x) {
         var_f31 = cd->cur_pos_correct.x;
         var_f29 = temp_f5 + (cd->cur_pos.x + cd->xA4_ecbCurrCorrect.right.x);
