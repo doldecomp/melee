@@ -138,9 +138,9 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
-    ftCommon_8007D494(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
+    ftCommon_Fall(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
                       mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
-    ftCommon_8007CE94(fp, ca->aerial_friction);
+    ftCommon_ApplyFrictionAir(fp, ca->aerial_friction);
 }
 
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
@@ -171,7 +171,7 @@ void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 // 0x801464B0

@@ -178,7 +178,7 @@ void ftZd_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
     vec.x = attributes->x40;
     vec.y = attributes->x44;
 
-    ftCommon_8007D494(fp, vec.x, vec.y);
+    ftCommon_Fall(fp, vec.x, vec.y);
     ftCommon_8007CEF4(fp);
 }
 
@@ -264,7 +264,7 @@ void ftZd_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
 void ftZd_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftZd_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
@@ -457,7 +457,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
               (float) M_PI_2))
         {
             if (ftCo_8009A134(gobj) == 0) {
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
 
                 temp_f5 = atan2f(fp->input.lstick.y,
                                  fp->input.lstick.x * fp->facing_dir);
@@ -543,7 +543,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
             temp_f1 = -temp_f1;
         }
         if (temp_f1 > 0.001f) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
         }
         var_f30 =
             atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
@@ -616,8 +616,8 @@ void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes = fp->dat_attrs;
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007D4B8(fp);
-        ftCommon_8007D440(fp, attributes->x5C * fp->co_attrs.air_drift_max);
+        ftCommon_FallBasic(fp);
+        ftCommon_ClampSelfVelX(fp, attributes->x5C * fp->co_attrs.air_drift_max);
         return;
     }
 

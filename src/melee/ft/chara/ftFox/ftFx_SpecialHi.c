@@ -161,11 +161,11 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialHi.gravityDelay != 0) {
         fp->mv.fx.SpecialHi.gravityDelay -= 1;
     } else {
-        ftCommon_8007D494(fp, da->x60_FOX_FIREFOX_FALL_ACCEL,
+        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL,
                           ca->terminal_vel);
     }
 
-    ftCommon_8007CE94(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
+    ftCommon_ApplyFrictionAir(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
 }
 
 void ftFx_SpecialHiHold_Coll(HSD_GObj* gobj)
@@ -220,7 +220,7 @@ void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
 
     fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void ftFx_SpecialHi_Anim(HSD_GObj* gobj)
@@ -275,10 +275,10 @@ void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
     fp->mv.fx.SpecialHi.unk++;
 
     if (fp->mv.fx.SpecialHi.unk >= da->x70_FOX_FIREFOX_DURATION_END) {
-        ftCommon_8007C930(fp, da->x78_FOX_FIREFOX_REVERSE_ACCEL);
+        ftCommon_ApplyFrictionGround(fp, da->x78_FOX_FIREFOX_REVERSE_ACCEL);
     }
 
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftFx_SpecialAirHi_Phys(HSD_GObj* gobj)
@@ -458,7 +458,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
         if (!(lbVector_AngleXY(&collData->floor.normal, &sp20) < HALF_PI32) &&
             (ftCo_8009A134(gobj) == false))
         {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
 
             Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHi, 0, 0.0f, 1.0f,
                                       0.0f, NULL);
@@ -515,7 +515,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
             temp_stick = -temp_stick;
         }
         if (temp_stick > da->x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
         }
         fp->mv.fx.SpecialHi.rotateModel =
             atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
@@ -589,8 +589,8 @@ void ftFx_SpecialHiLanding_Phys(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
-    ftCommon_8007C930(fp, da->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, da->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 // 0x800E7F20 - Fox & Falco's aerial Firefox/Firebird End Physics callback

@@ -193,10 +193,10 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ int x0;
         /* fp+2344 */ float x4;
-        /* fp+2348 */ float x8;
+        /* fp+2348 */ float mobility;
         /* fp+234C */ int xC;
         /* fp+2350 */ bool x10;
-        /* fp+2354 */ float x14;
+        /* fp+2354 */ float landing_lag;
         /* fp+2358 */ bool allow_interrupt;
     } fallspecial;
     struct {

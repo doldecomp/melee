@@ -37,7 +37,7 @@ void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
 void ftMh_CaptureDamageMasterHand_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007DC08(fp, p_ftCommonData->x3A8);
+    ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
     if (fp->grab_timer <= 0) {
         ftMh_CaptureDamageMasterHand_80155C94(gobj);
         ftMh_MS_381_8015483C(fp->victim_gobj);

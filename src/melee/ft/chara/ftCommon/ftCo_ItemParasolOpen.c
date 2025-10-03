@@ -112,19 +112,19 @@ void ftCo_ItemParasolOpen_Phys(Fighter_GObj* gobj)
         float mul = p_ftCommonData->x590;
         float grav = ca->grav * mul;
         float terminal_vel = ca->terminal_vel * mul;
-        ftCommon_8007D494(fp, grav, terminal_vel);
+        ftCommon_Fall(fp, grav, terminal_vel);
         {
-            float arg1, arg2;
+            float drift, target_vel;
             if (ABS(fp->input.lstick.x) >= p_ftCommonData->x258) {
-                arg1 = p_ftCommonData->x58C *
-                       (fp->input.lstick.x * ca->air_drift_stick_mul);
-                arg2 = p_ftCommonData->x58C *
-                       (fp->input.lstick.x * ca->air_drift_max);
+                drift = p_ftCommonData->x58C *
+                        (fp->input.lstick.x * ca->air_drift_stick_mul);
+                target_vel = p_ftCommonData->x58C *
+                             (fp->input.lstick.x * ca->air_drift_max);
             } else {
-                arg2 = 0.0f;
-                arg1 = 0.0f;
+                target_vel = 0.0F;
+                drift = 0.0F;
             }
-            ftCommon_8007D140(fp, arg1, arg2, ca->aerial_friction);
+            ftCommon_8007D140(fp, drift, target_vel, ca->aerial_friction);
         }
     }
 }

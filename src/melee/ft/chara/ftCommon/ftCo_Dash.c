@@ -66,7 +66,7 @@ void ftCo_Dash_Enter(Fighter_GObj* gobj, int arg1)
     } else {
         fp->mv.co.dash.x0 = init_vel - fp->gr_vel;
     }
-    ftCommon_800804A0(fp, fp->mv.ca.specials.grav);
+    ftCommon_800804A0(fp, fp->mv.co.dash.x0);
     fp->mv.co.dash.x4 = arg1;
     if (fp->x197C != NULL) {
         ft_PlaySFX(fp, 0x118, 0x7F, 0x40);
@@ -159,7 +159,7 @@ void ftCo_Dash_Phys(Fighter_GObj* gobj)
                           attrs->gr_friction *
                               p_ftCommonData->x60_someFrictionMul);
     }
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftCo_Dash_Coll(Fighter_GObj* gobj)

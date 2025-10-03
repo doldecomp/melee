@@ -60,7 +60,7 @@ void ftSs_SpecialAirHi_Enter(HSD_GObj* gobj)
     fp->cmd_vars[0] = 0;
     fp->mv.ss.unk5.x0 = 0;
     fp->self_vel.y = samus_attr->x44;
-    ftCommon_8007D440(fp, samus_attr->x40);
+    ftCommon_ClampSelfVelX(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(1154, gobj, fp->parts[FtPart_YRotN].joint);
     fp->fv.ss.x2244 = 1;
@@ -132,7 +132,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
             {
                 fp->cmd_vars[1] = 1;
                 fp->mv.ss.unk5.x0 = 1;
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
                 ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
@@ -160,7 +160,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
             {
                 fp->cmd_vars[1] = 1;
                 fp->mv.ss.unk5.x0 = 1;
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
                 ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }

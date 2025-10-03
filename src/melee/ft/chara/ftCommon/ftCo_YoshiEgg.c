@@ -136,7 +136,7 @@ void ftCo_YoshiEgg_Anim(Fighter_GObj* gobj)
     PAD_STACK(8);
     fp->grab_timer -= ftYs_SpecialN_GetExtAttr28(gobj);
     fp->mv.co.yoshiegg.x4 =
-        ftCommon_8007DC08(fp, ftYs_SpecialN_GetExtAttr2C());
+        ftCommon_GrabMash(fp, ftYs_SpecialN_GetExtAttr2C());
     if (fp->grab_timer <= 0) {
         ft_PlaySFX(fp, 280088, 127, 64);
         {

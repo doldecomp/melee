@@ -157,7 +157,7 @@ void ftMt_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         Fighter* fp1 = fp0;
         ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp0);
 
-        ftCommon_8007D494(fp1, mewtwoAttrs->x48_MEWTWO_TELEPORT_GRAVITY,
+        ftCommon_Fall(fp1, mewtwoAttrs->x48_MEWTWO_TELEPORT_GRAVITY,
                           mewtwoAttrs->x4C_MEWTWO_TELEPORT_TERMINAL_VELOCITY);
     }
 
@@ -251,7 +251,7 @@ void ftMt_SpecialAirHiLost_IASA(HSD_GObj* gobj) {}
 // Mewtwo's grounded Teleport Zoom Physics callback
 void ftMt_SpecialHiLost_Phys(HSD_GObj* gobj)
 {
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 // Mewtwo's aerial Teleport Zoom Physics callback
@@ -441,7 +441,7 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
               (float) M_PI_2) &&
             (ftCo_8009A134(gobj) == false))
         {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
 
             vel = atan2f(fp->input.lstick.y,
                          fp->input.lstick.x * fp->facing_dir);
@@ -502,7 +502,7 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
 
         /// @todo Express as a fraction or something.
         if (stick_x > stick_epsilon) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
         }
 
         floatVar =
@@ -576,8 +576,8 @@ void ftMt_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
     if (fp->cmd_vars[0]) {
-        ftCommon_8007D4B8(fp);
-        ftCommon_8007D440(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
+        ftCommon_FallBasic(fp);
+        ftCommon_ClampSelfVelX(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
                                   fp->co_attrs.air_drift_max);
     } else {
         float velY = fp->self_vel.y;

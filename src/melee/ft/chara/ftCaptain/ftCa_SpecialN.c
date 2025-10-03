@@ -206,7 +206,7 @@ void ftCa_SpecialN_Coll(HSD_GObj* gobj)
                                   fp->cur_anim_frame, 1, 0, NULL);
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
-        ftCommon_8007D468(fp);
+        ftCommon_ClampAirDrift(fp);
     }
 }
 

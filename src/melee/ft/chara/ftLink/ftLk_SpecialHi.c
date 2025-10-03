@@ -98,7 +98,7 @@ void ftLk_SpecialAirHi_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* ca = &fp->co_attrs;
     ftLk_DatAttrs* da = fp->dat_attrs;
-    ftCommon_8007D494(fp, ca->grav * da->specialhi_grav_mul, ca->terminal_vel);
+    ftCommon_Fall(fp, ca->grav * da->specialhi_grav_mul, ca->terminal_vel);
     ftCommon_8007D344(
         fp, 0, ca->air_drift_stick_mul * da->specialairhi_drift_stick_mul,
         ca->air_drift_max * da->specialairhi_drift_max_mul);

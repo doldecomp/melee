@@ -186,11 +186,11 @@ void ftCo_PassiveWall_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
     if (!fp->mv.co.passivewall.timer) {
         ftCo_DatAttrs* co = &fp->co_attrs;
-        ftCommon_8007D528(fp);
-        if (fp->x221A_b4) {
-            ftCommon_8007D4E4(fp);
+        ftCommon_CheckFallFast(fp);
+        if (fp->fall_fast) {
+            ftCommon_FallFast(fp);
         } else {
-            ftCommon_8007D494(fp, co->grav, co->terminal_vel);
+            ftCommon_Fall(fp, co->grav, co->terminal_vel);
         }
         ftCommon_8007D140(fp, 0.0F, 0.0F, fp->co_attrs.aerial_friction);
     }

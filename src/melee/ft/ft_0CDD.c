@@ -140,7 +140,7 @@ void ftCo_800CE010(Fighter_GObj* fighter_gobj)
                                   0.0f, 1.0f, 0.0f, NULL);
     }
     ftAnim_8006EBA4(fighter_gobj);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE1D4;
     if ((Item_GObj*) fighter->item_gobj != NULL) {
         it_8028E938((Item_GObj*) fighter->item_gobj);
@@ -188,7 +188,7 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
     f2 = fighter->frame_speed_mul;
     Fighter_ChangeMotionState(fighter_gobj, id, 0x0C4C5080, f1, f2, 0.0f,
                               NULL);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
 
@@ -299,7 +299,7 @@ void ftCo_800CE480(Fighter_GObj* fighter_gobj)
     Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir, 0,
                               0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE650;
     fighter->take_dmg_cb = ftCo_800CE620;
 }
@@ -326,7 +326,7 @@ void ft_800CE5A0(Fighter_GObj* fighter_gobj)
     Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir,
                               0x0C4C5880U, fighter->cur_anim_frame,
                               fighter->frame_speed_mul, 0.0f, NULL);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE650;
     fighter->take_dmg_cb = ftCo_800CE620;
 }

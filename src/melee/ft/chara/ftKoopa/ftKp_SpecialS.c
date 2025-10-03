@@ -629,7 +629,7 @@ void ftKp_SpecialAirSStart_Phys(Fighter_GObj* gobj)
     f32 vel_y = fp->self_vel.y;
     ft_80085134(gobj);
     fp->self_vel.y = vel_y;
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
 }
 
 void ftKp_SpecialSHit_Phys(Fighter_GObj* gobj)

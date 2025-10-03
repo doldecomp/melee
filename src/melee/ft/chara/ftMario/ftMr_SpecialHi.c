@@ -87,7 +87,7 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
     }
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > sa->specialhi.reverse_stick_range) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
@@ -121,7 +121,7 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.y *= sa->specialhi.vel_mul;
         fp->self_vel.z *= sa->specialhi.vel_mul;
     } else {
-        ftCommon_8007D494(fp, sa->specialhi.grav, attrs->terminal_vel);
+        ftCommon_Fall(fp, sa->specialhi.grav, attrs->terminal_vel);
         ftCommon_8007CF58(fp);
     }
 }

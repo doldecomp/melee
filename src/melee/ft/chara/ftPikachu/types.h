@@ -26,8 +26,8 @@ typedef struct _ftPikachuAttributes {
     float x28;
     float x2C;
     float x30;
-    float x34;
-    float x38;
+    float specials_start_friction;
+    float specials_start_gravity;
     float x3C;
     float x40;
     float x44;

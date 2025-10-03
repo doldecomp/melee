@@ -3848,7 +3848,7 @@ void ftKb_AttackDashAir_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ft_80085204(gobj);
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
 }
 
 /// #ftKb_AttackDashAir_Coll
@@ -4016,7 +4016,7 @@ void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj)
                       temp_r30->air_drift_stick_mul *
                           dat_attr->specialhi_horizontal_momentum,
                       temp_r30->air_drift_max);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
@@ -4030,7 +4030,7 @@ void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
                       temp_r30->air_drift_stick_mul *
                           dat_attr->specialhi_horizontal_momentum,
                       temp_r30->air_drift_max);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftKb_SpecialHi3_Phys(Fighter_GObj* gobj)
@@ -4041,7 +4041,7 @@ void ftKb_SpecialHi3_Phys(Fighter_GObj* gobj)
                       fp->co_attrs.air_drift_stick_mul *
                           dat_attr->specialhi_horizontal_momentum,
                       fp->co_attrs.air_drift_max);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftKb_SpecialHi4_Phys(Fighter_GObj* gobj)
@@ -7086,12 +7086,12 @@ void ftKb_PeSpecialAirLw_Phys(HSD_GObj* gobj)
                 fp->self_vel.y = 0;
             }
         }
-        ftCommon_8007D494(fp, da->specialn_pe_fall_acceleration,
+        ftCommon_Fall(fp, da->specialn_pe_fall_acceleration,
                           da->specialn_pe_unk2);
     } else {
-        ftCommon_8007D4B8(fp);
+        ftCommon_FallBasic(fp);
     }
-    ftCommon_8007CE94(fp,
+    ftCommon_ApplyFrictionAir(fp,
                       da->specialn_pe_air_horizontal_momentum_preservation);
     ftColl_8007AEE0(gobj);
 }
@@ -7215,9 +7215,9 @@ void ftKb_PeSpecialAirLwHit_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     PAD_STACK(4 * 2);
-    ftCommon_8007D494(fp, da->specialn_pe_fall_acceleration,
+    ftCommon_Fall(fp, da->specialn_pe_fall_acceleration,
                       da->specialn_pe_unk2);
-    ftCommon_8007CE94(fp,
+    ftCommon_ApplyFrictionAir(fp,
                       da->specialn_pe_air_horizontal_momentum_preservation);
 }
 

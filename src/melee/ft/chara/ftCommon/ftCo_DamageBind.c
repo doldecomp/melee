@@ -70,7 +70,7 @@ void ftCo_DamageBind_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x670;
-    ftCommon_8007DC08(fp, p_ftCommonData->x674);
+    ftCommon_GrabMash(fp, p_ftCommonData->x674);
     if (fp->grab_timer <= 0.0F) {
         ft_8008A2BC(gobj);
     }

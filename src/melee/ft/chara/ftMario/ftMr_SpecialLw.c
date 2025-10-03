@@ -87,7 +87,7 @@ void ftMr_SpecialLw_Enter(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, 0, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->self_vel.y = sa->speciallw.vel_y - sa->speciallw.tap_y_vel_max;
-    ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
+    ftCommon_ClampSelfVelX(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
     fp->pre_hitlag_cb = &efLib_PauseAll;
     fp->post_hitlag_cb = &efLib_ResumeAll;
@@ -110,7 +110,7 @@ void ftMr_SpecialAirLw_Enter(HSD_GObj* gobj)
         sub_val = sa->speciallw.tap_y_vel_max;
     }
     fp->self_vel.y = (float) (sa->speciallw.vel_y - sub_val);
-    ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
+    ftCommon_ClampSelfVelX(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
     fp->pre_hitlag_cb = &efLib_PauseAll;
     fp->post_hitlag_cb = &efLib_ResumeAll;
@@ -171,7 +171,7 @@ static void doPhys(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, transition_flags,
                               fp->cur_anim_frame, 1, 0, NULL);
     ftCommon_ClampFallSpeed(fp, sa->speciallw.tap_grav);
-    ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
+    ftCommon_ClampSelfVelX(fp, sa->speciallw.air_momentum_x);
     fp->pre_hitlag_cb = &efLib_PauseAll;
     fp->post_hitlag_cb = &efLib_ResumeAll;
 }
@@ -196,7 +196,7 @@ void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
     {
         Fighter* fp1 = fp0;
         ftCommon_8007CADC(fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
-        ftCommon_8007CB74(gobj);
+        ftCommon_ApplyGroundMovement(gobj);
         if (fp0->cmd_vars[2] != 0 && (fp0->input.x668 & HSD_PAD_B)) {
             vel_y = fp0->self_vel.y;
             fp0->self_vel.y = vel_y + sa->speciallw.tap_y_vel_max;
@@ -220,10 +220,10 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
     if (((s32) fp->fv.mr.x2234_tornadoCharge == false) &&
         ((u32) fp->cmd_vars[2] != 0U) && ((fp->input.x668 & HSD_PAD_B) != 0))
     {
-        ftCommon_8007D508(fp, sa->speciallw.tap_y_vel_max,
+        ftCommon_Ascend(fp, sa->speciallw.tap_y_vel_max,
                           sa->speciallw.tap_grav);
     }
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
     flt_var = sa->speciallw.air_momentum_x;
     sa_2 = fp->dat_attrs;
     if ((u32) fp->cmd_vars[0] != 0U) {
@@ -294,7 +294,7 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     fp->fv.mr.x2234_tornadoCharge = 0;
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialLw, transition_flags,
                               fp->cur_anim_frame, 1, 0, NULL);
-    ftCommon_8007CC78(ft_tmp = fp, sa->speciallw.momentum_x);
+    ftCommon_ClampGrVel(ft_tmp = fp, sa->speciallw.momentum_x);
     fp->pre_hitlag_cb = &efLib_PauseAll;
     fp->post_hitlag_cb = &efLib_ResumeAll;
 }

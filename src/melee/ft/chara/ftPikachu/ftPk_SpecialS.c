@@ -82,9 +82,8 @@ void ftPk_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = getFtSpecialAttrsD(fp);
-    float pika_attr_x34 = sa->x34;
-    ftCommon_8007C930(fp, pika_attr_x34);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, sa->specials_start_friction);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
@@ -94,10 +93,10 @@ void ftPk_SpecialAirSStart_Phys(HSD_GObj* gobj)
     struct ftCo_DatAttrs* da = &fp->co_attrs;
 
     if (fp->cmd_vars[0]) {
-        ftCommon_8007D494(fp, pika_attr->x38, da->terminal_vel);
+        ftCommon_Fall(fp, pika_attr->specials_start_gravity, da->terminal_vel);
     }
 
-    ftCommon_8007CE94(fp, pika_attr->x34);
+    ftCommon_ApplyFrictionAir(fp, pika_attr->specials_start_friction);
 }
 
 void ftPk_SpecialSStart_Coll(HSD_GObj* gobj)
@@ -392,13 +391,13 @@ void ftPk_SpecialAirS1_Phys(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007D494(fp, pika_attr->x58, pika_attr->x4C);
+        ftCommon_Fall(fp, pika_attr->x58, pika_attr->x4C);
     } else {
-        ftCommon_8007D494(fp, pika_attr->x48, pika_attr->x4C);
+        ftCommon_Fall(fp, pika_attr->x48, pika_attr->x4C);
     }
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007CE94(fp, pika_attr->x54);
+        ftCommon_ApplyFrictionAir(fp, pika_attr->x54);
     }
 }
 
@@ -469,8 +468,8 @@ void ftPk_SpecialSEnd_Phys(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
-    ftCommon_8007C930(fp, sa->x54);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, sa->x54);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
@@ -479,8 +478,8 @@ void ftPk_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->dat_attrs;
-    ftCommon_8007D494(fp, sa->x58, fp->co_attrs.terminal_vel);
-    ftCommon_8007CE94(fp, sa->x54);
+    ftCommon_Fall(fp, sa->x58, fp->co_attrs.terminal_vel);
+    ftCommon_ApplyFrictionAir(fp, sa->x54);
 }
 
 void ftPk_SpecialSEnd_Coll(HSD_GObj* gobj)

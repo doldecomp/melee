@@ -137,8 +137,8 @@ void ftLg_SpecialSStart_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    ftCommon_8007C930(fp, sa->x1C_LUIGI_GREENMISSILE_UNK2);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, sa->x1C_LUIGI_GREENMISSILE_UNK2);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 /// Luigi's aerial Green Missile Start Physics callback
@@ -151,11 +151,11 @@ void ftLg_SpecialAirSStart_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* ca = &fp->co_attrs;
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007D494(fp, da->x20_LUIGI_GREENMISSILE_FALLING_SPEED,
+        ftCommon_Fall(fp, da->x20_LUIGI_GREENMISSILE_FALLING_SPEED,
                           ca->terminal_vel);
     }
 
-    ftCommon_8007CE94(fp, da->x1C_LUIGI_GREENMISSILE_UNK2);
+    ftCommon_ApplyFrictionAir(fp, da->x1C_LUIGI_GREENMISSILE_UNK2);
 }
 
 /// Luigi's grounded Green Missile Start Collision callback
@@ -660,15 +660,15 @@ void ftLg_SpecialAirS2_Phys(HSD_GObj* gobj)
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007D494(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
+        ftCommon_Fall(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
                           sa->x34_LUIGI_GREENMISSILE_GRAVITY_START);
     } else {
-        ftCommon_8007D494(fp, sa->x30_LUIGI_GREENMISSILE_MUL_Y,
+        ftCommon_Fall(fp, sa->x30_LUIGI_GREENMISSILE_MUL_Y,
                           sa->x34_LUIGI_GREENMISSILE_GRAVITY_START);
     }
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007CE94(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
+        ftCommon_ApplyFrictionAir(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
     }
 }
 
@@ -770,8 +770,8 @@ void ftLg_SpecialSEnd_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    ftCommon_8007C930(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 /// Luigi's aerial Green Missile End Physics callback
@@ -780,9 +780,9 @@ void ftLg_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    ftCommon_8007D494(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
+    ftCommon_Fall(fp, sa->x40_LUIGI_GREENMISSILE_GRAVITY_MUL,
                       fp->co_attrs.terminal_vel);
-    ftCommon_8007CE94(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
+    ftCommon_ApplyFrictionAir(fp, sa->x3C_LUIGI_GREENMISSILE_X_DECEL);
 }
 
 /// Luigi's grounded Green Missile End Collision callback

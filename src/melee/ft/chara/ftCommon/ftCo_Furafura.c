@@ -33,7 +33,7 @@ void ftCo_Furafura_Anim(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->shield_health = p_ftCommonData->x280_unkShieldHealth;
     fp->grab_timer -= p_ftCommonData->x300;
-    ftCommon_8007DC08(fp, p_ftCommonData->x304);
+    ftCommon_GrabMash(fp, p_ftCommonData->x304);
     if (fp->grab_timer <= 0) {
         ft_8008A2BC(gobj);
     }

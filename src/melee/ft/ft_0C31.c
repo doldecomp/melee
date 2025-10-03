@@ -577,7 +577,7 @@ void ftCo_CaptureLeadead_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x734;
-    ftCommon_8007DC08(fp, p_ftCommonData->x738);
+    ftCommon_GrabMash(fp, p_ftCommonData->x738);
     if (fp->grab_timer <= 0.0F) {
         it_802EAE80(fp->mv.co.captureleadead.x0);
         ftCo_800C7800(gobj);

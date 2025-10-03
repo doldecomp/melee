@@ -81,7 +81,7 @@ void ftCa_SpecialHi_IASA(HSD_GObj* gobj)
                 lstick_x = -lstick_x;
             }
             if (lstick_x > da->specialhi_input_var) {
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
                 ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
@@ -171,7 +171,7 @@ static void doAirIASA(HSD_GObj* gobj)
             lstick_x = -lstick_x;
         }
         if (lstick_x > da->specialhi_input_var) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
@@ -277,7 +277,7 @@ void ftCa_SpecialHiThrow0_Phys(HSD_GObj* gobj)
         ca = &fp->co_attrs;
         {
             float vel_y = fp->self_vel.y - fp->mv.ca.specialhi.vel.y;
-            ftCommon_8007D494(fp, da->specialhi_catch_grav, ca->terminal_vel);
+            ftCommon_Fall(fp, da->specialhi_catch_grav, ca->terminal_vel);
             fp->mv.ca.specialhi.vel.y = fp->self_vel.y - vel_y;
         }
     } else {

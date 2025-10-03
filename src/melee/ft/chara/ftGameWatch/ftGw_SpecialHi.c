@@ -211,7 +211,7 @@ void ftGw_SpecialAirHi_IASA(HSD_GObj* gobj)
 
             temp = stick_range_threshold * facing_dir;
             angle = temp * gawAttrs->x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
             fp->lstick_angle = -angle;
             fp->cmd_vars[0] = 1;

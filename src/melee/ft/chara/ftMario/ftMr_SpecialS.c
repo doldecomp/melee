@@ -239,12 +239,12 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
             coords.x += 3 * fp->facing_dir;
             lb_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }
-        ftCommon_8007D494(fp, sa->specials.grav, sa->specials.terminal_vel);
+        ftCommon_Fall(fp, sa->specials.grav, sa->specials.terminal_vel);
     } else {
-        ftCommon_8007D4B8(fp);
+        ftCommon_FallBasic(fp);
     }
 
-    ftCommon_8007CE94(fp, sa->specials.vel.x);
+    ftCommon_ApplyFrictionAir(fp, sa->specials.vel.x);
     reflect(gobj);
 }
 

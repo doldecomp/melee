@@ -156,9 +156,9 @@ void ftPe_SpecialSStart_Phys(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
-    ftCommon_8007CA80(fp, da->x38 * fp->facing_dir, da->x3C * fp->facing_dir,
-                      0);
-    ftCommon_8007CB74(gobj);
+    ftCommon_8007CA80(fp, da->specials_start_accel * fp->facing_dir,
+                      da->specials_start_vel_x * fp->facing_dir, 0);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftPe_SpecialAirSStart_Phys(HSD_GObj* gobj)
@@ -241,9 +241,10 @@ void ftPe_SpecialAirSJump_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPe_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[1]) {
-        ftCommon_8007CE94(fp, da->x54);
+        ftCommon_ApplyFrictionAir(fp, da->x54);
     }
-    ftCommon_8007D494(fp, fp->cmd_vars[1] ? da->x58 : da->x50, da->x5C);
+    ftCommon_Fall(fp, fp->cmd_vars[1] ? da->x58_gravity : da->x50_gravity,
+                  da->x5C_terminal_vel);
 }
 
 void ftPe_SpecialAirSJump_Coll(HSD_GObj* gobj)

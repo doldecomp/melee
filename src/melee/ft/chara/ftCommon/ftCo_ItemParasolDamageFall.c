@@ -19,7 +19,7 @@ void ftCo_800CF4DC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_ItemParasolDamageFall,
                               Ft_MF_KeepFastFall, 0.0f, 1.0f, 0.0f, NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void ftCo_ItemParasolDamageFall_Anim(Fighter_GObj* gobj) {}
