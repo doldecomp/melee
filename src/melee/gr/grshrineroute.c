@@ -1,5 +1,7 @@
 #include "grshrineroute.h"
 
+#include "ground.h"
+
 #include <platform.h>
 
 extern float grNKr_804DB868;
@@ -102,7 +104,14 @@ void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
 /// #grShrineRoute_8020AC44
 
-/// #fn_8020AD24
+bool fn_8020AD24(bool arg)
+{
+    if (arg == 1) {
+        Ground_801C5740(arg);
+        return 1;
+    }
+    return 0;
+}
 
 /// #fn_8020AD58
 
