@@ -3246,7 +3246,23 @@ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
 
 /// #ftKb_Init_UnkCallbackPairs0_1
 
-/// #ftKb_SpecialN_800EFA40
+void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(4);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        Kirby_Unk* unk = ft_80459B88.x0;
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(unk->x0);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&unk->x4, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 void ftKb_SpecialN_800EFAF0(HSD_GObj* gobj)
 {
@@ -3265,7 +3281,7 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.jobj == NULL) {
         KirbyHatStruct** hats = ft_80459B88.hats;
-        KirbyHatStruct* hat = hats[0];
+        KirbyHatStruct* hat = hats[FTKIND_MARIO];
 
         fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
 
@@ -3293,7 +3309,23 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800EFBFC
 
-/// #ftKb_SpecialN_800EFC58
+void ftKb_SpecialN_800EFC58(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_FOX];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800EFD08
 
@@ -3328,15 +3360,63 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F0054
 
-/// #ftKb_SpecialN_800F00B8
+void ftKb_SpecialN_800F00B8(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_SEAK];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F0168
 
-/// #ftKb_SpecialN_800F01C4
+void ftKb_SpecialN_800F01C4(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_NESS];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F0274
 
-/// #ftKb_SpecialN_800F02D0
+void ftKb_SpecialN_800F02D0(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_PEACH];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F0380
 
@@ -3344,15 +3424,63 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F0494
 
-/// #ftKb_SpecialN_800F04F8
+void ftKb_SpecialN_800F04F8(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_PIKACHU];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F05A8
 
-/// #ftKb_SpecialN_800F0604
+void ftKb_SpecialN_800F0604(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_SAMUS];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F06B4
 
-/// #ftKb_SpecialN_800F0710
+void ftKb_SpecialN_800F0710(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_MEWTWO];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F07C0
 
@@ -3368,7 +3496,23 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F0B0C
 
-/// #ftKb_SpecialN_800F0B70
+void ftKb_SpecialN_800F0B70(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_CLINK];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F0C20
 
@@ -3376,7 +3520,23 @@ void ftKb_SpecialN_800EFE80(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F0D34
 
-/// #ftKb_SpecialN_800F0D98
+void ftKb_SpecialN_800F0D98(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.jobj == NULL) {
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_GAMEWATCH];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftParts_80074148();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftParts_80074170();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+                            &fp->fv.kb.hat.x14.count,
+                            &fp->fv.kb.hat.x14.count);
+    }
+}
 
 /// #ftKb_SpecialN_800F0E48
 
@@ -3397,7 +3557,7 @@ void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
         return;
     }
 
-    temp_r29 = ft_80459B88.hats[2];
+    temp_r29 = ft_80459B88.hats[FTKIND_CAPTAIN];
     ftKb_SpecialN_800EF040(gobj, 3, temp_r29);
     fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
     fp->fv.kb.hat.x20 = HSD_ObjAlloc(&fighter_x2040_alloc_data);
@@ -3475,7 +3635,10 @@ void ftKb_AttackDash_Phys(Fighter_GObj* gobj)
     ft_80084FA8(gobj);
 }
 
-/// #ftKb_AttackDash_Coll
+void ftKb_AttackDash_Coll(Fighter_GObj* gobj)
+{
+    ft_8008403C(gobj, fn_800F20C4);
+}
 
 /// #fn_800F20C4
 
@@ -3483,7 +3646,13 @@ void ftKb_AttackDash_Phys(Fighter_GObj* gobj)
 
 void ftKb_AttackDashAir_IASA(Fighter_GObj* gobj) {}
 
-/// #ftKb_AttackDashAir_Phys
+void ftKb_AttackDashAir_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ft_80085204(gobj);
+    ftCommon_8007D4B8(fp);
+}
 
 /// #ftKb_AttackDashAir_Coll
 
@@ -4642,13 +4811,25 @@ void ftKb_Eat_Coll(HSD_GObj* gobj)
 
 /// #ftKb_SpecialNSpit0_Coll
 
-/// #ftKb_SpecialNSpit_Coll
+void ftKb_SpecialNSpit_Coll(Fighter_GObj* gobj)
+{
+    ft_8008403C(gobj, fn_800F6C98);
+}
 
-/// #ftKb_SpecialNSpit1_Coll
+void ftKb_SpecialNSpit1_Coll(Fighter_GObj* gobj)
+{
+    ft_80082C74(gobj, fn_800F6D0C);
+}
 
-/// #ftKb_SpecialAirNSpit_Coll
+void ftKb_SpecialAirNSpit_Coll(Fighter_GObj* gobj)
+{
+    ft_80082C74(gobj, fn_800F6D80);
+}
 
-/// #ftKb_SpecialNDrink0_Coll
+void ftKb_SpecialNDrink0_Coll(Fighter_GObj* gobj)
+{
+    ft_8008403C(gobj, fn_800F6DF4);
+}
 
 /// #ftKb_SpecialNDrink_Coll
 
