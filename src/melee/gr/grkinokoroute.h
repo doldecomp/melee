@@ -29,7 +29,7 @@
 /* 207C88 */ void grKinokoRoute_80207C88(Ground_GObj*);
 /* 208368 */ void grKinokoRoute_80208368(Ground_GObj*);
 /* 20836C */ UNK_RET grKinokoRoute_8020836C(UNK_PARAMS);
-/* 208480 */ UNK_RET fn_80208480(UNK_PARAMS);
+/* 208480 */ bool fn_80208480(bool);
 /* 2084B4 */ UNK_RET fn_802084B4(UNK_PARAMS);
 /* 208564 */ UNK_RET grKinokoRoute_80208564(UNK_PARAMS);
 /* 208660 */ UNK_RET fn_80208660(UNK_PARAMS);

@@ -11,7 +11,7 @@
 /* 20882C */ void grShrineRoute_8020882C(void);
 /* 208850 */ void grShrineRoute_80208850(void);
 /* 2088B8 */ bool grShrineRoute_802088B8(void);
-/* 2088C0 */ UNK_RET grShrineRoute_802088C0(UNK_PARAMS);
+/* 2088C0 */ UNK_RET grShrineRoute_802088C0(int);
 /* 2089AC */ void grShrineRoute_802089AC(Ground_GObj*);
 /* 2089D8 */ bool grShrineRoute_802089D8(Ground_GObj*);
 /* 2089E0 */ void grShrineRoute_802089E0(Ground_GObj*);

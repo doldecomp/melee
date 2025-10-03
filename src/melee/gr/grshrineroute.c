@@ -15,7 +15,10 @@ void grShrineRoute_802087B8(bool arg) {}
 
 /// #grShrineRoute_802087BC
 
-/// #grShrineRoute_8020882C
+void grShrineRoute_8020882C(void)
+{
+    grShrineRoute_802088C0(6);
+}
 
 /// #grShrineRoute_80208850
 
