@@ -81,14 +81,14 @@ void mpCollPrev(CollData* cd)
     mpColl_804D64A0 = NULL;
     mpColl_804D64A4 = NULL;
     if (g_debugLevel >= 3) {
-        if (!(cd->cur_pos.x < 45000.0f) || !(cd->cur_pos.x > -45000.0f) ||
-            !(cd->cur_pos.y < 45000.0f) || !(cd->cur_pos.y > -45000.0f))
+        if (!(cd->cur_pos.x < 45000.0F) || !(cd->cur_pos.x > -45000.0F) ||
+            !(cd->cur_pos.y < 45000.0F) || !(cd->cur_pos.y > -45000.0F))
         {
             if (ftLib_80086960(cd->x0_gobj)) {
                 OSReport(
                     "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
-                    "mpcoll.c", 203, ftLib_80086BE0(cd->x0_gobj),
-                    ftLib_800874BC(cd->x0_gobj), cd->cur_pos.x, cd->cur_pos.y);
+                    "mpcoll.c", 203, cd->cur_pos.x, cd->cur_pos.y,
+                    ftLib_80086BE0(cd->x0_gobj), ftLib_800874BC(cd->x0_gobj));
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
                          "mpcoll.c", 212, cd->x0_gobj->classifier,
@@ -97,7 +97,7 @@ void mpCollPrev(CollData* cd)
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
             }
-            __assert("mpcoll.c", 228, "0");
+            HSD_ASSERT(228, 0);
         }
     }
     cd->x28_vec = cd->cur_pos;
@@ -684,8 +684,7 @@ void mpColl_80042DB0(CollData* ecb, float time)
         fpclassify(ecb->xA4_ecbCurrCorrect.right.x) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN)
     {
-        OSReport("error\n");
-        __assert("mpcoll.c", 1193, "0");
+        HSD_ASSERTREPORT(1193, 0, "error\n");
     }
 }
 
@@ -786,7 +785,7 @@ void mpCollEnd(CollData* coll, s32 arg1, s32 arg2)
                     OSReport("itkind=%d\n", itGetKind(coll->x0_gobj));
                 }
             }
-            __assert("mpcoll.c", 1374, "0");
+            HSD_ASSERT(1374, 0);
         }
     }
 }
@@ -1734,7 +1733,7 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             }
             return 0;
         } else {
-            __assert("mpcoll.c", 0xE65U, "0");
+            HSD_ASSERT(3685, 0);
             return;
         }
     }
