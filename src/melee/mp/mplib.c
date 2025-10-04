@@ -282,154 +282,145 @@ bool mpLib_8004EBF8(f32* arg0, f32* arg1, f32 arg8, f32 arg9, f32 argA,
 
 /// #mpLib_8005199C
 
-int mpLib_80051BA8(Vec3* arg0, int arg1, int arg2, int arg3, int arg4,
-                   f32 arg5, f32 arg6, f32 arg7, f32 arg8)
+int mpLib_80051BA8(Vec3* out_vec, int arg1, int arg2, int arg3, int dir,
+                   float left, float bottom, float right, float top)
 {
-    f32 var_f31;
-    f32 var_f30;
-    f32 var_f29;
-    f32 var_f26;
+    float min;
+    float out_x;
+    float out_y;
 
-    f32 temp_f0;
-    f32 temp_f6;
-    f32 var_f6;
-    f32 var_f6_2;
-    f32 temp_f8;
-    f32 temp_f10;
-    f32 var_f11;
-    f32 var_f12;
-    f32 var_f13;
+    int ledge_id = -1;
 
-    int var_r30;
-    int temp_r24;
-    mpLib_LineInner* temp_r24_2;
-    mpLib_Point* temp_r23;
-    mpLib_Point* temp_r23_2;
-
-    int var_r12;
-    int var_r11;
-    mpLib_Line* var_r10;
-    int var_r9;
-    mpLib_804D64C0_t* var_r8;
-    int temp_r7;
-    int temp_r6;
-    struct mpLib_804D64C0_x4_t* temp_r6_2;
     bool temp_r3;
+    int new_id;
+    mpLib_804D64C0_t* var_r8;
 
-    var_r30 = -1;
-    if (arg4 > 0) {
-        var_f31 = +F32_MAX;
-    } else if (arg4 < 0) {
-        var_f31 = -F32_MAX;
+    if (dir > 0) {
+        min = +F32_MAX;
+    } else if (dir < 0) {
+        min = -F32_MAX;
     } else {
-        __assert(__FILE__, 0xEED, "0");
+        HSD_ASSERT(3821, 0);
     }
+
     temp_r3 = mpLib_800588C8();
     if (!temp_r3) {
-        mpLib_800588D0(arg5, arg6, arg7, arg8);
+        mpLib_800588D0(left, bottom, right, top);
     }
-    var_r8 = mpLib_804D64C4;
-    while (var_r8 != NULL) {
-        if (!(var_r8->flags & 0x1000)) {
-            temp_r6 = var_r8 - mpLib_804D64C0;
-            if (arg2 != temp_r6 && (arg3 == -1 || arg3 == temp_r6)) {
-                temp_r6_2 = var_r8->x4;
-                var_r9 = 0;
-                var_r11 = temp_r6_2->x2;
-                var_r12 = temp_r6_2->x12;
-                var_r10 = &mpLib_Lines[temp_r6_2->x0];
-                while (var_r9 < var_r11) {
-                block_13:
-                    temp_r7 = var_r10 - mpLib_Lines;
-                    if (arg1 != temp_r7) {
-                        temp_r24 = var_r10->flags;
-                        if ((temp_r24 & 1) && (temp_r24 & 0x10000) &&
-                            !(temp_r24 & 0x80))
-                        {
-                            temp_r24_2 = var_r10->x0;
-                            if (temp_r24_2->xE & 0x200) {
-                                temp_r23 = &mpLib_Points[temp_r24_2->p0_idx];
-                                temp_f6 = temp_r23->pos.x;
-                                temp_f8 = temp_r23->pos.y;
-                                temp_r23_2 = &mpLib_Points[temp_r24_2->p1_idx];
-                                temp_f0 = temp_r23_2->pos.x;
-                                temp_f10 = temp_r23_2->pos.y;
-                                if (temp_f6 > temp_f0) {
-                                    var_f13 = temp_f6;
-                                    var_f11 = temp_f0;
-                                } else {
-                                    var_f11 = temp_f6;
-                                    var_f13 = temp_f0;
-                                }
-                                if (temp_f8 > temp_f10) {
-                                    var_f26 = temp_f8;
-                                    var_f12 = temp_f10;
-                                } else {
-                                    var_f12 = temp_f8;
-                                    var_f26 = temp_f10;
-                                }
-                                var_f6 =
-                                    ABS((var_f13 + var_f11) - (arg7 + arg5));
-                                if (var_f6 <
-                                    ((var_f13 - var_f11) + (arg7 - arg5)))
+
+    for (var_r8 = mpLib_804D64C4; var_r8 != NULL; var_r8 = var_r8->next) {
+        if (var_r8->flags & 0x1000) {
+            continue;
+        }
+
+        if (arg2 == var_r8 - mpLib_804D64C0) {
+            continue;
+        }
+
+        if (arg3 == -1 || arg3 == var_r8 - mpLib_804D64C0) {
+            int var_r9 = 0;
+            mpLib_Line* line = &mpLib_Lines[var_r8->x4->x0];
+            int var_r11 = var_r8->x4->x2;
+            int var_r12 = var_r8->x4->x12;
+            while (var_r9 < var_r11) {
+            block_13:
+                new_id = line - mpLib_Lines;
+                if (arg1 != new_id) {
+                    int flags = line->flags;
+                    if (flags & 1 && flags & 0x10000 && !(flags & 0x80)) {
+                        mpLib_LineInner* inner = line->x0;
+                        if (inner->xE & 0x200) {
+                            float x0 = mpLib_Points[inner->p0_idx].pos.x;
+                            float y0 = mpLib_Points[inner->p0_idx].pos.y;
+                            float x1 = mpLib_Points[inner->p1_idx].pos.x;
+                            float y1 = mpLib_Points[inner->p1_idx].pos.y;
+                            float line_left;
+                            float line_bottom;
+                            float line_right;
+                            float line_top;
+                            float dist_h;
+
+                            if (x0 > x1) {
+                                line_right = x0;
+                                line_left = x1;
+                            } else {
+                                line_left = x0;
+                                line_right = x1;
+                            }
+
+                            if (y0 > y1) {
+                                line_top = y0;
+                                line_bottom = y1;
+                            } else {
+                                line_bottom = y0;
+                                line_top = y1;
+                            }
+                            // distance between midpoints of two right/left
+                            // pairs
+                            dist_h =
+                                ABS((line_right + line_left) - (right + left));
+                            if (dist_h <
+                                (line_right - line_left) + (right - left))
+                            {
+                                float dist_v = ABS((line_top + line_bottom) -
+                                                   (top + bottom));
+                                if (dist_v <
+                                    (line_top - line_bottom) + (top - bottom))
                                 {
-                                    var_f6_2 = ABS((var_f26 + var_f12) -
-                                                   (arg8 + arg6));
-                                    if (var_f6_2 <
-                                        ((var_f26 - var_f12) + (arg8 - arg6)))
-                                    {
-                                        if (arg4 > 0) {
-                                            if (var_f31 > temp_f6) {
-                                                var_f31 = temp_f6;
-                                                var_r30 = temp_r7;
-                                                if (arg0 != NULL) {
-                                                    var_f30 = temp_f6;
-                                                    var_f29 = temp_f8;
-                                                }
+                                    // we interesect in both axes
+                                    if (dir > 0) {
+                                        if (min > x0) {
+                                            min = x0;
+                                            ledge_id = new_id;
+                                            if (out_vec != NULL) {
+                                                out_x = x0;
+                                                out_y = y0;
                                             }
-                                        } else if ((arg4 < 0) &&
-                                                   (var_f31 < temp_f0))
-                                        {
-                                            var_f31 = temp_f0;
-                                            var_r30 = temp_r7;
-                                            if (arg0 != NULL) {
-                                                var_f30 = temp_f0;
-                                                var_f29 = temp_f10;
+                                        }
+                                    } else if (dir < 0) {
+                                        if (min < x1) {
+                                            min = x1;
+                                            ledge_id = new_id;
+                                            if (out_vec != NULL) {
+                                                out_x = x1;
+                                                out_y = y1;
                                             }
                                         }
                                     }
                                 }
+                                }
                             }
-                        }
                     }
-                    var_r9 += 1;
-                    var_r10 += 1;
                 }
-                if (var_r12 != 0) {
-                    var_r11 = var_r12;
-                    var_r9 = 0;
-                    var_r10 = &mpLib_Lines[temp_r6_2->x10];
-                    var_r12 = 0;
-                    goto block_13;
-                }
+                var_r9 += 1;
+                line += 1;
+            }
+            if (var_r12 != 0) {
+                var_r11 = var_r12;
+                var_r9 = 0;
+                line = &mpLib_Lines[var_r8->x4->x10];
+                var_r12 = 0;
+                goto block_13;
             }
         }
-        var_r8 = var_r8->next;
     }
+
     if (!temp_r3) {
         mpLib_80058AA0();
     }
-    if (var_r30 != -1 && arg0 != NULL) {
-        if (var_f30 > arg7) {
-            var_f30 = arg7;
-        } else if (var_f30 < arg5) {
-            var_f30 = arg5;
+
+    if (ledge_id != -1 && out_vec != NULL) {
+        if (out_x > right) {
+            out_x = right;
+        } else if (out_x < left) {
+            out_x = left;
         }
-        arg0->x = var_f30;
-        arg0->y = var_f29;
-        arg0->z = 0.0F;
+        out_vec->x = out_x;
+        out_vec->y = out_y;
+        out_vec->z = 0.0F;
     }
-    return var_r30;
+
+    return ledge_id;
 }
 
 bool mpLib_80051EC8(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, u32 arg4,
