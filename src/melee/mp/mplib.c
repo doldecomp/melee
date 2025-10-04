@@ -110,91 +110,99 @@ int mpLib_8004DC04(int gr_idx)
 bool mpLib_8004E97C(float arg0, float arg1, float arg2, float arg3, float arg4,
                     float arg5, float arg6, float arg7, float* arg8,
                     float* arg9)
-
 {
-    bool b0 = false;
-    bool b1 = false;
+    bool r0 = false;
+    bool r5 = false;
 
-    if (arg2 <= arg0) {
-        if (((arg4 < arg2) && (arg6 < arg2)) ||
-            ((arg0 < arg4 && (arg0 < arg6))))
-        {
+    if (arg0 <= arg2) {
+        if ((arg4 < arg0 && arg6 < arg0) || (arg2 < arg4 && arg2 < arg6)) {
             return false;
         }
-    } else if (((arg4 < arg0) && (arg6 < arg0)) ||
-               ((arg2 < arg4 && (arg2 < arg6))))
-    {
+    } else if ((arg4 < arg2 && arg6 < arg2) || (arg0 < arg4 && arg0 < arg6)) {
         return false;
     }
-    if (arg3 <= arg1) {
-        if (((arg5 < arg3) && (arg7 < arg3)) ||
-            ((arg1 < arg5 && (arg1 < arg7))))
-        {
+
+    if (arg1 <= arg3) {
+        if ((arg5 < arg1 && arg7 < arg1) || (arg3 < arg5 && arg3 < arg7)) {
             return false;
         }
-    } else if (((arg5 < arg1) && (arg7 < arg1)) ||
-               ((arg3 < arg5 && (arg3 < arg7))))
-    {
+    } else if ((arg5 < arg3 && arg7 < arg3) || (arg1 < arg5 && arg1 < arg7)) {
         return false;
     }
+
     {
-        double n6 = arg3 - arg1;
-        double n5 = arg4 - arg0;
-        double n8 = arg2 - arg0;
-        double n7 = arg5 - arg1;
-        double n9 = n8 * n7 - n6 * n5;
-        if (n9 < 0) {
-            if (n9 < -0.1) {
+        double f11 = arg3 - arg1;
+        double f10 = arg4 - arg0;
+        double f13 = arg2 - arg0;
+        double f12 = arg5 - arg1;
+        double f31 = (f13 * f12) - (f11 * f10);
+        double f29;
+        double f30;
+        double f0;
+        double f9;
+        double f6;
+        double f7;
+
+        if (f31 < 0.0) {
+            if (f31 < -0.1) {
                 return false;
             }
-            b0 = true;
+            r0 = true;
         }
-        {
-            double n4 = n8 * (arg7 - arg3) - n6 * (arg6 - arg2);
-            if (0 < n4) {
-                if (0.1 < n4) {
-                    return false;
-                }
-                b1 = true;
+
+        f30 = arg6 - arg2;
+        f29 = arg7 - arg3;
+
+        f9 = (f13 * f29) - (f11 * f30);
+        if (f9 > 0.0) {
+            if (f9 > 0.1) {
+                return false;
             }
-            if ((0 != n9) || (0 != n4)) {
-                double n2 = n5 * (arg7 - arg3) - n7 * (arg6 - arg2);
-                if (n9 <= n2) {
-                    if ((n9 < n2) && (n4 < n2)) {
-                        return false;
-                    }
-                } else if (n2 < n4) {
-                    return false;
-                }
-                n2 = (arg6 - arg4);
-                n4 = (arg7 - arg5);
-                if ((((0 != n2) || (0 != n4)) && ((!b0 || (!b1)))) &&
-                    ((n9 < 0 || (!b1))))
-                {
-                    double n3 = n2 * n6 - n4 * n8;
-                    n9 = n3;
-                    if (n3 < 0) {
-                        n9 = -n3;
-                    }
-                    if (1e-4 < n9) {
-                        n3 = (n2 * n7 - n4 * n5) / n3;
-                        if (n3 <= 0) {
-                            *arg8 = arg0;
-                            *arg9 = arg1;
-                        } else if (1 <= n3) {
-                            *arg8 = arg2;
-                            *arg9 = arg3;
-                        } else {
-                            *arg8 = (n8 * n3 + arg0);
-                            *arg9 = (n6 * n3 + arg1);
-                        }
-                        return true;
-                    }
-                }
+            r5 = true;
+        }
+
+        if (f31 == 0.0 && f9 == 0.0) {
+            return false;
+        }
+
+        f0 = (f10 * f29) - (f12 * f30);
+        if (f0 < f31) {
+            if (f0 < f9) {
+                return false;
+            }
+        } else if (f0 > f31) {
+            if (f0 > f9) {
+                return false;
             }
         }
+
+        f7 = arg6 - arg4;
+        f6 = arg7 - arg5;
+        if (!((f7 == 0.0 && f6 == 0.0) || (r0 && r5) || (f31 >= 0.0 && r5))) {
+            double f5 = (f7 * f11) - (f6 * f13);
+
+            if (ABS(f5) > 0.0001F) {
+                double f5_2 = ((f7 * f12) - (f6 * f10)) / f5;
+                if (f5_2 > 0.0) {
+                    if (f5_2 < 1.0) {
+                        *arg8 = (f13 * f5_2) + arg0;
+                        *arg9 = (f11 * f5_2) + arg1;
+                    } else {
+                        *arg8 = arg2;
+                        *arg9 = arg3;
+                    }
+                } else {
+                    *arg8 = arg0;
+                    *arg9 = arg1;
+                }
+
+                goto tlabel;
+            }
+        }
+        return false;
+    tlabel:
+        return true;
     }
-    return false;
 }
 
 bool mpLib_8004EBF8(f32* arg0, f32* arg1, f32 arg8, f32 arg9, f32 argA,
