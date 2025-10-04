@@ -44,7 +44,7 @@
 /* 0EF0E4 */ UNK_RET ftKb_SpecialN_800EF0E4(Fighter_GObj*, int, u8*);
 /* 0EF35C */ UNK_RET ftKb_SpecialN_800EF35C(Fighter_GObj*, int, u8*);
 /* 0EF438 */ UNK_RET ftKb_SpecialN_800EF438(Fighter_GObj*, KirbyHatStruct*);
-/* 0EF69C */ UNK_RET ftKb_SpecialN_800EF69C(UNK_PARAMS);
+/* 0EF69C */ void ftKb_SpecialN_800EF69C(Fighter_GObj*, int, KirbyHatStruct*);
 /* 0EF87C */ void ftKb_UnkIntBoolFunc0(Fighter*, int, bool);
 /* 0EF9BC */ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj);
 /* 0EF9FC */ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int,
@@ -246,13 +246,30 @@
 /* 0F6070 */ void ftKb_SpecialN_800F6070(Fighter_GObj* gobj);
 /* 0F6388 */ void ftKb_SpecialN_800F6388(Fighter_GObj* gobj);
 /* 0F63EC */ void ftKb_SpecialN_800F63EC(Fighter_GObj* gobj);
+/* 0F6450 */ void fn_800F6450(Fighter_GObj* gobj);
+/* 0F6528 */ void fn_800F6528(Fighter_GObj* gobj);
 /* 0F6588 */ void fn_800F6588(Fighter_GObj* gobj);
+/* 0F6638 */ void fn_800F6638(Fighter_GObj* gobj);
+/* 0F66E8 */ void fn_800F66E8(Fighter_GObj* gobj);
+/* 0F6798 */ void fn_800F6798(Fighter_GObj* gobj);
+/* 0F6848 */ void fn_800F6848(Fighter_GObj* gobj);
+/* 0F68A8 */ void fn_800F68A8(Fighter_GObj* gobj);
+/* 0F6908 */ void fn_800F6908(Fighter_GObj* gobj);
+/* 0F697C */ void fn_800F697C(Fighter_GObj* gobj);
+/* 0F69E8 */ void fn_800F69E8(Fighter_GObj* gobj);
+/* 0F6A5C */ void fn_800F6A5C(Fighter_GObj* gobj);
+/* 0F6B3C */ void fn_800F6B3C(Fighter_GObj* gobj);
 /* 0F6BB0 */ void ftKb_SpecialS_800F6BB0(Fighter_GObj* gobj);
+/* 0F6C24 */ void fn_800F6C24(Fighter_GObj* gobj);
 /* 0F6C98 */ void fn_800F6C98(Fighter_GObj* gobj);
 /* 0F6D0C */ void fn_800F6D0C(Fighter_GObj* gobj);
 /* 0F6D80 */ void fn_800F6D80(Fighter_GObj* gobj);
 /* 0F6DF4 */ void fn_800F6DF4(Fighter_GObj* gobj);
+/* 0F6E68 */ void fn_800F6E68(Fighter_GObj* gobj);
+/* 0F6EDC */ void fn_800F6EDC(Fighter_GObj* gobj);
 /* 0F6F50 */ void fn_800F6F50(Fighter_GObj* gobj);
+/* 0F6FC4 */ void fn_800F6FC4(Fighter_GObj* gobj);
+/* 0F702C */ void fn_800F702C(Fighter_GObj* gobj);
 /* 0F70A0 */ void ftKb_SpecialN_Anim(Fighter_GObj* gobj);
 /* 0F71CC */ void ftKb_SpecialAirN_Anim(Fighter_GObj* gobj);
 /* 0F72F8 */ void ftKb_SpecialNLoop_Anim(Fighter_GObj* gobj);
@@ -662,7 +679,7 @@
 /* 105E50 */ void ftKb_ZdSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 105E8C */ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj);
 /* 105F3C */ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj);
-/* 105FF0 */ void ftKb_SpecialNSk_80105FF0(Fighter_GObj* gobj);
+/* 105FF0 */ bool ftKb_SpecialNSk_80105FF0(Fighter_GObj* gobj);
 /* 106020 */ s32 ftKb_SpecialNSk_80106020(Fighter_GObj* gobj);
 /* 10603C */ void ftKb_SpecialNSk_8010603C(Fighter_GObj* gobj);
 /* 10612C */ void ftKb_SpecialNSk_8010612C(Fighter_GObj* gobj);
@@ -762,7 +779,7 @@
 /* 108FBC */ void ftKb_PpSpecialN_Coll(Fighter_GObj* gobj);
 /* 109030 */ void ftKb_PpSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 109238 */ Fighter_Part ftKb_SpecialNYs_80109238(Fighter_GObj* gobj);
-/* 109260 */ void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj);
+/* 109260 */ void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec);
 /* 109290 */ float ftKb_SpecialNYs_80109290(Fighter_GObj* gobj);
 /* 10929C */ float ftKb_SpecialNYs_8010929C(Fighter_GObj* gobj);
 /* 1092AC */ float ftKb_SpecialNYs_801092AC(Fighter_GObj* gobj);
@@ -773,8 +790,8 @@
 /* 10930C */ float ftKb_SpecialNYs_8010930C(Fighter_GObj* gobj);
 /* 109324 */ float ftKb_SpecialNYs_80109324(Fighter_GObj* gobj);
 /* 10933C */ int ftKb_SpecialNYs_8010933C(Fighter_GObj* gobj);
-/* 109354 */ void ftKb_SpecialNYs_80109354(Fighter_GObj* gobj);
-/* 109380 */ void ftKb_SpecialNYs_80109380(Fighter_GObj* gobj);
+/* 109354 */ void ftKb_SpecialNYs_80109354(Vec3*);
+/* 109380 */ float ftKb_SpecialNYs_80109380(Fighter_GObj* gobj);
 /* 1093A0 */ ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj);
 /* 1093B4 */ void ftKb_SpecialNYs_801093B4(Fighter_GObj* gobj);
 /* 10941C */ void ftKb_SpecialNYs_8010941C(Fighter_GObj* gobj);
@@ -830,6 +847,8 @@
 /* 10B0A0 */ void ftCo_KirbyYoshiEgg_IASA(Fighter_GObj* gobj);
 /* 10B0A4 */ void ftCo_KirbyYoshiEgg_Phys(Fighter_GObj* gobj);
 /* 10B0DC */ void ftCo_KirbyYoshiEgg_Coll(Fighter_GObj* gobj);
+/* 10B124 */ void fn_8010B124(Fighter_GObj* gobj);
+/* 10B148 */ void fn_8010B148(Fighter_GObj* gobj);
 /* 10B1D4 */ void fn_8010B1D4(Fighter_GObj* gobj);
 /* 10B2FC */ void ftKb_SpecialNMs_8010B2FC(Fighter_GObj* gobj);
 /* 10B4A0 */ void ftKb_SpecialNMs_8010B4A0(Fighter_GObj* gobj);
