@@ -68,13 +68,13 @@ struct mp_UnkStruct6 {
     /* +4 */ short* x4;
 };
 
-struct mpLib_804D64B8_t {
+struct mpLib_Point {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
     /* 0x08 */ Vec2 pos;
     /* 0x10 */ char pad_10[8]; /* maybe part of unk_C[3]? */
 }; /* size = 0x18 */
-STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);
+STATIC_ASSERT(sizeof(struct mpLib_Point) == 0x18);
 
 struct mpLib_804D64C0_t {
     /* 0x00 */ mpLib_804D64C0_t* next;

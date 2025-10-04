@@ -14,7 +14,7 @@ typedef struct mp_UnkStruct3 mp_UnkStruct3;
 typedef struct mp_UnkStruct4 mp_UnkStruct4;
 typedef struct mp_UnkStruct6 mp_UnkStruct6;
 typedef struct mpisland mpisland;
-typedef struct mpLib_804D64B8_t mpLib_804D64B8_t;
+typedef struct mpLib_Point mpLib_Point;
 typedef struct mpLib_804D64C0_t mpLib_804D64C0_t;
 
 typedef enum mpLib_GroundEnum {

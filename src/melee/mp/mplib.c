@@ -24,7 +24,7 @@ UNK_T mpLib_8004D164(void)
     return mpLib_804D64B4;
 }
 
-mpLib_804D64B8_t* mpLib_8004D16C(void)
+mpLib_Point* mpLib_8004D16C(void)
 {
     return mpLib_804D64B8;
 }
@@ -52,8 +52,8 @@ int mpLib_8004DB78(int gr_idx)
         u32 temp_r4 = mpLib_804D64BC[result].x4;
 
         if ((temp_r4 & 0x10000) && !(temp_r4 & 0x40000)) {
-            mpLib_804D64B8_t* temp_r4_2 = &mpLib_804D64B8[temp_r6->x2];
-            mpLib_804D64B8_t* temp_r5 =
+            mpLib_Point* temp_r4_2 = &mpLib_804D64B8[temp_r6->x2];
+            mpLib_Point* temp_r5 =
                 &mpLib_804D64B8[mpLib_804D64BC[result].x0->x0];
 
             float dx = temp_r4_2->pos.x - temp_r5->pos.x;
@@ -79,8 +79,8 @@ int mpLib_8004DC04(int gr_idx)
         u32 temp_r4 = mpLib_804D64BC[result].x4;
 
         if ((temp_r4 & 0x10000) && !(temp_r4 & 0x40000)) {
-            mpLib_804D64B8_t* temp_r4_2 = &mpLib_804D64B8[temp_r6->x0];
-            mpLib_804D64B8_t* temp_r5 =
+            mpLib_Point* temp_r4_2 = &mpLib_804D64B8[temp_r6->x0];
+            mpLib_Point* temp_r5 =
                 &mpLib_804D64B8[mpLib_804D64BC[result].x0->x2];
 
             float dx = temp_r4_2->pos.x - temp_r5->pos.x;
@@ -303,8 +303,8 @@ int mpLib_80051BA8(Vec3* arg0, int arg1, int arg2, int arg3, int arg4,
     int var_r30;
     int temp_r24;
     mp_UnkStruct1* temp_r24_2;
-    mpLib_804D64B8_t* temp_r23;
-    mpLib_804D64B8_t* temp_r23_2;
+    mpLib_Point* temp_r23;
+    mpLib_Point* temp_r23_2;
 
     int var_r12;
     int var_r11;
@@ -349,11 +349,11 @@ int mpLib_80051BA8(Vec3* arg0, int arg1, int arg2, int arg3, int arg4,
                             temp_r24_2 = var_r10->x0;
                             if (temp_r24_2->xE & 0x200) {
                                 temp_r23 = &mpLib_804D64B8[temp_r24_2->x0];
-                                temp_f6 = temp_r23->unk_8;
-                                temp_f8 = temp_r23->unk_C;
+                                temp_f6 = temp_r23->pos.x;
+                                temp_f8 = temp_r23->pos.y;
                                 temp_r23_2 = &mpLib_804D64B8[temp_r24_2->x2];
-                                temp_f0 = temp_r23_2->unk_8;
-                                temp_f10 = temp_r23_2->unk_C;
+                                temp_f0 = temp_r23_2->pos.x;
+                                temp_f10 = temp_r23_2->pos.y;
                                 if (temp_f6 > temp_f0) {
                                     var_f13 = temp_f6;
                                     var_f11 = temp_f0;
@@ -684,29 +684,29 @@ int mpLib_80053950(int line)
 
 void mpLib_80054B14(int line, Vec3* arg1)
 {
-    mpLib_804D64B8_t* temp_r3;
+    mpLib_Point* temp_r3;
 
     if (line == -1 || line >= mpLib_804D64B4->xC) {
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x11BC, line);
         __assert(__FILE__, 0x11BC, "0");
     }
     temp_r3 = &mpLib_804D64B8[mpLib_804D64BC[line].x0->x2];
-    arg1->x = temp_r3->unk_8;
-    arg1->y = temp_r3->unk_C;
+    arg1->x = temp_r3->pos.x;
+    arg1->y = temp_r3->pos.y;
     arg1->z = 0.0F;
 }
 
 void mpLib_80054BC0(int line, Vec3* arg1)
 {
-    mpLib_804D64B8_t* temp_r3;
+    mpLib_Point* temp_r3;
 
     if (line == -1 || line >= mpLib_804D64B4->xC) {
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x11CB, line);
         __assert(__FILE__, 0x11CB, "0");
     }
     temp_r3 = &mpLib_804D64B8[mpLib_804D64BC[line].x0->x0];
-    arg1->x = temp_r3->unk_8;
-    arg1->y = temp_r3->unk_C;
+    arg1->x = temp_r3->pos.x;
+    arg1->y = temp_r3->pos.y;
     arg1->z = 0.0F;
 }
 
@@ -752,10 +752,10 @@ Vec3* mpLib_80054DFC(int line, Vec3* arg1)
     }
     temp_r4 = mpLib_804D64BC[line].x0;
     {
-        float x0 = mpLib_804D64B8[temp_r4->x0].unk_C;
-        float x1 = mpLib_804D64B8[temp_r4->x2].unk_C;
-        float y0 = mpLib_804D64B8[temp_r4->x0].unk_8;
-        float y1 = mpLib_804D64B8[temp_r4->x2].unk_8;
+        float x0 = mpLib_804D64B8[temp_r4->x0].pos.y;
+        float x1 = mpLib_804D64B8[temp_r4->x2].pos.y;
+        float y0 = mpLib_804D64B8[temp_r4->x0].pos.x;
+        float y1 = mpLib_804D64B8[temp_r4->x2].pos.x;
         arg1->x = -(x1 - x0);
         arg1->y = +(y1 - y0);
         arg1->z = 0.0F;
@@ -805,10 +805,10 @@ void mpLib_80055C5C(int index)
 
     for (i = 0; i < temp_r28; i++, var_r30++) {
         mp_UnkStruct1* temp_r5 = var_r30->x0;
-        mpLib_804D64B8_t* temp_r3 = &mpLib_804D64B8[temp_r5->x2];
-        mpLib_804D64B8_t* temp_r3_2 = &mpLib_804D64B8[temp_r5->x0];
-        temp_f2 = temp_r3->unk_8 - temp_r3_2->unk_8;
-        temp_f0 = temp_r3->unk_C - temp_r3_2->unk_C;
+        mpLib_Point* temp_r3 = &mpLib_804D64B8[temp_r5->x2];
+        mpLib_Point* temp_r3_2 = &mpLib_804D64B8[temp_r5->x0];
+        temp_f2 = temp_r3->pos.x - temp_r3_2->pos.x;
+        temp_f0 = temp_r3->pos.y - temp_r3_2->pos.y;
         if (temp_f2 > 0.0F) {
             if (temp_f0 / temp_f2 > 1.7320508368950045) {
                 var_r27 = 8;
@@ -862,22 +862,22 @@ void mpLib_80055E24(int index)
 void mpLib_800565DC(int index)
 {
     mpLib_804D64C0_t* temp_r5 = &mpLib_804D64C0[index];
-    mpLib_804D64B8_t* cur = &mpLib_804D64B8[temp_r5->x4->x24];
+    mpLib_Point* cur = &mpLib_804D64B8[temp_r5->x4->x24];
     int temp_r4_2 = temp_r5->x4->x26;
 
     int i;
     for (i = 0; i < temp_r4_2; i++) {
-        if (temp_r5->x10 > cur->unk_8 - 30.0F) {
-            temp_r5->x10 = cur->unk_8 - 30.0F;
+        if (temp_r5->x10 > cur->pos.x - 30.0F) {
+            temp_r5->x10 = cur->pos.x - 30.0F;
         }
-        if (temp_r5->x18 < cur->unk_8 + 30.0F) {
-            temp_r5->x18 = cur->unk_8 + 30.0F;
+        if (temp_r5->x18 < cur->pos.x + 30.0F) {
+            temp_r5->x18 = cur->pos.x + 30.0F;
         }
-        if (temp_r5->x14 > cur->unk_C - 30.0F) {
-            temp_r5->x14 = cur->unk_C - 30.0F;
+        if (temp_r5->x14 > cur->pos.y - 30.0F) {
+            temp_r5->x14 = cur->pos.y - 30.0F;
         }
-        if (temp_r5->x1C < cur->unk_C + 30.0F) {
-            temp_r5->x1C = cur->unk_C + 30.0F;
+        if (temp_r5->x1C < cur->pos.y + 30.0F) {
+            temp_r5->x1C = cur->pos.y + 30.0F;
         }
         cur += 1;
     }
@@ -896,16 +896,16 @@ void mpLib_8005667C(int index)
 
 void mpLib_800566D8(int index, f32* arg1, f32* arg2)
 {
-    mpLib_804D64B8_t* temp_r3 = &mpLib_804D64B8[index];
-    *arg1 = temp_r3->unk_8;
-    *arg2 = temp_r3->unk_C;
+    mpLib_Point* temp_r3 = &mpLib_804D64B8[index];
+    *arg1 = temp_r3->pos.x;
+    *arg2 = temp_r3->pos.y;
 }
 
 void mpLib_800566F8(int index, float arg1, float arg2)
 {
-    mpLib_804D64B8_t* temp_r3 = &mpLib_804D64B8[index];
-    temp_r3->unk_8 = arg1;
-    temp_r3->unk_C = arg2;
+    mpLib_Point* temp_r3 = &mpLib_804D64B8[index];
+    temp_r3->pos.x = arg1;
+    temp_r3->pos.y = arg2;
 }
 
 void mpLib_80056710(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
@@ -919,13 +919,13 @@ void mpLib_80056758(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
 {
     mp_UnkStruct2* temp_r5 = &mpLib_804D64BC[index];
 
-    mpLib_804D64B8_t* temp_r3 = &mpLib_804D64B8[temp_r5->x0->x0];
-    temp_r3->unk_8 = temp_r3->x0 + arg8;
-    temp_r3->unk_C = temp_r3->x4 + arg9;
+    mpLib_Point* temp_r3 = &mpLib_804D64B8[temp_r5->x0->x0];
+    temp_r3->pos.x = temp_r3->x0 + arg8;
+    temp_r3->pos.y = temp_r3->x4 + arg9;
 
     temp_r3 = &mpLib_804D64B8[temp_r5->x0->x2];
-    temp_r3->unk_8 = temp_r3->x0 + argA;
-    temp_r3->unk_C = temp_r3->x4 + argB;
+    temp_r3->pos.x = temp_r3->x0 + argA;
+    temp_r3->pos.y = temp_r3->x4 + argB;
 }
 
 /// #mpLib_800567C0
@@ -1339,15 +1339,15 @@ void mpLib_80059404(int arg0, int arg1, GXColor arg2)
             if ((var_r31->x4 & 0x10000) && !(var_r31->x4 & 0x40000)) {
                 if (arg0 == (var_r31->x0->xE & arg1)) {
                     u8 _[0x18];
-                    temp_f4 = mpLib_804D64B8[var_r31->x0->x0].unk_C;
-                    temp_f3 = mpLib_804D64B8[var_r31->x0->x0].unk_8;
+                    temp_f4 = mpLib_804D64B8[var_r31->x0->x0].pos.y;
+                    temp_f3 = mpLib_804D64B8[var_r31->x0->x0].pos.x;
 
                     GXWGFifo.f32 = temp_f3;
                     GXWGFifo.f32 = temp_f4;
                     GXWGFifo.f32 = 25.0f;
 
-                    temp_f5 = mpLib_804D64B8[var_r31->x0->x2].unk_C;
-                    temp_f1 = mpLib_804D64B8[var_r31->x0->x2].unk_8;
+                    temp_f5 = mpLib_804D64B8[var_r31->x0->x2].pos.y;
+                    temp_f1 = mpLib_804D64B8[var_r31->x0->x2].pos.x;
 
                     GXWGFifo.f32 = temp_f1;
                     GXWGFifo.f32 = temp_f5;

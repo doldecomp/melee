@@ -26,7 +26,7 @@ void mpIsland_8005A728(void)
 {
     short* v0;            // r27
     mp_UnkStruct2* v1;    // r28
-    mpLib_804D64B8_t* v2; // r3
+    mpLib_Point* v2; // r3
     // unk *test;
     int v3;                // r29
     unsigned char* result; // r3
