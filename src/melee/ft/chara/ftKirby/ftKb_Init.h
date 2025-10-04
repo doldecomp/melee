@@ -114,6 +114,7 @@
 /* 0F1DAC */ UNK_RET ftKb_SpecialN_800F1DAC(UNK_PARAMS);
 /* 0F1F1C */ void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3*);
 /* 0F1F68 */ void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj);
+/* 0F1FDC */ void fn_800F1FDC(Fighter_GObj* gobj);
 /* 0F203C */ void ftKb_AttackDash_Anim(Fighter_GObj* gobj);
 /* 0F205C */ void ftKb_AttackDash_IASA(Fighter_GObj* gobj);
 /* 0F207C */ void ftKb_AttackDash_Phys(Fighter_GObj* gobj);
@@ -251,6 +252,7 @@
 /* 0F6D0C */ void fn_800F6D0C(Fighter_GObj* gobj);
 /* 0F6D80 */ void fn_800F6D80(Fighter_GObj* gobj);
 /* 0F6DF4 */ void fn_800F6DF4(Fighter_GObj* gobj);
+/* 0F6F50 */ void fn_800F6F50(Fighter_GObj* gobj);
 /* 0F70A0 */ void ftKb_SpecialN_Anim(Fighter_GObj* gobj);
 /* 0F71CC */ void ftKb_SpecialAirN_Anim(Fighter_GObj* gobj);
 /* 0F72F8 */ void ftKb_SpecialNLoop_Anim(Fighter_GObj* gobj);
@@ -484,6 +486,7 @@
 /* 0FDB78 */ void ftKb_SsSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 0FDC00 */ void ftKb_SpecialNFx_800FDC00(Fighter_GObj* gobj, Vec3* vec);
 /* 0FDC70 */ void ftKb_SpecialNFx_800FDC70(Fighter_GObj* gobj, Vec3* vec);
+/* 0FDCE0 */ void fn_800FDCE0(Fighter_GObj* gobj);
 /* 0FDD14 */ bool ftKb_SpecialNFx_800FDD14(Fighter_GObj* gobj);
 /* 0FDD4C */ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj);
 /* 0FDDF4 */ bool ftKb_SpecialNFx_800FDDF4(Fighter_GObj* gobj);

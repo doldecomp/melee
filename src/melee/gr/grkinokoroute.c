@@ -1,5 +1,7 @@
 #include "grkinokoroute.h"
 
+#include "ground.h"
+
 #include <platform.h>
 
 void grKinokoRoute_8020741C(bool arg) {}
@@ -65,7 +67,14 @@ void grKinokoRoute_80208368(Ground_GObj* arg) {}
 
 /// #grKinokoRoute_8020836C
 
-/// #fn_80208480
+bool fn_80208480(bool arg)
+{
+    if (arg == 1) {
+        Ground_801C5740(arg);
+        return 1;
+    }
+    return 0;
+}
 
 /// #fn_802084B4
 
