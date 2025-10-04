@@ -26,12 +26,12 @@ UNK_T mpLib_8004D164(void)
 
 mpLib_Point* mpLib_8004D16C(void)
 {
-    return mpLib_804D64B8;
+    return mpLib_Points;
 }
 
-mp_UnkStruct2* mpLib_8004D174(void)
+mpLib_Line* mpLib_8004D174(void)
 {
-    return mpLib_804D64BC;
+    return mpLib_Lines;
 }
 
 mpLib_804D64C0_t* mpLib_8004D17C(void)
@@ -45,16 +45,16 @@ mpLib_804D64C0_t* mpLib_8004D17C(void)
 
 int mpLib_8004DB78(int gr_idx)
 {
-    mp_UnkStruct1* temp_r6 = mpLib_804D64BC[gr_idx].x0;
+    mpLib_LineInner* temp_r6 = mpLib_Lines[gr_idx].x0;
     s16 result = temp_r6->xA;
 
     if (result != -1) {
-        u32 temp_r4 = mpLib_804D64BC[result].x4;
+        u32 temp_r4 = mpLib_Lines[result].flags;
 
         if ((temp_r4 & 0x10000) && !(temp_r4 & 0x40000)) {
-            mpLib_Point* temp_r4_2 = &mpLib_804D64B8[temp_r6->x2];
+            mpLib_Point* temp_r4_2 = &mpLib_Points[temp_r6->p1_idx];
             mpLib_Point* temp_r5 =
-                &mpLib_804D64B8[mpLib_804D64BC[result].x0->x0];
+                &mpLib_Points[mpLib_Lines[result].x0->p0_idx];
 
             float dx = temp_r4_2->pos.x - temp_r5->pos.x;
             float dy = temp_r4_2->pos.y - temp_r5->pos.y;
@@ -72,16 +72,16 @@ int mpLib_8004DB78(int gr_idx)
 
 int mpLib_8004DC04(int gr_idx)
 {
-    mp_UnkStruct1* temp_r6 = mpLib_804D64BC[gr_idx].x0;
+    mpLib_LineInner* temp_r6 = mpLib_Lines[gr_idx].x0;
     s16 result = temp_r6->x8;
 
     if (result != -1) {
-        u32 temp_r4 = mpLib_804D64BC[result].x4;
+        u32 temp_r4 = mpLib_Lines[result].flags;
 
         if ((temp_r4 & 0x10000) && !(temp_r4 & 0x40000)) {
-            mpLib_Point* temp_r4_2 = &mpLib_804D64B8[temp_r6->x0];
+            mpLib_Point* temp_r4_2 = &mpLib_Points[temp_r6->p0_idx];
             mpLib_Point* temp_r5 =
-                &mpLib_804D64B8[mpLib_804D64BC[result].x0->x2];
+                &mpLib_Points[mpLib_Lines[result].x0->p1_idx];
 
             float dx = temp_r4_2->pos.x - temp_r5->pos.x;
             float dy = temp_r4_2->pos.y - temp_r5->pos.y;
@@ -302,13 +302,13 @@ int mpLib_80051BA8(Vec3* arg0, int arg1, int arg2, int arg3, int arg4,
 
     int var_r30;
     int temp_r24;
-    mp_UnkStruct1* temp_r24_2;
+    mpLib_LineInner* temp_r24_2;
     mpLib_Point* temp_r23;
     mpLib_Point* temp_r23_2;
 
     int var_r12;
     int var_r11;
-    mp_UnkStruct2* var_r10;
+    mpLib_Line* var_r10;
     int var_r9;
     mpLib_804D64C0_t* var_r8;
     int temp_r7;
@@ -337,21 +337,21 @@ int mpLib_80051BA8(Vec3* arg0, int arg1, int arg2, int arg3, int arg4,
                 var_r9 = 0;
                 var_r11 = temp_r6_2->x2;
                 var_r12 = temp_r6_2->x12;
-                var_r10 = &mpLib_804D64BC[temp_r6_2->x0];
+                var_r10 = &mpLib_Lines[temp_r6_2->x0];
                 while (var_r9 < var_r11) {
                 block_13:
-                    temp_r7 = var_r10 - mpLib_804D64BC;
+                    temp_r7 = var_r10 - mpLib_Lines;
                     if (arg1 != temp_r7) {
-                        temp_r24 = var_r10->x4;
+                        temp_r24 = var_r10->flags;
                         if ((temp_r24 & 1) && (temp_r24 & 0x10000) &&
                             !(temp_r24 & 0x80))
                         {
                             temp_r24_2 = var_r10->x0;
                             if (temp_r24_2->xE & 0x200) {
-                                temp_r23 = &mpLib_804D64B8[temp_r24_2->x0];
+                                temp_r23 = &mpLib_Points[temp_r24_2->p0_idx];
                                 temp_f6 = temp_r23->pos.x;
                                 temp_f8 = temp_r23->pos.y;
-                                temp_r23_2 = &mpLib_804D64B8[temp_r24_2->x2];
+                                temp_r23_2 = &mpLib_Points[temp_r24_2->p1_idx];
                                 temp_f0 = temp_r23_2->pos.x;
                                 temp_f10 = temp_r23_2->pos.y;
                                 if (temp_f6 > temp_f0) {
@@ -408,7 +408,7 @@ int mpLib_80051BA8(Vec3* arg0, int arg1, int arg2, int arg3, int arg4,
                 if (var_r12 != 0) {
                     var_r11 = var_r12;
                     var_r9 = 0;
-                    var_r10 = &mpLib_804D64BC[temp_r6_2->x10];
+                    var_r10 = &mpLib_Lines[temp_r6_2->x10];
                     var_r12 = 0;
                     goto block_13;
                 }
@@ -624,16 +624,16 @@ bool mpLib_80052508(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, u32 arg4,
 
 int mpLib_8005389C(int line)
 {
-    mp_UnkStruct2* temp_r5;
+    mpLib_Line* temp_r5;
     int cur;
 
     if (line == -1 || line >= mpLib_804D64B4->xC) {
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x10DA, line);
         __assert(__FILE__, 0x10DA, "0");
     }
-    cur = mpLib_804D64BC[line].x0->x4;
-    while (cur != -1 && (mpLib_804D64BC[cur].x4 & 2)) {
-        cur = mpLib_804D64BC[cur].x0->x4;
+    cur = mpLib_Lines[line].x0->x4;
+    while (cur != -1 && (mpLib_Lines[cur].flags & 2)) {
+        cur = mpLib_Lines[cur].x0->x4;
     }
     if (cur != -1) {
         return cur;
@@ -648,9 +648,9 @@ int mpLib_80053950(int line)
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x10E3, line);
         __assert(__FILE__, 0x10E3, "0");
     }
-    cur = mpLib_804D64BC[line].x0->x6;
-    while (cur != -1 && (mpLib_804D64BC[cur].x4 & 2)) {
-        cur = mpLib_804D64BC[cur].x0->x6;
+    cur = mpLib_Lines[line].x0->x6;
+    while (cur != -1 && (mpLib_Lines[cur].flags & 2)) {
+        cur = mpLib_Lines[cur].x0->x6;
     }
     if (cur != -1) {
         return cur;
@@ -690,7 +690,7 @@ void mpLib_80054B14(int line, Vec3* arg1)
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x11BC, line);
         __assert(__FILE__, 0x11BC, "0");
     }
-    temp_r3 = &mpLib_804D64B8[mpLib_804D64BC[line].x0->x2];
+    temp_r3 = &mpLib_Points[mpLib_Lines[line].x0->p1_idx];
     arg1->x = temp_r3->pos.x;
     arg1->y = temp_r3->pos.y;
     arg1->z = 0.0F;
@@ -704,7 +704,7 @@ void mpLib_80054BC0(int line, Vec3* arg1)
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x11CB, line);
         __assert(__FILE__, 0x11CB, "0");
     }
-    temp_r3 = &mpLib_804D64B8[mpLib_804D64BC[line].x0->x0];
+    temp_r3 = &mpLib_Points[mpLib_Lines[line].x0->p0_idx];
     arg1->x = temp_r3->pos.x;
     arg1->y = temp_r3->pos.y;
     arg1->z = 0.0F;
@@ -716,7 +716,7 @@ enum_t mpLib_80054C6C(int line)
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x11DD, line);
         __assert(__FILE__, 0x11DD, "0");
     }
-    return mpLib_804D64BC[line].x4 & 0xF;
+    return mpLib_Lines[line].flags & 0xF;
 }
 
 u32 mpLib_80054CEC(int line)
@@ -725,7 +725,7 @@ u32 mpLib_80054CEC(int line)
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x11E7, line);
         __assert(__FILE__, 0x11E7, "0");
     }
-    return mpLib_804D64BC[line].x0->xE;
+    return mpLib_Lines[line].x0->xE;
 }
 
 void mpLib_80054D68(int line, u32 arg1)
@@ -735,7 +735,7 @@ void mpLib_80054D68(int line, u32 arg1)
         __assert(__FILE__, 0x11F3, "0");
     }
     {
-        mp_UnkStruct1* temp_r3 = mpLib_804D64BC[line].x0;
+        mpLib_LineInner* temp_r3 = mpLib_Lines[line].x0;
         u16* tmp = &temp_r3->xE;
         *tmp = (*tmp & 0xFFFFFF00) | arg1;
     }
@@ -743,21 +743,21 @@ void mpLib_80054D68(int line, u32 arg1)
 
 Vec3* mpLib_80054DFC(int line, Vec3* arg1)
 {
-    mp_UnkStruct1* temp_r4;
+    mpLib_LineInner* temp_r4;
     PAD_STACK(4);
 
     if (line == -1 || line >= mpLib_804D64B4->xC) {
         OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x1201, line);
         __assert(__FILE__, 0x1201, "0");
     }
-    temp_r4 = mpLib_804D64BC[line].x0;
+    temp_r4 = mpLib_Lines[line].x0;
     {
-        float x0 = mpLib_804D64B8[temp_r4->x0].pos.y;
-        float x1 = mpLib_804D64B8[temp_r4->x2].pos.y;
-        float y0 = mpLib_804D64B8[temp_r4->x0].pos.x;
-        float y1 = mpLib_804D64B8[temp_r4->x2].pos.x;
-        arg1->x = -(x1 - x0);
-        arg1->y = +(y1 - y0);
+        float y0 = mpLib_Points[temp_r4->p0_idx].pos.y;
+        float y1 = mpLib_Points[temp_r4->p1_idx].pos.y;
+        float x0 = mpLib_Points[temp_r4->p0_idx].pos.x;
+        float x1 = mpLib_Points[temp_r4->p1_idx].pos.x;
+        arg1->x = -(y1 - y0);
+        arg1->y = +(x1 - x0);
         arg1->z = 0.0F;
     }
     PSVECNormalize(arg1, arg1);
@@ -774,8 +774,8 @@ bool mpLib_80054ED8(int line)
         while (true) {
         };
     }
-    if (!(mpLib_804D64BC[line].x4 & 0x10000) ||
-        (mpLib_804D64BC[line].x4 & 0x40000))
+    if (!(mpLib_Lines[line].flags & 0x10000) ||
+        (mpLib_Lines[line].flags & 0x40000))
     {
         return false;
     }
@@ -793,7 +793,7 @@ bool mpLib_80054ED8(int line)
 void mpLib_80055C5C(int index)
 {
     mpLib_804D64C0_t* temp_r31 = &mpLib_804D64C0[index];
-    mp_UnkStruct2* var_r30;
+    mpLib_Line* var_r30;
     int i;
     s16 temp_r28 = temp_r31->x4->x12;
     u32 var_r27;
@@ -801,12 +801,12 @@ void mpLib_80055C5C(int index)
     f32 temp_f0;
     f32 temp_f2;
 
-    var_r30 = &mpLib_804D64BC[temp_r31->x4->x10];
+    var_r30 = &mpLib_Lines[temp_r31->x4->x10];
 
     for (i = 0; i < temp_r28; i++, var_r30++) {
-        mp_UnkStruct1* temp_r5 = var_r30->x0;
-        mpLib_Point* temp_r3 = &mpLib_804D64B8[temp_r5->x2];
-        mpLib_Point* temp_r3_2 = &mpLib_804D64B8[temp_r5->x0];
+        mpLib_LineInner* temp_r5 = var_r30->x0;
+        mpLib_Point* temp_r3 = &mpLib_Points[temp_r5->p1_idx];
+        mpLib_Point* temp_r3_2 = &mpLib_Points[temp_r5->p0_idx];
         temp_f2 = temp_r3->pos.x - temp_r3_2->pos.x;
         temp_f0 = temp_r3->pos.y - temp_r3_2->pos.y;
         if (temp_f2 > 0.0F) {
@@ -832,13 +832,13 @@ void mpLib_80055C5C(int index)
         } else {
             __assert(__FILE__, 0x1314, "0");
         }
-        var_r30->x4 = (var_r30->x4 & 0xFFFFFFF0) | var_r27;
+        var_r30->flags = (var_r30->flags & 0xFFFFFFF0) | var_r27;
         if ((temp_r31->flags & 0x10000) && (var_r30->x0->xE & 0x400)) {
             if (var_r27 & 1) {
-                var_r30->x4 |= 0x10000 | 0x100;
+                var_r30->flags |= 0x10000 | 0x100;
                 var_r30->x0->xE |= 0x100;
             } else {
-                var_r30->x4 &= ~0x10000;
+                var_r30->flags &= ~0x10000;
             }
         }
     }
@@ -862,7 +862,7 @@ void mpLib_80055E24(int index)
 void mpLib_800565DC(int index)
 {
     mpLib_804D64C0_t* temp_r5 = &mpLib_804D64C0[index];
-    mpLib_Point* cur = &mpLib_804D64B8[temp_r5->x4->x24];
+    mpLib_Point* cur = &mpLib_Points[temp_r5->x4->x24];
     int temp_r4_2 = temp_r5->x4->x26;
 
     int i;
@@ -896,34 +896,34 @@ void mpLib_8005667C(int index)
 
 void mpLib_800566D8(int index, f32* arg1, f32* arg2)
 {
-    mpLib_Point* temp_r3 = &mpLib_804D64B8[index];
+    mpLib_Point* temp_r3 = &mpLib_Points[index];
     *arg1 = temp_r3->pos.x;
     *arg2 = temp_r3->pos.y;
 }
 
 void mpLib_800566F8(int index, float arg1, float arg2)
 {
-    mpLib_Point* temp_r3 = &mpLib_804D64B8[index];
+    mpLib_Point* temp_r3 = &mpLib_Points[index];
     temp_r3->pos.x = arg1;
     temp_r3->pos.y = arg2;
 }
 
 void mpLib_80056710(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
 {
-    mp_UnkStruct2* temp_r5 = &mpLib_804D64BC[index];
-    mpLib_800566F8(temp_r5->x0->x0, arg8, arg9);
-    mpLib_800566F8(temp_r5->x0->x2, argA, argB);
+    mpLib_Line* temp_r5 = &mpLib_Lines[index];
+    mpLib_800566F8(temp_r5->x0->p0_idx, arg8, arg9);
+    mpLib_800566F8(temp_r5->x0->p1_idx, argA, argB);
 }
 
 void mpLib_80056758(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
 {
-    mp_UnkStruct2* temp_r5 = &mpLib_804D64BC[index];
+    mpLib_Line* temp_r5 = &mpLib_Lines[index];
 
-    mpLib_Point* temp_r3 = &mpLib_804D64B8[temp_r5->x0->x0];
+    mpLib_Point* temp_r3 = &mpLib_Points[temp_r5->x0->p0_idx];
     temp_r3->pos.x = temp_r3->x0 + arg8;
     temp_r3->pos.y = temp_r3->x4 + arg9;
 
-    temp_r3 = &mpLib_804D64B8[temp_r5->x0->x2];
+    temp_r3 = &mpLib_Points[temp_r5->x0->p1_idx];
     temp_r3->pos.x = temp_r3->x0 + argA;
     temp_r3->pos.y = temp_r3->x4 + argB;
 }
@@ -955,7 +955,7 @@ int mpLib_80056B6C(int line)
             OSReport("%s:%d:not found lineID=%d\n", __FILE__, 0x1553, line);
             __assert(__FILE__, 0x1553, "0");
         }
-        temp_r6_2 = mpLib_804D64BC[line].x0->x0;
+        temp_r6_2 = mpLib_Lines[line].x0->p0_idx;
         var_r7 = mpLib_804D64C0;
         for (i = 0; i < mpLib_804D64B4->x28; i++) {
             if (var_r7->x4->x24 <= temp_r6_2 &&
@@ -977,9 +977,9 @@ void mpLib_80057528(int index)
 {
     int temp_r3 = mpLib_80056B6C(index);
     if (temp_r3 != -1) {
-        mp_UnkStruct2* tmp = &mpLib_804D64BC[index];
+        mpLib_Line* tmp = &mpLib_Lines[index];
         mpLib_804D64C0_t* temp_r31 = &mpLib_804D64C0[temp_r3];
-        tmp->x4 |= 0x10000;
+        tmp->flags |= 0x10000;
         mpIsland_8005B334(temp_r3, temp_r31->x4->x24, temp_r31->x4->x26,
                           !(temp_r31->flags & 0x800));
         temp_r31->xE = true;
@@ -990,9 +990,9 @@ void mpLib_800575B0(int index)
 {
     int temp_r3 = mpLib_80056B6C(index);
     if (temp_r3 != -1) {
-        mp_UnkStruct2* tmp = &mpLib_804D64BC[index];
+        mpLib_Line* tmp = &mpLib_Lines[index];
         mpLib_804D64C0_t* temp_r31 = &mpLib_804D64C0[temp_r3];
-        tmp->x4 &= ~0x10000;
+        tmp->flags &= ~0x10000;
         mpIsland_8005B334(temp_r3, temp_r31->x4->x24, temp_r31->x4->x26,
                           !(temp_r31->flags & 0x800));
         temp_r31->xE = true;
@@ -1313,18 +1313,18 @@ void mpLib_80059404(int arg0, int arg1, GXColor arg2)
     f32 temp_f4;
     f32 temp_f5;
 
-    mp_UnkStruct2* var_r31;
+    mpLib_Line* var_r31;
     int var_r28;
     int temp_r27;
 
-    mp_UnkStruct2* var_r6;
+    mpLib_Line* var_r6;
     int i;
 
     var_r28 = 0;
     temp_r27 = mpLib_804D64B4->xC;
-    var_r6 = mpLib_804D64BC;
+    var_r6 = mpLib_Lines;
     for (i = 0; i < temp_r27; i++) {
-        if ((var_r6->x4 & 0x10000) && !(var_r6->x4 & 0x40000) &&
+        if ((var_r6->flags & 0x10000) && !(var_r6->flags & 0x40000) &&
             arg0 == (var_r6->x0->xE & arg1))
         {
             var_r28 += 1;
@@ -1332,22 +1332,22 @@ void mpLib_80059404(int arg0, int arg1, GXColor arg2)
         var_r6 += 1;
     }
     if (var_r28 != 0) {
-        var_r31 = mpLib_804D64BC;
+        var_r31 = mpLib_Lines;
         mpLib_80058ACC(arg2);
         GXBegin(GX_QUADS, GX_VTXFMT0, var_r28 * 4);
         for (i = 0; i < temp_r27; i++) {
-            if ((var_r31->x4 & 0x10000) && !(var_r31->x4 & 0x40000)) {
+            if ((var_r31->flags & 0x10000) && !(var_r31->flags & 0x40000)) {
                 if (arg0 == (var_r31->x0->xE & arg1)) {
                     u8 _[0x18];
-                    temp_f4 = mpLib_804D64B8[var_r31->x0->x0].pos.y;
-                    temp_f3 = mpLib_804D64B8[var_r31->x0->x0].pos.x;
+                    temp_f4 = mpLib_Points[var_r31->x0->p0_idx].pos.y;
+                    temp_f3 = mpLib_Points[var_r31->x0->p0_idx].pos.x;
 
                     GXWGFifo.f32 = temp_f3;
                     GXWGFifo.f32 = temp_f4;
                     GXWGFifo.f32 = 25.0f;
 
-                    temp_f5 = mpLib_804D64B8[var_r31->x0->x2].pos.y;
-                    temp_f1 = mpLib_804D64B8[var_r31->x0->x2].pos.x;
+                    temp_f5 = mpLib_Points[var_r31->x0->p1_idx].pos.y;
+                    temp_f1 = mpLib_Points[var_r31->x0->p1_idx].pos.x;
 
                     GXWGFifo.f32 = temp_f1;
                     GXWGFifo.f32 = temp_f5;

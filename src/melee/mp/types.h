@@ -35,9 +35,9 @@ struct mp_UnkStruct0 {
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
-struct mp_UnkStruct1 {
-    /* +0 */ u16 x0;
-    /* +2 */ u16 x2;
+struct mpLib_LineInner {
+    /* +0 */ u16 p0_idx;
+    /* +2 */ u16 p1_idx;
     /* +4 */ short x4;
     /* +6 */ short x6;
     /* +8 */ short x8;
@@ -46,9 +46,9 @@ struct mp_UnkStruct1 {
     /* +E */ u16 xE;
 };
 
-struct mp_UnkStruct2 {
-    /* +0 */ mp_UnkStruct1* x0;
-    /* +4 */ u32 x4;
+struct mpLib_Line {
+    /* +0 */ mpLib_LineInner* x0;
+    /* +4 */ u32 flags;
 };
 
 struct mpisland {

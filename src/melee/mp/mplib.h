@@ -13,7 +13,7 @@
 
 /* 04D164 */ UNK_T mpLib_8004D164(void);
 /* 04D16C */ mpLib_Point* mpLib_8004D16C(void);
-/* 04D174 */ mp_UnkStruct2* mpLib_8004D174(void);
+/* 04D174 */ mpLib_Line* mpLib_8004D174(void);
 /* 04D17C */ mpLib_804D64C0_t* mpLib_8004D17C(void);
 /* 04D184 */ UNK_RET mpLib_8004D184(UNK_PARAMS);
 /* 04D288 */ void mpLib_8004D288(UNK_T);

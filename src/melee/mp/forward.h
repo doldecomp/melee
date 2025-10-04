@@ -8,8 +8,8 @@
 #include "lb/forward.h"
 
 typedef struct mp_UnkStruct0 mp_UnkStruct0;
-typedef struct mp_UnkStruct1 mp_UnkStruct1;
-typedef struct mp_UnkStruct2 mp_UnkStruct2;
+typedef struct mpLib_LineInner mpLib_LineInner;
+typedef struct mpLib_Line mpLib_Line;
 typedef struct mp_UnkStruct3 mp_UnkStruct3;
 typedef struct mp_UnkStruct4 mp_UnkStruct4;
 typedef struct mp_UnkStruct6 mp_UnkStruct6;

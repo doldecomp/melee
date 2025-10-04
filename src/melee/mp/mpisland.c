@@ -25,7 +25,7 @@ void mpIsland_8005A6F8(void)
 void mpIsland_8005A728(void)
 {
     short* v0;            // r27
-    mp_UnkStruct2* v1;    // r28
+    mpLib_Line* v1;    // r28
     mpLib_Point* v2; // r3
     // unk *test;
     int v3;                // r29
@@ -232,7 +232,7 @@ void mpIsland_8005A728(void)
 mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 {
     if (mpLib_80054ED8(surface_idx)) {
-        mp_UnkStruct2* v2 = mpLib_8004D174();
+        mpLib_Line* v2 = mpLib_8004D174();
         bool done;
         mp_UnkStruct0* cur;
 
@@ -250,7 +250,7 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
                 done = true;
                 j_next = v2[j].x0->x6;
 
-                if (j_next != -1 && (v2[j_next].x4 & 1)) {
+                if (j_next != -1 && (v2[j_next].flags & 1)) {
                     done = false;
                 }
 
@@ -289,7 +289,7 @@ bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 {
     int var_r31;
-    mp_UnkStruct2* var_r30;
+    mpLib_Line* var_r30;
     int temp_r29;
     bool var_r28;
     bool var_r27;
@@ -315,9 +315,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
     }
 
     for (i = 0; i < temp_r29 && var_r28 && var_r27; var_r31++) {
-        if (var_r28 && var_r30->x0->x0 == arg0->x4) {
+        if (var_r28 && var_r30->x0->p0_idx == arg0->x4) {
             mpLib_80054158(var_r31, arg1);
-        } else if (var_r27 && var_r30->x0->x2 == arg0->x6) {
+        } else if (var_r27 && var_r30->x0->p1_idx == arg0->x6) {
             mpLib_80053FF4(var_r31, arg2);
         }
         i++;

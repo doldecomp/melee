@@ -18,8 +18,8 @@
     u8 pad_x10[0x28 - 0x10];
     int x28;
 }* mpLib_804D64B4;
-/* 4D64B8 */ static mpLib_Point* mpLib_804D64B8;
-/* 4D64BC */ static mp_UnkStruct2* mpLib_804D64BC;
+/* 4D64B8 */ static mpLib_Point* mpLib_Points;
+/* 4D64BC */ static mpLib_Line* mpLib_Lines;
 /* 4D64C0 */ static mpLib_804D64C0_t* mpLib_804D64C0;
 /* 4D64C4 */ static mpLib_804D64C0_t* mpLib_804D64C4;
 /* 4D64C8 */ static mpLib_804D64C0_t* mpLib_804D64C8;
