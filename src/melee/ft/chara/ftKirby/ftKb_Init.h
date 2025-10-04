@@ -486,6 +486,7 @@
 /* 0FDB78 */ void ftKb_SsSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 0FDC00 */ void ftKb_SpecialNFx_800FDC00(Fighter_GObj* gobj, Vec3* vec);
 /* 0FDC70 */ void ftKb_SpecialNFx_800FDC70(Fighter_GObj* gobj, Vec3* vec);
+/* 0FDCE0 */ void fn_800FDCE0(Fighter_GObj* gobj);
 /* 0FDD14 */ bool ftKb_SpecialNFx_800FDD14(Fighter_GObj* gobj);
 /* 0FDD4C */ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj);
 /* 0FDDF4 */ bool ftKb_SpecialNFx_800FDDF4(Fighter_GObj* gobj);
