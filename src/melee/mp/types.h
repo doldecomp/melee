@@ -41,7 +41,8 @@ struct mp_UnkStruct1 {
     /* +4 */ short x4;
     /* +6 */ short x6;
     /* +8 */ short x8;
-    /* +A */ u8 pad_xA[0xE - 0xA];
+    /* +A */ s16 xA;
+    /* +C */ u8 pad_xC[0xE - 0xC];
     /* +E */ u16 xE;
 };
 
@@ -70,8 +71,7 @@ struct mp_UnkStruct6 {
 struct mpLib_804D64B8_t {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 unk_8;      /* inferred */
-    /* 0x0C */ f32 unk_C;      /* inferred */
+    /* 0x08 */ Vec2 pos;
     /* 0x10 */ char pad_10[8]; /* maybe part of unk_C[3]? */
 }; /* size = 0x18 */
 STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);

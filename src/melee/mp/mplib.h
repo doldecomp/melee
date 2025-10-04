@@ -17,8 +17,8 @@
 /* 04D17C */ mpLib_804D64C0_t* mpLib_8004D17C(void);
 /* 04D184 */ UNK_RET mpLib_8004D184(UNK_PARAMS);
 /* 04D288 */ void mpLib_8004D288(UNK_T);
-/* 04DB78 */ s32 mpLib_8004DB78(s32 gr_idx);
-/* 04DC04 */ s32 mpLib_8004DC04(s32 gr_idx);
+/* 04DB78 */ int mpLib_8004DB78(int gr_idx);
+/* 04DC04 */ int mpLib_8004DC04(int gr_idx);
 /* 04DD90 */ bool mpLib_8004DD90(int idx, Vec3*, float*, UNK_T, Vec3* normal);
 /* 04E090 */ enum_t mpLib_8004E090(int idx, Vec3*, float*, u32*, Vec3* normal);
 /* 04E398 */ bool mpLib_8004E398(int, Vec3*, int, int, int);

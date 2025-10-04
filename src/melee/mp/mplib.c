@@ -43,9 +43,59 @@ mpLib_804D64C0_t* mpLib_8004D17C(void)
 
 /// #mpLib_8004D288
 
-/// #mpLib_8004DB78
+int mpLib_8004DB78(int gr_idx)
+{
+    mp_UnkStruct1* temp_r6 = mpLib_804D64BC[gr_idx].x0;
+    s16 result = temp_r6->xA;
 
-/// #mpLib_8004DC04
+    if (result != -1) {
+        u32 temp_r4 = mpLib_804D64BC[result].x4;
+
+        if ((temp_r4 & 0x10000) && !(temp_r4 & 0x40000)) {
+            mpLib_804D64B8_t* temp_r4_2 = &mpLib_804D64B8[temp_r6->x2];
+            mpLib_804D64B8_t* temp_r5 =
+                &mpLib_804D64B8[mpLib_804D64BC[result].x0->x0];
+
+            float dx = temp_r4_2->pos.x - temp_r5->pos.x;
+            float dy = temp_r4_2->pos.y - temp_r5->pos.y;
+            float dx2 = dx * dx;
+            float dy2 = dy * dy;
+
+            if (dx2 + dy2 < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return temp_r6->x6;
+}
+
+int mpLib_8004DC04(int gr_idx)
+{
+    mp_UnkStruct1* temp_r6 = mpLib_804D64BC[gr_idx].x0;
+    s16 result = temp_r6->x8;
+
+    if (result != -1) {
+        u32 temp_r4 = mpLib_804D64BC[result].x4;
+
+        if ((temp_r4 & 0x10000) && !(temp_r4 & 0x40000)) {
+            mpLib_804D64B8_t* temp_r4_2 = &mpLib_804D64B8[temp_r6->x0];
+            mpLib_804D64B8_t* temp_r5 =
+                &mpLib_804D64B8[mpLib_804D64BC[result].x0->x2];
+
+            float dx = temp_r4_2->pos.x - temp_r5->pos.x;
+            float dy = temp_r4_2->pos.y - temp_r5->pos.y;
+            float dx2 = dx * dx;
+            float dy2 = dy * dy;
+
+            if (dx2 + dy2 < 4.0) {
+                return result;
+            }
+        }
+    }
+
+    return temp_r6->x4;
+}
 
 /// #mpLib_8004DC90
 
