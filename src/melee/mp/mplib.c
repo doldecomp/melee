@@ -1178,28 +1178,28 @@ void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top)
     mpLib_804D64B0 = true;
 }
 
-void mpLib_80058970(f32 arg0, f32 arg1, f32 arg2, f32 arg3)
+void mpLib_80058970(float x1, float y1, float x2, float y2)
 {
-    f32 right;
-    f32 left;
-    f32 bottom;
-    f32 var_f5;
+    float right;
+    float left;
+    float bottom;
+    float top;
 
-    left = arg2;
-    bottom = arg3;
-    if (arg0 > left) {
-        right = arg0;
+    if (x1 > x2) {
+        left = x2;
+        right = x1;
     } else {
-        right = left;
-        left = arg0;
+        right = x2;
+        left = x1;
     }
-    if (arg1 > bottom) {
-        var_f5 = arg1;
+    if (y1 > y2) {
+        bottom = y2;
+        top = y1;
     } else {
-        var_f5 = bottom;
-        bottom = arg1;
+        top = y2;
+        bottom = y1;
     }
-    mpLib_800588D0(left, bottom, right, var_f5);
+    mpLib_800588D0(left, bottom, right, top);
 }
 
 void mpLib_800589D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
