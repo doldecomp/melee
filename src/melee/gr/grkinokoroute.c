@@ -1,5 +1,7 @@
 #include "grkinokoroute.h"
 
+#include "ground.h"
+
 #include <platform.h>
 
 void grKinokoRoute_8020741C(bool arg) {}
