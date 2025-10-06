@@ -39,7 +39,9 @@ struct ftKb_FighterVars {
     /* fp+224C   */ u8 _48[0x60 - 0x48];
     /* fp+228C   */ UNK_T x60;
     /* fp+2290   */ bool x64;
-    /* fp+2294   */ u8 _68[0x7C - 0x68];
+    /* fp+2294   */ u8 _68[0x74 - 0x68];
+    /* fp+22A0   */ u32 x74;
+    /* fp+22A4   */ u32 x78;
     /* fp+22A8   */ Item_GObj* ns_flash_gobj;
     /* fp+2294   */ u8 x80[0x9C - 0x80];
     /* fp+22C8   */ int x9C;
@@ -47,9 +49,9 @@ struct ftKb_FighterVars {
     /* fp+22D0   */ UNK_T xA4;
     /* fp+22D4   */ int xA8;
     /* fp+22D8   */ UNK_T xAC;
-    /* fp+22DC   */ UNK_T xB0;
+    /* fp+22DC   */ u32 xB0;
     /* fp+22E0   */ int xB4;
-    /* fp+22E4   */ UNK_T xB8;
+    /* fp+22E4   */ u32 xB8;
     /* fp+22E8   */ int xBC;
     /* fp+22EC   */ Item_GObj* xC0;
     /* fp+22F0   */ bool xC4;
