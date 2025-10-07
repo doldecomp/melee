@@ -294,12 +294,9 @@ static int mnInfoBonus_803EFCE8[0x120] = {
 
 struct mnInfoBonus_804A09B0_t {
     /*  +0 */ int x0;
-    /*  +4 */ HSD_Text* x4;
-    /*  +8 */ u8 pad_8[0x10];
-    /* +18 */ HSD_Text* x18;
-    /* +1C */ u8 pad_1C[0x10];
-    /* +2C */ HSD_Text* x2C;
-    /* +30 */ u8 pad_30[0x10];
+    /*  +4 */ HSD_Text* x4[0x5];
+    /* +18 */ HSD_Text* x18[0x5];
+    /* +2C */ HSD_Text* x2C[0x5];
     /* +40 */ HSD_Text* x40;
     /* +44 */ int x44;
     /* +48 */ int x48;
@@ -319,14 +316,9 @@ static const float mnInfoBonus_804DC274 = 364.68332F;
 static const float mnInfoBonus_804DC278 = 38.38772F;
 static const float mnInfoBonus_804DC27C = 0.0521F;
 static const float mnInfoBonus_804DC280 = -14.F;
-static const float mnInfoBonus_804DC284 = -6.35F;
-static const float mnInfoBonus_804DC288 = 2.77F;
 static const float mnInfoBonus_804DC28C = 8.9F;
 static const float mnInfoBonus_804DC290 = 1.25F;
-static const float mnInfoBonus_804DC294 = 0.034F;
-static const float mnInfoBonus_804DC298 = -5.F;
 static const float mnInfoBonus_804DC29C = -4.7500005F;
-static const float mnInfoBonus_804DC2A0 = -6.25F;
 static const float mnInfoBonus_804DC2A4 = 18.5F;
 static const float mnInfoBonus_804DC2A8 = 2.5F;
 
