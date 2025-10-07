@@ -2,8 +2,9 @@
 #define MELEE_MN_INFOBONUS_H
 
 #include <placeholder.h>
+#include <baselib/forward.h>
 
-/* 2528F8 */ UNK_RET mnInfoBonus_802528F8(UNK_PARAMS);
+/* 2528F8 */ int mnInfoBonus_802528F8(void);
 /* 2529B4 */ UNK_RET mnInfoBonus_802529B4(UNK_PARAMS);
 /* 252ADC */ UNK_RET mnInfoBonus_80252ADC(UNK_PARAMS);
 /* 252C50 */ UNK_RET fn_80252C50(UNK_PARAMS);
