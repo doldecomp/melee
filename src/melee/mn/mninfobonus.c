@@ -1,7 +1,8 @@
 #include "mninfobonus.h"
 
 #include <gm/gm_16AE.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 static int mnInfoBonus_803EFCE8[0x120] = {
     0x00000000,
@@ -294,7 +295,7 @@ static int mnInfoBonus_803EFCE8[0x120] = {
 	0x00000000
 };
 
-struct {
+struct mnInfoBonus_804A09B0_t {
     /*  +0 */ int x0;
     /*  +4 */ HSD_Text* x4;
     /*  +8 */ u8 pad_8[0x10];
@@ -304,7 +305,7 @@ struct {
     /* +30 */ u8 pad_30[0x10];
     /* +40 */ HSD_Text* x40;
     /* +44 */ int x44;
-    /* +48 */ u32 x48; // not sure if signed or not
+    /* +48 */ int x48;
     /* +4C */ HSD_GObj* x4C;
     /* +50 */ void* x50; // No precise clue on pointer type
     /* +54 */ void* x54; // No precise clue on pointer type
@@ -366,4 +367,39 @@ int mnInfoBonus_802528F8(void) {
         }
     }
     return var_r30;
+}
+
+inline HSD_JObj* fn_80252E4C_inline_GetJObjNext(HSD_JObj* jobj)
+{
+    if (jobj == NULL) return NULL;
+    return jobj->next;
+}
+
+inline HSD_JObj* fn_80252E4C_inline_GetJObjChild(HSD_JObj* jobj)
+{
+    if (jobj == NULL) return NULL;
+    return jobj->child;
+}
+
+void fn_80252E4C(HSD_GObj* arg0) {
+    HSD_JObj* temp_r30 = GET_JOBJ(arg0);
+    struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
+    // definitely an int instead of u32
+    if (o->x48 < 0xC8) {
+        o->x48++;
+    } else {
+        o->x48 = 0;
+    }
+    if (o->x0 > 0) {
+        HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjNext(fn_80252E4C_inline_GetJObjChild(temp_r30)), 0x10);
+    } else {
+        HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjNext(fn_80252E4C_inline_GetJObjChild(temp_r30)), 0x10);
+    }
+    if (mnInfoBonus_802528F8() /* TODO don't inline! */ > 5) {
+        HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjChild(temp_r30), 0x10U);
+    } else {
+        HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjChild(temp_r30), 0x10U);
+    }
+    HSD_JObjReqAnimAll(temp_r30, (f32)o->x48);
+    HSD_JObjAnimAll(temp_r30);
 }
