@@ -311,16 +311,9 @@ static u8 mnInfoBonus_804D6C80[0x8];
 
 static const float mnInfoBonus_804DC268 = -9.5F;
 static const float mnInfoBonus_804DC26C = 9.1F;
-static const float mnInfoBonus_804DC270 = 17.F;
 static const float mnInfoBonus_804DC274 = 364.68332F;
 static const float mnInfoBonus_804DC278 = 38.38772F;
 static const float mnInfoBonus_804DC27C = 0.0521F;
-static const float mnInfoBonus_804DC280 = -14.F;
-static const float mnInfoBonus_804DC28C = 8.9F;
-static const float mnInfoBonus_804DC290 = 1.25F;
-static const float mnInfoBonus_804DC29C = -4.7500005F;
-static const float mnInfoBonus_804DC2A4 = 18.5F;
-static const float mnInfoBonus_804DC2A8 = 2.5F;
 
-static const double mnInfoBonus_804DC2B0 = 4503601774854144;
+static const double mnInfoBonus_804DC2B0 = 4503601774854144; // Remove when no more casts ADleft
 static const float mnInfoBonus_804DC2B8 = 0.F; // TODO somehow move this from sbss to sdata
