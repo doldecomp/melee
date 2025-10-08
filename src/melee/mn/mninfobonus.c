@@ -4,15 +4,18 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/sislib.h>
+#include <baselib/controller.h>
+#include <baselib/gobjplink.h>
+#include <db/db.h>
+#include <lb/lbaudio_ax.h>
+
+#include "mnmain.h"
 
 #include "mninfobonus.static.h"
 
-int inline mnInfoBonus_802528F8_inline(int j)
+inline int mnInfoBonus_802528F8_inline(int j)
 {
-    if (*mnInfoBonus_804D6C80)
-    {
-        return TRUE;
-    }
+    if (*mnInfoBonus_804D6C80) return TRUE;
     return gm_8016F120(j);
 }
 
@@ -40,7 +43,12 @@ int mnInfoBonus_802528F8(void) {
     return var_r30;
 }
 
-void inline mnInfoBonus_80252ADC_inline(HSD_Text* text)
+inline int mnInfoBonus_802528F8_wrapper(void)
+{
+    return mnInfoBonus_802528F8();
+}
+
+inline void mnInfoBonus_80252ADC_inline(HSD_Text* text)
 {
     text->x34.x = 0.034F;
     text->x34.y = 0.034F;
@@ -67,6 +75,65 @@ void mnInfoBonus_80252ADC(void)
     }
 }
 
+void fn_80252C50(HSD_GObj* gobj)
+{
+    struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
+    int i;
+    u32 temp_r3;
+    u64 pad_0;
+
+    if (mn_804D6BC8.x0 != 0) {
+        --mn_804D6BC8.x0;
+        mn_804D6BC8.x2 = 0;
+        mn_804D6BC8.x4 = 0;
+        return;
+    }
+    if (o->x44 != 0) {
+        if (o->x44 == 1)
+            mnInfoBonus_80252ADC();
+        --o->x44;
+        return;
+    }
+    temp_r3 = mn_80229624(4U);
+
+    // TODO some GC/Wii decomp members are suspicious of this block. Investigate further
+    // Context: inadvertent hack to remove an extra `li r29,0` operation using i = 0
+    i = 0;
+    mn_804A04F0.x8 = (u64) temp_r3;
+    if (((u64) temp_r3 & 0x20) != 0) {
+        lbAudioAx_80024030(i);
+        mn_804A04F0.x11 = i;
+        mn_80229894(0x1C, 1U, 3);
+        for (i = 0; i < 5; ++i) {
+    // Weird code end
+            HSD_SisLib_803A5CC4(o->x4[i]);
+            HSD_SisLib_803A5CC4(o->x2C[i]);
+            HSD_SisLib_803A5CC4(o->x18[i]);
+        }
+        HSD_SisLib_803A5CC4(o->x40);
+        HSD_GObjPLink_80390228(o->x4C);
+        o->x4C = NULL;
+        return;
+    }
+    // TODO inline button getter
+    if (g_debugLevel >= 3 && HSD_PadCopyStatus->button & 0x40 && HSD_PadCopyStatus->button & 0x20 && HSD_PadCopyStatus->button & 0x100) {
+        o->x0 = 0;
+        *mnInfoBonus_804D6C80 = 1;
+        mnInfoBonus_802529B4();
+    }
+    if (((u64) temp_r3 & 1) != 0) {
+        if (o->x0 > 0) {
+            lbAudioAx_80024030(2);
+            --o->x0;
+            mnInfoBonus_802529B4();
+        }
+    } else if (((u64) temp_r3 & 2) != 0 && mnInfoBonus_802528F8_wrapper() /* TODO don't inline! */ > 5) {
+        lbAudioAx_80024030(2);
+        ++o->x0;
+        mnInfoBonus_802529B4();
+    }
+}
+
 inline HSD_JObj* fn_80252E4C_inline_GetJObjNext(HSD_JObj* jobj)
 {
     if (jobj == NULL) return NULL;
@@ -79,7 +146,8 @@ inline HSD_JObj* fn_80252E4C_inline_GetJObjChild(HSD_JObj* jobj)
     return jobj->child;
 }
 
-void fn_80252E4C(HSD_GObj* arg0) {
+void fn_80252E4C(HSD_GObj* arg0)
+{
     HSD_JObj* temp_r30 = GET_JOBJ(arg0);
     struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
     // definitely an int instead of u32
@@ -93,7 +161,7 @@ void fn_80252E4C(HSD_GObj* arg0) {
     } else {
         HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjNext(fn_80252E4C_inline_GetJObjChild(temp_r30)), 0x10);
     }
-    if (mnInfoBonus_802528F8() /* TODO don't inline! */ > 5) {
+    if (mnInfoBonus_802528F8_wrapper() > 5) {
         HSD_JObjClearFlags(fn_80252E4C_inline_GetJObjChild(temp_r30), 0x10U);
     } else {
         HSD_JObjSetFlags(fn_80252E4C_inline_GetJObjChild(temp_r30), 0x10U);
