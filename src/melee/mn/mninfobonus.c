@@ -3,6 +3,7 @@
 #include "inlines.h"
 
 #include <gm/gm_16AE.h>
+#include <gm/gm_16F1.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/sislib.h>
@@ -46,6 +47,44 @@ int mnInfoBonus_802528F8(void) {
 inline int mnInfoBonus_802528F8_wrapper(void)
 {
     return mnInfoBonus_802528F8();
+}
+
+inline int mnInfoBonus_802529B4_inline0(int i)
+{
+    if (*mnInfoBonus_804D6C80 != 0) return 1;
+    return gm_8016F120(i);
+}
+
+inline int mnInfoBonus_802529B4_inline1(int i)
+{
+    return ((u16) gm_8016F208(i) - 2) * 3;
+}
+
+void mnInfoBonus_802529B4(void)
+{
+    struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
+    int text_idx = 0;
+    int bonus_offset = o->x0;
+    int var_r28 = 5;
+    int i;
+
+    for (i = 0; ; i++) {
+        int temp_1 = mnInfoBonus_803EFCE8[i];
+        if (temp_1 == 0x100)
+            break;
+        if (bonus_offset != 0) {
+            if (mnInfoBonus_802529B4_inline0(temp_1) != 0)
+                --bonus_offset;
+        } else if (var_r28 != 0) {
+            if (mnInfoBonus_802529B4_inline0(temp_1) != 0) {
+                HSD_SisLib_803A6368(o->x4[text_idx], mnInfoBonus_802529B4_inline1(temp_1) + 0x1BA);
+                HSD_SisLib_803A6368(o->x18[text_idx], mnInfoBonus_802529B4_inline1(temp_1) + 0x1BB);
+                HSD_SisLib_803A6368(o->x2C[text_idx], mnInfoBonus_802529B4_inline1(temp_1) + 0x1BC);
+                ++text_idx;
+                --var_r28;
+            }
+        }
+   }
 }
 
 inline void mnInfoBonus_80252ADC_inline(HSD_Text* text)
