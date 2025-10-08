@@ -1,4 +1,6 @@
 #include "mninfobonus.h"
+#include "mnmain.h"
+#include "inlines.h"
 
 #include <gm/gm_16AE.h>
 #include <baselib/gobj.h>
@@ -8,8 +10,6 @@
 #include <baselib/gobjplink.h>
 #include <db/db.h>
 #include <lb/lbaudio_ax.h>
-
-#include "mnmain.h"
 
 #include "mninfobonus.static.h"
 
@@ -79,8 +79,8 @@ void fn_80252C50(HSD_GObj* gobj)
 {
     struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
     int i;
-    u32 temp_r3;
-    u64 pad_0;
+    u64 temp_r3;
+    u32 pad_0;
 
     if (mn_804D6BC8.x0 != 0) {
         --mn_804D6BC8.x0;
@@ -94,12 +94,11 @@ void fn_80252C50(HSD_GObj* gobj)
         --o->x44;
         return;
     }
-    temp_r3 = mn_80229624(4U);
 
     // TODO some GC/Wii decomp members are suspicious of this block. Investigate further
     // Context: inadvertent hack to remove an extra `li r29,0` operation using i = 0
     i = 0;
-    mn_804A04F0.x8 = (u64) temp_r3;
+    temp_r3 = Menu_GetAllEvents();
     if (((u64) temp_r3 & 0x20) != 0) {
         lbAudioAx_80024030(i);
         mn_804A04F0.x11 = i;
