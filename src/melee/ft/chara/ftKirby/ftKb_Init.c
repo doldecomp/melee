@@ -6359,7 +6359,12 @@ void ftKb_ZdSpecialN_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_ZdSpecialAirN_Phys
 
-/// #ftKb_ZdSpecialN_Coll
+void ftKb_ZdSpecialN_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftKb_SpecialNSk_80105E8C(gobj);
+    }
+}
 
 /// #ftKb_ZdSpecialAirN_Coll
 
