@@ -4,6 +4,7 @@
 
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
 
