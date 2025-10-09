@@ -1,11 +1,12 @@
 #include "itzgshell.h"
 
+#include "gr/grzakogenerator.h"
+
 #include "it/forward.h"
 
-#include "gr/grzakogenerator.h"
 #include "it/inlines.h"
-#include "it/it_26B1.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
@@ -64,7 +65,13 @@ bool itZrshell_UnkMotion2_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion2_Phys
 
-/// #it_2725_Logic11_Thrown
+void it_2725_Logic11_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    Item_80268E5C((HSD_GObj*) gobj, 3, 6);
+    Item_8026AE84(ip, 0xF2, 0x7FU, 0x40U);
+}
 
 /// #itZrshell_UnkMotion3_Anim
 

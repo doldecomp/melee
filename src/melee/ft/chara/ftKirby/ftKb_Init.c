@@ -7,6 +7,7 @@
 #include "ef/eflib.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
+#include "ft/chara/ftCommon/ftCo_Wait.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -46,17 +47,13 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
 #include "melee/lb/lbrefract.h"
+#include "mp/mpcoll.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
 #include <stddef.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
-#include "ft/chara/ftCommon/ftCo_Jump.h"
-#include "ft/chara/ftCommon/ftCo_KneeBend.h"
-#include "ft/ftwalkcommon.h"
-#include "mp/mpcoll.h"
-#include "ft/chara/ftCommon/ftCo_Wait.h"
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
@@ -4517,11 +4514,13 @@ HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj, int arg1)
     return M2C_FIELD(&ca->x48_items[0], HSD_Joint**, 0x10);
 }
 
-float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj, Vec3* victim_self_vel, float victim_facing_dir)
+float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj, Vec3* victim_self_vel,
+                             float victim_facing_dir)
 {
     Fighter* ft = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = ft->dat_attrs;
-    victim_self_vel->x = -victim_facing_dir * da->specialn_ground_spit_initial_horizontal_velocity;
+    victim_self_vel->x = -victim_facing_dir *
+                         da->specialn_ground_spit_initial_horizontal_velocity;
     victim_self_vel->z = 0.0f;
     victim_self_vel->y = 0.0f;
     return da->specialn_spit_deceleration_rate;
@@ -6883,7 +6882,7 @@ int ftKb_SpecialNYs_8010933C(Fighter_GObj* gobj)
     return ea->specialn_ys_iframes_on_release;
 }
 
-void ftKb_SpecialNYs_80109354(Vec3 *v)
+void ftKb_SpecialNYs_80109354(Vec3* v)
 {
     ftKb_DatAttrs* cd = gFtDataList[FTKIND_KIRBY]->ext_attr;
     v->x = cd->specialn_ys_horizontal_velocity_on_breakout;
@@ -6936,7 +6935,15 @@ ftDynamics* ftKb_SpecialNYs_801093A0(Fighter_GObj* gobj)
 
 /// #fn_80109CF0
 
-/// #ftKb_YsSpecialN1_Anim
+void ftKb_YsSpecialN1_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    HSD_JObjAnimAll((HSD_JObj*) fp->fv.gw.x223C_panicDamage);
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 /// #ftKb_YsSpecialAirNCapture2_Anim
 
@@ -7094,7 +7101,16 @@ void ftCo_KirbyYoshiEgg_Phys(Fighter_GObj* gobj)
     ft_80084DB0(gobj);
 }
 
-/// #ftCo_KirbyYoshiEgg_Coll
+void ftCo_KirbyYoshiEgg_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((enum GroundOrAir) fp->ground_or_air == GA_Ground) {
+        ft_8008403C(gobj, fn_8010B148);
+        return;
+    }
+    ft_80082C74(gobj, fn_8010B124);
+}
 
 void fn_8010B124(Fighter_GObj* gobj)
 {
