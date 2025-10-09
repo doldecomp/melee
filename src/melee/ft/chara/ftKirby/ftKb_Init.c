@@ -7273,7 +7273,12 @@ void ftKb_MsSpecialAirNEnd_Phys(Fighter_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-/// #ftKb_MsSpecialNEnd_Coll
+void ftKb_MsSpecialNEnd_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftKb_SpecialNPe_8010BF90(gobj);
+    }
+}
 
 /// #ftKb_MsSpecialAirNEnd_Coll
 
