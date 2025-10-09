@@ -7078,7 +7078,16 @@ void ftKb_SpecialNYs_8010AA2C(Fighter_GObj* gobj)
 
 void ftCo_KirbyYoshiEgg_IASA(Fighter_GObj* gobj) {}
 
-/// #ftCo_KirbyYoshiEgg_Phys
+void ftCo_KirbyYoshiEgg_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((enum GroundOrAir) fp->ground_or_air == GA_Ground) {
+        ft_80084F3C(gobj);
+        return;
+    }
+    ft_80084DB0(gobj);
+}
 
 /// #ftCo_KirbyYoshiEgg_Coll
 
