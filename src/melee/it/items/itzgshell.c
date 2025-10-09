@@ -34,7 +34,11 @@ bool itZrshell_UnkMotion0_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion0_Coll
 
-/// #it_802DE320
+void it_802DE320(Item_GObj* gobj)
+{
+    Item_80268E5C((HSD_GObj*) gobj, 1, ITEM_ANIM_UPDATE);
+    it_80274C88(gobj);
+}
 
 /// #itZrshell_UnkMotion1_Anim
 
