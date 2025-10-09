@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
 #include "gr/forward.h"
 #include "lb/forward.h"
 
@@ -74,7 +75,7 @@
 /* 1EF60C */ UNK_RET fn_801EF60C(UNK_PARAMS);
 /* 1EF7D8 */ void grBigBlue_801EF7D8(Vec3*);
 /* 1EF844 */ bool grBigBlue_801EF844(enum_t);
-/* 1EFB9C */ UNK_RET fn_801EFB9C(UNK_PARAMS);
+/* 1EFB9C */ void fn_801EFB9C(HSD_GObj*, int);
 /* 1EFC0C */ DynamicsDesc* grBigBlue_801EFC0C(enum_t);
 /* 1EFC14 */ bool grBigBlue_801EFC14(Vec3*, int arg, HSD_JObj* jobj);
 
