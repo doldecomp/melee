@@ -6164,7 +6164,11 @@ void ftKb_SpecialNPr_80100DE0(Fighter_GObj* gobj)
 
 /// #fn_80100E0C
 
-/// #fn_80100F60
+void fn_80100F60(Fighter_GObj* gobj)
+{
+    ft_80089824(gobj);
+    ft_800892A0(gobj);
+}
 
 /// #ftKb_SpecialNPr_80100F94
 
