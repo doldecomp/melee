@@ -2,15 +2,21 @@
 #include "mnmain.h"
 #include "inlines.h"
 
-#include <gm/gm_16AE.h>
-#include <gm/gm_16F1.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/sislib.h>
 #include <baselib/controller.h>
 #include <baselib/gobjplink.h>
 #include <db/db.h>
+#include <gm/gm_16AE.h>
+#include <gm/gm_16F1.h>
+#include <lb/lbarchive.h>
 #include <lb/lbaudio_ax.h>
+#include <lb/lb_00B0.h>
+#include <sc/types.h>
 
 #include "mninfobonus.static.h"
 
@@ -206,4 +212,75 @@ void fn_80252E4C(HSD_GObj* arg0)
     }
     HSD_JObjReqAnimAll(temp_r30, (f32)o->x48);
     HSD_JObjAnimAll(temp_r30);
+}
+
+inline HSD_JObj* mnInfoBonus_inline_GetJObjNext(HSD_JObj* jobj)
+{
+    if (jobj == NULL) return NULL;
+    return jobj->next;
+}
+
+inline HSD_JObj* mnInfoBonus_inline_GetJObjChild(HSD_JObj* jobj)
+{
+    if (jobj == NULL) return NULL;
+    return jobj->child;
+}
+
+inline void mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc* gobjproc)
+{
+    gobjproc->flags_3 = HSD_GObj_804D783C;
+}
+
+inline void mnInfoBonus_80252F8C_inline0(StaticModelDesc* x50, HSD_GObj* temp_r3_2)
+{
+    HSD_JObj* temp_r3_3;
+    temp_r3_3 = HSD_JObjLoadJoint(x50->joint);
+    HSD_GObjObject_80390A70(temp_r3_2, HSD_GObj_804D7849, temp_r3_3);
+    GObj_SetupGXLink(temp_r3_2, HSD_GObj_JObjCallback, 4U, 0x80U);
+    HSD_JObjAddAnimAll(temp_r3_3, x50->animjoint, x50->matanim_joint, x50->shapeanim_joint);
+    HSD_JObjReqAnimAll(temp_r3_3, 0.F);
+    HSD_JObjAnimAll(temp_r3_3);
+    
+    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjNext(mnInfoBonus_inline_GetJObjChild(temp_r3_3)), 0x10U);
+    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(temp_r3_3), 0x10U);
+    mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(temp_r3_2, fn_80252E4C, 0U));
+}
+
+inline void mnInfoBonus_80252F8C_inline1(HSD_Text* text)
+{
+    text->x24.x = 0.0521F;
+    text->x24.y = 0.0521F;
+}
+
+void mnInfoBonus_80252F8C(void)
+{
+    struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
+    HSD_GObj* temp_r3_2;
+    HSD_Archive* archive;
+    StaticModelDesc* x50;
+    HSD_Text* text;
+
+    mn_804D6BC8.x0 = 5;
+    mn_804A04F0.x1 = mn_804A04F0.x0;
+    mn_804A04F0.x0 = 0x1F;
+    mn_804A04F0.x2 = 0;
+    memzero(o, sizeof(*o));
+    
+    o->x44 = 8;
+    *mnInfoBonus_804D6C80 = 0;
+    archive = mn_804D6BB8;
+    lbArchive_LoadSections(archive, &o->x50.joint, "MenMainConBo_Top_joint",
+                           &o->x50.animjoint, "MenMainConBo_Top_animjoint",
+                           &o->x50.matanim_joint, "MenMainConBo_Top_matanim_joint",
+                           &o->x50.shapeanim_joint, "MenMainConBo_Top_shapeanim_joint", 0);
+    mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), fn_80252C50, 0U));
+    
+    x50 = &o->x50;
+    temp_r3_2 = GObj_Create(6U, 7U, 0x80U);
+    o->x4C = temp_r3_2;
+    mnInfoBonus_80252F8C_inline0(x50, temp_r3_2);
+    
+    o->x40 = HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.F, 364.68332F, 38.38772F);
+    mnInfoBonus_80252F8C_inline1(o->x40);
+    HSD_SisLib_803A6368(o->x40, 0xA5);
 }

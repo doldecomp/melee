@@ -1,7 +1,9 @@
+#include "sc/forward.h"
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <sc/types.h>
 
-static int mnInfoBonus_803EFCE8[0x120] = {
+static int mnInfoBonus_803EFCE8[0x101] = {
     0x00000000,
 	0x00000001,
 	0x00000002,
@@ -258,38 +260,7 @@ static int mnInfoBonus_803EFCE8[0x120] = {
 	0x000000F3,
 	0x000000F4,
 	0x000000F5,
-	0x00000100,
-	0x4D656E4D,
-	0x61696E43,
-	0x6F6E426F,
-	0x5F546F70,
-	0x5F6A6F69,
-	0x6E740000,
-	0x4D656E4D,
-	0x61696E43,
-	0x6F6E426F,
-	0x5F546F70,
-	0x5F616E69,
-	0x6D6A6F69,
-	0x6E740000,
-	0x4D656E4D,
-	0x61696E43,
-	0x6F6E426F,
-	0x5F546F70,
-	0x5F6D6174,
-	0x616E696D,
-	0x5F6A6F69,
-	0x6E740000,
-	0x4D656E4D,
-	0x61696E43,
-	0x6F6E426F,
-	0x5F546F70,
-	0x5F736861,
-	0x7065616E,
-	0x696D5F6A,
-	0x6F696E74,
-	0x00000000,
-	0x00000000
+	0x00000100
 };
 
 struct mnInfoBonus_804A09B0_t {
@@ -301,19 +272,7 @@ struct mnInfoBonus_804A09B0_t {
     /* +44 */ int x44;
     /* +48 */ int x48;
     /* +4C */ HSD_GObj* x4C;
-    /* +50 */ void* x50; // No precise clue on pointer type
-    /* +54 */ void* x54; // No precise clue on pointer type
-    /* +58 */ void* x58; // No precise clue on pointer type
-    /* +5C */ void* x5C; // No precise clue on pointer type
+    /* +50 */ StaticModelDesc x50;
 } mnInfoBonus_804A09B0;
 
 static u8 mnInfoBonus_804D6C80[0x8];
-
-static const float mnInfoBonus_804DC268 = -9.5F;
-static const float mnInfoBonus_804DC26C = 9.1F;
-static const float mnInfoBonus_804DC274 = 364.68332F;
-static const float mnInfoBonus_804DC278 = 38.38772F;
-static const float mnInfoBonus_804DC27C = 0.0521F;
-
-static const double mnInfoBonus_804DC2B0 = 4503601774854144; // Remove when no more casts ADleft
-static const float mnInfoBonus_804DC2B8 = 0.F; // TODO somehow move this from sbss to sdata
