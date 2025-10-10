@@ -19,6 +19,8 @@
 #include <sc/types.h>
 
 #include "mninfobonus.static.h"
+#include "baselib/forward.h"
+#include "sc/forward.h"
 
 inline int mnInfoBonus_802528F8_inline(int j)
 {
@@ -231,21 +233,6 @@ inline void mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc* gobjproc)
     gobjproc->flags_3 = HSD_GObj_804D783C;
 }
 
-inline void mnInfoBonus_80252F8C_inline0(StaticModelDesc* x50, HSD_GObj* temp_r3_2)
-{
-    HSD_JObj* temp_r3_3;
-    temp_r3_3 = HSD_JObjLoadJoint(x50->joint);
-    HSD_GObjObject_80390A70(temp_r3_2, HSD_GObj_804D7849, temp_r3_3);
-    GObj_SetupGXLink(temp_r3_2, HSD_GObj_JObjCallback, 4U, 0x80U);
-    HSD_JObjAddAnimAll(temp_r3_3, x50->animjoint, x50->matanim_joint, x50->shapeanim_joint);
-    HSD_JObjReqAnimAll(temp_r3_3, 0.F);
-    HSD_JObjAnimAll(temp_r3_3);
-    
-    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjNext(mnInfoBonus_inline_GetJObjChild(temp_r3_3)), 0x10U);
-    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(temp_r3_3), 0x10U);
-    mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(temp_r3_2, fn_80252E4C, 0U));
-}
-
 inline void mnInfoBonus_80252F8C_inline1(HSD_Text* text)
 {
     text->x24.x = 0.0521F;
@@ -255,10 +242,12 @@ inline void mnInfoBonus_80252F8C_inline1(HSD_Text* text)
 void mnInfoBonus_80252F8C(void)
 {
     struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
-    HSD_GObj* temp_r3_2;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
     HSD_Archive* archive;
-    StaticModelDesc* x50;
-    HSD_Text* text;
+    StaticModelDesc* model_desc;
+    u8 pad0[0x8];
+    u8 pad1[0x8];
 
     mn_804D6BC8.x0 = 5;
     mn_804A04F0.x1 = mn_804A04F0.x0;
@@ -275,10 +264,20 @@ void mnInfoBonus_80252F8C(void)
                            &o->x50.shapeanim_joint, "MenMainConBo_Top_shapeanim_joint", 0);
     mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), fn_80252C50, 0U));
     
-    x50 = &o->x50;
-    temp_r3_2 = GObj_Create(6U, 7U, 0x80U);
-    o->x4C = temp_r3_2;
-    mnInfoBonus_80252F8C_inline0(x50, temp_r3_2);
+    model_desc = &o->x50;
+    gobj = GObj_Create(6U, 7U, 0x80U);
+    o->x4C = gobj;
+    jobj = HSD_JObjLoadJoint(model_desc->joint);
+
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
+    HSD_JObjAddAnimAll(jobj, model_desc->animjoint, model_desc->matanim_joint, model_desc->shapeanim_joint);
+    HSD_JObjReqAnimAll(jobj, 0.F);
+    HSD_JObjAnimAll(jobj);
+
+    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjNext(mnInfoBonus_inline_GetJObjChild(jobj)), 0x10U);
+    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(jobj), 0x10U);
+    mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(gobj, fn_80252E4C, 0U));
     
     o->x40 = HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.F, 364.68332F, 38.38772F);
     mnInfoBonus_80252F8C_inline1(o->x40);
