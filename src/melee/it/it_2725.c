@@ -7252,7 +7252,7 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
     }
     if (dir1 != 0) {
         sp34 = item->xC1C;
-        if (coll->x36 == 1) {
+        if (coll->facing_dir == 1) {
             pos_x1 = coll->xA4_ecbCurrCorrect.right.x - 1.0f;
             if (pos_x1 < 0.0f) {
                 pos_x1 = -pos_x1;

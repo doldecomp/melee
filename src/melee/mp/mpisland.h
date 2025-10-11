@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "mp/forward.h"
+#include "mp/types.h"
 
 #include <dolphin/mtx.h>
 
@@ -17,6 +18,7 @@
 /* 05B004 */ UNK_RET mpIsland_8005B004(UNK_PARAMS);
 /* 05B334 */ UNK_RET mpIsland_8005B334(int, int, int, bool);
 
+extern mpIsland_803B73E8_t mpIsland_803B73E8;
 struct mpIsland_80458E88_t;
 extern struct mpIsland_80458E88_t mpIsland_80458E88;
 

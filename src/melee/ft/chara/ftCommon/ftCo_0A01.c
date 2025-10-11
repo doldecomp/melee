@@ -709,16 +709,16 @@ bool ftCo_800A1BA8(Fighter* fp)
     {
         Vec3 coll_vec;
         Vec3 sp14;
-        UNK_T sp10;
-        UNK_T spC;
+        int sp10;
+        int spC;
         if (fp->facing_dir > 0.0) {
-            return mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y,
-                                  other_fp->cur_pos.x, other_fp->cur_pos.y,
-                                  &coll_vec, &sp10, &spC, &sp14, -1, -1);
+            return mpLib_800509B8(&coll_vec, &sp10, &spC, &sp14, -1, -1,
+                                  fp->cur_pos.x, fp->cur_pos.y,
+                                  other_fp->cur_pos.x, other_fp->cur_pos.y);
         }
-        return mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y,
-                              other_fp->cur_pos.x, other_fp->cur_pos.y,
-                              &coll_vec, &sp10, &spC, &sp14, -1, -1);
+        return mpLib_800501CC(&coll_vec, &sp10, &spC, &sp14, -1, -1,
+                              fp->cur_pos.x, fp->cur_pos.y,
+                              other_fp->cur_pos.x, other_fp->cur_pos.y);
     }
 }
 
@@ -2920,8 +2920,8 @@ bool ftCo_800AAF48(Fighter* fp)
             {
                 continue;
             }
-            if (mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y,
-                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
+            if (mpLib_800509B8(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                               fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y))
             {
                 continue;
             }
@@ -2953,8 +2953,8 @@ bool ftCo_800AAF48(Fighter* fp)
             {
                 continue;
             }
-            if (mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y,
-                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
+            if (mpLib_800501CC(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                               fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y))
             {
                 continue;
             }

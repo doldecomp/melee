@@ -187,7 +187,7 @@ struct CollData {
     /* fp+718 */ Vec3 x28_vec;
     /* fp+724 */ ECBFlagStruct x34_flags;
     /* fp+725 */ ECBFlagStruct x35_flags;
-    /* fp+726 */ s16 x36;
+    /* fp+726 */ s16 facing_dir;
     /* fp+728 */ s32 x38;
     /* fp+72C */ s32 x3C;
     /* fp+730 */ int ledge_id_unk0;

@@ -38,7 +38,7 @@ void mpLib_80053FF4(s32, Vec3*);
 void mpLib_80054158(s32, Vec3*);
 
 /// @todo Params not confirmed.
-bool mpLib_800567C0(s32 wall_id, Vec3* ecb_side_vtx, Vec3* result);
+bool mpGetSpeed(s32 wall_id, Vec3* ecb_side_vtx, Vec3* result);
 
 bool mpLib_80056C54(s32 idx, Vec3* pos, bool, Vec3*, bool, bool, f32, f32, f32,
                     f32);

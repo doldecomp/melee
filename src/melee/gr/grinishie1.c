@@ -2,6 +2,7 @@
 #include "gr/grinishie1.h"
 
 #include <platform.h>
+#include "mp/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efsync.h"
@@ -345,7 +346,7 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
             slot->jobj2 = NULL;
         }
 
-        mpLib_800581A4((s32) value, (s32) gp, (s32) fn_801FBEB8);
+        mpLib_800581A4((s32) value, gp, (mpLib_Callback)fn_801FBEB8);
         i++;
     }
 
@@ -806,10 +807,10 @@ static inline s32 get_block_id(s32 block_id)
     return idx;
 }
 
-void fn_801FBEB8(s32 block_id, f32 dist)
+void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3, mpLib_GroundEnum arg4, f32 dist)
 {
     s32 id = get_block_id(block_id);
-    if (fabsf_inline(dist) > 0.7f) {
+    if (fabsf_inline(dist) > 0.7) {
         HSD_GObj* gobj = Ground_801C2BA4(3);
         grInishie1_801FB0AC(gobj, id);
         grInishie1_801FBCEC(gobj, id);

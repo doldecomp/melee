@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "dolphin/gx/GXStruct.h"
+
 #include "gr/forward.h"
 #include "mp/forward.h" // IWYU pragma: export
 
@@ -21,6 +23,15 @@ struct mpIsland_80458E88_t {
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
+struct mpIsland_803B73E8_inner {
+    int idx;
+    GXColor color;
+};
+
+struct mpIsland_803B73E8_t {
+    mpIsland_803B73E8_inner x0[20];
+};
+
 struct mp_UnkStruct0 {
     /*  +0 */ mp_UnkStruct0* next;
     /*  +4 */ u16 x4;
@@ -35,19 +46,19 @@ struct mp_UnkStruct0 {
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
-struct mpLib_LineInner {
+struct mpLib_Line {
     /* +0 */ u16 p0_idx;
     /* +2 */ u16 p1_idx;
-    /* +4 */ short x4;
-    /* +6 */ short x6;
-    /* +8 */ short x8;
-    /* +A */ s16 xA;
-    /* +C */ u8 pad_xC[0xE - 0xC];
-    /* +E */ u16 xE;
+    /* +4 */ s16 x4_line_id;
+    /* +6 */ s16 x6_line_id;
+    /* +8 */ s16 x8_line_id;
+    /* +A */ s16 xA_line_id;
+    /* +C */ u16 xC;
+    /* +E */ u16 flags;
 };
 
-struct mpLib_Line {
-    /* +0 */ mpLib_LineInner* x0;
+struct CollLine {
+    /* +0 */ mpLib_Line* x0;
     /* +4 */ u32 flags;
 };
 
@@ -68,26 +79,37 @@ struct mp_UnkStruct6 {
     /* +4 */ short* x4;
 };
 
-struct mpLib_Point {
+struct CollVtx {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
     /* 0x08 */ Vec2 pos;
-    /* 0x10 */ char pad_10[8]; /* maybe part of unk_C[3]? */
+    /* 0x10 */ float x10;
+    /* 0x14 */ float x14;
 }; /* size = 0x18 */
-STATIC_ASSERT(sizeof(struct mpLib_Point) == 0x18);
+STATIC_ASSERT(sizeof(struct CollVtx) == 0x18);
 
-struct mpLib_804D64C0_t {
-    /* 0x00 */ mpLib_804D64C0_t* next;
-    /* 0x04 */ struct mpLib_804D64C0_x4_t {
-        s16 x0;
-        s16 x2;
-        u8 pad_x4[0x10 - 0x4];
-        s16 x10;
-        s16 x12;
-        u8 pad_x14[0x24 - 0x14];
-        s16 x24;
-        s16 x26;
-    }* x4;
+struct mpLib_CollData {
+    /*  +0 */ s16 floor_start;
+    /*  +2 */ s16 floor_count;
+    /*  +4 */ s16 ceiling_start;
+    /*  +6 */ s16 ceiling_count;
+    /*  +8 */ s16 right_wall_start;
+    /*  +A */ s16 right_wall_count;
+    /*  +C */ s16 left_wall_start;
+    /*  +E */ s16 left_wall_count;
+    /* +10 */ s16 dynamic_start;
+    /* +12 */ s16 dynamic_count;
+    /* +14 */ float x14;
+    /* +18 */ float x18;
+    /* +1C */ float x1C;
+    /* +20 */ float x20;
+    /* +24 */ s16 point_start;
+    /* +26 */ s16 point_count;
+};
+
+struct CollJoint {
+    /* 0x00 */ CollJoint* next;
+    /* 0x04 */ mpLib_CollData* coll_data;
     /* 0x08 */ u32 flags;
     /* 0x0C */ s16 xC;
     /* 0x0E */ u8 xE : 1;
@@ -95,12 +117,32 @@ struct mpLib_804D64C0_t {
     /* 0x14 */ float x14;
     /* 0x18 */ float x18;
     /* 0x1C */ float x1C;
-    /* 0x20 */ char pad_20[0x4];
+    /* 0x20 */ HSD_JObj* x20;
     /* 0x24 */ mpLib_Callback x24;
     /* 0x28 */ Ground* x28;
-    /* 0x2C */ int unk_2C; /* inferred */
-    /* 0x30 */ int unk_30; /* inferred */
+    /* 0x2C */ mpLib_Callback x2C;
+    /* 0x30 */ Ground* x30;
 }; /* size = 0x34 */
-STATIC_ASSERT(sizeof(struct mpLib_804D64C0_t) == 0x34);
+STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
+
+struct mp_CollData {
+    /*  +0 */ Vec2* verts;
+    /*  +4 */ int vert_count;
+    /*  +8 */ mpLib_Line* lines;
+    /*  +C */ int line_count;
+    /* +10 */ s16 floor_start;
+    /* +12 */ s16 floor_count;
+    /* +14 */ s16 ceiling_start;
+    /* +16 */ s16 ceiling_count;
+    /* +18 */ s16 right_wall_start;
+    /* +1A */ s16 right_wall_count;
+    /* +1C */ s16 left_wall_start;
+    /* +1E */ s16 left_wall_count;
+    /* +20 */ s16 dynamic_start;
+    /* +22 */ s16 dynamic_count;
+    /* +24 */ mpLib_CollData* x24;
+    /* +28 */ int x28;
+    /* +2C */ int x2C; /* inferred */
+};
 
 #endif

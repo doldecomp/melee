@@ -1333,13 +1333,13 @@ bool ft_80084CE4(Fighter* attacker, Fighter* victim)
     victim_x += victim->cur_pos.x;
 
     if (attacker_x > victim_x) {
-        if (mpLib_800509B8(attacker_x, attacker_y, victim_x, victim_y, NULL, 0,
-                           0, NULL, -1U, -1U))
+        if (mpLib_800509B8(NULL, NULL, NULL, NULL, -1U, -1U, attacker_x,
+                           attacker_y, victim_x, victim_y))
         {
             return true;
         }
-    } else if (mpLib_800501CC(attacker_x, attacker_y, victim_x, victim_y, NULL,
-                              0, 0, 0, -1U, -1U))
+    } else if (mpLib_800501CC(NULL, NULL, NULL, NULL, -1U, -1U, attacker_x,
+                              attacker_y, victim_x, victim_y))
     {
         return true;
     }

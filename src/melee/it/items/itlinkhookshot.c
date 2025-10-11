@@ -1086,7 +1086,7 @@ void it_802A4454(ItemLink* item_link)
     f32 pad[1];
 
     if (mpLib_80054ED8(item_link->unk) != 0) {
-        mpLib_800567C0(item_link->unk, &item_link->pos, &sp10);
+        mpGetSpeed(item_link->unk, &item_link->pos, &sp10);
         item_link->pos.x += sp10.x;
         item_link->pos.y += sp10.y;
         item_link->pos.z += sp10.z;

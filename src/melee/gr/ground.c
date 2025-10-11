@@ -1514,7 +1514,7 @@ bool Ground_801C2FE0(Ground_GObj* arg0)
     int map_id;
 
     struct UnkStageDat_x8_t* dat;
-    mpLib_804D64C0_t* temp_r3;
+    CollJoint* temp_r3;
     bool result;
     S16Vec3* vec;
     int i;
@@ -1563,7 +1563,7 @@ bool Ground_801C2FE0(Ground_GObj* arg0)
     return false;
 }
 
-bool Ground_801C3128(s32 arg0, void (*arg1)(s32))
+bool Ground_801C3128(s32 arg0, void (*arg1)(int))
 {
     /// @todo Unused variable; is this an argument?
     StageData* stage_data;

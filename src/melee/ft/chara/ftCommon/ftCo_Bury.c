@@ -284,7 +284,7 @@ void ftCo_800C0FCC(HSD_GObj* arg0, Fighter_GObj* arg1)
         HSD_JObj* jobj = GET_JOBJ(arg0);
         mpLib_80054DFC(fp->mv.co.bury.x20, &normal);
         HSD_JObjSetRotationZ(jobj, atan2f(-normal.x, normal.y));
-        if (mpLib_800567C0(fp->coll_data.floor.index,
+        if (mpGetSpeed(fp->coll_data.floor.index,
                            &fp->mv.co.bury.translate, &offset))
         {
             PSVECAdd(&fp->mv.co.bury.translate, &offset,

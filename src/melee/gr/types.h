@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "mp/forward.h"
 #include <melee/cm/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
@@ -88,7 +89,7 @@ struct StageInfo {
         s32 unk0;
         Article* unk4;
     }** itemdata;
-    /* +6AC */ void* coll_data;
+    /* +6AC */ mp_CollData* coll_data;
     /* +6B0 */ UnkStage6B0* param;
     /* +6B4 */ UNK_T** ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
