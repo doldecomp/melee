@@ -1,6 +1,7 @@
 #include "mninfobonus.h"
 #include "mnmain.h"
 #include "inlines.h"
+#include "baselib/archive.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -233,37 +234,12 @@ inline void mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc* gobjproc)
     gobjproc->flags_3 = HSD_GObj_804D783C;
 }
 
-inline void mnInfoBonus_80252F8C_inline1(HSD_Text* text)
+inline void mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
 {
-    text->x24.x = 0.0521F;
-    text->x24.y = 0.0521F;
-}
-
-void mnInfoBonus_80252F8C(void)
-{
-    struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    HSD_Archive* archive;
     StaticModelDesc* model_desc;
-    u8 pad0[0x8];
-    u8 pad1[0x8];
 
-    mn_804D6BC8.x0 = 5;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0x1F;
-    mn_804A04F0.x2 = 0;
-    memzero(o, sizeof(*o));
-    
-    o->x44 = 8;
-    *mnInfoBonus_804D6C80 = 0;
-    archive = mn_804D6BB8;
-    lbArchive_LoadSections(archive, &o->x50.joint, "MenMainConBo_Top_joint",
-                           &o->x50.animjoint, "MenMainConBo_Top_animjoint",
-                           &o->x50.matanim_joint, "MenMainConBo_Top_matanim_joint",
-                           &o->x50.shapeanim_joint, "MenMainConBo_Top_shapeanim_joint", 0);
-    mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), fn_80252C50, 0U));
-    
     model_desc = &o->x50;
     gobj = GObj_Create(6U, 7U, 0x80U);
     o->x4C = gobj;
@@ -278,6 +254,36 @@ void mnInfoBonus_80252F8C(void)
     HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjNext(mnInfoBonus_inline_GetJObjChild(jobj)), 0x10U);
     HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(jobj), 0x10U);
     mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(gobj, fn_80252E4C, 0U));
+}
+
+inline void mnInfoBonus_80252F8C_inline1(HSD_Text* text)
+{
+    text->x24.x = 0.0521F;
+    text->x24.y = 0.0521F;
+}
+
+void mnInfoBonus_80252F8C(void)
+{
+    struct mnInfoBonus_804A09B0_t* o = &mnInfoBonus_804A09B0;
+    HSD_Archive* archive;
+    u8 pad0[0x8];
+
+    mn_804D6BC8.x0 = 5;
+    mn_804A04F0.x1 = mn_804A04F0.x0;
+    mn_804A04F0.x0 = 0x1F;
+    mn_804A04F0.x2 = 0;
+    memzero(o, sizeof(*o));
+    
+    o->x44 = 8;
+    *mnInfoBonus_804D6C80 = 0;
+    archive = mn_804D6BB8;
+    lbArchive_LoadSections(archive, (void**) &o->x50.joint, "MenMainConBo_Top_joint",
+                           &o->x50.animjoint, "MenMainConBo_Top_animjoint",
+                           &o->x50.matanim_joint, "MenMainConBo_Top_matanim_joint",
+                           &o->x50.shapeanim_joint, "MenMainConBo_Top_shapeanim_joint", 0);
+    mnInfoBonus_inline_SetGObjFlag(HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), fn_80252C50, 0U));
+
+    mnInfoBonus_80252F8C_inline0(o);
     
     o->x40 = HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.F, 364.68332F, 38.38772F);
     mnInfoBonus_80252F8C_inline1(o->x40);
