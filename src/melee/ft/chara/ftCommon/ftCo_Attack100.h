@@ -74,6 +74,7 @@ void fn_800DAA40(Fighter_GObj*, Fighter_GObj*);
 /* 0D8464 */ void ftCo_ItemScopeAirFire_Phys(Fighter_GObj* gobj);
 /* 0D8484 */ void ftCo_ItemScopeFire_Coll(Fighter_GObj* gobj);
 /* 0D84AC */ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj);
+/* 0D8838 */ void fn_800D8838(Fighter_GObj* gobj);
 /* 0D88B8 */ void ftCo_ItemScopeEnd_Anim(Fighter_GObj* gobj);
 /* 0D88D8 */ void ftCo_ItemScopeAirEnd_Anim(Fighter_GObj* gobj);
 /* 0D88F8 */ void ftCo_ItemScopeEnd_IASA(Fighter_GObj* gobj);
