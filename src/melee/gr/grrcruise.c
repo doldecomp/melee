@@ -1,5 +1,7 @@
 #include "grrcruise.h"
 
+#include "grzakogenerator.h"
+
 #include <platform.h>
 
 void grRCruise_801FF164(bool arg) {}
