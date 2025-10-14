@@ -5,7 +5,7 @@
 #include "grmaterial.h"
 #include "grdisplay.h"
 #include "gr/inlines.h"
-#include "baselib/jobj.h" 
+#include "baselib/jobj.h"
 #include "baselib/gobjproc.h"
 #include "baselib/gobjgxlink.h"
 #include "gr/types.h"
@@ -73,7 +73,6 @@ HSD_GObj *grBigBlue_801E59F8(s32 id)
 {
     HSD_GObj *gobj;
     StageCallbacks *cbs = &grBb_803E29E0[id];
-    
     gobj = Ground_801C14D0(id);
     if (gobj != NULL) {
         Ground *gp = GET_GROUND(gobj);
