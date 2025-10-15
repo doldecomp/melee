@@ -227,11 +227,11 @@ void fn_80175240(s32 slot)
         sp30 = fn_8017507C(slot);
         ko_count = HSD_SisLib_803A6754(0, 0);
         ko_count = lbl_8046DBE8.player_data[slot].ko_count;
-        ko_count->x0 = lbl_8046DBE8.x4C[slot].x;
-        ko_count->x4 = -lbl_8046DBE8.x4C[slot].y - 30.0f;
-        ko_count->x8 = lbl_8046DBE8.x4C[slot].z;
-        lbl_8046DBE8.player_data[slot].ko_count->x4A = 1;
-        lbl_8046DBE8.player_data[slot].ko_count->x49 = 1;
+        ko_count->pos_x = lbl_8046DBE8.x4C[slot].x;
+        ko_count->pos_y = -lbl_8046DBE8.x4C[slot].y - 30.0f;
+        ko_count->pos_z = lbl_8046DBE8.x4C[slot].z;
+        lbl_8046DBE8.player_data[slot].ko_count->default_alignment = 1;
+        lbl_8046DBE8.player_data[slot].ko_count->default_kerning = 1;
         temp_r31 = &lbl_8046DBE8.player_data[slot].ko_count;
         if (me->player_standings[slot].slot_type != Gm_PKind_NA) {
             var_r3 = fn_8017AE0C(slot);
@@ -372,7 +372,7 @@ void fn_80175D34(void)
 
         ko_time = lbl_8046DBE8.player_data[i].ko_time;
         if (ko_time != NULL) {
-            ko_time->x4 = -pos.y;
+            ko_time->pos_y = -pos.y;
         }
     }
 }

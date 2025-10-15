@@ -109,11 +109,10 @@ HSD_Text* gmCamera_801A2334(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4)
     u32* temp_r27;
     gmCameraUnkStruct2* temp_r5;
 
-    text = HSD_SisLib_803A5ACC(3, (s32) gmCamera_80479BC8.gcus.x54, arg1, arg2,
-                               0.0f, 640.0f, 32.0f);
-    text->x24.x = arg3;
-    text->x24.y = arg4;
-    text->x49 = 1;
+    text = HSD_SisLib_803A5ACC(3, (s32) gmCamera_80479BC8.gcus.x54, arg1, arg2, 0.0f, 640.0f, 32.0f);
+    text->font_size.x = arg3;
+    text->font_size.y = arg4;
+    text->default_kerning = 1;
     if (arg0 == 0) {
         var_r30 = 6;
         HSD_SisLib_803A6530(3, 6, 8);

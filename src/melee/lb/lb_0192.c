@@ -137,15 +137,15 @@ void lb_800192A8(void (*cb)(void))
         lb_804D63D0 = HSD_SisLib_803A6754(0, -1);
         if (lbLang_IsSavedLanguageJP()) {
             HSD_Text* text = lb_804D63D0;
-            text->x24.x = 0.67F;
-            text->x24.y = 0.75F;
+            text->font_size.x = 0.67F;
+            text->font_size.y = 0.75F;
         } else {
             HSD_Text* text = lb_804D63D0;
-            text->x24.x = 0.58F;
-            text->x24.y = 0.70F;
+            text->font_size.x = 0.58F;
+            text->font_size.y = 0.70F;
         }
-        lb_804D63D0->x4A = 1;
-        lb_804D63D0->x49 = 1;
+        lb_804D63D0->default_alignment = 1;
+        lb_804D63D0->default_kerning = 1;
         if (lbLang_IsSavedLanguageJP()) {
             HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, -68.0F, "%s", jp_msg[i].x0);
             HSD_SisLib_803A6B98(lb_804D63D0, 0.0F, -34.0F, "%s", jp_msg[i].x4);

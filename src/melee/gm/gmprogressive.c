@@ -55,8 +55,8 @@ static void gm_801AD088(void)
     gm_80480D70.x8 = HSD_SisLib_803A5ACC(0, gm_80480D70.xC, 0.0F, 0.0F, 0.0F,
                                          640.0F, 480.0F);
     text = gm_80480D70.x8;
-    text->x24.x = 1.0F;
-    text->x24.y = 1.0F;
+    text->font_size.x = 1.0F;
+    text->font_size.y = 1.0F;
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(spC->models[0]->joint);
@@ -75,35 +75,35 @@ static void gm_801AD254(int arg0)
 
     switch (arg0) {
     case 0:
-        gm_80480D70.x8->x4D = 0;
+        gm_80480D70.x8->hidden = 0;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_SisLib_803A6368(gm_80480D70.x8, 6);
         HSD_JObjReqAnimAll(jobj, 0.0F);
         HSD_JObjSetTranslateY(jobj, -15.0F);
         break;
     case 4:
-        gm_80480D70.x8->x4D = 0;
+        gm_80480D70.x8->hidden = 0;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_SisLib_803A6368(gm_80480D70.x8, 5);
         HSD_JObjReqAnimAll(jobj, 0.0F);
         HSD_JObjSetTranslateY(jobj, 0.0F);
         break;
     case 5:
-        gm_80480D70.x8->x4D = 0;
+        gm_80480D70.x8->hidden = 0;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_SisLib_803A6368(gm_80480D70.x8, 4);
         HSD_JObjReqAnimAll(jobj, 0.0F);
         HSD_JObjSetTranslateY(jobj, 0.0F);
         break;
     case 1:
-        gm_80480D70.x8->x4D = 0;
+        gm_80480D70.x8->hidden = 0;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_SisLib_803A6368(gm_80480D70.x8, 2);
         HSD_JObjReqAnimAll(jobj, 1.0F);
         HSD_JObjSetTranslateY(jobj, 0.0F);
         break;
     case 2:
-        gm_80480D70.x8->x4D = 0;
+        gm_80480D70.x8->hidden = 0;
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         HSD_SisLib_803A6368(gm_80480D70.x8, 3);
         HSD_JObjReqAnimAll(jobj, 2.0F);
@@ -151,7 +151,7 @@ void gm_801AD620_OnFrame(void)
             if (gm_80480D70.x10 == 1) {
                 lbAudioAx_80024030(1);
                 gm_80480D70.x10 = 3;
-                gm_80480D70.x8->x4D = 1;
+                gm_80480D70.x8->hidden = 1;
                 HSD_JObjSetFlagsAll(gm_80480D70.x4, JOBJ_HIDDEN);
             } else if (gm_80480D70.x10 == 2) {
                 lbAudioAx_80024030(1);

@@ -279,19 +279,19 @@ void fn_8019CDBC(HSD_GObj* gobj)
     case 1:
         fn_8018FDC4(jobj, sp28, 19.5f, -6.0f);
         HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -197.0f);
-        tmd->x534[idx]->x8 = -6.0f;
+        tmd->x534[idx]->pos_z = -6.0f;
         break;
     case -1:
         fn_8018FDC4(jobj, sp28, 15.0f, 6.0f);
         HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -152.0f);
-        tmd->x534[idx]->x8 = 6.0f;
+        tmd->x534[idx]->pos_z = 6.0f;
         break;
     default:
     case 0:
         tmd->x37[idx].xD = temp_r27;
         fn_8018FDC4(jobj, sp28, 17.0f, 0.01f);
         HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -172.0f);
-        tmd->x534[idx]->x8 = 0.01f;
+        tmd->x534[idx]->pos_z = 0.01f;
         break;
     }
     if (tmd->x37[idx].x4 != 0) {
