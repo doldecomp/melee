@@ -224,22 +224,22 @@ void HSD_SisLib_803A5A2C(void* arg0)
     last = NULL;
     curr = HSD_SisLib_804D7978;
     while (curr != NULL) {
-        temp_r0 = curr->x50;
+        temp_r0 = curr->next;
         if (curr == arg0) {
             if (last != NULL) {
-                last->x50 = temp_r0;
+                last->next = temp_r0;
             } else {
                 HSD_SisLib_804D7978 = temp_r0;
             }
-            temp_r3 = curr->x64;
+            temp_r3 = curr->alloc_data;
             if (temp_r3 != NULL) {
                 if (temp_r3->data_1 != NULL) {
                     HSD_SisLib_803A594C(temp_r3->data_1);
                 }
-                HSD_SisLib_803A594C(curr->x64);
+                HSD_SisLib_803A594C(curr->alloc_data);
             }
-            if (curr->x68 != NULL) {
-                HSD_SisLib_803A594C(curr->x68);
+            if (curr->string_buffer != NULL) {
+                HSD_SisLib_803A594C(curr->string_buffer);
             }
             HSD_SisLib_803A594C(curr);
             return;
@@ -253,11 +253,11 @@ void HSD_SisLib_803A5CC4(HSD_Text* arg0)
 {
     HSD_Text* curr = HSD_SisLib_804D7978;
     while (curr != NULL) {
-        HSD_Text* next = curr->x50;
+        HSD_Text* next = curr->next;
         if (curr == arg0) {
-            if (curr->x54 != NULL) {
-                HSD_GObjPLink_80390228(curr->x54);
-                curr->x54 = NULL;
+            if (curr->entity != NULL) {
+                HSD_GObjPLink_80390228(curr->entity);
+                curr->entity = NULL;
             } else {
                 HSD_SisLib_803A5A2C(curr);
             }
@@ -271,10 +271,10 @@ void HSD_SisLib_803A5D30(void)
 {
     HSD_Text* curr = HSD_SisLib_804D7978;
     while (curr != NULL) {
-        HSD_Text* next = curr->x50;
-        if (curr->x54 != NULL) {
-            HSD_GObjPLink_80390228(curr->x54);
-            curr->x54 = NULL;
+        HSD_Text* next = curr->next;
+        if (curr->entity != NULL) {
+            HSD_GObjPLink_80390228(curr->entity);
+            curr->entity = NULL;
         } else {
             HSD_SisLib_803A5A2C(curr);
         }
@@ -282,15 +282,15 @@ void HSD_SisLib_803A5D30(void)
     }
 }
 
-static inline void HSD_SisLib_803A5DA0_inline0(s32 arg0)
+static inline void HSD_SisLib_803A5DA0_inline0(s32 font_idx)
 {
     HSD_Text* curr = HSD_SisLib_804D7978;
     while (curr != NULL) {
-        HSD_Text* next = curr->x50;
-        if (curr->x4F == arg0) {
-            if (curr->x54 != NULL) {
-                HSD_GObjPLink_80390228(curr->x54);
-                curr->x54 = NULL;
+        HSD_Text* next = curr->next;
+        if (curr->font_idx == font_idx) {
+            if (curr->entity != NULL) {
+                HSD_GObjPLink_80390228(curr->entity);
+                curr->entity = NULL;
             } else {
                 HSD_SisLib_803A5A2C(curr);
             }
@@ -326,7 +326,7 @@ void HSD_SisLib_803A5DA0(s32 arg0)
     }
 }
 
-HSD_Text* HSD_SisLib_803A5ACC(int arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
+HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
                               f32 arg5, f32 arg6)
 {
     HSD_Text* var_r30;
@@ -336,7 +336,7 @@ HSD_Text* HSD_SisLib_803A5ACC(int arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
     int var_r4;
     HSD_Text* temp_r30;
 
-    var_r4 = arg1;
+    var_r4 = arg1; /// this is the context id that comes from HSD_SisLib_803A611C, it essentially tells us which camera to use
     var_r29 = NULL;
     var_r28 = NULL;
     gobj = NULL;
@@ -344,7 +344,7 @@ HSD_Text* HSD_SisLib_803A5ACC(int arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
     if (var_r4 >= 0) {
         var_r28 = HSD_SisLib_804D797C;
         while (1) {
-            if (var_r28->xA == arg0 && --var_r4 < 0) {
+            if (var_r28->xA == font_idx && --var_r4 < 0) {
                 break;
             }
 
@@ -359,58 +359,58 @@ HSD_Text* HSD_SisLib_803A5ACC(int arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
     }
     while (var_r30 != NULL) {
         var_r29 = var_r30;
-        var_r30 = var_r30->x50;
+        var_r30 = var_r30->next;
     }
     temp_r30 = HSD_SisLib_803A5798(0xA0);
     if (HSD_SisLib_804D7978 == NULL) {
         HSD_SisLib_804D7978 = temp_r30;
     }
     if (var_r29 != NULL) {
-        var_r29->x50 = temp_r30;
+        var_r29->next = temp_r30;
     }
     if (gobj != NULL) {
         GObj_InitUserData(gobj, var_r28->x8, HSD_SisLib_803A5A2C, temp_r30);
     }
-    temp_r30->x50 = NULL;
-    temp_r30->x54 = gobj;
-    temp_r30->x0 = arg2;
-    temp_r30->x4 = arg3;
-    temp_r30->x8 = arg4;
-    temp_r30->xC = arg5;
-    temp_r30->x10 = arg6;
+    temp_r30->next = NULL;
+    temp_r30->entity = gobj;
+    temp_r30->pos_x = arg2;
+    temp_r30->pos_y = arg3;
+    temp_r30->pos_z = arg4;
+    temp_r30->box_size_x = arg5;
+    temp_r30->box_size_y = arg6;
     temp_r30->x14.w = 0.0f;
     temp_r30->x14.z = 0.0f;
     temp_r30->x14.y = 0.0f;
     temp_r30->x14.x = 0.0f;
-    temp_r30->x24.y = 1.0f;
-    temp_r30->x24.x = 1.0f;
-    temp_r30->x64 = NULL;
-    temp_r30->x68 = 0;
-    temp_r30->x5C = 0;
-    temp_r30->x2C.w = 0;
-    temp_r30->x2C.z = 0;
-    temp_r30->x2C.y = 0;
-    temp_r30->x2C.x = 0;
-    temp_r30->x30.w = 0xFF;
-    temp_r30->x30.z = 0xFF;
-    temp_r30->x30.y = 0xFF;
-    temp_r30->x30.x = 0xFF;
+    temp_r30->font_size.y = 1.0f;
+    temp_r30->font_size.x = 1.0f;
+    temp_r30->alloc_data = NULL;
+    temp_r30->string_buffer = 0;
+    temp_r30->sis_buffer = 0;
+    temp_r30->bg_color.a = 0;
+    temp_r30->bg_color.b = 0;
+    temp_r30->bg_color.g = 0;
+    temp_r30->bg_color.r = 0;
+    temp_r30->text_color.a = 0xFF;
+    temp_r30->text_color.b = 0xFF;
+    temp_r30->text_color.g = 0xFF;
+    temp_r30->text_color.r = 0xFF;
     temp_r30->x34.y = 1.0f;
     temp_r30->x34.x = 1.0f;
     temp_r30->x3C.y = 0.0f;
     temp_r30->x3C.x = 0.0f;
     temp_r30->x46 = 0;
     temp_r30->x44 = 0;
-    temp_r30->x4A = 0;
-    temp_r30->x48 = 0;
-    temp_r30->x49 = 0;
+    temp_r30->default_alignment = 0;
+    temp_r30->default_fitting = 0;
+    temp_r30->default_kerning = 0;
     temp_r30->x6E = 0;
     temp_r30->x6C = 0;
     temp_r30->x4E = 0;
-    temp_r30->x4D = 0;
+    temp_r30->hidden = 0;
     temp_r30->x4C = 0;
-    temp_r30->x58 = 0;
-    temp_r30->x4F = arg0;
+    temp_r30->render_callback = 0;
+    temp_r30->font_idx = font_idx;
     return temp_r30;
 }
 
@@ -585,35 +585,35 @@ void HSD_SisLib_803A6368(HSD_Text* arg0, s32 arg1)
     SIS** temp_r3;
     s32 var_r5;
 
-    temp_r3 = (SIS**) HSD_SisLib_804D1124[arg0->x4F];
+    temp_r3 = (SIS**) HSD_SisLib_804D1124[arg0->font_idx];
     if (temp_r3 != NULL) {
-        arg0->x5C = temp_r3[arg1];
+        arg0->sis_buffer = temp_r3[arg1];
     }
     arg0->x60 = NULL;
-    arg0->x74 = 0.0f;
-    arg0->x70 = 0.0f;
-    arg0->x8C = arg0->x30;
+    arg0->current_height = 0.0f;
+    arg0->current_width = 0.0f;
+    arg0->active_color = arg0->text_color;
     arg0->x80.x = arg0->x34.x;
     arg0->x80.y = arg0->x34.y;
     arg0->x78.x = arg0->x3C.x;
     arg0->x78.y = arg0->x3C.y;
     arg0->x90 = arg0->x44;
     arg0->x92 = arg0->x46;
-    arg0->x9E = arg0->x4A;
-    arg0->x9D = arg0->x49;
-    arg0->x9C = arg0->x48;
+    arg0->alignment = arg0->default_alignment;
+    arg0->kerning = arg0->default_kerning;
+    arg0->fitting = arg0->default_fitting;
     arg0->x6C = 0;
     arg0->x98 = 0;
     arg0->x94 = 0;
     arg0->x4B = 0;
-    if (arg0->x68 != NULL) {
-        HSD_SisLib_803A594C(arg0->x68);
+    if (arg0->string_buffer != NULL) {
+        HSD_SisLib_803A594C(arg0->string_buffer);
     }
-    arg0->x68 = HSD_SisLib_803A5798(0x10);
+    arg0->string_buffer = HSD_SisLib_803A5798(0x10);
     var_r5 = 0;
     arg0->x6E = 0x10;
     while (var_r5 < arg0->x6E) {
-        arg0->x68[var_r5] = 0;
+        arg0->string_buffer[var_r5] = 0;
         var_r5 += 1;
     }
 }
@@ -693,7 +693,7 @@ HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1)
     temp_r30 =
         HSD_SisLib_803A5ACC(arg0, arg1, 0.0f, 0.0f, 0.0f, 640.0f, 480.0f);
     temp_r3 = HSD_SisLib_803A5798(0x10);
-    temp_r30->x64 = temp_r3;
+    temp_r30->alloc_data = temp_r3;
     temp_r3_2 = HSD_SisLib_803A5798(0x80);
     temp_r3->data_1 = temp_r3_2;
     temp_r3->data_0 = (sislib_UnkAllocData*) temp_r3_2;
@@ -704,7 +704,7 @@ HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1)
     // @todo: Do any other Data struct usages have a 0xC member?
     *(&temp_r3->size + 1) = 0;
     HSD_SisLib_803A6368(temp_r30, 0);
-    temp_r30->x5C = (SIS*) temp_r3->data_1;
+    temp_r30->sis_buffer = (SIS*) temp_r3->data_1;
     return temp_r30;
 }
 
@@ -979,7 +979,7 @@ int HSD_SisLib_803A6B98(HSD_Text* arg0, float x, float y, const char* arg1,
     u8 sp8C;
 
     var_r29 = 0; // some type of size
-    temp_r30 = arg0->x64;
+    temp_r30 = arg0->alloc_data;
     sp8C = 0;
     if (arg1) {
         // @todo: is this the correct usage of vaargs?
@@ -1019,7 +1019,7 @@ int HSD_SisLib_803A6B98(HSD_Text* arg0, float x, float y, const char* arg1,
                 }
             }
             temp_r30->data_1 = (HSD_Text*) temp_r3;
-            arg0->x5C = (SIS*) temp_r3;
+            arg0->sis_buffer = (SIS*) temp_r3;
             temp_r30->data_0 =
                 (sislib_UnkAllocData*) (temp_r3 +
                                         ((u8*) temp_r30->data_0 - temp_r31));
@@ -1042,11 +1042,11 @@ int HSD_SisLib_803A6B98(HSD_Text* arg0, float x, float y, const char* arg1,
 
     *playhead++ = 0xC;
 
-    *playhead++ = arg0->x30.x;
-    *playhead++ = arg0->x30.y;
-    *playhead++ = arg0->x30.z;
+    *playhead++ = arg0->text_color.a;
+    *playhead++ = arg0->text_color.b;
+    *playhead++ = arg0->text_color.g;
     *playhead++ = 0xE;
-    *playhead++ = arg0->x30.w;
+    *playhead++ = arg0->text_color.r;
     *playhead++ = (u8) (s32) (arg0->x34.x);
     *playhead++ = (u8) (s32) (256.0f * arg0->x34.x);
     *playhead++ = (u8) (s32) (arg0->x34.y);
@@ -1158,7 +1158,7 @@ void HSD_SisLib_803A746C(HSD_Text* arg0, s32 arg1, f32 arg2, f32 arg3)
     u8* temp_r3;
     u8* temp_r3_2;
 
-    temp_r3 = fn_803A6FEC((u8*) arg0->x5C, arg1, NULL);
+    temp_r3 = fn_803A6FEC((u8*) arg0->sis_buffer, arg1, NULL);
     if (temp_r3 != NULL) {
         temp_r0 = arg2;
         temp_r0_2 = arg3;
@@ -1176,7 +1176,7 @@ void HSD_SisLib_803A74F0(HSD_Text* arg0, s32 arg1, u8* arg2)
     u8* temp_r3_2;
     void* temp_r31;
 
-    temp_r3 = fn_803A6FEC((u8*) arg0->x5C, arg1, NULL);
+    temp_r3 = fn_803A6FEC((u8*) arg0->sis_buffer, arg1, NULL);
     if (temp_r3 != NULL) {
         temp_r3_2 = temp_r3 + 5;
         temp_r3_2[1] = arg2[0];
@@ -1187,7 +1187,7 @@ void HSD_SisLib_803A74F0(HSD_Text* arg0, s32 arg1, u8* arg2)
 
 void HSD_SisLib_803A7548(HSD_Text* arg0, int arg1, float arg2, float arg3)
 {
-    u8* temp_r3 = fn_803A6FEC((u8*) arg0->x5C, arg1, NULL);
+    u8* temp_r3 = fn_803A6FEC((u8*) arg0->sis_buffer, arg1, NULL);
     u8* temp_r4;
     if (temp_r3 != NULL) {
         temp_r4 = temp_r3 + 9;
@@ -1223,8 +1223,8 @@ void HSD_SisLib_803A8134(void* arg0, HSD_Text* arg1, f32* arg2, f32* arg3)
     temp_f26 = arg1->x80.x;
     temp_f25 = arg1->x80.y;
     temp_f24 = arg1->x78.x;
-    var_r28 = arg1->x9D;
-    temp_r4 = HSD_SisLib_804D1124[arg1->x4F];
+    var_r28 = arg1->kerning;
+    temp_r4 = HSD_SisLib_804D1124[arg1->font_idx];
     temp_r27 = arg1->x6C;
     if (temp_r4 != NULL) {
         var_r29 = temp_r4->textures;
@@ -1263,7 +1263,7 @@ loop_3:
         var_r23 += 4;
         goto block_33;
     case 10:
-        if (((sislib_UnkAllocData*) arg1->x64 == NULL) || ((s16) var_r28 == 0))
+        if (((sislib_UnkAllocData*) arg1->alloc_data == NULL) || ((s16) var_r28 == 0))
         {
             HSD_SisLib_803A7684(arg1, *var_r23, 0x81U);
             arg1->x78.x = (f32) (s16) * (var_r23 + 1) * 0.00390625f;
@@ -1271,7 +1271,7 @@ loop_3:
         var_r23 += 4;
         goto block_33;
     case 11:
-        if (((sislib_UnkAllocData*) arg1->x64 == NULL) || ((s16) var_r28 == 0))
+        if (((sislib_UnkAllocData*) arg1->alloc_data == NULL) || ((s16) var_r28 == 0))
         {
             HSD_SisLib_803A7F0C(arg1, 0x81);
         }
@@ -1330,7 +1330,7 @@ loop_3:
     var_r5 = arg1->x6C;
 loop_36:
     if ((s32) var_r5 < (s32) arg1->x6E) {
-        *((u8*) arg1->x68 + var_r5) = 0;
+        *((u8*) arg1->string_buffer + var_r5) = 0;
         var_r5 += 1;
         goto loop_36;
     }
@@ -1349,7 +1349,7 @@ void static inline HSD_SisLib_803A7F0C_inline(HSD_Text* arg0, s32 arg1,
     temp_r9 = arg1 & 0x80;
     temp_r11 = arg1 & 0x7F;
     while (*var_r5 >= 0) {
-        temp_r8 = (s32*) arg0->x68;
+        temp_r8 = (s32*) arg0->string_buffer;
         temp_r7 = *(temp_r8 + *var_r5);
         temp_r6 = temp_r7 & 0x7F;
         temp_r10 = temp_r7 & 0x80;
@@ -1369,9 +1369,9 @@ void static inline HSD_SisLib_803A7F0C_inline(HSD_Text* arg0, s32 arg1,
         case 2:
             *var_r5 -= 3;
             if (temp_r11 == 2) {
-                arg0->x8C.x = ((U8Vec4*) arg0->x68 + *var_r5)->x;
-                arg0->x8C.y = ((U8Vec4*) arg0->x68 + *var_r5)->y;
-                arg0->x8C.z = ((U8Vec4*) arg0->x68 + *var_r5)->z;
+                arg0->active_color.r = ((GXColor*) arg0->string_buffer + *var_r5)->r;
+                arg0->active_color.g = ((GXColor*) arg0->string_buffer + *var_r5)->g;
+                arg0->active_color.b = ((GXColor*) arg0->string_buffer + *var_r5)->b;
                 if (temp_r9 == temp_r10) {
                     *var_r4 = 4;
                 }
@@ -1394,7 +1394,7 @@ void static inline HSD_SisLib_803A7F0C_inline(HSD_Text* arg0, s32 arg1,
         case 4:
             *var_r5 -= 1;
             if (temp_r11 == 4) {
-                arg0->x9E = *(temp_r8 + *var_r5);
+                arg0->alignment = *(temp_r8 + *var_r5);
                 if (temp_r9 == temp_r10) {
                     *var_r4 = 2;
                 }
@@ -1432,12 +1432,12 @@ s32 HSD_SisLib_803A7F0C(HSD_Text* arg0, s32 arg1)
     HSD_SisLib_803A7F0C_inline(arg0, arg1, &var_r4, &var_r5, &var_r0);
     if (var_r4 != 0) {
         while ((s32) (var_r5 + var_r4) < (s32) arg0->x6C) {
-            *((s32*) arg0->x68 + var_r5) =
-                *((s32*) arg0->x68 + var_r5 + var_r4);
+            *((s32*) arg0->string_buffer + var_r5) =
+                *((s32*) arg0->string_buffer + var_r5 + var_r4);
             var_r5 += 1;
         }
         while ((s32) var_r5 < (s32) arg0->x6C) {
-            *((s32*) arg0->x68 + var_r5) = 0;
+            *((s32*) arg0->string_buffer + var_r5) = 0;
             var_r5 += 1;
         }
         arg0->x6C -= var_r4;
@@ -1482,10 +1482,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
     } else {
         var_r31 = (HSD_Text*) arg1;
     }
-    if (var_r31->x4D == 0 && var_r31->x5C != NULL) {
-        u8 *var_r30 = (u8 *)var_r31->x5C;
+    if (var_r31->hidden == 0 && var_r31->sis_buffer != NULL) {
+        u8 *var_r30 = (u8 *)var_r31->sis_buffer;
         if (gobj != NULL) {
-            SIS *temp_r3 = HSD_SisLib_804D1124[var_r31->x4F];
+            SIS *temp_r3 = HSD_SisLib_804D1124[var_r31->font_idx];
             if (temp_r3 != NULL) {
                 kerning = temp_r3->kerning;
                 textures = temp_r3->textures;
@@ -1539,27 +1539,27 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
         GXSetColorUpdate(GX_ENABLE);
         GXSetAlphaUpdate(GX_DISABLE);
         if (gobj != NULL) {
-            if (var_r31->x58 != NULL) {
-                var_r31->x58(gobj);
+            if (var_r31->render_callback != NULL) {
+                var_r31->render_callback(gobj);
             }
         }
         GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_C0);
         GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_FALSE, GX_TEVPREV);
         GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_FALSE, GX_TEVPREV);
-        // @todo: What is this first quad for?
-        if (var_r31->x2C.w != 0) {
-            f32 temp_f4 = var_r31->x0;
-            f32 temp_f5 = var_r31->x4;
+        // first quad is the background
+        if (var_r31->bg_color.a != 0) {
+            f32 temp_f4 = var_r31->pos_x;
+            f32 temp_f5 = var_r31->pos_y;
             min.x = temp_f4;
             min.y = temp_f5;
-            max.x = (var_r31->xC  * var_r31->x24.x) + temp_f4;
-            max.y = (var_r31->x10 * var_r31->x24.y) + temp_f5;
+            max.x = (var_r31->box_size_x  * var_r31->font_size.x) + temp_f4;
+            max.y = (var_r31->box_size_y * var_r31->font_size.y) + temp_f5;
             GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_A0);
-            GXSetTevColor(GX_TEVREG0, *(GXColor *)&var_r31->x2C);
+            GXSetTevColor(GX_TEVREG0, *(GXColor *)&var_r31->bg_color);
             GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
             // @note: could be inlined
             {
-                f32 temp_f2 = var_r31->x8;
+                f32 temp_f2 = var_r31->pos_z;
                 f32 temp_f3 = -min.y;
                 f32 temp_f4_2 = -max.y;
                 GXPosition3f32(min.x, temp_f3, temp_f2);
@@ -1574,18 +1574,18 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
         }
         GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_A0, GX_CA_ZERO);
         if (var_r31->x4E != 0) {
-            min.x = (var_r31->x14.z * var_r31->x24.x) + var_r31->x0;
-            max.x = (var_r31->x24.x * (var_r31->xC - var_r31->x14.w)) + var_r31->x0;
-            min.y = (var_r31->x14.x * var_r31->x24.y) + var_r31->x4;
-            max.y = (var_r31->x24.y * (var_r31->x10 - var_r31->x14.y)) + var_r31->x4;
+            min.x = (var_r31->x14.z * var_r31->font_size.x) + var_r31->pos_x;
+            max.x = (var_r31->font_size.x * (var_r31->box_size_x - var_r31->x14.w)) + var_r31->pos_x;
+            min.y = (var_r31->x14.x * var_r31->font_size.y) + var_r31->pos_y;
+            max.y = (var_r31->font_size.y * (var_r31->box_size_y - var_r31->x14.y)) + var_r31->pos_y;
         }
-        if (var_r31->x64 != NULL) {
+        if (var_r31->alloc_data != NULL) {
             var_r31->x78.x = var_r31->x3C.x;
             var_r31->x78.y = var_r31->x3C.y;
             // interesting pattern... is there a U8Vec3?
-            var_r31->x9E = var_r31->x4A;
-            var_r31->x9D = var_r31->x49;
-            var_r31->x9C = var_r31->x48;
+            var_r31->alignment = var_r31->default_alignment;
+            var_r31->kerning = var_r31->default_kerning;
+            var_r31->fitting = var_r31->default_fitting;
         }
         {
             f32 sp60;
@@ -1593,17 +1593,17 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
             f64 spD8 = 16.0;
 
             u32 var_r26 = 0U;
-            temp_r22 = var_r31->x9D;
-            var_r31->x74 = 0.0f;
+            temp_r22 = var_r31->kerning;
+            var_r31->current_height = 0.0f;
             spCC = var_r31->x80;
-            spBC = var_r31->x8C.x;
-            spBB = var_r31->x8C.y;
-            spBA = var_r31->x8C.z;
+            spBC = var_r31->active_color.r;
+            spBB = var_r31->active_color.g;
+            spBA = var_r31->active_color.b;
             spC4.y = var_r31->x80.y;
             spC4.x = var_r31->x78.x;
-            spB8 = var_r31->x9E;
+            spB8 = var_r31->alignment;
             spC0 = var_r31->x78.y;
-            spB9 = var_r31->x9C;
+            spB9 = var_r31->fitting;
             var_r23 = var_r31->x90;
             var_r19 = var_r31->x92;
             var_r28 = var_r31->x98;
@@ -1628,20 +1628,20 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                         case 1:
                             var_r31->x60 = NULL;
                             var_r3 = 0;
-                            var_r31->x8C = var_r31->x30;
+                            var_r31->active_color = var_r31->text_color;
                             var_r31->x80.x = var_r31->x34.x;
                             var_r31->x80.y = var_r31->x34.y;
                             var_r31->x78.x = var_r31->x3C.x;
                             var_r31->x78.y = var_r31->x3C.y;
                             var_r31->x90 = var_r31->x44;
                             var_r31->x92 = var_r31->x46;
-                            var_r31->x9E = var_r31->x4A;
-                            var_r31->x9D = var_r31->x49;
-                            var_r31->x9C = var_r31->x48;
+                            var_r31->alignment = var_r31->default_alignment;
+                            var_r31->kerning = var_r31->default_kerning;
+                            var_r31->fitting = var_r31->default_fitting;
                             var_r31->x94 = 0U;
                             var_r31->x4B = 0U;
                             while (var_r3 < (s32) var_r31->x6E) {
-                                *((u8 *)var_r31->x68 + var_r3) = 0;
+                                *((u8 *)var_r31->string_buffer + var_r3) = 0;
                                 var_r3 += 1;
                             }
                             var_r31->x6C = 0;
@@ -1649,14 +1649,14 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                         case 2:
                             var_r31->x98 = 0;
                             var_r30 += 1;
-                            var_r31->x5C = (SIS *)var_r30;
+                            var_r31->sis_buffer = (SIS *)var_r30;
                             break;
                         case 3:
                             if (var_r26 == 0U) {
                                 sp60 = 32.0f * var_r31->x80.x;
                             }
                             var_r26 = 0U;
-                            var_r31->x74 = (f32) ((var_r31->x24.x * ((var_r31->x80.x * var_r31->x78.y) + sp60)) + var_r31->x74);
+                            var_r31->current_height = (f32) ((var_r31->font_size.x * ((var_r31->x80.x * var_r31->x78.y) + sp60)) + var_r31->current_height);
                             if (var_r28 != 0U) {
                                 var_r28 -= 1;
                             } else {
@@ -1693,25 +1693,25 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                             var_r26 = 1U;
                             // HSD_SisLib_803A8134();
                             temp_f0 = (f32) *((u8 *)var_r30 + 1);
-                            if (((u8) var_r31->x9C == 1) && (var_r31->xC < sp64) != 0) {
-                                var_r31->x88 = (f32) (var_r31->xC / sp64);
+                            if (((u8) var_r31->fitting == 1) && (var_r31->box_size_x < sp64) != 0) {
+                                var_r31->x88 = (f32) (var_r31->box_size_x / sp64);
                             } else {
                                 var_r31->x88 = 1.0f;
                             }
-                            switch ((s32) var_r31->x9E) {
+                            switch ((s32) var_r31->alignment) {
                             case 1:
-                                var_r31->x70 = (f32) -((0.5f * (sp64 * var_r31->x88)) - temp_f0);
+                                var_r31->current_width = (f32) -((0.5f * (sp64 * var_r31->x88)) - temp_f0);
                                 break;
                             case 2:
-                                var_r31->x70 = (f32) -((sp64 * var_r31->x88) - temp_f0);
+                                var_r31->current_width = (f32) -((sp64 * var_r31->x88) - temp_f0);
                                 break;
                             default:
-                                var_r31->x70 = temp_f0;
+                                var_r31->current_width = temp_f0;
                                 break;
                             }
                             temp_r0_4 = *((u8 *)var_r30 + 3);
                             var_r30 += 4;
-                            var_r31->x74 = (f32) ((f32) temp_r0_4 * var_r31->x24.y);
+                            var_r31->current_height = (f32) ((f32) temp_r0_4 * var_r31->font_size.y);
                             break;
                         case 9:
                             HSD_SisLib_803A7684(var_r31, *var_r30, 5U);
@@ -1720,7 +1720,7 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                             var_r30 -= 4;
                             break;
                         case 10:
-                            if (((u32) var_r31->x64 == 0U) || (temp_r22 == 0)) {
+                            if (((u32) var_r31->alloc_data == 0U) || (temp_r22 == 0)) {
                                 HSD_SisLib_803A7684(var_r31, *var_r30, 1U);
                                 var_r31->x78.x = (f32) ((f32) (s16)var_r30[1] * 0.00390625f);
                                 var_r31->x78.y = (f32) ((f32) (s16)var_r30[3] * 0.00390625f);
@@ -1728,15 +1728,15 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                             var_r30 += 4;
                             break;
                         case 11:
-                            if (((u32) var_r31->x64 == 0U) || (temp_r22 == 0)) {
+                            if (((u32) var_r31->alloc_data == 0U) || (temp_r22 == 0)) {
                                 HSD_SisLib_803A7F0C(var_r31, 1);
                             }
                             break;
                         case 12:
                             HSD_SisLib_803A7684(var_r31, *var_r30, 2U);
-                            var_r31->x8C.x = var_r30[1];
-                            var_r31->x8C.y = var_r30[2];
-                            var_r31->x8C.z = var_r30[3];
+                            var_r31->active_color.r = var_r30[1];
+                            var_r31->active_color.g = var_r30[2];
+                            var_r31->active_color.b = var_r30[3];
                             var_r30 += 3;
                             break;
                         case 13:
@@ -1753,15 +1753,15 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                             break;
                         case 16:
                             HSD_SisLib_803A7684(var_r31, *var_r30, 4U);
-                            var_r31->x9E = 1U;
+                            var_r31->alignment = 1U;
                             break;
                         case 18:
                             HSD_SisLib_803A7684(var_r31, *var_r30, 4U);
-                            var_r31->x9E = 0U;
+                            var_r31->alignment = 0U;
                             break;
                         case 20:
                             HSD_SisLib_803A7684(var_r31, *var_r30, 4U);
-                            var_r31->x9E = 2U;
+                            var_r31->alignment = 2U;
                             break;
                         case 17:
                         case 19:
@@ -1769,41 +1769,41 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                             HSD_SisLib_803A7F0C(var_r31, 4);
                             break;
                         case 22:
-                            var_r31->x9D = 1U;
+                            var_r31->kerning = 1U;
                             break;
                         case 23:
-                            var_r31->x9D = 0U;
+                            var_r31->kerning = 0U;
                             break;
                         case 24:
-                            var_r31->x9C = 1U;
+                            var_r31->fitting = 1U;
                             break;
                         case 25:
-                            var_r31->x9C = 0U;
+                            var_r31->fitting = 0U;
                             break;
                         case 26:
                             if (var_r26 == 0U) {
                                 var_r26 += 1;
                                 // HSD_SisLib_803A8134();
-                                if (((u8) var_r31->x9C == 1) && (var_r31->xC < sp64)) {
-                                    var_r31->x70 = 0.0f;
-                                    var_r31->x88 = (f32) (var_r31->xC / sp64);
+                                if (((u8) var_r31->fitting == 1) && (var_r31->box_size_x < sp64)) {
+                                    var_r31->current_width = 0.0f;
+                                    var_r31->x88 = (f32) (var_r31->box_size_x / sp64);
                                 } else {
                                     var_r31->x88 = 1.0f;
-                                    switch ((s32) var_r31->x9E) {
+                                    switch ((s32) var_r31->alignment) {
                                     case 1:
-                                        var_r31->x70 = (f32) (0.5f * (var_r31->xC - sp64));
+                                        var_r31->current_width = (f32) (0.5f * (var_r31->box_size_x - sp64));
                                         break;
                                     case 2:
-                                        var_r31->x70 = (f32) (var_r31->xC - sp64);
+                                        var_r31->current_width = (f32) (var_r31->box_size_x - sp64);
                                         break;
                                     default:
-                                        var_r31->x70 = 0.0f;
+                                        var_r31->current_width = 0.0f;
                                         break;
                                     }
                                 }
                             }
-                            var_r31->x70 = (f32) (((f64) var_r31->x88 * ((f64) var_r31->x80.x *
-                                            (spD8 + (f64) var_r31->x78.x))) + (f64) var_r31->x70);
+                            var_r31->current_width = (f32) (((f64) var_r31->x88 * ((f64) var_r31->x80.x *
+                                            (spD8 + (f64) var_r31->x78.x))) + (f64) var_r31->current_width);
                             if (var_r28 != 0U) {
                                 var_r28 -= 1;
                             } else {
@@ -1821,20 +1821,20 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                                 if (var_r26 == 0U) {
                                     var_r26 += 1;
                                     // HSD_SisLib_803A8134();
-                                    if (((u8) var_r31->x9C == 1) && (var_r31->xC < sp64)) {
-                                        var_r31->x70 = 0.0f;
-                                        var_r31->x88 = (f32) (var_r31->xC / sp64);
+                                    if (((u8) var_r31->fitting == 1) && (var_r31->box_size_x < sp64)) {
+                                        var_r31->current_width = 0.0f;
+                                        var_r31->x88 = (f32) (var_r31->box_size_x / sp64);
                                     } else {
                                         var_r31->x88 = 1.0f;
-                                        switch (var_r31->x9E) {
+                                        switch (var_r31->alignment) {
                                         case 1:
-                                            var_r31->x70 = (f32) (0.5f * (var_r31->xC - sp64));
+                                            var_r31->current_width = (f32) (0.5f * (var_r31->box_size_x - sp64));
                                             break;
                                         case 2:
-                                            var_r31->x70 = (f32) (var_r31->xC - sp64);
+                                            var_r31->current_width = (f32) (var_r31->box_size_x - sp64);
                                             break;
                                         default:
-                                            var_r31->x70 = 0.0f;
+                                            var_r31->current_width = 0.0f;
                                             break;
                                         }
                                     }
@@ -1845,9 +1845,9 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                                 } else {
                                     var_r25 = temp_r24 - 0x4000;
                                 }
-                                temp_f2_3 = var_r31->x24.x;
-                                var_f31 = (var_r31->x70 * temp_f2_3) + var_r31->x0;
-                                if ((u8) var_r31->x9D != 0) {
+                                temp_f2_3 = var_r31->font_size.x;
+                                var_f31 = (var_r31->current_width * temp_f2_3) + var_r31->pos_x;
+                                if ((u8) var_r31->kerning != 0) {
                                     if (temp_r24 < 0x4000U) {
                                         var_f31 = -((temp_f2_3 * (var_r31->x80.x * (f32) (*(&HSD_SisLib_8040CB00 + ((var_r25 * 2) & 0x1FFFE)) - 1))) - var_f31);
                                     } else {
@@ -1857,10 +1857,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                                 {
                                     GXTexObj sp98;
                                     f32 temp_f4_4 = 32.0f * var_r31->x80.x;
-                                    f32 temp_f0_2 = var_r31->x24.y;
+                                    f32 temp_f0_2 = var_r31->font_size.y;
                                     f32 var_f21 = 0.0f;
                                     f32 temp_f1 = 32.0f * var_r31->x80.x * temp_f2_3;
-                                    f32 temp_f3_2 = (temp_f0_2 * (sp60 - temp_f4_4)) + (var_r31->x4 + var_r31->x74);
+                                    f32 temp_f3_2 = (temp_f0_2 * (sp60 - temp_f4_4)) + (var_r31->pos_y + var_r31->current_height);
                                     f32 temp_f0_3 = temp_f4_4 * temp_f0_2;
                                     f32 var_f22 = 1.0f;
                                     f32 var_f18 = 0.0f;
@@ -1898,10 +1898,10 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                                         GXInitTexObj(&sp98, kerning + ((var_r25 << 9) & 0x01FFFE00), 0x20U, 0x20U, GX_TF_I4, GX_CLAMP, GX_CLAMP, 0U);
                                     }
                                     GXLoadTexObj(&sp98, GX_TEXMAP0);
-                                    GXSetTevColor(GX_TEVREG0, *(GXColor*)&var_r31->x8C);
+                                    GXSetTevColor(GX_TEVREG0, *(GXColor*)&var_r31->active_color);
                                     GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
                                     {
-                                        f32 temp_f0_4 = var_r31->x8;
+                                        f32 temp_f0_4 = var_r31->pos_z;
                                         f32 temp_f1_4 = -var_f27;
                                         f32 temp_f2_6 = -var_f28;
                                         GXPosition3f32(var_f31, temp_f1_4, temp_f0_4);
@@ -1914,14 +1914,14 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                                         GXTexCoord2f32(var_f18, var_f22);
                                     }
 
-                                    var_r31->x70 = (f32) ((var_r31->x80.y * (var_r31->x80.x * (32.0f + var_r31->x78.x))) + var_r31->x70);
-                                    if ((u8) var_r31->x9D != 0) {
+                                    var_r31->current_width = (f32) ((var_r31->x80.y * (var_r31->x80.x * (32.0f + var_r31->x78.x))) + var_r31->current_width);
+                                    if ((u8) var_r31->kerning != 0) {
                                         if (temp_r24 < 0x4000U) {
                                             f32 *temp_r4 = &HSD_SisLib_8040CB00 + ((var_r25 * 2) & 0x1FFFE);
-                                            var_r31->x70 = (f32) -((var_r31->x88 * (var_r31->x80.x * (f32) (temp_r4[0] + (temp_r4[1] - 2)))) - var_r31->x70);
+                                            var_r31->current_width = (f32) -((var_r31->x88 * (var_r31->x80.x * (f32) (temp_r4[0] + (temp_r4[1] - 2)))) - var_r31->current_width);
                                         } else {
                                             u8 *temp_r4 = &textures->data[(var_r25 * 2) & 0x1FFFE];
-                                            var_r31->x70 = (f32) -((var_r31->x88 * (var_r31->x80.x * (f32) (temp_r4[0] + (temp_r4[1] - 2)))) - var_r31->x70);
+                                            var_r31->current_width = (f32) -((var_r31->x88 * (var_r31->x80.x * (f32) (temp_r4[0] + (temp_r4[1] - 2)))) - var_r31->current_width);
                                         }
                                     }
                                     if (var_r28 != 0U) {
@@ -1939,21 +1939,21 @@ void HSD_SisLib_803A84BC(HSD_GObj* gobj, int arg1)
                 var_r30++;
             }
             HSD_StateInvalidate(-1);
-            var_r31->x8C.x = spBC;
-            var_r31->x8C.y = spBB;
-            var_r31->x8C.z = spBA;
+            var_r31->active_color.r = spBC;
+            var_r31->active_color.g = spBB;
+            var_r31->active_color.b = spBA;
             var_r31->x80.x = spCC.x;
             var_r31->x80.y = spCC.y;
             var_r31->x78.x = spC4.x;
             var_r31->x78.y = spC4.y;
-            var_r31->x9E = spB8;
-            var_r31->x9D = temp_r22;
-            var_r31->x9C = spB9;
+            var_r31->alignment = spB8;
+            var_r31->kerning = temp_r22;
+            var_r31->fitting = spB9;
             var_r31->x6C = temp_r14;
             {
                 s32 var_r5 = var_r31->x6C;
                 while ((s32) var_r5 < (s32) var_r31->x6E) {
-                    *((u8 *)var_r31->x68 + var_r5) = 0;
+                    *((u8 *)var_r31->string_buffer + var_r5) = 0;
                     var_r5 += 1;
                 }
             }

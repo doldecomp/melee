@@ -129,12 +129,12 @@ void mnInfoBonus_80252ADC(void)
         o->x4[i] = HSD_SisLib_803A5ACC(0, 1, -14.F, -6.35F + 2.77F * (float) i,
                                        17.F, 8.9F, 1.25F);
         mnInfoBonus_80252ADC_inline(o->x4[i]);
-        o->x4[i]->x4A = 2;
+        o->x4[i]->default_alignment = 2;
 
         o->x2C[i] = HSD_SisLib_803A5ACC(0, 1, -14.F, -5.F + 2.77F * (float) i,
                                         17.F, 8.9F, 1.25F);
         mnInfoBonus_80252ADC_inline(o->x2C[i]);
-        o->x2C[i]->x4A = 2;
+        o->x2C[i]->default_alignment = 2;
 
         o->x18[i] = HSD_SisLib_803A5ACC(
             0, 1, -4.7500005F, -6.25F + 2.77F * (float) i, 17.F, 18.5F, 2.5F);
@@ -302,8 +302,8 @@ inline void mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
 
 inline void mnInfoBonus_80252F8C_inline1(HSD_Text* text)
 {
-    text->x24.x = 0.0521F;
-    text->x24.y = 0.0521F;
+    text->font_size.x = 0.0521F;
+    text->font_size.y = 0.0521F;
 }
 
 void mnInfoBonus_80252F8C(void)
