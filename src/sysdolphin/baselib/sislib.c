@@ -708,6 +708,11 @@ HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1)
     return temp_r30;
 }
 
+/// @brief Converts ASCII to "SIS" format
+/// @details - Maps ASCII characters to SIS characters by using byte pair lookup tables
+/// @param data output buffer for the converted string
+/// @param string ASCII string to be converted
+/// @return length of encoded string
 s32 HSD_SisLib_803A67EC(u8* data, u8* string)
 {
     s32 sp10;
@@ -1197,6 +1202,35 @@ void HSD_SisLib_803A7548(HSD_Text* arg0, int arg1, float arg2, float arg3)
         temp_r4[3] = 256.0F * arg3;
     }
 }
+
+void HSD_SisLib_803A75E0(HSD_Text* arg0, s32 arg1)
+{
+    GXColor color;
+    GXColor* temp_r3;
+
+    if (HSD_SisLib_803A70A0(arg0, 0) != 0) {
+        color = arg0->text_color;
+        temp_r3 = (GXColor*)fn_803A6FEC((u8* ) arg0->sis_buffer, arg1, NULL);
+        if (temp_r3 != NULL) {
+            /// @todo: not really sure how to get the addi 0x5 here
+            /// fn_803A6FEC probably returns a struct that has color at an offset of 0x5?
+            temp_r3->g = color.r;
+            temp_r3->b = color.g;
+            temp_r3->a = color.b;
+        }
+    }
+}
+
+void HSD_SisLib_803A7664(HSD_Text* arg0)
+{
+    sisLib_803A7664_t* data;
+
+    data = (sisLib_803A7664_t*)arg0->alloc_data;
+    data->x0 = data->x4;
+    *(u8*)data->x0 = 0;
+    data->xC = 0;
+}
+
 
 void HSD_SisLib_803A8134(void* arg0, HSD_Text* arg1, f32* arg2, f32* arg3)
 {

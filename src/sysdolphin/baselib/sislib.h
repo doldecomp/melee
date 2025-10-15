@@ -34,6 +34,15 @@ struct sislib_UnkAllocData {
     u32 size;
 };
 
+/// @todo: this is the same as above, but just more generic...
+/// proper types will have to be sorted out later, as well as merging the two structs.
+typedef struct sisLib_803A7664_t {
+    void* x0;
+    void* x4;
+    u32 x8; ///< alloc size
+    u32 xC;
+} sisLib_803A7664_t;
+
 struct HSD_Text {
     // these get passed to the text initializer HSD_SisLib_803A5ACC
     f32 pos_x;          ///< world position x
@@ -112,8 +121,8 @@ void HSD_SisLib_803A84BC(HSD_GObj*, int);
 s32 HSD_SisLib_803A7F0C(HSD_Text*, s32);
 void HSD_SisLib_803A8134(void*, HSD_Text*, f32*, f32*);
 void HSD_SisLib_803A7684(UNK_T, u8, u8);
-void HSD_SisLib_803A7664(UNK_T);
-void HSD_SisLib_803A75E0(UNK_T, s32);
+void HSD_SisLib_803A7664(HSD_Text*);
+void HSD_SisLib_803A75E0(HSD_Text*, s32);
 void HSD_SisLib_803A7548(HSD_Text*, int, float, float);
 void HSD_SisLib_803A74F0(HSD_Text*, s32 arg1, u8* arg2);
 void HSD_SisLib_803A746C(HSD_Text*, s32, f32, f32);
