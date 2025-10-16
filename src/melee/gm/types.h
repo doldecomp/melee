@@ -888,4 +888,9 @@ struct lbl_8046DBD8_t {
     u16 x8;
 };
 
+struct VsApproachData {
+    u8 x0;
+    u8 x1;
+};
+
 #endif
