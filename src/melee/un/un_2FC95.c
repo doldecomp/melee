@@ -200,8 +200,8 @@ void un_802FF364(int slot)
         HSD_SisLib_803A5CC4(thing->x4);
     }
     thing->x4 = HSD_SisLib_803A6754(2, un_804A1F58->x0);
-    thing->x4->x4A = 1;
-    thing->x4->x49 = 1;
+    thing->x4->default_alignment = 1;
+    thing->x4->default_kerning = 1;
     gm_8016B774();
     s = gm_8016C658(slot);
     if (s > 9999) {
@@ -210,7 +210,7 @@ void un_802FF364(int slot)
     thing->x8 =
         HSD_SisLib_803A6B98(thing->x4, ifAll->x, ifAll->y + 3.2f, "%d", s);
     HSD_SisLib_803A7548(thing->x4, thing->x8, 0.06, 0.06);
-    thing->x4->x58 = fn_802FF360;
+    thing->x4->render_callback = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
     HSD_GObjProc_8038FD54(thing->x0, fn_802FF218, 17);
 }
@@ -240,7 +240,7 @@ void un_802FF570(void)
     int i;
     for (i = 0; i < 6; i++) {
         if (un_804A1F58[i].x8.x4) {
-            un_804A1F58[i].x8.x4->x4D = 1;
+            un_804A1F58[i].x8.x4->hidden = 1;
         }
     }
 }
@@ -252,7 +252,7 @@ void un_802FF620(void)
         un_804A1F58[i].x0 = 0;
         if (un_804A1F58[i].x8.x4) {
             un_802FF364(i);
-            un_804A1F58[i].x8.x4->x4D = 0;
+            un_804A1F58[i].x8.x4->hidden = 0;
         }
     }
 }

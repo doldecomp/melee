@@ -790,8 +790,8 @@ static void mn_80229A7C(struct mn_80229A7C_t* tmp, int arg1, int arg2)
         temp_r3_2 = HSD_SisLib_803A5ACC(0, mn_804D6BB4, -9.5f, 9.1f, 17.0f,
                                         364.68332f, 38.38772f);
         tmp->xAC = temp_r3_2;
-        temp_r3_2->x24.x = 0.0521f;
-        temp_r3_2->x24.y = 0.0521f;
+        temp_r3_2->font_size.x = 0.0521f;
+        temp_r3_2->font_size.y = 0.0521f;
         HSD_SisLib_803A6368(temp_r3_2, temp_r31[arg2]);
     }
 }
@@ -1367,7 +1367,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
         if (var_r25 != 0) {
             mn_80229A7C_dontinline(temp_r24, temp_r24->x0, var_r5);
         }
-        temp_r24->xAC->x4D = 0;
+        temp_r24->xAC->hidden = 0;
         break;
     }
     if (var_r26 != 0) {

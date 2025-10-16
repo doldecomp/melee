@@ -441,13 +441,13 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
         lb_80011E24(mnCharSel_804D6CC0, &sp10, joint, -1);
 
         if (arg1 == 0 || temp_r29 == 0) {
-            temp_r30->x4D = 1;
+            temp_r30->hidden = 1;
             HSD_JObjSetFlagsAll(sp10, JOBJ_HIDDEN);
             return;
         }
         HSD_JObjClearFlagsAll(sp10, JOBJ_HIDDEN);
         if (temp_r29 < 6) {
-            temp_r30->x4D = 1;
+            temp_r30->hidden = 1;
             HSD_JObjSetTranslateX(sp10, 0.9f * temp_r29 + var_f31 - 4.5f);
             if (sp10 == NULL) {
                 var_r0_2 = NULL;
@@ -486,7 +486,7 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
                 HSD_JObjSetFlags(sp10, JOBJ_HIDDEN);
             }
         } else {
-            temp_r30->x4D = 0;
+            temp_r30->hidden = 0;
             if (temp_r29 >= 0x3E8) {
                 var_f31 -= 3.0F;
             } else if (temp_r29 >= 100) {
@@ -495,18 +495,18 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
 
             HSD_JObjSetTranslateX(sp10, var_f31);
 
-            temp_r30->x0 = 0.6F + var_f31;
+            temp_r30->pos_x = 0.6F + var_f31;
             if (arg1 == 1) {
-                temp_r30->x30.w = 0x50;
+                temp_r30->text_color.a = 0x50;
             } else {
-                temp_r30->x30.w = 0xA0;
+                temp_r30->text_color.a = 0xA0;
             }
             {
                 UNK_T tmp = HSD_SisLib_803A6478(temp_r31, &HSD_SisLib_804D1124[0][43].kerning->left);
                 mnCharSel_8025BC20(tmp, temp_r29);
             }
             HSD_SisLib_803A6368(temp_r30, 0x56);
-            temp_r30->x5C = (SIS*) temp_r31;
+            temp_r30->sis_buffer = (SIS*) temp_r31;
             HSD_JObjSetFlags(sp10 = HSD_JObjGetChild(sp10), JOBJ_HIDDEN);
             HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(sp10), JOBJ_HIDDEN);
             HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(HSD_JObjGetNext(sp10)), JOBJ_HIDDEN);

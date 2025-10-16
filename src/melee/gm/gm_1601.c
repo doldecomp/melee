@@ -733,7 +733,7 @@ void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
     const char* str;
 
     if (lbLang_IsSavedLanguageUS()) {
-        text->x49 = 1;
+        text->default_kerning = 1;
     }
     str = arg2 ? fn_801609E0(ckind) : gm_80160980(ckind);
     if (lbLang_IsSavedLanguageUS()) {
@@ -744,7 +744,7 @@ void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
         var_f31 = tmp ? lbl_803B7700[ckind] : lbl_803B75F8[ckind];
     }
     HSD_SisLib_803A6B98(text, 0.0F, 0.0F, str);
-    text->x24.x *= var_f31;
+    text->font_size.x *= var_f31;
 }
 
 /// #gm_80160C90
