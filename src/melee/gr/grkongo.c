@@ -748,7 +748,7 @@ void grKongo_801D6668(Ground_GObj* arg0)
         }
 #endif
     }
-    Ground_801C4B50((s32) temp_r4->gv.kongo2.xC4, (s32) &sp5C, &sp50,
+    Ground_801C4B50(temp_r4->gv.kongo2.xC4, &sp5C, &sp50,
                     temp_r4->gv.kongo.xCC);
     HSD_JObjGetTranslation(temp_r30, &sp44);
     HSD_JObjSetTranslate(temp_r30, &sp5C);
