@@ -6939,7 +6939,7 @@ void ftKb_YsSpecialN1_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    HSD_JObjAnimAll((HSD_JObj*) fp->fv.gw.x223C_panicDamage);
+    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft_8008A2BC(gobj);
     }
