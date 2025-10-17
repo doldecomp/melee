@@ -103,48 +103,45 @@ CollJoint* mpLib_8004D17C(void)
 void mpLib_8004D184(mp_CollData* coll_data)
 {
     mpLib_Line* line;
-    Vec2* verts;
-    s32 var_r8;
-    Vec2* temp_r4;
-    Vec2* temp_r5;
-    mpLib_Line* var_r4;
-    s32 var_r5;
+    Vec2* verts = coll_data->verts;
+    int i;
 
-    verts = coll_data->verts;
-    if (stage_info.internal_stage_id != PURA) {
-        line = coll_data->lines;
-        var_r8 = 0;
-        while (var_r8 < coll_data->line_count) {
-            temp_r5 = &verts[line->p0_idx];
-            temp_r4 = &verts[line->p1_idx];
-            if (temp_r5->x == temp_r4->x && temp_r5->y == temp_r4->y) {
-                var_r4 = coll_data->lines;
-                var_r5 = 0;
-                while (var_r5 < coll_data->line_count) {
-                    if (var_r4->x4_line_id == var_r8) {
-                        var_r4->x4_line_id = line->x4_line_id;
-                    }
-                    if (var_r4->x6_line_id == var_r8) {
-                        var_r4->x6_line_id = line->x6_line_id;
-                    }
-                    if (var_r4->x8_line_id == var_r8) {
-                        var_r4->x8_line_id = line->x4_line_id;
-                    }
-                    if (var_r4->xA_line_id == var_r8) {
-                        var_r4->xA_line_id = line->x6_line_id;
-                    }
-                    var_r5 += 1;
-                    var_r4 += 1;
-                }
-                line->xC |= 0x80;
-                line->x4_line_id = -1;
-                line->x6_line_id = -1;
-                line->x8_line_id = -1;
-                line->xA_line_id = -1;
-            }
-            var_r8 += 1;
-            line += 1;
+    if (stage_info.internal_stage_id == PURA) {
+        return;
+    }
+
+    line = coll_data->lines;
+    for (i = 0; i < coll_data->line_count; i++, line++) {
+        Vec2* v0 = &verts[line->v0_idx];
+        Vec2* v1 = &verts[line->v1_idx];
+        mpLib_Line* other;
+        int j;
+
+        if (v0->x != v1->x || v0->y != v1->y) {
+            continue;
         }
+
+        other = coll_data->lines;
+        for (j = 0; j < coll_data->line_count; j++, other++) {
+            if (other->x4_line_id == i) {
+                other->x4_line_id = line->x4_line_id;
+            }
+            if (other->x6_line_id == i) {
+                other->x6_line_id = line->x6_line_id;
+            }
+            if (other->x8_line_id == i) {
+                other->x8_line_id = line->x4_line_id;
+            }
+            if (other->xA_line_id == i) {
+                other->xA_line_id = line->x6_line_id;
+            }
+        }
+
+        line->xC |= 0x80;
+        line->x4_line_id = -1;
+        line->x6_line_id = -1;
+        line->x8_line_id = -1;
+        line->xA_line_id = -1;
     }
 }
 
@@ -290,10 +287,10 @@ int mpLib_8004DB78(int line_id)
         u32 flags = groundCollLine[result].flags;
 
         if ((flags & 0x10000) && !(flags & 0x40000)) {
-            CollVtx* p1 = &groundCollVtx[groundCollLine[line_id].x0->p1_idx];
-            CollVtx* p0 = &groundCollVtx[groundCollLine[result].x0->p0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[result].x0->v0_idx];
 
-            if (SQ(p1->pos.x - p0->pos.x) + SQ(p1->pos.y - p0->pos.y) < 4.0) {
+            if (SQ(v1->pos.x - v0->pos.x) + SQ(v1->pos.y - v0->pos.y) < 4.0) {
                 return result;
             }
         }
@@ -310,10 +307,10 @@ int mpLib_8004DC04(int line_id)
         u32 flags = groundCollLine[result].flags;
 
         if ((flags & 0x10000) && !(flags & 0x40000)) {
-            CollVtx* p0 = &groundCollVtx[groundCollLine[line_id].x0->p0_idx];
-            CollVtx* p1 = &groundCollVtx[groundCollLine[result].x0->p1_idx];
+            CollVtx* v0 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
+            CollVtx* v1 = &groundCollVtx[groundCollLine[result].x0->v1_idx];
 
-            if (SQ(p0->pos.x - p1->pos.x) + SQ(p0->pos.y - p1->pos.y) < 4.0) {
+            if (SQ(v0->pos.x - v1->pos.x) + SQ(v0->pos.y - v1->pos.y) < 4.0) {
                 return result;
             }
         }
@@ -366,8 +363,8 @@ int mpLib_8004DD90(int line_id, Vec3* pos_out, float* y_out, u32* flags_out,
     x_f9 = pos_out->x;
     while (true) {
         CollLine* line_r4 = &groundCollLine[r27];
-        x0_f0 = groundCollVtx[line_r4->x0->p0_idx].pos.x;
-        x1_f1 = groundCollVtx[line_r4->x0->p1_idx].pos.x;
+        x0_f0 = groundCollVtx[line_r4->x0->v0_idx].pos.x;
+        x1_f1 = groundCollVtx[line_r4->x0->v1_idx].pos.x;
         if (pos_out->x < x0_f0) {
             if (r31 != 1) {
                 int r9 = mpLib_8004DC04(r27);
@@ -411,8 +408,8 @@ int mpLib_8004DD90(int line_id, Vec3* pos_out, float* y_out, u32* flags_out,
         *flags_out = groundCollLine[r27].x0->flags;
     }
 
-    y0_f6 = groundCollVtx[groundCollLine[r27].x0->p0_idx].pos.y;
-    y1_f7 = groundCollVtx[groundCollLine[r27].x0->p1_idx].pos.y;
+    y0_f6 = groundCollVtx[groundCollLine[r27].x0->v0_idx].pos.y;
+    y1_f7 = groundCollVtx[groundCollLine[r27].x0->v1_idx].pos.y;
     if (y_out != NULL) {
         *y_out = (0.0001 + ((y0_f6 + (((y1_f7 - y0_f6) * (x_f9 - x0_f0)) /
                                       (x1_f1 - x0_f0))) -
@@ -442,8 +439,8 @@ int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
     x = vec->x;
     while (true) {
         CollLine* line_r4 = &groundCollLine[line_id];
-        x0 = groundCollVtx[line_r4->x0->p0_idx].pos.x;
-        x1 = groundCollVtx[line_r4->x0->p1_idx].pos.x;
+        x0 = groundCollVtx[line_r4->x0->v0_idx].pos.x;
+        x1 = groundCollVtx[line_r4->x0->v1_idx].pos.x;
         if (vec->x < x1) {
             if (dir_r31 != 1) {
                 int new_id = mpLib_8004DB78(line_id);
@@ -488,8 +485,8 @@ int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
         *flags_out = groundCollLine[line_id].x0->flags;
     }
 
-    y0 = groundCollVtx[groundCollLine[line_id].x0->p0_idx].pos.y;
-    y1 = groundCollVtx[groundCollLine[line_id].x0->p1_idx].pos.y;
+    y0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.y;
+    y1 = groundCollVtx[groundCollLine[line_id].x0->v1_idx].pos.y;
 
     if (y_out != NULL) {
         *y_out = y0 + ((y1 - y0) * (x - x0)) / (x1 - x0) - vec->y - 0.0001;
@@ -521,8 +518,8 @@ int mpLib_8004E398(int line_id, Vec3* vec, float* x_out, u32* flags_out,
     y = vec->y;
     while (true) {
         CollLine* line_r4 = &groundCollLine[line_id];
-        y0 = groundCollVtx[line_r4->x0->p0_idx].pos.y;
-        y1 = groundCollVtx[line_r4->x0->p1_idx].pos.y;
+        y0 = groundCollVtx[line_r4->x0->v0_idx].pos.y;
+        y1 = groundCollVtx[line_r4->x0->v1_idx].pos.y;
         if (vec->y < y0) {
             if (dir_r31 != 1) {
                 int new_id = mpLib_8004DC04(line_id);
@@ -563,8 +560,8 @@ int mpLib_8004E398(int line_id, Vec3* vec, float* x_out, u32* flags_out,
         *flags_out = groundCollLine[line_id].x0->flags;
     }
 
-    x0 = groundCollVtx[groundCollLine[line_id].x0->p0_idx].pos.x;
-    x1 = groundCollVtx[groundCollLine[line_id].x0->p1_idx].pos.x;
+    x0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.x;
+    x1 = groundCollVtx[groundCollLine[line_id].x0->v1_idx].pos.x;
 
     if (x_out != NULL) {
         *x_out = x0 + (x1 - x0) * (y - y0) / (y1 - y0) - vec->x;
@@ -595,8 +592,8 @@ int mpLib_8004E684(int line_id, Vec3* vec, float* x_out, u32* flags_out,
     y = vec->y;
     while (true) {
         CollLine* line_r4 = &groundCollLine[line_id];
-        y0 = groundCollVtx[line_r4->x0->p0_idx].pos.y;
-        y1 = groundCollVtx[line_r4->x0->p1_idx].pos.y;
+        y0 = groundCollVtx[line_r4->x0->v0_idx].pos.y;
+        y1 = groundCollVtx[line_r4->x0->v1_idx].pos.y;
         if (vec->y > y0) {
             if (dir_r31 != -1) {
                 int new_id_r8 = mpLib_8004DC04(line_id);
@@ -639,8 +636,8 @@ int mpLib_8004E684(int line_id, Vec3* vec, float* x_out, u32* flags_out,
         *flags_out = groundCollLine[line_id].x0->flags;
     }
 
-    x0 = groundCollVtx[groundCollLine[line_id].x0->p0_idx].pos.x;
-    x1 = groundCollVtx[groundCollLine[line_id].x0->p1_idx].pos.x;
+    x0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.x;
+    x1 = groundCollVtx[groundCollLine[line_id].x0->v1_idx].pos.x;
 
     if (x_out != NULL) {
         *x_out = x0 + ((x1 - x0) * (y - y0)) / (y1 - y0) - vec->x;
@@ -821,10 +818,10 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
     bool calculated_distance = false;
     mpLib_Line* line_r11 = groundCollLine[line_id].x0;
 
-    float x0_f0 = groundCollVtx[line_r11->p0_idx].pos.x;
-    float y0_f1 = groundCollVtx[line_r11->p0_idx].pos.y;
-    float x1_f2 = groundCollVtx[line_r11->p1_idx].pos.x;
-    float y1_f3 = groundCollVtx[line_r11->p1_idx].pos.y;
+    float x0_f0 = groundCollVtx[line_r11->v0_idx].pos.x;
+    float y0_f1 = groundCollVtx[line_r11->v0_idx].pos.y;
+    float x1_f2 = groundCollVtx[line_r11->v1_idx].pos.x;
+    float y1_f3 = groundCollVtx[line_r11->v1_idx].pos.y;
     float distance;
 
     if (mpLib_8004DC04(line_id) != -1) {
@@ -1052,20 +1049,20 @@ bool mpLib_8004F400(Vec3* vec_out, int* line_id_out, int* flags_out,
             }
 
             {
-                CollVtx* p0_r5 = &groundCollVtx[line_r26->x0->p0_idx];
-                CollVtx* p1_r6 = &groundCollVtx[line_r26->x0->p1_idx];
+                CollVtx* v0_r5 = &groundCollVtx[line_r26->x0->v0_idx];
+                CollVtx* v1_r6 = &groundCollVtx[line_r26->x0->v1_idx];
                 float x_f23;
                 float y_f22;
                 float px_sp4C;
                 float py_sp48;
-                float x0_f27 = p0_r5->pos.x;
-                float y0_f26 = y_offset_f5 + p0_r5->pos.y;
-                float x1_f25 = p1_r6->pos.x;
-                float y1_f24 = y_offset_f5 + p1_r6->pos.y;
+                float x0_f27 = v0_r5->pos.x;
+                float y0_f26 = y_offset_f5 + v0_r5->pos.y;
+                float x1_f25 = v1_r6->pos.x;
+                float y1_f24 = y_offset_f5 + v1_r6->pos.y;
 
                 if (joint_r29->flags & 0x700) {
-                    mpLib_8004DC90(&x_f1, &y_f2, p0_r5->x10, p0_r5->x14,
-                                   p1_r6->x10, p1_r6->x14, x0_f27, y0_f26,
+                    mpLib_8004DC90(&x_f1, &y_f2, v0_r5->x10, v0_r5->x14,
+                                   v1_r6->x10, v1_r6->x14, x0_f27, y0_f26,
                                    x1_f25, y1_f24, x_f1, y_f2);
                 }
 
@@ -1361,8 +1358,8 @@ bool mpLib_8004FC2C(Vec3* vec_out, int* line_id_out, int* flags_out,
 
                 if (joint->flags & 0x700) {
                     mpLib_Line* line_r3 = r26->x0;
-                    CollVtx* v1_r6 = &groundCollVtx[line_r3->p1_idx];
-                    CollVtx* v0_r5 = &groundCollVtx[line_r3->p0_idx];
+                    CollVtx* v1_r6 = &groundCollVtx[line_r3->v1_idx];
+                    CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
                     mpLib_8004DC90(&f1, &f2, v0_r5->x10, v0_r5->x14,
                                    v1_r6->x10, v1_r6->x14, sp44, sp40, sp3C,
                                    sp38, f29, f28);
@@ -1572,8 +1569,8 @@ bool mpLib_800501CC(Vec3* vec_out, int* line_id_out, int* flags_out,
                 !(p26->flags & 0x80))
             {
                 mpLib_Line* line = p26->x0;
-                CollVtx* v0 = &groundCollVtx[line->p0_idx];
-                CollVtx* v1 = &groundCollVtx[line->p1_idx];
+                CollVtx* v0 = &groundCollVtx[line->v0_idx];
+                CollVtx* v1 = &groundCollVtx[line->v1_idx];
                 float x0 = v0->pos.x;
                 float y0 = v0->pos.y;
                 float x1 = v1->pos.x;
@@ -1706,8 +1703,8 @@ bool mpLib_8005057C(Vec3* vec_out, int* line_id_out, int* flags_out,
                 !(r26->flags & 0x80))
             {
                 mpLib_Line* line_r3 = r26->x0;
-                CollVtx* v0_r5 = &groundCollVtx[line_r3->p0_idx];
-                CollVtx* v1_r6 = &groundCollVtx[line_r3->p1_idx];
+                CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
+                CollVtx* v1_r6 = &groundCollVtx[line_r3->v1_idx];
                 float x0_f27 = v0_r5->pos.x;
                 float y0_f26 = v0_r5->pos.y;
                 float x1_f25 = v1_r6->pos.x;
@@ -1832,8 +1829,8 @@ bool mpLib_8005057C(Vec3* vec_out, int* line_id_out, int* flags_out,
 }
 
 bool mpLib_800509B8(Vec3* vec_out, int* line_id_out, int* flags_out,
-                    Vec3* normal_out, int joint_id0, int joint_id1,
-                    float f1, float f2, float left_x, float left_y)
+                    Vec3* normal_out, int joint_id0, int joint_id1, float f1,
+                    float f2, float left_x, float left_y)
 {
     float min;
     CollJoint* joint;
@@ -1877,8 +1874,8 @@ bool mpLib_800509B8(Vec3* vec_out, int* line_id_out, int* flags_out,
                 !(p26->flags & 0x80))
             {
                 mpLib_Line* line = p26->x0;
-                CollVtx* v0 = &groundCollVtx[line->p0_idx];
-                CollVtx* v1 = &groundCollVtx[line->p1_idx];
+                CollVtx* v0 = &groundCollVtx[line->v0_idx];
+                CollVtx* v1 = &groundCollVtx[line->v1_idx];
                 float x0 = v0->pos.x;
                 float y0 = v0->pos.y;
                 float x1 = v1->pos.x;
@@ -1889,8 +1886,8 @@ bool mpLib_800509B8(Vec3* vec_out, int* line_id_out, int* flags_out,
                 float x;
                 float y;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, f1, f2,
-                                       left_x, left_y, &x, &y))
+                    if (mpLib_8004E97C(x0, y0, x1, y1, f1, f2, left_x, left_y,
+                                       &x, &y))
                     {
                         dx2 = SQ(x - f1);
                         dy2 = SQ(y - f2);
@@ -1918,9 +1915,8 @@ bool mpLib_800509B8(Vec3* vec_out, int* line_id_out, int* flags_out,
                         }
                     }
                 } else {
-                    if (f1 >= left_x &&
-                        mpLib_80050068(&x, &y, x0, y0, y1, f1, f2,
-                                       left_x, left_y))
+                    if (f1 >= left_x && mpLib_80050068(&x, &y, x0, y0, y1, f1,
+                                                       f2, left_x, left_y))
                     {
                         dx2 = SQ(x - f1);
                         dy2 = SQ(y - f2);
@@ -2011,8 +2007,8 @@ bool mpLib_80050D68(Vec3* vec_out, int* line_id_out, int* flags_out,
                 !(r26->flags & 0x80))
             {
                 mpLib_Line* line_r3 = r26->x0;
-                CollVtx* v0_r5 = &groundCollVtx[line_r3->p0_idx];
-                CollVtx* v1_r6 = &groundCollVtx[line_r3->p1_idx];
+                CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
+                CollVtx* v1_r6 = &groundCollVtx[line_r3->v1_idx];
                 float x0_f27 = v0_r5->pos.x;
                 float y0_f26 = v0_r5->pos.y;
                 float x1_f25 = v1_r6->pos.x;
@@ -2193,7 +2189,7 @@ bool mpLib_800511A4(int* line_id_out, int joint_id0, int joint_id1,
                 float dx0;
                 float dy0;
                 {
-                    vtx = &groundCollVtx[p26->x0->p0_idx];
+                    vtx = &groundCollVtx[p26->x0->v0_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
@@ -2230,7 +2226,7 @@ bool mpLib_800511A4(int* line_id_out, int joint_id0, int joint_id1,
                 }
 
                 {
-                    vtx = &groundCollVtx[p26->x0->p1_idx];
+                    vtx = &groundCollVtx[p26->x0->v1_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
@@ -2312,8 +2308,8 @@ bool mpLib_800515A0(int* line_id, int arg1, int arg2, float arg8, float arg9,
     float f1;
     float f1_2;
     float f31;
-    CollVtx* p0_r3;
-    CollVtx* r3_4;
+    CollVtx* v0_r3;
+    CollVtx* v1_r3;
     int r3;
     mpLib_CollData* r4;
     CollJoint* r29;
@@ -2348,11 +2344,11 @@ bool mpLib_800515A0(int* line_id, int arg1, int arg2, float arg8, float arg9,
                 if ((r26->flags & LINE_FLAG_LEFT_WALL) &&
                     (r26->flags & 0x10000) && !(r26->flags & 0x80))
                 {
-                    p0_r3 = &groundCollVtx[r26->x0->p0_idx];
-                    x0_f16 = p0_r3->pos.x;
-                    y0_f17 = p0_r3->pos.y;
-                    f18 = p0_r3->x10;
-                    f19 = p0_r3->x14;
+                    v0_r3 = &groundCollVtx[r26->x0->v0_idx];
+                    x0_f16 = v0_r3->pos.x;
+                    y0_f17 = v0_r3->pos.y;
+                    f18 = v0_r3->x10;
+                    f19 = v0_r3->x14;
                     sp8 = f18;
                     spC = f19;
                     mpLib_8004DC90(&sp40, &sp3C, arg8, arg9, argA, argB, argC,
@@ -2377,11 +2373,11 @@ bool mpLib_800515A0(int* line_id, int arg1, int arg2, float arg8, float arg9,
                             r27 = true;
                         }
                     }
-                    r3_4 = &groundCollVtx[r26->x0->p1_idx];
-                    f21_2 = r3_4->pos.x;
-                    f20_2 = r3_4->pos.y;
-                    f19_2 = r3_4->x10;
-                    f18_2 = r3_4->x14;
+                    v1_r3 = &groundCollVtx[r26->x0->v1_idx];
+                    f21_2 = v1_r3->pos.x;
+                    f20_2 = v1_r3->pos.y;
+                    f19_2 = v1_r3->x10;
+                    f18_2 = v1_r3->x14;
                     sp8 = f19_2;
                     spC = f18_2;
                     mpLib_8004DC90(&sp40, &sp3C, arg8, arg9, argA, argB, argC,
@@ -2455,21 +2451,21 @@ int mpLib_8005199C(Vec3* vec, int arg1, int arg2)
                 if ((line_r11->flags & LINE_FLAG_FLOOR) &&
                     (line_r11->flags & 0x10000) && !(line_r11->flags & 0x80))
                 {
-                    CollVtx* p1_r4 = &groundCollVtx[line_r11->x0->p1_idx];
-                    CollVtx* p0_r5 = &groundCollVtx[line_r11->x0->p0_idx];
-                    float x0_f4 = p0_r5->pos.x;
-                    float x1_f0 = p1_r4->pos.x;
-                    float y0_f6 = p0_r5->pos.y;
-                    float y1_f1 = p1_r4->pos.y;
+                    CollVtx* v1_r4 = &groundCollVtx[line_r11->x0->v1_idx];
+                    CollVtx* v0_r5 = &groundCollVtx[line_r11->x0->v0_idx];
+                    float x0_f4 = v0_r5->pos.x;
+                    float x1_f0 = v1_r4->pos.x;
+                    float y0_f6 = v0_r5->pos.y;
+                    float y1_f1 = v1_r4->pos.y;
 
-                    if (x_f31 >= p0_r5->pos.x && x_f31 <= x1_f0) {
+                    if (x_f31 >= v0_r5->pos.x && x_f31 <= x1_f0) {
                         if (y_f30 >= y0_f6 && y_f30 >= y1_f1) {
                             line_id_r30 = (line_r11 - groundCollLine);
                             goto end;
                         }
-                        if (ABS(x1_f0 - p0_r5->pos.x) > 0.0001 &&
-                            y_f30 >= (y1_f1 - y0_f6) / (x1_f0 - p0_r5->pos.x) *
-                                             (x_f31 - p0_r5->pos.x) +
+                        if (ABS(x1_f0 - v0_r5->pos.x) > 0.0001 &&
+                            y_f30 >= (y1_f1 - y0_f6) / (x1_f0 - v0_r5->pos.x) *
+                                             (x_f31 - v0_r5->pos.x) +
                                          y0_f6)
                         {
                             line_id_r30 = (line_r11 - groundCollLine);
@@ -2552,10 +2548,10 @@ int mpLib_80051BA8(Vec3* out_vec, int arg1, int arg2, int arg3, int dir,
                     if (flags & 1 && flags & 0x10000 && !(flags & 0x80)) {
                         mpLib_Line* inner = line->x0;
                         if (inner->flags & LINE_FLAG_LEDGE) {
-                            float x0 = groundCollVtx[inner->p0_idx].pos.x;
-                            float y0 = groundCollVtx[inner->p0_idx].pos.y;
-                            float x1 = groundCollVtx[inner->p1_idx].pos.x;
-                            float y1 = groundCollVtx[inner->p1_idx].pos.y;
+                            float x0 = groundCollVtx[inner->v0_idx].pos.x;
+                            float y0 = groundCollVtx[inner->v0_idx].pos.y;
+                            float x1 = groundCollVtx[inner->v1_idx].pos.x;
+                            float y1 = groundCollVtx[inner->v1_idx].pos.y;
                             float line_left;
                             float line_bottom;
                             float line_right;
@@ -3157,7 +3153,7 @@ skip:
 
     LINEID_CHECK(4433, r29);
 
-    temp_r3 = &groundCollVtx[groundCollLine[r29].x0->p1_idx];
+    temp_r3 = &groundCollVtx[groundCollLine[r29].x0->v1_idx];
     pos_out->x = temp_r3->pos.x;
     pos_out->y = temp_r3->pos.y;
     pos_out->z = 0.0F;
@@ -3181,7 +3177,7 @@ void mpLib_80053ECC(int ledge_id, Vec* vec)
 
     LINEID_CHECK(4453, ledge_id);
 
-    temp_r3 = &groundCollVtx[groundCollLine[ledge_id].x0->p0_idx];
+    temp_r3 = &groundCollVtx[groundCollLine[ledge_id].x0->v0_idx];
     vec->x = temp_r3->pos.x;
     vec->y = temp_r3->pos.y;
     vec->z = 0.0F;
@@ -3205,7 +3201,7 @@ void mpLib_80053FF4(int line_id, Vec3* pos_out)
         }
     }
 
-    vtx = &groundCollVtx[groundCollLine[new_id].x0->p1_idx];
+    vtx = &groundCollVtx[groundCollLine[new_id].x0->v1_idx];
     pos_out->x = vtx->pos.x;
     pos_out->y = vtx->pos.y;
     pos_out->z = 0.0F;
@@ -3213,7 +3209,7 @@ void mpLib_80053FF4(int line_id, Vec3* pos_out)
 
 void mpLib_80054158(int line_id, Vec3* arg1)
 {
-    CollVtx* point;
+    CollVtx* vtx;
     int new_id;
     mpLib_Line* temp_r8;
 
@@ -3231,9 +3227,9 @@ void mpLib_80054158(int line_id, Vec3* arg1)
         }
     }
 
-    point = &groundCollVtx[temp_r8->p0_idx];
-    arg1->x = point->pos.x;
-    arg1->y = point->pos.y;
+    vtx = &groundCollVtx[temp_r8->v0_idx];
+    arg1->x = vtx->pos.x;
+    arg1->y = vtx->pos.y;
     arg1->z = 0.0F;
 }
 
@@ -3248,7 +3244,7 @@ void mpLib_800542BC(int line_id, Vec3* out)
         new_id = mpLib_8004DC04(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) ==
                                  (groundCollLine[new_id].flags & 0xF));
-    temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->p0_idx];
+    temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
     out->x = temp_r3->pos.x;
     out->y = temp_r3->pos.y;
     out->z = 0.0F;
@@ -3265,7 +3261,7 @@ void mpLib_80054420(int line_id, Vec3* out)
         new_id = mpLib_8004DB78(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) ==
                                  (groundCollLine[new_id].flags & 0xF));
-    temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->p0_idx];
+    temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
     out->x = temp_r3->pos.x;
     out->y = temp_r3->pos.y;
     out->z = 0.0F;
@@ -3273,7 +3269,7 @@ void mpLib_80054420(int line_id, Vec3* out)
 
 CollVtx* mpLib_80054584(int line_id, Vec3* out)
 {
-    CollVtx* p1;
+    CollVtx* v1;
     s32 new_id;
 
     LINEID_CHECK(4501, line_id);
@@ -3283,17 +3279,17 @@ CollVtx* mpLib_80054584(int line_id, Vec3* out)
         new_id = mpLib_8004DB78(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
-    p1 = &groundCollVtx[groundCollLine[new_id].x0->p1_idx];
-    out->x = p1->pos.x;
-    out->y = p1->pos.y;
+    v1 = &groundCollVtx[groundCollLine[new_id].x0->v1_idx];
+    out->x = v1->pos.x;
+    out->y = v1->pos.y;
     out->z = 0.0F;
-    return p1;
+    return v1;
 }
 
 void mpLib_800546E8(int line_id, Vec3* out)
 {
     int new_id;
-    CollVtx* p0;
+    CollVtx* v0;
 
     LINEID_CHECK(4510, line_id);
     new_id = line_id;
@@ -3301,16 +3297,16 @@ void mpLib_800546E8(int line_id, Vec3* out)
         new_id = mpLib_8004DC04(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
-    p0 = &groundCollVtx[groundCollLine[new_id].x0->p0_idx];
-    out->x = p0->pos.x;
-    out->y = p0->pos.y;
+    v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
+    out->x = v0->pos.x;
+    out->y = v0->pos.y;
     out->z = 0.0F;
 }
 
 void mpLib_8005484C(int line_id, Vec3* arg1)
 {
     int new_id;
-    CollVtx* p0;
+    CollVtx* v0;
 
     LINEID_CHECK(4519, line_id);
     new_id = line_id;
@@ -3318,16 +3314,16 @@ void mpLib_8005484C(int line_id, Vec3* arg1)
         new_id = mpLib_8004DC04(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
-    p0 = &groundCollVtx[groundCollLine[new_id].x0->p0_idx];
-    arg1->x = p0->pos.x;
-    arg1->y = p0->pos.y;
+    v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
+    arg1->x = v0->pos.x;
+    arg1->y = v0->pos.y;
     arg1->z = 0.0F;
 }
 
 void mpLib_800549B0(int line_id, Vec3* arg1)
 {
     int new_id;
-    CollVtx* p0;
+    CollVtx* v0;
 
     LINEID_CHECK(4519, line_id);
     new_id = line_id;
@@ -3335,9 +3331,9 @@ void mpLib_800549B0(int line_id, Vec3* arg1)
         new_id = mpLib_8004DC04(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
-    p0 = &groundCollVtx[groundCollLine[new_id].x0->p0_idx];
-    arg1->x = p0->pos.x;
-    arg1->y = p0->pos.y;
+    v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
+    arg1->x = v0->pos.x;
+    arg1->y = v0->pos.y;
     arg1->z = 0.0F;
 }
 
@@ -3346,7 +3342,7 @@ void mpLib_80054B14(int line_id, Vec3* out_vec)
     CollVtx* temp_r3;
 
     LINEID_CHECK(4540, line_id);
-    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->p1_idx];
+    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
     out_vec->x = temp_r3->pos.x;
     out_vec->y = temp_r3->pos.y;
     out_vec->z = 0.0F;
@@ -3357,7 +3353,7 @@ void mpLib_80054BC0(int line_id, Vec3* arg1)
     CollVtx* temp_r3;
 
     LINEID_CHECK(4555, line_id);
-    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->p0_idx];
+    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
     arg1->x = temp_r3->pos.x;
     arg1->y = temp_r3->pos.y;
     arg1->z = 0.0F;
@@ -3393,10 +3389,10 @@ Vec3* mpLib_80054DFC(int line_id, Vec3* normal_out)
     LINEID_CHECK(4609, line_id);
     temp_r4 = groundCollLine[line_id].x0;
     {
-        float y0 = groundCollVtx[temp_r4->p0_idx].pos.y;
-        float y1 = groundCollVtx[temp_r4->p1_idx].pos.y;
-        float x0 = groundCollVtx[temp_r4->p0_idx].pos.x;
-        float x1 = groundCollVtx[temp_r4->p1_idx].pos.x;
+        float y0 = groundCollVtx[temp_r4->v0_idx].pos.y;
+        float y1 = groundCollVtx[temp_r4->v1_idx].pos.y;
+        float x0 = groundCollVtx[temp_r4->v0_idx].pos.x;
+        float x1 = groundCollVtx[temp_r4->v1_idx].pos.x;
         normal_out->x = -(y1 - y0);
         normal_out->y = +(x1 - x0);
         normal_out->z = 0.0F;
@@ -3528,100 +3524,100 @@ void mpLib_800552B0(int x, HSD_JObj* jobj, int z)
 void mpLib_8005541C(int joint_id)
 {
     CollJoint* joint;
-    CollLine* l;
+    CollLine* line;
     int count;
 
     joint = &groundCollJoint[joint_id];
     joint->flags |= 0x40000;
 
     count = joint->coll_data->floor_count;
-    l = &groundCollLine[joint->coll_data->floor_start];
+    line = &groundCollLine[joint->coll_data->floor_start];
     while (count-- > 0) {
-        l->flags |= 0x40000;
-        l++;
+        line->flags |= 0x40000;
+        line++;
     }
 
     count = joint->coll_data->ceiling_count;
-    l = &groundCollLine[joint->coll_data->ceiling_start];
+    line = &groundCollLine[joint->coll_data->ceiling_start];
     while (count-- > 0) {
-        l->flags |= 0x40000;
-        l++;
+        line->flags |= 0x40000;
+        line++;
     }
 
     count = joint->coll_data->left_wall_count;
-    l = &groundCollLine[joint->coll_data->left_wall_start];
+    line = &groundCollLine[joint->coll_data->left_wall_start];
     while (count-- > 0) {
-        l->flags |= 0x40000;
-        l++;
+        line->flags |= 0x40000;
+        line++;
     }
 
     count = joint->coll_data->right_wall_count;
-    l = &groundCollLine[joint->coll_data->right_wall_start];
+    line = &groundCollLine[joint->coll_data->right_wall_start];
     while (count-- > 0) {
-        l->flags |= 0x40000;
-        l++;
+        line->flags |= 0x40000;
+        line++;
     }
 
     count = joint->coll_data->dynamic_count;
-    l = &groundCollLine[joint->coll_data->dynamic_start];
+    line = &groundCollLine[joint->coll_data->dynamic_start];
     while (count-- > 0) {
-        l->flags |= 0x40000;
-        l++;
+        line->flags |= 0x40000;
+        line++;
     }
 }
 
 void mpLib_800557D0(int joint_id)
 {
-    CollJoint* temp_r3;
-    CollLine* l;
-    CollVtx* p;
+    CollJoint* joint;
+    CollLine* line;
+    CollVtx* vtx;
     int count;
     int i;
 
-    temp_r3 = &groundCollJoint[joint_id];
-    temp_r3->flags &= ~0x40000;
+    joint = &groundCollJoint[joint_id];
+    joint->flags &= ~0x40000;
 
-    count = temp_r3->coll_data->floor_count;
-    l = &groundCollLine[temp_r3->coll_data->floor_start];
+    count = joint->coll_data->floor_count;
+    line = &groundCollLine[joint->coll_data->floor_start];
     while (count-- > 0) {
-        l->flags &= ~0x40000;
-        l++;
+        line->flags &= ~0x40000;
+        line++;
     }
 
-    count = temp_r3->coll_data->ceiling_count;
-    l = &groundCollLine[temp_r3->coll_data->ceiling_start];
+    count = joint->coll_data->ceiling_count;
+    line = &groundCollLine[joint->coll_data->ceiling_start];
     while (count-- > 0) {
-        l->flags &= ~0x40000;
-        l++;
+        line->flags &= ~0x40000;
+        line++;
     }
 
-    count = temp_r3->coll_data->left_wall_count;
-    l = &groundCollLine[temp_r3->coll_data->left_wall_start];
+    count = joint->coll_data->left_wall_count;
+    line = &groundCollLine[joint->coll_data->left_wall_start];
     while (count-- > 0) {
-        l->flags &= ~0x40000;
-        l++;
+        line->flags &= ~0x40000;
+        line++;
     }
 
-    count = temp_r3->coll_data->right_wall_count;
-    l = &groundCollLine[temp_r3->coll_data->right_wall_start];
+    count = joint->coll_data->right_wall_count;
+    line = &groundCollLine[joint->coll_data->right_wall_start];
     while (count-- > 0) {
-        l->flags &= ~0x40000;
-        l++;
+        line->flags &= ~0x40000;
+        line++;
     }
 
-    count = temp_r3->coll_data->dynamic_count;
-    l = &groundCollLine[temp_r3->coll_data->dynamic_start];
+    count = joint->coll_data->dynamic_count;
+    line = &groundCollLine[joint->coll_data->dynamic_start];
     while (count-- > 0) {
-        l->flags &= ~0x40000;
-        l++;
+        line->flags &= ~0x40000;
+        line++;
     }
 
-    count = temp_r3->coll_data->point_count;
-    p = &groundCollVtx[temp_r3->coll_data->point_start];
+    count = joint->coll_data->vtx_count;
+    vtx = &groundCollVtx[joint->coll_data->vtx_start];
     while (count-- > 0) {
-        p->x10 = p->pos.x;
-        p->x14 = p->pos.y;
-        p++;
+        vtx->x10 = vtx->pos.x;
+        vtx->x14 = vtx->pos.y;
+        vtx++;
     }
 }
 
@@ -3640,8 +3636,8 @@ void mpLib_80055C5C(int index)
 
     for (i = 0; i < temp_r28; i++, var_r30++) {
         mpLib_Line* temp_r5 = var_r30->x0;
-        CollVtx* temp_r3 = &groundCollVtx[temp_r5->p1_idx];
-        CollVtx* temp_r3_2 = &groundCollVtx[temp_r5->p0_idx];
+        CollVtx* temp_r3 = &groundCollVtx[temp_r5->v1_idx];
+        CollVtx* temp_r3_2 = &groundCollVtx[temp_r5->v0_idx];
         temp_f2 = temp_r3->pos.x - temp_r3_2->pos.x;
         temp_f0 = temp_r3->pos.y - temp_r3_2->pos.y;
         if (temp_f2 > 0.0F) {
@@ -3689,8 +3685,8 @@ void mpLib_80055E24(int index)
     if (!(temp_r31->flags & 0x40800) && (temp_r31->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(index, temp_r31->coll_data->point_start,
-                      temp_r31->coll_data->point_count, var_r6);
+    mpIsland_8005B334(index, temp_r31->coll_data->vtx_start,
+                      temp_r31->coll_data->vtx_count, var_r6);
 }
 
 void mpLib_80055E9C(int x)
@@ -3707,10 +3703,10 @@ void mpLib_80055E9C(int x)
     float m0_0;
     CollJoint* mp_info;
     HSD_JObj* jobj;
-    int point_count;
-    CollVtx* p_r26;
+    int vtx_count;
+    CollVtx* v_r26;
     int var_r25;
-    CollVtx* p_r4;
+    CollVtx* v_r4;
     bool var_r6;
     MtxPtr mtx;
     int i;
@@ -3719,11 +3715,11 @@ void mpLib_80055E9C(int x)
 
     mpColl_804D64AC += 1;
     mp_info = &groundCollJoint[x];
-    point_count = mp_info->coll_data->point_count;
-    p_r4 = &groundCollVtx[mp_info->coll_data->point_start];
-    for (i = 0; i < point_count; i++, p_r4++) {
-        p_r4->x10 = p_r4->pos.x;
-        p_r4->x14 = p_r4->pos.y;
+    vtx_count = mp_info->coll_data->vtx_count;
+    v_r4 = &groundCollVtx[mp_info->coll_data->vtx_start];
+    for (i = 0; i < vtx_count; i++, v_r4++) {
+        v_r4->x10 = v_r4->pos.x;
+        v_r4->x14 = v_r4->pos.y;
     }
     jobj = mp_info->x20;
     if (jobj == NULL) {
@@ -3737,8 +3733,8 @@ void mpLib_80055E9C(int x)
             if (!(mp_info->flags & 0x40800) && (mp_info->flags & 0x10000)) {
                 var_r6 = true;
             }
-            mpIsland_8005B334(x, mp_info->coll_data->point_start,
-                              mp_info->coll_data->point_count, var_r6);
+            mpIsland_8005B334(x, mp_info->coll_data->vtx_start,
+                              mp_info->coll_data->vtx_count, var_r6);
         }
         return;
     }
@@ -3751,10 +3747,10 @@ void mpLib_80055E9C(int x)
     if (m0_0 == mtx[1][1] && m0_0 == mtx[2][2]) {
         m0_3 = mtx[0][3];
         m1_3 = mtx[1][3];
-        p_r4 = &groundCollVtx[mp_info->coll_data->point_start];
-        for (i = 0; i < point_count; i++, p_r4++) {
-            p_r4->pos.x = p_r4->x0 * m0_0 + m0_3;
-            p_r4->pos.y = p_r4->x4 * m0_0 + m1_3;
+        v_r4 = &groundCollVtx[mp_info->coll_data->vtx_start];
+        for (i = 0; i < vtx_count; i++, v_r4++) {
+            v_r4->pos.x = v_r4->x0 * m0_0 + m0_3;
+            v_r4->pos.y = v_r4->x4 * m0_0 + m1_3;
         }
         mp_info->x10 = (mp_info->coll_data->x14 * m0_0 + m0_3) - 30.0F;
         mp_info->x14 = (mp_info->coll_data->x18 * m0_0 + m1_3) - 30.0F;
@@ -3765,20 +3761,20 @@ void mpLib_80055E9C(int x)
     }
 
     i = 0;
-    p_r26 = &groundCollVtx[mp_info->coll_data->point_start];
+    v_r26 = &groundCollVtx[mp_info->coll_data->vtx_start];
 
-    while (i < point_count) {
-        sp28.x = p_r26->x0;
-        sp28.y = p_r26->x4;
+    while (i < vtx_count) {
+        sp28.x = v_r26->x0;
+        sp28.y = v_r26->x4;
         sp28.z = 0.0F;
         PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-        p_r26->pos.x = sp28.x;
-        p_r26->pos.y = sp28.y;
-        if (mpLib_804D64CC == 0 || p_r26->pos.x != p_r26->x10 ||
-            p_r26->pos.y != p_r26->x14 || (++var_r25 <= 1))
+        v_r26->pos.x = sp28.x;
+        v_r26->pos.y = sp28.y;
+        if (mpLib_804D64CC == 0 || v_r26->pos.x != v_r26->x10 ||
+            v_r26->pos.y != v_r26->x14 || (++var_r25 <= 1))
         {
             i += 1;
-            p_r26 += 1;
+            v_r26 += 1;
         } else {
             goto after1;
         }
@@ -3876,16 +3872,15 @@ after1:
     if (!(mp_info->flags & (0x40000 | 0x800)) && (mp_info->flags & 0x10000)) {
         var_r6 = true;
     }
-    // cd_r5 = mp_info->coll_data;
-    mpIsland_8005B334(x, mp_info->coll_data->point_start,
-                      mp_info->coll_data->point_count, var_r6);
+    mpIsland_8005B334(x, mp_info->coll_data->vtx_start,
+                      mp_info->coll_data->vtx_count, var_r6);
 }
 
 void mpLib_800565DC(int index)
 {
     CollJoint* temp_r5 = &groundCollJoint[index];
-    CollVtx* cur = &groundCollVtx[temp_r5->coll_data->point_start];
-    int temp_r4_2 = temp_r5->coll_data->point_count;
+    CollVtx* cur = &groundCollVtx[temp_r5->coll_data->vtx_start];
+    int temp_r4_2 = temp_r5->coll_data->vtx_count;
 
     int i;
     for (i = 0; i < temp_r4_2; i++) {
@@ -3913,8 +3908,8 @@ void mpLib_8005667C(int index)
     if (!(temp_r7->flags & 0x40800) && (temp_r7->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(index, temp_r7->coll_data->point_start,
-                      temp_r7->coll_data->point_count, var_r6);
+    mpIsland_8005B334(index, temp_r7->coll_data->vtx_start,
+                      temp_r7->coll_data->vtx_count, var_r6);
 }
 
 void mpLib_800566D8(int index, f32* arg1, f32* arg2)
@@ -3934,19 +3929,19 @@ void mpLib_800566F8(int index, float arg1, float arg2)
 void mpLib_80056710(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
 {
     CollLine* temp_r5 = &groundCollLine[index];
-    mpLib_800566F8(temp_r5->x0->p0_idx, arg8, arg9);
-    mpLib_800566F8(temp_r5->x0->p1_idx, argA, argB);
+    mpLib_800566F8(temp_r5->x0->v0_idx, arg8, arg9);
+    mpLib_800566F8(temp_r5->x0->v1_idx, argA, argB);
 }
 
 void mpLib_80056758(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
 {
     CollLine* temp_r5 = &groundCollLine[index];
 
-    CollVtx* temp_r3 = &groundCollVtx[temp_r5->x0->p0_idx];
+    CollVtx* temp_r3 = &groundCollVtx[temp_r5->x0->v0_idx];
     temp_r3->pos.x = temp_r3->x0 + arg8;
     temp_r3->pos.y = temp_r3->x4 + arg9;
 
-    temp_r3 = &groundCollVtx[temp_r5->x0->p1_idx];
+    temp_r3 = &groundCollVtx[temp_r5->x0->v1_idx];
     temp_r3->pos.x = temp_r3->x0 + argA;
     temp_r3->pos.y = temp_r3->x4 + argB;
 }
@@ -3958,8 +3953,8 @@ bool mpGetSpeed(int wall_id, Vec3* ecb_side_vtx, Vec3* speed)
     f32 spC;
     f32 sp8;
     mpLib_Line* line_r6;
-    CollVtx* p0_r5;
-    CollVtx* p0_r6;
+    CollVtx* v0_r5;
+    CollVtx* v1_r6;
     bool var_r0;
 
     if (!mpLib_80054ED8(wall_id)) {
@@ -3969,11 +3964,11 @@ bool mpGetSpeed(int wall_id, Vec3* ecb_side_vtx, Vec3* speed)
     line_r6 = groundCollLine[wall_id].x0;
     sp8 = ecb_side_vtx->x;
     spC = ecb_side_vtx->y;
-    p0_r5 = &groundCollVtx[line_r6->p0_idx];
-    p0_r6 = &groundCollVtx[line_r6->p1_idx];
-    mpLib_8004DC90(&sp20, &sp1C, p0_r5->x0, p0_r6->x0, p0_r5->x10, p0_r5->x14,
-                   p0_r6->x10, p0_r6->x14, p0_r5->pos.x, p0_r5->pos.y,
-                   p0_r6->pos.x, p0_r6->pos.y);
+    v0_r5 = &groundCollVtx[line_r6->v0_idx];
+    v1_r6 = &groundCollVtx[line_r6->v1_idx];
+    mpLib_8004DC90(&sp20, &sp1C, v0_r5->x0, v1_r6->x0, v0_r5->x10, v0_r5->x14,
+                   v1_r6->x10, v1_r6->x14, v0_r5->pos.x, v0_r5->pos.y,
+                   v1_r6->pos.x, v1_r6->pos.y);
     speed->x = sp20 - ecb_side_vtx->x;
     speed->y = sp1C - ecb_side_vtx->y;
     speed->z = 0.0F;
@@ -4778,17 +4773,17 @@ int mpLib_80056B6C(int line_id)
 {
     if (line_id != -1) {
         int i;
-        int p0_idx;
+        int v0_idx;
         CollJoint* joint;
         int count;
         LINEID_CHECK(5459, line_id);
-        p0_idx = groundCollLine[line_id].x0->p0_idx;
+        v0_idx = groundCollLine[line_id].x0->v0_idx;
         count = mpLib_804D64B4->x28;
         joint = groundCollJoint;
         for (i = 0; i < count; i++) {
-            if (joint->coll_data->point_start <= p0_idx &&
-                p0_idx < joint->coll_data->point_start +
-                             joint->coll_data->point_count)
+            if (joint->coll_data->vtx_start <= v0_idx &&
+                v0_idx <
+                    joint->coll_data->vtx_start + joint->coll_data->vtx_count)
             {
                 return joint - groundCollJoint;
             }
@@ -4931,8 +4926,8 @@ void mpLib_80057424(int idx)
 {
     CollJoint* joint = &groundCollJoint[idx];
     mpLib_CollData* coll_data = joint->coll_data;
-    u32 count = coll_data->point_count;
-    s16 start = coll_data->point_start;
+    u32 count = coll_data->vtx_count;
+    s16 start = coll_data->vtx_start;
     int new_var;
     CollVtx* vtx = &groundCollVtx[start];
     for (idx = 0; idx < (new_var = count); idx++) {
@@ -4949,8 +4944,8 @@ void mpLib_80057528(int index)
         CollLine* tmp = &groundCollLine[index];
         CollJoint* temp_r31 = &groundCollJoint[temp_r3];
         tmp->flags |= 0x10000;
-        mpIsland_8005B334(temp_r3, temp_r31->coll_data->point_start,
-                          temp_r31->coll_data->point_count,
+        mpIsland_8005B334(temp_r3, temp_r31->coll_data->vtx_start,
+                          temp_r31->coll_data->vtx_count,
                           !(temp_r31->flags & 0x800));
         temp_r31->xE = true;
     }
@@ -4963,8 +4958,8 @@ void mpLib_800575B0(int index)
         CollLine* tmp = &groundCollLine[index];
         CollJoint* temp_r31 = &groundCollJoint[temp_r3];
         tmp->flags &= ~0x10000;
-        mpIsland_8005B334(temp_r3, temp_r31->coll_data->point_start,
-                          temp_r31->coll_data->point_count,
+        mpIsland_8005B334(temp_r3, temp_r31->coll_data->vtx_start,
+                          temp_r31->coll_data->vtx_count,
                           !(temp_r31->flags & 0x800));
         temp_r31->xE = true;
     }
@@ -5033,7 +5028,7 @@ void mpLib_80057638(int joint_id)
 
     mpLib_80057424(joint_id);
     coll_data = joint->coll_data;
-    mpIsland_8005B334(joint_id, coll_data->point_start, coll_data->point_count,
+    mpIsland_8005B334(joint_id, coll_data->vtx_start, coll_data->vtx_count,
                       !(joint->flags & 0x800));
     joint->xE = true;
 }
@@ -5342,7 +5337,7 @@ void mpLib_80057BC0(int joint_id)
         line_r6++;
     }
     coll_data = joint->coll_data;
-    mpIsland_8005B334(joint_id, coll_data->point_start, coll_data->point_count,
+    mpIsland_8005B334(joint_id, coll_data->vtx_start, coll_data->vtx_count,
                       false);
     joint->xE = true;
 }
@@ -5358,8 +5353,7 @@ void mpLib_80057FDC(int index)
         var_r6 = true;
     }
     temp_r5 = temp_r7->coll_data;
-    mpIsland_8005B334(index, temp_r5->point_start, temp_r5->point_count,
-                      var_r6);
+    mpIsland_8005B334(index, temp_r5->vtx_start, temp_r5->vtx_count, var_r6);
 }
 
 void mpLib_80058044(int index)
@@ -5373,8 +5367,7 @@ void mpLib_80058044(int index)
         var_r6 = true;
     }
     temp_r5 = temp_r7->coll_data;
-    mpIsland_8005B334(index, temp_r5->point_start, temp_r5->point_count,
-                      var_r6);
+    mpIsland_8005B334(index, temp_r5->vtx_start, temp_r5->vtx_count, var_r6);
 }
 
 void mpLib_800580AC(int index)
@@ -5505,9 +5498,9 @@ void mpLib_800581DC(int j0_idx, int j1_idx)
         }
     }
 
-    cd0 = j0_r9->coll_data;    /*  r3 */
-    start0 = cd0->point_start; /*  r4 */
-    count0 = cd0->point_count; /* r31 */
+    cd0 = j0_r9->coll_data;  /*  r3 */
+    start0 = cd0->vtx_start; /*  r4 */
+    count0 = cd0->vtx_count; /* r31 */
 
     v0_r29 = &groundCollVtx[start0];
     for (i = 0; i < count0; i++) {
@@ -5516,8 +5509,8 @@ void mpLib_800581DC(int j0_idx, int j1_idx)
         int var_r26; /* r26 */
         int idx;
         int start1_r4;
-        start1_r4 = j1_r10->coll_data->point_start;
-        count1 = j1_r10->coll_data->point_count;
+        start1_r4 = j1_r10->coll_data->vtx_start;
+        count1 = j1_r10->coll_data->vtx_count;
         idx = start1_r4;
         var_r26 = start1_r4;
         for (v = 0; v < count1; v++, idx++, var_r26++) {
@@ -5542,7 +5535,7 @@ void mpLib_800581DC(int j0_idx, int j1_idx)
                     s16 start_r20;
                     s16 count_r17;
                     CollLine* iter_r3;
-                    if (start0 + i == lines[i_r23].x0->p0_idx) {
+                    if (start0 + i == lines[i_r23].x0->v0_idx) {
                         for (j = 0; j < 5; j++) {
                             int k;
                             start_r20 =
@@ -5551,7 +5544,7 @@ void mpLib_800581DC(int j0_idx, int j1_idx)
                                 ((struct pair*) j1_r10->coll_data)[j].count;
                             iter_r3 = &groundCollLine[start_r20];
                             for (k = 0; k < count_r17; k++) {
-                                if (var_r26 == iter_r3->x0->p1_idx) {
+                                if (var_r26 == iter_r3->x0->v1_idx) {
                                     lines[i_r23].x0->x8_line_id =
                                         start_r20 + k;
                                     iter_r3->x0->xA_line_id = start_r24;
@@ -5559,7 +5552,7 @@ void mpLib_800581DC(int j0_idx, int j1_idx)
                                 iter_r3++;
                             }
                         }
-                    } else if (start0 + i == lines[i_r23].x0->p1_idx) {
+                    } else if (start0 + i == lines[i_r23].x0->v1_idx) {
                         for (j = 0; j < 5; j++) {
                             int k;
                             count_r17 =
@@ -5568,7 +5561,7 @@ void mpLib_800581DC(int j0_idx, int j1_idx)
                                 ((struct pair*) j1_r10->coll_data)[j].start;
                             iter_r3 = &groundCollLine[start_r20];
                             for (k = 0; k < count_r17; k++) {
-                                if (var_r26 == iter_r3->x0->p0_idx) {
+                                if (var_r26 == iter_r3->x0->v0_idx) {
                                     lines[i_r23].x0->xA_line_id =
                                         start_r20 + k;
                                     iter_r3->x0->x8_line_id = start_r24;
@@ -5649,8 +5642,8 @@ void mpLib_80058614(void)
             count_r29 = coll_data->dynamic_count;
 
             for (j = 0; j < count_r30; j++, line_r31++) {
-                CollVtx* p0;
-                CollVtx* p1;
+                CollVtx* v0;
+                CollVtx* v1;
                 float x0;
                 float y0;
                 float x1;
@@ -5663,12 +5656,12 @@ void mpLib_80058614(void)
                     continue;
                 }
 
-                p0 = &groundCollVtx[line_r31->x0->p0_idx];
-                p1 = &groundCollVtx[line_r31->x0->p1_idx];
-                x0 = p0->pos.x;
-                y0 = p0->pos.y;
-                x1 = p1->pos.x;
-                y1 = p1->pos.y;
+                v0 = &groundCollVtx[line_r31->x0->v0_idx];
+                v1 = &groundCollVtx[line_r31->x0->v1_idx];
+                x0 = v0->pos.x;
+                y0 = v0->pos.y;
+                x1 = v1->pos.x;
+                y1 = v1->pos.y;
 
                 if (mpLib_80458868[1].top < y0) {
                     mpLib_80458868[1].top = y0;
@@ -5780,47 +5773,47 @@ void mpLib_80058970(float x1, float y1, float x2, float y2)
     mpLib_800588D0(left, bottom, right, top);
 }
 
-void mpLib_800589D0(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
-                    f32 arg6, f32 arg7)
+void mpLib_800589D0(float x0, float y0, float x1, float y1, float x2, float y2,
+                    float x3, float y3)
 {
-    f32 right;
-    f32 left;
-    f32 bottom;
-    f32 top;
+    float right;
+    float left;
+    float bottom;
+    float top;
 
-    left = arg2;
-    bottom = arg3;
-    if (arg0 > left) {
-        right = arg0;
+    left = x1;
+    bottom = y1;
+    if (x0 > left) {
+        right = x0;
     } else {
         right = left;
-        left = arg0;
+        left = x0;
     }
-    if (arg1 > bottom) {
-        top = arg1;
+    if (y0 > bottom) {
+        top = y0;
     } else {
         top = bottom;
-        bottom = arg1;
+        bottom = y0;
     }
-    if (right < arg4) {
-        right = arg4;
-    } else if (left > arg4) {
-        left = arg4;
+    if (right < x2) {
+        right = x2;
+    } else if (left > x2) {
+        left = x2;
     }
-    if (top < arg5) {
-        top = arg5;
-    } else if (bottom > arg5) {
-        bottom = arg5;
+    if (top < y2) {
+        top = y2;
+    } else if (bottom > y2) {
+        bottom = y2;
     }
-    if (right < arg6) {
-        right = arg6;
-    } else if (left > arg6) {
-        left = arg6;
+    if (right < x3) {
+        right = x3;
+    } else if (left > x3) {
+        left = x3;
     }
-    if (top < arg7) {
-        top = arg7;
-    } else if (bottom > arg7) {
-        bottom = arg7;
+    if (top < y3) {
+        top = y3;
+    } else if (bottom > y3) {
+        bottom = y3;
     }
     mpLib_800588D0(left, bottom, right, top);
 }
@@ -6161,17 +6154,17 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
         if (line_r31->flags & 0x10000 && !(line_r31->flags & 0x40000)) {
             if (value == (line_r31->x0->flags & flag)) {
                 PAD_STACK(8);
-                GXPosition3f32(groundCollVtx[line_r31->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r31->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r31->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r31->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r31->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r31->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r31->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r31->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r31->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r31->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r31->x0->v0_idx].pos.y,
                                -25.0F);
             }
         }
@@ -6193,8 +6186,8 @@ void mpLib_80059554(void)
 {
     CollLine* line_r7;
     CollLine* line_r4;
-    CollVtx* p0_r6;
-    CollVtx* p1_r4;
+    CollVtx* v0_r6;
+    CollVtx* v1_r4;
     s16 count_r30;
     int total_r29;
     mp_CollData* coll_data_r31;
@@ -6224,17 +6217,17 @@ void mpLib_80059554(void)
 
         for (i = 0; i < count_r30; i++) {
             if (line_r7->flags & 0x10000 && !(line_r7->flags & 0x40000)) {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;
@@ -6260,17 +6253,17 @@ void mpLib_80059554(void)
 
         for (i = 0; i < count_r30; i++) {
             if (line_r7->flags & 0x10000 && !(line_r7->flags & 0x40000)) {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;
@@ -6296,17 +6289,17 @@ void mpLib_80059554(void)
 
         for (i = 0; i < count_r30; i++) {
             if (line_r7->flags & 0x10000 && !(line_r7->flags & 0x40000)) {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;
@@ -6332,17 +6325,17 @@ void mpLib_80059554(void)
 
         for (i = 0; i < count_r30; i++) {
             if (line_r7->flags & 0x10000 && !(line_r7->flags & 0x40000)) {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;
@@ -6376,17 +6369,17 @@ void mpLib_80059554(void)
             if (line_r7->flags & 0x10000 && line_r7->flags & LINE_FLAG_FLOOR &&
                 !(line_r7->flags & 0x40000))
             {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;
@@ -6415,17 +6408,17 @@ void mpLib_80059554(void)
                 line_r7->flags & LINE_FLAG_CEILING &&
                 !(line_r7->flags & 0x40000))
             {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;
@@ -6454,17 +6447,17 @@ void mpLib_80059554(void)
                 line_r7->flags & LINE_FLAG_RIGHT_WALL &&
                 !(line_r7->flags & 0x40000))
             {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;
@@ -6492,17 +6485,17 @@ void mpLib_80059554(void)
                 line_r7->flags & LINE_FLAG_LEFT_WALL &&
                 !(line_r7->flags & 0x40000))
             {
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p1_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p1_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v1_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v1_idx].pos.y,
                                -25.0F);
-                GXPosition3f32(groundCollVtx[line_r7->x0->p0_idx].pos.x,
-                               groundCollVtx[line_r7->x0->p0_idx].pos.y,
+                GXPosition3f32(groundCollVtx[line_r7->x0->v0_idx].pos.x,
+                               groundCollVtx[line_r7->x0->v0_idx].pos.y,
                                -25.0F);
             }
             line_r7++;

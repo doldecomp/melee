@@ -149,8 +149,8 @@
 /* 0588D0 */ void mpLib_800588D0(float left, float bottom, float right,
                                  float top);
 /* 058970 */ void mpLib_80058970(float x1, float y1, float x2, float y2);
-/* 0589D0 */ void mpLib_800589D0(f32 arg8, f32 arg9, f32 argA, f32 argB,
-                                 f32 argC, f32 argD, f32 argE, f32 argF);
+/* 0589D0 */ void mpLib_800589D0(float x0, float y0, float x1, float y1,
+                                 float x2, float y2, float x3, float y3);
 /* 058AA0 */ void mpLib_80058AA0(void);
 /* 058ACC */ void mpLib_SetupDraw(GXColor);
 /* 058B5C */ void mpLib_DrawEcbs(CollData*);

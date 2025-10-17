@@ -47,8 +47,8 @@ struct mp_UnkStruct0 {
 };
 
 struct mpLib_Line {
-    /* +0 */ u16 p0_idx;
-    /* +2 */ u16 p1_idx;
+    /* +0 */ u16 v0_idx;
+    /* +2 */ u16 v1_idx;
     /* +4 */ s16 x4_line_id;
     /* +6 */ s16 x6_line_id;
     /* +8 */ s16 x8_line_id;
@@ -103,8 +103,8 @@ struct mpLib_CollData {
     /* +18 */ float x18;
     /* +1C */ float x1C;
     /* +20 */ float x20;
-    /* +24 */ s16 point_start;
-    /* +26 */ s16 point_count;
+    /* +24 */ s16 vtx_start;
+    /* +26 */ s16 vtx_count;
 };
 
 struct CollJoint {

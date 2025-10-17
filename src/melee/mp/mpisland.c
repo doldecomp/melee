@@ -338,9 +338,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
     }
 
     for (i = 0; i < temp_r29 && var_r28 && var_r27; var_r31++) {
-        if (var_r28 && var_r30->x0->p0_idx == arg0->x4) {
+        if (var_r28 && var_r30->x0->v0_idx == arg0->x4) {
             mpLib_80054158(var_r31, arg1);
-        } else if (var_r27 && var_r30->x0->p1_idx == arg0->x6) {
+        } else if (var_r27 && var_r30->x0->v1_idx == arg0->x6) {
             mpLib_80053FF4(var_r31, arg2);
         }
         i++;
