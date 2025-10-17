@@ -348,55 +348,57 @@ void mpLib_8004DC90(float* x_out, float* y_out, float x0, float y0, float x1,
     }
 }
 
-int mpLib_8004DD90(int line_id, Vec3* pos_out, float* y_out, u32* flags_out,
+int mpLib_8004DD90(int line_id, Vec3* vec, float* y_out, u32* flags_out,
                    Vec3* normal_out)
 {
-    float x0_f0;
-    float x1_f1;
-    float y0_f6;
-    float y1_f7;
-    float x_f9;
-    s32 r31 = 0;
-    s32 r27 = line_id;
-    LINEID_CHECK(774, r27);
+    int dir = 0;
+    float x0, y0;
+    float x1, y1;
+    float x, y;
 
-    x_f9 = pos_out->x;
+    LINEID_CHECK(774, line_id);
+
     while (true) {
-        CollLine* line_r4 = &groundCollLine[r27];
-        x0_f0 = groundCollVtx[line_r4->x0->v0_idx].pos.x;
-        x1_f1 = groundCollVtx[line_r4->x0->v1_idx].pos.x;
-        if (pos_out->x < x0_f0) {
-            if (r31 != 1) {
-                int r9 = mpLib_8004DC04(r27);
-                if (r9 == -1 || !(groundCollLine[r9].flags & LINE_FLAG_FLOOR))
+        CollLine* line = &groundCollLine[line_id];
+
+        x0 = groundCollVtx[line->x0->v0_idx].pos.x;
+        x1 = groundCollVtx[line->x0->v1_idx].pos.x;
+        x = vec->x;
+        y = vec->y;
+        if (x < x0) {
+            if (dir != 1) {
+                int new_id = mpLib_8004DC04(line_id);
+                if (new_id == -1 ||
+                    !(groundCollLine[new_id].flags & LINE_FLAG_FLOOR))
                 {
-                    if ((pos_out->x - x0_f0) < -0.1) {
+                    if (x - x0 < -0.1) {
                         return -1;
                     }
-                    x_f9 = x0_f0;
+                    x = x0;
                     break;
                 }
-                r27 = r9;
-                r31 = -1;
+                line_id = new_id;
+                dir = -1;
             } else {
-                x_f9 = x0_f0;
+                x = x0;
                 break;
             }
-        } else if (pos_out->x > x1_f1) {
-            if (r31 != -1) {
-                int r8 = mpLib_8004DB78(r27);
-                if (r8 == -1 || !(groundCollLine[r8].flags & LINE_FLAG_FLOOR))
+        } else if (x > x1) {
+            if (dir != -1) {
+                int new_id = mpLib_8004DB78(line_id);
+                if (new_id == -1 ||
+                    !(groundCollLine[new_id].flags & LINE_FLAG_FLOOR))
                 {
-                    if ((pos_out->x - x1_f1) > 0.1) {
+                    if (x - x1 > 0.1) {
                         return -1;
                     }
-                    x_f9 = x1_f1;
+                    x = x1;
                     break;
                 }
 
-                r27 = r8;
+                line_id = new_id;
             } else {
-                x_f9 = x1_f1;
+                x = x1;
                 break;
             }
         } else {
@@ -405,31 +407,29 @@ int mpLib_8004DD90(int line_id, Vec3* pos_out, float* y_out, u32* flags_out,
     }
 
     if (flags_out != NULL) {
-        *flags_out = groundCollLine[r27].x0->flags;
+        *flags_out = groundCollLine[line_id].x0->flags;
     }
 
-    y0_f6 = groundCollVtx[groundCollLine[r27].x0->v0_idx].pos.y;
-    y1_f7 = groundCollVtx[groundCollLine[r27].x0->v1_idx].pos.y;
+    y0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.y;
+    y1 = groundCollVtx[groundCollLine[line_id].x0->v1_idx].pos.y;
     if (y_out != NULL) {
-        *y_out = (0.0001 + ((y0_f6 + (((y1_f7 - y0_f6) * (x_f9 - x0_f0)) /
-                                      (x1_f1 - x0_f0))) -
-                            pos_out->y));
+        *y_out = (y1 - y0) * (x - x0) / (x1 - x0) + y0 - y + 0.0001;
     }
 
     if (normal_out != NULL) {
-        normal_out->x = -(y1_f7 - y0_f6);
-        normal_out->y = x1_f1 - x0_f0;
+        normal_out->x = -(y1 - y0);
+        normal_out->y = x1 - x0;
         normal_out->z = 0.0F;
         PSVECNormalize(normal_out, normal_out);
     }
 
-    return r27;
+    return line_id;
 }
 
 int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
                    Vec3* normal_out)
 {
-    int dir_r31 = 0;
+    int dir = 0;
     float x0, y0;
     float x1, y1;
     float x;
@@ -442,7 +442,7 @@ int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
         x0 = groundCollVtx[line_r4->x0->v0_idx].pos.x;
         x1 = groundCollVtx[line_r4->x0->v1_idx].pos.x;
         if (vec->x < x1) {
-            if (dir_r31 != 1) {
+            if (dir != 1) {
                 int new_id = mpLib_8004DB78(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_CEILING))
@@ -455,12 +455,12 @@ int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
                     break;
                 }
                 line_id = new_id;
-                dir_r31 = -1;
+                dir = -1;
                 continue;
             }
             x = x1;
         } else if (vec->x > x0) {
-            if (dir_r31 != -1) {
+            if (dir != -1) {
                 int new_id = mpLib_8004DC04(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_CEILING))
@@ -473,7 +473,7 @@ int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
                     break;
                 }
                 line_id = new_id;
-                dir_r31 = 1;
+                dir = 1;
                 continue;
             }
             x = x0;
@@ -489,7 +489,7 @@ int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
     y1 = groundCollVtx[groundCollLine[line_id].x0->v1_idx].pos.y;
 
     if (y_out != NULL) {
-        *y_out = y0 + ((y1 - y0) * (x - x0)) / (x1 - x0) - vec->y - 0.0001;
+        *y_out = (y1 - y0) * (x - x0) / (x1 - x0) + y0 - vec->y - 0.0001;
     }
 
     if (normal_out != NULL) {
@@ -505,15 +505,12 @@ int mpLib_8004E090(int line_id, Vec3* vec, float* y_out, u32* flags_out,
 int mpLib_8004E398(int line_id, Vec3* vec, float* x_out, u32* flags_out,
                    Vec3* normal_out)
 {
-    int dir_r31 = 0;
+    int dir = 0;
     float x0, y0;
     float x1, y1;
     float y;
 
-    if (line_id == -1 || line_id >= mpLib_804D64B4->line_count) {
-        HSD_ASSERTREPORT(1014, 0, "%s:%d:not found lineID=%d\n", __FILE__,
-                         1014, line_id);
-    }
+    LINEID_CHECK(1014, line_id);
 
     y = vec->y;
     while (true) {
@@ -521,7 +518,7 @@ int mpLib_8004E398(int line_id, Vec3* vec, float* x_out, u32* flags_out,
         y0 = groundCollVtx[line_r4->x0->v0_idx].pos.y;
         y1 = groundCollVtx[line_r4->x0->v1_idx].pos.y;
         if (vec->y < y0) {
-            if (dir_r31 != 1) {
+            if (dir != 1) {
                 int new_id = mpLib_8004DC04(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_LEFT_WALL))
@@ -533,11 +530,11 @@ int mpLib_8004E398(int line_id, Vec3* vec, float* x_out, u32* flags_out,
                     break;
                 }
                 line_id = new_id;
-                dir_r31 = -1;
+                dir = -1;
                 continue;
             }
         } else if (vec->y > y1) {
-            if (dir_r31 != -1) {
+            if (dir != -1) {
                 int new_id = mpLib_8004DB78(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_LEFT_WALL))
@@ -549,7 +546,7 @@ int mpLib_8004E398(int line_id, Vec3* vec, float* x_out, u32* flags_out,
                     break;
                 }
                 line_id = new_id;
-                dir_r31 = 1;
+                dir = 1;
                 continue;
             }
         }
@@ -573,21 +570,19 @@ int mpLib_8004E398(int line_id, Vec3* vec, float* x_out, u32* flags_out,
         normal_out->z = 0.0F;
         PSVECNormalize(normal_out, normal_out);
     }
+
     return line_id;
 }
 
 int mpLib_8004E684(int line_id, Vec3* vec, float* x_out, u32* flags_out,
                    Vec3* normal_out)
 {
-    int dir_r31 = 0;
+    int dir = 0;
     float x0, y0;
     float x1, y1;
     float y;
 
-    if ((line_id == -1) || (line_id >= mpLib_804D64B4->line_count)) {
-        HSD_ASSERTREPORT(1134, 0, "%s:%d:not found lineID=%d\n", __FILE__,
-                         1134, line_id);
-    }
+    LINEID_CHECK(1134, line_id);
 
     y = vec->y;
     while (true) {
@@ -595,7 +590,7 @@ int mpLib_8004E684(int line_id, Vec3* vec, float* x_out, u32* flags_out,
         y0 = groundCollVtx[line_r4->x0->v0_idx].pos.y;
         y1 = groundCollVtx[line_r4->x0->v1_idx].pos.y;
         if (vec->y > y0) {
-            if (dir_r31 != -1) {
+            if (dir != -1) {
                 int new_id_r8 = mpLib_8004DC04(line_id);
                 if (new_id_r8 == -1 ||
                     !(groundCollLine[new_id_r8].flags & LINE_FLAG_RIGHT_WALL))
@@ -607,12 +602,12 @@ int mpLib_8004E684(int line_id, Vec3* vec, float* x_out, u32* flags_out,
                     break;
                 }
                 line_id = new_id_r8;
-                dir_r31 = 1;
+                dir = 1;
                 continue;
             }
             y = y0;
         } else if (vec->y < y1) {
-            if (dir_r31 != 1) {
+            if (dir != 1) {
                 int new_id_r9 = mpLib_8004DB78(line_id);
                 if (new_id_r9 == -1 ||
                     !(groundCollLine[new_id_r9].flags & LINE_FLAG_RIGHT_WALL))
@@ -624,7 +619,7 @@ int mpLib_8004E684(int line_id, Vec3* vec, float* x_out, u32* flags_out,
                     break;
                 }
                 line_id = new_id_r9;
-                dir_r31 = -1;
+                dir = -1;
                 continue;
             }
             y = y1;
@@ -649,6 +644,7 @@ int mpLib_8004E684(int line_id, Vec3* vec, float* x_out, u32* flags_out,
         normal_out->z = 0.0F;
         PSVECNormalize(normal_out, normal_out);
     }
+
     return line_id;
 }
 
