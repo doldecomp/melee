@@ -5492,22 +5492,20 @@ bool mpLib_800588C8(void)
     return mpLib_804D64B0;
 }
 
-void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top)
+void mpLib_800588D0(float left, float bottom, float right, float top)
 {
     CollJoint* curr = mpLib_804D64C4;
 
     while (curr != NULL) {
-        s32 flags = curr->flags;
-
-        if ((flags & 0x10000) && !(flags & 0x40000)) {
-            if (flags & 0x400) {
-                curr->flags = flags & 0xFFFFEFFF;
-            } else if ((left > curr->x18) || (right < curr->x10) ||
-                       (bottom > curr->x1C) || (top < curr->x14))
+        if (curr->flags & 0x10000 && !(curr->flags & 0x40000)) {
+            if (curr->flags & 0x400) {
+                curr->flags &= ~0x1000;
+            } else if (left > curr->x18 || right < curr->x10 ||
+                       bottom > curr->x1C || top < curr->x14)
             {
                 curr->flags |= 0x1000;
             } else {
-                curr->flags = flags & 0xFFFFEFFF;
+                curr->flags &= ~0x1000;
             }
         } else {
             curr->flags |= 0x1000;
