@@ -133,7 +133,7 @@ not_squatwait:
     }
     if (fp->x34_scale.y != 1) {
         fp->dmg.kb_applied = ftCo_CalcYScaledKnockback(
-            fp->dmg.kb_applied, fp->x34_scale.y, *Fighter_804D6524);
+            fp->dmg.kb_applied, fp->x34_scale.y, Fighter_804D6524->x0);
     }
     {
         float armor =
