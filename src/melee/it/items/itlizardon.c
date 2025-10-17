@@ -28,7 +28,17 @@ s32 it_802CB960(Item_GObj* gobj)
 
 /// #itLizardon_UnkMotion1_Anim
 
-/// #itLizardon_UnkMotion1_Phys
+void itLizardon_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    ItemAttr* ip_attr;
+    Item* ip = GET_ITEM(gobj);
+
+    if ((enum GroundOrAir) ip->ground_or_air == GA_Air) {
+        ip_attr = ip->xCC_item_attr;
+        it_80272860(gobj, ip_attr->x10_fall_speed,
+                    ip_attr->x14_fall_speed_max);
+    }
+}
 
 /// #itLizardon_UnkMotion1_Coll
 

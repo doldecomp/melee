@@ -516,7 +516,14 @@ void ftCo_ItemScopeRapid_Coll(Fighter_GObj* gobj)
 
 /// #fn_800D82EC
 
-/// #fn_800D8378
+void fn_800D8378(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((u32) fp->item_gobj != NULL) {
+        ftCommon_8007E7E4(gobj, 1);
+    }
+}
 
 void ftCo_ItemScopeFire_Anim(Fighter_GObj* gobj)
 {
@@ -593,7 +600,10 @@ void ftCo_ItemScopeAirEnd_Phys(Fighter_GObj* gobj)
     ftCo_800CDE74(gobj);
 }
 
-/// #ftCo_ItemScopeEnd_Coll
+void ftCo_ItemScopeEnd_Coll(Fighter_GObj* gobj)
+{
+    ft_800841B8(gobj, fn_800D8838);
+}
 
 /// #ftCo_ItemScopeAirEnd_Coll
 
@@ -844,8 +854,11 @@ static bool fn_800DAD18(Fighter_GObj* gobj)
     PAD_STACK(0x8);
 
     temp_r31 = GET_FIGHTER(gobj);
-    lb_8000B1CC(GET_FIGHTER(temp_r31->victim_gobj)->mv.co.capturedamage.x18, NULL, &sp20);
-    lb_8000B1CC(temp_r31->parts[ftParts_GetBoneIndex(temp_r31, FtPart_XRotN)].joint, NULL, &sp2C);
+    lb_8000B1CC(GET_FIGHTER(temp_r31->victim_gobj)->mv.co.capturedamage.x18,
+                NULL, &sp20);
+    lb_8000B1CC(
+        temp_r31->parts[ftParts_GetBoneIndex(temp_r31, FtPart_XRotN)].joint,
+        NULL, &sp2C);
 
     tmp.x = sp20.x - sp2C.x;
     tmp.y = sp20.y - sp2C.y;
@@ -900,7 +913,8 @@ static void fn_800DB5D8(Fighter_GObj* gobj)
         sp18.is_grabbable = false;
         sp18.a_offset.x = sp18.a_offset.y = sp18.a_offset.z = 0.0F;
         sp18.b_offset.x = sp18.b_offset.y = sp18.b_offset.z = 0.0F;
-        sp18.scale = ftYs_Init_8012BAC0(victim_fp) / ftCommon_GetModelScale(fp);
+        sp18.scale =
+            ftYs_Init_8012BAC0(victim_fp) / ftCommon_GetModelScale(fp);
         ftColl_HurtboxInit(fp, fp->hurt_capsules, &sp18);
     }
     ftCommon_8007E2F4(fp, 0x1FF);
@@ -967,7 +981,8 @@ void ftCo_CaptureJump_Coll(Fighter_GObj* gobj)
 void ftCo_800DC284(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, 0, 0.0F, 1.0F,
+                              0.0F, NULL);
     fp->mv.co.capturedamage.x4 = 0.0F;
     fn_800DB5D8(gobj);
 }
@@ -1011,7 +1026,8 @@ void fn_800DC384(Fighter_GObj* gobj)
 void ftCo_800DC3A4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageLw, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageLw, 0, 0.0F, 1.0F,
+                              0.0F, NULL);
     fp->mv.co.capturedamage.x4 = 0.0F;
     fn_800DB5D8(gobj);
 }
@@ -1019,7 +1035,8 @@ void ftCo_800DC3A4(Fighter_GObj* gobj)
 void fn_800DC404(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageLw, Ft_MF_UpdateCmd, fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageLw, Ft_MF_UpdateCmd,
+                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
     fn_800DB5D8(gobj);
     fn_800DAA40(gobj, fp->victim_gobj);
 }
@@ -1042,7 +1059,9 @@ static inline void ftCo_CaptureDamageLw_Phys_inline(Fighter_GObj* gobj)
 
     if (fn_800DAD18(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, Ft_MF_UpdateCmd, fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi,
+                                  Ft_MF_UpdateCmd, fp->cur_anim_frame, 1.0F,
+                                  0.0F, NULL);
         fn_800DB5D8(gobj);
         fn_800DAA40(gobj, fp->victim_gobj);
 
@@ -1072,7 +1091,8 @@ void ftCo_CaptureDamageLw_Coll(Fighter_GObj* gobj)
 static inline void fn_800DC624_inline(HSD_GObj* gobj)
 {
     Fighter* temp_r31 = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, Ft_MF_UpdateCmd, temp_r31->cur_anim_frame, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, Ft_MF_UpdateCmd,
+                              temp_r31->cur_anim_frame, 1.0F, 0.0F, NULL);
     fn_800DB5D8(gobj);
     fn_800DAA40(gobj, temp_r31->victim_gobj);
     if (!GET_FIGHTER(gobj)->x2226_b2) {
