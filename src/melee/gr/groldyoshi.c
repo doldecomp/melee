@@ -4,6 +4,7 @@
 
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
 
@@ -58,7 +59,11 @@ bool grOldYoshi_8020EA5C(Ground_GObj* arg)
     return false;
 }
 
-/// #grOldYoshi_8020EA64
+void grOldYoshi_8020EA64(Ground_GObj* arg0)
+{
+    Ground_801C2FE0(arg0);
+    lb_800115F4();
+}
 
 void grOldYoshi_8020EA88(Ground_GObj* arg) {}
 

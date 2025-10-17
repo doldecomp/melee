@@ -923,6 +923,9 @@ void ftPp_SpecialAirLw_Phys(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialLw_Coll
 
-/// #ftPp_SpecialAirLw_Coll
+void ftPp_SpecialAirLw_Coll(Fighter_GObj* gobj)
+{
+    ft_80082C74(gobj, fn_80122B54);
+}
 
 /// #fn_80122D2C
