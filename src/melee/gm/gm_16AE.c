@@ -2200,9 +2200,9 @@ void gm_8016F088(StartMeleeData* arg0)
     }
 }
 
-void gm_8016F120(int arg0)
+int gm_8016F120(int arg0)
 {
-    gmMainLib_8015DADC(arg0);
+    return gmMainLib_8015DADC(arg0);
 }
 
 void fn_8016F140(int arg0)

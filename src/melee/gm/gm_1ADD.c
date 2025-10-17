@@ -87,8 +87,8 @@ bool gm_801ADE1C(int arg0, int arg1, f32 arg2, f32 arg3)
         text = next->unk20;
         text->x34.x = 0.079F;
         text->x34.y = 0.079F;
-        next->unk20->x4A = 0;
-        next->unk20->x48 = 0;
+        next->unk20->default_alignment = 0;
+        next->unk20->default_fitting = 0;
         HSD_SisLib_803A6368(next->unk20, next->unk10);
         break;
     }
@@ -137,8 +137,8 @@ int gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
                 temp_r3_4 = temp_r3->unk24;
                 temp_r3_4->x34.x = 0.1F;
                 temp_r3_4->x34.y = 0.1F;
-                temp_r3->unk24->x4A = 1;
-                temp_r3->unk24->x48 = 0;
+                temp_r3->unk24->default_alignment = 1;
+                temp_r3->unk24->default_fitting = 0;
                 HSD_SisLib_803A6368(temp_r3->unk24, temp_r3->unkC);
                 continue;
             }
@@ -164,8 +164,8 @@ int gm_801AE050(int arg0, int arg1, int arg2, float arg3, float arg4)
                 temp_r3_7 = temp_r3->unk24;
                 temp_r3_7->x34.x = 0.1F;
                 temp_r3_7->x34.y = 0.1F;
-                temp_r3->unk24->x4A = 1;
-                temp_r3->unk24->x48 = 0;
+                temp_r3->unk24->default_alignment = 1;
+                temp_r3->unk24->default_fitting = 0;
                 HSD_SisLib_803A6368(temp_r3->unk24, temp_r3->unkC);
                 break;
             }
@@ -217,9 +217,9 @@ void gm_801AE640(int arg0, int arg1)
                     temp_r6->child->child->u.dobj->mobj->mat->diffuse.b = 0x33;
                 }
                 if (var_r30->unk24 != NULL) {
-                    var_r30->unk24->x30.x = 0xFF;
-                    var_r30->unk24->x30.y = 0xCC;
-                    var_r30->unk24->x30.z = 0x33;
+                    var_r30->unk24->text_color.r = 0xFF;
+                    var_r30->unk24->text_color.g = 0xCC;
+                    var_r30->unk24->text_color.b = 0x33;
                     HSD_SisLib_803A6368(var_r30->unk24, var_r30->unkC);
                 }
             }
@@ -247,9 +247,9 @@ void gm_801AE74C(int arg0, int arg1)
                     temp_r4->child->child->u.dobj->mobj->mat->diffuse.b = 0x66;
                 }
                 if (var_r30->unk24 != NULL) {
-                    var_r30->unk24->x30.x = 0x66;
-                    var_r30->unk24->x30.y = 0x66;
-                    var_r30->unk24->x30.z = 0x66;
+                    var_r30->unk24->text_color.r = 0x66;
+                    var_r30->unk24->text_color.g = 0x66;
+                    var_r30->unk24->text_color.b = 0x66;
                     HSD_SisLib_803A6368(var_r30->unk24, var_r30->unkC);
                 }
             }

@@ -65,9 +65,9 @@ void mnInfo_80251F04(HSD_GObj* gobj, u32 idx, u32 arg2)
     text = HSD_SisLib_803A5ACC(0, 0, -5.0f, (3.45f * idx) + -5.9f, 17.0f,
                                514.2857f, 142.85715f);
     data->right_column[idx] = text;
-    text->x24.x = 0.035f;
-    text->x24.y = 0.035f;
-    text->x48 = 1;
+    text->font_size.x = 0.035f;
+    text->font_size.y = 0.035f;
+    text->default_fitting = 1;
     un_802FE3F8((s32) arg2, 0x4BD, &sp16, NULL);
     HSD_SisLib_803A6368(text, (s32) (u16) sp16);
 }
