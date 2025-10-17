@@ -114,7 +114,7 @@
 /* 0566F8 */ void mpLib_800566F8(int index, float, float);
 /* 056710 */ void mpLib_80056710(int index, float, float, float, float);
 /* 056758 */ UNK_RET mpLib_80056758(int index, float, float, float, float);
-/* 0567C0 */ bool mpGetSpeed(int wall_id, Vec3* ecb_side_vtx, Vec3* speed);
+/* 0567C0 */ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed);
 /* 0569EC */ float mpLib_800569EC(u32);
 /* 056A1C */ int* mpLib_80056A1C(int, int*);
 /* 056A54 */ int mpLib_80056A54(int, int*);

@@ -3946,34 +3946,27 @@ void mpLib_80056758(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
     temp_r3->pos.y = temp_r3->x4 + argB;
 }
 
-bool mpGetSpeed(int wall_id, Vec3* ecb_side_vtx, Vec3* speed)
+bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
 {
-    f32 sp20;
-    f32 sp1C;
-    f32 spC;
-    f32 sp8;
-    mpLib_Line* line_r6;
+    float new_x;
+    float new_y;
     CollVtx* v0_r5;
     CollVtx* v1_r6;
-    bool var_r0;
 
-    if (!mpLib_80054ED8(wall_id)) {
+    if (!mpLib_80054ED8(line_id)) {
         return false;
     }
 
-    line_r6 = groundCollLine[wall_id].x0;
-    sp8 = ecb_side_vtx->x;
-    spC = ecb_side_vtx->y;
-    v0_r5 = &groundCollVtx[line_r6->v0_idx];
-    v1_r6 = &groundCollVtx[line_r6->v1_idx];
-    mpLib_8004DC90(&sp20, &sp1C, v0_r5->x0, v1_r6->x0, v0_r5->x10, v0_r5->x14,
-                   v1_r6->x10, v1_r6->x14, v0_r5->pos.x, v0_r5->pos.y,
-                   v1_r6->pos.x, v1_r6->pos.y);
-    speed->x = sp20 - ecb_side_vtx->x;
-    speed->y = sp1C - ecb_side_vtx->y;
+    v0_r5 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
+    v1_r6 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
+    mpLib_8004DC90(&new_x, &new_y, v0_r5->x10, v0_r5->x14, v1_r6->x10,
+                   v1_r6->x14, v0_r5->pos.x, v0_r5->pos.y, v1_r6->pos.x,
+                   v1_r6->pos.y, pos->x, pos->y);
+    speed->x = new_x - pos->x;
+    speed->y = new_y - pos->y;
     speed->z = 0.0F;
     if (g_debugLevel >= 3) {
-        if ((ABS(speed->x) > 10000.0F || ABS(speed->y) > 10000.0F)) {
+        if (ABS(speed->x) > 10000.0F || ABS(speed->y) > 10000.0F) {
             OSReport("%s:%d: Error: mpGetSpeed() x=%f y=%f\n", __FILE__, 5333,
                      speed->x, speed->y);
             HSD_ASSERT(5334,
