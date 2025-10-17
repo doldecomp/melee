@@ -2,6 +2,8 @@
 
 #include "ground.h"
 
+#include "gr/inlines.h"
+
 #include <platform.h>
 
 void grKinokoRoute_8020741C(bool arg) {}
@@ -30,7 +32,13 @@ bool grKinokoRoute_802078E8(Ground_GObj* arg)
 
 void grKinokoRoute_80207A94(Ground_GObj* arg) {}
 
-/// #grKinokoRoute_80207A98
+void grKinokoRoute_80207A98(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+}
 
 bool grKinokoRoute_80207ACC(Ground_GObj* arg)
 {
