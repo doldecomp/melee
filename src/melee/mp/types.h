@@ -23,13 +23,13 @@ struct mpIsland_80458E88_t {
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
-struct mpIsland_803B73E8_inner {
-    int idx;
+struct mpIsland_PaletteEntry {
+    mp_Terrain kind;
     GXColor color;
 };
 
-struct mpIsland_803B73E8_t {
-    mpIsland_803B73E8_inner x0[20];
+struct mpIsland_Palette {
+    mpIsland_PaletteEntry x0[20];
 };
 
 struct mp_UnkStruct0 {

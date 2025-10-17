@@ -6532,27 +6532,30 @@ void mpLib_80059E60(void)
     GXLoadPosMtxImm(sp104, 0U);
     if (Camera_80030B50()) {
         // terrain draw
-        mpIsland_803B73E8_t sp28;
-        mpIsland_803B73E8_inner* var_r30;
+        mpIsland_Palette sp28;
+        mpIsland_PaletteEntry* var_r30;
         PAD_STACK(0x8);
-        sp28 = mpIsland_803B73E8;
+        sp28 = mpIsland_TerrainPalette;
 
         var_r30 = sp28.x0;
 
-        while (var_r30->idx != -1) {
-            mpLib_DrawMatchingLines(var_r30->idx, 0xFF, var_r30->color);
+        while (var_r30->kind != -1) {
+            mpLib_DrawMatchingLines(var_r30->kind, 0xFF, var_r30->color);
             var_r30++;
         }
 
-        mpLib_DrawMatchingLines(0, 0xFF, mpLib_804D8100);
+        mpLib_DrawMatchingLines(mp_Terrain_Basic, 0xFF, mpLib_804D8100);
     } else if (Camera_80030B7C()) {
         // platform/ledge draw
         mpLib_DrawMatchingLines(LINE_FLAG_LEDGE, LINE_FLAG_LEDGE,
                                 mpLib_804D80F0);
         mpLib_DrawMatchingLines(LINE_FLAG_PLATFORM, LINE_FLAG_PLATFORM,
                                 mpLib_804D80F4);
-        mpLib_DrawMatchingLines(0x300, 0x300, mpLib_804D80F8);
-        mpLib_DrawMatchingLines(0x000, 0x300, mpLib_804D80FC);
+        mpLib_DrawMatchingLines(LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
+                                LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
+                                mpLib_804D80F8);
+        mpLib_DrawMatchingLines(0, LINE_FLAG_LEDGE | LINE_FLAG_PLATFORM,
+                                mpLib_804D80FC);
     } else {
         mpLib_80059554();
     }

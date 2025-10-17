@@ -7,8 +7,8 @@
 #include "gr/forward.h"
 #include "lb/forward.h"
 
-typedef struct mpIsland_803B73E8_inner mpIsland_803B73E8_inner;
-typedef struct mpIsland_803B73E8_t mpIsland_803B73E8_t;
+typedef struct mpIsland_PaletteEntry mpIsland_PaletteEntry;
+typedef struct mpIsland_Palette mpIsland_Palette;
 typedef struct mp_UnkStruct0 mp_UnkStruct0;
 typedef struct mpLib_Line mpLib_Line;
 typedef struct CollLine CollLine;
@@ -20,6 +20,29 @@ typedef struct CollVtx CollVtx;
 typedef struct mpLib_CollData mpLib_CollData;
 typedef struct CollJoint CollJoint;
 typedef struct mp_CollData mp_CollData;
+
+typedef enum mp_Terrain {
+    mp_Terrain_Basic,
+    mp_Terrain_Rock,
+    mp_Terrain_Grass,
+    mp_Terrain_Dirt,
+    mp_Terrain_Wood,
+    mp_Terrain_LightMetal,
+    mp_Terrain_HeavyMetal,
+    mp_Terrain_Paper,
+    mp_Terrain_Goop,
+    mp_Terrain_Birdo, // used in GrI2
+    mp_Terrain_Water,
+    mp_Terrain_Unk11, // used in GrTe
+    mp_Terrain_UFO,
+    mp_Terrain_Turtle,
+    mp_Terrain_Snow,
+    mp_Terrain_Ice,
+    mp_Terrain_GnW,
+    mp_Terrain_Unk17, // used in GrTe
+    mp_Terrain_Checkered,
+    mp_Terrain_Unk19,
+} mp_Terrain;
 
 typedef enum mpLib_GroundEnum {
     mpLib_GroundEnum_Unk0,
