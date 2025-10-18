@@ -167,12 +167,12 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             HSD_JObjSetTranslate(temp_r28, &var_r30->x2174);
         }
         if (mpLib_80054ED8(var_r31->coll_data.floor.index) != 0) {
-            temp_r3_2 = mpLib_8005199C(&sp4C, -1, -1);
+            temp_r3_2 = mpLib_8005199C_Floor(&sp4C, -1, -1);
             if (temp_r3_2 != -1) {
                 int tmp = var_r31->coll_data.floor.index;
                 if (mpLib_80054F68(temp_r3_2, tmp)) {
                     var_r30->coll_data.floor.index = temp_r3_2;
-                    mpLib_8004DD90(temp_r3_2, &sp4C, &sp48, 0, NULL);
+                    mpLib_8004DD90_Floor(temp_r3_2, &sp4C, &sp48, 0, NULL);
                     if (sp48 >= p_ftCommonData->x3BC) {
                         var_r30->cur_pos.x = sp4C.x;
                         var_r30->cur_pos.y = sp4C.y + sp48;

@@ -3,6 +3,7 @@
 #include "stdbool.h"
 
 #include "baselib/jobj.h"
+#include "mp/types.h"
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -258,7 +259,7 @@ void fn_800DD684(Fighter_GObj* gobj)
 
 bool fn_800DD6E4(Fighter_GObj* gobj, int arg)
 {
-    if (arg != -1 && (mpLib_80054CEC(arg) & 0x100) == 0) {
+    if (arg != -1 && (mpLineGetFlags(arg) & LINE_FLAG_PLATFORM) == 0) {
         return true;
     }
     return false;

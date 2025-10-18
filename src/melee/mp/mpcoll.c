@@ -976,16 +976,16 @@ void mpColl_800439FC(CollData* arg0)
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (mpLib_800501CC(&arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C,
-                       (arg0->ceiling.normal.y * var_f31) + temp_f3,
-                       -((arg0->ceiling.normal.x * var_f31) - temp_f4),
-                       temp_f3, temp_f4))
+    if (mpLib_800501CC_LeftWall(
+            &arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C,
+            (arg0->ceiling.normal.y * var_f31) + temp_f3,
+            -((arg0->ceiling.normal.x * var_f31) - temp_f4), temp_f3, temp_f4))
     {
         sp10.x = arg0->x140.x - var_f31;
         sp10.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (mpLib_8004E090(arg0->ceiling.index, (Vec3*) &sp10, &spC,
-                           (u32*) &arg0->ceiling.unk,
-                           &arg0->ceiling.normal) != -1)
+        if (mpLib_8004E090_Ceiling(arg0->ceiling.index, (Vec3*) &sp10, &spC,
+                                   (u32*) &arg0->ceiling.unk,
+                                   &arg0->ceiling.normal) != -1)
         {
             arg0->cur_pos.y += spC;
             arg0->cur_pos.x = sp10.x;
@@ -1007,15 +1007,16 @@ void mpColl_80043ADC(CollData* arg0)
     if (var_f31 < 0.0F) {
         var_f31 = -var_f31;
     }
-    if (mpLib_800509B8(&arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C,
-                       -((arg0->ceiling.normal.y * var_f31) - temp_f3),
-                       ((arg0->ceiling.normal.x * var_f31) + temp_f4), temp_f3,
-                       temp_f4))
+    if (mpLib_800509B8_RightWall(
+            &arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C,
+            -((arg0->ceiling.normal.y * var_f31) - temp_f3),
+            ((arg0->ceiling.normal.x * var_f31) + temp_f4), temp_f3, temp_f4))
     {
         sp10.x = arg0->x140.x + var_f31;
         sp10.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (mpLib_8004E090(arg0->ceiling.index, &sp10, &spC,
-                           &arg0->ceiling.unk, &arg0->ceiling.normal) != -1)
+        if (mpLib_8004E090_Ceiling(arg0->ceiling.index, &sp10, &spC,
+                                   &arg0->ceiling.unk,
+                                   &arg0->ceiling.normal) != -1)
         {
             arg0->cur_pos.y += spC;
             arg0->cur_pos.x = sp10.x;
@@ -1029,12 +1030,13 @@ bool mpColl_80043BBC(CollData* arg0, s32* arg1)
     s32 temp_r31;
     float new_var;
 
-    temp_r31 = mpLib_80052700(arg0->floor.index);
+    temp_r31 = mpLib_80052700_Floor(arg0->floor.index);
     new_var = arg0->cur_pos.x + arg0->xA4_ecbCurrCorrect.bottom.x;
-    if ((mpLib_800501CC(NULL, &sp10, NULL, NULL, arg0->x48, arg0->x4C, new_var,
-                        arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.bottom.y,
-                        arg0->cur_pos.x + arg0->xA4_ecbCurrCorrect.right.x,
-                        arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.right.y)) &&
+    if ((mpLib_800501CC_LeftWall(
+            NULL, &sp10, NULL, NULL, arg0->x48, arg0->x4C, new_var,
+            arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.bottom.y,
+            arg0->cur_pos.x + arg0->xA4_ecbCurrCorrect.right.x,
+            arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.right.y)) &&
         (sp10 != temp_r31))
     {
         *arg1 = sp10;
@@ -1065,11 +1067,11 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     sp20.x = arg0->cur_pos.x + temp_f1;
     temp_f1_2 = arg0->cur_pos.y;
     sp20.y = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
-    if (mpLib_8004E398(arg1, &sp20, 0, 0, 0) != -1) {
+    if (mpLib_8004E398_LeftWall(arg1, &sp20, 0, 0, 0) != -1) {
         float x = -(arg0->floor.normal.y * var_f31 - sp20.x);
         float y = arg0->floor.normal.x * var_f31 + sp20.y;
-        if (mpLib_800501CC(&arg0->x140, &sp1C, 0, 0, arg0->x48, arg0->x4C, x,
-                           y, sp20.x, sp20.y))
+        if (mpLib_800501CC_LeftWall(&arg0->x140, &sp1C, 0, 0, arg0->x48,
+                                    arg0->x4C, x, y, sp20.x, sp20.y))
         {
             sp20.x = arg0->x140.x - var_f31;
             if (arg2 != 0) {
@@ -1077,8 +1079,9 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
             } else {
                 sp20.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
-                               &arg0->floor.unk, &arg0->floor.normal) != -1)
+            if (mpLib_8004DD90_Floor(arg0->floor.index, &sp20, &sp30,
+                                     &arg0->floor.unk,
+                                     &arg0->floor.normal) != -1)
             {
                 arg0->cur_pos.y += sp30;
                 arg0->cur_pos.x = sp20.x;
@@ -1093,9 +1096,9 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
         sp20.y = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y -
                                arg0->xA4_ecbCurrCorrect.bottom.y)) -
                    temp_f2);
-        if (mpLib_8004F008(&arg0->x140, NULL, NULL, NULL, temp_f1_3, temp_f2,
-                           sp20.x, sp20.y, 0.0F, arg0->x3C, arg0->x48,
-                           arg0->x4C, NULL, NULL))
+        if (mpLib_8004F008_Floor(&arg0->x140, NULL, NULL, NULL, temp_f1_3,
+                                 temp_f2, sp20.x, sp20.y, 0.0F, arg0->x3C,
+                                 arg0->x48, arg0->x4C, NULL, NULL))
         {
             sp20.x = arg0->x140.x;
             if (arg2 != 0) {
@@ -1103,8 +1106,9 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
             } else {
                 sp20.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
-                               &arg0->floor.unk, &arg0->floor.normal) != -1)
+            if (mpLib_8004DD90_Floor(arg0->floor.index, &sp20, &sp30,
+                                     &arg0->floor.unk,
+                                     &arg0->floor.normal) != -1)
             {
                 arg0->cur_pos.y += sp30;
                 arg0->cur_pos.x = sp20.x;
@@ -1116,15 +1120,15 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 bool mpColl_80043E90(CollData* coll, s32* arg1)
 {
     int sp10;
-    s32 temp_r31 = mpLib_80052534(coll->floor.index);
+    s32 temp_r31 = mpLib_80052534_Floor(coll->floor.index);
 
     f32 f1 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
     f32 f2 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
     f32 f3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.left.x;
     f32 f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.left.y;
 
-    if (mpLib_800509B8(NULL, &sp10, 0, NULL, coll->x48, coll->x4C, f1, f2, f3,
-                       f4) &&
+    if (mpLib_800509B8_RightWall(NULL, &sp10, 0, NULL, coll->x48, coll->x4C,
+                                 f1, f2, f3, f4) &&
         sp10 != temp_r31)
     {
         *arg1 = sp10;
@@ -1145,11 +1149,12 @@ void mpColl_80043F40(CollData* arg0, s32 arg1, s32 arg2)
     var_f31 = ABS(arg0->xA4_ecbCurrCorrect.left.x);
     sp20.x = arg0->cur_pos.x + arg0->xA4_ecbCurrCorrect.left.x;
     sp20.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.left.y;
-    if (mpLib_8004E684(arg1, &sp20, NULL, NULL, NULL) != -1) {
+    if (mpLib_8004E684_RightWall(arg1, &sp20, NULL, NULL, NULL) != -1) {
         f32 tmp2 = arg0->floor.normal.y * var_f31 + sp20.x;
         f32 tmp = -(arg0->floor.normal.x * var_f31 - sp20.y);
-        if (mpLib_800509B8(&arg0->x140, &sp1C, 0, NULL, arg0->x48, arg0->x4C,
-                           tmp2, tmp, sp20.x, sp20.y) != 0)
+        if (mpLib_800509B8_RightWall(&arg0->x140, &sp1C, 0, NULL, arg0->x48,
+                                     arg0->x4C, tmp2, tmp, sp20.x,
+                                     sp20.y) != 0)
         {
             sp20.x = arg0->x140.x + var_f31;
             if (arg2 != 0) {
@@ -1157,8 +1162,9 @@ void mpColl_80043F40(CollData* arg0, s32 arg1, s32 arg2)
             } else {
                 sp20.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
-                               &arg0->floor.unk, &arg0->floor.normal) != -1)
+            if (mpLib_8004DD90_Floor(arg0->floor.index, &sp20, &sp30,
+                                     &arg0->floor.unk,
+                                     &arg0->floor.normal) != -1)
             {
                 arg0->cur_pos.y += sp30;
                 arg0->cur_pos.x = sp20.x;
@@ -1172,9 +1178,9 @@ void mpColl_80043F40(CollData* arg0, s32 arg1, s32 arg2)
         sp20.y = -(2.0F * (arg0->xA4_ecbCurrCorrect.left.y -
                            arg0->xA4_ecbCurrCorrect.bottom.y) -
                    temp_f2);
-        if (mpLib_8004F008(&arg0->x140, NULL, NULL, NULL, temp_f1_2, temp_f2,
-                           sp20.x, sp20.y, 0.0F, arg0->x3C, arg0->x48,
-                           arg0->x4C, 0, 0))
+        if (mpLib_8004F008_Floor(&arg0->x140, NULL, NULL, NULL, temp_f1_2,
+                                 temp_f2, sp20.x, sp20.y, 0.0F, arg0->x3C,
+                                 arg0->x48, arg0->x4C, 0, 0))
         {
             sp20.x = arg0->x140.x;
             if (arg2 != 0) {
@@ -1182,8 +1188,9 @@ void mpColl_80043F40(CollData* arg0, s32 arg1, s32 arg2)
             } else {
                 sp20.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.bottom.y;
             }
-            if (mpLib_8004DD90(arg0->floor.index, &sp20, &sp30,
-                               &arg0->floor.unk, &arg0->floor.normal) != -1)
+            if (mpLib_8004DD90_Floor(arg0->floor.index, &sp20, &sp30,
+                                     &arg0->floor.unk,
+                                     &arg0->floor.normal) != -1)
             {
                 arg0->cur_pos.x = sp20.x;
                 arg0->cur_pos.y += sp30;
@@ -1232,8 +1239,8 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
     if (!temp_r3) {
         mpLib_800588D0(left, bottom, right, top);
     }
-    ledge_id = mpLib_80051BA8(&cd->x140, cd->x3C, cd->x48, cd->x4C, 1, left,
-                              bottom, right, top);
+    ledge_id = mpLib_80051BA8_Floor(&cd->x140, cd->x3C, cd->x48, cd->x4C, 1,
+                                    left, bottom, right, top);
     if (ledge_id != -1 &&
         (mpLib_80054158(ledge_id, &sp14), cd->x140.x - sp14.x < 5.0F) &&
         cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x < sp14.x &&
@@ -1305,8 +1312,8 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
     if (!temp_r3) {
         mpLib_800588D0(left, bottom, right, top);
     }
-    ledge_id = mpLib_80051BA8(&cd->x140, cd->x3C, cd->x48, cd->x4C, -1, left,
-                              bottom, right, top);
+    ledge_id = mpLib_80051BA8_Floor(&cd->x140, cd->x3C, cd->x48, cd->x4C, -1,
+                                    left, bottom, right, top);
     if (ledge_id != -1 &&
         (mpLib_80053FF4(ledge_id, &sp14), sp14.x - cd->x140.x < 5.0F) &&
         cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x > sp14.x &&
@@ -1358,16 +1365,16 @@ bool mpColl_80044628(CollData* coll, bool (*cb)(Fighter_GObj*, int),
 
     if (coll->x38 != mpColl_804D64AC) {
         sp8 = gobj;
-        bool_r3 = mpLib_8004F400(&coll->x140, &coll->floor.index,
-                                 (int*) &coll->floor.unk, &coll->floor.normal,
-                                 temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
-                                 coll->x48, coll->x4C, cb, gobj);
+        bool_r3 = mpLib_8004F400_Floor(
+            &coll->x140, &coll->floor.index, (int*) &coll->floor.unk,
+            &coll->floor.normal, temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
+            coll->x48, coll->x4C, cb, gobj);
     } else {
         sp8 = gobj;
-        bool_r3 = mpLib_8004F008(&coll->x140, &coll->floor.index,
-                                 (int*) &coll->floor.unk, &coll->floor.normal,
-                                 temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
-                                 coll->x48, coll->x4C, cb, gobj);
+        bool_r3 = mpLib_8004F008_Floor(
+            &coll->x140, &coll->floor.index, (int*) &coll->floor.unk,
+            &coll->floor.normal, temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
+            coll->x48, coll->x4C, cb, gobj);
     }
     if (bool_r3 &&
         (!(coll->floor.unk & 0x100) || (coll->floor.index != coll->x3C)))
@@ -1377,14 +1384,16 @@ bool mpColl_80044628(CollData* coll, bool (*cb)(Fighter_GObj*, int),
         return true;
     }
 
-    if ((((flags & 1) && (line_id = mpLib_80052E30(coll->right_wall.index),
-                          (!(line_id == -1)))) ||
-         ((flags & 2) && (line_id = mpLib_800531C8(coll->left_wall.index),
-                          (!(line_id == -1))))) &&
+    if ((((flags & 1) &&
+          (line_id = mpLib_80052E30_LeftWall(coll->right_wall.index),
+           (!(line_id == -1)))) ||
+         ((flags & 2) &&
+          (line_id = mpLib_800531C8_RightWall(coll->left_wall.index),
+           (!(line_id == -1))))) &&
         mpLib_80054ED8(line_id) && mpLib_80054C6C(line_id) == 1)
     {
-        temp_r3 = mpLib_8004DD90(line_id, (Point3d*) &sp2C, &sp38,
-                                 &coll->floor.unk, &coll->floor.normal);
+        temp_r3 = mpLib_8004DD90_Floor(line_id, (Point3d*) &sp2C, &sp38,
+                                       &coll->floor.unk, &coll->floor.normal);
         if ((temp_r3 != -1) && (sp38 > 0.0F) &&
             ((coll->floor.index = temp_r3,
               (((coll->floor.unk & 0x100) == 0) != 0)) ||
@@ -1509,8 +1518,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             xy_arg_2 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
             xy_arg_3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.right.x;
             xy_arg_4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.right.y;
-            if (mpLib_800501CC(NULL, &sp1C, NULL, NULL, coll->x48, coll->x4C,
-                               xy_arg_1, xy_arg_2, xy_arg_3, xy_arg_4) &&
+            if (mpLib_800501CC_LeftWall(NULL, &sp1C, NULL, NULL, coll->x48,
+                                        coll->x4C, xy_arg_1, xy_arg_2,
+                                        xy_arg_3, xy_arg_4) &&
                 sp1C != temp_r21)
             { // Collision_CheckLeftWallHug
                 var_r0 = 1;
@@ -1527,8 +1537,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             xy_arg_2 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
             xy_arg_3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.left.x;
             xy_arg_4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.left.y;
-            if (mpLib_800509B8(NULL, &sp18, NULL, NULL, coll->x48, coll->x4C,
-                               xy_arg_1, xy_arg_2, xy_arg_3, xy_arg_4) &&
+            if (mpLib_800509B8_RightWall(NULL, &sp18, NULL, NULL, coll->x48,
+                                         coll->x4C, xy_arg_1, xy_arg_2,
+                                         xy_arg_3, xy_arg_4) &&
                 sp18 != temp_r21_2)
             { // Collision_CheckRightWallHug
                 var_r0_2 = 1;
@@ -1616,9 +1627,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 xy_arg_2 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
                 xy_arg_3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.right.x;
                 xy_arg_4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.right.y;
-                if (mpLib_800501CC(NULL, &sp14, NULL, NULL, coll->x48,
-                                   coll->x4C, xy_arg_1, xy_arg_2, xy_arg_3,
-                                   xy_arg_4) &&
+                if (mpLib_800501CC_LeftWall(NULL, &sp14, NULL, NULL, coll->x48,
+                                            coll->x4C, xy_arg_1, xy_arg_2,
+                                            xy_arg_3, xy_arg_4) &&
                     sp14 != temp_r21_3)
                 { // Collision_CheckLeftWallHug
                     var_r0_3 = 1;
@@ -1636,9 +1647,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 xy_arg_2 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
                 xy_arg_3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.left.x;
                 xy_arg_4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.left.y;
-                if (mpLib_800509B8(NULL, &sp10, NULL, NULL, coll->x48,
-                                   coll->x4C, xy_arg_1, xy_arg_2, xy_arg_3,
-                                   xy_arg_4) &&
+                if (mpLib_800509B8_RightWall(NULL, &sp10, NULL, NULL,
+                                             coll->x48, coll->x4C, xy_arg_1,
+                                             xy_arg_2, xy_arg_3, xy_arg_4) &&
                     sp10 != temp_r21_4)
                 { // Collision_CheckRightWallHug
                     var_r0_4 = 1;
@@ -1738,8 +1749,8 @@ bool fn_80046F78(CollData* coll, u32 arg1)
     if (fn_80046F78_inline(coll, &sp14)) {
         temp_r3 = mpLib_80054C6C(sp14);
         if (temp_r3 == 1) {
-            sp14 = mpLib_8004DD90(sp14, &coll->x140, &sp10, &coll->floor.unk,
-                                  &coll->floor.normal);
+            sp14 = mpLib_8004DD90_Floor(sp14, &coll->x140, &sp10,
+                                        &coll->floor.unk, &coll->floor.normal);
             if (sp14 != -1) {
                 coll->floor.index = sp14;
                 coll->cur_pos.x = coll->x140.x;
@@ -1750,8 +1761,9 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             }
             return 0;
         } else if (temp_r3 == 2) {
-            sp14 = mpLib_8004E090(sp14, &coll->x140, &sp10, &coll->ceiling.unk,
-                                  &coll->ceiling.normal);
+            sp14 = mpLib_8004E090_Ceiling(sp14, &coll->x140, &sp10,
+                                          &coll->ceiling.unk,
+                                          &coll->ceiling.normal);
             if (sp14 != -1) {
                 coll->ceiling.index = sp14;
                 coll->cur_pos.x = coll->x140.x;
@@ -1762,9 +1774,9 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             }
             return 0;
         } else if (temp_r3 == 8) {
-            sp14 =
-                mpLib_8004E398(sp14, &coll->x140, &sp10, &coll->right_wall.unk,
-                               &coll->right_wall.normal);
+            sp14 = mpLib_8004E398_LeftWall(sp14, &coll->x140, &sp10,
+                                           &coll->right_wall.unk,
+                                           &coll->right_wall.normal);
             if (sp14 != -1) {
                 coll->right_wall.index = sp14;
                 coll->cur_pos.x = coll->x140.x + sp10;
@@ -1775,9 +1787,9 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             }
             return 0;
         } else if (temp_r3 == 4) {
-            sp14 =
-                mpLib_8004E684(sp14, &coll->x140, &sp10, &coll->left_wall.unk,
-                               &coll->left_wall.normal);
+            sp14 = mpLib_8004E684_RightWall(sp14, &coll->x140, &sp10,
+                                            &coll->left_wall.unk,
+                                            &coll->left_wall.normal);
             if (sp14 != -1) {
                 coll->left_wall.index = sp14;
                 coll->cur_pos.x = coll->x140.x + sp10;
@@ -2109,8 +2121,8 @@ bool mpColl_800488F4(CollData* arg0)
     {
         return false;
     }
-    temp_r3 = mpLib_8004DD90(ledge_id, &sp30, &sp20, &arg0->floor.unk,
-                             &arg0->floor.normal);
+    temp_r3 = mpLib_8004DD90_Floor(ledge_id, &sp30, &sp20, &arg0->floor.unk,
+                                   &arg0->floor.normal);
     if (temp_r3 != -1) {
         arg0->cur_pos.y += sp20;
         arg0->floor.index = temp_r3;
@@ -2119,7 +2131,7 @@ bool mpColl_800488F4(CollData* arg0)
     var_r30 = false;
     mpLib_80054158(ledge_id, &sp14);
     if (arg0->cur_pos.x < sp14.x) {
-        temp_r3_2 = mpLib_80052700(ledge_id);
+        temp_r3_2 = mpLib_80052700_Floor(ledge_id);
         if ((temp_r3_2 != -1) && mpLib_80054ED8(temp_r3_2) &&
             (mpLib_80054C6C(temp_r3_2) & 4))
         {
@@ -2130,7 +2142,7 @@ bool mpColl_800488F4(CollData* arg0)
     } else {
         mpLib_80053FF4(ledge_id, &sp14);
         if (arg0->cur_pos.x > sp14.x) {
-            temp_r3_3 = mpLib_80052534(ledge_id);
+            temp_r3_3 = mpLib_80052534_Floor(ledge_id);
             if ((temp_r3_3 != -1) && mpLib_80054ED8(temp_r3_3) &&
                 (mpLib_80054C6C(temp_r3_3) & 8))
             {
@@ -2177,7 +2189,8 @@ bool mpColl_8004A678(CollData* coll, int line_id)
         {
             float right_x;
             float right_y;
-            var_r30 = mpLib_8004DD90(line_id, &sp10, &sp28, &sp2C, &sp1C);
+            var_r30 =
+                mpLib_8004DD90_Floor(line_id, &sp10, &sp28, &sp2C, &sp1C);
             if (var_r30 != -1) {
                 sp10.y += sp28;
             }
@@ -2186,9 +2199,9 @@ bool mpColl_8004A678(CollData* coll, int line_id)
                       coll->xA4_ecbCurrCorrect.bottom.x;
             right_y = sp10.y + coll->xA4_ecbCurrCorrect.right.y -
                       coll->xA4_ecbCurrCorrect.bottom.y;
-            if (!mpLib_800501CC(NULL, NULL, NULL, NULL, coll->x48, coll->x4C,
-                                sp10.x + 1.0F, sp10.y + 1.0F, right_x,
-                                right_y))
+            if (!mpLib_800501CC_LeftWall(NULL, NULL, NULL, NULL, coll->x48,
+                                         coll->x4C, sp10.x + 1.0F,
+                                         sp10.y + 1.0F, right_x, right_y))
             {
                 var_r29 = true;
             }
@@ -2200,7 +2213,8 @@ bool mpColl_8004A678(CollData* coll, int line_id)
         {
             float left_x;
             float left_y;
-            var_r30 = mpLib_8004DD90(line_id, &sp10, &sp28, &sp2C, &sp1C);
+            var_r30 =
+                mpLib_8004DD90_Floor(line_id, &sp10, &sp28, &sp2C, &sp1C);
             if (var_r30 != -1) {
                 sp10.y += sp28;
             }
@@ -2208,8 +2222,9 @@ bool mpColl_8004A678(CollData* coll, int line_id)
                      coll->xA4_ecbCurrCorrect.bottom.x;
             left_y = sp10.y + coll->xA4_ecbCurrCorrect.left.y -
                      coll->xA4_ecbCurrCorrect.bottom.y;
-            if (!mpLib_800509B8(NULL, NULL, NULL, NULL, coll->x48, coll->x4C,
-                                sp10.x - 1.0F, sp10.y + 1.0F, left_x, left_y))
+            if (!mpLib_800509B8_RightWall(NULL, NULL, NULL, NULL, coll->x48,
+                                          coll->x4C, sp10.x - 1.0F,
+                                          sp10.y + 1.0F, left_x, left_y))
             {
                 var_r29 = true;
             }
@@ -2246,8 +2261,9 @@ bool mpColl_8004AB80(CollData* arg0)
 
     sp1C.x = arg0->cur_pos.x + arg0->xA4_ecbCurrCorrect.top.x;
     sp1C.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.top.y;
-    temp_r3 = mpLib_8004E090(arg0->ceiling.index, &sp1C, &sp18,
-                             &arg0->ceiling.unk, &arg0->ceiling.normal);
+    temp_r3 =
+        mpLib_8004E090_Ceiling(arg0->ceiling.index, &sp1C, &sp18,
+                               &arg0->ceiling.unk, &arg0->ceiling.normal);
     if (temp_r3 != -1) {
         arg0->ceiling.index = temp_r3;
         arg0->cur_pos.y += sp18;
@@ -2255,13 +2271,13 @@ bool mpColl_8004AB80(CollData* arg0)
         var_r31 = 0;
         mpLib_80054420(arg0->ceiling.index, &spC);
         if (sp1C.x <= spC.x) {
-            temp_r3_2 = mpLib_80052A98(arg0->ceiling.index);
+            temp_r3_2 = mpLib_80052A98_Ceiling(arg0->ceiling.index);
             if ((temp_r3_2 != -1) && (mpLib_80054C6C(temp_r3_2) == 4)) {
                 var_r31 = 1;
             }
         } else {
             mpLib_800542BC(arg0->ceiling.index, &spC);
-            temp_r3_3 = mpLib_800528CC(arg0->ceiling.index);
+            temp_r3_3 = mpLib_800528CC_Ceiling(arg0->ceiling.index);
             if ((temp_r3_3 != -1) && (mpLib_80054C6C(temp_r3_3) == 8)) {
                 var_r31 = 1;
             }
@@ -2269,9 +2285,9 @@ bool mpColl_8004AB80(CollData* arg0)
         arg0->cur_pos.y = spC.y - arg0->xA4_ecbCurrCorrect.top.y;
         if (var_r31 != 0) {
             arg0->cur_pos.x = spC.x;
-            temp_ret =
-                mpLib_8004E090(arg0->ceiling.index, &spC, NULL,
-                               &arg0->ceiling.unk, &arg0->ceiling.normal);
+            temp_ret = mpLib_8004E090_Ceiling(arg0->ceiling.index, &spC, NULL,
+                                              &arg0->ceiling.unk,
+                                              &arg0->ceiling.normal);
             temp_r3_4 = temp_ret;
             if (temp_r3_4 != -1) {
                 arg0->ceiling.index = temp_r3_4;
@@ -2501,8 +2517,8 @@ bool mpColl_8004B6D8(CollData* arg0)
     {
         return false;
     }
-    temp_r3 = mpLib_8004E090(temp_r31, &sp30, &sp20, &arg0->ceiling.unk,
-                             &arg0->ceiling.normal);
+    temp_r3 = mpLib_8004E090_Ceiling(
+        temp_r31, &sp30, &sp20, &arg0->ceiling.unk, &arg0->ceiling.normal);
     if (temp_r3 != -1) {
         arg0->cur_pos.y += sp20;
         arg0->ceiling.index = temp_r3;
@@ -2511,7 +2527,7 @@ bool mpColl_8004B6D8(CollData* arg0)
     var_r30 = false;
     mpLib_80054420(temp_r31, &sp14);
     if (arg0->cur_pos.x < sp14.x) {
-        temp_r3_2 = mpLib_80052A98(temp_r31);
+        temp_r3_2 = mpLib_80052A98_Ceiling(temp_r31);
         if (temp_r3_2 != -1 && mpLib_80054ED8(temp_r3_2) &&
             (mpLib_80054C6C(temp_r3_2) & 4))
         {
@@ -2522,7 +2538,7 @@ bool mpColl_8004B6D8(CollData* arg0)
     } else {
         mpLib_800542BC(temp_r31, &sp14);
         if (arg0->cur_pos.x > sp14.x) {
-            temp_r3_3 = mpLib_800528CC(temp_r31);
+            temp_r3_3 = mpLib_800528CC_Ceiling(temp_r31);
             if (temp_r3_3 != -1 && mpLib_80054ED8(temp_r3_3) &&
                 (mpLib_80054C6C(temp_r3_3) & 8))
             {
@@ -2607,9 +2623,9 @@ bool mpColl_8004CB78(CollData* coll, Vec3* arg1)
     return mpGetSpeed(index, &sp10, arg1);
 }
 
-bool mpColl_8004CBC0(CollData* coll)
+bool mpColl_IsOnPlatform(CollData* coll)
 {
-    return mpLib_80054CEC(coll->floor.index) & 0x100;
+    return mpLineGetFlags(coll->floor.index) & LINE_FLAG_PLATFORM;
 }
 
 void mpColl_8004CBE8(CollData* coll)

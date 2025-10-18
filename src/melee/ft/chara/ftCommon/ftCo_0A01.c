@@ -434,7 +434,8 @@ bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, int arg4,
 {
     *arg1 = -1;
     {
-        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg7, arg8, arg9,
+        int ret =
+            mpLib_8004F008_Floor(arg0, arg1, arg2, arg3, arg7, arg8, arg9,
                                  arg10, arg11, arg4, arg5, arg6, 0, 0);
         if (ret && ftCo_800A1B38(*arg1)) {
             return false;
@@ -712,13 +713,13 @@ bool ftCo_800A1BA8(Fighter* fp)
         int sp10;
         int spC;
         if (fp->facing_dir > 0.0) {
-            return mpLib_800509B8(&coll_vec, &sp10, &spC, &sp14, -1, -1,
-                                  fp->cur_pos.x, fp->cur_pos.y,
-                                  other_fp->cur_pos.x, other_fp->cur_pos.y);
+            return mpLib_800509B8_RightWall(
+                &coll_vec, &sp10, &spC, &sp14, -1, -1, fp->cur_pos.x,
+                fp->cur_pos.y, other_fp->cur_pos.x, other_fp->cur_pos.y);
         }
-        return mpLib_800501CC(&coll_vec, &sp10, &spC, &sp14, -1, -1,
-                              fp->cur_pos.x, fp->cur_pos.y,
-                              other_fp->cur_pos.x, other_fp->cur_pos.y);
+        return mpLib_800501CC_LeftWall(
+            &coll_vec, &sp10, &spC, &sp14, -1, -1, fp->cur_pos.x,
+            fp->cur_pos.y, other_fp->cur_pos.x, other_fp->cur_pos.y);
     }
 }
 
@@ -2391,9 +2392,9 @@ void ftCo_800A9904(Fighter* fp)
         }
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (mpLib_8004F8A4(&sp4C, &sp3C, &sp38, &sp40, -1, -1,
-                              fp->cur_pos.x, fp->cur_pos.y, temp_r31->x54.x,
-                              temp_r31->x54.y) != 0)
+    } else if (mpLib_8004F8A4_Ceiling(&sp4C, &sp3C, &sp38, &sp40, -1, -1,
+                                      fp->cur_pos.x, fp->cur_pos.y,
+                                      temp_r31->x54.x, temp_r31->x54.y) != 0)
     {
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x81);
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
@@ -2772,7 +2773,8 @@ void ftCo_800AA844(Fighter* fp)
     ftCo_800AA320(fp, &sp38, &sp34);
     if (ftCo_800A28D0(fp, 1.0F)) {
         if (ftCo_800A1CA8(fp) && fp->coll_data.floor.index != -1 &&
-            (mpLib_80054CEC(fp->coll_data.floor.index) & 0x100) &&
+            (mpLineGetFlags(fp->coll_data.floor.index) &
+             LINE_FLAG_PLATFORM) &&
             ftCo_800A0FB0(&sp28, &sp18, &sp14, &sp1C, -1, -1, -1,
                           fp->cur_pos.x, fp->cur_pos.y - 10.0F, fp->cur_pos.x,
                           fp->cur_pos.y - 1000.0F, 0.0F))
@@ -2851,7 +2853,7 @@ void ftCo_800AACD0(Fighter* fp)
     }
     ftCo_800AA320(fp, &stick, &clamp);
     if (fp->coll_data.floor.index != -1 &&
-        (mpLib_80054CEC(fp->coll_data.floor.index) & 0x100))
+        (mpLineGetFlags(fp->coll_data.floor.index) & LINE_FLAG_PLATFORM))
     {
         ftCo_800A08F0(fp);
         return;
@@ -2915,13 +2917,15 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                               fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y))
+            if (mpLib_8004F8A4_Ceiling(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                                       fp->cur_pos.x, fp->cur_pos.y, sp44.x,
+                                       sp44.y))
             {
                 continue;
             }
-            if (mpLib_800509B8(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                               fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y))
+            if (mpLib_800509B8_RightWall(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                                         fp->cur_pos.x, fp->cur_pos.y, sp44.x,
+                                         sp44.y))
             {
                 continue;
             }
@@ -2948,13 +2952,15 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                               fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y))
+            if (mpLib_8004F8A4_Ceiling(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                                       fp->cur_pos.x, fp->cur_pos.y, spC.x,
+                                       spC.y))
             {
                 continue;
             }
-            if (mpLib_800501CC(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                               fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y))
+            if (mpLib_800501CC_LeftWall(&sp38, &sp28, &sp24, &sp2C, -1, -1,
+                                        fp->cur_pos.x, fp->cur_pos.y, spC.x,
+                                        spC.y))
             {
                 continue;
             }
@@ -3075,10 +3081,10 @@ void ftCo_800AB224(Fighter* fp)
             var_f31 = lb_8000D008(temp_f1, var_f2);
         }
         if (var_f31 > 0.6108652334660292) {
-            if (mpLib_8004F8A4(&sp24, &sp3C, &sp40, &sp30, -1, -1,
-                               fp->coll_data.cur_pos.x,
-                               fp->coll_data.cur_pos.y,
-                               fp->coll_data.cur_pos.x, fp->x1A88.x54.y))
+            if (mpLib_8004F8A4_Ceiling(
+                    &sp24, &sp3C, &sp40, &sp30, -1, -1,
+                    fp->coll_data.cur_pos.x, fp->coll_data.cur_pos.y,
+                    fp->coll_data.cur_pos.x, fp->x1A88.x54.y))
             {
                 var_r0_6 = 1;
             } else {

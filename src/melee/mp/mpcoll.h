@@ -106,7 +106,7 @@
 /* 04CAE8 */ bool mpColl_8004CAE8(CollData*, Vec3*);
 /* 04CB30 */ bool mpColl_8004CB30(CollData*, Vec3*);
 /* 04CB78 */ bool mpColl_8004CB78(CollData*, Vec3*);
-/* 04CBC0 */ bool mpColl_8004CBC0(CollData*);
+/* 04CBC0 */ bool mpColl_IsOnPlatform(CollData*);
 /* 04CBE8 */ void mpColl_8004CBE8(CollData*);
 /* 04CBF4 */ void mpColl_8004CBF4(CollData*);
 /* 04CC00 */ void mpColl_8004CC00(CollData*, CollData*, int);

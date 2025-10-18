@@ -123,7 +123,7 @@ void ftCo_FallSpecial_Phys(Fighter_GObj* gobj)
             target_vel = lstick_x * ca->air_drift_max;
             if (ABS(target_vel) > fp->mv.co.fallspecial.mobility) {
                 target_vel = target_vel < 0 ? -fp->mv.co.fallspecial.mobility
-                                    : fp->mv.co.fallspecial.mobility;
+                                            : fp->mv.co.fallspecial.mobility;
             }
             ftCommon_8007D140(fp, drift, target_vel, ca->aerial_friction);
         }
@@ -138,7 +138,7 @@ void ftCo_FallSpecial_Coll(Fighter_GObj* gobj)
 bool ftCo_80096CC8(Fighter_GObj* gobj, enum_t arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (arg1 != -1 && (!(mpLib_80054CEC(arg1) & (1 << 8)) ||
+    if (arg1 != -1 && (!(mpLineGetFlags(arg1) & LINE_FLAG_PLATFORM) ||
                        fp->input.lstick.y > p_ftCommonData->x25C))
     {
         return true;

@@ -23,46 +23,51 @@
 /* 04D288 */ void mpLib_8004D288(mp_CollData* coll_data);
 /* 04DB78 */ int mpLib_8004DB78(int line_id);
 /* 04DC04 */ int mpLib_8004DC04(int line_id);
-/* 04DD90 */ int mpLib_8004DD90(int line_id, Vec3*, float* y_out,
-                                u32* flags_out, Vec3* normal_out);
-/* 04E090 */ int mpLib_8004E090(int line_id, Vec3*, float* y_out,
-                                u32* flags_out, Vec3* normal_out);
-/* 04E398 */ int mpLib_8004E398(int line_id, Vec3*, float* x_out,
-                                u32* flags_out, Vec3* normal_out);
-/* 04E684 */ int mpLib_8004E684(int line_id, Vec3*, float* x_out,
-                                u32* flags_out, Vec3* normal_out);
+/* 04DD90 */ int mpLib_8004DD90_Floor(int line_id, Vec3*, float* y_out,
+                                      u32* flags_out, Vec3* normal_out);
+/* 04E090 */ int mpLib_8004E090_Ceiling(int line_id, Vec3*, float* y_out,
+                                        u32* flags_out, Vec3* normal_out);
+/* 04E398 */ int mpLib_8004E398_LeftWall(int line_id, Vec3*, float* x_out,
+                                         u32* flags_out, Vec3* normal_out);
+/* 04E684 */ int mpLib_8004E684_RightWall(int line_id, Vec3*, float* x_out,
+                                          u32* flags_out, Vec3* normal_out);
 /* 04EBF8 */ bool mpLib_8004EBF8(float*, float*, float, float, float, float,
                                  float, float, float);
 /* 04ED5C */ void mpLib_8004ED5C(int, float*, float*, float*, float*);
-/* 04F008 */ bool mpLib_8004F008(Vec3*, int*, int*, Vec3*, float, float, float,
-                                 float, float, int, int, int,
-                                 bool (*)(Fighter_GObj*, int), Fighter_GObj*);
-/* 04F400 */ bool mpLib_8004F400(Vec3*, int*, int*, Vec3*, float, float, float,
-                                 float, float, int, int, int,
-                                 bool (*)(Fighter_GObj*, int), Fighter_GObj*);
-/* 04F8A4 */ bool mpLib_8004F8A4(Vec3*, int*, int*, Vec3*, int, int, float,
-                                 float, float, float);
-/* 04FC2C */ bool mpLib_8004FC2C(Vec3*, int*, int*, Vec3*, int, int, float,
-                                 float, float, float);
+/* 04F008 */ bool mpLib_8004F008_Floor(Vec3*, int*, int*, Vec3*, float, float,
+                                       float, float, float, int, int, int,
+                                       bool (*)(Fighter_GObj*, int),
+                                       Fighter_GObj*);
+/* 04F400 */ bool mpLib_8004F400_Floor(Vec3*, int*, int*, Vec3*, float, float,
+                                       float, float, float, int, int, int,
+                                       bool (*)(Fighter_GObj*, int),
+                                       Fighter_GObj*);
+/* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(Vec3*, int*, int*, Vec3*, int, int,
+                                         float, float, float, float);
+/* 04FC2C */ bool mpLib_8004FC2C_Ceiling(Vec3*, int*, int*, Vec3*, int, int,
+                                         float, float, float, float);
 /* 050068 */ bool mpLib_80050068(float*, float*, float, float, float, float,
                                  float, float, float);
-/* 0501CC */ bool mpLib_800501CC(Vec3*, int*, int*, Vec3*, int, int,
-                                 float normal_x, float normal_y, float right_x,
-                                 float right_y);
-/* 05057C */ bool mpLib_8005057C(Vec3*, int*, int*, Vec3*, int, int, float,
-                                 float, float, float);
-/* 0509B8 */ bool mpLib_800509B8(Vec3*, int*, int*, Vec3*, int, int, float,
-                                 float, float left_x, float left_y);
-/* 050D68 */ bool mpLib_80050D68(Vec3*, int*, int*, Vec3*, int, int, float,
-                                 float, float, float);
-/* 0511A4 */ bool mpLib_800511A4(int*, int, int, float, float, float, float,
-                                 float, float, float, float);
-/* 0515A0 */ bool mpLib_800515A0(int* line_id, int, int, float, float, float,
-                                 float, float, float, float, float);
-/* 05199C */ int mpLib_8005199C(Vec3*, int, int);
-/* 051BA8 */ int mpLib_80051BA8(Vec3* out_vec, int line_id, int joint_id0,
-                                int joint_id1, int dir, float left,
-                                float bottom, float right, float top);
+/* 0501CC */ bool mpLib_800501CC_LeftWall(Vec3*, int*, int*, Vec3*, int, int,
+                                          float normal_x, float normal_y,
+                                          float right_x, float right_y);
+/* 05057C */ bool mpLib_8005057C_LeftWall(Vec3*, int*, int*, Vec3*, int, int,
+                                          float, float, float, float);
+/* 0509B8 */ bool mpLib_800509B8_RightWall(Vec3*, int*, int*, Vec3*, int, int,
+                                           float, float, float left_x,
+                                           float left_y);
+/* 050D68 */ bool mpLib_80050D68_RightWall(Vec3*, int*, int*, Vec3*, int, int,
+                                           float, float, float, float);
+/* 0511A4 */ bool mpLib_800511A4_RightWall(int*, int, int, float, float, float,
+                                           float, float, float, float, float);
+/* 0515A0 */ bool mpLib_800515A0_LeftWall(int* line_id, int, int, float, float,
+                                          float, float, float, float, float,
+                                          float);
+/* 05199C */ int mpLib_8005199C_Floor(Vec3*, int, int);
+/* 051BA8 */ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id,
+                                      int joint_id0, int joint_id1, int dir,
+                                      float left, float bottom, float right,
+                                      float top);
 /* 051EC8 */ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out,
                                  int* flags_out, Vec3* normal_out, u32 arg4,
                                  int joint_id0, int joint_id1, float x1,
@@ -75,24 +80,24 @@
                                  int* flags_out, Vec3* normal_out,
                                  int joint_id0, int joint_id1, float x0,
                                  float y0, float x1, float y1);
-/* 052534 */ int mpLib_80052534(int);
-/* 052700 */ int mpLib_80052700(int);
-/* 0528CC */ int mpLib_800528CC(int line_id);
-/* 052A98 */ int mpLib_80052A98(int line_id);
-/* 052C64 */ int mpLib_80052C64(int line_id);
-/* 052E30 */ int mpLib_80052E30(int line_id);
-/* 052FFC */ int mpLib_80052FFC(int line_id);
-/* 0531C8 */ int mpLib_800531C8(int line_id);
-/* 053394 */ int mpLib_80053394(int line_id);
-/* 053448 */ int mpLib_80053448(int line_id);
-/* 0534FC */ int mpLib_800534FC(int line_id);
-/* 0536CC */ int mpLib_800536CC(int line_id);
-/* 05389C */ int mpLib_8005389C(int line_id);
-/* 053950 */ int mpLib_80053950(int line_id);
-/* 053A04 */ int mpLib_80053A04(int line_id);
-/* 053BD4 */ int mpLib_80053BD4(int line_id);
-/* 053DA4 */ void mpLib_80053DA4(int ledge_id, Vec3*);
-/* 053ECC */ void mpLib_80053ECC(int ledge_id, Vec3*);
+/* 052534 */ int mpLib_80052534_Floor(int);
+/* 052700 */ int mpLib_80052700_Floor(int);
+/* 0528CC */ int mpLib_800528CC_Ceiling(int line_id);
+/* 052A98 */ int mpLib_80052A98_Ceiling(int line_id);
+/* 052C64 */ int mpLib_80052C64_LeftWall(int line_id);
+/* 052E30 */ int mpLib_80052E30_LeftWall(int line_id);
+/* 052FFC */ int mpLib_80052FFC_RightWall(int line_id);
+/* 0531C8 */ int mpLib_800531C8_RightWall(int line_id);
+/* 053394 */ int mpLib_80053394_Floor(int line_id);
+/* 053448 */ int mpLib_80053448_Floor(int line_id);
+/* 0534FC */ int mpLib_800534FC_Floor(int line_id);
+/* 0536CC */ int mpLib_800536CC_Floor(int line_id);
+/* 05389C */ int mpLib_8005389C_Ceiling(int line_id);
+/* 053950 */ int mpLib_80053950_Ceiling(int line_id);
+/* 053A04 */ int mpLib_80053A04_Ceiling(int line_id);
+/* 053BD4 */ int mpLib_80053BD4_Ceiling(int line_id);
+/* 053DA4 */ void mpLib_80053DA4_Floor(int ledge_id, Vec3*);
+/* 053ECC */ void mpLib_80053ECC_Floor(int ledge_id, Vec3*);
 /* 053FF4 */ void mpLib_80053FF4(int line_id, Vec3*);
 /* 054158 */ void mpLib_80054158(int line_id, Vec3*);
 /* 0542BC */ void mpLib_800542BC(int line_id, Vec3*);
@@ -104,7 +109,7 @@
 /* 054B14 */ void mpLib_80054B14(int, Vec3*);
 /* 054BC0 */ void mpLib_80054BC0(int, Vec3*);
 /* 054C6C */ u32 mpLib_80054C6C(int);
-/* 054CEC */ u32 mpLib_80054CEC(int);
+/* 054CEC */ u32 mpLib_GetLineFlags(int);
 /* 054D68 */ void mpLib_80054D68(int, u32);
 /* 054DFC */ Vec3* mpLib_80054DFC(int, Vec3*);
 /* 054ED8 */ bool mpLib_80054ED8(int);
@@ -149,7 +154,7 @@
 /* 0581BC */ void mpLib_800581BC(int, mpLib_Callback*, Ground**);
 /* 0581DC */ void mpLib_800581DC(int, int);
 /* 058560 */ void mpLib_80058560(void);
-/* 058614 */ UNK_RET mpLib_80058614(UNK_PARAMS);
+/* 058614 */ UNK_RET mpLib_80058614_Floor(UNK_PARAMS);
 /* 0587FC */ void fn_800587FC(HSD_GObj*);
 /* 058820 */ void mpLib_80058820(void);
 /* 0588C8 */ bool mpLib_800588C8(void);

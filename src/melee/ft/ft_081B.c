@@ -1238,7 +1238,7 @@ bool ft_80084A80(int arg0, Fighter_GObj* gobj, int* arg1, int* arg2, int* arg3)
     if (fp->ground_or_air == GA_Ground) {
         temp_r0 = fp->coll_data.floor.index;
         if (temp_r0 != -1) {
-            temp_r26 = mpLib_80054CEC(temp_r0);
+            temp_r26 = mpLineGetFlags(temp_r0);
             switch (arg0) {
             case 0:
                 var_r25 = mpLib_80056A1C(temp_r26, arg2);
@@ -1333,13 +1333,15 @@ bool ft_80084CE4(Fighter* attacker, Fighter* victim)
     victim_x += victim->cur_pos.x;
 
     if (attacker_x > victim_x) {
-        if (mpLib_800509B8(NULL, NULL, NULL, NULL, -1U, -1U, attacker_x,
-                           attacker_y, victim_x, victim_y))
+        if (mpLib_800509B8_RightWall(NULL, NULL, NULL, NULL, -1U, -1U,
+                                     attacker_x, attacker_y, victim_x,
+                                     victim_y))
         {
             return true;
         }
-    } else if (mpLib_800501CC(NULL, NULL, NULL, NULL, -1U, -1U, attacker_x,
-                              attacker_y, victim_x, victim_y))
+    } else if (mpLib_800501CC_LeftWall(NULL, NULL, NULL, NULL, -1U, -1U,
+                                       attacker_x, attacker_y, victim_x,
+                                       victim_y))
     {
         return true;
     }

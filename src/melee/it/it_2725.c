@@ -6640,12 +6640,12 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
     if (coll2 != NULL) {
         if (mpLib_80054ED8(coll2->floor.index)) {
             int floor_index;
-            temp_r3_2 = mpLib_8005199C(&sp44, -1, -1);
+            temp_r3_2 = mpLib_8005199C_Floor(&sp44, -1, -1);
             if ((temp_r3_2 != -1) && (floor_index = coll2->floor.index,
                                       mpLib_80054F68(temp_r3_2, floor_index)))
             {
                 coll1->floor.index = temp_r3_2;
-                mpLib_8004DD90(temp_r3_2, &sp44, &sp40, 0, NULL);
+                mpLib_8004DD90_Floor(temp_r3_2, &sp44, &sp40, 0, NULL);
                 // if (sp40 >= (f32) ((u8) it_804D6D28 + 0xF0)) {
                 // if (sp40 >= (f32) it_804D6D28->filler[12]) {
                 if (sp40 >= it_804D6D28->xF0) {
