@@ -60,8 +60,9 @@
 /* 0515A0 */ bool mpLib_800515A0(int* line_id, int, int, float, float, float,
                                  float, float, float, float, float);
 /* 05199C */ int mpLib_8005199C(Vec3*, int, int);
-/* 051BA8 */ int mpLib_80051BA8(Vec3*, int, int, int, int, float, float, float,
-                                float);
+/* 051BA8 */ int mpLib_80051BA8(Vec3* out_vec, int line_id, int joint_id0,
+                                int joint_id1, int dir, float left,
+                                float bottom, float right, float top);
 /* 051EC8 */ bool mpLib_80051EC8(Vec3*, int*, int*, Vec3*, u32, s32, s32,
                                  float, float, float, float);
 /* 0524DC */ bool mpLib_800524DC(Vec3*, int*, int*, Vec3*, int, int, float x,

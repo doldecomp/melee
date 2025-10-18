@@ -2496,8 +2496,8 @@ end:
     return line_id_r30;
 }
 
-int mpLib_80051BA8(Vec3* out_vec, int arg1, int arg2, int arg3, int dir,
-                   float left, float bottom, float right, float top)
+int mpLib_80051BA8(Vec3* out_vec, int line_id, int joint_id0, int joint_id1,
+                   int dir, float left, float bottom, float right, float top)
 {
     float min;
     float out_x;
@@ -2505,9 +2505,9 @@ int mpLib_80051BA8(Vec3* out_vec, int arg1, int arg2, int arg3, int dir,
 
     int ledge_id = -1;
 
-    bool temp_r3;
+    bool temp;
     int new_id;
-    CollJoint* var_r8;
+    CollJoint* joint;
 
     if (dir > 0) {
         min = +F32_MAX;
@@ -2517,88 +2517,90 @@ int mpLib_80051BA8(Vec3* out_vec, int arg1, int arg2, int arg3, int dir,
         HSD_ASSERT(3821, 0);
     }
 
-    temp_r3 = mpLib_800588C8();
-    if (!temp_r3) {
+    temp = mpLib_800588C8();
+    if (!temp) {
         mpLib_800588D0(left, bottom, right, top);
     }
 
-    for (var_r8 = mpLib_804D64C4; var_r8 != NULL; var_r8 = var_r8->next) {
-        if (var_r8->flags & 0x1000) {
+    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+        if (joint->flags & 0x1000) {
             continue;
         }
 
-        if (arg2 == var_r8 - groundCollJoint) {
+        if (joint_id0 == joint - groundCollJoint) {
             continue;
         }
 
-        if (arg3 == -1 || arg3 == var_r8 - groundCollJoint) {
-            int var_r9 = 0;
-            CollLine* line = &groundCollLine[var_r8->coll_data->floor_start];
-            int var_r11 = var_r8->coll_data->floor_count;
-            int var_r12 = var_r8->coll_data->dynamic_count;
-            while (var_r9 < var_r11) {
-            block_13:
+        if (joint_id1 == -1 || joint_id1 == joint - groundCollJoint) {
+            int i;
+            CollLine* line = &groundCollLine[joint->coll_data->floor_start];
+            int count = joint->coll_data->floor_count;
+            int dynamic_cout = joint->coll_data->dynamic_count;
+            for (i = 0; i < count; i++, line++) {
+            reset:
                 new_id = line - groundCollLine;
-                if (arg1 != new_id) {
-                    int flags = line->flags;
-                    if (flags & 1 && flags & 0x10000 && !(flags & 0x80)) {
-                        mpLib_Line* inner = line->x0;
-                        if (inner->flags & LINE_FLAG_LEDGE) {
-                            float x0 = groundCollVtx[inner->v0_idx].pos.x;
-                            float y0 = groundCollVtx[inner->v0_idx].pos.y;
-                            float x1 = groundCollVtx[inner->v1_idx].pos.x;
-                            float y1 = groundCollVtx[inner->v1_idx].pos.y;
-                            float line_left;
-                            float line_bottom;
-                            float line_right;
-                            float line_top;
-                            float dist_h;
+                if (line_id == new_id) {
+                    continue;
+                }
 
-                            if (x0 > x1) {
-                                line_right = x0;
-                                line_left = x1;
-                            } else {
-                                line_left = x0;
-                                line_right = x1;
-                            }
+                if (line->flags & LINE_FLAG_FLOOR && line->flags & 0x10000 &&
+                    !(line->flags & 0x80))
+                {
+                    mpLib_Line* inner = line->x0;
+                    if (inner->flags & LINE_FLAG_LEDGE) {
+                        float x0 = groundCollVtx[inner->v0_idx].pos.x;
+                        float y0 = groundCollVtx[inner->v0_idx].pos.y;
+                        float x1 = groundCollVtx[inner->v1_idx].pos.x;
+                        float y1 = groundCollVtx[inner->v1_idx].pos.y;
+                        float line_left;
+                        float line_bottom;
+                        float line_right;
+                        float line_top;
+                        float dist_h;
 
-                            if (y0 > y1) {
-                                line_top = y0;
-                                line_bottom = y1;
-                            } else {
-                                line_bottom = y0;
-                                line_top = y1;
-                            }
-                            // distance between midpoints of two right/left
-                            // pairs
-                            dist_h =
-                                ABS((line_right + line_left) - (right + left));
-                            if (dist_h <
-                                (line_right - line_left) + (right - left))
+                        if (x0 > x1) {
+                            line_right = x0;
+                            line_left = x1;
+                        } else {
+                            line_left = x0;
+                            line_right = x1;
+                        }
+
+                        if (y0 > y1) {
+                            line_top = y0;
+                            line_bottom = y1;
+                        } else {
+                            line_bottom = y0;
+                            line_top = y1;
+                        }
+                        // distance between midpoints of two right/left
+                        // pairs
+                        dist_h =
+                            ABS((line_right + line_left) - (right + left));
+                        if (dist_h < (line_right - line_left) + (right - left))
+                        {
+                            float dist_v =
+                                ABS((line_top + line_bottom) - (top + bottom));
+                            if (dist_v <
+                                (line_top - line_bottom) + (top - bottom))
                             {
-                                float dist_v = ABS((line_top + line_bottom) -
-                                                   (top + bottom));
-                                if (dist_v <
-                                    (line_top - line_bottom) + (top - bottom))
-                                {
-                                    // we interesect in both axes
-                                    if (dir > 0) {
-                                        if (min > x0) {
-                                            min = x0;
-                                            ledge_id = new_id;
-                                            if (out_vec != NULL) {
-                                                out_x = x0;
-                                                out_y = y0;
-                                            }
+                                // we interesect in both axes
+                                if (dir > 0) {
+                                    if (min > x0) {
+                                        min = x0;
+                                        ledge_id = new_id;
+                                        if (out_vec != NULL) {
+                                            out_x = x0;
+                                            out_y = y0;
                                         }
-                                    } else if (dir < 0) {
-                                        if (min < x1) {
-                                            min = x1;
-                                            ledge_id = new_id;
-                                            if (out_vec != NULL) {
-                                                out_x = x1;
-                                                out_y = y1;
-                                            }
+                                    }
+                                } else if (dir < 0) {
+                                    if (min < x1) {
+                                        min = x1;
+                                        ledge_id = new_id;
+                                        if (out_vec != NULL) {
+                                            out_x = x1;
+                                            out_y = y1;
                                         }
                                     }
                                 }
@@ -2606,20 +2608,19 @@ int mpLib_80051BA8(Vec3* out_vec, int arg1, int arg2, int arg3, int dir,
                         }
                     }
                 }
-                var_r9 += 1;
-                line += 1;
             }
-            if (var_r12 != 0) {
-                var_r11 = var_r12;
-                var_r9 = 0;
-                line = &groundCollLine[var_r8->coll_data->dynamic_start];
-                var_r12 = 0;
-                goto block_13;
+
+            if (dynamic_cout != 0) {
+                count = dynamic_cout;
+                i = 0;
+                line = &groundCollLine[joint->coll_data->dynamic_start];
+                dynamic_cout = 0;
+                goto reset;
             }
         }
     }
 
-    if (!temp_r3) {
+    if (!temp) {
         mpLib_80058AA0();
     }
 
