@@ -564,7 +564,7 @@ static inline bool itLinkarrow_UnkMotion1_Coll_inline(Item_GObj* gobj)
     {
         mpColl_80043558(pp, item_2->xDD4_itemVar.linkarrow.xE4);
         mpGetSpeed(item_2->xDD4_itemVar.linkarrow.xE4, &item_2->pos,
-                       &item_2->x40_vel);
+                   &item_2->x40_vel);
         item_2->xDD4_itemVar.linkarrow.xE8 =
             item_2->xDD4_itemVar.linkarrow.xEC = atan2f(sp1C.y, sp1C.x);
         return 1;
@@ -793,8 +793,8 @@ bool itLinkarrow_UnkMotion4_Coll(HSD_GObj* gobj)
         if (mpLib_80054ED8(item->xDD4_itemVar.linkarrow.xE4) != 0) {
             mpColl_80043558(pp, item->xDD4_itemVar.linkarrow.xE4);
             mpGetSpeed(item->xDD4_itemVar.linkarrow.xE4, &item->pos,
-                           &item->x40_vel);
-            mpLib_80054DFC(item->xDD4_itemVar.linkarrow.xE4, &sp18);
+                       &item->x40_vel);
+            mpLineGetNormal(item->xDD4_itemVar.linkarrow.xE4, &sp18);
             item->xDD4_itemVar.linkarrow.xE8 = atan2f(sp18.y, sp18.x);
         }
         var_r0 = 1;

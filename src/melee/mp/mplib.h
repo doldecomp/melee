@@ -106,12 +106,12 @@
 /* 0546E8 */ void mpLib_800546E8(int line_id, Vec3*);
 /* 05484C */ void mpLib_8005484C(int line_id, Vec3*);
 /* 0549B0 */ void mpLib_800549B0(int line_id, Vec3*);
-/* 054B14 */ void mpLib_80054B14(int, Vec3*);
-/* 054BC0 */ void mpLib_80054BC0(int, Vec3*);
+/* 054B14 */ void mpLib_GetV1Pos(int line_id, Vec3* pos_out);
+/* 054BC0 */ void mpLib_GetV0Pos(int line_id, Vec3* pos_out);
 /* 054C6C */ u32 mpLib_80054C6C(int);
 /* 054CEC */ u32 mpLib_GetLineFlags(int);
 /* 054D68 */ void mpLib_80054D68(int, u32);
-/* 054DFC */ Vec3* mpLib_80054DFC(int, Vec3*);
+/* 054DFC */ Vec3* mpLib_GetLineNormal(int line_id, Vec3* normal_out);
 /* 054ED8 */ bool mpLib_80054ED8(int);
 /* 054F68 */ bool mpLib_80054F68(int floor_id, int);
 /* 0552B0 */ void mpLib_800552B0(int x, HSD_JObj*, int z);

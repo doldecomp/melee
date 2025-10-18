@@ -7150,7 +7150,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
         sp80.z = 0.0f;
         sp80.x = 0.0f;
         sp80.y = 1.0f;
-        mpLib_80054DFC(item2->xC30, &sp74);
+        mpLineGetNormal(item2->xC30, &sp74);
         angle1 = lbVector_Angle(&sp74, &sp80);
         if (sp74.x < 0.0f) {
             dir1 = -1;
@@ -7165,7 +7165,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
         sp64.z = 0.0f;
         sp64.x = 0.0f;
         sp64.y = 1.0f;
-        mpLib_80054DFC(item3->xC30, &sp58);
+        mpLineGetNormal(item3->xC30, &sp58);
         angle2 = lbVector_Angle(&sp58, &sp64);
         if (sp58.x < 0.0f) {
             dir2 = -1;
@@ -7179,7 +7179,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
         sp48.z = 0.0f;
         sp48.x = 0.0f;
         sp48.y = 1.0f;
-        mpLib_80054DFC(item4->xC30, &sp3C);
+        mpLineGetNormal(item4->xC30, &sp3C);
         angle3 = lbVector_Angle(&sp3C, &sp48);
         if (sp3C.x < 0.0f) {
             dir3 = -1;

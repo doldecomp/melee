@@ -3346,26 +3346,26 @@ void mpLib_800549B0(int line_id, Vec3* arg1)
     arg1->z = 0.0F;
 }
 
-void mpLib_80054B14(int line_id, Vec3* out_vec)
+void mpLineGetV1Pos(int line_id, Vec3* pos_out)
 {
-    CollVtx* temp_r3;
+    CollVtx* v1;
 
     LINEID_CHECK(4540, line_id);
-    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
-    out_vec->x = temp_r3->pos.x;
-    out_vec->y = temp_r3->pos.y;
-    out_vec->z = 0.0F;
+    v1 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
+    pos_out->x = v1->pos.x;
+    pos_out->y = v1->pos.y;
+    pos_out->z = 0.0F;
 }
 
-void mpLib_80054BC0(int line_id, Vec3* arg1)
+void mpLineGetV0Pos(int line_id, Vec3* pos_out)
 {
-    CollVtx* temp_r3;
+    CollVtx* v0;
 
     LINEID_CHECK(4555, line_id);
-    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
-    arg1->x = temp_r3->pos.x;
-    arg1->y = temp_r3->pos.y;
-    arg1->z = 0.0F;
+    v0 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
+    pos_out->x = v0->pos.x;
+    pos_out->y = v0->pos.y;
+    pos_out->z = 0.0F;
 }
 
 u32 mpLib_80054C6C(int line_id)
@@ -3384,29 +3384,29 @@ void mpLib_80054D68(int line_id, u32 arg1)
 {
     LINEID_CHECK(4595, line_id);
     {
-        mpLib_Line* temp_r3 = groundCollLine[line_id].x0;
-        u16* tmp = &temp_r3->flags;
-        *tmp = (*tmp & 0xFFFFFF00) | arg1;
+        mpLib_Line* line = groundCollLine[line_id].x0;
+        u16* flags = &line->flags;
+        *flags = (*flags & 0xFFFFFF00) | arg1;
     }
 }
 
-Vec3* mpLib_80054DFC(int line_id, Vec3* normal_out)
+Vec3* mpLineGetNormal(int line_id, Vec3* normal_out)
 {
-    mpLib_Line* temp_r4;
+    mpLib_Line* line;
     PAD_STACK(4);
 
     LINEID_CHECK(4609, line_id);
-    temp_r4 = groundCollLine[line_id].x0;
+    line = groundCollLine[line_id].x0;
     {
-        float y0 = groundCollVtx[temp_r4->v0_idx].pos.y;
-        float y1 = groundCollVtx[temp_r4->v1_idx].pos.y;
-        float x0 = groundCollVtx[temp_r4->v0_idx].pos.x;
-        float x1 = groundCollVtx[temp_r4->v1_idx].pos.x;
+        float y0 = groundCollVtx[line->v0_idx].pos.y;
+        float y1 = groundCollVtx[line->v1_idx].pos.y;
+        float x0 = groundCollVtx[line->v0_idx].pos.x;
+        float x1 = groundCollVtx[line->v1_idx].pos.x;
         normal_out->x = -(y1 - y0);
         normal_out->y = +(x1 - x0);
         normal_out->z = 0.0F;
+        PSVECNormalize(normal_out, normal_out);
     }
-    PSVECNormalize(normal_out, normal_out);
     return normal_out;
 }
 
@@ -3440,8 +3440,8 @@ bool mpLib_80054F68(int floor_id, int line_id2)
     }
     var_r9 = mpLib_8004DB78(floor_id);
 loop_23:
-    if ((var_r9 == -1) || !(groundCollLine[floor_id].flags ==
-                            (groundCollLine[var_r9].flags & 0xF)))
+    if (var_r9 == -1 || !(groundCollLine[floor_id].flags ==
+                          (groundCollLine[var_r9].flags & 0xF)))
     {
         var_r6 = mpLib_8004DC04(floor_id);
         while (true) {
@@ -4824,7 +4824,7 @@ block_10:
     sp58.y += sp64;
     if (var_f25 > 0.0F) {
         while (true) {
-            mpLib_80054B14(line_id, &sp4C);
+            mpLineGetV1Pos(line_id, &sp4C);
             x_f2 = SQ(sp58.x - sp4C.x);
             y_f0 = SQ(sp58.y - sp4C.y);
             dist_f28 = sqrtf(x_f2 + y_f0);
@@ -4859,7 +4859,7 @@ block_10:
     } else {
         var_f25 = -var_f25;
         while (true) {
-            mpLib_80054BC0(line_id, &sp4C);
+            mpLineGetV0Pos(line_id, &sp4C);
             x_f2 = SQ(sp58.x - sp4C.x);
             y_f0 = SQ(sp58.y - sp4C.y);
             dist_f28 = sqrtf(x_f2 + y_f0);
@@ -4904,7 +4904,7 @@ block_10:
             *flags_out = mpLineGetFlags(line_id);
         }
         if (normal_out != NULL) {
-            mpLib_80054DFC(line_id, normal_out);
+            mpLineGetNormal(line_id, normal_out);
         }
     }
     if (arg3 != NULL) {
