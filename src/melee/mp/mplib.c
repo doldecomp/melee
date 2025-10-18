@@ -2639,8 +2639,8 @@ int mpLib_80051BA8(Vec3* out_vec, int line_id, int joint_id0, int joint_id1,
 }
 
 bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, int* flags_out,
-                    Vec3* normal_out, u32 arg4, s32 joint_id0, s32 joint_id1,
-                    f32 x1, f32 y1, f32 x2, f32 y2)
+                    Vec3* normal_out, u32 arg4, int joint_id0, int joint_id1,
+                    float x1, float y1, float x2, float y2)
 {
     f32 dx;
     f32 dy;
@@ -2799,18 +2799,20 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, int* flags_out,
     return false;
 }
 
-bool mpLib_800524DC(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, int arg4,
-                    int arg5, f32 x, f32 y, f32 z, f32 arg9)
+bool mpLib_800524DC(Vec3* pos_out, int* line_id_out, int* flags_out,
+                    Vec3* normal_out, int joint_id0, int joint_id1, float x0,
+                    float y0, float x1, float y1)
 {
-    return mpLib_80051EC8(arg0, arg1, arg2, arg3, 0x1F, arg4, arg5, x, y, z,
-                          arg9);
+    return mpLib_80051EC8(pos_out, line_id_out, flags_out, normal_out, 0x1F,
+                          joint_id0, joint_id1, x0, y0, x1, y1);
 }
 
-bool mpLib_80052508(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, u32 arg4,
-                    u32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9)
+bool mpLib_80052508(Vec3* pos_out, int* line_id_out, int* flags_out,
+                    Vec3* normal_out, int joint_id0, int joint_id1, float x0,
+                    float y0, float x1, float y1)
 {
-    return mpLib_80051EC8(arg0, arg1, arg2, arg3, 0xF, arg4, arg5, arg6, arg7,
-                          arg8, arg9);
+    return mpLib_80051EC8(pos_out, line_id_out, flags_out, normal_out, 0xF,
+                          joint_id0, joint_id1, x0, y0, x1, y1);
 }
 
 int mpLib_80052534(int line_id)
