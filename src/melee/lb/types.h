@@ -161,7 +161,7 @@ typedef struct _ECBFlagStruct {
 
 typedef struct SurfaceData {
     int index;
-    u32 unk;
+    u32 flags;
     Vec3 normal;
 } SurfaceData;
 
@@ -192,8 +192,8 @@ struct CollData {
     /* fp+72C */ s32 x3C;
     /* fp+730 */ int ledge_id_unk0;
     /* fp+734 */ int ledge_id_unk1;
-    /* fp+738 */ u32 x48;
-    /* fp+73C */ u32 x4C;
+    /* fp+738 */ u32 x48_joint_id;
+    /* fp+73C */ u32 x4C_joint_id;
     /* fp+740 */ float x50;
     /* fp+744 */ float ledge_snap_x;
     /* fp+748 */ float ledge_snap_y;
