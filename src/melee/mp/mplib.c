@@ -996,169 +996,173 @@ bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
 
 bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
                           Vec3* normal_out, float x_f1, float y_f2, float x_f3,
-                          float y_f4, float y_offset_f5, int r7, int r8,
-                          int r9, bool (*cb)(Fighter_GObj*, int),
-                          Fighter_GObj* gobj)
+                          float y_f4, float y_offset_f5, int line_id,
+                          int joint_id0, int joint_id1,
+                          bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
 {
-    float min_dist_f30 = F32_MAX;
-    CollJoint* joint_r29;
-    int i_r28;
-    bool result_r27 = false;
-    bool bool_r3;
+    float min_dist2 = F32_MAX;
+    float old_x = x_f1;
+    float old_y = y_f2;
+    CollJoint* joint;
+    int i;
+    bool result = false;
+    bool r3;
+    PAD_STACK(8);
 
-    bool_r3 = mpLib_800588C8();
-    if (!bool_r3) {
+    r3 = mpLib_800588C8();
+    if (!r3) {
         mpLib_80058970(x_f1, y_f2, x_f3, y_f4);
     }
 
-    for (joint_r29 = mpLib_804D64C4; joint_r29 != NULL;
-         joint_r29 = joint_r29->next)
-    {
-        CollLine* line_r26;
-        int count_r25;
-        int var_r24;
-        mpLib_CollData* temp_r4;
-        if (joint_r29->flags & 0x1000) {
+    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+        CollLine* line;
+        int count;
+        int count2;
+        if (joint->flags & 0x1000) {
             continue;
         }
 
-        if (r8 == joint_r29 - groundCollJoint ||
-            (r9 != -1 && r9 != joint_r29 - groundCollJoint))
+        if (joint_id0 == joint - groundCollJoint ||
+            (joint_id1 != -1 && joint_id1 != joint - groundCollJoint))
         {
             continue;
         }
 
-        temp_r4 = joint_r29->coll_data;
-        i_r28 = 0;
-        count_r25 = temp_r4->floor_count;
-        var_r24 = temp_r4->dynamic_count;
-        line_r26 = &groundCollLine[temp_r4->floor_start];
-        for (; i_r28 < count_r25; i_r28 += 1, line_r26 += 1) {
+        count = joint->coll_data->floor_count;
+        count2 = joint->coll_data->dynamic_count;
+        line = &groundCollLine[joint->coll_data->floor_start];
+        for (i = 0; i < count; i++, line++) {
         block_8:
-            if (cb != NULL && !cb(gobj, line_r26 - groundCollLine)) {
+            if (cb != NULL && !cb(gobj, line - groundCollLine)) {
                 continue;
             }
 
-            if (r7 == line_r26 - groundCollLine) {
+            if (line_id == line - groundCollLine) {
                 continue;
             }
 
-            if (!(line_r26->flags & LINE_FLAG_FLOOR) ||
-                !(line_r26->flags & 0x10000) || line_r26->flags & 0x80)
+            if (!(line->flags & LINE_FLAG_FLOOR) || !(line->flags & 0x10000) ||
+                line->flags & 0x80)
             {
                 continue;
             }
 
             {
-                CollVtx* v0_r5 = &groundCollVtx[line_r26->x0->v0_idx];
-                CollVtx* v1_r6 = &groundCollVtx[line_r26->x0->v1_idx];
+                CollVtx* v0_r5 = &groundCollVtx[line->x0->v0_idx];
+                CollVtx* v1_r6 = &groundCollVtx[line->x0->v1_idx];
+                float v0x = v0_r5->pos.x;
+                float v0y = y_offset_f5 + v0_r5->pos.y;
+                float v1x = v1_r6->pos.x;
+                float v1y = y_offset_f5 + v1_r6->pos.y;
                 float x_f23;
                 float y_f22;
-                float px_sp4C;
-                float py_sp48;
-                float x0_f27 = v0_r5->pos.x;
-                float y0_f26 = y_offset_f5 + v0_r5->pos.y;
-                float x1_f25 = v1_r6->pos.x;
-                float y1_f24 = y_offset_f5 + v1_r6->pos.y;
+                float dx2;
+                float dy2;
+                float dist2;
+                float int_x_sp4C;
+                float int_y_sp48;
+                PAD_STACK(4);
 
-                if (joint_r29->flags & 0x700) {
-                    mpLib_Remap2d(&x_f1, &y_f2, v0_r5->x10, v0_r5->x14,
-                                  v1_r6->x10, v1_r6->x14, x0_f27, y0_f26,
-                                  x1_f25, y1_f24, x_f1, y_f2);
+                if (joint->flags & 0x700) {
+                    mpRemap2d(&x_f1, &y_f2, v0_r5->x10, v0_r5->x14, v1_r6->x10,
+                              v1_r6->x14, v0x, v0y, v1x, v1y, old_x, old_y);
+                } else {
+                    x_f1 = old_x;
+                    y_f2 = old_y;
                 }
 
                 x_f23 = x_f3 - x_f1;
                 y_f22 = y_f4 - y_f2;
 
-                if (ABS(y0_f26 - y1_f24) > 0.0001) {
-                    if (mpLib_8004E97C(x0_f27, y0_f26, x1_f25, y1_f24, x_f1,
-                                       y_f2, x_f3, y_f4, &px_sp4C, &py_sp48))
+                if (ABS(v0y - v1y) > 0.0001) {
+                    if (mpLib_8004E97C(v0x, v0y, v1x, v1y, x_f1, y_f2, x_f3,
+                                       y_f4, &int_x_sp4C, &int_y_sp48))
                     {
-                        float dx = px_sp4C - x_f1;
-                        float dy = py_sp48 - y_f2;
-                        float dx2 = dx * dx;
-                        float dy2 = dy * dy;
-                        float dist2 = dx2 + dy2;
+                        dx2 = SQ(int_x_sp4C - old_x);
+                        dy2 = SQ(int_y_sp48 - old_y);
+                        dist2 = dx2 + dy2;
 
-                        if (x_f23 * (px_sp4C - x_f1) +
-                                y_f22 * (py_sp48 - y_f2) <
+                        if (x_f23 * (int_x_sp4C - old_x) +
+                                y_f22 * (int_y_sp48 - old_y) <
                             0.0F)
                         {
                             dist2 = -dist2;
                         }
-                        if (min_dist_f30 > dist2) {
-                            min_dist_f30 = dist2;
+                        if (min_dist2 > dist2) {
+                            min_dist2 = dist2;
                             if (vec_out) {
-                                vec_out->x = px_sp4C;
-                                vec_out->y = py_sp48;
+                                vec_out->x = int_x_sp4C;
+                                vec_out->y = int_y_sp48;
                                 vec_out->z = 0.0F;
                             }
                             if (line_id_out) {
-                                *line_id_out = line_r26 - groundCollLine;
+                                *line_id_out = line - groundCollLine;
                             }
                             if (flags_out) {
-                                *flags_out = line_r26->x0->flags;
+                                *flags_out = line->x0->flags;
                             }
                             if (normal_out) {
-                                normal_out->x = -(y1_f24 - y0_f26);
-                                normal_out->y = x1_f25 - x0_f27;
+                                normal_out->x = -(v1y - v0y);
+                                normal_out->y = v1x - v0x;
                                 normal_out->z = 0.0F;
                                 PSVECNormalize(normal_out, normal_out);
                             }
-                            result_r27 = true;
+                            result = true;
                         }
                     }
                 } else if (y_f2 >= y_f4 &&
-                           mpLib_8004EBF8(&px_sp4C, &py_sp48, x0_f27, y0_f26,
-                                          x1_f25, x_f1, y_f2, x_f3, y_f4))
+                           mpLib_8004EBF8(&int_x_sp4C, &int_y_sp48, v0x, v0y,
+                                          v1x, x_f1, y_f2, x_f3, y_f4))
                 {
-                    float dx = px_sp4C - x_f1;
-                    float dy = py_sp48 - y_f2;
-                    float dx2 = dx * dx;
-                    float dy2 = dy * dy;
-                    float dist2 = dx2 + dy2;
+                    dx2 = SQ(int_x_sp4C - old_x);
+                    dy2 = SQ(int_y_sp48 - old_y);
+                    dist2 = dx2 + dy2;
 
-                    if (x_f23 * dx + y_f22 * dy < 0.0F) {
+                    if (x_f23 * (int_x_sp4C - old_x) +
+                            y_f22 * (int_y_sp48 - old_y) <
+                        0.0F)
+                    {
                         dist2 = -dist2;
                     }
 
-                    if (min_dist_f30 > dist2) {
-                        min_dist_f30 = dist2;
+                    if (min_dist2 > dist2) {
+                        min_dist2 = dist2;
                         if (vec_out) {
-                            vec_out->x = px_sp4C;
-                            vec_out->y = py_sp48;
+                            vec_out->x = int_x_sp4C;
+                            vec_out->y = int_y_sp48;
                             vec_out->z = 0.0F;
                         }
                         if (line_id_out) {
-                            *line_id_out = line_r26 - groundCollLine;
+                            *line_id_out = line - groundCollLine;
                         }
                         if (flags_out) {
-                            *flags_out = line_r26->x0->flags;
+                            *flags_out = line->x0->flags;
                         }
                         if (normal_out) {
                             normal_out->x = 0.0F;
                             normal_out->y = 1.0F;
                             normal_out->z = 0.0F;
                         }
-                        result_r27 = true;
+                        result = true;
                     }
                 }
             }
         }
-        if (var_r24 != 0) {
-            count_r25 = var_r24;
-            i_r28 = 0;
-            var_r24 = 0;
-            line_r26 = &groundCollLine[joint_r29->coll_data->dynamic_start];
+
+        if (count2 != 0) {
+            count = count2;
+            i = 0;
+            count2 = 0;
+            line = &groundCollLine[joint->coll_data->dynamic_start];
             goto block_8;
         }
     }
 
-    if (!bool_r3) {
+    if (!r3) {
         mpLib_80058AA0();
     }
 
-    return result_r27;
+    return result;
 }
 
 bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, int* flags_out,

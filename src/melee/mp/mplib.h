@@ -38,8 +38,10 @@
                                        float, float, float, int, int, int,
                                        bool (*)(Fighter_GObj*, int),
                                        Fighter_GObj*);
-/* 04F400 */ bool mpLib_8004F400_Floor(Vec3*, int*, int*, Vec3*, float, float,
-                                       float, float, float, int, int, int,
+/* 04F400 */ bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out,
+                                       int* flags_out, Vec3* normal_out, float,
+                                       float, float, float, float, int line_id,
+                                       int joint_id0, int joint_id1,
                                        bool (*)(Fighter_GObj*, int),
                                        Fighter_GObj*);
 /* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(Vec3*, int*, int*, Vec3*, int, int,
