@@ -113,10 +113,8 @@ struct CollJoint {
     /* 0x08 */ u32 flags;
     /* 0x0C */ s16 xC;
     /* 0x0E */ u8 xE : 1;
-    /* 0x10 */ float x10;
-    /* 0x14 */ float x14;
-    /* 0x18 */ float x18;
-    /* 0x1C */ float x1C;
+    /* 0x10 */ Vec2 x10;
+    /* 0x18 */ Vec2 x18;
     /* 0x20 */ HSD_JObj* x20;
     /* 0x24 */ mpLib_Callback x24;
     /* 0x28 */ Ground* x28;

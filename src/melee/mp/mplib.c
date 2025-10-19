@@ -183,10 +183,10 @@ void mpLib_8004D288(mp_CollData* coll_data)
         var_r26 = &groundCollJoint[i];
         var_r26->coll_data = &coll_data->x24[i];
         var_r26->flags = 0x10000;
-        var_r26->x10 = f31 * coll_data->x24[i].x14;
-        var_r26->x14 = f31 * coll_data->x24[i].x18;
-        var_r26->x18 = f31 * coll_data->x24[i].x1C;
-        var_r26->x1C = f31 * coll_data->x24[i].x20;
+        var_r26->x10.x = f31 * coll_data->x24[i].x14;
+        var_r26->x10.y = f31 * coll_data->x24[i].x18;
+        var_r26->x18.x = f31 * coll_data->x24[i].x1C;
+        var_r26->x18.y = f31 * coll_data->x24[i].x20;
         var_r26->x20 = NULL;
         var_r26->x28 = NULL;
         var_r26->x24 = NULL;
@@ -3767,10 +3767,10 @@ void mpLib_80055E9C(int joint_id)
             v_r4->pos.x = v_r4->x0 * m0_0 + m0_3;
             v_r4->pos.y = v_r4->x4 * m0_0 + m1_3;
         }
-        mp_info->x10 = (mp_info->coll_data->x14 * m0_0 + m0_3) - 30.0F;
-        mp_info->x14 = (mp_info->coll_data->x18 * m0_0 + m1_3) - 30.0F;
-        mp_info->x18 = 30.0F + (mp_info->coll_data->x1C * m0_0 + m0_3);
-        mp_info->x1C = 30.0F + (mp_info->coll_data->x20 * m0_0 + m1_3);
+        mp_info->x10.x = (mp_info->coll_data->x14 * m0_0 + m0_3) - 30.0F;
+        mp_info->x10.y = (mp_info->coll_data->x18 * m0_0 + m1_3) - 30.0F;
+        mp_info->x18.x = 30.0F + (mp_info->coll_data->x1C * m0_0 + m0_3);
+        mp_info->x18.y = 30.0F + (mp_info->coll_data->x20 * m0_0 + m1_3);
         mp_info->flags |= 0x100;
         goto after0;
     }
@@ -3807,14 +3807,14 @@ void mpLib_80055E9C(int joint_id)
             sp28.y = mp_info->coll_data->x18;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            mp_info->x10 = sp28.x;
-            mp_info->x14 = sp28.y;
+            mp_info->x10.x = sp28.x;
+            mp_info->x10.y = sp28.y;
             sp28.x = mp_info->coll_data->x1C;
             sp28.y = mp_info->coll_data->x20;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            mp_info->x18 = sp28.x;
-            mp_info->x1C = sp28.y;
+            mp_info->x18.x = sp28.x;
+            mp_info->x18.y = sp28.y;
             if (mp_info->flags & 0x200) {
                 sp28.x = mp_info->coll_data->x1C;
                 sp28.y = mp_info->coll_data->x18;
@@ -3826,53 +3826,53 @@ void mpLib_80055E9C(int joint_id)
                 sp28.y = mp_info->coll_data->x20;
                 sp28.z = 0.0F;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-                f1 = mp_info->x10;
-                f0 = mp_info->x18;
+                f1 = mp_info->x10.x;
+                f0 = mp_info->x18.x;
                 f2 = sp28.x;
                 f3 = sp28.y;
                 if (f1 > f0) {
-                    mp_info->x10 = f0;
+                    mp_info->x10.x = f0;
                 }
-                if (mp_info->x10 > f30) {
-                    mp_info->x10 = f30;
+                if (mp_info->x10.x > f30) {
+                    mp_info->x10.x = f30;
                 }
-                if (mp_info->x10 > f2) {
-                    mp_info->x10 = f2;
+                if (mp_info->x10.x > f2) {
+                    mp_info->x10.x = f2;
                 }
-                if (mp_info->x18 < f1) {
-                    mp_info->x18 = f1;
+                if (mp_info->x18.x < f1) {
+                    mp_info->x18.x = f1;
                 }
-                if (mp_info->x18 < f30) {
-                    mp_info->x18 = f30;
+                if (mp_info->x18.x < f30) {
+                    mp_info->x18.x = f30;
                 }
-                if (mp_info->x18 < f2) {
-                    mp_info->x18 = f2;
+                if (mp_info->x18.x < f2) {
+                    mp_info->x18.x = f2;
                 }
-                f1 = mp_info->x14;
-                f0 = mp_info->x1C;
+                f1 = mp_info->x10.y;
+                f0 = mp_info->x18.y;
                 if (f1 > f0) {
-                    mp_info->x14 = f0;
+                    mp_info->x10.y = f0;
                 }
-                if (mp_info->x14 > f31) {
-                    mp_info->x14 = f31;
+                if (mp_info->x10.y > f31) {
+                    mp_info->x10.y = f31;
                 }
-                if (mp_info->x14 > f3) {
-                    mp_info->x14 = f3;
+                if (mp_info->x10.y > f3) {
+                    mp_info->x10.y = f3;
                 }
-                if (mp_info->x1C < f1) {
-                    mp_info->x1C = f1;
+                if (mp_info->x18.y < f1) {
+                    mp_info->x18.y = f1;
                 }
-                if (mp_info->x1C < f31) {
-                    mp_info->x1C = f31;
+                if (mp_info->x18.y < f31) {
+                    mp_info->x18.y = f31;
                 }
-                if (mp_info->x1C < f3) {
-                    mp_info->x1C = f3;
+                if (mp_info->x18.y < f3) {
+                    mp_info->x18.y = f3;
                 }
             }
-            mp_info->x10 -= 30.0F;
-            mp_info->x18 += 30.0F;
-            mp_info->x14 -= 30.0F;
-            mp_info->x1C += 30.0F;
+            mp_info->x10.x -= 30.0F;
+            mp_info->x18.x += 30.0F;
+            mp_info->x10.y -= 30.0F;
+            mp_info->x18.y += 30.0F;
         }
     }
 
@@ -3899,17 +3899,17 @@ void mpLib_800565DC(int joint_id)
 
     int i;
     for (i = 0; i < temp_r4_2; i++) {
-        if (temp_r5->x10 > cur->pos.x - 30.0F) {
-            temp_r5->x10 = cur->pos.x - 30.0F;
+        if (temp_r5->x10.x > cur->pos.x - 30.0F) {
+            temp_r5->x10.x = cur->pos.x - 30.0F;
         }
-        if (temp_r5->x18 < cur->pos.x + 30.0F) {
-            temp_r5->x18 = cur->pos.x + 30.0F;
+        if (temp_r5->x18.x < cur->pos.x + 30.0F) {
+            temp_r5->x18.x = cur->pos.x + 30.0F;
         }
-        if (temp_r5->x14 > cur->pos.y - 30.0F) {
-            temp_r5->x14 = cur->pos.y - 30.0F;
+        if (temp_r5->x10.y > cur->pos.y - 30.0F) {
+            temp_r5->x10.y = cur->pos.y - 30.0F;
         }
-        if (temp_r5->x1C < cur->pos.y + 30.0F) {
-            temp_r5->x1C = cur->pos.y + 30.0F;
+        if (temp_r5->x18.y < cur->pos.y + 30.0F) {
+            temp_r5->x18.y = cur->pos.y + 30.0F;
         }
         cur += 1;
     }
@@ -5517,8 +5517,8 @@ void mpLib_800588D0(float left, float bottom, float right, float top)
         if (curr->flags & 0x10000 && !(curr->flags & 0x40000)) {
             if (curr->flags & 0x400) {
                 curr->flags &= ~0x1000;
-            } else if (left > curr->x18 || right < curr->x10 ||
-                       bottom > curr->x1C || top < curr->x14)
+            } else if (left > curr->x18.x || right < curr->x10.x ||
+                       bottom > curr->x18.y || top < curr->x10.y)
             {
                 curr->flags |= 0x1000;
             } else {
