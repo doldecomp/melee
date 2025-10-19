@@ -848,11 +848,11 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
     *y1_out = y1_f3;
 }
 
-bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
+bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out, u32* flags_out,
                           Vec3* normal_out, float x0_f1, float y0_f2,
-                          float x1_f3, float y1_f4, float y_offset_f5, int r7,
-                          int r8, int r9, bool (*cb)(Fighter_GObj*, int),
-                          Fighter_GObj* gobj)
+                          float x1_f3, float y1_f4, float y_offset_f5,
+                          int line_id, int joint_id0, int joint_id1,
+                          bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
 {
     float min_dist2_f30;
     CollJoint* r29;
@@ -876,8 +876,8 @@ bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
             continue;
         }
 
-        if (r8 == r29 - groundCollJoint ||
-            (r9 != -1 && r9 != r29 - groundCollJoint))
+        if (joint_id0 == r29 - groundCollJoint ||
+            (joint_id1 != -1 && joint_id1 != r29 - groundCollJoint))
         {
             continue;
         }
@@ -899,7 +899,7 @@ bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
                 continue;
             }
 
-            if (r7 == line_r26 - groundCollLine) {
+            if (line_id == line_r26 - groundCollLine) {
                 continue;
             }
 
@@ -994,7 +994,7 @@ bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
     return result_r27;
 }
 
-bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
+bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out, u32* flags_out,
                           Vec3* normal_out, float x_f1, float y_f2, float x_f3,
                           float y_f4, float y_offset_f5, int line_id,
                           int joint_id0, int joint_id1,
@@ -1165,9 +1165,9 @@ bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
     return result;
 }
 
-bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, int* flags_out,
-                            Vec3* normal_out, int r6, int r7, float x_f1,
-                            float y_f2, float x_f3, float y_f4)
+bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
+                            Vec3* normal_out, int joint_id0, int joint_id1,
+                            float x_f1, float y_f2, float x_f3, float y_f4)
 {
     float min_dist2 = F32_MAX;
     CollJoint* r29;
@@ -1189,8 +1189,8 @@ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, int* flags_out,
             continue;
         }
 
-        if (r6 == r29 - groundCollJoint ||
-            (r7 != -1 && r7 != r29 - groundCollJoint))
+        if (joint_id0 == r29 - groundCollJoint ||
+            (joint_id1 != -1 && joint_id1 != r29 - groundCollJoint))
         {
             continue;
         }
@@ -1308,7 +1308,7 @@ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, int* flags_out,
     return result;
 }
 
-bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out, int* flags_out,
+bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
                             Vec3* normal_out, int joint_id0, int joint_id1,
                             float f1, float f2, float f3, float f4)
 {
@@ -1526,7 +1526,7 @@ bool mpLib_80050068(float* r3, float* r4, float f1, float f2, float f3,
     return true;
 }
 
-bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, int* flags_out,
+bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                              Vec3* normal_out, int joint_id0, int joint_id1,
                              float normal_x, float normal_y, float right_x,
                              float right_y)
@@ -1661,7 +1661,7 @@ bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, int* flags_out,
     return result;
 }
 
-bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out, int* flags_out,
+bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                              Vec3* normal_out, int joint_id0, int joint_id1,
                              float f1, float f2, float f3, float f4)
 {
@@ -1832,7 +1832,7 @@ bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out, int* flags_out,
     return r27;
 }
 
-bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, int* flags_out,
+bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                               Vec3* normal_out, int joint_id0, int joint_id1,
                               float f1, float f2, float left_x, float left_y)
 {
@@ -1965,7 +1965,7 @@ bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, int* flags_out,
     return result;
 }
 
-bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, int* flags_out,
+bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                               Vec3* normal_out, int joint_id0, int joint_id1,
                               float f1, float f2, float f3, float f4)
 {
@@ -2284,9 +2284,9 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
     return result;
 }
 
-bool mpLib_800515A0_LeftWall(int* line_id, int arg1, int arg2, float arg8,
-                             float arg9, float argA, float argB, float argC,
-                             float argD, float argE, float argF)
+bool mpLib_800515A0_LeftWall(int* line_id_out, int joint_id0, int joint_id1,
+                             float arg8, float arg9, float argA, float argB,
+                             float argC, float argD, float argE, float argF)
 {
     float sp48;
     float sp44;
@@ -2336,8 +2336,8 @@ bool mpLib_800515A0_LeftWall(int* line_id, int arg1, int arg2, float arg8,
             continue;
         }
 
-        if (arg1 != r29 - groundCollJoint &&
-            (arg2 == -1 || arg2 == r29 - groundCollJoint))
+        if (joint_id0 != r29 - groundCollJoint &&
+            (joint_id1 == -1 || joint_id1 == r29 - groundCollJoint))
         {
             r4 = r29->coll_data;
             r28 = 0;
@@ -2372,8 +2372,8 @@ bool mpLib_800515A0_LeftWall(int* line_id, int arg1, int arg2, float arg8,
                         }
                         if (f31 > f1) {
                             f31 = f1;
-                            if (line_id != NULL) {
-                                *line_id = r26 - groundCollLine;
+                            if (line_id_out != NULL) {
+                                *line_id_out = r26 - groundCollLine;
                             }
                             r27 = true;
                         }
@@ -2401,8 +2401,8 @@ bool mpLib_800515A0_LeftWall(int* line_id, int arg1, int arg2, float arg8,
                         }
                         if (f31 > f1_2) {
                             f31 = f1_2;
-                            if (line_id != NULL) {
-                                *line_id = r26 - groundCollLine;
+                            if (line_id_out != NULL) {
+                                *line_id_out = r26 - groundCollLine;
                             }
                             r27 = true;
                         }
@@ -2648,7 +2648,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id, int joint_id0,
     return ledge_id;
 }
 
-bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, int* flags_out,
+bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
                     Vec3* normal_out, u32 arg4, int joint_id0, int joint_id1,
                     float x1, float y1, float x2, float y2)
 {
@@ -2666,7 +2666,7 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, int* flags_out,
     Vec3 pos_sp50;
     Vec3 normal_sp44;
     int line_id_sp40;
-    int flags_sp3C;
+    u32 flags_sp3C;
 
     min_sq_dist_f31 = F32_MAX;
     temp_r3 = mpLib_800588C8();
@@ -2815,7 +2815,7 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, int* flags_out,
     return false;
 }
 
-bool mpLib_800524DC(Vec3* pos_out, int* line_id_out, int* flags_out,
+bool mpLib_800524DC(Vec3* pos_out, int* line_id_out, u32* flags_out,
                     Vec3* normal_out, int joint_id0, int joint_id1, float x0,
                     float y0, float x1, float y1)
 {
@@ -2823,7 +2823,7 @@ bool mpLib_800524DC(Vec3* pos_out, int* line_id_out, int* flags_out,
                           joint_id0, joint_id1, x0, y0, x1, y1);
 }
 
-bool mpLib_80052508(Vec3* pos_out, int* line_id_out, int* flags_out,
+bool mpLib_80052508(Vec3* pos_out, int* line_id_out, u32* flags_out,
                     Vec3* normal_out, int joint_id0, int joint_id1, float x0,
                     float y0, float x1, float y1)
 {
@@ -3149,9 +3149,9 @@ int mpLib_80053BD4_Ceiling(int line_id)
     return -1;
 }
 
-void mpLib_80053DA4_Floor(int ledge_id, Vec3* pos_out)
+void mpLib_80053DA4_Floor(int line_id, Vec3* pos_out)
 {
-    int r29 = ledge_id;
+    int r29 = line_id;
     int r5;
     CollVtx* temp_r3;
 
@@ -3174,25 +3174,25 @@ skip:
     pos_out->z = 0.0F;
 }
 
-void mpLib_80053ECC_Floor(int ledge_id, Vec* vec)
+void mpLib_80053ECC_Floor(int line_id, Vec* vec)
 {
     CollVtx* temp_r3;
 
-    LINEID_CHECK(4448, ledge_id);
+    LINEID_CHECK(4448, line_id);
 
     while (true) {
-        int new_id = groundCollLine[ledge_id].x0->x4_line_id;
+        int new_id = groundCollLine[line_id].x0->x4_line_id;
         if ((new_id != -1) && (groundCollLine[new_id].flags & LINE_FLAG_FLOOR))
         {
-            ledge_id = new_id;
+            line_id = new_id;
         } else {
             break;
         }
     }
 
-    LINEID_CHECK(4453, ledge_id);
+    LINEID_CHECK(4453, line_id);
 
-    temp_r3 = &groundCollVtx[groundCollLine[ledge_id].x0->v0_idx];
+    temp_r3 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
     vec->x = temp_r3->pos.x;
     vec->y = temp_r3->pos.y;
     vec->z = 0.0F;
@@ -3386,13 +3386,13 @@ u32 mpLineGetFlags(int line_id)
     return groundCollLine[line_id].x0->flags;
 }
 
-void mpLib_80054D68(int line_id, u32 arg1)
+void mpLib_80054D68(int line_id, u32 flags)
 {
     LINEID_CHECK(4595, line_id);
     {
         mpLib_Line* line = groundCollLine[line_id].x0;
-        u16* flags = &line->flags;
-        *flags = (*flags & 0xFFFFFF00) | arg1;
+        u16* old_flags = &line->flags;
+        *old_flags = (*old_flags & 0xFFFFFF00) | flags;
     }
 }
 
@@ -3434,24 +3434,24 @@ bool mpLib_80054ED8(int line_id)
     return true;
 }
 
-bool mpLib_80054F68(int floor_id, int line_id2)
+bool mpLib_80054F68(int line_id, int line_id2)
 {
-    int var_r6 = floor_id;
+    int var_r6 = line_id;
     int var_r9;
 
-    LINEID_CHECK(4656, floor_id);
+    LINEID_CHECK(4656, line_id);
     LINEID_CHECK(4657, line_id2);
-    if (floor_id == line_id2) {
+    if (line_id == line_id2) {
         return true;
     }
-    var_r9 = mpLib_8004DB78(floor_id);
+    var_r9 = mpLib_8004DB78(line_id);
 loop_23:
-    if (var_r9 == -1 || !(groundCollLine[floor_id].flags ==
+    if (var_r9 == -1 || !(groundCollLine[line_id].flags ==
                           (groundCollLine[var_r9].flags & 0xF)))
     {
-        var_r6 = mpLib_8004DC04(floor_id);
+        var_r6 = mpLib_8004DC04(line_id);
         while (true) {
-            if (var_r6 == -1 || !(groundCollLine[floor_id].flags ==
+            if (var_r6 == -1 || !(groundCollLine[line_id].flags ==
                                   (groundCollLine[var_r6].flags & 0xF)))
             {
                 return false;
@@ -3497,7 +3497,7 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
 }
 
 // what even is this lol
-void mpLib_800552B0(int x, HSD_JObj* jobj, int z)
+void mpLib_800552B0(int joint_id, HSD_JObj* jobj, int z)
 {
     s32 i;
     HSD_JObj* r7;
@@ -3531,7 +3531,7 @@ void mpLib_800552B0(int x, HSD_JObj* jobj, int z)
     }
 
     if (r7 != NULL) {
-        CollJoint* joint = &groundCollJoint[x];
+        CollJoint* joint = &groundCollJoint[joint_id];
         joint->x20 = r7;
     }
 }
@@ -3636,9 +3636,9 @@ void mpLib_800557D0(int joint_id)
     }
 }
 
-void mpLib_80055C5C(int index)
+void mpLib_80055C5C(int joint_id)
 {
-    CollJoint* temp_r31 = &groundCollJoint[index];
+    CollJoint* temp_r31 = &groundCollJoint[joint_id];
     CollLine* var_r30;
     int i;
     s16 temp_r28 = temp_r31->coll_data->dynamic_count;
@@ -3690,21 +3690,21 @@ void mpLib_80055C5C(int index)
     }
 }
 
-void mpLib_80055E24(int index)
+void mpLib_80055E24(int joint_id)
 {
     bool var_r6;
-    CollJoint* temp_r31 = &groundCollJoint[index];
+    CollJoint* temp_r31 = &groundCollJoint[joint_id];
 
-    mpLib_80055C5C(index);
+    mpLib_80055C5C(joint_id);
     var_r6 = false;
     if (!(temp_r31->flags & 0x40800) && (temp_r31->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(index, temp_r31->coll_data->vtx_start,
+    mpIsland_8005B334(joint_id, temp_r31->coll_data->vtx_start,
                       temp_r31->coll_data->vtx_count, var_r6);
 }
 
-void mpLib_80055E9C(int x)
+void mpLib_80055E9C(int joint_id)
 {
     float f31;
     float f30;
@@ -3729,7 +3729,7 @@ void mpLib_80055E9C(int x)
     PAD_STACK(0x14);
 
     mpColl_804D64AC += 1;
-    mp_info = &groundCollJoint[x];
+    mp_info = &groundCollJoint[joint_id];
     vtx_count = mp_info->coll_data->vtx_count;
     v_r4 = &groundCollVtx[mp_info->coll_data->vtx_start];
     for (i = 0; i < vtx_count; i++, v_r4++) {
@@ -3743,12 +3743,12 @@ void mpLib_80055E9C(int x)
 
     if (HSD_JObjGetFlags(jobj) & 0x10) {
         if (!(mp_info->flags & 0x40000)) {
-            mpLib_8005541C(x);
+            mpLib_8005541C(joint_id);
             var_r6 = false;
             if (!(mp_info->flags & 0x40800) && (mp_info->flags & 0x10000)) {
                 var_r6 = true;
             }
-            mpIsland_8005B334(x, mp_info->coll_data->vtx_start,
+            mpIsland_8005B334(joint_id, mp_info->coll_data->vtx_start,
                               mp_info->coll_data->vtx_count, var_r6);
         }
         return;
@@ -3877,23 +3877,23 @@ void mpLib_80055E9C(int x)
     }
 
 after0:
-    mpLib_80055C5C(x);
+    mpLib_80055C5C(joint_id);
 
 after1:
     if (mp_info->flags & 0x40000) {
-        mpLib_800557D0(x);
+        mpLib_800557D0(joint_id);
     }
     var_r6 = false;
     if (!(mp_info->flags & (0x40000 | 0x800)) && (mp_info->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(x, mp_info->coll_data->vtx_start,
+    mpIsland_8005B334(joint_id, mp_info->coll_data->vtx_start,
                       mp_info->coll_data->vtx_count, var_r6);
 }
 
-void mpLib_800565DC(int index)
+void mpLib_800565DC(int joint_id)
 {
-    CollJoint* temp_r5 = &groundCollJoint[index];
+    CollJoint* temp_r5 = &groundCollJoint[joint_id];
     CollVtx* cur = &groundCollVtx[temp_r5->coll_data->vtx_start];
     int temp_r4_2 = temp_r5->coll_data->vtx_count;
 
@@ -3915,42 +3915,42 @@ void mpLib_800565DC(int index)
     }
 }
 
-void mpLib_8005667C(int index)
+void mpLib_8005667C(int joint_id)
 {
     bool var_r6 = false;
-    CollJoint* temp_r7 = &groundCollJoint[index];
+    CollJoint* temp_r7 = &groundCollJoint[joint_id];
 
     if (!(temp_r7->flags & 0x40800) && (temp_r7->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(index, temp_r7->coll_data->vtx_start,
+    mpIsland_8005B334(joint_id, temp_r7->coll_data->vtx_start,
                       temp_r7->coll_data->vtx_count, var_r6);
 }
 
-void mpLib_800566D8(int index, f32* arg1, f32* arg2)
+void mpLib_800566D8(int vtx_id, f32* arg1, f32* arg2)
 {
-    CollVtx* temp_r3 = &groundCollVtx[index];
+    CollVtx* temp_r3 = &groundCollVtx[vtx_id];
     *arg1 = temp_r3->pos.x;
     *arg2 = temp_r3->pos.y;
 }
 
-void mpLib_800566F8(int index, float arg1, float arg2)
+void mpLib_800566F8(int vtx_id, float arg1, float arg2)
 {
-    CollVtx* temp_r3 = &groundCollVtx[index];
+    CollVtx* temp_r3 = &groundCollVtx[vtx_id];
     temp_r3->pos.x = arg1;
     temp_r3->pos.y = arg2;
 }
 
-void mpLib_80056710(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
+void mpLib_80056710(int line_id, f32 arg8, f32 arg9, f32 argA, f32 argB)
 {
-    CollLine* temp_r5 = &groundCollLine[index];
+    CollLine* temp_r5 = &groundCollLine[line_id];
     mpLib_800566F8(temp_r5->x0->v0_idx, arg8, arg9);
     mpLib_800566F8(temp_r5->x0->v1_idx, argA, argB);
 }
 
-void mpLib_80056758(int index, f32 arg8, f32 arg9, f32 argA, f32 argB)
+void mpLib_80056758(int line_id, f32 arg8, f32 arg9, f32 argA, f32 argB)
 {
-    CollLine* temp_r5 = &groundCollLine[index];
+    CollLine* temp_r5 = &groundCollLine[line_id];
 
     CollVtx* temp_r3 = &groundCollVtx[temp_r5->x0->v0_idx];
     temp_r3->pos.x = temp_r3->x0 + arg8;
@@ -4802,8 +4802,8 @@ int mpLib_80056B6C(int line_id)
     return -1;
 }
 
-bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* arg3,
-                    int* flags_out, Vec3* normal_out, f32 var_f25, f32 arg7,
+bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
+                    u32* flags_out, Vec3* normal_out, f32 var_f25, f32 arg7,
                     f32 arg8, f32 arg9)
 {
     float sp64;
@@ -4913,43 +4913,43 @@ block_10:
             mpLineGetNormal(line_id, normal_out);
         }
     }
-    if (arg3 != NULL) {
+    if (vec_out != NULL) {
         if (result_r30) {
             if (dist_f28 < 0.0001) {
-                *arg3 = sp58;
+                *vec_out = sp58;
             } else {
                 float temp_f2_5 = var_f25 / dist_f28;
-                arg3->x = (temp_f2_5 * (sp4C.x - sp58.x)) + sp58.x;
-                arg3->y = (temp_f2_5 * (sp4C.y - sp58.y)) + sp58.y;
-                arg3->z = (temp_f2_5 * (sp4C.z - sp58.z)) + sp58.z;
+                vec_out->x = (temp_f2_5 * (sp4C.x - sp58.x)) + sp58.x;
+                vec_out->y = (temp_f2_5 * (sp4C.y - sp58.y)) + sp58.y;
+                vec_out->z = (temp_f2_5 * (sp4C.z - sp58.z)) + sp58.z;
             }
         } else {
-            *arg3 = sp4C;
+            *vec_out = sp4C;
         }
     }
     return result_r30;
 }
 
-void mpLib_80057424(int idx)
+void mpLib_80057424(int joint_id)
 {
-    CollJoint* joint = &groundCollJoint[idx];
+    CollJoint* joint = &groundCollJoint[joint_id];
     mpLib_CollData* coll_data = joint->coll_data;
     u32 count = coll_data->vtx_count;
     s16 start = coll_data->vtx_start;
     int new_var;
     CollVtx* vtx = &groundCollVtx[start];
-    for (idx = 0; idx < (new_var = count); idx++) {
+    for (joint_id = 0; joint_id < (new_var = count); joint_id++) {
         vtx->x10 = vtx->pos.x;
         vtx->x14 = vtx->pos.y;
         vtx++;
     }
 }
 
-void mpLib_80057528(int index)
+void mpLib_80057528(int line_id)
 {
-    int temp_r3 = mpLib_80056B6C(index);
+    int temp_r3 = mpLib_80056B6C(line_id);
     if (temp_r3 != -1) {
-        CollLine* tmp = &groundCollLine[index];
+        CollLine* tmp = &groundCollLine[line_id];
         CollJoint* temp_r31 = &groundCollJoint[temp_r3];
         tmp->flags |= 0x10000;
         mpIsland_8005B334(temp_r3, temp_r31->coll_data->vtx_start,
@@ -4959,11 +4959,11 @@ void mpLib_80057528(int index)
     }
 }
 
-void mpLib_800575B0(int index)
+void mpLib_800575B0(int line_id)
 {
-    int temp_r3 = mpLib_80056B6C(index);
+    int temp_r3 = mpLib_80056B6C(line_id);
     if (temp_r3 != -1) {
-        CollLine* tmp = &groundCollLine[index];
+        CollLine* tmp = &groundCollLine[line_id];
         CollJoint* temp_r31 = &groundCollJoint[temp_r3];
         tmp->flags &= ~0x10000;
         mpIsland_8005B334(temp_r3, temp_r31->coll_data->vtx_start,
@@ -5127,57 +5127,59 @@ void mpLib_80057BC0(int joint_id)
     joint->xE = true;
 }
 
-void mpLib_80057FDC(int index)
+void mpLib_80057FDC(int joint_id)
 {
     mpLib_CollData* temp_r5;
     bool var_r6 = false;
-    CollJoint* temp_r7 = &groundCollJoint[index];
+    CollJoint* temp_r7 = &groundCollJoint[joint_id];
 
     temp_r7->flags &= ~0x800;
     if (!(temp_r7->flags & 0x40800) && (temp_r7->flags & 0x10000)) {
         var_r6 = true;
     }
     temp_r5 = temp_r7->coll_data;
-    mpIsland_8005B334(index, temp_r5->vtx_start, temp_r5->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, temp_r5->vtx_start, temp_r5->vtx_count,
+                      var_r6);
 }
 
-void mpLib_80058044(int index)
+void mpLib_80058044(int joint_id)
 {
     mpLib_CollData* temp_r5;
     bool var_r6 = false;
-    CollJoint* temp_r7 = &groundCollJoint[index];
+    CollJoint* temp_r7 = &groundCollJoint[joint_id];
 
     temp_r7->flags |= 0x800;
     if (!(temp_r7->flags & 0x40800) && (temp_r7->flags & 0x10000)) {
         var_r6 = true;
     }
     temp_r5 = temp_r7->coll_data;
-    mpIsland_8005B334(index, temp_r5->vtx_start, temp_r5->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, temp_r5->vtx_start, temp_r5->vtx_count,
+                      var_r6);
 }
 
-void mpLib_800580AC(int index)
+void mpLib_800580AC(int joint_id)
 {
-    CollJoint* temp_r3 = &groundCollJoint[index];
+    CollJoint* temp_r3 = &groundCollJoint[joint_id];
     temp_r3->flags |= 0x400;
 }
 
-void mpLib_800580C8(int index, Ground* arg1, mpLib_Callback cb)
+void mpLib_800580C8(int joint_id, Ground* arg1, mpLib_Callback cb)
 {
-    CollJoint* temp_r3 = &groundCollJoint[index];
+    CollJoint* temp_r3 = &groundCollJoint[joint_id];
     temp_r3->x24 = cb;
     temp_r3->x28 = arg1;
 }
 
-void mpLib_800580E0(int index)
+void mpLib_800580E0(int joint_id)
 {
-    CollJoint* temp_r3 = &groundCollJoint[index];
+    CollJoint* temp_r3 = &groundCollJoint[joint_id];
     temp_r3->x24 = NULL;
     temp_r3->x28 = NULL;
 }
 
-void mpLib_800580FC(int index, mpLib_Callback* arg1, Ground** arg2)
+void mpLib_800580FC(int joint_id, mpLib_Callback* arg1, Ground** arg2)
 {
-    CollJoint* temp_r3 = &groundCollJoint[index];
+    CollJoint* temp_r3 = &groundCollJoint[joint_id];
     *arg1 = temp_r3->x24;
     *arg2 = temp_r3->x28;
 }
@@ -5185,34 +5187,34 @@ void mpLib_800580FC(int index, mpLib_Callback* arg1, Ground** arg2)
 void mpLib_8005811C(CollData* coll, int ledge_id)
 {
     if (ledge_id != -1) {
-        int index = mpLib_80056B6C(ledge_id);
-        if (index != -1) {
-            mpLib_Callback cb = groundCollJoint[index].x24;
-            Ground* gp = groundCollJoint[index].x28;
+        int joint_id = mpLib_80056B6C(ledge_id);
+        if (joint_id != -1) {
+            mpLib_Callback cb = groundCollJoint[joint_id].x24;
+            Ground* gp = groundCollJoint[joint_id].x28;
             if (cb != NULL) {
-                cb(gp, index, coll, coll->x50, 3, 0.0F);
+                cb(gp, joint_id, coll, coll->x50, 3, 0.0F);
             }
         }
     }
 }
 
-void mpLib_800581A4(int index, Ground* arg1, mpLib_Callback arg2)
+void mpLib_800581A4(int joint_id, Ground* arg1, mpLib_Callback arg2)
 {
-    CollJoint* temp_r3 = &groundCollJoint[index];
+    CollJoint* temp_r3 = &groundCollJoint[joint_id];
     temp_r3->x2C = arg2;
     temp_r3->x30 = arg1;
 }
 
-void mpLib_800581BC(int idx, mpLib_Callback* cb, Ground** gr)
+void mpLib_800581BC(int joint_id, mpLib_Callback* cb, Ground** gr)
 {
     CollJoint* temp_r3;
 
-    temp_r3 = &groundCollJoint[idx];
+    temp_r3 = &groundCollJoint[joint_id];
     *cb = temp_r3->x2C;
     *gr = temp_r3->x30;
 }
 
-void mpLib_800581DC(int j0_idx, int j1_idx)
+void mpLib_800581DC(int joint_id0, int joint_id1)
 {
     struct pair {
         s16 start;
@@ -5226,8 +5228,8 @@ void mpLib_800581DC(int j0_idx, int j1_idx)
     CollVtx* v0_r29;
     int start0;
 
-    j0_r9 = &groundCollJoint[j0_idx];
-    j1_r10 = &groundCollJoint[j1_idx];
+    j0_r9 = &groundCollJoint[joint_id0];
+    j1_r10 = &groundCollJoint[joint_id1];
     for (i = 0; i < 5; i++) {
         int j;
         int idx;

@@ -1366,13 +1366,13 @@ bool mpColl_80044628(CollData* coll, bool (*cb)(Fighter_GObj*, int),
     if (coll->x38 != mpColl_804D64AC) {
         sp8 = gobj;
         bool_r3 = mpLib_8004F400_Floor(
-            &coll->x140, &coll->floor.index, (int*) &coll->floor.unk,
+            &coll->x140, &coll->floor.index, &coll->floor.unk,
             &coll->floor.normal, temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
             coll->x48, coll->x4C, cb, gobj);
     } else {
         sp8 = gobj;
         bool_r3 = mpLib_8004F008_Floor(
-            &coll->x140, &coll->floor.index, (int*) &coll->floor.unk,
+            &coll->x140, &coll->floor.index, &coll->floor.unk,
             &coll->floor.normal, temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
             coll->x48, coll->x4C, cb, gobj);
     }

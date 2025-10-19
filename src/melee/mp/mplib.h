@@ -34,56 +34,70 @@
 /* 04EBF8 */ bool mpLib_8004EBF8(float*, float*, float, float, float, float,
                                  float, float, float);
 /* 04ED5C */ void mpLib_8004ED5C(int, float*, float*, float*, float*);
-/* 04F008 */ bool mpLib_8004F008_Floor(Vec3*, int*, int*, Vec3*, float, float,
-                                       float, float, float, int, int, int,
-                                       bool (*)(Fighter_GObj*, int),
-                                       Fighter_GObj*);
-/* 04F400 */ bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out,
-                                       int* flags_out, Vec3* normal_out, float,
+/* 04F008 */ bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out,
+                                       u32* flags_out, Vec3* normal_out, float,
                                        float, float, float, float, int line_id,
                                        int joint_id0, int joint_id1,
                                        bool (*)(Fighter_GObj*, int),
                                        Fighter_GObj*);
-/* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(Vec3*, int*, int*, Vec3*, int, int,
-                                         float, float, float, float);
-/* 04FC2C */ bool mpLib_8004FC2C_Ceiling(Vec3*, int*, int*, Vec3*, int, int,
-                                         float, float, float, float);
+/* 04F400 */ bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out,
+                                       u32* flags_out, Vec3* normal_out, float,
+                                       float, float, float, float, int line_id,
+                                       int joint_id0, int joint_id1,
+                                       bool (*)(Fighter_GObj*, int),
+                                       Fighter_GObj*);
+/* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out,
+                                         u32* flags_out, Vec3* normal_out,
+                                         int joint_id0, int joint_id1, float,
+                                         float, float, float);
+/* 04FC2C */ bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out,
+                                         u32* flags_out, Vec3* normal_out,
+                                         int joint_id0, int joint_id1, float,
+                                         float, float, float);
 /* 050068 */ bool mpLib_80050068(float*, float*, float, float, float, float,
                                  float, float, float);
-/* 0501CC */ bool mpLib_800501CC_LeftWall(Vec3*, int*, int*, Vec3*, int, int,
+/* 0501CC */ bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out,
+                                          u32* flags_out, Vec3* normal_out,
+                                          int joint_id0, int joint_id1,
                                           float normal_x, float normal_y,
                                           float right_x, float right_y);
-/* 05057C */ bool mpLib_8005057C_LeftWall(Vec3*, int*, int*, Vec3*, int, int,
-                                          float, float, float, float);
-/* 0509B8 */ bool mpLib_800509B8_RightWall(Vec3*, int*, int*, Vec3*, int, int,
-                                           float, float, float left_x,
-                                           float left_y);
-/* 050D68 */ bool mpLib_80050D68_RightWall(Vec3*, int*, int*, Vec3*, int, int,
-                                           float, float, float, float);
-/* 0511A4 */ bool mpLib_800511A4_RightWall(int*, int, int, float, float, float,
+/* 05057C */ bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out,
+                                          u32* flags_out, Vec3* normal_out,
+                                          int joint_id0, int joint_id1, float,
+                                          float, float, float);
+/* 0509B8 */ bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out,
+                                           u32* flags_out, Vec3* normal_out,
+                                           int joint_id0, int joint_id1, float,
+                                           float, float left_x, float left_y);
+/* 050D68 */ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out,
+                                           u32* flags_out, Vec3* normal_out,
+                                           int joint_id0, int joint_id1, float,
+                                           float, float, float);
+/* 0511A4 */ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0,
+                                           int joint_id1, float, float, float,
                                            float, float, float, float, float);
-/* 0515A0 */ bool mpLib_800515A0_LeftWall(int* line_id, int, int, float, float,
-                                          float, float, float, float, float,
-                                          float);
+/* 0515A0 */ bool mpLib_800515A0_LeftWall(int* line_id_out, int joint_id0,
+                                          int joint_id1, float, float, float,
+                                          float, float, float, float, float);
 /* 05199C */ int mpLib_8005199C_Floor(Vec3*, int, int);
 /* 051BA8 */ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id,
                                       int joint_id0, int joint_id1, int dir,
                                       float left, float bottom, float right,
                                       float top);
 /* 051EC8 */ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out,
-                                 int* flags_out, Vec3* normal_out, u32 arg4,
+                                 u32* flags_out, Vec3* normal_out, u32 arg4,
                                  int joint_id0, int joint_id1, float x1,
                                  float y1, float x2, float y2);
 /* 0524DC */ bool mpLib_800524DC(Vec3* pos_out, int* line_id_out,
-                                 int* flags_out, Vec3* normal_out,
+                                 u32* flags_out, Vec3* normal_out,
                                  int joint_id0, int joint_id1, float x0,
                                  float y0, float x1, float y1);
 /* 052508 */ bool mpLib_80052508(Vec3* pos_out, int* line_id_out,
-                                 int* flags_out, Vec3* normal_out,
+                                 u32* flags_out, Vec3* normal_out,
                                  int joint_id0, int joint_id1, float x0,
                                  float y0, float x1, float y1);
-/* 052534 */ int mpLib_80052534_Floor(int);
-/* 052700 */ int mpLib_80052700_Floor(int);
+/* 052534 */ int mpLib_80052534_Floor(int line_id);
+/* 052700 */ int mpLib_80052700_Floor(int line_id);
 /* 0528CC */ int mpLib_800528CC_Ceiling(int line_id);
 /* 052A98 */ int mpLib_80052A98_Ceiling(int line_id);
 /* 052C64 */ int mpLib_80052C64_LeftWall(int line_id);
@@ -98,8 +112,8 @@
 /* 053950 */ int mpLib_80053950_Ceiling(int line_id);
 /* 053A04 */ int mpLib_80053A04_Ceiling(int line_id);
 /* 053BD4 */ int mpLib_80053BD4_Ceiling(int line_id);
-/* 053DA4 */ void mpLib_80053DA4_Floor(int ledge_id, Vec3*);
-/* 053ECC */ void mpLib_80053ECC_Floor(int ledge_id, Vec3*);
+/* 053DA4 */ void mpLib_80053DA4_Floor(int line_id, Vec3*);
+/* 053ECC */ void mpLib_80053ECC_Floor(int line_id, Vec3*);
 /* 053FF4 */ void mpLib_80053FF4(int line_id, Vec3*);
 /* 054158 */ void mpLib_80054158(int line_id, Vec3*);
 /* 0542BC */ void mpLib_800542BC(int line_id, Vec3*);
@@ -108,26 +122,26 @@
 /* 0546E8 */ void mpLib_800546E8(int line_id, Vec3*);
 /* 05484C */ void mpLib_8005484C(int line_id, Vec3*);
 /* 0549B0 */ void mpLib_800549B0(int line_id, Vec3*);
-/* 054B14 */ void mpLib_GetV1Pos(int line_id, Vec3* pos_out);
-/* 054BC0 */ void mpLib_GetV0Pos(int line_id, Vec3* pos_out);
-/* 054C6C */ u32 mpLib_80054C6C(int);
-/* 054CEC */ u32 mpLib_GetLineFlags(int);
-/* 054D68 */ void mpLib_80054D68(int, u32);
-/* 054DFC */ Vec3* mpLib_GetLineNormal(int line_id, Vec3* normal_out);
-/* 054ED8 */ bool mpLib_80054ED8(int);
-/* 054F68 */ bool mpLib_80054F68(int floor_id, int);
-/* 0552B0 */ void mpLib_800552B0(int x, HSD_JObj*, int z);
+/* 054B14 */ void mpLineGetV1Pos(int line_id, Vec3* pos_out);
+/* 054BC0 */ void mpLineGetV0Pos(int line_id, Vec3* pos_out);
+/* 054C6C */ u32 mpLib_80054C6C(int line_id);
+/* 054CEC */ u32 mpLineGetFlags(int line_id);
+/* 054D68 */ void mpLib_80054D68(int line_id, u32 flags);
+/* 054DFC */ Vec3* mpLineGetNormal(int line_id, Vec3* normal_out);
+/* 054ED8 */ bool mpLib_80054ED8(int line_id);
+/* 054F68 */ bool mpLib_80054F68(int line_id, int line_id2);
+/* 0552B0 */ void mpLib_800552B0(int joint_id, HSD_JObj*, int z);
 /* 05541C */ void mpLib_8005541C(int joint_id);
 /* 0557D0 */ void mpLib_800557D0(int joint_id);
-/* 055C5C */ UNK_RET mpLib_80055C5C(int index);
-/* 055E24 */ UNK_RET mpLib_80055E24(int index);
-/* 055E9C */ void mpLib_80055E9C(int x);
-/* 0565DC */ UNK_RET mpLib_800565DC(int index);
-/* 05667C */ void mpLib_8005667C(int index);
-/* 0566D8 */ UNK_RET mpLib_800566D8(int index, float*, float*);
-/* 0566F8 */ void mpLib_800566F8(int index, float, float);
-/* 056710 */ void mpLib_80056710(int index, float, float, float, float);
-/* 056758 */ UNK_RET mpLib_80056758(int index, float, float, float, float);
+/* 055C5C */ void mpLib_80055C5C(int joint_id);
+/* 055E24 */ void mpLib_80055E24(int joint_id);
+/* 055E9C */ void mpLib_80055E9C(int joint_id);
+/* 0565DC */ void mpLib_800565DC(int joint_id);
+/* 05667C */ void mpLib_8005667C(int joint_id);
+/* 0566D8 */ void mpLib_800566D8(int vtx_id, float*, float*);
+/* 0566F8 */ void mpLib_800566F8(int vtx_id, float, float);
+/* 056710 */ void mpLib_80056710(int line_id, float, float, float, float);
+/* 056758 */ void mpLib_80056758(int line_id, float, float, float, float);
 /* 0567C0 */ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed);
 /* 0569EC */ float mpLib_800569EC(u32);
 /* 056A1C */ int* mpLib_80056A1C(int, int*);
@@ -137,26 +151,27 @@
 /* 056AFC */ int* mpLib_80056AFC(int, int*);
 /* 056B34 */ int mpLib_80056B34(int, int*);
 /* 056B6C */ int mpLib_80056B6C(int);
-/* 056C54 */ bool mpLib_80056C54(int line_id, Vec3* pos, int* id_out, Vec3*,
-                                 int*, Vec3*, float, float, float, float);
-/* 057424 */ void mpLib_80057424(int idx);
-/* 057528 */ void mpLib_80057528(int index);
-/* 0575B0 */ void mpLib_800575B0(int);
-/* 057638 */ void mpLib_80057638(int);
+/* 056C54 */ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out,
+                                 Vec3* vec_out, u32* flags_out,
+                                 Vec3* normal_out, float, float, float, float);
+/* 057424 */ void mpLib_80057424(int joint_id);
+/* 057528 */ void mpLib_80057528(int line_id);
+/* 0575B0 */ void mpLib_800575B0(int line_id);
+/* 057638 */ void mpLib_80057638(int joint_id);
 /* 057B4C */ void mpLib_80057B4C(CollJoint*);
-/* 057BC0 */ void mpLib_80057BC0(int);
-/* 057FDC */ void mpLib_80057FDC(int index);
-/* 058044 */ void mpLib_80058044(int index);
-/* 0580AC */ void mpLib_800580AC(int index);
-/* 0580C8 */ void mpLib_800580C8(int, Ground*, mpLib_Callback);
-/* 0580E0 */ void mpLib_800580E0(int index);
-/* 0580FC */ void mpLib_800580FC(int, mpLib_Callback*, Ground**);
+/* 057BC0 */ void mpLib_80057BC0(int joint_id);
+/* 057FDC */ void mpLib_80057FDC(int joint_id);
+/* 058044 */ void mpLib_80058044(int joint_id);
+/* 0580AC */ void mpLib_800580AC(int joint_id);
+/* 0580C8 */ void mpLib_800580C8(int joint_id, Ground*, mpLib_Callback);
+/* 0580E0 */ void mpLib_800580E0(int joint_id);
+/* 0580FC */ void mpLib_800580FC(int joint_id, mpLib_Callback*, Ground**);
 /* 05811C */ void mpLib_8005811C(CollData*, int ledge_id);
-/* 0581A4 */ void mpLib_800581A4(int index, Ground*, mpLib_Callback);
-/* 0581BC */ void mpLib_800581BC(int, mpLib_Callback*, Ground**);
-/* 0581DC */ void mpLib_800581DC(int, int);
+/* 0581A4 */ void mpLib_800581A4(int joint_id, Ground*, mpLib_Callback);
+/* 0581BC */ void mpLib_800581BC(int joint_id, mpLib_Callback*, Ground**);
+/* 0581DC */ void mpLib_800581DC(int joint_id0, int joint_id1);
 /* 058560 */ void mpLib_80058560(void);
-/* 058614 */ UNK_RET mpLib_80058614_Floor(UNK_PARAMS);
+/* 058614 */ void mpLib_80058614_Floor(void);
 /* 0587FC */ void fn_800587FC(HSD_GObj*);
 /* 058820 */ void mpLib_80058820(void);
 /* 0588C8 */ bool mpLib_800588C8(void);

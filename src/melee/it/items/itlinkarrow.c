@@ -308,7 +308,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     Vec3 pos;
     Vec3 sp68;
     f32 pad_8[1];
-    int sp60;
+    u32 sp60;
     f32 pad_10[1];
     Quaternion quat;
     f32 pad_9[3];
@@ -553,7 +553,7 @@ void itLinkarrow_UnkMotion1_Phys(HSD_GObj* gobj)
 
 static inline bool itLinkarrow_UnkMotion1_Coll_inline(Item_GObj* gobj)
 {
-    int sp18;
+    u32 sp18;
     Vec3 sp1C;
     Item* item_2 = GET_ITEM(gobj);
     CollData* pp = &item_2->x378_itemColl;

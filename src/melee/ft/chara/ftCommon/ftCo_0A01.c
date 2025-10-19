@@ -428,16 +428,16 @@ bool ftCo_800A0F00(Fighter_GObj* gobj)
     return false;
 }
 
-bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, int arg4,
-                   int arg5, int arg6, float arg7, float arg8, float arg9,
-                   float arg10, float arg11)
+bool ftCo_800A0FB0(Vec3* vec_out, int* line_id_out, u32* flags_out,
+                   Vec3* normal_out, int arg4, int arg5, int arg6, float arg7,
+                   float arg8, float arg9, float arg10, float arg11)
 {
-    *arg1 = -1;
+    *line_id_out = -1;
     {
-        int ret =
-            mpLib_8004F008_Floor(arg0, arg1, arg2, arg3, arg7, arg8, arg9,
-                                 arg10, arg11, arg4, arg5, arg6, 0, 0);
-        if (ret && ftCo_800A1B38(*arg1)) {
+        int ret = mpLib_8004F008_Floor(vec_out, line_id_out, flags_out,
+                                       normal_out, arg7, arg8, arg9, arg10,
+                                       arg11, arg4, arg5, arg6, 0, 0);
+        if (ret && ftCo_800A1B38(*line_id_out)) {
             return false;
         }
         return ret;
@@ -461,7 +461,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     int i;
 
     int sp34;
-    int sp30;
+    u32 sp30;
 
     PAD_STACK(0xC);
 
@@ -711,7 +711,7 @@ bool ftCo_800A1BA8(Fighter* fp)
         Vec3 coll_vec;
         Vec3 sp14;
         int sp10;
-        int spC;
+        u32 spC;
         if (fp->facing_dir > 0.0) {
             return mpLib_800509B8_RightWall(
                 &coll_vec, &sp10, &spC, &sp14, -1, -1, fp->cur_pos.x,
@@ -1229,7 +1229,7 @@ bool ftCo_800A3234(Fighter* fp)
 
     {
         int sp18;
-        int sp14;
+        u32 sp14;
         float topn_x = fp->coll_data.prev_pos.x;
         float topn_y = fp->coll_data.prev_pos.y;
         float bottom_x = fp->coll_data.xA4_ecbCurrCorrect.bottom.x;
@@ -2343,7 +2343,7 @@ void ftCo_800A9904(Fighter* fp)
     Vec3 sp4C;
     Vec3 sp40;
     int sp3C;
-    int sp38;
+    u32 sp38;
 
     PAD_STACK(0x24);
 
@@ -2757,7 +2757,7 @@ void ftCo_800AA844(Fighter* fp)
     Vec3 sp28;
     Vec3 sp1C;
     int sp18;
-    int sp14;
+    u32 sp14;
 
     data = &fp->x1A88;
     if (isInTeeter(fp)) {
@@ -2897,7 +2897,7 @@ bool ftCo_800AAF48(Fighter* fp)
     Vec3 sp38;
     Vec3 sp2C;
     int sp28;
-    int sp24;
+    u32 sp24;
     PAD_STACK(0xC);
 
     if (temp_r29->x60 != 0) {
@@ -3008,7 +3008,7 @@ void ftCo_800AB224(Fighter* fp)
 
     u8 _[0x48];
 
-    int sp40;
+    u32 sp40;
     int sp3C;
     Vec3 sp30;
     Vec3 sp24;
