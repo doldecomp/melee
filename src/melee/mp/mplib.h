@@ -138,10 +138,12 @@
 /* 055E9C */ void mpLib_80055E9C(int joint_id);
 /* 0565DC */ void mpLib_800565DC(int joint_id);
 /* 05667C */ void mpLib_8005667C(int joint_id);
-/* 0566D8 */ void mpLib_800566D8(int vtx_id, float*, float*);
-/* 0566F8 */ void mpLib_800566F8(int vtx_id, float, float);
-/* 056710 */ void mpLib_80056710(int line_id, float, float, float, float);
-/* 056758 */ void mpLib_80056758(int line_id, float, float, float, float);
+/* 0566D8 */ void mpVtxGetPos(int vtx_id, float* x_out, float* y_out);
+/* 0566F8 */ void mpVtxSetPos(int vtx_id, float x, float y);
+/* 056710 */ void mpLineSetPos(int line_id, float x0, float y0, float x1,
+                               float y1);
+/* 056758 */ void mpLib_80056758(int line_id, float x0, float y0, float x1,
+                                 float y1);
 /* 0567C0 */ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed);
 /* 0569EC */ float mpLib_800569EC(u32);
 /* 056A1C */ int* mpLib_80056A1C(int, int*);

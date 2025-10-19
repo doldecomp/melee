@@ -3692,15 +3692,15 @@ void mpUpdateDynamics(int joint_id)
 void mpLib_80055E24(int joint_id)
 {
     bool var_r6;
-    CollJoint* temp_r31 = &groundCollJoint[joint_id];
+    CollJoint* joint = &groundCollJoint[joint_id];
 
     mpUpdateDynamics(joint_id);
     var_r6 = false;
-    if (!(temp_r31->flags & 0x40800) && (temp_r31->flags & 0x10000)) {
+    if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(joint_id, temp_r31->coll_data->vtx_start,
-                      temp_r31->coll_data->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, joint->coll_data->vtx_start,
+                      joint->coll_data->vtx_count, var_r6);
 }
 
 void mpLib_80055E9C(int joint_id)
@@ -3715,7 +3715,7 @@ void mpLib_80055E9C(int joint_id)
     float m1_3;
     float m0_3;
     float m0_0;
-    CollJoint* mp_info;
+    CollJoint* joint;
     HSD_JObj* jobj;
     int vtx_count;
     CollVtx* v_r26;
@@ -3728,32 +3728,32 @@ void mpLib_80055E9C(int joint_id)
     PAD_STACK(0x14);
 
     mpColl_804D64AC += 1;
-    mp_info = &groundCollJoint[joint_id];
-    vtx_count = mp_info->coll_data->vtx_count;
-    v_r4 = &groundCollVtx[mp_info->coll_data->vtx_start];
+    joint = &groundCollJoint[joint_id];
+    vtx_count = joint->coll_data->vtx_count;
+    v_r4 = &groundCollVtx[joint->coll_data->vtx_start];
     for (i = 0; i < vtx_count; i++, v_r4++) {
         v_r4->x10 = v_r4->pos.x;
         v_r4->x14 = v_r4->pos.y;
     }
-    jobj = mp_info->x20;
+    jobj = joint->x20;
     if (jobj == NULL) {
         return;
     }
 
     if (HSD_JObjGetFlags(jobj) & 0x10) {
-        if (!(mp_info->flags & 0x40000)) {
+        if (!(joint->flags & 0x40000)) {
             mpLib_8005541C(joint_id);
             var_r6 = false;
-            if (!(mp_info->flags & 0x40800) && (mp_info->flags & 0x10000)) {
+            if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
                 var_r6 = true;
             }
-            mpIsland_8005B334(joint_id, mp_info->coll_data->vtx_start,
-                              mp_info->coll_data->vtx_count, var_r6);
+            mpIsland_8005B334(joint_id, joint->coll_data->vtx_start,
+                              joint->coll_data->vtx_count, var_r6);
         }
         return;
     }
 
-    mp_info->xE = true;
+    joint->xE = true;
     var_r25 = 0;
     HSD_JObjSetupMatrix(jobj);
     mtx = HSD_JObjGetMtxPtr(jobj);
@@ -3761,21 +3761,21 @@ void mpLib_80055E9C(int joint_id)
     if (m0_0 == mtx[1][1] && m0_0 == mtx[2][2]) {
         m0_3 = mtx[0][3];
         m1_3 = mtx[1][3];
-        v_r4 = &groundCollVtx[mp_info->coll_data->vtx_start];
+        v_r4 = &groundCollVtx[joint->coll_data->vtx_start];
         for (i = 0; i < vtx_count; i++, v_r4++) {
             v_r4->pos.x = v_r4->x0 * m0_0 + m0_3;
             v_r4->pos.y = v_r4->x4 * m0_0 + m1_3;
         }
-        mp_info->x10.x = (mp_info->coll_data->x14 * m0_0 + m0_3) - 30.0F;
-        mp_info->x10.y = (mp_info->coll_data->x18 * m0_0 + m1_3) - 30.0F;
-        mp_info->x18.x = 30.0F + (mp_info->coll_data->x1C * m0_0 + m0_3);
-        mp_info->x18.y = 30.0F + (mp_info->coll_data->x20 * m0_0 + m1_3);
-        mp_info->flags |= 0x100;
+        joint->x10.x = (joint->coll_data->x14 * m0_0 + m0_3) - 30.0F;
+        joint->x10.y = (joint->coll_data->x18 * m0_0 + m1_3) - 30.0F;
+        joint->x18.x = 30.0F + (joint->coll_data->x1C * m0_0 + m0_3);
+        joint->x18.y = 30.0F + (joint->coll_data->x20 * m0_0 + m1_3);
+        joint->flags |= 0x100;
         goto after0;
     }
 
     i = 0;
-    v_r26 = &groundCollVtx[mp_info->coll_data->vtx_start];
+    v_r26 = &groundCollVtx[joint->coll_data->vtx_start];
 
     while (i < vtx_count) {
         sp28.x = v_r26->x0;
@@ -3798,80 +3798,80 @@ void mpLib_80055E9C(int joint_id)
         if (mtx[0][1] != 0.0F || mtx[0][2] != 0.0F || mtx[1][0] != 0.0F ||
             mtx[1][2] != 0.0F || mtx[2][0] != 0.0F || mtx[2][1] != 0.0F)
         {
-            mp_info->flags |= 0x200;
+            joint->flags |= 0x200;
         }
-        mp_info->flags |= 0x100;
-        if (!(mp_info->flags & 0x400)) {
-            sp28.x = mp_info->coll_data->x14;
-            sp28.y = mp_info->coll_data->x18;
+        joint->flags |= 0x100;
+        if (!(joint->flags & 0x400)) {
+            sp28.x = joint->coll_data->x14;
+            sp28.y = joint->coll_data->x18;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            mp_info->x10.x = sp28.x;
-            mp_info->x10.y = sp28.y;
-            sp28.x = mp_info->coll_data->x1C;
-            sp28.y = mp_info->coll_data->x20;
+            joint->x10.x = sp28.x;
+            joint->x10.y = sp28.y;
+            sp28.x = joint->coll_data->x1C;
+            sp28.y = joint->coll_data->x20;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            mp_info->x18.x = sp28.x;
-            mp_info->x18.y = sp28.y;
-            if (mp_info->flags & 0x200) {
-                sp28.x = mp_info->coll_data->x1C;
-                sp28.y = mp_info->coll_data->x18;
+            joint->x18.x = sp28.x;
+            joint->x18.y = sp28.y;
+            if (joint->flags & 0x200) {
+                sp28.x = joint->coll_data->x1C;
+                sp28.y = joint->coll_data->x18;
                 sp28.z = 0.0F;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
                 f30 = sp28.x;
                 f31 = sp28.y;
-                sp28.x = mp_info->coll_data->x14;
-                sp28.y = mp_info->coll_data->x20;
+                sp28.x = joint->coll_data->x14;
+                sp28.y = joint->coll_data->x20;
                 sp28.z = 0.0F;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-                f1 = mp_info->x10.x;
-                f0 = mp_info->x18.x;
+                f1 = joint->x10.x;
+                f0 = joint->x18.x;
                 f2 = sp28.x;
                 f3 = sp28.y;
                 if (f1 > f0) {
-                    mp_info->x10.x = f0;
+                    joint->x10.x = f0;
                 }
-                if (mp_info->x10.x > f30) {
-                    mp_info->x10.x = f30;
+                if (joint->x10.x > f30) {
+                    joint->x10.x = f30;
                 }
-                if (mp_info->x10.x > f2) {
-                    mp_info->x10.x = f2;
+                if (joint->x10.x > f2) {
+                    joint->x10.x = f2;
                 }
-                if (mp_info->x18.x < f1) {
-                    mp_info->x18.x = f1;
+                if (joint->x18.x < f1) {
+                    joint->x18.x = f1;
                 }
-                if (mp_info->x18.x < f30) {
-                    mp_info->x18.x = f30;
+                if (joint->x18.x < f30) {
+                    joint->x18.x = f30;
                 }
-                if (mp_info->x18.x < f2) {
-                    mp_info->x18.x = f2;
+                if (joint->x18.x < f2) {
+                    joint->x18.x = f2;
                 }
-                f1 = mp_info->x10.y;
-                f0 = mp_info->x18.y;
+                f1 = joint->x10.y;
+                f0 = joint->x18.y;
                 if (f1 > f0) {
-                    mp_info->x10.y = f0;
+                    joint->x10.y = f0;
                 }
-                if (mp_info->x10.y > f31) {
-                    mp_info->x10.y = f31;
+                if (joint->x10.y > f31) {
+                    joint->x10.y = f31;
                 }
-                if (mp_info->x10.y > f3) {
-                    mp_info->x10.y = f3;
+                if (joint->x10.y > f3) {
+                    joint->x10.y = f3;
                 }
-                if (mp_info->x18.y < f1) {
-                    mp_info->x18.y = f1;
+                if (joint->x18.y < f1) {
+                    joint->x18.y = f1;
                 }
-                if (mp_info->x18.y < f31) {
-                    mp_info->x18.y = f31;
+                if (joint->x18.y < f31) {
+                    joint->x18.y = f31;
                 }
-                if (mp_info->x18.y < f3) {
-                    mp_info->x18.y = f3;
+                if (joint->x18.y < f3) {
+                    joint->x18.y = f3;
                 }
             }
-            mp_info->x10.x -= 30.0F;
-            mp_info->x18.x += 30.0F;
-            mp_info->x10.y -= 30.0F;
-            mp_info->x18.y += 30.0F;
+            joint->x10.x -= 30.0F;
+            joint->x18.x += 30.0F;
+            joint->x10.y -= 30.0F;
+            joint->x18.y += 30.0F;
         }
     }
 
@@ -3879,85 +3879,85 @@ after0:
     mpUpdateDynamics(joint_id);
 
 after1:
-    if (mp_info->flags & 0x40000) {
+    if (joint->flags & 0x40000) {
         mpLib_800557D0(joint_id);
     }
     var_r6 = false;
-    if (!(mp_info->flags & (0x40000 | 0x800)) && (mp_info->flags & 0x10000)) {
+    if (!(joint->flags & (0x40000 | 0x800)) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(joint_id, mp_info->coll_data->vtx_start,
-                      mp_info->coll_data->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, joint->coll_data->vtx_start,
+                      joint->coll_data->vtx_count, var_r6);
 }
 
 void mpLib_800565DC(int joint_id)
 {
-    CollJoint* temp_r5 = &groundCollJoint[joint_id];
-    CollVtx* cur = &groundCollVtx[temp_r5->coll_data->vtx_start];
-    int temp_r4_2 = temp_r5->coll_data->vtx_count;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    CollVtx* vtx = &groundCollVtx[joint->coll_data->vtx_start];
+    int count = joint->coll_data->vtx_count;
 
     int i;
-    for (i = 0; i < temp_r4_2; i++) {
-        if (temp_r5->x10.x > cur->pos.x - 30.0F) {
-            temp_r5->x10.x = cur->pos.x - 30.0F;
+    for (i = 0; i < count; i++) {
+        if (joint->x10.x > vtx->pos.x - 30.0F) {
+            joint->x10.x = vtx->pos.x - 30.0F;
         }
-        if (temp_r5->x18.x < cur->pos.x + 30.0F) {
-            temp_r5->x18.x = cur->pos.x + 30.0F;
+        if (joint->x18.x < vtx->pos.x + 30.0F) {
+            joint->x18.x = vtx->pos.x + 30.0F;
         }
-        if (temp_r5->x10.y > cur->pos.y - 30.0F) {
-            temp_r5->x10.y = cur->pos.y - 30.0F;
+        if (joint->x10.y > vtx->pos.y - 30.0F) {
+            joint->x10.y = vtx->pos.y - 30.0F;
         }
-        if (temp_r5->x18.y < cur->pos.y + 30.0F) {
-            temp_r5->x18.y = cur->pos.y + 30.0F;
+        if (joint->x18.y < vtx->pos.y + 30.0F) {
+            joint->x18.y = vtx->pos.y + 30.0F;
         }
-        cur += 1;
+        vtx += 1;
     }
 }
 
 void mpLib_8005667C(int joint_id)
 {
     bool var_r6 = false;
-    CollJoint* temp_r7 = &groundCollJoint[joint_id];
+    CollJoint* joint = &groundCollJoint[joint_id];
 
-    if (!(temp_r7->flags & 0x40800) && (temp_r7->flags & 0x10000)) {
+    if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(joint_id, temp_r7->coll_data->vtx_start,
-                      temp_r7->coll_data->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, joint->coll_data->vtx_start,
+                      joint->coll_data->vtx_count, var_r6);
 }
 
-void mpLib_800566D8(int vtx_id, f32* arg1, f32* arg2)
+void mpVtxGetPos(int vtx_id, float* x_out, float* y_out)
 {
-    CollVtx* temp_r3 = &groundCollVtx[vtx_id];
-    *arg1 = temp_r3->pos.x;
-    *arg2 = temp_r3->pos.y;
+    CollVtx* vtx = &groundCollVtx[vtx_id];
+    *x_out = vtx->pos.x;
+    *y_out = vtx->pos.y;
 }
 
-void mpLib_800566F8(int vtx_id, float arg1, float arg2)
+void mpVtxSetPos(int vtx_id, float x, float y)
 {
-    CollVtx* temp_r3 = &groundCollVtx[vtx_id];
-    temp_r3->pos.x = arg1;
-    temp_r3->pos.y = arg2;
+    CollVtx* vtx = &groundCollVtx[vtx_id];
+    vtx->pos.x = x;
+    vtx->pos.y = y;
 }
 
-void mpLib_80056710(int line_id, f32 arg8, f32 arg9, f32 argA, f32 argB)
+void mpLineSetPos(int line_id, float x0, float y0, float x1, float y1)
 {
-    CollLine* temp_r5 = &groundCollLine[line_id];
-    mpLib_800566F8(temp_r5->x0->v0_idx, arg8, arg9);
-    mpLib_800566F8(temp_r5->x0->v1_idx, argA, argB);
+    CollLine* line = &groundCollLine[line_id];
+    mpVtxSetPos(line->x0->v0_idx, x0, y0);
+    mpVtxSetPos(line->x0->v1_idx, x1, y1);
 }
 
-void mpLib_80056758(int line_id, f32 arg8, f32 arg9, f32 argA, f32 argB)
+void mpLib_80056758(int line_id, float x0, float y0, float x1, float y1)
 {
-    CollLine* temp_r5 = &groundCollLine[line_id];
+    CollLine* line = &groundCollLine[line_id];
 
-    CollVtx* temp_r3 = &groundCollVtx[temp_r5->x0->v0_idx];
-    temp_r3->pos.x = temp_r3->x0 + arg8;
-    temp_r3->pos.y = temp_r3->x4 + arg9;
+    CollVtx* vtx = &groundCollVtx[line->x0->v0_idx];
+    vtx->pos.x = vtx->x0 + x0;
+    vtx->pos.y = vtx->x4 + y0;
 
-    temp_r3 = &groundCollVtx[temp_r5->x0->v1_idx];
-    temp_r3->pos.x = temp_r3->x0 + argA;
-    temp_r3->pos.y = temp_r3->x4 + argB;
+    vtx = &groundCollVtx[line->x0->v1_idx];
+    vtx->pos.x = vtx->x0 + x1;
+    vtx->pos.y = vtx->x4 + y1;
 }
 
 bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
@@ -4946,29 +4946,29 @@ void mpLib_80057424(int joint_id)
 
 void mpLib_80057528(int line_id)
 {
-    int temp_r3 = mpLib_80056B6C(line_id);
-    if (temp_r3 != -1) {
-        CollLine* tmp = &groundCollLine[line_id];
-        CollJoint* temp_r31 = &groundCollJoint[temp_r3];
-        tmp->flags |= 0x10000;
-        mpIsland_8005B334(temp_r3, temp_r31->coll_data->vtx_start,
-                          temp_r31->coll_data->vtx_count,
-                          !(temp_r31->flags & 0x800));
-        temp_r31->xE = true;
+    int joint_id = mpLib_80056B6C(line_id);
+    if (joint_id != -1) {
+        CollLine* line = &groundCollLine[line_id];
+        CollJoint* joint = &groundCollJoint[joint_id];
+        line->flags |= 0x10000;
+        mpIsland_8005B334(joint_id, joint->coll_data->vtx_start,
+                          joint->coll_data->vtx_count,
+                          !(joint->flags & 0x800));
+        joint->xE = true;
     }
 }
 
 void mpLib_800575B0(int line_id)
 {
-    int temp_r3 = mpLib_80056B6C(line_id);
-    if (temp_r3 != -1) {
-        CollLine* tmp = &groundCollLine[line_id];
-        CollJoint* temp_r31 = &groundCollJoint[temp_r3];
-        tmp->flags &= ~0x10000;
-        mpIsland_8005B334(temp_r3, temp_r31->coll_data->vtx_start,
-                          temp_r31->coll_data->vtx_count,
-                          !(temp_r31->flags & 0x800));
-        temp_r31->xE = true;
+    int joint_id = mpLib_80056B6C(line_id);
+    if (joint_id != -1) {
+        CollLine* line = &groundCollLine[line_id];
+        CollJoint* joint = &groundCollJoint[joint_id];
+        line->flags &= ~0x10000;
+        mpIsland_8005B334(joint_id, joint->coll_data->vtx_start,
+                          joint->coll_data->vtx_count,
+                          !(joint->flags & 0x800));
+        joint->xE = true;
     }
 }
 
@@ -5128,16 +5128,16 @@ void mpLib_80057BC0(int joint_id)
 
 void mpLib_80057FDC(int joint_id)
 {
-    mpLib_CollData* temp_r5;
+    mpLib_CollData* coll_data;
     bool var_r6 = false;
-    CollJoint* temp_r7 = &groundCollJoint[joint_id];
+    CollJoint* joint = &groundCollJoint[joint_id];
 
-    temp_r7->flags &= ~0x800;
-    if (!(temp_r7->flags & 0x40800) && (temp_r7->flags & 0x10000)) {
+    joint->flags &= ~0x800;
+    if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    temp_r5 = temp_r7->coll_data;
-    mpIsland_8005B334(joint_id, temp_r5->vtx_start, temp_r5->vtx_count,
+    coll_data = joint->coll_data;
+    mpIsland_8005B334(joint_id, coll_data->vtx_start, coll_data->vtx_count,
                       var_r6);
 }
 
@@ -5158,29 +5158,29 @@ void mpLib_80058044(int joint_id)
 
 void mpLib_800580AC(int joint_id)
 {
-    CollJoint* temp_r3 = &groundCollJoint[joint_id];
-    temp_r3->flags |= 0x400;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    joint->flags |= 0x400;
 }
 
 void mpLib_800580C8(int joint_id, Ground* arg1, mpLib_Callback cb)
 {
-    CollJoint* temp_r3 = &groundCollJoint[joint_id];
-    temp_r3->x24 = cb;
-    temp_r3->x28 = arg1;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    joint->x24 = cb;
+    joint->x28 = arg1;
 }
 
 void mpLib_800580E0(int joint_id)
 {
-    CollJoint* temp_r3 = &groundCollJoint[joint_id];
-    temp_r3->x24 = NULL;
-    temp_r3->x28 = NULL;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    joint->x24 = NULL;
+    joint->x28 = NULL;
 }
 
 void mpLib_800580FC(int joint_id, mpLib_Callback* arg1, Ground** arg2)
 {
-    CollJoint* temp_r3 = &groundCollJoint[joint_id];
-    *arg1 = temp_r3->x24;
-    *arg2 = temp_r3->x28;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    *arg1 = joint->x24;
+    *arg2 = joint->x28;
 }
 
 void mpLib_8005811C(CollData* coll, int ledge_id)
@@ -5199,18 +5199,16 @@ void mpLib_8005811C(CollData* coll, int ledge_id)
 
 void mpLib_800581A4(int joint_id, Ground* arg1, mpLib_Callback arg2)
 {
-    CollJoint* temp_r3 = &groundCollJoint[joint_id];
-    temp_r3->x2C = arg2;
-    temp_r3->x30 = arg1;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    joint->x2C = arg2;
+    joint->x30 = arg1;
 }
 
 void mpLib_800581BC(int joint_id, mpLib_Callback* cb, Ground** gr)
 {
-    CollJoint* temp_r3;
-
-    temp_r3 = &groundCollJoint[joint_id];
-    *cb = temp_r3->x2C;
-    *gr = temp_r3->x30;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    *cb = joint->x2C;
+    *gr = joint->x30;
 }
 
 void mpLib_800581DC(int joint_id0, int joint_id1)

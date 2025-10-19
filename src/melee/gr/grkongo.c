@@ -1064,7 +1064,7 @@ void grKongo_801D69B0(HSD_GObj *arg0) {
 u32 it_802E18B4(HSD_GObj *);                        /* extern */
 ? it_802E2330(Vec3 *, s32 *);                       /* extern */
 ? mpLib_8005667C(?);                                /* extern */
-? mpLib_800566D8(?, f32 *, ? *);                    /* extern */
+? mpVtxGetPos(?, f32 *, ? *);                    /* extern */
 ? mpLib_80056758(s32, ?, f32, ?, f32);              /* extern */
 ? ftCo_800C0764(?, s32 (*)(HSD_GObj *, HSD_GObj *)); /* extern */
 extern ? grKg_804D6984;
