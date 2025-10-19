@@ -319,32 +319,35 @@ int mpLib_8004DC04(int line_id)
     return groundCollLine[line_id].x0->x4_line_id;
 }
 
-void mpLib_8004DC90(float* x_out, float* y_out, float x0, float y0, float x1,
-                    float y1, float x2, float y2, float x3, float y3, float x4,
-                    float y4)
+// remap point p from line a to line b
+void mpRemap2d(float* x_out, float* y_out, float ax0, float ay0, float ax1,
+               float ay1, float bx0, float by0, float bx1, float by1, float px,
+               float py)
 {
     double dx;
     double dy;
     double dist2;
     float f30;
     float f29;
-    dx = x1 - x0;
-    dy = y1 - y0;
-    f30 = x4 - x0;
-    f29 = y4 - y0;
+    dx = ax1 - ax0;
+    dy = ay1 - ay0;
+    f30 = px - ax0;
+    f29 = py - ay0;
     dist2 = (dy * dy) + (dx * dx);
     if (ABS(dist2) > 0.0001) {
+        // how far along line a is point p
         double t = (dy * f29 + dx * f30) / dist2;
         if (t > 1.0) {
             t = 1.0;
         } else if (t < 0.0) {
             t = 0.0;
         }
-        *x_out = x4 + (1.0 - t) * (x2 - x0) + t * (x3 - x1);
-        *y_out = y4 + (1.0 - t) * (y2 - y0) + t * (y3 - y1);
+
+        *x_out = px + (1.0 - t) * (bx0 - ax0) + t * (bx1 - ax1);
+        *y_out = py + (1.0 - t) * (by0 - ay0) + t * (by1 - ay1);
     } else {
-        *x_out = x4 + (x2 - x0) + (x3 - x0);
-        *y_out = y4 + (y2 - y0) + (y3 - y0);
+        *x_out = px + (bx0 - ax0) + (bx1 - ax0);
+        *y_out = py + (by0 - ay0) + (by1 - ay0);
     }
 }
 
@@ -1059,9 +1062,9 @@ bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out, int* flags_out,
                 float y1_f24 = y_offset_f5 + v1_r6->pos.y;
 
                 if (joint_r29->flags & 0x700) {
-                    mpLib_8004DC90(&x_f1, &y_f2, v0_r5->x10, v0_r5->x14,
-                                   v1_r6->x10, v1_r6->x14, x0_f27, y0_f26,
-                                   x1_f25, y1_f24, x_f1, y_f2);
+                    mpLib_Remap2d(&x_f1, &y_f2, v0_r5->x10, v0_r5->x14,
+                                  v1_r6->x10, v1_r6->x14, x0_f27, y0_f26,
+                                  x1_f25, y1_f24, x_f1, y_f2);
                 }
 
                 x_f23 = x_f3 - x_f1;
@@ -1358,9 +1361,8 @@ bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out, int* flags_out,
                     mpLib_Line* line_r3 = r26->x0;
                     CollVtx* v1_r6 = &groundCollVtx[line_r3->v1_idx];
                     CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
-                    mpLib_8004DC90(&f1, &f2, v0_r5->x10, v0_r5->x14,
-                                   v1_r6->x10, v1_r6->x14, sp44, sp40, sp3C,
-                                   sp38, f29, f28);
+                    mpRemap2d(&f1, &f2, v0_r5->x10, v0_r5->x14, v1_r6->x10,
+                              v1_r6->x14, sp44, sp40, sp3C, sp38, f29, f28);
                 } else {
                     f1 = f29;
                     f2 = f28;
@@ -1716,9 +1718,9 @@ bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out, int* flags_out,
                 float int_y_sp38;
 
                 if (joint->flags & 0x700) {
-                    mpLib_8004DC90(&f1, &f2, v0_r5->x10, v0_r5->x14,
-                                   v1_r6->x10, v1_r6->x14, x0_f27, y0_f26,
-                                   x1_f25, y1_f24, f29, f28);
+                    mpRemap2d(&f1, &f2, v0_r5->x10, v0_r5->x14, v1_r6->x10,
+                              v1_r6->x14, x0_f27, y0_f26, x1_f25, y1_f24, f29,
+                              f28);
                 } else {
                     f1 = f29;
                     f2 = f28;
@@ -2020,9 +2022,9 @@ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, int* flags_out,
                 float int_y_sp38;
 
                 if (joint->flags & 0x700) {
-                    mpLib_8004DC90(&f1, &f2, v0_r5->x10, v0_r5->x14,
-                                   v1_r6->x10, v1_r6->x14, x0_f27, y0_f26,
-                                   x1_f25, y1_f24, f29, f28);
+                    mpRemap2d(&f1, &f2, v0_r5->x10, v0_r5->x14, v1_r6->x10,
+                              v1_r6->x14, x0_f27, y0_f26, x1_f25, y1_f24, f29,
+                              f28);
                 } else {
                     f1 = f29;
                     f2 = f28;
@@ -2193,8 +2195,8 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
                     y1 = vtx->x14;
-                    mpLib_8004DC90(&x, &y, normal_x, normal_y, left_x, left_y,
-                                   f5, f6, f7, f8, x1, y1);
+                    mpRemap2d(&x, &y, normal_x, normal_y, left_x, left_y, f5,
+                              f6, f7, f8, x1, y1);
 
                     dx0 = x0 - x;
                     dy0 = y0 - y;
@@ -2230,8 +2232,8 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
                     y1 = vtx->x14;
-                    mpLib_8004DC90(&x, &y, normal_x, normal_y, left_x, left_y,
-                                   f5, f6, f7, f8, x1, y1);
+                    mpRemap2d(&x, &y, normal_x, normal_y, left_x, left_y, f5,
+                              f6, f7, f8, x1, y1);
 
                     dx0 = x0 - x;
                     dy0 = y0 - y;
@@ -2350,8 +2352,8 @@ bool mpLib_800515A0_LeftWall(int* line_id, int arg1, int arg2, float arg8,
                     f19 = v0_r3->x14;
                     sp8 = f18;
                     spC = f19;
-                    mpLib_8004DC90(&sp40, &sp3C, arg8, arg9, argA, argB, argC,
-                                   argD, argE, argF, 0.0F, 0.0F);
+                    mpRemap2d(&sp40, &sp3C, arg8, arg9, argA, argB, argC, argD,
+                              argE, argF, 0.0F, 0.0F);
                     f21 = y0_f17 - sp3C;
                     f20 = x0_f16 - sp40;
                     if ((((f20 * f20) + (f21 * f21)) > 0.001F) &&
@@ -2379,8 +2381,8 @@ bool mpLib_800515A0_LeftWall(int* line_id, int arg1, int arg2, float arg8,
                     f18_2 = v1_r3->x14;
                     sp8 = f19_2;
                     spC = f18_2;
-                    mpLib_8004DC90(&sp40, &sp3C, arg8, arg9, argA, argB, argC,
-                                   argD, argE, argF, 0.0F, 0.0F);
+                    mpRemap2d(&sp40, &sp3C, arg8, arg9, argA, argB, argC, argD,
+                              argE, argF, 0.0F, 0.0F);
                     f16_2 = f20_2 - sp3C;
                     f17_2 = f21_2 - sp40;
                     if ((((f17_2 * f17_2) + (f16_2 * f16_2)) > 0.001F) &&
@@ -3968,9 +3970,9 @@ bool mpGetSpeed(int line_id, Vec3* pos, Vec3* speed)
 
     v0_r5 = &groundCollVtx[groundCollLine[line_id].x0->v0_idx];
     v1_r6 = &groundCollVtx[groundCollLine[line_id].x0->v1_idx];
-    mpLib_8004DC90(&new_x, &new_y, v0_r5->x10, v0_r5->x14, v1_r6->x10,
-                   v1_r6->x14, v0_r5->pos.x, v0_r5->pos.y, v1_r6->pos.x,
-                   v1_r6->pos.y, pos->x, pos->y);
+    mpRemap2d(&new_x, &new_y, v0_r5->x10, v0_r5->x14, v1_r6->x10, v1_r6->x14,
+              v0_r5->pos.x, v0_r5->pos.y, v1_r6->pos.x, v1_r6->pos.y, pos->x,
+              pos->y);
     speed->x = new_x - pos->x;
     speed->y = new_y - pos->y;
     speed->z = 0.0F;
