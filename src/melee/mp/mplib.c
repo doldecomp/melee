@@ -4776,7 +4776,7 @@ int mpLib_80056B34(int arg0, int* arg1)
     return temp->x4C[1];
 }
 
-int mpLib_80056B6C(int line_id)
+int mpJointFromLine(int line_id)
 {
     if (line_id != -1) {
         int i;
@@ -4946,7 +4946,7 @@ void mpLib_80057424(int joint_id)
 
 void mpLib_80057528(int line_id)
 {
-    int joint_id = mpLib_80056B6C(line_id);
+    int joint_id = mpJointFromLine(line_id);
     if (joint_id != -1) {
         CollLine* line = &groundCollLine[line_id];
         CollJoint* joint = &groundCollJoint[joint_id];
@@ -4960,7 +4960,7 @@ void mpLib_80057528(int line_id)
 
 void mpLib_800575B0(int line_id)
 {
-    int joint_id = mpLib_80056B6C(line_id);
+    int joint_id = mpJointFromLine(line_id);
     if (joint_id != -1) {
         CollLine* line = &groundCollLine[line_id];
         CollJoint* joint = &groundCollJoint[joint_id];
@@ -5162,21 +5162,21 @@ void mpLib_800580AC(int joint_id)
     joint->flags |= 0x400;
 }
 
-void mpLib_800580C8(int joint_id, Ground* arg1, mpLib_Callback cb)
+void mpJointSetCb1(int joint_id, Ground* arg1, mpLib_Callback cb)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
     joint->x24 = cb;
     joint->x28 = arg1;
 }
 
-void mpLib_800580E0(int joint_id)
+void mpJointClearCb1(int joint_id)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
     joint->x24 = NULL;
     joint->x28 = NULL;
 }
 
-void mpLib_800580FC(int joint_id, mpLib_Callback* arg1, Ground** arg2)
+void mpJointGetCb1(int joint_id, mpLib_Callback* arg1, Ground** arg2)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
     *arg1 = joint->x24;
@@ -5186,7 +5186,7 @@ void mpLib_800580FC(int joint_id, mpLib_Callback* arg1, Ground** arg2)
 void mpLib_8005811C(CollData* coll, int ledge_id)
 {
     if (ledge_id != -1) {
-        int joint_id = mpLib_80056B6C(ledge_id);
+        int joint_id = mpJointFromLine(ledge_id);
         if (joint_id != -1) {
             mpLib_Callback cb = groundCollJoint[joint_id].x24;
             Ground* gp = groundCollJoint[joint_id].x28;
@@ -5197,14 +5197,14 @@ void mpLib_8005811C(CollData* coll, int ledge_id)
     }
 }
 
-void mpLib_800581A4(int joint_id, Ground* arg1, mpLib_Callback arg2)
+void mpJointSetCb2(int joint_id, Ground* arg1, mpLib_Callback arg2)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
     joint->x2C = arg2;
     joint->x30 = arg1;
 }
 
-void mpLib_800581BC(int joint_id, mpLib_Callback* cb, Ground** gr)
+void mpJointGetCb2(int joint_id, mpLib_Callback* cb, Ground** gr)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
     *cb = joint->x2C;

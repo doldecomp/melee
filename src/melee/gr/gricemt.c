@@ -398,8 +398,8 @@ void fn_801F77B0(HSD_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     // 803E4544
-    // mpLib_800580FC();
-    mpLib_800580C8(4, gp, grIceMt_801FA7F0);
+    // mpJointGetCb1();
+    mpJointSetCb1(4, gp, grIceMt_801FA7F0);
 }
 
 void grIceMt_801F785C(Ground_GObj* arg0)
@@ -823,7 +823,7 @@ void FUN_801f91ec(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
     if (param_4 != -1) {
         grAnime_801C7A04(param_1, param_4, 7, -20);
     }
-    mpLib_800580C8(param_5, gp, param_8);
+    mpJointSetCb1(param_5, gp, param_8);
 }
 
 /// #grIceMt_801F929C

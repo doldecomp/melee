@@ -346,7 +346,7 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
             slot->jobj2 = NULL;
         }
 
-        mpLib_800581A4((s32) value, gp, (mpLib_Callback)fn_801FBEB8);
+        mpJointSetCb2((s32) value, gp, (mpLib_Callback)fn_801FBEB8);
         i++;
     }
 

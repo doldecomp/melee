@@ -249,7 +249,7 @@ static inline DynamicsDesc* inlineA1(int arg0)
 DynamicsDesc* grTMewtwo_802224B4(enum_t arg0)
 {
     if (arg0 != -1) {
-        int temp = mpLib_80056B6C(arg0);
+        int temp = mpJointFromLine(arg0);
         if (temp != -1) {
             if (temp == 0) {
                 return inlineA0(arg0);

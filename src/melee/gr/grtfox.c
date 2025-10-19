@@ -184,7 +184,7 @@ void grTFox_80220E58(Ground_GObj* gobj) {}
 DynamicsDesc* grTFox_80220E5C(enum_t arg0)
 {
     if (arg0 != -1) {
-        enum_t i = mpLib_80056B6C(arg0);
+        enum_t i = mpJointFromLine(arg0);
         if (i != -1 && i == 1) {
             i = mpLib_80054C6C(arg0);
             if (i == (1 << 0)) {

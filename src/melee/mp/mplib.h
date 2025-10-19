@@ -152,7 +152,7 @@
 /* 056AC4 */ int mpLib_80056AC4(int, int*);
 /* 056AFC */ int* mpLib_80056AFC(int, int*);
 /* 056B34 */ int mpLib_80056B34(int, int*);
-/* 056B6C */ int mpLib_80056B6C(int);
+/* 056B6C */ int mpJointFromLine(int line_id);
 /* 056C54 */ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out,
                                  Vec3* vec_out, u32* flags_out,
                                  Vec3* normal_out, float, float, float, float);
@@ -165,12 +165,12 @@
 /* 057FDC */ void mpLib_80057FDC(int joint_id);
 /* 058044 */ void mpLib_80058044(int joint_id);
 /* 0580AC */ void mpLib_800580AC(int joint_id);
-/* 0580C8 */ void mpLib_800580C8(int joint_id, Ground*, mpLib_Callback);
-/* 0580E0 */ void mpLib_800580E0(int joint_id);
-/* 0580FC */ void mpLib_800580FC(int joint_id, mpLib_Callback*, Ground**);
+/* 0580C8 */ void mpJointSetCb1(int joint_id, Ground*, mpLib_Callback);
+/* 0580E0 */ void mpJointClearCb1(int joint_id);
+/* 0580FC */ void mpJointGetCb1(int joint_id, mpLib_Callback*, Ground**);
 /* 05811C */ void mpLib_8005811C(CollData*, int ledge_id);
-/* 0581A4 */ void mpLib_800581A4(int joint_id, Ground*, mpLib_Callback);
-/* 0581BC */ void mpLib_800581BC(int joint_id, mpLib_Callback*, Ground**);
+/* 0581A4 */ void mpJointSetCb2(int joint_id, Ground*, mpLib_Callback);
+/* 0581BC */ void mpJointGetCb2(int joint_id, mpLib_Callback*, Ground**);
 /* 0581DC */ void mpLib_800581DC(int joint_id0, int joint_id1);
 /* 058560 */ void mpLib_80058560(void);
 /* 058614 */ void mpLib_80058614_Floor(void);

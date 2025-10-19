@@ -154,7 +154,7 @@ void mpIsland_8005A728(void)
             //     *(float*) (v2 + 0x18 * *(unsigned short*) (v11 + 6) + 0xC);
             // *(float*) (v11 + 0x1C) = v8;
             // --v5;
-            // *(short*) (v11 + 0x28) = mpLib_80056B6C(v7++);
+            // *(short*) (v11 + 0x28) = mpJointFromLine(v7++);
             // v7--;
 
             v18 = v5;
@@ -230,7 +230,7 @@ void mpIsland_8005A728(void)
             v25->x0[6] = *(float*) (v2 + 0x18 * v25->x0[1] + 0xC);
             v25->x0[7] = 0.0F;
             --v20;
-            v25->x20[2] = mpLib_80056B6C(v21++);
+            v25->x20[2] = mpJointFromLine(v21++);
             v32 = v20;
             result = &v33[v21];
             v23 += 8;

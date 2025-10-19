@@ -696,10 +696,10 @@ void mpColl_80043268(CollData* coll, s32 arg1, s32 arg2, float arg8)
     Ground* sp18;
     s32 temp_r31;
 
-    temp_r31 = mpLib_80056B6C(arg1);
+    temp_r31 = mpJointFromLine(arg1);
     if (temp_r31 != -1) {
         sp18 = NULL;
-        mpLib_800580FC(temp_r31, &sp1C, &sp18);
+        mpJointGetCb1(temp_r31, &sp1C, &sp18);
         if (sp1C != 0) {
             s32 thing;
             if (arg2 == 0) {
@@ -723,10 +723,10 @@ static inline void func_80043324_inline2(CollData* coll, s32 arg1, s32 arg2,
     Ground* thing;
     s32 temp_r29;
 
-    temp_r29 = mpLib_80056B6C(arg1);
+    temp_r29 = mpJointFromLine(arg1);
     if (temp_r29 != -1) {
         thing = NULL;
-        mpLib_800581BC(temp_r29, &callback, &thing);
+        mpJointGetCb2(temp_r29, &callback, &thing);
 
         if (callback != NULL) {
             callback(thing, temp_r29, coll, coll->x50, 0, arg8);
@@ -806,19 +806,19 @@ void mpColl_80043558(CollData* coll, s32 arg1)
 
     temp_r3 = mpLib_80054C6C(arg1);
     if (temp_r3 == 1) {
-        temp_r3_2 = mpLib_80056B6C(arg1);
+        temp_r3_2 = mpJointFromLine(arg1);
         if (temp_r3_2 != -1) {
             sp1C = NULL;
-            mpLib_800580FC(temp_r3_2, &sp18, &sp1C);
+            mpJointGetCb1(temp_r3_2, &sp18, &sp1C);
             if (sp18 != NULL) {
                 (*sp18)(sp1C, temp_r3_2, coll, coll->x50, 2, 0.0f);
             }
         }
     } else if (temp_r3 == 2) {
-        temp_r3_3 = mpLib_80056B6C(arg1);
+        temp_r3_3 = mpJointFromLine(arg1);
         if (temp_r3_3 != -1) {
             sp14 = NULL;
-            mpLib_800581BC(temp_r3_3, &sp10, &sp14);
+            mpJointGetCb2(temp_r3_3, &sp10, &sp14);
             if (sp10 != NULL) {
                 (*sp10)(sp14, temp_r3_3, coll, coll->x50, 0, 0.0f);
             }
@@ -1250,13 +1250,13 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
                            cd->cur_pos.x + cd->xA4_ecbCurrCorrect.top.x,
                            cd->cur_pos.y + cd->xA4_ecbCurrCorrect.top.y,
                            cd->x140.x, cd->x140.y) ||
-           mpLib_80056B6C(ledge_id) == mpLib_80056B6C(sp10)) &&
+           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)) &&
           (!mpLib_80051EC8(
                NULL, &sp10, NULL, NULL, 6, cd->x48, cd->x4C,
                cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x,
                -2.0F + (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y),
                cd->x140.x, cd->x140.y) ||
-           mpLib_80056B6C(ledge_id) == mpLib_80056B6C(sp10)))))
+           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)))))
     {
         if (p_ledge_id != NULL) {
             *p_ledge_id = ledge_id;
@@ -1323,13 +1323,13 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
                            cd->cur_pos.x + cd->xA4_ecbCurrCorrect.top.x,
                            cd->cur_pos.y + cd->xA4_ecbCurrCorrect.top.y,
                            cd->x140.x, cd->x140.y) ||
-           mpLib_80056B6C(ledge_id) == mpLib_80056B6C(sp10)) &&
+           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)) &&
           (!mpLib_80051EC8(
                NULL, &sp10, NULL, NULL, 10, cd->x48, cd->x4C,
                cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x,
                -2.0F + (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y),
                cd->x140.x, cd->x140.y) ||
-           mpLib_80056B6C(ledge_id) == mpLib_80056B6C(sp10)))))
+           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)))))
     {
         if (p_ledge_id != NULL) {
             *p_ledge_id = ledge_id;

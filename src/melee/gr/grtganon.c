@@ -185,7 +185,7 @@ void grTGanon_802249B0(Ground_GObj* gobj)
 DynamicsDesc* grTGanon_802249B4(enum_t arg0)
 {
     if (arg0 != -1) {
-        enum_t i = mpLib_80056B6C(arg0);
+        enum_t i = mpJointFromLine(arg0);
 
         if (i != -1 && i == 0) {
             i = mpLib_80054C6C(arg0);
