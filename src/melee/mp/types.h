@@ -73,12 +73,6 @@ struct mp_UnkStruct3 {
     int xC;
 };
 
-struct mp_UnkStruct6 {
-    /* +0 */ short x0;
-    /* +2 */ short x2;
-    /* +4 */ short* x4;
-};
-
 struct CollVtx {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;

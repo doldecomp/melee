@@ -13,8 +13,6 @@ typedef struct mp_UnkStruct0 mp_UnkStruct0;
 typedef struct mpLib_Line mpLib_Line;
 typedef struct CollLine CollLine;
 typedef struct mp_UnkStruct3 mp_UnkStruct3;
-typedef struct mp_UnkStruct4 mp_UnkStruct4;
-typedef struct mp_UnkStruct6 mp_UnkStruct6;
 typedef struct mpisland mpisland;
 typedef struct CollVtx CollVtx;
 typedef struct mpLib_CollData mpLib_CollData;
