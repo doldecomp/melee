@@ -133,7 +133,7 @@
 /* 0552B0 */ void mpLib_800552B0(int joint_id, HSD_JObj*, int z);
 /* 05541C */ void mpLib_8005541C(int joint_id);
 /* 0557D0 */ void mpLib_800557D0(int joint_id);
-/* 055C5C */ void mpLib_80055C5C(int joint_id);
+/* 055C5C */ void mpUpdateDynamics(int joint_id);
 /* 055E24 */ void mpLib_80055E24(int joint_id);
 /* 055E9C */ void mpLib_80055E9C(int joint_id);
 /* 0565DC */ void mpLib_800565DC(int joint_id);

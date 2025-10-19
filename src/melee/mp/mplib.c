@@ -3636,55 +3636,54 @@ void mpLib_800557D0(int joint_id)
     }
 }
 
-void mpLib_80055C5C(int joint_id)
+void mpUpdateDynamics(int joint_id)
 {
-    CollJoint* temp_r31 = &groundCollJoint[joint_id];
-    CollLine* var_r30;
+    const double TAN30 = 0.577350295784245;
+    const double TAN60 = 1.7320508368950045;
+    CollJoint* joint = &groundCollJoint[joint_id];
+    CollLine* line;
     int i;
-    s16 temp_r28 = temp_r31->coll_data->dynamic_count;
-    u32 var_r27;
+    s16 count = joint->coll_data->dynamic_count;
+    u32 kind;
 
-    f32 temp_f0;
-    f32 temp_f2;
+    line = &groundCollLine[joint->coll_data->dynamic_start];
 
-    var_r30 = &groundCollLine[temp_r31->coll_data->dynamic_start];
-
-    for (i = 0; i < temp_r28; i++, var_r30++) {
-        mpLib_Line* temp_r5 = var_r30->x0;
-        CollVtx* temp_r3 = &groundCollVtx[temp_r5->v1_idx];
-        CollVtx* temp_r3_2 = &groundCollVtx[temp_r5->v0_idx];
-        temp_f2 = temp_r3->pos.x - temp_r3_2->pos.x;
-        temp_f0 = temp_r3->pos.y - temp_r3_2->pos.y;
-        if (temp_f2 > 0.0F) {
-            if (temp_f0 / temp_f2 > 1.7320508368950045) {
-                var_r27 = 8;
-            } else if (temp_f0 / temp_f2 < -1.7320508368950045) {
-                var_r27 = 4;
+    for (i = 0; i < count; i++, line++) {
+        mpLib_Line* temp = line->x0;
+        CollVtx* v1 = &groundCollVtx[temp->v1_idx];
+        CollVtx* v0 = &groundCollVtx[temp->v0_idx];
+        float dx = v1->pos.x - v0->pos.x;
+        float dy = v1->pos.y - v0->pos.y;
+        if (dx > 0.0F) {
+            if (dy / dx > TAN60) {
+                kind = LINE_FLAG_LEFT_WALL;
+            } else if (dy / dx < -TAN60) {
+                kind = LINE_FLAG_RIGHT_WALL;
             } else {
-                var_r27 = true;
+                kind = LINE_FLAG_FLOOR;
             }
-        } else if (temp_f2 < 0.0F) {
-            if (temp_f0 / temp_f2 > 0.577350295784245) {
-                var_r27 = 4;
-            } else if (temp_f0 / temp_f2 < -0.577350295784245) {
-                var_r27 = 8;
+        } else if (dx < 0.0F) {
+            if (dy / dx > TAN30) {
+                kind = LINE_FLAG_RIGHT_WALL;
+            } else if (dy / dx < -TAN30) {
+                kind = LINE_FLAG_LEFT_WALL;
             } else {
-                var_r27 = 2;
+                kind = LINE_FLAG_CEILING;
             }
-        } else if (temp_f0 > 0.0F) {
-            var_r27 = 8;
-        } else if (temp_f0 < 0.0F) {
-            var_r27 = 4;
+        } else if (dy > 0.0F) {
+            kind = LINE_FLAG_LEFT_WALL;
+        } else if (dy < 0.0F) {
+            kind = LINE_FLAG_RIGHT_WALL;
         } else {
-            __assert(__FILE__, 4884, "0");
+            HSD_ASSERT(4884, 0);
         }
-        var_r30->flags = (var_r30->flags & 0xFFFFFFF0) | var_r27;
-        if ((temp_r31->flags & 0x10000) && (var_r30->x0->flags & 0x400)) {
-            if (var_r27 & 1) {
-                var_r30->flags |= 0x10000 | LINE_FLAG_PLATFORM;
-                var_r30->x0->flags |= LINE_FLAG_PLATFORM;
+        line->flags = (line->flags & ~0xF) | kind;
+        if ((joint->flags & 0x10000) && (line->x0->flags & 0x400)) {
+            if (kind & LINE_FLAG_FLOOR) {
+                line->flags |= 0x10000 | LINE_FLAG_PLATFORM;
+                line->x0->flags |= LINE_FLAG_PLATFORM;
             } else {
-                var_r30->flags &= ~0x10000;
+                line->flags &= ~0x10000;
             }
         }
     }
@@ -3695,7 +3694,7 @@ void mpLib_80055E24(int joint_id)
     bool var_r6;
     CollJoint* temp_r31 = &groundCollJoint[joint_id];
 
-    mpLib_80055C5C(joint_id);
+    mpUpdateDynamics(joint_id);
     var_r6 = false;
     if (!(temp_r31->flags & 0x40800) && (temp_r31->flags & 0x10000)) {
         var_r6 = true;
@@ -3877,7 +3876,7 @@ void mpLib_80055E9C(int joint_id)
     }
 
 after0:
-    mpLib_80055C5C(joint_id);
+    mpUpdateDynamics(joint_id);
 
 after1:
     if (mp_info->flags & 0x40000) {
