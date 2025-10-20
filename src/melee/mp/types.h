@@ -82,7 +82,7 @@ struct CollVtx {
 }; /* size = 0x18 */
 STATIC_ASSERT(sizeof(struct CollVtx) == 0x18);
 
-struct mpLib_CollData {
+struct CollInfo {
     /*  +0 */ s16 floor_start;
     /*  +2 */ s16 floor_count;
     /*  +4 */ s16 ceiling_start;
@@ -103,7 +103,7 @@ struct mpLib_CollData {
 
 struct CollJoint {
     /* 0x00 */ CollJoint* next;
-    /* 0x04 */ mpLib_CollData* coll_data;
+    /* 0x04 */ CollInfo* coll_info;
     /* 0x08 */ u32 flags;
     /* 0x0C */ s16 xC;
     /* 0x0E */ u8 xE : 1;
@@ -117,7 +117,7 @@ struct CollJoint {
 }; /* size = 0x34 */
 STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
 
-struct mp_CollData {
+struct mpCollData {
     /*  +0 */ Vec2* verts;
     /*  +4 */ int vert_count;
     /*  +8 */ mpLib_Line* lines;
@@ -132,7 +132,7 @@ struct mp_CollData {
     /* +1E */ s16 left_wall_count;
     /* +20 */ s16 dynamic_start;
     /* +22 */ s16 dynamic_count;
-    /* +24 */ mpLib_CollData* x24;
+    /* +24 */ CollInfo* x24;
     /* +28 */ int x28;
     /* +2C */ int x2C; /* inferred */
 };

@@ -15,9 +15,9 @@ typedef struct CollLine CollLine;
 typedef struct mp_UnkStruct3 mp_UnkStruct3;
 typedef struct mpisland mpisland;
 typedef struct CollVtx CollVtx;
-typedef struct mpLib_CollData mpLib_CollData;
+typedef struct CollInfo CollInfo;
 typedef struct CollJoint CollJoint;
-typedef struct mp_CollData mp_CollData;
+typedef struct mpCollData mpCollData;
 
 typedef enum mp_Terrain {
     mp_Terrain_Basic,

@@ -320,9 +320,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 
     CollJoint* temp_r3;
     temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
-    var_r31 = temp_r3->coll_data->floor_start;
+    var_r31 = temp_r3->coll_info->floor_start;
     var_r30 = &mpGetGroundCollLine()[var_r31];
-    temp_r29 = temp_r3->coll_data->floor_count;
+    temp_r29 = temp_r3->coll_info->floor_count;
 
     var_r28 = true;
     var_r27 = true;
