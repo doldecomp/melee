@@ -192,19 +192,19 @@ void mnSoundTest_8024A958(Soundtest_GObj* arg0)
     temp_r3_3 =
         HSD_SisLib_803A5ACC(0, 0, vec_6.x, vec_6.y, 18.0f, 350.0f, 10.0f);
     temp_r30->unk14 = temp_r3_3;
-    temp_r3_3->x24.x = 0.035f;
-    temp_r3_3->x24.y = 0.035f;
-    temp_r3_3->x4A = 2;
+    temp_r3_3->font_size.x = 0.035f;
+    temp_r3_3->font_size.y = 0.035f;
+    temp_r3_3->default_alignment = 2;
     HSD_SisLib_803A6368(temp_r3_3, data_2[text_ids[temp_r30->unk1]].text_id);
     temp_r3_4 = HSD_SisLib_803A6754(0, 0);
     temp_r30->unk18 = temp_r3_4;
-    temp_r3_4->x0 = 0.0f; // mnSoundTest_803EF0A8[0xB];
-    temp_r3_4->x4 = 0.0f; // mnSoundTest_803EF0A8[0xB];
-    temp_r3_4->x8 = 18.0f;
-    temp_r3_4->x24.x = 0.04f;
-    temp_r3_4->x24.y = 0.04f;
+    temp_r3_4->pos_x = 0.0f; // mnSoundTest_803EF0A8[0xB];
+    temp_r3_4->pos_y = 0.0f; // mnSoundTest_803EF0A8[0xB];
+    temp_r3_4->pos_z = 18.0f;
+    temp_r3_4->font_size.x = 0.04f;
+    temp_r3_4->font_size.y = 0.04f;
     mn_8022EA08((char*) &string, temp_r30->unk1);
-    temp_r3_4->x4A = 1;
+    temp_r3_4->default_alignment = 1;
     HSD_SisLib_803A6B98(temp_r3_4, 0.0f, 0.0f, string);
 }
 
@@ -238,13 +238,13 @@ void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
         temp_r3_3 = &vec_7;
         temp_r30_2->unk1C = temp_r3_2;
         temp_f1 = temp_r3_3->y;
-        temp_r3_2->x0 = temp_r3_3->x;
-        temp_r3_2->x4 = temp_f1;
-        temp_r3_2->x8 = 18.0f;
-        temp_r3_2->x24.x = 0.04f;
-        temp_r3_2->x24.y = 0.04f;
+        temp_r3_2->pos_x = temp_r3_3->x;
+        temp_r3_2->pos_y = temp_f1;
+        temp_r3_2->pos_z = 18.0f;
+        temp_r3_2->font_size.x = 0.04f;
+        temp_r3_2->font_size.y = 0.04f;
         mn_8022EA08((char*) &string, temp_r30_2->unk4);
-        temp_r3_2->x4A = 1;
+        temp_r3_2->default_alignment = 1;
         HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, string);
         HSD_JObjClearFlagsAll(sp38, 0x10U);
     } else {
@@ -336,13 +336,13 @@ static inline void fn_8024AED0_inline(HSD_GObj* arg0)
     }
     temp_r3_6 = HSD_SisLib_803A6754(0, 0);
     temp_r28_4->unk1C = temp_r3_6;
-    temp_r3_6->x0 = vec_6.x;
-    temp_r3_6->x4 = vec_6.y;
-    temp_r3_6->x8 = 18.0f;
-    temp_r3_6->x24.x = 0.04f;
-    temp_r3_6->x24.y = 0.04f;
+    temp_r3_6->pos_x = vec_6.x;
+    temp_r3_6->pos_y = vec_6.y;
+    temp_r3_6->pos_z = 18.0f;
+    temp_r3_6->font_size.x = 0.04f;
+    temp_r3_6->font_size.y = 0.04f;
     mn_8022EA08((char*) &string, temp_r28_4->unk4);
-    temp_r3_6->x4A = 1;
+    temp_r3_6->default_alignment = 1;
     HSD_SisLib_803A6B98(temp_r3_6, 0.0f, 0.0f, string);
 }
 

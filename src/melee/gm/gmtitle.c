@@ -359,7 +359,7 @@ void gmTitle_801A1E20_OnEnter(void* unused)
         gmTitle_801A1D38(db_build_timestamp, gmTitle_80479B48);
         scale =
             HSD_SisLib_803A6B98(text, 30.0F, 30.0F, "%s", gmTitle_80479B48);
-        text->x49 = 1;
+        text->default_kerning = 1;
         HSD_SisLib_803A7548(text, scale, 0.7f, 0.55f);
     }
 }

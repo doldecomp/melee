@@ -1328,7 +1328,7 @@ HSD_GObjEvent ftData_UnkMotionStates4[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ftData_LoadSpecialAttrs[FTKIND_MAX] = {
+HSD_GObjEvent ftKindCalcIndiviParamTable[FTKIND_MAX] = {
     ftMr_Init_LoadSpecialAttrs, ftFx_Init_LoadSpecialAttrs,
     ftCa_Init_LoadSpecialAttrs, ftDk_Init_LoadSpecialAttrs,
     ftKb_Init_LoadSpecialAttrs, ftKp_Init_LoadSpecialAttrs,
