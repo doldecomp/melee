@@ -85,17 +85,17 @@ mp_CollData* mpLib_8004D164(void)
     return mpLib_804D64B4;
 }
 
-CollVtx* mpLib_8004D16C(void)
+CollVtx* mpGetGroundCollVtx(void)
 {
     return groundCollVtx;
 }
 
-CollLine* mpLib_8004D174(void)
+CollLine* mpGetGroundCollLine(void)
 {
     return groundCollLine;
 }
 
-CollJoint* mpLib_8004D17C(void)
+CollJoint* mpGetGroundCollJoint(void)
 {
     return groundCollJoint;
 }

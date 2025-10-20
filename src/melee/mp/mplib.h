@@ -16,9 +16,9 @@
 #include <dolphin/mtx.h>
 
 /* 04D164 */ mp_CollData* mpLib_8004D164(void);
-/* 04D16C */ CollVtx* mpLib_8004D16C(void);
-/* 04D174 */ CollLine* mpLib_8004D174(void);
-/* 04D17C */ CollJoint* mpLib_8004D17C(void);
+/* 04D16C */ CollVtx* mpGetGroundCollVtx(void);
+/* 04D174 */ CollLine* mpGetGroundCollLine(void);
+/* 04D17C */ CollJoint* mpGetGroundCollJoint(void);
 /* 04D184 */ void mpPruneEmptyLines(mp_CollData* coll_data);
 /* 04D288 */ void mpLib_8004D288(mp_CollData* coll_data);
 /* 04DB78 */ int mpLib_8004DB78(int line_id);

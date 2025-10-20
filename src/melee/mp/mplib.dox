@@ -55,7 +55,7 @@ void mpLib_8004D288(UNK_T);
 void mpLib_80058820(void);
 void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
 void mpLib_80055E9C(s16 x);
-void mpLib_8004D17C(void);
+void mpGetGroundCollJoint(void);
 void mpLib_80057424(s32);
 void mpLib_80057638(s32);
 void mpLib_80057BC0(s32);

@@ -86,8 +86,8 @@ void mpIsland_8005A728(void)
     unsigned char v33[1524]; // [sp+18h] [-648h] BYREF
 
     v0 = (short*) mpLib_8004D164();
-    v1 = mpLib_8004D174();
-    v2 = mpLib_8004D16C();
+    v1 = mpGetGroundCollLine();
+    v2 = mpGetGroundCollVtx();
     v23 = &mpIsland_80458E88.x4;
     v24_2 = &mpIsland_80458E88.x8.x;
     v22_2 = &mpIsland_80458E88.x8.y;
@@ -255,7 +255,7 @@ void mpIsland_8005A728(void)
 mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 {
     if (mpLib_80054ED8(surface_idx)) {
-        CollLine* v2 = mpLib_8004D174();
+        CollLine* v2 = mpGetGroundCollLine();
         bool done;
         mp_UnkStruct0* cur;
 
@@ -299,7 +299,7 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 
 bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 {
-    CollJoint* temp_r3 = &mpLib_8004D17C()[arg0->x28];
+    CollJoint* temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
     if (temp_r3->flags & 0x700) {
         return true;
     }
@@ -319,9 +319,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
     int i;
 
     CollJoint* temp_r3;
-    temp_r3 = &mpLib_8004D17C()[arg0->x28];
+    temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
     var_r31 = temp_r3->coll_data->floor_start;
-    var_r30 = &mpLib_8004D174()[var_r31];
+    var_r30 = &mpGetGroundCollLine()[var_r31];
     temp_r29 = temp_r3->coll_data->floor_count;
 
     var_r28 = true;
