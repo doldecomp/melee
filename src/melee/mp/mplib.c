@@ -325,9 +325,9 @@ int mpLineGetPrev(int line_id)
 }
 
 // remap point p from line a to line b
-void mpRemap2d(float* x_out, float* y_out, float ax0, float ay0, float ax1,
-               float ay1, float bx0, float by0, float bx1, float by1, float px,
-               float py)
+static void mpRemap2d(float* x_out, float* y_out, float ax0, float ay0,
+                      float ax1, float ay1, float bx0, float by0, float bx1,
+                      float by1, float px, float py)
 {
     double dx;
     double dy;
