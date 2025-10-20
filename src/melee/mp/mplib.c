@@ -123,25 +123,25 @@ void mpPruneEmptyLines(mp_CollData* coll_data)
 
         other = coll_data->lines;
         for (j = 0; j < coll_data->line_count; j++, other++) {
-            if (other->x4_line_id == i) {
-                other->x4_line_id = line->x4_line_id;
+            if (other->prev_id0 == i) {
+                other->prev_id0 = line->prev_id0;
             }
-            if (other->x6_line_id == i) {
-                other->x6_line_id = line->x6_line_id;
+            if (other->next_id0 == i) {
+                other->next_id0 = line->next_id0;
             }
-            if (other->x8_line_id == i) {
-                other->x8_line_id = line->x4_line_id;
+            if (other->prev_id1 == i) {
+                other->prev_id1 = line->prev_id0;
             }
-            if (other->xA_line_id == i) {
-                other->xA_line_id = line->x6_line_id;
+            if (other->next_id1 == i) {
+                other->next_id1 = line->next_id0;
             }
         }
 
         line->is_empty |= LINE_FLAG_EMPTY;
-        line->x4_line_id = -1;
-        line->x6_line_id = -1;
-        line->x8_line_id = -1;
-        line->xA_line_id = -1;
+        line->prev_id0 = -1;
+        line->next_id0 = -1;
+        line->prev_id1 = -1;
+        line->next_id1 = -1;
     }
 }
 
@@ -284,9 +284,9 @@ void mpLibLoad(mp_CollData* coll_data)
     mpLib_80058AA0();
 }
 
-int mpLib_8004DB78(int line_id)
+int mpLineGetNext(int line_id)
 {
-    s16 result = groundCollLine[line_id].x0->xA_line_id;
+    s16 result = groundCollLine[line_id].x0->next_id1;
 
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -301,12 +301,12 @@ int mpLib_8004DB78(int line_id)
         }
     }
 
-    return groundCollLine[line_id].x0->x6_line_id;
+    return groundCollLine[line_id].x0->next_id0;
 }
 
-int mpLib_8004DC04(int line_id)
+int mpLineGetPrev(int line_id)
 {
-    s16 result = groundCollLine[line_id].x0->x8_line_id;
+    s16 result = groundCollLine[line_id].x0->prev_id1;
 
     if (result != -1) {
         u32 flags = groundCollLine[result].flags;
@@ -321,7 +321,7 @@ int mpLib_8004DC04(int line_id)
         }
     }
 
-    return groundCollLine[line_id].x0->x4_line_id;
+    return groundCollLine[line_id].x0->prev_id0;
 }
 
 // remap point p from line a to line b
@@ -375,7 +375,7 @@ int mpLib_8004DD90_Floor(int line_id, Vec3* vec, float* y_out, u32* flags_out,
         y = vec->y;
         if (x < x0) {
             if (dir != 1) {
-                int new_id = mpLib_8004DC04(line_id);
+                int new_id = mpLineGetPrev(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_FLOOR))
                 {
@@ -393,7 +393,7 @@ int mpLib_8004DD90_Floor(int line_id, Vec3* vec, float* y_out, u32* flags_out,
             }
         } else if (x > x1) {
             if (dir != -1) {
-                int new_id = mpLib_8004DB78(line_id);
+                int new_id = mpLineGetNext(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_FLOOR))
                 {
@@ -451,7 +451,7 @@ int mpLib_8004E090_Ceiling(int line_id, Vec3* vec, float* y_out,
         x1 = groundCollVtx[line_r4->x0->v1_idx].pos.x;
         if (vec->x < x1) {
             if (dir != 1) {
-                int new_id = mpLib_8004DB78(line_id);
+                int new_id = mpLineGetNext(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_CEILING))
                 {
@@ -469,7 +469,7 @@ int mpLib_8004E090_Ceiling(int line_id, Vec3* vec, float* y_out,
             x = x1;
         } else if (vec->x > x0) {
             if (dir != -1) {
-                int new_id = mpLib_8004DC04(line_id);
+                int new_id = mpLineGetPrev(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_CEILING))
                 {
@@ -527,7 +527,7 @@ int mpLib_8004E398_LeftWall(int line_id, Vec3* vec, float* x_out,
         y1 = groundCollVtx[line_r4->x0->v1_idx].pos.y;
         if (vec->y < y0) {
             if (dir != 1) {
-                int new_id = mpLib_8004DC04(line_id);
+                int new_id = mpLineGetPrev(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_LEFT_WALL))
                 {
@@ -543,7 +543,7 @@ int mpLib_8004E398_LeftWall(int line_id, Vec3* vec, float* x_out,
             }
         } else if (vec->y > y1) {
             if (dir != -1) {
-                int new_id = mpLib_8004DB78(line_id);
+                int new_id = mpLineGetNext(line_id);
                 if (new_id == -1 ||
                     !(groundCollLine[new_id].flags & LINE_FLAG_LEFT_WALL))
                 {
@@ -599,7 +599,7 @@ int mpLib_8004E684_RightWall(int line_id, Vec3* vec, float* x_out,
         y1 = groundCollVtx[line_r4->x0->v1_idx].pos.y;
         if (vec->y > y0) {
             if (dir != -1) {
-                int new_id_r8 = mpLib_8004DC04(line_id);
+                int new_id_r8 = mpLineGetPrev(line_id);
                 if (new_id_r8 == -1 ||
                     !(groundCollLine[new_id_r8].flags & LINE_FLAG_RIGHT_WALL))
                 {
@@ -616,7 +616,7 @@ int mpLib_8004E684_RightWall(int line_id, Vec3* vec, float* x_out,
             y = y0;
         } else if (vec->y < y1) {
             if (dir != 1) {
-                int new_id_r9 = mpLib_8004DB78(line_id);
+                int new_id_r9 = mpLineGetNext(line_id);
                 if (new_id_r9 == -1 ||
                     !(groundCollLine[new_id_r9].flags & LINE_FLAG_RIGHT_WALL))
                 {
@@ -828,7 +828,7 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
     float y1_f3 = groundCollVtx[line_r11->v1_idx].pos.y;
     float distance;
 
-    if (mpLib_8004DC04(line_id) != -1) {
+    if (mpLineGetPrev(line_id) != -1) {
         distance = sqrtf(SQ(x0_f0 - x1_f2) + SQ(y0_f1 - y1_f3));
         if (distance > 0.001F) {
             x0_f0 += (x0_f0 - x1_f2) / distance;
@@ -837,7 +837,7 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
         calculated_distance = true;
     }
 
-    if (mpLib_8004DB78(line_id) != -1) {
+    if (mpLineGetNext(line_id) != -1) {
         if (!calculated_distance) {
             distance = sqrtf(SQ(x0_f0 - x1_f2) + SQ(y0_f1 - y1_f3));
         }
@@ -2846,11 +2846,11 @@ int mpLib_80052534_Floor(int line_id)
 
     LINEID_CHECK(4139, line_id);
 
-    new_id = mpLib_8004DB78(line_id);
+    new_id = mpLineGetNext(line_id);
     while (new_id != -1 && new_id != line_id &&
            !(groundCollLine[new_id].flags & LINE_FLAG_FLOOR))
     {
-        new_id = mpLib_8004DB78(new_id);
+        new_id = mpLineGetNext(new_id);
     }
 
     valid_id = false;
@@ -2870,11 +2870,11 @@ int mpLib_80052700_Floor(int line_id)
     int new_id;
     bool valid_id;
     LINEID_CHECK(4148, line_id);
-    new_id = mpLib_8004DC04(line_id);
+    new_id = mpLineGetPrev(line_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & LINE_FLAG_FLOOR)
     {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     }
 
     valid_id = false;
@@ -2893,11 +2893,11 @@ int mpLib_800528CC_Ceiling(int line_id)
     int new_id;
     bool valid_id;
     LINEID_CHECK(4157, line_id);
-    new_id = mpLib_8004DC04(line_id);
+    new_id = mpLineGetPrev(line_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & LINE_FLAG_CEILING)
     {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     }
 
     valid_id = false;
@@ -2917,11 +2917,11 @@ int mpLib_80052A98_Ceiling(int line_id)
     int new_id;
     bool valid_id;
     LINEID_CHECK(4166, line_id);
-    new_id = mpLib_8004DB78(line_id);
+    new_id = mpLineGetNext(line_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & LINE_FLAG_CEILING)
     {
-        new_id = mpLib_8004DB78(new_id);
+        new_id = mpLineGetNext(new_id);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -2938,11 +2938,11 @@ int mpLib_80052C64_LeftWall(int line_id)
     int new_id;
     bool valid_id;
     LINEID_CHECK(4175, line_id);
-    new_id = mpLib_8004DB78(line_id);
+    new_id = mpLineGetNext(line_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & LINE_FLAG_LEFT_WALL)
     {
-        new_id = mpLib_8004DB78(new_id);
+        new_id = mpLineGetNext(new_id);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -2959,11 +2959,11 @@ int mpLib_80052E30_LeftWall(int line_id)
     int new_id;
     bool valid_id;
     LINEID_CHECK(4184, line_id);
-    new_id = mpLib_8004DC04(line_id);
+    new_id = mpLineGetPrev(line_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & LINE_FLAG_LEFT_WALL)
     {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -2980,11 +2980,11 @@ int mpLib_80052FFC_RightWall(int line_id)
     int new_id;
     bool valid_id;
     LINEID_CHECK(4193, line_id);
-    new_id = mpLib_8004DC04(line_id);
+    new_id = mpLineGetPrev(line_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & LINE_FLAG_RIGHT_WALL)
     {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -3001,11 +3001,11 @@ int mpLib_800531C8_RightWall(int line_id)
     int new_id;
     bool valid_id;
     LINEID_CHECK(4202, line_id);
-    new_id = mpLib_8004DB78(line_id);
+    new_id = mpLineGetNext(line_id);
     while (new_id != -1 && new_id != line_id &&
            groundCollLine[new_id].flags & LINE_FLAG_RIGHT_WALL)
     {
-        new_id = mpLib_8004DB78(new_id);
+        new_id = mpLineGetNext(new_id);
     }
     valid_id = false;
     if (new_id != -1 && new_id != line_id) {
@@ -3021,9 +3021,9 @@ int mpLib_80053394_Floor(int line_id)
 {
     int new_id;
     LINEID_CHECK(4252, line_id);
-    new_id = groundCollLine[line_id].x0->x6_line_id;
+    new_id = groundCollLine[line_id].x0->next_id0;
     while (new_id != -1 && groundCollLine[new_id].flags & LINE_FLAG_FLOOR) {
-        new_id = groundCollLine[new_id].x0->x6_line_id;
+        new_id = groundCollLine[new_id].x0->next_id0;
     }
     if (new_id != -1) {
         return new_id;
@@ -3035,9 +3035,9 @@ int mpLib_80053448_Floor(int line_id)
 {
     int new_id;
     LINEID_CHECK(4261, line_id);
-    new_id = groundCollLine[line_id].x0->x4_line_id;
+    new_id = groundCollLine[line_id].x0->prev_id0;
     while (new_id != -1 && groundCollLine[new_id].flags & LINE_FLAG_FLOOR) {
-        new_id = groundCollLine[new_id].x0->x4_line_id;
+        new_id = groundCollLine[new_id].x0->prev_id0;
     }
     if (new_id != -1) {
         return new_id;
@@ -3049,12 +3049,12 @@ int mpLib_800534FC_Floor(int line_id)
 {
     int new_id;
     LINEID_CHECK(4272, line_id);
-    new_id = mpLib_8004DB78(line_id);
+    new_id = mpLineGetNext(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & LINE_FLAG_FLOOR)) {
             new_id = -1;
-        } else if (new_id != groundCollLine[line_id].x0->xA_line_id) {
-            new_id = mpLib_8004DB78(new_id);
+        } else if (new_id != groundCollLine[line_id].x0->next_id1) {
+            new_id = mpLineGetNext(new_id);
             continue;
         }
         break;
@@ -3069,12 +3069,12 @@ int mpLib_800536CC_Floor(int line_id)
 {
     int new_id;
     LINEID_CHECK(4293, line_id);
-    new_id = mpLib_8004DC04(line_id);
+    new_id = mpLineGetPrev(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & LINE_FLAG_FLOOR)) {
             new_id = -1;
-        } else if (new_id != groundCollLine[line_id].x0->x8_line_id) {
-            new_id = mpLib_8004DC04(new_id);
+        } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
+            new_id = mpLineGetPrev(new_id);
             continue;
         }
         break;
@@ -3089,10 +3089,10 @@ int mpLib_8005389C_Ceiling(int line_id)
 {
     int new_id;
     LINEID_CHECK(4314, line_id);
-    new_id = groundCollLine[line_id].x0->x4_line_id;
+    new_id = groundCollLine[line_id].x0->prev_id0;
     while (new_id != -1 && (groundCollLine[new_id].flags & LINE_FLAG_CEILING))
     {
-        new_id = groundCollLine[new_id].x0->x4_line_id;
+        new_id = groundCollLine[new_id].x0->prev_id0;
     }
     if (new_id != -1) {
         return new_id;
@@ -3104,10 +3104,10 @@ int mpLib_80053950_Ceiling(int line_id)
 {
     int new_id;
     LINEID_CHECK(4323, line_id);
-    new_id = groundCollLine[line_id].x0->x6_line_id;
+    new_id = groundCollLine[line_id].x0->next_id0;
     while (new_id != -1 && (groundCollLine[new_id].flags & LINE_FLAG_CEILING))
     {
-        new_id = groundCollLine[new_id].x0->x6_line_id;
+        new_id = groundCollLine[new_id].x0->next_id0;
     }
     if (new_id != -1) {
         return new_id;
@@ -3119,13 +3119,13 @@ int mpLib_80053A04_Ceiling(int line_id)
 {
     int new_id;
     LINEID_CHECK(4334, line_id);
-    new_id = mpLib_8004DC04(line_id);
+    new_id = mpLineGetPrev(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & LINE_FLAG_CEILING)) {
             new_id = -1;
-        } else if (new_id != groundCollLine[line_id].x0->x8_line_id) {
+        } else if (new_id != groundCollLine[line_id].x0->prev_id1) {
             line_id = new_id;
-            new_id = mpLib_8004DC04(new_id);
+            new_id = mpLineGetPrev(new_id);
             continue;
         }
         break;
@@ -3140,13 +3140,13 @@ int mpLib_80053BD4_Ceiling(int line_id)
 {
     int new_id;
     LINEID_CHECK(4355, line_id);
-    new_id = mpLib_8004DB78(line_id);
+    new_id = mpLineGetNext(line_id);
     while (new_id != -1) {
         if (!(groundCollLine[new_id].flags & LINE_FLAG_CEILING)) {
             new_id = -1;
-        } else if (new_id != groundCollLine[line_id].x0->xA_line_id) {
+        } else if (new_id != groundCollLine[line_id].x0->next_id1) {
             line_id = new_id;
-            new_id = mpLib_8004DB78(new_id);
+            new_id = mpLineGetNext(new_id);
             continue;
         }
         break;
@@ -3169,7 +3169,7 @@ void mpLib_80053DA4_Floor(int line_id, Vec3* pos_out)
 loop:
     r29 = r5;
 skip:
-    r5 = groundCollLine[r29].x0->x6_line_id;
+    r5 = groundCollLine[r29].x0->next_id0;
     if (r5 != -1 && (groundCollLine[r5].flags & LINE_FLAG_FLOOR)) {
         goto loop;
     }
@@ -3189,7 +3189,7 @@ void mpLib_80053ECC_Floor(int line_id, Vec* vec)
     LINEID_CHECK(4448, line_id);
 
     while (true) {
-        int new_id = groundCollLine[line_id].x0->x4_line_id;
+        int new_id = groundCollLine[line_id].x0->prev_id0;
         if ((new_id != -1) && (groundCollLine[new_id].flags & LINE_FLAG_FLOOR))
         {
             line_id = new_id;
@@ -3217,7 +3217,7 @@ void mpLib_80053FF4(int line_id, Vec3* pos_out)
     new_id = line_id;
     flags_r3 = groundCollLine[line_id].flags & 0xF;
     while (true) {
-        new_id = mpLib_8004DB78(new_id);
+        new_id = mpLineGetNext(new_id);
 
         if (new_id == -1 || flags_r3 != (groundCollLine[new_id].flags & 0xF)) {
             break;
@@ -3241,7 +3241,7 @@ void mpLib_80054158(int line_id, Vec3* arg1)
     new_id = line_id;
     while (true) {
         temp_r8 = groundCollLine[new_id].x0;
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
 
         if (new_id == -1 || (groundCollLine[line_id].flags & 0xF) !=
                                 (groundCollLine[new_id].flags & 0xF))
@@ -3264,7 +3264,7 @@ void mpLib_800542BC(int line_id, Vec3* out)
     LINEID_CHECK(4483, line_id);
     new_id = line_id;
     do {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) ==
                                  (groundCollLine[new_id].flags & 0xF));
     temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
@@ -3281,7 +3281,7 @@ void mpLib_80054420(int line_id, Vec3* out)
     LINEID_CHECK(4492, line_id);
     new_id = line_id;
     do {
-        new_id = mpLib_8004DB78(new_id);
+        new_id = mpLineGetNext(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) ==
                                  (groundCollLine[new_id].flags & 0xF));
     temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
@@ -3299,7 +3299,7 @@ CollVtx* mpLib_80054584(int line_id, Vec3* out)
     new_id = line_id;
 
     do {
-        new_id = mpLib_8004DB78(new_id);
+        new_id = mpLineGetNext(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
     v1 = &groundCollVtx[groundCollLine[new_id].x0->v1_idx];
@@ -3317,7 +3317,7 @@ void mpLib_800546E8(int line_id, Vec3* out)
     LINEID_CHECK(4510, line_id);
     new_id = line_id;
     do {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
     v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
@@ -3334,7 +3334,7 @@ void mpLib_8005484C(int line_id, Vec3* arg1)
     LINEID_CHECK(4519, line_id);
     new_id = line_id;
     do {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
     v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
@@ -3351,7 +3351,7 @@ void mpLib_800549B0(int line_id, Vec3* arg1)
     LINEID_CHECK(4519, line_id);
     new_id = line_id;
     do {
-        new_id = mpLib_8004DC04(new_id);
+        new_id = mpLineGetPrev(new_id);
     } while (new_id != -1 && (groundCollLine[line_id].flags & 0xF) !=
                                  (groundCollLine[new_id].flags & 0xF));
     v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
@@ -3452,12 +3452,12 @@ bool mpLib_80054F68(int line_id, int line_id2)
     if (line_id == line_id2) {
         return true;
     }
-    var_r9 = mpLib_8004DB78(line_id);
+    var_r9 = mpLineGetNext(line_id);
 loop_23:
     if (var_r9 == -1 || !(groundCollLine[line_id].flags ==
                           (groundCollLine[var_r9].flags & 0xF)))
     {
-        var_r6 = mpLib_8004DC04(line_id);
+        var_r6 = mpLineGetPrev(line_id);
         while (true) {
             if (var_r6 == -1 || !(groundCollLine[line_id].flags ==
                                   (groundCollLine[var_r6].flags & 0xF)))
@@ -3467,13 +3467,13 @@ loop_23:
             if (var_r6 == line_id2) {
                 return true;
             }
-            var_r6 = mpLib_8004DC04(var_r6);
+            var_r6 = mpLineGetPrev(var_r6);
         }
     }
     if (var_r9 == line_id2) {
         return true;
     }
-    var_r9 = mpLib_8004DB78(var_r6);
+    var_r9 = mpLineGetNext(var_r6);
     goto loop_23;
 }
 
@@ -4855,7 +4855,7 @@ block_10:
                 total_dist_f27 = 0.0F;
             block_30:
                 if (!(dist_f28 > var_f25)) {
-                    new_id_r5 = mpLib_8004DB78(line_id);
+                    new_id_r5 = mpLineGetNext(line_id);
                     if (new_id_r5 == -1) {
                         result_r30 = false;
                     } else {
@@ -4890,7 +4890,7 @@ block_10:
                 total_dist_f27 = 0.0F;
             block_55:
                 if (!(dist_f28 > var_f25)) {
-                    new_id_r5 = mpLib_8004DC04(line_id);
+                    new_id_r5 = mpLineGetPrev(line_id);
                     if (new_id_r5 == -1) {
                         result_r30 = false;
                     } else {
@@ -5229,9 +5229,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     CollJoint* j1_r10;
     int i;
     mpLib_CollData* cd0;
-    int count0;
+    int vcount0;
     CollVtx* v0_r29;
-    int start0;
+    int vstart0;
 
     j0_r9 = &groundCollJoint[joint_id0];
     j1_r10 = &groundCollJoint[joint_id1];
@@ -5250,18 +5250,18 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         idx = start;
         lines = &groundCollLine[start];
         for (j = 0; j < count; j++, idx++) {
-            temp = lines[j].x0->x8_line_id;
+            temp = lines[j].x0->prev_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->xA_line_id;
+                temp = groundCollLine[temp].x0->next_id1;
                 if (temp != -1 && idx != temp) {
-                    lines[j].x0->x8_line_id = -1;
+                    lines[j].x0->prev_id1 = -1;
                 }
             }
-            temp = lines[j].x0->xA_line_id;
+            temp = lines[j].x0->next_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->x8_line_id;
+                temp = groundCollLine[temp].x0->prev_id1;
                 if (temp != -1 && idx != temp) {
-                    lines[j].x0->xA_line_id = -1;
+                    lines[j].x0->next_id1 = -1;
                 }
             }
         }
@@ -5272,97 +5272,102 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         idx = start;
         lines = &groundCollLine[start];
         for (j = 0; j < count; j++, idx++) {
-            temp = lines->x0->x8_line_id;
+            temp = lines->x0->prev_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->xA_line_id;
+                temp = groundCollLine[temp].x0->next_id1;
                 if (temp != -1 && idx != temp) {
-                    lines->x0->x8_line_id = -1;
+                    lines->x0->prev_id1 = -1;
                 }
             }
-            temp = lines->x0->xA_line_id;
+            temp = lines->x0->next_id1;
             if (temp != -1) {
-                temp = groundCollLine[temp].x0->x8_line_id;
+                temp = groundCollLine[temp].x0->prev_id1;
                 if (temp != -1 && idx != temp) {
-                    lines->x0->xA_line_id = -1;
+                    lines->x0->next_id1 = -1;
                 }
             }
             lines++;
         }
     }
 
-    cd0 = j0_r9->coll_data;  /*  r3 */
-    start0 = cd0->vtx_start; /*  r4 */
-    count0 = cd0->vtx_count; /* r31 */
+    cd0 = j0_r9->coll_data;   /*  r3 */
+    vstart0 = cd0->vtx_start; /*  r4 */
+    vcount0 = cd0->vtx_count; /* r31 */
 
-    v0_r29 = &groundCollVtx[start0];
-    for (i = 0; i < count0; i++) {
+    v0_r29 = &groundCollVtx[vstart0];
+    // for every pair of verts
+    for (i = 0; i < vcount0; i++) {
         int v;       /* r28 */
-        int count1;  /* r27 */
-        int var_r26; /* r26 */
-        int idx;
-        int start1_r4;
-        start1_r4 = j1_r10->coll_data->vtx_start;
-        count1 = j1_r10->coll_data->vtx_count;
-        idx = start1_r4;
-        var_r26 = start1_r4;
-        for (v = 0; v < count1; v++, idx++, var_r26++) {
+        int vcount1; /* r27 */
+        int vid_r26; /* r26 */
+        int vid;
+        int vstart1_r4;
+        vstart1_r4 = j1_r10->coll_data->vtx_start;
+        vcount1 = j1_r10->coll_data->vtx_count;
+        vid = vstart1_r4;
+        vid_r26 = vstart1_r4;
+        for (v = 0; v < vcount1; v++, vid++, vid_r26++) {
             int var_r25;
 
-            if (!(ABS(v0_r29[i].pos.x - groundCollVtx[idx].pos.x) < 2.0) ||
-                !(ABS(v0_r29[i].pos.y - groundCollVtx[idx].pos.y) < 2.0))
+            // ensure they are nearby
+            if (!(ABS(v0_r29[i].pos.x - groundCollVtx[vid].pos.x) < 2.0) ||
+                !(ABS(v0_r29[i].pos.y - groundCollVtx[vid].pos.y) < 2.0))
             {
                 continue;
             }
 
+            // find every line with the first vert
             for (var_r25 = 0; var_r25 < 5; var_r25++) {
                 int i_r23;
-                int start_r24;
-                int count_r22;
+                int lstart_r24;
+                int lcount_r22;
                 CollLine* lines; /* r5 */
-                start_r24 = ((struct pair*) j0_r9->coll_data)[var_r25].start;
-                count_r22 = ((struct pair*) j0_r9->coll_data)[var_r25].count;
-                lines = &groundCollLine[start_r24];
-                for (i_r23 = 0; i_r23 < count_r22; i_r23++) {
+                lstart_r24 = ((struct pair*) j0_r9->coll_data)[var_r25].start;
+                lcount_r22 = ((struct pair*) j0_r9->coll_data)[var_r25].count;
+                lines = &groundCollLine[lstart_r24];
+                for (i_r23 = 0; i_r23 < lcount_r22; i_r23++) {
                     int j;
-                    s16 start_r20;
-                    s16 count_r17;
+                    s16 lstart_r20;
+                    s16 lcount_r17;
                     CollLine* iter_r3;
-                    if (start0 + i == lines[i_r23].x0->v0_idx) {
+                    if (vstart0 + i == lines[i_r23].x0->v0_idx) {
+                        // if the first vert is that line's v0
+                        // find every line with the second vert as v1
                         for (j = 0; j < 5; j++) {
                             int k;
-                            start_r20 =
+                            lstart_r20 =
                                 ((struct pair*) j1_r10->coll_data)[j].start;
-                            count_r17 =
+                            lcount_r17 =
                                 ((struct pair*) j1_r10->coll_data)[j].count;
-                            iter_r3 = &groundCollLine[start_r20];
-                            for (k = 0; k < count_r17; k++) {
-                                if (var_r26 == iter_r3->x0->v1_idx) {
-                                    lines[i_r23].x0->x8_line_id =
-                                        start_r20 + k;
-                                    iter_r3->x0->xA_line_id = start_r24;
+                            iter_r3 = &groundCollLine[lstart_r20];
+                            for (k = 0; k < lcount_r17; k++) {
+                                if (vid_r26 == iter_r3->x0->v1_idx) {
+                                    lines[i_r23].x0->prev_id1 = lstart_r20 + k;
+                                    iter_r3->x0->next_id1 = lstart_r24;
                                 }
                                 iter_r3++;
                             }
                         }
-                    } else if (start0 + i == lines[i_r23].x0->v1_idx) {
+                    } else if (vstart0 + i == lines[i_r23].x0->v1_idx) {
+                        // else if the first vert is that line's v1
+                        // find every line with the second vert as v0
                         for (j = 0; j < 5; j++) {
                             int k;
-                            count_r17 =
+                            lcount_r17 =
                                 ((struct pair*) j1_r10->coll_data)[j].count;
-                            start_r20 =
+                            lstart_r20 =
                                 ((struct pair*) j1_r10->coll_data)[j].start;
-                            iter_r3 = &groundCollLine[start_r20];
-                            for (k = 0; k < count_r17; k++) {
-                                if (var_r26 == iter_r3->x0->v0_idx) {
-                                    lines[i_r23].x0->xA_line_id =
-                                        start_r20 + k;
-                                    iter_r3->x0->x8_line_id = start_r24;
+                            iter_r3 = &groundCollLine[lstart_r20];
+                            for (k = 0; k < lcount_r17; k++) {
+                                if (vid_r26 == iter_r3->x0->v0_idx) {
+                                    lines[i_r23].x0->next_id1 = lstart_r20 + k;
+                                    iter_r3->x0->prev_id1 = lstart_r24;
                                 }
                                 iter_r3++;
                             }
                         }
                     }
-                    start_r24++;
+                    lstart_r24++;
                 }
             }
         }

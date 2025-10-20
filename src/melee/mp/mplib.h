@@ -21,8 +21,8 @@
 /* 04D17C */ CollJoint* mpGetGroundCollJoint(void);
 /* 04D184 */ void mpPruneEmptyLines(mp_CollData* coll_data);
 /* 04D288 */ void mpLibLoad(mp_CollData* coll_data);
-/* 04DB78 */ int mpLib_8004DB78(int line_id);
-/* 04DC04 */ int mpLib_8004DC04(int line_id);
+/* 04DB78 */ int mpLineGetNext(int line_id);
+/* 04DC04 */ int mpLineGetPrev(int line_id);
 /* 04DD90 */ int mpLib_8004DD90_Floor(int line_id, Vec3*, float* y_out,
                                       u32* flags_out, Vec3* normal_out);
 /* 04E090 */ int mpLib_8004E090_Ceiling(int line_id, Vec3*, float* y_out,

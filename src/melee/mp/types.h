@@ -49,10 +49,10 @@ struct mp_UnkStruct0 {
 struct mpLib_Line {
     /* +0 */ u16 v0_idx;
     /* +2 */ u16 v1_idx;
-    /* +4 */ s16 x4_line_id;
-    /* +6 */ s16 x6_line_id;
-    /* +8 */ s16 x8_line_id;
-    /* +A */ s16 xA_line_id;
+    /* +4 */ s16 prev_id0;
+    /* +6 */ s16 next_id0;
+    /* +8 */ s16 prev_id1;
+    /* +A */ s16 next_id1;
     /* +C */ u16 is_empty;
     /* +E */ u16 flags;
 };

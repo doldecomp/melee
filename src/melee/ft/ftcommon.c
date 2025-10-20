@@ -760,8 +760,8 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
             }
             arg_gnd = arg_ft->coll_data.floor.index;
             cur_gnd = cur_ft->coll_data.floor.index;
-            if (arg_gnd == cur_gnd || cur_gnd == mpLib_8004DB78(arg_gnd) ||
-                cur_gnd == mpLib_8004DC04(arg_gnd))
+            if (arg_gnd == cur_gnd || cur_gnd == mpLineGetNext(arg_gnd) ||
+                cur_gnd == mpLineGetPrev(arg_gnd))
             {
                 ftCommon_8007F8B4(cur_ft, &sp24);
                 vtmp = &cur_ft->x2C4;
@@ -820,8 +820,8 @@ void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     if (!temp_r3->x221F_b3 && temp_r3->ground_or_air == GA_Ground) {
         temp_r0 = fp->coll_data.floor.index;
         temp_r30 = (new_var2 = temp_r3->coll_data.floor.index);
-        if (temp_r0 == temp_r30 || temp_r30 == mpLib_8004DB78(temp_r0) ||
-            temp_r30 == mpLib_8004DC04(temp_r0))
+        if (temp_r0 == temp_r30 || temp_r30 == mpLineGetNext(temp_r0) ||
+            temp_r30 == mpLineGetPrev(temp_r0))
         {
             ftCommon_8007F8B4(temp_r3, &sp1C);
             tmp = &temp_r3->x2C4;

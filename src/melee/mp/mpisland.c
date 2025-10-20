@@ -271,7 +271,7 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
                 }
 
                 done = true;
-                j_next = v2[j].x0->x6_line_id;
+                j_next = v2[j].x0->next_id0;
 
                 if (j_next != -1 && (v2[j_next].flags & LINE_FLAG_FLOOR)) {
                     done = false;
@@ -290,7 +290,7 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 {
     int i;
     if (mpLib_8004F008_Floor(NULL, &i, 0, 0, arg0->x, arg0->y, arg0->x,
-                       arg0->y + arg1, 0.0F, -1, -1, -1, 0, 0))
+                             arg0->y + arg1, 0.0F, -1, -1, -1, 0, 0))
     {
         return mpIsland_8005AB54(i);
     }

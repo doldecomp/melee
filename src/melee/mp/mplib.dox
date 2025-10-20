@@ -46,10 +46,10 @@ bool mpLib_80056C54(s32 idx, Vec3* pos, bool, Vec3*, bool, bool, f32, f32, f32,
 void mpLib_8005811C(CollData*, s32 ledge_id);
 
 /// @returns A ground index.
-s32 mpLib_8004DB78(s32 gr_idx);
+s32 mpLineGetNext(s32 gr_idx);
 
 /// @returns A ground index.
-s32 mpLib_8004DC04(s32 gr_idx);
+s32 mpLineGetPrev(s32 gr_idx);
 
 void mpLibLoad(UNK_T);
 void mpLib_80058820(void);
