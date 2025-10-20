@@ -1,9 +1,12 @@
 #include "spline.h"
 
-#include <math.h>
 #include <placeholder.h>
+
 #include "forward.h"
+
+#include <math.h>
 #include <MetroTRK/intrinsics.h>
+
 
 f32 splGetHelmite(f32 fterm, f32 time, f32 p0, f32 p1, f32 d0, f32 d1)
 {
@@ -180,7 +183,8 @@ f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
 
     switch (spl->x0) {
     case 0:
-        result = (arg1 - spl->segments[idx]) / (spl->segments[idx + 1] - spl->segments[idx]);
+        result = (arg1 - spl->segments[idx]) /
+                 (spl->segments[idx + 1] - spl->segments[idx]);
         break;
     case 1:
     case 2:
@@ -192,7 +196,7 @@ f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
         while (ABS(start - end) >= 0.00001F) {
             s32 i;
             f32 var_f24 = 0.0F;
-            //f32* coeffs = spl->coeffs[idx];
+            // f32* coeffs = spl->coeffs[idx];
             f32* coeffs = spl_GetCoeffs(spl, idx);
             f32 midpoint = (start + end) / 2.0F;
             f32 dx = (midpoint - start) / 8.0F;
@@ -209,7 +213,10 @@ f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
             }
 
             result = midpoint;
-            simpsons = dx * (var_f24 + splArcLengthPolynomial(coeffs, start) + splArcLengthPolynomial(coeffs, midpoint)) / 3.0F;
+            simpsons = dx *
+                       (var_f24 + splArcLengthPolynomial(coeffs, start) +
+                        splArcLengthPolynomial(coeffs, midpoint)) /
+                       3.0F;
             if (var_f22 < (0.00001F + simpsons)) {
                 end = midpoint;
             } else {
