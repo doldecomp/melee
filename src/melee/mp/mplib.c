@@ -145,7 +145,7 @@ void mpPruneEmptyLines(mp_CollData* coll_data)
     }
 }
 
-void mpLib_8004D288(mp_CollData* coll_data)
+void mpLibLoad(mp_CollData* coll_data)
 {
     float f0;
     float f1;

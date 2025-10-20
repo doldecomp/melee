@@ -483,7 +483,7 @@ void Ground_801C0800(StructPairWithStageID* pair)
         psInitDataBankLoad(0x1E, stage_info.map_ptcl, stage_info.map_texg, 0,
                            0);
     }
-    mpLib_8004D288(stage_info.coll_data);
+    mpLibLoad(stage_info.coll_data);
     mpLib_80058820();
     Ground_801C1E94();
     Ground_801C466C();
