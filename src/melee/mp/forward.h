@@ -56,6 +56,7 @@ typedef bool (*mpColl_Callback)(CollData*, u32);
 #define LINE_FLAG_CEILING (1 << 1)
 #define LINE_FLAG_RIGHT_WALL (1 << 2)
 #define LINE_FLAG_LEFT_WALL (1 << 3)
+#define LINE_FLAG_EMPTY (1 << 7)
 #define LINE_FLAG_PLATFORM (1 << 8)
 #define LINE_FLAG_LEDGE (1 << 9)
 

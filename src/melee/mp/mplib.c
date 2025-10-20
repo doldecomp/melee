@@ -100,7 +100,7 @@ CollJoint* mpLib_8004D17C(void)
     return groundCollJoint;
 }
 
-void mpLib_8004D184(mp_CollData* coll_data)
+void mpPruneEmptyLines(mp_CollData* coll_data)
 {
     mpLib_Line* line;
     Vec2* verts = coll_data->verts;
@@ -137,7 +137,7 @@ void mpLib_8004D184(mp_CollData* coll_data)
             }
         }
 
-        line->xC |= 0x80;
+        line->is_empty |= LINE_FLAG_EMPTY;
         line->x4_line_id = -1;
         line->x6_line_id = -1;
         line->x8_line_id = -1;
@@ -202,12 +202,13 @@ void mpLib_8004D288(mp_CollData* coll_data)
     }
     var_r26->next = NULL;
     mpLib_804D64C8 = var_r26;
-    mpLib_8004D184(coll_data);
+    mpPruneEmptyLines(coll_data);
 
     count = coll_data->floor_count;
     start = coll_data->floor_start;
     while (count-- > 0) {
-        groundCollLine[start].flags = coll_data->lines[start].xC | 0x10000;
+        groundCollLine[start].flags =
+            coll_data->lines[start].is_empty | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -215,7 +216,8 @@ void mpLib_8004D288(mp_CollData* coll_data)
     count = coll_data->ceiling_count;
     start = coll_data->ceiling_start;
     while (count-- > 0) {
-        groundCollLine[start].flags = coll_data->lines[start].xC | 0x10000;
+        groundCollLine[start].flags =
+            coll_data->lines[start].is_empty | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -223,7 +225,8 @@ void mpLib_8004D288(mp_CollData* coll_data)
     count = coll_data->right_wall_count;
     start = coll_data->right_wall_start;
     while (count-- > 0) {
-        groundCollLine[start].flags = coll_data->lines[start].xC | 0x10000;
+        groundCollLine[start].flags =
+            coll_data->lines[start].is_empty | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -231,7 +234,8 @@ void mpLib_8004D288(mp_CollData* coll_data)
     count = coll_data->left_wall_count;
     start = coll_data->left_wall_start;
     while (count-- > 0) {
-        groundCollLine[start].flags = coll_data->lines[start].xC | 0x10000;
+        groundCollLine[start].flags =
+            coll_data->lines[start].is_empty | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -239,7 +243,8 @@ void mpLib_8004D288(mp_CollData* coll_data)
     count = coll_data->dynamic_count;
     start = coll_data->dynamic_start;
     while (count-- > 0) {
-        groundCollLine[start].flags = coll_data->lines[start].xC | 0x10000;
+        groundCollLine[start].flags =
+            coll_data->lines[start].is_empty | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -904,7 +909,8 @@ bool mpLib_8004F008_Floor(Vec3* vec_out, int* line_id_out, u32* flags_out,
             }
 
             if (!(line_r26->flags & LINE_FLAG_FLOOR) ||
-                !(line_r26->flags & 0x10000) || line_r26->flags & 0x80)
+                !(line_r26->flags & 0x10000) ||
+                line_r26->flags & LINE_FLAG_EMPTY)
             {
                 continue;
             }
@@ -1042,7 +1048,7 @@ bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out, u32* flags_out,
             }
 
             if (!(line->flags & LINE_FLAG_FLOOR) || !(line->flags & 0x10000) ||
-                line->flags & 0x80)
+                line->flags & LINE_FLAG_EMPTY)
             {
                 continue;
             }
@@ -1210,7 +1216,8 @@ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
         block_8:
 
             if (!(line_r26->flags & LINE_FLAG_CEILING) ||
-                !(line_r26->flags & 0x10000) || line_r26->flags & 0x80)
+                !(line_r26->flags & 0x10000) ||
+                line_r26->flags & LINE_FLAG_EMPTY)
             {
                 continue;
             }
@@ -1344,7 +1351,7 @@ bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
         for (r28 = 0; r28 < r25; r28++, r26++) {
         block_8:
             if (r26->flags & LINE_FLAG_CEILING && r26->flags & 0x10000 &&
-                !(r26->flags & 0x80))
+                !(r26->flags & LINE_FLAG_EMPTY))
             {
                 float dx2;
                 float dy2;
@@ -1570,7 +1577,7 @@ bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
         for (r28 = 0; r28 < r25; r28++, p26++) {
         block_8:
             if (p26->flags & LINE_FLAG_LEFT_WALL && p26->flags & 0x10000 &&
-                !(p26->flags & 0x80))
+                !(p26->flags & LINE_FLAG_EMPTY))
             {
                 mpLib_Line* line = p26->x0;
                 CollVtx* v0 = &groundCollVtx[line->v0_idx];
@@ -1704,7 +1711,7 @@ bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
         for (r28 = 0; r28 < r25; r28++, r26++) {
         block_8:
             if (r26->flags & LINE_FLAG_LEFT_WALL && r26->flags & 0x10000 &&
-                !(r26->flags & 0x80))
+                !(r26->flags & LINE_FLAG_EMPTY))
             {
                 mpLib_Line* line_r3 = r26->x0;
                 CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
@@ -1875,7 +1882,7 @@ bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
         for (r28 = 0; r28 < r25; r28++, p26++) {
         block_8:
             if (p26->flags & LINE_FLAG_RIGHT_WALL && p26->flags & 0x10000 &&
-                !(p26->flags & 0x80))
+                !(p26->flags & LINE_FLAG_EMPTY))
             {
                 mpLib_Line* line = p26->x0;
                 CollVtx* v0 = &groundCollVtx[line->v0_idx];
@@ -2008,7 +2015,7 @@ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
         for (r28 = 0; r28 < r25; r28++, r26++) {
         block_8:
             if (r26->flags & LINE_FLAG_RIGHT_WALL && r26->flags & 0x10000 &&
-                !(r26->flags & 0x80))
+                !(r26->flags & LINE_FLAG_EMPTY))
             {
                 mpLib_Line* line_r3 = r26->x0;
                 CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
@@ -2179,7 +2186,7 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
         for (r28 = 0; r28 < r25; r28++, p26++) {
         block_8:
             if (p26->flags & LINE_FLAG_RIGHT_WALL && p26->flags & 0x10000 &&
-                !(p26->flags & 0x80))
+                !(p26->flags & LINE_FLAG_EMPTY))
             {
                 CollVtx* vtx;
                 float x0;
@@ -2347,7 +2354,7 @@ bool mpLib_800515A0_LeftWall(int* line_id_out, int joint_id0, int joint_id1,
             while (r28 < r25) {
             block_8:
                 if ((r26->flags & LINE_FLAG_LEFT_WALL) &&
-                    (r26->flags & 0x10000) && !(r26->flags & 0x80))
+                    (r26->flags & 0x10000) && !(r26->flags & LINE_FLAG_EMPTY))
                 {
                     v0_r3 = &groundCollVtx[r26->x0->v0_idx];
                     x0_f16 = v0_r3->pos.x;
@@ -2454,7 +2461,8 @@ int mpLib_8005199C_Floor(Vec3* vec, int arg1, int arg2)
             goto loop_condition;
             while (true) {
                 if ((line_r11->flags & LINE_FLAG_FLOOR) &&
-                    (line_r11->flags & 0x10000) && !(line_r11->flags & 0x80))
+                    (line_r11->flags & 0x10000) &&
+                    !(line_r11->flags & LINE_FLAG_EMPTY))
                 {
                     CollVtx* v1_r4 = &groundCollVtx[line_r11->x0->v1_idx];
                     CollVtx* v0_r5 = &groundCollVtx[line_r11->x0->v0_idx];
@@ -2554,7 +2562,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id, int joint_id0,
                 }
 
                 if (line->flags & LINE_FLAG_FLOOR && line->flags & 0x10000 &&
-                    !(line->flags & 0x80))
+                    !(line->flags & LINE_FLAG_EMPTY))
                 {
                     mpLib_Line* inner = line->x0;
                     if (inner->flags & LINE_FLAG_LEDGE) {

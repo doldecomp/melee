@@ -53,7 +53,7 @@ struct mpLib_Line {
     /* +6 */ s16 x6_line_id;
     /* +8 */ s16 x8_line_id;
     /* +A */ s16 xA_line_id;
-    /* +C */ u16 xC;
+    /* +C */ u16 is_empty;
     /* +E */ u16 flags;
 };
 

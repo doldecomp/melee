@@ -19,7 +19,7 @@
 /* 04D16C */ CollVtx* mpLib_8004D16C(void);
 /* 04D174 */ CollLine* mpLib_8004D174(void);
 /* 04D17C */ CollJoint* mpLib_8004D17C(void);
-/* 04D184 */ void mpLib_8004D184(mp_CollData* coll_data);
+/* 04D184 */ void mpPruneEmptyLines(mp_CollData* coll_data);
 /* 04D288 */ void mpLib_8004D288(mp_CollData* coll_data);
 /* 04DB78 */ int mpLib_8004DB78(int line_id);
 /* 04DC04 */ int mpLib_8004DC04(int line_id);
