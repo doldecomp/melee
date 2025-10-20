@@ -4825,7 +4825,6 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
     u32 flags_r0;
 
     result_r30 = true;
-block_10:
     if (!mpLib_80054ED8(line_id)) {
         return false;
     }
