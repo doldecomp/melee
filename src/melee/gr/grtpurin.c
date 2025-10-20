@@ -210,7 +210,7 @@ DynamicsDesc* grTPurin_802234F8(enum_t arg0)
     if (arg0 != -1) {
         i = mpJointFromLine(arg0);
         if (i != -1) {
-            mpLib_80054C6C(arg0);
+            mpLineGetKind(arg0);
             if (i == (0 << 0)) {
                 return grTPr_804D6B10->x0;
             }

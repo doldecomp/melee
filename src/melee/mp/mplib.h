@@ -125,7 +125,7 @@
 /* 0549B0 */ void mpLib_800549B0(int line_id, Vec3*);
 /* 054B14 */ void mpLineGetV1Pos(int line_id, Vec3* pos_out);
 /* 054BC0 */ void mpLineGetV0Pos(int line_id, Vec3* pos_out);
-/* 054C6C */ u32 mpLib_80054C6C(int line_id);
+/* 054C6C */ enum_t mpLineGetKind(int line_id);
 /* 054CEC */ u32 mpLineGetFlags(int line_id);
 /* 054D68 */ void mpLib_80054D68(int line_id, u32 flags);
 /* 054DFC */ Vec3* mpLineGetNormal(int line_id, Vec3* normal_out);

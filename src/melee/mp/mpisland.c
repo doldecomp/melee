@@ -273,7 +273,7 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
                 done = true;
                 j_next = v2[j].x0->next_id0;
 
-                if (j_next != -1 && (v2[j_next].flags & LINE_FLAG_FLOOR)) {
+                if (j_next != -1 && (v2[j_next].flags & CollLine_Floor)) {
                     done = false;
                 }
 

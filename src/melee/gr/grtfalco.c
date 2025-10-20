@@ -9,6 +9,9 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 
 #include <dolphin/os/OSError.h>
@@ -178,21 +181,21 @@ DynamicsDesc* grTFalco_80220ACC(enum_t arg0)
         enum_t i = mpJointFromLine(arg0);
 
         if (i != -1 && i == 0) {
-            i = mpLib_80054C6C(arg0);
+            i = mpLineGetKind(arg0);
 
-            if (i == (1 << 0)) {
+            if (i == CollLine_Floor) {
                 return grTFc_804D6AF8->unk_0;
             }
 
-            if (i == (1 << 1)) {
+            if (i == CollLine_Ceiling) {
                 return grTFc_804D6AF8->unk_4;
             }
 
-            if (i == (1 << 2)) {
+            if (i == CollLine_RightWall) {
                 return grTFc_804D6AF8->unk_8;
             }
 
-            if (i == (1 << 3)) {
+            if (i == CollLine_LeftWall) {
                 return grTFc_804D6AF8->unk_C;
             }
 

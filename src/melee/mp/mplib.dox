@@ -70,7 +70,7 @@ void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top);
 enum_t mpJointFromLine(enum_t);
 void mpJointGetCb1(int, mpLib_Callback*, UNK_T);
 void mpJointGetCb2(int, mpLib_Callback*, UNK_T);
-enum_t mpLib_80054C6C(int);
+enum_t mpLineGetKind(int);
 void mpLib_80058AA0(void);
 enum_t mpLib_8004E090_Ceiling(int idx, Vec3*, f32*, u32*, Vec3* normal);
 void mpLib_800569EC(void);

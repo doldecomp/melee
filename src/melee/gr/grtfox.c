@@ -13,6 +13,9 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00F9.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 
 #include <baselib/forward.h>
@@ -186,17 +189,17 @@ DynamicsDesc* grTFox_80220E5C(enum_t arg0)
     if (arg0 != -1) {
         enum_t i = mpJointFromLine(arg0);
         if (i != -1 && i == 1) {
-            i = mpLib_80054C6C(arg0);
-            if (i == (1 << 0)) {
+            i = mpLineGetKind(arg0);
+            if (i == CollLine_Floor) {
                 return grTFx_804D6B00->unk0;
             }
-            if (i == (1 << 1)) {
+            if (i == CollLine_Ceiling) {
                 return grTFx_804D6B00->unk4;
             }
-            if (i == (1 << 2)) {
+            if (i == CollLine_RightWall) {
                 return grTFx_804D6B00->unk8;
             }
-            if (i == (1 << 3)) {
+            if (i == CollLine_LeftWall) {
                 return grTFx_804D6B00->unkC;
             }
             return NULL;

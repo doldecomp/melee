@@ -1,6 +1,8 @@
 #ifndef MELEE_MP_TYPES_H
 #define MELEE_MP_TYPES_H
 
+#include "platform.h"
+
 #include <placeholder.h>
 
 #include "dolphin/gx/GXStruct.h"

@@ -52,10 +52,14 @@ typedef void (*mpLib_Callback)(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
                                f32);
 typedef bool (*mpColl_Callback)(CollData*, u32);
 
-#define LINE_FLAG_FLOOR (1 << 0)
-#define LINE_FLAG_CEILING (1 << 1)
-#define LINE_FLAG_RIGHT_WALL (1 << 2)
-#define LINE_FLAG_LEFT_WALL (1 << 3)
+typedef enum CollLineKind {
+    CollLine_Floor = 1 << 0,
+    CollLine_Ceiling = 1 << 1,
+    CollLine_RightWall = 1 << 2,
+    CollLine_LeftWall = 1 << 3,
+} CollLineKind;
+
+#define LINE_FLAG_KIND (0b1111)
 #define LINE_FLAG_EMPTY (1 << 7)
 #define LINE_FLAG_PLATFORM (1 << 8)
 #define LINE_FLAG_LEDGE (1 << 9)
