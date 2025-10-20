@@ -1533,10 +1533,9 @@ bool mpLib_80050068(float* r3, float* r4, float f1, float f2, float f3,
     return true;
 }
 
-bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
-                             Vec3* normal_out, int joint_id0, int joint_id1,
-                             float normal_x, float normal_y, float right_x,
-                             float right_y)
+bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
+                             Vec3* vec_out, int* line_id_out, u32* flags_out,
+                             Vec3* normal_out, int joint_id0, int joint_id1)
 {
     float min;
     CollJoint* joint;
@@ -1554,7 +1553,7 @@ bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
     r3 = mpLib_800588C8();
 
     if (!r3) {
-        mpLib_80058970(normal_x, normal_y, right_x, right_y);
+        mpLib_80058970(ax, ay, bx, by);
     }
 
     for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
@@ -1592,11 +1591,10 @@ bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                 float x;
                 float y;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, normal_x, normal_y,
-                                       right_x, right_y, &x, &y))
+                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &x, &y))
                     {
-                        dx2 = SQ(x - normal_x);
-                        dy2 = SQ(y - normal_y);
+                        dx2 = SQ(x - ax);
+                        dy2 = SQ(y - ay);
                         dist2 = dx2 + dy2;
                         if (min > dist2) {
                             min = dist2;
@@ -1621,12 +1619,11 @@ bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                         }
                     }
                 } else {
-                    if ((normal_x <= right_x) &&
-                        mpLib_80050068(&x, &y, x0, y0, y1, normal_x, normal_y,
-                                       right_x, right_y))
+                    if ((ax <= bx) &&
+                        mpLib_80050068(&x, &y, x0, y0, y1, ax, ay, bx, by))
                     {
-                        dx2 = SQ(x - normal_x);
-                        dy2 = SQ(y - normal_y);
+                        dx2 = SQ(x - ax);
+                        dy2 = SQ(y - ay);
                         dist2 = dx2 + dy2;
                         if (min > dist2) {
                             min = dist2;
@@ -1839,9 +1836,9 @@ bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
     return r27;
 }
 
-bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
-                              Vec3* normal_out, int joint_id0, int joint_id1,
-                              float f1, float f2, float left_x, float left_y)
+bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
+                              Vec3* vec_out, int* line_id_out, u32* flags_out,
+                              Vec3* normal_out, int joint_id0, int joint_id1)
 {
     float min;
     CollJoint* joint;
@@ -1859,7 +1856,7 @@ bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
     r3 = mpLib_800588C8();
 
     if (!r3) {
-        mpLib_80058970(f1, f2, left_x, left_y);
+        mpLib_80058970(ax, ay, bx, by);
     }
 
     for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
@@ -1897,11 +1894,10 @@ bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                 float x;
                 float y;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, f1, f2, left_x, left_y,
-                                       &x, &y))
+                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &x, &y))
                     {
-                        dx2 = SQ(x - f1);
-                        dy2 = SQ(y - f2);
+                        dx2 = SQ(x - ax);
+                        dy2 = SQ(y - ay);
                         dist2 = dx2 + dy2;
                         if (min > dist2) {
                             min = dist2;
@@ -1926,11 +1922,11 @@ bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                         }
                     }
                 } else {
-                    if (f1 >= left_x && mpLib_80050068(&x, &y, x0, y0, y1, f1,
-                                                       f2, left_x, left_y))
+                    if (ax >= bx &&
+                        mpLib_80050068(&x, &y, x0, y0, y1, ax, ay, bx, by))
                     {
-                        dx2 = SQ(x - f1);
-                        dy2 = SQ(y - f2);
+                        dx2 = SQ(x - ax);
+                        dy2 = SQ(y - ay);
                         dist2 = dx2 + dy2;
                         if (min > dist2) {
                             min = dist2;
@@ -2772,9 +2768,9 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 4) &&
-            (mpLib_800501CC_LeftWall(&pos_sp68, &line_id_sp40, &flags_sp3C,
-                                     &normal_sp5C, joint_id0, joint_id1, x1,
-                                     y1, x2, y2)))
+            (mpLib_800501CC_LeftWall(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+                                     &flags_sp3C, &normal_sp5C, joint_id0,
+                                     joint_id1)))
         {
             dx = SQ(pos_sp68.x - x1);
             dy = SQ(pos_sp68.y - y1);
@@ -2787,9 +2783,9 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 8) &&
-            (mpLib_800509B8_RightWall(&pos_sp68, &line_id_sp40, &flags_sp3C,
-                                      &normal_sp5C, joint_id0, joint_id1, x1,
-                                      y1, x2, y2)))
+            (mpLib_800509B8_RightWall(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+                                      &flags_sp3C, &normal_sp5C, joint_id0,
+                                      joint_id1)))
         {
             dx = SQ(pos_sp68.x - x1);
             dy = SQ(pos_sp68.y - y1);

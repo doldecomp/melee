@@ -56,19 +56,20 @@
                                          float, float, float);
 /* 050068 */ bool mpLib_80050068(float*, float*, float, float, float, float,
                                  float, float, float);
-/* 0501CC */ bool mpLib_800501CC_LeftWall(Vec3* vec_out, int* line_id_out,
-                                          u32* flags_out, Vec3* normal_out,
-                                          int joint_id0, int joint_id1,
-                                          float normal_x, float normal_y,
-                                          float right_x, float right_y);
+/* 0501CC */ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx,
+                                          float by, Vec3* vec_out,
+                                          int* line_id_out, u32* flags_out,
+                                          Vec3* normal_out, int joint_id0,
+                                          int joint_id1);
 /* 05057C */ bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out,
                                           u32* flags_out, Vec3* normal_out,
                                           int joint_id0, int joint_id1, float,
                                           float, float, float);
-/* 0509B8 */ bool mpLib_800509B8_RightWall(Vec3* vec_out, int* line_id_out,
-                                           u32* flags_out, Vec3* normal_out,
-                                           int joint_id0, int joint_id1, float,
-                                           float, float left_x, float left_y);
+/* 0509B8 */ bool mpLib_800509B8_RightWall(float ax, float ay, float bx,
+                                           float by, Vec3* vec_out,
+                                           int* line_id_out, u32* flags_out,
+                                           Vec3* normal_out, int joint_id0,
+                                           int joint_id1);
 /* 050D68 */ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out,
                                            u32* flags_out, Vec3* normal_out,
                                            int joint_id0, int joint_id1, float,
