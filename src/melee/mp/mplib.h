@@ -185,13 +185,13 @@
 /* 058AA0 */ void mpLib_80058AA0(void);
 /* 058ACC */ void mpLib_SetupDraw(GXColor);
 /* 058B5C */ void mpLib_DrawEcbs(CollData*);
-/* 0590F4 */ void mpLib_DrawSnapping(UNK_PARAMS);
+/* 0590F4 */ void mpLib_DrawSnapping(void);
 /* 059404 */ void mpLib_DrawMatchingLines(int, int, GXColor);
-/* 059554 */ void mpLib_80059554(UNK_PARAMS);
+/* 059554 */ void mpLib_80059554(void);
 /* 059E60 */ void mpLib_80059E60(void);
 /* 059FE0 */ void mpLib_DrawCrosses(s16* idx, int len, GXColor);
-/* 05A220 */ UNK_RET mpLib_DrawSpecialPoints(UNK_PARAMS);
+/* 05A220 */ void mpLib_DrawSpecialPoints(void);
 /* 05A2DC */ void mpLib_8005A2DC(void);
-/* 05A340 */ UNK_RET mpLib_DrawZones(UNK_PARAMS);
+/* 05A340 */ void mpLib_DrawZones(void);
 
 #endif
