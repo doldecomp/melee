@@ -7,7 +7,6 @@
 #include <math.h>
 #include <MetroTRK/intrinsics.h>
 
-
 f32 splGetHelmite(f32 fterm, f32 time, f32 p0, f32 p1, f32 d0, f32 d1)
 {
     f32 _3t2_T2;
@@ -161,13 +160,27 @@ inline f32* spl_GetCoeffs(HSD_Spline* spl, s32 idx)
     return spl->coeffs[idx];
 }
 
+inline f32 spl_IterateSimpsonsMiddle(const f32 coeffs[5], const f32 dx, f32 t)
+{
+    f32 var_f24 = 0.0F;
+    s32 i;
+    for (i = 2; i <= 8; ++i) {
+        if (!(i & 1)) {
+            var_f24 += 4.0F * splArcLengthPolynomial(coeffs, t);
+        } else {
+            var_f24 += 2.0F * splArcLengthPolynomial(coeffs, t);
+        }
+        t += dx;
+    }
+    return var_f24;
+}
+
 f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
 {
     s32 idx = 0;
     f32 result;
     f32 start = 0.0F;
     f32 end = 1.0F;
-    PAD_STACK(12);
 
     if (arg1 <= 0.0F) {
         return start;
@@ -182,10 +195,10 @@ f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
     }
 
     switch (spl->x0) {
-    case 0:
+    case 0: {
         result = (arg1 - spl->segments[idx]) /
                  (spl->segments[idx + 1] - spl->segments[idx]);
-        break;
+    } break;
     case 1:
     case 2:
     case 3: {
@@ -194,27 +207,15 @@ f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
         f32 var_f22 = spl->xC * (arg1 - spl->segments[idx]);
 
         while (ABS(start - end) >= 0.00001F) {
-            s32 i;
-            f32 var_f24 = 0.0F;
-            // f32* coeffs = spl->coeffs[idx];
-            f32* coeffs = spl_GetCoeffs(spl, idx);
-            f32 midpoint = (start + end) / 2.0F;
-            f32 dx = (midpoint - start) / 8.0F;
-            f32 t = start + dx;
+            const f32* coeffs = spl_GetCoeffs(spl, idx);
+            const f32 midpoint = (start + end) / 2.0F;
+            const f32 dx = (midpoint - start) / 8.0F;
+            f32 middle = spl_IterateSimpsonsMiddle(coeffs, dx, start + dx);
             f32 simpsons;
-
-            for (i = 2; i <= 8; ++i) {
-                if (!(i & 1)) {
-                    var_f24 += 4.0F * splArcLengthPolynomial(coeffs, t);
-                } else {
-                    var_f24 += 2.0F * splArcLengthPolynomial(coeffs, t);
-                }
-                t += dx;
-            }
 
             result = midpoint;
             simpsons = dx *
-                       (var_f24 + splArcLengthPolynomial(coeffs, start) +
+                       (middle + splArcLengthPolynomial(coeffs, start) +
                         splArcLengthPolynomial(coeffs, midpoint)) /
                        3.0F;
             if (var_f22 < (0.00001F + simpsons)) {
