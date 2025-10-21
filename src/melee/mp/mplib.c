@@ -1013,7 +1013,6 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
     int i;
     bool result = false;
     bool r3;
-    PAD_STACK(8);
 
     r3 = mpLib_800588C8();
     if (!r3) {
@@ -1056,49 +1055,51 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
             {
                 CollVtx* v0_r5 = &groundCollVtx[line->x0->v0_idx];
                 CollVtx* v1_r6 = &groundCollVtx[line->x0->v1_idx];
-                float v0x = v0_r5->pos.x;
-                float v0y = y_offset + v0_r5->pos.y;
-                float v1x = v1_r6->pos.x;
-                float v1y = y_offset + v1_r6->pos.y;
-                float x_f23;
-                float y_f22;
+                float x0 = groundCollVtx[line->x0->v0_idx].pos.x;
+                float y0 = y_offset + groundCollVtx[line->x0->v0_idx].pos.y;
+                float x1 = groundCollVtx[line->x0->v1_idx].pos.x;
+                float y1 = y_offset + groundCollVtx[line->x0->v1_idx].pos.y;
+                float dx;
+                float dy;
                 float dx2;
                 float dy2;
                 float dist2;
-                float int_x_sp4C;
-                float int_y_sp48;
+                float int_x;
+                float int_y;
                 PAD_STACK(4);
 
                 if (joint->flags & 0x700) {
-                    mpRemap2d(&ax, &ay, v0_r5->x10, v0_r5->x14, v1_r6->x10,
-                              v1_r6->x14, v0x, v0y, v1x, v1y, old_x, old_y);
+                    mpRemap2d(&ax, &ay, groundCollVtx[line->x0->v0_idx].x10,
+                              groundCollVtx[line->x0->v0_idx].x14,
+                              groundCollVtx[line->x0->v1_idx].x10,
+                              groundCollVtx[line->x0->v1_idx].x14, x0, y0, x1,
+                              y1, old_x, old_y);
                 } else {
                     ax = old_x;
                     ay = old_y;
                 }
 
-                x_f23 = bx - ax;
-                y_f22 = by - ay;
+                dx = bx - ax;
+                dy = by - ay;
 
-                if (ABS(v0y - v1y) > 0.0001) {
-                    if (mpLib_8004E97C(v0x, v0y, v1x, v1y, ax, ay, bx, by,
-                                       &int_x_sp4C, &int_y_sp48))
+                if (ABS(y0 - y1) > 0.0001) {
+                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
+                                       &int_y))
                     {
-                        dx2 = SQ(int_x_sp4C - old_x);
-                        dy2 = SQ(int_y_sp48 - old_y);
+                        dx2 = SQ(int_x - old_x);
+                        dy2 = SQ(int_y - old_y);
                         dist2 = dx2 + dy2;
 
-                        if (x_f23 * (int_x_sp4C - old_x) +
-                                y_f22 * (int_y_sp48 - old_y) <
-                            0.0F)
+                        if (dx * (int_x - old_x) + dy * (int_y - old_y) < 0.0F)
                         {
                             dist2 = -dist2;
                         }
+
                         if (min_dist2 > dist2) {
                             min_dist2 = dist2;
                             if (vec_out) {
-                                vec_out->x = int_x_sp4C;
-                                vec_out->y = int_y_sp48;
+                                vec_out->x = int_x;
+                                vec_out->y = int_y;
                                 vec_out->z = 0.0F;
                             }
                             if (line_id_out) {
@@ -1108,34 +1109,30 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                                 *flags_out = line->x0->flags;
                             }
                             if (normal_out) {
-                                normal_out->x = -(v1y - v0y);
-                                normal_out->y = v1x - v0x;
+                                normal_out->x = -(y1 - y0);
+                                normal_out->y = x1 - x0;
                                 normal_out->z = 0.0F;
                                 PSVECNormalize(normal_out, normal_out);
                             }
                             result = true;
                         }
                     }
-                } else if (ay >= by &&
-                           mpLib_8004EBF8(&int_x_sp4C, &int_y_sp48, v0x, v0y,
-                                          v1x, ax, ay, bx, by))
+                } else if (ay >= by && mpLib_8004EBF8(&int_x, &int_y, x0, y0,
+                                                      x1, ax, ay, bx, by))
                 {
-                    dx2 = SQ(int_x_sp4C - old_x);
-                    dy2 = SQ(int_y_sp48 - old_y);
+                    dx2 = SQ(int_x - old_x);
+                    dy2 = SQ(int_y - old_y);
                     dist2 = dx2 + dy2;
 
-                    if (x_f23 * (int_x_sp4C - old_x) +
-                            y_f22 * (int_y_sp48 - old_y) <
-                        0.0F)
-                    {
+                    if (dx * (int_x - old_x) + dy * (int_y - old_y) < 0.0F) {
                         dist2 = -dist2;
                     }
 
                     if (min_dist2 > dist2) {
                         min_dist2 = dist2;
                         if (vec_out) {
-                            vec_out->x = int_x_sp4C;
-                            vec_out->y = int_y_sp48;
+                            vec_out->x = int_x;
+                            vec_out->y = int_y;
                             vec_out->z = 0.0F;
                         }
                         if (line_id_out) {
