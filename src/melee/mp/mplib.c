@@ -3333,10 +3333,10 @@ void mpLib_800549B0(int line_id, Vec3* arg1)
     int new_id;
     CollVtx* v0;
 
-    LINEID_CHECK(4519, line_id);
+    LINEID_CHECK(4528, line_id);
     new_id = line_id;
     do {
-        new_id = mpLineGetPrev(new_id);
+        new_id = mpLineGetNext(new_id);
     } while (new_id != -1 &&
              (groundCollLine[line_id].flags & LINE_FLAG_KIND) !=
                  (groundCollLine[new_id].flags & LINE_FLAG_KIND));
