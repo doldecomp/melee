@@ -1171,9 +1171,9 @@ bool mpLib_8004F400_Floor(Vec3* vec_out, int* line_id_out, u32* flags_out,
     return result;
 }
 
-bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
-                            Vec3* normal_out, int joint_id0, int joint_id1,
-                            float x_f1, float y_f2, float x_f3, float y_f4)
+bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
+                            Vec3* vec_out, int* line_id_out, u32* flags_out,
+                            Vec3* normal_out, int joint_id0, int joint_id1)
 {
     float min_dist2 = F32_MAX;
     CollJoint* r29;
@@ -1187,7 +1187,7 @@ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
 
     temp_r3 = mpLib_800588C8();
     if (!temp_r3) {
-        mpLib_80058970(x_f1, y_f2, x_f3, y_f4);
+        mpLib_80058970(ax, ay, bx, by);
     }
 
     for (r29 = mpLib_804D64C4; r29 != NULL; r29 = r29->next) {
@@ -1225,11 +1225,11 @@ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
             mpLib_8004ED5C(line_r26 - groundCollLine, &x0_sp3C, &y0_sp38,
                            &x1_sp34, &y1_sp30);
             if (ABS(y0_sp38 - y1_sp30) > 0.0001) {
-                if (mpLib_8004E97C(x0_sp3C, y0_sp38, x1_sp34, y1_sp30, x_f1,
-                                   y_f2, x_f3, y_f4, &int_x, &int_y))
+                if (mpLib_8004E97C(x0_sp3C, y0_sp38, x1_sp34, y1_sp30, ax, ay,
+                                   bx, by, &int_x, &int_y))
                 {
-                    float dx = int_x - x_f1;
-                    float dy = int_y - y_f2;
+                    float dx = int_x - ax;
+                    float dy = int_y - ay;
                     float dx2 = dx * dx;
                     float dy2 = dy * dy;
                     float dist2 = dx2 + dy2;
@@ -1261,12 +1261,12 @@ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
                     }
                 }
             } else {
-                if (y_f2 <= y_f4 &&
+                if (ay <= by &&
                     mpLib_8004EBF8(&int_x, &int_y, x0_sp3C, y0_sp38, x1_sp34,
-                                   x_f1, y_f2, x_f3, y_f4))
+                                   ax, ay, bx, by))
                 {
-                    float dx = int_x - x_f1;
-                    float dy = int_y - y_f2;
+                    float dx = int_x - ax;
+                    float dy = int_y - ay;
                     float dx2 = dx * dx;
                     float dy2 = dy * dy;
                     float dist2 = dx2 + dy2;
@@ -1315,20 +1315,20 @@ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
     return result;
 }
 
-bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
-                            Vec3* normal_out, int joint_id0, int joint_id1,
-                            float f1, float f2, float f3, float f4)
+bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
+                            Vec3* vec_out, int* line_id_out, u32* flags_out,
+                            Vec3* normal_out, int joint_id0, int joint_id1)
 {
     float min_f30 = F32_MAX;
-    float f29 = f1;
-    float f28 = f2;
+    float f29 = ax;
+    float f28 = ay;
     CollJoint* joint;
     int r28;
     int r27 = false;
     int r3 = mpLib_800588C8();
 
     if (!r3) {
-        mpLib_80058970(f1, f2, f3, f4);
+        mpLib_80058970(ax, ay, bx, by);
     }
 
     for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
@@ -1372,17 +1372,17 @@ bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
                     mpLib_Line* line_r3 = r26->x0;
                     CollVtx* v1_r6 = &groundCollVtx[line_r3->v1_idx];
                     CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
-                    mpRemap2d(&f1, &f2, v0_r5->x10, v0_r5->x14, v1_r6->x10,
+                    mpRemap2d(&ax, &ay, v0_r5->x10, v0_r5->x14, v1_r6->x10,
                               v1_r6->x14, sp44, sp40, sp3C, sp38, f29, f28);
                 } else {
-                    f1 = f29;
-                    f2 = f28;
+                    ax = f29;
+                    ay = f28;
                 }
 
-                x_f23 = f3 - f1;
-                y_f22 = f4 - f2;
+                x_f23 = bx - ax;
+                y_f22 = by - ay;
                 if (ABS(sp40 - sp38) > 0.0001) {
-                    if (mpLib_8004E97C(sp44, sp40, sp3C, sp38, f1, f2, f3, f4,
+                    if (mpLib_8004E97C(sp44, sp40, sp3C, sp38, ax, ay, bx, by,
                                        &sp58, &sp54))
                     {
                         dx2 = SQ(sp58 - f29);
@@ -1421,8 +1421,8 @@ bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out, u32* flags_out,
                         }
                     }
                 } else {
-                    if (f2 <= f4 && mpLib_8004EBF8(&sp58, &sp54, sp44, sp40,
-                                                   sp3C, f1, f2, f3, f4))
+                    if (ay <= by && mpLib_8004EBF8(&sp58, &sp54, sp44, sp40,
+                                                   sp3C, ax, ay, bx, by))
                     {
                         dx2 = SQ(sp58 - f29);
                         dy2 = SQ(sp54 - f28);
@@ -2693,9 +2693,9 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 2) &&
-            (mpLib_8004FC2C_Ceiling(&pos_sp68, &line_id_sp40, &flags_sp3C,
-                                    &normal_sp5C, joint_id0, joint_id1, x1, y1,
-                                    x2, y2)))
+            (mpLib_8004FC2C_Ceiling(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+                                    &flags_sp3C, &normal_sp5C, joint_id0,
+                                    joint_id1)))
         {
             dx = SQ(pos_sp68.x - x1);
             dy = SQ(pos_sp68.y - y1);
@@ -2753,9 +2753,9 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 2) &&
-            (mpLib_8004F8A4_Ceiling(&pos_sp68, &line_id_sp40, &flags_sp3C,
-                                    &normal_sp5C, joint_id0, joint_id1, x1, y1,
-                                    x2, y2)))
+            (mpLib_8004F8A4_Ceiling(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+                                    &flags_sp3C, &normal_sp5C, joint_id0,
+                                    joint_id1)))
         {
             dx = SQ(pos_sp68.x - x1);
             dy = SQ(pos_sp68.y - y1);

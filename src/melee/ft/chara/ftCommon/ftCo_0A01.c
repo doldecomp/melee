@@ -2397,9 +2397,9 @@ void ftCo_800A9904(Fighter* fp)
         }
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (mpLib_8004F8A4_Ceiling(&sp4C, &sp3C, &sp38, &sp40, -1, -1,
-                                      fp->cur_pos.x, fp->cur_pos.y,
-                                      temp_r31->x54.x, temp_r31->x54.y) != 0)
+    } else if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y,
+                                      temp_r31->x54.x, temp_r31->x54.y, &sp4C,
+                                      &sp3C, &sp38, &sp40, -1, -1))
     {
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x81);
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
@@ -2922,9 +2922,9 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4_Ceiling(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                                       fp->cur_pos.x, fp->cur_pos.y, sp44.x,
-                                       sp44.y))
+            if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y, sp44.x,
+                                       sp44.y, &sp38, &sp28, &sp24, &sp2C, -1,
+                                       -1))
             {
                 continue;
             }
@@ -2957,9 +2957,9 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4_Ceiling(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                                       fp->cur_pos.x, fp->cur_pos.y, spC.x,
-                                       spC.y))
+            if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y, spC.x,
+                                       spC.y, &sp38, &sp28, &sp24, &sp2C, -1,
+                                       -1))
             {
                 continue;
             }
@@ -3087,9 +3087,9 @@ void ftCo_800AB224(Fighter* fp)
         }
         if (var_f31 > 0.6108652334660292) {
             if (mpLib_8004F8A4_Ceiling(
-                    &sp24, &sp3C, &sp40, &sp30, -1, -1,
                     fp->coll_data.cur_pos.x, fp->coll_data.cur_pos.y,
-                    fp->coll_data.cur_pos.x, fp->x1A88.x54.y))
+                    fp->coll_data.cur_pos.x, fp->x1A88.x54.y, &sp24, &sp3C,
+                    &sp40, &sp30, -1, -1))
             {
                 var_r0_6 = 1;
             } else {

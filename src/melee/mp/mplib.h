@@ -46,14 +46,16 @@
                                        int joint_id0, int joint_id1,
                                        bool (*)(Fighter_GObj*, int),
                                        Fighter_GObj*);
-/* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(Vec3* vec_out, int* line_id_out,
-                                         u32* flags_out, Vec3* normal_out,
-                                         int joint_id0, int joint_id1, float,
-                                         float, float, float);
-/* 04FC2C */ bool mpLib_8004FC2C_Ceiling(Vec3* vec_out, int* line_id_out,
-                                         u32* flags_out, Vec3* normal_out,
-                                         int joint_id0, int joint_id1, float,
-                                         float, float, float);
+/* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx,
+                                         float by, Vec3* vec_out,
+                                         int* line_id_out, u32* flags_out,
+                                         Vec3* normal_out, int joint_id0,
+                                         int joint_id1);
+/* 04FC2C */ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx,
+                                         float by, Vec3* vec_out,
+                                         int* line_id_out, u32* flags_out,
+                                         Vec3* normal_out, int joint_id0,
+                                         int joint_id1);
 /* 050068 */ bool mpLib_80050068(float*, float*, float, float, float, float,
                                  float, float, float);
 /* 0501CC */ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx,
