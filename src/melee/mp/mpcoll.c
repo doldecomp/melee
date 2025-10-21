@@ -1098,8 +1098,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
         sp20.y = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y -
                                arg0->xA4_ecbCurrCorrect.bottom.y)) -
                    temp_f2);
-        if (mpLib_8004F008_Floor(&arg0->x140, NULL, NULL, NULL, temp_f1_3,
-                                 temp_f2, sp20.x, sp20.y, 0.0F, arg0->x3C,
+        if (mpLib_8004F008_Floor(temp_f1_3, temp_f2, sp20.x, sp20.y, 0.0F,
+                                 &arg0->x140, NULL, NULL, NULL, arg0->x3C,
                                  arg0->x48_joint_id, arg0->x4C_joint_id, NULL,
                                  NULL))
         {
@@ -1181,8 +1181,8 @@ void mpColl_80043F40(CollData* arg0, s32 arg1, s32 arg2)
         sp20.y = -(2.0F * (arg0->xA4_ecbCurrCorrect.left.y -
                            arg0->xA4_ecbCurrCorrect.bottom.y) -
                    temp_f2);
-        if (mpLib_8004F008_Floor(&arg0->x140, NULL, NULL, NULL, temp_f1_2,
-                                 temp_f2, sp20.x, sp20.y, 0.0F, arg0->x3C,
+        if (mpLib_8004F008_Floor(temp_f1_2, temp_f2, sp20.x, sp20.y, 0.0F,
+                                 &arg0->x140, NULL, NULL, NULL, arg0->x3C,
                                  arg0->x48_joint_id, arg0->x4C_joint_id, 0, 0))
         {
             sp20.x = arg0->x140.x;
@@ -1373,15 +1373,15 @@ bool mpColl_80044628(CollData* coll, bool (*cb)(Fighter_GObj*, int),
     if (coll->x38 != mpColl_804D64AC) {
         sp8 = gobj;
         bool_r3 = mpLib_8004F400_Floor(
-            &coll->x140, &coll->floor.index, &coll->floor.flags,
-            &coll->floor.normal, temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
-            coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
+            temp_f1, temp_f2, sp2C, sp30, 0.0F, &coll->x140,
+            &coll->floor.index, &coll->floor.flags, &coll->floor.normal,
+            coll->x3C, coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
     } else {
         sp8 = gobj;
         bool_r3 = mpLib_8004F008_Floor(
-            &coll->x140, &coll->floor.index, &coll->floor.flags,
-            &coll->floor.normal, temp_f1, temp_f2, sp2C, sp30, 0.0F, coll->x3C,
-            coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
+            temp_f1, temp_f2, sp2C, sp30, 0.0F, &coll->x140,
+            &coll->floor.index, &coll->floor.flags, &coll->floor.normal,
+            coll->x3C, coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
     }
     if (bool_r3 && (!(coll->floor.flags & LINE_FLAG_PLATFORM) ||
                     (coll->floor.index != coll->x3C)))

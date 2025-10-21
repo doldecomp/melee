@@ -436,9 +436,9 @@ bool ftCo_800A0FB0(Vec3* vec_out, int* line_id_out, u32* flags_out,
 {
     *line_id_out = -1;
     {
-        int ret = mpLib_8004F008_Floor(vec_out, line_id_out, flags_out,
-                                       normal_out, arg7, arg8, arg9, arg10,
-                                       arg11, arg4, arg5, arg6, 0, 0);
+        int ret = mpLib_8004F008_Floor(arg7, arg8, arg9, arg10, arg11, vec_out,
+                                       line_id_out, flags_out, normal_out,
+                                       arg4, arg5, arg6, NULL, NULL);
         if (ret && ftCo_800A1B38(*line_id_out)) {
             return false;
         }
