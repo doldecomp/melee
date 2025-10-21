@@ -59,10 +59,11 @@
                                           int* line_id_out, u32* flags_out,
                                           Vec3* normal_out, int joint_id0,
                                           int joint_id1);
-/* 05057C */ bool mpLib_8005057C_LeftWall(Vec3* vec_out, int* line_id_out,
-                                          u32* flags_out, Vec3* normal_out,
-                                          int joint_id0, int joint_id1, float,
-                                          float, float, float);
+/* 05057C */ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx,
+                                          float by, Vec3* vec_out,
+                                          int* line_id_out, u32* flags_out,
+                                          Vec3* normal_out, int joint_id0,
+                                          int joint_id1);
 /* 0509B8 */ bool mpLib_800509B8_RightWall(float ax, float ay, float bx,
                                            float by, Vec3* vec_out,
                                            int* line_id_out, u32* flags_out,
