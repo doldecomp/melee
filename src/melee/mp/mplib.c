@@ -1959,32 +1959,33 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
     return result;
 }
 
-bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
-                              Vec3* normal_out, int joint_id0, int joint_id1,
-                              float f1, float f2, float f3, float f4)
+bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
+                              Vec3* vec_out, int* line_id_out, u32* flags_out,
+                              Vec3* normal_out, int joint_id0, int joint_id1)
 {
-    float min_f30;
-    float f29 = f1;
-    float f28 = f2;
+    float min_dist2;
+    float old_x = ax;
+    float old_y = ay;
     CollJoint* joint;
-    int r28;
-    int r27;
-    CollLine* r26;
-    int r25;
-    int r24;
-    CollInfo* ci_r4;
+    int i;
+    int result;
     int r3;
-    u8 _[8];
+    PAD_STACK(8);
 
-    r27 = false;
-    min_f30 = F32_MAX;
+    result = false;
+    min_dist2 = F32_MAX;
 
     r3 = mpLib_800588C8();
     if (!r3) {
-        mpLib_80058970(f1, f2, f3, f4);
+        mpLib_80058970(ax, ay, bx, by);
     }
 
     for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+        CollLine* line;
+        int count;
+        int dynamic_count;
+        CollInfo* coll_info;
+
         if (joint->flags & 0x1000) {
             continue;
         }
@@ -1995,110 +1996,108 @@ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
             continue;
         }
 
-        ci_r4 = joint->coll_info;
-        r25 = ci_r4->right_wall_count;
-        r24 = ci_r4->dynamic_count;
-        r26 = &groundCollLine[ci_r4->right_wall_start];
-        for (r28 = 0; r28 < r25; r28++, r26++) {
+        coll_info = joint->coll_info;
+        count = coll_info->right_wall_count;
+        dynamic_count = coll_info->dynamic_count;
+        line = &groundCollLine[coll_info->right_wall_start];
+        for (i = 0; i < count; i++, line++) {
         block_8:
-            if (r26->flags & CollLine_RightWall && r26->flags & 0x10000 &&
-                !(r26->flags & LINE_FLAG_EMPTY))
+            if (line->flags & CollLine_RightWall && line->flags & 0x10000 &&
+                !(line->flags & LINE_FLAG_EMPTY))
             {
-                mpLib_Line* line_r3 = r26->x0;
-                CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
-                CollVtx* v1_r6 = &groundCollVtx[line_r3->v1_idx];
-                float x0_f27 = v0_r5->pos.x;
-                float y0_f26 = v0_r5->pos.y;
-                float x1_f25 = v1_r6->pos.x;
-                float y1_f24 = v1_r6->pos.y;
-                float x_f23;
-                float y_f22;
+                float x0 = groundCollVtx[line->x0->v0_idx].pos.x;
+                float y0 = groundCollVtx[line->x0->v0_idx].pos.y;
+                float x1 = groundCollVtx[line->x0->v1_idx].pos.x;
+                float y1 = groundCollVtx[line->x0->v1_idx].pos.y;
+                float dx;
+                float dy;
                 float dx2;
                 float dy2;
                 float dist2;
-                float int_x_sp3C;
-                float int_y_sp38;
+                float int_x;
+                float int_y;
 
                 if (joint->flags & 0x700) {
-                    mpRemap2d(&f1, &f2, v0_r5->x10, v0_r5->x14, v1_r6->x10,
-                              v1_r6->x14, x0_f27, y0_f26, x1_f25, y1_f24, f29,
-                              f28);
+                    mpRemap2d(&ax, &ay, groundCollVtx[line->x0->v0_idx].x10,
+                              groundCollVtx[line->x0->v0_idx].x14,
+                              groundCollVtx[line->x0->v1_idx].x10,
+                              groundCollVtx[line->x0->v1_idx].x14, x0, y0, x1,
+                              y1, old_x, old_y);
                 } else {
-                    f1 = f29;
-                    f2 = f28;
+                    ax = old_x;
+                    ay = old_y;
                 }
 
-                x_f23 = f3 - f1;
-                y_f22 = f4 - f2;
-                if (ABS(x0_f27 - x1_f25) > 0.0001) {
-                    if (mpLib_8004E97C(x0_f27, y0_f26, x1_f25, y1_f24, f1, f2,
-                                       f3, f4, &int_x_sp3C, &int_y_sp38))
+                dx = bx - ax;
+                dy = by - ay;
+                if (ABS(x0 - x1) > 0.0001) {
+                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
+                                       &int_y))
                     {
-                        dx2 = SQ(int_x_sp3C - f29);
-                        dy2 = SQ(int_y_sp38 - f28);
+                        dx2 = SQ(int_x - old_x);
+                        dy2 = SQ(int_y - old_y);
                         dist2 = dx2 + dy2;
-                        if ((x_f23 * (int_x_sp3C - f29)) +
-                                (y_f22 * (int_y_sp38 - f28)) <
+                        if ((dx * (int_x - old_x)) + (dy * (int_y - old_y)) <
                             0.0F)
                         {
                             dist2 = -dist2;
                         }
-                        if (min_f30 > dist2) {
-                            min_f30 = dist2;
+
+                        if (min_dist2 > dist2) {
+                            min_dist2 = dist2;
 
                             if (vec_out != NULL) {
-                                vec_out->x = int_x_sp3C;
-                                vec_out->y = int_y_sp38;
+                                vec_out->x = int_x;
+                                vec_out->y = int_y;
                                 vec_out->z = 0.0F;
                             }
 
                             if (line_id_out != NULL) {
-                                *line_id_out = r26 - groundCollLine;
+                                *line_id_out = line - groundCollLine;
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = r26->x0->flags;
+                                *flags_out = line->x0->flags;
                             }
 
                             if (normal_out != NULL) {
-                                normal_out->x = -(y1_f24 - y0_f26);
-                                normal_out->y = x1_f25 - x0_f27;
+                                normal_out->x = -(y1 - y0);
+                                normal_out->y = x1 - x0;
                                 normal_out->z = 0.0F;
                                 PSVECNormalize(normal_out, normal_out);
                             }
 
-                            r27 = true;
+                            result = true;
                         }
                     }
                 } else {
-                    if (f1 <= f3 &&
-                        mpLib_80050068(&int_x_sp3C, &int_y_sp38, x0_f27,
-                                       y0_f26, y1_f24, f1, f2, f3, f4))
+                    if (ax >= bx && mpLib_80050068(&int_x, &int_y, x0, y0, y1,
+                                                   ax, ay, bx, by))
                     {
-                        dx2 = SQ(int_x_sp3C - f29);
-                        dy2 = SQ(int_y_sp38 - f28);
+                        dx2 = SQ(int_x - old_x);
+                        dy2 = SQ(int_y - old_y);
                         dist2 = dx2 + dy2;
-                        if ((x_f23 * (int_x_sp3C - f29)) +
-                                (y_f22 * (int_y_sp38 - f28)) <
+                        if ((dx * (int_x - old_x)) + (dy * (int_y - old_y)) <
                             0.0F)
                         {
                             dist2 = -dist2;
                         }
-                        if (min_f30 > dist2) {
-                            min_f30 = dist2;
+
+                        if (min_dist2 > dist2) {
+                            min_dist2 = dist2;
 
                             if (vec_out != NULL) {
-                                vec_out->x = int_x_sp3C;
-                                vec_out->y = int_y_sp38;
+                                vec_out->x = int_x;
+                                vec_out->y = int_y;
                                 vec_out->z = 0.0F;
                             }
 
                             if (line_id_out != NULL) {
-                                *line_id_out = r26 - groundCollLine;
+                                *line_id_out = line - groundCollLine;
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = r26->x0->flags;
+                                *flags_out = line->x0->flags;
                             }
 
                             if (normal_out != NULL) {
@@ -2107,18 +2106,18 @@ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
                                 normal_out->z = 0.0F;
                             }
 
-                            r27 = true;
+                            result = true;
                         }
                     }
                 }
             }
         }
 
-        if (r24 != 0) {
-            r25 = r24;
-            r28 = 0;
-            r24 = 0;
-            r26 = &groundCollLine[joint->coll_info->dynamic_start];
+        if (dynamic_count != 0) {
+            count = dynamic_count;
+            i = 0;
+            dynamic_count = 0;
+            line = &groundCollLine[joint->coll_info->dynamic_start];
             goto block_8;
         }
     }
@@ -2127,7 +2126,7 @@ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
         mpLib_80058AA0();
     }
 
-    return r27;
+    return result;
 }
 
 bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
@@ -2703,9 +2702,9 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 8) &&
-            (mpLib_80050D68_RightWall(&pos_sp68, &line_id_sp40, &flags_sp3C,
-                                      &normal_sp5C, joint_id0, joint_id1, x1,
-                                      y1, x2, y2)))
+            (mpLib_80050D68_RightWall(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+                                      &flags_sp3C, &normal_sp5C, joint_id0,
+                                      joint_id1)))
         {
             dx = SQ(pos_sp68.x - x1);
             dy = SQ(pos_sp68.y - y1);
