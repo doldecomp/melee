@@ -2406,84 +2406,78 @@ bool mpLib_800515A0_LeftWall(float ax, float ay, float bx, float by, float cx,
     return result;
 }
 
-int mpLib_8005199C_Floor(Vec3* vec, int arg1, int arg2)
+int mpLib_8005199C_Floor(Vec3* vec, int joint_id0, int joint_id1)
 {
-    int line_id_r30 = -1;
-    float x_f31 = vec->x;
-    float y_f30 = vec->y;
-    bool r3_1 = mpLib_800588C8();
-    CollJoint* r3;
-    PAD_STACK(16);
+    int line_id = -1;
+    float x = vec->x;
+    float y = vec->y;
+    bool r3 = mpLib_800588C8();
+    CollJoint* joint;
+    PAD_STACK(0x8);
 
-    if (!r3_1) {
-        mpLib_80058970(x_f31, y_f30, x_f31, y_f30 - 30000.0F);
+    if (!r3) {
+        mpLib_80058970(x, y, x, y - 30000.0F);
     }
 
-    for (r3 = mpLib_804D64C4; r3 != NULL; r3 = r3->next) {
-        if (r3->flags & 0x1000 || arg1 == r3 - groundCollJoint) {
+    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+        if (joint->flags & 0x1000 || joint_id0 == joint - groundCollJoint) {
             continue;
         }
 
-        if (arg2 == -1 || arg2 == r3 - groundCollJoint) {
-            CollInfo* r9 = r3->coll_info;
-            int r10 = 0;
-            CollLine* line_r11 = &groundCollLine[r9->floor_start];
-            int r12 = r9->floor_count;
-            int r27;
-            r27 = r9->dynamic_count;
-            goto loop_condition;
-            while (true) {
-                if ((line_r11->flags & CollLine_Floor) &&
-                    (line_r11->flags & 0x10000) &&
-                    !(line_r11->flags & LINE_FLAG_EMPTY))
+        if (joint_id1 != -1 && joint_id1 != joint - groundCollJoint) {
+            continue;
+        }
+
+        {
+            CollInfo* coll_info = joint->coll_info;
+            int i;
+            CollLine* line = &groundCollLine[coll_info->floor_start];
+            int count = coll_info->floor_count;
+            int dynamic_count = coll_info->dynamic_count;
+            for (i = 0; i < count; i++, line++) {
+            block8:
+                if (line->flags & CollLine_Floor && line->flags & 0x10000 &&
+                    !(line->flags & LINE_FLAG_EMPTY))
                 {
-                    CollVtx* v1_r4 = &groundCollVtx[line_r11->x0->v1_idx];
-                    CollVtx* v0_r5 = &groundCollVtx[line_r11->x0->v0_idx];
-                    float x0_f4 = v0_r5->pos.x;
-                    float x1_f0 = v1_r4->pos.x;
-                    float y0_f6 = v0_r5->pos.y;
-                    float y1_f1 = v1_r4->pos.y;
+                    float x0 = groundCollVtx[line->x0->v0_idx].pos.x;
+                    float y0 = groundCollVtx[line->x0->v0_idx].pos.y;
+                    float x1 = groundCollVtx[line->x0->v1_idx].pos.x;
+                    float y1 = groundCollVtx[line->x0->v1_idx].pos.y;
 
-                    if (x_f31 >= v0_r5->pos.x && x_f31 <= x1_f0) {
-                        if (y_f30 >= y0_f6 && y_f30 >= y1_f1) {
-                            line_id_r30 = (line_r11 - groundCollLine);
+                    if (x >= x0 && x <= x1) {
+                        if (y >= y0 && y >= y1) {
+                            line_id = line - groundCollLine;
                             goto end;
                         }
-                        if (ABS(x1_f0 - v0_r5->pos.x) > 0.0001 &&
-                            y_f30 >= (y1_f1 - y0_f6) / (x1_f0 - v0_r5->pos.x) *
-                                             (x_f31 - v0_r5->pos.x) +
-                                         y0_f6)
-                        {
-                            line_id_r30 = (line_r11 - groundCollLine);
-                            goto end;
+
+                        if (ABS(x1 - x0) > 0.0001) {
+                            float dx = x1 - x0;
+                            float dy = y1 - y0;
+                            if (y >= dy / dx * (x - x0) + y0) {
+                                line_id = line - groundCollLine;
+                                goto end;
+                            }
                         }
                     }
                 }
+            }
 
-                r10 += 1;
-                line_r11 += 1;
-
-            loop_condition:
-                if (r10 >= r12) {
-                    if (r27 != 0) {
-                        r12 = r27;
-                        r10 = 0;
-                        line_r11 = &groundCollLine[r9->dynamic_start];
-                        r27 = 0;
-                    } else {
-                        break;
-                    }
-                }
+            if (dynamic_count != 0) {
+                count = dynamic_count;
+                i = 0;
+                line = &groundCollLine[coll_info->dynamic_start];
+                dynamic_count = 0;
+                goto block8;
             }
         }
     }
 
 end:
-    if (!r3_1) {
+    if (!r3) {
         mpLib_80058AA0();
     }
 
-    return line_id_r30;
+    return line_id;
 }
 
 int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id, int joint_id0,

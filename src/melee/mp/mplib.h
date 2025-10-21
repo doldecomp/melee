@@ -83,7 +83,7 @@
                                           float by, float cx, float cy,
                                           float dx, float dy, int* line_id_out,
                                           int joint_id0, int joint_id1);
-/* 05199C */ int mpLib_8005199C_Floor(Vec3*, int, int);
+/* 05199C */ int mpLib_8005199C_Floor(Vec3*, int joint_id0, int joint_id1);
 /* 051BA8 */ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id,
                                       int joint_id0, int joint_id1, int dir,
                                       float left, float bottom, float right,
