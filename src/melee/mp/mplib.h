@@ -72,12 +72,15 @@
                                            u32* flags_out, Vec3* normal_out,
                                            int joint_id0, int joint_id1, float,
                                            float, float, float);
-/* 0511A4 */ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0,
-                                           int joint_id1, float, float, float,
-                                           float, float, float, float, float);
-/* 0515A0 */ bool mpLib_800515A0_LeftWall(int* line_id_out, int joint_id0,
-                                          int joint_id1, float, float, float,
-                                          float, float, float, float, float);
+/* 0511A4 */ bool mpLib_800511A4_RightWall(float ax, float ay, float bx,
+                                           float by, float cx, float cy,
+                                           float dx, float dy,
+                                           int* line_id_out, int joint_id0,
+                                           int joint_id1);
+/* 0515A0 */ bool mpLib_800515A0_LeftWall(float ax, float ay, float bx,
+                                          float by, float cx, float cy,
+                                          float dx, float dy, int* line_id_out,
+                                          int joint_id0, int joint_id1);
 /* 05199C */ int mpLib_8005199C_Floor(Vec3*, int, int);
 /* 051BA8 */ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id,
                                       int joint_id0, int joint_id1, int dir,

@@ -2132,30 +2132,31 @@ bool mpLib_80050D68_RightWall(Vec3* vec_out, int* line_id_out, u32* flags_out,
     return r27;
 }
 
-bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
-                              float normal_x, float normal_y, float left_x,
-                              float left_y, float f5, float f6, float f7,
-                              float f8)
+bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
+                              float cy, float dx, float dy, int* line_id_out,
+                              int joint_id0, int joint_id1)
 {
-    float min;
+    float min_dist2;
     CollJoint* joint;
-    int r28;
+    int i;
     int result;
-    CollLine* p26;
-    int r25;
-    int r24;
-    CollInfo* coll_info;
     int r3;
+    PAD_STACK(8);
 
     result = false;
-    min = F32_MAX;
+    min_dist2 = F32_MAX;
     r3 = mpLib_800588C8();
 
     if (!r3) {
-        mpLib_800589D0(normal_x, normal_y, left_x, left_y, f5, f6, f7, f8);
+        mpLib_800589D0(ax, ay, bx, by, cx, cy, dx, dy);
     }
 
     for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+        CollLine* line;
+        int count;
+        int dynamic_count;
+        CollInfo* coll_info;
+
         if (joint->flags & 0x1000) {
             continue;
         }
@@ -2168,57 +2169,52 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
 
         coll_info = joint->coll_info;
 
-        r25 = coll_info->right_wall_count;
-        r24 = coll_info->dynamic_count;
-        p26 = &groundCollLine[coll_info->right_wall_start];
-
-        for (r28 = 0; r28 < r25; r28++, p26++) {
+        count = coll_info->right_wall_count;
+        dynamic_count = coll_info->dynamic_count;
+        line = &groundCollLine[coll_info->right_wall_start];
+        for (i = 0; i < count; i++, line++) {
         block_8:
-            if (p26->flags & CollLine_RightWall && p26->flags & 0x10000 &&
-                !(p26->flags & LINE_FLAG_EMPTY))
+            if (line->flags & CollLine_RightWall && line->flags & 0x10000 &&
+                !(line->flags & LINE_FLAG_EMPTY))
             {
                 CollVtx* vtx;
+                float int_x;
+                float int_y;
+                float x;
+                float y;
                 float x0;
                 float y0;
                 float x1;
                 float y1;
-                float dx2;
-                float dy2;
+                float vdx;
+                float vdy;
                 float dist2;
-                float x;
-                float y;
-                float dx0;
-                float dy0;
+
                 {
-                    vtx = &groundCollVtx[p26->x0->v0_idx];
+                    vtx = &groundCollVtx[line->x0->v0_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
                     y1 = vtx->x14;
-                    mpRemap2d(&x, &y, normal_x, normal_y, left_x, left_y, f5,
-                              f6, f7, f8, x1, y1);
+                    mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
 
-                    dx0 = x0 - x;
-                    dy0 = y0 - y;
+                    vdx = x0 - x;
+                    vdy = y0 - y;
 
-                    if (SQ(dx0) + SQ(dy0) > 0.001F) {
-                        float int_x;
-                        float int_y;
-                        if (mpLib_8004E97C(f5, f6, f7, f8, x, y, x0, y0,
+                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
                                            &int_x, &int_y))
                         {
-                            dx2 = SQ(int_x - x1);
-                            dy2 = SQ(int_y - y1);
-                            dist2 = dx2 + dy2;
-                            if ((dx0 * (int_x - x1)) + (dy0 * (int_y - y1)) <
+                            dist2 = SQ(int_x - x1) + SQ(int_y - y1);
+                            if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <
                                 0.0F)
                             {
                                 dist2 = -dist2;
                             }
-                            if (min > dist2) {
-                                min = dist2;
+                            if (min_dist2 > dist2) {
+                                min_dist2 = dist2;
                                 if (line_id_out != NULL) {
-                                    *line_id_out = p26 - groundCollLine;
+                                    *line_id_out = line - groundCollLine;
                                 }
                                 result = true;
                             }
@@ -2227,35 +2223,30 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
                 }
 
                 {
-                    vtx = &groundCollVtx[p26->x0->v1_idx];
+                    vtx = &groundCollVtx[line->x0->v1_idx];
                     x0 = vtx->pos.x;
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
                     y1 = vtx->x14;
-                    mpRemap2d(&x, &y, normal_x, normal_y, left_x, left_y, f5,
-                              f6, f7, f8, x1, y1);
+                    mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
 
-                    dx0 = x0 - x;
-                    dy0 = y0 - y;
+                    vdx = x0 - x;
+                    vdy = y0 - y;
 
-                    if (SQ(x0 - x) + SQ(y0 - y) > 0.001F) {
-                        float int_x;
-                        float int_y;
-                        if (mpLib_8004E97C(f5, f6, f7, f8, x, y, x0, y0,
+                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
                                            &int_x, &int_y))
                         {
-                            dx2 = SQ(int_x - x1);
-                            dy2 = SQ(int_y - y1);
-                            dist2 = dx2 + dy2;
-                            if ((dx0 * (int_x - x1)) + (dy0 * (int_y - y1)) <
+                            dist2 = SQ(int_x - x1) + SQ(int_y - y1);
+                            if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <
                                 0.0F)
                             {
                                 dist2 = -dist2;
                             }
-                            if (min > dist2) {
-                                min = dist2;
+                            if (min_dist2 > dist2) {
+                                min_dist2 = dist2;
                                 if (line_id_out != NULL) {
-                                    *line_id_out = p26 - groundCollLine;
+                                    *line_id_out = line - groundCollLine;
                                 }
                                 result = true;
                             }
@@ -2265,14 +2256,15 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
             }
         }
 
-        if (r24 != 0) {
-            r25 = r24;
-            r28 = 0;
-            r24 = 0;
-            p26 = &groundCollLine[joint->coll_info->dynamic_start];
+        if (dynamic_count != 0) {
+            count = dynamic_count;
+            i = 0;
+            dynamic_count = 0;
+            line = &groundCollLine[joint->coll_info->dynamic_start];
             goto block_8;
         }
     }
+
     if (!r3) {
         mpLib_80058AA0();
     }
@@ -2280,146 +2272,144 @@ bool mpLib_800511A4_RightWall(int* line_id_out, int joint_id0, int joint_id1,
     return result;
 }
 
-bool mpLib_800515A0_LeftWall(int* line_id_out, int joint_id0, int joint_id1,
-                             float arg8, float arg9, float argA, float argB,
-                             float argC, float argD, float argE, float argF)
+bool mpLib_800515A0_LeftWall(float ax, float ay, float bx, float by, float cx,
+                             float cy, float dx, float dy, int* line_id_out,
+                             int joint_id0, int joint_id1)
 {
-    float sp48;
-    float sp44;
-    float sp40;
-    float sp3C;
-    float spC;
-    float sp8;
-    float x0_f16;
-    float f16_2;
-    float y0_f17;
-    float f17_2;
-    float f18;
-    float f18_2;
-    float f19;
-    float f19_2;
-    float f20;
-    float f20_2;
-    float f21;
-    float f21_2;
-    float f3;
-    float f3_2;
-    float f4;
-    float f4_2;
-    float f1;
-    float f1_2;
-    float f31;
-    CollVtx* v0_r3;
-    CollVtx* v1_r3;
+    float min_dist2;
+    CollJoint* joint;
+    int i;
+    int result;
     int r3;
-    CollInfo* r4;
-    CollJoint* r29;
-    int r28;
-    int r27;
-    CollLine* r26;
-    int r25;
-    int r24;
+    PAD_STACK(8);
 
-    r27 = false;
-    f31 = F32_MAX;
+    result = false;
+    min_dist2 = F32_MAX;
     r3 = mpLib_800588C8();
-    if (r3 == 0) {
-        mpLib_800589D0(arg8, arg9, argA, argB, argC, argD, argE, argF);
+
+    if (!r3) {
+        mpLib_800589D0(ax, ay, bx, by, cx, cy, dx, dy);
     }
 
-    for (r29 = mpLib_804D64C4; r29 != NULL; r29 = r29->next) {
-        if (r29->flags & 0x1000) {
+    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+        CollLine* line;
+        int count;
+        int dynamic_count;
+        CollInfo* coll_info;
+
+        if (joint->flags & 0x1000) {
             continue;
         }
 
-        if (joint_id0 != r29 - groundCollJoint &&
-            (joint_id1 == -1 || joint_id1 == r29 - groundCollJoint))
+        if (joint_id0 == (joint - groundCollJoint) ||
+            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
         {
-            r4 = r29->coll_info;
-            r28 = 0;
-            r25 = r4->left_wall_count;
-            r24 = r4->dynamic_count;
-            r26 = &groundCollLine[r4->left_wall_count];
-            while (r28 < r25) {
-            block_8:
-                if ((r26->flags & CollLine_LeftWall) &&
-                    (r26->flags & 0x10000) && !(r26->flags & LINE_FLAG_EMPTY))
+            continue;
+        }
+
+        coll_info = joint->coll_info;
+
+        count = coll_info->left_wall_count;
+        dynamic_count = coll_info->dynamic_count;
+        line = &groundCollLine[coll_info->left_wall_start];
+        for (i = 0; i < count; i++, line++) {
+        block_8:
+            if (line->flags & CollLine_LeftWall && line->flags & 0x10000 &&
+                !(line->flags & LINE_FLAG_EMPTY))
+            {
+                CollVtx* vtx;
+                float int_x;
+                float int_y;
+                float x;
+                float y;
+                float x0;
+                float y0;
+                float x1;
+                float y1;
+                float vdx;
+                float vdy;
+                float dist2;
+
                 {
-                    v0_r3 = &groundCollVtx[r26->x0->v0_idx];
-                    x0_f16 = v0_r3->pos.x;
-                    y0_f17 = v0_r3->pos.y;
-                    f18 = v0_r3->x10;
-                    f19 = v0_r3->x14;
-                    sp8 = f18;
-                    spC = f19;
-                    mpRemap2d(&sp40, &sp3C, arg8, arg9, argA, argB, argC, argD,
-                              argE, argF, 0.0F, 0.0F);
-                    f21 = y0_f17 - sp3C;
-                    f20 = x0_f16 - sp40;
-                    if ((((f20 * f20) + (f21 * f21)) > 0.001F) &&
-                        (mpLib_8004E97C(argC, argD, argE, argF, sp40, sp3C,
-                                        x0_f16, y0_f17, &sp48, &sp44)))
-                    {
-                        f3 = sp44 - f19;
-                        f4 = sp48 - f18;
-                        f1 = (f4 * f4) + (f3 * f3);
-                        if (((f20 * f4) + (f21 * f3)) < 0.0F) {
-                            f1 = -f1;
-                        }
-                        if (f31 > f1) {
-                            f31 = f1;
-                            if (line_id_out != NULL) {
-                                *line_id_out = r26 - groundCollLine;
+                    vtx = &groundCollVtx[line->x0->v0_idx];
+                    x0 = vtx->pos.x;
+                    y0 = vtx->pos.y;
+                    x1 = vtx->x10;
+                    y1 = vtx->x14;
+                    mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
+
+                    vdx = x0 - x;
+                    vdy = y0 - y;
+
+                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
+                                           &int_x, &int_y))
+                        {
+                            dist2 = SQ(int_x - x1) + SQ(int_y - y1);
+                            if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <
+                                0.0F)
+                            {
+                                dist2 = -dist2;
                             }
-                            r27 = true;
-                        }
-                    }
-                    v1_r3 = &groundCollVtx[r26->x0->v1_idx];
-                    f21_2 = v1_r3->pos.x;
-                    f20_2 = v1_r3->pos.y;
-                    f19_2 = v1_r3->x10;
-                    f18_2 = v1_r3->x14;
-                    sp8 = f19_2;
-                    spC = f18_2;
-                    mpRemap2d(&sp40, &sp3C, arg8, arg9, argA, argB, argC, argD,
-                              argE, argF, 0.0F, 0.0F);
-                    f16_2 = f20_2 - sp3C;
-                    f17_2 = f21_2 - sp40;
-                    if ((((f17_2 * f17_2) + (f16_2 * f16_2)) > 0.001F) &&
-                        (mpLib_8004E97C(argC, argD, argE, argF, sp40, sp3C,
-                                        f21_2, f20_2, &sp48, &sp44)))
-                    {
-                        f3_2 = sp44 - f18_2;
-                        f4_2 = sp48 - f19_2;
-                        f1_2 = (f4_2 * f4_2) + (f3_2 * f3_2);
-                        if (((f17_2 * f4_2) + (f16_2 * f3_2)) < 0.0F) {
-                            f1_2 = -f1_2;
-                        }
-                        if (f31 > f1_2) {
-                            f31 = f1_2;
-                            if (line_id_out != NULL) {
-                                *line_id_out = r26 - groundCollLine;
+                            if (min_dist2 > dist2) {
+                                min_dist2 = dist2;
+                                if (line_id_out != NULL) {
+                                    *line_id_out = line - groundCollLine;
+                                }
+                                result = true;
                             }
-                            r27 = true;
                         }
                     }
                 }
-                r28 += 1;
-                r26 += 1;
-            }
-            if (r24 != 0) {
-                r25 = r24;
-                r28 = 0;
-                r24 = 0;
-                r26 = &groundCollLine[r29->coll_info->dynamic_start];
-                goto block_8;
+
+                {
+                    vtx = &groundCollVtx[line->x0->v1_idx];
+                    x0 = vtx->pos.x;
+                    y0 = vtx->pos.y;
+                    x1 = vtx->x10;
+                    y1 = vtx->x14;
+                    mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
+
+                    vdx = x0 - x;
+                    vdy = y0 - y;
+
+                    if (SQ(vdx) + SQ(vdy) > 0.001F) {
+                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
+                                           &int_x, &int_y))
+                        {
+                            dist2 = SQ(int_x - x1) + SQ(int_y - y1);
+                            if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <
+                                0.0F)
+                            {
+                                dist2 = -dist2;
+                            }
+                            if (min_dist2 > dist2) {
+                                min_dist2 = dist2;
+                                if (line_id_out != NULL) {
+                                    *line_id_out = line - groundCollLine;
+                                }
+                                result = true;
+                            }
+                        }
+                    }
+                }
             }
         }
+
+        if (dynamic_count != 0) {
+            count = dynamic_count;
+            i = 0;
+            dynamic_count = 0;
+            line = &groundCollLine[joint->coll_info->dynamic_start];
+            goto block_8;
+        }
     }
+
     if (!r3) {
         mpLib_80058AA0();
     }
-    return r27;
+
+    return result;
 }
 
 int mpLib_8005199C_Floor(Vec3* vec, int arg1, int arg2)
