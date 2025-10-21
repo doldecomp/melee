@@ -1453,7 +1453,60 @@ bool mpColl_80044838_Floor(CollData* coll, bool ignore_bottom)
     return true;
 }
 
-/// #mpColl_80044948
+bool mpColl_80044948_Floor(CollData* coll)
+{
+    Vec3 sp1C;
+    float y_sp18;
+    Vec3 spC;
+    bool hit_wall;
+    int line_id;
+
+    hit_wall = false;
+    if (coll->xA4_ecbCurrCorrect.bottom.y <= 0.0F) {
+        sp1C.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+        sp1C.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    } else {
+        sp1C.x = coll->cur_pos.x;
+        sp1C.y = coll->cur_pos.y;
+    }
+    line_id = mpLib_8004DD90_Floor(coll->floor.index, &sp1C, &y_sp18,
+                                   &coll->floor.flags, &coll->floor.normal);
+    if (line_id != -1) {
+        coll->floor.index = line_id;
+        hit_wall = true;
+        coll->cur_pos.y += y_sp18;
+    } else {
+        mpLib_80054158(coll->floor.index, &spC);
+        if (sp1C.x < spC.x) {
+            line_id = mpLib_80052700_Floor(coll->floor.index);
+            if (line_id != -1 && mpLineGetKind(line_id) == CollLine_RightWall)
+            {
+                hit_wall = true;
+            }
+        } else {
+            mpLib_80053FF4(coll->floor.index, &spC);
+            line_id = mpLib_80052534_Floor(coll->floor.index);
+            if (line_id != -1 && mpLineGetKind(line_id) == CollLine_LeftWall) {
+                hit_wall = true;
+            }
+        }
+        coll->cur_pos.y = spC.y - coll->xA4_ecbCurrCorrect.bottom.y;
+        if (hit_wall) {
+            coll->cur_pos.x = spC.x;
+            line_id =
+                mpLib_8004DD90_Floor(coll->floor.index, &spC, NULL,
+                                     &coll->floor.flags, &coll->floor.normal);
+            if (line_id != -1) {
+                coll->floor.index = line_id;
+            } else {
+                OSReport("%s:%d: Error:oioi... id=%d\n", __FILE__, 2488,
+                         coll->floor.index);
+            }
+        }
+    }
+
+    return hit_wall;
+}
 
 /// #mpColl_80044AD8
 
@@ -1608,7 +1661,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
         if (var_r3) {
             if (flags & CollisionFlagAir_StayAirborne) {
-                if (mpColl_80044948(coll))
+                if (mpColl_80044948_Floor(coll))
                 { // Physics_FloorCollideStayAirborne
                     if (mpColl_80043BBC(coll, &sp24))
                     { // Physics_CheckFloorConnectedLeftWallHug
