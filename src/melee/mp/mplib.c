@@ -1179,11 +1179,8 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
     CollJoint* r29;
     int i_r28;
     bool result = false;
-    CollLine* line_r26;
-    int var_r25;
-    int var_r24;
-    int temp_r3;
-    CollInfo* temp_r4;
+    bool temp_r3;
+    PAD_STACK(8);
 
     temp_r3 = mpLib_800588C8();
     if (!temp_r3) {
@@ -1191,6 +1188,10 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
     }
 
     for (r29 = mpLib_804D64C4; r29 != NULL; r29 = r29->next) {
+        CollLine* line_r26;
+        int var_r25;
+        int var_r24;
+        CollInfo* coll_info;
         if (r29->flags & 0x1000) {
             continue;
         }
@@ -1201,20 +1202,22 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
             continue;
         }
 
-        temp_r4 = r29->coll_info;
+        coll_info = r29->coll_info;
         i_r28 = 0;
-        var_r25 = temp_r4->ceiling_count;
-        var_r24 = temp_r4->dynamic_count;
-        line_r26 = &groundCollLine[temp_r4->ceiling_start];
+        var_r25 = coll_info->ceiling_count;
+        var_r24 = coll_info->dynamic_count;
+        line_r26 = &groundCollLine[coll_info->ceiling_start];
         for (; i_r28 < var_r25; i_r28 += 1, line_r26 += 1) {
-            float y1_sp30;
-            float x1_sp34;
-            float y0_sp38;
-            float x0_sp3C;
-            float int_y;
             float int_x;
-        block_8:
+            float int_y;
+            u8 pad[4];
+            float x0;
+            float y0;
+            float x1;
+            float y1;
+            float dist2;
 
+        block_8:
             if (!(line_r26->flags & CollLine_Ceiling) ||
                 !(line_r26->flags & 0x10000) ||
                 line_r26->flags & LINE_FLAG_EMPTY)
@@ -1222,17 +1225,12 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                 continue;
             }
 
-            mpLib_8004ED5C(line_r26 - groundCollLine, &x0_sp3C, &y0_sp38,
-                           &x1_sp34, &y1_sp30);
-            if (ABS(y0_sp38 - y1_sp30) > 0.0001) {
-                if (mpLib_8004E97C(x0_sp3C, y0_sp38, x1_sp34, y1_sp30, ax, ay,
-                                   bx, by, &int_x, &int_y))
+            mpLib_8004ED5C(line_r26 - groundCollLine, &x0, &y0, &x1, &y1);
+            if (ABS(y0 - y1) > 0.0001) {
+                if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
+                                   &int_y))
                 {
-                    float dx = int_x - ax;
-                    float dy = int_y - ay;
-                    float dx2 = dx * dx;
-                    float dy2 = dy * dy;
-                    float dist2 = dx2 + dy2;
+                    dist2 = SQ(int_x - ax) + SQ(int_y - ay);
                     if (min_dist2 > dist2) {
                         min_dist2 = dist2;
 
@@ -1251,8 +1249,8 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                         }
 
                         if (normal_out != NULL) {
-                            normal_out->x = -(y1_sp30 - y0_sp38);
-                            normal_out->y = x1_sp34 - x0_sp3C;
+                            normal_out->x = -(y1 - y0);
+                            normal_out->y = x1 - x0;
                             normal_out->z = 0.0F;
                             PSVECNormalize(normal_out, normal_out);
                         }
@@ -1262,14 +1260,9 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                 }
             } else {
                 if (ay <= by &&
-                    mpLib_8004EBF8(&int_x, &int_y, x0_sp3C, y0_sp38, x1_sp34,
-                                   ax, ay, bx, by))
+                    mpLib_8004EBF8(&int_x, &int_y, x0, y0, x1, ax, ay, bx, by))
                 {
-                    float dx = int_x - ax;
-                    float dy = int_y - ay;
-                    float dx2 = dx * dx;
-                    float dy2 = dy * dy;
-                    float dist2 = dx2 + dy2;
+                    dist2 = SQ(int_x - ax) + SQ(int_y - ay);
                     if (min_dist2 > dist2) {
                         min_dist2 = dist2;
 
