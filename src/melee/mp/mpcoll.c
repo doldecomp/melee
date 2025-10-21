@@ -34,13 +34,13 @@ int mpColl_804D64AC;
 /// @todo float order hack
 const float mpColl_804D7F9C = -F32_MAX;
 const float mpColl_804D7FA0 = F32_MAX;
-const float flt_804D7FF8 = 5.0f;
+const float flt_804D7FF8 = 5.0F;
 const f64 flt_804D8000 = -0.75;
 const f64 flt_804D8008 = 0.75;
-const float flt_804D8010 = -3.0f;
+const float flt_804D8010 = -3.0F;
 
 /// @todo float order hack
-const float flt_804D7FD8 = 6.0f;
+const float flt_804D7FD8 = 6.0F;
 
 /// @todo This is the same as #MPCOLL_RIGHTWALL, etc. Pick a naming convention.
 #define Collide_LeftWallPush 0x1
@@ -174,31 +174,31 @@ void mpColl_80041EE4(CollData* cd)
     cd->ledge_id_unk1 = -1;
     cd->floor.index = -1;
     cd->floor.flags = 0;
-    cd->floor.normal.x = 0.0f;
-    cd->floor.normal.y = 1.0f;
-    cd->floor.normal.z = 0.0f;
+    cd->floor.normal.x = 0.0F;
+    cd->floor.normal.y = 1.0F;
+    cd->floor.normal.z = 0.0F;
     cd->ceiling.index = -1;
     cd->ceiling.flags = 0;
-    cd->ceiling.normal.x = 0.0f;
-    cd->ceiling.normal.y = -1.0f;
-    cd->ceiling.normal.z = 0.0f;
+    cd->ceiling.normal.x = 0.0F;
+    cd->ceiling.normal.y = -1.0F;
+    cd->ceiling.normal.z = 0.0F;
     cd->left_wall.index = -1;
     cd->left_wall.flags = 0;
-    cd->left_wall.normal.x = 0.0f;
-    cd->left_wall.normal.y = 1.0f;
-    cd->left_wall.normal.z = 0.0f;
+    cd->left_wall.normal.x = 0.0F;
+    cd->left_wall.normal.y = 1.0F;
+    cd->left_wall.normal.z = 0.0F;
     cd->right_wall.index = -1;
     cd->right_wall.flags = 0;
-    cd->right_wall.normal.x = 0.0f;
-    cd->right_wall.normal.y = -1.0f;
-    cd->right_wall.normal.z = 0.0f;
+    cd->right_wall.normal.x = 0.0F;
+    cd->right_wall.normal.y = -1.0F;
+    cd->right_wall.normal.z = 0.0F;
     cd->x38 = mpColl_804D64AC;
-    cd->x50 = 0.0f;
+    cd->x50 = 0.0F;
     cd->x48_joint_id = -1;
     cd->x4C_joint_id = -1;
-    cd->ledge_snap_x = 0.0f;
-    cd->ledge_snap_y = 0.0f;
-    cd->ledge_snap_height = 0.0f;
+    cd->ledge_snap_x = 0.0F;
+    cd->ledge_snap_y = 0.0F;
+    cd->ledge_snap_height = 0.0F;
     memzero(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
     memzero(&cd->xC4_ecb, sizeof(ftECB));
     memzero(&cd->xE4_ecb, sizeof(ftECB));
@@ -223,17 +223,17 @@ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
     cd->x10C_joint[4] = arg6;
     cd->x10C_joint[5] = arg7;
     cd->x124 = arg9;
-    cd->x128 = 10.0f;
-    cd->x12C = 10.0f;
+    cd->x128 = 10.0F;
+    cd->x12C = 10.0F;
     if (cd->x34_flags.b0) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 8.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 4.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 4.0f;
-        cd->xA4_ecbCurrCorrect.left.x = -4.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 4.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 8.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 4.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 4.0F;
+        cd->xA4_ecbCurrCorrect.left.x = -4.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 4.0F;
         cd->xA4_ecbCurrCorrect = cd->xA4_ecbCurrCorrect;
         cd->xC4_ecb = cd->xA4_ecbCurrCorrect;
         cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
@@ -241,7 +241,7 @@ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
         cd->x84_ecb = cd->xA4_ecbCurrCorrect;
     }
     cd->facing_dir = -1;
-    cd->x50 = 0.0f;
+    cd->x50 = 0.0F;
 }
 
 // 8004220C https://decomp.me/scratch/nOinn
@@ -254,16 +254,16 @@ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float arg1, float arg2,
     cd->x10C_f32 = arg2;
     cd->x110_f32 = arg3;
     cd->x114_f32 = arg4;
-    cd->x118_f32 = 0.0f;
+    cd->x118_f32 = 0.0F;
     if (cd->x34_flags.b0) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 8.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 4.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 4.0f;
-        cd->xA4_ecbCurrCorrect.left.x = -4.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 4.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 8.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 4.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 4.0F;
+        cd->xA4_ecbCurrCorrect.left.x = -4.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 4.0F;
         cd->xC4_ecb = cd->xA4_ecbCurrCorrect;
         cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
         cd->x64_ecb = cd->xA4_ecbCurrCorrect;
@@ -286,40 +286,40 @@ void mpColl_80042384(CollData* cd)
 {
     float tmp, tmp2;
 
-    if (ABS(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0f) {
-        cd->x84_ecb.top.y += 1.0f;
-        tmp = 0.5f * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
+    if (ABS(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0F) {
+        cd->x84_ecb.top.y += 1.0F;
+        tmp = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
         cd->x84_ecb.left.y = tmp;
         cd->x84_ecb.right.y = tmp;
     }
-    if (cd->x84_ecb.top.y < 1.0f) {
-        cd->x84_ecb.top.y = 1.0f;
+    if (cd->x84_ecb.top.y < 1.0F) {
+        cd->x84_ecb.top.y = 1.0F;
     }
-    if (cd->x84_ecb.left.x > -1.0f) {
-        cd->x84_ecb.left.x = -1.0f;
+    if (cd->x84_ecb.left.x > -1.0F) {
+        cd->x84_ecb.left.x = -1.0F;
     }
-    if (cd->x84_ecb.right.x < 1.0f) {
-        cd->x84_ecb.right.x = 1.0f;
+    if (cd->x84_ecb.right.x < 1.0F) {
+        cd->x84_ecb.right.x = 1.0F;
     }
     if (cd->x84_ecb.top.y < cd->x84_ecb.bottom.y) {
-        cd->x84_ecb.top.y = 1.0f + cd->x84_ecb.bottom.y;
+        cd->x84_ecb.top.y = 1.0F + cd->x84_ecb.bottom.y;
     }
     if (cd->x84_ecb.right.y > cd->x84_ecb.top.y ||
         cd->x84_ecb.right.y < cd->x84_ecb.bottom.y)
     {
-        tmp = 0.5f * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
+        tmp = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
         cd->x84_ecb.left.y = tmp;
         cd->x84_ecb.right.y = tmp;
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.right.y;
-    if (tmp - tmp2 < 0.001f || tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
-        cd->x84_ecb.right.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
+    if (tmp - tmp2 < 0.001F || tmp2 - cd->x84_ecb.bottom.y < 0.001F) {
+        cd->x84_ecb.right.y = 0.5F * (tmp + cd->x84_ecb.bottom.y);
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.left.y;
-    if (tmp - tmp2 < 0.001f || tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
-        cd->x84_ecb.left.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
+    if (tmp - tmp2 < 0.001F || tmp2 - cd->x84_ecb.bottom.y < 0.001F) {
+        cd->x84_ecb.left.y = 0.5F * (tmp + cd->x84_ecb.bottom.y);
     }
 }
 
@@ -345,14 +345,14 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     float tmpval;
 
     if (cd->x130_flags & 0b100000) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 0.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 0.0F;
         cd->x130_flags &= ~0b100000;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
@@ -381,66 +381,66 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     }
 
     if (!(flags & 0b100)) {
-        left_x -= 2.0f;
-        right_x += 2.0f;
-        bottom_y -= 2.0f;
-        top_y += 2.0f;
+        left_x -= 2.0F;
+        right_x += 2.0F;
+        bottom_y -= 2.0F;
+        top_y += 2.0F;
     }
 
-    phi_f1 = 4.0f > cd->x12C ? 4.0f : cd->x12C;
+    phi_f1 = 4.0F > cd->x12C ? 4.0F : cd->x12C;
     phi_f2 = ABS(right_x - left_x);
 
     if (phi_f2 < phi_f1) {
-        right_x = 0.5f * phi_f2;
+        right_x = 0.5F * phi_f2;
         left_x = -right_x;
     }
 
-    phi_f1 = 4.0f > cd->x128 ? 4.0f : cd->x128;
+    phi_f1 = 4.0F > cd->x128 ? 4.0F : cd->x128;
     phi_f2 = ABS(top_y - bottom_y);
 
     if (phi_f2 < phi_f1) {
-        tmpval = 0.5f * phi_f2;
-        mid_y = 0.5f * (top_y + bottom_y);
+        tmpval = 0.5F * phi_f2;
+        mid_y = 0.5F * (top_y + bottom_y);
         top_y = mid_y + tmpval;
         bottom_y = mid_y - tmpval;
     }
 
     if (flags & 0b1000) {
-        left_x = -1.0f;
-        right_x = +1.0f;
+        left_x = -1.0F;
+        right_x = +1.0F;
     } else {
-        right_x = right_x < +2.0f ? +2.0f : right_x;
-        left_x = left_x > -2.0f ? -2.0f : left_x;
+        right_x = right_x < +2.0F ? +2.0F : right_x;
+        left_x = left_x > -2.0F ? -2.0F : left_x;
     }
 
     if (flags & 1) {
-        bottom_y = 0.0f;
+        bottom_y = 0.0F;
         if (flags & 0b10000) {
-            top_y = 2.0f;
+            top_y = 2.0F;
         }
     } else {
-        if (bottom_y < 0.0f) {
-            bottom_y = 0.0f;
+        if (bottom_y < 0.0F) {
+            bottom_y = 0.0F;
         }
         if (flags & 0b10000) {
-            mid_y = 0.5f * (bottom_y + top_y);
-            bottom_y = mid_y - 1.0f;
-            top_y = mid_y + 1.0f;
-            if (bottom_y < 0.0f) {
-                bottom_y = 0.0f;
-                top_y = 2.0f;
+            mid_y = 0.5F * (bottom_y + top_y);
+            bottom_y = mid_y - 1.0F;
+            top_y = mid_y + 1.0F;
+            if (bottom_y < 0.0F) {
+                bottom_y = 0.0F;
+                top_y = 2.0F;
             }
         }
     }
 
-    cd->x84_ecb.top.x = 0.0f;
+    cd->x84_ecb.top.x = 0.0F;
     cd->x84_ecb.top.y = top_y;
-    cd->x84_ecb.bottom.x = 0.0f;
+    cd->x84_ecb.bottom.x = 0.0F;
     cd->x84_ecb.bottom.y = bottom_y;
     cd->x84_ecb.right.x = right_x;
-    cd->x84_ecb.right.y = cd->x124 + 0.5f * (bottom_y + top_y);
+    cd->x84_ecb.right.y = cd->x124 + 0.5F * (bottom_y + top_y);
     cd->x84_ecb.left.x = left_x;
-    cd->x84_ecb.left.y = cd->x124 + 0.5f * (bottom_y + top_y);
+    cd->x84_ecb.left.y = cd->x124 + 0.5F * (bottom_y + top_y);
     cd->x34_flags.b0 = 0;
 }
 
@@ -498,14 +498,14 @@ void mpColl_8004293C(CollData* cd)
 
     angle = cd->x118_f32;
     if (cd->x130_flags & 0x20) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.top.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.right.y = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.x = 0.0f;
-        cd->xA4_ecbCurrCorrect.left.y = 0.0f;
+        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.top.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.right.y = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.x = 0.0F;
+        cd->xA4_ecbCurrCorrect.left.y = 0.0F;
         cd->x130_flags &= 0xFFFFFFDF;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
@@ -521,7 +521,7 @@ void mpColl_8004293C(CollData* cd)
         left_x = -cd->x110_f32;
     }
 
-    if (angle != 0.0f) {
+    if (angle != 0.0F) {
         sin = sinf(angle);
         cos = cosf(angle);
 
@@ -531,10 +531,10 @@ void mpColl_8004293C(CollData* cd)
         orig_left_x = left_x;
 
         // fake
-        rot_right_y = 0.5f * (orig_right_x + orig_left_x);
+        rot_right_y = 0.5F * (orig_right_x + orig_left_x);
         midpoint_x = rot_right_y;
 
-        top_y = right_x = bottom_y = left_x = 0.0f;
+        top_y = right_x = bottom_y = left_x = 0.0F;
 
         rot_top_x = -orig_top_y * sin;
         rot_top_y = orig_top_y * cos;
@@ -557,26 +557,26 @@ void mpColl_8004293C(CollData* cd)
         update_min_max_2(&bottom_y, &top_y, rot_left_y);
     }
 
-    clamp_above_2(&top_y, 0.0f);
-    clamp_below_2(&bottom_y, -0.0f);
-    clamp_above_2(&right_x, 0.0f);
-    clamp_below_2(&left_x, -0.0f);
+    clamp_above_2(&top_y, 0.0F);
+    clamp_below_2(&bottom_y, -0.0F);
+    clamp_above_2(&right_x, 0.0F);
+    clamp_below_2(&left_x, -0.0F);
 
-    if ((top_y - bottom_y) < 3.0f) {
-        top_y = 1.5f;
+    if ((top_y - bottom_y) < 3.0F) {
+        top_y = 1.5F;
         bottom_y = -top_y;
     }
-    if ((right_x - left_x) < 3.0f) {
-        right_x = 1.5f;
+    if ((right_x - left_x) < 3.0F) {
+        right_x = 1.5F;
         left_x = -right_x;
     }
 
-    cd->x84_ecb.top.x = 0.0f;
+    cd->x84_ecb.top.x = 0.0F;
     cd->x84_ecb.top.y = top_y;
-    cd->x84_ecb.bottom.x = 0.0f;
+    cd->x84_ecb.bottom.x = 0.0F;
     cd->x84_ecb.bottom.y = bottom_y;
 
-    midpoint_y = 0.5f * (top_y + bottom_y);
+    midpoint_y = 0.5F * (top_y + bottom_y);
     cd->x84_ecb.right.x = right_x;
     cd->x84_ecb.right.y = midpoint_y;
     cd->x84_ecb.left.x = left_x;
@@ -588,20 +588,20 @@ void mpColl_8004293C(CollData* cd)
 void mpColl_80042C58(CollData* coll, ftCollisionBox* arg1)
 {
     if (coll->x130_flags & 0x20) {
-        coll->xA4_ecbCurrCorrect.top.x = 0.0f;
-        coll->xA4_ecbCurrCorrect.top.y = 0.0f;
-        coll->xA4_ecbCurrCorrect.bottom.x = 0.0f;
-        coll->xA4_ecbCurrCorrect.bottom.y = 0.0f;
-        coll->xA4_ecbCurrCorrect.right.x = 0.0f;
-        coll->xA4_ecbCurrCorrect.right.y = 0.0f;
-        coll->xA4_ecbCurrCorrect.left.x = 0.0f;
-        coll->xA4_ecbCurrCorrect.left.y = 0.0f;
+        coll->xA4_ecbCurrCorrect.top.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.top.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.right.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.right.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.left.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.left.y = 0.0F;
         coll->x130_flags &= 0xFFFFFFDF;
     }
     coll->xE4_ecb = coll->xA4_ecbCurrCorrect;
-    coll->x84_ecb.top.x = 0.0f;
+    coll->x84_ecb.top.x = 0.0F;
     coll->x84_ecb.top.y = arg1->top;
-    coll->x84_ecb.bottom.x = 0.0f;
+    coll->x84_ecb.bottom.x = 0.0F;
     coll->x84_ecb.bottom.y = arg1->bottom;
     coll->x84_ecb.right.x = arg1->right.x;
     coll->x84_ecb.right.y = arg1->right.y;
@@ -766,8 +766,8 @@ void mpCollEnd(CollData* coll, s32 arg1, s32 arg2)
                               coll->cur_pos.y - coll->prev_pos.y);
     }
     if (g_debugLevel >= 3) {
-        if (!(coll->cur_pos.x < 45000.0f) || !(coll->cur_pos.x > -45000.0f) ||
-            !(coll->cur_pos.y < 45000.0f) || !(coll->cur_pos.y > -45000.0f))
+        if (!(coll->cur_pos.x < 45000.0F) || !(coll->cur_pos.x > -45000.0F) ||
+            !(coll->cur_pos.y < 45000.0F) || !(coll->cur_pos.y > -45000.0F))
         {
             if (ftLib_80086960(coll->x0_gobj)) {
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
@@ -827,9 +827,9 @@ void mpColl_80043558(CollData* coll, s32 line_id)
     enum_t kind = mpLineGetKind(line_id);
 
     if (kind == CollLine_Floor) {
-        mpColl_80043268(coll, line_id, 0, 0.0f);
+        mpColl_80043268(coll, line_id, 0, 0.0F);
     } else if (kind == CollLine_Ceiling) {
-        func_80043324_inline2(coll, line_id, 0, 0.0f);
+        func_80043324_inline2(coll, line_id, 0, 0.0F);
     }
 #endif
 }
@@ -935,8 +935,8 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     y = max_inline(y, dist_top_y);
     x = max_inline(x, y);
 
-    if (x > flt_804D7FD8) {                 // 6.0f float order hack
-        var_r30 = (s32) (x / flt_804D7FD8); // 6.0f float order hack
+    if (x > flt_804D7FD8) {                 // 6.0F float order hack
+        var_r30 = (s32) (x / flt_804D7FD8); // 6.0F float order hack
         var_r30 = var_r30 + 1;
         vel.x /= var_r30;
         vel.y /= var_r30;
@@ -948,7 +948,7 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     arg1->cur_pos = arg1->prev_pos;
     arg1->x34_flags.b5 = 0;
     while ((var_r31 < var_r30) && !arg1->x34_flags.b5) {
-        mpColl_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
+        mpColl_80042DB0(arg1, 1.0F / (var_r30 - var_r31));
         arg1->cur_pos_correct = arg1->cur_pos;
         lbVector_Add(&arg1->cur_pos, &vel);
         mpColl_80041DD0(arg1, arg2);
@@ -972,7 +972,7 @@ void mpColl_800439FC(CollData* arg0)
     var_f31 = arg0->xA4_ecbCurrCorrect.right.x;
     temp_f3 = arg0->cur_pos.x + var_f31;
     temp_f4 = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.right.y;
-    if (var_f31 < 0.0f) {
+    if (var_f31 < 0.0F) {
         var_f31 = -var_f31;
     }
     if (mpLib_800501CC_LeftWall(
@@ -1060,7 +1060,7 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     int sp1C;
 
     temp_f1 = arg0->xA4_ecbCurrCorrect.right.x;
-    if (temp_f1 < 0.0f) {
+    if (temp_f1 < 0.0F) {
         var_f31 = -temp_f1;
     } else {
         var_f31 = temp_f1;
@@ -1069,8 +1069,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     temp_f1_2 = arg0->cur_pos.y;
     sp20.y = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
     if (mpLib_8004E398_LeftWall(arg1, &sp20, 0, 0, 0) != -1) {
-        float x = -(arg0->floor.normal.y * var_f31 - sp20.x);
-        float y = arg0->floor.normal.x * var_f31 + sp20.y;
+        float x = -((arg0->floor.normal.y * var_f31) - sp20.x);
+        float y = (arg0->floor.normal.x * var_f31) + sp20.y;
         if (mpLib_800501CC_LeftWall(x, y, sp20.x, sp20.y, &arg0->x140, &sp1C,
                                     0, 0, arg0->x48_joint_id,
                                     arg0->x4C_joint_id))
@@ -1091,7 +1091,7 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
         }
     } else {
         mpLib_80054584(arg1, &sp20);
-        temp_f4 = 2.0f;
+        temp_f4 = 2.0F;
         temp_f2 = sp20.y;
         temp_f1_3 = sp20.x - temp_f4;
         sp20.x = -((temp_f4 * var_f31) - temp_f1_3);
@@ -1153,8 +1153,8 @@ void mpColl_80043F40(CollData* arg0, s32 arg1, s32 arg2)
     sp20.x = arg0->cur_pos.x + arg0->xA4_ecbCurrCorrect.left.x;
     sp20.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.left.y;
     if (mpLib_8004E684_RightWall(arg1, &sp20, NULL, NULL, NULL) != -1) {
-        f32 tmp2 = arg0->floor.normal.y * var_f31 + sp20.x;
-        f32 tmp = -(arg0->floor.normal.x * var_f31 - sp20.y);
+        f32 tmp2 = (arg0->floor.normal.y * var_f31) + sp20.x;
+        f32 tmp = -((arg0->floor.normal.x * var_f31) - sp20.y);
         if (mpLib_800509B8_RightWall(tmp2, tmp, sp20.x, sp20.y, &arg0->x140,
                                      &sp1C, 0, NULL, arg0->x48_joint_id,
                                      arg0->x4C_joint_id) != 0)
@@ -1178,8 +1178,8 @@ void mpColl_80043F40(CollData* arg0, s32 arg1, s32 arg2)
         temp_f2 = sp20.y;
         temp_f1_2 = 2.0F + sp20.x;
         sp20.x = 2.0F * var_f31 + temp_f1_2;
-        sp20.y = -(2.0F * (arg0->xA4_ecbCurrCorrect.left.y -
-                           arg0->xA4_ecbCurrCorrect.bottom.y) -
+        sp20.y = -((2.0F * (arg0->xA4_ecbCurrCorrect.left.y -
+                            arg0->xA4_ecbCurrCorrect.bottom.y)) -
                    temp_f2);
         if (mpLib_8004F008_Floor(temp_f1_2, temp_f2, sp20.x, sp20.y, 0.0F,
                                  &arg0->x140, NULL, NULL, NULL, arg0->x3C,
@@ -1478,9 +1478,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
     horizontal_squeeze_flags_all = 0;
     horizontal_squeeze_flags = 0;
     do {
-        x_after_collide_right = 0.0f;
+        x_after_collide_right = 0.0F;
         old_horizontal_squeeze_flags = horizontal_squeeze_flags;
-        x_after_collide_left = 0.0f;
+        x_after_collide_left = 0.0F;
         old_x34_flag_b6 = coll->x34_flags.b6;
         horizontal_squeeze_flags = 0;
         if (mpColl_80045B74(coll)) {     // Physics_LeftWallCheckAir
@@ -1515,8 +1515,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             mpColl_8004C864(coll, 1, x_after_collide_right,
                             x_after_collide_left); // Physics_SqueezeHorizontal
         }
-        y_after_collide_ceiling = 0.0f;
-        y_after_collide_floor = 0.0f;
+        y_after_collide_ceiling = 0.0F;
+        y_after_collide_floor = 0.0F;
         if (mpColl_80044AD8(coll, horizontal_squeeze_flags_2) &&
             mpColl_80044C74(coll))
         { // Physics_CeilingCheck, Physics_CeilingCollideAir
@@ -1589,7 +1589,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 }
             } else {
                 var_r21 = 0;
-                if (coll->xA4_ecbCurrCorrect.bottom.y > 0.0f) {
+                if (coll->xA4_ecbCurrCorrect.bottom.y > 0.0F) {
                     var_r21 = 1;
                 }
                 var_r4 = 0;
@@ -2662,9 +2662,9 @@ bool mpColl_8004D024(Vec3* arg0)
     CollData spC;
     mpColl_80041EE4(&spC);
     spC.x34_flags.b1234 = 0;
-    mpColl_8004220C(&spC, NULL, 10.0f, 10.0f, 10.0f, 10.0f);
+    mpColl_8004220C(&spC, NULL, 10.0F, 10.0F, 10.0F, 10.0F);
     spC.prev_pos.x = arg0->x;
-    spC.prev_pos.y = -3.0f + arg0->y;
+    spC.prev_pos.y = -3.0F + arg0->y;
     spC.prev_pos.z = arg0->z;
     spC.cur_pos = *arg0;
     spC.x130_flags |= 0x20;

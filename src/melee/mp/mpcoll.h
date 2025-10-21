@@ -59,16 +59,23 @@
 /* 0473CC */ bool mpColl_800473CC(CollData*);
 /* 0474E0 */ bool mpColl_800474E0(CollData*);
 /* 0475F4 */ bool mpColl_800475F4(CollData*, ftCollisionBox*);
-/* 0476B4 */ bool mpColl_800476B4(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
+/* 0476B4 */ bool mpColl_800476B4(CollData*, bool (*)(Fighter_GObj*, enum_t),
+                                  Fighter_GObj*);
 /* 0477E0 */ bool mpColl_800477E0(CollData*);
 /* 0478F4 */ bool mpColl_800478F4(CollData*);
 /* 047A08 */ bool mpColl_80047A08(CollData*, ftCollisionBox*);
-/* 047AC8 */ bool mpColl_80047AC8(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
-/* 047BF4 */ bool mpColl_80047BF4(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
-/* 047D20 */ bool mpColl_80047D20(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
-/* 047E14 */ bool mpColl_80047E14(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
-/* 047F40 */ bool mpColl_80047F40(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
-/* 04806C */ bool mpColl_8004806C(CollData*, bool (*)(Fighter_GObj*, enum_t), Fighter_GObj*);
+/* 047AC8 */ bool mpColl_80047AC8(CollData*, bool (*)(Fighter_GObj*, enum_t),
+                                  Fighter_GObj*);
+/* 047BF4 */ bool mpColl_80047BF4(CollData*, bool (*)(Fighter_GObj*, enum_t),
+                                  Fighter_GObj*);
+/* 047D20 */ bool mpColl_80047D20(CollData*, bool (*)(Fighter_GObj*, enum_t),
+                                  Fighter_GObj*);
+/* 047E14 */ bool mpColl_80047E14(CollData*, bool (*)(Fighter_GObj*, enum_t),
+                                  Fighter_GObj*);
+/* 047F40 */ bool mpColl_80047F40(CollData*, bool (*)(Fighter_GObj*, enum_t),
+                                  Fighter_GObj*);
+/* 04806C */ bool mpColl_8004806C(CollData*, bool (*)(Fighter_GObj*, enum_t),
+                                  Fighter_GObj*);
 /* 048160 */ bool mpColl_80048160(CollData*);
 /* 048274 */ bool mpColl_80048274(CollData*);
 /* 048388 */ bool mpColl_80048388(CollData*);
