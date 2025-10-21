@@ -1415,7 +1415,43 @@ bool mpColl_80044628(CollData* coll, bool (*cb)(Fighter_GObj*, int),
     return false;
 }
 
-/// #mpColl_80044838
+bool mpColl_80044838_Floor(CollData* coll, bool ignore_bottom)
+{
+    Vec3 sp20;
+    float y_sp1C;
+    Vec3 sp10;
+    int line_id;
+
+    if (ignore_bottom) {
+        sp20.x = coll->cur_pos.x;
+        sp20.y = coll->cur_pos.y;
+    } else {
+        sp20.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+        sp20.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    }
+
+    line_id = mpLib_8004DD90_Floor(coll->floor.index, &sp20, &y_sp1C,
+                                   &coll->floor.flags, &coll->floor.normal);
+    if (line_id != -1) {
+        coll->floor.index = line_id;
+        coll->cur_pos.y += y_sp1C;
+    } else {
+        mpLib_80054158(coll->floor.index, &sp10);
+        if (sp10.x <= sp20.x) {
+            mpLib_80053FF4(coll->floor.index, &sp10);
+        }
+        coll->cur_pos.x = sp10.x - coll->xA4_ecbCurrCorrect.bottom.x;
+        coll->cur_pos.y = sp10.y - coll->xA4_ecbCurrCorrect.bottom.y;
+        line_id =
+            mpLib_8004DD90_Floor(coll->floor.index, &sp10, NULL,
+                                 &coll->floor.flags, &coll->floor.normal);
+        if (line_id != -1) {
+            coll->floor.index = line_id;
+        }
+    }
+
+    return true;
+}
 
 /// #mpColl_80044948
 
@@ -1464,7 +1500,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
     s32 var_r3_2;
     s32 var_r3_3;
     s32 var_r3_4;
-    s32 var_r4;
+    bool var_r4;
     s32 not_touched_floor;
     s32 var_r5;
     s32 var_r5_2;
@@ -1592,11 +1628,11 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 if (coll->xA4_ecbCurrCorrect.bottom.y > 0.0F) {
                     var_r21 = 1;
                 }
-                var_r4 = 0;
+                var_r4 = false;
                 if (var_r21 && !(horizontal_squeeze_flags & 1)) {
-                    var_r4 = 1;
+                    var_r4 = true;
                 }
-                if (mpColl_80044838(coll, var_r4))
+                if (mpColl_80044838_Floor(coll, var_r4))
                 { // Physics_SnapToFloorNoEdgePass
                     if (mpColl_80043BBC(coll, &sp20))
                     { // Physics_CheckFloorConnectedLeftWallHug
@@ -2451,7 +2487,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
         }
     } while (temp_r27 != arg0->x34_flags.b6);
     if (mpColl_8004A908(arg0, arg0->floor.index)) {
-        if (mpColl_80044838(arg0, 0)) {
+        if (mpColl_80044838_Floor(arg0, false)) {
             if (mpColl_80043BBC(arg0, &sp10)) {
                 mpColl_80043C6C(arg0, sp10, 0);
             }

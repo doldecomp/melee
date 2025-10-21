@@ -44,7 +44,7 @@
 /* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
 /* 044628 */ bool mpColl_80044628(CollData*, bool (*)(Fighter_GObj*, int),
                                   Fighter_GObj*, s32);
-/* 044838 */ bool mpColl_80044838(CollData*, s32);
+/* 044838 */ bool mpColl_80044838_Floor(CollData* coll, bool ignore_ecb);
 /* 044948 */ s32 mpColl_80044948(CollData*);
 /* 044AD8 */ s32 mpColl_80044AD8(CollData*, s32);
 /* 044C74 */ s32 mpColl_80044C74(CollData*);
