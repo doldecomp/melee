@@ -386,8 +386,8 @@ void un_802FD4C8(void)
     // "Break the targets!" "Race to the finish!" etc strings
     HSD_SisLib_803A62A0(2, "SdIntro.dat", "SIS_IntroData");
     un_804D6D78 = HSD_SisLib_803A6754(2, un_804D6D7C);
-    un_804D6D78->x8 = -10.0;
-    un_804D6D78->x4A = 1;
+    un_804D6D78->pos_z = -10.0;
+    un_804D6D78->default_alignment = 1;
     un_802FCBA0();
     for (i = 0; i < PL_SLOT_MAX; i++) {
         NameTag_Create(i);

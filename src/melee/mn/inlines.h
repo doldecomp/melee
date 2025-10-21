@@ -67,8 +67,8 @@ static inline void Menu_InitCenterText(Menu* menu, u8 val)
     HSD_Text* text =
         HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
     menu->text = text;
-    text->x24.x = 0.0521F;
-    text->x24.y = 0.0521F;
+    text->font_size.x = 0.0521F;
+    text->font_size.y = 0.0521F;
     HSD_SisLib_803A6368(text, val);
 }
 

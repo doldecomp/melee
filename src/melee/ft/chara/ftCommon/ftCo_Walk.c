@@ -60,15 +60,15 @@ void ftCo_Walk_Enter(Fighter_GObj* gobj, f32 arg8)
     float* anim_vars = &fp->x2DC;
 
     if (fp->is_metal) {
-        accel_mul = *Fighter_804D651C;
+        accel_mul = Fighter_804D651C->x0;
     }
 
     if (fp->x34_scale.y != 1.0F) {
         accel_mul = ftCo_CalcYScaledKnockback(accel_mul, fp->x34_scale.y,
-                                              Fighter_804D6524[3]);
+                                              Fighter_804D6524->xC);
     }
     if ((u32) fp->x197C != NULL) {
-        accel_mul *= *Fighter_804D6520;
+        accel_mul *= Fighter_804D6520->x0;
     }
     ftWalkCommon_800DFCA4(
         gobj, ftCo_MS_WalkSlow, Ft_MF_None, arg8, anim_vars[0], anim_vars[1],

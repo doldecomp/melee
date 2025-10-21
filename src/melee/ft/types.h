@@ -648,7 +648,7 @@ struct ftData {
         float x10;
     }* x38;
     /* +3C */ struct UnkFloat6_Camera* x3C;
-    /* +40 */ Vec4* x40;
+    /* +40 */ struct itPickup* x40;
     /* +44 */ ftData_x44_t* x44;
     /* +48 */ UNK_T* x48_items; ///< @todo might be similar to KirbyHat? see
                                 ///< ftPr_Init_8013C360
@@ -728,7 +728,7 @@ typedef struct ftCo_DatAttrs {
     /* +0A8 fp+1B8 */ float ledge_jump_horizontal_velocity;
     /* +0AC fp+1BC */ float ledge_jump_vertical_velocity;
     /* +0B0 fp+1C0 */ float item_throw_velocity_multiplier;
-    /* +0B4 fp+1C4 */ int xB4;
+    /* +0B4 fp+1C4 */ float xB4;
     /* +0B8 fp+1C8 */ float xB8;
     /* +0BC fp+1CC */ ftCo_DatAttrs_xBC_t xBC;
     /* +0DC fp+1EC */ float xDC;
@@ -1145,12 +1145,17 @@ struct Fighter {
     /*  fp+2C4 */ Vec2 x2C4;
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
     /*  fp+2D0 */ struct Fighter_x2D0_t {
-        int x0;
-        int x4;
-        int x8;
-        float xC;
-        float x10;
-    }* x2D0;
+        /// @warning i didnt confirm these comments, they come from altimors ghidra db
+        int x0;         ///< turn frames
+        float x4;       ///< turn threshold
+        float x8;       ///< x impulse
+        float xC;       ///< accel mult
+        float x10;      ///< speed mult
+        float x14[5];      ///< y impulse
+        int x28;        ///< state count
+        enum_t x2C;     ///< start state
+        enum_t x30;     ///< start state helmet
+    }* x2D0; ///< multi jump stats
     /*  fp+2D4 */ void* dat_attrs;
     /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;
@@ -1402,7 +1407,7 @@ struct Fighter {
     /* fp+1970 */ enum_t unk_msid;
     /* fp+1974 */ Item_GObj* item_gobj;
     /* fp+1978 */ Item_GObj* x1978; // held item
-    /* fp+197C */ HSD_GObj* x197C;
+    /* fp+197C */ HSD_GObj* x197C; ///< bunny hood
     /* fp+1980 */ HSD_GObj* x1980;
     /* fp+1984 */ Item_GObj* x1984_heldItemSpec;
     /* fp+1988 */ enum_t x1988;
