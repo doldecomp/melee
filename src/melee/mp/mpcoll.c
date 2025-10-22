@@ -1558,7 +1558,58 @@ bool mpColl_80044AD8_Ceiling(CollData* coll, int flags)
     return false;
 }
 
-/// #mpColl_80044C74
+bool mpColl_80044C74_Ceiling(CollData* coll)
+{
+    Vec3 sp1C;
+    float sp18;
+    Vec3 spC;
+    int line_id;
+    int var_r30;
+
+    sp1C.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+    sp1C.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    line_id =
+        mpLib_8004E090_Ceiling(coll->ceiling.index, &sp1C, &sp18,
+                               &coll->ceiling.flags, &coll->ceiling.normal);
+
+    if (line_id != -1) {
+        coll->ceiling.index = line_id;
+        coll->cur_pos.y += sp18;
+    } else {
+        var_r30 = false;
+        mpLib_80054420(coll->ceiling.index, &spC);
+        if (sp1C.x <= spC.x) {
+            line_id = mpLib_80052A98_Ceiling(coll->ceiling.index);
+            if (line_id != -1 && mpLib_80054ED8(line_id) &&
+                mpLineGetKind(line_id) == CollLine_RightWall)
+            {
+                var_r30 = true;
+            }
+        } else {
+            mpLib_800542BC(coll->ceiling.index, &spC);
+            line_id = mpLib_800528CC_Ceiling(coll->ceiling.index);
+            if (line_id != -1 && mpLib_80054ED8(line_id) &&
+                mpLineGetKind(line_id) == CollLine_LeftWall)
+            {
+                var_r30 = true;
+            }
+        }
+        coll->cur_pos.y = spC.y - coll->xA4_ecbCurrCorrect.top.y;
+        if (var_r30) {
+            coll->cur_pos.x = spC.x;
+            line_id = mpLib_8004E090_Ceiling(coll->ceiling.index, &spC, NULL,
+                                             &coll->ceiling.flags,
+                                             &coll->ceiling.normal);
+            if (line_id != -1) {
+                coll->ceiling.index = line_id;
+            } else {
+                OSReport("%s:%d: oioi...\n", __FILE__, 2620);
+            }
+        }
+    }
+
+    return true;
+}
 
 /// #mpColl_80044E10
 
@@ -1655,7 +1706,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         y_after_collide_ceiling = 0.0F;
         y_after_collide_floor = 0.0F;
         if (mpColl_80044AD8_Ceiling(coll, horizontal_squeeze_flags_2) &&
-            mpColl_80044C74(coll))
+            mpColl_80044C74_Ceiling(coll))
         { // Physics_CeilingCheck, Physics_CeilingCollideAir
             temp_r21 = mpColl_80052A98(
                 coll->ceiling.index); // Collision_GetNextNonCeilingLine
@@ -1764,7 +1815,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             y_after_collide_floor = coll->cur_pos.y;
             horizontal_squeeze_flags |= 2;
             if (mpColl_80044AD8_Ceiling(coll, horizontal_squeeze_flags_2) &&
-                mpColl_80044C74(coll))
+                mpColl_80044C74_Ceiling(coll))
             { // Physics_CeilingCheck, Physics_CeilingCollideAir
                 temp_r21_3 = mpColl_80052A98(
                     coll->ceiling.index); // Collision_GetNextNonCeilingLine
@@ -2536,7 +2587,9 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             var_f28 = arg0->cur_pos.y;
             var_r29 = 1;
             var_r25_2 = 1;
-            if (mpColl_80044AD8_Ceiling(arg0, var_r28) && mpColl_8004AB80(arg0)) {
+            if (mpColl_80044AD8_Ceiling(arg0, var_r28) &&
+                mpColl_8004AB80(arg0))
+            {
                 var_f29 = arg0->cur_pos.y;
                 var_r26_2 = 1;
             }

@@ -47,7 +47,7 @@
 /* 044838 */ bool mpColl_80044838_Floor(CollData* coll, bool ignore_bottom);
 /* 044948 */ bool mpColl_80044948_Floor(CollData* coll);
 /* 044AD8 */ bool mpColl_80044AD8_Ceiling(CollData*, int);
-/* 044C74 */ s32 mpColl_80044C74(CollData*);
+/* 044C74 */ bool mpColl_80044C74_Ceiling(CollData*);
 /* 044E10 */ s32 mpColl_80044E10(CollData*);
 /* 0454A4 */ s32 mpColl_800454A4(CollData*);
 /* 045B74 */ s32 mpColl_80045B74(CollData*);
