@@ -49,7 +49,7 @@
 /* 044AD8 */ bool mpColl_80044AD8_Ceiling(CollData*, int);
 /* 044C74 */ bool mpColl_80044C74_Ceiling(CollData*);
 /* 044E10 */ bool mpColl_80044E10_RightWall(CollData*);
-/* 0454A4 */ s32 mpColl_800454A4(CollData*);
+/* 0454A4 */ bool mpColl_800454A4_RightWall(CollData*);
 /* 045B74 */ s32 mpColl_80045B74(CollData*);
 /* 046224 */ s32 mpColl_80046224(CollData*);
 /* 046904 */ bool mpColl_80046904(CollData*, u32 flags);
