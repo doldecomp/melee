@@ -19,6 +19,7 @@
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 
+#include "baselib/forward.h"
 #include "gr/forward.h"
 
 #include "gr/inlines.h"
@@ -2541,7 +2542,7 @@ void Ground_801C4A08(HSD_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
+void Ground_801C4B50(HSD_Spline* spline, Vec3* arg1, Vec3* result, f32 arg8)
 {
     Vec3 vec0;
     Vec3 vec1;
@@ -2552,8 +2553,8 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     f32 result_z;
     f32 z1;
     f32 y0;
-    splGetSplinePoint(arg1, arg0);
-    lbShadow_8000E9F0(&vec0, arg0, arg8);
+    splGetSplinePoint(arg1, spline, arg8);
+    lbShadow_8000E9F0(&vec0, spline, arg8);
     lbVector_Normalize(&vec0);
     y0 = vec0.y;
     if (vec0.y < 0.0F) {
