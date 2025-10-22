@@ -116,7 +116,7 @@ static inline bool ftCo_Squat_IASA_inline(Fighter_GObj* gobj)
     if (fp->mv.co.squat.x0 && fp->mv.co.squat.x4) {
         fp->mv.co.squat.x4 -= 1.0F;
 
-        if (!fp->mv.co.squat.x4 && mpColl_8004CBC0(&fp->coll_data)) {
+        if (!fp->mv.co.squat.x4 && mpColl_IsOnPlatform(&fp->coll_data)) {
             ftCo_8009A228(gobj);
             return true;
         }

@@ -58,11 +58,11 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
     comm_attr = item->xCC_item_attr;
     spec_attr = item->xC4_article_data->x4_specialAttributes;
     it_80276214(item_gobj);
-    temp_f1 = coll_data->cur_topn.y;
-    coll_data->cur_topn.y = temp_f1 - item->xC1C.bottom;
+    temp_f1 = coll_data->cur_pos.y;
+    coll_data->cur_pos.y = temp_f1 - item->xC1C.bottom;
     check1 = mpColl_80048844(coll_data, temp_f1);
-    coll_data->cur_topn.y = coll_data->cur_topn.y + item->xC1C.bottom;
-    item->pos = coll_data->cur_topn;
+    coll_data->cur_pos.y = coll_data->cur_pos.y + item->xC1C.bottom;
+    item->pos = coll_data->cur_pos;
 
     // Rounds item velocities to 0 if they are close to it
     if (check1 && arg_check) {

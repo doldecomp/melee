@@ -543,10 +543,10 @@ void grKongo_801D6198(Ground_GObj* arg0)
                 InternalStageID_Unk01)
             {
                 mpLib_80057638(0);
-                mpLib_800580C8(0, temp_r3, fn_801D7E60);
+                mpJointSetCb1(0, temp_r3, fn_801D7E60);
             } else {
                 mpLib_80057638(1);
-                mpLib_800580C8(1, temp_r3, fn_801D7E60);
+                mpJointSetCb1(1, temp_r3, fn_801D7E60);
             }
             temp_r3->gv.kongo3.xC4 = 1;
         }
@@ -568,10 +568,10 @@ void grKongo_801D6198(Ground_GObj* arg0)
                 InternalStageID_Unk01)
             {
                 mpLib_80057BC0(0);
-                mpLib_800580E0(0);
+                mpJointClearCb1(0);
             } else {
                 mpLib_80057BC0(1);
-                mpLib_800580E0(1);
+                mpJointClearCb1(1);
             }
             temp_r3->gv.kongo3.xC4 = 2;
             return;
@@ -1064,7 +1064,7 @@ void grKongo_801D69B0(HSD_GObj *arg0) {
 u32 it_802E18B4(HSD_GObj *);                        /* extern */
 ? it_802E2330(Vec3 *, s32 *);                       /* extern */
 ? mpLib_8005667C(?);                                /* extern */
-? mpLib_800566D8(?, f32 *, ? *);                    /* extern */
+? mpVtxGetPos(?, f32 *, ? *);                    /* extern */
 ? mpLib_80056758(s32, ?, f32, ?, f32);              /* extern */
 ? ftCo_800C0764(?, s32 (*)(HSD_GObj *, HSD_GObj *)); /* extern */
 extern ? grKg_804D6984;
@@ -1336,7 +1336,7 @@ void fn_801D542C(HSD_GObj* arg0)
     f32 temp_f2;
 
     temp_r31 = arg0->user_data;
-    mpLib_800580C8(4, temp_r31, fn_801D7700);
+    mpJointSetCb1(4, temp_r31, fn_801D7700);
     temp_f2 = grKg_804D6980->unk0;
     temp_r31->gv.kongo.xE4 =
         (s16) (((grKg_804D6980->unk4 - temp_f2) * HSD_Randf()) + temp_f2);

@@ -308,7 +308,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     Vec3 pos;
     Vec3 sp68;
     f32 pad_8[1];
-    int sp60;
+    u32 sp60;
     f32 pad_10[1];
     Quaternion quat;
     f32 pad_9[3];
@@ -553,7 +553,7 @@ void itLinkarrow_UnkMotion1_Phys(HSD_GObj* gobj)
 
 static inline bool itLinkarrow_UnkMotion1_Coll_inline(Item_GObj* gobj)
 {
-    int sp18;
+    u32 sp18;
     Vec3 sp1C;
     Item* item_2 = GET_ITEM(gobj);
     CollData* pp = &item_2->x378_itemColl;
@@ -563,8 +563,8 @@ static inline bool itLinkarrow_UnkMotion1_Coll_inline(Item_GObj* gobj)
         (mpLib_80054ED8(item_2->xDD4_itemVar.linkarrow.xE4) != 0))
     {
         mpColl_80043558(pp, item_2->xDD4_itemVar.linkarrow.xE4);
-        mpLib_800567C0(item_2->xDD4_itemVar.linkarrow.xE4, &item_2->pos,
-                       &item_2->x40_vel);
+        mpGetSpeed(item_2->xDD4_itemVar.linkarrow.xE4, &item_2->pos,
+                   &item_2->x40_vel);
         item_2->xDD4_itemVar.linkarrow.xE8 =
             item_2->xDD4_itemVar.linkarrow.xEC = atan2f(sp1C.y, sp1C.x);
         return 1;
@@ -792,9 +792,9 @@ bool itLinkarrow_UnkMotion4_Coll(HSD_GObj* gobj)
     if (item->xDD4_itemVar.linkarrow.xE4 != -1) {
         if (mpLib_80054ED8(item->xDD4_itemVar.linkarrow.xE4) != 0) {
             mpColl_80043558(pp, item->xDD4_itemVar.linkarrow.xE4);
-            mpLib_800567C0(item->xDD4_itemVar.linkarrow.xE4, &item->pos,
-                           &item->x40_vel);
-            mpLib_80054DFC(item->xDD4_itemVar.linkarrow.xE4, &sp18);
+            mpGetSpeed(item->xDD4_itemVar.linkarrow.xE4, &item->pos,
+                       &item->x40_vel);
+            mpLineGetNormal(item->xDD4_itemVar.linkarrow.xE4, &sp18);
             item->xDD4_itemVar.linkarrow.xE8 = atan2f(sp18.y, sp18.x);
         }
         var_r0 = 1;

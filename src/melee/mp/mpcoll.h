@@ -11,7 +11,7 @@
 #include <dolphin/mtx.h>
 
 /* 041C78 */ void mpColl_80041C78(void);
-/* 041C8C */ void mpColl_80041C8C(CollData* cd);
+/* 041C8C */ void mpCollPrev(CollData* cd);
 /* 041DD0 */ void mpColl_80041DD0(CollData* cd, u32 flags);
 /* 041EE4 */ void mpColl_80041EE4(CollData*);
 /* 042078 */ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*,
@@ -19,7 +19,7 @@
                                   HSD_JObj*, HSD_JObj*, float);
 /* 04220C */ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float, float,
                                   float, float);
-/* 042374 */ void mpColl_80042374(CollData*, float, float, float);
+/* 042374 */ void mpColl_SetLedgeSnap(CollData*, float, float, float);
 /* 042384 */ void mpColl_80042384(CollData* cd);
 /* 0424DC */ void mpColl_800424DC(CollData* cd, u32 flags);
 /* 04293C */ void mpColl_8004293C(CollData* cd);
@@ -27,7 +27,7 @@
 /* 042D24 */ void mpColl_80042D24(CollData* cd);
 /* 042DB0 */ void mpColl_80042DB0(CollData* ecb, float time);
 /* 043268 */ void mpColl_80043268(CollData*, s32, s32, float);
-/* 043324 */ void mpColl_80043324(CollData*, s32, s32);
+/* 043324 */ void mpCollEnd(CollData*, s32, s32);
 /* 043558 */ void mpColl_80043558(CollData*, s32);
 /* 043670 */ void mpColl_80043670(CollData*);
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);
@@ -43,7 +43,7 @@
 /* 044164 */ bool mpColl_80044164(CollData* cd, int* p_ledge_id);
 /* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
 /* 044628 */ bool mpColl_80044628(CollData*, bool (*)(Fighter_GObj*, int),
-                                  void*, s32);
+                                  Fighter_GObj*, s32);
 /* 044838 */ bool mpColl_80044838(CollData*, s32);
 /* 044948 */ s32 mpColl_80044948(CollData*);
 /* 044AD8 */ s32 mpColl_80044AD8(CollData*, s32);
@@ -106,7 +106,7 @@
 /* 04CAE8 */ bool mpColl_8004CAE8(CollData*, Vec3*);
 /* 04CB30 */ bool mpColl_8004CB30(CollData*, Vec3*);
 /* 04CB78 */ bool mpColl_8004CB78(CollData*, Vec3*);
-/* 04CBC0 */ bool mpColl_8004CBC0(CollData*);
+/* 04CBC0 */ bool mpColl_IsOnPlatform(CollData*);
 /* 04CBE8 */ void mpColl_8004CBE8(CollData*);
 /* 04CBF4 */ void mpColl_8004CBF4(CollData*);
 /* 04CC00 */ void mpColl_8004CC00(CollData*, CollData*, int);

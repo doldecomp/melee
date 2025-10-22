@@ -484,7 +484,7 @@ void Ground_801C0800(StructPairWithStageID* pair)
         psInitDataBankLoad(0x1E, stage_info.map_ptcl, stage_info.map_texg, 0,
                            0);
     }
-    mpLib_8004D288(stage_info.coll_data);
+    mpLibLoad(stage_info.coll_data);
     mpLib_80058820();
     Ground_801C1E94();
     Ground_801C466C();
@@ -1515,7 +1515,7 @@ bool Ground_801C2FE0(Ground_GObj* arg0)
     int map_id;
 
     struct UnkStageDat_x8_t* dat;
-    mpLib_804D64C0_t* temp_r3;
+    CollJoint* temp_r3;
     bool result;
     S16Vec3* vec;
     int i;
@@ -1527,7 +1527,7 @@ bool Ground_801C2FE0(Ground_GObj* arg0)
     if (Ground_804D6950[map_id] == 0) {
         result = false;
 
-        temp_r3 = mpLib_8004D17C();
+        temp_r3 = mpGetGroundCollJoint();
         Ground_804D6954++;
         stagedata = Ground_803DFEDC[stage_info.internal_stage_id];
         count = stagedata->x30;
@@ -1564,12 +1564,12 @@ bool Ground_801C2FE0(Ground_GObj* arg0)
     return false;
 }
 
-bool Ground_801C3128(s32 arg0, void (*arg1)(s32))
+bool Ground_801C3128(s32 arg0, void (*arg1)(int))
 {
     /// @todo Unused variable; is this an argument?
     StageData* stage_data;
     bool result;
-    mpLib_8004D17C();
+    mpGetGroundCollJoint();
     result = false;
     {
         /// @todo @c cur cannot be swapped below @c max, hinting at a missing
@@ -1633,7 +1633,7 @@ s32 Ground_801C32D4(s32 arg0, s32 arg1)
     int max;
     S16Vec3* cur;
     int i;
-    mpLib_8004D17C();
+    mpGetGroundCollJoint();
     /// @todo Might be an @c inline starting here.
     max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
     cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;
@@ -1668,7 +1668,7 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
     int max;
     S16Vec3* cur;
     int i;
-    mpLib_8004D17C();
+    mpGetGroundCollJoint();
     /// @todo Might be an @c inline starting here.
     max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
     cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;

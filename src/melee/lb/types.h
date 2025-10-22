@@ -4,9 +4,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include <melee/gr/forward.h>
 #include <melee/lb/forward.h> // IWYU pragma: export
 #include <sysdolphin/baselib/forward.h>
-#include <melee/gr/forward.h>
 
 #include <dolphin/card.h>
 #include <dolphin/gx.h>
@@ -161,7 +161,7 @@ typedef struct _ECBFlagStruct {
 
 typedef struct SurfaceData {
     int index;
-    u32 unk;
+    u32 flags;
     Vec3 normal;
 } SurfaceData;
 
@@ -181,23 +181,23 @@ typedef struct _ftECB {
 
 struct CollData {
     /* fp+6F0 */ HSD_GObj* x0_gobj;
-    /* fp+6F4 */ Vec3 cur_topn;
-    /* fp+700 */ Vec3 cur_topn_correct;
-    /* fp+70C */ Vec3 prev_topn;
+    /* fp+6F4 */ Vec3 cur_pos;
+    /* fp+700 */ Vec3 cur_pos_correct;
+    /* fp+70C */ Vec3 prev_pos;
     /* fp+718 */ Vec3 x28_vec;
     /* fp+724 */ ECBFlagStruct x34_flags;
     /* fp+725 */ ECBFlagStruct x35_flags;
-    /* fp+726 */ s16 x36;
+    /* fp+726 */ s16 facing_dir;
     /* fp+728 */ s32 x38;
     /* fp+72C */ s32 x3C;
     /* fp+730 */ int ledge_id_unk0;
     /* fp+734 */ int ledge_id_unk1;
-    /* fp+738 */ u32 x48;
-    /* fp+73C */ u32 x4C;
+    /* fp+738 */ u32 x48_joint_id;
+    /* fp+73C */ u32 x4C_joint_id;
     /* fp+740 */ float x50;
-    /* fp+744 */ float x54;
-    /* fp+748 */ float x58;
-    /* fp+74C */ float x5C;
+    /* fp+744 */ float ledge_snap_x;
+    /* fp+748 */ float ledge_snap_y;
+    /* fp+74C */ float ledge_snap_height;
     /* fp+750 */ float x60;
     /* fp+754 */ ftECB x64_ecb;
     /* fp+774 */ ftECB x84_ecb;

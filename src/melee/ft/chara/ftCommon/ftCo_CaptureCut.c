@@ -167,12 +167,12 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             HSD_JObjSetTranslate(temp_r28, &var_r30->x2174);
         }
         if (mpLib_80054ED8(var_r31->coll_data.floor.index) != 0) {
-            temp_r3_2 = mpLib_8005199C(&sp4C, -1, -1);
+            temp_r3_2 = mpLib_8005199C_Floor(&sp4C, -1, -1);
             if (temp_r3_2 != -1) {
                 int tmp = var_r31->coll_data.floor.index;
                 if (mpLib_80054F68(temp_r3_2, tmp)) {
                     var_r30->coll_data.floor.index = temp_r3_2;
-                    mpLib_8004DD90(temp_r3_2, &sp4C, &sp48, 0, NULL);
+                    mpLib_8004DD90_Floor(temp_r3_2, &sp4C, &sp48, 0, NULL);
                     if (sp48 >= p_ftCommonData->x3BC) {
                         var_r30->cur_pos.x = sp4C.x;
                         var_r30->cur_pos.y = sp4C.y + sp48;
@@ -195,9 +195,9 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             sp3C.y = var_r31->cur_pos.y + tmp.y;
             sp3C.z = var_r31->cur_pos.z + tmp.z;
 
-            temp_r28_2->prev_topn = sp3C;
+            temp_r28_2->prev_pos = sp3C;
             mpColl_80043670(temp_r28_2);
-            temp_r28_2->cur_topn = sp4C;
+            temp_r28_2->cur_pos = sp4C;
 
             HSD_JObjSetTranslate(temp_r29, &sp4C);
 
@@ -211,7 +211,7 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
                 if (var_r30->ground_or_air != GA_Ground) {
                     ftCommon_8007D7FC(var_r30);
                 }
-                var_r30->cur_pos = temp_r28_2->cur_topn;
+                var_r30->cur_pos = temp_r28_2->cur_pos;
             } else {
                 if (var_r30->ground_or_air != GA_Air) {
                     ftCommon_8007D5D4(var_r30);

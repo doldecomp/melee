@@ -88,9 +88,9 @@ void ftCliffCommon_80081370(Fighter_GObj* gobj)
         ftCommon_8007EBAC(fp, 12, 0);
 
         if (fp->facing_dir > 0) {
-            mpLib_80053ECC(fp->mv.co.cliff.ledge_id, &vec);
+            mpLib_80053ECC_Floor(fp->mv.co.cliff.ledge_id, &vec);
         } else {
-            mpLib_80053DA4(fp->mv.co.cliff.ledge_id, &vec);
+            mpLib_80053DA4_Floor(fp->mv.co.cliff.ledge_id, &vec);
         }
     }
     {
@@ -116,9 +116,9 @@ void ftCo_CliffCatch_Phys(Fighter_GObj* gobj)
         Vec3 vec;
         u8 _[4] = { 0 };
         if (fp->facing_dir > 0) {
-            mpLib_80053ECC(fp->mv.co.cliff.ledge_id, &vec);
+            mpLib_80053ECC_Floor(fp->mv.co.cliff.ledge_id, &vec);
         } else {
-            mpLib_80053DA4(fp->mv.co.cliff.ledge_id, &vec);
+            mpLib_80053DA4_Floor(fp->mv.co.cliff.ledge_id, &vec);
         }
         fp->cur_pos.x = fp->x68C_transNPos.z * fp->facing_dir + vec.x;
         fp->cur_pos.y = vec.y + fp->x68C_transNPos.y;

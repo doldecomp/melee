@@ -36,8 +36,8 @@ bool ftCo_800C3A14(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CollData coll = *getFtColl(fp);
     PAD_STACK(8);
-    coll.x58 += 5.0;
-    coll.x5C += 5.0;
+    coll.ledge_snap_y += 5.0;
+    coll.ledge_snap_height += 5.0;
     if (fp->facing_dir > (f64) 0.0F) {
         if (mpColl_80044164(&coll, &fp->coll_data.ledge_id_unk1)) {
             fp->coll_data.env_flags |= MPCOLL_FLAGS_B24;
@@ -166,7 +166,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                                      jobj->mtx[0][3];
                         }
                         if (mpLib_800524DC(
-                                0, 0, 0, 0, -1, -1, fp->coll_data.cur_topn.x,
+                                0, 0, 0, 0, -1, -1, fp->coll_data.cur_pos.x,
                                 jobj->mtx[1][3], var_f3, jobj->mtx[1][3]) != 0)
                         {
                             it_802A2B10(fp->fv.lk.xC);
@@ -228,7 +228,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                             HSD_JObjSetupMatrix(jobj);
                             if (mpLib_800524DC(
                                     0, 0, 0, 0, -1, -1,
-                                    fp->coll_data.cur_topn.x, jobj->mtx[1][3],
+                                    fp->coll_data.cur_pos.x, jobj->mtx[1][3],
                                     (2.0 * fp->facing_dir * fp->x34_scale.y) +
                                         jobj->mtx[0][3],
                                     jobj->mtx[1][3]))

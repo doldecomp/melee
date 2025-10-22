@@ -2365,7 +2365,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
         // __assert functions. But I guess these just stop or reset the game.
         // result is written to where r5 points to, which is 'difference' in
         // this case
-        if (mpLib_800567C0(fp->coll_data.floor.index, &fp->cur_pos,
+        if (mpGetSpeed(fp->coll_data.floor.index, &fp->cur_pos,
                            &difference))
         {
             // fp->position += difference
