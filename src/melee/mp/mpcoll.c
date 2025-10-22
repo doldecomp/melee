@@ -1508,7 +1508,55 @@ bool mpColl_80044948_Floor(CollData* coll)
     return hit_wall;
 }
 
-/// #mpColl_80044AD8
+bool mpColl_80044AD8_Ceiling(CollData* coll, int flags)
+{
+    float sp28;
+    Vec3 vec;
+    float x;
+    float y;
+    int ceiling_id;
+    int line_id;
+    int hit_ceiling;
+    PAD_STACK(0xC);
+
+    x = coll->cur_pos_correct.x + coll->xC4_ecb.top.x;
+    y = coll->cur_pos_correct.y + coll->xC4_ecb.top.y;
+    vec.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+    vec.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    if (coll->x38 != mpColl_804D64AC) {
+        hit_ceiling = mpLib_8004FC2C_Ceiling(
+            x, y, vec.x, vec.y, &coll->x140, &coll->ceiling.index,
+            &coll->ceiling.flags, &coll->ceiling.normal, coll->x48_joint_id,
+            coll->x4C_joint_id);
+    } else {
+        hit_ceiling = mpLib_8004F8A4_Ceiling(
+            x, y, vec.x, vec.y, &coll->x140, &coll->ceiling.index,
+            &coll->ceiling.flags, &coll->ceiling.normal, coll->x48_joint_id,
+            coll->x4C_joint_id);
+    }
+    if (hit_ceiling) {
+        coll->env_flags |= 0x2000;
+        coll->env_flags |= 0x4000;
+        return true;
+    }
+
+    if (((flags & 1 &&
+          (line_id = mpLib_80052C64_LeftWall(coll->right_wall.index)) != -1) ||
+         (flags & 2 && (line_id = mpLib_80052FFC_RightWall(
+                            coll->left_wall.index)) != -1)) &&
+        mpLib_80054ED8(line_id) && mpLineGetKind(line_id) == CollLine_Ceiling)
+    {
+        ceiling_id = mpLib_8004E090_Ceiling(
+            line_id, &vec, &sp28, &coll->ceiling.flags, &coll->ceiling.normal);
+        if ((ceiling_id != -1) && (sp28 < 0.0F)) {
+            coll->ceiling.index = ceiling_id;
+            coll->env_flags |= 0x2000;
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /// #mpColl_80044C74
 
@@ -1606,7 +1654,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
         y_after_collide_ceiling = 0.0F;
         y_after_collide_floor = 0.0F;
-        if (mpColl_80044AD8(coll, horizontal_squeeze_flags_2) &&
+        if (mpColl_80044AD8_Ceiling(coll, horizontal_squeeze_flags_2) &&
             mpColl_80044C74(coll))
         { // Physics_CeilingCheck, Physics_CeilingCollideAir
             temp_r21 = mpColl_80052A98(
@@ -1715,7 +1763,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             }
             y_after_collide_floor = coll->cur_pos.y;
             horizontal_squeeze_flags |= 2;
-            if (mpColl_80044AD8(coll, horizontal_squeeze_flags_2) &&
+            if (mpColl_80044AD8_Ceiling(coll, horizontal_squeeze_flags_2) &&
                 mpColl_80044C74(coll))
             { // Physics_CeilingCheck, Physics_CeilingCollideAir
                 temp_r21_3 = mpColl_80052A98(
@@ -2474,7 +2522,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
         }
         var_r26_2 = 0;
         var_r25_2 = 0;
-        if (mpColl_80044AD8(arg0, var_r28) && mpColl_8004AB80(arg0)) {
+        if (mpColl_80044AD8_Ceiling(arg0, var_r28) && mpColl_8004AB80(arg0)) {
             var_r26_2 = 1;
             var_f29 = arg0->cur_pos.y;
         }
@@ -2488,7 +2536,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             var_f28 = arg0->cur_pos.y;
             var_r29 = 1;
             var_r25_2 = 1;
-            if (mpColl_80044AD8(arg0, var_r28) && mpColl_8004AB80(arg0)) {
+            if (mpColl_80044AD8_Ceiling(arg0, var_r28) && mpColl_8004AB80(arg0)) {
                 var_f29 = arg0->cur_pos.y;
                 var_r26_2 = 1;
             }
