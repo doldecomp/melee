@@ -6365,7 +6365,12 @@ void ftKb_ZdSpecialN_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_ZdSpecialAirN_Coll
+void ftKb_ZdSpecialAirN_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftKb_SpecialNSk_80105F3C(gobj);
+    }
+}
 
 /// #ftKb_SpecialNSk_80105E8C
 
