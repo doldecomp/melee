@@ -3436,7 +3436,22 @@ bool mpColl_8004C750(CollData* coll)
     return inline3(coll, 2);
 }
 
-/// #mpColl_8004C864
+void mpColl_8004C864(CollData* coll, bool _, float left, float right)
+{
+    float half_width =
+        0.5F * (right - left + coll->xA4_ecbCurrCorrect.right.x -
+                coll->xA4_ecbCurrCorrect.left.x);
+    if (!coll->x34_flags.b6) {
+        coll->x64_ecb = coll->xA4_ecbCurrCorrect;
+    }
+    coll->x34_flags.b6 = true;
+    coll->cur_pos.x = (right + coll->xA4_ecbCurrCorrect.right.x) - half_width;
+    coll->xA4_ecbCurrCorrect.right.x = half_width;
+    coll->xA4_ecbCurrCorrect.left.x = -half_width;
+    coll->x84_ecb.right.x = coll->xA4_ecbCurrCorrect.right.x;
+    coll->x84_ecb.left.x = coll->xA4_ecbCurrCorrect.left.x;
+    coll->x34_flags.b5 = false;
+}
 
 /// #mpColl_8004C91C
 

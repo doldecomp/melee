@@ -106,7 +106,7 @@
 /* 04C328 */ UNK_RET mpColl_8004C328(UNK_PARAMS);
 /* 04C534 */ bool fn_8004C534(CollData*, u32);
 /* 04C750 */ bool mpColl_8004C750(CollData*);
-/* 04C864 */ void mpColl_8004C864(CollData*, s32, float, float);
+/* 04C864 */ void mpColl_8004C864(CollData*, bool, float, float);
 /* 04C91C */ void mpColl_8004C91C(CollData*, s32, float, float);
 /* 04CA6C */ float mpColl_8004CA6C(CollData*);
 /* 04CAA0 */ bool mpColl_8004CAA0(CollData*, Vec3*);
