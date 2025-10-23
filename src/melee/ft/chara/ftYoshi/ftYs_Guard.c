@@ -323,7 +323,39 @@ void ftYs_GuardOff_Coll(HSD_GObj* arg0)
     ftCo_GuardOff_Coll(arg0);
 }
 
-/// #ftYs_Shield_8012C600
+extern f32 ftYs_Init_804D9A2C;
+
+void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
+{
+    f32 var_f0;
+    f32 temp;
+
+    u8 _[16];
+
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    Fighter_ChangeMotionState(gobj, 0x158, 0U, ftYs_Init_804D9A2C,
+                              ftYs_Init_804D9A28, ftYs_Init_804D9A2C, NULL);
+    fp->hitlag_cb = (void (*)(HSD_GObj*)) ftCo_80093240;
+    fp->x670_timer_lstick_tilt_x = 0xFE;
+    fp->post_hitlag_cb = (void (*)(HSD_GObj*)) ftCo_800932DC;
+    if (fp->x221C_b2 == 0) {
+        ftParts_80074B0C(gobj, 0, 1);
+    }
+    inlineA0(gobj);
+    temp = (p_ftCommonData->x28C * (fp->x19A4 * (ftYs_Init_804D9A28 - fp->lightshield_amount))) + p_ftCommonData->x290;
+    if (arg1 == false) {
+        fp->gr_vel = temp * p_ftCommonData->x294;
+        if (fp->specialn_facing_dir < ftYs_Init_804D9A2C) {
+            var_f0 = fp->gr_vel;
+        } else {
+            var_f0 = -fp->gr_vel;
+        }
+        fp->gr_vel = var_f0;
+    }
+    ftCo_80092450(gobj);
+    ftCo_80091D58(fp);
+}
 
 void ftYs_GuardDamage_Anim(HSD_GObj* gobj)
 {
@@ -372,7 +404,23 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
 
 void ftYs_Shield_8012CACC(HSD_GObj* arg0) {}
 
-/// #ftYs_GuardOn_1_Anim
+void ftYs_GuardOn_1_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp;
+    u8 _[12];
+
+    ftCo_80093BC0(gobj);
+    fp = GET_FIGHTER(gobj);
+    fp->mv.ys.guard.x0 += ftYs_Init_804D9A28;
+    ftCo_80092BCC(gobj);
+    if (ftCo_800925A4(gobj)) {
+        spawnEffect(gobj);
+    } else if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_800928CC(gobj);
+    } else {
+        ftYs_Init_8012B8A4(gobj);
+    }
+}
 
 void ftYs_GuardOn_1_IASA(Fighter_GObj* gobj)
 {
