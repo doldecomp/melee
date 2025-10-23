@@ -22,7 +22,7 @@
 #include <baselib/memory.h>
 #include <baselib/sislib.h>
 
-/* 3EEED8 */ Vec3 mnSound_803EEED8[] = {
+/* 3EEED8 */ AnimLoopSettings mnSound_803EEED8[] = {
     { 0.0f, 199.0f, 0.0f },  { 0.0f, 29.0f, 0.0f }, { 30.0f, 59.0f, 30.0f },
     { 10.0f, 15.0f, -0.1f }, { 0.0f, 5.0f, -0.1f }, { 0.0f, 3.0f, -0.1f },
     { 4.0f, 7.0f, -0.1f }
@@ -48,7 +48,7 @@ static void mnSound_VolumeAnim(HSD_JObj* jobj, s32 sound_music_mix,
         (((f32) ((s8) sound_music_mix + 100) / 200.0f) * (pos_1.x - pos_0.x)) +
             pos_0.x);
     if (anim_id != -1) {
-        HSD_JObjReqAnimAll(jobj_anim_0, mnSound_803EEED8[anim_id].x);
+        HSD_JObjReqAnimAll(jobj_anim_0, mnSound_803EEED8[anim_id].start_frame);
     }
 }
 
@@ -151,7 +151,7 @@ void fn_80249A1C(HSD_GObj* arg0)
     HSD_JObj* sp40;
     HSD_JObj* sp3C;
     HSD_JObj* sp34;
-    Vec3 sp28;
+    AnimLoopSettings sp28;
     HSD_JObj* sp20;
     HSD_JObj* temp_r3;
     f32 temp_f1;
@@ -186,8 +186,8 @@ void fn_80249A1C(HSD_GObj* arg0)
     }
     lb_80011E24((HSD_JObj*) arg0->hsd_obj, &sp20, 6, -1, arg8);
     temp_f1 = mn_8022F298(sp20);
-    if ((mnSound_803EEED8[5].x <= temp_f1) &&
-        ((temp_f1 <= mnSound_803EEED8[5].y) != 0))
+    if ((mnSound_803EEED8[5].start_frame <= temp_f1) &&
+        ((temp_f1 <= mnSound_803EEED8[5].end_frame) != 0))
     {
         sp28 = mnSound_803EEED8[5];
     } else {
@@ -243,7 +243,7 @@ void mnSound_80249C08(int unused)
     {
         HSD_JObj* sp5C;
         lb_80011E24(jobj, &sp5C, 6, -1);
-        HSD_JObjReqAnimAll(sp5C, mnSound_803EEED8[1].x);
+        HSD_JObjReqAnimAll(sp5C, mnSound_803EEED8[1].start_frame);
         HSD_JObjAnimAll(sp5C);
     }
 
@@ -256,7 +256,7 @@ void mnSound_80249C08(int unused)
         lb_80011E24(jobj, &sp64, 0xE, -1);
         mn_8022ED6C(sp64, &mnSound_803EEED8[menu->unk2 + 1]);
         lb_80011E24(jobj, &sp60, 0xB, -1);
-        HSD_JObjReqAnimAll(sp60, mnSound_803EEED8[menu->unk1 + 4].x);
+        HSD_JObjReqAnimAll(sp60, mnSound_803EEED8[menu->unk1 + 4].start_frame);
         HSD_JObjAnimAll(sp60);
         HSD_JObjSetFlagsAll(jobj, 0x10U);
     }
