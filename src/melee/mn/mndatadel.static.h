@@ -56,6 +56,11 @@ struct MnDataDelData {
     f32 x6C;
 };
 
+static inline void JObj_GetChildAtIdx(HSD_JObj* parent, HSD_JObj** child, s32 idx)
+{
+    lb_80011E24(parent, child, idx, -1);
+}
+
 static inline void JObj_HideChildAtIdx(HSD_JObj* root, s32 idx)
 {
     HSD_JObj* child;
@@ -63,6 +68,12 @@ static inline void JObj_HideChildAtIdx(HSD_JObj* root, s32 idx)
     HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
 }
 
+static inline bool Anim_IsFrameInRange(float frame, AnimLoopSettings *settings) {
+    return frame >= settings->start_frame && frame < settings->end_frame;
+}
+
+#define FRAME_IN_RANGE(frame, settings) \
+    ((frame) >= (settings).start_frame && (frame) < (settings).end_frame)
 
 extern HSD_GObj* mnDataDel_804D6C68;
 extern HSD_Text* mnDataDel_804D6C6C;

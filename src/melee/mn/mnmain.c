@@ -3086,6 +3086,7 @@ void mn_8022F268(void)
     gmMainLib_8015CC34()->unk_x0 = 1;
 }
 
+/// @brief returns the current frame of the jobj
 float mn_8022F298(HSD_JObj* jobj)
 {
     HSD_AObj* aobj;

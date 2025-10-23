@@ -18,69 +18,74 @@
 
 /// #mnDataDel_8024EBC8                 /* unable to generate initializer: unknown type */
 
-// void fn_8024ECCC(HSD_GObj* gp)
-// {
-//     HSD_JObj* sp3C;
-//     HSD_JObj* sp38;
-//     HSD_JObj* sp20;
-//     HSD_JObj* sp1C;
-//     HSD_Text* text;
-//     f32 temp_f1;
-//     f32 temp_f1_2;
-//     s32 var_r30;
-//     u8 temp_r30_2;
-//     u8 temp_r30_3;
-//     HSD_JObj* root;
-//     struct WarnCmnData* data;
+/// @brief animates the warning modal
+void fn_8024ECCC(HSD_GObj* arg0)
+{
+    HSD_JObj* root;
+    HSD_JObj* panel;
+    HSD_JObj* exclaim;
+    HSD_JObj* cursor_no;
+    HSD_JObj* cursor_yes;
+    u8 _pad[10];
+    f32 curr_frame;
+    HSD_Text* text;
+    s32 sis_id;
+    u8 visible;
+    u8 cursor_idx;
+    struct WarnCmnData* data;
 
-//     root = gp->hsd_obj;
-//     data = mnDataDel_804D6C68->user_data;
-//     lb_80011E24(root, &sp3C, 2, -1);
-//     if ((u8) data->visible != 0) {
-//         temp_f1 = mn_8022F298((HSD_JObj* ) root);
-//         // M2C_ERROR(/* unknown instruction: cror eq, lt, eq */);
-//         if ((mnDataDel_803EF870.x30.start_frame == temp_f1) && (temp_f1 < mnDataDel_803EF870.x30.end_frame)) {
-//             temp_f1_2 = mn_8022EFD8(sp3C, (Point3d* ) &mnDataDel_803EF870.x30);
-//             lb_80011E24((HSD_JObj* ) root, &sp38, 8, -1, temp_f1_2);
-//             mn_8022EFD8(sp38, (Point3d* ) &mnDataDel_803EF870.x30);
-//             // M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
-//             if (temp_f1_2 == mnDataDel_803EF870.x30.end_frame) {
-//                 temp_r30_2 = data->visible;
-//                 if ((HSD_Text* ) mnDataDel_804D6C6C != NULL) {
-//                     HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
-//                 }
-//                 if ((s32) temp_r30_2 == 1) {
-//                     var_r30 = 0x13E;
-//                 } else {
-//                     var_r30 = 0x13F;
-//                 }
-//                 text = HSD_SisLib_803A5ACC(0, 1, mnDataDel_803EF870.x64, mnDataDel_803EF870.x68, mnDataDel_803EF870.x6C, 250.0f, 5.0f);
-//                 mnDataDel_804D6C6C = text;
-//                 text->font_size.x = 0.05f;
-//                 text->font_size.y = 0.05f;
-//                 text->default_alignment = 1;
-//                 HSD_SisLib_803A6368(text, var_r30);
-//             }
-//         } else {
-//             temp_r30_3 = data->cursor_idx;
-//             lb_80011E24((HSD_JObj* ) temp_r28, &sp20, 7, -1);
-//             lb_80011E24((HSD_JObj* ) temp_r28, &sp1C, 6, -1, temp_f1);
-//             if ((s32) temp_r30_3 != 0) {
-//                 HSD_JObjReqAnimAll(sp1C, 1.0f);
-//                 HSD_JObjReqAnimAll(sp20, 0.0f);
-//             } else {
-//                 HSD_JObjReqAnimAll(sp1C, 0.0f);
-//                 HSD_JObjReqAnimAll(sp20, 1.0f);
-//             }
-//             HSD_JObjAnimAll(sp1C);
-//             HSD_JObjAnimAll(sp20);
-//         }
-//     } else {
-//         HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
-//         mnDataDel_804D6C6C = NULL;
-//         HSD_GObjPLink_80390228(gp);
-//     }
-// }
+
+    root = GET_JOBJ(arg0);
+    data = mnDataDel_804D6C68->user_data;
+    lb_80011E24(root, &panel, WARN_JOINT_PANEL, -1);
+    if (data->visible != 0)
+        {
+            curr_frame = mn_8022F298(root);
+            if ((mnDataDel_803EF8A0.start_frame <= curr_frame) && (curr_frame < mnDataDel_803EF8A0.end_frame))
+                {
+                    curr_frame = mn_8022EFD8(panel, &mnDataDel_803EF8A0);
+                    lb_80011E24(root, &exclaim, WARN_JOINT_EXCLAIM, -1, curr_frame);
+                    mn_8022EFD8(exclaim, &mnDataDel_803EF8A0);
+                    if (curr_frame >= mnDataDel_803EF8A0.end_frame)
+                        {
+                            visible = data->visible;
+                            if (mnDataDel_804D6C6C != NULL) {
+                                HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
+                            }
+                            if ((s32) visible == 1) {
+                                sis_id = 318;
+                            } else {
+                                sis_id = 319;
+                            }
+                            text = HSD_SisLib_803A5ACC(0, 1, mnDataDel_803EF870.x64, mnDataDel_803EF870.x68, mnDataDel_803EF870.x6C, 250.0f, 5.0f);
+                            mnDataDel_804D6C6C = text;
+                            text->font_size.x = 0.05f;
+                            text->font_size.y = 0.05f;
+                            text->default_alignment = 1;
+                            HSD_SisLib_803A6368(text, sis_id);
+                        }
+                } else
+                    {
+                        cursor_idx = data->cursor_idx;
+                        lb_80011E24(root, &cursor_yes, WARN_JOINT_CURSOR_YES, -1);
+                        lb_80011E24(root, &cursor_no, WARN_JOINT_CURSOR_NO, -1);
+                        if ((s32) cursor_idx != 0) {
+                            HSD_JObjReqAnimAll(cursor_yes, 1.0f);
+                            HSD_JObjReqAnimAll(cursor_no, 0.0f);
+                        } else {
+                            HSD_JObjReqAnimAll(cursor_yes, 0.0f);
+                            HSD_JObjReqAnimAll(cursor_no, 1.0f);
+                        }
+                        HSD_JObjAnimAll(cursor_yes);
+                        HSD_JObjAnimAll(cursor_no);
+                    }
+            } else
+                {
+                    HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
+                    mnDataDel_804D6C6C = NULL;
+                    HSD_GObjPLink_80390228(arg0);
+                }
+}
 
 void mnDataDel_8024EEC0(void)
 {
