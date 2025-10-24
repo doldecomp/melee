@@ -15,11 +15,13 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+#include "lb/types.h"
 
 #include "mp/forward.h"
 
 #include "mp/mplib.h"
 
+#include <string.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -3750,7 +3752,60 @@ bool mpColl_8004A678(CollData* coll, int line_id)
     return false;
 }
 
-/// #mpColl_8004A908
+bool mpColl_8004A908_Floor(CollData* coll, int line_id)
+{
+    int floor_id;
+    u32 flags;
+    Vec3 normal;
+    float x0;
+    float y0;
+    float x1;
+    float y1;
+    bool result;
+
+    x0 = coll->cur_pos_correct.x + coll->xC4_ecb.bottom.x;
+    y0 = coll->cur_pos_correct.y + coll->xC4_ecb.bottom.y;
+    x1 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+    y1 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    if (coll->x38 != mpColl_804D64AC) {
+        result = mpLib_8004F400_Floor(
+            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
+            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+    } else {
+        result = mpLib_8004F008_Floor(
+            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
+            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+    }
+    if (result && floor_id != -1 && floor_id != line_id &&
+        (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
+    {
+        coll->floor.index = floor_id;
+        coll->floor.flags = flags;
+        coll->floor.normal = normal;
+        return true;
+    }
+    y0 = 0.5F * (coll->xC4_ecb.top.y + coll->xC4_ecb.bottom.y) +
+         coll->cur_pos_correct.y;
+    if (coll->x38 != mpColl_804D64AC) {
+        result = mpLib_8004F400_Floor(
+            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
+            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+    } else {
+        result = mpLib_8004F008_Floor(
+            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
+            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+    }
+    if (result && floor_id != -1 && floor_id != line_id &&
+        (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
+    {
+        coll->floor.index = floor_id;
+        coll->floor.flags = flags;
+        coll->floor.normal = normal;
+        return true;
+    }
+
+    return false;
+}
 
 bool mpColl_8004AB80(CollData* arg0)
 {
@@ -3946,7 +4001,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             mpColl_8004C91C(arg0, var_r4, var_f29, var_f28);
         }
     } while (temp_r27 != arg0->x34_flags.b6);
-    if (mpColl_8004A908(arg0, arg0->floor.index)) {
+    if (mpColl_8004A908_Floor(arg0, arg0->floor.index)) {
         if (mpColl_80044838_Floor(arg0, false)) {
             if (mpColl_80043BBC(arg0, &sp10)) {
                 mpColl_80043C6C(arg0, sp10, 0);
