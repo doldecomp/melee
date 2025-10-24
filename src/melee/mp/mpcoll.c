@@ -3017,7 +3017,121 @@ bool mpColl_800488F4(CollData* arg0)
     return false;
 }
 
-/// #mpColl_80048AB0
+// maybe a grounded version of `mpColl_80044E10_RightWall`
+bool mpColl_80048AB0_RightWall(CollData* coll)
+{
+    int line_id;
+    float f31;
+    float f30;
+    float f29;
+    float f28;
+    float f26;
+    float f27;
+    float f1;
+    float f2;
+    float f3;
+    float f4;
+    bool result;
+    int line_id1;
+    int line_id2;
+
+    result = false;
+    mpColl_804D6488 = 0;
+
+    if (mpLib_80054ED8(coll->floor.index)) {
+        int temp;
+        line_id1 = mpLib_80053394_Floor(coll->floor.index);
+        temp = mpLib_800536CC_Floor(coll->floor.index);
+        line_id = temp;
+        line_id2 = temp != -1 ? mpLib_80053394_Floor(line_id) : -1;
+    } else {
+        line_id2 = -1;
+        line_id1 = -1;
+    }
+
+    f31 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.left.x;
+    f30 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.left.y;
+    f1 = coll->cur_pos_correct.x + coll->xC4_ecb.left.x;
+    f2 = coll->cur_pos_correct.y + coll->xC4_ecb.left.y;
+    if (mpColl_80044E10_RightWall_inline2(coll, f1, f2, f31, f30, &line_id)) {
+        mpColl_80044E10_RightWall_inline(line_id);
+        result = true;
+        coll->env_flags |= Collide_RightWallHug;
+    }
+
+    f1 = coll->cur_pos_correct.x + coll->xC4_ecb.bottom.x;
+    f2 = coll->cur_pos_correct.y + coll->xC4_ecb.bottom.y;
+    f3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+    f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    if (mpColl_80044E10_RightWall_inline2(coll, f1, f2, f3, f4, &line_id) &&
+        line_id != line_id1 && line_id != line_id2)
+    {
+        mpColl_80044E10_RightWall_inline(line_id);
+        result = true;
+    }
+
+    f1 = coll->cur_pos_correct.x + coll->xC4_ecb.top.x;
+    f2 = coll->cur_pos_correct.y + coll->xC4_ecb.top.y;
+    f3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+    f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    if (mpColl_80044E10_RightWall_inline2(coll, f1, f2, f3, f4, &line_id)) {
+        mpColl_80044E10_RightWall_inline(line_id);
+        result = true;
+    }
+
+    f27 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+    f26 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    if (mpLib_800509B8_RightWall(f27, f26, f31, f30, NULL, &line_id, NULL,
+                                 NULL, coll->x48_joint_id,
+                                 coll->x4C_joint_id) &&
+        line_id != line_id1 && line_id != line_id2)
+    {
+        mpColl_80044E10_RightWall_inline(line_id);
+        result = true;
+    }
+
+    if (!mpColl_804D649C) {
+        f1 = coll->cur_pos_correct.x + coll->xC4_ecb.bottom.x;
+        f2 = coll->cur_pos_correct.y + coll->xC4_ecb.bottom.y;
+        f29 = coll->cur_pos_correct.x + coll->xC4_ecb.left.x;
+        f28 = coll->cur_pos_correct.y + coll->xC4_ecb.left.y;
+        if (mpLib_800511A4_RightWall(f1, f2, f29, f28, f27, f26, f31, f30,
+                                     &line_id, coll->x48_joint_id,
+                                     coll->x4C_joint_id) &&
+            line_id != line_id1 && line_id != line_id2)
+        {
+            mpColl_80044E10_RightWall_inline(line_id);
+            result = true;
+        }
+    }
+
+    f27 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+    f26 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    if (mpLib_800509B8_RightWall(f27, f26, f31, f30, NULL, &line_id, NULL,
+                                 NULL, coll->x48_joint_id, coll->x4C_joint_id))
+    {
+        mpColl_80044E10_RightWall_inline(line_id);
+        result = true;
+    }
+
+    if (!mpColl_804D649C) {
+        f3 = coll->cur_pos_correct.x + coll->xC4_ecb.top.x;
+        f4 = coll->cur_pos_correct.y + coll->xC4_ecb.top.y;
+        if (mpLib_800511A4_RightWall(f29, f28, f3, f4, f31, f30, f27, f26,
+                                     &line_id, coll->x48_joint_id,
+                                     coll->x4C_joint_id))
+        {
+            mpColl_80044E10_RightWall_inline(line_id);
+            result = true;
+        }
+    }
+
+    if (result) {
+        coll->env_flags |= Collide_RightWallPush;
+    }
+
+    return result;
+}
 
 /// #mpColl_800491C8
 
@@ -3201,7 +3315,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             var_f30 = arg0->cur_pos.x;
             arg0->x34_flags.b5 = true;
         }
-        if (mpColl_80048AB0(arg0)) {
+        if (mpColl_80048AB0_RightWall(arg0)) {
             var_r25 = mpColl_800491C8(arg0);
             if (var_r25) {
                 var_r28 |= 2;
@@ -3219,7 +3333,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             var_f30 = arg0->cur_pos.x;
             arg0->x34_flags.b5 = true;
         }
-        if (mpColl_80048AB0(arg0)) {
+        if (mpColl_80048AB0_RightWall(arg0)) {
             var_r25 |= mpColl_800491C8(arg0);
             if (var_r25) {
                 var_r28 |= 2;
