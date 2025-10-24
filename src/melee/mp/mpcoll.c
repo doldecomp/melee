@@ -4564,7 +4564,61 @@ void mpColl_8004CBF4(CollData* coll)
     coll->x3C = -1;
 }
 
-/// #mpColl_8004CC00
+void mpCopyCollData(CollData* src, CollData* dst, int arg2)
+{
+    if (arg2 == 1) {
+        dst->x64_ecb = src->x64_ecb;
+        dst->x84_ecb = src->x84_ecb;
+        dst->xA4_ecbCurrCorrect = src->xA4_ecbCurrCorrect;
+        dst->xC4_ecb = src->xC4_ecb;
+        dst->xE4_ecb = src->xE4_ecb;
+    }
+
+    dst->cur_pos = src->cur_pos;
+    dst->cur_pos_correct = src->cur_pos_correct;
+    dst->prev_pos = src->prev_pos;
+
+    dst->x34_flags.b0 = src->x34_flags.b0;
+    dst->x34_flags.b1234 = src->x34_flags.b1234;
+    dst->x34_flags.b5 = src->x34_flags.b5;
+    dst->x34_flags.b6 = src->x34_flags.b6;
+
+    dst->facing_dir = src->facing_dir;
+    dst->x38 = src->x38;
+    dst->x3C = src->x3C;
+    dst->ledge_id_unk1 = src->ledge_id_unk1;
+    dst->ledge_id_unk0 = src->ledge_id_unk0;
+    dst->x48_joint_id = src->x48_joint_id;
+    dst->x60 = src->x60;
+
+    dst->x64_ecb = src->x64_ecb;
+    dst->x84_ecb = src->x84_ecb;
+    dst->xA4_ecbCurrCorrect = src->xA4_ecbCurrCorrect;
+    dst->xC4_ecb = src->xC4_ecb;
+    dst->xE4_ecb = src->xE4_ecb;
+
+    dst->x130_flags = src->x130_flags;
+    dst->env_flags = src->env_flags;
+    dst->prev_env_flags = src->prev_env_flags;
+    dst->x13C = src->x13C;
+    dst->x140 = src->x140;
+
+    dst->floor.index = src->floor.index;
+    dst->floor.flags = src->floor.flags;
+    dst->floor.normal = src->floor.normal;
+
+    dst->right_wall.index = src->right_wall.index;
+    dst->right_wall.flags = src->right_wall.flags;
+    dst->right_wall.normal = src->right_wall.normal;
+
+    dst->left_wall.index = src->left_wall.index;
+    dst->left_wall.flags = src->left_wall.flags;
+    dst->left_wall.normal = src->left_wall.normal;
+
+    dst->ceiling.index = src->ceiling.index;
+    dst->ceiling.flags = src->ceiling.flags;
+    dst->ceiling.normal = src->ceiling.normal;
+}
 
 bool mpColl_8004D024(Vec3* arg0)
 {

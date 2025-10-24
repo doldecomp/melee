@@ -1208,7 +1208,7 @@ void ft_800848DC(Fighter_GObj* gobj, HSD_GObjEvent cb)
 
 void ft_800849EC(Fighter* fp1, Fighter* fp2)
 {
-    mpColl_8004CC00(&fp1->coll_data, &fp2->coll_data, 2);
+    mpCopyCollData(&fp1->coll_data, &fp2->coll_data, 2);
 }
 
 int ft_80084A18(Fighter_GObj* gobj)

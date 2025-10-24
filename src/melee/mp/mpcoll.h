@@ -116,7 +116,7 @@
 /* 04CBC0 */ bool mpColl_IsOnPlatform(CollData*);
 /* 04CBE8 */ void mpColl_8004CBE8(CollData*);
 /* 04CBF4 */ void mpColl_8004CBF4(CollData*);
-/* 04CC00 */ void mpColl_8004CC00(CollData*, CollData*, int);
+/* 04CC00 */ void mpCopyCollData(CollData* src, CollData* dst, int);
 /* 04D024 */ bool mpColl_8004D024(Vec3*);
 /* 0528CC */ s32 mpColl_800528CC(s32);
 /* 052A98 */ s32 mpColl_80052A98(s32);
