@@ -3418,7 +3418,180 @@ bool mpColl_80049778_LeftWall(CollData* coll)
     return result;
 }
 
-/// #mpColl_80049EAC
+bool mpColl_80049EAC_LeftWall(CollData* coll)
+{
+    u32 flags;
+    Vec3 pos;
+    Vec3 normal;
+    int line_id;
+    int* arr = mpColl_80458810.left;
+    int i;
+
+    mpColl_804D6490_max_x = F32_MAX;
+    for (i = 0; i < mpColl_804D6488; arr++, i++) {
+        float top;
+        float mid;
+        float bot;
+        float f28;
+        float f27;
+        float f3;
+        float f4;
+        float f5;
+        float f6;
+        int j;
+        int wall_id;
+        float x;
+        PAD_STACK(0x38);
+
+        wall_id = *arr;
+
+        mpLib_80054584(wall_id, &pos);
+        if (pos.y < (coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y)) {
+            if (mpColl_804D6490_max_x > pos.x) {
+                int r3 = mpLib_8004E398_LeftWall(wall_id, &pos, NULL, &flags,
+                                                 &normal);
+                if (r3 != -1) {
+                    mpColl_804D6490_max_x = pos.x;
+                    mpColl_804D6494_line_id = r3;
+                    mpColl_804D6498_flags = flags;
+                    mpColl_80458810.normal = normal;
+                }
+            }
+
+            continue;
+        }
+
+        mpLib_800546E8(wall_id, &pos);
+        if (pos.y > (coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y)) {
+            if (mpColl_804D6490_max_x > pos.x) {
+                int r3 = mpLib_8004E398_LeftWall(wall_id, &pos, NULL, &flags,
+                                                 &normal);
+                if (r3 != -1) {
+                    mpColl_804D6490_max_x = pos.x;
+                    mpColl_804D6494_line_id = r3;
+                    mpColl_804D6498_flags = flags;
+                    mpColl_80458810.normal = normal;
+                }
+            }
+
+            continue;
+        }
+
+        pos.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+        pos.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+        line_id = mpLib_8004E398_LeftWall(wall_id, &pos, &x, &flags, &normal);
+        if (line_id != -1) {
+            if (mpColl_804D6490_max_x > coll->cur_pos.x + x) {
+                mpColl_804D6490_max_x = coll->cur_pos.x + x;
+                mpColl_804D6494_line_id = line_id;
+                mpColl_804D6498_flags = flags;
+                mpColl_80458810.normal = normal;
+            }
+        }
+
+        pos.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.right.x;
+        pos.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.right.y;
+        line_id = mpLib_8004E398_LeftWall(wall_id, &pos, &x, &flags, &normal);
+        if (line_id != -1) {
+            if (mpColl_804D6490_max_x > coll->cur_pos.x + x) {
+                mpColl_804D6490_max_x = coll->cur_pos.x + x;
+                mpColl_804D6494_line_id = line_id;
+                mpColl_804D6498_flags = flags;
+                mpColl_80458810.normal = normal;
+            }
+        }
+
+        pos.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+        pos.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+        line_id = mpLib_8004E398_LeftWall(wall_id, &pos, &x, &flags, &normal);
+        if (line_id != -1) {
+            if (mpColl_804D6490_max_x > coll->cur_pos.x + x) {
+                mpColl_804D6490_max_x = coll->cur_pos.x + x;
+                mpColl_804D6494_line_id = line_id;
+                mpColl_804D6498_flags = flags;
+                mpColl_80458810.normal = normal;
+            }
+        }
+
+        f6 = coll->xA4_ecbCurrCorrect.right.x;
+        f5 = coll->xA4_ecbCurrCorrect.top.y;
+        f4 = coll->xA4_ecbCurrCorrect.right.y;
+        f3 = coll->xA4_ecbCurrCorrect.bottom.y;
+        top = coll->cur_pos.y + f5;
+        mid = coll->cur_pos.y + f4;
+        bot = coll->cur_pos.y + f3;
+        f28 = f6 / (f4 - f3);
+        f27 = f6 / (f4 - f5);
+
+        for (j = wall_id; j != -1 && (mpLineGetKind(j) & LINE_FLAG_KIND) ==
+                                         CollLine_LeftWall;
+             j = mpLineGetPrev(j))
+        {
+            mpLineGetV0Pos(j, &pos);
+
+            if (bot <= pos.y && pos.y <= mid) {
+                x = f28 * (pos.y - bot) + coll->xA4_ecbCurrCorrect.bottom.x;
+            } else if (mid <= pos.y && pos.y <= top) {
+                x = f27 * (pos.y - top) + coll->xA4_ecbCurrCorrect.top.x;
+            } else if (pos.y < bot) {
+                break;
+            } else {
+                continue;
+            }
+
+            x = pos.x - x;
+            if (mpColl_804D6490_max_x > x) {
+                flags = mpLineGetFlags(j);
+                mpLineGetNormal(j, &normal);
+                mpColl_804D6490_max_x = x;
+                mpColl_804D6494_line_id = j;
+                mpColl_804D6498_flags = flags;
+                mpColl_80458810.normal = normal;
+            }
+        }
+
+        for (; wall_id != -1 &&
+               (mpLineGetKind(wall_id) & LINE_FLAG_KIND) == CollLine_LeftWall;
+             wall_id = mpLineGetNext(wall_id))
+        {
+            mpLineGetV1Pos(wall_id, &pos);
+
+            if (bot <= pos.y && pos.y <= mid) {
+                x = f28 * (pos.y - bot) + coll->xA4_ecbCurrCorrect.bottom.x;
+            } else if (mid <= pos.y && pos.y <= top) {
+                x = f27 * (pos.y - top) + coll->xA4_ecbCurrCorrect.top.x;
+            } else if (pos.y > top) {
+                break;
+            } else {
+                continue;
+            }
+
+            x = pos.x - x;
+            if (mpColl_804D6490_max_x > x) {
+                flags = mpLineGetFlags(wall_id);
+                mpLineGetNormal(wall_id, &normal);
+                mpColl_804D6490_max_x = x;
+                mpColl_804D6494_line_id = wall_id;
+                mpColl_804D6498_flags = flags;
+                mpColl_80458810.normal = normal;
+            }
+        }
+    }
+
+    line_id = mpColl_804D6494_line_id;
+    flags = mpColl_804D6498_flags;
+    normal = mpColl_80458810.normal;
+
+    if (coll->cur_pos.x > mpColl_804D6490_max_x) {
+        coll->cur_pos.x = mpColl_804D6490_max_x;
+        coll->right_wall.index = line_id;
+        coll->right_wall.flags = flags;
+        coll->right_wall.normal = normal;
+        return true;
+    }
+
+    return false;
+}
 
 /// #mpColl_8004A45C
 
@@ -3587,7 +3760,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
         temp_r27 = arg0->x34_flags.b6;
         var_r26 = 0;
         if (mpColl_80049778_LeftWall(arg0)) {
-            var_r26 = mpColl_80049EAC(arg0);
+            var_r26 = mpColl_80049EAC_LeftWall(arg0);
             if (var_r26) {
                 var_r28 |= 1;
             } else {
@@ -3607,7 +3780,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             arg0->x34_flags.b5 = true;
         }
         if (mpColl_80049778_LeftWall(arg0)) {
-            var_r26 |= mpColl_80049EAC(arg0);
+            var_r26 |= mpColl_80049EAC_LeftWall(arg0);
             if (var_r26) {
                 var_r28 |= 1;
             }
