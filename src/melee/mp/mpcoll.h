@@ -89,7 +89,7 @@
 /* 0491C8 */ bool mpColl_800491C8_RightWall(CollData*);
 /* 049778 */ bool mpColl_80049778_LeftWall(CollData*);
 /* 049EAC */ bool mpColl_80049EAC_LeftWall(CollData*);
-/* 04A45C */ bool mpColl_8004A45C(CollData*, int);
+/* 04A45C */ bool mpColl_8004A45C_Floor(CollData*, int line_id);
 /* 04A678 */ bool mpColl_8004A678(CollData*, int);
 /* 04A908 */ bool mpColl_8004A908(CollData*, int);
 /* 04AB80 */ bool mpColl_8004AB80(CollData*);

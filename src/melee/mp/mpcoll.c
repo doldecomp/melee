@@ -3593,7 +3593,74 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
     return false;
 }
 
-/// #mpColl_8004A45C
+bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
+{
+    u32 flags;
+    float y;
+    Vec3 normal;
+    Vec3 edge;
+    int floor_id;
+    bool result;
+    float vx;
+    float vy;
+    float ecb_side_x;
+    float ecb_side_y;
+
+    result = false;
+    if (!mpLib_80054ED8(line_id) || mpLineGetKind(line_id) != CollLine_Floor) {
+        return false;
+    }
+    mpLib_80054158(line_id, &edge);
+    if (coll->cur_pos.x <= edge.x) {
+        floor_id = mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
+        vx = edge.x + 1.0F;
+        vy = edge.y + 1.0F;
+        ecb_side_x = edge.x + coll->xA4_ecbCurrCorrect.right.x -
+                     coll->xA4_ecbCurrCorrect.bottom.x;
+        ecb_side_y = edge.y + coll->xA4_ecbCurrCorrect.right.y -
+                     coll->xA4_ecbCurrCorrect.bottom.y;
+        // make sure a wall hasn't stopped us
+        if (!mpLib_800501CC_LeftWall(vx, vy, ecb_side_x, ecb_side_y, NULL,
+                                     NULL, NULL, NULL, coll->x48_joint_id,
+                                     coll->x4C_joint_id))
+        {
+            result = true;
+            coll->env_flags |= Collide_RightEdge;
+        }
+    } else {
+        mpLib_80053FF4(line_id, &edge);
+        if (coll->cur_pos.x >= edge.x) {
+            floor_id =
+                mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
+            vx = edge.x - 1.0F;
+            vy = edge.y + 1.0F;
+            ecb_side_x = edge.x + coll->xA4_ecbCurrCorrect.left.x -
+                         coll->xA4_ecbCurrCorrect.bottom.x;
+            ecb_side_y = edge.y + coll->xA4_ecbCurrCorrect.left.y -
+                         coll->xA4_ecbCurrCorrect.bottom.y;
+            // make sure a wall hasn't stopped us
+            if (!mpLib_800509B8_RightWall(vx, vy, ecb_side_x, ecb_side_y, NULL,
+                                          NULL, NULL, NULL, coll->x48_joint_id,
+                                          coll->x4C_joint_id))
+            {
+                result = true;
+                coll->env_flags |= Collide_LeftEdge;
+            }
+        }
+    }
+
+    if (result) {
+        coll->cur_pos.x = edge.x - coll->xA4_ecbCurrCorrect.bottom.x;
+        coll->cur_pos.y = edge.y - coll->xA4_ecbCurrCorrect.bottom.y;
+        coll->cur_pos.z = edge.z;
+        coll->floor.index = floor_id;
+        coll->floor.flags = flags;
+        coll->floor.normal = normal;
+        return true;
+    }
+
+    return false;
+}
 
 bool mpColl_8004A678(CollData* coll, int line_id)
 {
@@ -3836,7 +3903,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
                         var_r23 = 1;
                     }
                 } else if (arg1 & 2) {
-                    if (mpColl_8004A45C(arg0, temp_r22)) {
+                    if (mpColl_8004A45C_Floor(arg0, temp_r22)) {
                         arg0->x34_flags.b5 = true;
                         var_r29 = 1;
                         var_r25_2 = 1;
