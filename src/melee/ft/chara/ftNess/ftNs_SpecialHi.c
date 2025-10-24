@@ -536,7 +536,7 @@ void ftNs_SpecialHi_Enter(
 
     Fighter* fp = getFighter(gobj);
     ftNessAttributes* ness_attr = fp->dat_attrs;
-    if ((fp->coll_data.floor.unk & 256) == 0) {
+    if ((fp->coll_data.floor.flags & LINE_FLAG_PLATFORM) == 0) {
         float temp_f3 = 5.0f;
         float temp_f1;
         float temp_f2;

@@ -327,7 +327,7 @@ static inline bool PointInsideColl(CollData* cd, Vec3* point, float offset)
 
     top = cd->xA4_ecbCurrCorrect.top.y;
     bottom = cd->xA4_ecbCurrCorrect.bottom.y;
-    topn = cd->cur_topn.y;
+    topn = cd->cur_pos.y;
     height = top - bottom;
     comp = 0.5f * height + offset;
     y = 0.5f * (top + bottom) + topn - point->y;
@@ -337,7 +337,7 @@ static inline bool PointInsideColl(CollData* cd, Vec3* point, float offset)
 
     right = cd->xA4_ecbCurrCorrect.right.x;
     left = cd->xA4_ecbCurrCorrect.left.x;
-    topn = cd->cur_topn.x;
+    topn = cd->cur_pos.x;
     width = right - left;
     comp = 0.5f * width + offset;
     x = 0.5f * (left + right) + topn - point->x;

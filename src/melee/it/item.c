@@ -1434,10 +1434,10 @@ void Item_802697D4(HSD_GObj* gobj)
     it_80273484(gobj);
     if (item_data->ground_or_air == 0) {
         if ((item_data->xDCE_flag.b3 != 0) && (it_8026D604(gobj) != 0)) {
-            mpLib_800567C0(item_data->xC30, &item_data->pos,
+            mpGetSpeed(item_data->xC30, &item_data->pos,
                            &item_data->x64_vec_unk2);
         } else {
-            mpLib_800567C0(item_data->x378_itemColl.floor.index,
+            mpGetSpeed(item_data->x378_itemColl.floor.index,
                            &item_data->pos, &item_data->x64_vec_unk2);
         }
     }

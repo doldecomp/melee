@@ -239,7 +239,9 @@ void ftCo_800A08F0(Fighter* fp)
 {
     ftCo_800B46B8(fp, CpuCmd_SetLstickX, 0);
     ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
-    if (fp->motion_id == ftCo_MS_SquatRv || fp->motion_id == ftCo_MS_Squat || fp->motion_id == ftCo_MS_SquatWait) {
+    if (fp->motion_id == ftCo_MS_SquatRv || fp->motion_id == ftCo_MS_Squat ||
+        fp->motion_id == ftCo_MS_SquatWait)
+    {
         ftCo_800B46B8(fp, CpuCmd_WaitFor, 1);
         ftCo_800B463C(fp, CpuCmd_Done);
         return;
@@ -428,15 +430,16 @@ bool ftCo_800A0F00(Fighter_GObj* gobj)
     return false;
 }
 
-bool ftCo_800A0FB0(Vec3* arg0, int* arg1, int* arg2, Vec3* arg3, int arg4,
-                   int arg5, int arg6, float arg7, float arg8, float arg9,
-                   float arg10, float arg11)
+bool ftCo_800A0FB0(Vec3* vec_out, int* line_id_out, u32* flags_out,
+                   Vec3* normal_out, int arg4, int arg5, int arg6, float arg7,
+                   float arg8, float arg9, float arg10, float arg11)
 {
-    *arg1 = -1;
+    *line_id_out = -1;
     {
-        int ret = mpLib_8004F008(arg0, arg1, arg2, arg3, arg7, arg8, arg9,
-                                 arg10, arg11, arg4, arg5, arg6, 0, 0);
-        if (ret && ftCo_800A1B38(*arg1)) {
+        int ret = mpLib_8004F008_Floor(arg7, arg8, arg9, arg10, arg11, vec_out,
+                                       line_id_out, flags_out, normal_out,
+                                       arg4, arg5, arg6, NULL, NULL);
+        if (ret && ftCo_800A1B38(*line_id_out)) {
             return false;
         }
         return ret;
@@ -460,7 +463,7 @@ void ftCo_800A101C(Fighter* arg0, int arg1, int arg2, int arg3)
     int i;
 
     int sp34;
-    int sp30;
+    u32 sp30;
 
     PAD_STACK(0xC);
 
@@ -693,7 +696,7 @@ f32 ftCo_800A1AB4(Fighter* fp0, Fighter* fp1)
 bool ftCo_800A1B38(enum_t arg0)
 {
     if (grBigBlue_801EF844(arg0) || grInishie1_801FCAAC(arg0) ||
-            grCorneria_801E2D90(arg0) || grVenom_80206D10(arg0))
+        grCorneria_801E2D90(arg0) || grVenom_80206D10(arg0))
     {
         return true;
     }
@@ -709,16 +712,16 @@ bool ftCo_800A1BA8(Fighter* fp)
     {
         Vec3 coll_vec;
         Vec3 sp14;
-        UNK_T sp10;
-        UNK_T spC;
+        int sp10;
+        u32 spC;
         if (fp->facing_dir > 0.0) {
-            return mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y,
-                                  other_fp->cur_pos.x, other_fp->cur_pos.y,
-                                  &coll_vec, &sp10, &spC, &sp14, -1, -1);
+            return mpLib_800509B8_RightWall(
+                fp->cur_pos.x, fp->cur_pos.y, other_fp->cur_pos.x,
+                other_fp->cur_pos.y, &coll_vec, &sp10, &spC, &sp14, -1, -1);
         }
-        return mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y,
-                              other_fp->cur_pos.x, other_fp->cur_pos.y,
-                              &coll_vec, &sp10, &spC, &sp14, -1, -1);
+        return mpLib_800501CC_LeftWall(
+            fp->cur_pos.x, fp->cur_pos.y, other_fp->cur_pos.x,
+            other_fp->cur_pos.y, &coll_vec, &sp10, &spC, &sp14, -1, -1);
     }
 }
 
@@ -867,7 +870,7 @@ void ftCo_800A20A0(Fighter* fp)
         Fighter* other_fp = data->x44;
 
         if (ftCo_800A1AB4(fp, other_fp) <
-                2.0f * M2C_FIELD(Fighter_804D64FC, float**, 0x20)[fp->kind])
+            2.0f * M2C_FIELD(Fighter_804D64FC, float**, 0x20)[fp->kind])
         {
             data->xF8_b6 = true;
         } else {
@@ -969,15 +972,15 @@ block_13:
     if (temp_cr0_eq != 0) {
         goto block_21;
         goto block_37;
-block_15:
+    block_15:
         return mpIsland_8005AC8C(arg0);
-block_16:
-    if (ftCo_800A1F98(0x5A, arg0->x14.y) != 0) {
-        return 1;
-    }
-    if (ftCo_800A1F98(0x5A, arg0->x8.y) != 0) {
-        return 1;
-    }
+    block_16:
+        if (ftCo_800A1F98(0x5A, arg0->x14.y) != 0) {
+            return 1;
+        }
+        if (ftCo_800A1F98(0x5A, arg0->x8.y) != 0) {
+            return 1;
+        }
         return 0;
     }
 block_21:
@@ -1228,16 +1231,16 @@ bool ftCo_800A3234(Fighter* fp)
 
     {
         int sp18;
-        int sp14;
-        float topn_x = fp->coll_data.prev_topn.x;
-        float topn_y = fp->coll_data.prev_topn.y;
+        u32 sp14;
+        float topn_x = fp->coll_data.prev_pos.x;
+        float topn_y = fp->coll_data.prev_pos.y;
         float bottom_x = fp->coll_data.xA4_ecbCurrCorrect.bottom.x;
         float bottom_y = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
-        float y = fp->coll_data.prev_topn.y + bottom_y;
+        float y = fp->coll_data.prev_pos.y + bottom_y;
         if (ftCo_800A0FB0(&sp34, &sp18, &sp14, &sp28, -1, -1, -1,
                           topn_x + bottom_x, topn_y + bottom_y,
-                          fp->coll_data.cur_topn.x + bottom_x,
-                          fp->coll_data.cur_topn.y + bottom_y, 0.0f))
+                          fp->coll_data.cur_pos.x + bottom_x,
+                          fp->coll_data.cur_pos.y + bottom_y, 0.0f))
         {
             return false;
         }
@@ -1277,7 +1280,7 @@ bool ftCo_800A3498(Fighter* fp)
             return true;
         }
     } else if (temp_r4->x54.y >
-               temp_r4->x568 + (fp->coll_data.cur_topn.y +
+               temp_r4->x568 + (fp->coll_data.cur_pos.y +
                                 fp->coll_data.xA4_ecbCurrCorrect.bottom.y))
     {
         return true;
@@ -1513,7 +1516,6 @@ Fighter* ftCo_800A50D4(Fighter* fp)
     }
     closest_fp = NULL;
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
-
         // Ignore self
         if (fp->gobj == cur) {
             continue;
@@ -1601,7 +1603,9 @@ Fighter* ftCo_800A53DC(Fighter* fp)
     }
     var_r28 = NULL;
     if (temp_r31->xFA_b34) {
-        for (var_r30 = HSD_GObj_Entities->fighters; var_r30 != NULL; var_r30 = var_r30->next) {
+        for (var_r30 = HSD_GObj_Entities->fighters; var_r30 != NULL;
+             var_r30 = var_r30->next)
+        {
             if (fp->gobj == var_r30) {
                 continue;
             }
@@ -1646,7 +1650,9 @@ Fighter* ftCo_800A53DC(Fighter* fp)
             return var_r28;
         }
     }
-    for (var_r30_2 = HSD_GObj_Entities->fighters; var_r30_2 != NULL; var_r30_2 = var_r30_2->next) {
+    for (var_r30_2 = HSD_GObj_Entities->fighters; var_r30_2 != NULL;
+         var_r30_2 = var_r30_2->next)
+    {
         if (fp->gobj == var_r30_2) {
             continue;
         }
@@ -1743,8 +1749,7 @@ bool ftCo_800A5980(Fighter* fp)
     {
         return true;
     }
-    if (fp->motion_id == ftCo_MS_Furafura ||
-        fp->motion_id == ftCo_MS_Catch ||
+    if (fp->motion_id == ftCo_MS_Furafura || fp->motion_id == ftCo_MS_Catch ||
         fp->motion_id == ftCo_MS_CatchPull ||
         fp->motion_id == ftCo_MS_CatchAttack)
     {
@@ -1957,7 +1962,6 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
     }
     closest_ip = NULL;
     for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-
         /// @todo stupid stack padding hack
         cur_ip = GET_ITEM(cur);
         cur_ip = GET_ITEM(cur);
@@ -2139,7 +2143,8 @@ void ftCo_800A92CC(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
     if (ABS(fp->cur_pos.x - data->x54.x) > 60.0) {
-        // If we're far in the horizontal direction, up-B diagonally, then to the side.
+        // If we're far in the horizontal direction, up-B diagonally, then to
+        // the side.
 
         // Start the up-B
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0x7F);
@@ -2251,7 +2256,8 @@ static void ftCo_800A963C(Fighter* fp, bool unused)
 void ftCo_800A96B8(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    float sum = fp->coll_data.cur_topn.y + fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
+    float sum =
+        fp->coll_data.cur_pos.y + fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
     bool tmp = fp->x1A88.x54.y > sum ? true : false;
 
     PAD_STACK(0x10);
@@ -2342,7 +2348,7 @@ void ftCo_800A9904(Fighter* fp)
     Vec3 sp4C;
     Vec3 sp40;
     int sp3C;
-    int sp38;
+    u32 sp38;
 
     PAD_STACK(0x24);
 
@@ -2391,9 +2397,9 @@ void ftCo_800A9904(Fighter* fp)
         }
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (mpLib_8004F8A4(&sp4C, &sp3C, &sp38, &sp40, -1, -1,
-                              fp->cur_pos.x, fp->cur_pos.y, temp_r31->x54.x,
-                              temp_r31->x54.y) != 0)
+    } else if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y,
+                                      temp_r31->x54.x, temp_r31->x54.y, &sp4C,
+                                      &sp3C, &sp38, &sp40, -1, -1))
     {
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x81);
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
@@ -2567,7 +2573,8 @@ void ftCo_800A9CB4(Fighter* fp)
  */
 void ftCo_800AA320(Fighter* fp, int* stick, int* clamp)
 {
-    // Nana moves the stick more aggressively so she can follow more effectively
+    // Nana moves the stick more aggressively so she can follow more
+    // effectively
     if (fp->kind == FTKIND_NANA) {
         *stick = 0x40;
         *clamp = 0x7F;
@@ -2756,7 +2763,7 @@ void ftCo_800AA844(Fighter* fp)
     Vec3 sp28;
     Vec3 sp1C;
     int sp18;
-    int sp14;
+    u32 sp14;
 
     data = &fp->x1A88;
     if (isInTeeter(fp)) {
@@ -2772,7 +2779,7 @@ void ftCo_800AA844(Fighter* fp)
     ftCo_800AA320(fp, &sp38, &sp34);
     if (ftCo_800A28D0(fp, 1.0F)) {
         if (ftCo_800A1CA8(fp) && fp->coll_data.floor.index != -1 &&
-            (mpLib_80054CEC(fp->coll_data.floor.index) & 0x100) &&
+            (mpLineGetFlags(fp->coll_data.floor.index) & LINE_FLAG_PLATFORM) &&
             ftCo_800A0FB0(&sp28, &sp18, &sp14, &sp1C, -1, -1, -1,
                           fp->cur_pos.x, fp->cur_pos.y - 10.0F, fp->cur_pos.x,
                           fp->cur_pos.y - 1000.0F, 0.0F))
@@ -2851,7 +2858,7 @@ void ftCo_800AACD0(Fighter* fp)
     }
     ftCo_800AA320(fp, &stick, &clamp);
     if (fp->coll_data.floor.index != -1 &&
-        (mpLib_80054CEC(fp->coll_data.floor.index) & 0x100))
+        (mpLineGetFlags(fp->coll_data.floor.index) & LINE_FLAG_PLATFORM))
     {
         ftCo_800A08F0(fp);
         return;
@@ -2895,7 +2902,7 @@ bool ftCo_800AAF48(Fighter* fp)
     Vec3 sp38;
     Vec3 sp2C;
     int sp28;
-    int sp24;
+    u32 sp24;
     PAD_STACK(0xC);
 
     if (temp_r29->x60 != 0) {
@@ -2915,13 +2922,15 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                               fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y))
+            if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y, sp44.x,
+                                       sp44.y, &sp38, &sp28, &sp24, &sp2C, -1,
+                                       -1))
             {
                 continue;
             }
-            if (mpLib_800509B8(fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y,
-                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
+            if (mpLib_800509B8_RightWall(fp->cur_pos.x, fp->cur_pos.y, sp44.x,
+                                         sp44.y, &sp38, &sp28, &sp24, &sp2C,
+                                         -1, -1))
             {
                 continue;
             }
@@ -2948,13 +2957,15 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4(&sp38, &sp28, &sp24, &sp2C, -1, -1,
-                               fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y))
+            if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y, spC.x,
+                                       spC.y, &sp38, &sp28, &sp24, &sp2C, -1,
+                                       -1))
             {
                 continue;
             }
-            if (mpLib_800501CC(fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y,
-                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
+            if (mpLib_800501CC_LeftWall(fp->cur_pos.x, fp->cur_pos.y, spC.x,
+                                        spC.y, &sp38, &sp28, &sp24, &sp2C, -1,
+                                        -1))
             {
                 continue;
             }
@@ -3002,7 +3013,7 @@ void ftCo_800AB224(Fighter* fp)
 
     u8 _[0x48];
 
-    int sp40;
+    u32 sp40;
     int sp3C;
     Vec3 sp30;
     Vec3 sp24;
@@ -3075,10 +3086,10 @@ void ftCo_800AB224(Fighter* fp)
             var_f31 = lb_8000D008(temp_f1, var_f2);
         }
         if (var_f31 > 0.6108652334660292) {
-            if (mpLib_8004F8A4(&sp24, &sp3C, &sp40, &sp30, -1, -1,
-                               fp->coll_data.cur_topn.x,
-                               fp->coll_data.cur_topn.y,
-                               fp->coll_data.cur_topn.x, fp->x1A88.x54.y))
+            if (mpLib_8004F8A4_Ceiling(
+                    fp->coll_data.cur_pos.x, fp->coll_data.cur_pos.y,
+                    fp->coll_data.cur_pos.x, fp->x1A88.x54.y, &sp24, &sp3C,
+                    &sp40, &sp30, -1, -1))
             {
                 var_r0_6 = 1;
             } else {
@@ -3142,10 +3153,13 @@ void ftCo_800ABA34(Fighter* fp)
         ftCo_800A05F4(fp);
         return;
     }
-    if ((fp->kind == FTKIND_ZELDA || fp->kind == FTKIND_SEAK) && data->xF8_b5) {
+    if ((fp->kind == FTKIND_ZELDA || fp->kind == FTKIND_SEAK) && data->xF8_b5)
+    {
         ftCo_800B4880(fp, 38);
         data->xF8_b5 = false;
-    } else if (ftCo_800A5CE0(fp) == NULL && fp->motion_id == ftCo_MS_RebirthWait) {
+    } else if (ftCo_800A5CE0(fp) == NULL &&
+               fp->motion_id == ftCo_MS_RebirthWait)
+    {
         ftCo_800A08F0(fp);
     } else if (fp->ground_or_air == GA_Air) {
         ftCo_800A9CB4(fp);
@@ -4329,7 +4343,9 @@ bool ftCo_800B0CA8(Fighter* fp0, Fighter* fp1)
             var_r0_2 = 1;
         } else if (temp_r5 == ftCo_MS_CaptureWaitLw) {
             var_r0_2 = 1;
-        } else if (temp_r5 >= ftCo_MS_ShoulderedWait && temp_r5 <= ftCo_MS_ShoulderedTurn) {
+        } else if (temp_r5 >= ftCo_MS_ShoulderedWait &&
+                   temp_r5 <= ftCo_MS_ShoulderedTurn)
+        {
             var_r0_2 = 1;
         } else {
             var_r0_2 = 0;
@@ -4337,26 +4353,32 @@ bool ftCo_800B0CA8(Fighter* fp0, Fighter* fp1)
         if (var_r0_2 != 0) {
             goto jmp_9c;
         } else {
-            if (temp_r5  == ftCo_MS_Ottotto || temp_r5 == ftCo_MS_OttottoWait) {
+            if (temp_r5 == ftCo_MS_Ottotto || temp_r5 == ftCo_MS_OttottoWait) {
                 var_r0_3 = 1;
             } else {
                 var_r0_3 = 0;
             }
             if (var_r0_3 != 0) {
                 /// @todo fakematched control flow
-jmp_9c:
+            jmp_9c:
                 return false;
             }
-            if (temp_r5 >= ftCo_MS_CaptureKirby && temp_r5 <= ftCo_MS_CaptureWaitKirby) {
+            if (temp_r5 >= ftCo_MS_CaptureKirby &&
+                temp_r5 <= ftCo_MS_CaptureWaitKirby)
+            {
                 return false;
             }
             if (temp_r5 >= ftCo_MS_Rebirth && temp_r5 <= ftCo_MS_RebirthWait) {
                 return false;
             }
-            if (temp_r5 >= ftCo_MS_WarpStarJump && temp_r5 <= ftCo_MS_WarpStarFall) {
+            if (temp_r5 >= ftCo_MS_WarpStarJump &&
+                temp_r5 <= ftCo_MS_WarpStarFall)
+            {
                 return false;
             }
-            if (temp_r5 >= ftCo_MS_ItemParasolFall && temp_r5 <= ftCo_MS_ItemParasolDamageFall) {
+            if (temp_r5 >= ftCo_MS_ItemParasolFall &&
+                temp_r5 <= ftCo_MS_ItemParasolDamageFall)
+            {
                 return false;
             }
             temp_r5_2 = fp0->item_gobj;

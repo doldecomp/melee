@@ -7,6 +7,29 @@
 
 #include <baselib/memory.h>
 
+/* 3B73E8 */ mpIsland_Palette mpIsland_TerrainPalette = { {
+    { mp_Terrain_Rock, { 0x80, 0x60, 0x60, 0xFF } },
+    { mp_Terrain_Grass, { 0x40, 0xFF, 0x40, 0xFF } },
+    { mp_Terrain_Dirt, { 0xC0, 0x60, 0x60, 0xFF } },
+    { mp_Terrain_Wood, { 0xC0, 0x80, 0x40, 0xFF } },
+    { mp_Terrain_LightMetal, { 0x40, 0x40, 0x40, 0xFF } },
+    { mp_Terrain_HeavyMetal, { 0x60, 0x40, 0x40, 0xFF } },
+    { mp_Terrain_Paper, { 0xC0, 0xC0, 0x60, 0xFF } },
+    { mp_Terrain_Goop, { 0xFF, 0xFF, 0x60, 0xFF } },
+    { mp_Terrain_Birdo, { 0xC0, 0xFF, 0xC0, 0xFF } },
+    { mp_Terrain_Water, { 0x40, 0x40, 0xFF, 0xFF } },
+    { mp_Terrain_Unk11, { 0x40, 0xFF, 0xFF, 0xFF } },
+    { mp_Terrain_UFO, { 0xC0, 0xC0, 0xFF, 0xFF } },
+    { mp_Terrain_Turtle, { 0xC0, 0xFF, 0x40, 0xFF } },
+    { mp_Terrain_Snow, { 0xFF, 0xFF, 0xFF, 0xFF } },
+    { mp_Terrain_Ice, { 0xC0, 0xC0, 0xFF, 0xFF } },
+    { mp_Terrain_GnW, { 0xC0, 0xC0, 0xC0, 0xFF } },
+    { mp_Terrain_Unk17, { 0x0C, 0x0C, 0x0C, 0xFF } },
+    { mp_Terrain_Checkered, { 0xFF, 0xFF, 0xC0, 0xFF } },
+    { mp_Terrain_Unk19, { 0xFF, 0x05, 0x05, 0xFF } },
+    { -1, { 0x00, 0x00, 0x00, 0x00 } },
+} };
+
 /* 458E88 */ struct mpIsland_80458E88_t mpIsland_80458E88;
 
 void mpIsland_8005A6F8(void)
@@ -24,9 +47,9 @@ void mpIsland_8005A6F8(void)
 
 void mpIsland_8005A728(void)
 {
-    short* v0;            // r27
-    mp_UnkStruct2* v1;    // r28
-    mpLib_804D64B8_t* v2; // r3
+    short* v0;    // r27
+    CollLine* v1; // r28
+    CollVtx* v2;  // r3
     // unk *test;
     int v3;                // r29
     unsigned char* result; // r3
@@ -63,8 +86,8 @@ void mpIsland_8005A728(void)
     unsigned char v33[1524]; // [sp+18h] [-648h] BYREF
 
     v0 = (short*) mpLib_8004D164();
-    v1 = mpLib_8004D174();
-    v2 = mpLib_8004D16C();
+    v1 = mpGetGroundCollLine();
+    v2 = mpGetGroundCollVtx();
     v23 = &mpIsland_80458E88.x4;
     v24_2 = &mpIsland_80458E88.x8.x;
     v22_2 = &mpIsland_80458E88.x8.y;
@@ -131,7 +154,7 @@ void mpIsland_8005A728(void)
             //     *(float*) (v2 + 0x18 * *(unsigned short*) (v11 + 6) + 0xC);
             // *(float*) (v11 + 0x1C) = v8;
             // --v5;
-            // *(short*) (v11 + 0x28) = mpLib_80056B6C(v7++);
+            // *(short*) (v11 + 0x28) = mpJointFromLine(v7++);
             // v7--;
 
             v18 = v5;
@@ -207,7 +230,7 @@ void mpIsland_8005A728(void)
             v25->x0[6] = *(float*) (v2 + 0x18 * v25->x0[1] + 0xC);
             v25->x0[7] = 0.0F;
             --v20;
-            v25->x20[2] = mpLib_80056B6C(v21++);
+            v25->x20[2] = mpJointFromLine(v21++);
             v32 = v20;
             result = &v33[v21];
             v23 += 8;
@@ -232,7 +255,7 @@ void mpIsland_8005A728(void)
 mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 {
     if (mpLib_80054ED8(surface_idx)) {
-        mp_UnkStruct2* v2 = mpLib_8004D174();
+        CollLine* v2 = mpGetGroundCollLine();
         bool done;
         mp_UnkStruct0* cur;
 
@@ -248,9 +271,9 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
                 }
 
                 done = true;
-                j_next = v2[j].x0->x6;
+                j_next = v2[j].x0->next_id0;
 
-                if (j_next != -1 && (v2[j_next].x4 & 1)) {
+                if (j_next != -1 && (v2[j_next].flags & CollLine_Floor)) {
                     done = false;
                 }
 
@@ -266,8 +289,8 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 {
     int i;
-    if (mpLib_8004F008(NULL, &i, 0, 0, arg0->x, arg0->y, arg0->x,
-                       arg0->y + arg1, 0.0F, -1, -1, -1, 0, 0))
+    if (mpLib_8004F008_Floor(arg0->x, arg0->y, arg0->x, arg0->y + arg1, 0.0F,
+                             NULL, &i, NULL, NULL, -1, -1, -1, NULL, NULL))
     {
         return mpIsland_8005AB54(i);
     }
@@ -276,7 +299,7 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 
 bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 {
-    mpLib_804D64C0_t* temp_r3 = &mpLib_8004D17C()[arg0->x28];
+    CollJoint* temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
     if (temp_r3->flags & 0x700) {
         return true;
     }
@@ -289,17 +312,17 @@ bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 {
     int var_r31;
-    mp_UnkStruct2* var_r30;
+    CollLine* var_r30;
     int temp_r29;
     bool var_r28;
     bool var_r27;
     int i;
 
-    mpLib_804D64C0_t* temp_r3;
-    temp_r3 = &mpLib_8004D17C()[arg0->x28];
-    var_r31 = temp_r3->x4->x0;
-    var_r30 = &mpLib_8004D174()[var_r31];
-    temp_r29 = temp_r3->x4->x2;
+    CollJoint* temp_r3;
+    temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
+    var_r31 = temp_r3->coll_info->floor_start;
+    var_r30 = &mpGetGroundCollLine()[var_r31];
+    temp_r29 = temp_r3->coll_info->floor_count;
 
     var_r28 = true;
     var_r27 = true;
@@ -315,9 +338,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
     }
 
     for (i = 0; i < temp_r29 && var_r28 && var_r27; var_r31++) {
-        if (var_r28 && var_r30->x0->x0 == arg0->x4) {
+        if (var_r28 && var_r30->x0->v0_idx == arg0->x4) {
             mpLib_80054158(var_r31, arg1);
-        } else if (var_r27 && var_r30->x0->x2 == arg0->x6) {
+        } else if (var_r27 && var_r30->x0->v1_idx == arg0->x6) {
             mpLib_80053FF4(var_r31, arg2);
         }
         i++;

@@ -12,6 +12,9 @@
 #include "lb/forward.h"
 
 #include "lb/lb_00F9.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
@@ -216,14 +219,14 @@ void grTMewtwo_802224B0(Ground_GObj* gobj) {}
 
 static inline DynamicsDesc* inlineA0(int arg0)
 {
-    int temp = mpLib_80054C6C(arg0);
-    if (temp == (1 << 0)) {
+    int temp = mpLineGetKind(arg0);
+    if (temp == CollLine_Floor) {
         return grTMewtwo_804D6B08->x0;
-    } else if (temp == (1 << 1)) {
+    } else if (temp == CollLine_Ceiling) {
         return grTMewtwo_804D6B08->x4;
-    } else if (temp == (1 << 2)) {
+    } else if (temp == CollLine_RightWall) {
         return grTMewtwo_804D6B08->x8;
-    } else if (temp == (1 << 3)) {
+    } else if (temp == CollLine_LeftWall) {
         return grTMewtwo_804D6B08->xC;
     } else {
         return NULL;
@@ -232,14 +235,14 @@ static inline DynamicsDesc* inlineA0(int arg0)
 
 static inline DynamicsDesc* inlineA1(int arg0)
 {
-    int temp = mpLib_80054C6C(arg0);
-    if (temp == (1 << 0)) {
+    int temp = mpLineGetKind(arg0);
+    if (temp == CollLine_Floor) {
         return grTMewtwo_804D6B08->x10;
-    } else if (temp == (1 << 1)) {
+    } else if (temp == CollLine_Ceiling) {
         return grTMewtwo_804D6B08->x14;
-    } else if (temp == (1 << 2)) {
+    } else if (temp == CollLine_RightWall) {
         return grTMewtwo_804D6B08->x18;
-    } else if (temp == (1 << 3)) {
+    } else if (temp == CollLine_LeftWall) {
         return grTMewtwo_804D6B08->x1C;
     } else {
         return NULL;
@@ -249,7 +252,7 @@ static inline DynamicsDesc* inlineA1(int arg0)
 DynamicsDesc* grTMewtwo_802224B4(enum_t arg0)
 {
     if (arg0 != -1) {
-        int temp = mpLib_80056B6C(arg0);
+        int temp = mpJointFromLine(arg0);
         if (temp != -1) {
             if (temp == 0) {
                 return inlineA0(arg0);

@@ -599,9 +599,9 @@ typedef struct ftData_x44_t {
     s16 unk8;
     s16 unkA;
     float unkC;
-    float unk10;
-    float unk14;
-    float unk18;
+    float ledge_snap_x;
+    float ledge_snap_y;
+    float ledge_snap_height;
 } ftData_x44_t;
 
 struct ftData {

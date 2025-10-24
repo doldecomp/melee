@@ -32,7 +32,7 @@ bool ftCo_80099F1C(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (fp->input.lstick.y <= -p_ftCommonData->x464 &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->x468 &&
-        mpColl_8004CBC0(&fp->coll_data))
+        mpColl_IsOnPlatform(&fp->coll_data))
     {
         return true;
     }
@@ -70,7 +70,7 @@ bool ftCo_8009A134(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
     CollData* coll = &fp->coll_data;
-    if (mpColl_8004CBC0(coll)) {
+    if (mpColl_IsOnPlatform(coll)) {
         mpColl_8004CBE8(coll);
         return true;
     }

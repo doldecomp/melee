@@ -6640,12 +6640,12 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
     if (coll2 != NULL) {
         if (mpLib_80054ED8(coll2->floor.index)) {
             int floor_index;
-            temp_r3_2 = mpLib_8005199C(&sp44, -1, -1);
+            temp_r3_2 = mpLib_8005199C_Floor(&sp44, -1, -1);
             if ((temp_r3_2 != -1) && (floor_index = coll2->floor.index,
                                       mpLib_80054F68(temp_r3_2, floor_index)))
             {
                 coll1->floor.index = temp_r3_2;
-                mpLib_8004DD90(temp_r3_2, &sp44, &sp40, 0, NULL);
+                mpLib_8004DD90_Floor(temp_r3_2, &sp44, &sp40, 0, NULL);
                 // if (sp40 >= (f32) ((u8) it_804D6D28 + 0xF0)) {
                 // if (sp40 >= (f32) it_804D6D28->filler[12]) {
                 if (sp40 >= it_804D6D28->xF0) {
@@ -6667,12 +6667,12 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
             sp34.y = sp1C.y + temp_f31;
             sp34.z = sp1C.z + it_804DC73C;
             // sp34.z = sp1C.z + 0.0f;
-            coll1->prev_topn = sp34;
+            coll1->prev_pos = sp34;
             mpColl_80043670(coll1);
-            coll1->cur_topn = sp44;
+            coll1->cur_pos = sp44;
             if (mpColl_800471F8(coll1)) {
                 it_802762B0(item1);
-                item1->pos = coll1->cur_topn;
+                item1->pos = coll1->cur_pos;
                 return;
             }
             it_802762BC(item1);
@@ -6692,7 +6692,7 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
     item = GET_ITEM((HSD_GObj*) item_gobj);
     sp24 = item->xBFC;
     it_802762BC(item);
-    item->x378_itemColl.cur_topn = item->pos;
+    item->x378_itemColl.cur_pos = item->pos;
     if (arg_gobj != NULL) {
         switch (it_80272D40((Item_GObj*) arg_gobj)) { /* irregular */
         case 0:
@@ -6788,7 +6788,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     item1 = item_gobj->user_data;
     attr = item1->xCC_item_attr;
     coll = &item1->x378_itemColl;
-    item1->x378_itemColl.cur_topn = item1->pos;
+    item1->x378_itemColl.cur_pos = item1->pos;
     mpColl_80041EE4(coll);
     kind = item1->kind;
     if (kind < It_Kind_L_Gun_Ray) {
@@ -6836,7 +6836,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
         it_80276174(item_gobj, &spawn->pos);
         return;
     }
-    coll->prev_topn = spawn->pos;
+    coll->prev_pos = spawn->pos;
     mpColl_80043670(coll);
 }
 
@@ -6844,10 +6844,10 @@ void it_80276100(Item_GObj* item_gobj, Vec3* pos)
 {
     Item* item = GET_ITEM(item_gobj);
     CollData* coll = &item->x378_itemColl;
-    coll->prev_topn = *pos;
+    coll->prev_pos = *pos;
     mpColl_80043670(coll);
     mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
 }
 
 void it_80276174(Item_GObj* item_gobj, Vec3* pos)
@@ -6858,7 +6858,7 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     Item* item;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    item->x378_itemColl.prev_topn = *pos;
+    item->x378_itemColl.prev_pos = *pos;
     mpColl_80043670(&item->x378_itemColl);
     if (mpLib_80051EC8(&temp_pos, NULL, NULL, NULL, 1, -1, -1, item->pos.x,
                        item->pos.y, item->pos.x,
@@ -6874,8 +6874,8 @@ void it_80276214(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->x378_itemColl.prev_topn = item->x378_itemColl.cur_topn;
-    item->x378_itemColl.cur_topn = item->pos;
+    item->x378_itemColl.prev_pos = item->x378_itemColl.cur_pos;
+    item->x378_itemColl.cur_pos = item->pos;
     if (item->xDCE_flag.b7 == 1) {
         it_80276278(item_gobj);
     }
@@ -7150,7 +7150,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
         sp80.z = 0.0f;
         sp80.x = 0.0f;
         sp80.y = 1.0f;
-        mpLib_80054DFC(item2->xC30, &sp74);
+        mpLineGetNormal(item2->xC30, &sp74);
         angle1 = lbVector_Angle(&sp74, &sp80);
         if (sp74.x < 0.0f) {
             dir1 = -1;
@@ -7165,7 +7165,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
         sp64.z = 0.0f;
         sp64.x = 0.0f;
         sp64.y = 1.0f;
-        mpLib_80054DFC(item3->xC30, &sp58);
+        mpLineGetNormal(item3->xC30, &sp58);
         angle2 = lbVector_Angle(&sp58, &sp64);
         if (sp58.x < 0.0f) {
             dir2 = -1;
@@ -7179,7 +7179,7 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
         sp48.z = 0.0f;
         sp48.x = 0.0f;
         sp48.y = 1.0f;
-        mpLib_80054DFC(item4->xC30, &sp3C);
+        mpLineGetNormal(item4->xC30, &sp3C);
         angle3 = lbVector_Angle(&sp3C, &sp48);
         if (sp3C.x < 0.0f) {
             dir3 = -1;
@@ -7252,7 +7252,7 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
     }
     if (dir1 != 0) {
         sp34 = item->xC1C;
-        if (coll->x36 == 1) {
+        if (coll->facing_dir == 1) {
             pos_x1 = coll->xA4_ecbCurrCorrect.right.x - 1.0f;
             if (pos_x1 < 0.0f) {
                 pos_x1 = -pos_x1;

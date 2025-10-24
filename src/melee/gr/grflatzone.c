@@ -655,7 +655,7 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
                 if (gobj != NULL) {
                     Item* ip = GET_ITEM(gobj);
                     if (ip != NULL) {
-                        ip->x378_itemColl.x4C = 0x32;
+                        ip->x378_itemColl.x4C_joint_id = 0x32;
                     }
                 }
             }
