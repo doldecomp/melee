@@ -1,4 +1,5 @@
 #include "mnmain.h"
+#include "mn/forward.h"
 
 #include <math.h>
 #include <trigf.h>
@@ -63,7 +64,7 @@ static u16 mn_803EAE68[] = {
 static u16 mn_803EAE7C[] = {
     0x2, 0x3, 0x4, 0x9, 0xB, 0xC, 0xD, 0x0,
 };
-static Vec3 mn_803EAE8C[0x22][3] = {
+static AnimLoopSettings mn_803EAE8C[0x22][3] = {
     {
         { 0, 99, 0 },
         { 0, 0, 0 },
@@ -236,81 +237,81 @@ static Vec3 mn_803EAE8C[0x22][3] = {
     },
 };
 
-static Vec3 mn_803EB354 = { 0, 799, 0 };
-static Vec3 mn_803EB360[2] = {
+static AnimLoopSettings mn_803EB354 = { 0, 799, 0 };
+static AnimLoopSettings mn_803EB360[2] = {
     { 0, 49, 0 },
     { 50, 99, 50 },
 };
-static Vec3 mn_803EB378[2] = {
+static AnimLoopSettings mn_803EB378[2] = {
     { 0, 49, -0.1 },
     { 50, 250, 50 },
 };
-static Vec3 mn_803EB390 = { 0, 10, -0.1 };
-static Vec3 mn_803EB39C = { 320, 339, -0.1 };
+static AnimLoopSettings mn_803EB390 = { 0, 10, -0.1 };
+static AnimLoopSettings mn_803EB39C = { 320, 339, -0.1 };
 
-static Vec3 mn_803EB3A8 = { 380, 399, -0.1 };
-static Vec3 mn_803EB3B4 = { 360, 379, -0.1 };
-static Vec3 mn_803EB3C0 = { 340, 359, -0.1 };
+static AnimLoopSettings mn_803EB3A8 = { 380, 399, -0.1 };
+static AnimLoopSettings mn_803EB3B4 = { 360, 379, -0.1 };
+static AnimLoopSettings mn_803EB3C0 = { 340, 359, -0.1 };
 static float mn_803EB3CC[] = {
     280, 299, -0.1, 300, 319, -0.1, 320, 339, -0.1, 3950, 3999, 3970,
 };
 
-static Vec3 mn_803EB3FC[] = { { 0, 49, 20 },
+static AnimLoopSettings mn_803EB3FC[] = { { 0, 49, 20 },
                               { 50, 99, 70 },
                               { 100, 149, 120 },
                               { 150, 199, 170 },
                               { 200, 249, 220 } };
 
-static Vec3 mn_803EB438 = { 3550, 3599, 3570 };
+static AnimLoopSettings mn_803EB438 = { 3550, 3599, 3570 };
 
-static Vec3 mn_803EB444[] = {
+static AnimLoopSettings mn_803EB444[] = {
     { 400, 449, 420 }, { 450, 499, 470 }, { 500, 549, 520 },
     { 550, 599, 570 }, { 600, 649, 620 },
 };
 
-static Vec3 mn_803EB480 = { 3500, 3549, 3520 };
+static AnimLoopSettings mn_803EB480 = { 3500, 3549, 3520 };
 
-static Vec3 mn_803EB48C[] = {
+static AnimLoopSettings mn_803EB48C[] = {
     { 700, 749, 720 }, { 750, 799, 770 }, { 800, 849, 820 },
     { 850, 899, 870 }, { 900, 949, 920 },
 };
 
-static Vec3 mn_803EB4C8[] = {
+static AnimLoopSettings mn_803EB4C8[] = {
     { 1000, 1049, 1020 },
     { 1050, 1099, 1070 },
     { 1100, 1149, 1120 },
     { 1150, 1199, 1170 },
 };
 
-static Vec3 mn_803EB4F8[] = {
+static AnimLoopSettings mn_803EB4F8[] = {
     { 1300, 1349, 1320 }, { 1350, 1399, 1370 }, { 1400, 1449, 1420 },
     { 1450, 1499, 1470 }, { 1500, 1549, 1520 }, { 1550, 1599, 1570 },
 };
 
-static Vec3 mn_803EB540[] = {
+static AnimLoopSettings mn_803EB540[] = {
     { 1600, 1649, 1620 }, { 1650, 1699, 1670 }, { 1700, 1749, 1720 },
     { 1750, 1799, 1770 }, { 1800, 1849, 1820 },
 };
 
-static Vec3 mn_803EB57C[] = {
+static AnimLoopSettings mn_803EB57C[] = {
     { 2000, 2049, 2020 },
     { 2050, 2099, 2070 },
     { 2100, 2149, 2120 },
 };
 
-static Vec3 mn_803EB5A0[] = {
+static AnimLoopSettings mn_803EB5A0[] = {
     { 3150, 3199, 3170 },
     { 3200, 3249, 3220 },
     { 3250, 3299, 3270 },
 };
 
-static Vec3 mn_803EB5C4[] = {
+static AnimLoopSettings mn_803EB5C4[] = {
     { 2250, 2299, 2270 },
     { 2300, 2349, 2320 },
     { 2350, 2399, 2370 },
 };
 
-static Vec3 mn_803EB5E8[] = {
+static AnimLoopSettings mn_803EB5E8[] = {
     { 2550, 2599, 2570 }, { 2600, 2649, 2620 }, { 2650, 2699, 2670 },
     { 2700, 2749, 2720 }, { 2750, 2799, 2770 }, { 2800, 2849, 2820 },
     { 2850, 2899, 2870 }, { 2900, 2949, 2920 }, { 2900, 2949, 2920 },
@@ -341,7 +342,7 @@ static GXColor mn_804D4B60 = { 0x9B, 0x41, 0xFF, 0xFF };
 GXColor mn_804D4B64 = { 0xFF, 0xC8, 0x00, 0xFF };
 
 struct mn_803EB6B0_t {
-    Vec3* x0;
+    AnimLoopSettings* x0;
     float x4;
     u16* x8;
     u8 xC;
@@ -848,7 +849,7 @@ void fn_80229BF4(HSD_GObj* gobj)
 
     HSD_JObj* sp20;
     HSD_JObj* sp1C;
-    Vec3 sp10;
+    AnimLoopSettings sp10;
 
     void* temp_r4;
     struct {
@@ -866,10 +867,10 @@ void fn_80229BF4(HSD_GObj* gobj)
         temp_r30->unk1 = temp_r30->unk0;
         temp_r30->unk0 = mn_804A04F0.x0;
         if (mn_804A04F0.x11 != 0) {
-            HSD_JObjReqAnimAll(sp1C, mn_803EAE8C[temp_r30->unk0][0].x);
+            HSD_JObjReqAnimAll(sp1C, mn_803EAE8C[temp_r30->unk0][0].start_frame);
             temp_r30->unk3 = 0;
         } else {
-            HSD_JObjReqAnimAll(sp1C, mn_803EAE8C[temp_r30->unk1][1].x);
+            HSD_JObjReqAnimAll(sp1C, mn_803EAE8C[temp_r30->unk1][1].start_frame);
             temp_r30->unk3 = 1;
         }
     }
@@ -885,9 +886,9 @@ void fn_80229BF4(HSD_GObj* gobj)
         } else {
             sp10 = mn_803EAE8C[temp_r30->unk1][1];
         }
-        if (temp_f1 >= sp10.y) {
+        if (temp_f1 >= sp10.end_frame) {
             temp_r30->unk3 = 2;
-            HSD_JObjReqAnimAll(sp1C, mn_803EAE8C[temp_r30->unk0][2].x);
+            HSD_JObjReqAnimAll(sp1C, mn_803EAE8C[temp_r30->unk0][2].start_frame);
         }
         HSD_JObjAnimAll(sp1C);
         break;
@@ -914,12 +915,12 @@ HSD_GObj* mn_80229DC0(void)
                        MenMainPanel_Top.shapeanim_joint);
     lb_80011E24(temp_r3, &spC, 4, -1);
     lb_80011E24(temp_r3, &sp8, 0x29, -1);
-    HSD_JObjReqAnimAll(spC, mn_803EB354.x);
+    HSD_JObjReqAnimAll(spC, mn_803EB354.start_frame);
     HSD_JObjAnimAll(spC);
     if (mn_804A04F0.x0 == 0) {
-        HSD_JObjReqAnimAll(sp8, mn_803EAE8C[mn_804A04F0.x0][0].x);
+        HSD_JObjReqAnimAll(sp8, mn_803EAE8C[mn_804A04F0.x0][0].start_frame);
     } else {
-        HSD_JObjReqAnimAll(sp8, mn_803EAE8C[mn_804A04F0.x0][2].x);
+        HSD_JObjReqAnimAll(sp8, mn_803EAE8C[mn_804A04F0.x0][2].start_frame);
     }
     HSD_JObjAnimAll(sp8);
     temp_r3_2 = HSD_MemAlloc(4);
@@ -974,12 +975,12 @@ void mn_80229F60(HSD_GObj* arg0, HSD_JObj* arg1, int arg2)
     mn_8022F3D8(jobj, 0x13, TOBJ_MASK);
     HSD_JObjAnim(jobj);
     HSD_JObjReqAnimAll(sp54[0],
-                       mn_803EB360[1].x + (mn_8022F298(sp54[0]) - mn_803EB360[0].x));
+                       mn_803EB360[1].start_frame + (mn_8022F298(sp54[0]) - mn_803EB360[0].start_frame));
     HSD_JObjAnimAll(sp54[0]);
     HSD_JObjReqAnimAll(sp54[2],
-                       mn_803EB378[1].x + (mn_8022F298(sp54[2]) - mn_803EB378[0].x));
+                       mn_803EB378[1].start_frame + (mn_8022F298(sp54[2]) - mn_803EB378[0].start_frame));
     HSD_JObjAnimAll(sp54[2]);
-    HSD_JObjReqAnimAll(sp54[3], mn_803EB390.x);
+    HSD_JObjReqAnimAll(sp54[3], mn_803EB390.start_frame);
     HSD_JObjAnimAll(sp54[3]);
     HSD_JObjClearFlagsAll(sp54[3], JOBJ_HIDDEN);
     HSD_JObjClearFlagsAll(sp54[4], JOBJ_HIDDEN);
@@ -1021,11 +1022,11 @@ void mn_8022A440(HSD_GObj* arg0, HSD_JObj* arg1, s32 arg2)
     mn_8022F3D8(r29, 0x12, TOBJ_MASK);
     mn_8022F3D8(r29, 0x13, TOBJ_MASK);
     HSD_JObjAnim(r29);
-    f = (mn_8022F298(sp24[0]) - mn_803EB360[1].x);
-    HSD_JObjReqAnimAll(sp24[0], f + mn_803EB360[0].x);
+    f = (mn_8022F298(sp24[0]) - mn_803EB360[1].start_frame);
+    HSD_JObjReqAnimAll(sp24[0], f + mn_803EB360[0].start_frame);
     HSD_JObjAnimAll(sp24[0]);
     mn_8022F298(sp24[2]);
-    HSD_JObjReqAnimAll(sp24[2], mn_803EB378[0].x);
+    HSD_JObjReqAnimAll(sp24[2], mn_803EB378[0].start_frame);
     HSD_JObjAnimAll(sp24[2]);
     HSD_JObjSetFlagsAll(sp24[4], JOBJ_HIDDEN);
 }
@@ -1082,7 +1083,7 @@ void mn_8022A5D0(HSD_GObj* arg0, int arg1)
             temp_r22_2 = (arg1 == var_r26) * 0xC;
             mn_8022ED6C(sp84[0], &mn_803EB360[var_r26 == arg1]);
             mn_8022ED6C(sp84[2], &mn_803EB378[var_r26 == arg1]);
-            if (mn_8022ED6C(sp84[3], &mn_803EB390) >= mn_803EB390.y) {
+            if (mn_8022ED6C(sp84[3], &mn_803EB390) >= mn_803EB390.end_frame) {
                 HSD_JObjSetFlagsAll(sp84[3], 0x10);
             }
             if (arg1 == var_r26) {
@@ -1130,9 +1131,9 @@ void mn_8022ADD8(HSD_GObj* arg0, int arg1)
         u8 pad[0x3C - 0x3];
         HSD_JObj* x3C;
     }* temp_r30;
-    Vec3* var_r29;
+    AnimLoopSettings* var_r29;
     HSD_JObj* temp_r28;
-    Vec3* tmp;
+    AnimLoopSettings* tmp;
     u8 temp_r0;
 
     temp_r30 = arg0->user_data;
@@ -1160,10 +1161,10 @@ void mn_8022ADD8(HSD_GObj* arg0, int arg1)
                 var_r29 = &tmp[temp_r30->x1];
             }
             temp_f1 = mn_8022F298(temp_r28);
-            if ((u8) arg1 != 0 || !(var_r29->x <= temp_f1) ||
-                !(temp_f1 <= var_r29->y))
+            if ((u8) arg1 != 0 || !(var_r29->start_frame <= temp_f1) ||
+                !(temp_f1 <= var_r29->end_frame))
             {
-                HSD_JObjReqAnimAll(temp_r28, var_r29->x);
+                HSD_JObjReqAnimAll(temp_r28, var_r29->start_frame);
             }
             mn_8022ED6C(temp_r28, var_r29);
         }
@@ -1180,7 +1181,7 @@ void fn_8022AF10(HSD_GObj* arg0)
         HSD_JObj* x10;
     }* temp_r31;
     HSD_JObj* temp_r30;
-    Vec3* var_r29;
+    AnimLoopSettings* var_r29;
 
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->x10;
@@ -1192,7 +1193,7 @@ void fn_8022AF10(HSD_GObj* arg0)
         var_r29 = &mn_803EB3C0;
         break;
     }
-    if (mn_8022F298(temp_r30) >= var_r29->y) {
+    if (mn_8022F298(temp_r30) >= var_r29->end_frame) {
         switch (temp_r31->x2) {
         case 2:
         case 4:
@@ -1215,7 +1216,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
         HSD_JObj* x10;
     }* temp_r30_3;
     HSD_JObj* var_r0;
-    Vec3* var_r28;
+    AnimLoopSettings* var_r28;
     struct {
         u8 x0;
         u8 x1;
@@ -1267,7 +1268,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
             break;
         }
         temp_r30 = temp_r27->x10;
-        HSD_JObjReqAnim(temp_r30, var_r28->x);
+        HSD_JObjReqAnim(temp_r30, var_r28->start_frame);
         HSD_JObjAnim(temp_r30);
         if (temp_r27->x2 == 5 || temp_r27->x2 <= 1 || temp_r27->x2 == 3) {
             var_r26 = 1;
@@ -1294,7 +1295,7 @@ void fn_8022AFEC(HSD_GObj* arg0)
             var_r28 = &mn_803EB3C0;
             break;
         }
-        if (mn_8022F298(temp_r30) >= var_r28->y) {
+        if (mn_8022F298(temp_r30) >= var_r28->end_frame) {
             switch (temp_r27->x2) {
             case 1:
             case 3:
@@ -1392,16 +1393,16 @@ HSD_GObj* mn_8022B3A0(u8 state)
     int idx;
     u8 var_r17;
     u8 var_r16_2;
-    Vec3* var_r4_3;
+    AnimLoopSettings* var_r4_3;
     u8 temp_r21;
     u8 temp_r22;
     int temp_r22_2;
     struct mn_80229A7C_t* menu_data;
     int i;
     HSD_JObj* jobj;
-    Vec3* tmp;
+    AnimLoopSettings* tmp;
     int var_r17_int;
-    Vec3* r31;
+    AnimLoopSettings* r31;
 
     StaticModelDesc* top = &MenMainConTop_Top;
 
@@ -1445,10 +1446,10 @@ HSD_GObj* mn_8022B3A0(u8 state)
     if (menu_data->x2 != 0) {
         switch (menu_data->x2) {
         case 1:
-            HSD_JObjReqAnim(menu_data->x4[3], mn_803EB39C.x);
+            HSD_JObjReqAnim(menu_data->x4[3], mn_803EB39C.start_frame);
             break;
         case 3:
-            HSD_JObjReqAnim(menu_data->x4[3], mn_803EB3B4.x);
+            HSD_JObjReqAnim(menu_data->x4[3], mn_803EB3B4.start_frame);
             break;
         }
         HSD_JObjAnim(menu_data->x4[3]);
@@ -1469,7 +1470,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
                                top->shapeanim_joint);
             lb_8001204C(cursor_jobj, sp2C, mn_803EAE7C, 7);
             tmp = &mn_803EB378[temp_r25 == i];
-            HSD_JObjReqAnim(sp2C[0], mn_803EB360[0].x);
+            HSD_JObjReqAnim(sp2C[0], mn_803EB360[0].start_frame);
             HSD_JObjAnim(sp2C[0]);
             jobj = sp2C[1];
             HSD_JObjReqAnimAll(jobj, temp_r25 == i);
@@ -1485,13 +1486,13 @@ HSD_GObj* mn_8022B3A0(u8 state)
             mn_8022F3D8(jobj, 0x13, TOBJ_MASK);
             HSD_JObjAnim(jobj);
             if (i == temp_r25) {
-                HSD_JObjReqAnimAll(sp2C[2], tmp->x);
+                HSD_JObjReqAnimAll(sp2C[2], tmp->start_frame);
             } else {
-                HSD_JObjReqAnimAll(sp2C[2], tmp->y);
+                HSD_JObjReqAnimAll(sp2C[2], tmp->end_frame);
             }
             HSD_JObjAnimAll(sp2C[2]);
             if (i == temp_r25) {
-                HSD_JObjReqAnim(sp2C[3], mn_803EB390.x);
+                HSD_JObjReqAnim(sp2C[3], mn_803EB390.start_frame);
             } else {
                 HSD_JObjSetFlagsAll(sp2C[3], JOBJ_HIDDEN);
             }
@@ -1514,7 +1515,7 @@ HSD_GObj* mn_8022B3A0(u8 state)
     } else {
         var_r4_3 = &r31[menu_data->x1];
     }
-    HSD_JObjReqAnimAll(temp_r16_2, var_r4_3->x);
+    HSD_JObjReqAnimAll(temp_r16_2, var_r4_3->start_frame);
     HSD_JObjAnimAll(temp_r16_2);
 
     mn_80229A7C(menu_data, menu_data->x0, menu_data->x1);
@@ -2920,22 +2921,22 @@ float mn_8022EC18(HSD_JObj* arg0, float* arg1, HSD_TypeMask arg2)
     return var_f31;
 }
 
-float mn_8022ED6C(HSD_JObj* jobj, Vec3* arg1)
+float mn_8022ED6C(HSD_JObj* jobj, AnimLoopSettings* arg1)
 {
     float temp_f0;
     float temp_f1;
 
     temp_f1 = mn_8022F298(jobj);
-    if (!(arg1->x <= temp_f1 && temp_f1 <= arg1->y)) {
-        HSD_JObjReqAnimAll(jobj, *(volatile f32*) &arg1->x);
+    if (!(arg1->start_frame <= temp_f1 && temp_f1 <= arg1->end_frame)) {
+        HSD_JObjReqAnimAll(jobj, *(volatile f32*) &arg1->start_frame);
     }
-    if (arg1->z == -0.1f) {
+    if (arg1->loop_frame == -0.1f) {
         temp_f1 = mn_8022F298(jobj);
-        temp_f0 = arg1->y;
+        temp_f0 = arg1->end_frame;
         if (temp_f1 < temp_f0) {
             HSD_JObjAnimAll(jobj);
             temp_f1 = mn_8022F298(jobj);
-            temp_f0 = arg1->y;
+            temp_f0 = arg1->end_frame;
             if (temp_f1 > temp_f0) {
                 temp_f1 = temp_f0;
                 HSD_JObjReqAnimAll(jobj, temp_f1);
@@ -2945,9 +2946,9 @@ float mn_8022ED6C(HSD_JObj* jobj, Vec3* arg1)
     } else {
         HSD_JObjAnimAll(jobj);
         temp_f1 = mn_8022F298(jobj);
-        temp_f0 = arg1->y;
+        temp_f0 = arg1->end_frame;
         if (temp_f1 >= temp_f0) {
-            temp_f1 = arg1->z + (temp_f1 - temp_f0);
+            temp_f1 = arg1->loop_frame + (temp_f1 - temp_f0);
             HSD_JObjReqAnimAll(jobj, temp_f1);
             HSD_JObjAnimAll(jobj);
         }
@@ -2955,7 +2956,7 @@ float mn_8022ED6C(HSD_JObj* jobj, Vec3* arg1)
     return temp_f1;
 }
 
-float mn_8022EE84(HSD_JObj* arg0, Vec3* arg1, enum _HSD_TypeMask arg2)
+float mn_8022EE84(HSD_JObj* arg0, AnimLoopSettings* arg1, enum _HSD_TypeMask arg2)
 {
     f32 temp_f0;
     f32 temp_f0_2;
@@ -2963,16 +2964,16 @@ float mn_8022EE84(HSD_JObj* arg0, Vec3* arg1, enum _HSD_TypeMask arg2)
     f32 var_f31;
 
     temp_f1 = mn_8022F298(arg0);
-    if (!(arg1->x <= temp_f1) || !(temp_f1 <= arg1->y)) {
-        HSD_JObjReqAnim(arg0, *(volatile float*) &arg1->x);
+    if (!(arg1->start_frame <= temp_f1) || !(temp_f1 <= arg1->end_frame)) {
+        HSD_JObjReqAnim(arg0, *(volatile float*) &arg1->start_frame);
         mn_8022F3D8(arg0, 0xFF, arg2);
     }
-    if (arg1->z == -0.1f) {
+    if (arg1->loop_frame == -0.1f) {
         var_f31 = mn_8022F298(arg0);
-        if (arg1->y != var_f31) {
+        if (arg1->end_frame != var_f31) {
             HSD_JObjAnim(arg0);
             var_f31 = mn_8022F298(arg0);
-            temp_f0 = arg1->y;
+            temp_f0 = arg1->end_frame;
             if (var_f31 > temp_f0) {
                 var_f31 = temp_f0;
                 HSD_JObjReqAnim(arg0, var_f31);
@@ -2983,9 +2984,9 @@ float mn_8022EE84(HSD_JObj* arg0, Vec3* arg1, enum _HSD_TypeMask arg2)
     } else {
         HSD_JObjAnim(arg0);
         var_f31 = mn_8022F298(arg0);
-        temp_f0_2 = arg1->y;
+        temp_f0_2 = arg1->end_frame;
         if (var_f31 >= temp_f0_2) {
-            var_f31 = arg1->z + (var_f31 - temp_f0_2);
+            var_f31 = arg1->loop_frame + (var_f31 - temp_f0_2);
             HSD_JObjReqAnim(arg0, var_f31);
             mn_8022F3D8(arg0, 0xFFU, arg2);
             HSD_JObjAnim(arg0);
@@ -2994,23 +2995,27 @@ float mn_8022EE84(HSD_JObj* arg0, Vec3* arg1, enum _HSD_TypeMask arg2)
     return var_f31;
 }
 
-float mn_8022EFD8(HSD_JObj* arg0, Vec3* arg1)
+/// @brief updates a jobjs looping animation.
+// if the end frame is -0.1f, the animation will stop after reaching the end frame.
+/// @param arg0 HSD_JObj
+/// @param arg1 AnimLoopSettings
+float mn_8022EFD8(HSD_JObj* arg0, AnimLoopSettings* arg1)
 {
     float temp_f0_2;
     float temp_f1;
     float var_f31;
 
     temp_f1 = mn_8022F298(arg0);
-    if (!(arg1->x <= temp_f1) || !(temp_f1 <= arg1->y)) {
-        HSD_JObjReqAnim(arg0, *(volatile float*) &arg1->x);
+    if (!(arg1->start_frame <= temp_f1) || !(temp_f1 <= arg1->end_frame)) {
+        HSD_JObjReqAnim(arg0, *(volatile float*) &arg1->start_frame);
     }
-    if (arg1->z == -0.1f) {
+    if (arg1->loop_frame == -0.1f) {
         var_f31 = mn_8022F298(arg0);
-        if (arg1->y != var_f31) {
+        if (arg1->end_frame != var_f31) {
             HSD_JObjAnim(arg0);
             var_f31 = mn_8022F298(arg0);
-            if (var_f31 > arg1->y) {
-                var_f31 = arg1->y;
+            if (var_f31 > arg1->end_frame) {
+                var_f31 = arg1->end_frame;
                 HSD_JObjReqAnim(arg0, var_f31);
                 HSD_JObjAnim(arg0);
             }
@@ -3018,9 +3023,9 @@ float mn_8022EFD8(HSD_JObj* arg0, Vec3* arg1)
     } else {
         HSD_JObjAnim(arg0);
         var_f31 = mn_8022F298(arg0);
-        temp_f0_2 = arg1->y;
+        temp_f0_2 = arg1->end_frame;
         if (var_f31 >= temp_f0_2) {
-            var_f31 = arg1->z + (var_f31 - temp_f0_2);
+            var_f31 = arg1->loop_frame + (var_f31 - temp_f0_2);
             HSD_JObjReqAnim(arg0, var_f31);
             HSD_JObjAnim(arg0);
         }
@@ -3081,6 +3086,7 @@ void mn_8022F268(void)
     gmMainLib_8015CC34()->unk_x0 = 1;
 }
 
+/// @brief returns the current frame of the jobj
 float mn_8022F298(HSD_JObj* jobj)
 {
     HSD_AObj* aobj;

@@ -1299,39 +1299,18 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
 
 void efAsync_8006729C(int index)
 {
-#if 1
-    char* DAT_filename;
-
-    DAT_filename = efAsync_803C025C[index].ef_DAT_file;
-    if (index < 50) {
-        if (index < 0) {
-            return;
-        }
-        if (DAT_filename != NULL) {
-            lbDvd_800178E8(3, DAT_filename, 4, 4, 0, 1U, 4, 4U, index);
-        }
+    struct _struct_efAsync_803C025C_0xC *entry = &efAsync_803C025C[index];
+    if (index >= 50 || index < 0) {
+        return;
     }
-#else
-    struct _struct_efAsync_803C025C_0xC data;
-    char* DAT_filename;
 
-    data = efAsync_803C025C[index];
-    if (index < 50) {
-        if (index < 0) {
-            return;
-        }
-        DAT_filename = data.ef_DAT_file;
-        if (DAT_filename != NULL) {
-            // if ((bool) DAT_filename) {
-            lbDvd_800178E8(3, DAT_filename, 4, 4, 0, 1U, 4, 4U,
-                           index); // Should this function have 1 less arg?
-        }
+    if (entry->ef_DAT_file == NULL) {
+        return;
     }
-#endif
+
+    lbDvd_800178E8(3, entry->ef_DAT_file, 4, 4, 0, 1U, 4, 4U, index);
 }
 
-// void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, s32 index)
-// {
 void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, int index)
 {
     char* effDateTable_name;

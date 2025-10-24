@@ -74,7 +74,7 @@ void mnInfo_80251F04(HSD_GObj* gobj, u32 idx, u32 arg2)
 
 /// #fn_80251FE4
 
-static Vec3 mnInfo_803EFC08[0x12] = {
+static AnimLoopSettings mnInfo_803EFC08[0x12] = {
     { 0.0f, 199.0f, 0.0f },
     { 1.8e-42f, 1.802e-42f, 1.803e-42f },
     { 1.805e-42f, 2.1092525e-16f, 1.379729e31f },
