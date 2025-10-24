@@ -4302,7 +4302,83 @@ bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
     return false;
 }
 
-/// #fn_8004C534
+bool fn_8004C534(CollData* coll, u32 flags)
+{
+    bool result;
+
+    result = false;
+    if (mpColl_8004BDD4_LeftWall(coll)) {
+        mpColl_80049EAC_LeftWall(coll);
+        coll->x34_flags.b5 = true;
+    }
+
+    if (mpColl_8004B894_RightWall(coll)) {
+        mpColl_800491C8_RightWall(coll);
+        coll->x34_flags.b5 = true;
+    }
+
+    if (mpColl_8004B6D8(coll)) {
+        int left_id;
+        int right_id;
+        bool r0;
+        int r30 = mpLib_80052A98_Ceiling(coll->ceiling.index);
+        float f1 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+        float f2 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+        float f3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.right.x;
+        float f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.right.y;
+        if (mpLib_800501CC_LeftWall(f1, f2, f3, f4, NULL, &left_id, NULL, NULL,
+                                    coll->x48_joint_id, coll->x4C_joint_id) &&
+            left_id != r30)
+        {
+            r0 = true;
+        } else {
+            r0 = false;
+        }
+
+        if (r0) {
+            mpColl_800439FC(coll);
+        }
+
+        r30 = mpLib_800528CC_Ceiling(coll->ceiling.index);
+        f1 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+        f2 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+        f3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.left.x;
+        f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.left.y;
+        if (mpLib_800509B8_RightWall(f1, f2, f3, f4, NULL, &right_id, NULL,
+                                     NULL, coll->x48_joint_id,
+                                     coll->x4C_joint_id) &&
+            right_id != r30)
+        {
+            r0 = true;
+        } else {
+            r0 = false;
+        }
+
+        if (r0) {
+            mpColl_80043ADC(coll);
+        }
+        result = true;
+    } else if (mpLib_80054ED8(coll->ceiling.index)) {
+        int ceiling_id = coll->ceiling.index;
+        if (!(flags & 1)) {
+            if (flags & 2) {
+                if (mpColl_8004C328_Ceiling(coll, ceiling_id)) {
+                    result = true;
+                } else {
+                    coll->x34_flags.b5 = true;
+                }
+            } else {
+                coll->x34_flags.b5 = true;
+            }
+        }
+    }
+
+    if (result) {
+        coll->env_flags |= Collide_CeilingPush;
+    }
+
+    return result;
+}
 
 bool mpColl_8004C750(CollData* coll)
 {
