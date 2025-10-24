@@ -101,7 +101,7 @@
 /* 04B4B0 */ bool mpColl_8004B4B0(CollData*);
 /* 04B5C4 */ bool mpColl_8004B5C4(CollData*);
 /* 04B6D8 */ bool mpColl_8004B6D8(CollData*);
-/* 04B894 */ UNK_RET mpColl_8004B894(UNK_PARAMS);
+/* 04B894 */ bool mpColl_8004B894_RightWall(CollData*);
 /* 04BDD4 */ UNK_RET mpColl_8004BDD4(UNK_PARAMS);
 /* 04C328 */ UNK_RET mpColl_8004C328(UNK_PARAMS);
 /* 04C534 */ bool fn_8004C534(CollData*, u32);
