@@ -4221,7 +4221,74 @@ bool mpColl_8004BDD4_LeftWall(CollData* coll)
     return result;
 }
 
-/// #mpColl_8004C328
+bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
+{
+    u32 flags;
+    float y;
+    Vec3 normal;
+    Vec3 edge;
+    int ceiling_id;
+    bool result;
+    float edge_x;
+    float edge_y;
+    float ecb_side_x;
+    float ecb_side_y;
+
+    result = false;
+    if (!mpLib_80054ED8(line_id) || mpLineGetKind(line_id) != CollLine_Ceiling)
+    {
+        return false;
+    }
+    mpLib_80054420(line_id, &edge);
+    if (coll->cur_pos.x <= edge.x) {
+        ceiling_id =
+            mpLib_8004E090_Ceiling(line_id, &edge, &y, &flags, &normal);
+        edge_x = edge.x + 1.0F;
+        edge_y = edge.y - 1.0F;
+        ecb_side_x = edge.x + coll->xA4_ecbCurrCorrect.right.x -
+                     coll->xA4_ecbCurrCorrect.top.x;
+        ecb_side_y = edge.y + coll->xA4_ecbCurrCorrect.right.y -
+                     coll->xA4_ecbCurrCorrect.top.y;
+        // make sure a wall hasn't stopped us
+        if (!mpLib_800501CC_LeftWall(edge_x, edge_y, ecb_side_x, ecb_side_y,
+                                     NULL, NULL, NULL, NULL,
+                                     coll->x48_joint_id, coll->x4C_joint_id))
+        {
+            result = true;
+            coll->env_flags |= Collide_RightEdge;
+        }
+    } else {
+        mpLib_800542BC(line_id, &edge);
+        if (coll->cur_pos.x >= edge.x) {
+            ceiling_id =
+                mpLib_8004E090_Ceiling(line_id, &edge, &y, &flags, &normal);
+            edge_x = edge.x - 1.0F;
+            edge_y = edge.y - 1.0F;
+            ecb_side_x = edge.x + coll->xA4_ecbCurrCorrect.left.x -
+                         coll->xA4_ecbCurrCorrect.top.x;
+            ecb_side_y = edge.y + coll->xA4_ecbCurrCorrect.left.y -
+                         coll->xA4_ecbCurrCorrect.top.y;
+            // make sure a wall hasn't stopped us
+            if (!mpLib_800509B8_RightWall(
+                    edge_x, edge_y, ecb_side_x, ecb_side_y, NULL, NULL, NULL,
+                    NULL, coll->x48_joint_id, coll->x4C_joint_id))
+            {
+                result = true;
+                coll->env_flags |= Collide_LeftEdge;
+            }
+        }
+    }
+
+    if (result) {
+        coll->cur_pos = edge;
+        coll->ceiling.index = ceiling_id;
+        coll->ceiling.flags = flags;
+        coll->ceiling.normal = normal;
+        return true;
+    }
+
+    return false;
+}
 
 /// #fn_8004C534
 
