@@ -997,68 +997,80 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
 }
 
 // 800439FC https://decomp.me/scratch/T1yAJ
-void mpColl_800439FC(CollData* arg0)
+void mpColl_800439FC(CollData* coll)
 {
     Vec3 sp10;
-    float spC;
-    float temp_f3;
-    float temp_f4;
-    float var_f31;
+    float y;
+    float f1;
+    float f2;
+    float f3;
+    float f4;
+    float f31;
 
-    var_f31 = arg0->xA4_ecbCurrCorrect.right.x;
-    temp_f3 = arg0->cur_pos.x + var_f31;
-    temp_f4 = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.right.y;
-    if (var_f31 < 0.0F) {
-        var_f31 = -var_f31;
+    f31 = coll->xA4_ecbCurrCorrect.right.x;
+    f3 = coll->cur_pos.x + f31;
+    f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.right.y;
+    if (f31 < 0.0F) {
+        f31 = -f31;
     }
-    if (mpLib_800501CC_LeftWall(
-            (arg0->ceiling.normal.y * var_f31) + temp_f3,
-            -((arg0->ceiling.normal.x * var_f31) - temp_f4), temp_f3, temp_f4,
-            &arg0->x140, NULL, NULL, NULL, arg0->x48_joint_id,
-            arg0->x4C_joint_id))
+    f1 = (coll->ceiling.normal.y * f31) + f3;
+    f2 = -((coll->ceiling.normal.x * f31) - f4);
+    if (!mpLib_800501CC_LeftWall(f1, f2, f3, f4, &coll->x140, NULL, NULL, NULL,
+                                 coll->x48_joint_id, coll->x4C_joint_id))
     {
-        sp10.x = arg0->x140.x - var_f31;
-        sp10.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (mpLib_8004E090_Ceiling(arg0->ceiling.index, &sp10, &spC,
-                                   &arg0->ceiling.flags,
-                                   &arg0->ceiling.normal) != -1)
-        {
-            arg0->cur_pos.y += spC;
-            arg0->cur_pos.x = sp10.x;
-        }
+        return;
     }
+
+    sp10.x = coll->x140.x - f31;
+    sp10.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    if (mpLib_8004E090_Ceiling(coll->ceiling.index, &sp10, &y,
+                               &coll->ceiling.flags,
+                               &coll->ceiling.normal) == -1)
+    {
+        return;
+    }
+
+    coll->cur_pos.y += y;
+    coll->cur_pos.x = sp10.x;
 }
 
-void mpColl_80043ADC(CollData* arg0)
+void mpColl_80043ADC(CollData* coll)
 {
     Vec3 sp10;
-    float spC;
-    float temp_f3;
-    float temp_f4;
-    float var_f31;
+    float y;
+    float f1;
+    float f2;
+    float f3;
+    float f4;
+    float f31;
 
-    var_f31 = arg0->xA4_ecbCurrCorrect.left.x;
-    temp_f3 = arg0->cur_pos.x + var_f31;
-    temp_f4 = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.left.y;
-    if (var_f31 < 0.0F) {
-        var_f31 = -var_f31;
+    f31 = coll->xA4_ecbCurrCorrect.left.x;
+    f3 = coll->cur_pos.x + f31;
+    f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.left.y;
+    if (f31 < 0.0F) {
+        f31 = -f31;
     }
-    if (mpLib_800509B8_RightWall(
-            -((arg0->ceiling.normal.y * var_f31) - temp_f3),
-            ((arg0->ceiling.normal.x * var_f31) + temp_f4), temp_f3, temp_f4,
-            &arg0->x140, NULL, NULL, NULL, arg0->x48_joint_id,
-            arg0->x4C_joint_id))
+
+    f1 = -((coll->ceiling.normal.y * f31) - f3);
+    f2 = ((coll->ceiling.normal.x * f31) + f4);
+    if (!mpLib_800509B8_RightWall(f1, f2, f3, f4, &coll->x140, NULL, NULL,
+                                  NULL, coll->x48_joint_id,
+                                  coll->x4C_joint_id))
     {
-        sp10.x = arg0->x140.x + var_f31;
-        sp10.y = arg0->cur_pos.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (mpLib_8004E090_Ceiling(arg0->ceiling.index, &sp10, &spC,
-                                   &arg0->ceiling.flags,
-                                   &arg0->ceiling.normal) != -1)
-        {
-            arg0->cur_pos.y += spC;
-            arg0->cur_pos.x = sp10.x;
-        }
+        return;
     }
+
+    sp10.x = coll->x140.x + f31;
+    sp10.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    if (mpLib_8004E090_Ceiling(coll->ceiling.index, &sp10, &y,
+                               &coll->ceiling.flags,
+                               &coll->ceiling.normal) == -1)
+    {
+        return;
+    }
+
+    coll->cur_pos.y += y;
+    coll->cur_pos.x = sp10.x;
 }
 
 bool mpColl_80043BBC(CollData* arg0, s32* arg1)
