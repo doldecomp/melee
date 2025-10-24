@@ -3304,7 +3304,119 @@ bool mpColl_800491C8_RightWall(CollData* coll)
     return false;
 }
 
-/// #mpColl_80049778
+bool mpColl_80049778_LeftWall(CollData* coll)
+{
+    int line_id;
+    float f31;
+    float f30;
+    float f29;
+    float f28;
+    float f26;
+    float f27;
+    float f1;
+    float f2;
+    float f3;
+    float f4;
+    bool result;
+    int line_id1;
+    int line_id2;
+
+    result = false;
+    mpColl_804D648C = 0;
+
+    if (mpLib_80054ED8(coll->floor.index)) {
+        int temp;
+        line_id1 = mpLib_80053448_Floor(coll->floor.index);
+        temp = mpLib_800534FC_Floor(coll->floor.index);
+        line_id = temp;
+        line_id2 = temp != -1 ? mpLib_80053448_Floor(line_id) : -1;
+    } else {
+        line_id2 = -1;
+        line_id1 = -1;
+    }
+
+    f31 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.right.x;
+    f30 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.right.y;
+    f1 = coll->cur_pos_correct.x + coll->xC4_ecb.right.x;
+    f2 = coll->cur_pos_correct.y + coll->xC4_ecb.right.y;
+    if (mpColl_80045B74_LeftWall_inline2(coll, f1, f2, f31, f30, &line_id)) {
+        mpColl_80045B74_LeftWall_inline(line_id);
+        result = true;
+        coll->env_flags |= Collide_LeftWallHug;
+    }
+
+    f1 = coll->cur_pos_correct.x + coll->xC4_ecb.bottom.x;
+    f2 = coll->cur_pos_correct.y + coll->xC4_ecb.bottom.y;
+    f3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+    f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    if (mpColl_80045B74_LeftWall_inline2(coll, f1, f2, f3, f4, &line_id) &&
+        line_id != line_id1 && line_id != line_id2)
+    {
+        mpColl_80045B74_LeftWall_inline(line_id);
+        result = true;
+    }
+
+    f1 = coll->cur_pos_correct.x + coll->xC4_ecb.top.x;
+    f2 = coll->cur_pos_correct.y + coll->xC4_ecb.top.y;
+    f3 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+    f4 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    if (mpColl_80045B74_LeftWall_inline2(coll, f1, f2, f3, f4, &line_id)) {
+        mpColl_80045B74_LeftWall_inline(line_id);
+        result = true;
+    }
+
+    f27 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+    f26 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    if (mpLib_800501CC_LeftWall(f27, f26, f31, f30, NULL, &line_id, NULL, NULL,
+                                coll->x48_joint_id, coll->x4C_joint_id) &&
+        line_id != line_id1 && line_id != line_id2)
+    {
+        mpColl_80045B74_LeftWall_inline(line_id);
+        result = true;
+    }
+
+    if (!mpColl_804D649C) {
+        f1 = coll->cur_pos_correct.x + coll->xC4_ecb.bottom.x;
+        f2 = coll->cur_pos_correct.y + coll->xC4_ecb.bottom.y;
+        f29 = coll->cur_pos_correct.x + coll->xC4_ecb.right.x;
+        f28 = coll->cur_pos_correct.y + coll->xC4_ecb.right.y;
+        if (mpLib_800515A0_LeftWall(f29, f28, f1, f2, f31, f30, f27, f26,
+                                    &line_id, coll->x48_joint_id,
+                                    coll->x4C_joint_id) &&
+            line_id != line_id1 && line_id != line_id2)
+        {
+            mpColl_80045B74_LeftWall_inline(line_id);
+            result = true;
+        }
+    }
+
+    f27 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.top.x;
+    f26 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y;
+    if (mpLib_800501CC_LeftWall(f27, f26, f31, f30, NULL, &line_id, NULL, NULL,
+                                coll->x48_joint_id, coll->x4C_joint_id))
+    {
+        mpColl_80045B74_LeftWall_inline(line_id);
+        result = true;
+    }
+
+    if (!mpColl_804D649C) {
+        f3 = coll->cur_pos_correct.x + coll->xC4_ecb.top.x;
+        f4 = coll->cur_pos_correct.y + coll->xC4_ecb.top.y;
+        if (mpLib_800515A0_LeftWall(f3, f4, f29, f28, f27, f26, f31, f30,
+                                    &line_id, coll->x48_joint_id,
+                                    coll->x4C_joint_id))
+        {
+            mpColl_80045B74_LeftWall_inline(line_id);
+            result = true;
+        }
+    }
+
+    if (result) {
+        coll->env_flags |= Collide_LeftWallPush;
+    }
+
+    return result;
+}
 
 /// #mpColl_80049EAC
 
@@ -3474,7 +3586,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
         var_r25 = 0;
         temp_r27 = arg0->x34_flags.b6;
         var_r26 = 0;
-        if (mpColl_80049778(arg0)) {
+        if (mpColl_80049778_LeftWall(arg0)) {
             var_r26 = mpColl_80049EAC(arg0);
             if (var_r26) {
                 var_r28 |= 1;
@@ -3494,7 +3606,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             var_f31 = arg0->cur_pos.x;
             arg0->x34_flags.b5 = true;
         }
-        if (mpColl_80049778(arg0)) {
+        if (mpColl_80049778_LeftWall(arg0)) {
             var_r26 |= mpColl_80049EAC(arg0);
             if (var_r26) {
                 var_r28 |= 1;
