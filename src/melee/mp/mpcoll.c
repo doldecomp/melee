@@ -3453,7 +3453,46 @@ void mpColl_8004C864(CollData* coll, bool _, float left, float right)
     coll->x34_flags.b5 = false;
 }
 
-/// #mpColl_8004C91C
+void mpColl_8004C91C(CollData* coll, bool r4, float top, float bottom)
+{
+    float height = top - bottom + coll->xA4_ecbCurrCorrect.top.y -
+                   coll->xA4_ecbCurrCorrect.bottom.y;
+    float mid_y;
+
+    if (!coll->x34_flags.b6) {
+        coll->x64_ecb = coll->xA4_ecbCurrCorrect;
+    }
+    coll->x34_flags.b6 = true;
+
+    if (height < 3.0F) {
+        float old_height =
+            coll->xA4_ecbCurrCorrect.top.y - coll->xA4_ecbCurrCorrect.bottom.y;
+        float new_height = coll->xA4_ecbCurrCorrect.top.y + top - bottom;
+        coll->xA4_ecbCurrCorrect.top.y = MIN(old_height, new_height);
+        coll->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        coll->cur_pos.y = bottom;
+    } else if (!r4) {
+        coll->cur_pos.y = bottom;
+        coll->xA4_ecbCurrCorrect.top.y =
+            height + coll->xA4_ecbCurrCorrect.bottom.y;
+    } else {
+        coll->cur_pos.y = 0.5F * (top + bottom);
+        coll->xA4_ecbCurrCorrect.top.y =
+            0.5F * (coll->xA4_ecbCurrCorrect.top.y +
+                    coll->xA4_ecbCurrCorrect.bottom.y + height);
+        coll->xA4_ecbCurrCorrect.bottom.y =
+            coll->xA4_ecbCurrCorrect.top.y - height;
+    }
+    mid_y = 0.5F * (coll->xA4_ecbCurrCorrect.top.y +
+                    coll->xA4_ecbCurrCorrect.bottom.y);
+    coll->xA4_ecbCurrCorrect.right.y = mid_y;
+    coll->xA4_ecbCurrCorrect.left.y = mid_y;
+    coll->x84_ecb.top.y = coll->xA4_ecbCurrCorrect.top.y;
+    coll->x84_ecb.bottom.y = coll->xA4_ecbCurrCorrect.bottom.y;
+    coll->x84_ecb.left.y = coll->xA4_ecbCurrCorrect.left.y;
+    coll->x84_ecb.right.y = coll->xA4_ecbCurrCorrect.right.y;
+    coll->x34_flags.b5 = false;
+}
 
 float mpColl_8004CA6C(CollData* coll)
 {
