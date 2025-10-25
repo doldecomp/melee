@@ -986,8 +986,8 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     y = max_inline(y, dist_top_y);
     x = max_inline(x, y);
 
-    if (x > flt_804D7FD8) {                 // 6.0F float order hack
-        var_r30 = (s32) (x / flt_804D7FD8); // 6.0F float order hack
+    if (x > flt_804D7FD8) {         // 6.0F float order hack
+        var_r30 = x / flt_804D7FD8; // 6.0F float order hack
         var_r30 = var_r30 + 1;
         vel.x /= var_r30;
         vel.y /= var_r30;
@@ -2614,8 +2614,8 @@ static inline bool fn_80046F78_inline(CollData* coll, int* sp14)
         float x1 = coll->cur_pos.x;
         float y1 = coll->cur_pos.y;
         return mpLib_800524DC(&coll->x140, sp14, NULL, NULL,
-                              (s32) coll->x48_joint_id,
-                              (s32) coll->x4C_joint_id, x0, y0, x1, y1);
+                              coll->x48_joint_id, coll->x4C_joint_id, x0, y0,
+                              x1, y1);
     } else {
         float x0 = coll->cur_pos_correct.x;
         float y0 = coll->cur_pos_correct.y;

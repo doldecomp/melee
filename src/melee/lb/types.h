@@ -188,12 +188,12 @@ struct CollData {
     /* fp+724 */ ECBFlagStruct x34_flags;
     /* fp+725 */ ECBFlagStruct x35_flags;
     /* fp+726 */ s16 facing_dir;
-    /* fp+728 */ s32 x38;
-    /* fp+72C */ s32 x3C;
+    /* fp+728 */ int x38;
+    /* fp+72C */ int x3C;
     /* fp+730 */ int ledge_id_right;
     /* fp+734 */ int ledge_id_left;
-    /* fp+738 */ u32 x48_joint_id;
-    /* fp+73C */ u32 x4C_joint_id;
+    /* fp+738 */ int x48_joint_id;
+    /* fp+73C */ int x4C_joint_id;
     /* fp+740 */ float x50;
     /* fp+744 */ float ledge_snap_x;
     /* fp+748 */ float ledge_snap_y;
