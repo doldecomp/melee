@@ -36,10 +36,10 @@
 /* 043754 */ bool mpColl_80043754(mpColl_Callback, CollData*, u32);
 /* 0439FC */ void mpColl_800439FC(CollData*);
 /* 043ADC */ void mpColl_80043ADC(CollData*);
-/* 043BBC */ bool mpColl_80043BBC(CollData*, s32*);
-/* 043C6C */ void mpColl_80043C6C(CollData*, s32, s32);
-/* 043E90 */ bool mpColl_80043E90(CollData*, s32*);
-/* 043F40 */ void mpColl_80043F40(CollData*, s32, s32);
+/* 043BBC */ bool mpColl_80043BBC(CollData*, int* line_id_out);
+/* 043C6C */ void mpColl_80043C6C(CollData*, int, bool);
+/* 043E90 */ bool mpColl_80043E90(CollData*, int* line_id_out);
+/* 043F40 */ void mpColl_80043F40(CollData*, int, bool);
 /* 044164 */ bool mpColl_80044164(CollData* cd, int* p_ledge_id);
 /* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
 /* 044628 */ bool mpColl_80044628_Floor(CollData*,
@@ -119,8 +119,6 @@
 /* 04CBF4 */ void mpColl_8004CBF4(CollData*);
 /* 04CC00 */ void mpCopyCollData(CollData* src, CollData* dst, int);
 /* 04D024 */ bool mpColl_8004D024(Vec3*);
-/* 0528CC */ s32 mpColl_800528CC(s32);
-/* 052A98 */ s32 mpColl_80052A98(s32);
 /* 4D64AC */ extern int mpColl_804D64AC;
 
 #endif
