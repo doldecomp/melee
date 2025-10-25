@@ -198,7 +198,7 @@ struct CollData {
     /* fp+744 */ float ledge_snap_x;
     /* fp+748 */ float ledge_snap_y;
     /* fp+74C */ float ledge_snap_height;
-    /* fp+750 */ float x60;
+    /* fp+750 */ float lstick_x;
     /* fp+754 */ ftECB x64_ecb;
     /* fp+774 */ ftECB x84_ecb;
     /* fp+794 */ ftECB xA4_ecbCurrCorrect;

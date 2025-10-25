@@ -3708,7 +3708,7 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
     mpLib_80054158(line_id, &edge);
     if (coll->cur_pos.x <= edge.x) {
         if (!(coll->env_flags & Collide_LeftWallMask) &&
-            coll->facing_dir == -1 && coll->x60 > -0.75)
+            coll->facing_dir == -1 && coll->lstick_x > -0.75)
         {
             float edge_x;
             float edge_y;
@@ -3738,7 +3738,7 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
         mpLib_80053FF4(line_id, &edge);
         if (coll->cur_pos.x >= edge.x &&
             !(coll->env_flags & Collide_RightWallMask) &&
-            coll->facing_dir == 1 && coll->x60 < 0.75)
+            coll->facing_dir == 1 && coll->lstick_x < 0.75)
         {
             float edge_x;
             float edge_y;
@@ -4617,7 +4617,7 @@ void mpCopyCollData(CollData* src, CollData* dst, int arg2)
     dst->ledge_id_unk1 = src->ledge_id_unk1;
     dst->ledge_id_unk0 = src->ledge_id_unk0;
     dst->x48_joint_id = src->x48_joint_id;
-    dst->x60 = src->x60;
+    dst->lstick_x = src->lstick_x;
 
     dst->x64_ecb = src->x64_ecb;
     dst->x84_ecb = src->x84_ecb;
