@@ -607,7 +607,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
                 if (cur_fp->facing_dir > 0.0F &&
                     (fp->coll_data.env_flags & MPCOLL_FLAGS_B24))
                 {
-                    int r4 = fp->coll_data.ledge_id_unk1;
+                    int r4 = fp->coll_data.ledge_id_left;
                     int floor_id = cur_fp->mv.co.common.x0;
                     if (mpLib_80054F68(floor_id, r4)) {
                         return cur;
@@ -616,7 +616,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
                 if (cur_fp->facing_dir < 0.0f &&
                     (fp->coll_data.env_flags & MPCOLL_FLAGS_B25))
                 {
-                    int r4 = fp->coll_data.ledge_id_unk0;
+                    int r4 = fp->coll_data.ledge_id_right;
                     int floor_id = cur_fp->mv.co.common.x0;
                     if (mpLib_80054F68(floor_id, r4)) {
                         return cur;
@@ -1051,7 +1051,7 @@ static inline bool ft_80084280_inline(Fighter_GObj* gobj)
     bool temp;
     coll->prev_pos = coll->cur_pos;
     coll->cur_pos = fp->cur_pos;
-    coll->x60 = fp->input.lstick.x;
+    coll->lstick_x = fp->input.lstick.x;
     mpColl_800436D8(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B4B0(coll);
     fp->cur_pos = coll->cur_pos;
@@ -1092,7 +1092,7 @@ static inline bool ft_800843FC_inline(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.prev_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    fp->coll_data.x60 = fp->input.lstick.x;
+    fp->coll_data.lstick_x = fp->input.lstick.x;
     mpColl_800436D8(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B5C4(coll);
     fp->cur_pos = coll->cur_pos;
@@ -1208,7 +1208,7 @@ void ft_800848DC(Fighter_GObj* gobj, HSD_GObjEvent cb)
 
 void ft_800849EC(Fighter* fp1, Fighter* fp2)
 {
-    mpColl_8004CC00(&fp1->coll_data, &fp2->coll_data, 2);
+    mpCopyCollData(&fp1->coll_data, &fp2->coll_data, 2);
 }
 
 int ft_80084A18(Fighter_GObj* gobj)

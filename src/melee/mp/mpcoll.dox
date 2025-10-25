@@ -44,7 +44,7 @@ void mpColl_800474E0(CollData*);
 void mpColl_800476B4(CollData*);
 void mpColl_800478F4(CollData*);
 void mpColl_8004B5C4(CollData*);
-void mpColl_8004CC00(CollData*);
+void mpCopyCollData(CollData*);
 void mpColl_8004CA6C(CollData*);
 void mpColl_8004CBF4(CollData*);
 

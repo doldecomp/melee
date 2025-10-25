@@ -64,4 +64,6 @@ typedef enum CollLineKind {
 #define LINE_FLAG_PLATFORM (1 << 8)
 #define LINE_FLAG_LEDGE (1 << 9)
 
+#define MPCOLL_WALLID_MAX 9
+
 #endif

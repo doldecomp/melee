@@ -88,10 +88,10 @@
                                       int joint_id0, int joint_id1, int dir,
                                       float left, float bottom, float right,
                                       float top);
-/* 051EC8 */ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out,
+/* 051EC8 */ bool mpLib_80051EC8(float x0, float y0, float x1, float y1,
+                                 Vec3* pos_out, int* line_id_out,
                                  u32* flags_out, Vec3* normal_out, u32 arg4,
-                                 int joint_id0, int joint_id1, float x1,
-                                 float y1, float x2, float y2);
+                                 int joint_id0, int joint_id1);
 /* 0524DC */ bool mpLib_800524DC(Vec3* pos_out, int* line_id_out,
                                  u32* flags_out, Vec3* normal_out,
                                  int joint_id0, int joint_id1, float x0,

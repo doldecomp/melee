@@ -78,9 +78,9 @@ void ftCliffCommon_80081370(Fighter_GObj* gobj)
         ftCommon_8007E2FC(gobj);
         fp->x221D_b7 = 1;
         if (fp->facing_dir > 0) {
-            fp->mv.co.cliff.ledge_id = fp->coll_data.ledge_id_unk1;
+            fp->mv.co.cliff.ledge_id = fp->coll_data.ledge_id_left;
         } else {
-            fp->mv.co.cliff.ledge_id = fp->coll_data.ledge_id_unk0;
+            fp->mv.co.cliff.ledge_id = fp->coll_data.ledge_id_right;
         }
         ftCo_CliffCatch_Phys(gobj);
         ft_800881D8(fp, fp->ft_data->x4C_sfx->x28, 127, 64);

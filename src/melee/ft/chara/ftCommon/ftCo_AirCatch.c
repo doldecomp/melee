@@ -39,7 +39,7 @@ bool ftCo_800C3A14(Fighter_GObj* gobj)
     coll.ledge_snap_y += 5.0;
     coll.ledge_snap_height += 5.0;
     if (fp->facing_dir > (f64) 0.0F) {
-        if (mpColl_80044164(&coll, &fp->coll_data.ledge_id_unk1)) {
+        if (mpColl_80044164(&coll, &fp->coll_data.ledge_id_left)) {
             fp->coll_data.env_flags |= MPCOLL_FLAGS_B24;
             fp->self_vel.x = 0;
             fp->self_vel.y = 0;
@@ -47,7 +47,7 @@ bool ftCo_800C3A14(Fighter_GObj* gobj)
         }
         return false;
     }
-    if (mpColl_800443C4(&coll, &fp->coll_data.ledge_id_unk0)) {
+    if (mpColl_800443C4(&coll, &fp->coll_data.ledge_id_right)) {
         fp->coll_data.env_flags |= MPCOLL_FLAGS_B25;
         fp->self_vel.x = 0;
         fp->self_vel.y = 0;
