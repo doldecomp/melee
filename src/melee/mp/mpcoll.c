@@ -182,8 +182,8 @@ void mpColl_80041EE4(CollData* cd)
     cd->prev_pos = cd->cur_pos;
     cd->x28_vec = cd->cur_pos;
     cd->x3C = -1;
-    cd->ledge_id_unk0 = -1;
-    cd->ledge_id_unk1 = -1;
+    cd->ledge_id_right = -1;
+    cd->ledge_id_left = -1;
     cd->floor.index = -1;
     cd->floor.flags = 0;
     cd->floor.normal.x = 0.0F;
@@ -2568,7 +2568,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
 
         if (!r3 && coll->cur_pos.y < coll->cur_pos_correct.y) {
             if (coll->facing_dir == 1 || coll->facing_dir == 0) {
-                if (mpColl_80044164(coll, &coll->ledge_id_unk1))
+                if (mpColl_80044164(coll, &coll->ledge_id_left))
                 { // Physics_CheckForLeftLedge
                     r3 = true;
                     coll->env_flags |= Collide_LeftLedgeGrab;
@@ -2580,7 +2580,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 }
             }
             if (coll->facing_dir == -1 || coll->facing_dir == 0) {
-                if (mpColl_800443C4(coll, &coll->ledge_id_unk0))
+                if (mpColl_800443C4(coll, &coll->ledge_id_right))
                 { // Physics_CheckForRightLedge
                     r3 = true;
                     coll->env_flags |= Collide_RightLedgeGrab;
@@ -4614,8 +4614,8 @@ void mpCopyCollData(CollData* src, CollData* dst, int arg2)
     dst->facing_dir = src->facing_dir;
     dst->x38 = src->x38;
     dst->x3C = src->x3C;
-    dst->ledge_id_unk1 = src->ledge_id_unk1;
-    dst->ledge_id_unk0 = src->ledge_id_unk0;
+    dst->ledge_id_left = src->ledge_id_left;
+    dst->ledge_id_right = src->ledge_id_right;
     dst->x48_joint_id = src->x48_joint_id;
     dst->lstick_x = src->lstick_x;
 

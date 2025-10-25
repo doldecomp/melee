@@ -190,8 +190,8 @@ struct CollData {
     /* fp+726 */ s16 facing_dir;
     /* fp+728 */ s32 x38;
     /* fp+72C */ s32 x3C;
-    /* fp+730 */ int ledge_id_unk0;
-    /* fp+734 */ int ledge_id_unk1;
+    /* fp+730 */ int ledge_id_right;
+    /* fp+734 */ int ledge_id_left;
     /* fp+738 */ u32 x48_joint_id;
     /* fp+73C */ u32 x4C_joint_id;
     /* fp+740 */ float x50;

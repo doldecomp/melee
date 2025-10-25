@@ -607,7 +607,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
                 if (cur_fp->facing_dir > 0.0F &&
                     (fp->coll_data.env_flags & MPCOLL_FLAGS_B24))
                 {
-                    int r4 = fp->coll_data.ledge_id_unk1;
+                    int r4 = fp->coll_data.ledge_id_left;
                     int floor_id = cur_fp->mv.co.common.x0;
                     if (mpLib_80054F68(floor_id, r4)) {
                         return cur;
@@ -616,7 +616,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
                 if (cur_fp->facing_dir < 0.0f &&
                     (fp->coll_data.env_flags & MPCOLL_FLAGS_B25))
                 {
-                    int r4 = fp->coll_data.ledge_id_unk0;
+                    int r4 = fp->coll_data.ledge_id_right;
                     int floor_id = cur_fp->mv.co.common.x0;
                     if (mpLib_80054F68(floor_id, r4)) {
                         return cur;
