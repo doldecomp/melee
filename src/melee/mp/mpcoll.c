@@ -3680,62 +3680,74 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
     return false;
 }
 
-bool mpColl_8004A678(CollData* coll, int line_id)
+bool mpColl_8004A678_Floor(CollData* coll, int line_id)
 {
     u32 flags;
-    float sp28;
+    float y;
     Vec3 normal;
-    Vec3 sp10;
-    int var_r30;
+    Vec3 edge;
+    int floor_id;
     bool var_r29 = false;
 
     if (!mpLib_80054ED8(line_id) || mpLineGetKind(line_id) != CollLine_Floor) {
         return false;
     }
 
-    mpLib_80054158(line_id, &sp10);
-    if (coll->cur_pos.x <= sp10.x) {
-        if (!(coll->env_flags & 0x3F) && (coll->facing_dir == -1) &&
-            (coll->x60 > -0.75))
+    mpLib_80054158(line_id, &edge);
+    if (coll->cur_pos.x <= edge.x) {
+        if (!(coll->env_flags & Collide_LeftWallMask) &&
+            coll->facing_dir == -1 && coll->x60 > -0.75)
         {
+            float edge_x;
+            float edge_y;
             float right_x;
             float right_y;
-            var_r30 =
-                mpLib_8004DD90_Floor(line_id, &sp10, &sp28, &flags, &normal);
-            if (var_r30 != -1) {
-                sp10.y += sp28;
+            floor_id =
+                mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
+            if (floor_id != -1) {
+                edge.y += y;
             }
 
-            right_x = sp10.x + coll->xA4_ecbCurrCorrect.right.x -
+            edge_x = edge.x + 1.0F;
+            edge_y = edge.y + 1.0F;
+            right_x = edge.x + coll->xA4_ecbCurrCorrect.right.x -
                       coll->xA4_ecbCurrCorrect.bottom.x;
-            right_y = sp10.y + coll->xA4_ecbCurrCorrect.right.y -
+            right_y = edge.y + coll->xA4_ecbCurrCorrect.right.y -
                       coll->xA4_ecbCurrCorrect.bottom.y;
+            // make sure a wall hasn't stopped us
             if (!mpLib_800501CC_LeftWall(
-                    sp10.x + 1.0F, sp10.y + 1.0F, right_x, right_y, NULL, NULL,
-                    NULL, NULL, coll->x48_joint_id, coll->x4C_joint_id))
+                    edge_x, edge_y, right_x, right_y, NULL, NULL, NULL, NULL,
+                    coll->x48_joint_id, coll->x4C_joint_id))
             {
                 var_r29 = true;
             }
         }
     } else {
-        mpLib_80053FF4(line_id, &sp10);
-        if ((coll->cur_pos.x >= sp10.x) && !(coll->env_flags & 0xFC0) &&
-            (coll->facing_dir == 1) && (coll->x60 < 0.75))
+        mpLib_80053FF4(line_id, &edge);
+        if (coll->cur_pos.x >= edge.x &&
+            !(coll->env_flags & Collide_RightWallMask) &&
+            coll->facing_dir == 1 && coll->x60 < 0.75)
         {
+            float edge_x;
+            float edge_y;
             float left_x;
             float left_y;
-            var_r30 =
-                mpLib_8004DD90_Floor(line_id, &sp10, &sp28, &flags, &normal);
-            if (var_r30 != -1) {
-                sp10.y += sp28;
+            floor_id =
+                mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
+            if (floor_id != -1) {
+                edge.y += y;
             }
-            left_x = sp10.x + coll->xA4_ecbCurrCorrect.left.x -
+
+            edge_x = edge.x - 1.0F;
+            edge_y = edge.y + 1.0F;
+            left_x = edge.x + coll->xA4_ecbCurrCorrect.left.x -
                      coll->xA4_ecbCurrCorrect.bottom.x;
-            left_y = sp10.y + coll->xA4_ecbCurrCorrect.left.y -
+            left_y = edge.y + coll->xA4_ecbCurrCorrect.left.y -
                      coll->xA4_ecbCurrCorrect.bottom.y;
-            if (!mpLib_800509B8_RightWall(
-                    sp10.x - 1.0F, sp10.y + 1.0F, left_x, left_y, NULL, NULL,
-                    NULL, NULL, coll->x48_joint_id, coll->x4C_joint_id))
+            // make sure a wall hasn't stopped us
+            if (!mpLib_800509B8_RightWall(edge_x, edge_y, left_x, left_y, NULL,
+                                          NULL, NULL, NULL, coll->x48_joint_id,
+                                          coll->x4C_joint_id))
             {
                 var_r29 = true;
             }
@@ -3743,10 +3755,10 @@ bool mpColl_8004A678(CollData* coll, int line_id)
     }
 
     if (var_r29) {
-        coll->cur_pos.x = sp10.x - coll->xA4_ecbCurrCorrect.bottom.x;
-        coll->cur_pos.y = sp10.y - coll->xA4_ecbCurrCorrect.bottom.y;
-        coll->cur_pos.z = sp10.z;
-        coll->floor.index = var_r30;
+        coll->cur_pos.x = edge.x - coll->xA4_ecbCurrCorrect.bottom.x;
+        coll->cur_pos.y = edge.y - coll->xA4_ecbCurrCorrect.bottom.y;
+        coll->cur_pos.z = edge.z;
+        coll->floor.index = floor_id;
         coll->floor.flags = flags;
         coll->floor.normal = normal;
         coll->env_flags |= Collide_Edge;
@@ -3965,7 +3977,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
                 mpLineGetKind(temp_r22) == CollLine_Floor)
             {
                 if (arg1 & 1) {
-                    if (mpColl_8004A678(arg0, temp_r22)) {
+                    if (mpColl_8004A678_Floor(arg0, temp_r22)) {
                         arg0->x34_flags.b5 = true;
                         var_r29 = 0;
                         var_r25_2 = 1;
