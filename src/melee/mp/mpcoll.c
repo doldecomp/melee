@@ -1401,67 +1401,71 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
     return grabbed_ledge;
 }
 
-bool mpColl_80044628(CollData* coll, bool (*cb)(Fighter_GObj*, int),
-                     Fighter_GObj* gobj, s32 flags)
+bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
+                           Fighter_GObj* gobj, int flags)
 {
-    float sp38;
-    float sp30;
-    Fighter_GObj* sp8;
-    float sp2C;
+    float y;
+    Vec3 sp2C;
+    u8 _[12];
     float temp_f1;
     float temp_f2;
-    int temp_r3;
     int line_id;
     int bool_r3;
-    PAD_STACK(16);
 
     temp_f1 = coll->cur_pos_correct.x + coll->xC4_ecb.bottom.x;
-    sp2C = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
     temp_f2 = coll->cur_pos_correct.y + coll->xC4_ecb.bottom.y;
-    sp30 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
+    sp2C.x = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
+    sp2C.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
 
     if (coll->x38 != mpColl_804D64AC) {
-        sp8 = gobj;
         bool_r3 = mpLib_8004F400_Floor(
-            temp_f1, temp_f2, sp2C, sp30, 0.0F, &coll->x140,
+            temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F, &coll->x140,
             &coll->floor.index, &coll->floor.flags, &coll->floor.normal,
             coll->x3C, coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
     } else {
-        sp8 = gobj;
         bool_r3 = mpLib_8004F008_Floor(
-            temp_f1, temp_f2, sp2C, sp30, 0.0F, &coll->x140,
+            temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F, &coll->x140,
             &coll->floor.index, &coll->floor.flags, &coll->floor.normal,
             coll->x3C, coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
     }
-    if (bool_r3 && (!(coll->floor.flags & LINE_FLAG_PLATFORM) ||
-                    (coll->floor.index != coll->x3C)))
-    {
-        coll->env_flags |= Collide_FloorPush;
-        coll->env_flags |= Collide_FloorHug;
-        return true;
-    }
 
-    if ((((flags & 1) &&
-          (line_id = mpLib_80052E30_LeftWall(coll->right_wall.index),
-           (!(line_id == -1)))) ||
-         ((flags & 2) &&
-          (line_id = mpLib_800531C8_RightWall(coll->left_wall.index),
-           (!(line_id == -1))))) &&
-        mpLib_80054ED8(line_id) && mpLineGetKind(line_id) == CollLine_Floor)
-    {
-        temp_r3 =
-            mpLib_8004DD90_Floor(line_id, (Point3d*) &sp2C, &sp38,
-                                 &coll->floor.flags, &coll->floor.normal);
-        if ((temp_r3 != -1) && (sp38 > 0.0F) &&
-            ((coll->floor.index = temp_r3,
-              (((coll->floor.flags & LINE_FLAG_PLATFORM) == 0) != 0)) ||
-             (coll->floor.index != coll->x3C)) &&
-            ((cb == NULL) || (cb(gobj, coll->floor.index) != 0)))
+    if (bool_r3) {
+        if (!(coll->floor.flags & LINE_FLAG_PLATFORM) ||
+            coll->floor.index != coll->x3C)
         {
             coll->env_flags |= Collide_FloorPush;
+            coll->env_flags |= Collide_FloorHug;
             return true;
         }
     }
+
+    if ((flags & 1 &&
+         (line_id = mpLib_80052E30_LeftWall(coll->right_wall.index),
+          line_id != -1)) ||
+        (flags & 2 &&
+         (line_id = mpLib_800531C8_RightWall(coll->left_wall.index),
+          line_id != -1)))
+    {
+        if (mpLib_80054ED8(line_id) &&
+            mpLineGetKind(line_id) == CollLine_Floor)
+        {
+            int floor_id = mpLib_8004DD90_Floor(
+                line_id, &sp2C, &y, &coll->floor.flags, &coll->floor.normal);
+
+            if (floor_id != -1 && y > 0.0F) {
+                coll->floor.index = floor_id;
+                if (!(coll->floor.flags & LINE_FLAG_PLATFORM) ||
+                    coll->floor.index != coll->x3C)
+                {
+                    if (cb == NULL || cb(gobj, coll->floor.index)) {
+                        coll->env_flags |= Collide_FloorPush;
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
     return false;
 }
 
@@ -2423,11 +2427,11 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             y_after_collide_ceiling = coll->cur_pos.y;
         }
         if (flags & CollisionFlagAir_PlatformPassCallback) {
-            var_r3 = mpColl_80044628(
+            var_r3 = mpColl_80044628_Floor(
                 coll, mpColl_804D64A0, mpColl_804D64A4,
                 horizontal_squeeze_flags_2); // Physics_FloorCheckAir
         } else {
-            var_r3 = mpColl_80044628(
+            var_r3 = mpColl_80044628_Floor(
                 coll, NULL, NULL,
                 horizontal_squeeze_flags_2); // Physics_FloorCheckAir
         }

@@ -42,8 +42,9 @@
 /* 043F40 */ void mpColl_80043F40(CollData*, s32, s32);
 /* 044164 */ bool mpColl_80044164(CollData* cd, int* p_ledge_id);
 /* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
-/* 044628 */ bool mpColl_80044628(CollData*, bool (*)(Fighter_GObj*, int),
-                                  Fighter_GObj*, s32);
+/* 044628 */ bool mpColl_80044628_Floor(CollData*,
+                                        bool (*)(Fighter_GObj*, int),
+                                        Fighter_GObj*, int);
 /* 044838 */ bool mpColl_80044838_Floor(CollData* coll, bool ignore_bottom);
 /* 044948 */ bool mpColl_80044948_Floor(CollData* coll);
 /* 044AD8 */ bool mpColl_80044AD8_Ceiling(CollData*, int);
