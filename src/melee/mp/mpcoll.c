@@ -752,6 +752,19 @@ static void mpColl_80045B74_LeftWall_inline(int line_id2)
     mpColl_804D648C++;
 }
 
+static void mpColl_80045B74_LeftWall_inline3(int line_id2, int* arr)
+{
+    int i;
+    for (i = 0; i < mpColl_804D648C; arr++, i++) {
+        if (line_id2 == *arr || mpLib_80054F68(*arr, line_id2)) {
+            return;
+        }
+    }
+    HSD_ASSERT(345, i<MPCOLL_WALLID_MAX);
+    mpColl_80458810.left[i] = line_id2;
+    mpColl_804D648C++;
+}
+
 static inline void func_80043324_inline2(CollData* coll, s32 arg1, s32 arg2,
                                          float arg8)
 { // see mpColl_80043268
@@ -2023,7 +2036,7 @@ bool mpColl_80045B74_LeftWall(CollData* coll)
     x1 = coll->cur_pos_correct.x + coll->xC4_ecb.right.x;
     y2 = coll->cur_pos_correct.y + coll->xC4_ecb.right.y;
     if (mpColl_80045B74_LeftWall_inline2(coll, x1, y2, x31, y30, &line_id)) {
-        mpColl_80045B74_LeftWall_inline(line_id);
+        mpColl_80045B74_LeftWall_inline3(line_id, mpColl_80458810.left);
         result = true;
         coll->env_flags |= Collide_LeftWallHug;
     }
@@ -3357,7 +3370,7 @@ bool mpColl_80049778_LeftWall(CollData* coll)
     f1 = coll->cur_pos_correct.x + coll->xC4_ecb.right.x;
     f2 = coll->cur_pos_correct.y + coll->xC4_ecb.right.y;
     if (mpColl_80045B74_LeftWall_inline2(coll, f1, f2, f31, f30, &line_id)) {
-        mpColl_80045B74_LeftWall_inline(line_id);
+        mpColl_80045B74_LeftWall_inline3(line_id, mpColl_80458810.left);
         result = true;
         coll->env_flags |= Collide_LeftWallHug;
     }
@@ -4252,7 +4265,7 @@ bool mpColl_8004BDD4_LeftWall(CollData* coll)
     f1 = coll->cur_pos_correct.x + coll->xC4_ecb.right.x;
     f2 = coll->cur_pos_correct.y + coll->xC4_ecb.right.y;
     if (mpColl_80045B74_LeftWall_inline2(coll, f1, f2, f31, f30, &line_id)) {
-        mpColl_80045B74_LeftWall_inline(line_id);
+        mpColl_80045B74_LeftWall_inline3(line_id, mpColl_80458810.left);
         result = true;
         coll->env_flags |= Collide_LeftWallHug;
     }
