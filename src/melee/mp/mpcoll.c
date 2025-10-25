@@ -1300,17 +1300,16 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
         cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x < sp14.x &&
         cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y < sp14.y &&
         (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y > cd->x140.y ||
-         ((!mpLib_80051EC8(NULL, &sp10, NULL, NULL, 6, cd->x48_joint_id,
-                           cd->x4C_joint_id,
-                           cd->cur_pos.x + cd->xA4_ecbCurrCorrect.top.x,
+         ((!mpLib_80051EC8(cd->cur_pos.x + cd->xA4_ecbCurrCorrect.top.x,
                            cd->cur_pos.y + cd->xA4_ecbCurrCorrect.top.y,
-                           cd->x140.x, cd->x140.y) ||
+                           cd->x140.x, cd->x140.y, NULL, &sp10, NULL, NULL, 6,
+                           cd->x48_joint_id, cd->x4C_joint_id) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(sp10)) &&
           (!mpLib_80051EC8(
-               NULL, &sp10, NULL, NULL, 6, cd->x48_joint_id, cd->x4C_joint_id,
                cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x,
                -2.0F + (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y),
-               cd->x140.x, cd->x140.y) ||
+               cd->x140.x, cd->x140.y, NULL, &sp10, NULL, NULL, 6,
+               cd->x48_joint_id, cd->x4C_joint_id) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(sp10)))))
     {
         if (p_ledge_id != NULL) {
@@ -1375,17 +1374,16 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
         cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x > sp14.x &&
         cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y < sp14.y &&
         (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y > cd->x140.y ||
-         ((!mpLib_80051EC8(NULL, &sp10, NULL, NULL, 10, cd->x48_joint_id,
-                           cd->x4C_joint_id,
-                           cd->cur_pos.x + cd->xA4_ecbCurrCorrect.top.x,
+         ((!mpLib_80051EC8(cd->cur_pos.x + cd->xA4_ecbCurrCorrect.top.x,
                            cd->cur_pos.y + cd->xA4_ecbCurrCorrect.top.y,
-                           cd->x140.x, cd->x140.y) ||
+                           cd->x140.x, cd->x140.y, NULL, &sp10, NULL, NULL, 10,
+                           cd->x48_joint_id, cd->x4C_joint_id) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(sp10)) &&
           (!mpLib_80051EC8(
-               NULL, &sp10, NULL, NULL, 10, cd->x48_joint_id, cd->x4C_joint_id,
                cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x,
                -2.0F + (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y),
-               cd->x140.x, cd->x140.y) ||
+               cd->x140.x, cd->x140.y, NULL, &sp10, NULL, NULL, 10,
+               cd->x48_joint_id, cd->x4C_joint_id) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(sp10)))))
     {
         if (p_ledge_id != NULL) {
