@@ -1,5 +1,7 @@
 #include "ftanim.h"
 
+#include "placeholder.h"
+
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -719,7 +721,79 @@ void ftAnim_8006F628(Fighter* fp, Fighter_Part arg1, int arg2)
     }
 }
 
-/// #ftAnim_8006F7C8
+void ftAnim_8006F7C8(Fighter* ft, Fighter_Part part, int arg2, FigaTree* tree)
+{
+    s8* nodes;
+    FigaTrack* tracks;
+    int r29;
+    int i;
+    int r27;
+    int r22;
+    PAD_STACK(8);
+
+    nodes = tree->nodes;
+    tracks = tree->tracks;
+    r29 = ft->x594_bits;
+    r27 = ft->parts[part].xC;
+
+    for (i = 0; i < part; i++) {
+        u32 r3 = ftParts_8007506C(ft->kind, i);
+        if (r3 == 0 || r3 & r29) {
+            tracks = &tracks[*nodes];
+            nodes += 1;
+        }
+    }
+
+    r22 = i;
+
+    while (*nodes != -1) {
+        FighterBone* r3 = &ft->parts[r22];
+        int r21;
+
+        while (!r3->flags_b1) {
+            r3 += 1;
+            i += 1;
+            r22 += 1;
+        }
+
+        r21 = i;
+
+        while (true) {
+            u32 r3;
+            if (!ft->parts[r21].flags_b2) {
+                break;
+            }
+
+            r3 = ftParts_8007506C(ft->kind, i);
+            if (r3 == 0 || r3 & r29) {
+                break;
+            }
+
+            r21 += 1;
+            i += 1;
+            r22 += 1;
+        }
+
+        if (ft->parts[r22].xC <= r27 && i != part) {
+            break;
+        }
+
+        if (!ft->parts[r22].flags_b0 && !ft->parts[r22].flags_b5) {
+            HSD_JObj* r3;
+            if (arg2) {
+                r3 = ft->parts[r22].x4_jobj2;
+            } else {
+                r3 = ft->parts[r22].joint;
+            }
+            lbAnim_8001E6D8(r3, tree, tracks, *nodes);
+        }
+
+        tracks = &tracks[*nodes];
+        i += 1;
+        r22 += 1;
+        nodes += 1;
+    }
+}
 
 void ftAnim_8006F954(Fighter* fp, Fighter_Part arg1, int arg2,
                      FigaTree* unused)
