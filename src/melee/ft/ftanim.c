@@ -881,7 +881,52 @@ void ftAnim_8006FB88(Fighter* fp, int arg1, HSD_Joint* arg2)
     }
 }
 
-/// #ftAnim_8006FCE4
+void ftAnim_8006FCE4(Fighter* fp, bool do_blending)
+{
+    FigaTree* tree;       // r31
+    int x594_bits;        // r30
+    FighterKind kind;     // r29
+    s8* cur_node;         // r28
+    FigaTrack* cur_track; // r27
+    int i;                // r26
+
+    i = 0;
+    tree = fp->x590;
+    cur_node = tree->nodes;
+    x594_bits = fp->x594_bits;
+    cur_track = tree->tracks;
+    kind = fp->x597_bits;
+
+    while (*cur_node != -1) {
+        int part;
+
+        while (true) {
+            u32 r3 = ftParts_8007506C(kind, i);
+            if (r3 == 0 || r3 & x594_bits) {
+                break;
+            }
+            i++;
+        }
+
+        part = ftParts_80075028(fp->kind, kind, i);
+        if (part != 0xFFU) {
+            if (fp->parts[part].flags_b1 && !fp->parts[part].flags_b0 &&
+                !fp->parts[part].flags_b5)
+            {
+                HSD_JObj* jobj = get_part_joint(fp, part, do_blending);
+                if (fp->parts[part].flags_b3) {
+                    lbAnim_8001E6D8(jobj, tree, cur_track, *cur_node);
+                } else {
+                    lbAnim_8001E7E8(jobj, tree, cur_track, *cur_node);
+                }
+            }
+        }
+
+        cur_track = &cur_track[*cur_node];
+        i++;
+        cur_node++;
+    }
+}
 
 void ftAnim_8006FE08(Fighter* fp, int arg1)
 {

@@ -789,6 +789,10 @@ struct FighterBone {
             /* +9:6 */ u8 flags2_b6 : 1;
             /* +9:7 */ u8 flags2_b7 : 1;
         };
+        struct {
+            u8 hi;
+            u8 lo;
+        };
         u16 flags8;
     };
     union {
