@@ -87,6 +87,7 @@ void fn_8024ECCC(HSD_GObj* arg0)
                 }
 }
 
+/// @brief creates the warning modal
 void mnDataDel_8024EEC0(void)
 {
     HSD_JObj* cursor_yes;

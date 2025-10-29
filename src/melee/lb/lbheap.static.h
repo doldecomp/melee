@@ -6,26 +6,26 @@
 
 #include <placeholder.h>
 
-struct lbHeap_80431FA0_x10_t {
-    /* 10 */ s32 unk_10;
-    /* 14 */ Handle* unk_14;
-    /* 18 */ s32 unk_18;
-    /* 1C */ u32 unk_1C;
-    /* 20 */ s32 unk_20;
-    /* 24 */ s32 unk_24;
+struct Heap {
+    /* 10 */ s32 id;
+    /* 14 */ Handle* handle;
+    /* 18 */ s32 start;
+    /* 1C */ u32 size;
+    /* 20 */ s32 type;
+    /* 24 */ s32 transient;
     /* 28 */ int status;
 };
-STATIC_ASSERT(sizeof(struct lbHeap_80431FA0_x10_t) == 0x1C);
+STATIC_ASSERT(sizeof(struct Heap) == 0x1C);
 
-struct lbHeap_80431FA0_t {
-    /* 0x00 */ void* unk_0;        /* inferred */
-    /* 0x04 */ void* unk_4;        /* inferred */
-    /* 0x08 */ unsigned int unk_8; /* inferred */
-    /* 0x0C */ unsigned int unk_C; /* inferred */
-    /* 0x10 */ struct lbHeap_80431FA0_x10_t unk_10[6];
+struct lbHeap_HeapState {
+    /* 0x00 */ void* arena_lo;        /* inferred */
+    /* 0x04 */ void* arena_hi;        /* inferred */
+    /* 0x08 */ unsigned int aram_lo; /* inferred */
+    /* 0x0C */ unsigned int aram_hi; /* inferred */
+    /* 0x10 */ struct Heap heap_array[6];
 }; /* size = 0xB8 */
-STATIC_ASSERT(sizeof(struct lbHeap_80431FA0_t) == 0xB8);
+STATIC_ASSERT(sizeof(struct lbHeap_HeapState) == 0xB8);
 
-/* 431FA0 */ static struct lbHeap_80431FA0_t lbHeap_80431FA0;
+/* 431FA0 */ static struct lbHeap_HeapState lbHeap_80431FA0;
 
 #endif

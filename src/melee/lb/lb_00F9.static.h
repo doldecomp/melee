@@ -5,6 +5,7 @@
 #include "platform.h"
 
 #include <placeholder.h>
+#include "baselib/forward.h"
 
 struct _m2c_stack_lb_80014638 {
     /* 0x00 */ char pad_0[0x18];
@@ -14,6 +15,20 @@ struct _m2c_stack_lb_80014638 {
     /* 0x3C */ char pad_3C[4];
 }; /* size = 0x40 */
 STATIC_ASSERT(sizeof(struct _m2c_stack_lb_80014638) == 0x40);
+
+struct CameraBlurData {
+    /* 0x00 */ f32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ u8 x10;
+    /* 0x11 */ u8 x11;
+    /* 0x12 */ u8 x12;
+    /* 0x13 */ char pad_13[0x18 - 0x13];
+    /* 0x18 */ HSD_GObjEvent x18;
+    /* 0x1C */ HSD_ImageDesc* x1C;
+    /* 0x20 */ f32 x20;
+};
 
 /* 0103D8 */ static bool lb_800103D8(Vec3* vec, float x0, float x1, float x2,
                                      float x3, float offset);
