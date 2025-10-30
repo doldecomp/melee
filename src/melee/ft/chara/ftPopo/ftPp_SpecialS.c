@@ -20,16 +20,16 @@
 #include "pl/player.h"
 
 #include <common_structs.h>
-#include <dolphin/pad.h>
-#include <trigf.h>
 #include <math.h>
 #include <math_ppc.h>
-#include <melee/ft/chara/ftPopo/ftPp_SpecialS.h>
+#include <trigf.h>
+#include <dolphin/pad.h>
 #include <melee/ft/chara/ftCommon/ftCo_Fall.h>
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
+#include <melee/ft/chara/ftPopo/ftPp_SpecialS.h>
+#include <melee/it/items/itclimbersstring.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lbvector.h>
-#include <melee/it/items/itclimbersstring.h>
 
 /* 121AC8 */ static void ftPp_SpecialHiThrow_0_IASA(Fighter_GObj* gobj);
 /* 121ACC */ static void ftPp_SpecialAirHiThrow_0_IASA(Fighter_GObj* gobj);
@@ -91,15 +91,19 @@ void ftPp_SpecialS_8011F720(Fighter_GObj* gobj)
         if (fp->x2219_b0 && fp->mv.pp.specials.x8 != NULL) {
             temp_r3_2 = fp->mv.pp.specials.x8->x4;
             if (temp_r3_2 != NULL) {
-                var_r0 = HSD_JObjGetNext(HSD_JObjGetChild(GET_JOBJ(temp_r3_2)));
+                var_r0 =
+                    HSD_JObjGetNext(HSD_JObjGetChild(GET_JOBJ(temp_r3_2)));
                 temp_r30 = temp_r3_2->hsd_obj;
-                if (fp->motion_id == ftPp_MS_SpecialS1 || fp->motion_id == ftPp_MS_SpecialS2) {
+                if (fp->motion_id == ftPp_MS_SpecialS1 ||
+                    fp->motion_id == ftPp_MS_SpecialS2)
+                {
                     HSD_JObjClearFlagsAll(var_r0, JOBJ_HIDDEN);
                 } else {
                     HSD_JObjSetFlagsAll(var_r0, JOBJ_HIDDEN);
                 }
                 if (fp->cmd_vars[3] != 0 && fp->mv.pp.specials.xC != 0) {
-                    angle = -atan2f(fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y);
+                    angle = -atan2f(fp->coll_data.floor.normal.x,
+                                    fp->coll_data.floor.normal.y);
                     HSD_JObjSetRotationZ(temp_r30, angle);
                 } else {
                     HSD_JObjSetRotationZ(temp_r30, 0.0F);
@@ -275,7 +279,8 @@ void ftPp_SpecialS2_Anim(Fighter_GObj* gobj)
     }
 }
 
-static inline void inline0(Fighter_GObj* gobj) {
+static inline void inline0(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     fp->take_dmg_cb = NULL;
     fp->death2_cb = NULL;
@@ -373,12 +378,15 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     temp_r30 = fp->dat_attrs;
     if (fp->cmd_vars[0] == 0 && fp->mv.pp.specials.x1C != 0.0F) {
-        target_vel = fp->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
-        ftCommon_8007CA80(fp, fp->mv.pp.specials.x1C, target_vel, fp->co_attrs.gr_friction);
+        target_vel =
+            fp->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
+        ftCommon_8007CA80(fp, fp->mv.pp.specials.x1C, target_vel,
+                          fp->co_attrs.gr_friction);
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
-            temp_r5->xE4_ground_accel_1 += da->x6C * temp_r5->coll_data.floor.normal.x;
+            temp_r5->xE4_ground_accel_1 +=
+                da->x6C * temp_r5->coll_data.floor.normal.x;
         }
         ftCommon_ClampGrVel(fp, temp_r30->x38);
         ftCommon_ApplyGroundMovementNoSlide(gobj);
@@ -392,12 +400,14 @@ void ftPp_SpecialS1_Phys(Fighter_GObj* gobj)
     if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
         fp->mv.pp.specials.x10 += 1;
     }
-    if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > temp_r30->x68) {
+    if (fp->mv.pp.specials.x10 != 0 && fp->mv.pp.specials.x14 > temp_r30->x68)
+    {
         temp_r27 = GET_FIGHTER(gobj);
         temp_r28 = temp_r27->dat_attrs;
         ftCommon_8007D5D4(temp_r27);
         temp_r27->x74_anim_vel.x = temp_r27->xE4_ground_accel_1;
-        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS1, 0x0C4C528A, temp_r27->cur_anim_frame, 1.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS1, 0x0C4C528A,
+                                  temp_r27->cur_anim_frame, 1.0F, 0.0F, NULL);
         temp_r5_2 = GET_FIGHTER(gobj);
         temp_r5_2->take_dmg_cb = ftPp_Init_8011F060;
         temp_r5_2->death2_cb = ftPp_Init_8011F060;
@@ -427,12 +437,15 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
     temp_r31 = GET_FIGHTER(gobj);
     temp_r30 = temp_r31->dat_attrs;
     if (temp_r31->cmd_vars[0] == 0 && temp_r31->mv.pp.specials.x1C != 0.0F) {
-        target_vel = temp_r31->mv.pp.specials.x1C > 0.0F ? temp_r30->x38 : -temp_r30->x38;
-        ftCommon_8007CA80(temp_r31, temp_r31->mv.pp.specials.x1C, target_vel, temp_r31->co_attrs.gr_friction);
+        target_vel = temp_r31->mv.pp.specials.x1C > 0.0F ? temp_r30->x38
+                                                         : -temp_r30->x38;
+        ftCommon_8007CA80(temp_r31, temp_r31->mv.pp.specials.x1C, target_vel,
+                          temp_r31->co_attrs.gr_friction);
         temp_r5 = GET_FIGHTER(gobj);
         {
             ftIceClimberAttributes* da = temp_r5->dat_attrs;
-            temp_r5->xE4_ground_accel_1 += da->x6C * temp_r5->coll_data.floor.normal.x;
+            temp_r5->xE4_ground_accel_1 +=
+                da->x6C * temp_r5->coll_data.floor.normal.x;
         }
         ftCommon_ClampGrVel(temp_r31, temp_r30->x38);
         ftCommon_ApplyGroundMovementNoSlide(gobj);
@@ -443,15 +456,20 @@ void ftPp_SpecialS2_Phys(Fighter_GObj* gobj)
         ftCommon_ApplyGroundMovementNoSlide(gobj);
     }
     temp_r31->mv.pp.specials.x14 += 1;
-    if (((u32) temp_r31->cmd_vars[2] != 0) && (temp_r31->input.x668 & HSD_PAD_B)) {
+    if (((u32) temp_r31->cmd_vars[2] != 0) &&
+        (temp_r31->input.x668 & HSD_PAD_B))
+    {
         temp_r31->mv.pp.specials.x10 += 1;
     }
-    if (temp_r31->mv.pp.specials.x10 != 0 && temp_r31->mv.pp.specials.x14 > temp_r30->x68) {
+    if (temp_r31->mv.pp.specials.x10 != 0 &&
+        temp_r31->mv.pp.specials.x14 > temp_r30->x68)
+    {
         temp_r27 = GET_FIGHTER(gobj);
         temp_r28 = temp_r27->dat_attrs;
         ftCommon_8007D5D4(temp_r27);
         temp_r27->x74_anim_vel.x = temp_r27->xE4_ground_accel_1;
-        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS2, 0xC4C528A, temp_r27->cur_anim_frame, 1.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirS2, 0xC4C528A,
+                                  temp_r27->cur_anim_frame, 1.0F, 0.0F, NULL);
         temp_r5_2 = GET_FIGHTER(gobj);
         temp_r5_2->take_dmg_cb = ftPp_Init_8011F060;
         temp_r5_2->death2_cb = ftPp_Init_8011F060;
@@ -524,19 +542,17 @@ void ftPp_SpecialAirS2_Phys(Fighter_GObj* gobj)
 }
 
 static ftCollisionBox ftNn_Init_803CD820 = {
-    12,
-    0,
-    -6,
-    6,
-    6,
-    6,
+    12, 0, -6, 6, 6, 6,
 };
 
 static inline void inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[3] != 0 && fp->mv.pp.specials.xC != 0) {
-        ftParts_8007592C(fp, 0, fp->facing_dir * atan2f(fp->coll_data.floor.normal.x, fp->coll_data.floor.normal.y));
+        ftParts_8007592C(fp, 0,
+                         fp->facing_dir *
+                             atan2f(fp->coll_data.floor.normal.x,
+                                    fp->coll_data.floor.normal.y));
     } else {
         ftParts_8007592C(fp, 0, 0.0F);
     }
@@ -548,7 +564,8 @@ static inline void inline3(Fighter_GObj* gobj, int msid)
     ftIceClimberAttributes* temp_r30 = fp->dat_attrs;
     ftCommon_8007D5D4(fp);
     fp->x74_anim_vel.x = fp->xE4_ground_accel_1;
-    Fighter_ChangeMotionState(gobj, msid, 0xC4C528A, fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0xC4C528A, fp->cur_anim_frame, 1.0F,
+                              0.0F, NULL);
     inlineA0(gobj);
     ftCommon_ClampSelfVelX(fp, temp_r30->x3C);
 }
@@ -622,7 +639,8 @@ static inline void inline4(Fighter_GObj* gobj, int msid)
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, msid, 0xC4C528A, fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0xC4C528A, fp->cur_anim_frame, 1.0F,
+                              0.0F, NULL);
     inlineA0(gobj);
     fp->x74_anim_vel.y = 0.0F;
     fp->self_vel.y = 0.0F;
@@ -721,7 +739,8 @@ void ftPp_SpecialS_80120E68(Fighter_GObj* gobj)
         temp_r31->self_vel.x = temp_r29->cur_pos.x - temp_r31->cur_pos.x;
         temp_r31->self_vel.y = temp_r29->cur_pos.y - temp_r31->cur_pos.y;
         temp_r31->self_vel.z = 0.0F;
-        temp_r31->self_vel.x = -(3.0F * temp_r29->facing_dir - temp_r31->self_vel.x);
+        temp_r31->self_vel.x =
+            -(3.0F * temp_r29->facing_dir - temp_r31->self_vel.x);
         temp_r31->self_vel.y += 5.0F;
         lbVector_Normalize(&temp_r31->self_vel);
         temp_f3 = SQ(temp_r31->cur_pos.x - temp_r29->cur_pos.x);
