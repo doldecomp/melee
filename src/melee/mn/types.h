@@ -377,4 +377,10 @@ struct SSSData {
     /* +08 */ VsModeData data;
 };
 
+struct AnimLoopSettings {
+    /* +00 */ f32 start_frame;
+    /* +04 */ f32 end_frame;
+    /* +08 */ f32 loop_frame; ///< if -1.0f, dont loop
+};
+
 #endif

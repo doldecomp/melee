@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "mn/forward.h"
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
@@ -78,9 +79,9 @@ typedef struct _mn_unk2 {
 /* 22EB78 */ s32 mn_8022EB78(s32);
 /* 22EBDC */ UNK_RET mn_8022EBDC(UNK_PARAMS);
 /* 22EC18 */ float mn_8022EC18(HSD_JObj*, float*, HSD_TypeMask);
-/* 22ED6C */ float mn_8022ED6C(HSD_JObj*, Vec3*);
-/* 22EE84 */ float mn_8022EE84(HSD_JObj* arg0, Vec3* arg1, HSD_TypeMask arg2);
-/* 22EFD8 */ float mn_8022EFD8(HSD_JObj*, Vec3*);
+/* 22ED6C */ float mn_8022ED6C(HSD_JObj*, AnimLoopSettings*);
+/* 22EE84 */ float mn_8022EE84(HSD_JObj* arg0, AnimLoopSettings* arg1, HSD_TypeMask arg2);
+/* 22EFD8 */ float mn_8022EFD8(HSD_JObj*, AnimLoopSettings*);
 /* 22F0F0 */ void mn_8022F0F0(int);
 /* 22F138 */ void mn_8022F138(u16, u16);
 /* 22F1A8 */ void mn_8022F1A8(u16, u16);

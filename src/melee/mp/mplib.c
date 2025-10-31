@@ -2623,9 +2623,9 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id, int joint_id0,
     return ledge_id;
 }
 
-bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
-                    Vec3* normal_out, u32 arg4, int joint_id0, int joint_id1,
-                    float x1, float y1, float x2, float y2)
+bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
+                    int* line_id_out, u32* flags_out, Vec3* normal_out,
+                    u32 arg4, int joint_id0, int joint_id1)
 {
     f32 dx;
     f32 dy;
@@ -2646,16 +2646,16 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
     min_sq_dist_f31 = F32_MAX;
     temp_r3 = mpLib_800588C8();
     if (!temp_r3) {
-        mpLib_80058970(x1, y1, x2, y2);
+        mpLib_80058970(x0, y0, x1, y1);
     }
     if (arg4 & 0x10) {
         if (arg4 & 1) {
-            if (mpLib_8004F400_Floor(x1, y1, x2, y2, 0.0F, &pos_sp68,
+            if (mpLib_8004F400_Floor(x0, y0, x1, y1, 0.0F, &pos_sp68,
                                      &line_id_sp40, &flags_sp3C, &normal_sp5C,
                                      -1, joint_id0, joint_id1, NULL, NULL))
             {
-                dx = SQ(pos_sp68.x - x1);
-                dy = SQ(pos_sp68.y - y1);
+                dx = SQ(pos_sp68.x - x0);
+                dy = SQ(pos_sp68.y - y0);
                 pos_sp50 = pos_sp68;
                 normal_sp44 = normal_sp5C;
                 min_sq_dist_f31 = dx + dy;
@@ -2664,12 +2664,12 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 2) &&
-            (mpLib_8004FC2C_Ceiling(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+            (mpLib_8004FC2C_Ceiling(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
                                     &flags_sp3C, &normal_sp5C, joint_id0,
                                     joint_id1)))
         {
-            dx = SQ(pos_sp68.x - x1);
-            dy = SQ(pos_sp68.y - y1);
+            dx = SQ(pos_sp68.x - x0);
+            dy = SQ(pos_sp68.y - y0);
             if (min_sq_dist_f31 > dx + dy) {
                 min_sq_dist_f31 = dx + dy;
                 pos_sp50 = pos_sp68;
@@ -2679,11 +2679,11 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 4) && mpLib_8005057C_LeftWall(
-                              x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+                              x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
                               &flags_sp3C, &normal_sp5C, joint_id0, joint_id1))
         {
-            dx = SQ(pos_sp68.x - x1);
-            dy = SQ(pos_sp68.y - y1);
+            dx = SQ(pos_sp68.x - x0);
+            dy = SQ(pos_sp68.y - y0);
             if (min_sq_dist_f31 > dx + dy) {
                 min_sq_dist_f31 = dx + dy;
                 pos_sp50 = pos_sp68;
@@ -2693,12 +2693,12 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 8) &&
-            (mpLib_80050D68_RightWall(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+            (mpLib_80050D68_RightWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
                                       &flags_sp3C, &normal_sp5C, joint_id0,
                                       joint_id1)))
         {
-            dx = SQ(pos_sp68.x - x1);
-            dy = SQ(pos_sp68.y - y1);
+            dx = SQ(pos_sp68.x - x0);
+            dy = SQ(pos_sp68.y - y0);
             if (min_sq_dist_f31 > dx + dy) {
                 min_sq_dist_f31 = dx + dy;
                 pos_sp50 = pos_sp68;
@@ -2709,12 +2709,12 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
         }
     } else {
         if (arg4 & 1) {
-            if (mpLib_8004F008_Floor(x1, y1, x2, y2, 0.0F, &pos_sp68,
+            if (mpLib_8004F008_Floor(x0, y0, x1, y1, 0.0F, &pos_sp68,
                                      &line_id_sp40, &flags_sp3C, &normal_sp5C,
                                      -1, joint_id0, joint_id1, NULL, NULL))
             {
-                dx = SQ(pos_sp68.x - x1);
-                dy = SQ(pos_sp68.y - y1);
+                dx = SQ(pos_sp68.x - x0);
+                dy = SQ(pos_sp68.y - y0);
                 pos_sp50 = pos_sp68;
                 normal_sp44 = normal_sp5C;
                 min_sq_dist_f31 = dx + dy;
@@ -2723,12 +2723,12 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 2) &&
-            (mpLib_8004F8A4_Ceiling(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+            (mpLib_8004F8A4_Ceiling(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
                                     &flags_sp3C, &normal_sp5C, joint_id0,
                                     joint_id1)))
         {
-            dx = SQ(pos_sp68.x - x1);
-            dy = SQ(pos_sp68.y - y1);
+            dx = SQ(pos_sp68.x - x0);
+            dy = SQ(pos_sp68.y - y0);
             if (min_sq_dist_f31 > dx + dy) {
                 min_sq_dist_f31 = dx + dy;
                 pos_sp50 = pos_sp68;
@@ -2738,12 +2738,12 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 4) &&
-            (mpLib_800501CC_LeftWall(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+            (mpLib_800501CC_LeftWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
                                      &flags_sp3C, &normal_sp5C, joint_id0,
                                      joint_id1)))
         {
-            dx = SQ(pos_sp68.x - x1);
-            dy = SQ(pos_sp68.y - y1);
+            dx = SQ(pos_sp68.x - x0);
+            dy = SQ(pos_sp68.y - y0);
             if (min_sq_dist_f31 > dx + dy) {
                 min_sq_dist_f31 = dx + dy;
                 pos_sp50 = pos_sp68;
@@ -2753,12 +2753,12 @@ bool mpLib_80051EC8(Vec3* pos_out, int* line_id_out, u32* flags_out,
             }
         }
         if ((arg4 & 8) &&
-            (mpLib_800509B8_RightWall(x1, y1, x2, y2, &pos_sp68, &line_id_sp40,
+            (mpLib_800509B8_RightWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
                                       &flags_sp3C, &normal_sp5C, joint_id0,
                                       joint_id1)))
         {
-            dx = SQ(pos_sp68.x - x1);
-            dy = SQ(pos_sp68.y - y1);
+            dx = SQ(pos_sp68.x - x0);
+            dy = SQ(pos_sp68.y - y0);
             if (min_sq_dist_f31 > dx + dy) {
                 min_sq_dist_f31 = dx + dy;
                 pos_sp50 = pos_sp68;
@@ -2793,16 +2793,16 @@ bool mpLib_800524DC(Vec3* pos_out, int* line_id_out, u32* flags_out,
                     Vec3* normal_out, int joint_id0, int joint_id1, float x0,
                     float y0, float x1, float y1)
 {
-    return mpLib_80051EC8(pos_out, line_id_out, flags_out, normal_out, 0x1F,
-                          joint_id0, joint_id1, x0, y0, x1, y1);
+    return mpLib_80051EC8(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
+                          normal_out, 0x1F, joint_id0, joint_id1);
 }
 
 bool mpLib_80052508(Vec3* pos_out, int* line_id_out, u32* flags_out,
                     Vec3* normal_out, int joint_id0, int joint_id1, float x0,
                     float y0, float x1, float y1)
 {
-    return mpLib_80051EC8(pos_out, line_id_out, flags_out, normal_out, 0xF,
-                          joint_id0, joint_id1, x0, y0, x1, y1);
+    return mpLib_80051EC8(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
+                          normal_out, 0xF, joint_id0, joint_id1);
 }
 
 int mpLib_80052534_Floor(int line_id)
