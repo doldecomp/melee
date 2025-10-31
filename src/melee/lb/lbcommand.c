@@ -1,6 +1,8 @@
 #include "lb/lbcommand.h"
 
+#include "lb/inlines.h"
 #include "lb/lbbgflash.h"
+#include "lb/types.h"
 
 void (*lbCommand_803B9840[16])(CommandInfo*) = {
     Command_00, Command_01, Command_02, Command_03, Command_04, Command_05,
@@ -8,83 +10,82 @@ void (*lbCommand_803B9840[16])(CommandInfo*) = {
     NULL,       NULL,       NULL,       NULL
 };
 
-// Reset
+/// Reset
 void Command_00(CommandInfo* info)
 {
-    info->u.data_position = 0;
+    info->u = NULL;
 }
 
-// SynchronousTimer
+/// SynchronousTimer
 void Command_01(CommandInfo* info)
 {
-    info->timer += *info->u.data_position & 0x3ffffff;
-    info->u.data_position += 1;
+    info->timer += info->u->Command_00.value;
+    NEXT_CMD(info);
 }
 
-// AsynchronousTimer
+/// AsynchronousTimer
 void Command_02(CommandInfo* info)
 {
-    info->timer = (*info->u.data_position & 0x3ffffff) - info->frame_count;
-    info->u.data_position += 1;
+    info->timer = info->u->Command_02.value - info->frame_count;
+    NEXT_CMD(info);
 }
 
-// SetLoop
+/// SetLoop
 void Command_03(CommandInfo* info)
 {
-    info->event_return[info->loop_count++] = info->u.data_position + 1;
+    info->event_return[info->loop_count++] = info->u + 1;
     info->event_return[info->loop_count++] =
-        (u32*) (*info->u.data_position & 0x3ffffff);
-    info->u.data_position += 1;
+        (union CmdUnion*) info->u->Command_03.value;
+    NEXT_CMD(info);
 }
 
-// Execute Loop
+/// Execute Loop
 void Command_04(CommandInfo* info)
 {
     u32* ptr = (u32*) info;
     ptr[info->loop_count + 3] -= 1;
 
     if ((s32) info->event_return[info->loop_count - 1]) {
-        info->u.data_position = &info->u.Command_04.ptr[info->loop_count][0];
+        info->ptr[0] = &info->ptr[info->loop_count][0];
         return;
     }
-
-    info->u.data_position += 1;
+    NEXT_CMD(info);
     info->loop_count -= 2;
 }
 
 // Subroutine
 void Command_05(CommandInfo* info)
 {
-    info->u.data_position = info->u.data_position + 1;
-    info->event_return[info->loop_count++] = info->u.data_position + 1;
-    info->u.data_position = (u32*) (*info->u.data_position);
+    NEXT_CMD(info);
+    info->event_return[info->loop_count++] = info->u + 1;
+    info->u = info->u->Command_05.ptr;
 }
 
-// Return
+/// Return
 void Command_06(CommandInfo* info)
 {
-    info->u.data_position = info->event_return[info->loop_count -= 1];
+    info->u = info->event_return[info->loop_count -= 1];
 }
 
-// GoTo
+/// Goto
 void Command_07(CommandInfo* info)
 {
-    info->u.data_position += 1;
-    info->u.data_position = (u32*) *info->u.data_position;
+    NEXT_CMD(info);
+    info->u = info->u->Command_07.ptr;
 }
 
-// SetTimerAnimation
+/// SetTimerAnimation
 void Command_08(CommandInfo* info)
 {
-    info->u.data_position += 1;
+    NEXT_CMD(info);
     info->timer = F32_MAX;
 }
 
 void Command_09(CommandInfo* info)
 {
-    Command_09_Struct* cmd = info->u.Command_09;
-    lbBgFlash_80021C48(cmd->param_1, cmd->param_2);
-    info->u.data_position += 1;
+    lbBgFlash_80021C48(info->u->Command_09.param_1,
+                       info->u->Command_09.param_2);
+    NEXT_CMD(info);
 }
 
 bool Command_Execute(CommandInfo* info, u32 command)

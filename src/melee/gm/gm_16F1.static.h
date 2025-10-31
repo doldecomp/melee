@@ -2,8 +2,16 @@
 
 #include <melee/gm/types.h>
 
-static u8 lbl_8046DBC8[0xe];
-/* 46DBD8 */ static UNK_T lbl_8046DBD8[4];
+static struct {
+    u8 x0;
+    u8 x1;
+    struct {
+        u8 x0;
+        u8 x1;
+    } x2[6];
+} lbl_8046DBC8;
+
+/* 46DBD8 */ static lbl_8046DBD8_t lbl_8046DBD8;
 
 static int lbl_803D5648[] = {
     // TODO this is the start of a data section
@@ -53,10 +61,10 @@ static int lbl_803D5648[] = {
 };
 
 struct lbl_803D5A4C_t {
-    /* +0 */ short x0;
+    /* +0 */ short kind;
     /* +2 */ u16 x2;
     /* +4 */ u8 x4;
-    /* +5 */ u8 x5;
+    /* +5 */ u8 x5; ///< Gm_DecType
     /* +6 */ u8 x6;
 };
 
@@ -321,4 +329,4 @@ struct lbl_803D5A4C_t {
         { 0x29A },
     };
 
-/* 4D65A0 */ static s8 lbl_804D65A0;
+/* 4D65A0 */ static u8 lbl_804D65A0;

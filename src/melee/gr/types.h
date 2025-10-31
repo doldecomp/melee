@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "mp/forward.h"
 #include <melee/cm/forward.h>
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
@@ -88,7 +89,7 @@ struct StageInfo {
         s32 unk0;
         Article* unk4;
     }** itemdata;
-    /* +6AC */ void* coll_data;
+    /* +6AC */ mpCollData* coll_data;
     /* +6B0 */ UnkStage6B0* param;
     /* +6B4 */ UNK_T** ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
@@ -554,6 +555,19 @@ struct grFourside_GroundVars {
     /*  +4 gp+C8 */ s32 x4;
 };
 
+struct grGreens_GroundVars {
+    /*  +0 gp+C4 */  struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x0_flags;
+};
+
 struct grOnett_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
@@ -674,6 +688,7 @@ struct Ground {
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;
             struct grFourside_GroundVars fourside;
+            struct grGreens_GroundVars greens;
             struct grIceMt_GroundVars icemt;
             struct grIceMt_GroundVars2 icemt2;
             struct grInishie1_GroundVars inishie1;

@@ -3,6 +3,7 @@
 #include "gm_unsplit.h"
 
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbdvd.h>
 
 extern UNK_T gm_80470708[];
 extern DebugGameOverData gm_80470850;
@@ -319,13 +320,13 @@ MinorScene gm_803DDC58_MinorScenes[] = {
 
 void gm_801B34B8_OnInit(void)
 {
-    u8* temp_r3 = gmMainLib_8015CDC8();
-    temp_r3[0] = 0x21;
-    temp_r3[2] = 0;
-    temp_r3[1] = 3;
-    temp_r3[3] = 0;
-    temp_r3[4] = 0x78;
-    temp_r3[5] = 0;
+    struct gmm_x0_528_t* temp_r3 = gmMainLib_8015CDC8();
+    temp_r3->c_kind = 0x21;
+    temp_r3->color = 0;
+    temp_r3->stocks = 3;
+    temp_r3->cpu_level = 0;
+    temp_r3->x4 = 0x78;
+    temp_r3->x5 = 0;
 }
 
 /// #gm_801B3500
@@ -334,16 +335,31 @@ void gm_801B34B8_OnInit(void)
 
 /// #gm_801B3B40
 
-void gm_801B3D44(MinorScene* arg0)
+void gm_801B3D44(MinorScene* scene)
 {
-    struct DebugGameOverData* temp_r31 = gm_801A427C(arg0);
-    gm_8017C9A8(temp_r31, gm_8017EB30(), 1);
+    struct DebugGameOverData* temp_r31 = gm_801A427C(scene);
+    gm_8017C9A8(temp_r31, &gm_8017EB30()->x0, 1);
 }
 
-/// #gm_801B3D84
+void gm_801B3D84(MinorScene* scene)
+{
+    DebugGameOverData* temp_r30 = gm_801A4284(scene);
+    gm_8017CA38(temp_r30, &gm_8017EB30()->x0, gmMainLib_8015CDC8(), 1);
+}
 
-/// #gm_801B3DD8
+void gm_801B3DD8(MinorScene* scene)
+{
+    CSSData* css = gm_801A427C(scene);
+    struct gmm_x0_528_t* temp_r31 = gmMainLib_8015CDC8();
+    gm_801B06B0(css, 0xB, temp_r31->c_kind, temp_r31->stocks, temp_r31->color,
+                temp_r31->x4, temp_r31->cpu_level, gm_8017EB30()->x0.slot);
+    lbDvd_800174BC();
+}
 
 /// #gm_801B3E44
 
-/// #gm_801B3F18
+void gm_801B3F18(MinorScene* scene)
+{
+    gm_801A42E8(MJ_MENU);
+    gm_801A42D4();
+}

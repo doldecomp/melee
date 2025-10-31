@@ -27,7 +27,8 @@
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C8C.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
+#include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
 #include "ft/ftchangeparam.h"
 #include "ft/ftcolanim.h"
@@ -35,9 +36,14 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_DamageScrew.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Jump.h"
 #include "ftCommon/ftCo_JumpAerial.h"
+#include "ftCommon/ftCo_Landing.h"
+#include "ftCommon/ftCo_Throw.h"
+#include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/ftDk_HeavyLanding.h"
 #include "gm/gm_unsplit.h"
@@ -57,8 +63,6 @@
 #include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
-/* 08E5A4 */ static void ftCo_8008E5A4(Fighter* fp);
-
 int ftCo_803C5520[2][12] = {
     { 81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87 },
     { 84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87 },
@@ -77,7 +81,7 @@ float ftCo_Damage_CalcAngle(Fighter* fp, float f)
         return deg_to_rad * fp->dmg.x1848_kb_angle;
     }
     if (fp->ground_or_air == GA_Air) {
-        return p_ftCommonData->x144;
+        return p_ftCommonData->x144_radians;
     } else if (f < p_ftCommonData->x14C) {
         return 0;
     } else {
@@ -128,15 +132,14 @@ not_squatwait:
         fp->dmg.kb_applied *= p_ftCommonData->kb_smashcharge_mul;
     }
     if (fp->x34_scale.y != 1) {
-        fp->dmg.kb_applied =
-            ftCo_CalcYScaledKnockback(Fighter_804D6524, fp->dmg.kb_applied,
-                                      fp->x34_scale.y, *Fighter_804D6524);
+        fp->dmg.kb_applied = ftCo_CalcYScaledKnockback(
+            fp->dmg.kb_applied, fp->x34_scale.y, Fighter_804D6524->x0);
     }
     {
         float armor =
             fp->dmg.armor0 > fp->dmg.armor1 ? fp->dmg.armor0 : fp->dmg.armor1;
-        if (fp->x2223_b7) {
-            armor += p_ftCommonData->unk_armor;
+        if (fp->is_metal) {
+            armor += p_ftCommonData->metal_armor;
         }
         fp->dmg.kb_applied -= armor;
         if (fp->dmg.kb_applied < p_ftCommonData->kb_min) {
@@ -1072,7 +1075,7 @@ void ftCo_Damage_Coll(Fighter_GObj* gobj)
             if (mag >= p_ftCommonData->x1E0) {
                 ftCo_80097D40(gobj);
             } else if (mag >= p_ftCommonData->x1E4) {
-                ftCo_800D5BF8(gobj);
+                ftCo_Landing_Enter_Basic(gobj);
             } else {
                 ftCommon_8007D7FC(fp);
             }

@@ -7,14 +7,16 @@
 
 #include "it/items/types.h"
 
+#include <dolphin/mtx.h>
+
 /* 29570C */ void it_3F14_Logic23_Spawned(Item_GObj*);
-/* 295748 */ UNK_RET it_80295748(UNK_PARAMS);
-/* 295770 */ UNK_RET it_80295770(UNK_PARAMS);
-/* 2957AC */ UNK_RET it_802957AC(UNK_PARAMS);
+/* 295748 */ void it_80295748(Item_GObj* gobj, Vec* pos);
+/* 295770 */ void it_80295770(Item_GObj*, Vec*, float, int);
+/* 2957AC */ void it_802957AC(Item_GObj*);
 /* 295804 */ bool itLipstick_UnkMotion0_Anim(Item_GObj* gobj);
 /* 29580C */ void itLipstick_UnkMotion0_Phys(Item_GObj* gobj);
 /* 295810 */ bool itLipstick_UnkMotion0_Coll(Item_GObj* gobj);
-/* 29583C */ UNK_RET it_8029583C(UNK_PARAMS);
+/* 29583C */ void it_8029583C(Item_GObj* gobj);
 /* 295864 */ bool itLipstick_UnkMotion4_Anim(Item_GObj* gobj);
 /* 29586C */ void itLipstick_UnkMotion1_Phys(Item_GObj* gobj);
 /* 29589C */ bool itLipstick_UnkMotion1_Coll(Item_GObj* gobj);

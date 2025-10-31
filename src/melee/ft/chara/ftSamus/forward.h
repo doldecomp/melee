@@ -49,7 +49,7 @@ typedef enum ftSamus_MotionState {
     ftSs_MS_SpecialLw = ftCo_MS_Count,
     ftSs_MS_SpecialAirLw,
     ftSs_MS_SpecialNStart,
-    ftSs_MS_SpecialNHold,
+    /* 158 */ ftSs_MS_SpecialNHold,
     ftSs_MS_SpecialNCancel,
     ftSs_MS_SpecialN,
     ftSs_MS_SpecialAirNStart,

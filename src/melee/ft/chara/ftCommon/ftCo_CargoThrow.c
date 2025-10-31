@@ -12,16 +12,19 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
+#include "ftCommon/ftCo_Thrown.h"
 #include "ftDonkey/types.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 09C02C */ static bool ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid);
+/* 09C02C */ static void ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid);
 /* 09C170 */ static void ftCo_8009C170(Fighter_GObj* gobj);
 /* 09C45C */ static void ftCo_8009C45C(Fighter_GObj* gobj);
 
@@ -92,7 +95,7 @@ bool ftCo_8009BF3C(Fighter_GObj* gobj)
     return false;
 }
 
-bool ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid)
+void ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid)
 {
     u8 _[16] = { 0 };
     Fighter* fp = gobj->user_data;
@@ -117,7 +120,7 @@ bool ftCo_8009C02C(Fighter_GObj* gobj, FtMotionId msid)
         FtMotionId msid1 = msid;
         msid1 -= fp->x2CC->x4_motion_state + 10;
         msid1 += ftCo_MS_ThrownFF;
-        return ftCo_800DE3FC(fp->victim_gobj, msid1, 1);
+        ftCo_800DE3FC(fp->victim_gobj, msid1, 1);
     }
 }
 

@@ -10,10 +10,12 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 
 #include <math.h>
@@ -47,7 +49,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
             fp->mv.co.capturekirby.pos_offset.x = fp->cur_pos.x - vec0.x;
             fp->mv.co.capturekirby.pos_offset.y = fp->cur_pos.y - vec0.y;
         }
-        ftKb_SpecialN_800F5B20(fp->victim_gobj);
+        ftKb_SpecialN_800F5B20(fp->victim_gobj, &vec1);
         {
             Vec3* scale = &fp->mv.co.capturekirby.scale;
             fp->mv.co.capturekirby.x10.x = vec1.x;

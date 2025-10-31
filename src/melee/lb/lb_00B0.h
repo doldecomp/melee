@@ -15,7 +15,7 @@
 /* 00B074 */ bool lb_8000B074(HSD_JObj*);
 /* 00B09C */ bool lb_8000B09C(HSD_JObj*);
 /* 00B134 */ bool lb_8000B134(HSD_JObj*);
-/* 00B1CC */ void lb_8000B1CC(HSD_JObj*, Vec3*, Vec3*);
+/* 00B1CC */ void lb_8000B1CC(HSD_JObj* jobj, Vec3* pos0, Vec3* pos1);
 /* 00B4FC */ void lb_8000B4FC(HSD_JObj*, HSD_Joint*);
 /* 00B5DC */ void lb_8000B5DC(HSD_JObj*, HSD_Joint*);
 /* 00B6A4 */ void lb_8000B6A4(HSD_JObj*, HSD_Joint*);

@@ -277,7 +277,7 @@ void gm_801B0348(StartMeleeData* arg0)
     int i;
     int j;
 
-    if (arg0->rules.x8 != 1) {
+    if (arg0->rules.is_teams != true) {
         return;
     }
 
@@ -411,8 +411,8 @@ void gm_801B06B0(CSSData* css_data, u8 type, s8 c_kind, s8 stocks, s8 color,
 
 #pragma push
 #pragma dont_inline on
-void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, u8* color,
-                 s8* arg4, u8* level)
+void gm_801B0730(CSSData* css_data, s8* c_kind, u8* stocks, u8* color,
+                 u8* nametag, u8* level)
 {
     s32 slot;
 
@@ -429,8 +429,8 @@ void gm_801B0730(CSSData* css_data, s8* c_kind, s8* stocks, u8* color,
     if (level != NULL) {
         *level = css_data->data.data.players[slot].cpu_level;
     }
-    if (arg4 != NULL) {
-        *arg4 = css_data->data.data.players[slot].xA;
+    if (nametag != NULL) {
+        *nametag = css_data->data.data.players[slot].xA;
     }
 }
 #pragma pop
@@ -489,30 +489,30 @@ void gm_801B089C(MinorScene* scene)
     int* temp_r3 = gm_801A4284(scene);
     if (g_debugLevel >= 3) {
         if (*temp_r3 & 0x100) {
-            gm_801A42E8(0xE);
+            gm_801A42E8(MJ_DEBUG_VS);
         } else if (*temp_r3 & 0x1000) {
             gm_80173EEC();
             gm_80172898(0x100);
-            if (gm_80173754(1, 0) == 0) {
-                gm_801A42E8(1);
+            if (!gm_80173754(1, 0)) {
+                gm_801A42E8(MJ_MENU);
             }
         } else if (*temp_r3 & 0x400) {
-            gm_801A42E8(7);
+            gm_801A42E8(MJ_DEBUG_SOUND_TEST);
         } else if (*temp_r3 & 0x800) {
-            gm_801A42E8(6);
+            gm_801A42E8(MJ_DEBUG);
         } else {
             gm_801BF708(1);
-            gm_801A42E8(0x18);
+            gm_801A42E8(MJ_OPENING_MV);
         }
     } else if (*temp_r3 & 0x1000) {
         gm_80173EEC();
         gm_80172898(0x100);
-        if (gm_80173754(1, 0) == 0) {
-            gm_801A42E8(1);
+        if (!gm_80173754(1, 0)) {
+            gm_801A42E8(MJ_MENU);
         }
     } else {
         gm_801BF708(1);
-        gm_801A42E8(0x18);
+        gm_801A42E8(MJ_OPENING_MV);
     }
     gm_801A42D4();
 }
@@ -629,8 +629,8 @@ void gm_801B0C74(MinorScene* arg0)
     data = gm_801A427C(arg0);
     data->x0 = 0x1869F;
     data->x8 = 1;
-    data->x10 = un_803FA258[0x4D];
-    data->x14 = 0;
+    data->ckind = un_803FA258[0x4D];
+    data->slot = 0;
     data->x15 = 0x78;
     data->x18 = HSD_Randi(0x3E8);
     data->x16 = (HSD_Randi(0xA) + 1);
@@ -1585,11 +1585,11 @@ void gm_801B2204(MinorScene* arg0)
     gm_80163298(
         temp_r3->match_end.player_standings[0].character_kind,
         (u16) gm_80188454(
-            (s8) temp_r3->match_end.player_standings[0].character_kind));
+            temp_r3->match_end.player_standings[0].character_kind));
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
-    if (gm_80173754(0x1C, gm_804D68C0) == 0) {
-        gm_SetScenePendingMinor(MJ_TITLE);
+    if (!gm_80173754(0x1C, gm_804D68C0)) {
+        gm_SetScenePendingMinor(0);
     }
     lbAudioAx_80024030(1);
 }
@@ -1620,12 +1620,12 @@ void gm_801B23C4_OnLoad(void)
     gm_804D68C1 = 0;
 }
 
-UNK_T gm_801B23F0(void)
+void gm_801B23F0(void)
 {
     size_t size = GXGetTexBufferSize(0x280, 0x1E0, 4, 0, 0);
     lbDvd_80017740(0, 0x7D6, 4, 4, OSRoundUp32B(size), 0, 1, 0x20, 0);
     lbDvd_80017740(0, 0x7D7, 4, 4, lbSnap_8001E204(), 0, 1, 0x20, 0);
-    return lbDvd_80017740(0, 0x7D8, 4, 4, lbSnap_8001E210(), 0, 1, 0x20, 0);
+    lbDvd_80017740(0, 0x7D8, 4, 4, lbSnap_8001E210(), 0, 1, 0x20, 0);
 }
 
 void gm_801B24B4(MinorScene* arg0)
@@ -1683,7 +1683,7 @@ void gm_801B25D4(MinorScene* arg0)
     temp_r31 = &gmMainLib_804D3EE0->unk_950;
     temp_r3 = gm_801A4284(arg0);
     if (temp_r3->pending_scene_change == 2) {
-        gm_801A42F8(1);
+        gm_801A42F8(MJ_MENU);
         return;
     }
 
@@ -1723,7 +1723,7 @@ void gm_801B2704(MinorScene* arg0)
         lbAudioAx_80027168();
         return;
     }
-    gm_SetScenePendingMinor(MN_MENU);
+    gm_SetScenePendingMinor(1);
 }
 
 void gm_801B2790(MinorScene* arg0)
@@ -1785,7 +1785,7 @@ void gm_801B2AF8(MinorScene* arg0)
     gm_80168710(&gm_80479D98.match_end, temp_r30);
     gm_8016247C(gm_801688AC(&gm_80479D98.match_end));
     gm_801A5258(temp_r29, &gm_80479D98.match_end);
-    gm_SetScenePendingMinor(MN_MENU);
+    gm_SetScenePendingMinor(1);
 }
 
 void gm_801B2B7C_OnInit(void)

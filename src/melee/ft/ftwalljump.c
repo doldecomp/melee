@@ -22,8 +22,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
 
-    // is a walljump character? is airborne?
-    if (fp0->x2224_b7) {
+    if (fp0->can_walljump) {
         CollData* coll_data = &fp0->coll_data;
         if ((fp0->coll_data.env_flags & MPCOLL_FLAGS_B11) ||
             (coll_data->env_flags & MPCOLL_FLAGS_B05))
@@ -54,7 +53,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     ecb.y += fp0->cur_pos.y;
                     ecb.z += fp0->cur_pos.z;
                     // compute distance to the wall?
-                    if (!mpLib_800567C0(coll_data->left_wall.index, &ecb,
+                    if (!mpGetSpeed(coll_data->left_wall.index, &ecb,
                                         &wall_pos))
                     {
                         wall_pos.x = 0.0f;
@@ -68,7 +67,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     ecb.y += fp0->cur_pos.y;
                     ecb.z += fp0->cur_pos.z;
                     // compute distance to the wall?
-                    if (!mpLib_800567C0(coll_data->right_wall.index, &ecb,
+                    if (!mpGetSpeed(coll_data->right_wall.index, &ecb,
                                         &wall_pos))
                     {
                         wall_pos.x = 0.0f;
@@ -82,7 +81,7 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     float x_diff = fp0->pos_delta.x - wall_pos.x;
                     x_diff = x_diff < 0 ? -x_diff : x_diff;
 
-                    if (x_diff > fp0->co_attrs.x130) {
+                    if (x_diff > fp0->co_attrs.x148) {
                         // walljump input phase one completed, now start the
                         // walljump input timer and check for the control stick
                         // movement away from the wall in the next phase

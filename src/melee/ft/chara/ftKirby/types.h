@@ -4,8 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/forward.h"
-
+#include "ft/dobjlist.h"
 #include "ftGameWatch/types.h"
 #include "ftMars/types.h"
 #include "ftNess/types.h"
@@ -27,16 +26,22 @@ struct ftKb_FighterVars {
         /*  +9   fp+2235 */ u8 x9[3];
         /*  +C   fp+2238 */ FighterKind kind;
         /* +10   fp+223C */ HSD_JObj* jobj;
-        /* +14   fp+2240 */ u32 x14;
-        /* +18   fp+2244 */ UNK_T unk_hsd_obj;
-        /* +1C   fp+2248 */ UNK_T x1C;
+        /* +14   fp+2240 */ DObjList x14;
+        /* +1C   fp+2248 */ u32 x1C;
         /* +20   fp+224C */ UNK_T x20;
-        /* +24   fp+2250 */ UNK_T x24;
+        /* +24   fp+2250 */ u32 x24;
     } hat;
-    /* fp+224C   */ u8 _28[0x60 - 0x28];
+    /* fp+224C   */ HSD_DObj** x28;
+    /* fp+2250   */ u8 _2C[0x44 - 0x2C];
+    /* fp+2270   */ struct KirbyFV_x44_t {
+        int x0;
+    } x44;
+    /* fp+224C   */ u8 _48[0x60 - 0x48];
     /* fp+228C   */ UNK_T x60;
-    /* fp+2290   */ UNK_T x64;
-    /* fp+2294   */ u8 _68[0x7C - 0x68];
+    /* fp+2290   */ bool x64;
+    /* fp+2294   */ u8 _68[0x74 - 0x68];
+    /* fp+22A0   */ u32 x74;
+    /* fp+22A4   */ u32 x78;
     /* fp+22A8   */ Item_GObj* ns_flash_gobj;
     /* fp+2294   */ u8 x80[0x9C - 0x80];
     /* fp+22C8   */ int x9C;
@@ -44,18 +49,18 @@ struct ftKb_FighterVars {
     /* fp+22D0   */ UNK_T xA4;
     /* fp+22D4   */ int xA8;
     /* fp+22D8   */ UNK_T xAC;
-    /* fp+22DC   */ UNK_T xB0;
+    /* fp+22DC   */ u32 xB0;
     /* fp+22E0   */ int xB4;
-    /* fp+22E4   */ UNK_T xB8;
+    /* fp+22E4   */ u32 xB8;
     /* fp+22E8   */ int xBC;
-    /* fp+22EC   */ UNK_T xC0;
-    /* fp+22F0   */ UNK_T xC4;
+    /* fp+22EC   */ Item_GObj* xC0;
+    /* fp+22F0   */ bool xC4;
     /* fp+22F4   */ UNK_T xC8;
     /* fp+22F8   */ bool xCC;
-    /* fp+22FC   */ Item_GObj* xD0;
-    /* fp+2300   */ UNK_T xD4;
-    /* fp+2304   */ UNK_T xD8;
-    /* fp+2308   */ UNK_T xDC;
+    /* fp+22FC   */ Item_GObj* xD0; ///< Peach toad item
+    /* fp+2300   */ int xD4;
+    /* fp+2304   */ int xD8;
+    /* fp+2308   */ Item_GObj* xDC; ///< Game & Watch pan item
     /* fp+230C   */ int xE0;
     /* fp+2310   */ short xE4;
     /* fp+2314   */ float xE8;
@@ -378,14 +383,8 @@ struct ftKb_DatAttrs {
 
     /* +3EC */ AbsorbDesc specialn_pe_absorbdesc;
     /* +400 */ ReflectDesc specialn_zd_reflectdesc;
-
-    // Final Cutter
-    /* +424 */ float specialhi_initial_velocity;
-    /* +428 */ float specialhi_unk2;
-    /* +42C */ float specialhi_duration;
-    /* +430 */ float specialhi_deceleration_rate;
 };
-STATIC_ASSERT(sizeof(struct ftKb_DatAttrs) == 0x434);
+STATIC_ASSERT(sizeof(struct ftKb_DatAttrs) == 0x424);
 
 union ftKb_MotionVars {
     struct ftGameWatch_SpecialNVars specialn_gw;

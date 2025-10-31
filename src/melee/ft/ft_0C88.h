@@ -14,6 +14,6 @@
 /* 0C8AF0 */ void ftCo_800C8AF0(Fighter*);
 /* 0C8B1C */ void fn_800C8B1C(Fighter_GObj* gobj);
 /* 0C8B2C */ bool ftCo_800C8B2C(Fighter*, int, bool);
-/* 0C8B60 */ void ftCo_800C8B60(Fighter* fp, int, s8);
+/* 0C8B60 */ void ftCo_800C8B60(Fighter* fp, u8, u8);
 
 #endif

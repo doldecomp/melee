@@ -175,7 +175,7 @@ static void reflect(HSD_GObj* gobj)
         ftColl_CreateReflectHit(gobj, &sa->cape_reflection, NULL);
     } else if (fp->cmd_vars[1] == 0 && fp->mv.mr.SpecialS.reflecting == true) {
         fp->mv.mr.SpecialS.reflecting = false;
-        fp->x2218_b3 = false;
+        fp->reflecting = false;
     }
 
     ftColl_8007AEF8(gobj);
@@ -239,12 +239,12 @@ void ftMr_SpecialAirS_Phys(HSD_GObj* gobj)
             coords.x += 3 * fp->facing_dir;
             lb_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }
-        ftCommon_8007D494(fp, sa->specials.grav, sa->specials.terminal_vel);
+        ftCommon_Fall(fp, sa->specials.grav, sa->specials.terminal_vel);
     } else {
-        ftCommon_8007D4B8(fp);
+        ftCommon_FallBasic(fp);
     }
 
-    ftCommon_8007CE94(fp, sa->specials.vel.x);
+    ftCommon_ApplyFrictionAir(fp, sa->specials.vel.x);
     reflect(gobj);
 }
 
@@ -265,8 +265,8 @@ void ftMr_SpecialAirS_Coll(HSD_GObj* gobj)
 static void collUpdateVars(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((s32) fp->mv.mr.SpecialS.reflecting != false) {
-        fp->x2218_b3 = 1;
+    if (fp->mv.mr.SpecialS.reflecting) {
+        fp->reflecting = true;
     }
     setCallbacks(fp);
     fp->accessory4_cb = ftMr_SpecialS_CreateCape;

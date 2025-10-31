@@ -15,7 +15,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
@@ -32,7 +32,7 @@ bool ftCo_80099F1C(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (fp->input.lstick.y <= -p_ftCommonData->x464 &&
         fp->x671_timer_lstick_tilt_y < p_ftCommonData->x468 &&
-        mpColl_8004CBC0(&fp->coll_data))
+        mpColl_IsOnPlatform(&fp->coll_data))
     {
         return true;
     }
@@ -70,7 +70,7 @@ bool ftCo_8009A134(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
     CollData* coll = &fp->coll_data;
-    if (mpColl_8004CBC0(coll)) {
+    if (mpColl_IsOnPlatform(coll)) {
         mpColl_8004CBE8(coll);
         return true;
     }
@@ -83,7 +83,7 @@ void ftCo_8009A184(Fighter_GObj* gobj, FtMotionId msid, MotionFlags mf,
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
     fp->self_vel.y = p_ftCommonData->x46C;
     Fighter_ChangeMotionState(gobj, msid, mf, anim_start, 1, 0, NULL);
     mpColl_8004CBE8(&fp->coll_data);
@@ -95,7 +95,7 @@ void ftCo_8009A228(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
     fp->self_vel.y = p_ftCommonData->x46C;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Pass, Ft_MF_None, 0, 1, 0, NULL);
     mpColl_8004CBE8(&fp->coll_data);

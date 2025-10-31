@@ -450,11 +450,11 @@ void ftZd_SpecialAirSStart_Phys(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->co_attrs;
-        ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
+        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
-    ftCommon_8007CE94(fp, aerialFriction);
+    ftCommon_ApplyFrictionAir(fp, aerialFriction);
 }
 
 // 8013BFB0 - 8013C010 (96 bytes)
@@ -477,11 +477,11 @@ void ftZd_SpecialAirSLoop_Phys(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->co_attrs;
-        ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
+        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
-    ftCommon_8007CE94(fp, aerialFriction);
+    ftCommon_ApplyFrictionAir(fp, aerialFriction);
 }
 
 // 8013C010 - 8013C070 (96 bytes)
@@ -504,11 +504,11 @@ void ftZd_SpecialAirSEnd_Phys(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->co_attrs;
-        ftCommon_8007D494(fp, charAttr->x2C, fighterAttr->terminal_vel);
+        ftCommon_Fall(fp, charAttr->x2C, fighterAttr->terminal_vel);
     }
 
     aerialFriction = fp->co_attrs.aerial_friction;
-    ftCommon_8007CE94(fp, aerialFriction);
+    ftCommon_ApplyFrictionAir(fp, aerialFriction);
 }
 
 // 8013C070 - 8013C0DC (108 bytes)

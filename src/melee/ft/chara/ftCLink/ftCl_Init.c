@@ -8,7 +8,6 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
@@ -19,6 +18,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_AirCatch.h"
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Guard.h"
 
 #include "ftLink/forward.h"
@@ -331,7 +331,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     ftLk_DatAttrs* ea = ftdata->ext_attr;
     void** items = ftdata->x48_items;
 
-    fp->x2224_b7 = true;
+    fp->can_walljump = true;
     ea->attackairlw_hit_anim_frame_end =
         lbAnim_8001E8F8(ftData_80085E50(fp, 72));
     ftLk_Init_OnLoadForCLink(fp);
@@ -342,7 +342,7 @@ void ftCl_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(items[3], ea->xC);
     it_8026B3F8(items[4], ea->x10);
     it_8026B3F8(items[5], It_Kind_CLink_Milk);
-    ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], items[6]);
+    ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, items[6]);
 }
 
 void ftCl_Init_OnItemPickupExt(HSD_GObj* gobj, bool flag)

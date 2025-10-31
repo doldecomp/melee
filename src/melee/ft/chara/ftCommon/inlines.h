@@ -7,10 +7,11 @@
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_ItemParasolOpen.h"
+#include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/types.h"
 
 #include <baselib/forward.h>
@@ -50,6 +51,22 @@ static inline void ftCo_Barrel_ApplyKnockback(Fighter* fp, float kb_angle,
     fp->dmg.x184c_damaged_hurtbox = 0;
     fp->dmg.x1854_collpos = fp->cur_pos;
     fp->dmg.x1860_element = hit->element;
+}
+
+static inline FtMotionId ftCo_ItemParasolGetFallMotionId(
+    Fighter_GObj* gobj, ftPeach_MotionState pe_msid, FtMotionId co_msid)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->kind == FTKIND_PEACH && fp->fv.pe.parasol_gobj_0 != NULL) {
+        return pe_msid;
+    } else {
+        return co_msid;
+    }
+}
+
+static inline void ftCo_ItemParasol_Phys(Fighter_GObj* gobj)
+{
+    ftCo_ItemParasolOpen_Phys(gobj);
 }
 
 #endif

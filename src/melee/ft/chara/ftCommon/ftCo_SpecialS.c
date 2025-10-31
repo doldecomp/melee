@@ -36,7 +36,7 @@ bool ftCo_SpecialS_CheckInput(Fighter_GObj* gobj)
     }
     if (fp->x688 == 0) {
         if (fp->input.lstick.x * fp->facing_dir < -p_ftCommonData->x220) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
         }
         doEnter(gobj);
         return true;

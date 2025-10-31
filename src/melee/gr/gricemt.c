@@ -30,7 +30,7 @@
 /* 1F91EC */ static void FUN_801f91ec(HSD_GObj* param_1, s16* param_2,
                                       int param_3, int param_4, int param_5,
                                       int param_6, int param_7,
-                                      mpLib_GroundCallback param_8);
+                                      mpLib_Callback param_8);
 
 // StageData grIm_803E8974 = {
 //     45,
@@ -398,8 +398,8 @@ void fn_801F77B0(HSD_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     // 803E4544
-    // mpLib_800580FC();
-    mpLib_800580C8(4, gp, grIceMt_801FA7F0);
+    // mpJointGetCb1();
+    mpJointSetCb1(4, gp, grIceMt_801FA7F0);
 }
 
 void grIceMt_801F785C(Ground_GObj* arg0)
@@ -809,7 +809,7 @@ HSD_GObj* fn_801F91A8(HSD_GObj* arg0)
 /// #grIceMt_801F91EC
 void FUN_801f91ec(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
                   int param_5, int param_6, int param_7,
-                  mpLib_GroundCallback param_8)
+                  mpLib_Callback param_8)
 {
     Ground* gp = GET_GROUND(param_1);
     param_2[0] = 0;
@@ -823,7 +823,7 @@ void FUN_801f91ec(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
     if (param_4 != -1) {
         grAnime_801C7A04(param_1, param_4, 7, -20);
     }
-    mpLib_800580C8(param_5, gp, param_8);
+    mpJointSetCb1(param_5, gp, param_8);
 }
 
 /// #grIceMt_801F929C
@@ -835,33 +835,33 @@ void grIceMt_801F929C(HSD_GObj* arg0)
 }
 
 /// #fn_801F9338
-void fn_801F9338(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
-                 mpLib_GroundEnum arg4)
+void fn_801F9338(Ground* gp, int arg1, CollData* arg2, s32 arg3,
+                 mpLib_GroundEnum arg4, float arg8)
 {
     // mpLib_80057BC0(2);
     // mpLib_80057638(2);
     // grAnime_801C83D0(arg0,2,7);
-    grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4);
+    grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }
 
 /// #fn_801F9448
-void fn_801F9448(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
-                 mpLib_GroundEnum arg4)
+void fn_801F9448(Ground* gp, int arg1, CollData* arg2, s32 arg3,
+                 mpLib_GroundEnum arg4, float arg8)
 {
     // mpLib_80057BC0(2);
     // mpLib_80057638(2);
     // grAnime_801C83D0(arg0,2,7);
-    grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4);
+    grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }
 
 /// #fn_801F9558
-void fn_801F9558(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
-                 mpLib_GroundEnum arg4)
+void fn_801F9558(Ground* gp, int arg1, CollData* arg2, s32 arg3,
+                 mpLib_GroundEnum arg4, float arg8)
 {
     // mpLib_80057BC0(2);
     // mpLib_80057638(2);
     // grAnime_801C83D0(arg0,2,7);
-    grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4);
+    grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }
 
 void grIceMt_801F9668(float arg8)
@@ -1051,8 +1051,8 @@ void grIceMt_801FA728(Vec3* arg0)
 }
 
 /// #grIceMt_801FA7F0
-void grIceMt_801FA7F0(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
-                      mpLib_GroundEnum arg4)
+void grIceMt_801FA7F0(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
+                      mpLib_GroundEnum arg4, float arg8)
 {
     HSD_GObj* playerGObj = Ground_801C57A4();
     if ((Ground_801C2BA4(10)) && (playerGObj->user_data))

@@ -18,8 +18,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0CEE.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
@@ -29,10 +28,10 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
-#include "lb/lb_00CE.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
@@ -187,11 +186,11 @@ void ftCo_PassiveWall_Phys(Fighter_GObj* gobj)
     PAD_STACK(8);
     if (!fp->mv.co.passivewall.timer) {
         ftCo_DatAttrs* co = &fp->co_attrs;
-        ftCommon_8007D528(fp);
-        if (fp->x221A_b4) {
-            ftCommon_8007D4E4(fp);
+        ftCommon_CheckFallFast(fp);
+        if (fp->fall_fast) {
+            ftCommon_FallFast(fp);
         } else {
-            ftCommon_8007D494(fp, co->grav, co->terminal_vel);
+            ftCommon_Fall(fp, co->grav, co->terminal_vel);
         }
         ftCommon_8007D140(fp, 0.0F, 0.0F, fp->co_attrs.aerial_friction);
     }

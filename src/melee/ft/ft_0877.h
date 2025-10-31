@@ -21,7 +21,7 @@
 /* 0879D8 */ bool ft_800879D8(Fighter_GObj* gobj);
 /* 0879F8 */ bool ft_800879F8(Fighter_GObj* gobj);
 /* 087A18 */ bool ft_80087A18(Fighter_GObj* gobj);
-/* 087A80 */ s8 ft_80087A80(Fighter_GObj* gobj);
+/* 087A80 */ int ft_80087A80(Fighter_GObj* gobj);
 /* 087A8C */ float ft_80087A8C(Fighter_GObj* gobj);
 /* 087A98 */ s32 ft_80087A98(Fighter_GObj* gobj);
 /* 087AA4 */ bool ft_80087AA4(Fighter_GObj* gobj);
@@ -42,7 +42,7 @@
 /* 0880AC */ void ft_800880AC(Fighter*);
 /* 0880D8 */ void ft_800880D8(Fighter*);
 /* 088110 */ void ft_80088110(Fighter*);
-/* 088148 */ void ft_PlaySFX(Fighter*, enum_t, int, int);
+/* 088148 */ void ft_PlaySFX(Fighter*, enum_t, u8, u8);
 /* 3C57D0 */ extern char ftMr_Init_DatFilename[];
 /* 3C57DC */ extern char ftMr_Init_DataName[];
 /* 3C595C */ extern char ftMr_Init_AnimDatFilename[];

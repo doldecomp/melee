@@ -351,7 +351,7 @@ bool itCoin_UnkMotion5_Coll(Item_GObj* gobj)
 
 void it_802F2014(Item_GObj* gobj, int arg1)
 {
-    GET_ITEM(gobj)->x378_itemColl.x4C = arg1;
+    GET_ITEM(gobj)->x378_itemColl.x4C_joint_id = arg1;
 }
 
 int it_802F2020(Item_GObj* gobj)

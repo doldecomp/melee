@@ -8,8 +8,10 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 
 void ftCo_800BCC20(Fighter_GObj* gobj)
 {
@@ -28,7 +30,7 @@ void ftCo_CaptureWaitKoopa_Anim(Fighter_GObj* gobj)
     if (fp->grab_timer <= 0) {
         ftCo_800DA698(fp->victim_gobj, 0);
         fp->facing_dir = -fp->facing_dir;
-        ftCo_800DC750(gobj);
+        ftCo_CaptureCut_Enter(gobj);
     } else {
         ftCo_800BC4A8(gobj);
     }

@@ -41,7 +41,9 @@
 /* 3FA258 */ static struct {
     int x0;
     int x4;
-} un_803FA258 = { 0 };
+    u8 _pad[0x130];
+    void* x138;
+} un_803FA258;
 /* 3FA658 */ static int un_803FA658;
 /* 3FA8E8 */ static int un_803FA8E8;
 /* 3FB168 */ static int un_803FB168;
@@ -110,15 +112,19 @@ void un_802FF934(void)
 
 int un_802FF958(void)
 {
-    lbAudioAx_800245F4(un_804D5854);
-    lbAudioAx_80024614(un_804D5858);
-    lbAudioAx_800245D4(un_804D5850);
+    u8 tmp = un_804D5854;
+    lbAudioAx_800245F4(tmp);
+    tmp = un_804D5858;
+    lbAudioAx_80024614(tmp);
+    tmp = un_804D5850;
+    lbAudioAx_800245D4(tmp);
     return 0;
 }
 
 int un_802FF99C(int arg0)
 {
-    lbAudioAx_80024634(un_804D6DAC);
+    u8 tmp = un_804D6DAC;
+    lbAudioAx_80024634(tmp);
     un_802FFB58(arg0);
     return 0;
 }
@@ -627,7 +633,11 @@ bool un_803015F8(bool update_scene)
 
 /// #un_80301BA8
 
-/// #un_80301C64
+void un_80301C64(un_80301C64_t* arg0)
+{
+    arg0->x0 = un_803FA258.x138;
+    arg0->x4 = 0;
+}
 
 /// #un_80301C80
 

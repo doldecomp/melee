@@ -74,7 +74,7 @@ void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     da = getFtSpecialAttrs(fp);
 
-    fp->mv.fx.SpecialHi.gravityDelay = (s32) da->x54_FOX_FIREFOX_GRAVITY_DELAY;
+    fp->mv.fx.SpecialHi.gravityDelay = da->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->gr_vel /= da->x58_FOX_FIREFOX_VEL_X;
 
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiHold, 0, 0.0f, 1.0f, 0.0f,
@@ -89,7 +89,7 @@ void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
-    fp->mv.fx.SpecialHi.gravityDelay = (s32) da->x54_FOX_FIREFOX_GRAVITY_DELAY;
+    fp->mv.fx.SpecialHi.gravityDelay = da->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->self_vel.x /= da->x58_FOX_FIREFOX_VEL_X;
     fp->self_vel.y = 0.0f;
 
@@ -113,7 +113,7 @@ void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if ((s32) fp->ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirHi_Enter(gobj);
             return;
         }
@@ -127,7 +127,7 @@ void ftFx_SpecialHiHoldAir_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if ((s32) fp->ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ftFx_SpecialAirHi_Enter(gobj);
             return;
         }
@@ -161,11 +161,11 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialHi.gravityDelay != 0) {
         fp->mv.fx.SpecialHi.gravityDelay -= 1;
     } else {
-        ftCommon_8007D494(fp, da->x60_FOX_FIREFOX_FALL_ACCEL,
+        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL,
                           ca->terminal_vel);
     }
 
-    ftCommon_8007CE94(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
+    ftCommon_ApplyFrictionAir(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
 }
 
 void ftFx_SpecialHiHold_Coll(HSD_GObj* gobj)
@@ -187,7 +187,7 @@ void ftFx_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
         facingDir = 1;
     }
 
-    if (ft_CheckGroundAndLedge(gobj, facingDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
         ftFx_SpecialHiHoldAir_AirToGround(gobj);
         return;
     }
@@ -220,7 +220,7 @@ void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
 
     fp->accessory4_cb = ftFx_SpecialHi_CreateChargeGFX;
 
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void ftFx_SpecialHi_Anim(HSD_GObj* gobj)
@@ -275,10 +275,10 @@ void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
     fp->mv.fx.SpecialHi.unk++;
 
     if (fp->mv.fx.SpecialHi.unk >= da->x70_FOX_FIREFOX_DURATION_END) {
-        ftCommon_8007C930(fp, da->x78_FOX_FIREFOX_REVERSE_ACCEL);
+        ftCommon_ApplyFrictionGround(fp, da->x78_FOX_FIREFOX_REVERSE_ACCEL);
     }
 
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftFx_SpecialAirHi_Phys(HSD_GObj* gobj)
@@ -326,7 +326,7 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
 
     if (fp->mv.fx.SpecialHi.unk2 >= da->x6C_FOX_FIREFOX_BOUNCE_VAR) {
         return true;
-    } else if (ftCo_8009A134(gobj) != false) {
+    } else if (ftCo_8009A134(gobj)) {
         return false;
     } else {
         return true;
@@ -338,14 +338,12 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     float facingDir;
 
-    u8 _[4];
-
-    Fighter* fp = fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = da = getFtSpecialAttrs(fp);
     CollData* collData = collData = getFtColl(fp);
 
-    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
-        if (ftFox_SpecialHi_IsBound(gobj) != false) {
+    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH)) {
+        if (ftFox_SpecialHi_IsBound(gobj)) {
             if ((!(collData->env_flags & 98304)) ||
                 (!(lbVector_AngleXY(&collData->floor.normal, &fp->self_vel) <
                    (0.01745329238474369f *
@@ -439,9 +437,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
     float stick_x;
     float stick_y;
 
-    u8 _[4];
-
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     stick_y = fp->input.lstick.y;
 
     collData = getFtColl(fp);
@@ -462,7 +458,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
         if (!(lbVector_AngleXY(&collData->floor.normal, &sp20) < HALF_PI32) &&
             (ftCo_8009A134(gobj) == false))
         {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
 
             Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHi, 0, 0.0f, 1.0f,
                                       0.0f, NULL);
@@ -471,7 +467,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
             fp->x2223_b4 = 1;
 
             fp->mv.fx.SpecialHi.travelFrames =
-                (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
+                tempAttrs->x68_FOX_FIREFOX_DURATION;
 
             fp->mv.fx.SpecialHi.unk = 0.0f;
             fp->mv.fx.SpecialHi.unk2 = 0.0f;
@@ -505,8 +501,6 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     float stick_y;
     float temp_stick;
 
-    u8 _[4];
-
     ca = &fp->co_attrs;
     da = fp->dat_attrs;
 
@@ -521,7 +515,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
             temp_stick = -temp_stick;
         }
         if (temp_stick > da->x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
         }
         fp->mv.fx.SpecialHi.rotateModel =
             atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
@@ -535,8 +529,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
     tempAttrs = fp->dat_attrs;
     fp->x2223_b4 = 1;
 
-    fp->mv.fx.SpecialHi.travelFrames =
-        (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
+    fp->mv.fx.SpecialHi.travelFrames = tempAttrs->x68_FOX_FIREFOX_DURATION;
     fp->mv.fx.SpecialHi.unk = 0;
     fp->mv.fx.SpecialHi.unk2 = 0;
 
@@ -596,8 +589,8 @@ void ftFx_SpecialHiLanding_Phys(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
-    ftCommon_8007C930(fp, da->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyFrictionGround(fp, da->x7C_FOX_FIREFOX_GROUND_MOMENTUM_END);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 // 0x800E7F20 - Fox & Falco's aerial Firefox/Firebird End Physics callback
@@ -627,7 +620,7 @@ void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
+    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH)) {
         ftFx_SpecialHiFall_Enter(gobj);
         return;
     }
@@ -656,7 +649,7 @@ void ftFx_SpecialHiFall_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007DB24(gobj);
-    if ((s32) fp->ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiLanding, 0, 0.0f, 1.0f,
@@ -693,14 +686,14 @@ void ftFx_SpecialHiBound_Anim(HSD_GObj* gobj)
     ca = &fp->co_attrs;
     da = fp->dat_attrs;
 
-    if (((u32) fp->cmd_vars[0] != 0U) && ((s32) fp->ground_or_air == GA_Air)) {
+    if (fp->cmd_vars[0] != 0 && fp->ground_or_air == GA_Air) {
         ftCo_80096900(gobj, 1, 0, true, da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                       da->x90_FOX_FIREFOX_LANDING_LAG);
         fp->x1968_jumpsUsed = (u8) ca->max_jumps;
         return;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if ((s32) fp->ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ftCo_80096900(gobj, 1, 0, true,
                           da->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                           da->x90_FOX_FIREFOX_LANDING_LAG);
@@ -741,19 +734,19 @@ void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 cliffCatchDir;
 
-    if ((s32) fp->ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->facing_dir < 0.0f) {
             cliffCatchDir = -1;
         } else {
             cliffCatchDir = 1;
         }
 
-        if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+        if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
             ftCommon_8007D7FC(fp);
             return;
         }
 
-        if (ftCliffCommon_80081298(gobj) != false) {
+        if (ftCliffCommon_80081298(gobj)) {
             return;
         }
     }

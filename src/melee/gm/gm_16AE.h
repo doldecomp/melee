@@ -25,9 +25,9 @@
 /* 16B014 */ bool gm_8016B014(void);
 /* 16B094 */ bool gm_8016B094(void);
 /* 16B0B4 */ bool gm_8016B0B4(void);
-/* 16B0D4 */ bool gm_8016B0D4(void);
+/* 16B0D4 */ bool gm_8016B0D4(void); ///< friendly fire enabled
 /* 16B0E8 */ bool gm_8016B0E8(void);
-/* 16B0FC */ bool gm_8016B0FC(void);
+/* 16B0FC */ bool gm_8016B0FC(void); ///< single-button mode enabled
 /* 16B110 */ bool gm_8016B110(void);
 /* 16B124 */ bool gm_8016B124(void);
 /* 16B138 */ void fn_8016B138(void);
@@ -79,6 +79,8 @@
 /* 16C4F4 */ void fn_8016C4F4(struct lbl_8046B6A0_24C_t*);
 /* 16C5C0 */ bool gm_8016C5C0(int pl_slot);
 /* 16C658 */ int gm_8016C658(int);
+
+/// @todo should take Fighter_GObj*? See ftCo_800A53DC
 /* 16C6C0 */ /* static */ s32 gm_8016C6C0(Item_GObj*);
 /* 16C6C0 */ s32 gm_8016C6C0(Item_GObj*);
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);
@@ -110,7 +112,7 @@
 /* 16F00C */ void gm_8016F00C(int);
 /* 16F030 */ void fn_8016F030(struct StartMeleeData*);
 /* 16F088 */ void gm_8016F088(struct StartMeleeData*); /// Checks rumble?
-/* 16F120 */ void gm_8016F120(int);
+/* 16F120 */ int gm_8016F120(int);
 /* 16F140 */ void fn_8016F140(int);
 /* 16F160 */ void fn_8016F160(int, int);
 

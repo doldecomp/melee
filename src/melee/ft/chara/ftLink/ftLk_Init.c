@@ -9,7 +9,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
@@ -342,7 +342,7 @@ void ftLk_Init_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[2], da->xBC);
     it_8026B3F8(item_list[3], da->xC);
     it_8026B3F8(item_list[4], da->x10);
-    ftParts_800753D4(fp, *Fighter_804D6540[fp->kind], item_list[6]);
+    ftParts_800753D4(fp, Fighter_804D6540[fp->kind]->x0, item_list[6]);
 }
 
 void ftLk_800EAF38(HSD_GObj* gobj)

@@ -2,6 +2,11 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_26B1.h"
+#include "it/it_266F.h"
+#include "it/item.h"
+#include "it/inlines.h"
+#include "it/it_2725.h"
 
 /// #it_802E05A0
 
@@ -32,7 +37,10 @@ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #it_802E0F1C
 
-/// #it_2725_Logic4_PickedUp
+void it_2725_Logic4_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 /// #itPatapata_UnkMotion5_Anim
 
@@ -44,13 +52,22 @@ void itPatapata_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itPatapata_UnkMotion7_Coll
+bool itPatapata_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    it_8026DA08(gobj);
+    return false;
+}
 
 /// #it_2725_Logic4_Thrown
 
 /// #itPatapata_UnkMotion6_Anim
 
-/// #itPatapata_UnkMotion6_Phys
+void itPatapata_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itPatapata_UnkMotion6_Coll
 
@@ -68,6 +85,9 @@ void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #it_802E1694
 
-/// #it_802E16D8
+void it_802E16D8(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802E16F8

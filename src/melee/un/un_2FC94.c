@@ -133,7 +133,7 @@ void un_802FE6A8(void)
     HSD_GObj* gobj_light;
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
-    U8Vec4 color = { 0x5A, 0x5A, 0x5A, 0xFF };
+    GXColor color = { 0x5A, 0x5A, 0x5A, 0xFF };
     HSD_Text* text;
     HSD_Text* text2;
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
@@ -156,12 +156,12 @@ void un_802FE6A8(void)
     lb_80011E24(jobj_ui, 0, 2, -1);
     HSD_SisLib_803A611C(2, 0, 9, 20, 0, 14, 0, 18);
     text = HSD_SisLib_803A5ACC(2, 0, 105.0, 202.0, 0.0, 435.0, 75.0);
-    text->x48 = 1;
-    text->x4A = 1;
+    text->default_fitting = 1;
+    text->default_alignment = 1;
     text2 = HSD_SisLib_803A6754(2, 0);
-    text2->x4A = 1;
-    text2->x49 = 1;
-    text2->x30 = color;
+    text2->default_alignment = 1;
+    text2->default_kerning = 1;
+    text2->text_color = color;
 }
 
 void un_802FE8CC(void)

@@ -11,7 +11,7 @@
 /* 20882C */ void grShrineRoute_8020882C(void);
 /* 208850 */ void grShrineRoute_80208850(void);
 /* 2088B8 */ bool grShrineRoute_802088B8(void);
-/* 2088C0 */ UNK_RET grShrineRoute_802088C0(UNK_PARAMS);
+/* 2088C0 */ UNK_RET grShrineRoute_802088C0(int);
 /* 2089AC */ void grShrineRoute_802089AC(Ground_GObj*);
 /* 2089D8 */ bool grShrineRoute_802089D8(Ground_GObj*);
 /* 2089E0 */ void grShrineRoute_802089E0(Ground_GObj*);
@@ -42,7 +42,7 @@
 /* 20AA40 */ UNK_RET grShrineRoute_8020AA40(UNK_PARAMS);
 /* 20AB58 */ UNK_RET grShrineRoute_8020AB58(UNK_PARAMS);
 /* 20AC44 */ UNK_RET grShrineRoute_8020AC44(UNK_PARAMS);
-/* 20AD24 */ UNK_RET fn_8020AD24(UNK_PARAMS);
+/* 20AD24 */ bool fn_8020AD24(bool);
 /* 20AD58 */ UNK_RET fn_8020AD58(UNK_PARAMS);
 /* 20AE08 */ UNK_RET fn_8020AE08(UNK_PARAMS);
 /* 20AF38 */ UNK_RET grShrineRoute_8020AF38(UNK_PARAMS);

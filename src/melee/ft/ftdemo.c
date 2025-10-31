@@ -46,10 +46,10 @@ static HSD_GObjEvent on_create_fighter[16] = {
 
 static void initFighter(HSD_GObj* gobj, plAllocInfo2* alloc_info)
 {
-    struct S_TEMP1 temp1;
-    temp1.fighterKind = alloc_info->internal_id;
-    temp1.playerID = alloc_info->slot;
-    temp1.flags_b0 = alloc_info->has_transformation;
+    struct plAllocInfo temp1;
+    temp1.internal_id = alloc_info->internal_id;
+    temp1.slot = alloc_info->slot;
+    temp1.b0 = alloc_info->has_transformation;
     Fighter_UnkInitLoad_80068914(gobj, &temp1);
 }
 

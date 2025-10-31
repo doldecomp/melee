@@ -4,6 +4,7 @@
 #include "it/forward.h"
 
 #include "it/items/types.h"
+#include "it/types.h"
 
 /* 2C66E8 */ void it_2725_Logic72_Destroyed(Item_GObj*);
 /* 2C67A4 */ void it_2725_Logic72_PickedUp(Item_GObj*);

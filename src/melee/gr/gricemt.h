@@ -124,12 +124,12 @@ typedef struct IceMountainParams {
 /* 1F91A8 */ HSD_GObj* fn_801F91A8(HSD_GObj*);
 /* 1F91EC */ UNK_RET grIceMt_801F91EC(HSD_GObj*);
 /* 1F929C */ UNK_RET grIceMt_801F929C(HSD_GObj* arg0);
-/* 1F9338 */ UNK_RET fn_801F9338(Ground*, UNK_T, UNK_T, UNK_T,
-                                 mpLib_GroundEnum);
-/* 1F9448 */ UNK_RET fn_801F9448(Ground*, UNK_T, UNK_T, UNK_T,
-                                 mpLib_GroundEnum);
-/* 1F9558 */ UNK_RET fn_801F9558(Ground*, UNK_T, UNK_T, UNK_T,
-                                 mpLib_GroundEnum);
+/* 1F9338 */ UNK_RET fn_801F9338(Ground*, int, CollData*, s32,
+                                 mpLib_GroundEnum, float);
+/* 1F9448 */ UNK_RET fn_801F9448(Ground*, int, CollData*, s32,
+                                 mpLib_GroundEnum, float);
+/* 1F9558 */ UNK_RET fn_801F9558(Ground*, int, CollData*, s32,
+                                 mpLib_GroundEnum, float);
 /* 1F9668 */ void grIceMt_801F9668(float);
 /* 1F96E0 */ float grIceMt_801F96E0(float);
 /* 1F98A8 */ bool grIceMt_801F98A8(HSD_GObj* param1);
@@ -141,8 +141,8 @@ typedef struct IceMountainParams {
 /* 1FA500 */ int grIceMt_801FA500(HSD_GObj*);
 /* 1FA6D8 */ UNK_RET grIceMt_801FA6D8(Ground_GObj*);
 /* 1FA728 */ void grIceMt_801FA728(Vec3*);
-/* 1FA7F0 */ UNK_RET grIceMt_801FA7F0(Ground*, UNK_T, UNK_T, UNK_T,
-                                      mpLib_GroundEnum);
+/* 1FA7F0 */ UNK_RET grIceMt_801FA7F0(Ground*, s32, CollData*, s32,
+                                      mpLib_GroundEnum, float);
 /* 1FA854 */ UNK_RET grIceMt_801FA854(void);
 /* 1FA8F8 */ DynamicsDesc* grIceMt_801FA8F8(enum_t id);
 /* 1FA900 */ bool grIceMt_801FA900(Vec3* a, int id, HSD_JObj* jobj);

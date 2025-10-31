@@ -7,7 +7,6 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
@@ -15,6 +14,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "ftZelda/types.h"
 #include "lb/lb_00B0.h"
@@ -178,7 +178,7 @@ void ftZd_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
     vec.x = attributes->x40;
     vec.y = attributes->x44;
 
-    ftCommon_8007D494(fp, vec.x, vec.y);
+    ftCommon_Fall(fp, vec.x, vec.y);
     ftCommon_8007CEF4(fp);
 }
 
@@ -264,7 +264,7 @@ void ftZd_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
 void ftZd_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftZd_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
@@ -384,7 +384,7 @@ void ftZd_SpecialHi_80139F6C(HSD_GObj* gobj)
                               0, 0, NULL);
 
     fp->x2223_b4 = true;
-    fp->x221E_b0 = true;
+    fp->invisible = true;
 }
 
 void ftZd_SpecialHi_80139FE8(HSD_GObj* gobj)
@@ -395,7 +395,7 @@ void ftZd_SpecialHi_80139FE8(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 350, transition_flags1, fp->cur_anim_frame,
                               0, 0, NULL);
 
-    fp->x221E_b0 = true;
+    fp->invisible = true;
 }
 
 void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
@@ -457,7 +457,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
               (float) M_PI_2))
         {
             if (ftCo_8009A134(gobj) == 0) {
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
 
                 temp_f5 = atan2f(fp->input.lstick.y,
                                  fp->input.lstick.x * fp->facing_dir);
@@ -481,7 +481,7 @@ void ftZd_SpecialHi_8013A058(HSD_GObj* gobj)
                 fp->x2223_b4 = 1;
 
                 ftColl_8007B62C(gobj, 2);
-                fp->x221E_b0 = 1;
+                fp->invisible = true;
                 return;
             }
         }
@@ -543,7 +543,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
             temp_f1 = -temp_f1;
         }
         if (temp_f1 > 0.001f) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
         }
         var_f30 =
             atan2f(fp->input.lstick.y, fp->input.lstick.x * fp->facing_dir);
@@ -574,7 +574,7 @@ void ftZd_SpecialHi_8013A244(HSD_GObj* gobj)
 
     ftColl_8007B62C(gobj, 2);
 
-    fp->x221E_b0 = 1;
+    fp->invisible = true;
 }
 
 void ftZd_SpecialHi_Anim(HSD_GObj* gobj)
@@ -616,8 +616,8 @@ void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes = fp->dat_attrs;
 
     if (fp->cmd_vars[0] != 0) {
-        ftCommon_8007D4B8(fp);
-        ftCommon_8007D440(fp, attributes->x5C * fp->co_attrs.air_drift_max);
+        ftCommon_FallBasic(fp);
+        ftCommon_ClampSelfVelX(fp, attributes->x5C * fp->co_attrs.air_drift_max);
         return;
     }
 
@@ -653,7 +653,7 @@ void ftZd_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
 
         if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir) != 0) {
-            ftCo_800D5CB0(gobj, 0, attributes->x6C);
+            ftCo_LandingFallSpecial_Enter(gobj, false, attributes->x6C);
             return;
         }
     }
@@ -687,7 +687,7 @@ void ftZd_SpecialHi_8013A6A8(HSD_GObj* gobj)
         fp1->self_vel.y = 0;
         fp1->self_vel.x = 0;
         fp1->gr_vel = 0;
-        fp1->x221E_b0 = false;
+        fp1->invisible = false;
         fp1->accessory4_cb = &ftZd_SpecialHi_8013979C;
     }
 
@@ -711,7 +711,7 @@ void ftZd_SpecialHi_8013A764(HSD_GObj* gobj)
         fp1->self_vel.y = 0;
         fp1->self_vel.x = 0;
         fp1->gr_vel = 0;
-        fp1->x221E_b0 = false;
+        fp1->invisible = false;
         fp1->accessory4_cb = &ftZd_SpecialHi_8013979C;
     }
 

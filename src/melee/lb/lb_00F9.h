@@ -28,7 +28,7 @@
                               Fighter_Part part, int, bool);
 /* 0115F4 */ void lb_800115F4(void);
 /* 011710 */ void lb_80011710(DynamicsDesc*, DynamicsDesc*);
-/* 0117F4 */ bool lb_800117F4(DynamicsDesc*, GXColor*, UNK_T, int, u32);
+/* 0117F4 */ bool lb_800117F4(DynamicsDesc*, GXColor*, GXColor*, int, u32);
 /* 0119DC */ void lb_800119DC(Vec3*, int, float, float, float);
 /* 011A50 */ void lb_80011A50(Vec3*, int, float, float, float, float, float,
                               float, float);
@@ -47,8 +47,8 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
 /* 01271C */ void lb_8001271C(GXTexObj*, float, float, float, float, float,
                               float);
 /* 01285C */ void lb_8001285C(HSD_ImageDesc*, GXTexObj*);
-/* 012994 */ UNK_RET lb_80012994(UNK_PARAMS);
-/* 013614 */ UNK_RET fn_80013614(UNK_PARAMS);
+/* 012994 */ void lb_80012994(HSD_ImageDesc*, u8, u8, float, float, float, float, float);
+/* 013614 */ void fn_80013614(HSD_GObj*);
 /* 0138AC */ void fn_800138AC(void* ptr); ///< #HSD_Free wrapper
 /* 0138CC */ void lb_800138CC(HSD_GObj* gobj, int arg1);
 /* 0138D8 */ void lb_800138D8(HSD_GObj* gobj, s8 arg1);
@@ -61,7 +61,7 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
     ColorOverlay*); ///< Copy light rotation from #ColorOverlay::x8_ptr1
 /* 014014 */ bool lb_80014014(ColorOverlay*);
 /* 0140F8 */ bool lb_800140F8(ColorOverlay*);
-/* 014258 */ bool lb_80014258(HSD_GObj* gobj, void* arg1, FtCmd cmd);
+/* 014258 */ bool lb_80014258(HSD_GObj* gobj, void* arg1, FtCmd2 cmd);
 /* 014498 */ void lb_80014498(ColorOverlay*);
 /* 0144C8 */ bool lb_800144C8(ColorOverlay*, struct Fighter_804D653C_t*, int,
                               int);

@@ -1,4 +1,6 @@
 #include "ftMt_SpecialS.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 
 #include <platform.h>
 
@@ -7,7 +9,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -196,9 +198,9 @@ void ftMt_SpecialAirS_Phys(HSD_GObj* gobj)
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
-        fp->x2218_b3 = 1;
-        fp->x2218_b4 = 1;
+    if (fp->mv.mt.SpecialS.isConfusionReflect) {
+        fp->reflecting = true;
+        fp->x2218_b4 = true;
         fp->reflect_hit_cb = ftMt_SpecialS_OnReflect;
     }
 }
@@ -216,7 +218,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
                               FTMEWTWO_SPECIALS_COLL_FLAG, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
 
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 
     ftMewtwo_SpecialAirS_SetGrab(gobj);
 
@@ -282,8 +284,8 @@ void ftMt_SpecialS_ReflectThink(HSD_GObj* gobj)
 
     case CONFUSION_REFLECT_OFF:
         if (fp->mv.mt.SpecialS.isConfusionReflect != false) {
-            fp->x2218_b3 = 0;
-            fp->x2218_b4 = 0;
+            fp->reflecting = false;
+            fp->x2218_b4 = false;
             fp->reflect_hit_cb = NULL;
             fp->mv.mt.SpecialS.isConfusionReflect = false;
         }

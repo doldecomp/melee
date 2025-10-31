@@ -55,7 +55,7 @@
 // 24-27 - Heart   - Red, Blue, Yellow, Green
 // 28    - Nametag - Gray
 // 29-30 - Empty   - Gray
-/* 3F98B8 */ static float un_803F98B8[6][5] = {
+/* 3F98B8 */ static float un_803F98B8[5][5] = {
     {
         0.0,  // 1P Red
         1.0,  // 1P Blue
@@ -91,12 +91,13 @@
         18.0, // CP Gray
         18.0, // CP Gray
     },
-    {
-        24.0, // Heart Red
-        25.0, // Heart Blue
-        26.0, // Heart Yellow
-        27.0, // Heart Green
-    },
+};
+
+/* 3F991C */ static float un_803F991C[4] = {
+    24.0, // Heart Red
+    25.0, // Heart Blue
+    26.0, // Heart Yellow
+    27.0, // Heart Green
 };
 /* 3F992C */ static HSD_WObjDesc nametag_eyepos = { NULL,
                                                     { 0.0f, 0.0f, 300.0f },
@@ -154,7 +155,7 @@ float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
         if ((gm_8016B258(player_id) || gm_8016B0E8()) &&
             arg1 == Player_GetTeam(0))
         {
-            return un_803F98B8[5][Player_GetPlayerId(0)];
+            return un_803F991C[Player_GetPlayerId(0)];
         }
         return un_803F98B8[4][arg1];
     }
@@ -244,7 +245,7 @@ void fn_802FCC44(HSD_GObj* gobj)
     } else {
         HSD_JObjSetFlags(HSD_JObjGetChild(jobj), 0x10);
         if (has_nametag(*slot)) {
-            HSD_SisLib_803A746C(un_804D6D78, un_804A1EF8[*slot], 5000.0f,
+            HSD_SisLib_803A746C(un_804D6D78, un_804A1EF8[*slot], -5000.0f,
                                 0.0f);
         }
         return;
@@ -368,12 +369,10 @@ void un_802FD4C8(void)
 {
     HSD_GObj* gobj;
     int i;
-    un_804A1EE0[0] = NULL;
-    un_804A1EE0[1] = NULL;
-    un_804A1EE0[2] = NULL;
-    un_804A1EE0[3] = NULL;
-    un_804A1EE0[4] = NULL;
-    un_804A1EE0[5] = NULL;
+    PAD_STACK(0x10);
+    for (i = 0; i < PL_SLOT_MAX; i++) {
+        un_804A1EE0[i] = NULL;
+    }
     un_804D6D68 = NULL;
     un_804D6D6C = 0;
     memzero(un_804D6D70, sizeof(un_804D6D70));
@@ -387,8 +386,8 @@ void un_802FD4C8(void)
     // "Break the targets!" "Race to the finish!" etc strings
     HSD_SisLib_803A62A0(2, "SdIntro.dat", "SIS_IntroData");
     un_804D6D78 = HSD_SisLib_803A6754(2, un_804D6D7C);
-    un_804D6D78->x8 = -10.0;
-    un_804D6D78->x4A = 1;
+    un_804D6D78->pos_z = -10.0;
+    un_804D6D78->default_alignment = 1;
     un_802FCBA0();
     for (i = 0; i < PL_SLOT_MAX; i++) {
         NameTag_Create(i);

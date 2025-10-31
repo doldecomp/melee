@@ -134,7 +134,7 @@ void ftSk_SpecialAirLw_Phys(Fighter_GObj* gobj)
 
     u8 _[4];
 
-    ftCommon_8007D494(fp, attributes->x68, attributes->x6C);
+    ftCommon_Fall(fp, attributes->x68, attributes->x6C);
     ftCommon_8007CEF4(fp);
 }
 
@@ -202,7 +202,7 @@ void ftSk_SpecialAirLw2_Phys(Fighter_GObj* gobj)
 
     u8 _[4];
 
-    ftCommon_8007D494(fp, attributes->x68, attributes->x6C);
+    ftCommon_Fall(fp, attributes->x68, attributes->x6C);
     ftCommon_8007CEF4(fp);
 }
 

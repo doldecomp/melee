@@ -9,12 +9,14 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
 #include <melee/cm/camera.h>
+#include <melee/db/db.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/gmadventure.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
@@ -25,6 +27,9 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
+#include <melee/lb/lbcardgame.h>
+#include <melee/lb/lbcardnew.h>
+#include <melee/lb/lbtime.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
@@ -51,7 +56,7 @@ static struct lbl_804706C0_t {
     int x14;
 } lbl_804706C0;
 
-static UnkAllstarData lbl_80472C30;
+static UnkAdventureData lbl_80472C30;
 static UnkAllstarData lbl_80472CB0;
 static struct lbl_80472D28_t lbl_80472D28;
 static struct lbl_80472E48_t lbl_80472E48;
@@ -273,11 +278,11 @@ void fn_8017C7A0(void)
 void fn_8017C7EC(void)
 {
     lbl_8046B6A0_t* temp_r31;
-    UnkAllstarData* temp_r30;
+    Unk1PData* temp_r30;
 
     temp_r30 = fn_8017DF28();
     temp_r31 = gm_8016AE44();
-    temp_r31->timer_seconds = grPushOn_80219230(temp_r30->x0);
+    temp_r31->timer_seconds = grPushOn_80219230(temp_r30->ckind);
 }
 
 void gm_8017C838(void)
@@ -288,26 +293,26 @@ void gm_8017C838(void)
     int i;
     s8 var_r3;
     s8* var_r31;
-    UnkAllstarData* temp_r30;
+    UnkAdventureData* temp_r30;
 
     PAD_STACK(8);
 
     temp_r30 = gm_8017E424();
     temp_r3 = gm_8016AE38();
     var_r31 = sp10;
-    sp10[0] = 0x21;
-    sp10[1] = 0x21;
-    sp10[2] = 0x21;
+    sp10[0] = FTKIND_NONE;
+    sp10[1] = FTKIND_NONE;
+    sp10[2] = FTKIND_NONE;
     switch (temp_r3->x24C8.xE) {
     case 0x3B:
-        sp10[0] = 0xE;
+        sp10[0] = FTKIND_YOSHI;
         break;
     case 0x3F:
-        sp10[0] = 6;
+        sp10[0] = FTKIND_LINK;
         break;
     case 0x44:
-        sp10[0] = 4;
-        if (temp_r30->x0 == 4 && temp_r30->x1 == 0) {
+        sp10[0] = FTKIND_KIRBY;
+        if (temp_r30->x0.ckind == CKIND_KIRBY && temp_r30->x0.color == 0) {
             var_r3 = 1;
         } else {
             var_r3 = 0;
@@ -316,25 +321,25 @@ void gm_8017C838(void)
         break;
     case 0x48:
         sp10[0] = 0xC;
-        if (gm_80164840(0x18) != 0) {
-            sp10[1] = 0x17;
+        if (gm_80164840(CKIND_PICHU) != 0) {
+            sp10[1] = FTKIND_PICHU;
         }
-        if (gm_80164840(0xF) != 0) {
-            sp10[2] = 0xF;
+        if (gm_80164840(CKIND_PURIN) != 0) {
+            sp10[2] = FTKIND_PURIN;
         }
         break;
     case 0x4C:
-        sp10[0] = 0xA;
-        sp10[1] = 0xB;
+        sp10[0] = FTKIND_POPO;
+        sp10[1] = FTKIND_NANA;
         break;
     case 0x4E:
-        sp10[0] = 0x1D;
-        sp10[1] = 0x1E;
+        sp10[0] = FTKIND_BOY;
+        sp10[1] = FTKIND_GIRL;
         break;
     }
 
     for (i = 0; i < 3; i++) {
-        if (*var_r31 != (s8) FTKIND_MAX) {
+        if (*var_r31 != FTKIND_MAX) {
             ftLib_80087574(*var_r31);
         }
         var_r31++;
@@ -349,35 +354,201 @@ void gm_8017C984(UNK_T arg0)
 
 extern u8 lbl_803B7C08[][5];
 
-void gm_8017C9A8(DebugGameOverData* arg0, UnkAllstarData* arg1, u8 arg2)
+void gm_8017C9A8(DebugGameOverData* arg0, Unk1PData* arg1, u8 arg2)
 {
     PAD_STACK(8);
-    arg0->x0 = arg1->xC.xC;
+    arg0->x0 = arg1->xC.x18;
     arg0->x8 = arg2;
-    arg0->x10 = arg1->x0;
-    arg0->x14 = arg1->x3;
+    arg0->ckind = arg1->ckind;
+    arg0->slot = arg1->slot;
     arg0->x15 = arg1->x4;
     arg0->x18 = gm_801623D8();
-    arg0->x16 = lbl_803B7C08[arg2][arg1->x2];
+    arg0->x16 = lbl_803B7C08[arg2][arg1->cpu_level];
 }
 
-/// #gm_8017CA38
+void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
+                 u8 arg3)
+{
+    u8 temp_r31;
 
-/// #gm_8017CBAC
+    arg1->xC.x14 = arg0->x18;
+    gm_801623FC(arg1->xC.x14);
+    if (arg0->xC == 0) {
+        temp_r31 = gm_80173224(arg3, 0);
+        switch (gm_801A4310()) {
+        case 3:
+            fn_80162BFC(arg1->ckind, arg0->x4);
+            break;
+        case 4:
+            fn_80162DF8(arg1->ckind, arg0->x4);
+            break;
+        case 5:
+            fn_80162FF4(arg1->ckind, arg0->x4);
+            break;
+        }
+        Ground_801C5A60();
+        gm_8017390C(fn_8017DF90(), 0);
+        gm_80173EEC();
+        gm_80172898(0x40);
+        if (temp_r31 == CHKIND_NONE) {
+            if (gm_80173754(1, arg1->slot) == 0) {
+                gm_801A42F8(1);
+            }
+        } else {
+            gm_801736E8(arg1->ckind, arg1->color, arg1->slot, arg1->x4,
+                        temp_r31, 1U);
+            gm_801A42F8(0x14);
+        }
+    } else {
+        arg1->xC.x18 = lbTime_8000AEC8((u32) arg0->x4, 1U);
+        arg1->stocks = arg2->stocks;
+        arg1->xC.xD = lbTime_8000AF74((u32) arg1->xC.xD, 1);
+        gm_SetScenePendingMinor(arg1->x7);
+    }
+}
+
+void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
+{
+    s32 temp_r3_2;
+    u8 temp_r31;
+    u8* temp_r3;
+
+    temp_r31 = gm_80164024(arg0->x0.ckind);
+    Ground_801C5A60();
+    switch (arg2) {
+    case 21:
+        gmMainLib_8015D134(temp_r31);
+        fn_80162BFC(arg0->x0.ckind, arg0->x0.xC.x18);
+        temp_r3 = gmMainLib_8015D194(temp_r31);
+        if (*temp_r3 < arg0->x0.cpu_level) {
+            *temp_r3 = arg0->x0.cpu_level;
+        }
+        temp_r3_2 = gmMainLib_8015D1AC(temp_r31);
+        if ((arg0->x0.cpu_level == 4) &&
+            ((temp_r3_2 == 0) || (arg1->stocks < temp_r3_2)))
+        {
+            gmMainLib_8015D1C8(temp_r31, arg1->stocks);
+        }
+        break;
+    case 22:
+        gmMainLib_8015D25C(temp_r31);
+        fn_80162DF8(arg0->x0.ckind, arg0->x0.xC.x18);
+        temp_r3 = gmMainLib_8015D2BC(temp_r31);
+        if (*temp_r3 < arg0->x0.cpu_level) {
+            *temp_r3 = arg0->x0.cpu_level;
+        }
+        temp_r3_2 = gmMainLib_8015D2D4(temp_r31);
+        if ((arg0->x0.cpu_level == 4) &&
+            ((temp_r3_2 == 0) || (arg1->stocks < temp_r3_2)))
+        {
+            gmMainLib_8015D2F0(temp_r31, arg1->stocks);
+        }
+        break;
+    case 23:
+        gmMainLib_8015D384(temp_r31);
+        fn_80162FF4(arg0->x0.ckind, arg0->x0.xC.x18);
+        if (!gm_80164430(0x1F)) {
+            gm_80164504(0x1F);
+        }
+        temp_r3 = gmMainLib_8015D3E4(temp_r31);
+        if (*temp_r3 < arg0->x0.cpu_level) {
+            *temp_r3 = arg0->x0.cpu_level;
+        }
+        temp_r3_2 = gmMainLib_8015D3FC(temp_r31);
+        if ((arg0->x0.cpu_level == 4) &&
+            (temp_r3_2 == 0 || arg1->stocks < temp_r3_2))
+        {
+            gmMainLib_8015D418(temp_r31, arg1->stocks);
+        }
+        break;
+    }
+    lb_8001C550();
+    lb_8001D164(0);
+    lb_8001CE00();
+    gm_801A42E8(arg2);
+    gm_801A42D4();
+}
 
 /// #gm_8017CD94
 
 /// #gm_8017CE34
 
-/// #gm_8017D7AC
+bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
+{
+    u8 temp_r0;
+
+    arg1->xC.x14 =
+        lbTime_8000AEC8(arg1->xC.x14, arg0->match_end.player_standings[0].xE);
+    gm_8016247C(arg0->match_end.player_standings[0].xE);
+    arg1->xC.x1C =
+        lbTime_8000AEC8(arg1->xC.x1C, arg0->match_end.player_standings[0].x44);
+    gm_80162968(arg0->match_end.frame_count / 60);
+    if (!(arg1->x8 & 0x80)) {
+        arg1->xC.x20 =
+            lbTime_8000AEC8(arg1->xC.x20, arg0->match_end.frame_count);
+    }
+    if (arg0->match_end.player_standings[0].character_id == 7) {
+        arg1->xC.x12 = 1;
+    } else {
+        arg1->xC.x12 = 0;
+    }
+    if (fn_8016B510() != 0) {
+        arg1->xC.xF = 1;
+    }
+    if (fn_8016B4BC() != 0) {
+        arg1->xC.xE = 1;
+    }
+    temp_r0 = arg0->match_end.result;
+    if ((temp_r0 == 7 || temp_r0 == 8) && g_debugLevel <= 2) {
+        switch (gm_801A4310()) {
+        case 3:
+            fn_80162BFC(arg1->ckind, arg1->xC.x18);
+            break;
+        case 4:
+            fn_80162DF8(arg1->ckind, arg1->xC.x18);
+            break;
+        case 5:
+            fn_80162FF4(arg1->ckind, arg1->xC.x18);
+            break;
+        }
+        gm_801A42F8(1);
+        return 0;
+    }
+    fn_8017E3C8();
+    if (!(arg1->x8 & 0x80)) {
+        arg1->stocks = arg0->match_end.player_standings[0].stocks;
+        if (arg1->stocks != 0) {
+            if (arg0->match_end.result == 1) {
+                arg1->stocks--;
+                if (arg1->stocks == 0) {
+                    gm_SetScenePendingMinor(arg2);
+                    return 0;
+                }
+                if (!(arg1->x8 & 0x40)) {
+                    arg1->xC.x10++;
+                    gm_SetScenePendingMinor(gm_801A42C4());
+                    return 0;
+                }
+            }
+        } else {
+            arg1->xC.x10 = 0;
+            gm_SetScenePendingMinor(arg2);
+            return 0;
+        }
+    }
+    arg1->xC.x18 = arg0->x0;
+    arg1->xC.x10 = 0;
+    return 1;
+}
 
 /// #fn_8017D9C0
 
-void gm_8017DB58(void* arg0)
+void gm_8017DB58(struct Unk1PData_x24* arg0)
 {
-    M2C_FIELD(arg0, s8*, 0) = 0x21;
-    M2C_FIELD(arg0, s8*, 0xC) = 0x21;
-    M2C_FIELD(arg0, s8*, 0x18) = 0x21;
+    int i;
+    for (i = 0; i < 3; i++) {
+        arg0[i].ckind = CHKIND_NONE;
+    }
 }
 
 u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index)
@@ -396,29 +567,29 @@ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index)
 
 /// #fn_8017DE54
 
-UnkAllstarData* fn_8017DEC8(int arg0)
+Unk1PData* fn_8017DEC8(int arg0)
 {
     switch (arg0) {
     case 0:
-        return gm_8017E424();
+        return &gm_8017E424()->x0;
     case 1:
-        return gm_8017EB30();
+        return &gm_8017EB30()->x0;
     case 2:
-        return &gm_80473A18;
+        return &gm_80473A18.x0;
     default:
         return NULL;
     }
 }
 
-UnkAllstarData* fn_8017DF28(void)
+Unk1PData* fn_8017DF28(void)
 {
     switch (gm_801A4310()) {
     case MJ_CLASSIC:
-        return gm_8017EB30();
+        return &gm_8017EB30()->x0;
     case MJ_ADVENTURE:
-        return gm_8017E424();
+        return &gm_8017E424()->x0;
     case MJ_ALLSTAR:
-        return &gm_80473A18;
+        return &gm_80473A18.x0;
     default:
         return NULL;
     }
@@ -440,46 +611,42 @@ u8 fn_8017DF90(void)
 
 int gm_8017DFF4(int arg0)
 {
-    UnkAllstarData* var_r3 = fn_8017DEC8(arg0);
+    Unk1PData* var_r3 = fn_8017DEC8(arg0);
     if (var_r3 != NULL) {
-        return var_r3->x2;
+        return var_r3->cpu_level;
     }
     return -1;
 }
 
 int gm_8017E068(void)
 {
-    UnkAllstarData* var_r3 = fn_8017DF28();
+    Unk1PData* var_r3 = fn_8017DF28();
     if (var_r3 != NULL) {
-        return var_r3->x2;
+        return var_r3->cpu_level;
     }
     return -1;
 }
 
 int fn_8017E0E4(void)
 {
-    UnkAllstarData* var_r3 = fn_8017DF28();
+    Unk1PData* var_r3 = fn_8017DF28();
     if (var_r3 != NULL) {
-        return var_r3->xC.x0;
+        return var_r3->xC.xC;
     }
     return -1;
 }
 
 bool fn_8017E160(void)
 {
-    UnkAllstarData* var_r3 = fn_8017DF28();
-    struct UnkAllstarData_xC* temp_r3_2;
+    Unk1PData* var_r3 = fn_8017DF28();
+    struct Unk1PData_xC* temp_r3_2;
 
     if (var_r3 != NULL) {
-        if (var_r3->xC.x18 != 0x21) {
-            return true;
-        }
-        temp_r3_2 = &var_r3->xC;
-        if (temp_r3_2->x24 != 0x21) {
-            return true;
-        }
-        if (temp_r3_2->x30 != 0x21) {
-            return true;
+        int i;
+        for (i = 0; i < 3; i++) {
+            if (var_r3->xC.x24[i].ckind != CHKIND_NONE) {
+                return true;
+            }
         }
         return false;
     }
@@ -494,19 +661,29 @@ bool fn_8017E160(void)
 
 /// #fn_8017E3C8
 
-UnkAllstarData* gm_8017E424(void)
+UnkAdventureData* gm_8017E424(void)
 {
     return &lbl_80472C30;
 }
 
 u8 gm_8017E430(void)
 {
-    return lbl_80472C30.x3;
+    return lbl_80472C30.x0.slot;
 }
 
 /// #gm_8017E440
 
-/// #gm_8017E48C
+int gm_8017E48C(MinorScene* scene)
+{
+    int count = 0;
+    int i;
+    for (i = 0; scene->idx != gm_803DE1B8_MinorScenes[i].idx; i++) {
+        if (gm_803DE1B8_MinorScenes[i].info.class_id == 2) {
+            count++;
+        }
+    }
+    return count;
+}
 
 /// #gm_8017E4C4
 
@@ -534,7 +711,10 @@ u8 gm_8017E430(void)
 
 /// #gm_8017E7A0
 
-/// #gm_8017E7E0
+bool gm_8017E7E0(void)
+{
+    return lbl_80472C30.x7C == 0x14;
+}
 
 /// #gm_8017E7FC
 
@@ -629,7 +809,10 @@ s32 gm_80180AE4(void)
     return lbl_80472EC8[0] * 0xA;
 }
 
-/// #gm_80180AF4
+Fighter_GObj* gm_80180AF4(void)
+{
+    return Player_GetEntity(1);
+}
 
 /// #gm_80180B18
 
@@ -674,7 +857,7 @@ int gm_80181A14(void)
     return lbl_80473594.x0;
 }
 
-u16 gm_80181A24(void)
+u32 gm_80181A24(void)
 {
     return lbl_80473594.x2;
 }
@@ -748,7 +931,7 @@ void fn_80182F40(HSD_GObj* unused)
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);
         gm_801A4B60();
-        gm_801A42E8(0);
+        gm_801A42E8(MJ_TITLE);
         gm_801A42D4();
         return;
     }

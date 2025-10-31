@@ -7,13 +7,14 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftLink/types.h"
 
 #include <baselib/forward.h>
@@ -97,7 +98,7 @@ void ftLk_SpecialAirHi_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* ca = &fp->co_attrs;
     ftLk_DatAttrs* da = fp->dat_attrs;
-    ftCommon_8007D494(fp, ca->grav * da->specialhi_grav_mul, ca->terminal_vel);
+    ftCommon_Fall(fp, ca->grav * da->specialhi_grav_mul, ca->terminal_vel);
     ftCommon_8007D344(
         fp, 0, ca->air_drift_stick_mul * da->specialairhi_drift_stick_mul,
         ca->air_drift_max * da->specialairhi_drift_max_mul);
@@ -127,7 +128,7 @@ void ftLk_SpecialAirHi_Coll(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj)->dat_attrs;
     if (ft_CheckGroundAndLedge(gobj, 0)) {
-        ftCo_800D5CB0(gobj, 0, fp->facing_dir1);
+        ftCo_LandingFallSpecial_Enter(gobj, false, fp->facing_dir1);
     } else if (ftCliffCommon_80081298(gobj)) {
         return;
     }

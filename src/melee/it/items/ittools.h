@@ -13,11 +13,11 @@
 /* 2EF128 */ bool itTools_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2EF27C */ void itTools_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2EF2BC */ bool itTools_UnkMotion4_Coll(Item_GObj* gobj);
-/* 2EF320 */ UNK_RET it_802EF320(UNK_PARAMS);
+/* 2EF320 */ void it_802EF320(Item_GObj* gobj);
 /* 2EF3C4 */ bool itTools_UnkMotion9_Anim(Item_GObj* gobj);
 /* 2EF468 */ void itTools_UnkMotion9_Phys(Item_GObj* gobj);
 /* 2EF46C */ bool itTools_UnkMotion9_Coll(Item_GObj* gobj);
-/* 2EF548 */ UNK_RET it_802EF548(UNK_PARAMS);
+/* 2EF548 */ void it_802EF548(Item_GObj* gobj);
 /* 2EF700 */ bool it_2725_Logic22_DmgReceived(Item_GObj*);
 /* 2EF724 */ bool it_2725_Logic22_Clanked(Item_GObj*);
 /* 2EF7CC */ bool it_2725_Logic22_HitShield(Item_GObj*);

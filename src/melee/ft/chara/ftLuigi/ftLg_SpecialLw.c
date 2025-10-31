@@ -88,7 +88,7 @@ void ftLg_SpecialLw_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     fp2->self_vel.y = (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
                                luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
-    ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
+    ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
@@ -123,7 +123,7 @@ void ftLg_SpecialAirLw_Enter(HSD_GObj* gobj)
     }
     fp2->self_vel.y =
         (float) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
-    ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
+    ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     ftLuigi_SpecialLw_SetVars(gobj);
     ftLuigi_SpecialLw_SetCall(gobj);
     ftLuigi_SpecialLw_SetGFX(gobj);
@@ -190,7 +190,7 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x166, 0x0C4C508A, fp->cur_anim_frame,
                               1.0f, 0.0f, NULL);
     ftCommon_ClampFallSpeed(fp, luigiAttrs->x90_LUIGI_CYCLONE_TAP_GRAVITY);
-    ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
+    ftCommon_ClampSelfVelX(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
 }
@@ -221,7 +221,7 @@ void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
             fp, 0, attrs->x7C_LUIGI_CYCLONE_MOMENTUM_X_MUL_GROUND, var2);
     }
 
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 
     if (fp->cmd_vars[2] != 0 && (fp->input.x668 & HSD_PAD_B)) {
         fp->self_vel.y += attrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
@@ -241,11 +241,11 @@ void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
     if (!fp->fv.lg.x222C_cycloneCharge && fp->cmd_vars[2] != 0 &&
         (fp->input.x668 & HSD_PAD_B))
     {
-        ftCommon_8007D508(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
+        ftCommon_Ascend(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
                           attrs0->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     }
 
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
 
     {
         float spd_x = attrs0->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
@@ -322,7 +322,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     fp->fv.lg.x222C_cycloneCharge = false;
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialLw, FTLUIGI_SPECIALLW_FLAG,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-    ftCommon_8007CC78(fp, luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND);
+    ftCommon_ClampGrVel(fp, luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND);
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
 }

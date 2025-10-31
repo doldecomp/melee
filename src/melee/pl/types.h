@@ -2,16 +2,32 @@
 #define MELEE_PL_TYPES_H
 
 #include <placeholder.h>
+#include <platform.h>
 
 #include <melee/pl/forward.h>
 
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
+
+struct plAllocInfo {
+    FighterKind internal_id;
+    u8 slot;
+    s8 x5;
+    struct {
+        u8 b0 : 1;
+        u8 has_transformation : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    };
+};
 
 /// @todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
 struct plAllocInfo2 {
-    s32 internal_id;
+    FighterKind internal_id;
     u8 slot;
     enum_t unk8;
     struct {
@@ -28,20 +44,40 @@ struct plAllocInfo2 {
 
 struct pl_800386D8_t {
     /*   +0 */ int total_attack_count;
-    /*   +4 */ u8 x4[0xCC - 0x4];
-    /*  +33 */ int xCC;
-    /*  +D0 */ int xD0;
-    /*  +D4 */ u8 xD4[0x194 - 0xD4];
+    /*   +4 */ u32 x4[100];
     /* +194 */ int x194;
     /* +198 */ int x198;
     /* +19C */ int x19C;
     /* +1A0 */ u8 x1A0[0x1A8 - 0x1A0];
     /* +1A8 */ int x1A8;
     /* +1AC */ int x1AC;
-    /* +1B0 */ u8 x1B0[0x358 - 0x1B0];
+    struct pl_800386D8_1B0_t {
+        /* +1B0 +000 */ u8 x0[0xCC];
+        /* +27C +0CC */ u32 xCC;
+        /* +280 +0D0 */ u32 xD0;
+        /* +384 +0D4 */ u8 xD4[0x188 - 0xD4];
+        /* +318 +188 */ int x188;
+        /* +31C +18C */ int x18C;
+    } x1B0;
+    /* +340 */ int x340;
+    /* +344 */ int x344;
+    /* +348 */ int x348;
+    /* +34C */ int x34C;
+    /* +350 */ int x350;
+    /* +354 */ int x354;
     /* +358 */ int x358;
     /* +35C */ u8 x35C[0x3E8 - 0x35C];
-    /* +3E8 */ unsigned int x3E8 UNK_SIZE_ARRAY;
+    /* +3E8 */ int x3E8[(0x500 - 0x3E8) / 4];
+    /* +500 */ int x500;
+    /* +504 */ u8 x504[0x64];
+    /* +568 */ int x568;
+    /* +56C */ int x56C;
+    /* +570 */ u8 x570[0x598 - 0x570];
+    /* +598 */ u32 x598[9]; // UNKNOWN SIZE
+    /* +5BC */ u8 x5BC_b0 : 1;
+    /* +5BC */ u8 x5BC_b1 : 1;
+    /* +5BC */ u8 x5BC_b2 : 1;
+    /* +5BC */ u8 x5BC_b3 : 1;
 }; // UNKNOWN SIZE
 
 struct StaleMoveTable {
@@ -51,15 +87,41 @@ struct StaleMoveTable {
         u16 attack_instance;
     } StaleMoves[10];
     /*  +2C */ pl_800386D8_t total_attack_count_struct;
-    /* +414 */ u8 x414[0x5C4 - 0x414];
-    /* +5C4 */ int x5C4[0xA]; // UNKNOWN SIZE
-    /* +5EC */ int x5EC;
-    /* +5F0 */ u8 x5F0[0x674 - 0x5F0];
-    /* +674 */ int x674[39];
+    /* +5EC */ struct pl_x5EC_t {
+        u8 x0; ///< player slot
+        f32 x4;
+        u32 x8;
+        u32 xC;
+        struct {
+            float x0; ///< combo damage?
+            s16 x4;
+            u16 x6;
+            s16 x8;
+            int xC;
+            s16 x10;
+            u16 x12_b0 : 1;
+        } x10[6];
+    } x5EC;
+    /* +674 */ u32 x674[39];
     /* +710 */ int x710[39];
     /* +7AC */ int x7AC[39];
     /* +848 */ int x848[30];
-    /* +8E4 */ u8 x8C0[0x904 - 0x8C0];
+    /* +8C0 */ struct pl_x8C0_t {
+        int x0;
+        struct {
+            u16 x0;
+            u8 x2;
+            u8 x3_b0 : 1;
+        } x4[5];
+    } x8C0;
+    /* +8D8 */ struct pl_x8D8_t {
+        int x0;
+        struct {
+            u32 x0;
+            u8 x4_b0 : 1;
+            u8 x4_b1 : 1;
+        } x4[5];
+    } x8D8;
     /* +904 */ unsigned int x904[215];
     /* +C60 */ float xC60;
     /* +C64 */ float xC64;
@@ -85,8 +147,8 @@ struct StaleMoveTable {
     /* +CD8 */ int xCD8;
     /* +CDC */ float xCDC;
     /* +CE0 */ float xCE0;
-    /* +CE4 */ int xCE4;
-    /* +CE8 */ int xCE8;
+    /* +CE4 */ u32 xCE4;
+    /* +CE8 */ u32 xCE8;
     /* +CEC */ int xCEC;
     /* +CF0 */ int xCF0;
 };
@@ -102,17 +164,17 @@ struct pl_StaleMoveTableExt_t {
     /* +D08 */ unsigned int xD08;
     /* +D0C */ unsigned int xD0C;
     /* +D10 */ int xD10;
-    /* +D14 */ int xD14;
+    /* +D14 */ u32 xD14;
     /* +D18 */ unsigned int xD18;
-    /* +D1C */ int xD1C;
-    /* +D20 */ int xD20;
-    /* +D24 */ int xD24;
-    /* +D28 */ int xD28;
-    /* +D2C */ int xD2C;
-    /* +D30 */ int xD30;
+    /* +D1C */ u32 xD1C;
+    /* +D20 */ u32 xD20;
+    /* +D24 */ u32 xD24;
+    /* +D28 */ u32 xD28;
+    /* +D2C */ u32 xD2C;
+    /* +D30 */ u32 xD30;
     /* +D34 */ int xD34;
-    /* +D38 */ int xD38;
-    /* +D3C */ int xD3C;
+    /* +D38 */ u32 xD38;
+    /* +D3C */ u32 xD3C;
     /* +D40 */ unsigned int xD40;
     /* +D44 */ unsigned int xD44;
     /* +D48 */ unsigned int xD48;
@@ -186,15 +248,22 @@ struct pl_800386E8_arg0_t {
 }; /* size = 0x5B4 */
 
 struct pl_804D6470_t {
-    /*   +0 */ u8 x0[0x18];
+    /*   +0 */ u8 x0[0x4];
+    /*   +4 */ int x4;
+    /*   +8 */ u8 x8[0x10];
     /*  +18 */ unsigned int x18;
     /*  +1C */ unsigned int x1C;
-    /*  +20 */ u8 x20[0x2C - 0x20];
+    /*  +20 */ u8 x20[0x24 - 0x20];
+    /*  +24 */ int x24;
+    /*  +28 */ float x28;
     /*  +2C */ unsigned int x2C;
     /*  +30 */ unsigned int x30;
-    /*  +34 */ u8 x34[0x38 - 0x34];
+    /*  +34 */ float x34;
     /*  +38 */ float x38;
-    /*  +3C */ u8 x3C[0x4C - 0x3C];
+    /*  +3C */ u32 x3C;
+    /*  +40 */ u32 x40;
+    /*  +44 */ float x44;
+    /*  +48 */ float x48;
     /*  +4C */ float x4C;
     /*  +50 */ u8 x50[0x58 - 0x50];
     /*  +58 */ float x58;
@@ -214,7 +283,7 @@ struct pl_804D6470_t {
     /*  +90 */ unsigned int x90;
     /*  +94 */ unsigned int x94;
     /*  +98 */ float x98;
-    /*  +9C */ u8 x9C[0xA0 - 0x9C];
+    /*  +9C */ float x9C;
     /*  +A0 */ float xA0;
     /*  +A4 */ unsigned int xA4;
     /*  +A8 */ unsigned int xA8;
@@ -226,12 +295,25 @@ struct pl_804D6470_t {
     /*  +C0 */ u8 xC0[0xC4 - 0xC0];
     /*  +C4 */ unsigned int xC4;
     /*  +C8 */ unsigned int xC8;
-    /*  +CC */ u8 xCC[0xE0 - 0xCC];
+    /*  +CC */ float xCC;
+    /*  +D0 */ float xD0;
+    /*  +D4 */ float xD4;
+    /*  +D8 */ float xD8;
+    /*  +DC */ u32 xDC;
     /*  +E0 */ unsigned int xE0;
     /*  +E4 */ UNK_T xE4;
-    /*  +E8 */ UNK_T xE8;
+    /*  +E8 */ float xE8;
     /*  +EC */ int xEC;
-    /*  +E8 */ u8 xF0[0x118 - 0xF0];
+    /*  +E8 */ u8 xF0[0xF4 - 0xF0];
+    /*  +F4 */ float xF4;
+    /*  +F8 */ float xF8;
+    /*  +FC */ float xFC;
+    /* +100 */ float x100;
+    /* +104 */ float x104;
+    /* +108 */ int x108;
+    /* +10C */ float x10C;
+    /* +110 */ int x110;
+    /* +114 */ float x114;
     /* +118 */ unsigned int x118;
     /* +11C */ float x11C;
     /* +120 */ int x120;
@@ -255,7 +337,7 @@ struct pl_804D6470_t {
     /* +170 */ unsigned int x170;
     /* +174 */ unsigned int x174;
     /* +178 */ unsigned int x178;
-    /* +17C */ u8 x17C[0x180 - 0x17C];
+    /* +17C */ int x17C;
     /* +180 */ float x180;
 }; // UNKNOWN SIZE
 

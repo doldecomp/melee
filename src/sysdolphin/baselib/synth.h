@@ -9,7 +9,7 @@ struct HSD_SynthSFXNode;
 
 /* 388330 */ void* HSD_AudioMalloc(size_t);
 /* 38838C */ void HSD_AudioFree(void*);
-/* 3883B4 */ void HSD_SynthSFXSampleLoadCallback(void*, int, void*,
+/* 3883B4 */ void HSD_SynthSFXSampleLoadCallback(int, int, void*,
                                                  int cancelflag);
 /* 38893C */ void HSD_SynthSFXLoadNewProc(void);
 /* 3889B8 */ int HSD_SynthSFXLoad(const char* filename, int, int, int);
@@ -50,14 +50,14 @@ void HSD_SynthSFXKeyOff(int);
 /* 38ABC4 */ void HSD_SynthSFXSetDriverMasterClockCallback(UNK_T);
 /* 38ABCC */ void HSD_SynthSFXSetDriverPauseCallback(UNK_T);
 /* 38ABD4 */ void HSD_SynthCallback(void);
-/* 38AD60 */ void HSD_SynthResetStreamCounters(void);
-/* 38AD74 */ UNK_RET HSD_Synth_8038AD74(UNK_PARAMS);
+/* 38AD60 */ void HSD_SynthResetStreamCounters(int, int, void*, bool);
+/* 38AD74 */ UNK_RET HSD_Synth_8038AD74(u32);
 /* 38ADD0 */ UNK_RET HSD_Synth_8038ADD0(UNK_PARAMS);
 /* 38B120 */ UNK_RET HSD_Synth_8038B120(UNK_PARAMS);
 /* 38B380 */ UNK_RET HSD_SynthPStreamFirstHakoHeaderCallback(UNK_PARAMS);
-/* 38B3E0 */ void HSD_SynthPStreamHeaderCallback(void*, s32, void*,
-                                                 s32 cancelflag);
-/* 38B5AC */ int HSD_Synth_8038B5AC(int, u8, int, int);
+/* 38B3E0 */ void HSD_SynthPStreamHeaderCallback(int, int, void*,
+                                                 bool cancelflag);
+/* 38B5AC */ int HSD_Synth_8038B5AC(int, u8, u8, int);
 /* 38B81C */ void HSD_SynthStreamSetVolume(float);
 /* 38B938 */ void HSD_SynthInit(int, int, int, int);
 

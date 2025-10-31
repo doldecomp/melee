@@ -1,4 +1,6 @@
 #include "ftCo_Shouldered.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 
 #include "ftCo_Damage.h"
 
@@ -6,7 +8,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -89,7 +91,7 @@ static inline float inlineA0(Fighter_GObj* gobj)
 void ftCo_Shouldered_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->mv.co.shouldered.x4 = ftCommon_8007DC08(fp, inlineA0(fp->victim_gobj));
+    fp->mv.co.shouldered.x4 = ftCommon_GrabMash(fp, inlineA0(fp->victim_gobj));
     if (fp->grab_timer <= 0) {
         HitCapsule* hit;
         Fighter_GObj* gobj1 = fp->victim_gobj;

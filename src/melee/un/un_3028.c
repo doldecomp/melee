@@ -989,7 +989,7 @@ bool un_80304780(void)
 
 int un_80304870(void)
 {
-    if (gm_8016B498() || gm_801A4310() == 12) {
+    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
         return (short) un_804A284C[0x258 / 2];
     } else {
         return *gmMainLib_8015CC90();
@@ -998,14 +998,14 @@ int un_80304870(void)
 
 inline static unsigned short* idk(void)
 {
-    if (gm_8016B498() || gm_801A4310() == 12) {
+    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
         return &un_804A284C[5];
     } else {
         return gmMainLib_8015CC78();
     }
 }
 
-bool un_803048C0(int arg0)
+int un_803048C0(int arg0)
 {
     return idk()[arg0] & 0xFF;
 }
@@ -1038,7 +1038,7 @@ bool un_80304B0C(int arg0)
 {
     unsigned short* v;
     unsigned short s;
-    if (gm_8016B498() || gm_801A4310() == 12) {
+    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
         s = un_804A284C[3] | un_804A284C[4];
         v = &s;
     } else {

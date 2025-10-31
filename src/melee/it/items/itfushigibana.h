@@ -6,7 +6,7 @@
 #include "it/items/types.h"
 
 /* 2D6FD0 */ void it_2725_Logic29_Spawned(Item_GObj*);
-/* 2D705C */ UNK_RET it_802D705C(UNK_PARAMS);
+/* 2D705C */ void it_802D705C(Item_GObj*);
 /* 2D70A4 */ UNK_RET it_802D70A4(UNK_PARAMS);
 /* 2D7120 */ bool itFushigibana_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2D7144 */ void itFushigibana_UnkMotion0_Phys(Item_GObj* gobj);

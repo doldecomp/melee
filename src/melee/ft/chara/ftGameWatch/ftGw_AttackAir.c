@@ -5,13 +5,14 @@
 #include <platform.h>
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_AttackAir.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_LandingAir.h"
 #include "ftGameWatch/types.h"
 #include "it/items/it_27CF.h"
@@ -410,7 +411,7 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
         return;
     }
 
-    ftCo_800D5BF8(gobj);
+    ftCo_Landing_Enter_Basic(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 
@@ -482,7 +483,7 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
         return;
     }
 
-    ftCo_800D5BF8(gobj);
+    ftCo_Landing_Enter_Basic(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 
@@ -544,7 +545,7 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
         return;
     }
 
-    ftCo_800D5BF8(gobj);
+    ftCo_Landing_Enter_Basic(gobj);
     ftGw_Init_OnDamage(gobj);
 }
 

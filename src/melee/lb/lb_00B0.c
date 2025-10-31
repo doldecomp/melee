@@ -106,41 +106,41 @@ inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
     return jobj->parent;
 }
 
-void lb_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
+void lb_8000B1CC(HSD_JObj* arg0, Vec3* pos0, Vec3* pos1)
 {
     Quaternion r;
     Vec3 s;
 
     if (arg0 == NULL) {
-        *arg2 = *arg1;
+        *pos1 = *pos0;
         return;
     }
     if (jobj_parent(arg0) != NULL) {
         HSD_JObjSetupMatrix(arg0);
-        if (arg1 == NULL || (!arg1->x && !arg1->y && !arg1->z)) {
-            arg2->x = arg0->mtx[0][3];
-            arg2->y = arg0->mtx[1][3];
-            arg2->z = arg0->mtx[2][3];
+        if (pos0 == NULL || (!pos0->x && !pos0->y && !pos0->z)) {
+            pos1->x = arg0->mtx[0][3];
+            pos1->y = arg0->mtx[1][3];
+            pos1->z = arg0->mtx[2][3];
         } else {
-            MTXMultVec(arg0->mtx, arg1, arg2);
+            MTXMultVec(arg0->mtx, pos0, pos1);
         }
         return;
     }
-    if (arg1 == NULL || (!arg1->x && !arg1->y && !arg1->z)) {
-        HSD_JObjGetTranslation(arg0, arg2);
+    if (pos0 == NULL || (!pos0->x && !pos0->y && !pos0->z)) {
+        HSD_JObjGetTranslation(arg0, pos1);
         return;
     }
     HSD_JObjGetRotation(arg0, &r);
     HSD_JObjGetScale(arg0, &s);
     if (!r.x && !r.y && !r.z && s.x == 1 && s.y == 1 && s.z == 1) {
-        HSD_JObjGetTranslation(arg0, arg2);
-        arg2->x += arg1->x;
-        arg2->y += arg1->y;
-        arg2->z += arg1->z;
+        HSD_JObjGetTranslation(arg0, pos1);
+        pos1->x += pos0->x;
+        pos1->y += pos0->y;
+        pos1->z += pos0->z;
         return;
     }
     HSD_JObjSetupMatrix(arg0);
-    MTXMultVec(arg0->mtx, arg1, arg2);
+    MTXMultVec(arg0->mtx, pos0, pos1);
 }
 
 void lb_8000B4FC(HSD_JObj* jobj, HSD_Joint* joint)

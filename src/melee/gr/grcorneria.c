@@ -177,7 +177,9 @@ bool grCorneria_801DFBC4(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801DFBCC
+void grCorneria_801DFBCC(Ground_GObj* arg) {
+    grCorneria_801DED50(arg);
+}
 
 void grCorneria_801DFBEC(Ground_GObj* arg) {}
 
@@ -295,7 +297,11 @@ bool grCorneria_801E0D28(Ground_GObj* arg)
 
 void grCorneria_801E0DE0(Ground_GObj* arg) {}
 
-/// #grCorneria_801E0DE4
+s32 grCorneria_801E0DE4(Ground_GObj* gobj)
+{
+    Ground* gr = GET_GROUND(gobj);
+    return grCorneria_801E2550(gobj, &gr->gv.corneria);
+}
 
 bool grCorneria_801E0E0C(Ground_GObj* arg)
 {

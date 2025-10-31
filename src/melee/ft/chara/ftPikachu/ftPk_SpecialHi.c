@@ -7,7 +7,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
@@ -17,6 +17,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
 #include "ftPikachu/types.h"
 #include "lb/lb_00B0.h"
@@ -126,7 +127,7 @@ void ftPk_SpecialAirHiStart0_Phys(HSD_GObj* gobj)
         if ((signed) fp->mv.pk.specialhi.x0 != 0) {
             fp->mv.pk.specialhi.x0--;
         } else {
-            ftCommon_8007D494(fp, sa->x64, da->terminal_vel);
+            ftCommon_Fall(fp, sa->x64, da->terminal_vel);
         }
     }
 
@@ -287,7 +288,7 @@ void ftPk_SpecialHi_8012642C(HSD_GObj* gobj)
 
 void ftPk_SpecialHiStart1_Phys(HSD_GObj* gobj)
 {
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 #pragma push
@@ -505,7 +506,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
             (!ftCo_8009A134(gobj)))
         {
             Fighter* fighter2;
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
 
             // store stick angle to compare during zip2 check
             fp->mv.pk.specialhi.x10.x = lstick_direction.x;
@@ -570,7 +571,7 @@ void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
 
     if ((final_stick_mag > pika_attr->x8C)) {
         if (ABS(fp->input.lstick.x) > 0.001f) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
         }
 
         // zip angle = atan2(stick_y, stick_x * facing_direction)
@@ -739,8 +740,8 @@ void ftPk_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->dat_attrs;
 
     if (fp->cmd_vars[0]) {
-        ftCommon_8007D4B8(fp);
-        ftCommon_8007D440(fp, sa->x9C * fp->co_attrs.air_drift_max);
+        ftCommon_FallBasic(fp);
+        ftCommon_ClampSelfVelX(fp, sa->x9C * fp->co_attrs.air_drift_max);
     } else {
         fp->self_vel.y -= (fp->self_vel.y / 9.0f);
         ftCommon_8007CEF4(fp);
@@ -773,7 +774,7 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (ft_8008239C(gobj, fp->facing_dir, box)) {
-        ftCo_800D5CB0(gobj, 0, pika_attr->xB0);
+        ftCo_LandingFallSpecial_Enter(gobj, false, pika_attr->xB0);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
         return;

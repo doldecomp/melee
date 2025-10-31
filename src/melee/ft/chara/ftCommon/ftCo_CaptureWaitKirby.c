@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -12,6 +12,8 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
 
@@ -35,7 +37,7 @@ void ftCo_800BD620(Fighter_GObj* gobj)
                               NULL);
     Fighter_UpdateModelScale(gobj);
     fp->accessory1_cb = ftCo_800DB464;
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     ftColl_8007B62C(gobj, 2);
     ftCommon_8007D5D4(fp);
     ftCommon_8007E2F4(fp, 0x1FF);
@@ -99,12 +101,12 @@ void ftCo_CaptureWaitKirby_IASA(Fighter_GObj* gobj)
     }
     fp->grab_timer -= ftKb_SpecialN_800F5B00(fp->victim_gobj);
     fp->mv.co.capturekirby.x18 =
-        ftCommon_8007DC08(fp, ftKb_SpecialN_800F5B10(fp->victim_gobj));
+        ftCommon_GrabMash(fp, ftKb_SpecialN_800F5B10(fp->victim_gobj));
     if (fp->grab_timer <= 0) {
         Fighter_GObj* victim_gobj = fp->victim_gobj;
         fp->facing_dir = ftKb_SpecialN_800F5A60(victim_gobj);
         HSD_JObjSetScale(jobj, &jobj->scale);
-        ftCo_800DC750(gobj);
+        ftCo_CaptureCut_Enter(gobj);
         ftCo_800DA698(victim_gobj, 0);
     }
 }

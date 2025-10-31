@@ -9,13 +9,14 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_Jump.h"
@@ -147,10 +148,10 @@ void ftCo_Run_Phys(Fighter_GObj* gobj)
     ftCommon_8007C98C(fp, accel, target_vel,
                       attrs->gr_friction *
                           p_ftCommonData->x60_someFrictionMul);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftCo_Run_Coll(Fighter_GObj* gobj)
 {
-    ft_800844EC();
+    ft_800844EC(gobj);
 }

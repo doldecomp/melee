@@ -503,8 +503,7 @@ static inline HSD_SM* AXDriver_8038CFF4_inline(void)
     }
 }
 
-int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel,
-                      float pitch)
+int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track, int channel)
 {
     HSD_SM* v;
     int sample_idx;
@@ -1079,7 +1078,7 @@ bool AXDriver_8038E844(int arg0)
     return true;
 }
 
-bool AXDriver_8038E8EC(const char* path, int arg1, int arg2)
+bool AXDriver_8038E8EC(const char* path, u8 arg1, int arg2)
 {
     int entrynum = DVDConvertPathToEntrynum(path);
     if (AXDriver_804D6038 != -1) {

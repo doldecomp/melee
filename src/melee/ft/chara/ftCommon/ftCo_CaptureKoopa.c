@@ -7,12 +7,14 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 #include "ftKoopa/ftKp_Init.h"
 
@@ -29,7 +31,7 @@ void ftCo_800BC458(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= ftKp_SpecialS_80132DD0(fp->victim_gobj);
     fp->mv.co.capturekoopa.x0 =
-        ftCommon_8007DC08(fp, ftKp_SpecialS_80132DE0(fp->victim_gobj));
+        ftCommon_GrabMash(fp, ftKp_SpecialS_80132DE0(fp->victim_gobj));
 }
 
 void ftCo_800BC4A8(Fighter_GObj* gobj)

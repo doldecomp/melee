@@ -10,13 +10,14 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 
 #include "it/forward.h"
 
@@ -76,7 +77,7 @@ void ftCa_SpecialS_Enter(HSD_GObj* gobj)
     fp->fv.ca.during_specials = false;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->x21F4 = ftCa_SpecialS_OnDetect;
+    fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
 
     resetVel(fp);
 
@@ -109,7 +110,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     fp->fv.ca.during_specials = false;
     fp->pre_hitlag_cb = efLib_PauseAll;
     fp->post_hitlag_cb = efLib_ResumeAll;
-    fp->x21F4 = ftCa_SpecialS_OnDetect;
+    fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
     {
         /// @todo Too much stack for #resetVel.
         Vec3* vel = &fp->self_vel;
@@ -349,7 +350,7 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
             ftCo_Fall_Enter(gobj);
             return;
         }
-        ftCommon_8007D468(fp);
+        ftCommon_ClampAirDrift(fp);
         ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_miss_landing_lag);
         return;
     }
@@ -382,7 +383,7 @@ void ftCa_SpecialS_Coll(HSD_GObj* gobj)
                 ftCo_Fall_Enter(gobj);
                 return;
             } else {
-                ftCommon_8007D468(fp1);
+                ftCommon_ClampAirDrift(fp1);
                 ftCo_80096900(gobj, 1, 1, 0, 1, da->specials_hit_landing_lag);
             }
         }
@@ -395,7 +396,8 @@ void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     if (ft_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
-        ftCo_800D5CB0(gobj, 0, da->specials_miss_landing_lag);
+        ftCo_LandingFallSpecial_Enter(gobj, false,
+                                      da->specials_miss_landing_lag);
     }
 }
 
@@ -409,6 +411,7 @@ void ftCa_SpecialAirS_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) == true) {
         fp->gr_vel = fp->self_vel.x;
         efLib_DestroyAll(gobj);
-        ftCo_800D5CB0(gobj, 0, da->specials_hit_landing_lag);
+        ftCo_LandingFallSpecial_Enter(gobj, false,
+                                      da->specials_hit_landing_lag);
     }
 }

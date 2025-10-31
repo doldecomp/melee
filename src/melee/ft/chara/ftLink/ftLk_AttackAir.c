@@ -56,7 +56,7 @@ static void lwOnHit(HSD_GObj* gobj)
                       da->attackairlw_hit_anim_frame_start;
     ftColl_8007AFF8(gobj);
     fp->self_vel.y = da->attackairlw_hit_vel_y;
-    fp->x221A_b4 = false;
+    fp->fall_fast = false;
     fp->mv.lk.attackair.lw_frame_start = da->attackairlw_hit_anim_frame_start;
     if (fp->cur_anim_frame > frame_len) {
         Fighter_ChangeMotionState(gobj, ftCo_MS_AttackAirLw, Ft_MF_None,

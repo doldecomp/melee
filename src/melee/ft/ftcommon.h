@@ -6,21 +6,22 @@
 #include "it/forward.h"
 #include <baselib/forward.h>
 
-/* 07C930 */ void ftCommon_8007C930(Fighter*, float);
-/* 07C98C */ void ftCommon_8007C98C(Fighter*, float vel, float,
-                                    float gr_friction);
-/* 07CA80 */ void ftCommon_8007CA80(Fighter* fp, float result, float, float);
+/* 07C930 */ void ftCommon_ApplyFrictionGround(Fighter*, float);
+/* 07C98C */ void ftCommon_8007C98C(Fighter*, float accel, float target_vel,
+                                    float friction);
+/* 07CA80 */ void ftCommon_8007CA80(Fighter* fp, float accel, float target_vel,
+                                    float);
 /* 07CADC */ void ftCommon_8007CADC(Fighter*, float, float, float);
-/* 07CB74 */ void ftCommon_8007CB74(Fighter_GObj*);
-/* 07CC1C */ Fighter_GObj* ftCommon_8007CC1C(Fighter_GObj*);
-/* 07CC78 */ void ftCommon_8007CC78(Fighter*, float);
+/* 07CB74 */ void ftCommon_ApplyGroundMovement(Fighter_GObj*);
+/* 07CC1C */ Fighter_GObj* ftCommon_ApplyGroundMovementNoSlide(Fighter_GObj*);
+/* 07CC78 */ void ftCommon_ClampGrVel(Fighter*, float);
 /* 07CCA0 */ void ftCommon_8007CCA0(Fighter*, float);
 /* 07CCE8 */ void ftCommon_8007CCE8(Fighter*);
 /* 07CD6C */ float ftCommon_8007CD6C(float, float decrement);
 /* 07CDA4 */ float ftCommon_8007CDA4(Fighter*);
 /* 07CDF8 */ float ftCommon_8007CDF8(Fighter*);
 /* 07CE4C */ void ftCommon_8007CE4C(Fighter*, float);
-/* 07CE94 */ void ftCommon_8007CE94(Fighter*, float);
+/* 07CE94 */ void ftCommon_ApplyFrictionAir(Fighter*, float);
 /* 07CEF4 */ void ftCommon_8007CEF4(Fighter*);
 /* 07CF58 */ bool ftCommon_8007CF58(Fighter*);
 /* 07D050 */ bool ftCommon_8007D050(Fighter*, float);
@@ -28,21 +29,24 @@
 /* 07D174 */ void ftCommon_8007D174(Fighter*, float, float, float, float);
 /* 07D268 */ void ftCommon_8007D268(Fighter*);
 /* 07D28C */ void ftCommon_8007D28C(Fighter*, float);
-/* 07D2E8 */ void ftCommon_8007D2E8(Fighter*, float, float);
-/* 07D344 */ void ftCommon_8007D344(Fighter*, float, float, float);
-/* 07D3A8 */ void ftCommon_8007D3A8(Fighter*, float, float, float);
-/* 07D440 */ void ftCommon_8007D440(Fighter*, float);
-/* 07D468 */ void ftCommon_8007D468(Fighter*);
-/* 07D494 */ void ftCommon_8007D494(Fighter*, float, float);
-/* 07D4B8 */ void ftCommon_8007D4B8(Fighter*);
-/* 07D4E4 */ void ftCommon_8007D4E4(Fighter*);
+/* 07D2E8 */ void ftCommon_8007D2E8(Fighter*, float accel, float target_vel,
+                                    float unused);
+/* 07D344 */ void ftCommon_8007D344(Fighter*, float threshold, float accel_max,
+                                    float target_max);
+/* 07D3A8 */ void ftCommon_8007D3A8(Fighter*, float threshold, float accel_max,
+                                    float target_max);
+/* 07D440 */ void ftCommon_ClampSelfVelX(Fighter*, float);
+/* 07D468 */ void ftCommon_ClampAirDrift(Fighter*);
+/* 07D494 */ void ftCommon_Fall(Fighter*, float, float);
+/* 07D4B8 */ void ftCommon_FallBasic(Fighter*);
+/* 07D4E4 */ void ftCommon_FallFast(Fighter*);
 /* 07D4F4 */ void ftCommon_ClampFallSpeed(Fighter*, float);
-/* 07D508 */ void ftCommon_8007D508(Fighter*, float, float);
-/* 07D528 */ bool ftCommon_8007D528(Fighter*);
-/* 07D5BC */ void ftCommon_8007D5BC(Fighter*);
+/* 07D508 */ void ftCommon_Ascend(Fighter*, float, float);
+/* 07D528 */ bool ftCommon_CheckFallFast(Fighter*);
+/* 07D5BC */ void ftCommon_UnlockECB(Fighter*);
 /* 07D5D4 */ void ftCommon_8007D5D4(Fighter*);
 /* 07D60C */ void ftCommon_8007D60C(Fighter*);
-/* 07D698 */ void ftCommon_8007D698(Fighter*);
+/* 07D698 */ void ftCommon_UseAllJumps(Fighter*);
 /* 07D6A4 */ void ftCommon_8007D6A4(Fighter*);
 /* 07D780 */ void ftCommon_8007D780(Fighter*);
 /* 07D7FC */ void ftCommon_8007D7FC(Fighter*);
@@ -50,13 +54,13 @@
 /* 07D964 */ float ftCo_GetLStickAngle(Fighter* fp);
 /* 07D99C */ float ftCo_GetCStickAngle(Fighter* fp);
 /* 07D9D4 */ float ftCommon_8007D9D4(Fighter*);
-/* 07D9FC */ void ftCommon_8007D9FC(Fighter*);
+/* 07D9FC */ void ftCommon_UpdateFacing(Fighter*);
 /* 07DA24 */ void ftCommon_8007DA24(Fighter*);
 /* 07DA74 */ float ftCommon_CalcHitlag(int dmg, FtMotionId msid, float mul);
 /* 07DB24 */ void ftCommon_8007DB24(Fighter_GObj*);
 /* 07DB58 */ void ftCommon_8007DB58(Fighter_GObj*);
 /* 07DBCC */ void ftCommon_InitGrab(Fighter*, bool, float);
-/* 07DC08 */ bool ftCommon_8007DC08(Fighter*, float);
+/* 07DC08 */ bool ftCommon_GrabMash(Fighter*, float);
 /* 07DD7C */ void ftCommon_8007DD7C(Fighter_GObj*, Vec3*);
 /* 07DFD0 */ void ftCommon_8007DFD0(Fighter_GObj* gobj, Vec3* arg1);
 /* 07E0E4 */ void ftCommon_8007E0E4(Fighter_GObj*);
@@ -90,7 +94,7 @@
 /* 07EFC0 */ void ftCommon_8007EFC0(Fighter*, u32 val);
 /* 07EFC8 */ void ftCommon_8007EFC8(Fighter_GObj*, void (*)(Fighter_GObj*));
 /* 07F578 */ void ftCommon_8007F578(Fighter_GObj*);
-/* 07F5CC */ void ftCommon_8007F5CC(Fighter_GObj*, s32);
+/* 07F5CC */ void ftCommon_8007F5CC(Item_GObj*, bool);
 /* 07F694 */ float ftCommon_GetModelScale(Fighter*);
 /* 07F6A4 */ void ftCommon_8007F6A4(Fighter*, HSD_JObj*);
 /* 07F76C */ void ftCommon_8007F76C(Fighter_GObj*);

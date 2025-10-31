@@ -166,5 +166,5 @@ void ftPr_SpecialS_8013D5F0(Fighter_GObj* gobj)
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialS, 0x0C4C508AU,
                               fp->cur_anim_frame, 1, 0, NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }

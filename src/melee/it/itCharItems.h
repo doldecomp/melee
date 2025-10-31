@@ -6,6 +6,7 @@
 #include "platform.h"
 
 #include "it/forward.h"
+#include "lb/forward.h"
 
 #include "lb/types.h"
 
@@ -39,6 +40,13 @@ typedef struct {
     /* xC */ f32 xC;
     /* x10 */ f32 x10;
 } itDrMarioPillAttributes;
+
+typedef struct {
+    /* x0 */ f32 x0;
+    /* x4 */ f32 x4;
+    /* x8 */ f32 x8;
+    /* xC */ f32 xC;
+} itFireAttributes;
 
 typedef struct {
     /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
@@ -356,7 +364,7 @@ typedef struct {
     f32 xD8;
     f32 xDC;
     HSD_GObj* xE0;
-    s32 xE4;
+    int xE4;
     f32 xE8;
     f32 xEC;
     s32 xF0;
@@ -432,10 +440,27 @@ typedef struct itPikachutJoltGround_ItemVars {
     /* +8 +DDC */ UNK_T unk_8;
 } itPikachutJoltGround_ItemVars;
 
+typedef struct itPikachutJoltAir_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x4];
+    /* +4 +DD8 */ u32 xDD8;
+} itPikachutJoltAir_ItemVars;
+
+typedef struct itSamusBomb_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x4];
+    /* +4 +DD8 */ s32 xDD8;
+} itSamusBomb_ItemVars;
+
 typedef struct itSamusGrapple_ItemVars {
     /*  +0 +DD4 */ char pad_0[0x10];
     /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
 } itSamusGrapple_ItemVars;
+
+typedef struct itSeakNeedleThrown_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x4];
+    /* +4 +DD8 */ f32 xDD8;
+    /* +8 +DDC */ f32 xDDC;
+    /* +C +DE0 */ f32 xDE0;
+} itSeakNeedleThrown_ItemVars;
 
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;
@@ -451,5 +476,12 @@ typedef struct itZeldaDinFireExplodeAttributes {
     /* +C */ f32 xC;
     /* +10 */ f32 x10;
 } itZeldaDinFireExplodeAttributes;
+
+typedef struct itUnk4_ItemVars {
+    /*  +0 ip+DD4 */ u8 pad[0x18];
+    /*  +18 ip+DEC */ u8 xDEC_b0 : 1;
+    /*  +18 ip+DEC */ u8 xDEC_b1 : 1;
+    /*  +1C ip+DF0 */ Mtx xDF0;
+} itUnk4_ItemVars;
 
 #endif

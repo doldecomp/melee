@@ -25,8 +25,8 @@
 static StaticModelDesc gmTitle_80479B28;
 static StaticModelDesc gmTitle_80479B38;
 static char gmTitle_80479B48[0x80]; // debug text
-Vec3 gmTitle_803DA4F0 = { 0, 1600.0F, 400.0F };
-Vec3 gmTitle_803DA4FC = { 0, 1330.0F, 130.0F };
+AnimLoopSettings gmTitle_803DA4F0 = { 0, 1600.0F, 400.0F };
+AnimLoopSettings gmTitle_803DA4FC = { 0, 1330.0F, 130.0F };
 Vec3 gmTitle_803DA508 = { 0, -3, 0 };
 
 static HSD_CameraDescPerspective* gmTitle_804D6708;
@@ -48,7 +48,7 @@ HSD_GObj* gmTitle_801A12C4(void)
     HSD_JObjAddAnimAll(jobj, gmTitle_80479B28.animjoint,
                        gmTitle_80479B28.matanim_joint,
                        gmTitle_80479B28.shapeanim_joint);
-    HSD_JObjReqAnimAll(jobj, gmTitle_803DA4F0.z);
+    HSD_JObjReqAnimAll(jobj, gmTitle_803DA4F0.loop_frame);
     HSD_JObjAnimAll(jobj);
 
     HSD_JObjSetTranslate(jobj, &gmTitle_803DA508);
@@ -78,14 +78,14 @@ static inline void fn_801A1498_inline(void)
                        gmTitle_80479B38.shapeanim_joint);
     HSD_GObjProc_8038FD54(gobj, gmTitle_801A146C, 0);
     if (gm_801A4310() == MJ_TITLE ||
-        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2))
+        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
     {
         var_r0 = false;
     } else {
         var_r0 = true;
     }
     if (var_r0 != 0) {
-        HSD_JObjReqAnimAll(jobj, gmTitle_803DA4FC.x);
+        HSD_JObjReqAnimAll(jobj, gmTitle_803DA4FC.start_frame);
     } else {
         HSD_JObjReqAnimAll(jobj, 130.0F);
     }
@@ -132,7 +132,7 @@ HSD_GObj* gmTitle_801A165C(void)
                        gmTitle_80479B28.shapeanim_joint);
 
     if (gm_801A4310() == MJ_TITLE ||
-        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == 2))
+        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
     {
         var_r0 = false;
     } else {
@@ -140,14 +140,14 @@ HSD_GObj* gmTitle_801A165C(void)
     }
     if (var_r0) {
         gmTitle_804D671C = 0;
-        HSD_JObjReqAnimAll(jobj, gmTitle_803DA4F0.x);
+        HSD_JObjReqAnimAll(jobj, gmTitle_803DA4F0.start_frame);
         HSD_GObjProc_8038FD54(gobj, fn_801A1498, 0);
     } else {
         HSD_JObjReqAnimAll(jobj, 400.0F);
         HSD_GObjProc_8038FD54(gobj, gmTitle_801A1630, 0);
     }
     HSD_JObjAnimAll(jobj);
-    if (gm_80164840(9) || gm_80164840(0x17)) {
+    if (gm_80164840(CKIND_MARS) || gm_80164840(CKIND_EMBLEM)) {
         var_r0 = true;
     } else {
         var_r0 = false;
@@ -359,7 +359,7 @@ void gmTitle_801A1E20_OnEnter(void* unused)
         gmTitle_801A1D38(db_build_timestamp, gmTitle_80479B48);
         scale =
             HSD_SisLib_803A6B98(text, 30.0F, 30.0F, "%s", gmTitle_80479B48);
-        text->x49 = 1;
+        text->default_kerning = 1;
         HSD_SisLib_803A7548(text, scale, 0.7f, 0.55f);
     }
 }

@@ -7,7 +7,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -25,6 +25,7 @@
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_SpecialS.h"
+#include "ftCommon/ftCo_SquatWait.h"
 #include "lb/lbcollision.h"
 
 #include <common_structs.h>
@@ -46,7 +47,7 @@ void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
         case 3:
         case 4:
             if ((fp->x2070.x2073 == 0x14) || ((fp->x2070.x2071_b5) == 0)) {
-                if (fp->x5F5 == 2) {
+                if (fp->x5F4_arr[0].x1 == 2) {
                     ftSs_Init_80128B1C(gobj, float_result, da->x0, 1.0f);
                 } else {
                     ftSs_Init_80128B1C(gobj, float_result, 0.0f, 1.0f);
@@ -96,7 +97,7 @@ inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, float angle)
     fp = GET_FIGHTER(gobj);
     fp->self_vel.x = samus_attr->x8 * cosf(angle);
     fp->self_vel.y = samus_attr->x8 * sinf(angle);
-    ftCommon_8007D440(fp, ftAttr->air_drift_max * samus_attr->x10);
+    ftCommon_ClampSelfVelX(fp, ftAttr->air_drift_max * samus_attr->x10);
 }
 
 void ftSs_Init_80128B1C(HSD_GObj* gobj, float angle, float arg9, float argA)
@@ -194,7 +195,7 @@ void ftSs_SpecialLw_Phys(HSD_GObj* gobj)
         float samus_attr_xC = samus_attr->xC;
         ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_init_vel * samus_attr_xC,
                           ftAttr->walk_max_vel * samus_attr_xC);
-        ftCommon_8007CB74(gobj);
+        ftCommon_ApplyGroundMovement(gobj);
     } else {
         ft_80084F3C(gobj);
     }
@@ -208,7 +209,7 @@ void ftSs_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     u8 _[8];
 
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
     ftCommon_8007D344(fp, 0.0f,
                       ftAttr->ground_to_air_jump_momentum_multiplier *
                           samus_attr->x10,

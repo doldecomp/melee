@@ -7,6 +7,9 @@
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
@@ -185,20 +188,20 @@ void grTGanon_802249B0(Ground_GObj* gobj)
 DynamicsDesc* grTGanon_802249B4(enum_t arg0)
 {
     if (arg0 != -1) {
-        enum_t i = mpLib_80056B6C(arg0);
+        enum_t i = mpJointFromLine(arg0);
 
         if (i != -1 && i == 0) {
-            i = mpLib_80054C6C(arg0);
+            i = mpLineGetKind(arg0);
 
-            if (i == (1 << 1)) {
+            if (i == CollLine_Ceiling) {
                 return grTGn_804D6B18->x0;
             }
 
-            if (i == (1 << 2)) {
+            if (i == CollLine_RightWall) {
                 return grTGn_804D6B18->x4;
             }
 
-            if (i == (1 << 3)) {
+            if (i == CollLine_LeftWall) {
                 return grTGn_804D6B18->x8;
             }
 

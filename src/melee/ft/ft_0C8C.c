@@ -8,11 +8,13 @@
 
 #include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
+#include "ft/ft_0D31.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_Lift.h"
@@ -70,10 +72,10 @@ void ftCo_800C8D00(Fighter_GObj* gobj)
 
         if (victim != NULL) {
             if (fp->x221B_b5) {
-                ftCo_800DC750(victim);
+                ftCo_CaptureCut_Enter(victim);
             } else {
                 Fighter_GObj* tmp = victim;
-                ftCo_800DC750(gobj);
+                ftCo_CaptureCut_Enter(gobj);
                 ftCo_800DA698(tmp, false);
             }
             ftCommon_8007DB58(victim);

@@ -12,8 +12,6 @@
 #
 # Usage:
 #         split_suggester.py -s [fileToSplit.s]
-#                     OR
-#         split_suggester.py -s [fileToSplit.s] -m [mapFilePath.map]
 #
 # If a .map file is provided, function names from it will be
 # included in the generated function headers. If one is not
@@ -38,7 +36,6 @@ import os
 import struct
 import sys
 import time
-import parse_map
 from pathlib import Path
 from collections import OrderedDict
 
@@ -169,15 +166,6 @@ def parseArguments():
             help="Provide a filepath for the assembly file you want to split.",
         )
         parser.add_argument(
-            "-m",
-            "--mapFile",
-            nargs="?",
-            help="You may provide a filepath for a .map file if you'd like to check for "
-            "known function names. If a function has a good name in the map file "
-            "(i.e. not starting with 'zz', and ending with '_') then it will be included "
-            "in console output as well as its header in the generated .c file templates.",
-        )
-        parser.add_argument(
             "-d",
             "--debug",
             action="store_true",
@@ -193,7 +181,7 @@ def parseArguments():
             "-nn",
             "--noNames",
             action="store_true",
-            help="Don't look up new function names in a .map file or from map.csv.",
+            help="Don't look up new function names in symbols.txt.",
         )
         parser.add_argument("-v", "--version", action="version", version=Version)
 
@@ -206,68 +194,14 @@ def parseArguments():
     return args
 
 
-def parseMapCsv():
-    """Gets function names from the build/map.csv file."""
-
+def parseSymbolsTxt():
     mapNames = {}
-
-    # Build a filepath to the map.csv file
-    root = Path(__file__).parents[1]
-    mapFilePath = os.path.join(root, "build/map.csv")
-
-    # Build the map.csv file
-    parse_map.main()
-
-    # Parse the map.csv file for function names
-    with open(mapFilePath, "r") as mapFile:
+    with open("config/GALE01/symbols.txt", "r") as mapFile:
         for line in mapFile:
-            try:
-                # Parse out the function start [virtual] address and function name
-                lineParts = line.split(",")
-                funcStart = hex(int(lineParts[2]))[2:].upper()
-                funcName = lineParts[4]
-                mapNames[funcStart] = funcName
-            except Exception as err:
-                if line.startswith("localAddress"):
-                    # It's the first line (column header); we can ignore this error
-                    continue
-                print(f'Unable to parse map file line: "{line}"')
-                print(err)
-
-    return mapNames
-
-
-def parseMapFile(mapFilePath):
-    """Opens and reads the given .map file to parse out function names.
-    Returns a dictionary of the form key=functionStartAddress, value=functionName"""
-
-    mapNames = {}
-    startedTextLayout = False
-
-    with open(mapFilePath, "r") as mapFile:
-        for line in mapFile:
-            line = line.strip()
-
-            # Skip empty lines & headers
-            if not line or line.startswith("."):
-                if line == ".text section layout":
-                    startedTextLayout = True
-                continue
-
-            # Skip lines until the start of the text section descriptions
-            elif not startedTextLayout:
-                continue
-
-            try:
-                # Parse out the function start [virtual] address and function name
-                lineParts = line.split()
-                funcStart = lineParts[2].upper()
-                funcName = " ".join(lineParts[4:])
-                mapNames[funcStart] = funcName
-            except Exception as err:
-                print(f'Unable to parse map file line: "{line}"')
-                print(err)
-
+            line = line.split(";")[0]
+            name = line.split("=")[0].strip()
+            addr = line.split(":")[1].strip()[2:]
+            mapNames[addr] = name
     return mapNames
 
 
@@ -304,8 +238,11 @@ def parseAssemblyFile(args, mapNames):
                 continue
 
             # Track what file section we're in
-            elif line.startswith(".section"):
-                sectionName = line.split()[1].replace(",", "")
+            elif line.startswith(".section") or line.startswith(".text"):
+                if line.startswith(".section"):
+                    sectionName = line.split()[1].replace(",", "")
+                else:
+                    sectionName = ".text"
                 fileSections[sectionName] = 0  # Initialize section data length
                 currentSection = sectionName
 
@@ -317,8 +254,8 @@ def parseAssemblyFile(args, mapNames):
 
             # Start parsing for specific sections
             elif currentSection == ".sdata2":
-                if line.endswith(":"):
-                    lastLabel = line[:-1]  # Strips colon
+                if line.startswith(".obj"):
+                    lastLabel = line.split()[1][:-1]  # Strips colon
                     firstValueProcessed = False
 
                 elif line.startswith(".4byte") or line.startswith(".float"):
@@ -452,8 +389,8 @@ def parseAssemblyFile(args, mapNames):
                     fileSections[".text"] += 4
 
                 # Check if this is the start of a new function
-                elif line.endswith(":"):
-                    label = line[:-1]  # Removes colon
+                elif line.startswith(".fn"):
+                    label = line.split()[1][:-1]  # Removes colon
 
                     # Check if the last line was THE end, or just AN end to the function
                     if currentFunction and functionEndLikely and not functionEndCertain:
@@ -572,10 +509,8 @@ def main(args):
     try:
         if args.noNames:
             mapNames = {}
-        elif args.mapFile:
-            mapNames = parseMapFile(args.mapFile)
         else:
-            mapNames = parseMapCsv()
+            mapNames = parseSymbolsTxt()
     except Exception as err:
         print(f"Unable to check for external function names; {err}")
         mapNames = {}
@@ -821,7 +756,7 @@ def main(args):
         return
 
     # Determine (and create) a directory to create the new files in
-    newParentDir = parentDir.replace("\\asm\\", "\\src\\")
+    newParentDir = parentDir.replace("\\build\\GALE01\\asm\\", "\\src\\")
     if newParentDir.endswith("\\ft\\chara"):  # Add a subfolder for characters
         charFolderName = "ft" + filename[2].upper() + filename[3:]
         newParentDir = os.path.join(newParentDir, charFolderName)
@@ -904,7 +839,7 @@ def main(args):
             alreadyWritten = []
             for function in functionList:
                 for label in function.uniqueLabels:
-                    if label not in alreadyWritten:
+                    if label not in alreadyWritten and label in floatsData:
                         name, floatType, value = floatsData.get(label)
                         cFile.write(
                             "\n// {} const {} = {};".format(floatType, name, value)
@@ -926,8 +861,9 @@ def main(args):
 
                 # Write the float literals this function references
                 for label in function.uniqueLabels:
-                    name, floatType, value = floatsData.get(label)
-                    cFile.write("\n// {} ({}: {})".format(name, floatType, value))
+                    if label in floatsData:
+                        name, floatType, value = floatsData.get(label)
+                        cFile.write("\n// {} ({}: {})".format(name, floatType, value))
 
     print("\nFile templates created.")
 
@@ -943,5 +879,7 @@ if __name__ == "__main__":
         print(message, file=sys.stderr)
         sys.exit(code)
     except Exception as err:
+        import traceback
+        print(traceback.format_exc())
         print(err, file=sys.stderr)
         sys.exit(4)

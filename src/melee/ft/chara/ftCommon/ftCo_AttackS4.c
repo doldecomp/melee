@@ -18,7 +18,8 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0CDD.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
+#include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcommon.h"
@@ -28,8 +29,10 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Dash.h"
 #include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
 #include "ftGameWatch/ftGw_AttackS4.h"
@@ -173,19 +176,19 @@ static void doEnter(Fighter_GObj* gobj, float stick_angle)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId msid;
-    if (stick_angle > p_ftCommonData->xB8 &&
+    if (stick_angle > p_ftCommonData->xB8_radians &&
         ftData_80085FD4(fp, ftCo_MS_AttackS4S)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4Hi;
-    } else if (stick_angle > p_ftCommonData->xBC &&
+    } else if (stick_angle > p_ftCommonData->xBC_radians &&
                ftData_80085FD4(fp, ftCo_MS_AttackS4LwS)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4HiS;
-    } else if (stick_angle < p_ftCommonData->xC4 &&
+    } else if (stick_angle < p_ftCommonData->xC4_radians &&
                ftData_80085FD4(fp, ftCo_MS_AttackLw4)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4Lw;
-    } else if (stick_angle < p_ftCommonData->xC0 &&
+    } else if (stick_angle < p_ftCommonData->xC0_radians &&
                ftData_80085FD4(fp, ftCo_MS_AttackHi4)->x8 != NULL)
     {
         msid = ftCo_MS_AttackS4LwS;

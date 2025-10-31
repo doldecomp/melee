@@ -685,7 +685,7 @@ void it_8026D564(Item_GObj* item_gobj)
 
     it_80276214(item_gobj);
     test = mpColl_8004B108(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (test) {
         ip->xC30 = coll->floor.index;
     }
@@ -720,7 +720,7 @@ void it_8026D62C(Item_GObj* gobj, HSD_GObjEvent arg1)
     it_80276214(gobj);
 
     test = mpColl_8004B108(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
 
     if (test != false) {
         ip->xC30 = (u32) coll->floor.index;
@@ -748,7 +748,7 @@ void it_8026D6F4(Item_GObj* gobj, HSD_GObjEvent arg1)
     it_80276214(gobj);
 
     test = mpColl_8004B108(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
 
     if (test != false) {
         ip->xC30 = coll->floor.index;
@@ -771,7 +771,7 @@ void it_8026D78C(Item_GObj* gobj, HSD_GObjEvent arg1)
     it_80276214(gobj);
 
     test = mpColl_8004B108(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
 
     if (test != false) {
         ip->xC30 = coll->floor.index;
@@ -795,7 +795,7 @@ void it_8026D82C(Item_GObj* gobj)
     it_80276214(gobj);
 
     test = mpColl_8004B108(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
 
     if (test) {
         ip->xC30 = coll->floor.index;
@@ -820,7 +820,7 @@ bool it_8026D8A4(Item_GObj* gobj, HSD_GObjEvent arg1)
         it_80276214(gobj);
 
         test = mpColl_8004B2DC(coll);
-        ip->pos = coll->cur_topn;
+        ip->pos = coll->cur_pos;
 
         if (test != false) {
             ip->xC30 = coll->floor.index;
@@ -849,7 +849,7 @@ bool it_8026D9A0(Item_GObj* gobj)
     {
         u8 _[4];
         bool temp = mpColl_800477E0(coll_data);
-        item->pos = coll_data->cur_topn;
+        item->pos = coll_data->cur_pos;
         if (temp) {
             item->xC30 = coll_data->floor.index;
         }
@@ -870,7 +870,7 @@ bool it_8026DA08(Item_GObj* gobj)
     it_80276214(gobj);
 
     test = mpColl_800471F8(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
 
     if (test) {
         ip->xC30 = coll->floor.index;
@@ -899,7 +899,7 @@ bool it_8026DAA8(Item_GObj* gobj)
     it_80276214(gobj);
 
     test = mpColl_800471F8(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (test != false) {
         ip->xC30 = coll->floor.index;
     }
@@ -920,7 +920,7 @@ bool it_8026DB40(Item_GObj* gobj)
     it_80276214(gobj);
 
     test = mpColl_800471F8(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (test != false) {
         ip->xC30 = coll->floor.index;
     }
@@ -1019,7 +1019,7 @@ bool it_8026DF34(Item_GObj* gobj)
     coll = &ip->x378_itemColl;
     it_80276214(gobj);
     cond = mpColl_800471F8(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (cond) {
         ip->xC30 = coll->floor.index;
     }
@@ -1041,7 +1041,7 @@ bool it_8026DFB0(Item_GObj* gobj)
     coll = &ip->x378_itemColl;
     it_80276214(gobj);
     cond = mpColl_800471F8(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (cond) {
         ip->xC30 = coll->floor.index;
     }
@@ -1070,7 +1070,7 @@ bool it_8026E058(Item_GObj* gobj)
     coll = &ip->x378_itemColl;
     it_80276214(gobj);
     cond = mpColl_800471F8(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (cond) {
         ip->xC30 = coll->floor.index;
     }
@@ -1092,7 +1092,7 @@ void it_8026E0F4(Item_GObj* gobj)
     coll = &ip->x378_itemColl;
     it_80276214(gobj);
     cond = mpColl_800477E0(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (cond) {
         ip->xC30 = coll->floor.index;
     }
@@ -1109,7 +1109,7 @@ inline bool it_8026E_inline(Item_GObj* gobj)
     coll = &ip->x378_itemColl;
     it_80276214(gobj);
     cond = mpColl_800471F8(coll);
-    ip->pos = coll->cur_topn;
+    ip->pos = coll->cur_pos;
     if (cond) {
         ip->xC30 = coll->floor.index;
     }
@@ -1309,7 +1309,7 @@ bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1344,7 +1344,7 @@ void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1372,7 +1372,7 @@ void it_8026E4D0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1401,7 +1401,7 @@ void it_8026E5A0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1430,7 +1430,7 @@ void it_8026E664(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1458,7 +1458,7 @@ void it_8026E71C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1488,7 +1488,7 @@ void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_800471F8(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1521,7 +1521,7 @@ void it_8026E8C4(Item_GObj* item_gobj, HSD_GObjEvent arg1, HSD_GObjEvent arg2)
     coll = &item->x378_itemColl;
     it_80276214(item_gobj);
     chk = mpColl_8004B108(coll);
-    item->pos = coll->cur_topn;
+    item->pos = coll->cur_pos;
     if (chk) {
         item->xC30 = coll->floor.index;
     }
@@ -1547,7 +1547,7 @@ bool it_8026E9A4(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3)
     Vec3 p;
     PAD_STACK(4);
 
-    if (mpLib_800524DC(&p, 0, NULL, arg3, -1, -1, arg1->x, arg1->y, arg2->x,
+    if (mpLib_800524DC(&p, NULL, NULL, arg3, -1, -1, arg1->x, arg1->y, arg2->x,
                        arg2->y) == true)
     {
         *arg2 = p;
@@ -1556,14 +1556,14 @@ bool it_8026E9A4(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3)
     return false;
 }
 
-bool it_8026EA20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3, s32* arg4,
-                 Vec3* arg5)
+bool it_8026EA20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3,
+                 UNK_T* arg4, u32* flags_out)
 {
     Vec3 p;
     // PAD_STACK(4);
     PAD_STACK(8);
 
-    if (mpLib_800524DC(&p, *arg4, arg5, arg3, -1, -1, arg1->x, arg1->y,
+    if (mpLib_800524DC(&p, *arg4, flags_out, arg3, -1, -1, arg1->x, arg1->y,
                        arg2->x, arg2->y) == true)
     {
         *arg2 = p;
@@ -1572,13 +1572,13 @@ bool it_8026EA20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3, s32* arg4,
     return false;
 }
 
-bool it_8026EA9C(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3, s32 arg4,
-                 Vec3* arg5, s32 arg6)
+bool it_8026EA9C(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3, int* arg4,
+                 u32* flags_out, s32 arg6)
 {
     Vec3 p;
     PAD_STACK(4);
 
-    if (mpLib_800524DC(&p, arg4, arg5, arg3, -1, arg6, arg1->x, arg1->y,
+    if (mpLib_800524DC(&p, arg4, flags_out, arg3, -1, arg6, arg1->x, arg1->y,
                        arg2->x, arg2->y) == true)
     {
         *arg2 = p;

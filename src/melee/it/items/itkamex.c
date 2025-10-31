@@ -4,14 +4,26 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802CA49C
 
 void it_802CA534(void) {}
 
-/// #it_802CA538
+void it_802CA538(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
-/// #it_802CA558
+void it_802CA558(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_80273454(gobj);
+    it_802CA58C(gobj);
+}
 
 /// #it_802CA58C
 
@@ -33,7 +45,13 @@ void it_802CA534(void) {}
 
 /// #it_802CA938
 
-/// #itKamex_UnkMotion2_Anim
+bool itKamex_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        return true;
+    }
+    return false;
+}
 
 /// #itKamex_UnkMotion2_Phys
 
@@ -41,11 +59,21 @@ void it_802CA534(void) {}
 
 /// #it_802CAA40
 
-/// #itKamex_UnkMotion3_Anim
+bool itKamex_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
-/// #itKamex_UnkMotion3_Phys
+void itKamex_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    it_8027A09C(gobj);
+}
 
-/// #itKamex_UnkMotion3_Coll
+bool itKamex_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CA558);
+}
 
 /// #it_802CAB10
 
@@ -61,12 +89,25 @@ bool it_2725_Logic31_DmgDealt(Item_GObj* arg0)
     return false;
 }
 
-/// #it_2725_Logic31_EvtUnk
+void it_2725_Logic31_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 /// #it_802CADF0
 
-/// #it_802CAE60
+bool it_802CAE60(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (--ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
 
 /// #it_802CAE94
 
-/// #it_802CAFB4
+bool it_802CAFB4(Item_GObj* gobj)
+{
+    return it_8026DFB0(gobj);
+}

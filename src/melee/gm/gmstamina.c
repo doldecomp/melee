@@ -187,7 +187,7 @@ int gm_801B9600(void)
             gm_804975F8.eliminated[i] = true;
         }
         if (!gm_804975F8.eliminated[i]) {
-            if (gmMainLib_804D3EE0->unk_10D0.data.rules.x8) {
+            if (gmMainLib_804D3EE0->unk_10D0.data.rules.is_teams) {
                 for (j = 0; j < i; j++) {
                     if (!gm_804975F8.eliminated[j] &&
                         Player_GetTeam(i) == Player_GetTeam(j))

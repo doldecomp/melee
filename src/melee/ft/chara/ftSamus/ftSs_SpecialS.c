@@ -85,9 +85,9 @@ void ftSs_SpecialAirS_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = getFtSpecialAttrs(fp);
     Fighter* fighter2;
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
     fighter2 = fp;
-    ftCommon_8007CE94(fighter2, samus_attr->x30);
+    ftCommon_ApplyFrictionAir(fighter2, samus_attr->x30);
 }
 
 void ftSs_SpecialS_Coll(HSD_GObj* gobj)
@@ -141,9 +141,9 @@ void ftSs_SpecialAirSSmash_Phys(HSD_GObj* gobj)
     ftSs_DatAttrs* samus_attr2;
     fp = fighter2 = GET_FIGHTER(gobj);
     samus_attr = getFtSpecialAttrs(fp);
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
     samus_attr2 = samus_attr;
-    ftCommon_8007CE94(fp, samus_attr2->x30);
+    ftCommon_ApplyFrictionAir(fp, samus_attr2->x30);
 }
 
 void ftSs_SpecialSSmash_Coll(HSD_GObj* gobj)

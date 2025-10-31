@@ -17,7 +17,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdynamics.h"
@@ -27,8 +27,10 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 #include "ftKirby/ftKb_Init.h"
 
@@ -82,7 +84,7 @@ void ftCo_800909D0(Fighter* fp)
         fp->mv.co.damageice.ice_coll.right.y = 0;
         fp->mv.co.damageice.ice_coll.left.x = -radius + offset.x;
         fp->mv.co.damageice.ice_coll.left.y = 0;
-        ftCommon_8007D5BC(fp);
+        ftCommon_UnlockECB(fp);
         if (fp->ground_or_air == GA_Air) {
             ft_80082638(fp->gobj, &fp->mv.co.damageice.ice_coll);
         } else {
@@ -206,8 +208,8 @@ void ftCo_DamageIce_Init(Fighter_GObj* gobj)
     yrotn = fp->parts[ftParts_GetBoneIndex(fp, FtPart_YRotN)].joint;
 
     pos.x = 0;
-    pos.y = fp->co_attrs.x13C_damageice_unk;
-    pos.z = fp->co_attrs.x138_damageice_unk;
+    pos.y = fp->co_attrs.x154_damageice_unk;
+    pos.z = fp->co_attrs.x150_damageice_unk;
     PSMTXTrans(spEC, pos.x, pos.y, pos.z);
 
     JObjRotMtx(sp11C, yrotn);
@@ -264,7 +266,7 @@ void ftCo_DamageIce_Anim(Fighter_GObj* gobj)
     if (!fp->x2224_b2) {
         fp->grab_timer -= p_ftCommonData->x794_damageice_unk;
     }
-    ftCommon_8007DC08(fp, p_ftCommonData->x798_damageice_unk);
+    ftCommon_GrabMash(fp, p_ftCommonData->x798_damageice_unk);
     if (fp->grab_timer <= 0) {
         ftCo_80091854(gobj);
     }
@@ -279,7 +281,7 @@ void ftCo_DamageIce_Phys(Fighter_GObj* gobj)
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007CEF4(fp);
-        ftCommon_8007D494(fp,
+        ftCommon_Fall(fp,
                           co->grav * p_ftCommonData->damageice_gravity_mult,
                           co->terminal_vel);
     } else {

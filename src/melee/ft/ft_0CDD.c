@@ -1,7 +1,5 @@
 #include "ft_0CDD.h"
 
-#include "ft_0D14.h"
-
 #include "ef/efsync.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -10,6 +8,7 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftpickupitem.h"
 #include "it/it_26B1.h"
 #include "it/items/itfflower.h"
@@ -141,7 +140,7 @@ void ftCo_800CE010(Fighter_GObj* fighter_gobj)
                                   0.0f, 1.0f, 0.0f, NULL);
     }
     ftAnim_8006EBA4(fighter_gobj);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE1D4;
     if ((Item_GObj*) fighter->item_gobj != NULL) {
         it_8028E938((Item_GObj*) fighter->item_gobj);
@@ -189,7 +188,7 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
     f2 = fighter->frame_speed_mul;
     Fighter_ChangeMotionState(fighter_gobj, id, 0x0C4C5080, f1, f2, 0.0f,
                               NULL);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
 
@@ -300,7 +299,7 @@ void ftCo_800CE480(Fighter_GObj* fighter_gobj)
     Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir, 0,
                               0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(fighter_gobj);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE650;
     fighter->take_dmg_cb = ftCo_800CE620;
 }
@@ -327,7 +326,7 @@ void ft_800CE5A0(Fighter_GObj* fighter_gobj)
     Fighter_ChangeMotionState(fighter_gobj, ftCo_MS_FireFlowerShootAir,
                               0x0C4C5880U, fighter->cur_anim_frame,
                               fighter->frame_speed_mul, 0.0f, NULL);
-    ftCommon_8007D468(fighter);
+    ftCommon_ClampAirDrift(fighter);
     fighter->accessory4_cb = ftCo_800CE650;
     fighter->take_dmg_cb = ftCo_800CE620;
 }
@@ -410,14 +409,14 @@ void ftCo_800CE650(HSD_GObj* gobj)
 
     temp_r3 = GET_FIGHTER(gobj);
     if (temp_r3->item_gobj != NULL) {
-        if (!(temp_r3->input.held_inputs & 0x100)) {
+        if (!(temp_r3->input.held_inputs & HSD_PAD_A)) {
             temp_r3->mv.co.itemthrow.xC = 1;
         }
         if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0) {
             temp_r3->mv.co.itemthrow.x10 += 1.0F;
         }
         if (temp_r3->mv.co.itemthrow.x10 < p_ftCommonData->x5B0 &&
-            (temp_r3->input.x668 & 0x100))
+            (temp_r3->input.x668 & HSD_PAD_A))
         {
             temp_r3->mv.co.itemthrow.x10 = 0.0F;
         }

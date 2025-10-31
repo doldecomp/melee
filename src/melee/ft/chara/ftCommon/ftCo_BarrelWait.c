@@ -1,13 +1,15 @@
 #include "ftCo_BarrelWait.h"
 
+#include "ftCo_CaptureCut.h"
 #include "ftCo_Damage.h"
 #include "ftCo_Lift.h"
+#include "ftCo_Throw.h"
 
 #include <placeholder.h>
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
@@ -47,7 +49,7 @@ void ftCo_8009EB18(Fighter_GObj* gobj)
     fp->accessory1_cb = ftCo_8009EC44;
     ftCommon_8007E2FC(gobj);
     fp->x1988 = 2;
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     ftCommon_8007E2F4(fp, 0x1FF);
     setCamData(p_ftCommonData, fp->x890_cameraBox);
     ftCommon_8007EFC0(fp, 1);

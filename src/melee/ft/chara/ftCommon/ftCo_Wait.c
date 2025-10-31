@@ -12,18 +12,18 @@
 
 #include <platform.h>
 
-#include "forward.h"
-
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcoll.h"
 #include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Dash.h"
 #include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
 #include "ftFox/ftFx_AppealS.h"

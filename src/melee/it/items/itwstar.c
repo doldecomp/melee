@@ -1,6 +1,10 @@
 #include "itwstar.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
+#include "it/item.h"
+#include "it/inlines.h"
+#include "it/it_2725.h"
 
 /// #it_80294364
 
@@ -19,18 +23,34 @@ bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itWstar_UnkMotion0_Phys
 
-/// #itWstar_UnkMotion0_Coll
+bool itWstar_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_80294624);
+    return false;
+}
 
-/// #it_80294624
+void it_80294624(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itWstar_UnkMotion1_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #itWstar_UnkMotion1_Phys
+void itWstar_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itWstar_UnkMotion1_Coll
+bool itWstar_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, it_8029455C);
+    return false;
+}
 
 /// #it_802946B0
 
@@ -54,7 +74,10 @@ bool itWstar_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic29_EnteredAir
+void it_3F14_Logic29_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itWstar_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -63,7 +86,11 @@ bool itWstar_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itWstar_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itWstar_UnkMotion4_Coll
+bool itWstar_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_8029455C, it_80294624);
+    return false;
+}
 
 void it_3F14_Logic30_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

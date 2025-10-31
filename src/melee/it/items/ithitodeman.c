@@ -7,6 +7,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_2725_Logic24_Spawned
 
@@ -35,7 +36,19 @@ bool it_802D48A8(Item_GObj* gobj)
 
 /// #itHitodeman_UnkMotion1_Anim
 
-/// #itHitodeman_UnkMotion1_Phys
+typedef struct {
+    u8 _pad[0x4C];
+    f32 x4C;
+} itHitodemanAttributes;
+
+void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->xDB0_itcmd_var1 != 0) {
+        ip->x40_vel.x = -((-ip->facing_dir * attrs->x4C) - ip->x40_vel.x);
+    }
+}
 
 bool itHitodeman_UnkMotion1_Coll(Item_GObj* gobj)
 {
@@ -46,11 +59,18 @@ void it_802D4B50(void) {}
 
 /// #it_802D4B54
 
-/// #itHitodeman_UnkMotion2_Anim
+bool itHitodeman_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return false;
+}
 
 /// #itHitodeman_UnkMotion2_Phys
 
-/// #itHitodeman_UnkMotion2_Coll
+bool itHitodeman_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802D43AC);
+}
 
 /// #it_802D4C74
 
@@ -62,9 +82,15 @@ bool it_802D4EF4(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D4F08
+bool it_802D4F08(Item_GObj* gobj)
+{
+    return it_8027AF50(gobj);
+}
 
-/// #it_802D4F28
+bool it_802D4F28(Item_GObj* gobj)
+{
+    return it_8027AE34(gobj);
+}
 
 bool it_2725_Logic43_Absorbed(Item_GObj* arg0)
 {

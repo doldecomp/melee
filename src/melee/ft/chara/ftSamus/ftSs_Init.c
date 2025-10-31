@@ -10,7 +10,7 @@
 #include "forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
@@ -276,7 +276,7 @@ void ftSs_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;
 
-    fp->x2224_b7 = 1;
+    fp->can_walljump = true;
 
     PUSH_ATTRS(fp, ftSs_DatAttrs);
 

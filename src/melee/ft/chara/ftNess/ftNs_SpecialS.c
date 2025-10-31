@@ -5,10 +5,11 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftNess/types.h"
 #include "it/items/itnesspkfire.h"
 #include "lb/lb_00B0.h"
@@ -161,6 +162,7 @@ void ftNs_SpecialAirS_Coll(
 
     ness_attr = fp->dat_attrs;
     if (ft_80081D0C(gobj) != false) {
-        ftCo_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
+        ftCo_LandingFallSpecial_Enter(gobj, false,
+                                      ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

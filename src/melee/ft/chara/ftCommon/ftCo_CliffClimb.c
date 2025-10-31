@@ -8,7 +8,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ft/ft_0DF1.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
@@ -52,8 +52,8 @@ bool ftCo_8009AA0C(Fighter_GObj* gobj)
 bool ftCo_8009AAFC(Fighter_GObj* gobj, int arg1, float stick_x, float angle)
 {
     Fighter* fp = gobj->user_data;
-    if (angle > p_ftCommonData->x20 ||
-        (angle > -p_ftCommonData->x20 && stick_x * fp->facing_dir >= 0))
+    if (angle > p_ftCommonData->x20_radians ||
+        (angle > -p_ftCommonData->x20_radians && stick_x * fp->facing_dir >= 0))
     {
         if (arg1 && fp->mv.co.cliff.x8) {
             ftCo_8009AB9C(gobj);
@@ -101,9 +101,9 @@ void ftCo_CliffClimb_Phys(Fighter_GObj* gobj)
             Vec3 vec;
             u8 _[8] = { 0 };
             if (fp->facing_dir > 0) {
-                mpLib_80053ECC(fp->mv.co.cliff.ledge_id, &vec);
+                mpLib_80053ECC_Floor(fp->mv.co.cliff.ledge_id, &vec);
             } else {
-                mpLib_80053DA4(fp->mv.co.cliff.ledge_id, &vec);
+                mpLib_80053DA4_Floor(fp->mv.co.cliff.ledge_id, &vec);
             }
             fp->cur_pos.x = fp->x68C_transNPos.z * fp->facing_dir + vec.x;
             fp->cur_pos.y = vec.y + fp->x68C_transNPos.y;

@@ -3,6 +3,7 @@
 #include "ftCo_AirCatch.h"
 #include "ftCo_AttackAir.h"
 #include "ftCo_BarrelWait.h"
+#include "ftCo_CaptureCut.h"
 #include "ftCo_Damage.h"
 #include "ftCo_EscapeAir.h"
 #include "ftCo_HammerJump.h"
@@ -10,6 +11,7 @@
 #include "ftCo_ItemThrow.h"
 #include "ftCo_Lift.h"
 #include "ftCo_SpecialAir.h"
+#include "ftCo_Throw.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -20,7 +22,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -261,7 +263,7 @@ void ftCo_Bury_Anim(Fighter_GObj* gobj)
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x610;
-    ftCommon_8007DC08(fp, p_ftCommonData->x614);
+    ftCommon_GrabMash(fp, p_ftCommonData->x614);
     if (fp->grab_timer <= 0) {
         ftCo_800C13BC(gobj);
     }
@@ -280,10 +282,10 @@ void ftCo_800C0FCC(HSD_GObj* arg0, Fighter_GObj* arg1)
         Vec3 normal;
         Vec3 offset;
         HSD_JObj* jobj = GET_JOBJ(arg0);
-        mpLib_80054DFC(fp->mv.co.bury.x20, &normal);
+        mpLineGetNormal(fp->mv.co.bury.x20, &normal);
         HSD_JObjSetRotationZ(jobj, atan2f(-normal.x, normal.y));
-        if (mpLib_800567C0(fp->coll_data.floor.index,
-                           &fp->mv.co.bury.translate, &offset))
+        if (mpGetSpeed(fp->coll_data.floor.index, &fp->mv.co.bury.translate,
+                       &offset))
         {
             PSVECAdd(&fp->mv.co.bury.translate, &offset,
                      &fp->mv.co.bury.translate);
@@ -334,7 +336,7 @@ void ftCo_BuryWait_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x610;
-    ftCommon_8007DC08(fp, p_ftCommonData->x614);
+    ftCommon_GrabMash(fp, p_ftCommonData->x614);
     if (fp->grab_timer <= 0) {
         ftCo_800C13BC(gobj);
     }
@@ -395,7 +397,7 @@ void ftCo_BuryJump_Phys(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007D494(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
     ftCommon_8007D268(fp);
 }
 

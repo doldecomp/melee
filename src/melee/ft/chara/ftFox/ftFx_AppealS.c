@@ -19,10 +19,9 @@
 
 bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 {
-    pl_800386D8_t* attackCount =
-        Player_GetTotalAttackCountPtr((s32) fp->player_id);
-    if ((pl_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) &&
-        (grCorneria_801E2D14() != false))
+    pl_800386D8_t* attackCount = Player_GetTotalAttackCountPtr(fp->player_id);
+    if (pl_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0 &&
+        grCorneria_801E2D14())
     {
         return true;
     }
@@ -51,10 +50,10 @@ bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind = fp->kind;
 
-    if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
-        (grCorneria_801E2CE8() != false) &&
-        ((fp->input.held_inputs & HSD_PAD_DPADDOWN) == false) &&
-        ((u8) fp->x682 == true))
+    if ((ftKind == FTKIND_FOX || ftKind == FTKIND_FALCO) &&
+        grCorneria_801E2CE8() &&
+        !(fp->input.held_inputs & HSD_PAD_DPADDOWN) &&
+        fp->x682 == 1)
     {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFx_AppealS_Enter(gobj);
@@ -111,24 +110,21 @@ static void ftFx_AppealS_OnTakeDamage(HSD_GObj*);
 
 void ftFx_AppealS_Anim(HSD_GObj* gobj)
 {
-    FighterKind ftKind;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    u8 _[4];
+    PAD_STACK(4);
 
     if (ftCheckThrowB3(fp)) {
-        ftKind = fp->kind;
-
-        switch (ftKind) {
+        switch (fp->kind) {
         case FTKIND_FOX:
-            if (grCorneria_801E2B80() != false) {
+            if (grCorneria_801E2B80()) {
                 fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
 
         case FTKIND_FALCO:
-            if (grCorneria_801E2C34() != false) {
+            if (grCorneria_801E2C34()) {
                 fp->death1_cb = ftFx_AppealS_OnTakeDamage;
             }
 
@@ -137,7 +133,7 @@ void ftFx_AppealS_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->mv.fx.AppealS.animCount++;
-        if ((s32) fp->mv.fx.AppealS.animCount >= 3) {
+        if (fp->mv.fx.AppealS.animCount >= 3) {
             ft_8008A324(gobj);
             return;
         }

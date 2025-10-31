@@ -10,6 +10,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/stage.h"
 #include "it/items/itklap.h"
 #include "lb/lb_00B0.h"
@@ -542,10 +543,10 @@ void grKongo_801D6198(Ground_GObj* arg0)
                 InternalStageID_Unk01)
             {
                 mpLib_80057638(0);
-                mpLib_800580C8(0, temp_r3, fn_801D7E60);
+                mpJointSetCb1(0, temp_r3, fn_801D7E60);
             } else {
                 mpLib_80057638(1);
-                mpLib_800580C8(1, temp_r3, fn_801D7E60);
+                mpJointSetCb1(1, temp_r3, fn_801D7E60);
             }
             temp_r3->gv.kongo3.xC4 = 1;
         }
@@ -567,10 +568,10 @@ void grKongo_801D6198(Ground_GObj* arg0)
                 InternalStageID_Unk01)
             {
                 mpLib_80057BC0(0);
-                mpLib_800580E0(0);
+                mpJointClearCb1(0);
             } else {
                 mpLib_80057BC0(1);
-                mpLib_800580E0(1);
+                mpJointClearCb1(1);
             }
             temp_r3->gv.kongo3.xC4 = 2;
             return;
@@ -747,7 +748,7 @@ void grKongo_801D6668(Ground_GObj* arg0)
         }
 #endif
     }
-    Ground_801C4B50((s32) temp_r4->gv.kongo2.xC4, (s32) &sp5C, &sp50,
+    Ground_801C4B50(temp_r4->gv.kongo2.xC4, &sp5C, &sp50,
                     temp_r4->gv.kongo.xCC);
     HSD_JObjGetTranslation(temp_r30, &sp44);
     HSD_JObjSetTranslate(temp_r30, &sp5C);
@@ -1063,7 +1064,7 @@ void grKongo_801D69B0(HSD_GObj *arg0) {
 u32 it_802E18B4(HSD_GObj *);                        /* extern */
 ? it_802E2330(Vec3 *, s32 *);                       /* extern */
 ? mpLib_8005667C(?);                                /* extern */
-? mpLib_800566D8(?, f32 *, ? *);                    /* extern */
+? mpVtxGetPos(?, f32 *, ? *);                    /* extern */
 ? mpLib_80056758(s32, ?, f32, ?, f32);              /* extern */
 ? ftCo_800C0764(?, s32 (*)(HSD_GObj *, HSD_GObj *)); /* extern */
 extern ? grKg_804D6984;
@@ -1335,7 +1336,7 @@ void fn_801D542C(HSD_GObj* arg0)
     f32 temp_f2;
 
     temp_r31 = arg0->user_data;
-    mpLib_800580C8(4, temp_r31, fn_801D7700);
+    mpJointSetCb1(4, temp_r31, fn_801D7700);
     temp_f2 = grKg_804D6980->unk0;
     temp_r31->gv.kongo.xE4 =
         (s16) (((grKg_804D6980->unk4 - temp_f2) * HSD_Randf()) + temp_f2);
@@ -1417,8 +1418,8 @@ void fn_801D542C(HSD_GObj* arg0)
 
 /// #grKongo_801D7BBC
 
-void fn_801D7E60(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
-                 mpLib_GroundEnum arg4)
+void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
+                 mpLib_GroundEnum arg4, float arg8)
 {
     if (arg4 == mpLib_GroundEnum_Unk2) {
         gp->gv.kongo3.xC6 = gp->gv.kongo3.xC8 + 1;
@@ -1429,13 +1430,21 @@ void fn_801D7E60(Ground* gp, UNK_T arg1, UNK_T arg2, UNK_T arg3,
 
 /// #grKongo_801D7F78
 
-/// #grKongo_801D8058
+void grKongo_801D8058(Ground_GObj* arg) {
+    Ground_801C4A08(arg);
+}
 
 /// #grKongo_801D8078
 
 /// #fn_801D8134
 
-/// #grKongo_801D8270
+void grKongo_801D8270(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->gv.inishie2.xC6 == 1) {
+        gp->gv.inishie2.xC6 = 2;
+    }
+}
 
 /// #grKongo_801D828C
 

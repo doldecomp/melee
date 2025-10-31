@@ -6,19 +6,19 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/types.h"
 
-void ftCo_800C5F88(Fighter_GObj* gobj)
+void ftCo_HammerLanding_Enter(Fighter_GObj* gobj)
 {
     /// @todo Cannot move below @c fp, which suggests an inline
     u32 flags;
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.hammerlanding.x4 = p_ftCommonData->x6B4;
     flags = ftCo_800C54C4(fp);
-    ftCo_800D5AEC(gobj, ftCo_MS_HammerLanding, Ft_MF_KeepFastFall, flags,
-                  ftCo_800C548C(fp), 1);
+    ftCo_Landing_Enter(gobj, ftCo_MS_HammerLanding, Ft_MF_KeepFastFall, flags,
+                       ftCo_800C548C(fp), 1.0F);
     ftCo_800C4E94(fp);
 }
 

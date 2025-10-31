@@ -1,6 +1,11 @@
 #include "itoctarockstone.h"
 
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
+
+#include "it/inlines.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802E878C
 
@@ -24,13 +29,29 @@ bool it_2725_Logic4_Absorbed(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic4_Reflected
+bool it_2725_Logic4_Reflected(Item_GObj* gobj)
+{
+    it_80273030(gobj);
+    return false;
+}
 
-/// #it_2725_Logic4_ShieldBounced
+bool it_2725_Logic4_ShieldBounced(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
-/// #it_802E883C
+void it_802E883C(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
-/// #itOctarockstone_UnkMotion0_Anim
+bool itOctarockstone_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    return false;
+}
 
 void itOctarockstone_UnkMotion0_Phys(Item_GObj* gobj) {}
 
@@ -43,9 +64,16 @@ bool itOctarockstone_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOctarockstone_UnkMotion1_Phys
+void itOctarockstone_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itOctarockstone_UnkMotion1_Coll
+bool itOctarockstone_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    return it_8026DFB0(gobj);
+}
 
 void it_802E89B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

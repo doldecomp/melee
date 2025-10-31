@@ -77,7 +77,13 @@ void grOldKongo_80210450(Ground_GObj* arg) {}
 
 /// #fn_80210454
 
-/// #grOldKongo_802105AC
+void grOldKongo_802105AC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->gv.inishie2.xC6 == 1) {
+        gp->gv.inishie2.xC6 = 2;
+    }
+}
 
 /// #grOldKongo_802105C8
 

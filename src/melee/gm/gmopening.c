@@ -159,7 +159,7 @@ void gm_801AA28C_OnFrame(void)
         lbAudioAx_800236DC();
         lbAudioAx_80023694();
         gm_801A4B74();
-        gm_801A42E8(0);
+        gm_801A42E8(MJ_TITLE);
         gm_801A42D4();
     } else if (gm_804D67EC > 0x157C) {
         if (gm_801A36A0(4) & 0x1000) {
@@ -169,8 +169,8 @@ void gm_801AA28C_OnFrame(void)
             gm_801A4B60();
             gm_80173EEC();
             gm_80172898(0x100);
-            if (gm_80173754(1, 0) == 0) {
-                gm_801A42E8(1);
+            if (!gm_80173754(1, 0)) {
+                gm_801A42E8(MJ_MENU);
             }
             gm_801A42D4();
         }
@@ -181,7 +181,7 @@ void gm_801AA28C_OnFrame(void)
             lbAudioAx_80023694();
             lbAudioAx_80024030(1);
             gm_801A4B60();
-            gm_801A42E8(0);
+            gm_801A42E8(MJ_TITLE);
             gm_801A42D4();
         }
     }

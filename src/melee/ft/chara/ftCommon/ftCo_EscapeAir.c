@@ -9,10 +9,11 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/types.h"
 
 #include <common_structs.h>
@@ -113,5 +114,5 @@ void ftCo_EscapeAir_Coll(Fighter_GObj* gobj)
 
 void ftCo_80099D70(Fighter_GObj* gobj)
 {
-    ftCo_800D5CB0(gobj, 0, p_ftCommonData->x344);
+    ftCo_LandingFallSpecial_Enter(gobj, false, p_ftCommonData->x344);
 }

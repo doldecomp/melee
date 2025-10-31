@@ -360,7 +360,7 @@ void it_802A0E70(Item_GObj* gobj)
     HSD_JObjReqAnimAll(hobj, 0.0f);
     HSD_JObjAnimAll(hobj);
     HSD_JObjRemoveAnimAll(hobj);
-    ip->x524_cmd.x8 = NULL;
+    ip->x524_cmd.u = NULL;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 

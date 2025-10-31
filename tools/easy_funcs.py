@@ -147,7 +147,7 @@ def print_funcs(
         table.align["Function"] = "l"
         table.align["Size"] = "r"
         table.align["Matched"] = "r"
-        table.set_style(prettytable.PLAIN_COLUMNS)
+        table.set_style(prettytable.TableStyle.PLAIN_COLUMNS)
         table.add_rows(
             [
                 [

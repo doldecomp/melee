@@ -241,9 +241,9 @@ itSword_UnkBytes* it_80285300(Item_GObj* gobj)
     return &attrs->x1C;
 }
 
-void it_80285314(Item_GObj* gobj)
+HSD_JObj* it_80285314(Item_GObj* gobj)
 {
-    it_80272CC0(gobj, 5);
+    return it_80272CC0(gobj, 5);
 }
 
 void it_3F14_Logic12_Spawned(Item_GObj* gobj)

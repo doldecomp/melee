@@ -116,10 +116,10 @@ short* gmMainLib_8015CC90(void)
     return &gmMainLib_804D3EE0->thing.x1CD0;
 }
 
-void* GetPersistentNameData(s32 arg0)
+struct gmm_x2FF8_inner* GetPersistentNameData(s32 arg0)
 {
     struct gmm_x2FF8* base = &gmMainLib_804D3EE0->thing.x2FF8[0];
-    struct gmm_x2FF8_inner* inner = &base[arg0 / 19].inner[0];
+    struct gmm_x2FF8_inner* inner = base[arg0 / 19].inner;
     return &inner[arg0 % 19];
 }
 
@@ -218,12 +218,12 @@ void* gmMainLib_8015CDBC(void)
     return &gmMainLib_804D3EE0->thing.x1A60;
 }
 
-void* gmMainLib_8015CDC8(void)
+struct gmm_x0_528_t* gmMainLib_8015CDC8(void)
 {
     return &gmMainLib_804D3EE0->unk_51C;
 }
 
-void* gmMainLib_8015CDD4(void)
+struct gmm_x0_528_t* gmMainLib_8015CDD4(void)
 {
     return &gmMainLib_804D3EE0->unk_522;
 }
@@ -290,9 +290,9 @@ void gmMainLib_8015CF84(void)
 bool gmMainLib_8015CF94(void)
 {
     if (gmMainLib_804D3EE0->thing.x1B3C) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 s8* gmMainLib_8015CFB4(u8 arg0)
@@ -332,7 +332,7 @@ s32* gmMainLib_8015D0C0(u8 arg0)
     return &base[arg0].x7C.x88;
 }
 
-s32 gmMainLib_8015D0D8(u8 arg0)
+bool gmMainLib_8015D0D8(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b4;
@@ -365,10 +365,10 @@ s32 gmMainLib_8015D1AC(u8 arg0)
     return base[arg0].x7C.b789;
 }
 
-void gmMainLib_8015D1C8(u8 arg0, s32 arg1)
+void gmMainLib_8015D1C8(u8 arg0, int stocks)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.b789 = arg1;
+    base[arg0].x7C.b789 = stocks;
 }
 
 s32* gmMainLib_8015D1E8(u8 arg0)
@@ -377,7 +377,7 @@ s32* gmMainLib_8015D1E8(u8 arg0)
     return &base[arg0].x7C.x8C;
 }
 
-s32 gmMainLib_8015D200(u8 arg0)
+bool gmMainLib_8015D200(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b5;
@@ -410,10 +410,10 @@ s32 gmMainLib_8015D2D4(u8 arg0)
     return base[arg0].x7C.b10_to_12;
 }
 
-void gmMainLib_8015D2F0(u8 arg0, s32 arg1)
+void gmMainLib_8015D2F0(u8 arg0, int stocks)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.b10_to_12 = arg1;
+    base[arg0].x7C.b10_to_12 = stocks;
 }
 
 s32* gmMainLib_8015D310(u8 arg0)
@@ -422,7 +422,7 @@ s32* gmMainLib_8015D310(u8 arg0)
     return &base[arg0].x7C.x90;
 }
 
-s32 gmMainLib_8015D328(u8 arg0)
+bool gmMainLib_8015D328(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b6;
@@ -455,13 +455,13 @@ s32 gmMainLib_8015D3FC(u8 arg0)
     return base[arg0].x7C.b13_to_15;
 }
 
-void gmMainLib_8015D418(u8 arg0, s32 arg1)
+void gmMainLib_8015D418(u8 arg0, int stocks)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.b13_to_15 = arg1;
+    base[arg0].x7C.b13_to_15 = stocks;
 }
 
-s32* gmMainLib_8015D438(u8 arg0)
+u32* gmMainLib_8015D438(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x94;
@@ -472,7 +472,7 @@ s32* gmMainLib_8015D450(u8 arg0)
     return &gmMainLib_8015EDBC()->x4C[arg0 & 255];
 }
 
-s32 gmMainLib_8015D48C(u8 arg0)
+bool gmMainLib_8015D48C(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b0;
@@ -496,37 +496,37 @@ bool gmMainLib_8015D508(void)
     s32 i;
     for (i = 0; i < 25; ++i) {
         struct gmm_x1F2C* _x1F2C = base->x1F2C;
-        if (_x1F2C[(u8) i].x7C.b0 == 0) {
-            return 0;
+        if (!_x1F2C[(u8) i].x7C.b0) {
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
-s32 gmMainLib_8015D5DC(void)
+bool gmMainLib_8015D5DC(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
         s32 j = gmMainLib_8015EDB0()->x4;
         s32 k = 1 << (u8) i;
         if ((j & k) == 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
-s32 gmMainLib_8015D640(void)
+bool gmMainLib_8015D640(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
         s32 j = gmMainLib_8015EDBC()->x8;
         s32 k = 1 << (u8) i;
         if ((j & k) == 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }
 
 s32* gmMainLib_8015D6A4(u8 arg0)
@@ -535,7 +535,7 @@ s32* gmMainLib_8015D6A4(u8 arg0)
     return &base[arg0].x7C.x98;
 }
 
-s32 gmMainLib_8015D6BC(u8 arg0)
+bool gmMainLib_8015D6BC(u8 arg0)
 {
     struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b1;
@@ -607,7 +607,7 @@ s16* gmMainLib_8015D7EC(u8 arg0)
     return &base[arg0].x7C.x7E;
 }
 
-void* gmMainLib_8015D804(s32 arg0)
+u32* gmMainLib_8015D804(s32 arg0)
 {
     struct gmm_x1868* thing = &gmMainLib_804D3EE0->thing;
     return &thing->x1B80[arg0];
@@ -797,7 +797,7 @@ int gmMainLib_8015ED30(void)
     return gmMainLib_804D3EE0->x1850.unk_xc;
 }
 
-u8 GetRumbleSettingOfPort(s32 arg0)
+int GetRumbleSettingOfPort(s32 arg0)
 {
     return gmMainLib_8015CC40()->x1CB0.rumble[arg0];
 }
@@ -852,7 +852,7 @@ struct gmm_retval_EDBC* gmMainLib_8015EDBC(void)
     return &gmMainLib_804D3EE0->thing.unk_30;
 }
 
-u8* gmMainLib_8015EDC8(void)
+struct gmm_x1868_1A8_t* gmMainLib_8015EDC8(void)
 {
     return &gmMainLib_804D3EE0->thing.unk_1A8;
 }
@@ -930,7 +930,28 @@ void gmMainLib_8015EEC8(void)
     memzero(&gmMainLib_804D3EE0->thing.x1A68, 0xD8);
 }
 
-/// #gmMainLib_8015EF30
+void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0)
+{
+    arg0->x0 = 0;
+    arg0->x4 = 0;
+    arg0->x8 = 0;
+    arg0->xC = 0;
+    arg0->x10 = 0;
+    arg0->x18 = 0;
+    arg0->x1A = 0;
+    arg0->x1C = 0;
+    arg0->x1E = 0;
+    arg0->x20 = 0;
+    arg0->x24 = 0;
+    arg0->x14 = 0;
+    arg0->x28 = 0;
+    arg0->x2C = 0;
+    arg0->x30 = 0;
+    arg0->x34 = 0;
+    arg0->x3C = 0;
+    arg0->x40 = 0;
+    arg0->x38 = 0;
+}
 
 /// #gmMainLib_8015EF84
 
@@ -956,7 +977,7 @@ void gmMainLib_8015F4BC(void)
             sizeof(gmMainLib_804D3EE0->thing.unk_30));
 }
 
-u8 gmMainLib_8015F4E8(void)
+u32 gmMainLib_8015F4E8(void)
 {
     return GetRumbleSettingOfPort(5);
 }
@@ -965,8 +986,6 @@ void gmMainLib_8015F4F4(u8 arg0)
 {
     gmMainLib_8015CC40()->x1CB0.deflicker = arg0;
 }
-
-/// #gmMainLib_8015F500
 
 void gmMainLib_8015F500(void)
 {

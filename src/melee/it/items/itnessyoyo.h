@@ -23,7 +23,7 @@
 /* 2BF28C */ UNK_RET it_802BF28C(UNK_PARAMS);
 /* 2BF4A0 */ UNK_RET it_802BF4A0(UNK_PARAMS);
 /* 2BF800 */ UNK_RET it_802BF800(UNK_PARAMS);
-/* 2BF900 */ UNK_RET it_802BF900(UNK_PARAMS);
+/* 2BF900 */ void it_802BF900(Item* item);
 /* 2BFAFC */ UNK_RET it_802BFAFC(UNK_PARAMS);
 /* 2BFE34 */ void it_2725_Logic59_PickedUp(Item_GObj*);
 /* 2BFE5C */ void it_802BFE5C(Item_GObj*, Vec3*, float);

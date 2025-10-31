@@ -32,4 +32,7 @@ void ifMagnify_802FC3BC(void) {}
 
 /// #ifMagnify_802FC940
 
-/// #ifMagnify_802FC998
+bool ifMagnify_802FC998(s32 ply_slot)
+{
+    return ifMagnify_804A1DE0.player[ply_slot].state.is_offscreen;
+}

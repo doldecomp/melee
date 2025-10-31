@@ -6,12 +6,16 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_8029BAB8
 
 /// #it_8029BB90
 
-/// #itKirbycutterbeam_UnkMotion0_Anim
+bool itKirbycutterbeam_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    return it_80273130(gobj);
+}
 
 /// #itKirbycutterbeam_UnkMotion0_Phys
 

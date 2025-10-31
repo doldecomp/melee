@@ -44,7 +44,7 @@
 /* 225074 */ s32 Stage_80225074(s32);
 /* 225194 */ enum_t Stage_80225194(void);
 /* 22519C */ s32 Stage_8022519C(InternalStageId idx);
-/* 2251B4 */ void Stage_802251B4(InternalStageId idx, s32);
+/* 2251B4 */ void Stage_802251B4(InternalStageId idx);
 /* 2251E8 */ void Stage_802251E8(InternalStageId idx, s32*);
 /* 22524C */ void Stage_8022524C(void);
 /* 225298 */ void Stage_80225298(void);

@@ -9,8 +9,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0CEE.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -25,6 +24,7 @@
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_HammerFall.h"
 #include "ftCommon/ftCo_HammerWait.h"
+#include "ftCommon/ftCo_ItemParasolOpen.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/ftCo_SpecialAir.h"
@@ -65,7 +65,7 @@ void ftCo_Fall_Enter(Fighter_GObj* gobj)
     if (!ftCo_Fall_inline(gobj)) {
         Fighter_ChangeMotionState(gobj, ftCo_MS_Fall, Ft_MF_KeepFastFall, 0.0F,
                                   1.0F, 0.0F, NULL);
-        ftCommon_8007D468(fp);
+        ftCommon_ClampAirDrift(fp);
         fp->mv.co.fall.smid = ftCo_SM_Fall;
         fp->mv.co.fall.x4 = 0.0F;
         if (fp->ground_or_air == GA_Ground) {

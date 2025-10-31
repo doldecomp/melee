@@ -3,7 +3,11 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_80286088
 
@@ -34,9 +38,16 @@ bool itBox_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itBox_UnkMotion1_Phys
 
-/// #itBox_UnkMotion1_Coll
+bool itBox_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026E15C(gobj, fn_80286480);
+    return false;
+}
 
-/// #it_3F14_Logic1_PickedUp
+void it_3F14_Logic1_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itBox_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -45,19 +56,28 @@ bool itBox_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itBox_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic1_Thrown
+void it_3F14_Logic1_Thrown(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
 /// #itBox_UnkMotion4_Phys
 
 /// #itBox_UnkMotion3_Coll
 
-/// #it_3F14_Logic1_Dropped
+void it_3F14_Logic1_Dropped(Item_GObj* gobj)
+{
+    it_3F14_Logic1_Thrown(gobj);
+}
 
 /// #itBox_UnkMotion4_Coll
 
 /// #it_80286AA4
 
-/// #itBox_UnkMotion6_Anim
+bool itBox_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
 
 void itBox_UnkMotion6_Phys(Item_GObj* gobj) {}
 
@@ -68,7 +88,15 @@ bool itBox_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #it_80286BA0
 
-/// #itBox_UnkMotion7_Anim
+bool itBox_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.box.xDD8 -= 1;
+    if (ip->xDD4_itemVar.box.xDD8 > 0) {
+        return false;
+    }
+    return true;
+}
 
 void itBox_UnkMotion7_Phys(Item_GObj* gobj) {}
 
@@ -87,7 +115,10 @@ bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic1_DmgReceived
 
-/// #it_3F14_Logic1_EnteredAir
+void it_3F14_Logic1_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itBox_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -96,7 +127,11 @@ bool itBox_UnkMotion5_Anim(Item_GObj* gobj)
 
 void itBox_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itBox_UnkMotion5_Coll
+bool itBox_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, fn_80286480, it_8028655C);
+    return false;
+}
 
 void it_3F14_Logic1_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

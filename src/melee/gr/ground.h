@@ -75,7 +75,7 @@
 /* 1C2D24 */ bool Ground_801C2D24(enum_t, Vec3*);
 /* 1C2ED0 */ bool Ground_801C2ED0(HSD_JObj*, s32);
 /* 1C2FE0 */ bool Ground_801C2FE0(Ground_GObj*);
-/* 1C3128 */ bool Ground_801C3128(s32, void (*)(s32));
+/* 1C3128 */ bool Ground_801C3128(s32, void (*)(int));
 /* 1C3214 */ bool Ground_801C3214(int);
 /* 1C3260 */ bool Ground_801C3260(s32);
 /* 1C32AC */ void Ground_801C32AC(s32);
@@ -119,7 +119,7 @@
 /* 1C49B4 */ LightList** Ground_801C49B4(void);
 /* 1C49F8 */ void* Ground_801C49F8(void);
 /* 1C4A08 */ void Ground_801C4A08(HSD_GObj* gobj);
-/* 1C4B50 */ void Ground_801C4B50(s32, s32, Vec3* result, f32);
+/* 1C4B50 */ void Ground_801C4B50(HSD_Spline*, Vec3*, Vec3*, f32);
 /* 1C4D70 */ bool Ground_801C4D70(HSD_GObj*, Vec3*, f32);
 /* 1C4DA0 */ bool Ground_801C4DA0(Vec3*, f32*);
 /* 1C4DD0 */ bool Ground_801C4DD0(void);

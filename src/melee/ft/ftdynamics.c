@@ -256,8 +256,6 @@ void ftCo_8009D5EC(Fighter* fp)
     }
 }
 
-/// #ftCo_8009D704
-
 void ftCo_8009D704(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_LINK];

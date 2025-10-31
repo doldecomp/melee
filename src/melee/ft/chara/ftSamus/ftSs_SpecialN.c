@@ -293,12 +293,12 @@ void ftSs_SpecialNHold_IASA(HSD_GObj* gobj)
         fighterObj2 = gobj;
         ftSamus_UnkAndDestroyAllEF(fighterObj2);
     } else {
-        if ((fp->input.x668 & 512)) {
+        if (fp->input.x668 & HSD_PAD_B) {
             Fighter_ChangeMotionState(gobj, 346, 0, 0, 1, 0, NULL);
             ftSamus_updateDamageDeathCBs(gobj);
             return;
         }
-        if ((fp->input.x668 & 0x80000000)) {
+        if (fp->input.x668 & HSD_PAD_LR) {
             Fighter_ChangeMotionState(gobj, 345, 0, 0, 1, 0, NULL);
             ftSamus_UnkAndDestroyAllEF(gobj);
             ftSamus_updateDamageDeathCBs(gobj);

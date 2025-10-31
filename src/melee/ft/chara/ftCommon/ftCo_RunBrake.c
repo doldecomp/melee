@@ -11,7 +11,6 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -19,6 +18,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Squat.h"
 #include "ftCommon/ftCo_TurnRun.h"
 
 bool ftCo_RunBrake_CheckInput(Fighter_GObj* gobj)
@@ -95,9 +95,9 @@ void ftCo_RunBrake_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftCommon_8007C930(fp, p_ftCommonData->x60_someFrictionMul *
+    ftCommon_ApplyFrictionGround(fp, p_ftCommonData->x60_someFrictionMul *
                               fp->co_attrs.gr_friction);
-    ftCommon_8007CB74(gobj);
+    ftCommon_ApplyGroundMovement(gobj);
 }
 
 void ftCo_RunBrake_Coll(Fighter_GObj* gobj)

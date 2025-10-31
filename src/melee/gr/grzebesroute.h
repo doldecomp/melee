@@ -24,7 +24,7 @@
 /* 20B42C */ void grZebesRoute_8020B42C(Ground_GObj*);
 /* 20B4D4 */ void grZebesRoute_8020B4D4(Ground_GObj*);
 /* 20B4D8 */ UNK_RET fn_8020B4D8(UNK_PARAMS);
-/* 20B548 */ UNK_RET grZebesRoute_8020B548(UNK_PARAMS);
+/* 20B548 */ void grZebesRoute_8020B548(void);
 /* 20B854 */ DynamicsDesc* grZebesRoute_8020B854(enum_t);
 /* 20B85C */ bool grZebesRoute_8020B85C(Vec3*, int arg, HSD_JObj* jobj);
 

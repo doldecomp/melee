@@ -404,7 +404,7 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
     case 2:
         if (grAnime_801C83D0(gobj, 0, 1) != 0) {
             Vec3 pos_2;
-            s32 ret;
+            int ret;
             f32 other_x;
             f32 other_z;
             s32 var_r0;
@@ -416,8 +416,8 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             pos.y -= 27.0f;
             other_z = 5.0f + pos.z;
             pos.z -= 5.0f;
-            if (mpLib_80051EC8(&pos_2, &ret, 0, 0, 1, -1, 0x32, other_x,
-                               other_z, pos.x, pos.z) != 0)
+            if (mpLib_80051EC8(other_x, other_z, pos.x, pos.z, &pos_2, &ret, 0,
+                               0, 1, -1, 0x32) != 0)
             {
                 var_r0 = ret;
             } else {
@@ -655,7 +655,7 @@ void grFlatzone_80217EF0(Ground_GObj* gobj)
                 if (gobj != NULL) {
                     Item* ip = GET_ITEM(gobj);
                     if (ip != NULL) {
-                        ip->x378_itemColl.x4C = 0x32;
+                        ip->x378_itemColl.x4C_joint_id = 0x32;
                     }
                 }
             }

@@ -68,7 +68,10 @@ int mn_80231634(struct mn_80231634_t* arg0)
 
 /// #mn_80231714
 
-/// #mn_802317E4
+void mn_802317E4(HSD_Archive* archive, int arg1)
+{
+    mn_80231804(archive, arg1);
+}
 
 extern int mn_804D6BD4;
 

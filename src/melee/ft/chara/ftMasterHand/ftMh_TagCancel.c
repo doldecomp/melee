@@ -1,9 +1,11 @@
 #include "ftMh_TagCancel.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
@@ -35,7 +37,7 @@ void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     ftCommon_8007D5D4(ft_1);
     Fighter_ChangeMotionState(gobj_1, ftCo_MS_CaptureMasterHand, 0, 0, 1, 0,
                               0);
-    ft_1->x221E_b0 = true;
+    ft_1->invisible = true;
     ft_1->x2220_b3 = true;
     ftCommon_8007E2F4(ft_1, 511);
     ftAnim_8006EBA4(gobj_1);

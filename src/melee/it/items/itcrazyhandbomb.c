@@ -2,16 +2,28 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802F0F6C
 
 /// #it_802F1030
 
-/// #it_2725_Logic86_EvtUnk
+void it_2725_Logic86_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
-/// #it_2725_Logic86_DmgDealt
+bool it_2725_Logic86_DmgDealt(Item_GObj* gobj)
+{
+    it_802F1344();
+    return 1;
+}
 
-/// #it_2725_Logic86_Reflected
+bool it_2725_Logic86_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 /// #it_802F10F8
 
@@ -28,7 +40,10 @@ void it_802F1340(void) {}
 
 /// #it_802F1344
 
-/// #itCrazyhandbomb_UnkMotion1_Anim
+bool itCrazyhandbomb_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
 
 void itCrazyhandbomb_UnkMotion1_Phys(Item_GObj* gobj) {}
 

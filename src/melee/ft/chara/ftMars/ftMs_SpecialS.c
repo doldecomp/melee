@@ -120,8 +120,8 @@ void ftMs_SpecialAirS1_Phys(HSD_GObj* gobj)
         ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        ftCommon_8007D494(fp, da->x20, da->x24);
-        ftCommon_8007CE94(fp, da->x18);
+        ftCommon_Fall(fp, da->x20, da->x24);
+        ftCommon_ApplyFrictionAir(fp, da->x18);
     }
 }
 
@@ -214,8 +214,8 @@ void ftMs_SpecialS2_Phys(HSD_GObj* gobj)
         ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        ftCommon_8007D494(fp, da->x20, da->x24);
-        ftCommon_8007CE94(fp, da->x18);
+        ftCommon_Fall(fp, da->x20, da->x24);
+        ftCommon_ApplyFrictionAir(fp, da->x18);
     }
 }
 
@@ -359,7 +359,7 @@ void ftMs_SpecialS3_Phys(HSD_GObj* gobj)
         ft_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        ftCommon_8007D494(fp, sa->x20, sa->x24);
+        ftCommon_Fall(fp, sa->x20, sa->x24);
         ft_80085204(gobj);
     }
 }
@@ -496,7 +496,7 @@ void ftMs_SpecialS4_Phys(HSD_GObj* gobj)
         ft_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        ftCommon_8007D494(fp, sa->x20, sa->x24);
+        ftCommon_Fall(fp, sa->x20, sa->x24);
         ft_80085204(gobj);
     }
 }

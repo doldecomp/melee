@@ -5,12 +5,13 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_SquatWait.h"
 #include "ftCommon/types.h"
 #include "ftSamus/types.h"
 #include "it/items/itsamusbomb.h"
@@ -178,7 +179,7 @@ void ftSs_SpecialLwBomb_Phys(HSD_GObj* gobj)
     if (fp->cmd_vars[0]) {
         ftCommon_8007CADC(fp, 0.0f, ft_attr->walk_init_vel * samus_attr->x64,
                           ft_attr->walk_max_vel * samus_attr->x5C);
-        ftCommon_8007CB74(gobj);
+        ftCommon_ApplyGroundMovement(gobj);
     } else {
         ft_80084F3C(gobj);
     }
@@ -191,7 +192,7 @@ void ftSs_SpecialAirLwBomb_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* ft_attr = &fp->co_attrs;
 
     u8 _[8];
-    ftCommon_8007D4B8(fp);
+    ftCommon_FallBasic(fp);
     ftCommon_8007D3A8(fp, 0.0f, ft_attr->air_drift_stick_mul * samus_attr->x68,
                       ft_attr->air_drift_max * samus_attr->x60);
 }

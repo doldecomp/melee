@@ -5,6 +5,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
 
@@ -53,7 +54,9 @@ bool grGarden_80202E40(Ground_GObj* arg)
     return false;
 }
 
-/// #grGarden_80202E48
+void grGarden_80202E48(Ground_GObj* arg) {
+    lb_800115F4();
+}
 
 void grGarden_80202E68(Ground_GObj* arg) {}
 

@@ -6,12 +6,13 @@
 
 #include "ft/forward.h"
 
-#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
+
+#include "ftCommon/ftCo_Landing.h"
 
 void ftCo_LandingAir_EnterWithLag(Fighter_GObj* gobj)
 {
@@ -54,7 +55,7 @@ void ftCo_LandingAir_EnterWithLag(Fighter_GObj* gobj)
     if (msid != ftCo_MS_None) {
         ftCo_LandingAir_EnterWithMsidLag(gobj, msid, lag);
     } else {
-        ftCo_800D5BF8(gobj);
+        ftCo_Landing_Enter_Basic(gobj);
     }
 }
 

@@ -103,7 +103,7 @@ void ftZd_SpecialN_Anim(HSD_GObj* gobj)
     }
 
     if (fp->cmd_vars[0] == 0) {
-        fp->x2218_b3 = 0;
+        fp->reflecting = false;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -129,8 +129,8 @@ void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
                                 &ftZd_SpecialN_8013ADB0);
     }
 
-    if (fp->cmd_vars[0] == 0U) {
-        fp->x2218_b3 = 0;
+    if (fp->cmd_vars[0] == 0) {
+        fp->reflecting = false;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -170,7 +170,7 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
         if (var1 != 0) {
             fp->mv.zd.specialn.x0 = var1 - 1;
         } else {
-            ftCommon_8007D494(fp, sa->xC, da->terminal_vel);
+            ftCommon_Fall(fp, sa->xC, da->terminal_vel);
         }
     }
 

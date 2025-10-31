@@ -1197,10 +1197,10 @@ HSD_GObj* grStadium_801D2BEC(void)
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrPStadiumData");
     text->x18 = HSD_SisLib_803A5ACC(1, 0, 0.0F, 0.0F, 0.0F, 250.0F, 160.0F);
     text->x1C = HSD_SisLib_803A6754(1, 0);
-    text->x1C->x8 = 0.0F;
+    text->x1C->pos_z = 0.0F;
     hsd_text = text->x1C;
-    hsd_text->xC = 250.0F;
-    hsd_text->x10 = 160.0F;
+    hsd_text->box_size_x = 250.0F;
+    hsd_text->box_size_y = 160.0F;
     return gobj;
 }
 
@@ -1436,7 +1436,7 @@ bool grStadium_801D32D0(Ground_GObj* gobj)
     return false;
 }
 
-static const U8Vec4 grPs_804DAF3C = { 0xFF, 0xFF, 0xFF, 0xFF };
+static const GXColor grPs_804DAF3C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 /// @todo is there a way to prevent these being upcast to double
 /// when passed to variadic sislib functions?
@@ -1463,8 +1463,8 @@ static TextGlyphTexture grPs_8049F040;
 
 void grStadium_801D3460(Ground_GObj* gobj)
 {
-    U8Vec4 sp48;
-    void* sp38[4];
+    GXColor sp48;
+    const char* sp38[4];
     HSD_Text* temp_r3;
     HSD_Text* temp_r3_2;
     HSD_Text* temp_r4;
@@ -1512,7 +1512,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
 
     HSD_SisLib_803A660C(1, 5, 7);
     HSD_SisLib_803A6368(gp2->x18, 5);
-    gp2->x1C->x49 = 0;
+    gp2->x1C->default_kerning = 0;
     if (lbLang_IsSavedLanguageJP() != 0) {
         temp_r3 = gp2->x1C;
         temp_r3->x34.x = 0.3125f;
@@ -1522,25 +1522,25 @@ void grStadium_801D3460(Ground_GObj* gobj)
         temp_r3_2->x34.x = 0.26f;
         temp_r3_2->x34.y = 0.625f;
     }
-    sp48.x = 0xC0;
-    sp48.y = 0xC0;
+    sp48.r = 0xC0;
+    sp48.g = 0xC0;
     var_r28 = 0;
-    sp48.z = 0xFF;
+    sp48.b = 0xFF;
     var_r27 = 0;
-    gp2->x1C->x30 = sp48;
-    gp2->x1C->x4A = 1;
+    gp2->x1C->text_color = sp48;
+    gp2->x1C->default_alignment = 1;
 
     for (i = 0; i < 4; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
-            UNK_T tmp = gm_80160A60(i);
-            sp38[var_r28] = tmp;
-            if (tmp != NULL) {
+            const char* character_name = gm_80160A60(i);
+            sp38[var_r28] = character_name;
+            if (character_name != NULL) {
                 var_r28++;
             }
         }
     }
 
-    gp2->x1C->x48 = 1;
+    gp2->x1C->default_fitting = 1;
     if (var_r28 == 1) {
         HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF30, grPs_804DAF4C, sp38[0]);
     } else if (var_r28 == 2) {
@@ -1557,7 +1557,7 @@ void grStadium_801D3460(Ground_GObj* gobj)
         HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF50, grPs_804DAF38, sp38[3]);
     }
 
-    gp2->x1C->x48 = 0;
+    gp2->x1C->default_fitting = 0;
     rules = gm_8016AE50();
     temp_r4 = gp2->x1C;
     temp_r4->x34.x = 0.625f;
@@ -1574,12 +1574,12 @@ void grStadium_801D3460(Ground_GObj* gobj)
                         gm_8016AF0C());
 }
 
-const U8Vec4 grPs_804DAF60 = { 0xC0, 0xC0, 0xFF, 0xFF };
+const GXColor grPs_804DAF60 = { 0xC0, 0xC0, 0xFF, 0xFF };
 
 void grStadium_801D384C(Ground_GObj* gobj)
 {
     u8 _[4];
-    U8Vec4 sp2C;
+    GXColor sp2C;
     HSD_GObj* temp_r3;
     HSD_Text* temp_r3_2;
     HSD_Text* temp_r3_3;
@@ -1602,22 +1602,22 @@ void grStadium_801D384C(Ground_GObj* gobj)
     HSD_SisLib_803A7664(gp2->x1C);
     if (lbLang_IsSavedLanguageJP()) {
         HSD_SisLib_803A6368(gp2->x18, 0xD);
-        gp2->x1C->x49 = 0;
+        gp2->x1C->default_kerning = 0;
         temp_r3_2 = gp2->x1C;
         temp_r3_2->x34.x = 1.5f;
         temp_r3_2->x34.y = 1.5f;
         temp_r6 = gp2->x1C;
-        temp_r6->x30 = sp2C;
-        gp2->x1C->x4A = 1;
+        temp_r6->text_color = sp2C;
+        gp2->x1C->default_alignment = 1;
         HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF58, grPs_804DAF68, "%d",
                             temp_r29, temp_r6);
     } else {
         HSD_SisLib_803A6368(gp2->x18, 0xD);
-        gp2->x1C->x49 = 0;
+        gp2->x1C->default_kerning = 0;
         temp_r3_3 = gp2->x1C;
         temp_r3_3->x34.x = 1.5f;
         temp_r3_3->x34.y = 1.5f;
-        gp2->x1C->x30 = sp2C;
+        gp2->x1C->text_color = sp2C;
         HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF6C, grPs_804DAF68, "%3d",
                             temp_r29);
     }
@@ -1635,11 +1635,11 @@ void grStadium_801D39A0(Ground_GObj* gobj)
     }
 }
 
-const U8Vec4 grPs_804DAF70 = { 0xFF, 0xFF, 0xFF, 0xFF };
+const GXColor grPs_804DAF70 = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 void grStadium_801D3A0C(Ground_GObj* gobj)
 {
-    U8Vec4 sp24;
+    GXColor sp24;
     HSD_Text* temp_r3;
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* tmp = gp->u.display.xD4;
@@ -1656,12 +1656,12 @@ void grStadium_801D3A0C(Ground_GObj* gobj)
     }
     HSD_SisLib_803A7664(temp_r30->x1C);
     HSD_SisLib_803A6368(temp_r30->x18, 3);
-    temp_r30->x1C->x49 = 1;
-    sp24.x = 0xC0;
-    sp24.y = 0xC0;
-    sp24.z = 0xFF;
-    temp_r30->x1C->x30 = sp24;
-    temp_r30->x1C->x4A = 1;
+    temp_r30->x1C->default_kerning = 1;
+    sp24.r = 0xC0;
+    sp24.g = 0xC0;
+    sp24.b = 0xFF;
+    temp_r30->x1C->text_color = sp24;
+    temp_r30->x1C->default_alignment = 1;
     if (gp->u.display.xF0 == Gm_PKind_Human) {
         temp_r3 = temp_r30->x1C;
         temp_r3->x34.x = 0.625F;
@@ -1727,7 +1727,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     f32 var_f0_2;
     f32 var_f0_3;
     s32 temp_r29;
-    char* temp_r3_5;
+    const char* character_name;
     s32 var_r25;
     s32 var_r28;
     s32 var_r30;
@@ -1775,9 +1775,9 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         return;
     }
 
-    temp_r31->x1C->x49 = 0;
-    temp_r31->x1C->x4A = 1;
-    temp_r31->x1C->x48 = 1;
+    temp_r31->x1C->default_kerning = 0;
+    temp_r31->x1C->default_alignment = 1;
+    temp_r31->x1C->default_fitting = 1;
     if (lbLang_IsSavedLanguageJP() != 0) {
         temp_r3_2 = temp_r31->x1C;
         temp_r3_2->x34.x = 1.0f;
@@ -1786,7 +1786,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         temp_r3_3 = temp_r31->x1C;
         temp_r3_3->x34.x = 0.8f;
         temp_r3_3->x34.y = 1.0f;
-        temp_r31->x1C->x49 = 1;
+        temp_r31->x1C->default_kerning = 1;
     }
     sp28[1] = *(GXColor*) &grPs_803B7F8C[0];
     sp28[2] = *(GXColor*) &grPs_803B7F8C[1];
@@ -1821,12 +1821,12 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 }
                 sp28[0].g = (u8) (s32) var_f0_3;
                 sp28[0].b = 0xFF;
-                temp_r31->x1C->x30 = *(U8Vec4*) &sp28[0];
-                temp_r3_5 = gm_80160A60(var_r30_2);
-                if (temp_r3_5 != 0) {
+                temp_r31->x1C->text_color = sp28[0];
+                character_name = gm_80160A60(var_r30_2);
+                if (character_name != NULL) {
                     HSD_SisLib_803A6B98(temp_r31->x1C, grPs_804DAF58,
                                         (f32) (temp_r29 + var_r28), "%s",
-                                        temp_r3_5);
+                                        character_name);
                 }
                 var_r28 += 0x20;
             }
@@ -1920,7 +1920,7 @@ void grStadium_801D4194(Ground_GObj* arg0)
     HSD_SisLib_803A6368(gp2->x18, 3);
 }
 
-void fn_801D4220(UNK_T un0, int un1, UNK_T un2, bool cancelflag)
+void fn_801D4220(int un0, int un1, UNK_T un2, bool cancelflag)
 {
     Ground_GObj* map_gobj;
     Ground* gp;

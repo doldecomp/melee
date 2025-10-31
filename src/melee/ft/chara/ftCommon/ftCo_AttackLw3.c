@@ -15,7 +15,6 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
@@ -24,6 +23,8 @@
 
 #include "ftCommon/ftCo_Dash.h"
 #include "ftCommon/ftCo_Jump.h"
+#include "ftCommon/ftCo_Squat.h"
+#include "ftCommon/ftCo_SquatWait.h"
 #include "ftCommon/ftCo_Turn.h"
 #include "ftCommon/ftCo_Walk.h"
 #include "ftCommon/types.h"
@@ -47,7 +48,7 @@ bool ftCo_AttackLw3_CheckInput(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A) {
         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
-            ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
+            ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20_radians)
         {
             if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
                 ftCo_800957F4(gobj, ftCo_MS_LightThrowLw);
@@ -129,7 +130,7 @@ static bool checkItemThrowInput(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.y <= p_ftCommonData->xB0 &&
-        ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20)
+        ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20_radians)
     {
         if (fp->item_gobj != NULL && ftCo_80094E54(fp)) {
             ftCo_800957F4(gobj, ftCo_MS_LightThrowLw);

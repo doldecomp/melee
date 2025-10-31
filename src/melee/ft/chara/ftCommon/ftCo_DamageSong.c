@@ -1,4 +1,6 @@
 #include "ftCo_DamageSong.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 
 #include "ftCo_0C35.h"
 #include "ftCo_Lift.h"
@@ -8,7 +10,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
@@ -47,7 +49,7 @@ static inline bool inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x63C;
-    ftCommon_8007DC08(fp, p_ftCommonData->x640);
+    ftCommon_GrabMash(fp, p_ftCommonData->x640);
     if (fp->grab_timer <= 0) {
         ftCo_800C3480(gobj);
         return true;

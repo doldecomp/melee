@@ -20,7 +20,7 @@ struct gm_8049E548_t {
     /* 0x09 */ u8 unk_9;
     /* 0x0A */ s8 unk_A;
     /* 0x0B */ char pad_B[1];
-    /* 0x0C */ u16 unk_C;
+    /* 0x0C */ u16 unk_C; ///< InternalStageId
     /* 0x0E */ s8 unk_E; /* inferred */
     /* 0x0F */ char pad_F[1];
 }; /* size = 0x10 */
@@ -35,7 +35,8 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
                               u8);
 /* 1B06B0 */ void gm_801B06B0(CSSData*, u8 match_type, s8 c_kind, s8 stocks,
                               s8 color, u8, u8 cpu_level, u8 slot);
-/* 1B0730 */ void gm_801B0730(CSSData*, s8*, s8*, u8*, s8*, u8*);
+/* 1B0730 */ void gm_801B0730(CSSData*, s8* ckind, u8* stocks, u8* color,
+                              u8* nametag, u8* cpu_level);
 /* 1B07B4 */ void gm_801B07B4(CSSData*, s8, s8, s8, u8, u8, u8);
 /* 1B07E8 */ void gm_801B07E8(CSSData*, s8*, s8*, s8*, s8*, u8*);
 /* 1B087C */ void gm_801B087C(MinorScene*);
@@ -91,7 +92,7 @@ STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);
 /* 1B2204 */ void gm_801B2204(MinorScene*);
 /* 1B2298 */ void gm_801B2298_OnInit(void);
 /* 1B23C4 */ void gm_801B23C4_OnLoad(void);
-/* 1B23F0 */ UNK_T gm_801B23F0(void);
+/* 1B23F0 */ void gm_801B23F0(void);
 /* 1B24B4 */ void gm_801B24B4(MinorScene*);
 /* 1B2510 */ void gm_801B2510(MinorScene*);
 /* 1B254C */ void gm_801B254C(MinorScene*);

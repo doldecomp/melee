@@ -25,9 +25,7 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
-
-#include "lb/forward.h"
-
+#include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"
 #include "pl/plbonuslib.h"
@@ -38,43 +36,14 @@
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 
-// types
-enum EntityKind {
-    EntityKind_None,
-    EntityKind_Fighter,
-    EntityKind_Item,
-};
-
-typedef struct DmgLogEntry {
-    /*  +0 */ enum EntityKind x0;
-    /*  +4 */ FighterKind kind;
-    /*  +8 */ HSD_GObj* gobj;
-    /// @todo Might be a fake union
-    /*  +C */ union {
-        HitCapsule* hit0;
-        DynamicsDesc* unk_anim0;
-    };
-    /// @todo Might be a fake union
-    /* +10 */ union {
-        HitCapsule* hit1;
-        FighterHurtCapsule* hurt1;
-    };
-    /* +14 */ Vec3 pos;
-    /* +20 */ int x20;
-    /* +24 */ size_t size_of_xC;
-} DmgLogEntry;
-STATIC_ASSERT(sizeof(DmgLogEntry) == 0x28);
-
-// functions
-
 /* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry** log,
                                          int idx, bool);
 // /* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
 //                                          Fighter* victim, bool);
 
 // .data
-IntVec3 ftColl_803C0C40 = { 141, 142, 143 };
-IntVec3 ftColl_803C0C4C = { 107, 108, 109 };
+int ftColl_803C0C40[] = { 141, 142, 143 };
+int ftColl_803C0C4C[] = { 107, 108, 109 };
 
 UNUSED static int ftColl_803C0CAC[] = {
     1000, 1002, 1001, 1004, 1145, 1005, -1, -1, -1,
@@ -304,6 +273,13 @@ void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2, void* victim,
     }
 }
 
+static inline void ftColl_80076808_dontinline(Fighter* fp, HitCapsule* hit,
+                                              int arg2, void* victim,
+                                              bool arg4)
+{
+    ftColl_80076808(fp, hit, arg2, victim, arg4);
+}
+
 void ftColl_800768A0(Fighter* fp, HitCapsule* dst)
 {
     size_t i;
@@ -447,6 +423,12 @@ bool ftColl_8007699C(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     return false;
 }
 
+static inline bool ftColl_8007699C_dontinline(Fighter* fp0, HitCapsule* hit0,
+                                              Fighter* fp1, HitCapsule* hit1)
+{
+    ftColl_8007699C(fp0, hit0, fp1, hit1);
+}
+
 void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
 {
     ftColl_80076808(fp0, hit0, 1, fp1, false);
@@ -460,9 +442,9 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
                 {
                     float facing_dir;
                     if (fp1->cur_pos.x > fp0->cur_pos.x) {
-                        facing_dir = -1;
-                    } else {
                         facing_dir = +1;
+                    } else {
+                        facing_dir = -1;
                     }
                     fp0->dmg.x192c = facing_dir;
                 }
@@ -474,9 +456,9 @@ void ftColl_80076CBC(Fighter* fp0, HitCapsule* hit0, Fighter* fp1)
             {
                 float facing_dir;
                 if (fp1->cur_pos.x > fp0->cur_pos.x) {
-                    facing_dir = +1;
-                } else {
                     facing_dir = -1;
+                } else {
+                    facing_dir = +1;
                 }
                 fp1->specialn_facing_dir = facing_dir;
             }
@@ -746,9 +728,29 @@ void ftColl_80077C60(void)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_80078384(Fighter* fp, FighterHurtCapsule* hurt, HitCapsule* hit)
+static inline int getUnkVal(Fighter* fp, int i)
 {
-    NOT_IMPLEMENTED;
+    return i + fp->player_id * 2 + fp->x221F_b4;
+}
+
+void ftColl_80078384(Fighter* fp, FighterHurtCapsule* arg1, HitCapsule* arg2)
+{
+    bool var_r0;
+    if (fp->x1988 != 0 || fp->x198C != 0 || fp->x221D_b6 ||
+        arg1->capsule.state != HurtCapsule_Enabled)
+    {
+        ft_PlaySFX(fp, ftColl_803C0C40[arg2->sfx_severity], 0x7F, 0x40);
+        var_r0 = true;
+    } else {
+        var_r0 = false;
+    }
+    if (!var_r0) {
+        if (arg2->sfx_kind == 0xDU && arg2->sfx_severity == 2U) {
+            fp->x215C = lbColl_80005BB0(arg2, getUnkVal(fp, 0x72));
+        } else {
+            fp->x2160 = lbColl_80005BB0(arg2, getUnkVal(fp, 0x7E));
+        }
+    }
 }
 
 void ftColl_80078488(Fighter* fp)
@@ -756,9 +758,13 @@ void ftColl_80078488(Fighter* fp)
     ft_PlaySFX(fp, 85, 0x7F, 0x40);
 }
 
-UNK_T ftColl_800784B4(UNK_T arg0, UNK_T arg1, UNK_T arg2)
+void ftColl_800784B4(Fighter* arg0, HitCapsule* arg1, HitCapsule* arg2)
 {
-    NOT_IMPLEMENTED;
+    if (arg1->element == 3 && arg2->element == 3) {
+        ft_PlaySFX(arg0, ftColl_803C0C4C[HSD_Randi(3)], 0x7F, 0x40);
+    } else {
+        ft_PlaySFX(arg0, 0x6A, 0x7F, 0x40);
+    }
 }
 
 void ftColl_80078538(void)
@@ -766,15 +772,16 @@ void ftColl_80078538(void)
     NOT_IMPLEMENTED;
 }
 
-void ftColl_8007861C(bool arg0, Fighter_GObj* gobj, int arg2, int arg3,
-                     int arg4, u32 arg5, int arg6, UNK_T arg7, int arg8)
-{
-    NOT_IMPLEMENTED;
-}
+void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
+                     int arg3, int arg4, UNK_T arg5, int arg6, UNK_T arg7,
+                     int arg8);
 
-UNK_RET ftColl_80078710(UNK_PARAMS)
+void ftColl_80078710(Fighter_GObj* arg0, Fighter_GObj* arg1, UNK_T arg2)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(arg0);
+    PAD_STACK(8);
+    ftColl_8007861C(arg0, arg1, 1, fp->kind, fp->x2070.x2070_int, &fp->x2074,
+                    fp->x2074.x2088, arg2, 0);
 }
 
 void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
@@ -812,7 +819,7 @@ inline HitCapsule* HitCapsuleGetPtr(Fighter* fp, u32 i)
 inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
 {
     float grab_dist = victim_fp->cur_pos.x - this_fp->cur_pos.x;
-    if (grab_dist < F32_MAX) {
+    if (grab_dist < 0) {
         grab_dist = -grab_dist;
     }
     if (grab_dist < this_fp->unk_grab_val) {
@@ -839,33 +846,30 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
     this_fp->unk_grab_val = F32_MAX;
     victim_gobj = HSD_GObj_Entities->fighters;
     while (victim_gobj != NULL) {
-        if (ftLib_80086FD4(this_gobj, victim_gobj) == false) {
+        if (!ftLib_80086FD4(this_gobj, victim_gobj)) {
             victim_fp = victim_gobj->user_data;
-            if (((!(victim_fp->x2219_b1)) &&
-                 ((!victim_fp->x222A_b0) &&
-                  ((gm_8016B168() == false) || (gm_8016B0D4() != false) ||
-                   ((u8) victim_fp->team != (u8) this_fp->team)) &&
-                  ((int) victim_fp->x1988 == 0) &&
-                  ((int) victim_fp->x198C == 0) &&
-                  (!(victim_fp->x221D_b6) &&
-                   !(victim_fp->x1A6A & this_fp->x1A68) &&
-                   !((victim_fp->x2224_b2))))))
+            if ((!victim_fp->x2219_b1 &&
+                 (!victim_fp->x222A_b0 &&
+                  (!gm_8016B168() || gm_8016B0D4() ||
+                   victim_fp->team != this_fp->team) &&
+                  victim_fp->x1988 == 0 && victim_fp->x198C == 0 &&
+                  !victim_fp->x221D_b6 &&
+                  !(victim_fp->x1A6A & this_fp->x1A68) &&
+                  !victim_fp->x2224_b2)))
             {
                 for (i = 0; i < 4; i++) {
                     this_hit = HitCapsuleGetPtr(this_fp, i);
-                    if ((this_hit->state != HitCapsule_Disabled) &&
-                        (this_hit->element == (u32) HitElement_Catch) &&
-                        ((((this_hit->x40_b2) &&
-                           (victim_fp->ground_or_air == GA_Air)) ||
-                          ((((u8) this_hit->x40_b3) &&
-                            ((int) victim_fp->ground_or_air == GA_Ground))))))
+                    if (this_hit->state != HitCapsule_Disabled &&
+                        this_hit->element == HitElement_Catch &&
+                        ((this_hit->x40_b2 &&
+                          victim_fp->ground_or_air == GA_Air) ||
+                         (this_hit->x40_b3 &&
+                          victim_fp->ground_or_air == GA_Ground)))
                     {
-                        if (lbColl_8000ACFC(victim_fp, this_hit) == false) {
+                        if (!lbColl_8000ACFC(victim_fp, this_hit)) {
                             for (j = 0; j < victim_fp->hurt_capsules_len; j++)
                             {
-                                if ((int) victim_fp->hurt_capsules[j]
-                                        .is_grabbable != false)
-                                {
+                                if (victim_fp->hurt_capsules[j].is_grabbable) {
                                     if (lbColl_80007ECC(
                                             this_hit,
                                             &victim_fp->hurt_capsules[j]
@@ -878,8 +882,9 @@ void ftColl_80078A2C(Fighter_GObj* this_gobj)
                                         if (ft_80084CE4(this_fp, victim_fp) ==
                                             false)
                                         {
-                                            ftColl_80076808(this_fp, this_hit,
-                                                            0, victim_fp, 0);
+                                            ftColl_80076808_dontinline(
+                                                this_fp, this_hit, 0,
+                                                victim_fp, 0);
                                             ftGrabDist(this_fp, victim_fp);
                                         }
                                         goto next_gobj;
@@ -937,7 +942,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                     }
                 }
             if ((var_r4 != 0) || ((u8) this_fp->player_id != (u8) victim_fp->player_id)) {
-                if ((gm_8016B168() != false) && (gm_8016B0D4() == false) && !(((u8) victim_fp->x2225_b4))) {
+                if ((gm_8016B168()) && !gm_8016B0D4() && !(((u8) victim_fp->x2225_b4))) {
                     var_r0 = (victim_fp->x1064_thrownHitbox.owner != NULL) ? victim_fp->x119C_teamUnk : victim_fp->team;
                     if ((u8) this_fp->team != var_r0) {
                         goto block_16;
@@ -963,7 +968,7 @@ void ftColl_80078C70(Fighter_GObj* this_gobj)
                                     for (m = 0; m < (sizeof(this_fp->x914) / sizeof(HitCapsule)); m++) {
                                         if ((u8) ftColl_804D6560[m] != 0) {
                                             temp_r16 = (HitCapsule*) HitCapsuleGetPtr( this_fp, m);
-                                            if (((lbColl_80007AFC( temp_r23, temp_r16, victim_fp ->x34_scale .y, this_fp ->x34_scale .y) != false) && (ftColl_8007699C( victim_fp, temp_r23, this_fp, temp_r16) != false))) {
+                                            if (((lbColl_80007AFC( temp_r23, temp_r16, victim_fp ->x34_scale .y, this_fp ->x34_scale .y) != false) && (ftColl_8007699C_dontinline( victim_fp, temp_r23, this_fp, temp_r16) != false))) {
                                                 var_r17 = true;
                                                 break;
                                             } else {
@@ -1063,7 +1068,8 @@ void ftColl_8007925C(Fighter_GObj* gobj)
 extern double const ftColl_804D8308;
 extern float const ftColl_804D8314;
 
-void ftColl_80079AB0(void)
+float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, int unk_count, float arg3,
+                      float attack, float defense, float weight)
 {
     NOT_IMPLEMENTED;
 }
@@ -1119,12 +1125,49 @@ void ftColl_8007AC9C(HitCapsule* arg0, int arg1, Fighter_GObj* arg2)
 
 void ftColl_8007AD18(Fighter* fp, HitCapsule* arg1)
 {
-    NOT_IMPLEMENTED;
+    Vec3 sp10;
+    f32 temp_f1;
+
+    switch (arg1->state) {
+    case HitCapsule_Enabled:
+        if (arg1->x43_b1) {
+            temp_f1 = 1.0f / fp->x34_scale.y;
+            sp10.x = arg1->b_offset.x * temp_f1;
+            sp10.y = arg1->b_offset.y * temp_f1;
+            sp10.z = arg1->b_offset.z * temp_f1;
+        } else {
+            sp10 = arg1->b_offset;
+        }
+        lb_8000B1CC(arg1->jobj, &sp10, &arg1->x4C);
+        arg1->x58 = arg1->x4C;
+        arg1->state = HitCapsule_Unk2;
+        break;
+    case HitCapsule_Unk2:
+        arg1->state = HitCapsule_Max;
+    case HitCapsule_Max:
+        arg1->x58 = arg1->x4C;
+        if (arg1->x43_b1) {
+            temp_f1 = 1.0f / fp->x34_scale.y;
+            sp10.x = arg1->b_offset.x * temp_f1;
+            sp10.y = arg1->b_offset.y * temp_f1;
+            sp10.z = arg1->b_offset.z * temp_f1;
+        } else {
+            sp10 = arg1->b_offset;
+        }
+        lb_8000B1CC(arg1->jobj, &sp10, &arg1->x4C);
+        break;
+    case HitCapsule_Disabled:
+        break;
+    }
 }
 
 void ftColl_8007AE80(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    int i;
+    for (i = 0; i < ARRAY_SIZE(fp->x914); i++) {
+        ftColl_8007AD18(fp, &fp->x914[i]);
+    }
 }
 
 void ftColl_8007AEE0(Fighter_GObj* gobj)
@@ -1151,7 +1194,16 @@ void ftColl_8007AF28(Fighter_GObj* gobj)
     }
 }
 
-/// #ftColl_8007AF60
+void ftColl_8007AF60(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    int i;
+
+    for (i = 0; i < (unsigned) fp->x166C; i++) {
+        Fighter_x1670_t* temp_r4 = &fp->x1670[i];
+        lb_8000B1CC(temp_r4->jobj, &temp_r4->v1, &temp_r4->x18);
+    }
+}
 
 void ftColl_8007AFC8(Fighter_GObj* gobj, int hit_idx)
 {
@@ -1160,12 +1212,22 @@ void ftColl_8007AFC8(Fighter_GObj* gobj, int hit_idx)
 
 void ftColl_8007AFF8(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    int i;
+    for (i = 0; i < ARRAY_SIZE(fp->x914); i++) {
+        lbColl_80008428(&fp->x914[i]);
+    }
+    fp->x2219_b3 = false;
 }
 
-void ftColl_8007B064(Fighter_GObj* gobj, enum_t arg1)
+void ftColl_8007B064(Fighter_GObj* gobj, int arg1)
 {
-    NOT_IMPLEMENTED;
+    HitCapsule* capsule;
+    Fighter* fp = GET_FIGHTER(gobj);
+    capsule = &fp->x914[arg1];
+    lbColl_80008434(capsule);
+    lbColl_80008440(capsule);
+    fp->x2219_b3 = true;
 }
 
 void ftColl_8007B0C0(Fighter_GObj* gobj, HurtCapsuleState arg1)
@@ -1183,6 +1245,7 @@ void ftColl_8007B0C0(Fighter_GObj* gobj, HurtCapsuleState arg1)
     }
 }
 
+/// Set hurt capsule state
 void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
                      HurtCapsuleState state)
 {
@@ -1193,14 +1256,14 @@ void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
         int bone_idx = hurt->capsule.bone_idx;
         if (bone_idx == bone_id) {
             hurt->capsule.state = state;
-            if (state != HitCapsule_Disabled) {
+            if (state != HurtCapsule_Enabled) {
                 fp->x221A_b5 = 1;
             }
             return;
         }
     }
 
-    OSReport("fighter parts num over!\n");
+    OSReport("in ftCollisionSetHitStatus illegal parts!\n");
     HSD_ASSERT(2184, 0);
 }
 
@@ -1223,7 +1286,7 @@ void ftColl_CreateReflectHit(Fighter_GObj* gobj, ReflectDesc* reflect,
                              HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2218_b3 = true;
+    fp->reflecting = true;
     fp->x2218_b4 = false;
     fp->reflect_hit_cb = cb;
     fp->ReflectAttr.x1A30_maxDamage = reflect->x4_max_damage;
@@ -1288,7 +1351,11 @@ void ftColl_8007B62C(Fighter_GObj* gobj, enum_t arg1)
 
 void ftColl_8007B6A0(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2221_b0 = true;
+    fp->x1990 = 0;
+    fp->x198C = 2;
+    ftCo_800BFFD0(fp, 9, false);
 }
 
 inline enum_t inlineC0(Fighter* fp)

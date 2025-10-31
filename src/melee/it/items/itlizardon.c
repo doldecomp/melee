@@ -4,20 +4,41 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802CB8AC
 
 void it_802CB93C(void) {}
 
-/// #it_802CB940
+void it_802CB940(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
-/// #it_802CB960
+s32 it_802CB960(Item_GObj* gobj)
+{
+    it_80273454(gobj);
+    return it_802CB994(gobj);
+}
 
 /// #it_802CB994
 
 /// #itLizardon_UnkMotion1_Anim
 
-/// #itLizardon_UnkMotion1_Phys
+void itLizardon_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    ItemAttr* ip_attr;
+    Item* ip = GET_ITEM(gobj);
+
+    if ((enum GroundOrAir) ip->ground_or_air == GA_Air) {
+        ip_attr = ip->xCC_item_attr;
+        it_80272860(gobj, ip_attr->x10_fall_speed,
+                    ip_attr->x14_fall_speed_max);
+    }
+}
 
 /// #itLizardon_UnkMotion1_Coll
 
@@ -33,7 +54,13 @@ void it_802CB93C(void) {}
 
 /// #it_802CBFE4
 
-/// #itLizardon_UnkMotion3_Anim
+bool itLizardon_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        return true;
+    }
+    return false;
+}
 
 /// #itLizardon_UnkMotion3_Phys
 
@@ -41,11 +68,21 @@ void it_802CB93C(void) {}
 
 /// #it_802CC0EC
 
-/// #it_802CC160
+s32 it_802CC160(Item_GObj* gobj)
+{
+    it_80279FF8(gobj);
+    return 0;
+}
 
-/// #it_802CC184
+void it_802CC184(Item_GObj* gobj)
+{
+    it_8027A09C(gobj);
+}
 
-/// #it_802CC1A4
+bool it_802CC1A4(Item_GObj* gobj)
+{
+    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CB960);
+}
 
 /// #it_802CC1CC
 
@@ -57,9 +94,15 @@ void it_802CB93C(void) {}
 
 /// #it_2725_Logic37_Spawned
 
-/// #it_2725_Logic37_EvtUnk
+void it_2725_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
-/// #it_2725_Logic37_Reflected
+bool it_2725_Logic37_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 bool it_2725_Logic37_HitShield(Item_GObj* arg0)
 {
@@ -73,8 +116,21 @@ bool it_2725_Logic37_Absorbed(Item_GObj* arg0)
 
 /// #it_802CC5D4
 
-/// #it_802CC650
+bool it_802CC650(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    ip->xD44_lifeTimer -= 1.0f;
+    return false;
+}
 
 /// #it_802CC684
 
 /// #it_802CC6C4
+
+bool it_802CC6C4(Item_GObj* gobj)
+{
+    return it_8026DFB0(gobj);
+}

@@ -270,7 +270,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
             if (stick_range > p_ftCommonData->x0) {
                 float facing_dir = fp->facing_dir;
 
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
 
                 if (facing_dir != fp->facing_dir) {
                     fp->mv.gw.SpecialLw.turnFrames =
@@ -306,7 +306,7 @@ void ftGw_SpecialAirLw_IASA(HSD_GObj* gobj)
 
             if (stick_range > p_ftCommonData->x0) {
                 float facingDir = fp->facing_dir;
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
 
                 if (facingDir != fp->facing_dir) {
                     fp->mv.gw.SpecialLw.turnFrames =
@@ -336,10 +336,10 @@ void ftGw_SpecialAirLw_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = fp->dat_attrs;
 
-    ftCommon_8007D494(fp, sa->x6C_GAMEWATCH_PANIC_FALL_ACCEL,
+    ftCommon_Fall(fp, sa->x6C_GAMEWATCH_PANIC_FALL_ACCEL,
                       sa->x70_GAMEWATCH_PANIC_VEL_Y_MAX);
 
-    ftCommon_8007CE94(fp, sa->x68_GAMEWATCH_PANIC_MOMENTUM_MUL);
+    ftCommon_ApplyFrictionAir(fp, sa->x68_GAMEWATCH_PANIC_MOMENTUM_MUL);
     ftColl_8007AF10(gobj);
 }
 

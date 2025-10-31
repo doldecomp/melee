@@ -34,53 +34,60 @@ struct sislib_UnkAllocData {
     u32 size;
 };
 
+/// @todo: this is the same as above, but just more generic...
+/// proper types will have to be sorted out later, as well as merging the two structs.
+typedef struct sisLib_803A7664_t {
+    void* x0;
+    void* x4;
+    u32 x8; ///< alloc size
+    u32 xC;
+} sisLib_803A7664_t;
+
 struct HSD_Text {
     // these get passed to the text initializer HSD_SisLib_803A5ACC
-    f32 x0;  // global x position, 0,0 at center
-    f32 x4;  // global y position
-    f32 x8;  // scale that happens from the origin after the translation of x0,
-             // x4
-    f32 xC;  // scale that happens on the X axis from the left side of the text
-    f32 x10; // unknown, no effect observed so far
-
+    f32 pos_x;          ///< world position x
+    f32 pos_y;          ///< world position y
+    f32 pos_z;          ///< world position z
+    f32 box_size_x;      ///< text box size x
+    f32 box_size_y;      ///< text box size y
     Vec4 x14;
-    Vec2 x24; // font size, 1.0 being 100% of the screen?
-    U8Vec4 x2C;
-    U8Vec4 x30;
+    Vec2 font_size;         ///< font size, 1.0 being 100% of the screen?
+    GXColor bg_color;
+    GXColor text_color;
     Vec2 x34;
     Vec2 x3C;
-    u16 x44;
-    u16 x46;
-    u8 x48;
-    u8 x49;
-    u8 x4A;
+    u16 x44;                ///< render flags?
+    u16 x46;                ///< more flags?
+    u8 default_fitting;     ///< sets fitting below
+    u8 default_kerning;     ///< sets kerning below
+    u8 default_alignment;   ///< sets alignment below
     u8 x4B;
     u8 x4C; // whether to test for Z depth?
-    u8 x4D;
+    u8 hidden;              ///< visibility flag
     u8 x4E;
-    u8 x4F; // which font to select from the array HSD_SisLib_804D1124
-    HSD_Text* x50;
-    HSD_GObj* x54;
-    void (*x58)(void*); // callback in the text renderer (HSD_SisLib_803A84BC)
-    SIS* x5C;           // could just be a byte pointer?
-    UNK_T x60;
-    sislib_UnkAllocData* x64;
-    char* x68;
-    u16 x6C;
-    u16 x6E;
-    f32 x70;
-    f32 x74;
+    u8 font_idx;            ///< which font to select from the array HSD_SisLib_804D1124
+    HSD_Text* next;
+    HSD_GObj* entity;
+    void (*render_callback)(void*); ///< callback in the text renderer (HSD_SisLib_803A84BC)
+    SIS* sis_buffer;        ///< SIS text buffer
+    UNK_T x60;              ///< position in text buffer
+    sislib_UnkAllocData* alloc_data;
+    char* string_buffer;    ///< raw string buffer
+    u16 x6C;                ///< string length?
+    u16 x6E;                ///< alloc size?
+    f32 current_width;
+    f32 current_height;
     Vec2 x78;
     Vec2 x80;
     f32 x88;
-    U8Vec4 x8C;
-    u16 x90;
-    u16 x92;
+    GXColor active_color;   ///< the texts current color
+    u16 x90;                ///< set by x44
+    u16 x92;                ///< set by x46
     u32 x94;
     u32 x98;
-    u8 x9C;
-    u8 x9D;
-    u8 x9E;
+    u8 fitting;
+    u8 kerning;
+    u8 alignment;
     u8 x9F;
 };
 
@@ -114,19 +121,19 @@ void HSD_SisLib_803A84BC(HSD_GObj*, int);
 s32 HSD_SisLib_803A7F0C(HSD_Text*, s32);
 void HSD_SisLib_803A8134(void*, HSD_Text*, f32*, f32*);
 void HSD_SisLib_803A7684(UNK_T, u8, u8);
-void HSD_SisLib_803A7664(UNK_T);
-void HSD_SisLib_803A75E0(UNK_T, s32);
+void HSD_SisLib_803A7664(HSD_Text*);
+void HSD_SisLib_803A75E0(HSD_Text*, s32);
 void HSD_SisLib_803A7548(HSD_Text*, int, float, float);
 void HSD_SisLib_803A74F0(HSD_Text*, s32 arg1, u8* arg2);
 void HSD_SisLib_803A746C(HSD_Text*, s32, f32, f32);
 s32 HSD_SisLib_803A70A0(HSD_Text*, ...);
 u32 lbl_803A6FEC(s32, s32, bool);
-int HSD_SisLib_803A6B98(HSD_Text* arg0, float, float, void*, ...);
+int HSD_SisLib_803A6B98(HSD_Text* arg0, float, float, const char*, ...);
 s32 HSD_SisLib_803A67EC(u8*, u8*);
 HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1);
 void HSD_SisLib_803A660C(s32, s32, s32);
 void HSD_SisLib_803A6530(s32, s32, s32);
-void HSD_SisLib_803A6478(u8*, u8*);
+u8* HSD_SisLib_803A6478(u8*, u8*);
 void HSD_SisLib_803A6368(HSD_Text*, s32);
 void HSD_SisLib_803A62A0(s32, char*, char*);
 s32 HSD_SisLib_803A611C(int, HSD_GObj*, u16, u8, u8, u8, u8, u32);

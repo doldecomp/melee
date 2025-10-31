@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -14,13 +15,13 @@ typedef enum_t FtMotionId;
 typedef struct DObjList DObjList;
 typedef struct Fighter Fighter;
 typedef struct Fighter_804D653C_t Fighter_804D653C_t;
+typedef struct Fighter_x1670_t Fighter_x1670_t;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
 typedef struct FighterBone FighterBone;
+typedef struct FighterPartsTable FighterPartsTable;
 typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef struct ft_800898B4_t ft_800898B4_t;
-typedef struct ftCmdScript ftCmdScript;
-typedef struct FtCmdState FtCmdState;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftData ftData;
@@ -66,45 +67,46 @@ typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
 typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* gobj, int arg1, Mtx vmtx);
 typedef void (*Fighter_UnkPtrEvent)(int arg0, int* arg1, int* arg2);
 typedef void (*FighterEvent)(Fighter* fp);
-typedef void (*FtCmd)(Fighter_GObj* gobj, FtCmdState* cmd);
+typedef void (*FtCmd)(Fighter_GObj*, CommandInfo*);
+typedef void (*FtCmd2)(Fighter_GObj*, CommandInfo*, int);
 typedef bool (*ftDevice_Callback0)(UNK_T, HSD_GObj*, Vec3*);
 
 typedef enum FighterKind {
-    FTKIND_MARIO,
-    FTKIND_FOX,
-    FTKIND_CAPTAIN,
-    FTKIND_DONKEY,
-    FTKIND_KIRBY,
-    FTKIND_KOOPA,
-    FTKIND_LINK,
-    FTKIND_SEAK,
-    FTKIND_NESS,
-    FTKIND_PEACH,
-    FTKIND_POPO,
-    FTKIND_NANA,
-    FTKIND_PIKACHU,
-    FTKIND_SAMUS,
-    FTKIND_YOSHI,
-    FTKIND_PURIN,
-    FTKIND_MEWTWO,
-    FTKIND_LUIGI,
-    FTKIND_MARS,
-    FTKIND_ZELDA,
-    FTKIND_CLINK,
-    FTKIND_DRMARIO,
-    FTKIND_FALCO,
-    FTKIND_PICHU,
-    FTKIND_GAMEWATCH,
-    FTKIND_GANON,
-    FTKIND_EMBLEM,
-    FTKIND_MASTERH,
-    FTKIND_CREZYH,
-    FTKIND_BOY,
-    FTKIND_GIRL,
-    FTKIND_GKOOPS,
-    FTKIND_SANDBAG,
-    FTKIND_NONE,
-    FTKIND_MAX = FTKIND_NONE
+    /* 00 */ FTKIND_MARIO,
+    /* 01 */ FTKIND_FOX,
+    /* 02 */ FTKIND_CAPTAIN,
+    /* 03 */ FTKIND_DONKEY,
+    /* 04 */ FTKIND_KIRBY,
+    /* 05 */ FTKIND_KOOPA,
+    /* 06 */ FTKIND_LINK,
+    /* 07 */ FTKIND_SEAK,
+    /* 08 */ FTKIND_NESS,
+    /* 09 */ FTKIND_PEACH,
+    /* 0A */ FTKIND_POPO,
+    /* 0B */ FTKIND_NANA,
+    /* 0C */ FTKIND_PIKACHU,
+    /* 0D */ FTKIND_SAMUS,
+    /* 0E */ FTKIND_YOSHI,
+    /* 0F */ FTKIND_PURIN,
+    /* 10 */ FTKIND_MEWTWO,
+    /* 11 */ FTKIND_LUIGI,
+    /* 12 */ FTKIND_MARS,
+    /* 13 */ FTKIND_ZELDA,
+    /* 14 */ FTKIND_CLINK,
+    /* 15 */ FTKIND_DRMARIO,
+    /* 16 */ FTKIND_FALCO,
+    /* 17 */ FTKIND_PICHU,
+    /* 18 */ FTKIND_GAMEWATCH,
+    /* 19 */ FTKIND_GANON,
+    /* 1A */ FTKIND_EMBLEM,
+    /* 1B */ FTKIND_MASTERH,
+    /* 1C */ FTKIND_CREZYH,
+    /* 1D */ FTKIND_BOY,
+    /* 1E */ FTKIND_GIRL,
+    /* 1F */ FTKIND_GKOOPS,
+    /* 20 */ FTKIND_SANDBAG,
+    /* 21 */ FTKIND_NONE,
+    /* 22 */ FTKIND_MAX = FTKIND_NONE
 } FighterKind;
 
 typedef enum CharacterKind {
@@ -134,7 +136,10 @@ typedef enum CharacterKind {
     /* 17 */ CKIND_EMBLEM,    // Roy (Emblem)
     /* 18 */ CKIND_PICHU,     // Pichu
     /* 19 */ CKIND_GANON,     // Ganondorf (Ganon)
-    /* 1A */ CKIND_MASTERH,   // Master Hand (MasterH)
+
+    CKIND_PLAYABLE_COUNT,
+
+    /* 1A */ CKIND_MASTERH = CKIND_PLAYABLE_COUNT, // Master Hand (MasterH)
     /* 1B */ CKIND_BOY,       // Male Wireframe (Boy)
     /* 1C */ CKIND_GIRL,      // Female Wireframe (Girl)
     /* 1D */ CKIND_GKOOPS,    // Giga Bowser (GKoops)
@@ -409,6 +414,12 @@ typedef enum ftCommon_BuryType {
 
 enum {
     Ft_Dynamics_NumMax = 10,
+};
+
+enum EntityKind {
+    EntityKind_None,
+    EntityKind_Fighter,
+    EntityKind_Item,
 };
 
 #endif

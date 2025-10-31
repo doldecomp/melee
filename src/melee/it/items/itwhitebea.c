@@ -2,7 +2,9 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/types.h"
+#include "it/item.h"
 
 /// #it_802E31F8
 
@@ -16,9 +18,17 @@ void itOldottosea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #itOldottosea_UnkMotion9_Anim
 
-/// #itOldottosea_UnkMotion9_Phys
+void itOldottosea_UnkMotion9_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itOldottosea_UnkMotion9_Coll
+bool itOldottosea_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #it_802E3400
 
@@ -26,7 +36,10 @@ void itOldottosea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 void itOldottosea_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #itOldottosea_UnkMotion10_Coll
+bool itOldottosea_UnkMotion10_Coll(Item_GObj* gobj)
+{
+    return it_8027C79C(gobj);
+}
 
 /// #it_2725_Logic3_Destroyed
 
@@ -37,13 +50,23 @@ bool itOldottosea_UnkMotion11_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOldottosea_UnkMotion11_Phys
+void itOldottosea_UnkMotion11_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itOldottosea_UnkMotion11_Coll
+bool itOldottosea_UnkMotion11_Coll(Item_GObj* gobj)
+{
+    return it_8027C794(gobj);
+}
 
 /// #it_802E35CC
 
-/// #it_802E3784
+void it_802E3784(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
+}
 
 // This function only called by it_3F14_Logic17_PickedUp from itfreeze, so
 // using those item vars
@@ -81,7 +104,12 @@ bool itWhitebea_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWhitebea_UnkMotion3_Phys
+void itWhitebea_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itWhitebea_UnkMotion3_Coll
 
@@ -89,7 +117,13 @@ bool itWhitebea_UnkMotion3_Anim(Item_GObj* gobj)
 
 /// #itWhitebea_UnkMotion4_Anim
 
-/// #itWhitebea_UnkMotion4_Phys
+void itWhitebea_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+    }
+}
 
 /// #itWhitebea_UnkMotion4_Coll
 
@@ -118,7 +152,12 @@ bool itWhitebea_UnkMotion6_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWhitebea_UnkMotion6_Phys
+void itWhitebea_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itWhitebea_UnkMotion6_Coll
 
@@ -130,7 +169,10 @@ void itWhitebea_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 /// #itWhitebea_UnkMotion7_Coll
 
-/// #it_2725_Logic9_PickedUp
+void it_2725_Logic9_PickedUp(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
 
 /// #itWhitebea_UnkMotion8_Anim
 
@@ -142,9 +184,17 @@ void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #itWhitebea_UnkMotion9_Anim
 
-/// #itWhitebea_UnkMotion9_Phys
+void itWhitebea_UnkMotion9_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
-/// #itWhitebea_UnkMotion9_Coll
+bool itWhitebea_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    return it_8027C824(gobj, NULL);
+}
 
 /// #it_802E48B4
 
@@ -152,7 +202,10 @@ void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 void itWhitebea_UnkMotion10_Phys(Item_GObj* gobj) {}
 
-/// #itWhitebea_UnkMotion10_Coll
+bool itWhitebea_UnkMotion10_Coll(Item_GObj* gobj)
+{
+    return it_8027C79C(gobj);
+}
 
 /// #it_802E4980
 
@@ -161,9 +214,16 @@ bool itWhitebea_UnkMotion11_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWhitebea_UnkMotion11_Phys
+void itWhitebea_UnkMotion11_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+}
 
-/// #itWhitebea_UnkMotion11_Coll
+bool itWhitebea_UnkMotion11_Coll(Item_GObj* gobj)
+{
+    return it_8027C794(gobj);
+}
 
 void it_802E4A24(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

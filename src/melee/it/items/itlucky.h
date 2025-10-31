@@ -9,16 +9,16 @@
 #include "it/items/types.h"
 
 /* 2D5050 */ void it_802D5050(Item_GObj*);
-/* 2D50F0 */ UNK_RET it_802D50F0(UNK_PARAMS);
+/* 2D50F0 */ void it_802D50F0(Item_GObj*);
 /* 2D5124 */ UNK_RET it_802D5124(UNK_PARAMS);
 /* 2D51C8 */ UNK_RET it_802D51C8(UNK_PARAMS);
 /* 2D52E4 */ UNK_RET it_802D52E4(UNK_PARAMS);
-/* 2D533C */ UNK_RET it_802D533C(UNK_PARAMS);
+/* 2D533C */ void it_802D533C(Item_GObj* gobj);
 /* 2D53AC */ bool it_802D53AC(Item_GObj* gobj);
 /* 2D53F0 */ void it_802D53F0(Item_GObj* gobj);
 /* 2D53F4 */ bool it_802D53F4(Item_GObj* gobj);
 /* 2D5420 */ UNK_RET it_802D5420(UNK_PARAMS);
-/* 2D546C */ UNK_RET it_802D546C(UNK_PARAMS);
+/* 2D546C */ void it_802D546C(Item_GObj*);
 /* 2D54C4 */ bool itLucky_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2D54CC */ void itLucky_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2D54FC */ bool itLucky_UnkMotion5_Coll(Item_GObj* gobj);
@@ -32,11 +32,11 @@
 /* 2D56F0 */ void it_802D56F0(Item_GObj*, Item_GObj*);
 /* 2D5710 */ UNK_RET it_802D5710(UNK_PARAMS);
 /* 2D57D0 */ void it_2725_Logic44_Spawned(Item_GObj*);
-/* 2D582C */ UNK_RET it_802D582C(UNK_PARAMS);
+/* 2D582C */ void it_802D582C(Item_GObj*);
 /* 2D5884 */ bool it_802D5884(Item_GObj* gobj);
 /* 2D58BC */ void it_802D58BC(Item_GObj* gobj);
 /* 2D58C0 */ bool it_802D58C0(Item_GObj* gobj);
-/* 2D58EC */ UNK_RET it_802D58EC(UNK_PARAMS);
+/* 2D58EC */ void it_802D58EC(HSD_GObj* gobj);
 /* 2D5914 */ bool itLucky_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2D594C */ void itLucky_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2D597C */ bool itLucky_UnkMotion3_Coll(Item_GObj* gobj);

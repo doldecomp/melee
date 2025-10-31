@@ -7,7 +7,7 @@
 #include "ft/forward.h"
 
 #include "ft/ft_0C31.h"
-#include "ft/ft_0D14.h"
+#include "ft/ft_0D31.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_09F4.h"
 #include "gm/gm_unsplit.h"
@@ -49,7 +49,7 @@ void ftMaterial_800BF2B8(HSD_MObj* mobj, u32 rendermode)
     }
 
     if (!fp->x2223_b2 && (!fp->x2228_b0 || !fp->x2224_b0)) {
-        if (fp->x2223_b7) {
+        if (fp->is_metal) {
             mobj = ft_804D6580;
         } else if (fp->x2227_b3) {
             mobj = ft_804D6588;
@@ -251,7 +251,7 @@ void ftMaterial_800BFD04(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_Sleep, Ft_MF_None, 0, 1, 0, NULL);
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     fp->x221E_b1 = true;
     fp->x221E_b2 = true;
     fp->x2219_b1 = true;

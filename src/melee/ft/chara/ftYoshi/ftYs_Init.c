@@ -14,6 +14,7 @@
 
 #include "ft/forward.h"
 
+#include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
@@ -22,6 +23,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Guard.h"
 #include "ftYoshi/ftYs_SpecialHi.h"
 #include "ftYoshi/ftYs_SpecialS.h"
 
@@ -544,37 +546,4 @@ void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
     ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
     ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
-}
-
-void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    PAD_STACK(4 * 2);
-    {
-        ftHurtboxInit hurt;
-        PAD_STACK(4 * 4);
-        ftColl_8007B0C0(gobj, Intangible);
-        hurt.bone_idx = fp->ft_data->x8->x11;
-        hurt.height = HurtHeight_Mid;
-        hurt.is_grabbable = true;
-        hurt.a_offset = hurt.b_offset = ftYs_Unk1_803B75C0;
-        hurt.scale = 1;
-        ftColl_HurtboxInit(fp, &fp->hurt_capsules[0], &hurt);
-    }
-}
-
-void ftYs_Init_8012BE3C(HSD_GObj* gobj)
-{
-    /// @todo Some kind of inline here.
-    ftCo_DatAttrs_xBC_t* xBC;
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_80074B0C(gobj, 0, 0);
-    ftColl_8007B0C0(gobj, 0);
-    xBC = &fp->co_attrs.xBC;
-    {
-        Fighter_Part part = ftParts_GetBoneIndex(fp, 4);
-        HSD_JObj* jobj = fp->parts[part].joint;
-        Fighter* fp1 = GET_FIGHTER(gobj);
-        efAsync_Spawn(gobj, &fp1->x60C, 4, 1231, jobj, xBC);
-    }
 }

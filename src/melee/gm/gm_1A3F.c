@@ -46,10 +46,10 @@ void gm_801A3F48(MinorScene* scene)
     }
     temp_r31 = lbDvd_8001822C();
     if (lbHeap_80015BB8(2) == 0) {
-        temp_r31->is_heap_persistent[0] = 1;
+        temp_r31->is_heap_persistent[0] = true;
     }
     if (lbHeap_80015BB8(3) == 0) {
-        temp_r31->is_heap_persistent[1] = 1;
+        temp_r31->is_heap_persistent[1] = true;
     }
     lbDvd_80018254();
     lb_8001C5A4();
@@ -195,9 +195,9 @@ void gm_801A42D4(void)
     gm_80479D30.pending = 1;
 }
 
-void gm_801A42E8(s8 arg0)
+void gm_801A42E8(s8 pending_major)
 {
-    M2C_FIELD(&gm_80479D30, s8*, 1) = arg0;
+    gm_80479D30.nums.pending_major = pending_major;
 }
 
 void gm_801A42F8(int pending_major)

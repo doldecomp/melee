@@ -8,12 +8,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
@@ -86,7 +87,7 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
     }
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > sa->specialhi.reverse_stick_range) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
@@ -120,7 +121,7 @@ void ftMr_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.y *= sa->specialhi.vel_mul;
         fp->self_vel.z *= sa->specialhi.vel_mul;
     } else {
-        ftCommon_8007D494(fp, sa->specialhi.grav, attrs->terminal_vel);
+        ftCommon_Fall(fp, sa->specialhi.grav, attrs->terminal_vel);
         ftCommon_8007CF58(fp);
     }
 }
@@ -129,7 +130,7 @@ void ftMr_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->dat_attrs;
-    ftCo_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
+    ftCo_LandingFallSpecial_Enter(gobj, false, sa->specialhi.landing_lag);
 }
 
 void ftMr_SpecialHi_Coll(HSD_GObj* gobj)

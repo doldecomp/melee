@@ -6,7 +6,7 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
@@ -26,7 +26,7 @@ void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageMasterHand, 0, 0, 1,
                               0, 0);
-    fp->x221E_b0 = true;
+    fp->invisible = true;
     fp->x2220_b3 = true;
     fp->accessory1_cb = ftCo_800DB464;
     ftCommon_8007E2F4(fp, 511);
@@ -37,7 +37,7 @@ void ftMh_CaptureMasterHand_80155B80(HSD_GObj* gobj)
 void ftMh_CaptureDamageMasterHand_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCommon_8007DC08(fp, p_ftCommonData->x3A8);
+    ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
     if (fp->grab_timer <= 0) {
         ftMh_CaptureDamageMasterHand_80155C94(gobj);
         ftMh_MS_381_8015483C(fp->victim_gobj);

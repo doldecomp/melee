@@ -11,11 +11,11 @@
 /* 286248 */ UNK_RET it_80286248(UNK_PARAMS);
 /* 286340 */ UNK_RET it_80286340(UNK_PARAMS);
 /* 2863BC */ UNK_RET it_802863BC(UNK_PARAMS);
-/* 286480 */ UNK_RET fn_80286480(UNK_PARAMS);
+/* 286480 */ void fn_80286480(Item_GObj*);
 /* 2864D8 */ bool itBox_UnkMotion0_Anim(Item_GObj* gobj);
 /* 286518 */ void itBox_UnkMotion0_Phys(Item_GObj* gobj);
 /* 28651C */ bool itBox_UnkMotion0_Coll(Item_GObj* gobj);
-/* 28655C */ UNK_RET it_8028655C(UNK_PARAMS);
+/* 28655C */ void it_8028655C(Item_GObj* gobj);
 /* 286598 */ bool itBox_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2865A0 */ void itBox_UnkMotion1_Phys(Item_GObj* gobj);
 /* 286754 */ bool itBox_UnkMotion1_Coll(Item_GObj* gobj);

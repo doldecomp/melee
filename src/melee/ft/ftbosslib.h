@@ -29,7 +29,7 @@
 /* 15C3E8 */ HSD_GObj* ftBossLib_8015C3E8(FighterKind arg0);
 /* 15C44C */ enum_t ftBossLib_8015C44C(FighterKind kind);
 /* 15C4C4 */ enum_t ftBossLib_8015C4C4(void);
-/* 15C530 */ s32 ftBossLib_8015C530(enum_t arg0);
+/* 15C530 */ s32 ftBossLib_8015C530(int cpu_level);
 /* 15C5F8 */ void ftBossLib_8015C5F8(HSD_GObj*);
 /* 15C6BC */ ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void);
 /* 15C74C */ s32 ftBossLib_8015C74C(void);

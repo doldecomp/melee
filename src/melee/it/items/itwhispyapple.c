@@ -1,6 +1,10 @@
 #include "itwhispyapple.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
+#include "it/it_2725.h"
+#include "it/item.h"
+#include "it/inlines.h"
 
 /// #it_802EE200
 
@@ -18,13 +22,25 @@
 
 void itWhispyapple_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #itWhispyapple_UnkMotion1_Coll
+bool itWhispyapple_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, fn_802EE7FC);
+    return false;
+}
 
-/// #fn_802EE7FC
+void fn_802EE7FC(HSD_GObj* gobj)
+{
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 /// #itWhispyapple_UnkMotion5_Anim
 
-/// #itWhispyapple_UnkMotion5_Phys
+void itWhispyapple_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itWhispyapple_UnkMotion5_Coll
 
@@ -41,13 +57,20 @@ void itWhispyapple_UnkMotion3_Phys(Item_GObj* gobj) {}
 
 /// #it_802EEB28
 
-/// #it_2725_Logic18_EnteredAir
+void it_2725_Logic18_EnteredAir(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
 
 /// #itWhispyapple_UnkMotion6_Anim
 
 void itWhispyapple_UnkMotion6_Phys(Item_GObj* gobj) {}
 
-/// #itWhispyapple_UnkMotion6_Coll
+bool itWhispyapple_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    it_8026E8C4(gobj, it_802EE6A0, fn_802EE7FC);
+    return false;
+}
 
 /// #it_802EED00
 
@@ -67,11 +90,22 @@ bool it_802EEED0(Item_GObj* item_gobj)
 
 /// #it_802EEED8
 
-/// #it_802EEF10
+bool it_802EEF10(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
-/// #it_802EEF30
+bool it_802EEF30(Item_GObj* gobj)
+{
+    it_802725D4(gobj);
+    itColl_BounceOffVictim(gobj);
+    return false;
+}
 
-/// #it_802EEF68
+bool it_802EEF68(Item_GObj* gobj)
+{
+    return itColl_BounceOffShield(gobj);
+}
 
 void it_802EEF88(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

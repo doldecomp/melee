@@ -10,10 +10,11 @@
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftPopo/types.h"
 
 #include "it/forward.h"
@@ -134,7 +135,7 @@ void ftPp_SpecialAirN_Coll(Fighter_GObj* gobj)
         }
         fp->fv.pp.x224C = 0;
         fp->fv.pp.x2250 = 0.0f;
-        ftCo_800D5CB0(gobj, 0, da->x8);
+        ftCo_LandingFallSpecial_Enter(gobj, false, da->x8);
     }
 }
 

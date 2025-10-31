@@ -4,6 +4,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /// #it_802AFD8C
 
@@ -24,13 +25,24 @@ void it_2725_Logic109_Destroyed(Item_GObj* gobj)
 
 /// #itSeakneedlethrown_UnkMotion2_Anim
 
-/// #itSeakneedlethrown_UnkMotion3_Anim
+bool itSeakneedlethrown_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    return it_80273130(gobj);
+}
 
 /// #itSeakneedlethrown_UnkMotion4_Anim
 
 void itSeakneedlethrown_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itSeakneedlethrown_UnkMotion1_Phys
+void itSeakneedlethrown_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.seakneedlethrown.xDD8;
+    ip->x40_vel.y += ip->xDD4_itemVar.seakneedlethrown.xDE0;
+    if (ip->x40_vel.y < ip->xDD4_itemVar.seakneedlethrown.xDDC) {
+        ip->x40_vel.y = ip->xDD4_itemVar.seakneedlethrown.xDDC;
+    }
+}
 
 void itSeakneedlethrown_UnkMotion2_Phys(Item_GObj* gobj) {}
 
@@ -40,7 +52,15 @@ void itSeakneedlethrown_UnkMotion3_Phys(Item_GObj* gobj)
     itResetVelocity(ip);
 }
 
-/// #itSeakneedlethrown_UnkMotion4_Phys
+void itSeakneedlethrown_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.seakneedlethrown.xDD8;
+    ip->x40_vel.y += ip->xDD4_itemVar.seakneedlethrown.xDE0;
+    if (ip->x40_vel.y < ip->xDD4_itemVar.seakneedlethrown.xDDC) {
+        ip->x40_vel.y = ip->xDD4_itemVar.seakneedlethrown.xDDC;
+    }
+}
 
 /// #itSeakneedlethrown_UnkMotion0_Coll
 

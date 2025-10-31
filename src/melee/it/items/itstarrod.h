@@ -8,13 +8,13 @@
 #include "it/items/types.h"
 
 /* 292360 */ void it_3F14_Logic22_Spawned(Item_GObj*);
-/* 292394 */ UNK_RET it_80292394(UNK_PARAMS);
-/* 2923BC */ UNK_RET it_802923BC(UNK_PARAMS);
-/* 2923F8 */ UNK_RET it_802923F8(UNK_PARAMS);
+/* 292394 */ void it_80292394(Item_GObj*, Vec*);
+/* 2923BC */ void it_802923BC(Item_GObj*, Vec*, float, int);
+/* 2923F8 */ void it_802923F8(Item_GObj*);
 /* 292450 */ bool itStarrod_UnkMotion0_Anim(Item_GObj* gobj);
 /* 292458 */ void itStarrod_UnkMotion0_Phys(Item_GObj* gobj);
 /* 29245C */ bool itStarrod_UnkMotion0_Coll(Item_GObj* gobj);
-/* 292488 */ UNK_RET it_80292488(UNK_PARAMS);
+/* 292488 */ void it_80292488(Item_GObj*);
 /* 2924B0 */ bool itStarrod_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2924B8 */ void itStarrod_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2924E8 */ bool itStarrod_UnkMotion1_Coll(Item_GObj* gobj);

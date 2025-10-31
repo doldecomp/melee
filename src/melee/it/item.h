@@ -47,12 +47,12 @@ struct ItemStateDesc;
 /* 26AE10 */ void Item_OnUserDataRemove(void* user_data);
 /* 26AE10 */ void lbl_8026AE10(void* user_data);
 /* 26AE60 */ u32 Item_8026AE60(void);
-/* 26AE84 */ void Item_8026AE84(Item* item_data, enum_t sfx, int pan,
-                                int volume);
-/* 26AF0C */ void Item_8026AF0C(Item* item_data, enum_t sfx, int pan,
-                                int volume);
-/* 26AFA0 */ void Item_8026AFA0(Item* item_data, enum_t sfx, int pan,
-                                int volume);
+/* 26AE84 */ void Item_8026AE84(Item* item_data, enum_t sfx, u8 pan,
+                                u8 volume);
+/* 26AF0C */ void Item_8026AF0C(Item* item_data, enum_t sfx, u8 pan,
+                                u8 volume);
+/* 26AFA0 */ void Item_8026AFA0(Item* item_data, enum_t sfx, u8 pan,
+                                u8 volume);
 /* 26B034 */ void Item_8026B034(Item* item_data);
 /* 26B074 */ void Item_8026B074(Item* item_data);
 /* 26B1A4 */ bool Item_IsGrabbable(Item_GObj* gobj);

@@ -6,6 +6,8 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
+#include "it/it_2725.h"
 
 /// #it_802AA054
 
@@ -13,7 +15,10 @@
 
 /// #itNesspkfire_UnkMotion0_Anim
 
-/// #itNesspkfire_UnkMotion0_Coll
+bool itNesspkfire_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    return it_8026E058(gobj);
+}
 
 /// #it_2725_Logic23_DmgDealt
 
@@ -29,7 +34,10 @@ bool it_2725_Logic23_HitShield(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic23_Reflected
+bool it_2725_Logic23_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
 
 /// #it_2725_Logic23_ShieldBounced
 

@@ -31,7 +31,7 @@ bool ftCo_AttackS3_CheckInput(Fighter_GObj* gobj)
     if (fp->input.x668 & HSD_PAD_A &&
         fp->input.lstick.x * fp->facing_dir >= p_ftCommonData->x98)
     {
-        if (ABS(ftCo_GetLStickAngle(fp)) < p_ftCommonData->x20) {
+        if (ABS(ftCo_GetLStickAngle(fp)) < p_ftCommonData->x20_radians) {
             if (fp->item_gobj) {
                 if (fp->input.held_inputs & HSD_PAD_LR ||
                     it_8026B30C(fp->item_gobj) == 0)
@@ -62,19 +62,19 @@ static void decideAngle(Fighter_GObj* gobj)
     if (!ftpickupitem_80094790(gobj)) {
         FtMotionId msid;
         float stick_angle = ftCo_GetLStickAngle(fp);
-        if (stick_angle > p_ftCommonData->x9C &&
+        if (stick_angle > p_ftCommonData->x9C_radians &&
             ftData_80085FD4(fp, ftCo_MS_AttackS3S)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3Hi;
-        } else if (stick_angle > p_ftCommonData->xA0 &&
+        } else if (stick_angle > p_ftCommonData->xA0_radians &&
                    ftData_80085FD4(fp, ftCo_MS_AttackS3LwS)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3HiS;
-        } else if (stick_angle < p_ftCommonData->xA8 &&
+        } else if (stick_angle < p_ftCommonData->xA8_radians &&
                    ftData_80085FD4(fp, ftCo_MS_AttackLw3)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3Lw;
-        } else if (stick_angle < p_ftCommonData->xA4 &&
+        } else if (stick_angle < p_ftCommonData->xA4_radians &&
                    ftData_80085FD4(fp, ftCo_MS_AttackHi3)->x8 != NULL)
         {
             msid = ftCo_MS_AttackS3LwS;

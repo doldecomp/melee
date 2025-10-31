@@ -9,12 +9,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
@@ -132,7 +133,7 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
             control = -control;
         }
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
         }
     }
@@ -188,7 +189,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
             control = -control;
         }
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
         }
     }
@@ -222,7 +223,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->self_vel.z *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
         return;
     }
-    ftCommon_8007D494(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
+    ftCommon_Fall(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
                       ca->terminal_vel);
     ftCommon_8007CF58(fp);
 }
@@ -231,9 +232,10 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLg_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
-    ftCo_800D5CB0(gobj, 0,
-                  ((ftLuigiAttributes*) GET_FIGHTER(gobj)->dat_attrs)
-                      ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+    ftCo_LandingFallSpecial_Enter(
+        gobj, false,
+        ((ftLuigiAttributes*) GET_FIGHTER(gobj)->dat_attrs)
+            ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x801444E4

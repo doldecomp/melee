@@ -7,21 +7,21 @@
 
 #include "it/items/types.h"
 
-/* 2927E8 */ UNK_RET it_802927E8(UNK_PARAMS);
-/* 29282C */ UNK_RET it_8029282C(UNK_PARAMS);
+/* 2927E8 */ void it_802927E8(Item_GObj*);
+/* 29282C */ void it_8029282C(Item_GObj*);
 /* 29285C */ void it_3F14_Logic24_Spawned(Item_GObj*);
-/* 29287C */ UNK_RET it_8029287C(UNK_PARAMS);
+/* 29287C */ void it_8029287C(Item_GObj*);
 /* 2928D4 */ bool itHarisen_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2928DC */ void itHarisen_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2928E0 */ bool itHarisen_UnkMotion0_Coll(Item_GObj* gobj);
-/* 29290C */ UNK_RET it_8029290C(UNK_PARAMS);
+/* 29290C */ void it_8029290C(Item_GObj* gobj);
 /* 292934 */ bool itHarisen_UnkMotion8_Anim(Item_GObj* gobj);
 /* 29293C */ void itHarisen_UnkMotion1_Phys(Item_GObj* gobj);
 /* 29296C */ bool itHarisen_UnkMotion1_Coll(Item_GObj* gobj);
-/* 292998 */ UNK_RET it_80292998(UNK_PARAMS);
-/* 2929C8 */ UNK_RET it_802929C8(UNK_PARAMS);
-/* 2929F8 */ UNK_RET it_802929F8(UNK_PARAMS);
-/* 292A28 */ UNK_RET it_80292A28(UNK_PARAMS);
+/* 292998 */ void it_80292998(Item_GObj*, float);
+/* 2929C8 */ void it_802929C8(Item_GObj*, float);
+/* 2929F8 */ void it_802929F8(Item_GObj*, float);
+/* 292A28 */ void it_80292A28(Item_GObj*);
 /* 292A5C */ void it_3F14_Logic24_PickedUp(Item_GObj*);
 /* 292A84 */ bool itHarisen_UnkMotion6_Anim(Item_GObj* gobj);
 /* 292A8C */ void itHarisen_UnkMotion6_Phys(Item_GObj* gobj);

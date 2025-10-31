@@ -177,41 +177,23 @@ Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
     }
 }
 
-/// @todo Should be `__FILE__`
-extern char* filename;
-
-// 100% except for literal relocations
 void lbMemory_800150F0(Handle* h, void* arg1)
 {
     Handle* handle = h->xC_prev;
     Handle* r6 = (Handle*) &h->xC_prev;
 
-    // couldn't figure out how to extract the control flow
-    // while keeping the null check at the bottom
-
-    goto check;
-ifeq:
-    if (handle->x4_lo != h) {
-        goto precheck;
-    } else {
-        r6->x0_next = handle->x0_next;
-        PUSH_HANDLE(&g_alloc.x62C_free_mem, handle);
-        g_alloc.x630_num_allocs -= 1;
-        return;
+    while (handle != NULL) {
+        if (handle->x4_lo == arg1) {
+            r6->x0_next = handle->x0_next;
+            PUSH_HANDLE(&g_alloc.x62C_free_mem, handle);
+            g_alloc.x630_num_allocs -= 1;
+            return;
+        }
+        r6 = handle;
+        handle = handle->x0_next;
     }
-precheck:
-    r6 = handle;
-    handle = handle->x0_next;
-check:
-    if (handle == NULL) {
-        // target relocates each of these as high and low.
-        // maybe one of them is an inline?
-        // it also clears eq flag before OSReport
-        OSReport(filename);
-        __assert(filename, 283, "handle");
-        return;
-    }
-    goto ifeq;
+    OSReport("[LbMem] Error: lbMemFreeToHeap %x.\n", arg1);
+    __assert("lbmemory.c", 283, "0");
 }
 
 u32 lbMemory_8001529C(Handle* h, void* arg1, u32 arg2)

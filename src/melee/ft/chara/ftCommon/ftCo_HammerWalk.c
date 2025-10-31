@@ -34,8 +34,8 @@ void ftCo_800C5614(Fighter_GObj* gobj)
     {
         float accel_mul = 1;
         if (fp->x34_scale.y != 1) {
-            accel_mul = ftCo_CalcYScaledKnockback(
-                &Fighter_804D6524[0], 1, fp->x34_scale.y, Fighter_804D6524[3]);
+            accel_mul = ftCo_CalcYScaledKnockback(1, fp->x34_scale.y,
+                                                  Fighter_804D6524->xC);
         }
         fp->mv.co.walk.accel_mul = accel_mul;
         fp->mv.co.walk.x0 = fp->gr_vel;

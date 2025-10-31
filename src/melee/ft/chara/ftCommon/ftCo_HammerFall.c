@@ -80,5 +80,5 @@ void ftCo_HammerFall_Phys(Fighter_GObj* gobj)
 
 void ftCo_HammerFall_Coll(Fighter_GObj* gobj)
 {
-    ft_80082C74(gobj, ftCo_800C5F88);
+    ft_80082C74(gobj, ftCo_HammerLanding_Enter);
 }

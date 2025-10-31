@@ -3,6 +3,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
+#include "it/it_2725.h"
+
 /// #it_802E2470
 
 /// #it_2725_Logic8_DmgReceived
@@ -30,7 +33,12 @@ bool itOldottosea_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOldottosea_UnkMotion4_Phys
+void itOldottosea_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itOldottosea_UnkMotion4_Coll
 
@@ -38,7 +46,13 @@ bool itOldottosea_UnkMotion4_Anim(Item_GObj* gobj)
 
 /// #itOldottosea_UnkMotion5_Anim
 
-/// #itOldottosea_UnkMotion5_Phys
+void itOldottosea_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+    }
+}
 
 /// #itOldottosea_UnkMotion5_Coll
 

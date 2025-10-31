@@ -49,21 +49,12 @@ void grDisplay_801C5B90(HSD_JObj* jobj, void* arg1, u32 arg2, int arg3)
             for (cur = HSD_GObj_Entities->fighters; cur != NULL;
                  cur = cur->next)
             {
-                struct {
-                    u8 b0 : 1;
-                    u8 b1 : 1;
-                    u8 b2 : 1;
-                    u8 b3 : 1;
-                    u8 b4 : 1;
-                    u8 b5 : 1;
-                    u8 b6 : 1;
-                    u8 b7 : 1;
-                }* temp_r26 = ftLib_800872B0(cur);
+                LbShadow* temp_r26 = ftLib_800872B0(cur);
                 ftLib_80086644(cur, &sp30);
                 if (Camera_80030B24() || stage_info.x17C(&sp30, -1, jobj)) {
-                    temp_r26->b4 = 0;
+                    temp_r26->x0_b4 = 0;
                 } else {
-                    temp_r26->b4 = 1;
+                    temp_r26->x0_b4 = 1;
                 }
             }
             lbShadow_8000EFEC();

@@ -21,7 +21,7 @@ bool ftCo_800980BC(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if ((fp->input.lstick.y >= p_ftCommonData->x244 &&
-         ftCo_GetLStickAngle(fp) >= p_ftCommonData->x20) ||
+         ftCo_GetLStickAngle(fp) >= p_ftCommonData->x20_radians) ||
         fp->input.x668 & HSD_PAD_LR)
     {
         FtMotionId msid;

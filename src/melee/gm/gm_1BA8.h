@@ -5,6 +5,7 @@
 
 #include "gm/types.h"
 
+#include <melee/ft/forward.h>
 #include <melee/gm/forward.h>
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -12,10 +13,10 @@
 struct EventData;
 
 /* 1BA8FC */ UNK_RET gm_801BA8FC(UNK_PARAMS);
-/* 1BA938 */ UNK_RET gm_801BA938(struct EventData*, int, int, int);
+/* 1BA938 */ void gm_801BA938(struct EventData*, int lo, int hi, bool);
 /* 1BAA60 */ void gm_801BAA60(MinorScene*);
 /* 1BAAD0 */ void gm_801BAAD0(MinorScene*);
-/* 1BAB40 */ UNK_RET gm_801BAB40(UNK_PARAMS);
+/* 1BAB40 */ UNK_RET gm_801BAB40(PlayerInitData*, int);
 /* 1BAC9C */ UNK_RET gm_801BAC9C(UNK_PARAMS);
 /* 1BAD70 */ void gm_801BAD70(MinorScene*);
 /* 1BB758 */ void gm_801BB758(MinorScene*);
@@ -73,16 +74,16 @@ struct EventData;
 /* 1BEE58 */ void gm_801BEE58(MinorScene*);
 /* 1BEE9C */ void gm_801BEE9C(MinorScene*);
 /* 1BEF84 */ void gm_801BEF84(MinorScene*);
-/* 1BEFA4 */ void gm_801BEFA4(s8);
-/* 1BEFB0 */ int gm_801BEFB0(void);
+/* 1BEFA4 */ void gm_801BEFA4(s8 ckind);
+/* 1BEFB0 */ CharacterKind gm_801BEFB0(void);
 /* 1BEFC0 */ void gm_801BEFC0(int);
 /* 1BEFD0 */ int gm_801BEFD0(void);
 /* 1BEFE0 */ void gm_801BEFE0(s8);
-/* 1BEFF0 */ u8 gm_801BEFF0(void);
+/* 1BEFF0 */ int gm_801BEFF0(void);
 /* 1BF000 */ void gm_801BF000(s8);
 /* 1BF010 */ int gm_801BF010(void);
 /* 1BF020 */ void gm_801BF020(s8);
-/* 1BF030 */ u8 gm_801BF030(void);
+/* 1BF030 */ int gm_801BF030(void);
 /* 1BF040 */ void gm_801BF040(s8);
 /* 1BF050 */ int gm_801BF050(void);
 /* 1BF060 */ void gm_801BF060(MinorScene*);
@@ -90,11 +91,11 @@ struct EventData;
 /* 1BF3F8 */ UNK_RET gm_801BF3F8(UNK_PARAMS);
 /* 1BF4DC */ void gm_801BF4DC(MinorScene*);
 /* 1BF634 */ void gm_801BF634(s32, s8);
-/* 1BF648 */ s8 gm_801BF648(s32);
+/* 1BF648 */ int gm_801BF648(s32);
 /* 1BF65C */ void gm_801BF65C(s32, s8);
 /* 1BF670 */ u8 gm_801BF670(s32);
 /* 1BF684 */ void gm_801BF684(s16);
-/* 1BF694 */ u8 gm_801BF694(void);
+/* 1BF694 */ u8 gm_801BF694(void); ///< @returns InternalStageId
 /* 1BF6A8 */ void gm_801BF6A8(s8);
 /* 1BF6B8 */ u8 gm_801BF6B8(void);
 /* 1BF6C8 */ void gm_801BF6C8(s8);

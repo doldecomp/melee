@@ -1,20 +1,22 @@
 #ifndef MELEE_MP_TYPES_H
 #define MELEE_MP_TYPES_H
 
+#include "platform.h"
+
 #include <placeholder.h>
+
+#include "dolphin/gx/GXStruct.h"
 
 #include "gr/forward.h"
 #include "mp/forward.h" // IWYU pragma: export
 
-struct mp_UnkStruct0 {
+#include <dolphin/mtx.h>
+
+struct mpIsland_80458E88_t {
     /*  +0 */ mp_UnkStruct0* next;
     /*  +4 */ int x4;
-    /*  +8 */ float x8;
-    /*  +C */ float xC;
-    /* +10 */ int x10;
-    /* +14 */ float x14;
-    /* +18 */ float x18;
-    /* +1C */ int x1C;
+    /*  +8 */ S32Vec3 x8;
+    /* +14 */ S32Vec3 x14;
     /* +20 */ int x20;
     /* +24 */ short x24;
     /* +26 */ short x26;
@@ -23,15 +25,43 @@ struct mp_UnkStruct0 {
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
-struct mp_UnkStruct1 {
-    /* +0 */ int x0;
-    /* +4 */ short x4;
-    /* +6 */ short x6;
+struct mpIsland_PaletteEntry {
+    mp_Terrain kind;
+    GXColor color;
 };
 
-struct mp_UnkStruct2 {
-    /* +0 */ mp_UnkStruct1* x0;
-    /* +4 */ int x4;
+struct mpIsland_Palette {
+    mpIsland_PaletteEntry x0[20];
+};
+
+struct mp_UnkStruct0 {
+    /*  +0 */ mp_UnkStruct0* next;
+    /*  +4 */ u16 x4;
+    /*  +6 */ u16 x6;
+    /*  +8 */ Vec3 x8;
+    /* +14 */ Vec3 x14;
+    /* +20 */ int x20;
+    /* +24 */ short x24;
+    /* +26 */ short x26;
+    /* +28 */ short x28;
+    /* +2A */ short x2A;
+    /* +2C */ mp_UnkStruct3* ptr;
+};
+
+struct mpLib_Line {
+    /* +0 */ u16 v0_idx;
+    /* +2 */ u16 v1_idx;
+    /* +4 */ s16 prev_id0;
+    /* +6 */ s16 next_id0;
+    /* +8 */ s16 prev_id1;
+    /* +A */ s16 next_id1;
+    /* +C */ u16 is_empty;
+    /* +E */ u16 flags;
+};
+
+struct CollLine {
+    /* +0 */ mpLib_Line* x0;
+    /* +4 */ u32 flags;
 };
 
 struct mpisland {
@@ -45,63 +75,68 @@ struct mp_UnkStruct3 {
     int xC;
 };
 
-struct mp_UnkStruct5 {
-    /*  +0 */ u8 x0[0x4];
-    /*  +4 */ u16 x4;
-    /*  +6 */ u16 x6;
-    /*  +8 */ int x8;
-    /*  +C */ int xC;
-    /* +10 */ int x10;
-    /* +14 */ int x14;
-    /* +18 */ int x18;
-    /* +1C */ int x1C;
-    /* +20 */ u8 x20[0x28 - 0x20];
-    /* +28 */ short x28;
-    /* +2A */ short x2A;
-    /* +2C */ u16 x2C;
-    /* +30 */ int x30;
-    /* +34 */ int x34;
-    /* +38 */ int x38;
-    /* +3C */ int x3C;
-};
-
-struct mp_UnkStruct6 {
-    /* +0 */ short x0;
-    /* +2 */ short x2;
-    /* +4 */ short* x4;
-};
-
-struct mpLib_804D64B8_t {
-    /* 0x00 */ char pad_0[8];
-    /* 0x08 */ f32 unk_8;      /* inferred */
-    /* 0x0C */ f32 unk_C;      /* inferred */
-    /* 0x10 */ char pad_10[8]; /* maybe part of unk_C[3]? */
+struct CollVtx {
+    /* 0x00 */ f32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ Vec2 pos;
+    /* 0x10 */ float x10;
+    /* 0x14 */ float x14;
 }; /* size = 0x18 */
-STATIC_ASSERT(sizeof(struct mpLib_804D64B8_t) == 0x18);
+STATIC_ASSERT(sizeof(struct CollVtx) == 0x18);
 
-struct mpLib_804D64C0_t {
-    /* 0x00 */ UNK_T x0;
-    /* 0x04 */ UNK_T x4;
-    /* 0x08 */ UNK_T x8;
-    /* 0x0C */ s16 xC;
-    /* 0x0E */ s16 xE;
-    /* 0x10 */ char pad_0[0x14];
-    /* 0x24 */ mpLib_GroundCallback x24;
-    /* 0x28 */ Ground* x28;
-    /* 0x2C */ int unk_2C; /* inferred */
-    /* 0x30 */ int unk_30; /* inferred */
-}; /* size = 0x34 */
-STATIC_ASSERT(sizeof(struct mpLib_804D64C0_t) == 0x34);
-
-struct mp_UnkStruct7 {
-    /* +0 */ struct mp_UnkStruct7* next;
-    /* +4 */ s32 x4;
-    /* +8 */ s32 x8;
-    /* +C */ u8 xC[0x10 - 0xC];
-    /* +10 */ float x10;
+struct CollInfo {
+    /*  +0 */ s16 floor_start;
+    /*  +2 */ s16 floor_count;
+    /*  +4 */ s16 ceiling_start;
+    /*  +6 */ s16 ceiling_count;
+    /*  +8 */ s16 right_wall_start;
+    /*  +A */ s16 right_wall_count;
+    /*  +C */ s16 left_wall_start;
+    /*  +E */ s16 left_wall_count;
+    /* +10 */ s16 dynamic_start;
+    /* +12 */ s16 dynamic_count;
     /* +14 */ float x14;
     /* +18 */ float x18;
     /* +1C */ float x1C;
+    /* +20 */ float x20;
+    /* +24 */ s16 vtx_start;
+    /* +26 */ s16 vtx_count;
+};
+
+struct CollJoint {
+    /* 0x00 */ CollJoint* next;
+    /* 0x04 */ CollInfo* coll_info;
+    /* 0x08 */ u32 flags;
+    /* 0x0C */ s16 xC;
+    /* 0x0E */ u8 xE : 1;
+    /* 0x10 */ Vec2 x10;
+    /* 0x18 */ Vec2 x18;
+    /* 0x20 */ HSD_JObj* x20;
+    /* 0x24 */ mpLib_Callback x24;
+    /* 0x28 */ Ground* x28;
+    /* 0x2C */ mpLib_Callback x2C;
+    /* 0x30 */ Ground* x30;
+}; /* size = 0x34 */
+STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
+
+struct mpCollData {
+    /*  +0 */ Vec2* verts;
+    /*  +4 */ int vert_count;
+    /*  +8 */ mpLib_Line* lines;
+    /*  +C */ int line_count;
+    /* +10 */ s16 floor_start;
+    /* +12 */ s16 floor_count;
+    /* +14 */ s16 ceiling_start;
+    /* +16 */ s16 ceiling_count;
+    /* +18 */ s16 right_wall_start;
+    /* +1A */ s16 right_wall_count;
+    /* +1C */ s16 left_wall_start;
+    /* +1E */ s16 left_wall_count;
+    /* +20 */ s16 dynamic_start;
+    /* +22 */ s16 dynamic_count;
+    /* +24 */ CollInfo* x24;
+    /* +28 */ int x28;
+    /* +2C */ int x2C; /* inferred */
 };
 
 #endif

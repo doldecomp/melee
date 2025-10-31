@@ -37,7 +37,7 @@
 /* 213B1C */ UNK_RET fn_80213B1C(UNK_PARAMS);
 /* 213C10 */ void grGreens_80213C10(Ground_GObj*);
 /* 214654 */ void grGreens_80214654(Ground_GObj*);
-/* 214658 */ UNK_RET fn_80214658(UNK_PARAMS);
+/* 214658 */ Ground* fn_80214658(Ground_GObj*);
 /* 214674 */ void grGreens_80214674(Ground_GObj*);
 /* 214794 */ bool grGreens_80214794(Ground_GObj*);
 /* 21479C */ void grGreens_8021479C(Ground_GObj*);

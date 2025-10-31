@@ -8,12 +8,14 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
@@ -58,8 +60,8 @@ void ftCo_800C4550(Fighter_GObj* gobj)
     if (fp->ground_or_air == GA_Air) {
         ftCo_80090780(gobj);
     } else {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageBind, Ft_MF_None, 0.0f,
-                                  1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftCo_MS_DamageBind, Ft_MF_None, 0.0F,
+                                  1.0F, 0.0F, NULL);
         commonCall(fp);
     }
 }
@@ -68,8 +70,8 @@ void ftCo_DamageBind_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->grab_timer -= p_ftCommonData->x670;
-    ftCommon_8007DC08(fp, p_ftCommonData->x674);
-    if (fp->grab_timer <= 0.0f) {
+    ftCommon_GrabMash(fp, p_ftCommonData->x674);
+    if (fp->grab_timer <= 0.0F) {
         ft_8008A2BC(gobj);
     }
 }

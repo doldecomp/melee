@@ -4,29 +4,16 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
-typedef struct {
-    Vec3 v1;
-    float v2;
-    HSD_JObj* jobj;
-} Foo;
+struct lbColl_8000A10C_arg0_t;
 
-typedef struct {
-    /*  +0 */ HitCapsuleState state;
-    /*  +4 */ u32 damage;
-    /*  +8 */ int kb_angle;
-    /*  +C */ u32 unkC;
-    /* +10 */ u32 unk10;
-    /* +14 */ u32 unk14;
-    /* +18 */ u32 element;
-    /* +1C */ int sfx_severity;
-    /* +20 */ enum_t sfx_kind;
-} lbColl_80008D30_arg1;
+struct Fighter_x1614_t;
 
 /* 005BB0 */ int lbColl_80005BB0(HitCapsule*, int);
 /* 005C44 */ bool lbColl_80005C44(const Vec3*, const Vec3*, const Vec3*, Vec3*,
@@ -41,7 +28,7 @@ typedef struct {
 /* 0077A0 */ void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*,
                                   float* angle, float, float);
 /* 007AFC */ bool lbColl_80007AFC(HitCapsule*, HitCapsule*, float, float);
-/* 007B78 */ UNK_RET lbColl_80007B78(Mtx, Mtx, float, float);
+/* 007B78 */ bool lbColl_80007B78(Mtx, struct Fighter_x1614_t*, float, float);
 /* 007BCC */ bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, UNK_T,
                                   s32, float, float, float);
 /* 007D68 */ void lbColl_JObjSetupMatrix(HSD_JObj*);
@@ -65,17 +52,17 @@ typedef struct {
 /* 0089B8 */ void lbColl_800089B8(HitCapsule* hit, UNK_T arg1);
 /* 008A5C */ void lbColl_80008A5C(HitCapsule* hit);
 /* 008D30 */ void lbColl_80008D30(HitCapsule*, lbColl_80008D30_arg1*);
-/* 008DA4 */ UNK_RET lbColl_80008DA4(UNK_PARAMS);
-/* 008FC8 */ void lbColl_80008FC8(Vec3, Vec3, u8*, u8*, float);
-/* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, u8*, GXColor*, float);
-/* 009DD4 */ UNK_RET lbColl_80009DD4(UNK_PARAMS);
+/* 008DA4 */ UNK_RET lbColl_80008DA4(GXColor*, GXColor*);
+/* 008FC8 */ void lbColl_80008FC8(Vec3, Vec3, GXColor*, GXColor*, float);
+/* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, GXColor*, GXColor*, float);
+/* 009DD4 */ UNK_RET lbColl_80009DD4(Vec3*, Vec3*, GXColor*);
 /* 009F54 */ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A044 */ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8);
-/* 00A10C */ bool lbColl_8000A10C(Vec3 (*)[2], u32, f32);
-/* 00A1A8 */ bool lbColl_8000A1A8(UNK_T, int, float scale_y);
+/* 00A10C */ bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t*, u32, f32);
+/* 00A1A8 */ bool lbColl_8000A1A8(struct Fighter_x1614_t*, int, float scale_y);
 /* 00A244 */ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2,
                                   float arg3);
-/* 00A460 */ bool lbColl_8000A460(Foo* hurt, u32 arg1);
+/* 00A460 */ bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1);
 /* 00A584 */ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2,
                                   MtxPtr arg3, float arg8);
 /* 00A78C */ bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2,

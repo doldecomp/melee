@@ -55,7 +55,7 @@ struct Item_GObj {
 typedef HSD_GObj Item_GObj;
 #endif
 
-typedef void (*ItCmd)(Item_GObj* gobj, FtCmdState* cmd);
+typedef void (*ItCmd)(Item_GObj* gobj, CommandInfo* cmd);
 
 typedef enum Item_StateChangeFlags {
     ITEM_UNK_0x1 = (1 << 0),
@@ -109,41 +109,41 @@ typedef enum Item_HoldKinds {
 typedef enum ItemKind {
     // COMMON ITEMS
 
-    It_Kind_Capsule,  // Capsule
-    It_Kind_Box,      // Crate
-    It_Kind_Taru,     // Barrel
-    It_Kind_Egg,      // Egg
-    It_Kind_Kusudama, // Party Ball (Kusudama)
-    It_Kind_TaruCann, // Barrel Cannon (TaruCann)
-    It_Kind_BombHei,  // Bob-omb (BombHei)
-    It_Kind_Dosei,    // Mr. Saturn (Dosei)
-    It_Kind_Heart,    // Heart Container
-    It_Kind_Tomato,   // Maxim Tomato
-    It_Kind_Star,     // Starman (Super Star)
-    It_Kind_Bat,      // Home-Run Bat
-    It_Kind_Sword,    // Beam Sword
-    It_Kind_Parasol,  // Parasol
-    It_Kind_G_Shell,  // Green Shell (G Shell)
-    It_Kind_R_Shell,  // Red Shell (R Shell)
-    It_Kind_L_Gun,    // Ray Gun (L Gun)
-    It_Kind_Freeze,   // Freezie (Freeze)
-    It_Kind_Foods,    // Food
-    It_Kind_MSBomb,   // Proximity Mine (MSBomb)
-    It_Kind_Flipper,  // Flipper
-    It_Kind_S_Scope,  // Super Scope (S Scope)
-    It_Kind_StarRod,  // Star Rod
-    It_Kind_LipStick, // Lip's Stick
-    It_Kind_Harisen,  // Fan (Harisen)
-    It_Kind_F_Flower, // Fire Flower (F Flower)
-    It_Kind_Kinoko,   // Super Mushroom (Kinoko)
-    It_Kind_DKinoko,  // Poison Mushroom (DKinoko)
-    It_Kind_Hammer,   // Hammer
-    It_Kind_WStar,    // Warp Star (WStar)
-    It_Kind_ScBall,   // Screw Attack (ScBall)
-    It_Kind_RabbitC,  // Bunny Hood (RabbitC)
-    It_Kind_MetalB,   // Metal Box
-    It_Kind_Spycloak, // Cloaking Device (Spycloak)
-    It_Kind_M_Ball,   // Poke Ball (M Ball)
+    /* 00 */ It_Kind_Capsule,  // Capsule
+    /* 01 */ It_Kind_Box,      // Crate
+    /* 02 */ It_Kind_Taru,     // Barrel
+    /* 03 */ It_Kind_Egg,      // Egg
+    /* 04 */ It_Kind_Kusudama, // Party Ball (Kusudama)
+    /* 05 */ It_Kind_TaruCann, // Barrel Cannon (TaruCann)
+    /* 06 */ It_Kind_BombHei,  // Bob-omb (BombHei)
+    /* 07 */ It_Kind_Dosei,    // Mr. Saturn (Dosei)
+    /* 08 */ It_Kind_Heart,    // Heart Container
+    /* 09 */ It_Kind_Tomato,   // Maxim Tomato
+    /* 0A */ It_Kind_Star,     // Starman (Super Star)
+    /* 0B */ It_Kind_Bat,      // Home-Run Bat
+    /* 0C */ It_Kind_Sword,    // Beam Sword
+    /* 0D */ It_Kind_Parasol,  // Parasol
+    /* 0E */ It_Kind_G_Shell,  // Green Shell (G Shell)
+    /* 0F */ It_Kind_R_Shell,  // Red Shell (R Shell)
+    /* 10 */ It_Kind_L_Gun,    // Ray Gun (L Gun)
+    /* 11 */ It_Kind_Freeze,   // Freezie (Freeze)
+    /* 12 */ It_Kind_Foods,    // Food
+    /* 13 */ It_Kind_MSBomb,   // Proximity Mine (MSBomb)
+    /* 14 */ It_Kind_Flipper,  // Flipper
+    /* 15 */ It_Kind_S_Scope,  // Super Scope (S Scope)
+    /* 16 */ It_Kind_StarRod,  // Star Rod
+    /* 17 */ It_Kind_LipStick, // Lip's Stick
+    /* 18 */ It_Kind_Harisen,  // Fan (Harisen)
+    /* 19 */ It_Kind_F_Flower, // Fire Flower (F Flower)
+    /* 1A */ It_Kind_Kinoko,   // Super Mushroom (Kinoko)
+    /* 1B */ It_Kind_DKinoko,  // Poison Mushroom (DKinoko)
+    /* 1C */ It_Kind_Hammer,   // Hammer
+    /* 1D */ It_Kind_WStar,    // Warp Star (WStar)
+    /* 1E */ It_Kind_ScBall,   // Screw Attack (ScBall)
+    /* 1F */ It_Kind_RabbitC,  // Bunny Hood (RabbitC)
+    /* 20 */ It_Kind_MetalB,   // Metal Box
+    /* 21 */ It_Kind_Spycloak, // Cloaking Device (Spycloak)
+    /* 22 */ It_Kind_M_Ball,   // Poke Ball (M Ball)
 
     // ITEM-RELATED
 

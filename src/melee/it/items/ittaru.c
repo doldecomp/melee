@@ -3,7 +3,10 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_3F14_Logic2_Spawned
 
@@ -24,11 +27,21 @@ bool itTaru_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTaru_UnkMotion1_Phys
+void itTaru_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
 
 /// #itTaru_UnkMotion1_Coll
 
-/// #it_3F14_Logic2_PickedUp
+void it_3F14_Logic2_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDB0_itcmd_var1 = 1;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itTaru_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -37,7 +50,10 @@ bool itTaru_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic2_Dropped
+void it_3F14_Logic2_Dropped(Item_GObj* gobj)
+{
+    it_80287F20(gobj);
+}
 
 /// #it_3F14_Logic2_Thrown
 
@@ -49,7 +65,10 @@ void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itTaru_UnkMotion3_Coll
 
-/// #it_80288194
+void it_80288194(Item_GObj* gobj)
+{
+    it_802881FC(gobj);
+}
 
 /// #it_802881B4
 
@@ -57,7 +76,12 @@ void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itTaru_UnkMotion5_Anim
 
-/// #itTaru_UnkMotion5_Phys
+void itTaru_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_802874F0(gobj);
+    it_80287690(gobj);
+}
 
 /// #itTaru_UnkMotion5_Coll
 
@@ -65,11 +89,17 @@ void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itTaru_UnkMotion4_Phys
 
-/// #itTaru_UnkMotion4_Coll
+bool itTaru_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    return itTaru_UnkMotion5_Coll(gobj);
+}
 
 /// #it_802885C8
 
-/// #itTaru_UnkMotion6_Anim
+bool itTaru_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    return it_802751D8(gobj);
+}
 
 void itTaru_UnkMotion6_Phys(Item_GObj* gobj) {}
 
@@ -80,7 +110,15 @@ bool itTaru_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #it_802886C4
 
-/// #itTaru_UnkMotion7_Anim
+bool itTaru_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.taru.xDD8 -= 1;
+    if (ip->xDD4_itemVar.taru.xDD8 > 0) {
+        return false;
+    }
+    return true;
+}
 
 void itTaru_UnkMotion7_Phys(Item_GObj* gobj) {}
 

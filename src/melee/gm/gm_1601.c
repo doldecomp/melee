@@ -21,6 +21,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lb_0192.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lblanguage.h"
 #include "lb/lbtime.h"
 #include "mn/mnstagesel.h"
 #include "mp/mpcoll.h"
@@ -34,40 +35,357 @@
 #include <melee/gm/gm_1A45.h>
 #include <melee/pl/player.h>
 
-static struct VictoryTheme lbl_803D5480[0x1B] = {
-    { 0x0, 0x11 },  { 0x1, 0xD },   { 0x2, 0x10 },  { 0x3, 0xF },
-    { 0x4, 0x14 },  { 0x5, 0x16 },  { 0x6, 0x15 },  { 0x7, 0x16 },
-    { 0x8, 0x16 },  { 0x9, 0xE },   { 0xA, 0x18 },  { 0xB, 0x17 },
-    { 0xC, 0x16 },  { 0xD, 0x18 },  { 0xE, 0x13 },  { 0xF, 0x18 },
-    { 0x10, 0x19 }, { 0x11, 0x1D }, { 0x12, 0x15 }, { 0x13, 0x15 },
-    { 0x14, 0x10 }, { 0x15, 0x15 }, { 0x16, 0x16 }, { 0x17, 0xE },
-    { 0x18, 0x18 }, { 0x19, 0x15 }, { 0x21, -1 },
+/// JP character names
+char* lbl_803D4D74[] = {
+    "Ｃ．ファルコン",
+    "ドンキ－コング",
+    "フォックス",
+    "Ｍｒ．ゲ－ム＆ウォッチ",
+    "カ－ビィ",
+    "クッパ",
+    "リンク",
+    "ルイ－ジ",
+    "マリオ",
+    "マルス",
+    "ミュウツ－",
+    "ネス",
+    "ピ－チ",
+    "ピカチュウ",
+    "アイスクライマー",
+    "プリン",
+    "サムス",
+    "ヨッシ－",
+    "ゼルダ",
+    "シーク",
+    "ファルコ",
+    "こどもリンク",
+    "ドクタ－マリオ",
+    "ロイ",
+    "ピチュ－",
+    "ガノンドロフ",
+    "マスターハンド",
+    "謎のザコ敵：男",
+    "謎のザコ敵：女",
+    "ギガクッパ",
+    "クレイジーハンド",
+    "サンドバッグ君",
+    NULL,
+};
+
+/// US character names
+char* lbl_803D4FDC[] = {
+    "Ｃ． Ｆａｌｃｏｎ",
+    "ＤＫ",
+    "Ｆｏｘ",
+    "Ｍｒ． Ｇａｍｅ ＆ Ｗａｔｃｈ",
+    "Ｋｉｒｂｙ",
+    "Ｂｏｗｓｅｒ",
+    "Ｌｉｎｋ",
+    "Ｌｕｉｇｉ",
+    "Ｍａｒｉｏ",
+    "Ｍａｒｔｈ",
+    "Ｍｅｗｔｗｏ",
+    "Ｎｅｓｓ",
+    "Ｐｅａｃｈ",
+    "Ｐｉｋａｃｈｕ",
+    "Ｉｃｅ Ｃｌｉｍｂｅｒｓ",
+    "Ｊｉｇｇｌｙｐｕｆｆ",
+    "Ｓａｍｕｓ",
+    "Ｙｏｓｈｉ",
+    "Ｚｅｌｄａ",
+    "Ｓｈｅｉｋ",
+    "Ｆａｌｃｏ",
+    "Ｙｏｕｎｇ Ｌｉｎｋ",
+    "Ｄｒ． Ｍａｒｉｏ",
+    "Ｒｏｙ",
+    "Ｐｉｃｈｕ",
+    "Ｇａｎｏｎｄｏｒｆ",
+    "Ｍａｓｔｅｒｈａｎｄ",
+    "ＺＡＫＯ ｏｔｏｋｏ",
+    "ＺＡＫＯ ｏｎｎａ",
+    "Ｇ－Ｂｏｗｓｅｒ",
+    "Ｃｒａｚｙｈａｎｄ",
+    "Ｓａｎｄｂａｇ",
+    NULL,
+};
+
+char* lbl_803D5060[] = {
+    NULL, NULL, "フォックス", NULL, NULL, NULL, NULL, NULL,     NULL,
+    NULL, NULL, NULL,         NULL, NULL, NULL, NULL, "サムス", NULL,
+    NULL, NULL, NULL,         NULL, NULL, NULL, NULL, NULL,     NULL,
+    NULL, NULL, NULL,         NULL, NULL, NULL,
+};
+
+char* lbl_803D50E4[] = {
+    NULL, NULL, "Ｆｏｘ", NULL, NULL, NULL, NULL, NULL,         NULL,
+    NULL, NULL, NULL,     NULL, NULL, NULL, NULL, "Ｓａｍｕｓ", NULL,
+    NULL, NULL, NULL,     NULL, NULL, NULL, NULL, NULL,         NULL,
+    NULL, NULL, NULL,     NULL, NULL, NULL,
+};
+
+static struct lbl_803D5168_t {
+    u8 x0;
+    u8 x1;
+} lbl_803D5168[] = {
+    { 0x22, 0x00 }, { 0x24, 0x01 }, { 0x27, 0x02 }, { 0x38, 0x03 },
+    { 0x29, 0x04 }, { 0x2A, 0x05 }, { 0x2B, 0x06 }, { 0x2C, 0x07 },
+    { 0x21, 0x08 }, { 0x2D, 0x09 }, { 0x2E, 0x0A }, { 0x2F, 0x0B },
+    { 0x30, 0x0C }, { 0x32, 0x0D }, { 0x28, 0x0E }, { 0x33, 0x0F },
+    { 0x34, 0x10 }, { 0x36, 0x11 }, { 0x37, 0x12 }, { 0x35, 0x13 },
+    { 0x26, 0x14 }, { 0x23, 0x15 }, { 0x25, 0x16 }, { 0x39, 0x17 },
+    { 0x31, 0x18 }, { 0x3A, 0x19 }, { 0x48, 0x00 }, { 0 },
+};
+
+static struct {
+    /* 0 */ u8 ncolors;
+    /* 1 */ u8 x1;
+    /* 2 */ u8 x2;
+    /* 3 */ u8 x3;
+} lbl_803D51A0[CKIND_PLAYABLE_COUNT] = {
+    { 0x06, 0x02, 0x05, 0x04 }, { 0x05, 0x02, 0x03, 0x04 },
+    { 0x04, 0x01, 0x02, 0x03 }, { 0x04, 0x01, 0x02, 0x03 },
+    { 0x06, 0x03, 0x02, 0x04 }, { 0x04, 0x01, 0x02, 0x00 },
+    { 0x05, 0x01, 0x02, 0x00 }, { 0x04, 0x03, 0x02, 0x00 },
+    { 0x05, 0x00, 0x03, 0x04 }, { 0x05, 0x01, 0x00, 0x02 },
+    { 0x04, 0x01, 0x02, 0x03 }, { 0x04, 0x00, 0x02, 0x03 },
+    { 0x05, 0x00, 0x03, 0x04 }, { 0x04, 0x01, 0x02, 0x03 },
+    { 0x04, 0x03, 0x00, 0x01 }, { 0x05, 0x01, 0x02, 0x03 },
+    { 0x05, 0x00, 0x04, 0x03 }, { 0x06, 0x01, 0x02, 0x00 },
+    { 0x05, 0x01, 0x02, 0x03 }, { 0x05, 0x01, 0x02, 0x03 },
+    { 0x04, 0x01, 0x02, 0x03 }, { 0x05, 0x01, 0x02, 0x00 },
+    { 0x05, 0x01, 0x02, 0x03 }, { 0x05, 0x01, 0x02, 0x03 },
+    { 0x04, 0x01, 0x02, 0x03 }, { 0x05, 0x01, 0x02, 0x03 },
 };
 
 static struct ResultAnimEntry lbl_803D53A8[0x1B] = {
-    { 0, "GmRstMCa.dat" },    { 0x15, "GmRstMCl.dat" },
-    { 1, "GmRstMDk.dat" },    { 0x16, "GmRstMDr.dat" },
-    { 0x14, "GmRstMFc.dat" }, { 2, "GmRstMFx.dat" },
-    { 3, "GmRstMGw.dat" },    { 0x19, "GmRstMGn.dat" },
-    { 4, "GmRstMKb.dat" },    { 5, "GmRstMKp.dat" },
-    { 6, "GmRstMLk.dat" },    { 7, "GmRstMLg.dat" },
-    { 9, "GmRstMMs.dat" },    { 8, "GmRstMMr.dat" },
-    { 0xA, "GmRstMMt.dat" },  { 0xB, "GmRstMNs.dat" },
-    { 0xE, "GmRstMPn.dat" },  { 0xC, "GmRstMPe.dat" },
-    { 0xD, "GmRstMPk.dat" },  { 0x18, "GmRstMPc.dat" },
-    { 0xF, "GmRstMPr.dat" },  { 0x10, "GmRstMSs.dat" },
-    { 0x13, "GmRstMSk.dat" }, { 0x11, "GmRstMYs.dat" },
-    { 0x12, "GmRstMZd.dat" }, { 0x17, "GmRstMFe.dat" },
-    { 0x21, NULL },
+    {
+        CKIND_CAPTAIN,
+        "GmRstMCa.dat",
+    },
+    {
+        CKIND_CLINK,
+        "GmRstMCl.dat",
+    },
+    {
+        CKIND_DONKEY,
+        "GmRstMDk.dat",
+    },
+    {
+        CKIND_DRMARIO,
+        "GmRstMDr.dat",
+    },
+    {
+        CKIND_FALCO,
+        "GmRstMFc.dat",
+    },
+    {
+        CKIND_FOX,
+        "GmRstMFx.dat",
+    },
+    {
+        CKIND_GAMEWATCH,
+        "GmRstMGw.dat",
+    },
+    {
+        CKIND_GANON,
+        "GmRstMGn.dat",
+    },
+    {
+        CKIND_KIRBY,
+        "GmRstMKb.dat",
+    },
+    {
+        CKIND_KOOPA,
+        "GmRstMKp.dat",
+    },
+    {
+        CKIND_LINK,
+        "GmRstMLk.dat",
+    },
+    {
+        CKIND_LUIGI,
+        "GmRstMLg.dat",
+    },
+    {
+        CKIND_MARS,
+        "GmRstMMs.dat",
+    },
+    {
+        CKIND_MARIO,
+        "GmRstMMr.dat",
+    },
+    {
+        CKIND_MEWTWO,
+        "GmRstMMt.dat",
+    },
+    {
+        CKIND_NESS,
+        "GmRstMNs.dat",
+    },
+    {
+        CKIND_POPONANA,
+        "GmRstMPn.dat",
+    },
+    {
+        CKIND_PEACH,
+        "GmRstMPe.dat",
+    },
+    {
+        CKIND_PIKACHU,
+        "GmRstMPk.dat",
+    },
+    {
+        CKIND_PICHU,
+        "GmRstMPc.dat",
+    },
+    {
+        CKIND_PURIN,
+        "GmRstMPr.dat",
+    },
+    {
+        CKIND_SAMUS,
+        "GmRstMSs.dat",
+    },
+    {
+        CKIND_SEAK,
+        "GmRstMSk.dat",
+    },
+    {
+        CKIND_YOSHI,
+        "GmRstMYs.dat",
+    },
+    {
+        CKIND_ZELDA,
+        "GmRstMZd.dat",
+    },
+    {
+        CKIND_EMBLEM,
+        "GmRstMFe.dat",
+    },
+    {
+        CHKIND_NONE,
+        NULL,
+    },
 };
 
-#pragma dont_inline on
-u8 gm_801601C4(s8 arg0)
+static struct VictoryTheme lbl_803D5480[0x1B] = {
+    {
+        0x0,
+        0x11,
+    },
+    {
+        0x1,
+        0xD,
+    },
+    {
+        0x2,
+        0x10,
+    },
+    {
+        0x3,
+        0xF,
+    },
+    {
+        0x4,
+        0x14,
+    },
+    {
+        0x5,
+        0x16,
+    },
+    {
+        0x6,
+        0x15,
+    },
+    {
+        0x7,
+        0x16,
+    },
+    {
+        0x8,
+        0x16,
+    },
+    {
+        0x9,
+        0xE,
+    },
+    {
+        0xA,
+        0x18,
+    },
+    {
+        0xB,
+        0x17,
+    },
+    {
+        0xC,
+        0x16,
+    },
+    {
+        0xD,
+        0x18,
+    },
+    {
+        0xE,
+        0x13,
+    },
+    {
+        0xF,
+        0x18,
+    },
+    {
+        0x10,
+        0x19,
+    },
+    {
+        0x11,
+        0x1D,
+    },
+    {
+        0x12,
+        0x15,
+    },
+    {
+        0x13,
+        0x15,
+    },
+    {
+        0x14,
+        0x10,
+    },
+    {
+        0x15,
+        0x15,
+    },
+    {
+        0x16,
+        0x16,
+    },
+    {
+        0x17,
+        0xE,
+    },
+    {
+        0x18,
+        0x18,
+    },
+    {
+        0x19,
+        0x15,
+    },
+    {
+        0x21,
+        -1,
+    },
+};
+
+int gm_801601C4(s8 arg0)
 {
     f32 temp_f1;
 
-    temp_f1 = ((arg0 + 0x64) / 200.0f);
-    if (temp_f1 * 100.f == 50.0f) {
+    temp_f1 = (arg0 + 100) / 200.0F;
+    temp_f1 *= 100.0F;
+    if (temp_f1 == 50.0f) {
         return 0x7F;
     }
     if (temp_f1 > 50.0f) {
@@ -76,11 +394,12 @@ u8 gm_801601C4(s8 arg0)
     return 0x7F;
 }
 
-u8 gm_80160244(s8 arg0)
+int gm_80160244(s8 arg0)
 {
     f32 temp_f2;
 
-    temp_f2 = ((arg0 + 0x64) / 200.0f) * 100.0f;
+    temp_f2 = (arg0 + 100) / 200.0F;
+    temp_f2 *= 100.0F;
     if (temp_f2 == 50.0f) {
         return 0x7F;
     }
@@ -89,44 +408,23 @@ u8 gm_80160244(s8 arg0)
     }
     return (127.0f * (temp_f2 / 50.0f));
 }
-#pragma dont_inline reset
 
 void gm_801602C0(s8 arg0)
 {
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f3;
-    s32 var_r0;
-    s32 var_r0_2;
-    PAD_STACK(8); // maybe an inlined function somewhere
+    int a = gm_80160244(arg0);
+    int b = gm_801601C4(arg0);
 
-    temp_f3 = (arg0 + 0x64) / 200.0f;
-    temp_f1 = temp_f3 * 100.0f;
+    PAD_STACK(8);
 
-    if (temp_f1 == 50.0f) {
-        var_r0 = 0x7F;
-    } else if (temp_f1 > 50.0f) {
-        var_r0 = 0x7F;
-    } else {
-        var_r0 = (127.0f * (temp_f1 / 50.0f));
-    }
-
-    temp_f1_2 = temp_f3 * 100.0f;
-    if (temp_f1_2 == 50.0f) {
-        var_r0_2 = 0x7F;
-    } else if (temp_f1_2 > 50.0f) {
-        var_r0_2 = (127.0f * ((100.0f - temp_f1_2) / 50.0f));
-    } else {
-        var_r0_2 = 0x7F;
-    }
-
-    lbAudioAx_80024614(var_r0_2);
-    lbAudioAx_800245F4(var_r0);
+    lbAudioAx_80024614(b);
+    lbAudioAx_800245F4(a);
 }
 
+#pragma push
+#pragma dont_inline on
 void gm_801603B0(void)
 {
-    u8 temp_r31;
+    int temp_r31;
     s8 temp_r3;
 
     temp_r3 = gmMainLib_8015ED74();
@@ -135,93 +433,96 @@ void gm_801603B0(void)
     lbAudioAx_80024614(gm_801601C4(temp_r3));
     lbAudioAx_800245F4(temp_r31);
 }
+#pragma pop
 
-u32 fn_80160400(s32 cid)
+u32 fn_80160400(CharacterKind ckind)
 {
     struct VictoryTheme* theme = lbl_803D5480;
-    u8 id;
 
     while (true) {
-        if (theme->character_id == cid) {
+        if (theme->ckind == ckind) {
             return theme->theme_id;
         }
 
-        id = theme[1].character_id;
-        theme++;
+        {
+            CharacterKind ckind;
+            ckind = theme[1].ckind;
+            theme++;
 
-        if ((s32) id == 0x21) {
-            return -1;
+            if (ckind == CHKIND_NONE) {
+                return -1;
+            }
         }
     }
 }
 
-char* gm_80160438(s32 cid)
+char* gm_80160438(s32 ckind)
 {
     struct ResultAnimEntry* entry = lbl_803D53A8;
     s32 id;
 
     while (true) {
-        id = entry->character_id;
-        if (id == cid || id == 0x21) {
+        id = entry->ckind;
+        if (id == ckind || id == CHKIND_NONE) {
             return entry->path;
         }
-        id = entry[1].character_id;
+        id = entry[1].ckind;
         entry++;
-        if (id == 0x21) {
+        if (id == CHKIND_NONE) {
             return NULL;
         }
     }
 }
 
-bool gm_80160474(enum CharacterKind c_kind, enum MajorSceneKind scene)
+bool gm_80160474(CharacterKind ckind, MajorSceneKind scene)
 {
     switch (scene) {
     case MJ_CLASSIC_GOVER:
     case MJ_CLASSIC:
-        return lbl_803B75F8._380[c_kind];
+        return lbl_803B7978[ckind];
     case MJ_ADVENTURE_GOVER:
     case MJ_ADVENTURE:
-        return lbl_803B75F8._3C4[c_kind];
+        return lbl_803B79BC[ckind];
     default:
-        return lbl_803B75F8._408[c_kind];
+        return lbl_803B7A00[ckind];
     }
 }
 
-char* gm_801604DC(enum CharacterKind c_kind, enum MajorSceneKind scene)
+char* gm_801604DC(CharacterKind ckind, MajorSceneKind scene)
 {
     s16 var_r3;
 
     switch (scene) {
     case MJ_CLASSIC_GOVER:
     case MJ_CLASSIC:
-        var_r3 = lbl_803B75F8._380[c_kind];
+        var_r3 = lbl_803B7978[ckind];
         break;
     case MJ_ADVENTURE_GOVER:
     case MJ_ADVENTURE:
-        var_r3 = lbl_803B75F8._3C4[c_kind];
+        var_r3 = lbl_803B79BC[ckind];
         break;
     default:
-        var_r3 = lbl_803B75F8._408[c_kind];
+        var_r3 = lbl_803B7A00[ckind];
         break;
     }
     return un_8030813C(var_r3, scene) + 4;
 }
 
-char* gm_80160564(enum CharacterKind c_kind, enum MajorSceneKind scene)
+char* gm_80160564(CharacterKind ckind, MajorSceneKind scene)
 {
     s16 var_r3;
 
     switch (scene) {
     case MJ_CLASSIC_GOVER:
     case MJ_CLASSIC:
-        var_r3 = lbl_803B75F8._380[c_kind];
+        var_r3 = lbl_803B7978[ckind];
         break;
     case MJ_ADVENTURE_GOVER:
     case MJ_ADVENTURE:
-        var_r3 = lbl_803B75F8._3C4[c_kind];
+        var_r3 = lbl_803B79BC[ckind];
         break;
     default:
-        var_r3 = lbl_803B75F8._408[c_kind];
+        var_r3 = lbl_803B7A00[ckind];
         break;
     }
     return un_8030813C(var_r3, scene) + 0x24;
@@ -229,12 +530,10 @@ char* gm_80160564(enum CharacterKind c_kind, enum MajorSceneKind scene)
 
 u8 fn_801605EC(s32 arg0)
 {
-    struct lbl_803B78C8_0x6* entry = lbl_803B78C8;
-    s32 i;
-
-    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; entry++, i++) {
-        if (arg0 == entry->x1) {
-            return lbl_803B78C8[i].x0;
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if (arg0 == lbl_803B78C8[i].ckind) {
+            return lbl_803B78C8[i].idx;
         }
     }
     return NUM_UNLOCKABLE_CHARACTERS;
@@ -242,27 +541,68 @@ u8 fn_801605EC(s32 arg0)
 
 s8 gm_80160638(s32 arg0)
 {
-    s32 temp_r4 = gm_80164024(arg0);
-    struct lbl_803B78C8_0x6* entry = lbl_803B78C8;
-    u32 i;
-
-    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; entry++, i++) {
-        if (temp_r4 == entry->x1) {
-            return lbl_803B78C8[i].x0;
-        }
-    }
-    return NUM_UNLOCKABLE_CHARACTERS;
+    return fn_801605EC(gm_80164024(arg0));
 }
 
-/// #fn_801606A8
+static inline u8 fn_801606A8_inline(int arg0)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if (arg0 == lbl_803B78C8[i].idx) {
+            return lbl_803B78C8[i].ckind;
+        }
+    }
+    return CKIND_GANON;
+}
 
-/// #fn_80160710
+u8 fn_801606A8(int arg0)
+{
+    return gm_8016400C(fn_801606A8_inline(arg0));
+}
 
-/// #gm_8016075C
+u8 fn_80160710(int arg0)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if (arg0 == lbl_803B78C8[i].idx) {
+            return lbl_803B78C8[i].x2;
+        }
+    }
+    return 0x42;
+}
 
-/// #fn_801607A8
+int gm_8016075C(CharacterKind ckind)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if (ckind == lbl_803B78C8[i].ckind) {
+            return lbl_803B78C8[i].x4;
+        }
+    }
+    return 0x148;
+}
 
-/// #fn_801607F4
+u8 fn_801607A8(int arg0)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if (arg0 == lbl_803B790C[i][0]) {
+            return lbl_803B790C[i][1];
+        }
+    }
+    return 0x6F;
+}
+
+u8 fn_801607F4(int arg0)
+{
+    int i;
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if (arg0 == lbl_803B790C[i][1]) {
+            return lbl_803B790C[i][2];
+        }
+    }
+    return 0x42U;
+}
 
 u8 fn_80160840(u8 arg0)
 {
@@ -332,19 +672,97 @@ GXColor gm_80160968(u8 arg0)
     return lbl_803B7864[arg0];
 }
 
-/// #gm_80160980
+/// Get SJIS character name for a given CharacterKind
+const char* gm_80160980(u8 ckind)
+{
+    if (lbLang_IsSavedLanguageUS()) {
+        return lbl_803D4FDC[ckind];
+    } else {
+        return lbl_803D4D74[ckind];
+    }
+}
 
-/// #fn_801609E0
+const char* fn_801609E0(u8 ckind)
+{
+    if (lbLang_IsSavedLanguageUS()) {
+        if (lbl_803D50E4[ckind] != NULL) {
+            return lbl_803D50E4[ckind];
+        }
+        return lbl_803D4FDC[ckind];
+    } else {
+        if (lbl_803D5060[ckind] != NULL) {
+            return lbl_803D5060[ckind];
+        }
+        return lbl_803D4D74[ckind];
+    }
+}
 
-/// #gm_80160A60
+const char* gm_80160A60(int arg0)
+{
+    u8 ckind;
 
-/// #gm_80160B40
+    if (Player_GetPlayerSlotType(arg0) != Gm_PKind_NA) {
+        ckind = Player_GetPlayerCharacter(arg0);
+        if (ckind == CKIND_ZELDA || ckind == CKIND_SEAK) {
+            if (Player_80036394(arg0) == FTKIND_SEAK) {
+                if (lbLang_IsSavedLanguageUS()) {
+                    return lbl_803D4FDC[CKIND_SEAK];
+                } else {
+                    return lbl_803D4D74[CKIND_SEAK];
+                }
+            } else {
+                if (lbLang_IsSavedLanguageUS()) {
+                    return lbl_803D4FDC[CKIND_ZELDA];
+                } else {
+                    return lbl_803D4D74[CKIND_ZELDA];
+                }
+            }
+        }
+        if (lbLang_IsSavedLanguageUS()) {
+            return lbl_803D4FDC[ckind];
+        } else {
+            return lbl_803D4D74[ckind];
+        }
+    }
+    return NULL;
+}
+
+void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
+{
+    f32 var_f31;
+    const char* str;
+
+    if (lbLang_IsSavedLanguageUS()) {
+        text->default_kerning = 1;
+    }
+    str = arg2 ? fn_801609E0(ckind) : gm_80160980(ckind);
+    if (lbLang_IsSavedLanguageUS()) {
+        bool tmp = arg2 && lbl_803D50E4[ckind] != NULL;
+        var_f31 = tmp ? lbl_803B7784[ckind] : lbl_803B767C[ckind];
+    } else {
+        bool tmp = arg2 && lbl_803D5060[ckind] != NULL;
+        var_f31 = tmp ? lbl_803B7700[ckind] : lbl_803B75F8[ckind];
+    }
+    HSD_SisLib_803A6B98(text, 0.0F, 0.0F, str);
+    text->font_size.x *= var_f31;
+}
 
 /// #gm_80160C90
 
 /// #fn_80160DE8
 
-/// #fn_80160F58
+f32 fn_80160F58(u8 ckind)
+{
+    f32 result;
+    if (lbLang_IsSavedLanguageUS()) {
+        result = lbl_803D50E4[ckind] != NULL ? lbl_803B7784[ckind]
+                                             : lbl_803B767C[ckind];
+    } else {
+        result = lbl_803D5060[ckind] != NULL ? lbl_803B7700[ckind]
+                                             : lbl_803B75F8[ckind];
+    }
+    return result;
+}
 
 /// #fn_80161004
 
@@ -360,7 +778,28 @@ GXColor gm_80160968(u8 arg0)
 
 /// #gm_801623D8
 
-/// #gm_801623FC
+void gm_801623FC(int arg0)
+{
+    s32* temp_r30;
+    u32 var_r29;
+    u32* temp_r31;
+    u32* temp_r3;
+
+    var_r29 = arg0;
+    temp_r30 = gmMainLib_8015CCF0();
+    temp_r31 = gmMainLib_8015CCFC();
+    temp_r3 = &gmMainLib_8015EDBC()->x14;
+    if (var_r29 > *temp_r31) {
+        *temp_r31 = var_r29;
+    }
+    if (var_r29 > *temp_r3) {
+        *temp_r3 = var_r29;
+    }
+    if (var_r29 > 0x270F) {
+        var_r29 = 0x270F;
+    }
+    *temp_r30 = (s32) var_r29;
+}
 
 /// #gm_8016247C
 
@@ -400,9 +839,27 @@ void gm_80162B98(void)
 
 /// #gm_80162C48
 
-/// #fn_80162CCC
+bool fn_80162CCC(void)
+{
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D0D8(i)) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #gm_80162D1C
+bool gm_80162D1C(void)
+{
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (!gmMainLib_8015D0D8(i)) {
+            return false;
+        }
+    }
+    return true;
+}
 
 /// #gm_80162D6C
 
@@ -412,9 +869,27 @@ void gm_80162B98(void)
 
 /// #gm_80162E44
 
-/// #gm_80162EC8
+bool gm_80162EC8(void)
+{
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D200(i)) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #gm_80162F18
+bool gm_80162F18(void)
+{
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (!gmMainLib_8015D200(i)) {
+            return false;
+        }
+    }
+    return true;
+}
 
 /// #gm_80162F68
 
@@ -424,9 +899,27 @@ void gm_80162B98(void)
 
 /// #gm_80163040
 
-/// #fn_801630C4
+bool fn_801630C4(void)
+{
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D328(i)) {
+            return true;
+        }
+    }
+    return false;
+}
 
-/// #gm_80163114
+bool gm_80163114(void)
+{
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (!gmMainLib_8015D328(i)) {
+            return false;
+        }
+    }
+    return true;
+}
 
 /// #gm_80163164
 
@@ -444,7 +937,13 @@ void gm_80162B98(void)
 
 /// #gm_801634D4
 
-/// #gm_8016365C
+bool gm_8016365C(u8 arg0)
+{
+    if (!gmMainLib_8015D6BC(arg0)) {
+        return true;
+    }
+    return false;
+}
 
 /// #gm_80163690
 
@@ -452,7 +951,13 @@ void gm_80162B98(void)
 
 /// #gm_80163838
 
-/// #gm_801639C0
+bool gm_801639C0(u8 arg0)
+{
+    if (!gmMainLib_8015D710(arg0)) {
+        return true;
+    }
+    return false;
+}
 
 /// #gm_801639F4
 
@@ -555,9 +1060,9 @@ int fn_80163FA4(u8 arg0)
     return count;
 }
 
-u8 gm_8016400C(u8 arg0)
+u8 gm_8016400C(u8 ckind)
 {
-    return lbl_803B7888[arg0];
+    return lbl_803B7888[ckind];
 }
 
 u8 gm_80164024(u8 arg0)
@@ -647,22 +1152,28 @@ void gm_801647D0(void)
     *stage_unlock_mask = 0;
 }
 
-/// #gm_801647F8
-
-bool gm_80164840(u8 id)
+int gm_801647F8(u8 arg0)
 {
-    int i;
-    u16* temp_r31;
-    u8 var_r0 = 0;
-
-    temp_r31 = gmMainLib_8015ED8C();
-    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
-        if (lbl_803B75F8.id[id] == lbl_803B75F8.thing[i].unk1) {
-            var_r0 = lbl_803B75F8.thing[i].unk0;
-            break;
-        }
+    struct lbl_803D5168_t* var_r5 = lbl_803D5168;
+    if (arg0 == 0x20) {
+        arg0 = 0xE;
     }
-    if ((var_r0 == 11) || (*temp_r31 & (1LL << var_r0))) {
+    while (var_r5->x0 != 0x148) {
+        if (var_r5->x1 == arg0) {
+            return var_r5->x0;
+        }
+        var_r5++;
+    }
+    return 0x148;
+}
+
+/// Is a specific character unlocked?
+bool gm_80164840(u8 ckind)
+{
+    u16* temp_r31 = gmMainLib_8015ED8C();
+    u8 var_r0 = fn_801605EC(lbl_803B78A4[ckind]);
+
+    if (var_r0 == NUM_UNLOCKABLE_CHARACTERS || (*temp_r31 & (1LL << var_r0))) {
         return true;
     }
     return false;
@@ -769,7 +1280,7 @@ void fn_801652B0(s32 arg0, s32 arg1)
 /// #fn_801652D8
 
 /// creates the develop mode stress test
-HSD_GObj* gm_80165388(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+HSD_GObj* gm_80165388(u16 arg0, u8 arg1, u8 arg2, s32 arg3)
 {
     HSD_GObj* temp_r3;
 
@@ -878,7 +1389,7 @@ bool gm_80167140(MatchEnd* me)
     return false;
 }
 
-u8 fn_80167194(MatchEnd* me)
+int fn_80167194(MatchEnd* me)
 {
     return me->n_winners;
 }
@@ -938,7 +1449,34 @@ void fn_8016719C(s32 slot, s32 subchar)
     }
 }
 
-/// #gm_80167320
+void gm_80167320(int slot, bool arg1)
+{
+    if (Player_GetFlagsBit1(slot) == 0) {
+        if (gm_8016A1F8() && slot == 0 && fn_80169444(2)) {
+            int i;
+            for (i = 1; i < 6; i++) {
+                if (Player_GetFlagsBit1(i)) {
+                    ifStatus_802F6788(i);
+                    Player_80031EBC(i);
+                }
+                Player_SetSlottype(i, Gm_PKind_NA);
+            }
+            gm_8016A164();
+        }
+        if ((gm_8016B094() || gm_8016B0E8()) && Player_GetStocks(slot) == 0) {
+            gm_8016AC44(Player_GetPlayerCharacter(slot),
+                        Player_GetCostumeId(slot));
+        } else if (Stage_80224DC8(gm_8016B004())) {
+            fn_8016719C(slot, arg1);
+        } else {
+            fn_8016719C(slot, arg1);
+        }
+    } else if (!arg1) {
+        Player_80031EBC(slot);
+        Player_SetSlottype(slot, Gm_PKind_NA);
+        fn_80169550(slot);
+    }
+}
 
 /// #gm_80167470
 
@@ -967,11 +1505,30 @@ u8 gm_801677F0(void)
     return lbl_804D6598;
 }
 
-/// #gm_801677F8
+bool gm_801677F8(int port, int arg1)
+{
+    bool result = false;
+    if (arg1 == 0x78) {
+        if (GetRumbleSettingOfPort(port) != 0) {
+            result = true;
+        }
+    } else if (GetPersistentNameData(arg1)->x1A1 != 0) {
+        result = true;
+    }
+    return result;
+}
 
-/// #gm_80167858
+void gm_80167858(int port, int arg1, int arg2, int arg3)
+{
+    if (gm_801677F8(port, arg1)) {
+        lb_80014574(port, 3, arg2, arg3);
+    }
+}
 
-/// #gm_801678F8
+void gm_801678F8(int port, int arg1, int arg2)
+{
+    gm_80167858(port, 0x78, arg1, arg2);
+}
 
 void gm_8016795C(struct PlayerInitData* arg0)
 {
@@ -1130,7 +1687,7 @@ void gm_80167BC8(VsModeData* vs_data)
     // TODO :: some weird item copy thing that needs to be fixed
     i = 0;
     do {
-        if ((s32) lbl_803B75F8.pad_x24C[i] != 0x23) {
+        if ((s32) lbl_803B7844[i] != 0x23) {
             // prefs->item_mask = vs_data->data.rules.x20;
             if ((prefs->item_mask & (1LL << i))) {
                 vs_data->data.rules.x20 |= (1LL << prefs->item_mask);
@@ -1201,13 +1758,6 @@ static inline int pad_inline(SSSData* arg0, int base)
     }
     return -1;
 }
-
-static const u8 lbl_803B790C[0xB][3] = {
-    { 0x00, 0x09, 0x0B }, { 0x01, 0x11, 0x0D }, { 0x02, 0x13, 0x0E },
-    { 0x03, 0x15, 0x0C }, { 0x04, 0x19, 0x0F }, { 0x05, 0x1B, 0x10 },
-    { 0x06, 0x24, 0x11 }, { 0x07, 0x25, 0x12 }, { 0x08, 0x1C, 0x13 },
-    { 0x09, 0x1D, 0x14 }, { 0x0A, 0x1E, 0x15 },
-};
 
 static inline int get_flag_unk(u16 temp_r30)
 {
@@ -1303,7 +1853,13 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
 
 /// #gm_801688AC
 
-/// #gm_80168940
+int gm_80168940(MatchEnd* match_end)
+{
+    if (match_end->player_standings[0].slot_type == 0) {
+        return match_end->player_standings[0].xE;
+    }
+    return 0;
+}
 
 void gm_8016895C(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
 {
@@ -1319,15 +1875,167 @@ void gm_8016895C(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
 
 /// #fn_80168A6C
 
-/// #gm_80168B34
+f32 gm_80168B34(CharacterKind ckind, int arg1, int arg2)
+{
+    int base;
+    if (ckind == CKIND_GKOOPS) {
+        return 58.0F;
+    }
+    if (ckind == CKIND_BOY || ckind == CKIND_GIRL) {
+        return 26.0F;
+    }
+    if (ckind == CKIND_MASTERH) {
+        return 28.0F;
+    }
+    if (ckind == CKIND_CREZYH) {
+        return 27.0F;
+    }
+    if (ckind == CKIND_ZELDA || ckind == CKIND_SEAK) {
+        if (arg1 == 7) {
+            base = 0x19;
+        } else {
+            base = 0x12;
+        }
+    } else if (ckind == CHKIND_SANDBAG) {
+        return 59.0F;
+    } else if (ckind == CHKIND_POPO) {
+        base = 0xE;
+    } else if (ckind > CKIND_SEAK) {
+        base = ckind - 1;
+    }
+    return base + arg2 * 30;
+}
 
-/// #gm_80168BF8
+float gm_80168BF8(int arg0)
+{
+    CharacterKind ckind = Player_GetPlayerCharacter(arg0);
+    u32 costume = Player_GetCostumeId(arg0);
+    gm_80168B34(ckind, Player_80036394(arg0), costume);
+}
 
-/// #gm_80168C5C
+void gm_80168C5C(u32 arg0)
+{
+    switch (arg0) {
+    case 0:
+        lbAudioAx_800243F4(0x7C830);
+        break;
+    case 1:
+        lbAudioAx_800243F4(0x7C831);
+        break;
+    case 2:
+        lbAudioAx_800243F4(0x7C835);
+        break;
+    case 3:
+        lbAudioAx_800243F4(0x7C83A);
+        break;
+    case 4:
+        lbAudioAx_800243F4(0x7C83F);
+        break;
+    case 5:
+        lbAudioAx_800243F4(0x7C840);
+        break;
+    case 6:
+        lbAudioAx_800243F4(0x7C842);
+        break;
+    case 7:
+        lbAudioAx_800243F4(0x7C844);
+        break;
+    case 8:
+        lbAudioAx_800243F4(0x7C845);
+        break;
+    case 9:
+        lbAudioAx_800243F4(0x7C846);
+        break;
+    case 10:
+        lbAudioAx_800243F4(0x7C848);
+        break;
+    case 11:
+        lbAudioAx_800243F4(0x7C84A);
+        break;
+    case 12:
+        lbAudioAx_800243F4(0x7C84B);
+        break;
+    case 13:
+        lbAudioAx_800243F4(0x7C84D);
+        break;
+    case 14:
+        lbAudioAx_800243F4(0x7C83B);
+        break;
+    case 15:
+        lbAudioAx_800243F4(0x7C83D);
+        break;
+    case 16:
+        lbAudioAx_800243F4(0x7C84E);
+        break;
+    case 17:
+        lbAudioAx_800243F4(0x7C84F);
+        break;
+    case 19:
+        lbAudioAx_800243F4(0x7C850);
+        break;
+    case 18:
+        lbAudioAx_800243F4(0x7C851);
+        break;
+    case 20:
+        lbAudioAx_800243F4(0x7C834);
+        break;
+    case 21:
+        lbAudioAx_800243F4(0x7C843);
+        break;
+    case 22:
+        lbAudioAx_800243F4(0x7C832);
+        break;
+    case 23:
+        lbAudioAx_800243F4(0x7C83C);
+        break;
+    case 24:
+        lbAudioAx_800243F4(0x7C84C);
+        break;
+    case 25:
+        lbAudioAx_800243F4(0x7C836);
+        break;
+    case 26:
+        lbAudioAx_800243F4(0x7C849);
+        break;
+    case 29:
+        lbAudioAx_800243F4(0x7C838);
+        break;
+    }
+}
 
-/// #fn_80168E54
+void fn_80168E54(s8 arg0, s8 arg1, u8 arg2, u8 arg3)
+{
+    if (arg3 != 0) {
+        switch (arg2) {
+        case 0:
+            lbAudioAx_800237A8(0xC354, 0x7F, 0x40);
+            break;
+        case 1:
+            lbAudioAx_800237A8(0xC352, 0x7F, 0x40);
+            break;
+        case 2:
+            lbAudioAx_800237A8(0xC353, 0x7F, 0x40);
+            break;
+        }
+    } else {
+        if (arg0 == 0x12 && arg1 == 7) {
+            arg0 = 0x13;
+        } else if (arg0 == 0x13 && arg1 == 0x13) {
+            arg0 = 0x12;
+        }
+        gm_80168C5C(arg0);
+    }
+}
 
-/// #fn_80168F2C
+void fn_80168F2C(void)
+{
+    if (lbl_804D659A == 0) {
+        lbl_804D659A = 3;
+        lbAudioAx_80023870(0x7E, 0x7F, 0x40, 1);
+    } else {
+        lbl_804D659A--;
+    }
+}
 
 void fn_80168F7C(void)
 {
@@ -1353,13 +2061,37 @@ void gm_80168FC4(void)
 
 /// #fn_80169000
 
-/// #gm_80169238
+u8 gm_80169238(u8 ckind)
+{
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
+        return 0;
+    }
+    return lbl_803D51A0[ckind].ncolors;
+}
 
-/// #gm_80169264
+u8 gm_80169264(u8 ckind)
+{
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
+        return 0;
+    }
+    return lbl_803D51A0[ckind].x1;
+}
 
-/// #gm_80169290
+u8 gm_80169290(u8 ckind)
+{
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
+        return 0;
+    }
+    return lbl_803D51A0[ckind].x3;
+}
 
-/// #gm_801692BC
+u8 gm_801692BC(u8 ckind)
+{
+    if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
+        return 0;
+    }
+    return lbl_803D51A0[ckind].x2;
+}
 
 void gm_801692E8(u32 secs, datetime* datetime)
 {
@@ -1538,11 +2270,20 @@ void gm_8016A424(s8 arg0)
     lbl_8046B488.xF = arg0;
 }
 
-/// #gm_8016A434
+void gm_8016A434(void)
+{
+    lbl_8046B488.unk_10_b3 = 1;
+}
 
-/// #fn_8016A450
+void fn_8016A450(void)
+{
+    lbl_8046B488.unk_10_b4 = 1;
+}
 
-/// #fn_8016A46C
+void fn_8016A46C(void)
+{
+    lbl_8046B488.unk_10_b6 = 1;
+}
 
 /// #fn_8016A488
 

@@ -115,10 +115,10 @@ void fn_8012E3B4(Fighter_GObj* gobj)
 
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirHi, motion_flags,
-                              fp->cur_anim_frame, 0.0f, 1.0f, NULL);
+                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
 }
 
 void fn_8012E44C(Fighter_GObj* gobj)
@@ -126,8 +126,8 @@ void fn_8012E44C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x16C, motion_flags, fp->cur_anim_frame, 0,
-                              1, NULL);
+    Fighter_ChangeMotionState(gobj, 0x16C, motion_flags, fp->cur_anim_frame, 1,
+                              0, NULL);
     setDamageCallbacks(gobj);
     setAccessory4Callback(gobj);
 }
@@ -138,7 +138,7 @@ void ftYs_SpecialHi_Anim(Fighter_GObj* gobj)
 
     u8 _[8];
 
-    if (fp->input.held_inputs & 0x200) {
+    if (fp->input.held_inputs & HSD_PAD_B) {
         fp->mv.ys.specialhi.x4 += 1;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
@@ -152,7 +152,7 @@ void ftYs_SpecialAirHi_Anim(Fighter_GObj* gobj)
 
     u8 _[8];
 
-    if (fp->input.held_inputs & 0x200) {
+    if (fp->input.held_inputs & HSD_PAD_B) {
         fp->mv.ys.specialhi.x4 += 1;
     }
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
@@ -179,9 +179,7 @@ void ftYs_SpecialAirHi_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.ys.specialhi.x0 != 0) {
-        // ft_80083A48(NULL, fn_8012E44C);
         ft_80083A48(gobj, fn_8012E44C);
-        // return;
     } else {
         ft_80082C74(gobj, fn_8012E44C);
     }

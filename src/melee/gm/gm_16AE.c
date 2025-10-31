@@ -185,22 +185,22 @@ bool gm_8016B124(void)
 
 void fn_8016B138(void)
 {
-    lbl_8046B6A0.x24C8.x8 = 0;
+    lbl_8046B6A0.x24C8.is_teams = false;
 }
 
 bool gm_8016B14C(void)
 {
-    return lbl_8046B6A0.x24C8.x8 == 0;
+    return lbl_8046B6A0.x24C8.is_teams == false;
 }
 
 bool gm_8016B168(void)
 {
-    return lbl_8046B6A0.x24C8.x8 == 1;
+    return lbl_8046B6A0.x24C8.is_teams == true;
 }
 
 bool gm_8016B184(void)
 {
-    if (lbl_8046B6A0.is_singleplayer == 1) {
+    if (lbl_8046B6A0.is_singleplayer == true) {
         return true;
     }
     return false;
@@ -534,7 +534,7 @@ void fn_8016B918(void)
     if (!temp_r3->x4_1) {
         return;
     }
-    if (temp_r3->x8 != 1) {
+    if (temp_r3->is_teams != true) {
         return;
     }
 
@@ -610,7 +610,7 @@ int fn_8016BC74(void)
     PAD_STACK(0x18);
 
     if (gm_8016B41C() || gm_801A4310() == MJ_CHALLENGER_APPROACH ||
-        (gm_801A4310() == 2 && gm_801A42C4() == 0x81))
+        (gm_801A4310() == MJ_VS && gm_801A42C4() == 0x81))
     {
         temp_r3 = Player_GetPlayerId(0);
         temp_r4 = &HSD_PadCopyStatus[(u8) temp_r3];
@@ -871,13 +871,13 @@ int fn_8016C35C(void)
             }
         }
     }
-    if (lbl_8046B6A0.x24C8.x8 == 0) {
+    if (!lbl_8046B6A0.x24C8.is_teams) {
         temp_r3_2 = fn_8016BF74();
         if (temp_r3_2 != 0) {
             return temp_r3_2;
         }
     }
-    if (lbl_8046B6A0.x24C8.x8 == 1) {
+    if (lbl_8046B6A0.x24C8.is_teams == true) {
         temp_r3 = fn_8016C0C8();
         if (temp_r3 != 0) {
             return temp_r3;
@@ -893,13 +893,13 @@ void fn_8016C46C(int arg0)
 {
     if (lbl_8046B6A0.unk_9 != 0) {
         switch (gm_801A4310()) {
-        case 3:
+        case MJ_CLASSIC:
             fn_8017EE40(arg0);
             return;
-        case 4:
+        case MJ_ADVENTURE:
             fn_8017E8A4(arg0);
             return;
-        case 5:
+        case MJ_ALLSTAR:
             fn_8018A364(arg0);
             break;
         }
@@ -941,7 +941,7 @@ int gm_8016C5C0(int pl_slot)
         tmp->x0 = (UNK_T) gm_801A4BA8();
         gm_80166378(tmp);
     }
-    if (lbl_8046B6A0.x24C8.x8 == 0) {
+    if (!lbl_8046B6A0.x24C8.is_teams) {
         return tmp->x58[pl_slot].x5;
     }
     return tmp->x24[tmp->x58[pl_slot].x7].x0;
@@ -990,7 +990,7 @@ void fn_8016C7F0(void)
     s32 sp20;
     u8 _[0x18];
 
-    s32* temp_r30_2;
+    u32* temp_r30_2;
     int var_r29;
     u8 var_r29_2;
     int var_r28;
@@ -1024,7 +1024,7 @@ void fn_8016C7F0(void)
         if (gm_801A4310() == MJ_TARGET_TEST) {
             var_r29_2 = gm_80164024(*temp_r29_2);
         } else {
-            var_r29_2 = gm_80164024(temp_r30->x0);
+            var_r29_2 = gm_80164024(temp_r30->x0.ckind);
         }
         temp_r30_2 = gmMainLib_8015D438(var_r29_2);
         gmMainLib_8015D450(var_r29_2);
@@ -1408,7 +1408,7 @@ static inline void fn_8016D634_inline(struct lbl_8046B6A0_24C_t* dst)
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
     if (lbl_8046B6A0.match_over == 0) {
         *dst = tmp->x24C;
-        dst->x6 = tmp->x24C8.x8;
+        dst->is_teams = tmp->x24C8.is_teams;
         dst->x4 = tmp->match_result;
         gm_80166378(dst);
         fn_8016C46C_dontinline((int) dst);
@@ -1446,7 +1446,7 @@ void fn_8016D634(void)
         temp_r6 = &tmp->x24C;
         if (lbl_8046B6A0.match_over == 0) {
             *temp_r6 = tmp->x24C;
-            temp_r6->x6 = lbl_8046B6A0.x24C8.x8;
+            temp_r6->is_teams = lbl_8046B6A0.x24C8.is_teams;
             temp_r6->x4 = tmp->match_result;
             gm_80166378(temp_r6);
             fn_8016C46C_dontinline((int) temp_r6);
@@ -1563,9 +1563,9 @@ void fn_8016D8AC(int arg0, struct PlayerInitData* arg1)
     tmp->FighterMatchInfo[arg0].x4_b1 = arg1->xC_b3;
     tmp->FighterMatchInfo[arg0].x4_b0 = arg1->xC_b2;
     if (arg1->xC_b2) {
-        Player_SetFlagsBit5(arg0, 1);
+        Player_SetFlagsBit5(arg0, true);
     } else {
-        Player_SetFlagsBit5(arg0, 0);
+        Player_SetFlagsBit5(arg0, false);
     }
     tmp->FighterMatchInfo[arg0].x4_b2 = arg1->xC_b4;
     if (arg1->xC_b4) {
@@ -1611,7 +1611,7 @@ void fn_8016DCC0(StartMeleeData* arg0)
     lbl_8046B6A0.x24C8 = arg0->rules;
 
     lbl_8046B6A0.x24C.x5 = arg0->rules.x0_0;
-    lbl_8046B6A0.x24C.x6 = arg0->rules.x8;
+    lbl_8046B6A0.x24C.is_teams = arg0->rules.is_teams;
     if (arg0->rules.x7 != 0) {
         lbl_8046B6A0.unk_B = arg0->rules.x7;
     }
@@ -1716,7 +1716,7 @@ void fn_8016DEEC(void)
 
             for (j = 0; j < 6; j++) {
                 if (j != i && Player_GetPlayerSlotType(j) != Gm_PKind_NA &&
-                    (tmp->x24C8.x8 != 1 ||
+                    (tmp->x24C8.is_teams != true ||
                      Player_GetTeam(i) != Player_GetTeam(j)))
                 {
                     if (var_r23 == -1 ||
@@ -1808,8 +1808,7 @@ void fn_8016E2BC(void)
     float var_f1_2;
     bool var_r0;
     int i;
-    int temp_r27;
-    int temp_r24;
+    bool is_teams;
     PAD_STACK(0xC);
 
     Player_80036DA4();
@@ -1833,10 +1832,10 @@ void fn_8016E2BC(void)
             }
         }
         Player_80032768(0, &sp24);
-        temp_r27 = tmp->x24C8.x8 == 1;
+        is_teams = tmp->x24C8.is_teams == true;
         Player_SetUnk45(0, fn_80160840(gm_80160854(
                                Player_GetPlayerId(0), Player_GetTeam(0),
-                               temp_r27, Player_GetPlayerSlotType(0))));
+                               is_teams, Player_GetPlayerSlotType(0))));
         Player_80031AD0(0);
         if (tmp->FighterMatchInfo[0].x4_b4) {
             lbAudioAx_800237A8(0x41F4E, 0x7F, 0x40);
@@ -1866,10 +1865,10 @@ void fn_8016E2BC(void)
                     }
                 }
                 Player_80032768(i, &sp18);
-                temp_r24 = tmp->x24C8.x8 == 1;
+                is_teams = tmp->x24C8.is_teams == true;
                 Player_SetUnk45(
                     i, fn_80160840(gm_80160854(Player_GetPlayerId(i),
-                                               Player_GetTeam(i), temp_r24,
+                                               Player_GetTeam(i), is_teams,
                                                Player_GetPlayerSlotType(i))));
                 Player_80031AD0(i);
                 if (tmp->FighterMatchInfo[i].x4_b4) {
@@ -2013,7 +2012,7 @@ void gm_8016E9C8(void* arg0_raw)
 
     if (lbl_8046B6A0.match_over == 0) {
         arg0->xC = lbl_8046B6A0.x24C;
-        arg0->xC.x6 = lbl_8046B6A0.x24C8.x8;
+        arg0->xC.is_teams = lbl_8046B6A0.x24C8.is_teams;
         arg0->xC.x4 = lbl_8046B6A0.match_result;
         gm_80166378(&arg0->xC);
         fn_8016C46C_dontinline((int) &arg0->xC);
@@ -2106,7 +2105,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
     float var_f1;
     u8 temp_r30;
     u8 temp_r29;
-    int temp_r27;
+    bool is_teams;
     s8 temp_r3;
     PAD_STACK(4);
 
@@ -2137,10 +2136,10 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
             }
         }
         Player_80032768(arg0, &sp18);
-        temp_r27 = lbl_8046B6A0.x24C8.x8 == 1;
+        is_teams = lbl_8046B6A0.x24C8.is_teams == true;
         Player_SetUnk45(
             arg0, fn_80160840(gm_80160854(Player_GetPlayerId(arg0),
-                                          Player_GetTeam(arg0), temp_r27,
+                                          Player_GetTeam(arg0), is_teams,
                                           Player_GetPlayerSlotType(arg0))));
         Player_80031AD0(arg0);
         if (lbl_8046B6A0.FighterMatchInfo[arg0].x4_b4) {
@@ -2201,9 +2200,9 @@ void gm_8016F088(StartMeleeData* arg0)
     }
 }
 
-void gm_8016F120(int arg0)
+int gm_8016F120(int arg0)
 {
-    gmMainLib_8015DADC(arg0);
+    return gmMainLib_8015DADC(arg0);
 }
 
 void fn_8016F140(int arg0)

@@ -4,6 +4,7 @@
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
+#include "baselib/memory.h"
 #include "gm/gm_1601.h" // for gm_801677E8
 #include "gm/gm_16AE.h"
 #include "gm/gm_1A3F.h"
@@ -152,7 +153,10 @@ void un_80306BB8(HSD_GObj* gobj)
 
 /// #un_80306C5C
 
-/// #Toy_RemoveUserData
+void Toy_RemoveUserData(void* ptr)
+{
+    HSD_Free(ptr);
+}
 
 /// #un_80306D14
 
@@ -250,7 +254,7 @@ void un_803122D0_OnInit(void)
 
     un_804D6EA1 = 0;
 
-    if (gm_8016B498() || gm_801A4310() == 12) {
+    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
         targetPtr = &userData->x19A;
     } else {
         targetPtr = gmMainLib_8015CC84();

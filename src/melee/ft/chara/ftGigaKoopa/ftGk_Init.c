@@ -10,6 +10,9 @@
 #include "ftKoopa/forward.h"
 
 #include "ftKoopa/ftKp_Init.h"
+#include "ftKoopa/ftKp_SpecialN.h"
+#include "ftKoopa/ftKp_SpecialLw.h"
+#include "ftKoopa/ftKp_SpecialHi.h"
 #include "ftKoopa/types.h"
 
 #include "it/forward.h"

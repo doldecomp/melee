@@ -39,7 +39,7 @@ bool ftCo_SpecialAir_CheckInput(Fighter_GObj* gobj)
                 return false;
             }
             if (fp->input.lstick.x * fp->facing_dir < -p_ftCommonData->x220) {
-                ftCommon_8007D9FC(fp);
+                ftCommon_UpdateFacing(fp);
             }
             ftData_SpecialAirS[fp->kind](gobj);
             fp->x2227_b5 = true;

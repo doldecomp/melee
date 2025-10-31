@@ -142,7 +142,13 @@ typedef struct ResultsData ResultsData;
 typedef struct CameraVsData CameraVsData;
 typedef struct TmVsData TmVsData;
 typedef struct DebugGameOverData DebugGameOverData;
+typedef struct Unk1PData Unk1PData;
 typedef struct UnkAllstarData UnkAllstarData;
+typedef struct UnkAdventureData UnkAdventureData;
 typedef struct UnkMultimanData UnkMultimanData;
+typedef struct gmm_x0_528_t gmm_x0_528_t;
+typedef struct Unk1PData_x24 Unk1PData_x24;
+typedef struct lbl_8046DBD8_t lbl_8046DBD8_t;
+typedef struct VsApproachData VsApproachData;
 
 #endif

@@ -405,7 +405,7 @@
 //     },
 //     {
 //         // MSBomb
-//         it_803F5E00,
+//         ItemStateTable_MsBomb,
 //         it_3F14_Logic19_Spawned,
 //         NULL,
 //         it_3F14_Logic19_PickedUp,

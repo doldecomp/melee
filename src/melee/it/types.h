@@ -7,6 +7,7 @@
 #include "cm/forward.h"
 
 #include "ft/types.h"
+#include "gm/types.h"
 
 #include "it/forward.h" // IWYU pragma: export
 
@@ -194,7 +195,7 @@ typedef struct it_266F_ItemVars {
     s32 x10;
     s32 x14;
     UnkFlagStruct x18;
-    Vec3 x1C[2];
+    struct lbColl_8000A10C_arg0_t x1C;
 } it_266F_ItemVars;
 
 struct Item {
@@ -283,7 +284,7 @@ struct Item {
 
     HSD_GObj* x51C;            // Related to the owner gobj
     CameraBox* x520_cameraBox; // CameraBox
-    FtCmdState x524_cmd;       // should this be CommandInfo* instead?
+    CommandInfo x524_cmd;       // should this be CommandInfo* instead?
                                // f32 x528;
                                // void* x52C_item_script; // Script parse?
                                // u32 x530;
@@ -529,7 +530,9 @@ struct Item {
     UnkFlagStruct xDD3_flag;
     union {
         itBombHei_ItemVars bombhei;
+        itBox_ItemVars box;
         itCapsule_ItemVars capsule;
+        itDosei_ItemVars dosei;
         itChicorita_ItemVars chicorita;
         itClimbersBlizzard_ItemVars climbersblizzard;
         itCoin_ItemVars coin;
@@ -537,6 +540,7 @@ struct Item {
         itEgg_ItemVars egg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
+        itFlipper_ItemVars flipper;
         itFoods_ItemVars foods;
         itFoxBlaster_ItemVars foxblaster;
         itFoxIllusion_ItemVars foxillusion;
@@ -567,17 +571,23 @@ struct Item {
         itLinkHookshot_ItemVars linkhookshot;
         itMBall_ItemVars mball;
         itMato_ItemVars mato;
+        itMsBomb_ItemVars msbomb;
         itNokoNoko_ItemVars nokonoko;
         itOctarock_ItemVars octarock;
         itPeachTurnip_ItemVars peachturnip;
         itPikachutJoltGround_ItemVars pikachujoltground;
+        itPikachutJoltAir_ItemVars pikachujoltair;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
         itPokemon_ItemVars pokemon;
+        itSamusBomb_ItemVars samusbomb;
         itSamusGrapple_ItemVars samusgrapple;
+        itSeakNeedleThrown_ItemVars seakneedlethrown;
+        itSonans_ItemVars sonans;
         itStar_ItemVars star;
         itSword_ItemVars sword;
+        itTaru_ItemVars taru;
         itTincle_ItemVars tincle;
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
@@ -585,6 +595,9 @@ struct Item {
         itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
         itMasterHandBullet_ItemVars masterhandbullet;
         itMasterHandLaser_ItemVars masterhandlaser;
+        itUnk4_ItemVars unk4;
+        itStarRodStar_ItemVars starrodstar;
+        itZeldaDinFire_ItemVars zeldadinfire;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

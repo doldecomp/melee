@@ -4,12 +4,13 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ft/ft_0D14.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_FallSpecial.h"
+#include "ftCommon/ftCo_Landing.h"
 #include "ftMars/types.h"
 
 #include <common_structs.h>
@@ -102,7 +103,7 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
     }
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
@@ -127,7 +128,7 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
     }
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
-            ftCommon_8007D9FC(fp);
+            ftCommon_UpdateFacing(fp);
             ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
@@ -165,7 +166,7 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
         } else {
             da = fp->dat_attrs;
             attr2 = &fp->co_attrs;
-            ftCommon_8007D494(fp, da->x44, da->x48);
+            ftCommon_Fall(fp, da->x44, da->x48);
             ftCommon_8007D344(fp, 0.0f, attr2->air_drift_stick_mul * da->x28,
                               attr2->air_drift_max * da->x28);
         }
@@ -203,12 +204,12 @@ void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
                 fp->cmd_vars[2] = 1;
             }
         } else {
-            ftCommon_8007D494(fp, da->x44, da->x48);
+            ftCommon_Fall(fp, da->x44, da->x48);
             ftCommon_8007D344(fp, 0.0f, attr2->air_drift_stick_mul * da->x28,
                               attr2->air_drift_max * da->x28);
         }
     } else {
-        ftCommon_8007D494(fp, attr2->grav, attr2->terminal_vel);
+        ftCommon_Fall(fp, attr2->grav, attr2->terminal_vel);
         ftCommon_8007CF58(fp);
     }
 }
@@ -219,7 +220,7 @@ void ftMs_SpecialHi_80138884(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* da = fp->dat_attrs;
-    ftCo_800D5CB0(gobj, 0, da->x2C);
+    ftCo_LandingFallSpecial_Enter(gobj, false, da->x2C);
 }
 
 // 801388B4 00135494

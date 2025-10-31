@@ -11,8 +11,8 @@
 #include <dolphin/mtx.h>
 
 /* 2DDB38 */ UNK_RET it_802DDB38(UNK_PARAMS);
-/* 2DDBE8 */ UNK_RET it_802DDBE8(UNK_PARAMS);
-/* 2DDC8C */ UNK_RET fn_802DDC8C(UNK_PARAMS);
+/* 2DDBE8 */ void it_802DDBE8(Item_GObj*);
+/* 2DDC8C */ void fn_802DDC8C(Item_GObj*);
 /* 2DDD38 */ UNK_RET it_802DDD38(UNK_PARAMS);
 /* 2DDEB4 */ UNK_RET it_802DDEB4(UNK_PARAMS);
 /* 2DE040 */ void it_802DE040(Item_GObj*);

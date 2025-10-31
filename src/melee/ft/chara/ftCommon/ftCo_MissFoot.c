@@ -21,7 +21,7 @@ void ftCo_8009F39C(Fighter_GObj* gobj)
     fp->x8c_kb_vel.y = 0;
     Fighter_ChangeMotionState(gobj, ftCo_MS_MissFoot, Ft_MF_None, 0, 1, 0,
                               NULL);
-    ftCommon_8007D468(fp);
+    ftCommon_ClampAirDrift(fp);
     if (fp->ground_or_air == GA_Ground) {
         ftCommon_8007D5D4(fp);
     }
