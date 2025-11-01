@@ -1602,8 +1602,8 @@ bool mpColl_80044AD8_Ceiling(CollData* coll, int flags)
             coll->x4C_joint_id);
     }
     if (hit_ceiling) {
-        coll->env_flags |= 0x2000;
-        coll->env_flags |= 0x4000;
+        coll->env_flags |= Collide_CeilingPush;
+        coll->env_flags |= Collide_CeilingHug;
         return true;
     }
 
@@ -1617,7 +1617,7 @@ bool mpColl_80044AD8_Ceiling(CollData* coll, int flags)
             line_id, &vec, &sp28, &coll->ceiling.flags, &coll->ceiling.normal);
         if ((ceiling_id != -1) && (sp28 < 0.0F)) {
             coll->ceiling.index = ceiling_id;
-            coll->env_flags |= 0x2000;
+            coll->env_flags |= Collide_CeilingPush;
             return true;
         }
     }
@@ -3926,7 +3926,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             if (var_r26) {
                 var_r28 |= 1;
             } else {
-                arg0->env_flags &= 0xFFFFFFC0;
+                arg0->env_flags &= ~Collide_LeftWallMask;
             }
             var_f30 = arg0->cur_pos.x;
             arg0->x34_flags.b5 = true;
@@ -3936,7 +3936,7 @@ bool fn_8004ACE4(CollData* arg0, int arg1)
             if (var_r25) {
                 var_r28 |= 2;
             } else {
-                arg0->env_flags &= 0xFFFFF03F;
+                arg0->env_flags &= ~Collide_RightWallMask;
             }
             var_f31 = arg0->cur_pos.x;
             arg0->x34_flags.b5 = true;
@@ -4184,7 +4184,7 @@ bool mpColl_8004B894_RightWall(CollData* coll)
     if (mpColl_80044E10_RightWall_inline2(coll, f1, f2, f31, f30, &line_id)) {
         mpColl_80044E10_RightWall_inline(line_id);
         result = true;
-        coll->env_flags |= 0x800;
+        coll->env_flags |= Collide_RightWallHug;
     }
 
     f1 = coll->cur_pos_correct.x + coll->xC4_ecb.bottom.x;
