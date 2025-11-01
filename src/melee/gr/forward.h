@@ -14,7 +14,7 @@ typedef struct UnkStage6B0 UnkStage6B0;
 typedef struct UnkStageDatInternal UnkStageDatInternal;
 typedef struct UnkStageDat UnkStageDat;
 
-#ifdef M2CTX
+#ifdef M2C
 typedef struct Ground_GObj Ground_GObj;
 struct Ground_GObj {
     /*  +0 */ u16 classifier;

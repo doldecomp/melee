@@ -5,7 +5,7 @@
 
 #include "ty/forward.h"
 
-#ifdef M2CTX
+#ifdef M2C
 #define GET_TOY(gobj) ((Toy*) HSD_GObjGetUserData((HSD_GObj*) gobj))
 #else
 #define GET_TOY(gobj) ((Toy*) HSD_GObjGetUserData(gobj))
