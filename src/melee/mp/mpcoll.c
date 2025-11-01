@@ -3893,158 +3893,163 @@ bool mpColl_8004AB80(CollData* arg0)
 
 #pragma push
 #pragma dont_inline on
-bool fn_8004ACE4(CollData* arg0, int arg1)
+bool fn_8004ACE4(CollData* coll, int arg1)
 {
-    int sp14;
-    int sp10;
+    bool touching_floor; // r29
+    u32 left_right;      // r28
+    bool prev_b6;        // r27
 
-    f32 var_f31;
-    f32 var_f30;
-    f32 var_f29;
-    f32 var_f28;
-
-    bool var_r29;
-    u32 var_r28;
-    bool temp_r27;
-    bool var_r26;
-    bool var_r25;
-    bool var_r25_2;
-    bool var_r26_2;
-    int temp_r23;
-    int temp_r22;
-    bool var_r23;
-    bool var_r4;
-
-    var_r29 = false;
-    var_r28 = 0;
+    touching_floor = false;
+    left_right = 0;
     do {
-        var_r25 = 0;
-        temp_r27 = arg0->x34_flags.b6;
-        var_r26 = 0;
-        if (mpColl_80049778_LeftWall(arg0)) {
-            var_r26 = mpColl_80049EAC_LeftWall(arg0);
-            if (var_r26) {
-                var_r28 |= 1;
+        float x_after_right;   // f31
+        float x_after_left;    // f30
+        float y_after_ceiling; // f29
+        float y_after_floor;   // f28
+
+        bool hit_left;    // r26
+        bool hit_right;   // r25
+        bool hit_floor;   // r25
+        bool hit_ceiling; // r26
+        hit_right = false;
+        prev_b6 = coll->x34_flags.b6;
+        hit_left = 0;
+        if (mpColl_80049778_LeftWall(coll)) {
+            hit_left = mpColl_80049EAC_LeftWall(coll);
+            if (hit_left) {
+                left_right |= 1;
             } else {
-                arg0->env_flags &= ~Collide_LeftWallMask;
+                coll->env_flags &= ~Collide_LeftWallMask;
             }
-            var_f30 = arg0->cur_pos.x;
-            arg0->x34_flags.b5 = true;
+            x_after_left = coll->cur_pos.x;
+            coll->x34_flags.b5 = true;
         }
-        if (mpColl_80048AB0_RightWall(arg0)) {
-            var_r25 = mpColl_800491C8_RightWall(arg0);
-            if (var_r25) {
-                var_r28 |= 2;
+        if (mpColl_80048AB0_RightWall(coll)) {
+            hit_right = mpColl_800491C8_RightWall(coll);
+            if (hit_right) {
+                left_right |= 2;
             } else {
-                arg0->env_flags &= ~Collide_RightWallMask;
+                coll->env_flags &= ~Collide_RightWallMask;
             }
-            var_f31 = arg0->cur_pos.x;
-            arg0->x34_flags.b5 = true;
+            x_after_right = coll->cur_pos.x;
+            coll->x34_flags.b5 = true;
         }
-        if (mpColl_80049778_LeftWall(arg0)) {
-            var_r26 |= mpColl_80049EAC_LeftWall(arg0);
-            if (var_r26) {
-                var_r28 |= 1;
+        if (mpColl_80049778_LeftWall(coll)) {
+            hit_left |= mpColl_80049EAC_LeftWall(coll);
+            if (hit_left) {
+                left_right |= 1;
             }
-            var_f30 = arg0->cur_pos.x;
-            arg0->x34_flags.b5 = true;
+            x_after_left = coll->cur_pos.x;
+            coll->x34_flags.b5 = true;
         }
-        if (mpColl_80048AB0_RightWall(arg0)) {
-            var_r25 |= mpColl_800491C8_RightWall(arg0);
-            if (var_r25) {
-                var_r28 |= 2;
+        if (mpColl_80048AB0_RightWall(coll)) {
+            hit_right |= mpColl_800491C8_RightWall(coll);
+            if (hit_right) {
+                left_right |= 2;
             }
-            var_f31 = arg0->cur_pos.x;
-            arg0->x34_flags.b5 = true;
+            x_after_right = coll->cur_pos.x;
+            coll->x34_flags.b5 = true;
         }
-        if (var_r26 && var_r25) {
-            mpColl_8004C864(arg0, 0, var_f31, var_f30);
+
+        if (hit_left && hit_right) {
+            mpColl_8004C864(coll, false, x_after_right, x_after_left);
         }
-        var_r26_2 = 0;
-        var_r25_2 = 0;
-        if (mpColl_80044AD8_Ceiling(arg0, var_r28) && mpColl_8004AB80(arg0)) {
-            var_r26_2 = 1;
-            var_f29 = arg0->cur_pos.y;
+
+        hit_ceiling = false;
+        hit_floor = false;
+        if (mpColl_80044AD8_Ceiling(coll, left_right) && mpColl_8004AB80(coll))
+        {
+            hit_ceiling = true;
+            y_after_ceiling = coll->cur_pos.y;
         }
-        if (mpColl_800488F4(arg0)) {
-            if (mpColl_80043BBC(arg0, &sp14)) {
-                mpColl_80043C6C(arg0, sp14, 0);
+        if (mpColl_800488F4(coll)) {
+            int wall_id; // sp14
+            if (mpColl_80043BBC(coll, &wall_id)) {
+                mpColl_80043C6C(coll, wall_id, false);
             }
-            if (mpColl_80043E90(arg0, &sp14)) {
-                mpColl_80043F40(arg0, sp14, 0);
+            if (mpColl_80043E90(coll, &wall_id)) {
+                mpColl_80043F40(coll, wall_id, false);
             }
-            var_f28 = arg0->cur_pos.y;
-            var_r29 = 1;
-            var_r25_2 = 1;
-            if (mpColl_80044AD8_Ceiling(arg0, var_r28) &&
-                mpColl_8004AB80(arg0))
+            y_after_floor = coll->cur_pos.y;
+            touching_floor = true;
+            hit_floor = true;
+            if (mpColl_80044AD8_Ceiling(coll, left_right) &&
+                mpColl_8004AB80(coll))
             {
-                var_f29 = arg0->cur_pos.y;
-                var_r26_2 = 1;
+                y_after_ceiling = coll->cur_pos.y;
+                hit_ceiling = true;
             }
         } else {
-            temp_r22 = arg0->floor.index;
-            var_r23 = 0;
-            if (mpLib_80054ED8(temp_r22) &&
-                mpLineGetKind(temp_r22) == CollLine_Floor)
+            int old_x3C;                      // r23
+            bool var_r23 = false;             // r23
+            int floor_id = coll->floor.index; // r22
+            if (mpLib_80054ED8(floor_id) &&
+                mpLineGetKind(floor_id) == CollLine_Floor)
             {
                 if (arg1 & 1) {
-                    if (mpColl_8004A678_Floor(arg0, temp_r22)) {
-                        arg0->x34_flags.b5 = true;
-                        var_r29 = 0;
-                        var_r25_2 = 1;
-                        var_f28 = arg0->cur_pos.y;
+                    if (mpColl_8004A678_Floor(coll, floor_id)) {
+                        coll->x34_flags.b5 = true;
+                        touching_floor = false;
+                        hit_floor = true;
+                        y_after_floor = coll->cur_pos.y;
                     } else {
-                        var_r23 = 1;
+                        var_r23 = true;
                     }
                 } else if (arg1 & 2) {
-                    if (mpColl_8004A45C_Floor(arg0, temp_r22)) {
-                        arg0->x34_flags.b5 = true;
-                        var_r29 = 1;
-                        var_r25_2 = 1;
-                        var_f28 = arg0->cur_pos.y;
+                    if (mpColl_8004A45C_Floor(coll, floor_id)) {
+                        coll->x34_flags.b5 = true;
+                        touching_floor = true;
+                        hit_floor = true;
+                        y_after_floor = coll->cur_pos.y;
                     } else {
-                        var_r23 = 1;
+                        var_r23 = true;
                     }
                 } else {
-                    var_r23 = 1;
+                    var_r23 = true;
                 }
+
                 if (var_r23) {
-                    temp_r23 = arg0->x3C;
-                    arg0->x3C = temp_r22;
-                    if (mpColl_80046904(arg0, 0U)) {
-                        var_r29 = 1;
+                    old_x3C = coll->x3C;
+                    coll->x3C = floor_id;
+                    if (mpColl_80046904(coll, 0U)) {
+                        touching_floor = true;
                     }
-                    arg0->x3C = temp_r23;
-                    arg0->x34_flags.b5 = true;
+                    coll->x3C = old_x3C;
+                    coll->x34_flags.b5 = true;
                 }
             }
         }
-        if (var_r25_2 && var_r26_2) {
-            if (var_r29) {
-                var_r4 = 0;
+
+        if (hit_floor && hit_ceiling) {
+            bool aerial; // r4
+            if (touching_floor) {
+                aerial = false;
             } else {
-                var_r4 = 1;
+                aerial = true;
             }
-            mpColl_8004C91C(arg0, var_r4, var_f29, var_f28);
+            mpColl_8004C91C(coll, aerial, y_after_ceiling, y_after_floor);
         }
-    } while (temp_r27 != arg0->x34_flags.b6);
-    if (mpColl_8004A908_Floor(arg0, arg0->floor.index)) {
-        if (mpColl_80044838_Floor(arg0, false)) {
-            if (mpColl_80043BBC(arg0, &sp10)) {
-                mpColl_80043C6C(arg0, sp10, 0);
+    } while (prev_b6 != coll->x34_flags.b6);
+
+    if (mpColl_8004A908_Floor(coll, coll->floor.index)) {
+        int wall_id; // sp10
+        if (mpColl_80044838_Floor(coll, false)) {
+            if (mpColl_80043BBC(coll, &wall_id)) {
+                mpColl_80043C6C(coll, wall_id, false);
             }
-            if (mpColl_80043E90(arg0, &sp10)) {
-                mpColl_80043F40(arg0, sp10, 0);
+            if (mpColl_80043E90(coll, &wall_id)) {
+                mpColl_80043F40(coll, wall_id, false);
             }
         }
-        arg0->x34_flags.b5 = false;
-        var_r29 = true;
+        coll->x34_flags.b5 = false;
+        touching_floor = true;
     }
-    if (var_r29) {
-        arg0->env_flags |= Collide_FloorPush;
+
+    if (touching_floor) {
+        coll->env_flags |= Collide_FloorPush;
     }
-    return var_r29;
+
+    return touching_floor;
 }
 #pragma pop
 
