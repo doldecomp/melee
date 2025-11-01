@@ -333,7 +333,7 @@ void it_2725_Logic116_EnteredAir(Item_GObj* gobj)
     } else {
         coll_dir = 1;
     }
-    mpColl_800436D8(&ip->x378_itemColl, coll_dir);
+    mpCollSetFacingDir(&ip->x378_itemColl, coll_dir);
 }
 
 bool itCoin_UnkMotion5_Anim(Item_GObj* gobj)

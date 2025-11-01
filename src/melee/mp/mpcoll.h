@@ -31,7 +31,7 @@
 /* 043558 */ void mpColl_80043558(CollData*, s32);
 /* 043670 */ void mpColl_80043670(CollData*);
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);
-/* 0436D8 */ void mpColl_800436D8(CollData*, int facing_dir);
+/* 0436D8 */ void mpCollSetFacingDir(CollData*, int facing_dir);
 /* 0436E4 */ void mpColl_800436E4(CollData*, float);
 /* 043754 */ bool mpColl_80043754(mpColl_Callback, CollData*, u32);
 /* 0439FC */ void mpColl_800439FC(CollData*);

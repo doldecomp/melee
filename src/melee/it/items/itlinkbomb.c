@@ -495,8 +495,9 @@ void it_8029F18C(HSD_GObj* gobj)
     temp_r0 = item->msid;
     if ((temp_r0 != 6) || (temp_r0 != 4)) {
         item->xDD4_itemVar.linkbomb.x4 = fsign_inline(item->x40_vel.x);
-        mpColl_800436D8(&item->x378_itemColl,
-                        float_sign_int_inline(item->xDD4_itemVar.linkbomb.x4));
+        mpCollSetFacingDir(
+            &item->x378_itemColl,
+            float_sign_int_inline(item->xDD4_itemVar.linkbomb.x4));
         item->xDD4_itemVar.linkbomb.x0.b1 = true;
     } else {
         item->xDD4_itemVar.linkbomb.x0.b1 = false;

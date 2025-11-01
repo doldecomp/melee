@@ -25,7 +25,7 @@ void mpColl_80048274(CollData*);
 void mpColl_80048578(CollData*);
 void mpColl_80048768(CollData*);
 void mpColl_80048388(CollData*);
-void mpColl_800436D8(CollData*, int facing_dir);
+void mpCollSetFacingDir(CollData*, int facing_dir);
 void mpColl_800475F4(CollData*);
 void mpColl_8004730C(CollData*, f32 (*x)[6]);
 void mpColl_80047A08(CollData*);

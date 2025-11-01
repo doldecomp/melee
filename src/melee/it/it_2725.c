@@ -5023,7 +5023,7 @@ void it_80272980(Item_GObj* item_gobj)
     } else {
         int_dir = 1;
     }
-    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    mpCollSetFacingDir(&item->x378_itemColl, int_dir);
 }
 
 void it_80272A18(HSD_JObj* item_jobj)
@@ -5223,7 +5223,7 @@ bool itColl_BounceOffShield(Item_GObj* item_gobj)
     } else {
         int_dir = 1;
     }
-    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    mpCollSetFacingDir(&item->x378_itemColl, int_dir);
     return false;
 }
 
@@ -5492,7 +5492,7 @@ void it_80273748(Item_GObj* item_gobj, Vec3* pos, Vec3* vel)
         } else {
             int_dir = 1;
         }
-        mpColl_800436D8(&item->x378_itemColl, int_dir);
+        mpCollSetFacingDir(&item->x378_itemColl, int_dir);
     }
     if (item->xDC8_word.flags.x19 == 1) {
         dir_radians = M_PI_2 * item->facing_dir;
@@ -5587,7 +5587,7 @@ void it_80273B50(Item_GObj* item_gobj, Vec3* vel)
         } else {
             int_dir = 1;
         }
-        mpColl_800436D8(&item2->x378_itemColl, int_dir);
+        mpCollSetFacingDir(&item2->x378_itemColl, int_dir);
     }
     if (item->xDC8_word.flags.x19 == 1) {
         dir_radians = M_PI_2 * item->facing_dir;
@@ -5658,7 +5658,7 @@ void it_80273F34(Item_GObj* item_gobj, HSD_GObj* arg_gobj2)
         int_dir = 1;
     }
 
-    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    mpCollSetFacingDir(&item->x378_itemColl, int_dir);
     Item_8026B074(item);
     it_802762BC(item);
     HSD_JObjSetTranslate(item_jobj, &item->pos);
@@ -6749,7 +6749,7 @@ void it_80275D5C(Item_GObj* item_gobj, itECB* arg_ecb)
     } else {
         int_dir = 1;
     }
-    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    mpCollSetFacingDir(&item->x378_itemColl, int_dir);
 }
 
 void it_80275DFC(Item_GObj* item_gobj)
@@ -6771,7 +6771,7 @@ void it_80275DFC(Item_GObj* item_gobj)
     } else {
         int_dir = 1;
     }
-    mpColl_800436D8(&item->x378_itemColl, int_dir);
+    mpCollSetFacingDir(&item->x378_itemColl, int_dir);
 }
 
 void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
@@ -6826,7 +6826,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     } else {
         int_dir = 1;
     }
-    mpColl_800436D8(&item2->x378_itemColl, int_dir);
+    mpCollSetFacingDir(&item2->x378_itemColl, int_dir);
     coll->x50 = attr->x1C_damage_mul;
     if (spawn->x44_flag.b0 == 1) {
         if (spawn->x48_ground_or_air == GA_Air) {
@@ -7288,7 +7288,7 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
         } else {
             dir2 = 1;
         }
-        mpColl_800436D8(&item->x378_itemColl, dir2);
+        mpCollSetFacingDir(&item->x378_itemColl, dir2);
         return false;
     }
     if ((arg1 & 4) && (coll->prev_env_flags & MPCOLL_LEFTWALL)) {

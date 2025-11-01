@@ -36,7 +36,7 @@ ItemStateTable it_803F85F0[] = {
 
 void static inline coll_inline(Item* ip)
 {
-    mpColl_800436D8(&ip->x378_itemColl, (ip->facing_dir == -1.0f) ? -1 : 1);
+    mpCollSetFacingDir(&ip->x378_itemColl, (ip->facing_dir == -1.0f) ? -1 : 1);
 }
 
 void it_802DC69C(Item_GObj* gobj)

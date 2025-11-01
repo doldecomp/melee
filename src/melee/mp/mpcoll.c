@@ -899,9 +899,9 @@ void mpColl_80043680(CollData* coll, Vec3* arg1)
     coll->x130_flags |= 0x20;
 }
 
-void mpColl_800436D8(CollData* coll, int arg1)
+void mpCollSetFacingDir(CollData* coll, int facing_dir)
 {
-    coll->facing_dir = arg1;
+    coll->facing_dir = facing_dir;
 }
 
 static float six(void)

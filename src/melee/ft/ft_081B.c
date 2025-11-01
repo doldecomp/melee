@@ -289,7 +289,7 @@ bool ft_CheckGroundAndLedge(Fighter_GObj* gobj, int dir)
     if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_800471F8(coll);
     } else {
-        mpColl_800436D8(coll, dir);
+        mpCollSetFacingDir(coll, dir);
         var_r28 = mpColl_800473CC(coll);
     }
     fp->cur_pos = coll->cur_pos;
@@ -315,7 +315,7 @@ bool ft_8008239C(Fighter_GObj* gobj, int dir,
     if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_8004730C(coll, collbox);
     } else {
-        mpColl_800436D8(coll, dir);
+        mpCollSetFacingDir(coll, dir);
         var_r28 = mpColl_800475F4(coll, collbox);
     }
     fp->cur_pos = coll->cur_pos;
@@ -665,7 +665,7 @@ static inline bool ft_80083090_inline(Fighter_GObj* gobj,
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_80047AC8(coll, arg1, gobj);
     } else {
-        mpColl_800436D8(coll, dir);
+        mpCollSetFacingDir(coll, dir);
         temp = mpColl_80047E14(coll, arg1, gobj);
     }
     fp->cur_pos = coll->cur_pos;
@@ -722,7 +722,7 @@ static inline bool ft_80083318_inline(Fighter_GObj* gobj,
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_80047BF4(coll, arg1, gobj);
     } else {
-        mpColl_800436D8(coll, dir);
+        mpCollSetFacingDir(coll, dir);
         temp = mpColl_80047F40(coll, arg1, gobj);
     }
     fp->cur_pos = coll->cur_pos;
@@ -770,7 +770,7 @@ static inline bool ft_80083464_inline(Fighter_GObj* gobj,
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_80047D20(coll, arg1, gobj);
     } else {
-        mpColl_800436D8(coll, dir);
+        mpCollSetFacingDir(coll, dir);
         temp = mpColl_8004806C(coll, arg1, gobj);
     }
     fp->cur_pos = coll->cur_pos;
@@ -829,7 +829,7 @@ static inline bool ft_8008370C_inline(Fighter_GObj* gobj)
     if (fp->x2064_ledgeCooldown || fp->x2224_b2) {
         temp = mpColl_800471F8(coll);
     } else {
-        mpColl_800436D8(coll, dir);
+        mpCollSetFacingDir(coll, dir);
         temp = mpColl_800473CC(coll);
     }
     fp->cur_pos = coll->cur_pos;
@@ -900,7 +900,7 @@ static inline bool ft_80083910_inline(Fighter_GObj* gobj)
     if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         temp = mpColl_80048654(coll);
     } else {
-        mpColl_800436D8(coll, dir);
+        mpCollSetFacingDir(coll, dir);
         temp = mpColl_800474E0(coll);
     }
     fp->cur_pos = coll->cur_pos;
@@ -1052,7 +1052,7 @@ static inline bool ft_80084280_inline(Fighter_GObj* gobj)
     coll->prev_pos = coll->cur_pos;
     coll->cur_pos = fp->cur_pos;
     coll->lstick_x = fp->input.lstick.x;
-    mpColl_800436D8(coll, ftGetFacingDirInt(fp));
+    mpCollSetFacingDir(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B4B0(coll);
     fp->cur_pos = coll->cur_pos;
 
@@ -1093,7 +1093,7 @@ static inline bool ft_800843FC_inline(Fighter_GObj* gobj)
     fp->coll_data.prev_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
     fp->coll_data.lstick_x = fp->input.lstick.x;
-    mpColl_800436D8(coll, ftGetFacingDirInt(fp));
+    mpCollSetFacingDir(coll, ftGetFacingDirInt(fp));
     temp = mpColl_8004B5C4(coll);
     fp->cur_pos = coll->cur_pos;
     if (temp) {
