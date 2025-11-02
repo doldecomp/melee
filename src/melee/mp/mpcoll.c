@@ -296,42 +296,41 @@ void mpColl_SetLedgeSnap(CollData* coll, float ledge_snap_x,
 // 80042384 https://decomp.me/scratch/P8djI
 void mpColl_80042384(CollData* cd)
 {
-    float tmp, tmp2;
-
     if (ABS(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0F) {
+        float mid;
         cd->x84_ecb.top.y += 1.0F;
-        tmp = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
-        cd->x84_ecb.left.y = tmp;
-        cd->x84_ecb.right.y = tmp;
+        mid = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
+        cd->x84_ecb.left.y = mid;
+        cd->x84_ecb.right.y = mid;
     }
-    if (cd->x84_ecb.top.y < 1.0F) {
-        cd->x84_ecb.top.y = 1.0F;
-    }
-    if (cd->x84_ecb.left.x > -1.0F) {
-        cd->x84_ecb.left.x = -1.0F;
-    }
-    if (cd->x84_ecb.right.x < 1.0F) {
-        cd->x84_ecb.right.x = 1.0F;
-    }
+
+    clamp_above(&cd->x84_ecb.top.y, 1.0F);
+    clamp_below(&cd->x84_ecb.left.x, -1.0F);
+    clamp_above(&cd->x84_ecb.right.x, 1.0F);
+
     if (cd->x84_ecb.top.y < cd->x84_ecb.bottom.y) {
         cd->x84_ecb.top.y = 1.0F + cd->x84_ecb.bottom.y;
     }
+
     if (cd->x84_ecb.right.y > cd->x84_ecb.top.y ||
         cd->x84_ecb.right.y < cd->x84_ecb.bottom.y)
     {
-        tmp = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
-        cd->x84_ecb.left.y = tmp;
-        cd->x84_ecb.right.y = tmp;
+        float mid = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
+        cd->x84_ecb.left.y = mid;
+        cd->x84_ecb.right.y = mid;
     }
-    tmp = cd->x84_ecb.top.y;
-    tmp2 = cd->x84_ecb.right.y;
-    if (tmp - tmp2 < 0.001F || tmp2 - cd->x84_ecb.bottom.y < 0.001F) {
-        cd->x84_ecb.right.y = 0.5F * (tmp + cd->x84_ecb.bottom.y);
+
+    if (cd->x84_ecb.top.y - cd->x84_ecb.right.y < 0.001F ||
+        cd->x84_ecb.right.y - cd->x84_ecb.bottom.y < 0.001F)
+    {
+        cd->x84_ecb.right.y =
+            0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
     }
-    tmp = cd->x84_ecb.top.y;
-    tmp2 = cd->x84_ecb.left.y;
-    if (tmp - tmp2 < 0.001F || tmp2 - cd->x84_ecb.bottom.y < 0.001F) {
-        cd->x84_ecb.left.y = 0.5F * (tmp + cd->x84_ecb.bottom.y);
+
+    if (cd->x84_ecb.top.y - cd->x84_ecb.left.y < 0.001F ||
+        cd->x84_ecb.left.y - cd->x84_ecb.bottom.y < 0.001F)
+    {
+        cd->x84_ecb.left.y = 0.5F * (cd->x84_ecb.top.y + cd->x84_ecb.bottom.y);
     }
 }
 
