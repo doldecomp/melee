@@ -66,4 +66,9 @@ typedef enum CollLineKind {
 
 #define MPCOLL_WALLID_MAX 9
 
+enum CollDataX130Flags {
+    CollData_X130_Locked = 1 << 4,
+    CollData_X130_Clear = 1 << 5,
+};
+
 #endif

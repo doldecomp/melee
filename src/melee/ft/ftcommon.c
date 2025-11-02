@@ -38,6 +38,9 @@
 #include "it/items/itrabbitc.h"
 #include "it/items/itsword.h"
 #include "lb/lb_00F9.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
@@ -516,7 +519,7 @@ bool ftCommon_CheckFallFast(Fighter* fp)
 void ftCommon_UnlockECB(Fighter* fp)
 {
     fp->ecb_lock = 0;
-    fp->coll_data.x130_flags &= 0xFFFFFFEF;
+    fp->coll_data.x130_flags &= ~CollData_X130_Locked;
 }
 
 void ftCommon_8007D5D4(Fighter* fp)
@@ -528,7 +531,7 @@ void ftCommon_8007D5D4(Fighter* fp)
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = 1;
     fp->ecb_lock = 10;
-    fp->coll_data.x130_flags |= (1 << 4);
+    fp->coll_data.x130_flags |= CollData_X130_Locked;
 }
 
 void ftCommon_8007D60C(Fighter* fp)
@@ -542,7 +545,7 @@ void ftCommon_8007D60C(Fighter* fp)
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = ca->max_jumps;
     fp->ecb_lock = 5;
-    fp->coll_data.x130_flags |= 0x10;
+    fp->coll_data.x130_flags |= CollData_X130_Locked;
 }
 
 void ftCommon_UseAllJumps(Fighter* fp)

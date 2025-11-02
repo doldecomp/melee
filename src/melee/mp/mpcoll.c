@@ -355,7 +355,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     float mid_y;
     float tmpval;
 
-    if (cd->x130_flags & 0b100000) {
+    if (cd->x130_flags & CollData_X130_Clear) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0F;
         cd->xA4_ecbCurrCorrect.top.y = 0.0F;
         cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
@@ -364,7 +364,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
         cd->xA4_ecbCurrCorrect.right.y = 0.0F;
         cd->xA4_ecbCurrCorrect.left.x = 0.0F;
         cd->xA4_ecbCurrCorrect.left.y = 0.0F;
-        cd->x130_flags &= ~0b100000;
+        cd->x130_flags &= ~CollData_X130_Clear;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
 
@@ -508,7 +508,7 @@ void mpColl_8004293C(CollData* cd)
     float rot_left_x;
 
     angle = cd->x118_f32;
-    if (cd->x130_flags & 0x20) {
+    if (cd->x130_flags & CollData_X130_Clear) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0F;
         cd->xA4_ecbCurrCorrect.top.y = 0.0F;
         cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
@@ -517,7 +517,7 @@ void mpColl_8004293C(CollData* cd)
         cd->xA4_ecbCurrCorrect.right.y = 0.0F;
         cd->xA4_ecbCurrCorrect.left.x = 0.0F;
         cd->xA4_ecbCurrCorrect.left.y = 0.0F;
-        cd->x130_flags &= 0xFFFFFFDF;
+        cd->x130_flags &= ~CollData_X130_Clear;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
 
@@ -598,7 +598,7 @@ void mpColl_8004293C(CollData* cd)
 
 void mpColl_80042C58(CollData* coll, ftCollisionBox* arg1)
 {
-    if (coll->x130_flags & 0x20) {
+    if (coll->x130_flags & CollData_X130_Clear) {
         coll->xA4_ecbCurrCorrect.top.x = 0.0F;
         coll->xA4_ecbCurrCorrect.top.y = 0.0F;
         coll->xA4_ecbCurrCorrect.bottom.x = 0.0F;
@@ -607,7 +607,7 @@ void mpColl_80042C58(CollData* coll, ftCollisionBox* arg1)
         coll->xA4_ecbCurrCorrect.right.y = 0.0F;
         coll->xA4_ecbCurrCorrect.left.x = 0.0F;
         coll->xA4_ecbCurrCorrect.left.y = 0.0F;
-        coll->x130_flags &= 0xFFFFFFDF;
+        coll->x130_flags &= ~CollData_X130_Clear;
     }
     coll->xE4_ecb = coll->xA4_ecbCurrCorrect;
     coll->x84_ecb.top.x = 0.0F;
@@ -626,7 +626,7 @@ static inline void mpColl_80042D24_inline(CollData* coll, enum_t i)
     float saved_bottom_x;
     float saved_bottom_y;
 
-    if (coll->x130_flags & 0x10) {
+    if (coll->x130_flags & CollData_X130_Locked) {
         saved_bottom_x = coll->x84_ecb.bottom.x;
         saved_bottom_y = coll->x84_ecb.bottom.y;
     }
@@ -635,7 +635,7 @@ static inline void mpColl_80042D24_inline(CollData* coll, enum_t i)
     } else {
         mpColl_8004293C(coll);
     }
-    if (coll->x130_flags & 0x10) {
+    if (coll->x130_flags & CollData_X130_Locked) {
         coll->x84_ecb.bottom.x = saved_bottom_x;
         coll->x84_ecb.bottom.y = saved_bottom_y;
     }
@@ -650,7 +650,7 @@ void mpColl_80042D24(CollData* coll)
     float saved_bottom_x;
     float saved_bottom_y;
 
-    if (coll->x130_flags & 0x10) {
+    if (coll->x130_flags & CollData_X130_Locked) {
         saved_bottom_x = coll->x84_ecb.bottom.x;
         saved_bottom_y = coll->x84_ecb.bottom.y;
     }
@@ -659,7 +659,7 @@ void mpColl_80042D24(CollData* coll)
     } else {
         mpColl_8004293C(coll);
     }
-    if (coll->x130_flags & 0x10) {
+    if (coll->x130_flags & CollData_X130_Locked) {
         coll->x84_ecb.bottom.x = saved_bottom_x;
         coll->x84_ecb.bottom.y = saved_bottom_y;
     }
@@ -884,7 +884,7 @@ void mpColl_80043558(CollData* coll, s32 line_id)
 
 void mpColl_80043670(CollData* coll)
 {
-    coll->x130_flags |= 0x20;
+    coll->x130_flags |= CollData_X130_Clear;
 }
 
 void mpColl_80043680(CollData* coll, Vec3* arg1)
@@ -892,7 +892,7 @@ void mpColl_80043680(CollData* coll, Vec3* arg1)
     coll->cur_pos = *arg1;
     coll->cur_pos_correct = coll->cur_pos;
     coll->prev_pos = coll->cur_pos_correct;
-    coll->x130_flags |= 0x20;
+    coll->x130_flags |= CollData_X130_Clear;
 }
 
 void mpCollSetFacingDir(CollData* coll, int facing_dir)
@@ -4659,7 +4659,7 @@ bool mpColl_8004D024(Vec3* arg0)
     spC.prev_pos.y = -3.0F + arg0->y;
     spC.prev_pos.z = arg0->z;
     spC.cur_pos = *arg0;
-    spC.x130_flags |= 0x20;
+    spC.x130_flags |= CollData_X130_Clear;
     mpCollPrev(&spC);
     mpColl_80042D24(&spC);
     inline0(&spC, 0, true);
