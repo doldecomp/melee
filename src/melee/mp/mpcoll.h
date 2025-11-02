@@ -27,7 +27,7 @@
 /* 042D24 */ void mpColl_80042D24(CollData* cd);
 /* 042DB0 */ void mpColl_80042DB0(CollData* ecb, float time);
 /* 043268 */ void mpColl_80043268(CollData*, s32, s32, float);
-/* 043324 */ void mpCollEnd(CollData*, s32, s32);
+/* 043324 */ void mpCollEnd(CollData*, bool, s32);
 /* 043558 */ void mpColl_80043558(CollData*, s32);
 /* 043670 */ void mpColl_80043670(CollData*);
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);

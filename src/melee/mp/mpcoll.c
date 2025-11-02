@@ -792,22 +792,19 @@ static inline void func_80043324_inline(CollData* coll, s32 arg1, s32 arg2,
     mpColl_80043268(coll, arg1, arg2, arg8);
 }
 
-void mpCollEnd(CollData* coll, s32 arg1, s32 arg2)
+void mpCollEnd(CollData* coll, bool arg1, s32 arg2)
 {
-    s32 temp_r3;
-
-    u8 temp_r3_2[4];
-
+    PAD_STACK(4);
     if (coll->floor.index != -1) {
-        temp_r3 = grDynamicAttr_801CA284(&coll->cur_pos, coll->floor.index);
+        int temp_r3 =
+            grDynamicAttr_801CA284(&coll->cur_pos, coll->floor.index);
         if (temp_r3 != 0) {
-            coll->floor.flags =
-                (coll->floor.flags & 0xFFFFFF00) | (temp_r3 & 0xFF);
+            coll->floor.flags = (coll->floor.flags & ~0xFF) | (temp_r3 & 0xFF);
         }
     }
-    if ((arg1 != 0) || (coll->env_flags & Collide_Edge) ||
-        (coll->env_flags & Collide_LeftEdge) ||
-        (coll->env_flags & Collide_RightEdge))
+    if (arg1 || coll->env_flags & Collide_Edge ||
+        coll->env_flags & Collide_LeftEdge ||
+        coll->env_flags & Collide_RightEdge)
     {
         func_80043324_inline(coll, coll->floor.index, arg2,
                              coll->cur_pos.y - coll->prev_pos.y);
@@ -817,13 +814,13 @@ void mpCollEnd(CollData* coll, s32 arg1, s32 arg2)
                               coll->cur_pos.y - coll->prev_pos.y);
     }
     if (g_debugLevel >= 3) {
-        if (!(coll->cur_pos.x < 45000.0F) || !(coll->cur_pos.x > -45000.0F) ||
-            !(coll->cur_pos.y < 45000.0F) || !(coll->cur_pos.y > -45000.0F))
+        if (!(coll->cur_pos.x < 45000.0F && coll->cur_pos.x > -45000.0F &&
+              coll->cur_pos.y < 45000.0F && coll->cur_pos.y > -45000.0F))
         {
             if (ftLib_80086960(coll->x0_gobj)) {
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "ply=%d ms=%d\n",
-                         "mpcoll.c", 1350, coll->prev_pos.x, coll->prev_pos.y,
+                         __FILE__, 1350, coll->prev_pos.x, coll->prev_pos.y,
                          coll->cur_pos.x, coll->cur_pos.y,
                          ftLib_80086BE0(coll->x0_gobj),
                          ftLib_800874BC(coll->x0_gobj));
@@ -831,7 +828,7 @@ void mpCollEnd(CollData* coll, s32 arg1, s32 arg2)
                 s32 gobjid = coll->x0_gobj->classifier;
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "gobjid=%d\n",
-                         "mpcoll.c", 1358, coll->prev_pos.x, coll->prev_pos.y,
+                         __FILE__, 1358, coll->prev_pos.x, coll->prev_pos.y,
                          coll->cur_pos.x, coll->cur_pos.y, gobjid);
                 if (coll->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(coll->x0_gobj));
