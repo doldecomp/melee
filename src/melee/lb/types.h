@@ -179,6 +179,26 @@ typedef struct _ftECB {
     Vec2 left;
 } ftECB;
 
+typedef struct ECBSource {
+    /* fp+7F4 */ ECBSourceKind kind;
+    /* fp+7F8 */ union {
+        /* fp+7F8 */ struct {
+            /* fp+7F8 */ HSD_JObj* x108_joint;
+            /* fp+7FC */ HSD_JObj* x10C_joint[6];
+        };
+        /* fp+7F8 */ struct {
+            /* fp+7F8 */ float up;
+            /* fp+7FC */ float down;
+            /* fp+800 */ float front;
+            /* fp+804 */ float back;
+            /* fp+808 */ float angle;
+        };
+    };
+    /* fp+814 */ float x124;
+    /* fp+818 */ float x128;
+    /* fp+81C */ float x12C;
+} ECBSource;
+
 struct CollData {
     /* fp+6F0 */ HSD_GObj* x0_gobj;
     /* fp+6F4 */ Vec3 cur_pos;
@@ -204,24 +224,7 @@ struct CollData {
     /* fp+794 */ ftECB xA4_ecbCurrCorrect;
     /* fp+7B4 */ ftECB xC4_ecb;
     /* fp+7D4 */ ftECB xE4_ecb;
-    /// @todo this is the start of a substruct with size 0x2C
-    /* fp+7F4 */ s32 x104;
-    /* fp+7F8 */ union {
-        /* fp+7F8 */ struct {
-            /* fp+7F8 */ HSD_JObj* x108_joint;
-            /* fp+7FC */ HSD_JObj* x10C_joint[6];
-        };
-        /* fp+7F8 */ struct {
-            /* fp+7F8 */ float x108_f32;
-            /* fp+7FC */ float x10C_f32;
-            /* fp+800 */ float x110_f32;
-            /* fp+804 */ float x114_f32;
-            /* fp+808 */ float x118_f32;
-        };
-    };
-    /* fp+814 */ float x124;
-    /* fp+818 */ float x128;
-    /* fp+81C */ float x12C;
+    /* fp+7F4 */ ECBSource ecb_source;
     /* fp+820 */ u32 x130_flags;
     /* fp+824 */ s32 env_flags;
     /* fp+828 */ s32 prev_env_flags;

@@ -249,10 +249,10 @@ bool itLgunbeam_UnkMotion0_Coll(HSD_GObj* gobj)
         ip->xDD4_itemVar.lgunbeam.angle0 -= 2 * M_PI;
     }
     {
-        ip->x378_itemColl.x108_f32 = 3.0f;
-        ip->x378_itemColl.x10C_f32 = 3.0f;
-        ip->x378_itemColl.x110_f32 = 3.0f;
-        ip->x378_itemColl.x114_f32 = 3.0f;
+        ip->x378_itemColl.ecb_source.up = 3.0f;
+        ip->x378_itemColl.ecb_source.down = 3.0f;
+        ip->x378_itemColl.ecb_source.front = 3.0f;
+        ip->x378_itemColl.ecb_source.back = 3.0f;
         it_8026D9A0(gobj);
 
         if (ip->x378_itemColl.env_flags & 0x18000) {

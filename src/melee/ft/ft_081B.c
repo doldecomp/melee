@@ -68,9 +68,9 @@ void ft_80081B38(Fighter_GObj* gobj)
                         temp_r29->ledge_snap_height * temp_f3);
     coll->x50 = fp->co_attrs.weight;
     temp_f0 = 10.0F * fp->x34_scale.y;
-    if (coll->x104 == 1) {
-        coll->x128 = temp_f0;
-        coll->x12C = temp_f0;
+    if (coll->ecb_source.kind == ECBSource_JObj) {
+        coll->ecb_source.x128 = temp_f0;
+        coll->ecb_source.x12C = temp_f0;
     }
 }
 
@@ -85,8 +85,8 @@ void ft_80081C88(Fighter_GObj* dst_gobj, f32 scl_y)
 
         float tmp = temp_r3->unkC * scl_y;
         ;
-        if (fp->coll_data.x104 == 1) {
-            temp_r5->x124 = tmp;
+        if (fp->coll_data.ecb_source.kind == ECBSource_JObj) {
+            temp_r5->ecb_source.x124 = tmp;
         }
 
         {
@@ -94,7 +94,7 @@ void ft_80081C88(Fighter_GObj* dst_gobj, f32 scl_y)
             float ledge_snap_y = temp_r3->ledge_snap_y * scl_y;
             float ledge_snap_x = temp_r3->ledge_snap_x * scl_y;
 
-            if (temp_r5->x104 == 1) {
+            if (temp_r5->ecb_source.kind == ECBSource_JObj) {
                 temp_r5->ledge_snap_x = ledge_snap_x;
                 temp_r5->ledge_snap_y = ledge_snap_y;
                 temp_r5->ledge_snap_height = ledge_snap_height;
@@ -102,9 +102,9 @@ void ft_80081C88(Fighter_GObj* dst_gobj, f32 scl_y)
         }
         temp_r5->x50 = fp->co_attrs.weight;
         temp_f0 = 10.0F * fp->x34_scale.y;
-        if (temp_r5->x104 == 1) {
-            temp_r5->x128 = temp_f0;
-            temp_r5->x12C = temp_f0;
+        if (temp_r5->ecb_source.kind == ECBSource_JObj) {
+            temp_r5->ecb_source.x128 = temp_f0;
+            temp_r5->ecb_source.x12C = temp_f0;
         }
     }
 }
@@ -150,14 +150,14 @@ bool ft_80081DD4(Fighter_GObj* gobj)
 
         tmp = temp_r28->ledge_snap_height * fp->x34_scale.y *
               p_ftCommonData->x1CC;
-        if (coll->x104 == 1) {
+        if (coll->ecb_source.kind == ECBSource_JObj) {
             coll->ledge_snap_height = tmp;
         }
 
         var_r28 = mpColl_800473CC(coll);
 
         tmp = temp_r28->ledge_snap_height * fp->x34_scale.y;
-        if (coll->x104 == 1) {
+        if (coll->ecb_source.kind == ECBSource_JObj) {
             coll->ledge_snap_height = tmp;
         }
     }
@@ -194,14 +194,14 @@ bool ft_80081F2C(Fighter_GObj* gobj)
 
         tmp = temp_r28->ledge_snap_height * fp->x34_scale.y *
               p_ftCommonData->x1CC;
-        if (coll->x104 == 1) {
+        if (coll->ecb_source.kind == ECBSource_JObj) {
             coll->ledge_snap_height = tmp;
         }
 
         var_r28 = mpColl_80048464(coll);
 
         tmp = temp_r28->ledge_snap_height * fp->x34_scale.y;
-        if (coll->x104 == 1) {
+        if (coll->ecb_source.kind == ECBSource_JObj) {
             coll->ledge_snap_height = tmp;
         }
     }
@@ -237,14 +237,14 @@ bool ft_80082084(Fighter_GObj* gobj)
 
         tmp = temp_r28->ledge_snap_height * fp->x34_scale.y *
               p_ftCommonData->x1CC;
-        if (coll->x104 == 1) {
+        if (coll->ecb_source.kind == ECBSource_JObj) {
             coll->ledge_snap_height = tmp;
         }
 
         var_r28 = mpColl_80048578(coll);
 
         tmp = temp_r28->ledge_snap_height * fp->x34_scale.y;
-        if (coll->x104 == 1) {
+        if (coll->ecb_source.kind == ECBSource_JObj) {
             coll->ledge_snap_height = tmp;
         }
     }

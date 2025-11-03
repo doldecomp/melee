@@ -101,4 +101,10 @@ typedef struct lbColl_80008D30_arg1 {
     /* +20 */ enum_t sfx_kind;
 } lbColl_80008D30_arg1;
 
+typedef enum ECBSourceKind {
+    ECBSource_None,
+    ECBSource_JObj,
+    ECBSource_Fixed,
+} ECBSourceKind;
+
 #endif

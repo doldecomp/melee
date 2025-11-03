@@ -214,7 +214,7 @@ void mpColl_80041EE4(CollData* cd)
     memzero(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
     memzero(&cd->xC4_ecb, sizeof(ftECB));
     memzero(&cd->xE4_ecb, sizeof(ftECB));
-    memzero(&cd->x104, 0x2C);
+    memzero(&cd->ecb_source, sizeof(ECBSource));
     memzero(&cd->x84_ecb, sizeof(ftECB));
     memzero(&cd->x64_ecb, sizeof(ftECB));
 }
@@ -226,17 +226,17 @@ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
                      float arg9)
 {
     cd->x0_gobj = gobj;
-    cd->x104 = 1;
-    cd->x108_joint = arg1;
-    cd->x10C_joint[0] = arg2;
-    cd->x10C_joint[1] = arg3;
-    cd->x10C_joint[2] = arg4;
-    cd->x10C_joint[3] = arg5;
-    cd->x10C_joint[4] = arg6;
-    cd->x10C_joint[5] = arg7;
-    cd->x124 = arg9;
-    cd->x128 = 10.0F;
-    cd->x12C = 10.0F;
+    cd->ecb_source.kind = ECBSource_JObj;
+    cd->ecb_source.x108_joint = arg1;
+    cd->ecb_source.x10C_joint[0] = arg2;
+    cd->ecb_source.x10C_joint[1] = arg3;
+    cd->ecb_source.x10C_joint[2] = arg4;
+    cd->ecb_source.x10C_joint[3] = arg5;
+    cd->ecb_source.x10C_joint[4] = arg6;
+    cd->ecb_source.x10C_joint[5] = arg7;
+    cd->ecb_source.x124 = arg9;
+    cd->ecb_source.x128 = 10.0F;
+    cd->ecb_source.x12C = 10.0F;
     if (cd->x34_flags.b0) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0F;
         cd->xA4_ecbCurrCorrect.top.y = 8.0F;
@@ -261,12 +261,12 @@ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float arg1, float arg2,
                      float arg3, float arg4)
 {
     cd->x0_gobj = gobj;
-    cd->x104 = 2;
-    cd->x108_f32 = arg1;
-    cd->x10C_f32 = arg2;
-    cd->x110_f32 = arg3;
-    cd->x114_f32 = arg4;
-    cd->x118_f32 = 0.0F;
+    cd->ecb_source.kind = ECBSource_Fixed;
+    cd->ecb_source.up = arg1;
+    cd->ecb_source.down = arg2;
+    cd->ecb_source.front = arg3;
+    cd->ecb_source.back = arg4;
+    cd->ecb_source.angle = 0.0F;
     if (cd->x34_flags.b0) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0F;
         cd->xA4_ecbCurrCorrect.top.y = 8.0F;
@@ -373,7 +373,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     {
         float temp_x = cd->cur_pos.x;
         float temp_y = cd->cur_pos.y;
-        lb_8000B1CC(cd->x10C_joint[0], NULL, &vec);
+        lb_8000B1CC(cd->ecb_source.x10C_joint[0], NULL, &vec);
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
@@ -384,11 +384,11 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     update_min_max(&left_x, &right_x, dx);                                    \
     update_min_max(&bottom_y, &top_y, dy);
 
-        EXPAND_ECB_FOR(cd->x10C_joint[1]);
-        EXPAND_ECB_FOR(cd->x10C_joint[2]);
-        EXPAND_ECB_FOR(cd->x10C_joint[3]);
-        EXPAND_ECB_FOR(cd->x10C_joint[4]);
-        EXPAND_ECB_FOR(cd->x10C_joint[5]);
+        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[1]);
+        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[2]);
+        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[3]);
+        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[4]);
+        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[5]);
     }
 
     if (!(flags & 0b100)) {
@@ -398,7 +398,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
         top_y += 2.0F;
     }
 
-    phi_f1 = 4.0F > cd->x12C ? 4.0F : cd->x12C;
+    phi_f1 = 4.0F > cd->ecb_source.x12C ? 4.0F : cd->ecb_source.x12C;
     phi_f2 = ABS(right_x - left_x);
 
     if (phi_f2 < phi_f1) {
@@ -406,7 +406,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
         left_x = -right_x;
     }
 
-    phi_f1 = 4.0F > cd->x128 ? 4.0F : cd->x128;
+    phi_f1 = 4.0F > cd->ecb_source.x128 ? 4.0F : cd->ecb_source.x128;
     phi_f2 = ABS(top_y - bottom_y);
 
     if (phi_f2 < phi_f1) {
@@ -449,9 +449,9 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     cd->x84_ecb.bottom.x = 0.0F;
     cd->x84_ecb.bottom.y = bottom_y;
     cd->x84_ecb.right.x = right_x;
-    cd->x84_ecb.right.y = cd->x124 + 0.5F * (bottom_y + top_y);
+    cd->x84_ecb.right.y = cd->ecb_source.x124 + 0.5F * (bottom_y + top_y);
     cd->x84_ecb.left.x = left_x;
-    cd->x84_ecb.left.y = cd->x124 + 0.5F * (bottom_y + top_y);
+    cd->x84_ecb.left.y = cd->ecb_source.x124 + 0.5F * (bottom_y + top_y);
     cd->x34_flags.b0 = 0;
 }
 
@@ -507,7 +507,7 @@ void mpColl_8004293C(CollData* cd)
     float rot_left_y;
     float rot_left_x;
 
-    angle = cd->x118_f32;
+    angle = cd->ecb_source.angle;
     if (cd->x130_flags & CollData_X130_Clear) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0F;
         cd->xA4_ecbCurrCorrect.top.y = 0.0F;
@@ -521,15 +521,15 @@ void mpColl_8004293C(CollData* cd)
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
 
-    bottom_y = -cd->x10C_f32;
-    top_y = cd->x108_f32;
+    bottom_y = -cd->ecb_source.down;
+    top_y = cd->ecb_source.up;
 
     if (cd->facing_dir == 1) {
-        right_x = cd->x110_f32;
-        left_x = -cd->x114_f32;
+        right_x = cd->ecb_source.front;
+        left_x = -cd->ecb_source.back;
     } else {
-        right_x = cd->x114_f32;
-        left_x = -cd->x110_f32;
+        right_x = cd->ecb_source.back;
+        left_x = -cd->ecb_source.front;
     }
 
     if (angle != 0.0F) {
@@ -630,7 +630,7 @@ static inline void mpColl_80042D24_inline(CollData* coll, enum_t i)
         saved_bottom_x = coll->x84_ecb.bottom.x;
         saved_bottom_y = coll->x84_ecb.bottom.y;
     }
-    if (coll->x104 == 1) {
+    if (coll->ecb_source.kind == ECBSource_JObj) {
         mpColl_800424DC(coll, i);
     } else {
         mpColl_8004293C(coll);
@@ -654,7 +654,7 @@ void mpColl_80042D24(CollData* coll)
         saved_bottom_x = coll->x84_ecb.bottom.x;
         saved_bottom_y = coll->x84_ecb.bottom.y;
     }
-    if (coll->x104 == 1) {
+    if (coll->ecb_source.kind == ECBSource_JObj) {
         mpColl_800424DC(coll, 6);
     } else {
         mpColl_8004293C(coll);
@@ -911,13 +911,13 @@ void mpColl_800436E4(CollData* coll, float arg1)
     float var_f1;
 
     var_f1 = arg1;
-    if (coll->x104 == 2) {
+    if (coll->ecb_source.kind == ECBSource_Fixed) {
         if (var_f1 > M_TAU) {
             var_f1 -= M_TAU;
         } else if (var_f1 < -M_TAU) {
             var_f1 += M_TAU;
         }
-        coll->x118_f32 = var_f1;
+        coll->ecb_source.angle = var_f1;
     } else {
         OSReport("not support rotate at JObj type coll\n");
         while (1) {
@@ -2874,7 +2874,7 @@ bool mpColl_80047D20(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
     mpCollPrev(coll);
-    if (coll->x104 == 1) {
+    if (coll->ecb_source.kind == ECBSource_JObj) {
         mpColl_800424DC(coll, 0x12);
     } else {
         mpColl_8004293C(coll);
@@ -2903,7 +2903,7 @@ bool mpColl_8004806C(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
     mpCollPrev(coll);
-    if (coll->x104 == 1) {
+    if (coll->ecb_source.kind == ECBSource_JObj) {
         mpColl_800424DC(coll, 0x12);
     } else {
         mpColl_8004293C(coll);
@@ -2929,7 +2929,7 @@ bool mpColl_80048274(CollData* coll)
 bool mpColl_80048388(CollData* coll)
 {
     mpCollPrev(coll);
-    if (coll->x104 == 1) {
+    if (coll->ecb_source.kind == ECBSource_JObj) {
         mpColl_800424DC(coll, 0x12);
     } else {
         mpColl_8004293C(coll);
@@ -2948,7 +2948,7 @@ bool mpColl_80048464(CollData* coll)
 bool mpColl_80048578(CollData* coll)
 {
     mpCollPrev(coll);
-    if (coll->x104 == 1) {
+    if (coll->ecb_source.kind == ECBSource_JObj) {
         mpColl_800424DC(coll, 0x12);
     } else {
         mpColl_8004293C(coll);
@@ -2967,7 +2967,7 @@ bool mpColl_80048654(CollData* coll)
 bool mpColl_80048768(CollData* coll)
 {
     mpCollPrev(coll);
-    if (coll->x104 == 1) {
+    if (coll->ecb_source.kind == ECBSource_JObj) {
         mpColl_800424DC(coll, 0x12);
     } else {
         mpColl_8004293C(coll);
