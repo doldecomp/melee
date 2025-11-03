@@ -57,7 +57,7 @@ void ft_80081B38(Fighter_GObj* gobj)
     coll->x34_flags.b1234 = 1;
     bones = fp->parts;
     temp_r29 = fp->ft_data->x44;
-    mpColl_80042078(coll, gobj, bones->joint, bones[temp_r29->unk0].joint,
+    mpColl_SetECBSource_JObj(coll, gobj, bones->joint, bones[temp_r29->unk0].joint,
                     bones[temp_r29->unk2].joint, bones[temp_r29->unk4].joint,
                     bones[temp_r29->unk6].joint, bones[temp_r29->unk8].joint,
                     bones[temp_r29->unkA].joint,

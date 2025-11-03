@@ -220,10 +220,10 @@ void mpColl_80041EE4(CollData* cd)
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8
-void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
-                     HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
-                     HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7,
-                     float arg9)
+void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
+                              HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
+                              HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7,
+                              float arg9)
 {
     cd->x0_gobj = gobj;
     cd->ecb_source.kind = ECBSource_JObj;
@@ -257,8 +257,8 @@ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
 }
 
 // 8004220C https://decomp.me/scratch/nOinn
-void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float arg1, float arg2,
-                     float arg3, float arg4)
+void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj, float arg1,
+                               float arg2, float arg3, float arg4)
 {
     cd->x0_gobj = gobj;
     cd->ecb_source.kind = ECBSource_Fixed;
@@ -344,7 +344,7 @@ inline void update_min_max(float* min, float* max, float val)
     }
 }
 
-void mpColl_800424DC(CollData* cd, u32 flags)
+void mpColl_LoadECB_JObj(CollData* coll, u32 flags)
 {
     Vec3 vec;
     float left_x, bottom_y;
@@ -355,25 +355,25 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     float mid_y;
     float tmpval;
 
-    if (cd->x130_flags & CollData_X130_Clear) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.top.y = 0.0F;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
-        cd->xA4_ecbCurrCorrect.right.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.right.y = 0.0F;
-        cd->xA4_ecbCurrCorrect.left.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.left.y = 0.0F;
-        cd->x130_flags &= ~CollData_X130_Clear;
+    if (coll->x130_flags & CollData_X130_Clear) {
+        coll->xA4_ecbCurrCorrect.top.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.top.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.right.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.right.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.left.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.left.y = 0.0F;
+        coll->x130_flags &= ~CollData_X130_Clear;
     }
-    cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
+    coll->xE4_ecb = coll->xA4_ecbCurrCorrect;
 
     // Loop through all collision data joints,
     // expanding the ECB to contain them all
     {
-        float temp_x = cd->cur_pos.x;
-        float temp_y = cd->cur_pos.y;
-        lb_8000B1CC(cd->ecb_source.x10C_joint[0], NULL, &vec);
+        float temp_x = coll->cur_pos.x;
+        float temp_y = coll->cur_pos.y;
+        lb_8000B1CC(coll->ecb_source.x10C_joint[0], NULL, &vec);
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
@@ -384,11 +384,11 @@ void mpColl_800424DC(CollData* cd, u32 flags)
     update_min_max(&left_x, &right_x, dx);                                    \
     update_min_max(&bottom_y, &top_y, dy);
 
-        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[1]);
-        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[2]);
-        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[3]);
-        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[4]);
-        EXPAND_ECB_FOR(cd->ecb_source.x10C_joint[5]);
+        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[1]);
+        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[2]);
+        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[3]);
+        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[4]);
+        EXPAND_ECB_FOR(coll->ecb_source.x10C_joint[5]);
     }
 
     if (!(flags & 0b100)) {
@@ -398,7 +398,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
         top_y += 2.0F;
     }
 
-    phi_f1 = 4.0F > cd->ecb_source.x12C ? 4.0F : cd->ecb_source.x12C;
+    phi_f1 = 4.0F > coll->ecb_source.x12C ? 4.0F : coll->ecb_source.x12C;
     phi_f2 = ABS(right_x - left_x);
 
     if (phi_f2 < phi_f1) {
@@ -406,7 +406,7 @@ void mpColl_800424DC(CollData* cd, u32 flags)
         left_x = -right_x;
     }
 
-    phi_f1 = 4.0F > cd->ecb_source.x128 ? 4.0F : cd->ecb_source.x128;
+    phi_f1 = 4.0F > coll->ecb_source.x128 ? 4.0F : coll->ecb_source.x128;
     phi_f2 = ABS(top_y - bottom_y);
 
     if (phi_f2 < phi_f1) {
@@ -444,15 +444,15 @@ void mpColl_800424DC(CollData* cd, u32 flags)
         }
     }
 
-    cd->x84_ecb.top.x = 0.0F;
-    cd->x84_ecb.top.y = top_y;
-    cd->x84_ecb.bottom.x = 0.0F;
-    cd->x84_ecb.bottom.y = bottom_y;
-    cd->x84_ecb.right.x = right_x;
-    cd->x84_ecb.right.y = cd->ecb_source.x124 + 0.5F * (bottom_y + top_y);
-    cd->x84_ecb.left.x = left_x;
-    cd->x84_ecb.left.y = cd->ecb_source.x124 + 0.5F * (bottom_y + top_y);
-    cd->x34_flags.b0 = 0;
+    coll->x84_ecb.top.x = 0.0F;
+    coll->x84_ecb.top.y = top_y;
+    coll->x84_ecb.bottom.x = 0.0F;
+    coll->x84_ecb.bottom.y = bottom_y;
+    coll->x84_ecb.right.x = right_x;
+    coll->x84_ecb.right.y = coll->ecb_source.x124 + 0.5F * (bottom_y + top_y);
+    coll->x84_ecb.left.x = left_x;
+    coll->x84_ecb.left.y = coll->ecb_source.x124 + 0.5F * (bottom_y + top_y);
+    coll->x34_flags.b0 = 0;
 }
 
 // 8004293C https://decomp.me/scratch/H4EUT
@@ -479,7 +479,7 @@ inline void clamp_below_2(float* value, float max)
     }
 }
 
-void mpColl_8004293C(CollData* cd)
+void mpColl_LoadECB_Fixed(CollData* coll)
 {
     float angle;
     float sin;
@@ -507,29 +507,29 @@ void mpColl_8004293C(CollData* cd)
     float rot_left_y;
     float rot_left_x;
 
-    angle = cd->ecb_source.angle;
-    if (cd->x130_flags & CollData_X130_Clear) {
-        cd->xA4_ecbCurrCorrect.top.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.top.y = 0.0F;
-        cd->xA4_ecbCurrCorrect.bottom.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.bottom.y = 0.0F;
-        cd->xA4_ecbCurrCorrect.right.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.right.y = 0.0F;
-        cd->xA4_ecbCurrCorrect.left.x = 0.0F;
-        cd->xA4_ecbCurrCorrect.left.y = 0.0F;
-        cd->x130_flags &= ~CollData_X130_Clear;
+    angle = coll->ecb_source.angle;
+    if (coll->x130_flags & CollData_X130_Clear) {
+        coll->xA4_ecbCurrCorrect.top.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.top.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.bottom.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.bottom.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.right.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.right.y = 0.0F;
+        coll->xA4_ecbCurrCorrect.left.x = 0.0F;
+        coll->xA4_ecbCurrCorrect.left.y = 0.0F;
+        coll->x130_flags &= ~CollData_X130_Clear;
     }
-    cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
+    coll->xE4_ecb = coll->xA4_ecbCurrCorrect;
 
-    bottom_y = -cd->ecb_source.down;
-    top_y = cd->ecb_source.up;
+    bottom_y = -coll->ecb_source.down;
+    top_y = coll->ecb_source.up;
 
-    if (cd->facing_dir == 1) {
-        right_x = cd->ecb_source.front;
-        left_x = -cd->ecb_source.back;
+    if (coll->facing_dir == 1) {
+        right_x = coll->ecb_source.front;
+        left_x = -coll->ecb_source.back;
     } else {
-        right_x = cd->ecb_source.back;
-        left_x = -cd->ecb_source.front;
+        right_x = coll->ecb_source.back;
+        left_x = -coll->ecb_source.front;
     }
 
     if (angle != 0.0F) {
@@ -582,18 +582,18 @@ void mpColl_8004293C(CollData* cd)
         left_x = -right_x;
     }
 
-    cd->x84_ecb.top.x = 0.0F;
-    cd->x84_ecb.top.y = top_y;
-    cd->x84_ecb.bottom.x = 0.0F;
-    cd->x84_ecb.bottom.y = bottom_y;
+    coll->x84_ecb.top.x = 0.0F;
+    coll->x84_ecb.top.y = top_y;
+    coll->x84_ecb.bottom.x = 0.0F;
+    coll->x84_ecb.bottom.y = bottom_y;
 
     midpoint_y = 0.5F * (top_y + bottom_y);
-    cd->x84_ecb.right.x = right_x;
-    cd->x84_ecb.right.y = midpoint_y;
-    cd->x84_ecb.left.x = left_x;
-    cd->x84_ecb.left.y = midpoint_y;
+    coll->x84_ecb.right.x = right_x;
+    coll->x84_ecb.right.y = midpoint_y;
+    coll->x84_ecb.left.x = left_x;
+    coll->x84_ecb.left.y = midpoint_y;
 
-    cd->x34_flags.b0 = 0;
+    coll->x34_flags.b0 = 0;
 }
 
 void mpColl_80042C58(CollData* coll, ftCollisionBox* arg1)
@@ -621,7 +621,7 @@ void mpColl_80042C58(CollData* coll, ftCollisionBox* arg1)
     coll->x34_flags.b0 = 0;
 }
 
-static inline void mpColl_80042D24_inline(CollData* coll, enum_t i)
+static inline void mpColl_LoadECB_inline(CollData* coll, enum_t i)
 {
     float saved_bottom_x;
     float saved_bottom_y;
@@ -631,9 +631,9 @@ static inline void mpColl_80042D24_inline(CollData* coll, enum_t i)
         saved_bottom_y = coll->x84_ecb.bottom.y;
     }
     if (coll->ecb_source.kind == ECBSource_JObj) {
-        mpColl_800424DC(coll, i);
+        mpColl_LoadECB_JObj(coll, i);
     } else {
-        mpColl_8004293C(coll);
+        mpColl_LoadECB_Fixed(coll);
     }
     if (coll->x130_flags & CollData_X130_Locked) {
         coll->x84_ecb.bottom.x = saved_bottom_x;
@@ -645,7 +645,7 @@ static inline void mpColl_80042D24_inline(CollData* coll, enum_t i)
 // 80042D24 https://decomp.me/scratch/2MnVj
 #pragma push
 #pragma dont_inline on
-void mpColl_80042D24(CollData* coll)
+void mpColl_LoadECB(CollData* coll)
 {
     float saved_bottom_x;
     float saved_bottom_y;
@@ -655,9 +655,9 @@ void mpColl_80042D24(CollData* coll)
         saved_bottom_y = coll->x84_ecb.bottom.y;
     }
     if (coll->ecb_source.kind == ECBSource_JObj) {
-        mpColl_800424DC(coll, 6);
+        mpColl_LoadECB_JObj(coll, 6);
     } else {
-        mpColl_8004293C(coll);
+        mpColl_LoadECB_Fixed(coll);
     }
     if (coll->x130_flags & CollData_X130_Locked) {
         coll->x84_ecb.bottom.x = saved_bottom_x;
@@ -2793,7 +2793,7 @@ static inline bool inline1(CollData* coll, int i,
 bool mpColl_800471F8(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 6);
+    mpColl_LoadECB_inline(coll, 6);
     return inline0(coll, 0, true);
 }
 
@@ -2807,14 +2807,14 @@ bool mpColl_8004730C(CollData* coll, ftCollisionBox* arg1)
 bool mpColl_800473CC(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 6);
+    mpColl_LoadECB_inline(coll, 6);
     return inline0(coll, 4, true);
 }
 
 bool mpColl_800474E0(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 5);
+    mpColl_LoadECB_inline(coll, 5);
     return inline0(coll, 4, true);
 }
 
@@ -2829,21 +2829,21 @@ bool mpColl_800476B4(CollData* coll, bool (*arg1)(Fighter_GObj*, enum_t),
                      Fighter_GObj* gobj)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 6);
+    mpColl_LoadECB_inline(coll, 6);
     return inline1(coll, 3, arg1, gobj);
 }
 
 bool mpColl_800477E0(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 6);
+    mpColl_LoadECB_inline(coll, 6);
     return inline0(coll, 1, true);
 }
 
 bool mpColl_800478F4(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 5);
+    mpColl_LoadECB_inline(coll, 5);
     return inline0(coll, 1, true);
 }
 
@@ -2858,7 +2858,7 @@ bool mpColl_80047AC8(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 6);
+    mpColl_LoadECB_inline(coll, 6);
     return inline1(coll, 2, arg1, arg2);
 }
 
@@ -2866,7 +2866,7 @@ bool mpColl_80047BF4(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 0xA);
+    mpColl_LoadECB_inline(coll, 0xA);
     return inline1(coll, 2, arg1, arg2);
 }
 
@@ -2875,9 +2875,9 @@ bool mpColl_80047D20(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 {
     mpCollPrev(coll);
     if (coll->ecb_source.kind == ECBSource_JObj) {
-        mpColl_800424DC(coll, 0x12);
+        mpColl_LoadECB_JObj(coll, 0x12);
     } else {
-        mpColl_8004293C(coll);
+        mpColl_LoadECB_Fixed(coll);
     }
     mpColl_80042384(coll);
     return inline1(coll, 2, arg1, arg2);
@@ -2887,7 +2887,7 @@ bool mpColl_80047E14(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 6);
+    mpColl_LoadECB_inline(coll, 6);
     return inline1(coll, 6, arg1, arg2);
 }
 
@@ -2895,7 +2895,7 @@ bool mpColl_80047F40(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
                      Fighter_GObj* arg2)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 0xA);
+    mpColl_LoadECB_inline(coll, 0xA);
     return inline1(coll, 6, arg1, arg2);
 }
 
@@ -2904,9 +2904,9 @@ bool mpColl_8004806C(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 {
     mpCollPrev(coll);
     if (coll->ecb_source.kind == ECBSource_JObj) {
-        mpColl_800424DC(coll, 0x12);
+        mpColl_LoadECB_JObj(coll, 0x12);
     } else {
-        mpColl_8004293C(coll);
+        mpColl_LoadECB_Fixed(coll);
     }
     mpColl_80042384(coll);
     return inline1(coll, 6, arg1, arg2);
@@ -2915,14 +2915,14 @@ bool mpColl_8004806C(CollData* coll, bool (*arg1)(Fighter_GObj*, int),
 bool mpColl_80048160(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 0xA);
+    mpColl_LoadECB_inline(coll, 0xA);
     return inline0(coll, 0, true);
 }
 
 bool mpColl_80048274(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 0xA);
+    mpColl_LoadECB_inline(coll, 0xA);
     return inline0(coll, 1, true);
 }
 
@@ -2930,9 +2930,9 @@ bool mpColl_80048388(CollData* coll)
 {
     mpCollPrev(coll);
     if (coll->ecb_source.kind == ECBSource_JObj) {
-        mpColl_800424DC(coll, 0x12);
+        mpColl_LoadECB_JObj(coll, 0x12);
     } else {
-        mpColl_8004293C(coll);
+        mpColl_LoadECB_Fixed(coll);
     }
     mpColl_80042384(coll);
     return inline0(coll, 1, true);
@@ -2941,7 +2941,7 @@ bool mpColl_80048388(CollData* coll)
 bool mpColl_80048464(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 0xA);
+    mpColl_LoadECB_inline(coll, 0xA);
     return inline0(coll, 4, true);
 }
 
@@ -2949,9 +2949,9 @@ bool mpColl_80048578(CollData* coll)
 {
     mpCollPrev(coll);
     if (coll->ecb_source.kind == ECBSource_JObj) {
-        mpColl_800424DC(coll, 0x12);
+        mpColl_LoadECB_JObj(coll, 0x12);
     } else {
-        mpColl_8004293C(coll);
+        mpColl_LoadECB_Fixed(coll);
     }
     mpColl_80042384(coll);
     return inline0(coll, 4, true);
@@ -2960,7 +2960,7 @@ bool mpColl_80048578(CollData* coll)
 bool mpColl_80048654(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 5);
+    mpColl_LoadECB_inline(coll, 5);
     return inline0(coll, 0, true);
 }
 
@@ -2968,9 +2968,9 @@ bool mpColl_80048768(CollData* coll)
 {
     mpCollPrev(coll);
     if (coll->ecb_source.kind == ECBSource_JObj) {
-        mpColl_800424DC(coll, 0x12);
+        mpColl_LoadECB_JObj(coll, 0x12);
     } else {
-        mpColl_8004293C(coll);
+        mpColl_LoadECB_Fixed(coll);
     }
     mpColl_80042384(coll);
     return inline0(coll, 0, true);
@@ -4052,7 +4052,7 @@ bool fn_8004ACE4(CollData* coll, int arg1)
 bool mpColl_8004B108(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 5);
+    mpColl_LoadECB_inline(coll, 5);
     return inline2(coll, 0);
 }
 
@@ -4066,7 +4066,7 @@ bool mpColl_8004B21C(CollData* coll, ftCollisionBox* arg1)
 bool mpColl_8004B2DC(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 5);
+    mpColl_LoadECB_inline(coll, 5);
     return inline2(coll, 2);
 }
 
@@ -4080,14 +4080,14 @@ bool mpColl_8004B3F0(CollData* coll, ftCollisionBox* arg1)
 bool mpColl_8004B4B0(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 5);
+    mpColl_LoadECB_inline(coll, 5);
     return inline2(coll, 1);
 }
 
 bool mpColl_8004B5C4(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 9);
+    mpColl_LoadECB_inline(coll, 9);
     return inline2(coll, 1);
 }
 
@@ -4467,7 +4467,7 @@ bool fn_8004C534(CollData* coll, u32 flags)
 bool mpColl_8004C750(CollData* coll)
 {
     mpCollPrev(coll);
-    mpColl_80042D24_inline(coll, 5);
+    mpColl_LoadECB_inline(coll, 5);
     return inline3(coll, 2);
 }
 
@@ -4654,14 +4654,14 @@ bool mpColl_8004D024(Vec3* arg0)
     CollData spC;
     mpColl_80041EE4(&spC);
     spC.x34_flags.b1234 = 0;
-    mpColl_8004220C(&spC, NULL, 10.0F, 10.0F, 10.0F, 10.0F);
+    mpColl_SetECBSource_Fixed(&spC, NULL, 10.0F, 10.0F, 10.0F, 10.0F);
     spC.prev_pos.x = arg0->x;
     spC.prev_pos.y = -3.0F + arg0->y;
     spC.prev_pos.z = arg0->z;
     spC.cur_pos = *arg0;
     spC.x130_flags |= CollData_X130_Clear;
     mpCollPrev(&spC);
-    mpColl_80042D24(&spC);
+    mpColl_LoadECB(&spC);
     inline0(&spC, 0, true);
     if (spC.x34_flags.b6) {
         return true;

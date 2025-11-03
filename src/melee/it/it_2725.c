@@ -6741,9 +6741,10 @@ void it_80275D5C(Item_GObj* item_gobj, itECB* arg_ecb)
     item = GET_ITEM((HSD_GObj*) item_gobj);
     scale = item->scl;
     item->xC1C = *arg_ecb;
-    mpColl_8004220C(&item->x378_itemColl, (HSD_GObj*) item_gobj,
-                    item->xC1C.top * scale, item->xC1C.bottom * scale,
-                    item->xC1C.right * scale, item->xC1C.left * scale);
+    mpColl_SetECBSource_Fixed(
+        &item->x378_itemColl, (HSD_GObj*) item_gobj, item->xC1C.top * scale,
+        item->xC1C.bottom * scale, item->xC1C.right * scale,
+        item->xC1C.left * scale);
     if (-1.0f == item->facing_dir) {
         int_dir = -1;
     } else {
@@ -6763,9 +6764,10 @@ void it_80275DFC(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     scale = item->scl;
     item->xC1C = item->xC0C;
-    mpColl_8004220C(&item->x378_itemColl, (HSD_GObj*) item_gobj,
-                    item->xC1C.top * scale, item->xC1C.bottom * scale,
-                    item->xC1C.right * scale, item->xC1C.left * scale);
+    mpColl_SetECBSource_Fixed(
+        &item->x378_itemColl, (HSD_GObj*) item_gobj, item->xC1C.top * scale,
+        item->xC1C.bottom * scale, item->xC1C.right * scale,
+        item->xC1C.left * scale);
     if (-1.0f == item->facing_dir) {
         int_dir = -1;
     } else {
@@ -6818,9 +6820,10 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
     item2 = item_gobj->user_data;
     scale = item2->scl;
     item2->xC1C = item1->xC1C;
-    mpColl_8004220C(&item2->x378_itemColl, (HSD_GObj*) item_gobj,
-                    item2->xC1C.top * scale, item2->xC1C.bottom * scale,
-                    item2->xC1C.right * scale, item2->xC1C.left * scale);
+    mpColl_SetECBSource_Fixed(
+        &item2->x378_itemColl, (HSD_GObj*) item_gobj, item2->xC1C.top * scale,
+        item2->xC1C.bottom * scale, item2->xC1C.right * scale,
+        item2->xC1C.left * scale);
     if (-1.0f == item2->facing_dir) {
         int_dir = -1;
     } else {
@@ -7276,12 +7279,13 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
             sp34.left = pos_x4;
         }
         item->xC1C = sp34;
-        mpColl_8004220C(
+        mpColl_SetECBSource_Fixed(
             &item->x378_itemColl, (HSD_GObj*) item_gobj,
             item->xC1C.top * it_804DC744, item->xC1C.bottom * it_804DC744,
             item->xC1C.right * it_804DC744, item->xC1C.left * it_804DC744);
-        // mpColl_8004220C(&item->x378_itemColl, (HSD_GObj*) item_gobj,
-        // item->xC1C.top * 1.0f, item->xC1C.bottom * 1.0f, item->xC1C.right
+        // mpColl_SetECBSource_Fixed(&item->x378_itemColl, (HSD_GObj*)
+        // item_gobj, item->xC1C.top * 1.0f, item->xC1C.bottom * 1.0f,
+        // item->xC1C.right
         // * 1.0f, item->xC1C.left * 1.0f);
         if (-1.0f == item->facing_dir) {
             dir2 = -1;

@@ -14,18 +14,19 @@
 /* 041C8C */ void mpCollPrev(CollData* cd);
 /* 041DD0 */ void mpColl_80041DD0(CollData* cd, u32 flags);
 /* 041EE4 */ void mpColl_80041EE4(CollData*);
-/* 042078 */ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*,
-                                  HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*,
-                                  HSD_JObj*, HSD_JObj*, float);
-/* 04220C */ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float, float,
-                                  float, float);
+/* 042078 */ void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj,
+                                           HSD_JObj*, HSD_JObj*, HSD_JObj*,
+                                           HSD_JObj*, HSD_JObj*, HSD_JObj*,
+                                           HSD_JObj*, float);
+/* 04220C */ void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj,
+                                            float, float, float, float);
 /* 042374 */ void mpColl_SetLedgeSnap(CollData*, float, float, float);
 /* 042384 */ void mpColl_80042384(CollData* cd);
-/* 0424DC */ void mpColl_800424DC(CollData* cd, u32 flags);
-/* 04293C */ void mpColl_8004293C(CollData* cd);
+/* 0424DC */ void mpColl_LoadECB_JObj(CollData*, u32 flags);
+/* 04293C */ void mpColl_LoadECB_Fixed(CollData*);
 /* 042C58 */ void mpColl_80042C58(CollData*, ftCollisionBox*);
-/* 042D24 */ void mpColl_80042D24(CollData* cd);
-/* 042DB0 */ void mpColl_80042DB0(CollData* ecb, float time);
+/* 042D24 */ void mpColl_LoadECB(CollData*);
+/* 042DB0 */ void mpColl_80042DB0(CollData*, float time);
 /* 043268 */ void mpColl_80043268(CollData*, s32, s32, float);
 /* 043324 */ void mpCollEnd(CollData*, bool, s32);
 /* 043558 */ void mpColl_80043558(CollData*, s32);

@@ -101,7 +101,7 @@ void it_802A24D0(ItemLink* arg0, f32 arg8)
     coll_data->prev_pos = coll_data->cur_pos;
     mpColl_80041EE4(coll_data);
     coll_data->x34_flags.b1234 = 5;
-    mpColl_8004220C(coll_data, NULL, arg8, arg8, arg8, arg8);
+    mpColl_SetECBSource_Fixed(coll_data, NULL, arg8, arg8, arg8, arg8);
 }
 
 static bool inline link_fighter_compare(Fighter* fp)
@@ -239,7 +239,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
 
             mpColl_80041EE4(temp_r18);
             temp_r18->x34_flags.b1234 = 5;
-            mpColl_8004220C(temp_r18, NULL, arg8, arg8, arg8, arg8);
+            mpColl_SetECBSource_Fixed(temp_r18, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
@@ -264,7 +264,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
 
             mpColl_80041EE4(temp_r21);
             temp_r18->x34_flags.b1234 = 5;
-            mpColl_8004220C(temp_r21, NULL, arg8, arg8, arg8, arg8);
+            mpColl_SetECBSource_Fixed(temp_r21, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint_c(arg0));
             GObj_SetupGXLink(temp_r3_2, HSD_GObj_JObjCallback, 6U, 0U);
@@ -289,7 +289,7 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
 
             mpColl_80041EE4(temp_r17);
             temp_r18->x34_flags.b1234 = 5;
-            mpColl_8004220C(temp_r17, NULL, arg8, arg8, arg8, arg8);
+            mpColl_SetECBSource_Fixed(temp_r17, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
