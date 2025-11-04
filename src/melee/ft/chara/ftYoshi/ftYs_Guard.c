@@ -66,15 +66,6 @@ Fighter_CostumeStrings ftYs_Init_CostumeStrings[] = {
     { ftYs_Unk2_803CEC24, ftYs_Unk2_803CEC30, ftYs_Unk2_803CEC4C },
 };
 
-/* 3CED84 */ static Vec4 ftYs_Unk3_803CED84 = { 0.65, 0.7, 0.8, 1 };
-/* 3CED94 */ static Vec4 ftYs_Unk3_803CED94 = { 1.1, 1.35, 1.3, 1.2 };
-/* 3CEDA4 */ static Vec3 ftYs_Unk3_803CEDA4[] = {
-    { 12, 0, -6 },
-    { 6, 6, 6 },
-};
-
-/* static */ extern float const ftYs_Init_804D9A28;
-
 void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -127,11 +118,11 @@ static void ftYs_Init_8012BECC_sub(HSD_GObj* gobj)
     } s;
 
     ftColl_8007B0C0(gobj, HurtCapsule_Disabled);
-    fp->mv.ys.guard.xA = 0;
+    fp->mv.ys.guard.xC = false;
     fp->mv.ys.guard.x0 = 0;
-    fp->mv.ys.guard.xD = p_ftCommonData->x268;
+    fp->mv.ys.guard.x10 = p_ftCommonData->x268;
+    fp->mv.ys.guard.x24 = 0;
     fp->mv.ys.guard.x20 = 0;
-    fp->mv.ys.guard.x1C = 0;
     s.v.x = s.v.y = s.v.z = 0;
     HSD_JObjSetTranslate(fp->parts[fp->ft_data->x8->x11].joint, &s.v);
     ftYs_Init_8012B8A4_no_inline(gobj);
@@ -172,7 +163,7 @@ void ftYs_GuardOn_0_Anim(HSD_GObj* gobj)
     u8 _[8];
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->mv.ys.unk2.x0 += ftYs_Init_804D9A28;
+    fp->mv.ys.guard.x0 += 1.0F;
     ftCo_80092BCC(gobj);
     if (ftCo_800925A4(gobj)) {
         spawnEffect(gobj);
@@ -240,12 +231,12 @@ void ftYs_GuardHold_Anim(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->mv.ys.unk2.x0 += ftYs_Init_804D9A28;
+    fp->mv.ys.guard.x0 += 1.0F;
     ftCo_80092BCC(gobj);
 
     if (ftCo_800925A4(gobj)) {
         spawnEffect(gobj);
-    } else if (fp->mv.ys.unk2.xC || (!fp->x221B_b0 && !fp->reflecting)) {
+    } else if (fp->mv.ys.guard.xC || (!fp->x221B_b0 && !fp->reflecting)) {
         ftCo_80092BE8(gobj);
     } else {
         ftYs_Init_8012B8A4(gobj);
@@ -273,7 +264,7 @@ void ftYs_GuardHold_Coll(HSD_GObj* arg0)
 
 void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 343, 0, 0, ftYs_Init_804D9A28, 0, NULL);
+    Fighter_ChangeMotionState(gobj, 343, 0, 0, 1.0F, 0, NULL);
 
     {
         Fighter* fp0 = GET_FIGHTER(gobj);
@@ -298,10 +289,8 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
 
 void ftYs_GuardOff_Anim(HSD_GObj* gobj)
 {
-    u8 _[8];
-
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->mv.ys.unk2.x0 = fp->mv.ys.unk2.x0 + ftYs_Init_804D9A28;
+    fp->mv.ys.guard.x0 += 1.0F;
 
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft_8008A2BC(gobj);
@@ -323,8 +312,6 @@ void ftYs_GuardOff_Coll(HSD_GObj* arg0)
     ftCo_GuardOff_Coll(arg0);
 }
 
-extern f32 ftYs_Init_804D9A2C;
-
 void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
 {
     f32 var_f0;
@@ -334,8 +321,8 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, 0x158, 0U, ftYs_Init_804D9A2C,
-                              ftYs_Init_804D9A28, ftYs_Init_804D9A2C, NULL);
+    Fighter_ChangeMotionState(gobj, 0x158, 0U, 0.0F,
+                              1.0F, 0.0F, NULL);
     fp->hitlag_cb = (void (*)(HSD_GObj*)) ftCo_80093240;
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->post_hitlag_cb = (void (*)(HSD_GObj*)) ftCo_800932DC;
@@ -343,10 +330,10 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
         ftParts_80074B0C(gobj, 0, 1);
     }
     inlineA0(gobj);
-    temp = (p_ftCommonData->x28C * (fp->x19A4 * (ftYs_Init_804D9A28 - fp->lightshield_amount))) + p_ftCommonData->x290;
+    temp = (p_ftCommonData->x28C * (fp->x19A4 * (1.0F - fp->lightshield_amount))) + p_ftCommonData->x290;
     if (arg1 == false) {
         fp->gr_vel = temp * p_ftCommonData->x294;
-        if (fp->specialn_facing_dir < ftYs_Init_804D9A2C) {
+        if (fp->specialn_facing_dir < 0.0F) {
             var_f0 = fp->gr_vel;
         } else {
             var_f0 = -fp->gr_vel;
@@ -363,7 +350,7 @@ void ftYs_GuardDamage_Anim(HSD_GObj* gobj)
 
     ftCo_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->mv.ys.unk2.xC) {
+        if (fp->mv.ys.guard.xC) {
             ftCo_80092BE8(gobj);
         } else {
             ftCo_800928CC(gobj);
@@ -395,12 +382,44 @@ void ftYs_Shield_8012C850(HSD_GObj* gobj)
     fp->x221C_b1 = true;
     fp->x221C_b2 = true;
 
-    fp->mv.ys.unk2.x14 = p_ftCommonData->x2A4;
-    fp->mv.ys.unk2.x18 = p_ftCommonData->x2B4;
+    fp->mv.ys.guard.x14 = p_ftCommonData->x2A4;
+    fp->mv.ys.guard.x18 = p_ftCommonData->x2B4;
     ftCo_8009370C(gobj, ftYs_Shield_8012CACC);
 }
 
-/// #ftYs_Shield_8012C914
+static inline void ftYs_Shield_8012C914_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 translate;
+
+    ftColl_8007B0C0(gobj, HurtCapsule_Disabled);
+    fp->mv.ys.guard.xC = false;
+    fp->mv.ys.guard.x0 = 0.0F;
+    fp->mv.ys.guard.x10 = p_ftCommonData->x268;
+    fp->mv.ys.guard.x24 = 0;
+    fp->mv.ys.guard.x20 = 0;
+    translate.x = translate.y = translate.z = 0.0F;
+
+    HSD_JObjSetTranslate(fp->parts[fp->ft_data->x8->x11].joint, &translate);
+    ftYs_Init_8012B8A4(gobj);
+    ftCo_80091D58(fp);
+    ft_PlaySFX(fp, 0x6E, 0x7F, 0x40);
+}
+
+void ftYs_Shield_8012C914(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 0, 0.0F, 1.0F, 0.0F, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->x672_input_timer_counter = 254;
+    fp->x221C_b3 = true;
+    fp->x221C_b1 = true;
+    fp->x221C_b2 = true;
+    fp->mv.ys.guard.x14 = p_ftCommonData->x2A4;
+    fp->mv.ys.guard.x18 = p_ftCommonData->x2B4;
+    ftCo_8009370C(gobj, ftYs_Shield_8012CACC);
+    ftYs_Shield_8012C914_inline(gobj);
+}
 
 void ftYs_Shield_8012CACC(HSD_GObj* arg0) {}
 
@@ -411,7 +430,7 @@ void ftYs_GuardOn_1_Anim(HSD_GObj* gobj)
 
     ftCo_80093BC0(gobj);
     fp = GET_FIGHTER(gobj);
-    fp->mv.ys.guard.x0 += ftYs_Init_804D9A28;
+    fp->mv.ys.guard.x0 += 1.0F;
     ftCo_80092BCC(gobj);
     if (ftCo_800925A4(gobj)) {
         spawnEffect(gobj);
