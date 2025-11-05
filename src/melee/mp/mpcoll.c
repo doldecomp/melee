@@ -674,27 +674,28 @@ inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
     dest->y += time * (src->y - dest->y);
 }
 
-void mpColl_80042DB0(CollData* ecb, float time)
+void mpColl_80042DB0(CollData* coll, float time)
 {
-    ecb->xC4_ecb = ecb->xA4_ecbCurrCorrect;
-    if (ecb->x34_flags.b6) {
-        ecb->xA4_ecbCurrCorrect = ecb->x64_ecb;
-        ecb->x34_flags.b6 = 0;
+    coll->xC4_ecb = coll->xA4_ecbCurrCorrect;
+    if (coll->x34_flags.b6) {
+        coll->xA4_ecbCurrCorrect = coll->x64_ecb;
+        coll->x34_flags.b6 = 0;
     }
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.top, &ecb->x84_ecb.top);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom,
-                     &ecb->x84_ecb.bottom);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.left, &ecb->x84_ecb.left);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right,
-                     &ecb->x84_ecb.right);
-    if (fpclassify(ecb->xA4_ecbCurrCorrect.top.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.top.y) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.bottom.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.bottom.y) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.left.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.left.y) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.right.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN)
+    Vec2_Interpolate(time, &coll->xA4_ecbCurrCorrect.top, &coll->x84_ecb.top);
+    Vec2_Interpolate(time, &coll->xA4_ecbCurrCorrect.bottom,
+                     &coll->x84_ecb.bottom);
+    Vec2_Interpolate(time, &coll->xA4_ecbCurrCorrect.left,
+                     &coll->x84_ecb.left);
+    Vec2_Interpolate(time, &coll->xA4_ecbCurrCorrect.right,
+                     &coll->x84_ecb.right);
+    if (fpclassify(coll->xA4_ecbCurrCorrect.top.x) == FP_NAN ||
+        fpclassify(coll->xA4_ecbCurrCorrect.top.y) == FP_NAN ||
+        fpclassify(coll->xA4_ecbCurrCorrect.bottom.x) == FP_NAN ||
+        fpclassify(coll->xA4_ecbCurrCorrect.bottom.y) == FP_NAN ||
+        fpclassify(coll->xA4_ecbCurrCorrect.left.x) == FP_NAN ||
+        fpclassify(coll->xA4_ecbCurrCorrect.left.y) == FP_NAN ||
+        fpclassify(coll->xA4_ecbCurrCorrect.right.x) == FP_NAN ||
+        fpclassify(coll->xA4_ecbCurrCorrect.right.y) == FP_NAN)
     {
         HSD_ASSERTREPORT(1193, 0, "error\n");
     }
