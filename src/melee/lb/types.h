@@ -559,255 +559,374 @@ struct lbColl_8000A10C_arg0_t {
     Vec3 x14;
 };
 
+struct Command_00 {
+    u32 code : 6;
+    u32 value : 26;
+};
+struct Command_02 {
+    u32 code : 6;
+    u32 value : 26;
+};
+struct Command_03 {
+    u32 code : 6;
+    u32 value : 26;
+};
+struct Command_04 {
+    u32 x;
+};
+struct Command_05 {
+    union CmdUnion* ptr;
+};
+struct Command_07 {
+    union CmdUnion* ptr;
+};
+struct Command_09 {
+    u32 id : 6;
+    u32 param_1 : 8;
+    u32 param_2 : 18;
+};
+struct unk0 {
+    u32 code : 6;  ///< Bits 0~5
+    u32 unk1 : 8;  ///< Bits 6~13
+    u32 unk2 : 18; ///< Bits 14~31
+};
+struct unk1 {
+    u32 code : 6; ///< Bits 0~5
+    u32 unk0 : 2; ///< Bits 6~7
+    u32 unk1 : 4; ///< Bits 8~11
+    u32 unk2 : 1; ///< Bit 12
+};
+struct unk2 {
+    u32 code : 6;     ///< Bits 0~5
+    u32 hit_idx : 26; ///< Bits 6~31
+};
+struct unk3 {
+    s32 unk0 : 7;  ///< Bits 0~6
+    s32 unk1 : 25; ///< Bits 7~31
+};
+struct unk4 {
+    u16 unk0 : 6; ///< Bits 0~5
+    u16 unk1 : 8; ///< Bits 6~13
+};
+struct unk5 {
+    s32 unk0 : 14; ///< Bits 0~13
+    s32 unk1 : 18; ///< Bits 14~31
+};
+struct unk6 {
+    u8 unk0 : 6; ///< Bits 0~5
+    u8 unk1 : 1; ///< Bit 6
+};
+struct unk7 {
+    u32 unk0 : 6;  ///< Bits 0~5
+    u32 unk1 : 26; ///< Bits 6~31
+};            ///< #ftAction_80071998
+struct unk8 {
+    int unk0;
+};
+struct part_anim {
+    s32 unk0 : 6;
+    s32 unk1 : 7;
+    s32 unk2 : 7;
+    u32 unk3 : 12;
+};
+struct unk9 {
+    s32 unk0 : 6;
+    u32 unk1 : 13;
+    u32 unk2 : 13;
+};
+struct unk10 {
+    s32 unk0 : 6;
+    u32 unk1 : 1;
+    u32 unk2 : 12;
+    u32 unk3 : 13;
+};
+struct unk11 {
+    s32 unk0 : 6;
+    u32 unk1 : 26;
+};
+struct unk12 {
+    u32 unk0 : 6;
+    u32 unk1 : 2;
+    u32 unk2 : 10;
+    u32 unk3 : 14;
+};
+struct unk13 {
+    u32 unk0 : 6;
+    u32 unk1 : 8;
+    u32 unk2 : 18;
+};
+struct unk14 {
+    u32 unk0 : 6;
+    u32 unk1 : 8;
+};
+struct unk15 {
+    u32 unk0 : 6;
+    u32 unk1 : 26;
+}; ///< #ftAction_80072B14
+struct unk16 {
+    u32 unk0 : 6;
+    s32 unk3 : 1;
+    s32 unk4 : 25;
+}; ///< #ftAction_80072B3C
+struct unk17 {
+    u32 unk0 : 6;
+    s32 unk1 : 26;
+}; ///< #ftAction_80072B94
+struct unk18 {
+    u32 unk0 : 6;
+    s32 damage_amount : 26;
+}; ///< #ftAction_80072BF4
+struct unk19 {
+    u32 unk0 : 6;
+    u32 unk1 : 26;
+}; ///< #ftAction_80072C6C
+struct unk20 {
+    u32 unk0 : 6;
+    u32 unk1 : 26;
+}; ///< #ftAction_80072CB0
+struct unk21 {
+    u32 unk0 : 6;
+    u32 unk1 : 1;
+    u32 unk2 : 8;
+}; ///< #ftAction_800730B8
+struct set_hitbox_damage {
+    u32 code : 6;
+    u32 idx : 3;
+    u32 value : 23;
+}; ///< #ftAction_8007162C
+struct set_hitbox_scale {
+    u32 code : 6;
+    u32 idx : 3;
+    u32 value : 23;
+}; ///< #ftAction_8007169C
+struct unk22 {
+    u32 code : 6;
+    u32 idx : 24;
+    u32 type : 1;
+    u32 value : 1;
+}; ///< #ftAction_80071708
+struct set_cmd_var {
+    u32 code : 6;
+    u32 idx : 2;
+    u32 value : 24;
+}; ///< #ftAction_80071708
+struct set_hurt_state {
+    u32 code : 6;
+    u32 bone_idx : 8;
+    u32 state : 18;
+}; ///< #ftAction_80071A9C
+struct unk23 {
+    u32 code : 6;
+    u32 disabled : 26;
+}; ///< #ftAction_80071AE8
+struct unk24 {
+    u32 code : 6;
+    u32 unk0 : 26;
+}; ///< #ftAction_80071B28
+struct unk25 {
+    u32 code : 6;
+    s32 unk0 : 7;
+    s32 unk1 : 19;
+}; ///< #ftAction_80071D40
+struct unk26_0 {
+    u32 code : 6;
+    u32 idx : 3;
+    u32 unk0 : 23;
+}; ///< #ftAction_80071E04 command 0
+struct unk26_1 {
+    u32 unk0 : 9;
+    u32 hit_x24 : 9;
+    u32 hit_x28 : 9;
+}; ///< #ftAction_80071E04 command 1
+struct unk26_2 {
+    u32 hit_x2C : 9;
+    u32 element : 4;
+    u32 sfx_severity : 3;
+    u32 sfx_kind : 4;
+}; ///< #ftAction_80071E04 command 2
+struct unk27 {
+    u32 code : 6;
+    u32 value : 26;
+}; ///< #ftAction_80071F34
+struct unk28 {
+    u32 code : 6;
+    u32 value : 26;
+}; ///< #ftAction_80071F78
+struct unk29 {
+    u32 code : 6;
+    u32 value : 26;
+}; ///< #ftAction_80071FA0
+struct unk30 {
+    u32 code : 6;
+    u32 b : 1;
+    s32 i0 : 7;
+    s32 i1 : 7;
+    s32 f : 11;
+}; ///< #ftAction_800726F4
+struct unk31 {
+    u32 code : 6;
+    u32 unk0 : 10;
+    u32 unk1 : 16;
+}; ///< #ftAction_80073008
+struct unk32 {
+    u32 code : 6;
+    u32 unk0 : 13;
+    u32 unk1 : 13;
+}; ///< #ftAction_80073008
+struct unk33 {
+    u32 code : 6;
+    u32 unk0 : 13;
+    u32 unk1 : 13;
+}; ///< #it_8027990C
+struct spawn_gfx_0 {
+    u32 opcode : 6;
+    u32 boneId : 8;
+    u32 useCommonBoneIDs : 1;
+    u32 destroyOnStateChange : 1;
+    u32 useUnkBone : 1;
+    u32 unk1 : 15;
+};
+struct spawn_gfx_1 {
+    u32 gfxID : 16;
+    u32 unkFloat : 16;
+};
+struct spawn_gfx_2 {
+    s16 offsetZ : 16;
+    s16 offsetY : 16;
+};
+struct spawn_gfx_3 {
+    s16 offsetX : 16;
+    u16 rangeZ : 16;
+};
+struct spawn_gfx_4 {
+    u16 rangeY : 16;
+    u16 rangeX : 16;
+};
+struct spawn_hitbox_0 {
+    u32 opcode : 6;
+    u32 id : 3;
+    u32 hit_group : 3;
+    u32 only_hit_grabbed : 1;
+    u32 bone : 8;
+    u32 use_common_bone_ids : 1;
+    u32 damage : 10;
+};
+
+struct spawn_hitbox_1 {
+    u32 size : 16;
+    s32 z_offset : 16;
+};
+
+struct spawn_hitbox_2 {
+    s32 y_offset : 16;
+    s32 x_offset : 16;
+};
+
+struct spawn_hitbox_3 {
+    u32 angle : 9;
+    u32 knockback_growth : 9;
+    u32 weight_set_knockback : 9;
+    u32 item_hit_interaction : 1;
+    u32 ignore_thrown_fighters : 1;
+    u32 ignore_fighter_scale : 1;
+    u32 clank : 1;
+    u32 rebound : 1;
+};
+
+struct spawn_hitbox_4 {
+    u32 base_knockback : 9;
+    u32 element : 5;
+    s32 shield_damage : 8;
+    u32 hit_sfx_severity : 3;
+    u32 hit_sfx_kind : 5;
+    u32 hit_grounded : 1;
+    u32 hit_aerial : 1;
+};
+struct spawn_hitbox_5 {
+    u32 x0 : 8;
+    u32 x1_b0 : 1;
+    u32 x1_b1 : 1;
+    u32 x1_b2 : 1;
+    u32 x1_b3 : 1;
+    u32 x1_b4 : 1;
+    u32 x1_b5 : 1;
+    u32 x1_b6 : 1;
+    u32 x1_b7 : 1;
+};
+struct spawn_hitbox_skip {
+    u8 _0[0xF];
+    u32 xF_b0 : 1;
+    u32 xF_b1 : 1;
+    u32 xF_b2 : 1;
+    u32 xF_b3 : 1;
+    u32 xF_b4 : 1;
+};
+
 struct CommandInfo {
     f32 timer;       // 0x00
     f32 frame_count; // 0x04
     union {
         u32* ptr[1]; ///< @todo Hack to match #Command_04
         union CmdUnion {
-            struct {
-                u32 code : 6;
-                u32 value : 26;
-            } Command_00;
-            struct {
-                u32 code : 6;
-                u32 value : 26;
-            } Command_02;
-            struct {
-                u32 code : 6;
-                u32 value : 26;
-            } Command_03;
-            struct {
-                u32 x;
-            } Command_04_2;
-            struct {
-                union CmdUnion* ptr;
-            } Command_05;
-            struct {
-                union CmdUnion* ptr;
-            } Command_07;
-            struct {
-                u32 id : 6;
-                u32 param_1 : 8;
-                u32 param_2 : 18;
-            } Command_09;
-            struct {
-                u32 code : 6;  ///< Bits 0~5
-                u32 unk1 : 8;  ///< Bits 6~13
-                u32 unk2 : 18; ///< Bits 14~31
-            } unk0;
-            struct {
-                u32 code : 6; ///< Bits 0~5
-                u32 unk0 : 2; ///< Bits 6~7
-                u32 unk1 : 4; ///< Bits 8~11
-                u32 unk2 : 1; ///< Bit 12
-            } unk1;
-            struct {
-                u32 code : 6;     ///< Bits 0~5
-                u32 hit_idx : 26; ///< Bits 6~31
-            } unk2;
-            struct {
-                s32 unk0 : 7;  ///< Bits 0~6
-                s32 unk1 : 25; ///< Bits 7~31
-            } unk3;
-            struct {
-                u16 unk0 : 6; ///< Bits 0~5
-                u16 unk1 : 8; ///< Bits 6~13
-            } unk4;
-            struct {
-                s32 unk0 : 14; ///< Bits 0~13
-                s32 unk1 : 18; ///< Bits 14~31
-            } unk5;
-            struct {
-                u8 unk0 : 6; ///< Bits 0~5
-                u8 unk1 : 1; ///< Bit 6
-            } unk6;
-            struct {
-                u32 unk0 : 6;  ///< Bits 0~5
-                u32 unk1 : 26; ///< Bits 6~31
-            } unk7;            ///< #ftAction_80071998
-            struct {
-                int unk0;
-            } unk8;
-            struct {
-                s32 unk0 : 6;
-                s32 unk1 : 7;
-                s32 unk2 : 7;
-                u32 unk3 : 12;
-            } part_anim;
-            struct {
-                s32 unk0 : 6;
-                u32 unk1 : 13;
-                u32 unk2 : 13;
-            } unk9;
-            struct {
-                s32 unk0 : 6;
-                u32 unk1 : 1;
-                u32 unk2 : 12;
-                u32 unk3 : 13;
-            } unk10;
-            struct {
-                s32 unk0 : 6;
-                u32 unk1 : 26;
-            } unk11;
-            struct {
-                u32 unk0 : 6;
-                u32 unk1 : 2;
-                u32 unk2 : 10;
-                u32 unk3 : 14;
-            } unk12;
-            struct {
-                u32 unk0 : 6;
-                u32 unk1 : 8;
-                u32 unk2 : 18;
-            } unk13;
-            struct {
-                u32 unk0 : 6;
-                u32 unk1 : 8;
-            } unk14;
-            struct {
-                u32 unk0 : 6;
-                u32 unk1 : 26;
-            } unk15; ///< #ftAction_80072B14
-            struct {
-                u32 unk0 : 6;
-                s32 unk3 : 1;
-                s32 unk4 : 25;
-            } unk16; ///< #ftAction_80072B3C
-            struct {
-                u32 unk0 : 6;
-                s32 unk1 : 26;
-            } unk17; ///< #ftAction_80072B94
-            struct {
-                u32 unk0 : 6;
-                s32 damage_amount : 26;
-            } unk18; ///< #ftAction_80072BF4
-            struct {
-                u32 unk0 : 6;
-                u32 unk1 : 26;
-            } unk19; ///< #ftAction_80072C6C
-            struct {
-                u32 unk0 : 6;
-                u32 unk1 : 26;
-            } unk20; ///< #ftAction_80072CB0
-            struct {
-                u32 unk0 : 6;
-                u32 unk1 : 1;
-                u32 unk2 : 8;
-            } unk21; ///< #ftAction_800730B8
-            struct {
-                u32 code : 6;
-                u32 idx : 3;
-                u32 value : 23;
-            } set_hitbox_damage; ///< #ftAction_8007162C
-            struct {
-                u32 code : 6;
-                u32 idx : 3;
-                u32 value : 23;
-            } set_hitbox_scale; ///< #ftAction_8007169C
-            struct {
-                u32 code : 6;
-                u32 idx : 24;
-                u32 type : 1;
-                u32 value : 1;
-            } unk22; ///< #ftAction_80071708
-            struct {
-                u32 code : 6;
-                u32 idx : 2;
-                u32 value : 24;
-            } set_cmd_var; ///< #ftAction_80071708
-            struct {
-                u32 code : 6;
-                u32 bone_idx : 8;
-                u32 state : 18;
-            } set_hurt_state; ///< #ftAction_80071A9C
-            struct {
-                u32 code : 6;
-                u32 disabled : 26;
-            } unk23; ///< #ftAction_80071AE8
-            struct {
-                u32 code : 6;
-                u32 unk0 : 26;
-            } unk24; ///< #ftAction_80071B28
-            struct {
-                u32 code : 6;
-                s32 unk0 : 7;
-                s32 unk1 : 19;
-            } unk25; ///< #ftAction_80071D40
-            struct {
-                u32 code : 6;
-                u32 idx : 3;
-                u32 unk0 : 23;
-            } unk26_0; ///< #ftAction_80071E04 command 0
-            struct {
-                u32 unk0 : 9;
-                u32 hit_x24 : 9;
-                u32 hit_x28 : 9;
-            } unk26_1; ///< #ftAction_80071E04 command 1
-            struct {
-                u32 hit_x2C : 9;
-                u32 element : 4;
-                u32 sfx_severity : 3;
-                u32 sfx_kind : 4;
-            } unk26_2; ///< #ftAction_80071E04 command 2
-            struct {
-                u32 code : 6;
-                u32 value : 26;
-            } unk27; ///< #ftAction_80071F34
-            struct {
-                u32 code : 6;
-                u32 value : 26;
-            } unk28; ///< #ftAction_80071F78
-            struct {
-                u32 code : 6;
-                u32 value : 26;
-            } unk29; ///< #ftAction_80071FA0
-            struct {
-                u32 code : 6;
-                u32 b : 1;
-                s32 i0 : 7;
-                s32 i1 : 7;
-                s32 f : 11;
-            } unk30; ///< #ftAction_800726F4
-            struct {
-                u32 code : 6;
-                u32 unk0 : 10;
-                u32 unk1 : 16;
-            } unk31; ///< #ftAction_80073008
-            struct {
-                u32 code : 6;
-                u32 unk0 : 13;
-                u32 unk1 : 13;
-            } unk32; ///< #ftAction_80073008
-            struct {
-                u32 code : 6;
-                u32 unk0 : 13;
-                u32 unk1 : 13;
-            } unk33; ///< #it_8027990C
-            struct {
-                u32 opcode : 6;
-                u32 boneId : 8;
-                u32 useCommonBoneIDs : 1;
-                u32 destroyOnStateChange : 1;
-                u32 useUnkBone : 1;
-                u32 unk1 : 15;
-            } test1;
-            struct {
-                u32 gfxID : 16;
-                u32 unkFloat : 16;
-            } test2;
-            struct {
-                s16 offsetZ : 16;
-                s16 offsetY : 16;
-            } test3;
-            struct {
-                s16 offsetX : 16;
-                u16 rangeZ : 16;
-            } test4;
-            struct {
-                u16 rangeY : 16;
-                u16 rangeX : 16;
-            } test5;
+            struct Command_00 Command_00;
+            struct Command_02 Command_02;
+            struct Command_03 Command_03;
+            struct Command_04 Command_04;
+            struct Command_05 Command_05;
+            struct Command_07 Command_07;
+            struct Command_09 Command_09;
+            struct unk0 unk0;
+            struct unk1 unk1;
+            struct unk2 unk2;
+            struct unk3 unk3;
+            struct unk4 unk4;
+            struct unk5 unk5;
+            struct unk6 unk6;
+            struct unk7 unk7; ///< #ftAction_80071998
+            struct unk8 unk8;
+            struct part_anim part_anim;
+            struct unk9 unk9;
+            struct unk10 unk10;
+            struct unk11 unk11;
+            struct unk12 unk12;
+            struct unk13 unk13;
+            struct unk14 unk14;
+            struct unk15 unk15; ///< #ftAction_80072B14
+            struct unk16 unk16; ///< #ftAction_80072B3C
+            struct unk17 unk17; ///< #ftAction_80072B94
+            struct unk18 unk18; ///< #ftAction_80072BF4
+            struct unk19 unk19; ///< #ftAction_80072C6C
+            struct unk20 unk20; ///< #ftAction_80072CB0
+            struct unk21 unk21; ///< #ftAction_800730B8
+            struct set_hitbox_damage set_hitbox_damage; ///< #ftAction_8007162C
+            struct set_hitbox_scale set_hitbox_scale; ///< #ftAction_8007169C
+            struct unk22 unk22; ///< #ftAction_80071708
+            struct set_cmd_var set_cmd_var; ///< #ftAction_80071708
+            struct set_hurt_state set_hurt_state; ///< #ftAction_80071A9C
+            struct unk23 unk23; ///< #ftAction_80071AE8
+            struct unk24 unk24; ///< #ftAction_80071B28
+            struct unk25 unk25; ///< #ftAction_80071D40
+            struct unk26_0 unk26_0; ///< #ftAction_80071E04 command 0
+            struct unk26_1 unk26_1; ///< #ftAction_80071E04 command 1
+            struct unk26_2 unk26_2; ///< #ftAction_80071E04 command 2
+            struct unk27 unk27; ///< #ftAction_80071F34
+            struct unk28 unk28; ///< #ftAction_80071F78
+            struct unk29 unk29; ///< #ftAction_80071FA0
+            struct unk30 unk30; ///< #ftAction_800726F4
+            struct unk31 unk31; ///< #ftAction_80073008
+            struct unk32 unk32; ///< #ftAction_80073008
+            struct unk33 unk33; ///< #it_8027990C
+            struct spawn_gfx_0 spawn_gfx_0; ///< ftAction_80071028
+            struct spawn_gfx_1 spawn_gfx_1;
+            struct spawn_gfx_2 spawn_gfx_2;
+            struct spawn_gfx_3 spawn_gfx_3;
+            struct spawn_gfx_4 spawn_gfx_4;
+            struct spawn_hitbox_0 create_hitbox_0; ///< ftAction_8007121C
+            struct spawn_hitbox_1 create_hitbox_1;
+            struct spawn_hitbox_2 create_hitbox_2;
+            struct spawn_hitbox_3 create_hitbox_3;
+            struct spawn_hitbox_4 create_hitbox_4;
+            struct spawn_hitbox_5 create_hitbox_5;
         }* u;
     };
     u32 loop_count; // 0x0C

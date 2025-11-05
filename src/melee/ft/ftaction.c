@@ -2,6 +2,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "lb/forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -221,151 +222,140 @@ Offset X
 Range Z
 Range Y
 Range X
-
-
-
-ftCo_8009F834 args:
-
-gobj
-gfx_id
-bone
-use_common_bone_id
-destroy_on_state_change
-offset
-range
 */
 
+/// @brief Spawns GFX
 void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float unk;
     Vec3 offset;
     Vec3 range;
-    // permuter jank?
+    int bone;
+    int use_common_bone_id;
+    int destroy_on_state_change;
+    u32 gfx_id;
     {
-        CommandInfo* new_var;
         if (!fp->invisible) {
-            int bone;
-            if (cmd->u->test1.useUnkBone) {
+            if (cmd->u->spawn_gfx_0.useUnkBone) {
                 bone = fp->ft_data->x8->x12;
             } else {
-                bone = cmd->u->test1.boneId;
+                bone = cmd->u->spawn_gfx_0.boneId;
             }
-            {
-                int use_common_bone_id = cmd->u->test1.useCommonBoneIDs;
-                int destroy_on_state_change =
-                    cmd->u->test1.destroyOnStateChange;
-                gmScriptEventUpdatePtr((new_var = cmd)->u, struct test1);
-                {
-                    int gfx_id = new_var->u->test2.gfxID;
-                    unk = new_var->u->test2.unkFloat;
-                    gmScriptEventUpdatePtr(new_var->u, struct test2);
-                    {
-                        offset.z = (1 / 256.0f) * new_var->u->test3.offsetZ;
-                        offset.y = (1 / 256.0f) * new_var->u->test3.offsetY;
-                        gmScriptEventUpdatePtr(new_var->u, struct test3);
-                        offset.x = (1 / 256.0f) * new_var->u->test4.offsetX;
-                        range.z = (1 / 256.0f) * new_var->u->test4.rangeZ;
-                        gmScriptEventUpdatePtr(new_var->u, struct test4);
-                        range.y = (1 / 256.0f) * new_var->u->test5.rangeY;
-                        range.x = (1 / 256.0f) * new_var->u->test5.rangeX;
-                        gmScriptEventUpdatePtr(new_var->u, struct test5);
-                        ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
-                                      destroy_on_state_change, &offset, &range,
-                                      unk);
-                    }
-                }
-            }
+            use_common_bone_id = cmd->u->spawn_gfx_0.useCommonBoneIDs;
+            destroy_on_state_change =
+                cmd->u->spawn_gfx_0.destroyOnStateChange;
+
+            NEXT_CMD(cmd);
+            gfx_id = cmd->u->spawn_gfx_1.gfxID;
+            unk = cmd->u->spawn_gfx_1.unkFloat;
+
+            NEXT_CMD(cmd);
+            /// @todo i believe they are actually read in reverse order, maybe
+            // ftCo_8009F834 also reads them in reverse.
+            // double check this in-game eventually...
+            offset.x = (1 / 256.0f) * cmd->u->spawn_gfx_2.offsetZ;
+            offset.y = (1 / 256.0f) * cmd->u->spawn_gfx_2.offsetY;
+
+            NEXT_CMD(cmd);
+            offset.z = (1 / 256.0f) * cmd->u->spawn_gfx_3.offsetX;
+            range.x = (1 / 256.0f) * cmd->u->spawn_gfx_3.rangeZ;
+
+            NEXT_CMD(cmd);
+            range.y = (1 / 256.0f) * cmd->u->spawn_gfx_4.rangeY;
+            range.z = (1 / 256.0f) * cmd->u->spawn_gfx_4.rangeX;
+
+            NEXT_CMD(cmd);
+            ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
+                            destroy_on_state_change, &offset, &range,
+                            unk);
         } else {
             ftAction_800711DC(gobj, cmd);
         }
     }
 }
 
-/// Skip GFX Spawn
+/// @brief Skips GFX Spawn
 void ftAction_800711DC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 5);
 }
 
+/// @brief Spawns Hitboxes
 void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // char* temp_r3;
-    // char part;
-    // u32 temp_r4_2;
-    // char* cmd_x8 = cmd->x8;
-    // Fighter* fp = gobj->user_data;
-    // HitCapsule* hit;
-    // PAD_STACK(16);
+    Fighter* fp;
+    HitCapsule* hitbox;
+    u32 hit_group;
+    u32 idx;
+    struct spawn_hitbox_skip* skip;
+    PAD_STACK(8);
 
-    // if ((((u8) M2C_FIELD(cmd_x8, u8*, 0xF) >> 3U) & 1) &&
-    //     fp->x1064_thrownHitbox.owner == NULL)
-    // {
-    //     ftAction_800715EC(gobj, cmd);
-    // } else {
-    //     hit = &fp->x914[(((u16) M2C_FIELD(cmd_x8, u16*, 0) >> 7U) & 7)];
-    //     temp_r4_2 = ((u8) M2C_FIELD(cmd_x8, u8*, 1) >> 4U) & 7;
-    //     if (hit->state == HitCapsule_Disabled || hit->x4 != temp_r4_2) {
-    //         hit->x4 = temp_r4_2;
-    //         hit->state = HitCapsule_Enabled;
-    //         fp->x2219_b3 = 1;
-    //         ftColl_800768A0(fp, hit);
-    //     }
-    //     temp_r3 = cmd->x8;
-    //     part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xB);
-    //     if (((u8) M2C_FIELD(temp_r3, u8*, 2) >> 2U) & 1) {
-    //         hit->jobj = fp->parts[ftParts_GetBoneIndex(fp, part)].joint;
-    //     } else {
-    //         hit->jobj = fp->parts[(int) part].joint;
-    //     }
-    //     ftColl_8007ABD0(hit, M2C_FIELD(cmd->x8, u16*, 2) & 0x3FF, gobj);
-    //     ++cmd->u;
-    //     hit->scale = 0.003906f * M2C_FIELD(cmd->x8, u16*, 0);
-    //     hit->b_offset.x = 0.003906f * M2C_FIELD(cmd->x8, s16*, 2);
-    //     ++cmd->u;
-    //     // hit->b_offset.y = 0.003906f * cmd->x8_bits->x0;
-    //     // hit->b_offset.z = 0.003906f * cmd->x8_bits->x2;
-    //     ++cmd->u;
-    //     ftColl_8007AC9C(hit, (M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF,
-    //                     gobj);
-    //     hit->x24 = ((u32) M2C_FIELD(cmd->x8, u32*, 0) >> 0xEU) & 0x1FF;
-    //     hit->x28 = (M2C_FIELD(cmd->x8, u16*, 2) >> 5U) & 0x1FF;
-    //     // hit->x43_b0 = cmd->x8_bits->x3_b3;
-    //     // hit->x43_b1 = cmd->x8_bits->x3_b5;
-    //     // hit->x40_b0 = cmd->x8_bits->x3_b6;
-    //     // hit->x40_b1 = cmd->x8_bits->x3_b7;
-    //     ++cmd->u;
-    //     hit->x2C = ((u16) M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF;
-    //     hit->element = ((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 2U) & 0x1F;
-    //     M2C_FIELD(hit, int*, 0x34) =
-    //         (int) ((int) ((M2C_FIELD(cmd->x8, u32*, 0) << 0xE) & 0xFF800000)
-    //         >>
-    //                0x18);
-    //     hit->sfx_severity = ((u16) M2C_FIELD(cmd->x8, u16*, 2) >> 7U) & 7;
-    //     hit->sfx_kind = ((u8) M2C_FIELD(cmd->x8, u8*, 3) >> 2U) & 0x1F;
-    //     // hit->x40_b2 = cmd->x8_bits->x3_b7;
-    //     // hit->x40_b3 = cmd->x8_bits->x3_b6;
-    //     ++cmd->u;
-    //     hit->x42_b5 = 1;
-    //     hit->x42_b7 = 1;
-    //     hit->x41_b4 = 0;
-    //     hit->x41_b6 = 0;
-    //     hit->x41_b5 = 0;
-    //     hit->x42_b0 = 0;
-    //     hit->x42_b4 = 0;
-    //     hit->x41_b7 = 0;
-    //     hit->hit_grabbed_victim_only = cmd->u->unk1.unk2;
-    //     hit->x42_b1 = 1;
-    //     hit->x42_b2 = 0;
-    //     hit->x43_b2 = 0;
-    //     if ((HSD_GObj_804D7838 != NULL) && (HSD_GObj_804D7838->s_link > 9U))
-    //     {
-    //         ftColl_8007AD18(fp, hit);
-    //     }
-    // }
-    // ftCommon_80080484(fp);
+    fp = GET_FIGHTER(gobj);
+    /// @todo this matches but isnt pretty. maybe an inline/macro as
+    // we dont have enough stack in general?
+    skip = (struct spawn_hitbox_skip*)cmd->u;
+    if ((skip->xF_b4) && (fp->x1064_thrownHitbox.owner == NULL)) {
+        ftAction_800715EC(gobj, cmd);
+    }else {
+        hitbox = &fp->x914[cmd->u->create_hitbox_0.id];
+        hit_group = cmd->u->create_hitbox_0.hit_group;
+        if ((hitbox->state == HitCapsule_Disabled) || (hitbox->x4 != hit_group)) {
+            hitbox->x4 = hit_group;
+            hitbox->state = HitCapsule_Enabled;
+            fp->x2219_b3 = 1;
+            ftColl_800768A0(fp, hitbox);
+        }
+        idx = cmd->u->create_hitbox_0.bone;
+        if (cmd->u->create_hitbox_0.use_common_bone_ids) {
+            hitbox->jobj = fp->parts[ftParts_GetBoneIndex(fp, cmd->u->create_hitbox_0.bone)].joint;
+        } else {
+            hitbox->jobj = fp->parts[idx].joint;
+        }
+        ftColl_8007ABD0(hitbox, cmd->u->create_hitbox_0.damage, gobj);
+        NEXT_CMD(cmd);
+        hitbox->scale = (1 / 256.0f) * cmd->u->create_hitbox_1.size;
+        hitbox->b_offset.x = (1 / 256.0f) * cmd->u->create_hitbox_1.z_offset;
+        NEXT_CMD(cmd);
+        hitbox->b_offset.y = (1 / 256.0f) * cmd->u->create_hitbox_2.y_offset;
+        hitbox->b_offset.z = (1 / 256.0f) * cmd->u->create_hitbox_2.x_offset;
+        NEXT_CMD(cmd);
+        ftColl_8007AC9C(hitbox, cmd->u->create_hitbox_3.angle, gobj);
+        hitbox->x24 = cmd->u->create_hitbox_3.knockback_growth;
+        hitbox->x28 = cmd->u->create_hitbox_3.weight_set_knockback;
+        hitbox->x43_b0 = cmd->u->create_hitbox_3.item_hit_interaction;
+        hitbox->x43_b1 = cmd->u->create_hitbox_3.ignore_fighter_scale;
+        hitbox->x40_b0 = cmd->u->create_hitbox_3.clank;
+        hitbox->x40_b1 = cmd->u->create_hitbox_3.rebound;
+        NEXT_CMD(cmd);
+        hitbox->x2C = cmd->u->create_hitbox_4.base_knockback;
+        hitbox->element = cmd->u->create_hitbox_4.element;
+        hitbox->x34 = cmd->u->create_hitbox_4.shield_damage;
+        hitbox->sfx_severity = cmd->u->create_hitbox_4.hit_sfx_severity;
+        hitbox->sfx_kind = cmd->u->create_hitbox_4.hit_sfx_kind;
+        hitbox->x40_b2 = cmd->u->create_hitbox_4.hit_aerial;
+        hitbox->x40_b3 = cmd->u->create_hitbox_4.hit_grounded;
+        NEXT_CMD(cmd);
+        hitbox->x42_b5 = 1;
+        hitbox->x42_b7 = 1;
+        hitbox->x41_b4 = 0;
+        hitbox->x41_b6 = 0;
+        hitbox->x41_b5 = 0;
+        hitbox->x42_b0 = 0;
+        hitbox->x42_b4 = 0;
+        hitbox->x41_b7 = 0;
+        hitbox->hit_grabbed_victim_only = cmd->u->create_hitbox_5.x1_b4;
+        hitbox->x42_b1 = 1;
+        hitbox->x42_b2 = 0;
+        hitbox->x43_b2 = 0;
+        if ((HSD_GObj_804D7838 != NULL) && (HSD_GObj_804D7838->s_link > 9)) {
+            ftColl_8007AD18(fp, hitbox);
+        }
+    }
+    ftCommon_80080484(fp);
 }
 
+/// @brief Skips Hitbox Spawn
 void ftAction_800715EC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 5);
