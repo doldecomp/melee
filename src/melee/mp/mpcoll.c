@@ -933,7 +933,7 @@ inline float max_inline(float a, float b)
     return (a > b) ? a : b;
 }
 
-bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
+bool mpColl_80043754(mpColl_Callback cb, CollData* coll, u32 flags)
 {
     Vec3 vel;
 
@@ -945,19 +945,19 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     float y;
     float dist_left_x;
     float dist_top_y;
-    s32 var_r31;
-    s32 var_r30;
-    s32 ret;
+    s32 step;  // r31
+    s32 steps; // r30
+    bool ret;
 
-    lbVector_Diff(&arg1->cur_pos, &arg1->prev_pos, &vel);
+    lbVector_Diff(&coll->cur_pos, &coll->prev_pos, &vel);
     x = ABS(vel.x);
     y = ABS(vel.y);
 
-    dist_left_x = arg1->x84_ecb.left.x - arg1->xA4_ecbCurrCorrect.left.x;
+    dist_left_x = coll->x84_ecb.left.x - coll->xA4_ecbCurrCorrect.left.x;
     // if (dist_left_x < 0) dist_left_x = -dist_left_x;
     dist_left_x = ABS(dist_left_x);
 
-    dist_right_x = arg1->x84_ecb.right.x - arg1->xA4_ecbCurrCorrect.right.x;
+    dist_right_x = coll->x84_ecb.right.x - coll->xA4_ecbCurrCorrect.right.x;
     if (dist_right_x < 0) {
         dist_right_x = -dist_right_x;
     }
@@ -966,11 +966,11 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
         dist_left_x = dist_right_x;
     }
 
-    dist_top_y = arg1->x84_ecb.top.y - arg1->xA4_ecbCurrCorrect.top.y;
+    dist_top_y = coll->x84_ecb.top.y - coll->xA4_ecbCurrCorrect.top.y;
     // if (dist_top_y < 0) dist_top_y = -dist_top_y;
     dist_top_y = ABS(dist_top_y);
 
-    dist_right_y = arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y;
+    dist_right_y = coll->x84_ecb.right.y - coll->xA4_ecbCurrCorrect.right.y;
     if (dist_right_y < 0) {
         dist_right_y = -dist_right_y;
     }
@@ -983,27 +983,27 @@ bool mpColl_80043754(mpColl_Callback arg0, CollData* arg1, u32 arg2)
     y = max_inline(y, dist_top_y);
     x = max_inline(x, y);
 
-    if (x > flt_804D7FD8) {         // 6.0F float order hack
-        var_r30 = x / flt_804D7FD8; // 6.0F float order hack
-        var_r30 = var_r30 + 1;
-        vel.x /= var_r30;
-        vel.y /= var_r30;
-        vel.z /= var_r30;
+    if (x > flt_804D7FD8) {       // 6.0F float order hack
+        steps = x / flt_804D7FD8; // 6.0F float order hack
+        steps = steps + 1;
+        vel.x /= steps;
+        vel.y /= steps;
+        vel.z /= steps;
     } else {
-        var_r30 = 1;
+        steps = 1;
     }
-    var_r31 = 0;
-    arg1->cur_pos = arg1->prev_pos;
-    arg1->x34_flags.b5 = 0;
-    while ((var_r31 < var_r30) && !arg1->x34_flags.b5) {
-        mpColl_80042DB0(arg1, 1.0F / (var_r30 - var_r31));
-        arg1->cur_pos_correct = arg1->cur_pos;
-        lbVector_Add(&arg1->cur_pos, &vel);
-        mpColl_80041DD0(arg1, arg2);
-        ret = (*arg0)(arg1, arg2);
+    step = 0;
+    coll->cur_pos = coll->prev_pos;
+    coll->x34_flags.b5 = 0;
+    while ((step < steps) && !coll->x34_flags.b5) {
+        mpColl_80042DB0(coll, 1.0F / (steps - step));
+        coll->cur_pos_correct = coll->cur_pos;
+        lbVector_Add(&coll->cur_pos, &vel);
+        mpColl_80041DD0(coll, flags);
+        ret = (*cb)(coll, flags);
         mpLib_80058AA0();
-        var_r31 += 1;
-        arg1->x38 = mpColl_804D64AC;
+        step += 1;
+        coll->x38 = mpColl_804D64AC;
     }
     return ret;
 }
