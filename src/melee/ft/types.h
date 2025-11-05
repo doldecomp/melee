@@ -832,10 +832,10 @@ typedef struct itPickup {
 } itPickup;
 
 typedef struct {
-    HSD_Joint* joint;
-    HSD_MatAnimJoint* x4;
-    u8 padding[0x0C];
-    HSD_Archive* x14_archive;
+    /*  +0 */ HSD_Joint* joint;
+    /*  +4 */ HSD_MatAnimJoint* x4;
+    /*  +8 */ u8 padding[0x0C];
+    /* +14 */ HSD_Archive* x14_archive;
 } UnkCostumeStruct;
 
 struct UnkCostumeList {
