@@ -25,8 +25,7 @@ void it_3F14_Logic21_Spawned(Item_GObj* gobj)
 
 itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
 {
-    Item* ip = GET_ITEM(gobj);
-    itSScopeAttributes* attrs = GET_ATTRS(ip);
+    itSScopeAttributes* attrs = GET_ATTRS(GET_ITEM(gobj));
     pos->x = attrs->x34.x;
     pos->y = attrs->x34.y;
     pos->z = attrs->x34.z;
@@ -60,7 +59,7 @@ void it_80292030(Item_GObj* gobj)
     temp_r4->x40_vel.y = 0.0f;
     temp_r4->x40_vel.x = 0.0f;
     it_8026B390(gobj);
-    Item_80268E5C((HSD_GObj* ) gobj, 0, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
 bool itSscope_UnkMotion0_Anim(Item_GObj* gobj)
@@ -88,8 +87,7 @@ bool itSscope_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itSscope_UnkMotion1_Phys(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ItemAttr* attrs = ip->xCC_item_attr;
+    ItemAttr* attrs = (GET_ITEM(gobj))->xCC_item_attr;
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
