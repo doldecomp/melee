@@ -1806,11 +1806,6 @@ void ftData_800858E4(FighterKind kind, int costume_id)
     }
 }
 
-extern struct ft_8045993C_t {
-    u8 pad_x0[0x6];
-    u16 x6_b0 : 1;
-} ft_8045993C[6];
-
 void ftData_800859A8(Fighter* fp)
 {
     HSD_GObj* gobj;

@@ -43,7 +43,11 @@ bool grHomeRun_8021D678(Ground_GObj* arg)
 
 void grHomeRun_8021DEB0(Ground_GObj* arg) {}
 
-/// #grHomeRun_8021DEB4
+void grHomeRun_8021DEB4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+}
 
 bool grHomeRun_8021DEE0(Ground_GObj* arg)
 {
@@ -223,4 +227,9 @@ DynamicsDesc* grHomeRun_8021EEB4(enum_t arg)
 
 /// #grHomeRun_8021EEBC
 
-/// #grHomeRun_8021EF10
+extern f32 grHr_804DBC94;
+
+f32 grHomeRun_8021EF10(void)
+{
+    return grHr_804DBC94 * Ground_801C0498();
+}
