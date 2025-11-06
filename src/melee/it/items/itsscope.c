@@ -41,7 +41,15 @@ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
 
 /// #it_80291FA8
 
-/// #it_80292030
+void it_80292030(Item_GObj* gobj)
+{
+    Item* temp_r4 = GET_ITEM(gobj);
+    temp_r4->x40_vel.z = 0.0f;
+    temp_r4->x40_vel.y = 0.0f;
+    temp_r4->x40_vel.x = 0.0f;
+    it_8026B390(gobj);
+    Item_80268E5C((HSD_GObj* ) gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itSscope_UnkMotion0_Anim(Item_GObj* gobj)
 {
