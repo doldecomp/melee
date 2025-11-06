@@ -834,7 +834,9 @@ typedef struct itPickup {
 typedef struct {
     /*  +0 */ HSD_Joint* joint;
     /*  +4 */ HSD_MatAnimJoint* x4;
-    /*  +8 */ u8 padding[0x0C];
+    /*  +8 */ u32 pad_x8; // Probably a pointer.
+    /*  +C */ u32 pad_xC;
+    /* +10 */ u32 pad_x10;
     /* +14 */ HSD_Archive* x14_archive;
 } UnkCostumeStruct;
 
