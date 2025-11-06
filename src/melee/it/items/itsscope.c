@@ -2,8 +2,10 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/forward.h"
 
 #include "it/inlines.h"
+#include "it/itCommonItems.h"
 #include "it/it_26B1.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
@@ -31,9 +33,19 @@ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
     return attrs;
 }
 
-/// #it_80291CF4
+s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
+{
+    itSScopeAttributes* attrs = GET_ATTRS(GET_ITEM(gobj));
 
-/// #it_80291D38
+    if (arg1 <= attrs->x4) {
+        return 0;
+    }
+    if (arg1 < attrs->x8 * 8) {
+        return arg1 / 8;
+    }
+    return 9;
+}
+
 
 /// #it_80291DAC
 
