@@ -73,7 +73,14 @@ void itSscope_UnkMotion1_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itSscope_UnkMotion3_Coll
+bool itSscope_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    if ((GET_ITEM(gobj))->xD4C != 0) {
+        it_8026E15C(gobj, (void (*)(HSD_GObj*)) it_80292030);
+        return 0;
+    }
+    return it_8026DF34(gobj);
+}
 
 void it_3F14_Logic21_PickedUp(Item_GObj* gobj)
 {
