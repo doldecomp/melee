@@ -135,11 +135,11 @@ void ftCo_FallSpecial_Coll(Fighter_GObj* gobj)
     ft_80083090(gobj, ftCo_80096CC8, ftCo_80096D28);
 }
 
-bool ftCo_80096CC8(Fighter_GObj* gobj, enum_t arg1)
+bool ftCo_80096CC8(Fighter_GObj* gobj, int line_id)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (arg1 != -1 && (!(mpLineGetFlags(arg1) & LINE_FLAG_PLATFORM) ||
-                       fp->input.lstick.y > p_ftCommonData->x25C))
+    if (line_id != -1 && (!(mpLineGetFlags(line_id) & LINE_FLAG_PLATFORM) ||
+                          fp->input.lstick.y > p_ftCommonData->x25C))
     {
         return true;
     }
