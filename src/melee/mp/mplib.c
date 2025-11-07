@@ -2266,9 +2266,9 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
     return result;
 }
 
-bool mpLib_800515A0_LeftWall(float ax, float ay, float bx, float by, float cx,
-                             float cy, float dx, float dy, int* line_id_out,
-                             int joint_id0, int joint_id1)
+bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
+                             float b0x, float b0y, float b1x, float b1y,
+                             int* line_id_out, int joint_id0, int joint_id1)
 {
     float min_dist2;
     CollJoint* joint;
@@ -2282,7 +2282,7 @@ bool mpLib_800515A0_LeftWall(float ax, float ay, float bx, float by, float cx,
     r3 = mpLib_800588C8();
 
     if (!r3) {
-        mpLib_800589D0(ax, ay, bx, by, cx, cy, dx, dy);
+        mpLib_800589D0(a0x, a0y, a1x, a1y, b0x, b0y, b1x, b1y);
     }
 
     for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
@@ -2330,13 +2330,14 @@ bool mpLib_800515A0_LeftWall(float ax, float ay, float bx, float by, float cx,
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
                     y1 = vtx->x14;
-                    mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
+                    mpRemap2d(&x, &y, a0x, a0y, a1x, a1y, b0x, b0y, b1x, b1y,
+                              x1, y1);
 
                     vdx = x0 - x;
                     vdy = y0 - y;
 
                     if (SQ(vdx) + SQ(vdy) > 0.001F) {
-                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
+                        if (mpLib_8004E97C(b0x, b0y, b1x, b1y, x, y, x0, y0,
                                            &int_x, &int_y))
                         {
                             dist2 = SQ(int_x - x1) + SQ(int_y - y1);
@@ -2362,13 +2363,14 @@ bool mpLib_800515A0_LeftWall(float ax, float ay, float bx, float by, float cx,
                     y0 = vtx->pos.y;
                     x1 = vtx->x10;
                     y1 = vtx->x14;
-                    mpRemap2d(&x, &y, ax, ay, bx, by, cx, cy, dx, dy, x1, y1);
+                    mpRemap2d(&x, &y, a0x, a0y, a1x, a1y, b0x, b0y, b1x, b1y,
+                              x1, y1);
 
                     vdx = x0 - x;
                     vdy = y0 - y;
 
                     if (SQ(vdx) + SQ(vdy) > 0.001F) {
-                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
+                        if (mpLib_8004E97C(b0x, b0y, b1x, b1y, x, y, x0, y0,
                                            &int_x, &int_y))
                         {
                             dist2 = SQ(int_x - x1) + SQ(int_y - y1);
