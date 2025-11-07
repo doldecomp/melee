@@ -3415,40 +3415,41 @@ bool mpLib_80054ED8(int line_id)
     return true;
 }
 
-bool mpLib_80054F68(int line_id, int line_id2)
+bool mpLib_80054F68(int start_id, int target_id)
 {
-    int var_r6 = line_id;
-    int var_r9;
+    int line_id;
+    u32 kind;
 
-    LINEID_CHECK(4656, line_id);
-    LINEID_CHECK(4657, line_id2);
-    if (line_id == line_id2) {
+    LINEID_CHECK(4656, start_id);
+    LINEID_CHECK(4657, target_id);
+    if (start_id == target_id) {
         return true;
     }
-    var_r9 = mpLineGetNext(line_id);
-loop_23:
-    if (var_r9 == -1 || !(groundCollLine[line_id].flags ==
-                          (groundCollLine[var_r9].flags & LINE_FLAG_KIND)))
+
+    kind = groundCollLine[start_id].flags & LINE_FLAG_KIND;
+    line_id = mpLineGetNext(start_id);
+    while (line_id != -1 &&
+           kind == (groundCollLine[line_id].flags & LINE_FLAG_KIND))
     {
-        var_r6 = mpLineGetPrev(line_id);
-        while (true) {
-            if (var_r6 == -1 ||
-                !(groundCollLine[line_id].flags ==
-                  (groundCollLine[var_r6].flags & LINE_FLAG_KIND)))
-            {
-                return false;
-            }
-            if (var_r6 == line_id2) {
-                return true;
-            }
-            var_r6 = mpLineGetPrev(var_r6);
+        if (line_id == target_id) {
+            return true;
         }
+
+        line_id = mpLineGetNext(line_id);
     }
-    if (var_r9 == line_id2) {
-        return true;
+
+    line_id = mpLineGetPrev(start_id);
+    while (line_id != -1 &&
+           kind == (groundCollLine[line_id].flags & LINE_FLAG_KIND))
+    {
+        if (line_id == target_id) {
+            return true;
+        }
+
+        line_id = mpLineGetPrev(line_id);
     }
-    var_r9 = mpLineGetNext(var_r6);
-    goto loop_23;
+
+    return false;
 }
 
 static inline HSD_JObj* jobj_child(HSD_JObj* jobj)

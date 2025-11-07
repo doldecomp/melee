@@ -724,44 +724,44 @@ void mpColl_80043268(CollData* coll, s32 arg1, s32 arg2, float arg8)
     }
 }
 
-static void mpColl_80044E10_RightWall_inline(int line_id2)
+static void mpColl_80044E10_RightWall_inline(int line_id)
 {
     int i;
     for (i = 0; i < mpColl_804D6488; i++) {
-        int line_id = mpColl_80458810.right[i];
-        if (line_id2 == line_id || mpLib_80054F68(line_id, line_id2)) {
+        int start_id = mpColl_80458810.right[i];
+        if (line_id == start_id || mpLib_80054F68(start_id, line_id)) {
             return;
         }
     }
     HSD_ASSERT(330, i<MPCOLL_WALLID_MAX);
-    mpColl_80458810.right[i] = line_id2;
+    mpColl_80458810.right[i] = line_id;
     mpColl_804D6488++;
 }
 
-static void mpColl_80045B74_LeftWall_inline(int line_id2)
+static void mpColl_80045B74_LeftWall_inline(int line_id)
 {
     int i = 0;
     int* arr = mpColl_80458810.left;
     for (; i < mpColl_804D648C; arr++, i++) {
-        if (line_id2 == *arr || mpLib_80054F68(*arr, line_id2)) {
+        if (line_id == *arr || mpLib_80054F68(*arr, line_id)) {
             return;
         }
     }
     HSD_ASSERT(345, i<MPCOLL_WALLID_MAX);
-    mpColl_80458810.left[i] = line_id2;
+    mpColl_80458810.left[i] = line_id;
     mpColl_804D648C++;
 }
 
-static void mpColl_80045B74_LeftWall_inline3(int line_id2, int* arr)
+static void mpColl_80045B74_LeftWall_inline3(int line_id, int* arr)
 {
     int i;
     for (i = 0; i < mpColl_804D648C; arr++, i++) {
-        if (line_id2 == *arr || mpLib_80054F68(*arr, line_id2)) {
+        if (line_id == *arr || mpLib_80054F68(*arr, line_id)) {
             return;
         }
     }
     HSD_ASSERT(345, i<MPCOLL_WALLID_MAX);
-    mpColl_80458810.left[i] = line_id2;
+    mpColl_80458810.left[i] = line_id;
     mpColl_804D648C++;
 }
 
@@ -2351,8 +2351,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
 
         if (mpColl_80044E10_RightWall(coll)) { // Physics_RightWallCheckAir
-            if (mpColl_800454A4_RightWall(coll))
-            { // Physics_RightWallCollideAir
+            if (mpColl_800454A4_RightWall(
+                    coll)) { // Physics_RightWallCollideAir
                 horizontal_squeeze_flags_2 |= 2;
                 horizontal_squeeze_flags |= 4;
             }
@@ -2368,8 +2368,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
 
         if (mpColl_80044E10_RightWall(coll)) { // Physics_RightWallCheckAir
-            if (mpColl_800454A4_RightWall(coll))
-            { // Physics_RightWallCollideAir
+            if (mpColl_800454A4_RightWall(
+                    coll)) { // Physics_RightWallCollideAir
                 horizontal_squeeze_flags_2 |= 2;
                 horizontal_squeeze_flags |= 4;
             }
@@ -2385,8 +2385,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         y_after_collide_floor = 0.0F;
 
         if (mpColl_80044AD8_Ceiling(coll, horizontal_squeeze_flags_2) &&
-            mpColl_80044C74_Ceiling(coll))
-        { // Physics_CeilingCheck, Physics_CeilingCollideAir
+            mpColl_80044C74_Ceiling(
+                coll)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
             bool r0;
             int r21 = mpLib_80052A98_Ceiling(
                 coll->ceiling.index); // Collision_GetNextNonCeilingLine
@@ -2397,8 +2397,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             if (mpLib_800501CC_LeftWall(
                     top_x, top_y, side_x, side_y, NULL, &line_id_sp1C, NULL,
                     NULL, coll->x48_joint_id, coll->x4C_joint_id) &&
-                line_id_sp1C != r21)
-            { // Collision_CheckLeftWallHug
+                line_id_sp1C != r21) { // Collision_CheckLeftWallHug
                 r0 = true;
             } else {
                 r0 = false;
@@ -2417,8 +2416,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             if (mpLib_800509B8_RightWall(
                     top_x, top_y, side_x, side_y, NULL, &line_id_sp18, NULL,
                     NULL, coll->x48_joint_id, coll->x4C_joint_id) &&
-                line_id_sp18 != r21)
-            { // Collision_CheckRightWallHug
+                line_id_sp18 != r21) { // Collision_CheckRightWallHug
                 r0 = true;
             } else {
                 r0 = false;
@@ -2444,16 +2442,18 @@ bool mpColl_80046904(CollData* coll, u32 flags)
 
         if (r3) {
             if ((int) flags & CollisionFlagAir_StayAirborne) {
-                if (mpColl_80044948_Floor(coll))
-                { // Physics_FloorCollideStayAirborne
-                    if (mpColl_80043BBC(coll, &sp24))
-                    { // Physics_CheckFloorConnectedLeftWallHug
+                if (mpColl_80044948_Floor(
+                        coll)) { // Physics_FloorCollideStayAirborne
+                    if (mpColl_80043BBC(
+                            coll,
+                            &sp24)) { // Physics_CheckFloorConnectedLeftWallHug
                         mpColl_80043C6C(
                             coll, sp24,
                             0); // Physics_LeftWallFloorMultiCollide
                     }
-                    if (mpColl_80043E90(coll, &sp24))
-                    { // Physics_CheckFloorConnectedRightWallHug
+                    if (mpColl_80043E90(
+                            coll,
+                            &sp24)) { // Physics_CheckFloorConnectedRightWallHug
                         mpColl_80043F40(
                             coll, sp24,
                             0); // Physics_RightWallFloorMultiCollide
@@ -2467,10 +2467,12 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 }
 
                 if (mpColl_80044838_Floor(
-                        coll, ecb_unlocked && !(horizontal_squeeze_flags & 1)))
-                { // Physics_SnapToFloorNoEdgePass
-                    if (mpColl_80043BBC(coll, &sp20))
-                    { // Physics_CheckFloorConnectedLeftWallHug
+                        coll, ecb_unlocked &&
+                                  !(horizontal_squeeze_flags &
+                                    1))) { // Physics_SnapToFloorNoEdgePass
+                    if (mpColl_80043BBC(
+                            coll,
+                            &sp20)) { // Physics_CheckFloorConnectedLeftWallHug
                         // TODO: inhibit inlining
                         // Physics_LeftWallFloorMultiCollide
                         mpColl_80043C6C(coll, sp20,
@@ -2478,8 +2480,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                                             !(horizontal_squeeze_flags & 1));
                     }
 
-                    if (mpColl_80043E90(coll, &sp20))
-                    { // Physics_CheckFloorConnectedRightWallHug
+                    if (mpColl_80043E90(
+                            coll,
+                            &sp20)) { // Physics_CheckFloorConnectedRightWallHug
                         // TODO: inhibit inlining
                         // Physics_RightWallFloorMultiCollide
                         mpColl_80043F40(coll, sp20,
@@ -2495,8 +2498,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             y_after_collide_floor = coll->cur_pos.y;
             horizontal_squeeze_flags |= 2;
             if (mpColl_80044AD8_Ceiling(coll, horizontal_squeeze_flags_2) &&
-                mpColl_80044C74_Ceiling(coll))
-            { // Physics_CeilingCheck, Physics_CeilingCollideAir
+                mpColl_80044C74_Ceiling(
+                    coll)) { // Physics_CeilingCheck, Physics_CeilingCollideAir
                 bool r0;
                 int r21 = mpLib_80052A98_Ceiling(
                     coll->ceiling.index); // Collision_GetNextNonCeilingLine
@@ -2507,8 +2510,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 if (mpLib_800501CC_LeftWall(
                         top_x, top_y, side_x, side_y, NULL, &sp14, NULL, NULL,
                         coll->x48_joint_id, coll->x4C_joint_id) &&
-                    sp14 != r21)
-                { // Collision_CheckLeftWallHug
+                    sp14 != r21) { // Collision_CheckLeftWallHug
                     r0 = true;
                 } else {
                     r0 = false;
@@ -2528,8 +2530,7 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 if (mpLib_800509B8_RightWall(
                         top_x, top_y, side_x, side_y, NULL, &sp10, NULL, NULL,
                         coll->x48_joint_id, coll->x4C_joint_id) &&
-                    sp10 != r21)
-                { // Collision_CheckRightWallHug
+                    sp10 != r21) { // Collision_CheckRightWallHug
                     r0 = true;
                 } else {
                     r0 = false;
@@ -2565,8 +2566,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
 
         if (!r3 && coll->cur_pos.y < coll->cur_pos_correct.y) {
             if (coll->facing_dir == 1 || coll->facing_dir == 0) {
-                if (mpColl_80044164(coll, &coll->ledge_id_left))
-                { // Physics_CheckForLeftLedge
+                if (mpColl_80044164(
+                        coll,
+                        &coll->ledge_id_left)) { // Physics_CheckForLeftLedge
                     r3 = true;
                     coll->env_flags |= Collide_LeftLedgeGrab;
                 } else {
@@ -2577,8 +2579,9 @@ bool mpColl_80046904(CollData* coll, u32 flags)
                 }
             }
             if (coll->facing_dir == -1 || coll->facing_dir == 0) {
-                if (mpColl_800443C4(coll, &coll->ledge_id_right))
-                { // Physics_CheckForRightLedge
+                if (mpColl_800443C4(
+                        coll,
+                        &coll->ledge_id_right)) { // Physics_CheckForRightLedge
                     r3 = true;
                     coll->env_flags |= Collide_RightLedgeGrab;
                 } else {
