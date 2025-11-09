@@ -102,7 +102,6 @@
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
-extern ftData* gFtDataList[FTKIND_MAX];
 extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 

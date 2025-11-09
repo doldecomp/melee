@@ -809,7 +809,10 @@ typedef struct itOctarock_ItemVars {
 } itOctarock_ItemVars;
 
 typedef struct itSScopeAttributes {
-    /* +0 */ char _padding[0x34];
+    /* +0 */ char pad_x0[0x4];
+    /* +4 */ s32 x4;
+    /* +8 */ s32 x8;
+    /* +C */ char pad_xC[0x28];
     /* +34 */ Vec3 x34;
 } itSScopeAttributes;
 

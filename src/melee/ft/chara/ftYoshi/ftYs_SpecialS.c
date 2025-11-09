@@ -17,6 +17,13 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 
+/* 3CED84 */ static Vec4 ftYs_Unk3_803CED84 = { 0.65, 0.7, 0.8, 1 };
+/* 3CED94 */ static Vec4 ftYs_Unk3_803CED94 = { 1.1, 1.35, 1.3, 1.2 };
+/* 3CEDA4 */ static Vec3 ftYs_Unk3_803CEDA4[] = {
+    { 12, 0, -6 },
+    { 6, 6, 6 },
+};
+
 /// #ftYs_SpecialS_8012EB48
 
 /// #fn_8012EC7C

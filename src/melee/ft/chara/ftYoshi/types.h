@@ -77,16 +77,6 @@ struct S_UNK_YOSHI1 {
 };
 
 union ftYoshi_MotionVars {
-    /// @todo Proper state name.
-    struct ftYoshi_State2Vars {
-        float x0;
-        UNK_T x4;
-        UNK_T x8;
-        bool xC;
-        UNK_T x10;
-        float x14;
-        float x18;
-    } unk2;
     struct ftYoshi_SpecialNVars {
         /* fp+2340:0 */ u8 x0_b0 : 1;
         /* fp+2340:1 */ u8 x0_b1 : 1;
@@ -104,14 +94,14 @@ union ftYoshi_MotionVars {
     } specialhi;
     struct ftYoshi_GuardVars {
         /* fp+2340 */ f32 x0;
-        /* fp+2344 */ u8 _pad[6];
-        /* fp+234A */ s32 xA;
-        /* fp+234D */ f32 xD;
-        /* fp+2350 */ UNK_T x10;
-        /* fp+2354 */ UNK_T x14;
-        /* fp+2358 */ UNK_T x18;
-        /* fp+235C */ s32 x1C;
-        /* fp+2360 */ s32 x20;
+        /* fp+2344 */ u8 _pad[8];
+        /* fp+234C */ bool xC;
+        /* fp+2350 */ f32 x10;
+        /* fp+2354 */ f32 x14;
+        /* fp+2358 */ f32 x18;
+        /* fp+235C */ UNK_T x1C;
+        /* fp+2360 */ int x20;
+        /* fp+2364 */ int x24;
     } guard;
 };
 
