@@ -1288,8 +1288,7 @@ bool ft_80084BFC(Fighter_GObj* gobj, int* arg1, int* arg2, int* arg3)
     return ft_80084A80(0, gobj, arg1, arg2, arg3);
 }
 
-bool ft_80084C38(Fighter_GObj* gobj, int* arg1, int* arg2, int* arg3,
-                 char* arg4)
+bool ft_80084C38(Fighter_GObj* gobj, int* arg1, int* arg2, int* arg3)
 {
     return ft_80084A80(1, gobj, arg1, arg2, arg3);
 }

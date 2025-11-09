@@ -1574,8 +1574,7 @@ struct Fighter {
             u8 throw_flags_b7 : 1;
         };
     };
-    /* fp+2214 */ float x2214;
-
+    /* fp+2214 */ float cmd_timer;
     /* fp+2218:0 */ u8 allow_interrupt : 1;
     /* fp+2218:1 */ u8 x2218_b1 : 1;
     /* fp+2218:2 */ u8 x2218_b2 : 1;
