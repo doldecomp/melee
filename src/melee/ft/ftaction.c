@@ -846,7 +846,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
             }
             /// @todo cant get the b instruction to generate here and in case 6
             ft_kind = fp->kind;
-            if (ft_kind == FTKIND_GAMEWATCH || ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS)) {
+            if (ft_kind == FTKIND_GAMEWATCH || (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS))) {
                 sp8 = fp->player_id + 0x1E + fp->x221F_b4;
                 spC = -1;
                 fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
@@ -880,7 +880,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
             }
 
             ft_kind = fp->kind;
-            if (ft_kind == FTKIND_GAMEWATCH || ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS)) {
+            if (ft_kind == FTKIND_GAMEWATCH || (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS))) {
                 sp8 = fp->player_id + 0x2A + fp->x221F_b4;
                 spC = -1;
                 fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
