@@ -533,7 +533,7 @@ void ftCo_80095EFC(Fighter_GObj* gobj)
                 }
                 {
                     float vec0_x = vec0.x;
-                    float fsm = -fp->x2214 / fp->frame_speed_mul;
+                    float fsm = -fp->cmd_timer / fp->frame_speed_mul;
                     float cd_xB4 = M2C_FIELD(fp + 0x110, float*, 0xB4);
                     float temp_f2 =
                         cd_xB4 *

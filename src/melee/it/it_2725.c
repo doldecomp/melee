@@ -8797,7 +8797,7 @@ void it_802795EC(Item_GObj* item_gobj, CommandInfo* cmd)
 
 void it_80279680(Item_GObj* item_gobj, CommandInfo* cmd)
 {
-    it_80272560(item_gobj, cmd->u->unk2.hit_idx);
+    it_80272560(item_gobj, cmd->u->set_throw_flags.hit_idx);
     ++cmd->u;
 }
 
@@ -8812,21 +8812,21 @@ void it_802796C4(Item_GObj* item_gobj, CommandInfo* cmd)
 void it_802796FC(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
-    it->xDAC_itcmd_var0 = cmd->u->unk2.hit_idx;
+    it->xDAC_itcmd_var0 = cmd->u->set_throw_flags.hit_idx;
     ++cmd->u;
 }
 
 void it_80279720(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
-    it->xDB0_itcmd_var1 = cmd->u->unk2.hit_idx;
+    it->xDB0_itcmd_var1 = cmd->u->set_throw_flags.hit_idx;
     ++cmd->u;
 }
 
 void it_80279744(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     Item* it = GET_ITEM(item_gobj);
-    it->xDB4_itcmd_var2 = cmd->u->unk2.hit_idx;
+    it->xDB4_itcmd_var2 = cmd->u->set_throw_flags.hit_idx;
     ++cmd->u;
 }
 
