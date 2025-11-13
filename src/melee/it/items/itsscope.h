@@ -13,7 +13,7 @@
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
 /* 291C98 */ void it_3F14_Logic21_Spawned(Item_GObj*);
 /* 291CCC */ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos);
-/* 291CF4 */ UNK_RET it_80291CF4(UNK_PARAMS);
+/* 291CF4 */ s32 it_80291CF4(Item_GObj*, s32);
 /* 291D38 */ UNK_RET it_80291D38(UNK_PARAMS);
 /* 291DAC */ UNK_RET it_80291DAC(UNK_PARAMS);
 /* 291F14 */ UNK_RET it_80291F14(UNK_PARAMS);

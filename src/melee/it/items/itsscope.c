@@ -2,8 +2,10 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/forward.h"
 
 #include "it/inlines.h"
+#include "it/itCommonItems.h"
 #include "it/it_26B1.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
@@ -23,17 +25,26 @@ void it_3F14_Logic21_Spawned(Item_GObj* gobj)
 
 itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
 {
-    Item* ip = GET_ITEM(gobj);
-    itSScopeAttributes* attrs = GET_ATTRS(ip);
+    itSScopeAttributes* attrs = GET_ATTRS(GET_ITEM(gobj));
     pos->x = attrs->x34.x;
     pos->y = attrs->x34.y;
     pos->z = attrs->x34.z;
     return attrs;
 }
 
-/// #it_80291CF4
+s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
+{
+    itSScopeAttributes* attrs = GET_ATTRS(GET_ITEM(gobj));
 
-/// #it_80291D38
+    if (arg1 <= attrs->x4) {
+        return 0;
+    }
+    if (arg1 < attrs->x8 * 8) {
+        return arg1 / 8;
+    }
+    return 9;
+}
+
 
 /// #it_80291DAC
 
@@ -41,7 +52,15 @@ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
 
 /// #it_80291FA8
 
-/// #it_80292030
+void it_80292030(Item_GObj* gobj)
+{
+    Item* temp_r4 = GET_ITEM(gobj);
+    temp_r4->x40_vel.z = 0.0f;
+    temp_r4->x40_vel.y = 0.0f;
+    temp_r4->x40_vel.x = 0.0f;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itSscope_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -68,12 +87,18 @@ bool itSscope_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itSscope_UnkMotion1_Phys(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ItemAttr* attrs = ip->xCC_item_attr;
+    ItemAttr* attrs = (GET_ITEM(gobj))->xCC_item_attr;
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itSscope_UnkMotion3_Coll
+bool itSscope_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    if ((GET_ITEM(gobj))->xD4C != 0) {
+        it_8026E15C(gobj, (void (*)(HSD_GObj*)) it_80292030);
+        return 0;
+    }
+    return it_8026DF34(gobj);
+}
 
 void it_3F14_Logic21_PickedUp(Item_GObj* gobj)
 {
@@ -97,7 +122,12 @@ void it_3F14_Logic21_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, 6);
 }
 
-/// #itSscope_UnkMotion3_Phys
+void itSscope_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    ItemAttr* temp_r4 = (GET_ITEM(gobj))->xCC_item_attr;
+    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 bool it_3F14_Logic21_DmgDealt(Item_GObj* gobj)
 {
