@@ -228,11 +228,11 @@ void lbDvd_80017A80(void)
 void lbDvd_CachePreloadedFile(s32 index)
 {
     int heap;
-    PreloadEntry* entry;
-    int i;
+    s32 i;
     PreloadEntry* preloadEntry;
-
-    preloadEntry = &preloadCache.entries[index];
+    PreloadEntry* entry;
+    entry = &preloadCache.entries[index];
+    preloadEntry = entry;
     heap = preloadEntry->heap;
 
     for (i = 0; i < (signed) ARRAY_SIZE(preloadCache.entries); i++) {

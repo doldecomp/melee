@@ -118,12 +118,15 @@ loop:
 // malloc
 Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
 {
-    Handle* iter;
-    Handle* memp_candidate;
-    void* start;
     void* lo;
+    Handle* memp_candidate;
     void* end;
-    u32 aligned_size, leftover, available_space, least_leftover;
+    u32 least_leftover;
+    u32 aligned_size;
+    u32 leftover;
+    u32 available_space;
+    void* start;
+    Handle* iter;
 
     least_leftover = 0x40000000U;
     if (g_alloc.x62C_free_mem == NULL) {
