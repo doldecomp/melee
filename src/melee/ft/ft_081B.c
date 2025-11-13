@@ -57,11 +57,11 @@ void ft_80081B38(Fighter_GObj* gobj)
     coll->x34_flags.b1234 = 1;
     bones = fp->parts;
     temp_r29 = fp->ft_data->x44;
-    mpColl_SetECBSource_JObj(coll, gobj, bones->joint, bones[temp_r29->unk0].joint,
-                    bones[temp_r29->unk2].joint, bones[temp_r29->unk4].joint,
-                    bones[temp_r29->unk6].joint, bones[temp_r29->unk8].joint,
-                    bones[temp_r29->unkA].joint,
-                    temp_r29->unkC * fp->x34_scale.y);
+    mpColl_SetECBSource_JObj(
+        coll, gobj, bones->joint, bones[temp_r29->unk0].joint,
+        bones[temp_r29->unk2].joint, bones[temp_r29->unk4].joint,
+        bones[temp_r29->unk6].joint, bones[temp_r29->unk8].joint,
+        bones[temp_r29->unkA].joint, temp_r29->unkC * fp->x34_scale.y);
     temp_f3 = fp->x34_scale.y;
     mpColl_SetLedgeSnap(coll, temp_r29->ledge_snap_x * temp_f3,
                         temp_r29->ledge_snap_y * temp_f3,
@@ -646,7 +646,7 @@ void ft_80082F28(Fighter_GObj* gobj)
 }
 
 static inline bool ft_80083090_inline(Fighter_GObj* gobj,
-                                      bool (*arg1)(Fighter_GObj*, enum_t),
+                                      bool (*arg1)(Fighter_GObj*, int),
                                       HSD_GObjEvent cb)
 {
     CollData* coll;
@@ -678,7 +678,7 @@ static inline bool ft_80083090_inline(Fighter_GObj* gobj,
     return false;
 }
 
-void ft_80083090(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
+void ft_80083090(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, int),
                  HSD_GObjEvent cb)
 {
     PAD_STACK(16);
@@ -689,7 +689,7 @@ void ft_80083090(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
     RETURN_IF(ftCliffCommon_80081298(gobj));
 }
 
-void ft_800831CC(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
+void ft_800831CC(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, int),
                  HSD_GObjEvent cb)
 {
     PAD_STACK(16);
@@ -703,7 +703,7 @@ void ft_800831CC(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
 }
 
 static inline bool ft_80083318_inline(Fighter_GObj* gobj,
-                                      bool (*arg1)(Fighter_GObj*, enum_t),
+                                      bool (*arg1)(Fighter_GObj*, int),
                                       HSD_GObjEvent cb)
 {
     CollData* coll;
@@ -736,7 +736,7 @@ static inline bool ft_80083318_inline(Fighter_GObj* gobj,
     return false;
 }
 
-void ft_80083318(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
+void ft_80083318(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, int),
                  HSD_GObjEvent cb)
 {
     PAD_STACK(16);
@@ -750,7 +750,7 @@ void ft_80083318(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
 }
 
 static inline bool ft_80083464_inline(Fighter_GObj* gobj,
-                                      bool (*arg1)(Fighter_GObj*, enum_t),
+                                      bool (*arg1)(Fighter_GObj*, int),
                                       HSD_GObjEvent cb)
 {
     CollData* coll;
@@ -783,7 +783,7 @@ static inline bool ft_80083464_inline(Fighter_GObj* gobj,
     return false;
 }
 
-void ft_80083464(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
+void ft_80083464(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, int),
                  HSD_GObjEvent cb)
 {
     PAD_STACK(16);
@@ -796,7 +796,7 @@ void ft_80083464(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
     RETURN_IF(ftCliffCommon_80081298(gobj));
 }
 
-void ft_800835B0(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, enum_t),
+void ft_800835B0(Fighter_GObj* gobj, bool (*arg1)(Fighter_GObj*, int),
                  HSD_GObjEvent cb)
 {
     PAD_STACK(16);
@@ -954,7 +954,7 @@ void ft_80083C00(Fighter_GObj* gobj, HSD_GObjEvent cb)
 }
 
 static inline bool ft_80083CE4_inline(Fighter_GObj* gobj,
-                                      bool (*cb1)(Fighter_GObj*, enum_t),
+                                      bool (*cb1)(Fighter_GObj*, int),
                                       HSD_GObjEvent cb2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -975,7 +975,7 @@ static inline bool ft_80083CE4_inline(Fighter_GObj* gobj,
     }
 }
 
-void ft_80083CE4(Fighter_GObj* gobj, bool (*cb1)(Fighter_GObj*, enum_t),
+void ft_80083CE4(Fighter_GObj* gobj, bool (*cb1)(Fighter_GObj*, int),
                  HSD_GObjEvent cb2)
 {
     PAD_STACK(16);

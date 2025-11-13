@@ -35,18 +35,18 @@
 /* 082D40 */ void ft_80082D40(Fighter_GObj* gobj, float);
 /* 082E3C */ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj);
 /* 082F28 */ void ft_80082F28(Fighter_GObj* gobj);
-/* 083090 */ void ft_80083090(Fighter_GObj* gobj,
-                              bool (*)(Fighter_GObj*, enum_t), HSD_GObjEvent);
-/* 0831CC */ void ft_800831CC(Fighter_GObj*, bool (*)(Fighter_GObj*, enum_t),
+/* 083090 */ void ft_80083090(Fighter_GObj* gobj, bool (*)(Fighter_GObj*, int),
+                              HSD_GObjEvent);
+/* 0831CC */ void ft_800831CC(Fighter_GObj*, bool (*)(Fighter_GObj*, int),
                               HSD_GObjEvent);
 /* 083318 */ void ft_80083318(Fighter_GObj* gobj,
-                              bool (*)(Fighter_GObj* gobj, enum_t),
+                              bool (*)(Fighter_GObj* gobj, int),
                               HSD_GObjEvent);
 /* 083464 */ void ft_80083464(Fighter_GObj* gobj,
-                              bool (*)(Fighter_GObj* gobj, enum_t),
+                              bool (*)(Fighter_GObj* gobj, int),
                               HSD_GObjEvent);
 /* 0835B0 */ void ft_800835B0(Fighter_GObj* gobj,
-                              bool (*)(Fighter_GObj* gobj, enum_t),
+                              bool (*)(Fighter_GObj* gobj, int),
                               HSD_GObjEvent);
 /* 08370C */ void ft_8008370C(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083844 */ void ft_80083844(Fighter_GObj* gobj, HSD_GObjEvent cb);
@@ -54,7 +54,8 @@
 /* 083A48 */ void ft_80083A48(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 083B68 */ void ft_80083B68(Fighter_GObj* gobj);
 /* 083C00 */ void ft_80083C00(Fighter_GObj* gobj, HSD_GObjEvent cb);
-/* 083CE4 */ void ft_80083CE4(Fighter_GObj* gobj, bool (*)(Fighter_GObj*, enum_t), HSD_GObjEvent cb2);
+/* 083CE4 */ void ft_80083CE4(Fighter_GObj* gobj, bool (*)(Fighter_GObj*, int),
+                              HSD_GObjEvent cb2);
 /* 083DCC */ void ft_80083DCC(Fighter_GObj* gobj);
 /* 083E64 */ void ft_80083E64(Fighter_GObj* gobj, ftCollisionBox* ecb,
                               HSD_GObjEvent cb);
@@ -66,7 +67,8 @@
 /* 0843FC */ void ft_800843FC(Fighter_GObj* gobj);
 /* 0844EC */ void ft_800844EC(Fighter_GObj* gobj);
 /* 0845B4 */ void ft_800845B4(Fighter_GObj* gobj);
-/* 0846B0 */ void ft_800846B0(Fighter_GObj* gobj, ftCollisionBox* box, HSD_GObjEvent cb);
+/* 0846B0 */ void ft_800846B0(Fighter_GObj* gobj, ftCollisionBox* box,
+                              HSD_GObjEvent cb);
 /* 0847D0 */ void ft_800847D0(Fighter_GObj* gobj, ftCollisionBox*);
 /* 0848DC */ void ft_800848DC(Fighter_GObj* gobj, HSD_GObjEvent cb);
 /* 0849EC */ void ft_800849EC(Fighter*, Fighter*);
