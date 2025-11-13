@@ -124,8 +124,9 @@ HSD_GObj* gmTitle_801A165C(void)
     HSD_GObj* gobj = GObj_Create(0xE, 0xF, 0);
     HSD_JObj* jobj = HSD_JObjLoadJoint(gmTitle_80479B28.joint);
     int second;
+    u8 kind = HSD_GObj_804D7849;
 
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    HSD_GObjObject_80390A70(gobj, kind, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 9, 0);
     HSD_JObjAddAnimAll(jobj, gmTitle_80479B28.animjoint,
                        gmTitle_80479B28.matanim_joint,

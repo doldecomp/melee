@@ -5921,7 +5921,6 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
     for (i = 0; i < total_r27; i++) {
         if (line_r31->flags & 0x10000 && !(line_r31->flags & 0x40000)) {
             if (value == (line_r31->x0->flags & flag)) {
-                PAD_STACK(8);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
                                groundCollVtx[line_r31->x0->v0_idx].pos.y,
                                25.0F);

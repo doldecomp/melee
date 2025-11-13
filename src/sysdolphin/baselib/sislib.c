@@ -137,8 +137,9 @@ void* HSD_SisLib_803A5798(s32 size)
 
         temp_r26 = (u8*) HSD_SisLib_804D7970->data_1;
         temp_r25 = HSD_SisLib_804D7970->data_0;
-        temp_r27 =
-            HSD_SisLib_804D7970->size - size - sizeof(sislib_UnkAllocData);
+        temp_r27 = size;
+        temp_r27 = (HSD_SisLib_804D7970->size - temp_r27) -
+                   (sizeof(sislib_UnkAllocData));
         if (temp_r27 < 0) {
             OSReport("Memory Empty\n");
             OSPanic("sislib.c", 0x5F, "");

@@ -83,18 +83,18 @@ void Camera_80028B9C(int n_subjects)
     cm_80452C68.x398_b3 = 0;
     cm_80452C68.x398_b4 = 0;
     cm_80452C68.x398_b5 = 0;
-    cm_80452C68.x398_b6_b7 = 0;
     cm_80452C68.x399_b0_b1 = 0;
     cm_80452C68.x399_b2 = 0;
     cm_80452C68.debug_mode.last_mode = cm_80452C68.mode;
     cm_80452C68.x399_b3 = 0;
     cm_80452C68.x399_b4 = 0;
     cm_80452C68.x399_b5 = 0;
-    memzero(&cm_80452C68 + 0x380, 0x18);
     cm_80452C68.x399_b6 = 0;
-    cm_80452C68.x39A_b5 = 0;
-    cm_80452C68.x39A_b6 = 0;
-    cm_80452C68.x39A_b7 = 0;
+    memzero(&cm_80452C68.x380, 0x18);
+    cm_80452C68.x399_b7 = 0;
+    cm_80452C68.x39A_b0 = 0;
+    cm_80452C68.x39A_b1 = 0;
+    cm_80452C68.x39A_b2 = 0;
     cm_80452C68.gobj = NULL;
     cam_box = HSD_MemAlloc(n_subjects * sizeof(CameraBox));
     cm_804D6458 = cam_box;
@@ -564,14 +564,16 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
 void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
                      f32 speed)
 {
-    float dx, dy;
+    float dx;
+    float dy;
     f32 spread;
     f32 lerp_factor;
     f32 delta;
+    float new_var;
     f32 follow_speed;
-    f32 offset_x, offset_y;
+    f32 offset_x;
+    f32 offset_y;
     CameraUnkGlobals* unk;
-
     if (bounds->subjects != 0) {
         dx = bounds->x_max - bounds->x_min;
         dy = bounds->y_max - bounds->y_min;
@@ -583,33 +585,31 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
     } else {
         spread = 99999.0f;
     }
-
     unk = &cm_803BCCA0;
-
     offset_x = transform->target_interest.x - transform->interest.x;
     offset_y = transform->target_interest.y - transform->interest.y;
-
-    if (spread > unk->x38) {
+    new_var = unk->x38;
+    if (spread > new_var) {
         follow_speed = unk->x30;
     } else if (spread < unk->x34) {
         follow_speed = unk->x2C;
     } else {
-        follow_speed = (spread - unk->x34) / (unk->x38 - unk->x34) *
-                           (unk->x30 - unk->x2C) +
+        follow_speed = (((spread - unk->x34) / (new_var - unk->x34)) *
+                        (unk->x30 - unk->x2C)) +
                        unk->x2C;
     }
     if (cm_80452C68.x2BC > 0.0001f) {
-        delta = 1.0f / cm_80452C68.x2BC;
+        delta = 1.0f;
+        delta = delta / cm_80452C68.x2BC;
     } else {
         delta = 1000.0f;
     }
-    lerp_factor = follow_speed * speed * delta;
+    lerp_factor = (follow_speed * speed) * delta;
     if (lerp_factor > 1.0f) {
         lerp_factor = 1.0f;
     } else if (lerp_factor < 0.0001f) {
         lerp_factor = 0.0001f;
     }
-
     transform->interest.x += offset_x * lerp_factor;
     transform->interest.y += offset_y * lerp_factor;
 }

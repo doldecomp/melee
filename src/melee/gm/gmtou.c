@@ -144,7 +144,7 @@ void fn_8019C3EC(HSD_GObj* gobj)
 
 void fn_8019C570(HSD_GObj* gobj)
 {
-    u32 idx;
+    u64 idx;
     HSD_JObj* jobj;
     TmData* tmd = GetTmData();
 
