@@ -15,8 +15,8 @@ buildPythonPackage {
   src = fetchFromGitHub {
     owner = "matt-kempster";
     repo = "m2c";
-    rev = "4caccf86a027bf52b9132a8ae9331cb3210305a8";
-    hash = "sha256-dutmRYEP1XQwnbrG3d/VZdldl4x+pWxq84aj1xTKApI=";
+    rev = "f201e8861ba0143676f3078d7354d2f7255555b3";
+    hash = "sha256-WhXIeeiRLDeVSgbIuCAlJVTLHtFbJGsM+ACmhsAPUvk=";
   };
 
   postPatch = ''

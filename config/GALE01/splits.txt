@@ -1383,7 +1383,7 @@ melee/ft/chara/ftYoshi/ftYs_Init.c:
 
 melee/ft/chara/ftYoshi/ftYs_Guard.c:
 	.text       start:0x8012BDA0 end:0x8012CC6C
-	.data       start:0x803CEA98 end:0x803CEDBC
+	.data       start:0x803CEA98 end:0x803CED48
 	.sdata      start:0x804D3E58 end:0x804D3E68
 	.sdata2     start:0x804D9A28 end:0x804D9A38
 
@@ -1401,6 +1401,7 @@ melee/ft/chara/ftYoshi/ftYs_SpecialLw.c:
 
 melee/ft/chara/ftYoshi/ftYs_SpecialS.c:
 	.text       start:0x8012EB48 end:0x80132A0C
+	.data       start:0x803CED48 end:0x803CEDBC
 	.sdata      start:0x804D3E68 end:0x804D3E80
 	.sdata2     start:0x804D9A68 end:0x804D9AC8
 
