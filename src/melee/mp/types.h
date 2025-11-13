@@ -95,10 +95,10 @@ struct CollInfo {
     /*  +E */ s16 left_wall_count;
     /* +10 */ s16 dynamic_start;
     /* +12 */ s16 dynamic_count;
-    /* +14 */ float x14;
-    /* +18 */ float x18;
-    /* +1C */ float x1C;
-    /* +20 */ float x20;
+    /* +14 */ float left;
+    /* +18 */ float bottom;
+    /* +1C */ float right;
+    /* +20 */ float top;
     /* +24 */ s16 vtx_start;
     /* +26 */ s16 vtx_count;
 };

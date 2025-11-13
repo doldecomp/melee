@@ -183,10 +183,10 @@ void mpLibLoad(mpCollData* coll_data)
         var_r26 = &groundCollJoint[i];
         var_r26->coll_info = &coll_data->x24[i];
         var_r26->flags = 0x10000;
-        var_r26->x10.x = f31 * coll_data->x24[i].x14;
-        var_r26->x10.y = f31 * coll_data->x24[i].x18;
-        var_r26->x18.x = f31 * coll_data->x24[i].x1C;
-        var_r26->x18.y = f31 * coll_data->x24[i].x20;
+        var_r26->x10.x = f31 * coll_data->x24[i].left;
+        var_r26->x10.y = f31 * coll_data->x24[i].bottom;
+        var_r26->x18.x = f31 * coll_data->x24[i].right;
+        var_r26->x18.y = f31 * coll_data->x24[i].top;
         var_r26->x20 = NULL;
         var_r26->x28 = NULL;
         var_r26->x24 = NULL;
@@ -3751,10 +3751,10 @@ void mpLib_80055E9C(int joint_id)
             v_r4->pos.x = v_r4->x0 * m0_0 + m0_3;
             v_r4->pos.y = v_r4->x4 * m0_0 + m1_3;
         }
-        joint->x10.x = (joint->coll_info->x14 * m0_0 + m0_3) - 30.0F;
-        joint->x10.y = (joint->coll_info->x18 * m0_0 + m1_3) - 30.0F;
-        joint->x18.x = 30.0F + (joint->coll_info->x1C * m0_0 + m0_3);
-        joint->x18.y = 30.0F + (joint->coll_info->x20 * m0_0 + m1_3);
+        joint->x10.x = (joint->coll_info->left * m0_0 + m0_3) - 30.0F;
+        joint->x10.y = (joint->coll_info->bottom * m0_0 + m1_3) - 30.0F;
+        joint->x18.x = 30.0F + (joint->coll_info->right * m0_0 + m0_3);
+        joint->x18.y = 30.0F + (joint->coll_info->top * m0_0 + m1_3);
         joint->flags |= 0x100;
         goto after0;
     }
@@ -3787,27 +3787,27 @@ void mpLib_80055E9C(int joint_id)
         }
         joint->flags |= 0x100;
         if (!(joint->flags & 0x400)) {
-            sp28.x = joint->coll_info->x14;
-            sp28.y = joint->coll_info->x18;
+            sp28.x = joint->coll_info->left;
+            sp28.y = joint->coll_info->bottom;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
             joint->x10.x = sp28.x;
             joint->x10.y = sp28.y;
-            sp28.x = joint->coll_info->x1C;
-            sp28.y = joint->coll_info->x20;
+            sp28.x = joint->coll_info->right;
+            sp28.y = joint->coll_info->top;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
             joint->x18.x = sp28.x;
             joint->x18.y = sp28.y;
             if (joint->flags & 0x200) {
-                sp28.x = joint->coll_info->x1C;
-                sp28.y = joint->coll_info->x18;
+                sp28.x = joint->coll_info->right;
+                sp28.y = joint->coll_info->bottom;
                 sp28.z = 0.0F;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
                 f30 = sp28.x;
                 f31 = sp28.y;
-                sp28.x = joint->coll_info->x14;
-                sp28.y = joint->coll_info->x20;
+                sp28.x = joint->coll_info->left;
+                sp28.y = joint->coll_info->top;
                 sp28.z = 0.0F;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
                 f1 = joint->x10.x;
