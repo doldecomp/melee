@@ -179,7 +179,7 @@ void mpLibLoad(mpCollData* coll_data)
     mpLib_80458868[0].left = -F32_MAX;
     temp_r30 = &mpLib_80458868[0].bottom;
     mpLib_80458868[0].bottom = -F32_MAX;
-    for (i = 0; i < coll_data->x28; i++) {
+    for (i = 0; i < coll_data->joint_count; i++) {
         var_r26 = &groundCollJoint[i];
         var_r26->coll_info = &coll_data->x24[i];
         var_r26->flags = 0x10000;
@@ -4770,7 +4770,7 @@ int mpJointFromLine(int line_id)
         int count;
         LINEID_CHECK(5459, line_id);
         v0_idx = groundCollLine[line_id].x0->v0_idx;
-        count = mpLib_804D64B4->x28;
+        count = mpLib_804D64B4->joint_count;
         joint = groundCollJoint;
         for (i = 0; i < count; i++) {
             if (joint->coll_info->vtx_start <= v0_idx &&
@@ -5358,8 +5358,8 @@ void mpLib_80058560(void)
     CollJoint* cur_i;
     CollJoint* cur_j;
 
-    for (i = 0; i < temp_r29->x28 - 1; i++) {
-        for (j = i + 1; j < temp_r29->x28; j++) {
+    for (i = 0; i < temp_r29->joint_count - 1; i++) {
+        for (j = i + 1; j < temp_r29->joint_count; j++) {
             cur_i = &groundCollJoint[i];
             cur_j = &groundCollJoint[j];
             if ((cur_i->flags & 0x10000) && !(cur_i->flags & 0x40000) &&
@@ -5384,7 +5384,7 @@ void mpLib_80058614_Floor(void)
     int j;
 
     joint_r7 = groundCollJoint;
-    count_r8 = mpLib_804D64B4->x28;
+    count_r8 = mpLib_804D64B4->joint_count;
     for (i = 0; i < count_r8; i++) {
         if (joint_r7[i].xE) {
             break;

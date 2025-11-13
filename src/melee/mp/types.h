@@ -135,7 +135,7 @@ struct mpCollData {
     /* +20 */ s16 dynamic_start;
     /* +22 */ s16 dynamic_count;
     /* +24 */ CollInfo* x24;
-    /* +28 */ int x28;
+    /* +28 */ int joint_count;
     /* +2C */ int x2C; /* inferred */
 };
 
