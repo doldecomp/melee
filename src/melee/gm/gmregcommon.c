@@ -53,7 +53,7 @@ void gmRegSetupEnemyColorTable(s8 ckind, u8 color, s8* ckinds, u8* colors)
             }
             for (k = 0; k < NUM_OPPONENTS; k++) {
                 result = true;
-                if (i == k || ckinds[k] == CHKIND_NONE) {
+                if ((i == k) || ((ckinds[k] & 0xFF) == CHKIND_NONE)) {
                     continue;
                 }
                 if (j == colors[k]) {

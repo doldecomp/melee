@@ -11,10 +11,10 @@
 
 f32 expf(f32 arg8)
 {
-    f32 temp_f5;
     f32 var_f1;
     f32 var_f3;
     f32 var_f4;
+    f32 temp_f5;
     f32 var_f6;
     s32 temp_r3;
     s32 var_r4;
@@ -48,10 +48,10 @@ f32 expf(f32 arg8)
 f32 powf(f32 arg0, f32 arg1)
 {
     f32 temp_f1;
-    f32 temp_f5;
     f32 var_f4;
-    f32 var_f6;
+    f32 temp_f5;
     s32 var_r4;
+    f32 var_f6;
 
     if (arg0 == 0.0f) {
         return 0.0f;
@@ -69,43 +69,45 @@ f32 powf(f32 arg0, f32 arg1)
     return expf(arg1 * (2.0f * var_f4));
 }
 
-s32 powi(s32 arg0, s32 arg1)
+s32 powi(s32 base, s32 exponent)
 {
-    s32 temp_r5;
-    s32 var_ctr_2;
-    s32 var_r6;
-    s32 var_r7;
-    u32 var_ctr;
+    s32 exp_minus_8;
+    s32 remaining;
+    s32 powers_done;
+    s32 result;
 
-    if (arg0 == 0) {
+    if (base == 0) {
         return 0;
     }
-    if (arg1 >= 0) {
-        var_r6 = 0;
-        var_r7 = 1;
-        if (arg1 > 0) {
-            temp_r5 = arg1 - 8;
-            if (arg1 > 8) {
-                var_ctr = (u32) (temp_r5 + 7) >> 3U;
-                if (temp_r5 > 0) {
-                    do {
-                        var_r7 = var_r7 * arg0 * arg0 * arg0 * arg0 * arg0 *
-                                 arg0 * arg0 * arg0;
-                        var_r6 += 8;
-                        var_ctr -= 1;
-                    } while (var_ctr != 0);
-                }
-            }
-            var_ctr_2 = arg1 - var_r6;
-            if (var_r6 < arg1) {
+    if (exponent < 0) {
+        goto return_zero;
+    }
+
+    powers_done = 0;
+    result = 1;
+
+    if (exponent > 0) {
+        exp_minus_8 = exponent - 8;
+        if (exponent > 8) {
+            exp_minus_8 = (u32)(exp_minus_8 + 7) >> 3U;
+            if (exp_minus_8 > 0) {
                 do {
-                    var_r7 *= arg0;
-                    var_ctr_2 -= 1;
-                } while (var_ctr_2 != 0);
+                    result = result * base * base * base * base * base * base * base * base;
+                    powers_done += 8;
+                    exp_minus_8--;
+                } while (exp_minus_8 != 0);
             }
         }
-        return var_r7;
+
+        remaining = exponent - powers_done;
+
+        if (powers_done < exponent) {
+            result *= remaining;
+        }
     }
+    return result;
+
+return_zero:
     return 0;
 }
 

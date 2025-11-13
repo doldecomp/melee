@@ -1171,7 +1171,8 @@ int gm_801647F8(u8 arg0)
 bool gm_80164840(u8 ckind)
 {
     u16* temp_r31 = gmMainLib_8015ED8C();
-    u8 var_r0 = fn_801605EC(lbl_803B78A4[ckind]);
+    u8 var = lbl_803B78A4[ckind];
+    u8 var_r0 = fn_801605EC(var);
 
     if (var_r0 == NUM_UNLOCKABLE_CHARACTERS || (*temp_r31 & (1LL << var_r0))) {
         return true;
