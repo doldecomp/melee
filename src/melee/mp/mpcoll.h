@@ -26,7 +26,7 @@
 /* 04293C */ void mpColl_LoadECB_Fixed(CollData*);
 /* 042C58 */ void mpColl_80042C58(CollData*, ftCollisionBox*);
 /* 042D24 */ void mpColl_LoadECB(CollData*);
-/* 042DB0 */ void mpColl_80042DB0(CollData*, float time);
+/* 042DB0 */ void mpCollInterpolateECB(CollData*, float time);
 /* 043268 */ void mpColl_80043268(CollData*, s32, s32, float);
 /* 043324 */ void mpCollEnd(CollData*, bool, s32);
 /* 043558 */ void mpColl_80043558(CollData*, s32);

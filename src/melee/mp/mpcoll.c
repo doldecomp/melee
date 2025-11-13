@@ -674,7 +674,7 @@ inline void Vec2_Interpolate(float time, Vec2* dest, Vec2* src)
     dest->y += time * (src->y - dest->y);
 }
 
-void mpColl_80042DB0(CollData* coll, float time)
+void mpCollInterpolateECB(CollData* coll, float time)
 {
     coll->xC4_ecb = coll->xA4_ecbCurrCorrect;
     if (coll->x34_flags.b6) {
@@ -996,7 +996,7 @@ bool mpColl_80043754(mpColl_Callback cb, CollData* coll, u32 flags)
     coll->cur_pos = coll->prev_pos;
     coll->x34_flags.b5 = 0;
     while ((step < steps) && !coll->x34_flags.b5) {
-        mpColl_80042DB0(coll, 1.0F / (steps - step));
+        mpCollInterpolateECB(coll, 1.0F / (steps - step));
         coll->cur_pos_correct = coll->cur_pos;
         lbVector_Add(&coll->cur_pos, &vel);
         mpColl_80041DD0(coll, flags);

@@ -55,7 +55,7 @@ void mpCollPrev(CollData* cd);
 void mpColl_LoadECB_Fixed(CollData* cd);
 void mpColl_80042C58(CollData* arg0, ftECB* arg1);
 void mpColl_LoadECB(CollData* cd);
-void mpColl_80042DB0(CollData* ecb, f32 time);
+void mpCollInterpolateECB(CollData* ecb, f32 time);
 void mpColl_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
 void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
 void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
