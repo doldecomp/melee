@@ -702,16 +702,16 @@ void mpCollInterpolateECB(CollData* coll, float time)
 }
 
 // 80043268 https://decomp.me/scratch/GNwej
-void mpColl_80043268(CollData* coll, s32 arg1, s32 arg2, float arg8)
+void mpColl_80043268(CollData* coll, int line_id, s32 arg2, float dy)
 {
     mpLib_Callback sp1C;
     Ground* sp18;
-    s32 temp_r31;
+    int joint_id; // r31
 
-    temp_r31 = mpJointFromLine(arg1);
-    if (temp_r31 != -1) {
+    joint_id = mpJointFromLine(line_id);
+    if (joint_id != -1) {
         sp18 = NULL;
-        mpJointGetCb1(temp_r31, &sp1C, &sp18);
+        mpJointGetCb1(joint_id, &sp1C, &sp18);
         if (sp1C != 0) {
             s32 thing;
             if (arg2 == 0) {
@@ -719,7 +719,7 @@ void mpColl_80043268(CollData* coll, s32 arg1, s32 arg2, float arg8)
             } else {
                 thing = 1;
             }
-            sp1C(sp18, temp_r31, coll, coll->x50, thing, arg8);
+            sp1C(sp18, joint_id, coll, coll->x50, thing, dy);
         }
     }
 }
@@ -766,7 +766,7 @@ static void mpColl_80045B74_LeftWall_inline3(int line_id, int* arr)
 }
 
 static inline void func_80043324_inline2(CollData* coll, s32 arg1, s32 arg2,
-                                         float arg8)
+                                         float dy)
 { // see mpColl_80043268
     int dummy = 0;
 
@@ -780,16 +780,16 @@ static inline void func_80043324_inline2(CollData* coll, s32 arg1, s32 arg2,
         mpJointGetCb2(temp_r29, &callback, &thing);
 
         if (callback != NULL) {
-            callback(thing, temp_r29, coll, coll->x50, 0, arg8);
+            callback(thing, temp_r29, coll, coll->x50, 0, dy);
         }
     }
 }
 
-static inline void func_80043324_inline(CollData* coll, s32 arg1, s32 arg2,
-                                        float arg8)
+static inline void func_80043324_inline(CollData* coll, int line_id, s32 arg2,
+                                        float dy)
 {
     // inhibit inlining
-    mpColl_80043268(coll, arg1, arg2, arg8);
+    mpColl_80043268(coll, line_id, arg2, dy);
 }
 
 void mpCollEnd(CollData* coll, bool arg1, s32 arg2)
