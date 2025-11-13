@@ -137,7 +137,7 @@ void mpPruneEmptyLines(mpCollData* coll_data)
             }
         }
 
-        line->is_empty |= LINE_FLAG_EMPTY;
+        line->hi_flags |= LINE_FLAG_EMPTY;
         line->prev_id0 = -1;
         line->next_id0 = -1;
         line->prev_id1 = -1;
@@ -208,7 +208,7 @@ void mpLibLoad(mpCollData* coll_data)
     start = coll_data->floor_start;
     while (count-- > 0) {
         groundCollLine[start].flags =
-            coll_data->lines[start].is_empty | 0x10000;
+            coll_data->lines[start].hi_flags | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -217,7 +217,7 @@ void mpLibLoad(mpCollData* coll_data)
     start = coll_data->ceiling_start;
     while (count-- > 0) {
         groundCollLine[start].flags =
-            coll_data->lines[start].is_empty | 0x10000;
+            coll_data->lines[start].hi_flags | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -226,7 +226,7 @@ void mpLibLoad(mpCollData* coll_data)
     start = coll_data->right_wall_start;
     while (count-- > 0) {
         groundCollLine[start].flags =
-            coll_data->lines[start].is_empty | 0x10000;
+            coll_data->lines[start].hi_flags | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -235,7 +235,7 @@ void mpLibLoad(mpCollData* coll_data)
     start = coll_data->left_wall_start;
     while (count-- > 0) {
         groundCollLine[start].flags =
-            coll_data->lines[start].is_empty | 0x10000;
+            coll_data->lines[start].hi_flags | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -244,7 +244,7 @@ void mpLibLoad(mpCollData* coll_data)
     start = coll_data->dynamic_start;
     while (count-- > 0) {
         groundCollLine[start].flags =
-            coll_data->lines[start].is_empty | 0x10000;
+            coll_data->lines[start].hi_flags | 0x10000;
         groundCollLine[start].x0 = &coll_data->lines[start];
         start++;
     }
@@ -415,7 +415,7 @@ int mpLib_8004DD90_Floor(int line_id, Vec3* vec, float* y_out, u32* flags_out,
     }
 
     if (flags_out != NULL) {
-        *flags_out = groundCollLine[line_id].x0->flags;
+        *flags_out = groundCollLine[line_id].x0->lo_flags;
     }
 
     y0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.y;
@@ -490,7 +490,7 @@ int mpLib_8004E090_Ceiling(int line_id, Vec3* vec, float* y_out,
     }
 
     if (flags_out != NULL) {
-        *flags_out = groundCollLine[line_id].x0->flags;
+        *flags_out = groundCollLine[line_id].x0->lo_flags;
     }
 
     y0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.y;
@@ -562,7 +562,7 @@ int mpLib_8004E398_LeftWall(int line_id, Vec3* vec, float* x_out,
     }
 
     if (flags_out != NULL) {
-        *flags_out = groundCollLine[line_id].x0->flags;
+        *flags_out = groundCollLine[line_id].x0->lo_flags;
     }
 
     x0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.x;
@@ -636,7 +636,7 @@ int mpLib_8004E684_RightWall(int line_id, Vec3* vec, float* x_out,
     }
 
     if (flags_out != NULL) {
-        *flags_out = groundCollLine[line_id].x0->flags;
+        *flags_out = groundCollLine[line_id].x0->lo_flags;
     }
 
     x0 = groundCollVtx[groundCollLine[line_id].x0->v0_idx].pos.x;
@@ -939,7 +939,7 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
                             *line_id_out = line_r26 - groundCollLine;
                         }
                         if (flags_out != NULL) {
-                            *flags_out = line_r26->x0->flags;
+                            *flags_out = line_r26->x0->lo_flags;
                         }
                         if (normal_out != NULL) {
                             normal_out->x = -(y1_sp3C - y0_sp44);
@@ -971,7 +971,7 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
                             *line_id_out = line_r26 - groundCollLine;
                         }
                         if (flags_out != NULL) {
-                            *flags_out = line_r26->x0->flags;
+                            *flags_out = line_r26->x0->lo_flags;
                         }
                         if (normal_out != NULL) {
                             normal_out->x = 0.0F;
@@ -1106,7 +1106,7 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                                 *line_id_out = line - groundCollLine;
                             }
                             if (flags_out) {
-                                *flags_out = line->x0->flags;
+                                *flags_out = line->x0->lo_flags;
                             }
                             if (normal_out) {
                                 normal_out->x = -(y1 - y0);
@@ -1139,7 +1139,7 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                             *line_id_out = line - groundCollLine;
                         }
                         if (flags_out) {
-                            *flags_out = line->x0->flags;
+                            *flags_out = line->x0->lo_flags;
                         }
                         if (normal_out) {
                             normal_out->x = 0.0F;
@@ -1242,7 +1242,7 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                         }
 
                         if (flags_out != NULL) {
-                            *flags_out = line_r26->x0->flags;
+                            *flags_out = line_r26->x0->lo_flags;
                         }
 
                         if (normal_out != NULL) {
@@ -1274,7 +1274,7 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                         }
 
                         if (flags_out != NULL) {
-                            *flags_out = line_r26->x0->flags;
+                            *flags_out = line_r26->x0->lo_flags;
                         }
 
                         if (normal_out != NULL) {
@@ -1397,7 +1397,7 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = r26->x0->flags;
+                                *flags_out = r26->x0->lo_flags;
                             }
 
                             if (normal_out != NULL) {
@@ -1436,7 +1436,7 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = r26->x0->flags;
+                                *flags_out = r26->x0->lo_flags;
                             }
 
                             if (normal_out != NULL) {
@@ -1597,7 +1597,7 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                                 *line_id_out = p26 - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->flags;
+                                *flags_out = p26->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = -(y1 - y0);
@@ -1626,7 +1626,7 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                                 *line_id_out = p26 - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->flags;
+                                *flags_out = p26->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = -1.0F;
@@ -1752,7 +1752,7 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = line->x0->flags;
+                                *flags_out = line->x0->lo_flags;
                             }
 
                             if (normal_out != NULL) {
@@ -1792,7 +1792,7 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = line->x0->flags;
+                                *flags_out = line->x0->lo_flags;
                             }
 
                             if (normal_out != NULL) {
@@ -1898,7 +1898,7 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                                 *line_id_out = p26 - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->flags;
+                                *flags_out = p26->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = -(y1 - y0);
@@ -1927,7 +1927,7 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                                 *line_id_out = p26 - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->flags;
+                                *flags_out = p26->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = 1.0F;
@@ -2054,7 +2054,7 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = line->x0->flags;
+                                *flags_out = line->x0->lo_flags;
                             }
 
                             if (normal_out != NULL) {
@@ -2094,7 +2094,7 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
                             }
 
                             if (flags_out != NULL) {
-                                *flags_out = line->x0->flags;
+                                *flags_out = line->x0->lo_flags;
                             }
 
                             if (normal_out != NULL) {
@@ -2534,7 +2534,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id, int joint_id0,
                     !(line->flags & LINE_FLAG_EMPTY))
                 {
                     mpLib_Line* inner = line->x0;
-                    if (inner->flags & LINE_FLAG_LEDGE) {
+                    if (inner->lo_flags & LINE_FLAG_LEDGE) {
                         float x0 = groundCollVtx[inner->v0_idx].pos.x;
                         float y0 = groundCollVtx[inner->v0_idx].pos.y;
                         float x1 = groundCollVtx[inner->v1_idx].pos.x;
@@ -3366,7 +3366,7 @@ enum_t mpLineGetKind(int line_id)
 u32 mpLineGetFlags(int line_id)
 {
     LINEID_CHECK(4583, line_id);
-    return groundCollLine[line_id].x0->flags;
+    return groundCollLine[line_id].x0->lo_flags;
 }
 
 void mpLib_80054D68(int line_id, u32 flags)
@@ -3374,7 +3374,7 @@ void mpLib_80054D68(int line_id, u32 flags)
     LINEID_CHECK(4595, line_id);
     {
         mpLib_Line* line = groundCollLine[line_id].x0;
-        u16* old_flags = &line->flags;
+        u16* old_flags = &line->lo_flags;
         *old_flags = (*old_flags & ~0xFF) | flags;
     }
 }
@@ -3663,10 +3663,10 @@ void mpUpdateDynamics(int joint_id)
             HSD_ASSERT(4884, 0);
         }
         line->flags = (line->flags & ~LINE_FLAG_KIND) | kind;
-        if ((joint->flags & 0x10000) && (line->x0->flags & 0x400)) {
+        if ((joint->flags & 0x10000) && (line->x0->lo_flags & 0x400)) {
             if (kind & CollLine_Floor) {
                 line->flags |= 0x10000 | LINE_FLAG_PLATFORM;
-                line->x0->flags |= LINE_FLAG_PLATFORM;
+                line->x0->lo_flags |= LINE_FLAG_PLATFORM;
             } else {
                 line->flags &= ~0x10000;
             }
@@ -5907,7 +5907,7 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
     line_r6 = groundCollLine;
     for (i = 0; i < total_r27; i++) {
         if (line_r6->flags & 0x10000 && !(line_r6->flags & 0x40000) &&
-            value == (line_r6->x0->flags & flag))
+            value == (line_r6->x0->lo_flags & flag))
         {
             count_r28 += 1;
         }
@@ -5923,7 +5923,7 @@ void mpLib_DrawMatchingLines(int value, int flag, GXColor color)
     GXBegin(GX_QUADS, GX_VTXFMT0, count_r28 * 4);
     for (i = 0; i < total_r27; i++) {
         if (line_r31->flags & 0x10000 && !(line_r31->flags & 0x40000)) {
-            if (value == (line_r31->x0->flags & flag)) {
+            if (value == (line_r31->x0->lo_flags & flag)) {
                 PAD_STACK(8);
                 GXPosition3f32(groundCollVtx[line_r31->x0->v0_idx].pos.x,
                                groundCollVtx[line_r31->x0->v0_idx].pos.y,

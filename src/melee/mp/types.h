@@ -55,8 +55,8 @@ struct mpLib_Line {
     /* +6 */ s16 next_id0;
     /* +8 */ s16 prev_id1;
     /* +A */ s16 next_id1;
-    /* +C */ u16 is_empty;
-    /* +E */ u16 flags;
+    /* +C */ u16 hi_flags;
+    /* +E */ u16 lo_flags;
 };
 
 struct CollLine {
