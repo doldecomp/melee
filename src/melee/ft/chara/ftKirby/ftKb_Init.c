@@ -3809,7 +3809,14 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F1F68
 
-/// #fn_800F1FDC
+void fn_800F1FDC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, 0x15F, 0x0C4C5082U, fp->cur_anim_frame,
+                              fp->frame_speed_mul, 0, NULL);
+}
 
 void ftKb_AttackDash_Anim(Fighter_GObj* gobj)
 {
@@ -7224,7 +7231,12 @@ void ftKb_MsSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
 /// #ftKb_MsSpecialAirNStart_Phys
 
-/// #ftKb_MsSpecialNStart_Coll
+void ftKb_MsSpecialNStart_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftKb_SpecialNMs_8010B868(gobj);
+    }
+}
 
 /// #ftKb_MsSpecialAirNStart_Coll
 

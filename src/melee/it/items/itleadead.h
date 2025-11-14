@@ -80,7 +80,7 @@
 /* 2EA988 */ UNK_RET it_802EA988(UNK_PARAMS);
 /* 2EA9FC */ UNK_RET it_802EA9FC(UNK_PARAMS);
 /* 2EAAEC */ UNK_RET it_802EAAEC(UNK_PARAMS);
-/* 2EAC8C */ UNK_RET it_802EAC8C(UNK_PARAMS);
+/* 2EAC8C */ void it_802EAC8C(Item_GObj* gobj);
 /* 2EADD8 */ void it_802EADD8(Item_GObj*);
 /* 2EAE80 */ UNK_RET it_802EAE80(HSD_GObj*);
 /* 3F8EB0 */ extern ItemStateTable it_803F8EB0[];

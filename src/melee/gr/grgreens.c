@@ -68,7 +68,11 @@ void grGreens_80213980(Ground_GObj* arg) {}
 
 void grGreens_80213984(Ground_GObj* arg) {}
 
-/// #grGreens_80213988
+void grGreens_80213988(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+}
 
 bool grGreens_802139B4(Ground_GObj* arg)
 {
@@ -111,7 +115,13 @@ bool grGreens_80214794(Ground_GObj* arg)
 
 /// #grGreens_8021479C
 
-/// #grGreens_80214804
+void grGreens_80214804(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    HSD_Free((void*) gp->gv.corneria.xC8);
+    HSD_Free((void*) gp->gv.corneria.xCC);
+}
 
 /// #grGreens_8021483C
 

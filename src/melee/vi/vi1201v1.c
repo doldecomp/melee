@@ -25,7 +25,10 @@ void un_8031F9B4(HSD_GObj* gobj)
 
 /// #un_8031FD18_OnEnter
 
-/// #un_80320490_OnFrame
+void un_80320490_OnFrame(void)
+{
+    vi_8031CAAC();
+}
 
 void un_803204B0(int arg0, int arg1)
 {

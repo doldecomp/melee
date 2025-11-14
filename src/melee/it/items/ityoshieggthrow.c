@@ -19,6 +19,14 @@ void it_2725_Logic43_PickedUp(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
+void it_802B2B08(Item_GObj* item_gobj)
+{
+    Item* item = GET_ITEM((HSD_GObj*) item_gobj);
+    f32* unkc4_unk4 = item->xC4_article_data->x4_specialAttributes;
+    Item_80268E5C((HSD_GObj*) item_gobj, 1, ITEM_ANIM_UPDATE);
+    it_80275158(item_gobj, *unkc4_unk4);
+}
+
 bool itYoshieggthrow_UnkMotion1_Coll(Item_GObj* gobj)
 {
     it_8026E5A0(gobj, it_802B2C38);
