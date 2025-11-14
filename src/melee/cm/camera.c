@@ -46,6 +46,19 @@
                                          f32 speed);
 /* 4D6464 */ static HSD_CObj* cm_804D6464;
 
+static inline float vec_len(Vec3* offset)
+{
+    return sqrtf((offset->x * offset->x) + (offset->y * offset->y) +
+                 (offset->z * offset->z));
+}
+
+inline BOOL abs_threshold_inline(f32 value, f32 threshold)
+{
+    f32 abs_value = value;
+    abs_value = ABS(abs_value);
+    return (abs_value > threshold) ? true : false;
+}
+
 void Camera_80028B9C(int n_subjects)
 {
     CameraBox* cam_box;
@@ -561,7 +574,7 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
     bounds->z_pos = z_pos;
 }
 
-void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
+static void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
                      f32 speed)
 {
     float dx;
@@ -614,6 +627,7 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
     transform->interest.y += offset_y * lerp_factor;
 }
 
+#pragma dont_inline on
 void Camera_80029BC4(CameraBounds* bounds, CameraTransformState* transform)
 {
     float cam_dist = (bounds->y_max - bounds->y_min) /
@@ -653,6 +667,7 @@ void Camera_80029C88(CameraBounds* unused, CameraTransformState* transform,
     transform->position.y += dist.y * scale;
     transform->position.z += dist.z * scale;
 }
+#pragma dont_inline reset
 
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
@@ -788,7 +803,55 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     transform->target_position.z = transform->target_interest.z + var_f28;
 }
 
-/// #Camera_8002A0C0
+
+void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
+{
+    f32 temp_f27;
+    f32 temp_f28;
+    f32 temp_f29;
+    f32 temp_f29_2;
+    f32 temp_f30;
+    f32 temp_f31;
+    f32 temp_f5;
+    f32 var_f30;
+    f32 var_f31;
+    f32 var_f6;
+
+    var_f31 = cm_80452C68.xA4 * cm_80452C68.xAC * 10.0f;
+    var_f30 = cm_80452C68.xA8 * cm_80452C68.xAC * 10.0f;
+
+    /// @todo figure out how to get cm_803BCCA0 to load into r3
+    if (gm_8016B41C() != 0) {
+        var_f31 *= cm_803BCCA0.xE8;
+        var_f30 *= cm_803BCCA0.xE8;
+    }
+
+    temp_f31 = var_f31 * cm_80452C68.x2BC;
+    temp_f30 = var_f30 * cm_80452C68.x2BC;
+    temp_f5 = bounds->z_pos * tanf(0.5f * (0.017453292f * state->fov));
+    temp_f28 = cm_803BCB64.aspect *
+               (temp_f5 / (0.5f * (f32) (cm_803BCB64.viewport.xmax -
+                                         cm_803BCB64.viewport.xmin)));
+    temp_f27 =
+        temp_f5 /
+        (0.5f * (f32) (cm_803BCB64.viewport.ymax - cm_803BCB64.viewport.ymin));
+    temp_f29 = Stage_GetCamZoomRate();
+    temp_f29_2 = Stage_GetCamMaxDepth() - temp_f29;
+
+    if (temp_f29_2 < 0.001f) {
+        var_f6 = 0.5f;
+    } else {
+        var_f6 = (bounds->z_pos - Stage_GetCamZoomRate()) / temp_f29_2;
+    }
+
+    Camera_80030DE4(
+        ((var_f6 * (cm_803BCCA0.x60 - cm_803BCCA0.x58)) + cm_803BCCA0.x58) *
+            (temp_f31 * temp_f28),
+        ((var_f6 * (cm_803BCCA0.x5C - cm_803BCCA0.x54)) + cm_803BCCA0.x54) *
+            (temp_f30 * temp_f27));
+    cm_80452C68.xA4 = 0.0f;
+    cm_80452C68.xA8 = 0.0f;
+}
 
 void Camera_8002A278(f32 x, f32 y)
 {
@@ -796,7 +859,7 @@ void Camera_8002A278(f32 x, f32 y)
     cm_80452C68.xA8 = y;
 }
 
-void Camera_8002A28C(void)
+void Camera_8002A28C(CameraBounds* arg0)
 {
     u8 _[16];
     s32 test;
@@ -1221,42 +1284,41 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
 
 void Camera_8002B0E0(void)
 {
-    bool singleplayer;
-    f32 cstick_y;
-    f32 val;
-    f32 x2bc;
-    u8 player_id;
-
-    singleplayer = gm_8016B41C();
-    if (singleplayer && (cm_80452C68.x2C0 > 0.0f)) {
-        player_id = Player_GetPlayerId(0);
-        cstick_y = HSD_PadCopyStatus[player_id].nml_subStickY;
-        val = cstick_y;
-
-        if (cstick_y < 0.0f) {
-            cstick_y = -cstick_y;
+    CameraUnkGlobals* new_var2;
+    f32 var_f1;
+    f32 var_f2;
+    f32* new_var;
+    if ((gm_8016B41C() != 0) && (cm_80452C68.x2C0 > 0.0f)) {
+        var_f1 = HSD_PadCopyStatus[Player_GetPlayerId(0) & 0xFFFFu].nml_subStickY;
+        new_var2 = &cm_803BCCA0;
+        var_f2 = var_f1;
+        var_f2 = var_f1;
+        if (var_f2 < 0.0f) {
+            var_f1 = -var_f1;
         }
-
-        if (cstick_y < 0.85f) {
-            val = 0.0f;
-            if (cm_80452C68.x2BA > 0) {
-                cm_80452C68.x2BA--;
+        if (var_f1 < 0.85f) {
+            var_f2 = 0.0f;
+            if (((s32) cm_80452C68.x2BA) > 0) {
+                cm_80452C68.x2BA = cm_80452C68.x2BA - 1;
             } else {
-                cstick_y = cm_803BCCA0._44[0x28];
+                var_f2 = (*new_var2).xE4;
             }
-            x2bc = cm_803BCCA0._44[40];
         } else {
-            cm_80452C68.x2BA = cm_803BCCA0._44[0x27];
+            cm_80452C68.x2BA = (*new_var2).xE0;
         }
-
-        cm_80452C68.x2BC = -(val * cm_803BCCA0._44[36] - cm_80452C68.x2BC);
-        if (cm_80452C68.x2BC < cm_803BCCA0._44[38]) {
-            cm_80452C68.x2BC = cm_803BCCA0._44[38];
-        } else if (cm_80452C68.x2BC > cm_803BCCA0._44[37]) {
-            cm_80452C68.x2BC = cm_803BCCA0._44[37];
+        cm_80452C68.x2BC = -((var_f2 * (*new_var2).xD4) - cm_80452C68.x2BC);
+        if (cm_80452C68.x2BC < (*new_var2).xDC) {
+            cm_80452C68.x2BC = (*new_var2).xDC;
+            return;
+        }
+        if ((*new_var2).xD4 && (*new_var2).xD4) {
+        }
+        if (cm_80452C68.x2BC > (*new_var2).xD8) {
+            cm_80452C68.x2BC = (*new_var2).xD8;
         }
     }
 }
+
 
 void Camera_8002B1F8(CameraTransformState* transform)
 {
@@ -1304,9 +1366,221 @@ void Camera_8002B1F8(CameraTransformState* transform)
     }
 }
 
-/// #Camera_8002B3D4
+/// update gameplay camera
+void Camera_8002B3D4(void* arg0)
+{
+    CameraBounds bounds;
+    CameraBounds sp2C;
+    Vec3 distance;
+    Vec3 fighter_pos;
+    float total_dist;
+    HSD_GObj* p1_fgp;
+    f32 temp_f31;
+    f32 var_f1;
+    f32 var_f1_2;
+    BOOL var_r0;
 
-/// #Camera_8002B694
+    Camera_80030DF8();
+    Camera_800293E0();
+    Camera_8002B0E0();
+    Camera_8002958C(&bounds, &cm_80452C68.transform);
+    cm_80452C68.transform.target_fov = cm_803BCCA0.x40;
+    total_dist = cm_80452C68.transform.target_fov - cm_80452C68.transform.fov;
+    cm_80452C68.transform.fov += total_dist * cm_803BCCA0.x44;
+    Camera_80029BC4(&bounds, &cm_80452C68.transform);
+    if ((Camera_80030AF8() != 0) &&
+        ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)))
+    {
+        ftLib_80086644(p1_fgp, &fighter_pos);
+        /// @todo inline?
+        var_f1 = fighter_pos.z;
+        var_r0 = abs_threshold_inline(var_f1, 30.0f);
+        // if (var_f1 < 0.0f) {
+        //     var_f1 = -var_f1;
+        // }
+        // if (var_f1 > 30.0f) {
+        //     var_r0 = 1;
+        // } else {
+        //     var_r0 = 0;
+        // }
+    }
+    if (var_r0 == 0) {
+        Camera_80029CF8(&bounds, &cm_80452C68.transform);
+        Camera_8002A768(&cm_80452C68.transform, 0);
+    }
+    Camera_8002958C(&sp2C, &cm_80452C68.transform_copy);
+    cm_80452C68.transform_copy.target_fov = cm_803BCCA0.x40;
+    temp_f31 = cm_80452C68.transform_copy.target_fov - cm_80452C68.transform_copy.fov;
+    cm_80452C68.transform_copy.fov += temp_f31 * cm_803BCCA0.x44;
+    Camera_80029BC4(&sp2C, &cm_80452C68.transform_copy);
+    if ((Camera_80030AF8() != 0) &&
+        ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)))
+    {
+        ftLib_80086644(p1_fgp, &fighter_pos);
+        var_f1_2 = fighter_pos.z;
+        if (var_f1_2 < 0.0f) {
+            var_f1_2 = -var_f1_2;
+        }
+        if (var_f1_2 > 30.0f) {
+            var_r0 = 1;
+        } else {
+            var_r0 = 0;
+        }
+    }
+    if (var_r0 == 0) {
+        Camera_80029CF8(&sp2C, &cm_80452C68.transform_copy);
+        Camera_8002A768(&cm_80452C68.transform_copy, 0);
+    }
+
+    /// @remarks permuter jank
+    distance.y = cm_80452C68.transform.target_position.y - cm_80452C68.transform.target_interest.y;
+    if (cm_80452C68.x2BC == 1.0f) {
+        distance.x = cm_80452C68.transform.target_position.x - cm_80452C68.transform.target_interest.x;
+        distance.y = cm_80452C68.transform.target_position.y - cm_80452C68.transform.target_interest.y;
+        distance.z = cm_80452C68.transform.target_position.z - cm_80452C68.transform.target_interest.z;
+        var_f1 = distance.y * distance.y;
+        temp_f31 = distance.z * distance.z;
+        var_f1_2 = distance.x * distance.x;
+        total_dist = (var_f1_2 + var_f1) + temp_f31;
+        cm_80452C68.x2C0 = sqrtf__Ff(total_dist);
+    }
+
+    Camera_8002B1F8(&cm_80452C68.transform);
+    Camera_80029AAC(&bounds, &cm_80452C68.transform,
+                    Stage_GetCamTrackSmooth());
+    Camera_80029C88(&bounds, &cm_80452C68.transform,
+                    Stage_GetCamTrackSmooth());
+    Camera_80029AAC(&sp2C, &cm_80452C68.transform_copy,
+                    Stage_GetCamTrackSmooth());
+    Camera_80029C88(&sp2C, &cm_80452C68.transform_copy,
+                    Stage_GetCamTrackSmooth());
+    Camera_8002A28C(&bounds);
+    Camera_8002A0C0(&bounds, &cm_80452C68.transform);
+
+    if (((s16) cm_80452C68.x2B8) > 0x3E8) {
+        cm_80452C68.x2B4 = cm_80452C68.x2B0;
+        cm_80452C68.x2B8 = 1;
+    }
+
+    temp_f31 = Stage_GetCamBoundsLeftOffset();
+    cm_80452C68.x2B4 += Stage_GetCamBoundsRightOffset() - temp_f31;
+    cm_80452C68.x2B8 += 1;
+    cm_80452C68.x2B0 = cm_80452C68.x2B4 / ((f32) cm_80452C68.x2B8);
+}
+
+
+inline HSD_PadStatus* get_slot_pad(u8 arg0)
+{
+    return &HSD_PadCopyStatus[arg0];
+}
+
+inline f32 get_stick_x(HSD_PadStatus* arg0)
+{
+    return arg0->nml_stickX;
+}
+
+inline f32 get_stick_y(HSD_PadStatus* arg0)
+{
+    return arg0->nml_stickY;
+}
+
+void Camera_8002B694(CameraInputs* inputs, s32 slot)
+{
+    HSD_PadStatus* pad;
+    f32 stick_x;
+    f32 stick_y;
+    f32 substick_x;
+    f32 substick_y;
+    f32 temp_x;
+    f32 temp_y;
+    s32 var_r4;
+    s32 var_r5;
+    u64 temp_ret;
+    PAD_STACK(8);
+
+    if (slot == 5) {
+        inputs->stick_x = 0.0f;
+        inputs->stick_y = 0.0f;
+        inputs->substick_x = 0.0f;
+        inputs->substick_y = 0.0f;
+        inputs->x18._u64 = 0;
+        inputs->x10._u64 = 0;
+        return;
+    }
+    if (slot == 4) {
+        /// @todo there is probably a bigger inline
+        for (var_r4 = 0; var_r4 < 4; var_r4++) {
+            pad = get_slot_pad(var_r4);
+            temp_x = get_stick_x(pad);
+            temp_y = get_stick_y(pad);
+            stick_x = temp_x;
+            stick_y = temp_y;
+            if (temp_x < 0.0f) {
+                temp_x = -temp_x;
+            }
+            if (temp_x > 0.85f) {
+                break;
+            }
+            if (temp_y < 0.0f) {
+                temp_y = -temp_y;
+            }
+            if (temp_y > 0.85f) {
+                break;
+            }
+        }
+
+        if (var_r4 == 4) {
+            stick_y = 0.0f;
+            stick_x = 0.0f;
+        }
+
+        for (var_r5 = 0; var_r5 < 4; var_r5++) {
+            pad = get_slot_pad(var_r5);
+            temp_x = pad->nml_subStickX;
+            temp_y = pad->nml_subStickY;
+            substick_x = temp_x;
+            substick_y = temp_y;
+            if (temp_x < 0.0f) {
+                temp_x = -temp_x;
+            }
+            if (temp_x > 0.85f) {
+                break;
+            }
+            if (temp_y < 0.0f) {
+                temp_y = -temp_y;
+            }
+            if (temp_y > 0.85f) {
+                break;
+            }
+        }
+
+        if (var_r5 == 4) {
+            substick_y = 0.0f;
+            substick_x = 0.0f;
+        }
+        inputs->stick_x = stick_x;
+        inputs->stick_y = stick_y;
+        inputs->substick_x = substick_x;
+        inputs->substick_y = substick_y;
+        temp_ret = gm_801A3680(4U);
+        inputs->x10._u64 = temp_ret;
+        temp_ret = gm_801A36A0(4U);
+        inputs->x18._u64 = temp_ret;
+        return;
+    }
+    pad = get_slot_pad(slot);
+    inputs->stick_x = pad->nml_stickX;
+    inputs->stick_y = pad->nml_stickY;
+    inputs->substick_x = pad->nml_subStickX;
+    inputs->substick_y = pad->nml_subStickY;
+    temp_ret = gm_801A3680(slot);
+    inputs->x10._u64 = temp_ret;
+    temp_ret = gm_801A36A0(slot);
+    inputs->x18._u64 = temp_ret;
+}
+
+
+
 
 s32 Camera_8002BA00(s32 slot, s32 arg1)
 {
@@ -1333,12 +1607,6 @@ s32 Camera_8002BA00(s32 slot, s32 arg1)
     return Camera_8002BA00(slot, arg1);
 }
 
-static inline float vec_len(Vec3* offset)
-{
-    return sqrtf((offset->x * offset->x) + (offset->y * offset->y) +
-                 (offset->z * offset->z));
-}
-
 // Camera_PauseZoom
 void Camera_8002BAA8(f32 zoom_amt)
 {
@@ -1362,7 +1630,7 @@ void Camera_8002BAA8(f32 zoom_amt)
 
     cm_80452C68.pause_eye_distance =
         ((zoom_amt *
-          ((offset_len * cm_803BCCA0._44[0x16]) + cm_803BCCA0._44[0x17])) +
+          ((offset_len * cm_803BCCA0.x9C) + cm_803BCCA0.xA0)) +
          cm_80452C68.pause_eye_distance);
 
     if (cm_80452C68.pause_eye_distance < cm_80452C68.min_distance) {
@@ -1464,7 +1732,7 @@ void Camera_8002BD88(f32 x, f32 y)
 
     if (y != 0.0F) {
         scale =
-            y * ((view_dir * cm_803BCCA0._44[0x1E]) + cm_803BCCA0._44[0x1F]);
+            y * ((view_dir * cm_803BCCA0.xBC) + cm_803BCCA0.xC0);
         // scale = y * ((view_dir * cm_803BCCA0._44[0x1E]) +
         // cm_803BCCA0._44[0x1F]);
         up.x *= scale;
@@ -1493,7 +1761,51 @@ void Camera_8002BD88(f32 x, f32 y)
     cm_80452C68.pause_eye_offset = pos;
 }
 
-/// #Camera_8002C010
+void Camera_8002C010(f32 farg0, f32 farg1)
+{
+    Vec3 up;
+    Vec3 forward;
+    Vec3 right;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 var_f30;
+
+    up = cm_803B73DC;
+    forward = cm_80452C68.pause_eye_offset;
+    forward.x *= -1.0f;
+    forward.y *= -1.0f;
+    forward.z *= -1.0f;
+    var_f30 = lbVector_Normalize(&forward);
+
+    if (var_f30 < 1.0f) {
+        var_f30 = 1.0f;
+        forward.y = 0.0f;
+        forward.x = 0.0f;
+        forward.z = 1.0f;
+        cm_80452C68.pause_eye_distance = 1.0f;
+    }
+
+    Camera_8002BC78(&forward, &up, &right);
+
+    if (farg1 != 0.0f) {
+        temp_f1_2 = (var_f30 * cm_803BCCA0.xB4) + cm_803BCCA0.xB8;
+        temp_f1 = farg1 * temp_f1_2;
+        up.x *= temp_f1;
+        up.y *= temp_f1;
+        up.z *= temp_f1;
+        lbVector_Add(&cm_80452C68.x314, &up);
+    }
+
+    if (farg0 != 0.0f) {
+        /// @todo not really sure how to get the same output as the if above
+        // temp_f1_2 = (var_f30 * cm_803BCCA0.xB4) + cm_803BCCA0.xB8;
+        temp_f1 = -(farg0 * var_f30);
+        right.x *= temp_f1;
+        right.y *= temp_f1;
+        right.z *= temp_f1;
+        lbVector_Add(&cm_80452C68.x314, &right);
+    }
+}
 
 /// #Camera_8002C1A8
 
@@ -1513,7 +1825,42 @@ void Camera_8002BD88(f32 x, f32 y)
 
 /// #Camera_8002DFE4
 
-/// #Camera_8002E158
+s32 Camera_8002E158(f32* arg0, f32 farg0, f32 farg1, f32 farg2)
+{
+    s32 var_r6;
+    f32 var_f4;
+
+    var_r6 = 0;
+    switch (cm_80452C68.x341_b5_b6) {
+    case 0:
+        var_r6 = 1;
+        break;
+
+    case 1:
+        if (cm_80452C68.x378.s32 == cm_80452C68.x37C) {
+            var_r6 = 1;
+        } else {
+            var_f4 = cm_80452C68.x378.s32 / (f32) cm_80452C68.x37C;
+        }
+        break;
+
+    case 2:
+        if (cm_80452C68.x378.f32 >= 1.0f) {
+            var_r6 = 1;
+        } else {
+            var_f4 = cm_80452C68.x378.f32;
+        }
+        break;
+    }
+
+    if (var_r6 != 0) {
+        *arg0 = farg1;
+    } else {
+        *arg0 = (var_f4 * (farg1 - farg0)) + farg0;
+    }
+
+    return var_r6;
+}
 
 /// #Camera_8002E234
 
@@ -1706,14 +2053,14 @@ s32 fn_8002F908(HSD_RectF32* arg0)
         (Stage_GetCamBoundsRightOffset() + Stage_GetCamBoundsLeftOffset()) *
         0.5f;
     half_width =
-        cm_803BCCA0._44[0x1A] * (0.5f * (Stage_GetCamBoundsRightOffset() -
+        cm_803BCCA0.xAC * (0.5f * (Stage_GetCamBoundsRightOffset() -
                                          Stage_GetCamBoundsLeftOffset()));
     arg0->ymax = center_h + half_width;
     arg0->ymin = center_h - half_width;
     center_v = 0.5f * (Stage_GetCamBoundsTopOffset() +
                        Stage_GetCamBoundsBottomOffset());
     half_height =
-        cm_803BCCA0._44[0x1B] * (0.5f * (Stage_GetCamBoundsTopOffset() -
+        cm_803BCCA0.xB0 * (0.5f * (Stage_GetCamBoundsTopOffset() -
                                          Stage_GetCamBoundsBottomOffset()));
     arg0->xmin = center_v + half_height;
     arg0->xmax = center_v - half_height;
@@ -1734,21 +2081,66 @@ s32 fn_8002FBA0(HSD_RectF32* arg0)
         (Stage_GetCamBoundsRightOffset() + Stage_GetCamBoundsLeftOffset()) *
         0.5f;
     half_width =
-        cm_803BCCA0._44[0x1A] * (0.5f * (Stage_GetCamBoundsRightOffset() -
+        cm_803BCCA0.xAC * (0.5f * (Stage_GetCamBoundsRightOffset() -
                                          Stage_GetCamBoundsLeftOffset()));
     arg0->ymax = center_h + half_width;
     arg0->ymin = center_h - half_width;
     center_v = 0.5f * (Stage_GetCamBoundsTopOffset() +
                        Stage_GetCamBoundsBottomOffset());
     half_height =
-        cm_803BCCA0._44[0x1B] * (0.5f * (Stage_GetCamBoundsTopOffset() -
+        cm_803BCCA0.xB0 * (0.5f * (Stage_GetCamBoundsTopOffset() -
                                          Stage_GetCamBoundsBottomOffset()));
     arg0->xmin = center_v + half_height;
     arg0->xmax = center_v - half_height;
     return 1;
 }
 
-/// #Camera_8002FC7C
+void Camera_8002FC7C(s8 arg0, s8 arg1)
+{
+    CameraUnkGlobals* new_var;
+    f32 temp_f2;
+    cm_80452C68.mode = 5;
+    cm_80452C68.x304 = Camera_8002BA00(arg0 - 1, 1);
+    cm_80452C68.x305 = arg1;
+    cm_80452C68.x32C = cm_803BCCA0.x40;
+    cm_80452C68.x2D8 = Stage_GetCamBoundsLeftOffset();
+    cm_80452C68.x2DC = Stage_GetCamBoundsRightOffset();
+    cm_80452C68.x2D0 = Stage_GetCamBoundsTopOffset();
+    cm_80452C68.x2D4 = Stage_GetCamBoundsBottomOffset();
+    cm_80452C68.x2E0 = (*(new_var = &cm_803BCCA0)).xA8;
+    cm_80452C68.x2E4 = (*new_var).xA4;
+    cm_80452C68.x2E8 = Stage_GetCamAngleRadiansUp();
+    cm_80452C68.x2EC = Stage_GetCamAngleRadiansDown();
+    cm_80452C68.x2F0 = Stage_GetCamAngleRadiansRight();
+    cm_80452C68.x2F4 = Stage_GetCamAngleRadiansLeft();
+    temp_f2 = (cm_80452C68.x32C * (*new_var).x8C) + (*new_var).x90;
+    cm_80452C68.min_distance = temp_f2 * (*new_var).x94;
+    cm_80452C68.max_distance = temp_f2 * (*new_var).x98;
+    cm_80452C68.x300 = (s32) fn_8002FBA0;
+    cm_80452C68.x314.z = 0.0f;
+    cm_80452C68.x314.y = 0.0f;
+    cm_80452C68.x314.x = 0.0f;
+    cm_80452C68.pause_eye_offset.x = 0.0f;
+    cm_80452C68.pause_eye_offset.y = 5.0f;
+    cm_80452C68.pause_eye_offset.z = 20.0f;
+    cm_80452C68.pause_up.x = 0.0f;
+    cm_80452C68.pause_up.y = 1.0f;
+    cm_80452C68.pause_up.z = 0.0f;
+    if (cm_80452C68.x304 == 0xA) {
+        cm_80452C68.pause_eye_distance = 3.0f * temp_f2;
+    } else {
+        cm_80452C68.pause_eye_distance = temp_f2;
+    }
+    Camera_8002BAA8(0.0f);
+    Camera_8002BD88(0.0f, 0.0f);
+    Camera_8002C010(0.0f, 0.0f);
+    cm_80452C68.transform.target_interest = cm_80452C68.x308;
+    lbVector_Add(&cm_80452C68.transform.target_interest, &cm_80452C68.x314);
+    cm_80452C68.transform.target_position =
+        cm_80452C68.transform.target_interest;
+    lbVector_Add(&cm_80452C68.transform.target_position,
+                 &cm_80452C68.pause_eye_offset);
+}
 
 void Camera_8002FE38(void)
 {
@@ -1766,7 +2158,61 @@ void Camera_8002FE38(void)
         cm_80452C68.transform.fov;
 }
 
-/// #Camera_8002FEEC
+void Camera_8002FEEC(s32 arg0)
+{
+    HSD_CObj* cobj;
+    CameraBox* box;
+    Vec3 eye;
+    Vec3 target;
+    f32 fov;
+    f32 temp_f1_4;
+    f32 temp_f1;
+    f32 temp_f31;
+    f32 temp_f1_3;
+    PAD_STACK(8);
+
+    if (Player_GetEntity(arg0) != NULL) {
+        box = ftLib_80086B74(Player_GetEntity(arg0));
+        if ((box != NULL) && ((cm_80452C68.mode) != 7)) {
+
+            if (cm_80452C68.mode <= 1U) {
+                cm_80452C68.debug_mode.last_mode = cm_80452C68.mode;
+            }
+
+            cm_80452C68.mode = 7;
+            cm_80452C68.debug_mode.ply_slot = arg0;
+            temp_f1 = tanf(0.017453292f * cm_80452C68.transform.target_fov);
+            temp_f31 = (2.0f * box->x34.z) / temp_f1;
+            cm_80452C68.debug_mode.mode7_int_offset.z = 0.0f;
+            cm_80452C68.debug_mode.mode7_int_offset.y = 0.0f;
+            cm_80452C68.debug_mode.mode7_int_offset.x = 0.0f;
+            cobj = cm_80452C68.gobj->hsd_obj;
+            HSD_CObjGetInterest(cobj, &eye);
+            HSD_CObjGetEyePosition(cobj, &target);
+            fov = HSD_CObjGetFov(cobj);
+            cm_80452C68.debug_mode.mode7_eye_pos = eye;
+            cm_80452C68.debug_mode.mode7_int_pos = target;
+            cm_80452C68.debug_mode.mode7_fov = fov;
+
+            lbVector_Diff(&target, &eye,
+                          &cm_80452C68.debug_mode.mode7_eye_offset);
+            temp_f1_3 = cm_80452C68.debug_mode.mode7_eye_offset.x;
+            temp_f1 = temp_f1_3 * temp_f1_3;
+
+            temp_f1_4 =
+                temp_f31 /
+                sqrtf__Ff(
+                    (cm_80452C68.debug_mode.mode7_eye_offset.z *
+                     cm_80452C68.debug_mode.mode7_eye_offset.z) +
+                    (temp_f1 + (cm_80452C68.debug_mode.mode7_eye_offset.y *
+                                cm_80452C68.debug_mode.mode7_eye_offset.y)));
+
+            cm_80452C68.debug_mode.mode7_eye_offset.x *= temp_f1_4;
+            cm_80452C68.debug_mode.mode7_eye_offset.y *= temp_f1_4;
+            cm_80452C68.debug_mode.mode7_eye_offset.z *= temp_f1_4;
+        }
+    }
+}
 
 void Camera_8003006C(void)
 {
@@ -1962,12 +2408,14 @@ void Camera_80030A8C(bool arg0)
 
 void Camera_SetStageVisible(int arg0)
 {
-    cm_80452C68.x399_b5 = arg0 == 0;
+    int temp;
+    cm_80452C68.x399_b5 = (temp = 0) == arg0;
 }
 
 bool Camera_80030AC4(void)
 {
-    return cm_80452C68.x399_b5 == 0;
+    int temp;
+    return (temp = 0) == cm_80452C68.x399_b5;
 }
 
 void Camera_80030AE0(bool arg0)
@@ -2191,6 +2639,37 @@ void Camera_800311DC(f32 arg8)
 
 /// #Camera_800311EC
 
-/// #Camera_80031328
+void Camera_80031328(HSD_GObj* arg0, s32 arg2, s32 arg3)
+{
+    s32 var_r11;
+    s32 var_r4;
+    s32 var_r9;
+    Camera* camera;
+
+    cm_80452C68.x398_b6_b7 = 0;
+    camera = &cm_80452C68;
+
+    if (cm_80452C68.x398_b0) {
+        var_r4 = 0;
+    } else {
+        var_r4 = 0x20;
+    }
+
+    if (cm_80452C68.x398_b4) {
+        var_r9 = 0;
+    } else {
+        var_r9 = 0x10;
+        var_r4 = 0;
+    }
+
+    if ((*camera).x398_b1) {
+        var_r11 = 0;
+    } else {
+        var_r11 = 0x40;
+        var_r9 = 0;
+    }
+    arg0->gxlink_prios = (var_r11 | var_r4) | (var_r9 | var_r4) | (arg2 | arg3) | (var_r11 | 0);
+    HSD_GObj_80390ED0(arg0, 4);
+}
 
 /// #Camera_800313E0
