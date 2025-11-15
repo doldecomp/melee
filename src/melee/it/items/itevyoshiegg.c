@@ -85,7 +85,13 @@ void it_3F14_Logic42_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, 6);
 }
 
-/// #itEvyoshiegg_UnkMotion3_Phys
+void itEvyoshiegg_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
+
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 /// #itEvyoshiegg_UnkMotion3_Coll
 

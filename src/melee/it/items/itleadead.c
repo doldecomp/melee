@@ -69,7 +69,15 @@ void itLeadead_UnkMotion12_Phys(Item_GObj* gobj)
 
 /// #itLeadead_UnkMotion7_Anim
 
-/// #itLeadead_UnkMotion7_Phys
+extern f32 it_804DD87C;
+
+void itLeadead_UnkMotion7_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+    it_8027C0A8(gobj, ip->facing_dir, it_804DD87C);
+}
 
 /// #itLeadead_UnkMotion7_Coll
 

@@ -11,6 +11,22 @@ void itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
     it_8026DFB0(gobj);
 }
 
+s32 itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    if (it_8026DA08(gobj) != 0) {
+        return it_2725_Logic28_DmgDealt(gobj);
+    }
+    return 0;
+}
+
+void itKyasarinegg_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
+
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
+
 void it_2725_Logic28_Dropped(Item_GObj* gobj)
 {
     it_2725_Logic28_Thrown(gobj);
