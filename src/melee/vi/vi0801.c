@@ -1,3 +1,4 @@
+#include "vi0801.h"
 
 #include "vi.h"
 
