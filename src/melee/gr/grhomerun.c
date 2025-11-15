@@ -5,6 +5,7 @@
 #include "cm/camera.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
+#include "gr/grzakogenerator.h"
 
 void grHomeRun_8021C750(bool arg) {}
 

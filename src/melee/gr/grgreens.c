@@ -3,6 +3,8 @@
 #include <platform.h>
 #include "gr/inlines.h"
 
+#include "memory.h"
+
 static s8 grGr_804D6AAC;
 static s8 grGr_804D6AAD;
 

@@ -1,4 +1,6 @@
 
+#include "memory.h"
+
 void fn_80246F0C(void* arg0)
 {
     HSD_Free(arg0);

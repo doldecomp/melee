@@ -1,5 +1,7 @@
 #include "vi1101.static.h"
 
+#include "vi.h"
+
 /// #un_8031F294
 
 /// #fn_8031F548

@@ -3,6 +3,8 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#include "vi.h"
+
 void un_8031F990(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));

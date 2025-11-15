@@ -4,6 +4,8 @@
 
 #include <platform.h>
 
+#include "memory.h"
+
 /// #grBigBlueRoute_8020B864
 
 /// #grBigBlueRoute_8020B89C
