@@ -1,3 +1,4 @@
+#include "mndiagram3.h"
 
 #include "baselib/memory.h"
 
