@@ -1150,7 +1150,7 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
             }
         }
     } else {
-        mpLib_80054584(line_id, &sp20);
+        mpLeftWallGetTop(line_id, &sp20);
         temp_f4 = 2.0F;
         temp_f2 = sp20.y;
         temp_f1_3 = sp20.x - temp_f4;
@@ -1235,7 +1235,7 @@ void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
             }
         }
     } else {
-        mpLib_8005484C(line_id, &sp20);
+        mpRightWallGetTop(line_id, &sp20);
         temp_f2 = sp20.y;
         temp_f1_2 = 2.0F + sp20.x;
         sp20.x = 2.0F * var_f31 + temp_f1_2;
@@ -1308,7 +1308,7 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
         mpLib_80051BA8_Floor(&cd->x140, cd->floor_skip, cd->x48_joint_id,
                              cd->x4C_joint_id, 1, left, bottom, right, top);
     if (ledge_id != -1 &&
-        (mpLib_80054158(ledge_id, &sp14), cd->x140.x - sp14.x < 5.0F) &&
+        (mpFloorGetLeft(ledge_id, &sp14), cd->x140.x - sp14.x < 5.0F) &&
         cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x < sp14.x &&
         cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y < sp14.y &&
         (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y > cd->x140.y ||
@@ -1382,7 +1382,7 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
         mpLib_80051BA8_Floor(&cd->x140, cd->floor_skip, cd->x48_joint_id,
                              cd->x4C_joint_id, -1, left, bottom, right, top);
     if (ledge_id != -1 &&
-        (mpLib_80053FF4(ledge_id, &sp14), sp14.x - cd->x140.x < 5.0F) &&
+        (mpFloorGetRight(ledge_id, &sp14), sp14.x - cd->x140.x < 5.0F) &&
         cd->cur_pos.x + cd->xA4_ecbCurrCorrect.bottom.x > sp14.x &&
         cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y < sp14.y &&
         (cd->cur_pos.y + cd->xA4_ecbCurrCorrect.bottom.y > cd->x140.y ||
@@ -1502,9 +1502,9 @@ bool mpColl_80044838_Floor(CollData* coll, bool ignore_bottom)
         coll->floor.index = line_id;
         coll->cur_pos.y += y_sp1C;
     } else {
-        mpLib_80054158(coll->floor.index, &sp10);
+        mpFloorGetLeft(coll->floor.index, &sp10);
         if (sp10.x <= sp20.x) {
-            mpLib_80053FF4(coll->floor.index, &sp10);
+            mpFloorGetRight(coll->floor.index, &sp10);
         }
         coll->cur_pos.x = sp10.x - coll->xA4_ecbCurrCorrect.bottom.x;
         coll->cur_pos.y = sp10.y - coll->xA4_ecbCurrCorrect.bottom.y;
@@ -1542,7 +1542,7 @@ bool mpColl_80044948_Floor(CollData* coll)
         hit_wall = true;
         coll->cur_pos.y += y_sp18;
     } else {
-        mpLib_80054158(coll->floor.index, &spC);
+        mpFloorGetLeft(coll->floor.index, &spC);
         if (sp1C.x < spC.x) {
             line_id = mpLib_80052700_Floor(coll->floor.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_RightWall)
@@ -1550,7 +1550,7 @@ bool mpColl_80044948_Floor(CollData* coll)
                 hit_wall = true;
             }
         } else {
-            mpLib_80053FF4(coll->floor.index, &spC);
+            mpFloorGetRight(coll->floor.index, &spC);
             line_id = mpLib_80052534_Floor(coll->floor.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_LeftWall) {
                 hit_wall = true;
@@ -1643,7 +1643,7 @@ bool mpColl_80044C74_Ceiling(CollData* coll)
         coll->cur_pos.y += sp18;
     } else {
         var_r30 = false;
-        mpLib_80054420(coll->ceiling.index, &spC);
+        mpCeilingGetLeft(coll->ceiling.index, &spC);
         if (sp1C.x <= spC.x) {
             line_id = mpLib_80052A98_Ceiling(coll->ceiling.index);
             if (line_id != -1 && mpLib_80054ED8(line_id) &&
@@ -1652,7 +1652,7 @@ bool mpColl_80044C74_Ceiling(CollData* coll)
                 var_r30 = true;
             }
         } else {
-            mpLib_800542BC(coll->ceiling.index, &spC);
+            mpCeilingGetRight(coll->ceiling.index, &spC);
             line_id = mpLib_800528CC_Ceiling(coll->ceiling.index);
             if (line_id != -1 && mpLib_80054ED8(line_id) &&
                 mpLineGetKind(line_id) == CollLine_LeftWall)
@@ -1822,7 +1822,7 @@ bool mpColl_800454A4_RightWall(CollData* coll)
         float s68;
         wall_id = mpColl_80458810.right[i];
 
-        mpLib_8005484C(wall_id, &pos);
+        mpRightWallGetTop(wall_id, &pos);
         if (pos.y < coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y) {
             if (mpColl_804D6490_max_x < pos.x) {
                 line_id = mpLib_8004E684_RightWall(wall_id, &pos, NULL, &flags,
@@ -1838,7 +1838,7 @@ bool mpColl_800454A4_RightWall(CollData* coll)
             continue;
         }
 
-        mpLib_800549B0(wall_id, &pos);
+        mpRightWallGetBottom(wall_id, &pos);
         if (pos.y > coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y) {
             if (mpColl_804D6490_max_x < pos.x) {
                 line_id = mpLib_8004E684_RightWall(wall_id, &pos, NULL, &flags,
@@ -1899,7 +1899,7 @@ bool mpColl_800454A4_RightWall(CollData* coll)
             Vec3 vec;
             Vec3 nrm;
             PAD_STACK(0x44);
-            mpLib_8005484C(wall_id, &vec);
+            mpRightWallGetTop(wall_id, &vec);
             if (pos.y > vec.y) {
                 line_id = mpLib_80052A98_Ceiling(line_id);
                 if (line_id != -1 && mpLib_80054ED8(line_id) &&
@@ -2135,7 +2135,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
 
         wall_id = *arr;
 
-        mpLib_80054584(wall_id, &pos);
+        mpLeftWallGetTop(wall_id, &pos);
         if (pos.y < coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y) {
             if (mpColl_804D6490_max_x > pos.x) {
                 int line_id = mpLib_8004E398_LeftWall(wall_id, &pos, NULL,
@@ -2151,7 +2151,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
             continue;
         }
 
-        mpLib_800546E8(wall_id, &pos);
+        mpLeftWallGetBottom(wall_id, &pos);
         if (pos.y > coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y) {
             if (mpColl_804D6490_max_x > pos.x) {
                 int line_id = mpLib_8004E398_LeftWall(wall_id, &pos, NULL,
@@ -2207,7 +2207,7 @@ bool mpColl_80046224_LeftWall(CollData* coll)
             mpLineGetKind(line_id) & CollLine_Ceiling)
         {
             Vec3 vec;
-            mpLib_80054584(wall_id, &vec);
+            mpLeftWallGetTop(wall_id, &vec);
             if (pos.y > vec.y) {
                 line_id = mpLib_800528CC_Ceiling(line_id);
                 if (line_id != -1 && mpLib_80054ED8(line_id) &&
@@ -3016,7 +3016,7 @@ bool mpColl_800488F4(CollData* arg0)
         return true;
     }
     var_r30 = false;
-    mpLib_80054158(ledge_id, &sp14);
+    mpFloorGetLeft(ledge_id, &sp14);
     if (arg0->cur_pos.x < sp14.x) {
         temp_r3_2 = mpLib_80052700_Floor(ledge_id);
         if ((temp_r3_2 != -1) && mpLib_80054ED8(temp_r3_2) &&
@@ -3027,7 +3027,7 @@ bool mpColl_800488F4(CollData* arg0)
             arg0->env_flags |= Collide_LeftLedgeSlip;
         }
     } else {
-        mpLib_80053FF4(ledge_id, &sp14);
+        mpFloorGetRight(ledge_id, &sp14);
         if (arg0->cur_pos.x > sp14.x) {
             temp_r3_3 = mpLib_80052534_Floor(ledge_id);
             if ((temp_r3_3 != -1) && mpLib_80054ED8(temp_r3_3) &&
@@ -3188,7 +3188,7 @@ bool mpColl_800491C8_RightWall(CollData* coll)
 
         wall_id = mpColl_80458810.right[i];
 
-        mpLib_8005484C(wall_id, &pos);
+        mpRightWallGetTop(wall_id, &pos);
         if (pos.y < (coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y)) {
             if (mpColl_804D6490_max_x < pos.x) {
                 int r3 = mpLib_8004E684_RightWall(wall_id, &pos, NULL, &flags,
@@ -3204,7 +3204,7 @@ bool mpColl_800491C8_RightWall(CollData* coll)
             continue;
         }
 
-        mpLib_800549B0(wall_id, &pos);
+        mpRightWallGetBottom(wall_id, &pos);
         if (pos.y > (coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y)) {
             if (mpColl_804D6490_max_x < pos.x) {
                 int r3 = mpLib_8004E684_RightWall(wall_id, &pos, NULL, &flags,
@@ -3474,7 +3474,7 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
 
         wall_id = *arr;
 
-        mpLib_80054584(wall_id, &pos);
+        mpLeftWallGetTop(wall_id, &pos);
         if (pos.y < (coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y)) {
             if (mpColl_804D6490_max_x > pos.x) {
                 int r3 = mpLib_8004E398_LeftWall(wall_id, &pos, NULL, &flags,
@@ -3490,7 +3490,7 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
             continue;
         }
 
-        mpLib_800546E8(wall_id, &pos);
+        mpLeftWallGetBottom(wall_id, &pos);
         if (pos.y > (coll->cur_pos.y + coll->xA4_ecbCurrCorrect.top.y)) {
             if (mpColl_804D6490_max_x > pos.x) {
                 int r3 = mpLib_8004E398_LeftWall(wall_id, &pos, NULL, &flags,
@@ -3639,7 +3639,7 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
     if (!mpLib_80054ED8(line_id) || mpLineGetKind(line_id) != CollLine_Floor) {
         return false;
     }
-    mpLib_80054158(line_id, &edge);
+    mpFloorGetLeft(line_id, &edge);
     if (coll->cur_pos.x <= edge.x) {
         floor_id = mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
         vx = edge.x + 1.0F;
@@ -3657,7 +3657,7 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
             coll->env_flags |= Collide_RightEdge;
         }
     } else {
-        mpLib_80053FF4(line_id, &edge);
+        mpFloorGetRight(line_id, &edge);
         if (coll->cur_pos.x >= edge.x) {
             floor_id =
                 mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
@@ -3704,7 +3704,7 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
         return false;
     }
 
-    mpLib_80054158(line_id, &edge);
+    mpFloorGetLeft(line_id, &edge);
     if (coll->cur_pos.x <= edge.x) {
         if (!(coll->env_flags & Collide_LeftWallMask) &&
             coll->facing_dir == -1 && coll->lstick_x > -0.75)
@@ -3734,7 +3734,7 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
             }
         }
     } else {
-        mpLib_80053FF4(line_id, &edge);
+        mpFloorGetRight(line_id, &edge);
         if (coll->cur_pos.x >= edge.x &&
             !(coll->env_flags & Collide_RightWallMask) &&
             coll->facing_dir == 1 && coll->lstick_x < 0.75)
@@ -3857,7 +3857,7 @@ bool mpColl_8004AB80(CollData* coll)
         coll->cur_pos.y += y;
     } else {
         hit_wall = false;
-        mpLib_80054420(coll->ceiling.index, &spC);
+        mpCeilingGetLeft(coll->ceiling.index, &spC);
         if (top.x <= spC.x) {
             int line_id = mpLib_80052A98_Ceiling(coll->ceiling.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_RightWall)
@@ -3866,7 +3866,7 @@ bool mpColl_8004AB80(CollData* coll)
             }
         } else {
             int line_id;
-            mpLib_800542BC(coll->ceiling.index, &spC);
+            mpCeilingGetRight(coll->ceiling.index, &spC);
             line_id = mpLib_800528CC_Ceiling(coll->ceiling.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_LeftWall) {
                 hit_wall = true;
@@ -4125,7 +4125,7 @@ bool mpColl_8004B6D8(CollData* arg0)
         return true;
     }
     var_r30 = false;
-    mpLib_80054420(temp_r31, &sp14);
+    mpCeilingGetLeft(temp_r31, &sp14);
     if (arg0->cur_pos.x < sp14.x) {
         temp_r3_2 = mpLib_80052A98_Ceiling(temp_r31);
         if (temp_r3_2 != -1 && mpLib_80054ED8(temp_r3_2) &&
@@ -4136,7 +4136,7 @@ bool mpColl_8004B6D8(CollData* arg0)
             arg0->env_flags |= Collide_LeftLedgeSlip;
         }
     } else {
-        mpLib_800542BC(temp_r31, &sp14);
+        mpCeilingGetRight(temp_r31, &sp14);
         if (arg0->cur_pos.x > sp14.x) {
             temp_r3_3 = mpLib_800528CC_Ceiling(temp_r31);
             if (temp_r3_3 != -1 && mpLib_80054ED8(temp_r3_3) &&
@@ -4338,7 +4338,7 @@ bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
     {
         return false;
     }
-    mpLib_80054420(line_id, &edge);
+    mpCeilingGetLeft(line_id, &edge);
     if (coll->cur_pos.x <= edge.x) {
         ceiling_id =
             mpLib_8004E090_Ceiling(line_id, &edge, &y, &flags, &normal);
@@ -4357,7 +4357,7 @@ bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
             coll->env_flags |= Collide_RightEdge;
         }
     } else {
-        mpLib_800542BC(line_id, &edge);
+        mpCeilingGetRight(line_id, &edge);
         if (coll->cur_pos.x >= edge.x) {
             ceiling_id =
                 mpLib_8004E090_Ceiling(line_id, &edge, &y, &flags, &normal);

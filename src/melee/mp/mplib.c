@@ -3172,167 +3172,204 @@ void mpLib_80053ECC_Floor(int line_id, Vec* vec)
     vec->z = 0.0F;
 }
 
-void mpLib_80053FF4(int line_id, Vec3* pos_out)
+void mpFloorGetRight(int line_id, Vec3* pos_out)
 {
-    CollVtx* vtx;
+    u32 kind;
     int new_id;
-    u32 flags_r3;
 
     LINEID_CHECK(4465, line_id);
 
     new_id = line_id;
-    flags_r3 = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
     while (true) {
+        int good_id = new_id;
         new_id = mpLineGetNext(new_id);
 
         if (new_id == -1 ||
-            flags_r3 != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
         {
-            break;
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v1_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
         }
     }
-
-    vtx = &groundCollVtx[groundCollLine[new_id].x0->v1_idx];
-    pos_out->x = vtx->pos.x;
-    pos_out->y = vtx->pos.y;
-    pos_out->z = 0.0F;
 }
 
-void mpLib_80054158(int line_id, Vec3* arg1)
+void mpFloorGetLeft(int line_id, Vec3* pos_out)
 {
-    CollVtx* vtx;
+    u32 kind;
     int new_id;
-    mpLib_Line* temp_r8;
 
     LINEID_CHECK(4474, line_id);
 
     new_id = line_id;
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
     while (true) {
-        temp_r8 = groundCollLine[new_id].x0;
+        int good_id = new_id;
         new_id = mpLineGetPrev(new_id);
 
         if (new_id == -1 ||
-            (groundCollLine[line_id].flags & LINE_FLAG_KIND) !=
-                (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
         {
-            break;
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v0_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
         }
     }
-
-    vtx = &groundCollVtx[temp_r8->v0_idx];
-    arg1->x = vtx->pos.x;
-    arg1->y = vtx->pos.y;
-    arg1->z = 0.0F;
 }
 
-void mpLib_800542BC(int line_id, Vec3* out)
+void mpCeilingGetRight(int line_id, Vec3* pos_out)
 {
-    CollVtx* temp_r3;
+    u32 kind;
     int new_id;
 
     LINEID_CHECK(4483, line_id);
+
     new_id = line_id;
-    do {
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    while (true) {
+        int good_id = new_id;
         new_id = mpLineGetPrev(new_id);
-    } while (new_id != -1 &&
-             (groundCollLine[line_id].flags & LINE_FLAG_KIND) ==
-                 (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-    temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
-    out->x = temp_r3->pos.x;
-    out->y = temp_r3->pos.y;
-    out->z = 0.0F;
+
+        if (new_id == -1 ||
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+        {
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v0_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
+        }
+    }
 }
 
-void mpLib_80054420(int line_id, Vec3* out)
+void mpCeilingGetLeft(int line_id, Vec3* pos_out)
 {
-    CollVtx* temp_r3;
+    u32 kind;
     int new_id;
 
     LINEID_CHECK(4492, line_id);
+
     new_id = line_id;
-    do {
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    while (true) {
+        int good_id = new_id;
         new_id = mpLineGetNext(new_id);
-    } while (new_id != -1 &&
-             (groundCollLine[line_id].flags & LINE_FLAG_KIND) ==
-                 (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-    temp_r3 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
-    out->x = temp_r3->pos.x;
-    out->y = temp_r3->pos.y;
-    out->z = 0.0F;
+
+        if (new_id == -1 ||
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+        {
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v1_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
+        }
+    }
 }
 
-CollVtx* mpLib_80054584(int line_id, Vec3* out)
+void mpLeftWallGetTop(int line_id, Vec3* pos_out)
 {
-    CollVtx* v1;
-    s32 new_id;
+    u32 kind;
+    int new_id;
 
     LINEID_CHECK(4501, line_id);
-    new_id = line_id;
 
-    do {
+    new_id = line_id;
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    while (true) {
+        int good_id = new_id;
         new_id = mpLineGetNext(new_id);
-    } while (new_id != -1 &&
-             (groundCollLine[line_id].flags & LINE_FLAG_KIND) !=
-                 (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-    v1 = &groundCollVtx[groundCollLine[new_id].x0->v1_idx];
-    out->x = v1->pos.x;
-    out->y = v1->pos.y;
-    out->z = 0.0F;
-    return v1;
+
+        if (new_id == -1 ||
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+        {
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v1_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
+        }
+    }
 }
 
-void mpLib_800546E8(int line_id, Vec3* out)
+void mpLeftWallGetBottom(int line_id, Vec3* pos_out)
 {
+    u32 kind;
     int new_id;
-    CollVtx* v0;
 
     LINEID_CHECK(4510, line_id);
+
     new_id = line_id;
-    do {
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    while (true) {
+        int good_id = new_id;
         new_id = mpLineGetPrev(new_id);
-    } while (new_id != -1 &&
-             (groundCollLine[line_id].flags & LINE_FLAG_KIND) !=
-                 (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-    v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
-    out->x = v0->pos.x;
-    out->y = v0->pos.y;
-    out->z = 0.0F;
+
+        if (new_id == -1 ||
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+        {
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v0_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
+        }
+    }
 }
 
-void mpLib_8005484C(int line_id, Vec3* arg1)
+void mpRightWallGetTop(int line_id, Vec3* pos_out)
 {
+    u32 kind;
     int new_id;
-    CollVtx* v0;
 
     LINEID_CHECK(4519, line_id);
+
     new_id = line_id;
-    do {
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    while (true) {
+        int good_id = new_id;
         new_id = mpLineGetPrev(new_id);
-    } while (new_id != -1 &&
-             (groundCollLine[line_id].flags & LINE_FLAG_KIND) !=
-                 (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-    v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
-    arg1->x = v0->pos.x;
-    arg1->y = v0->pos.y;
-    arg1->z = 0.0F;
+
+        if (new_id == -1 ||
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+        {
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v0_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
+        }
+    }
 }
 
-void mpLib_800549B0(int line_id, Vec3* arg1)
+void mpRightWallGetBottom(int line_id, Vec3* pos_out)
 {
+    u32 kind;
     int new_id;
-    CollVtx* v0;
 
     LINEID_CHECK(4528, line_id);
+
     new_id = line_id;
-    do {
+    kind = groundCollLine[line_id].flags & LINE_FLAG_KIND;
+    while (true) {
+        int good_id = new_id;
         new_id = mpLineGetNext(new_id);
-    } while (new_id != -1 &&
-             (groundCollLine[line_id].flags & LINE_FLAG_KIND) !=
-                 (groundCollLine[new_id].flags & LINE_FLAG_KIND));
-    v0 = &groundCollVtx[groundCollLine[new_id].x0->v0_idx];
-    arg1->x = v0->pos.x;
-    arg1->y = v0->pos.y;
-    arg1->z = 0.0F;
+
+        if (new_id == -1 ||
+            kind != (groundCollLine[new_id].flags & LINE_FLAG_KIND))
+        {
+            CollVtx* vtx = &groundCollVtx[groundCollLine[good_id].x0->v1_idx];
+            pos_out->x = vtx->pos.x;
+            pos_out->y = vtx->pos.y;
+            pos_out->z = 0.0F;
+            return;
+        }
+    }
 }
 
 void mpLineGetV1Pos(int line_id, Vec3* pos_out)

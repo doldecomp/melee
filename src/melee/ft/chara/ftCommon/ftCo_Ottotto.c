@@ -104,9 +104,9 @@ void ftCo_Ottotto_Coll(Fighter_GObj* gobj)
             {
                 u8 _[4] = { 0 };
                 if (fp->facing_dir > 0) {
-                    mpLib_80053FF4(fp->coll_data.floor.index, &pos);
+                    mpFloorGetRight(fp->coll_data.floor.index, &pos);
                 } else {
-                    mpLib_80054158(fp->coll_data.floor.index, &pos);
+                    mpFloorGetLeft(fp->coll_data.floor.index, &pos);
                 }
                 {
                     float x = fp->cur_pos.x - pos.x;
@@ -152,9 +152,9 @@ void ftCo_OttottoWait_Coll(Fighter_GObj* gobj)
             {
                 u8 _[20] = { 0 };
                 if (fp->facing_dir > 0) {
-                    mpLib_80053FF4(fp->coll_data.floor.index, &pos);
+                    mpFloorGetRight(fp->coll_data.floor.index, &pos);
                 } else {
-                    mpLib_80054158(fp->coll_data.floor.index, &pos);
+                    mpFloorGetLeft(fp->coll_data.floor.index, &pos);
                 }
                 if (ABS(fp->cur_pos.x - pos.x) >
                     p_ftCommonData->x478 + p_ftCommonData->x47C)

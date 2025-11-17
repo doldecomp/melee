@@ -135,13 +135,13 @@ void ftBossLib_8015C190(HSD_GObj* arg0)
     Fighter* fp = GET_FIGHTER(arg0);
     Vec3 vec;
 
-    mpLib_80053FF4(0, &vec);
+    mpFloorGetRight(0, &vec);
     if (fp->cur_pos.x > vec.x) {
         fp->cur_pos.x = vec.x;
         fp->self_vel.x = 0;
     }
 
-    mpLib_80054158(0, &vec);
+    mpFloorGetLeft(0, &vec);
     if (fp->cur_pos.x < vec.x) {
         fp->cur_pos.x = vec.x;
         fp->self_vel.x = 0;
