@@ -4446,7 +4446,7 @@ void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj) {
     fp->mv.kb.speciallw.x88[3] = 0.0f;
     fp->mv.kb.speciallw.x88[7] = 0.0f;
     fp->mv.kb.speciallw.x18 = ftKb_Init_803CB4EC.vec;
-    fp->mv.kb.speciallw.x84 = 0.0f; 
+    fp->mv.kb.speciallw.x84 = 0.0f;
 }
 
 void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj) {
@@ -4502,12 +4502,12 @@ void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj) {
                         var_r4 = -1;
                     } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
                         if (temp_f5 < 0.0f) {
-                            fp->mv.kb.speciallw.x88[8] -= 0.25f; 
+                            fp->mv.kb.speciallw.x88[8] -= 0.25f;
                             if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
                                 fp->mv.kb.speciallw.x88[8] = 0.0f;
                             }
                         } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
-                            fp->mv.kb.speciallw.x88[8] -= 0.25f; 
+                            fp->mv.kb.speciallw.x88[8] -= 0.25f;
                             if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
                             fp->mv.kb.speciallw.x88[8] = 0.0f;
                             }
