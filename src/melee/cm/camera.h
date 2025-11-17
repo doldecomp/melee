@@ -18,7 +18,7 @@
 /* 029020 */ CameraBox* Camera_80029020(void);
 /* 029044 */ CameraBox* Camera_80029044(int);
 /* 0290D4 */ void Camera_800290D4(CameraBox*);
-/* 029124 */ u32 Camera_80029124(Vec*, s32);
+/* 029124 */ BOOL Camera_80029124(Vec3*, s32);
 /* 02928C */ bool Camera_8002928C(CameraBox*);
 /* 0293E0 */ UNK_RET Camera_800293E0(UNK_PARAMS);
 /* 02958C */ void Camera_8002958C(CameraBounds*, CameraTransformState*);
