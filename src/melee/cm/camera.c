@@ -200,14 +200,15 @@ void Camera_800290D4(CmSubject* subject)
 
 s32 Camera_80029124(Vec3* subject_pos, s32 distance)
 {
+    /// @todo lots of ways to match this without the padding
+    u8 _PAD[4];
+    s32 result;
     f32 slope;
     f32 intercept;
     f32 bounds_left;
     f32 bounds_right;
     f32 bounds_top;
     f32 bounds_bottom;
-    s32 result;
-    PAD_STACK(4);
 
     result = 0;
     Ground_801C4368(&slope, &intercept);
