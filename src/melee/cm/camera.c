@@ -61,7 +61,7 @@ inline BOOL abs_threshold_inline(f32 value, f32 threshold)
 
 void Camera_80028B9C(int n_subjects)
 {
-    CameraBox* cam_box;
+    CmSubject* cam_box;
     Vec3* interest_pos;
     Vec3* eye_pos;
     int i;
@@ -109,21 +109,22 @@ void Camera_80028B9C(int n_subjects)
     cm_80452C68.x39A_b1 = 0;
     cm_80452C68.x39A_b2 = 0;
     cm_80452C68.gobj = NULL;
-    cam_box = HSD_MemAlloc(n_subjects * sizeof(CameraBox));
+    cam_box = HSD_MemAlloc(n_subjects * sizeof(CmSubject));
     cm_804D6458 = cam_box;
     cm_804D645C = cam_box;
-    memzero(cm_804D6458, n_subjects * sizeof(CameraBox));
+    memzero(cm_804D6458, n_subjects * sizeof(CmSubject));
 
-    // link subjects
-    for (i = 0; i < n_subjects; i++) {
+    // Link subjects
+    for (i = 0; i < n_subjects - 1; i++) {
         cm_804D645C[i].prev = &cm_804D645C[i + 1];
     }
-    cm_804D645C[n_subjects - 1].prev = NULL;
+    cm_804D645C[i].prev = NULL;
+
     cm_804D6460 = NULL;
     cm_804D6468 = NULL;
 }
 
-void Camera_80028F5C(CameraBox* subject, s32 arg1)
+void Camera_80028F5C(CmSubject* subject, s32 arg1)
 {
     if (subject != NULL) {
         subject->x8 = arg1;
@@ -152,24 +153,23 @@ void Camera_80028F5C(CameraBox* subject, s32 arg1)
     }
 }
 
-CameraBox* Camera_80029020(void)
+CmSubject* Camera_80029020(void)
 {
     return Camera_80029044(0);
 }
 
-CameraBox* Camera_80029044(int arg0)
+CmSubject* Camera_80029044(int arg0)
 {
-    CameraBox* subject = cm_804D6458;
+    CmSubject* subject = cm_804D6458;
 
-    // subject = cm_804D6458;
-    if ((CameraBox*) cm_804D6458 == NULL) {
+    if ((CmSubject*) cm_804D6458 == NULL) {
         OSReport("couldn't get CmSubject struct.\n", arg0);
-    loop_2:
-        goto loop_2;
+        while (true) {};
     }
+
     cm_804D6458 = subject->prev;
     subject->next = NULL;
-    if ((CameraBox*) cm_804D6460 != NULL) {
+    if ((CmSubject*) cm_804D6460 != NULL) {
         cm_804D6468->next = subject;
     } else {
         cm_804D6460 = subject;
@@ -180,7 +180,7 @@ CameraBox* Camera_80029044(int arg0)
     return subject;
 }
 
-void Camera_800290D4(CameraBox* subject)
+void Camera_800290D4(CmSubject* subject)
 {
     if (subject->next != 0) {
         subject->next->prev = subject->prev;
@@ -198,16 +198,16 @@ void Camera_800290D4(CameraBox* subject)
     cm_804D6458 = subject;
 }
 
-BOOL Camera_80029124(Vec3* arg0, s32 distance)
+s32 Camera_80029124(Vec3* subject_pos, s32 distance)
 {
-    f32 _unused;
     f32 slope;
     f32 intercept;
     f32 bounds_left;
     f32 bounds_right;
     f32 bounds_top;
     f32 bounds_bottom;
-    u32 result;
+    s32 result;
+    PAD_STACK(4);
 
     result = 0;
     Ground_801C4368(&slope, &intercept);
@@ -223,18 +223,18 @@ BOOL Camera_80029124(Vec3* arg0, s32 distance)
         bounds_bottom = slope;
     }
 
-    if (arg0->x < (bounds_left - distance)) {
-        result |= 4;
+    if (subject_pos->x < (bounds_left - distance)) {
+        result |= LEFT_BOUND;
     }
-    if (arg0->x > (bounds_right + distance)) {
-        result |= 8;
+    if (subject_pos->x > (bounds_right + distance)) {
+        result |= RIGHT_BOUND;
     }
 
-    if (arg0->y > (bounds_top + distance)) {
-        result |= 1;
+    if (subject_pos->y > (bounds_top + distance)) {
+        result |= TOP_BOUND;
     }
-    if (arg0->y < (bounds_bottom - distance)) {
-        result |= 2;
+    if (subject_pos->y < (bounds_bottom - distance)) {
+        result |= BOTTOM_BOUND;
     }
 
     return result;
@@ -245,7 +245,7 @@ static inline bool cam_bound(float x)
     return x > 0.65f || x < 0.35f;
 }
 
-bool Camera_8002928C(CameraBox* cam)
+bool Camera_8002928C(CmSubject* cam)
 {
     float left;
     float right;
@@ -281,7 +281,7 @@ bool Camera_8002928C(CameraBox* cam)
 
 void Camera_800293E0(void)
 {
-    CameraBox* curr;
+    CmSubject* curr;
     f32 temp_f0;
     f32 temp_f1;
     f32 distance;
@@ -359,209 +359,218 @@ void Camera_800293E0(void)
 void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
 {
     f32 z_pos;
-    f32 var_f3;
+    f32 z_factor;
     CameraBounds* new_bounds;
-    BOOL offscreen;
-    Vec3 sp50;
-    Vec3 sp44;
-    Vec3 scroll_offset;
-    f32 sp34;
-    f32 sp30;
-    f32 intercept;
-    f32 slope;
-    f32 sp24;
-    f32 sp20;
-    f32 sp1C;
-    f32 sp18;
-    f32 sp14;
-    f32 sp10;
-    f32 x1;
-    f32 y1;
-    f32 x2;
-    f32 y2;
-    CameraBox* subject;
-    s32 i;
-    f32 fixedness;
-    f32 track_ratio;
+    BOOL boundary_flags;
+    Vec3 base_pos;
+    Vec3 test_pos;
+    Vec3 default_offset;
+    f32 base_ground_intercept;
+    f32 base_ground;
+    f32 x_extent_intercept;
+    f32 x_extent_ground;
+    f32 alt_x_intercept;
+    f32 alt_x_ground;
+    f32 y_extent_intercept;
+    f32 y_extent_ground;
+    f32 alt_y_intercept;
+    f32 alt_y_ground;
+    f32 min_x;
+    f32 min_y;
+    f32 max_x;
+    f32 max_y;
+    CmSubject* subject;
+    s32 subject_count;
+    f32 tracking_weight;
+    f32 tracking_multiplier;
 
-    i = 0;
+    subject_count = 0;
     subject = cm_804D6468;
     for (subject = cm_804D6468; subject != 0L; subject = subject->prev) {
         if (Camera_8002928C(subject)) {
-            i++;
+            subject_count++;
         }
     }
 
     new_bounds = bounds;
-    if (i != 0) {
-        if (((u32) i) < 5) {
-            fixedness = cm_803BCB9C[i];
+    if (subject_count != 0) {
+        if (((u32) subject_count) < 5) {
+            tracking_weight = cm_803BCB9C[subject_count];
         } else {
-            fixedness = 1.0f;
+            tracking_weight = 1.0f;
         }
-        track_ratio = fixedness * Stage_GetCamTrackRatio();
-        x1 = y1 = FLT_MAX;
-        x2 = y2 = FLT_MIN;
+        tracking_multiplier = tracking_weight * Stage_GetCamTrackRatio();
+        min_x = min_y = FLT_MAX;
+        max_x = max_y = FLT_MIN;
 
-        i = 0;
+        subject_count = 0;
         subject = cm_804D6468;
         while (subject != NULL) {
             if (Camera_8002928C(subject)) {
-                i++;
-                sp50 = subject->x10;
-                sp44 = subject->x10;
-                offscreen = Camera_80029124(&sp50, 0);
-                if (offscreen != false) {
-                    Ground_801C4368(&sp30, &sp34);
-                    sp30 += 1.0;
-                    if (offscreen & 4) {
-                        sp50.x = Stage_GetCamBoundsLeftOffset();
+                subject_count++;
+                base_pos = subject->x10;
+                test_pos = subject->x10;
+                boundary_flags = Camera_80029124(&base_pos, 0);
+                if (boundary_flags != 0) {
+                    Ground_801C4368(&base_ground, &base_ground_intercept);
+                    base_ground += 1.0;
+                    if (boundary_flags & LEFT_BOUND) {
+                        base_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (offscreen & 8) {
-                        sp50.x = Stage_GetCamBoundsRightOffset();
+                    if (boundary_flags & RIGHT_BOUND) {
+                        base_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (offscreen & 1) {
-                        sp50.y = Stage_GetCamBoundsTopOffset();
+                    if (boundary_flags & TOP_BOUND) {
+                        base_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (offscreen & 2) {
-                        sp50.y = (Stage_GetCamBoundsBottomOffset() > sp30)
-                                     ? (Stage_GetCamBoundsBottomOffset())
-                                     : (sp30);
-                    }
-                }
-                sp44.x = (subject->x2C.x * track_ratio) + sp50.x;
-                offscreen = Camera_80029124(&sp44, 0);
-                if (offscreen != false) {
-                    Ground_801C4368(&slope, &intercept);
-                    slope += 1.0;
-                    if (offscreen & 4) {
-                        sp44.x = Stage_GetCamBoundsLeftOffset();
-                    }
-                    if (offscreen & 8) {
-                        sp44.x = Stage_GetCamBoundsRightOffset();
-                    }
-                    if (offscreen & 1) {
-                        sp44.y = Stage_GetCamBoundsTopOffset();
-                    }
-                    if (offscreen & 2) {
-                        sp44.y = (Stage_GetCamBoundsBottomOffset() > slope)
-                                     ? (Stage_GetCamBoundsBottomOffset())
-                                     : (slope);
+                    if (boundary_flags & BOTTOM_BOUND) {
+                        base_pos.y = (Stage_GetCamBoundsBottomOffset() >
+                                      base_ground)
+                                         ? (Stage_GetCamBoundsBottomOffset())
+                                         : (base_ground);
                     }
                 }
-                if (sp44.x < x1) {
-                    x1 = sp44.x;
-                }
-                if (sp44.x > x2) {
-                    x2 = sp44.x;
-                }
-                sp44.x = (subject->x2C.y * track_ratio) + sp50.x;
-                offscreen = Camera_80029124(&sp44, 0);
-                if (offscreen != false) {
-                    Ground_801C4368(&sp20, &sp24);
-                    sp20 += 1.0;
-                    if (offscreen & 4) {
-                        sp44.x = Stage_GetCamBoundsLeftOffset();
+                test_pos.x =
+                    (subject->x2C.x * tracking_multiplier) + base_pos.x;
+                boundary_flags = Camera_80029124(&test_pos, 0);
+                if (boundary_flags != 0) {
+                    Ground_801C4368(&x_extent_ground, &x_extent_intercept);
+                    x_extent_ground += 1.0;
+                    if (boundary_flags & LEFT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (offscreen & 8) {
-                        sp44.x = Stage_GetCamBoundsRightOffset();
+                    if (boundary_flags & RIGHT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (offscreen & 1) {
-                        sp44.y = Stage_GetCamBoundsTopOffset();
+                    if (boundary_flags & TOP_BOUND) {
+                        test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (offscreen & 2) {
-                        sp44.y = (Stage_GetCamBoundsBottomOffset() > sp20)
-                                     ? (Stage_GetCamBoundsBottomOffset())
-                                     : (sp20);
+                    if (boundary_flags & BOTTOM_BOUND) {
+                        test_pos.y =
+                            (Stage_GetCamBoundsBottomOffset() > x_extent_ground)
+                                ? (Stage_GetCamBoundsBottomOffset())
+                                : (x_extent_ground);
                     }
                 }
-                if (sp44.x < x1) {
-                    x1 = sp44.x;
+                if (test_pos.x < min_x) {
+                    min_x = test_pos.x;
                 }
-                if (sp44.x > x2) {
-                    x2 = sp44.x;
+                if (test_pos.x > max_x) {
+                    max_x = test_pos.x;
                 }
-                sp44.y = (subject->x34.y * track_ratio) + sp50.y;
-                offscreen = Camera_80029124(&sp44, 0);
-                if (offscreen != false) {
-                    Ground_801C4368(&sp18, &sp1C);
-                    sp18 += 1.0;
-                    if (offscreen & 4) {
-                        sp44.x = Stage_GetCamBoundsLeftOffset();
+                test_pos.x =
+                    (subject->x2C.y * tracking_multiplier) + base_pos.x;
+                boundary_flags = Camera_80029124(&test_pos, 0);
+                if (boundary_flags != 0) {
+                    Ground_801C4368(&alt_x_ground, &alt_x_intercept);
+                    alt_x_ground += 1.0;
+                    if (boundary_flags & LEFT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsLeftOffset();
                     }
-                    if (offscreen & 8) {
-                        sp44.x = Stage_GetCamBoundsRightOffset();
+                    if (boundary_flags & RIGHT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsRightOffset();
                     }
-                    if (offscreen & 1) {
-                        sp44.y = Stage_GetCamBoundsTopOffset();
+                    if (boundary_flags & TOP_BOUND) {
+                        test_pos.y = Stage_GetCamBoundsTopOffset();
                     }
-                    if (offscreen & 2) {
-                        sp44.y = (Stage_GetCamBoundsBottomOffset() > sp18)
-                                     ? (Stage_GetCamBoundsBottomOffset())
-                                     : (sp18);
-                    }
-                }
-                if (sp44.y < y1) {
-                    y1 = sp44.y;
-                }
-                if (sp44.y > y2) {
-                    y2 = sp44.y;
-                }
-                sp44.y = (subject->x34.x * track_ratio) + sp50.y;
-                offscreen = Camera_80029124(&sp44, 0);
-                if (offscreen != false) {
-                    Ground_801C4368(&sp10, &sp14);
-                    sp10 += 1.0;
-                    if (offscreen & 4) {
-                        sp44.x = Stage_GetCamBoundsLeftOffset();
-                    }
-                    if (offscreen & 8) {
-                        sp44.x = Stage_GetCamBoundsRightOffset();
-                    }
-                    if (offscreen & 1) {
-                        sp44.y = Stage_GetCamBoundsTopOffset();
-                    }
-                    if (offscreen & 2) {
-                        sp44.y = (Stage_GetCamBoundsBottomOffset() > sp10)
-                                     ? (Stage_GetCamBoundsBottomOffset())
-                                     : (sp10);
+                    if (boundary_flags & BOTTOM_BOUND) {
+                        test_pos.y = (Stage_GetCamBoundsBottomOffset() >
+                                      alt_x_ground)
+                                         ? (Stage_GetCamBoundsBottomOffset())
+                                         : (alt_x_ground);
                     }
                 }
-                if (sp44.y < y1) {
-                    y1 = sp44.y;
+                if (test_pos.x < min_x) {
+                    min_x = test_pos.x;
                 }
-                if (sp44.y > y2) {
-                    y2 = sp44.y;
+                if (test_pos.x > max_x) {
+                    max_x = test_pos.x;
+                }
+                test_pos.y =
+                    (subject->x34.y * tracking_multiplier) + base_pos.y;
+                boundary_flags = Camera_80029124(&test_pos, 0);
+                if (boundary_flags != 0) {
+                    Ground_801C4368(&y_extent_ground, &y_extent_intercept);
+                    y_extent_ground += 1.0;
+                    if (boundary_flags & LEFT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsLeftOffset();
+                    }
+                    if (boundary_flags & RIGHT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsRightOffset();
+                    }
+                    if (boundary_flags & TOP_BOUND) {
+                        test_pos.y = Stage_GetCamBoundsTopOffset();
+                    }
+                    if (boundary_flags & BOTTOM_BOUND) {
+                        test_pos.y = (Stage_GetCamBoundsBottomOffset() >
+                                      y_extent_ground)
+                                         ? (Stage_GetCamBoundsBottomOffset())
+                                         : (y_extent_ground);
+                    }
+                }
+                if (test_pos.y < min_y) {
+                    min_y = test_pos.y;
+                }
+                if (test_pos.y > max_y) {
+                    max_y = test_pos.y;
+                }
+                test_pos.y =
+                    (subject->x34.x * tracking_multiplier) + base_pos.y;
+                boundary_flags = Camera_80029124(&test_pos, 0);
+                if (boundary_flags != 0) {
+                    Ground_801C4368(&alt_y_ground, &alt_y_intercept);
+                    alt_y_ground += 1.0;
+                    if (boundary_flags & LEFT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsLeftOffset();
+                    }
+                    if (boundary_flags & RIGHT_BOUND) {
+                        test_pos.x = Stage_GetCamBoundsRightOffset();
+                    }
+                    if (boundary_flags & TOP_BOUND) {
+                        test_pos.y = Stage_GetCamBoundsTopOffset();
+                    }
+                    if (boundary_flags & BOTTOM_BOUND) {
+                        test_pos.y = (Stage_GetCamBoundsBottomOffset() >
+                                      alt_y_ground)
+                                         ? (Stage_GetCamBoundsBottomOffset())
+                                         : (alt_y_ground);
+                    }
+                }
+                if (test_pos.y < min_y) {
+                    min_y = test_pos.y;
+                }
+                if (test_pos.y > max_y) {
+                    max_y = test_pos.y;
                 }
             }
             subject = subject->prev;
         }
     }
-    if (i == 0) {
-        Stage_UnkSetVec3TCam_Offset(&scroll_offset);
-        x1 = scroll_offset.x - 40.0f;
-        y1 = scroll_offset.y - 40.0f;
-        x2 = 40.0f + scroll_offset.x;
-        y2 = 40.0f + scroll_offset.y;
+    if (subject_count == 0) {
+        Stage_UnkSetVec3TCam_Offset(&default_offset);
+        min_x = default_offset.x - 40.0f;
+        min_y = default_offset.y - 40.0f;
+        max_x = 40.0f + default_offset.x;
+        max_y = 40.0f + default_offset.y;
     }
     z_pos = (transform->position.z < 0) ? (-transform->position.z)
                                         : (transform->position.z);
     if (z_pos < 80.0f) {
-        var_f3 = 0.0f;
+        z_factor = 0.0f;
     } else if (z_pos > 5000.0f) {
-        var_f3 = 1.0f;
+        z_factor = 1.0f;
     } else {
-        var_f3 = (z_pos - 80.0f) / 4920.0f;
+        z_factor = (z_pos - 80.0f) / 4920.0f;
     }
-    new_bounds->x_min = x1;
-    new_bounds->y_min = y1 - ((390.0f * var_f3) + 10.0f);
-    new_bounds->x_max = x2;
-    new_bounds->y_max = y2;
-    new_bounds->subjects = i;
+    new_bounds->x_min = min_x;
+    new_bounds->y_min = min_y - ((390.0f * z_factor) + 10.0f);
+    new_bounds->x_max = max_x;
+    new_bounds->y_max = max_y;
+    new_bounds->total_subjects = subject_count;
     new_bounds->z_pos = z_pos;
 }
 
-static void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
+void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
                      f32 speed)
 {
     float dx;
@@ -574,7 +583,7 @@ static void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transfor
     f32 offset_x;
     f32 offset_y;
     CameraUnkGlobals* unk;
-    if (bounds->subjects != 0) {
+    if (bounds->total_subjects != 0) {
         dx = bounds->x_max - bounds->x_min;
         dy = bounds->y_max - bounds->y_min;
         if (dx > dy) {
@@ -1294,13 +1303,12 @@ void Camera_8002B0E0(void)
     }
 }
 
-
 void Camera_8002B1F8(CameraTransformState* transform)
 {
     Vec3 vec;
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_2;
-    CameraBox* var_r29;
+    CmSubject* subject;
     float temp_f1;
     float temp_f1_2;
     float temp_f31;
@@ -1311,23 +1319,23 @@ void Camera_8002B1F8(CameraTransformState* transform)
         return;
     }
     if ((((temp_r3 = Player_GetEntity(0), temp_r3 != NULL) &&
-          (var_r29 = ftLib_80086B74(temp_r3), var_r29 != NULL) &&
-          (Camera_8002928C(var_r29) != 0) &&
-          (Camera_80029124(&var_r29->x1C, 0) == 0U) &&
+          (subject = ftLib_80086B74(temp_r3), subject != NULL) &&
+          (Camera_8002928C(subject) != 0) &&
+          (Camera_80029124(&subject->x1C, 0) == 0U) &&
           !ftLib_8008732C(temp_r3)) ||
          ((Player_GetPlayerCharacter(1) == CHKIND_SANDBAG) &&
           (temp_r3_2 = Player_GetEntity(1), ((temp_r3_2 == NULL) == 0)) &&
-          (var_r29 = ftLib_80086B74(temp_r3_2), ((var_r29 == NULL) == 0)) &&
-          (Camera_8002928C(var_r29) != 0) &&
-          (Camera_80029124(&var_r29->x1C, 0) == 0))))
+          (subject = ftLib_80086B74(temp_r3_2), ((subject == NULL) == 0)) &&
+          (Camera_8002928C(subject) != 0) &&
+          ((u32)Camera_80029124(&subject->x1C, 0) == false))))
     {
-        lbVector_Diff(&transform->target_interest, &var_r29->x1C, &vec);
+        lbVector_Diff(&transform->target_interest, &subject->x1C, &vec);
         temp_f1 = *temp_r31;
         temp_f1_2 = temp_f1 * temp_f1;
         vec.x *= temp_f1_2;
         vec.y *= temp_f1_2;
         vec.z *= temp_f1_2;
-        lbVector_Add(&vec, &var_r29->x1C);
+        lbVector_Add(&vec, &subject->x1C);
         transform->target_interest = vec;
         lbVector_Diff(&transform->target_position, &transform->target_interest,
                       &vec);
@@ -1959,7 +1967,7 @@ void Camera_8002F784(s8 slot, s8 arg1)
 
 void Camera_8002F7AC(s8 slot)
 {
-    CameraBox* cam_box;
+    CmSubject* cam_box;
     HSD_GObj* fighter_gobj;
     f32 direction;
     f32 randf;
@@ -2136,7 +2144,7 @@ void Camera_8002FE38(void)
 void Camera_8002FEEC(s32 arg0)
 {
     HSD_CObj* cobj;
-    CameraBox* box;
+    CmSubject* box;
     Vec3 eye;
     Vec3 target;
     f32 fov;
@@ -2479,13 +2487,13 @@ bool Camera_80030BBC(Point3d* arg0, S32Vec2* arg1)
     return true;
 }
 
-bool Camera_80030CD8(CameraBox* arg0, S32Vec2* arg1)
+bool Camera_80030CD8(CmSubject* arg0, S32Vec2* arg1)
 {
     return Camera_80030BBC(&arg0->x1C, arg1);
 }
 
 // Camera_IsSubjectOnScreen
-bool Camera_80030CFC(CameraBox* cam_box, f32 tolerance)
+bool Camera_80030CFC(CmSubject* cam_box, f32 tolerance)
 {
     HSD_CObj* cobj;
     Point3d eye_pos;
@@ -2588,7 +2596,7 @@ f32 Camera_80031144(void)
 
 bool Camera_80031154(Vec3* arg0)
 {
-    if (Camera_80029124(arg0, 0) == 0) {
+    if ((u32)Camera_80029124(arg0, 0) == 0) {
         return true;
     }
     return false;
@@ -2596,7 +2604,7 @@ bool Camera_80031154(Vec3* arg0)
 
 bool Camera_8003118C(Vec3* arg0, float arg1)
 {
-    if (Camera_80029124(arg0, arg1) == 0) {
+    if ((u32)Camera_80029124(arg0, arg1) == 0) {
         return true;
     }
     return false;

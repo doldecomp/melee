@@ -937,7 +937,7 @@ static void foobar2(HSD_GObj* gobj)
 static void foobar3(HSD_GObj* gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(gobj);
-    CameraBox* cam_box;
+    CmSubject* cam_box;
     if (it->xDCD_flag.b01 != 0) {
         if (it->xDCD_flag.b01 == 1) {
             it->x520_cameraBox = Camera_80029044(0);
@@ -1472,10 +1472,10 @@ static void Item_80269A9C(HSD_GObj* gobj)
     }
     item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDCD_flag.b01 != 0) {
-        CameraBox* cameraBox = item_data->x520_cameraBox;
-        if (cameraBox != NULL) {
-            cameraBox->x10 = item_data->pos;
-            cameraBox->x1C = item_data->pos;
+        CmSubject* CmSubject = item_data->x520_cameraBox;
+        if (CmSubject != NULL) {
+            CmSubject->x10 = item_data->pos;
+            CmSubject->x1C = item_data->pos;
         }
     }
     it_80271A58(gobj);

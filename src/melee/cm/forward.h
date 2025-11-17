@@ -3,6 +3,11 @@
 
 #include <placeholder.h>
 
+#define TOP_BOUND    (1 << 0) ///< 0x1
+#define BOTTOM_BOUND (1 << 1) ///< 0x2
+#define LEFT_BOUND   (1 << 2) ///< 0x4
+#define RIGHT_BOUND  (1 << 3) ///< 0x8
+
 typedef enum CameraType {
     CAMERA_STANDARD = 0,      ///< mode used during normal gameplay
     CAMERA_PAUSE = 1,         ///< mode used during pause menu
@@ -20,7 +25,7 @@ typedef enum CameraType {
 typedef struct Camera Camera;
 typedef struct CameraBounds CameraBounds;
 typedef struct CameraQuake CameraQuake;
-typedef struct CameraBox CameraBox;
+typedef struct CmSubject CmSubject;
 typedef struct CameraTransformState CameraTransformState;
 typedef struct CameraUnkGlobals CameraUnkGlobals;
 typedef struct CameraDebugMode CameraDebugMode;
