@@ -167,11 +167,11 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
         if (coll->env_flags & MPCOLL_CEIL) {
             unk_anim = Ground_801C5700(coll->ceiling.index);
         }
-        if (coll->env_flags & MPCOLL_LEFTWALL) {
-            unk_anim = Ground_801C5700(coll->left_wall.index);
-        }
         if (coll->env_flags & MPCOLL_RIGHTWALL) {
-            unk_anim = Ground_801C5700(coll->right_wall.index);
+            unk_anim = Ground_801C5700(coll->right_facing_wall.index);
+        }
+        if (coll->env_flags & MPCOLL_LEFTWALL) {
+            unk_anim = Ground_801C5700(coll->left_facing_wall.index);
         }
         if (unk_anim != NULL) {
             HitCapsule hit;

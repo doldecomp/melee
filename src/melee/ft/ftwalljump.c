@@ -53,8 +53,8 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     ecb.y += fp0->cur_pos.y;
                     ecb.z += fp0->cur_pos.z;
                     // compute distance to the wall?
-                    if (!mpGetSpeed(coll_data->left_wall.index, &ecb,
-                                        &wall_pos))
+                    if (!mpGetSpeed(coll_data->right_facing_wall.index, &ecb,
+                                    &wall_pos))
                     {
                         wall_pos.x = 0.0f;
                     }
@@ -67,8 +67,8 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     ecb.y += fp0->cur_pos.y;
                     ecb.z += fp0->cur_pos.z;
                     // compute distance to the wall?
-                    if (!mpGetSpeed(coll_data->right_wall.index, &ecb,
-                                        &wall_pos))
+                    if (!mpGetSpeed(coll_data->left_facing_wall.index, &ecb,
+                                    &wall_pos))
                     {
                         wall_pos.x = 0.0f;
                     }

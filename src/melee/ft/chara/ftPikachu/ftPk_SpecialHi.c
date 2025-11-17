@@ -400,16 +400,16 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
         }
 
         if (collData->env_flags & 63) {
-            float angle =
-                lbVector_AngleXY(&collData->right_wall.normal, &fp->self_vel);
+            float angle = lbVector_AngleXY(&collData->left_facing_wall.normal,
+                                           &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             }
         }
 
         if (collData->env_flags & 4032) {
-            float angle =
-                lbVector_AngleXY(&collData->left_wall.normal, &fp->self_vel);
+            float angle = lbVector_AngleXY(&collData->right_facing_wall.normal,
+                                           &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             }

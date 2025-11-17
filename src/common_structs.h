@@ -47,10 +47,10 @@ typedef u32 HSD_Pad;
 // From Ness's Yo-Yo collision check
 
 /// @todo These (and #CollData::env_flags) should be a bitfield struct
-#define MPCOLL_RIGHTWALL 0x3F ///< Bits 0-5
+#define MPCOLL_LEFTWALL 0x3F ///< Bits 0-5
 #define MPCOLL_FLAGS_B05 (1 << 5)
-#define MPCOLL_LEFTWALL 0xFC0                            ///< Bits 6-11
-#define MPCOLL_WALL (MPCOLL_RIGHTWALL | MPCOLL_LEFTWALL) ///< Bits 0-11
+#define MPCOLL_RIGHTWALL 0xFC0                           ///< Bits 6-11
+#define MPCOLL_WALL (MPCOLL_LEFTWALL | MPCOLL_RIGHTWALL) ///< Bits 0-11
 #define MPCOLL_FLAGS_B11 (1 << 11)
 #define MPCOLL_CEIL 0x6000 ///< Bits 13-14
 #define MPCOLL_FLAGS_B14 (1 << 14)

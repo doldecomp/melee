@@ -357,9 +357,9 @@ void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
     if (fp->cmd_vars[0] == 1) {
         float _ = fp->facing_dir;
         if ((fp->facing_dir == +1 &&
-             (fp->coll_data.env_flags & MPCOLL_RIGHTWALL)) ||
+             (fp->coll_data.env_flags & MPCOLL_LEFTWALL)) ||
             (fp->facing_dir == -1 &&
-             fp->coll_data.env_flags & MPCOLL_LEFTWALL))
+             fp->coll_data.env_flags & MPCOLL_RIGHTWALL))
         {
             efLib_DestroyAll(gobj);
             ft_8008A2BC(gobj);

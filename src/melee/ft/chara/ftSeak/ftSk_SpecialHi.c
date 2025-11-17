@@ -353,13 +353,15 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
             ftSk_SpecialHi_80113F68(gobj);
         }
         if ((collData->env_flags & 0x3F) &&
-            (lbVector_AngleXY(&collData->right_wall.normal, &fp->self_vel) >
+            (lbVector_AngleXY(&collData->left_facing_wall.normal,
+                              &fp->self_vel) >
              (deg_to_rad * (90.0f + (f32) attr->x50))))
         {
             ftSk_SpecialHi_80113F68(gobj);
         }
         if ((collData->env_flags & 0xFC0) &&
-            (lbVector_AngleXY(&collData->left_wall.normal, &fp->self_vel) >
+            (lbVector_AngleXY(&collData->right_facing_wall.normal,
+                              &fp->self_vel) >
              (deg_to_rad * (90.0f + (f32) attr->x50))))
         {
             ftSk_SpecialHi_80113F68(gobj);
@@ -616,7 +618,8 @@ void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         ftCommon_FallBasic(fp);
-        ftCommon_ClampSelfVelX(fp, attributes->x4C * fp->co_attrs.air_drift_max);
+        ftCommon_ClampSelfVelX(fp,
+                               attributes->x4C * fp->co_attrs.air_drift_max);
         // UPDATE x4c TO F32!
         return;
     } else {

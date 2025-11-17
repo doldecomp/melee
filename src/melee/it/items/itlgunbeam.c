@@ -52,12 +52,12 @@ void it_802993E0(Item_GObj* gobj, s32 flags)
         pos.y += item->x378_itemColl.ceiling.normal.y;
     }
     if (flags & (1 << 2)) {
-        pos.x += item->x378_itemColl.right_wall.normal.x;
-        pos.y += item->x378_itemColl.right_wall.normal.y;
+        pos.x += item->x378_itemColl.left_facing_wall.normal.x;
+        pos.y += item->x378_itemColl.left_facing_wall.normal.y;
     }
     if (flags & (1 << 3)) {
-        pos.x += item->x378_itemColl.left_wall.normal.x;
-        pos.y += item->x378_itemColl.left_wall.normal.y;
+        pos.x += item->x378_itemColl.right_facing_wall.normal.x;
+        pos.y += item->x378_itemColl.right_facing_wall.normal.y;
     }
     lbVector_Normalize(&pos);
     item->xDD4_itemVar.lgunbeam.position1 = pos;

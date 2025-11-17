@@ -41,7 +41,7 @@ void ftCo_8009EE30(Fighter_GObj* gobj)
     {
         Vec3 vec;
         u8 _[4] = { 0 };
-        if (fp->coll_data.env_flags & MPCOLL_LEFTWALL) {
+        if (fp->coll_data.env_flags & MPCOLL_RIGHTWALL) {
             vec.x = coll->xA4_ecbCurrCorrect.left.x;
             vec.y = coll->xA4_ecbCurrCorrect.left.y;
             vec.z = 0.0f;

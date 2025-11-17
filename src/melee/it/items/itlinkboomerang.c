@@ -558,16 +558,16 @@ bool itLinkboomerang_UnkMotion2_Coll(Item_GObj* gobj)
         HSD_JObjSetRotationZ(hobj, ip->xDD4_itemVar.linkboomerang.xF78);
         HSD_JObjSetRotation(child, &quat);
         if (ip->facing_dir == -1.0f) {
-            if (coll->env_flags & MPCOLL_LEFTWALL) {
-                it_802A15EC_no_inline(gobj, &coll->left_wall.normal);
+            if (coll->env_flags & MPCOLL_RIGHTWALL) {
+                it_802A15EC_no_inline(gobj, &coll->right_facing_wall.normal);
             } else if (coll->env_flags & MPCOLL_CEIL) {
                 it_802A15EC_no_inline(gobj, &coll->ceiling.normal);
             } else if (coll->env_flags & MPCOLL_UNK) {
                 it_802A15EC_no_inline(gobj, &coll->floor.normal);
             }
         } else {
-            if (coll->env_flags & MPCOLL_RIGHTWALL) {
-                it_802A15EC_no_inline(gobj, &coll->right_wall.normal);
+            if (coll->env_flags & MPCOLL_LEFTWALL) {
+                it_802A15EC_no_inline(gobj, &coll->left_facing_wall.normal);
             } else if (coll->env_flags & MPCOLL_CEIL) {
                 it_802A15EC_no_inline(gobj, &coll->ceiling.normal);
             } else if (coll->env_flags & MPCOLL_UNK) {

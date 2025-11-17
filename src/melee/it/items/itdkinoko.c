@@ -75,8 +75,8 @@ bool itDkinoko_UnkMotion0_Coll(Item_GObj* gobj)
         } else {
             it->xDD4_itemVar.kinoko.x4.x = 0.0f;
         }
-        if ((cd->env_flags & MPCOLL_RIGHTWALL) ||
-            (cd->env_flags & MPCOLL_LEFTWALL))
+        if ((cd->env_flags & MPCOLL_LEFTWALL) ||
+            (cd->env_flags & MPCOLL_RIGHTWALL))
         {
             it->facing_dir = -it->facing_dir;
             it->xDD4_itemVar.kinoko.x0 = -it->xDD4_itemVar.kinoko.x0;

@@ -6931,12 +6931,12 @@ s32 it_80276308(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     ret_val = 0;
     coll = &item->x378_itemColl;
-    if (item->x378_itemColl.env_flags & MPCOLL_RIGHTWALL) {
+    if (item->x378_itemColl.env_flags & MPCOLL_LEFTWALL) {
         ret_val = 8;
-        item->xC30 = coll->right_wall.index;
+        item->xC30 = coll->left_facing_wall.index;
     }
-    if (coll->env_flags & MPCOLL_LEFTWALL) {
-        item->xC30 = coll->left_wall.index;
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        item->xC30 = coll->right_facing_wall.index;
         ret_val = 4;
     }
     return ret_val;
@@ -6951,14 +6951,14 @@ s32 it_80276348(Item_GObj* item_gobj, Vec3* vec)
     item = item_gobj->user_data;
     ret_val = 0;
     coll = &item->x378_itemColl;
-    if (coll->env_flags & MPCOLL_RIGHTWALL) {
-        ret_val = 8;
-        item->xC30 = coll->right_wall.index;
-        *vec = coll->right_wall.normal;
-    }
     if (coll->env_flags & MPCOLL_LEFTWALL) {
-        item->xC30 = coll->left_wall.index;
-        *vec = coll->left_wall.normal;
+        ret_val = 8;
+        item->xC30 = coll->left_facing_wall.index;
+        *vec = coll->left_facing_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        item->xC30 = coll->right_facing_wall.index;
+        *vec = coll->right_facing_wall.normal;
         ret_val = 4;
     }
     return ret_val;
@@ -6995,11 +6995,11 @@ s32 it_802763E0(Item_GObj* item_gobj)
 #pragma dont_inline on
 void it_80276408(Item_GObj* item_gobj, CollData* coll, Vec3* vec)
 {
-    if (coll->env_flags & MPCOLL_RIGHTWALL) {
-        *vec = coll->right_wall.normal;
-    }
     if (coll->env_flags & MPCOLL_LEFTWALL) {
-        *vec = coll->left_wall.normal;
+        *vec = coll->left_facing_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        *vec = coll->right_facing_wall.normal;
     }
     if (coll->env_flags & MPCOLL_CEIL) {
         *vec = coll->ceiling.normal;
@@ -7025,11 +7025,11 @@ f32 it_8027649C(Item_GObj* item_gobj)
     sp14.z = 0.0f;
     sp14.x = 0.0f;
     sp14.y = 1.0f;
-    if (coll->env_flags & MPCOLL_RIGHTWALL) {
-        sp20 = coll->right_wall.normal;
-    }
     if (coll->env_flags & MPCOLL_LEFTWALL) {
-        sp20 = coll->left_wall.normal;
+        sp20 = coll->left_facing_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        sp20 = coll->right_facing_wall.normal;
     }
     if (coll->env_flags & MPCOLL_CEIL) {
         sp20 = coll->ceiling.normal;
@@ -7209,13 +7209,13 @@ void it_80276CEC(Item_GObj* item_gobj)
 
     item = item_gobj->user_data;
     coll = &item->x378_itemColl;
-    if (coll->env_flags & MPCOLL_RIGHTWALL) {
-        item->xAC_unk = coll->right_wall.normal;
-        coll_index = coll->right_wall.index;
-    }
     if (coll->env_flags & MPCOLL_LEFTWALL) {
-        item->xAC_unk = coll->left_wall.normal;
-        coll_index = coll->left_wall.index;
+        item->xAC_unk = coll->left_facing_wall.normal;
+        coll_index = coll->left_facing_wall.index;
+    }
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        item->xAC_unk = coll->right_facing_wall.normal;
+        coll_index = coll->right_facing_wall.index;
     }
     if (coll->env_flags & MPCOLL_CEIL) {
         item->xAC_unk = coll->ceiling.normal;
@@ -7245,8 +7245,8 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
     ret_val = true;
     item = item_gobj->user_data;
     coll = &item->x378_itemColl;
-    if ((coll->env_flags & MPCOLL_RIGHTWALL) &&
-        (coll->env_flags & MPCOLL_LEFTWALL))
+    if ((coll->env_flags & MPCOLL_LEFTWALL) &&
+        (coll->env_flags & MPCOLL_RIGHTWALL))
     {
         // if (coll->env_flags & MPCOLL_WALL) {
         dir1 = 1;
@@ -7295,11 +7295,11 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
         mpCollSetFacingDir(&item->x378_itemColl, dir2);
         return false;
     }
-    if ((arg1 & 4) && (coll->prev_env_flags & MPCOLL_LEFTWALL)) {
+    if ((arg1 & 4) && (coll->prev_env_flags & MPCOLL_RIGHTWALL)) {
         ret_val = false;
         item->pos.x += 1.5f;
     }
-    if ((arg1 & 8) && (coll->prev_env_flags & MPCOLL_RIGHTWALL)) {
+    if ((arg1 & 8) && (coll->prev_env_flags & MPCOLL_LEFTWALL)) {
         ret_val = false;
         item->pos.x -= 1.5f;
     }
@@ -7371,11 +7371,11 @@ bool it_80277040(Item_GObj* item_gobj)
     sp20.z = 0.0f;
     sp20.x = 0.0f;
     sp20.y = 1.0f;
-    if (coll->env_flags & MPCOLL_RIGHTWALL) {
-        sp5C = coll->right_wall.normal;
-    }
     if (coll->env_flags & MPCOLL_LEFTWALL) {
-        sp5C = coll->left_wall.normal;
+        sp5C = coll->left_facing_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
+        sp5C = coll->right_facing_wall.normal;
     }
     if (coll->env_flags & MPCOLL_CEIL) {
         sp5C = coll->ceiling.normal;
@@ -7547,15 +7547,15 @@ bool it_8027770C(Item_GObj* item_gobj)
     ret_val = false;
     coll = &item->x378_itemColl;
     attr = item->xCC_item_attr;
-    if (coll->env_flags & MPCOLL_RIGHTWALL) {
-        var_r5 = 8;
-        item->xC30 = coll->right_wall.index;
-        sp38 = coll->right_wall.normal;
-    }
     if (coll->env_flags & MPCOLL_LEFTWALL) {
+        var_r5 = 8;
+        item->xC30 = coll->left_facing_wall.index;
+        sp38 = coll->left_facing_wall.normal;
+    }
+    if (coll->env_flags & MPCOLL_RIGHTWALL) {
         var_r5 = 4;
-        item->xC30 = coll->left_wall.index;
-        sp38 = coll->left_wall.normal;
+        item->xC30 = coll->right_facing_wall.index;
+        sp38 = coll->right_facing_wall.normal;
     }
     if (var_r5 != 0) {
         if (((item->x40_vel.z * sp38.z) +
@@ -7605,22 +7605,22 @@ bool it_8027781C(Item_GObj* item_gobj)
     sp30 = it_803B857C;
 
     speed = return_sqrt_value(&item->x40_vel);
-    if ((coll->env_flags & MPCOLL_RIGHTWALL) &&
-        product_xy(&item->x40_vel, &coll->right_wall.normal) < 0.0f)
+    if ((coll->env_flags & MPCOLL_LEFTWALL) &&
+        product_xy(&item->x40_vel, &coll->left_facing_wall.normal) < 0.0f)
     {
         sp48 = item->x40_vel;
-        lbVector_Mirror(&sp48, &coll->right_wall.normal);
+        lbVector_Mirror(&sp48, &coll->left_facing_wall.normal);
         lbVector_Add_xy(&sp30, &sp48);
         if (mpColl_8004CAE8(coll, &sp48)) {
             lbVector_Add_xy(&sp3C, &sp48);
         }
         chk = true;
     }
-    if ((coll->env_flags & MPCOLL_LEFTWALL) &&
-        product_xy(&item->x40_vel, &coll->left_wall.normal) < 0.0f)
+    if ((coll->env_flags & MPCOLL_RIGHTWALL) &&
+        product_xy(&item->x40_vel, &coll->right_facing_wall.normal) < 0.0f)
     {
         sp48 = item->x40_vel;
-        lbVector_Mirror(&sp48, &coll->left_wall.normal);
+        lbVector_Mirror(&sp48, &coll->right_facing_wall.normal);
         lbVector_Add_xy(&sp30, &sp48);
         if (mpColl_8004CB30(coll, &sp48)) {
             lbVector_Add_xy(&sp3C, &sp48);

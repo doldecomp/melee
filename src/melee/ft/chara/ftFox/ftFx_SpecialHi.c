@@ -161,8 +161,7 @@ void ftFx_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialHi.gravityDelay != 0) {
         fp->mv.fx.SpecialHi.gravityDelay -= 1;
     } else {
-        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL,
-                          ca->terminal_vel);
+        ftCommon_Fall(fp, da->x60_FOX_FIREFOX_FALL_ACCEL, ca->terminal_vel);
     }
 
     ftCommon_ApplyFrictionAir(fp, da->x5C_FOX_FIREFOX_AIR_MOMENTUM_PRESERVE_X);
@@ -369,10 +368,10 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
                 var =
                     lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
             } else if (envFlags & 63) {
-                var = lbVector_AngleXY(&collData->right_wall.normal,
+                var = lbVector_AngleXY(&collData->left_facing_wall.normal,
                                        &fp->self_vel);
             } else if (envFlags & 4032) {
-                var = lbVector_AngleXY(&collData->left_wall.normal,
+                var = lbVector_AngleXY(&collData->right_facing_wall.normal,
                                        &fp->self_vel);
             } else {
                 if (((!fp->self_vel.x) && (!fp->self_vel.x)) &&

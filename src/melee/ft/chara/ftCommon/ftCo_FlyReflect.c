@@ -44,7 +44,7 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
-            Vec3* normal = &coll->left_wall.normal;
+            Vec3* normal = &coll->right_facing_wall.normal;
             ftCo_800C18A8(gobj, ftCo_MS_FlyReflectWall, normal, &vec);
         }
         fp->mv.co.damage.x19 = ftCo_Surface_LeftWall;
@@ -58,7 +58,7 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
-            Vec3* normal = &coll->right_wall.normal;
+            Vec3* normal = &coll->left_facing_wall.normal;
             ftCo_800C18A8(gobj, ftCo_MS_FlyReflectWall, normal, &vec);
         }
         fp->mv.co.damage.x19 = ftCo_Surface_RightWall;

@@ -54,7 +54,6 @@ const float flt_804D8010 = -3.0F;
 /// @todo float order hack
 const float flt_804D7FD8 = 6.0F;
 
-/// @todo This is the same as #MPCOLL_RIGHTWALL, etc. Pick a naming convention.
 #define Collide_LeftWallPush 0x1
 #define Collide_LeftWallHug 0x20
 #define Collide_LeftWallMask 0x3F
@@ -194,16 +193,16 @@ void mpColl_80041EE4(CollData* cd)
     cd->ceiling.normal.x = 0.0F;
     cd->ceiling.normal.y = -1.0F;
     cd->ceiling.normal.z = 0.0F;
-    cd->left_wall.index = -1;
-    cd->left_wall.flags = 0;
-    cd->left_wall.normal.x = 0.0F;
-    cd->left_wall.normal.y = 1.0F;
-    cd->left_wall.normal.z = 0.0F;
-    cd->right_wall.index = -1;
-    cd->right_wall.flags = 0;
-    cd->right_wall.normal.x = 0.0F;
-    cd->right_wall.normal.y = -1.0F;
-    cd->right_wall.normal.z = 0.0F;
+    cd->right_facing_wall.index = -1;
+    cd->right_facing_wall.flags = 0;
+    cd->right_facing_wall.normal.x = 0.0F;
+    cd->right_facing_wall.normal.y = 1.0F;
+    cd->right_facing_wall.normal.z = 0.0F;
+    cd->left_facing_wall.index = -1;
+    cd->left_facing_wall.flags = 0;
+    cd->left_facing_wall.normal.x = 0.0F;
+    cd->left_facing_wall.normal.y = -1.0F;
+    cd->left_facing_wall.normal.z = 0.0F;
     cd->x38 = mpColl_804D64AC;
     cd->x50 = 0.0F;
     cd->x48_joint_id = -1;
@@ -1451,10 +1450,12 @@ bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
         }
     }
 
-    if ((flags & 1 && (line_id = mpLinePrevNonLeftWall(coll->right_wall.index),
-                       line_id != -1)) ||
-        (flags & 2 && (line_id = mpLineNextNonRightWall(coll->left_wall.index),
-                       line_id != -1)))
+    if ((flags & 1 &&
+         (line_id = mpLinePrevNonLeftWall(coll->left_facing_wall.index),
+          line_id != -1)) ||
+        (flags & 2 &&
+         (line_id = mpLineNextNonRightWall(coll->right_facing_wall.index),
+          line_id != -1)))
     {
         if (mpLib_80054ED8(line_id) &&
             mpLineGetKind(line_id) == CollLine_Floor)
@@ -1604,10 +1605,10 @@ bool mpColl_80044AD8_Ceiling(CollData* coll, int flags)
         return true;
     }
 
-    if (((flags & 1 &&
-          (line_id = mpLineNextNonLeftWall(coll->right_wall.index)) != -1) ||
-         (flags & 2 &&
-          (line_id = mpLinePrevNonRightWall(coll->left_wall.index)) != -1)) &&
+    if (((flags & 1 && (line_id = mpLineNextNonLeftWall(
+                            coll->left_facing_wall.index)) != -1) ||
+         (flags & 2 && (line_id = mpLinePrevNonRightWall(
+                            coll->right_facing_wall.index)) != -1)) &&
         mpLib_80054ED8(line_id) && mpLineGetKind(line_id) == CollLine_Ceiling)
     {
         ceiling_id = mpLib_8004E090_Ceiling(
@@ -1987,9 +1988,9 @@ bool mpColl_800454A4_RightWall(CollData* coll)
 
     if (coll->cur_pos.x < mpColl_804D6490_max_x) {
         coll->cur_pos.x = mpColl_804D6490_max_x;
-        coll->left_wall.index = line_id;
-        coll->left_wall.flags = flags;
-        coll->left_wall.normal = normal;
+        coll->right_facing_wall.index = line_id;
+        coll->right_facing_wall.flags = flags;
+        coll->right_facing_wall.normal = normal;
         return true;
     }
     return false;
@@ -2296,9 +2297,9 @@ bool mpColl_80046224_LeftWall(CollData* coll)
     normal = mpColl_80458810.normal;
     if (coll->cur_pos.x > mpColl_804D6490_max_x) {
         coll->cur_pos.x = mpColl_804D6490_max_x;
-        coll->right_wall.index = line_id;
-        coll->right_wall.flags = flags;
-        coll->right_wall.normal = normal;
+        coll->left_facing_wall.index = line_id;
+        coll->left_facing_wall.flags = flags;
+        coll->left_facing_wall.normal = normal;
         return true;
     }
     return false;
@@ -2656,10 +2657,10 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             return false;
         } else if (kind == CollLine_LeftWall) {
             line_id = mpLib_8004E398_LeftWall(line_id, &coll->x140, &sp10,
-                                              &coll->right_wall.flags,
-                                              &coll->right_wall.normal);
+                                              &coll->left_facing_wall.flags,
+                                              &coll->left_facing_wall.normal);
             if (line_id != -1) {
-                coll->right_wall.index = line_id;
+                coll->left_facing_wall.index = line_id;
                 coll->cur_pos.x = coll->x140.x + sp10;
                 coll->cur_pos.y = coll->x140.y;
                 coll->cur_pos.z = coll->x140.z;
@@ -2668,11 +2669,11 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             }
             return false;
         } else if (kind == CollLine_RightWall) {
-            line_id = mpLib_8004E684_RightWall(line_id, &coll->x140, &sp10,
-                                               &coll->left_wall.flags,
-                                               &coll->left_wall.normal);
+            line_id = mpLib_8004E684_RightWall(
+                line_id, &coll->x140, &sp10, &coll->right_facing_wall.flags,
+                &coll->right_facing_wall.normal);
             if (line_id != -1) {
-                coll->left_wall.index = line_id;
+                coll->right_facing_wall.index = line_id;
                 coll->cur_pos.x = coll->x140.x + sp10;
                 coll->cur_pos.y = coll->x140.y;
                 coll->cur_pos.z = coll->x140.z;
@@ -3319,9 +3320,9 @@ bool mpColl_800491C8_RightWall(CollData* coll)
     normal = mpColl_80458810.normal;
     if (coll->cur_pos.x < mpColl_804D6490_max_x) {
         coll->cur_pos.x = mpColl_804D6490_max_x;
-        coll->left_wall.index = line_id;
-        coll->left_wall.flags = flags;
-        coll->left_wall.normal = normal;
+        coll->right_facing_wall.index = line_id;
+        coll->right_facing_wall.flags = flags;
+        coll->right_facing_wall.normal = normal;
         return true;
     }
     return false;
@@ -3607,9 +3608,9 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
 
     if (coll->cur_pos.x > mpColl_804D6490_max_x) {
         coll->cur_pos.x = mpColl_804D6490_max_x;
-        coll->right_wall.index = line_id;
-        coll->right_wall.flags = flags;
-        coll->right_wall.normal = normal;
+        coll->left_facing_wall.index = line_id;
+        coll->left_facing_wall.flags = flags;
+        coll->left_facing_wall.normal = normal;
         return true;
     }
 
@@ -4545,7 +4546,7 @@ bool mpColl_8004CAA0(CollData* coll, Vec3* arg1)
 
 bool mpColl_8004CAE8(CollData* coll, Vec3* arg1)
 {
-    int index = coll->right_wall.index;
+    int index = coll->left_facing_wall.index;
     Vec3 sp10;
     sp10.x = coll->xA4_ecbCurrCorrect.top.x;
     sp10.y = coll->xA4_ecbCurrCorrect.top.y;
@@ -4555,7 +4556,7 @@ bool mpColl_8004CAE8(CollData* coll, Vec3* arg1)
 
 bool mpColl_8004CB30(CollData* coll, Vec3* arg1)
 {
-    int index = coll->left_wall.index;
+    int index = coll->right_facing_wall.index;
     Vec3 sp10;
     sp10.x = coll->xA4_ecbCurrCorrect.top.x;
     sp10.y = coll->xA4_ecbCurrCorrect.top.y;
@@ -4631,13 +4632,13 @@ void mpCopyCollData(CollData* src, CollData* dst, int arg2)
     dst->floor.flags = src->floor.flags;
     dst->floor.normal = src->floor.normal;
 
-    dst->right_wall.index = src->right_wall.index;
-    dst->right_wall.flags = src->right_wall.flags;
-    dst->right_wall.normal = src->right_wall.normal;
+    dst->left_facing_wall.index = src->left_facing_wall.index;
+    dst->left_facing_wall.flags = src->left_facing_wall.flags;
+    dst->left_facing_wall.normal = src->left_facing_wall.normal;
 
-    dst->left_wall.index = src->left_wall.index;
-    dst->left_wall.flags = src->left_wall.flags;
-    dst->left_wall.normal = src->left_wall.normal;
+    dst->right_facing_wall.index = src->right_facing_wall.index;
+    dst->right_facing_wall.flags = src->right_facing_wall.flags;
+    dst->right_facing_wall.normal = src->right_facing_wall.normal;
 
     dst->ceiling.index = src->ceiling.index;
     dst->ceiling.flags = src->ceiling.flags;
