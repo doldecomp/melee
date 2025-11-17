@@ -4891,7 +4891,7 @@ float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj, Vec3* victim_self_vel,
 void ftKb_SpecialN_800F5954(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    mpColl_8004CBE8(&ft->coll_data);
+    mpUpdateFloorSkip(&ft->coll_data);
 }
 
 bool ftKb_SpecialN_800F597C(Fighter_GObj* gobj)

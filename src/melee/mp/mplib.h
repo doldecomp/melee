@@ -36,11 +36,11 @@
 /* 04ED5C */ void mpLib_8004ED5C(int, float*, float*, float*, float*);
 /* 04F008 */ bool mpLib_8004F008_Floor(
     float ax, float ay, float bx, float by, float y_offset, Vec3* vec_out,
-    int* line_id_out, u32* flags_out, Vec3* normal_out, int line_id,
+    int* line_id_out, u32* flags_out, Vec3* normal_out, int line_id_skip,
     int joint_id0, int joint_id1, bool (*)(Fighter_GObj*, int), Fighter_GObj*);
 /* 04F400 */ bool mpLib_8004F400_Floor(
     float ax, float ay, float bx, float by, float y_offset, Vec3* vec_out,
-    int* line_id_out, u32* flags_out, Vec3* normal_out, int line_id,
+    int* line_id_out, u32* flags_out, Vec3* normal_out, int line_id_skip,
     int joint_id0, int joint_id1, bool (*)(Fighter_GObj*, int), Fighter_GObj*);
 /* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx,
                                          float by, Vec3* vec_out,
@@ -85,7 +85,7 @@
                                           int* line_id_out, int joint_id0,
                                           int joint_id1);
 /* 05199C */ int mpLib_8005199C_Floor(Vec3*, int joint_id0, int joint_id1);
-/* 051BA8 */ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id,
+/* 051BA8 */ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip,
                                       int joint_id0, int joint_id1, int dir,
                                       float left, float bottom, float right,
                                       float top);

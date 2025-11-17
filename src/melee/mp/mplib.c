@@ -855,7 +855,7 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
 
 bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
                           float y_offset, Vec3* vec_out, int* line_id_out,
-                          u32* flags_out, Vec3* normal_out, int line_id,
+                          u32* flags_out, Vec3* normal_out, int line_id_skip,
                           int joint_id0, int joint_id1,
                           bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
 {
@@ -904,7 +904,7 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
                 continue;
             }
 
-            if (line_id == line_r26 - groundCollLine) {
+            if (line_id_skip == line_r26 - groundCollLine) {
                 continue;
             }
 
@@ -1002,7 +1002,7 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
 
 bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                           float y_offset, Vec3* vec_out, int* line_id_out,
-                          u32* flags_out, Vec3* normal_out, int line_id,
+                          u32* flags_out, Vec3* normal_out, int line_id_skip,
                           int joint_id0, int joint_id1,
                           bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
 {
@@ -1042,7 +1042,7 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                 continue;
             }
 
-            if (line_id == line - groundCollLine) {
+            if (line_id_skip == line - groundCollLine) {
                 continue;
             }
 
@@ -2482,7 +2482,7 @@ end:
     return line_id;
 }
 
-int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id, int joint_id0,
+int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
                          int joint_id1, int dir, float left, float bottom,
                          float right, float top)
 {
@@ -2526,7 +2526,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id, int joint_id0,
             for (i = 0; i < count; i++, line++) {
             reset:
                 new_id = line - groundCollLine;
-                if (line_id == new_id) {
+                if (line_id_skip == new_id) {
                     continue;
                 }
 

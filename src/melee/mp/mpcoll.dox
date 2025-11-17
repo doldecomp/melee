@@ -46,7 +46,7 @@ void mpColl_800478F4(CollData*);
 void mpColl_8004B5C4(CollData*);
 void mpCopyCollData(CollData*);
 void mpColl_8004CA6C(CollData*);
-void mpColl_8004CBF4(CollData*);
+void mpClearFloorSkip(CollData*);
 
 void mpColl_80041C78(void);
 void mpColl_80042384(CollData* cd);
@@ -73,7 +73,7 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2);
 void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2,
                      f32 arg3, f32 arg4);
 /* 04CBC0 */ bool mpColl_IsOnPlatform(CollData*);
-/* 04CBE8 */ void mpColl_8004CBE8(CollData*);
+/* 04CBE8 */ void mpUpdateFloorSkip(CollData*);
 /* 0443C4 */ bool mpColl_800443C4(CollData* cd, int* p_ledge_id);
 /* 044164 */ bool mpColl_80044164(CollData* cd, int* p_ledge_id);
 /* 4D64A0 */ extern s32 mpColl_804D64A0;

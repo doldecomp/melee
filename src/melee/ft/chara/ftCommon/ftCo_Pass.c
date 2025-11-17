@@ -71,7 +71,7 @@ bool ftCo_8009A134(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     CollData* coll = &fp->coll_data;
     if (mpColl_IsOnPlatform(coll)) {
-        mpColl_8004CBE8(coll);
+        mpUpdateFloorSkip(coll);
         return true;
     }
     return false;
@@ -86,7 +86,7 @@ void ftCo_8009A184(Fighter_GObj* gobj, FtMotionId msid, MotionFlags mf,
     ftCommon_ClampAirDrift(fp);
     fp->self_vel.y = p_ftCommonData->x46C;
     Fighter_ChangeMotionState(gobj, msid, mf, anim_start, 1, 0, NULL);
-    mpColl_8004CBE8(&fp->coll_data);
+    mpUpdateFloorSkip(&fp->coll_data);
     fp->x671_timer_lstick_tilt_y = 0xFE;
 }
 
@@ -98,7 +98,7 @@ void ftCo_8009A228(Fighter_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
     fp->self_vel.y = p_ftCommonData->x46C;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Pass, Ft_MF_None, 0, 1, 0, NULL);
-    mpColl_8004CBE8(&fp->coll_data);
+    mpUpdateFloorSkip(&fp->coll_data);
     fp->x671_timer_lstick_tilt_y = 0xFE;
 }
 

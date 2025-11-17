@@ -209,7 +209,7 @@ struct CollData {
     /* fp+725 */ ECBFlagStruct x35_flags;
     /* fp+726 */ s16 facing_dir;
     /* fp+728 */ int x38;
-    /* fp+72C */ int x3C;
+    /* fp+72C */ int floor_skip;
     /* fp+730 */ int ledge_id_right;
     /* fp+734 */ int ledge_id_left;
     /* fp+738 */ int x48_joint_id;

@@ -1083,7 +1083,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     fp->x2225_b1 = 0;
     fp->x2225_b4 = 0;
 
-    mpColl_8004CBF4(&fp->coll_data);
+    mpClearFloorSkip(&fp->coll_data);
 
     ftCo_800DEEA8(gobj);
 

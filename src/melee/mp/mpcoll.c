@@ -181,7 +181,7 @@ void mpColl_80041EE4(CollData* cd)
     cd->cur_pos_correct = cd->cur_pos;
     cd->prev_pos = cd->cur_pos;
     cd->x28_vec = cd->cur_pos;
-    cd->x3C = -1;
+    cd->floor_skip = -1;
     cd->ledge_id_right = -1;
     cd->ledge_id_left = -1;
     cd->floor.index = -1;
@@ -1159,9 +1159,9 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
                                coll->xA4_ecbCurrCorrect.bottom.y)) -
                    temp_f2);
         if (mpLib_8004F008_Floor(temp_f1_3, temp_f2, sp20.x, sp20.y, 0.0F,
-                                 &coll->x140, NULL, NULL, NULL, coll->x3C,
-                                 coll->x48_joint_id, coll->x4C_joint_id, NULL,
-                                 NULL))
+                                 &coll->x140, NULL, NULL, NULL,
+                                 coll->floor_skip, coll->x48_joint_id,
+                                 coll->x4C_joint_id, NULL, NULL))
         {
             sp20.x = coll->x140.x;
             if (ignore_bottom) {
@@ -1243,9 +1243,9 @@ void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
                             coll->xA4_ecbCurrCorrect.bottom.y)) -
                    temp_f2);
         if (mpLib_8004F008_Floor(temp_f1_2, temp_f2, sp20.x, sp20.y, 0.0F,
-                                 &coll->x140, NULL, NULL, NULL, coll->x3C,
-                                 coll->x48_joint_id, coll->x4C_joint_id, NULL,
-                                 NULL))
+                                 &coll->x140, NULL, NULL, NULL,
+                                 coll->floor_skip, coll->x48_joint_id,
+                                 coll->x4C_joint_id, NULL, NULL))
         {
             sp20.x = coll->x140.x;
             if (ignore_bottom) {
@@ -1305,7 +1305,7 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
         mpLib_800588D0(left, bottom, right, top);
     }
     ledge_id =
-        mpLib_80051BA8_Floor(&cd->x140, cd->x3C, cd->x48_joint_id,
+        mpLib_80051BA8_Floor(&cd->x140, cd->floor_skip, cd->x48_joint_id,
                              cd->x4C_joint_id, 1, left, bottom, right, top);
     if (ledge_id != -1 &&
         (mpLib_80054158(ledge_id, &sp14), cd->x140.x - sp14.x < 5.0F) &&
@@ -1379,7 +1379,7 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
         mpLib_800588D0(left, bottom, right, top);
     }
     ledge_id =
-        mpLib_80051BA8_Floor(&cd->x140, cd->x3C, cd->x48_joint_id,
+        mpLib_80051BA8_Floor(&cd->x140, cd->floor_skip, cd->x48_joint_id,
                              cd->x4C_joint_id, -1, left, bottom, right, top);
     if (ledge_id != -1 &&
         (mpLib_80053FF4(ledge_id, &sp14), sp14.x - cd->x140.x < 5.0F) &&
@@ -1428,20 +1428,22 @@ bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
     sp2C.y = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
 
     if (coll->x38 != mpColl_804D64AC) {
-        bool_r3 = mpLib_8004F400_Floor(
-            temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F, &coll->x140,
-            &coll->floor.index, &coll->floor.flags, &coll->floor.normal,
-            coll->x3C, coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
+        bool_r3 = mpLib_8004F400_Floor(temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F,
+                                       &coll->x140, &coll->floor.index,
+                                       &coll->floor.flags, &coll->floor.normal,
+                                       coll->floor_skip, coll->x48_joint_id,
+                                       coll->x4C_joint_id, cb, gobj);
     } else {
-        bool_r3 = mpLib_8004F008_Floor(
-            temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F, &coll->x140,
-            &coll->floor.index, &coll->floor.flags, &coll->floor.normal,
-            coll->x3C, coll->x48_joint_id, coll->x4C_joint_id, cb, gobj);
+        bool_r3 = mpLib_8004F008_Floor(temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F,
+                                       &coll->x140, &coll->floor.index,
+                                       &coll->floor.flags, &coll->floor.normal,
+                                       coll->floor_skip, coll->x48_joint_id,
+                                       coll->x4C_joint_id, cb, gobj);
     }
 
     if (bool_r3) {
         if (!(coll->floor.flags & LINE_FLAG_PLATFORM) ||
-            coll->floor.index != coll->x3C)
+            coll->floor.index != coll->floor_skip)
         {
             coll->env_flags |= Collide_FloorPush;
             coll->env_flags |= Collide_FloorHug;
@@ -1465,7 +1467,7 @@ bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
             if (floor_id != -1 && y > 0.0F) {
                 coll->floor.index = floor_id;
                 if (!(coll->floor.flags & LINE_FLAG_PLATFORM) ||
-                    coll->floor.index != coll->x3C)
+                    coll->floor.index != coll->floor_skip)
                 {
                     if (cb == NULL || cb(gobj, coll->floor.index)) {
                         coll->env_flags |= Collide_FloorPush;
@@ -3793,13 +3795,15 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
     x1 = coll->cur_pos.x + coll->xA4_ecbCurrCorrect.bottom.x;
     y1 = coll->cur_pos.y + coll->xA4_ecbCurrCorrect.bottom.y;
     if (coll->x38 != mpColl_804D64AC) {
-        result = mpLib_8004F400_Floor(
-            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
-            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+        result =
+            mpLib_8004F400_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags,
+                                 &normal, coll->floor_skip, coll->x48_joint_id,
+                                 coll->x4C_joint_id, NULL, NULL);
     } else {
-        result = mpLib_8004F008_Floor(
-            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
-            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+        result =
+            mpLib_8004F008_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags,
+                                 &normal, coll->floor_skip, coll->x48_joint_id,
+                                 coll->x4C_joint_id, NULL, NULL);
     }
     if (result && floor_id != -1 && floor_id != line_id &&
         (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
@@ -3812,13 +3816,15 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
     y0 = 0.5F * (coll->xC4_ecb.top.y + coll->xC4_ecb.bottom.y) +
          coll->cur_pos_correct.y;
     if (coll->x38 != mpColl_804D64AC) {
-        result = mpLib_8004F400_Floor(
-            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
-            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+        result =
+            mpLib_8004F400_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags,
+                                 &normal, coll->floor_skip, coll->x48_joint_id,
+                                 coll->x4C_joint_id, NULL, NULL);
     } else {
-        result = mpLib_8004F008_Floor(
-            x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags, &normal, coll->x3C,
-            coll->x48_joint_id, coll->x4C_joint_id, NULL, NULL);
+        result =
+            mpLib_8004F008_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id, &flags,
+                                 &normal, coll->floor_skip, coll->x48_joint_id,
+                                 coll->x4C_joint_id, NULL, NULL);
     }
     if (result && floor_id != -1 && floor_id != line_id &&
         (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
@@ -3973,7 +3979,7 @@ bool fn_8004ACE4(CollData* coll, int arg1)
                 hit_ceiling = true;
             }
         } else {
-            int old_x3C;                      // r23
+            int old_skip;                     // r23
             bool var_r23 = false;             // r23
             int floor_id = coll->floor.index; // r22
             if (mpLib_80054ED8(floor_id) &&
@@ -4002,12 +4008,12 @@ bool fn_8004ACE4(CollData* coll, int arg1)
                 }
 
                 if (var_r23) {
-                    old_x3C = coll->x3C;
-                    coll->x3C = floor_id;
+                    old_skip = coll->floor_skip;
+                    coll->floor_skip = floor_id;
                     if (mpColl_80046904(coll, 0U)) {
                         touching_floor = true;
                     }
-                    coll->x3C = old_x3C;
+                    coll->floor_skip = old_skip;
                     coll->x34_flags.b5 = true;
                 }
             }
@@ -4580,14 +4586,14 @@ bool mpColl_IsOnPlatform(CollData* coll)
     return mpLineGetFlags(coll->floor.index) & LINE_FLAG_PLATFORM;
 }
 
-void mpColl_8004CBE8(CollData* coll)
+void mpUpdateFloorSkip(CollData* coll)
 {
-    coll->x3C = coll->floor.index;
+    coll->floor_skip = coll->floor.index;
 }
 
-void mpColl_8004CBF4(CollData* coll)
+void mpClearFloorSkip(CollData* coll)
 {
-    coll->x3C = -1;
+    coll->floor_skip = -1;
 }
 
 void mpCopyCollData(CollData* src, CollData* dst, int arg2)
@@ -4611,7 +4617,7 @@ void mpCopyCollData(CollData* src, CollData* dst, int arg2)
 
     dst->facing_dir = src->facing_dir;
     dst->x38 = src->x38;
-    dst->x3C = src->x3C;
+    dst->floor_skip = src->floor_skip;
     dst->ledge_id_left = src->ledge_id_left;
     dst->ledge_id_right = src->ledge_id_right;
     dst->x48_joint_id = src->x48_joint_id;

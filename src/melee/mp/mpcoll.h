@@ -116,8 +116,8 @@
 /* 04CB30 */ bool mpColl_8004CB30(CollData*, Vec3*);
 /* 04CB78 */ bool mpColl_8004CB78(CollData*, Vec3*);
 /* 04CBC0 */ bool mpColl_IsOnPlatform(CollData*);
-/* 04CBE8 */ void mpColl_8004CBE8(CollData*);
-/* 04CBF4 */ void mpColl_8004CBF4(CollData*);
+/* 04CBE8 */ void mpUpdateFloorSkip(CollData*);
+/* 04CBF4 */ void mpClearFloorSkip(CollData*);
 /* 04CC00 */ void mpCopyCollData(CollData* src, CollData* dst, int);
 /* 04D024 */ bool mpColl_8004D024(Vec3*);
 /* 4D64AC */ extern int mpColl_804D64AC;
