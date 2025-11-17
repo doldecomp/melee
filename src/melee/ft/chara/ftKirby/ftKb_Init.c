@@ -4431,12 +4431,12 @@ void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj) {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.kb.speciallw.x24 =  ftKb_Init_803CB4EC.vec;
     fp->mv.kb.speciallw.x54 = fp->mv.kb.speciallw.x24;
-    fp->mv.kb.speciallw.x88[0] = 0.0f; 
-    fp->mv.kb.speciallw.x88[4] = 0.0f; 
+    fp->mv.kb.speciallw.x88[0] = 0.0f;
+    fp->mv.kb.speciallw.x88[4] = 0.0f;
     fp->mv.kb.speciallw.x30 = ftKb_Init_803CB4EC.vec;
      fp->mv.kb.speciallw.x60 =  fp->mv.kb.speciallw.x30;
     fp->mv.kb.speciallw.x88[1] = 0.0f;
-    fp->mv.kb.speciallw.x88[5] = 0.0f; 
+    fp->mv.kb.speciallw.x88[5] = 0.0f;
     fp->mv.kb.speciallw.x3C = ftKb_Init_803CB4EC.vec;
     fp->mv.kb.speciallw.x6C = fp->mv.kb.speciallw.x3C;
     fp->mv.kb.speciallw.x88[2] = 0.0f;
@@ -4455,7 +4455,6 @@ void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj) {
     s32 var_r5;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    
     fp->mv.kb.speciallw.x48 = fp->mv.kb.speciallw.x3C;
     fp->mv.kb.speciallw.x78 =  fp->mv.kb.speciallw.x6C;
     fp->mv.kb.speciallw.x88[3] = fp->mv.kb.speciallw.x88[2];
@@ -4502,17 +4501,17 @@ void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj) {
                         var_r5 = -1;
                         var_r4 = -1;
                     } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
-                         if (temp_f5 < 0.0f) {
+                        if (temp_f5 < 0.0f) {
                             fp->mv.kb.speciallw.x88[8] -= 0.25f; 
                             if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
                                 fp->mv.kb.speciallw.x88[8] = 0.0f;
                             }
-                         } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
+                        } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
                             fp->mv.kb.speciallw.x88[8] -= 0.25f; 
-                        if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
+                            if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
                             fp->mv.kb.speciallw.x88[8] = 0.0f;
-                            } 
-                         }
+                            }
+                        }
                     }
             }
         }
