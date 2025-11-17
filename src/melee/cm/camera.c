@@ -98,7 +98,7 @@ void Camera_80028B9C(int n_subjects)
     cm_80452C68.x398_b5 = 0;
     cm_80452C68.x399_b0_b1 = 0;
     cm_80452C68.x399_b2 = 0;
-    cm_80452C68.debug_mode.last_mode = cm_80452C68.mode;
+    cm_80453004.last_mode = cm_80452C68.mode;
     cm_80452C68.x399_b3 = 0;
     cm_80452C68.x399_b4 = 0;
     cm_80452C68.x399_b5 = 0;
@@ -889,98 +889,86 @@ void Camera_8002A28C(CameraBounds* arg0)
     }
 }
 
+/// @note doesnt check all stages...
+// probably was a bandaid for problem stages
+inline float get_stage_floor_height(InternalStageId stage_id)
+{
+    float height = FLT_MIN;
+    switch (stage_id) {
+    case CASTLE:
+        height = grCastle_801D0FF0();
+        break;
+    case CORNERIA:
+        height = grCorneria_801E2FCC();
+        break;
+    case ZEBES:
+        height = grZebes_801DCCC8();
+        break;
+    case GARDEN:
+        height = grGarden_80203624();
+        break;
+    case SHRINEROUTE:
+        height = grShrineRoute_802087B0();
+        break;
+    case HOMERUN:
+        height = grHomeRun_8021EF10();
+        break;
+    }
+    return height;
+}
+
 void Camera_8002A4AC(HSD_GObj* gobj)
 {
+    f32 floor_height;
     Vec3 pos;
     HSD_CObj* cobj;
-    f32 floor_y;
-    PAD_STACK(8);
+    CameraTransformState* transform = &cm_80452C68.transform;
 
     cobj = GET_COBJ(gobj);
     switch (cm_80452C68.mode) {
-    case 0:
-    case 4:
-        Camera_8002AF68(cobj, &cm_80452C68.transform);
+    case CAMERA_STANDARD:
+    case CAMERA_FIXED:
+        Camera_8002AF68(cobj, transform);
         Camera_8002AF68(cm_804D6464, &cm_80452C68.transform_copy);
         HSD_CObjSetNear(cobj, cm_80452C68.nearz);
         HSD_CObjSetFar(cobj, cm_80452C68.farz);
-        return;
-    case 5:
-        Camera_8002AF68(cobj, &cm_80452C68.transform);
+        break;
+    case CAMERA_FREE:
+        Camera_8002AF68(cobj, transform);
         HSD_CObjSetNear(cobj, cm_80452C68.nearz);
         HSD_CObjSetFar(cobj, cm_80452C68.farz);
-        return;
-    case 1:
-        pos = cm_80452C68.transform.position;
-        floor_y = -3.4028235e38f;
-        switch (stage_info.internal_stage_id) {
-        case CASTLE:
-            floor_y = grCastle_801D0FF0();
-            break;
-        case CORNERIA:
-            floor_y = grCorneria_801E2FCC();
-            break;
-        case ZEBES:
-            floor_y = grZebes_801DCCC8();
-            break;
-        case GARDEN:
-            floor_y = grGarden_80203624();
-            break;
-        case SHRINEROUTE:
-            floor_y = grShrineRoute_802087B0();
-            break;
-        case HOMERUN:
-            floor_y = grHomeRun_8021EF10();
-            break;
+        break;
+    case CAMERA_PAUSE:
+        pos = transform->position;
+        floor_height = get_stage_floor_height(stage_info.internal_stage_id);
+        if (pos.y < floor_height) {
+            floor_height = get_stage_floor_height(stage_info.internal_stage_id);
+            pos.y = floor_height;
         }
-        if (pos.y < floor_y) {
-            floor_y = -3.4028235e38f;
-            switch (stage_info.internal_stage_id) {
-            case CASTLE:
-                floor_y = grCastle_801D0FF0();
-                break;
-            case CORNERIA:
-                floor_y = grCorneria_801E2FCC();
-                break;
-            case ZEBES:
-                floor_y = grZebes_801DCCC8();
-                break;
-            case GARDEN:
-                floor_y = grGarden_80203624();
-                break;
-            case SHRINEROUTE:
-                floor_y = grShrineRoute_802087B0();
-                break;
-            case HOMERUN:
-                floor_y = grHomeRun_8021EF10();
-                break;
-            }
-            pos.y = floor_y;
-        }
-        HSD_CObjSetFov(cobj, cm_80452C68.transform.fov);
-        HSD_CObjSetInterest(cobj, &cm_80452C68.transform.interest);
+        HSD_CObjSetFov(cobj, transform->fov);
+        HSD_CObjSetInterest(cobj, &transform->interest);
         HSD_CObjSetEyePosition(cobj, &pos);
         HSD_CObjSetNear(cobj, 0.1f);
         HSD_CObjSetFar(cobj, 16384.0f);
-        return;
-    case 2:
-    case 3:
-    case 6:
-        HSD_CObjSetFov(cobj, cm_80452C68.transform.fov);
-        HSD_CObjSetInterest(cobj, &cm_80452C68.transform.interest);
-        HSD_CObjSetEyePosition(cobj, &cm_80452C68.transform.position);
+        break;
+    case CAMERA_TRAINING_MENU:
+    case CAMERA_CLEAR:
+    case CAMERA_BOSS_INTRO:
+        HSD_CObjSetFov(cobj, transform->fov);
+        HSD_CObjSetInterest(cobj, &transform->interest);
+        HSD_CObjSetEyePosition(cobj, &transform->position);
         HSD_CObjSetNear(cobj, 0.1f);
         HSD_CObjSetFar(cobj, 16384.0f);
-        return;
-    case 7:
-        HSD_CObjSetFov(cobj, cm_80452C68.debug_mode.mode7_fov);
-        HSD_CObjSetInterest(cobj, &cm_80452C68.debug_mode.mode7_int_pos);
-        HSD_CObjSetEyePosition(cobj, &cm_80452C68.debug_mode.mode7_eye_pos);
-        return;
-    case 8:
-        HSD_CObjSetFov(cobj, cm_80452C68.debug_mode.mode8_fov);
-        HSD_CObjSetInterest(cobj, &cm_80452C68.debug_mode.mode8_int_pos);
-        HSD_CObjSetEyePosition(cobj, &cm_80452C68.debug_mode.mode8_eye_pos);
+        break;
+    case CAMERA_DEBUG_FOLLOW:
+        HSD_CObjSetFov(cobj, cm_80453004.follow_fov);
+        HSD_CObjSetInterest(cobj, &cm_80453004.follow_eye_pos);
+        HSD_CObjSetEyePosition(cobj, &cm_80453004.follow_int_pos);
+        break;
+    case CAMERA_DEBUG_FREE:
+        HSD_CObjSetFov(cobj, cm_80453004.free_fov);
+        HSD_CObjSetInterest(cobj, &cm_80453004.free_int_pos);
+        HSD_CObjSetEyePosition(cobj, &cm_80453004.free_eye_pos);
     }
 }
 
@@ -2176,40 +2164,40 @@ void Camera_8002FEEC(s32 arg0)
         if ((box != NULL) && ((cm_80452C68.mode) != 7)) {
 
             if (cm_80452C68.mode <= 1U) {
-                cm_80452C68.debug_mode.last_mode = cm_80452C68.mode;
+                cm_80453004.last_mode = cm_80452C68.mode;
             }
 
             cm_80452C68.mode = 7;
-            cm_80452C68.debug_mode.ply_slot = arg0;
+            cm_80453004.ply_slot = arg0;
             temp_f1 = tanf(0.017453292f * cm_80452C68.transform.target_fov);
             temp_f31 = (2.0f * box->x34.z) / temp_f1;
-            cm_80452C68.debug_mode.mode7_int_offset.z = 0.0f;
-            cm_80452C68.debug_mode.mode7_int_offset.y = 0.0f;
-            cm_80452C68.debug_mode.mode7_int_offset.x = 0.0f;
+            cm_80453004.follow_int_offset.z = 0.0f;
+            cm_80453004.follow_int_offset.y = 0.0f;
+            cm_80453004.follow_int_offset.x = 0.0f;
             cobj = cm_80452C68.gobj->hsd_obj;
             HSD_CObjGetInterest(cobj, &eye);
             HSD_CObjGetEyePosition(cobj, &target);
             fov = HSD_CObjGetFov(cobj);
-            cm_80452C68.debug_mode.mode7_eye_pos = eye;
-            cm_80452C68.debug_mode.mode7_int_pos = target;
-            cm_80452C68.debug_mode.mode7_fov = fov;
+            cm_80453004.follow_eye_pos = eye;
+            cm_80453004.follow_int_pos = target;
+            cm_80453004.follow_fov = fov;
 
             lbVector_Diff(&target, &eye,
-                          &cm_80452C68.debug_mode.mode7_eye_offset);
-            temp_f1_3 = cm_80452C68.debug_mode.mode7_eye_offset.x;
+                          &cm_80453004.follow_eye_offset);
+            temp_f1_3 = cm_80453004.follow_eye_offset.x;
             temp_f1 = temp_f1_3 * temp_f1_3;
 
             temp_f1_4 =
                 temp_f31 /
                 sqrtf__Ff(
-                    (cm_80452C68.debug_mode.mode7_eye_offset.z *
-                     cm_80452C68.debug_mode.mode7_eye_offset.z) +
-                    (temp_f1 + (cm_80452C68.debug_mode.mode7_eye_offset.y *
-                                cm_80452C68.debug_mode.mode7_eye_offset.y)));
+                    (cm_80453004.follow_eye_offset.z *
+                     cm_80453004.follow_eye_offset.z) +
+                    (temp_f1 + (cm_80453004.follow_eye_offset.y *
+                                cm_80453004.follow_eye_offset.y)));
 
-            cm_80452C68.debug_mode.mode7_eye_offset.x *= temp_f1_4;
-            cm_80452C68.debug_mode.mode7_eye_offset.y *= temp_f1_4;
-            cm_80452C68.debug_mode.mode7_eye_offset.z *= temp_f1_4;
+            cm_80453004.follow_eye_offset.x *= temp_f1_4;
+            cm_80453004.follow_eye_offset.y *= temp_f1_4;
+            cm_80453004.follow_eye_offset.z *= temp_f1_4;
         }
     }
 }
@@ -2220,13 +2208,13 @@ void Camera_8003006C(void)
 
     if (cm_80452C68.mode != 8) {
         if (cm_80452C68.mode <= 1U) {
-            cm_80452C68.debug_mode.last_mode = cm_80452C68.mode;
+            cm_80453004.last_mode = cm_80452C68.mode;
         }
         cm_80452C68.mode = 8;
         cobj = GET_COBJ(cm_80452C68.gobj);
-        HSD_CObjGetInterest(cobj, &cm_80452C68.debug_mode.mode8_int_pos);
-        HSD_CObjGetEyePosition(cobj, &cm_80452C68.debug_mode.mode8_eye_pos);
-        cm_80452C68.debug_mode.mode8_fov = HSD_CObjGetFov(cobj);
+        HSD_CObjGetInterest(cobj, &cm_80453004.free_int_pos);
+        HSD_CObjGetEyePosition(cobj, &cm_80453004.free_eye_pos);
+        cm_80453004.free_fov = HSD_CObjGetFov(cobj);
     }
 }
 

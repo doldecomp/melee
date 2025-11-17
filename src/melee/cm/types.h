@@ -50,25 +50,23 @@ struct CameraQuake {
     /* 0xC */ int type;
 };
 
-// global vars for camera mode 7 and 8
-// mode 7 will attach and follow a player, and 8 is free cam
 struct CameraDebugMode {
-    int last_mode;
+    CameraType last_mode;
     int ply_slot;
-    Vec3 mode7_int_offset;
-    Vec3 mode7_eye_offset;
-    Vec3 mode7_eye_pos;
-    Vec3 mode7_int_pos;
-    float mode7_fov;
-    Vec3 mode8_int_pos;
-    Vec3 mode8_eye_pos;
-    float mode8_fov;
+    Vec3 follow_int_offset;
+    Vec3 follow_eye_offset;
+    Vec3 follow_eye_pos;
+    Vec3 follow_int_pos;
+    float follow_fov;
+    Vec3 free_int_pos;
+    Vec3 free_eye_pos;
+    float free_fov;
     u8 _4C[8]; // padding? not sure if this is correct
 };
 
-typedef struct Camera {
+struct Camera {
     /* 0x000 */ HSD_GObj* gobj;
-    /* 0x004 */ int mode;
+    /* 0x004 */ CameraType mode;
     /* 0x008 */ u8 background_r;
     /* 0x009 */ u8 background_g;
     /* 0x00A */ u8 background_b;
@@ -165,11 +163,8 @@ typedef struct Camera {
     /* 0x39A:6 */ u8 x39A_b6 : 1;
     /* 0x39A:7 */ u8 x39A_b7 : 1;
     /* 0x39B */ char pad_39B; /* maybe part of unk_39A[6]? */
-    /* 0x39C */ struct CameraDebugMode debug_mode;
-} Camera; /* size = 0x3A4 */
-
-/// @todo Size should be 0x39C like #cm_80452C68
-// STATIC_ASSERT(sizeof(struct Camera) == 0x3A4);
+};
+STATIC_ASSERT(sizeof(struct Camera) == 0x39C);
 
 // struct CameraUnkGlobals {
 //     /*  +0 */ float _0[11];

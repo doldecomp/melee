@@ -11,8 +11,12 @@
 #include <sysdolphin/baselib/cobj.h>
 #include <melee/cm/types.h>
 
+#define FLT_MAX 3.4028235E38F
+#define FLT_MIN -3.4028235E38F
+
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
+/* 453004 */ static CameraDebugMode cm_80453004;
 
 // .data
 /* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = { Camera_8002B3D4,

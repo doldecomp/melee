@@ -136,7 +136,6 @@
 /* 0311EC */ UNK_RET Camera_800311EC(UNK_PARAMS);
 /* 031328 */ void Camera_80031328(HSD_GObj*, s32, s32);
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
-/* 453004 */ extern CameraDebugMode cm_80453004;
 
 extern CameraBox* cm_804D6468;
 
