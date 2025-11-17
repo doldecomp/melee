@@ -2807,33 +2807,28 @@ bool mpLib_80052508(Vec3* pos_out, int* line_id_out, u32* flags_out,
                           normal_out, 0xF, joint_id0, joint_id1);
 }
 
-int mpLib_80052534_Floor(int line_id)
+int mpLineNextNonFloor(int line_id)
 {
     int new_id;
     bool valid_id;
-
     LINEID_CHECK(4139, line_id);
-
     new_id = mpLineGetNext(line_id);
     while (new_id != -1 && new_id != line_id &&
-           !(groundCollLine[new_id].flags & CollLine_Floor))
+           groundCollLine[new_id].flags & CollLine_Floor)
     {
         new_id = mpLineGetNext(new_id);
     }
-
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
         valid_id = true;
     }
-
     if (valid_id) {
         return new_id;
     }
-
     return -1;
 }
 
-int mpLib_80052700_Floor(int line_id)
+int mpLinePrevNonFloor(int line_id)
 {
     int new_id;
     bool valid_id;
@@ -2844,19 +2839,17 @@ int mpLib_80052700_Floor(int line_id)
     {
         new_id = mpLineGetPrev(new_id);
     }
-
     valid_id = false;
     if ((new_id != -1) && (new_id != line_id)) {
         valid_id = true;
     }
-
     if (valid_id) {
         return new_id;
     }
     return -1;
 }
 
-int mpLib_800528CC_Ceiling(int line_id)
+int mpLinePrevNonCeiling(int line_id)
 {
     int new_id;
     bool valid_id;
@@ -2867,20 +2860,17 @@ int mpLib_800528CC_Ceiling(int line_id)
     {
         new_id = mpLineGetPrev(new_id);
     }
-
     valid_id = false;
-    if (new_id != -1 && new_id != line_id) {
+    if ((new_id != -1) && (new_id != line_id)) {
         valid_id = true;
     }
-
     if (valid_id) {
         return new_id;
     }
-
     return -1;
 }
 
-int mpLib_80052A98_Ceiling(int line_id)
+int mpLineNextNonCeiling(int line_id)
 {
     int new_id;
     bool valid_id;
@@ -2901,7 +2891,7 @@ int mpLib_80052A98_Ceiling(int line_id)
     return -1;
 }
 
-int mpLib_80052C64_LeftWall(int line_id)
+int mpLineNextNonLeftWall(int line_id)
 {
     int new_id;
     bool valid_id;
@@ -2913,7 +2903,7 @@ int mpLib_80052C64_LeftWall(int line_id)
         new_id = mpLineGetNext(new_id);
     }
     valid_id = false;
-    if (new_id != -1 && new_id != line_id) {
+    if ((new_id != -1) && (new_id != line_id)) {
         valid_id = true;
     }
     if (valid_id) {
@@ -2922,7 +2912,7 @@ int mpLib_80052C64_LeftWall(int line_id)
     return -1;
 }
 
-int mpLib_80052E30_LeftWall(int line_id)
+int mpLinePrevNonLeftWall(int line_id)
 {
     int new_id;
     bool valid_id;
@@ -2943,7 +2933,7 @@ int mpLib_80052E30_LeftWall(int line_id)
     return -1;
 }
 
-int mpLib_80052FFC_RightWall(int line_id)
+int mpLinePrevNonRightWall(int line_id)
 {
     int new_id;
     bool valid_id;
@@ -2964,7 +2954,7 @@ int mpLib_80052FFC_RightWall(int line_id)
     return -1;
 }
 
-int mpLib_800531C8_RightWall(int line_id)
+int mpLineNextNonRightWall(int line_id)
 {
     int new_id;
     bool valid_id;
@@ -2976,7 +2966,7 @@ int mpLib_800531C8_RightWall(int line_id)
         new_id = mpLineGetNext(new_id);
     }
     valid_id = false;
-    if (new_id != -1 && new_id != line_id) {
+    if ((new_id != -1) && (new_id != line_id)) {
         valid_id = true;
     }
     if (valid_id) {

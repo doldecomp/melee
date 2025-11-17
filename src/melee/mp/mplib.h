@@ -101,14 +101,14 @@
                                  u32* flags_out, Vec3* normal_out,
                                  int joint_id0, int joint_id1, float x0,
                                  float y0, float x1, float y1);
-/* 052534 */ int mpLib_80052534_Floor(int line_id);
-/* 052700 */ int mpLib_80052700_Floor(int line_id);
-/* 0528CC */ int mpLib_800528CC_Ceiling(int line_id);
-/* 052A98 */ int mpLib_80052A98_Ceiling(int line_id);
-/* 052C64 */ int mpLib_80052C64_LeftWall(int line_id);
-/* 052E30 */ int mpLib_80052E30_LeftWall(int line_id);
-/* 052FFC */ int mpLib_80052FFC_RightWall(int line_id);
-/* 0531C8 */ int mpLib_800531C8_RightWall(int line_id);
+/* 052534 */ int mpLineNextNonFloor(int line_id);
+/* 052700 */ int mpLinePrevNonFloor(int line_id);
+/* 0528CC */ int mpLinePrevNonCeiling(int line_id);
+/* 052A98 */ int mpLineNextNonCeiling(int line_id);
+/* 052C64 */ int mpLineNextNonLeftWall(int line_id);
+/* 052E30 */ int mpLinePrevNonLeftWall(int line_id);
+/* 052FFC */ int mpLinePrevNonRightWall(int line_id);
+/* 0531C8 */ int mpLineNextNonRightWall(int line_id);
 /* 053394 */ int mpLib_80053394_Floor(int line_id);
 /* 053448 */ int mpLib_80053448_Floor(int line_id);
 /* 0534FC */ int mpLib_800534FC_Floor(int line_id);
