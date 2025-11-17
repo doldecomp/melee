@@ -423,7 +423,7 @@ union ftKb_MotionVars {
         /* fp+23AC */  Vec3 x6C;
         /* fp+23B8 */  Vec3 x78;
         /* fp+23C4 */ float x84;
-        /*fp+23C8 */ float x88[8];
+        /*fp+23C8 */ float x88[9];
     } speciallw;
 };
 
