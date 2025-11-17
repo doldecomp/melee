@@ -5,6 +5,7 @@
 #include "cm/camera.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
+#include "gr/grzakogenerator.h"
 
 void grHomeRun_8021C750(bool arg) {}
 
@@ -12,7 +13,10 @@ void grHomeRun_8021C750(bool arg) {}
 
 void grHomeRun_8021C7FC(void) {}
 
-/// #grHomeRun_8021C800
+void grHomeRun_8021C800(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grHomeRun_8021C824(void)
 {

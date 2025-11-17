@@ -1,6 +1,10 @@
 #include "grbigblueroute.h"
 
+#include "gr/inlines.h"
+
 #include <platform.h>
+
+#include "baselib/memory.h"
 
 /// #grBigBlueRoute_8020B864
 
@@ -72,7 +76,11 @@ bool grBigBlueRoute_8020C1D4(Ground_GObj* arg)
 
 /// #grBigBlueRoute_8020C1DC
 
-/// #grBigBlueRoute_8020C210
+void grBigBlueRoute_8020C210(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_Free((void*) gp->gv.corneria.xC8);
+}
 
 /// #grBigBlueRoute_8020C238
 
