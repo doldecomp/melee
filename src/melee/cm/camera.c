@@ -1815,7 +1815,46 @@ void Camera_8002C010(f32 farg0, f32 farg1)
 
 /// #Camera_8002DDC4
 
-/// #Camera_8002DFE4
+s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest, CameraTransformState* transform)
+{
+    Vec3 sp14;
+    f32 var_f31;
+    s32 var_r31;
+
+    var_r31 = 0;
+    switch (cm_80452C68.x341_b5_b6) {
+    case 0:
+        var_r31 = 1;
+        break;
+    case 1:
+        if (cm_80452C68.x378.s32 == cm_80452C68.x37C) {
+            var_r31 = 1;
+        } else {
+            var_f31 = cm_80452C68.x378.s32 / (f32) cm_80452C68.x37C;
+        }
+        break;
+    case 2:
+        if (cm_80452C68.x378.f32 >= 1.0f) {
+            var_r31 = 1;
+        } else {
+            var_f31 = cm_80452C68.x378.f32;
+        }
+        break;
+    }
+    if (var_r31 != 0) {
+        transform->interest = *interest;
+
+    } else {
+        lbVector_Diff(interest, arg0, &sp14);
+        sp14.x *= var_f31;
+        sp14.y *= var_f31;
+        sp14.z *= var_f31;
+        lbVector_Add(&sp14, arg0);
+        transform->interest = sp14;
+    }
+    return var_r31;
+}
+
 
 s32 Camera_8002E158(f32* arg0, f32 farg0, f32 farg1, f32 farg2)
 {
