@@ -329,6 +329,14 @@ struct grCorneria_GroundVars {
     HSD_JObj* x12C;
 };
 
+struct grGreatBay_GroundVars {
+    u8 _0[0x10];
+    u32 x10;
+    s32 x14;
+    u32 x18;
+    f32 x1C;
+};
+
 struct grIceMt_GroundVars {
     /* +0 gp+C4 */ HSD_GObj* xC4;
     /* +0 gp+C4 */ HSD_GObj* xC6;
@@ -556,7 +564,7 @@ struct grFourside_GroundVars {
 };
 
 struct grGreens_GroundVars {
-    /*  +0 gp+C4 */  struct {
+    /*  +0 gp+C4 */ struct {
         u8 b0 : 1;
         u8 b1 : 1;
         u8 b2 : 1;
@@ -684,6 +692,7 @@ struct Ground {
             char pad_0[0x204 - 0xC4];
             struct grBigBlue_GroundVars bigblue;
             struct grCorneria_GroundVars corneria;
+            struct grGreatBay_GroundVars greatbay;
             struct grFigureGet_GroundVars figureget;
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;

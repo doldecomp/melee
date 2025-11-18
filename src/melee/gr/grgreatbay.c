@@ -1,5 +1,7 @@
 #include "grgreatbay.h"
 
+#include "placeholder.h"
+
 #include <platform.h>
 
 #include "baselib/psstructs.h"
@@ -266,7 +268,19 @@ bool grGreatBay_801F55F8(Ground_GObj* gobj)
 
 /// #grGreatBay_801F5600
 
-/// #fn_801F5914
+void fn_801F5914(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,
+                 enum mpLib_GroundEnum arg4, f32 farg0)
+{
+    s32 temp_r0;
+    PAD_STACK(12);
+
+    temp_r0 = arg2->x34_flags.b1234;
+    if (temp_r0 == 1 || (s32) temp_r0 == 2 || temp_r0 == 3) {
+        arg0->gv.greatbay.x10 = ((u32) arg2->env_flags & 0x03000000);
+        arg0->gv.greatbay.x14 = (arg0->gv.greatbay.x14 + 1);
+        arg0->gv.greatbay.x1C += arg3 / 100.0f;
+    }
+}
 
 void grGreatBay_801F5988(Ground_GObj* gobj)
 {
