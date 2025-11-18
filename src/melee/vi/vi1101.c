@@ -1,5 +1,7 @@
 #include "vi1101.static.h"
 
+#include "vi.h"
+
 /// #un_8031F294
 
 /// #fn_8031F548
@@ -10,7 +12,10 @@
 
 /// #un_8031F714_OnEnter
 
-/// #un_8031F960_OnFrame
+void un_8031F960_OnFrame(void)
+{
+    vi_8031CAAC();
+}
 
 void un_8031F980(int arg0, int arg1)
 {

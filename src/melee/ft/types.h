@@ -832,10 +832,12 @@ typedef struct itPickup {
 } itPickup;
 
 typedef struct {
-    HSD_Joint* joint;
-    HSD_MatAnimJoint* x4;
-    u8 padding[0x0C];
-    HSD_Archive* x14_archive;
+    /*  +0 */ HSD_Joint* joint;
+    /*  +4 */ HSD_MatAnimJoint* x4;
+    /*  +8 */ u32 pad_x8; // Probably a pointer.
+    /*  +C */ u32 pad_xC;
+    /* +10 */ u32 pad_x10;
+    /* +14 */ HSD_Archive* x14_archive;
 } UnkCostumeStruct;
 
 struct UnkCostumeList {
@@ -1282,7 +1284,7 @@ struct Fighter {
     /*  fp+6E4 */ Vec3 x6E4;
     /*  fp+6F0 */ CollData coll_data;
     /*  fp+88C */ s32 ecb_lock;
-    /*  fp+890 */ CameraBox* x890_cameraBox;
+    /*  fp+890 */ CmSubject* x890_cameraBox;
     /*  fp+894 */ float cur_anim_frame;
     /*  fp+898 */ float x898_unk;
     /*  fp+89C */ float frame_speed_mul;
@@ -1574,8 +1576,7 @@ struct Fighter {
             u8 throw_flags_b7 : 1;
         };
     };
-    /* fp+2214 */ float x2214;
-
+    /* fp+2214 */ float cmd_timer;
     /* fp+2218:0 */ u8 allow_interrupt : 1;
     /* fp+2218:1 */ u8 x2218_b1 : 1;
     /* fp+2218:2 */ u8 x2218_b2 : 1;

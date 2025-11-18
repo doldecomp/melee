@@ -2,6 +2,8 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "ft/forward.h"
+#include "lb/forward.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
@@ -9,12 +11,14 @@
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ft_0DF0.h"
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_09F7.h"
 #include "lb/inlines.h"
@@ -221,151 +225,140 @@ Offset X
 Range Z
 Range Y
 Range X
-
-
-
-ftCo_8009F834 args:
-
-gobj
-gfx_id
-bone
-use_common_bone_id
-destroy_on_state_change
-offset
-range
 */
 
+/// @brief Spawns GFX
 void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float unk;
     Vec3 offset;
     Vec3 range;
-    // permuter jank?
+    int bone;
+    int use_common_bone_id;
+    int destroy_on_state_change;
+    u32 gfx_id;
     {
-        CommandInfo* new_var;
         if (!fp->invisible) {
-            int bone;
-            if (cmd->u->test1.useUnkBone) {
+            if (cmd->u->spawn_gfx_0.useUnkBone) {
                 bone = fp->ft_data->x8->x12;
             } else {
-                bone = cmd->u->test1.boneId;
+                bone = cmd->u->spawn_gfx_0.boneId;
             }
-            {
-                int use_common_bone_id = cmd->u->test1.useCommonBoneIDs;
-                int destroy_on_state_change =
-                    cmd->u->test1.destroyOnStateChange;
-                gmScriptEventUpdatePtr((new_var = cmd)->u, struct test1);
-                {
-                    int gfx_id = new_var->u->test2.gfxID;
-                    unk = new_var->u->test2.unkFloat;
-                    gmScriptEventUpdatePtr(new_var->u, struct test2);
-                    {
-                        offset.z = (1 / 256.0f) * new_var->u->test3.offsetZ;
-                        offset.y = (1 / 256.0f) * new_var->u->test3.offsetY;
-                        gmScriptEventUpdatePtr(new_var->u, struct test3);
-                        offset.x = (1 / 256.0f) * new_var->u->test4.offsetX;
-                        range.z = (1 / 256.0f) * new_var->u->test4.rangeZ;
-                        gmScriptEventUpdatePtr(new_var->u, struct test4);
-                        range.y = (1 / 256.0f) * new_var->u->test5.rangeY;
-                        range.x = (1 / 256.0f) * new_var->u->test5.rangeX;
-                        gmScriptEventUpdatePtr(new_var->u, struct test5);
-                        ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
-                                      destroy_on_state_change, &offset, &range,
-                                      unk);
-                    }
-                }
-            }
+            use_common_bone_id = cmd->u->spawn_gfx_0.useCommonBoneIDs;
+            destroy_on_state_change =
+                cmd->u->spawn_gfx_0.destroyOnStateChange;
+
+            NEXT_CMD(cmd);
+            gfx_id = cmd->u->spawn_gfx_1.gfxID;
+            unk = cmd->u->spawn_gfx_1.unkFloat;
+
+            NEXT_CMD(cmd);
+            /// @todo i believe they are actually read in reverse order, maybe
+            // ftCo_8009F834 also reads them in reverse.
+            // double check this in-game eventually...
+            offset.x = (1 / 256.0f) * cmd->u->spawn_gfx_2.offsetZ;
+            offset.y = (1 / 256.0f) * cmd->u->spawn_gfx_2.offsetY;
+
+            NEXT_CMD(cmd);
+            offset.z = (1 / 256.0f) * cmd->u->spawn_gfx_3.offsetX;
+            range.x = (1 / 256.0f) * cmd->u->spawn_gfx_3.rangeZ;
+
+            NEXT_CMD(cmd);
+            range.y = (1 / 256.0f) * cmd->u->spawn_gfx_4.rangeY;
+            range.z = (1 / 256.0f) * cmd->u->spawn_gfx_4.rangeX;
+
+            NEXT_CMD(cmd);
+            ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
+                            destroy_on_state_change, &offset, &range,
+                            unk);
         } else {
             ftAction_800711DC(gobj, cmd);
         }
     }
 }
 
-/// Skip GFX Spawn
+/// @brief Skips GFX Spawn
 void ftAction_800711DC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 5);
 }
 
+/// @brief Spawns Hitboxes
 void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // char* temp_r3;
-    // char part;
-    // u32 temp_r4_2;
-    // char* cmd_x8 = cmd->x8;
-    // Fighter* fp = gobj->user_data;
-    // HitCapsule* hit;
-    // PAD_STACK(16);
+    Fighter* fp;
+    HitCapsule* hitbox;
+    u32 hit_group;
+    u32 idx;
+    struct spawn_hitbox_skip* skip;
+    PAD_STACK(8);
 
-    // if ((((u8) M2C_FIELD(cmd_x8, u8*, 0xF) >> 3U) & 1) &&
-    //     fp->x1064_thrownHitbox.owner == NULL)
-    // {
-    //     ftAction_800715EC(gobj, cmd);
-    // } else {
-    //     hit = &fp->x914[(((u16) M2C_FIELD(cmd_x8, u16*, 0) >> 7U) & 7)];
-    //     temp_r4_2 = ((u8) M2C_FIELD(cmd_x8, u8*, 1) >> 4U) & 7;
-    //     if (hit->state == HitCapsule_Disabled || hit->x4 != temp_r4_2) {
-    //         hit->x4 = temp_r4_2;
-    //         hit->state = HitCapsule_Enabled;
-    //         fp->x2219_b3 = 1;
-    //         ftColl_800768A0(fp, hit);
-    //     }
-    //     temp_r3 = cmd->x8;
-    //     part = (s8) ((u32) M2C_FIELD(temp_r3, u32*, 0) >> 0xB);
-    //     if (((u8) M2C_FIELD(temp_r3, u8*, 2) >> 2U) & 1) {
-    //         hit->jobj = fp->parts[ftParts_GetBoneIndex(fp, part)].joint;
-    //     } else {
-    //         hit->jobj = fp->parts[(int) part].joint;
-    //     }
-    //     ftColl_8007ABD0(hit, M2C_FIELD(cmd->x8, u16*, 2) & 0x3FF, gobj);
-    //     ++cmd->u;
-    //     hit->scale = 0.003906f * M2C_FIELD(cmd->x8, u16*, 0);
-    //     hit->b_offset.x = 0.003906f * M2C_FIELD(cmd->x8, s16*, 2);
-    //     ++cmd->u;
-    //     // hit->b_offset.y = 0.003906f * cmd->x8_bits->x0;
-    //     // hit->b_offset.z = 0.003906f * cmd->x8_bits->x2;
-    //     ++cmd->u;
-    //     ftColl_8007AC9C(hit, (M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF,
-    //                     gobj);
-    //     hit->x24 = ((u32) M2C_FIELD(cmd->x8, u32*, 0) >> 0xEU) & 0x1FF;
-    //     hit->x28 = (M2C_FIELD(cmd->x8, u16*, 2) >> 5U) & 0x1FF;
-    //     // hit->x43_b0 = cmd->x8_bits->x3_b3;
-    //     // hit->x43_b1 = cmd->x8_bits->x3_b5;
-    //     // hit->x40_b0 = cmd->x8_bits->x3_b6;
-    //     // hit->x40_b1 = cmd->x8_bits->x3_b7;
-    //     ++cmd->u;
-    //     hit->x2C = ((u16) M2C_FIELD(cmd->x8, u16*, 0) >> 7U) & 0x1FF;
-    //     hit->element = ((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 2U) & 0x1F;
-    //     M2C_FIELD(hit, int*, 0x34) =
-    //         (int) ((int) ((M2C_FIELD(cmd->x8, u32*, 0) << 0xE) & 0xFF800000)
-    //         >>
-    //                0x18);
-    //     hit->sfx_severity = ((u16) M2C_FIELD(cmd->x8, u16*, 2) >> 7U) & 7;
-    //     hit->sfx_kind = ((u8) M2C_FIELD(cmd->x8, u8*, 3) >> 2U) & 0x1F;
-    //     // hit->x40_b2 = cmd->x8_bits->x3_b7;
-    //     // hit->x40_b3 = cmd->x8_bits->x3_b6;
-    //     ++cmd->u;
-    //     hit->x42_b5 = 1;
-    //     hit->x42_b7 = 1;
-    //     hit->x41_b4 = 0;
-    //     hit->x41_b6 = 0;
-    //     hit->x41_b5 = 0;
-    //     hit->x42_b0 = 0;
-    //     hit->x42_b4 = 0;
-    //     hit->x41_b7 = 0;
-    //     hit->hit_grabbed_victim_only = cmd->u->unk1.unk2;
-    //     hit->x42_b1 = 1;
-    //     hit->x42_b2 = 0;
-    //     hit->x43_b2 = 0;
-    //     if ((HSD_GObj_804D7838 != NULL) && (HSD_GObj_804D7838->s_link > 9U))
-    //     {
-    //         ftColl_8007AD18(fp, hit);
-    //     }
-    // }
-    // ftCommon_80080484(fp);
+    fp = GET_FIGHTER(gobj);
+    /// @todo this matches but isnt pretty. maybe an inline/macro as
+    // we dont have enough stack in general?
+    skip = (struct spawn_hitbox_skip*)cmd->u;
+    if ((skip->xF_b4) && (fp->x1064_thrownHitbox.owner == NULL)) {
+        ftAction_800715EC(gobj, cmd);
+    }else {
+        hitbox = &fp->x914[cmd->u->create_hitbox_0.id];
+        hit_group = cmd->u->create_hitbox_0.hit_group;
+        if ((hitbox->state == HitCapsule_Disabled) || (hitbox->x4 != hit_group)) {
+            hitbox->x4 = hit_group;
+            hitbox->state = HitCapsule_Enabled;
+            fp->x2219_b3 = 1;
+            ftColl_800768A0(fp, hitbox);
+        }
+        idx = cmd->u->create_hitbox_0.bone;
+        if (cmd->u->create_hitbox_0.use_common_bone_ids) {
+            hitbox->jobj = fp->parts[ftParts_GetBoneIndex(fp, cmd->u->create_hitbox_0.bone)].joint;
+        } else {
+            hitbox->jobj = fp->parts[idx].joint;
+        }
+        ftColl_8007ABD0(hitbox, cmd->u->create_hitbox_0.damage, gobj);
+        NEXT_CMD(cmd);
+        hitbox->scale = (1 / 256.0f) * cmd->u->create_hitbox_1.size;
+        hitbox->b_offset.x = (1 / 256.0f) * cmd->u->create_hitbox_1.z_offset;
+        NEXT_CMD(cmd);
+        hitbox->b_offset.y = (1 / 256.0f) * cmd->u->create_hitbox_2.y_offset;
+        hitbox->b_offset.z = (1 / 256.0f) * cmd->u->create_hitbox_2.x_offset;
+        NEXT_CMD(cmd);
+        ftColl_8007AC9C(hitbox, cmd->u->create_hitbox_3.angle, gobj);
+        hitbox->x24 = cmd->u->create_hitbox_3.knockback_growth;
+        hitbox->x28 = cmd->u->create_hitbox_3.weight_set_knockback;
+        hitbox->x43_b0 = cmd->u->create_hitbox_3.item_hit_interaction;
+        hitbox->x43_b1 = cmd->u->create_hitbox_3.ignore_fighter_scale;
+        hitbox->x40_b0 = cmd->u->create_hitbox_3.clank;
+        hitbox->x40_b1 = cmd->u->create_hitbox_3.rebound;
+        NEXT_CMD(cmd);
+        hitbox->x2C = cmd->u->create_hitbox_4.base_knockback;
+        hitbox->element = cmd->u->create_hitbox_4.element;
+        hitbox->x34 = cmd->u->create_hitbox_4.shield_damage;
+        hitbox->sfx_severity = cmd->u->create_hitbox_4.hit_sfx_severity;
+        hitbox->sfx_kind = cmd->u->create_hitbox_4.hit_sfx_kind;
+        hitbox->x40_b2 = cmd->u->create_hitbox_4.hit_aerial;
+        hitbox->x40_b3 = cmd->u->create_hitbox_4.hit_grounded;
+        NEXT_CMD(cmd);
+        hitbox->x42_b5 = 1;
+        hitbox->x42_b7 = 1;
+        hitbox->x41_b4 = 0;
+        hitbox->x41_b6 = 0;
+        hitbox->x41_b5 = 0;
+        hitbox->x42_b0 = 0;
+        hitbox->x42_b4 = 0;
+        hitbox->x41_b7 = 0;
+        hitbox->hit_grabbed_victim_only = cmd->u->create_hitbox_5.x1_b4;
+        hitbox->x42_b1 = 1;
+        hitbox->x42_b2 = 0;
+        hitbox->x43_b2 = 0;
+        if ((HSD_GObj_804D7838 != NULL) && (HSD_GObj_804D7838->s_link > 9)) {
+            ftColl_8007AD18(fp, hitbox);
+        }
+    }
+    ftCommon_80080484(fp);
 }
 
+/// @brief Skips Hitbox Spawn
 void ftAction_800715EC(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 5);
@@ -380,7 +373,7 @@ void ftAction_800715EC(Fighter_GObj* gobj, CommandInfo* cmd)
   - name: Damage
     bitCount: 23
 */
-/// Adjust Hitbox Damage
+/// @brief Adjust Hitbox Damage
 void ftAction_8007162C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     HitCapsule* hit = &GET_FIGHTER(gobj)->x914[cmd->u->set_hitbox_damage.idx];
@@ -388,34 +381,39 @@ void ftAction_8007162C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/// @remarks after each CommandInfo function, there seems to be
+// a function that has the ability to skip it (ftAction_800715EC's usage)
+// unsure if theyre all actually called
 void ftAction_8007168C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    NEXT_CMD(cmd);
+    SKIP_CMD(cmd, 1);
 }
 
+/// @brief Adjusts Hitbox Scale
 void ftAction_8007169C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HitCapsule* hit = &fp->x914[cmd->u->set_hitbox_scale.idx];
-    hit->scale = 0.003906f * cmd->u->set_hitbox_scale.value;
+    hit->scale = (1 / 256.0f) * cmd->u->set_hitbox_scale.value;
     NEXT_CMD(cmd);
 }
 
 void ftAction_800716F8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    NEXT_CMD(cmd);
+    SKIP_CMD(cmd, 1);
 }
 
+/// @brief Sets Hitbox flags
 void ftAction_80071708(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HitCapsule* hit = &fp->x914[cmd->u->unk22.idx];
-    switch (cmd->u->unk22.type) {
+    HitCapsule* hit = &fp->x914[cmd->u->set_hitbox_x42_b57.idx];
+    switch (cmd->u->set_hitbox_x42_b57.type) {
     case 0:
-        hit->x42_b5 = cmd->u->unk22.value;
+        hit->x42_b5 = cmd->u->set_hitbox_x42_b57.value;
         break;
     case 1:
-        hit->x42_b7 = cmd->u->unk22.value;
+        hit->x42_b7 = cmd->u->set_hitbox_x42_b57.value;
         break;
     }
     NEXT_CMD(cmd);
@@ -423,18 +421,18 @@ void ftAction_80071708(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80071774(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    NEXT_CMD(cmd);
+    SKIP_CMD(cmd, 1);
 }
 
 void ftAction_80071784(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    ftColl_8007AFC8(gobj, cmd->u->unk2.hit_idx);
+    ftColl_8007AFC8(gobj, cmd->u->set_throw_flags.hit_idx);
     NEXT_CMD(cmd);
 }
 
 void ftAction_800717C8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    NEXT_CMD(cmd);
+    SKIP_CMD(cmd, 1);
 }
 
 void ftAction_800717D8(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -445,7 +443,7 @@ void ftAction_800717D8(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80071810(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    NEXT_CMD(cmd);
+    SKIP_CMD(cmd, 1);
 }
 
 /// Set one of #Fighter::cmd_vars
@@ -474,10 +472,10 @@ void ftAction_80071820(Fighter_GObj* gobj, CommandInfo* cmd)
 void ftAction_800718A4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    switch (cmd->u->unk2.hit_idx) {
+    switch (cmd->u->set_throw_flags.hit_idx) {
     case 0:
         fp->throw_flags_b3 = true;
-        fp->x2214 = cmd->timer;
+        fp->cmd_timer = cmd->timer;
         break;
     case 1:
         fp->throw_flags_b4 = true;
@@ -518,7 +516,7 @@ void ftAction_80071974(Fighter_GObj* gobj, CommandInfo* cmd)
 void ftAction_80071998(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    switch (cmd->u->unk7.unk1) {
+    switch (cmd->u->set_airborne_state.state) {
     case 0:
         ftCommon_8007D7FC(fp);
         break;
@@ -534,17 +532,17 @@ void ftAction_80071998(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80071A14(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    ftColl_8007B62C(gobj, cmd->u->unk7.unk1);
+    ftColl_8007B62C(gobj, cmd->u->set_airborne_state.state);
     NEXT_CMD(cmd);
 }
 
 void ftAction_80071A58(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    ftColl_8007B0C0(gobj, cmd->u->unk7.unk1);
+    ftColl_8007B0C0(gobj, cmd->u->set_airborne_state.state);
     NEXT_CMD(cmd);
 }
 
-/// Set hurt capsule state
+/// @brief Sets Hurt Capsule State
 void ftAction_80071A9C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     ftColl_8007B128(gobj, cmd->u->set_hurt_state.bone_idx,
@@ -552,11 +550,12 @@ void ftAction_80071A9C(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+/// @brief Sets Jab Combo
 void ftAction_80071AE8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!cmd->u->unk23.disabled || fp->x197C != NULL) {
+    if (!cmd->u->set_jab_combo.disabled || fp->x197C != NULL) {
         fp->x2218_b1 = true;
     }
     NEXT_CMD(cmd);
@@ -565,88 +564,57 @@ void ftAction_80071AE8(Fighter_GObj* gobj, CommandInfo* cmd)
 void ftAction_80071B28(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2218_b2 = cmd->u->unk24.unk0;
+    fp->x2218_b2 = cmd->u->set_jab_rapid.state;
     NEXT_CMD(cmd);
 }
 
 void ftAction_80071B50(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // int temp_r4_2;
-    // char* temp_r5;
-    // char* temp_r6;
-    // char temp_r8;
-    // u8 temp_r5_2;
-    // u8 temp_r6_2;
-    // char* cmd_x8 = cmd->x8;
-    // Fighter* fp = gobj->user_data;
+    Fighter* fp;
+    u32 sfx;
+    u8 vol;
+    u8 pan;
+    s32 behavior;
 
-    // PAD_STACK(8);
-    // temp_r8 = (s8) ((u16) *cmd_x8 >> 2U);
-    // cmd->x8 = cmd_x8 + 4;
-    // if (temp_r8 < 0xA) {
-    //     if (temp_r8 < 7) {
-    //         if (temp_r8 < 0) {
-    //         } else {
-    //             temp_r5 = cmd->x8;
-    //             temp_r4_2 = M2C_FIELD(temp_r5, int*, 0);
-    //             cmd->x8 = temp_r5 + 4;
-    //             temp_r6 = cmd->x8;
-    //             temp_r5_2 = M2C_FIELD(temp_r6, u8*, 2);
-    //             temp_r6_2 = M2C_FIELD(temp_r6, u8*, 3);
-    //             switch (temp_r8) {
-    //             case 0:
-    //                 ft_PlaySFX(fp, temp_r4_2, (int) temp_r5_2,
-    //                            (int) temp_r6_2);
-    //                 break;
-    //             case 1:
-    //                 ft_80088478(fp, temp_r4_2, (int) temp_r5_2,
-    //                             (int) temp_r6_2);
-    //                 break;
-    //             case 2:
-    //                 ft_800881D8(fp, (u32) temp_r4_2, (u32) temp_r5_2,
-    //                             (u32) temp_r6_2);
-    //                 break;
-    //             case 3:
-    //                 ft_80088510(fp, temp_r4_2, temp_r5_2, temp_r6_2);
-    //                 break;
-    //             case 4:
-    //                 ft_800885A8(fp, temp_r4_2, temp_r5_2, temp_r6_2);
-    //                 break;
-    //             case 5:
-    //                 ft_80088640(fp, temp_r4_2, (int) temp_r5_2,
-    //                             (int) temp_r6_2);
-    //                 break;
-    //             case 6:
-    //                 ft_80088328(fp, temp_r4_2, (int) temp_r5_2,
-    //                             (int) temp_r6_2);
-    //                 break;
-    //             }
-    //         }
-    //     }
-    // } else if (temp_r8 < 0x10) {
-    //     ++cmd->u;
-    //     switch (temp_r8) { /* switch 1; irregular */
-    //     case 10:           /* switch 1 */
-    //         ft_80088828(fp);
-    //         break;
-    //     case 11: /* switch 1 */
-    //         ft_80088770(fp);
-    //         break;
-    //     case 12: /* switch 1 */
-    //         ft_80088884(fp);
-    //         break;
-    //     case 13: /* switch 1 */
-    //         ft_800888E0(fp);
-    //         break;
-    //     case 14: /* switch 1 */
-    //         ft_8008893C(fp);
-    //         break;
-    //     case 15: /* switch 1 */
-    //         ft_800887CC(fp);
-    //         break;
-    //     }
-    // }
-    // ++cmd->u;
+    fp = GET_FIGHTER(gobj);
+    behavior = cmd->u->sound_effect_0.behavior;
+    NEXT_CMD(cmd);
+
+    switch (behavior) {
+        case 0: case 1: case 2: case 3: case 4: case 5: case 6:
+            sfx = cmd->u->sound_effect_1.sfx_id;
+            NEXT_CMD(cmd);
+            vol = cmd->u->sound_effect_2.volume;
+            pan = cmd->u->sound_effect_2.panning;
+
+        switch (behavior) {
+            case 0: ft_PlaySFX(fp, sfx, vol, pan); break;
+            case 1: ft_80088478(fp, sfx, vol, pan); break;
+            case 2: ft_800881D8(fp, sfx, vol, pan); break;
+            case 3: ft_80088510(fp, sfx, vol, pan); break;
+            case 4: ft_800885A8(fp, sfx, vol, pan); break;
+            case 5: ft_80088640(fp, sfx, vol, pan); break;
+            case 6: ft_80088328(fp, sfx, vol, pan); break;
+        }
+        break;
+
+        case 10: case 11: case 12: case 13: case 14: case 15:
+            NEXT_CMD(cmd);
+            switch (behavior) {
+                case 10: ft_80088828(fp); break;
+                case 11: ft_80088770(fp); break;
+                case 12: ft_80088884(fp); break;
+                case 13: ft_800888E0(fp); break;
+                case 14: ft_8008893C(fp); break;
+                case 15: ft_800887CC(fp); break;
+            }
+            break;
+
+        default:
+            break;
+    }
+
+    NEXT_CMD(cmd);
 }
 
 void ftAction_80071CA4(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -669,12 +637,12 @@ void ftAction_80071CCC(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80071D30(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    NEXT_CMD(cmd);
+    SKIP_CMD(cmd, 1);
 }
 
 void ftAction_80071D40(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    ftParts_80074B0C(gobj, cmd->u->unk25.unk0, cmd->u->unk25.unk1);
+    ftParts_80074B0C(gobj, cmd->u->set_dobj_flags.idx, cmd->u->set_dobj_flags.value);
     NEXT_CMD(cmd);
 }
 
@@ -693,19 +661,19 @@ void ftAction_80071DCC(Fighter_GObj* gobj, CommandInfo* cmd)
 void ftAction_80071E04(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    HitCapsule* hit = &fp->xDF4[cmd->u->unk26_0.idx];
-    ftColl_8007ABD0(hit, cmd->u->unk26_0.unk0, gobj);
-    ++cmd->u;
-
-    ftColl_8007AC9C(hit, cmd->u->unk26_1.unk0, gobj);
-    hit->x24 = cmd->u->unk26_1.hit_x24;
-    hit->x28 = cmd->u->unk26_1.hit_x28;
+    HitCapsule* hit = &fp->xDF4[cmd->u->set_throw_hitbox_0.idx];
+    ftColl_8007ABD0(hit, cmd->u->set_throw_hitbox_0.damage, gobj);
     NEXT_CMD(cmd);
 
-    hit->x2C = cmd->u->unk26_2.hit_x2C;
-    hit->element = cmd->u->unk26_2.element;
-    hit->sfx_severity = cmd->u->unk26_2.sfx_severity;
-    hit->sfx_kind = cmd->u->unk26_2.sfx_kind;
+    ftColl_8007AC9C(hit, cmd->u->set_throw_hitbox_1.unk0, gobj);
+    hit->x24 = cmd->u->set_throw_hitbox_1.hit_x24;
+    hit->x28 = cmd->u->set_throw_hitbox_1.hit_x28;
+    NEXT_CMD(cmd);
+
+    hit->x2C = cmd->u->set_throw_hitbox_2.hit_x2C;
+    hit->element = cmd->u->set_throw_hitbox_2.element;
+    hit->sfx_severity = cmd->u->set_throw_hitbox_2.sfx_severity;
+    hit->sfx_kind = cmd->u->set_throw_hitbox_2.sfx_kind;
     NEXT_CMD(cmd);
 }
 
@@ -724,122 +692,87 @@ void ftAction_80071F34(Fighter_GObj* gobj, CommandInfo* cmd)
 void ftAction_80071F78(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x221E_b4 = cmd->u->unk28.value;
+    fp->x221E_b4 = cmd->u->set_article_vis.value;
     NEXT_CMD(cmd);
 }
 
 void ftAction_80071FA0(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x221E_b5 = cmd->u->unk29.value;
+    fp->x221E_b5 = cmd->u->set_fighter_vis.value;
     NEXT_CMD(cmd);
 }
 
 void ftAction_80071FC8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // int var_r27 = M2C_ERROR(saved_reg_r27);
-    // char* cmd_x8 = cmd->x8;
-    // void* fp = gobj->user_data;
-    // u8 temp_r30 = (u8) ((u16) M2C_FIELD(cmd_x8, u16*, 0) >> 2U);
+    /// @todo way too much stack
+    Fighter* fp;
+    s32 rand;
+    s32 sfx_id;
+    u32 behavior;
+    u8 panning;
+    u8 volume;
 
-    // PAD_STACK(8);
-    // cmd->x8 = cmd_x8 + 4;
-    // {
-    //     u8 temp_r29 = (u8) ((u32) M2C_FIELD(cmd_x8, u16*, 0) >> 0xAU);
-    //     u32 temp_r28 = ((u16) M2C_FIELD(cmd_x8, u16*, 2) >> 6U) & 0xF;
-    //     int temp_r3 = HSD_Randi(M2C_FIELD(cmd_x8, u8*, 3) & 0x3F);
-    //     switch (temp_r3) { /* switch 1; irregular */
-    //     case 0:            /* switch 1 */
-    //     {
-    //         char* cmd_x8 = cmd->x8;
-    //         var_r27 = *cmd_x8;
-    //         cmd->x8 = cmd_x8 + 4;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         break;
-    //     }
-    //     case 1: /* switch 1 */
-    //         ++cmd->u;
-    //         {
-    //             char* cmd_x8 = cmd->x8;
-    //             var_r27 = *cmd_x8;
-    //             cmd->x8 = cmd_x8 + 4;
-    //         }
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         break;
-    //     case 2: /* switch 1 */
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         {
-    //             char* cmd_x8 = cmd->x8;
-    //             var_r27 = *cmd_x8;
-    //             cmd->x8 = cmd_x8 + 4;
-    //         }
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         break;
-    //     case 3: /* switch 1 */
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         {
-    //             char* cmd_x8 = cmd->x8;
-    //             var_r27 = *cmd_x8;
-    //             cmd->x8 = cmd_x8 + 4;
-    //         }
-    //         ++cmd->u;
-    //         break;
-    //     case 4: /* switch 1 */
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         {
-    //             char* cmd_x8 = cmd->x8;
-    //             var_r27 = *cmd_x8;
-    //             cmd->x8 = cmd_x8 + 4;
-    //         }
-    //         break;
-    //     case 5: /* switch 1 */
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         ++cmd->u;
-    //         var_r27 = *cmd->x8;
-    //         break;
-    //     }
-    //     ++cmd->u;
-    //     switch (temp_r28) {
-    //     case 0:
-    //         ft_PlaySFX(fp, var_r27, (int) temp_r30, (int) temp_r29);
-    //         return;
-    //     case 1:
-    //         ft_80088478(fp, var_r27, (int) temp_r30, (int) temp_r29);
-    //         return;
-    //     case 2:
-    //         ft_800881D8(fp, (u32) var_r27, (u32) temp_r30, (u32) temp_r29);
-    //         return;
-    //     case 3:
-    //         ft_80088510(fp, var_r27, temp_r30, temp_r29);
-    //         return;
-    //     case 4:
-    //         ft_800885A8(fp, var_r27, temp_r30, temp_r29);
-    //         return;
-    //     case 5:
-    //         ft_80088640(fp, var_r27, (int) temp_r30, (int) temp_r29);
-    //         return;
-    //     case 6:
-    //         ft_80088328(fp, var_r27, (int) temp_r30, (int) temp_r29);
-    //     /* fallthrough */
-    //     default:
-    //         return;
-    //     }
-    // }
+    fp = GET_FIGHTER(gobj);
+    volume = cmd->u->pseudo_random_sfx_0.volume;
+    panning = cmd->u->pseudo_random_sfx_0.panning;
+    behavior = cmd->u->pseudo_random_sfx_0.behavior;
+    rand = HSD_Randi(cmd->u->pseudo_random_sfx_0.random_range);
+    switch (rand) {
+        case 0:
+            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+            SKIP_CMD(cmd, 5);
+            break;
+        case 1:
+            NEXT_CMD(cmd);
+            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+            SKIP_CMD(cmd, 4);
+            break;
+        case 2:
+            SKIP_CMD(cmd, 2);
+            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+            SKIP_CMD(cmd, 3);
+            break;
+        case 3:
+            SKIP_CMD(cmd, 3);
+            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+            SKIP_CMD(cmd, 2);
+            break;
+        case 4:
+            SKIP_CMD(cmd, 4);
+            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+            NEXT_CMD(cmd);
+            break;
+        case 5:
+            SKIP_CMD(cmd, 5);
+            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+            break;
+    }
+    NEXT_CMD(cmd);
+    switch (behavior) {
+        case 0:
+            ft_PlaySFX(fp, sfx_id, volume, panning);
+            return;
+        case 1:
+            ft_80088478(fp, sfx_id, volume, panning);
+            return;
+        case 2:
+            ft_800881D8(fp, sfx_id, volume, panning);
+            return;
+        case 3:
+            ft_80088510(fp, sfx_id, volume, panning);
+            return;
+        case 4:
+            ft_800885A8(fp, sfx_id, volume, panning);
+            return;
+        case 5:
+            ft_80088640(fp, sfx_id, volume, panning);
+            return;
+        case 6:
+            ft_80088328(fp, sfx_id, volume, panning);
+        default:
+            return;
+        }
 }
 
 void ftAction_800722C8(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -849,133 +782,111 @@ void ftAction_800722C8(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // int spC;
-    // int sp8;
-    // float var_f31;
-    // int temp_r0_2;
-    // int temp_r0_3;
-    // int temp_r30;
-    // int temp_r5;
-    // char* temp_r4;
-    // u8 temp_r0;
-    // u8 temp_r29;
-    // Fighter* temp_r31;
+    Fighter* fp;
+    u8 pitch_select;
+    s32 spC;
+    s32 sp8;
+    enum FighterKind ft_kind;
+    s32 sfx;
+    u32 sfx_base;
+    u8 behavior;
+    f32 direction;
+    s32 temp_r8;
+    s32 temp_r9;
+    s32 temp_r10;
 
-    // var_f31 = M2C_ERROR(saved_reg_f31);
-    // temp_r4 = cmd->x8;
-    // temp_r31 = gobj->user_data;
-    // temp_r0 = M2C_FIELD(temp_r4, u8*, 3);
-    // temp_r29 = M2C_FIELD(temp_r4, u8*, 2);
-    // temp_r30 = M2C_FIELD(temp_r4, u16*, 0) & 0x3FF;
-    // switch ((int) temp_r0) { /* switch 1; irregular */
-    // case 0:                  /* switch 1 */
-    //     var_f31 = 0.0f;
-    //     break;
-    // case 1: /* switch 1 */
-    //     var_f31 = 1.0f;
-    //     break;
-    // case 2: /* switch 1 */
-    //     var_f31 = -1.0f;
-    //     break;
-    // case 3: /* switch 1 */
-    //     var_f31 = M2C_FIELD(temp_r31, float*, 0x2C);
-    //     break;
-    // }
-    // ++cmd->u;
-    // temp_r5 = ft_80087D0C((Fighter*) temp_r31, M2C_FIELD(cmd->x8, int*, 0));
-    // ++cmd->u;
-    // ++cmd->u;
-    // ++cmd->u;
-    // switch (temp_r29) {
-    // case 0:
-    //     sp8 = 0;
-    //     spC = -1;
-    //     M2C_FIELD(temp_r31, int*, 0x2160) = lbAudioAx_800264E4(
-    //         lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //     return;
-    // case 1:
-    //     sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-    //           (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x36;
-    //     spC = -1;
-    //     M2C_FIELD(temp_r31, int*, 0x214C) = lbAudioAx_800264E4(
-    //         lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //     return;
-    // case 2:
-    //     if (!(((u8) M2C_FIELD(temp_r31, u8*, 0x2225) >> 1U) & 1)) {
-    //         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-    //               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) +
-    //               0x1E;
-    //         spC = -1;
-    //         M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(
-    //             lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //         return;
-    //     }
-    //     temp_r0_2 = M2C_FIELD(temp_r31, int*, 4);
-    //     if (temp_r0_2 != 0x18) {
-    //         if (temp_r0_2 < 0x18) {
-    //             if (temp_r0_2 != 0xD) {
-    //                 return;
-    //             }
-    //             goto block_21;
-    //         }
-    //     default:
-    //         return;
-    //     }
-    // block_21:
-    //     sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-    //           (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x1E;
-    //     spC = -1;
-    //     M2C_FIELD(temp_r31, int*, 0x2144) = lbAudioAx_800264E4(
-    //         lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //     return;
-    // case 3:
-    //     sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-    //           (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x42;
-    //     spC = -1;
-    //     M2C_FIELD(temp_r31, int*, 0x2150) = lbAudioAx_800264E4(
-    //         lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //     return;
-    // case 4:
-    //     sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-    //           (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x4E;
-    //     spC = -1;
-    //     M2C_FIELD(temp_r31, int*, 0x2154) = lbAudioAx_800264E4(
-    //         lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //     return;
-    // case 5:
-    //     sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-    //           (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) + 0x5A;
-    //     spC = -1;
-    //     M2C_FIELD(temp_r31, int*, 0x2158) = lbAudioAx_800264E4(
-    //         lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //     return;
-    // case 6:
-    //     if (!(((u8) M2C_FIELD(temp_r31, u8*, 0x2225) >> 1U) & 1)) {
-    //         sp8 = M2C_FIELD(temp_r31, u8*, 0xC) +
-    //               (((u8) M2C_FIELD(temp_r31, u8*, 0x221F) >> 3U) & 1) +
-    //               0x2A;
-    //         spC = -1;
-    //         M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(
-    //             lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //         return;
-    //     }
-    //     temp_r0_3 = M2C_FIELD(temp_r31, int*, 4);
-    //     if (temp_r0_3 != 0x18) {
-    //         if (temp_r0_3 < 0x18) {
-    //             if (temp_r0_3 != 0xD) {
-    //                 return;
-    //             }
-    //             goto block_31;
-    //         }
-    //     } else {
-    //     block_31:
-    //         sp8 = temp_r31->player_id + temp_r31->x221F_b4 + 0x2A;
-    //         spC = -1;
-    //         M2C_FIELD(temp_r31, int*, 0x2148) = lbAudioAx_800264E4(
-    //             lbAudioAx_800263E8(gobj, temp_r30, temp_r5, 0x7F, var_f31));
-    //     }
-    //     break;
-    // }
+    fp = GET_FIGHTER(gobj);
+    pitch_select = cmd->u->stage_sfx_0.pitch_select;
+    sfx_base = cmd->u->stage_sfx_0.sfx_base;
+    behavior = cmd->u->stage_sfx_0.x2_b0_7;
+
+    switch (pitch_select) {
+        case 0:
+            direction = 0.0f;
+            break;
+        case 1:
+            direction = 1.0f;
+            break;
+        case 2:
+            direction = -1.0f;
+            break;
+        case 3:
+            direction = fp->facing_dir;
+            break;
+    }
+
+    NEXT_CMD(cmd);
+    sfx = ft_80087D0C(fp, cmd->u->stage_sfx_1.sfx_id);
+    NEXT_CMD(cmd);
+    temp_r10 = cmd->u->stage_sfx_2.x2_b0_15;
+    NEXT_CMD(cmd);
+    temp_r8 = cmd->u->stage_sfx_3.x2_b0_7;
+    temp_r9 = cmd->u->stage_sfx_3.x3_b0_7;
+    NEXT_CMD(cmd);
+
+    switch (sfx_base) {
+        case 0:
+            sp8 = 0;
+            spC = -1;
+            fp->x2160 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            break;
+
+        case 1:
+            sp8 = fp->player_id + 0x36 + fp->x221F_b4;
+            spC = -1;
+            fp->x214C = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            break;
+
+        case 2:
+            if (!fp->x2225_b0) {
+                sp8 = fp->player_id + 0x1E + fp->x221F_b4;
+                spC = -1;
+                fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+                break;
+            }
+            /// @todo cant get the b instruction to generate here and in case 6
+            ft_kind = fp->kind;
+            if (ft_kind == FTKIND_GAMEWATCH || (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS))) {
+                sp8 = fp->player_id + 0x1E + fp->x221F_b4;
+                spC = -1;
+                fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            }
+            break;
+
+        case 3:
+            sp8 = fp->player_id + 0x42 + fp->x221F_b4;
+            spC = -1;
+            fp->x2150 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            break;
+
+        case 4:
+            sp8 = fp->player_id + 0x4E + fp->x221F_b4;
+            spC = -1;
+            fp->x2154 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            break;
+
+        case 5:
+            sp8 = fp->player_id + 0x5A + fp->x221F_b4;
+            spC = -1;
+            fp->x2158 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            break;
+
+        case 6:
+            if (!fp->x2225_b0) {
+                sp8 = fp->player_id + 0x2A + fp->x221F_b4;
+                spC = -1;
+                fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+                break;
+            }
+
+            ft_kind = fp->kind;
+            if (ft_kind == FTKIND_GAMEWATCH || (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS))) {
+                sp8 = fp->player_id + 0x2A + fp->x221F_b4;
+                spC = -1;
+                fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            }
+            break;
+    }
 }
 
 void ftAction_800726C0(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -985,9 +896,9 @@ void ftAction_800726C0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_800726F4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    ftAnim_800704F0(gobj, cmd->u->unk30.i0, cmd->u->unk30.f);
-    if (cmd->u->unk30.b) {
-        ftAnim_800704F0(gobj, cmd->u->unk30.i1, cmd->u->unk30.f);
+    ftAnim_800704F0(gobj, cmd->u->set_tex_anim.idx, cmd->u->set_tex_anim.frame);
+    if (cmd->u->set_tex_anim.b) {
+        ftAnim_800704F0(gobj, cmd->u->set_tex_anim.idx2, cmd->u->set_tex_anim.frame);
     }
     NEXT_CMD(cmd);
 }
@@ -1142,46 +1053,60 @@ void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
+
 void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // IntVec3 ivec1;
-    // int* sp40;
-    // UNK_T sp38;
-    // IntVec3 ivec0;
-    // Vec3 vec1;
-    // Vec3 vec0;
-    // u8 var_r5;
-    // Fighter* fp = gobj->user_data;
-    // ivec1.y = 1;
-    // if (ft_80084BFC(gobj, &ivec1.z, &ivec1.y) != 0) {
-    //     if (ivec1.z != -1) {
-    //         sp40 = &ivec0.x;
-    //         ivec0.x = M2C_FIELD(cmd->x8, int*, 0);
-    //         ivec0.y = ivec1.z;
-    //         ivec0.z = M2C_FIELD(cmd->x8, int*, 8);
-    //         ftAction_80071B50(gobj, (CommandInfo*) &sp38);
-    //     }
-    //     if (ivec1.x != -1) {
-    //         vec1.z = 0.0f;
-    //         vec0.z = 0.0f;
-    //         vec1.y = 0.0f;
-    //         vec0.y = 0.0f;
-    //         vec1.x = 0.0f;
-    //         vec0.x = 0.0f;
-    //         if (!(((u8) M2C_FIELD(cmd->x8, u8*, 1) >> 1U) & 1)) {
-    //             var_r5 = fp->ft_data->x8->x13;
-    //         } else {
-    //             var_r5 = fp->ft_data->x8->x14;
-    //         }
-    //         ftCo_8009F834(gobj, (int) ivec1.x, var_r5, 0, 0, &vec1, &vec0,
-    //                       0.0f);
-    //     }
-    // }
-    // if (ivec1.y != 0) {
-    //     ftAction_80071B50(gobj, cmd);
-    //     return;
-    // }
-    // SKIP_CMD(cmd, 3);
+    /// @todo too much stack
+    int gfx_id;
+    int sp64;
+    int sp60;
+    struct {
+        u32 x0;
+        u32 x4;
+        u32 x8;
+    } sp2C;
+    CommandInfo _cmd;
+    u32 part;
+    Fighter* fp;
+    Vec3 range;
+    Vec3 offset;
+
+    fp = GET_FIGHTER(gobj);
+    sp60 = 1;
+
+    if (ft_80084BFC(gobj, &sp64, &sp60, &gfx_id) != false) {
+        /// @todo not sure how to actually handle this...
+        if (sp64 != -1) {
+            _cmd.u = (union CmdUnion*)&sp2C;
+            sp2C.x0 = *(u32*)cmd->u;
+            sp2C.x4 = sp64;
+            sp2C.x8 = *(u32*)((u8*)cmd->u + 8);
+            ftAction_80071B50(gobj, &_cmd);
+        }
+
+        if (gfx_id != -1) {
+            offset.z = 0.0f;
+            range.z = 0.0f;
+            offset.y = 0.0f;
+            range.y = 0.0f;
+            offset.x = 0.0f;
+            range.x = 0.0f;
+
+            if (!cmd->u->footstep_fx_0.use_alt_bone) {
+                part = fp->ft_data->x8->x13;
+            } else {
+                part = fp->ft_data->x8->x14;
+            }
+            ftCo_8009F834(gobj, gfx_id, part, 0, 0, &offset, &range, 0.0f);
+        }
+    }
+
+    if (sp60 != 0) {
+        ftAction_80071B50(gobj, cmd);
+        return;
+    }
+
+    SKIP_CMD(cmd, 3);
 }
 
 void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -1191,53 +1116,60 @@ void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // IntVec3 ivec1; /* compiler-managed */
-    // int* sp40;
-    // UNK_T sp38;
-    // IntVec3 ivec0;
-    // Fighter* fp = gobj->user_data;
-    // Vec3 vec1;
-    // Vec3 vec0;
+    /// @todo same issues as ftAction_80072CD8
+    int sp64;
+    int sp60;
+    int gfx_id;
+    CommandInfo _cmd;
+    s32 sp34;
+    s32 sp30;
+    struct {
+        u32 x0;
+        u32 x4;
+        u32 x8;
+    } sp2C;
+    f32 sp28;
+    f32 sp24;
+    Vec3 offset;
+    Vec3 range;
+    Fighter* fp;
+    s32 temp_r29;
+    char* temp_r7;
 
-    // PAD_STACK(24);
+    fp = GET_FIGHTER(gobj);
+    sp60 = 1;
+    gfx_id = -1;
+    temp_r29 = cmd->u->unk_fx_0.x1_b0_7;
+    if ((ft_80084C38(gobj, &sp64, &sp60, &gfx_id) != false) && (temp_r29 == 0) && (sp64 != -1)) {
+        _cmd.u = (union CmdUnion*)&sp2C;
+        sp2C.x0 = *(u32*)cmd->u;
+        sp2C.x4 = sp64;
+        sp2C.x8 = *(u32*)((u8*)cmd->u + 8);
+        ftAction_80071B50(gobj, &_cmd);
+        }
 
-    // ivec1.y = 1;
-    // ivec1.x = -1;
-    // {
-    //     char* temp_r7 = cmd->x8;
-    //     int temp_r29 = M2C_FIELD(temp_r7, u8*, 1) & 1;
-    //     if ((ft_80084C38(gobj, &ivec1.z, &ivec1.y, &ivec1.x, temp_r7) != 0)
-    //     &&
-    //         (temp_r29 == 0) && (ivec1.z != -1))
-    //     {
-    //         sp40 = &ivec0.x;
-    //         ivec0.x = M2C_FIELD(cmd->x8, int*, 0);
-    //         ivec0.y = ivec1.z;
-    //         ivec0.z = M2C_FIELD(cmd->x8, int*, 8);
-    //         ftAction_80071B50(gobj, (CommandInfo*) &sp38);
-    //     }
-    //     if ((int) ivec1.x == -1) {
-    //         ivec1.x = (int) M2C_FIELD(cmd->x8, u16*, 2);
-    //     }
-    //     vec1.z = 0.0f;
-    //     vec0.z = 0.0f;
-    //     vec1.y = 0.0f;
-    //     vec0.y = 0.0f;
-    //     vec1.x = 0.0f;
-    //     vec0.x = 0.0f;
-    //     ftCo_8009F834(gobj, ivec1.x, 0, 0, 0, &vec1, &vec0, 0.0f);
-    //     if (ivec1.y != 0) {
-    //         ft_PlaySFX(fp, 0x46, 0x7F, 0x40);
-    //         if (temp_r29 == 0) {
-    //             ftAction_80071B50(gobj, cmd);
-    //         }
-    //     }
-    //     if ((ivec1.y == 0) || (temp_r29 != 0)) {
-    //         SKIP_CMD(cmd, 3);
-    //     }
-    //     ftCommon_8007EBAC(fp, 0x16U, 0U);
-    // }
+    if (gfx_id == -1) {
+        gfx_id = cmd->u->unk_fx_0.x2_b0_7;
+    }
+    offset.z = 0.0f;
+    range.z = 0.0f;
+    offset.y = 0.0f;
+    range.y = 0.0f;
+    offset.x = 0.0f;
+    range.x = 0.0f;
+    ftCo_8009F834(gobj, gfx_id, FtPart_TopN, 0, 0, &offset, &range, 0.0f);
+    if (sp60 != 0) {
+        ft_PlaySFX(fp, 0x46, 0x7FU, 0x40U);
+        if (temp_r29 == 0) {
+            ftAction_80071B50(gobj, cmd);
+        }
+    }
+    if ((sp60 == 0) || (temp_r29 != 0)) {
+        SKIP_CMD(cmd, 3);
+    }
+    ftCommon_8007EBAC(fp, 0x16U, 0U);
 }
+
 
 void ftAction_80072FE0(Fighter_GObj* gobj, CommandInfo* cmd)
 {
@@ -1246,15 +1178,19 @@ void ftAction_80072FE0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80073008(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // s16 temp = cmd->u->unk31.unk1;
-    // NEXT_CMD(cmd);
-    // {
-    //     char* temp_r6 = cmd->x8;
-    //     u8 temp_r5 = (u8) M2C_FIELD(temp_r6, s8*, 0);
-    //     cmd->x8 = temp_r6 + 4;
-    //     // ftCo_800DEE84((int) (float) temp_r5, temp_r5, temp_r6, temp,
-    //     //               (float) temp, 0.003906f * cmd->u->unk31.unk1);
-    // }
+    /// @todo cant seem to get the float to int, and there is a
+    // bunch of unused stack...
+    f32 charge_frames;
+    f32 charge_rate;
+    u32 color_anim;
+    PAD_STACK(20);
+
+    charge_frames = cmd->u->smash_charge_0.charge_frames;
+    charge_rate = cmd->u->smash_charge_0.charge_rate;
+    NEXT_CMD(cmd);
+    color_anim = cmd->u->smash_charge_1.color_anim;
+    NEXT_CMD(cmd);
+    ftCo_800DEE84(gobj, color_anim, charge_rate, (1.0f / 256.0f) * charge_frames);
 }
 
 void ftAction_8007309C(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -1276,30 +1212,30 @@ void ftAction_80073108(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80073118(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    // char* temp_r5 = cmd->x8;
-    // u8 temp_r10 = M2C_FIELD(temp_r5, u8*, 3);
-    // cmd->x8 = temp_r5 + 4;
-    // {
-    //     char* cmd_x8 = cmd->x8;
-    //     cmd->x8 = cmd_x8 + 4;
-    //     {
-    //         char* cmd_x8 = cmd->x8;
-    //         cmd->x8 = cmd_x8 + 4;
-    //         {
-    //             char* cmd_x8 = cmd->x8;
-    //             cmd->x8 = cmd_x8 + 4;
-    //             // ftCo_8009E714(temp_r10, M2C_FIELD(cmd_x8, s16*, 0),
-    //             cmd_x8,
-    //             //               temp_r10, 0.003906f * M2C_FIELD(cmd_x8,
-    //             s16*,
-    //             //               0), 0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-    //             //               0.003906f * M2C_FIELD(cmd_x8, s16*, 0),
-    //             //               0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-    //             //               0.003906f * M2C_FIELD(cmd_x8, s16*, 2),
-    //             //               0.003906f);
-    //         }
-    //     }
-    // }
+    u8 idx;
+    s32 timer;
+    f32 x;
+    f32 y;
+    f32 mag;
+    f32 decay_amt;
+    f32 angle;
+
+    idx = cmd->u->wind_fx_0.bone;
+    NEXT_CMD(cmd);
+
+    timer = cmd->u->wind_fx_1.timer;
+    x = cmd->u->wind_fx_1.x * (1.0f / 256.0f);
+    NEXT_CMD(cmd);
+
+    y = cmd->u->wind_fx_2.y * (1.0f / 256.0f);
+    mag = cmd->u->wind_fx_2.mag * (1.0f / 256.0f);
+    NEXT_CMD(cmd);
+
+    decay_amt = cmd->u->wind_fx_3.decay * (1.0f / 256.0f);
+    angle = cmd->u->wind_fx_3.angle * (1.0f / 256.0f);
+    NEXT_CMD(cmd);
+
+    ftCo_8009E714(gobj, idx, timer, x, y, mag, decay_amt, angle);
 }
 
 void ftAction_8007320C(Fighter_GObj* gobj, CommandInfo* cmd)

@@ -283,7 +283,7 @@ struct Item {
     HSD_GObj* owner;
 
     HSD_GObj* x51C;            // Related to the owner gobj
-    CameraBox* x520_cameraBox; // CameraBox
+    CmSubject* x520_cameraBox; // CmSubject
     CommandInfo x524_cmd;       // should this be CommandInfo* instead?
                                // f32 x528;
                                // void* x52C_item_script; // Script parse?

@@ -8,23 +8,24 @@
 
 #include <dolphin/mtx.h>
 
-struct CameraBox {
-    CameraBox* next;
-    CameraBox* prev;
-    bool x8;
-    /* +C:0 */ u8 xC_b0 : 1;
-    /* +C:1 */ u8 xC_b1 : 1;
-    /* +C:2 */ u8 xC_b2 : 1;
-    s16 xE;
-    Vec3 x10;  // might be Vec2?
-    Vec3 x1C;  // position?
-    float x28; // direction?
-    Vec2 x2C;
-    Vec3 x34; // size?
-    Vec2 x40;
-    Vec3 x48;
-    Vec3 x54;
-    Vec3 x60;
+/// @note name found @ 80029070
+struct CmSubject {
+/* +00 */ CmSubject* next;
+/* +04 */ CmSubject* prev;
+/* +08 */ bool x8;
+/* +0C:0 */ u8 xC_b0 : 1;
+/* +0C:1 */ u8 xC_b1 : 1;
+/* +0C:2 */ u8 xC_b2 : 1;
+/* +0E */ s16 xE;
+/* +10 */ Vec3 x10;  // might be Vec2?
+/* +1C */ Vec3 x1C;  // position?
+/* +28 */ float x28; // direction?
+/* +2C */ Vec2 x2C;
+/* +34 */ Vec3 x34; // size?
+/* +40 */ Vec2 x40;
+/* +48 */ Vec3 x48;
+/* +54 */ Vec3 x54;
+/* +60 */ Vec3 x60;
 };
 
 struct CameraTransformState {
@@ -41,7 +42,7 @@ struct CameraBounds {
     float y_min;
     float x_max;
     float y_max;
-    int subjects;
+    int total_subjects;
     float z_pos;
 };
 
@@ -50,25 +51,23 @@ struct CameraQuake {
     /* 0xC */ int type;
 };
 
-// global vars for camera mode 7 and 8
-// mode 7 will attach and follow a player, and 8 is free cam
 struct CameraDebugMode {
-    int last_mode;
+    CameraType last_mode;
     int ply_slot;
-    Vec3 mode7_int_offset;
-    Vec3 mode7_eye_offset;
-    Vec3 mode7_eye_pos;
-    Vec3 mode7_int_pos;
-    float mode7_fov;
-    Vec3 mode8_int_pos;
-    Vec3 mode8_eye_pos;
-    float mode8_fov;
+    Vec3 follow_int_offset;
+    Vec3 follow_eye_offset;
+    Vec3 follow_eye_pos;
+    Vec3 follow_int_pos;
+    float follow_fov;
+    Vec3 free_int_pos;
+    Vec3 free_eye_pos;
+    float free_fov;
     u8 _4C[8]; // padding? not sure if this is correct
 };
 
-typedef struct Camera {
+struct Camera {
     /* 0x000 */ HSD_GObj* gobj;
-    /* 0x004 */ int mode;
+    /* 0x004 */ CameraType mode;
     /* 0x008 */ u8 background_r;
     /* 0x009 */ u8 background_g;
     /* 0x00A */ u8 background_b;
@@ -98,10 +97,25 @@ typedef struct Camera {
     /* 0x2C6 */ char pad_2C6[0x2C8 - 0x2C6];
     /* 0x2C8 */ float pitch_offset;
     /* 0x2CC */ float yaw_offset;
-    /* 0x2D0 */ char pad_2D0[0x2F8 - 0x2D0];
+    /* 0x2D0 */ f32 x2D0;
+    /* 0x2D4 */ f32 x2D4;
+    /* 0x2D8 */ f32 x2D8;
+    /* 0x2DC */ f32 x2DC;
+    /* 0x2E0 */ f32 x2E0;
+    /* 0x2E4 */ f32 x2E4;
+    /* 0x2E8 */ f32 x2E8;
+    /* 0x2EC */ f32 x2EC;
+    /* 0x2F0 */ f32 x2F0;
+    /* 0x2F4 */ f32 x2F4;
     /* 0x2F8 */ f32 min_distance;
     /* 0x2FC */ f32 max_distance;
-    /* 0x300 */ char pad_300[0x320 - 0x300];
+    /* 0x300 */ s32 x300;
+    /* 0x304 */ s8 x304;
+    /* 0x305 */ s8 x305;
+    /* 0x306 */ s8 x306;
+    /* 0x307 */ s8 x307;
+    /* 0x308 */ Vec3 x308;
+    /* 0x314 */ Vec3 x314;
     /* 0x320 */ Vec3 pause_eye_offset; /* offset from focused player */
     /* 0x32C */ f32 x32C;
     /* 0x330 */ f32 pause_eye_distance; /* distance to focused player */
@@ -120,8 +134,13 @@ typedef struct Camera {
     } x35C;
     /* 0x368 */ Vec3 x368;
     /* 0x374 */ f32 x374;
-    /* 0x378 */ f32 x378;
-    /* 0x378 */ char pad_37C[0x398 - 0x37C];
+    /* 0x378 */ union {
+        f32 f32;
+        s32 s32;
+    } x378;
+    // /* 0x378 */ f32 x378;
+    /* 0x37C */ s32 x37C;
+    /* 0x380 */ u8 x380[0x18];
     /* 0x398:0 */ u8 x398_b0 : 1;
     /* 0x398:1 */ u8 x398_b1 : 1;
     /* 0x398:2 */ u8 x398_b2 : 1;
@@ -145,24 +164,101 @@ typedef struct Camera {
     /* 0x39A:6 */ u8 x39A_b6 : 1;
     /* 0x39A:7 */ u8 x39A_b7 : 1;
     /* 0x39B */ char pad_39B; /* maybe part of unk_39A[6]? */
-    /* 0x39C */ struct CameraDebugMode debug_mode;
-} Camera; /* size = 0x3A4 */
+};
+STATIC_ASSERT(sizeof(struct Camera) == 0x39C);
 
-/// @todo Size should be 0x39C like #cm_80452C68
-// STATIC_ASSERT(sizeof(struct Camera) == 0x3A4);
+// struct CameraUnkGlobals {
+//     /*  +0 */ float _0[11];
+//     /* +2C */ float x2C;
+//     /* +30 */ float x30;
+//     /* +34 */ float x34;
+//     /* +38 */ float x38;
+//     /* +3C */ float x3C;
+//     /* +40 */ float x40;
+//     /* +44 */ float _44[43];
+// };
 
 struct CameraUnkGlobals {
-    /*  +0 */ float _0[11];
+    /*  +0 */ float x0;
+    /*  +4 */ float x4;
+    /*  +8 */ float x8;
+    /*  +C */ float xC;
+    /* +10 */ float x10;
+    /* +14 */ float x14;
+    /* +18 */ float x18;
+    /* +1C */ float x1C;
+    /* +20 */ float x20;
+    /* +24 */ float x24;
+    /* +28 */ float x28;
     /* +2C */ float x2C;
     /* +30 */ float x30;
     /* +34 */ float x34;
     /* +38 */ float x38;
     /* +3C */ float x3C;
     /* +40 */ float x40;
-    /* +44 */ float _44[43];
+    /* +44 */ float x44;
+    /* +48 */ float x48;
+    /* +4C */ float x4C;
+    /* +50 */ float x50;
+    /* +54 */ float x54;
+    /* +58 */ float x58;
+    /* +5C */ float x5C;
+    /* +60 */ float x60;
+    /* +64 */ float x64;
+    /* +68 */ float x68;
+    /* +6C */ float x6C;
+    /* +70 */ float x70;
+    /* +74 */ float x74;
+    /* +78 */ float x78;
+    /* +7C */ float x7C;
+    /* +80 */ float x80;
+    /* +84 */ float x84;
+    /* +88 */ float x88;
+    /* +8C */ float x8C;
+    /* +90 */ float x90;
+    /* +94 */ float x94;
+    /* +98 */ float x98;
+    /* +9C */ float x9C;
+    /* +A0 */ float xA0;
+    /* +A4 */ float xA4;
+    /* +A8 */ float xA8;
+    /* +AC */ float xAC;
+    /* +B0 */ float xB0;
+    /* +B4 */ float xB4;
+    /* +B8 */ float xB8;
+    /* +BC */ float xBC;
+    /* +C0 */ float xC0;
+    /* +C4 */ float xC4;
+    /* +C8 */ float xC8;
+    /* +CC */ float xCC;
+    /* +D0 */ float xD0;
+    /* +D4 */ float xD4;
+    /* +D8 */ float xD8;
+    /* +DC */ float xDC;
+    /* +E0 */ float xE0;
+    /* +E4 */ float xE4;
+    /* +E8 */ float xE8;
+    /* +EC */ float xEC;
 };
+
 struct CameraModeCallbacks {
     void (*(callback[9]))(void*);
+};
+
+struct CameraInputs {
+    /* +00 */ f32 stick_x;
+    /* +04 */ f32 stick_y;
+    /* +08 */ f32 substick_x;
+    /* +0C */ f32 substick_y;
+    /// @todo sus unions
+    /* +10 */ union {
+        u32 _u32[2];
+        u64 _u64;
+    } x10;
+    /* +18 */ union {
+        u32 _u32[2];
+        u64 _u64;
+    } x18;
 };
 
 #endif

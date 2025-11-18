@@ -563,7 +563,10 @@ void ftCo_ItemScopeFire_Coll(Fighter_GObj* gobj)
     ft_800841B8(gobj, fn_800D82EC);
 }
 
-/// #ftCo_ItemScopeAirFire_Coll
+void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
+{
+    ft_80082C74(gobj, fn_800D8268);
+}
 
 /// #fn_800D84D4
 

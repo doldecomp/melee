@@ -74,7 +74,7 @@
 /* 084A40 */ float ft_GetGroundFrictionMultiplier(Fighter* fp);
 /* 084A80 */ bool ft_80084A80(int arg0, Fighter_GObj* gobj, int*, int*, int*);
 /* 084BFC */ bool ft_80084BFC(Fighter_GObj* gobj, int*, int*, int*);
-/* 084C38 */ bool ft_80084C38(Fighter_GObj*, int*, int*, int*, char*);
+/* 084C38 */ bool ft_80084C38(Fighter_GObj*, int*, int*, int*);
 /* 084C74 */ bool ft_80084C74(Fighter_GObj*, int*, int*, int*);
 /* 084CB0 */ void ft_80084CB0(Fighter*, ftCollisionBox*);
 /* 084CE4 */ bool ft_80084CE4(Fighter* attacker, Fighter* victim);

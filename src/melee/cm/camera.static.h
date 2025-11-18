@@ -11,8 +11,10 @@
 #include <sysdolphin/baselib/cobj.h>
 #include <melee/cm/types.h>
 
+
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
+/* 453004 */ static CameraDebugMode cm_80453004;
 
 // .data
 /* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = { Camera_8002B3D4,
@@ -83,10 +85,10 @@
 /* 3B73DC */ static Vec3 const cm_803B73DC = { 0.0f, 1.0f, 0.0f };
 
 /// .sbss
-/* 4D6458 */ static CameraBox* cm_804D6458;
-/* 4D645C */ static CameraBox* cm_804D645C;
-/* 4D6460 */ static CameraBox* cm_804D6460;
-/* 4D6468 */ CameraBox* cm_804D6468; // requires a size of 8?
+/* 4D6458 */ static CmSubject* cm_804D6458;
+/* 4D645C */ static CmSubject* cm_804D645C;
+/* 4D6460 */ static CmSubject* cm_804D6460;
+/* 4D6468 */ CmSubject* cm_804D6468; // requires a size of 8?
 
 /// .sdata
 /* 4D3938 */ static char cm_804D3938[0x8] = "0";

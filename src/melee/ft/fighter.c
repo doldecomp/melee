@@ -102,7 +102,6 @@
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
-extern ftData* gFtDataList[FTKIND_MAX];
 extern MotionState ftData_MotionStateList[ftCo_MS_Count];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
@@ -384,7 +383,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x20A0_accessory = 0;
     fp->throw_flags = 0;
-    fp->x2214 = 0;
+    fp->cmd_timer = 0;
     fp->item_gobj = 0;
     fp->x1978 = 0;
 
