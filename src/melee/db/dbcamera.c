@@ -26,6 +26,8 @@ static u8 db_ShowCameraInfo;
 const GXColor g_bg = { 0x00, 0x00, 0x00, 0x80 };
 const GXColor g_fg = { 0xFF, 0xFF, 0xFF, 0xFF };
 
+extern CameraDebugMode cm_80453004;
+
 void fn_SetupMiscStageVisuals(void)
 {
     db.MiscStageVisualsStatus = 0;
@@ -421,8 +423,8 @@ void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos, Vec3* camera_interest,
 static void fn_80227B64(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 {
     if ((cstick_x != 0.0F) || (cstick_y != 0.0F)) {
-        fn_802279E8(camera, &cm_80453004.mode8_eye_pos,
-                    &cm_80453004.mode8_int_pos, cstick_x, cstick_y);
+        fn_802279E8(camera, &cm_80453004.free_eye_pos,
+                    &cm_80453004.free_int_pos, cstick_x, cstick_y);
     }
 }
 
@@ -433,19 +435,19 @@ void fn_80227BA8(HSD_GObj* camera, Vec3* arg1, f32 arg2, f32 arg3)
     PAD_STACK(4);
 
     if (arg1 != NULL) {
-        fn_802279E8(camera, &cm_80453004.mode7_eye_offset,
-                    &cm_80453004.mode7_int_offset, arg2, arg3);
-        sp28 = cm_80453004.mode7_int_offset;
+        fn_802279E8(camera, &cm_80453004.follow_eye_offset,
+                    &cm_80453004.follow_int_offset, arg2, arg3);
+        sp28 = cm_80453004.follow_int_offset;
         lbVector_Add(&sp28, arg1);
-        cm_80453004.mode7_eye_pos = sp28;
-        sp1C = cm_80453004.mode7_eye_offset;
+        cm_80453004.follow_eye_pos = sp28;
+        sp1C = cm_80453004.follow_eye_offset;
         lbVector_Add(&sp1C, arg1);
-        cm_80453004.mode7_int_pos = sp1C;
+        cm_80453004.follow_int_pos = sp1C;
         return;
     }
     if (arg2 != 0.0F || arg3 != 0.0F) {
-        fn_802279E8(camera, &cm_80453004.mode8_eye_pos,
-                    &cm_80453004.mode8_int_pos, arg2, arg3);
+        fn_802279E8(camera, &cm_80453004.free_eye_pos,
+                    &cm_80453004.free_int_pos, arg2, arg3);
     }
 }
 
@@ -462,8 +464,8 @@ static void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
             float dist = HSD_CObjGetEyeDistance(cobj);
             VECScale(&forward, &forward, dist * (1.0F - 0.05F * cstick_y));
         }
-        VECSubtract(&cm_80453004.mode8_int_pos, &forward,
-                    &cm_80453004.mode8_eye_pos);
+        VECSubtract(&cm_80453004.free_int_pos, &forward,
+                    &cm_80453004.free_eye_pos);
     }
 }
 
@@ -482,23 +484,23 @@ void fn_80227D38(HSD_GObj* camera, Vec3* arg1, f32 arg2)
             HSD_CObjGetEyeVector(cobj, &sp28);
             dist = HSD_CObjGetEyeDistance(cobj);
             PSVECScale(&sp28, &sp28, dist * -(0.05F * arg2 - 1.0F));
-            PSVECSubtract(&cm_80453004.mode7_int_offset, &sp28,
-                          &cm_80453004.mode7_eye_offset);
+            PSVECSubtract(&cm_80453004.follow_int_offset, &sp28,
+                          &cm_80453004.follow_eye_offset);
         }
-        sp40 = cm_80453004.mode7_int_offset;
+        sp40 = cm_80453004.follow_int_offset;
         lbVector_Add(&sp40, arg1);
-        cm_80453004.mode7_eye_pos = sp40;
-        sp34 = cm_80453004.mode7_eye_offset;
+        cm_80453004.follow_eye_pos = sp40;
+        sp34 = cm_80453004.follow_eye_offset;
         lbVector_Add(&sp34, arg1);
-        cm_80453004.mode7_int_pos = sp34;
+        cm_80453004.follow_int_pos = sp34;
     } else {
         if (arg2 != 0.0F && arg2 != 0.0F) {
             cobj = GET_COBJ(camera);
             HSD_CObjGetEyeVector(cobj, &sp1C);
             dist = HSD_CObjGetEyeDistance(cobj);
             PSVECScale(&sp1C, &sp1C, dist * -(0.05F * arg2 - 1.0F));
-            PSVECSubtract(&cm_80453004.mode8_int_pos, &sp1C,
-                          &cm_80453004.mode8_eye_pos);
+            PSVECSubtract(&cm_80453004.free_int_pos, &sp1C,
+                          &cm_80453004.free_eye_pos);
         }
     }
 }
@@ -553,17 +555,17 @@ static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
         if (cstick_x != 0.0F) {
             HSD_CObjGetLeftVector(cobj, &left_vec);
             VECScale(&left_vec, &left_vec, scale_factor * cstick_x);
-            temp_r3 = &cm_80453004.mode8_int_pos;
+            temp_r3 = &cm_80453004.free_int_pos;
             VECAdd(temp_r3, &left_vec, temp_r3);
-            temp_r3_2 = &cm_80453004.mode8_eye_pos;
+            temp_r3_2 = &cm_80453004.free_eye_pos;
             VECAdd(temp_r3_2, &left_vec, temp_r3_2);
         }
         if (cstick_y != 0.0F) {
             HSD_CObjGetUpVector(cobj, &up_vec);
             VECScale(&up_vec, &up_vec, -scale_factor * cstick_y);
-            temp_r3_3 = &cm_80453004.mode8_int_pos;
-            VECAdd(&cm_80453004.mode8_int_pos, &up_vec, temp_r3_3);
-            temp_r3_4 = &cm_80453004.mode8_eye_pos;
+            temp_r3_3 = &cm_80453004.free_int_pos;
+            VECAdd(&cm_80453004.free_int_pos, &up_vec, temp_r3_3);
+            temp_r3_4 = &cm_80453004.free_eye_pos;
             VECAdd(temp_r3_4, &up_vec, temp_r3_4);
         }
     }
@@ -596,27 +598,27 @@ void fn_80228124(HSD_GObj* camera, Vec3* arg1, f32 arg2, f32 arg3)
         if (arg2 != 0.0f) {
             HSD_CObjGetLeftVector(cobj, &sp20);
             PSVECScale(&sp20, &sp20, dist * arg2);
-            PSVECAdd(&cm_80453004.mode7_int_offset, &sp20,
-                     &cm_80453004.mode7_int_offset);
-            PSVECAdd(&cm_80453004.mode7_eye_offset, &sp20,
-                     &cm_80453004.mode7_eye_offset);
+            PSVECAdd(&cm_80453004.follow_int_offset, &sp20,
+                     &cm_80453004.follow_int_offset);
+            PSVECAdd(&cm_80453004.follow_eye_offset, &sp20,
+                     &cm_80453004.follow_eye_offset);
         }
         if (arg3 != 0.0f) {
             HSD_CObjGetUpVector(cobj, &sp2C);
             PSVECScale(&sp2C, &sp2C, -dist * arg3);
-            PSVECAdd(&cm_80453004.mode7_int_offset, &sp2C,
-                     &cm_80453004.mode7_int_offset);
-            PSVECAdd(&cm_80453004.mode7_eye_offset, &sp2C,
-                     &cm_80453004.mode7_eye_offset);
+            PSVECAdd(&cm_80453004.follow_int_offset, &sp2C,
+                     &cm_80453004.follow_int_offset);
+            PSVECAdd(&cm_80453004.follow_eye_offset, &sp2C,
+                     &cm_80453004.follow_eye_offset);
         }
-        sp44 = cm_80453004.mode7_int_offset;
+        sp44 = cm_80453004.follow_int_offset;
         lbVector_Add(&sp44, arg1);
-        cm_80453004.mode7_eye_pos = sp44;
-        sp38 = cm_80453004.mode7_eye_offset;
+        cm_80453004.follow_eye_pos = sp44;
+        sp38 = cm_80453004.follow_eye_offset;
         lbVector_Add(&sp38, arg1);
-        cm_80453004.mode7_int_pos = sp38;
+        cm_80453004.follow_int_pos = sp38;
     } else {
-        fn_80227EB0_dummy_inline(camera, &cm_80453004.mode8_eye_pos,
-                                 &cm_80453004.mode8_int_pos, arg2, arg3);
+        fn_80227EB0_dummy_inline(camera, &cm_80453004.free_eye_pos,
+                                 &cm_80453004.free_int_pos, arg2, arg3);
     }
 }

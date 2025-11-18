@@ -230,7 +230,7 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
 void fn_801D11E4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    CameraBox* cam = Camera_80029020();
+    CmSubject* cam = Camera_80029020();
     gp->u.display.xF4 = cam;
 
     if (cam != NULL) {

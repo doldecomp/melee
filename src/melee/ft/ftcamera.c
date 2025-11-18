@@ -22,7 +22,7 @@ void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, float mul)
 // Camera_CopyPlayerPositionToCameraBoxPosition
 void ftCamera_80076064(Fighter* fp)
 {
-    CameraBox* camera_box;
+    CmSubject* camera_box;
     UnkFloat6_Camera spC;
     camera_box = fp->x890_cameraBox;
     ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
@@ -53,7 +53,7 @@ void ftCamera_80076064(Fighter* fp)
 void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    CameraBox* camera_box = fp->x890_cameraBox;
+    CmSubject* camera_box = fp->x890_cameraBox;
 
     ///@todo lol
     fp->facing_dir + 1.0f;
@@ -96,7 +96,7 @@ void ftCamera_80076320(HSD_GObj* gobj)
 {
     Vec3 center_pos;
     Fighter* fp = gobj->user_data;
-    CameraBox* camera_box;
+    CmSubject* camera_box;
     float temp_f1;
     float temp_f31;
 

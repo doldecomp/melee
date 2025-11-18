@@ -14,15 +14,15 @@
 #include <baselib/cobj.h>
 
 /* 028B9C */ void Camera_80028B9C(int);
-/* 028F5C */ void Camera_80028F5C(CameraBox*, s32);
-/* 029020 */ CameraBox* Camera_80029020(void);
-/* 029044 */ CameraBox* Camera_80029044(int);
-/* 0290D4 */ void Camera_800290D4(CameraBox*);
-/* 029124 */ u32 Camera_80029124(Vec*, s32);
-/* 02928C */ bool Camera_8002928C(CameraBox*);
+/* 028F5C */ void Camera_80028F5C(CmSubject*, s32);
+/* 029020 */ CmSubject* Camera_80029020(void);
+/* 029044 */ CmSubject* Camera_80029044(int);
+/* 0290D4 */ void Camera_800290D4(CmSubject*);
+/* 029124 */ s32 Camera_80029124(Vec3*, s32);
+/* 02928C */ bool Camera_8002928C(CmSubject*);
 /* 0293E0 */ UNK_RET Camera_800293E0(UNK_PARAMS);
 /* 02958C */ void Camera_8002958C(CameraBounds*, CameraTransformState*);
-/* 029AAC */ void Camera_80028F5C(CameraBox*, s32);
+/* 029AAC */ void Camera_80028F5C(CmSubject*, s32);
 /* 029BC4 */ void Camera_80029BC4(CameraBounds*, CameraTransformState*);
 /* 029C88 */ void Camera_80029C88(CameraBounds*, CameraTransformState*, f32);
 /* 029CF8 */ void Camera_80029CF8(CameraBounds*, CameraTransformState*);
@@ -49,7 +49,7 @@
 /* 02D318 */ void Camera_8002D318(void*);
 /* 02D85C */ void Camera_8002D85C(void*);
 /* 02DDC4 */ void Camera_8002DDC4(void*);
-/* 02DFE4 */ UNK_RET Camera_8002DFE4(UNK_PARAMS);
+/* 02DFE4 */ s32 Camera_8002DFE4(Vec3*, Vec3*, CameraTransformState*);
 /* 02E158 */ s32 Camera_8002E158(f32*, f32, f32, f32);
 /* 02E234 */ UNK_RET Camera_8002E234(UNK_PARAMS);
 /* 02E490 */ void Camera_8002E490(void*);
@@ -114,8 +114,8 @@
 /* 030B90 */ void Camera_80030B90(bool);
 /* 030BA8 */ bool Camera_80030BA8(void);
 /* 030BBC */ bool Camera_80030BBC(Point3d*, S32Vec2*);
-/* 030CD8 */ bool Camera_80030CD8(CameraBox*, S32Vec2*);
-/* 030CFC */ bool Camera_80030CFC(CameraBox*, float);
+/* 030CD8 */ bool Camera_80030CD8(CmSubject*, S32Vec2*);
+/* 030CFC */ bool Camera_80030CFC(CmSubject*, float);
 /* 030DE4 */ void Camera_80030DE4(f32, f32);
 /* 030DF8 */ UNK_RET Camera_80030DF8(UNK_PARAMS);
 /* 030E10 */ float Camera_80030E10(void);
@@ -136,8 +136,7 @@
 /* 0311EC */ UNK_RET Camera_800311EC(UNK_PARAMS);
 /* 031328 */ void Camera_80031328(HSD_GObj*, s32, s32);
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
-/* 453004 */ extern CameraDebugMode cm_80453004;
 
-extern CameraBox* cm_804D6468;
+extern CmSubject* cm_804D6468;
 
 #endif

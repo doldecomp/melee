@@ -6443,7 +6443,7 @@ void mpLib_DrawZones(void)
     u8 _5[0x8];
     GXColor sp34;
     GXColor sp20;
-    CameraBox* var_r30;
+    CmSubject* var_r30;
 
     f32 left;
     f32 right;
