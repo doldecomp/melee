@@ -571,12 +571,32 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
     new_bounds->z_pos = z_pos;
 }
 
+inline float get_follow_speed(float temp_f4, float spread, CameraUnkGlobals* globals) {
+    if (spread > temp_f4) {
+        return globals->x30;
+    } else if (spread < globals->x34) {
+        return globals->x2C;
+    } else {
+        return (((spread - globals->x34) / (temp_f4 - globals->x34)) *
+                        (globals->x30 - globals->x2C)) +
+                       globals->x2C;
+    }
+}
+
+inline float get_delta(float temp_f) {
+    if (temp_f > 0.0001f) {
+        return 1.0f / temp_f;
+    } else {
+        return 1000.0f;
+    }
+}
+
 void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
                      f32 speed)
 {
-    /// @todo only reg swaps left
     CameraUnkGlobals* globals;
     f32 follow_speed;
+    f32 temp_f;
     f32 temp_f4;
     f32 temp_f3;
     f32 delta;
@@ -596,28 +616,13 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
     } else {
         spread = 99999.0f;
     }
-
     offset_x = transform->target_interest.x - transform->interest.x;
     offset_y = transform->target_interest.y - transform->interest.y;
+
     globals = &cm_803BCCA0;
-    temp_f4 = globals->x38;
-
-    if (spread > temp_f4) {
-        follow_speed = globals->x30;
-    } else if (spread < globals->x34) {
-        follow_speed = globals->x2C;
-    } else {
-        follow_speed = (((spread - globals->x34) / (temp_f4 - globals->x34)) *
-                        (globals->x30 - globals->x2C)) +
-                       globals->x2C;
-    }
-
-    if (cm_80452C68.x2BC > 0.0001f) {
-        delta = 1.0f;
-        delta = (f32) delta / cm_80452C68.x2BC;
-    } else {
-        delta = 1000.0f;
-    }
+    /// @todo this makes it match, but its weird to pass in x38 as a param
+    follow_speed = get_follow_speed(globals->x38, spread, globals);
+    delta = get_delta(cm_80452C68.x2BC);
 
     lerp_factor = (follow_speed * speed) * delta;
     if (lerp_factor > 1.0f) {
