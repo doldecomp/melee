@@ -1813,7 +1813,43 @@ void Camera_8002C010(f32 farg0, f32 farg1)
 
 /// #Camera_8002D85C
 
-/// #Camera_8002DDC4
+void Camera_8002DDC4(void* arg0)
+{
+    CameraBounds bounds;
+    Vec3 spC;
+    Vec3* target_pos;
+    Vec3* target_interest;
+    f32 temp_f1_3;
+
+    Camera_80030DF8();
+    target_interest = &cm_80452C68.transform.target_interest;
+    Stage_80224CAC(target_interest);
+    cm_80452C68.transform.interest.x += (cm_80452C68.transform.target_interest.x - cm_80452C68.transform.interest.x) * cm_803BCCA0.x74;
+    cm_80452C68.transform.interest.y += (cm_80452C68.transform.target_interest.y - cm_80452C68.transform.interest.y) * cm_803BCCA0.x74;
+    cm_80452C68.transform.interest.z += (cm_80452C68.transform.target_interest.z - cm_80452C68.transform.interest.z) * cm_803BCCA0.x74;
+    Stage_80224CAC(&cm_80452C68.transform_copy.target_interest);
+    cm_80452C68.transform_copy.interest.x += (cm_80452C68.transform_copy.target_interest.x - cm_80452C68.transform_copy.interest.x) * cm_803BCCA0.x74;
+    cm_80452C68.transform_copy.interest.y += (cm_80452C68.transform_copy.target_interest.y - cm_80452C68.transform_copy.interest.y) * cm_803BCCA0.x74;
+    cm_80452C68.transform_copy.interest.z += (cm_80452C68.transform_copy.target_interest.z - cm_80452C68.transform_copy.interest.z) * cm_803BCCA0.x74;
+    cm_80452C68.transform.target_fov = Stage_GetCamFixedFov();
+    cm_80452C68.transform.fov += (cm_80452C68.transform.target_fov - cm_80452C68.transform.fov) * cm_803BCCA0.x7C;
+    cm_80452C68.transform_copy.target_fov = Stage_GetCamFixedFov();
+    target_pos = &cm_80452C68.transform.target_position;
+    cm_80452C68.transform_copy.fov += (cm_80452C68.transform_copy.target_fov - cm_80452C68.transform_copy.fov) * cm_803BCCA0.x7C;
+    Stage_SetVecToFixedCamPos(target_pos);
+    cm_80452C68.transform.position.x += (cm_80452C68.transform.target_position.x - cm_80452C68.transform.position.x) * cm_803BCCA0.x78;
+    cm_80452C68.transform.position.y += (cm_80452C68.transform.target_position.y - cm_80452C68.transform.position.y) * cm_803BCCA0.x78;
+    cm_80452C68.transform.position.z += (cm_80452C68.transform.target_position.z - cm_80452C68.transform.position.z) * cm_803BCCA0.x78;
+    Stage_SetVecToFixedCamPos(&cm_80452C68.transform_copy.target_position);
+    cm_80452C68.transform_copy.position.x += (cm_80452C68.transform_copy.target_position.x - cm_80452C68.transform_copy.position.x) * cm_803BCCA0.x78;
+    cm_80452C68.transform_copy.position.y += (cm_80452C68.transform_copy.target_position.y - cm_80452C68.transform_copy.position.y) * cm_803BCCA0.x78;
+    cm_80452C68.transform_copy.position.z += (cm_80452C68.transform_copy.target_position.z - cm_80452C68.transform_copy.position.z) * cm_803BCCA0.x78;
+    lbVector_Diff(target_interest, target_pos, &spC);
+    temp_f1_3 = spC.x;
+    bounds.z_pos = sqrtf__Ff((spC.z * spC.z) + ((temp_f1_3 * temp_f1_3) + (spC.y * spC.y)));
+    Camera_8002A28C(&bounds);
+    Camera_8002A0C0(&bounds, &cm_80452C68.transform);
+}
 
 s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest, CameraTransformState* transform)
 {
@@ -1854,7 +1890,6 @@ s32 Camera_8002DFE4(Vec3* arg0, Vec3* interest, CameraTransformState* transform)
     }
     return var_r31;
 }
-
 
 s32 Camera_8002E158(f32* arg0, f32 farg0, f32 farg1, f32 farg2)
 {
