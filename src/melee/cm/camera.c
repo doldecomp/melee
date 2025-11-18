@@ -728,22 +728,20 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
         var_f3 = ((cm_803BCCA0.x20 - cm_803BCCA0.x1C) * ((len - cm_803BCCA0.x24) / (cm_803BCCA0.x28 - cm_803BCCA0.x24))) + cm_803BCCA0.x1C;
     }
 
-    max_v = deg_to_rad * 5.0f;
+    max_v = deg_to_rad * cm_803BCCA0.xC;
     pitch_angle = -(deg_to_rad * (((((bounds->y_min - scroll_offset.y) +
                                      (bounds->y_max - scroll_offset.y)) *
                                     (0.5f - var_f3)) +
-                                   scroll_offset.y + -30.0f))) *
-                  Stage_GetCamInfoX24();
-
+                                   scroll_offset.y + cm_803BCCA0.x8) *
+                                  Stage_GetCamInfoX24()));
     if (pitch_angle > max_v) {
         pitch_angle = max_v;
     }
 
-    min_v = deg_to_rad * -7.0f;
+    min_v = deg_to_rad * cm_803BCCA0.x10;
     if (pitch_angle < min_v) {
         pitch_angle = min_v;
     }
-
     temp_f29 = pitch_angle + Stage_GetCamPanAngleRadians();
 
     fov_u = (0.5f * (deg_to_rad * transform->fov)) + temp_f29;
