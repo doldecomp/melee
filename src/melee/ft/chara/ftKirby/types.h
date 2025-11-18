@@ -404,6 +404,27 @@ union ftKb_MotionVars {
         char pad1[0x60];
         /* fp+23C4 */ float xC4;
     } specialhi;
+    struct ftKb_SpecialLWVars {
+        /* fp+2340 */ s16 x0;
+        /* fp+2342 */ s16 x2;
+        /* fp+2344 */ s16 x4;
+        /* fp+2346 */ s16 x6;
+        /* fp+2348 */ int x8;
+        /* fp+234C */ int xC;
+        /* fp+2350 */ int x10;
+        /* fp+2354 */ int x14;
+        /* fp+2358 */ Vec3 x18;
+        /* fp+2364 */ Vec3 x24;
+        /* fp+2370 */  Vec3 x30;
+        /* fp+237C */  Vec3 x3C;
+        /* fp+2388 */  Vec3 x48;
+        /* fp+2394 */  Vec3 x54;
+        /* fp+23A0 */  Vec3 x60;
+        /* fp+23AC */  Vec3 x6C;
+        /* fp+23B8 */  Vec3 x78;
+        /* fp+23C4 */ float x84;
+        /*fp+23C8 */ float x88[9];
+    } speciallw;
 };
 
 #endif
