@@ -5,9 +5,11 @@
 #include <placeholder.h>
 
 #include "ef/eflib.h"
+#include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
+#include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -46,8 +48,10 @@
 #include "it/items/itpeachtoadspore.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
+#include "lb/lbvector.h"
 #include "melee/lb/lbrefract.h"
 #include "mp/mpcoll.h"
+#include "mp/mplib.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
@@ -4118,6 +4122,13 @@ inline void ftKirbyDmgInline(Fighter_GObj* gobj)
     fp->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
 }
 
+inline void ftKirbyDmgInline2(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
+    fp->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
+}
+
 void ftKb_SpecialHi1_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -4605,7 +4616,7 @@ void ftKb_SpecialLw_Enter(Fighter_GObj* gobj) {
     temp_r30 = fp->x221C_b4;
     Fighter_ChangeMotionState(gobj, 0x189, 0U, 0.0f, 1.0f, 0.0f, NULL);
     fp->x221C_b4 = temp_r30;
-    ftKirbyDmgInline(gobj);
+    ftKirbyDmgInline2(gobj);
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(0x49B, (HSD_GObj* ) gobj, temp_r28);
 }
@@ -4636,7 +4647,7 @@ void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj) {
     temp_r30 = fp->x221C_b4;
     Fighter_ChangeMotionState(gobj, 0x18c, 0U, 0.0f, 1.0f, 0.0f, NULL);
     fp->x221C_b4 = temp_r30;
-    ftKirbyDmgInline(gobj);
+    ftKirbyDmgInline2(gobj);
     ftAnim_8006EBA4(gobj);
     efSync_Spawn(0x49B, (HSD_GObj* ) gobj, temp_r28);
 }
