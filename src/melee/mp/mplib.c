@@ -1468,58 +1468,56 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
     return r27;
 }
 
-bool mpLib_80050068(float* r3, float* r4, float f1, float f2, float f3,
-                    float f4, float f5, float f6, float f7)
+bool mpLib_80050068(float* x_out, float* y_out, float a0x, float a0y,
+                    float a1y, float b0x, float b0y, float b1x, float b1y)
 {
-    double d2;
-    double d4;
-    double d5;
-    double d7;
-    float min;
-    float max;
-    if (f2 < f3) {
-        if ((f5 < f2 && f7 < f2) || (f3 < f5 && f3 < f7)) {
+    double dbx;
+    double dby;
+    double dy;
+    double new_y;
+    float min_ay;
+    float max_ay;
+    if (a0y < a1y) {
+        if ((b0y < a0y && b1y < a0y) || (a1y < b0y && a1y < b1y)) {
             return false;
         }
-        if (f6 - f1 < -0.0001 || f4 - f1 > 0.0001) {
+        if (b1x - a0x < -0.0001 || b0x - a0x > 0.0001) {
             return false;
         }
-        min = f2;
-        max = f3;
+        min_ay = a0y;
+        max_ay = a1y;
     } else {
-        if ((f5 < f3 && f7 < f3) || (f2 < f5 && f2 < f7)) {
+        if ((b0y < a1y && b1y < a1y) || (a0y < b0y && a0y < b1y)) {
             return false;
         }
-        if (f4 - f1 < -0.0001 || f6 - f1 > 0.0001) {
+        if (b0x - a0x < -0.0001 || b1x - a0x > 0.0001) {
             return false;
         }
-        min = f3;
-        max = f2;
+        min_ay = a1y;
+        max_ay = a0y;
     }
-    d7 = f7 - f5;
-    d2 = f6 - f4;
-    if (ABS(d2) < 0.0001) {
+    dby = b1y - b0y;
+    dbx = b1x - b0x;
+    if (ABS(dbx) < 0.0001) {
         return false;
     }
-    d2 = (d7 / d2 * (f1 - f4)) + f5;
-    d4 = d2;
-    d5 = d2;
-    d4 = d4 - min;
-    if (d4 < 0.0) {
-        if (d4 < -0.1) {
+    new_y = (dby / dbx * (a0x - b0x)) + b0y;
+    dy = new_y - min_ay;
+    if (dy < 0.0) {
+        if (dy < -0.1) {
             return false;
         }
-        d5 = min;
+        new_y = min_ay;
     }
-    d4 = d5 - max;
-    if (d4 > 0.0) {
-        if (d4 > 0.1) {
+    dy = new_y - max_ay;
+    if (dy > 0.0) {
+        if (dy > 0.1) {
             return false;
         }
-        d5 = max;
+        new_y = max_ay;
     }
-    *r3 = f1;
-    *r4 = d5;
+    *x_out = a0x;
+    *y_out = new_y;
     return true;
 }
 
