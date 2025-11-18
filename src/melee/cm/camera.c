@@ -401,8 +401,8 @@ void Camera_8002958C(CameraBounds* bounds, CameraTransformState* transform)
             tracking_weight = 1.0f;
         }
         tracking_multiplier = tracking_weight * Stage_GetCamTrackRatio();
-        min_x = min_y = FLT_MAX;
-        max_x = max_y = FLT_MIN;
+        min_x = min_y = F32_MAX;
+        max_x = max_y = -F32_MAX;
 
         subject_count = 0;
         subject = cm_804D6468;
@@ -898,7 +898,7 @@ void Camera_8002A28C(CameraBounds* arg0)
 // probably was a bandaid for problem stages
 inline float get_stage_floor_height(InternalStageId stage_id)
 {
-    float height = FLT_MIN;
+    float height = -F32_MAX;
     switch (stage_id) {
     case CASTLE:
         height = grCastle_801D0FF0();
