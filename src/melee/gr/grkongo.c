@@ -542,10 +542,10 @@ void grKongo_801D6198(Ground_GObj* arg0)
             if ((enum InternalStageId) temp_r3->map_id ==
                 InternalStageID_Unk01)
             {
-                mpLib_80057638(0);
+                mpJointListAdd(0);
                 mpJointSetCb1(0, temp_r3, fn_801D7E60);
             } else {
-                mpLib_80057638(1);
+                mpJointListAdd(1);
                 mpJointSetCb1(1, temp_r3, fn_801D7E60);
             }
             temp_r3->gv.kongo3.xC4 = 1;

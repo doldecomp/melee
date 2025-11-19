@@ -163,7 +163,7 @@ void grTPurin_80223388(Ground_GObj* gobj)
             if ((jobj != NULL) &&
                 (lb_8000B1CC(jobj, NULL, &vec), (vec.x < 130.0f)))
             {
-                mpLib_80057638(res);
+                mpJointListAdd(res);
             } else {
                 mpLib_80057BC0(res);
             }

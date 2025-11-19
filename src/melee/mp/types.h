@@ -84,7 +84,7 @@ struct CollVtx {
 }; /* size = 0x18 */
 STATIC_ASSERT(sizeof(struct CollVtx) == 0x18);
 
-struct CollInfo {
+struct MapJoint {
     /*  +0 */ s16 floor_start;
     /*  +2 */ s16 floor_count;
     /*  +4 */ s16 ceiling_start;
@@ -105,12 +105,12 @@ struct CollInfo {
 
 struct CollJoint {
     /* 0x00 */ CollJoint* next;
-    /* 0x04 */ CollInfo* coll_info;
+    /* 0x04 */ MapJoint* inner;
     /* 0x08 */ u32 flags;
     /* 0x0C */ s16 xC;
     /* 0x0E */ u8 xE : 1;
-    /* 0x10 */ Vec2 x10;
-    /* 0x18 */ Vec2 x18;
+    /* 0x10 */ Vec2 bounding_min;
+    /* 0x18 */ Vec2 bounding_max;
     /* 0x20 */ HSD_JObj* x20;
     /* 0x24 */ mpLib_Callback x24;
     /* 0x28 */ Ground* x28;
@@ -134,7 +134,7 @@ struct mpCollData {
     /* +1E */ s16 left_wall_count;
     /* +20 */ s16 dynamic_start;
     /* +22 */ s16 dynamic_count;
-    /* +24 */ CollInfo* x24;
+    /* +24 */ MapJoint* joints;
     /* +28 */ int joint_count;
     /* +2C */ int x2C; /* inferred */
 };

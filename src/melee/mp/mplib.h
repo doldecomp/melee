@@ -139,10 +139,10 @@
 /* 0552B0 */ void mpLib_800552B0(int joint_id, HSD_JObj*, int z);
 /* 05541C */ void mpLib_8005541C(int joint_id);
 /* 0557D0 */ void mpLib_800557D0(int joint_id);
-/* 055C5C */ void mpUpdateDynamics(int joint_id);
+/* 055C5C */ void mpJointUpdateDynamics(int joint_id);
 /* 055E24 */ void mpLib_80055E24(int joint_id);
 /* 055E9C */ void mpLib_80055E9C(int joint_id);
-/* 0565DC */ void mpLib_800565DC(int joint_id);
+/* 0565DC */ void mpJointUpdateBounding(int joint_id);
 /* 05667C */ void mpLib_8005667C(int joint_id);
 /* 0566D8 */ void mpVtxGetPos(int vtx_id, float* x_out, float* y_out);
 /* 0566F8 */ void mpVtxSetPos(int vtx_id, float x, float y);
@@ -165,8 +165,8 @@
 /* 057424 */ void mpLib_80057424(int joint_id);
 /* 057528 */ void mpLib_80057528(int line_id);
 /* 0575B0 */ void mpLib_800575B0(int line_id);
-/* 057638 */ void mpLib_80057638(int joint_id);
-/* 057B4C */ void mpLib_80057B4C(CollJoint*);
+/* 057638 */ void mpJointListAdd(int joint_id);
+/* 057B4C */ void mpJointListUnlink(CollJoint*);
 /* 057BC0 */ void mpLib_80057BC0(int joint_id);
 /* 057FDC */ void mpLib_80057FDC(int joint_id);
 /* 058044 */ void mpLib_80058044(int joint_id);

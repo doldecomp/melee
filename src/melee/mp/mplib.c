@@ -57,7 +57,7 @@
 
 static Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
 static mpLib_Line mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
-static CollInfo mpLib_803BF738 = {
+static MapJoint mpLib_803BF738 = {
     1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
 };
 static mpCollData mpLib_803BF760 = {
@@ -154,13 +154,13 @@ void mpLibLoad(mpCollData* coll_data)
     float* temp_r30;
     float* temp_r29;
     float* temp_r28;
-    CollJoint* var_r27;
-    CollJoint* var_r26;
+    CollJoint* joint_prev; // r27
+    CollJoint* joint;      // r26
     int start;
     int count;
     int i;
 
-    var_r27 = NULL;
+    joint_prev = NULL;
     groundCollVtx = HSD_MemAlloc(0xC000);
     HSD_ASSERT(412, groundCollVtx);
     groundCollLine = HSD_MemAlloc(0x3000);
@@ -180,28 +180,28 @@ void mpLibLoad(mpCollData* coll_data)
     temp_r30 = &mpLib_80458868[0].bottom;
     mpLib_80458868[0].bottom = -F32_MAX;
     for (i = 0; i < coll_data->joint_count; i++) {
-        var_r26 = &groundCollJoint[i];
-        var_r26->coll_info = &coll_data->x24[i];
-        var_r26->flags = 0x10000;
-        var_r26->x10.x = f31 * coll_data->x24[i].left;
-        var_r26->x10.y = f31 * coll_data->x24[i].bottom;
-        var_r26->x18.x = f31 * coll_data->x24[i].right;
-        var_r26->x18.y = f31 * coll_data->x24[i].top;
-        var_r26->x20 = NULL;
-        var_r26->x28 = NULL;
-        var_r26->x24 = NULL;
-        var_r26->x30 = NULL;
-        var_r26->x2C = NULL;
-        var_r26->xE = true;
-        if (var_r27 == NULL) {
-            mpLib_804D64C4 = var_r26;
+        joint = &groundCollJoint[i];
+        joint->inner = &coll_data->joints[i];
+        joint->flags = 0x10000;
+        joint->bounding_min.x = f31 * coll_data->joints[i].left;
+        joint->bounding_min.y = f31 * coll_data->joints[i].bottom;
+        joint->bounding_max.x = f31 * coll_data->joints[i].right;
+        joint->bounding_max.y = f31 * coll_data->joints[i].top;
+        joint->x20 = NULL;
+        joint->x28 = NULL;
+        joint->x24 = NULL;
+        joint->x30 = NULL;
+        joint->x2C = NULL;
+        joint->xE = true;
+        if (joint_prev == NULL) {
+            jointListStart = joint;
         } else {
-            var_r27->next = var_r26;
+            joint_prev->next = joint;
         }
-        var_r27 = var_r26;
+        joint_prev = joint;
     }
-    var_r26->next = NULL;
-    mpLib_804D64C8 = var_r26;
+    joint->next = NULL;
+    jointListEnd = joint;
     mpPruneEmptyLines(coll_data);
 
     count = coll_data->floor_count;
@@ -860,7 +860,7 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
                           bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
 {
     float min_dist2_f30;
-    CollJoint* r29;
+    CollJoint* joint; // r29
     int i_r28;
     bool result_r27;
     bool temp_r3;
@@ -872,26 +872,26 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (r29 = mpLib_804D64C4; r29 != NULL; r29 = r29->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         CollLine* line_r26;
         int var_r25;
         int var_r24;
-        CollInfo* temp_r4;
-        if (r29->flags & 0x1000) {
+        MapJoint* j_inner; // r4
+        if (joint->flags & 0x1000) {
             continue;
         }
 
-        if (joint_id0 == r29 - groundCollJoint ||
-            (joint_id1 != -1 && joint_id1 != r29 - groundCollJoint))
+        if (joint_id0 == joint - groundCollJoint ||
+            (joint_id1 != -1 && joint_id1 != joint - groundCollJoint))
         {
             continue;
         }
 
-        temp_r4 = r29->coll_info;
+        j_inner = joint->inner;
         i_r28 = 0;
-        var_r25 = temp_r4->floor_count;
-        var_r24 = temp_r4->dynamic_count;
-        line_r26 = &groundCollLine[temp_r4->floor_start];
+        var_r25 = j_inner->floor_count;
+        var_r24 = j_inner->dynamic_count;
+        line_r26 = &groundCollLine[j_inner->floor_start];
         for (; i_r28 < var_r25; i_r28 += 1, line_r26 += 1) {
             float px_sp54;
             float py_sp50;
@@ -988,7 +988,7 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
             var_r25 = var_r24;
             i_r28 = 0;
             var_r24 = 0;
-            line_r26 = &groundCollLine[r29->coll_info->dynamic_start];
+            line_r26 = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1019,7 +1019,7 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         CollLine* line;
         int count;
         int count2;
@@ -1033,9 +1033,9 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
             continue;
         }
 
-        count = joint->coll_info->floor_count;
-        count2 = joint->coll_info->dynamic_count;
-        line = &groundCollLine[joint->coll_info->floor_start];
+        count = joint->inner->floor_count;
+        count2 = joint->inner->dynamic_count;
+        line = &groundCollLine[joint->inner->floor_start];
         for (i = 0; i < count; i++, line++) {
         block_8:
             if (cb != NULL && !cb(gobj, line - groundCollLine)) {
@@ -1156,7 +1156,7 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
             count = count2;
             i = 0;
             count2 = 0;
-            line = &groundCollLine[joint->coll_info->dynamic_start];
+            line = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1173,7 +1173,7 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                             Vec3* normal_out, int joint_id0, int joint_id1)
 {
     float min_dist2 = F32_MAX;
-    CollJoint* r29;
+    CollJoint* joint; // r29
     int i_r28;
     bool result = false;
     bool temp_r3;
@@ -1184,26 +1184,26 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (r29 = mpLib_804D64C4; r29 != NULL; r29 = r29->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         CollLine* line_r26;
         int var_r25;
         int var_r24;
-        CollInfo* coll_info;
-        if (r29->flags & 0x1000) {
+        MapJoint* j_inner;
+        if (joint->flags & 0x1000) {
             continue;
         }
 
-        if (joint_id0 == r29 - groundCollJoint ||
-            (joint_id1 != -1 && joint_id1 != r29 - groundCollJoint))
+        if (joint_id0 == joint - groundCollJoint ||
+            (joint_id1 != -1 && joint_id1 != joint - groundCollJoint))
         {
             continue;
         }
 
-        coll_info = r29->coll_info;
+        j_inner = joint->inner;
         i_r28 = 0;
-        var_r25 = coll_info->ceiling_count;
-        var_r24 = coll_info->dynamic_count;
-        line_r26 = &groundCollLine[coll_info->ceiling_start];
+        var_r25 = j_inner->ceiling_count;
+        var_r24 = j_inner->dynamic_count;
+        line_r26 = &groundCollLine[j_inner->ceiling_start];
         for (; i_r28 < var_r25; i_r28 += 1, line_r26 += 1) {
             float int_x;
             float int_y;
@@ -1293,7 +1293,7 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
             var_r25 = var_r24;
             i_r28 = 0;
             var_r24 = 0;
-            line_r26 = &groundCollLine[r29->coll_info->dynamic_start];
+            line_r26 = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1321,7 +1321,7 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         CollLine* r26;
         int r25;
         int r24;
@@ -1335,9 +1335,9 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
             continue;
         }
 
-        r25 = joint->coll_info->ceiling_count;
-        r24 = joint->coll_info->dynamic_count;
-        r26 = &groundCollLine[joint->coll_info->ceiling_start];
+        r25 = joint->inner->ceiling_count;
+        r24 = joint->inner->dynamic_count;
+        r26 = &groundCollLine[joint->inner->ceiling_start];
         for (r28 = 0; r28 < r25; r28++, r26++) {
         block_8:
             if (r26->flags & CollLine_Ceiling && r26->flags & 0x10000 &&
@@ -1456,7 +1456,7 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
             r25 = r24;
             r28 = 0;
             r24 = 0;
-            r26 = &groundCollLine[joint->coll_info->dynamic_start];
+            r26 = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1532,7 +1532,7 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
     CollLine* p26;
     int r25;
     int r24;
-    CollInfo* coll_info;
+    MapJoint* j_inner;
     int r3;
     PAD_STACK(4);
 
@@ -1544,7 +1544,7 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         if (joint->flags & 0x1000) {
             continue;
         }
@@ -1555,11 +1555,11 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        coll_info = joint->coll_info;
+        j_inner = joint->inner;
 
-        r25 = coll_info->left_wall_count;
-        r24 = coll_info->dynamic_count;
-        p26 = &groundCollLine[coll_info->left_wall_start];
+        r25 = j_inner->left_wall_count;
+        r24 = j_inner->dynamic_count;
+        p26 = &groundCollLine[j_inner->left_wall_start];
 
         for (r28 = 0; r28 < r25; r28++, p26++) {
         block_8:
@@ -1642,7 +1642,7 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
             r25 = r24;
             r28 = 0;
             r24 = 0;
-            p26 = &groundCollLine[joint->coll_info->dynamic_start];
+            p26 = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1666,7 +1666,7 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
     CollLine* line;
     int count;
     int dynamic_count;
-    CollInfo* coll_info;
+    MapJoint* j_inner;
     int r3;
     PAD_STACK(8);
 
@@ -1678,7 +1678,7 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         if (joint->flags & 0x1000) {
             continue;
         }
@@ -1689,10 +1689,10 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        coll_info = joint->coll_info;
-        count = coll_info->left_wall_count;
-        dynamic_count = coll_info->dynamic_count;
-        line = &groundCollLine[coll_info->left_wall_start];
+        j_inner = joint->inner;
+        count = j_inner->left_wall_count;
+        dynamic_count = j_inner->dynamic_count;
+        line = &groundCollLine[j_inner->left_wall_start];
         for (i = 0; i < count; i++, line++) {
         block_8:
             if (line->flags & CollLine_LeftWall && line->flags & 0x10000 &&
@@ -1810,7 +1810,7 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
             count = dynamic_count;
             i = 0;
             dynamic_count = 0;
-            line = &groundCollLine[joint->coll_info->dynamic_start];
+            line = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1833,7 +1833,7 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
     CollLine* p26;
     int r25;
     int r24;
-    CollInfo* coll_info;
+    MapJoint* j_inner;
     int r3;
     PAD_STACK(4);
 
@@ -1845,7 +1845,7 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         if (joint->flags & 0x1000) {
             continue;
         }
@@ -1856,11 +1856,11 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        coll_info = joint->coll_info;
+        j_inner = joint->inner;
 
-        r25 = coll_info->right_wall_count;
-        r24 = coll_info->dynamic_count;
-        p26 = &groundCollLine[coll_info->right_wall_start];
+        r25 = j_inner->right_wall_count;
+        r24 = j_inner->dynamic_count;
+        p26 = &groundCollLine[j_inner->right_wall_start];
 
         for (r28 = 0; r28 < r25; r28++, p26++) {
         block_8:
@@ -1943,7 +1943,7 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
             r25 = r24;
             r28 = 0;
             r24 = 0;
-            p26 = &groundCollLine[joint->coll_info->dynamic_start];
+            p26 = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1975,11 +1975,11 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
         mpLib_80058970(ax, ay, bx, by);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         CollLine* line;
         int count;
         int dynamic_count;
-        CollInfo* coll_info;
+        MapJoint* j_inner;
 
         if (joint->flags & 0x1000) {
             continue;
@@ -1991,10 +1991,10 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        coll_info = joint->coll_info;
-        count = coll_info->right_wall_count;
-        dynamic_count = coll_info->dynamic_count;
-        line = &groundCollLine[coll_info->right_wall_start];
+        j_inner = joint->inner;
+        count = j_inner->right_wall_count;
+        dynamic_count = j_inner->dynamic_count;
+        line = &groundCollLine[j_inner->right_wall_start];
         for (i = 0; i < count; i++, line++) {
         block_8:
             if (line->flags & CollLine_RightWall && line->flags & 0x10000 &&
@@ -2112,7 +2112,7 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
             count = dynamic_count;
             i = 0;
             dynamic_count = 0;
-            line = &groundCollLine[joint->coll_info->dynamic_start];
+            line = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -2143,11 +2143,11 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
         mpLib_800589D0(ax, ay, bx, by, cx, cy, dx, dy);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         CollLine* line;
         int count;
         int dynamic_count;
-        CollInfo* coll_info;
+        MapJoint* j_inner;
 
         if (joint->flags & 0x1000) {
             continue;
@@ -2159,11 +2159,11 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
             continue;
         }
 
-        coll_info = joint->coll_info;
+        j_inner = joint->inner;
 
-        count = coll_info->right_wall_count;
-        dynamic_count = coll_info->dynamic_count;
-        line = &groundCollLine[coll_info->right_wall_start];
+        count = j_inner->right_wall_count;
+        dynamic_count = j_inner->dynamic_count;
+        line = &groundCollLine[j_inner->right_wall_start];
         for (i = 0; i < count; i++, line++) {
         block_8:
             if (line->flags & CollLine_RightWall && line->flags & 0x10000 &&
@@ -2252,7 +2252,7 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
             count = dynamic_count;
             i = 0;
             dynamic_count = 0;
-            line = &groundCollLine[joint->coll_info->dynamic_start];
+            line = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -2283,11 +2283,11 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
         mpLib_800589D0(a0x, a0y, a1x, a1y, b0x, b0y, b1x, b1y);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         CollLine* line;
         int count;
         int dynamic_count;
-        CollInfo* coll_info;
+        MapJoint* j_inner;
 
         if (joint->flags & 0x1000) {
             continue;
@@ -2299,11 +2299,11 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
             continue;
         }
 
-        coll_info = joint->coll_info;
+        j_inner = joint->inner;
 
-        count = coll_info->left_wall_count;
-        dynamic_count = coll_info->dynamic_count;
-        line = &groundCollLine[coll_info->left_wall_start];
+        count = j_inner->left_wall_count;
+        dynamic_count = j_inner->dynamic_count;
+        line = &groundCollLine[j_inner->left_wall_start];
         for (i = 0; i < count; i++, line++) {
         block_8:
             if (line->flags & CollLine_LeftWall && line->flags & 0x10000 &&
@@ -2394,7 +2394,7 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
             count = dynamic_count;
             i = 0;
             dynamic_count = 0;
-            line = &groundCollLine[joint->coll_info->dynamic_start];
+            line = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -2419,7 +2419,7 @@ int mpLib_8005199C_Floor(Vec3* vec, int joint_id0, int joint_id1)
         mpLib_80058970(x, y, x, y - 30000.0F);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         if (joint->flags & 0x1000 || joint_id0 == joint - groundCollJoint) {
             continue;
         }
@@ -2429,11 +2429,11 @@ int mpLib_8005199C_Floor(Vec3* vec, int joint_id0, int joint_id1)
         }
 
         {
-            CollInfo* coll_info = joint->coll_info;
+            MapJoint* j_inner = joint->inner;
             int i;
-            CollLine* line = &groundCollLine[coll_info->floor_start];
-            int count = coll_info->floor_count;
-            int dynamic_count = coll_info->dynamic_count;
+            CollLine* line = &groundCollLine[j_inner->floor_start];
+            int count = j_inner->floor_count;
+            int dynamic_count = j_inner->dynamic_count;
             for (i = 0; i < count; i++, line++) {
             block8:
                 if (line->flags & CollLine_Floor && line->flags & 0x10000 &&
@@ -2465,7 +2465,7 @@ int mpLib_8005199C_Floor(Vec3* vec, int joint_id0, int joint_id1)
             if (dynamic_count != 0) {
                 count = dynamic_count;
                 i = 0;
-                line = &groundCollLine[coll_info->dynamic_start];
+                line = &groundCollLine[j_inner->dynamic_start];
                 dynamic_count = 0;
                 goto block8;
             }
@@ -2507,7 +2507,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
         mpLib_800588D0(left, bottom, right, top);
     }
 
-    for (joint = mpLib_804D64C4; joint != NULL; joint = joint->next) {
+    for (joint = jointListStart; joint != NULL; joint = joint->next) {
         if (joint->flags & 0x1000) {
             continue;
         }
@@ -2518,9 +2518,9 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
 
         if (joint_id1 == -1 || joint_id1 == joint - groundCollJoint) {
             int i;
-            CollLine* line = &groundCollLine[joint->coll_info->floor_start];
-            int count = joint->coll_info->floor_count;
-            int dynamic_cout = joint->coll_info->dynamic_count;
+            CollLine* line = &groundCollLine[joint->inner->floor_start];
+            int count = joint->inner->floor_count;
+            int dynamic_cout = joint->inner->dynamic_count;
             for (i = 0; i < count; i++, line++) {
             reset:
                 new_id = line - groundCollLine;
@@ -2598,7 +2598,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
             if (dynamic_cout != 0) {
                 count = dynamic_cout;
                 i = 0;
-                line = &groundCollLine[joint->coll_info->dynamic_start];
+                line = &groundCollLine[joint->inner->dynamic_start];
                 dynamic_cout = 0;
                 goto reset;
             }
@@ -3555,36 +3555,36 @@ void mpLib_8005541C(int joint_id)
     joint = &groundCollJoint[joint_id];
     joint->flags |= 0x40000;
 
-    count = joint->coll_info->floor_count;
-    line = &groundCollLine[joint->coll_info->floor_start];
+    count = joint->inner->floor_count;
+    line = &groundCollLine[joint->inner->floor_start];
     while (count-- > 0) {
         line->flags |= 0x40000;
         line++;
     }
 
-    count = joint->coll_info->ceiling_count;
-    line = &groundCollLine[joint->coll_info->ceiling_start];
+    count = joint->inner->ceiling_count;
+    line = &groundCollLine[joint->inner->ceiling_start];
     while (count-- > 0) {
         line->flags |= 0x40000;
         line++;
     }
 
-    count = joint->coll_info->left_wall_count;
-    line = &groundCollLine[joint->coll_info->left_wall_start];
+    count = joint->inner->left_wall_count;
+    line = &groundCollLine[joint->inner->left_wall_start];
     while (count-- > 0) {
         line->flags |= 0x40000;
         line++;
     }
 
-    count = joint->coll_info->right_wall_count;
-    line = &groundCollLine[joint->coll_info->right_wall_start];
+    count = joint->inner->right_wall_count;
+    line = &groundCollLine[joint->inner->right_wall_start];
     while (count-- > 0) {
         line->flags |= 0x40000;
         line++;
     }
 
-    count = joint->coll_info->dynamic_count;
-    line = &groundCollLine[joint->coll_info->dynamic_start];
+    count = joint->inner->dynamic_count;
+    line = &groundCollLine[joint->inner->dynamic_start];
     while (count-- > 0) {
         line->flags |= 0x40000;
         line++;
@@ -3602,43 +3602,43 @@ void mpLib_800557D0(int joint_id)
     joint = &groundCollJoint[joint_id];
     joint->flags &= ~0x40000;
 
-    count = joint->coll_info->floor_count;
-    line = &groundCollLine[joint->coll_info->floor_start];
+    count = joint->inner->floor_count;
+    line = &groundCollLine[joint->inner->floor_start];
     while (count-- > 0) {
         line->flags &= ~0x40000;
         line++;
     }
 
-    count = joint->coll_info->ceiling_count;
-    line = &groundCollLine[joint->coll_info->ceiling_start];
+    count = joint->inner->ceiling_count;
+    line = &groundCollLine[joint->inner->ceiling_start];
     while (count-- > 0) {
         line->flags &= ~0x40000;
         line++;
     }
 
-    count = joint->coll_info->left_wall_count;
-    line = &groundCollLine[joint->coll_info->left_wall_start];
+    count = joint->inner->left_wall_count;
+    line = &groundCollLine[joint->inner->left_wall_start];
     while (count-- > 0) {
         line->flags &= ~0x40000;
         line++;
     }
 
-    count = joint->coll_info->right_wall_count;
-    line = &groundCollLine[joint->coll_info->right_wall_start];
+    count = joint->inner->right_wall_count;
+    line = &groundCollLine[joint->inner->right_wall_start];
     while (count-- > 0) {
         line->flags &= ~0x40000;
         line++;
     }
 
-    count = joint->coll_info->dynamic_count;
-    line = &groundCollLine[joint->coll_info->dynamic_start];
+    count = joint->inner->dynamic_count;
+    line = &groundCollLine[joint->inner->dynamic_start];
     while (count-- > 0) {
         line->flags &= ~0x40000;
         line++;
     }
 
-    count = joint->coll_info->vtx_count;
-    vtx = &groundCollVtx[joint->coll_info->vtx_start];
+    count = joint->inner->vtx_count;
+    vtx = &groundCollVtx[joint->inner->vtx_start];
     while (count-- > 0) {
         vtx->x10 = vtx->pos.x;
         vtx->x14 = vtx->pos.y;
@@ -3646,17 +3646,17 @@ void mpLib_800557D0(int joint_id)
     }
 }
 
-void mpUpdateDynamics(int joint_id)
+void mpJointUpdateDynamics(int joint_id)
 {
     const double TAN30 = 0.577350295784245;
     const double TAN60 = 1.7320508368950045;
     CollJoint* joint = &groundCollJoint[joint_id];
     CollLine* line;
     int i;
-    s16 count = joint->coll_info->dynamic_count;
+    s16 count = joint->inner->dynamic_count;
     u32 kind;
 
-    line = &groundCollLine[joint->coll_info->dynamic_start];
+    line = &groundCollLine[joint->inner->dynamic_start];
 
     for (i = 0; i < count; i++, line++) {
         mpLib_Line* temp = line->x0;
@@ -3704,13 +3704,13 @@ void mpLib_80055E24(int joint_id)
     bool var_r6;
     CollJoint* joint = &groundCollJoint[joint_id];
 
-    mpUpdateDynamics(joint_id);
+    mpJointUpdateDynamics(joint_id);
     var_r6 = false;
     if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(joint_id, joint->coll_info->vtx_start,
-                      joint->coll_info->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, joint->inner->vtx_start,
+                      joint->inner->vtx_count, var_r6);
 }
 
 void mpLib_80055E9C(int joint_id)
@@ -3739,8 +3739,8 @@ void mpLib_80055E9C(int joint_id)
 
     mpColl_804D64AC += 1;
     joint = &groundCollJoint[joint_id];
-    vtx_count = joint->coll_info->vtx_count;
-    v_r4 = &groundCollVtx[joint->coll_info->vtx_start];
+    vtx_count = joint->inner->vtx_count;
+    v_r4 = &groundCollVtx[joint->inner->vtx_start];
     for (i = 0; i < vtx_count; i++, v_r4++) {
         v_r4->x10 = v_r4->pos.x;
         v_r4->x14 = v_r4->pos.y;
@@ -3750,15 +3750,15 @@ void mpLib_80055E9C(int joint_id)
         return;
     }
 
-    if (HSD_JObjGetFlags(jobj) & 0x10) {
+    if (HSD_JObjGetFlags(jobj) & JOBJ_HIDDEN) {
         if (!(joint->flags & 0x40000)) {
             mpLib_8005541C(joint_id);
             var_r6 = false;
             if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
                 var_r6 = true;
             }
-            mpIsland_8005B334(joint_id, joint->coll_info->vtx_start,
-                              joint->coll_info->vtx_count, var_r6);
+            mpIsland_8005B334(joint_id, joint->inner->vtx_start,
+                              joint->inner->vtx_count, var_r6);
         }
         return;
     }
@@ -3771,21 +3771,21 @@ void mpLib_80055E9C(int joint_id)
     if (m0_0 == mtx[1][1] && m0_0 == mtx[2][2]) {
         m0_3 = mtx[0][3];
         m1_3 = mtx[1][3];
-        v_r4 = &groundCollVtx[joint->coll_info->vtx_start];
+        v_r4 = &groundCollVtx[joint->inner->vtx_start];
         for (i = 0; i < vtx_count; i++, v_r4++) {
             v_r4->pos.x = v_r4->x0 * m0_0 + m0_3;
             v_r4->pos.y = v_r4->x4 * m0_0 + m1_3;
         }
-        joint->x10.x = (joint->coll_info->left * m0_0 + m0_3) - 30.0F;
-        joint->x10.y = (joint->coll_info->bottom * m0_0 + m1_3) - 30.0F;
-        joint->x18.x = 30.0F + (joint->coll_info->right * m0_0 + m0_3);
-        joint->x18.y = 30.0F + (joint->coll_info->top * m0_0 + m1_3);
+        joint->bounding_min.x = (joint->inner->left * m0_0 + m0_3) - 30.0F;
+        joint->bounding_min.y = (joint->inner->bottom * m0_0 + m1_3) - 30.0F;
+        joint->bounding_max.x = 30.0F + (joint->inner->right * m0_0 + m0_3);
+        joint->bounding_max.y = 30.0F + (joint->inner->top * m0_0 + m1_3);
         joint->flags |= 0x100;
         goto after0;
     }
 
     i = 0;
-    v_r26 = &groundCollVtx[joint->coll_info->vtx_start];
+    v_r26 = &groundCollVtx[joint->inner->vtx_start];
 
     while (i < vtx_count) {
         sp28.x = v_r26->x0;
@@ -3812,81 +3812,81 @@ void mpLib_80055E9C(int joint_id)
         }
         joint->flags |= 0x100;
         if (!(joint->flags & 0x400)) {
-            sp28.x = joint->coll_info->left;
-            sp28.y = joint->coll_info->bottom;
+            sp28.x = joint->inner->left;
+            sp28.y = joint->inner->bottom;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            joint->x10.x = sp28.x;
-            joint->x10.y = sp28.y;
-            sp28.x = joint->coll_info->right;
-            sp28.y = joint->coll_info->top;
+            joint->bounding_min.x = sp28.x;
+            joint->bounding_min.y = sp28.y;
+            sp28.x = joint->inner->right;
+            sp28.y = joint->inner->top;
             sp28.z = 0.0F;
             PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-            joint->x18.x = sp28.x;
-            joint->x18.y = sp28.y;
+            joint->bounding_max.x = sp28.x;
+            joint->bounding_max.y = sp28.y;
             if (joint->flags & 0x200) {
-                sp28.x = joint->coll_info->right;
-                sp28.y = joint->coll_info->bottom;
+                sp28.x = joint->inner->right;
+                sp28.y = joint->inner->bottom;
                 sp28.z = 0.0F;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
                 f30 = sp28.x;
                 f31 = sp28.y;
-                sp28.x = joint->coll_info->left;
-                sp28.y = joint->coll_info->top;
+                sp28.x = joint->inner->left;
+                sp28.y = joint->inner->top;
                 sp28.z = 0.0F;
                 PSMTXMultVec(jobj->mtx, &sp28, &sp28);
-                f1 = joint->x10.x;
-                f0 = joint->x18.x;
+                f1 = joint->bounding_min.x;
+                f0 = joint->bounding_max.x;
                 f2 = sp28.x;
                 f3 = sp28.y;
                 if (f1 > f0) {
-                    joint->x10.x = f0;
+                    joint->bounding_min.x = f0;
                 }
-                if (joint->x10.x > f30) {
-                    joint->x10.x = f30;
+                if (joint->bounding_min.x > f30) {
+                    joint->bounding_min.x = f30;
                 }
-                if (joint->x10.x > f2) {
-                    joint->x10.x = f2;
+                if (joint->bounding_min.x > f2) {
+                    joint->bounding_min.x = f2;
                 }
-                if (joint->x18.x < f1) {
-                    joint->x18.x = f1;
+                if (joint->bounding_max.x < f1) {
+                    joint->bounding_max.x = f1;
                 }
-                if (joint->x18.x < f30) {
-                    joint->x18.x = f30;
+                if (joint->bounding_max.x < f30) {
+                    joint->bounding_max.x = f30;
                 }
-                if (joint->x18.x < f2) {
-                    joint->x18.x = f2;
+                if (joint->bounding_max.x < f2) {
+                    joint->bounding_max.x = f2;
                 }
-                f1 = joint->x10.y;
-                f0 = joint->x18.y;
+                f1 = joint->bounding_min.y;
+                f0 = joint->bounding_max.y;
                 if (f1 > f0) {
-                    joint->x10.y = f0;
+                    joint->bounding_min.y = f0;
                 }
-                if (joint->x10.y > f31) {
-                    joint->x10.y = f31;
+                if (joint->bounding_min.y > f31) {
+                    joint->bounding_min.y = f31;
                 }
-                if (joint->x10.y > f3) {
-                    joint->x10.y = f3;
+                if (joint->bounding_min.y > f3) {
+                    joint->bounding_min.y = f3;
                 }
-                if (joint->x18.y < f1) {
-                    joint->x18.y = f1;
+                if (joint->bounding_max.y < f1) {
+                    joint->bounding_max.y = f1;
                 }
-                if (joint->x18.y < f31) {
-                    joint->x18.y = f31;
+                if (joint->bounding_max.y < f31) {
+                    joint->bounding_max.y = f31;
                 }
-                if (joint->x18.y < f3) {
-                    joint->x18.y = f3;
+                if (joint->bounding_max.y < f3) {
+                    joint->bounding_max.y = f3;
                 }
             }
-            joint->x10.x -= 30.0F;
-            joint->x18.x += 30.0F;
-            joint->x10.y -= 30.0F;
-            joint->x18.y += 30.0F;
+            joint->bounding_min.x -= 30.0F;
+            joint->bounding_max.x += 30.0F;
+            joint->bounding_min.y -= 30.0F;
+            joint->bounding_max.y += 30.0F;
         }
     }
 
 after0:
-    mpUpdateDynamics(joint_id);
+    mpJointUpdateDynamics(joint_id);
 
 after1:
     if (joint->flags & 0x40000) {
@@ -3896,29 +3896,29 @@ after1:
     if (!(joint->flags & (0x40000 | 0x800)) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(joint_id, joint->coll_info->vtx_start,
-                      joint->coll_info->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, joint->inner->vtx_start,
+                      joint->inner->vtx_count, var_r6);
 }
 
-void mpLib_800565DC(int joint_id)
+void mpJointUpdateBounding(int joint_id)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
-    CollVtx* vtx = &groundCollVtx[joint->coll_info->vtx_start];
-    int count = joint->coll_info->vtx_count;
+    CollVtx* vtx = &groundCollVtx[joint->inner->vtx_start];
+    int count = joint->inner->vtx_count;
 
     int i;
     for (i = 0; i < count; i++) {
-        if (joint->x10.x > vtx->pos.x - 30.0F) {
-            joint->x10.x = vtx->pos.x - 30.0F;
+        if (joint->bounding_min.x > vtx->pos.x - 30.0F) {
+            joint->bounding_min.x = vtx->pos.x - 30.0F;
         }
-        if (joint->x18.x < vtx->pos.x + 30.0F) {
-            joint->x18.x = vtx->pos.x + 30.0F;
+        if (joint->bounding_max.x < vtx->pos.x + 30.0F) {
+            joint->bounding_max.x = vtx->pos.x + 30.0F;
         }
-        if (joint->x10.y > vtx->pos.y - 30.0F) {
-            joint->x10.y = vtx->pos.y - 30.0F;
+        if (joint->bounding_min.y > vtx->pos.y - 30.0F) {
+            joint->bounding_min.y = vtx->pos.y - 30.0F;
         }
-        if (joint->x18.y < vtx->pos.y + 30.0F) {
-            joint->x18.y = vtx->pos.y + 30.0F;
+        if (joint->bounding_max.y < vtx->pos.y + 30.0F) {
+            joint->bounding_max.y = vtx->pos.y + 30.0F;
         }
         vtx += 1;
     }
@@ -3932,8 +3932,8 @@ void mpLib_8005667C(int joint_id)
     if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    mpIsland_8005B334(joint_id, joint->coll_info->vtx_start,
-                      joint->coll_info->vtx_count, var_r6);
+    mpIsland_8005B334(joint_id, joint->inner->vtx_start,
+                      joint->inner->vtx_count, var_r6);
 }
 
 void mpVtxGetPos(int vtx_id, float* x_out, float* y_out)
@@ -4798,9 +4798,8 @@ int mpJointFromLine(int line_id)
         count = mpLib_804D64B4->joint_count;
         joint = groundCollJoint;
         for (i = 0; i < count; i++) {
-            if (joint->coll_info->vtx_start <= v0_idx &&
-                v0_idx <
-                    joint->coll_info->vtx_start + joint->coll_info->vtx_count)
+            if (joint->inner->vtx_start <= v0_idx &&
+                v0_idx < joint->inner->vtx_start + joint->inner->vtx_count)
             {
                 return joint - groundCollJoint;
             }
@@ -4941,9 +4940,9 @@ bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
 void mpLib_80057424(int joint_id)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
-    CollInfo* coll_info = joint->coll_info;
-    u32 count = coll_info->vtx_count;
-    s16 start = coll_info->vtx_start;
+    MapJoint* j_inner = joint->inner;
+    u32 count = j_inner->vtx_count;
+    s16 start = j_inner->vtx_start;
     int new_var;
     CollVtx* vtx = &groundCollVtx[start];
     for (joint_id = 0; joint_id < (new_var = count); joint_id++) {
@@ -4960,9 +4959,8 @@ void mpLib_80057528(int line_id)
         CollLine* line = &groundCollLine[line_id];
         CollJoint* joint = &groundCollJoint[joint_id];
         line->flags |= 0x10000;
-        mpIsland_8005B334(joint_id, joint->coll_info->vtx_start,
-                          joint->coll_info->vtx_count,
-                          !(joint->flags & 0x800));
+        mpIsland_8005B334(joint_id, joint->inner->vtx_start,
+                          joint->inner->vtx_count, !(joint->flags & 0x800));
         joint->xE = true;
     }
 }
@@ -4974,17 +4972,16 @@ void mpLib_800575B0(int line_id)
         CollLine* line = &groundCollLine[line_id];
         CollJoint* joint = &groundCollJoint[joint_id];
         line->flags &= ~0x10000;
-        mpIsland_8005B334(joint_id, joint->coll_info->vtx_start,
-                          joint->coll_info->vtx_count,
-                          !(joint->flags & 0x800));
+        mpIsland_8005B334(joint_id, joint->inner->vtx_start,
+                          joint->inner->vtx_count, !(joint->flags & 0x800));
         joint->xE = true;
     }
 }
 
-void mpLib_80057638(int joint_id)
+void mpJointListAdd(int joint_id)
 {
     CollJoint* joint;
-    CollInfo* coll_info;
+    MapJoint* j_inner;
     int count_r7;
     CollLine* line_r6;
 
@@ -4994,79 +4991,79 @@ void mpLib_80057638(int joint_id)
     }
 
     joint->flags |= 0x10000;
-    if (mpLib_804D64C4 == NULL) {
-        mpLib_804D64C4 = joint;
+    if (jointListStart == NULL) {
+        jointListStart = joint;
     } else {
-        mpLib_804D64C8->next = joint;
+        jointListEnd->next = joint;
     }
-    mpLib_804D64C8 = joint;
+    jointListEnd = joint;
     joint->next = NULL;
 
-    coll_info = joint->coll_info;
-    count_r7 = coll_info->floor_count;
-    line_r6 = &groundCollLine[coll_info->floor_start];
+    j_inner = joint->inner;
+    count_r7 = j_inner->floor_count;
+    line_r6 = &groundCollLine[j_inner->floor_start];
     while (count_r7-- > 0) {
         line_r6->flags |= 0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count_r7 = coll_info->ceiling_count;
-    line_r6 = &groundCollLine[coll_info->ceiling_start];
+    j_inner = joint->inner;
+    count_r7 = j_inner->ceiling_count;
+    line_r6 = &groundCollLine[j_inner->ceiling_start];
     while (count_r7-- > 0) {
         line_r6->flags |= 0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count_r7 = coll_info->left_wall_count;
-    line_r6 = &groundCollLine[coll_info->left_wall_start];
+    j_inner = joint->inner;
+    count_r7 = j_inner->left_wall_count;
+    line_r6 = &groundCollLine[j_inner->left_wall_start];
     while (count_r7-- > 0) {
         line_r6->flags |= 0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count_r7 = coll_info->right_wall_count;
-    line_r6 = &groundCollLine[coll_info->right_wall_start];
+    j_inner = joint->inner;
+    count_r7 = j_inner->right_wall_count;
+    line_r6 = &groundCollLine[j_inner->right_wall_start];
     while (count_r7-- > 0) {
         line_r6->flags |= 0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count_r7 = coll_info->dynamic_count;
-    line_r6 = &groundCollLine[coll_info->dynamic_start];
+    j_inner = joint->inner;
+    count_r7 = j_inner->dynamic_count;
+    line_r6 = &groundCollLine[j_inner->dynamic_start];
     while (count_r7-- > 0) {
         line_r6->flags |= 0x10000;
         line_r6++;
     }
 
     mpLib_80057424(joint_id);
-    coll_info = joint->coll_info;
-    mpIsland_8005B334(joint_id, coll_info->vtx_start, coll_info->vtx_count,
+    j_inner = joint->inner;
+    mpIsland_8005B334(joint_id, j_inner->vtx_start, j_inner->vtx_count,
                       !(joint->flags & 0x800));
     joint->xE = true;
 }
 
-void mpLib_80057B4C(CollJoint* arg0)
+void mpJointListUnlink(CollJoint* arg0)
 {
     CollJoint* cur;
 
-    if (arg0 == mpLib_804D64C4) {
-        if (arg0 == mpLib_804D64C8) {
-            mpLib_804D64C8 = NULL;
-            mpLib_804D64C4 = NULL;
+    if (arg0 == jointListStart) {
+        if (arg0 == jointListEnd) {
+            jointListEnd = NULL;
+            jointListStart = NULL;
         } else {
-            mpLib_804D64C4 = mpLib_804D64C4->next;
+            jointListStart = jointListStart->next;
         }
         return;
     }
 
-    for (cur = mpLib_804D64C4; cur != NULL; cur = cur->next) {
+    for (cur = jointListStart; cur != NULL; cur = cur->next) {
         if (cur->next == arg0) {
-            if (arg0 == mpLib_804D64C8) {
-                mpLib_804D64C8 = cur;
+            if (arg0 == jointListEnd) {
+                jointListEnd = cur;
             }
             cur->next = cur->next->next;
             return;
@@ -5077,7 +5074,7 @@ void mpLib_80057B4C(CollJoint* arg0)
 void mpLib_80057BC0(int joint_id)
 {
     CollJoint* joint;
-    CollInfo* coll_info;
+    MapJoint* j_inner;
     int count;
     int start;
     CollLine* line_r6;
@@ -5088,56 +5085,55 @@ void mpLib_80057BC0(int joint_id)
     }
 
     joint->flags &= ~0x10000;
-    mpLib_80057B4C(joint);
+    mpJointListUnlink(joint);
 
-    coll_info = joint->coll_info;
-    count = coll_info->floor_count;
-    line_r6 = &groundCollLine[coll_info->floor_start];
+    j_inner = joint->inner;
+    count = j_inner->floor_count;
+    line_r6 = &groundCollLine[j_inner->floor_start];
     while (count-- > 0) {
         line_r6->flags &= ~0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count = coll_info->ceiling_count;
-    line_r6 = &groundCollLine[coll_info->ceiling_start];
+    j_inner = joint->inner;
+    count = j_inner->ceiling_count;
+    line_r6 = &groundCollLine[j_inner->ceiling_start];
     while (count-- > 0) {
         line_r6->flags &= ~0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count = coll_info->left_wall_count;
-    line_r6 = &groundCollLine[coll_info->left_wall_start];
+    j_inner = joint->inner;
+    count = j_inner->left_wall_count;
+    line_r6 = &groundCollLine[j_inner->left_wall_start];
     while (count-- > 0) {
         line_r6->flags &= ~0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count = coll_info->right_wall_count;
-    line_r6 = &groundCollLine[coll_info->right_wall_start];
+    j_inner = joint->inner;
+    count = j_inner->right_wall_count;
+    line_r6 = &groundCollLine[j_inner->right_wall_start];
     while (count-- > 0) {
         line_r6->flags &= ~0x10000;
         line_r6++;
     }
 
-    coll_info = joint->coll_info;
-    count = coll_info->dynamic_count;
-    line_r6 = &groundCollLine[coll_info->dynamic_start];
+    j_inner = joint->inner;
+    count = j_inner->dynamic_count;
+    line_r6 = &groundCollLine[j_inner->dynamic_start];
     while (count-- > 0) {
         line_r6->flags &= ~0x10000;
         line_r6++;
     }
-    coll_info = joint->coll_info;
-    mpIsland_8005B334(joint_id, coll_info->vtx_start, coll_info->vtx_count,
-                      false);
+    j_inner = joint->inner;
+    mpIsland_8005B334(joint_id, j_inner->vtx_start, j_inner->vtx_count, false);
     joint->xE = true;
 }
 
 void mpLib_80057FDC(int joint_id)
 {
-    CollInfo* coll_info;
+    MapJoint* j_inner;
     bool var_r6 = false;
     CollJoint* joint = &groundCollJoint[joint_id];
 
@@ -5145,14 +5141,14 @@ void mpLib_80057FDC(int joint_id)
     if (!(joint->flags & 0x40800) && (joint->flags & 0x10000)) {
         var_r6 = true;
     }
-    coll_info = joint->coll_info;
-    mpIsland_8005B334(joint_id, coll_info->vtx_start, coll_info->vtx_count,
+    j_inner = joint->inner;
+    mpIsland_8005B334(joint_id, j_inner->vtx_start, j_inner->vtx_count,
                       var_r6);
 }
 
 void mpLib_80058044(int joint_id)
 {
-    CollInfo* temp_r5;
+    MapJoint* temp_r5;
     bool var_r6 = false;
     CollJoint* temp_r7 = &groundCollJoint[joint_id];
 
@@ -5160,7 +5156,7 @@ void mpLib_80058044(int joint_id)
     if (!(temp_r7->flags & 0x40800) && (temp_r7->flags & 0x10000)) {
         var_r6 = true;
     }
-    temp_r5 = temp_r7->coll_info;
+    temp_r5 = temp_r7->inner;
     mpIsland_8005B334(joint_id, temp_r5->vtx_start, temp_r5->vtx_count,
                       var_r6);
 }
@@ -5229,7 +5225,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
     CollJoint* j0_r9;
     CollJoint* j1_r10;
     int i;
-    CollInfo* cd0;
+    MapJoint* cd0;
     int vcount0;
     CollVtx* v0_r29;
     int vstart0;
@@ -5245,7 +5241,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         int start;         /* r8 */
         CollLine* lines;   /* r5 */
 
-        pair = (struct pair*) j0_r9->coll_info + i;
+        pair = (struct pair*) j0_r9->inner + i;
         count = pair->count;
         start = pair->start;
         idx = start;
@@ -5267,7 +5263,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
             }
         }
 
-        pair = (struct pair*) j1_r10->coll_info + i;
+        pair = (struct pair*) j1_r10->inner + i;
         count = pair->count;
         start = pair->start;
         idx = start;
@@ -5291,7 +5287,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         }
     }
 
-    cd0 = j0_r9->coll_info;   /*  r3 */
+    cd0 = j0_r9->inner;       /*  r3 */
     vstart0 = cd0->vtx_start; /*  r4 */
     vcount0 = cd0->vtx_count; /* r31 */
 
@@ -5303,8 +5299,8 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
         int vid_r26; /* r26 */
         int vid;
         int vstart1_r4;
-        vstart1_r4 = j1_r10->coll_info->vtx_start;
-        vcount1 = j1_r10->coll_info->vtx_count;
+        vstart1_r4 = j1_r10->inner->vtx_start;
+        vcount1 = j1_r10->inner->vtx_count;
         vid = vstart1_r4;
         vid_r26 = vstart1_r4;
         for (v = 0; v < vcount1; v++, vid++, vid_r26++) {
@@ -5323,8 +5319,8 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                 int lstart_r24;
                 int lcount_r22;
                 CollLine* lines; /* r5 */
-                lstart_r24 = ((struct pair*) j0_r9->coll_info)[var_r25].start;
-                lcount_r22 = ((struct pair*) j0_r9->coll_info)[var_r25].count;
+                lstart_r24 = ((struct pair*) j0_r9->inner)[var_r25].start;
+                lcount_r22 = ((struct pair*) j0_r9->inner)[var_r25].count;
                 lines = &groundCollLine[lstart_r24];
                 for (i_r23 = 0; i_r23 < lcount_r22; i_r23++) {
                     int j;
@@ -5337,9 +5333,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                         for (j = 0; j < 5; j++) {
                             int k;
                             lstart_r20 =
-                                ((struct pair*) j1_r10->coll_info)[j].start;
+                                ((struct pair*) j1_r10->inner)[j].start;
                             lcount_r17 =
-                                ((struct pair*) j1_r10->coll_info)[j].count;
+                                ((struct pair*) j1_r10->inner)[j].count;
                             iter_r3 = &groundCollLine[lstart_r20];
                             for (k = 0; k < lcount_r17; k++) {
                                 if (vid_r26 == iter_r3->x0->v1_idx) {
@@ -5355,9 +5351,9 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
                         for (j = 0; j < 5; j++) {
                             int k;
                             lcount_r17 =
-                                ((struct pair*) j1_r10->coll_info)[j].count;
+                                ((struct pair*) j1_r10->inner)[j].count;
                             lstart_r20 =
-                                ((struct pair*) j1_r10->coll_info)[j].start;
+                                ((struct pair*) j1_r10->inner)[j].start;
                             iter_r3 = &groundCollLine[lstart_r20];
                             for (k = 0; k < lcount_r17; k++) {
                                 if (vid_r26 == iter_r3->x0->v0_idx) {
@@ -5434,10 +5430,10 @@ void mpLib_80058614_Floor(void)
         }
 
         {
-            CollInfo* coll_info = joint_r7->coll_info;
-            line_r31 = &groundCollLine[coll_info->floor_start];
-            count_r30 = coll_info->floor_count;
-            count_r29 = coll_info->dynamic_count;
+            MapJoint* j_inner = joint_r7->inner;
+            line_r31 = &groundCollLine[j_inner->floor_start];
+            count_r30 = j_inner->floor_count;
+            count_r29 = j_inner->dynamic_count;
 
             for (j = 0; j < count_r30; j++, line_r31++) {
                 CollVtx* v0;
@@ -5490,7 +5486,7 @@ void mpLib_80058614_Floor(void)
                 count_r30 = count_r29;
                 j = 0;
                 count_r29 = 0;
-                line_r31 = &groundCollLine[joint_r7->coll_info->dynamic_start];
+                line_r31 = &groundCollLine[joint_r7->inner->dynamic_start];
                 goto block_8;
             }
         }
@@ -5522,14 +5518,16 @@ bool mpLib_800588C8(void)
 
 void mpLib_800588D0(float left, float bottom, float right, float top)
 {
-    CollJoint* curr = mpLib_804D64C4;
+    CollJoint* curr = jointListStart;
 
     while (curr != NULL) {
         if (curr->flags & 0x10000 && !(curr->flags & 0x40000)) {
             if (curr->flags & 0x400) {
                 curr->flags &= ~0x1000;
-            } else if (left > curr->x18.x || right < curr->x10.x ||
-                       bottom > curr->x18.y || top < curr->x10.y)
+            } else if (left > curr->bounding_max.x ||
+                       right < curr->bounding_min.x ||
+                       bottom > curr->bounding_max.y ||
+                       top < curr->bounding_min.y)
             {
                 curr->flags |= 0x1000;
             } else {
@@ -5616,7 +5614,7 @@ void mpLib_800589D0(float x0, float y0, float x1, float y1, float x2, float y2,
 
 void mpLib_80058AA0(void)
 {
-    CollJoint* curr = mpLib_804D64C4;
+    CollJoint* curr = jointListStart;
 
     while (curr != NULL) {
         curr->flags &= ~0x1000;

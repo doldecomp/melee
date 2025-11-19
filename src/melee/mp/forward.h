@@ -15,7 +15,7 @@ typedef struct CollLine CollLine;
 typedef struct mp_UnkStruct3 mp_UnkStruct3;
 typedef struct mpisland mpisland;
 typedef struct CollVtx CollVtx;
-typedef struct CollInfo CollInfo;
+typedef struct MapJoint MapJoint;
 typedef struct CollJoint CollJoint;
 typedef struct mpCollData mpCollData;
 

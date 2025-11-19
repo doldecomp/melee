@@ -23,8 +23,8 @@ static struct {
 /* 4D64B8 */ static CollVtx* groundCollVtx;
 /* 4D64BC */ static CollLine* groundCollLine;
 /* 4D64C0 */ static CollJoint* groundCollJoint;
-/* 4D64C4 */ static CollJoint* mpLib_804D64C4;
-/* 4D64C8 */ static CollJoint* mpLib_804D64C8;
+/* 4D64C4 */ static CollJoint* jointListStart;
+/* 4D64C8 */ static CollJoint* jointListEnd;
 /* 4D64CC */ static s32 mpLib_804D64CC;
 /* 4D64D0 */ static s32 mpLib_804D64D0;
 /* 4D64D4 */ static s32 mpLib_804D64D4;

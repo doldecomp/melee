@@ -57,7 +57,7 @@ void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
 void mpLib_80055E9C(s16 x);
 void mpGetGroundCollJoint(void);
 void mpLib_80057424(s32);
-void mpLib_80057638(s32);
+void mpJointListAdd(s32);
 void mpLib_80057BC0(s32);
 bool mpLib_80054F68(s32, s32);
 s32 mpLinePrevNonFloor(int idx);
