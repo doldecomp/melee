@@ -66,12 +66,12 @@ bool mpLib_8004F008_Floor(Vec3*, int, int, int, int, int, int, int, float, float
 s32 mpLeftWallGetTop(int, float*);
 bool mpLib_8004DD90_Floor(int idx, float*, float*, UNK_T, Vec3* normal);
 bool mpLib_8004E398_LeftWall(void);
-void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top);
+void mpBoundingCheck(f32 left, f32 bottom, f32 right, f32 top);
 enum_t mpJointFromLine(enum_t);
 void mpJointGetCb1(int, mpLib_Callback*, UNK_T);
 void mpJointGetCb2(int, mpLib_Callback*, UNK_T);
 enum_t mpLineGetKind(int);
-void mpLib_80058AA0(void);
+void mpUncheckBounding(void);
 enum_t mpLib_8004E090_Ceiling(int idx, Vec3*, f32*, u32*, Vec3* normal);
 void mpLib_800569EC(void);
 /* 04F8A4 */ UNK_RET mpLib_8004F8A4_Ceiling(UNK_PARAMS);

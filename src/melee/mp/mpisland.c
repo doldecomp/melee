@@ -300,10 +300,10 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 {
     CollJoint* temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
-    if (temp_r3->flags & 0x700) {
+    if (temp_r3->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
         return true;
     }
-    if (temp_r3->flags & 0x700) {
+    if (temp_r3->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
         return true;
     }
     return false;

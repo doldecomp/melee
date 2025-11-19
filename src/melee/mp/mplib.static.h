@@ -18,7 +18,7 @@ static struct {
                                         float ay1, float bx0, float by0,
                                         float bx1, float by1, float* int_x,
                                         float* int_y);
-/* 4D64B0 */ static bool mpLib_804D64B0;
+/* 4D64B0 */ static bool didCheckBounding;
 /* 4D64B4 */ static mpCollData* mpLib_804D64B4;
 /* 4D64B8 */ static CollVtx* groundCollVtx;
 /* 4D64BC */ static CollLine* groundCollLine;

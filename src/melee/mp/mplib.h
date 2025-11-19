@@ -137,8 +137,8 @@
 /* 054ED8 */ bool mpLib_80054ED8(int line_id);
 /* 054F68 */ bool mpLib_80054F68(int start_id, int target_id);
 /* 0552B0 */ void mpLib_800552B0(int joint_id, HSD_JObj*, int z);
-/* 05541C */ void mpLib_8005541C(int joint_id);
-/* 0557D0 */ void mpLib_800557D0(int joint_id);
+/* 05541C */ void mpJointHide(int joint_id);
+/* 0557D0 */ void mpJointUnhide(int joint_id);
 /* 055C5C */ void mpJointUpdateDynamics(int joint_id);
 /* 055E24 */ void mpLib_80055E24(int joint_id);
 /* 055E9C */ void mpLib_80055E9C(int joint_id);
@@ -170,7 +170,7 @@
 /* 057BC0 */ void mpLib_80057BC0(int joint_id);
 /* 057FDC */ void mpLib_80057FDC(int joint_id);
 /* 058044 */ void mpLib_80058044(int joint_id);
-/* 0580AC */ void mpLib_800580AC(int joint_id);
+/* 0580AC */ void mpJointSetB10(int joint_id);
 /* 0580C8 */ void mpJointSetCb1(int joint_id, Ground*, mpLib_Callback);
 /* 0580E0 */ void mpJointClearCb1(int joint_id);
 /* 0580FC */ void mpJointGetCb1(int joint_id, mpLib_Callback*, Ground**);
@@ -182,13 +182,13 @@
 /* 058614 */ void mpLib_80058614_Floor(void);
 /* 0587FC */ void fn_800587FC(HSD_GObj*);
 /* 058820 */ void mpLib_80058820(void);
-/* 0588C8 */ bool mpLib_800588C8(void);
-/* 0588D0 */ void mpLib_800588D0(float left, float bottom, float right,
-                                 float top);
-/* 058970 */ void mpLib_80058970(float x1, float y1, float x2, float y2);
-/* 0589D0 */ void mpLib_800589D0(float x0, float y0, float x1, float y1,
-                                 float x2, float y2, float x3, float y3);
-/* 058AA0 */ void mpLib_80058AA0(void);
+/* 0588C8 */ bool mpCheckedBounding(void);
+/* 0588D0 */ void mpBoundingCheck(float left, float bottom, float right,
+                                  float top);
+/* 058970 */ void mpBoundingCheck2(float x1, float y1, float x2, float y2);
+/* 0589D0 */ void mpBoundingCheck3(float x0, float y0, float x1, float y1,
+                                   float x2, float y2, float x3, float y3);
+/* 058AA0 */ void mpUncheckBounding(void);
 /* 058ACC */ void mpLib_SetupDraw(GXColor);
 /* 058B5C */ void mpLib_DrawEcbs(CollData*);
 /* 0590F4 */ void mpLib_DrawSnapping(void);

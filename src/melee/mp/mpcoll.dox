@@ -62,7 +62,7 @@ void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
 void mpCollEnd(CollData* arg0, s32 arg1, s32 arg2);
 void mpColl_80043558(CollData* arg0, s32 arg1);
 void mpColl_80043670(CollData* arg0);
-void mpColl_80041DD0(CollData* cd, u32 flags);
+void mpCollCheckBounding(CollData* cd, u32 flags);
 void mpColl_80043680(CollData* arg0, Vec3* arg1);
 void mpColl_800436E4(CollData* arg0, f32 arg1);
 s32 mpColl_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2);

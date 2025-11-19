@@ -95,10 +95,10 @@ struct MapJoint {
     /*  +E */ s16 left_wall_count;
     /* +10 */ s16 dynamic_start;
     /* +12 */ s16 dynamic_count;
-    /* +14 */ float left;
-    /* +18 */ float bottom;
-    /* +1C */ float right;
-    /* +20 */ float top;
+    /* +14 */ float left_bound;
+    /* +18 */ float bottom_bound;
+    /* +1C */ float right_bound;
+    /* +20 */ float top_bound;
     /* +24 */ s16 vtx_start;
     /* +26 */ s16 vtx_count;
 };

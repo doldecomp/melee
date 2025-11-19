@@ -832,7 +832,7 @@ void grKongo_801D69B0(HSD_GObj* gobj)
     grKg_804D6984.unk4 = Ground_801C3FA4(gobj, 0x21);
     grKongo_801D7134(gobj, 1);
     grKongo_801D77E0(gobj, 1);
-    mpLib_800580AC(4);
+    mpJointSetB10(4);
 }
 
 static inline void rad_compare(f32 a, f32 b, f32* ret)
@@ -1053,7 +1053,7 @@ void grKongo_801D69B0(HSD_GObj *arg0) {
     grKg_804D6984.unk4 = Ground_801C3FA4(arg0, 0x21);
     grKongo_801D7134(arg0, 1);
     grKongo_801D77E0(arg0, 1);
-    mpLib_800580AC(4);
+    mpJointSetB10(4);
 }
 #endif
 

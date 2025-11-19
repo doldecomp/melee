@@ -129,7 +129,7 @@ inline void clamp_below(float* value, float max)
     }
 }
 
-void mpColl_80041DD0(CollData* cd, u32 flags)
+void mpCollCheckBounding(CollData* cd, u32 flags)
 {
     float left, bottom, right, top;
 
@@ -162,7 +162,7 @@ void mpColl_80041DD0(CollData* cd, u32 flags)
         clamp_above(&top, cd->cur_pos_correct.y + offset);
     }
 
-    mpLib_800588D0(left, bottom, right, top);
+    mpBoundingCheck(left, bottom, right, top);
 }
 
 // 80041EE4 https://decomp.me/scratch/j2TXK
@@ -998,9 +998,9 @@ bool mpColl_80043754(mpColl_Callback cb, CollData* coll, u32 flags)
         mpCollInterpolateECB(coll, 1.0F / (steps - step));
         coll->cur_pos_correct = coll->cur_pos;
         lbVector_Add(&coll->cur_pos, &vel);
-        mpColl_80041DD0(coll, flags);
+        mpCollCheckBounding(coll, flags);
         ret = (*cb)(coll, flags);
-        mpLib_80058AA0();
+        mpUncheckBounding();
         step += 1;
         coll->x38 = mpColl_804D64AC;
     }
@@ -1271,7 +1271,7 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
     float top;
 
     bool grabbed_ledge;
-    bool temp_r3;
+    bool already_checked;
     int ledge_id;
 
     u8 _[8];
@@ -1299,9 +1299,9 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
         top = half_height + (cd->cur_pos_correct.y + snap_y);
     }
 
-    temp_r3 = mpLib_800588C8();
-    if (!temp_r3) {
-        mpLib_800588D0(left, bottom, right, top);
+    already_checked = mpCheckedBounding();
+    if (!already_checked) {
+        mpBoundingCheck(left, bottom, right, top);
     }
     ledge_id =
         mpLib_80051BA8_Floor(&cd->x140, cd->floor_skip, cd->x48_joint_id,
@@ -1331,8 +1331,8 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
         grabbed_ledge = false;
     }
 
-    if (!temp_r3) {
-        mpLib_80058AA0();
+    if (!already_checked) {
+        mpUncheckBounding();
     }
 
     return grabbed_ledge;
@@ -1347,7 +1347,7 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
 
     bool grabbed_ledge;
     s32 temp_r31;
-    bool temp_r3;
+    bool already_checked;
     s32 ledge_id;
 
     Vec3 sp14;
@@ -1373,9 +1373,9 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
         bottom = (cd->cur_pos.y + snap_y) - half_height;
         top = half_height + (cd->cur_pos_correct.y + snap_y);
     }
-    temp_r3 = mpLib_800588C8();
-    if (!temp_r3) {
-        mpLib_800588D0(left, bottom, right, top);
+    already_checked = mpCheckedBounding();
+    if (!already_checked) {
+        mpBoundingCheck(left, bottom, right, top);
     }
     ledge_id =
         mpLib_80051BA8_Floor(&cd->x140, cd->floor_skip, cd->x48_joint_id,
@@ -1404,8 +1404,8 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
     } else {
         grabbed_ledge = false;
     }
-    if (!temp_r3) {
-        mpLib_80058AA0();
+    if (!already_checked) {
+        mpUncheckBounding();
     }
     return grabbed_ledge;
 }

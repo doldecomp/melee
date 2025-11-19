@@ -12,7 +12,7 @@
 
 /* 041C78 */ void mpColl_80041C78(void);
 /* 041C8C */ void mpCollPrev(CollData* cd);
-/* 041DD0 */ void mpColl_80041DD0(CollData* cd, u32 flags);
+/* 041DD0 */ void mpCollCheckBounding(CollData* cd, u32 flags);
 /* 041EE4 */ void mpColl_80041EE4(CollData*);
 /* 042078 */ void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj,
                                            HSD_JObj*, HSD_JObj*, HSD_JObj*,
