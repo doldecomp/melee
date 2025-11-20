@@ -4,6 +4,9 @@
 
 #include <platform.h>
 
+#include "ft/ftlib.h"
+#include "cm/camera.h"
+
 #include "baselib/memory.h"
 
 /// #grBigBlueRoute_8020B864
