@@ -4829,7 +4829,12 @@ void ftKb_SpecialS_Enter(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialAirS_Enter
 
-/// #ftKb_SpecialS_Anim
+void ftKb_SpecialS_Anim(Fighter_GObj* gobj)
+{
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 /// #ftKb_SpecialAirS_Anim
 
@@ -7305,7 +7310,15 @@ void ftKb_YsSpecialN1_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_YsSpecialAirNCapture2_Anim
+void ftKb_YsSpecialAirNCapture2_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    HSD_JObjAnimAll(fp->fv.kb.hat.jobj);
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 /// #ftKb_YsSpecialAirNCapture1_Anim
 

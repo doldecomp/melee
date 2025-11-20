@@ -10,7 +10,18 @@
 
 /// #grBigBlueRoute_8020B89C
 
-/// #grBigBlueRoute_8020B920
+void grBigBlueRoute_8020B920(void)
+{
+    Point3d sp8;
+    HSD_GObj* temp_r3;
+
+    temp_r3 = Ground_801C57A4();
+    if (temp_r3 != NULL) {
+        ftLib_80086644(temp_r3, &sp8);
+        grBigBlueRoute_8020DED4(&sp8);
+        Camera_8002F3AC();
+    }
+}
 
 /// #grBigBlueRoute_8020B95C
 
