@@ -56,11 +56,11 @@
     } while (0)
 
 static Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
-static mpLib_Line mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
+static MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
 static MapJoint mpLib_803BF738 = {
     1, 0, 0, 0, 0, -9.0F, -408.0F, 9.0F, -392.0F, 2,
 };
-static mpCollData mpLib_803BF760 = {
+static MapCollData mpLib_803BF760 = {
     /*  +0 */ mpLib_803BF718,
     /*  +4 */ 2,
     /*  +8 */ &mpLib_803BF728,
@@ -80,7 +80,7 @@ static mpCollData mpLib_803BF760 = {
     /* +2C */ 0x00000000,
 };
 
-mpCollData* mpLib_8004D164(void)
+MapCollData* mpLib_8004D164(void)
 {
     return mpLib_804D64B4;
 }
@@ -100,9 +100,9 @@ CollJoint* mpGetGroundCollJoint(void)
     return groundCollJoint;
 }
 
-void mpPruneEmptyLines(mpCollData* coll_data)
+void mpPruneEmptyLines(MapCollData* coll_data)
 {
-    mpLib_Line* line;
+    MapLine* line;
     Vec2* verts = coll_data->verts;
     int i;
 
@@ -114,7 +114,7 @@ void mpPruneEmptyLines(mpCollData* coll_data)
     for (i = 0; i < coll_data->line_count; i++, line++) {
         Vec2* v0 = &verts[line->v0_idx];
         Vec2* v1 = &verts[line->v1_idx];
-        mpLib_Line* other;
+        MapLine* other;
         int j;
 
         if (v0->x != v1->x || v0->y != v1->y) {
@@ -145,7 +145,7 @@ void mpPruneEmptyLines(mpCollData* coll_data)
     }
 }
 
-void mpLibLoad(mpCollData* coll_data)
+void mpLibLoad(MapCollData* coll_data)
 {
     float f0;
     float f1;
@@ -820,7 +820,7 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
                     float* y1_out)
 {
     bool calculated_distance = false;
-    mpLib_Line* line_r11 = groundCollLine[line_id].x0;
+    MapLine* line_r11 = groundCollLine[line_id].x0;
 
     float x0_f0 = groundCollVtx[line_r11->v0_idx].pos.x;
     float y0_f1 = groundCollVtx[line_r11->v0_idx].pos.y;
@@ -1365,7 +1365,7 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
                 if (joint->flags &
                     (CollJoint_B10 | CollJoint_B9 | CollJoint_B8))
                 {
-                    mpLib_Line* line_r3 = r26->x0;
+                    MapLine* line_r3 = r26->x0;
                     CollVtx* v1_r6 = &groundCollVtx[line_r3->v1_idx];
                     CollVtx* v0_r5 = &groundCollVtx[line_r3->v0_idx];
                     mpRemap2d(&ax, &ay, v0_r5->x10, v0_r5->x14, v1_r6->x10,
@@ -1573,7 +1573,7 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                 p26->flags & LINE_FLAG_ENABLED &&
                 !(p26->flags & LINE_FLAG_EMPTY))
             {
-                mpLib_Line* line = p26->x0;
+                MapLine* line = p26->x0;
                 CollVtx* v0 = &groundCollVtx[line->v0_idx];
                 CollVtx* v1 = &groundCollVtx[line->v1_idx];
                 float x0 = v0->pos.x;
@@ -1878,7 +1878,7 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                 p26->flags & LINE_FLAG_ENABLED &&
                 !(p26->flags & LINE_FLAG_EMPTY))
             {
-                mpLib_Line* line = p26->x0;
+                MapLine* line = p26->x0;
                 CollVtx* v0 = &groundCollVtx[line->v0_idx];
                 CollVtx* v1 = &groundCollVtx[line->v1_idx];
                 float x0 = v0->pos.x;
@@ -2551,7 +2551,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
                     line->flags & LINE_FLAG_ENABLED &&
                     !(line->flags & LINE_FLAG_EMPTY))
                 {
-                    mpLib_Line* inner = line->x0;
+                    MapLine* inner = line->x0;
                     if (inner->lo_flags & LINE_FLAG_LEDGE) {
                         float x0 = groundCollVtx[inner->v0_idx].pos.x;
                         float y0 = groundCollVtx[inner->v0_idx].pos.y;
@@ -3418,7 +3418,7 @@ void mpLib_80054D68(int line_id, u32 flags)
 {
     LINEID_CHECK(4595, line_id);
     {
-        mpLib_Line* line = groundCollLine[line_id].x0;
+        MapLine* line = groundCollLine[line_id].x0;
         u16* old_flags = &line->lo_flags;
         *old_flags = (*old_flags & ~0xFF) | flags;
     }
@@ -3426,7 +3426,7 @@ void mpLib_80054D68(int line_id, u32 flags)
 
 Vec3* mpLineGetNormal(int line_id, Vec3* normal_out)
 {
-    mpLib_Line* line;
+    MapLine* line;
     PAD_STACK(4);
 
     LINEID_CHECK(4609, line_id);
@@ -3679,7 +3679,7 @@ void mpJointUpdateDynamics(int joint_id)
     line = &groundCollLine[joint->inner->dynamic_start];
 
     for (i = 0; i < count; i++, line++) {
-        mpLib_Line* temp = line->x0;
+        MapLine* temp = line->x0;
         CollVtx* v1 = &groundCollVtx[temp->v1_idx];
         CollVtx* v0 = &groundCollVtx[temp->v0_idx];
         float dx = v1->pos.x - v0->pos.x;
@@ -5411,7 +5411,7 @@ void mpLib_800581DC(int joint_id0, int joint_id1)
 
 void mpLib_80058560(void)
 {
-    mpCollData* temp_r29 = mpLib_804D64B4;
+    MapCollData* temp_r29 = mpLib_804D64B4;
     int i;
     int j;
     CollJoint* cur_i;
@@ -6033,7 +6033,7 @@ void mpLib_80059554(void)
     CollVtx* v1_r4;
     s16 count_r30;
     int total_r29;
-    mpCollData* coll_data_r31;
+    MapCollData* coll_data_r31;
     int i;
     GXColor spB4;
     GXColor spB0;

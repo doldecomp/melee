@@ -19,7 +19,7 @@ static struct {
                                         float bx1, float by1, float* int_x,
                                         float* int_y);
 /* 4D64B0 */ static bool didCheckBounding;
-/* 4D64B4 */ static mpCollData* mpLib_804D64B4;
+/* 4D64B4 */ static MapCollData* mpLib_804D64B4;
 /* 4D64B8 */ static CollVtx* groundCollVtx;
 /* 4D64BC */ static CollLine* groundCollLine;
 /* 4D64C0 */ static CollJoint* groundCollJoint;

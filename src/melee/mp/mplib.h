@@ -15,12 +15,12 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-/* 04D164 */ mpCollData* mpLib_8004D164(void);
+/* 04D164 */ MapCollData* mpLib_8004D164(void);
 /* 04D16C */ CollVtx* mpGetGroundCollVtx(void);
 /* 04D174 */ CollLine* mpGetGroundCollLine(void);
 /* 04D17C */ CollJoint* mpGetGroundCollJoint(void);
-/* 04D184 */ void mpPruneEmptyLines(mpCollData* coll_data);
-/* 04D288 */ void mpLibLoad(mpCollData* coll_data);
+/* 04D184 */ void mpPruneEmptyLines(MapCollData* coll_data);
+/* 04D288 */ void mpLibLoad(MapCollData* coll_data);
 /* 04DB78 */ int mpLineGetNext(int line_id);
 /* 04DC04 */ int mpLineGetPrev(int line_id);
 /* 04DD90 */ int mpLib_8004DD90_Floor(int line_id, Vec3*, float* y_out,

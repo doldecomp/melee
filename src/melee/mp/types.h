@@ -48,7 +48,7 @@ struct mp_UnkStruct0 {
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
-struct mpLib_Line {
+struct MapLine {
     /* +0 */ u16 v0_idx;
     /* +2 */ u16 v1_idx;
     /* +4 */ s16 prev_id0;
@@ -60,7 +60,7 @@ struct mpLib_Line {
 };
 
 struct CollLine {
-    /* +0 */ mpLib_Line* x0;
+    /* +0 */ MapLine* x0;
     /* +4 */ u32 flags;
 };
 
@@ -119,10 +119,10 @@ struct CollJoint {
 }; /* size = 0x34 */
 STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
 
-struct mpCollData {
+struct MapCollData {
     /*  +0 */ Vec2* verts;
     /*  +4 */ int vert_count;
-    /*  +8 */ mpLib_Line* lines;
+    /*  +8 */ MapLine* lines;
     /*  +C */ int line_count;
     /* +10 */ s16 floor_start;
     /* +12 */ s16 floor_count;

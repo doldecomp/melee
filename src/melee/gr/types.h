@@ -89,7 +89,7 @@ struct StageInfo {
         s32 unk0;
         Article* unk4;
     }** itemdata;
-    /* +6AC */ mpCollData* coll_data;
+    /* +6AC */ MapCollData* coll_data;
     /* +6B0 */ UnkStage6B0* param;
     /* +6B4 */ UNK_T** ald_yaku_all;
     /* +6B8 */ void* map_ptcl;
