@@ -811,40 +811,16 @@ static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
 
 static inline bool IsThroughColor(HSD_TExp* texp)
 {
-    bool r0, r1, r2, result;
-    result = false, r2 = false, r1 = false, r0 = false;
-    if (texp->tev.c_op == GX_TEV_ADD && texp->tev.c_in[0].sel == HSD_TE_0) {
-        r0 = true;
-    }
-    if (r0 && texp->tev.c_in[1].sel == HSD_TE_0) {
-        r1 = true;
-    }
-    if (r1 && texp->tev.c_bias == 0) {
-        r2 = true;
-    }
-    if (r2 && texp->tev.c_scale == 0) {
-        result = true;
-    }
-    return result;
+    return texp->tev.c_op == GX_TEV_ADD && texp->tev.c_in[0].sel == HSD_TE_0 &&
+           texp->tev.c_in[1].sel == HSD_TE_0 && texp->tev.c_bias == 0 &&
+           texp->tev.c_scale == 0;
 }
 
 static inline bool IsThroughAlpha(HSD_TExp* texp)
 {
-    bool r0, r1, r2, result;
-    result = false, r2 = false, r1 = false, r0 = false;
-    if (texp->tev.a_op == GX_TEV_ADD && texp->tev.a_in[0].sel == HSD_TE_0) {
-        r0 = true;
-    }
-    if (r0 && texp->tev.a_in[1].sel == HSD_TE_0) {
-        r1 = true;
-    }
-    if (r1 && texp->tev.a_bias == 0) {
-        r2 = true;
-    }
-    if (r2 && texp->tev.a_scale == 0) {
-        result = true;
-    }
-    return result;
+    return texp->tev.a_op == GX_TEV_ADD && texp->tev.a_in[0].sel == HSD_TE_0 &&
+           texp->tev.a_in[1].sel == HSD_TE_0 && texp->tev.a_bias == 0 &&
+           texp->tev.a_scale == 0;
 }
 
 static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
