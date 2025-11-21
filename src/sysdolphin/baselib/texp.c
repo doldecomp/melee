@@ -809,20 +809,6 @@ static int AssignAlphaKonst(HSD_TETev* tev, int idx, HSD_TExpRes* res)
     return -1;
 }
 
-static inline bool IsThroughColor(HSD_TExp* texp)
-{
-    return texp->tev.c_op == GX_TEV_ADD && texp->tev.c_in[0].sel == HSD_TE_0 &&
-           texp->tev.c_in[1].sel == HSD_TE_0 && texp->tev.c_bias == 0 &&
-           texp->tev.c_scale == 0;
-}
-
-static inline bool IsThroughAlpha(HSD_TExp* texp)
-{
-    return texp->tev.a_op == GX_TEV_ADD && texp->tev.a_in[0].sel == HSD_TE_0 &&
-           texp->tev.a_in[1].sel == HSD_TE_0 && texp->tev.a_bias == 0 &&
-           texp->tev.a_scale == 0;
-}
-
 static int TExpAssignReg(HSD_TExp* texp, HSD_TExpRes* res)
 {
     HSD_TETev* tev;
