@@ -1067,119 +1067,119 @@ static inline int clamp_color(int c)
     return c;
 }
 
-void HSD_TExpSetReg(HSD_TExp* clist)
+void HSD_TExpSetReg(HSD_TExp* texp)
 {
     int i;
     GXColor reg[8];
     u32 changed;
-    HSD_TECnst* cnst;
+    HSD_TECnst* clist;
 
-    cnst = &clist->cnst;
+    clist = &texp->cnst;
     changed = 0;
 
-    while (cnst != NULL) {
-        HSD_ASSERT(0x591, cnst->type == HSD_TE_CNST);
-        if (cnst->reg < 8) {
-            changed |= 1 << cnst->reg;
-            if (cnst->comp == HSD_TE_RGB) {
-                switch (cnst->ctype) {
+    while (clist != NULL) {
+        HSD_ASSERT(0x591, clist->type == HSD_TE_CNST);
+        if (clist->reg < 8) {
+            changed |= 1 << clist->reg;
+            if (clist->comp == HSD_TE_RGB) {
+                switch (clist->ctype) {
                 case HSD_TE_U8: {
                     GXColor col;
-                    col = *(GXColor*) cnst->val;
-                    col.a = reg[cnst->reg].a;
-                    reg[cnst->reg] = col;
+                    col = *(GXColor*) clist->val;
+                    col.a = reg[clist->reg].a;
+                    reg[clist->reg] = col;
                     break;
                 }
                 case HSD_TE_U32: {
-                    u32* ptr = cnst->val;
-                    reg[cnst->reg].r = ptr[0] < 0x100 ? ptr[0] : 0xFF;
-                    reg[cnst->reg].g = ptr[1] < 0x100 ? ptr[1] : 0xFF;
-                    reg[cnst->reg].b = ptr[2] < 0x100 ? ptr[2] : 0xFF;
+                    u32* ptr = clist->val;
+                    reg[clist->reg].r = ptr[0] < 0x100 ? ptr[0] : 0xFF;
+                    reg[clist->reg].g = ptr[1] < 0x100 ? ptr[1] : 0xFF;
+                    reg[clist->reg].b = ptr[2] < 0x100 ? ptr[2] : 0xFF;
                     break;
                 }
                 default: {
                     int r;
                     int g;
                     int b;
-                    switch (cnst->ctype) {
+                    switch (clist->ctype) {
                     case HSD_TE_U16: {
-                        u16* ptr = cnst->val;
+                        u16* ptr = clist->val;
                         r = ptr[0];
                         g = ptr[1];
                         b = ptr[2];
                         break;
                     }
                     case HSD_TE_F32: {
-                        f32* ptr = cnst->val;
+                        f32* ptr = clist->val;
                         r = 0xFF * ptr[0];
                         g = 0xFF * ptr[1];
                         b = 0xFF * ptr[2];
                         break;
                     }
                     default: {
-                        f64* ptr = cnst->val;
+                        f64* ptr = clist->val;
                         r = 0xFF * ptr[0];
                         g = 0xFF * ptr[1];
                         b = 0xFF * ptr[2];
                         break;
                     }
                     }
-                    reg[cnst->reg].r = r > 0xFF ? 0xFF : r < 0 ? 0 : r;
-                    reg[cnst->reg].g = g > 0xFF ? 0xFF : g < 0 ? 0 : g;
-                    reg[cnst->reg].b = b > 0xFF ? 0xFF : b < 0 ? 0 : b;
+                    reg[clist->reg].r = r > 0xFF ? 0xFF : r < 0 ? 0 : r;
+                    reg[clist->reg].g = g > 0xFF ? 0xFF : g < 0 ? 0 : g;
+                    reg[clist->reg].b = b > 0xFF ? 0xFF : b < 0 ? 0 : b;
                 }
                 }
             } else {
                 int x;
                 u8 val;
-                switch (cnst->ctype) {
+                switch (clist->ctype) {
                 case HSD_TE_U8:
-                    x = *(u8*) cnst->val;
+                    x = *(u8*) clist->val;
                     val = x;
                     break;
                 case HSD_TE_U16: {
-                    x = *(u16*) cnst->val;
+                    x = *(u16*) clist->val;
                     val = x > 0xFF ? 0xFF : x < 0 ? 0 : x;
                     break;
                 }
                 case HSD_TE_U32:
-                    x = *(u32*) cnst->val;
+                    x = *(u32*) clist->val;
                     val = x > 0xFF ? 0xFF : x < 0 ? 0 : x;
                     break;
                 case HSD_TE_F32:
-                    x = 0xFF * *(f32*) cnst->val;
+                    x = 0xFF * *(f32*) clist->val;
                     val = x > 0xFF ? 0xFF : x < 0 ? 0 : x;
                     break;
                 default:
-                    x = 0xFF * *(f64*) cnst->val;
+                    x = 0xFF * *(f64*) clist->val;
                     val = x > 0xFF ? 0xFF : x < 0 ? 0 : x;
                     break;
                 }
-                if (cnst->reg < 4) {
-                    switch (cnst->idx) {
+                if (clist->reg < 4) {
+                    switch (clist->idx) {
                     case 0:
-                        reg[cnst->reg].r = val;
+                        reg[clist->reg].r = val;
                         break;
                     case 1:
-                        reg[cnst->reg].g = val;
+                        reg[clist->reg].g = val;
                         break;
                     case 2:
-                        reg[cnst->reg].b = val;
+                        reg[clist->reg].b = val;
                         break;
                     default:
-                        reg[cnst->reg].a = val;
+                        reg[clist->reg].a = val;
                         break;
                     }
-                } else if (cnst->idx == 3) {
-                    reg[cnst->reg].a = val;
+                } else if (clist->idx == 3) {
+                    reg[clist->reg].a = val;
                 } else {
-                    reg[cnst->reg].r = val;
-                    reg[cnst->reg].g = val;
-                    reg[cnst->reg].b = val;
+                    reg[clist->reg].r = val;
+                    reg[clist->reg].g = val;
+                    reg[clist->reg].b = val;
                 }
             }
         }
-        cnst = &cnst->next->cnst;
+        clist = &clist->next->cnst;
     }
     if (changed != 0) {
         GXPixModeSync();
