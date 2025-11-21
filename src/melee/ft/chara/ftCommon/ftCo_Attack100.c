@@ -805,7 +805,15 @@ void ftCo_CatchAttack_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_CatchAttack_Coll
 
-/// #fn_800DA618
+void fn_800DA618(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_GObj* victim = fp->victim_gobj;
+
+    ftCo_800DC920(gobj, victim);
+    ftCo_Fall_Enter(gobj);
+    ftCo_Fall_Enter(victim);
+}
 
 void fn_800DA668(Fighter_GObj* gobj)
 {
