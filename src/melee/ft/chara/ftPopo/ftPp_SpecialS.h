@@ -31,6 +31,7 @@
 /* 1210C8 */ void ftPp_SpecialS_801210C8(Fighter_GObj* gobj);
 /* 12114C */ void ftPp_SpecialS_8012114C(Fighter_GObj* gobj);
 /* 121164 */ void ftPp_SpecialS_80121164(Fighter_GObj* gobj);
+/* 12184C */ void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj);
 /* 121EB8 */ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj);
 /* 1221AC */ void ftPp_SpecialHiThrow_1_IASA(Fighter_GObj* gobj);
 /* 1221B4 */ void ftPp_SpecialHiThrow_1_Phys(Fighter_GObj* gobj);

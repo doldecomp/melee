@@ -193,7 +193,14 @@ bool it_2725_Logic11_Reflected(Item_GObj* gobj)
 
 /// #it_2725_Logic11_ShieldBounced
 
-/// #fn_802DFE7C
+s32 fn_802DFE7C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_80272940(gobj);
+    it_802DDEB4(gobj);
+    Item_8026AE84(ip, 0xF1, 0x7FU, 0x40U);
+    return 0;
+}
 
 void it_802DFED4(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
