@@ -14,10 +14,10 @@ static struct {
     float right;
 } mpLib_80458868[2];
 
-/* 04E97C */ static bool mpLib_8004E97C(float ax0, float ay0, float ax1,
-                                        float ay1, float bx0, float by0,
-                                        float bx1, float by1, float* int_x,
-                                        float* int_y);
+/* 04E97C */ static bool mpLineIntersection(float a0x, float a0y, float a1x,
+                                            float a1y, float b0x, float b0y,
+                                            float b1x, float b1y, float* int_x,
+                                            float* int_y);
 /* 4D64B0 */ static bool didCheckBounding;
 /* 4D64B4 */ static MapCollData* mpLib_804D64B4;
 /* 4D64B8 */ static CollVtx* groundCollVtx;

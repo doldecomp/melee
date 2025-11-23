@@ -657,43 +657,43 @@ int mpLib_8004E684_RightWall(int line_id, Vec3* vec, float* x_out,
 }
 
 // direction dependent line intersection
-bool mpLib_8004E97C(float ax0, float ay0, float ax1, float ay1, float bx0,
-                    float by0, float bx1, float by1, float* int_x,
-                    float* int_y)
+bool mpLineIntersection(float a0x, float a0y, float a1x, float a1y, float b0x,
+                        float b0y, float b1x, float b1y, float* int_x,
+                        float* int_y)
 {
     bool b1_below_a = false;
     bool b2_above_a = false;
 
     // b entirely left/right of a
-    if (ax0 <= ax1) {
-        if ((bx0 < ax0 && bx1 < ax0) || (ax1 < bx0 && ax1 < bx1)) {
+    if (a0x <= a1x) {
+        if ((b0x < a0x && b1x < a0x) || (a1x < b0x && a1x < b1x)) {
             return false;
         }
     } else {
-        if ((bx0 < ax1 && bx1 < ax1) || (ax0 < bx0 && ax0 < bx1)) {
+        if ((b0x < a1x && b1x < a1x) || (a0x < b0x && a0x < b1x)) {
             return false;
         }
     }
 
     // b entirely above/below a
-    if (ay0 <= ay1) {
-        if ((by0 < ay0 && by1 < ay0) || (ay1 < by0 && ay1 < by1)) {
+    if (a0y <= a1y) {
+        if ((b0y < a0y && b1y < a0y) || (a1y < b0y && a1y < b1y)) {
             return false;
         }
     } else {
-        if ((by0 < ay1 && by1 < ay1) || (ay0 < by0 && ay0 < by1)) {
+        if ((b0y < a1y && b1y < a1y) || (a0y < b0y && a0y < b1y)) {
             return false;
         }
     }
 
     {
-        double ah = ay1 - ay0;
-        double dx0 = bx0 - ax0;
-        double aw = ax1 - ax0;
-        double dy0 = by0 - ay0;
-        double hs_b0_a = (aw * dy0) - (ah * dx0);
-        double dy1;
-        double dx1;
+        double ah = a1y - a0y;
+        double d0x = b0x - a0x;
+        double aw = a1x - a0x;
+        double d0y = b0y - a0y;
+        double hs_b0_a = (aw * d0y) - (ah * d0x);
+        double d1y;
+        double d1x;
         double det;
         double hs_b1_a;
         double bh;
@@ -706,10 +706,10 @@ bool mpLib_8004E97C(float ax0, float ay0, float ax1, float ay1, float bx0,
             b1_below_a = true;
         }
 
-        dx1 = bx1 - ax1;
-        dy1 = by1 - ay1;
+        d1x = b1x - a1x;
+        d1y = b1y - a1y;
 
-        hs_b1_a = (aw * dy1) - (ah * dx1);
+        hs_b1_a = (aw * d1y) - (ah * d1x);
         if (hs_b1_a > 0.0) {
             if (hs_b1_a > 0.1) {
                 return false;
@@ -722,7 +722,7 @@ bool mpLib_8004E97C(float ax0, float ay0, float ax1, float ay1, float bx0,
             return false;
         }
 
-        det = (dx0 * dy1) - (dy0 * dx1);
+        det = (d0x * d1y) - (d0y * d1x);
         if (det < hs_b0_a) {
             if (det < hs_b1_a) {
                 return false;
@@ -733,8 +733,8 @@ bool mpLib_8004E97C(float ax0, float ay0, float ax1, float ay1, float bx0,
             }
         }
 
-        bw = bx1 - bx0;
-        bh = by1 - by0;
+        bw = b1x - b0x;
+        bh = b1y - b0y;
         if (!((bw == 0.0 && bh == 0.0) || (b1_below_a && b2_above_a) ||
               (hs_b0_a >= 0.0 && b2_above_a)))
         {
@@ -742,18 +742,18 @@ bool mpLib_8004E97C(float ax0, float ay0, float ax1, float ay1, float bx0,
 
             if (ABS(area) > 0.0001F) {
                 double t =
-                    ((bw * dy0) - (bh * dx0)) / area; // barycentric weight
+                    ((bw * d0y) - (bh * d0x)) / area; // barycentric weight
                 if (t > 0.0) {
                     if (t < 1.0) {
-                        *int_x = (aw * t) + ax0;
-                        *int_y = (ah * t) + ay0;
+                        *int_x = (aw * t) + a0x;
+                        *int_y = (ah * t) + a0y;
                     } else {
-                        *int_x = ax1;
-                        *int_y = ay1;
+                        *int_x = a1x;
+                        *int_y = a1y;
                     }
                 } else {
-                    *int_x = ax0;
-                    *int_y = ay0;
+                    *int_x = a0x;
+                    *int_y = a0y;
                 }
 
                 goto tlabel;
@@ -765,54 +765,57 @@ bool mpLib_8004E97C(float ax0, float ay0, float ax1, float ay1, float bx0,
     }
 }
 
-bool mpLib_8004EBF8(f32* arg0, f32* arg1, f32 arg8, f32 arg9, f32 argA,
-                    f32 argB, f32 argC, f32 argD, f32 argE)
+// line intersection between a and b, where a is a horizontal line
+bool mpLineIntersectionH(float* int_x, float* int_y, float a0x, float a0y,
+                         float a1x, float b0x, float b0y, float b1x, float b1y)
 {
-    f32 d2;
-    f64 d1;
-    f32 var_f3;
-    f32 var_f8;
-    f64 var_f5;
+    float max_ax;
+    float min_ax;
+    double dbx;
+    double dby;
+    double new_x;
+    double dx;
 
-    var_f3 = argA;
-    if (arg8 < var_f3) {
-        if ((argB < arg8 && argD < arg8) || (var_f3 < argB && var_f3 < argD)) {
+    if (a0x < a1x) {
+        if ((b0x < a0x && b1x < a0x) || (a1x < b0x && a1x < b1x)) {
             return false;
         }
-        if (argC - arg9 < -0.0001 || argE - arg9 > 0.0001) {
+        if (b0y - a0y < -0.0001 || b1y - a0y > 0.0001) {
             return false;
         }
-        var_f8 = arg8;
+        min_ax = a0x;
+        max_ax = a1x;
     } else {
-        if ((argB < var_f3 && argD < var_f3) || (arg8 < argB && arg8 < argD)) {
+        if ((b0x < a1x && b1x < a1x) || (a0x < b0x && a0x < b1x)) {
             return false;
         }
-        if (argE - arg9 < -0.0001 || argC - arg9 > 0.0001) {
+        if (b1y - a0y < -0.0001 || b0y - a0y > 0.0001) {
             return false;
         }
-        var_f8 = var_f3;
-        var_f3 = arg8;
+        min_ax = a1x;
+        max_ax = a0x;
     }
-    d1 = argE - argC;
-    d2 = argD - argB;
-    if (ABS(d1) < 0.0001) {
+    dby = b1y - b0y;
+    dbx = b1x - b0x;
+    if (ABS(dby) < 0.0001) {
         return false;
     }
-    var_f5 = d2 / d1 * (arg9 - argC) + argB;
-    if (d2 / d1 * (arg9 - argC) + argB - var_f8 < 0.0) {
-        if (d2 / d1 * (arg9 - argC) + argB - var_f8 < -0.1) {
+    new_x = dbx / dby * (a0y - b0y) + b0x;
+    dx = new_x - min_ax;
+    if (dx < 0.0) {
+        if (dx < -0.1) {
             return false;
         }
-        var_f5 = var_f8;
+        new_x = min_ax;
     }
-    if (var_f5 - var_f3 > 0.0) {
-        if (var_f5 - var_f3 > 0.1) {
+    if (new_x - max_ax > 0.0) {
+        if (new_x - max_ax > 0.1) {
             return false;
         }
-        var_f5 = var_f3;
+        new_x = max_ax;
     }
-    *arg0 = var_f5;
-    *arg1 = arg9;
+    *int_x = new_x;
+    *int_y = a0y;
     return true;
 }
 
@@ -920,8 +923,8 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
             y0_sp44 += y_offset;
             y1_sp3C += y_offset;
             if (ABS(y0_sp44 - y1_sp3C) > 0.0001) {
-                if (mpLib_8004E97C(x0_sp48, y0_sp44, x1_sp40, y1_sp3C, ax, ay,
-                                   bx, by, &px_sp54, &py_sp50))
+                if (mpLineIntersection(x0_sp48, y0_sp44, x1_sp40, y1_sp3C, ax,
+                                       ay, bx, by, &px_sp54, &py_sp50))
                 {
                     float dx = px_sp54 - ax;
                     float dy = py_sp50 - ay;
@@ -952,8 +955,8 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
                 }
             } else {
                 if (ay >= by &&
-                    mpLib_8004EBF8(&px_sp54, &py_sp50, x0_sp48, y0_sp44,
-                                   x1_sp40, ax, ay, bx, by))
+                    mpLineIntersectionH(&px_sp54, &py_sp50, x0_sp48, y0_sp44,
+                                        x1_sp40, ax, ay, bx, by))
                 {
                     float dx = px_sp54 - ax;
                     float dx2 = dx * dx;
@@ -1086,8 +1089,8 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                 dy = by - ay;
 
                 if (ABS(y0 - y1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
-                                       &int_y))
+                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by,
+                                           &int_x, &int_y))
                     {
                         dx2 = SQ(int_x - old_x);
                         dy2 = SQ(int_y - old_y);
@@ -1120,8 +1123,9 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                             result = true;
                         }
                     }
-                } else if (ay >= by && mpLib_8004EBF8(&int_x, &int_y, x0, y0,
-                                                      x1, ax, ay, bx, by))
+                } else if (ay >= by &&
+                           mpLineIntersectionH(&int_x, &int_y, x0, y0, x1, ax,
+                                               ay, bx, by))
                 {
                     dx2 = SQ(int_x - old_x);
                     dy2 = SQ(int_y - old_y);
@@ -1227,8 +1231,8 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
 
             mpLib_8004ED5C(line_r26 - groundCollLine, &x0, &y0, &x1, &y1);
             if (ABS(y0 - y1) > 0.0001) {
-                if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
-                                   &int_y))
+                if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
+                                       &int_y))
                 {
                     dist2 = SQ(int_x - ax) + SQ(int_y - ay);
                     if (min_dist2 > dist2) {
@@ -1259,8 +1263,8 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                     }
                 }
             } else {
-                if (ay <= by &&
-                    mpLib_8004EBF8(&int_x, &int_y, x0, y0, x1, ax, ay, bx, by))
+                if (ay <= by && mpLineIntersectionH(&int_x, &int_y, x0, y0, x1,
+                                                    ax, ay, bx, by))
                 {
                     dist2 = SQ(int_x - ax) + SQ(int_y - ay);
                     if (min_dist2 > dist2) {
@@ -1378,8 +1382,8 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
                 x_f23 = bx - ax;
                 y_f22 = by - ay;
                 if (ABS(sp40 - sp38) > 0.0001) {
-                    if (mpLib_8004E97C(sp44, sp40, sp3C, sp38, ax, ay, bx, by,
-                                       &sp58, &sp54))
+                    if (mpLineIntersection(sp44, sp40, sp3C, sp38, ax, ay, bx,
+                                           by, &sp58, &sp54))
                     {
                         dx2 = SQ(sp58 - f29);
                         dy2 = SQ(sp54 - f28);
@@ -1417,8 +1421,9 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
                         }
                     }
                 } else {
-                    if (ay <= by && mpLib_8004EBF8(&sp58, &sp54, sp44, sp40,
-                                                   sp3C, ax, ay, bx, by))
+                    if (ay <= by &&
+                        mpLineIntersectionH(&sp58, &sp54, sp44, sp40, sp3C, ax,
+                                            ay, bx, by))
                     {
                         dx2 = SQ(sp58 - f29);
                         dy2 = SQ(sp54 - f28);
@@ -1474,15 +1479,17 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
     return r27;
 }
 
-bool mpLib_80050068(float* x_out, float* y_out, float a0x, float a0y,
-                    float a1y, float b0x, float b0y, float b1x, float b1y)
+// line intersection between a and b, where a is a vertical line
+bool mpLineIntersectionV(float* int_x, float* int_y, float a0x, float a0y,
+                         float a1y, float b0x, float b0y, float b1x, float b1y)
 {
-    double dbx;
-    double dby;
-    double dy;
-    double new_y;
     float min_ay;
     float max_ay;
+    double dbx;
+    double dby;
+    double new_y;
+    double dy;
+
     if (a0y < a1y) {
         if ((b0y < a0y && b1y < a0y) || (a1y < b0y && a1y < b1y)) {
             return false;
@@ -1522,8 +1529,8 @@ bool mpLib_80050068(float* x_out, float* y_out, float a0x, float a0y,
         }
         new_y = max_ay;
     }
-    *x_out = a0x;
-    *y_out = new_y;
+    *int_x = a0x;
+    *int_y = new_y;
     return true;
 }
 
@@ -1586,7 +1593,8 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                 float x;
                 float y;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &x, &y))
+                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by, &x,
+                                           &y))
                     {
                         dx2 = SQ(x - ax);
                         dy2 = SQ(y - ay);
@@ -1614,8 +1622,8 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                         }
                     }
                 } else {
-                    if ((ax <= bx) &&
-                        mpLib_80050068(&x, &y, x0, y0, y1, ax, ay, bx, by))
+                    if ((ax <= bx) && mpLineIntersectionV(&x, &y, x0, y0, y1,
+                                                          ax, ay, bx, by))
                     {
                         dx2 = SQ(x - ax);
                         dy2 = SQ(y - ay);
@@ -1734,8 +1742,8 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
                 dx = bx - ax;
                 dy = by - ay;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
-                                       &int_y))
+                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by,
+                                           &int_x, &int_y))
                     {
                         dx2 = SQ(int_x - old_x);
                         dy2 = SQ(int_y - old_y);
@@ -1774,8 +1782,8 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
                         }
                     }
                 } else {
-                    if (ax <= bx && mpLib_80050068(&int_x, &int_y, x0, y0, y1,
-                                                   ax, ay, bx, by))
+                    if (ax <= bx && mpLineIntersectionV(&int_x, &int_y, x0, y0,
+                                                        y1, ax, ay, bx, by))
                     {
                         dx2 = SQ(int_x - old_x);
                         dy2 = SQ(int_y - old_y);
@@ -1891,7 +1899,8 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                 float x;
                 float y;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &x, &y))
+                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by, &x,
+                                           &y))
                     {
                         dx2 = SQ(x - ax);
                         dy2 = SQ(y - ay);
@@ -1919,8 +1928,8 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                         }
                     }
                 } else {
-                    if (ax >= bx &&
-                        mpLib_80050068(&x, &y, x0, y0, y1, ax, ay, bx, by))
+                    if (ax >= bx && mpLineIntersectionV(&x, &y, x0, y0, y1, ax,
+                                                        ay, bx, by))
                     {
                         dx2 = SQ(x - ax);
                         dy2 = SQ(y - ay);
@@ -2040,8 +2049,8 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
                 dx = bx - ax;
                 dy = by - ay;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLib_8004E97C(x0, y0, x1, y1, ax, ay, bx, by, &int_x,
-                                       &int_y))
+                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by,
+                                           &int_x, &int_y))
                     {
                         dx2 = SQ(int_x - old_x);
                         dy2 = SQ(int_y - old_y);
@@ -2080,8 +2089,8 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
                         }
                     }
                 } else {
-                    if (ax >= bx && mpLib_80050068(&int_x, &int_y, x0, y0, y1,
-                                                   ax, ay, bx, by))
+                    if (ax >= bx && mpLineIntersectionV(&int_x, &int_y, x0, y0,
+                                                        y1, ax, ay, bx, by))
                     {
                         dx2 = SQ(int_x - old_x);
                         dy2 = SQ(int_y - old_y);
@@ -2209,8 +2218,8 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                     vdy = y0 - y;
 
                     if (SQ(vdx) + SQ(vdy) > 0.001F) {
-                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
-                                           &int_x, &int_y))
+                        if (mpLineIntersection(cx, cy, dx, dy, x, y, x0, y0,
+                                               &int_x, &int_y))
                         {
                             dist2 = SQ(int_x - x1) + SQ(int_y - y1);
                             if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <
@@ -2241,8 +2250,8 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                     vdy = y0 - y;
 
                     if (SQ(vdx) + SQ(vdy) > 0.001F) {
-                        if (mpLib_8004E97C(cx, cy, dx, dy, x, y, x0, y0,
-                                           &int_x, &int_y))
+                        if (mpLineIntersection(cx, cy, dx, dy, x, y, x0, y0,
+                                               &int_x, &int_y))
                         {
                             dist2 = SQ(int_x - x1) + SQ(int_y - y1);
                             if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <
@@ -2351,8 +2360,8 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                     vdy = y0 - y;
 
                     if (SQ(vdx) + SQ(vdy) > 0.001F) {
-                        if (mpLib_8004E97C(b0x, b0y, b1x, b1y, x, y, x0, y0,
-                                           &int_x, &int_y))
+                        if (mpLineIntersection(b0x, b0y, b1x, b1y, x, y, x0,
+                                               y0, &int_x, &int_y))
                         {
                             dist2 = SQ(int_x - x1) + SQ(int_y - y1);
                             if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <
@@ -2384,8 +2393,8 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                     vdy = y0 - y;
 
                     if (SQ(vdx) + SQ(vdy) > 0.001F) {
-                        if (mpLib_8004E97C(b0x, b0y, b1x, b1y, x, y, x0, y0,
-                                           &int_x, &int_y))
+                        if (mpLineIntersection(b0x, b0y, b1x, b1y, x, y, x0,
+                                               y0, &int_x, &int_y))
                         {
                             dist2 = SQ(int_x - x1) + SQ(int_y - y1);
                             if ((vdx * (int_x - x1)) + (vdy * (int_y - y1)) <

@@ -31,8 +31,9 @@
                                          u32* flags_out, Vec3* normal_out);
 /* 04E684 */ int mpLib_8004E684_RightWall(int line_id, Vec3*, float* x_out,
                                           u32* flags_out, Vec3* normal_out);
-/* 04EBF8 */ bool mpLib_8004EBF8(float*, float*, float, float, float, float,
-                                 float, float, float);
+/* 04EBF8 */ bool mpLineIntersectionH(float* int_x, float* int_y, float a0x,
+                                 float a0y, float a1x, float b0x, float b0y,
+                                 float b1x, float b1y);
 /* 04ED5C */ void mpLib_8004ED5C(int, float*, float*, float*, float*);
 /* 04F008 */ bool mpLib_8004F008_Floor(
     float ax, float ay, float bx, float by, float y_offset, Vec3* vec_out,
@@ -52,7 +53,7 @@
                                          int* line_id_out, u32* flags_out,
                                          Vec3* normal_out, int joint_id0,
                                          int joint_id1);
-/* 050068 */ bool mpLib_80050068(float* x_out, float* y_out, float a0x,
+/* 050068 */ bool mpLineIntersectionV(float* int_x, float* int_y, float a0x,
                                  float a0y, float a1y, float b0x, float b0y,
                                  float b1x, float b1y);
 /* 0501CC */ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx,
