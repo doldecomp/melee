@@ -812,7 +812,13 @@ void ftPp_SpecialS_80121164(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialHi_801217EC
 
-/// #ftPp_SpecialHi_8012184C
+void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C508AU, fp->cur_anim_frame, 0, 1, NULL);
+}
 
 /// #ftPp_SpecialHi_801218AC
 

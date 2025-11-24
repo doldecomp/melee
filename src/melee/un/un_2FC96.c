@@ -453,7 +453,21 @@ bool un_80300C3C(bool update_scene)
 
 /// #un_80300F3C
 
-/// #un_80300F98
+extern s32 un_804D6DF4;
+
+s32 un_80300F98(s32 arg0)
+{
+    s32* temp_r31;
+
+    if (arg0 == 1) {
+        temp_r31 = gmMainLib_8015CDB0();
+        lbAudioAx_80024030(1);
+        *temp_r31 = un_804D6DF4;
+        gm_801A42F8(1);
+        gm_801A4B60();
+    }
+    return 0;
+}
 
 bool un_80300FEC(bool update_scene)
 {

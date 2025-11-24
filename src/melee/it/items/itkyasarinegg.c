@@ -11,6 +11,14 @@ void itKyasarinegg_UnkMotion1_Coll(Item_GObj* gobj)
     it_8026DFB0(gobj);
 }
 
+void itKyasarinegg_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    ItemAttr* attrs = GET_ITEM(gobj)->xCC_item_attr;
+
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
+
 s32 itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj)
 {
     if (it_8026DA08(gobj) != 0) {

@@ -124,6 +124,7 @@ void fn_800DAA40(Fighter_GObj*, Fighter_GObj*);
 /* 0DA5A4 */ void ftCo_CatchAttack_IASA(Fighter_GObj* gobj);
 /* 0DA5A8 */ void ftCo_CatchAttack_Phys(Fighter_GObj* gobj);
 /* 0DA5F0 */ void ftCo_CatchAttack_Coll(Fighter_GObj* gobj);
+/* 0DA618 */ void fn_800DA618(Fighter_GObj* gobj);
 /* 0DA668 */ void fn_800DA668(Fighter_GObj* gobj);
 /* 0DA698 */ void ftCo_800DA698(Fighter_GObj* gobj, bool);
 /* 0DA744 */ void ftCo_CatchCut_Anim(Fighter_GObj* gobj);
