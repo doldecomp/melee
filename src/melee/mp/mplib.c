@@ -859,7 +859,7 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
 bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
                           float y_offset, Vec3* vec_out, int* line_id_out,
                           u32* flags_out, Vec3* normal_out, int line_id_skip,
-                          int joint_id0, int joint_id1,
+                          int joint_id_skip, int joint_id_only,
                           bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
 {
     float min_dist2_f30;
@@ -884,8 +884,8 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == joint - groundCollJoint ||
-            (joint_id1 != -1 && joint_id1 != joint - groundCollJoint))
+        if (joint_id_skip == joint - groundCollJoint ||
+            (joint_id_only != -1 && joint_id_only != joint - groundCollJoint))
         {
             continue;
         }
@@ -1006,7 +1006,7 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
 bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
                           float y_offset, Vec3* vec_out, int* line_id_out,
                           u32* flags_out, Vec3* normal_out, int line_id_skip,
-                          int joint_id0, int joint_id1,
+                          int joint_id_skip, int joint_id_only,
                           bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
 {
     float min_dist2 = F32_MAX;
@@ -1030,8 +1030,8 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == joint - groundCollJoint ||
-            (joint_id1 != -1 && joint_id1 != joint - groundCollJoint))
+        if (joint_id_skip == joint - groundCollJoint ||
+            (joint_id_only != -1 && joint_id_only != joint - groundCollJoint))
         {
             continue;
         }
@@ -1177,7 +1177,8 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
 
 bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
                             Vec3* vec_out, int* line_id_out, u32* flags_out,
-                            Vec3* normal_out, int joint_id0, int joint_id1)
+                            Vec3* normal_out, int joint_id_skip,
+                            int joint_id_only)
 {
     float min_dist2 = F32_MAX;
     CollJoint* joint; // r29
@@ -1200,8 +1201,8 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == joint - groundCollJoint ||
-            (joint_id1 != -1 && joint_id1 != joint - groundCollJoint))
+        if (joint_id_skip == joint - groundCollJoint ||
+            (joint_id_only != -1 && joint_id_only != joint - groundCollJoint))
         {
             continue;
         }
@@ -1314,7 +1315,8 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
 
 bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
                             Vec3* vec_out, int* line_id_out, u32* flags_out,
-                            Vec3* normal_out, int joint_id0, int joint_id1)
+                            Vec3* normal_out, int joint_id_skip,
+                            int joint_id_only)
 {
     float min_f30 = F32_MAX;
     float f29 = ax;
@@ -1336,8 +1338,9 @@ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == (joint - groundCollJoint) ||
-            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
+        if (joint_id_skip == (joint - groundCollJoint) ||
+            !(joint_id_only == -1 ||
+              joint_id_only == (joint - groundCollJoint)))
         {
             continue;
         }
@@ -1536,7 +1539,8 @@ bool mpLineIntersectionV(float* int_x, float* int_y, float a0x, float a0y,
 
 bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                              Vec3* vec_out, int* line_id_out, u32* flags_out,
-                             Vec3* normal_out, int joint_id0, int joint_id1)
+                             Vec3* normal_out, int joint_id_skip,
+                             int joint_id_only)
 {
     float min;
     CollJoint* joint;
@@ -1562,8 +1566,9 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == (joint - groundCollJoint) ||
-            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
+        if (joint_id_skip == (joint - groundCollJoint) ||
+            !(joint_id_only == -1 ||
+              joint_id_only == (joint - groundCollJoint)))
         {
             continue;
         }
@@ -1670,7 +1675,8 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
 
 bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
                              Vec3* vec_out, int* line_id_out, u32* flags_out,
-                             Vec3* normal_out, int joint_id0, int joint_id1)
+                             Vec3* normal_out, int joint_id_skip,
+                             int joint_id_only)
 {
     float min_dist2;
     float old_x = ax;
@@ -1698,8 +1704,9 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == (joint - groundCollJoint) ||
-            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
+        if (joint_id_skip == (joint - groundCollJoint) ||
+            !(joint_id_only == -1 ||
+              joint_id_only == (joint - groundCollJoint)))
         {
             continue;
         }
@@ -1842,7 +1849,8 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
 
 bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                               Vec3* vec_out, int* line_id_out, u32* flags_out,
-                              Vec3* normal_out, int joint_id0, int joint_id1)
+                              Vec3* normal_out, int joint_id_skip,
+                              int joint_id_only)
 {
     float min;
     CollJoint* joint;
@@ -1868,8 +1876,9 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == (joint - groundCollJoint) ||
-            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
+        if (joint_id_skip == (joint - groundCollJoint) ||
+            !(joint_id_only == -1 ||
+              joint_id_only == (joint - groundCollJoint)))
         {
             continue;
         }
@@ -1976,7 +1985,8 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
 
 bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
                               Vec3* vec_out, int* line_id_out, u32* flags_out,
-                              Vec3* normal_out, int joint_id0, int joint_id1)
+                              Vec3* normal_out, int joint_id_skip,
+                              int joint_id_only)
 {
     float min_dist2;
     float old_x = ax;
@@ -2005,8 +2015,9 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
             continue;
         }
 
-        if (joint_id0 == (joint - groundCollJoint) ||
-            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
+        if (joint_id_skip == (joint - groundCollJoint) ||
+            !(joint_id_only == -1 ||
+              joint_id_only == (joint - groundCollJoint)))
         {
             continue;
         }
@@ -2149,7 +2160,7 @@ bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
 
 bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
                               float cy, float dx, float dy, int* line_id_out,
-                              int joint_id0, int joint_id1)
+                              int joint_id_skip, int joint_id_only)
 {
     float min_dist2;
     CollJoint* joint;
@@ -2176,8 +2187,9 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
             continue;
         }
 
-        if (joint_id0 == (joint - groundCollJoint) ||
-            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
+        if (joint_id_skip == (joint - groundCollJoint) ||
+            !(joint_id_only == -1 ||
+              joint_id_only == (joint - groundCollJoint)))
         {
             continue;
         }
@@ -2290,7 +2302,8 @@ bool mpLib_800511A4_RightWall(float ax, float ay, float bx, float by, float cx,
 
 bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
                              float b0x, float b0y, float b1x, float b1y,
-                             int* line_id_out, int joint_id0, int joint_id1)
+                             int* line_id_out, int joint_id_skip,
+                             int joint_id_only)
 {
     float min_dist2;
     CollJoint* joint;
@@ -2317,8 +2330,9 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
             continue;
         }
 
-        if (joint_id0 == (joint - groundCollJoint) ||
-            !(joint_id1 == -1 || joint_id1 == (joint - groundCollJoint)))
+        if (joint_id_skip == (joint - groundCollJoint) ||
+            !(joint_id_only == -1 ||
+              joint_id_only == (joint - groundCollJoint)))
         {
             continue;
         }
@@ -2431,7 +2445,7 @@ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x, float a1y,
     return result;
 }
 
-int mpLib_8005199C_Floor(Vec3* vec, int joint_id0, int joint_id1)
+int mpLib_8005199C_Floor(Vec3* vec, int joint_id_skip, int joint_id_only)
 {
     int line_id = -1;
     float x = vec->x;
@@ -2446,12 +2460,12 @@ int mpLib_8005199C_Floor(Vec3* vec, int joint_id0, int joint_id1)
 
     for (joint = jointListStart; joint != NULL; joint = joint->next) {
         if (joint->flags & CollJoint_TooFar ||
-            joint_id0 == joint - groundCollJoint)
+            joint_id_skip == joint - groundCollJoint)
         {
             continue;
         }
 
-        if (joint_id1 != -1 && joint_id1 != joint - groundCollJoint) {
+        if (joint_id_only != -1 && joint_id_only != joint - groundCollJoint) {
             continue;
         }
 
@@ -2508,8 +2522,8 @@ end:
     return line_id;
 }
 
-int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
-                         int joint_id1, int dir, float left, float bottom,
+int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id_skip,
+                         int joint_id_only, int dir, float left, float bottom,
                          float right, float top)
 {
     float min;
@@ -2540,11 +2554,11 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
             continue;
         }
 
-        if (joint_id0 == joint - groundCollJoint) {
+        if (joint_id_skip == joint - groundCollJoint) {
             continue;
         }
 
-        if (joint_id1 == -1 || joint_id1 == joint - groundCollJoint) {
+        if (joint_id_only == -1 || joint_id_only == joint - groundCollJoint) {
             int i;
             CollLine* line = &groundCollLine[joint->inner->floor_start];
             int count = joint->inner->floor_count;
@@ -2654,7 +2668,7 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id0,
 
 bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
                     int* line_id_out, u32* flags_out, Vec3* normal_out,
-                    u32 arg4, int joint_id0, int joint_id1)
+                    u32 arg4, int joint_id_skip, int joint_id_only)
 {
     f32 dx;
     f32 dy;
@@ -2681,7 +2695,8 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
         if (arg4 & 1) {
             if (mpLib_8004F400_Floor(x0, y0, x1, y1, 0.0F, &pos_sp68,
                                      &line_id_sp40, &flags_sp3C, &normal_sp5C,
-                                     -1, joint_id0, joint_id1, NULL, NULL))
+                                     -1, joint_id_skip, joint_id_only, NULL,
+                                     NULL))
             {
                 dx = SQ(pos_sp68.x - x0);
                 dy = SQ(pos_sp68.y - y0);
@@ -2694,8 +2709,8 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
         }
         if ((arg4 & 2) &&
             (mpLib_8004FC2C_Ceiling(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                    &flags_sp3C, &normal_sp5C, joint_id0,
-                                    joint_id1)))
+                                    &flags_sp3C, &normal_sp5C, joint_id_skip,
+                                    joint_id_only)))
         {
             dx = SQ(pos_sp68.x - x0);
             dy = SQ(pos_sp68.y - y0);
@@ -2707,9 +2722,10 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
                 var_r29 = flags_sp3C;
             }
         }
-        if ((arg4 & 4) && mpLib_8005057C_LeftWall(
-                              x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                              &flags_sp3C, &normal_sp5C, joint_id0, joint_id1))
+        if ((arg4 & 4) &&
+            mpLib_8005057C_LeftWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
+                                    &flags_sp3C, &normal_sp5C, joint_id_skip,
+                                    joint_id_only))
         {
             dx = SQ(pos_sp68.x - x0);
             dy = SQ(pos_sp68.y - y0);
@@ -2723,8 +2739,8 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
         }
         if ((arg4 & 8) &&
             (mpLib_80050D68_RightWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                      &flags_sp3C, &normal_sp5C, joint_id0,
-                                      joint_id1)))
+                                      &flags_sp3C, &normal_sp5C, joint_id_skip,
+                                      joint_id_only)))
         {
             dx = SQ(pos_sp68.x - x0);
             dy = SQ(pos_sp68.y - y0);
@@ -2740,7 +2756,8 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
         if (arg4 & 1) {
             if (mpLib_8004F008_Floor(x0, y0, x1, y1, 0.0F, &pos_sp68,
                                      &line_id_sp40, &flags_sp3C, &normal_sp5C,
-                                     -1, joint_id0, joint_id1, NULL, NULL))
+                                     -1, joint_id_skip, joint_id_only, NULL,
+                                     NULL))
             {
                 dx = SQ(pos_sp68.x - x0);
                 dy = SQ(pos_sp68.y - y0);
@@ -2753,8 +2770,8 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
         }
         if ((arg4 & 2) &&
             (mpLib_8004F8A4_Ceiling(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                    &flags_sp3C, &normal_sp5C, joint_id0,
-                                    joint_id1)))
+                                    &flags_sp3C, &normal_sp5C, joint_id_skip,
+                                    joint_id_only)))
         {
             dx = SQ(pos_sp68.x - x0);
             dy = SQ(pos_sp68.y - y0);
@@ -2768,8 +2785,8 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
         }
         if ((arg4 & 4) &&
             (mpLib_800501CC_LeftWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                     &flags_sp3C, &normal_sp5C, joint_id0,
-                                     joint_id1)))
+                                     &flags_sp3C, &normal_sp5C, joint_id_skip,
+                                     joint_id_only)))
         {
             dx = SQ(pos_sp68.x - x0);
             dy = SQ(pos_sp68.y - y0);
@@ -2783,8 +2800,8 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
         }
         if ((arg4 & 8) &&
             (mpLib_800509B8_RightWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                      &flags_sp3C, &normal_sp5C, joint_id0,
-                                      joint_id1)))
+                                      &flags_sp3C, &normal_sp5C, joint_id_skip,
+                                      joint_id_only)))
         {
             dx = SQ(pos_sp68.x - x0);
             dy = SQ(pos_sp68.y - y0);
@@ -2819,19 +2836,19 @@ bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
 }
 
 bool mpLib_800524DC(Vec3* pos_out, int* line_id_out, u32* flags_out,
-                    Vec3* normal_out, int joint_id0, int joint_id1, float x0,
-                    float y0, float x1, float y1)
+                    Vec3* normal_out, int joint_id_skip, int joint_id_only,
+                    float x0, float y0, float x1, float y1)
 {
     return mpLib_80051EC8(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
-                          normal_out, 0x1F, joint_id0, joint_id1);
+                          normal_out, 0x1F, joint_id_skip, joint_id_only);
 }
 
 bool mpLib_80052508(Vec3* pos_out, int* line_id_out, u32* flags_out,
-                    Vec3* normal_out, int joint_id0, int joint_id1, float x0,
-                    float y0, float x1, float y1)
+                    Vec3* normal_out, int joint_id_skip, int joint_id_only,
+                    float x0, float y0, float x1, float y1)
 {
     return mpLib_80051EC8(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
-                          normal_out, 0xF, joint_id0, joint_id1);
+                          normal_out, 0xF, joint_id_skip, joint_id_only);
 }
 
 int mpLineNextNonFloor(int line_id)

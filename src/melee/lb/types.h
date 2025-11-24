@@ -212,8 +212,8 @@ struct CollData {
     /* fp+72C */ int floor_skip;
     /* fp+730 */ int ledge_id_right;
     /* fp+734 */ int ledge_id_left;
-    /* fp+738 */ int x48_joint_id;
-    /* fp+73C */ int x4C_joint_id;
+    /* fp+738 */ int joint_id_skip;
+    /* fp+73C */ int joint_id_only;
     /* fp+740 */ float x50;
     /* fp+744 */ float ledge_snap_x;
     /* fp+748 */ float ledge_snap_y;

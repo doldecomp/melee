@@ -32,77 +32,84 @@
 /* 04E684 */ int mpLib_8004E684_RightWall(int line_id, Vec3*, float* x_out,
                                           u32* flags_out, Vec3* normal_out);
 /* 04EBF8 */ bool mpLineIntersectionH(float* int_x, float* int_y, float a0x,
-                                 float a0y, float a1x, float b0x, float b0y,
-                                 float b1x, float b1y);
+                                      float a0y, float a1x, float b0x,
+                                      float b0y, float b1x, float b1y);
 /* 04ED5C */ void mpLib_8004ED5C(int, float*, float*, float*, float*);
-/* 04F008 */ bool mpLib_8004F008_Floor(
-    float ax, float ay, float bx, float by, float y_offset, Vec3* vec_out,
-    int* line_id_out, u32* flags_out, Vec3* normal_out, int line_id_skip,
-    int joint_id0, int joint_id1, bool (*)(Fighter_GObj*, int), Fighter_GObj*);
-/* 04F400 */ bool mpLib_8004F400_Floor(
-    float ax, float ay, float bx, float by, float y_offset, Vec3* vec_out,
-    int* line_id_out, u32* flags_out, Vec3* normal_out, int line_id_skip,
-    int joint_id0, int joint_id1, bool (*)(Fighter_GObj*, int), Fighter_GObj*);
+/* 04F008 */ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
+                                       float y_offset, Vec3* vec_out,
+                                       int* line_id_out, u32* flags_out,
+                                       Vec3* normal_out, int line_id_skip,
+                                       int joint_id_skip, int joint_id_only,
+                                       bool (*)(Fighter_GObj*, int),
+                                       Fighter_GObj*);
+/* 04F400 */ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
+                                       float y_offset, Vec3* vec_out,
+                                       int* line_id_out, u32* flags_out,
+                                       Vec3* normal_out, int line_id_skip,
+                                       int joint_id_skip, int joint_id_only,
+                                       bool (*)(Fighter_GObj*, int),
+                                       Fighter_GObj*);
 /* 04F8A4 */ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx,
                                          float by, Vec3* vec_out,
                                          int* line_id_out, u32* flags_out,
-                                         Vec3* normal_out, int joint_id0,
-                                         int joint_id1);
+                                         Vec3* normal_out, int joint_id_skip,
+                                         int joint_id_only);
 /* 04FC2C */ bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx,
                                          float by, Vec3* vec_out,
                                          int* line_id_out, u32* flags_out,
-                                         Vec3* normal_out, int joint_id0,
-                                         int joint_id1);
+                                         Vec3* normal_out, int joint_id_skip,
+                                         int joint_id_only);
 /* 050068 */ bool mpLineIntersectionV(float* int_x, float* int_y, float a0x,
-                                 float a0y, float a1y, float b0x, float b0y,
-                                 float b1x, float b1y);
+                                      float a0y, float a1y, float b0x,
+                                      float b0y, float b1x, float b1y);
 /* 0501CC */ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx,
                                           float by, Vec3* vec_out,
                                           int* line_id_out, u32* flags_out,
-                                          Vec3* normal_out, int joint_id0,
-                                          int joint_id1);
+                                          Vec3* normal_out, int joint_id_skip,
+                                          int joint_id_only);
 /* 05057C */ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx,
                                           float by, Vec3* vec_out,
                                           int* line_id_out, u32* flags_out,
-                                          Vec3* normal_out, int joint_id0,
-                                          int joint_id1);
+                                          Vec3* normal_out, int joint_id_skip,
+                                          int joint_id_only);
 /* 0509B8 */ bool mpLib_800509B8_RightWall(float ax, float ay, float bx,
                                            float by, Vec3* vec_out,
                                            int* line_id_out, u32* flags_out,
-                                           Vec3* normal_out, int joint_id0,
-                                           int joint_id1);
+                                           Vec3* normal_out, int joint_id_skip,
+                                           int joint_id_only);
 /* 050D68 */ bool mpLib_80050D68_RightWall(float ax, float ay, float bx,
                                            float by, Vec3* vec_out,
                                            int* line_id_out, u32* flags_out,
-                                           Vec3* normal_out, int joint_id0,
-                                           int joint_id1);
+                                           Vec3* normal_out, int joint_id_skip,
+                                           int joint_id_only);
 /* 0511A4 */ bool mpLib_800511A4_RightWall(float ax, float ay, float bx,
                                            float by, float cx, float cy,
                                            float dx, float dy,
-                                           int* line_id_out, int joint_id0,
-                                           int joint_id1);
+                                           int* line_id_out, int joint_id_skip,
+                                           int joint_id_only);
 /* 0515A0 */ bool mpLib_800515A0_LeftWall(float a0x, float a0y, float a1x,
                                           float a1y, float b0x, float b0y,
                                           float b1x, float b1y,
-                                          int* line_id_out, int joint_id0,
-                                          int joint_id1);
-/* 05199C */ int mpLib_8005199C_Floor(Vec3*, int joint_id0, int joint_id1);
+                                          int* line_id_out, int joint_id_skip,
+                                          int joint_id_only);
+/* 05199C */ int mpLib_8005199C_Floor(Vec3*, int joint_id_skip,
+                                      int joint_id_only);
 /* 051BA8 */ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip,
-                                      int joint_id0, int joint_id1, int dir,
-                                      float left, float bottom, float right,
-                                      float top);
+                                      int joint_id_skip, int joint_id_only,
+                                      int dir, float left, float bottom,
+                                      float right, float top);
 /* 051EC8 */ bool mpLib_80051EC8(float x0, float y0, float x1, float y1,
                                  Vec3* pos_out, int* line_id_out,
                                  u32* flags_out, Vec3* normal_out, u32 arg4,
-                                 int joint_id0, int joint_id1);
+                                 int joint_id_skip, int joint_id_only);
 /* 0524DC */ bool mpLib_800524DC(Vec3* pos_out, int* line_id_out,
                                  u32* flags_out, Vec3* normal_out,
-                                 int joint_id0, int joint_id1, float x0,
-                                 float y0, float x1, float y1);
+                                 int joint_id_skip, int joint_id_only,
+                                 float x0, float y0, float x1, float y1);
 /* 052508 */ bool mpLib_80052508(Vec3* pos_out, int* line_id_out,
                                  u32* flags_out, Vec3* normal_out,
-                                 int joint_id0, int joint_id1, float x0,
-                                 float y0, float x1, float y1);
+                                 int joint_id_skip, int joint_id_only,
+                                 float x0, float y0, float x1, float y1);
 /* 052534 */ int mpLineNextNonFloor(int line_id);
 /* 052700 */ int mpLinePrevNonFloor(int line_id);
 /* 0528CC */ int mpLinePrevNonCeiling(int line_id);
