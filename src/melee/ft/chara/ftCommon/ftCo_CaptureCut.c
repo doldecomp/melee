@@ -195,7 +195,7 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             sp3C.y = var_r31->cur_pos.y + tmp.y;
             sp3C.z = var_r31->cur_pos.z + tmp.z;
 
-            temp_r28_2->prev_pos = sp3C;
+            temp_r28_2->last_pos = sp3C;
             mpColl_80043670(temp_r28_2);
             temp_r28_2->cur_pos = sp4C;
 

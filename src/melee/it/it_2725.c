@@ -6667,7 +6667,7 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
             sp34.y = sp1C.y + temp_f31;
             sp34.z = sp1C.z + it_804DC73C;
             // sp34.z = sp1C.z + 0.0f;
-            coll1->prev_pos = sp34;
+            coll1->last_pos = sp34;
             mpColl_80043670(coll1);
             coll1->cur_pos = sp44;
             if (mpColl_800471F8(coll1)) {
@@ -6839,7 +6839,7 @@ void it_80275E98(Item_GObj* item_gobj, SpawnItem* spawn)
         it_80276174(item_gobj, &spawn->pos);
         return;
     }
-    coll->prev_pos = spawn->pos;
+    coll->last_pos = spawn->pos;
     mpColl_80043670(coll);
 }
 
@@ -6847,7 +6847,7 @@ void it_80276100(Item_GObj* item_gobj, Vec3* pos)
 {
     Item* item = GET_ITEM(item_gobj);
     CollData* coll = &item->x378_itemColl;
-    coll->prev_pos = *pos;
+    coll->last_pos = *pos;
     mpColl_80043670(coll);
     mpColl_800471F8(coll);
     item->pos = coll->cur_pos;
@@ -6861,7 +6861,7 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     Item* item;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    item->x378_itemColl.prev_pos = *pos;
+    item->x378_itemColl.last_pos = *pos;
     mpColl_80043670(&item->x378_itemColl);
     if (mpLib_80051EC8(item->pos.x, item->pos.y, item->pos.x,
                        item->pos.y - it_804D6D28->xF4, &temp_pos, NULL, NULL,
@@ -6877,7 +6877,7 @@ void it_80276214(Item_GObj* item_gobj)
     Item* item;
 
     item = item_gobj->user_data;
-    item->x378_itemColl.prev_pos = item->x378_itemColl.cur_pos;
+    item->x378_itemColl.last_pos = item->x378_itemColl.cur_pos;
     item->x378_itemColl.cur_pos = item->pos;
     if (item->xDCE_flag.b7 == 1) {
         it_80276278(item_gobj);

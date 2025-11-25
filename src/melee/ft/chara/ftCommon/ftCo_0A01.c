@@ -1232,11 +1232,11 @@ bool ftCo_800A3234(Fighter* fp)
     {
         int sp18;
         u32 sp14;
-        float topn_x = fp->coll_data.prev_pos.x;
-        float topn_y = fp->coll_data.prev_pos.y;
+        float topn_x = fp->coll_data.last_pos.x;
+        float topn_y = fp->coll_data.last_pos.y;
         float bottom_x = fp->coll_data.xA4_ecbCurrCorrect.bottom.x;
         float bottom_y = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
-        float y = fp->coll_data.prev_pos.y + bottom_y;
+        float y = fp->coll_data.last_pos.y + bottom_y;
         if (ftCo_800A0FB0(&sp34, &sp18, &sp14, &sp28, -1, -1, -1,
                           topn_x + bottom_x, topn_y + bottom_y,
                           fp->coll_data.cur_pos.x + bottom_x,

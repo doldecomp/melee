@@ -5773,62 +5773,60 @@ void mpLib_DrawEcbs(CollData* cd)
     mpLib_SetupDraw(spD8);
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
-    GXPosition3f32(cd->cur_pos_correct.x + cd->xC4_ecb.top.x,
-                   cd->cur_pos_correct.y + cd->xC4_ecb.top.y,
-                   cd->cur_pos_correct.z - 0.5F);
-    GXPosition3f32(cd->cur_pos_correct.x + cd->xC4_ecb.right.x,
-                   cd->cur_pos_correct.y + cd->xC4_ecb.right.y,
-                   cd->cur_pos_correct.z - 0.5F);
-    GXPosition3f32(cd->cur_pos_correct.x + cd->xC4_ecb.bottom.x,
-                   cd->cur_pos_correct.y + cd->xC4_ecb.bottom.y,
-                   cd->cur_pos_correct.z - 0.5F);
-    GXPosition3f32(cd->cur_pos_correct.x + cd->xC4_ecb.left.x,
-                   cd->cur_pos_correct.y + cd->xC4_ecb.left.y,
-                   cd->cur_pos_correct.z - 0.5F);
+    GXPosition3f32(cd->prev_pos.x + cd->xC4_ecb.top.x,
+                   cd->prev_pos.y + cd->xC4_ecb.top.y, cd->prev_pos.z - 0.5F);
+    GXPosition3f32(cd->prev_pos.x + cd->xC4_ecb.right.x,
+                   cd->prev_pos.y + cd->xC4_ecb.right.y,
+                   cd->prev_pos.z - 0.5F);
+    GXPosition3f32(cd->prev_pos.x + cd->xC4_ecb.bottom.x,
+                   cd->prev_pos.y + cd->xC4_ecb.bottom.y,
+                   cd->prev_pos.z - 0.5F);
+    GXPosition3f32(cd->prev_pos.x + cd->xC4_ecb.left.x,
+                   cd->prev_pos.y + cd->xC4_ecb.left.y, cd->prev_pos.z - 0.5F);
 
     GXEnd();
 
     mpLib_SetupDraw(spD4);
     GXBegin(GX_LINES, GX_VTXFMT0, 4);
 
-    GXPosition3f32(cd->cur_pos_correct.x - 1.0F, cd->cur_pos_correct.y,
-                   cd->cur_pos_correct.z - 0.5F);
-    GXPosition3f32(1.0F + cd->cur_pos_correct.x, cd->cur_pos_correct.y,
-                   cd->cur_pos_correct.z - 0.5F);
-    GXPosition3f32(cd->cur_pos_correct.x, cd->cur_pos_correct.y - 1.0F,
-                   cd->cur_pos_correct.z - 0.5F);
-    GXPosition3f32(cd->cur_pos_correct.x, 1.0F + cd->cur_pos_correct.y,
-                   cd->cur_pos_correct.z - 0.5F);
+    GXPosition3f32(cd->prev_pos.x - 1.0F, cd->prev_pos.y,
+                   cd->prev_pos.z - 0.5F);
+    GXPosition3f32(1.0F + cd->prev_pos.x, cd->prev_pos.y,
+                   cd->prev_pos.z - 0.5F);
+    GXPosition3f32(cd->prev_pos.x, cd->prev_pos.y - 1.0F,
+                   cd->prev_pos.z - 0.5F);
+    GXPosition3f32(cd->prev_pos.x, 1.0F + cd->prev_pos.y,
+                   cd->prev_pos.z - 0.5F);
 
     GXEnd();
 
     mpLib_SetupDraw(spD0);
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
-    GXPosition3f32(cd->prev_pos.x + cd->xE4_ecb.top.x,
-                   cd->prev_pos.y + cd->xE4_ecb.top.y, cd->prev_pos.z - 1.0F);
-    GXPosition3f32(cd->prev_pos.x + cd->xE4_ecb.right.x,
-                   cd->prev_pos.y + cd->xE4_ecb.right.y,
-                   cd->prev_pos.z - 1.0F);
-    GXPosition3f32(cd->prev_pos.x + cd->xE4_ecb.bottom.x,
-                   cd->prev_pos.y + cd->xE4_ecb.bottom.y,
-                   cd->prev_pos.z - 1.0F);
-    GXPosition3f32(cd->prev_pos.x + cd->xE4_ecb.left.x,
-                   cd->prev_pos.y + cd->xE4_ecb.left.y, cd->prev_pos.z - 1.0F);
+    GXPosition3f32(cd->last_pos.x + cd->xE4_ecb.top.x,
+                   cd->last_pos.y + cd->xE4_ecb.top.y, cd->last_pos.z - 1.0F);
+    GXPosition3f32(cd->last_pos.x + cd->xE4_ecb.right.x,
+                   cd->last_pos.y + cd->xE4_ecb.right.y,
+                   cd->last_pos.z - 1.0F);
+    GXPosition3f32(cd->last_pos.x + cd->xE4_ecb.bottom.x,
+                   cd->last_pos.y + cd->xE4_ecb.bottom.y,
+                   cd->last_pos.z - 1.0F);
+    GXPosition3f32(cd->last_pos.x + cd->xE4_ecb.left.x,
+                   cd->last_pos.y + cd->xE4_ecb.left.y, cd->last_pos.z - 1.0F);
 
     GXEnd();
 
     mpLib_SetupDraw(spCC);
     GXBegin(GX_LINES, GX_VTXFMT0, 4);
 
-    GXPosition3f32(cd->prev_pos.x - 1.0F, cd->prev_pos.y,
-                   cd->prev_pos.z - 1.0F);
-    GXPosition3f32(1.0F + cd->prev_pos.x, cd->prev_pos.y,
-                   cd->prev_pos.z - 1.0F);
-    GXPosition3f32(cd->prev_pos.x, cd->prev_pos.y - 1.0F,
-                   cd->prev_pos.z - 1.0F);
-    GXPosition3f32(cd->prev_pos.x, 1.0F + cd->prev_pos.y,
-                   cd->prev_pos.z - 1.0F);
+    GXPosition3f32(cd->last_pos.x - 1.0F, cd->last_pos.y,
+                   cd->last_pos.z - 1.0F);
+    GXPosition3f32(1.0F + cd->last_pos.x, cd->last_pos.y,
+                   cd->last_pos.z - 1.0F);
+    GXPosition3f32(cd->last_pos.x, cd->last_pos.y - 1.0F,
+                   cd->last_pos.z - 1.0F);
+    GXPosition3f32(cd->last_pos.x, 1.0F + cd->last_pos.y,
+                   cd->last_pos.z - 1.0F);
 
     GXEnd();
 

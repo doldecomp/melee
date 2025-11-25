@@ -202,8 +202,10 @@ typedef struct ECBSource {
 struct CollData {
     /* fp+6F0 */ HSD_GObj* x0_gobj;
     /* fp+6F4 */ Vec3 cur_pos;
-    /* fp+700 */ Vec3 cur_pos_correct;
-    /* fp+70C */ Vec3 prev_pos;
+    // position on the previous step of collision
+    /* fp+700 */ Vec3 prev_pos;
+    // position before collision routine started
+    /* fp+70C */ Vec3 last_pos;
     /* fp+718 */ Vec3 x28_vec;
     /* fp+724 */ ECBFlagStruct x34_flags;
     /* fp+725 */ ECBFlagStruct x35_flags;

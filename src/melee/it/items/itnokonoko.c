@@ -543,8 +543,8 @@ int it_802DDA84(Item_GObj* gobj)
     CollData* col = &ip->x378_itemColl;
     bool cond;
     ip->x378_itemColl.cur_pos = ip->pos;
-    ip->x378_itemColl.prev_pos = ip->x378_itemColl.cur_pos;
-    ip->x378_itemColl.prev_pos.y += 10.0f;
+    ip->x378_itemColl.last_pos = ip->x378_itemColl.cur_pos;
+    ip->x378_itemColl.last_pos.y += 10.0f;
     ip->x378_itemColl.cur_pos.y -= 10.0f;
     cond = mpColl_800471F8(col);
     ip->pos = col->cur_pos;
