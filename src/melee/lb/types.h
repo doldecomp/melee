@@ -222,9 +222,10 @@ struct CollData {
     /* fp+74C */ float ledge_snap_height;
     /* fp+750 */ float lstick_x;
     /* fp+754 */ ftECB x64_ecb;
-    /* fp+774 */ ftECB x84_ecb;
-    /* fp+794 */ ftECB xA4_ecbCurrCorrect;
-    /* fp+7B4 */ ftECB xC4_ecb;
+    /* fp+774 */ ftECB desired_ecb;
+    /* fp+794 */ ftECB ecb;
+    // ECB on the previous step of collision
+    /* fp+7B4 */ ftECB prev_ecb;
     /* fp+7D4 */ ftECB xE4_ecb;
     /* fp+7F4 */ ECBSource ecb_source;
     /* fp+820 */ u32 x130_flags;

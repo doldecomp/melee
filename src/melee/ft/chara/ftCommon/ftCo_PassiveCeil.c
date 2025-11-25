@@ -40,7 +40,7 @@ void ftCo_800C23FC(Fighter_GObj* gobj)
     ftCommon_8007E2FC(gobj);
     fp->throw_flags = 0;
     ef_offset.x = 0;
-    ef_offset.y = fp->coll_data.xA4_ecbCurrCorrect.top.y;
+    ef_offset.y = fp->coll_data.ecb.top.y;
     ef_offset.z = 0;
     ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
     Fighter_ChangeMotionState(gobj, ftCo_MS_PassiveCeil, Ft_MF_None, 0, 1, 0,

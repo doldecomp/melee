@@ -270,8 +270,8 @@ bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj)
     ECB_X = 0.0f;
     ECB_MUL_Y = 0.5f;
     sp20.x = ECB_X;
-    sp20.y = ECB_MUL_Y * (fp->coll_data.xA4_ecbCurrCorrect.top.y +
-                          fp->coll_data.xA4_ecbCurrCorrect.bottom.y);
+    sp20.y =
+        ECB_MUL_Y * (fp->coll_data.ecb.top.y + fp->coll_data.ecb.bottom.y);
     sp20.z = ECB_X;
     sp20.x += fp->cur_pos.x;
     sp20.y += fp->cur_pos.y;
@@ -688,9 +688,8 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
 
             fighter_data2 = getFighter(gobj);
             sp18.x = 0.0f;
-            sp18.y =
-                0.5f * (fighter_data2->coll_data.xA4_ecbCurrCorrect.top.y +
-                        fighter_data2->coll_data.xA4_ecbCurrCorrect.bottom.y);
+            sp18.y = 0.5f * (fighter_data2->coll_data.ecb.top.y +
+                             fighter_data2->coll_data.ecb.bottom.y);
             sp18.z = 0.0f;
             sp18.x += fighter_data2->cur_pos.x;
             sp18.y += fighter_data2->cur_pos.y;

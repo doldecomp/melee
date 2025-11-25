@@ -1234,8 +1234,8 @@ bool ftCo_800A3234(Fighter* fp)
         u32 sp14;
         float topn_x = fp->coll_data.last_pos.x;
         float topn_y = fp->coll_data.last_pos.y;
-        float bottom_x = fp->coll_data.xA4_ecbCurrCorrect.bottom.x;
-        float bottom_y = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
+        float bottom_x = fp->coll_data.ecb.bottom.x;
+        float bottom_y = fp->coll_data.ecb.bottom.y;
         float y = fp->coll_data.last_pos.y + bottom_y;
         if (ftCo_800A0FB0(&sp34, &sp18, &sp14, &sp28, -1, -1, -1,
                           topn_x + bottom_x, topn_y + bottom_y,
@@ -1279,9 +1279,8 @@ bool ftCo_800A3498(Fighter* fp)
         if (fp->pos_delta.y < 0.0) {
             return true;
         }
-    } else if (temp_r4->x54.y >
-               temp_r4->x568 + (fp->coll_data.cur_pos.y +
-                                fp->coll_data.xA4_ecbCurrCorrect.bottom.y))
+    } else if (temp_r4->x54.y > temp_r4->x568 + (fp->coll_data.cur_pos.y +
+                                                 fp->coll_data.ecb.bottom.y))
     {
         return true;
     }
@@ -2256,8 +2255,7 @@ static void ftCo_800A963C(Fighter* fp, bool unused)
 void ftCo_800A96B8(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    float sum =
-        fp->coll_data.cur_pos.y + fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
+    float sum = fp->coll_data.cur_pos.y + fp->coll_data.ecb.bottom.y;
     bool tmp = fp->x1A88.x54.y > sum ? true : false;
 
     PAD_STACK(0x10);

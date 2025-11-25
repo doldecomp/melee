@@ -46,8 +46,8 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
 
                 if (env_flags) {
                     // compute absolte position of the ECB's left vertex?
-                    ecb.x = coll_data->xA4_ecbCurrCorrect.left.x;
-                    ecb.y = coll_data->xA4_ecbCurrCorrect.left.y;
+                    ecb.x = coll_data->ecb.left.x;
+                    ecb.y = coll_data->ecb.left.y;
                     ecb.z = 0.0f;
                     ecb.x += fp0->cur_pos.x;
                     ecb.y += fp0->cur_pos.y;
@@ -60,8 +60,8 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     }
                 } else {
                     // compute absolte position of the ECB's right vertex?
-                    ecb.x = coll_data->xA4_ecbCurrCorrect.right.x;
-                    ecb.y = coll_data->xA4_ecbCurrCorrect.right.y;
+                    ecb.x = coll_data->ecb.right.x;
+                    ecb.y = coll_data->ecb.right.y;
                     ecb.z = 0.0f;
                     ecb.x += fp0->cur_pos.x;
                     ecb.y += fp0->cur_pos.y;

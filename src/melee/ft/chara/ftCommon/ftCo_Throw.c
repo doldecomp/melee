@@ -522,8 +522,7 @@ static inline float ftCo_800DDDE4_inline3(Fighter* fp3)
 
 static inline float ftCo_800DDDE4_inline2(Fighter* fp3)
 {
-    return 0.5f * (fp3->coll_data.xA4_ecbCurrCorrect.top.y +
-                   fp3->coll_data.xA4_ecbCurrCorrect.bottom.y);
+    return 0.5f * (fp3->coll_data.ecb.top.y + fp3->coll_data.ecb.bottom.y);
 }
 
 void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)

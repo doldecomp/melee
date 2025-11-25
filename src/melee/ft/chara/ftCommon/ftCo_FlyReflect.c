@@ -39,8 +39,8 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
         fp->mv.co.damage.x19 != ftCo_Surface_LeftWall)
     {
         u8 _[8] = { 0 };
-        vec.x = coll->xA4_ecbCurrCorrect.left.x;
-        vec.y = coll->xA4_ecbCurrCorrect.left.y;
+        vec.x = coll->ecb.left.x;
+        vec.y = coll->ecb.left.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
@@ -53,8 +53,8 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
     if (kb_vel_x > threshold && coll->env_flags & MPCOLL_FLAGS_B05 &&
         fp->mv.co.damage.x19 != ftCo_Surface_RightWall)
     {
-        vec.x = coll->xA4_ecbCurrCorrect.right.x;
-        vec.y = coll->xA4_ecbCurrCorrect.right.y;
+        vec.x = coll->ecb.right.x;
+        vec.y = coll->ecb.right.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
@@ -78,7 +78,7 @@ bool ftCo_800C1718(Fighter_GObj* gobj)
         fp->mv.co.damage.x19 != ftCo_Surface_Ceiling)
     {
         vec.x = 0;
-        vec.y = coll->xA4_ecbCurrCorrect.top.y;
+        vec.y = coll->ecb.top.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {

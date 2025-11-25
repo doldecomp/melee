@@ -6041,10 +6041,10 @@ void it_80274D6C(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
 
-    float right_x = item->x378_itemColl.xA4_ecbCurrCorrect.right.x;
-    float right_y = item->x378_itemColl.xA4_ecbCurrCorrect.right.y;
-    float left_x = item->x378_itemColl.xA4_ecbCurrCorrect.left.x;
-    float top_y = item->x378_itemColl.xA4_ecbCurrCorrect.top.y;
+    float right_x = item->x378_itemColl.ecb.right.x;
+    float right_y = item->x378_itemColl.ecb.right.y;
+    float left_x = item->x378_itemColl.ecb.left.x;
+    float top_y = item->x378_itemColl.ecb.top.y;
 
     item->xB54.x8.y = right_x + item->pos.x;
     item->xB54.x8.x = left_x + item->pos.x;
@@ -6659,8 +6659,7 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
             }
         }
         if (!chk) {
-            temp_f31 = 0.5f * (coll2->xA4_ecbCurrCorrect.top.y +
-                               coll2->xA4_ecbCurrCorrect.bottom.y);
+            temp_f31 = 0.5f * (coll2->ecb.top.y + coll2->ecb.bottom.y);
             it_8026BC90(item_gobj2, &sp1C);
             sp34.x = sp1C.x + it_804DC73C;
             // sp34.x = sp1C.x + 0.0f;
@@ -7256,23 +7255,23 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
     if (dir1 != 0) {
         sp34 = item->xC1C;
         if (coll->facing_dir == 1) {
-            pos_x1 = coll->xA4_ecbCurrCorrect.right.x - 1.0f;
+            pos_x1 = coll->ecb.right.x - 1.0f;
             if (pos_x1 < 0.0f) {
                 pos_x1 = -pos_x1;
             }
             sp34.right = pos_x1;
-            pos_x2 = 1.0f + coll->xA4_ecbCurrCorrect.left.x;
+            pos_x2 = 1.0f + coll->ecb.left.x;
             if (pos_x2 < 0.0f) {
                 pos_x2 = -pos_x2;
             }
             sp34.left = pos_x2;
         } else {
-            pos_x3 = 1.0f + coll->xA4_ecbCurrCorrect.left.x;
+            pos_x3 = 1.0f + coll->ecb.left.x;
             if (pos_x3 < 0.0f) {
                 pos_x3 = -pos_x3;
             }
             sp34.right = pos_x3;
-            pos_x4 = coll->xA4_ecbCurrCorrect.right.x - 1.0f;
+            pos_x4 = coll->ecb.right.x - 1.0f;
             if (pos_x4 < 0.0f) {
                 pos_x4 = -pos_x4;
             }
@@ -7682,20 +7681,20 @@ void it_80277C40(Item_GObj* item_gobj, s32 arg1)
     sp20.y = 0.0f;
     sp20.x = 0.0f;
     if (arg1 & 8) {
-        sp20.x = coll->xA4_ecbCurrCorrect.right.x;
-        sp20.y = coll->xA4_ecbCurrCorrect.right.y;
+        sp20.x = coll->ecb.right.x;
+        sp20.y = coll->ecb.right.y;
     }
     if (arg1 & 4) {
-        sp20.x = coll->xA4_ecbCurrCorrect.left.x;
-        sp20.y = coll->xA4_ecbCurrCorrect.left.y;
+        sp20.x = coll->ecb.left.x;
+        sp20.y = coll->ecb.left.y;
     }
     if (arg1 & 2) {
-        sp20.x = coll->xA4_ecbCurrCorrect.top.x;
-        sp20.y = coll->xA4_ecbCurrCorrect.top.y;
+        sp20.x = coll->ecb.top.x;
+        sp20.y = coll->ecb.top.y;
     }
     if (arg1 & 1) {
-        sp20.x = coll->xA4_ecbCurrCorrect.bottom.x;
-        sp20.y = coll->xA4_ecbCurrCorrect.bottom.y;
+        sp20.x = coll->ecb.bottom.x;
+        sp20.y = coll->ecb.bottom.y;
     }
     if (!item->xDCF_flag.b0) {
         it_80278800(item_gobj, 0x405, 0, &sp20, &sp14, 0U, 0.0f);

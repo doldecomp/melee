@@ -204,7 +204,7 @@ void ftCo_800C4C60(Fighter_GObj* gobj)
     {
         Vec3 vec;
         vec.x = 0;
-        vec.y = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
+        vec.y = fp->coll_data.ecb.bottom.y;
         vec.z = 0;
         vec.x += fp->cur_pos.x;
         vec.y += fp->cur_pos.y;

@@ -32,7 +32,7 @@ void ftCo_8009EFA4(Fighter_GObj* gobj)
     {
         Vec3 vec;
         vec.x = 0;
-        vec.y = fp->coll_data.xA4_ecbCurrCorrect.top.y;
+        vec.y = fp->coll_data.ecb.top.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         Fighter_ChangeMotionState(gobj, ftCo_MS_StopCeil, Ft_MF_None, 0, 1, 0,

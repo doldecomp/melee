@@ -77,12 +77,12 @@ void ftCo_800C1E64(Fighter_GObj* gobj, int msid, int timer, int vel_y_exponent,
         fp->facing_dir = -facing_dir;
         ftCommon_8007E2FC(gobj);
         if (fp->coll_data.env_flags & MPCOLL_FLAGS_B11) {
-            ef_offset.x = coll->xA4_ecbCurrCorrect.left.x;
-            ef_offset.y = coll->xA4_ecbCurrCorrect.left.y;
+            ef_offset.x = coll->ecb.left.x;
+            ef_offset.y = coll->ecb.left.y;
             ef_offset.z = 0.0F;
         } else {
-            ef_offset.x = coll->xA4_ecbCurrCorrect.right.x;
-            ef_offset.y = coll->xA4_ecbCurrCorrect.right.y;
+            ef_offset.x = coll->ecb.right.x;
+            ef_offset.y = coll->ecb.right.y;
             ef_offset.z = 0.0F;
         }
     }

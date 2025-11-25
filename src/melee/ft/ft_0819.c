@@ -21,7 +21,7 @@ void ft_80081938(HSD_GObj* gobj)
     u8 unused2[56];
     Fighter* fp = gobj->user_data;
     sp44 = fp->coll_data.cur_pos;
-    new_var = &fp->coll_data.xA4_ecbCurrCorrect;
+    new_var = &fp->coll_data.ecb;
     lx = new_var->left.x;
     rx = new_var->right.x;
     fp->dmg.x1930.xC.x = lx + sp44.x;
@@ -39,7 +39,7 @@ void ft_800819A8(HSD_GObj* gobj)
     u8 unused2[56];
     Fighter* fp = gobj->user_data;
     sp44 = fp->coll_data.cur_pos;
-    p_var = &fp->coll_data.xA4_ecbCurrCorrect;
+    p_var = &fp->coll_data.ecb;
     lx = p_var->left.x;
     rx = p_var->right.x;
     fp->dmg.x1930.x0.x = lx + sp44.x;
@@ -76,8 +76,8 @@ bool ft_80081A00(Fighter_GObj* fp_gobj)
         PAD_STACK(14 * 4);
         fp->x2223_b5 = true;
         sp64 = fp->coll_data.cur_pos;
-        lx = fp->coll_data.xA4_ecbCurrCorrect.left.x;
-        rx = fp->coll_data.xA4_ecbCurrCorrect.right.x;
+        lx = fp->coll_data.ecb.left.x;
+        rx = fp->coll_data.ecb.right.x;
         fp->dmg.x1930.xC.x = lx + sp64.x;
         fp->dmg.x1930.xC.y = rx + sp64.x;
         fp->dmg.x1930.xC.z = fp->cur_pos.y + fp->co_attrs.x17C;

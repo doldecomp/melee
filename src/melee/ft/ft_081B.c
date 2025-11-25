@@ -1300,12 +1300,12 @@ bool ft_80084C74(Fighter_GObj* gobj, int* arg1, int* arg2, int* arg3)
 
 void ft_80084CB0(Fighter* fp, ftCollisionBox* box)
 {
-    box->top = fp->coll_data.xA4_ecbCurrCorrect.top.y;
-    box->bottom = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
-    box->right.x = fp->coll_data.xA4_ecbCurrCorrect.right.x;
-    box->right.y = fp->coll_data.xA4_ecbCurrCorrect.right.y;
-    box->left.x = fp->coll_data.xA4_ecbCurrCorrect.left.x;
-    box->left.y = fp->coll_data.xA4_ecbCurrCorrect.left.y;
+    box->top = fp->coll_data.ecb.top.y;
+    box->bottom = fp->coll_data.ecb.bottom.y;
+    box->right.x = fp->coll_data.ecb.right.x;
+    box->right.y = fp->coll_data.ecb.right.y;
+    box->left.x = fp->coll_data.ecb.left.x;
+    box->left.y = fp->coll_data.ecb.left.y;
 }
 
 bool ft_80084CE4(Fighter* attacker, Fighter* victim)
@@ -1315,17 +1315,16 @@ bool ft_80084CE4(Fighter* attacker, Fighter* victim)
     float victim_x;
     float victim_y;
 
-    attacker_y = (attacker->coll_data.xA4_ecbCurrCorrect.top.y +
-                  attacker->coll_data.xA4_ecbCurrCorrect.bottom.y) *
-                 0.5F;
+    attacker_y =
+        (attacker->coll_data.ecb.top.y + attacker->coll_data.ecb.bottom.y) *
+        0.5F;
     attacker_y += attacker->cur_pos.y;
 
     attacker_x = 0.0F;
     attacker_x += attacker->cur_pos.x;
 
-    victim_y = (victim->coll_data.xA4_ecbCurrCorrect.top.y +
-                victim->coll_data.xA4_ecbCurrCorrect.bottom.y) *
-               0.5F;
+    victim_y =
+        (victim->coll_data.ecb.top.y + victim->coll_data.ecb.bottom.y) * 0.5F;
     victim_y += victim->cur_pos.y;
 
     victim_x = 0.0F;
