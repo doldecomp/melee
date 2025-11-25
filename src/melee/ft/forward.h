@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "gr/forward.h"
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
@@ -69,7 +70,7 @@ typedef void (*Fighter_UnkPtrEvent)(int arg0, int* arg1, int* arg2);
 typedef void (*FighterEvent)(Fighter* fp);
 typedef void (*FtCmd)(Fighter_GObj*, CommandInfo*);
 typedef void (*FtCmd2)(Fighter_GObj*, CommandInfo*, int);
-typedef bool (*ftDevice_Callback0)(UNK_T, HSD_GObj*, Vec3*);
+typedef bool (*ftDevice_Callback0)(Ground_GObj*, Fighter_GObj*, Vec3*);
 
 typedef enum FighterKind {
     /* 00 */ FTKIND_MARIO,

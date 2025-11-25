@@ -22,6 +22,7 @@
 #include "ftCommon/types.h"
 #include "gm/gm_unsplit.h"
 
+#include "gr/forward.h"
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
@@ -1454,18 +1455,18 @@ void ftColl_8007B8E8(Fighter_GObj* gobj)
 
 s32 func_800C0A28(HSD_GObj*, u32, s32); /* extern */
 
-void ftColl_GetWindOffsetVec(HSD_GObj* gobj, Vec3* out_wind)
+void ftColl_GetWindOffsetVec(HSD_GObj* fgp, Vec3* out_wind)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(fgp);
     Vec3 wind;
     out_wind->x = out_wind->y = out_wind->z = 0;
     if (!fp->x2224_b4) {
         int i;
         for (i = 0; i < ft_804D6578.x0; i++) {
-            UNK_T x0 = ft_80459A68[i].x0;
-            if (ft_80459A68[i].x0) {
-                if (ftCo_800C0A28(gobj, x0, ft_80459A68[i].x4) &&
-                    ft_80459A68[i].active_cb(x0, gobj, &wind))
+            Ground_GObj* grp = ft_80459A68[i].ground;
+            if (ft_80459A68[i].ground) {
+                if (ftCo_800C0A28(fgp, grp, ft_80459A68[i].type) &&
+                    ft_80459A68[i].active_cb(grp, fgp, &wind))
                 {
                     out_wind->x += wind.x;
                     out_wind->y += wind.y;
