@@ -42,9 +42,9 @@ struct plAllocInfo2 {
     };
 };
 
-struct pl_800386D8_t {
+struct plActionStats {
     /*   +0 */ int total_attack_count;
-    /*   +4 */ u32 x4[100];
+    /*   +4 */ u32 attack_counts[StatsAttack_99 + 1];
     /* +194 */ int x194;
     /* +198 */ int x198;
     /* +19C */ int x19C;
@@ -86,7 +86,7 @@ struct StaleMoveTable {
         u16 move_id;
         u16 attack_instance;
     } StaleMoves[10];
-    /*  +2C */ pl_800386D8_t total_attack_count_struct;
+    /*  +2C */ plActionStats total_attack_count_struct;
     /* +5EC */ struct pl_x5EC_t {
         u8 x0; ///< player slot
         f32 x4;

@@ -288,7 +288,7 @@ void Player_SetUnk4C(s32 slot, u8 unk4C);
 bool Player_80036058(s32 slot);
 float Player_800360D8(s32 slot);
 void Player_SetStructFunc(s32 slot, void* arg_func);
-pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot);
+plActionStats* Player_GetActionStats(int slot);
 StaleMoveTable* Player_GetStaleMoveTableIndexPtr(s32 slot);
 struct pl_x5EC_t* Player_GetUnk6A8Ptr(int slot);
 pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot);

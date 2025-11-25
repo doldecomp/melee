@@ -1738,10 +1738,10 @@ void Player_SetStructFunc(s32 slot, void* arg_func)
     player->struct_func = arg_func;
 }
 
-pl_800386D8_t* Player_GetTotalAttackCountPtr(int slot)
+plActionStats* Player_GetActionStats(int slot)
 {
     StaticPlayer* player;
-    pl_800386D8_t* attack_count;
+    plActionStats* attack_count;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     attack_count = &player->stale_moves.total_attack_count_struct;
