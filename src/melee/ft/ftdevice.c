@@ -64,7 +64,9 @@ UNK_RET ftCo_800C0764(UNK_PARAMS)
     NOT_IMPLEMENTED;
 }
 
-void ftCo_800C07F8(Ground_GObj* arg0, u32 arg1, ftDevice_Callback0 arg2)
+/// @todo pretty sure arg2 is a ftDevice callback, but unsure if its
+// always of type ftDevice_Callback0.
+void ftCo_800C07F8(Ground_GObj* arg0, u32 arg1, void* arg2)
 {
     struct ftDeviceUnk3* temp_r6;
     /// @todo is supposed to load in ft_80459A8C, which is ft_80459A68[3]
