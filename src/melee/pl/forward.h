@@ -119,6 +119,7 @@ typedef enum {
     /* 61 */ StatsAttack_MSBomb,       ///< on explode
     /* 62 */ StatsAttack_ItemThrow,
     /* 63 */ StatsAttack_99,
+    /* 64 */ StatsAttack_Count,
 } plStats_Attack;
 
 #endif

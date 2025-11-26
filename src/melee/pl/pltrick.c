@@ -23,7 +23,7 @@ void pl_80037ECC(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
     plActionStats* acp = Player_GetActionStats(ft->player_id);
-    acp->x1A8 += 1;
+    acp->attacks.x1A8++;
 }
 
 /// #fn_80037F00

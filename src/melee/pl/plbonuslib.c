@@ -1289,12 +1289,12 @@ int pl_800408DC(int arg0)
 
 int pl_80040900(int arg0)
 {
-    return Player_GetActionStats(arg0)->x358;
+    return Player_GetActionStats(arg0)->x358_hits.total;
 }
 
 int pl_80040924(int arg0)
 {
-    return Player_GetActionStats(arg0)->total_attack_count;
+    return Player_GetActionStats(arg0)->attacks.total;
 }
 
 float pl_80040948(int arg0)
@@ -1303,8 +1303,8 @@ float pl_80040948(int arg0)
     unsigned int temp_r30;
     PAD_STACK(0x10);
 
-    total = Player_GetActionStats(arg0)->total_attack_count;
-    temp_r30 = Player_GetActionStats(arg0)->x358;
+    total = Player_GetActionStats(arg0)->attacks.total;
+    temp_r30 = Player_GetActionStats(arg0)->x358_hits.total;
     if (total != 0) {
         return pl_CalculateAverage(temp_r30, total);
     }
@@ -1314,27 +1314,27 @@ float pl_80040948(int arg0)
 int pl_80040A04(int arg0)
 {
     plActionStats* temp_r3 = Player_GetActionStats(arg0);
-    return temp_r3->total_attack_count - temp_r3->x198;
+    return temp_r3->attacks.total - temp_r3->attacks.aerials_count;
 }
 
 int pl_80040A30(int arg0)
 {
-    return Player_GetActionStats(arg0)->x198;
+    return Player_GetActionStats(arg0)->attacks.aerials_count;
 }
 
 int pl_80040A54(int arg0)
 {
-    return Player_GetActionStats(arg0)->x194;
+    return Player_GetActionStats(arg0)->attacks.thrown_item_count;
 }
 
 int pl_80040A78(int arg0)
 {
-    return Player_GetActionStats(arg0)->attack_counts[StatsAttack_Catch];
+    return Player_GetActionStats(arg0)->attacks.by_attack_counts[StatsAttack_Catch];
 }
 
 int pl_80040A9C(int arg0)
 {
-    u32* val = &Player_GetActionStats(arg0)->attack_counts[StatsAttack_DownAttackD];
+    u32* val = &Player_GetActionStats(arg0)->attacks.by_attack_counts[StatsAttack_DownAttackD];
     int sum = 0;
     unsigned int cursor_i = 51;
     int ctr;
@@ -1357,7 +1357,7 @@ void pl_80040AF0(int arg0)
 
 int pl_80040B18(int arg0)
 {
-    return Player_GetActionStats(arg0)->x19C;
+    return Player_GetActionStats(arg0)->attacks.specials_count;
 }
 
 unsigned int pl_80040B3C(int arg0)
