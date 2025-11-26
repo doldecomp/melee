@@ -5,7 +5,7 @@
 
 #include <melee/pl/forward.h>
 
-/* 0386D8 */ unsigned int pl_800386D8(pl_800386D8_t*, ssize_t);
+/* 0386D8 */ unsigned int pl_800386D8(plActionStats*, ssize_t);
 /* 0386E8 */ int pl_800386E8(pl_800386E8_arg0_t*);
 /* 038700 */ int fn_80038700(int*, int, int);
 /* 038788 */ void pl_80038788(int player, int kind, int);

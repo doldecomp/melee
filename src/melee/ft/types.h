@@ -935,8 +935,8 @@ struct ftSubactionList {
 };
 
 struct ftDeviceUnk3 {
-    UNK_T x0;
-    u32 x4;
+    Ground_GObj* ground;
+    u32 type;
     ftDevice_Callback0 active_cb;
 };
 

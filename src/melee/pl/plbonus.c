@@ -40,9 +40,9 @@ static inline void setPointValue(int player, int kind, unsigned int val)
 
 #pragma push
 #pragma dont_inline on
-unsigned int pl_800386D8(pl_800386D8_t* arg0, ssize_t arg1)
+unsigned int pl_800386D8(plActionStats* arg0, ssize_t arg1)
 {
-    return arg0->x3E8[arg1];
+    return arg0->by_attack_hi[arg1];
 }
 #pragma pop
 
@@ -422,10 +422,10 @@ void fn_8003B044(int player)
     int var_r27;
 
     f32 var_f30;
-    pl_800386D8_t* temp_r3;
+    plActionStats* temp_r3;
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(player);
-    temp_r3 = Player_GetTotalAttackCountPtr(player);
+    temp_r3 = Player_GetActionStats(player);
     if (!temp_r3->x5BC_b0) {
         setFlag(player, 0x31);
     }
@@ -527,33 +527,33 @@ void fn_8003B9A4(int player)
 {
     pl_StaleMoveTableExt_t* temp_r31;
     int i;
-    u32* temp_r29;
-    struct pl_800386D8_1B0_t* temp_r28;
-    pl_800386D8_t* temp_r3;
+    u32* attack_counts;
+    u32* hit_counts;
+    plActionStats* action_stats;
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(player);
-    temp_r3 = Player_GetTotalAttackCountPtr(player);
-    temp_r29 = temp_r3->x4;
-    temp_r28 = &temp_r3->x1B0;
+    action_stats = Player_GetActionStats(player);
+    attack_counts = action_stats->attacks.by_attack_counts;
+    hit_counts = action_stats->hits.by_attack_counts;
 
-    if (temp_r29[0x33] != 0) {
-        if (temp_r29[0x33] >= pl_804D6470->x3C && temp_r28->xCC == 0) {
+    if (attack_counts[StatsAttack_Catch] != 0) {
+        if (attack_counts[StatsAttack_Catch] >= pl_804D6470->x3C && hit_counts[StatsAttack_Catch] == 0) {
             setFlag(player, 0x26);
-        } else if (pl_CalculateAverage(temp_r28->xCC, temp_r29[0x33]) <=
+        } else if (pl_CalculateAverage(hit_counts[StatsAttack_Catch], attack_counts[StatsAttack_Catch]) <=
                    pl_804D6470->x44)
         {
             setFlag(player, 0x25);
         }
     }
-    if (temp_r28->xCC != 0) {
-        for (i = 0x33; i < 0x3E; i++) {
-            if (!(i == 0x33 || i == 0x34 || temp_r29[i] == 0)) {
+    if (hit_counts[StatsAttack_Catch] != 0) {
+        for (i = StatsAttack_Catch; i < StatsAttack_LedgeAttackSlow; i++) {
+            if (!(i == StatsAttack_Catch || i == StatsAttack_CatchAttack || attack_counts[i] == 0)) {
                 break;
             }
         }
-        if (i == 0x3E) {
-            if (temp_r28->xD0 == 0) {
-                if (temp_r28->xCC >= pl_804D6470->x40) {
+        if (i == StatsAttack_LedgeAttackSlow) {
+            if (hit_counts[StatsAttack_CatchAttack] == 0) {
+                if (hit_counts[StatsAttack_Catch] >= pl_804D6470->x40) {
                     setFlag(player, 0x27);
                 }
             } else {
@@ -562,13 +562,13 @@ void fn_8003B9A4(int player)
         }
     }
 
-    for (i = 0x35; i < 0x39; i++) {
-        if (temp_r29[i] == 0) {
+    for (i = StatsAttack_ThrowF; i < StatsAttack_CargoThrowF; i++) {
+        if (attack_counts[i] == StatsAttack_None) {
             break;
         }
     }
 
-    if (i == 0x39) {
+    if (i == StatsAttack_CargoThrowF) {
         setFlag(player, 0x28);
     }
     if (temp_r31->x0_staleMoveTable.xC6C > 0.0F) {
@@ -827,7 +827,7 @@ void fn_8003CC84(int player)
     int temp_r5;
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(player);
-    Player_GetTotalAttackCountPtr(player);
+    Player_GetActionStats(player);
     temp_r29 = Player_GetEntity(player);
     if (!gm_8016B1EC()) {
         pl_8004182C(player);
@@ -913,12 +913,12 @@ void fn_8003D2EC(int player)
 {
     u32 temp_r30;
     u32* temp_r27;
-    pl_800386D8_t* temp_r3;
+    plActionStats* temp_r3;
     int i;
 
-    temp_r3 = Player_GetTotalAttackCountPtr(player);
-    temp_r27 = temp_r3->x4;
-    temp_r30 = temp_r3->total_attack_count;
+    temp_r3 = Player_GetActionStats(player);
+    temp_r27 = temp_r3->attacks.by_attack_counts;
+    temp_r30 = temp_r3->attacks.total;
 
     if (gm_8016B0FC() ||
         Player_GetStaleMoveTableIndexPtr2(player)->x0_staleMoveTable.x904[0] !=

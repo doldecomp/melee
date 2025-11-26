@@ -42,43 +42,58 @@ struct plAllocInfo2 {
     };
 };
 
-struct pl_800386D8_t {
-    /*   +0 */ int total_attack_count;
-    /*   +4 */ u32 x4[100];
-    /* +194 */ int x194;
-    /* +198 */ int x198;
-    /* +19C */ int x19C;
-    /* +1A0 */ u8 x1A0[0x1A8 - 0x1A0];
-    /* +1A8 */ int x1A8;
-    /* +1AC */ int x1AC;
-    struct pl_800386D8_1B0_t {
-        /* +1B0 +000 */ u8 x0[0xCC];
-        /* +27C +0CC */ u32 xCC;
-        /* +280 +0D0 */ u32 xD0;
-        /* +384 +0D4 */ u8 xD4[0x188 - 0xD4];
-        /* +318 +188 */ int x188;
-        /* +31C +18C */ int x18C;
-    } x1B0;
-    /* +340 */ int x340;
-    /* +344 */ int x344;
-    /* +348 */ int x348;
-    /* +34C */ int x34C;
-    /* +350 */ int x350;
-    /* +354 */ int x354;
-    /* +358 */ int x358;
-    /* +35C */ u8 x35C[0x3E8 - 0x35C];
-    /* +3E8 */ int x3E8[(0x500 - 0x3E8) / 4];
-    /* +500 */ int x500;
-    /* +504 */ u8 x504[0x64];
-    /* +568 */ int x568;
-    /* +56C */ int x56C;
-    /* +570 */ u8 x570[0x598 - 0x570];
-    /* +598 */ u32 x598[9]; // UNKNOWN SIZE
+struct plAttackStats {
+    /*   +0 */ u32 total;
+    /*   +4 */ u32 by_attack_counts[StatsAttack_Count];
+    /* +194 */ u32 thrown_item_count;
+    /* +198 */ u32 aerials_count;
+    /* +19C */ u32 specials_count;
+    /* +1A0 */ u32 x1A0_count; ///< increments on most attacks, but not down special?
+    /* +1A4 */ u32 x1A4_count; ///< increments on down specials?
+    /* +1A8 */ u32 x1A8;
+};
+
+struct plActionStats {
+    /*   +0 */ struct plAttackStats attacks;
+    /* +1AC */ struct plAttackStats hits;
+    /// @todo i dont think this is a union but in-game, x358 follows
+    // the pattern for plAttackStats... but pl_800386D8 directly references
+    // x3E8. it doesnt really make sense that it would split the enum at
+    // StatsAttack_KbSpecialNMt
+    /* +358 */ union {
+        struct plAttackStats x358_hits;
+        struct {
+            u32 total;
+            u32 by_attack_lo[35];
+            u32 by_attack_hi[65];
+            u32 thrown_item_count;
+            u32 aerials_count;
+            u32 specials_count;
+            u32 x4F8_count;
+            u32 x4FC_count;
+            u32 x500;
+        };
+    };
+    /* +504 */ u8 x504[StatsAttack_Count]; ///< related to UnkPlBonusBits
+    /* +568 */ u32 x568;
+    /* +56C */ u32 x56C;
+    /* +570 */ u32 x570;
+    /* +574 */ u32 x574;
+    /* +578 */ u32 x578;
+    /* +57C */ u32 x57C;
+    /* +580 */ u32 x580;
+    /* +584 */ u32 x584;
+    /* +588 */ u32 x588;
+    /* +58C */ u32 x58C;
+    /* +590 */ u32 x590;
+    /* +594 */ u32 x594;
+    /* +598 */ u32 x598[8];
+    /* +5B8 */ u8 x5B8[4];
     /* +5BC */ u8 x5BC_b0 : 1;
     /* +5BC */ u8 x5BC_b1 : 1;
     /* +5BC */ u8 x5BC_b2 : 1;
     /* +5BC */ u8 x5BC_b3 : 1;
-}; // UNKNOWN SIZE
+};
 
 struct StaleMoveTable {
     /*   +0 */ int current_index;
@@ -86,7 +101,7 @@ struct StaleMoveTable {
         u16 move_id;
         u16 attack_instance;
     } StaleMoves[10];
-    /*  +2C */ pl_800386D8_t total_attack_count_struct;
+    /*  +2C */ plActionStats total_attack_count_struct;
     /* +5EC */ struct pl_x5EC_t {
         u8 x0; ///< player slot
         f32 x4;

@@ -6,9 +6,9 @@
 
 #include "ft/types.h"
 
-struct pl_800386D8_t;
+struct plActionStats;
 
-/* 037B2C */ int pl_80037B2C(struct pl_800386D8_t* arg0, int arg1, int arg2);
+/* 037B2C */ int pl_80037B2C(struct plActionStats* arg0, int arg1, int arg2);
 /* 037BC0 */ UNK_RET pl_80037BC0(UNK_PARAMS);
 /* 037C60 */ UNK_RET pl_80037C60(HSD_GObj*, s32);
 /* 037DF4 */ void pl_80037DF4(HSD_GObj*, union Struct2070*);

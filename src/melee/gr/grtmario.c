@@ -160,7 +160,7 @@ void grTMario_8021FA04(Ground_GObj* gobj) {}
 
 void lbl_8021FA08(HSD_GObj* gobj)
 {
-    ftCo_800C07F8(gobj, 6, (int) lbl_8021FB50);
+    ftCo_800C07F8(gobj, 6, lbl_8021FB50);
 }
 
 void grTMario_8021FA34(Ground_GObj* gobj)

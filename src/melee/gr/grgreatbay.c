@@ -205,7 +205,7 @@ void grGreatBay_801F451C(Ground_GObj* gobj)
 
 void fn_801F4520(HSD_GObj* gobj)
 {
-    ftCo_800C07F8(gobj, 6, (int) fn_801F6708);
+    ftCo_800C07F8(gobj, 6, fn_801F6708);
 }
 
 void grGreatBay_801F454C(Ground_GObj* gobj)
