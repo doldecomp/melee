@@ -95,7 +95,7 @@
 /* 04A678 */ bool mpColl_8004A678_Floor(CollData*, int line_id);
 /* 04A908 */ bool mpColl_8004A908_Floor(CollData*, int line_id);
 /* 04AB80 */ bool mpColl_8004AB80(CollData*);
-/* 04ACE4 */ bool fn_8004ACE4(CollData*, int);
+/* 04ACE4 */ bool mpColl_8004ACE4(CollData*, int);
 /* 04B108 */ bool mpColl_8004B108(CollData*);
 /* 04B21C */ bool mpColl_8004B21C(CollData*, ftCollisionBox*);
 /* 04B2DC */ bool mpColl_8004B2DC(CollData*);
@@ -106,7 +106,7 @@
 /* 04B894 */ bool mpColl_8004B894_RightWall(CollData*);
 /* 04BDD4 */ bool mpColl_8004BDD4_LeftWall(CollData*);
 /* 04C328 */ bool mpColl_8004C328_Ceiling(CollData*, int line_id);
-/* 04C534 */ bool fn_8004C534(CollData*, u32);
+/* 04C534 */ bool mpColl_8004C534(CollData*, u32);
 /* 04C750 */ bool mpColl_8004C750(CollData*);
 /* 04C864 */ void mpColl_8004C864(CollData*, bool, float, float);
 /* 04C91C */ void mpColl_8004C91C(CollData*, bool, float, float);
