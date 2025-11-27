@@ -1461,33 +1461,33 @@ bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
 
 bool mpColl_80044838_Floor(CollData* coll, bool ignore_bottom)
 {
-    Vec3 sp20;
-    float y_sp1C;
-    Vec3 sp10;
+    Vec3 bottom; // sp20
+    float y;     // sp1C
+    Vec3 edge;   // sp10
     int line_id;
 
     if (ignore_bottom) {
-        sp20.x = coll->cur_pos.x;
-        sp20.y = coll->cur_pos.y;
+        bottom.x = coll->cur_pos.x;
+        bottom.y = coll->cur_pos.y;
     } else {
-        sp20.x = coll->cur_pos.x + coll->ecb.bottom.x;
-        sp20.y = coll->cur_pos.y + coll->ecb.bottom.y;
+        bottom.x = coll->cur_pos.x + coll->ecb.bottom.x;
+        bottom.y = coll->cur_pos.y + coll->ecb.bottom.y;
     }
 
-    line_id = mpLib_8004DD90_Floor(coll->floor.index, &sp20, &y_sp1C,
+    line_id = mpLib_8004DD90_Floor(coll->floor.index, &bottom, &y,
                                    &coll->floor.flags, &coll->floor.normal);
     if (line_id != -1) {
         coll->floor.index = line_id;
-        coll->cur_pos.y += y_sp1C;
+        coll->cur_pos.y += y;
     } else {
-        mpFloorGetLeft(coll->floor.index, &sp10);
-        if (sp10.x <= sp20.x) {
-            mpFloorGetRight(coll->floor.index, &sp10);
+        mpFloorGetLeft(coll->floor.index, &edge);
+        if (edge.x <= bottom.x) {
+            mpFloorGetRight(coll->floor.index, &edge);
         }
-        coll->cur_pos.x = sp10.x - coll->ecb.bottom.x;
-        coll->cur_pos.y = sp10.y - coll->ecb.bottom.y;
+        coll->cur_pos.x = edge.x - coll->ecb.bottom.x;
+        coll->cur_pos.y = edge.y - coll->ecb.bottom.y;
         line_id =
-            mpLib_8004DD90_Floor(coll->floor.index, &sp10, NULL,
+            mpLib_8004DD90_Floor(coll->floor.index, &edge, NULL,
                                  &coll->floor.flags, &coll->floor.normal);
         if (line_id != -1) {
             coll->floor.index = line_id;
