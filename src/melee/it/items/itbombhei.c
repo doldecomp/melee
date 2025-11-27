@@ -2,21 +2,121 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "baselib/forward.h"
+#include "baselib/gobj.h"
+#include "baselib/jobj.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/it_266F.h"
 #include "it/inlines.h"
+#include "it/item.h"
 
 
-/// #it_8027D670
+Item_GObj* it_8027D670(Vec3* pos)
+{
+    SpawnItem data;
+    Item_GObj* igp = NULL;
 
-/// #it_8027D730
+    data.kind = It_Kind_BombHei;
+    data.pos = data.prev_pos = *pos;
+    data.facing_dir = it_8026B684(&data.pos);
+    data.x3C_damage = 0;
+    data.vel.x = data.vel.y = data.vel.z = 0.0f;
+    data.x0_parent_gobj = NULL;
+    data.x4_parent_gobj2 = data.x0_parent_gobj;
+    data.x44_flag.b0 = true;
+    data.x40 = 0;
+    igp = Item_80268B18(&data);
 
-/// #it_3F14_Logic6_Spawned
+    if (igp != NULL) {
+        it_8027F8E0(igp);
+    }
 
-/// #it_8027D820
+    return igp;
+}
 
-/// #fn_8027DAC8
+void it_8027D730(Item_GObj* igp)
+{
+    Item* item = GET_ITEM(igp);
+
+    if (item->xDC8_word.flags.x13 == 0 && item->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(igp);
+    }
+}
+
+void it_3F14_Logic6_Spawned(Item_GObj* igp)
+{
+    Item* item = GET_ITEM(igp);
+    f32 temp_f2;
+    itBombHeiAttributes* ap = item->xC4_article_data->x4_specialAttributes;
+
+    item->xDD4_itemVar.bombhei.xDDC = 0;
+    item->xDD4_itemVar.bombhei.xDD4 = ap->x10;
+    item->xDD4_itemVar.bombhei.xDEC = ap->x8 + (ap->x4 + (ap->x10 + ap->x14));
+    item->xDD4_itemVar.bombhei.xDE0 = 0;
+    item->xDD4_itemVar.bombhei.xDE4 = 0;
+    temp_f2 = ap->x4 + (ap->x10 + ap->x14);
+    item->xDD4_itemVar.bombhei.xDF8 = (-1.5999999f / temp_f2) * item->scl;
+    item->xDD4_itemVar.bombhei.xDFC = (-0.2617994f / temp_f2) * item->scl;
+    item->xDD4_itemVar.bombhei.xDE8 = 1.0f;
+    it_8027DE18(igp);
+}
+
+void it_8027D820(Item_GObj* igp)
+{
+    Item* item = GET_ITEM(igp);
+    HSD_JObj* jobj = GET_JOBJ(igp);
+    f32 temp_f30;
+    f32 scale;
+    itBombHeiAttributes* ap;
+
+    ap = item->xC4_article_data->x4_specialAttributes;
+    temp_f30 = ap->x1C;
+    item->xDD4_itemVar.bombhei.xDD4 -= 1;
+
+    scale = temp_f30 * item->xDD4_itemVar.bombhei.xDD8;
+    HSD_JObjAddScaleX(jobj, scale);
+
+    scale = temp_f30 * item->xDD4_itemVar.bombhei.xDD8;
+    HSD_JObjAddScaleY(jobj, scale);
+
+    scale = temp_f30 * item->xDD4_itemVar.bombhei.xDD8;
+    HSD_JObjAddScaleZ(jobj, scale);
+
+    if (item->xDD4_itemVar.bombhei.xDD4 <= 0) {
+        item->xDD4_itemVar.bombhei.xDD4 = ap->x18;
+        item->xDD4_itemVar.bombhei.xDD8 = -item->xDD4_itemVar.bombhei.xDD8;
+    }
+
+    item->xDD4_itemVar.bombhei.xDF0 = item->xDD4_itemVar.bombhei.xDF0 - 1.0f;
+    item->xDD4_itemVar.bombhei.xDEC -= 1.0f;
+
+    if (item->xDD4_itemVar.bombhei.xDF0 <= 0.0f) {
+        it_80280DC0(igp);
+    }
+}
+
+void fn_8027DAC8(Item_GObj* igp)
+{
+    f32 temp_f30;
+    f32 temp_f31;
+    HSD_JObj* jobj;
+    Item* item = GET_ITEM(igp);
+    PAD_STACK(24);
+
+    it_8026B390(igp);
+    item->x40_vel.z = 0.0f;
+    item->x40_vel.y = 0.0f;
+    item->x40_vel.x = 0.0f;
+    jobj = GET_ITEM(igp)->xBBC_dynamicBoneTable->bones[0xB];
+
+    temp_f31 = HSD_JObjGetTranslationY(jobj);
+    temp_f30 = HSD_JObjGetRotationX(jobj);
+    Item_80268E5C((HSD_GObj* ) igp, 0, ITEM_ANIM_UPDATE);
+
+    HSD_JObjSetTranslateY(jobj, temp_f31);
+    HSD_JObjSetRotationX(jobj, temp_f30);
+}
 
 /// #itBombhei_UnkMotion0_Anim
 
