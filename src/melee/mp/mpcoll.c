@@ -1260,8 +1260,8 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
     int ledge_id;
 
     u8 _[8];
-    Vec3 sp14;
-    int sp10;
+    Vec3 edge;   // sp14
+    int line_id; // sp10
 
     float half_height = 0.5F * cd->ledge_snap_height;
     float snap_x = cd->ledge_snap_x;
@@ -1291,20 +1291,20 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
         mpLib_80051BA8_Floor(&cd->contact, cd->floor_skip, cd->joint_id_skip,
                              cd->joint_id_only, 1, left, bottom, right, top);
     if (ledge_id != -1 &&
-        (mpFloorGetLeft(ledge_id, &sp14), cd->contact.x - sp14.x < 5.0F) &&
-        cd->cur_pos.x + cd->ecb.bottom.x < sp14.x &&
-        cd->cur_pos.y + cd->ecb.bottom.y < sp14.y &&
+        (mpFloorGetLeft(ledge_id, &edge), cd->contact.x - edge.x < 5.0F) &&
+        cd->cur_pos.x + cd->ecb.bottom.x < edge.x &&
+        cd->cur_pos.y + cd->ecb.bottom.y < edge.y &&
         (cd->cur_pos.y + cd->ecb.bottom.y > cd->contact.y ||
          ((!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.top.x,
                            cd->cur_pos.y + cd->ecb.top.y, cd->contact.x,
-                           cd->contact.y, NULL, &sp10, NULL, NULL, 6,
+                           cd->contact.y, NULL, &line_id, NULL, NULL, 6,
                            cd->joint_id_skip, cd->joint_id_only) ||
-           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)) &&
+           mpJointFromLine(ledge_id) == mpJointFromLine(line_id)) &&
           (!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.bottom.x,
                            -2.0F + (cd->cur_pos.y + cd->ecb.bottom.y),
-                           cd->contact.x, cd->contact.y, NULL, &sp10, NULL,
+                           cd->contact.x, cd->contact.y, NULL, &line_id, NULL,
                            NULL, 6, cd->joint_id_skip, cd->joint_id_only) ||
-           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)))))
+           mpJointFromLine(ledge_id) == mpJointFromLine(line_id)))))
     {
         if (p_ledge_id != NULL) {
             *p_ledge_id = ledge_id;
@@ -1329,12 +1329,12 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
     float top;
 
     bool grabbed_ledge;
-    s32 temp_r31;
     bool already_checked;
-    s32 ledge_id;
+    int ledge_id;
 
-    Vec3 sp14;
-    int sp10;
+    u8 _[8];
+    Vec3 edge;   // sp14
+    int line_id; // sp10
 
     float half_height = 0.5F * cd->ledge_snap_height;
     float snap_x = cd->ledge_snap_x;
@@ -1363,20 +1363,20 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
         mpLib_80051BA8_Floor(&cd->contact, cd->floor_skip, cd->joint_id_skip,
                              cd->joint_id_only, -1, left, bottom, right, top);
     if (ledge_id != -1 &&
-        (mpFloorGetRight(ledge_id, &sp14), sp14.x - cd->contact.x < 5.0F) &&
-        cd->cur_pos.x + cd->ecb.bottom.x > sp14.x &&
-        cd->cur_pos.y + cd->ecb.bottom.y < sp14.y &&
+        (mpFloorGetRight(ledge_id, &edge), edge.x - cd->contact.x < 5.0F) &&
+        cd->cur_pos.x + cd->ecb.bottom.x > edge.x &&
+        cd->cur_pos.y + cd->ecb.bottom.y < edge.y &&
         (cd->cur_pos.y + cd->ecb.bottom.y > cd->contact.y ||
          ((!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.top.x,
                            cd->cur_pos.y + cd->ecb.top.y, cd->contact.x,
-                           cd->contact.y, NULL, &sp10, NULL, NULL, 10,
+                           cd->contact.y, NULL, &line_id, NULL, NULL, 10,
                            cd->joint_id_skip, cd->joint_id_only) ||
-           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)) &&
+           mpJointFromLine(ledge_id) == mpJointFromLine(line_id)) &&
           (!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.bottom.x,
                            -2.0F + (cd->cur_pos.y + cd->ecb.bottom.y),
-                           cd->contact.x, cd->contact.y, NULL, &sp10, NULL,
+                           cd->contact.x, cd->contact.y, NULL, &line_id, NULL,
                            NULL, 10, cd->joint_id_skip, cd->joint_id_only) ||
-           mpJointFromLine(ledge_id) == mpJointFromLine(sp10)))))
+           mpJointFromLine(ledge_id) == mpJointFromLine(line_id)))))
     {
         if (p_ledge_id != NULL) {
             *p_ledge_id = ledge_id;
