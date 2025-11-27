@@ -1802,7 +1802,7 @@ bool mpColl_800454A4_RightWall(CollData* coll)
         float f6;
         int wall_id;
         int j;
-        float s68;
+        float x; // sp68
         wall_id = mpColl_80458810.right[i];
 
         mpRightWallGetTop(wall_id, &pos);
@@ -1838,11 +1838,10 @@ bool mpColl_800454A4_RightWall(CollData* coll)
 
         pos.x = coll->cur_pos.x + coll->ecb.bottom.x;
         pos.y = coll->cur_pos.y + coll->ecb.bottom.y;
-        line_id =
-            mpLib_8004E684_RightWall(wall_id, &pos, &s68, &flags, &normal);
+        line_id = mpLib_8004E684_RightWall(wall_id, &pos, &x, &flags, &normal);
         if (line_id != -1) {
-            if (mpColl_804D6490_max_x < coll->cur_pos.x + s68) {
-                mpColl_804D6490_max_x = coll->cur_pos.x + s68;
+            if (mpColl_804D6490_max_x < coll->cur_pos.x + x) {
+                mpColl_804D6490_max_x = coll->cur_pos.x + x;
                 mpColl_804D6494_line_id = line_id;
                 mpColl_804D6498_flags = flags;
                 mpColl_80458810.normal = normal;
@@ -1851,11 +1850,10 @@ bool mpColl_800454A4_RightWall(CollData* coll)
 
         pos.x = coll->cur_pos.x + coll->ecb.left.x;
         pos.y = coll->cur_pos.y + coll->ecb.left.y;
-        line_id =
-            mpLib_8004E684_RightWall(wall_id, &pos, &s68, &flags, &normal);
+        line_id = mpLib_8004E684_RightWall(wall_id, &pos, &x, &flags, &normal);
         if (line_id != -1) {
-            if (mpColl_804D6490_max_x < coll->cur_pos.x + s68) {
-                mpColl_804D6490_max_x = coll->cur_pos.x + s68;
+            if (mpColl_804D6490_max_x < coll->cur_pos.x + x) {
+                mpColl_804D6490_max_x = coll->cur_pos.x + x;
                 mpColl_804D6494_line_id = line_id;
                 mpColl_804D6498_flags = flags;
                 mpColl_80458810.normal = normal;
@@ -1864,11 +1862,10 @@ bool mpColl_800454A4_RightWall(CollData* coll)
 
         pos.x = coll->cur_pos.x + coll->ecb.top.x;
         pos.y = coll->cur_pos.y + coll->ecb.top.y;
-        line_id =
-            mpLib_8004E684_RightWall(wall_id, &pos, &s68, &flags, &normal);
+        line_id = mpLib_8004E684_RightWall(wall_id, &pos, &x, &flags, &normal);
         if (line_id != -1) {
-            if (mpColl_804D6490_max_x < coll->cur_pos.x + s68) {
-                mpColl_804D6490_max_x = coll->cur_pos.x + s68;
+            if (mpColl_804D6490_max_x < coll->cur_pos.x + x) {
+                mpColl_804D6490_max_x = coll->cur_pos.x + x;
                 mpColl_804D6494_line_id = line_id;
                 mpColl_804D6498_flags = flags;
                 mpColl_80458810.normal = normal;
@@ -1879,21 +1876,21 @@ bool mpColl_800454A4_RightWall(CollData* coll)
         if (line_id != -1 && mpLib_80054ED8(line_id) &&
             mpLineGetKind(line_id) & CollLine_Ceiling)
         {
-            Vec3 vec;
+            Vec3 top;
             Vec3 nrm;
             PAD_STACK(0x44);
-            mpRightWallGetTop(wall_id, &vec);
-            if (pos.y > vec.y) {
+            mpRightWallGetTop(wall_id, &top);
+            if (pos.y > top.y) {
                 line_id = mpLineNextNonCeiling(line_id);
                 if (line_id != -1 && mpLib_80054ED8(line_id) &&
                     mpLineGetKind(line_id) & CollLine_RightWall)
                 {
                     mpLineGetNormal(line_id, &nrm);
-                    s68 = (pos.y - vec.y) / nrm.x * -nrm.y + vec.x - pos.x +
-                          0.5F;
-                    if (mpColl_804D6490_max_x < coll->cur_pos.x + s68) {
+                    x = (pos.y - top.y) / nrm.x * -nrm.y + top.x - pos.x +
+                        0.5F;
+                    if (mpColl_804D6490_max_x < coll->cur_pos.x + x) {
                         u32 temp = mpLineGetFlags(line_id);
-                        mpColl_804D6490_max_x = coll->cur_pos.x + s68;
+                        mpColl_804D6490_max_x = coll->cur_pos.x + x;
                         mpColl_804D6494_line_id = line_id;
                         mpColl_804D6498_flags = temp;
                         mpColl_80458810.normal = nrm;
@@ -1919,20 +1916,20 @@ bool mpColl_800454A4_RightWall(CollData* coll)
             mpLineGetV1Pos(j, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                s68 = f27 * (pos.y - bot) + coll->ecb.bottom.x;
+                x = f27 * (pos.y - bot) + coll->ecb.bottom.x;
             } else if (mid <= pos.y && pos.y <= top) {
-                s68 = f26 * (pos.y - top) + coll->ecb.top.x;
+                x = f26 * (pos.y - top) + coll->ecb.top.x;
             } else if (pos.y < bot) {
                 break;
             } else {
                 continue;
             }
 
-            s68 = pos.x - s68;
-            if (mpColl_804D6490_max_x < s68) {
+            x = pos.x - x;
+            if (mpColl_804D6490_max_x < x) {
                 flags = mpLineGetFlags(j);
                 mpLineGetNormal(j, &normal);
-                mpColl_804D6490_max_x = s68;
+                mpColl_804D6490_max_x = x;
                 mpColl_804D6494_line_id = j;
                 mpColl_804D6498_flags = flags;
                 mpColl_80458810.normal = normal;
@@ -1946,20 +1943,20 @@ bool mpColl_800454A4_RightWall(CollData* coll)
             mpLineGetV0Pos(wall_id, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                s68 = f27 * (pos.y - bot) + coll->ecb.bottom.x;
+                x = f27 * (pos.y - bot) + coll->ecb.bottom.x;
             } else if (mid <= pos.y && pos.y <= top) {
-                s68 = f26 * (pos.y - top) + coll->ecb.top.x;
+                x = f26 * (pos.y - top) + coll->ecb.top.x;
             } else if (pos.y > top) {
                 break;
             } else {
                 continue;
             }
 
-            s68 = pos.x - s68;
-            if (mpColl_804D6490_max_x < s68) {
+            x = pos.x - x;
+            if (mpColl_804D6490_max_x < x) {
                 flags = mpLineGetFlags(wall_id);
                 mpLineGetNormal(wall_id, &normal);
-                mpColl_804D6490_max_x = s68;
+                mpColl_804D6490_max_x = x;
                 mpColl_804D6494_line_id = wall_id;
                 mpColl_804D6498_flags = flags;
                 mpColl_80458810.normal = normal;
