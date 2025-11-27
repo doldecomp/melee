@@ -1392,36 +1392,34 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
 }
 
 bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
-                           Fighter_GObj* gobj, int flags)
+                           Fighter_GObj* gobj, int left_right)
 {
     float y;
-    Vec3 sp2C;
-    u8 _[12];
-    float temp_f1;
-    float temp_f2;
+    Vec3 bottom; // sp2C
+    Vec3 prev_bottom;
     int line_id;
-    int bool_r3;
+    bool hit_floor; // r3
 
-    temp_f1 = coll->prev_pos.x + coll->prev_ecb.bottom.x;
-    temp_f2 = coll->prev_pos.y + coll->prev_ecb.bottom.y;
-    sp2C.x = coll->cur_pos.x + coll->ecb.bottom.x;
-    sp2C.y = coll->cur_pos.y + coll->ecb.bottom.y;
+    prev_bottom.x = coll->prev_pos.x + coll->prev_ecb.bottom.x;
+    prev_bottom.y = coll->prev_pos.y + coll->prev_ecb.bottom.y;
+    bottom.x = coll->cur_pos.x + coll->ecb.bottom.x;
+    bottom.y = coll->cur_pos.y + coll->ecb.bottom.y;
 
     if (coll->x38 != mpColl_804D64AC) {
-        bool_r3 = mpLib_8004F400_Floor(temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F,
-                                       &coll->contact, &coll->floor.index,
-                                       &coll->floor.flags, &coll->floor.normal,
-                                       coll->floor_skip, coll->joint_id_skip,
-                                       coll->joint_id_only, cb, gobj);
+        hit_floor = mpLib_8004F400_Floor(
+            prev_bottom.x, prev_bottom.y, bottom.x, bottom.y, 0.0F,
+            &coll->contact, &coll->floor.index, &coll->floor.flags,
+            &coll->floor.normal, coll->floor_skip, coll->joint_id_skip,
+            coll->joint_id_only, cb, gobj);
     } else {
-        bool_r3 = mpLib_8004F008_Floor(temp_f1, temp_f2, sp2C.x, sp2C.y, 0.0F,
-                                       &coll->contact, &coll->floor.index,
-                                       &coll->floor.flags, &coll->floor.normal,
-                                       coll->floor_skip, coll->joint_id_skip,
-                                       coll->joint_id_only, cb, gobj);
+        hit_floor = mpLib_8004F008_Floor(
+            prev_bottom.x, prev_bottom.y, bottom.x, bottom.y, 0.0F,
+            &coll->contact, &coll->floor.index, &coll->floor.flags,
+            &coll->floor.normal, coll->floor_skip, coll->joint_id_skip,
+            coll->joint_id_only, cb, gobj);
     }
 
-    if (bool_r3) {
+    if (hit_floor) {
         if (!(coll->floor.flags & LINE_FLAG_PLATFORM) ||
             coll->floor.index != coll->floor_skip)
         {
@@ -1431,10 +1429,10 @@ bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
         }
     }
 
-    if ((flags & 1 &&
+    if ((left_right & 1 &&
          (line_id = mpLinePrevNonLeftWall(coll->left_facing_wall.index),
           line_id != -1)) ||
-        (flags & 2 &&
+        (left_right & 2 &&
          (line_id = mpLineNextNonRightWall(coll->right_facing_wall.index),
           line_id != -1)))
     {
@@ -1442,7 +1440,7 @@ bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
             mpLineGetKind(line_id) == CollLine_Floor)
         {
             int floor_id = mpLib_8004DD90_Floor(
-                line_id, &sp2C, &y, &coll->floor.flags, &coll->floor.normal);
+                line_id, &bottom, &y, &coll->floor.flags, &coll->floor.normal);
 
             if (floor_id != -1 && y > 0.0F) {
                 coll->floor.index = floor_id;
