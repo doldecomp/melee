@@ -1552,31 +1552,29 @@ bool mpColl_80044948_Floor(CollData* coll)
     return hit_wall;
 }
 
-bool mpColl_80044AD8_Ceiling(CollData* coll, int flags)
+bool mpColl_80044AD8_Ceiling(CollData* coll, int left_right)
 {
-    float sp28;
-    Vec3 vec;
-    float x;
     float y;
+    Vec3 top;
+    Vec3 prev_top;
     int ceiling_id;
     int line_id;
     int hit_ceiling;
-    PAD_STACK(0xC);
 
-    x = coll->prev_pos.x + coll->prev_ecb.top.x;
-    y = coll->prev_pos.y + coll->prev_ecb.top.y;
-    vec.x = coll->cur_pos.x + coll->ecb.top.x;
-    vec.y = coll->cur_pos.y + coll->ecb.top.y;
+    prev_top.x = coll->prev_pos.x + coll->prev_ecb.top.x;
+    prev_top.y = coll->prev_pos.y + coll->prev_ecb.top.y;
+    top.x = coll->cur_pos.x + coll->ecb.top.x;
+    top.y = coll->cur_pos.y + coll->ecb.top.y;
     if (coll->x38 != mpColl_804D64AC) {
         hit_ceiling = mpLib_8004FC2C_Ceiling(
-            x, y, vec.x, vec.y, &coll->contact, &coll->ceiling.index,
-            &coll->ceiling.flags, &coll->ceiling.normal, coll->joint_id_skip,
-            coll->joint_id_only);
+            prev_top.x, prev_top.y, top.x, top.y, &coll->contact,
+            &coll->ceiling.index, &coll->ceiling.flags, &coll->ceiling.normal,
+            coll->joint_id_skip, coll->joint_id_only);
     } else {
         hit_ceiling = mpLib_8004F8A4_Ceiling(
-            x, y, vec.x, vec.y, &coll->contact, &coll->ceiling.index,
-            &coll->ceiling.flags, &coll->ceiling.normal, coll->joint_id_skip,
-            coll->joint_id_only);
+            prev_top.x, prev_top.y, top.x, top.y, &coll->contact,
+            &coll->ceiling.index, &coll->ceiling.flags, &coll->ceiling.normal,
+            coll->joint_id_skip, coll->joint_id_only);
     }
     if (hit_ceiling) {
         coll->env_flags |= Collide_CeilingPush;
@@ -1584,15 +1582,15 @@ bool mpColl_80044AD8_Ceiling(CollData* coll, int flags)
         return true;
     }
 
-    if (((flags & 1 && (line_id = mpLineNextNonLeftWall(
-                            coll->left_facing_wall.index)) != -1) ||
-         (flags & 2 && (line_id = mpLinePrevNonRightWall(
-                            coll->right_facing_wall.index)) != -1)) &&
+    if (((left_right & 1 && (line_id = mpLineNextNonLeftWall(
+                                 coll->left_facing_wall.index)) != -1) ||
+         (left_right & 2 && (line_id = mpLinePrevNonRightWall(
+                                 coll->right_facing_wall.index)) != -1)) &&
         mpLib_80054ED8(line_id) && mpLineGetKind(line_id) == CollLine_Ceiling)
     {
         ceiling_id = mpLib_8004E090_Ceiling(
-            line_id, &vec, &sp28, &coll->ceiling.flags, &coll->ceiling.normal);
-        if ((ceiling_id != -1) && (sp28 < 0.0F)) {
+            line_id, &top, &y, &coll->ceiling.flags, &coll->ceiling.normal);
+        if (ceiling_id != -1 && y < 0.0F) {
             coll->ceiling.index = ceiling_id;
             coll->env_flags |= Collide_CeilingPush;
             return true;
