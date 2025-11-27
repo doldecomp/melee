@@ -1009,30 +1009,29 @@ bool mpColl_80043754(mpColl_Callback cb, CollData* coll, u32 flags)
 // 800439FC https://decomp.me/scratch/T1yAJ
 void mpColl_800439FC(CollData* coll)
 {
-    Vec3 sp10;
-    float y;
+    float right_dx; // f31
     float f1;
     float f2;
-    float f3;
-    float f4;
-    float f31;
+    float right_x;
+    float right_y;
+    Vec3 sp10;
+    float y;
 
-    f31 = coll->ecb.right.x;
-    f3 = coll->cur_pos.x + f31;
-    f4 = coll->cur_pos.y + coll->ecb.right.y;
-    if (f31 < 0.0F) {
-        f31 = -f31;
-    }
-    f1 = (coll->ceiling.normal.y * f31) + f3;
-    f2 = -((coll->ceiling.normal.x * f31) - f4);
-    if (!mpLib_800501CC_LeftWall(f1, f2, f3, f4, &coll->contact, NULL, NULL,
-                                 NULL, coll->joint_id_skip,
+    right_x = coll->cur_pos.x + coll->ecb.right.x;
+    right_y = coll->cur_pos.y + coll->ecb.right.y;
+    right_dx = ABS(coll->ecb.right.x);
+
+    // recalculate ceiling direction from its normal
+    f1 = (coll->ceiling.normal.y * right_dx) + right_x;
+    f2 = -(coll->ceiling.normal.x * right_dx) + right_y;
+    if (!mpLib_800501CC_LeftWall(f1, f2, right_x, right_y, &coll->contact,
+                                 NULL, NULL, NULL, coll->joint_id_skip,
                                  coll->joint_id_only))
     {
         return;
     }
 
-    sp10.x = coll->contact.x - f31;
+    sp10.x = coll->contact.x - right_dx;
     sp10.y = coll->cur_pos.y + coll->ecb.top.y;
     if (mpLib_8004E090_Ceiling(coll->ceiling.index, &sp10, &y,
                                &coll->ceiling.flags,
@@ -1047,31 +1046,29 @@ void mpColl_800439FC(CollData* coll)
 
 void mpColl_80043ADC(CollData* coll)
 {
-    Vec3 sp10;
-    float y;
+    float left_dx;
     float f1;
     float f2;
-    float f3;
-    float f4;
-    float f31;
+    float left_x;
+    float left_y;
+    Vec3 sp10;
+    float y;
 
-    f31 = coll->ecb.left.x;
-    f3 = coll->cur_pos.x + f31;
-    f4 = coll->cur_pos.y + coll->ecb.left.y;
-    if (f31 < 0.0F) {
-        f31 = -f31;
-    }
+    left_x = coll->cur_pos.x + coll->ecb.left.x;
+    left_y = coll->cur_pos.y + coll->ecb.left.y;
+    left_dx = ABS(coll->ecb.left.x);
 
-    f1 = -((coll->ceiling.normal.y * f31) - f3);
-    f2 = ((coll->ceiling.normal.x * f31) + f4);
-    if (!mpLib_800509B8_RightWall(f1, f2, f3, f4, &coll->contact, NULL, NULL,
-                                  NULL, coll->joint_id_skip,
+    // recalculate ceiling direction from its normal
+    f1 = -(coll->ceiling.normal.y * left_dx) + left_x;
+    f2 = (coll->ceiling.normal.x * left_dx) + left_y;
+    if (!mpLib_800509B8_RightWall(f1, f2, left_x, left_y, &coll->contact, NULL,
+                                  NULL, NULL, coll->joint_id_skip,
                                   coll->joint_id_only))
     {
         return;
     }
 
-    sp10.x = coll->contact.x + f31;
+    sp10.x = coll->contact.x + left_dx;
     sp10.y = coll->cur_pos.y + coll->ecb.top.y;
     if (mpLib_8004E090_Ceiling(coll->ceiling.index, &sp10, &y,
                                &coll->ceiling.flags,
@@ -1107,72 +1104,61 @@ bool mpColl_80043BBC(CollData* coll, int* line_id_out)
 
 void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
 {
-    float temp_f1;
-    float temp_f1_2;
-    float temp_f1_3;
-    float sp30;
-    float temp_f2;
-    float temp_f4;
-    float var_f31;
+    float f1;
+    float f2;
+    float y; // sp30
+    float right_dx;
+    Vec3 pos;    // sp20
+    int wall_id; // sp1C
 
-    Vec3 sp20;
-    int sp1C;
-
-    temp_f1 = coll->ecb.right.x;
-    if (temp_f1 < 0.0F) {
-        var_f31 = -temp_f1;
-    } else {
-        var_f31 = temp_f1;
-    }
-    sp20.x = coll->cur_pos.x + temp_f1;
-    temp_f1_2 = coll->cur_pos.y;
-    sp20.y = temp_f1_2 + coll->ecb.right.y;
-    if (mpLib_8004E398_LeftWall(line_id, &sp20, NULL, NULL, NULL) != -1) {
-        float x = -((coll->floor.normal.y * var_f31) - sp20.x);
-        float y = (coll->floor.normal.x * var_f31) + sp20.y;
-        if (mpLib_800501CC_LeftWall(x, y, sp20.x, sp20.y, &coll->contact,
-                                    &sp1C, NULL, NULL, coll->joint_id_skip,
-                                    coll->joint_id_only))
+    right_dx = ABS(coll->ecb.right.x);
+    pos.x = coll->cur_pos.x + coll->ecb.right.x;
+    pos.y = coll->cur_pos.y + coll->ecb.right.y;
+    if (mpLib_8004E398_LeftWall(line_id, &pos, NULL, NULL, NULL) != -1) {
+        // recalculate floor direction from its normal
+        float floor_x = -(coll->floor.normal.y * right_dx) + pos.x;
+        float floor_y = (coll->floor.normal.x * right_dx) + pos.y;
+        if (mpLib_800501CC_LeftWall(floor_x, floor_y, pos.x, pos.y,
+                                    &coll->contact, &wall_id, NULL, NULL,
+                                    coll->joint_id_skip, coll->joint_id_only))
         {
-            sp20.x = coll->contact.x - var_f31;
+            pos.x = coll->contact.x - right_dx;
             if (ignore_bottom) {
-                sp20.y = coll->cur_pos.y;
+                pos.y = coll->cur_pos.y;
             } else {
-                sp20.y = coll->cur_pos.y + coll->ecb.bottom.y;
+                pos.y = coll->cur_pos.y + coll->ecb.bottom.y;
             }
-            if (mpLib_8004DD90_Floor(coll->floor.index, &sp20, &sp30,
+            if (mpLib_8004DD90_Floor(coll->floor.index, &pos, &y,
                                      &coll->floor.flags,
                                      &coll->floor.normal) != -1)
             {
-                coll->cur_pos.y += sp30;
-                coll->cur_pos.x = sp20.x;
+                coll->cur_pos.y += y;
+                coll->cur_pos.x = pos.x;
             }
         }
     } else {
-        mpLeftWallGetTop(line_id, &sp20);
-        temp_f4 = 2.0F;
-        temp_f2 = sp20.y;
-        temp_f1_3 = sp20.x - temp_f4;
-        sp20.x = -((temp_f4 * var_f31) - temp_f1_3);
-        sp20.y =
-            -((temp_f4 * (coll->ecb.right.y - coll->ecb.bottom.y)) - temp_f2);
-        if (mpLib_8004F008_Floor(temp_f1_3, temp_f2, sp20.x, sp20.y, 0.0F,
-                                 &coll->contact, NULL, NULL, NULL,
-                                 coll->floor_skip, coll->joint_id_skip,
-                                 coll->joint_id_only, NULL, NULL))
+        mpLeftWallGetTop(line_id, &pos);
+        f1 = pos.x - 2.0F;
+        f2 = pos.y;
+        pos.x = -((2.0F * right_dx) - f1);
+        pos.y = -((2.0F * (coll->ecb.right.y - coll->ecb.bottom.y)) - f2);
+        if (mpLib_8004F008_Floor(f1, f2, pos.x, pos.y, 0.0F, &coll->contact,
+                                 NULL, NULL, NULL, coll->floor_skip,
+                                 coll->joint_id_skip, coll->joint_id_only,
+                                 NULL, NULL))
         {
-            sp20.x = coll->contact.x;
+            pos.x = coll->contact.x;
             if (ignore_bottom) {
-                sp20.y = coll->cur_pos.y;
+                pos.y = coll->cur_pos.y;
             } else {
-                sp20.y = coll->cur_pos.y + coll->ecb.bottom.y;
+                pos.y = coll->cur_pos.y + coll->ecb.bottom.y;
             }
-            if (mpLib_8004DD90_Floor(coll->floor.index, &sp20, &sp30,
+            if (mpLib_8004DD90_Floor(coll->floor.index, &pos, &y,
                                      &coll->floor.flags,
                                      &coll->floor.normal) != -1)
             {
-                coll->cur_pos.y += sp30;
-                coll->cur_pos.x = sp20.x;
+                coll->cur_pos.y += y;
+                coll->cur_pos.x = pos.x;
             }
         }
     }
@@ -1201,60 +1187,62 @@ bool mpColl_80043E90(CollData* coll, int* line_id_out)
 
 void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
 {
-    f32 sp30;
-    f32 temp_f1_2;
-    f32 temp_f2;
-    f32 var_f31;
-    Vec3 sp20;
-    int sp1C;
+    float f1;
+    float f2;
+    float y; // sp30
+    float left_dx;
+    Vec3 pos;    // sp20
+    int wall_id; // sp1C
 
-    var_f31 = ABS(coll->ecb.left.x);
-    sp20.x = coll->cur_pos.x + coll->ecb.left.x;
-    sp20.y = coll->cur_pos.y + coll->ecb.left.y;
-    if (mpLib_8004E684_RightWall(line_id, &sp20, NULL, NULL, NULL) != -1) {
-        f32 tmp2 = (coll->floor.normal.y * var_f31) + sp20.x;
-        f32 tmp = -((coll->floor.normal.x * var_f31) - sp20.y);
-        if (mpLib_800509B8_RightWall(tmp2, tmp, sp20.x, sp20.y, &coll->contact,
-                                     &sp1C, NULL, NULL, coll->joint_id_skip,
-                                     coll->joint_id_only))
+    left_dx = ABS(coll->ecb.left.x);
+    pos.x = coll->cur_pos.x + coll->ecb.left.x;
+    pos.y = coll->cur_pos.y + coll->ecb.left.y;
+    if (mpLib_8004E684_RightWall(line_id, &pos, NULL, NULL, NULL) != -1) {
+        // recalculate floor direction from its normal
+        float floor_x = (coll->floor.normal.y * left_dx) + pos.x;
+        float floor_y = -(coll->floor.normal.x * left_dx) + pos.y;
+        if (mpLib_800509B8_RightWall(floor_x, floor_y, pos.x, pos.y,
+                                     &coll->contact, &wall_id, NULL, NULL,
+                                     coll->joint_id_skip, coll->joint_id_only))
         {
-            sp20.x = coll->contact.x + var_f31;
+            pos.x = coll->contact.x + left_dx;
             if (ignore_bottom) {
-                sp20.y = coll->cur_pos.y;
+                pos.y = coll->cur_pos.y;
             } else {
-                sp20.y = coll->cur_pos.y + coll->ecb.bottom.y;
+                pos.y = coll->cur_pos.y + coll->ecb.bottom.y;
             }
-            if (mpLib_8004DD90_Floor(coll->floor.index, &sp20, &sp30,
+            if (mpLib_8004DD90_Floor(coll->floor.index, &pos, &y,
                                      &coll->floor.flags,
                                      &coll->floor.normal) != -1)
             {
-                coll->cur_pos.y += sp30;
-                coll->cur_pos.x = sp20.x;
+                coll->cur_pos.y += y;
+                coll->cur_pos.x = pos.x;
             }
         }
     } else {
-        mpRightWallGetTop(line_id, &sp20);
-        temp_f2 = sp20.y;
-        temp_f1_2 = 2.0F + sp20.x;
-        sp20.x = 2.0F * var_f31 + temp_f1_2;
-        sp20.y = -((2.0F * (coll->ecb.left.y - coll->ecb.bottom.y)) - temp_f2);
-        if (mpLib_8004F008_Floor(temp_f1_2, temp_f2, sp20.x, sp20.y, 0.0F,
-                                 &coll->contact, NULL, NULL, NULL,
-                                 coll->floor_skip, coll->joint_id_skip,
-                                 coll->joint_id_only, NULL, NULL))
+        mpRightWallGetTop(line_id, &pos);
+        f1 = 2.0F + pos.x;
+        f2 = pos.y;
+        // 2.0 * (ecb bottom -> ecb left).normal() + ecb left
+        pos.x = 2.0F * left_dx + f1;
+        pos.y = -(2.0F * (coll->ecb.left.y - coll->ecb.bottom.y)) + f2;
+        if (mpLib_8004F008_Floor(f1, f2, pos.x, pos.y, 0.0F, &coll->contact,
+                                 NULL, NULL, NULL, coll->floor_skip,
+                                 coll->joint_id_skip, coll->joint_id_only,
+                                 NULL, NULL))
         {
-            sp20.x = coll->contact.x;
+            pos.x = coll->contact.x;
             if (ignore_bottom) {
-                sp20.y = coll->cur_pos.y;
+                pos.y = coll->cur_pos.y;
             } else {
-                sp20.y = coll->cur_pos.y + coll->ecb.bottom.y;
+                pos.y = coll->cur_pos.y + coll->ecb.bottom.y;
             }
-            if (mpLib_8004DD90_Floor(coll->floor.index, &sp20, &sp30,
+            if (mpLib_8004DD90_Floor(coll->floor.index, &pos, &y,
                                      &coll->floor.flags,
                                      &coll->floor.normal) != -1)
             {
-                coll->cur_pos.x = sp20.x;
-                coll->cur_pos.y += sp30;
+                coll->cur_pos.x = pos.x;
+                coll->cur_pos.y += y;
             }
         }
     }
