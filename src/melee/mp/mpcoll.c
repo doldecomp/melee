@@ -1499,46 +1499,46 @@ bool mpColl_80044838_Floor(CollData* coll, bool ignore_bottom)
 
 bool mpColl_80044948_Floor(CollData* coll)
 {
-    Vec3 sp1C;
-    float y_sp18;
-    Vec3 spC;
+    Vec3 bottom; // sp1C
+    float y;     // sp18
+    Vec3 edge;   // spC
     bool hit_wall;
     int line_id;
 
     hit_wall = false;
     if (coll->ecb.bottom.y <= 0.0F) {
-        sp1C.x = coll->cur_pos.x + coll->ecb.bottom.x;
-        sp1C.y = coll->cur_pos.y + coll->ecb.bottom.y;
+        bottom.x = coll->cur_pos.x + coll->ecb.bottom.x;
+        bottom.y = coll->cur_pos.y + coll->ecb.bottom.y;
     } else {
-        sp1C.x = coll->cur_pos.x;
-        sp1C.y = coll->cur_pos.y;
+        bottom.x = coll->cur_pos.x;
+        bottom.y = coll->cur_pos.y;
     }
-    line_id = mpLib_8004DD90_Floor(coll->floor.index, &sp1C, &y_sp18,
+    line_id = mpLib_8004DD90_Floor(coll->floor.index, &bottom, &y,
                                    &coll->floor.flags, &coll->floor.normal);
     if (line_id != -1) {
         coll->floor.index = line_id;
         hit_wall = true;
-        coll->cur_pos.y += y_sp18;
+        coll->cur_pos.y += y;
     } else {
-        mpFloorGetLeft(coll->floor.index, &spC);
-        if (sp1C.x < spC.x) {
+        mpFloorGetLeft(coll->floor.index, &edge);
+        if (bottom.x < edge.x) {
             line_id = mpLinePrevNonFloor(coll->floor.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_RightWall)
             {
                 hit_wall = true;
             }
         } else {
-            mpFloorGetRight(coll->floor.index, &spC);
+            mpFloorGetRight(coll->floor.index, &edge);
             line_id = mpLineNextNonFloor(coll->floor.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_LeftWall) {
                 hit_wall = true;
             }
         }
-        coll->cur_pos.y = spC.y - coll->ecb.bottom.y;
+        coll->cur_pos.y = edge.y - coll->ecb.bottom.y;
         if (hit_wall) {
-            coll->cur_pos.x = spC.x;
+            coll->cur_pos.x = edge.x;
             line_id =
-                mpLib_8004DD90_Floor(coll->floor.index, &spC, NULL,
+                mpLib_8004DD90_Floor(coll->floor.index, &edge, NULL,
                                      &coll->floor.flags, &coll->floor.normal);
             if (line_id != -1) {
                 coll->floor.index = line_id;
