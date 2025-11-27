@@ -2903,62 +2903,60 @@ bool mpColl_80048844(CollData* coll, f32 arg1)
     return inline4(coll, 0);
 }
 
-bool mpColl_800488F4(CollData* arg0)
+bool mpColl_800488F4(CollData* coll)
 {
-    Vec3 sp30;
+    Vec3 bottom; // sp30
     u8 _[0xC];
-    f32 sp20;
-    Vec3 sp14;
+    float y; // sp20
+    Vec3 edge;
 
-    s32 ledge_id;
-    s32 temp_r3;
-    s32 temp_r3_2;
-    s32 temp_r3_3;
-    s32 var_r30;
+    int floor_id;
+    int line_id;
+    int hit_wall;
 
     PAD_STACK(0x8);
 
-    ledge_id = arg0->floor.index;
-    sp30.x = arg0->cur_pos.x + arg0->ecb.bottom.x;
-    sp30.y = arg0->cur_pos.y + arg0->ecb.bottom.y;
-    if (!mpLib_80054ED8(arg0->floor.index) ||
-        (mpLineGetKind(arg0->floor.index) != CollLine_Floor))
+    floor_id = coll->floor.index;
+    bottom.x = coll->cur_pos.x + coll->ecb.bottom.x;
+    bottom.y = coll->cur_pos.y + coll->ecb.bottom.y;
+    if (!mpLib_80054ED8(coll->floor.index) ||
+        (mpLineGetKind(coll->floor.index) != CollLine_Floor))
     {
         return false;
     }
-    temp_r3 = mpLib_8004DD90_Floor(ledge_id, &sp30, &sp20, &arg0->floor.flags,
-                                   &arg0->floor.normal);
-    if (temp_r3 != -1) {
-        arg0->cur_pos.y += sp20;
-        arg0->floor.index = temp_r3;
+    line_id = mpLib_8004DD90_Floor(floor_id, &bottom, &y, &coll->floor.flags,
+                                   &coll->floor.normal);
+    if (line_id != -1) {
+        coll->cur_pos.y += y;
+        coll->floor.index = line_id;
         return true;
     }
-    var_r30 = false;
-    mpFloorGetLeft(ledge_id, &sp14);
-    if (arg0->cur_pos.x < sp14.x) {
-        temp_r3_2 = mpLinePrevNonFloor(ledge_id);
-        if ((temp_r3_2 != -1) && mpLib_80054ED8(temp_r3_2) &&
-            (mpLineGetKind(temp_r3_2) & CollLine_RightWall))
+    hit_wall = false;
+    mpFloorGetLeft(floor_id, &edge);
+    if (coll->cur_pos.x < edge.x) {
+        int non_floor_id = mpLinePrevNonFloor(floor_id);
+        if (non_floor_id != -1 && mpLib_80054ED8(non_floor_id) &&
+            mpLineGetKind(non_floor_id) & CollLine_RightWall)
         {
-            var_r30 = true;
+            hit_wall = true;
         } else {
-            arg0->env_flags |= Collide_LeftLedgeSlip;
+            coll->env_flags |= Collide_LeftLedgeSlip;
         }
     } else {
-        mpFloorGetRight(ledge_id, &sp14);
-        if (arg0->cur_pos.x > sp14.x) {
-            temp_r3_3 = mpLineNextNonFloor(ledge_id);
-            if ((temp_r3_3 != -1) && mpLib_80054ED8(temp_r3_3) &&
-                (mpLineGetKind(temp_r3_3) & CollLine_LeftWall))
+        mpFloorGetRight(floor_id, &edge);
+        if (coll->cur_pos.x > edge.x) {
+            int non_floor_id = mpLineNextNonFloor(floor_id);
+            if (non_floor_id != -1 && mpLib_80054ED8(non_floor_id) &&
+                mpLineGetKind(non_floor_id) & CollLine_LeftWall)
             {
-                var_r30 = true;
+                hit_wall = true;
             } else {
-                arg0->env_flags |= Collide_RightLedgeSlip;
+                coll->env_flags |= Collide_RightLedgeSlip;
             }
         }
     }
-    if (var_r30) {
-        arg0->cur_pos = sp14;
+    if (hit_wall) {
+        coll->cur_pos = edge;
         return true;
     }
     return false;
