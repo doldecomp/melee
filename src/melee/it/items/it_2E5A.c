@@ -115,7 +115,7 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
                 sp40 = item->x40_vel;
                 lbVector_Mirror(&sp40, &coll_data->floor.normal);
                 lbVector_Add_xy(&sp28, &sp40);
-                if (mpColl_8004CB78(coll_data, &sp40) != 0) {
+                if (mpCollGetSpeedFloor(coll_data, &sp40) != 0) {
                     lbVector_Add_xy(&sp34, &sp40);
                 }
                 check2 = true;

@@ -4411,44 +4411,44 @@ float mpColl_8004CA6C(CollData* coll)
     return result;
 }
 
-bool mpColl_8004CAA0(CollData* coll, Vec3* arg1)
+bool mpCollGetSpeedCeiling(CollData* coll, Vec3* speed)
 {
     int index = coll->ceiling.index;
-    Vec3 sp10;
-    sp10.x = coll->ecb.top.x;
-    sp10.y = coll->ecb.top.y;
-    sp10.z = 0.0F;
-    return mpGetSpeed(index, &sp10, arg1);
+    Vec3 top; // sp10
+    top.x = coll->ecb.top.x;
+    top.y = coll->ecb.top.y;
+    top.z = 0.0F;
+    return mpGetSpeed(index, &top, speed);
 }
 
-bool mpColl_8004CAE8(CollData* coll, Vec3* arg1)
+bool mpCollGetSpeedLeftWall(CollData* coll, Vec3* speed)
 {
     int index = coll->left_facing_wall.index;
-    Vec3 sp10;
-    sp10.x = coll->ecb.top.x;
-    sp10.y = coll->ecb.top.y;
-    sp10.z = 0.0F;
-    return mpGetSpeed(index, &sp10, arg1);
+    Vec3 top; // sp10
+    top.x = coll->ecb.top.x;
+    top.y = coll->ecb.top.y;
+    top.z = 0.0F;
+    return mpGetSpeed(index, &top, speed);
 }
 
-bool mpColl_8004CB30(CollData* coll, Vec3* arg1)
+bool mpCollGetSpeedRightWall(CollData* coll, Vec3* speed)
 {
     int index = coll->right_facing_wall.index;
-    Vec3 sp10;
-    sp10.x = coll->ecb.top.x;
-    sp10.y = coll->ecb.top.y;
-    sp10.z = 0.0F;
-    return mpGetSpeed(index, &sp10, arg1);
+    Vec3 top; // sp10
+    top.x = coll->ecb.top.x;
+    top.y = coll->ecb.top.y;
+    top.z = 0.0F;
+    return mpGetSpeed(index, &top, speed);
 }
 
-bool mpColl_8004CB78(CollData* coll, Vec3* arg1)
+bool mpCollGetSpeedFloor(CollData* coll, Vec3* speed)
 {
     int index = coll->floor.index;
-    Vec3 sp10;
-    sp10.x = coll->ecb.top.x;
-    sp10.y = coll->ecb.top.y;
-    sp10.z = 0.0F;
-    return mpGetSpeed(index, &sp10, arg1);
+    Vec3 top;
+    top.x = coll->ecb.top.x;
+    top.y = coll->ecb.top.y;
+    top.z = 0.0F;
+    return mpGetSpeed(index, &top, speed);
 }
 
 bool mpColl_IsOnPlatform(CollData* coll)

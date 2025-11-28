@@ -111,10 +111,10 @@
 /* 04C864 */ void mpColl_8004C864(CollData*, bool, float, float);
 /* 04C91C */ void mpColl_8004C91C(CollData*, bool, float, float);
 /* 04CA6C */ float mpColl_8004CA6C(CollData*);
-/* 04CAA0 */ bool mpColl_8004CAA0(CollData*, Vec3*);
-/* 04CAE8 */ bool mpColl_8004CAE8(CollData*, Vec3*);
-/* 04CB30 */ bool mpColl_8004CB30(CollData*, Vec3*);
-/* 04CB78 */ bool mpColl_8004CB78(CollData*, Vec3*);
+/* 04CAA0 */ bool mpCollGetSpeedCeiling(CollData*, Vec3* speed);
+/* 04CAE8 */ bool mpCollGetSpeedLeftWall(CollData*, Vec3* speed);
+/* 04CB30 */ bool mpCollGetSpeedRightWall(CollData*, Vec3* speed);
+/* 04CB78 */ bool mpCollGetSpeedFloor(CollData*, Vec3* speed);
 /* 04CBC0 */ bool mpColl_IsOnPlatform(CollData*);
 /* 04CBE8 */ void mpUpdateFloorSkip(CollData*);
 /* 04CBF4 */ void mpClearFloorSkip(CollData*);

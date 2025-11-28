@@ -7610,7 +7610,7 @@ bool it_8027781C(Item_GObj* item_gobj)
         sp48 = item->x40_vel;
         lbVector_Mirror(&sp48, &coll->left_facing_wall.normal);
         lbVector_Add_xy(&sp30, &sp48);
-        if (mpColl_8004CAE8(coll, &sp48)) {
+        if (mpCollGetSpeedLeftWall(coll, &sp48)) {
             lbVector_Add_xy(&sp3C, &sp48);
         }
         chk = true;
@@ -7621,7 +7621,7 @@ bool it_8027781C(Item_GObj* item_gobj)
         sp48 = item->x40_vel;
         lbVector_Mirror(&sp48, &coll->right_facing_wall.normal);
         lbVector_Add_xy(&sp30, &sp48);
-        if (mpColl_8004CB30(coll, &sp48)) {
+        if (mpCollGetSpeedRightWall(coll, &sp48)) {
             lbVector_Add_xy(&sp3C, &sp48);
         }
         chk = true;
@@ -7632,7 +7632,7 @@ bool it_8027781C(Item_GObj* item_gobj)
         sp48 = item->x40_vel;
         lbVector_Mirror(&sp48, &coll->ceiling.normal);
         lbVector_Add_xy(&sp30, &sp48);
-        if (mpColl_8004CAA0(coll, &sp48)) {
+        if (mpCollGetSpeedCeiling(coll, &sp48)) {
             lbVector_Add_xy(&sp3C, &sp48);
         }
         chk = true;
@@ -7643,7 +7643,7 @@ bool it_8027781C(Item_GObj* item_gobj)
         sp48 = item->x40_vel;
         lbVector_Mirror(&sp48, &coll->floor.normal);
         lbVector_Add_xy(&sp30, &sp48);
-        if (mpColl_8004CB78(coll, &sp48)) {
+        if (mpCollGetSpeedFloor(coll, &sp48)) {
             lbVector_Add_xy(&sp3C, &sp48);
         }
         chk = true;
