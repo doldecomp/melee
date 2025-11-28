@@ -2544,68 +2544,67 @@ bool mpColl_80046904(CollData* coll, u32 flags)
     return touched_floor;
 }
 
-static inline bool fn_80046F78_inline(CollData* coll, int* sp14)
+static inline bool mpColl_80046F78_inline(CollData* coll, int* line_id_out)
 {
     if (coll->x38 != mpColl_804D64AC) {
-        float x0 = coll->prev_pos.x;
-        float y0 = coll->prev_pos.y;
-        float x1 = coll->cur_pos.x;
-        float y1 = coll->cur_pos.y;
-        return mpLib_800524DC(&coll->contact, sp14, NULL, NULL,
-                              coll->joint_id_skip, coll->joint_id_only, x0, y0,
-                              x1, y1);
+        float prev_x = coll->prev_pos.x;
+        float prev_y = coll->prev_pos.y;
+        float x = coll->cur_pos.x;
+        float y = coll->cur_pos.y;
+        return mpLib_800524DC(&coll->contact, line_id_out, NULL, NULL,
+                              coll->joint_id_skip, coll->joint_id_only, prev_x,
+                              prev_y, x, y);
     } else {
-        float x0 = coll->prev_pos.x;
-        float y0 = coll->prev_pos.y;
-        float x1 = coll->cur_pos.x;
-        float y1 = coll->cur_pos.y;
-        return mpLib_80052508(&coll->contact, sp14, NULL, NULL,
-                              coll->joint_id_skip, coll->joint_id_only, x0, y0,
-                              x1, y1);
+        float prev_x = coll->prev_pos.x;
+        float prev_y = coll->prev_pos.y;
+        float x = coll->cur_pos.x;
+        float y = coll->cur_pos.y;
+        return mpLib_80052508(&coll->contact, line_id_out, NULL, NULL,
+                              coll->joint_id_skip, coll->joint_id_only, prev_x,
+                              prev_y, x, y);
     }
 }
 
-bool fn_80046F78(CollData* coll, u32 arg1)
+bool mpColl_80046F78(CollData* coll, u32 _)
 {
     int line_id;
-    f32 sp10;
-    enum_t kind;
+    float y; // sp10
 
-    if (fn_80046F78_inline(coll, &line_id)) {
-        kind = mpLineGetKind(line_id);
+    if (mpColl_80046F78_inline(coll, &line_id)) {
+        enum_t kind = mpLineGetKind(line_id);
         if (kind == CollLine_Floor) {
             line_id =
-                mpLib_8004DD90_Floor(line_id, &coll->contact, &sp10,
+                mpLib_8004DD90_Floor(line_id, &coll->contact, &y,
                                      &coll->floor.flags, &coll->floor.normal);
             if (line_id != -1) {
                 coll->floor.index = line_id;
                 coll->cur_pos.x = coll->contact.x;
-                coll->cur_pos.y = coll->contact.y + sp10;
+                coll->cur_pos.y = coll->contact.y + y;
                 coll->cur_pos.z = coll->contact.z;
                 coll->env_flags |= Collide_FloorPush;
                 return true;
             }
             return false;
         } else if (kind == CollLine_Ceiling) {
-            line_id = mpLib_8004E090_Ceiling(line_id, &coll->contact, &sp10,
+            line_id = mpLib_8004E090_Ceiling(line_id, &coll->contact, &y,
                                              &coll->ceiling.flags,
                                              &coll->ceiling.normal);
             if (line_id != -1) {
                 coll->ceiling.index = line_id;
                 coll->cur_pos.x = coll->contact.x;
-                coll->cur_pos.y = coll->contact.y + sp10;
+                coll->cur_pos.y = coll->contact.y + y;
                 coll->cur_pos.z = coll->contact.z;
                 coll->env_flags |= Collide_CeilingPush;
                 return true;
             }
             return false;
         } else if (kind == CollLine_LeftWall) {
-            line_id = mpLib_8004E398_LeftWall(line_id, &coll->contact, &sp10,
+            line_id = mpLib_8004E398_LeftWall(line_id, &coll->contact, &y,
                                               &coll->left_facing_wall.flags,
                                               &coll->left_facing_wall.normal);
             if (line_id != -1) {
                 coll->left_facing_wall.index = line_id;
-                coll->cur_pos.x = coll->contact.x + sp10;
+                coll->cur_pos.x = coll->contact.x + y;
                 coll->cur_pos.y = coll->contact.y;
                 coll->cur_pos.z = coll->contact.z;
                 coll->env_flags |= Collide_LeftWallPush;
@@ -2614,11 +2613,11 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             return false;
         } else if (kind == CollLine_RightWall) {
             line_id = mpLib_8004E684_RightWall(
-                line_id, &coll->contact, &sp10, &coll->right_facing_wall.flags,
+                line_id, &coll->contact, &y, &coll->right_facing_wall.flags,
                 &coll->right_facing_wall.normal);
             if (line_id != -1) {
                 coll->right_facing_wall.index = line_id;
-                coll->cur_pos.x = coll->contact.x + sp10;
+                coll->cur_pos.x = coll->contact.x + y;
                 coll->cur_pos.y = coll->contact.y;
                 coll->cur_pos.z = coll->contact.z;
                 coll->env_flags |= Collide_RightWallPush;
@@ -2630,7 +2629,7 @@ bool fn_80046F78(CollData* coll, u32 arg1)
             return;
         }
     }
-    return 0;
+    return false;
 }
 
 static inline bool inline0(CollData* coll, int i, bool j)
@@ -2662,7 +2661,7 @@ static inline bool inline4(CollData* coll, int i)
     } else {
         mpColl_IsEcbTiny = false;
     }
-    result = mpColl_80043754(fn_80046F78, coll, i);
+    result = mpColl_80043754(mpColl_80046F78, coll, i);
     mpCollEnd(coll, result, 1);
     return result;
 }

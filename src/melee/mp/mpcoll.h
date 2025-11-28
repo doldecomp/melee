@@ -55,7 +55,7 @@
 /* 045B74 */ bool mpColl_80045B74_LeftWall(CollData*);
 /* 046224 */ bool mpColl_80046224_LeftWall(CollData*);
 /* 046904 */ bool mpColl_80046904(CollData*, u32 flags);
-/* 046F78 */ bool fn_80046F78(CollData*, u32);
+/* 046F78 */ bool mpColl_80046F78(CollData*, u32);
 /* 0471F8 */ bool mpColl_800471F8(CollData*);
 /* 04730C */ bool mpColl_8004730C(CollData*, ftCollisionBox*);
 /* 0473CC */ bool mpColl_800473CC(CollData*);
