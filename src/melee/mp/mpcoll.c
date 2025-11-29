@@ -3780,7 +3780,7 @@ bool mpColl_8004AB80(CollData* coll)
 {
     Vec3 top;
     float y;
-    Vec3 spC;
+    Vec3 ceiling_end; // spC
     int line_id;
     bool hit_wall;
 
@@ -3794,8 +3794,8 @@ bool mpColl_8004AB80(CollData* coll)
         coll->cur_pos.y += y;
     } else {
         hit_wall = false;
-        mpCeilingGetLeft(coll->ceiling.index, &spC);
-        if (top.x <= spC.x) {
+        mpCeilingGetLeft(coll->ceiling.index, &ceiling_end);
+        if (top.x <= ceiling_end.x) {
             int line_id = mpLineNextNonCeiling(coll->ceiling.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_RightWall)
             {
@@ -3803,23 +3803,23 @@ bool mpColl_8004AB80(CollData* coll)
             }
         } else {
             int line_id;
-            mpCeilingGetRight(coll->ceiling.index, &spC);
+            mpCeilingGetRight(coll->ceiling.index, &ceiling_end);
             line_id = mpLinePrevNonCeiling(coll->ceiling.index);
             if (line_id != -1 && mpLineGetKind(line_id) == CollLine_LeftWall) {
                 hit_wall = true;
             }
         }
-        coll->cur_pos.y = spC.y - coll->ecb.top.y;
+        coll->cur_pos.y = ceiling_end.y - coll->ecb.top.y;
         if (hit_wall) {
             int line_id;
-            coll->cur_pos.x = spC.x;
-            line_id = mpLib_8004E090_Ceiling(coll->ceiling.index, &spC, NULL,
-                                             &coll->ceiling.flags,
+            coll->cur_pos.x = ceiling_end.x;
+            line_id = mpLib_8004E090_Ceiling(coll->ceiling.index, &ceiling_end,
+                                             NULL, &coll->ceiling.flags,
                                              &coll->ceiling.normal);
             if (line_id != -1) {
                 coll->ceiling.index = line_id;
             } else {
-                OSReport("%s:%d: oioi...\n", "mpcoll.c", 5745);
+                OSReport("%s:%d: oioi...\n", __FILE__, 5745);
             }
         }
     }
