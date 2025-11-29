@@ -3721,28 +3721,28 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
     int floor_id;
     u32 flags;
     Vec3 normal;
-    float x0;
-    float y0;
-    float x1;
-    float y1;
-    bool result;
+    float prev_bottom_x;
+    float prev_bottom_y;
+    float bottom_x;
+    float bottom_y;
+    bool hit_floor;
 
-    x0 = coll->prev_pos.x + coll->prev_ecb.bottom.x;
-    y0 = coll->prev_pos.y + coll->prev_ecb.bottom.y;
-    x1 = coll->cur_pos.x + coll->ecb.bottom.x;
-    y1 = coll->cur_pos.y + coll->ecb.bottom.y;
+    prev_bottom_x = coll->prev_pos.x + coll->prev_ecb.bottom.x;
+    prev_bottom_y = coll->prev_pos.y + coll->prev_ecb.bottom.y;
+    bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
+    bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
     if (coll->x38 != mpColl_804D64AC) {
-        result = mpLib_8004F400_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id,
-                                      &flags, &normal, coll->floor_skip,
-                                      coll->joint_id_skip, coll->joint_id_only,
-                                      NULL, NULL);
+        hit_floor = mpLib_8004F400_Floor(
+            prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
+            &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
+            coll->joint_id_only, NULL, NULL);
     } else {
-        result = mpLib_8004F008_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id,
-                                      &flags, &normal, coll->floor_skip,
-                                      coll->joint_id_skip, coll->joint_id_only,
-                                      NULL, NULL);
+        hit_floor = mpLib_8004F008_Floor(
+            prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
+            &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
+            coll->joint_id_only, NULL, NULL);
     }
-    if (result && floor_id != -1 && floor_id != line_id &&
+    if (hit_floor && floor_id != -1 && floor_id != line_id &&
         (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
     {
         coll->floor.index = floor_id;
@@ -3750,20 +3750,20 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
         coll->floor.normal = normal;
         return true;
     }
-    y0 = 0.5F * (coll->prev_ecb.top.y + coll->prev_ecb.bottom.y) +
-         coll->prev_pos.y;
+    prev_bottom_y = 0.5F * (coll->prev_ecb.top.y + coll->prev_ecb.bottom.y) +
+                    coll->prev_pos.y;
     if (coll->x38 != mpColl_804D64AC) {
-        result = mpLib_8004F400_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id,
-                                      &flags, &normal, coll->floor_skip,
-                                      coll->joint_id_skip, coll->joint_id_only,
-                                      NULL, NULL);
+        hit_floor = mpLib_8004F400_Floor(
+            prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
+            &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
+            coll->joint_id_only, NULL, NULL);
     } else {
-        result = mpLib_8004F008_Floor(x0, y0, x1, y1, 0.0F, NULL, &floor_id,
-                                      &flags, &normal, coll->floor_skip,
-                                      coll->joint_id_skip, coll->joint_id_only,
-                                      NULL, NULL);
+        hit_floor = mpLib_8004F008_Floor(
+            prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
+            &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
+            coll->joint_id_only, NULL, NULL);
     }
-    if (result && floor_id != -1 && floor_id != line_id &&
+    if (hit_floor && floor_id != -1 && floor_id != line_id &&
         (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
     {
         coll->floor.index = floor_id;
