@@ -3574,52 +3574,56 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
     Vec3 normal;
     Vec3 edge;
     int floor_id;
-    bool result;
-    float vx;
-    float vy;
-    float ecb_side_x;
-    float ecb_side_y;
+    bool on_edge;
 
-    result = false;
+    on_edge = false;
     if (!mpLib_80054ED8(line_id) || mpLineGetKind(line_id) != CollLine_Floor) {
         return false;
     }
     mpFloorGetLeft(line_id, &edge);
     if (coll->cur_pos.x <= edge.x) {
+        float edge_x;
+        float edge_y;
+        float right_x;
+        float right_y;
         floor_id = mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
-        vx = edge.x + 1.0F;
-        vy = edge.y + 1.0F;
-        ecb_side_x = edge.x + coll->ecb.right.x - coll->ecb.bottom.x;
-        ecb_side_y = edge.y + coll->ecb.right.y - coll->ecb.bottom.y;
+        edge_x = edge.x + 1.0F;
+        edge_y = edge.y + 1.0F;
+        right_x = edge.x + coll->ecb.right.x - coll->ecb.bottom.x;
+        right_y = edge.y + coll->ecb.right.y - coll->ecb.bottom.y;
         // make sure a wall hasn't stopped us
-        if (!mpLib_800501CC_LeftWall(vx, vy, ecb_side_x, ecb_side_y, NULL,
+        if (!mpLib_800501CC_LeftWall(edge_x, edge_y, right_x, right_y, NULL,
                                      NULL, NULL, NULL, coll->joint_id_skip,
                                      coll->joint_id_only))
         {
-            result = true;
+            on_edge = true;
             coll->env_flags |= Collide_RightEdge;
         }
     } else {
+        float edge_x;
+        float edge_y;
+        float left_x;
+        float left_y;
         mpFloorGetRight(line_id, &edge);
         if (coll->cur_pos.x >= edge.x) {
             floor_id =
                 mpLib_8004DD90_Floor(line_id, &edge, &y, &flags, &normal);
-            vx = edge.x - 1.0F;
-            vy = edge.y + 1.0F;
-            ecb_side_x = edge.x + coll->ecb.left.x - coll->ecb.bottom.x;
-            ecb_side_y = edge.y + coll->ecb.left.y - coll->ecb.bottom.y;
+            edge_x = edge.x - 1.0F;
+            edge_y = edge.y + 1.0F;
+            left_x = edge.x + coll->ecb.left.x - coll->ecb.bottom.x;
+            left_y = edge.y + coll->ecb.left.y - coll->ecb.bottom.y;
             // make sure a wall hasn't stopped us
             if (!mpLib_800509B8_RightWall(
-                    vx, vy, ecb_side_x, ecb_side_y, NULL, NULL, NULL, NULL,
+                    edge_x, edge_y, left_x, left_y, NULL, NULL, NULL, NULL,
                     coll->joint_id_skip, coll->joint_id_only))
             {
-                result = true;
+                on_edge = true;
                 coll->env_flags |= Collide_LeftEdge;
             }
         }
     }
 
-    if (result) {
+    if (on_edge) {
         coll->cur_pos.x = edge.x - coll->ecb.bottom.x;
         coll->cur_pos.y = edge.y - coll->ecb.bottom.y;
         coll->cur_pos.z = edge.z;
@@ -3639,7 +3643,7 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
     Vec3 normal;
     Vec3 edge;
     int floor_id;
-    bool var_r29 = false;
+    bool on_edge = false; // r29
 
     if (!mpLib_80054ED8(line_id) || mpLineGetKind(line_id) != CollLine_Floor) {
         return false;
@@ -3669,7 +3673,7 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
                     edge_x, edge_y, right_x, right_y, NULL, NULL, NULL, NULL,
                     coll->joint_id_skip, coll->joint_id_only))
             {
-                var_r29 = true;
+                on_edge = true;
             }
         }
     } else {
@@ -3697,12 +3701,12 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
                     edge_x, edge_y, left_x, left_y, NULL, NULL, NULL, NULL,
                     coll->joint_id_skip, coll->joint_id_only))
             {
-                var_r29 = true;
+                on_edge = true;
             }
         }
     }
 
-    if (var_r29) {
+    if (on_edge) {
         coll->cur_pos.x = edge.x - coll->ecb.bottom.x;
         coll->cur_pos.y = edge.y - coll->ecb.bottom.y;
         coll->cur_pos.z = edge.z;
