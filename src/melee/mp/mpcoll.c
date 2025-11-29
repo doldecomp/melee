@@ -2697,8 +2697,8 @@ static inline bool inline3(CollData* coll, int i)
 }
 
 static inline bool inline1(CollData* coll, int i,
-                           bool (*arg1)(Fighter_GObj*, int),
-                           Fighter_GObj* arg2)
+                           bool (*floor_cb)(Fighter_GObj*, int),
+                           Fighter_GObj* gobj)
 {
     bool result;
     coll->prev_env_flags = coll->env_flags;
@@ -2710,8 +2710,8 @@ static inline bool inline1(CollData* coll, int i,
     } else {
         mpColl_IsEcbTiny = false;
     }
-    mpColl_804D64A0 = arg1;
-    mpColl_804D64A4 = arg2;
+    mpColl_804D64A0 = floor_cb;
+    mpColl_804D64A4 = gobj;
     result = mpColl_80043754(mpColl_80046904, coll, i);
     mpCollEnd(coll, result, true);
     return result;
