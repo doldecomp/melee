@@ -699,29 +699,6 @@ void mpCollInterpolateECB(CollData* coll, float time)
     }
 }
 
-// 80043268 https://decomp.me/scratch/GNwej
-void mpColl_80043268(CollData* coll, int line_id, s32 arg2, float dy)
-{
-    mpLib_Callback sp1C;
-    Ground* sp18;
-    int joint_id; // r31
-
-    joint_id = mpJointFromLine(line_id);
-    if (joint_id != -1) {
-        sp18 = NULL;
-        mpJointGetCb1(joint_id, &sp1C, &sp18);
-        if (sp1C != 0) {
-            s32 thing;
-            if (arg2 == 0) {
-                thing = 2;
-            } else {
-                thing = 1;
-            }
-            sp1C(sp18, joint_id, coll, coll->x50, thing, dy);
-        }
-    }
-}
-
 static void mpColl_RightWall_inline(int line_id)
 {
     int i;
@@ -763,34 +740,55 @@ static void mpColl_LeftWall_inline3(int line_id, int* arr)
     mpColl_804D648C++;
 }
 
-static inline void func_80043324_inline2(CollData* coll, s32 arg1, s32 arg2,
-                                         float dy)
-{ // see mpColl_80043268
-    int dummy = 0;
+// 80043268 https://decomp.me/scratch/GNwej
+void mpColl_80043268(CollData* coll, int line_id, bool arg2, float dy)
+{
+    int joint_id; // r31
 
-    mpLib_Callback callback;
-    Ground* thing;
-    s32 temp_r29;
-
-    temp_r29 = mpJointFromLine(arg1);
-    if (temp_r29 != -1) {
-        thing = NULL;
-        mpJointGetCb2(temp_r29, &callback, &thing);
-
-        if (callback != NULL) {
-            callback(thing, temp_r29, coll, coll->x50, 0, dy);
+    joint_id = mpJointFromLine(line_id);
+    if (joint_id != -1) {
+        mpLib_Callback callback;
+        Ground* ground = NULL;
+        mpJointGetCb1(joint_id, &callback, &ground);
+        if (callback != 0) {
+            s32 thing;
+            if (!arg2) {
+                thing = 2;
+            } else {
+                thing = 1;
+            }
+            callback(ground, joint_id, coll, coll->x50, thing, dy);
         }
     }
 }
 
-static inline void func_80043324_inline(CollData* coll, int line_id, s32 arg2,
-                                        float dy)
+static inline void mpCollEnd_inline2(CollData* coll, int line_id, bool arg2,
+                                     float dy)
+{ // see mpColl_80043268
+    int dummy = 0;
+
+    int joint_id; // r29
+
+    joint_id = mpJointFromLine(line_id);
+    if (joint_id != -1) {
+        mpLib_Callback callback;
+        Ground* ground = NULL;
+        mpJointGetCb2(joint_id, &callback, &ground);
+
+        if (callback != NULL) {
+            callback(ground, joint_id, coll, coll->x50, 0, dy);
+        }
+    }
+}
+
+static inline void mpCollEnd_inline(CollData* coll, int line_id, bool arg2,
+                                    float dy)
 {
     // inhibit inlining
     mpColl_80043268(coll, line_id, arg2, dy);
 }
 
-void mpCollEnd(CollData* coll, bool arg1, s32 arg2)
+void mpCollEnd(CollData* coll, bool arg1, bool arg2)
 {
     PAD_STACK(4);
     if (coll->floor.index != -1) {
@@ -804,12 +802,12 @@ void mpCollEnd(CollData* coll, bool arg1, s32 arg2)
         coll->env_flags & Collide_LeftEdge ||
         coll->env_flags & Collide_RightEdge)
     {
-        func_80043324_inline(coll, coll->floor.index, arg2,
-                             coll->cur_pos.y - coll->last_pos.y);
+        mpCollEnd_inline(coll, coll->floor.index, arg2,
+                         coll->cur_pos.y - coll->last_pos.y);
     }
     if (coll->env_flags & (Collide_CeilingHug | Collide_CeilingPush)) {
-        func_80043324_inline2(coll, coll->ceiling.index, arg2,
-                              coll->cur_pos.y - coll->last_pos.y);
+        mpCollEnd_inline2(coll, coll->ceiling.index, arg2,
+                          coll->cur_pos.y - coll->last_pos.y);
     }
     if (g_debugLevel >= 3) {
         if (!(coll->cur_pos.x < 45000.0F && coll->cur_pos.x > -45000.0F &&
@@ -838,14 +836,10 @@ void mpCollEnd(CollData* coll, bool arg1, s32 arg2)
 }
 
 #define SOLUTION 0
-/// @todo dummy stack in #func_80043324_inline2 breaks this function
-void mpColl_80043558(CollData* coll, s32 line_id)
+/// @todo dummy stack in #mpCollEnd_inline2 breaks this function
+void mpColl_80043558(CollData* coll, int line_id)
 {
 #if SOLUTION == 0
-    Ground* sp1C;
-    mpLib_Callback sp18;
-    Ground* sp14;
-    mpLib_Callback sp10;
     enum_t kind;
     s32 joint_id;
 
@@ -853,19 +847,21 @@ void mpColl_80043558(CollData* coll, s32 line_id)
     if (kind == CollLine_Floor) {
         joint_id = mpJointFromLine(line_id);
         if (joint_id != -1) {
-            sp1C = NULL;
-            mpJointGetCb1(joint_id, &sp18, &sp1C);
-            if (sp18 != NULL) {
-                (*sp18)(sp1C, joint_id, coll, coll->x50, 2, 0.0F);
+            Ground* ground = NULL;
+            mpLib_Callback callback;
+            mpJointGetCb1(joint_id, &callback, &ground);
+            if (callback != NULL) {
+                callback(ground, joint_id, coll, coll->x50, 2, 0.0F);
             }
         }
     } else if (kind == CollLine_Ceiling) {
         joint_id = mpJointFromLine(line_id);
         if (joint_id != -1) {
-            sp14 = NULL;
-            mpJointGetCb2(joint_id, &sp10, &sp14);
-            if (sp10 != NULL) {
-                (*sp10)(sp14, joint_id, coll, coll->x50, 0, 0.0F);
+            Ground* ground = NULL;
+            mpLib_Callback callback;
+            mpJointGetCb2(joint_id, &callback, &ground);
+            if (callback != NULL) {
+                callback(ground, joint_id, coll, coll->x50, 0, 0.0F);
             }
         }
     }
@@ -873,9 +869,9 @@ void mpColl_80043558(CollData* coll, s32 line_id)
     enum_t kind = mpLineGetKind(line_id);
 
     if (kind == CollLine_Floor) {
-        mpColl_80043268(coll, line_id, 0, 0.0F);
+        mpColl_80043268(coll, line_id, false, 0.0F);
     } else if (kind == CollLine_Ceiling) {
-        func_80043324_inline2(coll, line_id, 0, 0.0F);
+        mpCollEnd_inline2(coll, line_id, false, 0.0F);
     }
 #endif
 }
@@ -2662,7 +2658,7 @@ static inline bool inline4(CollData* coll, int i)
         mpColl_IsEcbTiny = false;
     }
     result = mpColl_80043754(mpColl_80046F78, coll, i);
-    mpCollEnd(coll, result, 1);
+    mpCollEnd(coll, result, true);
     return result;
 }
 
@@ -2679,7 +2675,7 @@ static inline bool inline2(CollData* coll, int i)
         mpColl_IsEcbTiny = false;
     }
     result = mpColl_80043754((void*) mpColl_8004ACE4, coll, i);
-    mpCollEnd(coll, result, 0);
+    mpCollEnd(coll, result, false);
     return result;
 }
 
@@ -2696,7 +2692,7 @@ static inline bool inline3(CollData* coll, int i)
         mpColl_IsEcbTiny = false;
     }
     result = mpColl_80043754(mpColl_8004C534, coll, i);
-    mpCollEnd(coll, result, 0);
+    mpCollEnd(coll, result, false);
     return result;
 }
 
@@ -2717,7 +2713,7 @@ static inline bool inline1(CollData* coll, int i,
     mpColl_804D64A0 = arg1;
     mpColl_804D64A4 = arg2;
     result = mpColl_80043754(mpColl_80046904, coll, i);
-    mpCollEnd(coll, result, 1);
+    mpCollEnd(coll, result, true);
     return result;
 }
 

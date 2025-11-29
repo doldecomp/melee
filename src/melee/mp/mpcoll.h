@@ -27,9 +27,9 @@
 /* 042C58 */ void mpColl_80042C58(CollData*, ftCollisionBox*);
 /* 042D24 */ void mpColl_LoadECB(CollData*);
 /* 042DB0 */ void mpCollInterpolateECB(CollData*, float time);
-/* 043268 */ void mpColl_80043268(CollData*, int line_id, s32, float);
-/* 043324 */ void mpCollEnd(CollData*, bool, s32);
-/* 043558 */ void mpColl_80043558(CollData*, s32);
+/* 043268 */ void mpColl_80043268(CollData*, int line_id, bool, float);
+/* 043324 */ void mpCollEnd(CollData*, bool, bool);
+/* 043558 */ void mpColl_80043558(CollData*, int line_id);
 /* 043670 */ void mpColl_80043670(CollData*);
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);
 /* 0436D8 */ void mpCollSetFacingDir(CollData*, int facing_dir);
