@@ -59,7 +59,7 @@ void mpGetGroundCollJoint(void);
 void mpLib_80057424(s32);
 void mpJointListAdd(s32);
 void mpLib_80057BC0(s32);
-bool mpLib_80054F68(s32, s32);
+bool mpLinesConnected(s32, s32);
 s32 mpLinePrevNonFloor(int idx);
 bool mpLib_8004F008_Floor(Vec3*, int, int, int, int, int, int, int, float, float,
                     float, float, float);

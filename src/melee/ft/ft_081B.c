@@ -609,7 +609,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
                 {
                     int r4 = fp->coll_data.ledge_id_left;
                     int floor_id = cur_fp->mv.co.common.x0;
-                    if (mpLib_80054F68(floor_id, r4)) {
+                    if (mpLinesConnected(floor_id, r4)) {
                         return cur;
                     }
                 }
@@ -618,7 +618,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
                 {
                     int r4 = fp->coll_data.ledge_id_right;
                     int floor_id = cur_fp->mv.co.common.x0;
-                    if (mpLib_80054F68(floor_id, r4)) {
+                    if (mpLinesConnected(floor_id, r4)) {
                         return cur;
                     }
                 }

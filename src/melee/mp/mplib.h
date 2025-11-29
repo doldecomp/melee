@@ -143,7 +143,7 @@
 /* 054D68 */ void mpLib_80054D68(int line_id, u32 flags);
 /* 054DFC */ Vec3* mpLineGetNormal(int line_id, Vec3* normal_out);
 /* 054ED8 */ bool mpLib_80054ED8(int line_id);
-/* 054F68 */ bool mpLib_80054F68(int start_id, int target_id);
+/* 054F68 */ bool mpLinesConnected(int start_id, int target_id);
 /* 0552B0 */ void mpLib_800552B0(int joint_id, HSD_JObj*, int z);
 /* 05541C */ void mpJointHide(int joint_id);
 /* 0557D0 */ void mpJointUnhide(int joint_id);

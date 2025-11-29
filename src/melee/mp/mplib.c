@@ -3488,7 +3488,7 @@ bool mpLib_80054ED8(int line_id)
     return true;
 }
 
-bool mpLib_80054F68(int start_id, int target_id)
+bool mpLinesConnected(int start_id, int target_id)
 {
     int line_id;
     u32 kind;

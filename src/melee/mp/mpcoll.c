@@ -704,7 +704,7 @@ static void mpColl_RightWall_inline(int line_id)
     int i;
     for (i = 0; i < mpColl_804D6488; i++) {
         int start_id = mpColl_80458810.right[i];
-        if (line_id == start_id || mpLib_80054F68(start_id, line_id)) {
+        if (line_id == start_id || mpLinesConnected(start_id, line_id)) {
             return;
         }
     }
@@ -718,7 +718,7 @@ static void mpColl_LeftWall_inline(int line_id)
     int i = 0;
     int* arr = mpColl_80458810.left;
     for (; i < mpColl_804D648C; arr++, i++) {
-        if (line_id == *arr || mpLib_80054F68(*arr, line_id)) {
+        if (line_id == *arr || mpLinesConnected(*arr, line_id)) {
             return;
         }
     }
@@ -731,7 +731,7 @@ static void mpColl_LeftWall_inline3(int line_id, int* arr)
 {
     int i;
     for (i = 0; i < mpColl_804D648C; arr++, i++) {
-        if (line_id == *arr || mpLib_80054F68(*arr, line_id)) {
+        if (line_id == *arr || mpLinesConnected(*arr, line_id)) {
             return;
         }
     }
@@ -3743,7 +3743,7 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
             coll->joint_id_only, NULL, NULL);
     }
     if (hit_floor && floor_id != -1 && floor_id != line_id &&
-        (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
+        (line_id == -1 || !mpLinesConnected(floor_id, line_id)))
     {
         coll->floor.index = floor_id;
         coll->floor.flags = flags;
@@ -3764,7 +3764,7 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
             coll->joint_id_only, NULL, NULL);
     }
     if (hit_floor && floor_id != -1 && floor_id != line_id &&
-        (line_id == -1 || !mpLib_80054F68(floor_id, line_id)))
+        (line_id == -1 || !mpLinesConnected(floor_id, line_id)))
     {
         coll->floor.index = floor_id;
         coll->floor.flags = flags;
