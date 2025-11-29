@@ -4078,17 +4078,23 @@ bool mpColl_8004B6D8(CollData* arg0)
 bool mpColl_8004B894_RightWall(CollData* coll)
 {
     int line_id;
-    float f31;
-    float f30;
-    float f1;
-    float f2;
-    float f3;
-    float f4;
-    int result;
+    float left_x;        // f31
+    float left_y;        // f30
+    float prev_left_x;   // f1
+    float prev_left_y;   // f2
+    float prev_bottom_x; // f1
+    float prev_bottom_y; // f2
+    float prev_top_x;    // f1
+    float prev_top_y;    // f2
+    float bottom_x;      // f3
+    float bottom_y;      // f4
+    float top_x;         // f3
+    float top_y;         // f4
+    bool hit_wall;
     int line_id1;
     int line_id2;
 
-    result = false;
+    hit_wall = false;
     mpColl_804D6488 = 0;
     if (mpLib_80054ED8(coll->ceiling.index)) {
         int temp;
@@ -4101,78 +4107,90 @@ bool mpColl_8004B894_RightWall(CollData* coll)
         line_id1 = -1;
     }
 
-    f31 = coll->cur_pos.x + coll->ecb.left.x;
-    f30 = coll->cur_pos.y + coll->ecb.left.y;
-    f1 = coll->prev_pos.x + coll->prev_ecb.left.x;
-    f2 = coll->prev_pos.y + coll->prev_ecb.left.y;
-    if (mpColl_RightWall_inline2(coll, f1, f2, f31, f30, &line_id)) {
+    left_x = coll->cur_pos.x + coll->ecb.left.x;
+    left_y = coll->cur_pos.y + coll->ecb.left.y;
+    prev_left_x = coll->prev_pos.x + coll->prev_ecb.left.x;
+    prev_left_y = coll->prev_pos.y + coll->prev_ecb.left.y;
+    if (mpColl_RightWall_inline2(coll, prev_left_x, prev_left_y, left_x,
+                                 left_y, &line_id))
+    {
         mpColl_RightWall_inline(line_id);
-        result = true;
+        hit_wall = true;
         coll->env_flags |= Collide_RightWallHug;
     }
 
-    f1 = coll->prev_pos.x + coll->prev_ecb.bottom.x;
-    f2 = coll->prev_pos.y + coll->prev_ecb.bottom.y;
-    f3 = coll->cur_pos.x + coll->ecb.bottom.x;
-    f4 = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpColl_RightWall_inline2(coll, f1, f2, f3, f4, &line_id)) {
+    prev_bottom_x = coll->prev_pos.x + coll->prev_ecb.bottom.x;
+    prev_bottom_y = coll->prev_pos.y + coll->prev_ecb.bottom.y;
+    bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
+    bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
+    if (mpColl_RightWall_inline2(coll, prev_bottom_x, prev_bottom_y, bottom_x,
+                                 bottom_y, &line_id))
+    {
         mpColl_RightWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    f1 = coll->prev_pos.x + coll->prev_ecb.top.x;
-    f2 = coll->prev_pos.y + coll->prev_ecb.top.y;
-    f3 = coll->cur_pos.x + coll->ecb.top.x;
-    f4 = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpColl_RightWall_inline2(coll, f1, f2, f3, f4, &line_id) &&
+    prev_top_x = coll->prev_pos.x + coll->prev_ecb.top.x;
+    prev_top_y = coll->prev_pos.y + coll->prev_ecb.top.y;
+    top_x = coll->cur_pos.x + coll->ecb.top.x;
+    top_y = coll->cur_pos.y + coll->ecb.top.y;
+    if (mpColl_RightWall_inline2(coll, prev_top_x, prev_top_y, top_x, top_y,
+                                 &line_id) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_RightWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    f1 = coll->cur_pos.x + coll->ecb.bottom.x;
-    f2 = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800509B8_RightWall(f1, f2, f31, f30, NULL, &line_id, NULL, NULL,
+    prev_bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
+    prev_bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
+    if (mpLib_800509B8_RightWall(prev_bottom_x, prev_bottom_y, left_x, left_y,
+                                 NULL, &line_id, NULL, NULL,
                                  coll->joint_id_skip, coll->joint_id_only))
     {
         mpColl_RightWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    f1 = coll->cur_pos.x + coll->ecb.top.x;
-    f2 = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800509B8_RightWall(f1, f2, f31, f30, NULL, &line_id, NULL, NULL,
-                                 coll->joint_id_skip, coll->joint_id_only) &&
+    prev_top_x = coll->cur_pos.x + coll->ecb.top.x;
+    prev_top_y = coll->cur_pos.y + coll->ecb.top.y;
+    if (mpLib_800509B8_RightWall(prev_top_x, prev_top_y, left_x, left_y, NULL,
+                                 &line_id, NULL, NULL, coll->joint_id_skip,
+                                 coll->joint_id_only) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_RightWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    if (result) {
+    if (hit_wall) {
         coll->env_flags |= Collide_RightWallPush;
     }
 
-    return result;
+    return hit_wall;
 }
 
 bool mpColl_8004BDD4_LeftWall(CollData* coll)
 {
     int line_id;
-    float f31;
-    float f30;
-    float f1;
-    float f2;
-    float f3;
-    float f4;
-    bool result;
+    float right_x;       // f31
+    float right_y;       // f30
+    float prev_right_x;  // f1
+    float prev_right_y;  // f2
+    float prev_bottom_x; // f1
+    float prev_bottom_y; // f2
+    float prev_top_x;    // f1
+    float prev_top_y;    // f2
+    float bottom_x;      // f3
+    float bottom_y;      // f4
+    float top_x;         // f3
+    float top_y;         // f4
+    bool hit_wall;
     int line_id1;
     int line_id2;
 
-    result = false;
-    mpColl_804D648C = 0;
-
+    hit_wall = false;
+    mpColl_804D6488 = 0;
     if (mpLib_80054ED8(coll->ceiling.index)) {
         int temp;
         line_id1 = mpLib_80053950_Ceiling(coll->ceiling.index);
@@ -4184,60 +4202,67 @@ bool mpColl_8004BDD4_LeftWall(CollData* coll)
         line_id1 = -1;
     }
 
-    f31 = coll->cur_pos.x + coll->ecb.right.x;
-    f30 = coll->cur_pos.y + coll->ecb.right.y;
-    f1 = coll->prev_pos.x + coll->prev_ecb.right.x;
-    f2 = coll->prev_pos.y + coll->prev_ecb.right.y;
-    if (mpColl_LeftWall_inline2(coll, f1, f2, f31, f30, &line_id)) {
+    right_x = coll->cur_pos.x + coll->ecb.right.x;
+    right_y = coll->cur_pos.y + coll->ecb.right.y;
+    prev_right_x = coll->prev_pos.x + coll->prev_ecb.right.x;
+    prev_right_y = coll->prev_pos.y + coll->prev_ecb.right.y;
+    if (mpColl_LeftWall_inline2(coll, prev_right_x, prev_right_y, right_x,
+                                right_y, &line_id))
+    {
         mpColl_LeftWall_inline3(line_id, mpColl_80458810.left);
-        result = true;
+        hit_wall = true;
         coll->env_flags |= Collide_LeftWallHug;
     }
 
-    f1 = coll->prev_pos.x + coll->prev_ecb.bottom.x;
-    f2 = coll->prev_pos.y + coll->prev_ecb.bottom.y;
-    f3 = coll->cur_pos.x + coll->ecb.bottom.x;
-    f4 = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpColl_LeftWall_inline2(coll, f1, f2, f3, f4, &line_id)) {
+    prev_bottom_x = coll->prev_pos.x + coll->prev_ecb.bottom.x;
+    prev_bottom_y = coll->prev_pos.y + coll->prev_ecb.bottom.y;
+    bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
+    bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
+    if (mpColl_LeftWall_inline2(coll, prev_bottom_x, prev_bottom_y, bottom_x,
+                                bottom_y, &line_id))
+    {
         mpColl_LeftWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    f1 = coll->prev_pos.x + coll->prev_ecb.top.x;
-    f2 = coll->prev_pos.y + coll->prev_ecb.top.y;
-    f3 = coll->cur_pos.x + coll->ecb.top.x;
-    f4 = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpColl_LeftWall_inline2(coll, f1, f2, f3, f4, &line_id) &&
+    prev_top_x = coll->prev_pos.x + coll->prev_ecb.top.x;
+    prev_top_y = coll->prev_pos.y + coll->prev_ecb.top.y;
+    top_x = coll->cur_pos.x + coll->ecb.top.x;
+    top_y = coll->cur_pos.y + coll->ecb.top.y;
+    if (mpColl_LeftWall_inline2(coll, prev_top_x, prev_top_y, top_x, top_y,
+                                &line_id) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_LeftWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    f1 = coll->cur_pos.x + coll->ecb.bottom.x;
-    f2 = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800501CC_LeftWall(f1, f2, f31, f30, NULL, &line_id, NULL, NULL,
+    prev_bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
+    prev_bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
+    if (mpLib_800501CC_LeftWall(prev_bottom_x, prev_bottom_y, right_x, right_y,
+                                NULL, &line_id, NULL, NULL,
                                 coll->joint_id_skip, coll->joint_id_only))
     {
         mpColl_LeftWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    f1 = coll->cur_pos.x + coll->ecb.top.x;
-    f2 = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800501CC_LeftWall(f1, f2, f31, f30, NULL, &line_id, NULL, NULL,
-                                coll->joint_id_skip, coll->joint_id_only) &&
+    prev_top_x = coll->cur_pos.x + coll->ecb.top.x;
+    prev_top_y = coll->cur_pos.y + coll->ecb.top.y;
+    if (mpLib_800501CC_LeftWall(prev_top_x, prev_top_y, right_x, right_y, NULL,
+                                &line_id, NULL, NULL, coll->joint_id_skip,
+                                coll->joint_id_only) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_LeftWall_inline(line_id);
-        result = true;
+        hit_wall = true;
     }
 
-    if (result) {
+    if (hit_wall) {
         coll->env_flags |= Collide_LeftWallPush;
     }
 
-    return result;
+    return hit_wall;
 }
 
 bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
