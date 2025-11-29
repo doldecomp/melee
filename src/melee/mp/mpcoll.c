@@ -3110,12 +3110,12 @@ bool mpColl_800491C8_RightWall(CollData* coll)
         float top;
         float mid;
         float bot;
-        float f28;
-        float f27;
-        float f3;
-        float f4;
-        float f5;
-        float f6;
+        float bot_y_to_x; // f28
+        float top_y_to_x; // f27
+        float bottom_y;   // f3
+        float left_y;     // f4
+        float top_y;      // f5
+        float left_x;     // f6
         int j;
         int wall_id;
         float x;
@@ -3191,15 +3191,15 @@ bool mpColl_800491C8_RightWall(CollData* coll)
             }
         }
 
-        f6 = coll->ecb.left.x;
-        f5 = coll->ecb.top.y;
-        f4 = coll->ecb.left.y;
-        f3 = coll->ecb.bottom.y;
-        top = coll->cur_pos.y + f5;
-        mid = coll->cur_pos.y + f4;
-        bot = coll->cur_pos.y + f3;
-        f28 = f6 / (f4 - f3);
-        f27 = f6 / (f4 - f5);
+        left_x = coll->ecb.left.x;
+        top_y = coll->ecb.top.y;
+        left_y = coll->ecb.left.y;
+        bottom_y = coll->ecb.bottom.y;
+        top = coll->cur_pos.y + top_y;
+        mid = coll->cur_pos.y + left_y;
+        bot = coll->cur_pos.y + bottom_y;
+        bot_y_to_x = left_x / (left_y - bottom_y);
+        top_y_to_x = left_x / (left_y - top_y);
 
         for (j = wall_id; j != -1 && (mpLineGetKind(j) & LINE_FLAG_KIND) ==
                                          CollLine_RightWall;
@@ -3208,9 +3208,9 @@ bool mpColl_800491C8_RightWall(CollData* coll)
             mpLineGetV1Pos(j, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = f28 * (pos.y - bot) + coll->ecb.bottom.x;
+                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
             } else if (mid <= pos.y && pos.y <= top) {
-                x = f27 * (pos.y - top) + coll->ecb.top.x;
+                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
             } else if (pos.y < bot) {
                 break;
             } else {
@@ -3235,9 +3235,9 @@ bool mpColl_800491C8_RightWall(CollData* coll)
             mpLineGetV0Pos(wall_id, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = f28 * (pos.y - bot) + coll->ecb.bottom.x;
+                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
             } else if (mid <= pos.y && pos.y <= top) {
-                x = f27 * (pos.y - top) + coll->ecb.top.x;
+                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
             } else if (pos.y > top) {
                 break;
             } else {
@@ -3406,12 +3406,12 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
         float top;
         float mid;
         float bot;
-        float f28;
-        float f27;
-        float f3;
-        float f4;
-        float f5;
-        float f6;
+        float bot_y_to_x; // f28
+        float top_y_to_x; // f27
+        float bottom_y;   // f3
+        float right_y;    // f4
+        float top_y;      // f5
+        float right_x;    // f6
         int j;
         int wall_id;
         float x;
@@ -3487,15 +3487,15 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
             }
         }
 
-        f6 = coll->ecb.right.x;
-        f5 = coll->ecb.top.y;
-        f4 = coll->ecb.right.y;
-        f3 = coll->ecb.bottom.y;
-        top = coll->cur_pos.y + f5;
-        mid = coll->cur_pos.y + f4;
-        bot = coll->cur_pos.y + f3;
-        f28 = f6 / (f4 - f3);
-        f27 = f6 / (f4 - f5);
+        right_x = coll->ecb.right.x;
+        top_y = coll->ecb.top.y;
+        right_y = coll->ecb.right.y;
+        bottom_y = coll->ecb.bottom.y;
+        top = coll->cur_pos.y + top_y;
+        mid = coll->cur_pos.y + right_y;
+        bot = coll->cur_pos.y + bottom_y;
+        bot_y_to_x = right_x / (right_y - bottom_y);
+        top_y_to_x = right_x / (right_y - top_y);
 
         for (j = wall_id; j != -1 && (mpLineGetKind(j) & LINE_FLAG_KIND) ==
                                          CollLine_LeftWall;
@@ -3504,9 +3504,9 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
             mpLineGetV0Pos(j, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = f28 * (pos.y - bot) + coll->ecb.bottom.x;
+                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
             } else if (mid <= pos.y && pos.y <= top) {
-                x = f27 * (pos.y - top) + coll->ecb.top.x;
+                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
             } else if (pos.y < bot) {
                 break;
             } else {
@@ -3531,9 +3531,9 @@ bool mpColl_80049EAC_LeftWall(CollData* coll)
             mpLineGetV1Pos(wall_id, &pos);
 
             if (bot <= pos.y && pos.y <= mid) {
-                x = f28 * (pos.y - bot) + coll->ecb.bottom.x;
+                x = bot_y_to_x * (pos.y - bot) + coll->ecb.bottom.x;
             } else if (mid <= pos.y && pos.y <= top) {
-                x = f27 * (pos.y - top) + coll->ecb.top.x;
+                x = top_y_to_x * (pos.y - top) + coll->ecb.top.x;
             } else if (pos.y > top) {
                 break;
             } else {
