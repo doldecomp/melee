@@ -4016,60 +4016,60 @@ bool mpColl_8004B5C4(CollData* coll)
     return inline2(coll, 1);
 }
 
-bool mpColl_8004B6D8(CollData* arg0)
+bool mpColl_8004B6D8(CollData* coll)
 {
-    Vec3 sp30;
+    Vec3 top; // sp30
     u8 _[0xC];
-    f32 sp20;
-    Vec3 sp14;
+    float y;          // sp20
+    Vec3 ceiling_end; // sp14
 
-    s32 temp_r31;
-    s32 temp_r3;
-    bool var_r30;
+    int ceiling_id; // r31
+    int new_ceiling;
+    bool hit_wall; // r30
 
     PAD_STACK(0x8);
 
-    temp_r31 = arg0->ceiling.index;
-    sp30.x = arg0->cur_pos.x + arg0->ecb.top.x;
-    sp30.y = arg0->cur_pos.y + arg0->ecb.top.y;
-    if (!mpLib_80054ED8(arg0->ceiling.index) ||
-        mpLineGetKind(arg0->ceiling.index) != CollLine_Ceiling)
+    ceiling_id = coll->ceiling.index;
+    top.x = coll->cur_pos.x + coll->ecb.top.x;
+    top.y = coll->cur_pos.y + coll->ecb.top.y;
+    if (!mpLib_80054ED8(coll->ceiling.index) ||
+        mpLineGetKind(coll->ceiling.index) != CollLine_Ceiling)
     {
         return false;
     }
-    temp_r3 = mpLib_8004E090_Ceiling(
-        temp_r31, &sp30, &sp20, &arg0->ceiling.flags, &arg0->ceiling.normal);
-    if (temp_r3 != -1) {
-        arg0->cur_pos.y += sp20;
-        arg0->ceiling.index = temp_r3;
+    new_ceiling = mpLib_8004E090_Ceiling(
+        ceiling_id, &top, &y, &coll->ceiling.flags, &coll->ceiling.normal);
+    if (new_ceiling != -1) {
+        coll->cur_pos.y += y;
+        coll->ceiling.index = new_ceiling;
         return true;
     }
-    var_r30 = false;
-    mpCeilingGetLeft(temp_r31, &sp14);
-    if (arg0->cur_pos.x < sp14.x) {
-        int non_ceiling_id = mpLineNextNonCeiling(temp_r31);
+    hit_wall = false;
+    mpCeilingGetLeft(ceiling_id, &ceiling_end);
+    if (coll->cur_pos.x < ceiling_end.x) {
+        int non_ceiling_id = mpLineNextNonCeiling(ceiling_id);
         if (non_ceiling_id != -1 && mpLib_80054ED8(non_ceiling_id) &&
             (mpLineGetKind(non_ceiling_id) & CollLine_RightWall))
         {
-            var_r30 = true;
+            hit_wall = true;
         } else {
-            arg0->env_flags |= Collide_LeftLedgeSlip;
+            coll->env_flags |= Collide_LeftLedgeSlip;
         }
     } else {
-        mpCeilingGetRight(temp_r31, &sp14);
-        if (arg0->cur_pos.x > sp14.x) {
-            int non_ceiling_id = mpLinePrevNonCeiling(temp_r31);
+        mpCeilingGetRight(ceiling_id, &ceiling_end);
+        if (coll->cur_pos.x > ceiling_end.x) {
+            int non_ceiling_id = mpLinePrevNonCeiling(ceiling_id);
             if (non_ceiling_id != -1 && mpLib_80054ED8(non_ceiling_id) &&
                 (mpLineGetKind(non_ceiling_id) & CollLine_LeftWall))
             {
-                var_r30 = true;
+                hit_wall = true;
             } else {
-                arg0->env_flags |= Collide_RightLedgeSlip;
+                coll->env_flags |= Collide_RightLedgeSlip;
             }
         }
     }
-    if (var_r30) {
-        arg0->cur_pos = sp14;
+    if (hit_wall) {
+        coll->cur_pos = ceiling_end;
         return true;
     }
     return false;
