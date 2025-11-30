@@ -598,6 +598,7 @@ struct Item {
         itUnk4_ItemVars unk4;
         itStarRodStar_ItemVars starrodstar;
         itZeldaDinFire_ItemVars zeldadinfire;
+        itTosakinto_ItemVars tosakinto;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
