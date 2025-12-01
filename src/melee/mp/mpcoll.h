@@ -108,8 +108,10 @@
 /* 04C328 */ bool mpColl_8004C328_Ceiling(CollData*, int line_id);
 /* 04C534 */ bool mpColl_8004C534(CollData*, u32);
 /* 04C750 */ bool mpColl_8004C750(CollData*);
-/* 04C864 */ void mpColl_8004C864(CollData*, bool, float, float);
-/* 04C91C */ void mpColl_8004C91C(CollData*, bool, float, float);
+/* 04C864 */ void mpCollSqueezeHorizontal(CollData*, bool airborne, float left,
+                                          float right);
+/* 04C91C */ void mpCollSqueezeVertical(CollData*, bool airborne, float top,
+                                        float bottom);
 /* 04CA6C */ float mpColl_8004CA6C(CollData*);
 /* 04CAA0 */ bool mpCollGetSpeedCeiling(CollData*, Vec3* speed);
 /* 04CAE8 */ bool mpCollGetSpeedLeftWall(CollData*, Vec3* speed);

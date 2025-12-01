@@ -2399,8 +2399,8 @@ bool mpColl_80046904(CollData* coll, u32 flags)
         }
 
         if ((squeeze_flags & 0b1100) == 0b1100) {
-            mpColl_8004C864(coll, true, x_after_collide_right,
-                            x_after_collide_left); // Physics_SqueezeHorizontal
+            mpCollSqueezeHorizontal(coll, true, x_after_collide_right,
+                                    x_after_collide_left);
         }
 
         y_after_collide_ceiling = 0.0F;
@@ -2460,14 +2460,14 @@ bool mpColl_80046904(CollData* coll, u32 flags)
             }
         }
         if ((squeeze_flags & 0b0011) == 0b0011) {
-            bool aerial;
+            bool airborne;
             if (touched_floor) {
-                aerial = false;
+                airborne = false;
             } else {
-                aerial = true;
+                airborne = true;
             }
-            mpColl_8004C91C(coll, aerial, y_after_collide_ceiling,
-                            y_after_collide_floor); // Physics_SqueezeVertical
+            mpCollSqueezeVertical(coll, airborne, y_after_collide_ceiling,
+                                  y_after_collide_floor);
         }
         squeeze_flags_all |= squeeze_flags;
     } while (prev_b6 != coll->x34_flags.b6 ||
@@ -3862,7 +3862,7 @@ bool mpColl_8004ACE4(CollData* coll, int flags)
         }
 
         if (hit_left && hit_right) {
-            mpColl_8004C864(coll, false, x_after_right, x_after_left);
+            mpCollSqueezeHorizontal(coll, false, x_after_right, x_after_left);
         }
 
         hit_ceiling = false;
@@ -3925,13 +3925,14 @@ bool mpColl_8004ACE4(CollData* coll, int flags)
         }
 
         if (hit_floor && hit_ceiling) {
-            bool aerial; // r4
+            bool airborne; // r4
             if (touching_floor) {
-                aerial = false;
+                airborne = false;
             } else {
-                aerial = true;
+                airborne = true;
             }
-            mpColl_8004C91C(coll, aerial, y_after_ceiling, y_after_floor);
+            mpCollSqueezeVertical(coll, airborne, y_after_ceiling,
+                                  y_after_floor);
         }
     } while (prev_b6 != coll->x34_flags.b6);
 
@@ -4352,7 +4353,8 @@ bool mpColl_8004C750(CollData* coll)
     return inline3(coll, 2);
 }
 
-void mpColl_8004C864(CollData* coll, bool _, float left, float right)
+void mpCollSqueezeHorizontal(CollData* coll, bool airborne, float left,
+                             float right)
 {
     float half_width =
         0.5F * (right - left + coll->ecb.right.x - coll->ecb.left.x);
@@ -4368,7 +4370,8 @@ void mpColl_8004C864(CollData* coll, bool _, float left, float right)
     coll->x34_flags.b5 = false;
 }
 
-void mpColl_8004C91C(CollData* coll, bool r4, float top, float bottom)
+void mpCollSqueezeVertical(CollData* coll, bool airborne, float top,
+                           float bottom)
 {
     float height = top - bottom + coll->ecb.top.y - coll->ecb.bottom.y;
     float mid_y;
@@ -4384,7 +4387,7 @@ void mpColl_8004C91C(CollData* coll, bool r4, float top, float bottom)
         coll->ecb.top.y = MIN(old_height, new_height);
         coll->ecb.bottom.y = 0.0F;
         coll->cur_pos.y = bottom;
-    } else if (!r4) {
+    } else if (!airborne) {
         coll->cur_pos.y = bottom;
         coll->ecb.top.y = height + coll->ecb.bottom.y;
     } else {
