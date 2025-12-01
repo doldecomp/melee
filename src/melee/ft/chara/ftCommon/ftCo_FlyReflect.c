@@ -35,7 +35,7 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
     CollData* coll = &fp->coll_data;
     float threshold = p_ftCommonData->x1B0;
     float kb_vel_x = fp->x8c_kb_vel.x;
-    if (kb_vel_x < -threshold && coll->env_flags & MPCOLL_FLAGS_B11 &&
+    if (kb_vel_x < -threshold && coll->env_flags & Collide_RightWallHug &&
         fp->mv.co.damage.x19 != ftCo_Surface_LeftWall)
     {
         u8 _[8] = { 0 };
@@ -50,7 +50,7 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
         fp->mv.co.damage.x19 = ftCo_Surface_LeftWall;
         return true;
     }
-    if (kb_vel_x > threshold && coll->env_flags & MPCOLL_FLAGS_B05 &&
+    if (kb_vel_x > threshold && coll->env_flags & Collide_LeftWallHug &&
         fp->mv.co.damage.x19 != ftCo_Surface_RightWall)
     {
         vec.x = coll->ecb.right.x;
@@ -74,7 +74,7 @@ bool ftCo_800C1718(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
     if (fp->x8c_kb_vel.y > p_ftCommonData->x1B0 &&
-        coll->env_flags & MPCOLL_FLAGS_B14 &&
+        coll->env_flags & Collide_CeilingHug &&
         fp->mv.co.damage.x19 != ftCo_Surface_Ceiling)
     {
         vec.x = 0;

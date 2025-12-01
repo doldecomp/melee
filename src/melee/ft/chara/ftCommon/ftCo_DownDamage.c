@@ -93,8 +93,8 @@ void ftCo_DownDamage_Coll(Fighter_GObj* gobj)
             ftCommon_8007D7FC(fp);
         } else {
             CollData* coll = &fp->coll_data;
-            if (coll->env_flags & MPCOLL_FLAGS_B11 ||
-                coll->env_flags & MPCOLL_FLAGS_B05)
+            if (coll->env_flags & Collide_RightWallHug ||
+                coll->env_flags & Collide_LeftWallHug)
             {
                 RETURN_IF(ftCo_800C1D38(gobj));
                 RETURN_IF(ftCo_800C17CC(gobj));

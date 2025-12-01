@@ -24,10 +24,10 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
 
     if (fp0->can_walljump) {
         CollData* coll_data = &fp0->coll_data;
-        if ((fp0->coll_data.env_flags & MPCOLL_FLAGS_B11) ||
-            (coll_data->env_flags & MPCOLL_FLAGS_B05))
+        if ((fp0->coll_data.env_flags & Collide_RightWallHug) ||
+            (coll_data->env_flags & Collide_LeftWallHug))
         {
-            s32 env_flags = coll_data->env_flags & MPCOLL_FLAGS_B11;
+            s32 env_flags = coll_data->env_flags & Collide_RightWallHug;
 
             // side of the collision?
             float wall_dir = env_flags ? -1.f : +1.f;

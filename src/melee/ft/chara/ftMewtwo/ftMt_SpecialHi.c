@@ -268,7 +268,9 @@ void ftMt_SpecialHiLost_Coll(HSD_GObj* gobj)
 
         if (!ft_80082708(gobj)) {
             u32 env_flags = collData->env_flags;
-            if (env_flags & MPCOLL_LEFTWALL || env_flags & MPCOLL_RIGHTWALL) {
+            if (env_flags & Collide_LeftWallMask ||
+                env_flags & Collide_RightWallMask)
+            {
                 ftCommon_8007D60C(fp1);
                 ftMt_SpecialAirHiLost_Enter(gobj);
                 return;
@@ -277,7 +279,9 @@ void ftMt_SpecialHiLost_Coll(HSD_GObj* gobj)
             }
         } else {
             u32 env_flags = collData->env_flags;
-            if (env_flags & MPCOLL_LEFTWALL || env_flags & MPCOLL_RIGHTWALL) {
+            if (env_flags & Collide_LeftWallMask ||
+                env_flags & Collide_RightWallMask)
+            {
                 ftMt_SpecialHiLost_Enter(gobj);
             }
         }
@@ -327,7 +331,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
             return;
         }
 
-        if ((collData->env_flags & MPCOLL_CEIL) &&
+        if ((collData->env_flags & Collide_CeilingMask) &&
             (lbVector_AngleXY(&collData->ceiling.normal, &fp1->self_vel) >
              deg_to_rad *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
@@ -335,7 +339,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
             ftMt_SpecialAirHiLost_Enter(gobj);
         }
 
-        if (collData->env_flags & MPCOLL_LEFTWALL &&
+        if (collData->env_flags & Collide_LeftWallMask &&
             (lbVector_AngleXY(&collData->left_facing_wall.normal,
                               &fp1->self_vel) >
              deg_to_rad *
@@ -344,7 +348,7 @@ void ftMt_SpecialAirHiLost_Coll(HSD_GObj* gobj)
             ftMt_SpecialAirHiLost_Enter(gobj);
         }
 
-        if (collData->env_flags & MPCOLL_RIGHTWALL &&
+        if (collData->env_flags & Collide_RightWallMask &&
             lbVector_AngleXY(&collData->right_facing_wall.normal,
                              &fp1->self_vel) >
                 deg_to_rad *

@@ -25,7 +25,7 @@
 bool ftCo_800C23A0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->coll_data.env_flags & MPCOLL_FLAGS_B14 && ftCo_800986B0(gobj)) {
+    if (fp->coll_data.env_flags & Collide_CeilingHug && ftCo_800986B0(gobj)) {
         ftCo_800C23FC(gobj);
         return true;
     }

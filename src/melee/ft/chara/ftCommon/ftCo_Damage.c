@@ -1189,8 +1189,8 @@ void ftCo_DamageFly_Coll(Fighter_GObj* gobj)
         return;
     } else {
         u32 env_flags = coll->env_flags;
-        if (env_flags & MPCOLL_FLAGS_B11 || env_flags & MPCOLL_FLAGS_B05 ||
-            env_flags & MPCOLL_FLAGS_B14)
+        if (env_flags & Collide_RightWallHug ||
+            env_flags & Collide_LeftWallHug || env_flags & Collide_CeilingHug)
         {
             RETURN_IF(ftCo_800C1D38(gobj));
             RETURN_IF(ftCo_800C23A0(gobj));
@@ -1265,8 +1265,8 @@ void ftCo_DamageFlyRoll_Coll(Fighter_GObj* gobj)
         ftCo_80097D40(gobj);
     } else {
         u32 env_flags = coll->env_flags;
-        if (env_flags & MPCOLL_FLAGS_B11 || env_flags & MPCOLL_FLAGS_B05 ||
-            env_flags & MPCOLL_FLAGS_B14)
+        if (env_flags & Collide_RightWallHug ||
+            env_flags & Collide_LeftWallHug || env_flags & Collide_CeilingHug)
         {
             RETURN_IF(ftCo_800C1D38(gobj));
             RETURN_IF(ftCo_800C23A0(gobj));

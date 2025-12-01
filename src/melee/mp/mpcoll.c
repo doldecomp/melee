@@ -54,24 +54,6 @@ const float flt_804D8010 = -3.0F;
 /// @todo float order hack
 const float flt_804D7FD8 = 6.0F;
 
-#define Collide_LeftWallPush 0x1
-#define Collide_LeftWallHug 0x20
-#define Collide_LeftWallMask 0x3F
-#define Collide_RightWallPush 0x40
-#define Collide_RightWallHug 0x800
-#define Collide_RightWallMask 0xFC0
-#define Collide_CeilingPush 0x2000
-#define Collide_CeilingHug 0x4000
-#define Collide_FloorPush 0x8000
-#define Collide_FloorHug 0x10000
-#define Collide_LeftEdge 0x100000
-#define Collide_RightEdge 0x200000
-#define Collide_Edge 0x800000
-#define Collide_LeftLedgeGrab 0x1000000
-#define Collide_RightLedgeGrab 0x2000000
-#define Collide_LeftLedgeSlip 0x10000000
-#define Collide_RightLedgeSlip 0x20000000
-
 #define CollisionFlagAir_StayAirborne 0x1
 #define CollisionFlagAir_PlatformPassCallback 0x2
 #define CollisionFlagAir_CanGrabLedge 0x4

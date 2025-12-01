@@ -1253,7 +1253,7 @@ bool ftCo_800A3234(Fighter* fp)
 
 static inline bool inlineC0(Fighter* fp)
 {
-    if (fp->coll_data.env_flags & MPCOLL_WALL) {
+    if (fp->coll_data.env_flags & Collide_WallMask) {
         return true;
     } else {
         return false;

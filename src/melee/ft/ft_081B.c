@@ -364,7 +364,7 @@ bool ft_80082578(Fighter_GObj* arg0)
     if (ft_80081A00(arg0)) {
         return false;
     }
-    if (coll->env_flags & MPCOLL_UNK) {
+    if (coll->env_flags & Collide_FloorMask) {
         return true;
     } else {
         return false;
@@ -389,7 +389,7 @@ bool ft_80082638(Fighter_GObj* gobj, ftCollisionBox* arg1)
     if (ft_80081A00(gobj) != 0) {
         return false;
     }
-    if (coll->env_flags & MPCOLL_UNK) {
+    if (coll->env_flags & Collide_FloorMask) {
         return true;
     } else {
         return false;
@@ -605,7 +605,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
             Fighter* cur_fp = GET_FIGHTER(cur);
             if (cur_fp->x221D_b7) {
                 if (cur_fp->facing_dir > 0.0F &&
-                    (fp->coll_data.env_flags & MPCOLL_FLAGS_B24))
+                    (fp->coll_data.env_flags & Collide_LeftLedgeGrab))
                 {
                     int r4 = fp->coll_data.ledge_id_left;
                     int floor_id = cur_fp->mv.co.common.x0;
@@ -614,7 +614,7 @@ Fighter_GObj* ft_80082E3C(Fighter_GObj* gobj)
                     }
                 }
                 if (cur_fp->facing_dir < 0.0f &&
-                    (fp->coll_data.env_flags & MPCOLL_FLAGS_B25))
+                    (fp->coll_data.env_flags & Collide_RightLedgeGrab))
                 {
                     int r4 = fp->coll_data.ledge_id_right;
                     int floor_id = cur_fp->mv.co.common.x0;
@@ -968,7 +968,7 @@ static inline bool ft_80083CE4_inline(Fighter_GObj* gobj,
         return false;
     }
 
-    if (coll->env_flags & MPCOLL_UNK) {
+    if (coll->env_flags & Collide_FloorMask) {
         return true;
     } else {
         return false;
@@ -1127,9 +1127,9 @@ void ft_800845B4(Fighter_GObj* gobj)
     if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         if (((fp->facing_dir < 0.0F) &&
-             (fp->coll_data.env_flags & MPCOLL_FLAGS_B29)) ||
+             (fp->coll_data.env_flags & Collide_RightLedgeSlip)) ||
             ((fp->facing_dir > 0.0F) &&
-             (fp->coll_data.env_flags & MPCOLL_FLAGS_B28)))
+             (fp->coll_data.env_flags & Collide_LeftLedgeSlip)))
         {
             ftCo_8009F39C(gobj);
             return;
@@ -1195,9 +1195,9 @@ void ft_800848DC(Fighter_GObj* gobj, HSD_GObjEvent cb)
     if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         if ((fp->facing_dir < 0.0F &&
-             fp->coll_data.env_flags & MPCOLL_FLAGS_B29) ||
+             fp->coll_data.env_flags & Collide_RightLedgeSlip) ||
             (fp->facing_dir > 0.0F &&
-             fp->coll_data.env_flags & MPCOLL_FLAGS_B28))
+             fp->coll_data.env_flags & Collide_LeftLedgeSlip))
         {
             ftCo_8009F39C(gobj);
             return;

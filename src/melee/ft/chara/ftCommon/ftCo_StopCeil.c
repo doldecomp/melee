@@ -18,7 +18,7 @@
 
 bool ftCo_8009EF68(Fighter_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->coll_data.env_flags & MPCOLL_FLAGS_B14) {
+    if (GET_FIGHTER(gobj)->coll_data.env_flags & Collide_CeilingHug) {
         ftCo_8009EFA4(gobj);
         return true;
     }

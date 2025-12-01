@@ -92,8 +92,8 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
     getAccelAndTarget(fp, &accel, &target_vel);
 
     if (!target_vel) {
-        ftCommon_ApplyFrictionGround(fp, co_attrs->gr_friction *
-                                  p_ftCommonData->x60_someFrictionMul);
+        ftCommon_ApplyFrictionGround(
+            fp, co_attrs->gr_friction * p_ftCommonData->x60_someFrictionMul);
     } else if (fp->mv.co.turnrun.accel_mul * accel < 0) {
         if (accel > 0) {
             if (fp->gr_vel + accel > target_vel) {
@@ -131,7 +131,7 @@ void ftCo_TurnRun_Coll(Fighter_GObj* gobj)
     }
     var_r4 = true;
     env_flags = GET_FIGHTER(gobj)->coll_data.env_flags;
-    if (!(env_flags & MPCOLL_FLAGS_B20) && !(env_flags & MPCOLL_FLAGS_B21)) {
+    if (!(env_flags & Collide_LeftEdge) && !(env_flags & Collide_RightEdge)) {
         var_r4 = false;
     }
     if (var_r4) {

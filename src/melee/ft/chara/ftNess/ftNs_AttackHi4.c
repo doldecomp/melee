@@ -284,7 +284,7 @@ bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj)
         sp20.y += fp->x34_scale.y;
         sp14.y += -1.0f * fp->x34_scale.y;
         if ((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp20, &sp14, 1.5f) &
-             MPCOLL_GRPUSH) != 0)
+             Collide_FloorPush) != 0)
         {
             return true;
         }
@@ -701,7 +701,7 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
                  sp18.y += fighter_data2->x34_scale.y,
                  sp24.y += -1.0f * fighter_data2->x34_scale.y,
                  (((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp18, &sp24, 1.5f) &
-                    MPCOLL_GRPUSH) == 0) == 0)))
+                    Collide_FloorPush) == 0) == 0)))
             {
                 phi_r0 = true;
             } else {

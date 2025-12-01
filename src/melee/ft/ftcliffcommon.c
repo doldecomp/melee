@@ -59,7 +59,7 @@ void ftCliffCommon_80081370(Fighter_GObj* gobj)
         float facing_dir;
         {
             float ledge_dir;
-            if (fp->coll_data.env_flags & MPCOLL_FLAGS_B24) {
+            if (fp->coll_data.env_flags & Collide_LeftLedgeGrab) {
                 ledge_dir = +1;
             } else {
                 ledge_dir = -1;
