@@ -255,16 +255,16 @@ bool itLgunbeam_UnkMotion0_Coll(HSD_GObj* gobj)
         ip->x378_itemColl.ecb_source.back = 3.0f;
         it_8026D9A0(gobj);
 
-        if (ip->x378_itemColl.env_flags & 0x18000) {
+        if (ip->x378_itemColl.env_flags & Collide_FloorMask) {
             flags |= 1;
         }
-        if (ip->x378_itemColl.env_flags & 0x6000) {
+        if (ip->x378_itemColl.env_flags & Collide_CeilingMask) {
             flags |= 2;
         }
-        if (ip->x378_itemColl.env_flags & 0x3F) {
+        if (ip->x378_itemColl.env_flags & Collide_LeftWallMask) {
             flags |= 4;
         }
-        if (ip->x378_itemColl.env_flags & 0xFC0) {
+        if (ip->x378_itemColl.env_flags & Collide_RightWallMask) {
             flags |= 8;
         }
         if (flags) {

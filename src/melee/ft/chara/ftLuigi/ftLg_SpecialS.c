@@ -690,9 +690,8 @@ void ftLg_SpecialAirS2_Coll(HSD_GObj* gobj)
     {
         u32 env_flags = coll_data->env_flags;
 
-        /// @todo Named flags
-        if ((env_flags & Collide_LeftWallMask) ||
-            (env_flags & Collide_RightWallMask))
+        if (env_flags & Collide_LeftWallMask ||
+            env_flags & Collide_RightWallMask)
         {
             ftLg_SpecialAirSEnd_Enter(gobj);
         }

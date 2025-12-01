@@ -895,7 +895,7 @@ s32 it_802A3D90(ItemLink* item_link)
         item_link->flag1 = 0;
     }
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
@@ -938,14 +938,16 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
                 if ((mp_island->x8.x > item_link->pos.x) &&
                     (mp_island->x8.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
             }
         }
@@ -955,9 +957,9 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
     } else {
         item_link->flag1 = mpColl_800471F8(coll);
     }
-    if (coll->env_flags & 0x18000) {
+    if (coll->env_flags & Collide_FloorMask) {
         coll->cur_pos.x = item_link->pos.x;
-    } else if ((coll->env_flags & 0xFFF) && (var_r29 != 0) &&
+    } else if (coll->env_flags & Collide_WallMask && (var_r29 != 0) &&
                (item_link->prev != NULL) &&
                (item_link->next->pos.y < item_link->pos.y))
     {
@@ -972,7 +974,7 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
         item_link->flag2 = 1;
     }
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 s32 it_802A40D0(ItemLink* item_link, f32 arg8)
@@ -1012,14 +1014,16 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
                 if ((mp_island->x8.x > item_link->pos.x) &&
                     (mp_island->x8.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
             }
         }
@@ -1029,9 +1033,9 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
     } else {
         item_link->flag1 = mpColl_800471F8(coll);
     }
-    if (coll->env_flags & 0x18000) {
+    if (coll->env_flags & Collide_FloorMask) {
         coll->cur_pos.x = item_link->pos.x;
-    } else if ((coll->env_flags & 0xFFF) && (var_r29 != 0) &&
+    } else if ((coll->env_flags & Collide_WallMask) && (var_r29 != 0) &&
                (item_link->prev != NULL) &&
                (item_link->next->pos.y < item_link->pos.y))
     {
@@ -1039,7 +1043,7 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
     }
     flag_2 = item_link->flag0;
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 s32 it_802A42F4(ItemLink* item_link, f32 arg8)
@@ -1055,7 +1059,7 @@ s32 it_802A42F4(ItemLink* item_link, f32 arg8)
         item_link->flag1 = 0;
     }
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 void it_802A43B8(ItemLink* item_link)
@@ -1242,9 +1246,9 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
     link_0->pos.y += link_0->x8_vel.y;
     link_0->pos.z += link_0->x8_vel.z;
     flag = it_802A40D0(link_0, attr->x30);
-    if (flag & 0x3F) {
+    if (flag & Collide_LeftWallMask) {
         link_0->unk = link_0->x30_collData.left_facing_wall.index;
-    } else if (flag & 0xFC0) {
+    } else if (flag & Collide_RightWallMask) {
         link_0->unk = link_0->x30_collData.right_facing_wall.index;
     }
 
@@ -1272,13 +1276,13 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
                 link_1->flag0 = 1;
                 link_1->x30_collData.cur_pos = link_1->pos;
                 link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
-                if (flag & 0xFFF) {
+                if (flag & Collide_WallMask) {
                     return 1;
                 }
-                if (flag & 0x6000) {
+                if (flag & Collide_CeilingMask) {
                     return 3;
                 }
-                if (flag & 0x18000) {
+                if (flag & Collide_FloorMask) {
                     return 4;
                 }
                 return 0;
@@ -1315,7 +1319,7 @@ s32 it_802A5320(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
     link_0->pos.x += link_0->x8_vel.x;
     link_0->pos.y += link_0->x8_vel.y;
     link_0->pos.z += link_0->x8_vel.z;
-    temp_r30 = it_802A40D0(link_0, attr->x30) & 0xFFF;
+    temp_r30 = it_802A40D0(link_0, attr->x30) & Collide_WallMask;
     var_r29 = 0;
 
     while (link_1 != NULL) {

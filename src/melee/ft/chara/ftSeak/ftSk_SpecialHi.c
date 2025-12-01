@@ -285,7 +285,8 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
     if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {
         temp_r3 = collData->env_flags;
 
-        if ((temp_r3 & 0x3F) || (temp_r3 & 0xFC0)) {
+        if (temp_r3 & Collide_LeftWallMask || temp_r3 & Collide_RightWallMask)
+        {
             ftCommon_8007D60C((Fighter*) fp);
             ftSk_SpecialHi_80113F68(gobj);
             return;
@@ -295,7 +296,8 @@ void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
     }
     temp_r3_2 = collData->env_flags;
 
-    if ((temp_r3_2 & 0x3F) || (temp_r3_2 & 0xFC0)) {
+    if (temp_r3_2 & Collide_LeftWallMask || temp_r3_2 & Collide_RightWallMask)
+    {
         ftSk_SpecialHi_80113EAC(gobj);
     }
 }
@@ -346,20 +348,20 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
         (void) 1.0f;
         (void) S32_TO_F32;
         (void) deg_to_rad;
-        if ((collData->env_flags & 0x6000) &&
+        if ((collData->env_flags & Collide_CeilingMask) &&
             (lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel) >
              (deg_to_rad * (90.0f + (f32) attr->x50))))
         {
             ftSk_SpecialHi_80113F68(gobj);
         }
-        if ((collData->env_flags & 0x3F) &&
+        if ((collData->env_flags & Collide_LeftWallMask) &&
             (lbVector_AngleXY(&collData->left_facing_wall.normal,
                               &fp->self_vel) >
              (deg_to_rad * (90.0f + (f32) attr->x50))))
         {
             ftSk_SpecialHi_80113F68(gobj);
         }
-        if ((collData->env_flags & 0xFC0) &&
+        if ((collData->env_flags & Collide_RightWallMask) &&
             (lbVector_AngleXY(&collData->right_facing_wall.normal,
                               &fp->self_vel) >
              (deg_to_rad * (90.0f + (f32) attr->x50))))

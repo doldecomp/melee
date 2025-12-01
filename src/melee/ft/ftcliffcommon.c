@@ -32,7 +32,7 @@ bool ftCliffCommon_80081298(Fighter_GObj* gobj)
     if (fp->input.lstick.y <= -p_ftCommonData->x480) {
         return false;
     }
-    if (((fp->coll_data.env_flags & 0x03000000) != 0) &&
+    if (fp->coll_data.env_flags & Collide_LedgeGrabMask &&
         (((fp->x2228_b2 & 1) == 0)))
     {
         other_gobj = ft_80082E3C(gobj);

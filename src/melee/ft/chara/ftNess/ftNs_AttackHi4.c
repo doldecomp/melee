@@ -137,19 +137,19 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
         s32 retval;
         /// @todo Define flags.
         retval = 0;
-        if ((coll.env_flags & 98304) != 0) {
+        if (coll.env_flags & Collide_FloorMask) {
             retval |= 32768;
         }
 
-        if ((coll.env_flags & 63) != 0) {
+        if (coll.env_flags & Collide_LeftWallMask) {
             retval |= 1;
         }
 
-        if ((coll.env_flags & 4032) != 0) {
+        if (coll.env_flags & Collide_RightWallMask) {
             retval |= 64;
         }
 
-        if ((coll.env_flags & 24576) != 0) {
+        if (coll.env_flags & Collide_CeilingMask) {
             retval |= 8192;
         }
 

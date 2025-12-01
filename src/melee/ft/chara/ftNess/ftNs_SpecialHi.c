@@ -342,7 +342,7 @@ static void ftNs_SpecialAirHi_CollisionModVel(
     while (fp->mv.ns.specialhi.aerialVel > 2 * M_PI) {
         fp->mv.ns.specialhi.aerialVel -= 2 * M_PI;
     }
-    if ((coll_data->env_flags & 63) != 0) {
+    if (coll_data->env_flags & Collide_LeftWallMask) {
         phi_f1 = atan2f(coll_data->left_facing_wall.normal.y,
                         coll_data->left_facing_wall.normal.x);
         while (phi_f1 < 0.0f) {
@@ -367,7 +367,7 @@ static void ftNs_SpecialAirHi_CollisionModVel(
             phi_f1 -= M_PI / 2;
         }
     }
-    if ((coll_data->env_flags & 4032) != 0) {
+    if (coll_data->env_flags & Collide_RightWallMask) {
         phi_f1 = atan2f(coll_data->right_facing_wall.normal.y,
                         coll_data->right_facing_wall.normal.x);
         phi_f3 = M_PI + phi_f1;
@@ -1466,7 +1466,9 @@ void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
     if (ft_80082708(gobj) == false) {
         u32 env_flags = fp0->coll_data.env_flags;
 
-        if ((env_flags & 0b111111) || (env_flags & 0b111111 << 6)) {
+        if (env_flags & Collide_LeftWallMask ||
+            env_flags & Collide_RightWallMask)
+        {
             ftCommon_8007D60C(fp0);
             {
                 Fighter* fp1 = gobj->user_data;
@@ -1505,8 +1507,9 @@ void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
     {
         u32 env_flags = fp0->coll_data.env_flags;
 
-        if ((env_flags & 0b11 << 13) || (env_flags & 0b111111) ||
-            (env_flags & 0b111111 << 6))
+        if (env_flags & Collide_CeilingMask ||
+            env_flags & Collide_LeftWallMask ||
+            env_flags & Collide_RightWallMask)
         {
             fp0->gr_vel = 0;
             {
@@ -1707,7 +1710,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 
     ecbFlag = fighter_r31->coll_data.env_flags;
-    if ((ecbFlag & 24576) != 0) {
+    if (ecbFlag & Collide_CeilingMask) {
         if (lbVector_Angle(&fighter_r31->coll_data.ceiling.normal,
                            &fighter_r31->self_vel) >
             (0.01745329238474369f *
@@ -1742,7 +1745,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
 
     } else {
-        if ((ecbFlag & 63) != 0) {
+        if (ecbFlag & Collide_LeftWallMask) {
             if (lbVector_Angle(&fighter_r31->coll_data.left_facing_wall.normal,
                                &fighter_r31->self_vel) >
                 (0.01745329238474369f *
@@ -1783,7 +1786,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
             ftNs_SpecialAirHi_CollisionModVel(gobj, &fighter_r31->coll_data);
             return;
         }
-        if ((ecbFlag & 4032) != 0) {
+        if (ecbFlag & Collide_RightWallMask) {
             if (lbVector_Angle(
                     &fighter_r31->coll_data.right_facing_wall.normal,
                     &fighter_r31->self_vel) >

@@ -68,6 +68,7 @@ typedef u32 HSD_Pad;
 #define Collide_Edge 0x800000
 #define Collide_LeftLedgeGrab 0x1000000
 #define Collide_RightLedgeGrab 0x2000000
+#define Collide_LedgeGrabMask (Collide_LeftLedgeGrab | Collide_RightLedgeGrab)
 #define Collide_LeftLedgeSlip 0x10000000
 #define Collide_RightLedgeSlip 0x20000000
 

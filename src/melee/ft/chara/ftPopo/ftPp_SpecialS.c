@@ -579,9 +579,9 @@ void ftPp_SpecialS1_Coll(Fighter_GObj* gobj)
     PAD_STACK(0x18);
     if (fp->gr_vel != 0.0F) {
         if (fp->gr_vel > 0.0F) {
-            var_r0 = fp->coll_data.env_flags & 0x3F;
+            var_r0 = fp->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = fp->coll_data.env_flags & 0xFC0;
+            var_r0 = fp->coll_data.env_flags & Collide_RightWallMask;
         }
     }
     if (var_r0) {
@@ -611,9 +611,9 @@ void ftPp_SpecialS2_Coll(Fighter_GObj* gobj)
     PAD_STACK(0x18);
     if (temp_r28->gr_vel != 0.0F) {
         if (temp_r28->gr_vel > 0.0F) {
-            var_r0 = temp_r28->coll_data.env_flags & 0x3F;
+            var_r0 = temp_r28->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = temp_r28->coll_data.env_flags & 0xFC0;
+            var_r0 = temp_r28->coll_data.env_flags & Collide_RightWallMask;
         }
     }
     if (var_r0) {
@@ -656,15 +656,15 @@ void ftPp_SpecialAirS1_Coll(Fighter_GObj* gobj)
     PAD_STACK(0x20);
 
     temp_r3 = ft_800824A0(gobj, &ftNn_Init_803CD820);
-    if ((fp->coll_data.env_flags & 0x6000) == 1) {
+    if ((fp->coll_data.env_flags & Collide_CeilingMask) == 1) {
         fp->self_vel.y = 0.0F;
     }
     var_r0 = false;
     if (fp->self_vel.x != 0.0F) {
         if (fp->self_vel.x > 0.0F) {
-            var_r0 = fp->coll_data.env_flags & 0x3F;
+            var_r0 = fp->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = fp->coll_data.env_flags & 0xFC0;
+            var_r0 = fp->coll_data.env_flags & Collide_RightWallMask;
         }
     }
     if (var_r0) {
@@ -692,15 +692,15 @@ void ftPp_SpecialAirS2_Coll(Fighter_GObj* gobj)
     bool temp_r3 = ft_800824A0(gobj, &ftNn_Init_803CD820);
     bool var_r0;
     PAD_STACK(0x20);
-    if ((fp->coll_data.env_flags & 0x6000) == 1) {
+    if ((fp->coll_data.env_flags & Collide_CeilingMask) == 1) {
         fp->self_vel.y = 0.0F;
     }
     var_r0 = false;
     if (fp->self_vel.x != 0.0F) {
         if (fp->self_vel.x > 0.0F) {
-            var_r0 = fp->coll_data.env_flags & 0x3F;
+            var_r0 = fp->coll_data.env_flags & Collide_LeftWallMask;
         } else {
-            var_r0 = fp->coll_data.env_flags & 0xFC0;
+            var_r0 = fp->coll_data.env_flags & Collide_RightWallMask;
         }
     }
     if (var_r0) {

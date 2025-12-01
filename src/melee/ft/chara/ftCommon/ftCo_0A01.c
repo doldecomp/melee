@@ -1215,12 +1215,12 @@ bool ftCo_800A3234(Fighter* fp)
         return false;
     }
     if (fp->facing_dir > 0.0f) {
-        if (fp->coll_data.env_flags & 0x3F) {
+        if (fp->coll_data.env_flags & Collide_LeftWallMask) {
             var_r0 = true;
         } else {
             var_r0 = false;
         }
-    } else if (fp->coll_data.env_flags & 0xFC0) {
+    } else if (fp->coll_data.env_flags & Collide_RightWallMask) {
         var_r0 = true;
     } else {
         var_r0 = false;
