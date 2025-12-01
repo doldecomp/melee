@@ -436,9 +436,9 @@ bool ftCo_800A0FB0(Vec3* vec_out, int* line_id_out, u32* flags_out,
 {
     *line_id_out = -1;
     {
-        int ret = mpLib_8004F008_Floor(arg7, arg8, arg9, arg10, arg11, vec_out,
-                                       line_id_out, flags_out, normal_out,
-                                       arg4, arg5, arg6, NULL, NULL);
+        int ret =
+            mpCheckFloor(arg7, arg8, arg9, arg10, arg11, vec_out, line_id_out,
+                         flags_out, normal_out, arg4, arg5, arg6, NULL, NULL);
         if (ret && ftCo_800A1B38(*line_id_out)) {
             return false;
         }
@@ -715,13 +715,13 @@ bool ftCo_800A1BA8(Fighter* fp)
         int sp10;
         u32 spC;
         if (fp->facing_dir > 0.0) {
-            return mpLib_800509B8_RightWall(
-                fp->cur_pos.x, fp->cur_pos.y, other_fp->cur_pos.x,
-                other_fp->cur_pos.y, &coll_vec, &sp10, &spC, &sp14, -1, -1);
+            return mpCheckRightWall(fp->cur_pos.x, fp->cur_pos.y,
+                                    other_fp->cur_pos.x, other_fp->cur_pos.y,
+                                    &coll_vec, &sp10, &spC, &sp14, -1, -1);
         }
-        return mpLib_800501CC_LeftWall(
-            fp->cur_pos.x, fp->cur_pos.y, other_fp->cur_pos.x,
-            other_fp->cur_pos.y, &coll_vec, &sp10, &spC, &sp14, -1, -1);
+        return mpCheckLeftWall(fp->cur_pos.x, fp->cur_pos.y,
+                               other_fp->cur_pos.x, other_fp->cur_pos.y,
+                               &coll_vec, &sp10, &spC, &sp14, -1, -1);
     }
 }
 
@@ -2395,9 +2395,9 @@ void ftCo_800A9904(Fighter* fp)
         }
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
         ftCo_800B463C(fp, CpuCmd_Done);
-    } else if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y,
-                                      temp_r31->x54.x, temp_r31->x54.y, &sp4C,
-                                      &sp3C, &sp38, &sp40, -1, -1))
+    } else if (mpCheckCeiling(fp->cur_pos.x, fp->cur_pos.y, temp_r31->x54.x,
+                              temp_r31->x54.y, &sp4C, &sp3C, &sp38, &sp40, -1,
+                              -1))
     {
         ftCo_800B46B8(fp, CpuCmd_LstickXTowardDestination, 0x81);
         ftCo_800B46B8(fp, CpuCmd_SetLstickY, 0);
@@ -2920,15 +2920,13 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y, sp44.x,
-                                       sp44.y, &sp38, &sp28, &sp24, &sp2C, -1,
-                                       -1))
+            if (mpCheckCeiling(fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y,
+                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
             {
                 continue;
             }
-            if (mpLib_800509B8_RightWall(fp->cur_pos.x, fp->cur_pos.y, sp44.x,
-                                         sp44.y, &sp38, &sp28, &sp24, &sp2C,
-                                         -1, -1))
+            if (mpCheckRightWall(fp->cur_pos.x, fp->cur_pos.y, sp44.x, sp44.y,
+                                 &sp38, &sp28, &sp24, &sp2C, -1, -1))
             {
                 continue;
             }
@@ -2955,15 +2953,13 @@ bool ftCo_800AAF48(Fighter* fp)
             if (dy < 0.0F) {
                 continue;
             }
-            if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y, spC.x,
-                                       spC.y, &sp38, &sp28, &sp24, &sp2C, -1,
-                                       -1))
+            if (mpCheckCeiling(fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y,
+                               &sp38, &sp28, &sp24, &sp2C, -1, -1))
             {
                 continue;
             }
-            if (mpLib_800501CC_LeftWall(fp->cur_pos.x, fp->cur_pos.y, spC.x,
-                                        spC.y, &sp38, &sp28, &sp24, &sp2C, -1,
-                                        -1))
+            if (mpCheckLeftWall(fp->cur_pos.x, fp->cur_pos.y, spC.x, spC.y,
+                                &sp38, &sp28, &sp24, &sp2C, -1, -1))
             {
                 continue;
             }
@@ -3084,10 +3080,10 @@ void ftCo_800AB224(Fighter* fp)
             var_f31 = lb_8000D008(temp_f1, var_f2);
         }
         if (var_f31 > 0.6108652334660292) {
-            if (mpLib_8004F8A4_Ceiling(
-                    fp->coll_data.cur_pos.x, fp->coll_data.cur_pos.y,
-                    fp->coll_data.cur_pos.x, fp->x1A88.x54.y, &sp24, &sp3C,
-                    &sp40, &sp30, -1, -1))
+            if (mpCheckCeiling(fp->coll_data.cur_pos.x,
+                               fp->coll_data.cur_pos.y,
+                               fp->coll_data.cur_pos.x, fp->x1A88.x54.y, &sp24,
+                               &sp3C, &sp40, &sp30, -1, -1))
             {
                 var_r0_6 = 1;
             } else {

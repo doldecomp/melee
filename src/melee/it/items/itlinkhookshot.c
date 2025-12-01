@@ -677,12 +677,12 @@ static inline bool it_802A3630_inline(Item* item, Vec3* cur_pos, Vec3* pos)
     item_link = item->xDD4_itemVar.linkhookshot.x0;
     item_link_pos = &item_link->pos;
 
-    if (mpLib_800524DC(0, 0, 0, 0, -1, -1, pos->x, pos->y, item_link->pos.x,
-                       item_link->pos.y) != 0)
+    if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, pos->x, pos->y, item_link->pos.x,
+                        item_link->pos.y) != 0)
     {
         return 1;
-    } else if (mpLib_800524DC(0, 0, 0, 0, -1, -1, cur_pos->x, cur_pos->y,
-                              item_link_pos->x, item_link_pos->y) != 0)
+    } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, cur_pos->x, cur_pos->y,
+                               item_link_pos->x, item_link_pos->y) != 0)
     {
         return 1;
     } else {
@@ -807,12 +807,13 @@ void it_802A39FC(Item_GObj* gobj)
 
     item_link = item->xDD4_itemVar.linkhookshot.x0;
 
-    if (mpLib_800524DC(0, 0, 0, 0, -1, -1, pos.x, pos.y, item_link->pos.x,
-                       item_link->pos.y) != 0)
+    if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, pos.x, pos.y, item_link->pos.x,
+                        item_link->pos.y) != 0)
     {
         var_r0 = 1;
-    } else if (mpLib_800524DC(0, 0, 0, 0, -1, -1, fp->cur_pos.x, fp->cur_pos.y,
-                              item_link->pos.x, item_link->pos.y) != 0)
+    } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, fp->cur_pos.x,
+                               fp->cur_pos.y, item_link->pos.x,
+                               item_link->pos.y) != 0)
     {
         var_r0 = 1;
     } else {

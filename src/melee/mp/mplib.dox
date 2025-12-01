@@ -19,19 +19,19 @@ UNK_T mpLib_80056AC4(void);
 UNK_T mpLib_80056A54(void);
 UNK_T mpLib_80056AFC(void);
 
-bool mpLib_800501CC_LeftWall(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
+bool mpCheckLeftWall(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
                     f32 right_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
                     u32);
 
 UNK_T mpLib_80056A8C(void);
 UNK_T mpLib_80056A1C(void);
 
-bool mpLib_800509B8_RightWall(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
+bool mpCheckRightWall(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
                     f32 left_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32, u32);
 
 u32 mpLineGetFlags(enum_t);
 
-s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
+s32 mpCheckMultiple(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
 void mpLib_80053DA4_Floor(int ledge_id, Vec3*);
 void mpLib_80053ECC_Floor(int ledge_id, Vec3*);
 void mpFloorGetRight(s32, Vec3*);
@@ -61,7 +61,7 @@ void mpJointListAdd(s32);
 void mpLib_80057BC0(s32);
 bool mpLinesConnected(s32, s32);
 s32 mpLinePrevNonFloor(int idx);
-bool mpLib_8004F008_Floor(Vec3*, int, int, int, int, int, int, int, float, float,
+bool mpCheckFloor(Vec3*, int, int, int, int, int, int, int, float, float,
                     float, float, float);
 s32 mpLeftWallGetTop(int, float*);
 bool mpLib_8004DD90_Floor(int idx, float*, float*, UNK_T, Vec3* normal);
@@ -74,10 +74,10 @@ enum_t mpLineGetKind(int);
 void mpUncheckBounding(void);
 enum_t mpLib_8004E090_Ceiling(int idx, Vec3*, f32*, u32*, Vec3* normal);
 void mpLib_800569EC(void);
-/* 04F8A4 */ UNK_RET mpLib_8004F8A4_Ceiling(UNK_PARAMS);
-/* 052508 */ UNK_RET mpLib_80052508(UNK_PARAMS);
+/* 04F8A4 */ UNK_RET mpCheckCeiling(UNK_PARAMS);
+/* 052508 */ UNK_RET mpCheckAll(UNK_PARAMS);
 /* 054DFC */ void mpLineGetNormal(enum_t, Vec3*);
-/* 0524DC */ bool mpLib_800524DC(int, int, int, int, int, int, float x,
+/* 0524DC */ bool mpCheckAllRemap(int, int, int, int, int, int, float x,
                                  float y, float z, float);
 
 #endif

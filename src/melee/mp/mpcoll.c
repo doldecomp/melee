@@ -1020,9 +1020,8 @@ void mpColl_800439FC(CollData* coll)
     // recalculate ceiling direction from its normal
     f1 = (coll->ceiling.normal.y * right_dx) + right_x;
     f2 = -(coll->ceiling.normal.x * right_dx) + right_y;
-    if (!mpLib_800501CC_LeftWall(f1, f2, right_x, right_y, &coll->contact,
-                                 NULL, NULL, NULL, coll->joint_id_skip,
-                                 coll->joint_id_only))
+    if (!mpCheckLeftWall(f1, f2, right_x, right_y, &coll->contact, NULL, NULL,
+                         NULL, coll->joint_id_skip, coll->joint_id_only))
     {
         return;
     }
@@ -1057,9 +1056,8 @@ void mpColl_80043ADC(CollData* coll)
     // recalculate ceiling direction from its normal
     f1 = -(coll->ceiling.normal.y * left_dx) + left_x;
     f2 = (coll->ceiling.normal.x * left_dx) + left_y;
-    if (!mpLib_800509B8_RightWall(f1, f2, left_x, left_y, &coll->contact, NULL,
-                                  NULL, NULL, coll->joint_id_skip,
-                                  coll->joint_id_only))
+    if (!mpCheckRightWall(f1, f2, left_x, left_y, &coll->contact, NULL, NULL,
+                          NULL, coll->joint_id_skip, coll->joint_id_only))
     {
         return;
     }
@@ -1086,9 +1084,9 @@ bool mpColl_80043BBC(CollData* coll, int* line_id_out)
     float right_y = coll->cur_pos.y + coll->ecb.right.y;
     int wall_id;
 
-    if (mpLib_800501CC_LeftWall(bottom_x, bottom_y, right_x, right_y, NULL,
-                                &wall_id, NULL, NULL, coll->joint_id_skip,
-                                coll->joint_id_only) &&
+    if (mpCheckLeftWall(bottom_x, bottom_y, right_x, right_y, NULL, &wall_id,
+                        NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only) &&
         wall_id != line_id)
     {
         *line_id_out = wall_id;
@@ -1114,9 +1112,9 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
         // recalculate floor direction from its normal
         float floor_x = -(coll->floor.normal.y * right_dx) + pos.x;
         float floor_y = (coll->floor.normal.x * right_dx) + pos.y;
-        if (mpLib_800501CC_LeftWall(floor_x, floor_y, pos.x, pos.y,
-                                    &coll->contact, &wall_id, NULL, NULL,
-                                    coll->joint_id_skip, coll->joint_id_only))
+        if (mpCheckLeftWall(floor_x, floor_y, pos.x, pos.y, &coll->contact,
+                            &wall_id, NULL, NULL, coll->joint_id_skip,
+                            coll->joint_id_only))
         {
             pos.x = coll->contact.x - right_dx;
             if (ignore_bottom) {
@@ -1138,10 +1136,9 @@ void mpColl_80043C6C(CollData* coll, int line_id, bool ignore_bottom)
         f2 = pos.y;
         pos.x = -((2.0F * right_dx) - f1);
         pos.y = -((2.0F * (coll->ecb.right.y - coll->ecb.bottom.y)) - f2);
-        if (mpLib_8004F008_Floor(f1, f2, pos.x, pos.y, 0.0F, &coll->contact,
-                                 NULL, NULL, NULL, coll->floor_skip,
-                                 coll->joint_id_skip, coll->joint_id_only,
-                                 NULL, NULL))
+        if (mpCheckFloor(f1, f2, pos.x, pos.y, 0.0F, &coll->contact, NULL,
+                         NULL, NULL, coll->floor_skip, coll->joint_id_skip,
+                         coll->joint_id_only, NULL, NULL))
         {
             pos.x = coll->contact.x;
             if (ignore_bottom) {
@@ -1169,9 +1166,9 @@ bool mpColl_80043E90(CollData* coll, int* line_id_out)
     float left_y = coll->cur_pos.y + coll->ecb.left.y;
     int wall_id;
 
-    if (mpLib_800509B8_RightWall(bottom_x, bottom_y, left_x, left_y, NULL,
-                                 &wall_id, NULL, NULL, coll->joint_id_skip,
-                                 coll->joint_id_only) &&
+    if (mpCheckRightWall(bottom_x, bottom_y, left_x, left_y, NULL, &wall_id,
+                         NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only) &&
         wall_id != line_id)
     {
         *line_id_out = wall_id;
@@ -1197,9 +1194,9 @@ void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
         // recalculate floor direction from its normal
         float floor_x = (coll->floor.normal.y * left_dx) + pos.x;
         float floor_y = -(coll->floor.normal.x * left_dx) + pos.y;
-        if (mpLib_800509B8_RightWall(floor_x, floor_y, pos.x, pos.y,
-                                     &coll->contact, &wall_id, NULL, NULL,
-                                     coll->joint_id_skip, coll->joint_id_only))
+        if (mpCheckRightWall(floor_x, floor_y, pos.x, pos.y, &coll->contact,
+                             &wall_id, NULL, NULL, coll->joint_id_skip,
+                             coll->joint_id_only))
         {
             pos.x = coll->contact.x + left_dx;
             if (ignore_bottom) {
@@ -1222,10 +1219,9 @@ void mpColl_80043F40(CollData* coll, int line_id, bool ignore_bottom)
         // 2.0 * (ecb bottom -> ecb left).normal() + ecb left
         pos.x = 2.0F * left_dx + f1;
         pos.y = -(2.0F * (coll->ecb.left.y - coll->ecb.bottom.y)) + f2;
-        if (mpLib_8004F008_Floor(f1, f2, pos.x, pos.y, 0.0F, &coll->contact,
-                                 NULL, NULL, NULL, coll->floor_skip,
-                                 coll->joint_id_skip, coll->joint_id_only,
-                                 NULL, NULL))
+        if (mpCheckFloor(f1, f2, pos.x, pos.y, 0.0F, &coll->contact, NULL,
+                         NULL, NULL, coll->floor_skip, coll->joint_id_skip,
+                         coll->joint_id_only, NULL, NULL))
         {
             pos.x = coll->contact.x;
             if (ignore_bottom) {
@@ -1291,15 +1287,15 @@ bool mpColl_80044164(CollData* cd, int* p_ledge_id)
         cd->cur_pos.x + cd->ecb.bottom.x < edge.x &&
         cd->cur_pos.y + cd->ecb.bottom.y < edge.y &&
         (cd->cur_pos.y + cd->ecb.bottom.y > cd->contact.y ||
-         ((!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.top.x,
-                           cd->cur_pos.y + cd->ecb.top.y, cd->contact.x,
-                           cd->contact.y, NULL, &line_id, NULL, NULL, 6,
-                           cd->joint_id_skip, cd->joint_id_only) ||
+         ((!mpCheckMultiple(cd->cur_pos.x + cd->ecb.top.x,
+                            cd->cur_pos.y + cd->ecb.top.y, cd->contact.x,
+                            cd->contact.y, NULL, &line_id, NULL, NULL, 6,
+                            cd->joint_id_skip, cd->joint_id_only) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(line_id)) &&
-          (!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.bottom.x,
-                           -2.0F + (cd->cur_pos.y + cd->ecb.bottom.y),
-                           cd->contact.x, cd->contact.y, NULL, &line_id, NULL,
-                           NULL, 6, cd->joint_id_skip, cd->joint_id_only) ||
+          (!mpCheckMultiple(cd->cur_pos.x + cd->ecb.bottom.x,
+                            -2.0F + (cd->cur_pos.y + cd->ecb.bottom.y),
+                            cd->contact.x, cd->contact.y, NULL, &line_id, NULL,
+                            NULL, 6, cd->joint_id_skip, cd->joint_id_only) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(line_id)))))
     {
         if (p_ledge_id != NULL) {
@@ -1363,15 +1359,15 @@ bool mpColl_800443C4(CollData* cd, int* p_ledge_id)
         cd->cur_pos.x + cd->ecb.bottom.x > edge.x &&
         cd->cur_pos.y + cd->ecb.bottom.y < edge.y &&
         (cd->cur_pos.y + cd->ecb.bottom.y > cd->contact.y ||
-         ((!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.top.x,
-                           cd->cur_pos.y + cd->ecb.top.y, cd->contact.x,
-                           cd->contact.y, NULL, &line_id, NULL, NULL, 10,
-                           cd->joint_id_skip, cd->joint_id_only) ||
+         ((!mpCheckMultiple(cd->cur_pos.x + cd->ecb.top.x,
+                            cd->cur_pos.y + cd->ecb.top.y, cd->contact.x,
+                            cd->contact.y, NULL, &line_id, NULL, NULL, 10,
+                            cd->joint_id_skip, cd->joint_id_only) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(line_id)) &&
-          (!mpLib_80051EC8(cd->cur_pos.x + cd->ecb.bottom.x,
-                           -2.0F + (cd->cur_pos.y + cd->ecb.bottom.y),
-                           cd->contact.x, cd->contact.y, NULL, &line_id, NULL,
-                           NULL, 10, cd->joint_id_skip, cd->joint_id_only) ||
+          (!mpCheckMultiple(cd->cur_pos.x + cd->ecb.bottom.x,
+                            -2.0F + (cd->cur_pos.y + cd->ecb.bottom.y),
+                            cd->contact.x, cd->contact.y, NULL, &line_id, NULL,
+                            NULL, 10, cd->joint_id_skip, cd->joint_id_only) ||
            mpJointFromLine(ledge_id) == mpJointFromLine(line_id)))))
     {
         if (p_ledge_id != NULL) {
@@ -1402,13 +1398,13 @@ bool mpColl_80044628_Floor(CollData* coll, bool (*cb)(Fighter_GObj*, int),
     bottom.y = coll->cur_pos.y + coll->ecb.bottom.y;
 
     if (coll->x38 != mpColl_804D64AC) {
-        hit_floor = mpLib_8004F400_Floor(
+        hit_floor = mpCheckFloorRemap(
             prev_bottom.x, prev_bottom.y, bottom.x, bottom.y, 0.0F,
             &coll->contact, &coll->floor.index, &coll->floor.flags,
             &coll->floor.normal, coll->floor_skip, coll->joint_id_skip,
             coll->joint_id_only, cb, gobj);
     } else {
-        hit_floor = mpLib_8004F008_Floor(
+        hit_floor = mpCheckFloor(
             prev_bottom.x, prev_bottom.y, bottom.x, bottom.y, 0.0F,
             &coll->contact, &coll->floor.index, &coll->floor.flags,
             &coll->floor.normal, coll->floor_skip, coll->joint_id_skip,
@@ -1562,12 +1558,12 @@ bool mpColl_80044AD8_Ceiling(CollData* coll, int left_right)
     top.x = coll->cur_pos.x + coll->ecb.top.x;
     top.y = coll->cur_pos.y + coll->ecb.top.y;
     if (coll->x38 != mpColl_804D64AC) {
-        hit_ceiling = mpLib_8004FC2C_Ceiling(
+        hit_ceiling = mpCheckCeilingRemap(
             prev_top.x, prev_top.y, top.x, top.y, &coll->contact,
             &coll->ceiling.index, &coll->ceiling.flags, &coll->ceiling.normal,
             coll->joint_id_skip, coll->joint_id_only);
     } else {
-        hit_ceiling = mpLib_8004F8A4_Ceiling(
+        hit_ceiling = mpCheckCeiling(
             prev_top.x, prev_top.y, top.x, top.y, &coll->contact,
             &coll->ceiling.index, &coll->ceiling.flags, &coll->ceiling.normal,
             coll->joint_id_skip, coll->joint_id_only);
@@ -1654,13 +1650,12 @@ static inline bool mpColl_RightWall_inline2(CollData* coll, float ax, float ay,
                                             int* line_id_out)
 {
     if (coll->x38 != mpColl_804D64AC) {
-        return mpLib_80050D68_RightWall(ax, ay, bx, by, NULL, line_id_out,
-                                        NULL, NULL, coll->joint_id_skip,
-                                        coll->joint_id_only);
+        return mpCheckRightWallRemap(ax, ay, bx, by, NULL, line_id_out, NULL,
+                                     NULL, coll->joint_id_skip,
+                                     coll->joint_id_only);
     }
-    return mpLib_800509B8_RightWall(ax, ay, bx, by, NULL, line_id_out, NULL,
-                                    NULL, coll->joint_id_skip,
-                                    coll->joint_id_only);
+    return mpCheckRightWall(ax, ay, bx, by, NULL, line_id_out, NULL, NULL,
+                            coll->joint_id_skip, coll->joint_id_only);
 }
 
 bool mpColl_80044E10_RightWall(CollData* coll)
@@ -1719,9 +1714,9 @@ bool mpColl_80044E10_RightWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.bottom.x;
     vertical_y = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800509B8_RightWall(vertical_x, vertical_y, left_x, left_y, NULL,
-                                 &line_id, NULL, NULL, coll->joint_id_skip,
-                                 coll->joint_id_only))
+    if (mpCheckRightWall(vertical_x, vertical_y, left_x, left_y, NULL,
+                         &line_id, NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only))
     {
         mpColl_RightWall_inline(line_id);
         hit_wall = true;
@@ -1744,9 +1739,9 @@ bool mpColl_80044E10_RightWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.top.x;
     vertical_y = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800509B8_RightWall(vertical_x, vertical_y, left_x, left_y, NULL,
-                                 &line_id, NULL, NULL, coll->joint_id_skip,
-                                 coll->joint_id_only))
+    if (mpCheckRightWall(vertical_x, vertical_y, left_x, left_y, NULL,
+                         &line_id, NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only))
     {
         mpColl_RightWall_inline(line_id);
         hit_wall = true;
@@ -1978,13 +1973,12 @@ static inline bool mpColl_LeftWall_inline2(CollData* coll, float ax, float ay,
                                            int* line_id_out)
 {
     if (coll->x38 != mpColl_804D64AC) {
-        return mpLib_8005057C_LeftWall(ax, ay, bx, by, NULL, line_id_out, NULL,
-                                       NULL, coll->joint_id_skip,
-                                       coll->joint_id_only);
+        return mpCheckLeftWallRemap(ax, ay, bx, by, NULL, line_id_out, NULL,
+                                    NULL, coll->joint_id_skip,
+                                    coll->joint_id_only);
     }
-    return mpLib_800501CC_LeftWall(ax, ay, bx, by, NULL, line_id_out, NULL,
-                                   NULL, coll->joint_id_skip,
-                                   coll->joint_id_only);
+    return mpCheckLeftWall(ax, ay, bx, by, NULL, line_id_out, NULL, NULL,
+                           coll->joint_id_skip, coll->joint_id_only);
 }
 
 bool mpColl_80045B74_LeftWall(CollData* coll)
@@ -2043,9 +2037,9 @@ bool mpColl_80045B74_LeftWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.bottom.x;
     vertical_y = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800501CC_LeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
-                                &line_id, NULL, NULL, coll->joint_id_skip,
-                                coll->joint_id_only))
+    if (mpCheckLeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
+                        &line_id, NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only))
     {
         mpColl_LeftWall_inline(line_id);
         hit_wall = true;
@@ -2067,9 +2061,9 @@ bool mpColl_80045B74_LeftWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.top.x;
     vertical_y = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800501CC_LeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
-                                &line_id, NULL, NULL, coll->joint_id_skip,
-                                coll->joint_id_only))
+    if (mpCheckLeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
+                        &line_id, NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only))
     {
         mpColl_LeftWall_inline(line_id);
         hit_wall = true;
@@ -2307,9 +2301,9 @@ static inline void mpCollCeilingInline(CollData* coll)
     top_y = coll->cur_pos.y + coll->ecb.top.y;
     side_x = coll->cur_pos.x + coll->ecb.right.x;
     side_y = coll->cur_pos.y + coll->ecb.right.y;
-    if (mpLib_800501CC_LeftWall(top_x, top_y, side_x, side_y, NULL,
-                                &left_wall_id, NULL, NULL, coll->joint_id_skip,
-                                coll->joint_id_only) &&
+    if (mpCheckLeftWall(top_x, top_y, side_x, side_y, NULL, &left_wall_id,
+                        NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only) &&
         left_wall_id != non_ceiling_id)
     { // Collision_CheckLeftWallHug
         hit_wall = true;
@@ -2325,9 +2319,9 @@ static inline void mpCollCeilingInline(CollData* coll)
     top_y = coll->cur_pos.y + coll->ecb.top.y;
     side_x = coll->cur_pos.x + coll->ecb.left.x;
     side_y = coll->cur_pos.y + coll->ecb.left.y;
-    if (mpLib_800509B8_RightWall(top_x, top_y, side_x, side_y, NULL,
-                                 &right_wall_id, NULL, NULL,
-                                 coll->joint_id_skip, coll->joint_id_only) &&
+    if (mpCheckRightWall(top_x, top_y, side_x, side_y, NULL, &right_wall_id,
+                         NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only) &&
         right_wall_id != non_ceiling_id)
     { // Collision_CheckRightWallHug
         hit_wall = true;
@@ -2547,17 +2541,17 @@ static inline bool mpColl_80046F78_inline(CollData* coll, int* line_id_out)
         float prev_y = coll->prev_pos.y;
         float x = coll->cur_pos.x;
         float y = coll->cur_pos.y;
-        return mpLib_800524DC(&coll->contact, line_id_out, NULL, NULL,
-                              coll->joint_id_skip, coll->joint_id_only, prev_x,
-                              prev_y, x, y);
+        return mpCheckAllRemap(&coll->contact, line_id_out, NULL, NULL,
+                               coll->joint_id_skip, coll->joint_id_only,
+                               prev_x, prev_y, x, y);
     } else {
         float prev_x = coll->prev_pos.x;
         float prev_y = coll->prev_pos.y;
         float x = coll->cur_pos.x;
         float y = coll->cur_pos.y;
-        return mpLib_80052508(&coll->contact, line_id_out, NULL, NULL,
-                              coll->joint_id_skip, coll->joint_id_only, prev_x,
-                              prev_y, x, y);
+        return mpCheckAll(&coll->contact, line_id_out, NULL, NULL,
+                          coll->joint_id_skip, coll->joint_id_only, prev_x,
+                          prev_y, x, y);
     }
 }
 
@@ -3038,9 +3032,9 @@ bool mpColl_80048AB0_RightWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.bottom.x;
     vertical_y = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800509B8_RightWall(vertical_x, vertical_y, left_x, left_y, NULL,
-                                 &line_id, NULL, NULL, coll->joint_id_skip,
-                                 coll->joint_id_only) &&
+    if (mpCheckRightWall(vertical_x, vertical_y, left_x, left_y, NULL,
+                         &line_id, NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_RightWall_inline(line_id);
@@ -3065,9 +3059,9 @@ bool mpColl_80048AB0_RightWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.top.x;
     vertical_y = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800509B8_RightWall(vertical_x, vertical_y, left_x, left_y, NULL,
-                                 &line_id, NULL, NULL, coll->joint_id_skip,
-                                 coll->joint_id_only))
+    if (mpCheckRightWall(vertical_x, vertical_y, left_x, left_y, NULL,
+                         &line_id, NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only))
     {
         mpColl_RightWall_inline(line_id);
         hit_wall = true;
@@ -3333,9 +3327,9 @@ bool mpColl_80049778_LeftWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.bottom.x;
     vertical_y = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800501CC_LeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
-                                &line_id, NULL, NULL, coll->joint_id_skip,
-                                coll->joint_id_only) &&
+    if (mpCheckLeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
+                        &line_id, NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_LeftWall_inline(line_id);
@@ -3360,9 +3354,9 @@ bool mpColl_80049778_LeftWall(CollData* coll)
 
     vertical_x = coll->cur_pos.x + coll->ecb.top.x;
     vertical_y = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800501CC_LeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
-                                &line_id, NULL, NULL, coll->joint_id_skip,
-                                coll->joint_id_only))
+    if (mpCheckLeftWall(vertical_x, vertical_y, right_x, right_y, NULL,
+                        &line_id, NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only))
     {
         mpColl_LeftWall_inline(line_id);
         hit_wall = true;
@@ -3588,9 +3582,9 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
         right_x = edge.x + coll->ecb.right.x - coll->ecb.bottom.x;
         right_y = edge.y + coll->ecb.right.y - coll->ecb.bottom.y;
         // make sure a wall hasn't stopped us
-        if (!mpLib_800501CC_LeftWall(edge_x, edge_y, right_x, right_y, NULL,
-                                     NULL, NULL, NULL, coll->joint_id_skip,
-                                     coll->joint_id_only))
+        if (!mpCheckLeftWall(edge_x, edge_y, right_x, right_y, NULL, NULL,
+                             NULL, NULL, coll->joint_id_skip,
+                             coll->joint_id_only))
         {
             on_edge = true;
             coll->env_flags |= Collide_RightEdge;
@@ -3609,9 +3603,9 @@ bool mpColl_8004A45C_Floor(CollData* coll, int line_id)
             left_x = edge.x + coll->ecb.left.x - coll->ecb.bottom.x;
             left_y = edge.y + coll->ecb.left.y - coll->ecb.bottom.y;
             // make sure a wall hasn't stopped us
-            if (!mpLib_800509B8_RightWall(
-                    edge_x, edge_y, left_x, left_y, NULL, NULL, NULL, NULL,
-                    coll->joint_id_skip, coll->joint_id_only))
+            if (!mpCheckRightWall(edge_x, edge_y, left_x, left_y, NULL, NULL,
+                                  NULL, NULL, coll->joint_id_skip,
+                                  coll->joint_id_only))
             {
                 on_edge = true;
                 coll->env_flags |= Collide_LeftEdge;
@@ -3665,9 +3659,9 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
             right_x = edge.x + coll->ecb.right.x - coll->ecb.bottom.x;
             right_y = edge.y + coll->ecb.right.y - coll->ecb.bottom.y;
             // make sure a wall hasn't stopped us
-            if (!mpLib_800501CC_LeftWall(
-                    edge_x, edge_y, right_x, right_y, NULL, NULL, NULL, NULL,
-                    coll->joint_id_skip, coll->joint_id_only))
+            if (!mpCheckLeftWall(edge_x, edge_y, right_x, right_y, NULL, NULL,
+                                 NULL, NULL, coll->joint_id_skip,
+                                 coll->joint_id_only))
             {
                 on_edge = true;
             }
@@ -3693,9 +3687,9 @@ bool mpColl_8004A678_Floor(CollData* coll, int line_id)
             left_x = edge.x + coll->ecb.left.x - coll->ecb.bottom.x;
             left_y = edge.y + coll->ecb.left.y - coll->ecb.bottom.y;
             // make sure a wall hasn't stopped us
-            if (!mpLib_800509B8_RightWall(
-                    edge_x, edge_y, left_x, left_y, NULL, NULL, NULL, NULL,
-                    coll->joint_id_skip, coll->joint_id_only))
+            if (!mpCheckRightWall(edge_x, edge_y, left_x, left_y, NULL, NULL,
+                                  NULL, NULL, coll->joint_id_skip,
+                                  coll->joint_id_only))
             {
                 on_edge = true;
             }
@@ -3732,12 +3726,12 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
     bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
     bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
     if (coll->x38 != mpColl_804D64AC) {
-        hit_floor = mpLib_8004F400_Floor(
+        hit_floor = mpCheckFloorRemap(
             prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
             &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
             coll->joint_id_only, NULL, NULL);
     } else {
-        hit_floor = mpLib_8004F008_Floor(
+        hit_floor = mpCheckFloor(
             prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
             &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
             coll->joint_id_only, NULL, NULL);
@@ -3753,12 +3747,12 @@ bool mpColl_8004A908_Floor(CollData* coll, int line_id)
     prev_bottom_y = 0.5F * (coll->prev_ecb.top.y + coll->prev_ecb.bottom.y) +
                     coll->prev_pos.y;
     if (coll->x38 != mpColl_804D64AC) {
-        hit_floor = mpLib_8004F400_Floor(
+        hit_floor = mpCheckFloorRemap(
             prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
             &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
             coll->joint_id_only, NULL, NULL);
     } else {
-        hit_floor = mpLib_8004F008_Floor(
+        hit_floor = mpCheckFloor(
             prev_bottom_x, prev_bottom_y, bottom_x, bottom_y, 0.0F, NULL,
             &floor_id, &flags, &normal, coll->floor_skip, coll->joint_id_skip,
             coll->joint_id_only, NULL, NULL);
@@ -4144,9 +4138,9 @@ bool mpColl_8004B894_RightWall(CollData* coll)
 
     prev_bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
     prev_bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800509B8_RightWall(prev_bottom_x, prev_bottom_y, left_x, left_y,
-                                 NULL, &line_id, NULL, NULL,
-                                 coll->joint_id_skip, coll->joint_id_only))
+    if (mpCheckRightWall(prev_bottom_x, prev_bottom_y, left_x, left_y, NULL,
+                         &line_id, NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only))
     {
         mpColl_RightWall_inline(line_id);
         hit_wall = true;
@@ -4154,9 +4148,9 @@ bool mpColl_8004B894_RightWall(CollData* coll)
 
     prev_top_x = coll->cur_pos.x + coll->ecb.top.x;
     prev_top_y = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800509B8_RightWall(prev_top_x, prev_top_y, left_x, left_y, NULL,
-                                 &line_id, NULL, NULL, coll->joint_id_skip,
-                                 coll->joint_id_only) &&
+    if (mpCheckRightWall(prev_top_x, prev_top_y, left_x, left_y, NULL,
+                         &line_id, NULL, NULL, coll->joint_id_skip,
+                         coll->joint_id_only) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_RightWall_inline(line_id);
@@ -4239,9 +4233,9 @@ bool mpColl_8004BDD4_LeftWall(CollData* coll)
 
     prev_bottom_x = coll->cur_pos.x + coll->ecb.bottom.x;
     prev_bottom_y = coll->cur_pos.y + coll->ecb.bottom.y;
-    if (mpLib_800501CC_LeftWall(prev_bottom_x, prev_bottom_y, right_x, right_y,
-                                NULL, &line_id, NULL, NULL,
-                                coll->joint_id_skip, coll->joint_id_only))
+    if (mpCheckLeftWall(prev_bottom_x, prev_bottom_y, right_x, right_y, NULL,
+                        &line_id, NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only))
     {
         mpColl_LeftWall_inline(line_id);
         hit_wall = true;
@@ -4249,9 +4243,9 @@ bool mpColl_8004BDD4_LeftWall(CollData* coll)
 
     prev_top_x = coll->cur_pos.x + coll->ecb.top.x;
     prev_top_y = coll->cur_pos.y + coll->ecb.top.y;
-    if (mpLib_800501CC_LeftWall(prev_top_x, prev_top_y, right_x, right_y, NULL,
-                                &line_id, NULL, NULL, coll->joint_id_skip,
-                                coll->joint_id_only) &&
+    if (mpCheckLeftWall(prev_top_x, prev_top_y, right_x, right_y, NULL,
+                        &line_id, NULL, NULL, coll->joint_id_skip,
+                        coll->joint_id_only) &&
         line_id != line_id1 && line_id != line_id2)
     {
         mpColl_LeftWall_inline(line_id);
@@ -4292,9 +4286,9 @@ bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
         ecb_side_x = edge.x + coll->ecb.right.x - coll->ecb.top.x;
         ecb_side_y = edge.y + coll->ecb.right.y - coll->ecb.top.y;
         // make sure a wall hasn't stopped us
-        if (!mpLib_800501CC_LeftWall(edge_x, edge_y, ecb_side_x, ecb_side_y,
-                                     NULL, NULL, NULL, NULL,
-                                     coll->joint_id_skip, coll->joint_id_only))
+        if (!mpCheckLeftWall(edge_x, edge_y, ecb_side_x, ecb_side_y, NULL,
+                             NULL, NULL, NULL, coll->joint_id_skip,
+                             coll->joint_id_only))
         {
             result = true;
             coll->env_flags |= Collide_RightEdge;
@@ -4309,9 +4303,9 @@ bool mpColl_8004C328_Ceiling(CollData* coll, int line_id)
             ecb_side_x = edge.x + coll->ecb.left.x - coll->ecb.top.x;
             ecb_side_y = edge.y + coll->ecb.left.y - coll->ecb.top.y;
             // make sure a wall hasn't stopped us
-            if (!mpLib_800509B8_RightWall(
-                    edge_x, edge_y, ecb_side_x, ecb_side_y, NULL, NULL, NULL,
-                    NULL, coll->joint_id_skip, coll->joint_id_only))
+            if (!mpCheckRightWall(edge_x, edge_y, ecb_side_x, ecb_side_y, NULL,
+                                  NULL, NULL, NULL, coll->joint_id_skip,
+                                  coll->joint_id_only))
             {
                 result = true;
                 coll->env_flags |= Collide_LeftEdge;

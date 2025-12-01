@@ -165,7 +165,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                             var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
                                      jobj->mtx[0][3];
                         }
-                        if (mpLib_800524DC(
+                        if (mpCheckAllRemap(
                                 0, 0, 0, 0, -1, -1, fp->coll_data.cur_pos.x,
                                 jobj->mtx[1][3], var_f3, jobj->mtx[1][3]) != 0)
                         {
@@ -226,7 +226,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                         {
                             HSD_JObj* jobj = fp->parts[FtPart_ThrowN].joint;
                             HSD_JObjSetupMatrix(jobj);
-                            if (mpLib_800524DC(
+                            if (mpCheckAllRemap(
                                     0, 0, 0, 0, -1, -1,
                                     fp->coll_data.cur_pos.x, jobj->mtx[1][3],
                                     (2.0 * fp->facing_dir * fp->x34_scale.y) +

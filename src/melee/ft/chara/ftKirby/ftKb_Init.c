@@ -4413,7 +4413,7 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
         } else {
             var_f3 = -1.0f;
         }
-        if (mpLib_800524DC(
+        if (mpCheckAllRemap(
                 NULL, 0, NULL, &sp1C, -1, -1, vec.z, vec.x + vec.y,
                 (fp->mv.kb.specialhi.x18.y * vec.y *
                  ((fp->mv.kb.specialhi.x18.x > 0.0f) ? 1.0f : -1.0f)) +

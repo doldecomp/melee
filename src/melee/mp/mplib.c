@@ -856,11 +856,11 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
     *y1_out = y1_f3;
 }
 
-bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
-                          float y_offset, Vec3* vec_out, int* line_id_out,
-                          u32* flags_out, Vec3* normal_out, int line_id_skip,
-                          int joint_id_skip, int joint_id_only,
-                          bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
+bool mpCheckFloor(float ax, float ay, float bx, float by, float y_offset,
+                  Vec3* vec_out, int* line_id_out, u32* flags_out,
+                  Vec3* normal_out, int line_id_skip, int joint_id_skip,
+                  int joint_id_only, bool (*cb)(Fighter_GObj*, int),
+                  Fighter_GObj* gobj)
 {
     float min_dist2_f30;
     CollJoint* joint; // r29
@@ -1003,11 +1003,11 @@ bool mpLib_8004F008_Floor(float ax, float ay, float bx, float by,
     return result_r27;
 }
 
-bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
-                          float y_offset, Vec3* vec_out, int* line_id_out,
-                          u32* flags_out, Vec3* normal_out, int line_id_skip,
-                          int joint_id_skip, int joint_id_only,
-                          bool (*cb)(Fighter_GObj*, int), Fighter_GObj* gobj)
+bool mpCheckFloorRemap(float ax, float ay, float bx, float by, float y_offset,
+                       Vec3* vec_out, int* line_id_out, u32* flags_out,
+                       Vec3* normal_out, int line_id_skip, int joint_id_skip,
+                       int joint_id_only, bool (*cb)(Fighter_GObj*, int),
+                       Fighter_GObj* gobj)
 {
     float min_dist2 = F32_MAX;
     float old_x = ax;
@@ -1175,10 +1175,9 @@ bool mpLib_8004F400_Floor(float ax, float ay, float bx, float by,
     return result;
 }
 
-bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
-                            Vec3* vec_out, int* line_id_out, u32* flags_out,
-                            Vec3* normal_out, int joint_id_skip,
-                            int joint_id_only)
+bool mpCheckCeiling(float ax, float ay, float bx, float by, Vec3* vec_out,
+                    int* line_id_out, u32* flags_out, Vec3* normal_out,
+                    int joint_id_skip, int joint_id_only)
 {
     float min_dist2 = F32_MAX;
     CollJoint* joint; // r29
@@ -1313,10 +1312,9 @@ bool mpLib_8004F8A4_Ceiling(float ax, float ay, float bx, float by,
     return result;
 }
 
-bool mpLib_8004FC2C_Ceiling(float ax, float ay, float bx, float by,
-                            Vec3* vec_out, int* line_id_out, u32* flags_out,
-                            Vec3* normal_out, int joint_id_skip,
-                            int joint_id_only)
+bool mpCheckCeilingRemap(float ax, float ay, float bx, float by, Vec3* vec_out,
+                         int* line_id_out, u32* flags_out, Vec3* normal_out,
+                         int joint_id_skip, int joint_id_only)
 {
     float min_f30 = F32_MAX;
     float f29 = ax;
@@ -1537,24 +1535,23 @@ bool mpLineIntersectionV(float* int_x, float* int_y, float a0x, float a0y,
     return true;
 }
 
-bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
-                             Vec3* vec_out, int* line_id_out, u32* flags_out,
-                             Vec3* normal_out, int joint_id_skip,
-                             int joint_id_only)
+bool mpCheckLeftWall(float ax, float ay, float bx, float by, Vec3* vec_out,
+                     int* line_id_out, u32* flags_out, Vec3* normal_out,
+                     int joint_id_skip, int joint_id_only)
 {
-    float min;
+    float min_dist2;
     CollJoint* joint;
-    int r28;
-    int result;
-    CollLine* p26;
-    int r25;
-    int r24;
+    int i;
+    bool result;
+    CollLine* line;
+    int count;
+    int dynamic_count;
     MapJoint* j_inner;
     bool already_checked;
     PAD_STACK(4);
 
     result = false;
-    min = F32_MAX;
+    min_dist2 = F32_MAX;
     already_checked = mpCheckedBounding();
 
     if (!already_checked) {
@@ -1575,19 +1572,19 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
 
         j_inner = joint->inner;
 
-        r25 = j_inner->left_wall_count;
-        r24 = j_inner->dynamic_count;
-        p26 = &groundCollLine[j_inner->left_wall_start];
+        count = j_inner->left_wall_count;
+        dynamic_count = j_inner->dynamic_count;
+        line = &groundCollLine[j_inner->left_wall_start];
 
-        for (r28 = 0; r28 < r25; r28++, p26++) {
+        for (i = 0; i < count; i++, line++) {
         block_8:
-            if (p26->flags & CollLine_LeftWall &&
-                p26->flags & LINE_FLAG_ENABLED &&
-                !(p26->flags & LINE_FLAG_EMPTY))
+            if (line->flags & CollLine_LeftWall &&
+                line->flags & LINE_FLAG_ENABLED &&
+                !(line->flags & LINE_FLAG_EMPTY))
             {
-                MapLine* line = p26->x0;
-                CollVtx* v0 = &groundCollVtx[line->v0_idx];
-                CollVtx* v1 = &groundCollVtx[line->v1_idx];
+                MapLine* inner = line->x0;
+                CollVtx* v0 = &groundCollVtx[inner->v0_idx];
+                CollVtx* v1 = &groundCollVtx[inner->v1_idx];
                 float x0 = v0->pos.x;
                 float y0 = v0->pos.y;
                 float x1 = v1->pos.x;
@@ -1595,27 +1592,27 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                 float dx2;
                 float dy2;
                 float dist2;
-                float x;
-                float y;
+                float int_x;
+                float int_y;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by, &x,
-                                           &y))
+                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by,
+                                           &int_x, &int_y))
                     {
-                        dx2 = SQ(x - ax);
-                        dy2 = SQ(y - ay);
+                        dx2 = SQ(int_x - ax);
+                        dy2 = SQ(int_y - ay);
                         dist2 = dx2 + dy2;
-                        if (min > dist2) {
-                            min = dist2;
+                        if (min_dist2 > dist2) {
+                            min_dist2 = dist2;
                             if (vec_out != NULL) {
-                                vec_out->x = x;
-                                vec_out->y = y;
+                                vec_out->x = int_x;
+                                vec_out->y = int_y;
                                 vec_out->z = 0.0F;
                             }
                             if (line_id_out != NULL) {
-                                *line_id_out = p26 - groundCollLine;
+                                *line_id_out = line - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->lo_flags;
+                                *flags_out = line->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = -(y1 - y0);
@@ -1627,24 +1624,25 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
                         }
                     }
                 } else {
-                    if ((ax <= bx) && mpLineIntersectionV(&x, &y, x0, y0, y1,
-                                                          ax, ay, bx, by))
+                    if ((ax <= bx) &&
+                        mpLineIntersectionV(&int_x, &int_y, x0, y0, y1, ax, ay,
+                                            bx, by))
                     {
-                        dx2 = SQ(x - ax);
-                        dy2 = SQ(y - ay);
+                        dx2 = SQ(int_x - ax);
+                        dy2 = SQ(int_y - ay);
                         dist2 = dx2 + dy2;
-                        if (min > dist2) {
-                            min = dist2;
+                        if (min_dist2 > dist2) {
+                            min_dist2 = dist2;
                             if (vec_out != NULL) {
-                                vec_out->x = x;
-                                vec_out->y = y;
+                                vec_out->x = int_x;
+                                vec_out->y = int_y;
                                 vec_out->z = 0.0F;
                             }
                             if (line_id_out != NULL) {
-                                *line_id_out = p26 - groundCollLine;
+                                *line_id_out = line - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->lo_flags;
+                                *flags_out = line->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = -1.0F;
@@ -1658,11 +1656,11 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
             }
         }
 
-        if (r24 != 0) {
-            r25 = r24;
-            r28 = 0;
-            r24 = 0;
-            p26 = &groundCollLine[joint->inner->dynamic_start];
+        if (dynamic_count != 0) {
+            count = dynamic_count;
+            i = 0;
+            dynamic_count = 0;
+            line = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1673,10 +1671,10 @@ bool mpLib_800501CC_LeftWall(float ax, float ay, float bx, float by,
     return result;
 }
 
-bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
-                             Vec3* vec_out, int* line_id_out, u32* flags_out,
-                             Vec3* normal_out, int joint_id_skip,
-                             int joint_id_only)
+bool mpCheckLeftWallRemap(float ax, float ay, float bx, float by,
+                          Vec3* vec_out, int* line_id_out, u32* flags_out,
+                          Vec3* normal_out, int joint_id_skip,
+                          int joint_id_only)
 {
     float min_dist2;
     float old_x = ax;
@@ -1847,24 +1845,23 @@ bool mpLib_8005057C_LeftWall(float ax, float ay, float bx, float by,
     return result;
 }
 
-bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
-                              Vec3* vec_out, int* line_id_out, u32* flags_out,
-                              Vec3* normal_out, int joint_id_skip,
-                              int joint_id_only)
+bool mpCheckRightWall(float ax, float ay, float bx, float by, Vec3* vec_out,
+                      int* line_id_out, u32* flags_out, Vec3* normal_out,
+                      int joint_id_skip, int joint_id_only)
 {
-    float min;
+    float min_dist2;
     CollJoint* joint;
-    int r28;
-    int result;
-    CollLine* p26;
-    int r25;
-    int r24;
+    int i;
+    bool result;
+    CollLine* line;
+    int count;
+    int dynamic_count;
     MapJoint* j_inner;
     bool already_checked;
     PAD_STACK(4);
 
     result = false;
-    min = F32_MAX;
+    min_dist2 = F32_MAX;
     already_checked = mpCheckedBounding();
 
     if (!already_checked) {
@@ -1885,19 +1882,19 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
 
         j_inner = joint->inner;
 
-        r25 = j_inner->right_wall_count;
-        r24 = j_inner->dynamic_count;
-        p26 = &groundCollLine[j_inner->right_wall_start];
+        count = j_inner->right_wall_count;
+        dynamic_count = j_inner->dynamic_count;
+        line = &groundCollLine[j_inner->right_wall_start];
 
-        for (r28 = 0; r28 < r25; r28++, p26++) {
+        for (i = 0; i < count; i++, line++) {
         block_8:
-            if (p26->flags & CollLine_RightWall &&
-                p26->flags & LINE_FLAG_ENABLED &&
-                !(p26->flags & LINE_FLAG_EMPTY))
+            if (line->flags & CollLine_RightWall &&
+                line->flags & LINE_FLAG_ENABLED &&
+                !(line->flags & LINE_FLAG_EMPTY))
             {
-                MapLine* line = p26->x0;
-                CollVtx* v0 = &groundCollVtx[line->v0_idx];
-                CollVtx* v1 = &groundCollVtx[line->v1_idx];
+                MapLine* inner = line->x0;
+                CollVtx* v0 = &groundCollVtx[inner->v0_idx];
+                CollVtx* v1 = &groundCollVtx[inner->v1_idx];
                 float x0 = v0->pos.x;
                 float y0 = v0->pos.y;
                 float x1 = v1->pos.x;
@@ -1905,27 +1902,27 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                 float dx2;
                 float dy2;
                 float dist2;
-                float x;
-                float y;
+                float int_x;
+                float int_y;
                 if (ABS(x0 - x1) > 0.0001) {
-                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by, &x,
-                                           &y))
+                    if (mpLineIntersection(x0, y0, x1, y1, ax, ay, bx, by,
+                                           &int_x, &int_y))
                     {
-                        dx2 = SQ(x - ax);
-                        dy2 = SQ(y - ay);
+                        dx2 = SQ(int_x - ax);
+                        dy2 = SQ(int_y - ay);
                         dist2 = dx2 + dy2;
-                        if (min > dist2) {
-                            min = dist2;
+                        if (min_dist2 > dist2) {
+                            min_dist2 = dist2;
                             if (vec_out != NULL) {
-                                vec_out->x = x;
-                                vec_out->y = y;
+                                vec_out->x = int_x;
+                                vec_out->y = int_y;
                                 vec_out->z = 0.0F;
                             }
                             if (line_id_out != NULL) {
-                                *line_id_out = p26 - groundCollLine;
+                                *line_id_out = line - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->lo_flags;
+                                *flags_out = line->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = -(y1 - y0);
@@ -1937,24 +1934,24 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
                         }
                     }
                 } else {
-                    if (ax >= bx && mpLineIntersectionV(&x, &y, x0, y0, y1, ax,
-                                                        ay, bx, by))
+                    if (ax >= bx && mpLineIntersectionV(&int_x, &int_y, x0, y0,
+                                                        y1, ax, ay, bx, by))
                     {
-                        dx2 = SQ(x - ax);
-                        dy2 = SQ(y - ay);
+                        dx2 = SQ(int_x - ax);
+                        dy2 = SQ(int_y - ay);
                         dist2 = dx2 + dy2;
-                        if (min > dist2) {
-                            min = dist2;
+                        if (min_dist2 > dist2) {
+                            min_dist2 = dist2;
                             if (vec_out != NULL) {
-                                vec_out->x = x;
-                                vec_out->y = y;
+                                vec_out->x = int_x;
+                                vec_out->y = int_y;
                                 vec_out->z = 0.0F;
                             }
                             if (line_id_out != NULL) {
-                                *line_id_out = p26 - groundCollLine;
+                                *line_id_out = line - groundCollLine;
                             }
                             if (flags_out != NULL) {
-                                *flags_out = p26->x0->lo_flags;
+                                *flags_out = line->x0->lo_flags;
                             }
                             if (normal_out != NULL) {
                                 normal_out->x = 1.0F;
@@ -1968,11 +1965,11 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
             }
         }
 
-        if (r24 != 0) {
-            r25 = r24;
-            r28 = 0;
-            r24 = 0;
-            p26 = &groundCollLine[joint->inner->dynamic_start];
+        if (dynamic_count != 0) {
+            count = dynamic_count;
+            i = 0;
+            dynamic_count = 0;
+            line = &groundCollLine[joint->inner->dynamic_start];
             goto block_8;
         }
     }
@@ -1983,10 +1980,10 @@ bool mpLib_800509B8_RightWall(float ax, float ay, float bx, float by,
     return result;
 }
 
-bool mpLib_80050D68_RightWall(float ax, float ay, float bx, float by,
-                              Vec3* vec_out, int* line_id_out, u32* flags_out,
-                              Vec3* normal_out, int joint_id_skip,
-                              int joint_id_only)
+bool mpCheckRightWallRemap(float ax, float ay, float bx, float by,
+                           Vec3* vec_out, int* line_id_out, u32* flags_out,
+                           Vec3* normal_out, int joint_id_skip,
+                           int joint_id_only)
 {
     float min_dist2;
     float old_x = ax;
@@ -2666,189 +2663,185 @@ int mpLib_80051BA8_Floor(Vec3* out_vec, int line_id_skip, int joint_id_skip,
     return ledge_id;
 }
 
-bool mpLib_80051EC8(float x0, float y0, float x1, float y1, Vec3* pos_out,
-                    int* line_id_out, u32* flags_out, Vec3* normal_out,
-                    u32 arg4, int joint_id_skip, int joint_id_only)
+bool mpCheckMultiple(float x0, float y0, float x1, float y1, Vec3* pos_out,
+                     int* line_id_out, u32* flags_out, Vec3* normal_out,
+                     u32 checks, int joint_id_skip, int joint_id_only)
 {
-    f32 dx;
-    f32 dy;
+    float dx;
+    float dy;
 
-    f32 min_sq_dist_f31;
+    float min_dist2;
     bool already_checked;
 
-    s32 var_r30;
-    s32 var_r29;
+    int line_id; // r30
+    u32 flags;   // r29
 
-    Vec3 pos_sp68;
-    Vec3 normal_sp5C;
-    Vec3 pos_sp50;
-    Vec3 normal_sp44;
-    int line_id_sp40;
-    u32 flags_sp3C;
+    Vec3 temp_pos;    // sp68
+    Vec3 temp_normal; // sp5C
+    Vec3 pos;         // sp50
+    Vec3 normal;      // sp44
+    int temp_line_id; // sp40
+    u32 temp_flags;   // sp3C
 
-    min_sq_dist_f31 = F32_MAX;
+    min_dist2 = F32_MAX;
     already_checked = mpCheckedBounding();
     if (!already_checked) {
         mpBoundingCheck2(x0, y0, x1, y1);
     }
-    if (arg4 & 0x10) {
-        if (arg4 & 1) {
-            if (mpLib_8004F400_Floor(x0, y0, x1, y1, 0.0F, &pos_sp68,
-                                     &line_id_sp40, &flags_sp3C, &normal_sp5C,
-                                     -1, joint_id_skip, joint_id_only, NULL,
-                                     NULL))
-            {
-                dx = SQ(pos_sp68.x - x0);
-                dy = SQ(pos_sp68.y - y0);
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                min_sq_dist_f31 = dx + dy;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
+    if (checks & 0x10) {
+        if (checks & 1 &&
+            mpCheckFloorRemap(x0, y0, x1, y1, 0.0F, &temp_pos, &temp_line_id,
+                              &temp_flags, &temp_normal, -1, joint_id_skip,
+                              joint_id_only, NULL, NULL))
+        {
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            pos = temp_pos;
+            normal = temp_normal;
+            min_dist2 = dx + dy;
+            line_id = temp_line_id;
+            flags = temp_flags;
+        }
+        if (checks & 2 &&
+            mpCheckCeilingRemap(x0, y0, x1, y1, &temp_pos, &temp_line_id,
+                                &temp_flags, &temp_normal, joint_id_skip,
+                                joint_id_only))
+        {
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            if (min_dist2 > dx + dy) {
+                min_dist2 = dx + dy;
+                pos = temp_pos;
+                normal = temp_normal;
+                line_id = temp_line_id;
+                flags = temp_flags;
             }
         }
-        if ((arg4 & 2) &&
-            (mpLib_8004FC2C_Ceiling(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                    &flags_sp3C, &normal_sp5C, joint_id_skip,
-                                    joint_id_only)))
+        if (checks & 4 &&
+            mpCheckLeftWallRemap(x0, y0, x1, y1, &temp_pos, &temp_line_id,
+                                 &temp_flags, &temp_normal, joint_id_skip,
+                                 joint_id_only))
         {
-            dx = SQ(pos_sp68.x - x0);
-            dy = SQ(pos_sp68.y - y0);
-            if (min_sq_dist_f31 > dx + dy) {
-                min_sq_dist_f31 = dx + dy;
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            if (min_dist2 > dx + dy) {
+                min_dist2 = dx + dy;
+                pos = temp_pos;
+                normal = temp_normal;
+                line_id = temp_line_id;
+                flags = temp_flags;
             }
         }
-        if ((arg4 & 4) &&
-            mpLib_8005057C_LeftWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                    &flags_sp3C, &normal_sp5C, joint_id_skip,
-                                    joint_id_only))
+        if (checks & 8 &&
+            mpCheckRightWallRemap(x0, y0, x1, y1, &temp_pos, &temp_line_id,
+                                  &temp_flags, &temp_normal, joint_id_skip,
+                                  joint_id_only))
         {
-            dx = SQ(pos_sp68.x - x0);
-            dy = SQ(pos_sp68.y - y0);
-            if (min_sq_dist_f31 > dx + dy) {
-                min_sq_dist_f31 = dx + dy;
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
-            }
-        }
-        if ((arg4 & 8) &&
-            (mpLib_80050D68_RightWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                      &flags_sp3C, &normal_sp5C, joint_id_skip,
-                                      joint_id_only)))
-        {
-            dx = SQ(pos_sp68.x - x0);
-            dy = SQ(pos_sp68.y - y0);
-            if (min_sq_dist_f31 > dx + dy) {
-                min_sq_dist_f31 = dx + dy;
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            if (min_dist2 > dx + dy) {
+                min_dist2 = dx + dy;
+                pos = temp_pos;
+                normal = temp_normal;
+                line_id = temp_line_id;
+                flags = temp_flags;
             }
         }
     } else {
-        if (arg4 & 1) {
-            if (mpLib_8004F008_Floor(x0, y0, x1, y1, 0.0F, &pos_sp68,
-                                     &line_id_sp40, &flags_sp3C, &normal_sp5C,
-                                     -1, joint_id_skip, joint_id_only, NULL,
-                                     NULL))
-            {
-                dx = SQ(pos_sp68.x - x0);
-                dy = SQ(pos_sp68.y - y0);
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                min_sq_dist_f31 = dx + dy;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
+        if (checks & 1 &&
+            mpCheckFloor(x0, y0, x1, y1, 0.0F, &temp_pos, &temp_line_id,
+                         &temp_flags, &temp_normal, -1, joint_id_skip,
+                         joint_id_only, NULL, NULL))
+        {
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            pos = temp_pos;
+            normal = temp_normal;
+            min_dist2 = dx + dy;
+            line_id = temp_line_id;
+            flags = temp_flags;
+        }
+        if (checks & 2 &&
+            mpCheckCeiling(x0, y0, x1, y1, &temp_pos, &temp_line_id,
+                           &temp_flags, &temp_normal, joint_id_skip,
+                           joint_id_only))
+        {
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            if (min_dist2 > dx + dy) {
+                min_dist2 = dx + dy;
+                pos = temp_pos;
+                normal = temp_normal;
+                line_id = temp_line_id;
+                flags = temp_flags;
             }
         }
-        if ((arg4 & 2) &&
-            (mpLib_8004F8A4_Ceiling(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                    &flags_sp3C, &normal_sp5C, joint_id_skip,
-                                    joint_id_only)))
+        if (checks & 4 &&
+            mpCheckLeftWall(x0, y0, x1, y1, &temp_pos, &temp_line_id,
+                            &temp_flags, &temp_normal, joint_id_skip,
+                            joint_id_only))
         {
-            dx = SQ(pos_sp68.x - x0);
-            dy = SQ(pos_sp68.y - y0);
-            if (min_sq_dist_f31 > dx + dy) {
-                min_sq_dist_f31 = dx + dy;
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            if (min_dist2 > dx + dy) {
+                min_dist2 = dx + dy;
+                pos = temp_pos;
+                normal = temp_normal;
+                line_id = temp_line_id;
+                flags = temp_flags;
             }
         }
-        if ((arg4 & 4) &&
-            (mpLib_800501CC_LeftWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                     &flags_sp3C, &normal_sp5C, joint_id_skip,
-                                     joint_id_only)))
+        if (checks & 8 &&
+            mpCheckRightWall(x0, y0, x1, y1, &temp_pos, &temp_line_id,
+                             &temp_flags, &temp_normal, joint_id_skip,
+                             joint_id_only))
         {
-            dx = SQ(pos_sp68.x - x0);
-            dy = SQ(pos_sp68.y - y0);
-            if (min_sq_dist_f31 > dx + dy) {
-                min_sq_dist_f31 = dx + dy;
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
-            }
-        }
-        if ((arg4 & 8) &&
-            (mpLib_800509B8_RightWall(x0, y0, x1, y1, &pos_sp68, &line_id_sp40,
-                                      &flags_sp3C, &normal_sp5C, joint_id_skip,
-                                      joint_id_only)))
-        {
-            dx = SQ(pos_sp68.x - x0);
-            dy = SQ(pos_sp68.y - y0);
-            if (min_sq_dist_f31 > dx + dy) {
-                min_sq_dist_f31 = dx + dy;
-                pos_sp50 = pos_sp68;
-                normal_sp44 = normal_sp5C;
-                var_r30 = line_id_sp40;
-                var_r29 = flags_sp3C;
+            dx = SQ(temp_pos.x - x0);
+            dy = SQ(temp_pos.y - y0);
+            if (min_dist2 > dx + dy) {
+                min_dist2 = dx + dy;
+                pos = temp_pos;
+                normal = temp_normal;
+                line_id = temp_line_id;
+                flags = temp_flags;
             }
         }
     }
     if (!already_checked) {
         mpUncheckBounding();
     }
-    if (min_sq_dist_f31 < F32_MAX) {
+    if (min_dist2 < F32_MAX) {
         if (pos_out != NULL) {
-            *pos_out = pos_sp50;
+            *pos_out = pos;
         }
         if (line_id_out != NULL) {
-            *line_id_out = var_r30;
+            *line_id_out = line_id;
         }
         if (flags_out != NULL) {
-            *flags_out = var_r29;
+            *flags_out = flags;
         }
         if (normal_out != NULL) {
-            *normal_out = normal_sp44;
+            *normal_out = normal;
         }
         return true;
     }
     return false;
 }
 
-bool mpLib_800524DC(Vec3* pos_out, int* line_id_out, u32* flags_out,
-                    Vec3* normal_out, int joint_id_skip, int joint_id_only,
-                    float x0, float y0, float x1, float y1)
+bool mpCheckAllRemap(Vec3* pos_out, int* line_id_out, u32* flags_out,
+                     Vec3* normal_out, int joint_id_skip, int joint_id_only,
+                     float x0, float y0, float x1, float y1)
 {
-    return mpLib_80051EC8(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
-                          normal_out, 0x1F, joint_id_skip, joint_id_only);
+    return mpCheckMultiple(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
+                           normal_out, 0x1F, joint_id_skip, joint_id_only);
 }
 
-bool mpLib_80052508(Vec3* pos_out, int* line_id_out, u32* flags_out,
-                    Vec3* normal_out, int joint_id_skip, int joint_id_only,
-                    float x0, float y0, float x1, float y1)
+bool mpCheckAll(Vec3* pos_out, int* line_id_out, u32* flags_out,
+                Vec3* normal_out, int joint_id_skip, int joint_id_only,
+                float x0, float y0, float x1, float y1)
 {
-    return mpLib_80051EC8(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
-                          normal_out, 0xF, joint_id_skip, joint_id_only);
+    return mpCheckMultiple(x0, y0, x1, y1, pos_out, line_id_out, flags_out,
+                           normal_out, 0xF, joint_id_skip, joint_id_only);
 }
 
 int mpLineNextNonFloor(int line_id)

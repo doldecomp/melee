@@ -416,8 +416,8 @@ void grFlatzone_802176BC(Ground_GObj* gobj)
             pos.y -= 27.0f;
             other_z = 5.0f + pos.z;
             pos.z -= 5.0f;
-            if (mpLib_80051EC8(other_x, other_z, pos.x, pos.z, &pos_2, &ret, 0,
-                               0, 1, -1, 0x32) != 0)
+            if (mpCheckMultiple(other_x, other_z, pos.x, pos.z, &pos_2, &ret,
+                                0, 0, 1, -1, 0x32) != 0)
             {
                 var_r0 = ret;
             } else {

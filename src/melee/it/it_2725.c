@@ -6862,9 +6862,9 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     item = GET_ITEM((HSD_GObj*) item_gobj);
     item->x378_itemColl.last_pos = *pos;
     mpColl_80043670(&item->x378_itemColl);
-    if (mpLib_80051EC8(item->pos.x, item->pos.y, item->pos.x,
-                       item->pos.y - it_804D6D28->xF4, &temp_pos, NULL, NULL,
-                       NULL, 1, -1, -1))
+    if (mpCheckMultiple(item->pos.x, item->pos.y, item->pos.x,
+                        item->pos.y - it_804D6D28->xF4, &temp_pos, NULL, NULL,
+                        NULL, 1, -1, -1))
     {
         item->pos = temp_pos;
     }
