@@ -16,4 +16,10 @@ struct DObjList {
     HSD_DObj** data;
 };
 
+struct CostumeTObjList {
+    /*  fp+5CC */ u32 n_costume_tobjs;
+    /*  fp+5D0 */ u16* x5D0;
+    /*  fp+5D4 */ HSD_TObj* costume_tobjs[5];
+};
+
 #endif

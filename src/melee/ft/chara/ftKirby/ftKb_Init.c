@@ -60,7 +60,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-void ftAnim_80070458_proto(Fighter* fp, struct KirbyFV_x44_t*, int);
+void ftAnim_80070458_proto(Fighter* fp, CostumeTObjList*, int);
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
@@ -3785,8 +3785,8 @@ void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF438(gobj, temp_r29);
     ftParts_8007487C(temp_r29, &fp->fv.kb.hat.x24, fp->x619_costume_id,
                      &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, &temp_r29->hat_vis_table, &fp->fv.kb.x44,
-                    &fp->fv.kb.hat.x14);
+    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->hat_vis_table,
+                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
 }
 
 void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
