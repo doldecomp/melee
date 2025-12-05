@@ -4836,7 +4836,13 @@ void ftKb_SpecialS_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialAirS_Anim
+void ftKb_SpecialAirS_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(0x08);
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 void ftKb_SpecialS_Phys(Fighter_GObj* gobj)
 {
@@ -6769,7 +6775,14 @@ s32 ftKb_SpecialNSk_80106020(Fighter_GObj* gobj)
 
 /// #ftKb_SkSpecialNLoop_Anim
 
-/// #ftKb_SkSpecialNCancel_Anim
+void ftKb_SkSpecialNCancel_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->fv.kb.xB8 = 0;
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 /// #ftKb_SkSpecialNEnd_Anim
 
