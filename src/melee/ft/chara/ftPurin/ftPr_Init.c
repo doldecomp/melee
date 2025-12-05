@@ -483,7 +483,7 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.pr.x223C, &fp->fv.pr.x2240);
 
-        ftParts_8007487C((void*) &items_shifted[1], &fp->fv.pr.x2248,
+        ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->fv.pr.x2248,
                          fp->x619_costume_id, &fp->fv.pr.x2240.count,
                          &fp->fv.pr.x2240.count);
         ftCo_8009DC54(fp);

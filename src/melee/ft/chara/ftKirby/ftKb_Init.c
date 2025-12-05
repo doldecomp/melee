@@ -3344,8 +3344,8 @@ void ftKb_SpecialN_800EFB4C(HSD_GObj* gobj)
         {
             // Fighter_InitFtPartsModel(FtPartsDesc *ftpartsdesc, FtPartsVis
             // *unk, int index, FtParts *ftparts, FtParts *ftparts2);
-            ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
-                             &fp->fv.kb.hat.x14.count,
+            ftParts_8007487C(&hat->desc,
+                             &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14.count,
                              &fp->fv.kb.hat.x14.count);
         }
     }
@@ -3368,7 +3368,7 @@ void ftKb_SpecialN_800EFC58(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3399,7 +3399,7 @@ void ftKb_SpecialN_800EFE80(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3424,7 +3424,7 @@ void ftKb_SpecialN_800EFF9C(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3449,7 +3449,7 @@ void ftKb_SpecialN_800F00B8(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3471,7 +3471,7 @@ void ftKb_SpecialN_800F01C4(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3493,7 +3493,7 @@ void ftKb_SpecialN_800F02D0(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3515,7 +3515,7 @@ void ftKb_SpecialN_800F03DC(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3540,7 +3540,7 @@ void ftKb_SpecialN_800F04F8(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3562,7 +3562,7 @@ void ftKb_SpecialN_800F0604(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3584,7 +3584,7 @@ void ftKb_SpecialN_800F0710(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3606,7 +3606,7 @@ void ftKb_SpecialN_800F081C(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3631,7 +3631,7 @@ void ftKb_SpecialN_800F0938(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3656,7 +3656,7 @@ void ftKb_SpecialN_800F0A54(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3681,7 +3681,7 @@ void ftKb_SpecialN_800F0B70(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3703,7 +3703,7 @@ void ftKb_SpecialN_800F0C7C(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3728,7 +3728,7 @@ void ftKb_SpecialN_800F0D98(HSD_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
     }
 }
@@ -3750,7 +3750,7 @@ void ftKb_SpecialN_800F0EA4(Fighter_GObj* gobj)
         fp->x2225_b2 = true;
         ftParts_80074170();
         ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
-        ftParts_8007487C(&hat->joint_num, &fp->fv.kb.hat.x24, 0,
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0,
                          &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x14.count);
         ftCo_8009D704(fp);
     }
@@ -3783,9 +3783,10 @@ void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF0E4(gobj, 3, sp14);
     ftKb_SpecialN_800EF35C(gobj, 3, sp14);
     ftKb_SpecialN_800EF438(gobj, temp_r29);
-    ftParts_8007487C(temp_r29, &fp->fv.kb.hat.x24, fp->x619_costume_id,
-                     &fp->fv.kb.hat.x14.count, &fp->fv.kb.hat.x1C);
-    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->hat_vis_table,
+    ftParts_8007487C((FtPartsDesc*) temp_r29, &fp->fv.kb.hat.x24,
+                     fp->x619_costume_id, &fp->fv.kb.hat.x14.count,
+                     &fp->fv.kb.hat.x1C);
+    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
                     &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
 }
 

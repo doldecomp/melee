@@ -553,10 +553,38 @@ HSD_JObj* ftParts_8007482C(HSD_Joint* joint)
     return jobj;
 }
 
-/// just filling out the data section, remove when matching ftParts_8007487C
-static char ftParts_803C0AE0[] = "fighter parts model num over!\n";
+void ftParts_8007487C(FtPartsDesc* desc, FtPartsVis* vis, u32 costume_id,
+                      u32* arg3, u32* arg4)
+{
+    void*(*vis_table)[4];
+    PAD_STACK(0x8);
 
-/// #ftParts_8007487C
+    vis_table = desc->vis_table;
+    vis->model_num = desc->model_num;
+    if (vis->model_num > 11) {
+        HSD_ASSERTREPORT(627, 0, "fighter parts model num over!\n");
+    }
+
+    vis->xC =
+        vis_table[costume_id][0] ? vis_table[costume_id][0] : vis_table[0][0];
+    vis->x10 =
+        vis_table[costume_id][1] ? vis_table[costume_id][1] : vis_table[0][1];
+    vis->x14 =
+        vis_table[costume_id][2] ? vis_table[costume_id][2] : vis_table[0][2];
+    vis->x18 =
+        vis_table[costume_id][3] ? vis_table[costume_id][3] : vis_table[0][3];
+    vis->x1C = 0;
+    vis->x4[0] = 1;
+    vis->x4[1] = 1;
+    vis->x4[2] = 1;
+    vis->x4[3] = 1;
+    vis->x4[4] = 1;
+    ftParts_80074D7C(vis, 0, arg3);
+    ftParts_80074D7C(vis, 1, arg3);
+    ftParts_80074D7C(vis, 2, arg4);
+    ftParts_80074D7C(vis, 3, arg3);
+    ftParts_80074D7C(vis, 4, arg3);
+}
 
 void ftParts_800749CC(Fighter_GObj* gobj)
 {
@@ -565,7 +593,7 @@ void ftParts_800749CC(Fighter_GObj* gobj)
 
     ftParts_8007487C(&fp->ft_data->x8->x0, &fp->x5AC, fp->x619_costume_id,
                      &fp->dobj_list.count, &fp->x203C);
-    for (i = 0; i < fp->x5AC; i++) {
+    for (i = 0; i < fp->x5AC.model_num; i++) {
         fp->x5F4_arr[i].x0 = -1;
     }
     ftParts_80074ACC(gobj);
@@ -589,7 +617,7 @@ void ftParts_80074A8C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
-    for (i = 0; i < fp->x5AC; i++) {
+    for (i = 0; i < fp->x5AC.model_num; i++) {
         fp->x5F4_arr[i].x1 = fp->x5F4_arr[i].x0;
     }
     fp->x221D_b2 = false;
@@ -600,7 +628,7 @@ void ftParts_80074ACC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
-    for (i = 0; i < fp->x5AC; i++) {
+    for (i = 0; i < fp->x5AC.model_num; i++) {
         fp->x5F4_arr[i].x1 = -1;
     }
     fp->x221D_b2 = false;
