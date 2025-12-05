@@ -1,6 +1,9 @@
 #include "itsamusgrapple.h"
 
+#include "itlinkhookshot.h"
+
 #include "it/inlines.h"
+#include "it/item.h"
 
 void it_2725_Logic53_Spawned(Item_GObj* gobj)
 {
