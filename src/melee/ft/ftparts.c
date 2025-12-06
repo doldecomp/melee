@@ -272,9 +272,7 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
         envelope = var_r22->data;
         temp_r18 = HSD_Index2PosNrmMtx(var_r21);
         var_r17_2 = 0;
-        if (envelope == NULL) {
-            __assert("ftparts.c", 0x148, "envelope");
-        }
+        HSD_ASSERT(328, envelope);
         if (envelope->weight >= 1.0F) {
             HSD_JObjSetupMatrix(envelope->jobj);
             if (temp_r20 != NULL) {
@@ -298,17 +296,11 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
             sp7C[0][1] = 0.0f;
             sp7C[0][0] = 0.0f;
             while (envelope != NULL) {
-                if (envelope->jobj == NULL) {
-                    __assert("ftparts.c", 0x15C, "envelope->jobj");
-                }
+                HSD_ASSERT(348, envelope->jobj);
                 jp = envelope->jobj;
                 HSD_JObjSetupMatrix(jp);
-                if (jp->mtx == NULL) {
-                    __assert("ftparts.c", 0x15F, "jp->mtx");
-                }
-                if (jp->envelopemtx == NULL) {
-                    __assert("ftparts.c", 0x160, "jp->envelopemtx");
-                }
+                HSD_ASSERT(351, jp->mtx);
+                HSD_ASSERT(352, jp->envelopemtx);
                 PSMTXConcat(jp->mtx, jp->envelopemtx, sp4C);
                 HSD_MtxScaledAdd(sp4C, sp7C, sp7C, envelope->weight);
                 envelope = envelope->next;
@@ -413,9 +405,9 @@ void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
             break;
         }
         if (*dobj_index >= 124) {
-            OSReport("fighter parts model dobj num over! player %d\n",
-                     fighter->player_id);
-            __assert("ftparts.c", 0x1D2, "0");
+            HSD_ASSERTREPORT(466, 0,
+                             "fighter parts model dobj num over! player %d\n",
+                             fighter->player_id);
         }
         fighter->dobj_list.data[*dobj_index] = dobj;
         mobj = dobj != NULL ? dobj->mobj : NULL;
@@ -427,8 +419,8 @@ void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
         (*dobj_index)++;
     }
     if (dobj_count >= 128) {
-        OSReport("fighter dobj num over! player %d\n", fighter->player_id);
-        __assert("ftparts.c", 0x1E0, "0");
+        HSD_ASSERTREPORT(480, 0, "fighter dobj num over! player %d\n",
+                         fighter->player_id);
     }
     if (*dobj_index != 0) {
         bone->xD = *dobj_index - 1;
@@ -447,8 +439,8 @@ void ftParts_SetupParts(Fighter_GObj* fighter_obj)
     int dobj_count = 0;
 
     if (ftPartsTable[fp->kind]->parts_num > MAX_FT_PARTS) {
-        OSReport("fighter parts num over! player %d\n", fp->player_id);
-        __assert("ftparts.c", 503, "0");
+        HSD_ASSERTREPORT(503, 0, "fighter parts num over! player %d\n",
+                         fp->player_id);
     }
 
     while (jobj != NULL) {
@@ -498,8 +490,8 @@ void ftParts_SetupParts(Fighter_GObj* fighter_obj)
     fp->dobj_list.count = dobj_count;
 
     if (part != ftPartsTable[fp->kind]->parts_num) {
-        OSReport("fighter parts num not match! player %d\n", fp->player_id);
-        __assert("ftparts.c", 546, "0");
+        HSD_ASSERTREPORT(546, 0, "fighter parts num not match! player %d\n",
+                         fp->player_id);
     }
 }
 
@@ -541,8 +533,8 @@ void ftParts_8007462C(Fighter_GObj* gobj)
         }
     }
     if (i != ftPartsTable[fp->kind]->parts_num) {
-        OSReport("fighter parts num not match! player %d\n", fp->player_id);
-        __assert("ftparts.c", 0x251, "0");
+        HSD_ASSERTREPORT(593, 0, "fighter parts num not match! player %d\n",
+                         fp->player_id);
     }
 }
 
@@ -840,8 +832,7 @@ HSD_TObj* ftParts_80075240(DObjList* arg0, int n)
             }
         }
     }
-    OSReport("can't find tobj!\n");
-    __assert("ftparts.c", 0x3B4, "0");
+    HSD_ASSERTREPORT(948, 0, "can't find tobj!\n");
 }
 
 /**
@@ -995,8 +986,8 @@ void ftParts_80075650(Fighter_GObj* arg0, HSD_JObj* jobj, DObjList* arg2)
                 break;
             }
             if (var_r30 >= 0x20) {
-                OSReport("fighter parts model dobj num over!\n");
-                __assert("ftparts.c", 0x427, "0");
+                HSD_ASSERTREPORT(1063, 0,
+                                 "fighter parts model dobj num over!\n");
             }
             arg2->data[var_r30] = dobj;
             temp_r0 = dobj->mobj;
@@ -1047,8 +1038,7 @@ void ftParts_8007592C(Fighter* fp, int part_idx, f32 rotate_x)
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj2 = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj2) & JOBJ_USE_QUATERNION) {
-            OSReport("cant set fighter rot x!\n");
-            __assert("ftparts.c", 0x460, "0");
+            HSD_ASSERTREPORT(1120, 0, "cant set fighter rot x!\n");
         }
         HSD_JObjSetRotationX(jobj2, rotate_x);
     } else {
@@ -1062,8 +1052,7 @@ void ftParts_80075AF0(Fighter* fp, int part_idx, f32 rotate_y)
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj2 = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj2) & JOBJ_USE_QUATERNION) {
-            OSReport("cant set fighter rot y!\n");
-            __assert("ftparts.c", 0x473, "0");
+            HSD_ASSERTREPORT(1139, 0, "cant set fighter rot y!\n");
         }
         HSD_JObjSetRotationY(jobj2, rotate_y);
     } else {
@@ -1080,8 +1069,7 @@ void ftParts_80075CB4(Fighter* arg0, int part_idx, f32 rotate_z)
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         jobj2 = arg0->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj2) & JOBJ_USE_QUATERNION) {
-            OSReport("cant set fighter rot z!\n");
-            __assert("ftparts.c", 0x486, "0");
+            HSD_ASSERTREPORT(1158, 0, "cant set fighter rot z!\n");
         }
         HSD_JObjSetRotationZ(jobj2, rotate_z);
     } else {
@@ -1095,8 +1083,7 @@ f32 ftParts_80075E78(Fighter* fp, int part_idx)
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
-            OSReport("cant get fighter rot x!\n");
-            __assert("ftparts.c", 0x499, "0");
+            HSD_ASSERTREPORT(1177, 0, "cant get fighter rot x!\n");
         }
         return HSD_JObjGetRotationX(jobj);
     }
@@ -1109,8 +1096,7 @@ f32 ftParts_80075F48(Fighter* fp, int part_idx)
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
-            OSReport("cant get fighter rot y!\n");
-            __assert("ftparts.c", 0x4AC, "0");
+            HSD_ASSERTREPORT(1196, 0, "cant get fighter rot y!\n");
         }
         return HSD_JObjGetRotationY(jobj);
     }
