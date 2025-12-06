@@ -133,7 +133,7 @@ void ftSs_SpecialHi_IASA(HSD_GObj* gobj)
                 fp->cmd_vars[1] = 1;
                 fp->mv.ss.unk5.x0 = 1;
                 ftCommon_UpdateFacing(fp);
-                ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+                ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
     }
@@ -161,7 +161,7 @@ void ftSs_SpecialAirHi_IASA(HSD_GObj* gobj)
                 fp->cmd_vars[1] = 1;
                 fp->mv.ss.unk5.x0 = 1;
                 ftCommon_UpdateFacing(fp);
-                ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+                ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
     }

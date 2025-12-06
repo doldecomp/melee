@@ -64,7 +64,7 @@ void ftPp_SpecialS_8011F68C(Fighter_GObj* gobj)
     u8 _[16];
 
     fp = gobj->user_data;
-    ftParts_8007592C(fp, 0, 0);
+    ftPartSetRotX(fp, 0, 0);
     Fighter_UnkSetFlag_8006CFBC(gobj);
     setRefGObjFlagAndClear(fp);
 }
@@ -263,7 +263,7 @@ static inline void inlineC0(Fighter_GObj* gobj)
 static inline void inlineC1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_8007592C(fp, 0, 0);
+    ftPartSetRotX(fp, 0, 0);
     Fighter_UnkSetFlag_8006CFBC(gobj);
 
     if (fp->x1A5C != NULL) {
@@ -311,7 +311,7 @@ void ftPp_SpecialAirS1_Anim(Fighter_GObj* gobj)
 static inline void inline1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_8007592C(fp, 0, 0.0F);
+    ftPartSetRotX(fp, 0, 0.0F);
     Fighter_UnkSetFlag_8006CFBC(gobj);
     setRefGObjFlagAndClear(fp);
 }
@@ -553,12 +553,11 @@ static inline void inline2(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->cmd_vars[3] != 0 && fp->mv.pp.specials.xC != 0) {
-        ftParts_8007592C(fp, 0,
-                         fp->facing_dir *
-                             atan2f(fp->coll_data.floor.normal.x,
-                                    fp->coll_data.floor.normal.y));
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
     } else {
-        ftParts_8007592C(fp, 0, 0.0F);
+        ftPartSetRotX(fp, 0, 0.0F);
     }
 }
 

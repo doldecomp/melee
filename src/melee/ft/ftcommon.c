@@ -985,7 +985,7 @@ void ftCommon_8007E5AC(Fighter* fp)
     Vec3* ground_normal = &fp->coll_data.floor.normal;
     float tmp = -atan2f(ground_normal->x, ground_normal->y);
     HSD_ASSERT(1146, fp->ground_or_air == GA_Ground);
-    ftParts_80075CB4(fp, 0, tmp);
+    ftPartSetRotZ(fp, 0, tmp);
 }
 
 void ftCommon_SetAccessory(Fighter* fp, HSD_Joint* joint)

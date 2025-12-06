@@ -246,7 +246,7 @@ void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
     }
     if (ftCheckThrowB3(fp) && ABS(fp->input.lstick.x) > da->x78) {
         ftCommon_UpdateFacing(fp);
-        ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+        ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
     }
 }
 

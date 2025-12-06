@@ -74,13 +74,13 @@ void ftCo_800C37A0(Fighter_GObj* gobj)
                           (float) (p_ftCommonData->x648 - fp->dmg.x18F4) /
                           (float) p_ftCommonData->x648;
             fp->dmg.x18F4 -= 1;
-            ftParts_80075AF0(fp, part, rot_y);
+            ftPartSetRotY(fp, part, rot_y);
             HSD_JObjSetRotationY(jobj, rot_y);
             if (fp->dmg.x18F4 == 0) {
                 fp->x2220_b4 = false;
                 fp->facing_dir = -fp->facing_dir;
-                ftParts_80075AF0(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
-                ftParts_80075AF0(fp, part, 0);
+                ftPartSetRotY(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
+                ftPartSetRotY(fp, part, 0);
                 HSD_JObjSetRotationY(jobj, 0);
                 if (fp->x21F8 != NULL) {
                     fp->x21F8(gobj);

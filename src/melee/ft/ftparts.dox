@@ -28,11 +28,11 @@ void ftParts_80074E58(Fighter*);
 Fighter_Part ftParts_GetBoneIndex(Fighter*, Fighter_Part);
 
 void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
-void ftParts_8007592C(Fighter*, s32, f32);
-void ftParts_80075AF0(Fighter*, s32, f32);
-void ftParts_80075CB4(Fighter*, s32, f32);
+void ftPartSetRotX(Fighter*, s32, f32);
+void ftPartSetRotY(Fighter*, s32, f32);
+void ftPartSetRotZ(Fighter*, s32, f32);
 void ftParts_800753D4(Fighter*, s32, UNK_T);
-f32 ftParts_80075F48(Fighter*, s32);
+f32 ftPartGetRotZ(Fighter*, s32);
 s32 ftParts_80074A74(HSD_GObj*, s32);
 void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*);
 void ftParts_8007487C(UNK_T item, u32*, u8 costume_id, u32*, u32*);
@@ -41,7 +41,7 @@ void ftParts_80074D7C(u32*, s32, u32*);
 void ftParts_SetupParts(HSD_GObj* fighter_obj);
 
 /// @returns Blend frames.
-f32 ftParts_80075E78(Fighter*, bool);
+f32 ftPartGetRotX(Fighter*, bool);
 
 void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx);
 void ftParts_8007462C(void);

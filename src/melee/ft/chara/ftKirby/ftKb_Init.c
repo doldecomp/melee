@@ -3947,7 +3947,7 @@ void ftKb_AttackDashAir_Coll(Fighter_GObj* gobj)
 
 void ftKb_AttackDashAir_800F21C0(Fighter_GObj* gobj)
 {
-    ftParts_80075E78(gobj->user_data, 0);
+    ftPartGetRotX(gobj->user_data, 0);
 }
 
 /// #fn_800F21E8
@@ -3955,7 +3955,7 @@ void ftKb_AttackDashAir_800F21C0(Fighter_GObj* gobj)
 void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    ftParts_8007592C(ft, 0, 0.0f);
+    ftPartSetRotX(ft, 0, 0.0F);
 }
 
 /// #ftKb_SpecialHi_Enter
@@ -4222,7 +4222,7 @@ void ftKb_SpecialHi1_Coll(Fighter_GObj* gobj)
         ftKirbyDmgInline(gobj);
         fp->self_vel.z = 0.0f;
         fp->self_vel.y = 0.0f;
-        ftParts_8007592C(fp, 0, 0.0f);
+        ftPartSetRotX(fp, 0, 0.0F);
     }
 }
 
@@ -4248,10 +4248,10 @@ void ftKb_SpecialHi2_Coll(Fighter_GObj* gobj)
             fp->self_vel.y = 0.0f;
             fp->self_vel.x = 0.0f;
             fp->gr_vel = 0.0f;
-            ftParts_8007592C(fp, 0,
-                             fp->facing_dir *
-                                 atan2f(fp->coll_data.floor.normal.x,
-                                        fp->coll_data.floor.normal.y));
+            ftPartSetRotX(fp, 0,
+                          fp->facing_dir *
+                              atan2f(fp->coll_data.floor.normal.x,
+                                     fp->coll_data.floor.normal.y));
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {
@@ -4284,10 +4284,9 @@ void ftKb_SpecialHi3_Coll(Fighter_GObj* gobj)
         fp->self_vel.y = 0.0f;
         fp->self_vel.x = 0.0f;
         fp->gr_vel = 0.0f;
-        ftParts_8007592C(fp, 0,
-                         fp->facing_dir *
-                             atan2f(fp->coll_data.floor.normal.x,
-                                    fp->coll_data.floor.normal.y));
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
         return;
     }
     if (ftCliffCommon_80081298(gobj)) {
@@ -4306,12 +4305,12 @@ void ftKb_SpecialHi4_Coll(Fighter_GObj* gobj)
         fp->accessory4_cb = fn_800F21E8;
         fp->self_vel.z = 0.0f;
         fp->self_vel.y = 0.0f;
-        ftParts_8007592C(fp, 0, 0.0f);
+        ftPartSetRotX(fp, 0, 0.0F);
         return;
     }
-    ftParts_8007592C(fp, 0,
-                     fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
-                                             fp->coll_data.floor.normal.y));
+    ftPartSetRotX(fp, 0,
+                  fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                          fp->coll_data.floor.normal.y));
 }
 
 void ftKb_SpecialAirHi1_Coll(Fighter_GObj* gobj)
@@ -4350,10 +4349,10 @@ void ftKb_SpecialAirHi2_Coll(Fighter_GObj* gobj)
             fp->self_vel.y = 0.0f;
             fp->self_vel.x = 0.0f;
             fp->gr_vel = 0.0f;
-            ftParts_8007592C(fp, 0,
-                             fp->facing_dir *
-                                 atan2f(fp->coll_data.floor.normal.x,
-                                        fp->coll_data.floor.normal.y));
+            ftPartSetRotX(fp, 0,
+                          fp->facing_dir *
+                              atan2f(fp->coll_data.floor.normal.x,
+                                     fp->coll_data.floor.normal.y));
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {
@@ -4385,10 +4384,9 @@ void ftKb_SpecialAirHi3_Coll(Fighter_GObj* gobj)
         fp->self_vel.y = 0.0f;
         fp->self_vel.x = 0.0f;
         fp->gr_vel = 0.0f;
-        ftParts_8007592C(fp, 0,
-                         fp->facing_dir *
-                             atan2f(fp->coll_data.floor.normal.x,
-                                    fp->coll_data.floor.normal.y));
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
         return;
     }
     if (ftCliffCommon_80081298(gobj)) {
@@ -4407,13 +4405,12 @@ void ftKb_SpecialAirHiEnd_Coll(Fighter_GObj* gobj)
         fp->accessory4_cb = fn_800F21E8;
         fp->self_vel.z = 0.0f;
         fp->self_vel.y = 0.0f;
-        ftParts_8007592C(fp, 0,
-                         fp->facing_dir *
-                             atan2f(fp->coll_data.floor.normal.x,
-                                    fp->coll_data.floor.normal.y));
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
         return;
     }
-    ftParts_8007592C(fp, 0, 0.0f);
+    ftPartSetRotX(fp, 0, 0.0F);
 }
 
 void ftKb_SpecialHi_800F331C(Fighter_GObj* gobj)
@@ -4631,7 +4628,7 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj)
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
 
     var_f31 = fp->mv.kb.speciallw.x88[4];
-    ftParts_8007592C(fp, 0, var_f31);
+    ftPartSetRotX(fp, 0, var_f31);
     if (ABS(var_f31) < dat_attr->speciallw_min_slant_angle_slide) {
         var_f31 = 0.0f;
     }

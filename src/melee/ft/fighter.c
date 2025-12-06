@@ -1177,9 +1177,9 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     fp->lstick_angle = 0.0f;
 
-    ftParts_8007592C(fp, 0, 0.0f);
-    ftParts_80075AF0(fp, 0, (M_PI_2 * fp->facing_dir));
-    ftParts_80075CB4(fp, 0, 0.0f);
+    ftPartSetRotX(fp, 0, 0.0F);
+    ftPartSetRotY(fp, 0, (M_PI_2 * fp->facing_dir));
+    ftPartSetRotZ(fp, 0, 0.0F);
 
     if (msid >= fp->x18) {
         new_motion_state = &fp->x20_actionStateList[(msid - fp->x18)];

@@ -1373,7 +1373,7 @@ void ftAnim_80070FB4(Fighter_GObj* arg0, s32 arg1, s32 arg2)
 
 bool ftAnim_80070FD0(Fighter* fp)
 {
-    float rotation = ftParts_80075E78(fp, ftParts_GetBoneIndex(fp, 0x35));
+    float rotation = ftPartGetRotX(fp, ftParts_GetBoneIndex(fp, 0x35));
     if (fp->x100 != rotation) {
         fp->x100 = rotation;
         return true;

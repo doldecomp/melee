@@ -57,10 +57,10 @@ ftParts_80075240(DObjList*, int n); ///< finds the n-th TObj in a DObjList
 /* 0755E8 */ void ftParts_800755E8(Fighter*, u8*);
 /* 075650 */ void ftParts_80075650(Fighter_GObj*, HSD_JObj*, struct DObjList*);
 /* 07584C */ void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
-/* 07592C */ void ftParts_8007592C(Fighter*, int part_idx, f32 rotate_x);
-/* 075AF0 */ void ftParts_80075AF0(Fighter*, int part_idx, f32 rotate_y);
-/* 075CB4 */ void ftParts_80075CB4(Fighter*, int part_idx, f32 rotate_z);
-/* 075E78 */ float ftParts_80075E78(Fighter*, int part_idx);
-/* 075F48 */ float ftParts_80075F48(Fighter*, int part_idx);
+/* 07592C */ void ftPartSetRotX(Fighter*, int part_idx, f32 rotate_x);
+/* 075AF0 */ void ftPartSetRotY(Fighter*, int part_idx, f32 rotate_y);
+/* 075CB4 */ void ftPartSetRotZ(Fighter*, int part_idx, f32 rotate_z);
+/* 075E78 */ float ftPartGetRotX(Fighter*, int part_idx);
+/* 075F48 */ float ftPartGetRotZ(Fighter*, int part_idx);
 
 #endif

@@ -82,7 +82,7 @@ void ftCa_SpecialHi_IASA(HSD_GObj* gobj)
             }
             if (lstick_x > da->specialhi_input_var) {
                 ftCommon_UpdateFacing(fp);
-                ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+                ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
     }
@@ -172,7 +172,7 @@ static void doAirIASA(HSD_GObj* gobj)
         }
         if (lstick_x > da->specialhi_input_var) {
             ftCommon_UpdateFacing(fp);
-            ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+            ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
 }

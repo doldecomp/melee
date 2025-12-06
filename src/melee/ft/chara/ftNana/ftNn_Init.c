@@ -472,7 +472,7 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
         }
         if (nana_fp->facing_dir != popo_fp->facing_dir) {
             nana_fp->facing_dir = popo_fp->facing_dir;
-            ftParts_80075AF0(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
+            ftPartSetRotY(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
         }
         lb_8000B1CC(popo_fp->parts[FtPart_R4thNb].joint, NULL, &popo_vec);
         lb_8000B1CC(nana_fp->parts[FtPart_XRotN].joint, NULL, &nana_vec);
@@ -649,7 +649,7 @@ void ftPp_SpecialHi_4_Coll(Fighter_GObj* gobj)
         if (fp->self_vel.x > 0.0f) {
             fp->self_vel.x *= -1 * attrs->x14C;
             fp->facing_dir *= -1;
-            ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+            ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
             return;
         }
     }
@@ -657,7 +657,7 @@ void ftPp_SpecialHi_4_Coll(Fighter_GObj* gobj)
         if (fp->self_vel.x < 0.0f) {
             fp->self_vel.x *= -1 * attrs->x14C;
             fp->facing_dir *= -1;
-            ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+            ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
             return;
         }
     }
@@ -706,7 +706,7 @@ void ftNn_Init_801237F8(Fighter_GObj* nana_gobj)
 void ftNn_Init_801238E4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_8007592C(fp, 0, 0.0f);
+    ftPartSetRotX(fp, 0, 0.0F);
     Fighter_UnkSetFlag_8006CFBC(gobj);
     if (fp->x1A5C != NULL) {
         Fighter* fp2 = GET_FIGHTER(fp->x1A5C);
@@ -761,7 +761,7 @@ bool ftNn_Init_80123954(Fighter_GObj* nana_gobj, GroundOrAir pp_ga)
                 nana_fp->self_vel = popo_fp->self_vel;
                 nana_fp->gr_vel = popo_fp->gr_vel;
                 nana_fp->facing_dir = popo_fp->facing_dir;
-                ftParts_80075AF0(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
+                ftPartSetRotY(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
                 nana_fp->x1A5C =
                     Player_GetEntityAtIndex(nana_fp->player_id, 0);
             } else {
@@ -890,7 +890,7 @@ void ftPp_SpecialS_0_Phys(Fighter_GObj* nana_gobj)
     nana_fp->gr_vel = popo_fp->gr_vel;
     nana_fp->xE4_ground_accel_1 = popo_fp->xE4_ground_accel_1;
     nana_fp->facing_dir = popo_fp->facing_dir;
-    ftParts_80075AF0(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
+    ftPartSetRotY(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
 }
 
 void ftPp_SpecialS_1_Phys(Fighter_GObj* nana_gobj)
@@ -904,7 +904,7 @@ void ftPp_SpecialS_1_Phys(Fighter_GObj* nana_gobj)
     nana_fp->gr_vel = popo_fp->gr_vel;
     nana_fp->xE4_ground_accel_1 = popo_fp->xE4_ground_accel_1;
     nana_fp->facing_dir = popo_fp->facing_dir;
-    ftParts_80075AF0(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
+    ftPartSetRotY(nana_fp, 0, M_PI_2 * nana_fp->facing_dir);
 }
 
 static inline void ftPp_SpecialS_0_Coll_inline(Fighter_GObj* nana_gobj)
@@ -913,7 +913,7 @@ static inline void ftPp_SpecialS_0_Coll_inline(Fighter_GObj* nana_gobj)
     Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
     Fighter* popo_fp = GET_FIGHTER(popo_gobj);
 
-    ftParts_8007592C(nana_fp, 0, ftParts_80075E78(popo_fp, 0));
+    ftPartSetRotX(nana_fp, 0, ftPartGetRotX(popo_fp, 0));
 }
 
 static inline void ftPp_SpecialS_0_Coll_inline2(Fighter_GObj* nana_gobj)

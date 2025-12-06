@@ -161,5 +161,5 @@ void ftDemo_SetFacingDirection(Fighter_GObj* gobj, float facing_dir)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->facing_dir = facing_dir;
-    ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+    ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
 }

@@ -50,7 +50,7 @@ void ftCo_HammerTurn_Anim(Fighter_GObj* gobj)
                 M_PI *
                 ((p_ftCommonData->x6B0 - fp->mv.co.walk.fast_anim_frame) /
                  p_ftCommonData->x6B0);
-            ftParts_80075AF0(fp, part, rot_y);
+            ftPartSetRotY(fp, part, rot_y);
             HSD_JObjSetRotationY(jobj, rot_y);
         }
         if (fp->mv.co.walk.fast_anim_frame <= 0) {

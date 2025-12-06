@@ -149,7 +149,7 @@ void ft_8008A1B8(Fighter_GObj* gobj, int flags)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x221C_u16_y = flags;
     if (!(flags & 0x4)) {
-        ftParts_8007592C(fp, 0, 0.0f);
+        ftPartSetRotX(fp, 0, 0.0F);
     }
 }
 
