@@ -1102,3 +1102,5 @@ f32 ftParts_80075F48(Fighter* fp, int part_idx)
     }
     return HSD_JObjGetRotationY(jobj);
 }
+
+static char* ftParts_803C0BEC = "cant get fighter rot z!\n";
