@@ -1218,10 +1218,8 @@ struct Fighter {
     /*  fp+5E8 */ FighterBone* parts;
     /*  fp+5EC */ DObjList dobj_list;
     /*  fp+5F4 */ struct {
-        s8 x0, x1;
-    } x5F4_arr[2];
-    /*  fp+5F8 */ s8 x5F8;
-    /*  fp+5FC */ u8 filler_x5FC[0x60C - 0x5F9];
+        /*  fp+5F4 */ s8 prev, idx;
+    } x5F4_arr[12];
     /*  fp+60C */ void* x60C;
     /*  fp+610 */ GXColor x610_color_rgba[2];
     /*  fp+618 */ u8 x618_player_id;

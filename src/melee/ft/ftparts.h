@@ -35,11 +35,11 @@ struct Fighter_804D6540_x0_t;
 /* 07487C */ void ftParts_8007487C(FtPartsDesc*, FtPartsVis*, u32 costume_id,
                                    DObjList*, DObjList*);
 /* 0749CC */ void ftParts_800749CC(Fighter_GObj*);
-/* 074A4C */ void ftParts_80074A4C(Fighter_GObj*, int idx, int val);
-/* 074A74 */ int ftParts_80074A74(Fighter_GObj*, int idx);
+/* 074A4C */ void ftParts_80074A4C(Fighter_GObj*, int model_idx, int val);
+/* 074A74 */ int ftParts_80074A74(Fighter_GObj*, int model_idx);
 /* 074A8C */ void ftParts_80074A8C(Fighter_GObj*);
 /* 074ACC */ void ftParts_80074ACC(Fighter_GObj*);
-/* 074B0C */ void ftParts_80074B0C(Fighter_GObj*, int idx, int val);
+/* 074B0C */ void ftParts_80074B0C(Fighter_GObj*, int model_idx, int val);
 /* 074B6C */ void ftParts_80074B6C(Fighter*, FtPartsVis*, int, DObjList*);
 /* 074CA0 */ void ftParts_80074CA0(FtPartsVis*, int, DObjList*);
 /* 074D7C */ void ftParts_80074D7C(FtPartsVis*, int, DObjList*);

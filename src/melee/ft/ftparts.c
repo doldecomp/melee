@@ -588,22 +588,22 @@ void ftParts_800749CC(Fighter_GObj* gobj)
     ftParts_8007487C(&fp->ft_data->x8->x0, &fp->x5AC, fp->x619_costume_id,
                      &fp->dobj_list, &fp->x203C);
     for (i = 0; i < fp->x5AC.model_num; i++) {
-        fp->x5F4_arr[i].x0 = -1;
+        fp->x5F4_arr[i].prev = -1;
     }
     ftParts_80074ACC(gobj);
 }
 
-void ftParts_80074A4C(Fighter_GObj* gobj, int idx, int val)
+void ftParts_80074A4C(Fighter_GObj* gobj, int model_idx, int val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x5F4_arr[idx].x0 = val;
+    fp->x5F4_arr[model_idx].prev = val;
     fp->x221D_b2 = true;
 }
 
-int ftParts_80074A74(Fighter_GObj* gobj, int idx)
+int ftParts_80074A74(Fighter_GObj* gobj, int model_idx)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x5F4_arr[idx].x0;
+    return fp->x5F4_arr[model_idx].prev;
 }
 
 void ftParts_80074A8C(Fighter_GObj* gobj)
@@ -612,7 +612,7 @@ void ftParts_80074A8C(Fighter_GObj* gobj)
     int i;
 
     for (i = 0; i < fp->x5AC.model_num; i++) {
-        fp->x5F4_arr[i].x1 = fp->x5F4_arr[i].x0;
+        fp->x5F4_arr[i].idx = fp->x5F4_arr[i].prev;
     }
     fp->x221D_b2 = false;
 }
@@ -623,16 +623,16 @@ void ftParts_80074ACC(Fighter_GObj* gobj)
     int i;
 
     for (i = 0; i < fp->x5AC.model_num; i++) {
-        fp->x5F4_arr[i].x1 = -1;
+        fp->x5F4_arr[i].idx = -1;
     }
     fp->x221D_b2 = false;
 }
 
-void ftParts_80074B0C(Fighter_GObj* gobj, int idx, int val)
+void ftParts_80074B0C(Fighter_GObj* gobj, int model_idx, int val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (val != fp->x5F4_arr[idx].x1) {
-        fp->x5F4_arr[idx].x1 = val;
+    if (val != fp->x5F4_arr[model_idx].idx) {
+        fp->x5F4_arr[model_idx].idx = val;
         fp->x221D_b2 = true;
         ftParts_80074D7C(&fp->x5AC, 0, &fp->dobj_list);
     }
@@ -645,8 +645,8 @@ void ftParts_80074B6C(Fighter* fp, FtPartsVis* vis, int idx,
     if (lookup != NULL && !vis->cleared[idx]) {
         int i; // r26
         for (i = 0; i < vis->model_num; i++) {
-            int r25 = (int) fp->x5F4_arr[i].x1; // r25
-            int j;                              // r24
+            int r25 = (int) fp->x5F4_arr[i].idx; // r25
+            int j;                               // r24
             for (j = 0; j < lookup[i].x0; j++) {
                 TempS* r27 = &lookup[i].x4[j]; // r27
                 u8* r0 = r27->x4;              // r0
