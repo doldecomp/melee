@@ -1,6 +1,9 @@
 #include "itsamusgrapple.h"
 
+#include "itlinkhookshot.h"
+
 #include "it/inlines.h"
+#include "it/item.h"
 
 void it_2725_Logic53_Spawned(Item_GObj* gobj)
 {
@@ -108,7 +111,12 @@ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj)
 
 /// #it_802BAA08
 
-/// #it_802BAA58
+void it_802BAA58(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    Item_80268E5C((HSD_GObj*) gobj, 4, ITEM_ANIM_UPDATE);
+    it_802A2428(gobj);
+}
 
 /// #it_802BAA94
 
