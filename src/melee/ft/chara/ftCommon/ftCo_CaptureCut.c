@@ -170,7 +170,7 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             temp_r3_2 = mpLib_8005199C_Floor(&sp4C, -1, -1);
             if (temp_r3_2 != -1) {
                 int tmp = var_r31->coll_data.floor.index;
-                if (mpLib_80054F68(temp_r3_2, tmp)) {
+                if (mpLinesConnected(temp_r3_2, tmp)) {
                     var_r30->coll_data.floor.index = temp_r3_2;
                     mpLib_8004DD90_Floor(temp_r3_2, &sp4C, &sp48, 0, NULL);
                     if (sp48 >= p_ftCommonData->x3BC) {
@@ -188,14 +188,14 @@ void ftCo_800DC920(Fighter_GObj* arg0, Fighter_GObj* gobj)
             temp_r28_2 = &var_r30->coll_data;
             temp_r29 = GET_JOBJ(var_r30->gobj);
             tmp.x = 0;
-            tmp.y = 0.5F * (var_r31->coll_data.xA4_ecbCurrCorrect.top.y +
-                            var_r31->coll_data.xA4_ecbCurrCorrect.bottom.y);
+            tmp.y = 0.5F * (var_r31->coll_data.ecb.top.y +
+                            var_r31->coll_data.ecb.bottom.y);
             tmp.z = 0;
             sp3C.x = var_r31->cur_pos.x + tmp.x;
             sp3C.y = var_r31->cur_pos.y + tmp.y;
             sp3C.z = var_r31->cur_pos.z + tmp.z;
 
-            temp_r28_2->prev_pos = sp3C;
+            temp_r28_2->last_pos = sp3C;
             mpColl_80043670(temp_r28_2);
             temp_r28_2->cur_pos = sp4C;
 

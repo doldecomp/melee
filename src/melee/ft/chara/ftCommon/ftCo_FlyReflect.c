@@ -35,30 +35,30 @@ bool ftCo_800C15F4(Fighter_GObj* gobj)
     CollData* coll = &fp->coll_data;
     float threshold = p_ftCommonData->x1B0;
     float kb_vel_x = fp->x8c_kb_vel.x;
-    if (kb_vel_x < -threshold && coll->env_flags & MPCOLL_FLAGS_B11 &&
+    if (kb_vel_x < -threshold && coll->env_flags & Collide_RightWallHug &&
         fp->mv.co.damage.x19 != ftCo_Surface_LeftWall)
     {
         u8 _[8] = { 0 };
-        vec.x = coll->xA4_ecbCurrCorrect.left.x;
-        vec.y = coll->xA4_ecbCurrCorrect.left.y;
+        vec.x = coll->ecb.left.x;
+        vec.y = coll->ecb.left.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
-            Vec3* normal = &coll->left_wall.normal;
+            Vec3* normal = &coll->right_facing_wall.normal;
             ftCo_800C18A8(gobj, ftCo_MS_FlyReflectWall, normal, &vec);
         }
         fp->mv.co.damage.x19 = ftCo_Surface_LeftWall;
         return true;
     }
-    if (kb_vel_x > threshold && coll->env_flags & MPCOLL_FLAGS_B05 &&
+    if (kb_vel_x > threshold && coll->env_flags & Collide_LeftWallHug &&
         fp->mv.co.damage.x19 != ftCo_Surface_RightWall)
     {
-        vec.x = coll->xA4_ecbCurrCorrect.right.x;
-        vec.y = coll->xA4_ecbCurrCorrect.right.y;
+        vec.x = coll->ecb.right.x;
+        vec.y = coll->ecb.right.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {
-            Vec3* normal = &coll->right_wall.normal;
+            Vec3* normal = &coll->left_facing_wall.normal;
             ftCo_800C18A8(gobj, ftCo_MS_FlyReflectWall, normal, &vec);
         }
         fp->mv.co.damage.x19 = ftCo_Surface_RightWall;
@@ -74,11 +74,11 @@ bool ftCo_800C1718(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
     if (fp->x8c_kb_vel.y > p_ftCommonData->x1B0 &&
-        coll->env_flags & MPCOLL_FLAGS_B14 &&
+        coll->env_flags & Collide_CeilingHug &&
         fp->mv.co.damage.x19 != ftCo_Surface_Ceiling)
     {
         vec.x = 0;
-        vec.y = coll->xA4_ecbCurrCorrect.top.y;
+        vec.y = coll->ecb.top.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         {

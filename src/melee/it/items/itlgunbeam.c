@@ -52,12 +52,12 @@ void it_802993E0(Item_GObj* gobj, s32 flags)
         pos.y += item->x378_itemColl.ceiling.normal.y;
     }
     if (flags & (1 << 2)) {
-        pos.x += item->x378_itemColl.right_wall.normal.x;
-        pos.y += item->x378_itemColl.right_wall.normal.y;
+        pos.x += item->x378_itemColl.left_facing_wall.normal.x;
+        pos.y += item->x378_itemColl.left_facing_wall.normal.y;
     }
     if (flags & (1 << 3)) {
-        pos.x += item->x378_itemColl.left_wall.normal.x;
-        pos.y += item->x378_itemColl.left_wall.normal.y;
+        pos.x += item->x378_itemColl.right_facing_wall.normal.x;
+        pos.y += item->x378_itemColl.right_facing_wall.normal.y;
     }
     lbVector_Normalize(&pos);
     item->xDD4_itemVar.lgunbeam.position1 = pos;
@@ -249,22 +249,22 @@ bool itLgunbeam_UnkMotion0_Coll(HSD_GObj* gobj)
         ip->xDD4_itemVar.lgunbeam.angle0 -= 2 * M_PI;
     }
     {
-        ip->x378_itemColl.x108_f32 = 3.0f;
-        ip->x378_itemColl.x10C_f32 = 3.0f;
-        ip->x378_itemColl.x110_f32 = 3.0f;
-        ip->x378_itemColl.x114_f32 = 3.0f;
+        ip->x378_itemColl.ecb_source.up = 3.0f;
+        ip->x378_itemColl.ecb_source.down = 3.0f;
+        ip->x378_itemColl.ecb_source.front = 3.0f;
+        ip->x378_itemColl.ecb_source.back = 3.0f;
         it_8026D9A0(gobj);
 
-        if (ip->x378_itemColl.env_flags & 0x18000) {
+        if (ip->x378_itemColl.env_flags & Collide_FloorMask) {
             flags |= 1;
         }
-        if (ip->x378_itemColl.env_flags & 0x6000) {
+        if (ip->x378_itemColl.env_flags & Collide_CeilingMask) {
             flags |= 2;
         }
-        if (ip->x378_itemColl.env_flags & 0x3F) {
+        if (ip->x378_itemColl.env_flags & Collide_LeftWallMask) {
             flags |= 4;
         }
-        if (ip->x378_itemColl.env_flags & 0xFC0) {
+        if (ip->x378_itemColl.env_flags & Collide_RightWallMask) {
             flags |= 8;
         }
         if (flags) {

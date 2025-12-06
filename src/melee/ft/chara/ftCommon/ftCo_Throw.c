@@ -522,8 +522,7 @@ static inline float ftCo_800DDDE4_inline3(Fighter* fp3)
 
 static inline float ftCo_800DDDE4_inline2(Fighter* fp3)
 {
-    return 0.5f * (fp3->coll_data.xA4_ecbCurrCorrect.top.y +
-                   fp3->coll_data.xA4_ecbCurrCorrect.bottom.y);
+    return 0.5f * (fp3->coll_data.ecb.top.y + fp3->coll_data.ecb.bottom.y);
 }
 
 void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
@@ -591,7 +590,7 @@ void ftCo_800DDDE4(Fighter_GObj* gobj, Fighter_GObj* gobj2, bool arg)
         vec2.x = fp3->cur_pos.x + ftCo_800DDDE4_inline3(fp3);
         vec2.y = fp3->cur_pos.y + ftCo_800DDDE4_inline2(fp3);
         vec2.z = fp3->cur_pos.z + ftCo_800DDDE4_inline3(fp3);
-        fp4->coll_data.prev_pos = vec2;
+        fp4->coll_data.last_pos = vec2;
         mpColl_80043670(cd);
         cd->cur_pos = vec;
         HSD_JObjSetTranslate(jobj, &vec);

@@ -645,7 +645,7 @@ void ftPp_SpecialHi_4_Coll(Fighter_GObj* gobj)
         ftNn_Init_8012378C(gobj);
         return;
     }
-    if (cd->env_flags & 0x3F) {
+    if (cd->env_flags & Collide_LeftWallMask) {
         if (fp->self_vel.x > 0.0f) {
             fp->self_vel.x *= -1 * attrs->x14C;
             fp->facing_dir *= -1;
@@ -653,7 +653,7 @@ void ftPp_SpecialHi_4_Coll(Fighter_GObj* gobj)
             return;
         }
     }
-    if (cd->env_flags & 0xFC0) {
+    if (cd->env_flags & Collide_RightWallMask) {
         if (fp->self_vel.x < 0.0f) {
             fp->self_vel.x *= -1 * attrs->x14C;
             fp->facing_dir *= -1;
@@ -661,7 +661,7 @@ void ftPp_SpecialHi_4_Coll(Fighter_GObj* gobj)
             return;
         }
     }
-    if (cd->env_flags & 0x6000) {
+    if (cd->env_flags & Collide_CeilingMask) {
         fp->self_vel.y = 0.0f;
     }
 }

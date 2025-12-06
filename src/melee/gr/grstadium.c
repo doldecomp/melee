@@ -362,7 +362,7 @@ void grStadium_801D1570(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
     Ground_801C3214(gp->map_id);
-    mpLib_80057638(4);
+    mpJointListAdd(4);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->u.stadium.xC4_b0 = false;
     gp->u.stadium.xC4_b1 = false;
@@ -390,7 +390,7 @@ void grStadium_801D1648(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground_801C2ED0(jobj, gp->map_id);
     Ground_801C3214(gp->map_id);
-    mpLib_80057638(3);
+    mpJointListAdd(3);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->u.stadium.xC4_b0 = false;
     gp->u.stadium.xC4_b1 = false;
@@ -422,7 +422,7 @@ void grStadium_801D1720(Ground_GObj* gobj)
 
     Ground_801C2ED0(jobj, gp->map_id);
     Ground_801C3214(gp->map_id);
-    mpLib_80057638(5);
+    mpJointListAdd(5);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->u.stadium9.xC4_b0 = false;
     gp->u.stadium9.xC4_b1 = false;
@@ -465,8 +465,8 @@ void grStadium_801D1840(Ground_GObj* gobj)
 
     Ground_801C2ED0(jobj, gp->map_id);
     Ground_801C3214(gp->map_id);
-    mpLib_80057638(1);
-    mpLib_80057638(2);
+    mpJointListAdd(1);
+    mpJointListAdd(2);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->u.stadium9.xC4_b0 = false;
     gp->u.stadium9.xC4_b1 = false;
@@ -535,7 +535,7 @@ void grStadium_801D1A38(Ground_GObj* gobj)
 
     Ground_801C2ED0(jobj, gp->map_id);
     Ground_801C3214(gp->map_id);
-    mpLib_80057638(7);
+    mpJointListAdd(7);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->u.stadium9.xCC_gobj = grStadium_801D10F8(7);
     gp->u.stadium9.xD0_gobj = grStadium_801D10F8(8);
@@ -579,7 +579,7 @@ void grStadium_801D1B48(Ground_GObj* gobj)
 
     if (gp->u.stadium9.xC4_b0) {
         gp->u.stadium9.xC4_b0 = false;
-        mpLib_80057638(0);
+        mpJointListAdd(0);
     }
     if (gp->u.stadium9.xC4_b1) {
         gp->u.stadium9.xC4_b1 = false;

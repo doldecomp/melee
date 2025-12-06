@@ -281,9 +281,8 @@ void ftCo_DamageIce_Phys(Fighter_GObj* gobj)
     ftCo_DatAttrs* co = &fp->co_attrs;
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007CEF4(fp);
-        ftCommon_Fall(fp,
-                          co->grav * p_ftCommonData->damageice_gravity_mult,
-                          co->terminal_vel);
+        ftCommon_Fall(fp, co->grav * p_ftCommonData->damageice_gravity_mult,
+                      co->terminal_vel);
     } else {
         ft_80084F3C(gobj);
     }
@@ -316,31 +315,31 @@ void ftCo_DamageIce_InAirUpdate(Fighter_GObj* gobj)
         ret = ft_800824A0(gobj, &fp->mv.co.damageice.ice_coll);
     }
 
-    if ((coll_data->env_flags & MPCOLL_FLAGS_B11) &&
+    if ((coll_data->env_flags & Collide_RightWallHug) &&
         fp->mv.co.damageice.wall_hit_dir != 1)
     {
-        vec.x = coll_data->xA4_ecbCurrCorrect.left.x;
-        vec.y = coll_data->xA4_ecbCurrCorrect.left.y;
+        vec.x = coll_data->ecb.left.x;
+        vec.y = coll_data->ecb.left.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
-        normal = &coll_data->left_wall.normal;
+        normal = &coll_data->right_facing_wall.normal;
         ftCo_DamageIce_Collide(gobj, normal, &vec);
         fp->mv.co.damageice.wall_hit_dir = 1;
-    } else if ((coll_data->env_flags & MPCOLL_FLAGS_B05) &&
+    } else if ((coll_data->env_flags & Collide_LeftWallHug) &&
                fp->mv.co.damageice.wall_hit_dir != 2)
     {
-        vec.x = coll_data->xA4_ecbCurrCorrect.right.x;
-        vec.y = coll_data->xA4_ecbCurrCorrect.right.y;
+        vec.x = coll_data->ecb.right.x;
+        vec.y = coll_data->ecb.right.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
-        normal = &coll_data->right_wall.normal;
+        normal = &coll_data->left_facing_wall.normal;
         ftCo_DamageIce_Collide(gobj, normal, &vec);
         fp->mv.co.damageice.wall_hit_dir = 2;
-    } else if ((coll_data->env_flags & MPCOLL_FLAGS_B14) &&
+    } else if ((coll_data->env_flags & Collide_CeilingHug) &&
                fp->mv.co.damageice.wall_hit_dir != 3)
     {
         vec.x = 0;
-        vec.y = coll_data->xA4_ecbCurrCorrect.top.y;
+        vec.y = coll_data->ecb.top.y;
         vec.z = 0;
         ftKb_SpecialN_800F1F1C(gobj, &vec);
         normal = &coll_data->ceiling.normal;
@@ -398,8 +397,8 @@ void ftCo_DamageIce_Collide(Fighter_GObj* gobj, Vec3* normal, Vec3* vec)
             fp->self_vel.y *= mult;
         }
 
-        if ((coll_data->env_flags & MPCOLL_FLAGS_B11) != 0 ||
-            (coll_data->env_flags & MPCOLL_FLAGS_B11) != 0)
+        if ((coll_data->env_flags & Collide_RightWallHug) != 0 ||
+            (coll_data->env_flags & Collide_RightWallHug) != 0)
         {
             fp->cur_pos.x = -((fp->x68C_transNPos.z * -fp->facing_dir) -
                               (fp->cur_pos.x + vec->x));

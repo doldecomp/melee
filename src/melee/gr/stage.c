@@ -234,8 +234,8 @@ void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
         bool1 = 0;
         for (counter_f = -10.0F; counter_f < 100.0f; counter_f += 10.0f) {
             s32 temp_ret =
-                mpLib_80051EC8(0.0F, 10.0F + counter_f, 0.0F, counter_f,
-                               &internal_vec, 0, 0, 0, 1, -1, -1);
+                mpCheckMultiple(0.0F, 10.0F + counter_f, 0.0F, counter_f,
+                                &internal_vec, 0, 0, 0, 1, -1, -1);
             if (temp_ret != 0) {
                 bool1 = 1;
                 break;
@@ -245,8 +245,8 @@ void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
         if (bool1 == 0) {
             for (counter_f = -10.0F; counter_f > -100.0f; counter_f -= 10.0f) {
                 s32 temp_ret =
-                    mpLib_80051EC8(0.0F, counter_f, 0.0F, counter_f - 10.0F,
-                                   &internal_vec, 0, 0, 0, 1, -1, -1);
+                    mpCheckMultiple(0.0F, counter_f, 0.0F, counter_f - 10.0F,
+                                    &internal_vec, 0, 0, 0, 1, -1, -1);
 
                 if (temp_ret != 0) {
                     bool1 = 1;

@@ -289,8 +289,8 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
 mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 {
     int i;
-    if (mpLib_8004F008_Floor(arg0->x, arg0->y, arg0->x, arg0->y + arg1, 0.0F,
-                             NULL, &i, NULL, NULL, -1, -1, -1, NULL, NULL))
+    if (mpCheckFloor(arg0->x, arg0->y, arg0->x, arg0->y + arg1, 0.0F, NULL, &i,
+                     NULL, NULL, -1, -1, -1, NULL, NULL))
     {
         return mpIsland_8005AB54(i);
     }
@@ -300,10 +300,10 @@ mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 {
     CollJoint* temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
-    if (temp_r3->flags & 0x700) {
+    if (temp_r3->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
         return true;
     }
-    if (temp_r3->flags & 0x700) {
+    if (temp_r3->flags & (CollJoint_B10 | CollJoint_B9 | CollJoint_B8)) {
         return true;
     }
     return false;
@@ -320,9 +320,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 
     CollJoint* temp_r3;
     temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
-    var_r31 = temp_r3->coll_info->floor_start;
+    var_r31 = temp_r3->inner->floor_start;
     var_r30 = &mpGetGroundCollLine()[var_r31];
-    temp_r29 = temp_r3->coll_info->floor_count;
+    temp_r29 = temp_r3->inner->floor_count;
 
     var_r28 = true;
     var_r27 = true;
@@ -339,9 +339,9 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 
     for (i = 0; i < temp_r29 && var_r28 && var_r27; var_r31++) {
         if (var_r28 && var_r30->x0->v0_idx == arg0->x4) {
-            mpLib_80054158(var_r31, arg1);
+            mpFloorGetLeft(var_r31, arg1);
         } else if (var_r27 && var_r30->x0->v1_idx == arg0->x6) {
-            mpLib_80053FF4(var_r31, arg2);
+            mpFloorGetRight(var_r31, arg2);
         }
         i++;
         var_r30++;

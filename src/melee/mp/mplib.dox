@@ -19,23 +19,23 @@ UNK_T mpLib_80056AC4(void);
 UNK_T mpLib_80056A54(void);
 UNK_T mpLib_80056AFC(void);
 
-bool mpLib_800501CC_LeftWall(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
+bool mpCheckLeftWall(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
                     f32 right_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32,
                     u32);
 
 UNK_T mpLib_80056A8C(void);
 UNK_T mpLib_80056A1C(void);
 
-bool mpLib_800509B8_RightWall(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
+bool mpCheckRightWall(f32 surface_normal_y, f32 surface_normal_x, f32 left_x,
                     f32 left_y, Vec3* coll_vec, UNK_T, UNK_T, UNK_T, u32, u32);
 
 u32 mpLineGetFlags(enum_t);
 
-s32 mpLib_80051EC8(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
+s32 mpCheckMultiple(Vec3*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
 void mpLib_80053DA4_Floor(int ledge_id, Vec3*);
 void mpLib_80053ECC_Floor(int ledge_id, Vec3*);
-void mpLib_80053FF4(s32, Vec3*);
-void mpLib_80054158(s32, Vec3*);
+void mpFloorGetRight(s32, Vec3*);
+void mpFloorGetLeft(s32, Vec3*);
 
 /// @todo Params not confirmed.
 bool mpGetSpeed(s32 wall_id, Vec3* ecb_side_vtx, Vec3* result);
@@ -57,27 +57,27 @@ void mpLib_800552B0(s16 x, HSD_JObj*, s16 z);
 void mpLib_80055E9C(s16 x);
 void mpGetGroundCollJoint(void);
 void mpLib_80057424(s32);
-void mpLib_80057638(s32);
+void mpJointListAdd(s32);
 void mpLib_80057BC0(s32);
-bool mpLib_80054F68(s32, s32);
-s32 mpLib_80052700_Floor(int idx);
-bool mpLib_8004F008_Floor(Vec3*, int, int, int, int, int, int, int, float, float,
+bool mpLinesConnected(s32, s32);
+s32 mpLinePrevNonFloor(int idx);
+bool mpCheckFloor(Vec3*, int, int, int, int, int, int, int, float, float,
                     float, float, float);
-s32 mpLib_80054584(int, float*);
+s32 mpLeftWallGetTop(int, float*);
 bool mpLib_8004DD90_Floor(int idx, float*, float*, UNK_T, Vec3* normal);
 bool mpLib_8004E398_LeftWall(void);
-void mpLib_800588D0(f32 left, f32 bottom, f32 right, f32 top);
+void mpBoundingCheck(f32 left, f32 bottom, f32 right, f32 top);
 enum_t mpJointFromLine(enum_t);
 void mpJointGetCb1(int, mpLib_Callback*, UNK_T);
 void mpJointGetCb2(int, mpLib_Callback*, UNK_T);
 enum_t mpLineGetKind(int);
-void mpLib_80058AA0(void);
+void mpUncheckBounding(void);
 enum_t mpLib_8004E090_Ceiling(int idx, Vec3*, f32*, u32*, Vec3* normal);
 void mpLib_800569EC(void);
-/* 04F8A4 */ UNK_RET mpLib_8004F8A4_Ceiling(UNK_PARAMS);
-/* 052508 */ UNK_RET mpLib_80052508(UNK_PARAMS);
+/* 04F8A4 */ UNK_RET mpCheckCeiling(UNK_PARAMS);
+/* 052508 */ UNK_RET mpCheckAll(UNK_PARAMS);
 /* 054DFC */ void mpLineGetNormal(enum_t, Vec3*);
-/* 0524DC */ bool mpLib_800524DC(int, int, int, int, int, int, float x,
+/* 0524DC */ bool mpCheckAllRemap(int, int, int, int, int, int, float x,
                                  float y, float z, float);
 
 #endif

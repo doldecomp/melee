@@ -74,13 +74,13 @@ bool itKinoko_UnkMotion0_Coll(Item_GObj* gobj)
 
     it_8026D78C(gobj, it_80293884);
     if (it->ground_or_air != GA_Air) {
-        if ((cd->env_flags & MPCOLL_UNK)) {
+        if ((cd->env_flags & Collide_FloorMask)) {
             it_80276408(gobj, cd, &it->xDD4_itemVar.kinoko.x4);
         } else {
             it->xDD4_itemVar.kinoko.x4.x = 0.0f;
         }
-        if ((cd->env_flags & MPCOLL_RIGHTWALL) ||
-            (cd->env_flags & MPCOLL_LEFTWALL))
+        if ((cd->env_flags & Collide_LeftWallMask) ||
+            (cd->env_flags & Collide_RightWallMask))
         {
             it->facing_dir = -it->facing_dir;
             it->xDD4_itemVar.kinoko.x0 = -it->xDD4_itemVar.kinoko.x0;
@@ -138,7 +138,7 @@ bool itKinoko_UnkMotion1_Coll(Item_GObj* gobj)
     CollData* cd = &it->x378_itemColl;
 
     it_8026E7E0(gobj, it_802936E4);
-    if (it->ground_or_air != GA_Air && (cd->env_flags & MPCOLL_UNK)) {
+    if (it->ground_or_air != GA_Air && (cd->env_flags & Collide_FloorMask)) {
         it_80276408(gobj, cd, &it->xDD4_itemVar.kinoko.x4);
     }
     return false;

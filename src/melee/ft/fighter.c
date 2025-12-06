@@ -904,7 +904,7 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006ABA0, 2);
     HSD_GObjProc_8038FD54(gobj, &Fighter_Spaghetti_8006AD10, 3);
     HSD_GObjProc_8038FD54(gobj, &Fighter_procUpdate, 4);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006C27C, 6);
+    HSD_GObjProc_8038FD54(gobj, &Fighter_procMap, 6);
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006C5F4, 7);
     HSD_GObjProc_8038FD54(gobj, &Fighter_CallAcessoryCallbacks_8006C624, 8);
     HSD_GObjProc_8038FD54(gobj, &Fighter_8006C80C, 9);
@@ -1083,7 +1083,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     fp->x2225_b1 = 0;
     fp->x2225_b4 = 0;
 
-    mpColl_8004CBF4(&fp->coll_data);
+    mpClearFloorSkip(&fp->coll_data);
 
     ftCo_800DEEA8(gobj);
 
@@ -2457,7 +2457,7 @@ static inline float Fighter_GetPosY(Fighter* fp)
     return fp->cur_pos.y;
 }
 
-void Fighter_8006C27C(Fighter_GObj* gobj)
+void Fighter_procMap(Fighter_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 

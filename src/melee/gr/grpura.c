@@ -383,10 +383,10 @@ void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
         lb_8000B1CC(arg0, arg1, arg2);
         uVar1++;
     } while (uVar1 < 42);
-    mpLib_800565DC(0);
-    mpLib_800565DC(9);
-    mpLib_800565DC(24);
-    mpLib_800565DC(5);
+    mpJointUpdateBounding(0);
+    mpJointUpdateBounding(9);
+    mpJointUpdateBounding(24);
+    mpJointUpdateBounding(5);
 }
 
 DynamicsDesc* grPura_802130C0(enum_t arg0)

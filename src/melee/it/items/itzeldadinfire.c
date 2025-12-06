@@ -55,17 +55,17 @@ bool it_802C3AFC(Item_GObj* gobj, CollData* cd)
     bool ret = false;
     it_8026DA08(gobj);
     if (ip->x40_vel.y > 0.0f) {
-        if (cd->env_flags & 0x6000) {
+        if (cd->env_flags & Collide_CeilingMask) {
             ret = true;
         }
-    } else if (cd->env_flags & 0x18000) {
+    } else if (cd->env_flags & Collide_FloorMask) {
         ret = true;
     }
     if (ip->x40_vel.x > 0.0f) {
-        if (cd->env_flags & 0x3F) {
+        if (cd->env_flags & Collide_LeftWallMask) {
             ret = true;
         }
-    } else if (cd->env_flags & 0xFC0) {
+    } else if (cd->env_flags & Collide_RightWallMask) {
         ret = true;
     }
     return ret;

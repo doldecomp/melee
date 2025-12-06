@@ -48,19 +48,19 @@ struct mp_UnkStruct0 {
     /* +2C */ mp_UnkStruct3* ptr;
 };
 
-struct mpLib_Line {
+struct MapLine {
     /* +0 */ u16 v0_idx;
     /* +2 */ u16 v1_idx;
     /* +4 */ s16 prev_id0;
     /* +6 */ s16 next_id0;
     /* +8 */ s16 prev_id1;
     /* +A */ s16 next_id1;
-    /* +C */ u16 is_empty;
-    /* +E */ u16 flags;
+    /* +C */ u16 hi_flags;
+    /* +E */ u16 lo_flags;
 };
 
 struct CollLine {
-    /* +0 */ mpLib_Line* x0;
+    /* +0 */ MapLine* x0;
     /* +4 */ u32 flags;
 };
 
@@ -84,7 +84,7 @@ struct CollVtx {
 }; /* size = 0x18 */
 STATIC_ASSERT(sizeof(struct CollVtx) == 0x18);
 
-struct CollInfo {
+struct MapJoint {
     /*  +0 */ s16 floor_start;
     /*  +2 */ s16 floor_count;
     /*  +4 */ s16 ceiling_start;
@@ -95,22 +95,22 @@ struct CollInfo {
     /*  +E */ s16 left_wall_count;
     /* +10 */ s16 dynamic_start;
     /* +12 */ s16 dynamic_count;
-    /* +14 */ float x14;
-    /* +18 */ float x18;
-    /* +1C */ float x1C;
-    /* +20 */ float x20;
+    /* +14 */ float left_bound;
+    /* +18 */ float bottom_bound;
+    /* +1C */ float right_bound;
+    /* +20 */ float top_bound;
     /* +24 */ s16 vtx_start;
     /* +26 */ s16 vtx_count;
 };
 
 struct CollJoint {
     /* 0x00 */ CollJoint* next;
-    /* 0x04 */ CollInfo* coll_info;
+    /* 0x04 */ MapJoint* inner;
     /* 0x08 */ u32 flags;
     /* 0x0C */ s16 xC;
     /* 0x0E */ u8 xE : 1;
-    /* 0x10 */ Vec2 x10;
-    /* 0x18 */ Vec2 x18;
+    /* 0x10 */ Vec2 bounding_min;
+    /* 0x18 */ Vec2 bounding_max;
     /* 0x20 */ HSD_JObj* x20;
     /* 0x24 */ mpLib_Callback x24;
     /* 0x28 */ Ground* x28;
@@ -119,10 +119,10 @@ struct CollJoint {
 }; /* size = 0x34 */
 STATIC_ASSERT(sizeof(struct CollJoint) == 0x34);
 
-struct mpCollData {
+struct MapCollData {
     /*  +0 */ Vec2* verts;
     /*  +4 */ int vert_count;
-    /*  +8 */ mpLib_Line* lines;
+    /*  +8 */ MapLine* lines;
     /*  +C */ int line_count;
     /* +10 */ s16 floor_start;
     /* +12 */ s16 floor_count;
@@ -134,8 +134,8 @@ struct mpCollData {
     /* +1E */ s16 left_wall_count;
     /* +20 */ s16 dynamic_start;
     /* +22 */ s16 dynamic_count;
-    /* +24 */ CollInfo* x24;
-    /* +28 */ int x28;
+    /* +24 */ MapJoint* joints;
+    /* +28 */ int joint_count;
     /* +2C */ int x2C; /* inferred */
 };
 

@@ -413,8 +413,8 @@ void ftPk_SpecialAirS1_Coll(HSD_GObj* gobj)
         ftPk_SpecialS_ChangeMotion_Unk11(gobj);
     }
 
-    if (collData->env_flags & MPCOLL_RIGHTWALL ||
-        collData->env_flags & MPCOLL_LEFTWALL)
+    if (collData->env_flags & Collide_LeftWallMask ||
+        collData->env_flags & Collide_RightWallMask)
     {
         ftPk_SpecialS_ChangeMotion_Unk12(gobj);
     }

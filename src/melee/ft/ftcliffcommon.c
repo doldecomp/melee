@@ -32,7 +32,7 @@ bool ftCliffCommon_80081298(Fighter_GObj* gobj)
     if (fp->input.lstick.y <= -p_ftCommonData->x480) {
         return false;
     }
-    if (((fp->coll_data.env_flags & 0x03000000) != 0) &&
+    if (fp->coll_data.env_flags & Collide_LedgeGrabMask &&
         (((fp->x2228_b2 & 1) == 0)))
     {
         other_gobj = ft_80082E3C(gobj);
@@ -59,7 +59,7 @@ void ftCliffCommon_80081370(Fighter_GObj* gobj)
         float facing_dir;
         {
             float ledge_dir;
-            if (fp->coll_data.env_flags & MPCOLL_FLAGS_B24) {
+            if (fp->coll_data.env_flags & Collide_LeftLedgeGrab) {
                 ledge_dir = +1;
             } else {
                 ledge_dir = -1;

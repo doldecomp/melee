@@ -659,7 +659,7 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = fp->dat_attrs;
     CollData* colldata = &fp->coll_data;
     u8 _[8];
-    if (ftCheckThrowB3(fp) && (colldata->env_flags & 98304)) {
+    if (ftCheckThrowB3(fp) && (colldata->env_flags & Collide_FloorMask)) {
         Vec3 vec_list[4];
         int i;
         for (i = 0; i < 4; i++) {

@@ -98,10 +98,10 @@ void it_802A24D0(ItemLink* arg0, f32 arg8)
 
     coll_data = &arg0->x30_collData;
     coll_data->cur_pos = arg0->pos;
-    coll_data->prev_pos = coll_data->cur_pos;
+    coll_data->last_pos = coll_data->cur_pos;
     mpColl_80041EE4(coll_data);
     coll_data->x34_flags.b1234 = 5;
-    mpColl_8004220C(coll_data, NULL, arg8, arg8, arg8, arg8);
+    mpColl_SetECBSource_Fixed(coll_data, NULL, arg8, arg8, arg8, arg8);
 }
 
 static bool inline link_fighter_compare(Fighter* fp)
@@ -127,7 +127,7 @@ static inline void it_802A2568_inline(ItemLink* temp_r3_3, HSD_JObj* arg1,
     temp_r3_3->flag7 = 1;
     // it_802A43B8(temp_r3_3);
     temp_r3_3->x30_collData.cur_pos = temp_r3_3->pos;
-    temp_r3_3->x30_collData.prev_pos = temp_r3_3->x30_collData.cur_pos;
+    temp_r3_3->x30_collData.last_pos = temp_r3_3->x30_collData.cur_pos;
 }
 
 static inline HSD_JObj* it_link_get_joint(Item* arg0, s32 var_r31)
@@ -234,12 +234,11 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             temp_r3_3->flag7 = 0;
             // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_pos = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_pos =
-                temp_r3_3->x30_collData.cur_pos;
+            temp_r3_3->x30_collData.last_pos = temp_r3_3->x30_collData.cur_pos;
 
             mpColl_80041EE4(temp_r18);
             temp_r18->x34_flags.b1234 = 5;
-            mpColl_8004220C(temp_r18, NULL, arg8, arg8, arg8, arg8);
+            mpColl_SetECBSource_Fixed(temp_r18, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
@@ -259,12 +258,11 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             temp_r3_3->flag7 = 0;
             // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_pos = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_pos =
-                temp_r3_3->x30_collData.cur_pos;
+            temp_r3_3->x30_collData.last_pos = temp_r3_3->x30_collData.cur_pos;
 
             mpColl_80041EE4(temp_r21);
             temp_r18->x34_flags.b1234 = 5;
-            mpColl_8004220C(temp_r21, NULL, arg8, arg8, arg8, arg8);
+            mpColl_SetECBSource_Fixed(temp_r21, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint_c(arg0));
             GObj_SetupGXLink(temp_r3_2, HSD_GObj_JObjCallback, 6U, 0U);
@@ -284,12 +282,11 @@ HSD_JObj* it_802A2568(Item* arg0, HSD_JObj* arg1, s32 arg2, f32 arg8)
             temp_r3_3->flag7 = 1;
             // it_802A43B8(temp_r3_3);
             temp_r3_3->x30_collData.cur_pos = temp_r3_3->pos;
-            temp_r3_3->x30_collData.prev_pos =
-                temp_r3_3->x30_collData.cur_pos;
+            temp_r3_3->x30_collData.last_pos = temp_r3_3->x30_collData.cur_pos;
 
             mpColl_80041EE4(temp_r17);
             temp_r18->x34_flags.b1234 = 5;
-            mpColl_8004220C(temp_r17, NULL, arg8, arg8, arg8, arg8);
+            mpColl_SetECBSource_Fixed(temp_r17, NULL, arg8, arg8, arg8, arg8);
             HSD_GObjObject_80390A70(temp_r3_2, (u8) HSD_GObj_804D7849,
                                     it_link_get_joint(arg0, var_r31));
             GObj_SetupGXLink(temp_r3_2, it_802A24A0, 6U, 0U);
@@ -680,12 +677,12 @@ static inline bool it_802A3630_inline(Item* item, Vec3* cur_pos, Vec3* pos)
     item_link = item->xDD4_itemVar.linkhookshot.x0;
     item_link_pos = &item_link->pos;
 
-    if (mpLib_800524DC(0, 0, 0, 0, -1, -1, pos->x, pos->y, item_link->pos.x,
-                       item_link->pos.y) != 0)
+    if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, pos->x, pos->y, item_link->pos.x,
+                        item_link->pos.y) != 0)
     {
         return 1;
-    } else if (mpLib_800524DC(0, 0, 0, 0, -1, -1, cur_pos->x, cur_pos->y,
-                              item_link_pos->x, item_link_pos->y) != 0)
+    } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, cur_pos->x, cur_pos->y,
+                               item_link_pos->x, item_link_pos->y) != 0)
     {
         return 1;
     } else {
@@ -810,12 +807,13 @@ void it_802A39FC(Item_GObj* gobj)
 
     item_link = item->xDD4_itemVar.linkhookshot.x0;
 
-    if (mpLib_800524DC(0, 0, 0, 0, -1, -1, pos.x, pos.y, item_link->pos.x,
-                       item_link->pos.y) != 0)
+    if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, pos.x, pos.y, item_link->pos.x,
+                        item_link->pos.y) != 0)
     {
         var_r0 = 1;
-    } else if (mpLib_800524DC(0, 0, 0, 0, -1, -1, fp->cur_pos.x, fp->cur_pos.y,
-                              item_link->pos.x, item_link->pos.y) != 0)
+    } else if (mpCheckAllRemap(0, 0, 0, 0, -1, -1, fp->cur_pos.x,
+                               fp->cur_pos.y, item_link->pos.x,
+                               item_link->pos.y) != 0)
     {
         var_r0 = 1;
     } else {
@@ -889,7 +887,7 @@ s32 it_802A3D90(ItemLink* item_link)
     CollData* coll;
 
     coll = &item_link->x30_collData;
-    coll->prev_pos = coll->cur_pos;
+    coll->last_pos = coll->cur_pos;
     coll->cur_pos = item_link->pos;
     if (mpColl_800471F8(coll)) {
         item_link->flag1 = 1;
@@ -897,7 +895,7 @@ s32 it_802A3D90(ItemLink* item_link)
         item_link->flag1 = 0;
     }
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
@@ -923,9 +921,9 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
         var_r29 = 0;
     }
     if (var_r29 != 0) {
-        coll->prev_pos = item_link_next->x30_collData.cur_pos;
+        coll->last_pos = item_link_next->x30_collData.cur_pos;
     } else {
-        coll->prev_pos = coll->cur_pos;
+        coll->last_pos = coll->cur_pos;
     }
     coll->cur_pos = item_link->pos;
 
@@ -940,14 +938,16 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
                 if ((mp_island->x8.x > item_link->pos.x) &&
                     (mp_island->x8.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
             }
         }
@@ -957,9 +957,9 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
     } else {
         item_link->flag1 = mpColl_800471F8(coll);
     }
-    if (coll->env_flags & 0x18000) {
+    if (coll->env_flags & Collide_FloorMask) {
         coll->cur_pos.x = item_link->pos.x;
-    } else if ((coll->env_flags & 0xFFF) && (var_r29 != 0) &&
+    } else if (coll->env_flags & Collide_WallMask && (var_r29 != 0) &&
                (item_link->prev != NULL) &&
                (item_link->next->pos.y < item_link->pos.y))
     {
@@ -974,7 +974,7 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
         item_link->flag2 = 1;
     }
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 s32 it_802A40D0(ItemLink* item_link, f32 arg8)
@@ -997,9 +997,9 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
         var_r29 = 0;
     }
     if (var_r29 != 0) {
-        coll->prev_pos = item_link_next->x30_collData.cur_pos;
+        coll->last_pos = item_link_next->x30_collData.cur_pos;
     } else {
-        coll->prev_pos = coll->cur_pos;
+        coll->last_pos = coll->cur_pos;
     }
     coll->cur_pos = item_link->pos;
 
@@ -1014,14 +1014,16 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
                 if ((mp_island->x8.x > item_link->pos.x) &&
                     (mp_island->x8.y > item_link->pos.y))
                 {
                     item_link->pos.x = item_link->pos.x;
                     item_link->pos.y = mp_island->x14.y;
-                    return coll->env_flags & 0x18FFF;
+                    return coll->env_flags &
+                           (Collide_FloorMask | Collide_WallMask);
                 }
             }
         }
@@ -1031,9 +1033,9 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
     } else {
         item_link->flag1 = mpColl_800471F8(coll);
     }
-    if (coll->env_flags & 0x18000) {
+    if (coll->env_flags & Collide_FloorMask) {
         coll->cur_pos.x = item_link->pos.x;
-    } else if ((coll->env_flags & 0xFFF) && (var_r29 != 0) &&
+    } else if ((coll->env_flags & Collide_WallMask) && (var_r29 != 0) &&
                (item_link->prev != NULL) &&
                (item_link->next->pos.y < item_link->pos.y))
     {
@@ -1041,15 +1043,15 @@ s32 it_802A40D0(ItemLink* item_link, f32 arg8)
     }
     flag_2 = item_link->flag0;
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 s32 it_802A42F4(ItemLink* item_link, f32 arg8)
 {
     CollData* coll = &item_link->x30_collData;
     PAD_STACK(1 * 4);
-    coll->prev_pos = coll->cur_pos;
-    coll->prev_pos.y = arg8;
+    coll->last_pos = coll->cur_pos;
+    coll->last_pos.y = arg8;
     coll->cur_pos = item_link->pos;
     if (mpColl_800471F8(coll)) {
         item_link->flag1 = 1;
@@ -1057,18 +1059,18 @@ s32 it_802A42F4(ItemLink* item_link, f32 arg8)
         item_link->flag1 = 0;
     }
     item_link->pos = coll->cur_pos;
-    return coll->env_flags & 0x18FFF;
+    return coll->env_flags & (Collide_FloorMask | Collide_WallMask);
 }
 
 void it_802A43B8(ItemLink* item_link)
 {
     item_link->x30_collData.cur_pos = item_link->pos;
-    item_link->x30_collData.prev_pos = item_link->x30_collData.cur_pos;
+    item_link->x30_collData.last_pos = item_link->x30_collData.cur_pos;
 }
 
 void it_802A43EC(ItemLink* item_link)
 {
-    item_link->x30_collData.prev_pos = item_link->x30_collData.cur_pos;
+    item_link->x30_collData.last_pos = item_link->x30_collData.cur_pos;
     item_link->x30_collData.cur_pos = item_link->pos;
 }
 
@@ -1216,7 +1218,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
             it_802A2EE4_inline_alt(link_0, &pos);
             link_0->pos = pos;
             link_0->x30_collData.cur_pos = link_0->pos;
-            link_0->x30_collData.prev_pos = link_0->x30_collData.cur_pos;
+            link_0->x30_collData.last_pos = link_0->x30_collData.cur_pos;
             link_0->flag1 = 1;
         }
     } else if (fp->motion_id == 0xD6) {
@@ -1225,7 +1227,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
             it_802A2EE4_inline_alt(link_0, &pos);
             link_0->pos = pos;
             link_0->x30_collData.cur_pos = link_0->pos;
-            link_0->x30_collData.prev_pos = link_0->x30_collData.cur_pos;
+            link_0->x30_collData.last_pos = link_0->x30_collData.cur_pos;
             link_0->flag1 = 1;
         }
     } else if (fp->motion_id == 0x168) {
@@ -1234,7 +1236,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
             it_802A2EE4_inline_alt(link_0, &pos);
             link_0->pos = pos;
             link_0->x30_collData.cur_pos = link_0->pos;
-            link_0->x30_collData.prev_pos = link_0->x30_collData.cur_pos;
+            link_0->x30_collData.last_pos = link_0->x30_collData.cur_pos;
             link_0->flag1 = 1;
         }
     }
@@ -1244,10 +1246,10 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
     link_0->pos.y += link_0->x8_vel.y;
     link_0->pos.z += link_0->x8_vel.z;
     flag = it_802A40D0(link_0, attr->x30);
-    if (flag & 0x3F) {
-        link_0->unk = link_0->x30_collData.right_wall.index;
-    } else if (flag & 0xFC0) {
-        link_0->unk = link_0->x30_collData.left_wall.index;
+    if (flag & Collide_LeftWallMask) {
+        link_0->unk = link_0->x30_collData.left_facing_wall.index;
+    } else if (flag & Collide_RightWallMask) {
+        link_0->unk = link_0->x30_collData.right_facing_wall.index;
     }
 
     while (link_1 != NULL) {
@@ -1258,7 +1260,7 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
                 link_1->pos.y = (vec.y * attr->x30) + link_0->pos.y;
                 link_1->pos.z = (vec.z * attr->x30) + link_0->pos.z;
             }
-            link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+            link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
             link_1->x30_collData.cur_pos = link_1->pos;
         } else {
             len = it_802A3C98(arg1, &link_0->pos, &vec);
@@ -1268,19 +1270,19 @@ s32 it_802A4BFC(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
                 link_1->pos.z = (vec.z * attr->x30) + link_0->pos.z;
                 link_1->flag0 = 1;
                 link_1->x30_collData.cur_pos = link_1->pos;
-                link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+                link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
             } else {
                 link_1->pos = *arg1;
                 link_1->flag0 = 1;
                 link_1->x30_collData.cur_pos = link_1->pos;
-                link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
-                if (flag & 0xFFF) {
+                link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
+                if (flag & Collide_WallMask) {
                     return 1;
                 }
-                if (flag & 0x6000) {
+                if (flag & Collide_CeilingMask) {
                     return 3;
                 }
-                if (flag & 0x18000) {
+                if (flag & Collide_FloorMask) {
                     return 4;
                 }
                 return 0;
@@ -1317,7 +1319,7 @@ s32 it_802A5320(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
     link_0->pos.x += link_0->x8_vel.x;
     link_0->pos.y += link_0->x8_vel.y;
     link_0->pos.z += link_0->x8_vel.z;
-    temp_r30 = it_802A40D0(link_0, attr->x30) & 0xFFF;
+    temp_r30 = it_802A40D0(link_0, attr->x30) & Collide_WallMask;
     var_r29 = 0;
 
     while (link_1 != NULL) {
@@ -1337,7 +1339,7 @@ s32 it_802A5320(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
                 link_1->pos.y = (vec.y * attr->x30) + link_0->pos.y;
                 link_1->pos.z = (vec.z * attr->x30) + link_0->pos.z;
             }
-            link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+            link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
             link_1->x30_collData.cur_pos = link_1->pos;
         } else {
             len = it_802A3C98(arg1, &link_0->pos, &vec);
@@ -1347,12 +1349,12 @@ s32 it_802A5320(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* attr,
                 link_1->pos.z = (vec.z * attr->x30) + link_0->pos.z;
                 link_1->flag0 = 1;
                 link_1->x30_collData.cur_pos = link_1->pos;
-                link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+                link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
             } else {
                 link_1->pos = *arg1;
                 link_1->flag0 = 1;
                 link_1->x30_collData.cur_pos = link_1->pos;
-                link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+                link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
                 if (temp_r30 != 0) {
                     return 1;
                 }
@@ -1471,7 +1473,7 @@ s32 it_802A5AE0(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2)
                 link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
                 link_1->flag0 = 1;
                 link_1->x30_collData.cur_pos = link_1->pos;
-                link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+                link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
             } else {
                 return 0;
             }
@@ -1700,7 +1702,7 @@ s32 it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
                 link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
                 link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
             }
-            link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+            link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
             link_1->x30_collData.cur_pos = link_1->pos;
         } else {
             vec.x = arg1->x - link_0->pos.x;
@@ -1722,7 +1724,7 @@ s32 it_802A6A78(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
                 link_1->pos.y = (vec.y * arg2->x30) + link_0->pos.y;
                 link_1->pos.z = (vec.z * arg2->x30) + link_0->pos.z;
                 link_1->flag0 = 1;
-                link_1->x30_collData.prev_pos = link_1->x30_collData.cur_pos;
+                link_1->x30_collData.last_pos = link_1->x30_collData.cur_pos;
                 link_1->x30_collData.cur_pos = link_1->pos;
             }
         }

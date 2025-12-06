@@ -277,8 +277,8 @@ void ftZd_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 
     if (ft_80082708(gobj) == 0) {
         env_flags = collData->env_flags;
-        if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
-            (env_flags & MPCOLL_LEFTWALL) != 0)
+        if ((env_flags & Collide_LeftWallMask) != 0 ||
+            (env_flags & Collide_RightWallMask) != 0)
         {
             ftCommon_8007D60C(fp);
             ftZd_SpecialHi_8013A764(gobj);
@@ -288,8 +288,8 @@ void ftZd_SpecialHiStart_1_Coll(HSD_GObj* gobj)
         ftZd_SpecialHi_80139F6C(gobj);
     } else {
         env_flags = collData->env_flags;
-        if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
-            (env_flags & MPCOLL_LEFTWALL) != 0)
+        if ((env_flags & Collide_LeftWallMask) != 0 ||
+            (env_flags & Collide_RightWallMask) != 0)
         {
             ftZd_SpecialHi_8013A6A8(gobj);
         }
@@ -348,7 +348,7 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     }
 
     if (!ftCliffCommon_80081298(gobj)) {
-        if ((coll_data->env_flags & MPCOLL_CEIL) != 0) {
+        if ((coll_data->env_flags & Collide_CeilingMask) != 0) {
             float angle =
                 lbVector_AngleXY(&coll_data->ceiling.normal, &fp->self_vel);
             if (angle > deg_to_rad * (90.0F + sa->x60)) {
@@ -356,16 +356,16 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
             }
         }
 
-        if ((coll_data->env_flags & MPCOLL_RIGHTWALL) != 0) {
-            float angle =
-                lbVector_AngleXY(&coll_data->right_wall.normal, &fp->self_vel);
+        if ((coll_data->env_flags & Collide_LeftWallMask) != 0) {
+            float angle = lbVector_AngleXY(&coll_data->left_facing_wall.normal,
+                                           &fp->self_vel);
             if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
         }
-        if ((coll_data->env_flags & MPCOLL_LEFTWALL) != 0) {
-            float angle =
-                lbVector_AngleXY(&coll_data->left_wall.normal, &fp->self_vel);
+        if ((coll_data->env_flags & Collide_RightWallMask) != 0) {
+            float angle = lbVector_AngleXY(
+                &coll_data->right_facing_wall.normal, &fp->self_vel);
             if (angle > (deg_to_rad * (90.0F + sa->x60))) {
                 ftZd_SpecialHi_8013A764(gobj);
             }
@@ -617,7 +617,8 @@ void ftZd_SpecialAirHi_Phys(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         ftCommon_FallBasic(fp);
-        ftCommon_ClampSelfVelX(fp, attributes->x5C * fp->co_attrs.air_drift_max);
+        ftCommon_ClampSelfVelX(fp,
+                               attributes->x5C * fp->co_attrs.air_drift_max);
         return;
     }
 

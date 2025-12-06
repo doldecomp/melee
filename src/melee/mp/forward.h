@@ -10,14 +10,14 @@
 typedef struct mpIsland_PaletteEntry mpIsland_PaletteEntry;
 typedef struct mpIsland_Palette mpIsland_Palette;
 typedef struct mp_UnkStruct0 mp_UnkStruct0;
-typedef struct mpLib_Line mpLib_Line;
+typedef struct MapLine MapLine;
 typedef struct CollLine CollLine;
 typedef struct mp_UnkStruct3 mp_UnkStruct3;
 typedef struct mpisland mpisland;
 typedef struct CollVtx CollVtx;
-typedef struct CollInfo CollInfo;
+typedef struct MapJoint MapJoint;
 typedef struct CollJoint CollJoint;
-typedef struct mpCollData mpCollData;
+typedef struct MapCollData MapCollData;
 
 typedef enum mp_Terrain {
     mp_Terrain_Basic,
@@ -63,7 +63,24 @@ typedef enum CollLineKind {
 #define LINE_FLAG_EMPTY (1 << 7)
 #define LINE_FLAG_PLATFORM (1 << 8)
 #define LINE_FLAG_LEDGE (1 << 9)
+#define LINE_FLAG_ENABLED (1 << 16)
+#define LINE_FLAG_HIDDEN (1 << 18)
 
 #define MPCOLL_WALLID_MAX 9
+
+enum CollDataX130Flags {
+    CollData_X130_Locked = 1 << 4,
+    CollData_X130_Clear = 1 << 5,
+};
+
+enum CollJointFlags {
+    CollJoint_B8 = 1 << 8,
+    CollJoint_B9 = 1 << 9,
+    CollJoint_B10 = 1 << 10,
+    CollJoint_B11 = 1 << 11,
+    CollJoint_TooFar = 1 << 12,
+    CollJoint_Enabled = 1 << 16,
+    CollJoint_Hidden = 1 << 18,
+};
 
 #endif

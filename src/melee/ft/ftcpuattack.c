@@ -480,9 +480,9 @@ int ftCo_800B732C(Fighter* fp)
         if (temp_r0->cur_pos.y < fp->cur_pos.y) {
             return 0;
         }
-        if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y,
-                                   temp_r0->cur_pos.x, temp_r0->cur_pos.y,
-                                   &sp20, &sp10, &spC, &sp14, -1, -1))
+        if (mpCheckCeiling(fp->cur_pos.x, fp->cur_pos.y, temp_r0->cur_pos.x,
+                           temp_r0->cur_pos.y, &sp20, &sp10, &spC, &sp14, -1,
+                           -1))
         {
             return 0;
         }
@@ -513,9 +513,9 @@ int ftCo_800B732C(Fighter* fp)
         if (temp_r0->cur_pos.y < fp->cur_pos.y) {
             return 0;
         }
-        if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y,
-                                   temp_r0->cur_pos.x, temp_r0->cur_pos.y,
-                                   &sp20, &sp10, &spC, &sp14, -1, -1))
+        if (mpCheckCeiling(fp->cur_pos.x, fp->cur_pos.y, temp_r0->cur_pos.x,
+                           temp_r0->cur_pos.y, &sp20, &sp10, &spC, &sp14, -1,
+                           -1))
         {
             return 0;
         }
@@ -577,9 +577,9 @@ int ftCo_800B7638(Fighter* fp)
         return 0;
     }
     if (target->ground_or_air == GA_Air) {
-        if (mpLib_8004F8A4_Ceiling(fp->cur_pos.x, fp->cur_pos.y,
-                                   target->cur_pos.x, target->cur_pos.y, &sp24,
-                                   &sp14, &sp10, &sp18, -1, -1))
+        if (mpCheckCeiling(fp->cur_pos.x, fp->cur_pos.y, target->cur_pos.x,
+                           target->cur_pos.y, &sp24, &sp14, &sp10, &sp18, -1,
+                           -1))
         {
             return 0;
         }

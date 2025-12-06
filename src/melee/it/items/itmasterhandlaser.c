@@ -164,8 +164,8 @@ void it_802F063C(Item_GObj* gobj, Item_GObj* arg1)
     translate.z = 0;
     HSD_JObjSetTranslate(ip->xBBC_dynamicBoneTable->bones[2], &translate);
     lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[2], NULL, &pos_2);
-    if (mpLib_80051EC8(pos_0.x, pos_0.y, pos_2.x, pos_2.y, &pos_1, NULL, NULL,
-                       NULL, 1, -1, -1) != 0)
+    if (mpCheckMultiple(pos_0.x, pos_0.y, pos_2.x, pos_2.y, &pos_1, NULL, NULL,
+                        NULL, 1, -1, -1) != 0)
     {
         translate.x = 0;
         translate.z = 0;

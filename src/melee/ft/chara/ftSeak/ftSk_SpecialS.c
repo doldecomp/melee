@@ -829,8 +829,8 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
         float ecb_top;
         float ecb_bot;
         vec0.x = 0.0;
-        ecb_top = fp->coll_data.xA4_ecbCurrCorrect.top.y;
-        ecb_bot = fp->coll_data.xA4_ecbCurrCorrect.bottom.y;
+        ecb_top = fp->coll_data.ecb.top.y;
+        ecb_bot = fp->coll_data.ecb.bottom.y;
         vec0.y = 0.5F * (ecb_top + ecb_bot);
         vec0.z = 0.0;
         vec0.x += fp->cur_pos.x;

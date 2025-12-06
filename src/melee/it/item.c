@@ -208,7 +208,7 @@ static void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
             facing_dir = 1;
         }
 
-        mpColl_800436D8(&item_data->x378_itemColl, facing_dir);
+        mpCollSetFacingDir(&item_data->x378_itemColl, facing_dir);
     }
 
     HSD_JObjSetFacingDirItem(model, item_data);
@@ -1435,10 +1435,10 @@ void Item_802697D4(HSD_GObj* gobj)
     if (item_data->ground_or_air == 0) {
         if ((item_data->xDCE_flag.b3 != 0) && (it_8026D604(gobj) != 0)) {
             mpGetSpeed(item_data->xC30, &item_data->pos,
-                           &item_data->x64_vec_unk2);
+                       &item_data->x64_vec_unk2);
         } else {
-            mpGetSpeed(item_data->x378_itemColl.floor.index,
-                           &item_data->pos, &item_data->x64_vec_unk2);
+            mpGetSpeed(item_data->x378_itemColl.floor.index, &item_data->pos,
+                       &item_data->x64_vec_unk2);
         }
     }
     PSVECAdd(&item_data->pos, &item_data->x64_vec_unk2, &item_data->pos);

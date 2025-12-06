@@ -122,7 +122,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
         ftMh_MS_349_80151CA8(gobj);
     }
 
-    mpLib_80054158(0, &pos);
+    mpFloorGetLeft(0, &pos);
 
     if (fp->cur_pos.x < pos.x) {
         ftMh_MS_351_801520D8(gobj);

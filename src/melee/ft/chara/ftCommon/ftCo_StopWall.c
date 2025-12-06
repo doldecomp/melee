@@ -21,8 +21,8 @@ bool ftCo_8009EDA4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* coll = &fp->coll_data;
-    if ((fp->facing_dir == -1 && coll->env_flags & MPCOLL_FLAGS_B11) ||
-        (fp->facing_dir == +1 && coll->env_flags & MPCOLL_FLAGS_B05))
+    if ((fp->facing_dir == -1 && coll->env_flags & Collide_RightWallHug) ||
+        (fp->facing_dir == +1 && coll->env_flags & Collide_LeftWallHug))
     {
         ftCo_DatAttrs* ca = &fp->co_attrs;
         if (ABS(fp->gr_vel) > ca->walk_max_vel) {
@@ -41,13 +41,13 @@ void ftCo_8009EE30(Fighter_GObj* gobj)
     {
         Vec3 vec;
         u8 _[4] = { 0 };
-        if (fp->coll_data.env_flags & MPCOLL_LEFTWALL) {
-            vec.x = coll->xA4_ecbCurrCorrect.left.x;
-            vec.y = coll->xA4_ecbCurrCorrect.left.y;
+        if (fp->coll_data.env_flags & Collide_RightWallMask) {
+            vec.x = coll->ecb.left.x;
+            vec.y = coll->ecb.left.y;
             vec.z = 0.0f;
         } else {
-            vec.x = coll->xA4_ecbCurrCorrect.right.x;
-            vec.y = coll->xA4_ecbCurrCorrect.right.y;
+            vec.x = coll->ecb.right.x;
+            vec.y = coll->ecb.right.y;
             vec.z = 0.0f;
         }
         ftKb_SpecialN_800F1F1C(gobj, &vec);

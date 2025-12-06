@@ -47,23 +47,30 @@ typedef u32 HSD_Pad;
 // From Ness's Yo-Yo collision check
 
 /// @todo These (and #CollData::env_flags) should be a bitfield struct
-#define MPCOLL_RIGHTWALL 0x3F ///< Bits 0-5
-#define MPCOLL_FLAGS_B05 (1 << 5)
-#define MPCOLL_LEFTWALL 0xFC0                            ///< Bits 6-11
-#define MPCOLL_WALL (MPCOLL_RIGHTWALL | MPCOLL_LEFTWALL) ///< Bits 0-11
-#define MPCOLL_FLAGS_B11 (1 << 11)
-#define MPCOLL_CEIL 0x6000 ///< Bits 13-14
-#define MPCOLL_FLAGS_B14 (1 << 14)
-#define MPCOLL_UNK 0x18000 // Floor??
-#define MPCOLL_GRPUSH (1 << 15)
-#define MPCOLL_FLAGS_B16 (1 << 16)
-#define MPCOLL_FLAGS_B20 (1 << 20) // 0x100000
-#define MPCOLL_FLAGS_B21 (1 << 21) // 0x200000
-#define MPCOLL_FLAGS_B23 (1 << 23) // 0x800000
-#define MPCOLL_FLAGS_B24 (1 << 24) // 0x1000000
-#define MPCOLL_FLAGS_B25 (1 << 25) // 0x2000000
-#define MPCOLL_FLAGS_B28 (1 << 28) // 0x10000000
-#define MPCOLL_FLAGS_B29 (1 << 29) // 0x20000000
+#define Collide_LeftWallPush 0x1
+#define Collide_LeftWallHug 0x20
+#define Collide_LeftWallMask 0x3F
+#define Collide_RightWallPush 0x40
+#define Collide_RightWallHug 0x800
+#define Collide_RightWallMask 0xFC0
+#define Collide_WallMask (Collide_LeftWallMask | Collide_RightWallMask)
+
+#define Collide_CeilingPush 0x2000
+#define Collide_CeilingHug 0x4000
+#define Collide_CeilingMask (Collide_CeilingPush | Collide_CeilingHug)
+
+#define Collide_FloorPush 0x8000
+#define Collide_FloorHug 0x10000
+#define Collide_FloorMask (Collide_FloorPush | Collide_FloorHug)
+
+#define Collide_LeftEdge 0x100000
+#define Collide_RightEdge 0x200000
+#define Collide_Edge 0x800000
+#define Collide_LeftLedgeGrab 0x1000000
+#define Collide_RightLedgeGrab 0x2000000
+#define Collide_LedgeGrabMask (Collide_LeftLedgeGrab | Collide_RightLedgeGrab)
+#define Collide_LeftLedgeSlip 0x10000000
+#define Collide_RightLedgeSlip 0x20000000
 
 typedef union UnkFlagStruct {
     u8 u8;

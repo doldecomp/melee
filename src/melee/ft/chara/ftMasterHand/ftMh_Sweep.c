@@ -80,7 +80,7 @@ void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
         Vec3 pos;
 
         u8 _[8];
-        mpLib_80054158(0, &pos);
+        mpFloorGetLeft(0, &pos);
         if (fp->cur_pos.x < pos.x) {
             ftMh_MS_347_80151AC8(gobj);
             return;

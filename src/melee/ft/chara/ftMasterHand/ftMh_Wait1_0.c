@@ -280,12 +280,12 @@ void ftMh_Wait1_0_Anim(HSD_GObj* gobj)
                 }
                 switch (tmp2) {
                 case ftMh_MS_SweepLoop: // Stage-Wide Slap
-                    mpLib_80053FF4(0, &vec);
+                    mpFloorGetRight(0, &vec);
                     vec.y = da->x38;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_344_80151828, &vec);
                     break;
                 case ftMh_MS_Slap: // Sweep
-                    mpLib_80053FF4(0, &vec);
+                    mpFloorGetRight(0, &vec);
                     vec.y = da->x50.y;
                     ftMh_MS_389_80150DC4(gobj, &ftMh_MS_348_80151BB8, &vec);
                     break;
@@ -382,12 +382,12 @@ void ftMh_MS_341_80150894(HSD_GObj* gobj)
 
     if (l_pressed && (buttons & HSD_PAD_DPADUP)) {
         // Stage-Wide Slap
-        mpLib_80053FF4(0, &pos);
+        mpFloorGetRight(0, &pos);
         pos.y = da->x38;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_344_80151828, &pos);
     } else if (l_pressed && (buttons & HSD_PAD_DPADRIGHT)) {
         // Sweep
-        mpLib_80053FF4(0, &pos);
+        mpFloorGetRight(0, &pos);
         pos.y = da->x50.y;
         ftMh_MS_389_80150DC4(gobj, ftMh_MS_348_80151BB8, &pos);
     } else if (l_pressed && (buttons & HSD_PAD_DPADDOWN)) {

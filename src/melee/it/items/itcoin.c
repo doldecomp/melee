@@ -333,7 +333,7 @@ void it_2725_Logic116_EnteredAir(Item_GObj* gobj)
     } else {
         coll_dir = 1;
     }
-    mpColl_800436D8(&ip->x378_itemColl, coll_dir);
+    mpCollSetFacingDir(&ip->x378_itemColl, coll_dir);
 }
 
 bool itCoin_UnkMotion5_Anim(Item_GObj* gobj)
@@ -351,7 +351,7 @@ bool itCoin_UnkMotion5_Coll(Item_GObj* gobj)
 
 void it_802F2014(Item_GObj* gobj, int arg1)
 {
-    GET_ITEM(gobj)->x378_itemColl.x4C_joint_id = arg1;
+    GET_ITEM(gobj)->x378_itemColl.joint_id_only = arg1;
 }
 
 int it_802F2020(Item_GObj* gobj)

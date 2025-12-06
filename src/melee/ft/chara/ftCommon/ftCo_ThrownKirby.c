@@ -78,11 +78,11 @@ void ftCo_800BDA74(Fighter_GObj* gobj, Vec3* normal)
     CollData* coll = &fp->coll_data;
     if (ft_800824A0(gobj, &fp->mv.co.thrownkirby.coll_box)) {
         *normal = coll->floor.normal;
-    } else if (coll->env_flags & MPCOLL_LEFTWALL) {
-        *normal = coll->left_wall.normal;
-    } else if (coll->env_flags & MPCOLL_RIGHTWALL) {
-        *normal = coll->right_wall.normal;
-    } else if (coll->env_flags & MPCOLL_CEIL) {
+    } else if (coll->env_flags & Collide_RightWallMask) {
+        *normal = coll->right_facing_wall.normal;
+    } else if (coll->env_flags & Collide_LeftWallMask) {
+        *normal = coll->left_facing_wall.normal;
+    } else if (coll->env_flags & Collide_CeilingMask) {
         *normal = coll->ceiling.normal;
     } else {
         normal->x = normal->y = normal->z = 0;

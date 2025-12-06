@@ -40,7 +40,7 @@ bool ftCo_800C3A14(Fighter_GObj* gobj)
     coll.ledge_snap_height += 5.0;
     if (fp->facing_dir > (f64) 0.0F) {
         if (mpColl_80044164(&coll, &fp->coll_data.ledge_id_left)) {
-            fp->coll_data.env_flags |= MPCOLL_FLAGS_B24;
+            fp->coll_data.env_flags |= Collide_LeftLedgeGrab;
             fp->self_vel.x = 0;
             fp->self_vel.y = 0;
             return true;
@@ -48,7 +48,7 @@ bool ftCo_800C3A14(Fighter_GObj* gobj)
         return false;
     }
     if (mpColl_800443C4(&coll, &fp->coll_data.ledge_id_right)) {
-        fp->coll_data.env_flags |= MPCOLL_FLAGS_B25;
+        fp->coll_data.env_flags |= Collide_RightLedgeGrab;
         fp->self_vel.x = 0;
         fp->self_vel.y = 0;
         return true;
@@ -165,7 +165,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                             var_f3 = 8.0 * fp->facing_dir * fp->x34_scale.y +
                                      jobj->mtx[0][3];
                         }
-                        if (mpLib_800524DC(
+                        if (mpCheckAllRemap(
                                 0, 0, 0, 0, -1, -1, fp->coll_data.cur_pos.x,
                                 jobj->mtx[1][3], var_f3, jobj->mtx[1][3]) != 0)
                         {
@@ -226,7 +226,7 @@ void ftCo_AirCatch_Anim(Fighter_GObj* gobj)
                         {
                             HSD_JObj* jobj = fp->parts[FtPart_ThrowN].joint;
                             HSD_JObjSetupMatrix(jobj);
-                            if (mpLib_800524DC(
+                            if (mpCheckAllRemap(
                                     0, 0, 0, 0, -1, -1,
                                     fp->coll_data.cur_pos.x, jobj->mtx[1][3],
                                     (2.0 * fp->facing_dir * fp->x34_scale.y) +

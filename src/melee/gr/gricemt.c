@@ -830,7 +830,7 @@ void FUN_801f91ec(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
 void grIceMt_801F929C(HSD_GObj* arg0)
 {
     mpLib_80057BC0(2);
-    mpLib_80057638(2);
+    mpJointListAdd(2);
     grAnime_801C83D0(arg0, 2, 7);
 }
 
@@ -839,7 +839,7 @@ void fn_801F9338(Ground* gp, int arg1, CollData* arg2, s32 arg3,
                  mpLib_GroundEnum arg4, float arg8)
 {
     // mpLib_80057BC0(2);
-    // mpLib_80057638(2);
+    // mpJointListAdd(2);
     // grAnime_801C83D0(arg0,2,7);
     grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }
@@ -849,7 +849,7 @@ void fn_801F9448(Ground* gp, int arg1, CollData* arg2, s32 arg3,
                  mpLib_GroundEnum arg4, float arg8)
 {
     // mpLib_80057BC0(2);
-    // mpLib_80057638(2);
+    // mpJointListAdd(2);
     // grAnime_801C83D0(arg0,2,7);
     grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }
@@ -859,7 +859,7 @@ void fn_801F9558(Ground* gp, int arg1, CollData* arg2, s32 arg3,
                  mpLib_GroundEnum arg4, float arg8)
 {
     // mpLib_80057BC0(2);
-    // mpLib_80057638(2);
+    // mpJointListAdd(2);
     // grAnime_801C83D0(arg0,2,7);
     grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }

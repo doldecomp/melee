@@ -93,8 +93,8 @@ static void ftNs_AttackHi4_YoyoApplyDamage(float unk_float, HSD_GObj* gobj)
 
 static inline void push_ecb(CollData* a, Vec3* b)
 {
-    a->prev_pos = a->cur_pos; // old = curr
-    a->cur_pos = *b;           // curr = new
+    a->last_pos = a->cur_pos; // old = curr
+    a->cur_pos = *b;          // curr = new
 }
 
 s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
@@ -137,19 +137,19 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
         s32 retval;
         /// @todo Define flags.
         retval = 0;
-        if ((coll.env_flags & 98304) != 0) {
+        if (coll.env_flags & Collide_FloorMask) {
             retval |= 32768;
         }
 
-        if ((coll.env_flags & 63) != 0) {
+        if (coll.env_flags & Collide_LeftWallMask) {
             retval |= 1;
         }
 
-        if ((coll.env_flags & 4032) != 0) {
+        if (coll.env_flags & Collide_RightWallMask) {
             retval |= 64;
         }
 
-        if ((coll.env_flags & 24576) != 0) {
+        if (coll.env_flags & Collide_CeilingMask) {
             retval |= 8192;
         }
 
@@ -270,8 +270,8 @@ bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj)
     ECB_X = 0.0f;
     ECB_MUL_Y = 0.5f;
     sp20.x = ECB_X;
-    sp20.y = ECB_MUL_Y * (fp->coll_data.xA4_ecbCurrCorrect.top.y +
-                          fp->coll_data.xA4_ecbCurrCorrect.bottom.y);
+    sp20.y =
+        ECB_MUL_Y * (fp->coll_data.ecb.top.y + fp->coll_data.ecb.bottom.y);
     sp20.z = ECB_X;
     sp20.x += fp->cur_pos.x;
     sp20.y += fp->cur_pos.y;
@@ -284,7 +284,7 @@ bool ftNs_AttackHi4_YoyoCheckNoObstruct(HSD_GObj* gobj)
         sp20.y += fp->x34_scale.y;
         sp14.y += -1.0f * fp->x34_scale.y;
         if ((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp20, &sp14, 1.5f) &
-             MPCOLL_GRPUSH) != 0)
+             Collide_FloorPush) != 0)
         {
             return true;
         }
@@ -688,9 +688,8 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
 
             fighter_data2 = getFighter(gobj);
             sp18.x = 0.0f;
-            sp18.y =
-                0.5f * (fighter_data2->coll_data.xA4_ecbCurrCorrect.top.y +
-                        fighter_data2->coll_data.xA4_ecbCurrCorrect.bottom.y);
+            sp18.y = 0.5f * (fighter_data2->coll_data.ecb.top.y +
+                             fighter_data2->coll_data.ecb.bottom.y);
             sp18.z = 0.0f;
             sp18.x += fighter_data2->cur_pos.x;
             sp18.y += fighter_data2->cur_pos.y;
@@ -702,7 +701,7 @@ void ftNs_AttackHi4_Anim(HSD_GObj* gobj)
                  sp18.y += fighter_data2->x34_scale.y,
                  sp24.y += -1.0f * fighter_data2->x34_scale.y,
                  (((ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &sp18, &sp24, 1.5f) &
-                    MPCOLL_GRPUSH) == 0) == 0)))
+                    Collide_FloorPush) == 0) == 0)))
             {
                 phi_r0 = true;
             } else {

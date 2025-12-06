@@ -7,7 +7,6 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
@@ -16,6 +15,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_Pass.h"
@@ -316,7 +316,9 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 
     /// @todo Eliminate cast (by changing type of field)
     if (!ft_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
-        if ((collData->env_flags & 63) || (collData->env_flags & 4032)) {
+        if (collData->env_flags & Collide_LeftWallMask ||
+            collData->env_flags & Collide_RightWallMask)
+        {
             ftCommon_8007D60C(fp);
             ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             return;
@@ -330,7 +332,7 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
         fighter2 = GET_FIGHTER(gobj);
         collData = &fighter2->coll_data;
         pika_attr = fighter2->dat_attrs;
-        if (collData->env_flags & 98304) {
+        if (collData->env_flags & Collide_FloorMask) {
             float angle =
                 atan2f(collData->floor.normal.x, collData->floor.normal.y);
             float angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
@@ -346,7 +348,9 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
         HSD_JObjSetScale(jobj, &scl);
     }
 
-    if ((collData->env_flags & 63) || (collData->env_flags & 4032)) {
+    if (collData->env_flags & Collide_LeftWallMask ||
+        collData->env_flags & Collide_RightWallMask)
+    {
         ftPk_SpecialHi_MotionChangeUpdateVel_Unk0(gobj);
     }
 }
@@ -391,7 +395,7 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
     }
 
     if (!ftCliffCommon_80081298(gobj)) {
-        if (collData->env_flags & 24576) {
+        if (collData->env_flags & Collide_CeilingMask) {
             float angle =
                 lbVector_AngleXY(&collData->ceiling.normal, &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
@@ -399,17 +403,17 @@ void ftPk_SpecialAirHiStart1_Coll(HSD_GObj* gobj)
             }
         }
 
-        if (collData->env_flags & 63) {
-            float angle =
-                lbVector_AngleXY(&collData->right_wall.normal, &fp->self_vel);
+        if (collData->env_flags & Collide_LeftWallMask) {
+            float angle = lbVector_AngleXY(&collData->left_facing_wall.normal,
+                                           &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             }
         }
 
-        if (collData->env_flags & 4032) {
-            float angle =
-                lbVector_AngleXY(&collData->left_wall.normal, &fp->self_vel);
+        if (collData->env_flags & Collide_RightWallMask) {
+            float angle = lbVector_AngleXY(&collData->right_facing_wall.normal,
+                                           &fp->self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPk_SpecialHi_MotionChangeUpdateVel_Unk1(gobj);
             }
@@ -455,7 +459,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     collData = &fp->coll_data;
     pika_attr = fp->dat_attrs;
-    if (fp->coll_data.env_flags & 98304) {
+    if (fp->coll_data.env_flags & Collide_FloorMask) {
         float angle = (fp->facing_dir * atan2f(collData->floor.normal.x,
                                                collData->floor.normal.y)) +
                       pika_attr->x68;

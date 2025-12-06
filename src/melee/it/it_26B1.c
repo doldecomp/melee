@@ -734,7 +734,7 @@ void it_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos)
 void it_8026BB88(HSD_GObj* gobj, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
-    ftECB* ecb = &ip->x378_itemColl.xA4_ecbCurrCorrect;
+    ftECB* ecb = &ip->x378_itemColl.ecb;
 
     /// @todo Why is this always zero? Stripped something?
     f32 offset_xz = 0.0f;
@@ -758,9 +758,9 @@ void it_8026BBCC(HSD_GObj* gobj, Vec3* pos)
 
     f32 offset_y = 0.5f * (ecb->top.y + ecb->bottom.y);
 
-    pos->x = coll_data->prev_pos.x + offset_xz;
-    pos->y = coll_data->prev_pos.y + offset_y;
-    pos->z = coll_data->prev_pos.z + offset_xz;
+    pos->x = coll_data->last_pos.x + offset_xz;
+    pos->y = coll_data->last_pos.y + offset_y;
+    pos->z = coll_data->last_pos.z + offset_xz;
 }
 
 extern bool ftLib_80086960(HSD_GObj*);
@@ -1183,7 +1183,7 @@ void it_8026C334(HSD_GObj* gobj, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
     f32 offset_xz = 0.0f;
-    f32 offset_y = ip->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
+    f32 offset_y = ip->x378_itemColl.ecb.bottom.y;
 
     pos->x = ip->pos.x + offset_xz;
     pos->y = ip->pos.y + offset_y;

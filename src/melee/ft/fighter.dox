@@ -66,7 +66,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 /* 06AD10 */ void Fighter_Spaghetti_8006AD10(Fighter_GObj* gobj);
 void Fighter_procUpdate(Fighter_GObj* gobj);
 /* 06C0F0 */ void Fighter_UnkApplyTransformation_8006C0F0(Fighter_GObj* gobj);
-/* 06C27C */ void Fighter_8006C27C(Fighter_GObj* gobj);
+/* 06C27C */ void Fighter_procMap(Fighter_GObj* gobj);
 /* 06C5F4 */ void Fighter_8006C5F4(Fighter_GObj* gobj);
 /* 06C624 */ void Fighter_CallAcessoryCallbacks_8006C624(Fighter_GObj* gobj);
 /* 06C80C */ void Fighter_8006C80C(Fighter_GObj* gobj);

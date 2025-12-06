@@ -114,7 +114,7 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
     }
     HSD_GObjProc_8038FD54(gobj, Fighter_8006A360, 1);
     HSD_GObjProc_8038FD54(gobj, Fighter_procUpdate, 4);
-    HSD_GObjProc_8038FD54(gobj, Fighter_8006C27C, 5);
+    HSD_GObjProc_8038FD54(gobj, Fighter_procMap, 5);
     HSD_GObjProc_8038FD54(gobj, Fighter_8006C80C, 9);
     HSD_GObjProc_8038FD54(gobj, Fighter_8006D9AC, 16);
     Fighter_UnkProcessDeath_80068354(gobj);

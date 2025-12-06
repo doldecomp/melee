@@ -1605,7 +1605,7 @@ bool Ground_801C3214(int arg0)
 {
     if (Ground_804D6950[arg0] == 1) {
         Ground_804D6950[arg0] = 0;
-        return Ground_801C3128(arg0, mpLib_80057638);
+        return Ground_801C3128(arg0, mpJointListAdd);
     }
 
     return false;

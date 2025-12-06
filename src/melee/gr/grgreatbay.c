@@ -276,7 +276,8 @@ void fn_801F5914(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,
 
     temp_r0 = arg2->x34_flags.b1234;
     if (temp_r0 == 1 || (s32) temp_r0 == 2 || temp_r0 == 3) {
-        arg0->gv.greatbay.x10 = ((u32) arg2->env_flags & 0x03000000);
+        arg0->gv.greatbay.x10 =
+            ((u32) arg2->env_flags & Collide_LedgeGrabMask);
         arg0->gv.greatbay.x14 = (arg0->gv.greatbay.x14 + 1);
         arg0->gv.greatbay.x1C += arg3 / 100.0f;
     }

@@ -161,17 +161,17 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
     if (fp->bury_timer_1 == 0) {
         CollData* coll = &fp->coll_data;
         unk_anim = NULL;
-        if (fp->coll_data.env_flags & (MPCOLL_GRPUSH | MPCOLL_FLAGS_B16)) {
+        if (fp->coll_data.env_flags & (Collide_FloorPush | Collide_FloorHug)) {
             unk_anim = Ground_801C5700(coll->floor.index);
         }
-        if (coll->env_flags & MPCOLL_CEIL) {
+        if (coll->env_flags & Collide_CeilingMask) {
             unk_anim = Ground_801C5700(coll->ceiling.index);
         }
-        if (coll->env_flags & MPCOLL_LEFTWALL) {
-            unk_anim = Ground_801C5700(coll->left_wall.index);
+        if (coll->env_flags & Collide_RightWallMask) {
+            unk_anim = Ground_801C5700(coll->right_facing_wall.index);
         }
-        if (coll->env_flags & MPCOLL_RIGHTWALL) {
-            unk_anim = Ground_801C5700(coll->right_wall.index);
+        if (coll->env_flags & Collide_LeftWallMask) {
+            unk_anim = Ground_801C5700(coll->left_facing_wall.index);
         }
         if (unk_anim != NULL) {
             HitCapsule hit;

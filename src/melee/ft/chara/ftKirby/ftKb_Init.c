@@ -4413,7 +4413,7 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
         } else {
             var_f3 = -1.0f;
         }
-        if (mpLib_800524DC(
+        if (mpCheckAllRemap(
                 NULL, 0, NULL, &sp1C, -1, -1, vec.z, vec.x + vec.y,
                 (fp->mv.kb.specialhi.x18.y * vec.y *
                  ((fp->mv.kb.specialhi.x18.x > 0.0f) ? 1.0f : -1.0f)) +
@@ -4897,7 +4897,7 @@ float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj, Vec3* victim_self_vel,
 void ftKb_SpecialN_800F5954(Fighter_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
-    mpColl_8004CBE8(&ft->coll_data);
+    mpUpdateFloorSkip(&ft->coll_data);
 }
 
 bool ftKb_SpecialN_800F597C(Fighter_GObj* gobj)

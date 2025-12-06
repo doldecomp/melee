@@ -355,9 +355,9 @@ void grInishie2_801FD224(Ground_GObj* gobj)
 
         if (counter < 0) {
             if (gp->gv.inishie2.xC8 == 0) {
-                mpLib_80057638(0xC);
+                mpJointListAdd(0xC);
             } else {
-                mpLib_80057638(0xD);
+                mpJointListAdd(0xD);
             }
 
             gp->gv.inishie2.xC4_flags.b1 = 1;
@@ -460,7 +460,7 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     gp = GET_GROUND(gobj);
     temp_r28 = temp_r29;
     spawn_side = HSD_Randi(2);
-    mpLib_80057638(0xE);
+    mpJointListAdd(0xE);
     if (spawn_side == 0) {
         vec.x = grI2_804D6A00->unk14[spawn_side].x +
                 Stage_GetBlastZoneRightOffset();
@@ -546,7 +546,7 @@ void grInishie2_801FD824(HSD_GObj* gobj)
     gp = gobj->user_data;
     spawn_side = HSD_Randi(2);
 
-    mpLib_80057638(0);
+    mpJointListAdd(0);
 
     if (spawn_side == 0) {
         spawn_pos.x = grI2_804D6A00->unk30[spawn_side].x +

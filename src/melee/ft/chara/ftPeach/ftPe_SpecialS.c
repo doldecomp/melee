@@ -176,8 +176,9 @@ void ftPe_SpecialSStart_Coll(Fighter_GObj* gobj)
     }
     {
         u32 env_flags = coll->env_flags;
-        if ((env_flags & MPCOLL_LEFTWALL && fp->facing_dir == (float) -1.0) ||
-            (env_flags & MPCOLL_RIGHTWALL && fp->facing_dir == 1.0f))
+        if ((env_flags & Collide_RightWallMask &&
+             fp->facing_dir == (float) -1.0) ||
+            (env_flags & Collide_LeftWallMask && fp->facing_dir == 1.0f))
         {
             fp->gr_vel = 0;
             fp->cmd_vars[0] = 1;
@@ -192,14 +193,15 @@ void ftPe_SpecialAirSStart_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj)) {
         enterStart(gobj);
     }
-    if (coll->env_flags & MPCOLL_CEIL) {
+    if (coll->env_flags & Collide_CeilingMask) {
         fp->self_vel.y = 0;
         fp->cmd_vars[0] = 1;
     }
     {
         u32 env_flags = coll->env_flags;
-        if ((env_flags & MPCOLL_LEFTWALL && fp->facing_dir == (float) -1.0) ||
-            (env_flags & MPCOLL_RIGHTWALL && fp->facing_dir == +1))
+        if ((env_flags & Collide_RightWallMask &&
+             fp->facing_dir == (float) -1.0) ||
+            (env_flags & Collide_LeftWallMask && fp->facing_dir == +1))
         {
             fp->self_vel.x = 0;
             fp->cmd_vars[0] = 1;
@@ -257,8 +259,9 @@ void ftPe_SpecialAirSJump_Coll(HSD_GObj* gobj)
     }
     {
         u32 env_flags = coll->env_flags;
-        if ((env_flags & MPCOLL_LEFTWALL && fp->facing_dir == (float) -1.0) ||
-            (env_flags & MPCOLL_RIGHTWALL && fp->facing_dir == +1))
+        if ((env_flags & Collide_RightWallMask &&
+             fp->facing_dir == (float) -1.0) ||
+            (env_flags & Collide_LeftWallMask && fp->facing_dir == +1))
         {
             fp->cmd_vars[2] = 1;
             enterAirEndSmash(gobj);

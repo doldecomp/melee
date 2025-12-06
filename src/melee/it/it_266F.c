@@ -1547,8 +1547,8 @@ bool it_8026E9A4(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3)
     Vec3 p;
     PAD_STACK(4);
 
-    if (mpLib_800524DC(&p, NULL, NULL, arg3, -1, -1, arg1->x, arg1->y, arg2->x,
-                       arg2->y) == true)
+    if (mpCheckAllRemap(&p, NULL, NULL, arg3, -1, -1, arg1->x, arg1->y,
+                        arg2->x, arg2->y) == true)
     {
         *arg2 = p;
         return true;
@@ -1563,8 +1563,8 @@ bool it_8026EA20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3,
     // PAD_STACK(4);
     PAD_STACK(8);
 
-    if (mpLib_800524DC(&p, *arg4, flags_out, arg3, -1, -1, arg1->x, arg1->y,
-                       arg2->x, arg2->y) == true)
+    if (mpCheckAllRemap(&p, *arg4, flags_out, arg3, -1, -1, arg1->x, arg1->y,
+                        arg2->x, arg2->y) == true)
     {
         *arg2 = p;
         return true;
@@ -1578,8 +1578,8 @@ bool it_8026EA9C(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3, int* arg4,
     Vec3 p;
     PAD_STACK(4);
 
-    if (mpLib_800524DC(&p, arg4, flags_out, arg3, -1, arg6, arg1->x, arg1->y,
-                       arg2->x, arg2->y) == true)
+    if (mpCheckAllRemap(&p, arg4, flags_out, arg3, -1, arg6, arg1->x, arg1->y,
+                        arg2->x, arg2->y) == true)
     {
         *arg2 = p;
         return true;

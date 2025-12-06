@@ -342,9 +342,9 @@ static void ftNs_SpecialAirHi_CollisionModVel(
     while (fp->mv.ns.specialhi.aerialVel > 2 * M_PI) {
         fp->mv.ns.specialhi.aerialVel -= 2 * M_PI;
     }
-    if ((coll_data->env_flags & 63) != 0) {
-        phi_f1 = atan2f(coll_data->right_wall.normal.y,
-                        coll_data->right_wall.normal.x);
+    if (coll_data->env_flags & Collide_LeftWallMask) {
+        phi_f1 = atan2f(coll_data->left_facing_wall.normal.y,
+                        coll_data->left_facing_wall.normal.x);
         while (phi_f1 < 0.0f) {
             phi_f1 += 2 * M_PI;
         }
@@ -367,9 +367,9 @@ static void ftNs_SpecialAirHi_CollisionModVel(
             phi_f1 -= M_PI / 2;
         }
     }
-    if ((coll_data->env_flags & 4032) != 0) {
-        phi_f1 = atan2f(coll_data->left_wall.normal.y,
-                        coll_data->left_wall.normal.x);
+    if (coll_data->env_flags & Collide_RightWallMask) {
+        phi_f1 = atan2f(coll_data->right_facing_wall.normal.y,
+                        coll_data->right_facing_wall.normal.x);
         phi_f3 = M_PI + phi_f1;
 
         while (phi_f3 < 0.0f) {
@@ -1249,7 +1249,7 @@ void ftNs_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                          fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_vel);
     }
 
     {
@@ -1274,7 +1274,7 @@ void ftNs_SpecialAirHiHold_Phys(
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                          fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_vel);
     }
 
     {
@@ -1296,7 +1296,7 @@ void ftNs_SpecialAirHiEnd_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                          fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_vel);
     }
 
     {
@@ -1466,7 +1466,9 @@ void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
     if (ft_80082708(gobj) == false) {
         u32 env_flags = fp0->coll_data.env_flags;
 
-        if ((env_flags & 0b111111) || (env_flags & 0b111111 << 6)) {
+        if (env_flags & Collide_LeftWallMask ||
+            env_flags & Collide_RightWallMask)
+        {
             ftCommon_8007D60C(fp0);
             {
                 Fighter* fp1 = gobj->user_data;
@@ -1505,8 +1507,9 @@ void ftNs_SpecialHi_Coll(HSD_GObj* gobj)
     {
         u32 env_flags = fp0->coll_data.env_flags;
 
-        if ((env_flags & 0b11 << 13) || (env_flags & 0b111111) ||
-            (env_flags & 0b111111 << 6))
+        if (env_flags & Collide_CeilingMask ||
+            env_flags & Collide_LeftWallMask ||
+            env_flags & Collide_RightWallMask)
         {
             fp0->gr_vel = 0;
             {
@@ -1707,7 +1710,7 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 
     ecbFlag = fighter_r31->coll_data.env_flags;
-    if ((ecbFlag & 24576) != 0) {
+    if (ecbFlag & Collide_CeilingMask) {
         if (lbVector_Angle(&fighter_r31->coll_data.ceiling.normal,
                            &fighter_r31->self_vel) >
             (0.01745329238474369f *
@@ -1742,15 +1745,16 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
 
     } else {
-        if ((ecbFlag & 63) != 0) {
-            if (lbVector_Angle(&fighter_r31->coll_data.right_wall.normal,
+        if (ecbFlag & Collide_LeftWallMask) {
+            if (lbVector_Angle(&fighter_r31->coll_data.left_facing_wall.normal,
                                &fighter_r31->self_vel) >
                 (0.01745329238474369f *
                  (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data4 = gobj->user_data;
-                lbVector_Mirror(&fighter_data4->self_vel,
-                                &fighter_r31->coll_data.right_wall.normal);
+                lbVector_Mirror(
+                    &fighter_data4->self_vel,
+                    &fighter_r31->coll_data.left_facing_wall.normal);
                 (new_var = fighter_data4)->self_vel.x *= 0.5f;
                 new_var->self_vel.y *= 0.5f;
                 temp_f1_5 = new_var->self_vel.x;
@@ -1760,7 +1764,8 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 lbVector_sqrtf_accurate(fmuls3 + fmuls4);
                 DriftMax = new_var->co_attrs.air_drift_max;
                 DriftMax == 0.0f;
-                ftCommon_ClampSelfVelX(new_var, new_var->co_attrs.air_drift_max);
+                ftCommon_ClampSelfVelX(new_var,
+                                       new_var->co_attrs.air_drift_max);
                 if (fighter_data4->self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {
@@ -1772,23 +1777,26 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                                           Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
                                           NULL);
                 ftAnim_8006EBA4(gobj);
-                spB8.x = atan2f(-fighter_r31->coll_data.right_wall.normal.x,
-                                fighter_r31->coll_data.right_wall.normal.y);
+                spB8.x =
+                    atan2f(-fighter_r31->coll_data.left_facing_wall.normal.x,
+                           fighter_r31->coll_data.left_facing_wall.normal.y);
                 efSync_Spawn(1030, gobj, &fighter_data4->cur_pos, &spB8);
                 return;
             }
             ftNs_SpecialAirHi_CollisionModVel(gobj, &fighter_r31->coll_data);
             return;
         }
-        if ((ecbFlag & 4032) != 0) {
-            if (lbVector_Angle(&fighter_r31->coll_data.left_wall.normal,
-                               &fighter_r31->self_vel) >
+        if (ecbFlag & Collide_RightWallMask) {
+            if (lbVector_Angle(
+                    &fighter_r31->coll_data.right_facing_wall.normal,
+                    &fighter_r31->self_vel) >
                 (0.01745329238474369f *
                  (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data5 = gobj->user_data;
-                lbVector_Mirror(&fighter_data5->self_vel,
-                                &fighter_r31->coll_data.left_wall.normal);
+                lbVector_Mirror(
+                    &fighter_data5->self_vel,
+                    &fighter_r31->coll_data.right_facing_wall.normal);
                 (new_var = fighter_data5)->self_vel.x *= 0.5f;
                 new_var->self_vel.y *= 0.5f;
                 temp_f1_8 = new_var->self_vel.x;
@@ -1798,7 +1806,8 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                 lbVector_sqrtf_accurate(fmuls5 + fmuls6);
                 DriftMax = new_var->co_attrs.air_drift_max;
                 DriftMax == 0.0f;
-                ftCommon_ClampSelfVelX(new_var, new_var->co_attrs.air_drift_max);
+                ftCommon_ClampSelfVelX(new_var,
+                                       new_var->co_attrs.air_drift_max);
                 if (fighter_data5->self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {
@@ -1810,8 +1819,9 @@ void ftNs_SpecialAirHi_Coll(HSD_GObj* gobj)
                                           Ft_MF_KeepGfx, 0.0f, 1.0f, 0.0f,
                                           NULL);
                 ftAnim_8006EBA4(gobj);
-                spAC.x = atan2f(-fighter_r31->coll_data.left_wall.normal.x,
-                                fighter_r31->coll_data.left_wall.normal.y);
+                spAC.x =
+                    atan2f(-fighter_r31->coll_data.right_facing_wall.normal.x,
+                           fighter_r31->coll_data.right_facing_wall.normal.y);
                 efSync_Spawn(1030, gobj, &fighter_data5->cur_pos, &spAC);
                 return;
             }

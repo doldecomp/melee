@@ -12,26 +12,27 @@
 
 /* 041C78 */ void mpColl_80041C78(void);
 /* 041C8C */ void mpCollPrev(CollData* cd);
-/* 041DD0 */ void mpColl_80041DD0(CollData* cd, u32 flags);
+/* 041DD0 */ void mpCollCheckBounding(CollData* cd, u32 flags);
 /* 041EE4 */ void mpColl_80041EE4(CollData*);
-/* 042078 */ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*,
-                                  HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*,
-                                  HSD_JObj*, HSD_JObj*, float);
-/* 04220C */ void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, float, float,
-                                  float, float);
+/* 042078 */ void mpColl_SetECBSource_JObj(CollData* cd, HSD_GObj* gobj,
+                                           HSD_JObj*, HSD_JObj*, HSD_JObj*,
+                                           HSD_JObj*, HSD_JObj*, HSD_JObj*,
+                                           HSD_JObj*, float);
+/* 04220C */ void mpColl_SetECBSource_Fixed(CollData* cd, HSD_GObj* gobj,
+                                            float, float, float, float);
 /* 042374 */ void mpColl_SetLedgeSnap(CollData*, float, float, float);
 /* 042384 */ void mpColl_80042384(CollData* cd);
-/* 0424DC */ void mpColl_800424DC(CollData* cd, u32 flags);
-/* 04293C */ void mpColl_8004293C(CollData* cd);
+/* 0424DC */ void mpColl_LoadECB_JObj(CollData*, u32 flags);
+/* 04293C */ void mpColl_LoadECB_Fixed(CollData*);
 /* 042C58 */ void mpColl_80042C58(CollData*, ftCollisionBox*);
-/* 042D24 */ void mpColl_80042D24(CollData* cd);
-/* 042DB0 */ void mpColl_80042DB0(CollData* ecb, float time);
-/* 043268 */ void mpColl_80043268(CollData*, s32, s32, float);
-/* 043324 */ void mpCollEnd(CollData*, s32, s32);
-/* 043558 */ void mpColl_80043558(CollData*, s32);
+/* 042D24 */ void mpColl_LoadECB(CollData*);
+/* 042DB0 */ void mpCollInterpolateECB(CollData*, float time);
+/* 043268 */ void mpColl_80043268(CollData*, int line_id, bool, float);
+/* 043324 */ void mpCollEnd(CollData*, bool, bool);
+/* 043558 */ void mpColl_80043558(CollData*, int line_id);
 /* 043670 */ void mpColl_80043670(CollData*);
 /* 043680 */ void mpColl_80043680(CollData*, Vec3*);
-/* 0436D8 */ void mpColl_800436D8(CollData*, int facing_dir);
+/* 0436D8 */ void mpCollSetFacingDir(CollData*, int facing_dir);
 /* 0436E4 */ void mpColl_800436E4(CollData*, float);
 /* 043754 */ bool mpColl_80043754(mpColl_Callback, CollData*, u32);
 /* 0439FC */ void mpColl_800439FC(CollData*);
@@ -54,7 +55,7 @@
 /* 045B74 */ bool mpColl_80045B74_LeftWall(CollData*);
 /* 046224 */ bool mpColl_80046224_LeftWall(CollData*);
 /* 046904 */ bool mpColl_80046904(CollData*, u32 flags);
-/* 046F78 */ bool fn_80046F78(CollData*, u32);
+/* 046F78 */ bool mpColl_80046F78(CollData*, u32);
 /* 0471F8 */ bool mpColl_800471F8(CollData*);
 /* 04730C */ bool mpColl_8004730C(CollData*, ftCollisionBox*);
 /* 0473CC */ bool mpColl_800473CC(CollData*);
@@ -94,7 +95,7 @@
 /* 04A678 */ bool mpColl_8004A678_Floor(CollData*, int line_id);
 /* 04A908 */ bool mpColl_8004A908_Floor(CollData*, int line_id);
 /* 04AB80 */ bool mpColl_8004AB80(CollData*);
-/* 04ACE4 */ bool fn_8004ACE4(CollData*, int);
+/* 04ACE4 */ bool mpColl_8004ACE4(CollData*, int);
 /* 04B108 */ bool mpColl_8004B108(CollData*);
 /* 04B21C */ bool mpColl_8004B21C(CollData*, ftCollisionBox*);
 /* 04B2DC */ bool mpColl_8004B2DC(CollData*);
@@ -105,18 +106,20 @@
 /* 04B894 */ bool mpColl_8004B894_RightWall(CollData*);
 /* 04BDD4 */ bool mpColl_8004BDD4_LeftWall(CollData*);
 /* 04C328 */ bool mpColl_8004C328_Ceiling(CollData*, int line_id);
-/* 04C534 */ bool fn_8004C534(CollData*, u32);
+/* 04C534 */ bool mpColl_8004C534(CollData*, u32);
 /* 04C750 */ bool mpColl_8004C750(CollData*);
-/* 04C864 */ void mpColl_8004C864(CollData*, bool, float, float);
-/* 04C91C */ void mpColl_8004C91C(CollData*, bool, float, float);
+/* 04C864 */ void mpCollSqueezeHorizontal(CollData*, bool airborne, float left,
+                                          float right);
+/* 04C91C */ void mpCollSqueezeVertical(CollData*, bool airborne, float top,
+                                        float bottom);
 /* 04CA6C */ float mpColl_8004CA6C(CollData*);
-/* 04CAA0 */ bool mpColl_8004CAA0(CollData*, Vec3*);
-/* 04CAE8 */ bool mpColl_8004CAE8(CollData*, Vec3*);
-/* 04CB30 */ bool mpColl_8004CB30(CollData*, Vec3*);
-/* 04CB78 */ bool mpColl_8004CB78(CollData*, Vec3*);
+/* 04CAA0 */ bool mpCollGetSpeedCeiling(CollData*, Vec3* speed);
+/* 04CAE8 */ bool mpCollGetSpeedLeftWall(CollData*, Vec3* speed);
+/* 04CB30 */ bool mpCollGetSpeedRightWall(CollData*, Vec3* speed);
+/* 04CB78 */ bool mpCollGetSpeedFloor(CollData*, Vec3* speed);
 /* 04CBC0 */ bool mpColl_IsOnPlatform(CollData*);
-/* 04CBE8 */ void mpColl_8004CBE8(CollData*);
-/* 04CBF4 */ void mpColl_8004CBF4(CollData*);
+/* 04CBE8 */ void mpUpdateFloorSkip(CollData*);
+/* 04CBF4 */ void mpClearFloorSkip(CollData*);
 /* 04CC00 */ void mpCopyCollData(CollData* src, CollData* dst, int);
 /* 04D024 */ bool mpColl_8004D024(Vec3*);
 /* 4D64AC */ extern int mpColl_804D64AC;
