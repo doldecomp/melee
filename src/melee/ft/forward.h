@@ -18,6 +18,8 @@ typedef struct CostumeTObjList CostumeTObjList;
 typedef struct Fighter Fighter;
 typedef struct Fighter_804D653C_t Fighter_804D653C_t;
 typedef struct FtPartsVis FtPartsVis;
+typedef struct FtPartsVisLookup FtPartsVisLookup;
+typedef struct TempS TempS;
 typedef struct Fighter_x1670_t Fighter_x1670_t;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;

@@ -9,6 +9,8 @@
 #include "inlines.h"
 #include "types.h"
 
+#include "ft/forward.h"
+
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <sysdolphin/baselib/class.h>
@@ -554,7 +556,7 @@ HSD_JObj* ftParts_8007482C(HSD_Joint* joint)
 }
 
 void ftParts_8007487C(FtPartsDesc* desc, FtPartsVis* vis, u32 costume_id,
-                      u32* arg3, u32* arg4)
+                      DObjList* arg3, DObjList* arg4)
 {
     void*(*vis_table)[4];
     PAD_STACK(0x8);
@@ -565,20 +567,20 @@ void ftParts_8007487C(FtPartsDesc* desc, FtPartsVis* vis, u32 costume_id,
         HSD_ASSERTREPORT(627, 0, "fighter parts model num over!\n");
     }
 
-    vis->xC =
+    vis->xC[0] =
         vis_table[costume_id][0] ? vis_table[costume_id][0] : vis_table[0][0];
-    vis->x10 =
+    vis->xC[1] =
         vis_table[costume_id][1] ? vis_table[costume_id][1] : vis_table[0][1];
-    vis->x14 =
+    vis->xC[2] =
         vis_table[costume_id][2] ? vis_table[costume_id][2] : vis_table[0][2];
-    vis->x18 =
+    vis->xC[3] =
         vis_table[costume_id][3] ? vis_table[costume_id][3] : vis_table[0][3];
-    vis->x1C = 0;
-    vis->x4[0] = 1;
-    vis->x4[1] = 1;
-    vis->x4[2] = 1;
-    vis->x4[3] = 1;
-    vis->x4[4] = 1;
+    vis->xC[4] = 0;
+    vis->cleared[0] = true;
+    vis->cleared[1] = true;
+    vis->cleared[2] = true;
+    vis->cleared[3] = true;
+    vis->cleared[4] = true;
     ftParts_80074D7C(vis, 0, arg3);
     ftParts_80074D7C(vis, 1, arg3);
     ftParts_80074D7C(vis, 2, arg4);
@@ -592,7 +594,7 @@ void ftParts_800749CC(Fighter_GObj* gobj)
     int i;
 
     ftParts_8007487C(&fp->ft_data->x8->x0, &fp->x5AC, fp->x619_costume_id,
-                     &fp->dobj_list.count, &fp->x203C);
+                     &fp->dobj_list, &fp->x203C);
     for (i = 0; i < fp->x5AC.model_num; i++) {
         fp->x5F4_arr[i].x0 = -1;
     }
@@ -640,15 +642,82 @@ void ftParts_80074B0C(Fighter_GObj* gobj, int idx, int val)
     if (val != fp->x5F4_arr[idx].x1) {
         fp->x5F4_arr[idx].x1 = val;
         fp->x221D_b2 = true;
-        ftParts_80074D7C(&fp->x5AC, 0, &fp->dobj_list.count);
+        ftParts_80074D7C(&fp->x5AC, 0, &fp->dobj_list);
     }
 }
 
-/// #ftParts_80074B6C
+void ftParts_80074B6C(Fighter* fp, FtPartsVis* vis, int idx,
+                      DObjList* dobj_list)
+{
+    FtPartsVisLookup* lookup = vis->xC[idx]; // r4
+    if (lookup != NULL && !vis->cleared[idx]) {
+        int i; // r26
+        for (i = 0; i < vis->model_num; i++) {
+            int r25 = (int) fp->x5F4_arr[i].x1; // r25
+            int j;                              // r24
+            for (j = 0; j < lookup[i].x0; j++) {
+                TempS* r27 = &lookup[i].x4[j]; // r27
+                u8* r0 = r27->x4;              // r0
+                if (j == r25) {
+                    int k; // r20
+                    for (k = 0; k < r27->x0; k++) {
+                        HSD_DObjClearFlags(dobj_list->data[r0[k]], 1);
+                    }
+                } else {
+                    int k; // r20
+                    for (k = 0; k < r27->x0; k++) {
+                        HSD_DObjSetFlags(dobj_list->data[r0[k]], 1);
+                    }
+                }
+            }
+            vis->cleared[idx] = 1;
+        }
+    }
+}
 
-/// #ftParts_80074CA0
+void ftParts_80074CA0(FtPartsVis* vis, int idx, DObjList* dobj_list)
+{
+    FtPartsVisLookup* lookup = vis->xC[idx]; // r0
+    if (lookup != NULL && !vis->cleared[idx]) {
+        int i; // r24
+        for (i = 0; i < vis->model_num; i++) {
+            int j; // r23
+            for (j = 0; j < lookup[i].x0; j++) {
+                TempS* r26; // r26
+                int k;      // r22
+                u8* r29;    // r29
+                r26 = &lookup[i].x4[j];
+                r29 = r26->x4;
+                for (k = 0; k < r26->x0; k++) {
+                    HSD_DObjClearFlags(dobj_list->data[r29[k]], 1);
+                }
+            }
+        }
+        vis->cleared[idx] = true;
+    }
+}
 
-/// #ftParts_80074D7C
+void ftParts_80074D7C(FtPartsVis* vis, int idx, DObjList* dobj_list)
+{
+    FtPartsVisLookup* lookup = vis->xC[idx]; // r0
+    if (lookup != NULL && vis->cleared[idx]) {
+        int i; // r24
+        for (i = 0; i < vis->model_num; i++) {
+            int j; // r23
+            for (j = 0; j < lookup[i].x0; j++) {
+                TempS* r26; // r26
+                int k;      // r22
+                u8* r29;    // r29
+                r26 = &lookup[i].x4[j];
+                r29 = r26->x4;
+                for (k = 0; k < r26->x0; k++) {
+                    HSD_DObjSetFlags(dobj_list->data[r29[k]], 1);
+                }
+            }
+        }
+        vis->cleared[idx] = false;
+    }
+}
 
 void ftParts_80074E58(Fighter* fp)
 {
@@ -720,18 +789,18 @@ void ftParts_800750C8(Fighter* fp, enum_t arg1, bool arg2)
             ftData_UnkIntBoolFunc0.model_events[fp->kind](fp, 2, arg2);
         }
         if (arg2) {
-            ftParts_80074B6C(fp, &fp->x5AC, 3, &fp->dobj_list.count);
+            ftParts_80074B6C(fp, &fp->x5AC, 3, &fp->dobj_list);
         } else {
-            ftParts_80074D7C(&fp->x5AC, 3, &fp->dobj_list.count);
+            ftParts_80074D7C(&fp->x5AC, 3, &fp->dobj_list);
         }
         if (ftData_UnkIntBoolFunc0.model_events[fp->kind] != NULL) {
             ftData_UnkIntBoolFunc0.model_events[fp->kind](fp, 3, arg2);
         }
     } else {
         if (arg2) {
-            ftParts_80074B6C(fp, &fp->x5AC, arg1, &fp->dobj_list.count);
+            ftParts_80074B6C(fp, &fp->x5AC, arg1, &fp->dobj_list);
         } else {
-            ftParts_80074D7C(&fp->x5AC, arg1, &fp->dobj_list.count);
+            ftParts_80074D7C(&fp->x5AC, arg1, &fp->dobj_list);
         }
         if (ftData_UnkIntBoolFunc0.model_events[fp->kind] != NULL) {
             ftData_UnkIntBoolFunc0.model_events[fp->kind](fp, arg1, arg2);

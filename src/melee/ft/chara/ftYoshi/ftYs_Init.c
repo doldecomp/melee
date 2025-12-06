@@ -445,16 +445,16 @@ void ftYs_Init_8012B8A4(HSD_GObj* gobj)
     float tempf =
         da->xC *
         (1.0f - (fp->shield_health / p_ftCommonData->x260_startShieldHealth));
-    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.xC, tempf);
-    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.x10, tempf);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.xC[0], tempf);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.xC[1], tempf);
 }
 
 void ftYs_Init_8012B918(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.xC, 0.0F);
-    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.x10, 0.0F);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.xC[0], 0.0F);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5AC.xC[1], 0.0F);
 }
 
 void ftYs_Init_OnDeath(HSD_GObj* gobj)
@@ -476,9 +476,9 @@ void ftYs_Init_OnLoad(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5AC.xC;
+    temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5AC.xC[0];
     ft = fp->ft_data;
-    temp_r28 = (struct S_UNK_YOSHI1*) fp->x5AC.x10;
+    temp_r28 = (struct S_UNK_YOSHI1*) fp->x5AC.xC[1];
     item_list = ft->x48_items;
     other_attr = ft->ext_attr;
 

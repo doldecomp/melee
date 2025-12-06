@@ -1478,9 +1478,8 @@ struct Fighter {
     /* fp+2030 */ s32 x2030;
     /* fp+2034 */ s32 x2034;
     /* fp+2038 */ s32 x2038;
-    /* fp+203C */ u32 x203C;
-    /* fp+2040 */ HSD_DObj** x2040;
-    /* fp+203C */ u8 filler_x203C[0x2064 - 0x2044];
+    /* fp+203C */ DObjList x203C;
+    /* fp+2044 */ u8 filler_x2044[0x2064 - 0x2044];
     /* fp+2064 */ int x2064_ledgeCooldown;
     /* fp+2068 */ s32 x2068_attackID;
     /* fp+206C */ u16 x206C_attack_instance;

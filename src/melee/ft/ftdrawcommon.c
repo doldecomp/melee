@@ -260,7 +260,7 @@ void ftDrawCommon_80080C28(HSD_GObj* gobj, int arg1)
     if (fighter->x21FC_flag.b7 != 0) {
         if (!fighter->invisible && !fighter->x221E_b5 && !fighter->x2226_b5) {
             ftCo_8009F5AC(fighter);
-            if (fighter->x5AC.x10 != NULL) {
+            if (fighter->x5AC.xC[1] != NULL) {
                 ftParts_800750C8(fighter, 0, 0);
                 ftParts_800750C8(fighter, 2, 0);
                 ftParts_800750C8(fighter, 4, 0);
@@ -376,7 +376,7 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
             if (fp->x2220_b7) {
                 ftDrawCommon_80080E18_inline2(gobj, fp);
             }
-            if (fp->x5AC.x1C != NULL) {
+            if (fp->x5AC.xC[4] != NULL) {
                 ftDrawCommon_80080E18_inline0(gobj, arg1);
                 ftDrawCommon_800805C8(gobj, arg1, true);
                 ftDrawCommon_80080E18_inline1(gobj, arg1);
@@ -384,7 +384,8 @@ void ftDrawCommon_80080E18(HSD_GObj* gobj, int arg1)
             break;
         case 0:
             fp->x2223_b3 = false;
-            ftDrawCommon_800805C8(gobj, arg1, fp->x5AC.x1C != NULL ? false : true);
+            ftDrawCommon_800805C8(gobj, arg1,
+                                  fp->x5AC.xC[4] != NULL ? false : true);
         }
     }
 }
@@ -413,7 +414,7 @@ void ftDrawCommon_80081168(void)
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
         Fighter* fighter = GET_FIGHTER(cur);
         PAD_STACK(4 * 2);
-        if (fighter->x5AC.x10 != NULL) {
+        if (fighter->x5AC.xC[1] != NULL) {
             ftParts_800750C8(fighter, 1, 0);
             ftParts_800750C8(fighter, 2, 0);
             ftParts_800750C8(fighter, 4, 0);
@@ -428,7 +429,7 @@ void ftDrawCommon_80081200(void)
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
         Fighter* fighter = GET_FIGHTER(cur);
         PAD_STACK(4 * 2);
-        if (fighter->x5AC.x10 != NULL) {
+        if (fighter->x5AC.xC[1] != NULL) {
             ftParts_800750C8(fighter, 0, 0);
             ftParts_800750C8(fighter, 2, 0);
             ftParts_800750C8(fighter, 4, 0);

@@ -484,8 +484,8 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
         ftParts_80075650(gobj, fp->fv.pr.x223C, &fp->fv.pr.x2240);
 
         ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->fv.pr.x2248,
-                         fp->x619_costume_id, &fp->fv.pr.x2240.count,
-                         &fp->fv.pr.x2240.count);
+                         fp->x619_costume_id, &fp->fv.pr.x2240,
+                         &fp->fv.pr.x2240);
         ftCo_8009DC54(fp);
         return;
     }
@@ -524,9 +524,9 @@ void ftPr_Init_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
 {
     if (fp->fv.pr.x223C) {
         if (arg2) {
-            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240.count);
+            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
         } else {
-            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240.count);
+            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
         }
     }
 }

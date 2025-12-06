@@ -3104,7 +3104,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_ObjFree(&fighter_x59C_alloc_data, fp->x5A0);
     HSD_ObjFree(&fighter_parts_alloc_data, fp->parts);
     HSD_ObjFree(&fighter_dobj_list_alloc_data, fp->dobj_list.data);
-    HSD_ObjFree(&fighter_x2040_alloc_data, fp->x2040);
+    HSD_ObjFree(&fighter_x2040_alloc_data, fp->x203C.data);
     HSD_ObjFree(&fighter_dat_attrs_alloc_data, fp->dat_attrs_backup);
     HSD_ObjFree(&fighter_alloc_data, fp);
 }
