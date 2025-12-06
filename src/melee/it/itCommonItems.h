@@ -846,4 +846,18 @@ typedef struct itStarRodStar_ItemVars {
     float x4;
 } itStarRodStar_ItemVars;
 
+typedef struct itTosakinto_ItemVars {
+    /* ip+DD4 */ u8 x0_pad[0x60];
+    /* ip+E34 */ enum_t x60_msid;
+    /* ip+E38 */ float x64_vel_x;
+    /* ip+E3C */ int x68_sfx_id;
+
+} itTosakinto_ItemVars;
+
+typedef struct itTosakinto_Attrs {
+    float x0_scale;
+    float x4_life_timer;
+    float x8_vel_x;
+} itTosakinto_Attrs;
+
 #endif
