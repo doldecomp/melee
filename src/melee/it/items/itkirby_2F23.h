@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 2F23AC */ UNK_RET it_802F23AC(UNK_PARAMS);
+/* 2F23AC */ double it_802F23AC(int* obj, float* pos);
 /* 2F23EC */ void it_802F23EC(Item_GObj* gobj, Fighter_GObj* owner_gobj,
                               float facing_dir);
 /* 2F2578 */ bool itKirby_2F23_UnkMotion0_Anim(Item_GObj*);

@@ -88,7 +88,11 @@ bool grBigBlueRoute_8020C1D4(Ground_GObj* arg)
     return false;
 }
 
-/// #grBigBlueRoute_8020C1DC
+void grBigBlueRoute_8020C1DC(Ground_GObj* gobj)
+{
+    grBigBlueRoute_8020C85C();
+    grBigBlueRoute_8020CD20(gobj);
+}
 
 void grBigBlueRoute_8020C210(Ground_GObj* gobj)
 {

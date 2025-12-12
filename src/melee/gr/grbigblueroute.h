@@ -40,7 +40,7 @@ struct grBigBlueRoute_8020DA9C_t {
 /* 20C238 */ UNK_RET grBigBlueRoute_8020C238(UNK_PARAMS);
 /* 20C530 */ UNK_RET grBigBlueRoute_8020C530(UNK_PARAMS);
 /* 20C85C */ UNK_RET grBigBlueRoute_8020C85C(UNK_PARAMS);
-/* 20CD20 */ UNK_RET grBigBlueRoute_8020CD20(UNK_PARAMS);
+/* 20CD20 */ UNK_RET grBigBlueRoute_8020CD20(Ground_GObj*);
 /* 20DA9C */ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
 /* 20DAB4 */ UNK_RET grBigBlueRoute_8020DAB4(UNK_PARAMS);
 /* 20DD64 */ UNK_RET grBigBlueRoute_8020DD64(UNK_PARAMS);
