@@ -860,4 +860,13 @@ typedef struct itTosakinto_Attrs {
     float x8_vel_x;
 } itTosakinto_Attrs;
 
+typedef struct itMDisableAttributes {
+    f32 lifetime;
+    f32 x_vel;
+} itMDisableAttributes;
+
+typedef struct itMDisable_ItemVars {
+    Fighter_GObj* owner;
+} itMDisable_ItemVars;
+
 #endif
