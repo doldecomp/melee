@@ -105,7 +105,12 @@ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj)
 
 /// #it_802BA760
 
-/// #it_2725_Logic53_PickedUp
+void it_2725_Logic53_PickedUp(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
+    it_802A2428(gobj);
+}
 
 /// #it_802BA9B8
 

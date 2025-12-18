@@ -1,10 +1,10 @@
 #include "itwhispyapple.h"
 
-#include "it/it_26B1.h"
+#include "it/inlines.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/inlines.h"
 
 /// #it_802EE200
 
@@ -16,7 +16,18 @@
 
 /// #itWhispyapple_UnkMotion0_Coll
 
-/// #it_802EE6A0
+void it_802EE6A0(Item_GObj* gobj)
+{
+    Item* ip;
+    f32 val;
+
+    ip = GET_ITEM(gobj);
+    val = 0;
+    ip->x40_vel.x = val;
+    ip->x40_vel.y = val;
+    ip->x40_vel.z = val;
+    Item_80268E5C((HSD_GObj*) gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 /// #itWhispyapple_UnkMotion1_Anim
 
