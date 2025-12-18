@@ -599,6 +599,7 @@ struct Item {
         itStarRodStar_ItemVars starrodstar;
         itZeldaDinFire_ItemVars zeldadinfire;
         itTosakinto_ItemVars tosakinto;
+        itMDisable_ItemVars mdisable;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
