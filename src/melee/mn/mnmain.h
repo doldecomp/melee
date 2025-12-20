@@ -17,6 +17,24 @@ typedef struct _MainMenuData {
     HSD_Text* description;
 } MainMenuData;
 
+typedef struct _MenuFlow {
+    u8 cur_menu;
+    u8 prev_menu;
+    u16 hovered_option;
+    u32 confirmed_option;
+    u64 buttons;
+    u8 x10;
+    u8 entering_menu; ///< bool
+    u8 light_lerp_frames;
+    GXColor* light_color; ///< used for the main panel color
+} MenuFlow;
+
+typedef struct _MenuInputState {
+    u16 cooldown;
+    u16 x2;
+    s32 x4;
+} MenuInputState;
+
 /* 2295AC */ u8 mn_802295AC(void);
 /* 229624 */ u32 mn_80229624(u32);
 /* 229860 */ void mn_80229860(s8);

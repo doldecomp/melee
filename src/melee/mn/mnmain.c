@@ -1825,7 +1825,7 @@ void mn_8022C4F4(HSD_GObj* arg0)
 
     PAD_STACK(8);
 
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -1937,7 +1937,7 @@ void mn_8022C7CC(HSD_GObj* arg0)
 
     PAD_STACK(8);
 
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -1994,7 +1994,7 @@ void mn_8022CA54(HSD_GObj* arg0)
     PAD_STACK(8);
 
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -2056,7 +2056,7 @@ void mn_8022CC28(HSD_GObj* arg0)
     PAD_STACK(8);
 
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -2126,7 +2126,7 @@ void mn_8022CE6C(HSD_GObj* arg0)
     PAD_STACK(8);
 
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804A04F0.entering_menu = 1;
         switch ((s32) mn_804A04F0.hovered_option) {             /* irregular */
@@ -2210,7 +2210,7 @@ void mn_8022D104(HSD_GObj* arg0)
 
     temp_r30 = mn_803EB6B0[4].option_count;
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -2286,7 +2286,7 @@ void mn_8022D34C(HSD_GObj* arg0)
     PAD_STACK(8);
 
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -2357,7 +2357,7 @@ void mn_8022D594(HSD_GObj* arg0)
     PAD_STACK(8);
 
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -2442,7 +2442,7 @@ void mn_8022D7F4(HSD_GObj* arg0)
 
     temp_r29 = mn_803EB6B0[1].option_count;
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = temp_r3;
+    mn_804A04F0.buttons = temp_r3;
     if (temp_r3 & 0x10) {
         mn_804A04F0.entering_menu = 1;
         gm_801677E8(mn_8022C7CC_inline());
@@ -2532,7 +2532,7 @@ void mn_8022DB10(HSD_GObj* arg0)
 
     temp_r29 = mn_803EB6B0[0].option_count;
     temp_r3 = mn_80229624(4);
-    mn_804A04F0.x8 = 0;
+    mn_804A04F0.buttons = 0;
     if (temp_r3 & 0x10) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
@@ -2652,7 +2652,7 @@ void mn_8022DDA8_OnEnter(void* arg0_)
     mn_804D6BC8.cooldown = 0x14;
     mn_804D6BC8.x2 = 0;
     mn_804D6BC8.x4 = 0;
-    mn_804A04F0.x8 = 0;
+    mn_804A04F0.buttons = 0;
     sp2B4 = &mn_804A04F0.hovered_option;
     temp_r0 = arg0->x0;
     mn_804A04F0.cur_menu = temp_r0;
