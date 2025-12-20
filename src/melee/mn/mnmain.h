@@ -9,24 +9,13 @@
 #include <dolphin/mtx.h>
 #include <baselib/object.h>
 
-typedef struct _mn_unk1 {
-    u8 x0;  // current menu
-    u8 x1;  // previous menu
-    u16 x2; // selected index
-    s32 x4; // selected value
-    u64 x8;
-    u8 x10;
-    u8 x11;
-    u8 x12;
-    u8 x13;
-    GXColor* x14;
-} mn_unk1;
-
-typedef struct _mn_unk2 {
-    u16 x0;
-    u16 x2;
-    s32 x4;
-} mn_unk2;
+typedef struct _MainMenuData {
+    u8 menu_kind;
+    u8 hovered_option;
+    u8 state;
+    HSD_JObj* jobj_tree[42];
+    HSD_Text* description;
+} MainMenuData;
 
 /* 2295AC */ u8 mn_802295AC(void);
 /* 229624 */ u32 mn_80229624(u32);
@@ -94,8 +83,8 @@ typedef struct _mn_unk2 {
 /* 22F470 */ int mn_8022F470(int* x, int* target, int dx);
 /* 22F4CC */ UNK_RET mn_8022F4CC(UNK_PARAMS);
 
-/* 4A04F0 */ extern mn_unk1 mn_804A04F0;
+/* 4A04F0 */ extern MenuFlow mn_804A04F0;
 /* 4D6BB8 */ extern HSD_Archive* mn_804D6BB8;
-/* 4D6BC8 */ extern mn_unk2 mn_804D6BC8;
+/* 4D6BC8 */ extern MenuInputState mn_804D6BC8;
 
 #endif

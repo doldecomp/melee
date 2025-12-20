@@ -152,8 +152,8 @@ void fn_80252C50(HSD_GObj* gobj)
     u64 temp_r3;
     u32 pad_0;
 
-    if (mn_804D6BC8.x0 != 0) {
-        --mn_804D6BC8.x0;
+    if (mn_804D6BC8.cooldown != 0) {
+        --mn_804D6BC8.cooldown;
         mn_804D6BC8.x2 = 0;
         mn_804D6BC8.x4 = 0;
         return;
@@ -173,7 +173,7 @@ void fn_80252C50(HSD_GObj* gobj)
     temp_r3 = Menu_GetAllEvents();
     if (((u64) temp_r3 & 0x20) != 0) {
         lbAudioAx_80024030(i);
-        mn_804A04F0.x11 = i;
+        mn_804A04F0.entering_menu = i;
         mn_80229894(0x1C, 1U, 3);
         for (i = 0; i < 5; ++i) {
             // Weird code end
@@ -312,10 +312,10 @@ void mnInfoBonus_80252F8C(void)
     HSD_Archive* archive;
     u8 pad0[0x8];
 
-    mn_804D6BC8.x0 = 5;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0x1F;
-    mn_804A04F0.x2 = 0;
+    mn_804D6BC8.cooldown = 5;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0x1F;
+    mn_804A04F0.hovered_option = 0;
     memzero(o, sizeof(*o));
 
     o->x44 = 8;

@@ -9,6 +9,10 @@
 
 #include <baselib/sislib.h>
 
+typedef unsigned char MenuKind8;
+typedef unsigned char MenuState8;
+typedef unsigned long MenuButtons; ///< set in mn_80229624 and used in MenuFlow
+
 typedef struct {
     u8 cursor; // @todo are these arbitrary variables the menus can use in any
                // way?
@@ -381,6 +385,25 @@ struct AnimLoopSettings {
     /* +00 */ f32 start_frame;
     /* +04 */ f32 end_frame;
     /* +08 */ f32 loop_frame; ///< if -1.0f, dont loop
+};
+
+struct MenuFlow {
+    MenuKind8 cur_menu;
+    MenuKind8 prev_menu;
+    u16 hovered_option;
+    u8 confirmed_option;
+    u32 x8;
+    MenuButtons buttons;
+    u8 x10;
+    u8 entering_menu; ///< bool
+    u8 light_lerp_frames;
+    GXColor* light_color; ///< used for the main panel color
+};
+
+struct MenuInputState {
+    u16 cooldown;
+    u16 x2;
+    s32 x4;
 };
 
 #endif

@@ -29,7 +29,7 @@ typedef enum _MenuEvent {
 
 static inline void Menu_DecrementAnimTimer(void)
 {
-    mn_804D6BC8.x0--;
+    mn_804D6BC8.cooldown--;
     mn_804D6BC8.x2 = 0;
     mn_804D6BC8.x4 = 0;
 }

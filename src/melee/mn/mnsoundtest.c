@@ -370,7 +370,7 @@ void fn_8024AED0(HSD_GObj* arg0)
     u64 events;
 
     soundtest_user_data* user_data = arg0->user_data;
-    if ((u16) mn_804D6BC8.x0 != 0) {
+    if ((u16) mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
     }

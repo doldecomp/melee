@@ -42,8 +42,8 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
     HSD_JObj* sp24;
 
     temp_r31 = HSD_GObjGetUserData(mnLanguage_804D6C50);
-    if (mn_804D6BC8.x0 != 0) {
-        mn_804D6BC8.x0 -= 1;
+    if (mn_804D6BC8.cooldown != 0) {
+        mn_804D6BC8.cooldown -= 1;
         mn_804D6BC8.x2 = 0;
         mn_804D6BC8.x4 = 0;
         return;
@@ -51,7 +51,7 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
     temp_r3 = Menu_GetAllEvents();
     if (temp_r3 & 0x20) {
         lbAudioAx_80024030(0);
-        mn_804A04F0.x11 = 0;
+        mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 4, 3);
         return;
     }
@@ -63,8 +63,8 @@ void mnLanguage_8024BFE0(HSD_GObj* arg0_unused)
             lbAudioAx_80027AB0(0xAD);
             mn_80229860(1);
             mn_8022F1A8(1, 9);
-            mn_804A04F0.x0 = 4;
-            mn_804A04F0.x2 = 4;
+            mn_804A04F0.cur_menu = 4;
+            mn_804A04F0.hovered_option = 4;
         }
     } else if (temp_r31->x2 != 0) {
         if (temp_r3 & 4) {
@@ -104,7 +104,7 @@ void fn_8024C270(HSD_GObj* gobj)
     Menu* menu = GET_MENU(gobj);
     u8 _[12];
 
-    if (mn_804A04F0.x0 != 0x17) {
+    if (mn_804A04F0.cur_menu != 0x17) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         gobjproc = HSD_GObjProc_8038FD54(gobj, fn_8024C210, 0);
         gobjproc->flags_3 = HSD_GObj_804D783C;
@@ -119,7 +119,7 @@ void fn_8024C2E8(HSD_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 tmp;
 
-    if (mn_804A04F0.x0 != 0x17) {
+    if (mn_804A04F0.cur_menu != 0x17) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         gobjproc = HSD_GObjProc_8038FD54(gobj, fn_8024C210, 0);
         gobjproc->flags_3 = HSD_GObj_804D783C;
@@ -205,10 +205,10 @@ void mnLanguage_8024C5C0(HSD_GObj* gobj)
     HSD_GObjProc* gobjproc;
     HSD_Archive* archive;
 
-    mn_804D6BC8.x0 = 5;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0x17;
-    mn_804A04F0.x2 = 0;
+    mn_804D6BC8.cooldown = 5;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0x17;
+    mn_804A04F0.hovered_option = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
         archive, (void**) &mnLanguage_804A08D8.x0, "MenMainConLa_Top_joint",
