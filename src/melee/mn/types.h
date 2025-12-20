@@ -388,12 +388,12 @@ struct AnimLoopSettings {
 };
 
 struct MenuFlow {
-    MenuKind8 cur_menu;
-    MenuKind8 prev_menu;
+    u8 cur_menu;
+    u8 prev_menu;
     u16 hovered_option;
-    u8 confirmed_option;
+    u32 confirmed_option;
     u32 x8;
-    MenuButtons buttons;
+    u32 buttons;
     u8 x10;
     u8 entering_menu; ///< bool
     u8 light_lerp_frames;
