@@ -49,7 +49,7 @@ void mnDeflicker_8024A168(HSD_GObj* gobj)
     HSD_JObj* asd[2];
     int stack[5];
     Menu* menu = GET_MENU(mnDeflicker_804D6C38);
-    if (mn_804D6BC8.x0 != 0) {
+    if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
     }
@@ -59,7 +59,7 @@ void mnDeflicker_8024A168(HSD_GObj* gobj)
         gmMainLib_8015F4F4(
             ((Menu*) mnDeflicker_804D6C38->user_data)->cursor); // inline
         lb_8001CE00();
-        mn_804A04F0.x11 = 0;
+        mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 2, 3);
     } else if (mnDeflicker_804D6C3C && (events & MenuEvent_unk4)) {
         unsigned char x;
@@ -90,7 +90,7 @@ void mnDeflicker_8024A344(HSD_GObj* gobj)
 {
     Menu* menu = GET_MENU(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    if (mn_804A04F0.x0 != 0x15) {
+    if (mn_804A04F0.cur_menu != 0x15) {
         HSD_GObjProc* p;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         p = HSD_GObjProc_8038FD54(gobj, &mnDeflicker_8024A2E8, 0);
@@ -108,7 +108,7 @@ void mnDeflicker_8024A3E8(HSD_GObj* gobj)
     Menu* menu = GET_MENU(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_GObjProc* p;
-    if (mn_804A04F0.x0 != 0x15) {
+    if (mn_804A04F0.cur_menu != 0x15) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         p = HSD_GObjProc_8038FD54(gobj, &mnDeflicker_8024A2E8, 0);
         p->flags_3 = HSD_GObj_804D783C;
@@ -182,10 +182,10 @@ void mnDeflicker_8024A6C4(HSD_GObj* arg0)
     HSD_GObjProc* temp_r3;
     HSD_Archive* archive;
 
-    mn_804D6BC8.x0 = 5;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0x15;
-    mn_804A04F0.x2 = 0;
+    mn_804D6BC8.cooldown = 5;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0x15;
+    mn_804A04F0.hovered_option = 0;
     mnDeflicker_804D6C3C = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(

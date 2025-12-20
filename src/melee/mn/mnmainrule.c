@@ -78,13 +78,13 @@ extern int mn_804D6BD4;
 void mn_80231804(HSD_Archive* archive, int arg1)
 {
     HSD_GObjProc* temp_r3;
-    mn_804D6BC8.x0 = 0x14;
+    mn_804D6BC8.cooldown = 0x14;
     mn_804D6BC8.x2 = 0;
     mn_804D6BC8.x4 = 0;
     mn_804A04F0.x8 = 0;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0xD;
-    mn_804A04F0.x2 = 0;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0xD;
+    mn_804A04F0.hovered_option = 0;
     HSD_SisLib_803A5E70();
 
     lbArchive_LoadSections(
@@ -244,4 +244,22 @@ void mn_80231804(HSD_Archive* archive, int arg1)
 
 /// #mn_80233218
 
-/// #mn_802339FC
+// void mn_802339FC(void)
+// {
+//     ? var_r3;
+//     HSD_GObjProc* temp_r3;
+
+//     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+//     if ((s32) mn_804A04F0.prev_menu != 0x11) {
+//         mn_804A04F0.cur_menu = 0xF;
+//         var_r3 = 1;
+//         mn_804A04F0.hovered_option = 0;
+//     } else {
+//         mn_804A04F0.cur_menu = 0xF;
+//         var_r3 = 3;
+//         mn_804A04F0.hovered_option = 5;
+//     }
+//     mn_80233218(var_r3);
+//     temp_r3 = HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), (void (*)(HSD_GObj*)) fn_8023201C, 0U);
+//     temp_r3->unkD = (u8) ((temp_r3->unkD & ~0x30) | ((HSD_GObj_804D783C << 4) & 0x30));
+// }
