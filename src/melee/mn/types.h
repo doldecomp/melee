@@ -387,23 +387,4 @@ struct AnimLoopSettings {
     /* +08 */ f32 loop_frame; ///< if -1.0f, dont loop
 };
 
-struct MenuFlow {
-    u8 cur_menu;
-    u8 prev_menu;
-    u16 hovered_option;
-    u32 confirmed_option;
-    u32 x8;
-    u32 buttons;
-    u8 x10;
-    u8 entering_menu; ///< bool
-    u8 light_lerp_frames;
-    GXColor* light_color; ///< used for the main panel color
-};
-
-struct MenuInputState {
-    u16 cooldown;
-    u16 x2;
-    s32 x4;
-};
-
 #endif

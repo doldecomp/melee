@@ -16,8 +16,6 @@ typedef struct CSSKOStar CSSKOStar;
 typedef struct CSSDoorsData CSSDoorsData;
 typedef struct SSSData SSSData;
 typedef struct AnimLoopSettings AnimLoopSettings;
-typedef struct MenuFlow MenuFlow;
-typedef struct MenuInputState MenuInputState;
 
 #define MENU_BTN_UP      (1 << 0)   // 0x001
 #define MENU_BTN_DOWN    (1 << 1)   // 0x002

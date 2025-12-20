@@ -36,12 +36,12 @@ static inline void Menu_DecrementAnimTimer(void)
 
 static inline u64 Menu_GetAllEvents(void)
 {
-    return mn_804A04F0.x8 = mn_80229624(4);
+    return mn_804A04F0.buttons = mn_80229624(4);
 }
 
 static inline u64 Menu_GetEventsForPort(s32 i)
 {
-    return mn_804A04F0.x8 = mn_80229624(i);
+    return mn_804A04F0.buttons = mn_80229624(i);
 }
 
 // @todo: The functions `fn_8017435C`, `fn_80174338`, and `fn_80174380` are

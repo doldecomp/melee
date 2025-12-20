@@ -81,7 +81,7 @@ void mn_80231804(HSD_Archive* archive, int arg1)
     mn_804D6BC8.cooldown = 0x14;
     mn_804D6BC8.x2 = 0;
     mn_804D6BC8.x4 = 0;
-    mn_804A04F0.x8 = 0;
+    mn_804A04F0.buttons = 0;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0xD;
     mn_804A04F0.hovered_option = 0;
