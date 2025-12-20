@@ -28,7 +28,7 @@ float get_min_life(void) {
  * <rei wolf> cries
 */
 
-ItemStateTable itNesspkfirepillar_ItemStateTable[1] = {
+ItemStateTable it_803F6B60[1] = {
     0,
     itNesspkfirepillar_UnkMotion0_Anim,
     itNesspkfirepillar_UnkMotion0_Phys,
@@ -125,6 +125,6 @@ bool itNesspkfirepillar_Logic24_DmgReceived(Item_GObj* item_gobj) {
     return 0;
 }
 
-void itNesspkfirepillar_802AA7C4(Item_GObj* item_gobj, HSD_GObj* parent_gobj) {
+void itNesspkfirepillar_Logic24_EvtUnk(Item_GObj* item_gobj, HSD_GObj* parent_gobj) {
     it_8026B894(item_gobj, parent_gobj);
 }

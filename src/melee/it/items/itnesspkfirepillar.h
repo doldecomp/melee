@@ -10,8 +10,8 @@ bool itNesspkfirepillar_UnkMotion0_Anim(Item_GObj* item_gobj);
 void itNesspkfirepillar_UnkMotion0_Phys(Item_GObj* item_gobj);
 bool itNesspkfirepillar_UnkMotion0_Coll(Item_GObj* item_gobj);
 bool itNesspkfirepillar_Logic24_DmgReceived(Item_GObj* item_gobj);
-void itNesspkfirepillar_802AA7C4(Item_GObj* item_gobj, HSD_GObj* parent_gobj);
+void itNesspkfirepillar_Logic24_EvtUnk(Item_GObj* item_gobj, HSD_GObj* parent_gobj);
 
-extern ItemStateTable itNesspkfirepillar_ItemStateTable[1];
+extern ItemStateTable it_803F6B60[1];
 
 #endif
