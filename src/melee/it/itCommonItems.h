@@ -861,12 +861,18 @@ typedef struct itTosakinto_Attrs {
 } itTosakinto_Attrs;
 
 typedef struct itMDisableAttributes {
-    f32 lifetime;
-    f32 x_vel;
+    /* +0 */ f32 lifetime;
+    /* +4 */ f32 x_vel;
 } itMDisableAttributes;
 
 typedef struct itMDisable_ItemVars {
     Fighter_GObj* owner;
 } itMDisable_ItemVars;
+
+typedef struct itNessPKFirepillarAttributes {
+    /*  +0  */ float x0;
+    /*  +4  */ float x4;
+    /*  +8  */ float scale;
+} itNessPKFirepillarAttributes;
 
 #endif

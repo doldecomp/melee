@@ -3216,7 +3216,7 @@ melee/it/items/itnesspkfire.c:
 melee/it/items/itnesspkfirepillar.c:
 	.text       start:0x802AA494 end:0x802AA7E4
 	.data       start:0x803F6B60 end:0x803F6B70
-	.sdata      start:0x804D53D8 end:0x804D53E8
+	.sdata      start:0x804D53D8 end:0x804D53E5
 	.sdata2     start:0x804DCE60 end:0x804DCE70
 
 melee/it/items/itnesspkflush.c:
