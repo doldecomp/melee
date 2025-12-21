@@ -2467,14 +2467,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic24_DmgReceived,
+        itNesspkfirepillar_Logic24_DmgReceived,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_802AA7C4,
+        itNesspkfirepillar_Logic24_EvtUnk,
     },
     {
         // Ness PK flash
