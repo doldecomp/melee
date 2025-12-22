@@ -528,7 +528,7 @@ struct Item {
     UnkFlagStruct xDD1_flag;
     UnkFlagStruct xDD2_flag;
     UnkFlagStruct xDD3_flag;
-    union {
+    union Item_ItemVars {
         itBombHei_ItemVars bombhei;
         itBox_ItemVars box;
         itCapsule_ItemVars capsule;
@@ -600,6 +600,7 @@ struct Item {
         itZeldaDinFire_ItemVars zeldadinfire;
         itTosakinto_ItemVars tosakinto;
         itMDisable_ItemVars mdisable;
+        itKoopaFlame_ItemVars koopaflame;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

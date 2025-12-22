@@ -406,8 +406,8 @@
 /* 0FA4F0 */ void ftKb_PkSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 0FA588 */ void ftKb_SpecialNKp_800FA588(Fighter_GObj* gobj);
 /* 0FA7D4 */ void ftKb_SpecialNKp_800FA7D4(Fighter_GObj* gobj);
-/* 0FA83C */ void ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj);
-/* 0FA878 */ void ftKb_SpecialNKp_800FA878(Fighter_GObj* gobj);
+/* 0FA83C */ int ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj);
+/* 0FA878 */ int ftKb_SpecialNKp_800FA878(Fighter_GObj* gobj);
 /* 0FA8B4 */ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj);
 /* 0FA958 */ void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj);
 /* 0FA9FC */ void ftKb_KpSpecialNStart_Anim(Fighter_GObj* gobj);

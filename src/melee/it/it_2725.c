@@ -3054,7 +3054,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     },
     {
         // Bowser flame
-        it_803F6C58,
+        ItemStateTable_KoopaFlame,
         NULL,
         NULL,
         NULL,
@@ -4001,7 +4001,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic110_EvtUnk,
     },
     {
-        it_803F6C58,
+        ItemStateTable_KoopaFlame,
         NULL,
         NULL,
         NULL,
