@@ -78,7 +78,7 @@ static void __THPHuffDecodeDCTCompV(THPFileInfo*, THPCoeff*);
 
 s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV, void* work);
 s32 THPDec_803302EC(u8** data);
-
+void THPDec_803300E0(u32* data);
 BOOL THPInit(void);
 
 #ifdef __cplusplus

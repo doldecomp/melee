@@ -339,6 +339,33 @@ s32 THPDec_803302EC(u8** data){
     return 0;
 }
 
+void THPDec_803300E0(u32* data)
+{
+    s32 val;
+    s32 offset;
+    u8 count;
+    u32* buffer;
+
+    buffer = data;
+    count = 0;
+    val = (buffer[577] + 31) & 0xFFFFFFE0;
+    buffer[577] = (val + 2048);
+    offset = val;
+    while (count < 16){
+        buffer[4] = offset;
+        buffer[5] = offset + 128;        
+        buffer[6] = offset + 256;        
+        buffer[7] = offset + 384;        
+        offset += 1024;
+        buffer[8] = offset - 512;        
+        buffer[9] = offset - 384;
+        buffer[10] = offset - 256;
+        buffer[11] = offset - 128;
+        buffer += 8;
+        count += 8;
+    }
+}
+
 static u8 __THPReadFrameHeader(void)
 {
     u8 i, utmp8;
