@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include <m2c_macros.h> // IWYU pragma: export
+#include <dolphin/os.h>
 
 /// A label in a jump table
 typedef void (*jmp_t)(void);
@@ -12,7 +13,6 @@ typedef void (*jmp_t)(void);
 typedef jmp_t jtbl_t[];
 
 #if defined(__clang__) || defined(__GNUC__)
-#include <dolphin/os.h>
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
 #elif M2CTX
@@ -20,7 +20,6 @@ typedef jmp_t jtbl_t[];
 #elif defined(__MWERKS__) && !defined(BUGFIX)
 #define NOT_IMPLEMENTED asm { nop }
 #else
-#include <dolphin/os.h>
 #define NOT_IMPLEMENTED                                                       \
     OSPanic(__FILE__, __LINE__, "Function is not implemented!")
 #endif
