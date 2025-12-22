@@ -875,4 +875,20 @@ typedef struct itNessPKFirepillarAttributes {
     /*  +8  */ float scale;
 } itNessPKFirepillarAttributes;
 
+typedef struct itKoopaFlame_ItemVars {
+    Vec x0_pos;
+    Vec xC_direction;
+    Vec x18_vel;
+    float x24_angle;
+    float x28_speed;
+    float x2C_lifetime;
+    int x30;
+    float x34_base_scale;
+    float x38_base_speed;
+    float x3C_scale;
+    int x40_frame_counter;
+    bool x44_spawned;
+    int x48_gfx;
+} itKoopaFlame_ItemVars;
+
 #endif

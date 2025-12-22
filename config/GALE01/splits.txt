@@ -3239,8 +3239,8 @@ melee/it/items/itnesspkthundertrail.c:
 melee/it/items/itkoopaflame.c:
 	.text       start:0x802AC8A8 end:0x802AD478
 	.data       start:0x803F6C58 end:0x803F6C68
-	.sdata      start:0x804D5408 end:0x804D5418
-	.sdata2     start:0x804DCED0 end:0x804DCF20
+	.sdata      start:0x804D5408 end:0x804D5415
+	.sdata2     start:0x804DCED0 end:0x804DCF1C
 
 melee/it/items/itnessbat.c:
 	.text       start:0x802AD478 end:0x802ADA1C

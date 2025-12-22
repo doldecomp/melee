@@ -64,9 +64,9 @@ void ftKp_SpecialLw_80134ACC(Fighter_GObj* gobj)
     lb_8000B1CC(fp->parts[48].joint, NULL, &v);
     v.x += fp->x34_scale.y * (da->x24 * fp->facing_dir);
     v.y += da->x28 * fp->x34_scale.y;
-    it_802ACBA0(gobj, &v, fp->facing_dir, fp->mv.kp.specials.x4,
-                ftKp_SpecialLw_80134ACC_inline(gobj, dirs), fp->fv.kp.x222C,
-                fp->fv.kp.x2230, 100);
+    itKoopaFlame_Spawn(gobj, &v, fp->facing_dir, fp->mv.kp.specials.x4,
+                       ftKp_SpecialLw_80134ACC_inline(gobj, dirs),
+                       fp->fv.kp.x222C, fp->fv.kp.x2230, 100);
     if (fp->mv.kp.specials.x14 == 0) {
         fp->mv.kp.unk1.x4 = Item_8026AE60();
         ft_80089824(gobj);
