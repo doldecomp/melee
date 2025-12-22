@@ -325,15 +325,15 @@ _err_exit:
     return errorCode;
 }
 
-s32 THPDec_803302EC(u8** arg0){
+s32 THPDec_803302EC(u8** data){
     u32 i;
-    u8* ptr = *arg0;
+    u8* ptr = *data;
     u16 high = ptr[0];
     u16 low = ptr[1];
     
     u16 count = (high << 8) | low;
     for(i = 0; i <count; i++){
-        (*arg0)++;
+        (*data)++;
     }
 
     return 0;
