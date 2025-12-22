@@ -325,6 +325,20 @@ _err_exit:
     return errorCode;
 }
 
+s32 THPDec_803302EC(u8** arg0){
+    u32 i;
+    u8* ptr = *arg0;
+    u16 high = ptr[0];
+    u16 low = ptr[1];
+    
+    u16 count = (high << 8) | low;
+    for(i = 0; i <count; i++){
+        (*arg0)++;
+    }
+
+    return 0;
+}
+
 static u8 __THPReadFrameHeader(void)
 {
     u8 i, utmp8;
