@@ -7,8 +7,8 @@
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
-#include "un/un_2FC9.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
