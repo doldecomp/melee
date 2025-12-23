@@ -14,12 +14,13 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 
-#include "baselib/forward.h"
 #include "gr/forward.h"
 
 #include "gr/inlines.h"
@@ -2935,9 +2936,9 @@ s32 Ground_801C5840(void)
 void Ground_801C5878(void)
 {
     PAD_STACK(8);
-    un_8031C2CC();
+    tyDisplay_8031C2CC();
     if (gm_8016B498() != 0) {
-        int temp_r30 = un_8031C2EC();
+        int temp_r30 = tyDisplay_8031C2EC();
         un_8031C454();
         stage_info.x6E4[0] = temp_r30;
     } else {
