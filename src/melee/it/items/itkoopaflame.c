@@ -220,7 +220,7 @@ bool itKoopaFlame_UnkMotion0_Anim(Item_GObj* gobj)
     Item* it = GET_ITEM(gobj);
     itKoopaFlame_Attributes* attrs =
         it->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj); // GET_JOBJ does not work here!
     Vec vec;
     if (it->x5D4_hitboxes[0].hit.state != HitCapsule_Disabled) {
         if (it->xDD4_itemVar.koopaflame.x34_base_scale == 0.0f) {
@@ -276,6 +276,7 @@ bool itKoopaFlame_UnkMotion0_Coll(Item_GObj* gobj)
 {
     int flags;
     Item* it = GET_ITEM(gobj);
+    int flags2;
     PAD_STACK(0x1E0);
     clamp_angle(&it->xDD4_itemVar.koopaflame.x24_angle);
     it->x378_itemColl.ecb_source.up = 3.0f;
@@ -296,9 +297,9 @@ bool itKoopaFlame_UnkMotion0_Coll(Item_GObj* gobj)
     if (it->x378_itemColl.env_flags & Collide_RightWallMask) {
         flags |= itkpf_RightWall;
     }
-    if (flags != 0) {
-        itKoopaFlame_Update_Direction(gobj, flags);
-        itKoopaFlame_Update_Angle(gobj, flags);
+    if ((flags2 = flags) != 0) {
+        itKoopaFlame_Update_Direction(gobj, flags2);
+        itKoopaFlame_Update_Angle(gobj, flags2);
     }
     return false;
 }
@@ -324,6 +325,12 @@ bool it_2725_Logic111_Clanked(Item_GObj* gobj)
     return false;
 }
 
+bool it_2725_Logic111_Absorbed(Item_GObj* gobj)
+{
+    efLib_DestroyAll(gobj);
+    return true;
+}
+
 bool it_2725_Logic111_ShieldBounced(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
@@ -343,10 +350,4 @@ bool it_2725_Logic111_HitShield(Item_GObj* gobj)
 void it_2725_Logic111_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
-}
-
-bool it_2725_Logic111_Absorbed(Item_GObj* gobj)
-{
-    efLib_DestroyAll(gobj);
-    return true;
 }
