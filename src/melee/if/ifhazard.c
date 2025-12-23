@@ -1,3 +1,5 @@
+#include "ifhazard.h"
+
 #include "baselib/forward.h"
 
 #include "gm/gm_unsplit.h"
