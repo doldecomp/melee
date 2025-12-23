@@ -12,31 +12,6 @@
 
 #include <baselib/video.h>
 
-/* 2FC9B4 */ float un_802FC9B4(unsigned char slot, unsigned char arg1,
-                               unsigned char arg2, unsigned char arg3);
-/* 2FCAC4 */ void fn_802FCAC4(HSD_GObj* gobj, int pass);
-/* 2FCBA0 */ void un_802FCBA0(void);
-/* 2FCC44 */ void fn_802FCC44(HSD_GObj* gobj);
-/* 2FCF38 */ void NameTag_Create(int slot);
-/* 2FD28C */ void un_802FD28C(int slot);
-/* 2FD404 */ void un_802FD404(void);
-/* 2FD428 */ void un_802FD428(void);
-/* 2FD450 */ void un_802FD450(void);
-/* 2FD45C */ void un_802FD45C(void);
-/* 2FD468 */ void un_802FD468(void);
-/* 2FD4C8 */ void un_802FD4C8(void);
-/* 2FD604 */ void un_802FD604(int);
-/* 2FD65C */ void un_802FD65C(void);
-/* 2FD668 */ void un_802FD668(void);
-/* 2FD674 */ void un_802FD674(void);
-/* 2FD680 */ void fn_802FD680(HSD_GObj* gobj);
-/* 2FD6CC */ void fn_802FD6CC(HSD_GObj* gobj, int pass);
-/* 2FD704 */ void un_802FD704(void);
-/* 2FD708 */ void un_802FD708(void* arg0, int arg1);
-/* 2FD8A0 */ void un_802FD8A0(void* arg0);
-/* 2FD8C4 */ void un_802FD8C4(void* arg0);
-/* 2FD8E8 */ void un_802FD8E8(void* arg0);
-/* 2FD90C */ void un_802FD90C(void);
 /* 2FD910 */ void un_802FD910(void);
 /* 2FD91C */ void un_802FD91C(void);
 /* 2FD928 */ void un_802FD928(unsigned char slot, int arg1, GXColor* arg2);

@@ -21,6 +21,8 @@
 #include <melee/gr/grstadium.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>
+#include <melee/if/ifhazard.h>
+#include <melee/if/ifnametag.h>
 #include <melee/if/ifstatus.h>
 #include <melee/if/ifstock.h>
 #include <melee/if/iftime.h>
