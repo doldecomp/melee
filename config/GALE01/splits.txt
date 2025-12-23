@@ -3910,7 +3910,7 @@ melee/if/ifnametag.c:
 	.sbss       start:0x804D6D68 end:0x804D6D80
 	.sdata2     start:0x804DDB68 end:0x804DDBA0
 
-melee/un/un_2FC92.c:
+melee/if/ifhazard.c:
 	.text       start:0x802FD604 end:0x802FD910
 	.sdata      start:0x804D5810 end:0x804D581D
 	.sbss       start:0x804D6D80 end:0x804D6D90
