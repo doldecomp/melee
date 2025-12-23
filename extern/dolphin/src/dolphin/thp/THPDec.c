@@ -1,14 +1,17 @@
+#include <dolphin.h>
 #include <dolphin/thp/thp.h>
 
-#include <dolphin.h>
-
-static const u8 __THPJpegNaturalOrder[80]
-    = { 0,  1,  8,  16, 9,  2,  3,  10, 17, 24, 32, 25, 18, 11, 4,  5,  12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13,
-        6,  7,  14, 21, 28, 35, 42, 49, 56, 57, 50, 43, 36, 29, 22, 15, 23, 30, 37, 44, 51, 58, 59, 52, 45, 38, 31,
-        39, 46, 53, 60, 61, 54, 47, 55, 62, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63 };
+static const u8 __THPJpegNaturalOrder[80] = {
+    0,  1,  8,  16, 9,  2,  3,  10, 17, 24, 32, 25, 18, 11, 4,  5,
+    12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13, 6,  7,  14, 21, 28,
+    35, 42, 49, 56, 57, 50, 43, 36, 29, 22, 15, 23, 30, 37, 44, 51,
+    58, 59, 52, 45, 38, 31, 39, 46, 53, 60, 61, 54, 47, 55, 62, 63,
+    63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63
+};
 
 static const f64 __THPAANScaleFactor[8] = {
-    1.0f, 1.387039845f, 1.306562965f, 1.175875602f, 1.0f, 0.785694958f, 0.541196100f, 0.275899379f,
+    1.0f, 1.387039845f, 1.306562965f, 1.175875602f,
+    1.0f, 0.785694958f, 0.541196100f, 0.275899379f,
 };
 
 static THPHuffmanTab* Ydchuff ATTRIBUTE_ALIGN(32);
@@ -33,15 +36,15 @@ static THPCoeff* __THPMCUBuffer[6];
 static THPFileInfo* __THPInfo;
 static BOOL __THPInitFlag = FALSE;
 
-#define THPROUNDUP(a, b) ((((s32)(a)) + ((s32)(b) - 1L)) / ((s32)(b)))
+#define THPROUNDUP(a, b) ((((s32) (a)) + ((s32) (b) -1L)) / ((s32) (b)))
 
 void __THPPrepBitStream(THPFileInfo* info)
 {
     u32* ptr;
     u32 offset, i, j, k;
 
-    ptr    = (u32*)((u32)info->file & 0xFFFFFFFC);
-    offset = (u32)info->file & 3;
+    ptr = (u32*) ((u32) info->file & 0xFFFFFFFC);
+    offset = (u32) info->file & 3;
 
     if (info->cnt != 33) {
         info->cnt -= (3 - offset) * 8;
@@ -49,7 +52,7 @@ void __THPPrepBitStream(THPFileInfo* info)
         info->cnt = (offset * 8) + 1;
     }
 
-    info->file     = (u8*)ptr;
+    info->file = (u8*) ptr;
     info->currByte = *ptr;
 
     for (i = 0; i < 4; i++) {
@@ -61,8 +64,9 @@ void __THPPrepBitStream(THPFileInfo* info)
                     s32 code = j >> (5 - k - 1);
 
                     if (code <= info->huffmanTabs[i].maxCode[k + 1]) {
-                        info->huffmanTabs[i].quick[j]
-                            = info->huffmanTabs[i].Vij[(s32)(code + info->huffmanTabs[i].valPtr[k + 1])];
+                        info->huffmanTabs[i]
+                            .quick[j] = info->huffmanTabs[i].Vij[(
+                            s32) (code + info->huffmanTabs[i].valPtr[k + 1])];
                         info->huffmanTabs[i].increment[j] = k + 1;
                         k = 99;
                     }
@@ -140,7 +144,7 @@ static void __THPDecompressYUV(void* tileY, void* tileU, void* tileV)
     __THPInfo->dLC[2] = tileV;
 
     currentY = __THPInfo->decompressedY;
-    targetY  = __THPInfo->yPixelSize;
+    targetY = __THPInfo->yPixelSize;
 
     __THPGQRSetup();
     __THPPrepBitStream(__THPInfo);
@@ -175,7 +179,7 @@ static u8 __THPSetupBuffers(THPFileInfo* info)
         return 0;
     }
 
-    buffer = (THPCoeff*)OSRoundUp32B(__THPWorkArea);
+    buffer = (THPCoeff*) OSRoundUp32B(__THPWorkArea);
 
     for (i = 0; i < 6; i++) {
         __THPMCUBuffer[i] = &buffer[i * 64];
@@ -190,9 +194,11 @@ static u8 __THPSetupBuffers(THPFileInfo* info)
  * @param tileU  Pointer to the output tile for U component.
  * @param tileV  Pointer to the output tile for V component.
  * @param work   Pointer to the work area.
- * @return       Error code indicating the success or failure of the decoding process.
+ * @return       Error code indicating the success or failure of the decoding
+ * process.
  */
-s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV, void* workArea)
+s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
+                   void* workArea)
 {
     u8 all_done, status;
     s32 errorCode;
@@ -200,9 +206,9 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV, void* work
     THPFileInfo* info = __THPInfo;
 
     DCZeroRange(file, sizeof(THPFileInfo));
-    info->cnt           = 33;
+    info->cnt = 33;
     info->decompressedY = 0;
-    info->file          = (u8*)file;
+    info->file = (u8*) file;
 
     all_done = FALSE;
 
@@ -226,31 +232,36 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV, void* work
                 }
             }
 
-            else if (status == 192) {
+            else if (status == 192)
+            {
                 status = __THPReadFrameHeader();
                 if (status != 0) {
                     goto _err_bad_status;
                 }
             }
 
-            else {
+            else
+            {
                 goto _err_unsupported_marker;
             }
         }
 
-        else if (0xD8 <= status && status <= 0xDF) {
+        else if (0xD8 <= status && status <= 0xDF)
+        {
             if (status == 221) {
                 __THPRestartDefinition(info);
             }
 
-            else if (status == 219) {
+            else if (status == 219)
+            {
                 status = __THPReadQuantizationTable(info);
                 if (status != 0) {
                     goto _err_bad_status;
                 }
             }
 
-            else if (status == 218) {
+            else if (status == 218)
+            {
                 status = __THPReadScaneHeader(info);
                 if (status != 0) {
                     goto _err_bad_status;
@@ -264,7 +275,8 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV, void* work
             }
         }
 
-        else if (0xE0 <= status) {
+        else if (0xE0 <= status)
+        {
             if ((224 <= status && status <= 239) || status == 254) {
                 info->file += (info->file)[0] << 8 | (info->file)[1];
             } else {
@@ -325,6 +337,48 @@ _err_exit:
     return errorCode;
 }
 
+s32 THPDec_803302EC(u8** data)
+{
+    u32 i;
+    u8* ptr = *data;
+    u16 high = ptr[0];
+    u16 low = ptr[1];
+
+    u16 count = (high << 8) | low;
+    for (i = 0; i < count; i++) {
+        (*data)++;
+    }
+
+    return 0;
+}
+
+void THPDec_803300E0(u32* data)
+{
+    s32 val;
+    s32 offset;
+    u8 count;
+    u32* buffer;
+
+    buffer = data;
+    count = 0;
+    val = (buffer[577] + 31) & 0xFFFFFFE0;
+    buffer[577] = (val + 2048);
+    offset = val;
+    while (count < 16) {
+        buffer[4] = offset;
+        buffer[5] = offset + 128;
+        buffer[6] = offset + 256;
+        buffer[7] = offset + 384;
+        offset += 1024;
+        buffer[8] = offset - 512;
+        buffer[9] = offset - 384;
+        buffer[10] = offset - 256;
+        buffer[11] = offset - 128;
+        buffer += 8;
+        count += 8;
+    }
+}
+
 static u8 __THPReadFrameHeader(void)
 {
     u8 i, utmp8;
@@ -337,9 +391,11 @@ static u8 __THPReadFrameHeader(void)
         return 10;
     }
 
-    __THPInfo->yPixelSize = (u16)((__THPInfo->file)[0] << 8 | (__THPInfo->file)[1]);
+    __THPInfo->yPixelSize =
+        (u16) ((__THPInfo->file)[0] << 8 | (__THPInfo->file)[1]);
     __THPInfo->file += 2;
-    __THPInfo->xPixelSize = (u16)((__THPInfo->file)[0] << 8 | (__THPInfo->file)[1]);
+    __THPInfo->xPixelSize =
+        (u16) ((__THPInfo->file)[0] << 8 | (__THPInfo->file)[1]);
     __THPInfo->file += 2;
 
     utmp8 = (*(__THPInfo->file)++);
@@ -354,7 +410,8 @@ static u8 __THPReadFrameHeader(void)
             return 19;
         }
 
-        __THPInfo->components[i].quantizationTableSelector = (*(__THPInfo->file)++);
+        __THPInfo->components[i].quantizationTableSelector =
+            (*(__THPInfo->file)++);
     }
 
     return 0;
@@ -365,7 +422,7 @@ static u8 __THPReadQuantizationTable(THPFileInfo* info)
     u16 length, id, i, row, col;
     f32 q_temp[64];
 
-    length = (u16)((info->file)[0] << 8 | (info->file)[1]);
+    length = (u16) ((info->file)[0] << 8 | (info->file)[1]);
     info->file += 2;
     length -= 2;
 
@@ -373,7 +430,7 @@ static u8 __THPReadQuantizationTable(THPFileInfo* info)
         id = (*(info->file)++);
 
         for (i = 0; i < 64; i++) {
-            q_temp[__THPJpegNaturalOrder[i]] = (f32)(*(info->file)++);
+            q_temp[__THPJpegNaturalOrder[i]] = (f32) (*(info->file)++);
         }
 
         info->x78 |= 1 << id;
@@ -381,7 +438,8 @@ static u8 __THPReadQuantizationTable(THPFileInfo* info)
         i = 0;
         for (row = 0; row < 8; row++) {
             for (col = 0; col < 8; col++) {
-                info->quantTabs[id][i] = q_temp[i] * __THPAANScaleFactor[row] * __THPAANScaleFactor[col];
+                info->quantTabs[id][i] = q_temp[i] * __THPAANScaleFactor[row] *
+                                         __THPAANScaleFactor[col];
                 i++;
             }
         }
@@ -405,31 +463,35 @@ static u8 __THPReadHuffmanTableSpecification(THPFileInfo* info)
 
     //__THPHuffmanSizeTab = __THPWorkArea;
     //__THPHuffmanCodeTab = (u16*)((u32)__THPWorkArea + 256 + 1);
-    length              = (u16)((info->file)[0] << 8 | (info->file)[1]);
+    length = (u16) ((info->file)[0] << 8 | (info->file)[1]);
     info->file += 2;
     length -= 2;
 
     for (;;) {
-        i                = (*(info->file)++);
-        id               = (u8)(i & 15);
-        t_class          = (u8)(i >> 4);
-        huffmanBits      = info->file;
-        tab_index        = (u8)((id << 1) + t_class);
-        num_Vij          = 0;
+        i = (*(info->file)++);
+        id = (u8) (i & 15);
+        t_class = (u8) (i >> 4);
+        huffmanBits = info->file;
+        tab_index = (u8) ((id << 1) + t_class);
+        num_Vij = 0;
 
         for (i = 0; i < 16; i++) {
             num_Vij += (*(info->file)++);
         }
 
-
         info->huffmanTabs[tab_index].bits = huffmanBits;
         info->huffmanTabs[tab_index].Vij = info->file;
         info->huffmanTabs[tab_index].pad2[1] = num_Vij;
         info->file += num_Vij;
-        result = __THPHuffGenerateSizeTable(info, tab_index, (int) huffmanBits);
-        if (result) return result;
+        result =
+            __THPHuffGenerateSizeTable(info, tab_index, (int) huffmanBits);
+        if (result) {
+            return result;
+        }
         result = __THPHuffGenerateCodeTable(info, tab_index);
-        if (result) return result;
+        if (result) {
+            return result;
+        }
         __THPHuffGenerateDecoderTables(info, tab_index);
 
         info->validHuffmanTabs |= 1 << tab_index;
@@ -457,9 +519,9 @@ static u8 __THPReadScaneHeader(THPFileInfo* info)
     for (i = 0; i < 3; i++) {
         utmp8 = (*(info->file)++);
 
-        utmp8                                    = (*(info->file)++);
-        info->components[i].DCTableSelector = (u8)(utmp8 >> 4);
-        info->components[i].ACTableSelector = (u8)(utmp8 & 15);
+        utmp8 = (*(info->file)++);
+        info->components[i].DCTableSelector = (u8) (utmp8 >> 4);
+        info->components[i].ACTableSelector = (u8) (utmp8 & 15);
 
         if ((info->validHuffmanTabs & (1 << ((utmp8 >> 4)))) == 0) {
             return 15;
@@ -471,7 +533,7 @@ static u8 __THPReadScaneHeader(THPFileInfo* info)
     }
 
     info->file += 3;
-    info->MCUsPerRow           = (u16)THPROUNDUP(info->xPixelSize, 16);
+    info->MCUsPerRow = (u16) THPROUNDUP(info->xPixelSize, 16);
     info->components[0].predDC = 0;
     info->components[1].predDC = 0;
     info->components[2].predDC = 0;
@@ -484,9 +546,9 @@ static u8 __THPHuffGenerateSizeTable(THPFileInfo* info, u8 a, int b)
     p = 0;
 
     for (l = 1; l <= 16; l++) {
-        i = (s32)__THPHuffmanBits[l - 1];
+        i = (s32) __THPHuffmanBits[l - 1];
         while (i--) {
-            __THPHuffmanSizeTab[p++] = (u8)l;
+            __THPHuffmanSizeTab[p++] = (u8) l;
         }
     }
 
@@ -498,9 +560,9 @@ static u8 __THPHuffGenerateCodeTable(THPFileInfo* info, u8 tab_index)
     u8 si;
     u16 p, code;
 
-    p    = 0;
+    p = 0;
     code = 0;
-    si   = __THPHuffmanSizeTab[0];
+    si = __THPHuffmanSizeTab[0];
 
     while (__THPHuffmanSizeTab[p]) {
         while (__THPHuffmanSizeTab[p] == si) {
@@ -527,7 +589,7 @@ static int __THPHuffGenerateDecoderTables(THPFileInfo* info, u8 tabIndex)
             h->maxCode[l] = h->codetab[p - 1];
         } else {
             h->maxCode[l] = -1;
-            h->valPtr[l]  = -1;
+            h->valPtr[l] = -1;
         }
     }
 
@@ -540,7 +602,7 @@ static u8 __THPRestartDefinition(THPFileInfo* info)
 {
     info->RST = TRUE;
     info->file += 2;
-    info->nMCU = (u16)((info->file)[0] << 8 | (info->file)[1]);
+    info->nMCU = (u16) ((info->file)[0] << 8 | (info->file)[1]);
     info->file += 2;
     info->currMCU = info->nMCU;
     return 0;
@@ -552,13 +614,13 @@ inline void __THPInverseDCTNoYPos(register THPCoeff* in, register u32 xPos)
     register f32 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
     register f32 tmp10, tmp11, tmp12, tmp13;
     register f32 tmp20, tmp21, tmp22, tmp23;
-    register f32 cc4    = 1.414213562F;
-    register f32 cc2    = 1.847759065F;
+    register f32 cc4 = 1.414213562F;
+    register f32 cc2 = 1.847759065F;
     register f32 cc2c6s = 1.082392200F;
     register f32 cc2c6a = -2.613125930F;
-    register f32 bias   = 1024.0F;
-    q                   = Gq;
-    ws                  = &__THPIDCTWorkspace[0] - 2;
+    register f32 bias = 1024.0F;
+    q = Gq;
+    ws = &__THPIDCTWorkspace[0] - 2;
 
     {
         register u32 itmp0, itmp1, itmp2, itmp3;
@@ -721,7 +783,7 @@ inline void __THPInverseDCTNoYPos(register THPCoeff* in, register u32 xPos)
 
     {
         register THPSample* obase = Gbase;
-        register u32 wid          = Gwid;
+        register u32 wid = Gwid;
 
         register u32 itmp0, off0, off1;
         register THPSample *out0, *out1;
@@ -851,13 +913,13 @@ inline void __THPInverseDCTY8(register THPCoeff* in, register u32 xPos)
     register f32 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
     register f32 tmp10, tmp11, tmp12, tmp13;
     register f32 tmp20, tmp21, tmp22, tmp23;
-    register f32 cc4    = 1.414213562F;
-    register f32 cc2    = 1.847759065F;
+    register f32 cc4 = 1.414213562F;
+    register f32 cc2 = 1.847759065F;
     register f32 cc2c6s = 1.082392200F;
     register f32 cc2c6a = -2.613125930F;
-    register f32 bias   = 1024.0F;
+    register f32 bias = 1024.0F;
 
-    q  = Gq;
+    q = Gq;
     ws = &__THPIDCTWorkspace[0] - 2;
 
     {
@@ -1029,7 +1091,7 @@ inline void __THPInverseDCTY8(register THPCoeff* in, register u32 xPos)
 
     {
         register THPSample* obase = Gbase;
-        register u32 wid          = Gwid;
+        register u32 wid = Gwid;
 
         register u32 itmp0, off0, off1;
         register THPSample *out0, *out1;
@@ -1171,31 +1233,31 @@ static void __THPDecompressiMCURow512x448(void)
         __THPHuffDecodeDCTCompU(__THPInfo, __THPMCUBuffer[4]);
         __THPHuffDecodeDCTCompV(__THPInfo, __THPMCUBuffer[5]);
 
-        comp  = &__THPInfo->components[0];
+        comp = &__THPInfo->components[0];
         Gbase = __THPLCWork512[0];
-        Gwid  = 512;
-        Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
-        x_pos = (u32)(cl_num * 16);
+        Gwid = 512;
+        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        x_pos = (u32) (cl_num * 16);
         __THPInverseDCTNoYPos(__THPMCUBuffer[0], x_pos);
         __THPInverseDCTNoYPos(__THPMCUBuffer[1], x_pos + 8);
         __THPInverseDCTY8(__THPMCUBuffer[2], x_pos);
         __THPInverseDCTY8(__THPMCUBuffer[3], x_pos + 8);
 
-        comp  = &__THPInfo->components[1];
+        comp = &__THPInfo->components[1];
         Gbase = __THPLCWork512[1];
-        Gwid  = 256;
-        Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gwid = 256;
+        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         x_pos /= 2;
         __THPInverseDCTNoYPos(__THPMCUBuffer[4], x_pos);
-        comp  = &__THPInfo->components[2];
+        comp = &__THPInfo->components[2];
         Gbase = __THPLCWork512[2];
-        Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         __THPInverseDCTNoYPos(__THPMCUBuffer[5], x_pos);
 
         if (__THPInfo->RST != 0) {
             if ((--__THPInfo->currMCU) == 0) {
                 __THPInfo->currMCU = __THPInfo->nMCU;
-                __THPInfo->cnt     = 1 + ((__THPInfo->cnt + 6) & 0xFFFFFFF8);
+                __THPInfo->cnt = 1 + ((__THPInfo->cnt + 6) & 0xFFFFFFF8);
 
                 if (__THPInfo->cnt > 33) {
                     __THPInfo->cnt = 33;
@@ -1217,7 +1279,8 @@ static void __THPDecompressiMCURow512x448(void)
     __THPInfo->dLC[2] += 0x800;
 }
 
-inline s32 __THPHuffDecodeTab(register THPFileInfo* info, register THPHuffmanTab* h)
+inline s32 __THPHuffDecodeTab(register THPFileInfo* info,
+                              register THPHuffmanTab* h)
 {
     register s32 code;
     register u32 cnt;
@@ -1242,7 +1305,8 @@ inline s32 __THPHuffDecodeTab(register THPFileInfo* info, register THPHuffmanTab
         stw     cnt, info->cnt;
     }
 #endif // clang-format on
-    _done: return code;
+_done:
+    return code;
 
     {
         register u32 maxcodebase;
@@ -1301,7 +1365,7 @@ inline s32 __THPHuffDecodeTab(register THPFileInfo* info, register THPHuffmanTab
     }
 _FCEB_Done:
     info->cnt = cnt;
-    return (h->Vij[(s32)(tmp + h->valPtr[code])]);
+    return (h->Vij[(s32) (tmp + h->valPtr[code])]);
 
 #ifdef __MWERKS__ // clang-format off
     asm {
@@ -1373,7 +1437,7 @@ _Read4: {
 
     info->cnt = cnt;
 __CODE_PLUS_VP_CNT:
-    return (h->Vij[(s32)(code + h->valPtr[cnt])]);
+    return (h->Vij[(s32) (code + h->valPtr[cnt])]);
 
 _getfullword:
 #ifdef __MWERKS__ // clang-format off
@@ -1392,7 +1456,7 @@ _getfullword:
         stw     increment, info->cnt;
     }
 #endif // clang-format on
-    return (s32)cnt;
+    return (s32) cnt;
 
 _FailedCheckEnoughbits_Updated:
 
@@ -1417,7 +1481,7 @@ _FailedCheckNoBits1:
     register u32 mask = 0xFFFFFFFF << (33 - cnt);
     register u32 tmp2;
 
-    code = (s32)(cb & (~mask));
+    code = (s32) (cb & (~mask));
     mask = (u32) & (h->maxCode);
 
 #ifdef __MWERKS__ // clang-format off
@@ -1452,8 +1516,8 @@ _FailedCheckNoBits1:
 #endif // clang-format on
 }
 
-    info->cnt = (u32)tmp;
-    return (h->Vij[(s32)(code + h->valPtr[cnt])]);
+    info->cnt = (u32) tmp;
+    return (h->Vij[(s32) (code + h->valPtr[cnt])]);
 }
 
 static void __THPDecompressiMCURow640x480(void)
@@ -1477,26 +1541,26 @@ static void __THPDecompressiMCURow640x480(void)
             __THPHuffDecodeDCTCompU(info, r28[8]);
             __THPHuffDecodeDCTCompV(info, r28[9]);
 
-            comp  = &__THPInfo->components[0];
+            comp = &__THPInfo->components[0];
             Gbase = __THPLCWork672[0];
-            Gwid  = 640;
-            Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
-            x_pos = (u32)(cl_num * 16);
+            Gwid = 640;
+            Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+            x_pos = (u32) (cl_num * 16);
             __THPInverseDCTNoYPos(__THPMCUBuffer[0], x_pos);
             __THPInverseDCTNoYPos(r28[5], x_pos + 8);
             __THPInverseDCTY8(r28[6], x_pos);
             __THPInverseDCTY8(r28[3], x_pos + 8);
 
-            comp  = &__THPInfo->components[1];
+            comp = &__THPInfo->components[1];
             Gbase = __THPLCWork672[1];
-            Gwid  = 320;
-            Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
+            Gwid = 320;
+            Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
             x_pos /= 2;
             __THPInverseDCTNoYPos(__THPMCUBuffer[4], x_pos);
 
-            comp  = &__THPInfo->components[2];
+            comp = &__THPInfo->components[2];
             Gbase = __THPLCWork672[2];
-            Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
+            Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
             __THPInverseDCTNoYPos(__THPMCUBuffer[5], x_pos);
 
             if (__THPInfo->RST != 0) {
@@ -1546,33 +1610,33 @@ static void __THPDecompressiMCURowNxN(void)
         __THPHuffDecodeDCTCompU(info, __THPMCUBuffer[4]);
         __THPHuffDecodeDCTCompV(info, __THPMCUBuffer[5]);
 
-        comp  = &__THPInfo->components[0];
+        comp = &__THPInfo->components[0];
         Gbase = __THPLCWork672[0];
-        Gwid  = x;
-        Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
-        x_pos = (u32)(cl_num * 16);
+        Gwid = x;
+        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        x_pos = (u32) (cl_num * 16);
         __THPInverseDCTNoYPos(__THPMCUBuffer[0], x_pos);
         __THPInverseDCTNoYPos(__THPMCUBuffer[1], x_pos + 8);
         __THPInverseDCTY8(__THPMCUBuffer[2], x_pos);
         __THPInverseDCTY8(__THPMCUBuffer[3], x_pos + 8);
 
-        comp  = &__THPInfo->components[1];
+        comp = &__THPInfo->components[1];
         Gbase = __THPLCWork672[1];
-        Gwid  = x / 2;
-        Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gwid = x / 2;
+        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         x_pos /= 2;
         __THPInverseDCTNoYPos(__THPMCUBuffer[4], x_pos);
 
-        comp  = &__THPInfo->components[2];
+        comp = &__THPInfo->components[2];
         Gbase = __THPLCWork672[2];
-        Gq    = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
         __THPInverseDCTNoYPos(__THPMCUBuffer[5], x_pos);
 
         if (__THPInfo->RST != 0) {
             __THPInfo->currMCU--;
             if (__THPInfo->currMCU == 0) {
                 __THPInfo->currMCU = __THPInfo->nMCU;
-                __THPInfo->cnt     = 1 + ((__THPInfo->cnt + 6) & 0xFFFFFFF8);
+                __THPInfo->cnt = 1 + ((__THPInfo->cnt + 6) & 0xFFFFFFF8);
 
                 if (__THPInfo->cnt > 32) {
                     __THPInfo->cnt = 33;
@@ -1596,18 +1660,19 @@ static void __THPDecompressiMCURowNxN(void)
     info->dLC[2] += ((sizeof(u8) * 64) * (x / 16));
 }
 
-static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
+static void __THPHuffDecodeDCTCompY(register THPFileInfo* info,
+                                    THPCoeff* block)
 {
     {
         register s32 t;
         THPCoeff dc;
         register THPCoeff diff;
 
-        __dcbz((void*)block, 0);
+        __dcbz((void*) block, 0);
         t = __THPHuffDecodeTab(info, Ydchuff);
-        __dcbz((void*)block, 32);
+        __dcbz((void*) block, 32);
         diff = 0;
-        __dcbz((void*)block, 64);
+        __dcbz((void*) block, 64);
 
         if (t) {
             {
@@ -1657,13 +1722,13 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
 #endif // clang-format on
             }
 
-            if (__cntlzw((u32)diff) > 32 - t) {
+            if (__cntlzw((u32) diff) > 32 - t) {
                 diff += ((0xFFFFFFFF << t) + 1);
             }
         };
 
-        __dcbz((void*)block, 96);
-        dc       = (s16)(info->components[0].predDC + diff);
+        __dcbz((void*) block, 96);
+        dc = (s16) (info->components[0].predDC + diff);
         block[0] = info->components[0].predDC = dc;
     }
 
@@ -1684,8 +1749,7 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
         }
 #endif // clang-format on
 
-        for (k = 1; k < 64; k++)
-        {
+        for (k = 1; k < 64; k++) {
             register s32 ssss;
             register s32 rrrr;
 
@@ -1762,7 +1826,7 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
 #endif // clang-format on
             }
         _FCEB_Done:
-            ssss = (h->Vij[(s32)(tmp + h->valPtr[code])]);
+            ssss = (h->Vij[(s32) (tmp + h->valPtr[code])]);
             goto _DoneDecodeTab;
 
         _notEnoughBits:
@@ -1786,7 +1850,7 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
                 bgt     _FailedCheckNoBits1;
             }
 #endif // clang-format on
-            cnt = (u32)code;
+            cnt = (u32) code;
             goto _DoneDecodeTab;
 
         _getfullword: {
@@ -1817,8 +1881,8 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
 #endif // clang-format on
             } while (code > h->maxCode[ssss]);
 
-            cnt  = (u32)(ssss + 1);
-            ssss = (h->Vij[(s32)(code + h->valPtr[ssss])]);
+            cnt = (u32) (ssss + 1);
+            ssss = (h->Vij[(s32) (code + h->valPtr[ssss])]);
 
             goto _DoneDecodeTab;
 
@@ -1863,7 +1927,7 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
             }
 #endif // clang-format on
         }
-            ssss = (h->Vij[(s32)(code + h->valPtr[cnt])]);
+            ssss = (h->Vij[(s32) (code + h->valPtr[cnt])]);
             goto _DoneDecodeTab;
 
         _FailedCheckNoBits0:
@@ -1872,7 +1936,7 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
             register u32 mask = 0xFFFFFFFF << (33 - cnt);
             register u32 tmp2;
             register u32 tmp3;
-            code = (s32)(cb & (~mask));
+            code = (s32) (cb & (~mask));
             mask = (u32) & (h->maxCode);
 
 #ifdef __MWERKS__ // clang-format off
@@ -1904,7 +1968,7 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
                 bgt     __FCNB1_WHILE_START;
             }
 #endif // clang-format on
-            ssss = (h->Vij[(s32)(code + h->valPtr[tmp3])]);
+            ssss = (h->Vij[(s32) (code + h->valPtr[tmp3])]);
         }
 
             goto _DoneDecodeTab;
@@ -1951,11 +2015,11 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
 #endif // clang-format on
                 }
 
-                if (__cntlzw((u32)ssss) > 32 - rrrr) {
+                if (__cntlzw((u32) ssss) > 32 - rrrr) {
                     ssss += ((0xFFFFFFFF << rrrr) + 1);
                 }
 
-                block[__THPJpegNaturalOrder[k]] = (s16)ssss;
+                block[__THPJpegNaturalOrder[k]] = (s16) ssss;
                 goto _RECV_END;
             }
 
@@ -1974,34 +2038,35 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info, THPCoeff* block)
         _RECV_END: // Exists just to shut up VSCode
 #endif
         }
-        info->cnt      = cnt;
+        info->cnt = cnt;
         info->currByte = cb;
     }
 }
 
-static void __THPHuffDecodeDCTCompU(register THPFileInfo* info, THPCoeff* block)
+static void __THPHuffDecodeDCTCompU(register THPFileInfo* info,
+                                    THPCoeff* block)
 {
     THPCoeff dc;
 
     register s32 v; // r0
 
-    register s16 cnt; // r7
-    register u32 tmp; // r9
+    register s16 cnt;   // r7
+    register u32 tmp;   // r9
     register u32 cnt33; // r8
-    register u32 cnt1; // r10
-    register u32 cb; // r6
-    register s32 t; // r5
+    register u32 cnt1;  // r10
+    register u32 cb;    // r6
+    register s32 t;     // r5
 
     register u32 tmp1;
     register s32 k;
     register s32 ssss;
     register s32 rrrr;
 
-    __dcbz((void*)block, 0);
+    __dcbz((void*) block, 0);
     t = __THPHuffDecodeTab(info, Udchuff);
-    __dcbz((void*)block, 32);
+    __dcbz((void*) block, 32);
     cnt = 0;
-    __dcbz((void*)block, 64);
+    __dcbz((void*) block, 64);
 
     if (t) {
 #ifdef __MWERKS__ // clang-format off
@@ -2039,13 +2104,13 @@ static void __THPHuffDecodeDCTCompU(register THPFileInfo* info, THPCoeff* block)
         }
 #endif // clang-format on
 
-        if (__cntlzw((u32)cnt) > 32 - t) {
+        if (__cntlzw((u32) cnt) > 32 - t) {
             cnt += ((0xFFFFFFFF << t) + 1);
         }
     }
 
-    __dcbz((void*)block, 96);
-    dc       = (s16)(info->components[1].predDC + cnt);
+    __dcbz((void*) block, 96);
+    dc = (s16) (info->components[1].predDC + cnt);
     block[0] = info->components[1].predDC = dc;
 
     for (k = 1; k < 64; k++) {
@@ -2090,22 +2155,25 @@ static void __THPHuffDecodeDCTCompU(register THPFileInfo* info, THPCoeff* block)
             }
 #endif // clang-format on
 
-            if (__cntlzw((u32)rrrr) > 32 - ssss) {
+            if (__cntlzw((u32) rrrr) > 32 - ssss) {
                 rrrr += ((0xFFFFFFFF << ssss) + 1);
             }
 
-            block[__THPJpegNaturalOrder[k]] = (s16)rrrr;
+            block[__THPJpegNaturalOrder[k]] = (s16) rrrr;
         }
 
-        else {
-            if (rrrr != 15)
+        else
+        {
+            if (rrrr != 15) {
                 break;
+            }
             k += 15;
         }
     }
 }
 
-static void __THPHuffDecodeDCTCompV(register THPFileInfo* info, THPCoeff* block)
+static void __THPHuffDecodeDCTCompV(register THPFileInfo* info,
+                                    THPCoeff* block)
 {
     register s32 t;
     register THPCoeff diff;
@@ -2121,11 +2189,11 @@ static void __THPHuffDecodeDCTCompV(register THPFileInfo* info, THPCoeff* block)
     register s32 ssss;
     register s32 rrrr;
 
-    __dcbz((void*)block, 0);
+    __dcbz((void*) block, 0);
     t = __THPHuffDecodeTab(info, Vdchuff);
-    __dcbz((void*)block, 32);
+    __dcbz((void*) block, 32);
     diff = 0;
-    __dcbz((void*)block, 64);
+    __dcbz((void*) block, 64);
 
     if (t) {
 #ifdef __MWERKS__ // clang-format off
@@ -2163,14 +2231,14 @@ static void __THPHuffDecodeDCTCompV(register THPFileInfo* info, THPCoeff* block)
         }
 #endif // clang-format on
 
-        if (__cntlzw((u32)diff) > 32 - t) {
+        if (__cntlzw((u32) diff) > 32 - t) {
             diff += ((0xFFFFFFFF << t) + 1);
         }
     }
 
-    __dcbz((void*)block, 96);
+    __dcbz((void*) block, 96);
 
-    dc       = (s16)(info->components[2].predDC + diff);
+    dc = (s16) (info->components[2].predDC + diff);
     block[0] = info->components[2].predDC = dc;
 
     for (k = 1; k < 64; k++) {
@@ -2219,14 +2287,15 @@ static void __THPHuffDecodeDCTCompV(register THPFileInfo* info, THPCoeff* block)
             }
 #endif // clang-format on
 
-            if (__cntlzw((u32)rrrr) > 32 - ssss) {
+            if (__cntlzw((u32) rrrr) > 32 - ssss) {
                 rrrr += ((0xFFFFFFFF << ssss) + 1);
             }
 
-            block[__THPJpegNaturalOrder[k]] = (s16)rrrr;
+            block[__THPJpegNaturalOrder[k]] = (s16) rrrr;
         } else {
-            if (rrrr != 15)
+            if (rrrr != 15) {
                 break;
+            }
             k += 15;
         }
     }
