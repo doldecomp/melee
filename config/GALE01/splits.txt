@@ -3902,7 +3902,7 @@ melee/if/ifmagnify.c:
 	.sdata      start:0x804D57E8 end:0x804D5800
 	.sdata2     start:0x804DDB08 end:0x804DDB68
 
-melee/un/un_2FC91.c:
+melee/if/ifnametag.c:
 	.text       start:0x802FC9B4 end:0x802FD604
 	.data       start:0x803F98B8 end:0x803F99C8
 	.bss        start:0x804A1ED0 end:0x804A1F10

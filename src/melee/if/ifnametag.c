@@ -1,9 +1,5 @@
-#include "baselib/forward.h"
+#include "ifnametag.h"
 
-#include "baselib/jobj.h"
-#include "baselib/memory.h"
-#include "baselib/sislib.h"
-#include "baselib/wobj.h"
 #include "cm/camera.h"
 #include "gm/gm_unsplit.h"
 #include "if/ifall.h"
@@ -13,19 +9,8 @@
 #include "lb/lbvector.h"
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
-
-#include "pl/forward.h"
-
 #include "pl/player.h"
-
-#include "sc/forward.h"
-
 #include "sc/types.h"
-
-#include "un/forward.h"
-
-#include "un/types.h"
-#include "un/un_2FC9.h"
 
 #include <printf.h>
 #include <dolphin/mtx.h>
@@ -37,10 +22,12 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
+#include <baselib/wobj.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
