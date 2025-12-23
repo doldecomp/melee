@@ -7,7 +7,7 @@
 
 #include "gm/types.h"
 
-/* 305058 */ UNK_RET un_80305058(UNK_PARAMS);
+/* 305058 */ s32 un_80305058(s32, s32, s32, f32);
 /* 3053C4 */ UNK_RET un_803053C4(UNK_PARAMS);
 /* 30562C */ void Trophy_SetUnlockState(enum_t, bool);
 /* 305918 */ void un_80305918(s32, s32, s32);
