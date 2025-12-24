@@ -3916,7 +3916,7 @@ melee/if/ifhazard.c:
 	.sbss       start:0x804D6D80 end:0x804D6D90
 	.sdata2     start:0x804DDBA0 end:0x804DDBA8
 
-melee/un/un_2FC93.c:
+melee/if/if_2FC93.c:
 	.text       start:0x802FD910 end:0x802FE3F8
 	.rodata     start:0x803B8780 end:0x803B8810
 	.data       start:0x803F99C8 end:0x803F9A00
@@ -3925,7 +3925,7 @@ melee/un/un_2FC93.c:
 	.sbss       start:0x804D6D90 end:0x804D6D98
 	.sdata2     start:0x804DDBA8 end:0x804DDCC8
 
-melee/un/un_2FC94.c:
+melee/if/ifprize.c:
 	.text       start:0x802FE3F8 end:0x802FED14
 	.data       start:0x803F9A00 end:0x803F9E08
 	.sdata      start:0x804D5830 end:0x804D5838

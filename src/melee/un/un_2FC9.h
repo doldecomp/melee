@@ -20,13 +20,7 @@
 /* 2FDA78 */ void fn_802FDA78(HSD_GObj* gobj);
 /* 2FE260 */ void un_802FE260(void);
 /* 2FE390 */ void un_802FE390(void);
-/* 2FE3F8 */ void un_802FE3F8(int a, int b, short* c, short* d);
-/* 2FE470 */ void fn_802FE470(HSD_GObj* gobj);
-/* 2FE6A8 */ void un_802FE6A8(void);
-/* 2FE8CC */ void un_802FE8CC(void);
-/* 2FE918 */ void un_802FE918(int a, int b, int c);
-/* 2FEBE0 */ void un_802FEBE0_OnEnter(void* arg0);
-/* 2FED10 */ void un_802FED10_OnLeave(UNK_T);
+
 /* 2FED14 */ void fn_802FED14(HSD_GObj* gobj);
 /* 2FEFAC */ void un_802FEFAC(void);
 /* 2FF128 */ void un_802FF128(int arg0, int arg1, int arg2, int arg3);
