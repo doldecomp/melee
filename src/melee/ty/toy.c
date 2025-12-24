@@ -9,16 +9,15 @@
 #include "gm/gm_16AE.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
+#include "if/textlib.h"
 #include "lb/lb_00B0.h"
 #include "mn/mnsoundtest.h"
 
 #include "ty/forward.h"
 
 #include "ty/types.h"
-#include "un/un_2FC9.h"
-#include "un/un_3028.h"
 
-#include <melee/un/un_3028.h>
+#include <melee/if/textlib.h>
 #include <MSL/math.h> // for ABS
 
 static u8 un_804D6EA1;

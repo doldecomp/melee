@@ -1,12 +1,12 @@
 #include "db.h"
 
+#include "ft/ftlib.h"
+#include "lb/lbarchive.h"
+
 #include <dolphin/card.h>
 #include <dolphin/vi.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/ftlib.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/un/types.h>
 
 /* 4D6B30 */ u16 db_gameLaunchButtonState;
 /* 4D6B2C */ char** db_bonus_names;

@@ -1,8 +1,8 @@
 #include "tydisplay.h"
 
+#include "if/textlib.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
-#include "un/un_3028.h"
 
 #include <baselib/random.h>
 

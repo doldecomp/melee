@@ -2,15 +2,16 @@
 
 #include "placeholder.h"
 
+#include "gm/gmmain_lib.h"
+#include "if/ifprize.h"
+#include "lb/lb_00F9.h"
+#include "lb/lblanguage.h"
+#include "mn/mnmain.h"
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/mn/mnmain.h>
-#include <melee/un/un_2FC9.h>
 
 s32 mnInfo_80251A08(s32 arg0)
 {

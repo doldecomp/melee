@@ -1285,17 +1285,12 @@ config.libs = [
             Object(NonMatching, "melee/if/ifmagnify.c"),
             Object(NonMatching, "melee/if/ifnametag.c"),
             Object(Matching, "melee/if/ifhazard.c"),
-        ],
-    ),
-    MeleeLib(
-        "un (Unknown)",
-        [
-            Object(NonMatching, "melee/un/un_2FC93.c"),
-            Object(NonMatching, "melee/un/un_2FC94.c"),
-            Object(NonMatching, "melee/un/un_2FC95.c"),
-            Object(NonMatching, "melee/un/un_2FC96.c"),
-            Object(NonMatching, "melee/un/un_2FC97.c"),
-            Object(NonMatching, "melee/un/un_3028.c"),
+            Object(NonMatching, "melee/if/if_2FC93.c"),
+            Object(NonMatching, "melee/if/ifprize.c"),
+            Object(NonMatching, "melee/if/ifcoget.c"),
+            Object(NonMatching, "melee/if/soundtest.c"),
+            Object(NonMatching, "melee/if/textdraw.c"),
+            Object(NonMatching, "melee/if/textlib.c"),
         ],
     ),
     MeleeLib(
