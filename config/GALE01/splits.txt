@@ -3931,7 +3931,7 @@ melee/if/ifprize.c:
 	.sdata      start:0x804D5830 end:0x804D5838
 	.sbss       start:0x804D6D98 end:0x804D6DA0
 
-melee/un/un_2FC95.c:
+melee/if/ifcoget.c:
 	.text       start:0x802FED14 end:0x802FF7DC
 	.data       start:0x803F9E08 end:0x803F9F28
 	.bss        start:0x804A1F58 end:0x804A1FD8

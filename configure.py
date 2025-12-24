@@ -1287,12 +1287,12 @@ config.libs = [
             Object(Matching, "melee/if/ifhazard.c"),
             Object(NonMatching, "melee/if/if_2FC93.c"),
             Object(NonMatching, "melee/if/ifprize.c"),
+            Object(NonMatching, "melee/if/ifcoget.c"),
         ],
     ),
     MeleeLib(
         "un (Unknown)",
         [
-            Object(NonMatching, "melee/un/un_2FC95.c"),
             Object(NonMatching, "melee/un/un_2FC96.c"),
             Object(NonMatching, "melee/un/un_2FC97.c"),
             Object(NonMatching, "melee/un/un_3028.c"),
