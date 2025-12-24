@@ -13,19 +13,17 @@
 #include "baselib/jobj.h"
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/types.h"
-
 #include "gm/types.h"
+#include "if/ifcoget.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbvector.h"
+#include "mn/mnmain.h"
+#include "pl/player.h"
 #include "sc/types.h"
-
-#include <melee/mn/mnmain.h>
-#include <melee/pl/player.h>
-#include <melee/un/un_2FC9.h>
 
 MatchEnd* fn_80174274(void)
 {
@@ -419,43 +417,14 @@ void fn_80176BCC(HSD_GObj* gobj)
 }
 
 static const u8 lbl_803B7B18[40][2] = {
-    { 0x00, 0x0 },
-    { 0x01, 0x1 },
-    { 0x02, 0x2 },
-    { 0x03, 0x3 },
-    { 0x04, 0x5 },
-    { 0x05, 0x6 },
-    { 0x06, 0xD },
-    { 0x07, 0x6 },
-    { 0x08, 0x6 },
-    { 0x09, 0x7 },
-    { 0x0A, 0x9 },
-    { 0x0B, 0x8 },
-    { 0x0C, 0x6 },
-    { 0x0D, 0x9 },
-    { 0x0E, 0x4 },
-    { 0x0F, 0x9 },
-    { 0x10, 0xA },
-    { 0x11, 0xC },
-    { 0x12, 0xD },
-    { 0x13, 0xD },
-    { 0x14, 0x2 },
-    { 0x15, 0xD },
-    { 0x16, 0x6 },
-    { 0x17, 0x7 },
-    { 0x18, 0x9 },
-    { 0x19, 0xD },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0 },
-    { 0x40, 0x80 },
+    { 0x00, 0x0 }, { 0x01, 0x1 },  { 0x02, 0x2 }, { 0x03, 0x3 }, { 0x04, 0x5 },
+    { 0x05, 0x6 }, { 0x06, 0xD },  { 0x07, 0x6 }, { 0x08, 0x6 }, { 0x09, 0x7 },
+    { 0x0A, 0x9 }, { 0x0B, 0x8 },  { 0x0C, 0x6 }, { 0x0D, 0x9 }, { 0x0E, 0x4 },
+    { 0x0F, 0x9 }, { 0x10, 0xA },  { 0x11, 0xC }, { 0x12, 0xD }, { 0x13, 0xD },
+    { 0x14, 0x2 }, { 0x15, 0xD },  { 0x16, 0x6 }, { 0x17, 0x7 }, { 0x18, 0x9 },
+    { 0x19, 0xD }, { 0 },          { 0 },         { 0 },         { 0 },
+    { 0 },         { 0 },          { 0 },         { 0 },         { 0 },
+    { 0 },         { 0x40, 0x80 },
 };
 
 static inline int fn_80176BF0_inline(u8 arg1)
@@ -484,7 +453,9 @@ HSD_JObj* fn_80176BF0(HSD_JObj* arg0, u8 arg1, int arg2)
     } else {
         var_r29 = fn_80176BF0_inline(arg1);
     }
-    for (jobj = HSD_JObjGetChild(jobj); jobj != NULL; jobj = HSD_JObjGetNext(jobj)) {
+    for (jobj = HSD_JObjGetChild(jobj); jobj != NULL;
+         jobj = HSD_JObjGetNext(jobj))
+    {
         if (var_r31 != var_r29) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         } else {
@@ -523,9 +494,13 @@ void fn_80176F60(void)
     GObj_SetupGXLink(temp_r29, fn_80175038, 0xB, 0);
     lb_8000C0E8(jobj, 0, temp_r27);
     HSD_JObjReqAnimAll(jobj, 0.0F);
-    data->x20 = fn_80176BF0(jobj, temp_r30->player_standings[data->x6].character_kind, gm_801743A4(temp_r30->result));
+    data->x20 =
+        fn_80176BF0(jobj, temp_r30->player_standings[data->x6].character_kind,
+                    gm_801743A4(temp_r30->result));
     aobj = data->x20->u.dobj->mobj->aobj;
-    tmp = gm_80160854(data->x6, Player_GetTeam(data->x6), temp_r30->is_teams == 1, temp_r30->player_standings[data->x4].slot_type);
+    tmp = gm_80160854(data->x6, Player_GetTeam(data->x6),
+                      temp_r30->is_teams == 1,
+                      temp_r30->player_standings[data->x4].slot_type);
     HSD_AObjSetCurrentFrame(aobj, 1.0F + tmp);
     HSD_AObjSetRate(aobj, 0.0F);
     HSD_MObjAnim(data->x20->u.dobj->mobj);
@@ -605,20 +580,22 @@ void gm_80177368_OnEnter(void* arg0_)
     }
     fn_801771C0(&lbl_8046DBE8);
     if (temp_r29->player_standings[data->x6].slot_type == Gm_PKind_Human) {
-        if (!gm_801743A4(temp_r29->result)
-                && temp_r29->player_standings[data->x6].x3_6) {
+        if (!gm_801743A4(temp_r29->result) &&
+            temp_r29->player_standings[data->x6].x3_6)
+        {
             lb_80014574(data->x6, 3, 0x20, 0);
         }
     }
     un_802FF1B4();
-    lbl_804D65B8 = lbArchive_80016DBC("GmRst",
-            &data->pnlsce, "pnlsce",
-            &data->flmsce, "flmsce", 0);
+    lbl_804D65B8 = lbArchive_80016DBC("GmRst", &data->pnlsce, "pnlsce",
+                                      &data->flmsce, "flmsce", 0);
     if (data->pnlsce == NULL) {
-        OSReport("Error : Cannot read archive file (File Name : %s).", "GmRst");
+        OSReport("Error : Cannot read archive file (File Name : %s).",
+                 "GmRst");
     }
     if (data->flmsce == NULL) {
-        OSReport("Error : Cannot read archive file (File Name : %s).", "GmRst");
+        OSReport("Error : Cannot read archive file (File Name : %s).",
+                 "GmRst");
     }
     fn_80176A6C();
     temp_r3_2 = GObj_Create(0xB, 3, 0);
@@ -644,13 +621,16 @@ void gm_80177368_OnEnter(void* arg0_)
     fn_8017AA78(&arg0->x1);
     fn_8017A004();
     if (!gm_801743A4(temp_r29->result)) {
-        lbAudioAx_80023F28(fn_80160400(temp_r29->player_standings[data->x6].character_kind));
+        lbAudioAx_80023F28(
+            fn_80160400(temp_r29->player_standings[data->x6].character_kind));
     }
 
     for (i = 0; i < 4; i++) {
         if (temp_r29->player_standings[i].slot_type != Gm_PKind_NA) {
             fn_8017A9B4(i);
-            data->player_data[i].fighter_gobj = fn_8017A67C(temp_r29->player_standings[i].character_kind, temp_r29->player_standings[i].x3, i);
+            data->player_data[i].fighter_gobj =
+                fn_8017A67C(temp_r29->player_standings[i].character_kind,
+                            temp_r29->player_standings[i].x3, i);
             data->player_data[i].camera = fn_8017A318(i);
         }
     }

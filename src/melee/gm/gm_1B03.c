@@ -5,6 +5,8 @@
 #include "gmmovieend.h"
 #include "gmvsdata.h"
 
+#include "if/soundtest.h"
+
 #include <melee/pl/forward.h>
 
 #include <sysdolphin/baselib/controller.h>
@@ -31,7 +33,6 @@
 #include <melee/lb/types.h>
 #include <melee/mn/mngallery.h>
 #include <melee/mn/types.h>
-#include <melee/un/un_2FC9.h>
 #include <melee/vi/types.h>
 #include <melee/vi/vi0102.h>
 #include <melee/vi/vi0402.h>
@@ -1582,10 +1583,9 @@ void gm_801B2204(MinorScene* arg0)
     temp_r3 = gm_801A4284(arg0);
     gm_80162968(temp_r3->match_end.frame_count / 60);
     gm_8016247C(temp_r3->match_end.player_standings[0].xE);
-    gm_80163298(
-        temp_r3->match_end.player_standings[0].character_kind,
-        (u16) gm_80188454(
-            temp_r3->match_end.player_standings[0].character_kind));
+    gm_80163298(temp_r3->match_end.player_standings[0].character_kind,
+                (u16) gm_80188454(
+                    temp_r3->match_end.player_standings[0].character_kind));
     gm_80173BC4(temp_r3->match_end.player_standings[0].character_kind);
     gm_80173EEC();
     if (!gm_80173754(0x1C, gm_804D68C0)) {

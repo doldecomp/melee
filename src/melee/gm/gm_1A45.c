@@ -8,14 +8,12 @@
 
 #include "db/db.h"
 #include "gm/gmscdata.h"
+#include "if/ifcoget.h"
 #include "lb/lb_00F9.h"
 #include "lb/lb_0192.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
-#include "lb/lbcardnew.h"
-#include "lb/lbdvd.h"
 #include "lb/lbheap.h"
-#include "un/un_2FC9.h"
 
 #include <dolphin/os/OSThread.h>
 #include <baselib/controller.h>

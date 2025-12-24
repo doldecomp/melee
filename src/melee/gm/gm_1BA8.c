@@ -36,7 +36,6 @@
 #include <melee/mn/types.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
-#include <melee/un/un_2FC9.h>
 #include <melee/vi/types.h>
 #include <melee/vi/vi0102.h>
 #include <melee/vi/vi0402.h>
@@ -1126,7 +1125,9 @@ void gm_801BE39C(HSD_GObj* gobj)
     temp_r3_2 = gm_8016AE38();
     if (temp_r27_5->xB_0) {
         var_r0 = false;
-    } else if (temp_r3_2->x24C8.x0_6 && gm_8016AEEC() == 0 && gm_8016AEFC() == 0x3B) {
+    } else if (temp_r3_2->x24C8.x0_6 && gm_8016AEEC() == 0 &&
+               gm_8016AEFC() == 0x3B)
+    {
         var_r0 = true;
     } else {
         var_r0 = false;
@@ -1218,14 +1219,16 @@ void gm_801BE638(HSD_GObj* gobj)
             lbAudioAx_80028B6C();
         }
         if ((temp_r30->x10 % 30) == 0) {
-            gm_80167858((s32) temp_r30->x6, Player_GetNametagSlotID(0), 2, 0x1E);
+            gm_80167858((s32) temp_r30->x6, Player_GetNametagSlotID(0), 2,
+                        0x1E);
             Camera_80030E44(3, NULL);
         }
         temp_r3_2 = temp_r30->x10;
         if (temp_r3_2 <= temp_r28_2) {
             temp_r30->x10 = temp_r3_2 + 1;
         }
-    } else if (Player_GetRemainingHP(1) <= 0 || Player_GetRemainingHP(2) <= 0) {
+    } else if (Player_GetRemainingHP(1) <= 0 || Player_GetRemainingHP(2) <= 0)
+    {
         if (Player_GetRemainingHP(1) <= 0) {
             temp_r30->x18 = 1;
         } else {
@@ -1265,7 +1268,9 @@ void gm_801BE638(HSD_GObj* gobj)
     temp_r3_4 = gm_8016AE38();
     if (temp_r28_4->xB_0) {
         var_r0 = 0;
-    } else if (temp_r3_4->x24C8.x0_6 && gm_8016AEEC() == 0 && gm_8016AEFC() == 0x3B) {
+    } else if (temp_r3_4->x24C8.x0_6 && gm_8016AEEC() == 0 &&
+               gm_8016AEFC() == 0x3B)
+    {
         var_r0 = 1;
     } else {
         var_r0 = 0;
@@ -1427,7 +1432,8 @@ void gm_801BEE9C(MinorScene* arg0)
             gm_801A42E8(*temp_r28);
         }
     } else {
-        gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(), temp_r27, *temp_r28);
+        gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(),
+                    temp_r27, *temp_r28);
         gm_801A42E8(MJ_CHALLENGER_APPROACH);
     }
     gm_801A42D4();

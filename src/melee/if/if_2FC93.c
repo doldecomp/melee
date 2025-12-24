@@ -1,4 +1,4 @@
-#include "baselib/forward.h"
+#include "if_2FC93.h"
 
 #include "gm/gm_unsplit.h"
 #include "if/ifall.h"
@@ -6,7 +6,6 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 #include "sc/types.h"
-#include "un/un_2FC9.h"
 
 #include <printf.h>
 #include <dolphin/mtx.h>

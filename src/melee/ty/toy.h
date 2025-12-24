@@ -81,4 +81,7 @@
 /* 3122D0 */ void un_803122D0_OnInit(void);
 /* 31234C */ void un_8031234C(s32);
 
+/* 4D6E6C */ extern void* un_804D6E6C;
+/* 4D6EF4 */ extern struct un_804D6EF4_t* un_804D6EF4;
+
 #endif

@@ -8,18 +8,17 @@
 #include "gm_unsplit.h"
 #include "gmopening.h"
 
-#include "un/un_3028.h"
+#include "gm/gmmain_lib.h"
+#include "gm/types.h"
+#include "if/ifcoget.h"
+#include "if/textlib.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbmthp.h"
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/gm/types.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/mn/types.h>
-#include <melee/un/un_2FC9.h>
 
 void gm_801A6254(MinorScene* arg0)
 {
