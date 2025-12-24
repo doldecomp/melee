@@ -6,7 +6,6 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 #include "sc/types.h"
-#include "un/un_2FC9.h"
 
 #include <printf.h>
 #include <dolphin/mtx.h>

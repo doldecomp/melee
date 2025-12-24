@@ -1,10 +1,11 @@
 #include "db.h"
 
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/particle.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/un/un_2FC9.h>
+#include "gm/gm_unsplit.h"
+
+#include <baselib/controller.h>
+#include <baselib/gobj.h>
+#include <baselib/particle.h>
+#include <baselib/video.h>
 
 /* 4D6B94 */ int db_ScreenshotNumber;
 /* 4D6B90 */ unsigned int db_ScreenshotPending;

@@ -7,9 +7,9 @@
 
 #include <melee/ft/ftlib.h>
 #include <melee/ft/inlines.h>
+#include <melee/if/textdraw.h>
+#include <melee/if/textlib.h>
 #include <melee/pl/player.h>
-#include <melee/un/un_2FC9.h>
-#include <melee/un/un_3028.h>
 
 static struct {
     DevText* text;

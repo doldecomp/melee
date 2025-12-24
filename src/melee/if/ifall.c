@@ -1,6 +1,8 @@
 #include "ifall.h"
 
 #include "if/if_2F72.h"
+#include "if/if_2FC93.h"
+#include "if/ifcoget.h"
 #include "if/ifhazard.h"
 #include "if/ifmagnify.h"
 #include "if/ifnametag.h"
@@ -11,7 +13,6 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "sc/types.h"
-#include "un/un_2FC9.h"
 
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>

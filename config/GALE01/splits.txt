@@ -3938,18 +3938,18 @@ melee/if/ifcoget.c:
 	.sdata      start:0x804D5838 end:0x804D5850
 	.sbss       start:0x804D6DA0 end:0x804D6DA8
 
-melee/un/un_2FC96.c:
+melee/if/soundtest.c:
 	.text       start:0x802FF7DC end:0x80301E44
 	.data       start:0x803F9F28 end:0x803FDC20
 	.sdata      start:0x804D5850 end:0x804D5A40
 	.sbss       start:0x804D6DA8 end:0x804D7054
 
-melee/un/un_2FC97.c:
+melee/if/textdraw.c:
 	.text       start:0x80301E44 end:0x80302834
 	.data       start:0x803FDC20 end:0x803FDD18
 	.bss        start:0x804A1FD8 end:0x804A2688
 
-melee/un/un_3028.c:
+melee/if/textlib.c:
 	.text       start:0x80302834 end:0x80305058
 	.bss        start:0x804A2688 end:0x804A2F38
 

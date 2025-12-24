@@ -1,7 +1,5 @@
 #include "ifprize.h"
 
-#include "baselib/random.h"
-#include "baselib/sislib.h"
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lb_00F9.h"
@@ -11,7 +9,6 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
-#include "un/un_2FC9.h"
 
 #include <printf.h>
 #include <dolphin/mtx.h>
@@ -29,6 +26,7 @@
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>
+#include <baselib/random.h>
 #include <baselib/sislib.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>

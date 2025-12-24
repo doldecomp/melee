@@ -1,8 +1,8 @@
 #include "db.h"
 
-#include <melee/pl/player.h>
-#include <melee/un/un_2FC9.h>
-#include <melee/un/un_3028.h>
+#include "if/textdraw.h"
+#include "if/textlib.h"
+#include "pl/player.h"
 
 static struct {
     DevText* text;

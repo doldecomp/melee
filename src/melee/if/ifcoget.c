@@ -1,16 +1,14 @@
-#include "baselib/forward.h"
+#include "ifcoget.h"
 
-#include "baselib/jobj.h"
-#include "baselib/sislib.h"
 #include "gm/gm_unsplit.h"
 #include "if/ifall.h"
+#include "if/textdraw.h"
+#include "if/textlib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "sc/types.h"
-#include "un/un_2FC9.h"
-#include "un/un_3028.h"
 
 #include <printf.h>
 #include <dolphin/mtx.h>
@@ -22,6 +20,7 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>

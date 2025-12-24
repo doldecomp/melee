@@ -2,7 +2,12 @@
 
 #include "lbcardgame.static.h"
 
-#include "un/un_3028.h"
+#include "gm/gm_unsplit.h"
+#include "gm/gmmain_lib.h"
+#include "if/textlib.h"
+#include "lb/lbarchive.h"
+#include "lb/lbcardnew.h"
+#include "lb/lblanguage.h"
 
 #include <dolphin/card.h>
 #include <dolphin/os.h>
@@ -14,13 +19,6 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/hsd_3AA7.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lb_0192.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbcardnew.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/un/un_2FC9.h>
 
 static struct {
     u32 x0, x4, x8;

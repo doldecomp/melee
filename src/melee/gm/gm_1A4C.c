@@ -2,7 +2,13 @@
 
 #include "gm_unsplit.h"
 
-#include "un/un_3028.h"
+#include "gm/gmregtyfall.h"
+#include "if/textlib.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbbgflash.h"
+#include "lb/lbmthp.h"
+#include "mn/mnmain.h"
+#include "ty/toy.h"
 
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -10,13 +16,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/sobjlib.h>
-#include <melee/gm/gmregtyfall.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/mn/mnmain.h>
-#include <melee/ty/toy.h>
-#include <melee/un/un_2FC9.h>
 
 extern Event gm_804D6724;
 

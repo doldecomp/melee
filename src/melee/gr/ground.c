@@ -14,8 +14,6 @@
 
 #include <placeholder.h>
 
-#include "baselib/forward.h"
-
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
@@ -24,10 +22,9 @@
 #include "gr/forward.h"
 
 #include "gr/inlines.h"
-#include "it/it_266F.h"
+#include "if/textlib.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/items/it_27CF.h"
 #include "it/items/itcoin.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
@@ -44,8 +41,6 @@
 #include "ty/toy.h"
 #include "ty/tydisplay.h"
 #include "ty/tylist.h"
-#include "un/un_2FC9.h"
-#include "un/un_3028.h"
 
 #include <common_structs.h>
 #include <math.h>
