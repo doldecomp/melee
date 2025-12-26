@@ -1,8 +1,10 @@
 #include "itsonans.h"
 
+#include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802CD44C
 
@@ -61,9 +63,23 @@ bool itSonans_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itSonans_UnkMotion2_Phys(Item_GObj* gobj) {}
+void itSonans_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip;
+    HSD_GObj* unused;
+    if (it_8027A09C(gobj)) {
+        it_80273454(gobj);
+        it_802756E0(gobj);
+        it_802754D4(gobj);
+        it_802754BC(gobj);
+        ip = GET_ITEM(gobj);
+        Item_80268E5C(gobj, 0, 2);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+    }
+}
 
 bool itSonans_UnkMotion2_Coll(Item_GObj* gobj)
 {
-    return false;
+    return it_8027A118(gobj, (HSD_GObjEvent) it_802CD4D8);
 }
