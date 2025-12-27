@@ -466,8 +466,13 @@ void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_Rebirth_Phys
 
-/// #ftCo_Rebirth_Coll
-
+void ftCo_Rebirth_Coll(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->smash_attrs.x2135 == -1) {
+        ft_80083DCC(gobj);
+    }
+}
 /// #fn_800D54A4
 
 /// #fn_800D55B4
