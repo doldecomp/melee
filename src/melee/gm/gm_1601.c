@@ -776,7 +776,10 @@ f32 fn_80160F58(u8 ckind)
 
 /// #gm_801623A4
 
-/// #gm_801623D8
+int gm_801623D8(void)
+{
+    return *(s32*) gmMainLib_8015CCF0();
+}
 
 void gm_801623FC(int arg0)
 {
@@ -803,23 +806,81 @@ void gm_801623FC(int arg0)
 
 /// #gm_8016247C
 
-/// #gm_80162574
+void gm_80162574(u8 arg0, u8 arg1)
+{
+    u16* ptr;
+    u32 val;
+
+    if (arg1 == 7) {
+        return;
+    }
+    if (arg1 == 8) {
+        return;
+    }
+
+    // First counter
+    ptr = (u16*) gmMainLib_8015CFB4(gm_80164024(arg0));
+    val = *ptr + 1;
+    if (val > 0xFFFF) {
+        val = 0xFFFF;
+    }
+    *ptr = val;
+
+    // Second counter
+    ptr = (u16*) ((u8*) gmMainLib_8015EDBC() + gm_80164024(arg0) * 2 + 0x18);
+    val = *ptr + 1;
+    if (val > 0xFFFF) {
+        val = 0xFFFF;
+    }
+    *ptr = val;
+}
 
 /// #gm_8016260C
 
-/// #gm_8016279C
+u32 gm_8016279C(void)
+{
+    return *(u32*) gmMainLib_8015CD2C() + *(u32*) gmMainLib_8015CD38() +
+           *(u32*) gmMainLib_8015CD44() + *(u32*) gmMainLib_8015CD50() +
+           *(u32*) gmMainLib_8015CD5C();
+}
 
 /// #gm_80162800
 
 /// #gm_801628C4
 
-/// #gm_80162968
+long gm_80162968(u32 seconds)
+{
+    u32* ptr;
 
-/// #gm_801629B4
+    ptr = gmMainLib_8015CD74();
+    *ptr = MAX(*ptr + seconds, (u32) -1);
+}
 
-/// #gm_80162A00
+long gm_801629B4(s32 amount)
+{
+    u32* ptr;
 
-/// #gm_80162A4C
+    ptr = gmMainLib_8015CD80();
+    *ptr = MAX(*ptr + amount, (u32) -1);
+}
+
+long gm_80162A00(void)
+{
+    u32 a;
+    u32 b;
+
+    a = *(u32*) gmMainLib_8015CD14();
+    b = *(u32*) gmMainLib_8015CD74();
+    return MAX(a + b, (u32) -1);
+}
+
+long gm_80162A4C(s32 amount)
+{
+    u32* ptr;
+
+    ptr = gmMainLib_8015CDA4();
+    *ptr = MAX(*ptr + amount, (u32) -1);
+}
 
 /// #gm_80162A98
 
