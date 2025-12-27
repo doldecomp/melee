@@ -2,6 +2,8 @@
 
 #include "gm/forward.h"
 
+#include "if/ifprize.h"
+
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gm/gmadventure.h>
 #include <melee/gm/gmallstar.h>
@@ -38,7 +40,6 @@
 #include <melee/ty/toy.h>
 #include <melee/ty/tydisplay.h>
 #include <melee/ty/tyfigupon.h>
-#include <melee/un/un_2FC9.h>
 #include <melee/vi/vi0102.h>
 #include <melee/vi/vi0401.h>
 #include <melee/vi/vi0402.h>

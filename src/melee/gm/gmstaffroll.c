@@ -2,7 +2,17 @@
 
 #include "gm_unsplit.h"
 
-#include "un/un_3028.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "gm/gmmain_lib.h"
+#include "if/textlib.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbbgflash.h"
+#include "lb/lblanguage.h"
+#include "sc/types.h"
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/displayfunc.h>
@@ -16,17 +26,6 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/sc/types.h>
-#include <melee/un/un_2FC9.h>
 
 struct gm_804D67F8_t {
     char pad_0[0x948];

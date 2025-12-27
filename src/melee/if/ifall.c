@@ -1,5 +1,19 @@
 #include "ifall.h"
 
+#include "if/if_2F72.h"
+#include "if/if_2FC93.h"
+#include "if/ifcoget.h"
+#include "if/ifhazard.h"
+#include "if/ifmagnify.h"
+#include "if/ifnametag.h"
+#include "if/ifstatus.h"
+#include "if/ifstock.h"
+#include "if/iftime.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
+#include "sc/types.h"
+
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -7,16 +21,6 @@
 #include <baselib/gobjplink.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
-#include <melee/if/if_2F72.h>
-#include <melee/if/ifmagnify.h>
-#include <melee/if/ifstatus.h>
-#include <melee/if/ifstock.h>
-#include <melee/if/iftime.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/lb/lb_00F9.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/sc/types.h>
-#include <melee/un/un_2FC9.h>
 
 static struct ifAll_804A0FD8_t {
     /* 0x00 */ HSD_GObj* gobj;

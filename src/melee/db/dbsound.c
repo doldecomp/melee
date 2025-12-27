@@ -1,9 +1,8 @@
 #include "db.h"
 
-#include "un/un_3028.h"
-
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/un/un_2FC9.h>
+#include "if/textdraw.h"
+#include "if/textlib.h"
+#include "lb/lbaudio_ax.h"
 
 static char db_SoundInfoText_buf[0x70];
 

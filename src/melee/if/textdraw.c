@@ -1,12 +1,6 @@
-#include "baselib/forward.h"
+#include "textdraw.h"
 
-#include "baselib/jobj.h"
-#include "baselib/wobj.h"
-
-#include "un/forward.h"
-
-#include "un/types.h"
-#include "un/un_2FC9.h"
+#include "if/types.h"
 
 #include <printf.h>
 #include <dolphin/mtx.h>
@@ -18,10 +12,13 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>
 #include <baselib/sislib.h>
+#include <baselib/video.h>
+#include <baselib/wobj.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 

@@ -21,6 +21,8 @@
 #include <melee/gr/grstadium.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>
+#include <melee/if/ifhazard.h>
+#include <melee/if/ifnametag.h>
 #include <melee/if/ifstatus.h>
 #include <melee/if/ifstock.h>
 #include <melee/if/iftime.h>
@@ -38,7 +40,6 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>
-#include <melee/un/un_2FC9.h>
 #include <melee/vi/vi1202.h>
 
 lbl_8046B6A0_t* gm_8016AE38(void)

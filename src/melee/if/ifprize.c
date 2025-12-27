@@ -1,13 +1,5 @@
-#include "un_2FC9.h"
+#include "ifprize.h"
 
-#include "baselib/archive.h"
-#include "baselib/dobj.h"
-
-#include "baselib/forward.h"
-
-#include "baselib/jobj.h"
-#include "baselib/random.h"
-#include "baselib/sislib.h"
 #include "gm/gm_unsplit.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lb_00F9.h"
@@ -17,11 +9,12 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
-#include "un/un_2FC9.h"
 
 #include <printf.h>
 #include <dolphin/mtx.h>
+#include <baselib/archive.h>
 #include <baselib/cobj.h>
+#include <baselib/dobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -29,9 +22,11 @@
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <baselib/particle.h>
+#include <baselib/random.h>
 #include <baselib/sislib.h>
 #include <MSL/stdio.h>
 #include <MSL/string.h>
@@ -238,4 +233,4 @@ found:
     un_802FE6A8();
 }
 
-void un_802FED10_OnLeave(UNK_T unused) {}
+void un_802FED10_OnLeave(void* unused) {}

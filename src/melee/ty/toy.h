@@ -7,7 +7,7 @@
 
 #include "gm/types.h"
 
-/* 305058 */ UNK_RET un_80305058(UNK_PARAMS);
+/* 305058 */ s32 un_80305058(s32, s32, s32, f32);
 /* 3053C4 */ UNK_RET un_803053C4(UNK_PARAMS);
 /* 30562C */ void Trophy_SetUnlockState(enum_t, bool);
 /* 305918 */ void un_80305918(s32, s32, s32);
@@ -80,5 +80,8 @@
 /* 312050 */ UNK_RET un_80312050(UNK_PARAMS);
 /* 3122D0 */ void un_803122D0_OnInit(void);
 /* 31234C */ void un_8031234C(s32);
+
+/* 4D6E6C */ extern void* un_804D6E6C;
+/* 4D6EF4 */ extern struct un_804D6EF4_t* un_804D6EF4;
 
 #endif

@@ -1,15 +1,15 @@
+#include "cm/camera.h"
+#include "db/db.h"
+#include "ft/inlines.h"
+#include "gm/gm_unsplit.h"
+#include "gr/ground.h"
+#include "if/textdraw.h"
+#include "if/textlib.h"
+#include "lb/lbshadow.h"
+#include "lb/lbvector.h"
+
 #include <math.h>
 #include <trigf.h>
-#include <melee/cm/camera.h>
-#include <melee/db/db.h>
-#include <melee/ft/inlines.h>
-#include <melee/gm/gm_1A36.h>
-#include <melee/gm/gm_unsplit.h>
-#include <melee/gr/ground.h>
-#include <melee/lb/lbshadow.h>
-#include <melee/lb/lbvector.h>
-#include <melee/un/un_2FC9.h>
-#include <melee/un/un_3028.h>
 
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 

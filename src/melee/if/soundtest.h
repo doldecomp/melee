@@ -1,72 +1,12 @@
-#ifndef GALE01_2FC9B4
-#define GALE01_2FC9B4
+#ifndef _SOUNDTEST_H_
+#define _SOUNDTEST_H_
 
 #include <placeholder.h>
 #include <platform.h>
 
-#include "un/types.h"
+#include "if/forward.h"
+#include "mn/forward.h"
 
-#include <baselib/forward.h>
-#include <melee/mn/forward.h>
-#include <melee/un/forward.h>
-
-#include <baselib/video.h>
-
-/* 2FC9B4 */ float un_802FC9B4(unsigned char slot, unsigned char arg1,
-                               unsigned char arg2, unsigned char arg3);
-/* 2FCAC4 */ void fn_802FCAC4(HSD_GObj* gobj, int pass);
-/* 2FCBA0 */ void un_802FCBA0(void);
-/* 2FCC44 */ void fn_802FCC44(HSD_GObj* gobj);
-/* 2FCF38 */ void NameTag_Create(int slot);
-/* 2FD28C */ void un_802FD28C(int slot);
-/* 2FD404 */ void un_802FD404(void);
-/* 2FD428 */ void un_802FD428(void);
-/* 2FD450 */ void un_802FD450(void);
-/* 2FD45C */ void un_802FD45C(void);
-/* 2FD468 */ void un_802FD468(void);
-/* 2FD4C8 */ void un_802FD4C8(void);
-/* 2FD604 */ void un_802FD604(int);
-/* 2FD65C */ void un_802FD65C(void);
-/* 2FD668 */ void un_802FD668(void);
-/* 2FD674 */ void un_802FD674(void);
-/* 2FD680 */ void fn_802FD680(HSD_GObj* gobj);
-/* 2FD6CC */ void fn_802FD6CC(HSD_GObj* gobj, int pass);
-/* 2FD704 */ void un_802FD704(void);
-/* 2FD708 */ void un_802FD708(void* arg0, int arg1);
-/* 2FD8A0 */ void un_802FD8A0(void* arg0);
-/* 2FD8C4 */ void un_802FD8C4(void* arg0);
-/* 2FD8E8 */ void un_802FD8E8(void* arg0);
-/* 2FD90C */ void un_802FD90C(void);
-/* 2FD910 */ void un_802FD910(void);
-/* 2FD91C */ void un_802FD91C(void);
-/* 2FD928 */ void un_802FD928(unsigned char slot, int arg1, GXColor* arg2);
-/* 2FD9D8 */ void un_802FD9D8(unsigned char slot);
-/* 2FDA4C */ void fn_802FDA4C(HSD_GObj* gobj, int pass);
-/* 2FDA78 */ void fn_802FDA78(HSD_GObj* gobj);
-/* 2FE260 */ void un_802FE260(void);
-/* 2FE390 */ void un_802FE390(void);
-/* 2FE3F8 */ void un_802FE3F8(int a, int b, short* c, short* d);
-/* 2FE470 */ void fn_802FE470(HSD_GObj* gobj);
-/* 2FE6A8 */ void un_802FE6A8(void);
-/* 2FE8CC */ void un_802FE8CC(void);
-/* 2FE918 */ void un_802FE918(int a, int b, int c);
-/* 2FEBE0 */ void un_802FEBE0_OnEnter(void* arg0);
-/* 2FED10 */ void un_802FED10_OnLeave(UNK_T);
-/* 2FED14 */ void fn_802FED14(HSD_GObj* gobj);
-/* 2FEFAC */ void un_802FEFAC(void);
-/* 2FF128 */ void un_802FF128(int arg0, int arg1, int arg2, int arg3);
-/* 2FF190 */ void un_802FF190(void);
-/* 2FF1B4 */ void un_802FF1B4(void);
-/* 2FF218 */ void fn_802FF218(HSD_GObj* arg0);
-/* 2FF360 */ void fn_802FF360(void* arg0);
-/* 2FF364 */ void un_802FF364(int slot);
-/* 2FF498 */ void un_802FF498(void);
-/* 2FF4FC */ void un_802FF4FC(void);
-/* 2FF570 */ void un_802FF570(void);
-/* 2FF620 */ void un_802FF620(void);
-/* 2FF6A0 */ void un_802FF6A0(void);
-/* 2FF710 */ void un_802FF710(void);
-/* 2FF78C */ HSD_GObj* un_802FF78C(void);
 /* 2FF7DC */ void un_802FF7DC(void);
 /* 2FF884 */ bool un_802FF884(char*);
 /* 2FF88C */ int un_802FF88C(void);
@@ -178,24 +118,5 @@
 /* 301D7C */ UNK_RET un_80301D7C(UNK_PARAMS);
 /* 301DCC */ bool un_80301DCC(bool);
 /* 301E08 */ bool un_80301E08(bool);
-/* 301E44 */ int DevText_StrLen(char* str);
-/* 301E78 */ void DevText_NumToStr(int, char*);
-/* 301FB4 */ HSD_GObj* DevText_GetGObj(void);
-/* 301FBC */ void DevText_InitPool(void);
-/* 3020FC */ void DevText_Remove(DevText** ptext);
-/* 302164 */ void DevText_SetupCObj(void);
-/* 3022BC */ void DevText_Draw(DevText* text);
-/* 302608 */ void DevText_DrawAll(HSD_GObj* gobj, int pass);
-/* 30265C */ void DevText_CreateCObj(int classifier, int p_link,
-                                     int gobj_priority, int gx_link,
-                                     u8 gx_priority);
-/* 302708 */ HSD_GObj* DevText_Setup(int classifier, int p_link, int priority,
-                                     int gx_link, int render_priority,
-                                     u8 camera_priority);
-/* 3027A0 */ void DevText_AddToList(DevText** list, DevText* text);
-/* 302810 */ void DevText_Show(HSD_GObj* gobj, DevText* text);
-
-/* 4D6E6C */ extern void* un_804D6E6C;
-/* 4D6EF4 */ extern struct un_804D6EF4_t* un_804D6EF4;
 
 #endif
