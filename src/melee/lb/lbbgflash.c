@@ -1,9 +1,10 @@
+#include "lbbgflash.h"
+
 #include <placeholder.h>
 
 #include <baselib/gobj.h>
 #include <melee/lb/lb_00F9.h>
 
-/* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
 
 typedef struct lbl_80433658_t {
