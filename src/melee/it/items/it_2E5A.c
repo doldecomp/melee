@@ -278,59 +278,20 @@ inline void it_802E614C(Item_GObj* parent_gobj1, Item_GObj* parent_gobj2,
 
 s32 it_802E61C4(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
-    // s32 it_802E61C4(SpawnItem* spawn, s32 arg1, s32 arg2) {
-    f32 temp_r29;
-    s32 var_r29;
-    // it_2E5A_DatAttrs_1* attr;
-    it_2E5A_DatAttrs_2* attr;
     Item* item;
-    // void* temp_r3;
-    // f32 temp_f0;
-    // u32 num;
-    // s32 temp_r0;
-
-    s32 unused1;
-    s32 unused2;
-    // s32 unused3;
-    // s32 unused4;
-    f64 unused5;
-    // PAD_STACK(10);
-
-    // temp_r30 = arg0->user_data->xC4_article_data->x4_specialAttributes;
-    // temp_r29 = (s32) ((f32) arg1 * (attr[arg2 * 4 + 1]->x0);
-    // var_r29 = (s32) ((f32) temp_r29 * ((0.01f * (temp_r30->unk24 *
-    // HSD_Randf())) + 1.0f));
-
-    // num = arg2 * 4;
-    // temp_r29 = arg2 * 4;
+    it_2E5A_DatAttrs_2* attr;
+    s32 var_r29;
+    f32 temp_f1;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
     attr = item->xC4_article_data->x4_specialAttributes;
 
-    // temp_r29 = arg1 * attr[arg2 * 4 + 1].x0;
-    // var_r29 = temp_r29 * ((0.01f * (attr->x24 * HSD_Randf())) + 1.0f);
-    var_r29 = arg1 * attr[arg2 * 4 + 1].x0 *
-              ((0.01f * (attr->x24 * HSD_Randf())) + 1.0f);
+    var_r29 = arg1 * ((f32*) &attr[1])[arg2];
+    temp_f1 = attr->x24 * HSD_Randf();
+    var_r29 = var_r29 * (0.01F * temp_f1 + 1.0F);
 
-    // item = &attr + arg2 * 4;
-    // temp_f0 = attr->x2C;
-    // temp_f0 = (float) ((HSD_GObj*) item)->x2C;
-    // temp_f0 = (float) ((it_2E5A_ItemVars*) item)->x2C;
-    // temp_r0 = arg2 * 4;
-    // temp_f0 *= 4;
-    // temp_f0 += temp_r0;
-    // temp_f0 += arg2 * 4;
-    // temp_r29 = temp_f0;
-    // temp_r29 = (s32) ((f32) arg1 * (attr + (arg2 * 4))->unk2C);
-    // temp_r29 = (arg1 * (attr + (arg2 * 4)));
-    // num = arg2 * 4;
-    // // temp_r29 = arg1 * attr[num].x2C->top;
-    // temp_r29 = arg1 * attr[num + 1].x0;
-    // // var_r29 = (temp_f0 * ((0.01f * (attr->x24 * HSD_Randf())) + 1.0f));
-    // var_r29 = (temp_r29 * ((0.01f * (attr->x24 * HSD_Randf())) + 1.0f));
     if (var_r29 < 1) {
         var_r29 = 1;
-        // var_r29 = true;
     }
     return var_r29;
 }
@@ -700,15 +661,12 @@ bool it_2725_Logic115_DmgDealt(Item_GObj* item_gobj)
 void it_802E6A74(HSD_GObj* gobj)
 {
     Item* item;
-    // Vec3* temp_r3;
     it_2E5A_ItemVars_struct* temp_r6;
 
     item = gobj->user_data;
     if (item->xDD4_itemVar.it_2E5A.x8) {
-        temp_r6 = item->xDD4_itemVar.it_2E5A.x1C;
-        // temp_r3 = &item->xDD4_itemVar.it_2E5A.x1C->x8;
-        // temp_r6->x14 = *temp_r3;
-        // lb_8000B1CC(temp_r6->x4, NULL, temp_r3);
+        // Cast to get address of the inline struct at offset 0x1C
+        temp_r6 = (it_2E5A_ItemVars_struct*)&item->xDD4_itemVar.it_2E5A.x1C;
         temp_r6->x14 = temp_r6->x8;
         lb_8000B1CC(temp_r6->x4, NULL, &temp_r6->x8);
     }
