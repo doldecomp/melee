@@ -1,5 +1,20 @@
 #include <placeholder.h>
 
+typedef struct BgFlashState {
+    u8 active : 1;
+    u8 mode : 7;
+} BgFlashState;
+
+typedef struct BgFlashData {
+    BgFlashState state;
+    u8 pad[3];
+    int x4;
+    int x8;
+    int xC;
+} BgFlashData;
+
+extern BgFlashData lbl_80433658;
+
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static UNK_RET fn_80021C18(UNK_PARAMS);
 
@@ -17,8 +32,12 @@
 
 /// #lbBgFlash_800206D4
 
-/// #fn_8002087C
-
+void fn_8002087C(int* arg0)
+{
+    lbl_80433658.state.active = 0;
+    lbl_80433658.state.mode = 5;
+    lbl_80433658.xC = *arg0;
+}
 /// #fn_800208B0
 
 /// #lbBgFlash_800208EC
