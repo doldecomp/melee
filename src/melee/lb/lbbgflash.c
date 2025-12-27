@@ -3,6 +3,16 @@
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static UNK_RET fn_80021C18(UNK_PARAMS);
 
+typedef struct lbl_80433658_t {
+    u8 _0 : 1;
+    u8 field : 7;
+    u8 bytes[0x47];
+} lbl_80433658_t;
+
+extern s32 lbl_804D3840;
+extern s32 lbl_804D3844;
+extern lbl_80433658_t lbl_80433658;
+
 /// #fn_8001FC08
 
 /// #fn_8001FEC4
@@ -11,7 +21,14 @@
 
 /// #lbBgFlash_800205F0
 
-/// #lbBgFlash_8002063C
+void lbBgFlash_8002063C(int count)
+{
+    if (count < 1) {
+        count = 1;
+    }
+    lbBgFlash_800206D4(&lbl_804D3844, &lbl_804D3840, count);
+    lbl_80433658.field = 0;
+}
 
 /// #lbBgFlash_80020688
 
