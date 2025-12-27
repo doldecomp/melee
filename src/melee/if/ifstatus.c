@@ -253,8 +253,7 @@ static inline IfDamageState* getPlayerByNext(HSD_GObj* gobj)
     return NULL;
 }
 
-#define ifStatus_802F5E50 ifStatus_802F5E50_
-void ifStatus_802F5E50_(HSD_GObj* gobj, s32 arg1)
+void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
 {
     IfDamageState* player = getPlayerByNext(gobj);
     if (!player->flags.hide_all_digits) {
