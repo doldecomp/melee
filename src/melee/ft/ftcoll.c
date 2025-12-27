@@ -24,8 +24,10 @@
 
 #include "gr/forward.h"
 #include "it/forward.h"
+#include "it/types.h"
 
 #include "it/it_26B1.h"
+#include "it/itcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"
@@ -708,9 +710,97 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     return false;
 }
 
-void ftColl_80077464(void)
+void ftColl_80077464(Item* ip, HitCapsule* hit, Fighter* fp)
 {
-    NOT_IMPLEMENTED;
+    s32 damage;
+    s32 intDamage;
+    f32 dir;
+
+    it_8026FAC4(ip, hit, 7, fp, false);
+
+    if (hit->damage != 0.0f) {
+        intDamage = (s32) hit->damage;
+        if (intDamage != 0) {
+            damage = (s32) hit->damage;
+        } else {
+            damage = 1;
+        }
+    } else {
+        damage = 0;
+    }
+
+    if (damage > fp->ReflectAttr.x1A30_maxDamage) {
+        if (hit->x41_b4) {
+            if (damage > ip->xC4C) {
+                ip->xC4C = damage;
+            }
+        } else {
+            if (damage > ip->xC34_damageDealt) {
+                ip->xC34_damageDealt = damage;
+            }
+        }
+
+        if (fp->cur_pos.x > ip->pos.x) {
+            dir = -1.0f;
+        } else {
+            dir = 1.0f;
+        }
+        ip->xC68 = dir;
+
+        fp->ReflectAttr.x1A3C_damageOver = damage;
+
+        if (fp->x40 != 0.0f) {
+            if (fp->x40 > 0.0f) {
+                dir = -1.0f;
+            } else {
+                dir = 1.0f;
+            }
+        } else {
+            if (ip->pos.x > fp->cur_pos.x) {
+                dir = -1.0f;
+            } else {
+                dir = 1.0f;
+            }
+        }
+        fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
+    } else {
+        ip->xC64_reflectGObj = fp->gobj;
+        ip->xC74 = fp->x2070.x2070_int;
+        ip->xC78 = fp->x2074.x2074_vec;
+        ip->xC80 = fp->x2074.x207C;
+        ip->xC88 = fp->x2074.x2084;
+        ip->xC8C = fp->x2074.x2088;
+
+        if (fp->cur_pos.x > ip->pos.x) {
+            dir = -1.0f;
+        } else {
+            dir = 1.0f;
+        }
+        ip->xC68 = dir;
+
+        ip->xC6C = fp->ReflectAttr.x1A34_damageMul;
+        ip->xC70 = fp->ReflectAttr.x1A38_speedMul;
+
+        ip->xDCC_flag.b1 = fp->reflecting;
+        if (fp->x2218_b4) {
+            ip->xDCC_flag.b2 = 1;
+        }
+
+        if (fp->x40 != 0.0f) {
+            if (fp->x40 > 0.0f) {
+                dir = -1.0f;
+            } else {
+                dir = 1.0f;
+            }
+        } else {
+            if (ip->pos.x > fp->cur_pos.x) {
+                dir = -1.0f;
+            } else {
+                dir = 1.0f;
+            }
+        }
+        fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
+    }
 }
 
 void ftColl_80077688(Item* item, HitCapsule* hurt, Fighter* fp, Vec3* pos,

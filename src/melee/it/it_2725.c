@@ -8953,7 +8953,7 @@ void it_802798D4(Item_GObj* item_gobj, CommandInfo* cmd)
 void it_8027990C(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     PAD_STACK(4);
-    it_80273648(item_gobj, cmd->u->unk33.unk1, cmd->u->unk33.unk0);
+    it_80273648(item_gobj, cmd->u->unk33.unk0, cmd->u->unk33.unk1);
     NEXT_CMD(cmd);
 }
 
@@ -8972,38 +8972,41 @@ void it_802799A8(Item_GObj* item_gobj, CommandInfo* cmd)
 
 void it_802799E4(Item_GObj* item_gobj)
 {
-    // Item* item;
-    // CommandInfo* temp_r29;
-    // u32 temp_r28;
+    Item* item = GET_ITEM(item_gobj);
+    CommandInfo* cmd = &item->x524_cmd;
+    u32 opcode;
 
-    // item = item_gobj->user_data;
-    // // temp_r29 = (CommandInfo*) item->x524_cmd;
-    // temp_r29 = &item->x524_cmd;
-    // item->x524_cmd.x4 = item->x5CC_currentAnimFrame;
-    // item->xDBC_itcmd_var4 = 0;
-    // if (item->x524_cmd.u != NULL) {
-    //     if (F32_MAX != temp_r29->x0) {
-    //         temp_r29->x0 = temp_r29->x0 - item->x5D0_animFrameSpeed;
-    //     }
-    // loop_4:
-    //     if (temp_r29->x8 != NULL) {
-    //         if (F32_MAX == temp_r29->x0) {
-    //             if (!(temp_r29->x4 >= item->x5D0_animFrameSpeed)) {
-    //                 temp_r29->x0 = -temp_r29->x4;
-    //                 goto block_9;
-    //             }
-    //         } else if (!(temp_r29->x0 > 0.0f)) {
-    //         block_9:
-    //             // temp_r28 = temp_r29->x8_bits->x0_b0_8;
-    //             // if (Command_Execute((CommandInfo*) temp_r29, temp_r28) ==
-    //             0)
-    //             // {
-    //             //     it_803F22A8[temp_r28 - 10U](item_gobj, temp_r29);
-    //             // }
-    //             goto loop_4;
-    //         }
-    //     }
-    // }
+    cmd->frame_count = item->x5CC_currentAnimFrame;
+    item->xDBC_itcmd_var4 = 0;
+
+    if (cmd->u == NULL) {
+        return;
+    }
+
+    if (cmd->timer != F32_MAX) {
+        cmd->timer -= item->x5D0_animFrameSpeed;
+    }
+
+loop:
+    if (cmd->u == NULL) {
+        return;
+    }
+    if (cmd->timer == F32_MAX) {
+        if (cmd->frame_count >= item->x5D0_animFrameSpeed) {
+            return;
+        }
+        cmd->timer = -cmd->frame_count;
+    } else if (cmd->timer > 0.0f) {
+        return;
+    }
+
+    opcode = (*(u8*)cmd->u >> 2) & 0x3F;
+    if (Command_Execute(cmd, opcode) != 0) {
+        goto loop;
+    }
+    opcode -= 10;
+    it_803F22A8[opcode](item_gobj, cmd);
+    goto loop;
 }
 
 #pragma push

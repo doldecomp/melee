@@ -33,7 +33,7 @@
 /* 076CBC */ void ftColl_80076CBC(Fighter*, HitCapsule*, Fighter*);
 /* 076ED8 */ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                                   HitCapsule* hit1);
-/* 077464 */ UNK_RET ftColl_80077464(UNK_PARAMS);
+/* 077464 */ void ftColl_80077464(Item*, HitCapsule*, Fighter*);
 /* 077688 */ void ftColl_80077688(Item*, HitCapsule*, Fighter*, Vec3*, f32);
 /* 077970 */ UNK_RET ftColl_80077970(UNK_PARAMS);
 /* 077C60 */ UNK_RET ftColl_80077C60(UNK_PARAMS);
