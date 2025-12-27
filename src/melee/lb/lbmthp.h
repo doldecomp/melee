@@ -7,9 +7,43 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
+/* THPDec function declaration */
+s32 THPDec_8032FD40(void* arg0, u16 height);
+
+/* Struct used by fn_8001EBF0 for THP decode component init */
+typedef struct THPDecComp {
+    /* 0x00 */ u8 pad0[0x40];
+    /* 0x40 */ u32 unk_40;
+    /* 0x44 */ u32 width;
+    /* 0x48 */ u32 height;
+    /* 0x4C */ u8 pad4C[0x68 - 0x4C];
+    /* 0x68 */ u32 unk_68;
+    /* 0x6C */ u8 pad6C[0x78 - 0x6C];
+    /* 0x78 */ u32 unk_78;
+    /* 0x7C */ u32 unk_7C;
+    /* 0x80 */ u32 unk_80;
+    /* 0x84 */ u32 unk_84;
+    /* 0x88 */ u32 unk_88;
+    /* 0x8C */ u8 pad8C[0x90 - 0x8C];
+    /* 0x90 */ u32 unk_90;
+    /* 0x94 */ s32 unk_94;
+    /* 0x98 */ u8 pad98[0x9C - 0x98];
+    /* 0x9C */ u32 unk_9C;
+    /* 0xA0 */ u16 unk_A0;
+    /* 0xA2 */ u16 unk_A2;
+    /* 0xA4 */ u8 unk_A4;
+    /* 0xA5 */ u8 padA5[0xA8 - 0xA5];
+    /* 0xA8 */ u16 unk_A8;
+    /* 0xAA */ u16 unk_AA;
+    /* 0xAC */ u8 unk_AC;
+    /* 0xAD */ u8 padAD[0x100 - 0xAD];
+    /* 0x100 */ u32 unk_100;
+    /* 0x104 */ u32 unk_104;
+} THPDecComp;
+
 /* 01E910 */ UNK_RET fn_8001E910(UNK_PARAMS);
 /* 01EB14 */ UNK_RET fn_8001EB14(UNK_PARAMS);
-/* 01EBF0 */ UNK_RET fn_8001EBF0(UNK_PARAMS);
+/* 01EBF0 */ s32 fn_8001EBF0(THPDecComp* data);
 /* 01ECF4 */ UNK_RET fn_8001ECF4(UNK_PARAMS);
 /* 01EF5C */ UNK_RET fn_8001EF5C(UNK_PARAMS);
 /* 01F06C */ UNK_RET fn_8001F06C(UNK_PARAMS);
