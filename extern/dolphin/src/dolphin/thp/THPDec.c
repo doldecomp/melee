@@ -36,7 +36,7 @@ static THPCoeff* __THPMCUBuffer[6];
 static THPFileInfo* __THPInfo;
 static BOOL __THPInitFlag = FALSE;
 
-#define THPROUNDUP(a, b) ((((s32) (a)) + ((s32) (b) -1L)) / ((s32) (b)))
+#define THPROUNDUP(a, b) ((((s32) (a)) + ((s32) (b) - 1L)) / ((s32) (b)))
 
 void __THPPrepBitStream(THPFileInfo* info)
 {
@@ -240,8 +240,7 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
                 }
             }
 
-            else
-            {
+            else {
                 goto _err_unsupported_marker;
             }
         }
@@ -377,6 +376,19 @@ void THPDec_803300E0(u32* data)
         buffer += 8;
         count += 8;
     }
+}
+
+s32 THPDec_8032FD40(THPDec_8032FD40_Data* data, u16 num)
+{
+    s32 base = data->val0 + 0x4028;
+    s32 a;
+    if (data->val2 != 4) {
+        OSReport("ERROR: THP only supports 4:2:0!!!\n");
+        return 0;
+    }
+    a = (data->val1 / 2) * (num / 2) * 2 + (data->val1 * num);
+    base = base + a;
+    return base;
 }
 
 static u8 __THPReadFrameHeader(void)
@@ -1305,8 +1317,7 @@ inline s32 __THPHuffDecodeTab(register THPFileInfo* info,
         stw     cnt, info->cnt;
     }
 #endif // clang-format on
-_done:
-    return code;
+    _done: return code;
 
     {
         register u32 maxcodebase;
@@ -1749,7 +1760,8 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info,
         }
 #endif // clang-format on
 
-        for (k = 1; k < 64; k++) {
+        for (k = 1; k < 64; k++)
+        {
             register s32 ssss;
             register s32 rrrr;
 
@@ -2162,8 +2174,7 @@ static void __THPHuffDecodeDCTCompU(register THPFileInfo* info,
             block[__THPJpegNaturalOrder[k]] = (s16) rrrr;
         }
 
-        else
-        {
+        else {
             if (rrrr != 15) {
                 break;
             }
