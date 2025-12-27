@@ -1,5 +1,6 @@
 #include "hsd_3B2B.h"
 
+#include "string.h"
 void hsd_803B2B20(u8* src, int len, void* dest)
 {
     int i;
