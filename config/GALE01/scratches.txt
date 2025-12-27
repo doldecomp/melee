@@ -7848,3 +7848,4 @@ func_800C0EC4 = OK:ERROR; // author:r-burns id:di4yL updated:2022-08-23T02:11:01
 it_8026E7E0 = 100%:MATCHED; // author:itsgrimetime id:nLjfq
 itSonans_UnkMotion2_Coll = 100%:MATCHED; // author:itsgrimetime id:FGvsm
 it_3F14_Logic1_Thrown = 100%:MATCHED; // author:itsgrimetime id:1rBDu
+ftCo_800C0764 = 100%:MATCHED; // author:itsgrimetime id:jGbfJ
