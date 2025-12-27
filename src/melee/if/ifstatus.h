@@ -12,7 +12,7 @@
 /* 2F4EDC */ void ifStatus_802F4EDC(void);
 /* 2F5B48 */ void ifStatus_802F5B48(void);
 /* 2F5DE0 */ void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1);
-/* 2F5E50 */ void ifStatus_802F5E50(void);
+/* 2F5E50 */ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1);
 /* 2F5EC0 */ void ifStatus_802F5EC0(void);
 /* 2F6194 */ HSD_GObj* ifStatus_802F6194(HSD_GObj*, s32);
 /* 2F61FC */ void ifStatus_802F61FC(void);
