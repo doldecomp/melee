@@ -4,6 +4,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include <baselib/gobj.h>
+
 /* 01FC08 */ UNK_RET fn_8001FC08(UNK_PARAMS);
 /* 01FEC4 */ UNK_RET fn_8001FEC4(UNK_PARAMS);
 /* 0204C8 */ UNK_RET fn_800204C8(UNK_PARAMS);
@@ -25,6 +27,6 @@
 /* 021B04 */ UNK_RET fn_80021B04(UNK_PARAMS);
 /* 021C1C */ UNK_RET fn_80021C1C(UNK_PARAMS);
 /* 021C48 */ void lbBgFlash_80021C48(u32, u32);
-/* 021C80 */ UNK_RET fn_80021C80(UNK_PARAMS);
+/* 021C80 */ void fn_80021C80(HSD_GObj* gobj);
 
 #endif
