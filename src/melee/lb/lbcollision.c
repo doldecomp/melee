@@ -2274,6 +2274,51 @@ void lbColl_800096B4(MtxPtr arg0, Vec3 arg1, Vec3 arg2, GXColor* arg3, GXColor* 
     HSD_StateInitTev();
 }
 
+void lbColl_80009DD4(Vec3* v0, Vec3* v1, GXColor* clr)
+{
+    Mtx viewMtx;
+    float x0, y0, z0, x1, y1;
+    u8 r, g, b, a;
+
+    HSD_StateInvalidate(-1);
+    HSD_StateInitTev();
+    lbColl_80008DA4(clr, clr);
+    HSD_ClearVtxDesc();
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
+    GXSetCurrentMtx(0);
+    GXSetCullMode(GX_CULL_NONE);
+    HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), viewMtx);
+    GXLoadPosMtxImm(viewMtx, 0);
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+
+    z0 = v0->z;
+    y0 = v0->y;
+    x0 = v0->x;
+    GXPosition3f32(x0, y0, z0);
+    a = clr->a;
+    b = clr->b;
+    g = clr->g;
+    r = clr->r;
+    GXColor4u8(r, g, b, a);
+
+    x1 = v1->x;
+    GXPosition3f32(x1, y0, z0);
+    GXColor4u8(r, g, b, a);
+
+    y1 = v1->y;
+    GXPosition3f32(x1, y1, z0);
+    GXColor4u8(r, g, b, a);
+
+    GXPosition3f32(x0, y1, z0);
+    GXColor4u8(r, g, b, a);
+
+    HSD_StateInvalidate(-1);
+    HSD_StateInitTev();
+}
+
 extern GXColor lbColl_804D36A0;
 extern GXColor lbColl_804D36A4;
 extern GXColor lbColl_804D36A8;

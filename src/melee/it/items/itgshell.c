@@ -39,7 +39,7 @@ typedef struct itGShell_Attrs {
 } itGShell_Attrs;
 STATIC_ASSERT(sizeof(itGShell_Attrs) == 64);
 
-ItemStateTable ItemStateTable_GShell[] = {
+ItemStateTable it_803F5BA8[] = {
     { -1, itGshell_UnkMotion0_Anim, itGshell_UnkMotion0_Phys,
       itGshell_UnkMotion0_Coll },
     { -1, itGshell_UnkMotion1_Anim, itGshell_UnkMotion1_Phys,
@@ -632,8 +632,7 @@ bool it_3F14_Logic14_HitShield(Item_GObj* gobj)
         ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
         ip->x40_vel.y = attrs->x10;
         if (ip->xDD4_itemVar.gshell.xDEC_b0) {
-            ip->xDD4_itemVar.gshell.xDE8 =
-                HSD_Randi(it_804D6D28->x48_byte & 0xF);
+            ip->xDD4_itemVar.gshell.xDE8 = HSD_Randi(it_804D6D28->x48_byte & 0xF);
         } else {
             ip->xDD4_itemVar.gshell.xDEC_b0 = 1;
         }
