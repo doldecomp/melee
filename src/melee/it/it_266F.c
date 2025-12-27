@@ -1122,7 +1122,7 @@ void it_8026E15C(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     bool res2;
     bool res = it_8026E_inline(gobj);
-    PAD_STACK(14);
+    u8 _[22];
 
     if (res) {
         it_80276FC4(gobj, res);
@@ -1144,7 +1144,7 @@ void it_8026E248(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     bool res2;
     bool res = it_8026E_inline(gobj);
-    PAD_STACK(18);
+    PAD_STACK(26);
 
     if (res) {
         it_80276FC4(gobj, res);
@@ -1161,14 +1161,29 @@ void it_8026E248(Item_GObj* gobj, HSD_GObjEvent arg1)
     }
 }
 #if 0
-bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
-    bool chk = it_8026DFB0(item_gobj);
+bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
+{
+    CollData* coll;
+    Item* item;
+    bool chk;
     bool chk2;
+    PAD_STACK(42);
 
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    it_80276214(item_gobj);
+    chk = mpColl_800471F8(coll);
+    item->pos = coll->cur_pos;
     if (chk) {
+        item->xC30 = coll->floor.index;
+    }
+    chk = chk | it_80276308(item_gobj);
+    chk = chk | it_802763E0(item_gobj);
+    if (chk & 0xF) {
         it_80276FC4(item_gobj, chk);
         if (chk & 1) {
-            item_gobj->user_data->xD50_landNum += 1;
+            item = item_gobj->user_data;
+            item->xD50_landNum += 1;
             if (it_8026DC24(item_gobj)) {
                 chk2 = it_8026DD5C(item_gobj);
             } else {
@@ -1256,14 +1271,29 @@ void it_8026E71C(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
     }
 }
 
-void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
-    bool chk = it_8026DF34(item_gobj);
+void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
+{
+    CollData* coll;
+    Item* item;
+    bool chk;
     bool chk2;
+    u8 pad[40];
 
-    chk |= it_80276308(item_gobj);
-    chk |= it_802763E0(item_gobj);
-    if (chk & 0xC) {
-        it_80276D9C(item_gobj, chk);
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    it_80276214(item_gobj);
+    chk = mpColl_800471F8(coll);
+    item->pos = coll->cur_pos;
+    if (chk) {
+        item->xC30 = coll->floor.index;
+    }
+    chk = chk | it_80276308(item_gobj);
+    chk = chk | it_802763E0(item_gobj);
+    {
+        s32 chk_copy = chk;
+        if (chk & 0xC) {
+            it_80276D9C(item_gobj, chk_copy);
+        }
     }
     if (chk & 1) {
         if (it_8026DE98(item_gobj) && it_8026DC24(item_gobj)) {
@@ -2016,7 +2046,7 @@ Item_GObj* it_8026F6BC(Item_GObj* item_gobj, Vec3* arg1, Vec3* vel, bool chk)
 {
     Item* spawned_item;
     Item_GObj* spawned_item_gobj;
-    PAD_STACK(80);
+    PAD_STACK(96);
 
     if (Item_804A0C64.x2C >= Item_804A0C64.x30) {
         return NULL;
