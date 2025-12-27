@@ -9,11 +9,11 @@
 
 #pragma force_active on
 
-/* literal */ extern char* ftDevice_803C6B18;
-/* literal */ extern char* ftDevice_803C6B40;
-/* literal */ extern char* ftDevice_803C6B4C;
-/* literal */ extern char* ftDevice_803C6B78;
-/* literal */ extern char* ftCo_804D3C18;
+/* literal */ extern char ftDevice_803C6B18[];
+/* literal */ extern char ftDevice_803C6B40[];
+/* literal */ extern char ftDevice_803C6B4C[];
+/* literal */ extern char ftDevice_803C6B78[];
+/* literal */ extern char ftCo_804D3C18[];
 
 struct ftDeviceUnk3 ft_80459A68[4];
 static int ft_804D6570;
@@ -59,9 +59,25 @@ UNK_RET ftCo_800C06E8(UNK_PARAMS)
     NOT_IMPLEMENTED;
 }
 
-UNK_RET ftCo_800C0764(UNK_PARAMS)
+void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
 {
-    NOT_IMPLEMENTED;
+    struct ftDeviceUnk3* base = ft_80459A68;
+    struct ftDeviceUnk3* ptr;
+    int i;
+
+    ptr = base + 1;
+    for (i = 0; i < 2; i++) {
+        if (ptr->ground == NULL) {
+            base[i + 1].ground = arg0;
+            base[i + 1].type = arg1;
+            base[i + 1].active_cb = arg2;
+            ftDevice_BuryThingCount++;
+            return;
+        }
+        ptr++;
+    }
+    OSReport("fighter chk device coll func num over!\n");
+    __assert("ftdevice.c", 0x6FU, "0");
 }
 
 /// @todo pretty sure arg2 is a ftDevice callback, but unsure if its
