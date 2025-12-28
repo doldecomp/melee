@@ -447,6 +447,7 @@ void ftCo_80092908(Fighter_GObj* gobj)
 void ftCo_Guard_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     fp->mv.co.guard.x0 += 1;
     if (!ftCo_800925A4(gobj)) {
         ftCo_80091E78(gobj, 1);
