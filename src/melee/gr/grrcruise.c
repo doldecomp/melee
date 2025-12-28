@@ -64,7 +64,18 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
     return false;
 }
 
-/// #grRCruise_801FF6D4
+void grRCruise_801FF6D4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (*(int*)((u8*)gp + 0xD4) == 0) {
+        grRCruise_80201588(gobj);
+        grRCruise_8020071C(gobj);
+        grRCruise_80200C04(gobj);
+    }
+    lb_800115F4();
+    grRCruise_80201110(gobj);
+    Ground_801C2FE0(gobj);
+}
 
 void grRCruise_801FF738(Ground_GObj* arg) {}
 
