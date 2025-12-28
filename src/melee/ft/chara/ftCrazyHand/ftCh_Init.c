@@ -7,6 +7,7 @@
 
 #include "baselib/forward.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
@@ -24,6 +25,7 @@
 #include <dolphin/mtx.h>
 
 /* 156310 */ static void ftCh_Init_80156310(HSD_GObj* gobj);
+/* 157080 */ static void fn_80157080(Fighter_GObj* gobj);
 /* 15B174 */ void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj);
 
 extern f32 ftCh_Init_804DA070;
@@ -769,8 +771,12 @@ void ftCh_Entry_Phys(HSD_GObj* gobj)
 
 void ftCh_Entry_Coll(HSD_GObj* gobj) {}
 
-/// #fn_80157080
-
+void fn_80157080(Fighter_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, 0x158, 0,
+        ftCh_Init_804DA070, ftCh_Init_804DA074, ftCh_Init_804DA070, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 void ftCh_Damage_Anim(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
