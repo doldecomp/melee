@@ -1,3 +1,7 @@
+#include "lbbgflash.h"
+
+#include "lb/lb_00F9.h"
+
 #include <placeholder.h>
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
@@ -37,6 +41,14 @@
 
 f32 lbl_804D63D8;
 
+typedef struct {
+    char pad[0x2C];
+    void* x2C;
+} BgFlashGlobal;
+
+extern BgFlashGlobal* lbl_804D63E0;
+extern struct Fighter_804D653C_t* lbl_804D63DC;
+
 void lbBgFlash_80021A10(f32 arg8)
 {
     lbl_804D63D8 = arg8;
@@ -50,6 +62,10 @@ void fn_80021C18(void) {}
 
 /// #fn_80021C1C
 
-/// #lbBgFlash_80021C48
+void lbBgFlash_80021C48(u32 arg0, u32 arg1)
+{
+    ColorOverlay* overlay = (ColorOverlay*)((u8*)lbl_804D63E0->x2C + 4);
+    lb_800144C8(overlay, lbl_804D63DC, arg0, arg1);
+}
 
 /// #fn_80021C80
