@@ -5,14 +5,18 @@
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
 #include <baselib/debug.h>
+#include <baselib/dobj.h>
 #include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
+
+extern HSD_DObjInfo hsdDObj;
 
 /* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
+/* 022608 */ static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 /* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
                                      u32 arg2, u32* arg3, u32* arg4, u8* arg5,
                                      u8* arg6);
@@ -101,6 +105,14 @@ void lbRefract_80022560(void)
 
 void lbRefract_800225D4(void)
 {
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
+
+void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
     GXSetTevDirect(0);
     GXSetNumIndStages(0);
     HSD_StateInvalidate(-1);
