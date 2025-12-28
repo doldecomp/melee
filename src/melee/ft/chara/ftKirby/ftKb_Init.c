@@ -3806,8 +3806,21 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F1BAC
 
-/// #fn_800F1CA0
-
+bool fn_800F1CA0(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    u32 val = M2C_FIELD(fp, u32*, 0x2238);
+    switch (val) {
+    case 2:
+    case 7:
+    case 10:
+    case 11:
+    case 13:
+        return true;
+    default:
+        return false;
+    }
+}
 /// #ftKb_SpecialN_800F1CD8
 
 /// #ftKb_SpecialN_800F1D24
