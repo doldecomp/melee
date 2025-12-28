@@ -212,8 +212,16 @@ bool grCorneria_801DFC90(Ground_GObj* arg)
 
 void grCorneria_801DFEB4(Ground_GObj* arg) {}
 
-/// #grCorneria_801DFEB8
+void grCorneria_801DFEB8(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    u8* base = (u8*)gp;
 
+    ((xC6_flags*)(base + 0xC6))->b0 = 0;
+    grAnime_801C8138((HSD_GObj*)gobj, gp->map_id, 0);
+    base[0xC4] = 0;
+    gp->x11_flags.b012 = 1;
+}
 bool grCorneria_801DFF18(Ground_GObj* arg)
 {
     return false;
