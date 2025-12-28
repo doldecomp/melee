@@ -6056,7 +6056,17 @@ void it_80274DAC(Item_GObj* arg0)
     Item* temp_r4 = GET_ITEM(arg0);
     temp_r4->xB54.unk_x = 0.0F;
     temp_r4->xB54.unk_y = 0.0F;
-    it_80274D6C(arg0);
+    {
+        Item* item = GET_ITEM(arg0);
+        float right_x = item->x378_itemColl.ecb.right.x;
+        float right_y = item->x378_itemColl.ecb.right.y;
+        float left_x = item->x378_itemColl.ecb.left.x;
+        float top_y = item->x378_itemColl.ecb.top.y;
+
+        item->xB54.x8.y = right_x + item->pos.x;
+        item->xB54.x8.x = left_x + item->pos.x;
+        item->xB54.x8.z = right_y + item->pos.y + top_y;
+    }
 }
 
 void it_80274DFC(Item_GObj* item_gobj)
