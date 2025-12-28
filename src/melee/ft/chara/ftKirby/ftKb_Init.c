@@ -3767,8 +3767,12 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F10D4
 
-/// #ftKb_SpecialN_800F11AC
-
+void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftKb_SpecialN_800EF69C(gobj, 0xF, ft_80459B88.hats[14]);
+    ftCo_UnloadDynamicBones(fp);
+}
 /// #ftKb_SpecialN_800F11F0
 
 /// #ftKb_SpecialN_800F12C8
