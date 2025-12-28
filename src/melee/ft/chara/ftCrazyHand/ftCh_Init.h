@@ -217,4 +217,7 @@
 /* 3D485C */ extern char ftCh_Init_AnimDatFilename[];
 /* 3D4868 */ extern Fighter_CostumeStrings ftCh_Init_CostumeStrings[];
 
+/* 4DA070 */ extern f32 ftCh_Init_804DA070;
+/* 4DA074 */ extern f32 ftCh_Init_804DA074;
+
 #endif
