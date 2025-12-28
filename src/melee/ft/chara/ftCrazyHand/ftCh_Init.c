@@ -16,6 +16,7 @@
 #include "ftCrazyHand/forward.h"
 
 #include "ftMasterHand/types.h"
+#include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "pl/player.h"
 
@@ -706,7 +707,14 @@ void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftCrazyHand_DatAttrs);
 }
 
-/// #ftCh_Init_80155FCC
+void ftCh_Init_80155FCC(HSD_GObj* gobj)
+{
+    if (Stage_80225194() == 0xFB) {
+        ftCh_Init_80156310(gobj);
+    } else {
+        ftCh_GrabUnk1_8015B174(gobj);
+    }
+}
 
 void ftCh_Init_80156014(HSD_GObj* gobj) {}
 

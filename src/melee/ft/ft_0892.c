@@ -9,6 +9,7 @@
 #include "ft/chara/ftFox/ftFx_AppealS.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ftCLink/ftCl_Init.h"
 #include "ftCommon/ftCo_DownSpot.h"
@@ -73,8 +74,14 @@ bool ft_800898C0(HSD_GObj* gobj)
 
 /// #ft_80089B08
 
-/// #ft_8008A1B8
-
+void ft_8008A1B8(Fighter_GObj* gobj, int flags)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x221C_u16_y = flags;
+    if (!(flags & 0x4)) {
+        ftParts_8007592C(fp, 0, 0.0f);
+    }
+}
 /// #ft_8008A1FC
 
 static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
