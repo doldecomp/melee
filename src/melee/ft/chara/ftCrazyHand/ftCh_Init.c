@@ -22,6 +22,12 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
+/* 156310 */ static void ftCh_Init_80156310(HSD_GObj* gobj);
+/* 15B174 */ void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj);
+
+extern f32 ftCh_Init_804DA070;
+extern f32 ftCh_Init_804DA074;
+
 /* static */ void ftCh_Init_801566B4(void);
 /* static */ void ftCh_Init_80156A5C(void);
 /* static */ void ftCh_Init_80156688(void);

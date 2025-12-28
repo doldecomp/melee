@@ -15,6 +15,7 @@
 
 #include "ftPopo/forward.h"
 
+#include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
 #include "ftPopo/types.h"
 #include "pl/player.h"
@@ -793,8 +794,26 @@ void ftPp_SpecialS_80121164(Fighter_GObj* gobj)
     }
 }
 
-/// #ftPp_SpecialHi_Enter
+void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
 
+    fp->gr_vel /= *(float*)((u8*)da + 0x84);
+
+    ftPp_SpecialHi_801218AC(gobj);
+
+    fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp = GET_FIGHTER(gobj);
+    fp->mv.pp.unk_80123954.x0 = 1;
+    fp->fv.pp.x223C = 0;
+    fp->fv.pp.x2240.z = 0.0f;
+    fp->fv.pp.x2240.y = 0.0f;
+    fp->fv.pp.x2240.x = 0.0f;
+}
 /// #ftPp_SpecialAirHi_Enter
 
 /// #ftPp_SpecialHiStart_0_Anim
