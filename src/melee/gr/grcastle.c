@@ -5,8 +5,11 @@
 #include "baselib/psstructs.h"
 #include "placeholder.h"
 
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "gr/granime.h"
 #include "gr/grlib.h"
+#include "mp/mplib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"

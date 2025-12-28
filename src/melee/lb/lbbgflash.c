@@ -4,7 +4,6 @@
 
 #include <placeholder.h>
 
-/* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static UNK_RET fn_80021C18(UNK_PARAMS);
 
 /// #fn_8001FC08

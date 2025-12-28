@@ -4,7 +4,9 @@
 
 #include <platform.h>
 
+#include "gr/grlib.h"
 #include "gr/inlines.h"
+#include "lb/lb_00F9.h"
 
 void grRCruise_801FF164(bool arg) {}
 

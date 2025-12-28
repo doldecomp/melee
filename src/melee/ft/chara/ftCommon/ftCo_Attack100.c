@@ -18,6 +18,7 @@
 
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "ftKirby/ftKb_Init.h"
 
 #include <math.h>
 #include <melee/cm/camera.h>

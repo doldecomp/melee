@@ -9,6 +9,7 @@
 #include "ft/chara/ftFox/ftFx_AppealS.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ftCLink/ftCl_Init.h"
 #include "ftCommon/ftCo_DownSpot.h"

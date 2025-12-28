@@ -7,8 +7,10 @@
 
 #include "baselib/forward.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
+#include "gr/stage.h"
 #include "ft/ftcamera.h"
 #include "ft/inlines.h"
 #include "ft/types.h"

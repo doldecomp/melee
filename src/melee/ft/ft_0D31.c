@@ -7,7 +7,9 @@
 
 #include "ft/forward.h"
 
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
