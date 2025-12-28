@@ -468,8 +468,8 @@ config.libs = [
             Object(Matching, "melee/lb/lbgx.c"),
             Object(Matching, "melee/lb/lbanim.c"),
             Object(NonMatching, "melee/lb/lbmthp.c"),
-            Object(Matching, "melee/lb/lbbgflash.c"),
-            Object(Matching, "melee/lb/lbrefract.c"),
+            Object(NonMatching, "melee/lb/lbbgflash.c"),
+            Object(NonMatching, "melee/lb/lbrefract.c"),
             Object(NonMatching, "melee/lb/lbaudio_ax.c"),
         ],
     ),
@@ -514,7 +514,7 @@ config.libs = [
         [
             # Main
             Object(Matching, "melee/ft/fighter.c"),
-            Object(Matching, "melee/ft/ftanim.c"),
+            Object(NonMatching, "melee/ft/ftanim.c"),
             Object(NonMatching, "melee/ft/ftaction.c"),
             Object(NonMatching, "melee/ft/ftparts.c"),
             Object(Matching, "melee/ft/ftcamera.c"),
@@ -534,7 +534,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftlib.c"),
             Object(Matching, "melee/ft/ft_0877.c"),
             Object(Matching, "melee/ft/ft_0881.c"),
-            Object(Matching, "melee/ft/ft_0892.c"),
+            Object(NonMatching, "melee/ft/ft_0892.c"),
             # Common
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Wait.c"),
             Object(NonMatching, "melee/ft/ftwaitanim.c"),
@@ -678,12 +678,12 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0D27.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScrew.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageScrew.c"),
-            Object(Matching, "melee/ft/ft_0D31.c"),
+            Object(NonMatching, "melee/ft/ft_0D31.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Landing.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Squat.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatRv.c"),
-            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
+            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
             # Common throw-related
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCut.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Throw.c"),
