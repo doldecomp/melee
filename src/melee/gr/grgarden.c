@@ -71,7 +71,14 @@ void grGarden_80202F3C(Ground_GObj* arg) {}
 
 void grGarden_80202F40(Ground_GObj* arg) {}
 
-/// #grGarden_80202F44
+void grGarden_80202F44(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+    gp->x11_flags.b012 = 1;
+}
 
 bool grGarden_80202F94(Ground_GObj* arg)
 {
