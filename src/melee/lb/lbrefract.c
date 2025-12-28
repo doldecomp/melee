@@ -88,6 +88,17 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
     }
 }
 
+void lbRefract_80022560(void)
+{
+    if (lbl_804336D0[0] != 0) {
+        GXSetTexCopySrc(0, 0, 0x280, 0x1E0);
+        GXSetTexCopyDst(0x140, 0xF0, 4, 1);
+        GXCopyTex((void*)lbl_804336D0[1], 0);
+        GXPixModeSync();
+        GXInvalidateTexAll();
+    }
+}
+
 void lbRefract_800225D4(void)
 {
     GXSetTevDirect(0);
