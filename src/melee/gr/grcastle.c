@@ -115,7 +115,21 @@ bool grCastle_801CDC3C(Ground_GObj* gobj)
 
 void grCastle_801CDF50(Ground_GObj* gobj) {}
 
-/// #grCastle_801CDF54
+bool grCastle_801CDF54(Vec3* pos)
+{
+    int i;
+    if (stage_info.internal_stage_id == 2) {
+        for (i = 0; i < 9; i++) {
+            HSD_GObj* ground = Ground_801C2BA4(i + 8);
+            if (ground != NULL) {
+                HSD_JObj* jobj = Ground_801C3FA4(ground, 0);
+                lb_8000B1CC(jobj, NULL, pos);
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 /// #grCastle_801CDFD8
 
