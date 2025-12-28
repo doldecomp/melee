@@ -379,6 +379,7 @@ void ftCo_GuardOn_Anim(Fighter_GObj* gobj)
 static inline bool inlineC0(Fighter_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = gobj->user_data;
+    ftCo_80092BCC(gobj);
     if ((fp->mv.co.guard.xC && !fp->mv.co.guard.x10) ||
         (!fp->x221B_b0 && !fp->reflecting))
     {
