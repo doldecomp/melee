@@ -470,8 +470,15 @@ void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 
 /// #fn_800D54A4
 
-/// #fn_800D55B4
-
+void fn_800D55B4(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
+    Fighter* other_fp = other_gobj->user_data;
+    if (other_fp->cur_pos.y > fp->cur_pos.y) {
+        fp->cur_pos.y = other_fp->cur_pos.y;
+    }
+}
 /// #ftCo_800D5600
 
 /// #ftCo_RebirthWait_Anim
