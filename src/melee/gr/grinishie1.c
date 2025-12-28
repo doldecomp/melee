@@ -823,8 +823,23 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3, mpLib_Groun
 
 /// #fn_801FC9AC
 
-/// #grInishie1_801FCAAC
+s32 grInishie1_801FCAAC(s32 arg0)
+{
+    s32 joint;
+    s32 result;
 
+    if (stage_info.internal_stage_id == 0x18 && arg0 != -1) {
+        joint = mpJointFromLine(arg0);
+        result = 1;
+        if ((u32)(joint - 0x14) > 1) {
+            result = 0;
+        }
+        if (result != 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
 void grInishie1_801FCB10(HSD_GObj* gobj)
 {
     int time_remaining;

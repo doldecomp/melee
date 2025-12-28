@@ -790,8 +790,26 @@ void ftPp_SpecialS_80121164(Fighter_GObj* gobj)
     }
 }
 
-/// #ftPp_SpecialHi_Enter
+void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
 
+    fp->gr_vel /= *(float*)((u8*)da + 0x84);
+
+    ftPp_SpecialHi_801218AC(gobj);
+
+    fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp = GET_FIGHTER(gobj);
+    fp->mv.pp.unk_80123954.x0 = 1;
+    fp->fv.pp.x223C = 0;
+    fp->fv.pp.x2240.z = 0.0f;
+    fp->fv.pp.x2240.y = 0.0f;
+    fp->fv.pp.x2240.x = 0.0f;
+}
 /// #ftPp_SpecialAirHi_Enter
 
 /// #ftPp_SpecialHiStart_0_Anim
@@ -844,8 +862,10 @@ void ftPp_SpecialAirHiThrow_0_IASA(Fighter_GObj* gobj) {}
 
 /// #ftPp_SpecialHi_80121D40
 
-/// #ftPp_SpecialHi_80121DA0
-
+void ftPp_SpecialHi_80121DA0(Fighter_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, 0x15C, 0, 0, 1.0f, 0.0f, NULL);
+}
 /// #ftPp_SpecialHi_80121DD8
 
 /// #ftPp_SpecialHiStart_1_Anim
