@@ -27,7 +27,51 @@
 
 /// #ft_800895E0
 
-/// #ft_80089768
+// Local struct with bitfields - reversed order for MWCC big-endian
+typedef struct {
+    s32 x0;
+    s32 x4;
+    float x8;
+    s32 xC;
+    u8 x10_b7 : 1;  // bit 7 (MSB)
+    u8 x10_b6 : 1;
+    u8 x10_b5 : 1;
+    u8 x10_b4 : 1;
+    u8 x10_b3 : 1;
+    u8 x10_b2 : 1;
+    u8 x10_b1 : 1;
+    u8 x10_b0 : 1;  // bit 0 (LSB)
+    u8 x11_b7 : 1;
+    u8 x11_b6 : 1;
+    u8 x11_b5 : 1;
+    u8 x11_b4 : 1;
+    u8 x11_b3 : 1;
+    u8 x11_b2 : 1;
+    u8 x11_b1 : 1;
+    u8 x11_b0 : 1;
+} UnkStruct89768;
+
+void ft_80089768(Vec2* ptr)
+{
+    UnkStruct89768* s = (UnkStruct89768*)ptr;
+    s->x0 = 0;
+    s->x4 = 0;
+    s->x8 = 1.0f;
+    s->xC = 6;
+    s->x10_b7 = 0;
+    s->x11_b4 = 0;
+    s->x10_b6 = 0;
+    s->x10_b5 = 0;
+    s->x10_b4 = 0;
+    s->x10_b3 = 0;
+    s->x10_b2 = 0;
+    s->x10_b1 = 0;
+    s->x10_b0 = 0;
+    s->x11_b7 = 0;
+    s->x11_b6 = 0;
+    s->x11_b5 = 0;
+    s->x11_b3 = 0;
+}
 
 /// #ft_80089824
 
