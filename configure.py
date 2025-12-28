@@ -683,7 +683,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Squat.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatRv.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
             # Common throw-related
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCut.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Throw.c"),
