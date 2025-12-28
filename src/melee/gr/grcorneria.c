@@ -201,8 +201,17 @@ void grCorneria_801DFC24(Ground_GObj* arg) {}
 
 void grCorneria_801DFC28(Ground_GObj* arg) {}
 
-/// #grCorneria_801DFC2C
+void grCorneria_801DFC2C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    u8* base = (u8*)gp;
 
+    base[0xC6] = 0;
+    ((xE0_flags*)(base + 0xE0))->b0 = 0;
+    memzero(base + 0xC8, 0x18);
+    base[0xC4] = 0;
+    gp->x11_flags.b012 = 1;
+}
 bool grCorneria_801DFC90(Ground_GObj* arg)
 {
     return false;
