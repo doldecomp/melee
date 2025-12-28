@@ -90,7 +90,7 @@ typedef struct {
 extern BgFlashGlobal* lbl_804D63E0;
 extern struct Fighter_804D653C_t* lbl_804D63DC;
 
-void lbBgFlash_80021A10(f32 arg8)
+static void lbBgFlash_80021A10(f32 arg8)
 {
     lbl_804D63D8 = arg8;
 }
@@ -99,7 +99,7 @@ void lbBgFlash_80021A10(f32 arg8)
 
 /// #fn_80021B04
 
-void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
+static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 
 /// #fn_80021C1C
 
