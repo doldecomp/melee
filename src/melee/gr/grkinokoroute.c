@@ -6,11 +6,22 @@
 
 #include <platform.h>
 
+extern float grNKr_804DB830;
+
 void grKinokoRoute_8020741C(bool arg) {}
 
 /// #grKinokoRoute_80207420
 
-/// #grKinokoRoute_80207490
+void grKinokoRoute_80207490(void)
+{
+    Vec3 pos;
+    HSD_GObj* gobj = Ground_801C57A4();
+    if (gobj != NULL) {
+        ftLib_80086644(gobj, &pos);
+        Ground_801C38BC(pos.x, grNKr_804DB830 + pos.y);
+        Camera_8002F3AC();
+    }
+}
 
 /// #grKinokoRoute_802074D8
 
@@ -49,7 +60,12 @@ void grKinokoRoute_80207AD4(Ground_GObj* arg) {}
 
 void grKinokoRoute_80207AD8(Ground_GObj* arg) {}
 
-/// #grKinokoRoute_80207ADC
+void grKinokoRoute_80207ADC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grKinokoRoute_80207B20(Ground_GObj* arg)
 {
