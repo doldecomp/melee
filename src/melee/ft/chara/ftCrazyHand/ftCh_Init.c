@@ -1298,8 +1298,14 @@ void ftCh_BackCrush_Coll(HSD_GObj* gobj) {}
 
 /// #fn_80159908
 
-/// #ftCh_BackDisappear_Anim
-
+void ftCh_BackDisappear_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->self_vel.x = 0.0f;
+        ftCh_GrabUnk1_8015BC88(gobj);
+    }
+}
 void ftCh_BackDisappear_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
