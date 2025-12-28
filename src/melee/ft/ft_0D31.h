@@ -44,6 +44,7 @@
 /* 0D575C */ void ftCo_RebirthWait_IASA(Fighter_GObj* gobj);
 /* 0D58F4 */ void ftCo_RebirthWait_Phys(Fighter_GObj* gobj);
 /* 0D5A08 */ void ftCo_RebirthWait_Coll(Fighter_GObj* gobj);
+/* 0D5A30 */ void fn_800D5A30(Fighter_GObj* gobj);
 /* 0D5A6C */ void ftCo_Rebirth_Cam(Fighter_GObj* gobj);
 
 #endif
