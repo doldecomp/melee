@@ -31,6 +31,8 @@
 /* 4D6990 */ static HSD_GObj* grZe_804D6990;
 /* 4D6998 */ static s16 grZe_804D6998;
 
+extern f32 grZe_804DB0B0;
+
 void grZebes_801D84A0(bool arg) {}
 
 void grZebes_801D84A4(void)
@@ -194,4 +196,9 @@ bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj)
     return true;
 }
 
-/// #grZebes_801DCCC8
+f32 grZebes_801DCCC8(void)
+{
+    f32 slope, intercept;
+    Ground_801C4368(&slope, &intercept);
+    return grZe_804DB0B0 + slope;
+}
