@@ -31,8 +31,12 @@
 #include "lb/lbcollision.h"
 #include "lb/types.h"
 #include "pl/plbonuslib.h"
+#include "pl/plstale.h"
+
+#include "it/itcoll.h"
 
 #include <common_structs.h>
+#include <Runtime/runtime.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
