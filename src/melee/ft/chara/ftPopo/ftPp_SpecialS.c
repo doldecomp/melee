@@ -842,9 +842,17 @@ void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C508AU, fp->cur_anim_frame, 0, 1, NULL);
 }
 
-/// #ftPp_SpecialHi_801218AC
+void ftPp_SpecialHi_801218AC(Fighter_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, 0x15B, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
-/// #ftPp_SpecialHi_801218F8
+void ftPp_SpecialHi_801218F8(Fighter_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, 0x160, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
 /// #ftPp_SpecialHiThrow_0_Anim
 
