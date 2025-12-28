@@ -5,7 +5,11 @@
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
 #include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
+
+extern HSD_DObjInfo hsdDObj;
 
 /* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
@@ -87,6 +91,20 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
     }
 }
 
+void lbRefract_800225D4(void)
+{
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
+
+void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
 void lbRefract_80022BB8(void)
 {
     lbl_804336D0[0] += 1;
