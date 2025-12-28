@@ -112,8 +112,34 @@ bool ft_800898C0(HSD_GObj* gobj)
     return false;
 }
 
-/// #ft_80089914
+s32 ft_80089914(HSD_GObj* gobj, int msid)
+{
+    Fighter* fp = gobj->user_data;
 
+    if (msid < ftCo_MS_AttackS3Hi || msid > ftCo_MS_AttackS4LwS) {
+        return false;
+    }
+
+    if (fp->kind == FTKIND_FOX) {
+        if ((u32)(msid - ftCo_MS_AttackS3LwS) <= 2) {
+            return false;
+        }
+    }
+
+    if (fp->kind == FTKIND_FALCO) {
+        if ((u32)(msid - ftCo_MS_AttackS3LwS) <= 2) {
+            return false;
+        }
+    }
+
+    if (fp->kind == FTKIND_MEWTWO) {
+        if (msid == ftCo_MS_AttackS3S) {
+            return false;
+        }
+    }
+
+    return true;
+}
 /// #fn_8008998C
 
 /// #ft_80089B08
