@@ -1354,8 +1354,14 @@ void ftCh_Grab_Coll(HSD_GObj* gobj) {}
 
 /// #ftCh_Init_8015A030
 
-/// #ftCh_Cancel_Anim
-
+void ftCh_Cancel_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->self_vel.x = 0.0f;
+        ftCh_Init_8015A184(gobj);
+    }
+}
 void ftCh_Cancel_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
