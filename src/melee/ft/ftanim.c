@@ -1079,8 +1079,26 @@ void ftAnim_ApplyPartAnim(Fighter_GObj* gobj, s32 arg1, s32 arg2, f32 arg3)
 
 /// #ftAnim_80070E74
 
-/// #ftAnim_80070F28
+void ftAnim_80070F28(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    int i;
+    int j;
 
+    for (i = 0; i < ARRAY_SIZE(fp->x8B0); i++) {
+        struct Fighter_x8B0_t* slot = &fp->x8B0[i];
+        if ((s8)slot->x11 != -1) {
+            struct ftData_x1C* data = fp->ft_data->x1C[i];
+            u8* parts_list = data->x4;
+
+            for (j = 0; j < data->x2; j++) {
+                u8 part_idx = parts_list[j];
+                fp->parts[part_idx].flags_b5 = false;
+            }
+            slot->x11 = -1;
+        }
+    }
+}
 void ftAnim_80070FB4(Fighter_GObj* arg0, s32 arg1, s32 arg2)
 {
     Fighter* fp = GET_FIGHTER(arg0);
