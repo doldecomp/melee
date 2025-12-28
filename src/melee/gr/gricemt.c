@@ -683,7 +683,17 @@ void grIceMt_801F87C8(Ground_GObj* param1)
     return;
 }
 
-/// #grIceMt_801F87FC
+void grIceMt_801F87FC(Ground_GObj* gobj)
+{
+    int i;
+    Ground* gp = GET_GROUND(gobj);
+    for (i = 0; i < 5; i++) {
+        HSD_GObj* temp = *(HSD_GObj**)((u8*)gp + 0xF8 + i * 4);
+        if (temp != NULL) {
+            grMaterial_801C8CDC(temp);
+        }
+    }
+}
 
 /// #grIceMt_801F8850
 void grIceMt_801F8850(Ground_GObj* arg0)
