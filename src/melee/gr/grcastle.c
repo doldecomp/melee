@@ -56,7 +56,12 @@ bool grCastle_801CD4C8(void)
 
 /// #grCastle_801CD4D0
 
-/// #grCastle_801CD5BC
+void grCastle_801CD5BC(Ground_GObj* gobj)
+{
+    unkCastle* castle = gobj->user_data;
+    grAnime_801C8138(gobj, castle->x14, 0);
+    castle->x11_b5_b7 = 2;
+}
 
 bool grCastle_801CD600(Ground_GObj* gobj)
 {
@@ -67,7 +72,12 @@ void grCastle_801CD608(Ground_GObj* gobj) {}
 
 void grCastle_801CD60C(Ground_GObj* gobj) {}
 
-/// #fn_801CD610
+void fn_801CD610(Ground_GObj* gobj)
+{
+    ftCo_800C06E8(gobj, 6, fn_801D09B8);
+    grCastle_801CF7B0(gobj);
+    grCastle_801CDFD8(gobj);
+}
 
 /// #grCastle_801CD658
 

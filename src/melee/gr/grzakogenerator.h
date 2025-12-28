@@ -11,7 +11,7 @@
 /* 1CA8B4 */ long grZakoGenerator_801CA8B4(int);
 /* 1CAC14 */ void grZakoGenerator_801CAC14(void);
 /* 1CACB8 */ void grZakoGenerator_801CACB8(Ground_GObj* gobj);
-/* 1CADBC */ UNK_RET fn_801CADBC(UNK_PARAMS);
+/* 1CADBC */ s32 fn_801CADBC(void);
 /* 1CADE0 */ s32 grZakoGenerator_801CADE0(void);
 /* 1CAE04 */ void grZakoGenerator_801CAE04(UNK_T);
 /* 1CAEB0 */ void grZakoGenerator_801CAEB0(int, int);

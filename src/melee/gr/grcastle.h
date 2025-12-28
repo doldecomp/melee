@@ -8,9 +8,14 @@
 #include <baselib/forward.h>
 
 struct unkCastle  {
-    /* 0x000 */ u8 _pad[0x10C];
+    /* 0x000 */ u8 _pad0[0x11];
+    /* 0x011:5 */ u8 x11_b5_b7 : 3;
+    /* 0x011:0 */ u8 x11_b0_b4 : 5;
+    /* 0x012 */ u8 _pad1[2];
+    /* 0x014 */ s32 x14;
+    /* 0x018 */ u8 _pad2[0x10C - 0x18];
     /* 0x10C */ HSD_GObj* x10C[5];
-    /* 0x120 */ u8 _pad2[0x134-0x120];
+    /* 0x120 */ u8 _pad3[0x134-0x120];
     /* 0x134 */ u8 x134[5];
 };
 
@@ -24,7 +29,7 @@ struct unkCastle  {
 /* 1CD600 */ bool grCastle_801CD600(Ground_GObj*);
 /* 1CD608 */ void grCastle_801CD608(Ground_GObj*);
 /* 1CD60C */ void grCastle_801CD60C(Ground_GObj*);
-/* 1CD610 */ UNK_RET fn_801CD610(UNK_PARAMS);
+/* 1CD610 */ void fn_801CD610(Ground_GObj*);
 /* 1CD658 */ void grCastle_801CD658(Ground_GObj*);
 /* 1CD8A0 */ bool grCastle_801CD8A0(Ground_GObj*);
 /* 1CD8A8 */ void grCastle_801CD8A8(Ground_GObj*);
@@ -35,7 +40,7 @@ struct unkCastle  {
 /* 1CDC44 */ void grCastle_801CDC44(Ground_GObj*);
 /* 1CDF50 */ void grCastle_801CDF50(Ground_GObj*);
 /* 1CDF54 */ UNK_RET grCastle_801CDF54(UNK_PARAMS);
-/* 1CDFD8 */ UNK_RET grCastle_801CDFD8(UNK_PARAMS);
+/* 1CDFD8 */ void grCastle_801CDFD8(Ground_GObj*);
 /* 1CE054 */ UNK_RET grCastle_801CE054(UNK_PARAMS);
 /* 1CE19C */ UNK_RET grCastle_801CE19C(UNK_PARAMS);
 /* 1CE260 */ void grCastle_801CE260(Ground_GObj*);
@@ -62,7 +67,7 @@ struct unkCastle  {
 /* 1CF308 */ void grCastle_801CF308(Ground_GObj*);
 /* 1CF74C */ void grCastle_801CF74C(Ground_GObj*);
 /* 1CF750 */ UNK_RET fn_801CF750(UNK_PARAMS);
-/* 1CF7B0 */ UNK_RET grCastle_801CF7B0(UNK_PARAMS);
+/* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
 /* 1CFAFC */ UNK_RET fn_801CFAFC(UNK_PARAMS);
 /* 1CFB68 */ UNK_RET fn_801CFB68(UNK_PARAMS);

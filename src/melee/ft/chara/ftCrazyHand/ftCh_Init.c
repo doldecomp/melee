@@ -22,6 +22,8 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
+/* 156310 */ static void ftCh_Init_80156310(HSD_GObj* gobj);
+/* 15B174 */ void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj);
 /* static */ void ftCh_Init_801566B4(void);
 /* static */ void ftCh_Init_80156A5C(void);
 /* static */ void ftCh_Init_80156688(void);
@@ -700,7 +702,14 @@ void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftCrazyHand_DatAttrs);
 }
 
-/// #ftCh_Init_80155FCC
+void ftCh_Init_80155FCC(HSD_GObj* gobj)
+{
+    if (Stage_80225194() == 0xFB) {
+        ftCh_Init_80156310(gobj);
+    } else {
+        ftCh_GrabUnk1_8015B174(gobj);
+    }
+}
 
 void ftCh_Init_80156014(HSD_GObj* gobj) {}
 

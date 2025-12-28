@@ -81,7 +81,12 @@ bool grRCruise_801FF8DC(Ground_GObj* arg)
     return false;
 }
 
-/// #grRCruise_801FF8E4
+void grRCruise_801FF8E4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grLib_801C9B8C(&gp->gv);
+    Ground_801C2FE0(gobj);
+}
 
 void grRCruise_801FF920(Ground_GObj* arg) {}
 
