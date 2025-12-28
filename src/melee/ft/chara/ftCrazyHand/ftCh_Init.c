@@ -795,7 +795,15 @@ void ftCh_Damage2_IASA(HSD_GObj* gobj)
     }
 }
 
-/// #ftCh_Damage2_Phys
+void ftCh_Damage2_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCrazyHand_DatAttrs* attrs = fp->ft_data->ext_attr;
+    ft_80085134(gobj);
+    ftBossLib_8015BE40(gobj, (Vec3*)((u8*)fp + 0x234C),
+                       (float*)((u8*)fp + 0x2358), attrs->x14,
+                       *(float*)&attrs->x10);
+}
 
 void ftCh_Damage2_Coll(HSD_GObj* gobj) {}
 

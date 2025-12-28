@@ -792,18 +792,22 @@ void ftPp_SpecialS_80121164(Fighter_GObj* gobj)
 
 void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftIceClimberAttributes* da = fp->dat_attrs;
+    Fighter* fp;
+    ftIceClimberAttributes_local* da;
+    u8 _[16];  // PAD_STACK
 
-    fp->gr_vel /= *(float*)((u8*)da + 0x84);
+    fp = gobj->user_data;
+    da = fp->dat_attrs;
 
+    fp->gr_vel = fp->gr_vel / da->x84;
     ftPp_SpecialHi_801218AC(gobj);
 
-    fp = GET_FIGHTER(gobj);
+    fp = gobj->user_data;
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp = GET_FIGHTER(gobj);
+
+    fp = gobj->user_data;
     fp->mv.pp.unk_80123954.x0 = 1;
     fp->fv.pp.x223C = 0;
     fp->fv.pp.x2240.z = 0.0f;
