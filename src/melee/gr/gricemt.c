@@ -628,8 +628,12 @@ bool grIceMt_801F85BC(Ground_GObj* param1)
     return false;
 }
 
-/// #grIceMt_801F85C4
-
+void grIceMt_801F85C4(Ground_GObj* gobj)
+{
+    grIceMt_801F929C((HSD_GObj*)((u8*)gobj->user_data + 0x108));
+    grIceMt_801F98A8(gobj);
+    Ground_801C2FE0(gobj);
+}
 /// #grIceMt_801F8608
 void grIceMt_801F8608(Ground_GObj* arg0)
 {
