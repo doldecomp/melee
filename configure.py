@@ -678,7 +678,7 @@ config.libs = [
             Object(Matching, "melee/ft/ft_0D27.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_ItemScrew.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_DamageScrew.c"),
-            Object(NonMatching, "melee/ft/ft_0D31.c"),
+            Object(Matching, "melee/ft/ft_0D31.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Landing.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Squat.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatWait.c"),
