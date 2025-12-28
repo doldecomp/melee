@@ -1279,8 +1279,13 @@ void ftCh_BackAirplane3_Coll(HSD_GObj* gobj) {}
 
 /// #ftCh_Init_801597F0
 
-/// #ftCh_BackCrush_Anim
-
+void ftCh_BackCrush_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        M2C_FIELD(fp, void (**)(HSD_GObj*), 0x2344)(gobj);
+    }
+}
 void ftCh_BackCrush_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
