@@ -12,8 +12,8 @@
 /* 0205F0 */ void lbBgFlash_800205F0(s32);
 /* 02063C */ void lbBgFlash_8002063C(int);
 /* 020688 */ void lbBgFlash_80020688(int);
-/* 0206D4 */ UNK_RET lbBgFlash_800206D4(UNK_PARAMS);
-/* 02087C */ UNK_RET fn_8002087C(UNK_PARAMS);
+/* 0206D4 */ void lbBgFlash_800206D4(void*, s32*, int);
+/* 02087C */ void fn_8002087C(int* arg0);
 /* 0208B0 */ UNK_RET fn_800208B0(UNK_PARAMS);
 /* 0208EC */ UNK_RET lbBgFlash_800208EC(UNK_PARAMS);
 /* 0209F4 */ void lbBgFlash_800209F4(void);
@@ -22,7 +22,7 @@
 /* 02113C */ UNK_RET fn_8002113C(UNK_PARAMS);
 /* 021410 */ UNK_RET lbBgFlash_80021410(UNK_PARAMS);
 /* 0219E4 */ UNK_RET fn_800219E4(UNK_PARAMS);
-/* 021A10 */ UNK_RET lbBgFlash_80021A10(UNK_PARAMS);
+/* 021A10 */ void lbBgFlash_80021A10(f32);
 /* 021A18 */ void lbBgFlash_80021A18(int);
 /* 021B04 */ UNK_RET fn_80021B04(UNK_PARAMS);
 /* 021C1C */ UNK_RET fn_80021C1C(UNK_PARAMS);

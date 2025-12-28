@@ -1,3 +1,5 @@
+#include "lbbgflash.h"
+
 #include <placeholder.h>
 #include "lb/forward.h"
 #include "lb/lb_00F9.h"
@@ -22,11 +24,6 @@ extern BgFlashData lbl_80433658;
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
-/* 0205F0 */ void lbBgFlash_800205F0(s32);
-/* 02063C */ void lbBgFlash_8002063C(int);
-/* 0206D4 */ void lbBgFlash_800206D4(void*, s32*, int);
-/* 021C48 */ void lbBgFlash_80021C48(u32, u32);
-/* 021C80 */ void fn_80021C80(HSD_GObj* gobj);
 /* 02087C */ static void fn_8002087C(int* arg0);
 
 extern s32 lbl_804D3840;
