@@ -470,7 +470,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lbmthp.c"),
             Object(NonMatching, "melee/lb/lbbgflash.c"),
             Object(NonMatching, "melee/lb/lbrefract.c"),
-            Object(NonMatching, "melee/lb/lbaudio_ax.c"),
+            Object(Matching, "melee/lb/lbaudio_ax.c"),
         ],
     ),
     MeleeLib(
