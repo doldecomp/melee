@@ -895,7 +895,7 @@ config.libs = [
             ),
             Object(Matching, "melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c"),
             # Crazy Hand
-            Object(NonMatching, "melee/ft/chara/ftCrazyHand/ftCh_Init.c"),
+            Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_Init.c"),
             # Main
             Object(Matching, "melee/ft/ftbosslib.c"),
         ],

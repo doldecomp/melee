@@ -755,8 +755,12 @@ void ftCh_Entry_Phys(HSD_GObj* gobj)
 
 void ftCh_Entry_Coll(HSD_GObj* gobj) {}
 
-/// #fn_80157080
-
+void fn_80157080(Fighter_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, 0x158, 0,
+        ftCh_Init_804DA070, ftCh_Init_804DA074, ftCh_Init_804DA070, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 void ftCh_Damage_Anim(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
