@@ -802,8 +802,13 @@ int fn_8017F294(void)
 
 /// #fn_80180630
 
-/// #fn_80180AC0
-
+int fn_80180AC0(void)
+{
+    if (((u8*)&lbl_80472D28)[0x116] == 1) {
+        return 1;
+    }
+    return 0;
+}
 s32 gm_80180AE4(void)
 {
     return lbl_80472EC8[0] * 0xA;
