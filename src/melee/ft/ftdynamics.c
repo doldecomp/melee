@@ -449,26 +449,24 @@ void ftCo_8009DC54(Fighter* fp)
 void ftCo_8009DB50(Fighter* fp)
 {
     KirbyHatStruct* hat = ft_80459B88.hats[FTKIND_PURIN];
-    PAD_STACK(2 * 4);
+    ssize_t i = 0;
+    ssize_t j = 0;
+
     fp->dynamics_num = hat->hat_dynamics[4]->dynamicsNum;
     if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
         OSReport("fighter dynamics num over!\n");
         __assert("ftdynamics.c", 455, "fp->dynamics_num < Ft_Dynamics_NumMax");
     }
-    {
-        ssize_t i;
-        for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* desc =
-                &hat->hat_dynamics[4]->ftDynamicBones->array[i];
-            fp->parts[desc->bone_id].flags_b0 = true;
-            lb_8000FD48(fp->parts[desc->bone_id].joint,
-                        &fp->dynamic_bone_sets[i].dyn_desc,
-                        desc->dyn_desc.count);
-            fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
-            lb_80011710(
-                &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,
-                &fp->dynamic_bone_sets[i].dyn_desc);
-        }
+    for (i = 0; i < fp->dynamics_num; i++) {
+        int bone_id = hat->hat_dynamics[4]->ftDynamicBones->array[i].bone_id;
+        fp->parts[bone_id].flags_b0 = true;
+        lb_8000FD48(fp->parts[bone_id].joint,
+                    &fp->dynamic_bone_sets[i].dyn_desc,
+                    hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc.count);
+        fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
+        lb_80011710(
+            &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,
+            &fp->dynamic_bone_sets[i].dyn_desc);
     }
 }
 
