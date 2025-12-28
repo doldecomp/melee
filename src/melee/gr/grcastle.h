@@ -34,12 +34,12 @@ struct unkCastle  {
 /* 1CD8A0 */ bool grCastle_801CD8A0(Ground_GObj*);
 /* 1CD8A8 */ void grCastle_801CD8A8(Ground_GObj*);
 /* 1CD960 */ void grCastle_801CD960(Ground_GObj*);
-/* 1CD9B4 */ UNK_RET fn_801CD9B4(UNK_PARAMS);
+/* 1CD9B4 */ void fn_801CD9B4(Ground_GObj*);
 /* 1CDA0C */ void grCastle_801CDA0C(Ground_GObj*);
 /* 1CDC3C */ bool grCastle_801CDC3C(Ground_GObj*);
 /* 1CDC44 */ void grCastle_801CDC44(Ground_GObj*);
 /* 1CDF50 */ void grCastle_801CDF50(Ground_GObj*);
-/* 1CDF54 */ UNK_RET grCastle_801CDF54(UNK_PARAMS);
+/* 1CDF54 */ bool grCastle_801CDF54(Vec3*);
 /* 1CDFD8 */ void grCastle_801CDFD8(Ground_GObj*);
 /* 1CE054 */ UNK_RET grCastle_801CE054(UNK_PARAMS);
 /* 1CE19C */ UNK_RET grCastle_801CE19C(UNK_PARAMS);

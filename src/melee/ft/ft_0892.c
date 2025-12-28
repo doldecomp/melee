@@ -17,6 +17,8 @@
 #include "ftLink/ftLk_AttackAir.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "it/items/itpeachparasol.h"
+#include "pl/plattack.h"
+#include "pl/pltrick.h"
 
 #include <baselib/gobj.h>
 
@@ -28,7 +30,15 @@
 
 /// #ft_80089768
 
-/// #ft_80089824
+void ft_80089824(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    volatile s32 temp = fp->x2070.x2070_int;
+    fp->x2070.x2070_int = temp;
+    ft_80089460(fp);
+    fp->x2074.x2088 = plAttack_80037B08();
+    pl_80037C60(gobj, 0);
+}
 
 union Struct2070* ft_80089884(Fighter_GObj* gobj)
 {

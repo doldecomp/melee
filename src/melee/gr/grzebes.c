@@ -29,6 +29,8 @@
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
 /* 4D6998 */ static s16 grZe_804D6998;
 
+extern f32 grZe_804DB0B0;
+
 void grZebes_801D84A0(bool arg) {}
 
 /// #grZebes_801D84A4
