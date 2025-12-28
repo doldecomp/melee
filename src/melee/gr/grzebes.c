@@ -180,4 +180,9 @@ bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj)
     return true;
 }
 
-/// #grZebes_801DCCC8
+f32 grZebes_801DCCC8(void)
+{
+    f32 slope, intercept;
+    Ground_801C4368(&slope, &intercept);
+    return grZe_804DB0B0 + slope;
+}
