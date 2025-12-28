@@ -5,6 +5,7 @@
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
 #include <baselib/debug.h>
+#include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
 
 /* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
