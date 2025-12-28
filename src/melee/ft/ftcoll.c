@@ -1601,7 +1601,7 @@ float ftColl_8007BBCC(UNUSED Fighter_GObj* gobj)
     if (dmg_log0_idx != 0) {
         for (i = 0; i < dmg_log0_idx; i++) {
             DmgLogEntry* entry = &dmg_log0[i];
-            switch (entry->kind) {
+            switch (entry->x0) {  // x0 is EntityKind at offset 0
             case EntityKind_Fighter: {
                 HitCapsule* hit = entry->hit0;
                 if (hit->element == HitElement_Lipstick) {
