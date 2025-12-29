@@ -105,7 +105,7 @@ UNK_RET ftColl_8007AF60(UNK_PARAMS);
 void ftColl_8007AFC8(Fighter_GObj* gobj, int);
 void ftColl_8007B064(Fighter_GObj* gobj, enum_t arg1);
 void ftColl_8007B128(s8, int);
-UNK_RET ftColl_80077464(UNK_PARAMS);
+void ftColl_80077464(Item*, HitCapsule*, Fighter*);
 /* 07B6A0 */ void ftColl_8007B6A0(Fighter_GObj* gobj);
 /* 07B7A4 */ void ftColl_8007B7A4(Fighter_GObj* gobj, int);
 void ftColl_80078710(Fighter_GObj* gobj);

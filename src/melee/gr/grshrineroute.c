@@ -4,6 +4,9 @@
 
 #include <platform.h>
 
+#include "gr/grmaterial.h"
+#include "gr/inlines.h"
+
 extern float grNKr_804DB868;
 
 float grShrineRoute_802087B0(void)
@@ -40,7 +43,13 @@ void grShrineRoute_802089E0(Ground_GObj* arg) {}
 
 void grShrineRoute_802089E4(Ground_GObj* arg) {}
 
-/// #grShrineRoute_802089E8
+void grShrineRoute_802089E8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grMaterial_801C94D8(jobj);
+}
 
 bool grShrineRoute_80208A28(Ground_GObj* arg)
 {

@@ -2542,6 +2542,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
 /* 0EE8B0 */ static void ftKb_Init_800EE8B0(void);
 /* 0EE8EC */ static void ftKb_Init_800EE8EC(void);
 /* 0EE904 */ static void ftKb_Init_800EE904(void);
+/* 0F1CA0 */ static bool fn_800F1CA0(HSD_GObj* gobj);
 /* 105FEC */ static void fn_800F6AC8(HSD_GObj* gobj);
 /* 105FEC */ static void fn_80105FEC(void);
 /* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
@@ -3767,8 +3768,12 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F10D4
 
-/// #ftKb_SpecialN_800F11AC
-
+void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftKb_SpecialN_800EF69C(gobj, 0xF, ft_80459B88.hats[14]);
+    ftCo_UnloadDynamicBones(fp);
+}
 /// #ftKb_SpecialN_800F11F0
 
 /// #ftKb_SpecialN_800F12C8
@@ -3802,8 +3807,21 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F1BAC
 
-/// #fn_800F1CA0
-
+static bool fn_800F1CA0(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    u32 val = M2C_FIELD(fp, u32*, 0x2238);
+    switch (val) {
+    case 2:
+    case 7:
+    case 10:
+    case 11:
+    case 13:
+        return true;
+    default:
+        return false;
+    }
+}
 /// #ftKb_SpecialN_800F1CD8
 
 /// #ftKb_SpecialN_800F1D24
