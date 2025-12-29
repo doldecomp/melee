@@ -498,7 +498,7 @@ void ftCo_ItemScopeAirStart_Coll(Fighter_GObj* gobj)
 void fn_800D7BDC(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, ftCo_MS_ItemScopeRapid), 
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, ftCo_MS_ItemScopeRapid),
                               Ft_MF_SkipAttackCount, 0.0F, 1.0F, 0.0F, NULL);
     fp->mv.co.common.x0 = (int)p_ftCommonData->x5BC;
     fp->accessory4_cb = fn_800D80F4;
