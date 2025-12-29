@@ -3209,8 +3209,20 @@ void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
     }
 }
 
-/// #ftKb_Init_GetMotionFileString
+char* ftKb_Init_GetMotionFileString(enum_t arg0)
+{
+    int offset;
 
+    switch (arg0) {
+    case 11:
+        offset = 14;
+        break;
+    case 14:
+        offset = 17;
+    }
+
+    return ftKb_Init_803CA5A4[offset - 14];
+}
 /// #ftKb_SpecialN_800EEC34
 
 /// #ftKb_SpecialN_800EED50
