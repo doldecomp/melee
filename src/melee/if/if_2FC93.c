@@ -27,7 +27,7 @@
 #include <MSL/string.h>
 
 // .bss
-/* 4A1F10 */ static struct {
+/* 4A1F10 */ static struct un_804A1F10_t {
     DynamicModelDesc** x0;
     HSD_GObj* x4[4];
     GXColor x14[4];
@@ -55,22 +55,33 @@ void un_802FD91C(void)
     un_804D6D90 = 0;
 }
 
-void un_802FD928(unsigned char slot, int arg1, GXColor* arg2)
+void un_802FD928(unsigned char slot, u8 arg1, GXColor* arg2)
 {
-    if (slot < 4) {
-        int i;
-        for (i = 0; i < 4; i++) {
-            Gm_PKind type = Player_GetPlayerSlotType(slot);
-            if (type != Gm_PKind_Cpu && !un_804A1F10.x28[i] &&
-                !un_804A1F10.x24[slot])
-            {
-                un_804A1F10.x24[slot] = 1;
-                un_804A1F10.x2C[i] = slot;
-                un_804A1F10.x28[i] = arg1;
-                un_804A1F10.x14[i] = *arg2;
-                return;
+    struct un_804A1F10_t* tmp = &un_804A1F10;
+    int i;
+
+    if (slot >= 4) {
+        return;
+    }
+
+    for (i = 0; i < 4; i++) {
+        Gm_PKind type = Player_GetPlayerSlotType(slot);
+        if (type == Gm_PKind_Cpu) {
+            continue;
+        }
+        {
+            if (tmp->x28[i] != 0) {
+                continue;
             }
         }
+        if (un_804A1F10.x24[slot] != 0) {
+            continue;
+        }
+        un_804A1F10.x24[slot] = 1;
+        un_804A1F10.x2C[i] = slot;
+        un_804A1F10.x28[i] = arg1;
+        un_804A1F10.x14[i] = *arg2;
+        return;
     }
 }
 
