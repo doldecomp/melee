@@ -4,6 +4,7 @@
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static UNK_RET fn_80021C18(UNK_PARAMS);
+/* 0205F0 */ void lbBgFlash_800205F0(s32);
 /* 02063C */ void lbBgFlash_8002063C(int);
 /* 0206D4 */ void lbBgFlash_800206D4(void*, s32*, int);
 /* 021C48 */ void lbBgFlash_80021C48(u32, u32);
@@ -16,6 +17,7 @@ typedef struct lbl_80433658_t {
 
 extern s32 lbl_804D3840;
 extern s32 lbl_804D3844;
+extern s32 lbl_804D3848;
 extern lbl_80433658_t lbl_80433658;
 
 /// #fn_8001FC08
@@ -24,7 +26,14 @@ extern lbl_80433658_t lbl_80433658;
 
 /// #fn_800204C8
 
-/// #lbBgFlash_800205F0
+void lbBgFlash_800205F0(s32 arg0)
+{
+    if (arg0 < 1) {
+        arg0 = 1;
+    }
+    lbBgFlash_800206D4(&lbl_804D3848, &lbl_804D3840, arg0);
+    lbl_80433658.field = 0;
+}
 
 void lbBgFlash_8002063C(int count)
 {

@@ -7,7 +7,7 @@
 /* 01FC08 */ UNK_RET fn_8001FC08(UNK_PARAMS);
 /* 01FEC4 */ UNK_RET fn_8001FEC4(UNK_PARAMS);
 /* 0204C8 */ UNK_RET fn_800204C8(UNK_PARAMS);
-/* 0205F0 */ void lbBgFlash_800205F0(void);
+/* 0205F0 */ void lbBgFlash_800205F0(s32);
 /* 02063C */ void lbBgFlash_8002063C(int);
 /* 020688 */ void lbBgFlash_80020688(int);
 /* 0206D4 */ UNK_RET lbBgFlash_800206D4(UNK_PARAMS);
