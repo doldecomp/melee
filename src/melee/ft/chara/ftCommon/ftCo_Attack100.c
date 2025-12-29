@@ -65,6 +65,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
+/* 0D80F4 */ static void fn_800D80F4(Fighter_GObj* gobj);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
@@ -480,8 +481,15 @@ void ftCo_ItemScopeAirStart_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800D7830);
 }
 
-/// #fn_800D7BDC
-
+void fn_800D7BDC(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, ftCo_MS_ItemScopeRapid), 
+                              Ft_MF_SkipAttackCount, 0.0F, 1.0F, 0.0F, NULL);
+    fp->mv.co.common.x0 = (int)p_ftCommonData->x5BC;
+    fp->accessory4_cb = fn_800D80F4;
+    fp->take_dmg_cb = fn_800D8378;
+}
 /// #fn_800D7C60
 
 /// #fn_800D7CEC
