@@ -242,9 +242,23 @@ void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1)
     }
 }
 
-void ifStatus_802F5E50(void)
+static inline IfDamageState* getPlayerByNext(HSD_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    s32 i;
+    for (i = 0; i < 6; i++) {
+        if (ifStatus_HudInfo.players[i].next == gobj) {
+            return &ifStatus_HudInfo.players[i];
+        }
+    }
+    return NULL;
+}
+
+void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1)
+{
+    IfDamageState* player = getPlayerByNext(gobj);
+    if (!player->flags.hide_all_digits) {
+        HSD_GObj_JObjCallback(gobj, arg1);
+    }
 }
 
 void ifStatus_802F5EC0(void)
