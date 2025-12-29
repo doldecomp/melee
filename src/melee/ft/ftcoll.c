@@ -758,29 +758,23 @@ void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
             } else {
                 dir = 1.0f;
             }
+            fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
         } else {
             if (item->pos.x > fp->cur_pos.x) {
                 dir = -1.0f;
             } else {
                 dir = 1.0f;
             }
+            fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
         }
-        fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
     } else {
-        s32 tmp0, tmp1;
         f32 dir;
 
         item->xC64_reflectGObj = fp->gobj;
         item->xC74 = fp->x2070.x2070_int;
 
-        tmp0 = *(s32*) ((u8*) &fp->x2074 + 0);
-        tmp1 = *(s32*) ((u8*) &fp->x2074 + 4);
-        *(s32*) ((u8*) &item->xC78 + 0) = tmp0;
-        *(s32*) ((u8*) &item->xC78 + 4) = tmp1;
-        tmp0 = *(s32*) ((u8*) &fp->x2074 + 8);
-        tmp1 = *(s32*) ((u8*) &fp->x2074 + 12);
-        *(s32*) ((u8*) &item->xC78 + 8) = tmp0;
-        *(s32*) ((u8*) &item->xC78 + 12) = tmp1;
+        item->xC78 = fp->x2074.x2074_vec;
+        item->xC80 = fp->x2074.x207C;
 
         item->xC88 = fp->x2074.x2084;
         item->xC8C = fp->x2074.x2088;
@@ -795,9 +789,9 @@ void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
         item->xC6C = fp->ReflectAttr.x1A34_damageMul;
         item->xC70 = fp->ReflectAttr.x1A38_speedMul;
 
-        item->xDCC_flag.b2 = fp->x2218_b4;
+        item->xDCC_flag.b2 = fp->x2218_b5;
 
-        if (fp->reflecting) {
+        if (fp->x2218_b4) {
             item->xDCC_flag.b1 = 1;
         }
 
@@ -807,14 +801,15 @@ void ftColl_80077464(Item* item, HitCapsule* hit, Fighter* fp)
             } else {
                 dir = 1.0f;
             }
+            fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
         } else {
             if (item->pos.x > fp->cur_pos.x) {
                 dir = -1.0f;
             } else {
                 dir = 1.0f;
             }
+            fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
         }
-        fp->ReflectAttr.x1A2C_reflectHitDirection = dir;
     }
 }
 
@@ -873,10 +868,13 @@ void ftColl_800784B4(Fighter* arg0, HitCapsule* arg1, HitCapsule* arg2)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void ftColl_80078538(Fighter_GObj* gobj, Vec3* pos, float dmg, float scale)
 {
     NOT_IMPLEMENTED;
 }
+#pragma pop
 
 void ftColl_8007861C(Fighter_GObj* arg0, Fighter_GObj* gobj, int arg2,
                      int arg3, int arg4, UNK_T arg5, int arg6, UNK_T arg7,
