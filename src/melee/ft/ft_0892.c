@@ -82,7 +82,18 @@ void ft_8008A1B8(Fighter_GObj* gobj, int flags)
         ftParts_8007592C(fp, 0, 0.0f);
     }
 }
-/// #ft_8008A1FC
+
+bool ft_8008A1FC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((fp->input.lstick.x * fp->facing_dir < 0.0F) ||
+        (ABS(fp->input.lstick.x) < p_ftCommonData->x24))
+    {
+        return true;
+    }
+    return false;
+}
 
 static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
 {
