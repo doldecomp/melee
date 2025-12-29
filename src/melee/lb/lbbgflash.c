@@ -24,7 +24,7 @@ extern BgFlashData lbl_80433658;
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
-/* 02087C */ static void fn_8002087C(int* arg0);
+/* 02087C */ void fn_8002087C(int* arg0);
 
 extern s32 lbl_804D3840;
 extern s32 lbl_804D3844;
