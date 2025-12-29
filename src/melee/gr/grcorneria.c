@@ -7,6 +7,7 @@
 #include "grmaterial.h"
 #include "ground.h"
 #include "grzakogenerator.h"
+#include "stage.h"
 #include "inlines.h"
 #include "types.h"
 
