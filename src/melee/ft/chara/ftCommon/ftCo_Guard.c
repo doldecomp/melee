@@ -509,6 +509,7 @@ void ftCo_80092C54(Fighter_GObj* gobj)
 void ftCo_GuardOff_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     fp->mv.co.guard.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
