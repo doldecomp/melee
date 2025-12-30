@@ -2077,7 +2077,38 @@ void Camera_8002EB5C(float fov)
     }
 }
 
-/// #Camera_8002EC7C
+void Camera_8002EC7C(float fov)
+{
+    Vec3 spC;
+
+    if (cm_80452C68.mode != 6) {
+        Camera_8002FE38();
+    }
+
+    if (cm_80452C68.x341_b3_b4 != 2) {
+        cm_80452C68.x341_b3_b4 = 2;
+        X35C_BITS->b0 = 0;
+        X35C_BITS->b1 = 0;
+    }
+
+    *(f32*)((u8*)&cm_80452C68 + 0x364) = fov;
+    X35C_BITS->b2 = 1;
+
+    switch (cm_80452C68.x341_b3_b4) {
+    case 1:
+        cm_80452C68.transform.target_position = cm_80452C68.x35C.vec;
+        break;
+    case 3:
+        if (cm_80452C68.x35C.cb != NULL && cm_80452C68.x35C.cb(&spC)) {
+            cm_80452C68.transform.target_position = spC;
+        }
+        break;
+    case 2:
+    case 0:
+    default:
+        break;
+    }
+}
 
 /// #Camera_8002ED9C
 
