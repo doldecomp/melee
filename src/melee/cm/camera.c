@@ -2317,7 +2317,11 @@ s32 fn_8002FBA0(HSD_RectF32* arg0)
 void Camera_8002FC7C(s8 arg0, s8 arg1)
 {
     CameraUnkGlobals* new_var;
+    CameraTransformState* transform;
     f32 temp_f2;
+    s8* x304_ptr;
+    s8 x304_check;
+
     cm_80452C68.mode = 5;
     cm_80452C68.x304 = Camera_8002BA00(arg0 - 1, 1);
     cm_80452C68.x305 = arg1;
@@ -2336,6 +2340,8 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     cm_80452C68.min_distance = temp_f2 * (*new_var).x94;
     cm_80452C68.max_distance = temp_f2 * (*new_var).x98;
     cm_80452C68.x300 = (s32) fn_8002FBA0;
+    x304_ptr = &cm_80452C68.x304;
+    x304_check = *x304_ptr;
     cm_80452C68.x314.z = 0.0f;
     cm_80452C68.x314.y = 0.0f;
     cm_80452C68.x314.x = 0.0f;
@@ -2345,7 +2351,7 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     cm_80452C68.pause_up.x = 0.0f;
     cm_80452C68.pause_up.y = 1.0f;
     cm_80452C68.pause_up.z = 0.0f;
-    if (cm_80452C68.x304 == 0xA) {
+    if (x304_check == 0xA) {
         cm_80452C68.pause_eye_distance = 3.0f * temp_f2;
     } else {
         cm_80452C68.pause_eye_distance = temp_f2;
@@ -2353,12 +2359,11 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     Camera_8002BAA8(0.0f);
     Camera_8002BD88(0.0f, 0.0f);
     Camera_8002C010(0.0f, 0.0f);
-    cm_80452C68.transform.target_interest = cm_80452C68.x308;
-    lbVector_Add(&cm_80452C68.transform.target_interest, &cm_80452C68.x314);
-    cm_80452C68.transform.target_position =
-        cm_80452C68.transform.target_interest;
-    lbVector_Add(&cm_80452C68.transform.target_position,
-                 &cm_80452C68.pause_eye_offset);
+    transform = &cm_80452C68.transform;
+    transform->target_interest = cm_80452C68.x308;
+    lbVector_Add(&transform->target_interest, &cm_80452C68.x314);
+    transform->target_position = transform->target_interest;
+    lbVector_Add(&transform->target_position, &cm_80452C68.pause_eye_offset);
 }
 
 void Camera_8002FE38(void)
