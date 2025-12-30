@@ -611,15 +611,12 @@ Effect* efLib_8005C1B4(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
 {
     Vec3 sp1C;
     Effect* eff_1;
-    HSD_GObj* gobj_1;
     HSD_JObj* jobj_1;
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
-        gobj_1 = eff_1->gobj;
-        jobj_1 = GET_JOBJ(gobj_1);
-        if (jobj_1 == NULL) {
-            HSD_GObjPLink_80390228(gobj_1);
+        if ((jobj_1 = GET_JOBJ(eff_1->gobj)) == NULL) {
+            HSD_GObjPLink_80390228(eff_1->gobj);
             return NULL;
         }
         lb_8000C1C0(jobj_1, arg_jobj);
