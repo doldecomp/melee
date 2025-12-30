@@ -11,14 +11,11 @@
 
 extern HSD_DObjInfo hsdDObj;
 
-/* 021F34 */ static void fn_80021F34(lbRefract_CallbackData* arg0, s32 arg1,
-                                     u32 arg2, u32 arg3, u8 arg4, u8 arg5,
-                                     u8 arg6);
+/* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
-/* 022608 */ static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 /* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
                                      u32 arg2, u32* arg3, u32* arg4, u8* arg5,
                                      u8* arg6);
@@ -38,21 +35,6 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
-
-static void fn_80021F34(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2,
-                        u32 arg3, u8 arg4, u8 arg5, u8 arg6)
-{
-    s32 t0, t1, t2;
-    u8* ptr;
-
-    t0 = arg0->unk4;
-    t1 = arg2 >> 2;
-    t2 = arg0->unk0;
-    ptr = (u8*)(t2 + t1 * t0 + ((arg1 << 3) & 0xFFFFFFE0));
-    t0 = ((arg1 & 3) + ((arg2 << 2) & 0xC)) << 1;
-    ptr[t0] = arg6;
-    ptr[t0 + 1] = arg5;
-}
 
 void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2, u32* arg3,
                  u32* arg4, u8* arg5, u8* arg6)
@@ -109,6 +91,52 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
     }
 }
 
+void lbRefract_8002247C(HSD_CObj* cobj) {
+    s32 proj_type;
+    
+    if (lbl_804336D0[0] == 0) {
+        return;
+    }
+    
+    proj_type = HSD_CObjGetProjectionType(cobj);
+    
+    switch (proj_type) {
+    case 1:
+    {
+        f32 scale = 0.5F;
+        f32 trans = 0.5F;
+        MTXLightPerspective((MtxPtr)((char*)lbl_804336D0 + 0x10), 
+                           M2C_FIELD(cobj, f32*, 0x40),
+                           M2C_FIELD(cobj, f32*, 0x44),
+                           scale, scale, scale, trans);
+        break;
+    }
+    case 2:
+    {
+        f32 scale = 0.5F;
+        MTXLightFrustum((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                       M2C_FIELD(cobj, f32*, 0x40),
+                       M2C_FIELD(cobj, f32*, 0x44),
+                       M2C_FIELD(cobj, f32*, 0x48),
+                       M2C_FIELD(cobj, f32*, 0x4c),
+                       M2C_FIELD(cobj, f32*, 0x38),
+                       scale, 0.5F, scale, scale);
+        break;
+    }
+    default:
+    {
+        f32 scale = 0.5F;
+        MTXLightOrtho((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                     M2C_FIELD(cobj, f32*, 0x40),
+                     M2C_FIELD(cobj, f32*, 0x44),
+                     M2C_FIELD(cobj, f32*, 0x48),
+                     M2C_FIELD(cobj, f32*, 0x4c),
+                     scale, 0.5F, scale, scale);
+        break;
+    }
+    }
+}
+
 void lbRefract_80022560(void)
 {
     if (lbl_804336D0[0] != 0) {
@@ -119,7 +147,6 @@ void lbRefract_80022560(void)
         GXInvalidateTexAll();
     }
 }
-
 
 void lbRefract_800225D4(void)
 {
