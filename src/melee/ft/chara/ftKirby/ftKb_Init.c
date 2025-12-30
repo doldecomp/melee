@@ -3810,8 +3810,18 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F1A8C
 
-/// #ftKb_Init_UnkMotionStates3
-
+void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterKind kind = fp->fv.kb.hat.kind;
+    
+    switch (kind) {
+    case FTKIND_KOOPA:
+    case FTKIND_GKOOPS:
+        ftKb_SpecialNKp_800FA7D4(gobj);
+        break;
+    }
+}
 /// #ftKb_SpecialN_800F1BAC
 
 /// #fn_800F1CA0
