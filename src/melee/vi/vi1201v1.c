@@ -2,6 +2,7 @@
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <dolphin/gx/GXStruct.h>
 
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
@@ -31,14 +32,14 @@ void un_8031F9B4(HSD_GObj* gobj)
 
 void fn_8031FB90(HSD_GObj* gobj)
 {
-    u8* colors;
+    GXColor* colors;
     char pad[8];
     if (un_804D7000 != NULL) {
         lbShadow_8000F38C(0);
     }
     if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {
-        colors = &un_804D6FF4;
-        HSD_SetEraseColor(colors[0], colors[1], colors[2], colors[3]);
+        colors = (GXColor*) &un_804D6FF4;
+        HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
         HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
         vi_8031CA04(gobj);
         *(s32*)((char*)gobj + 0x24) = 0x881;

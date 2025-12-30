@@ -5,6 +5,8 @@
 
 #include <baselib/forward.h>
 
+typedef struct vi1202_UnkStruct vi1202_UnkStruct;
+
 /* 32110C */ void un_8032110C(HSD_GObj*);
 /* 321130 */ void un_80321130(HSD_GObj*);
 /* 321154 */ void un_80321154(HSD_GObj*);
@@ -13,7 +15,7 @@
 /* 321300 */ void un_80321300_OnEnter(UNK_T);
 /* 3218E0 */ void un_803218E0_OnFrame(void);
 /* 321900 */ void un_80321900(void);
-/* 321950 */ void un_80321950(void*);
+/* 321950 */ void un_80321950(vi1202_UnkStruct*);
 /* 3219AC */ void fn_803219AC(HSD_GObj*);
 /* 321A00 */ void un_80321A00(HSD_GObj*);
 /* 321AF4 */ void un_80321AF4(HSD_GObj*);
