@@ -1,6 +1,7 @@
 #include "lbaudio_ax.static.h"
 
 #include "baselib/forward.h"
+#include <m2c_macros.h>
 #include <melee/ft/forward.h>
 
 #include <baselib/axdriver.h>
@@ -820,14 +821,13 @@ void fn_800263B4(void* ptr)
 
 /// #lbAudioAx_80026510
 
-int lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
+bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
 {
     HSD_GObj* gobj;
-    
+
     PAD_STACK(16);
-    
-    // Access HSD_GObj_Entities at offset 0xF8 as a raw pointer
-    gobj = ((HSD_GObj**)HSD_GObj_Entities)[0x3E];
+
+    gobj = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0xF8);
 
     while (gobj != NULL) {
         int* user_data = gobj->user_data;
@@ -838,13 +838,13 @@ int lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
                     if (gobj != NULL) {
                         HSD_GObjPLink_80390228(gobj);
                     }
-                    return 1;
+                    return true;
                 }
             }
         }
         gobj = gobj->next;
     }
-    return 0;
+    return false;
 }
 /// #fn_80026650
 
