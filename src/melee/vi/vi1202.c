@@ -41,3 +41,14 @@ void un_803218E0_OnFrame(void)
 {
     vi_8031CAAC();
 }
+
+extern char un_804A2F08[];
+extern void* un_804D7050;
+
+void un_80321900(void)
+{
+    HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
+    HSD_GObjProc_8038FD54(gobj, fn_803219AC, 0x13);
+    un_804D7050 = un_804A2F08;
+    un_80321950(un_804D7050);
+}
