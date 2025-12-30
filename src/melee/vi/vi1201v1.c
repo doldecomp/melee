@@ -1,17 +1,14 @@
 #include "vi/vi1201v1.static.h"
 
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <dolphin/gx/GXStruct.h>
 
 #include "gm/gm_unsplit.h"
-#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "lb/lbshadow.h"
 #include "vi.h"
 
-extern void* un_804D7000;
-extern u8 un_804D6FF4;
 extern u8 un_804D6FFC;
 extern u8 un_804D6FFD;
 extern s32 un_804D6FF8;
@@ -30,28 +27,32 @@ void un_8031F9B4(HSD_GObj* gobj)
 
 /// #fn_8031FAA8
 
-void fn_8031FB90(HSD_GObj* gobj)
+/// #fn_8031FB90
+
+void fn_8031FC30(HSD_GObj* gobj)
 {
-    GXColor* colors;
-    char pad[8];
-    if (un_804D7000 != NULL) {
-        lbShadow_8000F38C(0);
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    HSD_CObjAnim(cobj);
+    if (cobj->aobj->curr_frame == 1.0F) {
+        vi_8031C9B4(0xd, 0);
     }
-    if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {
-        colors = (GXColor*) &un_804D6FF4;
-        HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
-        HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
-        vi_8031CA04(gobj);
-        *(s32*)((char*)gobj + 0x24) = 0x881;
-        *(s32*)((char*)gobj + 0x20) = 0;
-        HSD_GObj_80390ED0(gobj, 7);
-        HSD_CObjEndCurrent();
+    if (cobj->aobj->curr_frame == 30.0F) {
+        un_8031F9D8(un_804D6FFC, un_804D6FFD);
+    }
+    if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
+        lb_800145F4();
+        gm_801A4B60();
     }
 }
 
-/// #fn_8031FC30
-
-/// #fn_8031FCBC
+void fn_8031FCBC(HSD_GObj* gobj)
+{
+    if ((f32)un_804D6FF8 >= 30.0F) {
+        HSD_GObjPLink_80390228(gobj);
+    } else {
+        un_804D6FF8 = un_804D6FF8 + 1;
+    }
+}
 
 /// #un_8031FD18_OnEnter
 
