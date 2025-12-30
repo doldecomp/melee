@@ -1,12 +1,33 @@
 #include "vi1101.static.h"
 
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+
+#include "lb/lb_00B0.h"
 #include "vi.h"
+
+extern u8 un_804D5B08;
 
 /// #un_8031F294
 
 /// #fn_8031F548
 
-/// #fn_8031F56C
+void fn_8031F56C(HSD_GObj* gobj)
+{
+    u8* colors;
+    char pad[8];
+    lbShadow_8000F38C(0);
+    if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {
+        colors = &un_804D5B08;
+        HSD_SetEraseColor(colors[0], colors[1], colors[2], colors[3]);
+        HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
+        vi_8031CA04(gobj);
+        *(s32*)((char*)gobj + 0x24) = 0x281;
+        *(s32*)((char*)gobj + 0x20) = 0;
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_CObjEndCurrent();
+    }
+}
 
 /// #fn_8031F600
 
