@@ -16,10 +16,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-typedef struct {
-    u8 b0 : 1;
-} xE0_flags, xC6_flags;
-
 /// #grCorneria_801DCCFC
 
 /// #grCorneria_801DCE1C
@@ -55,7 +51,7 @@ void grCorneria_801DD658(Ground_GObj* arg) {}
 
 void fn_801DD65C(Ground_GObj* gobj)
 {
-    GET_GROUND(gobj)->gv.corneria.xC4_b0 = false;
+    GET_GROUND(gobj)->gv.corneria.xC4_flags.b0 = false;
 }
 
 extern int grCn_803E1FE8[];
@@ -69,13 +65,13 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
 
     Ground* gr = GET_GROUND(ground_gobj);
     Ground_801C2ED0(ground_gobj->hsd_obj, gr->map_id);
-    gr->gv.corneria.xC4_b0 = 1;
-    gr->gv.corneria.xC4_b1 = 0;
-    gr->gv.corneria.xD4 = 0.0f;
-    gr->gv.corneria.xD8 = 250.0f;
+    gr->gv.corneria.xC4_flags.b0 = 1;
+    gr->gv.corneria.xC4_flags.b1 = 0;
+    gr->gv.corneria.base_x = 0.0f;
+    gr->gv.corneria.base_y = 250.0f;
     gr->gv.corneria.xD0 = 0.0f;
-    gr->gv.corneria.xDC = 0.0f;
-    gr->gv.corneria.xE0 = 0.0f;
+    gr->gv.corneria.offset_x = 0.0f;
+    gr->gv.corneria.offset_y.val = 0.0f;
     gr->gv.corneria.xE4 = 0.0f;
     gr->gv.corneria.xE8 = 0.0f;
     gr->gv.corneria.xEC = 0.0f;
@@ -88,8 +84,8 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     grAnime_801C8780(ground_gobj, 3, 0, 0.0f, 1.0f);
     gr->gv.corneria.x128 = grCorneria_801DD534(0);
     jobj = ground_gobj->hsd_obj;
-    translate.x = gr->gv.corneria.xD4 + gr->gv.corneria.xDC;
-    translate.y = gr->gv.corneria.xD8 + gr->gv.corneria.xE0;
+    translate.x = gr->gv.corneria.base_x + gr->gv.corneria.offset_x;
+    translate.y = gr->gv.corneria.base_y + gr->gv.corneria.offset_y.val;
     translate.z = 0.0f;
     HSD_JObjSetTranslate(jobj, &translate);
     grCorneria_801E1878(ground_gobj);
@@ -101,18 +97,18 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     gr->gv.corneria.x11A = 0;
     gr->gv.corneria.x110 = 0;
     gr->gv.corneria.x114 = 0.0f;
-    gr->gv.corneria.x120 =
+    gr->gv.corneria.left_cannon =
         grMaterial_801C8CFC(0, 0, gr, Ground_801C3FA4(ground_gobj, 2),
                             fn_801E12D0, fn_801E12D4, 0);
-    grMaterial_801C8DE0(gr->gv.corneria.x120, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f,
-                        0.0f, 4.0f);
-    grMaterial_801C8E08(gr->gv.corneria.x120);
-    gr->gv.corneria.x124 =
+    grMaterial_801C8DE0(gr->gv.corneria.left_cannon, 4.0f, 0.0f, 0.0f, 16.0f,
+                        0.0f, 0.0f, 4.0f);
+    grMaterial_801C8E08(gr->gv.corneria.left_cannon);
+    gr->gv.corneria.right_cannon =
         grMaterial_801C8CFC(0, 2, gr, Ground_801C3FA4(ground_gobj, 3),
                             fn_801E12D0, fn_801E12D4, 0);
-    grMaterial_801C8E08(gr->gv.corneria.x124);
-    grMaterial_801C8DE0(gr->gv.corneria.x124, 4.0f, 0.0f, 0.0f, 16.0f, 0.0f,
-                        0.0f, 4.0f);
+    grMaterial_801C8E08(gr->gv.corneria.right_cannon);
+    grMaterial_801C8DE0(gr->gv.corneria.right_cannon, 4.0f, 0.0f, 0.0f, 16.0f,
+                        0.0f, 0.0f, 4.0f);
     HSD_JObjClearFlags(Ground_801C3FA4(ground_gobj, 6), JOBJ_HIDDEN);
     HSD_JObjSetFlags(Ground_801C3FA4(ground_gobj, 5), JOBJ_HIDDEN);
     gr->gv.corneria.xC8 =
@@ -223,12 +219,18 @@ void grCorneria_801DFC28(Ground_GObj* arg) {}
 void grCorneria_801DFC2C(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    u8* base = (u8*)gp;
+    struct grCorneria_GroundVars* cn = &gp->gv.corneria;
 
-    base[0xC6] = 0;
-    ((xE0_flags*)(base + 0xE0))->b0 = 0;
-    memzero(base + 0xC8, 0x18);
-    base[0xC4] = 0;
+    cn->xC6_flags.b0 = 0;
+    cn->offset_y.flags.b0 = 0;
+    cn->xC8 = 0;
+    cn->xCC = 0;
+    cn->xD0 = 0.0f;
+    cn->base_x = 0.0f;
+    cn->base_y = 0.0f;
+    cn->offset_x = 0.0f;
+    cn->xC4_flags.b0 = 0;
+    cn->xC4_flags.b1 = 0;
     gp->x11_flags.b012 = 1;
 }
 bool grCorneria_801DFC90(Ground_GObj* arg)
@@ -243,11 +245,12 @@ void grCorneria_801DFEB4(Ground_GObj* arg) {}
 void grCorneria_801DFEB8(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    u8* base = (u8*)gp;
+    struct grCorneria_GroundVars* cn = &gp->gv.corneria;
 
-    ((xC6_flags*)(base + 0xC6))->b0 = 0;
+    cn->xC6_flags.b0 = 0;
     grAnime_801C8138((HSD_GObj*)gobj, gp->map_id, 0);
-    base[0xC4] = 0;
+    cn->xC4_flags.b0 = 0;
+    cn->xC4_flags.b1 = 0;
     gp->x11_flags.b012 = 1;
 }
 bool grCorneria_801DFF18(Ground_GObj* arg)
