@@ -3818,7 +3818,11 @@ void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     FighterKind kind = fp->fv.kb.hat.kind;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 272211f25 (Match ftKb_Init_UnkMotionStates3 (100%))
     switch (kind) {
     case FTKIND_KOOPA:
     case FTKIND_GKOOPS:
