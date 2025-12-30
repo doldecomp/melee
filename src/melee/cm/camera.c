@@ -2223,7 +2223,70 @@ s32 fn_8002F908(HSD_RectF32* arg0)
     return 1;
 }
 
-/// #Camera_8002F9E4
+void Camera_8002F9E4(s8 mode, s8 arg1)
+{
+    f32 fov;
+    f32 scale;
+    u8* x304_ptr;
+    f32* x32C_ptr;
+    Vec3* x314_ptr;
+    Vec3* pause_eye_ptr;
+
+    cm_80452C68.mode = 5;
+    cm_80452C68.x304 = Camera_8002BA00(mode - 1, 1);
+    x304_ptr = (u8*)&cm_80452C68.x304;
+    cm_803BCCA0;  // Force load
+    cm_80452C68.x305 = arg1;
+    x32C_ptr = &cm_80452C68.x32C;
+    cm_80452C68.x32C = cm_803BCCA0.x40;
+
+    cm_80452C68.x2D8 = Stage_GetCamBoundsLeftOffset();
+    cm_80452C68.x2DC = Stage_GetCamBoundsRightOffset();
+    cm_80452C68.x2D0 = Stage_GetCamBoundsTopOffset();
+    cm_80452C68.x2D4 = Stage_GetCamBoundsBottomOffset();
+
+    cm_80452C68.x2E0 = cm_803BCCA0.xA8;
+    cm_80452C68.x2E4 = cm_803BCCA0.xA4;
+
+    cm_80452C68.x2E8 = Stage_GetCamAngleRadiansUp();
+    cm_80452C68.x2EC = Stage_GetCamAngleRadiansDown();
+    cm_80452C68.x2F0 = Stage_GetCamAngleRadiansRight();
+    cm_80452C68.x2F4 = Stage_GetCamAngleRadiansLeft();
+
+    fov = *x32C_ptr;
+    x314_ptr = &cm_80452C68.x314;
+    scale = fov * cm_803BCCA0.x8C + cm_803BCCA0.x90;
+    pause_eye_ptr = &cm_80452C68.pause_eye_offset;
+    cm_80452C68.min_distance = scale * cm_803BCCA0.x94;
+    cm_80452C68.max_distance = scale * cm_803BCCA0.x98;
+    cm_80452C68.x300 = (s32)fn_8002F908;
+
+    cm_80452C68.x314.z = 0.0f;
+    cm_80452C68.x314.y = 0.0f;
+    cm_80452C68.x314.x = 0.0f;
+    cm_80452C68.pause_eye_offset.x = 0.0f;
+    cm_80452C68.pause_eye_offset.y = 85.0f;
+    cm_80452C68.pause_eye_offset.z = 730.0f;
+    cm_80452C68.pause_up.x = 0.0f;
+    cm_80452C68.pause_up.y = 1.0f;
+    cm_80452C68.pause_up.z = 0.0f;
+
+    if (*x304_ptr == 10) {
+        cm_80452C68.pause_eye_distance = 35.0f * scale;
+    } else {
+        cm_80452C68.pause_eye_distance = scale;
+    }
+
+    Camera_8002BAA8(0.0f);
+    Camera_8002BD88(0.0f, 0.0f);
+    Camera_8002C010(0.0f, 0.0f);
+
+    cm_80452C68.transform.target_interest = cm_80452C68.x308;
+    lbVector_Add(&cm_80452C68.transform.target_interest, x314_ptr);
+
+    cm_80452C68.transform.target_position = cm_80452C68.transform.target_interest;
+    lbVector_Add(&cm_80452C68.transform.target_position, pause_eye_ptr);
+}
 
 s32 fn_8002FBA0(HSD_RectF32* arg0)
 {
