@@ -16,7 +16,7 @@ typedef struct {
     /* 0x04 */ s32 x4;
     /* 0x08 */ f32 x8;
     /* 0x0C */ s32 xC;
-    /* 0x10 */ void* x10;
+    /* 0x10 */ s32 x10;
     /* 0x14 */ s32 x14;
     /* 0x18 */ s32 x18;
     /* 0x1C */ s32 x1C;
@@ -76,7 +76,7 @@ void un_80321950(void* s)
     ((vi1202_UnkStruct*)s)->x4 = 0x10000;
     ((vi1202_UnkStruct*)s)->x8 = 1.0F;
     ((vi1202_UnkStruct*)s)->xC = 0;
-    ((vi1202_UnkStruct*)s)->x10 = *(void**)((char*)Fighter_804D6500 + 0x20);
+    ((vi1202_UnkStruct*)s)->x10 = *(s32*)((char*)Fighter_804D6500 + 0x20);
     ((vi1202_UnkStruct*)s)->x14 = 0x83D60;
     ((vi1202_UnkStruct*)s)->x18 = *(s32*)((char*)Fighter_804D6500 + 0x28);
     ((vi1202_UnkStruct*)s)->x1C = 0;
@@ -94,6 +94,45 @@ void fn_803219AC(HSD_GObj* gobj)
     }
     un_80321A00(gobj);
     un_80321AF4(gobj);
+}
+
+void un_80321A00(HSD_GObj* gobj)
+{
+    s32 zero;
+    vi1202_UnkStruct* data = un_804D7050;
+    void* fighter = Fighter_804D6500;
+
+    if (data->x18 >= *(s32*)((char*)fighter + 0x28)) {
+        if (data->x10 < *(s32*)((char*)fighter + 0x20)) {
+            data->x10 = data->x10 + 1;
+        }
+        return;
+    }
+
+    if (lbAudioAx_80023710(data->x2C) != 0) {
+        return;
+    }
+    data->x18 = data->x18 + 1;
+
+    if (data->x18 < *(s32*)((char*)Fighter_804D6500 + 0x28)) {
+        if (data->x1C != 0) {
+            zero = 0;
+            data->x1C = zero;
+            data->x10 = zero;
+            data->x18 = *(s32*)((char*)Fighter_804D6500 + 0x28);
+            un_80321C28();
+            if (data->x20 != 0) {
+                un_80321CA4(0x144);
+                data->x20 = zero;
+            }
+        } else {
+            un_80321BF8(data->x14);
+        }
+    } else {
+        data->x10 = 0;
+        un_80321C28();
+        un_80321CA4(0x140);
+    }
 }
 
 void un_80321BF8(int arg0)
