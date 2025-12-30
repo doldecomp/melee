@@ -1,6 +1,11 @@
 #include "tylist.h"
 
+#include "lb/lb_00B0.h"
+
 #include <baselib/cobj.h>
+#include <baselib/displayfunc.h>
+#include <baselib/fog.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/video.h>
 #include <string.h>
