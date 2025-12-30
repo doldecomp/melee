@@ -3828,10 +3828,46 @@ void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
 }
 /// #ftKb_SpecialN_800F1BAC
 
-/// #fn_800F1CA0
+static bool fn_800F1CA0(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    u32 val = M2C_FIELD(fp, u32*, 0x2238);
+    switch (val) {
+    case 2:
+    case 7:
+    case 10:
+    case 11:
+    case 13:
+        return true;
+    default:
+        return false;
+    }
+}
 
-/// #ftKb_SpecialN_800F1CD8
+s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterKind kind = fp->fv.kb.hat.kind;
+    bool result;
 
+    switch (kind) {
+    case FTKIND_CAPTAIN:
+    case FTKIND_SEAK:
+    case FTKIND_POPO:
+    case FTKIND_NANA:
+    case FTKIND_SAMUS:
+        result = true;
+        break;
+    default:
+        result = false;
+        break;
+    }
+
+    if (result) {
+        return true;
+    }
+    return false;
+}
 /// #ftKb_SpecialN_800F1D24
 
 /// #ftKb_SpecialN_800F1DAC
