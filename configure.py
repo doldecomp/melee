@@ -518,7 +518,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/ftaction.c"),
             Object(NonMatching, "melee/ft/ftparts.c"),
             Object(Matching, "melee/ft/ftcamera.c"),
-            Object(NonMatching, "melee/ft/ftcoll.c"),
+            Object(Matching, "melee/ft/ftcoll.c"),
             Object(Matching, "melee/ft/ft_07C1.c"),
             Object(Matching, "melee/ft/ft_07C6.c"),
             Object(Matching, "melee/ft/ftcommon.c"),
@@ -534,7 +534,7 @@ config.libs = [
             Object(Matching, "melee/ft/ftlib.c"),
             Object(Matching, "melee/ft/ft_0877.c"),
             Object(Matching, "melee/ft/ft_0881.c"),
-            Object(NonMatching, "melee/ft/ft_0892.c"),
+            Object(Matching, "melee/ft/ft_0892.c"),
             # Common
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Wait.c"),
             Object(NonMatching, "melee/ft/ftwaitanim.c"),
@@ -551,7 +551,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Damage.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageFall.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_DamageIce.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Guard.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Guard.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftpickupitem.c"),
             Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_ItemThrow.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SpecialS.c"),
@@ -683,7 +683,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Squat.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatWait.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_SquatRv.c"),
-            Object(NonMatching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
+            Object(Matching, "melee/ft/chara/ftCommon/ftCo_Attack100.c"),
             # Common throw-related
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_CaptureCut.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Throw.c"),
@@ -787,7 +787,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialLw.c"),
-            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialS.c"),
             # Bowser
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_Init.c"),
             Object(Matching, "melee/ft/chara/ftKoopa/ftKp_SpecialS.c"),
@@ -895,7 +895,7 @@ config.libs = [
             ),
             Object(Matching, "melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c"),
             # Crazy Hand
-            Object(NonMatching, "melee/ft/chara/ftCrazyHand/ftCh_Init.c"),
+            Object(Matching, "melee/ft/chara/ftCrazyHand/ftCh_Init.c"),
             # Main
             Object(Matching, "melee/ft/ftbosslib.c"),
         ],
@@ -978,7 +978,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/grstadium.c"),
             Object(NonMatching, "melee/gr/grkongo.c"),
             Object(NonMatching, "melee/gr/grzebes.c"),
-            Object(NonMatching, "melee/gr/grcorneria.c"),
+            Object(Matching, "melee/gr/grcorneria.c"),
             Object(Matching, "melee/gr/grstory.c"),
             Object(NonMatching, "melee/gr/gronett.c"),
             Object(NonMatching, "melee/gr/grbigblue.c"),

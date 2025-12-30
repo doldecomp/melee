@@ -31,7 +31,7 @@ void fn_800DAA40(Fighter_GObj*, Fighter_GObj*);
 /* 0D705C */ bool ftCo_800D705C(Fighter_GObj* gobj);
 /* 0D7100 */ bool ftCo_800D7100(Fighter_GObj* gobj);
 /* 0D71D8 */ void ftCo_800D71D8(Fighter_GObj* gobj);
-/* 0D7268 */ UNK_RET ftCo_800D7268(UNK_PARAMS);
+/* 0D7268 */ s32 ftCo_800D7268(void*);
 /* 0D72A0 */ UNK_RET ftCo_800D72A0(UNK_PARAMS);
 /* 0D730C */ bool ftCo_800D730C(Fighter_GObj* gobj, bool);
 /* 0D74A4 */ UNK_RET ftCo_800D74A4(Fighter_GObj* gobj);
@@ -43,6 +43,7 @@ void fn_800DAA40(Fighter_GObj*, Fighter_GObj*);
 /* 0D7770 */ void ft_800D7770(Fighter_GObj*);
 /* 0D7830 */ void fn_800D7830(Fighter_GObj* gobj);
 /* 0D78B0 */ void fn_800D78B0(Fighter_GObj* gobj);
+/* 0D7938 */ void fn_800D7938(Fighter_GObj* gobj);
 /* 0D79AC */ void ftCo_ItemScopeStart_Anim(Fighter_GObj* gobj);
 /* 0D79B0 */ void ftCo_ItemScopeAirStart_Anim(Fighter_GObj* gobj);
 /* 0D79B4 */ void fn_800D79B4(Fighter_GObj*, void (*)(Fighter_GObj*),

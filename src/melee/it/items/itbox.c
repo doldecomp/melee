@@ -68,7 +68,8 @@ void it_3F14_Logic1_Thrown(Item_GObj* gobj)
 
 void it_3F14_Logic1_Dropped(Item_GObj* gobj)
 {
-    it_3F14_Logic1_Thrown(gobj);
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
 /// #itBox_UnkMotion4_Coll

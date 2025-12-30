@@ -806,8 +806,13 @@ int fn_800250A0(int arg0, int arg1, int arg2, int arg3)
 
 /// #fn_800262A0
 
-/// #fn_800263B4
-
+void fn_800263B4(void* ptr)
+{
+    if (ptr != NULL) {
+        void* p = ptr;
+        HSD_ObjFree(&lbl_80433710, p);
+    }
+}
 /// #lbAudioAx_800263E8
 
 /// #lbAudioAx_800264E4

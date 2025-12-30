@@ -18,6 +18,7 @@
 
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "ftKirby/ftKb_Init.h"
 
 #include <math.h>
 #include <melee/cm/camera.h>
@@ -64,6 +65,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
+/* 0D80F4 */ static void fn_800D80F4(Fighter_GObj* gobj);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
@@ -374,8 +376,14 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800D7268
-
+s32 ftCo_800D7268(void* arg0)
+{
+    struct { Fighter_GObj* x0; int x4; }* s = arg0;
+    if (s->x4 == 4) {
+        return ftKb_SpecialN_800F1CD8(s->x0);
+    }
+    return 0;
+}
 /// #ftCo_800D72A0
 
 /// #ftCo_800D730C
@@ -431,8 +439,22 @@ static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid)
 
 /// #ft_800D7770
 
-/// #fn_800D7830
+void fn_800D7830(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 motion;
 
+    ftCommon_8007D7FC(fp);
+
+    if (M2C_FIELD(fp, s32*, 0x10) >= 0xA6) {
+        motion = 0xA6;
+    } else {
+        motion = 0x9E;
+    }
+
+    Fighter_ChangeMotionState(gobj, motion, 0x0C4C5280, M2C_FIELD(fp, f32*, 0x894), M2C_FIELD(fp, f32*, 0x89C), 0.0f, NULL);
+    M2C_FIELD(fp, void**, 0x21DC) = fn_800D7938;
+}
 /// #fn_800D78B0
 
 /// #fn_800D7938
@@ -473,8 +495,15 @@ void ftCo_ItemScopeAirStart_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800D7830);
 }
 
-/// #fn_800D7BDC
-
+void fn_800D7BDC(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, ftCo_MS_ItemScopeRapid),
+                              Ft_MF_SkipAttackCount, 0.0F, 1.0F, 0.0F, NULL);
+    fp->mv.co.common.x0 = (int)p_ftCommonData->x5BC;
+    fp->accessory4_cb = fn_800D80F4;
+    fp->take_dmg_cb = fn_800D8378;
+}
 /// #fn_800D7C60
 
 /// #fn_800D7CEC
@@ -694,8 +723,12 @@ void ftCo_CatchDash_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_Catch_Phys
 
-/// #ftCo_CatchDash_Phys
-
+void ftCo_CatchDash_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ft_80085030(gobj, *(float*)&p_ftCommonData->x64 * fp->co_attrs.gr_friction,
+                fp->facing_dir);
+}
 void ftCo_Catch_Coll(Fighter_GObj* gobj)
 {
     ft_800841B8(gobj, fn_800D8E30);
