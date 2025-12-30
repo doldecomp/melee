@@ -18,7 +18,7 @@ typedef struct {
     /* 0x0C */ s32 xC;
     /* 0x10 */ void* x10;
     /* 0x14 */ s32 x14;
-    /* 0x18 */ void* x18;
+    /* 0x18 */ s32 x18;
     /* 0x1C */ s32 x1C;
     /* 0x20 */ s32 x20;
     /* 0x24 */ s32 x24;
@@ -78,7 +78,7 @@ void un_80321950(void* s)
     ((vi1202_UnkStruct*)s)->xC = 0;
     ((vi1202_UnkStruct*)s)->x10 = *(void**)((char*)Fighter_804D6500 + 0x20);
     ((vi1202_UnkStruct*)s)->x14 = 0x83D60;
-    ((vi1202_UnkStruct*)s)->x18 = *(void**)((char*)Fighter_804D6500 + 0x28);
+    ((vi1202_UnkStruct*)s)->x18 = *(s32*)((char*)Fighter_804D6500 + 0x28);
     ((vi1202_UnkStruct*)s)->x1C = 0;
     ((vi1202_UnkStruct*)s)->x20 = 0;
     ((vi1202_UnkStruct*)s)->x24 = 0;
@@ -103,4 +103,17 @@ void un_80321C28(void)
         lbAudioAx_800236B8(data->x2C);
     }
     data->x2C = -1;
+}
+
+void un_80321C70(void)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    void* fighter = Fighter_804D6500;
+    s32 x18 = data->x18;
+    if (x18 >= *(s32*)((char*)fighter + 0x28)) {
+        return;
+    }
+    if (x18 >= *(s32*)((char*)fighter + 0x24)) {
+        data->x1C = 1;
+    }
 }
