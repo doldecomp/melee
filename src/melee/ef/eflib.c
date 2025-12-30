@@ -1023,7 +1023,7 @@ inline void efLib_8005D174_inline1(HSD_Generator* generator_1)
 // by trying to mimic original inlining Likely need to be remade to match how
 // inlines were actually written For more work/alternatives for this function
 // that may be helpful, see https://decomp.me/scratch/VjlDJ
-void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg_jobj, s32 arg3)
+void efLib_8005D174(int arg0, s32 arg1, HSD_JObj* arg_jobj, s32 arg3)
 {
     // HSD_JObj* jobj_2;
     // HSD_JObj* jobj_3;
@@ -1225,7 +1225,6 @@ void fn_8005DB20(s32 arg0, s32 arg1, s32 arg2, HSD_JObj* arg3)
     efLib_8005D174(arg1, arg2, arg3, 0);
 }
 
-// void fn_8005DB70(s32 arg0, s32 lo, s32 hi, HSD_JObj* jobj)
 void fn_8005DB70(int arg0, int lo, int hi, HSD_JObj* jobj)
 {
     if (lo == 0x1E) {
