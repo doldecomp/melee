@@ -2,13 +2,14 @@
 #define GALE01_23749C
 
 #include <placeholder.h>
+#include <stdbool.h>
 
 #include <baselib/forward.h>
 
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
 /* 23754C */ char* GetNameText(int slot);
 /* 237594 */ int GetNameCount(void);
-/* 2375EC */ UNK_RET IsNameListFull(UNK_PARAMS);
+/* 2375EC */ bool IsNameListFull(void);
 /* 237654 */ UNK_RET CompareNameStrings(UNK_PARAMS);
 /* 2377A4 */ UNK_RET fn_802377A4(UNK_PARAMS);
 /* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
@@ -20,7 +21,7 @@
 /* 237F78 */ UNK_RET mnName_ConfirmNameDeleteInput(UNK_PARAMS);
 /* 23817C */ UNK_RET mnName_MainInput(UNK_PARAMS);
 /* 238540 */ UNK_RET fn_80238540(UNK_PARAMS);
-/* 2385A0 */ UNK_RET mnName_802385A0(UNK_PARAMS);
+/* 2385A0 */ void mnName_802385A0(HSD_GObj* gobj);
 /* 2385D4 */ UNK_RET mnName_GetPageCount(UNK_PARAMS);
 /* 238698 */ UNK_RET mnName_GetColumnCount(UNK_PARAMS);
 /* 238754 */ UNK_RET mnName_80238754(UNK_PARAMS);
