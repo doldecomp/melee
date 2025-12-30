@@ -476,7 +476,7 @@ config.libs = [
     MeleeLib(
         "cm (Camera)",
         [
-            Object(Matching, "melee/cm/camera.c"),
+            Object(NonMatching, "melee/cm/camera.c"),
             Object(Matching, "melee/cm/cmsnap.c"),
         ],
     ),
