@@ -1,3 +1,11 @@
+/**
+ * @file lbbgflash.c
+ * @brief Background flash effects for dramatic game events.
+ *
+ * Provides full-screen color overlay flashes triggered by various game events.
+ * Called from game mode code (gmallstar.c, gm_17C0.c, gm_1A4C.c, etc).
+ */
+
 #include "lbbgflash.h"
 
 #include <placeholder.h>
@@ -24,7 +32,7 @@ extern BgFlashData lbl_80433658;
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
-/// @brief Initialize background flash state for mode 5.
+/// @brief Initialize background flash state.
 /* 02087C */ void lbBgFlash_InitState(int* duration);
 
 extern s32 lbl_804D3840;
@@ -37,15 +45,19 @@ extern s32 lbl_804D3848;
 
 /// #fn_800204C8
 
-void lbBgFlash_800205F0(s32 arg0)
+/// @brief Trigger background flash.
+/// @param duration Flash duration in frames (minimum 1).
+void lbBgFlash_800205F0(s32 duration)
 {
-    if (arg0 < 1) {
-        arg0 = 1;
+    if (duration < 1) {
+        duration = 1;
     }
-    lbBgFlash_800206D4(&lbl_804D3848, &lbl_804D3840, arg0);
+    lbBgFlash_800206D4(&lbl_804D3848, &lbl_804D3840, duration);
     lbl_80433658.state.mode = 0;
 }
 
+/// @brief Trigger background flash.
+/// @param count Flash duration in frames (minimum 1).
 void lbBgFlash_8002063C(int count)
 {
     if (count < 1) {

@@ -1,3 +1,8 @@
+/**
+ * @file lbbgflash.h
+ * @brief Background flash effects for dramatic game events.
+ */
+
 #ifndef GALE01_01FC08
 #define GALE01_01FC08
 
@@ -9,11 +14,13 @@
 /* 01FC08 */ UNK_RET fn_8001FC08(UNK_PARAMS);
 /* 01FEC4 */ UNK_RET fn_8001FEC4(UNK_PARAMS);
 /* 0204C8 */ UNK_RET fn_800204C8(UNK_PARAMS);
-/* 0205F0 */ void lbBgFlash_800205F0(s32);
-/* 02063C */ void lbBgFlash_8002063C(int);
+/// @brief Trigger background flash.
+/* 0205F0 */ void lbBgFlash_800205F0(s32 duration);
+/// @brief Trigger background flash.
+/* 02063C */ void lbBgFlash_8002063C(int count);
 /* 020688 */ void lbBgFlash_80020688(int);
 /* 0206D4 */ void lbBgFlash_800206D4(void*, s32*, int);
-/// @brief Initialize background flash state for mode 5.
+/// @brief Initialize background flash state.
 /* 02087C */ void lbBgFlash_InitState(int* duration);
 /* 0208B0 */ UNK_RET fn_800208B0(UNK_PARAMS);
 /* 0208EC */ UNK_RET lbBgFlash_800208EC(UNK_PARAMS);

@@ -1,3 +1,11 @@
+/**
+ * @file lbrefract.c
+ * @brief Refraction visual effects using GX indirect textures.
+ *
+ * Uses reference counting to track active effect users.
+ * Supports IA4, IA8, and RGBA8 texture formats.
+ */
+
 #include "lbrefract.h"
 
 #include "lb/types.h"
@@ -12,11 +20,6 @@
 extern HSD_DObjInfo hsdDObj;
 
 /// @brief Write IA4 texture coordinate to refraction buffer.
-/// @param data Refraction callback data containing buffer info.
-/// @param row Texture row index.
-/// @param col Texture column index.
-/// @param intensity Intensity value (0-255).
-/// @param alpha Alpha value (0-255).
 /* 021F34 */ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data,
                                                     s32 row, u32 col, u32 arg3,
                                                     u8 arg4, u8 intensity,
@@ -27,9 +30,11 @@ extern HSD_DObjInfo hsdDObj;
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
 /// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
 /* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
-/* 022120 */ static void fn_80022120(lbRefract_CallbackData* data, s32 row,
-                                     u32 col, u32* out_r, u32* out_g, u8* out_b,
-                                     u8* out_a);
+/// @brief Read RGBA8 texture coordinate addresses from refraction buffer.
+/* 022120 */ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data,
+                                                     s32 row, u32 col,
+                                                     u32* out_r, u32* out_g,
+                                                     u8* out_b, u8* out_a);
 /* 022DF8 */ static inline float lbRefract_80022DF8(float x);
 /// @brief Initialize refraction callback data for a texture buffer.
 /* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer,
@@ -49,8 +54,8 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define INF MSL_TrigF_80400774[0]
 
 static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
-                                       u32 col, u32 arg3, u8 arg4, u8 intensity,
-                                       u8 alpha)
+                                       u32 col, u32 arg3, u8 arg4,
+                                       u8 intensity, u8 alpha)
 {
     s32 offset, tile_col, base_addr;
     u8* dst;
@@ -64,8 +69,9 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
     dst[offset + 1] = intensity;
 }
 
-void fn_80022120(lbRefract_CallbackData* data, s32 row, u32 col, u32* out_r,
-                 u32* out_g, u8* out_b, u8* out_a)
+static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
+                                        u32 col, u32* out_r, u32* out_g,
+                                        u8* out_b, u8* out_a)
 {
     s32 base_offset;
     s32 pixel_offset;
@@ -116,7 +122,7 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
         goto block_11;
     case 6:
         data->callback0 = fn_80021FB4;
-        data->callback1 = fn_80022120;
+        data->callback1 = lbRefract_ReadTexCoordRGBA8;
         data->row_stride = (width * 0x10) & 0xFFFFFFC0;
         goto block_11;
     case 5:
@@ -126,6 +132,7 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
     }
 }
 
+/// @brief Copy framebuffer to refraction source texture.
 void lbRefract_80022560(void)
 {
     if (lbl_804336D0[0] != 0) {
@@ -137,6 +144,7 @@ void lbRefract_80022560(void)
     }
 }
 
+/// @brief Reset TEV and indirect texture stages.
 void lbRefract_800225D4(void)
 {
     GXSetTevDirect(0);
@@ -153,11 +161,13 @@ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
     HSD_StateInvalidate(-1);
 }
 
+/// @brief Increment refraction effect user count.
 void lbRefract_80022BB8(void)
 {
     lbl_804336D0[0] += 1;
 }
 
+/// @brief Decrement refraction effect user count.
 void lbRefract_80022BD0(void)
 {
     lbl_804336D0[0] -= 1;
