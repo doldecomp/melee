@@ -6,9 +6,12 @@
 #include <baselib/jobj.h>
 
 #include "gm/gm_unsplit.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "vi.h"
 
+extern void* un_804D7000;
+extern u8 un_804D6FF4;
 extern u8 un_804D6FFC;
 extern u8 un_804D6FFD;
 extern s32 un_804D6FF8;
@@ -27,7 +30,24 @@ void un_8031F9B4(HSD_GObj* gobj)
 
 /// #fn_8031FAA8
 
-/// #fn_8031FB90
+void fn_8031FB90(HSD_GObj* gobj)
+{
+    u8* colors;
+    char pad[8];
+    if (un_804D7000 != NULL) {
+        lbShadow_8000F38C(0);
+    }
+    if (HSD_CObjSetCurrent(GET_COBJ(gobj)) != 0) {
+        colors = &un_804D6FF4;
+        HSD_SetEraseColor(colors[0], colors[1], colors[2], colors[3]);
+        HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
+        vi_8031CA04(gobj);
+        *(s32*)((char*)gobj + 0x24) = 0x881;
+        *(s32*)((char*)gobj + 0x20) = 0;
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_CObjEndCurrent();
+    }
+}
 
 void fn_8031FC30(HSD_GObj* gobj)
 {
