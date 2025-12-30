@@ -946,10 +946,12 @@ int lb_8001C404(int arg0)
 
 int lb_8001C4A8(void* arg0, void* arg1)
 {
-    struct {
-        int unk0, unk4, unk8;
-    }* var_r30;
     int i;
+    struct {
+        int unk0;
+        int unk4;
+        int unk8;
+    }* var_r30;
 
     var_r30 = arg0;
     hsd_803B24E4(&lb_80432A68.unk_A8, 0, 0x2000, lb_80432A68.lib_area);
