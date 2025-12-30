@@ -38,10 +38,10 @@ void mpIsland_8005A6F8(void)
     mpIsland_80458E88.x4 = NULL;
     mpIsland_80458E88.x8 = NULL;
     mpIsland_80458E88.xC = NULL;
-    mpIsland_80458E88.x14 = NULL;
+    mpIsland_80458E88.x18 = NULL;
     mpIsland_80458E88.x1C = NULL;
     mpIsland_80458E88.x10 = NULL;
-    mpIsland_80458E88.x18 = NULL;
+    mpIsland_80458E88.x14 = NULL;
     mpIsland_80458E88.x20 = NULL;
 }
 
@@ -493,8 +493,8 @@ void mpIsland_8005B334(int arg0, int arg1, int arg2, bool arg3)
 
     mpIsland_8005AE1C(&mpIsland_80458E88.next, &mpIsland_80458E88.x18, arg1,
                       arg2, arg3);
-    mpIsland_8005AE1C(&mpIsland_80458E88.x4, &mpIsland_80458E88.x1C, arg1, arg2,
-                      arg3);
+    mpIsland_8005AE1C(&mpIsland_80458E88.x4, &mpIsland_80458E88.x1C, arg1,
+                      arg2, arg3);
     mpIsland_8005B004(&mpIsland_80458E88.x10, &mpIsland_80458E88.x20, arg0, 1,
                       arg1, arg2, arg3);
     mpIsland_8005B004(&mpIsland_80458E88.x14, &mpIsland_80458E88.x20, arg0, 2,
