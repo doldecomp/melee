@@ -1346,13 +1346,11 @@ struct Fighter {
         /* fp+1874 */ int x1874;
         /* fp+1878 */ int x1878;
         /* fp+187C */ float x187c;
-        /* fp+1880 */ int x1880;
-        /* fp+1884 */ int x1884;
-        /* fp+1888 */ int x1888;
+        /* fp+1880 */ Vec3 x1880;
         /* fp+188C */ int x188c;
         /* fp+1890 */ int x1890;
         /* fp+1894 */ int x1894;
-        /* fp+1898 */ int x1898;
+        /* fp+1898 */ float x1898;
         /* fp+189C */ float x189C_unk_num_frames;
         /* fp+18A0 */ float x18a0;
         /// kb magnitude

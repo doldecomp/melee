@@ -68,9 +68,6 @@ struct UnkSize320_t {
 static DmgLogEntry dmg_log0[20];
 struct DmgLogEntry dmg_log1[20];
 
-// .sdata
-char* const ftColl_804D3A68;
-
 // .sbss
 static size_t dmg_log0_idx;
 static size_t dmg_log1_idx;
@@ -1648,26 +1645,26 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
     Fighter* owner_fp;
     Item* ip;
     bool should_process;
-    PAD_STACK(48);
+    PAD_STACK(30);
 
     fp = gobj->user_data;
     data_ptr = ftColl_803C0C40;
-    dmg_count = getEnvDmg(*(float*)&fp->dmg.x1898);
+    dmg_count = getEnvDmg(fp->dmg.x1898);
 
     if (fp->x221C_b4) {
-        fp->dmg.x1834 = fp->dmg.x1834 - *(float*)&fp->dmg.x1898;
+        fp->dmg.x1834 = fp->dmg.x1834 - fp->dmg.x1898;
         if (fp->dmg.x1834 < 0.0f) {
-            *(float*)&fp->dmg.x1898 = -fp->dmg.x1834;
+            fp->dmg.x1898 = -fp->dmg.x1834;
             fp->x221C_b4 = 0;
         }
     }
 
     if (!fp->x221C_b4) {
-        if (*(float*)&fp->dmg.x1898 > 500.0f) {
-            OSReport((char*)&data_ptr[6]);
-            __assert((char*)&data_ptr[13], 0xb7, ftColl_804D3A68);
+        if (fp->dmg.x1898 > 500.0f) {
+            OSReport("attack power over 500!! %f\n", fp->dmg.x1898);
+            __assert("ftcoll.c", 0xb7, "0");
         }
-        fp->dmg.x1838_percentTemp += *(float*)&fp->dmg.x1898;
+        fp->dmg.x1838_percentTemp += fp->dmg.x1898;
         if (dmg_count > fp->dmg.x183C_applied) {
             fp->dmg.x183C_applied = dmg_count;
         }
@@ -1686,7 +1683,7 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
     case HSD_GOBJ_CLASS_FIGHTER:
         victim_gobj = fp->gobj;
         {
-            float dmg_amount = *(float*)&fp->dmg.x1898;
+            float dmg_amount = fp->dmg.x1898;
             plStale_UpdateStaleMovesFromFighter(source, victim_gobj);
             ftColl_80076444(source, victim_gobj);
             src_fp = source->user_data;
@@ -1699,7 +1696,7 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
     case HSD_GOBJ_CLASS_ITEM:
         victim_gobj = fp->gobj;
         {
-            float dmg_amount = *(float*)&fp->dmg.x1898;
+            float dmg_amount = fp->dmg.x1898;
             plStale_UpdateStaleMovesFromItem(source, victim_gobj);
             ftColl_8007646C(source, victim_gobj);
             ip = source->user_data;
@@ -1718,12 +1715,12 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
 
     {
         float x187c = fp->dmg.x187c;
-        u32 dmg_unsigned = __cvt_fp2unsigned(*(float*)&fp->dmg.x1898);
+        u32 dmg_unsigned = fp->dmg.x1898;
         int effect_idx = data_ptr[27 + fp->dmg.x188c];
         Fighter* vfp = gobj->user_data;
         switch (effect_idx) {
         case 1000:
-            ftColl_80078538(gobj, (Vec3*)&fp->dmg.x1880, (float)dmg_unsigned, x187c);
+            ftColl_80078538(gobj, &fp->dmg.x1880, dmg_unsigned, x187c);
             break;
         case 1001:
         case 1002:
