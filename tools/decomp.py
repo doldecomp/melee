@@ -151,7 +151,7 @@ def main() -> None:
             "-m",
             "m2c.main",
             *args.m2c_args,
-            "--knr", "--pointer", "left",
+            "--knr", "--pointer", "left", "--valid-syntax",
             "--target",
             "ppc-mwcc-c",
             "--context",

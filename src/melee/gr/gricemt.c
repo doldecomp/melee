@@ -687,8 +687,8 @@ void grIceMt_801F87C8(Ground_GObj* param1)
     return;
 }
 
-/// @brief Update material GObjs for Icicle Mountain stage.
-/// Iterates over xF4[1..5] calling grMaterial update on each.
+/// @todo Rename: This is callback3 (destroy) for row 5 in grIm_803E4718.
+/// Destroys Item_GObj* stored in icemt.xF4[1-5].
 void grIceMt_801F87FC(Ground_GObj* gobj)
 {
     int i;
