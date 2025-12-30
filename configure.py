@@ -1296,7 +1296,7 @@ config.libs = [
     MeleeLib(
         "ty (Toy, trophies)",
         [
-            Object(NonMatching, "melee/ty/toy.c"),
+            Object(Matching, "melee/ty/toy.c"),
             Object(NonMatching, "melee/ty/tylist.c"),
             Object(Matching, "melee/ty/tyfigupon.c"),
             Object(NonMatching, "melee/ty/tydisplay.c"),
