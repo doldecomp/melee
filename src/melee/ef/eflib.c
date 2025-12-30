@@ -826,8 +826,7 @@ HSD_Generator* efLib_8005CAB0(s32 arg0)
 
     generator = hsd_8039F05C(0, (arg0 / 1000), arg0);
     if (generator != NULL) {
-        psAppSRT = generator->appsrt;
-        if (psAppSRT == NULL) {
+        if ((psAppSRT = generator->appsrt) == NULL) {
             psAppSRT = psAddGeneratorAppSRT_begin(generator, 1);
         }
         if (psAppSRT == NULL) {
