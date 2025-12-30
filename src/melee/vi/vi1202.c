@@ -72,20 +72,20 @@ void un_80321900(void)
     un_80321950(un_804D7050);
 }
 
-void un_80321950(void* s)
+void un_80321950(vi1202_UnkStruct* s)
 {
-    ((vi1202_UnkStruct*)s)->x0 = 0;
-    ((vi1202_UnkStruct*)s)->x4 = 0x10000;
-    ((vi1202_UnkStruct*)s)->x8 = 1.0F;
-    ((vi1202_UnkStruct*)s)->xC = 0;
-    ((vi1202_UnkStruct*)s)->x10 = *(s32*)((char*)Fighter_804D6500 + 0x20);
-    ((vi1202_UnkStruct*)s)->x14 = 0x83D60;
-    ((vi1202_UnkStruct*)s)->x18 = *(s32*)((char*)Fighter_804D6500 + 0x28);
-    ((vi1202_UnkStruct*)s)->x1C = 0;
-    ((vi1202_UnkStruct*)s)->x20 = 0;
-    ((vi1202_UnkStruct*)s)->x24 = 0;
-    ((vi1202_UnkStruct*)s)->x2C = -1;
-    ((vi1202_UnkStruct*)s)->x28 = -1;
+    s->x0 = 0;
+    s->x4 = 0x10000;
+    s->x8 = 1.0F;
+    s->xC = 0;
+    s->x10 = *(s32*)((char*)Fighter_804D6500 + 0x20);
+    s->x14 = 0x83D60;
+    s->x18 = *(s32*)((char*)Fighter_804D6500 + 0x28);
+    s->x1C = 0;
+    s->x20 = 0;
+    s->x24 = 0;
+    s->x2C = -1;
+    s->x28 = -1;
 }
 
 void fn_803219AC(HSD_GObj* gobj)
@@ -267,11 +267,11 @@ bool un_80322258(float arg)
     if (arg >= val2c + val18) {
         val1c = *(f32*)(mpLib_80458868 + 0x1c);
         if (arg > val1c - val2c) {
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
 s32 un_80322298(float arg)
