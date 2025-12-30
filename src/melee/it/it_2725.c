@@ -8948,14 +8948,14 @@ void it_802798D4(Item_GObj* item_gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
-#pragma pop
-
 void it_8027990C(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     PAD_STACK(4);
     it_80273648(item_gobj, cmd->u->unk33.unk0, cmd->u->unk33.unk1);
     NEXT_CMD(cmd);
 }
+
+#pragma pop
 
 void it_80279958(Item_GObj* item_gobj, CommandInfo* cmd)
 {
