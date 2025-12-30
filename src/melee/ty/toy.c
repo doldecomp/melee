@@ -12,11 +12,8 @@
 #include "gm/gmmain_lib.h"
 #include "if/textlib.h"
 #include "lb/lb_00B0.h"
-<<<<<<< HEAD
-=======
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
->>>>>>> 8c8cc9bff (Fix build: add missing includes and prototypes for ty module)
 #include "mn/mnsoundtest.h"
 
 #include "ty/forward.h"

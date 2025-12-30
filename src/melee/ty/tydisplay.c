@@ -1,10 +1,7 @@
 #include "tydisplay.h"
 
-<<<<<<< HEAD
-=======
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
->>>>>>> 8c8cc9bff (Fix build: add missing includes and prototypes for ty module)
 #include "if/textlib.h"
 #include "ty/toy.h"
 #include "ty/tyfigupon.h"
@@ -12,8 +9,6 @@
 
 #include <baselib/random.h>
 
-<<<<<<< HEAD
-=======
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -74,7 +69,6 @@ void un_8031B9A4_OnFrame(void)
 
 /// #un_8031C1D0
 
->>>>>>> 63f98acce (Match un_8031B9A4_OnFrame (100%))
 void tyDisplay_8031C2CC(void)
 {
     un_803124BC();

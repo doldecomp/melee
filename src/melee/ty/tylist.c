@@ -1,6 +1,5 @@
+#include "tylist.h"
 
-<<<<<<< HEAD
-=======
 #include "lb/lb_00B0.h"
 
 #include <baselib/cobj.h>
@@ -91,4 +90,3 @@ void fn_80314504(HSD_GObj* gobj)
 /// #un_803147C4
 
 /// #un_803148E4
->>>>>>> 8c8cc9bff (Fix build: add missing includes and prototypes for ty module)
