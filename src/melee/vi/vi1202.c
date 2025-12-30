@@ -62,6 +62,86 @@ void fn_803219AC(HSD_GObj* gobj)
     un_80321AF4(gobj);
 }
 
+void un_80321A00(HSD_GObj* gobj)
+{
+    s32 zero;
+    vi1202_UnkStruct* data = un_804D7050;
+    void* fighter = Fighter_804D6500;
+
+    if (data->x18 >= *(s32*)((char*)fighter + 0x28)) {
+        if (data->x10 < *(s32*)((char*)fighter + 0x20)) {
+            data->x10 = data->x10 + 1;
+        }
+        return;
+    }
+
+    if (lbAudioAx_80023710(data->x2C) != 0) {
+        return;
+    }
+    data->x18 = data->x18 + 1;
+
+    if (data->x18 < *(s32*)((char*)Fighter_804D6500 + 0x28)) {
+        if (data->x1C != 0) {
+            zero = 0;
+            data->x1C = zero;
+            data->x10 = zero;
+            data->x18 = *(s32*)((char*)Fighter_804D6500 + 0x28);
+            un_80321C28();
+            if (data->x20 != 0) {
+                un_80321CA4(0x144);
+                data->x20 = zero;
+            }
+        } else {
+            un_80321BF8(data->x14);
+        }
+    } else {
+        data->x10 = 0;
+        un_80321C28();
+        un_80321CA4(0x140);
+    }
+}
+
+void un_80321AF4(HSD_GObj* gobj)
+{
+    char* mpLib = mpLib_80458868;
+    HSD_GObj* cur;
+    vi1202_UnkStruct* data = un_804D7050;
+    s32 old_x24 = data->x24;
+    s32 flag = 0;
+    Vec3 pos;
+    char pad[12];
+
+    data->x24 = 0;
+    cur = *(HSD_GObj**)((char*)HSD_GObj_Entities + 0x20);
+
+    while (cur != NULL) {
+        if (ftLib_8008732C(cur) == 0) {
+            if (ftLib_8008731C(cur) == 0) {
+                ftLib_80086644(cur, &pos);
+
+                if (pos.y < *(f32*)((char*)Fighter_804D6500 + 0x40) + *(f32*)(mpLib + 0x14)) {
+                    data->x24 = data->x24 + 1;
+                } else {
+                    if ((u32)data->xC == ftLib_80087460(cur)) {
+                        flag = 1;
+                    }
+                }
+            }
+        }
+        cur = *(HSD_GObj**)((char*)cur + 0x8);
+    }
+
+    if (old_x24 < *(s32*)((char*)Fighter_804D6500 + 0x3C)) {
+        if (data->x24 >= *(s32*)((char*)Fighter_804D6500 + 0x3C)) {
+            if (flag != 0) {
+                un_8032201C(data->xC, 3);
+            } else {
+                un_80322178(3);
+            }
+        }
+    }
+}
+
 void un_80321BF8(int arg0)
 {
     vi1202_UnkStruct* data;
@@ -106,6 +186,56 @@ void un_80321CE8(void)
         lbAudioAx_800236B8(data->x28);
     }
     data->x28 = -1;
+}
+
+void un_8032201C(int arg0, s32 cat)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    char pad[16];
+
+    switch (cat) {
+    case 0:
+        return;
+    case 3:
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13d);
+        break;
+    case 2:
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13e);
+        break;
+    case 1:
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13f);
+        break;
+    }
+
+    if ((u32)arg0 != 0) {
+        if ((u32)data->xC == (u32)arg0) {
+            void* fighter = Fighter_804D6500;
+            vi1202_UnkStruct* data2 = un_804D7050;
+            if (data2->x18 < *(s32*)((char*)fighter + 0x28)) {
+                if (data2->x18 >= *(s32*)((char*)fighter + 0x24)) {
+                    data2->x1C = 1;
+                }
+            }
+        }
+    }
+
+    {
+        HSD_GObj* gobj = ftLib_8008741C(arg0);
+        s32 port = ftLib_800874BC(gobj);
+        data->x10 = port;
+    }
 }
 
 void un_80322178(int arg)
