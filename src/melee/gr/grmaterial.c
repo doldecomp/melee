@@ -19,7 +19,6 @@ grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
                     void (*arg5)(Item_GObj*, Ground*),
                     void (*arg6)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
                     void (*arg7)(Item_GObj*, Ground*, HSD_GObj*));
-/* 1C8D98 */ static void grMaterial_801C8D98(HSD_GObj* gobj, int id);
 /* 1C8E48 */ static bool grMaterial_801C8E48(HSD_GObj* gobj);
 /* 1C8E74 */ static void grMaterial_801C8E74(void);
 /* 1C8EF8 */ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode);
