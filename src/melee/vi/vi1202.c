@@ -124,3 +124,12 @@ void un_80321CA4(s32 arg)
     un_80321CE8();
     data->x28 = lbAudioAx_8002411C(arg);
 }
+
+void un_80321CE8(void)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    if (lbAudioAx_80023710(data->x28) != 0) {
+        lbAudioAx_800236B8(data->x28);
+    }
+    data->x28 = -1;
+}
