@@ -1821,8 +1821,8 @@ loop_7:
 
 void fn_8005FBE4(Effect* arg_effect)
 {
-    Vec3 sp14;
     HSD_JObj* jobj_1;
+    Vec3 sp14;
 
     lb_8000B1CC(arg_effect->xC, NULL, &sp14);
     sp14.x += arg_effect->translate.x;
