@@ -2160,7 +2160,32 @@ bool Camera_8002F260(void)
     return cm_80452C68.x341_b7;
 }
 
-/// #Camera_8002F274
+void Camera_8002F274(void)
+{
+    Vec3 sp8;
+
+    if (cm_80452C68.mode != 6) {
+        Camera_8002FE38();
+    }
+
+    cm_80452C68.x341_b3_b4 = 1;
+    cm_80452C68.x35C.vec = cm_80452C68.transform.position;
+
+    switch (cm_80452C68.x341_b3_b4) {
+    case 1:
+        cm_80452C68.transform.target_position = cm_80452C68.x35C.vec;
+        break;
+    case 3:
+        if (cm_80452C68.x35C.cb != NULL && cm_80452C68.x35C.cb(&sp8)) {
+            cm_80452C68.transform.target_position = sp8;
+        }
+        break;
+    case 2:
+    case 0:
+    default:
+        break;
+    }
+}
 
 void fn_8002F360(HSD_GObj* x)
 {
