@@ -13,7 +13,8 @@
 /* 02063C */ void lbBgFlash_8002063C(int);
 /* 020688 */ void lbBgFlash_80020688(int);
 /* 0206D4 */ void lbBgFlash_800206D4(void*, s32*, int);
-/* 02087C */ void fn_8002087C(int* arg0);
+/// @brief Initialize background flash state for mode 5.
+/* 02087C */ void lbBgFlash_InitState(int* duration);
 /* 0208B0 */ UNK_RET fn_800208B0(UNK_PARAMS);
 /* 0208EC */ UNK_RET lbBgFlash_800208EC(UNK_PARAMS);
 /* 0209F4 */ void lbBgFlash_800209F4(void);

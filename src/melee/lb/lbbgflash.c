@@ -24,7 +24,8 @@ extern BgFlashData lbl_80433658;
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
-/* 02087C */ void fn_8002087C(int* arg0);
+/// @brief Initialize background flash state for mode 5.
+/* 02087C */ void lbBgFlash_InitState(int* duration);
 
 extern s32 lbl_804D3840;
 extern s32 lbl_804D3844;
@@ -58,11 +59,11 @@ void lbBgFlash_8002063C(int count)
 
 /// #lbBgFlash_800206D4
 
-void fn_8002087C(int* arg0)
+void lbBgFlash_InitState(int* duration)
 {
     lbl_80433658.state.active = 0;
     lbl_80433658.state.mode = 5;
-    lbl_80433658.xC = *arg0;
+    lbl_80433658.xC = *duration;
 }
 /// #fn_800208B0
 

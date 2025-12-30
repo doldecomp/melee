@@ -11,14 +11,16 @@
 
 extern HSD_DObjInfo hsdDObj;
 
-/* 021F34 */ static void fn_80021F34(lbRefract_CallbackData* arg0, s32 arg1,
-                                     u32 arg2, u32 arg3, u8 arg4, u8 arg5,
-                                     u8 arg6);
+/// @brief Write IA4 texture coordinate to refraction buffer.
+/* 021F34 */ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* arg0,
+                                                    s32 arg1, u32 arg2, u32 arg3,
+                                                    u8 arg4, u8 arg5, u8 arg6);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
-/* 022608 */ static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+/// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
+/* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 /* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
                                      u32 arg2, u32* arg3, u32* arg4, u8* arg5,
                                      u8* arg6);
@@ -39,8 +41,9 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
 
-static void fn_80021F34(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2,
-                        u32 arg3, u8 arg4, u8 arg5, u8 arg6)
+static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* arg0, s32 arg1,
+                                       u32 arg2, u32 arg3, u8 arg4, u8 arg5,
+                                       u8 arg6)
 {
     s32 t0, t1, t2;
     u8* ptr;
@@ -87,7 +90,7 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
     arg0->unk5 = GXGetTexBufferSize(arg3, arg4, arg2, 0U, 0U);
     switch (arg2) { /* irregular */
     case 3:
-        arg0->callback0 = fn_80021F34;
+        arg0->callback0 = lbRefract_WriteTexCoordIA4;
         arg0->callback1 = fn_80021FF8;
         arg0->unk4 = (arg3 * 8) & 0xFFFFFFE0;
     block_11:
@@ -127,7 +130,8 @@ void lbRefract_800225D4(void)
     HSD_StateInvalidate(-1);
 }
 
-void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
+                                    u32 rendermode)
 {
     hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
     GXSetTevDirect(0);
