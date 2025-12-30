@@ -1,5 +1,9 @@
 #include "mnname.h"
 
+#include <melee/gm/gmmain_lib.h>
+
+extern char mnName_StringTerminator;
+
 void fn_80249A1C(HSD_GObj* arg0);
 
 /// #mnName_8023749C
@@ -23,7 +27,16 @@ void fn_802377A4(void) {}
 
 /// #DeleteName
 
-/// #IsNameValid
+bool IsNameValid(int slot)
+{
+    char* data = (char*) GetPersistentNameData((u8) slot);
+    char first_char = data[0x198];
+    char term = mnName_StringTerminator;
+    if (term == first_char) {
+        return false;
+    }
+    return true;
+}
 
 /// #CreateNameAtIndex
 

@@ -13,7 +13,7 @@
 /* 2377A4 */ UNK_RET fn_802377A4(UNK_PARAMS);
 /* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
 /* 237834 */ UNK_RET DeleteName(UNK_PARAMS);
-/* 2379BC */ UNK_RET IsNameValid(UNK_PARAMS);
+/* 2379BC */ bool IsNameValid(int slot);
 /* 237A04 */ UNK_RET CreateNameAtIndex(UNK_PARAMS);
 /* 237A68 */ UNK_RET mnName_SortNames(UNK_PARAMS);
 /* 237D94 */ UNK_RET mnName_80237D94(UNK_PARAMS);
