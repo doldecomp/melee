@@ -49,7 +49,6 @@ void un_803218E0_OnFrame(void)
 extern char un_804A2F08[];
 extern vi1202_UnkStruct* un_804D7050;
 extern char mpLib_80458868[];
-extern void* HSD_GObj_Entities;
 
 void un_80321900(void)
 {
@@ -135,7 +134,7 @@ void un_80321AF4(HSD_GObj* gobj)
     char pad[12];
 
     data->x24 = 0;
-    cur = *(HSD_GObj**)((char*)HSD_GObj_Entities + 0x20);
+    cur = HSD_GObj_Entities->fighters;
 
     while (cur != NULL) {
         if (ftLib_8008732C(cur) == 0) {
