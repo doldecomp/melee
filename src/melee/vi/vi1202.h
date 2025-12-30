@@ -27,11 +27,11 @@
 /* 32201C */ void un_8032201C(int, s32);
 /* 322178 */ void un_80322178(int);
 /* 322258 */ bool un_80322258(float);
-/* 322298 */ UNK_RET un_80322298(UNK_PARAMS);
+/* 322298 */ s32 un_80322298(float);
 /* 3222EC */ float un_803222EC(float mag, float angle);
 /* 322314 */ void un_80322314(void);
 /* 32233C */ void un_8032233C(int, int);
 /* 3224DC */ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag);
-/* 322598 */ void un_80322598(int, float);
+/* 322598 */ int un_80322598(int, float);
 
 #endif

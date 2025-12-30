@@ -48,6 +48,8 @@ void un_803218E0_OnFrame(void)
 
 extern char un_804A2F08[];
 extern vi1202_UnkStruct* un_804D7050;
+extern char mpLib_80458868[];
+extern void* HSD_GObj_Entities;
 
 void un_80321900(void)
 {
@@ -63,7 +65,7 @@ void un_80321950(void* s)
     ((vi1202_UnkStruct*)s)->x4 = 0x10000;
     ((vi1202_UnkStruct*)s)->x8 = 1.0F;
     ((vi1202_UnkStruct*)s)->xC = 0;
-    ((vi1202_UnkStruct*)s)->x10 = *(void**)((char*)Fighter_804D6500 + 0x20);
+    ((vi1202_UnkStruct*)s)->x10 = *(s32*)((char*)Fighter_804D6500 + 0x20);
     ((vi1202_UnkStruct*)s)->x14 = 0x83D60;
     ((vi1202_UnkStruct*)s)->x18 = *(s32*)((char*)Fighter_804D6500 + 0x28);
     ((vi1202_UnkStruct*)s)->x1C = 0;
@@ -293,8 +295,6 @@ void un_80322178(int arg)
         break;
     }
 }
-
-extern char mpLib_80458868[];
 
 bool un_80322258(float arg)
 {
