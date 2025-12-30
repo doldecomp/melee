@@ -1460,6 +1460,7 @@ void efLib_8005EB70(Effect* arg_effect)
 
 void efLib_8005EBC8(Effect* arg_effect)
 {
+    f64 temp_d;
     Vec3 sp38;
     Vec3 sp2C;
     HSD_JObj* jobj_2;
@@ -1467,7 +1468,7 @@ void efLib_8005EBC8(Effect* arg_effect)
     HSD_JObj* jobj_1;
     void* user_data;
     HSD_GObj* gobj_1;
-    PAD_STACK(0x10);
+    PAD_STACK(0xC);
 
     gobj_1 = arg_effect->parent_gobj;
     jobj_1 = GET_JOBJ(gobj_1);
@@ -1482,10 +1483,11 @@ void efLib_8005EBC8(Effect* arg_effect)
     HSD_JObjSetScale(jobj_2, &sp38);
 
     if (((Fighter*) user_data)->facing_dir < 0.0f) {
-        rotate_y = -M_PI_2;
+        temp_d = -M_PI_2;
     } else {
-        rotate_y = M_PI_2;
+        temp_d = M_PI_2;
     }
+    rotate_y = temp_d;
     HSD_JObjSetRotationY(jobj_2, rotate_y);
 }
 
