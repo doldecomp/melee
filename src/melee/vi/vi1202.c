@@ -150,3 +150,41 @@ bool un_80322258(float arg)
     }
     return TRUE;
 }
+
+s32 un_80322298(float arg)
+{
+    void* fighter = Fighter_804D6500;
+    if (arg >= *(f32*)((char*)fighter + 0x8)) {
+        return 3;
+    }
+    if (arg >= *(f32*)((char*)fighter + 0x4)) {
+        return 2;
+    }
+    if (arg >= *(f32*)((char*)fighter + 0x0)) {
+        return 1;
+    }
+    return 0;
+}
+
+int un_80322598(int arg0, float arg1)
+{
+    f32 val14 = *(f32*)(mpLib_80458868 + 0x14);
+    s32 cat;
+    void* fighter;
+    if (arg1 >= val14) {
+        goto ret_zero;
+    }
+    fighter = Fighter_804D6500;
+    if (arg1 < *(f32*)((char*)fighter + 0x38) + val14) {
+ret_zero:
+        return 0;
+    }
+    if (arg1 > *(f32*)((char*)fighter + 0x30) + val14) {
+        cat = 3;
+    } else if (arg1 > *(f32*)((char*)fighter + 0x34) + val14) {
+        cat = 2;
+    } else {
+        cat = 1;
+    }
+    un_8032201C(arg0, cat);
+}
