@@ -64,6 +64,14 @@ void fn_803219AC(HSD_GObj* gobj)
     un_80321AF4(gobj);
 }
 
+void un_80321BF8(void)
+{
+    vi1202_UnkStruct* data;
+    char pad[8];
+    data = un_804D7050;
+    data->x2C = lbAudioAx_800240B4();
+}
+
 void un_80321C28(void)
 {
     vi1202_UnkStruct* data = un_804D7050;
