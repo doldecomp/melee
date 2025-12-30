@@ -249,8 +249,13 @@ void un_803102C4(s8 arg0)
 
 /// #un_80311F5C
 
-/// #un_80312018_OnFrame
-
+void un_80312018_OnFrame(void)
+{
+    if (M2C_FIELD(un_804A284C, s8*, 4) != 0) {
+        un_80311F5C();
+        gm_801A4B60();
+    }
+}
 /// #un_80312050
 
 void un_803122D0_OnInit(void)
