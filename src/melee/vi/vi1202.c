@@ -8,6 +8,7 @@
 #include "ft/fighter.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
 #include "vi.h"
 
 typedef struct {
@@ -93,4 +94,13 @@ void fn_803219AC(HSD_GObj* gobj)
     }
     un_80321A00(gobj);
     un_80321AF4(gobj);
+}
+
+void un_80321C28(void)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    if (lbAudioAx_80023710(data->x2C) != 0) {
+        lbAudioAx_800236B8(data->x2C);
+    }
+    data->x2C = -1;
 }
