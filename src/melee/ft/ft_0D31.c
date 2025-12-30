@@ -7,7 +7,10 @@
 
 #include "ft/forward.h"
 
+#include "ft/ft_081B.h"
+#include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
@@ -466,12 +469,24 @@ void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_Rebirth_Phys
 
-/// #ftCo_Rebirth_Coll
-
+void ftCo_Rebirth_Coll(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->smash_attrs.x2135 == -1) {
+        ft_80083DCC(gobj);
+    }
+}
 /// #fn_800D54A4
 
-/// #fn_800D55B4
-
+void fn_800D55B4(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
+    Fighter* other_fp = other_gobj->user_data;
+    if (other_fp->cur_pos.y > fp->cur_pos.y) {
+        fp->cur_pos.y = other_fp->cur_pos.y;
+    }
+}
 /// #ftCo_800D5600
 
 /// #ftCo_RebirthWait_Anim
@@ -482,6 +497,9 @@ void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_RebirthWait_Coll
 
-/// #fn_800D5A30
-
+void fn_800D5A30(Fighter_GObj* gobj)
+{
+    ftColl_8007B7A4(gobj, p_ftCommonData->x5D8);
+    ft_8008A2BC(gobj);
+}
 /// #ftCo_Rebirth_Cam

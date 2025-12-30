@@ -87,6 +87,8 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
     }
 }
 
+/// #lbRefract_8002247C
+
 void lbRefract_80022BB8(void)
 {
     lbl_804336D0[0] += 1;

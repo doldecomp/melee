@@ -27,6 +27,7 @@
 #include "it/types.h"
 
 #include "it/it_26B1.h"
+#include "it/itcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"
@@ -67,6 +68,9 @@ struct UnkSize320_t {
 // .bss
 static DmgLogEntry dmg_log0[20];
 struct DmgLogEntry dmg_log1[20];
+
+// .sdata
+char* const ftColl_804D3A68;
 
 // .sbss
 static size_t dmg_log0_idx;

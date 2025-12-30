@@ -421,7 +421,7 @@ struct ftCommonData {
     /* +5CC */ float x5CC;
     /* +5D0 */ UNK_T x5D0;
     /* +5D4 */ UNK_T x5D4;
-    /* +5D8 */ UNK_T x5D8;
+    /* +5D8 */ int x5D8;
     /* +5DC */ u32 bury_timer_unk1;
     /* +5E0 */ u32 bury_timer_unk2;
     /* +5E4 */ u32 bury_timer_unk3;
