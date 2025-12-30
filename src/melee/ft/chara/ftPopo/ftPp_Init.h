@@ -27,4 +27,7 @@
 /* 3CD7B4 */ extern Fighter_DemoStrings ftPp_Init_DemoMotionFilenames;
 /* 3CD7C4 */ extern Fighter_CostumeStrings ftPp_Init_CostumeStrings[];
 
+/* 4D9860 */ extern f32 ftPp_Init_804D9860;
+/* 4D9880 */ extern f32 ftPp_Init_804D9880;
+
 #endif
