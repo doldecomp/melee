@@ -1,7 +1,21 @@
+#include "lbbgflash.h"
+
 #include <placeholder.h>
 
-/* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
-/* 021C18 */ static UNK_RET fn_80021C18(UNK_PARAMS);
+#include <baselib/gobj.h>
+#include <melee/lb/lb_00F9.h>
+
+/* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
+
+typedef struct lbl_80433658_t {
+    u8 _0 : 1;
+    u8 field : 7;
+    u8 bytes[0x47];
+} lbl_80433658_t;
+
+extern s32 lbl_804D3840;
+extern s32 lbl_804D3844;
+extern lbl_80433658_t lbl_80433658;
 
 /// #fn_8001FC08
 
@@ -11,7 +25,14 @@
 
 /// #lbBgFlash_800205F0
 
-/// #lbBgFlash_8002063C
+void lbBgFlash_8002063C(int count)
+{
+    if (count < 1) {
+        count = 1;
+    }
+    lbBgFlash_800206D4(&lbl_804D3844, &lbl_804D3840, count);
+    lbl_80433658.field = 0;
+}
 
 /// #lbBgFlash_80020688
 
@@ -46,10 +67,20 @@ void lbBgFlash_80021A10(f32 arg8)
 
 /// #fn_80021B04
 
-void fn_80021C18(void) {}
+void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 
 /// #fn_80021C1C
 
 /// #lbBgFlash_80021C48
 
-/// #fn_80021C80
+void fn_80021C80(HSD_GObj* gobj)
+{
+    struct {
+        u8 unk0[4];
+        ColorOverlay x4;
+    }* user_data = gobj->user_data;
+
+    while (lb_80014258(gobj, &user_data->x4, fn_80021C18)) {
+        lb_80014498(&user_data->x4);
+    }
+}
