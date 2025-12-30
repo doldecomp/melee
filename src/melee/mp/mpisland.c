@@ -347,3 +347,128 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
         var_r30++;
     }
 }
+
+static float mpIsland_804D8158;
+
+void mpIsland_8005AE1C(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
+                       int arg3, bool arg4)
+{
+    mp_UnkStruct0* prev_b;
+    mp_UnkStruct0* prev_a;
+    mp_UnkStruct0* cur;
+    mp_UnkStruct0* next;
+    CollVtx* vtx;
+    int end;
+    float z_val;
+    u16 v0;
+
+    prev_b = NULL;
+    prev_a = NULL;
+
+    vtx = mpGetGroundCollVtx();
+    cur = *arg0;
+    end = arg2 + arg3;
+    z_val = mpIsland_804D8158;
+
+    goto loop1_check;
+loop1_body:
+    v0 = cur->x4;
+    next = cur->next;
+
+    if ((int) v0 < arg2) {
+        if ((int) cur->x6 < arg2) {
+            goto add_to_prev_b_1;
+        }
+    }
+
+    if (end > (int) v0) {
+        goto do_assign_1;
+    }
+    if (end <= (int) cur->x6) {
+        goto add_to_prev_b_1;
+    }
+
+do_assign_1:
+    cur->x8.x = vtx[v0].pos.x;
+    cur->x8.y = vtx[cur->x4].pos.y;
+    cur->x8.z = z_val;
+    cur->x14.x = vtx[cur->x6].pos.x;
+    cur->x14.y = vtx[cur->x6].pos.y;
+    cur->x14.z = z_val;
+
+    if (arg4) {
+        goto add_to_prev_b_1;
+    }
+    if (cur->x20 & 2) {
+        goto add_to_prev_b_1;
+    }
+    cur->x20 |= 2;
+    cur->next = prev_a;
+    prev_a = cur;
+    goto loop1_next;
+
+add_to_prev_b_1:
+    cur->next = prev_b;
+    prev_b = cur;
+
+loop1_next:
+    cur = next;
+loop1_check:
+    if (cur != NULL) {
+        goto loop1_body;
+    }
+
+    cur = *arg1;
+    z_val = mpIsland_804D8158;
+
+    goto loop2_check;
+loop2_body:
+    v0 = cur->x4;
+    next = cur->next;
+
+    if ((int) v0 < arg2) {
+        if ((int) cur->x6 < arg2) {
+            goto add_to_prev_a_2;
+        }
+    }
+
+    if (end > (int) v0) {
+        goto do_assign_2;
+    }
+    if (end <= (int) cur->x6) {
+        goto add_to_prev_a_2;
+    }
+
+do_assign_2:
+    cur->x8.x = vtx[v0].pos.x;
+    cur->x8.y = vtx[cur->x4].pos.y;
+    cur->x8.z = z_val;
+    cur->x14.x = vtx[cur->x6].pos.x;
+    cur->x14.y = vtx[cur->x6].pos.y;
+    cur->x14.z = z_val;
+
+    if (arg4 == false) {
+        goto add_to_prev_a_2;
+    }
+    if ((cur->x20 & 2) == 0) {
+        goto add_to_prev_a_2;
+    }
+    cur->x20 &= ~2;
+    cur->next = prev_b;
+    prev_b = cur;
+    goto loop2_next;
+
+add_to_prev_a_2:
+    cur->next = prev_a;
+    prev_a = cur;
+
+loop2_next:
+    cur = next;
+loop2_check:
+    if (cur != NULL) {
+        goto loop2_body;
+    }
+
+    *arg0 = prev_b;
+    *arg1 = prev_a;
+}
