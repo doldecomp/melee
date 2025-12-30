@@ -35,14 +35,14 @@
 void mpIsland_8005A6F8(void)
 {
     mpIsland_80458E88.next = NULL;
-    mpIsland_80458E88.x4 = 0;
-    mpIsland_80458E88.x8.x = 0;
-    mpIsland_80458E88.x8.y = 0;
-    mpIsland_80458E88.x14.y = 0;
-    mpIsland_80458E88.x14.z = 0;
-    mpIsland_80458E88.x8.z = 0;
-    mpIsland_80458E88.x14.x = 0;
-    mpIsland_80458E88.x20 = 0;
+    mpIsland_80458E88.x4 = NULL;
+    mpIsland_80458E88.x8 = NULL;
+    mpIsland_80458E88.xC = NULL;
+    mpIsland_80458E88.x14 = NULL;
+    mpIsland_80458E88.x1C = NULL;
+    mpIsland_80458E88.x10 = NULL;
+    mpIsland_80458E88.x18 = NULL;
+    mpIsland_80458E88.x20 = NULL;
 }
 
 void mpIsland_8005A728(void)
@@ -88,9 +88,9 @@ void mpIsland_8005A728(void)
     v0 = (short*) mpLib_8004D164();
     v1 = mpGetGroundCollLine();
     v2 = mpGetGroundCollVtx();
-    v23 = &mpIsland_80458E88.x4;
-    v24_2 = &mpIsland_80458E88.x8.x;
-    v22_2 = &mpIsland_80458E88.x8.y;
+    v23 = (int*) &mpIsland_80458E88.x4;
+    v24_2 = (s32*) &mpIsland_80458E88.x8;
+    v22_2 = (s32*) &mpIsland_80458E88.xC;
     mpIsland_8005A6F8();
 
     memzero(v33, 0x600u);
@@ -471,4 +471,56 @@ loop2_check:
 
     *arg0 = prev_b;
     *arg1 = prev_a;
+}
+
+/// #mpIsland_8005B004
+
+void mpIsland_8005B334(int arg0, int arg1, int arg2, bool arg3)
+{
+    mp_UnkStruct0* temp;
+
+    if (mpIsland_80458E88.x8 != NULL) {
+        mpIsland_80458E88.x8->next = NULL;
+    } else {
+        mpIsland_80458E88.next = NULL;
+    }
+
+    if (mpIsland_80458E88.xC != NULL) {
+        mpIsland_80458E88.xC->next = NULL;
+    } else {
+        mpIsland_80458E88.x4 = NULL;
+    }
+
+    mpIsland_8005AE1C(&mpIsland_80458E88.next, &mpIsland_80458E88.x18, arg1,
+                      arg2, arg3);
+    mpIsland_8005AE1C(&mpIsland_80458E88.x4, &mpIsland_80458E88.x1C, arg1, arg2,
+                      arg3);
+    mpIsland_8005B004(&mpIsland_80458E88.x10, &mpIsland_80458E88.x20, arg0, 1,
+                      arg1, arg2, arg3);
+    mpIsland_8005B004(&mpIsland_80458E88.x14, &mpIsland_80458E88.x20, arg0, 2,
+                      arg1, arg2, arg3);
+
+    // Find end of first list and link
+    temp = mpIsland_80458E88.next;
+    while (temp != NULL && temp->next != NULL) {
+        temp = temp->next;
+    }
+    if (temp != NULL) {
+        temp->next = mpIsland_80458E88.x10;
+    } else {
+        mpIsland_80458E88.next = mpIsland_80458E88.x10;
+    }
+    mpIsland_80458E88.x8 = temp;
+
+    // Find end of second list and link
+    temp = mpIsland_80458E88.x4;
+    while (temp != NULL && temp->next != NULL) {
+        temp = temp->next;
+    }
+    if (temp != NULL) {
+        temp->next = mpIsland_80458E88.x14;
+    } else {
+        mpIsland_80458E88.x4 = mpIsland_80458E88.x14;
+    }
+    mpIsland_80458E88.xC = temp;
 }
