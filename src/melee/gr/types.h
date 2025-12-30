@@ -296,15 +296,27 @@ struct grKraid_GroundVars {
 };
 
 struct grCorneria_GroundVars {
-    u32 xC4_b0 : 1;
-    u32 xC4_b1 : 1;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+    } xC4_flags;
+    u8 xC5;
+    struct {
+        u8 b0 : 1;
+    } xC6_flags;
+    u8 xC7;
     u32 xC8;
     u32 xCC;
     f32 xD0;
-    f32 xD4;
-    f32 xD8;
-    f32 xDC;
-    f32 xE0;
+    f32 base_x;
+    f32 base_y;
+    f32 offset_x;
+    union {
+        f32 val;
+        struct {
+            u8 b0 : 1;
+        } flags;
+    } offset_y;
     f32 xE4;
     f32 xE8;
     f32 xEC;
@@ -323,8 +335,8 @@ struct grCorneria_GroundVars {
     u8 x11A;
     u8 x11B;
     u32 x11C;
-    Item_GObj* x120;
-    Item_GObj* x124;
+    Item_GObj* left_cannon;
+    Item_GObj* right_cannon;
     HSD_GObj* x128;
     HSD_JObj* x12C;
 };
