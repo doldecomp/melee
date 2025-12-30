@@ -166,6 +166,18 @@ s32 un_80322298(float arg)
     return 0;
 }
 
+f32 un_803222EC(f32 arg1, f32 arg2)
+{
+    void* fighter = Fighter_804D6500;
+    if (!(arg2 > *(f32*)((char*)fighter + 0xc))) {
+        return arg1;
+    }
+    if (!(arg2 < *(f32*)((char*)fighter + 0x10))) {
+        return arg1;
+    }
+    return arg1 * *(f32*)((char*)fighter + 0x14);
+}
+
 int un_80322598(int arg0, float arg1)
 {
     f32 val14 = *(f32*)(mpLib_80458868 + 0x14);
