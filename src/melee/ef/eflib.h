@@ -58,7 +58,7 @@
 /* 05EDDC */ void efLib_8005EDDC(Effect*);
 /* 05F08C */ void efLib_8005F08C(Effect*);
 /* 05F270 */ void efLib_8005F270(Effect*);
-/* 05F454 */ void efLib_8005F454(Effect*);
+/* 05F454 */ void efLib_8005F454(Effect* arg_effect);
 /* 05F748 */ void efLib_8005F748(Effect*);
 /* 05F774 */ void efLib_8005F774(HSD_JObj*, s32, u32, u32);
 /* 05F864 */ void efLib_8005F864(HSD_GObj* gobj, s8, float, float);
