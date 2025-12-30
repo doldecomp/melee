@@ -697,7 +697,7 @@ void ftCo_CatchDash_IASA(Fighter_GObj* gobj) {}
 void ftCo_CatchDash_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ft_80085030(gobj, *(float*)&p_ftCommonData->x64 * fp->co_attrs.gr_friction,
+    ft_80085030(gobj, p_ftCommonData->x64 * fp->co_attrs.gr_friction,
                 fp->facing_dir);
 }
 void ftCo_Catch_Coll(Fighter_GObj* gobj)
