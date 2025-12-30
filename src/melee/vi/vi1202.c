@@ -117,3 +117,10 @@ void un_80321C70(void)
         data->x1C = 1;
     }
 }
+
+void un_80321CA4(s32 arg)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    un_80321CE8();
+    data->x28 = lbAudioAx_8002411C(arg);
+}
