@@ -4,6 +4,8 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
+#include "ft/ftlib.h"
+#include "lb/lbaudio_ax.h"
 #include "vi.h"
 
 void un_8032110C(HSD_GObj* gobj)

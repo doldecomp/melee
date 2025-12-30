@@ -6,6 +6,7 @@
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbshadow.h"
 #include "vi.h"
 
 extern void* un_804D7000;
