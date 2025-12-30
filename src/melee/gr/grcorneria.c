@@ -7,6 +7,7 @@
 #include "grmaterial.h"
 #include "ground.h"
 #include "grzakogenerator.h"
+#include "stage.h"
 #include "inlines.h"
 #include "types.h"
 
@@ -14,6 +15,10 @@
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+
+typedef struct {
+    u8 b0 : 1;
+} xE0_flags, xC6_flags;
 
 /// #grCorneria_801DCCFC
 
@@ -165,8 +170,22 @@ bool grCorneria_801DEC00(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801DEC08
-
+s32 grCorneria_801DEC08(Vec3* pos)
+{
+    if (pos->x > Stage_GetBlastZoneRightOffset()) {
+        return 1;
+    }
+    if (pos->x < Stage_GetBlastZoneLeftOffset()) {
+        return 1;
+    }
+    if (pos->y > Stage_GetBlastZoneTopOffset()) {
+        return 1;
+    }
+    if (pos->y < Stage_GetBlastZoneBottomOffset()) {
+        return 1;
+    }
+    return 0;
+}
 /// #grCorneria_801DEC94
 
 /// #grCorneria_801DED50
@@ -201,8 +220,17 @@ void grCorneria_801DFC24(Ground_GObj* arg) {}
 
 void grCorneria_801DFC28(Ground_GObj* arg) {}
 
-/// #grCorneria_801DFC2C
+void grCorneria_801DFC2C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    u8* base = (u8*)gp;
 
+    base[0xC6] = 0;
+    ((xE0_flags*)(base + 0xE0))->b0 = 0;
+    memzero(base + 0xC8, 0x18);
+    base[0xC4] = 0;
+    gp->x11_flags.b012 = 1;
+}
 bool grCorneria_801DFC90(Ground_GObj* arg)
 {
     return false;
@@ -212,8 +240,16 @@ bool grCorneria_801DFC90(Ground_GObj* arg)
 
 void grCorneria_801DFEB4(Ground_GObj* arg) {}
 
-/// #grCorneria_801DFEB8
+void grCorneria_801DFEB8(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    u8* base = (u8*)gp;
 
+    ((xC6_flags*)(base + 0xC6))->b0 = 0;
+    grAnime_801C8138((HSD_GObj*)gobj, gp->map_id, 0);
+    base[0xC4] = 0;
+    gp->x11_flags.b012 = 1;
+}
 bool grCorneria_801DFF18(Ground_GObj* arg)
 {
     return false;
