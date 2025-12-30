@@ -8,11 +8,12 @@
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
+#include "gm/gm_1601.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "vi.h"
 
-typedef struct {
+struct vi1202_UnkStruct {
     /* 0x00 */ s32 x0;
     /* 0x04 */ s32 x4;
     /* 0x08 */ f32 x8;
@@ -25,7 +26,7 @@ typedef struct {
     /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
     /* 0x2C */ s32 x2C;
-} vi1202_UnkStruct;
+};
 
 void un_8032110C(HSD_GObj* gobj)
 {
@@ -40,6 +41,35 @@ void un_80321130(HSD_GObj* gobj)
 void un_80321154(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
+
+extern void** un_804D7040;
+extern HSD_JObj* un_804D704C;
+extern f32 un_804DE140;
+
+void un_80321178(void)
+{
+    s32 i;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+
+    i = 0;
+    while (((void**)(*un_804D7040))[i] != NULL) {
+        gobj = GObj_Create(0xe, 0xf, 0);
+        jobj = HSD_JObjLoadJoint(*(void**)((void**)(*un_804D7040))[i]);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xb, 0);
+        gm_8016895C(jobj, (DynamicModelDesc*)((void**)(*un_804D7040))[i], 0);
+        HSD_JObjReqAnimAll(jobj, un_804DE140);
+        HSD_JObjAnimAll(jobj);
+        HSD_GObjProc_8038FD54(gobj, un_80321154, 0x17);
+        lb_80011E24(jobj, &un_804D704C, 2, -1);
+        i++;
+    }
+    lbAudioAx_80026F2C(0x18);
+    lbAudioAx_8002702C(8, 0x0020000000000000ULL);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
 }
 
 void un_80321294(HSD_GObj* gobj)
@@ -222,6 +252,180 @@ void un_80321CE8(void)
         lbAudioAx_800236B8(data->x28);
     }
     data->x28 = -1;
+}
+
+void un_80321D30(int arg0, f32 arg1)
+{
+    s32 cat;
+    vi1202_UnkStruct* data = un_804D7050;
+    cat = un_80322298(arg1);
+
+    if (cat >= 2) {
+        if (un_80321EBC(arg0, arg1) != 0) {
+            vi1202_UnkStruct* data2 = un_804D7050;
+            if (lbAudioAx_80023710(data2->x28) != 0) {
+                lbAudioAx_800236B8(data2->x28);
+            }
+            data2->x28 = -1;
+            return;
+        }
+    }
+
+    switch (cat) {
+    case 3:
+    {
+        vi1202_UnkStruct* data2 = un_804D7050;
+        if (lbAudioAx_80023710(data2->x28) != 0) {
+            lbAudioAx_800236B8(data2->x28);
+        }
+        data2->x28 = -1;
+        data2->x28 = lbAudioAx_8002411C(0x140);
+        break;
+    }
+    case 2:
+    {
+        vi1202_UnkStruct* data2 = un_804D7050;
+        if (lbAudioAx_80023710(data2->x28) != 0) {
+            lbAudioAx_800236B8(data2->x28);
+        }
+        data2->x28 = -1;
+        data2->x28 = lbAudioAx_8002411C(0x141);
+        break;
+    }
+    case 1:
+    {
+        vi1202_UnkStruct* data2 = un_804D7050;
+        if (lbAudioAx_80023710(data2->x28) != 0) {
+            lbAudioAx_800236B8(data2->x28);
+        }
+        data2->x28 = -1;
+        data2->x28 = lbAudioAx_8002411C(0x142);
+        break;
+    }
+    }
+
+    if ((u32)arg0 != 0) {
+        if ((u32)data->xC == (u32)arg0) {
+            vi1202_UnkStruct* data3 = un_804D7050;
+            void* fighter = Fighter_804D6500;
+            if (data3->x18 < *(s32*)((char*)fighter + 0x28)) {
+                if (data3->x18 >= *(s32*)((char*)fighter + 0x24)) {
+                    data3->x1C = 1;
+                }
+            }
+        }
+    }
+}
+
+bool un_80321EBC(int arg0, f32 arg1)
+{
+    HSD_GObj* fighter;
+    s32 port;
+    vi1202_UnkStruct* data;
+
+    data = un_804D7050;
+    fighter = ftLib_8008741C(arg0);
+
+    if (fighter == NULL) {
+        return FALSE;
+    }
+
+    port = ftLib_800874BC(fighter);
+
+    if (Player_8003248C(ftLib_80086BE0(fighter), port) == 1) {
+        return FALSE;
+    }
+
+    if (ftLib_80087120(fighter) < *(s32*)((char*)Fighter_804D6500 + 0x1C)) {
+        return FALSE;
+    }
+    if (data->x10 < *(s32*)((char*)Fighter_804D6500 + 0x20)) {
+        return FALSE;
+    }
+
+    if ((u32)data->xC == (u32)arg0) {
+        return FALSE;
+    }
+
+    {
+        s32 sfx_id;
+        vi1202_UnkStruct* data2;
+
+        data->x14 = ftLib_8008746C(fighter);
+        if ((u32)(data->x14 - 0x80000) == 0x3D60) {
+            return FALSE;
+        }
+
+        data2 = un_804D7050;
+        if (lbAudioAx_80023710(data2->x2C) != 0) {
+            lbAudioAx_800236B8(data2->x2C);
+        }
+        data2->x2C = -1;
+
+        if (un_80322298(arg1) == 3) {
+            sfx_id = 0x140;
+        } else {
+            sfx_id = 0x141;
+        }
+
+        data2 = un_804D7050;
+        data2->x2C = lbAudioAx_800240B4(sfx_id);
+        data->xC = arg0;
+        data->x18 = 0;
+        port = ftLib_800874BC(fighter);
+        data->x10 = port;
+        return TRUE;
+    }
+}
+
+void un_8032201C(int arg0, s32 cat)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    char pad[16];
+
+    switch (cat) {
+    case 0:
+        return;
+    case 3:
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13d);
+        break;
+    case 2:
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13e);
+        break;
+    case 1:
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13f);
+        break;
+    }
+
+    if ((u32)arg0 != 0) {
+        if ((u32)data->xC == (u32)arg0) {
+            void* fighter = Fighter_804D6500;
+            vi1202_UnkStruct* data2 = un_804D7050;
+            if (data2->x18 < *(s32*)((char*)fighter + 0x28)) {
+                if (data2->x18 >= *(s32*)((char*)fighter + 0x24)) {
+                    data2->x1C = 1;
+                }
+            }
+        }
+    }
+
+    {
+        HSD_GObj* gobj = ftLib_8008741C(arg0);
+        s32 port = ftLib_800874BC(gobj);
+        data->x10 = port;
+    }
 }
 
 void un_80322178(int arg)
