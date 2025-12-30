@@ -60,8 +60,11 @@ void fn_802377A4(void) {}
 
 /// #fn_80238540
 
-/// #mnName_802385A0
-
+void mnName_802385A0(HSD_GObj* gobj)
+{
+    mnName_80238754(gobj);
+    mnName_8023A058(gobj);
+}
 /// #mnName_GetPageCount
 
 /// #mnName_GetColumnCount
