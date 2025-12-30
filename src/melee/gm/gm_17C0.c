@@ -37,6 +37,8 @@
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
     /* +104 */ int x104;
+    /* +108 */ char pad_108[0xE];
+    /* +116 */ u8 x116;
 };
 
 struct lbl_80472E48_t {
@@ -802,8 +804,13 @@ int fn_8017F294(void)
 
 /// #fn_80180630
 
-/// #fn_80180AC0
-
+int fn_80180AC0(void)
+{
+    if (lbl_80472D28.x116 == 1) {
+        return 1;
+    }
+    return 0;
+}
 s32 gm_80180AE4(void)
 {
     return lbl_80472EC8[0] * 0xA;
