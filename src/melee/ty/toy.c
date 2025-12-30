@@ -11,6 +11,7 @@
 #include "gm/gmmain_lib.h"
 #include "if/textlib.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbarchive.h"
 #include "mn/mnsoundtest.h"
 
 #include "ty/forward.h"
@@ -21,6 +22,11 @@
 #include <MSL/math.h> // for ABS
 
 static u8 un_804D6EA1;
+
+extern char un_803FDD18[];
+extern void* un_804D6ECC;
+extern void* un_804D6EA8;
+extern void* un_804D6EA4;
 
 /// #un_80305058
 
@@ -224,8 +230,21 @@ void un_803102C4(s8 arg0)
     M2C_FIELD(un_804D6E6C, s8*, 4) = arg0;
 }
 
-/// #un_803102D0
-
+void un_803102D0(void)
+{
+    char* base = un_803FDD18;
+    
+    if (un_804D6ECC == NULL) {
+        un_804D6ECC = lbArchive_LoadSymbols(
+            base + 0xA58, 
+            &un_804D6EA8,
+            base + 0xA64,
+            &un_804D6EA4,
+            base + 0xA74,
+            NULL
+        );
+    }
+}
 /// #un_80310324
 
 /// #un_80310660
