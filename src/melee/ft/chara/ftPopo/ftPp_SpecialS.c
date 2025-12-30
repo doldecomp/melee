@@ -915,8 +915,12 @@ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialHi_801220D4
 
-/// #ftPp_SpecialHiThrow_1_Anim
-
+void ftPp_SpecialHiThrow_1_Anim(Fighter_GObj* gobj)
+{
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+    }
+}
 /// #ftPp_SpecialAirHiThrow_1_Anim
 
 void ftPp_SpecialHiThrow_1_IASA(Fighter_GObj* gobj) {}
