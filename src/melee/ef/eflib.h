@@ -49,7 +49,7 @@
 /* 05DE94 */ void efLib_8005DE94(Effect*);
 /* 05E090 */ void efLib_8005E090(Effect*);
 /* 05E1D8 */ void efLib_8005E1D8(Effect*);
-/* 05E2B4 */ void efLib_8005E2B4(Effect*);
+/* 05E2B4 */ void efLib_8005E2B4(Effect* effect);
 /* 05E3A0 */ void efLib_8005E3A0(Effect*);
 /* 05E648 */ void efLib_8005E648(Effect*);
 /* 05E950 */ void efLib_8005E950(Effect*);
