@@ -3272,8 +3272,18 @@ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
     }
 }
 
+<<<<<<< HEAD
 /// #ftKb_Init_UnkCallbackPairs0_1
 
+=======
+void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int arg1, float arg2)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.x14.data != NULL && fp->fv.kb.hat.jobj == NULL) {
+        ftAnim_80070458(fp, &fp->fv.kb.x44, arg1);
+    }
+}
+>>>>>>> e80b9e90f (Fix build: correct ftAnim_80070458 call and add missing prototypes)
 void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
