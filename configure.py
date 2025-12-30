@@ -1299,7 +1299,7 @@ config.libs = [
             Object(Matching, "melee/ty/toy.c"),
             Object(NonMatching, "melee/ty/tylist.c"),
             Object(NonMatching, "melee/ty/tyfigupon.c"),
-            Object(NonMatching, "melee/ty/tydisplay.c"),
+            Object(Matching, "melee/ty/tydisplay.c"),
         ],
     ),
     MeleeLib(
