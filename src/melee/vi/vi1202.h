@@ -12,6 +12,7 @@
 /* 321294 */ UNK_RET un_80321294(UNK_PARAMS);
 /* 321300 */ void un_80321300_OnEnter(UNK_T);
 /* 3218E0 */ void un_803218E0_OnFrame(void);
+<<<<<<< HEAD
 /* 321900 */ UNK_RET un_80321900(UNK_PARAMS);
 /* 321950 */ UNK_RET un_80321950(UNK_PARAMS);
 /* 3219AC */ UNK_RET fn_803219AC(UNK_PARAMS);
@@ -26,6 +27,22 @@
 /* 321EBC */ UNK_RET un_80321EBC(UNK_PARAMS);
 /* 32201C */ UNK_RET un_8032201C(UNK_PARAMS);
 /* 322178 */ UNK_RET un_80322178(UNK_PARAMS);
+=======
+/* 321900 */ void un_80321900(void);
+/* 321950 */ void un_80321950(void*);
+/* 3219AC */ void fn_803219AC(HSD_GObj*);
+/* 321A00 */ void un_80321A00(HSD_GObj*);
+/* 321AF4 */ void un_80321AF4(HSD_GObj*);
+/* 321BF8 */ void un_80321BF8(int);
+/* 321C28 */ void un_80321C28(void);
+/* 321C70 */ void un_80321C70(void);
+/* 321CA4 */ void un_80321CA4(s32);
+/* 321CE8 */ void un_80321CE8(void);
+/* 321D30 */ UNK_RET un_80321D30(UNK_PARAMS);
+/* 321EBC */ UNK_RET un_80321EBC(UNK_PARAMS);
+/* 32201C */ void un_8032201C(int, s32);
+/* 322178 */ void un_80322178(int);
+>>>>>>> 1bcb8cf3d (vi1202: Match un_80322178 and fix un_80321BF8 signature)
 /* 322258 */ bool un_80322258(float);
 /* 322298 */ UNK_RET un_80322298(UNK_PARAMS);
 /* 3222EC */ float un_803222EC(float mag, float angle);
