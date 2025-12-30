@@ -49,7 +49,7 @@ void fn_800204C8(void)
     f64 temp;
     BgFlashData2* data = (BgFlashData2*)&lbl_80433658;
     s32 mode = data->state & 0x7F;
-    
+
     if (mode == 5) {
         return;
     }
@@ -63,7 +63,7 @@ void fn_800204C8(void)
         goto case_0_1_2;
     }
     return;
-    
+
 case_0_1_2:
     fn_8001FC08();
     data->xC = (s32)data->x10;
@@ -71,16 +71,16 @@ case_0_1_2:
     data->xE = (s32)data->x18;
     data->xF = (s32)data->x1C;
     return;
-    
+
 case_3_4:
     if ((s32)data->x30 == 0) {
         s32* pX;
         s32* pY;
         s32 i;
-        
+
         pY = &data->x38;
         pX = &data->x34;
-        
+
         for (i = 0; i < data->x3C; i++) {
             if (*pX < 0x280) {
                 *pX = *pX + data->x31;
