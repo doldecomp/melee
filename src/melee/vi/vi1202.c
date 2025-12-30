@@ -59,13 +59,13 @@ void un_803218E0_OnFrame(void)
 }
 
 extern char un_804A2F08[];
-extern void* un_804D7050;
+extern vi1202_UnkStruct* un_804D7050;
 
 void un_80321900(void)
 {
     HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
     HSD_GObjProc_8038FD54(gobj, fn_803219AC, 0x13);
-    un_804D7050 = un_804A2F08;
+    un_804D7050 = (vi1202_UnkStruct*)un_804A2F08;
     un_80321950(un_804D7050);
 }
 
@@ -83,4 +83,14 @@ void un_80321950(void* s)
     ((vi1202_UnkStruct*)s)->x24 = 0;
     ((vi1202_UnkStruct*)s)->x2C = -1;
     ((vi1202_UnkStruct*)s)->x28 = -1;
+}
+
+void fn_803219AC(HSD_GObj* gobj)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    if (data->x4 < 0x10000) {
+        data->x4 = data->x4 + 1;
+    }
+    un_80321A00(gobj);
+    un_80321AF4(gobj);
 }
