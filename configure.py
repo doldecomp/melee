@@ -1298,7 +1298,7 @@ config.libs = [
         [
             Object(NonMatching, "melee/ty/toy.c"),
             Object(NonMatching, "melee/ty/tylist.c"),
-            Object(Matching, "melee/ty/tyfigupon.c"),
+            Object(NonMatching, "melee/ty/tyfigupon.c"),
             Object(NonMatching, "melee/ty/tydisplay.c"),
         ],
     ),
