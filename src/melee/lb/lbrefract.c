@@ -5,14 +5,20 @@
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
 #include <baselib/debug.h>
+#include <baselib/dobj.h>
 #include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
 
-/* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
+extern HSD_DObjInfo hsdDObj;
+
+/* 021F34 */ static void fn_80021F34(lbRefract_CallbackData* arg0, s32 arg1,
+                                     u32 arg2, u32 arg3, u8 arg4, u8 arg5,
+                                     u8 arg6);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
+/* 022608 */ static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 /* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
                                      u32 arg2, u32* arg3, u32* arg4, u8* arg5,
                                      u8* arg6);
@@ -32,6 +38,21 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
+
+static void fn_80021F34(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2,
+                        u32 arg3, u8 arg4, u8 arg5, u8 arg6)
+{
+    s32 t0, t1, t2;
+    u8* ptr;
+
+    t0 = arg0->unk4;
+    t1 = arg2 >> 2;
+    t2 = arg0->unk0;
+    ptr = (u8*)(t2 + t1 * t0 + ((arg1 << 3) & 0xFFFFFFE0));
+    t0 = ((arg1 & 3) + ((arg2 << 2) & 0xC)) << 1;
+    ptr[t0] = arg6;
+    ptr[t0 + 1] = arg5;
+}
 
 void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2, u32* arg3,
                  u32* arg4, u8* arg5, u8* arg6)
@@ -88,8 +109,27 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
     }
 }
 
+void lbRefract_80022560(void)
+{
+    if (lbl_804336D0[0] != 0) {
+        GXSetTexCopySrc(0, 0, 0x280, 0x1E0);
+        GXSetTexCopyDst(0x140, 0xF0, 4, 1);
+        GXCopyTex((void*)lbl_804336D0[1], 0);
+        GXPixModeSync();
+        GXInvalidateTexAll();
+    }
+}
+
 void lbRefract_800225D4(void)
 {
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
+
+void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
     GXSetTevDirect(0);
     GXSetNumIndStages(0);
     HSD_StateInvalidate(-1);
