@@ -9,7 +9,7 @@
 
 /* 2FD910 */ void un_802FD910(void);
 /* 2FD91C */ void un_802FD91C(void);
-/* 2FD928 */ void un_802FD928(unsigned char slot, int arg1, GXColor* arg2);
+/* 2FD928 */ void un_802FD928(unsigned char slot, u8 arg1, GXColor* arg2);
 /* 2FD9D8 */ void un_802FD9D8(unsigned char slot);
 /* 2FDA4C */ void fn_802FDA4C(HSD_GObj* gobj, int pass);
 /* 2FDA78 */ void fn_802FDA78(HSD_GObj* gobj);
