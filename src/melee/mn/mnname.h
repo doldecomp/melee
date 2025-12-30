@@ -7,7 +7,7 @@
 
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
 /* 23754C */ char* GetNameText(int slot);
-/* 237594 */ UNK_RET GetNameCount(UNK_PARAMS);
+/* 237594 */ int GetNameCount(void);
 /* 2375EC */ UNK_RET IsNameListFull(UNK_PARAMS);
 /* 237654 */ UNK_RET CompareNameStrings(UNK_PARAMS);
 /* 2377A4 */ UNK_RET fn_802377A4(UNK_PARAMS);
