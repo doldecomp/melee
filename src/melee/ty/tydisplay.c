@@ -1,7 +1,13 @@
 #include "tydisplay.h"
 
+<<<<<<< HEAD
+=======
+#include "gm/gm_1A3F.h"
+#include "gm/gm_1A45.h"
+>>>>>>> 8c8cc9bff (Fix build: add missing includes and prototypes for ty module)
 #include "if/textlib.h"
 #include "ty/toy.h"
+#include "ty/tyfigupon.h"
 #include "ty/tylist.h"
 
 #include <baselib/random.h>
