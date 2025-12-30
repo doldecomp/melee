@@ -4,9 +4,27 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
+#include "ft/fighter.h"
 #include "ft/ftlib.h"
+#include "gm/gm_unsplit.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "vi.h"
+
+typedef struct {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ s32 x2C;
+} vi1202_UnkStruct;
 
 void un_8032110C(HSD_GObj* gobj)
 {
