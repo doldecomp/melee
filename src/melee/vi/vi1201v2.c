@@ -1,10 +1,13 @@
 #include "vi/vi1201v2.h"
 
+#include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "mn/mnmain.h"
 #include "vi.h"
 
@@ -54,6 +57,22 @@ void un_803208F0(HSD_GObj* gobj)
         *(s32*)((char*)gobj + 0x20) = 0;
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
+    }
+}
+
+void un_80320984(HSD_GObj* gobj)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    HSD_CObjAnim(cobj);
+    if (cobj->aobj->curr_frame == 1.0F || cobj->aobj->curr_frame == 30.0F) {
+        vi_8031C9B4(0xd, 0);
+    }
+    if (cobj->aobj->curr_frame == 60.0F) {
+        vi_8031C9B4(1, 0xdb);
+    }
+    if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
+        lb_800145F4();
+        gm_801A4B60();
     }
 }
 
