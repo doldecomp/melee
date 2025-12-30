@@ -1932,7 +1932,44 @@ s32 Camera_8002E158(f32* arg0, f32 farg0, f32 farg1, f32 farg2)
 
 /// #Camera_8002E490
 
-/// #Camera_8002E6FC
+void Camera_8002E6FC(int arg0)
+{
+    Vec3 spC;
+
+    if (cm_80452C68.mode != 6) {
+        Camera_8002FE38();
+    }
+
+    cm_80452C68.x341_b1_b2 = 1;
+    *(s32*)&cm_80452C68.pad_342[2] = arg0;
+
+    switch (cm_80452C68.x341_b1_b2) {
+    case 1: {
+        HSD_GObj* gobj = Player_GetEntity(*(s32*)&cm_80452C68.pad_342[2]);
+        if (gobj != NULL) {
+            CmSubject* subject = ftLib_80086B74(gobj);
+            if (subject != NULL) {
+                cm_80452C68.transform.target_interest = subject->x1C;
+            }
+        }
+        break;
+    }
+    case 2:
+        cm_80452C68.transform.target_interest =
+            *(Vec3*)&cm_80452C68.pad_342[2];
+        break;
+    case 3: {
+        s32 (**cbp)(Vec3*) = (s32 (**)(Vec3*))&cm_80452C68.pad_342[2];
+        if (*cbp != NULL && (*cbp)(&spC)) {
+            cm_80452C68.transform.target_interest = spC;
+        }
+        break;
+    }
+    case 0:
+    default:
+        break;
+    }
+}
 
 /// #Camera_8002E818
 
