@@ -870,8 +870,12 @@ void ftPp_SpecialAirHiThrow_0_IASA(Fighter_GObj* gobj) {}
 
 /// #ftPp_SpecialAirHiThrow_0_Phys
 
-/// #ftPp_SpecialHiThrow_0_Coll
-
+void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
+{
+    if (ft_800827A0(gobj) == 0) {
+        ftPp_SpecialHi_80121CE0(gobj);
+    }
+}
 /// #ftPp_SpecialAirHiThrow_0_Coll
 
 /// #ftPp_SpecialHi_80121CE0
