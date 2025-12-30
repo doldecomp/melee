@@ -687,12 +687,14 @@ void grIceMt_801F87C8(Ground_GObj* param1)
     return;
 }
 
+/// @brief Update material GObjs for Icicle Mountain stage.
+/// Iterates over xF4[1..5] calling grMaterial update on each.
 void grIceMt_801F87FC(Ground_GObj* gobj)
 {
     int i;
     Ground* gp = GET_GROUND(gobj);
     for (i = 0; i < 5; i++) {
-        HSD_GObj* temp = *(HSD_GObj**)((u8*)gp + 0xF8 + i * 4);
+        HSD_GObj* temp = gp->gv.icemt.xF4[i + 1];
         if (temp != NULL) {
             grMaterial_801C8CDC(temp);
         }
