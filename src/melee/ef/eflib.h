@@ -40,13 +40,9 @@
 /* 05CE48 */ HSD_Generator* efLib_8005CE48(s32, void*);
 /* 05CF40 */ HSD_Generator* efLib_8005CF40(s32, void*);
 /* 05D044 */ HSD_Generator* efLib_8005D044(s32, void*);
-/* 05D174 */ void efLib_8005D174(s8, s32, HSD_JObj*, s32);
+/* 05D174 */ void efLib_8005D174(int, s32, HSD_JObj*, s32);
 /* 05DB20 */ void fn_8005DB20(s32, s32, s32, HSD_JObj*);
-// /* 05DB70 */ void fn_8005DB70(s32, s32, s32, HSD_JObj*);
-/* 05DB70 */ void
-fn_8005DB70(int, int, int,
-            HSD_JObj*); // args must be int type to be able to satisfy passing
-                        // into HSD_JObjSetDPtclCallback
+/* 05DB70 */ void fn_8005DB70(int arg0, int lo, int hi, HSD_JObj* jobj);
 /* 05DBC0 */ void efLib_8005DBC0(HSD_Particle*);
 /* 05DCD0 */ void fn_8005DCD0(void*);
 /* 05DDB8 */ void efLib_8005DDB8(Effect*);

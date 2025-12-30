@@ -1313,18 +1313,14 @@ void efAsync_8006729C(int index)
 
 void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, int index)
 {
-    char* effDateTable_name;
-    char* DAT_filename;
-    struct _struct_efAsync_803C025C_0xC* temp_r3;
+    struct _struct_efAsync_803C025C_0xC* result;
 
     lbArchive_InitializeDAT(archive, data, length);
-    temp_r3 = HSD_ArchiveGetPublicAddress(
+    result = HSD_ArchiveGetPublicAddress(
         archive, efAsync_803C025C[index].effDataTable_name);
-    DAT_filename = temp_r3->ef_DAT_file;
-    effDateTable_name = temp_r3->effDataTable_name;
-    if ((bool) DAT_filename | (bool) effDateTable_name) {
-        psInitDataBankLocate((HSD_Archive*) DAT_filename,
-                             (HSD_Archive*) effDateTable_name, NULL);
+    if ((u32) result->ef_DAT_file | (u32) result->effDataTable_name) {
+        psInitDataBankLocate((HSD_Archive*) result->ef_DAT_file,
+                             (HSD_Archive*) result->effDataTable_name, NULL);
     }
 }
 
