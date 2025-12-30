@@ -3281,7 +3281,7 @@ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int arg1, float arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.x14.data != NULL && fp->fv.kb.hat.jobj == NULL) {
-        ftAnim_80070458_proto(fp, &fp->fv.kb.x44, arg1);
+        ftAnim_80070458(fp, &fp->fv.kb.x44, arg1);
     }
 }
 void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
