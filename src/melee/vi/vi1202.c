@@ -96,12 +96,12 @@ void fn_803219AC(HSD_GObj* gobj)
     un_80321AF4(gobj);
 }
 
-void un_80321BF8(void)
+void un_80321BF8(int arg0)
 {
     vi1202_UnkStruct* data;
     char pad[8];
     data = un_804D7050;
-    data->x2C = lbAudioAx_800240B4();
+    data->x2C = lbAudioAx_800240B4(arg0);
 }
 
 void un_80321C28(void)
@@ -140,6 +140,41 @@ void un_80321CE8(void)
         lbAudioAx_800236B8(data->x28);
     }
     data->x28 = -1;
+}
+
+void un_80322178(int arg)
+{
+    vi1202_UnkStruct* data;
+    char pad[8];
+
+    switch (arg) {
+    case 0:
+        break;
+    case 3:
+        data = un_804D7050;
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13d);
+        break;
+    case 2:
+        data = un_804D7050;
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13e);
+        break;
+    case 1:
+        data = un_804D7050;
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
+        }
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x13f);
+        break;
+    }
 }
 
 extern char mpLib_80458868[];

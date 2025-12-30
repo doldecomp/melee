@@ -17,7 +17,7 @@
 /* 3219AC */ void fn_803219AC(HSD_GObj*);
 /* 321A00 */ void un_80321A00(HSD_GObj*);
 /* 321AF4 */ void un_80321AF4(HSD_GObj*);
-/* 321BF8 */ UNK_RET un_80321BF8(UNK_PARAMS);
+/* 321BF8 */ void un_80321BF8(int);
 /* 321C28 */ void un_80321C28(void);
 /* 321C70 */ void un_80321C70(void);
 /* 321CA4 */ void un_80321CA4(s32);
@@ -25,7 +25,7 @@
 /* 321D30 */ UNK_RET un_80321D30(UNK_PARAMS);
 /* 321EBC */ UNK_RET un_80321EBC(UNK_PARAMS);
 /* 32201C */ void un_8032201C(int, s32);
-/* 322178 */ UNK_RET un_80322178(UNK_PARAMS);
+/* 322178 */ void un_80322178(int);
 /* 322258 */ bool un_80322258(float);
 /* 322298 */ s32 un_80322298(float);
 /* 3222EC */ float un_803222EC(float mag, float angle);
