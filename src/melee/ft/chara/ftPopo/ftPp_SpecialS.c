@@ -911,8 +911,11 @@ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialHi_80122038
 
-/// #ftPp_SpecialHi_80122098
-
+void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, 0x15E, 0, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+}
 /// #ftPp_SpecialHi_801220D4
 
 void ftPp_SpecialHiThrow_1_Anim(Fighter_GObj* gobj)
