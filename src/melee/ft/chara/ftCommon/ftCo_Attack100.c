@@ -433,7 +433,7 @@ static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid)
 
 /// #fn_800D7830
 
-/// #fn_800D78B0
+/// #ftCo_ItemScopeStart_GroundToAir
 
 /// #fn_800D7938
 
@@ -465,7 +465,7 @@ void ftCo_ItemScopeAirStart_Phys(Fighter_GObj* gobj)
 
 void ftCo_ItemScopeStart_Coll(Fighter_GObj* gobj)
 {
-    ft_800841B8(gobj, fn_800D78B0);
+    ft_800841B8(gobj, ftCo_ItemScopeStart_GroundToAir);
 }
 
 void ftCo_ItemScopeAirStart_Coll(Fighter_GObj* gobj)
