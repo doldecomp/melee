@@ -517,6 +517,46 @@ void un_80322314(void)
     data->x20 = 1;
 }
 
+bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
+{
+    void* fighter = Fighter_804D6500;
+    s32 cat;
+    s32 out_of_bounds;
+
+    if (kb_mag >= M2C_FIELD(fighter, f32*, 0x8)) {
+        cat = 3;
+    } else if (kb_mag >= M2C_FIELD(fighter, f32*, 0x4)) {
+        cat = 2;
+    } else if (kb_mag >= M2C_FIELD(fighter, f32*, 0x0)) {
+        cat = 1;
+    } else {
+        cat = 0;
+    }
+
+    {
+        f32 val2c = M2C_FIELD(fighter, f32*, 0x2c);
+        f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
+        f32 val1c;
+
+        if (pos_x < val2c + val18) {
+            out_of_bounds = 1;
+        } else {
+            val1c = M2C_FIELD(mpLib_80458868, f32*, 0x1c);
+            if (pos_x > val1c - val2c) {
+                out_of_bounds = 1;
+            } else {
+                out_of_bounds = 0;
+            }
+        }
+    }
+
+    if (out_of_bounds != 0) {
+        un_8032201C(spawn_id, cat);
+    } else {
+        return 0;
+    }
+}
+
 int un_80322598(int arg0, float arg1)
 {
     f32 val14 = *(f32*)(mpLib_80458868 + 0x14);
