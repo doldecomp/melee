@@ -157,8 +157,14 @@ void Toy_RemoveUserData(void* ptr)
     HSD_Free(ptr);
 }
 
-/// #un_80306D14
-
+void un_80306D14(void)
+{
+    if (M2C_FIELD(un_804A284C, s8*, 0) == 1) {
+        lbAudioAx_800237A8(0xAA, 0x7F, 0x40);
+    } else if (M2C_FIELD(un_804A284C, s8*, 0) == 2) {
+        lbAudioAx_800237A8(0xAB, 0x7F, 0x40);
+    }
+}
 /// #un_80306D70
 
 /// #un_80306EEC
