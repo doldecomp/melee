@@ -24,8 +24,6 @@ void un_803218E0_OnFrame(void)
 {
     vi_8031CAAC();
 }
-<<<<<<< HEAD
-=======
 
 extern char un_804A2F08[];
 extern vi1202_UnkStruct* un_804D7050;
@@ -222,4 +220,3 @@ ret_zero:
     }
     un_8032201C(arg0, cat);
 }
->>>>>>> 22b9821b9 (vi1202.c: Match un_803222EC)

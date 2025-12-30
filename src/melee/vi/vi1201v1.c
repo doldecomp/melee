@@ -3,10 +3,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-<<<<<<< HEAD
-#include "vi.h"
-
-=======
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -18,7 +14,6 @@ extern u8 un_804D6FFC;
 extern u8 un_804D6FFD;
 extern s32 un_804D6FF8;
 
->>>>>>> 179759703 (vi1201v1.c: Match fn_8031FB90)
 void un_8031F990(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));

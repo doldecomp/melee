@@ -1,10 +1,5 @@
 #include "vi/vi1201v2.h"
 
-<<<<<<< HEAD
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-
-=======
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
@@ -14,7 +9,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "mn/mnmain.h"
->>>>>>> 77e52439e (vi1201v2.c: Match un_80320984)
 #include "vi.h"
 
 void un_803204C0(HSD_GObj* gobj)
@@ -27,8 +21,6 @@ void un_803204E4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-<<<<<<< HEAD
-=======
 void un_8032074C(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -80,7 +72,6 @@ void un_80320984(HSD_GObj* gobj)
     }
 }
 
->>>>>>> 77e52439e (vi1201v2.c: Match un_80320984)
 void un_803210EC_OnFrame(void)
 {
     vi_8031CAAC();
