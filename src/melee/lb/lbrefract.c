@@ -94,19 +94,19 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
 
 void lbRefract_8002247C(HSD_CObj* cobj) {
     s32 proj_type;
-    
+
     if (lbl_804336D0[0] == 0) {
         return;
     }
-    
+
     proj_type = HSD_CObjGetProjectionType(cobj);
-    
+
     switch (proj_type) {
     case 1:
     {
         f32 scale = 0.5F;
         f32 trans = 0.5F;
-        MTXLightPerspective((MtxPtr)((char*)lbl_804336D0 + 0x10), 
+        MTXLightPerspective((MtxPtr)((char*)lbl_804336D0 + 0x10),
                            M2C_FIELD(cobj, f32*, 0x40),
                            M2C_FIELD(cobj, f32*, 0x44),
                            scale, scale, scale, trans);

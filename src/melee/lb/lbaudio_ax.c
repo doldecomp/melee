@@ -823,9 +823,9 @@ void fn_800263B4(void* ptr)
 int lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
 {
     HSD_GObj* gobj;
-    
+
     PAD_STACK(16);
-    
+
     // Access HSD_GObj_Entities at offset 0xF8 as a raw pointer
     gobj = ((HSD_GObj**)HSD_GObj_Entities)[0x3E];
 
