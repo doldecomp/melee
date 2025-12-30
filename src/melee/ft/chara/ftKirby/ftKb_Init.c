@@ -3196,17 +3196,23 @@ void ftKb_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
+void ftKb_Init_UnkDemoCallbacks0(int kind, int* out1, int* out2)
 {
-    if (arg0 != 14) {
-        if (arg0 < 14 && arg0 >= 11) {
-            *arg1 = 14;
-            *arg2 = 16;
-        }
-    } else {
-        *arg2 = 17;
-        *arg1 = 17;
+    if (kind == 14) {
+        goto case14;
     }
+    if (kind >= 14) {
+        return;
+    }
+    if (kind < 11) {
+        return;
+    }
+    *out1 = 14;
+    *out2 = 16;
+    return;
+case14:
+    *out2 = 17;
+    *out1 = 17;
 }
 
 char* ftKb_Init_GetMotionFileString(enum_t arg0)
