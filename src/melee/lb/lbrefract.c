@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
+#include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/dobj.h>
 #include <baselib/state.h>
