@@ -7,6 +7,7 @@
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);
 /* 1D8550 */ static bool grZebes_801D8550(void);
+/* 1D8558 */ static void grZebes_801D8558(int);
 /* 1D8814 */ static bool grZebes_801D8814(Ground_GObj* arg);
 /* 1D90FC */ static void grZebes_801D90FC(Ground_GObj* arg);
 /* 1D9254 */ static bool grZebes_801D9254(Ground_GObj* arg);
@@ -27,12 +28,27 @@
                                      float* x);
 /* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
+/* 4D6990 */ static HSD_GObj* grZe_804D6990;
 /* 4D6998 */ static s16 grZe_804D6998;
+
+extern f32 grZe_804DB0B0;
 
 void grZebes_801D84A0(bool arg) {}
 
-/// #grZebes_801D84A4
-
+void grZebes_801D84A4(void)
+{
+    grZe_804D6990 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grZebes_801D8558(0);
+    grZebes_801D8558(1);
+    grZebes_801D8558(6);
+    grZebes_801D8558(4);
+    grZebes_801D8558(8);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    grZebes_801DA3E8();
+}
 void grZebes_801D8528(void) {}
 
 /// #grZebes_801D852C
@@ -180,4 +196,9 @@ bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj)
     return true;
 }
 
-/// #grZebes_801DCCC8
+f32 grZebes_801DCCC8(void)
+{
+    f32 slope, intercept;
+    Ground_801C4368(&slope, &intercept);
+    return grZe_804DB0B0 + slope;
+}

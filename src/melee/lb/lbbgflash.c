@@ -112,9 +112,12 @@ void lbBgFlash_80021C48(u32 arg0, u32 arg1)
 
 void fn_80021C80(HSD_GObj* gobj)
 {
-    u8* user_data = gobj->user_data;
+    struct {
+        u8 unk0[4];
+        ColorOverlay x4;
+    }* user_data = gobj->user_data;
 
-    while (lb_80014258(gobj, (ColorOverlay*)(user_data + 4), fn_80021C18)) {
-        lb_80014498((ColorOverlay*)(user_data + 4));
+    while (lb_80014258(gobj, &user_data->x4, fn_80021C18)) {
+        lb_80014498(&user_data->x4);
     }
 }

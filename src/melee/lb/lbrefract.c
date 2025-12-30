@@ -138,6 +138,7 @@ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
     GXSetNumIndStages(0);
     HSD_StateInvalidate(-1);
 }
+
 void lbRefract_80022BB8(void)
 {
     lbl_804336D0[0] += 1;
