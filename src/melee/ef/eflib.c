@@ -728,12 +728,13 @@ Effect* efLib_8005C6F4(u32 arg0, HSD_GObj* arg_gobj, void* unused_arg)
 
 Effect* efLib_8005C814(u32 arg0, HSD_GObj* arg_gobj, Vec3* arg_vec3)
 {
-    Effect* eff_1;
     HSD_JObj* jobj_1;
+    Effect* eff_1;
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
         jobj_1 = GET_JOBJ(eff_1->gobj);
+        (void) jobj_1;
         HSD_JObjSetTranslate(jobj_1, arg_vec3);
     }
     return eff_1;
