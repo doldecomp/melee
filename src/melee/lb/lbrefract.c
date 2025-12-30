@@ -20,6 +20,7 @@ extern HSD_DObjInfo hsdDObj;
 /* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
                                      u32 arg2, u32* arg3, u32* arg4, u8* arg5,
                                      u8* arg6);
+/* 022608 */ static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 /* 022DF8 */ static inline float lbRefract_80022DF8(float x);
 /* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData*, s32, s32, u16,
                                     u16);
@@ -156,7 +157,7 @@ void lbRefract_800225D4(void)
     HSD_StateInvalidate(-1);
 }
 
-void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
 {
     hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
     GXSetTevDirect(0);
