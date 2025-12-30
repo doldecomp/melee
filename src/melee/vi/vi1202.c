@@ -1,6 +1,7 @@
 #include "vi/vi1202.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
 #include "vi.h"
