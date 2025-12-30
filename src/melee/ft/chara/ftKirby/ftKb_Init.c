@@ -60,6 +60,8 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
+void ftAnim_80070458_proto(Fighter* fp, struct KirbyFV_x44_t*, int);
+
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
         // ftKb_MS_JumpAerialF1 = 341
