@@ -3184,7 +3184,7 @@ void mpLib_80053ECC_Floor(int line_id, Vec* vec)
     LINEID_CHECK(4448, line_id);
 
     goto loop_entry;
-    
+
 loop_start:
     line_id = new_id;
 loop_entry:
