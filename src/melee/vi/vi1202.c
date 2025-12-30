@@ -5,9 +5,25 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+#include "ft/fighter.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 #include "vi.h"
+
+typedef struct {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ void* x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ void* x18;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ s32 x2C;
+} vi1202_UnkStruct;
 
 void un_8032110C(HSD_GObj* gobj)
 {
@@ -51,4 +67,20 @@ void un_80321900(void)
     HSD_GObjProc_8038FD54(gobj, fn_803219AC, 0x13);
     un_804D7050 = un_804A2F08;
     un_80321950(un_804D7050);
+}
+
+void un_80321950(void* s)
+{
+    ((vi1202_UnkStruct*)s)->x0 = 0;
+    ((vi1202_UnkStruct*)s)->x4 = 0x10000;
+    ((vi1202_UnkStruct*)s)->x8 = 1.0F;
+    ((vi1202_UnkStruct*)s)->xC = 0;
+    ((vi1202_UnkStruct*)s)->x10 = *(void**)((char*)Fighter_804D6500 + 0x20);
+    ((vi1202_UnkStruct*)s)->x14 = 0x83D60;
+    ((vi1202_UnkStruct*)s)->x18 = *(void**)((char*)Fighter_804D6500 + 0x28);
+    ((vi1202_UnkStruct*)s)->x1C = 0;
+    ((vi1202_UnkStruct*)s)->x20 = 0;
+    ((vi1202_UnkStruct*)s)->x24 = 0;
+    ((vi1202_UnkStruct*)s)->x2C = -1;
+    ((vi1202_UnkStruct*)s)->x28 = -1;
 }
