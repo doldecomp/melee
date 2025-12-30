@@ -6,6 +6,7 @@
 #include <baselib/jobj.h>
 
 #include "ft/fighter.h"
+#include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
@@ -61,6 +62,7 @@ void un_803218E0_OnFrame(void)
 
 extern char un_804A2F08[];
 extern vi1202_UnkStruct* un_804D7050;
+extern char mpLib_80458868[];
 
 void un_80321900(void)
 {
@@ -94,6 +96,47 @@ void fn_803219AC(HSD_GObj* gobj)
     }
     un_80321A00(gobj);
     un_80321AF4(gobj);
+}
+
+void un_80321AF4(HSD_GObj* gobj)
+{
+    char* mpLib = mpLib_80458868;
+    HSD_GObj* cur;
+    vi1202_UnkStruct* data = un_804D7050;
+    s32 old_x24 = data->x24;
+    s32 flag = 0;
+    Vec3 pos;
+    char pad[12];
+
+    data->x24 = 0;
+    cur = *(HSD_GObj**)((char*)HSD_GObj_Entities + 0x20);
+
+    while (cur != NULL) {
+        if (ftLib_8008732C(cur) == 0) {
+            if (ftLib_8008731C(cur) == 0) {
+                ftLib_80086644(cur, &pos);
+
+                if (pos.y < *(f32*)((char*)Fighter_804D6500 + 0x40) + *(f32*)(mpLib + 0x14)) {
+                    data->x24 = data->x24 + 1;
+                } else {
+                    if ((u32)data->xC == ftLib_80087460(cur)) {
+                        flag = 1;
+                    }
+                }
+            }
+        }
+        cur = *(HSD_GObj**)((char*)cur + 0x8);
+    }
+
+    if (old_x24 < *(s32*)((char*)Fighter_804D6500 + 0x3C)) {
+        if (data->x24 >= *(s32*)((char*)Fighter_804D6500 + 0x3C)) {
+            if (flag != 0) {
+                un_8032201C(data->xC, 3);
+            } else {
+                un_80322178(3);
+            }
+        }
+    }
 }
 
 void un_80321A00(HSD_GObj* gobj)
@@ -215,8 +258,6 @@ void un_80322178(int arg)
         break;
     }
 }
-
-extern char mpLib_80458868[];
 
 bool un_80322258(float arg)
 {
