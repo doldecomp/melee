@@ -806,8 +806,12 @@ void ftPp_SpecialS_80121164(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialAirHiStart_0_Phys
 
-/// #ftPp_SpecialHiStart_0_Coll
-
+void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
+{
+    if (ft_800827A0(gobj) == 0) {
+        ftPp_SpecialHi_801217EC(gobj);
+    }
+}
 /// #ftPp_SpecialAirHiStart_0_Coll
 
 /// #ftPp_SpecialHi_801217EC
