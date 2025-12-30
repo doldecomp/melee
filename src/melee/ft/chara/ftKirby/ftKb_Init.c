@@ -3783,8 +3783,12 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F11F0
 
-/// #ftKb_SpecialN_800F12C8
-
+void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_SpecialN_800EF69C(gobj, 0x10, ft_80459B88.hats[FTKIND_PURIN]);
+    ftCo_UnloadDynamicBones(fp);
+}
 /// #ftKb_SpecialN_800F130C
 
 void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
