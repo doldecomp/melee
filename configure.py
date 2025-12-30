@@ -464,7 +464,7 @@ config.libs = [
             Object(NonMatching, "melee/lb/lb_0192.c"),
             Object(Matching, "melee/lb/lbcardnew.c"),
             Object(NonMatching, "melee/lb/lbcardgame.c"),
-            Object(NonMatching, "melee/lb/lbsnap.c"),
+            Object(Matching, "melee/lb/lbsnap.c"),
             Object(Matching, "melee/lb/lbgx.c"),
             Object(Matching, "melee/lb/lbanim.c"),
             Object(NonMatching, "melee/lb/lbmthp.c"),
