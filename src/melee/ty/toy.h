@@ -34,7 +34,7 @@
 /* 306BB8 */ void un_80306BB8(HSD_GObj* gobj);
 /* 306C5C */ UNK_RET un_80306C5C(UNK_PARAMS);
 /* 306CF4 */ void Toy_RemoveUserData(void* ptr);
-/* 306D14 */ UNK_RET un_80306D14(UNK_PARAMS);
+/* 306D14 */ void un_80306D14(void);
 /* 306D70 */ UNK_RET un_80306D70(UNK_PARAMS);
 /* 306EEC */ UNK_RET un_80306EEC(UNK_PARAMS);
 /* 307018 */ UNK_RET un_80307018(UNK_PARAMS);
