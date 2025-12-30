@@ -20,8 +20,11 @@ StageCallbacks grOt_803E27E0[2] = {
     { NULL, NULL, NULL, NULL, NULL },
 };
 
-static struct {
-    int x0;
+/// Onett stage yakumono parameters
+static struct grOnett_StageParam {
+    /* 0x00 */ float awning_initial;
+    /* 0x04 */ u8 pad04[0x1C];
+    /* 0x20 */ float awning_delta;
 }* grOt_804D69C0;
 
 void grOnett_801E3734(bool arg) {}
@@ -149,6 +152,9 @@ void grOnett_801E502C(Ground_GObj* gobj) {}
 
 /// #grOnett_801E5214
 
+/// Updates awning collision tracking data
+/// @note Accesses grOnett_AwningData fields via pointer arithmetic for matching codegen.
+///       See grOnett_AwningData struct in types.h for field documentation.
 void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3)
 {
     int temp = cd->x34_flags.b1234;
@@ -165,11 +171,15 @@ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3)
     }
 
     if (arg3 == 1) {
+        // awning->flag = 1
         *(s16*)((u8*)gp + idx * 0x1C + 0xDE) = 1;
-        *(float*)((u8*)gp + idx * 0x1C + 0xD4) = *(float*)grOt_804D69C0;
+        // awning->initial = grOt_804D69C0->awning_initial
+        *(float*)((u8*)gp + idx * 0x1C + 0xD4) = grOt_804D69C0->awning_initial;
     }
 
-    *(float*)((u8*)gp + idx * 0x1C + 0xCC) += *(float*)((u8*)grOt_804D69C0 + 0x20);
+    // awning->accumulator += grOt_804D69C0->awning_delta
+    *(float*)((u8*)gp + idx * 0x1C + 0xCC) += grOt_804D69C0->awning_delta;
+    // awning->counter += 1
     *(s16*)((u8*)gp + idx * 0x1C + 0xD8) += 1;
 }
 
