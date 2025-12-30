@@ -11,6 +11,10 @@
 #include "mn/mnmain.h"
 #include "vi.h"
 
+extern HSD_GObj* un_804D7030;
+extern HSD_GObj* un_804D7034;
+extern u8 un_804D7028;
+
 void un_803204C0(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
