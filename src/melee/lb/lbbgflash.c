@@ -44,56 +44,7 @@ typedef struct BgFlashData2 {
 
 /// #fn_8001FEC4
 
-void fn_800204C8(void)
-{
-    f64 temp;
-    BgFlashData2* data = (BgFlashData2*)&lbl_80433658;
-    s32 mode = data->state & 0x7F;
-
-    if (mode == 5) {
-        return;
-    }
-    if (mode >= 5) {
-        return;
-    }
-    if (mode >= 3) {
-        goto case_3_4;
-    }
-    if (mode >= 0) {
-        goto case_0_1_2;
-    }
-    return;
-
-case_0_1_2:
-    fn_8001FC08();
-    data->xC = (s32)data->x10;
-    data->xD = (s32)data->x14;
-    data->xE = (s32)data->x18;
-    data->xF = (s32)data->x1C;
-    return;
-
-case_3_4:
-    if ((s32)data->x30 == 0) {
-        s32* pX;
-        s32* pY;
-        s32 i;
-
-        pY = &data->x38;
-        pX = &data->x34;
-
-        for (i = 0; i < data->x3C; i++) {
-            if (*pX < 0x280) {
-                *pX = *pX + data->x31;
-            } else if (*pY < 0x1E0) {
-                *pY = *pY + data->x32;
-                *pX = 0;
-            } else {
-                data->x33 = 1;
-                return;
-            }
-        }
-    }
-}
+/// #fn_800204C8
 /// #lbBgFlash_800205F0
 
 void lbBgFlash_8002063C(int count)
