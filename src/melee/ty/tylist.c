@@ -1,6 +1,14 @@
 #include "tylist.h"
 
+#include <baselib/cobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/video.h>
 #include <string.h>
+
+typedef struct {
+    u8 pad[0x28];
+    HSD_CObj* cobj;
+} TyListData;
 
 extern u8 un_804A2AA8[];
 extern void* un_804D6ED0;
@@ -59,7 +67,18 @@ void un_803127D4(void)
 
 /// #fn_8031438C
 
-/// #fn_80314504
+void fn_80314504(HSD_GObj* gobj)
+{
+    TyListData* data = (TyListData*) gobj;
+
+    if ((s32) HSD_CObjSetCurrent(data->cobj) != 0) {
+        HSD_SetEraseColor(0, 0, 0, 0xFF);
+        HSD_CObjEraseScreen(data->cobj, 1, 0, 0);
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_FogSet(0);
+        HSD_CObjEndCurrent();
+    }
+}
 
 /// #un_8031457C
 
