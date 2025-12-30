@@ -47,7 +47,7 @@
 /* 1C1158 */ void Ground_801C1158(void);
 /* 1C11AC */ void Ground_801C11AC(HSD_GObj* gobj);
 /* 1C13D0 */ HSD_JObj* Ground_801C13D0(s32, s32 depth);
-/* 1C14D0 */ HSD_GObj* Ground_801C14D0(int);
+/* 1C14D0 */ Ground_GObj* Ground_801C14D0(int);
 /* 1C1A20 */ HSD_GObj* Ground_801C1A20(HSD_Joint*, s32);
 /* 1C1D6C */ void Ground_801C1D6C(u32);
 /* 1C1D84 */ u32 Ground_801C1D84(void);
