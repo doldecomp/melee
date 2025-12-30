@@ -32,7 +32,7 @@
 /* 05C9FC */ HSD_Generator* efLib_8005C9FC(s32, Vec3*);
 // /* 05C9FC */ Effect* efLib_8005C9FC(u32, Vec3*, f32, Vec3*, ...);
 /* 05CAB0 */ HSD_Generator* efLib_8005CAB0(s32);
-/* 05CB34 */ HSD_Generator* efLib_8005CB34(s32, Vec3*, f32);
+/* 05CB34 */ HSD_Generator* efLib_8005CB34(s32 arg0, Vec3* arg_vec3, f32 arg2);
 /* 05CC2C */ HSD_Generator* efLib_8005CC2C(s32, HSD_JObj*);
 // /* 05CC84 */ HSD_Generator* efLib_8005CC84(u32,  HSD_JObj*, ...);
 /* 05CC84 */ HSD_Generator* efLib_8005CC84(s32, HSD_JObj*);
