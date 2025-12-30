@@ -27,8 +27,21 @@ int GetNameCount(void)
     return count;
 }
 
-/// #IsNameListFull
-
+bool IsNameListFull(void)
+{
+    int result;
+    int count = 0;
+    int i;
+    for (i = count; i < 0x78; i++) {
+        if (IsNameValid((u8)i)) {
+            count++;
+        }
+    }
+    if (count < 0x78) {
+        return false;
+    }
+    return true;
+}
 /// #CompareNameStrings
 
 void fn_802377A4(void) {}
