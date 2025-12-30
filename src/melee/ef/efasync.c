@@ -1324,29 +1324,31 @@ void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, int index)
     }
 }
 
-void efAsync_8006737C(s8 index)
+void efAsync_8006737C(s8 arg_index)
 {
     struct _struct_efAsync_803C025C_0xC* spC;
-    bool chk;
-    char* effDateTable_name;
-    char* DAT_filename;
     struct _struct_efAsync_803C025C_0xC* temp_r31;
+    int index;
 
+    index = arg_index;
     temp_r31 = &efAsync_803C025C[index];
-    if (index < 50) {
-        if (index < 0) {
+    if (index >= 50) {
+        return;
+    }
+    if (index >= 0) {
+        if (temp_r31->ef_DAT_file == NULL) {
             return;
         }
-        DAT_filename = temp_r31->ef_DAT_file;
-        if ((DAT_filename != NULL) && ((void*) temp_r31->unk8 == NULL)) {
-            chk = lbArchive_80017040(NULL, DAT_filename, &spC,
-                                     temp_r31->effDataTable_name, 0);
-            DAT_filename = spC->ef_DAT_file;
-            effDateTable_name = spC->effDataTable_name;
-            if ((bool) effDateTable_name | (bool) DAT_filename) {
+        if (temp_r31->unk8) {
+            return;
+        }
+        {
+            bool chk = lbArchive_80017040(NULL, temp_r31->ef_DAT_file, &spC,
+                                          temp_r31->effDataTable_name, 0);
+            char* DAT_filename = spC->ef_DAT_file;
+            char* effDateTable_name = spC->effDataTable_name;
+            if ((u32) DAT_filename | (u32) effDateTable_name) {
                 if (chk) {
-                    // psInitDataBankLoad((s32) index, (s32* ) DAT_filename,
-                    // (s32* ) effDateTable_name, NULL, NULL);
                     psInitDataBankLoad(index, (void*) DAT_filename,
                                        (void*) effDateTable_name, NULL, NULL);
                 } else {
@@ -1354,7 +1356,7 @@ void efAsync_8006737C(s8 index)
                                    (void*) effDateTable_name, NULL, NULL);
                 }
             }
-            temp_r31->unk8 = spC->unk8;
+            temp_r31->unk8 = (void*) ((u8*) spC + 8);
         }
     }
 }
