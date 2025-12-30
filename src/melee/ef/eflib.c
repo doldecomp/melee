@@ -1533,10 +1533,10 @@ void efLib_8005EDDC(Effect* arg_effect)
 
 void efLib_8005F08C(Effect* arg_effect)
 {
+    f32 rotate_z;
     HSD_JObj* jobj_1;
     HSD_JObj* jobj_3;
     HSD_JObj* jobj_2;
-    f32 rotate_z;
     Fighter* fighter;
 
     jobj_1 = GET_JOBJ(arg_effect->gobj);
@@ -1551,7 +1551,7 @@ void efLib_8005F08C(Effect* arg_effect)
         jobj_3 = jobj_2->next;
     }
     fighter = GET_FIGHTER(arg_effect->parent_gobj);
-    if (fighter->motion_id == 349) { // Special state 8
+    if (fighter->motion_id == 349) {
         HSD_JObjClearFlagsAll(jobj_3, 0x10U);
     } else {
         HSD_JObjSetFlagsAll(jobj_3, 0x10U);
