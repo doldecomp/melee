@@ -1320,21 +1320,24 @@ void efLib_8005DE94(Effect* effect)
 
 void efLib_8005E090(Effect* effect)
 {
-    HSD_JObj* eff_jobj;
+    f64 temp_d;
     f32 rotate_y;
-    void* temp_r4;
+    HSD_JObj* eff_jobj;
+    HSD_JObj* temp_r4;
 
-    temp_r4 = effect->x14;
+    temp_r4 = (HSD_JObj*) effect->x14;
     eff_jobj = GET_JOBJ(effect->gobj);
+    (void) temp_r4;
     if (temp_r4 != NULL) {
-        if (((HSD_JObj*) temp_r4)->scale.x < 0.0f) {
-            rotate_y = -M_PI_2; // needs to load as a double/f64?
+        if (temp_r4->scale.x < 0.0f) {
+            temp_d = -M_PI_2;
         } else {
-            rotate_y = M_PI_2; // needs to load as a double/f64?
+            temp_d = M_PI_2;
         }
+        rotate_y = temp_d;
         HSD_JObjSetRotationY(eff_jobj, rotate_y);
     }
-    if (effect->x26 != 0) {
+    if ((u8) effect->x26 != 0) {
         effect->x24 = 0xBU;
         effect->x10 = NULL;
         HSD_JObjReqAnimAll(eff_jobj, 65.0f);
