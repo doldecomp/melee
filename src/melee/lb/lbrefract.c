@@ -12,9 +12,15 @@
 extern HSD_DObjInfo hsdDObj;
 
 /// @brief Write IA4 texture coordinate to refraction buffer.
-/* 021F34 */ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* arg0,
-                                                    s32 arg1, u32 arg2, u32 arg3,
-                                                    u8 arg4, u8 arg5, u8 arg6);
+/// @param data Refraction callback data containing buffer info.
+/// @param row Texture row index.
+/// @param col Texture column index.
+/// @param intensity Intensity value (0-255).
+/// @param alpha Alpha value (0-255).
+/* 021F34 */ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data,
+                                                    s32 row, u32 col, u32 arg3,
+                                                    u8 arg4, u8 intensity,
+                                                    u8 alpha);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
@@ -41,20 +47,20 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
 
-static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* arg0, s32 arg1,
-                                       u32 arg2, u32 arg3, u8 arg4, u8 arg5,
-                                       u8 arg6)
+static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
+                                       u32 col, u32 arg3, u8 arg4, u8 intensity,
+                                       u8 alpha)
 {
-    s32 t0, t1, t2;
-    u8* ptr;
+    s32 tile_offset, tile_col, base_addr;
+    u8* dst;
 
-    t0 = arg0->unk4;
-    t1 = arg2 >> 2;
-    t2 = arg0->unk0;
-    ptr = (u8*)(t2 + t1 * t0 + ((arg1 << 3) & 0xFFFFFFE0));
-    t0 = ((arg1 & 3) + ((arg2 << 2) & 0xC)) << 1;
-    ptr[t0] = arg6;
-    ptr[t0 + 1] = arg5;
+    tile_offset = data->unk4;
+    tile_col = col >> 2;
+    base_addr = data->unk0;
+    dst = (u8*) (base_addr + tile_col * tile_offset + ((row << 3) & 0xFFFFFFE0));
+    tile_offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
+    dst[tile_offset] = alpha;
+    dst[tile_offset + 1] = intensity;
 }
 
 void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2, u32* arg3,
