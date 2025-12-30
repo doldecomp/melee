@@ -24,7 +24,7 @@
 /* 05C3DC */ Effect* efLib_8005C3DC(u32, HSD_GObj*, HSD_JObj*);
 /* 05C5C4 */ Effect* efLib_8005C5C4(u32, HSD_GObj*, HSD_JObj*);
 /* 05C6F4 */ Effect* efLib_8005C6F4(u32, HSD_GObj*, void*);
-/* 05C814 */ Effect* efLib_8005C814(u32, HSD_GObj*, Vec3*);
+/* 05C814 */ Effect* efLib_8005C814(u32 arg0, HSD_GObj* arg_gobj, Vec3* arg_vec3);
 /* 05C904 */ void fn_8005C904(HSD_GObj*, int);
 /* 05C9A4 */ void efLib_8005C9A4(HSD_GObj*);
 /* 05C9D0 */ void fn_8005C9D0(HSD_GObj*);
@@ -51,7 +51,7 @@ fn_8005DB70(int, int, int,
 /* 05DCD0 */ void fn_8005DCD0(void*);
 /* 05DDB8 */ void efLib_8005DDB8(Effect*);
 /* 05DE94 */ void efLib_8005DE94(Effect*);
-/* 05E090 */ void efLib_8005E090(Effect*);
+/* 05E090 */ void efLib_8005E090(Effect* effect);
 /* 05E1D8 */ void efLib_8005E1D8(Effect*);
 /* 05E2B4 */ void efLib_8005E2B4(Effect* effect);
 /* 05E3A0 */ void efLib_8005E3A0(Effect*);
@@ -68,7 +68,7 @@ fn_8005DB70(int, int, int,
 /* 05F864 */ void efLib_8005F864(HSD_GObj* gobj, s8, float, float);
 /* 05F990 */ void efLib_8005F990(HSD_GObj*, s32);
 /* 05FAB8 */ void efLib_8005FAB8(Effect*);
-/* 05FBE4 */ void fn_8005FBE4(Effect*);
+/* 05FBE4 */ void fn_8005FBE4(Effect* arg_effect);
 /* 05FCD8 */ Effect* efLib_8005FCD8(int, HSD_GObj*, HSD_JObj*, Vec3*);
 /* 458EB0 */ extern HSD_ObjAllocData Effect_AllocData;
 
