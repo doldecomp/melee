@@ -27,12 +27,13 @@ extern HSD_DObjInfo hsdDObj;
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
 /// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
 /* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
-/* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
-                                     u32 arg2, u32* arg3, u32* arg4, u8* arg5,
-                                     u8* arg6);
+/* 022120 */ static void fn_80022120(lbRefract_CallbackData* data, s32 row,
+                                     u32 col, u32* out_r, u32* out_g, u8* out_b,
+                                     u8* out_a);
 /* 022DF8 */ static inline float lbRefract_80022DF8(float x);
-/* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData*, s32, s32, u16,
-                                    u16);
+/// @brief Initialize refraction callback data for a texture buffer.
+/* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer,
+                                    s32 format, u16 width, u16 height);
 
 static int lbl_804336D0[0x10];
 
@@ -51,65 +52,72 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
                                        u32 col, u32 arg3, u8 arg4, u8 intensity,
                                        u8 alpha)
 {
-    s32 tile_offset, tile_col, base_addr;
+    s32 offset, tile_col, base_addr;
     u8* dst;
 
-    tile_offset = data->unk4;
+    offset = data->row_stride;
     tile_col = col >> 2;
-    base_addr = data->unk0;
-    dst = (u8*) (base_addr + tile_col * tile_offset + ((row << 3) & 0xFFFFFFE0));
-    tile_offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
-    dst[tile_offset] = alpha;
-    dst[tile_offset + 1] = intensity;
+    base_addr = data->buffer;
+    dst = (u8*) (base_addr + tile_col * offset + ((row << 3) & 0xFFFFFFE0));
+    offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
+    dst[offset] = alpha;
+    dst[offset + 1] = intensity;
 }
 
-void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2, u32* arg3,
-                 u32* arg4, u8* arg5, u8* arg6)
+void fn_80022120(lbRefract_CallbackData* data, s32 row, u32 col, u32* out_r,
+                 u32* out_g, u8* out_b, u8* out_a)
 {
-    s32 temp_r10;
-    s32 temp_r4;
+    s32 base_offset;
+    s32 pixel_offset;
 
-    temp_r10 = arg0->unk0 +
-               (((arg2 >> 2U) * arg0->unk4) + ((arg1 * 0x10) & 0xFFFFFFC0));
-    temp_r4 = ((arg1 & 3) + ((arg2 * 4) & 0xC)) * 2;
-    if (arg6 != NULL) {
-        *arg6 = temp_r10 + temp_r4;
+    base_offset = data->buffer +
+                  (((col >> 2U) * data->row_stride) + ((row * 0x10) & 0xFFFFFFC0));
+    pixel_offset = ((row & 3) + ((col * 4) & 0xC)) * 2;
+    if (out_a != NULL) {
+        *out_a = base_offset + pixel_offset;
     }
-    if (arg3 != NULL) {
-        *arg3 = temp_r10 + temp_r4 + 0x01;
+    if (out_r != NULL) {
+        *out_r = base_offset + pixel_offset + 0x01;
     }
-    if (arg4 != NULL) {
-        *arg4 = temp_r10 + temp_r4 + 0x20;
+    if (out_g != NULL) {
+        *out_g = base_offset + pixel_offset + 0x20;
     }
-    if (arg5 != NULL) {
-        *arg5 = (s32) (temp_r10 + temp_r4 + 0x21);
+    if (out_b != NULL) {
+        *out_b = (s32) (base_offset + pixel_offset + 0x21);
     }
 }
 
-s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
-                       u16 arg3, u16 arg4)
+/// @brief Initialize refraction callback data for a texture buffer.
+/// @param data Callback data to initialize.
+/// @param buffer Base address of texture buffer.
+/// @param format Texture format (3=IA4, 4=IA8, 6=RGBA8).
+/// @param width Texture width in pixels.
+/// @param height Texture height in pixels.
+/// @return 0 on success, -1 if format is unsupported.
+s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
+                       u16 width, u16 height)
 {
-    arg0->unk0 = arg1;
-    arg0->unk1 = arg2;
-    arg0->unk2 = (s32) arg3;
-    arg0->unk3 = (s32) arg4;
-    arg0->unk5 = GXGetTexBufferSize(arg3, arg4, arg2, 0U, 0U);
-    switch (arg2) { /* irregular */
+    data->buffer = buffer;
+    data->format = format;
+    data->width = (s32) width;
+    data->height = (s32) height;
+    data->buffer_size = GXGetTexBufferSize(width, height, format, 0U, 0U);
+    switch (format) { /* irregular */
     case 3:
-        arg0->callback0 = lbRefract_WriteTexCoordIA4;
-        arg0->callback1 = fn_80021FF8;
-        arg0->unk4 = (arg3 * 8) & 0xFFFFFFE0;
+        data->callback0 = lbRefract_WriteTexCoordIA4;
+        data->callback1 = fn_80021FF8;
+        data->row_stride = (width * 8) & 0xFFFFFFE0;
     block_11:
         return 0;
     case 4:
-        arg0->callback0 = fn_80021F70;
-        arg0->callback1 = fn_8002206C;
-        arg0->unk4 = (arg3 * 8) & 0xFFFFFFE0;
+        data->callback0 = fn_80021F70;
+        data->callback1 = fn_8002206C;
+        data->row_stride = (width * 8) & 0xFFFFFFE0;
         goto block_11;
     case 6:
-        arg0->callback0 = fn_80021FB4;
-        arg0->callback1 = fn_80022120;
-        arg0->unk4 = (arg3 * 0x10) & 0xFFFFFFC0;
+        data->callback0 = fn_80021FB4;
+        data->callback1 = fn_80022120;
+        data->row_stride = (width * 0x10) & 0xFFFFFFC0;
         goto block_11;
     case 5:
         /* fallthrough */
