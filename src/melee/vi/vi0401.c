@@ -48,3 +48,14 @@ static void vi0401_8031D23C(HSD_GObj* gobj)
         gm_801A4B60();
     }
 }
+
+void un_8031D698_OnFrame(void)
+{
+    u64 buttons;
+    gm_8017E430();
+    buttons = gm_801A36A0(0);
+    if ((buttons & 0x1000ULL) != 0) {
+        lb_800145F4();
+        gm_801A4B60();
+    }
+}
