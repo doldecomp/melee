@@ -1282,7 +1282,7 @@ void Camera_8002B0E0(void)
     f32 var_f2;
     f32* new_var;
     if ((gm_8016B41C() != 0) && (cm_80452C68.x2C0 > 0.0f)) {
-        var_f1 = HSD_PadCopyStatus[Player_GetPlayerId(0) & 0xFFFFu].nml_subStickY;
+        var_f1 = HSD_PadCopyStatus[Player_GetPlayerId(0) & 0xFFu].nml_subStickY;
         new_var2 = &cm_803BCCA0;
         var_f2 = var_f1;
         var_f2 = var_f1;
@@ -1303,8 +1303,6 @@ void Camera_8002B0E0(void)
         if (cm_80452C68.x2BC < (*new_var2).xDC) {
             cm_80452C68.x2BC = (*new_var2).xDC;
             return;
-        }
-        if ((*new_var2).xD4 && (*new_var2).xD4) {
         }
         if (cm_80452C68.x2BC > (*new_var2).xD8) {
             cm_80452C68.x2BC = (*new_var2).xD8;
