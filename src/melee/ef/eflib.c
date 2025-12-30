@@ -354,57 +354,44 @@ void Effect_RemoveUserData(void* effect)
 #pragma dont_inline on
 void efLib_8005BBB4(u32 arg1, f32 arg8)
 {
-    HSD_GObj* gobj_3;
-    HSD_GObj* gobj_4;
-    HSD_GObj* gobj_1;
-    HSD_GObj* gobj_2;
-    f32 var_f1;
-    u32 var_r4;
-    // void* temp_ret;
-    // void* temp_ret_2;
+    HSD_GObj* gobj;
+    HSD_GObj* next;
+    u32 unused1;
+    f32 unused2;
 
-    var_r4 = arg1;
-    var_f1 = arg8;
-    gobj_1 = HSD_GObj_Entities->x2C;
-#if 1
-    while (gobj_1 != NULL) {
-        gobj_4 = gobj_1->next;
-        // temp_ret_2 = efLib_8005B780();
-        efLib_8005B780(gobj_1);
-        // var_f1 = (bitwise f32) temp_ret_2;
-        // var_r4 = (u32) (u64) temp_ret_2;
-        if (efLib_804D64EC >= 0x40U) {
-            gobj_1 = gobj_4;
+    unused1 = arg1;
+    unused2 = arg8;
+
+    gobj = HSD_GObj_Entities->x2C;
+    while (gobj != NULL) {
+        next = gobj->next;
+        efLib_8005B780(gobj);
+        if (efLib_804D64EC < 0x40U) {
+            return;
         }
+        gobj = next;
     }
-    gobj_2 = HSD_GObj_Entities->x30;
-    while (gobj_2 != NULL) {
-        //     OSReport("can't remove no force effect!\n\0\0error no parent
-        //     gobj!\n\0\0Over Anime Call\n", var_r4, var_f1);
-        //     __assert("eflib.c", 0x4DU, "0");
-        // } else {
-        gobj_3 = gobj_2->next;
-        // temp_ret = efLib_8005B780(gobj_2); // which gobj?
-        efLib_8005B780(gobj_2);
-        // var_f1 = (bitwise f32) temp_ret;
-        // var_r4 = (u32) (u64) temp_ret;
-        if (efLib_804D64EC >= 0x40U) {
-            gobj_2 = gobj_3;
+
+    gobj = HSD_GObj_Entities->x30;
+    while (gobj != NULL) {
+        next = gobj->next;
+        efLib_8005B780(gobj);
+        if (efLib_804D64EC < 0x40U) {
+            return;
         }
+        gobj = next;
     }
-    // if (gobj_2 != NULL) {
+
     OSReport("can't remove no force effect!\n\0\0error no parent "
-             "gobj!\n\0\0Over Anime Call\n",
-             var_r4, var_f1);
+             "gobj!\n\0\0Over Anime Call\n");
     __assert("eflib.c", 0x4DU, "0");
-    // }
 
-#else
+#if 0
 loop_3:
-    if (gobj_1 == NULL) {
-        gobj_2 = HSD_GObj_Entities->x30;
+    if (gobj == NULL) {
+        gobj = HSD_GObj_Entities->x30;
     loop_7:
-        if (gobj_2 == NULL) {
+        if (gobj == NULL) {
             OSReport("can't remove no force effect!\n\0\0error no parent "
                      "gobj!\n\0\0Over Anime Call\n",
                      var_r4, var_f1);
