@@ -379,6 +379,7 @@ void ftCo_GuardOn_Anim(Fighter_GObj* gobj)
 static inline bool inlineC0(Fighter_GObj* gobj, HSD_GObjEvent cb)
 {
     Fighter* fp = gobj->user_data;
+    ftCo_80092BCC(gobj);
     if ((fp->mv.co.guard.xC && !fp->mv.co.guard.x10) ||
         (!fp->x221B_b0 && !fp->reflecting))
     {
@@ -446,6 +447,7 @@ void ftCo_80092908(Fighter_GObj* gobj)
 void ftCo_Guard_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     fp->mv.co.guard.x0 += 1;
     if (!ftCo_800925A4(gobj)) {
         ftCo_80091E78(gobj, 1);
@@ -508,6 +510,7 @@ void ftCo_80092C54(Fighter_GObj* gobj)
 void ftCo_GuardOff_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     fp->mv.co.guard.x0 += 1;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
