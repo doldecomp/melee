@@ -9,6 +9,7 @@
 #include "gr/inlines.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
+#include "lb/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -148,7 +149,29 @@ void grOnett_801E502C(Ground_GObj* gobj) {}
 
 /// #grOnett_801E5214
 
-/// #grOnett_801E54B4
+void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3)
+{
+    int temp = cd->x34_flags.b1234;
+    int idx;
+
+    if (temp != 1 && temp != 2 && temp != 3) {
+        return;
+    }
+
+    if (arg1 == 0) {
+        idx = 0;
+    } else {
+        idx = 1;
+    }
+
+    if (arg3 == 1) {
+        *(s16*)((u8*)gp + idx * 0x1C + 0xDE) = 1;
+        *(float*)((u8*)gp + idx * 0x1C + 0xD4) = *(float*)grOt_804D69C0;
+    }
+
+    *(float*)((u8*)gp + idx * 0x1C + 0xCC) += *(float*)((u8*)grOt_804D69C0 + 0x20);
+    *(s16*)((u8*)gp + idx * 0x1C + 0xD8) += 1;
+}
 
 /// #grOnett_801E5538
 
