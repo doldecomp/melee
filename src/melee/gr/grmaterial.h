@@ -20,6 +20,7 @@ grMaterial_801C8CFC(int, int, Ground*, HSD_JObj*,
                     void (*arg4)(Item_GObj*, Ground*),
                     void (*arg5)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
                     void (*arg6)(Item_GObj*, Ground*, HSD_GObj*));
+/* 1C8D98 */ void grMaterial_801C8D98(HSD_GObj* gobj, int id);
 /* 1C8DE0 */ void grMaterial_801C8DE0(Item_GObj* gobj, float arg8, float arg9,
                                       float argA, float argB, float argC,
                                       float argD, float argE);
