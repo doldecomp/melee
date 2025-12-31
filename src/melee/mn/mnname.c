@@ -135,8 +135,26 @@ s32 mnName_80239FFC(void* arg0) {
         *(void**)((u8*)arg0 + 0x3C) = NULL;
     }
 }
-/// #mnName_8023A058
-
+void mnName_8023A058(HSD_GObj* gobj) {
+    void* obj;
+    HSD_JObj* jobj;
+    
+    obj = *(void**)((u8*)gobj + 0x30);
+    if (obj == NULL) {
+        jobj = NULL;
+    } else {
+        jobj = *(HSD_JObj**)((u8*)obj + 0x10);
+    }
+    HSD_JObjRemoveAll(jobj);
+    
+    obj = *(void**)((u8*)gobj + 0x3C);
+    if (obj != NULL) {
+        HSD_SisLib_803A5CC4(obj);
+        *(void**)((u8*)gobj + 0x3C) = NULL;
+    }
+    
+    mnName_80239A24(gobj);
+}
 /// #fn_8023A0BC
 
 /// #mnName_8023A290
