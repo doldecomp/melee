@@ -9,18 +9,21 @@
 #include "ft/forward.h"
 
 #include "ft/ftdemo.h"
+#include "gm/gm_17C0.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_unsplit.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
+#include "sc/types.h"
 #include "vi/vi.h"
 
 #include <baselib/forward.h>
@@ -33,13 +36,21 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/wobj.h>
 
-const GXColor erase_colors_vi0502 = { 0, 0, 0, 0 };
+GXColor erase_colors_vi0502 = { 0, 0, 0, 0 };
+
+extern SceneDesc* un_804D6F90;
+extern HSD_Archive* un_804D6F9C;
+extern HSD_Archive* un_804D6F98;
+extern char un_804000D0[];
 
 Vec3 initial_pos = { 0, 0, 0 };
 
+static f32 un_804DE0A0;
 static HSD_Archive* un_804D6F94;
 static HSD_GObj* kirby_gobj;
 
@@ -101,7 +112,7 @@ void vi0502_8031E304(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void vi0502_8031E328(HSD_GObj* gobj)
+static void vi0502_8031E328(HSD_GObj* gobj, int unused)
 {
     HSD_CObj* cobj;
     lbShadow_8000F38C(0);
@@ -133,4 +144,61 @@ void vi0502_RunFrame(HSD_GObj* gobj)
         lb_800145F4();
         gm_801A4B60();
     }
+}
+
+void un_8031E444_OnEnter(void* arg)
+{
+    u8* input = arg;
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
+    HSD_Fog* fog;
+    HSD_LObj* lobj;
+    HSD_JObj* jobj;
+    char* str_table = un_804000D0;
+    CharacterKind char_kind;
+    s32 i;
+
+    lbAudioAx_800236DC();
+    efLib_8005B4B8();
+    efAsync_8006737C(0);
+
+    char_kind = input[0];
+
+    un_804D6F9C = lbArchive_LoadSymbols(str_table + 0xC, &un_804D6F90,
+                                        str_table + 0x18, NULL);
+    un_804D6F94 = lbArchive_LoadSymbols(viGetCharAnimByIndex(char_kind), NULL);
+    un_804D6F98 = lbArchive_LoadSymbols(str_table + 0x28, NULL);
+
+    gobj = GObj_Create(0xb, 3, 0);
+    fog = HSD_FogLoadDesc(un_804D6F90->fogs->desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    *(GXColor*)&erase_colors_vi0502 = fog->color;
+
+    gobj = GObj_Create(0xb, 3, 0);
+    lobj = lb_80011AC4(un_804D6F90->lights);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+
+    gobj = GObj_Create(0x13, 0x14, 0);
+    cobj = lb_80013B14((HSD_CameraDescPerspective*)un_804D6F90->cameras->desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(gobj, (void(*)(HSD_GObj*, int))vi0502_8031E328, 5);
+    HSD_CObjAddAnim(cobj, un_804D6F90->cameras->anims[0]);
+    HSD_CObjReqAnim(cobj, un_804DE0A0);
+    HSD_CObjAnim(cobj);
+    HSD_GObjProc_8038FD54(gobj, vi0502_RunFrame, 0);
+
+    for (i = 0; un_804D6F90->models[i] != NULL; i++) {
+        gobj = GObj_Create(0xe, 0xf, 0);
+        jobj = HSD_JObjLoadJoint(un_804D6F90->models[i]->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 9, 0);
+        gm_8016895C(jobj, un_804D6F90->models[i], 0);
+        HSD_JObjReqAnimAll(jobj, un_804DE0A0);
+        HSD_JObjAnimAll(jobj);
+        HSD_GObjProc_8038FD54(gobj, vi0502_8031E304, 0x17);
+    }
+
+    vi0502_8031E124(input[0], input[1], input[3]);
 }
