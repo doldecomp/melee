@@ -1803,8 +1803,153 @@ void Camera_8002C010(f32 farg0, f32 farg1)
 
 /// #Camera_8002C908
 
-/// #Camera_8002CB0C
+void Camera_8002CB0C(void)
+{
+    Camera* camera;
+    CameraInputs inputs;
+    f32 stick_x;
+    f32 stick_y;
+    f32 abs_f1;
+    s8* x2C4_ptr;
+    Vec3* x308_ptr;
+    s32 dir;
+    f32 x_val;
+    f32 y_val;
+    f32 zoom_dir;
+    s32 valid;
+    s32 slot;
+    f32 z_init;
 
+    camera = &cm_80452C68;
+
+    if ((s8)camera->x2C5 == 5) {
+        return;
+    }
+
+    Camera_8002B694(&inputs, (s8)camera->x2C5);
+
+    y_val = 0.0f;
+    x_val = y_val;
+    zoom_dir = x_val;
+    dir = 0;
+
+    stick_x = inputs.stick_x;
+    stick_y = inputs.stick_y;
+
+    // Check 0x20 bit using 64-bit access
+    if ((inputs.x18._u64 & 0x20ULL) != 0) {
+        dir = 1;
+    } else if ((inputs.x18._u64 & 0x40ULL) != 0) {
+        dir = -1;
+    }
+
+    // Check 0x400 bit using 64-bit access
+    if ((inputs.x10._u64 & 0x400ULL) != 0) {
+        zoom_dir = 1.0f;
+    } else if ((inputs.x10._u64 & 0x800ULL) != 0) {
+        zoom_dir = -1.0f;
+    }
+
+    // Process stick_x with threshold 0.125
+    if (stick_x < 0.0f) {
+        abs_f1 = -stick_x;
+    } else {
+        abs_f1 = stick_x;
+    }
+    if (abs_f1 > 0.125) {
+        x_val = stick_x;
+    }
+
+    // Process stick_y with threshold 0.125
+    if (stick_y < 0.0f) {
+        abs_f1 = -stick_y;
+    } else {
+        abs_f1 = stick_y;
+    }
+    if (abs_f1 > 0.125) {
+        y_val = stick_y;
+    }
+
+    if (dir != 0) {
+        x2C4_ptr = &camera->x2C4;
+
+        slot = Camera_8002BA00((s8)*x2C4_ptr, dir);
+        *x2C4_ptr = (s8)slot;
+        x308_ptr = &camera->x308;
+        goto loop_body;
+
+    loop_top:
+        slot = Camera_8002BA00((s8)*x2C4_ptr, dir);
+        *x2C4_ptr = (s8)slot;
+
+    loop_body:
+        slot = (s8)*x2C4_ptr;
+        valid = 1;
+
+        if (slot == 0xB) {
+            valid = 0;
+        } else if (slot == 0xA) {
+            Stage_UnkSetVec3TCam_Offset(x308_ptr);
+        } else {
+            HSD_GObj* entity = Player_GetEntity(slot);
+            if (entity != NULL) {
+                CmSubject* subject = ftLib_80086B74(entity);
+                if (subject != NULL) {
+                    x308_ptr->x = subject->x1C.x;
+                    x308_ptr->y = subject->x1C.y;
+                    x308_ptr->z = subject->x1C.z;
+                } else {
+                    valid = 0;
+                }
+            } else {
+                valid = 0;
+            }
+        }
+
+        if (valid == 0) {
+            goto loop_top;
+        }
+
+        {
+            HSD_GObj* entity2 = Player_GetEntity((s8)*x2C4_ptr);
+            if (entity2 == NULL) {
+                goto loop_top;
+            }
+            if (ftLib_8008701C(entity2)) {
+                goto loop_top;
+            }
+
+            slot = (s8)*x2C4_ptr;
+            z_init = Stage_GetPauseCamZPosInit();
+
+            camera->x314.x = 0.0f;
+            camera->x314.y = 0.0f;
+            camera->x314.z = 0.0f;
+            camera->pause_eye_offset.x = 0.0f;
+            camera->pause_eye_offset.y = 5.0f;
+            camera->pause_eye_offset.z = 20.0f;
+            camera->pause_up.x = 0.0f;
+            camera->pause_up.y = 1.0f;
+            camera->pause_up.z = 0.0f;
+
+            if (slot == 0xA) {
+                camera->pause_eye_distance = 3.0f * z_init;
+            } else {
+                camera->pause_eye_distance = z_init;
+            }
+
+            Camera_8002BAA8(0.0f);
+        }
+    }
+
+    if (zoom_dir != 0.0f) {
+        Camera_8002BAA8(zoom_dir);
+    }
+
+    if (!(x_val == 0.0f && y_val == 0.0f)) {
+        Camera_8002BD88(x_val, y_val);
+    }
+}
 /// #Camera_8002CDDC
 
 /// #Camera_8002D318
