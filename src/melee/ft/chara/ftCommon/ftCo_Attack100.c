@@ -579,8 +579,15 @@ void fn_800D8268(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_800D86B8;
     fp->take_dmg_cb = fn_800D8378;
 }
-/// #fn_800D82EC
-
+void fn_800D82EC(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, 0xa4), 0xc4c5080, fp->cur_anim_frame, fp->frame_speed_mul, 0.0f, NULL);
+    ftCommon_ClampAirDrift(fp);
+    fp->accessory4_cb = fn_800D86B8;
+    fp->take_dmg_cb = fn_800D8378;
+}
 void fn_800D8378(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
