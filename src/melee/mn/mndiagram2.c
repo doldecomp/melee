@@ -33,3 +33,25 @@ void fn_80245028(void* arg0) {
     }
     HSD_Free(arg0);
 }
+
+extern s32 HSD_GObj_804D783C;
+
+HSD_GObj* GObj_Create(u16, u8, u8);
+void* HSD_GObjProc_8038FD54(HSD_GObj*, void*, s32);
+void mnDiagram2_80245178(s32);
+void fn_80243D40(HSD_GObj*);
+
+void mnDiagram2_802453B0(void) {
+    mn_unk1* data = &mn_804A04F0;
+    HSD_GObj* gobj;
+
+    data->x10 = 1;
+    data->x2 = 0;
+    mnDiagram2_80245178(0);
+    gobj = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_80243D40, 0);
+    {
+        u32 val = HSD_GObj_804D783C;
+        u8* ptr = (u8*)gobj + 0xD;
+        *ptr = (*ptr & ~0x30) | ((val & 3) << 4);
+    }
+}
