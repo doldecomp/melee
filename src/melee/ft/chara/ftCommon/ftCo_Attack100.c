@@ -1122,8 +1122,9 @@ void ftCo_CatchAttack_Phys(Fighter_GObj* gobj) {
     ftCommon_ApplyFrictionGround(fp, *(float*)&p_ftCommonData->x64 * fp->co_attrs.gr_friction);
     ftCommon_ApplyGroundMovement(gobj);
 }
-/// #ftCo_CatchAttack_Coll
-
+void ftCo_CatchAttack_Coll(Fighter_GObj* gobj) {
+    ft_800841B8(gobj, fn_800DA618);
+}
 void fn_800DA618(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
