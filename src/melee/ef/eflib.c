@@ -895,7 +895,6 @@ inline HSD_Generator* efLib_8005C_inline(s32 arg0, HSD_JObj* jobj)
             hsd_8039D4DC(generator);
             return NULL;
         }
-        // generator->type &= ~PSAPPSRT_UNK_B09;
         generator->type &= 0xFFFFF9FF;
         generator->type |= PSAPPSRT_UNK_B11;
     }

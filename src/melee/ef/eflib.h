@@ -19,7 +19,7 @@
 /* 05BBB4 */ void efLib_8005BBB4(u32, f32);
 /* 05BC50 */ void fn_8005BC50(HSD_GObj* gobj);
 /* 05BE88 */ Effect* efLib_8005BE88(int, HSD_GObj* parent_gobj);
-/* 05C1B4 */ Effect* efLib_8005C1B4(u32, HSD_GObj*, HSD_JObj*);
+/* 05C1B4 */ Effect* efLib_8005C1B4(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj);
 /* 05C2BC */ Effect* efLib_8005C2BC(u32, HSD_GObj*, HSD_JObj*);
 /* 05C3DC */ Effect* efLib_8005C3DC(u32, HSD_GObj*, HSD_JObj*);
 /* 05C5C4 */ Effect* efLib_8005C5C4(u32, HSD_GObj*, HSD_JObj*);
@@ -34,8 +34,7 @@
 /* 05CAB0 */ HSD_Generator* efLib_8005CAB0(s32);
 /* 05CB34 */ HSD_Generator* efLib_8005CB34(s32, Vec3*, f32);
 /* 05CC2C */ HSD_Generator* efLib_8005CC2C(s32, HSD_JObj*);
-// /* 05CC84 */ HSD_Generator* efLib_8005CC84(u32,  HSD_JObj*, ...);
-/* 05CC84 */ HSD_Generator* efLib_8005CC84(s32, HSD_JObj*);
+/* 05CC84 */ HSD_Generator* efLib_8005CC84(s32 arg0, HSD_JObj* jobj);
 /* 05CD2C */ HSD_Generator* efLib_8005CD2C(s32, void*, HSD_GObj*);
 /* 05CE48 */ HSD_Generator* efLib_8005CE48(s32, void*);
 /* 05CF40 */ HSD_Generator* efLib_8005CF40(s32, void*);
@@ -53,7 +52,7 @@ fn_8005DB70(int, int, int,
 /* 05DE94 */ void efLib_8005DE94(Effect*);
 /* 05E090 */ void efLib_8005E090(Effect*);
 /* 05E1D8 */ void efLib_8005E1D8(Effect*);
-/* 05E2B4 */ void efLib_8005E2B4(Effect*);
+/* 05E2B4 */ void efLib_8005E2B4(Effect* effect);
 /* 05E3A0 */ void efLib_8005E3A0(Effect*);
 /* 05E648 */ void efLib_8005E648(Effect*);
 /* 05E950 */ void efLib_8005E950(Effect*);
