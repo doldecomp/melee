@@ -34,8 +34,19 @@ u8 mnDiagram_8023EA40(s32 arg0)
 
 /// #mnDiagram_8023F334
 
-/// #mnDiagram_8023F3A8
-
+u8 mnDiagram_8023F3A8(u8 arg0) {
+    s32 i, original;
+    
+    original = i = (int)arg0;
+    
+    do {
+        if (--i < 0) {
+            return original;
+        }
+    } while ((u32)GetNameText(i) == 0);
+    
+    return i;
+}
 /// #mnDiagram_8023F400
 
 /// #mnDiagram_8023F45C
