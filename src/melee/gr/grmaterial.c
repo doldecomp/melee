@@ -297,7 +297,36 @@ void grMaterial_801C94D8(void* obj)
 
 /// #grMaterial_801C95C4
 
-/// #grMaterial_801C9604
+typedef struct {
+    u8 _pad0[0x10];
+    /* 0x10:4 */ u8 x10_upper : 4;
+    /* 0x10:3 */ u8 x10_b3 : 1;
+    u8 x10_lower : 3;
+    u8 _pad1[0x40 - 0x11];
+    /* 0x40 */ s32 x40;
+    /* 0x44 */ s32 x44;
+    /* 0x48 */ s32 x48;
+    /* 0x4C */ s32 x4C;
+    u8 _pad2[0xBC - 0x50];
+    /* 0xBC:7 */ u8 xBC_b7 : 1;
+    /* 0xBC:6 */ u8 xBC_b6 : 1;
+    u8 xBC_rest : 6;
+} grMaterialData;
+
+void grMaterial_801C9604(HSD_GObj* gobj, int arg1, int arg2)
+{
+    grMaterialData* gp = gobj->user_data;
+    u8 val;
+
+    gp->x44 = arg2;
+    gp->x48 = arg1;
+    gp->x40 = 0;
+    gp->x4C = 0;
+    val = gp->xBC_b6 = 0;
+    gp->xBC_b7 = val;
+    gp->x10_b3 = 0;
+    grMaterial_801C9698(gobj);
+}
 
 /// #fn_801C9664
 
