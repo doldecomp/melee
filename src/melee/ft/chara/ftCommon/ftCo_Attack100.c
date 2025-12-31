@@ -647,8 +647,13 @@ static void fn_800D86B8(Fighter_GObj* gobj)
 
 /// #fn_800D86E0
 
-/// #fn_800D874C
-
+void fn_800D874C(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, 0xa5), 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftCommon_ClampAirDrift(fp);
+    fp->take_dmg_cb = fn_800D8378;
+}
 /// #fn_800D87C0
 
 /// #fn_800D8838
