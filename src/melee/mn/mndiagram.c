@@ -266,7 +266,30 @@ void fn_80241AE8(HSD_GObj* gobj) {
 
 /// #fn_80243038
 
-/// #mnDiagram_802433AC
+extern void* mnDiagram_804A0814;
+extern u8 HSD_GObj_804D7849;
+void HSD_GObj_JObjCallback(HSD_GObj*, s32);
+void fn_80243038(HSD_GObj*);
+HSD_GObj* GObj_Create(s32, s32, s32);
+HSD_JObj* HSD_JObjLoadJoint(void*);
+void HSD_GObjObject_80390A70(HSD_GObj*, u8, HSD_JObj*);
+void GObj_SetupGXLink(HSD_GObj*, void*, s32, s32);
+void HSD_GObjProc_8038FD54(HSD_GObj*, void*, s32);
+
+void mnDiagram_802433AC(void) {
+    void** joint_data;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    s32 dummy[8];
+    (void)dummy;
+
+    joint_data = &mnDiagram_804A0814;
+    gobj = GObj_Create(6, 7, 0x80);
+    jobj = HSD_JObjLoadJoint(*joint_data);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_GObjProc_8038FD54(gobj, fn_80243038, 0);
+}
 
 /// #mnDiagram_80243434
 
