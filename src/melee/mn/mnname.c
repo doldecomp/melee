@@ -99,8 +99,40 @@ void mnName_802385A0(HSD_GObj* gobj)
 
 /// #mnName_80238754
 
-/// #mnName_802388D4
+s32 mnName_802388D4(void* arg0, u8 arg1) {
+    int count;
+    void* result;
+    void* temp;
 
+    if (arg1 < 0x18) {
+        temp = *(void**)((u8*)arg0 + 0x30);
+        if (temp == NULL) {
+            result = NULL;
+        } else {
+            result = *(void**)((u8*)temp + 0x10);
+        }
+        for (count = (u8)arg1; count > 0; count--) {
+            temp = result;
+            if (temp == NULL) {
+                result = NULL;
+            } else {
+                result = *(void**)((u8*)temp + 0x8);
+            }
+        }
+        return (s32)result;
+    }
+
+    switch(arg1) {
+        case 0x18:
+            return *(s32*)((u8*)arg0 + 0x24);
+        case 0x19:
+            return *(s32*)((u8*)arg0 + 0x18);
+        case 0x1a:
+            return *(s32*)((u8*)arg0 + 0x1c);
+    }
+
+    return (s32)arg0;
+}
 /// #mnName_80238964
 
 /// #mnName_80238A04
