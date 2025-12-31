@@ -820,7 +820,46 @@ void lbAudioAx_ObjFree(void* obj)
 
 /// #lbAudioAx_800264E4
 
-/// #lbAudioAx_80026510
+bool lbAudioAx_80026510(HSD_GObj* arg0)
+{
+    HSD_GObj* next;
+    HSD_GObj* gobj;
+    int count;
+
+    count = 0;
+
+    if (arg0 == NULL) {
+        goto end;
+    }
+
+    gobj = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0xF8);
+
+    while (gobj != NULL) {
+        void* data = gobj->user_data;
+        next = gobj->next;
+
+        if (data != NULL) {
+            if (*(HSD_GObj**) ((char*) data + 8) == arg0) {
+                s32 voice_id;
+                voice_id = *(s32*) ((char*) data + 0x30);
+                if (voice_id != -1) {
+                    AXDriverKeyOff(voice_id);
+                }
+                if (gobj != NULL) {
+                    HSD_GObjPLink_80390228(gobj);
+                }
+                count++;
+            }
+        }
+        gobj = next;
+    }
+
+end:
+    if (count != 0) {
+        return true;
+    }
+    return false;
+}
 
 bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
 {
