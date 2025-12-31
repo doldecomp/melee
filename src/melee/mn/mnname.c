@@ -1,5 +1,7 @@
 #include "mnname.h"
 
+#include "mnmain.h"
+
 #include <melee/gm/gmmain_lib.h>
 
 extern char mnName_StringTerminator;
@@ -71,8 +73,19 @@ bool IsNameValid(int slot)
 
 /// #mnName_MainInput
 
-/// #fn_80238540
-
+void fn_80238540(void) {
+    switch (mn_804A04F0.x10) {
+    case 0:
+        mnName_MainInput();
+        break;
+    case 1:
+        mnNameNew_MainInput();
+        break;
+    case 2:
+        mnName_ConfirmNameDeleteInput();
+        break;
+    }
+}
 void mnName_802385A0(HSD_GObj* gobj)
 {
     mnName_80238754(gobj);
