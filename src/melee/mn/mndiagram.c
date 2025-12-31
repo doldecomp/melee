@@ -107,7 +107,26 @@ s32 GetFighterTotalFalls(u8 field_index) {
 
 /// #mnDiagram_8023F238
 
-/// #mnDiagram_8023F334
+extern char mnDiagram_804D4FA4;
+s32 mn_8022EB78(s32);
+s32 mn_8022EB24(s32, s32);
+
+void mnDiagram_8023F334(s32 arg0, s32 arg1) {
+    s32 digit_count;
+    char* ptr;
+    s32 last;
+    s32 i;
+
+    digit_count = mn_8022EB78(arg1);
+    ptr = (char*)arg0;
+    last = digit_count - 1;
+    i = 0;
+    for (; i < digit_count; i++) {
+        *ptr = mn_8022EB24(arg1, last - i) + 0x30;
+        ptr++;
+    }
+    ((char*)arg0)[digit_count] = mnDiagram_804D4FA4;
+}
 
 u8 mnDiagram_8023F3A8(u8 arg0) {
     s32 i, original;
