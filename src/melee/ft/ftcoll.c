@@ -34,8 +34,6 @@
 #include "pl/plbonuslib.h"
 #include "pl/plstale.h"
 
-#include "it/itcoll.h"
-
 #include <common_structs.h>
 #include <Runtime/runtime.h>
 #include <math.h>
@@ -68,9 +66,6 @@ struct UnkSize320_t {
 // .bss
 static DmgLogEntry dmg_log0[20];
 struct DmgLogEntry dmg_log1[20];
-
-// .sdata
-char* const ftColl_804D3A68;
 
 // .sbss
 static size_t dmg_log0_idx;
