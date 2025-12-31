@@ -1149,7 +1149,14 @@ void fn_800DA190(Fighter_GObj* gobj)
 
 /// #fn_800DA1D8
 
-/// #fn_800DA2B0
+void fn_800DA2B0(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, 0xD8, 0, 0.0f, 1.0f, 0.0f, NULL);
+    fp->accessory1_cb = fn_800DA4A0;
+    fp->take_dmg_cb = fn_800DA490;
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
 
 void ftCo_CatchWait_Anim(Fighter_GObj* gobj) {}
 
