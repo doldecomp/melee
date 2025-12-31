@@ -105,7 +105,10 @@ static void vi0401_8031D23C(HSD_GObj* gobj)
     }
 }
 
-/// #fn_8031D168
+static void fn_8031D168(HSD_GObj* gobj)
+{
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
 
 /// #un_8031D288_OnEnter
 
