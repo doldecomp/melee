@@ -44,7 +44,7 @@
 /* 02C1A8 */ void Camera_8002C1A8(void);
 /* 02C5B4 */ void Camera_8002C5B4(void*);
 /* 02C908 */ void Camera_8002C908(void*);
-/* 02CB0C */ void Camera_8002CB0C(void);
+/* 02CB0C */ void Camera_8002CB0C(CameraBounds*);
 /* 02CDDC */ void Camera_8002CDDC(void*);
 /* 02D318 */ void Camera_8002D318(void*);
 /* 02D85C */ void Camera_8002D85C(void*);
