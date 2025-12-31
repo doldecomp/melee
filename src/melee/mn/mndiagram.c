@@ -4,6 +4,8 @@
 
 #include <melee/gm/gmmain_lib.h>
 
+bool mn_8022E950(int);
+
 u8 mnDiagram_8023EA2C(s32 arg0)
 {
     return mnDiagram_804A0750.pad_0[arg0];
@@ -78,8 +80,23 @@ u8 mnDiagram_8023F3A8(u8 arg0) {
 }
 /// #mnDiagram_8023F400
 
-/// #mnDiagram_8023F45C
+u8 mnDiagram_8023F45C(u8 arg0) {
+    s32 i;
+    u8 original;
+    u8* ptr;
 
+    ptr = (u8*)&mnDiagram_804A0750 + arg0;
+    i = arg0;
+    original = arg0;
+    do {
+        i--;
+        ptr--;
+        if (i < 0) {
+            return original;
+        }
+    } while (mn_8022E950(*ptr) == 0);
+    return (u8)i;
+}
 /// #mnDiagram_8023F4CC
 
 /// #mnDiagram_8023F540
