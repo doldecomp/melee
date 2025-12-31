@@ -50,7 +50,6 @@ void un_8031D708(void)
     lbAudioAx_80027648();
 }
 
-/// #vi_8031D80C
 void vi_8031D80C(HSD_GObj* gobj)
 {
     HSD_AObj* aobj;
