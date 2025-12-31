@@ -65,8 +65,18 @@ u8 mnDiagram_8023F3A8(u8 arg0) {
 
 /// #mnDiagram_8023FC28
 
-/// #mnDiagram_8023FDD8
-
+s32 mnDiagram_8023FDD8(void) {
+    s32 i;
+    s32 count;
+    i = 0;
+    count = 0;
+    for (; i < 0x19; i++) {
+        if (mn_8022E950(i) != 0) {
+            count++;
+        }
+    }
+    return count;
+}
 /// #fn_8023FE30
 
 /// #fn_8023FED4
