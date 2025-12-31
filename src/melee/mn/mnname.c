@@ -7,6 +7,8 @@
 #include <sysdolphin/baselib/jobj.h>
 
 extern char mnName_StringTerminator;
+extern char** NotAllowedNamesList;
+extern char mnNameNew_NullCharacter;
 
 void fn_80249A1C(HSD_GObj* arg0);
 
@@ -206,4 +208,18 @@ void mnName_8023A058(HSD_GObj* gobj) {
 
 /// #mnName_8023AC40
 
-/// #IsNameNotAllowed
+BOOL IsNameNotAllowed(char* name) {
+    char** list = NotAllowedNamesList;
+    for (;;) {
+        char nullChar = mnNameNew_NullCharacter;
+        char firstChar = **list;
+        if ((s8)nullChar != (s8)firstChar) {
+            if (CompareNameStrings(*list, name) == 0) {
+                return TRUE;
+            }
+            list++;
+        } else {
+            return FALSE;
+        }
+    }
+}
