@@ -59,6 +59,8 @@
 #include <melee/it/item.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/it/items/itkinoko.h>
+#include <melee/it/items/itlinkhookshot.h>
+#include <melee/it/items/itsamusgrapple.h>
 #include <melee/it/items/itsscope.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/pl_040D.h>
@@ -77,6 +79,13 @@
 /* 0D949C */ static void fn_800D949C(Fighter_GObj* gobj);
 /* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
+/* 0DA004 */ static void fn_800DA004(Fighter_GObj* gobj);
+/* 0DA054 */ static void fn_800DA054(Fighter_GObj* gobj);
+/* 0DA190 */ static void fn_800DA190(Fighter_GObj* gobj);
+/* 0DA1D8 */ static void fn_800DA1D8(Fighter_GObj* gobj);
+/* 0DA2B0 */ static void fn_800DA2B0(Fighter_GObj* gobj);
+/* 0DA4A0 */ static void fn_800DA4A0(Fighter_GObj* gobj);
+/* 0DA4C0 */ static bool fn_800DA4C0(Fighter_GObj* gobj);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
 
 bool ftCo_800D67C4(Fighter* fp)
