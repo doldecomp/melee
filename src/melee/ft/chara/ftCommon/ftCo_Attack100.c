@@ -862,8 +862,30 @@ bool ftCo_800D8A38(Fighter_GObj* gobj)
     return false;
 }
 
-/// #ftCo_800D8AE0
+bool ftCo_800D8AE0(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    s32 x2340_val;
 
+    if (ftCo_800952DC(gobj)) {
+        return true;
+    }
+    if (!fn_800D8E94(gobj)) {
+        return false;
+    }
+    if (!fn_800D952C(gobj)) {
+        return false;
+    }
+    if ((fp->input.held_inputs & 0x80000000) && *(s32*)&fp->mv.co.catch.x0 != 0) {
+        ftCo_800D8C54(gobj, 0xD6);
+        return true;
+    }
+    x2340_val = *(s32*)&fp->mv.co.catch.x0;
+    if (x2340_val != 0) {
+        *(s32*)&fp->mv.co.catch.x0 = x2340_val - 1;
+    }
+    return false;
+}
 /// #ftCo_800D8B9C
 
 void fn_800D8BFC(Fighter_GObj* gobj)
