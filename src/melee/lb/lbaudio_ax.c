@@ -1100,7 +1100,43 @@ u64 lbAudioAx_80026EBC(InternalStageId arg0)
     return 1ULL << shift;
 }
 
-/// #lbAudioAx_80026F2C
+u64 lbAudioAx_80026F2C(s32 arg0)
+{
+    int* arr;
+    int i;
+    u64 mask = 0;
+
+    if (arg0 & 1) {
+        mask += 0x0048000000000003ULL;
+    }
+
+    if (arg0 & 2) {
+        mask += 0x000000000000003CULL;
+    }
+
+    if (arg0 & 4) {
+        mask += 0x00800003FFFFFFC0ULL;
+    }
+
+    if (arg0 & 8) {
+        mask += 0x0023FFFC00000000ULL;
+    }
+
+    if (arg0 & 16) {
+        mask += 0x0014000000000000ULL;
+    }
+
+    arr = lbl_804337C4;
+    for (i = 0; i < 0x37; i++) {
+        if ((mask & 1) != 0) {
+            *arr = -1;
+        }
+        mask >>= 1;
+        arr++;
+    }
+
+    return mask;
+}
 
 /// #lbAudioAx_8002702C
 
