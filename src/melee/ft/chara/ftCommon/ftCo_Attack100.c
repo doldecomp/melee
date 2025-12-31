@@ -1070,8 +1070,9 @@ void fn_800DA490(Fighter_GObj* gobj)
     GET_FIGHTER(gobj)->take_dmg_cb = NULL;
 }
 
-/// #fn_800DA4A0
-
+void fn_800DA4A0(Fighter_GObj* gobj) {
+    fn_800DA054(gobj);
+}
 /// #fn_800DA4C0
 
 /// #fn_800DA4FC
