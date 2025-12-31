@@ -13,6 +13,7 @@
 #include <baselib/wobj.h>
 
 GXColor erase_colors_vi0601 = { 0, 0, 0, 0 };
+static f32 un_804DE0A8;
 
 void vi_8031E6CC_OnFrame(void)
 {
@@ -46,6 +47,26 @@ void vi0601_CameraCallback(HSD_GObj* gobj)
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
+}
+
+void fn_8031E800(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    f32 scale;
+
+    jobj = GET_JOBJ(gobj);
+    if (jobj != NULL) {
+        child = jobj->child;
+    } else {
+        child = NULL;
+    }
+    HSD_ASSERT(875, child);
+
+    scale = un_804DE0A8 * child->scale.x;
+    HSD_JObjSetScaleX(child, scale);
+    HSD_JObjSetScaleY(child, scale);
+    HSD_JObjSetScaleZ(child, scale);
 }
 
 void vi0601_RunFrame(HSD_GObj* gobj)
