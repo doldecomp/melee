@@ -2,9 +2,13 @@
 
 #include <placeholder.h>
 
+#include "ef/efasync.h"
+#include "ef/eflib.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "pl/player.h"
 #include "sc/types.h"
 #include "vi/vi.h"
 
