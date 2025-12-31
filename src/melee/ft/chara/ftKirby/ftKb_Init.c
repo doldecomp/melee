@@ -3158,9 +3158,12 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
     }
 }
 
-void ftKb_Init_OnItemInvisible(HSD_GObj* gobj)
+void ftKb_Init_OnItemInvisible(Fighter_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (it_8026B2B4(fp->item_gobj) == 0) {
+        ftAnim_80070CC4(gobj, 1);
+    }
 }
 
 void ftKb_Init_OnItemVisible(HSD_GObj* gobj)
