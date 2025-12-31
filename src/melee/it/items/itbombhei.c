@@ -299,8 +299,13 @@ void itBombhei_UnkMotion10_Phys(Item_GObj* gobj)
 }
 /// #fn_80280974
 
-/// #itBombhei_UnkMotion10_Coll
-
+bool itBombhei_UnkMotion10_Coll(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xDD4_itemVar.bombhei.xE0C = ip->x40_vel;
+    it_8026E414(gobj, fn_80280974);
+    return false;
+}
 /// #it_80280B60
 
 void it_80280DC0(Item_GObj* gobj)
