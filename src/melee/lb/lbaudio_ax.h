@@ -80,7 +80,7 @@
 /* 0263B4 */ void fn_800263B4(void* ptr);
 /* 0263E8 */ HSD_GObj* lbAudioAx_800263E8(float, HSD_GObj*, int, int, int, int, int, int, int, int, int);
 /* 0264E4 */ bool lbAudioAx_800264E4(UNK_T);
-/* 026510 */ void lbAudioAx_80026510(HSD_GObj*);
+/* 026510 */ bool lbAudioAx_80026510(HSD_GObj*);
 /* 0265C4 */ bool lbAudioAx_800265C4(HSD_GObj*, int sfx);
 /* 026650 */ UNK_RET fn_80026650(UNK_PARAMS);
 /* 0267B0 */ UNK_RET fn_800267B0(UNK_PARAMS);
