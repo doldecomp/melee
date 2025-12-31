@@ -10,6 +10,7 @@
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 /* 4DE0E4 */ static f32 un_804DE0E4;
 /* 4DE0E8 */ static f32 un_804DE0E8;
