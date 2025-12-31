@@ -3,6 +3,9 @@
 #include "mnname.h"
 
 #include <melee/gm/gmmain_lib.h>
+#include <sysdolphin/baselib/sislib.h>
+
+void HSD_Free(void*);
 
 bool mn_8022E950(int);
 
@@ -203,7 +206,24 @@ s32 mnDiagram_8023FDD8(void) {
 
 /// #fn_8023FED4
 
-/// #fn_80240B18
+void fn_80240B18(void* arg0) {
+    if (*(void**)((u8*)arg0 + 0x38) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**)((u8*)arg0 + 0x38));
+    }
+    if (*(void**)((u8*)arg0 + 0x3C) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**)((u8*)arg0 + 0x3C));
+    }
+    if (*(void**)((u8*)arg0 + 0x40) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**)((u8*)arg0 + 0x40));
+    }
+    if (*(void**)((u8*)arg0 + 0x44) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**)((u8*)arg0 + 0x44));
+    }
+    if (*(void**)((u8*)arg0 + 0x48) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**)((u8*)arg0 + 0x48));
+    }
+    HSD_Free(arg0);
+}
 
 /// #fn_80240B98
 
