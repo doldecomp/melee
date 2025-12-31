@@ -889,8 +889,119 @@ int fn_800250A0(int arg0, int arg1, int arg2, int arg3)
     return 64;
 }
 
-/// #fn_800251EC
+bool fn_800251EC(HSD_GObj* gobj)
+{
+    void* user_data;
+    s32 pad1;
+    s32 pad2;
+    f32 cam_left;
+    f32 cam_center;
+    f32 cam_right;
+    Vec3 pos;
+    s32 result_flag;
+    f32 pan;
+    s32 val;
+    f32 ratio;
+    f32 temp;
+    HSD_GObj* entity;
+    s32 type;
 
+    if (gobj == NULL) {
+        goto ret_true;
+    }
+
+    user_data = gobj->user_data;
+    if (user_data == NULL) {
+        goto ret_true;
+    }
+
+    Camera_800307D0(&cam_left, &cam_center, &cam_right);
+
+    if (gobj == NULL) {
+        goto set_flag;
+    }
+    if (gobj->user_data == NULL) {
+        goto set_flag;
+    }
+    entity = *(HSD_GObj**)((u8*)gobj->user_data + 0x08);
+    if (entity == NULL) {
+        goto set_flag;
+    }
+
+    type = *(u16*)entity;
+    switch (type) {
+    case 4:
+        ftLib_80086644(entity, &pos);
+        result_flag = 0;
+        break;
+    case 6:
+        it_8026B294(entity, &pos);
+        result_flag = 0;
+        break;
+    default:
+        pos.x = 0.0f;
+        pos.y = 0.0f;
+        pos.z = 0.0f;
+        goto set_flag;
+    }
+    goto check_flag;
+
+set_flag:
+    result_flag = 1;
+check_flag:
+    if (result_flag == 1) {
+        return true;
+    }
+
+    pan = 64.0f;
+
+    if (!(cam_left < cam_center)) {
+        goto store_pan;
+    }
+    if (!(cam_center < cam_right)) {
+        goto store_pan;
+    }
+    if (!(cam_left < pos.x)) {
+        goto store_pan;
+    }
+    if (!(pos.x < cam_right)) {
+        goto store_pan;
+    }
+
+    if (cam_center < pos.x) {
+        val = *(s32*)((u8*)user_data + 0x28);
+        if (!(val > 0x40)) {
+            goto store_pan;
+        }
+        ratio = (pos.x - cam_center) / (cam_right - cam_center);
+        temp = (f32)(val - 0x40) * ratio;
+        if (temp < 0.0f) {
+            temp = -temp;
+        }
+        pan = 64.0f + temp;
+    } else {
+        if (!(cam_center > pos.x)) {
+            goto store_pan;
+        }
+        val = *(s32*)((u8*)user_data + 0x24);
+        if (!(val < 0x40)) {
+            goto store_pan;
+        }
+        ratio = (cam_center - pos.x) / (cam_center - cam_left);
+        temp = (f32)(0x40 - val) * ratio;
+        if (temp < 0.0f) {
+            temp = -temp;
+        }
+        pan = 64.0f - temp;
+    }
+
+store_pan:
+    *(s32*)((u8*)user_data + 0x2C) = (s32)pan;
+    return false;
+
+ret_true:
+    return true;
+}
 /// #fn_800253D8
 
 /// #fn_800256BC
