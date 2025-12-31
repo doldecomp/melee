@@ -153,9 +153,7 @@ void grOnett_801E502C(Ground_GObj* gobj) {}
 /// #grOnett_801E5214
 
 /// Updates awning collision tracking data
-/// @note Accesses grOnett_AwningData fields via pointer arithmetic for matching codegen.
-///       See grOnett_AwningData struct in types.h for field documentation.
-void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3)
+void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3, int arg4)
 {
     int temp = cd->x34_flags.b1234;
     int idx;
@@ -170,17 +168,13 @@ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3)
         idx = 1;
     }
 
-    if (arg3 == 1) {
-        // awning->flag = 1
-        *(s16*)((u8*)gp + idx * 0x1C + 0xDE) = 1;
-        // awning->initial = grOt_804D69C0->awning_initial
-        *(float*)((u8*)gp + idx * 0x1C + 0xD4) = grOt_804D69C0->awning_initial;
+    if (arg4 == 1) {
+        gp->gv.onett.awnings[idx].flag = 1;
+        gp->gv.onett.awnings[idx].initial = grOt_804D69C0->awning_initial;
     }
 
-    // awning->accumulator += grOt_804D69C0->awning_delta
-    *(float*)((u8*)gp + idx * 0x1C + 0xCC) += grOt_804D69C0->awning_delta;
-    // awning->counter += 1
-    *(s16*)((u8*)gp + idx * 0x1C + 0xD8) += 1;
+    gp->gv.onett.awnings[idx].accumulator += grOt_804D69C0->awning_delta;
+    gp->gv.onett.awnings[idx].counter++;
 }
 
 /// #grOnett_801E5538

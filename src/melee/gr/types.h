@@ -619,9 +619,6 @@ struct grGreens_GroundVars {
 };
 
 /// Onett awning collision data element (0x1C bytes)
-/// Two elements starting at gp+0xCC, accessed via (gp + idx*0x1C + field_offset)
-/// @note Using struct field access generates non-matching code, so functions
-///       access these via pointer arithmetic: (u8*)gp + idx * 0x1C + offset
 struct grOnett_AwningData {
     /* +0x00 (gp+0xCC) */ float accumulator;
     /* +0x04 */ u8 pad04[4];
@@ -634,7 +631,8 @@ struct grOnett_AwningData {
 
 struct grOnett_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
-    /* See grOnett_AwningData for awning data at gp+0xCC (2 elements, 0x1C stride) */
+    u8 pad[0xCC - 0xC5];
+    struct grOnett_AwningData awnings[2];
 };
 
 struct grBigBlue_GroundVars {
