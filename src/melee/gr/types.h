@@ -618,7 +618,10 @@ struct grGreens_GroundVars {
     /* +1C gp+E0 */ int x1C;
 };
 
-/// Onett awning collision data element (0x1C bytes)
+/// Onett collision element (0x1C bytes)
+/// Callback for joints 0 and 1; could be awning hit tracking?
+/// (counter, accumulator, state machine with reset timer)
+/// Thresholds loaded from stage data at runtime
 struct grOnett_AwningData {
     /* +0x00 (gp+0xCC) */ float accumulator;
     /* +0x04 */ u8 pad04[4];
