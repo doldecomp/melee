@@ -43,4 +43,6 @@
 /* 21F830 */ DynamicsDesc* grHeal_8021F830(enum_t);
 /* 21F838 */ bool grHeal_8021F838(Vec3*, int, HSD_JObj*);
 
+extern s16 grHeal_804D49D8[4];
+
 #endif
