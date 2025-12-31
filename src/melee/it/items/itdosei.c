@@ -16,7 +16,12 @@
 
 void itDosei_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itDosei_UnkMotion0_Coll
+bool itDosei_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, (HSD_GObjEvent) it_80282074);
+    it_80276CB8(gobj);
+    return false;
+}
 
 /// #fn_80281734
 
@@ -24,7 +29,16 @@ void itDosei_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion1_Anim
 
-/// #itDosei_UnkMotion1_Phys
+void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    f32* ap = ip->xC4_article_data->x4_specialAttributes;
+    f32 vel = ap[2] * ip->x5D0_animFrameSpeed;
+    if (vel < 0.0f) {
+        vel = -vel;
+    }
+    ip->x40_vel.x = ip->facing_dir * vel;
+}
 
 /// #itDosei_UnkMotion1_Coll
 
@@ -111,7 +125,12 @@ bool itDosei_UnkMotion8_Coll(Item_GObj* gobj)
 
 void itDosei_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itDosei_UnkMotion7_Coll
+bool itDosei_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_80282BFC);
+    it_80276CB8(gobj);
+    return false;
+}
 
 /// #it_80282DE4
 
