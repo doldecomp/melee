@@ -11,6 +11,9 @@
 #include <baselib/synth.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbarchive.h>
+#include <melee/cm/camera.h>
+#include <melee/ft/ftlib.h>
+#include <melee/it/it_26B1.h>
 #include <melee/lb/lblanguage.h>
 
 extern s8 flags_arr_803BB800[0x62];
