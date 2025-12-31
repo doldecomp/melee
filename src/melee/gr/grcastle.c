@@ -78,8 +78,14 @@ bool grCastle_801CD8A0(Ground_GObj* gobj)
 
 /// #grCastle_801CD8A8
 
-/// #grCastle_801CD960
-
+void grCastle_801CD960(Ground_GObj* gobj)
+{
+    unkCastle* castle = gobj->user_data;
+    int i;
+    for (i = 0; i < 12; i++) {
+        grLib_801C9B6C((u8*)castle + i * 0x14 + 0xE0);
+    }
+}
 /// #fn_801CD9B4
 
 /// #grCastle_801CDA0C
