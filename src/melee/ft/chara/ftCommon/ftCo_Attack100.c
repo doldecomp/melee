@@ -1162,8 +1162,16 @@ void ftCo_CatchCut_Phys(Fighter_GObj* gobj) {
         ft_80084DB0(gobj);
     }
 }
-/// #ftCo_CatchCut_Coll
-
+void ftCo_CatchCut_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    
+    if (fp->ground_or_air == GA_Ground) {
+        ft_80084104(gobj);
+    } else {
+        ft_8008370C(gobj, ft_80082B1C);
+    }
+}
 /// #ftCo_800DA824
 
 /// #fn_800DA8E4
