@@ -6,6 +6,8 @@
 
 #include <baselib/axdriver.h>
 #include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
 #include <baselib/synth.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbarchive.h>
@@ -815,7 +817,70 @@ void fn_800263B4(void* ptr)
         HSD_ObjFree(&lbl_80433710, p);
     }
 }
-/// #lbAudioAx_800263E8
+typedef struct SoundParams {
+    HSD_GObj* gobj;
+    int x4;
+    int sfx_id;
+    int xC;
+    int x10;
+    int x14;
+    int x18;
+    int x1C;
+    float x20;
+    int x24;
+    int x28;
+} SoundParams;
+
+HSD_GObj* lbAudioAx_800263E8(float f1, HSD_GObj* arg1, int sfx_id, int arg3,
+                             int arg4, int arg5, int arg6, int arg7,
+                             int arg8, int arg9, int arg10)
+{
+    void* userdata;
+    HSD_GObj* gobj;
+    SoundParams params;
+
+    if (arg3 >= 0x83D60) {
+        goto return_null;
+    }
+
+    params.gobj = arg1;
+    params.x4 = sfx_id;
+    params.sfx_id = arg3;
+    params.xC = arg4;
+    params.x10 = arg5;
+    params.x14 = arg6;
+    params.x18 = arg7;
+    params.x1C = arg8;
+    params.x20 = f1;
+    params.x24 = arg9;
+    params.x28 = arg10;
+
+    gobj = GObj_Create(0x17, 0x3E, 0);
+    if (gobj == NULL) {
+        goto return_null;
+    }
+
+    userdata = HSD_ObjAlloc(&lbl_80433710);
+    if (userdata == NULL) {
+        HSD_GObjPLink_80390228(gobj);
+        gobj = NULL;
+        goto return_gobj;
+    }
+
+    GObj_InitUserData(gobj, 0x17, fn_800263B4, userdata);
+
+    if (gobj != NULL) {
+        HSD_GObjProc_8038FD54(gobj, fn_800262A0, 0x17);
+    }
+
+    fn_80025FAC(gobj, userdata, &params);
+
+return_gobj:
+    return gobj;
+
+return_null:
+    return NULL;
+}
 
 /// #lbAudioAx_800264E4
 
