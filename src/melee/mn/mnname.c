@@ -117,40 +117,47 @@ void mnName_802385A0(HSD_GObj* gobj)
 
 /// #mnName_80239F5C
 
+typedef struct {
+    char unk[0x30];
+    void* x30;
+    char unk34[0x8];
+    void* x3C;
+} MnNameData;
+
 s32 mnName_80239FFC(void* arg0) {
+    MnNameData* data = (MnNameData*)arg0;
     void* obj;
     HSD_JObj* jobj;
-    
-    obj = *(void**)((u8*)arg0 + 0x30);
+
+    obj = data->x30;
     if (obj == NULL) {
         jobj = NULL;
     } else {
         jobj = *(HSD_JObj**)((u8*)obj + 0x10);
     }
     HSD_JObjRemoveAll(jobj);
-    
-    obj = *(void**)((u8*)arg0 + 0x3C);
-    if (obj != NULL) {
-        HSD_SisLib_803A5CC4(obj);
-        *(void**)((u8*)arg0 + 0x3C) = NULL;
+
+    if (data->x3C != NULL) {
+        HSD_SisLib_803A5CC4(data->x3C);
+        data->x3C = NULL;
     }
 }
 void mnName_8023A058(HSD_GObj* gobj) {
+    MnNameData* data = (MnNameData*)gobj;
     void* obj;
     HSD_JObj* jobj;
-    
-    obj = *(void**)((u8*)gobj + 0x30);
+
+    obj = data->x30;
     if (obj == NULL) {
         jobj = NULL;
     } else {
         jobj = *(HSD_JObj**)((u8*)obj + 0x10);
     }
     HSD_JObjRemoveAll(jobj);
-    
-    obj = *(void**)((u8*)gobj + 0x3C);
-    if (obj != NULL) {
-        HSD_SisLib_803A5CC4(obj);
-        *(void**)((u8*)gobj + 0x3C) = NULL;
+
+    if (data->x3C != NULL) {
+        HSD_SisLib_803A5CC4(data->x3C);
+        data->x3C = NULL;
     }
     
     mnName_80239A24(gobj);
