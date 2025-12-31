@@ -41,7 +41,21 @@ s32 mnDiagram_8023EA54(u32 arg0) {
 
 /// #GetNameTotalFalls
 
-/// #GetFighterTotalKOs
+s32 GetFighterTotalKOs(u8 field_index) {
+    u8 idx = field_index;
+    s32 total = 0;
+    s32 i = 0;
+    s32 dummy[4];
+    void* data;
+    (void)dummy;
+    for (; i < 0x19; i++) {
+        if (mn_8022E950(i) != 0) {
+            data = GetPersistentFighterData(idx);
+            total += *(u16*)((u8*)data + ((u8)i * 2));
+        }
+    }
+    return total;
+}
 
 s32 GetFighterTotalFalls(u8 field_index) {
     s32 i;
