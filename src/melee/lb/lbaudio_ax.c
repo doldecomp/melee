@@ -1110,8 +1110,59 @@ bool fn_80025CBC(HSD_GObj* gobj)
 end:
     return false;
 }
-/// #fn_80025E38
+bool fn_80025E38(HSD_GObj* gobj)
+{
+    void* user_data;
+    s32 end_frame;
+    s32 current_frame;
+    s32 end_val;
+    s32 start_val;
+    f32 diff;
+    f32 ratio;
 
+    if (gobj == NULL) {
+        goto end;
+    }
+
+    user_data = gobj->user_data;
+    if (user_data == NULL) {
+        goto end;
+    }
+
+    current_frame = *(s32*)((u8*)user_data + 0x34);
+    end_frame = *(s32*)((u8*)user_data + 0x38);
+
+    if (current_frame > end_frame) {
+        goto set_7f;
+    }
+
+    start_val = *(s32*)((u8*)user_data + 0x18);
+    end_val = *(s32*)((u8*)user_data + 0x1C);
+
+    if (start_val < end_val) {
+        diff = (f32)end_val - (f32)start_val;
+        if (diff < 0.0f) {
+            diff = -diff;
+        }
+        ratio = (f32)current_frame / (f32)end_frame;
+        *(s32*)((u8*)user_data + 0x20) = start_val + (s32)(ratio * diff);
+        goto end;
+    }
+
+    diff = (f32)end_val - (f32)start_val;
+    if (diff < 0.0f) {
+        diff = -diff;
+    }
+    ratio = (f32)current_frame / (f32)end_frame;
+    *(s32*)((u8*)user_data + 0x20) = end_val - (s32)(ratio * diff);
+    goto end;
+
+set_7f:
+    *(s32*)((u8*)user_data + 0x20) = 0x7F;
+
+end:
+    return false;
+}
 /// #fn_80025FAC
 
 /// #fn_800262A0
