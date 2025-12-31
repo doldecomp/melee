@@ -702,8 +702,12 @@ static void fn_800D86B8(Fighter_GObj* gobj)
     fn_800D84D4(gobj, *(s32*)((u8*)fp + 0x2340));
 }
 
-/// #fn_800D86E0
-
+void fn_800D86E0(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, 0xA1), 0, 0.0f, 1.0f, 0.0f, NULL);
+    fp->take_dmg_cb = fn_800D8378;
+}
 static void fn_800D874C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
