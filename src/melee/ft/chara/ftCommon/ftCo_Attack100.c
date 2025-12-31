@@ -78,6 +78,7 @@
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D949C */ static void fn_800D949C(Fighter_GObj* gobj);
 /* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
+/* 0D9CE8 */ void fn_800D9CE8(Fighter_GObj* gobj);
 /* 0DA004 */ static void fn_800DA004(Fighter_GObj* gobj);
 /* 0DA054 */ static void fn_800DA054(Fighter_GObj* gobj);
 /* 0DA190 */ static void fn_800DA190(Fighter_GObj* gobj);
