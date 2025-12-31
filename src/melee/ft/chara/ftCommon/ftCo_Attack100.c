@@ -1272,9 +1272,45 @@ void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
     }
 }
 
-void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1)
+void fn_800DAADC(Fighter_GObj* gobj, Fighter_GObj* victim_gobj)
 {
-    NOT_IMPLEMENTED;
+    FtMotionId msid;
+    Fighter* fp1;
+    Fighter* fp2;
+    HSD_JObj* jobj;
+    u8 pad0[4];
+    Vec3 sp24;
+    u8 pad1[0x14];
+    Fighter* fp;
+
+    fp = gobj->user_data;
+    if (fp->ground_or_air == GA_Ground) {
+        msid = 0xE2;
+    } else {
+        msid = 0xDF;
+    }
+    fn_800DA8E4(gobj, victim_gobj, msid);
+    fp1 = gobj->user_data;
+    fp2 = victim_gobj->user_data;
+    fn_800DAC78(gobj, &sp24);
+    if (fp1->ground_or_air == GA_Ground) {
+        fp2->x2170 = (sp24.y + fp1->cur_pos.y) - fp2->cur_pos.y;
+    } else {
+        fp2->x2170 = 0.0f;
+        fp1->cur_pos.x += sp24.x;
+        fp1->cur_pos.y += sp24.y;
+        fp1->cur_pos.z += sp24.z;
+    }
+    fp->coll_cb(gobj);
+    jobj = gobj->hsd_obj;
+    if (jobj == NULL) {
+        __assert(__FILE__, 0x394, "jobj");
+    }
+    if (&fp->cur_pos == NULL) {
+        __assert(__FILE__, 0x395, "pos");
+    }
+    jobj->translate = fp->cur_pos;
+    HSD_JObjSetMtxDirtySub(jobj);
 }
 
 void ftCo_CapturePulledHi_Anim(Fighter_GObj* gobj) {}
