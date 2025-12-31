@@ -1061,8 +1061,55 @@ bool fn_80025B44(HSD_GObj* gobj)
 end:
     return false;
 }
-/// #fn_80025CBC
+bool fn_80025CBC(HSD_GObj* gobj)
+{
+    void* user_data;
+    s32 target;
+    s32 current;
+    s32 end_frame;
+    s32 current_frame;
+    s32 result;
+    f32 f_result;
 
+    if (gobj == NULL) {
+        goto end;
+    }
+
+    user_data = gobj->user_data;
+    if (user_data == NULL) {
+        goto end;
+    }
+
+    end_frame = *(s32*)((u8*)user_data + 0x38);
+    current_frame = *(s32*)((u8*)user_data + 0x34);
+    target = *(s32*)((u8*)user_data + 0x28);
+    current = *(s32*)((u8*)user_data + 0x24);
+
+    if (current_frame > end_frame) {
+        current_frame = end_frame;
+    }
+
+    if (current != target) {
+        if (current < target) {
+            f_result = (f32)current + ((f32)current_frame * ((f32)target - (f32)current)) / (f32)end_frame;
+        } else {
+            f_result = (f32)target + ((f32)current_frame * ((f32)current - (f32)target)) / (f32)end_frame;
+        }
+        if (f_result < 0.0f) {
+            f_result = 0.0f;
+        }
+        if (f_result > 127.0f) {
+            f_result = 127.0f;
+        }
+        result = (s32)f_result;
+    } else {
+        result = 0x40;
+    }
+
+    *(s32*)((u8*)user_data + 0x2C) = 0x7F - result;
+end:
+    return false;
+}
 /// #fn_80025E38
 
 /// #fn_80025FAC
