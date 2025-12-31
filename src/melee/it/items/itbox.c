@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "gr/grkongo.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_266F.h"
@@ -11,9 +12,23 @@
 
 /// #it_80286088
 
-/// #it_3F14_Logic1_Spawned
+void it_3F14_Logic1_Spawned(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xDCE_flag.b7 = 0;
+    ip->xDD4_itemVar.box.xDD4 = 0;
+    ip->xDD4_itemVar.box.xDDC = NULL;
+    it_8028655C(gobj);
+}
 
-/// #it_3F14_Logic1_Destroyed
+void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDD4_itemVar.box.xDDC != NULL) {
+        grKongo_801D8058(ip->xDD4_itemVar.box.xDDC);
+        ip->xDD4_itemVar.box.xDDC = NULL;
+    }
+}
 
 /// #it_80286248
 
