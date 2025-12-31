@@ -1499,7 +1499,42 @@ u64 lbAudioAx_80026F2C(s32 arg0)
     return mask;
 }
 
-/// #lbAudioAx_8002702C
+extern int lbl_804337C4[0x38];
+
+void lbAudioAx_8002702C(s32 flags, u64 base_val)
+{
+    u64 result = 0;
+    s32 i;
+    u64 mask;
+
+    mask = base_val + 3 + ((u64)0x480000 << 32);
+
+    if (flags & 1) {
+        result += 3 + ((u64)0x480000 << 32);
+    }
+    if (flags & 2) {
+        result += 0x3C;
+    }
+    if (flags & 4) {
+        result += (u32)-64 + ((u64)0x800003 << 32);
+    }
+    if (flags & 8) {
+        result += ((u64)0x23FFFC << 32);
+    }
+    if (flags & 16) {
+        result += ((u64)0x140000 << 32);
+    }
+
+    for (i = 0; i < 0x37; i++) {
+        if ((result & 1) != 0) {
+            if ((mask & 1) != 0) {
+                lbl_804337C4[i] = 1;
+            }
+        }
+        result >>= 1;
+        mask >>= 1;
+    }
+}
 
 /// #lbAudioAx_80027168
 

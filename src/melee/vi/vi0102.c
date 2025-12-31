@@ -74,16 +74,6 @@ void vi0102_8031CB00(int mario_costume, int luigi_costume)
     Player_SetFacingDirection(1, 1.0f);
     Player_80032768(1, &initial_pos);
     Player_80036F34(1, 9);
-
-    lbAudioAx_80026F2C(0x18);
-    lbAudioAx_8002702C(8, 0x400000000);
-    lbAudioAx_80027168();
-    lbAudioAx_80027648();
-}
-
-void vi0102_JObjCallback(HSD_GObj* gobj)
-{
-    HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
 void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
