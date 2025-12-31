@@ -60,8 +60,38 @@ void vi_8031D80C(HSD_GObj* gobj)
     }
 }
 
-/// #un_8031D858_OnEnter
+void un_8031D858_OnEnter(void* arg0)
+{
+    HSD_CObj* cobj;
+    HSD_GObj* cam_gobj;
 
+    lbAudioAx_800236DC();
+    efLib_8005B4B8();
+    efAsync_8006737C(0);
+    lbAudioAx_80023F28(0x58);
+    lbAudioAx_80024E50(1);
+    lbArchive_LoadSymbols("Vi0402.dat", &un_804D6F68, "visual0402Scene", NULL);
+    {
+        HSD_GObj* light_gobj = GObj_Create(0xB, 0x3, 0);
+        HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lb_80011AC4(un_804D6F68->lights));
+        GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
+    }
+
+    cam_gobj = GObj_Create(0x13, 0x14, 0);
+    cobj = lb_80013B14((HSD_CameraDescPerspective*) un_804D6F68->cameras[0].desc);
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
+    cam_gobj->gxlink_prios = 0x89;
+    HSD_CObjAddAnim(cobj, un_804D6F68->cameras[0].anims[0]);
+    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjAnim(cobj);
+    HSD_GObjProc_8038FD54(cam_gobj, vi_8031D80C, 0);
+
+    un_8031D708();
+    vi_8031C9B4(0x22, 0);
+    Player_InitAllPlayers();
+    lbAudioAx_80024E50(0);
+}
 void vi_8031D9C4_OnFrame(void)
 {
     vi_8031CAAC();
