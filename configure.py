@@ -1099,7 +1099,7 @@ config.libs = [
             Object(Matching, "melee/it/it_26B1.c"),
             Object(NonMatching, "melee/it/it_266F.c"),
             Object(NonMatching, "melee/it/itcoll.c"),
-            Object(NonMatching, "melee/it/it_2725.c"),
+            Object(Matching, "melee/it/it_2725.c"),
             # Individual items
             Object(Matching, "melee/it/items/itcapsule.c"),
             Object(NonMatching, "melee/it/items/itbombhei.c"),
