@@ -90,7 +90,108 @@ int lbAudioAx_80023220(int idx)
     return 0;
 }
 
-/// #fn_80023254
+void fn_80023254(s32 arg0)
+{
+    int local_arr[0x38];
+    int* arr_b44;
+    int* local_ptr;
+    s8 (*arr_5d0)[4];
+    int (*arr_4e4)[2];
+    int count;
+    int j;
+    int n;
+    int* shift_ptr;
+    int i;
+
+    arr_b44 = lbl_80433B44;
+    local_ptr = local_arr;
+    for (i = 0; i < 7; i++) {
+        arr_b44[0] = 0x37;
+        local_ptr[0] = 0;
+        arr_b44[1] = 0x37;
+        local_ptr[1] = 0;
+        arr_b44[2] = 0x37;
+        local_ptr[2] = 0;
+        arr_b44[3] = 0x37;
+        local_ptr[3] = 0;
+        arr_b44[4] = 0x37;
+        local_ptr[4] = 0;
+        arr_b44[5] = 0x37;
+        local_ptr[5] = 0;
+        arr_b44[6] = 0x37;
+        local_ptr[6] = 0;
+        arr_b44[7] = 0x37;
+        arr_b44 += 8;
+        local_ptr[7] = 0;
+        local_ptr += 8;
+    }
+
+    arr_b44 = lbl_80433B44;
+
+    for (count = 0; count <= 0x37; count++) {
+        local_ptr = local_arr;
+        arr_5d0 = s32_arr_803BB5D0;
+        arr_4e4 = offsets_arr_803BC4E4;
+        j = 0;
+
+        do {
+            if (arg0 != (s8)(*arr_5d0)[2]) {
+                goto next;
+            }
+            if (*local_ptr != 0) {
+                goto next;
+            }
+
+            if ((u32)offsets_arr_803BC4E4[*arr_b44][0] >= (u32)(*arr_4e4)[0]) {
+                goto next;
+            }
+
+            if (count < 0x37) {
+                shift_ptr = &lbl_80433B44[0x37];
+                n = 0x37 - count;
+
+                if ((n >> 3) != 0) {
+                    i = n >> 3;
+                    do {
+                        shift_ptr[0] = shift_ptr[-1];
+                        shift_ptr[-1] = shift_ptr[-2];
+                        shift_ptr[-2] = shift_ptr[-3];
+                        shift_ptr[-3] = shift_ptr[-4];
+                        shift_ptr[-4] = shift_ptr[-5];
+                        shift_ptr[-5] = shift_ptr[-6];
+                        shift_ptr[-6] = shift_ptr[-7];
+                        shift_ptr[-7] = shift_ptr[-8];
+                        shift_ptr -= 8;
+                        i--;
+                    } while (i != 0);
+                    n &= 7;
+                    if (n == 0) {
+                        goto insert;
+                    }
+                }
+
+                i = n;
+                do {
+                    shift_ptr[0] = shift_ptr[-1];
+                    shift_ptr--;
+                    i--;
+                } while (i != 0);
+            }
+
+        insert:
+            *arr_b44 = j;
+            *local_ptr = 1;
+
+        next:
+            j++;
+            arr_5d0++;
+            local_ptr++;
+            arr_4e4++;
+        } while (j <= 0x37);
+
+        arr_b44++;
+    }
+}
 
 /// #lbAudioAx_800233EC
 
