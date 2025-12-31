@@ -194,6 +194,7 @@ static int offsets_arr_803BC4E4[0x38][2];
 
 extern int lbl_804337C4[0x38];
 extern int lbl_804338A4[0x38];
+extern int lbl_80433B44[0x38];
 
 extern int lbl_804D6438;
 extern int lbl_804D6448;
