@@ -41,12 +41,14 @@
 #include <baselib/mtx.h>
 #include <baselib/wobj.h>
 
-GXColor erase_colors_vi0502 = { 0, 0, 0, 0 };
+extern GXColor erase_colors_vi0502;
 
 extern SceneDesc* un_804D6F90;
 extern HSD_Archive* un_804D6F9C;
 extern HSD_Archive* un_804D6F98;
-extern char un_804000D0[];
+
+// .data section 0x804000D0 - 0x80400108 (size 0x38)
+char un_804000D0[0x38];
 
 Vec3 initial_pos = { 0, 0, 0 };
 
