@@ -66,6 +66,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
+/* 0D7938 */ void fn_800D7938(Fighter_GObj* gobj);
 /* 0D80F4 */ static void fn_800D80F4(Fighter_GObj* gobj);
 /* 0D8378 */ void fn_800D8378(Fighter_GObj* gobj);
 /* 0D84D4 */ static void fn_800D84D4(Fighter_GObj* gobj, s32 arg1);
@@ -469,8 +470,22 @@ static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid)
 
 /// #ft_800D7770
 
-/// #fn_800D7830
+void fn_800D7830(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 motion;
 
+    ftCommon_8007D7FC(fp);
+
+    if (M2C_FIELD(fp, s32*, 0x10) >= 0xA6) {
+        motion = 0xA6;
+    } else {
+        motion = 0x9E;
+    }
+
+    Fighter_ChangeMotionState(gobj, motion, 0x0C4C5280, M2C_FIELD(fp, f32*, 0x894), M2C_FIELD(fp, f32*, 0x89C), 0.0f, NULL);
+    M2C_FIELD(fp, void**, 0x21DC) = fn_800D7938;
+}
 /// #ftCo_ItemScopeStart_GroundToAir
 
 void fn_800D7938(Fighter_GObj* gobj)
