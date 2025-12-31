@@ -39,7 +39,23 @@ s32 mnDiagram_8023EA54(u32 arg0) {
 
 /// #GetNameTotalKOs
 
-/// #GetNameTotalFalls
+s32 GetNameTotalFalls(u8 field_index) {
+    s32 i;
+    s32 total = 0;
+    s32 offset = (u8)field_index * 2;
+    s32 dummy[4];
+    (void)dummy;
+    for (i = 0; i < 0x78; i++) {
+        if (GetNameText(i) != 0) {
+            void* data = GetPersistentNameData(i);
+            total += *(u16*)((u8*)data + offset);
+        }
+    }
+    if (total > 999999) {
+        total = 999999;
+    }
+    return total;
+}
 
 s32 GetFighterTotalKOs(u8 field_index) {
     u8 idx = field_index;
