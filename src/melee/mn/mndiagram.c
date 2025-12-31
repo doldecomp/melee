@@ -106,8 +106,19 @@ s32 mnDiagram_8023FDD8(void) {
 
 /// #mnDiagram_802417D0
 
-/// #fn_80241AE8
-
+void fn_80241AE8(HSD_GObj* gobj) {
+    void* data;
+    void* jobj;
+    f32* table;
+    
+    data = *(void**)((u8*)gobj + 0x2C);
+    mnDiagram_802417D0(gobj);
+    jobj = *(void**)((u8*)data + 0x0C);
+    table = mnDiagram_803EE774;
+    if (mn_8022ED6C(jobj, table) >= table[1]) {
+        HSD_GObjPLink_80390228(gobj);
+    }
+}
 /// #mnDiagram_80241B4C
 
 /// #fn_80241BF8
