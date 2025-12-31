@@ -1242,8 +1242,18 @@ return_null:
     return NULL;
 }
 
-/// #lbAudioAx_800264E4
-
+bool lbAudioAx_800264E4(void* data)
+{
+    u8* inner;
+    if (data != NULL) {
+        inner = *(u8**)((u8*)data + 0x2C);
+        if (inner == NULL) {
+            return -1;
+        }
+        return *(s32*)(inner + 0x30);
+    }
+    return -1;
+}
 bool lbAudioAx_80026510(HSD_GObj* arg0)
 {
     HSD_GObj* next;
