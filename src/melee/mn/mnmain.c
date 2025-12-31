@@ -668,6 +668,8 @@ void mn_8022EA08(char* buf, u32 num)
 
 #pragma dont_inline off
 
+#pragma dont_inline on
+
 void mn_8022EA78(char* buf, int buf_end, u32 num)
 {
     int i;
@@ -676,6 +678,8 @@ void mn_8022EA78(char* buf, int buf_end, u32 num)
     }
     buf[buf_end] = null_terminator[0];
 }
+
+#pragma dont_inline off
 
 
 s32 mn_8022EB24(s32 arg0, s32 arg1)
@@ -2857,8 +2861,6 @@ void mn_8022E978(u8 item_idx, u8 enable)
     }
 }
 
-/// #mn_8022EA78
-
 void mn_8022EAE0(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(gobj->hsd_obj);
@@ -2868,10 +2870,6 @@ void mn_8022EB04(void* user_data)
 {
     HSD_Free(user_data);
 }
-
-/// #mn_8022EB24
-
-/// #mn_8022EB78
 
 void mn_8022EBDC(void)
 {
