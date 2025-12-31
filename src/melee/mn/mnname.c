@@ -1,8 +1,10 @@
 #include "mnname.h"
 
 #include "mnmain.h"
+#include "mnnamenew.h"
 
 #include <melee/gm/gmmain_lib.h>
+#include <sysdolphin/baselib/jobj.h>
 
 extern char mnName_StringTerminator;
 
