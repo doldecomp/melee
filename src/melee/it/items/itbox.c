@@ -38,11 +38,23 @@ void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
 
 /// #fn_80286480
 
-/// #itBox_UnkMotion0_Anim
+bool itBox_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        it_802787B4(gobj, 0x421);
+    }
+    return false;
+}
 
 void itBox_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itBox_UnkMotion0_Coll
+bool itBox_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_8028655C);
+    it_80276CB8(gobj);
+    return false;
+}
 
 /// #it_8028655C
 
@@ -77,7 +89,13 @@ void it_3F14_Logic1_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
-/// #itBox_UnkMotion4_Phys
+void itBox_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 /// #itBox_UnkMotion3_Coll
 

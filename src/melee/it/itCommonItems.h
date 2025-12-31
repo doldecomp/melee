@@ -110,6 +110,9 @@ typedef struct itDosei_ItemVars {
     s32 xDDC;
     s32 xDE0;
     Vec3 xDE4;
+    s32 xDF0;
+    s32 xDF4;
+    Vec3 xDF8;
 } itDosei_ItemVars;
 
 typedef struct itHeart_ItemVars {
