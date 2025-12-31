@@ -823,8 +823,25 @@ void ftCo_ItemScopeAirEnd_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800D87C0);
 }
 
-/// #ftCo_Catch_CheckInput
+bool ftCo_Catch_CheckInput(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
 
+    if (ftCo_800951D0(gobj)) {
+        return true;
+    }
+    if (!fn_800D8E94(gobj)) {
+        return false;
+    }
+    if (!fn_800D952C(gobj)) {
+        return false;
+    }
+    if ((fp->input.held_inputs & 0x80000000) && (fp->input.x668 & 0x100)) {
+        ftCo_800D8C54(gobj, 0xD4);
+        return true;
+    }
+    return false;
+}
 bool ftCo_800D8A38(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
