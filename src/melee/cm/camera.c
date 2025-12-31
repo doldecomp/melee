@@ -2889,14 +2889,14 @@ void Camera_8002FEEC(s32 arg0)
 {
     HSD_CObj* cobj;
     CmSubject* box;
-    Vec3 eye;
     Vec3 target;
+    Vec3 eye;
     f32 fov;
-    f32 temp_f1_4;
+    f32 temp_f1_3;
     f32 temp_f1;
     f32 temp_f31;
-    f32 temp_f1_3;
-    PAD_STACK(8);
+    f32 temp_f1_4;
+    PAD_STACK(12);
 
     if (Player_GetEntity(arg0) != NULL) {
         box = ftLib_80086B74(Player_GetEntity(arg0));
