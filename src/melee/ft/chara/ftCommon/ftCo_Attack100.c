@@ -473,8 +473,18 @@ static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid)
 
 /// #ftCo_ItemScopeStart_GroundToAir
 
-/// #fn_800D7938
+void fn_800D7938(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
 
+    if (fp->item_gobj != NULL) {
+        s32 result = it_80291DAC(fp->item_gobj, (s32)*(f32*)((u8*)fp + 0x2340));
+        if (result != -1) {
+            it_80291F14(fp->item_gobj, result);
+        }
+        ftCommon_8007E7E4(gobj, 1);
+    }
+}
 void ftCo_ItemScopeStart_Anim(Fighter_GObj* gobj) {}
 
 void ftCo_ItemScopeAirStart_Anim(Fighter_GObj* gobj) {}
