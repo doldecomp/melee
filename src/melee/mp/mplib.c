@@ -48,6 +48,8 @@
 #include <melee/gr/stage.h>
 #include <melee/lb/types.h>
 
+/* 458868 */ struct mpLib_BoundsRect mpLib_80458868[2];
+
 #define LINEID_CHECK(line, line_id)                                           \
     do {                                                                      \
         if ((line_id) == -1 || (line_id) >= mpLib_804D64B4->line_count)       \
@@ -3177,22 +3179,18 @@ skip:
 
 void mpLib_80053ECC_Floor(int line_id, Vec* vec)
 {
-    int shifted;
-    int new_id;
     CollVtx* temp_r3;
 
     LINEID_CHECK(4448, line_id);
 
-    goto loop_entry;
-
-loop_start:
-    line_id = new_id;
-loop_entry:
-    shifted = line_id << 3;
-    new_id = groundCollLine[line_id].x0->prev_id0;
-    if ((new_id != -1) && (groundCollLine[new_id].flags & CollLine_Floor))
-    {
-        goto loop_start;
+    while (true) {
+        int new_id = groundCollLine[line_id].x0->prev_id0;
+        if ((new_id != -1) && (groundCollLine[new_id].flags & CollLine_Floor))
+        {
+            line_id = new_id;
+        } else {
+            break;
+        }
     }
 
     LINEID_CHECK(4453, line_id);
