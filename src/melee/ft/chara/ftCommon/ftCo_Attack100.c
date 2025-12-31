@@ -526,8 +526,13 @@ void ftCo_ItemScopeRapid_IASA(Fighter_GObj* gobj)
         *(s32*)((u8*)fp + 0x2340) = (s32)p_ftCommonData->x5BC;
     }
 }
-/// #ftCo_ItemScopeAirRapid_IASA
-
+void ftCo_ItemScopeAirRapid_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fp->input.x668 & 0x100) {
+        *(s32*)((u8*)fp + 0x2340) = (s32)p_ftCommonData->x5BC;
+    }
+}
 void ftCo_ItemScopeRapid_Phys(Fighter_GObj* gobj)
 {
     ftCo_800CDE54(gobj);
