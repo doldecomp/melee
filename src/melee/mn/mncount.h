@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-/* 2502CC */ UNK_RET mnCount_802502CC(UNK_PARAMS);
+/* 2502CC */ s32 mnCount_802502CC(s32 idx);
 /* 2502F0 */ UNK_RET fn_802502F0(UNK_PARAMS);
 /* 250314 */ UNK_RET fn_80250314(UNK_PARAMS);
 /* 250338 */ UNK_RET fn_80250338(UNK_PARAMS);
