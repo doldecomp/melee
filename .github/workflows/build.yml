@@ -16,7 +16,11 @@ jobs:
   build-ninja:
     name: Ninja
     runs-on: ubuntu-latest
-    container: ghcr.io/itsgrimetime/build-melee:main
+    container:
+      image: ghcr.io/itsgrimetime/build-melee:main
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     strategy:
       fail-fast: false
       matrix:
