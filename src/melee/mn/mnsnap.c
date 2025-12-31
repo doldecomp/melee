@@ -34,6 +34,24 @@ void fn_80253E5C(HSD_GObj* gobj, int arg1) {
 
 /// #mnSnap_80253F6C
 
-/// #mnSnap_80254014
+extern f32 mnSnap_804DC2C0;
+
+void mnSnap_80254014(void) {
+    u8* base = (u8*)mnSnap_804A0A10;
+    HSD_JObj** ptr;
+    s32 i;
+
+    ptr = (HSD_JObj**)(base + 0xAC);
+    HSD_JObjReqAnimAll(*ptr, mnSnap_804DC2C0);
+    HSD_JObjAnimAll(*ptr);
+    i = 0;
+    ptr = (HSD_JObj**)(base + i * 4);
+    do {
+        HSD_JObjClearFlagsAll(*(HSD_JObj**)(base + 0xB8 + i * 4), 0x10);
+        i++;
+        ptr++;
+    } while (i < 5);
+    HSD_JObjSetFlagsAll(*(HSD_JObj**)(base + 0x8C), 0x10);
+}
 
 /// #mnSnap_8025409C
