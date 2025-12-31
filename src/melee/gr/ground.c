@@ -794,7 +794,7 @@ static HSD_JObj* get_jobj_inline(float phi_f0)
     return jobj;
 }
 
-HSD_GObj* Ground_801C14D0(int map_id)
+Ground_GObj* Ground_801C14D0(int map_id)
 {
     StageInfo* stageinfo = &stage_info;
     float phi_f0;

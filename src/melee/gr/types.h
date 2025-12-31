@@ -575,17 +575,47 @@ struct grFourside_GroundVars {
     /*  +4 gp+C8 */ s32 x4;
 };
 
+struct grGreens_BlockVars {
+    unsigned int status : 4;
+    unsigned int index : 5;
+    unsigned int x1_1 : 1;
+    unsigned int x1_2 : 1;
+    unsigned int x1_3 : 1;
+    unsigned int x1_4 : 1;
+    unsigned int x1_5 : 1;
+    unsigned int x1_6 : 1;
+    unsigned int x1_7 : 1;
+    float x4;
+    float x8;
+    Ground_GObj* xC;
+    Item_GObj* x10;
+    HSD_JObj* x14;
+    int x18;
+    int x1C;
+};
+STATIC_ASSERT(sizeof(struct grGreens_BlockVars) == 0x20);
+
 struct grGreens_GroundVars {
-    /*  +0 gp+C4 */ struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
+    /*  +0 gp+C4 */ union {
+        struct {
+            u8 b0 : 1;
+            u8 b1 : 1;
+            u8 b2 : 1;
+            u8 b3 : 1;
+            u8 b4 : 1;
+            u8 b5 : 1;
+            u8 b6 : 1;
+            u8 b7 : 1;
+        };
+        int whole_thing;
     } x0_flags;
+    /*  +4 gp+C8 */ Vec* x4;
+    /*  +8 gp+CC */ struct grGreens_BlockVars* x8_blocks;
+    /*  +C gp+D0 */ int xC;
+    /* +10 gp+D4 */ int x10;
+    /* +14 gp+D8 */ int x14;
+    /* +18 gp+DC */ int x18;
+    /* +1C gp+E0 */ int x1C;
 };
 
 /// Onett awning collision data element (0x1C bytes)
@@ -775,7 +805,7 @@ struct Ground {
          *
          * @todo The previous #Ground.gv union members should be moved here.
          */
-        union {
+        union GroundVars2 {
             struct grStadium_GroundVars stadium;
             struct grStadium_type9_GroundVars stadium9;
             struct grStadium_Display display; ///< Pokemon Stadium jumbotron
