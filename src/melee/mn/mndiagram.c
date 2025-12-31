@@ -37,7 +37,18 @@ s32 mnDiagram_8023EA54(u32 arg0) {
 
 /// #GetAveragePlayerCount
 
-/// #GetNameTotalKOs
+s32 GetNameTotalKOs(u8 field_index) {
+    u8 idx = field_index;
+    s32 total = 0;
+    s32 i = 0;
+    for (; i < 0x78; i++) {
+        if (GetNameText(i) != 0) {
+            void* data = GetPersistentNameData(idx);
+            total += *(u16*)((u8*)data + ((u8)i * 2));
+        }
+    }
+    return total;
+}
 
 s32 GetNameTotalFalls(u8 field_index) {
     s32 i;
