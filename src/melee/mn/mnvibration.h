@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-/* 2474C4 */ UNK_RET mnVibration_802474C4(UNK_PARAMS);
+/* 2474C4 */ void* mnVibration_802474C4(s32 arg0);
 /* 247510 */ UNK_RET fn_80247510(UNK_PARAMS);
 /* 248084 */ UNK_RET fn_80248084(UNK_PARAMS);
 /* 2480B4 */ UNK_RET mnVibration_802480B4(UNK_PARAMS);
