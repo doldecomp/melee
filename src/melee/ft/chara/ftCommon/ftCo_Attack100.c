@@ -156,6 +156,26 @@ void fn_800D9CE8(Fighter_GObj* gobj)
     fp->x221B_b7 = false;
 }
 
+bool ftCo_800D67C4(Fighter* fp)
+{
+    if (fp->input.x668 & 0x200) {
+        f32 x = fp->input.lstick.x;
+        if (x < 0.0f) {
+            x = -x;
+        }
+        if (x < p_ftCommonData->x218) {
+            f32 y = fp->input.lstick.y;
+            if (y < 0.0f) {
+                y = -y;
+            }
+            if (y < p_ftCommonData->x21C) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 bool ftCo_800D6824(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
