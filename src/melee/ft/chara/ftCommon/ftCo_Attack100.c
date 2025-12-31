@@ -654,8 +654,13 @@ void fn_800D874C(Fighter_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
     fp->take_dmg_cb = fn_800D8378;
 }
-/// #fn_800D87C0
-
+void fn_800D87C0(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, 0xa1), 0xc4c5080, fp->cur_anim_frame, fp->frame_speed_mul, 0.0f, NULL);
+    fp->take_dmg_cb = fn_800D8378;
+}
 /// #fn_800D8838
 
 #pragma push
