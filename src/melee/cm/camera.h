@@ -41,8 +41,8 @@
 /* 02BC78 */ s32 Camera_8002BC78(Vec3*, Vec3*, Vec3*);
 /* 02BD88 */ void Camera_8002BD88(f32, f32);
 /* 02C010 */ void Camera_8002C010(f32, f32);
-/* 02C1A8 */ UNK_RET Camera_8002C1A8(UNK_PARAMS);
-/* 02C5B4 */ UNK_RET Camera_8002C5B4(UNK_PARAMS);
+/* 02C1A8 */ void Camera_8002C1A8(void);
+/* 02C5B4 */ void Camera_8002C5B4(void*);
 /* 02C908 */ void Camera_8002C908(void*);
 /* 02CB0C */ void Camera_8002CB0C(void);
 /* 02CDDC */ void Camera_8002CDDC(void*);
@@ -51,7 +51,7 @@
 /* 02DDC4 */ void Camera_8002DDC4(void*);
 /* 02DFE4 */ s32 Camera_8002DFE4(Vec3*, Vec3*, CameraTransformState*);
 /* 02E158 */ s32 Camera_8002E158(f32*, f32, f32, f32);
-/* 02E234 */ UNK_RET Camera_8002E234(UNK_PARAMS);
+/* 02E234 */ s32 Camera_8002E234(void);
 /* 02E490 */ void Camera_8002E490(void*);
 /* 02E6FC */ void Camera_8002E6FC(int);
 /* 02E818 */ void Camera_8002E818(Vec*);
@@ -82,15 +82,15 @@
 /* 02FE38 */ void Camera_8002FE38(void);
 /* 02FEEC */ void Camera_8002FEEC(s32);
 /* 03006C */ void Camera_8003006C(void);
-/* 0300F0 */ UNK_RET Camera_800300F0(UNK_PARAMS);
+/* 0300F0 */ void Camera_800300F0(void);
 /* 03010C */ bool Camera_8003010C(void);
 /* 030130 */ bool Camera_80030130(void);
 /* 030154 */ bool Camera_80030154(void);
 /* 030178 */ bool Camera_80030178(void);
 /* 03019C */ Vec3* Camera_8003019C(void);
 /* 0301D0 */ void fn_800301D0(HSD_GObj*, int);
-/* 0304E0 */ UNK_RET Camera_800304E0(UNK_PARAMS);
-/* 030688 */ UNK_RET Camera_80030688(UNK_PARAMS);
+/* 0304E0 */ void Camera_800304E0(HSD_GObj*);
+/* 030688 */ void Camera_80030688(void);
 /* 030730 */ void Camera_80030730(f32);
 /* 030740 */ void Camera_SetBackgroundColor(u8, u8, u8);
 /* 030758 */ GXColor Camera_80030758(void);
@@ -127,13 +127,13 @@
 /* 03108C */ enum_t Camera_8003108C(void);
 /* 0310A0 */ void Camera_800310A0(u8);
 /* 0310B8 */ HSD_CObj* Camera_800310B8(void);
-/* 0310E8 */ UNK_RET Camera_800310E8(UNK_PARAMS);
+/* 0310E8 */ void Camera_800310E8(void);
 /* 031144 */ float Camera_80031144(void);
 /* 031154 */ bool Camera_80031154(Vec3*);
 /* 03118C */ bool Camera_8003118C(Vec3*, float);
 /* 0311CC */ void Camera_800311CC(f32);
 /* 0311DC */ void Camera_800311DC(f32);
-/* 0311EC */ UNK_RET Camera_800311EC(UNK_PARAMS);
+/* 0311EC */ void Camera_800311EC(HSD_GObj*);
 /* 031328 */ void Camera_80031328(HSD_GObj*, s32, s32);
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
 
