@@ -374,7 +374,14 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800D7268
+M2C_UNK ftCo_800D7268(void* arg0)
+{
+    struct { Fighter_GObj* x0; int x4; }* s = arg0;
+    if (s->x4 == 4) {
+        return ftKb_SpecialN_800F1CD8(s->x0);
+    }
+    return 0;
+}
 
 M2C_UNK ftCo_800D72A0(Fighter* fp)
 {
