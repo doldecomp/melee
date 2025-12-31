@@ -1132,7 +1132,49 @@ void fn_800DA004(Fighter_GObj* gobj)
     ftCo_Fall_Enter(victim);
 }
 
-/// #fn_800DA054
+void fn_800DA054(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter* victim_fp = ((Fighter_GObj*)fp->victim_gobj)->user_data;
+    Vec3 pos1;
+    Vec3 pos2;
+
+    if (victim_fp->x2226_b5) {
+        return;
+    }
+
+    lb_8000B1CC(*(HSD_JObj**)((u8*)fp + 0x2358), NULL, &pos1);
+
+    {
+        s32 bone_idx = ftParts_GetBoneIndex(victim_fp, 2);
+        HSD_JObj* jobj = victim_fp->parts[bone_idx].joint;
+        lb_8000B1CC(jobj, NULL, &pos2);
+    }
+
+    {
+        ftCommonData* cd = p_ftCommonData;
+        f32 dx = pos2.x - pos1.x;
+        f32 facing = fp->facing_dir;
+        f32 dy;
+        f32 y_adjusted;
+
+        dy = pos2.y - pos1.y;
+        y_adjusted = dy + fp->x2170;
+
+        if (dx * facing > cd->x34C ||
+            (y_adjusted < 0.0f ? -y_adjusted : y_adjusted) > cd->x350)
+        {
+            ftCo_800DA698(gobj, 1);
+        } else if (dx * facing < 0.0f) {
+            f32 abs_dx = dx < 0.0f ? -dx : dx;
+            f32 vel = abs_dx;
+            if (abs_dx > fp->co_attrs.walk_max_vel) {
+                vel = fp->co_attrs.walk_max_vel;
+            }
+            fp->gr_vel = dx > 0.0f ? vel : -vel;
+        }
+    }
+}
 
 void fn_800DA190(Fighter_GObj* gobj)
 {
