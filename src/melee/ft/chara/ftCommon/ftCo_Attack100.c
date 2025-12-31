@@ -84,78 +84,14 @@
 /* 0DA190 */ static void fn_800DA190(Fighter_GObj* gobj);
 /* 0DA1D8 */ static void fn_800DA1D8(Fighter_GObj* gobj);
 /* 0DA2B0 */ static void fn_800DA2B0(Fighter_GObj* gobj);
+/* 0DA490 */ static void fn_800DA490(Fighter_GObj* gobj);
 /* 0DA4A0 */ static void fn_800DA4A0(Fighter_GObj* gobj);
 /* 0DA4C0 */ static bool fn_800DA4C0(Fighter_GObj* gobj);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
 /* 0DA8E4 */ static void fn_800DA8E4(Fighter_GObj*, Fighter_GObj*, FtMotionId);
 /* 0DAC78 */ static void fn_800DAC78(Fighter_GObj*, Vec3*);
 /* 0DAECC */ void fn_800DAECC(Fighter_GObj* gobj);
-
-void fn_800D9CE8(Fighter_GObj* gobj)
-{
-    Fighter* fp;
-    FtMotionId msid;
-    f32 anim_frame;
-    void* dat_attrs;
-    void* item;
-    u8 pad[0x18];
-
-    fp = gobj->user_data;
-    fp->gr_vel = 0.0f;
-    {
-        register f32 f2 = fp->cur_anim_frame;
-        anim_frame = f2;
-
-        if (fp->motion_id == 0xD4) {
-            msid = 0xD5;
-            if (fp->kind == 0xE) {
-                dat_attrs = fp->dat_attrs;
-                if (f2 >= *(f32*)((u8*)dat_attrs + 0x124) &&
-                    f2 < *(f32*)((u8*)dat_attrs + 0x128))
-                {
-                    anim_frame = f2 - *(f32*)((u8*)dat_attrs + 0x124);
-                    ftAnim_SetAnimRate(gobj, anim_frame);
-                    ftAnim_8006EBA4(gobj);
-                    {
-                        s32 idx = (s32)anim_frame;
-                        anim_frame = (f32)((u8*)dat_attrs + 0x12C)[idx];
-                    }
-                }
-            }
-        } else {
-            msid = 0xD7;
-        }
-    }
-
-    switch (fp->kind) {
-    case 0x6:
-    case 0x14: {
-        HSD_GObj* item_gobj = *(HSD_GObj**)((u8*)fp + 0x2238);
-        item = item_gobj->user_data;
-        it_802A7840(item_gobj);
-        *(u32*)((u8*)fp + 0x2358) = *(u32*)((u8*)item + 0xDE0);
-        break;
-    }
-    case 0xD: {
-        HSD_GObj* item_gobj = *(HSD_GObj**)((u8*)fp + 0x223C);
-        item = item_gobj->user_data;
-        it_802BAA94(item_gobj);
-        *(u32*)((u8*)fp + 0x2358) = *(u32*)((u8*)item + 0xDE0);
-        break;
-    }
-    default: {
-        u8* ptr = *(u8**)((u8*)fp->ft_data + 0x8);
-        u32* parts = (u32*)fp->parts;
-        *(u32*)((u8*)fp + 0x2358) = parts[ptr[0x11] * 4];
-        break;
-    }
-    }
-
-    fp->throw_flags = 0;
-    Fighter_ChangeMotionState(gobj, msid, 0, anim_frame, 1.0f, 0.0f, NULL);
-    fp->accessory1_cb = fn_800DA190;
-    fp->x221B_b7 = false;
-}
+/* 0DB6C8 */ static void fn_800DB6C8(Fighter_GObj* gobj);
 
 bool ftCo_800D67C4(Fighter* fp)
 {
@@ -1190,7 +1126,28 @@ void fn_800DA190(Fighter_GObj* gobj)
     }
 }
 
-/// #fn_800DA1D8
+void fn_800DA1D8(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    HSD_JObj* joint;
+
+    fp->gr_vel = 0.0f;
+    Fighter_ChangeMotionState(gobj, 0xD8, 0, 0.0f, 1.0f, 0.0f, NULL);
+    fp->accessory1_cb = fn_800DA4A0;
+    fp->take_dmg_cb = fn_800DA490;
+    fp->x221B_b7 = false;
+
+    {
+        u8* ptr = *(u8**)((u8*)fp->ft_data + 0x8);
+        u32* parts = (u32*)fp->parts;
+        joint = (HSD_JObj*)parts[ptr[0x11] * 4];
+        *(HSD_JObj**)((u8*)fp + 0x2358) = joint;
+    }
+    efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 1, 0x41D, joint);
+    ftCommon_8007EBAC(fp, 3, 0);
+    ftCommon_8007E2F4(fp, 0x1FF);
+    fn_800DB6C8(fp->victim_gobj);
+}
 
 void fn_800DA2B0(Fighter_GObj* gobj)
 {
