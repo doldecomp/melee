@@ -104,3 +104,9 @@ static void vi0401_8031D23C(HSD_GObj* gobj)
         gm_801A4B60();
     }
 }
+
+/// #fn_8031D168
+
+/// #un_8031D288_OnEnter
+
+/// #un_8031D698_OnFrame
