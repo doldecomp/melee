@@ -3,9 +3,11 @@
 
 #include <placeholder.h>
 
+#include "ft/forward.h"
+
 #include <baselib/forward.h>
 
-/* 31D030 */ UNK_RET un_8031D030(UNK_PARAMS);
+/* 31D030 */ void un_8031D030(CharacterKind, int);
 /* 31D168 */ UNK_RET fn_8031D168(UNK_PARAMS);
 /* 31D18C */ static void vi0401_8031D18C(HSD_GObj*);
 /* 31D1B0 */ static void vi0401_8031D1B0(HSD_GObj*, int);
