@@ -87,6 +87,8 @@
 /* 0DA4A0 */ static void fn_800DA4A0(Fighter_GObj* gobj);
 /* 0DA4C0 */ static bool fn_800DA4C0(Fighter_GObj* gobj);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
+/* 0DA8E4 */ static void fn_800DA8E4(Fighter_GObj*, Fighter_GObj*, FtMotionId);
+/* 0DAC78 */ static void fn_800DAC78(Fighter_GObj*, Vec3*);
 
 void fn_800D9CE8(Fighter_GObj* gobj)
 {
