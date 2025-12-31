@@ -5,6 +5,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
@@ -126,7 +127,16 @@ DynamicsDesc* grGarden_802035C8(enum_t arg)
     return NULL;
 }
 
-/// #grGarden_802035D0
+bool grGarden_802035D0(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 f32 grGarden_80203624(void)
 {
