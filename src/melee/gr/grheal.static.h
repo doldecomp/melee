@@ -4,10 +4,10 @@
 #include "gr/grheal.h"
 #include "gr/types.h"
 
-struct {
+struct yaku {
     int x0;
     int x4;
-}* yaku;
+};
 
 static s32 grHeal_803E83B8[0x27] = {
     0x1D001E, 0x1F0020, 0x210022, 0x230024, 0x250026, 0x270028, 0x29002A,
