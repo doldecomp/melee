@@ -11,6 +11,7 @@
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 
+/* 4DE070 */ static f32 un_804DE070;
 /* 4DE074 */ static f32 un_804DE074;
 /* 4DE078 */ static f32 un_804DE078;
 /* 4DE07C */ static f32 un_804DE07C;

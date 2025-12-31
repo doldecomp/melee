@@ -16,6 +16,8 @@
 static GXColor erase_colors_vi0501;
 extern un_804D7004_t un_804D6FA8;
 
+void mn_8022EAE0(HSD_GObj*);
+
 /// #un_8031D9F8
 
 void vi_8031DC80(HSD_GObj* gobj, int unused)
@@ -58,7 +60,64 @@ void fn_8031DD14(HSD_GObj* gobj)
         gm_801A4B60();
     }
 }
-/// #un_8031DE58_OnEnter
+void un_8031DE58_OnEnter(void* arg)
+{
+    u8* input = arg;
+    s32 i;
+    u8 char_index;
+    HSD_GObj* fog_gobj;
+    HSD_GObj* light_gobj;
+    HSD_GObj* camera_gobj;
+    HSD_GObj* model_gobj;
+    HSD_Fog* fog;
+    HSD_LObj* lobj;
+    HSD_CObj* cobj;
+    HSD_JObj* jobj;
+
+    lbAudioAx_800236DC();
+    efLib_8005B4B8();
+    efAsync_8006737C(0);
+
+    char_index = input[0];
+
+    un_804D6F74 = lbArchive_LoadSymbols("ViIntro.dat", &un_804D6F70, "ScVi", NULL);
+    un_804D6F78 = lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
+
+    fog_gobj = GObj_Create(0xb, 3, 0);
+    fog = HSD_FogLoadDesc(un_804D6F70->fogs->desc);
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
+    erase_colors_vi0501 = fog->color;
+
+    light_gobj = GObj_Create(0xb, 3, 0);
+    lobj = lb_80011AC4(un_804D6F70->lights);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
+
+    camera_gobj = GObj_Create(0x13, 0x14, 0);
+    cobj = lb_80013B14((HSD_CameraDescPerspective*) un_804D6F70->cameras->desc);
+    HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(camera_gobj, vi_8031DC80, 5);
+    HSD_CObjAddAnim(cobj, un_804D6F70->cameras->anims[0]);
+    HSD_CObjReqAnim(cobj, un_804DE070);
+    HSD_CObjAnim(cobj);
+    HSD_GObjProc_8038FD54(camera_gobj, fn_8031DD14, 0);
+
+    for (i = 0; un_804D6F70->models[i] != NULL; i++) {
+        model_gobj = GObj_Create(0xe, 0xf, 0);
+        jobj = HSD_JObjLoadJoint(un_804D6F70->models[i]->joint);
+        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 9, 0);
+        gm_8016895C(jobj, un_804D6F70->models[i], 0);
+        HSD_JObjReqAnimAll(jobj, un_804DE070);
+        HSD_JObjAnimAll(jobj);
+        HSD_GObjProc_8038FD54(model_gobj, mn_8022EAE0, 0x17);
+    }
+
+    un_8031D9F8(input[0], input[1], input[3], (int)&input[4]);
+    lbAudioAx_800237A8(0x20b, 0x7f, 0x40);
+    lbAudioAx_800237A8(0x20c, 0x7f, 0x40);
+}
 
 void vi_8031E0F0_OnFrame(void)
 {
