@@ -3048,6 +3048,7 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     lbVector_Add(&transform->target_interest, &cm_80452C68.x314);
     transform->target_position = transform->target_interest;
     lbVector_Add(&transform->target_position, &cm_80452C68.pause_eye_offset);
+    Camera_8002AF68(cm_804D6464, transform);
 }
 
 void Camera_8002FE38(void)
