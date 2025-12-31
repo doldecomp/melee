@@ -69,12 +69,10 @@ s32 GetNameTotalFalls(u8 field_index) {
 }
 
 s32 GetFighterTotalKOs(u8 field_index) {
-    u8 idx = field_index;
+    u8 idx = (u8)(field_index & 0xFF);
     s32 total = 0;
     s32 i = 0;
-    s32 dummy[4];
     void* data;
-    (void)dummy;
     for (; i < 0x19; i++) {
         if (mn_8022E950(i) != 0) {
             data = GetPersistentFighterData(idx);
