@@ -1054,8 +1054,26 @@ void ftCo_CatchPull_Coll(Fighter_GObj* gobj)
 
 void ftCo_CatchWait_Anim(Fighter_GObj* gobj) {}
 
-/// #ftCo_CatchWait_IASA
+void ftCo_CatchWait_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
 
+    if (fn_800DA4C0(gobj)) {
+        s32 kind = fp->kind;
+        if (kind == 6 || kind == 0x14) {
+            it_802A7AAC(gobj);
+        } else if (kind == 0xD) {
+            it_802BAC3C(gobj);
+        }
+    } else if (ftCo_800DD1E4(gobj)) {
+        s32 kind = fp->kind;
+        if (kind == 6 || kind == 0x14) {
+            it_802A7AAC(gobj);
+        } else if (kind == 0xD) {
+            it_802BAC3C(gobj);
+        }
+    }
+}
 /// #ftCo_CatchWait_Phys
 
 void ftCo_CatchWait_Coll(Fighter_GObj* gobj)
