@@ -12,8 +12,19 @@ u8 mnDiagram_8023EA40(s32 arg0)
     return mnDiagram_804A076C.pad_0[arg0];
 }
 
-/// #mnDiagram_8023EA54
-
+s32 mnDiagram_8023EA54(u32 arg0) {
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        if (arg0 >= 0x274A6) {
+            return 1;
+        }
+        return 0;
+    } else {
+        if (arg0 >= 0x186A0) {
+            return 1;
+        }
+        return 0;
+    }
+}
 /// #mnDiagram_8023EAC4
 
 /// #GetHitPercentage
