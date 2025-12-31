@@ -286,13 +286,13 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
     return NULL;
 }
 
-mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
+mp_UnkStruct0* mpIsland_8005AC14(Vec3* pos, float height)
 {
-    int i;
-    if (mpCheckFloor(arg0->x, arg0->y, arg0->x, arg0->y + arg1, 0.0F, NULL, &i,
+    int surface_idx;
+    if (mpCheckFloor(pos->x, pos->y, pos->x, pos->y + height, 0.0F, NULL, &surface_idx,
                      NULL, NULL, -1, -1, -1, NULL, NULL))
     {
-        return mpIsland_8005AB54(i);
+        return mpIsland_8005AB54(surface_idx);
     }
     return NULL;
 }
