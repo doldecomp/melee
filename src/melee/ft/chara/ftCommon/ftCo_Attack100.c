@@ -1020,7 +1020,13 @@ bool fn_800D8E94(Fighter_GObj* gobj)
 
 /// #fn_800D9228
 
-/// #fn_800D949C
+void fn_800D949C(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fp->kind == 6 || fp->kind == 0x14) {
+        it_802A2B10(*(HSD_GObj**)((u8*)fp + 0x2238));
+    }
+}
 
 /// #ftCo_800D94D8
 
