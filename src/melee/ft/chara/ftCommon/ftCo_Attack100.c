@@ -886,8 +886,21 @@ bool ftCo_800D8AE0(Fighter_GObj* gobj)
     }
     return false;
 }
-/// #ftCo_800D8B9C
+bool ftCo_800D8B9C(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    s32 x2364_val;
 
+    if ((fp->input.x668 & 0x100) && fp->mv.co.guard.x24 != 0) {
+        ftCo_800D8C54(gobj, 0xD6);
+        return true;
+    }
+    x2364_val = fp->mv.co.guard.x24;
+    if (x2364_val != 0) {
+        fp->mv.co.guard.x24 = x2364_val - 1;
+    }
+    return false;
+}
 void fn_800D8BFC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
