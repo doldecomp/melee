@@ -20,7 +20,7 @@
 /* 0290D4 */ void Camera_800290D4(CmSubject*);
 /* 029124 */ s32 Camera_80029124(Vec3*, s32);
 /* 02928C */ bool Camera_8002928C(CmSubject*);
-/* 0293E0 */ UNK_RET Camera_800293E0(UNK_PARAMS);
+/* 0293E0 */ void Camera_800293E0(void);
 /* 02958C */ void Camera_8002958C(CameraBounds*, CameraTransformState*);
 /* 029AAC */ void Camera_80028F5C(CmSubject*, s32);
 /* 029BC4 */ void Camera_80029BC4(CameraBounds*, CameraTransformState*);
@@ -117,7 +117,7 @@
 /* 030CD8 */ bool Camera_80030CD8(CmSubject*, S32Vec2*);
 /* 030CFC */ bool Camera_80030CFC(CmSubject*, float);
 /* 030DE4 */ void Camera_80030DE4(f32, f32);
-/* 030DF8 */ UNK_RET Camera_80030DF8(UNK_PARAMS);
+/* 030DF8 */ void Camera_80030DF8(void);
 /* 030E10 */ float Camera_80030E10(void);
 /* 030E34 */ void Camera_80030E34(f32);
 /* 030E44 */ void Camera_80030E44(enum_t, Vec*);

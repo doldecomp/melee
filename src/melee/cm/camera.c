@@ -20,6 +20,7 @@
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 #include "gr/ground.h"
+#include "gr/grlib.h"
 #include "gr/stage.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
