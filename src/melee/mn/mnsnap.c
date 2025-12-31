@@ -15,7 +15,12 @@ void fn_80253DE8(HSD_GObj* gobj, int arg1) {
     }
 }
 
-/// #fn_80253E1C
+void fn_80253E1C(HSD_GObj* gobj, int arg1) {
+    s32 val = mnSnap_804A0A10[71];
+    if (val == 6 || (u32)(val - 10) <= 1) {
+        HSD_GObj_JObjCallback(gobj, arg1);
+    }
+}
 
 void fn_80253E5C(HSD_GObj* gobj, int arg1) {
     if (mnSnap_804A0A10[83] == 1) {
