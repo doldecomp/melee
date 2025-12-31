@@ -541,8 +541,14 @@ void ftCo_ItemScopeAirRapid_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800D7CEC);
 }
 
-/// #fn_800D80F4
+void fn_800D80F4(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
 
+    if (fp->item_gobj != NULL) {
+        fn_800D84D4(gobj, it_80291DAC(fp->item_gobj, 0));
+    }
+}
 /// #fn_800D8140
 
 /// #fn_800D81D0
