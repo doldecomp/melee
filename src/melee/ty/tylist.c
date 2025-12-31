@@ -30,6 +30,13 @@ extern void* un_804D6EA8;
 extern void* un_804D6EA4;
 extern void* un_804D6EC8;
 
+// Forward declarations for functions in this file
+void un_803127D4(void);
+void un_80312834(char* buf, u32 num);
+void un_80312904(void*, s32);
+void un_80313358(void* arg1, s8 arg2, s8 arg3, s8 arg4);
+void un_80313464(void* arg);
+
 /// #un_803124BC
 
 /// #un_8031263C

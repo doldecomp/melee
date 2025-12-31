@@ -6,7 +6,7 @@
 #include "baselib/forward.h"
 
 /* 314AA8 */ void tyFigupon_80314AA8(HSD_JObj*, char*, char*, char*);
-/* 314B54 */ UNK_RET un_80314B54(UNK_PARAMS);
+/* 314B54 */ s32 un_80314B54(void);
 /* 314BE4 */ void tyFigupon_80314BE4(HSD_GObj* gobj, int unused);
 /* 314C5C */ void tyFigupon_80314C5C(HSD_GObj*);
 /* 3152BC */ UNK_RET fn_803152BC(UNK_PARAMS);

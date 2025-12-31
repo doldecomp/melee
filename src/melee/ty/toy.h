@@ -49,7 +49,7 @@
 /* 30813C */ char*
     un_8030813C(s16, enum MajorSceneKind); /// TODO :: fill out the struct that
                                            /// this uses/returns
-/* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
+/* 308250 */ void un_80308250(void* ptr, s16 id, s32 skip_load);
 /* 3082F8 */ UNK_RET un_803082F8(UNK_PARAMS);
 /* 308328 */ UNK_RET un_80308328(UNK_PARAMS);
 /* 308354 */ UNK_RET un_80308354(UNK_PARAMS);

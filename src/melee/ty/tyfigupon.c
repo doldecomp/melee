@@ -4,6 +4,7 @@
 #include "toy.h"
 #include "types.h"
 
+#include "if/textlib.h"
 #include "if/types.h"
 #include "lb/lbaudio_ax.h"
 
