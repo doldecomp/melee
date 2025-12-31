@@ -55,7 +55,7 @@ void fn_800DAA40(Fighter_GObj*, Fighter_GObj*);
 /* 0D7B8C */ void ftCo_ItemScopeStart_Coll(Fighter_GObj* gobj);
 /* 0D7BB4 */ void ftCo_ItemScopeAirStart_Coll(Fighter_GObj* gobj);
 /* 0D7BDC */ void fn_800D7BDC(Fighter_GObj*);
-/* 0D7C60 */ void fn_800D7C60(Fighter_GObj*);
+/* 0D7C60 */ void fn_800D7C60(Fighter_GObj* gobj);
 /* 0D7CEC */ void fn_800D7CEC(Fighter_GObj* gobj);
 /* 0D7D70 */ void fn_800D7D70(Fighter_GObj* gobj);
 /* 0D7DFC */ void ftCo_ItemScopeRapid_Anim(Fighter_GObj* gobj);

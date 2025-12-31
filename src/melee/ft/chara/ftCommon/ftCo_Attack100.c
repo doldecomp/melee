@@ -513,8 +513,15 @@ void ftCo_ItemScopeAirStart_Coll(Fighter_GObj* gobj)
 
 /// #fn_800D7BDC
 
-/// #fn_800D7C60
-
+void fn_800D7C60(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, 0xA3), 0x02000000, 0.0f, 1.0f, 0.0f, NULL);
+    ftCommon_ClampAirDrift(fp);
+    *(s32*)((u8*)fp + 0x2340) = (s32)p_ftCommonData->x5BC;
+    fp->accessory4_cb = fn_800D80F4;
+    fp->take_dmg_cb = fn_800D8378;
+}
 void fn_800D7CEC(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
