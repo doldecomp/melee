@@ -872,59 +872,23 @@ bool it_2725_Logic98_HitShield(Item_GObj* gobj)
             item->xDD4_itemVar.linkarrow.xC4 = item->xCF4_fighterGObjUnk;
             temp_f31 = ftLib_800869D4(item->xDD4_itemVar.linkarrow.xC4);
             item->xDD4_itemVar.linkarrow.xD4 =
-                temp_f31 * ftCo_80094098(item->xDD4_itemVar.linkarrow.xC4,
-                                         &item->xDD4_itemVar.linkarrow.xC8);
-            item->xDD4_itemVar.linkarrow.xD8 = atan2f(
-                (0.5f * (item->pos.y + item->xDD4_itemVar.linkarrow.x18.y)) -
-                    item->xDD4_itemVar.linkarrow.xCC,
-                (0.5f * (item->pos.x + item->xDD4_itemVar.linkarrow.x18.x)) -
-                    item->xDD4_itemVar.linkarrow.xC8);
-            item->pos.x = (item->xDD4_itemVar.linkarrow.xD4 *
-                           cosf(item->xDD4_itemVar.linkarrow.xD8)) +
-                          item->xDD4_itemVar.linkarrow.xC8;
-            item->pos.y = (item->xDD4_itemVar.linkarrow.xD4 *
-                           sinf(item->xDD4_itemVar.linkarrow.xD8)) +
-                          item->xDD4_itemVar.linkarrow.xCC;
-            item->pos.z = 0.0f;
-            return 0;
-        }
-        return 1;
-    }
-    return 1;
-}
-
-bool it_2725_Logic98_Reflected(Item_GObj* gobj)
+float ftCo_80094098(Fighter_GObj* gobj, float* pos0)
 {
-    Item* item;
-    HSD_JObj* jobj;
-
-    f32 var_f31;
-    f32 temp_f31;
-    f32 pad[4];
-
-    item = GET_ITEM(gobj);
-    jobj = GET_JOBJ(gobj);
-    it_802A8330(gobj);
-    item->facing_dir = -item->facing_dir;
-    temp_f31 = 1.5707963267948966 * item->facing_dir;
-    HSD_JObjSetRotationY(jobj, temp_f31);
-    item->x40_vel.x = -item->x40_vel.x;
-    item->x40_vel.y = -item->x40_vel.y;
-    item->x40_vel.z = 0.0f;
-    item->pos.x += item->x40_vel.x;
-    item->pos.y += item->x40_vel.y;
-    item->pos.z = 0.0f;
-    var_f31 = 3.141592653589793 + item->xDD4_itemVar.linkarrow.x94;
-    while (var_f31 > 3.141592653589793) {
-        var_f31 -= 3.141592653589793;
+    Fighter* fp = gobj->user_data;
+    HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
+    lb_8000B1CC(jobj, NULL, (Vec3*) pos0);
+    if (fp->kind == FTKIND_YOSHI) {
+        return fp->co_attrs.initial_shield_size;
+    } else {
+        float n1 =
+            (fp->shield_health / p_ftCommonData->x260_startShieldHealth) *
+            (fp->lightshield_amount *
+                 (p_ftCommonData->x2D8 - p_ftCommonData->x2D4) +
+             p_ftCommonData->x2D4);
+        float n2 = 1 - p_ftCommonData->x264;
+        float n3 = n2 * n1 + p_ftCommonData->x264;
+        return n3 * fp->co_attrs.initial_shield_size;
     }
-    while (var_f31 < -3.141592653589793) {
-        var_f31 += 3.141592653589793;
-    }
-    item->xDD4_itemVar.linkarrow.x94 = var_f31;
-    HSD_JObjSetRotationZ(jobj, var_f31);
-    HSD_JObjSetTranslate(jobj, &item->pos);
-    return 0;
 }
 
 void it_2725_Logic98_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)

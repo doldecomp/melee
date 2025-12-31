@@ -850,7 +850,24 @@ void ftCo_GuardReflect_Coll(Fighter_GObj* gobj)
     ft_800845B4(gobj);
 }
 
-/// #ftCo_80094098
+float ftCo_80094098(Fighter_GObj* gobj, float* pos0)
+{
+    Fighter* fp = gobj->user_data;
+    HSD_JObj* jobj = fp->parts[fp->ft_data->x8->x11].joint;
+    lb_8000B1CC(jobj, NULL, (Vec3*) pos0);
+    if (fp->kind == FTKIND_YOSHI) {
+        return fp->co_attrs.initial_shield_size;
+    } else {
+        float n1 =
+            (fp->shield_health / p_ftCommonData->x260_startShieldHealth) *
+            (fp->lightshield_amount *
+                 (p_ftCommonData->x2D8 - p_ftCommonData->x2D4) +
+             p_ftCommonData->x2D4);
+        float n2 = 1 - p_ftCommonData->x264;
+        float n3 = n2 * n1 + p_ftCommonData->x264;
+        return n3 * fp->co_attrs.initial_shield_size;
+    }
+}
 
 void ftCo_80094138(Fighter* fp)
 {

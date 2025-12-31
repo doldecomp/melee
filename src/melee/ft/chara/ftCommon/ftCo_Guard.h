@@ -38,7 +38,7 @@
 /* 093694 */ bool ftCo_80093694(Fighter_GObj* gobj);
 /* 09370C */ void ftCo_8009370C(HSD_GObj*, HSD_GObjEvent);
 /* 093BC0 */ void ftCo_80093BC0(Fighter_GObj* gobj);
-/* 093C3C */ float ftCo_80094098(HSD_GObj*, float*);
+/* 094098 */ float ftCo_80094098(Fighter_GObj* gobj, float* pos0);
 /* 093CD0 */ void ftCo_GuardReflect_Anim(Fighter_GObj* gobj);
 /* 093CDC */ void ftCo_80094138(Fighter* fp);
 /* 093EC0 */ void ftCo_GuardReflect_IASA(Fighter_GObj* gobj);
