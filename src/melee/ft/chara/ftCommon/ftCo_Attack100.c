@@ -66,6 +66,7 @@
 #include <melee/pl/plstale.h>
 
 /* 0D84D4 */ static void fn_800D84D4(Fighter_GObj* gobj, s32 arg1);
+/* 0D86B8 */ static void fn_800D86B8(Fighter_GObj* gobj);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D949C */ static void fn_800D949C(Fighter_GObj* gobj);
 /* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
@@ -549,8 +550,16 @@ void fn_800D80F4(Fighter_GObj* gobj)
         fn_800D84D4(gobj, it_80291DAC(fp->item_gobj, 0));
     }
 }
-/// #fn_800D8140
-
+void fn_800D8140(Fighter_GObj* gobj, int arg1)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, 0xa0), 0, 0.0f, 1.0f, 0.0f, NULL);
+    *(int*)((u8*)fp + 0x2340) = arg1;
+    fp->accessory4_cb = fn_800D86B8;
+    fp->take_dmg_cb = fn_800D8378;
+}
 /// #fn_800D81D0
 
 /// #fn_800D8268
