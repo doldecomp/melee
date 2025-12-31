@@ -122,7 +122,13 @@ bool grZebes_801D99D8(Ground_GObj* arg)
 
 void grZebes_801D9F2C(Ground_GObj* arg) {}
 
-/// #grZebes_801D9F30
+void grZebes_801D9F30(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    M2C_FIELD(gp, s16*, 0xC4) = 0;
+    gp->x11_flags.b012 = 1;
+}
 
 bool grZebes_801D9F7C(Ground_GObj* arg)
 {
