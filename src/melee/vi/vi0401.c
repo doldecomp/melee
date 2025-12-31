@@ -8,6 +8,8 @@
 
 #include "cm/camera.h"
 #include "ft/ftdemo.h"
+#include "gm/gm_17C0.h"
+#include "gm/gm_1A36.h"
 #include "gm/gm_1A45.h"
 #include "gm/gm_unsplit.h"
 #include "gr/ground.h"
@@ -112,4 +114,11 @@ static void fn_8031D168(HSD_GObj* gobj)
 
 /// #un_8031D288_OnEnter
 
-/// #un_8031D698_OnFrame
+void un_8031D698_OnFrame(void)
+{
+    u64 result = gm_801A36A0(gm_8017E430());
+    if ((result & 0x1000) != 0) {
+        lb_800145F4();
+        gm_801A4B60();
+    }
+}
