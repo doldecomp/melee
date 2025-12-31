@@ -8226,18 +8226,22 @@ void it_80278574(HSD_GObj* gobj, GXColor* arg1)
 
 #if 0
 // load ItCo.dat/usd ?
-void it_8027870C(s32 arg0) {
-    if (lbLang_IsSettingUS() != 0) {
-        lbArchive_80017040(0, &it_803F1EE4, &it_804D6D20, &it_803F1EF0, 0);
+void it_8027870C(void) {
+    void** data;
+    
+    if (lbLang_IsSettingUS()) {
+        lbArchive_80017040(0, it_803F1EE4, &it_804D6D20, it_803F1EF0, 0);
     } else {
-        lbArchive_80017040(0, &it_803F1ED8, &it_804D6D20, &it_803F1EF0, 0);
+        lbArchive_80017040(0, it_803F1ED8, &it_804D6D20, it_803F1EF0, 0);
     }
-    it_804D6D28 = it_804D6D20->unk0;
-    it_804D6D24 = it_804D6D20->unk4;
-    it_804D6D38 = it_804D6D20->unk8;
-    it_804D6D30 = it_804D6D20->unkC;
-    it_804D6D40 = it_804D6D20->unk10;
-    it_804D6D04 = it_804D6D20->unk14;
+    
+    data = it_804D6D20;
+    it_804D6D28 = data[0];
+    it_804D6D24 = data[1];
+    it_804D6D38 = data[2];
+    it_804D6D30 = data[3];
+    it_804D6D40 = data[4];
+    it_804D6D04 = data[5];
 }
 #endif
 
