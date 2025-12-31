@@ -1074,8 +1074,11 @@ void ftCo_CatchWait_IASA(Fighter_GObj* gobj)
         }
     }
 }
-/// #ftCo_CatchWait_Phys
-
+void ftCo_CatchWait_Phys(Fighter_GObj* gobj) {
+    Fighter* fp = gobj->user_data;
+    ftCommon_ApplyFrictionGround(fp, *(float*)&p_ftCommonData->x64 * fp->co_attrs.gr_friction);
+    ftCommon_ApplyGroundMovement(gobj);
+}
 void ftCo_CatchWait_Coll(Fighter_GObj* gobj)
 {
     ft_800841B8(gobj, fn_800DA440);
