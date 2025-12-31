@@ -71,6 +71,7 @@
 /* 0D84D4 */ static void fn_800D84D4(Fighter_GObj* gobj, s32 arg1);
 /* 0D86B8 */ static void fn_800D86B8(Fighter_GObj* gobj);
 /* 0D86E0 */ extern void fn_800D86E0(Fighter_GObj* gobj);
+/* 0D874C */ static void fn_800D874C(Fighter_GObj* gobj);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D949C */ static void fn_800D949C(Fighter_GObj* gobj);
 /* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
@@ -541,8 +542,29 @@ void ftCo_ItemScopeRapid_Anim(Fighter_GObj* gobj)
         }
     }
 }
-/// #ftCo_ItemScopeAirRapid_Anim
+void ftCo_ItemScopeAirRapid_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
 
+    if (fp->cur_anim_frame >= 0.0f && fp->cur_anim_frame < fp->frame_speed_mul) {
+        ft_800892A0(gobj);
+        ft_80089824(gobj);
+        *(s32*)((u8*)fp + 0x2340) = *(s32*)((u8*)fp + 0x2340) - 1;
+        if (*(s32*)((u8*)fp + 0x2340) == 0) {
+            fn_800D874C(gobj);
+        } else if (fp->item_gobj != NULL && it_8026B594(fp->item_gobj)) {
+            fp = gobj->user_data;
+            if (fp->ground_or_air == GA_Ground) {
+                Fighter_ChangeMotionState(gobj, 0xA7, 0x0c4c5080, fp->cur_anim_frame, fp->frame_speed_mul, 0.0f, NULL);
+            } else {
+                Fighter_ChangeMotionState(gobj, 0xAB, 0x0c4c5080, fp->cur_anim_frame, fp->frame_speed_mul, 0.0f, NULL);
+            }
+            fp->accessory4_cb = fn_800D80F4;
+            fp->take_dmg_cb = fn_800D8378;
+        }
+    }
+}
 void ftCo_ItemScopeRapid_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
