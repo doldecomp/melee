@@ -1133,7 +1133,19 @@ void fn_800DA004(Fighter_GObj* gobj)
 
 /// #fn_800DA054
 
-/// #fn_800DA190
+void fn_800DA190(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    switch (fp->kind) {
+    case 0x6:
+    case 0xD:
+    case 0x14:
+        break;
+    default:
+        fn_800DA054(gobj);
+        break;
+    }
+}
 
 /// #fn_800DA1D8
 
