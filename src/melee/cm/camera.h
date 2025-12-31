@@ -44,7 +44,7 @@
 /* 02C1A8 */ UNK_RET Camera_8002C1A8(UNK_PARAMS);
 /* 02C5B4 */ UNK_RET Camera_8002C5B4(UNK_PARAMS);
 /* 02C908 */ void Camera_8002C908(void*);
-/* 02CB0C */ UNK_RET Camera_8002CB0C(UNK_PARAMS);
+/* 02CB0C */ void Camera_8002CB0C(void);
 /* 02CDDC */ void Camera_8002CDDC(void*);
 /* 02D318 */ void Camera_8002D318(void*);
 /* 02D85C */ void Camera_8002D85C(void*);
