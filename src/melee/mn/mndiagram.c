@@ -97,8 +97,23 @@ u8 mnDiagram_8023F45C(u8 arg0) {
     } while (mn_8022E950(*ptr) == 0);
     return (u8)i;
 }
-/// #mnDiagram_8023F4CC
+u8 mnDiagram_8023F4CC(u8 arg0) {
+    s32 i;
+    u8 original;
+    u8* ptr;
 
+    ptr = (u8*)&mnDiagram_804A0750 + arg0;
+    i = arg0;
+    original = arg0;
+    do {
+        i++;
+        ptr++;
+        if (i >= 0x19) {
+            return original;
+        }
+    } while (mn_8022E950(*ptr) == 0);
+    return (u8)i;
+}
 /// #mnDiagram_8023F540
 
 /// #mnDiagram_8023F578
