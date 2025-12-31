@@ -1951,8 +1951,189 @@ void Camera_8002CB0C(void)
         Camera_8002BD88(x_val, y_val);
     }
 }
-/// #Camera_8002CDDC
 
+void Camera_8002CDDC(void* unused)
+{
+    CameraBounds bounds;        // sp+0x78
+    CameraBounds bounds2;       // sp+0x44
+    CameraBounds bounds3;       // sp+0x2C
+    Vec3 sp6C;
+    Vec3 sp60;
+    Vec3 sp1C;                  // sp+0x1C
+    Camera* cam;                // r31
+    CameraTransformState* transform;  // r30
+    s8* slot_ptr;               // r29
+    s32 valid;                  // r28
+    Vec3* pos_ptr;              // r27
+    CmSubject* subject;         // r26
+    f32 temp_f31;
+
+    cam = &cm_80452C68;
+    Camera_80030DF8();
+    Camera_800293E0();
+    transform = &cam->transform;
+    Camera_8002958C(&bounds, transform);
+    slot_ptr = &cam->x2C4;
+    if (*slot_ptr == 11) {
+        goto after_loop;
+    }
+    pos_ptr = &cam->x308;
+    goto loop_check;
+
+loop_next:
+    *slot_ptr = Camera_8002BA00(*slot_ptr, 1);
+
+loop_check:
+    {
+        s8 slot = *slot_ptr;
+        if (slot == 10) {
+            goto loop_next;
+        }
+        valid = 1;
+        if (slot == 11) {
+            valid = 0;
+            goto check_valid;
+        }
+        if (slot == 10) {
+            Stage_UnkSetVec3TCam_Offset(pos_ptr);
+            goto check_valid;
+        }
+        {
+            HSD_GObj* gobj = Player_GetEntity(slot);
+            if (gobj == NULL) {
+                goto set_invalid;
+            }
+            subject = ftLib_80086B74(gobj);
+            if (subject == NULL) {
+                goto set_invalid;
+            }
+            *pos_ptr = subject->x1C;
+            goto check_valid;
+        }
+    }
+set_invalid:
+    valid = 0;
+
+check_valid:
+    if (valid == 0) {
+        goto loop_next;
+    }
+    {
+        HSD_GObj* gobj = Player_GetEntity(*slot_ptr);
+        if (gobj == NULL) {
+            goto loop_next;
+        }
+        if (ftLib_8008701C(gobj)) {
+            goto loop_next;
+        }
+    }
+
+after_loop:
+    Camera_8002CB0C(&bounds);
+    {
+        s8 slot = *slot_ptr;
+        if (slot == 10) {
+            goto fallback_path;
+        }
+        if (slot == 11) {
+            goto fallback_path;
+        }
+    }
+    {
+        HSD_GObj* gobj = Player_GetEntity(*slot_ptr);
+        if (gobj == NULL) {
+            goto fallback_path;
+        }
+        subject = ftLib_80086B74(gobj);
+        if (subject == NULL) {
+            goto fallback_path;
+        }
+        if (!Camera_8002928C(subject)) {
+            goto fallback_path;
+        }
+        if (subject->x8) {
+            goto fallback_path;
+        }
+        if (Camera_80029124(&subject->x1C, 0) != 0) {
+            goto fallback_path;
+        }
+        temp_f31 = subject->x1C.z;
+        if (temp_f31 < 0.0f) {
+            temp_f31 = -temp_f31;
+        }
+        if (temp_f31 >= 45.0f) {
+            goto fallback_path;
+        }
+        // Success path
+        Camera_8002C5B4(&cam->x2D0);
+    }
+    return;
+
+fallback_path:
+    {
+        f32* coeff_ptr;
+        f32* base_ptr;
+        CameraTransformState* transform_copy;
+        s32 check;
+
+        Camera_80030DF8();
+        Camera_800293E0();
+        Camera_8002B0E0();
+        Camera_8002958C(&bounds3, transform);
+
+        base_ptr = &cm_803BCCA0.x40;
+        coeff_ptr = &cm_803BCCA0.x44;
+        temp_f31 = *base_ptr;
+        Camera_80029BC4(&bounds3, transform);
+
+        if (Camera_80030AF8()) {
+            HSD_GObj* gobj = Ground_801C57A4();
+            if (gobj != NULL) {
+                ftLib_80086644(gobj, &sp1C);
+                temp_f31 = sp1C.z;
+                if (temp_f31 < 0.0f) {
+                    temp_f31 = -temp_f31;
+                }
+                if (temp_f31 >= 45.0f) {
+                    check = 1;
+                    goto check_done;
+                }
+            }
+        }
+        check = 0;
+    check_done:
+        if (check == 0) {
+            Camera_80029CF8(&bounds3, transform);
+            Camera_8002A768(transform, 0);
+        }
+
+        transform_copy = &cam->transform_copy;
+        Camera_8002958C(&bounds2, transform_copy);
+        temp_f31 = *base_ptr;
+        Camera_80029BC4(&bounds2, transform_copy);
+
+        if (Camera_80030AF8()) {
+            HSD_GObj* gobj = Ground_801C57A4();
+            if (gobj != NULL) {
+                ftLib_80086644(gobj, &sp60);
+                temp_f31 = sp60.z;
+                if (temp_f31 < 0.0f) {
+                    temp_f31 = -temp_f31;
+                }
+                if (temp_f31 >= 45.0f) {
+                    check = 1;
+                    goto check_done2;
+                }
+            }
+        }
+        check = 0;
+    check_done2:
+        if (check == 0) {
+            Camera_80029CF8(&bounds2, transform_copy);
+            Camera_8002A768(transform_copy, 0);
+        }
+    }
+}
 /// #Camera_8002D318
 
 void Camera_8002D85C(void* unused)
