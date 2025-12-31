@@ -16,6 +16,8 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+extern f32 grCn_804DB170;
+
 /// #grCorneria_801DCCFC
 
 /// #grCorneria_801DCE1C
@@ -138,7 +140,14 @@ bool grCorneria_801DDCE8(Ground_GObj* arg)
 
 /// #grCorneria_801DDCF0
 
-/// #grCorneria_801DDD4C
+void grCorneria_801DDD4C(Vec3* pos)
+{
+    Ground_GObj* gobj = Ground_801C2BA4(3);
+    Ground* gp = gobj->user_data;
+    pos->x = gp->gv.corneria.base_x + gp->gv.corneria.offset_x;
+    pos->y = gp->gv.corneria.base_y + gp->gv.corneria.offset_y.val;
+    pos->z = grCn_804DB170;
+}
 
 /// #grCorneria_801DDDA8
 
