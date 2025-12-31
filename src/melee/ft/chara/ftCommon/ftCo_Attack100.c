@@ -376,8 +376,29 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
 
 /// #ftCo_800D7268
 
-/// #ftCo_800D72A0
-
+M2C_UNK ftCo_800D72A0(Fighter* fp)
+{
+    s32 x2C;
+    s32 motion_id;
+    s32 x30;
+    struct Fighter_x2D0_t* x2D0 = fp->x2D0;
+    
+    x2C = x2D0->x2C;
+    if (x2C != -1) {
+        motion_id = fp->motion_id;
+        if (x2C <= motion_id && motion_id < x2C + x2D0->x28) {
+            return 1;
+        }
+    }
+    x30 = x2D0->x30;
+    if (x30 != -1) {
+        motion_id = fp->motion_id;
+        if (x30 <= motion_id && motion_id < x30 + x2D0->x28) {
+            return 1;
+        }
+    }
+    return 0;
+}
 /// #ftCo_800D730C
 
 /// #ftCo_800D74A4
