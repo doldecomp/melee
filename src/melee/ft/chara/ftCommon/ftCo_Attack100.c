@@ -42,6 +42,7 @@
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_Attack100.h>
 #include <melee/ft/chara/ftKirby/ftKb_Init.h>
+#include <melee/ft/chara/ftLink/ftLk_Init.h>
 #include <melee/ft/chara/ftYoshi/ftYs_Init.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
@@ -1028,7 +1029,16 @@ void fn_800D949C(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800D94D8
+void ftCo_800D94D8(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* item = *(HSD_GObj**)((u8*)fp + 0x2238);
+    if (item) {
+        it_802A2B10(item);
+        *(u32*)((u8*)fp + 0x2238) = 0;
+    }
+    ftLk_Init_BoomerangExists(gobj);
+}
 
 bool fn_800D952C(Fighter_GObj* gobj)
 {
