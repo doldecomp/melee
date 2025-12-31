@@ -58,13 +58,13 @@ s32 GetNameTotalKOs(u8 field_index) {
 s32 GetNameTotalFalls(u8 field_index) {
     s32 i;
     s32 total = 0;
-    s32 offset = (u8)field_index * 2;
+    s32 offset = (u8)(field_index & 0xFF) * 2;
     s32 dummy[4];
     (void)dummy;
     for (i = 0; i < 0x78; i++) {
         if (GetNameText(i) != 0) {
             void* data = GetPersistentNameData(i);
-            total += *(u16*)((u8*)data + offset);
+            total += *(u16*)(offset + (u8*)data);
         }
     }
     if (total > 999999) {
