@@ -26,7 +26,7 @@
 /* 1DDAC4 */ void grCorneria_801DDAC4(Ground_GObj*);
 /* 1DDCE8 */ bool grCorneria_801DDCE8(Ground_GObj*);
 /* 1DDCF0 */ UNK_RET grCorneria_801DDCF0(UNK_PARAMS);
-/* 1DDD4C */ UNK_RET grCorneria_801DDD4C(UNK_PARAMS);
+/* 1DDD4C */ void grCorneria_801DDD4C(Vec3* pos);
 /* 1DDDA8 */ UNK_RET grCorneria_801DDDA8(UNK_PARAMS);
 /* 1DDE88 */ UNK_RET grCorneria_801DDE88(UNK_PARAMS);
 /* 1DE024 */ void grCorneria_801DE024(Ground_GObj*);
