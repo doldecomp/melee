@@ -190,4 +190,10 @@ static u8 unk_arr_803BC4A0[0x21][2] = {
     { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 },
 };
 
+static int offsets_arr_803BC4E4[0x38][2];
+
+extern int lbl_804D6438;
+extern int lbl_804D6448;
+extern int lbl_804D6450;
+
 #endif
