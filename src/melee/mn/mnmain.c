@@ -655,6 +655,8 @@ void mn_80229860(s8 pending_major)
 
 static char null_terminator[1] = "\0";
 
+#pragma dont_inline on
+
 void mn_8022EA08(char* buf, u32 num)
 {
     int buf_end = mn_8022EB78(num);
@@ -664,6 +666,8 @@ void mn_8022EA08(char* buf, u32 num)
     }
     buf[buf_end] = null_terminator[0];
 }
+
+#pragma dont_inline off
 
 void mn_8022EA78(char* buf, int buf_end, u32 num)
 {
@@ -2913,8 +2917,6 @@ void mn_8022E978(u8 item_idx, u8 enable)
         gmMainLib_8015CC58()->item_mask &= ~(1 << item_idx);
     }
 }
-
-/// #mn_8022EA08
 
 /// #mn_8022EA78
 
