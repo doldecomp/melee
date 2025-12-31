@@ -59,6 +59,7 @@
 #include <melee/it/item.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/it/items/itkinoko.h>
+#include <melee/it/items/itsscope.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
@@ -542,7 +543,7 @@ void ftCo_ItemScopeAirRapid_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800D7CEC);
 }
 
-void fn_800D80F4(Fighter_GObj* gobj)
+static void fn_800D80F4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -647,14 +648,14 @@ static void fn_800D86B8(Fighter_GObj* gobj)
 
 /// #fn_800D86E0
 
-void fn_800D874C(Fighter_GObj* gobj)
+static void fn_800D874C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, fn_800D769C(fp, 0xa5), 0, 0.0f, 1.0f, 0.0f, NULL);
     ftCommon_ClampAirDrift(fp);
     fp->take_dmg_cb = fn_800D8378;
 }
-void fn_800D87C0(Fighter_GObj* gobj)
+static void fn_800D87C0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
