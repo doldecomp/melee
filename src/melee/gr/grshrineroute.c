@@ -46,7 +46,7 @@ void grShrineRoute_802089E4(Ground_GObj* arg) {}
 void grShrineRoute_802089E8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
     grMaterial_801C94D8(jobj);
 }
