@@ -43,6 +43,6 @@
 /* 23A59C */ void mnName_8023A59C(HSD_GObj* gobj);
 /* 23A9B4 */ void mnName_8023A9B4(HSD_GObj* gobj);
 /* 23AC40 */ void mnName_8023AC40(void);
-/* 23B084 */ bool IsNameNotAllowed(char* name);
+/* 23B084 */ BOOL IsNameNotAllowed(char* name);
 
 #endif
