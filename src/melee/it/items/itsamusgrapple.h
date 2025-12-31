@@ -50,7 +50,7 @@
 /* 2BA9B8 */ UNK_RET it_802BA9B8(UNK_PARAMS);
 /* 2BAA08 */ UNK_RET it_802BAA08(UNK_PARAMS);
 /* 2BAA58 */ void it_802BAA58(Item_GObj* gobj);
-/* 2BAA94 */ UNK_RET it_802BAA94(UNK_PARAMS);
+/* 2BAA94 */ void it_802BAA94(HSD_GObj* gobj);
 /* 2BAAE4 */ void it_802BAAE4(HSD_GObj*, Vec3*, float facing_dir);
 /* 2BAB40 */ UNK_RET it_802BAB40(UNK_PARAMS);
 /* 2BAB7C */ UNK_RET it_802BAB7C(UNK_PARAMS);
