@@ -14,7 +14,7 @@
 /* 05B780 */ void efLib_8005B780(HSD_GObj*);
 /* 05B880 */ void efLib_DestroyAll(HSD_GObj* gobj);
 /* 05BA40 */ void efLib_PauseAll(HSD_GObj* gobj);
-/* 05BAC4 */ void efLib_ResumeAll(HSD_GObj* gobj);
+/* 05BAC4 */ void efLib_ResumeAll(HSD_GObj* arg_gobj);
 /* 05BB40 */ void Effect_RemoveUserData(void* user_data);
 /* 05BBB4 */ void efLib_8005BBB4(u32, f32);
 /* 05BC50 */ void fn_8005BC50(HSD_GObj* gobj);
@@ -32,7 +32,7 @@
 /* 05C9FC */ HSD_Generator* efLib_8005C9FC(s32, Vec3*);
 // /* 05C9FC */ Effect* efLib_8005C9FC(u32, Vec3*, f32, Vec3*, ...);
 /* 05CAB0 */ HSD_Generator* efLib_8005CAB0(s32);
-/* 05CB34 */ HSD_Generator* efLib_8005CB34(s32, Vec3*, f32);
+/* 05CB34 */ HSD_Generator* efLib_8005CB34(s32 arg0, Vec3* arg_vec3, f32 arg2);
 /* 05CC2C */ HSD_Generator* efLib_8005CC2C(s32, HSD_JObj*);
 /* 05CC84 */ HSD_Generator* efLib_8005CC84(s32 arg0, HSD_JObj* jobj);
 /* 05CD2C */ HSD_Generator* efLib_8005CD2C(s32, void*, HSD_GObj*);
