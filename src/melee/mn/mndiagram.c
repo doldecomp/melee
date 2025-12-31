@@ -2,6 +2,8 @@
 
 #include "mnname.h"
 
+#include <melee/gm/gmmain_lib.h>
+
 u8 mnDiagram_8023EA2C(s32 arg0)
 {
     return mnDiagram_804A0750.pad_0[arg0];
@@ -39,7 +41,21 @@ s32 mnDiagram_8023EA54(u32 arg0) {
 
 /// #GetFighterTotalKOs
 
-/// #GetFighterTotalFalls
+s32 GetFighterTotalFalls(u8 field_index) {
+    s32 i;
+    s32 total = 0;
+    s32 offset = field_index * 2;
+    s32 dummy[4];
+    void* data;
+    (void)dummy;
+    for (i = 0; i < 0x19; i++) {
+        if (mn_8022E950(i) != 0) {
+            data = GetPersistentFighterData(i);
+            total += *(u16*)((u8*)data + offset);
+        }
+    }
+    return total;
+}
 
 /// #mnDiagram_8023F14C
 
