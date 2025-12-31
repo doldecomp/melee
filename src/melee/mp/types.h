@@ -14,10 +14,15 @@
 
 struct mpIsland_80458E88_t {
     /*  +0 */ mp_UnkStruct0* next;
-    /*  +4 */ mp_UnkStruct0* x4;
-    /*  +8 */ Vec3 x8;
-    /* +14 */ Vec3 x14;
+    /*  +4 */ int x4;
+    /*  +8 */ S32Vec3 x8;
+    /* +14 */ S32Vec3 x14;
     /* +20 */ int x20;
+    /* +24 */ short x24;
+    /* +26 */ short x26;
+    /* +28 */ short x28;
+    /* +2A */ short x2A;
+    /* +2C */ mp_UnkStruct3* ptr;
 };
 
 struct mpIsland_PaletteEntry {

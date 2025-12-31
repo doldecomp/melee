@@ -35,14 +35,14 @@
 void mpIsland_8005A6F8(void)
 {
     mpIsland_80458E88.next = NULL;
-    mpIsland_80458E88.x4 = NULL;
-    mpIsland_80458E88.x8 = NULL;
-    mpIsland_80458E88.xC = NULL;
-    mpIsland_80458E88.x14 = NULL;
-    mpIsland_80458E88.x1C = NULL;
-    mpIsland_80458E88.x10 = NULL;
-    mpIsland_80458E88.x18 = NULL;
-    mpIsland_80458E88.x20 = NULL;
+    mpIsland_80458E88.x4 = 0;
+    mpIsland_80458E88.x8.x = 0;
+    mpIsland_80458E88.x8.y = 0;
+    mpIsland_80458E88.x14.y = 0;
+    mpIsland_80458E88.x14.z = 0;
+    mpIsland_80458E88.x8.z = 0;
+    mpIsland_80458E88.x14.x = 0;
+    mpIsland_80458E88.x20 = 0;
 }
 
 void mpIsland_8005A728(void)
@@ -88,9 +88,9 @@ void mpIsland_8005A728(void)
     v0 = (short*) mpLib_8004D164();
     v1 = mpGetGroundCollLine();
     v2 = mpGetGroundCollVtx();
-    v23 = (int*) &mpIsland_80458E88.x4;
-    v24_2 = (s32*) &mpIsland_80458E88.x8;
-    v22_2 = (s32*) &mpIsland_80458E88.xC;
+    v23 = &mpIsland_80458E88.x4;
+    v24_2 = &mpIsland_80458E88.x8.x;
+    v22_2 = &mpIsland_80458E88.x8.y;
     mpIsland_8005A6F8();
 
     memzero(v33, 0x600u);
@@ -286,13 +286,13 @@ mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
     return NULL;
 }
 
-mp_UnkStruct0* mpIsland_8005AC14(Vec3* pos, float height)
+mp_UnkStruct0* mpIsland_8005AC14(Vec3* arg0, float arg1)
 {
-    int surface_idx;
-    if (mpCheckFloor(pos->x, pos->y, pos->x, pos->y + height, 0.0F, NULL, &surface_idx,
+    int i;
+    if (mpCheckFloor(arg0->x, arg0->y, arg0->x, arg0->y + arg1, 0.0F, NULL, &i,
                      NULL, NULL, -1, -1, -1, NULL, NULL))
     {
-        return mpIsland_8005AB54(surface_idx);
+        return mpIsland_8005AB54(i);
     }
     return NULL;
 }
@@ -311,7 +311,6 @@ bool mpIsland_8005AC8C(mp_UnkStruct0* arg0)
 
 void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
 {
-    CollJoint* temp_r3;
     int var_r31;
     CollLine* var_r30;
     int temp_r29;
@@ -319,6 +318,7 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
     bool var_r27;
     int i;
 
+    CollJoint* temp_r3;
     temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
     var_r31 = temp_r3->inner->floor_start;
     var_r30 = &mpGetGroundCollLine()[var_r31];
@@ -346,181 +346,4 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
         i++;
         var_r30++;
     }
-}
-
-static float mpIsland_804D8158;
-
-void mpIsland_8005AE1C(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
-                       int arg3, bool arg4)
-{
-    mp_UnkStruct0* prev_b;
-    mp_UnkStruct0* prev_a;
-    mp_UnkStruct0* cur;
-    mp_UnkStruct0* next;
-    CollVtx* vtx;
-    int end;
-    float z_val;
-    u16 v0;
-
-    prev_b = NULL;
-    prev_a = NULL;
-
-    vtx = mpGetGroundCollVtx();
-    cur = *arg0;
-    end = arg2 + arg3;
-    z_val = mpIsland_804D8158;
-
-    goto loop1_check;
-loop1_body:
-    v0 = cur->x4;
-    next = cur->next;
-
-    if ((int) v0 < arg2) {
-        if ((int) cur->x6 < arg2) {
-            goto add_to_prev_b_1;
-        }
-    }
-
-    if (end > (int) v0) {
-        goto do_assign_1;
-    }
-    if (end <= (int) cur->x6) {
-        goto add_to_prev_b_1;
-    }
-
-do_assign_1:
-    cur->x8.x = vtx[v0].pos.x;
-    cur->x8.y = vtx[cur->x4].pos.y;
-    cur->x8.z = z_val;
-    cur->x14.x = vtx[cur->x6].pos.x;
-    cur->x14.y = vtx[cur->x6].pos.y;
-    cur->x14.z = z_val;
-
-    if (arg4) {
-        goto add_to_prev_b_1;
-    }
-    if (cur->x20 & 2) {
-        goto add_to_prev_b_1;
-    }
-    cur->x20 |= 2;
-    cur->next = prev_a;
-    prev_a = cur;
-    goto loop1_next;
-
-add_to_prev_b_1:
-    cur->next = prev_b;
-    prev_b = cur;
-
-loop1_next:
-    cur = next;
-loop1_check:
-    if (cur != NULL) {
-        goto loop1_body;
-    }
-
-    cur = *arg1;
-    z_val = mpIsland_804D8158;
-
-    goto loop2_check;
-loop2_body:
-    v0 = cur->x4;
-    next = cur->next;
-
-    if ((int) v0 < arg2) {
-        if ((int) cur->x6 < arg2) {
-            goto add_to_prev_a_2;
-        }
-    }
-
-    if (end > (int) v0) {
-        goto do_assign_2;
-    }
-    if (end <= (int) cur->x6) {
-        goto add_to_prev_a_2;
-    }
-
-do_assign_2:
-    cur->x8.x = vtx[v0].pos.x;
-    cur->x8.y = vtx[cur->x4].pos.y;
-    cur->x8.z = z_val;
-    cur->x14.x = vtx[cur->x6].pos.x;
-    cur->x14.y = vtx[cur->x6].pos.y;
-    cur->x14.z = z_val;
-
-    if (arg4 == false) {
-        goto add_to_prev_a_2;
-    }
-    if ((cur->x20 & 2) == 0) {
-        goto add_to_prev_a_2;
-    }
-    cur->x20 &= ~2;
-    cur->next = prev_b;
-    prev_b = cur;
-    goto loop2_next;
-
-add_to_prev_a_2:
-    cur->next = prev_a;
-    prev_a = cur;
-
-loop2_next:
-    cur = next;
-loop2_check:
-    if (cur != NULL) {
-        goto loop2_body;
-    }
-
-    *arg0 = prev_b;
-    *arg1 = prev_a;
-}
-
-/// #mpIsland_8005B004
-
-void mpIsland_8005B334(int arg0, int arg1, int arg2, bool arg3)
-{
-    mp_UnkStruct0* temp;
-
-    if (mpIsland_80458E88.x8 != NULL) {
-        mpIsland_80458E88.x8->next = NULL;
-    } else {
-        mpIsland_80458E88.next = NULL;
-    }
-
-    if (mpIsland_80458E88.xC != NULL) {
-        mpIsland_80458E88.xC->next = NULL;
-    } else {
-        mpIsland_80458E88.x4 = NULL;
-    }
-
-    mpIsland_8005AE1C(&mpIsland_80458E88.next, &mpIsland_80458E88.x18, arg1,
-                      arg2, arg3);
-    mpIsland_8005AE1C(&mpIsland_80458E88.x4, &mpIsland_80458E88.x1C, arg1, arg2,
-                      arg3);
-    mpIsland_8005B004(&mpIsland_80458E88.x10, &mpIsland_80458E88.x20, arg0, 1,
-                      arg1, arg2, arg3);
-    mpIsland_8005B004(&mpIsland_80458E88.x14, &mpIsland_80458E88.x20, arg0, 2,
-                      arg1, arg2, arg3);
-
-    // Find end of first list and link
-    temp = mpIsland_80458E88.next;
-    while (temp != NULL && temp->next != NULL) {
-        temp = temp->next;
-    }
-    if (temp != NULL) {
-        temp->next = mpIsland_80458E88.x10;
-    } else {
-        mpIsland_80458E88.next = mpIsland_80458E88.x10;
-    }
-    mpIsland_80458E88.x8 = temp;
-
-    // Find end of second list and link
-    temp = mpIsland_80458E88.x4;
-    while (temp != NULL && temp->next != NULL) {
-        temp = temp->next;
-    }
-    if (temp != NULL) {
-        temp->next = mpIsland_80458E88.x14;
-    } else {
-        mpIsland_80458E88.x4 = mpIsland_80458E88.x14;
-    }
-    mpIsland_80458E88.xC = temp;
 }
