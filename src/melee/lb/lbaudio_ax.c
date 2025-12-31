@@ -1010,7 +1010,60 @@ void fn_800267B0(void)
     HSD_SynthSFXBankDeflagSync();
 }
 
-/// #fn_800268B4
+void fn_800268B4(void)
+{
+    int* arr_38a4;
+    int* arr_3984;
+    int (*arr_4e4)[2];
+    int i;
+
+    lbl_804D6450 = 0;
+    lbl_804D644C = 0;
+    lbl_804D6448 = 0;
+
+    arr_38a4 = lbl_804338A4;
+    arr_3984 = lbl_80433984;
+    arr_4e4 = offsets_arr_803BC4E4;
+
+    for (i = 0x37; i > 0; i--) {
+        int flag1, flag2;
+        int flags;
+
+        if (*arr_38a4 == -1) {
+            flag1 = 0;
+        } else {
+            flag1 = 1;
+        }
+
+        if (*arr_3984 == -1) {
+            flag2 = 0;
+        } else {
+            flag2 = 2;
+        }
+
+        flags = flag1 | flag2;
+
+        switch (flags) {
+        case 0:
+            break;
+        case 1:
+            lbl_804D644C += (*arr_4e4)[0];
+            lbl_804D6450 += (*arr_4e4)[0];
+            break;
+        case 2:
+            lbl_804D6448 += (*arr_4e4)[0];
+            break;
+        case 3:
+            lbl_804D644C += (*arr_4e4)[0];
+            lbl_804D6448 += (*arr_4e4)[0];
+            break;
+        }
+
+        arr_38a4++;
+        arr_3984++;
+        arr_4e4++;
+    }
+}
 
 /// #fn_800269AC
 
