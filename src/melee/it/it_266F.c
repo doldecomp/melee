@@ -1590,10 +1590,10 @@ bool it_8026EA20(HSD_GObj* gobj, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                  UNK_T* arg4, u32* flags_out)
 {
     Vec3 p;
-    // PAD_STACK(4);
-    PAD_STACK(8);
+    u8 pad[4];
+    s32 pad2;
 
-    if (mpCheckAllRemap(&p, *arg4, flags_out, arg3, -1, -1, arg1->x, arg1->y,
+    if (mpCheckAllRemap(&p, (UNK_T)arg4, flags_out, arg3, -1, -1, arg1->x, arg1->y,
                         arg2->x, arg2->y) == true)
     {
         *arg2 = p;
