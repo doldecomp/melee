@@ -439,8 +439,13 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2D90
 
-/// #grCorneria_801E2E50
-
+bool grCorneria_801E2E50(enum_t arg)
+{
+    if (stage_info.internal_stage_id == CORNERIA && arg != -1 && mpJointFromLine(arg) == 4) {
+        return true;
+    }
+    return false;
+}
 /// #grCorneria_801E2EA0
 
 DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
