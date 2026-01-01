@@ -10,7 +10,22 @@
 
 /// #it_3F14_Logic7_Spawned
 
-/// #fn_80281390
+void fn_80281390(Item_GObj* gobj)
+{
+    f32 frame_speed;
+    HSD_JObj* jobj;
+    Item* ip = gobj->user_data;
+
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    Item_80268E5C(gobj, 0, 3);
+    frame_speed = 1.0f;
+    jobj = gobj->hsd_obj;
+    ip->x5D0_animFrameSpeed = frame_speed;
+    lb_8000BA0C(jobj, frame_speed);
+    ip->owner = NULL;
+}
 
 /// #itDosei_UnkMotion0_Anim
 
