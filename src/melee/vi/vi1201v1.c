@@ -15,6 +15,8 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ft_0C31.h"
+#include "ft/ftdemo.h"
+#include "pl/player.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_unsplit.h"
 #include "gr/ground.h"
@@ -59,7 +61,24 @@ void un_8031F9B4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-/// #un_8031F9D8
+void un_8031F9D8(u8 char_index, u8 costume_id)
+{
+    ftDemo_ObjAllocInit();
+    Player_InitAllPlayers();
+    Player_80036E20(char_index, un_804D6FE8, 0);
+    Player_SetPlayerCharacter(0, char_index);
+    Player_SetCostumeId(0, costume_id);
+    Player_SetPlayerId(0, 0);
+    Player_SetSlottype(0, 2);
+    Player_SetFacingDirection(0, un_804DE100);
+    Player_80032768(0, (Vec3*)un_80400258);
+    Player_80036F34(0, 1);
+    un_804D7000 = Player_GetEntity(0);
+    lbAudioAx_80026F2C(0x18);
+    lbAudioAx_8002702C(0x8, (u64)0x20 << 32);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
+}
 
 /// #fn_8031FAA8
 
