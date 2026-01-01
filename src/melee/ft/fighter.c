@@ -127,7 +127,7 @@ u32 Fighter_804D64F8 = 0;
 
 // the following seems to be an array, initialized in reverse in
 struct Fighter_804D64FC_t* Fighter_804D64FC = NULL;
-UNK_T Fighter_804D6500 = NULL;
+vi1202_ViData* Fighter_804D6500 = NULL;
 HSD_Joint* Fighter_804D6504 = NULL;
 u8* Fighter_804D6508 = NULL;
 u8* Fighter_804D650C = NULL;

@@ -7,6 +7,27 @@
 
 typedef struct vi1202_UnkStruct vi1202_UnkStruct;
 
+typedef struct vi1202_ViData {
+    /* 0x00 */ f32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ u8 pad18[0x20 - 0x18];
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ s32 x3C;
+    /* 0x40 */ f32 x40;
+} vi1202_ViData;
+
+/* 4D6500 */ extern vi1202_ViData* Fighter_804D6500;
+
 /* 32110C */ void un_8032110C(HSD_GObj*);
 /* 321130 */ void un_80321130(HSD_GObj*);
 /* 321154 */ void un_80321154(HSD_GObj*);

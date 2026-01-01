@@ -29,26 +29,6 @@ struct vi1202_UnkStruct {
     /* 0x2C */ s32 x2C;
 };
 
-/// Fighter_804D6500 is not a Fighter - it's vi/cutscene related global data
-typedef struct vi1202_ViData {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ f32 x10;
-    /* 0x14 */ f32 x14;
-    /* 0x18 */ u8 pad18[0x20 - 0x18];
-    /* 0x20 */ s32 x20;
-    /* 0x24 */ s32 x24;
-    /* 0x28 */ s32 x28;
-    /* 0x2C */ f32 x2C;
-    /* 0x30 */ f32 x30;
-    /* 0x34 */ f32 x34;
-    /* 0x38 */ f32 x38;
-    /* 0x3C */ s32 x3C;
-    /* 0x40 */ f32 x40;
-} vi1202_ViData;
-
 void un_8032110C(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
@@ -100,9 +80,9 @@ void un_80321950(vi1202_UnkStruct* s)
     s->x4 = 0x10000;
     s->x8 = 1.0F;
     s->xC = 0;
-    s->x10 = ((vi1202_ViData*)Fighter_804D6500)->x20;
+    s->x10 = Fighter_804D6500->x20;
     s->x14 = 0x83D60;
-    s->x18 = ((vi1202_ViData*)Fighter_804D6500)->x28;
+    s->x18 = Fighter_804D6500->x28;
     s->x1C = 0;
     s->x20 = 0;
     s->x24 = 0;
@@ -124,10 +104,10 @@ void un_80321A00(HSD_GObj* gobj)
 {
     s32 zero;
     vi1202_UnkStruct* data = un_804D7050;
-    void* vdata = Fighter_804D6500;
+    vi1202_ViData* vdata = Fighter_804D6500;
 
-    if (data->x18 >= ((vi1202_ViData*)vdata)->x28) {
-        if (data->x10 < ((vi1202_ViData*)vdata)->x20) {
+    if (data->x18 >= vdata->x28) {
+        if (data->x10 < vdata->x20) {
             data->x10 = data->x10 + 1;
         }
         return;
@@ -138,12 +118,12 @@ void un_80321A00(HSD_GObj* gobj)
     }
     data->x18 = data->x18 + 1;
 
-    if (data->x18 < ((vi1202_ViData*)Fighter_804D6500)->x28) {
+    if (data->x18 < Fighter_804D6500->x28) {
         if (data->x1C != 0) {
             zero = 0;
             data->x1C = zero;
             data->x10 = zero;
-            data->x18 = ((vi1202_ViData*)Fighter_804D6500)->x28;
+            data->x18 = Fighter_804D6500->x28;
             un_80321C28();
             if (data->x20 != 0) {
                 un_80321CA4(0x144);
@@ -177,9 +157,7 @@ void un_80321AF4(HSD_GObj* gobj)
             if (ftLib_8008731C(cur) == 0) {
                 ftLib_80086644(cur, &pos);
 
-                if (pos.y < M2C_FIELD(Fighter_804D6500, f32*, 0x40) +
-                                M2C_FIELD(mpLib, f32*, 0x14))
-                {
+                if (pos.y < Fighter_804D6500->x40 + M2C_FIELD(mpLib, f32*, 0x14)) {
                     data->x24 = data->x24 + 1;
                 } else {
                     if ((u32) data->xC == ftLib_80087460(cur)) {
@@ -191,8 +169,8 @@ void un_80321AF4(HSD_GObj* gobj)
         cur = cur->next;
     }
 
-    if (old_x24 < ((vi1202_ViData*)Fighter_804D6500)->x3C) {
-        if (data->x24 >= ((vi1202_ViData*)Fighter_804D6500)->x3C) {
+    if (old_x24 < Fighter_804D6500->x3C) {
+        if (data->x24 >= Fighter_804D6500->x3C) {
             if (flag != 0) {
                 un_8032201C(data->xC, 3);
             } else {
@@ -222,12 +200,12 @@ void un_80321C28(void)
 void un_80321C70(void)
 {
     vi1202_UnkStruct* data = un_804D7050;
-    void* vdata = Fighter_804D6500;
+    vi1202_ViData* vdata = Fighter_804D6500;
     s32 x18 = data->x18;
-    if (x18 >= ((vi1202_ViData*)vdata)->x28) {
+    if (x18 >= vdata->x28) {
         return;
     }
-    if (x18 >= ((vi1202_ViData*)vdata)->x24) {
+    if (x18 >= vdata->x24) {
         data->x1C = 1;
     }
 }
@@ -280,11 +258,11 @@ void un_8032201C(int arg0, s32 cat)
     }
 
     if ((u32)arg0 != 0) {
-        if ((u32) data->xC == (u32)arg0) {
-            void* vdata = Fighter_804D6500;
+        if ((u32)data->xC == (u32)arg0) {
+            vi1202_ViData* vdata = Fighter_804D6500;
             vi1202_UnkStruct* data2 = un_804D7050;
-            if (data2->x18 < ((vi1202_ViData*)vdata)->x28) {
-                if (data2->x18 >= ((vi1202_ViData*)vdata)->x24) {
+            if (data2->x18 < vdata->x28) {
+                if (data2->x18 >= vdata->x24) {
                     data2->x1C = 1;
                 }
             }
@@ -335,7 +313,7 @@ void un_80322178(int arg)
 
 bool un_80322258(float arg)
 {
-    f32 val2c = ((vi1202_ViData*)Fighter_804D6500)->x2C;
+    f32 val2c = Fighter_804D6500->x2C;
     f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
     f32 val1c;
     if (arg >= val2c + val18) {
@@ -350,14 +328,14 @@ bool un_80322258(float arg)
 
 s32 un_80322298(float arg)
 {
-    void* vdata = Fighter_804D6500;
-    if (arg >= ((vi1202_ViData*)vdata)->x8) {
+    vi1202_ViData* vdata = Fighter_804D6500;
+    if (arg >= vdata->x8) {
         return 3;
     }
-    if (arg >= ((vi1202_ViData*)vdata)->x4) {
+    if (arg >= vdata->x4) {
         return 2;
     }
-    if (arg >= ((vi1202_ViData*)vdata)->x0) {
+    if (arg >= vdata->x0) {
         return 1;
     }
     return 0;
@@ -365,21 +343,21 @@ s32 un_80322298(float arg)
 
 f32 un_803222EC(f32 arg1, f32 arg2)
 {
-    void* vdata = Fighter_804D6500;
-    if (!(arg2 > ((vi1202_ViData*)vdata)->xC)) {
+    vi1202_ViData* vdata = Fighter_804D6500;
+    if (!(arg2 > vdata->xC)) {
         return arg1;
     }
-    if (!(arg2 < ((vi1202_ViData*)vdata)->x10)) {
+    if (!(arg2 < vdata->x10)) {
         return arg1;
     }
-    return arg1 * ((vi1202_ViData*)vdata)->x14;
+    return arg1 * vdata->x14;
 }
 
 void un_80322314(void)
 {
     vi1202_UnkStruct* data = un_804D7050;
-    void* vdata = Fighter_804D6500;
-    if (data->x18 >= ((vi1202_ViData*)vdata)->x28) {
+    vi1202_ViData* vdata = Fighter_804D6500;
+    if (data->x18 >= vdata->x28) {
         return;
     }
     data->x1C = 1;
@@ -430,18 +408,18 @@ int un_80322598(int arg0, float arg1)
 {
     f32 val14 = M2C_FIELD(mpLib_80458868, f32*, 0x14);
     s32 cat;
-    void* vdata;
+    vi1202_ViData* vdata;
     if (arg1 >= val14) {
         goto ret_zero;
     }
     vdata = Fighter_804D6500;
-    if (arg1 < ((vi1202_ViData*)vdata)->x38 + val14) {
+    if (arg1 < vdata->x38 + val14) {
 ret_zero:
         return 0;
     }
-    if (arg1 > ((vi1202_ViData*)vdata)->x30 + val14) {
+    if (arg1 > vdata->x30 + val14) {
         cat = 3;
-    } else if (arg1 > ((vi1202_ViData*)vdata)->x34 + val14) {
+    } else if (arg1 > vdata->x34 + val14) {
         cat = 2;
     } else {
         cat = 1;
