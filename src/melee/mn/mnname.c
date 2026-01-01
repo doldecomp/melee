@@ -12,6 +12,8 @@ extern char** NotAllowedNamesList;
 extern char mnNameNew_NullCharacter;
 extern char* mnNameNew_803EE724[];
 extern char* mnNameNew_803EE720[];
+extern char* mnName_804D4BF4;
+extern char* mnName_804D4BFC;
 
 void fn_80249A1C(HSD_GObj* arg0);
 
@@ -248,8 +250,38 @@ s32 mnName_802388D4(void* arg0, u8 arg1) {
 
 /// #mnName_80239A24
 
-/// #mnName_80239EBC
-
+void mnName_80239EBC(void* arg0, f32 arg1) {
+    if (arg0 == NULL) {
+        __assert(mnName_804D4BF4, 947, mnName_804D4BFC);
+    }
+    
+    *(f32*)((u8*)arg0 + 0x3c) = arg1;
+    
+    if ((*(u32*)((u8*)arg0 + 0x14) & 0x02000000) != 0) {
+        return;
+    }
+    
+    if (arg0 == NULL) {
+        return;
+    }
+    
+    if (arg0 == NULL) {
+        __assert(mnName_804D4BF4, 564, mnName_804D4BFC);
+    }
+    
+    {
+        BOOL cond;
+        cond = FALSE;
+        if ((*(u32*)((u8*)arg0 + 0x14) & 0x00800000) == 0) {
+            if ((*(u32*)((u8*)arg0 + 0x14) & 0x00000040) != 0) {
+                cond = TRUE;
+            }
+        }
+        if (cond == FALSE) {
+            HSD_JObjSetMtxDirtySub(arg0);
+        }
+    }
+}
 /// #mnName_80239F5C
 
 typedef struct {
