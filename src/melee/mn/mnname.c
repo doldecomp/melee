@@ -14,6 +14,7 @@ extern char* mnNameNew_803EE724[];
 extern char* mnNameNew_803EE720[];
 extern char* mnName_804D4BF4;
 extern char* mnName_804D4BFC;
+extern f32 mnName_803ED538[];
 
 void fn_80249A1C(HSD_GObj* arg0);
 
@@ -238,8 +239,34 @@ s32 mnName_802388D4(void* arg0, u8 arg1) {
 }
 /// #mnName_80238964
 
-/// #mnName_80238A04
-
+void mnName_80238A04(s32 arg0, s32 arg1, s32 arg2) {
+    f32* table = mnName_803ED538;
+    s32 i;
+    s32 jobj;
+    
+    for (i = 0x18; i < 0x1B; i++) {
+        jobj = mnName_802388D4((void*)arg0, (u8)i);
+        HSD_JObjReqAnimAll((HSD_JObj*)jobj, mnName_80238964((void*)i, arg1, arg2));
+        HSD_JObjAnimAll((HSD_JObj*)jobj);
+    }
+    
+    i = *(s32*)((u8*)arg0 + 0x14);
+    
+    if ((u8)arg1 == 0x18) {
+        if ((u8)arg2 != 0) {
+            HSD_JObjReqAnimAll((HSD_JObj*)i, table[15]);
+        } else {
+            HSD_JObjReqAnimAll((HSD_JObj*)i, table[12]);
+        }
+    } else {
+        if ((u8)arg2 != 0) {
+            HSD_JObjReqAnimAll((HSD_JObj*)i, table[24]);
+        } else {
+            HSD_JObjReqAnimAll((HSD_JObj*)i, table[18]);
+        }
+    }
+    HSD_JObjAnimAll((HSD_JObj*)i);
+}
 /// #mnName_80238AE0
 
 /// #mnName_80238C34
