@@ -15,6 +15,26 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
+#include <baselib/random.h>
+
+typedef struct {
+    u8 _pad0[0x8];
+    s16 x08;
+    s16 x0A;
+} grCs_Unk;
+
+extern grCs_Unk* grCs_804D6970;
+
+typedef struct {
+    u8 _pad0[0xD4];
+    s16 xD4;
+    s16 xD6;
+    s16 xD8;
+    s16 xDA;
+    s16 xDC;
+    u8 xDE_b7 : 1;
+    u8 xDE_rest : 7;
+} CastleGr;
 
 unkCastleCallback grCs_803B7F28[] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
@@ -101,7 +121,26 @@ void grCastle_801CDF50(Ground_GObj* gobj) {}
 
 /// #grCastle_801CDF54
 
-/// #grCastle_801CDFD8
+void grCastle_801CDFD8(Ground_GObj* gobj)
+{
+    CastleGr* castle = gobj->user_data;
+    s32 rnd;
+
+    castle->xDE_b7 = 1;
+
+    rnd = grCs_804D6970->x0A;
+    if (rnd != 0) {
+        rnd = HSD_Randi(rnd);
+    } else {
+        rnd = 0;
+    }
+
+    castle->xD4 = grCs_804D6970->x08 + rnd;
+    castle->xDC = -1;
+    castle->xDA = -1;
+    castle->xD8 = -1;
+    castle->xD6 = 0;
+}
 
 /// #grCastle_801CE054
 
