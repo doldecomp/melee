@@ -17,6 +17,9 @@
 #include <baselib/jobj.h>
 
 extern f32 grCn_804DB170;
+extern f32 grCn_804DB190;
+extern f32 grCn_804DB1E0;
+extern f32 grCn_804DB268;
 
 /// #grCorneria_801DCCFC
 
@@ -490,4 +493,15 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     return false;
 }
 
-/// #grCorneria_801E2FCC
+float grCorneria_801E2FCC(void)
+{
+    Ground_GObj* gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        if (gp != NULL) {
+            f32 scale = Ground_801C0498();
+            return grCn_804DB1E0 + (grCn_804DB190 * scale - gp->gv.corneria.xD0);
+        }
+    }
+    return grCn_804DB268;
+}
