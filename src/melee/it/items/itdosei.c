@@ -70,7 +70,15 @@ void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #it_80282074
 
-/// #itDosei_UnkMotion3_Anim
+bool itDosei_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    if (it_80272C6C(gobj) == 0) {
+        Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itDosei_UnkMotion3_Phys(Item_GObj* gobj)
 {
@@ -185,7 +193,15 @@ bool itDosei_UnkMotion10_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic7_DmgReceived
 
-/// #itDosei_UnkMotion11_Anim
+bool itDosei_UnkMotion11_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    if (it_80272C6C(gobj) == 0) {
+        Item_80268E5C(gobj, 11, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itDosei_UnkMotion11_Phys(Item_GObj* gobj)
 {
