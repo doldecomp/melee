@@ -10,6 +10,15 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/sc/types.h>
 
+typedef struct {
+    u8 pad[0xD];
+    u8 x0 : 2;
+    u8 render_plink : 2;
+    u8 x4 : 4;
+} GObjBitfield;
+
+extern int mn_804D6BD4;
+
 extern HSD_FogDesc* MenMain_fog;
 extern UNK_T MenMain_lights;
 extern HSD_CObjDesc* MenMain_cam;
@@ -66,8 +75,37 @@ int mn_80231634(struct mn_80231634_t* arg0)
 
 /// #mn_8023164C
 
-/// #mn_80231714
-
+void mn_80231714(void) {
+    mn_unk1* data;
+    u8 prev;
+    HSD_GObj* gobj;
+    s32 mode;
+    
+    data = &mn_804A04F0;
+    prev = data->x0;
+    data->x1 = prev;
+    data->x0 = 0xD;
+    
+    switch ((s32)data->x1) {
+    case 0x0F:
+        data->x2 = 6;
+        mode = 3;
+        break;
+    case 0x10:
+        data->x2 = 5;
+        mode = 3;
+        break;
+    default:
+        (&mn_804A04F0)->x2 = 0;
+        mode = 1;
+        break;
+    }
+    
+    gobj = (HSD_GObj*)HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_8022F538, 0);
+    ((GObjBitfield*)gobj)->render_plink = HSD_GObj_804D783C;
+    HSD_GObj_80390CD4(mn_80230E38(mode));
+    mn_804D6BD4 = 1;
+}
 void mn_802317E4(HSD_Archive* archive, int arg1)
 {
     mn_80231804(archive, arg1);
