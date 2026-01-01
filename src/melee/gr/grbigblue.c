@@ -287,7 +287,25 @@ void grBigBlue_801EAB4C(Ground_GObj* arg) {}
 
 /// #fn_801EF60C
 
-/// #grBigBlue_801EF7D8
+extern f32 grBb_804DB3F0;
+extern f32 grBb_804DB2F4;
+
+void grBigBlue_801EF7D8(Vec3* pos)
+{
+    f32 temp;
+    Ground_GObj* gobj = Ground_801C2BA4(0x22);
+    if (gobj != NULL && gobj->user_data != NULL) {
+        pos->x = grBb_804DB3F0;
+        temp = grBb_804DB2F4;
+        pos->y = temp;
+        pos->z = temp;
+    } else {
+        temp = grBb_804DB2F4;
+        pos->z = temp;
+        pos->y = temp;
+        pos->x = temp;
+    }
+}
 
 /// #grBigBlue_801EF844
 

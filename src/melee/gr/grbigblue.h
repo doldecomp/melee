@@ -49,8 +49,8 @@
 /* 1E8978 */ UNK_RET grBigBlue_801E8978(UNK_PARAMS);
 /* 1E89DC */ UNK_RET grBigBlue_801E89DC(UNK_PARAMS);
 /* 1E8A1C */ UNK_RET grBigBlue_801E8A1C(UNK_PARAMS);
-/* 1E8B84 */ UNK_RET grBigBlue_801E8B84(UNK_PARAMS);
-/* 1E8D04 */ UNK_RET grBigBlue_801E8D04(UNK_PARAMS);
+/* 1E8B84 */ void grBigBlue_801E8B84(f32 top, f32 bottom, f32 left, f32 right);
+/* 1E8D04 */ void grBigBlue_801E8D04(void);
 /* 1E8D64 */ void grBigBlue_801E8D64(Ground_GObj*);
 /* 1E93D0 */ bool grBigBlue_801E93D0(Ground_GObj*);
 /* 1E93D8 */ void grBigBlue_801E93D8(Ground_GObj*);
@@ -77,6 +77,6 @@
 /* 1EF844 */ bool grBigBlue_801EF844(enum_t);
 /* 1EFB9C */ void fn_801EFB9C(HSD_GObj*, int);
 /* 1EFC0C */ DynamicsDesc* grBigBlue_801EFC0C(enum_t);
-/* 1EFC14 */ bool grBigBlue_801EFC14(Vec3*, int arg, HSD_JObj* jobj);
+/* 1EFC14 */ bool grBigBlue_801EFC14(Vec3* v, int unused, HSD_JObj* jobj);
 
 #endif
