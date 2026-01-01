@@ -102,7 +102,14 @@ void it_80288194(Item_GObj* gobj)
     it_802881FC(gobj);
 }
 
-/// #it_802881B4
+void it_802881B4(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Article* article = ip->xC4_article_data;
+    lb_8000B804(jobj, article->x10_modelDesc->x0_joint);
+    it_802881FC(gobj);
+}
 
 /// #it_802881FC
 
