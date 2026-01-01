@@ -43,6 +43,15 @@ extern StaticModelDesc MenMainCursorIs_Top;
 extern StaticModelDesc MenMainConSs_Top;
 extern StaticModelDesc MenMainCursorSs_Top;
 
+extern u8 mn_804D4B96;
+extern u8 mn_803EC818[];
+extern f32 mn_804DBE18;
+extern f32 mn_804DBE1C;
+extern f32 mn_804DBE20;
+extern f32 mn_804DBE24;
+extern f32 mn_804DBE28;
+extern f32 mn_804DBE2C;
+
 /// #fn_8022F538
 
 /// #mn_8022FB88
@@ -55,8 +64,35 @@ extern StaticModelDesc MenMainCursorSs_Top;
 
 /// #mn_80230274
 
-/// #mn_802307F8
-
+void mn_802307F8(s32 arg0, s32 arg1, s32 arg2) {
+    u8* data = (u8*)arg0;
+    s32 r30 = arg2;
+    
+    if (*(void**)(data + 0x130) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**)(data + 0x130));
+        *(void**)(data + 0x130) = NULL;
+    }
+    
+    if (arg1 == 1 && *(u8*)(data + 2) == 1) {
+        r30 = mn_804D4B96;
+    } else if (arg1 == 1 || arg1 == 3 || (u32)(arg1 - 5) <= 1) {
+        r30 = mn_803EC818[arg1 * 5];
+    } else {
+        s32 idx = arg1 * 5;
+        r30 = mn_803EC818[idx + r30];
+    }
+    
+    {
+        void* sis = HSD_SisLib_803A5ACC(0, 1, mn_804DBE18, mn_804DBE1C, mn_804DBE20, mn_804DBE24, mn_804DBE28);
+        *(void**)(data + 0x130) = sis;
+        {
+            f32 zero = mn_804DBE2C;
+            *(f32*)((u8*)sis + 0x24) = zero;
+            *(f32*)((u8*)sis + 0x28) = zero;
+        }
+        HSD_SisLib_803A6368(sis, (u8)r30);
+    }
+}
 /// #mn_802308F0
 
 /// #fn_802309F0
