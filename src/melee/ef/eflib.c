@@ -675,56 +675,31 @@ Effect* efLib_8005C3DC(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
 {
     Vec3 sp34;
     Vec3 sp28;
-    HSD_GObj* gobj;
-    HSD_JObj* jobj_1;
     Effect* eff_1;
-    PAD_STACK(4);
+    HSD_GObj* gobj_1;
+    HSD_JObj* jobj_1;
+    HSD_JObj* jobj_2;
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
-        gobj = eff_1->gobj;
-        jobj_1 = GET_JOBJ(gobj);
+        gobj_1 = eff_1->gobj;
+        jobj_1 = GET_JOBJ(gobj_1);
         if (jobj_1 == NULL) {
-            HSD_GObjPLink_80390228(gobj);
+            HSD_GObjPLink_80390228(gobj_1);
             eff_1 = NULL;
         } else {
             lb_8000C1C0(jobj_1, arg_jobj);
             lb_8000B1CC(arg_jobj, NULL, &sp28);
-            if (jobj_1 == NULL) {
-                __assert("eflib.c", 0x394, "jobj");
-            }
-            jobj_1->translate = sp28;
-            if (!(jobj_1->flags & 0x02000000) && jobj_1 != NULL) {
-                if (jobj_1 == NULL) {
-                    __assert("eflib.c", 0x234, "jobj");
-                }
-                if ((!(jobj_1->flags & 0x800000) && (jobj_1->flags & 0x40)) == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj_1);
-                }
-            }
+            HSD_JObjSetTranslate(jobj_1, &sp28);
             eff_1->xC = arg_jobj;
         }
     }
     if (eff_1 != NULL) {
         jobj_1 = GET_JOBJ(arg_gobj);
-        if (jobj_1 == NULL) {
-            __assert("eflib.c", 0x337, "jobj");
-        }
-        sp34 = jobj_1->scale;
+        HSD_JObjGetScale(jobj_1, &sp34);
         sp34.x = sp34.z = sp34.y;
-        jobj_1 = GET_JOBJ(eff_1->gobj);
-        if (jobj_1 == NULL) {
-            __assert("eflib.c", 0x2F8, "jobj");
-        }
-        jobj_1->scale = sp34;
-        if (!(jobj_1->flags & 0x02000000) && jobj_1 != NULL) {
-            if (jobj_1 == NULL) {
-                __assert("eflib.c", 0x234, "jobj");
-            }
-            if ((!(jobj_1->flags & 0x800000) && (jobj_1->flags & 0x40)) == 0) {
-                HSD_JObjSetMtxDirtySub(jobj_1);
-            }
-        }
+        jobj_2 = GET_JOBJ(eff_1->gobj);
+        HSD_JObjSetScale(jobj_2, &sp34);
     }
     return eff_1;
 }
