@@ -69,7 +69,14 @@ void it_80287F20(Item_GObj* gobj)
 
 /// #itTaru_UnkMotion3_Anim
 
-/// #itTaru_UnkMotion3_Phys
+void itTaru_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_802874F0(gobj);
+    it_80287690(gobj);
+}
 
 /// #itTaru_UnkMotion3_Coll
 
