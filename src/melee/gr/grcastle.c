@@ -21,12 +21,19 @@ typedef struct {
     u8 _pad0[0x8];
     s16 x08;
     s16 x0A;
+    u8 _pad1[0x12C - 0xC];
+    s16 x12C[];
 } grCs_Unk;
 
 extern grCs_Unk* grCs_804D6970;
 
 typedef struct {
-    u8 _pad0[0xD4];
+    u8 _pad0[0x14];
+    s32 x14;
+    u8 _pad1[0xC4 - 0x18];
+    s32 xC4;
+    s16 xC8;
+    u8 _pad2[0xD4 - 0xCA];
     s16 xD4;
     s16 xD6;
     s16 xD8;
@@ -161,7 +168,17 @@ bool grCastle_801CE3A4(Ground_GObj* gobj)
 
 void grCastle_801CE7E4(Ground_GObj* gobj) {}
 
-/// #grCastle_801CE7E8
+void grCastle_801CE7E8(Ground_GObj* gobj)
+{
+    CastleGr* castle = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    s32 pad[2];
+
+    Ground_801C2ED0(jobj, castle->x14);
+    castle->xC4 = 0;
+    castle->xC8 = grCs_804D6970->x12C[castle->xC4];
+    grAnime_801C8138(gobj, castle->x14, castle->xC4);
+}
 
 bool grCastle_801CE858(Ground_GObj* gobj)
 {
