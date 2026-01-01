@@ -68,7 +68,15 @@ void it_3F14_Logic2_Dropped(Item_GObj* gobj)
     it_80287F20(gobj);
 }
 
-/// #it_3F14_Logic2_Thrown
+void it_3F14_Logic2_Thrown(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Article* article = ip->xC4_article_data;
+    lb_8000B804(jobj, article->x10_modelDesc->x0_joint);
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 3, 6);
+}
 
 void it_80287F20(Item_GObj* gobj)
 {
