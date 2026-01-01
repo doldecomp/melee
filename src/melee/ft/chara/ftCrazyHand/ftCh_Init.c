@@ -816,9 +816,8 @@ void ftCh_Damage2_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* attrs = fp->ft_data->ext_attr;
     ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, (Vec3*)((u8*)fp + 0x234C),
-                       (float*)((u8*)fp + 0x2358), attrs->x14,
-                       *(float*)&attrs->x10);
+    ftBossLib_8015BE40(gobj, &fp->mv.ch.unk0.xC, &fp->mv.ch.unk0.x18,
+                       attrs->x14, attrs->x10);
 }
 
 void ftCh_Damage2_Coll(HSD_GObj* gobj) {}
@@ -1283,7 +1282,7 @@ void ftCh_BackCrush_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        M2C_FIELD(fp, void (**)(HSD_GObj*), 0x2344)(gobj);
+        fp->mv.ch.unk0.x4(gobj);
     }
 }
 void ftCh_BackCrush_IASA(HSD_GObj* gobj)
