@@ -233,7 +233,19 @@ void fn_80282CD4(Item_GObj* gobj)
     M2C_FIELD(ip, s32*, 0x518) = 0;
 }
 
-/// #itDosei_UnkMotion7_Anim
+bool itDosei_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    s32 timer;
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    timer = ip->xDD4_itemVar.dosei.xDD4;
+    if (timer > 0) {
+        ip->xDD4_itemVar.dosei.xDD4 = timer - 1;
+    } else {
+        it_80282DE4(gobj);
+    }
+    return false;
+}
 
 void itDosei_UnkMotion7_Phys(Item_GObj* gobj) {}
 
