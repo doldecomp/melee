@@ -71,6 +71,7 @@
 #include <melee/pl/plstale.h>
 
 /* 0D7938 */ void fn_800D7938(Fighter_GObj* gobj);
+/* 0D78B0 */ void fn_800D78B0(Fighter_GObj* gobj);
 /* 0D80F4 */ static void fn_800D80F4(Fighter_GObj* gobj);
 /* 0D8378 */ void fn_800D8378(Fighter_GObj* gobj);
 /* 0D84D4 */ static void fn_800D84D4(Fighter_GObj* gobj, s32 arg1);
@@ -510,7 +511,26 @@ void fn_800D7830(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, motion, 0x0C4C5280, M2C_FIELD(fp, f32*, 0x894), M2C_FIELD(fp, f32*, 0x89C), 0.0f, NULL);
     M2C_FIELD(fp, void**, 0x21DC) = fn_800D7938;
 }
-/// #ftCo_ItemScopeStart_GroundToAir
+
+void fn_800D78B0(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    s32 motion;
+
+    ftCommon_8007D5D4(fp);
+
+    if (fp->motion_id >= 0xA6) {
+        motion = 0xAA;
+    } else {
+        motion = 0xA2;
+    }
+
+    Fighter_ChangeMotionState(gobj, motion, 0x0C4C5280,
+                              *(f32*)((u8*)fp + 0x894),
+                              *(f32*)((u8*)fp + 0x89C), 0.0f, NULL);
+    ftCommon_ClampAirDrift(fp);
+    *(void**)((u8*)fp + 0x21DC) = fn_800D7938;
+}
 
 void fn_800D7938(Fighter_GObj* gobj)
 {
@@ -1399,7 +1419,19 @@ void ftCo_CapturePulledHi_Anim(Fighter_GObj* gobj) {}
 
 void ftCo_CapturePulledHi_IASA(Fighter_GObj* gobj) {}
 
-/// #fn_800DAC78
+static void fn_800DAC78(Fighter_GObj* gobj, Vec3* result)
+{
+    Vec3 victim_pos, own_pos;
+    s32 bone_idx;
+    Fighter* fp = gobj->user_data;
+    Fighter* victim_fp = fp->victim_gobj->user_data;
+    lb_8000B1CC(*(HSD_JObj**)((u8*)victim_fp + 0x2358), 0, &victim_pos);
+    bone_idx = ftParts_GetBoneIndex(fp, 2);
+    lb_8000B1CC(fp->parts[bone_idx].joint, 0, &own_pos);
+    result->x = victim_pos.x - own_pos.x;
+    result->y = victim_pos.y - own_pos.y;
+    result->z = victim_pos.z - own_pos.z;
+}
 
 static bool fn_800DAD18(Fighter_GObj* gobj)
 {
@@ -1473,7 +1505,17 @@ void ftCo_CapturePulledLw_Coll(Fighter_GObj* gobj)
 
 /// #ftCo_800DB368
 
-/// #ftCo_800DB464
+void ftCo_800DB464(Fighter_GObj* gobj)
+{
+    Vec3 pos;
+    Fighter* fp = gobj->user_data;
+    s32 bone_idx = ftParts_GetBoneIndex(fp, 2);
+    lb_8000B1CC(fp->parts[bone_idx].joint, 0, &pos);
+    pos.x += fp->facing_dir * (fp->x1A70.z * fp->x34_scale.y);
+    pos.y += fp->x1A70.y * fp->x34_scale.y;
+    pos.z = 0.0f;
+    fp->cur_pos = pos;
+}
 
 /// #ftCo_800DB500
 
@@ -1620,7 +1662,17 @@ bool fn_800DC044(Fighter_GObj* gobj)
     return false;
 }
 
-/// #fn_800DC070
+void fn_800DC070(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_GObj* victim_gobj = fp->victim_gobj;
+    ftCommon_8007D5D4(fp);
+    fp->self_vel.x = -fp->facing_dir * p_ftCommonData->x374;
+    fp->self_vel.y = p_ftCommonData->x378;
+    *(float*)((u8*)fp + 0x2340) = 0.0f;
+    ftCo_800DC920(victim_gobj, gobj);
+    Fighter_ChangeMotionState(gobj, 0xE6, 0, 0.0f, 1.0f, 0.0f, NULL);
+}
 
 void ftCo_CaptureJump_Anim(Fighter_GObj* gobj)
 {
