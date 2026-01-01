@@ -169,8 +169,22 @@ void grVenom_80206BEC(Ground_GObj* arg) {}
 
 /// #grVenom_80206CB0
 
-/// #grVenom_80206D10
-
+bool grVenom_80206D10(enum_t arg)
+{
+    s32 result;
+    if (stage_info.internal_stage_id == VENOM && arg != -1) {
+        s32 joint = mpJointFromLine(arg);
+        u32 check = joint - 3;
+        result = 1;
+        if (check > 1) {
+            result = 0;
+        }
+        if (result != 0) {
+            return true;
+        }
+    }
+    return false;
+}
 DynamicsDesc* grVenom_80206D74(enum_t arg)
 {
     return false;
