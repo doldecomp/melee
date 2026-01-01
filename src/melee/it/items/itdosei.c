@@ -10,6 +10,9 @@
 #include "it/it_2725.h"
 #include "lb/lb_00B0.h"
 
+extern const f32 it_804DC874;
+extern const f32 it_804DC870;
+
 /// #it_3F14_Logic7_Spawned
 
 void fn_80281390(Item_GObj* gobj)
@@ -45,7 +48,26 @@ bool itDosei_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #it_802817A0
 
-/// #itDosei_UnkMotion1_Anim
+bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip2;
+    Item* ip;
+    f32 frame_speed;
+    HSD_JObj* jobj;
+    PAD_STACK(16);
+
+    ip = gobj->user_data;
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    ip2 = gobj->user_data;
+    frame_speed = it_804DC874 * (M2C_FIELD(ip2, f32*, 0x4CC) * ip2->facing_dir) + it_804DC870;
+    jobj = gobj->hsd_obj;
+    ip->x5D0_animFrameSpeed = frame_speed;
+    lb_8000BA0C(jobj, frame_speed);
+    if (it_80272C6C(gobj) == 0) {
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 {
