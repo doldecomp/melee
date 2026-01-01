@@ -446,8 +446,17 @@ bool grCorneria_801E2E50(enum_t arg)
     }
     return false;
 }
-/// #grCorneria_801E2EA0
-
+float grCorneria_801E2EA0(void)
+{
+    Ground_GObj* gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        if (gp != NULL) {
+            return gp->gv.corneria.xD0;
+        }
+    }
+    return grCn_804DB170;
+}
 DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
 {
     return NULL;
