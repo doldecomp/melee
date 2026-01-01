@@ -13,6 +13,7 @@
 extern const f32 it_804DC874;
 extern const f32 it_804DC870;
 extern const f32 it_804DC878;
+extern s32 it_803F56B8[];
 
 /// #it_3F14_Logic7_Spawned
 
@@ -295,7 +296,19 @@ bool itDosei_UnkMotion11_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic7_DmgDealt
+bool it_3F14_Logic7_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    s32 rand = HSD_Randi(3);
+    s32 sfx_id = it_803F56B8[rand];
+
+    Item_8026AF0C(ip, sfx_id, 0x7F, 0x40);
+    if (ip->x24 == 5) {
+        itColl_BounceOffVictim(gobj);
+        it_802725D4(gobj);
+    }
+    return false;
+}
 
 bool it_3F14_Logic7_Reflected(Item_GObj* gobj)
 {
