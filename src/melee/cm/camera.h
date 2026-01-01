@@ -46,8 +46,8 @@
 /* 02C908 */ void Camera_8002C908(void*);
 /* 02CB0C */ UNK_RET Camera_8002CB0C(UNK_PARAMS);
 /* 02CDDC */ void Camera_8002CDDC(void*);
-/* 02D318 */ void Camera_8002D318(void*);
-/* 02D85C */ void Camera_8002D85C(void*);
+/* 02D318 */ void Camera_8002D318(void* unused);
+/* 02D85C */ void Camera_8002D85C(void* unused);
 /* 02DDC4 */ void Camera_8002DDC4(void*);
 /* 02DFE4 */ s32 Camera_8002DFE4(Vec3*, Vec3*, CameraTransformState*);
 /* 02E158 */ s32 Camera_8002E158(f32*, f32, f32, f32);
