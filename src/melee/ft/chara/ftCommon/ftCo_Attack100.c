@@ -16,6 +16,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
 
@@ -1061,7 +1062,18 @@ void fn_800D9C64(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800D9C98
+void ftCo_800D9C98(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Item_GObj* item = *(Item_GObj**)((u8*)fp + 0x223C);
+    if (item != NULL) {
+        it_802B7B84(item);
+        *(s32*)((u8*)fp + 0x223C) = 0;
+    }
+    *(s32*)((u8*)fp + 0x21E4) = 0;
+    *(s32*)((u8*)fp + 0x21F0) = 0;
+    *(s32*)((u8*)fp + 0x21DC) = 0;
+}
 
 /// #ftCo_CatchPull_Anim
 
@@ -1548,7 +1560,12 @@ void ftCo_CaptureWaitHi_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #fn_800DBAC4
+static void fn_800DBBF8(Fighter_GObj* gobj);
+
+static void fn_800DBAC4(Fighter_GObj* gobj)
+{
+    fn_800DBBF8(gobj);
+}
 
 /// #fn_800DBAE4
 
@@ -1578,17 +1595,44 @@ void ftCo_CaptureWaitLw_Coll(Fighter_GObj* gobj)
 
 /// #fn_800DBED4
 
-/// #fn_800DC014
+void fn_800DC014(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (*(float*)((u8*)fp + 0x2340) < p_ftCommonData->x3AC) {
+        if (fp->input.x668 & 0xC00) {
+            *((u8*)fp + 0x234C) = 1;
+        }
+    }
+}
 
-/// #fn_800DC044
+bool fn_800DC044(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) {
+        return true;
+    }
+    return false;
+}
 
 /// #fn_800DC070
 
-/// #ftCo_CaptureJump_Anim
+void ftCo_CaptureJump_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    *(float*)((u8*)fp + 0x2340) += 1.0f;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 /// #ftCo_CaptureJump_IASA
 
-/// #ftCo_CaptureJump_Phys
+void ftCo_CaptureJump_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_8007D268(fp);
+}
 
 void ftCo_CaptureJump_Coll(Fighter_GObj* gobj)
 {
