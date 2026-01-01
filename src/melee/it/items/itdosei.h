@@ -19,7 +19,7 @@
 /* 281D00 */ bool itDosei_UnkMotion2_Anim(Item_GObj* gobj);
 /* 281E30 */ void itDosei_UnkMotion2_Phys(Item_GObj* gobj);
 /* 281E34 */ bool itDosei_UnkMotion2_Coll(Item_GObj* gobj);
-/* 282074 */ UNK_RET it_80282074(UNK_PARAMS);
+/* 282074 */ void it_80282074(Item_GObj* gobj);
 /* 2820CC */ bool itDosei_UnkMotion3_Anim(Item_GObj* gobj);
 /* 282130 */ void itDosei_UnkMotion3_Phys(Item_GObj* gobj);
 /* 282160 */ bool itDosei_UnkMotion5_Coll(Item_GObj* gobj);
