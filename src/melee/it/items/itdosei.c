@@ -18,6 +18,7 @@ void itDosei_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 bool itDosei_UnkMotion0_Coll(Item_GObj* gobj)
 {
+    PAD_STACK(8);
     it_8026D62C(gobj, (HSD_GObjEvent) it_80282074);
     it_80276CB8(gobj);
     return false;
