@@ -303,7 +303,7 @@ bool it_3F14_Logic7_DmgDealt(Item_GObj* gobj)
     s32 sfx_id = it_803F56B8[rand];
 
     Item_8026AF0C(ip, sfx_id, 0x7F, 0x40);
-    if (ip->x24 == 5) {
+    if (ip->msid == 5) {
         itColl_BounceOffVictim(gobj);
         it_802725D4(gobj);
     }
