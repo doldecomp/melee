@@ -11,6 +11,12 @@
 #include "baselib/gobjgxlink.h"
 #include "gr/types.h"
 
+typedef struct {
+    char pad[0xC8];
+    void* xC8;
+    void* xCC;
+} BigBlueGround;
+
 u8 tmpPadData[168] = {0};
 
 StageCallbacks grBb_803E29E0[] = {
@@ -221,8 +227,16 @@ void grBigBlue_801E6884(Ground_GObj* gobj)
     grBigBlue_801EF424(gobj);
     Ground_801C2FE0(gobj);
 }
-/// #grBigBlue_801E68B8
+void grBigBlue_801E68B8(Ground_GObj* gobj)
+{
+    BigBlueGround* gp = gobj->user_data;
+    void* null_val = NULL;
 
+    HSD_Free(gp->xC8);
+    gp->xC8 = null_val;
+    HSD_Free(gp->xCC);
+    gp->xCC = null_val;
+}
 /// #grBigBlue_801E6904
 
 bool grBigBlue_801E6C58(Ground_GObj* arg)
