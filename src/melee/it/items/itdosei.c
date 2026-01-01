@@ -159,9 +159,25 @@ bool itDosei_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itDosei_UnkMotion6_Phys(Item_GObj* gobj) {}
 
-/// #itDosei_UnkMotion6_Coll
+bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xDD4_itemVar.dosei.xDF8 = ip->x378_itemColl.floor.normal;
+    it_8026E8C4(gobj, (HSD_GObjEvent) fn_80281734, (HSD_GObjEvent) it_80282074);
+    return false;
+}
 
-/// #it_80282BFC
+void it_80282BFC(Item_GObj* gobj)
+{
+    f32 frame_speed;
+    Item* ip = gobj->user_data;
+
+    Item_80268E5C(gobj, 8, 3);
+    frame_speed = it_804DC870;
+    ip->x5D0_animFrameSpeed = frame_speed;
+    lb_8000BA0C(gobj->hsd_obj, frame_speed);
+    M2C_FIELD(ip, s32*, 0x518) = 0;
+}
 
 bool itDosei_UnkMotion8_Anim(Item_GObj* gobj)
 {
