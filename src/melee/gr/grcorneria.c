@@ -438,8 +438,22 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2CE8
 
-/// #grCorneria_801E2D14
-
+bool grCorneria_801E2D14(void)
+{
+    if (stage_info.internal_stage_id == CORNERIA) {
+        if (Ground_801C2BA4(0xC) != NULL) {
+            return true;
+        }
+        return false;
+    }
+    if (stage_info.internal_stage_id == VENOM) {
+        if (Ground_801C2BA4(8) != NULL) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
 /// #grCorneria_801E2D90
 
 bool grCorneria_801E2E50(enum_t arg)
