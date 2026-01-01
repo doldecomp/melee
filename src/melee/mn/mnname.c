@@ -130,8 +130,39 @@ void mnName_802385A0(HSD_GObj* gobj)
     mnName_80238754(gobj);
     mnName_8023A058(gobj);
 }
-/// #mnName_GetPageCount
-
+s32 mnName_GetPageCount(void) {
+    s32 count;
+    s32 i;
+    s32 rem;
+    
+    count = 0;
+    i = 0;
+    
+    for (; i < 0x78; i++) {
+        char* data;
+        char first_char;
+        char term;
+        BOOL valid;
+        data = (char*)GetPersistentNameData((u8)i);
+        first_char = data[0x198];
+        term = mnName_StringTerminator;
+        if (term == first_char) {
+            valid = FALSE;
+        } else {
+            valid = TRUE;
+        }
+        if (valid) {
+            count++;
+        }
+    }
+    
+    if (count % 24 != 0) {
+        rem = 1;
+    } else {
+        rem = 0;
+    }
+    return count / 24 + rem;
+}
 /// #mnName_GetColumnCount
 
 /// #mnName_80238754
