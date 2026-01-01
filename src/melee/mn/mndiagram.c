@@ -1,8 +1,12 @@
 #include "mndiagram.static.h"
 
+#include "mnmain.h"
 #include "mnname.h"
 
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lblanguage.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/sislib.h>
 
 void HSD_Free(void*);
@@ -240,13 +244,13 @@ void fn_80240B18(void* arg0) {
 void fn_80241AE8(HSD_GObj* gobj) {
     void* data;
     void* jobj;
-    f32* table;
-    
+    AnimLoopSettings* table;
+
     data = *(void**)((u8*)gobj + 0x2C);
     mnDiagram_802417D0(gobj);
     jobj = *(void**)((u8*)data + 0x0C);
-    table = mnDiagram_803EE774;
-    if (mn_8022ED6C(jobj, table) >= table[1]) {
+    table = (AnimLoopSettings*)mnDiagram_803EE774;
+    if (mn_8022ED6C(jobj, table) >= table->end_frame) {
         HSD_GObjPLink_80390228(gobj);
     }
 }
@@ -268,13 +272,10 @@ void fn_80241AE8(HSD_GObj* gobj) {
 
 extern void* mnDiagram_804A0814;
 extern u8 HSD_GObj_804D7849;
-void HSD_GObj_JObjCallback(HSD_GObj*, s32);
 void fn_80243038(HSD_GObj*);
-HSD_GObj* GObj_Create(s32, s32, s32);
 HSD_JObj* HSD_JObjLoadJoint(void*);
 void HSD_GObjObject_80390A70(HSD_GObj*, u8, HSD_JObj*);
 void GObj_SetupGXLink(HSD_GObj*, void*, s32, s32);
-void HSD_GObjProc_8038FD54(HSD_GObj*, void*, s32);
 
 void mnDiagram_802433AC(void) {
     void** joint_data;

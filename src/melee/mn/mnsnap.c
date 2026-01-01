@@ -1,6 +1,7 @@
 #include "mnsnap.h"
 
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 extern s32 mnSnap_804A0A10[84];
 
