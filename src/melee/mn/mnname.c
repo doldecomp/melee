@@ -163,8 +163,41 @@ s32 mnName_GetPageCount(void) {
     }
     return count / 24 + rem;
 }
-/// #mnName_GetColumnCount
-
+s32 mnName_GetColumnCount(void) {
+    s32 count;
+    s32 i;
+    s32 rem;
+    s32 zero;
+    
+    count = 0;
+    zero = count;
+    i = zero;
+    
+    for (; i < 0x78; i++) {
+        char* data;
+        char first_char;
+        char term;
+        BOOL valid;
+        data = (char*)GetPersistentNameData((u8)i);
+        first_char = data[0x198];
+        term = mnName_StringTerminator;
+        if (term == first_char) {
+            valid = FALSE;
+        } else {
+            valid = TRUE;
+        }
+        if (valid) {
+            count++;
+        }
+    }
+    
+    if (count % 6 != 0) {
+        rem = 1;
+    } else {
+        rem = 0;
+    }
+    return count / 6 + rem;
+}
 /// #mnName_80238754
 
 s32 mnName_802388D4(void* arg0, u8 arg1) {
