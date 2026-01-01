@@ -128,8 +128,18 @@ void fn_801E6124(Ground_GObj* gobj)
     GET_GROUND(gobj)->gv.bigblue.x0_b0 = false;
 }
 
-/// #grBigBlue_801E613C
+void grBigBlue_801E613C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    u8 _[16];
 
+    grAnime_801C8138((HSD_GObj*)gobj, gp->map_id, 0);
+    Ground_801C2ED0(jobj, gp->map_id);
+    grBigBlue_801EB004(gobj);
+    gp->gv.bigblue.x0_b0 = 1;
+    Ground_801C10B8(gobj, fn_801E6124);
+}
 bool grBigBlue_801E61BC(Ground_GObj* arg)
 {
     return false;
