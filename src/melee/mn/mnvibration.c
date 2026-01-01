@@ -1,5 +1,7 @@
 #include "mnvibration.h"
 
+#include "mnmain.h"
+
 #include <sysdolphin/baselib/gobjplink.h>
 
 extern void* mnVibration_804D6C28;
@@ -25,7 +27,11 @@ void* mnVibration_802474C4(s32 arg0) {
 }
 /// #fn_80247510
 
-/// #fn_80248084
+void fn_80248084(void* gobj) {
+    if (mn_804A04F0.x0 != 0x13) {
+        HSD_GObjPLink_80390228(gobj);
+    }
+}
 
 /// #mnVibration_802480B4
 

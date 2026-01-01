@@ -6,7 +6,7 @@
 
 /* 2474C4 */ void* mnVibration_802474C4(s32 arg0);
 /* 247510 */ UNK_RET fn_80247510(UNK_PARAMS);
-/* 248084 */ UNK_RET fn_80248084(UNK_PARAMS);
+/* 248084 */ void fn_80248084(void* gobj);
 /* 2480B4 */ UNK_RET mnVibration_802480B4(UNK_PARAMS);
 /* 24829C */ UNK_RET mnVibration_8024829C(UNK_PARAMS);
 /* 248444 */ UNK_RET mnVibration_80248444(UNK_PARAMS);
