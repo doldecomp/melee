@@ -3820,8 +3820,16 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_Enter
 
-/// #ftKb_SpecialAirN_Enter
-
+void ftKb_SpecialAirN_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    FighterKind kind = fp->fv.kb.hat.kind;
+    if (ftKb_Init_803C9E54[kind] != NULL) {
+        ftKb_Init_803C9E54[kind](gobj);
+    } else {
+        ftKb_SpecialN_800F6070(gobj);
+    }
+}
 /// #ftKb_SpecialN_800F16D0
 
 /// #ftKb_SpecialN_800F190C
