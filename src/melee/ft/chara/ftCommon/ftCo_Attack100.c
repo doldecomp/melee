@@ -1524,7 +1524,15 @@ void ftCo_CaptureWaitHi_Phys(Fighter_GObj* gobj)
 }
 #pragma pop
 
-/// #ftCo_CaptureWaitHi_Coll
+static void fn_800DBAC4(Fighter_GObj* gobj);
+
+void ftCo_CaptureWaitHi_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (!fp->x2226_b2) {
+        ft_80083C00(gobj, fn_800DBAC4);
+    }
+}
 
 /// #fn_800DBAC4
 
@@ -1544,7 +1552,15 @@ void ftCo_CaptureWaitLw_IASA(Fighter_GObj* gobj)
 
 /// #ftCo_CaptureWaitLw_Phys
 
-/// #ftCo_CaptureWaitLw_Coll
+static void fn_800DBED4(Fighter_GObj* gobj);
+
+void ftCo_CaptureWaitLw_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (!fp->x2226_b2) {
+        ft_8008403C(gobj, fn_800DBED4);
+    }
+}
 
 /// #fn_800DBED4
 
