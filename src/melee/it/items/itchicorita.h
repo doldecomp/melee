@@ -16,7 +16,7 @@
 /* 2C96CC */ bool itChicorita_UnkMotion0_Anim(HSD_GObj*);
 /* 2C9798 */ void itChicorita_UnkMotion0_Phys(HSD_GObj*);
 /* 2C9850 */ bool itChicorita_UnkMotion0_Coll(HSD_GObj*);
-/* 2C989C */ void it_802C989C(HSD_GObj*);
+/* 2C989C */ void it_802C989C(HSD_GObj* item_gobj);
 /* 2C98E4 */ void it_802C98E4(Item_GObj*);
 /* 2C990C */ bool itChicorita_UnkMotion1_Anim(HSD_GObj*);
 /* 2C9970 */ void itChicorita_UnkMotion1_Phys(HSD_GObj*);
