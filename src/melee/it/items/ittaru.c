@@ -8,13 +8,22 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+extern const f32 it_804DC978;
+
 /// #it_3F14_Logic2_Spawned
 
 /// #it_802874F0
 
 /// #it_80287690
 
-/// #itTaru_UnkMotion0_Anim
+bool itTaru_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xD44 <= it_804DC978) {
+        it_802787B4(gobj, 0x421);
+    }
+    return false;
+}
 
 void itTaru_UnkMotion0_Phys(Item_GObj* gobj) {}
 
