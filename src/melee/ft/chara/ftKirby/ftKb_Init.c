@@ -3896,8 +3896,14 @@ s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F1DAC
 
-/// #ftKb_SpecialN_800F1F1C
+void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3* arg1)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
 
+    if (fp->kind == FTKIND_KIRBY) {
+        efAsync_Spawn(gobj, &fp->x60C, 2, 0x49E, fp->parts->joint, arg1);
+    }
+}
 /// #ftKb_SpecialN_800F1F68
 
 void fn_800F1FDC(Fighter_GObj* gobj)
