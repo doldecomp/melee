@@ -83,7 +83,23 @@ void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 
 /// #itDosei_UnkMotion1_Coll
 
-/// #it_80281C6C
+void it_80281C6C(Item_GObj* gobj)
+{
+    s32 zero = 0;
+    f32 frame_speed;
+    Item* ip = gobj->user_data;
+
+    ip->xDD4_itemVar.dosei.xDD8 = zero;
+    ip->pos = ip->xDD4_itemVar.dosei.xDE4;
+    M2C_FIELD(ip, f32*, 0xDDC) = it_804DC878;
+    ip->x40_vel.x = it_804DC878;
+    it_802762B0(ip);
+    Item_80268E5C(gobj, 2, 3);
+    frame_speed = it_804DC870;
+    ip->x5D0_animFrameSpeed = frame_speed;
+    lb_8000BA0C(gobj->hsd_obj, frame_speed);
+    M2C_FIELD(ip, s32*, 0x518) = zero;
+}
 
 /// #itDosei_UnkMotion2_Anim
 
